@@ -1,6 +1,8 @@
 import re
 import sys
 
+# 注意：本脚本只支持跳过检查 ``` ``` 格式的代码块，~~~ ~~~ 格式的代码块会被检查。
+
 # reference: https://stackoverflow.com/questions/35761133/python-how-to-check-for-open-and-close-tags
 def stack_tag(tag, stack):
     t = tag[1:-1] # 去掉左右括号
@@ -66,6 +68,23 @@ def tag_is_wrapped(pos, content):
         # print(content_later)
         return False
 
+def filter_content(content):
+    # 该函数将原 content 的代码块以及 frontmatter 过滤掉
+    # 由于代码块本身是三个 ``` 包裹，所以该格式内代码块的 tag 不会导致 ci 失败
+    # 因此暂时只过滤掉 frontmatter
+    content_findall = re.findall(r'\n---\n', content)
+    print(len(content_findall))
+    # 如果有 frontmatter
+    if len(content_findall):
+        content_finditer = re.finditer(r'\n---\n', content)
+        for i in content_finditer: # i 本身也是可迭代对象，所以下面要使用 i.group()
+            # print(i.group())
+            meta_pos = i.span()[1]
+            # print(content[meta_pos:])
+            return content[meta_pos:]
+    else:
+        return content
+
 
 # print(sys.argv[1:])
 for filename in sys.argv[1:]:
@@ -73,6 +92,8 @@ for filename in sys.argv[1:]:
     file = open(filename, "r" )
     content = file.read()
     file.close()
+
+    content = filter_content(content)
     result_findall = re.findall(r'<([^`>]*)>', content)
     if len(result_findall) == 0:
         # print("=== REPORT == \n")
