@@ -134,9 +134,9 @@ cdc cli changefeed create --pd=http://10.0.10.25:2379 --sink-uri="kafka://127.0.
 
 For more information, refer to [Create a replication task](/ticdc/manage-ticdc.md#create-a-replication-task).
 
-## How do I view the state of TiCDC replication tasks?
+## How do I view the status of TiCDC replication tasks?
 
-To view the state of TiCDC replication tasks, use `cdc cli`. For example:
+To view the status of TiCDC replication tasks, use `cdc cli`. For example:
 
 {{< copyable "shell-regular" >}}
 
