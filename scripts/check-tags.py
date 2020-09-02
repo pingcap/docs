@@ -49,7 +49,13 @@ def tag_is_wrapped(pos, content):
     tag_end = pos[1]
     content_previous = content[:tag_start][::-1] # reverse content_previous
     content_later = content[tag_end:]
-    if content_previous.find('`') != -1 and content_later.find('`') != -1:
+
+    left_wraps_findall = re.findall(r'`', content_previous)
+    left_single_backtick = len(left_wraps_findall) % 2  # 如果为 0，则左侧没有单个的 backtick，即未被包裹
+    right_wraps_findall = re.findall(r'`', content_later)
+    right_single_backtick = len(right_wraps_findall) % 2  # 如果为 0，则右侧没有单个的 backtick，即未被包裹
+
+    if left_single_backtick != 0 and right_single_backtick != 0:
         # print(content_previous.find('`'), content_later.find('`'))
         # print(content_previous)
         # print(content_later)
