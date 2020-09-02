@@ -37,7 +37,9 @@ for filename in sys.argv[1:]:
     file.close()
     result_findall = re.findall(r'<([^`>]*)>', content)
     if len(result_findall) == 0:
+        print("=== REPORT == \n")
         print(filename, "has no tags!")
+        exit(0)
     else:
         result_finditer = re.finditer(r'<([^`>]*)>', content)
         stack = []
@@ -60,4 +62,6 @@ for filename in sys.argv[1:]:
 
         if len(stack):
             stack = ['<' + i + '>' for i in stack]
+            print("=== ERROR REPORT == \n")
             print(filename + ' has unclosed tags: ' + ','.join(stack) + '. Please use backticks `` to wrap them!')
+            exit(1)
