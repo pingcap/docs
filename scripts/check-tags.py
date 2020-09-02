@@ -4,29 +4,41 @@ import sys
 # reference: https://stackoverflow.com/questions/35761133/python-how-to-check-for-open-and-close-tags
 def stack_tag(tag, stack):
     t = tag[1:-1] # 去掉左右括号
+    first_space = t.find(' ') # 比如 t = 'span class="label__title"'；t.find(' ') = 4；只需要将属性名传入堆栈
     #print(t)
-    if t[0:1] != '/':
+    # print(t + ' 的第一个空格在 ' + str(first_space))
+    if t[-1] == '/':
+        self_closed_tag = True # 为自闭合标签。这一行用来占位，实际上无效
+    elif t[0:1] != '/': # 为开放标签，将属性名传入堆栈
         # Add tag to stack
-        stack.append(t)
-        # print("TRACE open", stack)
-    else:
-        t = t[1:]
+        if first_space == -1:
+            stack.append(t)
+            print("TRACE open", stack)
+        else:
+            stack.append(t[:first_space])
+            print("TRACE open", stack)
+    else: # </xxx>类标签
+        if first_space != -1:
+            t = t[1:first_space]
+        else:
+            t = t[1:]
+
         if len(stack) == 0:
-            # print("No blocks are open; tried to close", t)
-            self_closed_tag = True # 这一行用来占位，实际上无效
+            print("No blocks are open; tried to close", t)
+            closed_tag = True # 这一行用来占位，实际上无效
         else:
             if stack[-1] == t:
                 # Close the block
                 stack.pop()
-                # print("TRACE close", t, stack)
+                print("TRACE close", t, stack)
             else:
-                # print("Tried to close", t, "but most recent open block is", stack[0])
+                print("Tried to close", t, "but most recent open block is", stack[-1])
                 if t in stack:
                     stack.remove(t)
-                    # print("Prior block closed; continuing")
+                    print("Prior block closed; continuing")
 
-    # if len(stack):
-    #     print("Blocks still open at EOF:", stack)
+    if len(stack):
+        print("Blocks still open at EOF:", stack)
     return stack
 
 
@@ -44,7 +56,7 @@ for filename in sys.argv[1:]:
         result_finditer = re.finditer(r'<([^`>]*)>', content)
         stack = []
         for i in result_finditer: # i 本身也是可迭代对象，所以下面要使用 i.group()
-            # print(i.group())
+            print(i.group())
             # print(i.span())
             tag = i.group()
             pos = i.span() # (7429, 7433)
@@ -65,3 +77,6 @@ for filename in sys.argv[1:]:
             print("=== ERROR REPORT == \n")
             print(filename + ' has unclosed tags: ' + ','.join(stack) + '.\n Please use backticks `` to wrap them or close them!\n')
             exit(1)
+        else:
+            print("=== REPORT == \n")
+            print("The edited markdown file has tags. But all tags are closed, congratulations!\n")
