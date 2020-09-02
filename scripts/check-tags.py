@@ -41,6 +41,25 @@ def stack_tag(tag, stack):
         print("Blocks still open at EOF:", stack)
     return stack
 
+def tag_is_wrapped(pos, content):
+    # pos = (7429, 7433) # tag 的位置
+    # content 为整篇文档字符串
+    # 这个函数要找出 tag 附近两边是否有 `` 包裹
+    tag_start = pos[0]
+    tag_end = pos[1]
+    content_previous = content[:tag_start][::-1] # reverse content_previous
+    content_later = content[tag_end:]
+    if content_previous.find('`') != -1 and content_later.find('`') != -1:
+        # print(content_previous.find('`'), content_later.find('`'))
+        # print(content_previous)
+        # print(content_later)
+        return True
+    else:
+        # print(content_previous.find('`'), content_later.find('`'))
+        # print(content_previous)
+        # print(content_later)
+        return False
+
 
 # print(sys.argv[1:])
 for filename in sys.argv[1:]:
@@ -56,7 +75,7 @@ for filename in sys.argv[1:]:
         result_finditer = re.finditer(r'<([^`>]*)>', content)
         stack = []
         for i in result_finditer: # i 本身也是可迭代对象，所以下面要使用 i.group()
-            print(i.group())
+            # print(i.group())
             # print(i.span())
             tag = i.group()
             pos = i.span() # (7429, 7433)
@@ -64,13 +83,14 @@ for filename in sys.argv[1:]:
             if tag[:4] == '<!--' and tag[-3:] == '-->':
                 continue
             # 再筛去带 `` 的 tag
-            elif content[pos[0]-1] == '`' and content[pos[1]] == '`':
+            # elif content[pos[0]-1] == '`' and content[pos[1]] == '`':
+            elif tag_is_wrapped(pos, content):
                 # print(content[int(pos[0])-1:int(pos[1]+1)])
+                print(tag, 'is wrapped by backticks!')
                 continue
+
             # 其余的 tag 都需要放入堆栈确认是否闭合
-            else:
-                # print(tag)
-                stack = stack_tag(tag, stack)
+            stack = stack_tag(tag, stack)
 
         if len(stack):
             stack = ['<' + i + '>' for i in stack]
