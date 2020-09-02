@@ -69,14 +69,14 @@ def tag_is_wrapped(pos, content):
 
 # print(sys.argv[1:])
 for filename in sys.argv[1:]:
-    print("Checking " + filename + "......\n")
+    #print("Checking " + filename + "......\n")
     file = open(filename, "r" )
     content = file.read()
     file.close()
     result_findall = re.findall(r'<([^`>]*)>', content)
     if len(result_findall) == 0:
-        print("=== REPORT == \n")
-        print("The edited markdown file " + filename + " has no tags!\n")
+        # print("=== REPORT == \n")
+        # print("The edited markdown file " + filename + " has no tags!\n")
         status_code = 0
     else:
         result_finditer = re.finditer(r'<([^`>]*)>', content)
@@ -101,14 +101,13 @@ for filename in sys.argv[1:]:
 
         if len(stack):
             stack = ['<' + i + '>' for i in stack]
-            print("=== ERROR REPORT == \n")
-            print(filename + ' has unclosed tags: ' + ', '.join(stack) + '.\n')
+            print("ERROR: " + filename + ' has unclosed tags: ' + ', '.join(stack) + '.\n')
             status_code = 1
         else:
-            print("=== REPORT == \n")
-            print("The edited markdown file has tags. But all tags are closed, congratulations!\n")
+            # print("=== REPORT == \n")
+            # print("The edited markdown file has tags. But all tags are closed, congratulations!\n")
             status_code = 0
 
 if status_code:
-    print("Unclosed tags will cause website build failure. Please fix the reported unclosed tags. You can use backticks `` to wrap them or close them. Thanks.")
+    print("HINT: Unclosed tags will cause website build failure. Please fix the reported unclosed tags. You can use backticks `` to wrap them or close them. Thanks.")
     exit(1)
