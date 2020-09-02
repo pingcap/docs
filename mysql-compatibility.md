@@ -115,7 +115,7 @@ These differences are documented further in [`ANALYZE TABLE`](/sql-statements/sq
 
 ### Limitations of `SELECT` syntax
 
-- `SELECT ... INTO @variables` syntax is not supported.
+- `SELECT ... INTO @variable` syntax is not supported.
 - `SELECT ... GROUP BY ... WITH ROLLUP` syntax is not supported.
 
 ### Views
