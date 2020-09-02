@@ -161,7 +161,7 @@ This statement is understood to be fully compatible with roles, which are a feat
 ## See also
 
 * [DROP ROLE](/sql-statements/sql-statement-drop-role.md)
-* [`GRANT <role>`](/sql-statements/sql-statement-grant-role.md)
+* [GRANT <role>](/sql-statements/sql-statement-grant-role.md)
 * [`REVOKE <role>`](/sql-statements/sql-statement-revoke-role.md)
 * [SET ROLE](/sql-statements/sql-statement-set-role.md)
 * [SET DEFAULT ROLE](/sql-statements/sql-statement-set-default-role.md)

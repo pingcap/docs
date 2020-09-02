@@ -38,7 +38,7 @@ for filename in sys.argv[1:]:
     result_findall = re.findall(r'<([^`>]*)>', content)
     if len(result_findall) == 0:
         print("=== REPORT == \n")
-        print("The edited markdown file ", filename, "has no tags!\n")
+        print("The edited markdown file " + filename + " has no tags!\n")
         exit(0)
     else:
         result_finditer = re.finditer(r'<([^`>]*)>', content)
