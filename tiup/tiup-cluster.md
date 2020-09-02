@@ -621,21 +621,6 @@ When running the checks, if the `--apply` flag is specified, the program automat
 
 Environment checks are not necessary for deploying a cluster. For the production environment, it is recommended to perform environment checks and pass all check items before deployment. If not all the check items are passed, the cluster might be deployed and run normally, but the best performance might not be obtained.
 
-## Migrate control machine and back up TiUP data
-
-The TiUP data is stored in the `.tiup` directory in the user's home directory. To migrate the control machine, you can take the following steps to copy the `.tiup` directory to the corresponding target machine:
-
-1. Execute `tar czvf tiup.tar.gz .tiup` in the home directory of the original machine.
-2. Copy `tip.tar.gz` to the home directory of the target machine.
-3. Execute `tar xzvf tiup.tar.gz` in the home directory of the target machine.
-4. Add the `.tiup` directory to the `PATH` environment variable.
-
-    If you use `bash` and you are a `tidb` user, you can add `export PATH=/home/tidb/.tiup/bin:$PATH` in `~/.bashr` and execute `source ~/.bashrc`. Then make corresponding adjustments according to the shell and the user you use.
-
-> **Note:**
->
-> It is recommended that you back up the `.tiup` directory regularly to avoid the loss of TiUP data caused by abnormal conditions, such as disk damage of the control machine.
-
 ## Use the system's native SSH client to connect to cluster
 
 All operations above performed on the cluster machine use the SSH client embedded in TiUP to connect to the cluster and execute commands. However, in some scenarios, you might also need to use the SSH client native to the control machine system to perform such cluster operations. For example:
@@ -666,3 +651,18 @@ If you specify this environment variable and `--native-ssh` at the same time, `-
 > **Note:**
 >
 > During the process of cluster deployment, if you need to use a password for connection (`-p`) or `passphrase` is configured in the key file, you must ensure that `sshpass` is installed on the control machine; otherwise, a timeout error is reported.
+
+## Migrate control machine and back up TiUP data
+
+The TiUP data is stored in the `.tiup` directory in the user's home directory. To migrate the control machine, you can take the following steps to copy the `.tiup` directory to the corresponding target machine:
+
+1. Execute `tar czvf tiup.tar.gz .tiup` in the home directory of the original machine.
+2. Copy `tip.tar.gz` to the home directory of the target machine.
+3. Execute `tar xzvf tiup.tar.gz` in the home directory of the target machine.
+4. Add the `.tiup` directory to the `PATH` environment variable.
+
+    If you use `bash` and you are a `tidb` user, you can add `export PATH=/home/tidb/.tiup/bin:$PATH` in `~/.bashr` and execute `source ~/.bashrc`. Then make corresponding adjustments according to the shell and the user you use.
+
+> **Note:**
+>
+> It is recommended that you back up the `.tiup` directory regularly to avoid the loss of TiUP data caused by abnormal conditions, such as disk damage of the control machine.
