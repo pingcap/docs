@@ -289,7 +289,7 @@
       + [`FLUSH STATUS`](/sql-statements/sql-statement-flush-status.md)
       + [`FLUSH TABLES`](/sql-statements/sql-statement-flush-tables.md)
       + [`GRANT <privileges>`](/sql-statements/sql-statement-grant-privileges.md)
-      + [GRANT <role>](/sql-statements/sql-statement-grant-role.md)
+      + [`GRANT <role>`](/sql-statements/sql-statement-grant-role.md)
       + [`INSERT`](/sql-statements/sql-statement-insert.md)
       + [`KILL [TIDB]`](/sql-statements/sql-statement-kill.md)
       + [`LOAD DATA`](/sql-statements/sql-statement-load-data.md)
