@@ -44,8 +44,7 @@ jobs:
 
       - run:
          name: "Check unclosed tags"
-         command: 
-          git remote add upstream https://github.com/pingcap/docs.git;
+         command:
           git fetch upstream;
           python3 scripts/check-tags.py $(git diff-tree --name-only --no-commit-id -r upstream/master..HEAD -- '*.md')
 
