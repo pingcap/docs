@@ -73,12 +73,10 @@ def filter_content(content):
     # 由于代码块本身是三个 ``` 包裹，所以该格式内代码块的 tag 不会导致 ci 失败
     # 因此暂时只过滤掉 frontmatter
     content_findall = re.findall(r'\n---\n', content)
-    print(len(content_findall))
     # 如果有 frontmatter
     if len(content_findall):
         content_finditer = re.finditer(r'\n---\n', content)
-        for i in content_finditer: # i 本身也是可迭代对象，所以下面要使用 i.group()
-            # print(i.group())
+        for i in content_finditer:
             meta_pos = i.span()[1]
             # print(content[meta_pos:])
             return content[meta_pos:]
@@ -96,17 +94,16 @@ for filename in sys.argv[1:]:
     content = filter_content(content)
     result_findall = re.findall(r'<([^`>]*)>', content)
     if len(result_findall) == 0:
-        # print("=== REPORT == \n")
         # print("The edited markdown file " + filename + " has no tags!\n")
         status_code = 0
     else:
         result_finditer = re.finditer(r'<([^`>]*)>', content)
         stack = []
         for i in result_finditer: # i 本身也是可迭代对象，所以下面要使用 i.group()
-            # print(i.group())
-            # print(i.span())
+            # print(i.group(), i.span())
             tag = i.group()
-            pos = i.span() # (7429, 7433)
+            pos = i.span() # 输出类似于 (7429, 7433)
+
             # 首先筛去特殊 tag，比如 <!-- xxx -->
             if tag[:4] == '<!--' and tag[-3:] == '-->':
                 continue
@@ -125,7 +122,6 @@ for filename in sys.argv[1:]:
             print("ERROR: " + filename + ' has unclosed tags: ' + ', '.join(stack) + '.\n')
             status_code = 1
         else:
-            # print("=== REPORT == \n")
             # print("The edited markdown file has tags. But all tags are closed, congratulations!\n")
             status_code = 0
 
