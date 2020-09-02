@@ -77,7 +77,7 @@ for filename in sys.argv[1:]:
     if len(result_findall) == 0:
         print("=== REPORT == \n")
         print("The edited markdown file " + filename + " has no tags!\n")
-        exit(0)
+        status_code = 0
     else:
         result_finditer = re.finditer(r'<([^`>]*)>', content)
         stack = []
@@ -103,7 +103,11 @@ for filename in sys.argv[1:]:
             stack = ['<' + i + '>' for i in stack]
             print("=== ERROR REPORT == \n")
             print(filename + ' has unclosed tags: ' + ','.join(stack) + '.\n Please use backticks `` to wrap them or close them!\n')
-            exit(1)
+            status_code = 1
         else:
             print("=== REPORT == \n")
             print("The edited markdown file has tags. But all tags are closed, congratulations!\n")
+            status_code = 0
+
+if status_code:
+    exit(1)
