@@ -641,7 +641,7 @@ To avoid adding such a flag in every command, you can use the `TIUP_NATIVE_SSH` 
 ```sh
 export TIUP_NATIVE_SSH=true
 # or
-export TIUP_NATIVE_SSh=1
+export TIUP_NATIVE_SSH=1
 # or
 export TIUP_NATIVE_SSH=enable
 ```
