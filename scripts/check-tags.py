@@ -97,7 +97,9 @@ for filename in sys.argv[1:]:
 
             if tag[:4] == '<!--' and tag[-3:] == '-->':
                 continue
-            # elif content[pos[0]-1] == '`' and content[pos[1]] == '`':
+            elif content[pos[0]-2:pos[0]] == '{{' and content[pos[1]:pos[1]+2] == '}}':
+                # print(tag) # filter copyable shortcodes
+                continue
             elif tag_is_wrapped(pos, content):
                 # print(content[int(pos[0])-1:int(pos[1]+1)])
                 # print(tag, 'is wrapped by backticks!')
