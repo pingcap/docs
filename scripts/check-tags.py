@@ -13,10 +13,10 @@ def stack_tag(tag, stack):
         # Add tag to stack
         if first_space == -1:
             stack.append(t)
-            print("TRACE open", stack)
+            # print("TRACE open", stack)
         else:
             stack.append(t[:first_space])
-            print("TRACE open", stack)
+            # print("TRACE open", stack)
     else: # </xxx>类标签
         if first_space != -1:
             t = t[1:first_space]
@@ -24,21 +24,21 @@ def stack_tag(tag, stack):
             t = t[1:]
 
         if len(stack) == 0:
-            print("No blocks are open; tried to close", t)
+            # print("No blocks are open; tried to close", t)
             closed_tag = True # 这一行用来占位，实际上无效
         else:
             if stack[-1] == t:
                 # Close the block
                 stack.pop()
-                print("TRACE close", t, stack)
+                # print("TRACE close", t, stack)
             else:
-                print("Tried to close", t, "but most recent open block is", stack[-1])
+                # print("Tried to close", t, "but most recent open block is", stack[-1])
                 if t in stack:
                     stack.remove(t)
-                    print("Prior block closed; continuing")
+                    # print("Prior block closed; continuing")
 
-    if len(stack):
-        print("Blocks still open at EOF:", stack)
+    # if len(stack):
+    #     print("Blocks still open at EOF:", stack)
     return stack
 
 def tag_is_wrapped(pos, content):
@@ -93,7 +93,7 @@ for filename in sys.argv[1:]:
             # elif content[pos[0]-1] == '`' and content[pos[1]] == '`':
             elif tag_is_wrapped(pos, content):
                 # print(content[int(pos[0])-1:int(pos[1]+1)])
-                print(tag, 'is wrapped by backticks!')
+                # print(tag, 'is wrapped by backticks!')
                 continue
 
             # 其余的 tag 都需要放入堆栈确认是否闭合
@@ -102,7 +102,7 @@ for filename in sys.argv[1:]:
         if len(stack):
             stack = ['<' + i + '>' for i in stack]
             print("=== ERROR REPORT == \n")
-            print(filename + ' has unclosed tags: ' + ','.join(stack) + '.\n Please use backticks `` to wrap them or close them!\n')
+            print(filename + ' has unclosed tags: ' + ', '.join(stack) + '.\n')
             status_code = 1
         else:
             print("=== REPORT == \n")
@@ -110,4 +110,5 @@ for filename in sys.argv[1:]:
             status_code = 0
 
 if status_code:
+    print("Unclosed tags will cause website build failure. Please fix the reported unclosed tags. You can use backticks `` to wrap them or close them. Thanks.")
     exit(1)
