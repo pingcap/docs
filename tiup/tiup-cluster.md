@@ -34,6 +34,7 @@ Available Commands:
   restart     Restart a TiDB cluster
   scale-in    Scale in a TiDB cluster
   scale-out   Scale out a TiDB cluster
+  clean       Clean up cluster data
   destroy     Destroy a specified cluster
   upgrade     Upgrade a specified TiDB cluster
   exec        Run shell command on host in the tidb cluster
@@ -48,6 +49,8 @@ Available Commands:
 
 Flags:
   -h, --help              help for cluster
+      --native-ssh        Use the system's native SSH client
+      --wait-timeout int  Timeout of waiting the operation
       --ssh-timeout int   Timeout in seconds to connect host via SSH, ignored for operations that don't need an SSH connection. (default 5)
   -y, --yes               Skip all confirmations and assumes 'yes'
 ```
@@ -197,13 +200,13 @@ The `Status` column uses `Up` or `Down` to indicate whether the service is runni
 
 For the PD component, `|L` or `|UI` might be appended to `Up` or `Down`. `|L` indicates that the PD node is a Leader, and `|UI` indicates that [TiDB Dashboard](/dashboard/dashboard-intro.md) is running on the PD node.
 
-## Scale in a node
+## Scale in a cluster
 
 > **Note:**
 >
 > This section describes only the syntax of the scale-in command. For detailed steps of online scaling, refer to [Scale the TiDB Cluster Using TiUP](/scale-tidb-using-tiup.md).
 
-Scaling in a node means taking the node offline. This operation removes the node from the cluster and deletes the remaining data files.
+Scaling in a cluster means making some node(s) offline. This operation removes the specific node(s) from the cluster and deletes the remaining data files.
 
 Because the offline process of the TiKV and TiDB Binlog components is asynchronous (which requires removing the node through API), and the process takes a long time (which requires continuous observation on whether the node is successfully taken offline), special treatment is given to the TiKV and TiDB Binlog components.
 
@@ -229,7 +232,7 @@ tiup cluster scale-in <cluster-name> -N <node-id>
 
 To use this command, you need to specify at least two flags: the cluster name and the node ID. The node ID can be obtained by using the `tiup cluster display` command in the previous section.
 
-For example, to scale in the TiKV node on `172.16.5.140`, run the following command:
+For example, to make the TiKV node on `172.16.5.140` offline, run the following command:
 
 {{< copyable "shell-regular" >}}
 
@@ -266,7 +269,7 @@ ID                  Role        Host          Ports        Status     Data Dir  
 
 After PD schedules the data on the node to other TiKV nodes, this node will be deleted automatically.
 
-## Scale out a node
+## Scale out a cluster
 
 > **Note:**
 >
@@ -278,7 +281,7 @@ When you scale out PD, the node is added to the cluster by `join`, and the confi
 
 All services conduct correctness validation when they are scaled out. The validation results show whether the scaling-out is successful.
 
-To scale out a TiKV node and a PD node in the `tidb-test` cluster, take the following steps:
+To add a TiKV node and a PD node in the `tidb-test` cluster, take the following steps:
 
 1. Create a `scale.yaml` file, and add IPs of the new TiKV and PD nodes:
 
@@ -350,6 +353,8 @@ Flags:
       --transfer-timeout int   Timeout in seconds when transferring PD and TiKV store leaders (default 300)
 
 Global Flags:
+      --native-ssh        Use the system's native SSH client
+      --wait-timeout int  Timeout of waiting the operation
       --ssh-timeout int   Timeout in seconds to connect host via SSH, ignored for operations that don't need an SSH connection. (default 5)
   -y, --yes               Skip all confirmations and assumes 'yes'
 ```
@@ -408,6 +413,8 @@ Flags:
       --transfer-timeout int   Timeout in seconds when transferring PD and TiKV store leaders (default 300)
 
 Global Flags:
+      --native-ssh        Use the system's native SSH client
+      --wait-timeout int  Timeout of waiting the operation
       --ssh-timeout int   Timeout in seconds to connect host via SSH, ignored for operations that don't need an SSH connection. (default 5)
   -y, --yes               Skip all confirmations and assumes 'yes'
 ```
@@ -429,6 +436,10 @@ tiup cluster patch test-cluster /tmp/tidb-hotfix.tar.gz -N 172.16.4.5:4000
 ```
 
 ## Import TiDB Ansible cluster
+
+> **Note:**
+>
+> Currently, TiUP cluster's support for TiSpark is still **experimental**. It is not supported to import a TiDB cluster with TiSpark enabled.
 
 Before TiUP is released, TiDB Ansible is often used to deploy TiDB clusters. To enable TiUP to take over the cluster deployed by TiDB Ansible, use the `import` command.
 
@@ -454,6 +465,8 @@ Flags:
   -r, --rename NAME        Rename the imported cluster to NAME
 
 Global Flags:
+      --native-ssh        Use the system's native SSH client
+      --wait-timeout int  Timeout of waiting the operation
       --ssh-timeout int   Timeout in seconds to connect host via SSH, ignored for operations that don't need an SSH connection. (default 5)
   -y, --yes               Skip all confirmations and assumes 'yes'
 ```
@@ -608,6 +621,37 @@ When running the checks, if the `--apply` flag is specified, the program automat
 
 Environment checks are not necessary for deploying a cluster. For the production environment, it is recommended to perform environment checks and pass all check items before deployment. If not all the check items are passed, the cluster might be deployed and run normally, but the best performance might not be obtained.
 
+## Use the system's native SSH client to connect to cluster
+
+All operations above performed on the cluster machine use the SSH client embedded in TiUP to connect to the cluster and execute commands. However, in some scenarios, you might also need to use the SSH client native to the control machine system to perform such cluster operations. For example:
+
+- To use a SSH plug-in for authentication
+- To use a customized SSH client
+
+Then you can use the `--native-ssh` command-line flag to enable the system-native command-line tool:
+
+- Deploy a cluster: `tiup cluster deploy <cluster-name> <version> <topo> --native-ssh`
+- Start a cluster: `tiup cluster start <cluster-name> --native-ssh`
+- Upgrade a cluster: `tiup cluster upgrade ... --native-ssh`
+
+You can add `--native-ssh` in all cluster operation commands above to use the system's native SSH client.
+
+To avoid adding such a flag in every command, you can use the `TIUP_NATIVE_SSH` system variable to specify whether to use the local SSH client:
+
+```sh
+export TIUP_NATIVE_SSH=true
+# or
+export TIUP_NATIVE_SSH=1
+# or
+export TIUP_NATIVE_SSH=enable
+```
+
+If you specify this environment variable and `--native-ssh` at the same time, `--native-ssh` has higher priority.
+
+> **Note:**
+>
+> During the process of cluster deployment, if you need to use a password for connection (`-p`) or `passphrase` is configured in the key file, you must ensure that `sshpass` is installed on the control machine; otherwise, a timeout error is reported.
+
 ## Migrate control machine and back up TiUP data
 
 The TiUP data is stored in the `.tiup` directory in the user's home directory. To migrate the control machine, you can take the following steps to copy the `.tiup` directory to the corresponding target machine:
@@ -621,4 +665,4 @@ The TiUP data is stored in the `.tiup` directory in the user's home directory. T
 
 > **Note:**
 >
-> It is recommended that you back up the `.tiup` directory regularly to avoid the loss of TiUP data caused by abnormal conditions, such as disk damage of the control machine. 
+> It is recommended that you back up the `.tiup` directory regularly to avoid the loss of TiUP data caused by abnormal conditions, such as disk damage of the control machine.
