@@ -10,7 +10,7 @@ This document introduces the `distinct` optimization in the TiDB query optimizer
 ## `DISTINCT` modifier in `SELECT` statements
 
 The `DISTINCT` modifier specifies removal of duplicate rows from the result set. `SELECT DISTINCT` is transformed to `GROUP BY`, for example：
-
+   
 ```sql
 mysql> explain SELECT DISTINCT a from t;
 +--------------------------+---------+-----------+---------------+-------------------------------------------------------+

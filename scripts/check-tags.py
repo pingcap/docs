@@ -83,49 +83,69 @@ def filter_content(content):
     else:
         return content
 
-status_code = 0
+def check_unclosed_tags(content):
+        result_findall = re.findall(r'<([^`>]*)>', content)
+        if len(result_findall) == 0:
+            # print("The edited markdown file " + filename + " has no tags!\n")
+            status_code = 0
+        else:
+            result_finditer = re.finditer(r'<([^`>]*)>', content)
+            stack = []
+            for i in result_finditer: # i 本身也是可迭代对象，所以下面要使用 i.group()
+                # print(i.group(), i.span())
+                tag = i.group()
+                pos = i.span() # 输出类似于 (7429, 7433)
 
-# print(sys.argv[1:])
-for filename in sys.argv[1:]:
-    #print("Checking " + filename + "......\n")
-    file = open(filename, "r" )
-    content = file.read()
-    file.close()
+                # 首先筛去特殊 tag，比如 <!-- xxx -->
+                if tag[:4] == '<!--' and tag[-3:] == '-->':
+                    continue
+                # 再筛去带 `` 的 tag
+                # elif content[pos[0]-1] == '`' and content[pos[1]] == '`':
+                elif tag_is_wrapped(pos, content):
+                    # print(content[int(pos[0])-1:int(pos[1]+1)])
+                    # print(tag, 'is wrapped by backticks!')
+                    continue
 
-    content = filter_content(content)
-    result_findall = re.findall(r'<([^`>]*)>', content)
+                # 其余的 tag 都需要放入堆栈确认是否闭合
+                stack = stack_tag(tag, stack)
+
+            if len(stack):
+                stack = ['<' + i + '>' for i in stack]
+                print("ERROR: " + filename + ' has unclosed tags: ' + ', '.join(stack) + '.\n')
+                status_code = 1
+            else:
+                # print("The edited markdown file has tags. But all tags are closed, congratulations!\n")
+                status_code = 0
+
+    if status_code:
+        print("HINT: Unclosed tags will cause website build failure. Please fix the reported unclosed tags. You can use backticks `` to wrap them or close them. Thanks.")
+
+    return status_code
+
+def no_space_before_codeblock(content):
+    result_findall = re.findall(r'\n( *)```', content)
     if len(result_findall) == 0:
-        # print("The edited markdown file " + filename + " has no tags!\n")
         status_code = 0
     else:
-        result_finditer = re.finditer(r'<([^`>]*)>', content)
-        stack = []
-        for i in result_finditer: # i 本身也是可迭代对象，所以下面要使用 i.group()
-            # print(i.group(), i.span())
-            tag = i.group()
-            pos = i.span() # 输出类似于 (7429, 7433)
-
-            # 首先筛去特殊 tag，比如 <!-- xxx -->
-            if tag[:4] == '<!--' and tag[-3:] == '-->':
-                continue
-            # 再筛去带 `` 的 tag
-            # elif content[pos[0]-1] == '`' and content[pos[1]] == '`':
-            elif tag_is_wrapped(pos, content):
-                # print(content[int(pos[0])-1:int(pos[1]+1)])
-                # print(tag, 'is wrapped by backticks!')
-                continue
-
-            # 其余的 tag 都需要放入堆栈确认是否闭合
-            stack = stack_tag(tag, stack)
-
-        if len(stack):
-            stack = ['<' + i + '>' for i in stack]
-            print("ERROR: " + filename + ' has unclosed tags: ' + ', '.join(stack) + '.\n')
+        has_space = re.match(r'\n( *)```', content).group(1)
+        if has_space:
+            print(has_space)
             status_code = 1
         else:
-            # print("The edited markdown file has tags. But all tags are closed, congratulations!\n")
             status_code = 0
 
-if status_code:
-    print("HINT: Unclosed tags will cause website build failure. Please fix the reported unclosed tags. You can use backticks `` to wrap them or close them. Thanks.")
-    exit(1)
+if __name__ == '__main__':
+    status_code = 0
+    # print(sys.argv[1:])
+    for filename in sys.argv[1:]:
+        #print("Checking " + filename + "......\n")
+        file = open(filename, "r" )
+        content = file.read()
+        file.close()
+        no_space_before_codeblock(content)
+
+        content = filter_content(content)
+        status_code = check_unclosed_tags(content)
+
+
+    
