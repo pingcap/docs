@@ -45,7 +45,7 @@ jobs:
       - run:
          name: "Check unclosed tags"
          command:
-          git fetch upstream
+          git fetch upstream;
           python3 scripts/check-tags.py $(git diff-tree --name-only --no-commit-id -r upstream/master..HEAD -- '*.md')
 
   build:
