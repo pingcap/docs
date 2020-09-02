@@ -22,6 +22,7 @@ However, some features of MySQL are not supported. This could be because there i
 + User-defined functions
 + `FOREIGN KEY` constraints [#18209](https://github.com/pingcap/tidb/issues/18209)
 + `FULLTEXT`/`SPATIAL` functions and indexes [#1793](https://github.com/pingcap/tidb/issues/1793)
++ Temporary tables
 + Character sets other than `utf8`, `utf8mb4`, `ascii`, `latin1` and `binary`
 + SYS schema
 + Optimizer trace
@@ -42,7 +43,9 @@ However, some features of MySQL are not supported. This could be because there i
 
 + In TiDB, auto-increment columns are only guaranteed to be unique and incremental on a single TiDB server, but they are *not* guaranteed to be incremental among multiple TiDB servers or allocated sequentially. It is recommended that you do not mix default values and custom values. Otherwise, you might encounter the `Duplicated Error` error message.
 
-+ You can use the `tidb_allow_remove_auto_inc` system variable to enable or disable the `AUTO_INCREMENT` column attribute. The syntax of removing the column attribute is `alter table modify` or `alter table change`.
++ You can use the `tidb_allow_remove_auto_inc` system variable to enable or disable the `AUTO_INCREMENT` column attribute that allows removing columns. The syntax of removing the column attribute is `alter table modify` or `alter table change`.
+
++ TiDB does not support adding the `AUTO_INCREMENT` column attribute, and it cannot be restored after removing this attribute.
 
 + See [`AUTO_INCREMENT`](/auto-increment.md) for more details.
 
@@ -94,6 +97,7 @@ The following major restrictions apply to DDL versus MySQL:
 * Multiple operations cannot be completed in a single `ALTER TABLE` statement. For example, it is not possible to add multiple columns or indexes in a single statement. Otherwise, the `Unsupported multi schema change` error might be output.
 * Different types of indexes (`HASH|BTREE|RTREE|FULLTEXT`) are not supported, and will be parsed and ignored when specified.
 * Adding/Dropping the primary key is unsupported unless [`alter-primary-key`](/tidb-configuration-file.md#alter-primary-key) is enabled.
+* Changing the field type to its superset is unsupported. For example, it does not support changing from `INTEGER` to `VARCHAR`, or from `TIMESTAMP` to `DATETIME`. Otherwise, it might output the error information `Unsupported modify column: type %d not match origin %d`.
 * Change/Modify data type does not currently support "lossy changes", such as changing from BIGINT to INT.
 * Change/Modify decimal columns does not support changing the prevision.
 * Change/Modify integer columns does not permit changing the `UNSIGNED` attribute.
@@ -108,6 +112,11 @@ The following major restrictions apply to DDL versus MySQL:
 [Statistics Collection](/statistics.md#manual-collection) works differently in TiDB than in MySQL, in that it is a relatively lightweight and short-lived operation in MySQL/InnoDB, while in TiDB it completely rebuilds the statistics for a table and can take much longer to complete.
 
 These differences are documented further in [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md).
+
+### Limitations of `SELECT` syntax
+
+- `SELECT ... INTO @variables` syntax is not supported.
+- `SELECT ... GROUP BY ... WITH ROLLUP` syntax is not supported.
 
 ### Views
 
