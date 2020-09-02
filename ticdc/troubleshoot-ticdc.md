@@ -188,7 +188,7 @@ In the output of this command, `admin-job-type` shows the state of the replicati
 
 ## Why does the latency from TiCDC to Kafka become higher and higher?
 
-* Check [whether the status of the replication task is terminated manually](#how-do-i-know-whether-the-replication-task-is-terminated-manually).
+* Check [how do I view the status of TiCDC replication tasks](#how-do-i-view-the-status-of-ticdc-replication-tasks).
 * Adjust the following parameters of Kafka:
 
     * Increase the `message.max.bytes` value in `server.properties` to `1073741824` (1 GB).
