@@ -6,9 +6,9 @@ def stack_tag(tag, stack):
     t = tag[1:-1]
     first_space = t.find(' ')
     #print(t)
-    if t[-1] == '/':
+    if t[-1:] == '/':
         self_closed_tag = True
-    elif t[0:1] != '/':
+    elif t[:1] != '/':
         # Add tag to stack
         if first_space == -1:
             stack.append(t)
@@ -50,6 +50,7 @@ def tag_is_wrapped(pos, content):
     left_single_backtick = len(left_wraps_findall) % 2
     right_wraps_findall = re.findall(r'`', content_later)
     right_single_backtick = len(right_wraps_findall) % 2
+    # print(left_single_backtick, right_single_backtick)
 
     if left_single_backtick != 0 and right_single_backtick != 0:
         # print(content_previous.find('`'), content_later.find('`'))
@@ -83,12 +84,12 @@ for filename in sys.argv[1:]:
     file.close()
 
     content = filter_content(content)
-    result_findall = re.findall(r'<([^`>]*)>', content)
+    result_findall = re.findall(r'<([^\n`>]*)>', content)
     if len(result_findall) == 0:
         # print("The edited markdown file " + filename + " has no tags!\n")
         status_code = 0
     else:
-        result_finditer = re.finditer(r'<([^`>]*)>', content)
+        result_finditer = re.finditer(r'<([^\n`>]*)>', content)
         stack = []
         for i in result_finditer:
             # print(i.group(), i.span())
@@ -99,6 +100,9 @@ for filename in sys.argv[1:]:
                 continue
             elif content[pos[0]-2:pos[0]] == '{{' and content[pos[1]:pos[1]+2] == '}}':
                 # print(tag) # filter copyable shortcodes
+                continue
+            elif tag[:5] == '<http': # or tag[:4] == '<ftp'
+                # filter urls
                 continue
             elif tag_is_wrapped(pos, content):
                 # print(content[int(pos[0])-1:int(pos[1]+1)])
