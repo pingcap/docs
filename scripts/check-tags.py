@@ -83,6 +83,7 @@ def filter_content(content):
     else:
         return content
 
+status_code = 0
 
 # print(sys.argv[1:])
 for filename in sys.argv[1:]:
