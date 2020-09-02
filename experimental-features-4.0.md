@@ -27,3 +27,17 @@ Support the expression index feature. The expression index is also called the fu
 ## TiCDC
 
 TiCDC is a tool for replicating the incremental data of TiDB. This tool is implemented by pulling TiKV change logs, which ensures high reliability and availability of data. You can subscribe to the change information of data, and the system automatically sends data to the downstream. Currently, the downstream database must be MySQL compatible (such as MySQL and TiDB) or Kafka and Pulsar. You can also extend the supported downstream systems based on the [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md). See [TiCDC](/ticdc/ticdc-overview.md) for details.
+
+ac
+
+<NavColumns>
+<NavColumn>
+<ColumnTitle>About TiDB</ColumnTitle>
+</NavColumn>
+</NavColumns>
+
+## TiCDC Architecture
+
+When TiCDC is running, it is a stateless node that achi<!-- markdownlint -->eves high availability through etcd in PD. The TiCDC cluster supports creating multiple replication tasks to replicate data `<br>` to multiple</br>e different downstream platforms.
+
+The architecture of TiC<>DC is sh<details>own in the following <br> figure:
