@@ -251,7 +251,7 @@ The above command saves the rules of a PD Group to the `rules.txt` file.
     pd-ctl config placement-rules rule-group set pd 100 true
     ```
 
-- To delete the configuration of a rule group: (Use default group configuration if there are rules in the group)
+- To delete the configuration of a rule group: (use the default group configuration if there is any rule in the group)
 
     {{< copyable "shell-regular" >}}
 
