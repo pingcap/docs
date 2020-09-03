@@ -1,11 +1,7 @@
 ---
 title: TiDB Binlog FAQ
 summary: Learn about the frequently asked questions (FAQs) and answers about TiDB Binlog.
-<<<<<<< HEAD
-aliases: ['/docs/stable/tidb-binlog/tidb-binlog-faq/','/docs/v4.0/tidb-binlog/tidb-binlog-faq/','/docs/stable/reference/tidb-binlog/faq/']
-=======
-aliases: ['/docs/dev/tidb-binlog/tidb-binlog-faq/','/docs/dev/reference/tidb-binlog/faq/','/docs/dev/reference/tools/tidb-binlog/faq/']
->>>>>>> 7a99816... Add 3 aliases to fix dead links (#3817)
+aliases: ['/docs/stable/tidb-binlog/tidb-binlog-faq/','/docs/v4.0/tidb-binlog/tidb-binlog-faq/','/docs/stable/reference/tidb-binlog/faq/','/docs/v4.0/reference/tools/tidb-binlog/faq/','/docs/stable/reference/tools/tidb-binlog/faq/']
 ---
 
 # TiDB Binlog FAQ
