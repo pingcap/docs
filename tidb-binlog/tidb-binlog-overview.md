@@ -1,7 +1,11 @@
 ---
 title: TiDB Binlog Overview
 summary: Learn overview of the cluster version of TiDB Binlog.
+<<<<<<< HEAD
 aliases: ['/docs/v3.1/tidb-binlog/tidb-binlog-overview/','/docs/v3.1/reference/tidb-binlog/overview/']
+=======
+aliases: ['/docs/dev/tidb-binlog/tidb-binlog-overview/','/docs/dev/reference/tidb-binlog/overview/','/docs/dev/reference/tidb-binlog-overview/','/docs/dev/reference/tools/tidb-binlog/overview/']
+>>>>>>> 7a99816... Add 3 aliases to fix dead links (#3817)
 ---
 
 # TiDB Binlog Cluster Overview

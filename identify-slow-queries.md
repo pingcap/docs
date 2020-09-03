@@ -1,7 +1,11 @@
 ---
 title: Identify Slow Queries
 summary: Use the slow query log to identify problematic SQL statements.
+<<<<<<< HEAD
 aliases: ['/docs/v3.1/identify-slow-queries/','/docs/v3.1/how-to/maintain/identify-abnormal-queries/identify-slow-queries/','/docs-cn/v3.1/how-to/maintain/identify-slow-queries/']
+=======
+aliases: ['/docs/dev/identify-slow-queries/','/docs/dev/how-to/maintain/identify-abnormal-queries/identify-slow-queries/','/docs/dev/how-to/maintain/identify-slow-queries']
+>>>>>>> 7a99816... Add 3 aliases to fix dead links (#3817)
 ---
 
 # Identify Slow Queries
