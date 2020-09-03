@@ -18,7 +18,7 @@ The configuration of the whole rule system consists of multiple rules. Each rule
 
 The key ranges of multiple rules can have overlapping parts, which means that a Region can match multiple rules. In this case, PD decides whether the rules overwrite each other or take effect at the same time according to the attributes of rules. If multiple rules take effect at the same time, PD will generate schedules in sequence according to the stacking order of the rules for rule matching.
 
-In addition, to meet the requirement that rules from different sources are isolated from each other, more flexible ways are supported to organize the rules. The concept of "Group" is also introduced. Generally, users can place rules in different groups according to different sources.
+In addition, to meet the requirement that rules from different sources are isolated from each other, these rules can be organized in a more flexible way. Therefore, the concept of "Group" is introduced. Generally, users can place rules in different groups according to different sources.
 
 ![Placement rules overview](/media/placement-rules-1.png)
 
