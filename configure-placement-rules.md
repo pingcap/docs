@@ -58,7 +58,7 @@ The following table shows the description of each field in a rule group:
 | Field name | Type and restriction  | Description |
 | :--- | :--- | :--- |
 | `ID` | `string` | The group ID that marks the source of the rule. |
-| `Index` | `int` | The stacking sequence of rules in different groups. |
+| `Index` | `int` | The stacking sequence of different groups. |
 | `Override` | `true`/`false` | Whether to overwrite grooups with smaller index. |
 
 ## Configure rules
