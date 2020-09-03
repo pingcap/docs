@@ -51,7 +51,7 @@ The meaning and function of `LocationLabels` are the same with those earlier tha
 
 The meaning and function of `IsolationLevel` is elaborated in [Cluster topology configuration](/location-awareness.md). For example, if you have deployed `[zone,rack,host]` that defines a three-layer topology with `LocationLabels` and set `IsolationLevel` to `zone`, then PD ensures that all peers of each Region are placed in different zones during the scheduling. If the minimum isolation level restriction on `IsolationLevel` cannot be met (for example, 3 replicas are configured but there are only 2 data zones in total), PD will not try to make up to meet this restriction. The default value of `IsolationLevel` is an empty string, which means that it is disabled.
 
-### Rule group fields
+### Fields of the rule group
 
 The following table shows the description of each field in a rule group:
 
