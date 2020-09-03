@@ -243,7 +243,7 @@ The above command saves the rules of a PD Group to the `rules.txt` file.
     pd-ctl config placement-rules rule-group show pd
     ```
 
-- To set the `index` and `override` of the rule group:
+- To set the `index` and `override` attributes of the rule group:
 
     {{< copyable "shell-regular" >}}
 
