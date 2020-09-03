@@ -223,7 +223,7 @@ Executing the above command saves all rules to the `rules.json` file.
 pd-ctl config placement-rules load --group=pd --out=rule.txt
 ```
 
-The above command saves the rules of a PD Group to the `rules.json` file.
+The above command saves the rules of a PD Group to the `rules.txt` file.
 
 ### Use pd-ctl to configure rule groups
 
