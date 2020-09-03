@@ -115,10 +115,11 @@ for filename in sys.argv[1:]:
             stack = ['<' + i + '>' for i in stack]
             print("ERROR: " + filename + ' has unclosed tags: ' + ', '.join(stack) + '.\n')
             status_code = 1
+            print("status_code =", status_code)
         else:
             # print("The edited markdown file has tags. But all tags are closed, congratulations!\n")
             status_code = 0
 
-if status_code:
+if status_code == 1:
     print("HINT: Unclosed tags will cause website build failure. Please fix the reported unclosed tags. You can use backticks `` to wrap them or close them. Thanks.")
     exit(1)
