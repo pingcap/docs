@@ -74,57 +74,49 @@ def filter_content(content):
     else:
         return content
 
-if __name__ == '__main__':
-    status_code = 0
 
-    # print(sys.argv[1:])
-    for filename in sys.argv[1:]:
-        #print("Checking " + filename + "......\n")
-        file = open(filename, "r" )
-        content = file.read()
-        file.close()
+status_code = 0
 
-        content = filter_content(content)
-        result_findall = re.findall(r'<([^\n`>]*)>', content)
-        if len(result_findall) == 0:
-            # print("The edited markdown file " + filename + " has no tags!\n")
-            status_code = 0
-        else:
-            result_finditer = re.finditer(r'<([^\n`>]*)>', content)
-            stack = []
-            for i in result_finditer:
-                # print(i.group(), i.span())
-                tag = i.group()
-                pos = i.span()
+# print(sys.argv[1:])
+for filename in sys.argv[1:]:
+    #print("Checking " + filename + "......\n")
+    file = open(filename, "r" )
+    content = file.read()
+    file.close()
 
-                if tag[:4] == '<!--' and tag[-3:] == '-->':
-                    continue
-                elif content[pos[0]-2:pos[0]] == '{{' and content[pos[1]:pos[1]+2] == '}}':
-                    # print(tag) # filter copyable shortcodes
-                    continue
-                elif tag[:5] == '<http': # or tag[:4] == '<ftp'
-                    # filter urls
-                    continue
-                elif tag_is_wrapped(pos, content):
-                    # print(content[int(pos[0])-1:int(pos[1]+1)])
-                    # print(tag, 'is wrapped by backticks!')
-                    continue
+    content = filter_content(content)
+    result_findall = re.findall(r'<([^\n`>]*)>', content)
+    if len(result_findall) == 0:
+        # print("The edited markdown file " + filename + " has no tags!\n")
+        continue
+    else:
+        result_finditer = re.finditer(r'<([^\n`>]*)>', content)
+        stack = []
+        for i in result_finditer:
+            # print(i.group(), i.span())
+            tag = i.group()
+            pos = i.span()
 
-                stack = stack_tag(tag, stack)
+            if tag[:4] == '<!--' and tag[-3:] == '-->':
+                continue
+            elif content[pos[0]-2:pos[0]] == '{{' and content[pos[1]:pos[1]+2] == '}}':
+                # print(tag) # filter copyable shortcodes
+                continue
+            elif tag[:5] == '<http': # or tag[:4] == '<ftp'
+                # filter urls
+                continue
+            elif tag_is_wrapped(pos, content):
+                # print(content[int(pos[0])-1:int(pos[1]+1)])
+                # print(tag, 'is wrapped by backticks!')
+                continue
 
-            if len(stack):
-                stack = ['<' + i + '>' for i in stack]
-                print("ERROR: " + filename + ' has unclosed tags: ' + ', '.join(stack) + '.\n')
-                status_code = 1
-                print("status_code1 =", status_code)
-            else:
-                # print("The edited markdown file has tags. But all tags are closed, congratulations!\n")
-                status_code = 0
+            stack = stack_tag(tag, stack)
 
-    print("status_code2 =", status_code)
-    if status_code == 1:
-        print("HINT: Unclosed tags will cause website build failure. Please fix the reported unclosed tags. You can use backticks `` to wrap them or close them. Thanks.")
-        exit(1)
-    if status_code == 0:
-        exit(0)
-        
+        if len(stack):
+            stack = ['<' + i + '>' for i in stack]
+            print("ERROR: " + filename + ' has unclosed tags: ' + ', '.join(stack) + '.\n')
+            status_code = 1
+
+if status_code:
+    print("HINT: Unclosed tags will cause website build failure. Please fix the reported unclosed tags. You can use backticks `` to wrap them or close them. Thanks.")
+    exit(1)
