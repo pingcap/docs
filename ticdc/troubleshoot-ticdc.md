@@ -169,9 +169,9 @@ The expected output is as follows:
 >
 > This feature is introduced in TiCDC 4.0.3.
 
-## How do I know whether the replication task is terminated manually?
+## How do I know whether the replication task is stopped manually?
 
-You can know whether the replication task is terminated manually by using `cdc cli`. For example:
+You can know whether the replication task is stopped manually by using `cdc cli`. For example:
 
 {{< copyable "shell-regular" >}}
 
@@ -181,7 +181,7 @@ cdc cli changefeed query --pd=http://10.0.10.25:2379 --changefeed-id 28c43ffc-23
 
 In the output of this command, `admin-job-type` shows the state of the replication task:
 
-* `0`: In progress. When the task is in progress, it is not terminated manually.
+* `0`: In progress, which means that the task is not stopped manually.
 * `1`: Paused. When the task is paused, all replicated `processor`s exit. The configuration and the replication status of the task are retained, so you can resume the task from `checkpiont-ts`.
 * `2`: Resumed. The replication task resumes from `checkpoint-ts`.
 * `3`: Removed. When the task is removed, all replicated `processor`s are ended, and the configuration information of the replication task is cleared up. Only the replication status is retained for later queries.
