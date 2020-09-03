@@ -53,7 +53,7 @@ The meaning and function of `IsolationLevel` is elaborated in [Cluster topology 
 
 ### Rule group fields
 
-The following table shows the meaning of each field in a rule group:
+The following table shows the description of each field in a rule group:
 
 | Field name | Type and restriction  | Description |
 | :--- | :--- | :--- |
