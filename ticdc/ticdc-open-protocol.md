@@ -122,7 +122,7 @@ This section introduces the formats of Row Changed Event, DDL Event, and Resolve
     }
     ```
 
-    `Delete` event. The deleted row data is output. When the old value feature is enabled, the `Delete` event includes all the rows of the deleted row data; when this feature is disabled, the `Delete` event only includes the [HandleKey](#bit-flags-of-columns) row.
+    `Delete` event. The deleted row data is output. When the old value feature is enabled, the `Delete` event includes all the columns of the deleted row data; when this feature is disabled, the `Delete` event only includes the [HandleKey](#bit-flags-of-columns) column.
 
     ```
     {
@@ -299,7 +299,7 @@ COMMIT;
 | MEDIUMTEXT/MEDIUMBLOB | 250  | {"t":250,"v":"5rWL6K+VdGV4dA=="} | The value is encoded in Base64. |
 | LONGTEXT/LONGBLOB     | 251  | {"t":251,"v":"5rWL6K+VdGV4dA=="} | The value is encoded in Base64. |
 | TEXT/BLOB             | 252  | {"t":252,"v":"5rWL6K+VdGV4dA=="} | The value is encoded in Base64. |
-| CHAR/BINARY           | 254  | {"t":254,"v":"test"} / {"t":254,"v":"\\x89PNG\\r\\n\\x1a\\n"} | The value is encoded in UTF-8. When the upstream type is VARBINARY, invisible ASCII characters are escaped. |
+| CHAR/BINARY           | 254  | {"t":254,"v":"test"} / {"t":254,"v":"\\x89PNG\\r\\n\\x1a\\n"} | The value is encoded in UTF-8. When the upstream type is BINARY, invisible ASCII characters are escaped. |
 | GEOMETRY              | 255  |  | Unsupported |
 
 ## DDL Type Code
@@ -347,7 +347,7 @@ COMMIT;
 
 ## Bit flags of columns
 
-The bit flags represents specific attributes of columns.
+The bit flags represent specific attributes of columns.
 
 | Bit | Value | Name | Description |
 | :-- | :- | :- | :- |
@@ -381,4 +381,4 @@ If the value of a column is `46`, the column is a composite index column, a prim
 > + This feature is still experimental. Do **NOT** use it in the production environment.
 > + Currently, for a known composite index column, the `UniqueKeyFlag` value of this column is incorrectly output.
 > + `BinaryFlag` is meaningful only when the column type is Blob/Text (including Tiny Blob/Tiny Text and Long Blob/Long Text). When the upstream column is the Blob type, the `BinaryFlag` value is set to `1`. When the upstream column is the Text type, the `BinaryFlag` value is set to `0`.
-> + To replicate a table from the upstream, TiCDC selects a [valid index](/ticdc/ticdc-overview.md#restrictions) as the Handle index. The `HandleKeyFlag` value of the Handle index column is set `1`.
+> + To replicate a table from the upstream, TiCDC selects a [valid index](/ticdc/ticdc-overview.md#restrictions) as the Handle index. The `HandleKeyFlag` value of the Handle index column is set to `1`.
