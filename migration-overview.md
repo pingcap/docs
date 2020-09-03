@@ -1,7 +1,7 @@
 ---
 title: Migration Overview
 summary: This document describes how to migrate data from databases or data formats (CSV/SQL).
-aliases: ['/docs/stable/migration-overview/','/docs/v4.0/migration-overview/']
+aliases: ['/docs/stable/migration-overview/','/docs/v4.0/migration-overview/','/docs/op-guide/migration-overview/']
 ---
 
 # Migration Overview
