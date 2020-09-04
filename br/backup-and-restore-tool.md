@@ -15,7 +15,6 @@ aliases: ['/docs/v3.1/br/backup-and-restore-tool/','/docs/v3.1/reference/tools/b
 - It is recommended that you execute multiple backup operations serially. Otherwise, different backup operations might interfere with each other.
 - When BR restores data to the upstream cluster of Drainer, Drainer cannot replicate the restored data to the downstream.
 
-
 ## Recommended deployment configuration
 
 - It is recommended that you deploy BR on the PD node.
