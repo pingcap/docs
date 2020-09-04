@@ -316,13 +316,13 @@ prepare stmt from 'select  /*+ IGNORE_PLAN_CACHE() */ * from t where t.id = ?';
 
 ### NTH_PLAN(N)
 
-The `NTH_PLAN(N)` hint reminds the optimizer to select the `N`th physical plan found in the physical optimization stage. `N` must be a positive integer.
+The `NTH_PLAN(N)` hint reminds the optimizer to select the `N`th physical plan found during the physical optimization. `N` must be a positive integer.
 
-If the specified `N` exceeds the search range of the physical optimization stage, TiDB will return a warning and select the optimal physical plan based on the same strategy as when this hint does not exist.
+If the specified `N` is beyond the search range of the physical optimization, TiDB will return a warning and select the optimal physical plan based on the strategy that ignores this hint.
 
 This hint does not take effect when the cascades planner is enabled.
 
-In the following example, the optimizer is forcibly selected the third physical plan found in the physical optimization stage:
+In the following example, the optimizer is forced to select the third physical plan found during the physical optimization:
 
 {{< copyable "sql" >}}
 
@@ -332,4 +332,4 @@ SELECT /*+ NTH_PLAN(3) */ count(*) from t where a > 5;
 
 > **Note:**
 >
-> `NTH_PLAN(N)` is mainly used for testing, and its compatibility is not guaranteed in later versions, so proceed **with caution**.
+> `NTH_PLAN(N)` is mainly used for testing, and its compatibility is not guaranteed in later versions. Use this hint **with caution**.
