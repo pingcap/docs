@@ -507,6 +507,8 @@
   + [High Availability FAQs](/faq/high-availability-faq.md)
   + [High Reliability FAQs](/faq/high-reliability-faq.md)
   + [Migration FAQs](/faq/migration-tidb-faq.md)
++ Dev Guide
+  + [Schedule Replicas by Topology Labels](/schedule-replicas-by-topology-labels.md)
 + [Glossary](/glossary.md)
 + Release Notes
   + [All Releases](/releases/release-notes.md)
