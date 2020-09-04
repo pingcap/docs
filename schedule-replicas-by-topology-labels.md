@@ -8,7 +8,7 @@ aliases: ['/docs-cn/dev/how-to/deploy/geographic-redundancy/location-awareness/'
 
 To improve the high availability and disaster tolerance of TiDB clusters, it is recommended that TiKV nodes are physically distributed as much as possible. For example, TiKV nodes can be distributed on different racks or even in different data zones. According to the topology information of TiKV, the PD scheduler automatically performs scheduling at the background to isolate the replicas of Regions as much as possible, thereby maximizing the capability for disaster recovery.
 
-To make this mechanism effective, you need to report the topology information of the cluster, especially the TiKV location, to PD for reasonable configuration during deployment. Before you begin, see [Deploy TiDB Using TiDB Ansible (Recommended)](/online-deployment-using-ansible.md) and [Deploy TiDB Using Docker](/test-deployment-using-docker.md).
+To make this mechanism effective, you need to report the topology information of the cluster, especially the TiKV location, to PD for proper configuration during deployment. Before you begin, see [Deploy TiDB Using TiDB Ansible (Recommended)](/online-deployment-using-ansible.md) and [Deploy TiDB Using Docker](/test-deployment-using-docker.md).
 
 ## Configure `labels` based on the cluster topology
 
