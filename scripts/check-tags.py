@@ -1,5 +1,6 @@
 import re
 import sys
+import os
 
 # reference: https://stackoverflow.com/questions/35761133/python-how-to-check-for-open-and-close-tags
 def stack_tag(tag, stack):
@@ -63,58 +64,87 @@ def tag_is_wrapped(pos, content):
         # print(content_later)
         return False
 
-def filter_content(content):
-    content_findall = re.findall(r'\n---\n', content)
-    if len(content_findall):
-        content_finditer = re.finditer(r'\n---\n', content)
+def filter_frontmatter(content):
+    # if there is frontmatter, remove it
+    if content.startswith('---'):
+        collect = []
+        content_finditer = re.finditer(r'---\n', content)
         for i in content_finditer:
             meta_pos = i.span()[1]
-            # print(content[meta_pos:])
-            return content[meta_pos:]
-    else:
-        return content
+            collect.append(meta_pos)
+
+        filter_point = collect[1]
+        content = content[filter_point:]
+    return content
+
+def filter_backticks(content, filename):
+    # remove content wrapped by backticks
+    backticks = []
+    content_findall = re.findall(r'```', content)
+    if len(content_findall):
+        content_finditer = re.finditer(r'```', content)
+        for i in content_finditer:
+            pos = i.span()
+            backticks.append(pos)
+        # e.g. backticks = [[23, 26],[37, 40],[123, 126],[147, 150]]
+        if len(backticks) % 2 != 0:
+            print(len(content_findall))
+            print(backticks)
+            print(backticks[0][0], backticks[0][1])
+            # print(content[backticks[0][0]-10:backticks[0][1]+10])
+            print(filename, ": Your inline code ``` ```  is not closed. Please close it.")
+        elif len(backticks) != 0:
+            backticks_start = backticks[0][0]
+            backticks_end = backticks[1][1]
+            # print(backticks_start, backticks_end)
+            content = content.replace(content[backticks_start:backticks_end],'')
+            content = filter_backticks(content, filename)
+    return content
 
 status_code = 0
 
 # print(sys.argv[1:])
 for filename in sys.argv[1:]:
-    #print("Checking " + filename + "......\n")
-    file = open(filename, "r" )
-    content = file.read()
-    file.close()
+    # print("Checking " + filename + "......\n")
+    if os.path.isfile(filename):
+        file = open(filename, "r" )
+        content = file.read()
+        file.close()
 
-    content = filter_content(content)
-    result_findall = re.findall(r'<([^\n`>]*)>', content)
-    if len(result_findall) == 0:
-        # print("The edited markdown file " + filename + " has no tags!\n")
-        continue
-    else:
-        result_finditer = re.finditer(r'<([^\n`>]*)>', content)
-        stack = []
-        for i in result_finditer:
-            # print(i.group(), i.span())
-            tag = i.group()
-            pos = i.span()
+        content = filter_frontmatter(content)
+        content = filter_backticks(content, filename)
+        # print(content)
+        result_findall = re.findall(r'<([^\n`>]*)>', content)
+        if len(result_findall) == 0:
+            # print("The edited markdown file " + filename + " has no tags!\n")
+            continue
+        else:
+            result_finditer = re.finditer(r'<([^\n`>]*)>', content)
+            stack = []
+            for i in result_finditer:
+                # print(i.group(), i.span())
+                tag = i.group()
+                pos = i.span()
 
-            if tag[:4] == '<!--' and tag[-3:] == '-->':
-                continue
-            elif content[pos[0]-2:pos[0]] == '{{' and content[pos[1]:pos[1]+2] == '}}':
-                # print(tag) # filter copyable shortcodes
-                continue
-            elif tag[:5] == '<http': # or tag[:4] == '<ftp'
-                # filter urls
-                continue
-            elif tag_is_wrapped(pos, content):
-                # print(content[int(pos[0])-1:int(pos[1]+1)])
-                # print(tag, 'is wrapped by backticks!')
-                continue
+                if tag[:4] == '<!--' and tag[-3:] == '-->':
+                    continue
+                elif content[pos[0]-2:pos[0]] == '{{' and content[pos[1]:pos[1]+2] == '}}':
+                    # print(tag) # filter copyable shortcodes
+                    continue
+                elif tag[:5] == '<http': # or tag[:4] == '<ftp'
+                    # filter urls
+                    continue
+                elif tag_is_wrapped(pos, content):
+                    # print(content[int(pos[0])-1:int(pos[1]+1)])
+                    # print(tag, 'is wrapped by backticks!')
+                    continue
 
-            stack = stack_tag(tag, stack)
+                stack = stack_tag(tag, stack)
 
-        if len(stack):
-            stack = ['<' + i + '>' for i in stack]
-            print("ERROR: " + filename + ' has unclosed tags: ' + ', '.join(stack) + '.\n')
-            status_code = 1
+            if len(stack):
+                stack = ['<' + i + '>' for i in stack]
+                print("ERROR: " + filename + ' has unclosed tags: ' + ', '.join(stack) + '.\n')
+                status_code = 1
 
 if status_code:
     print("HINT: Unclosed tags will cause website build failure. Please fix the reported unclosed tags. You can use backticks `` to wrap them or close them. Thanks.")
