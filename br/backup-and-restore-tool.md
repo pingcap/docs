@@ -11,9 +11,9 @@ aliases: ['/docs/v3.1/br/backup-and-restore-tool/','/docs/v3.1/reference/tools/b
 ## Usage restrictions
 
 - BR only supports TiDB v3.1 and later versions.
-- Currently, TiDB does not support backing up and restoring partitioned tables.
 - Currently, you can perform restoration only on new clusters.
 - It is recommended that you execute multiple backup operations serially. Otherwise, different backup operations might interfere with each other.
+- When BR restores data to the upstream cluster of Drainer, Drainer cannot replicate the restored data to the downstream.
 
 ## Recommended deployment configuration
 
