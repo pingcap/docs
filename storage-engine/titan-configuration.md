@@ -56,15 +56,15 @@ If you want to speed up the writing process, you can compact data of the whole T
 > **Note:**
 >
 > 在不开启 Titan 功能的情况下，RocksDB 无法读取已经迁移到 Titan 的数据。如果在打开过 Titan 的 TiKV 实例上错误地关闭了 Titan（误设置 `rocksdb.titan.enabled = false`），启动 TiKV 会失败，TiKV log 中出现 `You have disabled titan when its data directory is not empty` 错误。如需要关闭 Titan，参考[关闭 Titan](#关闭-titan实验功能) 一节。
-> When Titan is disabled, RocksDB cannot read data that has been migrated to Titan. If Titan is mistakenly disabled on a TiKV instance that has been turned on (“rocksdb.titan.enabled = false” is set by mistake), TiKV will fail to start, and “You have disabled titan when its data directory is not empty” appears in the TiKV log. error.
+> When Titan is disabled, RocksDB cannot read data that has been migrated to Titan. If Titan is incorrectly disabled on a TiKV instance with Titan enabled (mistakenly set `rocksdb.titan.enabled` to `false`), TiKV will fail to start, and the `You have disabled titan when its data directory is not empty` error appears in the TiKV log. To correctly disabled Titan, see [Disable Titan](#disable-titan-experimental)
 
-## 相关参数介绍
+## Parameters
 
-使用 TiUP 调整参数，请参考[修改配置参数](/maintain-tidb-using-tiup.md#修改配置参数)。
+To adjust parameters using TiUP, refer to [Modify the configuration](/maintain-tidb-using-tiup.md#modify-the-configuration).
 
-+ Titan GC 线程数。
++ Titan GC thread count
 
-    当从 **TiKV Details** - **Thread CPU** - **RocksDB CPU** 监控中观察到 Titan GC 线程长期处于满负荷状态时，应该考虑增加 Titan GC 线程池大小。
+    From the **TiKV Details** -> **Thread CPU** -> **RocksDB CPU** panel, if you observe that the Titan GC threads are at full capacity for a long time, consider increase the size of the Titan GC thread pool.
 
     {{< copyable "" >}}
 
@@ -73,9 +73,10 @@ If you want to speed up the writing process, you can compact data of the whole T
     max-background-gc = 1
     ```
 
-+ value 的大小阈值。
++ Threshold of value size
 
     当写入的 value 小于这个值时，value 会保存在 RocksDB 中，反之则保存在 Titan 的 blob file 中。根据 value 大小的分布，增大这个值可以使更多 value 保存在 RocksDB，读取这些小 value 的性能会稍好一些；减少这个值可以使更多 value 保存在 Titan 中，进一步减少 RocksDB compaction。
+    When the value to write is smaller than the threshold, this value is stored in RocksDB; otherwise, this value is stored in the blob file of Titan. Based on the distribution of value sizes, if you increase the threshold, more values are stored in RocksDB, which performs better in reading small values. If you decrease the threshold, more values go to Titan, which reduces RocksDB compactions.
 
     ```toml
     [rocksdb.defaultcf.titan]
@@ -84,14 +85,18 @@ If you want to speed up the writing process, you can compact data of the whole T
 
 + Titan 中 value 所使用的压缩算法。Titan 中压缩是以 value 为单元的。
 
++ The compression algorithm used for values in Titan, which takes value as the unit.
+
     ```toml
     [rocksdb.defaultcf.titan]
     blob-file-compression = "lz4"
     ```
 
-+ Titan 中 value 的缓存大小。
++ The cache size of value in Titan
 
     更大的缓存能提高 Titan 读性能，但过大的缓存会造成 OOM。建议在数据库稳定运行后，根据监控把 RocksDB block cache (storage.block-cache.capacity) 设置为 store size 减去 blob file size 的大小，`blob-cache-size` 设置为 `内存大小 * 50% 再减去 block cache 的大小`。这是为了保证 block cache 足够缓存整个 RocksDB 的前提下，blob cache 尽量大。
+
+    Larger cache size means higher read performance of Titan. However, too large 
 
     ```toml
     [rocksdb.defaultcf.titan]
