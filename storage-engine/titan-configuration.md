@@ -1,19 +1,23 @@
 ---
-title: Titan 配置
+title: Titan Configuration
 aliases: ['/docs-cn/dev/storage-engine/titan-configuration/','/docs-cn/dev/reference/titan/configuration/','/docs-cn/dev/titan-configuration/']
 ---
 
-# Titan 配置
+# Titan Configuration
 
 Titan 是基于 RocksDB 开发的存储引擎插件，通过把 key 和 value 分离存储，在 value 较大的场景下，减少写放大，降低 RocksDB 后台 compaction 对 I/O 带宽和 CPU 的占用，以提高性能。详情参阅 [Titan 介绍](/storage-engine/titan-overview.md)。
 
 本文档介绍如何如何通过 Titan 配置项来开启、关闭 Titan，相关参数介绍，以及 level merge 功能。
 
-## 开启 Titan
+Titan is a RocksDB-based plugin for key-value separation. The goal of Titan is to reduce write amplification in RocksDB and make compaction operations occupy less I/O bandwidth and CPU resources when using large values. For more details of Titan, see [Titan Overview](/storage-engine/titan-overview.md).
 
-Titan 对 RocksDB 兼容，也就是说，使用 RocksDB 存储引擎的现有 TiKV 实例可以直接开启 Titan。
+This document introduces how to enable and disable Titan using the corresponding configuration items, the relevant parameters, and the Level Merge feature.
 
-+ 方法一：如果使用 TiUP 部署的集群，开启的方法是执行 `tiup cluster edit-config ${cluster-name}` 命令，再编辑 TiKV 的配置文件。编辑 TiKV 配置文件示例如下：
+## Enable Titan
+
+Titan is compatible with RocksDB, that is, you can directly enable Titan on the existing TiKV instances that use RocksDB. You can use one of the following two methods to enable Titan.
+
++ Method 1: If you have deployed the cluster using TiUP, you can execute the `tiup cluster edit-config ${cluster-name}` command and edit the TiKV configuration file as the following example shows:
 
     {{< copyable "shell-regular" >}}
 
@@ -22,7 +26,7 @@ Titan 对 RocksDB 兼容，也就是说，使用 RocksDB 存储引擎的现有 T
         rocksdb.titan.enabled: true
     ```
 
-    重新加载配置，同时也会在线滚动重启 TiKV：
+    Reload the configuration and TiKV will be rolling restarted online:
 
     {{< copyable "shell-regular" >}}
 
@@ -30,9 +34,9 @@ Titan 对 RocksDB 兼容，也就是说，使用 RocksDB 存储引擎的现有 T
     `tiup cluster reload ${cluster-name} -R tikv`
     ```
 
-    具体命令，可参考[通过 TiUP 修改配置参数](/maintain-tidb-using-tiup.md#修改配置参数)。
+    For the detailed command, see [Modify the configuration using TiUP](/maintain-tidb-using-tiup.md#modify-the-configuration).
 
-+ 方法二：直接编辑 TiKV 配置文件开启 Titan（生产环境不推荐)。
++ Method 2: Directly edit the TiKV configuration file to enable Titan (**NOT** recommended for the production environment).
 
     {{< copyable "" >}}
 
@@ -45,9 +49,14 @@ Titan 对 RocksDB 兼容，也就是说，使用 RocksDB 存储引擎的现有 T
 
 如果需要加速数据移入 Titan，可以通过 tikv-ctl 执行一次全量 compaction，具体参考[手动 compact](/tikv-control.md#手动-compact-整个-tikv-集群的数据)。
 
-> **注意：**
+After Titan is enabled, the existing data is not immediately written to the Titan engine but . As new data is written to the TiKV foreground and RocksDB performs compaction, the values are progressively separated from keys and written to Titan. You can view the **TiKV Details** -> **Titan kv** -> **blob file size** panel to confirm the size of the data stored in Titan.
+
+If you want to speed up the writing process, you can compact data of the whole TiKV cluster manually using tikv-ctl. For details, see [manual compaction](/tikv-control.md#compact-data-of-the-whole-tikv-cluster-manually).
+
+> **Note:**
 >
 > 在不开启 Titan 功能的情况下，RocksDB 无法读取已经迁移到 Titan 的数据。如果在打开过 Titan 的 TiKV 实例上错误地关闭了 Titan（误设置 `rocksdb.titan.enabled = false`），启动 TiKV 会失败，TiKV log 中出现 `You have disabled titan when its data directory is not empty` 错误。如需要关闭 Titan，参考[关闭 Titan](#关闭-titan实验功能) 一节。
+> When Titan is disabled, RocksDB cannot read data that has been migrated to Titan. If Titan is mistakenly disabled on a TiKV instance that has been turned on (“rocksdb.titan.enabled = false” is set by mistake), TiKV will fail to start, and “You have disabled titan when its data directory is not empty” appears in the TiKV log. error.
 
 ## 相关参数介绍
 

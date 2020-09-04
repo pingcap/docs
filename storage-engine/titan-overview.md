@@ -5,7 +5,7 @@ summary: Learn the overview of the Titan storage engine.
 
 # Titan Overview
 
-[Titan](https://github.com/pingcap/rocksdb/tree/titan-5.15) is a [RocksDB](https://github.com/facebook/rocksdb) plugin for key-value separation. The goal of Titan is to reduce write amplification in RocksDB when using large values.
+[Titan](https://github.com/pingcap/rocksdb/tree/titan-5.15) is a [RocksDB](https://github.com/facebook/rocksdb)-based plugin for key-value separation. The goal of Titan is to reduce write amplification in RocksDB when using large values.
 
 When the value size in Key-Value pairs is large, Titan performs better than RocksDB in write, update, and point read scenarios. However, Titan gets a higher write performance by sacrificing storage space and range query performance. As the price of SSDs continues to decrease, this trade-off will be more and more meaningful.
 
