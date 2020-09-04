@@ -1,40 +1,20 @@
 ---
-title: Understand the Query Execution Plan
+title: EXPLAIN Examples
 summary: Learn about the execution plan information returned by the `EXPLAIN` statement in TiDB.
 aliases: ['/docs/dev/query-execution-plan/','/docs/dev/reference/performance/understanding-the-query-execution-plan/','/docs/dev/index-merge/','/docs/dev/reference/performance/index-merge/','/tidb/dev/index-merge']
 ---
 
-# Understand the Query Execution Plan
+# EXPLAIN Examples
 
-Based on the latest statistics of your tables, the TiDB optimizer chooses the most efficient query execution plan, which consists of a series of operators. This document details the execution plan in TiDB.
+The following additional examples are provided to help understand the output of `EXPLAIN` for more complicated queries.
 
-## `EXPLAIN` overview
+### Aggregation queries
 
-You can use the `EXPLAIN` command in TiDB to view the execution plan. The result of the `EXPLAIN` statement provides information about how TiDB executes SQL queries:
+### Join Queries
 
-- `EXPLAIN` works together with statements such as `SELECT` and `DELETE`.
-- When you execute the `EXPLAIN` statement, TiDB returns the final optimized physical execution plan. In other words, `EXPLAIN` displays the complete information about how TiDB executes the SQL statement, such as in which order, how tables are joined, and what the expression tree looks like.
-- For more information about each column of `EXPLAIN`, see [`EXPLAIN` Output Format](/sql-statements/sql-statement-explain.md).
+### Subqueries
 
-The results of `EXPLAIN` shed light on how to index the data tables so that the execution plan can use the index to speed up the execution of SQL statements. You can also use `EXPLAIN` to check if the optimizer chooses the optimal order to join tables.
 
-## Operator execution order
-
-The execution plan in TiDB has a tree structure, with each node of the tree as an operator. Considering the concurrent execution of multiple threads in each operator, all operators consume CPU and memory resources to process data during the execution of a SQL statement. From this point of view, there is no execution order for the operator.
-
-However, from the perspective of which operators process a row of data first, the execution of a piece of data is in order. The following rule roughly summarizes this order:
-
-**`Build` is always executed before `Probe` and always appears before `Probe`.**
-
-The first half of this rule means: if an operator has multiple child nodes, the operator with the `Build` keyword at the end of the child node ID is always executed before the operator with the `Probe` keyword. The second half means: when TiDB shows the execution plan, the `Build` side always appears first, followed by the `Probe` side.
-
-The following examples illustrate this rule:
-
-{{< copyable "sql" >}}
-
-```sql
-explain select * from t use index(idx_a) where a = 1;
-```
 
 ```sql
 +-------------------------------+---------+-----------+-------------------------+---------------------------------------------+
@@ -432,74 +412,3 @@ EXPLAIN SELECT /*+ INL_MERGE_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 6 rows in set (0.00 sec)
 ```
 
-## Optimization example
-
-For more details, refer to [bikeshare example database](/import-example-data.md).
-
-{{< copyable "sql" >}}
-
-```sql
-EXPLAIN SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00' AND '2017-07-01 23:59:59';
-```
-
-```sql
-+------------------------------+----------+-----------+---------------+------------------------------------------------------------------------------------------------------------------------+
-| id                           | estRows  | task      | access object | operator info                                                                                                          |
-+------------------------------+----------+-----------+---------------+------------------------------------------------------------------------------------------------------------------------+
-| StreamAgg_20                 | 1.00        | root      |               | funcs:count(Column#13)->Column#11                                                                                      |
-| └─TableReader_21             | 1.00        | root      |               | data:StreamAgg_9                                                                                                       |
-|   └─StreamAgg_9              | 1.00        | cop[tikv] |               | funcs:count(1)->Column#13                                                                                              |
-|     └─Selection_19           | 8166.73     | cop[tikv] |               | ge(bikeshare.trips.start_date, 2017-07-01 00:00:00.000000), le(bikeshare.trips.start_date, 2017-07-01 23:59:59.000000) |
-|       └─TableFullScan_18     | 19117643.00 | cop[tikv] | table:trips   | keep order:false, stats:pseudo                                                                                         |
-+------------------------------+----------+-----------+---------------+------------------------------------------------------------------------------------------------------------------------+
-```
-
-The execution process of the above example can be illustrated as follows:
-
-1. Coprocessor reads the data on the trips table (executed by `TableScan_18`).
-2. Find data that meets the `start_date BETWEEN '2017-07-01 00:00:00' AND '2017-07-01 23:59:59'` condition (executed by `Selection_19`).
-3. Calculate the number of rows that satisfy the condition, and return the result to TiDB (executed by `StreamAgg_9`).
-4. TiDB aggregates the results returned by each Coprocessor (executed by `TableReader_21`).
-5. TiDB calculates the number of rows of all data (`StreamAgg_20`), and finally returns the results to the client.
-
-In the above query, TiDB estimates the number of rows in the output of `TableScan_18` as 19117643.00, based on the statistics of the `trips` table. The number of rows that meet the `start_date BETWEEN '2017-07-01 00:00:00' AND '2017-07-01 23:59:59'` condition is 8168.73. After the aggregation operation, there is only 1 result.
-
-The execution as illustrated in the above example is not efficient enough, though most of the calculation logic is pushed down to the TiKV Coprocessor. You can add an appropriate index to eliminate the full table scan on `trips` by `TableScan_18`, thereby accelerating the execution of the query:
-
-{{< copyable "sql" >}}
-
-```sql
-ALTER TABLE trips ADD INDEX (start_date);
-```
-
-{{< copyable "sql" >}}
-
-```sql
-EXPLAIN SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00' AND '2017-07-01 23:59:59';
-```
-
-```sql
-+-----------------------------+---------+-----------+-------------------------------------------+---------------------------------------------------------------------------------+
-| id                          | estRows | task      | access object                             | operator info                                                                   |
-+-----------------------------+---------+-----------+-------------------------------------------+---------------------------------------------------------------------------------+
-| StreamAgg_17                | 1.00    | root      |                                           | funcs:count(Column#13)->Column#11                                               |
-| └─IndexReader_18            | 1.00    | root      |                                           | index:StreamAgg_9                                                               |
-|   └─StreamAgg_9             | 1.00    | cop[tikv] |                                           | funcs:count(1)->Column#13                                                       |
-|     └─IndexRangeScan_16     | 8166.73 | cop[tikv] | table:trips, index:start_date(start_date) | range:[2017-07-01 00:00:00,2017-07-01 23:59:59], keep order:false, stats:pseudo |
-+-----------------------------+---------+-----------+-------------------------------------------+---------------------------------------------------------------------------------+
-4 rows in set (0.00 sec)
-```
-
-After adding the index, use `IndexScan_24` to directly read the data that meets the `start_date BETWEEN '2017-07-01 00:00:00' AND '2017-07-01 23:59:59'` condition. The estimated number of rows to be scanned decreases from 19117643.00 to 8166.73. In the test environment, the execution time of this query decreases from 50.41 seconds to 0.01 seconds.
-
-## Operator-related system variables
-
-Based on MySQL, TiDB defines some special system variables and syntax to optimize performance. Some system variables are related to specific operators, such as the concurrency of the operator, the upper limit of the operator memory, and whether to use partitioned tables. These can be controlled by system variables, thereby affecting the efficiency of each operator.
-
-## See also
-
-* [EXPLAIN](/sql-statements/sql-statement-explain.md)
-* [EXPLAIN ANALYZE](/sql-statements/sql-statement-explain-analyze.md)
-* [ANALYZE TABLE](/sql-statements/sql-statement-analyze-table.md)
-* [TRACE](/sql-statements/sql-statement-trace.md)
-* [System Variables](/system-variables.md)
