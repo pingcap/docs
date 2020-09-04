@@ -60,9 +60,6 @@ To view or modify binlog related states, execute corresponding SQL statements in
 
 - Check whether binlog is enabled:
 
-    When the Value is `0`, it means that the binlog is enabled.
-    When the Value is `1`, it means that the binlog is disabled.
-
     {{< copyable "sql" >}}
 
     ```sql
@@ -76,6 +73,8 @@ To view or modify binlog related states, execute corresponding SQL statements in
     | log_bin       |  0   |
     +---------------+-------+
     ```
+    
+    When the Value is `0`, binlog is enabled. When the Value is `1`, binlog is disabled.
 
 - Check the status of all the Pump or Drainer nodes:
 
