@@ -277,7 +277,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Default value: 0
 - Example value: 20000
 - When greater than `0`, TiDB will batch commit statements such as `INSERT` or `LOAD DATA` into smaller transactions. This reduces memory usage and helps ensure that the `txn-total-size-limit` is not reached by bulk modifications.
-- Only a value `0` provides ACID compliance. Setting this to any other value will break the atomicity and isolation guarantees of TiDB.
+- Only the value `0` provides ACID compliance. Setting this to any other value will break the atomicity and isolation guarantees of TiDB.
 
 ### tidb_enable_cascades_planner
 
