@@ -60,9 +60,9 @@ During data backup, backup files are generated on the Leader nodes of each Regio
 
 However, if you want to restore data from local storage, the number of replicas is equal to that of the TiKV nodes, because each TiKV must have access to all backup files.
 
-## What should I pay attention to when BR restores data to the upstream clusters of TiCDC/Drainer?
+## What should I pay attention to when BR restores data to the upstream cluster of TiCDC/Drainer?
 
-+ **The data restored by BR cannot be replicate to the downstream**. Because BR directly imports SST files, and downstream clusters currently cannot obtain upstream SST files.
++ **The data restored by BR cannot be replicated to the downstream**. Because BR directly imports SST files, and the downstream cluster currently cannot obtain upstream SST files.
 
 + Restored data that cannot be replicated to downstream might cause TiCDC/Drainer to abnormally execute DDL; therefore, if you must perform restore on the upstream cluster of TiCDC/Drainer, add all tables restored by BR to the TiCDC/Drainer block list.
 
