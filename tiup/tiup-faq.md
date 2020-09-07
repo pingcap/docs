@@ -10,7 +10,7 @@ aliases: ['/docs/dev/tiup/tiup-faq/']
 
 TiUP supports specifying the mirror source through the `TIUP_MIRRORS` environment variable. The address of the mirror source can be a local directory or an HTTP server address. If your environment cannot access the network, you can create your own offline mirror source to use TiUP.
 
-If you want to switch the unofficial mirror back to the official mirror, take any of the following steps:
+If you want to switch the unofficial mirror back to the official mirror, take any of the following measures:
 
 - Set the `TIUP_MIRRORS` variable to the official mirror address: `https://tiup-mirrors.pingcap.com`.
 - Make sure that you do not set the `TIUP_MIRRORS` variable, and then execute the `tiup mirror set https://tiup-mirrors.pingcap.com` command.
