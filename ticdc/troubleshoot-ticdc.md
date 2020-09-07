@@ -38,6 +38,13 @@ A replication task might be interrupted in the following known scenarios:
         2. Use the new task configuration file and add the `ignore-txn-start-ts` parameter to skip the transaction corresponding to the specified `start-ts`.
         3. Stop the old replication task via HTTP API. Execute `cdc cli changefeed create` to create a new task and specify the new task configuration file. Specify `checkpoint-ts` recorded in step 1 as the `start-ts` and start a new task to resume the replication.
 
+## How do I know whether a TiCDC replication task is interrupted?
+
+- Check the `changefeed checkpoint` monitoring metric of the replication task (choose the right `changefeed id`) in the Grafana dashboard. If the metric value stays unchanged, or the `checkpoint lag` metric keeps increasing, the replication task might be interrupted.
+- Check the `exit error count` monitoring metric. If the metric value is greater than `0`, an error has occurred in the replication task.
+- Execute `cdc cli changefeed list` and `cdc cli changefeed query` to check the status of the replication task. `stopped` means the task has stopped and the `error` item provides the detailed error information. After the error occurs, you can search `error on running processor` in the TiCDC server log to see the error stack for troubleshooting.
+- In some extreme cases, the TiCDC service is restarted. You can search the `FATAL` level log in the TiCDC server log for troubleshooting.
+
 ## What is `gc-ttl` and file sorting in TiCDC?
 
 Since v4.0.0-rc.1, PD supports external services in setting the service-level GC safepoint. Any service can register and update its GC safepoint. PD ensures that the key-value data smaller than this GC safepoint is not cleaned by GC. Enabling this feature in TiCDC ensures that the data to be consumed by TiCDC is retained in TiKV without being cleaned by GC when the replication task is unavailable or interrupted.
@@ -134,9 +141,9 @@ cdc cli changefeed create --pd=http://10.0.10.25:2379 --sink-uri="kafka://127.0.
 
 For more information, refer to [Create a replication task](/ticdc/manage-ticdc.md#create-a-replication-task).
 
-## How do I view the latency of TiCDC replication tasks?
+## How do I view the status of TiCDC replication tasks?
 
-To view the latency of TiCDC replication tasks, use `cdc cli`. For example:
+To view the status of TiCDC replication tasks, use `cdc cli`. For example:
 
 {{< copyable "shell-regular" >}}
 
@@ -169,9 +176,9 @@ The expected output is as follows:
 >
 > This feature is introduced in TiCDC 4.0.3.
 
-## How do I know whether the replication task runs normally?
+## How do I know whether the replication task is stopped manually?
 
-You can view the state of the replication tasks by using `cdc cli`. For example:
+You can know whether the replication task is stopped manually by using `cdc cli`. For example:
 
 {{< copyable "shell-regular" >}}
 
@@ -181,14 +188,14 @@ cdc cli changefeed query --pd=http://10.0.10.25:2379 --changefeed-id 28c43ffc-23
 
 In the output of this command, `admin-job-type` shows the state of the replication task:
 
-* `0`: Normal.
+* `0`: In progress, which means that the task is not stopped manually.
 * `1`: Paused. When the task is paused, all replicated `processor`s exit. The configuration and the replication status of the task are retained, so you can resume the task from `checkpiont-ts`.
 * `2`: Resumed. The replication task resumes from `checkpoint-ts`.
 * `3`: Removed. When the task is removed, all replicated `processor`s are ended, and the configuration information of the replication task is cleared up. Only the replication status is retained for later queries.
 
 ## Why does the latency from TiCDC to Kafka become higher and higher?
 
-* Check [whether the status of the replication task is normal](#how-do-i-know-whether-the-replication-task-runs-normally).
+* Check [how do I view the status of TiCDC replication tasks](#how-do-i-view-the-status-of-ticdc-replication-tasks).
 * Adjust the following parameters of Kafka:
 
     * Increase the `message.max.bytes` value in `server.properties` to `1073741824` (1 GB).
