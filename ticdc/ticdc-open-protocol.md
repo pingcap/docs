@@ -66,7 +66,7 @@ This section introduces the formats of Row Changed Event, DDL Event, and Resolve
 
 + **Value:**
 
-    `Insert` event. Newly added data is output.
+    `Insert` event. The newly added row data is output.
 
     ```
     {
@@ -379,6 +379,5 @@ If the value of a column is `46`, the column is a composite index column, a prim
 > **Note:**
 >
 > + This feature is still experimental. Do **NOT** use it in the production environment.
-> + Currently, for a known composite index column, the `UniqueKeyFlag` value of this column is incorrectly output.
 > + `BinaryFlag` is meaningful only when the column type is Blob/Text (including Tiny Blob/Tiny Text and Long Blob/Long Text). When the upstream column is the Blob type, the `BinaryFlag` value is set to `1`. When the upstream column is the Text type, the `BinaryFlag` value is set to `0`.
 > + To replicate a table from the upstream, TiCDC selects a [valid index](/ticdc/ticdc-overview.md#restrictions) as the Handle index. The `HandleKeyFlag` value of the Handle index column is set to `1`.
