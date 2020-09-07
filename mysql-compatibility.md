@@ -43,7 +43,7 @@ However, some features of MySQL are not supported. This could be because there i
 
 + In TiDB, auto-increment columns are only guaranteed to be unique and incremental on a single TiDB server, but they are *not* guaranteed to be incremental among multiple TiDB servers or allocated sequentially. It is recommended that you do not mix default values and custom values. Otherwise, you might encounter the `Duplicated Error` error message.
 
-+ You can use the `tidb_allow_remove_auto_inc` system variable to enable or disable allowing to remove the `AUTO_RANDOM` column attribute. The syntax of removing the column attribute is `alter table modify` or `alter table change`.
++ You can use the `tidb_allow_remove_auto_inc` system variable to allow or forbid removing the `AUTO_INCREMENT` column attribute. The syntax of removing the column attribute is `alter table modify` or `alter table change`.
 
 + TiDB does not support adding the `AUTO_INCREMENT` column attribute, and this attribute cannot be recovered once it is removed.
 
