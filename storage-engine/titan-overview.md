@@ -17,11 +17,11 @@ When the value size in Key-Value pairs is large, Titan performs better than Rock
 
 ## User scenarios
 
-Titan is suitable for the following scenarios:
+Titan is suitable for the scenarios where a huge volume of data is written to the TiKV foreground:
 
-- As a large volume of data is written to the TiKV foreground, RocksDB triggers many compactions, which consumes a lot of I/O bandwidth or CPU resources. This causes poor read and write performance of the TiKV foreground.
-- As a large volume of data is written to the TiKV foreground, the RocksDB compaction lags much behind (due to the I/O bandwidth or CPU bottleneck) and frequently causes write stalls.
-- As a large volume of data is written to the TiKV foreground, RocksDB triggers many compactions, which causes a large amount of I/O writes and affects the life of the SSD disk.
+- RocksDB triggers a large amount of compactions, which consumes a lot of I/O bandwidth or CPU resources. This causes poor read and write performance of the foreground.
+- The RocksDB compaction lags much behind (due to the I/O bandwidth limit or CPU bottleneck) and frequently causes write stalls.
+- RocksDB triggers a large amount of compactions, which causes a lot of I/O writes and affects the life of the SSD disk.
 
 ## Prerequisites
 
@@ -29,7 +29,7 @@ The prerequisites for enabling Titan are as follows:
 
 - The average size of values is large, or the size of all large values accounts for much of the total value size. Currently, the size of a value greater than 1 KB is considered as a large value. In some situations, this number (1 KB) can be 512 B. Nota that a single value written to TiKV cannot exceed 6 MB due to the limitation of the TiKV Raft layer.
 - No range query will be performed or you do not need a high performance of range query. Because the date stored in Titan is not well-ordered, its performance of range query is poorer than that of RocksDB, especially for the query of a large range. According PingCAP's internal test, Titan's range query performance is 40% up to a few times lower than that of RocksDB.
-- Sufficient disk space, because Titan reduces write amplification at the cost of disk space. In addition, Titan compresses values one by one, and its compression rate is lower than that of RocksDB which compresses blocks one by one. Therefore, Titan consumes much more space than RocksDB, which is expected and normal. In some situations, according to the actual situation and configuration, Titan's disk consumption can be twice that of RocksDB.
+- Sufficient disk space, because Titan reduces write amplification at the cost of disk space. In addition, Titan compresses values one by one, and its compression rate is lower than that of RocksDB. RocksDB compresses blocks one by one. Therefore, Titan consumes much more storage space than RocksDB, which is expected and normal. In some situations, Titan's storage consumption can be twice that of RocksDB.
 
 If you want to improve the performance of Titan, see the blog post [Titan: A RocksDB Plugin to Reduce Write Amplification](https://pingcap.com/blog/titan-storage-engine-design-and-implementation/).
 
@@ -70,8 +70,8 @@ Titan can also be downgraded to RocksDB in the process above. When RocksDB is pe
 
 Titan uses Garbage Collection (GC) to reclaim space. As the keys are being reclaimed in the LSM-tree compaction, some values stored in blob files are not deleted at the same time. Therefore, Titan needs to perform GC periodically to delete outdated values. There are two types of GC that can be performed in Titan:
 
-+ Blob files are periodically integrated and rewritten to delete outdated values, which is the regular way of performing GC.
-+ Blob file are rewritten as the LSM-tree compaction is performed at the same time, which is the feature of Level-Merge.
++ Blob files are periodically integrated and rewritten to delete outdated values. This is the regular way of performing GC.
++ Blob file are rewritten as the LSM-tree compaction is performed at the same time. This is the feature of Level Merge.
 
 ### Regular GC
 
@@ -79,7 +79,7 @@ Titan uses the TablePropertiesCollector and EventListener components of RocksDB 
 
 #### TablePropertiesCollector
 
-RocksDB allows using BlobFileSizeCollector, a custom table property collector, to collect properties from the SST which are written into corresponding SST files. The collected properties are named BlobFileSizeProperties. The following figure shows the BlobFileSizeCollector workflow and data formats.
+RocksDB supports using BlobFileSizeCollector, a custom table property collector, to collect properties from the SST which are written into corresponding SST files. The collected properties are named BlobFileSizeProperties. The following figure shows the BlobFileSizeCollector workflow and data formats.
 
 ![4-BlobFileSizeProperties.png](/media/titan/titan-4.png)
 
@@ -99,26 +99,26 @@ RocksDB uses compaction to discard old data and reclaim space. After each compac
 
 For each valid blob file, Titan maintains a discardable size variable in memory. After each compaction, this variable is accumulated for the corresponding blob file. Each time when GC starts, it picks the blob file with the greatest discardable size as the candidate file for GC. To reduce write amplification, we allow a certain level of space amplification, which means GC can be started on a blob file only when the discardable file has reached a specific proportion in size.
 
-For the selected blob file, Titan checks whether the blob index of the key corresponding to each value exists or has been updated to determine whether this value is outdated. If the value is not outdated, Titan merges and sorts the value into a new blob file, and writes the updated blob index into SST using WriteCallback or MergeOperator. After this, Titan records the latest sequence number of RocksDB and does not delete the old blob file until the sequence of the oldest snapshot exceeds the recorded sequence number. The reason is that after the blob index is written back to SST, the old blob index is still accessible via the previous snapshot. Therefore, we need to ensure that there is no snapshot to access the old blob index before GC can safely deletes the corresponding blob file.
+For the selected blob file, Titan checks whether the blob index of the key corresponding to each value exists or has been updated to determine whether this value is outdated. If the value is not outdated, Titan merges and sorts the value into a new blob file, and writes the updated blob index into SST using WriteCallback or MergeOperator. Then, Titan records the latest sequence number of RocksDB and does not delete the old blob file until the sequence of the oldest snapshot exceeds the recorded sequence number. The reason is that after the blob index is written back to SST, the old blob index is still accessible via the previous snapshot. Therefore, we need to ensure that there is no snapshot to access the old blob index before GC can safely deletes the corresponding blob file.
 
 ### Level Merge
 
-Level Merge is a newly introduced strategy in Titan. According to the implementation principle of Level Merge, Titan merges and rewrites blob file that corresponds to the SST file, and generates new blob file while compactions are performed in LSM-tree. The following figure shows the general process:
+Level Merge is a newly introduced algorithm in Titan. According to the implementation principle of Level Merge, Titan merges and rewrites blob file that corresponds to the SST file, and generates new blob file while compactions are performed in LSM-tree. The following figure shows the general process:
 
 ![6-LevelMerge.png](/media/titan/titan-6.png)
 
-When compactions are performed on the SSTs of level z-1 and level z, Titan reads and writes Key-Value pairs in order. Then it can write the values in the selected blob files into new blob files in order, and updates the blob indexes of keys when new SSTs are generated. For the keys deleted in compactions, the corresponding values will not be written to the new blob file, which works as if GC has done.
+When compactions are performed on the SSTs of level z-1 and level z, Titan reads and writes Key-Value pairs in order. Then it writes the values of the selected blob files into new blob files in order, and updates the blob indexes of keys when new SSTs are generated. For the keys deleted in compactions, the corresponding values will not be written to the new blob file, which works similar to GC.
 
-Compare to the regular way of GC, the Level Merge approach completes the blob GC while compactions are performed in LSM-tree. In this way, Titan no longer needs to check the status of blob index in LSM-tree or to write the new blob index into LSM-tree, which reduces the impact of GC on the foreground operations. As the blob file is repeatedly rewritten, less files overlap with each other, which makes the whole system in better order and improves the performance of scan.
+Compare to the regular way of GC, the Level Merge approach completes the blob GC while compactions are performed in LSM-tree. In this way, Titan no longer needs to check the status of blob index in LSM-tree or to write the new blob index into LSM-tree. This reduces the impact of GC on the foreground operations. As the blob file is repeatedly rewritten, less files overlap with each other, which makes the whole system in better order and improves the performance of scan.
 
 However, layering blob files similar to tiering compaction brings write amplification. Because 99% of the data in LSM-tree is stored at the lowest two levels, Titan performs the Level Merge operation on the blob files corresponding to the data that is compacted only to the lowest two levels of LSM-tree.
 
 #### Range Merge
 
-Range Merge is an optimized approach of GC based on Level Merge, which might be needed because the lowest level is in worsening order due to the following situations:
+Range Merge is an optimized approach of GC based on Level Merge. The lowest level of LSM-tree might be in worsening order due to the following situations:
 
 - When `level_compaction_dynamic_level_bytes` is enabled, data volume at each level of LSM-tree dynamically increases, and the sorted runs at the lowest level keep increasing.
-- A certain range of data is frequently compacted, which brings a lot of sorted runs in that range.
+- A specific range of data is frequently compacted, and this causes a lot of sorted runs in that range.
 
 ![7-RangeMerge.png](/media/titan/titan-7.png)
 
