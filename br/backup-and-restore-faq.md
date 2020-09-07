@@ -60,10 +60,10 @@ During data backup, backup files are generated on the Leader nodes of each Regio
 
 However, if you want to restore data from local storage, the number of replicas is equal to that of the TiKV nodes, because each TiKV must have access to all backup files.
 
-## What should I pay attention to when BR restores data to the upstream cluster of TiCDC/Drainer?
+## What should I do when BR restores data to the upstream cluster of TiCDC/Drainer?
 
-+ **The data restored by BR cannot be replicated to the downstream**. Because BR directly imports SST files, and the downstream cluster currently cannot obtain upstream SST files.
++ **The data restored using BR cannot be replicated to the downstream**. This is because BR directly imports SST files but the downstream cluster currently cannot obtain these files from the upstream.
 
 + Restored data that cannot be replicated to downstream might cause TiCDC/Drainer to abnormally execute DDL; therefore, if you must perform restore on the upstream cluster of TiCDC/Drainer, add all tables restored by BR to the TiCDC/Drainer block list.
 
-You can use [`filter.rules`](https://github.com/pingcap/ticdc/blob/7c3c2336f98153326912f3cf6ea2fbb7bcc4a20c/cmd/changefeed.toml#L16) item to complete the configuration of TiCDC and use [`syncer.ignore-table`](/tidb-binlog/tidb-binlog-configuration-file.md#ignore-table) item to complete the configuration of Drainer.
+You can use [`filter.rules`](https://github.com/pingcap/ticdc/blob/7c3c2336f98153326912f3cf6ea2fbb7bcc4a20c/cmd/changefeed.toml#L16) to configure the block list for TiCDC and use [`syncer.ignore-table`](/tidb-binlog/tidb-binlog-configuration-file.md#ignore-table) to configure the block list for Drainer.
