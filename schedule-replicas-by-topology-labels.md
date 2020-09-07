@@ -1,12 +1,11 @@
 ---
 title: Schedule Replicas by Topology Labels
-category: how-to
-aliases: ['/docs-cn/dev/how-to/deploy/geographic-redundancy/location-awareness/','/docs-cn/dev/location-awareness/']
+aliases: ['/docs/dev/how-to/deploy/geographic-redundancy/location-awareness/','/docs/dev/location-awareness/']
 ---
 
 # Schedule Replicas by Topology Labels
 
-To improve the high availability and disaster tolerance of TiDB clusters, it is recommended that TiKV nodes are physically distributed as much as possible. For example, TiKV nodes can be distributed on different racks or even in different data zones. According to the topology information of TiKV, the PD scheduler automatically performs scheduling at the background to isolate the replicas of Regions as much as possible, thereby maximizing the capability for disaster recovery.
+To improve the high availability and disaster tolerance of TiDB clusters, it is recommended that TiKV nodes are physically distributed as much as possible. For example, TiKV nodes can be distributed on different racks or even in different data centers. According to the topology information of TiKV, the PD scheduler automatically performs scheduling at the background to isolate the replicas of Regions as much as possible, thereby maximizing the capability for disaster recovery.
 
 To make this mechanism effective, you need to report the topology information of the cluster, especially the TiKV location, to PD for proper configuration during deployment. Before you begin, see [Deploy TiDB Using TiDB Ansible (Recommended)](/online-deployment-using-ansible.md) and [Deploy TiDB Using Docker](/test-deployment-using-docker.md).
 
@@ -48,7 +47,7 @@ Set the PD configuration `location-labels` through the PD configuration files.
 location-labels = ["zone", "rack", "host"]
 ```
 
-After the PD cluster is initialized, you need to use the pd-ctl tool to make online changes:
+If PD cluster is already initialized, you need to use the pd-ctl tool to make online changes:
 
 {{< copyable "shell-regular" >}}
 
