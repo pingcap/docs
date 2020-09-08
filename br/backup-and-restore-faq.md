@@ -41,11 +41,11 @@ Running BR with the root access might fail due to the disk permission, because t
 ## What should I do to resolve the `Io(Os...)` error?
 
 Almost all of these problems are system call errors that occur when TiKV writes data to the disk. You can check the mounting method and the file system of the backup directory, and try to back up data to another folder or another hard disk.
- 
+
 For example, you might encounter the `Code: 22(invalid argument)` error when backing up data to the network disk built by `samba`.
 
 ## Where are the backed up files stored when I use `local` storage?
- 
+
 When you use `local` storage, `backupmeta` is generated on the node where BR is running, and backup files are generated on the Leader nodes of each Region.
 
 ## How about the size of the backup data? Are there replicas of the backup?
@@ -53,3 +53,11 @@ When you use `local` storage, `backupmeta` is generated on the node where BR is 
 During data backup, backup files are generated on the Leader nodes of each Region. The size of the backup is equal to the data size, with no redundant replicas. Therefore, the total data size is approximately the total number of TiKV data divided by the number of replicas.
 
 However, if you want to restore data from local storage, the number of replicas is equal to that of the TiKV nodes, because each TiKV must have access to all backup files.
+
+## What should I do when BR restores data to the upstream cluster of Drainer?
+
++ **The data restored using BR cannot be replicated to the downstream**. This is because BR directly imports SST files but the downstream cluster currently cannot obtain these files from the upstream.
+
++ Therefore, if you need to perform restore on the upstream cluster of TiCDC/Drainer, add all tables restored using BR to the Drainer block list.
+
+You can use [`syncer.ignore-table`](/tidb-binlog/tidb-binlog-configuration-file.md#ignore-table) to configure the block list for Drainer.
