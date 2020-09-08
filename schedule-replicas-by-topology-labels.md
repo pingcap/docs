@@ -7,7 +7,7 @@ aliases: ['/docs/dev/location-awareness/','/docs/dev/how-to/deploy/geographic-re
 
 To improve the high availability and disaster tolerance of TiDB clusters, it is recommended that TiKV nodes are physically distributed as much as possible. For example, TiKV nodes can be distributed on different racks or even in different data centers. According to the topology information of TiKV, the PD scheduler automatically performs scheduling at the background to isolate the replicas of Regions as much as possible, thereby maximizing the capability for disaster recovery.
 
-To make this mechanism effective, you need to report the topology information of the cluster, especially the TiKV location, to PD for proper configuration during deployment. Before you begin, see [Deploy TiDB Using TiUP](/tidb/dev/production-deployment-using-tiup.md).
+To make this mechanism effective, you need to report the topology information of the cluster, especially the TiKV location, to PD for proper configuration during deployment. Before you begin, see [Deploy TiDB Using TiUP](/production-deployment-using-tiup.md).
 
 ## Configure `labels` based on the cluster topology
 
