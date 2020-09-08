@@ -11,6 +11,16 @@ This document summarizes the FAQs related to SQL operations in TiDB.
 
 See [System Variables](/system-variables.md).
 
+## The order of records for a SELECT statement without ORDER BY clause is not as same as MySQL
+
+It's not a bug. The default order of records depends on various situation without any guarantee of consistency. 
+
+The relevant text in the [SQL-92](http://www.contrib.andrew.cmu.edu/~shadow/sql/sql1992.txt) spec is
+
+> If an <order by clause> is not specified, then the table specified by the <cursor specification> is T and the ordering of rows in T is implementation-dependent.
+    
+If a query is intended to rely on its order for anything, a desired order using `ORDER BY` must be specified.
+
 ## Does TiDB support `SELECT FOR UPDATE`?
 
 Yes. When using pessimistic locking (the default since TiDB v3.0) the `SELECT FOR UPDATE` execution behaves similar to MySQL.
