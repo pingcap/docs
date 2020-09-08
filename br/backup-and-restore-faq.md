@@ -44,15 +44,6 @@ Almost all of these problems are system call errors that occur when TiKV writes 
 
 For example, you might encounter the `Code: 22(invalid argument)` error when backing up data to the network disk built by `samba`.
 
-<<<<<<< HEAD
-=======
-## What should I do to handle the `rpc error: code = Unavailable desc =...` error occurred in BR?
-
-This error might occur when the capacity of the cluster to restore (using BR) is insufficient. You can further confirm the cause by checking the monitoring metrics of this cluster or the TiKV log.
-
-To handle this issue, you can try to scale out the cluster resources, reduce the concurrency during restore, and enable the `RATE_LIMIT` option.
-
->>>>>>> 04715f3... br: add use constraint with TiCDC and Drainer (#3839)
 ## Where are the backed up files stored when I use `local` storage?
 
 When you use `local` storage, `backupmeta` is generated on the node where BR is running, and backup files are generated on the Leader nodes of each Region.
@@ -63,10 +54,10 @@ During data backup, backup files are generated on the Leader nodes of each Regio
 
 However, if you want to restore data from local storage, the number of replicas is equal to that of the TiKV nodes, because each TiKV must have access to all backup files.
 
-## What should I do when BR restores data to the upstream cluster of TiCDC/Drainer?
+## What should I do when BR restores data to the upstream cluster of Drainer?
 
 + **The data restored using BR cannot be replicated to the downstream**. This is because BR directly imports SST files but the downstream cluster currently cannot obtain these files from the upstream.
 
-+ Data from BR before v4.0.3 might cause unexcepted DDL executions. Therefore, if you need to perform restore on the upstream cluster of TiCDC/Drainer, add all tables restored using BR to the TiCDC/Drainer block list.
++ Therefore, if you need to perform restore on the upstream cluster of TiCDC/Drainer, add all tables restored using BR to the Drainer block list.
 
-You can use [`filter.rules`](https://github.com/pingcap/ticdc/blob/7c3c2336f98153326912f3cf6ea2fbb7bcc4a20c/cmd/changefeed.toml#L16) to configure the block list for TiCDC and use [`syncer.ignore-table`](/tidb-binlog/tidb-binlog-configuration-file.md#ignore-table) to configure the block list for Drainer.
+You can use [`syncer.ignore-table`](/tidb-binlog/tidb-binlog-configuration-file.md#ignore-table) to configure the block list for Drainer.
