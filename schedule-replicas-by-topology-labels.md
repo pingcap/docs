@@ -1,6 +1,6 @@
 ---
 title: Schedule Replicas by Topology Labels
-aliases: ['/docs/dev/how-to/deploy/geographic-redundancy/location-awareness/','/docs/dev/location-awareness/']
+aliases: ['/docs/dev/location-awareness/','/docs/dev/how-to/deploy/geographic-redundancy/location-awareness/','/tidb/dev/location-awareness']
 ---
 
 # Schedule Replicas by Topology Labels
