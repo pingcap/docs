@@ -70,7 +70,7 @@ Currently, the TiCDC sink component supports replicating data to the following d
 
 ## Restrictions
 
-TiCDC only replicates the table that has at least one **valid index**. **valid index** is defined as follows
+TiCDC only replicates the table that has at least one **valid index**. A **valid index** is defined as follows:
 
 - The primary key (`PRIMARY KEY`) is a valid index.
 - The unique index (`UNIQUE INDEX`) that meets the following conditions at the same time is a valid index:
