@@ -11,7 +11,7 @@ This document summarizes the FAQs related to SQL operations in TiDB.
 
 See [System Variables](/system-variables.md).
 
-## The order of records for a SELECT statement without ORDER BY clause is not as same as MySQL
+## The order of records for a SELECT statement without ORDER BY clause is not as same as MySQL.
 
 It's not a bug. The default order of records depends on various situation without any guarantee of consistency. 
 
