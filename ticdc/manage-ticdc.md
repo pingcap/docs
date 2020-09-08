@@ -553,7 +553,7 @@ election: not leader
 {{< copyable "shell-regular" >}}
 
 ```shell
-curl -X POST curl 127.0.0.1:8300/capture/owner/move_table -X POST -d 'cf-id=cf060953-036c-4f31-899f-5afa0ad0c2f9&target-cp-id=6f19a6d9-0f8c-4dc9-b299-3ba7c0f216f5&table-id=49'
+curl -X POST http://127.0.0.1:8300/capture/owner/move_table -d 'cf-id=cf060953-036c-4f31-899f-5afa0ad0c2f9&target-cp-id=6f19a6d9-0f8c-4dc9-b299-3ba7c0f216f5&table-id=49'
 ```
 
 Parameter description:
@@ -582,6 +582,9 @@ This section introduces the configuration of a replication task.
 # The default value is true.
 # This configuration item affects configurations related to filter and sink.
 case-sensitive = true
+
+# Specifies whether to output the old value. New in v4.0.5.
+enable-old-value = false
 
 [filter]
 # Ignores the transaction of specified start_ts.
