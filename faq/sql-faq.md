@@ -13,15 +13,15 @@ See [System Variables](/system-variables.md).
 
 ## The order of records for a `SELECT` statement without the `ORDER BY` clause is not as same as that in MySQL
 
-It's not a bug. The default order of records depends on various situation without any guarantee of consistency. 
+It's not a bug. The default order of records depends on various situations without any guarantee of consistency. 
 
-The relevant text in the [SQL-92](http://www.contrib.andrew.cmu.edu/~shadow/sql/sql1992.txt) spec is
+The reference can be found in [ISO/IEC 9075:1992, Database Language SQL- July 30, 1992](http://www.contrib.andrew.cmu.edu/~shadow/sql/sql1992.txt), which states as follows:
 
 > If an `<order by clause>` is not specified, then the table specified by the `<cursor specification>` is T and the ordering of rows in T is implementation-dependent.
     
-The order of results in MySQL may appear stable because queries are executed in a single thread. However, it's common that query plans can change when upgrading to new versions. It is recommended to use `ORDER BY` whenever an order of results is desired. If without an `ORDER BY`, the two examples below are both acceptable and correct for SQL standard.
+The order of results in MySQL might appear stable because queries are executed in a single thread. However, it is common that query plans can change when upgrading to new versions. It is recommended to use `ORDER BY` whenever an order of results is desired. If without an `ORDER BY`, the following two examples are both acceptable and correct for SQL standard.
 
-```mysql
+```sql
 > select * from t;
 +------+------+
 | a    | b    |
@@ -32,7 +32,7 @@ The order of results in MySQL may appear stable because queries are executed in 
 2 rows in set (0.00 sec)
 ```
 
-```mysql
+```sql
 > select * from t; -- the order of results is not guaranteed
 +------+------+
 | a    | b    |
@@ -43,9 +43,9 @@ The order of results in MySQL may appear stable because queries are executed in 
 2 rows in set (0.00 sec)
 ```
 
-Even with an `ORDER BY`, the order of the columns which is returned by a `SELECT` statement and not in `ODERY BY`'s scope is inconsistent. Unless the query includes `ORDER BY` on a unique column (or set of columns), TiDB is not guaranteed to return results in the same order as that in MySQL. The two examples below are both acceptable and correct for SQL standard.
+Even with an `ORDER BY`, the order of the columns which is returned by a `SELECT` statement and not in `ODERY BY`'s scope is inconsistent. Unless the query includes `ORDER BY` on a unique column (or set of columns), TiDB is not guaranteed to return results in the same order as that in MySQL. The following two examples are both acceptable and correct for SQL standard.
 
-```mysql
+```sql
 > select * from t order by a;
 +------+------+
 | a    | b    |
@@ -57,7 +57,7 @@ Even with an `ORDER BY`, the order of the columns which is returned by a `SELECT
 3 rows in set (0.00 sec)
 ```
 
-```mysql
+```sql
 > select * from t order by a; -- the order of column a is guaranteed, but b is not
 +------+------+
 | a    | b    |
