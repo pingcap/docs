@@ -13,7 +13,8 @@ See [System Variables](/system-variables.md).
 
 ## The order of records for a `SELECT` statement without the `ORDER BY` clause is not as same as that in MySQL
 
-It's not a bug. The default order of records depends on various situations without any guarantee of consistency.  
+It's not a bug. The default order of records depends on various situations without any guarantee of consistency.
+
 The order of results in MySQL might appear stable because queries are executed in a single thread. However, it is common that query plans can change when upgrading to new versions. It is recommended to use `ORDER BY` whenever an order of results is desired.
 
 
