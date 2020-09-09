@@ -43,7 +43,7 @@ The order of results in MySQL might appear stable because queries are executed i
 2 rows in set (0.00 sec)
 ```
 
-Even with an `ORDER BY`, the order of the columns which is returned by a `SELECT` statement and not in `ODERY BY`'s scope is inconsistent. Unless the query includes `ORDER BY` on a unique column (or set of columns), TiDB is not guaranteed to return results in the same order as that in MySQL. The following two examples are both acceptable and correct for SQL standard.
+A statement is also considered non-deterministic if the list of columns used in the `ORDER BY` is non-unique. In the following example, the column `a` has duplicate values. Thus, only `ORDER BY a, b` would be guaranteed deterministic:
 
 ```sql
 > select * from t order by a;
