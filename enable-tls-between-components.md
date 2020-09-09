@@ -69,7 +69,7 @@ Currently, it is not supported to only enable encrypted transmission of some spe
         key-path = "/path/to/pd-server-key.pem"
         ```
 
-    - TiFlash(New in v4.0.5)
+    - TiFlash (New in v4.0.5)
 
         Configure in the `tiflash.toml` file, and change the `http_port` item to `https_port`:
 
@@ -83,7 +83,7 @@ Currently, it is not supported to only enable encrypted transmission of some spe
         key_path = "/path/to/tiflash-server-key.pem"
         ```
 
-        Set in the `tiflash-learner.toml` file:
+        Configure in the `tiflash-learner.toml` file:
 
         ```toml
         [security]
@@ -175,7 +175,7 @@ To verify component caller's identity, you need to mark the certificate user ide
     cdc server --pd=https://127.0.0.1:2379 --log-file=ticdc.log --addr=0.0.0.0:8301 --advertise-addr=127.0.0.1:8301 --ca=/path/to/ca.pem --cert=/path/to/ticdc-cert.pem --key=/path/to/ticdc-key.pem --cert-allowed-cn="client1,client2"
     ```
 
-- TiFlash(New in v4.0.5)
+- TiFlash (New in v4.0.5)
 
     Configure in the `tiflash.toml` file or command-line arguments:
 
@@ -184,7 +184,7 @@ To verify component caller's identity, you need to mark the certificate user ide
     cert_allowed_cn = ["TiKV-Server", "TiDB-Server"]
     ```
 
-    Set in the `tiflash-learner.toml` file:
+    Configure in the `tiflash-learner.toml` file:
 
     ```toml
     [security]
