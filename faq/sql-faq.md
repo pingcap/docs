@@ -19,7 +19,7 @@ The relevant text in the [SQL-92](http://www.contrib.andrew.cmu.edu/~shadow/sql/
 
 > If an `<order by clause>` is not specified, then the table specified by the `<cursor specification>` is T and the ordering of rows in T is implementation-dependent.
     
-The order of results in MySQL may appear stable because queries are executed in a single thread. However, it's common that query plans can change when upgrading to new versions. It is recommended to use `ORDER BY` whenever an order of results is desired. The two examples below are both acceptable and correct.
+The order of results in MySQL may appear stable because queries are executed in a single thread. However, it's common that query plans can change when upgrading to new versions. It is recommended to use `ORDER BY` whenever an order of results is desired. If without an `ORDER BY`, the two examples below are both acceptable and correct for SQL standard.
 
 ```mysql
 > select * from t;
@@ -43,7 +43,7 @@ The order of results in MySQL may appear stable because queries are executed in 
 2 rows in set (0.00 sec)
 ```
 
-Even with an `ORDER BY`, the order of the columns which is returned by a `SELECT` statement and not in `ODERY BY`' scope is inconsistent. Unless the query includes `ORDER BY` on a unique column (or set of columns), TiDB is not guaranteed to return results in the same order as that in MySQL. The two examples below are both acceptable and correct.
+Even with an `ORDER BY`, the order of the columns which is returned by a `SELECT` statement and not in `ODERY BY`' scope is inconsistent. Unless the query includes `ORDER BY` on a unique column (or set of columns), TiDB is not guaranteed to return results in the same order as that in MySQL. The two examples below are both acceptable and correct for SQL standard.
 
 ```mysql
 > select * from t order by a;
