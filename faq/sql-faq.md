@@ -43,7 +43,7 @@ The order of results in MySQL may appear stable because queries are executed in 
 2 rows in set (0.00 sec)
 ```
 
-Even with an `ORDER BY`, the order of the columns which is returned by a `SELECT` statement and not in `ODERY BY`' scope is inconsistent. Unless the query includes `ORDER BY` on a unique column (or set of columns), TiDB is not guaranteed to return results in the same order as that in MySQL. The two examples below are both acceptable and correct for SQL standard.
+Even with an `ORDER BY`, the order of the columns which is returned by a `SELECT` statement and not in `ODERY BY`'s scope is inconsistent. Unless the query includes `ORDER BY` on a unique column (or set of columns), TiDB is not guaranteed to return results in the same order as that in MySQL. The two examples below are both acceptable and correct for SQL standard.
 
 ```mysql
 > select * from t order by a;
@@ -58,7 +58,7 @@ Even with an `ORDER BY`, the order of the columns which is returned by a `SELECT
 ```
 
 ```mysql
-> select * from t order by a; -- the order of column b is not guaranteed
+> select * from t order by a; -- the order of column a is guaranteed, but b is not
 +------+------+
 | a    | b    |
 +------+------+
