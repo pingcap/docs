@@ -19,7 +19,55 @@ The relevant text in the [SQL-92](http://www.contrib.andrew.cmu.edu/~shadow/sql/
 
 > If an `<order by clause>` is not specified, then the table specified by the `<cursor specification>` is T and the ordering of rows in T is implementation-dependent.
     
-If a query is intended to rely on its order for anything, a desired order using `ORDER BY` must be specified.
+The order of results in MySQL may appear stable because queries are executed in a single thread. However, it's common that query plans can change when upgrading to new versions. It is recommended to use `ORDER BY` whenever an order of results is desired. The two examples below are both acceptable and correct.
+
+```mysql
+> select * from t;
++------+------+
+| a    | b    |
++------+------+
+|    2 |    1 |
+|    2 |    2 |
++------+------+
+2 rows in set (0.00 sec)
+```
+
+```mysql
+> select * from t; -- the order of results is not guaranteed
++------+------+
+| a    | b    |
++------+------+
+|    2 |    2 |
+|    2 |    1 |
++------+------+
+2 rows in set (0.00 sec)
+```
+
+Even with an `ORDER BY`, the order of the columns which is returned by a `SELECT` statement and not in `ODERY BY`' scope is inconsistent. Unless the query includes `ORDER BY` on a unique column (or set of columns), TiDB is not guaranteed to return results in the same order as that in MySQL. The two examples below are both acceptable and correct.
+
+```mysql
+> select * from t order by a;
++------+------+
+| a    | b    |
++------+------+
+|    1 |    1 |
+|    2 |    1 |
+|    2 |    2 |
++------+------+
+3 rows in set (0.00 sec)
+```
+
+```mysql
+> select * from t order by a; -- the order of column b is not guaranteed
++------+------+
+| a    | b    |
++------+------+
+|    1 |    1 |
+|    2 |    2 |
+|    2 |    1 |
++------+------+
+3 rows in set (0.00 sec)
+```
 
 ## Does TiDB support `SELECT FOR UPDATE`?
 
