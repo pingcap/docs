@@ -28,7 +28,7 @@ In the following two queries, both results are considered legal:
 +------+------+
 | a    | b    |
 +------+------+
-|    2 |    1 |
+|    1 |    1 |
 |    2 |    2 |
 +------+------+
 2 rows in set (0.00 sec)
@@ -40,7 +40,7 @@ In the following two queries, both results are considered legal:
 | a    | b    |
 +------+------+
 |    2 |    2 |
-|    2 |    1 |
+|    1 |    1 |
 +------+------+
 2 rows in set (0.00 sec)
 ```
