@@ -108,7 +108,7 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 
 > **Note:**
 >
-> In earlier releases of TiDB, `LOAD DATA` committed every 20 000 rows. By default, TiDB now commits all rows in one transaction. This can result in the error `ERROR 8004 (HY000) at line 1: Transaction is too large, size: 100000058` after upgrading from TiDB 4.0 or earlier.
+> In earlier releases of TiDB, `LOAD DATA` committed every 20000 rows. By default, TiDB now commits all rows in one transaction. This can result in the error `ERROR 8004 (HY000) at line 1: Transaction is too large, size: 100000058` after upgrading from TiDB 4.0 or earlier versions.
 >
 > The recommended way to resolve this error is to increase the `txn-total-size-limit` in your tidb.toml file. If you are unable to increase this limit, you can also restore the previous behavior by setting [`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size) to `20000`.
 
