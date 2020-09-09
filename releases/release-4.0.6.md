@@ -1,20 +1,18 @@
 ---
-title: TiDB v4.0.6 Release Notes
-category: Releases
-aliases: ['/docs/dev/releases/v4.0.6/']
+title: TiDB 4.0.6 Release Notes
 ---
 
-# TiDB v4.0.6 Release Notes
+# TiDB 4.0.6 Release Notes
 
-Release date: September 09, 2020
+Release date: September 9, 2020
 
-TiDB version: v4.0.6
+TiDB version: 4.0.6
 
 ## Improvements
 
 + TiDB
 
-    - Replace error code and message with standard error. [#19888](https://github.com/pingcap/tidb/pull/19888)
+    - Replace error code and message with standard error [#19888](https://github.com/pingcap/tidb/pull/19888)
     - Table: improve the write performance of partition table [#19649](https://github.com/pingcap/tidb/pull/19649)
     - Optimize the performance of encoding plan. [#19279](https://github.com/pingcap/tidb/pull/19279)
     - Record more RPC runtime information in cop runtime stats [#19264](https://github.com/pingcap/tidb/pull/19264)
