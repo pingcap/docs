@@ -19,7 +19,7 @@ The reference can be found in [ISO/IEC 9075:1992, Database Language SQL- July 30
 
 > If an `<order by clause>` is not specified, then the table specified by the `<cursor specification>` is T and the ordering of rows in T is implementation-dependent.
     
-The order of results in MySQL might appear stable because queries are executed in a single thread. However, it is common that query plans can change when upgrading to new versions. It is recommended to use `ORDER BY` whenever an order of results is desired. If without an `ORDER BY`, the following two examples are both acceptable and correct for SQL standard.
+The order of results in MySQL might appear stable because queries are executed in a single thread. However, it is common that query plans can change when upgrading to new versions. It is recommended to use `ORDER BY` whenever an order of results is desired. In the following query, both results are considered legal:
 
 ```sql
 > select * from t;
