@@ -152,7 +152,7 @@ Query OK, 1 row affected (0.03 sec)
 4 rows in set (0.00 sec)
 ```
 
-A new insert against the initial TiDB server generates the `AUTO_INCREMENT` value of `4`. This is because the initial TiDB server still has space left in the `AUTO_INCREMENT` cache. The sequence of values can not be considered globally monotonic, because the value of `4` was inserted after the value of `2000001`:
+A new `INSERT` operation against the initial TiDB server generates the `AUTO_INCREMENT` value of `4`. This is because the initial TiDB server still has space left in the `AUTO_INCREMENT` cache for allocation. In this case, the sequence of values cannot be considered globally monotonic, because the value of `4` is inserted after the value of `2000001`:
 
 ```sql
 mysql> INSERT INTO t (a) VALUES (NULL);
