@@ -171,7 +171,7 @@ mysql> SELECT * FROM t ORDER BY b;
 5 rows in set (0.00 sec)
 ```
 
-The `AUTO_INCREMENT` cache does not persist across TiDB server restarts. The following insert statement was performed after the initial TiDB server was restarted:
+The `AUTO_INCREMENT` cache does not persist across TiDB server restarts. The following `INSERT` statement is performed after the initial TiDB server is restarted:
 
 ```sql
 mysql> INSERT INTO t (a) VALUES (NULL);
