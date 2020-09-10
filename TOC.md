@@ -136,7 +136,7 @@
       + [Overview](/control-execution-plan.md)
       + [Optimizer Hints](/optimizer-hints.md)
       + [SQL Plan Management](/sql-plan-management.md)
-      + [Optimization Rule Blocklist and Expression Pushdown](/blocklist-control-plan.md)
+      + [The Blocklist of Optimization Rules and Expression Pushdown](/blocklist-control-plan.md)
 + Tutorials
   + [Multiple Data Centers in One City Deployment](/multi-data-centers-in-one-city-deployment.md)
   + [Three Data Centers in Two Cities Deployment](/three-data-centers-in-two-cities-deployment.md)
