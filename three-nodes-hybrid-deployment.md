@@ -5,7 +5,7 @@ summary: Learn the best practices for three-node hybrid deployment.
 
 # Best Practices for Three-Node Hybrid Deployment
 
-For a TiDB cluster, if you do not want high performance but need to control the cost, you can deploy the TiDB, TiKV, and PD components on three machines in a hybrid way.
+For a TiDB cluster, if you do not want high performance but a moderate cost, you can deploy the TiDB, TiKV, and PD components on three machines in a hybrid way.
 
 This document offers an example of three-node hybrid deployment and a TPC-C test against the deployed cluster. Based on this example, this document offers best practices for the deployment scenario and its parameter adjustment.
 
