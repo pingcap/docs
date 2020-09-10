@@ -15,7 +15,7 @@ The execution plan of queries is unstable and might select the incorrect index, 
 
 #### Phenomenon
 
-* If the query execution plan is output in the slow log, you can directly view the plan in the slow log. Execute the `select tidb_decode_plan('xxx...')` statement to parse the detailed execution plan.
+* If the query execution plan is output in the slow log, you can directly view the plan. Execute the `select tidb_decode_plan('xxx...')` statement to parse the detailed execution plan.
 * The number of scanned keys in the monitor abnormally increases; in the slow log, the number of `Scan Keys` are large.
 * The SQL execution duration in TiDB is greatly different than that of other databases such as MySQL. You can compare the execution plan of other databases (for example, whether `Join Order` is different).
 
