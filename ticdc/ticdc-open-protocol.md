@@ -1,6 +1,10 @@
 ---
 title: TiCDC Open Protocol
+<<<<<<< HEAD
 aliases: ['/docs/stable/ticdc/ticdc-open-protocol/','/docs/v4.0/ticdc/ticdc-open-protocol/','/docs/stable/reference/tools/ticdc/open-protocol/']
+=======
+aliases: ['/docs/dev/ticdc/ticdc-open-protocol/','/docs/dev/reference/tools/ticdc/open-protocol/','/docs/dev/ticdc/column-ddl-type-codes/']
+>>>>>>> 2a57bfc... Add 2 aliases to fix dead links (#3870)
 ---
 
 # TiCDC Open Protocol
