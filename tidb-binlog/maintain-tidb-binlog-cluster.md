@@ -1,11 +1,7 @@
 ---
 title: TiDB Binlog Cluster Operations
 summary: Learn how to operate the cluster version of TiDB Binlog.
-<<<<<<< HEAD
-aliases: ['/docs/v2.1/tidb-binlog/maintain-tidb-binlog-cluster/','/docs/v2.1/reference/tidb-binlog/maintain/','/docs/v2.1/how-to/maintain/tidb-binlog/']
-=======
-aliases: ['/docs/dev/tidb-binlog/maintain-tidb-binlog-cluster/','/docs/dev/reference/tidb-binlog/maintain/','/docs/dev/how-to/maintain/tidb-binlog/','/docs/dev/reference/tools/tidb-binlog/maintain/']
->>>>>>> 2a57bfc... Add 2 aliases to fix dead links (#3870)
+aliases: ['/docs/v2.1/tidb-binlog/maintain-tidb-binlog-cluster/','/docs/v2.1/reference/tidb-binlog/maintain/','/docs/v2.1/how-to/maintain/tidb-binlog/','/docs/v2.1/reference/tools/tidb-binlog/maintain/']
 ---
 
 # TiDB Binlog Cluster Operations
