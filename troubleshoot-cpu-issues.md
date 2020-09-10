@@ -26,7 +26,7 @@ The statistical information is inaccurate.
 #### Handling methods
 
 * Update the statistical information
-    * Execute `analyze table` manually and execute `analyze` periodically with the `crontab` command to keep the accuracy of the statistical information
+    * Execute `analyze table` manually and execute `analyze` periodically with the `crontab` command to keep the accuracy of the statistical information.
     * Execute `auto analyze` automatically. Lower the threshold value of `analyze ratio`, increase the frequency of information collection, and set the runtime threshold. See the following examples:
         * `set global tidb_auto_analyze_ratio=0.2;`
         * `set global tidb_auto_analyze_start_time='00:00 +0800';`
