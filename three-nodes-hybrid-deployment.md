@@ -52,7 +52,7 @@ The following sections introduce the meanings and the adjustment methods of thes
 
 ### Configuration of TiKV thread pool size
 
-This section offers best practices for adjusting parameters that relate to the resource allocation of thread pools for foreground applications. Reducing these thread pool sizes will compromise performance, but in the hybrid deployment scenario, the available resources are limited, so the cluster is hard to achieve high performance. In this scenario, the overall stability of the cluster is preferred over performance.
+This section offers best practices for adjusting parameters that relate to the resource allocation of thread pools for foreground applications. Reducing these thread pool sizes will compromise performance, but in the hybrid deployment scenario with limited resources, the cluster itself is hard to achieve high performance. In this scenario, the overall stability of the cluster is preferred over performance.
 
 If you conduct an actual load test, you can first use the default configuration and observe the actual resource usage of each thread pool. Then you can adjust the corresponding configuration items and reduce the sizes of the thread pools that have lower usage.
 
