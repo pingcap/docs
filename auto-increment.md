@@ -191,7 +191,7 @@ mysql> SELECT * FROM t ORDER BY b;
 6 rows in set (0.00 sec)
 ```
 
-A high rate of TiDB server restarts may contribute to `AUTO_INCREMENT` values being exhausted. In the above example, the TiDB server still had values `[5-30000]` free in its cache. These values are lost, and will not be reallocated.
+A high rate of TiDB server restarts might contribute to the exhaustion of `AUTO_INCREMENT` values. In the above example, the initial TiDB server still has values `[5-30000]` free in its cache. These values are lost, and will not be reallocated.
 
 It is not recommended to rely on`AUTO_INCREMENT` values being continuous. Consider the following example, where a TiDB server has a cache of values `[2000001-2030000]`. By manually inserting the value `2029998` we can see the behavior as a new cache range is retrieved:
 
