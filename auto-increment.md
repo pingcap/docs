@@ -129,7 +129,7 @@ Records: 3  Duplicates: 0  Warnings: 0
 3 rows in set (0.00 sec)
 ```
 
-The `AUTO_INCREMENT` sequence might appear to _jump_ dramatically if an insert is performed against a different TiDB server. This is caused by each server having their own cache of `AUTO_INCREMENT` values:
+The `AUTO_INCREMENT` sequence might appear to _jump_ dramatically if an `INSERT` operation is performed against a different TiDB server. This is caused by the fact that each server has its own cache of `AUTO_INCREMENT` values:
 
 {{< copyable "sql" >}}
 
