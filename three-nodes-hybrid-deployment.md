@@ -64,7 +64,7 @@ The default value of this parameter is 80% of the number of machine threads. In 
 
 This parameter defaults to `4`. Because in the existing deployment plan the CPU resources are limited, the actual requests are few. You can observe the monitoring panel, lower the value of this parameter, and keep the usage rate below 80%.
 
-Finally in this test, the value of this parameter is set to `2`. Observe the **gRPC poll CPU** panel and you can see that the usage rate is just around 80%.
+In this test, the value of this parameter is set to `2`. Observe the **gRPC poll CPU** panel and you can see that the usage rate is just around 80%.
 
 ![gRPC Pool CPU](/media/best-practices/three-nodes-grpc-pool-usage.png)
 
@@ -86,9 +86,9 @@ However, in the hybrid deployment scenario, this default configuration is not in
 
 The RocksDB thread pool is used to perform compaction and flush jobs. The default value of `rocksdb.max-background-jobs` is `8`, which obviously exceeds the resource that is in need. Therefore, the value should be adjusted to limit the resource usage.
 
-`rocksdb.max-sub-compactions` indicates the number of concurrent sub-threads allowed for a single compaction job, which defaults to `3`. You can lower this value when the write traffic is not high.
+`rocksdb.max-sub-compactions` indicates the number of concurrent sub-tasks allowed for a single compaction job, which defaults to `3`. You can lower this value when the write traffic is not high.
 
-In the test, the `rocksdb.max-background-jobs` value is set to `3` and the `rocksdb.max-sub-compactions` value is set to `1`. No write stall occurs during the 12-hour test with the TPC-C load. When optimizing the two parameter values according to the actual load, you can lower the values progressively based on monitoring metrics:
+In the test, the `rocksdb.max-background-jobs` value is set to `3` and the `rocksdb.max-sub-compactions` value is set to `1`. No write stall occurs during the 12-hour test with the TPC-C load. When optimizing the two parameter values according to the actual load, you can lower the values gradually based on monitoring metrics:
 
 * If write stall occurs, you can first increase the value of `rocksdb.max-background-jobs`.
 * If the write stall persists, set the value of `rocksdb.max-sub-compactions` to `2` or `3`.
