@@ -21,7 +21,7 @@ However, some features of MySQL are not supported. This could be because there i
 + Events
 + User-defined functions
 + `FOREIGN KEY` constraints [#18209](https://github.com/pingcap/tidb/issues/18209)
-+ Temporary tables
++ Temporary tables [#1248](https://github.com/pingcap/tidb/issues/1248)
 + `FULLTEXT`/`SPATIAL` functions and indexes [#1793](https://github.com/pingcap/tidb/issues/1793)
 + Character sets other than `utf8`, `utf8mb4`, `ascii`, `latin1` and `binary`
 + SYS schema
@@ -32,7 +32,6 @@ However, some features of MySQL are not supported. This could be because there i
 + Column-level privileges [#9766](https://github.com/pingcap/tidb/issues/9766)
 + `XA` syntax (TiDB uses a two-phase commit internally, but this is not exposed via an SQL interface)
 + `CREATE TABLE tblName AS SELECT stmt` syntax [#4754](https://github.com/pingcap/tidb/issues/4754)
-+ `CREATE TEMPORARY TABLE` syntax [#1248](https://github.com/pingcap/tidb/issues/1248)
 + `CHECK TABLE` syntax [#4673](https://github.com/pingcap/tidb/issues/4673)
 + `CHECKSUM TABLE` syntax [#1895](https://github.com/pingcap/tidb/issues/1895)
 + `GET_LOCK` and `RELEASE_LOCK` functions [#14994](https://github.com/pingcap/tidb/issues/14994)
