@@ -7,7 +7,14 @@ title: TiDB 4.0.6 Release Notes
 Release date: September 9, 2020
 
 TiDB version: 4.0.6
+## Feature
 
++ TiDB Dashboard
+  - Add query editor and execution UI (experimental) [#713](https://github.com/pingcap-incubator/tidb-dashboard/pull/713)
+  - Support store location topology visualization [#719](https://github.com/pingcap-incubator/tidb-dashboard/pull/719)
+  - Add cluster configuration UI (experimental) [#733](https://github.com/pingcap-incubator/tidb-dashboard/pull/733)
+  - Support sharing current session [#741](https://github.com/pingcap-incubator/tidb-dashboard/pull/741)
+  - Support displaying number of execution plans in Statement list [#746](https://github.com/pingcap-incubator/tidb-dashboard/pull/746)
 ## Improvements
 
 + TiDB
@@ -18,6 +25,13 @@ TiDB version: 4.0.6
     - Forbidden creating table in metrics_schema and performance_schema [#19792](https://github.com/pingcap/tidb/pull/19792)
     - Support adjust the concurrency on union executor [#19886](https://github.com/pingcap/tidb/pull/19886)
     - Support out join in broadcast join [#19664](https://github.com/pingcap/tidb/pull/19664)
+
++ TiKV
+
+    - Optimize QPS drop when doing UnsafeDestroyRange [#8627](https://github.com/tikv/tikv/pull/8627)
+    - Support to generate metafile of error codes [#8619](https://github.com/tikv/tikv/pull/8619)
+    - Add perf statistics for cf scan detail [#8618](https://github.com/tikv/tikv/pull/8618)
+    - Add perf context panel for grafana template [#8467](https://github.com/tikv/tikv/pull/8467)
 
 + PD
 
@@ -78,6 +92,16 @@ TiDB version: 4.0.6
     - Fix a inconsistence of plan between `information_schema.statements_summary` and `explain`, which contains tikv/tiflash info [#19159](https://github.com/pingcap/tidb/pull/19159)
     - Fix the file exists errors in tests for `select into outfile` [#19725](https://github.com/pingcap/tidb/pull/19725)
 
++ TiKV
+
+    - Fix the estimation error for a non-index column with collation enabled. [#8620](https://github.com/tikv/tikv/pull/8620)
+    - Fix the issue that green GC may miss locks during transferring regions. [#8460](https://github.com/tikv/tikv/pull/8460)
+    - Fix the CDC incorrect resolved TS timeout. [#8573](https://github.com/tikv/tikv/pull/8573)
+    - Fix a panic issue if a TiKV runs very slow during conf change. [#8497](https://github.com/tikv/tikv/pull/8497)
+    - Fix the deadlock between the PD client thread and other threads calling PD sync requests. [#8612](https://github.com/tikv/tikv/pull/8612)
+    - Update jemalloc to 5.2.1 to address memory allocation problem in huge page. [#8463](https://github.com/tikv/tikv/pull/8463)
+    - Fix unified thread pool hang for long running query. [#8427](https://github.com/tikv/tikv/pull/8427)
+
 + TiFlash
 
     - Fix the issue that TiFlash throw exceptions after modifying column nullable attribute [#1081](https://github.com/pingcap/tics/pull/1081)
@@ -85,7 +109,7 @@ TiDB version: 4.0.6
     - Fix wrong result of FROM_UNIXTIME when input is NULL [#1047](https://github.com/pingcap/tics/pull/1047)
     - Fix the issue that TiFlash is not available after users applied unsupported column data type modifications [#1009](https://github.com/pingcap/tics/pull/1009)
 
-## Others
+## Bug Fix
 
 + TiDB
 
