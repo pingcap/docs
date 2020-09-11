@@ -131,7 +131,12 @@ TiDB version: 4.0.6
     - Fix the deadlock between the PD client thread and other threads calling PD sync requests. [#8612](https://github.com/tikv/tikv/pull/8612)
     - Update jemalloc to 5.2.1 to address memory allocation problem in huge page. [#8463](https://github.com/tikv/tikv/pull/8463)
     - Fix unified thread pool hang for long running query. [#8427](https://github.com/tikv/tikv/pull/8427)
++ PD
 
+    - Add `initial-cluster-token` configuration to avoid different clusters communicate during bootstrap [#2922](https://github.com/pingcap/pd/pull/2922)
+    - Fix the unit of store limit rate when the mode is auto [#2826](https://github.com/pingcap/pd/pull/2826)
+    - Fix the issue that some scheduler persist config without solving error [#2818](https://github.com/tikv/pd/pull/2818)
+    - fix empty http response in scheduler [#2871](https://github.com/tikv/pd/pull/2871) [#2874](https://github.com/tikv/pd/pull/2874)
 + TiFlash
 
     - Fix the issue that TiFlash throw exceptions after modifying column nullable attribute [#1081](https://github.com/pingcap/tics/pull/1081)
