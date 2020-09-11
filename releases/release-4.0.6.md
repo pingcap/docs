@@ -189,7 +189,8 @@ TiDB version: 4.0.6
 
 + TiFlash
 
-    - `Do not optimize applying snapshot by multi-thread when raftstore.snap-handle-pool-size is 0` [#1086](https://github.com/pingcap/tics/pull/1086)
-    - `Fix bug causes segment fault while computing table sync status` [#1077](https://github.com/pingcap/tics/pull/1077)
+    - Fix bug that TiFlash coprocessor executor QPS is always 0 in Grafana [#1092](https://github.com/pingcap/tics/pull/1092)
+    - Do not optimize applying snapshot by multi-thread when raftstore.snap-handle-pool-size is 0 [#1086](https://github.com/pingcap/tics/pull/1086)
+    - Fix bug causes segment fault while computing table sync status [#1077](https://github.com/pingcap/tics/pull/1077)
     - For invalid collation, treated as `utf8mb4_bin` in TiFlash [#1069](https://github.com/pingcap/tics/pull/1069)
     - Added some Grafana panels about write stall, and added some settings to avoid write stall. [#1051](https://github.com/pingcap/tics/pull/1051)
