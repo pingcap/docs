@@ -23,15 +23,9 @@ However, TiDB does not support some of MySQL features or behaves differently fro
 + Triggers
 + Events
 + User-defined functions
-<<<<<<< HEAD
-+ `FOREIGN KEY` constraints
-+ `FULLTEXT` functions and indexes
-+ `SPATIAL` functions and indexes
-=======
 + `FOREIGN KEY` constraints [#18209](https://github.com/pingcap/tidb/issues/18209)
 + Temporary tables [#1248](https://github.com/pingcap/tidb/issues/1248)
 + `FULLTEXT`/`SPATIAL` functions and indexes [#1793](https://github.com/pingcap/tidb/issues/1793)
->>>>>>> 2308eaf... mysql-compatibility: add more details (#3796)
 + Character sets other than `utf8`, `utf8mb4`, `ascii`, `latin1` and `binary`
 + Collations other than `BINARY`
 + Add primary key
@@ -43,19 +37,10 @@ However, TiDB does not support some of MySQL features or behaves differently fro
 + Savepoints
 + Column-level privileges
 + `CREATE TABLE tblName AS SELECT stmt` syntax
-+ `CREATE TEMPORARY TABLE` syntax
 + `XA` syntax (TiDB uses a two-phase commit internally, but this is not exposed via an SQL interface)
-<<<<<<< HEAD
 + `LOCK TABLE` syntax (TiDB uses `tidb_snapshot` to [produce backups](/mydumper-overview.md))
 + `CHECK TABLE` syntax
 + `CHECKSUM TABLE` syntax
-+ `GET_LOCK` and `RELEASE_LOCK` functions
-=======
-+ `CREATE TABLE tblName AS SELECT stmt` syntax [#4754](https://github.com/pingcap/tidb/issues/4754)
-+ `CHECK TABLE` syntax [#4673](https://github.com/pingcap/tidb/issues/4673)
-+ `CHECKSUM TABLE` syntax [#1895](https://github.com/pingcap/tidb/issues/1895)
-+ `GET_LOCK` and `RELEASE_LOCK` functions [#14994](https://github.com/pingcap/tidb/issues/14994)
->>>>>>> 2308eaf... mysql-compatibility: add more details (#3796)
 
 ## Features that are different from MySQL
 
@@ -77,20 +62,14 @@ CREATE TABLE t(id int unique key AUTO_INCREMENT, c int);
 
 The principle of the auto-increment ID in TiDB is that each tidb-server instance caches a section of ID values (currently 30000 IDs are cached) for allocation and fetches the next section after this section is used up.
 
-<<<<<<< HEAD
 Assume that the cluster contains two tidb-server instances, namely Instance A and Instance B. Instance A caches the auto-increment ID of [1, 30000], while Instance B caches the auto-increment ID of [30001, 60000].
-=======
-+ You can use the `tidb_allow_remove_auto_inc` system variable to allow or forbid removing the `AUTO_INCREMENT` column attribute. The syntax of removing the column attribute is `alter table modify` or `alter table change`.
-
-+ TiDB does not support adding the `AUTO_INCREMENT` column attribute, and this attribute cannot be recovered once it is removed.
->>>>>>> 2308eaf... mysql-compatibility: add more details (#3796)
 
 The operations are executed as follows:
 
 1. The client issues the `INSERT INTO t VALUES (1, 1)` statement to Instance B which sets the `id` to 1 and the statement is executed successfully.
 2. The client issues the `INSERT INTO t (c) (1)` statement to Instance A. This statement does not specify the value of `id`, so Instance A allocates the value. Currently, Instances A caches the auto-increment ID of [1, 30000], so it allocates the `id` value to 1 and adds 1 to the local counter. However, at this time the data with the `id` of 1 already exists in the cluster, therefore it reports `Duplicated Error`.
 
-Also, starting from TiDB 2.1.18, TiDB supports using the system variable `tidb_allow_remove_auto_inc` to control whether the `AUTO_INCREMENT` property of a column is allowed to be removed by executing  `ALTER TABLE MODIFY` or `ALTER TABLE CHANGE` statements. It is not allowed by default.
+Also, starting from TiDB 2.1.18, TiDB supports using the system variable `tidb_allow_remove_auto_inc` to control whether the `AUTO_INCREMENT` property of a column is allowed to be removed by executing  `ALTER TABLE MODIFY` or `ALTER TABLE CHANGE` statements. It is not allowed by default. Once the `AUTO_INCREMENT` property is removed, it cannot be recovered, because TiDB does not support adding the `AUTO_INCREMENT` column attribute.
 
 > **Note:**
 >
@@ -139,7 +118,7 @@ In TiDB DDL does not block reads or writes to tables while in operation. However
     - Does not support setting a column as the `PRIMARY KEY`, or creating a unique index, or specifying `AUTO_INCREMENT` while adding it.
 + Drop Column: Does not support dropping the `PRIMARY KEY` column or index column.
 + Change/Modify Column:
-    - Does not support lossy changes, such as from `BIGINT` to `INTEGER` or `VARCHAR(255)` to `VARCHAR(10)`.
+    - Does not support lossy changes, such as from `BIGINT` to `INTEGER` or `VARCHAR(255)` to `VARCHAR(10)`. Otherwise, the `length %d is less than origin %d` error might be output.
     - Does not support modifying the precision of `DECIMAL` data types starting from TiDB v2.1.10.
     - Does not support changing the `UNSIGNED` attribute.
     - Does not support changing from `NULL` to `NOT NULL`.
@@ -152,22 +131,7 @@ For more information, see [Online Schema Changes](/key-features.md#online-schema
 
 ### Analyze table
 
-<<<<<<< HEAD
 [`ANALYZE TABLE`](/statistics.md#manual-collection) works differently in TiDB than in MySQL, in that it is a relatively lightweight and short-lived operation in MySQL/InnoDB, while in TiDB it completely rebuilds the statistics for a table and can take much longer to complete.
-=======
-* Multiple operations cannot be completed in a single `ALTER TABLE` statement. For example, it is not possible to add multiple columns or indexes in a single statement. Otherwise, the `Unsupported multi schema change` error might be output.
-* Different types of indexes (`HASH|BTREE|RTREE|FULLTEXT`) are not supported, and will be parsed and ignored when specified.
-* Adding/Dropping the primary key is unsupported unless [`alter-primary-key`](/tidb-configuration-file.md#alter-primary-key) is enabled.
-* Changing the field type to its superset is unsupported. For example, TiDB does not support changing the field type from `INTEGER` to `VARCHAR`, or from `TIMESTAMP` to `DATETIME`. Otherwise, the error information `Unsupported modify column: type %d not match origin %d` might be output.
-* Change/Modify data type does not currently support "lossy changes", such as changing from BIGINT to INT.
-* Change/Modify decimal columns does not support changing the prevision.
-* Change/Modify integer columns does not permit changing the `UNSIGNED` attribute.
-* Table Partitioning supports Hash, Range, and `Add`/`Drop`/`Truncate`/`Coalesce`. The other partition operations are ignored. The `Warning: Unsupported partition type, treat as normal table` error might be output. The following Table Partition syntaxes are not supported:
-    - `PARTITION BY LIST`
-    - `PARTITION BY KEY`
-    - `SUBPARTITION`
-    - `{CHECK|EXCHANGE|TRUNCATE|OPTIMIZE|REPAIR|IMPORT|DISCARD|REBUILD|REORGANIZE} PARTITION`
->>>>>>> 2308eaf... mysql-compatibility: add more details (#3796)
 
 ### Storage engines
 
@@ -175,7 +139,6 @@ For compatibility reasons, TiDB supports the syntax to create tables with altern
 
 {{< copyable "sql" >}}
 
-<<<<<<< HEAD
 ```sql
 CREATE TABLE t1 (a INT) ENGINE=MyISAM;
 ```
@@ -183,14 +146,6 @@ CREATE TABLE t1 (a INT) ENGINE=MyISAM;
 ```
 Query OK, 0 rows affected (0.14 sec)
 ```
-=======
-### Limitations of `SELECT` syntax
-
-- The `SELECT ... INTO @variable` syntax is not supported.
-- The `SELECT ... GROUP BY ... WITH ROLLUP` syntax is not supported.
-
-### Views
->>>>>>> 2308eaf... mysql-compatibility: add more details (#3796)
 
 {{< copyable "sql" >}}
 
