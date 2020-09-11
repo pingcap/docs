@@ -58,7 +58,7 @@ TiDB version: 4.0.6
 + TiFlash
 
     - Add some metrics about apply Region snapshots and ingest SST files [#1088](https://github.com/pingcap/tics/pull/1088)
-    - Fix the problem that CN check doesn't work on https_port and metrics_port [#1064](https://github.com/pingcap/tics/pull/1064)## Bug Fixes
+    - Fix the problem that CN check doesn't work on https_port and metrics_port [#1064](https://github.com/pingcap/tics/pull/1064)
 
 + Tools
 
