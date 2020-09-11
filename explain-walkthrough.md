@@ -5,7 +5,7 @@ summary: Learn how to use `EXPLAIN` by walking through an example statement
 
 # EXPLAIN Walkthrough
 
-Because SQL is a declarative language, it is not possible to sight-check a query and tell if it is executing efficiently. We must first use `EXPLAIN` to understand what the current execution plan is.
+Because SQL is a declarative language, it is not possible to sight-check a query and tell if it is executing efficiently. We must first use [`EXPLAIN`](/sql-statements/sql-statement-explain.md) to understand what the current execution plan is.
 
 The following statement from the [bikeshare example database](/import-example-data.md) counts how many trips were taken on the 1st July 2017:
 
@@ -33,8 +33,8 @@ Working from the child operator `└─TableFullScan_18` back, we can see that t
 1. The coprocessor (TiKV) is reading the entire trips table, as a `TableFullScan`. It then passes the rows that it reads to `Selection_19`, still within TiKV.
 2. The `WHERE start_date BETWEEN ..` predicate is then filtered in the `Selection_19` operator. It is estimated that approximately `250` rows will meet this selection. Note that this number was produced from a heuristic; the `└─TableFullScan_18` operator shows `stats:pseudo`. After running `ANALYZE TABLE trips` the statistics should be more accurate.
 3. The rows that met the selection criteria then have a `count` function applied to them. This is also completed inside the `StreamAgg_9` operator, which is still inside TiKV (`cop[tikv]`). The TiKV coprocessor understands a number of MySQL built-in functions, `count` being one of them. It also understands that `count` is safe to apply Stream Aggregation to, even though the results are not in order.
-4. The results from `StreamAgg_9` are then sent to `TableReader_21` which is now inside the TiDB server (task of `root`). The `estRows` does not make it entirely clear, but the `TableReader_21` operator will receive one row from each of the TiKV regions that had to be accessed. We can see more information about these requests in `EXPLAIN ANALYZE`.
-5. The `StreamAgg_20` operator then has the task of applying a count function to each of the rows from the `└─TableReader_21` operator, which we can see from the `SHOW TABLE REGIONS` output above, will be about 56 rows. As this is the root operator, it can then return results to the client.
+4. The results from `StreamAgg_9` are then sent to `TableReader_21` which is now inside the TiDB server (task of `root`). The `estRows` does not make it entirely clear, but the `TableReader_21` operator will receive one row from each of the TiKV regions that had to be accessed. We can see more information about these requests in [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md).
+5. The `StreamAgg_20` operator then has the task of applying a count function to each of the rows from the `└─TableReader_21` operator, which we can see from [`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md) will be about 56 rows. As this is the root operator, it can then return results to the client.
 
 > **Tip:**
 > 
@@ -42,7 +42,7 @@ Working from the child operator `└─TableFullScan_18` back, we can see that t
 
 ## Assessing the current performance
 
-`EXPLAIN` only returns the query execution plan, and does not execute the query. We can either run the query, or use `EXPLAIN ANALYZE` to get the actual execution time:
+[`EXPLAIN`](/sql-statements/sql-statement-explain.md) only returns the query execution plan, and does not execute the query. We can either run the query, or use [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) to get the actual execution time:
 
 {{< copyable "sql" >}}
 
@@ -65,7 +65,7 @@ EXPLAIN ANALYZE SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 
 
 The example query takes `1.03` seconds to execute. This is our benchmark to beat!
 
-Importantly, we can also see some of the useful columns that `EXPLAIN ANALYZE` has added. `actRows` shows that some of our estimates were off. We knew this already because the `└─TableFullScan_18` showed `stats:pseudo`. But expecting 10 thousand rows and finding 19 million rows does not show that the estimate was very accurate. If we run `ANALYZE TABLE`, and then `EXPLAIN ANALYZE` again we can see that the estimates are much closer:
+Importantly, we can also see some of the useful columns that [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) has added. `actRows` shows that some of our estimates were off. We knew this already because the `└─TableFullScan_18` showed `stats:pseudo`. But expecting 10 thousand rows and finding 19 million rows does not show that the estimate was very accurate. If we run [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md), and then [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) again we can see that the estimates are much closer:
 
 {{< copyable "sql" >}}
 
@@ -89,9 +89,9 @@ Query OK, 0 rows affected (10.22 sec)
 5 rows in set (0.93 sec)
 ```
 
-After `ANALYZE TABLE` is executed, we can see that the estimated rows for the `└─TableFullScan_18` is accurate, and the estimate for `└─Selection_19` is now also much closer. While in this case the execution plan (i.e. the set of operators TiDB uses to execute this query) has not changed in between running `ANALYZE TABLE`, quite frequently sub-optimal plans are caused by out of date statistics.
+After [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) is executed, we can see that the estimated rows for the `└─TableFullScan_18` is accurate, and the estimate for `└─Selection_19` is now also much closer. While in this case the execution plan (i.e. the set of operators TiDB uses to execute this query) has not changed in between running [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md), quite frequently sub-optimal plans are caused by out of date statistics.
 
-As well as `ANALYZE TABLE`, TiDB will automatically regenerate statistics as a background operation after a [threshold is reached](/system-variables.md#tidb_auto_analyze_ratio). You can see how close TiDB is to this threshold (i.e. how healthy it considers the statistics to be) with the statement [`SHOW STATS_HEALTHY`](/sql-statements/sql-statement-show-stats-healthy.md):
+As well as [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md), TiDB will automatically regenerate statistics as a background operation after a [threshold is reached](/system-variables.md#tidb_auto_analyze_ratio). You can see how close TiDB is to this threshold (i.e. how healthy it considers the statistics to be) with the statement [`SHOW STATS_HEALTHY`](/sql-statements/sql-statement-show-stats-healthy.md):
 
 {{< copyable "sql" >}}
 
@@ -179,7 +179,7 @@ EXPLAIN SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00
 4 rows in set (0.00 sec)
 ```
 
-To compare the actual execution time, we can again use `EXPLAIN ANALYZE`:
+To compare the actual execution time, we can again use [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md):
 
 {{< copyable "sql" >}}
 
