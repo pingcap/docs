@@ -17,17 +17,17 @@ The execution plan of queries is unstable and might select the incorrect index, 
 
 * If the query execution plan is output in the slow log, you can directly view the plan. Execute the `select tidb_decode_plan('xxx...')` statement to parse the detailed execution plan.
 * The number of scanned keys in the monitor abnormally increases; in the slow log, the number of `Scan Keys` are large.
-* The SQL execution duration in TiDB is greatly different than that of other databases such as MySQL. You can compare the execution plan of other databases (for example, whether `Join Order` is different).
+* The SQL execution duration in TiDB is greatly different than that in other databases such as MySQL. You can compare the execution plan of other databases (for example, whether `Join Order` is different).
 
 #### Possible reason
 
-The statistical information is inaccurate.
+The statistics is inaccurate.
 
-#### Handling methods
+#### Troubleshooting methods
 
 * Update the statistical information
-    * Execute `analyze table` manually and execute `analyze` periodically with the `crontab` command to keep the accuracy of the statistical information.
-    * Execute `auto analyze` automatically. Lower the threshold value of `analyze ratio`, increase the frequency of information collection, and set the runtime threshold. See the following examples:
+    * Execute `analyze table` manually and execute `analyze` periodically with the `crontab` command to keep the statistics accurate.
+    * Execute `auto analyze` automatically. Lower the threshold value of `analyze ratio`, increase the frequency of information collection, and set the start and end time of the execution. See the following examples:
         * `set global tidb_auto_analyze_ratio=0.2;`
         * `set global tidb_auto_analyze_start_time='00:00 +0800';`
         * `set global tidb_auto_analyze_end_time='06:00 +0800';`
@@ -106,7 +106,7 @@ The usage of CPU resources becomes the bottleneck.
 #### Possible reasons
 
 * Hotspot issue
-* High overall load. Check the slow queries and expensive queries of TiDB. Optimize the executing queries by adding indexes or executing queries in batches. Another option to handle the issue of high load is to scale out the cluster.
+* High overall load. Check the slow queries and expensive queries of TiDB. Optimize the executing queries by adding indexes or executing queries in batches. Another solution is to scale out the cluster.
 
 ## Other causes
 
@@ -116,7 +116,7 @@ Most of each online cluster has three or five nodes. If the machine to be mainta
 
 ### Minority of replicas are offline
 
-By default, each TiDB cluster has three replicas, so each Region has three replicas in the cluster. These Regions elect the leader and replicate data through the Raft protocol. The Raft protocol ensures that TiDB can still provide services even when the nodes (that are fewer than half of replicas) fail or are isolated without data loss. For the cluster with three replicas, the failure of one node might cause performance jitter but the usability and correctness in theory are not affected.
+By default, each TiDB cluster has three replicas, so each Region has three replicas in the cluster. These Regions elect the leader and replicate data through the Raft protocol. The Raft protocol ensures that TiDB can still provide services without data loss even when the nodes (that are fewer than half of replicas) fail or are isolated. For the cluster with three replicas, the failure of one node might cause performance jitter but the usability and correctness in theory are not affected.
 
 ### New indexes
 
@@ -132,8 +132,8 @@ In addition, you can also set the value of `tidb_ddl_reorg_priority` to `PRIORIT
 
 ### High GC pressure
 
-The transaction of TiDB adopts the Multi-Version Concurrency Control (MVCC) mechanism. When the newly written data overwrites the old data, the old data is not replaced but stored with the newly written data. Timestamps are used to mark different versions. The task of GC is to clear the obsolete data.
+The transaction of TiDB adopts the Multi-Version Concurrency Control (MVCC) mechanism. When the newly written data overwrites the old data, the old data is not replaced, and both versions of data are stored. Timestamps are used to mark different versions. The task of GC is to clear the obsolete data.
 
 * In the phase of Resolve Locks, a large amount of `scan_lock` requests are created in TiKV, which can be observed in the gRPC-related metrics. These `scan_lock` requests call all Regions.
 * In the phase of Delete Ranges, a few (or no) `unsafe_destroy_range` requests are sent to TiKV, which can be observed in the gRPC-related metrics and the **GC tasks** panel.
-* In the phase of Do GC, each TiKV by default scans the leader Regions on the machine and performs GC to each leader, which be observed in the **GC tasks** panel.
+* In the phase of Do GC, each TiKV by default scans the leader Regions on the machine and performs GC to each leader, which can be observed in the **GC tasks** panel.
