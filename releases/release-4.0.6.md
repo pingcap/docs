@@ -7,14 +7,28 @@ title: TiDB 4.0.6 Release Notes
 Release date: September 9, 2020
 
 TiDB version: 4.0.6
+
 ## Feature
 
++ TiKV
+
+    - Support to generate metafile of error codes [#8619](https://github.com/tikv/tikv/pull/8619)
+    - Add perf statistics for cf scan detail [#8618](https://github.com/tikv/tikv/pull/8618)
+    - Add perf context panel for grafana template [#8467](https://github.com/tikv/tikv/pull/8467)
+
 + TiDB Dashboard
-  - Add query editor and execution UI (experimental) [#713](https://github.com/pingcap-incubator/tidb-dashboard/pull/713)
-  - Support store location topology visualization [#719](https://github.com/pingcap-incubator/tidb-dashboard/pull/719)
-  - Add cluster configuration UI (experimental) [#733](https://github.com/pingcap-incubator/tidb-dashboard/pull/733)
-  - Support sharing current session [#741](https://github.com/pingcap-incubator/tidb-dashboard/pull/741)
-  - Support displaying number of execution plans in Statement list [#746](https://github.com/pingcap-incubator/tidb-dashboard/pull/746)
+
+    - Add query editor and execution UI (experimental) [#713](https://github.com/pingcap-incubator/tidb-dashboard/pull/713)
+    - Support store location topology visualization [#719](https://github.com/pingcap-incubator/tidb-dashboard/pull/719)
+    - Add cluster configuration UI (experimental) [#733](https://github.com/pingcap-incubator/tidb-dashboard/pull/733)
+    - Support sharing current session [#741](https://github.com/pingcap-incubator/tidb-dashboard/pull/741)
+    - Support displaying number of execution plans in Statement list [#746](https://github.com/pingcap-incubator/tidb-dashboard/pull/746)
+
++ Tools
+
+    + TiCDC
+        - Support output maxwell data format [#869](https://github.com/pingcap/ticdc/pull/869)
+
 ## Improvements
 
 + TiDB
@@ -29,9 +43,6 @@ TiDB version: 4.0.6
 + TiKV
 
     - Optimize QPS drop when doing UnsafeDestroyRange [#8627](https://github.com/tikv/tikv/pull/8627)
-    - Support to generate metafile of error codes [#8619](https://github.com/tikv/tikv/pull/8619)
-    - Add perf statistics for cf scan detail [#8618](https://github.com/tikv/tikv/pull/8618)
-    - Add perf context panel for grafana template [#8467](https://github.com/tikv/tikv/pull/8467)
 
 + PD
 
@@ -108,6 +119,25 @@ TiDB version: 4.0.6
     - Fix the issue that after renaming the primary key column in previous versions, TiFlash may not start after upgrading to v4.0.4/v4.0.5 [#1072](https://github.com/pingcap/tics/pull/1072)
     - Fix wrong result of FROM_UNIXTIME when input is NULL [#1047](https://github.com/pingcap/tics/pull/1047)
     - Fix the issue that TiFlash is not available after users applied unsupported column data type modifications [#1009](https://github.com/pingcap/tics/pull/1009)
+
++ Tools
+
+    + TiCDC
+        - Fix the issue that TiCDC leaks memory in some cases [#942](https://github.com/pingcap/ticdc/pull/942)
+        - Fix the issue that TiCDC may panic in Kafka sink [#912](https://github.com/pingcap/ticdc/pull/912)
+        - Fix the issue that CRTs may less than resolved ts in puller [#927](https://github.com/pingcap/ticdc/pull/927)
+        - Fix the issue that change feed may blocked by MySQL driver [#936](https://github.com/pingcap/ticdc/pull/936)
+
+    + Backup & Restore (BR)
+        - Fix a panic during checksum [#479](https://github.com/pingcap/br/pull/479)
+        - Fix a panic after PD changes leader [#496](https://github.com/pingcap/br/pull/496)
+
+    + Dumpling
+        - Fix the issue that the NULL value for binary type is not handled properly [#137](https://github.com/pingcap/dumpling/pull/137)
+
+    + TiDB Lightning
+        - Fix the issue that write and ingest all retry failed will just treat it as success [#381](https://github.com/pingcap/tidb-lightning/pull/381)
+        - Fix the issue that some checkpoint update may not be written to db before exit [#386](https://github.com/pingcap/tidb-lightning/pull/386)
 
 ## Bug Fix
 
