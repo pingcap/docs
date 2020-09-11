@@ -126,7 +126,11 @@ Three system variables related to automatic update of statistics are as follows:
 
 When the ratio of the number of modified rows to the total number of rows of `tbl` in a table is greater than `tidb_auto_analyze_ratio`, and the current time is between `tidb_auto_analyze_start_time` and `tidb_auto_analyze_end_time`, TiDB executes the `ANALYZE TABLE tbl` statement in the background to automatically update the statistics of this table.
 
-When the query is executed, TiDB collects feedback with the probability of `feedback-probability` and uses it to update the histogram and Count-Min Sketch. You can modify the value of `feedback-probability` in the configuration file. The default value is `0.0`.
+When the query is executed, TiDB collects feedback with the probability of `feedback-probability` and uses it to update the histogram and Count-Min Sketch. You can modify the value of `feedback-probability` in the configuration file. The default value is `0.05`. You can set the value to `0.0` to disable this feature.
+
+> **Note:**
+>
+> If you set `feedback-probability` to `0` in the configuration file, it causes a failure and reports an error. You need to set the value to `0.0` to disable `feedback-probability`.
 
 ### Control `ANALYZE` concurrency
 
