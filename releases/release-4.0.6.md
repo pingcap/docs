@@ -132,6 +132,13 @@ TiDB version: 4.0.6
     - Update jemalloc to 5.2.1 to address memory allocation problem in huge page. [#8463](https://github.com/tikv/tikv/pull/8463)
     - Fix unified thread pool hang for long running query. [#8427](https://github.com/tikv/tikv/pull/8427)
 
++ PD
+
+    - Add `initial-cluster-token` configuration to avoid different clusters communicate during bootstrap [#2922](https://github.com/pingcap/pd/pull/2922)
+    - Fix the unit of store limit rate when the mode is auto [#2826](https://github.com/pingcap/pd/pull/2826)
+    - Fix the issue that some scheduler persist config without solving error [#2818](https://github.com/tikv/pd/pull/2818)
+    - fix empty http response in scheduler [#2871](https://github.com/tikv/pd/pull/2871) [#2874](https://github.com/tikv/pd/pull/2874)
+
 + TiFlash
 
     - Fix the issue that TiFlash throw exceptions after modifying column nullable attribute [#1081](https://github.com/pingcap/tics/pull/1081)
@@ -157,3 +164,41 @@ TiDB version: 4.0.6
     + TiDB Lightning
         - Fix the issue that write and ingest all retry failed will just treat it as success [#381](https://github.com/pingcap/tidb-lightning/pull/381)
         - Fix the issue that some checkpoint update may not be written to db before exit [#386](https://github.com/pingcap/tidb-lightning/pull/386)
+
+## Bug Fix
+
++ TiDB
+
+    - Add sql digest for process list [#19829](https://github.com/pingcap/tidb/pull/19829)
+    - Switch to pessimistic txn mode for autocommit statement retry [#19796](https://github.com/pingcap/tidb/pull/19796)
+    - Support `%r`, `%T` data format in `Str_to_date()` [#19693](https://github.com/pingcap/tidb/pull/19693)
+    - Make `SELECT INTO OUTFILE` require the file privilege [#19577](https://github.com/pingcap/tidb/pull/19577)
+    - Support stddev_pop function [#19541](https://github.com/pingcap/tidb/pull/19541)
+    - Make DDL avoid taking too long in retry [#19488](https://github.com/pingcap/tidb/pull/19488)
+    - Make statements like `alter table db.t1 add constraint fk foreign key (c2) references t2(c1)` execute without first executing `use db` [#19471](https://github.com/pingcap/tidb/pull/19471)
+    - Fix `INFORMATION_SCHEMA.CLUSTER_HARDWARE` does not have raid devices information [#19457](https://github.com/pingcap/tidb/pull/19457)
+    - Make dispatch errors be changed from an Error to an Info message in the server log file [#19454](https://github.com/pingcap/tidb/pull/19454)
+    - Add `TiDB-Runtime` dashboard [#19396](https://github.com/pingcap/tidb/pull/19396)
+    - Make add index can exit on generated column with `case-when` expression parse error [#19395](https://github.com/pingcap/tidb/pull/19395)
+    - Improve compatibility for ALTER TABLE algorithms [#19364](https://github.com/pingcap/tidb/pull/19364)
+    - Encode insert/delete/update plan in slow log plan field [#19269](https://github.com/pingcap/tidb/pull/19269)
+
++ TiKV
+
+    - Optimize QPS drop when doing UnsafeDestroyRange [#8627](https://github.com/tikv/tikv/pull/8627)
+    - Fix the estimation error for a non-index column with collation enabled. [#8620](https://github.com/tikv/tikv/pull/8620)
+    - Error-code: support to generate metafile [#8619](https://github.com/tikv/tikv/pull/8619)
+    - Add perf statistics for cf scan detail [#8618](https://github.com/tikv/tikv/pull/8618)
+    - Fix the deadlock between the PD client thread and other threads calling PD sync requests. [#8612](https://github.com/tikv/tikv/pull/8612)
+    - Fix a panic issue if a TiKV runs very slow during conf change. [#8497](https://github.com/tikv/tikv/pull/8497)
+    - Add perf context panel for grafana template [#8467](https://github.com/tikv/tikv/pull/8467)
+    - Update jemalloc to 5.2.1 [#8463](https://github.com/tikv/tikv/pull/8463)
+    - Fix the issue that green GC may miss locks during transferring regions. [#8460](https://github.com/tikv/tikv/pull/8460)
+    - Support float CPU quota in cgroup. [#8427](https://github.com/tikv/tikv/pull/8427)
+
++ TiFlash
+
+    - `Do not optimize applying snapshot by multi-thread when raftstore.snap-handle-pool-size is 0` [#1086](https://github.com/pingcap/tics/pull/1086)
+    - `Fix bug causes segment fault while computing table sync status` [#1077](https://github.com/pingcap/tics/pull/1077)
+    - For invalid collation, treated as `utf8mb4_bin` in TiFlash [#1069](https://github.com/pingcap/tics/pull/1069)
+    - Added some Grafana panels about write stall, and added some settings to avoid write stall. [#1051](https://github.com/pingcap/tics/pull/1051)
