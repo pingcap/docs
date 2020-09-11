@@ -44,27 +44,27 @@ There is an abnormal increase of the `wait duration` metric for the PD TSO. This
 
 #### Possible reasons
 
-* Disk issue. The I/O usage of the node where PD is located is full. You can check the Grafana -> **disk performance** -> `latency` and `load` metrics to see whether there is any other component with high I/O usage and the health status of the disk. You can also check with the fio tool.
+* Disk issue. The disk where the PD node is located has full I/O load. Investigate whether PD is deployed with other components with high I/O demand and the health of the disk. You can verify the cause by viewing the monitor metrics in **Grafana** -> **disk performance** -> **latency**/**load**. You can also use the FIO tool to run a check on the disk if necessary.
 
-* Network issues between PD peers. The `"lost the TCP streaming connection"` error is output in the PD log. You can check the Grafana -> **PD** -> **etcd** -> `round trip` metric to see whether the network issue exists.
+* Network issues between PD peers. The PD log shows `lost the TCP streaming connection`. You need to check whether there is a problem with the network between PD nodes and verify the cause by viewing `round trip` in the monitor **Grafana** -> **PD** -> **etcd**.
 
-* High server load. You can see `"server is likely overloaded"` in the log.
+* High server load. The log shows `server is likely overloaded`.
 
-* The leader cannot be elected. The `"lease is not expired"` error is output in the PD log. This issue was fixed in v3.0.x and v2.1.19.
+* PD cannot elect a Leader: The PD log shows `lease is not expired`. [This issue](https://github.com/etcd-io/etcd/issues/10355) has been fixed in v3.0.x and v2.1.19.
 
-* The leader election is slow. It takes a long time to load Regions. Execute `grep "regions cost"` to search the PD log (for example, `load 460927 regions cost 11.77099s` might be in the log). If the loading time is at the second-level, the election is slow. In v3.0, you can enable the Region Storage feature by setting `use-region-storage` to `true`. This feature can greatly shorten the loading time of Region.
+* The leader election is slow. The Region loading duration is long. You can check this issue by running `grep "regions cost"` in the PD log. If the result is in seconds, such as `load 460927 regions cost 11.77099s`, it means the Region loading is slow. You can enable the `region storage` feature in v3.0 by setting `use-region-storage` to `true`, which significantly reduce the Region loading duration.
 
-* The network issue between TiDB and PD. You can check the Grafana -> **blackbox_exporter** -> `ping latency` metric to see whether the network between TiDB and the PD leader is fine.
+* The network issue between TiDB and PD. Check whether the network from TiDB to PD Leader is running normally by accessing the monitor **Grafana** -> **blackbox_exporter** -> **ping latency**.
 
-* PD returns the `FATAL` error. The `"range failed to find revision pair"` error is output in the log, which was fixed in v3.0.8. See [#2040](https://github.com/pingcap/pd/pull/2040) for details.
+* PD reports the `FATAL` error, and the log shows `range failed to find revision pair`. This issue has been fixed in v3.0.8 ([#2040](https://github.com/pingcap/pd/pull/2040)).
 
-* When you use the `/api/v1/regions` interface, too many Regions cause PD to run out of memory (OOM). This issue was fixed in v3.0.8. See [#1986](https://github.com/pingcap/pd/pull/1986) for details.
+* When the `/api/v1/regions` interface is used, too many Regions might cause PD OOM. This issue has been fixed in v3.0.8 ([#1986](https://github.com/pingcap/pd/pull/1986)).
 
-* PD OOM occurs during the rolling upgrade and the size of a gRPC message is not limited. From the monitoring panel, you can see that `TCP InSegs` is large. This issue was fixed in v3.0.6. See [#1952](https://github.com/pingcap/pd/pull/1952) for details.
+* PD OOM during the rolling upgrade. The size of gRPC messages is not limited, and the monitor shows that `TCP InSegs` is relatively large. This issue has been fixed in v3.0.6 ([#1952](https://github.com/pingcap/pd/pull/1952)). 
 
-* PD panics and you can report the bug.
+* PD panics. [Report a bug](https://github.com/tikv/pd/issues/new?labels=kind/bug&template=bug-report.md).
 
-* Report a bug when you use `curl http://127.0.0.1:2379/debug/pprof/goroutine?debug=2` to get the gorountine.
+* Other causes. Get goroutine by running `curl http://127.0.0.1:2379/debug/pprof/goroutine?debug=2` and [report a bug](https://github.com/pingcap/pd/issues/new?labels=kind%2Fbug&template=bug-report.md).
 
 ### TiKV anomalies
 
@@ -76,26 +76,26 @@ The `KV Cmd Duration` metric in the monitor increases abnormally. This metric re
 
 * Check the `gRPC duration` metric. This metric represents the total duration of a gRPC request in TiKV. You can find out the potential network issue by comparing `gRPC duration` of TiKV and `KV duration` of TiDB. For example, the gRPC duration is short but the KV duration of TiDB is long, which indicates that the network latency between TiDB and TiKV might be high, or that the NIC bandwidth between TiDB and TiKV is fully occupied.
 
-* The TiKV restart causes the re-election.
-    * TiKV panics and is then restarted by `systemd` to run normally. You can check the TiKV log to confirm whether `panic` exists. This situation is unexpected and you need to report a bug.
-    * TiKV is stopped by `stop`/`kill` by a third party. Then TiKV is restarted by `systemd`. You can view `dmesg` and `TiKV log` to confirm the cause.
-    * OOM occurs in TiKV and TiKV is restarted.
-    * The dynamical adjustment of `THP` is hung.
+* Re-election because TiKV is restarted.
+    * After TiKV panics, it is pulled up by `systemd` and runs normally. You can check whether panic has occurred by viewing the TiKV log. Because this issue is unexpected, [report a bug](https://github.com/tikv/tikv/issues/new?template=bug-report.md) if it happens.
+    * TiKV is stopped or killed by a third party and then pulled up by `systemd`. Check the cause by viewing `dmesg` and the TiKV log.
+    * TiKV is OOM, which causes restart.
+    * TiKV is hung because of dynamically adjusting `THP` (Transparent Hugepage).
 
-* Check monitor: Check Grafana -> **TiKV-details** -> **errors** -> `server is busy`, and you can see that the write stall occurs in TiKV RocksDB that causes the re-election.
+* Check monitor: TiKV RocksDB encounters write stall and thus results in re-election. You can check if the monitor **Grafana** -> **TiKV-details** -> **errors** shows `server is busy`.
 
-* Network isolation occurs in TiKV that causes the re-election.
+* Re-election because of network isolation.
 
-* `block-cache` is configured too large a value that causes OOM. You can confirm this cause by selecting the corresponding instances in the Grafana -> **TiKV-details** panel and viewing the `block cache size` metric of RocksDB. At the same time, check whether the `[storage.block-cache] capacity = # "1GB"` parameter value is properly configured. By default, the `block-cache` value of TiKV is set to 45% of the total machine memory. For the containerized deployment, you need to explicitly specify this parameter, because the memory of the physical machine obtained by TiKV might exceed the memory limit of a single container.
+* If the `block-cache` configuration is too large, it might cause TiKV OOM. To verify the cause of the problem, check the `block cache size` of RocksDB by selecting the corresponding instance in the monitor **Grafana** -> **TiKV-details**. Meanwhile, check whether the `[storage.block-cache] capacity = # "1GB"`parameter is set properly. By default, TiKV's `block-cache` is set to `45%` of the total memory of the machine. You need to explicitly specify this parameter when you deploy TiKV in the container, because TiKV obtains the memory of the physical machine, which might exceed the memory limit of the container.
 
-* Coprocessor receives many large queries and the amount of data to return is large. The speed at which gRPC messages are sent falls behind the speed at which Coprocessor exports data to the client, which causes the OOM. You can confirm this cause by checking whether the `response size` metric in the Grafana -> **TiKV-details** -> **coprocessor overview** panel exceeds `network outbound`.
+* Coprocessor receives many large queries and returns a large volume of data. gRPC fails to send data as quickly as the coprocessor returns data, which results in OOM. To verify the cause, you can check whether `response size` exceeds the `network outbound` traffic by viewing the monitor **Grafana** -> **TiKV-details** -> **coprocessor overview**.
 
 ### Bottleneck of a single TiKV thread
 
 There are some single threads in TiKV that might become the bottleneck.
 
-* Too many Regions on a single TiKV node cause the single gRPC threads to become the bottleneck (see Grafana -> **TiKV-details** -> `Thread CPU/gRPC CPU Per Thread`). In v3.x and later versions, you can resolve this issue by enabling the Hibernate Region feature.
-* In versions earlier than v3.0, when the single `raftstore` thread or the single `apply` thread becomes the bottleneck (Grafana -> **TiKV-details** -> `Thread CPU/raft store CPU` and `Async apply CPU` exceed `80%`), you can scale out the TiKV instance (for v2.x) or upgrade to v3.x for the multi-threaded mode.
+* Too many Regions in a TiKV instance causes a single gRPC thread to be the bottleneck (Check the **Grafana** -> **TiKV-details** -> **Thread CPU/gRPC CPU Per Thread** metric). In v3.x or later versions, you can enable `Hibernate Region` to resolve the issue.
+* For versions earlier than v3.0, when the raftstore thread or the apply thread becomes the bottleneck (**Grafana** -> **TiKV-details** -> **Thread CPU/raft store CPU** and **Async apply CPU** metrics exceed `80%`), you can scale out TiKV (v2.x) instances or upgrade to v3.x with multi-threading.
 
 ### CPU load increases
 
