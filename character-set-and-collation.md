@@ -451,9 +451,12 @@ If an expression involves multiple clauses of different collations, you need to 
 
 When inferring collations, TiDB prefers using the collation of expressions with lower coercibility values. If the coercibility values of two clauses are the same, the collation is determined according to the following priority:
 
-binary > utf8mb4_bin > utf8mb4_general_ci > utf8_bin > utf8_general_ci > latin1_bin > ascii_bin
+binary > utf8mb4_bin > (utf8mb4_general_ci, utf8mb4_unicode_ci) > utf8_bin > (utf8_general_ci, utf8_unicode_ci) > latin1_bin > ascii_bin
 
-If the collations of two clauses are different and the coercibility value of both clauses is `0`, TiDB cannot infer the collation and reports an error.
+TiDB cannot infer the collation and reports an error in following situation
+
+- If the collations of two clauses are different and the coercibility value of both clauses is `0`.
+- If the collations of two clauses are incompatible and the return type of expression is `String` type.
 
 ## `COLLATE` clause
 
