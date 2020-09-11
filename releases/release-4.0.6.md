@@ -10,6 +10,10 @@ TiDB version: 4.0.6
 
 ## New Features
 
++ TiFlash
+
+    - Support outer join in TiFlash broadcast join [#988](https://github.com/pingcap/tics/pull/988)
+    
 + TiKV
 
     - Support to generate metafile of error codes [#8619](https://github.com/tikv/tikv/pull/8619)
