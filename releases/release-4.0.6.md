@@ -17,12 +17,17 @@ TiDB version: 4.0.6
     - Optimize the performance of encoding plan. [#19279](https://github.com/pingcap/tidb/pull/19279)
     - Record more RPC runtime information in cop runtime stats [#19264](https://github.com/pingcap/tidb/pull/19264)
 
++ PD
+
+    - Dashboard: update to v2020.09.08.1 [#2928](https://github.com/pingcap/pd/pull/2928)
+    - metrics: add more metrics for region and store heartbeat [#2891](https://github.com/tikv/pd/pull/2891)
+    - Change back to the original way to control the low space threshold [#2875](https://github.com/pingcap/pd/pull/2875)
+    - Support standard error code [#2918](https://github.com/tikv/pd/pull/2918) [#2911](https://github.com/tikv/pd/pull/2911) [#2913](https://github.com/tikv/pd/pull/2913) [#2915](https://github.com/tikv/pd/pull/2915) [#2912](https://github.com/tikv/pd/pull/2912) [#2907](https://github.com/tikv/pd/pull/2907) [#2906](https://github.com/tikv/pd/pull/2906) [#2903](https://github.com/tikv/pd/pull/2903) [#2806](https://github.com/tikv/pd/pull/2806) [#2900](https://github.com/tikv/pd/pull/2900) [#2902](https://github.com/tikv/pd/pull/2902)
+
 + TiFlash
 
     - Add some metrics about apply Region snapshots and ingest SST files [#1088](https://github.com/pingcap/tics/pull/1088)
-    - Fix the problem that CN check doesn't work on https_port and metrics_port [#1064](https://github.com/pingcap/tics/pull/1064)
-
-## Bug Fixes
+    - Fix the problem that CN check doesn't work on https_port and metrics_port [#1064](https://github.com/pingcap/tics/pull/1064)## Bug Fixes
 
 + TiDB
 
@@ -114,13 +119,10 @@ TiDB version: 4.0.6
 
 + PD
 
-    - Dashboard: update to v2020.09.08.1 [#2928](https://github.com/pingcap/pd/pull/2928)
     - Add `initial-cluster-token` configuration to avoid different clusters communicate during bootstrap [#2922](https://github.com/pingcap/pd/pull/2922)
-    - Change back to the original way to control the low space threshold [#2875](https://github.com/pingcap/pd/pull/2875)
     - Fix the unit of store limit rate when the mode is auto [#2826](https://github.com/pingcap/pd/pull/2826)
-    - Add service gc safepoit commands [#2813](https://github.com/pingcap/pd/pull/2813)
-    - Fix the issue that no filtered unhealthy store in `summaryStoresLoad` [#2805](https://github.com/pingcap/pd/pull/2805)
-    - Fix a bug that pd will not pass the vet check in go1.15. [#2753](https://github.com/pingcap/pd/pull/2753)
+    - Fix the issue that some scheduler persist config without solving error [#2818](https://github.com/tikv/pd/pull/2818)
+    - fix empty http response in scheduler [#2871](https://github.com/tikv/pd/pull/2871) [#2874](https://github.com/tikv/pd/pull/2874)
 
 + TiFlash
 
