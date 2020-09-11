@@ -125,6 +125,7 @@ In TiDB DDL does not block reads or writes to tables while in operation. However
     - Does not support lossy changes, such as from `BIGINT` to `INTEGER` or `VARCHAR(255)` to `VARCHAR(10)`. Otherwise, the `length %d is less than origin %d` error might be output.
     - Does not support modifying the precision of `DECIMAL` data types.
     - Changing the field type to its superset is unsupported. For example, TiDB does not support changing the field type from `INTEGER` to `VARCHAR`, or from `TIMESTAMP` to `DATETIME`. Otherwise, the error information `Unsupported modify column: type %d not match origin %d` might be output.
+    - Does not support changing the `UNSIGNED` attribute.
     - Only supports changing the `CHARACTER SET` attribute from `utf8` to `utf8mb4`.
 + `LOCK [=] {DEFAULT|NONE|SHARED|EXCLUSIVE}`: the syntax is supported, but is not applicable to TiDB. All DDL changes that are supported do not lock the table.
 + `ALGORITHM [=] {DEFAULT|INSTANT|INPLACE|COPY}`: the syntax for `ALGORITHM=INSTANT` and `ALGORITHM=INPLACE` is fully supported, but it works differently from MySQL because some operations that are `INPLACE` in MySQL are `INSTANT` in TiDB. The syntax `ALGORITHM=COPY` is not applicable to TIDB and returns a warning.
