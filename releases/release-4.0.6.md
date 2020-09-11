@@ -56,6 +56,25 @@ TiDB version: 4.0.6
     - Add some metrics about apply Region snapshots and ingest SST files [#1088](https://github.com/pingcap/tics/pull/1088)
     - Fix the problem that CN check doesn't work on https_port and metrics_port [#1064](https://github.com/pingcap/tics/pull/1064)## Bug Fixes
 
++ Tools
+
+    + TiCDC
+        - Skip resolved lock during puller initialization [#910](https://github.com/pingcap/ticdc/pull/910)
+        - Reduce PD write frequency [#937](https://github.com/pingcap/ticdc/pull/937)
+
+    + Backup & Restore (BR)
+        - Add real time cost in summary log [#486](https://github.com/pingcap/br/issues/486)
+
+    + Dumpling
+        - Support output `INSERT` with column names [#135](https://github.com/pingcap/dumpling/pull/135)
+        - Unify `--filesize` and `--statement-size` definition with mydumper's [#142](https://github.com/pingcap/dumpling/pull/142)
+
+    + TiDB Lightning
+        - Split and ingest region size more precise [#369](https://github.com/pingcap/tidb-lightning/pull/369)
+
+    + TiDB Binlog
+        - Support go time package format gc time [#996](https://github.com/pingcap/tidb-binlog/pull/996)
+
 ## Bug Fixes
 
 + TiDB
@@ -128,7 +147,7 @@ TiDB version: 4.0.6
         - Fix the issue that CRTs may less than resolved ts in puller [#927](https://github.com/pingcap/ticdc/pull/927)
         - Fix the issue that change feed may blocked by MySQL driver [#936](https://github.com/pingcap/ticdc/pull/936)
 
-    + Backup & Restore (BR)
+    + BR
         - Fix a panic during checksum [#479](https://github.com/pingcap/br/pull/479)
         - Fix a panic after PD changes leader [#496](https://github.com/pingcap/br/pull/496)
 
