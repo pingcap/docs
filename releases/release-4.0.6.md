@@ -16,6 +16,10 @@ TiDB version: 4.0.6
     - Add perf statistics for cf scan detail [#8618](https://github.com/tikv/tikv/pull/8618)
     - Add perf context panel for grafana template [#8467](https://github.com/tikv/tikv/pull/8467)
 
++ TiFlash
+
+    - Support outer join in TiFlash broadcast join [#988](https://github.com/pingcap/tics/pull/988)
+
 + TiDB Dashboard
 
     - Add query editor and execution UI (experimental) [#713](https://github.com/pingcap-incubator/tidb-dashboard/pull/713)
@@ -54,7 +58,7 @@ TiDB version: 4.0.6
 + TiFlash
 
     - Add some metrics about apply Region snapshots and ingest SST files [#1088](https://github.com/pingcap/tics/pull/1088)
-    - Fix the problem that CN check doesn't work on https_port and metrics_port [#1064](https://github.com/pingcap/tics/pull/1064)## Bug Fixes
+    - Fix the problem that CN check doesn't work on https_port and metrics_port [#1064](https://github.com/pingcap/tics/pull/1064)
 
 + Tools
 
