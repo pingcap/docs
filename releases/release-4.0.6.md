@@ -183,19 +183,6 @@ TiDB version: 4.0.6
     - Improve compatibility for ALTER TABLE algorithms [#19364](https://github.com/pingcap/tidb/pull/19364)
     - Encode insert/delete/update plan in slow log plan field [#19269](https://github.com/pingcap/tidb/pull/19269)
 
-+ TiKV
-
-    - Optimize QPS drop when doing UnsafeDestroyRange [#8627](https://github.com/tikv/tikv/pull/8627)
-    - Fix the estimation error for a non-index column with collation enabled. [#8620](https://github.com/tikv/tikv/pull/8620)
-    - Error-code: support to generate metafile [#8619](https://github.com/tikv/tikv/pull/8619)
-    - Add perf statistics for cf scan detail [#8618](https://github.com/tikv/tikv/pull/8618)
-    - Fix the deadlock between the PD client thread and other threads calling PD sync requests. [#8612](https://github.com/tikv/tikv/pull/8612)
-    - Fix a panic issue if a TiKV runs very slow during conf change. [#8497](https://github.com/tikv/tikv/pull/8497)
-    - Add perf context panel for grafana template [#8467](https://github.com/tikv/tikv/pull/8467)
-    - Update jemalloc to 5.2.1 [#8463](https://github.com/tikv/tikv/pull/8463)
-    - Fix the issue that green GC may miss locks during transferring regions. [#8460](https://github.com/tikv/tikv/pull/8460)
-    - Support float CPU quota in cgroup. [#8427](https://github.com/tikv/tikv/pull/8427)
-
 + TiFlash
 
     - `Do not optimize applying snapshot by multi-thread when raftstore.snap-handle-pool-size is 0` [#1086](https://github.com/pingcap/tics/pull/1086)
