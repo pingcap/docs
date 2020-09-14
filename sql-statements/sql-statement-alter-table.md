@@ -95,7 +95,7 @@ ALTER TABLE t1 DROP INDEX c1, ALGORITHM=INSTANT;
 Query OK, 0 rows affected (0.24 sec)
 ```
 
-Using the `INSTANT` assertion on an operation that requires the `INPLACE` algorithm will result in a statement error:
+Using the `ALGORITHM=INSTANT` assertion on an operation that requires the `INPLACE` algorithm results in a statement error:
 
 {{< copyable "sql" >}}
 
