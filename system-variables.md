@@ -33,7 +33,7 @@ SET  GLOBAL tidb_distsql_scan_concurrency = 10;
 
 ### `allow_auto_random_explicit_insert` <span class="version-mark">New in v4.0.3</span>
 
-- Scope: SESSION (since v4.0.4: SESSION | GLOBAL)
+- Scope: SESSION (since v4.0.5: SESSION | GLOBAL)
 - Default value: 0
 - Determines whether to allow explicitly specifying the values of the column with the `AUTO_RANDOM` attribute in the `INSERT` statement. `1` means to allow and `0` means to disallow.
 
@@ -270,6 +270,14 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - This variable is used to set the concurrency of the `scan` operation.
 - Use a bigger value in OLAP scenarios, and a smaller value in OLTP scenarios.
 - For OLAP scenarios, the maximum value cannot exceed the number of CPU cores of all the TiKV nodes.
+
+### tidb_dml_batch_size
+
+- Scope: SESSION | GLOBAL
+- Default value: 0
+- Example value: 20000
+- When this value is greater than `0`, TiDB will batch commit statements such as `INSERT` or `LOAD DATA` into smaller transactions. This reduces memory usage and helps ensure that the `txn-total-size-limit` is not reached by bulk modifications.
+- Only the value `0` provides ACID compliance. Setting this to any other value will break the atomicity and isolation guarantees of TiDB.
 
 ### tidb_enable_cascades_planner
 
@@ -819,7 +827,7 @@ SET tidb_slow_log_threshold = 200;
 
 - Scope: SESSION | GLOBAL
 - Default value: SYSTEM
-- This variable sets the sytem time zone. Values can be specified as either an offset such as '-8:00' or a named zone 'America/Los_Angeles'.
+- This variable sets the system time zone. Values can be specified as either an offset such as '-8:00' or a named zone 'America/Los_Angeles'.
 
 ### transaction_isolation
 
