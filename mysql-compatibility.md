@@ -87,7 +87,7 @@ See also: [TiDB SQL Grammar](https://pingcap.github.io/sqlgram/#functioncallkeyw
 
 ### DDL
 
-In TiDB, all supported DDL changes are performed online. The following major restrictions apply to DDL versus MySQL:
+In TiDB, all supported DDL changes are performed online. Compared with DDL operations in MySQL, the DDL operations in TiDB have the following major restrictions:
 
 * Multiple operations cannot be completed in a single `ALTER TABLE` statement. For example, it is not possible to add multiple columns or indexes in a single statement. Otherwise, the `Unsupported multi schema change` error might be output.
 * Different types of indexes (`HASH|BTREE|RTREE|FULLTEXT`) are not supported, and will be parsed and ignored when specified.
