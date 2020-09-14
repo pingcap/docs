@@ -64,7 +64,7 @@ The `location-labels` configuration is an array of strings, and each item corres
 
 ### Configure `isolation-level` for PD
 
-If `location-labels` has been configured, you can further enhance the topological isolation requirements on TiKV clusters by configuring `isolation-level` in the PD configuration file:
+If `location-labels` has been configured, you can further enhance the topological isolation requirements on TiKV clusters by configuring `isolation-level` in the PD configuration file.
 
 Assume that you have made a three-layer cluster topology by configuring `location-labels` according to the instructions above: zone -> rack -> host, and have configured the `isolation-level` as follows:
 
