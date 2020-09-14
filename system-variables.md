@@ -308,7 +308,15 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 - Scope: SESSION | GLOBAL
 - Default value: 0
-- This variable is used to control whether to enable `get_lock` and `release_lock` functions. These two functions are not implemented, and always return 1 in the current version of TiDB.
+- By default, TiDB returns an error when attempting to use syntax for functionality that is not yet implemented. However, some users may prefer that TiDB silently ignore cases when the functionality is not available. This is helpful in cases where you can not make changes to the SQL code.
+- Enabling `noop` functions controls the following behaviors:
+  * `get_lock` and `release_lock` functions
+  * `LOCK IN SHARE MODE` syntax
+  * `SQL_CALC_FOUND_ROWS` syntax
+
+> **Note:**
+>
+> Only the default value of `0` can be considered safe. Setting `tidb_enable_noop_functions=1` might lead to unexpected behaviors in your application, because it permits TiDB to ignore certain syntax without providing an error.
 
 ### tidb_enable_slow_log
 
