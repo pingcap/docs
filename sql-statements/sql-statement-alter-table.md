@@ -137,7 +137,7 @@ The following major restrictions apply to `ALTER TABLE` in TiDB:
 
 * Spatial data types are not supported.
 
-Further restrictions are documented under [MySQL Compatibility](/mysql-compatibility.md#ddl).
+For further restrictions, see [MySQL Compatibility](/mysql-compatibility.md#ddl).
 
 ## See also
 
