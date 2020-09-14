@@ -310,9 +310,9 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Default value: 0
 - By default, TiDB returns an error when attempting to use syntax for functionality that is not yet implemented. However, some users may prefer that TiDB silently ignore cases when the functionality is not available. This is helpful in cases where you can not make changes to the SQL code.
 - Enabling `noop` functions controls the following behaviors:
-  * `get_lock` and `release_lock` functions
-  * `LOCK IN SHARE MODE` syntax
-  * `SQL_CALC_FOUND_ROWS` syntax
+    * `get_lock` and `release_lock` functions
+    * `LOCK IN SHARE MODE` syntax
+    * `SQL_CALC_FOUND_ROWS` syntax
 
 > **Note:**
 >
@@ -598,7 +598,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - This variable is used to set whether the optimizer executes the optimization operation of pushing down the aggregate function with `distinct` (such as `select count(distinct a) from t`) to Coprocessor.
 - When the aggregate function with the `distinct` operation is slow in the query, you can set the variable value to `1`.
 
-In the following example, before `tidb_opt_distinct_agg_push_down` is enabled, TiDB needs to read all data from TiKV and execute `disctinct` on the TiDB side. After `tidb_opt_distinct_agg_push_down` is enabled, `distinct a` is pushed down to Coprocessor, and a `group by` column `test.t.a` is added to `HashAgg_5`.
+In the following example, before `tidb_opt_distinct_agg_push_down` is enabled, TiDB needs to read all data from TiKV and execute `distinct` on the TiDB side. After `tidb_opt_distinct_agg_push_down` is enabled, `distinct a` is pushed down to Coprocessor, and a `group by` column `test.t.a` is added to `HashAgg_5`.
 
 ```sql
 mysql> desc select count(distinct a) from test.t;
