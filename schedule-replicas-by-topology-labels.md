@@ -94,7 +94,7 @@ The `location-level` configuration is an array of strings, which needs to corres
 
 When using TiDB Ansible to deploy a cluster, you can directly configure the TiKV location in the `inventory.ini` file. `tidb-ansible` will generate the corresponding TiKV and PD configuration files during deployment.
 
-The following example defines a double-level topology of `zone/host`. The TiKV of the cluster is distributed in three zones, with two hosts in each zone. z1 is deployed with two TiKV instances per host, and z2 and z3 are deployed with 1 instance per host.
+In the following example, a two-layer topology of `zone/host` is defined. The TiKV nodes of the cluster are distributed among three zones, each zone with two hosts. In z1, two TiKV instances are deployed per host. In z2 and z3, one TiKV instance is deployed per host.
 
 ```
 [tikv_servers]
@@ -132,4 +132,4 @@ For example, a TiKV cluster is distributed across three data zones z1, z2, and z
 
 Similarly, when `isolation-level` is set to `rack`, the minimum isolation level is different racks in the same data center. Under this setting, if isolation can be guaranteed at the zone level, it will be guaranteed first. Only when the zone level isolation can not be completed, will the scheduling in the same zone and the same rack be considered to avoid.
 
-In summary, PD maximizes the disaster recovery of the cluster according to the current topology. Therefore, if you want to achieve a certain level of disaster recovery, deploy more machines on different sites according to the topology than the number of `max-replicas`. Also, TiDB provides mandatory isolation level settings such as `isolation-level` to control the topological isolation level according to the scenario more flexibly.
+In summary, PD maximizes the disaster recovery of the cluster according to the current topology. Therefore, if you want to achieve a certain level of disaster recovery, deploy more machines on different sites according to the topology than the number of `max-replicas`. TiDB also provides mandatory configuration items such as `isolation-level` for you to more flexibly control the topological isolation level of data according to different scenarios.
