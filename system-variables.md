@@ -8,7 +8,7 @@ aliases: ['/tidb/dev/tidb-specific-system-variables','/docs/dev/system-variables
 
 TiDB system variables behave similar to MySQL with some differences, in that settings might apply on a `SESSION`, `INSTANCE`, or `GLOBAL` scope, or on a scope that combines `SESSION`, `INSTANCE`, or `GLOBAL`.
 
-- Changes to `GLOBAL` scoped variables **only apply to new connection sessions with TiDB**. Currently active connection sessions are not affected. These changes are persisted across restarts.
+- Changes to `GLOBAL` scoped variables **only apply to new connection sessions with TiDB**. Currently active connection sessions are not affected. These changes are persisted and valid after restarts.
 - Changes to `INSTANCE` scoped variables apply to all active or new connection sessions with the current TiDB instance immediately after the changes are made. Other TiDB instances are not affected. These changes are not persisted and become invalid after TiDB restarts.
 
 Variables can be set with the [`SET` statement](/sql-statements/sql-statement-set-variable.md) on a per-session, instance or global basis:
@@ -757,8 +757,8 @@ SET tidb_slow_log_threshold = 200;
 
 - Scope: GLOBAL
 - Default value: 0
-- This variable controls whether to mask user information in the SQL statement being recorded into the TiDB log and slow log.
-- When the variable is set to `1`, user information is masked. For example, if the executed SQL statement is `insert into t values (1,2)`, the statement is recorded as `insert into t values (?,?)` in the log.
+- This variable controls whether to hide user information in the SQL statement being recorded into the TiDB log and slow log.
+- When you set the variable to `1`, user information is hidden. For example, if the executed SQL statement is `insert into t values (1,2)`, the statement is recorded as `insert into t values (?,?)` in the log.
 
 ### tidb_slow_query_file
 
