@@ -4,7 +4,7 @@ title: TiDB 4.0.6 Release Notes
 
 # TiDB 4.0.6 Release Notes
 
-Release date: September 9, 2020
+Release date: September 15, 2020
 
 TiDB version: 4.0.6
 
@@ -12,60 +12,61 @@ TiDB version: 4.0.6
 
 + TiFlash
 
-    - Support outer join in TiFlash broadcast join [#988](https://github.com/pingcap/tics/pull/988)
+    - Support outer join in TiFlash broadcast join
 
 + TiDB Dashboard
 
-    - Add query editor and execution UI (experimental) [#713](https://github.com/pingcap-incubator/tidb-dashboard/pull/713)
+    - Add Query Editor and execution UI (experimental) [#713](https://github.com/pingcap-incubator/tidb-dashboard/pull/713)
     - Support store location topology visualization [#719](https://github.com/pingcap-incubator/tidb-dashboard/pull/719)
     - Add cluster configuration UI (experimental) [#733](https://github.com/pingcap-incubator/tidb-dashboard/pull/733)
-    - Support sharing current session [#741](https://github.com/pingcap-incubator/tidb-dashboard/pull/741)
-    - Support displaying number of execution plans in Statement list [#746](https://github.com/pingcap-incubator/tidb-dashboard/pull/746)
+    - Support sharing the current session [#741](https://github.com/pingcap-incubator/tidb-dashboard/pull/741)
+    - Support displaying the number of execution plans in SQL Statement list [#746](https://github.com/pingcap-incubator/tidb-dashboard/pull/746)
 
 + Tools
 
     + TiCDC
-        - Support output maxwell data format [#869](https://github.com/pingcap/ticdc/pull/869)
+        - Support outputting data in the `maxwell` format [#869](https://github.com/pingcap/ticdc/pull/869)
 
 ## Improvements
 
 + TiDB
 
-    - Replace error code and message with standard error [#19888](https://github.com/pingcap/tidb/pull/19888)
-    - Improve the write performance of partition table [#19649](https://github.com/pingcap/tidb/pull/19649)
+    - Replace error codes and messages with standard errors [#19888](https://github.com/pingcap/tidb/pull/19888)
+    - Improve the write performance of partitioned table [#19649](https://github.com/pingcap/tidb/pull/19649)
     - Record more RPC runtime information in cop runtime stats [#19264](https://github.com/pingcap/tidb/pull/19264)
-    - Forbidden creating table in metrics_schema and performance_schema [#19792](https://github.com/pingcap/tidb/pull/19792)
-    - Support adjust the concurrency on union executor [#19886](https://github.com/pingcap/tidb/pull/19886)
+    - Forbidden creating tables in `metrics_schema` and `performance_schema` [#19792](https://github.com/pingcap/tidb/pull/19792)
+    - Support adjusting the concurrency of the union executor [#19886](https://github.com/pingcap/tidb/pull/19886)
     - Support out join in broadcast join [#19664](https://github.com/pingcap/tidb/pull/19664)
-    - Add sql digest for process list [#19829](https://github.com/pingcap/tidb/pull/19829)
-    - Switch to pessimistic txn mode for autocommit statement retry [#19796](https://github.com/pingcap/tidb/pull/19796)
-    - Support `%r`, `%T` data format in `Str_to_date()` [#19693](https://github.com/pingcap/tidb/pull/19693)
-    - Make `SELECT INTO OUTFILE` require the file privilege [#19577](https://github.com/pingcap/tidb/pull/19577)
-    - Support stddev_pop function [#19541](https://github.com/pingcap/tidb/pull/19541)
-    - Add `TiDB-Runtime` dashboard [#19396](https://github.com/pingcap/tidb/pull/19396)
-    - Improve compatibility for ALTER TABLE algorithms [#19364](https://github.com/pingcap/tidb/pull/19364)
-    - Encode insert/delete/update plan in slow log plan field [#19269](https://github.com/pingcap/tidb/pull/19269)
+    - Add sql digest for the process list [#19829](https://github.com/pingcap/tidb/pull/19829)
+    - Switch to the pessimistic transaction mode for autocommit statement retry [#19796](https://github.com/pingcap/tidb/pull/19796)
+    - Support the `%r` and `%T` data format in `Str_to_date()` [#19693](https://github.com/pingcap/tidb/pull/19693)
+    - Enable `SELECT INTO OUTFILE` to require the file privilege [#19577](https://github.com/pingcap/tidb/pull/19577)
+    - Support the `stddev_pop` function [#19541](https://github.com/pingcap/tidb/pull/19541)
+    - Add the `TiDB-Runtime` dashboard [#19396](https://github.com/pingcap/tidb/pull/19396)
+    - Improve compatibility for the `ALTER TABLE` algorithms [#19364](https://github.com/pingcap/tidb/pull/19364)
+    - Encode `insert`/`delete`/`update` plans in the slow log `plan` field [#19269](https://github.com/pingcap/tidb/pull/19269)
+
 + TiKV
 
-    - Optimize QPS drop when doing UnsafeDestroyRange [#8627](https://github.com/tikv/tikv/pull/8627)
-    - Support to generate metafile of error codes [#8619](https://github.com/tikv/tikv/pull/8619)
-    - Add perf statistics for cf scan detail [#8618](https://github.com/tikv/tikv/pull/8618)
-    - Add perf context panel for grafana template [#8467](https://github.com/tikv/tikv/pull/8467)
+    - Reduce QPS drop when doing `UnsafeDestroyRange` [#8627](https://github.com/tikv/tikv/pull/8627)
+    - Support generating metafile of error codes [#8619](https://github.com/tikv/tikv/pull/8619)
+    - Add performance statistics for cf scan detail [#8618](https://github.com/tikv/tikv/pull/8618)
+    - Add the `perf context` panel in the Grafana template [#8467](https://github.com/tikv/tikv/pull/8467)
 
 + PD
 
-    - Dashboard: update to v2020.09.08.1 [#2928](https://github.com/pingcap/pd/pull/2928)
-    - metrics: add more metrics for region and store heartbeat [#2891](https://github.com/tikv/pd/pull/2891)
+    - Update TiDB Dashboard to v2020.09.08.1 [#2928](https://github.com/pingcap/pd/pull/2928)
+    - Add more metrics for region and store heartbeat [#2891](https://github.com/tikv/pd/pull/2891)
     - Change back to the original way to control the low space threshold [#2875](https://github.com/pingcap/pd/pull/2875)
-    - Support standard error code [#2918](https://github.com/tikv/pd/pull/2918) [#2911](https://github.com/tikv/pd/pull/2911) [#2913](https://github.com/tikv/pd/pull/2913) [#2915](https://github.com/tikv/pd/pull/2915) [#2912](https://github.com/tikv/pd/pull/2912) [#2907](https://github.com/tikv/pd/pull/2907) [#2906](https://github.com/tikv/pd/pull/2906) [#2903](https://github.com/tikv/pd/pull/2903) [#2806](https://github.com/tikv/pd/pull/2806) [#2900](https://github.com/tikv/pd/pull/2900) [#2902](https://github.com/tikv/pd/pull/2902)
+    - Support standard error codes [#2918](https://github.com/tikv/pd/pull/2918) [#2911](https://github.com/tikv/pd/pull/2911) [#2913](https://github.com/tikv/pd/pull/2913) [#2915](https://github.com/tikv/pd/pull/2915) [#2912](https://github.com/tikv/pd/pull/2912) [#2907](https://github.com/tikv/pd/pull/2907) [#2906](https://github.com/tikv/pd/pull/2906) [#2903](https://github.com/tikv/pd/pull/2903) [#2806](https://github.com/tikv/pd/pull/2806) [#2900](https://github.com/tikv/pd/pull/2900) [#2902](https://github.com/tikv/pd/pull/2902)
 
 + TiFlash
 
-    - Add Grafana panels about applying Region snapshots and ingest SST files
+    - Add Grafana panels about data replication (`apply Region snapshots` and `ingest SST files`)
     - Add Grafana panels about write stall
-    - Add `dt_segment_force_merge_delta_rows` and `dt_segment_force_merge_delta_deletes` to adjust the threshold of write stall
-    - Support setting `raftstore.snap-handle-pool-size` to `0` in TiFlash-Proxy to disable applying Region snapshot by multi-thread to reduce memory consumption
-    - Support CN check on https_port and metrics_port
+    - Add `dt_segment_force_merge_delta_rows` and `dt_segment_force_merge_delta_deletes` to adjust the threshold of `write stall`
+    - Support setting `raftstore.snap-handle-pool-size` to `0` in TiFlash-Proxy to disable applying Region snapshot by multi-thread to reduce memory consumption during data replication
+    - Support CN check on `https_port` and `metrics_port`
 
 + Tools
 
@@ -78,19 +79,19 @@ TiDB version: 4.0.6
 
     + Dumpling
         - Support output `INSERT` with column names [#135](https://github.com/pingcap/dumpling/pull/135)
-        - Unify `--filesize` and `--statement-size` definition with mydumper's [#142](https://github.com/pingcap/dumpling/pull/142)
+        - Unify the `--filesize` and `--statement-size` definitions with those of mydumper [#142](https://github.com/pingcap/dumpling/pull/142)
 
     + TiDB Lightning
-        - Split and ingest region size more precise [#369](https://github.com/pingcap/tidb-lightning/pull/369)
+        - Split and ingest region in more precise sizes [#369](https://github.com/pingcap/tidb-lightning/pull/369)
 
     + TiDB Binlog
-        - Support go time package format gc time [#996](https://github.com/pingcap/tidb-binlog/pull/996)
+        - Support setting GC time in `go time` package format [#996](https://github.com/pingcap/tidb-binlog/pull/996)
 
 ## Bug Fixes
 
 + TiDB
 
-    - Fix an issue of tikv_cop_wait time in metric profile [#19881](https://github.com/pingcap/tidb/pull/19881)
+    - Fix an issue of `tikv_cop_wait` time in metric profile [#19881](https://github.com/pingcap/tidb/pull/19881)
     - Fix the wrong result of `SHOW GRANTS` [#19834](https://github.com/pingcap/tidb/pull/19834)
     - Fix the incorrect query result for `!= ALL (subq)` [#19831](https://github.com/pingcap/tidb/pull/19831)
     - Fix a bug of converting enum and set [#19778](https://github.com/pingcap/tidb/pull/19778)
