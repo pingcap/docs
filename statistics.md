@@ -130,7 +130,7 @@ When the query is executed, TiDB collects feedback with the probability of `feed
 
 > **Note:**
 >
-> If you set `feedback-probability` to `0` in the configuration file, it causes a failure and reports an error. You need to set the value to `0.0` to disable `feedback-probability`.
+> If you set the value of `feedback-probability` to `0` in the configuration file, it causes a failure and reports an error. You need to set the value to `0.0` to disable `feedback-probability`.
 
 ### Control `ANALYZE` concurrency
 
