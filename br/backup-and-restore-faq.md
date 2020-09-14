@@ -58,6 +58,10 @@ However, if you want to restore data from local storage, the number of replicas 
 
 + **The data restored using BR cannot be replicated to the downstream**. This is because BR directly imports SST files but the downstream cluster currently cannot obtain these files from the upstream.
 
+<<<<<<< HEAD
 + Therefore, if you need to perform restore on the upstream cluster of TiCDC/Drainer, add all tables restored using BR to the Drainer block list.
+=======
++ Before v4.0.3, DDL jobs generated during the BR restore might cause unexpected DDL executions in TiCDC/Drainer. Therefore, if you need to perform restore on the upstream cluster of TiCDC/Drainer, add all tables restored using BR to the TiCDC/Drainer block list.
+>>>>>>> be6b3e4... br: correct description (#3884)
 
 You can use [`syncer.ignore-table`](/tidb-binlog/tidb-binlog-configuration-file.md#ignore-table) to configure the block list for Drainer.
