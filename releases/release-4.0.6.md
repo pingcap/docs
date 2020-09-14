@@ -61,8 +61,11 @@ TiDB version: 4.0.6
 
 + TiFlash
 
-    - Add some metrics about apply Region snapshots and ingest SST files [#1088](https://github.com/pingcap/tics/pull/1088)
-    - Fix the problem that CN check doesn't work on https_port and metrics_port [#1064](https://github.com/pingcap/tics/pull/1064)
+    - Add Grafana panels about applying Region snapshots and ingest SST files
+    - Add Grafana panels about write stall
+    - Add `dt_segment_force_merge_delta_rows` and `dt_segment_force_merge_delta_deletes` to adjust the threshold of write stall
+    - Support setting `raftstore.snap-handle-pool-size` to `0` in TiFlash-Proxy to disable applying Region snapshot by multi-thread to reduce memory consumption
+    - Support CN check on https_port and metrics_port
 
 + Tools
 
@@ -154,10 +157,13 @@ TiDB version: 4.0.6
 
 + TiFlash
 
-    - Fix the issue that TiFlash throw exceptions after modifying column nullable attribute [#1081](https://github.com/pingcap/tics/pull/1081)
-    - Fix the issue that after renaming the primary key column in previous versions, TiFlash may not start after upgrading to v4.0.4/v4.0.5 [#1072](https://github.com/pingcap/tics/pull/1072)
-    - Fix wrong result of FROM_UNIXTIME when input is NULL [#1047](https://github.com/pingcap/tics/pull/1047)
-    - Fix the issue that TiFlash is not available after users applied unsupported column data type modifications [#1009](https://github.com/pingcap/tics/pull/1009)
+    - Fix the issue that after renaming the primary key column in previous versions, TiFlash may not start after upgrading to v4.0.4/v4.0.5
+    - Fix the exceptions that occur after modifying the column nullable attribute
+    - Fix the issue that TiFlash is not available after users applied unsupported column data type modifications
+    - Fix the exceptions that caused by unsupported collation, treated those collation as `utf8mb4_bin`
+    - Fix the crash caused by computing table sync status
+    - Fix the issue that TiFlash coprocessor executor QPS is always 0 in Grafana
+    - Fix the wrong result of `FROM_UNIXTIME` when input is `NULL`
 
 + Tools
 
