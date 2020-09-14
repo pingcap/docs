@@ -95,7 +95,7 @@ In TiDB, all supported DDL changes are performed online. Compared with DDL opera
 * Change/Modify data type does not currently support "lossy changes", such as changing from BIGINT to INT.
 * Change/Modify decimal columns does not support changing the precision.
 * Change/Modify integer columns does not permit changing the `UNSIGNED` attribute.
-* The syntax `ALGORITHM={INSTANT,INPLACE,COPY}` functions only as an assertion in TiDB, and does not modify the alter algorithm. See [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md) for further details.
+* The `ALGORITHM={INSTANT,INPLACE,COPY}` syntax functions only as an assertion in TiDB, and does not modify the `ALTER` algorithm. See [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md) for further details.
 * Table Partitioning supports Hash, Range, and `Add`/`Drop`/`Truncate`/`Coalesce`. The other partition operations are ignored. The `Warning: Unsupported partition type, treat as normal table` error might be output. The following Table Partition syntaxes are not supported:
     - `PARTITION BY LIST`
     - `PARTITION BY KEY`
