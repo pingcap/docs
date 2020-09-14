@@ -10,12 +10,6 @@ TiDB version: 4.0.6
 
 ## New Features
 
-+ TiKV
-
-    - Support to generate metafile of error codes [#8619](https://github.com/tikv/tikv/pull/8619)
-    - Add perf statistics for cf scan detail [#8618](https://github.com/tikv/tikv/pull/8618)
-    - Add perf context panel for grafana template [#8467](https://github.com/tikv/tikv/pull/8467)
-
 + TiFlash
 
     - Support outer join in TiFlash broadcast join [#988](https://github.com/pingcap/tics/pull/988)
@@ -47,6 +41,9 @@ TiDB version: 4.0.6
 + TiKV
 
     - Optimize QPS drop when doing UnsafeDestroyRange [#8627](https://github.com/tikv/tikv/pull/8627)
+    - Support to generate metafile of error codes [#8619](https://github.com/tikv/tikv/pull/8619)
+    - Add perf statistics for cf scan detail [#8618](https://github.com/tikv/tikv/pull/8618)
+    - Add perf context panel for grafana template [#8467](https://github.com/tikv/tikv/pull/8467)
 
 + PD
 
