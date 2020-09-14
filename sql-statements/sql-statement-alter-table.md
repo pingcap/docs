@@ -129,7 +129,7 @@ Query OK, 0 rows affected, 1 warning (0.25 sec)
 
 ## MySQL compatibility
 
-The following major restrictions apply to `ALTER TABLE`:
+The following major restrictions apply to `ALTER TABLE` in TiDB:
 
 * Multiple operations cannot be completed in a single `ALTER TABLE` statement.
 
