@@ -37,7 +37,14 @@ TiDB version: 4.0.6
     - Forbidden creating table in metrics_schema and performance_schema [#19792](https://github.com/pingcap/tidb/pull/19792)
     - Support adjust the concurrency on union executor [#19886](https://github.com/pingcap/tidb/pull/19886)
     - Support out join in broadcast join [#19664](https://github.com/pingcap/tidb/pull/19664)
-
+    - Add sql digest for process list [#19829](https://github.com/pingcap/tidb/pull/19829)
+    - Switch to pessimistic txn mode for autocommit statement retry [#19796](https://github.com/pingcap/tidb/pull/19796)
+    - Support `%r`, `%T` data format in `Str_to_date()` [#19693](https://github.com/pingcap/tidb/pull/19693)
+    - Make `SELECT INTO OUTFILE` require the file privilege [#19577](https://github.com/pingcap/tidb/pull/19577)
+    - Support stddev_pop function [#19541](https://github.com/pingcap/tidb/pull/19541)
+    - Add `TiDB-Runtime` dashboard [#19396](https://github.com/pingcap/tidb/pull/19396)
+    - Improve compatibility for ALTER TABLE algorithms [#19364](https://github.com/pingcap/tidb/pull/19364)
+    - Encode insert/delete/update plan in slow log plan field [#19269](https://github.com/pingcap/tidb/pull/19269)
 + TiKV
 
     - Optimize QPS drop when doing UnsafeDestroyRange [#8627](https://github.com/tikv/tikv/pull/8627)
@@ -122,7 +129,12 @@ TiDB version: 4.0.6
     - Fix a bug that schema charset modification in an uppercase schema will cause panic [#19302](https://github.com/pingcap/tidb/pull/19302)
     - Fix a inconsistence of plan between `information_schema.statements_summary` and `explain`, which contains tikv/tiflash info [#19159](https://github.com/pingcap/tidb/pull/19159)
     - Fix the file exists errors in tests for `select into outfile` [#19725](https://github.com/pingcap/tidb/pull/19725)
-
+    - Fix `INFORMATION_SCHEMA.CLUSTER_HARDWARE` does not have raid devices information [#19457](https://github.com/pingcap/tidb/pull/19457)
+    - Make add index can exit on generated column with `case-when` expression parse error [#19395](https://github.com/pingcap/tidb/pull/19395)
+    - Make DDL avoid taking too long in retry [#19488](https://github.com/pingcap/tidb/pull/19488)
+    - Make statements like `alter table db.t1 add constraint fk foreign key (c2) references t2(c1)` execute without first executing `use db` [#19471]
+    - Make dispatch errors be changed from an Error to an Info message in the server log file [#19454](https://github.com/pingcap/tidb/pull/19454)
+    
 + TiKV
 
     - Fix the estimation error for a non-index column with collation enabled. [#8620](https://github.com/tikv/tikv/pull/8620)
