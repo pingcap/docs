@@ -148,28 +148,28 @@ TiDB version: 4.0.6
 + TiKV
 
     - Fix the estimation error for a non-index column when collation is enabled [#8620](https://github.com/tikv/tikv/pull/8620)
-    - Fix the issue that green GC might miss locks during Region transfer [#8460](https://github.com/tikv/tikv/pull/8460)
+    - Fix the issue that Green GC might miss locks during the process of Region transfer [#8460](https://github.com/tikv/tikv/pull/8460)
     - Fix the CDC incorrect resolved TS timeout [#8573](https://github.com/tikv/tikv/pull/8573)
-    - Fix a panic issue if a TiKV runs very slow during conf change [#8497](https://github.com/tikv/tikv/pull/8497)
-    - Fix the deadlock issue between the PD client thread and other threads calling PD sync requests [#8612](https://github.com/tikv/tikv/pull/8612)
-    - Update jemalloc to 5.2.1 to address memory allocation problem in huge page [#8463](https://github.com/tikv/tikv/pull/8463)
-    - Fix unified thread pool hang for long running query. [#8427](https://github.com/tikv/tikv/pull/8427)
+    - Fix a panic issue that occurs when TiKV runs very slowly during configuration change [#8497](https://github.com/tikv/tikv/pull/8497)
+    - Fix the deadlock issue that occurs between the PD client thread and other threads when calling PD sync requests [#8612](https://github.com/tikv/tikv/pull/8612)
+    - Upgrade jemalloc to v5.2.1 to address the issue of memory allocation in huge page [#8463](https://github.com/tikv/tikv/pull/8463)
+    - Fix the issue that the unified thread pool hangs for long-running queries [#8427](https://github.com/tikv/tikv/pull/8427)
 
 + PD
 
-    - Add the `initial-cluster-token` configuration to prevent different clusters from communicating to each other during bootstrap [#2922](https://github.com/pingcap/pd/pull/2922)
+    - Add the `initial-cluster-token` configuration to prevent different clusters from communicating with each other during bootstrap [#2922](https://github.com/pingcap/pd/pull/2922)
     - Fix the unit of store limit rate when the mode is `auto` [#2826](https://github.com/pingcap/pd/pull/2826)
-    - Fix the issue that some scheduler persist config without solving error [#2818](https://github.com/tikv/pd/pull/2818)
-    - Fix empty http response in scheduler [#2871](https://github.com/tikv/pd/pull/2871) [#2874](https://github.com/tikv/pd/pull/2874)
+    - Fix the issue that some schedulers persist configuration without solving errors [#2818](https://github.com/tikv/pd/pull/2818)
+    - Fix the empty HTTP response in scheduler [#2871](https://github.com/tikv/pd/pull/2871) [#2874](https://github.com/tikv/pd/pull/2874)
 
 + TiFlash
 
     - Fix the issue that after renaming the primary key column in previous versions, TiFlash might not start after upgrading to v4.0.4/v4.0.5
     - Fix the exceptions that occur after modifying the column's `nullable` attribute
-    - Fix the crash caused by computing table sync status
-    - Fix the issue that TiFlash is not available after users applied unsupported column data type modifications
-    - Fix the exceptions caused by unsupported collations, treated those collation as `utf8mb4_bin`
-    - Fix the issue that TiFlash coprocessor executor QPS is always 0 in Grafana
+    - Fix the crash caused by computing a table's replication status
+    - Fix the issue that TiFlash is not available for data reads after users applied unsupported DDL operations
+    - Fix the exceptions caused by unsupported collations which are treated as `utf8mb4_bin`
+    - Fix the issue that the QPS panel for the TiFlash coprocessor executor always displays `0` in Grafana
     - Fix the wrong result of the `FROM_UNIXTIME` function when input is `NULL`
 
 + Tools
@@ -177,20 +177,20 @@ TiDB version: 4.0.6
     + TiCDC
 
         - Fix the issue that TiCDC leaks memory in some cases [#942](https://github.com/pingcap/ticdc/pull/942)
-        - Fix the issue that TiCDC may panic in Kafka sink [#912](https://github.com/pingcap/ticdc/pull/912)
+        - Fix the issue that TiCDC might panic in Kafka sink [#912](https://github.com/pingcap/ticdc/pull/912)
         - Fix the issue that CRTs may less than resolved ts in puller [#927](https://github.com/pingcap/ticdc/pull/927)
-        - Fix the issue that change feed may be blocked by MySQL driver [#936](https://github.com/pingcap/ticdc/pull/936)
+        - Fix the issue that `changefeed` might be blocked by MySQL driver [#936](https://github.com/pingcap/ticdc/pull/936)
 
     + Backup & Restore (BR)
 
-        - Fix a panic that occurs during checksum [#479](https://github.com/pingcap/br/pull/479)
-        - Fix a panic that occurs after PD changes leader [#496](https://github.com/pingcap/br/pull/496)
+        - Fix a panic that might occur during checksum [#479](https://github.com/pingcap/br/pull/479)
+        - Fix a panic that might occur after the change of PD leader [#496](https://github.com/pingcap/br/pull/496)
 
     + Dumpling
 
-        - Fix the issue that the `NULL` value for binary type is not handled properly [#137](https://github.com/pingcap/dumpling/pull/137)
+        - Fix the issue that the `NULL` value for the binary type is not handled properly [#137](https://github.com/pingcap/dumpling/pull/137)
 
     + TiDB Lightning
 
-        - Fix the issue that write and ingest all retry failed will just treat it as success [#381](https://github.com/pingcap/tidb-lightning/pull/381)
-        - Fix the issue that some checkpoint updates may not be written to db before exit [#386](https://github.com/pingcap/tidb-lightning/pull/386)
+        - Fix the issue that all failed operations of writes and ingests are mistakenly displayed as successful [#381](https://github.com/pingcap/tidb-lightning/pull/381)
+        - Fix the issue that some checkpoint updates might not be written to the database before TiDB Lightning exits [#386](https://github.com/pingcap/tidb-lightning/pull/386)
