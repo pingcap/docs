@@ -34,7 +34,7 @@ TiDB version: 4.0.6
 
     - Replace error codes and messages with standard errors [#19888](https://github.com/pingcap/tidb/pull/19888)
     - Improve the write performance of partitioned table [#19649](https://github.com/pingcap/tidb/pull/19649)
-    - Record more RPC runtime information in Cop Runtime statistics [#19264](https://github.com/pingcap/tidb/pull/19264)
+    - Record more RPC runtime information in `Cop Runtime` statistics [#19264](https://github.com/pingcap/tidb/pull/19264)
     - Forbid creating tables in `metrics_schema` and `performance_schema` [#19792](https://github.com/pingcap/tidb/pull/19792)
     - Support adjusting the concurrency of the union executor [#19886](https://github.com/pingcap/tidb/pull/19886)
     - Support out join in broadcast join [#19664](https://github.com/pingcap/tidb/pull/19664)
@@ -51,7 +51,7 @@ TiDB version: 4.0.6
 
     - Reduce QPS drop when `DropTable` or `TruncateTable` is being executed [#8627](https://github.com/tikv/tikv/pull/8627)
     - Support generating metafile of error codes [#8619](https://github.com/tikv/tikv/pull/8619)
-    - Add performance statistics for cf scan detail [#8618](https://github.com/tikv/tikv/pull/8618)
+    - Add performance statistics for cf scan details [#8618](https://github.com/tikv/tikv/pull/8618)
     - Add the `rocksdb perf context` panel in the Grafana default template [#8467](https://github.com/tikv/tikv/pull/8467)
 
 + PD
@@ -66,7 +66,7 @@ TiDB version: 4.0.6
 + TiFlash
 
     - Add Grafana panels for data replication (`apply Region snapshots` and `ingest SST files`)
-    - Add Grafana panels for write stall
+    - Add Grafana panels for `write stall`
     - Add `dt_segment_force_merge_delta_rows` and `dt_segment_force_merge_delta_deletes` to adjust the threshold of `write stall`
     - Support setting `raftstore.snap-handle-pool-size` to `0` in TiFlash-Proxy to disable applying Region snapshot by multi-thread to reduce memory consumption during data replication
     - Support CN check on `https_port` and `metrics_port`
@@ -89,7 +89,7 @@ TiDB version: 4.0.6
 
     + TiDB Lightning
 
-        - Split and ingest Region in more precise sizes [#369](https://github.com/pingcap/tidb-lightning/pull/369)
+        - Split and ingest Regions in more precise sizes [#369](https://github.com/pingcap/tidb-lightning/pull/369)
 
     + TiDB Binlog
 
@@ -99,7 +99,7 @@ TiDB version: 4.0.6
 
 + TiDB
 
-    - Fix an issue of `tikv_cop_wait` time in metric profile [#19881](https://github.com/pingcap/tidb/pull/19881)
+    - Fix an issue of collecting the `tikv_cop_wait` time in metric profile [#19881](https://github.com/pingcap/tidb/pull/19881)
     - Fix the wrong result of `SHOW GRANTS` [#19834](https://github.com/pingcap/tidb/pull/19834)
     - Fix the incorrect query result of `!= ALL (subq)` [#19831](https://github.com/pingcap/tidb/pull/19831)
     - Fix a bug of converting the `enum` and `set` types [#19778](https://github.com/pingcap/tidb/pull/19778)
@@ -118,19 +118,19 @@ TiDB version: 4.0.6
     - Fix a bug that the `SHOW GRANTS` statement shows grants for non-existent users [#19588](https://github.com/pingcap/tidb/pull/19588)
     - Fix a query error when there is an `Apply` executor upon `IndexLookupJoin` [#19566](https://github.com/pingcap/tidb/pull/19566)
     - Fix the wrong results when converting `Apply` to `HashJoin` on a partitioned table [#19546](https://github.com/pingcap/tidb/pull/19546)
-    - Fix incorrect results when there is an `IndexLookUp` executor under the inner side of an `Apply` [#19508](https://github.com/pingcap/tidb/pull/19508)
+    - Fix incorrect results when there is an `IndexLookUp` executor on the inner side of an `Apply` [#19508](https://github.com/pingcap/tidb/pull/19508)
     - Fix an unexpected panic when using view [#19491](https://github.com/pingcap/tidb/pull/19491)
-    - Fix an incorrect result of `anti-semi-join` query [#19477](https://github.com/pingcap/tidb/pull/19477)
-    - Fix a bug that topN statistics is not deleted when the statistics is dropped [#19465](https://github.com/pingcap/tidb/pull/19465)
+    - Fix an incorrect result of the `anti-semi-join` query [#19477](https://github.com/pingcap/tidb/pull/19477)
+    - Fix a bug that the `TopN` statistics is not deleted when the statistics is dropped [#19465](https://github.com/pingcap/tidb/pull/19465)
     - Fix a wrong result caused by mistaken usage of batch point get [#19460](https://github.com/pingcap/tidb/pull/19460)
     - Fix a bug that a column cannot be found in `indexLookupJoin` with a virtual generated column [#19439](https://github.com/pingcap/tidb/pull/19439)
     - Fix an error that different plans of the `select` and `update` queries compare datum [#19403](https://github.com/pingcap/tidb/pull/19403)
-    - Fix a data race for TiFlash work index in region cache [#19362](https://github.com/pingcap/tidb/pull/19362)
+    - Fix a data race for TiFlash work index in Region cache [#19362](https://github.com/pingcap/tidb/pull/19362)
     - Fix a bug that the `logarithm` function does not show a warning [#19291](https://github.com/pingcap/tidb/pull/19291)
-    - Fix an unexpected error that occurs when TiDB persists data to disk [#19272](https://github.com/pingcap/tidb/pull/19272)
+    - Fix an unexpected error that occurs when TiDB persists data to disks [#19272](https://github.com/pingcap/tidb/pull/19272)
     - Support using a single partitioned table on the inner side of index join [#19197](https://github.com/pingcap/tidb/pull/19197)
     - Fix the wrong hash key value generated for decimal [#19188](https://github.com/pingcap/tidb/pull/19188)
-    - Fix an issue that TiDB returns an `no regions` error when table endKey and region endKey are the same [#19895](https://github.com/pingcap/tidb/pull/19895)
+    - Fix an issue that TiDB returns a `no regions` error when table endKey and region endKey are the same [#19895](https://github.com/pingcap/tidb/pull/19895)
     - Fix the unexpected success of alter partition [#19891](https://github.com/pingcap/tidb/pull/19891)
     - Fix the wrong value of the default maximum packet length allowed for pushed down expressions [#19876](https://github.com/pingcap/tidb/pull/19876)
     - Fix a wrong behavior for the `Max`/`Min` functions on the `ENUM`/`SET` columns [#19869](https://github.com/pingcap/tidb/pull/19869)
@@ -145,7 +145,7 @@ TiDB version: 4.0.6
     - Make the `add index` operation that has a generated column with the `case-when` expression can exit normally when it encounters a parse error [#19395](https://github.com/pingcap/tidb/pull/19395)
     - Fix a bug that DDL takes too long to retry [#19488](https://github.com/pingcap/tidb/pull/19488)
     - Make statements like `alter table db.t1 add constraint fk foreign key (c2) references t2(c1)` execute without first executing `use db` [#19471](https://github.com/pingcap/tidb/pull/19471)
-    - Change the dispatch error from an Error to an Info message in the server log file [#19454](https://github.com/pingcap/tidb/pull/19454)
+    - Change the dispatch error from an `Error` to an `Info` message in the server log file [#19454](https://github.com/pingcap/tidb/pull/19454)
 
 + TiKV
 
@@ -183,10 +183,10 @@ TiDB version: 4.0.6
         - Fix the issue that `changefeed` might be blocked by MySQL driver [#936](https://github.com/pingcap/ticdc/pull/936)
         - Fix the incorrect Resolved Ts interval of TiCDC [#8573](https://github.com/tikv/tikv/pull/8573)
 
-    + Backup & Restore (BR)
+    + BR
 
         - Fix a panic that might occur during checksum [#479](https://github.com/pingcap/br/pull/479)
-        - Fix a panic that might occur after the change of PD leader [#496](https://github.com/pingcap/br/pull/496)
+        - Fix a panic that might occur after the change of PD Leader [#496](https://github.com/pingcap/br/pull/496)
 
     + Dumpling
 
