@@ -33,7 +33,7 @@ TiDB version: 4.0.6
 
     - Replace error codes and messages with standard errors [#19888](https://github.com/pingcap/tidb/pull/19888)
     - Improve the write performance of partitioned table [#19649](https://github.com/pingcap/tidb/pull/19649)
-    - Record more RPC runtime information in cop runtime stats [#19264](https://github.com/pingcap/tidb/pull/19264)
+    - Record more RPC runtime information in Cop Runtime statistics [#19264](https://github.com/pingcap/tidb/pull/19264)
     - Forbid creating tables in `metrics_schema` and `performance_schema` [#19792](https://github.com/pingcap/tidb/pull/19792)
     - Support adjusting the concurrency of the union executor [#19886](https://github.com/pingcap/tidb/pull/19886)
     - Support out join in broadcast join [#19664](https://github.com/pingcap/tidb/pull/19664)
