@@ -52,7 +52,7 @@ TiDB version: 4.0.6
     - Reduce QPS drop when doing `UnsafeDestroyRange` [#8627](https://github.com/tikv/tikv/pull/8627)
     - Support generating metafile of error codes [#8619](https://github.com/tikv/tikv/pull/8619)
     - Add performance statistics for cf scan detail [#8618](https://github.com/tikv/tikv/pull/8618)
-    - Add the `perf context` panel in the Grafana template [#8467](https://github.com/tikv/tikv/pull/8467)
+    - Add the `rocksdb perf context` panel in the Grafana default template [#8467](https://github.com/tikv/tikv/pull/8467)
 
 + PD
 
@@ -63,8 +63,8 @@ TiDB version: 4.0.6
 
 + TiFlash
 
-    - Add Grafana panels about data replication (`apply Region snapshots` and `ingest SST files`)
-    - Add Grafana panels about write stall
+    - Add Grafana panels for data replication (`apply Region snapshots` and `ingest SST files`)
+    - Add Grafana panels for write stall
     - Add `dt_segment_force_merge_delta_rows` and `dt_segment_force_merge_delta_deletes` to adjust the threshold of `write stall`
     - Support setting `raftstore.snap-handle-pool-size` to `0` in TiFlash-Proxy to disable applying Region snapshot by multi-thread to reduce memory consumption during data replication
     - Support CN check on `https_port` and `metrics_port`
@@ -101,19 +101,19 @@ TiDB version: 4.0.6
     - Fix the wrong result of `SHOW GRANTS` [#19834](https://github.com/pingcap/tidb/pull/19834)
     - Fix the incorrect query result of `!= ALL (subq)` [#19831](https://github.com/pingcap/tidb/pull/19831)
     - Fix a bug of converting the `enum` and `set` types [#19778](https://github.com/pingcap/tidb/pull/19778)
-    - Add a privilege check for `SHOW STATS_META`, `SHOW STATS_BUCKET` [#19760](https://github.com/pingcap/tidb/pull/19760)
+    - Add a privilege check for `SHOW STATS_META` and `SHOW STATS_BUCKET` [#19760](https://github.com/pingcap/tidb/pull/19760)
     - Fix the error of unmatched column lengths caused by `builtinGreatestStringSig` and `builtinLeastStringSig` [#19758](https://github.com/pingcap/tidb/pull/19758)
     - Fallback vectorized control expressions [#19749](https://github.com/pingcap/tidb/pull/19749)
     - Fix an error of the `Apply` executor when the type of the correlation column is `Bit` [#19692](https://github.com/pingcap/tidb/pull/19692)
-    - Fix an issue that occurs when the user queries processlist and `cluster_log` in MySQL 8.0 client [#19690](https://github.com/pingcap/tidb/pull/19690)
+    - Fix an issue that occurs when the user queries `processlist` and `cluster_log` in MySQL 8.0 client [#19690](https://github.com/pingcap/tidb/pull/19690)
     - Fix an issue that plans of the same type have different plan digests [#19684](https://github.com/pingcap/tidb/pull/19684)
     - Forbid changing the column type from `Decimal` to `Int` [#19682](https://github.com/pingcap/tidb/pull/19682)
     - Fix an issue that `SELECT ... INTO OUTFILE` returns the runtime error [#19672](https://github.com/pingcap/tidb/pull/19672)
     - Fix an incorrect implementation of `builtinRealIsFalseSig` [#19670](https://github.com/pingcap/tidb/pull/19670)
     - Fix an issue that the partition expression check misses the parentheses expression [#19614](https://github.com/pingcap/tidb/pull/19614)
     - Fix a query error when there is an `Apply` executor upon `HashJoin` [#19611](https://github.com/pingcap/tidb/pull/19611)
-    - Fix an incorrect result of vectorized casting `Real` as `Time` [#19594](https://github.com/pingcap/tidb/pull/19594)
-    - Fix a bug that `SHOW GRANTS` shows grants for non-existent users [#19588](https://github.com/pingcap/tidb/pull/19588)
+    - Fix an incorrect result of vectorization that casts `Real` as `Time` [#19594](https://github.com/pingcap/tidb/pull/19594)
+    - Fix a bug that the `SHOW GRANTS` statement shows grants for non-existent users [#19588](https://github.com/pingcap/tidb/pull/19588)
     - Fix a query error when there is an `Apply` executor upon `IndexLookupJoin` [#19566](https://github.com/pingcap/tidb/pull/19566)
     - Fix the wrong results when converting `Apply` to `HashJoin` on partitioned table [#19546](https://github.com/pingcap/tidb/pull/19546)
     - Fix incorrect results when there is an `IndexLookUp` executor under the inner side of an `Apply` [#19508](https://github.com/pingcap/tidb/pull/19508)
