@@ -5,9 +5,7 @@ summary: Learn how to configure Titan.
 
 # Titan Configuration
 
-Titan is a RocksDB-based plugin for key-value separation. The goal of Titan is to reduce write amplification in RocksDB and make the background compactions consume less I/O bandwidth and CPU resources when using large values. For more details of Titan, see [Titan Overview](/storage-engine/titan-overview.md).
-
-This document introduces how to enable and disable Titan using the corresponding configuration items, as well as the relevant parameters and the Level Merge feature.
+This document introduces how to enable and disable [Titan](/storage-engine/titan-overview.md) using the corresponding configuration items, as well as the relevant parameters and the Level Merge feature.
 
 ## Enable Titan
 

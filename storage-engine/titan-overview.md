@@ -11,7 +11,7 @@ When the value size in Key-Value pairs is large, Titan performs better than Rock
 
 ## Key features
 
-- Reduce write amplification by separating values from the log-structured merge-tree (LSM tree) and storing them independently.
+- Reduce write amplification by separating values from the log-structured merge-tree (LSM-tree) and storing them independently.
 - Seamlessly upgrade RocksDB instances to Titan. The upgrade does not require human intervention and does not impact online services.
 - Achieve 100% compatibility with all RocksDB features used by the current TiKV.
 
@@ -39,11 +39,11 @@ The following figure shows the architecture of Titan:
 
 ![Titan Architecture](/media/titan/titan-1.png)
 
-During flush and compaction operations, Titan separates values from the LSM tree. The advantage of this approach is that the write process is consistent with RocksDB, which reduces the chance of invasive changes to RocksDB.
+During flush and compaction operations, Titan separates values from the LSM-tree. The advantage of this approach is that the write process is consistent with RocksDB, which reduces the chance of invasive changes to RocksDB.
 
 ### BlobFile
 
-When Titan separates the value file from the LSM tree, it stores the value file in the BlobFile. The following figure shows the BlobFile format:
+When Titan separates the value file from the LSM-tree, it stores the value file in the BlobFile. The following figure shows the BlobFile format:
 
 ![BlobFile Format](/media/titan/titan-2.png)
 
