@@ -49,7 +49,7 @@ TiDB version: 4.0.6
 
 + TiKV
 
-    - Reduce QPS drop when doing `UnsafeDestroyRange` [#8627](https://github.com/tikv/tikv/pull/8627)
+    - Reduce QPS drop when `DropTable` or `TruncateTable` is being executed [#8627](https://github.com/tikv/tikv/pull/8627)
     - Support generating metafile of error codes [#8619](https://github.com/tikv/tikv/pull/8619)
     - Add performance statistics for cf scan detail [#8618](https://github.com/tikv/tikv/pull/8618)
     - Add the `rocksdb perf context` panel in the Grafana default template [#8467](https://github.com/tikv/tikv/pull/8467)
@@ -178,8 +178,9 @@ TiDB version: 4.0.6
 
         - Fix the issue that TiCDC leaks memory in some cases [#942](https://github.com/pingcap/ticdc/pull/942)
         - Fix the issue that TiCDC might panic in Kafka sink [#912](https://github.com/pingcap/ticdc/pull/912)
-        - Fix the issue that CRTs may less than resolved ts in puller [#927](https://github.com/pingcap/ticdc/pull/927)
+        - Fix the issue that CommitTs or ResolvedTs (CRTs) might be less than `resolvedTs` in puller [#927](https://github.com/pingcap/ticdc/pull/927)
         - Fix the issue that `changefeed` might be blocked by MySQL driver [#936](https://github.com/pingcap/ticdc/pull/936)
+        - Fix the incorrect Resolved Ts interval of TiCDC [#8573](https://github.com/tikv/tikv/pull/8573)
 
     + Backup & Restore (BR)
 
