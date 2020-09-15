@@ -290,12 +290,12 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Scope: SESSION | GLOBAL
 - Default value: 1
 - This variable is used to control whether to enable the Clustered Index feature.
-    - This feature is only applicable to newly created tables and will not affect old tables that have been created.
+    - This feature is only applicable to newly created tables and has no effect on old tables that have been created.
     - This feature is only applicable to tables of single column non-integer primary key and multi-column primary key. It does not affect tables without primary keys and tables with single column integer primary keys.
     - You can execute `select tidb_pk_type from information_schema.tables where table_name ='{table_name}'` to check whether a table uses the Clustered Index feature.
-- After you enable the feature, rows are stored directly on the primary key instead of the rows_ID allocated within the system, and use the extra created primary key index to point to row_id.
+- After you enable this feature, rows are stored directly on the primary key instead of the rows_id allocated within the system, and use the extra created primary key index to point to row_id.
 
-    The impact of this variable on performance is mainly reflected in the following aspects:
+    The impact of this feature on performance is mainly reflected in the following aspects:
     - When inserting this variable, each row reduces the write of one index key.
     - When using the primary key as the equivalent condition query, you can save one read request.
     - When using a single-column primary key as a range condition query, you can save multiple read requests.
