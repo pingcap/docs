@@ -25,6 +25,7 @@ TiDB version: 4.0.6
 + Tools
 
     + TiCDC
+
         - Support outputting data in the `maxwell` format [#869](https://github.com/pingcap/ticdc/pull/869)
 
 ## Improvements
@@ -71,20 +72,25 @@ TiDB version: 4.0.6
 + Tools
 
     + TiCDC
+
         - Skip resolved lock during puller initialization [#910](https://github.com/pingcap/ticdc/pull/910)
         - Reduce PD write frequency [#937](https://github.com/pingcap/ticdc/pull/937)
 
     + Backup & Restore (BR)
+
         - Add real time cost in summary log [#486](https://github.com/pingcap/br/issues/486)
 
     + Dumpling
+
         - Support outputting `INSERT` with column names [#135](https://github.com/pingcap/dumpling/pull/135)
         - Unify the `--filesize` and `--statement-size` definitions with those of mydumper [#142](https://github.com/pingcap/dumpling/pull/142)
 
     + TiDB Lightning
+
         - Split and ingest Region in more precise sizes [#369](https://github.com/pingcap/tidb-lightning/pull/369)
 
     + TiDB Binlog
+
         - Support setting GC time in `go time` package format [#996](https://github.com/pingcap/tidb-binlog/pull/996)
 
 ## Bug Fixes
@@ -169,18 +175,22 @@ TiDB version: 4.0.6
 + Tools
 
     + TiCDC
+
         - Fix the issue that TiCDC leaks memory in some cases [#942](https://github.com/pingcap/ticdc/pull/942)
         - Fix the issue that TiCDC may panic in Kafka sink [#912](https://github.com/pingcap/ticdc/pull/912)
         - Fix the issue that CRTs may less than resolved ts in puller [#927](https://github.com/pingcap/ticdc/pull/927)
         - Fix the issue that change feed may be blocked by MySQL driver [#936](https://github.com/pingcap/ticdc/pull/936)
 
     + Backup & Restore (BR)
+
         - Fix a panic that occurs during checksum [#479](https://github.com/pingcap/br/pull/479)
         - Fix a panic that occurs after PD changes leader [#496](https://github.com/pingcap/br/pull/496)
 
     + Dumpling
+
         - Fix the issue that the `NULL` value for binary type is not handled properly [#137](https://github.com/pingcap/dumpling/pull/137)
 
     + TiDB Lightning
+
         - Fix the issue that write and ingest all retry failed will just treat it as success [#381](https://github.com/pingcap/tidb-lightning/pull/381)
         - Fix the issue that some checkpoint updates may not be written to db before exit [#386](https://github.com/pingcap/tidb-lightning/pull/386)
