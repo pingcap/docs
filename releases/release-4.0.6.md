@@ -149,7 +149,6 @@ TiDB version: 4.0.6
 
     - Fix the estimation error for a non-index column when collation is enabled [#8620](https://github.com/tikv/tikv/pull/8620)
     - Fix the issue that Green GC might miss locks during the process of Region transfer [#8460](https://github.com/tikv/tikv/pull/8460)
-    - Fix the CDC incorrect resolved TS timeout [#8573](https://github.com/tikv/tikv/pull/8573)
     - Fix a panic issue that occurs when TiKV runs very slowly during configuration change [#8497](https://github.com/tikv/tikv/pull/8497)
     - Fix the deadlock issue that occurs between the PD client thread and other threads when calling PD sync requests [#8612](https://github.com/tikv/tikv/pull/8612)
     - Upgrade jemalloc to v5.2.1 to address the issue of memory allocation in huge page [#8463](https://github.com/tikv/tikv/pull/8463)
