@@ -103,7 +103,7 @@ TiDB version: 4.0.6
     - Fix a bug of converting the `enum` and `set` types [#19778](https://github.com/pingcap/tidb/pull/19778)
     - Add a privilege check for `SHOW STATS_META` and `SHOW STATS_BUCKET` [#19760](https://github.com/pingcap/tidb/pull/19760)
     - Fix the error of unmatched column lengths caused by `builtinGreatestStringSig` and `builtinLeastStringSig` [#19758](https://github.com/pingcap/tidb/pull/19758)
-    - Fallback vectorized control expressions [#19749](https://github.com/pingcap/tidb/pull/19749)
+    - If unnecessary errors or warnings occur, the vectorized control expresions fall back to their scalar execution [#19749](https://github.com/pingcap/tidb/pull/19749)
     - Fix an error of the `Apply` executor when the type of the correlation column is `Bit` [#19692](https://github.com/pingcap/tidb/pull/19692)
     - Fix an issue that occurs when the user queries `processlist` and `cluster_log` in MySQL 8.0 client [#19690](https://github.com/pingcap/tidb/pull/19690)
     - Fix an issue that plans of the same type have different plan digests [#19684](https://github.com/pingcap/tidb/pull/19684)
@@ -149,7 +149,7 @@ TiDB version: 4.0.6
 
     - Fix the estimation error for a non-index column when collation is enabled [#8620](https://github.com/tikv/tikv/pull/8620)
     - Fix the issue that Green GC might miss locks during the process of Region transfer [#8460](https://github.com/tikv/tikv/pull/8460)
-    - Fix a panic issue that occurs when TiKV runs very slowly during configuration change [#8497](https://github.com/tikv/tikv/pull/8497)
+    - Fix a panic issue that occurs when TiKV runs very slowly during Raft membership change [#8497](https://github.com/tikv/tikv/pull/8497)
     - Fix the deadlock issue that occurs between the PD client thread and other threads when calling PD sync requests [#8612](https://github.com/tikv/tikv/pull/8612)
     - Upgrade jemalloc to v5.2.1 to address the issue of memory allocation in huge page [#8463](https://github.com/tikv/tikv/pull/8463)
     - Fix the issue that the unified thread pool hangs for long-running queries [#8427](https://github.com/tikv/tikv/pull/8427)
