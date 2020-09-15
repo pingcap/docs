@@ -27,7 +27,7 @@ Titan is compatible with RocksDB, that is, you can directly enable Titan on the 
     {{< copyable "shell-regular" >}}
 
     ```shell
-    `tiup cluster reload ${cluster-name} -R tikv`
+    tiup cluster reload ${cluster-name} -R tikv
     ```
 
     For the detailed command, see [Modify the configuration using TiUP](/maintain-tidb-using-tiup.md#modify-the-configuration).
