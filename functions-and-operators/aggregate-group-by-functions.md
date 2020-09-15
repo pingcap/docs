@@ -115,7 +115,6 @@ group by id, val;
 
 The following aggregate functions are currently unsupported in TiDB. You can track our progress in [TiDB #7623](https://github.com/pingcap/tidb/issues/7623):
 
-- `STD`, `STDDEV`, `STDDEV_POP`
 - `STDDEV_SAMP`
 - `VARIANCE`, `VAR_POP`
 - `VAR_SAMP`
