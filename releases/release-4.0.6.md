@@ -34,10 +34,10 @@ TiDB version: 4.0.6
     - Replace error codes and messages with standard errors [#19888](https://github.com/pingcap/tidb/pull/19888)
     - Improve the write performance of partitioned table [#19649](https://github.com/pingcap/tidb/pull/19649)
     - Record more RPC runtime information in cop runtime stats [#19264](https://github.com/pingcap/tidb/pull/19264)
-    - Forbidden creating tables in `metrics_schema` and `performance_schema` [#19792](https://github.com/pingcap/tidb/pull/19792)
+    - Forbid creating tables in `metrics_schema` and `performance_schema` [#19792](https://github.com/pingcap/tidb/pull/19792)
     - Support adjusting the concurrency of the union executor [#19886](https://github.com/pingcap/tidb/pull/19886)
     - Support out join in broadcast join [#19664](https://github.com/pingcap/tidb/pull/19664)
-    - Add sql digest for the process list [#19829](https://github.com/pingcap/tidb/pull/19829)
+    - Add SQL digest for the process list [#19829](https://github.com/pingcap/tidb/pull/19829)
     - Switch to the pessimistic transaction mode for autocommit statement retry [#19796](https://github.com/pingcap/tidb/pull/19796)
     - Support the `%r` and `%T` data format in `Str_to_date()` [#19693](https://github.com/pingcap/tidb/pull/19693)
     - Enable `SELECT INTO OUTFILE` to require the file privilege [#19577](https://github.com/pingcap/tidb/pull/19577)
@@ -56,7 +56,7 @@ TiDB version: 4.0.6
 + PD
 
     - Update TiDB Dashboard to v2020.09.08.1 [#2928](https://github.com/pingcap/pd/pull/2928)
-    - Add more metrics for region and store heartbeat [#2891](https://github.com/tikv/pd/pull/2891)
+    - Add more metrics for Region and store heartbeat [#2891](https://github.com/tikv/pd/pull/2891)
     - Change back to the original way to control the low space threshold [#2875](https://github.com/pingcap/pd/pull/2875)
     - Support standard error codes [#2918](https://github.com/tikv/pd/pull/2918) [#2911](https://github.com/tikv/pd/pull/2911) [#2913](https://github.com/tikv/pd/pull/2913) [#2915](https://github.com/tikv/pd/pull/2915) [#2912](https://github.com/tikv/pd/pull/2912) [#2907](https://github.com/tikv/pd/pull/2907) [#2906](https://github.com/tikv/pd/pull/2906) [#2903](https://github.com/tikv/pd/pull/2903) [#2806](https://github.com/tikv/pd/pull/2806) [#2900](https://github.com/tikv/pd/pull/2900) [#2902](https://github.com/tikv/pd/pull/2902)
 
@@ -78,11 +78,11 @@ TiDB version: 4.0.6
         - Add real time cost in summary log [#486](https://github.com/pingcap/br/issues/486)
 
     + Dumpling
-        - Support output `INSERT` with column names [#135](https://github.com/pingcap/dumpling/pull/135)
+        - Support outputting `INSERT` with column names [#135](https://github.com/pingcap/dumpling/pull/135)
         - Unify the `--filesize` and `--statement-size` definitions with those of mydumper [#142](https://github.com/pingcap/dumpling/pull/142)
 
     + TiDB Lightning
-        - Split and ingest region in more precise sizes [#369](https://github.com/pingcap/tidb-lightning/pull/369)
+        - Split and ingest Region in more precise sizes [#369](https://github.com/pingcap/tidb-lightning/pull/369)
 
     + TiDB Binlog
         - Support setting GC time in `go time` package format [#996](https://github.com/pingcap/tidb-binlog/pull/996)
@@ -120,7 +120,7 @@ TiDB version: 4.0.6
     - Fix a data race for TiFlash work index in region cache [#19362](https://github.com/pingcap/tidb/pull/19362)
     - Fix a bug that the `logarithm` function does not show a warning [#19291](https://github.com/pingcap/tidb/pull/19291)
     - Fix an unexpected error that occurs when TiDB persists data to disk [#19272](https://github.com/pingcap/tidb/pull/19272)
-    - Support using single partition table on the inner side of index join [#19197](https://github.com/pingcap/tidb/pull/19197)
+    - Support using single partitioned table on the inner side of index join [#19197](https://github.com/pingcap/tidb/pull/19197)
     - Fix the wrong hash key value generated for decimal [#19188](https://github.com/pingcap/tidb/pull/19188)
     - Fix an issue that TiDB returns an `no regions` error when table endKey and region endKey are the same [#19895](https://github.com/pingcap/tidb/pull/19895)
     - Fix the unexpected success of alter partition [#19891](https://github.com/pingcap/tidb/pull/19891)
@@ -174,7 +174,7 @@ TiDB version: 4.0.6
         - Fix the issue that CRTs may less than resolved ts in puller [#927](https://github.com/pingcap/ticdc/pull/927)
         - Fix the issue that change feed may be blocked by MySQL driver [#936](https://github.com/pingcap/ticdc/pull/936)
 
-    + BR
+    + Backup & Restore (BR)
         - Fix a panic that occurs during checksum [#479](https://github.com/pingcap/br/pull/479)
         - Fix a panic that occurs after PD changes leader [#496](https://github.com/pingcap/br/pull/496)
 
