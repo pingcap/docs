@@ -74,7 +74,7 @@ EXPLAIN SELECT * FROM trips WHERE bike_number = 'W00950';
 
 In the first statement above, you can see that the index is used to satisfy the view definition, and then the `bike_number = 'W00950'` is applied when TiDB reads the table row. In the second statement, there are no indexes to satisfy the statement, and a `TableFullScan` is used.
 
-TiDB will make use of indexes that satisfy both the view definition, and the statement itself. Consider the following composite index:
+TiDB makes use of indexes that satisfy both the view definition and the statement itself. Consider the following composite index:
 
 {{< copyable "sql" >}}
 
