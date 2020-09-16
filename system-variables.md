@@ -285,7 +285,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Default value: 0
 - This variable is used to control whether to enable the cascades planner, which is currently considered experimental.
 
-### tidb_enable_clustered_index <!-- New in 5.0 -->
+### tidb_enable_clustered_index <span class="version-mark">Upcoming in v5.0</span>
 
 - Scope: SESSION | GLOBAL
 - Default value: 1
