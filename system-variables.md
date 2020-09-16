@@ -285,15 +285,15 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Default value: 0
 - This variable is used to control whether to enable the cascades planner, which is currently considered experimental.
 
-### `tidb_enable_clustered_index` <span class="version-mark">New in 5.0</span>
+### tidb_enable_clustered_index <!-- New in 5.0 -->
 
 - Scope: SESSION | GLOBAL
 - Default value: 1
 - This variable is used to control whether to enable the clustered index feature.
     - This feature is only applicable to newly created tables and does not affect the existing old tables.
-    - This feature is only applicable to tables whose primary key is the single-column non-integer type or the multi-column type. It does not affect tables without a primary key and tables with the primary key of the single-column non-integer type.
+    - This feature is only applicable to tables whose primary key is the single-column non-integer type or the multi-column type. It does not affect the tables without a primary key and tables with the primary key of the single-column non-integer type.
     - You can execute `select tidb_pk_type from information_schema.tables where table_name ='{table_name}'` to check whether the clustered index feature has been enabled on a table.
-- After you enable this feature, rows are stored directly on the primary key instead of on the internally allocated `rows_id` and using the extra primary key index created to point to `row_id`.
+- After you enable this feature, rows are stored directly on the primary key instead of on the internally allocated `rows_id` to which the extra primary key index is created to point.
 
     This feature impacts performance in the following aspects:
     - For each `INSERT` operation, there is one less index key written into each row.
