@@ -42,7 +42,7 @@ Query OK, 0 rows affected (0.13 sec)
 3 rows in set (0.00 sec)
 ```
 
-Similarly, predicates from the view will be pushed down to the base table:
+Similarly, predicates from the view are pushed down to the base table:
 
 {{< copyable "sql" >}}
 
