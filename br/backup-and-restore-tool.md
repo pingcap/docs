@@ -111,6 +111,23 @@ After the restoration operation is completed, BR performs a checksum calculation
 
 </details>
 
+<<<<<<< HEAD
+=======
+## How to use BR
+
+Currently, you can use SQL statements or the command-line tool to back up and restore data.
+
+### Use SQL statements
+
+TiDB v4.0.2 and later versions support backup and restore operations using SQL statements. For details, see the [Backup syntax](/sql-statements/sql-statement-backup.md#backup) and the [Restore syntax](/sql-statements/sql-statement-restore.md#restore).
+
+### Use the command-line tool
+
+Also, you can use the command-line tool to perform backup and restore. First, you need to download the binary file of the BR tool. For details, see [download link](/download-ecosystem-tools.md#br-backup-and-restore).
+
+The following section takes the command-line tool as an example to introduce how to perform backup and restore operations.
+
+>>>>>>> 4f89eb8... Fix wording issues in release notes (#3916)
 ## Command-line description
 
 A `br` command consists of sub-commands, options, and parameters.
