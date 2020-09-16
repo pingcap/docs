@@ -1,9 +1,9 @@
 ---
-title: Indexes
+title: Explain Statements Using Indexes
 summary: Learn about the execution plan information returned by the `EXPLAIN` statement in TiDB.
 ---
 
-# Indexes
+# Explain Statements Using Indexes
 
 ## Operator execution order
 
