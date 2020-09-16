@@ -91,16 +91,22 @@ This section introduces how to use `cdc cli` to manage a TiCDC cluster and data 
 
     ```
     [
-            {
-                    "id": "6d92386a-73fc-43f3-89de-4e337a42b766",
-                    "is-owner": true
-            },
-            {
-                    "id": "b293999a-4168-4988-a4f4-35d9589b226b",
-                    "is-owner": false
-            }
+      {
+        "id": "806e3a1b-0e31-477f-9dd6-f3f2c570abdd",
+        "is-owner": true,
+        "address": "127.0.0.1:8300"
+      },
+      {
+        "id": "ea2a4203-56fe-43a6-b442-7b295f458ebc",
+        "is-owner": false,
+        "address": "127.0.0.1:8301"
+      }
     ]
     ```
+
+    - `id`: The ID of the service process.
+    - `is-owner`: Indicates whether the service process is the owner node.
+    - `address`: The address via which the service process provides interface to the outside.
 
 ### Manage replication tasks (`changefeed`)
 
@@ -170,7 +176,7 @@ The following are descriptions of parameters and parameter values that can be co
 | `127.0.0.1`          | The IP address of the downstream Kafka services                                 |
 | `9092`               | The port for the downstream Kafka                                          |
 | `cdc-test`           | The name of the Kafka topic                                      |
-| `kafka-version`      | The version of the downstream Kafka (optional, `2.4.0` by default)                      |
+| `kafka-version`      | The version of the downstream Kafka (optional, `2.4.0` by default. Currently, the earlist supported Kafka version is `0.11.0.2` and the latest one is `2.6.0`.)                      |
 | `kafka-client-id`    | Specifies the Kafka client ID of the replication task (optional, `TiCDC_sarama_producer_replication ID` by default) |
 | `partition-num`      | The number of the downstream Kafka partitions (Optional. The value must be **no greater than** the actual number of partitions. If you do not configure this parameter, the partition number is obtained automatically.) |
 | `max-message-bytes`  | The maximum size of data that is sent to Kafka broker each time (optional, `64MB` by default) |
@@ -553,7 +559,7 @@ election: not leader
 {{< copyable "shell-regular" >}}
 
 ```shell
-curl -X POST curl 127.0.0.1:8300/capture/owner/move_table -X POST -d 'cf-id=cf060953-036c-4f31-899f-5afa0ad0c2f9&target-cp-id=6f19a6d9-0f8c-4dc9-b299-3ba7c0f216f5&table-id=49'
+curl -X POST http://127.0.0.1:8300/capture/owner/move_table -d 'cf-id=cf060953-036c-4f31-899f-5afa0ad0c2f9&target-cp-id=6f19a6d9-0f8c-4dc9-b299-3ba7c0f216f5&table-id=49'
 ```
 
 Parameter description:
@@ -583,6 +589,9 @@ This section introduces the configuration of a replication task.
 # This configuration item affects configurations related to filter and sink.
 case-sensitive = true
 
+# Specifies whether to output the old value. New in v4.0.5.
+enable-old-value = false
+
 [filter]
 # Ignores the transaction of specified start_ts.
 ignore-txn-start-ts = [1, 2]
@@ -597,7 +606,12 @@ worker-num = 16
 
 [sink]
 # For the sink of MQ type, you can use dispatchers to configure the event dispatcher.
-# Supports four dispatchers: default, ts, rowid, and table
+# Supports four dispatchers: default, ts, rowid, and table.
+# The dispatcher rules are as follows:
+# - default: When multiple unique indexes (including the primary key) exist or the Old Value feature is enabled, events are dispatched in the table mode. When only one unique index (or the primary key) exists, events are dispatched in the rowid mode.
+# - ts: Use the commitTs of the row change to create Hash and dispatch events.
+# - rowid: Use the name and value of the selected HandleKey column to create Hash and dispatch events.
+# - table: Use the schema name of the table and the table name to create Hash and dispatch events.
 # The matching syntax of matcher is the same as the filter rule syntax.
 dispatchers = [
     {matcher = ['test1.*', 'test2.*'], dispatcher = "ts"},
