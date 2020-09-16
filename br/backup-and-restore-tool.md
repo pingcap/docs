@@ -11,9 +11,9 @@ aliases: ['/docs/dev/br/backup-and-restore-tool/','/docs/dev/reference/tools/br/
 ## Usage restrictions
 
 - BR only supports TiDB v3.1 and later versions.
-- Currently, TiDB does not support backing up and restoring partitioned tables.
-- Currently, you can perform restoration only on new clusters.
+- BR supports restore on clusters of different topologies. However, the online applications will be greatly impacted during the restore operation. It is recommended that you perform restore during the off-peak hours or use `rate-limit` to limit the rate.
 - It is recommended that you execute multiple backup operations serially. Otherwise, different backup operations might interfere with each other.
+- When BR restores data to the upstream cluster of TiCDC/Drainer, TiCDC/Drainer cannot replicate the restored data to the downstream.
 - BR supports operations only between clusters with the same [`new_collations_enabled_on_first_bootstrap`](/character-set-and-collation.md#collation-support-framework) value because BR only backs up KV data. If the cluster to be backed up and the cluster to be restored use different collations, the data validation fails. Therefore, before restoring a cluster, make sure that the switch value from the query result of the `select VARIABLE_VALUE from mysql.tidb where VARIABLE_NAME='new_collation_enabled';` statement is consistent with that during the backup process.
 
     - For v3.1 clusters, the new collation framework is not supported, so you can see it as disabled.
@@ -31,16 +31,6 @@ aliases: ['/docs/dev/br/backup-and-restore-tool/','/docs/dev/reference/tools/br/
 > If you do not mount a network disk or use other shared storage, the data backed up by BR will be generated on each TiKV node. Because BR only backs up leader replicas, you should estimate the space reserved for each node based on the leader size.
 >
 > Meanwhile, because TiDB v4.0 uses leader count for load balancing by default, leaders are greatly different in size, resulting in uneven distribution of backup data on each node.
-
-## Use BR
-
-### Use binary files
-
-Refer to the [download page](/download-ecosystem-tools.md#br-backup-and-restore) for more information.
-
-### Use SQL statements
-
-Refer to the [`BACKUP` syntax](/sql-statements/sql-statement-backup.md#backup) and [`RESTORE` syntax](/sql-statements/sql-statement-restore.md#restore) for more information.
 
 ## Implementation principles
 
@@ -128,6 +118,20 @@ After TiKV receives the request to load the SST file, TiKV uses the Raft mechani
 After the restoration operation is completed, BR performs a checksum calculation on the restored data to compare the stored data with the backed up data.
 
 </details>
+
+## How to use BR
+
+Currently, you can use SQL statements or the command-line tool to back up and restore data.
+
+### Use SQL statements 
+
+TiDB v4.0.2 and later versions support backup and restore operations using SQL statements. For details, see the [Backup syntax](/sql-statements/sql-statement-backup.md#backup) and the [Restore syntax](/sql-statements/sql-statement-restore.md#restore).
+
+### Use the command-line tool
+
+Also, you can use the command-line tool to perform backup and restore. First, you need to download the binary file of the BR tool. For details, see [download link](/download-ecosystem-tools.md#br-backup-and-restore).
+
+The following section takes the command-line tool as an example to introduce how to perform backup and restore operations.
 
 ## Command-line description
 
@@ -369,7 +373,7 @@ To get the timestamp of the last backup, execute the `validate` command. For exa
 LAST_BACKUP_TS=`br validate decode --field="end-version" -s local:///home/tidb/backupdata`
 ```
 
-In the above example, the incremental backup data includes the newly written data and the DDLs between `(LAST_BACKUP_TS, current PD timestamp]`. When restoring data, BR restores DDLs first and then restores the written data.
+In the above example, for the incremental backup data, BR records the data changes and the DDL operations during `(LAST_BACKUP_TS, current PD timestamp]`. When restoring data, BR first restores DDL operations and then the data.
 
 ### Back up Raw KV (experimental feature)
 
