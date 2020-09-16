@@ -106,4 +106,4 @@ Query OK, 0 rows affected (2 min 31.20 sec)
 3 rows in set (0.00 sec)
 ```
 
-In the first statement, TiDB is able to use both parts of the composite index `(bike_number, duration)`. In the second statement, only the first part which is `bike_number` of the index `(bike_number, duration)` was used.
+In the first statement, TiDB is able to use both parts of the composite index `(bike_number, duration)`. In the second statement, only the first part which is `bike_number` of the index `(bike_number, duration)` is used.
