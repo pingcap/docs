@@ -14,11 +14,11 @@ To make this mechanism effective, you need to properly configure TiKV and PD so 
 
 ### Configure `labels` for TiKV
 
-You can use the command-line flag or set the TiKV configuration file to bind some attributes in the form of key-value pairs. These attributes are called `labels`. TiKV reports its `labels` to PD so users can identify the location of TiKV nodes.
+You can use the command-line flag or set the TiKV configuration file to bind some attributes in the form of key-value pairs. These attributes are called `labels`. After TiKV is started, it reports its `labels` to PD so users can identify the location of TiKV nodes.
 
-Assume that the topology has three layers: zone > rack > host, and you can use these labels (zone, rack, host) to set the TiKV location.
+Assume that the topology has three layers: zone > rack > host, and you can use these labels (zone, rack, host) to set the TiKV location in one of the following methods:
 
-+ If the TiKV cluster is not started, use the command-line flag:
++ Use the command-line flag:
 
     {{< copyable "" >}}
 
@@ -26,7 +26,7 @@ Assume that the topology has three layers: zone > rack > host, and you can use t
     tikv-server --labels zone=<zone>,rack=<rack>,host=<host>
     ```
 
-+ If the TiKV cluster is started, configure in the TiKV configuration file:
++ Configure in the TiKV configuration file:
 
     {{< copyable "" >}}
 
@@ -39,7 +39,7 @@ Assume that the topology has three layers: zone > rack > host, and you can use t
 
 According to the description above, the label can be any key-value pair used to describe TiKV attributes. But PD cannot identify the location-related labels and the layer relationship of these labels. Therefore, you need to make the following configuration for PD to understand the TiKV node topology.
 
-+ If the PD cluster is not started, configure `location-labels` in the PD configuration file:
++ If the PD cluster is not initialized, configure `location-labels` in the PD configuration file:
 
     {{< copyable "" >}}
 
