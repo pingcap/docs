@@ -7,7 +7,7 @@ summary: Learn about the execution plan information returned by the `EXPLAIN` st
 
 `EXPLAIN` displays the tables and indexes that a [view](/views.md) references, not the name of the view itself. This is because views are only virtual tables and do not store any data themselves. The definition of the view and the rest of the statement are merged together during SQL optimization.
 
-Using the [bikeshare example database](/import-example-data.md), we can see that the following two queries execute in a similar manner:
+From the [bikeshare example database](/import-example-data.md), you can see that the following two queries are executed in a similar manner:
 
 {{< copyable "sql" >}}
 
