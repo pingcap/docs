@@ -86,7 +86,6 @@ tikv-8 labels="zone=z3,host=h2"
 location_labels = ["zone", "host"]
 ```
 
-</details>
 
 ## PD schedules based on topology label
 
