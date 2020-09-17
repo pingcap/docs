@@ -251,6 +251,28 @@ Configuration items related to replicas
 
 + The topology information of a TiKV cluster
 + Default value: `[]`
+<<<<<<< HEAD
+=======
++ [Cluster topology configuration](/schedule-replicas-by-topology-labels.md)
+
+### `isolation-level`
+
++ The minimum topological isolation level of a TiKV cluster
++ Default value: `""`
++ [Cluster topology configuration](/schedule-replicas-by-topology-labels.md)
+
+### `strictly-match-label`
+
++ Enables the strict check for whether the TiKV label matches PD's `location-labels`.
++ Default value: `false`
+
+### `enable-placement-rules`
+
++ Enables `placement-rules`.
++ Default value: `false`
++ See [Placement Rules](/configure-placement-rules.md).
++ An experimental feature of TiDB 4.0.
+>>>>>>> 24f31fb... improve location-awareness (#3825)
 
 ## `label-property`
 
