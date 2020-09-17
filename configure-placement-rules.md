@@ -48,6 +48,21 @@ The following table shows the meaning of each field in a rule:
 
 The meaning and function of `LocationLabels` are the same with those earlier than v4.0. For example, if you have deployed `[zone,rack,host]` that defines a three-layer topology: the cluster has multiple zones (Availability Zones), each zone has multiple racks, and each rack has multiple hosts. When performing schedule, PD first tries to place the Region's peers in different zones. If this try fails (such as there are three replicas but only two zones in total), PD guarantees to place these replicas in different racks. If the number of racks is not enough to guarantee isolation, then PD tries the host-level isolation.
 
+<<<<<<< HEAD
+=======
+The meaning and function of `IsolationLevel` is elaborated in [Cluster topology configuration](/schedule-replicas-by-topology-labels.md). For example, if you have deployed `[zone,rack,host]` that defines a three-layer topology with `LocationLabels` and set `IsolationLevel` to `zone`, then PD ensures that all peers of each Region are placed in different zones during the scheduling. If the minimum isolation level restriction on `IsolationLevel` cannot be met (for example, 3 replicas are configured but there are only 2 data zones in total), PD will not try to make up to meet this restriction. The default value of `IsolationLevel` is an empty string, which means that it is disabled.
+
+### Fields of the rule group
+
+The following table shows the description of each field in a rule group:
+
+| Field name | Type and restriction  | Description |
+| :--- | :--- | :--- |
+| `ID` | `string` | The group ID that marks the source of the rule. |
+| `Index` | `int` | The stacking sequence of different groups. |
+| `Override` | `true`/`false` | Whether to override groups with smaller indexes. |
+
+>>>>>>> 24f31fb... improve location-awareness (#3825)
 ## Configure rules
 
 The operations in this section are based on [pd-ctl](/pd-control.md), and the commands involved in the operations also support calls via HTTP API.
