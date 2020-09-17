@@ -89,6 +89,65 @@ The `location-level` configuration is an array of strings, which needs to corres
 >
 > `isolation-level` is empty by default, which means there is no mandatory restriction on the isolation level. To set it, you need to configure `location-labels` for PD and ensure that the value of `isolation-level` is one of `location-labels` names.
 
+### Configure a cluster using TiUP (recommended)
+
+When using TiUP to deploy a cluster, you can configure the TiKV location in the [initialization configuration file](/production-deployment-using-tiup.md#step-3-edit-the-initialization-configuration-file). TiUP will generate the corresponding TiKV and PD configuration files during deployment.
+
+In the following example, a two-layer topology of `zone/host` is defined. The TiKV nodes of the cluster are distributed among three zones, each zone with two hosts. In z1, two TiKV instances are deployed per host. In z2 and z3, one TiKV instance is deployed per host. In the following example, `tikv-n` represents the IP address of the `n`th TiKV node.
+
+```
+server_configs:
+  pd:
+    replication.location-labels: ["zone", "host"]
+
+tikv_servers:
+# z1
+  - host: tikv-1
+    config:
+      server.labels:
+        zone: z1
+        host: h1
+   - host: tikv-2
+    config:
+      server.labels:
+        zone: z1
+        host: h1
+  - host: tikv-3
+    config:
+      server.labels:
+        zone: z1
+        host: h2
+  - host: tikv-4
+    config:
+      server.labels:
+        zone: z1
+        host: h2
+# z2
+  - host: tikv-5
+    config:
+      server.labels:
+        zone: z2
+        host: h1
+   - host: tikv-6
+    config:
+      server.labels:
+        zone: z2
+        host: h2
+# z3
+  - host: tikv-7
+    config:
+      server.labels:
+        zone: z3
+        host: h1
+  - host: tikv-8
+    config:
+      server.labels:
+        zone: z3
+        host: h2s
+```
+
+For details, see [Geo-distributed Deployment topology](/geo-distributed-deployment-topology.md).
+
 <details>
 <summary> <strong>Configure a cluster using TiDB Ansible</strong> </summary>
 
