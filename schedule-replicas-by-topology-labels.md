@@ -86,7 +86,6 @@ tikv-8 labels="zone=z3,host=h2"
 location_labels = ["zone", "host"]
 ```
 
-
 ## PD schedules based on topology label
 
 PD schedules replicas according to the label layer to make sure that different replicas of the same data are scattered as much as possible.
