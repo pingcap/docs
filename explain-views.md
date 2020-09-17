@@ -1,9 +1,9 @@
 ---
-title: Explain Statements Using Views
+title: EXPLAIN Statements Using Views
 summary: Learn about the execution plan information returned by the `EXPLAIN` statement in TiDB.
 ---
 
-# Explain Statements Using Views
+# EXPLAIN Statements Using Views
 
 `EXPLAIN` displays the tables and indexes that a [view](/views.md) references, not the name of the view itself. This is because views are only virtual tables and do not store any data themselves. The definition of the view and the rest of the statement are merged together during SQL optimization.
 
