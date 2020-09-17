@@ -5,7 +5,22 @@ summary: Learn about the execution plan information returned by the `EXPLAIN` st
 
 # Explain Statements Using Joins
 
-In TiDB, the SQL Optimizer needs to decide which order tables should be joined in, and what is the most efficient join algorithm for a particular SQL statement. The following examples explain the use of each join algorithm, and describe likely reasons why it was chosen.
+In TiDB, the SQL Optimizer needs to decide which order tables should be joined in, and what is the most efficient join algorithm for a particular SQL statement. The examples are based on the following sample data:
+
+{{< copyable "sql" >}}
+
+```sql
+CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY auto_increment, pad1 BLOB, pad2 BLOB, pad3 BLOB);
+CREATE TABLE t2 (id INT NOT NULL PRIMARY KEY auto_increment, t1_id INT NOT NULL, pad1 BLOB, pad2 BLOB, pad3 BLOB, INDEX(t1_id));
+INSERT INTO t1 SELECT NULL, RANDOM_BYTES(1024), RANDOM_BYTES(1024), RANDOM_BYTES(1024) FROM dual;
+INSERT INTO t1 SELECT NULL, RANDOM_BYTES(1024), RANDOM_BYTES(1024), RANDOM_BYTES(1024) FROM t1 a JOIN t1 b JOIN t1 c LIMIT 10000;
+INSERT INTO t1 SELECT NULL, RANDOM_BYTES(1024), RANDOM_BYTES(1024), RANDOM_BYTES(1024) FROM t1 a JOIN t1 b JOIN t1 c LIMIT 10000;
+INSERT INTO t2 SELECT NULL, a.id, RANDOM_BYTES(1024), RANDOM_BYTES(1024), RANDOM_BYTES(1024) FROM t1 a JOIN t1 b JOIN t1 c LIMIT 10000;
+INSERT INTO t2 SELECT NULL, a.id, RANDOM_BYTES(1024), RANDOM_BYTES(1024), RANDOM_BYTES(1024) FROM t1 a JOIN t1 b JOIN t1 c LIMIT 10000;
+INSERT INTO t2 SELECT NULL, a.id, RANDOM_BYTES(1024), RANDOM_BYTES(1024), RANDOM_BYTES(1024) FROM t1 a JOIN t1 b JOIN t1 c LIMIT 10000;
+SELECT SLEEP(1);
+ANALYZE TABLE t1, t2;
+```
 
 ## Index Join (Index Nested Loop Join)
 
@@ -14,27 +29,27 @@ If the estimated rows that need to be joined is small (typically less than 10000
 {{< copyable "sql" >}}
 
 ```sql
-EXPLAIN SELECT /*+ INL_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
+EXPLAIN SELECT /*+ INL_JOIN(t1, t2) */ * FROM t1 INNER JOIN t2 ON t1.id = t2.t1_id;
 ```
 
 ```sql
-+-----------------------------+----------+-----------+------------------------+--------------------------------------------------------------------------------+
-| id                          | estRows  | task      | access object          | operator info                                                                  |
-+-----------------------------+----------+-----------+------------------------+--------------------------------------------------------------------------------+
-| IndexJoin_11                | 12487.50 | root      |                        | inner join, inner:IndexReader_10, outer key:test.t1.id, inner key:test.t2.id   |
-| ├─IndexReader_31(Build)     | 9990.00  | root      |                        | index:IndexFullScan_30                                                         |
-| │ └─IndexFullScan_30        | 9990.00  | cop[tikv] | table:t1, index:id(id) | keep order:false, stats:pseudo                                                 |
-| └─IndexReader_10(Probe)     | 1.00     | root      |                        | index:Selection_9                                                              |
-|   └─Selection_9             | 1.00     | cop[tikv] |                        | not(isnull(test.t2.id))                                                        |
-|     └─IndexRangeScan_8      | 1.00     | cop[tikv] | table:t2, index:id(id) | range: decided by [eq(test.t2.id, test.t1.id)], keep order:false, stats:pseudo |
-+-----------------------------+----------+-----------+------------------------+--------------------------------------------------------------------------------+
++---------------------------------+---------+-----------+------------------------------+---------------------------------------------------------------------------------+
+| id                              | estRows | task      | access object                | operator info                                                                   |
++---------------------------------+---------+-----------+------------------------------+---------------------------------------------------------------------------------+
+| IndexJoin_11                    | 6000.00 | root      |                              | inner join, inner:IndexLookUp_10, outer key:test.t1.id, inner key:test.t2.t1_id |
+| ├─TableReader_29(Build)         | 20.00   | root      |                              | data:TableFullScan_28                                                           |
+| │ └─TableFullScan_28            | 20.00   | cop[tikv] | table:t1                     | keep order:false                                                                |
+| └─IndexLookUp_10(Probe)         | 300.00  | root      |                              |                                                                                 |
+|   ├─IndexRangeScan_8(Build)     | 300.00  | cop[tikv] | table:t2, index:t1_id(t1_id) | range: decided by [eq(test.t2.t1_id, test.t1.id)], keep order:false             |
+|   └─TableRowIDScan_9(Probe)     | 300.00  | cop[tikv] | table:t2                     | keep order:false                                                                |
++---------------------------------+---------+-----------+------------------------------+---------------------------------------------------------------------------------+
 6 rows in set (0.00 sec)
 ```
 
 Index join is efficient in memory usage, but may be slower to execute than other join methods when a large number of probe operations are required. Consider also the following query:
 
 ```sql
-SELECT * FROM t1 INNER JOIN t2 ON t1.id=t2.t1_id WHERE t1.col = 'value' and t2.col='value';
+SELECT * FROM t1 INNER JOIN t2 ON t1.id=t2.t1_id WHERE t1.pad1 = 'value' and t2.pad1='value';
 ```
 
 On an inner join, TiDB will apply join reordering and might access either `t1` or `t2` first. Assuming that TiDB selects `t1` as the first table to apply the `Build` step, it will be able to filter on the predicate `t1.col = 'value'` before probing the table `t2`. The filter for the predicate `t2.col='value'` will be applied on each probe of table `t2`, which may be less efficient than other join methods.
@@ -74,6 +89,27 @@ The execution process of `Hash Join` is as follows:
 
 The operator info column in the `explain` table also records other information about `Hash Join`, including whether the query is Inner Join or Outer Join, and what are the conditions of Join. In the above example, the query is an Inner Join, where the Join condition `equal:[eq(test.t1.id, test.t2.id)]` partly corresponds with the query statement `where t1.id = t2. id`. The operator info of the other Join operators in the following examples is similar to this one.
 
+### Runtime Statistics
+
+If the size of the hash table exceeds `tidb_mem_quota_query`, it will overflow to disk provided that `oom-use-tmp-storage=TRUE` (the default). Similarly, hash tables work most efficiently when the rate of hash collisions is relatively low. These runtime statistics can be observed in `EXPLAIN ANALYZE`:
+
+```sql
+EXPLAIN ANALYZE SELECT /*+ HASH_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
+```
+
+```sql
++-----------------------------+---------+---------+-----------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------+----------------------+---------+
+| id                          | estRows | actRows | task      | access object | execution info                                                                                                                                                                                  | operator info                                  | memory               | disk    |
++-----------------------------+---------+---------+-----------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------+----------------------+---------+
+| HashJoin_27                 | 20.00   | 10      | root      |               | time:16.793524ms, loops:2, build_hash_table:{total:569.736µs, fetch:565.386µs, build:4.35µs}, probe:{concurrency:5, total:83.482002ms, max:16.749324ms, probe:296.137µs, fetch:83.185865ms}     | inner join, equal:[eq(test.t1.id, test.t2.id)] | 68.92578125 KB       | 0 Bytes |
+| ├─TableReader_29(Build)     | 20.00   | 10      | root      |               | time:496.427µs, loops:2, cop_task: {num: 1, max:526.566µs, proc_keys: 10, rpc_num: 1, rpc_time: 502.026µs, copr_cache_hit_ratio: 0.00}                                                          | data:TableFullScan_28                          | 30.5556640625 KB     | N/A     |
+| │ └─TableFullScan_28        | 20.00   | 10      | cop[tikv] | table:t1      | time:0s, loops:1                                                                                                                                                                                | keep order:false                               | N/A                  | N/A     |
+| └─TableReader_31(Probe)     | 6000.00 | 3000    | root      |               | time:16.615265ms, loops:4, cop_task: {num: 1, max:15.95008ms, proc_keys: 3000, rpc_num: 1, rpc_time: 15.930511ms, copr_cache_hit_ratio: 0.00}                                                   | data:TableFullScan_30                          | 8.904180526733398 MB | N/A     |
+|   └─TableFullScan_30        | 6000.00 | 3000    | cop[tikv] | table:t2      | time:8ms, loops:7                                                                                                                                                                               | keep order:false                               | N/A                  | N/A     |
++-----------------------------+---------+---------+-----------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------+----------------------+---------+
+5 rows in set (0.01 sec)
+```
+
 ## Merge Join
 
 Merge join is a special sort of join that applies when both sides of the join can be read in sorted order. It can be described as similar to an _efficient zipper merge_, in that as data is read on both the `Build` and the `Probe` side of the join it can be compared as a streaming operation. Merge joins require far less memory than hash join, but do not execute in parallel.
@@ -112,20 +148,20 @@ The execution of the `Merge Join` operator is as follows:
 {{< copyable "sql" >}}
 
 ```sql
-EXPLAIN SELECT /*+ INL_HASH_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
+EXPLAIN SELECT /*+ INL_HASH_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.t1_id;
 ```
 
 ```sql
-+-----------------------------+----------+-----------+------------------------+--------------------------------------------------------------------------------+
-| id                          | estRows  | task      | access object          | operator info                                                                  |
-+-----------------------------+----------+-----------+------------------------+--------------------------------------------------------------------------------+
-| IndexHashJoin_18            | 12487.50 | root      |                        | inner join, inner:IndexReader_10, outer key:test.t1.id, inner key:test.t2.id   |
-| ├─IndexReader_31(Build)     | 9990.00  | root      |                        | index:IndexFullScan_30                                                         |
-| │ └─IndexFullScan_30        | 9990.00  | cop[tikv] | table:t1, index:id(id) | keep order:false, stats:pseudo                                                 |
-| └─IndexReader_10(Probe)     | 1.00     | root      |                        | index:Selection_9                                                              |
-|   └─Selection_9             | 1.00     | cop[tikv] |                        | not(isnull(test.t2.id))                                                        |
-|     └─IndexRangeScan_8      | 1.00     | cop[tikv] | table:t2, index:id(id) | range: decided by [eq(test.t2.id, test.t1.id)], keep order:false, stats:pseudo |
-+-----------------------------+----------+-----------+------------------------+--------------------------------------------------------------------------------+
++---------------------------------+---------+-----------+------------------------------+---------------------------------------------------------------------------------+
+| id                              | estRows | task      | access object                | operator info                                                                   |
++---------------------------------+---------+-----------+------------------------------+---------------------------------------------------------------------------------+
+| IndexHashJoin_13                | 6000.00 | root      |                              | inner join, inner:IndexLookUp_10, outer key:test.t1.id, inner key:test.t2.t1_id |
+| ├─TableReader_29(Build)         | 20.00   | root      |                              | data:TableFullScan_28                                                           |
+| │ └─TableFullScan_28            | 20.00   | cop[tikv] | table:t1                     | keep order:false                                                                |
+| └─IndexLookUp_10(Probe)         | 300.00  | root      |                              |                                                                                 |
+|   ├─IndexRangeScan_8(Build)     | 300.00  | cop[tikv] | table:t2, index:t1_id(t1_id) | range: decided by [eq(test.t2.t1_id, test.t1.id)], keep order:false             |
+|   └─TableRowIDScan_9(Probe)     | 300.00  | cop[tikv] | table:t2                     | keep order:false                                                                |
++---------------------------------+---------+-----------+------------------------------+---------------------------------------------------------------------------------+
 6 rows in set (0.00 sec)
 ```
 
@@ -136,19 +172,19 @@ EXPLAIN SELECT /*+ INL_HASH_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 {{< copyable "sql" >}}
 
 ```sql
-EXPLAIN SELECT /*+ INL_MERGE_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
+EXPLAIN SELECT /*+ INL_MERGE_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.t1_id;
 ```
 
 ```sql
-+-----------------------------+----------+-----------+------------------------+-------------------------------------------------------------------------------+
-| id                          | estRows  | task      | access object          | operator info                                                                 |
-+-----------------------------+----------+-----------+------------------------+-------------------------------------------------------------------------------+
-| IndexMergeJoin_16           | 12487.50 | root      |                        | inner join, inner:IndexReader_14, outer key:test.t1.id, inner key:test.t2.id  |
-| ├─IndexReader_31(Build)     | 9990.00  | root      |                        | index:IndexFullScan_30                                                        |
-| │ └─IndexFullScan_30        | 9990.00  | cop[tikv] | table:t1, index:id(id) | keep order:false, stats:pseudo                                                |
-| └─IndexReader_14(Probe)     | 1.00     | root      |                        | index:Selection_13                                                            |
-|   └─Selection_13            | 1.00     | cop[tikv] |                        | not(isnull(test.t2.id))                                                       |
-|     └─IndexRangeScan_12     | 1.00     | cop[tikv] | table:t2, index:id(id) | range: decided by [eq(test.t2.id, test.t1.id)], keep order:true, stats:pseudo |
-+-----------------------------+----------+-----------+------------------------+-------------------------------------------------------------------------------+
++----------------------------------+---------+-----------+------------------------------+---------------------------------------------------------------------------------+
+| id                               | estRows | task      | access object                | operator info                                                                   |
++----------------------------------+---------+-----------+------------------------------+---------------------------------------------------------------------------------+
+| IndexMergeJoin_18                | 6000.00 | root      |                              | inner join, inner:IndexLookUp_16, outer key:test.t1.id, inner key:test.t2.t1_id |
+| ├─TableReader_29(Build)          | 20.00   | root      |                              | data:TableFullScan_28                                                           |
+| │ └─TableFullScan_28             | 20.00   | cop[tikv] | table:t1                     | keep order:false                                                                |
+| └─IndexLookUp_16(Probe)          | 300.00  | root      |                              |                                                                                 |
+|   ├─IndexRangeScan_14(Build)     | 300.00  | cop[tikv] | table:t2, index:t1_id(t1_id) | range: decided by [eq(test.t2.t1_id, test.t1.id)], keep order:true              |
+|   └─TableRowIDScan_15(Probe)     | 300.00  | cop[tikv] | table:t2                     | keep order:false                                                                |
++----------------------------------+---------+-----------+------------------------------+---------------------------------------------------------------------------------+
 6 rows in set (0.00 sec)
 ```
