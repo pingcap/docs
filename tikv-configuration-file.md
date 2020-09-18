@@ -283,12 +283,11 @@ Configuration items related to Raftstore
 ### `sync-log`
 
 + Enables or disables synchronous write mode. In the synchronous write mode, each commit is forced to be flushed to raft-log synchronously for persistent storage.
-
-    > **Note:**
-    >
-    > Setting the value to `false` might lead to data loss.
-
 + Default value: `true`
+
+> **Warning:**
+>
+> Setting the value to `false` might lead to **data loss**. It is **strongly recommended** that you do not modify this configuration.
 
 ### `prevote`
 
