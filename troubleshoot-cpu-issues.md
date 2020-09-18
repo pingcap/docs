@@ -40,7 +40,7 @@ The statistics is inaccurate.
 
 #### Phenomenon
 
-There is an abnormal increase of the `wait duration` metric for the PD TSO. This metric represents the duration of waiting for PD to return.
+There is an abnormal increase of the `wait duration` metric for the PD TSO. This metric represents the duration of waiting for PD to return requests.
 
 #### Possible reasons
 
