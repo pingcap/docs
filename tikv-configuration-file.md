@@ -287,8 +287,7 @@ Configuration items related to Raftstore
 
 > **Warning:**
 >
-> - This configuration item has been deprecated since v4.0.6.
-> - For versions <= 4.0.5, setting the value to `false` might lead to **data loss**. It is **strongly recommended** that you do not modify this configuration.
+> Setting the value to `false` might lead to **data loss**. It is **strongly recommended** that you do not modify this configuration.
 
 ### `prevote`
 
