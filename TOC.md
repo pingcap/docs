@@ -479,6 +479,8 @@
     + TiKV
       + [TiKV Overview](/tikv-overview.md)
       + [RocksDB Overview](/storage-engine/rocksdb-overview.md)
+      + [Titan Overview](/storage-engine/titan-overview.md)
+      + [Titan Configuration](/storage-engine/titan-configuration.md)
     + TiFlash
       + [Overview](/tiflash/tiflash-overview.md)
       + [Use TiFlash](/tiflash/use-tiflash.md)
@@ -499,6 +501,7 @@
   + [TiCDC Overview](/ticdc/ticdc-overview.md)
   + [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
   + [Table Filter](/table-filter.md)
+  + [Schedule Replicas by Topology Labels](/schedule-replicas-by-topology-labels.md)
 + FAQs
   + [TiDB FAQs](/faq/tidb-faq.md)
   + [SQL FAQs](/faq/sql-faq.md)
@@ -511,6 +514,7 @@
 + Release Notes
   + [All Releases](/releases/release-notes.md)
   + v4.0
+    + [4.0.6](/releases/release-4.0.6.md)
     + [4.0.5](/releases/release-4.0.5.md)
     + [4.0.4](/releases/release-4.0.4.md)
     + [4.0.3](/releases/release-4.0.3.md)
