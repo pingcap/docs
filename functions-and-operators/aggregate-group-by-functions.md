@@ -119,11 +119,6 @@ group by id, val;
 
 The following aggregate functions are currently unsupported in TiDB. You can track our progress in [TiDB #7623](https://github.com/pingcap/tidb/issues/7623):
 
-<<<<<<< HEAD
-- `STDDEV_SAMP`
 - `VARIANCE`, `VAR_POP`
-- `VAR_SAMP`
-=======
->>>>>>> f1acd27... functions-and-operators: function VAR_SAMP()/STDDEV_SAMP() is supported (#3934)
 - `JSON_ARRAYAGG`
 - `JSON_OBJECTAGG`
