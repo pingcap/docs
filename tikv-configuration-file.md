@@ -280,6 +280,16 @@ Configuration items related to the sharing of block cache among multiple RocksDB
 
 Configuration items related to Raftstore
 
+### `sync-log`
+
++ Enables or disables synchronous write mode. In the synchronous write mode, each commit is forced to be flushed to raft-log synchronously for persistent storage.
++ Default value: `true`
+
+> **Warning:**
+>
+> - This configuration item has been deprecated since v4.0.6.
+> - For versions <= 4.0.5, setting the value to `false` might lead to **data loss**. It is **strongly recommended** that you do not modify this configuration.
+
 ### `prevote`
 
 + Enables or disables `prevote`. Enabling this feature helps reduce jitter on the system after recovery from network partition.
