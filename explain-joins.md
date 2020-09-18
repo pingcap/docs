@@ -10,11 +10,25 @@ In TiDB, the SQL Optimizer needs to decide which order tables should be joined i
 {{< copyable "sql" >}}
 
 ```sql
-CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY auto_increment, pad1 BLOB, pad2 BLOB, pad3 BLOB);
-CREATE TABLE t2 (id INT NOT NULL PRIMARY KEY auto_increment, t1_id INT NOT NULL, pad1 BLOB, pad2 BLOB, pad3 BLOB, INDEX(t1_id));
+CREATE TABLE t1 (id BIGINT NOT NULL PRIMARY KEY auto_increment, pad1 BLOB, pad2 BLOB, pad3 BLOB);
+CREATE TABLE t2 (id BIGINT NOT NULL PRIMARY KEY auto_increment, t1_id BIGINT NOT NULL, pad1 BLOB, pad2 BLOB, pad3 BLOB, INDEX(t1_id));
 INSERT INTO t1 SELECT NULL, RANDOM_BYTES(1024), RANDOM_BYTES(1024), RANDOM_BYTES(1024) FROM dual;
 INSERT INTO t1 SELECT NULL, RANDOM_BYTES(1024), RANDOM_BYTES(1024), RANDOM_BYTES(1024) FROM t1 a JOIN t1 b JOIN t1 c LIMIT 10000;
 INSERT INTO t1 SELECT NULL, RANDOM_BYTES(1024), RANDOM_BYTES(1024), RANDOM_BYTES(1024) FROM t1 a JOIN t1 b JOIN t1 c LIMIT 10000;
+INSERT INTO t1 SELECT NULL, RANDOM_BYTES(1024), RANDOM_BYTES(1024), RANDOM_BYTES(1024) FROM t1 a JOIN t1 b JOIN t1 c LIMIT 10000;
+INSERT INTO t1 SELECT NULL, RANDOM_BYTES(1024), RANDOM_BYTES(1024), RANDOM_BYTES(1024) FROM t1 a JOIN t1 b JOIN t1 c LIMIT 10000;
+INSERT INTO t1 SELECT NULL, RANDOM_BYTES(1024), RANDOM_BYTES(1024), RANDOM_BYTES(1024) FROM t1 a JOIN t1 b JOIN t1 c LIMIT 10000;
+INSERT INTO t1 SELECT NULL, RANDOM_BYTES(1024), RANDOM_BYTES(1024), RANDOM_BYTES(1024) FROM t1 a JOIN t1 b JOIN t1 c LIMIT 10000;
+INSERT INTO t1 SELECT NULL, RANDOM_BYTES(1024), RANDOM_BYTES(1024), RANDOM_BYTES(1024) FROM t1 a JOIN t1 b JOIN t1 c LIMIT 10000;
+INSERT INTO t1 SELECT NULL, RANDOM_BYTES(1024), RANDOM_BYTES(1024), RANDOM_BYTES(1024) FROM t1 a JOIN t1 b JOIN t1 c LIMIT 10000;
+INSERT INTO t1 SELECT NULL, RANDOM_BYTES(1024), RANDOM_BYTES(1024), RANDOM_BYTES(1024) FROM t1 a JOIN t1 b JOIN t1 c LIMIT 10000;
+INSERT INTO t1 SELECT NULL, RANDOM_BYTES(1024), RANDOM_BYTES(1024), RANDOM_BYTES(1024) FROM t1 a JOIN t1 b JOIN t1 c LIMIT 10000;
+INSERT INTO t2 SELECT NULL, a.id, RANDOM_BYTES(1024), RANDOM_BYTES(1024), RANDOM_BYTES(1024) FROM t1 a JOIN t1 b JOIN t1 c LIMIT 10000;
+INSERT INTO t2 SELECT NULL, a.id, RANDOM_BYTES(1024), RANDOM_BYTES(1024), RANDOM_BYTES(1024) FROM t1 a JOIN t1 b JOIN t1 c LIMIT 10000;
+INSERT INTO t2 SELECT NULL, a.id, RANDOM_BYTES(1024), RANDOM_BYTES(1024), RANDOM_BYTES(1024) FROM t1 a JOIN t1 b JOIN t1 c LIMIT 10000;
+INSERT INTO t2 SELECT NULL, a.id, RANDOM_BYTES(1024), RANDOM_BYTES(1024), RANDOM_BYTES(1024) FROM t1 a JOIN t1 b JOIN t1 c LIMIT 10000;
+INSERT INTO t2 SELECT NULL, a.id, RANDOM_BYTES(1024), RANDOM_BYTES(1024), RANDOM_BYTES(1024) FROM t1 a JOIN t1 b JOIN t1 c LIMIT 10000;
+INSERT INTO t2 SELECT NULL, a.id, RANDOM_BYTES(1024), RANDOM_BYTES(1024), RANDOM_BYTES(1024) FROM t1 a JOIN t1 b JOIN t1 c LIMIT 10000;
 INSERT INTO t2 SELECT NULL, a.id, RANDOM_BYTES(1024), RANDOM_BYTES(1024), RANDOM_BYTES(1024) FROM t1 a JOIN t1 b JOIN t1 c LIMIT 10000;
 INSERT INTO t2 SELECT NULL, a.id, RANDOM_BYTES(1024), RANDOM_BYTES(1024), RANDOM_BYTES(1024) FROM t1 a JOIN t1 b JOIN t1 c LIMIT 10000;
 INSERT INTO t2 SELECT NULL, a.id, RANDOM_BYTES(1024), RANDOM_BYTES(1024), RANDOM_BYTES(1024) FROM t1 a JOIN t1 b JOIN t1 c LIMIT 10000;
@@ -33,16 +47,16 @@ EXPLAIN SELECT /*+ INL_JOIN(t1, t2) */ * FROM t1 INNER JOIN t2 ON t1.id = t2.t1_
 ```
 
 ```sql
-+---------------------------------+---------+-----------+------------------------------+---------------------------------------------------------------------------------+
-| id                              | estRows | task      | access object                | operator info                                                                   |
-+---------------------------------+---------+-----------+------------------------------+---------------------------------------------------------------------------------+
-| IndexJoin_11                    | 6000.00 | root      |                              | inner join, inner:IndexLookUp_10, outer key:test.t1.id, inner key:test.t2.t1_id |
-| ├─TableReader_29(Build)         | 20.00   | root      |                              | data:TableFullScan_28                                                           |
-| │ └─TableFullScan_28            | 20.00   | cop[tikv] | table:t1                     | keep order:false                                                                |
-| └─IndexLookUp_10(Probe)         | 300.00  | root      |                              |                                                                                 |
-|   ├─IndexRangeScan_8(Build)     | 300.00  | cop[tikv] | table:t2, index:t1_id(t1_id) | range: decided by [eq(test.t2.t1_id, test.t1.id)], keep order:false             |
-|   └─TableRowIDScan_9(Probe)     | 300.00  | cop[tikv] | table:t2                     | keep order:false                                                                |
-+---------------------------------+---------+-----------+------------------------------+---------------------------------------------------------------------------------+
++---------------------------------+-----------+-----------+------------------------------+--------------------------------------------------------------------------------+
+| id                              | estRows   | task      | access object                | operator info                                                                  |
++---------------------------------+-----------+-----------+------------------------------+--------------------------------------------------------------------------------+
+| IndexJoin_10                    | 180000.00 | root      |                              | inner join, inner:IndexLookUp_9, outer key:test.t1.id, inner key:test.t2.t1_id |
+| ├─TableReader_28(Build)         | 142020.00 | root      |                              | data:TableFullScan_27                                                          |
+| │ └─TableFullScan_27            | 142020.00 | cop[tikv] | table:t1                     | keep order:false                                                               |
+| └─IndexLookUp_9(Probe)          | 1.27      | root      |                              |                                                                                |
+|   ├─IndexRangeScan_7(Build)     | 1.27      | cop[tikv] | table:t2, index:t1_id(t1_id) | range: decided by [eq(test.t2.t1_id, test.t1.id)], keep order:false            |
+|   └─TableRowIDScan_8(Probe)     | 1.27      | cop[tikv] | table:t2                     | keep order:false                                                               |
++---------------------------------+-----------+-----------+------------------------------+--------------------------------------------------------------------------------+
 6 rows in set (0.00 sec)
 ```
 
@@ -67,16 +81,16 @@ EXPLAIN SELECT /*+ HASH_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 ```
 
 ```sql
-+-----------------------------+----------+-----------+------------------------+------------------------------------------------+
-| id                          | estRows  | task      | access object          | operator info                                  |
-+-----------------------------+----------+-----------+------------------------+------------------------------------------------+
-| HashJoin_30                 | 12487.50 | root      |                        | inner join, equal:[eq(test.t1.id, test.t2.id)] |
-| ├─IndexReader_35(Build)     | 9990.00  | root      |                        | index:IndexFullScan_34                         |
-| │ └─IndexFullScan_34        | 9990.00  | cop[tikv] | table:t2, index:id(id) | keep order:false, stats:pseudo                 |
-| └─IndexReader_33(Probe)     | 9990.00  | root      |                        | index:IndexFullScan_32                         |
-|   └─IndexFullScan_32        | 9990.00  | cop[tikv] | table:t1, index:id(id) | keep order:false, stats:pseudo                 |
-+-----------------------------+----------+-----------+------------------------+------------------------------------------------+
-5 rows in set (0.01 sec)
++-----------------------------+-----------+-----------+---------------+------------------------------------------------+
+| id                          | estRows   | task      | access object | operator info                                  |
++-----------------------------+-----------+-----------+---------------+------------------------------------------------+
+| HashJoin_27                 | 142020.00 | root      |               | inner join, equal:[eq(test.t1.id, test.t2.id)] |
+| ├─TableReader_29(Build)     | 142020.00 | root      |               | data:TableFullScan_28                          |
+| │ └─TableFullScan_28        | 142020.00 | cop[tikv] | table:t1      | keep order:false                               |
+| └─TableReader_31(Probe)     | 180000.00 | root      |               | data:TableFullScan_30                          |
+|   └─TableFullScan_30        | 180000.00 | cop[tikv] | table:t2      | keep order:false                               |
++-----------------------------+-----------+-----------+---------------+------------------------------------------------+
+5 rows in set (0.00 sec)
 ```
 
 The execution process of `Hash Join` is as follows:
@@ -87,27 +101,42 @@ The execution process of `Hash Join` is as follows:
 4. Use the data of the `Probe` side to probe the Hash Table.
 5. Return qualified data to the user.
 
-The operator info column in the `explain` table also records other information about `Hash Join`, including whether the query is Inner Join or Outer Join, and what are the conditions of Join. In the above example, the query is an Inner Join, where the Join condition `equal:[eq(test.t1.id, test.t2.id)]` partly corresponds with the query statement `where t1.id = t2. id`. The operator info of the other Join operators in the following examples is similar to this one.
+The operator info column in the `explain` table also records other information about `Hash Join`, including whether the query is Inner Join or Outer Join, and what are the conditions of Join. In the above example, the query is an Inner Join, where the Join condition `equal:[eq(test.t1.id, test.t2.id)]` partly corresponds with the query statement `WHERE t1.id = t2.id`. The operator info of the other Join operators in the following examples is similar to this one.
 
 ### Runtime Statistics
 
-If the size of the hash table exceeds `tidb_mem_quota_query`, it will overflow to disk provided that `oom-use-tmp-storage=TRUE` (the default). Similarly, hash tables work most efficiently when the rate of hash collisions is relatively low. These runtime statistics can be observed in `EXPLAIN ANALYZE`:
+If [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) (default: 1GB) is exceeded, TiDB will attempt to use temporary storage provided that `oom-use-tmp-storage=TRUE` (default). This means that the hash table used as part of the hash join is created on disk. Runtime statistics, such as memory usage are visible in the `execution info` of `EXPLAIN ANALYZE`. The following example shows the output of `EXPLAIN ANALYZE` with a 1GB (default) `tidb_mem_quota_query` quota, and a 500MB quota. At 500MB the hash table spills to disk:
 
 ```sql
+EXPLAIN ANALYZE SELECT /*+ HASH_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
+SET tidb_mem_quota_query=500 * 1024 * 1024;
 EXPLAIN ANALYZE SELECT /*+ HASH_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 ```
 
 ```sql
-+-----------------------------+---------+---------+-----------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------+----------------------+---------+
-| id                          | estRows | actRows | task      | access object | execution info                                                                                                                                                                                  | operator info                                  | memory               | disk    |
-+-----------------------------+---------+---------+-----------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------+----------------------+---------+
-| HashJoin_27                 | 20.00   | 10      | root      |               | time:16.793524ms, loops:2, build_hash_table:{total:569.736µs, fetch:565.386µs, build:4.35µs}, probe:{concurrency:5, total:83.482002ms, max:16.749324ms, probe:296.137µs, fetch:83.185865ms}     | inner join, equal:[eq(test.t1.id, test.t2.id)] | 68.92578125 KB       | 0 Bytes |
-| ├─TableReader_29(Build)     | 20.00   | 10      | root      |               | time:496.427µs, loops:2, cop_task: {num: 1, max:526.566µs, proc_keys: 10, rpc_num: 1, rpc_time: 502.026µs, copr_cache_hit_ratio: 0.00}                                                          | data:TableFullScan_28                          | 30.5556640625 KB     | N/A     |
-| │ └─TableFullScan_28        | 20.00   | 10      | cop[tikv] | table:t1      | time:0s, loops:1                                                                                                                                                                                | keep order:false                               | N/A                  | N/A     |
-| └─TableReader_31(Probe)     | 6000.00 | 3000    | root      |               | time:16.615265ms, loops:4, cop_task: {num: 1, max:15.95008ms, proc_keys: 3000, rpc_num: 1, rpc_time: 15.930511ms, copr_cache_hit_ratio: 0.00}                                                   | data:TableFullScan_30                          | 8.904180526733398 MB | N/A     |
-|   └─TableFullScan_30        | 6000.00 | 3000    | cop[tikv] | table:t2      | time:8ms, loops:7                                                                                                                                                                               | keep order:false                               | N/A                  | N/A     |
-+-----------------------------+---------+---------+-----------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------+----------------------+---------+
-5 rows in set (0.01 sec)
++-----------------------------+-----------+---------+-----------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------+-----------------------+---------+
+| id                          | estRows   | actRows | task      | access object | execution info                                                                                                                                                                                                                                           | operator info                                  | memory                | disk    |
++-----------------------------+-----------+---------+-----------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------+-----------------------+---------+
+| HashJoin_27                 | 142020.00 | 71010   | root      |               | time:647.508572ms, loops:72, build_hash_table:{total:579.254415ms, fetch:566.91012ms, build:12.344295ms}, probe:{concurrency:5, total:3.23315006s, max:647.520113ms, probe:330.884716ms, fetch:2.902265344s}                                             | inner join, equal:[eq(test.t1.id, test.t2.id)] | 209.61642456054688 MB | 0 Bytes |
+| ├─TableReader_29(Build)     | 142020.00 | 71010   | root      |               | time:567.088247ms, loops:72, cop_task: {num: 2, max: 569.809411ms, min: 369.67451ms, avg: 469.74196ms, p95: 569.809411ms, max_proc_keys: 39245, p95_proc_keys: 39245, tot_proc: 400ms, rpc_num: 2, rpc_time: 939.447231ms, copr_cache_hit_ratio: 0.00}   | data:TableFullScan_28                          | 210.2100534439087 MB  | N/A     |
+| │ └─TableFullScan_28        | 142020.00 | 71010   | cop[tikv] | table:t1      | proc max:64ms, min:48ms, p80:64ms, p95:64ms, iters:79, tasks:2                                                                                                                                                                                           | keep order:false                               | N/A                   | N/A     |
+| └─TableReader_31(Probe)     | 180000.00 | 90000   | root      |               | time:337.233636ms, loops:91, cop_task: {num: 3, max: 569.790741ms, min: 332.758911ms, avg: 421.543165ms, p95: 569.790741ms, max_proc_keys: 31719, p95_proc_keys: 31719, tot_proc: 500ms, rpc_num: 3, rpc_time: 1.264570696s, copr_cache_hit_ratio: 0.00} | data:TableFullScan_30                          | 267.1126985549927 MB  | N/A     |
+|   └─TableFullScan_30        | 180000.00 | 90000   | cop[tikv] | table:t2      | proc max:84ms, min:72ms, p80:84ms, p95:84ms, iters:102, tasks:3                                                                                                                                                                                          | keep order:false                               | N/A                   | N/A     |
++-----------------------------+-----------+---------+-----------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------+-----------------------+---------+
+5 rows in set (0.65 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
++-----------------------------+-----------+---------+-----------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------+-----------------------+----------------------+
+| id                          | estRows   | actRows | task      | access object | execution info                                                                                                                                                                                                                                           | operator info                                  | memory                | disk                 |
++-----------------------------+-----------+---------+-----------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------+-----------------------+----------------------+
+| HashJoin_27                 | 142020.00 | 71010   | root      |               | time:963.983353ms, loops:72, build_hash_table:{total:775.961447ms, fetch:503.789677ms, build:272.17177ms}, probe:{concurrency:5, total:4.805454793s, max:963.973133ms, probe:922.156835ms, fetch:3.883297958s}                                           | inner join, equal:[eq(test.t1.id, test.t2.id)] | 93.53974533081055 MB  | 210.7459259033203 MB |
+| ├─TableReader_29(Build)     | 142020.00 | 71010   | root      |               | time:504.062018ms, loops:72, cop_task: {num: 2, max: 509.276857ms, min: 402.66386ms, avg: 455.970358ms, p95: 509.276857ms, max_proc_keys: 39245, p95_proc_keys: 39245, tot_proc: 384ms, rpc_num: 2, rpc_time: 911.893237ms, copr_cache_hit_ratio: 0.00}  | data:TableFullScan_28                          | 210.20934200286865 MB | N/A                  |
+| │ └─TableFullScan_28        | 142020.00 | 71010   | cop[tikv] | table:t1      | proc max:88ms, min:72ms, p80:88ms, p95:88ms, iters:79, tasks:2                                                                                                                                                                                           | keep order:false                               | N/A                   | N/A                  |
+| └─TableReader_31(Probe)     | 180000.00 | 90000   | root      |               | time:363.058382ms, loops:91, cop_task: {num: 3, max: 412.659191ms, min: 358.489688ms, avg: 391.463008ms, p95: 412.659191ms, max_proc_keys: 31719, p95_proc_keys: 31719, tot_proc: 484ms, rpc_num: 3, rpc_time: 1.174326746s, copr_cache_hit_ratio: 0.00} | data:TableFullScan_30                          | 267.11340618133545 MB | N/A                  |
+|   └─TableFullScan_30        | 180000.00 | 90000   | cop[tikv] | table:t2      | proc max:92ms, min:64ms, p80:92ms, p95:92ms, iters:102, tasks:3                                                                                                                                                                                          | keep order:false                               | N/A                   | N/A                  |
++-----------------------------+-----------+---------+-----------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------+-----------------------+----------------------+
+5 rows in set (0.98 sec)
 ```
 
 ## Merge Join
@@ -123,16 +152,16 @@ EXPLAIN SELECT /*+ MERGE_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 ```
 
 ```sql
-+-----------------------------+----------+-----------+------------------------+-------------------------------------------------------+
-| id                          | estRows  | task      | access object          | operator info                                         |
-+-----------------------------+----------+-----------+------------------------+-------------------------------------------------------+
-| MergeJoin_7                 | 12487.50 | root      |                        | inner join, left key:test.t1.id, right key:test.t2.id |
-| ├─IndexReader_12(Build)     | 9990.00  | root      |                        | index:IndexFullScan_11                                |
-| │ └─IndexFullScan_11        | 9990.00  | cop[tikv] | table:t2, index:id(id) | keep order:true, stats:pseudo                         |
-| └─IndexReader_10(Probe)     | 9990.00  | root      |                        | index:IndexFullScan_9                                 |
-|   └─IndexFullScan_9         | 9990.00  | cop[tikv] | table:t1, index:id(id) | keep order:true, stats:pseudo                         |
-+-----------------------------+----------+-----------+------------------------+-------------------------------------------------------+
-5 rows in set (0.01 sec)
++-----------------------------+-----------+-----------+---------------+-------------------------------------------------------+
+| id                          | estRows   | task      | access object | operator info                                         |
++-----------------------------+-----------+-----------+---------------+-------------------------------------------------------+
+| MergeJoin_7                 | 142020.00 | root      |               | inner join, left key:test.t1.id, right key:test.t2.id |
+| ├─TableReader_12(Build)     | 180000.00 | root      |               | data:TableFullScan_11                                 |
+| │ └─TableFullScan_11        | 180000.00 | cop[tikv] | table:t2      | keep order:true                                       |
+| └─TableReader_10(Probe)     | 142020.00 | root      |               | data:TableFullScan_9                                  |
+|   └─TableFullScan_9         | 142020.00 | cop[tikv] | table:t1      | keep order:true                                       |
++-----------------------------+-----------+-----------+---------------+-------------------------------------------------------+
+5 rows in set (0.00 sec)
 ```
 
 The execution of the `Merge Join` operator is as follows:
@@ -152,16 +181,16 @@ EXPLAIN SELECT /*+ INL_HASH_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.t1_id
 ```
 
 ```sql
-+---------------------------------+---------+-----------+------------------------------+---------------------------------------------------------------------------------+
-| id                              | estRows | task      | access object                | operator info                                                                   |
-+---------------------------------+---------+-----------+------------------------------+---------------------------------------------------------------------------------+
-| IndexHashJoin_13                | 6000.00 | root      |                              | inner join, inner:IndexLookUp_10, outer key:test.t1.id, inner key:test.t2.t1_id |
-| ├─TableReader_29(Build)         | 20.00   | root      |                              | data:TableFullScan_28                                                           |
-| │ └─TableFullScan_28            | 20.00   | cop[tikv] | table:t1                     | keep order:false                                                                |
-| └─IndexLookUp_10(Probe)         | 300.00  | root      |                              |                                                                                 |
-|   ├─IndexRangeScan_8(Build)     | 300.00  | cop[tikv] | table:t2, index:t1_id(t1_id) | range: decided by [eq(test.t2.t1_id, test.t1.id)], keep order:false             |
-|   └─TableRowIDScan_9(Probe)     | 300.00  | cop[tikv] | table:t2                     | keep order:false                                                                |
-+---------------------------------+---------+-----------+------------------------------+---------------------------------------------------------------------------------+
++---------------------------------+-----------+-----------+------------------------------+---------------------------------------------------------------------------------+
+| id                              | estRows   | task      | access object                | operator info                                                                   |
++---------------------------------+-----------+-----------+------------------------------+---------------------------------------------------------------------------------+
+| IndexHashJoin_13                | 180000.00 | root      |                              | inner join, inner:IndexLookUp_10, outer key:test.t1.id, inner key:test.t2.t1_id |
+| ├─TableReader_29(Build)         | 142020.00 | root      |                              | data:TableFullScan_28                                                           |
+| │ └─TableFullScan_28            | 142020.00 | cop[tikv] | table:t1                     | keep order:false                                                                |
+| └─IndexLookUp_10(Probe)         | 1.27      | root      |                              |                                                                                 |
+|   ├─IndexRangeScan_8(Build)     | 1.27      | cop[tikv] | table:t2, index:t1_id(t1_id) | range: decided by [eq(test.t2.t1_id, test.t1.id)], keep order:false             |
+|   └─TableRowIDScan_9(Probe)     | 1.27      | cop[tikv] | table:t2                     | keep order:false                                                                |
++---------------------------------+-----------+-----------+------------------------------+---------------------------------------------------------------------------------+
 6 rows in set (0.00 sec)
 ```
 
@@ -176,15 +205,15 @@ EXPLAIN SELECT /*+ INL_MERGE_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.t1_i
 ```
 
 ```sql
-+----------------------------------+---------+-----------+------------------------------+---------------------------------------------------------------------------------+
-| id                               | estRows | task      | access object                | operator info                                                                   |
-+----------------------------------+---------+-----------+------------------------------+---------------------------------------------------------------------------------+
-| IndexMergeJoin_18                | 6000.00 | root      |                              | inner join, inner:IndexLookUp_16, outer key:test.t1.id, inner key:test.t2.t1_id |
-| ├─TableReader_29(Build)          | 20.00   | root      |                              | data:TableFullScan_28                                                           |
-| │ └─TableFullScan_28             | 20.00   | cop[tikv] | table:t1                     | keep order:false                                                                |
-| └─IndexLookUp_16(Probe)          | 300.00  | root      |                              |                                                                                 |
-|   ├─IndexRangeScan_14(Build)     | 300.00  | cop[tikv] | table:t2, index:t1_id(t1_id) | range: decided by [eq(test.t2.t1_id, test.t1.id)], keep order:true              |
-|   └─TableRowIDScan_15(Probe)     | 300.00  | cop[tikv] | table:t2                     | keep order:false                                                                |
-+----------------------------------+---------+-----------+------------------------------+---------------------------------------------------------------------------------+
++----------------------------------+-----------+-----------+------------------------------+---------------------------------------------------------------------------------+
+| id                               | estRows   | task      | access object                | operator info                                                                   |
++----------------------------------+-----------+-----------+------------------------------+---------------------------------------------------------------------------------+
+| IndexMergeJoin_18                | 180000.00 | root      |                              | inner join, inner:IndexLookUp_16, outer key:test.t1.id, inner key:test.t2.t1_id |
+| ├─TableReader_29(Build)          | 142020.00 | root      |                              | data:TableFullScan_28                                                           |
+| │ └─TableFullScan_28             | 142020.00 | cop[tikv] | table:t1                     | keep order:false                                                                |
+| └─IndexLookUp_16(Probe)          | 1.27      | root      |                              |                                                                                 |
+|   ├─IndexRangeScan_14(Build)     | 1.27      | cop[tikv] | table:t2, index:t1_id(t1_id) | range: decided by [eq(test.t2.t1_id, test.t1.id)], keep order:true              |
+|   └─TableRowIDScan_15(Probe)     | 1.27      | cop[tikv] | table:t2                     | keep order:false                                                                |
++----------------------------------+-----------+-----------+------------------------------+---------------------------------------------------------------------------------+
 6 rows in set (0.00 sec)
 ```
