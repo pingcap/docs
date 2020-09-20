@@ -37,7 +37,7 @@ SELECT SLEEP(1);
 ANALYZE TABLE t1, t2;
 ```
 
-## Index Join (Index Nested Loop Join)
+## Index Join
 
 If the estimated rows that need to be joined is small (typically less than 10000 rows), using the Index Join method is preferable. This method of join works similar to the primary method of join used in MySQL. In the following example, the operator `├─TableReader_28(Build)` first reads the table `t1`. For each row that matches, TiDB will probe the table `t2`:
 
@@ -146,6 +146,10 @@ Query OK, 0 rows affected (0.28 sec)
 Query OK, 0 rows affected (3.16 sec)
 ```
 
+### Variations of Index Join
+
+An index join using the hint [`INL_JOIN`](/optimizer-hints.md#inl_joint1_name--tl_name-) will create a hash table of the intermediate results before joining on the outer table. TiDB also supports creating a hash table on the outer table with the hint [`INL_HASH_JOIN`](/optimizer-hints.md#inl_hash_join). If the column sets on the inner table match the columns of the outer table, the [`INL_MERGE_JOIN`](/optimizer-hints.md#inl_merge_join) index join can apply. Each of these variations of Index Join will be automatically selected by the SQL Optimizer.
+
 ## Hash Join
 
 A hash join reads and caches the data on the `Build` side of the join in a hash table, and then reads the data on the `Probe` side of the join, probing the hash table to access required rows. Hash joins require more memory to execute than Index Joins, but execute much faster when there are a lot of rows that need to be joined. The Hash Join operator is multi-threaded in TiDB, and executes in parallel.
@@ -247,51 +251,3 @@ The execution of the `Merge Join` operator is as follows:
 1. Read all the data of a Join Group from the `Build` side into the memory
 2. Read the data of the `Probe` side.
 3. Compare whether each row of data on the `Probe` side matches a complete Join Group on the `Build` side. Apart from equivalent conditions, there are non-equivalent conditions. Here "match" mainly refers to checking whether non-equivalent conditions are met. Join Group refers to the data with the same value among all Join Keys.
-
-## Index Hash Join (Index Nested Loop Hash Join)
-
-`Index Hash Join` uses the same conditions as `Index Join`. However, `Index Hash Join` saves more memory in some scenarios.
-
-{{< copyable "sql" >}}
-
-```sql
-EXPLAIN SELECT /*+ INL_HASH_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.t1_id;
-```
-
-```sql
-+---------------------------------+-----------+-----------+------------------------------+---------------------------------------------------------------------------------+
-| id                              | estRows   | task      | access object                | operator info                                                                   |
-+---------------------------------+-----------+-----------+------------------------------+---------------------------------------------------------------------------------+
-| IndexHashJoin_13                | 180000.00 | root      |                              | inner join, inner:IndexLookUp_10, outer key:test.t1.id, inner key:test.t2.t1_id |
-| ├─TableReader_29(Build)         | 142020.00 | root      |                              | data:TableFullScan_28                                                           |
-| │ └─TableFullScan_28            | 142020.00 | cop[tikv] | table:t1                     | keep order:false                                                                |
-| └─IndexLookUp_10(Probe)         | 1.27      | root      |                              |                                                                                 |
-|   ├─IndexRangeScan_8(Build)     | 1.27      | cop[tikv] | table:t2, index:t1_id(t1_id) | range: decided by [eq(test.t2.t1_id, test.t1.id)], keep order:false             |
-|   └─TableRowIDScan_9(Probe)     | 1.27      | cop[tikv] | table:t2                     | keep order:false                                                                |
-+---------------------------------+-----------+-----------+------------------------------+---------------------------------------------------------------------------------+
-6 rows in set (0.00 sec)
-```
-
-## Index Merge Join (Index Nested Loop Merge Join)
-
-`Index Merge Join` is used in similar scenarios as Index Join. However, the index prefix used by the inner table is the inner table column collection in the join keys. `Index Merge Join` saves more memory than `INL_JOIN`.
-
-{{< copyable "sql" >}}
-
-```sql
-EXPLAIN SELECT /*+ INL_MERGE_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.t1_id;
-```
-
-```sql
-+----------------------------------+-----------+-----------+------------------------------+---------------------------------------------------------------------------------+
-| id                               | estRows   | task      | access object                | operator info                                                                   |
-+----------------------------------+-----------+-----------+------------------------------+---------------------------------------------------------------------------------+
-| IndexMergeJoin_18                | 180000.00 | root      |                              | inner join, inner:IndexLookUp_16, outer key:test.t1.id, inner key:test.t2.t1_id |
-| ├─TableReader_29(Build)          | 142020.00 | root      |                              | data:TableFullScan_28                                                           |
-| │ └─TableFullScan_28             | 142020.00 | cop[tikv] | table:t1                     | keep order:false                                                                |
-| └─IndexLookUp_16(Probe)          | 1.27      | root      |                              |                                                                                 |
-|   ├─IndexRangeScan_14(Build)     | 1.27      | cop[tikv] | table:t2, index:t1_id(t1_id) | range: decided by [eq(test.t2.t1_id, test.t1.id)], keep order:true              |
-|   └─TableRowIDScan_15(Probe)     | 1.27      | cop[tikv] | table:t2                     | keep order:false                                                                |
-+----------------------------------+-----------+-----------+------------------------------+---------------------------------------------------------------------------------+
-6 rows in set (0.00 sec)
-```
