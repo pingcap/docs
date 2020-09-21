@@ -6,7 +6,12 @@ aliases: ['/tidb/dev/tidb-specific-system-variables','/docs/dev/system-variables
 
 # System Variables
 
-TiDB system variables behave similar to MySQL, in that settings may apply on a `SESSION`, `GLOBAL` or both `SESSION` and `GLOBAL` scope. Changes to `GLOBAL` scoped variables **only apply** to new connections to TiDB. Variables can be set with the [`SET` statement](/sql-statements/sql-statement-set-variable.md) on a per-session or global basis:
+TiDB system variables behave similar to MySQL with some differences, in that settings might apply on a `SESSION`, `INSTANCE`, or `GLOBAL` scope, or on a scope that combines `SESSION`, `INSTANCE`, or `GLOBAL`.
+
+- Changes to `GLOBAL` scoped variables **only apply to new connection sessions with TiDB**. Currently active connection sessions are not affected. These changes are persisted and valid after restarts.
+- Changes to `INSTANCE` scoped variables apply to all active or new connection sessions with the current TiDB instance immediately after the changes are made. Other TiDB instances are not affected. These changes are not persisted and become invalid after TiDB restarts.
+
+Variables can be set with the [`SET` statement](/sql-statements/sql-statement-set-variable.md) on a per-session, instance or global basis:
 
 ```sql
 # These two identical statements change a session variable
@@ -39,7 +44,7 @@ SET  GLOBAL tidb_distsql_scan_concurrency = 10;
 
 ### ddl_slow_threshold
 
-- Scope: SESSION
+- Scope: INSTANCE
 - Default value: 300
 - DDL operations whose execution time exceeds the threshold value are output to the log. The unit is millisecond.
 
@@ -171,7 +176,7 @@ SET  GLOBAL tidb_distsql_scan_concurrency = 10;
 
 ### tidb_check_mb4_value_in_utf8
 
-- Scope: SERVER
+- Scope: INSTANCE
 - Default value: 1, indicating check the validity of UTF-8 data. This default behavior is compatible with MySQL.
 - This variable is used to set whether to check the validity of UTF-8 data.
 - To upgrade an earlier version (TiDB v2.1.1 or earlier), you may need to disable this option. Otherwise, you can successfully write invalid strings in an earlier version but fail to do this in a later version, because there is no data validity check in the earlier version. For details, see [FAQs After Upgrade](/faq/upgrade-faq.md).
@@ -324,11 +329,19 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 - Scope: SESSION | GLOBAL
 - Default value: 0
-- This variable is used to control whether to enable `get_lock` and `release_lock` functions. These two functions are not implemented, and always return 1 in the current version of TiDB.
+- By default, TiDB returns an error when you attempt to use the syntax for functionality that is not yet implemented. When the variable value is set to `1`, TiDB silently ignores such cases of unavailable functionality, which is helpful if you cannot make changes to the SQL code.
+- Enabling `noop` functions controls the following behaviors:
+    * `get_lock` and `release_lock` functions
+    * `LOCK IN SHARE MODE` syntax
+    * `SQL_CALC_FOUND_ROWS` syntax
+
+> **Note:**
+>
+> Only the default value of `0` can be considered safe. Setting `tidb_enable_noop_functions=1` might lead to unexpected behaviors in your application, because it permits TiDB to ignore certain syntax without providing an error.
 
 ### tidb_enable_slow_log
 
-- Scope: SESSION
+- Scope: INSTANCE
 - Default value: `1`
 - This variable is used to control whether to enable the slow log feature. It is enabled by default.
 
@@ -402,7 +415,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 ### tidb_expensive_query_time_threshold
 
-- Scope: SERVER
+- Scope: INSTANCE
 - Default value: 60
 - This variable is used to set the threshold value that determines whether to print expensive query logs. The unit is second. The difference between expensive query logs and slow query logs is:
     - Slow logs are printed after the statement is executed.
@@ -410,14 +423,14 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 ### tidb_force_priority
 
-- Scope: SESSION
+- Scope: INSTANCE
 - Default value: `NO_PRIORITY`
 - This variable is used to change the default priority for statements executed on a TiDB server. A use case is to ensure that a particular user that is performing OLAP queries receives lower priority than users performing OLTP queries.
 - You can set the value of this variable to `NO_PRIORITY`, `LOW_PRIORITY`, `DELAYED` or `HIGH_PRIORITY`.
 
 ### tidb_general_log
 
-- Scope: SERVER
+- Scope: INSTANCE
 - Default value: 0
 - This variable is used to set whether to record all the SQL statements in the log.
 
@@ -606,7 +619,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - This variable is used to set whether the optimizer executes the optimization operation of pushing down the aggregate function with `distinct` (such as `select count(distinct a) from t`) to Coprocessor.
 - When the aggregate function with the `distinct` operation is slow in the query, you can set the variable value to `1`.
 
-In the following example, before `tidb_opt_distinct_agg_push_down` is enabled, TiDB needs to read all data from TiKV and execute `disctinct` on the TiDB side. After `tidb_opt_distinct_agg_push_down` is enabled, `distinct a` is pushed down to Coprocessor, and a `group by` column `test.t.a` is added to `HashAgg_5`.
+In the following example, before `tidb_opt_distinct_agg_push_down` is enabled, TiDB needs to read all data from TiKV and execute `distinct` on the TiDB side. After `tidb_opt_distinct_agg_push_down` is enabled, `distinct a` is pushed down to Coprocessor, and a `group by` column `test.t.a` is added to `HashAgg_5`.
 
 ```sql
 mysql> desc select count(distinct a) from test.t;
@@ -671,7 +684,7 @@ mysql> desc select count(distinct a) from test.t;
 
 ### tidb_query_log_max_len
 
-- Scope: SESSION
+- Scope: INSTANCE
 - Default value: 4096 (bytes)
 - The maximum length of the SQL statement output. When the output length of a statement is larger than the `tidb_query-log-max-len` value, the statement is truncated to output.
 
@@ -683,13 +696,13 @@ set tidb_query_log_max_len = 20
 
 ### tidb_pprof_sql_cpu <span class="version-mark">New in v4.0</span>
 
-- Scope: SESSION
+- Scope: INSTANCE
 - Default value: 0
 - This variable is used to control whether to mark the corresponding SQL statement in the profile output to identify and troubleshoot performance issues.
 
 ### tidb_record_plan_in_slow_log
 
-- Scope: SESSION
+- Scope: INSTANCE
 - Default value: `1`
 - This variable is used to control whether to include the execution plan of slow queries in the slow log.
 
@@ -748,7 +761,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 ### tidb_slow_log_threshold
 
-- Scope: SESSION
+- Scope: INSTANCE
 - Default value: 300ms
 - This variable is used to output the threshold value of the time consumed by the slow log. When the time consumed by a query is larger than this value, this query is considered as a slow log and its log is output to the slow query log.
 
@@ -757,6 +770,19 @@ Usage example:
 ```sql
 SET tidb_slow_log_threshold = 200;
 ```
+
+### tidb_enable_collect_execution_info
+
+- Scope: INSTANCE
+- Default value: 1
+- This variable controls whether to record the execution information of each operator in the slow query log.
+
+### tidb_log_desensitization
+
+- Scope: GLOBAL
+- Default value: 0
+- This variable controls whether to hide user information in the SQL statement being recorded into the TiDB log and slow log.
+- When you set the variable to `1`, user information is hidden. For example, if the executed SQL statement is `insert into t values (1,2)`, the statement is recorded as `insert into t values (?,?)` in the log.
 
 ### tidb_slow_query_file
 
@@ -802,7 +828,7 @@ SET tidb_slow_log_threshold = 200;
 
 ### tidb_store_limit <span class="version-mark">New in v3.0.4 and v4.0</span>
 
-- Scope: SESSION | GLOBAL
+- Scope: INSTANCE | GLOBAL
 - Default value: 0
 - This variable is used to limit the maximum number of requests TiDB can send to TiKV at the same time. 0 means no limit.
 
@@ -837,7 +863,7 @@ SET tidb_slow_log_threshold = 200;
 
 - Scope: SESSION | GLOBAL
 - Default value: 4
-- This variable is used to set the concurrency degree of the window operator. 
+- This variable is used to set the concurrency degree of the window operator.
 
 ### time_zone
 
