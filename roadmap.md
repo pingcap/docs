@@ -45,12 +45,12 @@ aliases: ['/docs/ROADMAP/','/docs/roadmap/']
 
 - [ ] [Optimize the performance and stability of TiDB running on AWS i3.xlarge/i3.2xlarge](https://github.com/pingcap/tidb/issues/18025).
 - [ ] [Optimize the performance and stability of TiDB running on No-NVME SSD or Cloud disk (like AWS EBS gp2)](https://github.com/pingcap/tidb/issues/18024).
-- [ ] [Easier discover performance issues and diagnose causes](https://github.com/pingcap/tidb/issues/18867).
 
 ## New Feature
 
 - [ ] [Point-in-Time Recovery](https://github.com/pingcap/br/issues/325).
 - [ ] [Changing Column Types](https://github.com/pingcap/tidb/issues/17526).
+- [ ] [Easier discover performance issues and diagnose causes](https://github.com/pingcap/tidb/issues/18867).
 - [ ] [Support collation `utf8mb4_unicode_ci` and `utf8_unicode_ci`](https://github.com/pingcap/tidb/issues/17596).
 - [ ] [Make TiCDC a complete alternative to TiDB-Binlog](https://github.com/pingcap/ticdc/issues/690)
     - [ ] Support distinguish update and insert in a row changed event].
