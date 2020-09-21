@@ -272,7 +272,7 @@ COMMIT;
 
 ## Protocol parsing for consumers
 
-Currently, TiCDC does not provide the standard implementation of TiCDC Open Protocol parsing but demonstrations of parsing for the Golang version and Java version. You can refer to the data format provided in this document and the following demonstrations to implement the protocol parsing for consumers.
+Currently, TiCDC does not provide the standard parsing library for TiCDC Open Protocol, but the Golang version and Java version of parsing demonstrations are provided. You can refer to the data format provided in this document and the following demonstrations to implement the protocol parsing for consumers.
 
 - [Golang demo](https://github.com/pingcap/ticdc/tree/master/kafka_consumer)
 - [Java demo](https://github.com/pingcap/ticdc/tree/master/demo/java)
