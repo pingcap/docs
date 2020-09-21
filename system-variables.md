@@ -285,6 +285,22 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Default value: 0
 - This variable is used to control whether to enable the cascades planner, which is currently considered experimental.
 
+### tidb_enable_clustered_index <!-- New in v5.0 -->
+
+- Scope: SESSION | GLOBAL
+- Default value: 1
+- This variable is used to control whether to enable the clustered index feature.
+    - This feature is only applicable to newly created tables and does not affect the existing old tables.
+    - This feature is only applicable to tables whose primary key is the single-column non-integer type or the multi-column type. It does not affect the tables without a primary key or tables with the primary key of the single-column non-integer type.
+    - You can execute `select tidb_pk_type from information_schema.tables where table_name ='{table_name}'` to check whether the clustered index feature has been enabled on a table.
+- After you enable this feature, rows are stored directly on the primary key instead of on the internally allocated `rows_id` to which the extra primary key index is created to point.
+
+    This feature impacts performance in the following aspects:
+    - For each `INSERT` operation, there is one less index key written into each row.
+    - When you make a query using the primary key as the equivalent condition, one read request can be saved.
+    - When you make a query using the primary key as the range condition, multiple read requests can be saved.
+    - When you make a query using the prefix of the multi-column primary key as the equivalent condition or range condition, multiple read requests can be saved.
+
 ### tidb_enable_chunk_rpc <span class="version-mark">New in v4.0</span>
 
 - Scope: SESSION
@@ -308,7 +324,15 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 - Scope: SESSION | GLOBAL
 - Default value: 0
-- This variable is used to control whether to enable `get_lock` and `release_lock` functions. These two functions are not implemented, and always return 1 in the current version of TiDB.
+- By default, TiDB returns an error when you attempt to use the syntax for functionality that is not yet implemented. When the variable value is set to `1`, TiDB silently ignores such cases of unavailable functionality, which is helpful if you cannot make changes to the SQL code.
+- Enabling `noop` functions controls the following behaviors:
+    * `get_lock` and `release_lock` functions
+    * `LOCK IN SHARE MODE` syntax
+    * `SQL_CALC_FOUND_ROWS` syntax
+
+> **Note:**
+>
+> Only the default value of `0` can be considered safe. Setting `tidb_enable_noop_functions=1` might lead to unexpected behaviors in your application, because it permits TiDB to ignore certain syntax without providing an error.
 
 ### tidb_enable_slow_log
 
@@ -590,7 +614,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - This variable is used to set whether the optimizer executes the optimization operation of pushing down the aggregate function with `distinct` (such as `select count(distinct a) from t`) to Coprocessor.
 - When the aggregate function with the `distinct` operation is slow in the query, you can set the variable value to `1`.
 
-In the following example, before `tidb_opt_distinct_agg_push_down` is enabled, TiDB needs to read all data from TiKV and execute `disctinct` on the TiDB side. After `tidb_opt_distinct_agg_push_down` is enabled, `distinct a` is pushed down to Coprocessor, and a `group by` column `test.t.a` is added to `HashAgg_5`.
+In the following example, before `tidb_opt_distinct_agg_push_down` is enabled, TiDB needs to read all data from TiKV and execute `distinct` on the TiDB side. After `tidb_opt_distinct_agg_push_down` is enabled, `distinct a` is pushed down to Coprocessor, and a `group by` column `test.t.a` is added to `HashAgg_5`.
 
 ```sql
 mysql> desc select count(distinct a) from test.t;
