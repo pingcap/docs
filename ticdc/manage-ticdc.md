@@ -73,7 +73,7 @@ The following are descriptions of options available in the `cdc server` command:
 
 ## Upgrade TiCDC using TiUP
 
-This section introduces how to upgrade the TiCDC-enabled cluster using TiUP. In the following example, assume that you need to upgrade TiCDC and the cluster to v4.0.6.
+This section introduces how to upgrade the TiCDC cluster using TiUP. In the following example, assume that you need to upgrade TiCDC and the entire TiDB cluster to v4.0.6.
 
 {{< copyable "shell-regular" >}}
 
