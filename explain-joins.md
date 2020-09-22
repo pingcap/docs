@@ -150,6 +150,13 @@ Query OK, 0 rows affected (3.16 sec)
 
 An index join using the hint [`INL_JOIN`](/optimizer-hints.md#inl_joint1_name--tl_name-) will create a hash table of the intermediate results before joining on the outer table. TiDB also supports creating a hash table on the outer table with the hint [`INL_HASH_JOIN`](/optimizer-hints.md#inl_hash_join). If the column sets on the inner table match the columns of the outer table, the [`INL_MERGE_JOIN`](/optimizer-hints.md#inl_merge_join) index join can apply. Each of these variations of Index Join will be automatically selected by the SQL Optimizer.
 
+### Configuration
+
+Index Join performance is influenced by the following system variables:
+
+* [`tidb_index_join_batch_size`](/system-variables.md#tidb_index_join_batch_size) (default: 25000) - the batch size of index lookup operations.
+* [`tidb_index_lookup_join_concurrency`](/system-variables.md#tidb_index_lookup_join_concurrency) (default: 4) - the number of concurrent index lookup tasks.
+
 ## Hash Join
 
 A hash join reads and caches the data on the `Build` side of the join in a hash table, and then reads the data on the `Probe` side of the join, probing the hash table to access required rows. Hash joins require more memory to execute than Index Joins, but execute much faster when there are a lot of rows that need to be joined. The Hash Join operator is multi-threaded in TiDB, and executes in parallel.
@@ -220,6 +227,13 @@ Query OK, 0 rows affected (0.00 sec)
 +-----------------------------+-----------+---------+-----------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------+-----------------------+----------------------+
 5 rows in set (0.98 sec)
 ```
+
+### Configuration
+
+Hash Join performance is influenced by the following system variables:
+
+* [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) (default: 1GB) - if the memory quota for a query is exceeded, TiDB will attempt to create hash tables on disk to save memory.
+* [`tidb_hash_join_concurrency`](/system-variables.md#tidb_hash_join_concurrency) (default: 5) - the number of concurrent hash join tasks.
 
 ## Merge Join
 
