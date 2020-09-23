@@ -52,4 +52,4 @@ This statement is a TiDB extension to MySQL syntax.
 
 ## See also
 
-* [`ADMIN REPAIR`](/sql-statements/sql-statement-admin.md#admin-repair-statement)
+* [`ADMIN`](/sql-statements/sql-statement-admin.md)
