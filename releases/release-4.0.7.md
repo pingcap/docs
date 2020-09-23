@@ -1,20 +1,18 @@
 ---
-title: TiDB v4.0.7 Release Notes
-category: Releases
-aliases: ['/docs/dev/releases/v4.0.7/']
+title: TiDB 4.0.7 Release Notes
 ---
 
-# TiDB v4.0.7 Release Notes
+# TiDB 4.0.7 Release Notes
 
-Release date: September 23, 2020
+Release date: September 29, 2020
 
-TiDB version: v4.0.7
+TiDB version: 4.0.7
 
 ## Improvements
 
 + TiDB
 
-    - Add more runtime information for join executor. [#20093](https://github.com/pingcap/tidb/pull/20093)
+    - Add more runtime information for join executor [#20093](https://github.com/pingcap/tidb/pull/20093)
 
 + TiFlash
 
@@ -26,14 +24,14 @@ TiDB version: v4.0.7
 
     - Solve vectorization bug from and/or/COALESCE due to short cut [#20092](https://github.com/pingcap/tidb/pull/20092)
     - Fix issue of plan digest is same when cop task store is different [#20076](https://github.com/pingcap/tidb/pull/20076)
-    - Fix wrong behavior for != any() [#20062](https://github.com/pingcap/tidb/pull/20062)
+    - Fix wrong behavior for `!= any()` [#20062](https://github.com/pingcap/tidb/pull/20062)
     - Fix issue query slow_query error when slow-log file not exist [#20051](https://github.com/pingcap/tidb/pull/20051)
-    - Fix unexpected retry region request when context cancel. [#20031](https://github.com/pingcap/tidb/pull/20031)
-    - Fix issue querying cluster_slow_query time type in streaming request bug. [#19943](https://github.com/pingcap/tidb/pull/19943)
+    - Fix unexpected retry region request when context cancel [#20031](https://github.com/pingcap/tidb/pull/20031)
+    - Fix issue querying cluster_slow_query time type in streaming request bug [#19943](https://github.com/pingcap/tidb/pull/19943)
 
 + PD
 
-    - Fix the bug that pd might panic If some regions have no leader when `balance-region` enabled. [#2994](https://github.com/pingcap/pd/pull/2994)
+    - Fix the bug that pd might panic If some regions have no leader when `balance-region` enabled [#2994](https://github.com/pingcap/pd/pull/2994)
     - Fix the statistical deviation of region size and region keys after region merge [#2985](https://github.com/pingcap/pd/pull/2985)
 
 ## Others
@@ -45,19 +43,19 @@ TiDB version: v4.0.7
     - Bug fix:CLUSTER_INFO system table may not work after PD is scaled-in or out [#20026](https://github.com/pingcap/tidb/pull/20026)
     - Fix panic tidb-server doesn't release table lock [#20020](https://github.com/pingcap/tidb/pull/20020)
     - Update stats per table to avoid OOM [#20013](https://github.com/pingcap/tidb/pull/20013)
-    - Refine error message desensitization. [#20004](https://github.com/pingcap/tidb/pull/20004)
-    - Add coprocessor cache hit ratio in explain analyze. [#19972](https://github.com/pingcap/tidb/pull/19972)
+    - Refine error message desensitization [#20004](https://github.com/pingcap/tidb/pull/20004)
+    - Add coprocessor cache hit ratio in explain analyze [#19972](https://github.com/pingcap/tidb/pull/19972)
     - Support push ROUND function to TiFlash [#19967](https://github.com/pingcap/tidb/pull/19967)
-    - TiDB now accepts connections from clients using connectors from MySQL 8.0. [#19959](https://github.com/pingcap/tidb/pull/19959)
+    - TiDB now accepts connections from clients using connectors from MySQL 8.0 [#19959](https://github.com/pingcap/tidb/pull/19959)
     - Fix incorrect error message of inserting enum & set [#19950](https://github.com/pingcap/tidb/pull/19950)
     - Add default value of CMSketch for Analyze [#19927](https://github.com/pingcap/tidb/pull/19927)
     - Avoid unnecessary warnings/errors when folding constants in control expr [#19910](https://github.com/pingcap/tidb/pull/19910)
-    - Fix the behavior of rewrite ScalarFunction IsTure . [#19903](https://github.com/pingcap/tidb/pull/19903)
+    - Fix the behavior of rewrite ScalarFunction IsTure [#19903](https://github.com/pingcap/tidb/pull/19903)
 
 + TiKV
 
     - Fix possible missing blob file error of generating snap when doing UnsafeDestroyRange [#8681](https://github.com/tikv/tikv/pull/8681)
-    - Fix the bug that status server shutdown when the TLS handshake fails. [#8654](https://github.com/tikv/tikv/pull/8654)
+    - Fix the bug that status server shutdown when the TLS handshake fails [#8654](https://github.com/tikv/tikv/pull/8654)
 
 + PD
 
@@ -71,4 +69,4 @@ TiDB version: v4.0.7
 
 + TiFlash
 
-    - Fix TiFlash right out join bug. [#1110](https://github.com/pingcap/tics/pull/1110)
+    - Fix TiFlash right out join bug
