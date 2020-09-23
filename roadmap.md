@@ -1,6 +1,5 @@
 ---
-title: TiDB  Roadmap
-category: Roadmap
+title: TiDB Roadmap
 aliases: ['/docs/ROADMAP/','/docs/roadmap/']
 ---
 
@@ -11,7 +10,7 @@ aliases: ['/docs/ROADMAP/','/docs/roadmap/']
 ## Improve system stability
 
 - [ ] [Create bindings for `UPDATE`/`DELETE`/`INSERT` queries](https://github.com/pingcap/tidb/issues/15827).
-- [ ] [Optimize transaction commits to avoid them failed caused by DDL execution](https://github.com/pingcap/tidb/issues/18098).
+- [ ] [Optimize transaction commits to avoid commit failures caused by DDL execution](https://github.com/pingcap/tidb/issues/18098).
 - [ ] [Reduce latency jitter](https://github.com/pingcap/tidb/issues/18005).
 
 ## Improve system performance and reduce latency
@@ -20,7 +19,7 @@ aliases: ['/docs/ROADMAP/','/docs/roadmap/']
 - [ ] [Improve memory management](https://github.com/pingcap/tidb/issues/17479).
 - [ ] [Improve the accuracy and robustness of index selection](https://github.com/pingcap/tidb/issues/18065).
 - [ ] [Improve the performance of partition pruning and data access on the partitioned table](https://github.com/pingcap/tidb/issues/18016).
-- [ ] [Asynchronous commit means the writing statement can return to the client ASAP the prewrite stage finished,Reduces system latency](https://github.com/tikv/tikv/issues/8316).
+- [ ] [Async Commit](https://github.com/tikv/tikv/issues/8316). This feature means that the statement being written can return to the client as soon as possible after the prewrite stage finishes, which reduces system latency.
 - [ ] [Clustered index](https://github.com/pingcap/tidb/issues/4841).
 - [ ] [Support cross-region deployment and geo-partition](https://github.com/pingcap/tidb/issues/18273).
 
@@ -28,25 +27,25 @@ aliases: ['/docs/ROADMAP/','/docs/roadmap/']
 
 ### Authentication
 
-- [ ] [Transport Layer Security(TLS) for TiFlash](https://github.com/pingcap/tidb/issues/18080).
+- [ ] [Transport Layer Security (TLS) for TiFlash](https://github.com/pingcap/tidb/issues/18080).
 - [ ] [TLS for internal communication in the TiDB cluster](https://github.com/pingcap/tiup/issues/529).
 - [ ] [SSH LDAP extension for TiUP](https://github.com/pingcap/tiup/issues/528).
 
 ### Transparent Data Encryption (TDE)
 
 - [ ] [Transparent Data Encryption (TDE) for TiFlash](https://github.com/pingcap/tidb/issues/18082).
-- [ ] [Transparent Data Encryption (TDE) for PD](https://github.com/pingcap/tidb/issues/18262).
+- [ ] [TDE for PD](https://github.com/pingcap/tidb/issues/18262).
 
 ### Mask
 
 - [ ] [Desensitize the TiDB general log](https://github.com/pingcap/tidb/issues/18034).
 
-## Cost-effective
+## Cost-effectiveness
 
 - [ ] [Optimize the performance and stability of TiDB running on AWS i3.xlarge/i3.2xlarge](https://github.com/pingcap/tidb/issues/18025).
 - [ ] [Optimize the performance and stability of TiDB running on non-NVMe SSD or on cloud disk (such as AWS EBS gp2)](https://github.com/pingcap/tidb/issues/18024).
 
-## New feature
+## New features
 
 - [ ] [Point-in-time recovery](https://github.com/pingcap/br/issues/325).
 - [ ] [Change column types](https://github.com/pingcap/tidb/issues/17526).
