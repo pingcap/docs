@@ -63,7 +63,6 @@
   + Configure
     - [Time Zone](/configure-time-zone.md)
     - [Memory Control](/configure-memory-usage.md)
-    - [Placement Rules](/configure-placement-rules.md)
     - [Store Limit](/configure-store-limit.md)
   + Secure
     + Transport Layer Security (TLS)
@@ -85,16 +84,14 @@
     + Backup and Restore
       - [Use Mydumper and TiDB Lightning](/backup-and-restore-using-mydumper-lightning.md)
       - [Use Dumpling for Export or Backup](/export-or-backup-using-dumpling.md)
-      + Use BR
-        - [Use BR](/br/backup-and-restore-tool.md)
-        - [BR Use Cases](/br/backup-and-restore-use-cases.md)
     + Identify Abnormal Queries
       - [Identify Slow Queries](/identify-slow-queries.md)
       - [Identify Expensive Queries](/identify-expensive-queries.md)
   + Scale
     - [Scale using Ansible](/scale-tidb-using-ansible.md)
+    - [Scale a TiDB Cluster](/horizontal-scale.md)
   + Upgrade
-    - [Upgrade to TiDB 3.1](/upgrade-tidb-using-ansible.md)
+    - [Upgrade to TiDB 3.0](/upgrade-tidb-using-ansible.md)
   + Troubleshoot
     - [TiDB Troubleshooting Map](/tidb-troubleshooting-map.md)
     - [Troubleshoot Cluster Setup](/troubleshoot-tidb-cluster.md)
@@ -109,8 +106,6 @@
       - [User-Defined Variables](/user-defined-variables.md)
       - [Expression Syntax](/expression-syntax.md)
       - [Comment Syntax](/comment-syntax.md)
-    + Attributes
-      - [`AUTO_RANDOM`](/auto-random.md)
     + Data Types
       - [Overview](/data-type-overview.md)
       - [Default Values](/data-type-default-values.md)
@@ -174,7 +169,6 @@
       - [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md)
       - [`ADMIN SHOW DDL [JOBS|QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)
       - [`ALTER DATABASE`](/sql-statements/sql-statement-alter-database.md)
-      - [`ALTER INSTANCE`](/sql-statements/sql-statement-alter-instance.md)
       - [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md)
       - [`ALTER USER`](/sql-statements/sql-statement-alter-user.md)
       - [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)
@@ -301,7 +295,6 @@
     - [Introduction to Statistics](/statistics.md)
     - [TopN and Limit Push Down](/topn-limit-push-down.md)
     - [Optimizer Hints](/optimizer-hints.md)
-    - [Follower Read](/follower-read.md)
     - [Check the TiDB Cluster Status Using SQL Statements](/check-cluster-status-using-sql-statements.md)
     - [Execution Plan Binding](/execution-plan-binding.md)
     - [Statement Summary Table](/statement-summary-tables.md)
@@ -323,19 +316,6 @@
     - [TiKV Performance Tuning with Massive Regions](/best-practices/massive-regions-best-practices.md)
   - [TiSpark](/tispark-overview.md)
   - [TiKV](/tikv-overview.md)
-  + TiFlash
-    - [Overview](/tiflash/tiflash-overview.md)
-    - [Deploy a TiFlash Cluster](/tiflash/deploy-tiflash.md)
-    - [Use TiFlash](/tiflash/use-tiflash.md)
-    - [Maintain a TiFlash Cluster](/tiflash/maintain-tiflash.md)
-    - [Monitor TiFlash](/tiflash/monitor-tiflash.md)
-    - [Scale TiFlash](/tiflash/scale-tiflash.md)
-    - [Upgrade TiFlash Nodes](/tiflash/upgrade-tiflash.md)
-    - [Configure TiFlash](/tiflash/tiflash-configuration.md)
-    - [Command-line Flags](/tiflash/tiflash-command-line-flags.md)
-    - [TiFlash Alert Rules](/tiflash/tiflash-alert-rules.md)
-    - [Tune TiFlash Performance](/tiflash/tune-tiflash-performance.md)
-    - [FAQ](/tiflash/tiflash-faq.md)
   + TiDB Binlog
     - [Overview](/tidb-binlog/tidb-binlog-overview.md)
     - [Deploy](/tidb-binlog/deploy-tidb-binlog.md)
@@ -359,10 +339,6 @@
     - [Use Cases](/ecosystem-tool-user-case.md)
     - [Download](/download-ecosystem-tools.md)
     - [Table Filter](/table-filter.md)
-    + Backup & Restore (BR)
-      - [Use BR](/br/backup-and-restore-tool.md)
-      - [BR Use Cases](/br/backup-and-restore-use-cases.md)
-      - [BR FAQ](/br/backup-and-restore-faq.md)
     - [Mydumper](/mydumper-overview.md)
     - [Syncer](/syncer-overview.md)
     - [Loader](/loader-overview.md)
@@ -403,14 +379,6 @@
 - [Adopters](/adopters.md)
 + Releases
   + [All Releases](/releases/release-notes.md)
-  + v3.1
-    - [3.1.2](/releases/release-3.1.2.md)
-    - [3.1.1](/releases/release-3.1.1.md)
-    - [3.1.0 GA](/releases/release-3.1.0-ga.md)
-    - [3.1.0-rc](/releases/release-3.1.0-rc.md)
-    - [3.1.0-beta.2](/releases/release-3.1.0-beta.2.md)
-    - [3.1.0-beta.1](/releases/release-3.1.0-beta.1.md)
-    - [3.1.0-beta](/releases/release-3.1.0-beta.md)
   + v3.0
     - [3.0.18](/releases/release-3.0.18.md)
     - [3.0.17](/releases/release-3.0.17.md)
