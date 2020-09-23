@@ -19,7 +19,7 @@ aliases: ['/docs/ROADMAP/','/docs/roadmap/']
 - [ ] Improve memory management [#17479](https://github.com/pingcap/tidb/issues/17479)
 - [ ] Improve the accuracy and robustness of index selection [#18065](https://github.com/pingcap/tidb/issues/18065)
 - [ ] Improve the performance of partition pruning and data access on the partitioned table [#18016](https://github.com/pingcap/tidb/issues/18016)
-- [ ] [Async Commit](https://github.com/tikv/tikv/issues/8316). This feature means that the statement being written can return to the client as soon as possible after the prewrite stage finishes, which reduces system latency.
+- [ ] Async Commit. This feature means that the statement being written can return to the client as soon as possible after the prewrite stage finishes, which reduces system latency. [#8316](https://github.com/tikv/tikv/issues/8316)
 - [ ] Clustered index [#4841](https://github.com/pingcap/tidb/issues/4841)
 - [ ] Support cross-region deployment and geo-partition [#18273](https://github.com/pingcap/tidb/issues/18273)
 
