@@ -8,7 +8,7 @@ aliases: ['/docs/stable/sql-statements/sql-statement-alter-database/','/docs/v4.
 
 `ALTER DATABASE` is used to specify or modify the default character set and collation of the current database. `ALTER SCHEMA` has the same effect as `ALTER DATABASE`.
 
-## 语法图
+## Synopsis
 
 **AlterDatabaseStmt:**
 
