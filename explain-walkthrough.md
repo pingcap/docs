@@ -203,4 +203,4 @@ From the result above, the query time has reduced from 1.03 seconds to 0.0 secon
 
 > **Tip:**
 >
-> Another optimization that applies here is the coprocessor cache. If you are unable to add indexes, consider enabling the [coprocessor cache](/coprocessor-cache.md). When enabled, as long as the region has not been modified since the operator was last executed, TiKV will return the value from cache. This will also help reduce much of the expense of the expensive `TableFullScan` and `Selection` operators.
+> Another optimization that applies here is the coprocessor cache. If you are unable to add indexes, consider enabling the [coprocessor cache](/coprocessor-cache.md). When it is enabled, as long as the Region has not been modified since the operator is last executed, TiKV will return the value from the cache. This will also help reduce much of the cost of the expensive `TableFullScan` and `Selection` operators.
