@@ -28,7 +28,7 @@ EXPLAIN SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00
 5 rows in set (0.00 sec)
 ```
 
-Working from the child operator `└─TableFullScan_18` back, we can see that this query is currently suboptimal:
+Working from the child operator `└─TableFullScan_18` back, you can see its execution process as follows, which is currently suboptimal:
 
 1. The coprocessor (TiKV) is reading the entire trips table, as a `TableFullScan`. It then passes the rows that it reads to `Selection_19`, still within TiKV.
 2. The `WHERE start_date BETWEEN ..` predicate is then filtered in the `Selection_19` operator. It is estimated that approximately `250` rows will meet this selection. Note that this number was produced from a heuristic; the `└─TableFullScan_18` operator shows `stats:pseudo`. After running `ANALYZE TABLE trips` the statistics should be more accurate.
