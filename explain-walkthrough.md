@@ -179,7 +179,7 @@ EXPLAIN SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00
 4 rows in set (0.00 sec)
 ```
 
-To compare the actual execution time, we can again use [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md):
+To compare the actual execution time, you can again use [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md):
 
 {{< copyable "sql" >}}
 
