@@ -159,7 +159,7 @@ Query OK, 0 rows affected (2 min 10.23 sec)
 > 
 > The progress of DDL jobs can be monitored with the command [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin.md). The defaults in TiDB are carefully chosen so that adding an index does not impact production workloads too much. For testing environments, consider increasing [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size) and [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt). On a reference system, a batch size of 10240 and worker count of 32 achieved a 10x improvement over the defaults.
 
-With the index added we can then repeat the query in `EXPLAIN`. In the following output, we can see that a new execution plan is chosen, and the `TableFullScan` and `Selection` operators have been eliminated:
+After adding an index, you can then repeat the query in `EXPLAIN`. In the following output, you can see that a new execution plan is chosen, and the `TableFullScan` and `Selection` operators have been eliminated:
 
 {{< copyable "sql" >}}
 
