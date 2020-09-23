@@ -199,7 +199,7 @@ EXPLAIN ANALYZE SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 
 4 rows in set (0.00 sec)
 ```
 
-The query time has reduced from 1.03 seconds to 0.0 seconds. Not bad!
+From the result above, the query time has reduced from 1.03 seconds to 0.0 seconds.
 
 > **Tip:**
 >
