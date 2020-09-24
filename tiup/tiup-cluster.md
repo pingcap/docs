@@ -412,7 +412,7 @@ The content and format requirements for files under the specified path are as fo
 - The folder specified in the `rule_dir` field of `monitoring_servers` need to contain full `*.rules.yml` files
 - For the format of files specified in the `config_file` field of `alertmanager_servers`, refer to [this template](https://github.com/pingcap/tiup/blob/master/templates/config/alertmanager.yml)
 
-When you execute `tiup reload`, TiUP first delete all old configuration files in the target machine and then upload the corresponding configuration from the control machine to the corresponding configuration directory of the target machine. Therefore, if you want to modify a particular configuration file, make sure that all configuration files (including the unmodified ones) are in the same directory. For example, to modify Grafana's `tidb.json` file, you need to first copy all the `*.json` files from Grafana's `dashboards` directory to your local directory. Otherwise, other JSON files will be missing from the target machine.
+When you execute `tiup reload`, TiUP first deletes all old configuration files in the target machine and then uploads the corresponding configuration from the control machine to the corresponding configuration directory of the target machine. Therefore, if you want to modify a particular configuration file, make sure that all configuration files (including the unmodified ones) are in the same directory. For example, to modify Grafana's `tidb.json` file, you need to first copy all the `*.json` files from Grafana's `dashboards` directory to your local directory. Otherwise, other JSON files will be missing from the target machine.
 
 > **Note:**
 >
