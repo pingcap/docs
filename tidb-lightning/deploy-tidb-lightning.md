@@ -129,7 +129,7 @@ You can deploy TiDB Lightning using TiDB Ansible together with the [deployment o
     "sorted-kv-dir" = "/mnt/ssd/sorted-kv-dir"
 
     [tidb]
-    # Fill in one address of pd-server.
+    # An address of pd-server.
     pd-addr = "172.16.31.4:2379
     ```
 
@@ -188,7 +188,7 @@ Refer to the [TiDB enterprise tools download page](/download-ecosystem-tools.md#
     password = ""
     # Table schema information is fetched from TiDB via this status-port.
     status-port = 10080
-    # Fill in one address of pd-server.
+    # An address of pd-server.
     pd-addr = "172.16.31.4:2379"
     ```
 
