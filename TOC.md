@@ -245,6 +245,10 @@
       + [`ADD COLUMN`](/sql-statements/sql-statement-add-column.md)
       + [`ADD INDEX`](/sql-statements/sql-statement-add-index.md)
       + [`ADMIN`](/sql-statements/sql-statement-admin.md)
+      + [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)
+      + [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)
+      + [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md)
+      + [`ADMIN SHOW DDL [JOBS|QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)
       + [`ALTER DATABASE`](/sql-statements/sql-statement-alter-database.md)
       + [`ALTER INDEX`](/sql-statements/sql-statement-alter-index.md)
       + [`ALTER INSTANCE`](/sql-statements/sql-statement-alter-instance.md)
@@ -479,6 +483,8 @@
     + TiKV
       + [TiKV Overview](/tikv-overview.md)
       + [RocksDB Overview](/storage-engine/rocksdb-overview.md)
+      + [Titan Overview](/storage-engine/titan-overview.md)
+      + [Titan Configuration](/storage-engine/titan-configuration.md)
     + TiFlash
       + [Overview](/tiflash/tiflash-overview.md)
       + [Use TiFlash](/tiflash/use-tiflash.md)
@@ -499,6 +505,7 @@
   + [TiCDC Overview](/ticdc/ticdc-overview.md)
   + [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
   + [Table Filter](/table-filter.md)
+  + [Schedule Replicas by Topology Labels](/schedule-replicas-by-topology-labels.md)
 + FAQs
   + [TiDB FAQs](/faq/tidb-faq.md)
   + [SQL FAQs](/faq/sql-faq.md)
@@ -510,7 +517,9 @@
 + [Glossary](/glossary.md)
 + Release Notes
   + [All Releases](/releases/release-notes.md)
+  + [TiDB Roadmap](/roadmap.md)
   + v4.0
+    + [4.0.6](/releases/release-4.0.6.md)
     + [4.0.5](/releases/release-4.0.5.md)
     + [4.0.4](/releases/release-4.0.4.md)
     + [4.0.3](/releases/release-4.0.3.md)
