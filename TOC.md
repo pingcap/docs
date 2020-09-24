@@ -245,6 +245,10 @@
       + [`ADD COLUMN`](/sql-statements/sql-statement-add-column.md)
       + [`ADD INDEX`](/sql-statements/sql-statement-add-index.md)
       + [`ADMIN`](/sql-statements/sql-statement-admin.md)
+      + [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)
+      + [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)
+      + [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md)
+      + [`ADMIN SHOW DDL [JOBS|QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)
       + [`ALTER DATABASE`](/sql-statements/sql-statement-alter-database.md)
       + [`ALTER INDEX`](/sql-statements/sql-statement-alter-index.md)
       + [`ALTER INSTANCE`](/sql-statements/sql-statement-alter-instance.md)
@@ -513,6 +517,7 @@
 + [Glossary](/glossary.md)
 + Release Notes
   + [All Releases](/releases/release-notes.md)
+  + [TiDB Roadmap](/roadmap.md)
   + v4.0
     + [4.0.6](/releases/release-4.0.6.md)
     + [4.0.5](/releases/release-4.0.5.md)
