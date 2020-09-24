@@ -395,12 +395,15 @@ The command sends the configuration to the target machine and restarts the clust
 
 ```yaml
 ---
+
 grafana_servers:
   - host: 172.16.5.134
     dashboard_dir: /path/to/local/dashboards/dir
+
 monitoring_servers:
   - host: 172.16.5.134
     rule_dir: /path/to/local/rules/dir
+
 alertmanager_servers:
   - host: 172.16.5.134
     config_file: /path/to/local/alertmanager.yml
@@ -408,18 +411,18 @@ alertmanager_servers:
 
 The content and format requirements for files under the specified path are as follows:
 
-- The folder specified in the `dashboard_dir` field of `grafana_servers` need to contain full `*.json` files
-- The folder specified in the `rule_dir` field of `monitoring_servers` need to contain full `*.rules.yml` files
-- For the format of files specified in the `config_file` field of `alertmanager_servers`, refer to [this template](https://github.com/pingcap/tiup/blob/master/templates/config/alertmanager.yml)
+- The folder specified in the `dashboard_dir` field of `grafana_servers` must contain full `*.json` files.
+- The folder specified in the `rule_dir` field of `monitoring_servers` must contain full `*.rules.yml` files.
+- For the format of files specified in the `config_file` field of `alertmanager_servers`, refer to [the Alertmanager configuration template](https://github.com/pingcap/tiup/blob/master/templates/config/alertmanager.yml).
 
 When you execute `tiup reload`, TiUP first deletes all old configuration files in the target machine and then uploads the corresponding configuration from the control machine to the corresponding configuration directory of the target machine. Therefore, if you want to modify a particular configuration file, make sure that all configuration files (including the unmodified ones) are in the same directory. For example, to modify Grafana's `tidb.json` file, you need to first copy all the `*.json` files from Grafana's `dashboards` directory to your local directory. Otherwise, other JSON files will be missing from the target machine.
 
 > **Note:**
 >
-> If you have configured the `dashboard_dir` field of `grafana_servers`, complete the following operations when executing the `tiup cluster rename` command to rename the cluster:
+> If you have configured the `dashboard_dir` field of `grafana_servers`, complete the following operations after executing the `tiup cluster rename` command to rename the cluster:
 >
 > 1. `dashboards` in the local directory contains cluster name information. Change the cluster name in the local `dashboards` to the new cluster name.
-> 2. Change the `datasource` field in `dashboards` to the new cluster name. `datasource` is named after the cluster name.
+> 2. Change the `datasource` field in `dashboards` to the new cluster name. Because `datasource` is named after the cluster name.
 > 3. Execute the `tiup cluster reload -R grafana` command.
 
 ## Update component
