@@ -5,7 +5,7 @@ summary: Learn the best practices for three-node hybrid deployment.
 
 # Best Practices for Three-Node Hybrid Deployment
 
-For a TiDB cluster, if you do not want high performance but a moderate cost, you can deploy the TiDB, TiKV, and PD components on three machines in a hybrid way.
+For a TiDB cluster, if you have no requirements on high performance but need to control the cost, you can deploy the TiDB, TiKV, and PD components on three machines in a hybrid way.
 
 This document offers an example of three-node hybrid deployment and a TPC-C test against the deployed cluster. Based on this example, this document offers best practices for the deployment scenario and its parameter adjustment.
 
@@ -13,7 +13,7 @@ This document offers an example of three-node hybrid deployment and a TPC-C test
 
 In this example, three physical machines are used for deployment, each with 16 CPU cores and 32 GB of memory. On each machine (node), one TiDB instance, one TiKV instance, and one PD instance are deployed in a hybrid way.
 
-Because PD and TiKV both store information on the disk, the read and write latency of disk directly affects the latency of the PD and TiKV services. To avoid the situation that PD and TiKv compete for disk resources and affect each other, it is recommended to use different disks for PD and TiKV.
+Because PD and TiKV both store information on the disk, the read and write latency of disk directly affects the latency of the PD and TiKV services. To avoid the situation that PD and TiKV compete for disk resources and affect each other, it is recommended to use different disks for PD and TiKV.
 
 In this example, the TPC-C 5000 Warehouse data is used in TiUP bench and the test lasts 12 hours with the `terminals` parameter set to `128` (concurrency). Close attention is paid to metrics related to performance stability of the cluster.
 
@@ -62,7 +62,7 @@ The default value of this parameter is 80% of the number of machine threads. In 
 
 #### `server.grpc-concurrency`
 
-This parameter defaults to `4`. Because in the existing deployment plan the CPU resources are limited, the actual requests are few. You can observe the monitoring panel, lower the value of this parameter, and keep the usage rate below 80%.
+This parameter defaults to `4`. Because in the existing deployment plan, the CPU resources are limited and the actual requests are few. You can observe the monitoring panel, lower the value of this parameter, and keep the usage rate below 80%.
 
 In this test, the value of this parameter is set to `2`. Observe the **gRPC poll CPU** panel and you can see that the usage rate is just around 80%.
 
@@ -70,7 +70,7 @@ In this test, the value of this parameter is set to `2`. Observe the **gRPC poll
 
 #### `storage.scheduler-worker-pool-size`
 
-When TiKV detects that the CPU core number of the machine is greater than or equal to `16`, this parameter value defaults to `8`. When the CPU core number is smaller than `16`, the parameter value defaults to `4`. This parameter is used when TiKV converts complex transaction requests to simple key-value reads or writes, but the scheduler thread pool does not performs any reads or writes.
+When TiKV detects that the CPU core number of the machine is greater than or equal to `16`, this parameter value defaults to `8`. When the CPU core number is smaller than `16`, the parameter value defaults to `4`. This parameter is used when TiKV converts complex transaction requests to simple key-value reads or writes, but the scheduler thread pool does not performs any writes.
 
 Ideally, the usage rate of the scheduler thread pool is kept between 50% and 75%. Similar to the gRPC thread pool, the `storage.scheduler-worker-pool-size` parameter defaults to a larger value during the hybrid deployment, which makes resource usage insufficient. In this test, the value of this parameter is set to `2`, which is in line with the best practices, a conclusion drawn by observing the corresponding metrics in the **Scheduler worker CPU** panel.
 
@@ -90,7 +90,7 @@ The RocksDB thread pool is used to perform compaction and flush jobs. The defaul
 
 In the test, the `rocksdb.max-background-jobs` value is set to `3` and the `rocksdb.max-sub-compactions` value is set to `1`. No write stall occurs during the 12-hour test with the TPC-C load. When optimizing the two parameter values according to the actual load, you can lower the values gradually based on monitoring metrics:
 
-* If write stall occurs, you can first increase the value of `rocksdb.max-background-jobs`.
+* If write stall occurs, increase the value of `rocksdb.max-background-jobs`.
 * If the write stall persists, set the value of `rocksdb.max-sub-compactions` to `2` or `3`.
 
 #### `rocksdb.rate-bytes-per-sec`
@@ -101,11 +101,11 @@ The method of optimizing the RocksDB thread pool is similar to that of optimizin
 
 #### `gc.max_write_bytes_per_sec`
 
-Because TiDB implements the multi-version concurrency control (MVCC) model, TiKV periodically cleans old version data in the background. When the available resources are limited, this operation causes periodical performance jitter. You can use the `gc.max_write_bytes_per_sec` parameter to limit the resource usage of such an operation.
+Because TiDB uses the multi-version concurrency control (MVCC) model, TiKV periodically cleans old version data in the background. When the available resources are limited, this operation causes periodical performance jitter. You can use the `gc.max_write_bytes_per_sec` parameter to limit the resource usage of such an operation.
 
 ![GC Impact](/media/best-practices/three-nodes-gc-impact.png)
 
-In addition to setting this parameter value in the configuration file, you can also dynamically adjust this value in tikv-ctl to make it easier for the parameter change.
+In addition to setting this parameter value in the configuration file, you can also dynamically adjust this value in tikv-ctl.
 
 {{< copyable "shell-regular" >}}
 
@@ -115,16 +115,16 @@ tiup ctl tikv --host=${ip:port} modify-tikv-config -n gc.max_write_bytes_per_sec
 
 > **Note:**
 >
-> In application scenarios with frequent updates, limiting GC traffic might cause the MVCC versions to pile up and affect read performance. You might need to try multiple times to adjust the value of this parameter in order to achieve a balance between performance jitter and performance decrease. In the future, TiKV will provide new optimization solution to such an issue.
+> In application scenarios with frequent updates, limiting GC traffic might cause the MVCC versions to pile up and affect read performance. Currently, to achieve a balance between performance jitter and performance decrease, you might need to try multiple times to adjust the value of this parameter.
 
 ### TiDB parameter adjustment
 
 Generally, you can adjust the TiDB parameters of execution operators using system variables such as `tidb_hash_join_concurrency` and `tidb_index_lookup_join_concurrency`.
 
-In this test, these parameters are not adjusted. In the load test of your actual application, if the execution operators consume excessive amount of CPU resources, you can limit the resource usage of specific operators according to your application scenario. For more details, see [TiDB system variables](/system-variables.md).
+In this test, these parameters are not adjusted. In the load test of your actual application, if the execution operators consume an excessive amount of CPU resources, you can limit the resource usage of specific operators according to your application scenario. For more details, see [TiDB system variables](/system-variables.md).
 
 #### `performance.max-procs`
 
-This parameter is used to control how many CPU cores an entire Go process can use. By default, the value equals to the number of CPU cores of the current machine or cgroups.
+This parameter is used to control how many CPU cores an entire Go process can use. By default, the value is equal to the number of CPU cores of the current machine or cgroups.
 
-When Go is running, a proportion of threads is used for background tasks such as GC. If you do not limit the value of the `performance.max-procs` parameter, these background tasks including GC will consume too many CPU cores.
+When Go is running, a proportion of threads is used for background tasks such as GC. If you do not limit the value of the `performance.max-procs` parameter, these background tasks will consume too much CPU.
