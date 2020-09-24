@@ -39,7 +39,7 @@ TiDB version: 3.0.19
     - Forbid changing the decimal type to the integer type [#19681](https://github.com/pingcap/tidb/pull/19681)
     - Fix the issue that alter enum/set type does not check constraint [#20045](https://github.com/pingcap/tidb/pull/20045)
     - Fix the panic that tidb-server does not release table locks [#20021](https://github.com/pingcap/tidb/pull/20021)
-    - Fix the behavior of rewrite ScalarFunction IsTure . [#19901](https://github.com/pingcap/tidb/pull/19901)
+    - Fix the bug that the `OR` operation is not handled correctly in the `WHERE` clause [#19901](https://github.com/pingcap/tidb/pull/19901)
 
 + TiKV
 
