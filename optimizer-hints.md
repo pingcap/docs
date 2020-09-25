@@ -203,13 +203,13 @@ select /*+ READ_FROM_STORAGE(TIFLASH[t1], TIKV[t2]) */ t1.a from t t1, t t2 wher
 
 > **Note:**
 >
-> If the table using optimizer hints is not in the same database, you need to display the statement `SCHEMA_NAME`. For example:
-
-{{< copyable "sql" >}}
-
-```sql
-`SELECT /*+ READ_FROM_STORAGE(TIFLASH[test1.t1,test2.t2]) */ t1.a FROM test1.t t1, test2.t t2 WHERE t1.a = t2.a;`
-```
+> If the table to be read by the optimizer hint is not from the same schema, you need to declare the schema name. For example:
+>
+> {{< copyable "sql" >}}
+>
+> ```sql
+> SELECT /*+ READ_FROM_STORAGE(TIFLASH[test1.t1,test2.t2]) */ t1.a FROM test1.t t1, test2.t t2 WHERE t1.a = t2.a;
+> ```
 
 ### USE_INDEX_MERGE(t1_name, idx1_name [, idx2_name ...])
 
