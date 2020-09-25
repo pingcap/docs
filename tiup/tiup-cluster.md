@@ -419,7 +419,7 @@ When you execute `tiup reload`, TiUP first deletes all old configuration files i
 
 > **Note:**
 >
-> If you have configured the `dashboard_dir` field of `grafana_servers`, complete the following operations after executing the `tiup cluster rename` command to rename the cluster:
+> If you have configured the `dashboard_dir` field of `grafana_servers`, after executing the `tiup cluster rename` command to rename the cluster, you need to complete the following operations:
 >
 > 1. In the local `dashboards` directory, change the cluster name to the new cluster name.
 > 2. In the local `dashboards` directory, change `datasource` to the new cluster name, because `datasource` is named after the cluster name.
