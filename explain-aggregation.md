@@ -71,7 +71,7 @@ EXPLAIN SELECT COUNT(*) FROM t1;
 4 rows in set (0.00 sec)
 ```
 
-This is easiest to observe in `EXPLAIN ANALYZE`, where the `actRows` matches the number of regions from `SHOW TABLE REGIONS` because a `TableFullScan` is being used and there are no secondary indexes:
+This is easiest to observe in `EXPLAIN ANALYZE`, where the `actRows` matches the number of Regions from `SHOW TABLE REGIONS` because a `TableFullScan` is being used and there are no secondary indexes:
 
 ```sql
 EXPLAIN ANALYZE SELECT COUNT(*) FROM t1;
