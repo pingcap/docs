@@ -24,7 +24,7 @@ TiDB version: 3.0.19
 
 + TiKV
 
-    - Set `sync-log` to `true` always [#8636](https://github.com/tikv/tikv/pull/8636)
+    - Set `sync-log` to `true` as an nonadjustable value [#8636](https://github.com/tikv/tikv/pull/8636)
 
 + PD
 
