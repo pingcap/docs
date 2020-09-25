@@ -1,11 +1,7 @@
 ---
 title: Transactions
 summary: Learn transactions in TiDB.
-<<<<<<< HEAD
 aliases: ['/docs/v3.0/transaction-overview/','/docs/v3.0/reference/transactions/overview/','/docs/sql/transaction/']
-=======
-aliases: ['/docs/stable/transaction-overview/','/docs/v4.0/transaction-overview/','/docs/stable/reference/transactions/overview/','/docs/v4.0/reference/transactions/overview/']
->>>>>>> 41a29a87... Add 5 aliases to fix dead links (#3973)
 ---
 
 # Transactions

@@ -1,11 +1,7 @@
 ---
 title: TiDB Binlog Cluster Deployment
 summary: Learn how to deploy TiDB Binlog cluster.
-<<<<<<< HEAD
 aliases: ['/docs/v3.0/tidb-binlog/deploy-tidb-binlog/','/docs/v3.0/reference/tidb-binlog/deploy/','/docs/tools/binlog/deploy/','/docs/v3.0/how-to/deploy/tidb-binlog/']
-=======
-aliases: ['/docs/stable/tidb-binlog/deploy-tidb-binlog/','/docs/v4.0/tidb-binlog/deploy-tidb-binlog/','/docs/stable/reference/tidb-binlog/deploy/','/docs/stable/how-to/deploy/tidb-binlog/']
->>>>>>> 41a29a87... Add 5 aliases to fix dead links (#3973)
 ---
 
 # TiDB Binlog Cluster Deployment
