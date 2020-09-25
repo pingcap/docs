@@ -19,8 +19,8 @@ TiDB version: 3.0.19
 
 + TiDB
 
-    - Mitigate the impact of failure recovery on QPS [#19764](https://github.com/pingcap/tidb/pull/19764)
-    - Support adjusting the concurrency on the `union` operator [#19885](https://github.com/pingcap/tidb/pull/19885)
+    - Mitigate the impact of failure recovery on QPS performance [#19764](https://github.com/pingcap/tidb/pull/19764)
+    - Support adjusting the concurrency of the `union` operator [#19885](https://github.com/pingcap/tidb/pull/19885)
 
 + TiKV
 
@@ -28,18 +28,18 @@ TiDB version: 3.0.19
 
 + PD
 
-    - Add an alert rule for restart [#2789](https://github.com/pingcap/pd/pull/2789)
+    - Add an alert rule for PD restart [#2789](https://github.com/pingcap/pd/pull/2789)
 
 ## Bug Fixes
 
 + TiDB
 
-    - Fix the `slow_query` error when the `slow-log` file does not exist [#20050](https://github.com/pingcap/tidb/pull/20050)
-    - Add the privilege check for `SHOW STATS_META`, `SHOW STATS_BUCKET` [#19759](https://github.com/pingcap/tidb/pull/19759)
+    - Fix the query error that occurs when the `slow-log` file does not exist [#20050](https://github.com/pingcap/tidb/pull/20050)
+    - Add the privilege check for `SHOW STATS_META` and `SHOW STATS_BUCKET` [#19759](https://github.com/pingcap/tidb/pull/19759)
     - Forbid changing the decimal type to the integer type [#19681](https://github.com/pingcap/tidb/pull/19681)
     - Fix the issue that alter enum/set type does not check constraint [#20045](https://github.com/pingcap/tidb/pull/20045)
     - Fix the bug that tidb-server does not release table locks after a panic [#20021](https://github.com/pingcap/tidb/pull/20021)
-    - Fix the bug that the `OR` operation is not handled correctly in the `WHERE` clause [#19901](https://github.com/pingcap/tidb/pull/19901)
+    - Fix the bug that the `OR` operator is not handled correctly in the `WHERE` clause [#19901](https://github.com/pingcap/tidb/pull/19901)
 
 + TiKV
 
@@ -49,4 +49,4 @@ TiDB version: 3.0.19
 
     + TiDB Lightning
 
-        - Fix the issue that break import immediately when detect non-UTF-8 data in strict-mode  [#378](https://github.com/pingcap/tidb-lightning/pull/378)
+        - Fix the issue that the TiDB Lightning process does not exit in time when encountering illegal UTF characters in CSV in the strict mode [#378](https://github.com/pingcap/tidb-lightning/pull/378)
