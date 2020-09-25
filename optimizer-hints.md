@@ -203,7 +203,7 @@ select /*+ READ_FROM_STORAGE(TIFLASH[t1], TIKV[t2]) */ t1.a from t t1, t t2 wher
 
 > **Note:**
 >
-> If the tables using optimizer hints are not in the same database, you need to explicitly specify the `SCHEMA_NAME`. For example:
+> If the tables using optimizer hints are not in the same database, you need to display the statement `SCHEMA_NAME`. For example:
 
 {{< copyable "sql" >}}
 
