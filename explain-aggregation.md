@@ -91,7 +91,7 @@ EXPLAIN ANALYZE SELECT COUNT(*) FROM t1;
 
 ## Hash Aggregation
 
-The Hash Aggregation algorithm uses a hash table to store intermediate results while performing aggregation. It executes in parallel using multiple threads, but consumes more memory than stream aggregation.
+The Hash Aggregation algorithm uses a hash table to store intermediate results while performing aggregation. It executes in parallel using multiple threads but consumes more memory than Stream Aggregation.
 
 The following is an example of the `HashAgg` operator:
 
