@@ -16,7 +16,7 @@ TiDB version: 4.0.7
 
 + TiFlash
 
-    - Improve error handling when reading request and Region meta change in concurrency [#1109](https://github.com/pingcap/tics/pull/1109)
+    - Improve error handling of Region meta change happened during read in progress
 
 ## Bug Fixes
 
@@ -33,6 +33,10 @@ TiDB version: 4.0.7
 
     - Fix the bug that pd might panic If some regions have no leader when `balance-region` enabled [#2994](https://github.com/pingcap/pd/pull/2994)
     - Fix the statistical deviation of region size and region keys after region merge [#2985](https://github.com/pingcap/pd/pull/2985)
+
++ TiFlash
+
+    - Fix wrong result of right outer join
 
 ## Others
 
@@ -66,7 +70,3 @@ TiDB version: 4.0.7
     - Add GetMemberInfo() function to get pd member info [#2980](https://github.com/pingcap/pd/pull/2980)
     - Set the `make-up-replica` operator to high priority [#2977](https://github.com/pingcap/pd/pull/2977)
     - Fix miss err in `redirectSchedulerDelete` [#2974](https://github.com/pingcap/pd/pull/2974)
-
-+ TiFlash
-
-    - Fix TiFlash right out join bug
