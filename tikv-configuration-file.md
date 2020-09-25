@@ -1138,6 +1138,10 @@ Configuration items related to security
 + The path of the PEM file that contains the X509 key
 + Default value: ""
 
+### `redact-info-log`
+
++ This configuration item enables log redaction. If this is enabled, all user data in log will be replaced with `?`.
+
 ## `import`
 
 Configuration items related to TiDB Lightning import and BR restore.
