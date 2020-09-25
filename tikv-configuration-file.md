@@ -1141,6 +1141,7 @@ Configuration items related to security
 ### `redact-info-log`
 
 + This configuration item enables log redaction. If this is enabled, all user data in log will be replaced with `?`.
++ Default value: `false`
 
 ## `import`
 
