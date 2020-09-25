@@ -37,7 +37,7 @@ TiDB version: 3.0.19
     - Fix the query error that occurs when the `slow-log` file does not exist [#20050](https://github.com/pingcap/tidb/pull/20050)
     - Add the privilege check for `SHOW STATS_META` and `SHOW STATS_BUCKET` [#19759](https://github.com/pingcap/tidb/pull/19759)
     - Forbid changing the decimal type to the integer type [#19681](https://github.com/pingcap/tidb/pull/19681)
-    - Fix the issue that alter enum/set type does not check constraint [#20045](https://github.com/pingcap/tidb/pull/20045)
+    - Fix the issue that the constraint is not checked when altering the `ENUM`/`SET` type column [#20045](https://github.com/pingcap/tidb/pull/20045)
     - Fix the bug that tidb-server does not release table locks after a panic [#20021](https://github.com/pingcap/tidb/pull/20021)
     - Fix the bug that the `OR` operator is not handled correctly in the `WHERE` clause [#19901](https://github.com/pingcap/tidb/pull/19901)
 
