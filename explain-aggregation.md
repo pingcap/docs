@@ -117,7 +117,7 @@ The `operator info` shows that the hashing function used to aggregate the data i
 
 ## Stream Aggregation
 
-The Stream Aggregation algorithm usually takes less memory than Hash Aggregation. However, this operator requires that data is sent ordered so that it can _stream_ and apply the aggregation on values as they arrive.
+The Stream Aggregation algorithm usually consumes less memory than Hash Aggregation. However, this operator requires that data is sent ordered so that it can _stream_ and apply the aggregation on values as they arrive.
 
 Consider the following example:
 
