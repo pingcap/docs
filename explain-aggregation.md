@@ -147,7 +147,7 @@ Records: 5  Duplicates: 0  Warnings: 0
 5 rows in set (0.00 sec)
 ```
 
-In this example, the `└─Sort_13` operator can be eliminated by adding an index on `col1`. Once added, the data can be read in order and the sort operator is eliminated:
+In this example, the `└─Sort_13` operator can be eliminated by adding an index on `col1`. Once the index is added, the data can be read in order and the `└─Sort_13` operator is eliminated:
 
 {{< copyable "sql" >}}
 
