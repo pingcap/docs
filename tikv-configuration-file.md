@@ -280,16 +280,6 @@ Configuration items related to the sharing of block cache among multiple RocksDB
 
 Configuration items related to Raftstore
 
-### `sync-log`
-
-+ Enables or disables synchronous write mode. In the synchronous write mode, each commit is forced to be flushed to raft-log synchronously for persistent storage.
-
-    > **Note:**
-    >
-    > Setting the value to `false` might lead to data loss.
-
-+ Default value: `true`
-
 ### `prevote`
 
 + Enables or disables `prevote`. Enabling this feature helps reduce jitter on the system after recovery from network partition.
@@ -1163,7 +1153,7 @@ Configuration items related to TiDB Lightning import and BR restore.
 + The number of jobs imported concurrently
 + Default value: `8`
 + Minimum value: `1`
-  
+
 ## backup
 
 Configuration items related to BR backup.
@@ -1172,14 +1162,11 @@ Configuration items related to BR backup.
 
 + The number of worker threads to process backup
 + Default value: `MIN(CPU * 0.75, 32)`.
-+ Minimum value: `1` 
++ Minimum value: `1`
 
 ## pessimistic-txn
 
-### `enabled`
-
-- Enables the pessimistic transaction mode. For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](/pessimistic-transaction.md).
-- Default value: `true`
+For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](/pessimistic-transaction.md).
 
 ### `wait-for-lock-timeout`
 
