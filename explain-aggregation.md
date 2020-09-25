@@ -51,7 +51,7 @@ SHOW TABLE t1 REGIONS;
 4 rows in set (0.00 sec)
 ```
 
-Using `EXPLAIN` with the following aggregation statement, we can see that `└─StreamAgg_8` is first performed on each region inside TiKV. Each TiKV region will then send one row back to TiDB, which aggregates the data from each region in `StreamAgg_16`:
+Using `EXPLAIN` with the following aggregation statement, you can see that `└─StreamAgg_8` is first performed on each Region inside TiKV. Each TiKV Region will then send one row back to TiDB, which aggregates the data from each Region in `StreamAgg_16`:
 
 {{< copyable "sql" >}}
 
