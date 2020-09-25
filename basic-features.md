@@ -30,7 +30,7 @@ The following table provides an overview of the feature development history of T
 | **Character sets**                                                                   | **5.0** | **4.0** | **3.1** | **3.0** | **2.1** |
 | [`utf8`](/character-set-and-collation.md)                                            | Y     | Y   | Y   | Y   | Y   |
 | [`utf8mb4`](/character-set-and-collation.md)                                         | Y     | Y   | Y   | Y   | Y   |
-| [`ascii`](/character-set-and-collation.md)[1]                                        | Y     | Y   | Y   | Y   | Y   |
+| [`ascii`](/character-set-and-collation.md) [^1]                                      | Y     | Y   | Y   | Y   | Y   |
 | [`latin1`](/character-set-and-collation.md)                                          | Y     | Y   | Y   | Y   | Y   |
 | [`binary`](/character-set-and-collation.md)                                          | Y     | Y   | Y   | Y   | Y   |
 | **Collations**                                                                       | **5.0** | **4.0** | **3.1** | **3.0** | **2.1** |
@@ -44,7 +44,7 @@ The following table provides an overview of the feature development history of T
 | [`latin1_bin`](/character-set-and-collation.md)                                      | Y     | Y   | Y   | Y   | Y   |
 | [`binary`](/character-set-and-collation.md)                                          | Y     | Y   | Y   | Y   | Y   |
 | **Indexing and constraints**                                                         | **5.0** | **4.0** | **3.1** | **3.0** | **2.1** |
-| Expression Indexes                                                                   | Experimental | Experimental | N   | N   | N   |
+| [Expression Indexes](/sql-statements/sql-statement-create-index.md#expression-index) | Experimental | Experimental | N   | N   | N   |
 | [Columnar Storage (TiFlash)](/tiflash/tiflash-overview.md)                           | Y     | Y   | Y   | N   | N   |
 | [RocksDB Engine](/storage-engine/rocksdb-overview.md)                                | Y     | Y   | Y   | Y   | Y   |
 | [Titan Plugin](/storage-engine/titan-overview.md)                                    | Y     | Y   | Experimental | Experimental | Experimental |
@@ -53,7 +53,7 @@ The following table provides an overview of the feature development history of T
 | [Unique indexes](/constraints.md)                                                    | Y     | Y   | Y   | Y   | Y   |
 | [Clustered index on integer `PRIMARY KEY`](/constraints.md)                          | Y     | Y   | Y   | Y   | Y   |
 | [Clustered index on composite or non-integer key](/constraints.md)                   | Experimental | N | N | N | N  |
-| **SQL statements** [2]                                                               | **5.0** | **4.0** | **3.1** | **3.0** | **2.1** |
+| **SQL statements** [^2]                                                              | **5.0** | **4.0** | **3.1** | **3.0** | **2.1** |
 | Basic `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `REPLACE`                              | Y     | Y   | Y   | Y   | Y   |
 | `INSERT ON DUPLICATE KEY UPDATE`                                                     | Y     | Y   | Y   | Y   | Y   |
 | `LOAD DATA INFILE`                                                                   | Y     | Y   | Y   | Y   | Y   |
@@ -68,7 +68,7 @@ The following table provides an overview of the feature development history of T
 | Prepared statement cache                                                             | Y     | Experimental   | N   | N   | N   |
 | [SQL plan management (SPM)](/sql-plan-management.md)                                 | Y     | Y   | N   | N   | N   |
 | [Coprocessor cache](/coprocessor-cache.md)                                           | Y     | Experimental | N | N | N |
-| [Placement rules](/configure-placement-rules.md)                                     | Y     | Y   | N   | N   | N   |
+| [Placement rules](/configure-placement-rules.md)                                     | Y     | Experimental | N   | N   | N   |
 | [Follower reads](/follower-read.md)                                                  | Y     | Y   | Y   | N   | N   |
 | [Read Historical Data (tidb_snapshot)](/read-historical-data.md)                     | Y     | Y   | Y   | Y   | Y   |
 | [Optimizer Hints](/optimizer-hints.md)                                               | Y     | Y   | Y   | Y   | Y   |
@@ -124,7 +124,5 @@ The following table provides an overview of the feature development history of T
 | [Built-in physical backup](/br/backup-and-restore-use-cases.md)                      | Y     | Y   | N   | N   | N   |
 | Point in time recovery (PITR)                                                        | Planned | N | N   | N   | N   |
 
-Footnotes:
-
-1. TiDB incorrectly treats latin1 as a subset of utf8. See [TiDB #18955](https://github.com/pingcap/tidb/issues/18955) for more details.
-2. See [Statement Reference](/sql-statements/sql-statement-select.md) for a full list of SQL statements supported.
+[^1] TiDB incorrectly treats latin1 as a subset of utf8. See [TiDB #18955](https://github.com/pingcap/tidb/issues/18955) for more details.
+[^2] See [Statement Reference](/sql-statements/sql-statement-select.md) for a full list of SQL statements supported.
