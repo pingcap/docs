@@ -1,5 +1,5 @@
 ---
-title: Enable Disk Spill Encrypt
+title: Enable Encryption for Disk Spill
 summary: Learn how to enable disk spill encrypt for TiDB.
 ---
 
