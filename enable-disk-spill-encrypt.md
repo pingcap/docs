@@ -18,4 +18,4 @@ To enable encryption for the disk spill files, you can configure the item [`spil
 spilled-file-encryption-method = "aes128-ctr"
 ```
 
-Possible values for `spilled-file-encryption-method` are `aes128-ctr` and `plaintext`. The default value is `plaintext`, which means encryption is disable.
+Value options for `spilled-file-encryption-method` are `aes128-ctr` and `plaintext`. The default value is `plaintext`, which means that encryption is disabled.
