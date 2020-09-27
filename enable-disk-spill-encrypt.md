@@ -11,7 +11,7 @@ You can enable encryption for disk spill to prevent attackers from accessing dat
 
 ## Configure
 
-To enable the encryption of the disk spill files, we can configure the item [`spilled-file-encryption-method`](/tidb-configuration-file.md#spilled-file-encryption-method) in the `[security]` section of the TiDB configuration file
+To enable encryption for the disk spill files, you can configure the item [`spilled-file-encryption-method`](/tidb-configuration-file.md#spilled-file-encryption-method) in the `[security]` section of the TiDB configuration file.
 
 ```toml
 [security]
