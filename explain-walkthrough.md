@@ -36,7 +36,7 @@ Working from the child operator `└─TableFullScan_18` back, you can see its e
 4. The results from `StreamAgg_9` are then sent to `TableReader_21` which is now inside the TiDB server (task of `root`). The `estRows` does not make it entirely clear, but the `TableReader_21` operator will receive one row from each of the TiKV regions that had to be accessed. We can see more information about these requests in [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md).
 5. The `StreamAgg_20` operator then has the task of applying a count function to each of the rows from the `└─TableReader_21` operator, which we can see from [`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md) will be about 56 rows. As this is the root operator, it can then return results to the client.
 
-> **Tip:**
+> **Note:**
 > 
 > For a general view of the regions a table contains, run [`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md). 
 
