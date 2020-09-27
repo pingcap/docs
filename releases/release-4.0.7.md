@@ -31,6 +31,11 @@ TiDB version: 4.0.7
 
     - Support JSON log format [#8382](https://github.com/tikv/tikv/pull/8382)
 
++ PD
+
+    - Make counter inc when operator finished rather than operator added [#2983](https://github.com/pingcap/pd/pull/2983)
+    - Set the `make-up-replica` operator to high priority [#2977](https://github.com/pingcap/pd/pull/2977)
+
 + TiFlash
 
     - Improve error handling of Region meta change happened during read in progress
