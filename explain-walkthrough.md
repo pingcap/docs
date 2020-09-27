@@ -38,11 +38,11 @@ Working from the child operator `└─TableFullScan_18` back, you can see its e
 
 > **Note:**
 > 
-> For a general view of the regions a table contains, run [`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md). 
+> For a general view of the Regions that a table contains, execute [`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md). 
 
-## Assessing the current performance
+## Assess the current performance
 
-[`EXPLAIN`](/sql-statements/sql-statement-explain.md) only returns the query execution plan, and does not execute the query. We can either run the query, or use [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) to get the actual execution time:
+[`EXPLAIN`](/sql-statements/sql-statement-explain.md) only returns the query execution plan but does not execute the query. To get the actual execution time, you can either execute the query or use [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md):
 
 {{< copyable "sql" >}}
 
@@ -63,7 +63,7 @@ EXPLAIN ANALYZE SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 
 5 rows in set (1.03 sec)
 ```
 
-The example query takes `1.03` seconds to execute. This is our benchmark to beat!
+The example query above takes `1.03` seconds to execute, which is an ideal performance.
 
 Importantly, we can also see some of the useful columns that [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) has added. `actRows` shows that some of our estimates were off. We knew this already because the `└─TableFullScan_18` showed `stats:pseudo`. But expecting 10 thousand rows and finding 19 million rows does not show that the estimate was very accurate. If we run [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md), and then [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) again we can see that the estimates are much closer:
 
@@ -108,15 +108,15 @@ SHOW STATS_HEALTHY;
 1 row in set (0.00 sec)
 ```
 
-## Identifying optimizations
+## Identify optimizations
 
-There are some aspects of the current execution plan that are quite efficient:
+The current execution plan is efficient in the following aspects:
 
-* Most of the work is handled inside the TiKV coprocessor. Only 56 rows need to be sent across the network back to TiDB for processing. Each of these rows is short, and contains only the count that matched the selection.
+* Most of the work is handled inside the TiKV coprocessor. Only 56 rows need to be sent across the network back to TiDB for processing. Each of these rows is short and contains only the count that matches the selection.
 
-* Both aggregating the count of rows in TiDB (`StreamAgg_20`), and aggregating in TiKV (`└─StreamAgg_9`) are using stream aggregation, which is very efficient in its memory usage.
+* Aggregating the count of rows both in TiDB (`StreamAgg_20`) and in TiKV (`└─StreamAgg_9`) uses the stream aggregation, which is very efficient in its memory usage.
 
-The biggest issue with the current execution plan, is that the predicate `start_date BETWEEN '2017-07-01 00:00:00' AND '2017-07-01 23:59:59'` does not apply immediately. All rows are read first with a TableFullScan operator, and then a selection is applied afterwards. If we look at the output from `SHOW CREATE TABLE trips` we can see why this is:
+The biggest issue with the current execution plan is that the predicate `start_date BETWEEN '2017-07-01 00:00:00' AND '2017-07-01 23:59:59'` does not apply immediately. All rows are read first with a `TableFullScan` operator, and then a selection is applied afterwards. You can find out the cause from the output of `SHOW CREATE TABLE trips`:
 
 {{< copyable "sql" >}}
 
@@ -143,7 +143,7 @@ Create Table: CREATE TABLE `trips` (
 1 row in set (0.00 sec)
 ```
 
-There is no index on `start_date`! We would need an index in order to push this predicate into an index reader operator. Let's go ahead and add one:
+There is **NO** index on `start_date`. You would need an index in order to push this predicate into an index reader operator. Add an index as follows:
 
 {{< copyable "sql" >}}
 
@@ -155,7 +155,7 @@ ALTER TABLE trips ADD INDEX (start_date);
 Query OK, 0 rows affected (2 min 10.23 sec)
 ```
 
-> **Tip:**
+> **Note:**
 > 
 > The progress of DDL jobs can be monitored with the command [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin.md). The defaults in TiDB are carefully chosen so that adding an index does not impact production workloads too much. For testing environments, consider increasing [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size) and [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt). On a reference system, a batch size of 10240 and worker count of 32 achieved a 10x improvement over the defaults.
 
