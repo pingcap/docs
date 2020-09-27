@@ -13,7 +13,6 @@ TiDB version: 4.0.7
 + TiDB
 
     - Add more runtime information for join executor [#20093](https://github.com/pingcap/tidb/pull/20093)
-    - Add more runtime information for join executor [#20093](https://github.com/pingcap/tidb/pull/20093)
     - Add coprocessor cache hit ratio in explain analyze [#19972](https://github.com/pingcap/tidb/pull/19972)
     - Support push ROUND function to TiFlash [#19967](https://github.com/pingcap/tidb/pull/19967)
     - Add default value of CMSketch for Analyze [#19927](https://github.com/pingcap/tidb/pull/19927)
