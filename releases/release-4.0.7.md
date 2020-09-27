@@ -82,6 +82,8 @@ TiDB version: 4.0.7
 
     - Fix the bug that pd might panic If some regions have no leader when `balance-region` enabled [#2994](https://github.com/pingcap/pd/pull/2994)
     - Fix the statistical deviation of region size and region keys after region merge [#2985](https://github.com/pingcap/pd/pull/2985)
+    - Fix error hot statistic metrics [#2991](https://github.com/pingcap/pd/pull/2991)
+    - Fix miss err in `redirectSchedulerDelete` [#2974](https://github.com/pingcap/pd/pull/2974)
 
 + TiFlash
 
