@@ -8,6 +8,16 @@ Release date: September 29, 2020
 
 TiDB version: 4.0.7
 
+## New Features
+
++ PD
+
+    - Add `GetAllMembers` function to get pd member info in PD client [#2980](https://github.com/pingcap/pd/pull/2980)
+
++ TiDB Dashboard
+
+    - Support to generate metrics relationship graph [#760](https://github.com/pingcap-incubator/tidb-dashboard/pull/760)
+
 ## Improvements
 
 + TiDB
