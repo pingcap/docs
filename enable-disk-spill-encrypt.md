@@ -3,7 +3,7 @@ title: Enable Encryption for Disk Spill
 summary: Learn how to enable encryption for disk spill in TiDB.
 ---
 
-# Enable disk spill encrypt for TiDB
+# Enable Encryption for Disk Spill
 
 When the configuration item `oom-use-tmp-storage` is `true`, if the memory usage of a single SQL statement exceeds the limit of `mem-quota-query` setting, some operators can save the intermediate results during execution as a temporary file to the disk and delete them after the query is completed.
 
