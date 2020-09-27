@@ -13,6 +13,10 @@ TiDB version: 4.0.7
 + TiDB
 
     - Add more runtime information for join executor [#20093](https://github.com/pingcap/tidb/pull/20093)
+    - Add more runtime information for join executor [#20093](https://github.com/pingcap/tidb/pull/20093)
+    - Add coprocessor cache hit ratio in explain analyze [#19972](https://github.com/pingcap/tidb/pull/19972)
+    - Support push ROUND function to TiFlash [#19967](https://github.com/pingcap/tidb/pull/19967)
+    - Add default value of CMSketch for Analyze [#19927](https://github.com/pingcap/tidb/pull/19927)
 
 + TiKV
 
@@ -85,10 +89,7 @@ TiDB version: 4.0.7
 
     - Update stats per table to avoid OOM [#20013](https://github.com/pingcap/tidb/pull/20013)
     - Refine error message desensitization [#20004](https://github.com/pingcap/tidb/pull/20004)
-    - Add coprocessor cache hit ratio in explain analyze [#19972](https://github.com/pingcap/tidb/pull/19972)
-    - Support push ROUND function to TiFlash [#19967](https://github.com/pingcap/tidb/pull/19967)
     - Accept connections from clients using connectors from MySQL 8.0 [#19959](https://github.com/pingcap/tidb/pull/19959)
-    - Add default value of CMSketch for Analyze [#19927](https://github.com/pingcap/tidb/pull/19927)
 
 + PD
 
