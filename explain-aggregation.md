@@ -1,5 +1,5 @@
 ---
-title: Explain Statements Using Aggregation
+title: Explain Statements That Use Aggregation
 summary: Learn about the execution plan information returned by the `EXPLAIN` statement in TiDB.
 ---
 
