@@ -26,6 +26,8 @@ TiDB version: 4.0.7
     - Add coprocessor cache hit ratio in explain analyze [#19972](https://github.com/pingcap/tidb/pull/19972)
     - Support push the `ROUND` function to TiFlash [#19967](https://github.com/pingcap/tidb/pull/19967)
     - Add default value of CMSketch for Analyze [#19927](https://github.com/pingcap/tidb/pull/19927)
+    - Refine error message desensitization [#20004](https://github.com/pingcap/tidb/pull/20004)
+    - Accept connections from clients using connectors from MySQL 8.0 [#19959](https://github.com/pingcap/tidb/pull/19959)
 
 + TiKV
 
@@ -71,6 +73,7 @@ TiDB version: 4.0.7
     - Fix the behavior of rewrite ScalarFunction IsTure [#19903](https://github.com/pingcap/tidb/pull/19903)
     - Fix CLUSTER_INFO system table may not work after PD is scaled-in or out [#20026](https://github.com/pingcap/tidb/pull/20026)
     - Avoid unnecessary warnings/errors when folding constants in control expr [#19910](https://github.com/pingcap/tidb/pull/19910)
+    - Update stats per table to avoid OOM [#20013](https://github.com/pingcap/tidb/pull/20013)
 
 + TiKV
 
@@ -98,11 +101,3 @@ TiDB version: 4.0.7
     + Dumpling
 
         - Fix the issue that Dumpling fails to parse metadata when some variables are `NULL` [#150](https://github.com/pingcap/dumpling/pull/150)
-
-## Others
-
-+ TiDB
-
-    - Update stats per table to avoid OOM [#20013](https://github.com/pingcap/tidb/pull/20013)
-    - Refine error message desensitization [#20004](https://github.com/pingcap/tidb/pull/20004)
-    - Accept connections from clients using connectors from MySQL 8.0 [#19959](https://github.com/pingcap/tidb/pull/19959)
