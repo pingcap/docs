@@ -5,7 +5,7 @@ summary: Learn about the execution plan information returned by the `EXPLAIN` st
 
 # Partitions
 
-`EXPLAIN` will display the partitions that TiDB needs to access in order to execute a query. Because of [partition pruning](/partition-pruning.md), this will often only be a subset of the partitions. In this section we will describe some of these optimizations for common partitioned tables, and how to interpret the output of `EXPLAIN`.
+The `EXPLAIN` statement displays the partitions that TiDB needs to access in order to execute a query. Because of [partition pruning](/partition-pruning.md), the displayed partitions are often only a subset of the overall partitions. This document describes some of the optimizations for common partitioned tables, and how to interpret the output of `EXPLAIN`.
 
 Examples use the following sample data:
 
