@@ -9,6 +9,8 @@ The `EXPLAIN` statement displays the partitions that TiDB needs to access in ord
 
 The sample data used in this document:
 
+{{< copyable "sql" >}}
+
 ```sql
 CREATE TABLE t1 (
  id BIGINT NOT NULL auto_increment,
@@ -53,6 +55,8 @@ ANALYZE TABLE t1;
 
 The following example shows a statement against the newly created partitioned table:
 
+{{< copyable "sql" >}}
+
 ```sql
 EXPLAIN SELECT COUNT(*) FROM t1 WHERE d = '2017-06-01';
 ```
@@ -70,7 +74,7 @@ EXPLAIN SELECT COUNT(*) FROM t1 WHERE d = '2017-06-01';
 5 rows in set (0.01 sec)
 ```
 
-Starting from the child operators and working backwards, the output shows that:
+Starting from the inner-most (`└─TableFullScan_19`) operator and working back towards the root operator (`StreamAgg_21`):
 
 * TiDB successfully identified that only one partition (`p2017`) needed to be accessed. This is noted under `access object`.
 * The partition itself was scanned in the operator `└─TableFullScan_19` and then `└─Selection_20` was applied to filter for rows that have a start date of `2017-06-01 00:00:00.000000`.
@@ -78,6 +82,8 @@ Starting from the child operators and working backwards, the output shows that:
 * Each coprocessor request then sends back one row to  `└─TableReader_22` inside TiDB, which is then stream aggregated under `StreamAgg_21` and one row is returned to the client.
 
 The following example shows partition pruning has not applied:
+
+{{< copyable "sql" >}}
 
 ```sql
 EXPLAIN SELECT COUNT(*) FROM t1 WHERE YEAR(d) = 2017;
