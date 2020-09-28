@@ -440,14 +440,14 @@ The Plan Cache configuration of the `PREPARE` statement.
 
 ### `enable-async-commit` <!-- New in v5.0 -->
 
-- Specifies whether to enable the async commit feature so that the second phase of the two-phase transaction commit performs asynchronously in the background. Enable this feature to reduce the latency of transaction commit. This feature is not compatible with [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) and has no effect when binlog is enabled.
+- Specifies whether to enable the Async Commit feature so that the second phase of the two-phase transaction commit performs asynchronously in the background. Enable this feature to reduce the latency of transaction commit. This feature is not compatible with [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) and does not work when binlog is enabled.
 - Default value: `false`
 
 > **Warning:**
 >
 > This is still an experimental feature. It is **NOT** recommended that you use it in the production environment. Currently, some known issues are as follows:
 >
-> - This feature is temporarily incompatible with [Follower Read](/follower-read.md) and [TiFlash](/tiflash/tiflash-overview.md), snapshot isolation cannot be guaranteed during use.
+> - This feature is temporarily incompatible with [Follower Read](/follower-read.md) and [TiFlash](/tiflash/tiflash-overview.md), and has no guarantee for snapshot isolation during use.
 > - No guarantee for external consistency.
 > - If the transaction commit is interrupted abnormally due to the shutdown of the TiDB machine while executing DDL operation, the data format might be incorrect.
 
