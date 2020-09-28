@@ -51,7 +51,7 @@ SELECT SLEEP(1);
 ANALYZE TABLE t1;
 ```
 
-The following example shows a statement against our newly created partitioned table:
+The following example shows a statement against the newly created partitioned table:
 
 ```sql
 EXPLAIN SELECT COUNT(*) FROM t1 WHERE d = '2017-06-01';
