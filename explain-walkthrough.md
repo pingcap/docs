@@ -65,7 +65,7 @@ EXPLAIN ANALYZE SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 
 
 The example query above takes `1.03` seconds to execute, which is an ideal performance.
 
-Importantly, we can also see some of the useful columns that [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) has added. `actRows` shows that some of our estimates were off. We knew this already because the `└─TableFullScan_18` showed `stats:pseudo`. But expecting 10 thousand rows and finding 19 million rows does not show that the estimate was very accurate. If we run [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md), and then [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) again we can see that the estimates are much closer:
+From the result of `EXPLAIN ANALYZE` above, you can see a few more useful columns. `actRows` indicates that some of the estimates (`estRows`) are inaccurate, which is already indicated in the `operator info` (`stats:pseudo`) of `└─TableFullScan_18`. Expecting 10 thousand rows but finding 19 million rows show that the estimate is inaccurate. If you run [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) first and then [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) again, you can see that the estimates are much closer:
 
 {{< copyable "sql" >}}
 
