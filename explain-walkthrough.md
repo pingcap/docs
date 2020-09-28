@@ -91,7 +91,7 @@ Query OK, 0 rows affected (10.22 sec)
 
 After [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) is executed, we can see that the estimated rows for the `└─TableFullScan_18` is accurate, and the estimate for `└─Selection_19` is now also much closer. While in this case the execution plan (i.e. the set of operators TiDB uses to execute this query) has not changed in between running [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md), quite frequently sub-optimal plans are caused by out of date statistics.
 
-As well as [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md), TiDB will automatically regenerate statistics as a background operation after a [threshold is reached](/system-variables.md#tidb_auto_analyze_ratio). You can see how close TiDB is to this threshold (i.e. how healthy it considers the statistics to be) with the statement [`SHOW STATS_HEALTHY`](/sql-statements/sql-statement-show-stats-healthy.md):
+In addition to [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md), TiDB automatically regenerates statistics as a background operation after a [threshold is reached](/system-variables.md#tidb_auto_analyze_ratio). You can see how close TiDB is to this threshold (how healthy TiDB considers the statistics to be) by executing the [`SHOW STATS_HEALTHY`](/sql-statements/sql-statement-show-stats-healthy.md) statement:
 
 {{< copyable "sql" >}}
 
