@@ -5,7 +5,7 @@ summary: Learn how to use `EXPLAIN` by walking through an example statement
 
 # EXPLAIN Walkthrough
 
-Because SQL is a declarative language, it is not possible to sight-check a query and tell if it is executing efficiently. We must first use [`EXPLAIN`](/sql-statements/sql-statement-explain.md) to understand what the current execution plan is.
+Because SQL is a declarative language, you cannot automatically tell whether a query is executed efficiently. You must first use the [`EXPLAIN`](/sql-statements/sql-statement-explain.md) statement to learn the current execution plan.
 
 The following statement from the [bikeshare example database](/import-example-data.md) counts how many trips were taken on the 1st July 2017:
 
