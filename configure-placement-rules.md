@@ -207,25 +207,7 @@ EOF
 pd-ctl config placement save --in=rules.json
 ```
 
-pd-ctl also supports directly saving rules to the file by using the `load` command for easier modification:
-
-{{< copyable "shell-regular" >}}
-
-```bash
-pd-ctl config placement-rules load
-```
-
-Executing the above command saves all rules to the `rules.json` file.
-
-{{< copyable "shell-regular" >}}
-
-```bash
-pd-ctl config placement-rules load --group=pd --out=rule.txt
-```
-
-The above command saves the rules of a PD Group to the `rules.txt` file.
-
-### Use pd-ctl to configure rule groups
+### Configure rule groupsUsing pd-ctl
 
 - To view the list of all rule groups:
 
@@ -258,6 +240,74 @@ The above command saves the rules of a PD Group to the `rules.txt` file.
     ```bash
     pd-ctl config placement-rules rule-group delete pd
     ```
+
+### Batch update groups and rules in groups using pd-ctl
+
+Use the `rule-bundle` subcommand, you can easily view and modify the rule group and all the rules in the group at the same time.
+
+You can use the subcommand `get {group_id}` to query a group, and the output result is nested rule grouping and rules within the group:
+
+{{< copyable "shell-regular" >}}
+
+```bash
+pd-ctl config placement-rules rule-bundle get pd
+```
+
+The output of the above command:
+
+```json
+{
+  "group_id": "pd",
+  "group_index": 0,
+  "group_override": false,
+  "rules": [
+    {
+      "group_id": "pd",
+      "id": "default",
+      "start_key": "",
+      "end_key": "",
+      "role": "voter",
+      "count": 3
+    }
+  ]
+}
+```
+
+You can add the `-out` parameter to the `rule-bundle get` subcommand to write the output to the file, which is convenient for subsequent modification and saving.
+
+{{< copyable "shell-regular" >}}
+
+```bash
+pd-ctl config placement-rules rule-bundle get pd -out="group.json"
+```
+
+After completing the modification, you can use the `rule-bundle set` subcommand to save the configuration in the file to the PD server. Unlike the `save` command described earlier, this command replaces all the rules in the group on the server side.
+
+{{< copyable "shell-regular" >}}
+
+```bash
+pd-ctl config placement-rules rule-bundle set pd -in="group.json"
+```
+
+### View and modify all configurations using pd-ctl
+
+Users can also view and modify all configurations using pd-ctl, that is, save all configurations to a file, and then overwrite and save after modification. This operation also uses the `rule-bundle` subcommand.
+
+Use the following command to save all configurations to the `rules.json` file:
+
+{{< copyable "shell-regular" >}}
+
+```bash
+pd-ctl config placement-rules rule-bundle load -out="rules.json"
+```
+
+After editing the file, use the following command to save the configuration to the PD server:
+
+{{< copyable "shell-regular" >}}
+
+```bash
+pd-ctl config placement-rules rule-bundle save -in="rules.json"
+```
 
 ### Use tidb-ctl to query the table-related key range
 
