@@ -38,7 +38,7 @@ The following table shows the meaning of each field in a rule:
 | `Count`           | `int`, positive integer                     |  The number of replicas.                            |
 | `LabelConstraint` | `[]Constraint`                    |  Filers nodes based on the label.               |
 | `LocationLabels`  | `[]string`                        |  Used for physical isolation.                       |
-| `IsolationLevel`  | `string`                          |  Used to set the minimum physical isolation level    
+| `IsolationLevel`  | `string`                          |  Used to set the minimum physical isolation level
 
 `LabelConstraint` is similar to the function in Kubernetes that filters labels based on these four primitives: `in`, `notIn`, `exists`, and `notExists`. The meanings of these four primitives are as follows:
 
@@ -207,7 +207,7 @@ EOF
 pd-ctl config placement save --in=rules.json
 ```
 
-### Configure rule groupsUsing pd-ctl
+### Use pd-ctl to configure rule groups
 
 - To view the list of all rule groups:
 
@@ -241,7 +241,7 @@ pd-ctl config placement save --in=rules.json
     pd-ctl config placement-rules rule-group delete pd
     ```
 
-### Batch update groups and rules in groups using pd-ctl
+### Use pd-ctl to batch update groups and rules in groups
 
 Use the `rule-bundle` subcommand, you can easily view and modify the rule group and all the rules in the group at the same time.
 
@@ -289,7 +289,7 @@ After completing the modification, you can use the `rule-bundle set` subcommand 
 pd-ctl config placement-rules rule-bundle set pd -in="group.json"
 ```
 
-### View and modify all configurations using pd-ctl
+### Use pd-ctl to view and modify all configurations
 
 Users can also view and modify all configurations using pd-ctl, that is, save all configurations to a file, and then overwrite and save after modification. This operation also uses the `rule-bundle` subcommand.
 
