@@ -77,7 +77,7 @@ Starting from the child operators and working backwards, the output shows that:
 * The rows that match `└─Selection_20` are then stream aggregated in the coprocessor, which natively understands the `count` function.
 * Each coprocessor request then sends back one row to  `└─TableReader_22` inside TiDB, which is then stream aggregated under `StreamAgg_21` and one row is returned to the client.
 
-The following naive example shows partition pruning has not applied:
+The following example shows partition pruning has not applied:
 
 ```sql
 EXPLAIN SELECT COUNT(*) FROM t1 WHERE YEAR(d) = 2017;
