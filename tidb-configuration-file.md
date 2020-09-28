@@ -440,7 +440,7 @@ The Plan Cache configuration of the `PREPARE` statement.
 
 ### `enable-async-commit` <!-- New in v5.0 -->
 
-- Specifies whether to enable the Async Commit feature so that the second phase of the two-phase transaction commit performs asynchronously in the background. Enable this feature to reduce the latency of transaction commit. This feature is not compatible with [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) and does not work when binlog is enabled.
+- Specifies whether to enable the Async Commit feature so that the second phase of the two-phase transaction commit performs asynchronously in the background. Enable this feature to reduce the latency of transaction commit. This feature is not compatible with [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) and does not take effect when binlog is enabled.
 - Default value: `false`
 
 > **Warning:**
