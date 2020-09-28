@@ -12,11 +12,11 @@ TiDB version: 4.0.7
 
 + PD
 
-    - Add `GetAllMembers` function to get pd member info in PD client [#2980](https://github.com/pingcap/pd/pull/2980)
+    - Add the `GetAllMembers` function in PD client to get PD member info [#2980](https://github.com/pingcap/pd/pull/2980)
 
 + TiDB Dashboard
 
-    - Support to generate metrics relationship graph [#760](https://github.com/pingcap-incubator/tidb-dashboard/pull/760)
+    - Support generating the metrics relationship graph [#760](https://github.com/pingcap-incubator/tidb-dashboard/pull/760)
 
 ## Improvements
 
@@ -24,7 +24,7 @@ TiDB version: 4.0.7
 
     - Add more runtime information for join executor [#20093](https://github.com/pingcap/tidb/pull/20093)
     - Add coprocessor cache hit ratio in explain analyze [#19972](https://github.com/pingcap/tidb/pull/19972)
-    - Support push ROUND function to TiFlash [#19967](https://github.com/pingcap/tidb/pull/19967)
+    - Support push the `ROUND` function to TiFlash [#19967](https://github.com/pingcap/tidb/pull/19967)
     - Add default value of CMSketch for Analyze [#19927](https://github.com/pingcap/tidb/pull/19927)
 
 + TiKV
@@ -33,26 +33,26 @@ TiDB version: 4.0.7
 
 + PD
 
-    - Make counter inc when operator finished rather than operator added [#2983](https://github.com/pingcap/pd/pull/2983)
+    - Make counter inc when the operator is finished rather than when the operator is added [#2983](https://github.com/pingcap/pd/pull/2983)
     - Set the `make-up-replica` operator to high priority [#2977](https://github.com/pingcap/pd/pull/2977)
 
 + TiFlash
 
-    - Improve error handling of Region meta change happened during read in progress
+    - Improve error handling of the Region meta change that occurs during read in progress
 
 + Tools
 
     + TiCDC
 
-        - Support to translate to more execution efficient SQLs in MySQL sink when the old value feature is enabled. [#955](https://github.com/pingcap/ticdc/pull/955)
+        - Support to translate to more execution efficient SQLs in MySQL sink when the old value feature is enabled [#955](https://github.com/pingcap/ticdc/pull/955)
 
     + Backup & Restore (BR)
 
-        - Add retry when backup connection was broken [#508](https://github.com/pingcap/br/pull/508)
+        - Add retry when the connection is broken during backup [#508](https://github.com/pingcap/br/pull/508)
 
     + TiDB Lightning
 
-        - TiDB Lightning's log level can be dynamically updated via HTTP [#393](https://github.com/pingcap/tidb-lightning/pull/393)
+        - Support dynamically updating the log level via HTTP [#393](https://github.com/pingcap/tidb-lightning/pull/393)
 
 ## Bug Fixes
 
@@ -87,17 +87,17 @@ TiDB version: 4.0.7
 
 + TiFlash
 
-    - Fix wrong result of right outer join
+    - Fix the wrong result of right outer join
 
 + Tools
 
     + Backup & Restore (BR)
 
-        - Fix a bug that caused the TiDB config changed after restoring [#509](https://github.com/pingcap/br/pull/509)
+        - Fix a bug that causes the TiDB config changed after restoring [#509](https://github.com/pingcap/br/pull/509)
 
     + Dumpling
 
-        - Fix the problem that dumpling fails to parse metadata when some variables are `NULL` [#150](https://github.com/pingcap/dumpling/pull/150)
+        - Fix the issue that Dumpling fails to parse metadata when some variables are `NULL` [#150](https://github.com/pingcap/dumpling/pull/150)
 
 ## Others
 
