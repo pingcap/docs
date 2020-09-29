@@ -83,7 +83,7 @@ TiDB version: 4.0.7
 
 + PD
 
-    - Fix the bug that PD might panic If some Regions have no Leader when `balance-region` is enabled [#2994](https://github.com/pingcap/pd/pull/2994)
+    - Fix the bug that PD might panic if some Regions have no Leader when `balance-region` is enabled [#2994](https://github.com/pingcap/pd/pull/2994)
     - Fix the statistical deviation of Region size and Region keys after Region merge [#2985](https://github.com/pingcap/pd/pull/2985)
     - Fix the incorrect hotspot statistics [#2991](https://github.com/pingcap/pd/pull/2991)
     - Fix the issue that there is no `nil` check in `redirectSchedulerDelete` [#2974](https://github.com/pingcap/pd/pull/2974)
