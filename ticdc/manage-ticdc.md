@@ -147,7 +147,7 @@ Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":
 - `--sink-uri`: The downstream address of the replication task. Configure `--sink-uri` according to the following format. Currently, the scheme supports `mysql`/`tidb`/`kafka`/`pulsar`.
 - `--start-ts`: Specifies the start TSO for changefeed. The TiCDC cluster starts pulling data from this TSO. The default is the current time.
 - `--target-ts`: Specifies the target TSO for changefeed. The TiCDC cluster pulls data until this TSO stops. The default is empty, that is, TiCDC does not stop automatically.
-- `--config`:Specifies the changefeed configuration file.
+- `--config`: Specifies the configuration file for changefeed.
 
 {{< copyable "" >}}
 
