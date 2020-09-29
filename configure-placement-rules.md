@@ -243,9 +243,9 @@ pd-ctl config placement save --in=rules.json
 
 ### Use pd-ctl to batch update groups and rules in groups
 
-Use the `rule-bundle` subcommand, you can easily view and modify the rule group and all the rules in the group at the same time.
+Use the `rule-bundle` subcommand, you can easily view and modify the rule groups and all the rules in the groups at the same time.
 
-You can use the subcommand `get {group_id}` to query a group, and the output result is nested rule grouping and rules within the group:
+You can use the subcommand `get {group_id}` to query a group, and the output result is nested rule groups and rules in the groups:
 
 {{< copyable "shell-regular" >}}
 
@@ -281,7 +281,7 @@ You can add the `-out` parameter to the `rule-bundle get` subcommand to write th
 pd-ctl config placement-rules rule-bundle get pd -out="group.json"
 ```
 
-After completing the modification, you can use the `rule-bundle set` subcommand to save the configuration in the file to the PD server. Unlike the `save` command described earlier, this command replaces all the rules in the group on the server side.
+After the modification, you can use the `rule-bundle set` subcommand to save the configuration in the file to the PD server. Unlike the `save` command described earlier, this command replaces all the rules in this group on the server side.
 
 {{< copyable "shell-regular" >}}
 
@@ -291,7 +291,7 @@ pd-ctl config placement-rules rule-bundle set pd -in="group.json"
 
 ### Use pd-ctl to view and modify all configurations
 
-Users can also view and modify all configurations using pd-ctl, that is, save all configurations to a file, and then overwrite and save after modification. This operation also uses the `rule-bundle` subcommand.
+Users can also view and modify all configurations using pd-ctl, that is, save all configurations to the file, and then overwrite and save after modification. This operation also uses the `rule-bundle` subcommand.
 
 Use the following command to save all configurations to the `rules.json` file:
 
