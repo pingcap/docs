@@ -35,7 +35,7 @@ TiDB version: 4.0.7
 
 + PD
 
-    - Make counter inc when the operator is finished rather than when the operator is added [#2983](https://github.com/pingcap/pd/pull/2983)
+    - Count schedule operators when they are finished rather than added [#2983](https://github.com/pingcap/pd/pull/2983)
     - Set the `make-up-replica` operator to high priority [#2977](https://github.com/pingcap/pd/pull/2977)
 
 + TiFlash
