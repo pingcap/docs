@@ -1,4 +1,4 @@
-﻿---
+---
 title: TiKV Configuration File
 summary: Learn the TiKV configuration file.
 aliases: ['/docs/stable/tikv-configuration-file/','/docs/v4.0/tikv-configuration-file/','/docs/stable/reference/configuration/tikv-server/configuration-file/']
@@ -284,10 +284,11 @@ Configuration items related to Raftstore
 
 + Enables or disables synchronous write mode. In the synchronous write mode, each commit is forced to be flushed to raft-log synchronously for persistent storage.
 + Default value: `true`
++ This configuration item has been deprecated since v4.0.7.
 
 > **Warning:**
 >
-> Setting the value to `false` might lead to **data loss**. It is **strongly recommended** that you do not modify this configuration.
+> For versions <= 4.0.6, setting the value to `false` might lead to **data loss**. It is **strongly recommended** that you do not modify this configuration.
 
 ### `prevote`
 
