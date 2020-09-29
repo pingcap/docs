@@ -88,7 +88,7 @@ SET  GLOBAL tidb_distsql_scan_concurrency = 10;
 >
 > Unlike in MySQL, the `max_execution_time` system variable currently works on all kinds of statements in TiDB, not only restricted to the `SELECT` statement. The precision of the timeout value is roughly 100ms. This means the statement might not be terminated in accurate milliseconds as you specify.
 
-### `interactive_timeout`
+### interactive_timeout
 
 - Scope: SESSION | GLOBAL
 - Default value: 28800
@@ -280,7 +280,6 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 - Scope: SESSION | GLOBAL
 - Default value: 0
-- Example value: 20000
 - When this value is greater than `0`, TiDB will batch commit statements such as `INSERT` or `LOAD DATA` into smaller transactions. This reduces memory usage and helps ensure that the `txn-total-size-limit` is not reached by bulk modifications.
 - Only the value `0` provides ACID compliance. Setting this to any other value will break the atomicity and isolation guarantees of TiDB.
 
@@ -521,61 +520,12 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Default value: 1024
 - This variable is used to set the maximum number of schema versions (the table IDs modified for corresponding versions) allowed to be cached. The value range is 100 ~ 16384.
 
-### tidb_mem_quota_hashjoin
-
-- Scope: SESSION
-- Default value: 32 GB
-- This variable is used to set the threshold value of memory quota for the `HashJoin` operator.
-- If the memory quota of the `HashJoin` operator during execution exceeds the threshold value, TiDB performs the operation designated by the OOMAction option in the configuration file.
-
-### tidb_mem_quota_indexlookupjoin
-
-- Scope: SESSION
-- Default value: 32 GB
-- This variable is used to set the threshold value of memory quota for the `IndexLookupJoin` operator.
-- If the memory quota of the `IndexLookupJoin` operator during execution exceeds the threshold value, TiDB performs the operation designated by the OOMAction option in the configuration file.
-
-### tidb_mem_quota_indexlookupreader
-
-- Scope: SESSION
-- Default value: 32 GB
-- This variable is used to set the threshold value of memory quota for the `IndexLookupReader` operator.
-- If the memory quota of the `IndexLookupReader` operator during execution exceeds the threshold value, TiDB performs the operation designated by the OOMAction option in the configuration file.
-
-### tidb_mem_quota_mergejoin
-
-- Scope: SESSION
-- Default value: 32 GB
-- This variable is used to set the threshold value of memory quota for the `MergeJoin` operator.
-- If the memory quota of the `MergeJoin` operator during execution exceeds the threshold value, TiDB performs the operation designated by the OOMAction option in the configuration file.
-
-### tidb_mem_quota_nestedloopapply
-
-- Scope: SESSION
-- Default value: 32 GB
-- This variable is used to set the threshold value of memory quota for the `NestedLoopApply` operator.
-- If the memory quota of the `NestedLoopApply` operator during execution exceeds the threshold value, TiDB performs the operation designated by the OOMAction option in the configuration file.
-
 ### tidb_mem_quota_query
 
 - Scope: SESSION
 - Default value: 1 GB
 - This variable is used to set the threshold value of memory quota for a query.
 - If the memory quota of a query during execution exceeds the threshold value, TiDB performs the operation designated by the OOMAction option in the configuration file. The initial value of this variable is configured by [`mem-quota-query`](/tidb-configuration-file.md#mem-quota-query).
-
-### tidb_mem_quota_sort
-
-- Scope: SESSION
-- Default value: 32 GB
-- This variable is used to set the threshold value of memory quota for the `Sort` operator.
-- If the memory quota of the `Sort` operator during execution exceeds the threshold value, TiDB performs the operation designated by the OOMAction option in the configuration file.
-
-### tidb_mem_quota_topn
-
-- Scope: SESSION
-- Default value: 32 GB
-- This variable is used to set the threshold value of memory quota for the `TopN` operator.
-- If the memory quota of the `TopN` operator during execution exceeds the threshold value, TiDB performs the operation designated by the OOMAction option in the configuration file.
 
 ### tidb_metric_query_range_duration <span class="version-mark">New in v4.0</span>
 
