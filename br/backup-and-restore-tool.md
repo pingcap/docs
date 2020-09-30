@@ -11,9 +11,9 @@ aliases: ['/docs/dev/br/backup-and-restore-tool/','/docs/dev/reference/tools/br/
 ## Usage restrictions
 
 - BR only supports TiDB v3.1 and later versions.
-- Currently, TiDB does not support backing up and restoring partitioned tables.
-- Currently, you can perform restoration only on new clusters.
+- BR supports restore on clusters of different topologies. However, the online applications will be greatly impacted during the restore operation. It is recommended that you perform restore during the off-peak hours or use `rate-limit` to limit the rate.
 - It is recommended that you execute multiple backup operations serially. Otherwise, different backup operations might interfere with each other.
+- When BR restores data to the upstream cluster of TiCDC/Drainer, TiCDC/Drainer cannot replicate the restored data to the downstream.
 - BR supports operations only between clusters with the same [`new_collations_enabled_on_first_bootstrap`](/character-set-and-collation.md#collation-support-framework) value because BR only backs up KV data. If the cluster to be backed up and the cluster to be restored use different collations, the data validation fails. Therefore, before restoring a cluster, make sure that the switch value from the query result of the `select VARIABLE_VALUE from mysql.tidb where VARIABLE_NAME='new_collation_enabled';` statement is consistent with that during the backup process.
 
     - For v3.1 clusters, the new collation framework is not supported, so you can see it as disabled.
@@ -123,7 +123,7 @@ After the restoration operation is completed, BR performs a checksum calculation
 
 Currently, you can use SQL statements or the command-line tool to back up and restore data.
 
-### Use SQL statements 
+### Use SQL statements
 
 TiDB v4.0.2 and later versions support backup and restore operations using SQL statements. For details, see the [Backup syntax](/sql-statements/sql-statement-backup.md#backup) and the [Restore syntax](/sql-statements/sql-statement-restore.md#restore).
 
@@ -373,7 +373,7 @@ To get the timestamp of the last backup, execute the `validate` command. For exa
 LAST_BACKUP_TS=`br validate decode --field="end-version" -s local:///home/tidb/backupdata`
 ```
 
-In the above example, the incremental backup data includes the newly written data and the DDLs between `(LAST_BACKUP_TS, current PD timestamp]`. When restoring data, BR restores DDLs first and then restores the written data.
+In the above example, for the incremental backup data, BR records the data changes and the DDL operations during `(LAST_BACKUP_TS, current PD timestamp]`. When restoring data, BR first restores DDL operations and then the data.
 
 ### Back up Raw KV (experimental feature)
 
