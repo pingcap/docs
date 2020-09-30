@@ -8,14 +8,23 @@ aliases: ['/docs/dev/sql-statements/sql-statement-admin/','/docs/dev/reference/s
 
 This statement is a TiDB extension syntax, used to view the status of TiDB and check the data of tables in TiDB.
 
-## DDL related statement
+## DDL related statements
 
 | Statement                                                                                | Description                 |
 |------------------------------------------------------------------------------------------|-----------------------------|
 | [`ADMIN CANCEL DDL JOBS`](/sql-statements/sql-statement-admin-cancel-ddl.md)             | Cancels a currently running DDL jobs. |
 | [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)          | Calculates the CRC64 of all rows + indexes of a table. |
-| [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) | Checks for consistency of a table or index. |
-| [`ADMIN SHOW DDL [JOBS|QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)      | Shows details about currently running or recently completed DDL jobs. |
+| [`ADMIN CHECK [TABLE/INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) | Checks for consistency of a table or index. |
+| [`ADMIN SHOW DDL [JOBS/QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)      | Shows details about currently running or recently completed DDL jobs. |
+
+## SQL Plan Binding related statements
+
+| Statement                                                                           | Description                 |
+|-------------------------------------------------------------------------------------|-----------------------------|
+| [`ADMIN CAPTURE BINDINGS`](/sql-statements/sql-statement-admin-capture-bindings.md) | Automatically create GLOBAL bindings for `SELECT` statements that have previously been executed more than once. |
+| [`ADMIN EVOLVE BINDINGS`](/sql-statements/sql-statement-admin-evolve-bindings.md)   | Manually trigger new SQL Plan Bindings. |
+| [`ADMIN FLUSH BINDINGS`](/sql-statements/sql-statement-admin-flush-bindings.md)     | Persist SQL Plan bindings. |
+| [`ADMIN RELOAD BINDINGS`](/sql-statements/sql-statement-admin-reload-bindings.md)   | Reload SQL Plan binding information. |
 
 ## `ADMIN RELOAD` statement
 
@@ -52,40 +61,6 @@ ADMIN PLUGINS DISABLE plugin_name [, plugin_name] ...;
 ```
 
 The above statement is used to disable the `plugin_name` plugin.
-
-## `ADMIN BINDINGS` related statement
-
-{{< copyable "sql" >}}
-
-```sql
-ADMIN FLUSH bindings;
-```
-
-The above statement is used to persist SQL Plan binding information.
-
-{{< copyable "sql" >}}
-
-```sql
-ADMIN CAPTURE bindings;
-```
-
-The above statement can generate the binding of SQL Plan from the `SELECT` statement that occurs more than once.
-
-{{< copyable "sql" >}}
-
-```sql
-ADMIN EVOLVE bindings;
-```
-
-After the automatic binding feature is enabled, the evolution of SQL Plan binding information is triggered every `bind-info-leave` (the default value is `3s`). The above statement is used to proactively trigger this evolution.
-
-{{< copyable "sql" >}}
-
-```sql
-ADMIN RELOAD bindings;
-```
-
-The above statement is used to reload SQL Plan binding information.
 
 ## `ADMIN REPAIR` statement
 

@@ -30,57 +30,37 @@ The bound SQL statement is parameterized and stored in the system table. When a 
 
 ## Examples
 
+Start with some example data:
+
 {{< copyable "sql" >}}
 
 ```sql
-mysql> CREATE TABLE t1 (
-    ->  id INT NOT NULL PRIMARY KEY auto_increment,
-    ->  b INT NOT NULL,
-    ->  pad VARBINARY(255),
-    ->  INDEX(b)
-    -> );
-Query OK, 0 rows affected (0.07 sec)
+CREATE TABLE t1 (
+ id INT NOT NULL PRIMARY KEY auto_increment,
+ b INT NOT NULL,
+ pad VARBINARY(255),
+ INDEX(b)
+);
+INSERT INTO t1 SELECT NULL, FLOOR(RAND()*1000), RANDOM_BYTES(255) FROM dual;
+INSERT INTO t1 SELECT NULL, FLOOR(RAND()*1000), RANDOM_BYTES(255) FROM t1 a JOIN t1 b JOIN t1 c LIMIT 100000;
+INSERT INTO t1 SELECT NULL, FLOOR(RAND()*1000), RANDOM_BYTES(255) FROM t1 a JOIN t1 b JOIN t1 c LIMIT 100000;
+INSERT INTO t1 SELECT NULL, FLOOR(RAND()*1000), RANDOM_BYTES(255) FROM t1 a JOIN t1 b JOIN t1 c LIMIT 100000;
+INSERT INTO t1 SELECT NULL, FLOOR(RAND()*1000), RANDOM_BYTES(255) FROM t1 a JOIN t1 b JOIN t1 c LIMIT 100000;
+INSERT INTO t1 SELECT NULL, FLOOR(RAND()*1000), RANDOM_BYTES(255) FROM t1 a JOIN t1 b JOIN t1 c LIMIT 100000;
+INSERT INTO t1 SELECT NULL, FLOOR(RAND()*1000), RANDOM_BYTES(255) FROM t1 a JOIN t1 b JOIN t1 c LIMIT 100000;
+SELECT SLEEP(1);
+ANALYZE TABLE t1;
+```
 
-mysql> INSERT INTO t1 SELECT NULL, FLOOR(RAND()*1000), RANDOM_BYTES(255) FROM dual;
-Query OK, 1 row affected (0.01 sec)
-Records: 1  Duplicates: 0  Warnings: 0
+The following statement has the current query execution plan:
 
-mysql> INSERT INTO t1 SELECT NULL, FLOOR(RAND()*1000), RANDOM_BYTES(255) FROM t1 a JOIN t1 b JOIN t1 c LIMIT 100000;
-Query OK, 1 row affected (0.00 sec)
-Records: 1  Duplicates: 0  Warnings: 0
+{{< copyable "sql" >}}
 
-mysql> INSERT INTO t1 SELECT NULL, FLOOR(RAND()*1000), RANDOM_BYTES(255) FROM t1 a JOIN t1 b JOIN t1 c LIMIT 100000;
-Query OK, 8 rows affected (0.00 sec)
-Records: 8  Duplicates: 0  Warnings: 0
+```sql
+EXPLAIN ANALYZE SELECT * FROM t1 WHERE b = 123;
+```
 
-mysql> INSERT INTO t1 SELECT NULL, FLOOR(RAND()*1000), RANDOM_BYTES(255) FROM t1 a JOIN t1 b JOIN t1 c LIMIT 100000;
-Query OK, 1000 rows affected (0.04 sec)
-Records: 1000  Duplicates: 0  Warnings: 0
-
-mysql> INSERT INTO t1 SELECT NULL, FLOOR(RAND()*1000), RANDOM_BYTES(255) FROM t1 a JOIN t1 b JOIN t1 c LIMIT 100000;
-Query OK, 100000 rows affected (1.74 sec)
-Records: 100000  Duplicates: 0  Warnings: 0
-
-mysql> INSERT INTO t1 SELECT NULL, FLOOR(RAND()*1000), RANDOM_BYTES(255) FROM t1 a JOIN t1 b JOIN t1 c LIMIT 100000;
-Query OK, 100000 rows affected (2.15 sec)
-Records: 100000  Duplicates: 0  Warnings: 0
-
-mysql> INSERT INTO t1 SELECT NULL, FLOOR(RAND()*1000), RANDOM_BYTES(255) FROM t1 a JOIN t1 b JOIN t1 c LIMIT 100000;
-Query OK, 100000 rows affected (2.64 sec)
-Records: 100000  Duplicates: 0  Warnings: 0
-
-mysql> SELECT SLEEP(1);
-+----------+
-| SLEEP(1) |
-+----------+
-|        0 |
-+----------+
-1 row in set (1.00 sec)
-
-mysql> ANALYZE TABLE t1;
-Query OK, 0 rows affected (1.33 sec)
-
-mysql> EXPLAIN ANALYZE SELECT * FROM t1 WHERE b = 123;
+```sql
 +-------------------------------+---------+---------+-----------+----------------------+---------------------------------------------------------------------------+-----------------------------------+----------------+------+
 | id                            | estRows | actRows | task      | access object        | execution info                                                            | operator info                     | memory         | disk |
 +-------------------------------+---------+---------+-----------+----------------------+---------------------------------------------------------------------------+-----------------------------------+----------------+------+
@@ -89,24 +69,44 @@ mysql> EXPLAIN ANALYZE SELECT * FROM t1 WHERE b = 123;
 | └─TableRowIDScan_9(Probe)     | 583.00  | 297     | cop[tikv] | table:t1             | time:12ms, loops:4                                                        | keep order:false                  | N/A            | N/A  |
 +-------------------------------+---------+---------+-----------+----------------------+---------------------------------------------------------------------------+-----------------------------------+----------------+------+
 3 rows in set (0.02 sec)
+```
 
-mysql> CREATE SESSION BINDING FOR
-    ->  SELECT * FROM t1 WHERE b = 123
-    -> USING
-    ->  SELECT * FROM t1 IGNORE INDEX (b) WHERE b = 123;
+A different plan can be forced by adding a plan binding. In this case, the binding will ignore the index `(b)`:
+
+{{< copyable "sql" >}}
+
+```sql
+CREATE SESSION BINDING FOR
+ SELECT * FROM t1 WHERE b = 123
+USING
+ SELECT * FROM t1 IGNORE INDEX (b) WHERE b = 123;
+EXPLAIN ANALYZE  SELECT * FROM t1 WHERE b = 123;
+```
+
+```sql
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> EXPLAIN ANALYZE  SELECT * FROM t1 WHERE b = 123;
-+-------------------------+-----------+---------+-----------+---------------+--------------------------------------------------------------------------------+--------------------+---------------+------+
-| id                      | estRows   | actRows | task      | access object | execution info                                                                 | operator info      | memory        | disk |
-+-------------------------+-----------+---------+-----------+---------------+--------------------------------------------------------------------------------+--------------------+---------------+------+
-| TableReader_7           | 583.00    | 297     | root      |               | time:222.32506ms, loops:2, rpc num: 1, rpc time:222.078952ms, proc keys:301010 | data:Selection_6   | 88.6640625 KB | N/A  |
-| └─Selection_6           | 583.00    | 297     | cop[tikv] |               | time:224ms, loops:298                                                          | eq(test.t1.b, 123) | N/A           | N/A  |
-|   └─TableFullScan_5     | 301010.00 | 301010  | cop[tikv] | table:t1      | time:220ms, loops:298                                                          | keep order:false   | N/A           | N/A  |
-+-------------------------+-----------+---------+-----------+---------------+--------------------------------------------------------------------------------+--------------------+---------------+------+
-3 rows in set (0.22 sec)
++-------------------------+-----------+---------+-----------+---------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+--------------------+-----------------+------+
+| id                      | estRows   | actRows | task      | access object | execution info                                                                                                                                      | operator info      | memory          | disk |
++-------------------------+-----------+---------+-----------+---------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+--------------------+-----------------+------+
+| TableReader_7           | 595.00    | 297     | root      |               | time:187.843107ms, loops:2, cop_task: {num: 1, max:187.675378ms, proc_keys: 301010, rpc_num: 1, rpc_time: 187.655538ms, copr_cache_hit_ratio: 0.00} | data:Selection_6   | 88.232421875 KB | N/A  |
+| └─Selection_6           | 595.00    | 297     | cop[tikv] |               | time:184ms, loops:298                                                                                                                               | eq(test.t1.b, 123) | N/A             | N/A  |
+|   └─TableFullScan_5     | 301010.00 | 301010  | cop[tikv] | table:t1      | time:176ms, loops:298                                                                                                                               | keep order:false   | N/A             | N/A  |
++-------------------------+-----------+---------+-----------+---------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+--------------------+-----------------+------+
+3 rows in set (0.18 sec)
+```
 
-mysql> SHOW SESSION BINDINGS\G
+The binding can then be checked and removed with:
+
+{{< copyable "sql" >}}
+
+```sql
+SHOW SESSION BINDINGS\G
+DROP SESSION BINDING FOR SELECT * FROM t1 WHERE b = 123;
+EXPLAIN ANALYZE  SELECT * FROM t1 WHERE b = 123;
+```
+
+```sql
 *************************** 1. row ***************************
 Original_sql: select * from t1 where b = ?
     Bind_sql: SELECT * FROM t1 IGNORE INDEX (b) WHERE b = 123
@@ -118,10 +118,8 @@ Original_sql: select * from t1 where b = ?
    Collation: utf8mb4_0900_ai_ci
 1 row in set (0.00 sec)
 
-mysql> DROP SESSION BINDING FOR SELECT * FROM t1 WHERE b = 123;
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> EXPLAIN ANALYZE  SELECT * FROM t1 WHERE b = 123;
 +-------------------------------+---------+---------+-----------+----------------------+-------------------------------------------------------------------------+-----------------------------------+----------------+------+
 | id                            | estRows | actRows | task      | access object        | execution info                                                          | operator info                     | memory         | disk |
 +-------------------------------+---------+---------+-----------+----------------------+-------------------------------------------------------------------------+-----------------------------------+----------------+------+
