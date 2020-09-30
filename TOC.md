@@ -111,9 +111,10 @@
     + [Coprocessor Cache](/coprocessor-cache.md)
   + SQL Tuning
     + [Overview](/sql-tuning-overview.md)
-    + [SQL Tuning with `EXPLAIN`](/query-execution-plan.md)
-    + SQL Optimization
-      + [SQL Optimization Process](/sql-optimization-concepts.md)
+    + Understanding the Query Execution Plan
+      + [Overview](/explain-overview.md)
+    + SQL Optimization Process
+      + [Overview](/sql-optimization-concepts.md)
       + Logic Optimization
         + [Overview](/sql-logical-optimization.md)
         + [Subquery Related Optimizations](/subquery-optimization.md)
@@ -131,11 +132,11 @@
         + [Wrong Index Solution](/wrong-index-solution.md)
         + [Distinct Optimization](/agg-distinct-optimization.md)
       + [Prepare Execution Plan Cache](/sql-prepare-plan-cache.md)
-      + Control Execution Plan
-        + [Overview](/control-execution-plan.md)
-        + [Optimizer Hints](/optimizer-hints.md)
-        + [SQL Plan Management](/sql-plan-management.md)
-        + [The Blocklist of Optimization Rules and Expression Pushdown](/blocklist-control-plan.md)
+    + Control Execution Plans
+      + [Overview](/control-execution-plan.md)
+      + [Optimizer Hints](/optimizer-hints.md)
+      + [SQL Plan Management](/sql-plan-management.md)
+      + [The Blocklist of Optimization Rules and Expression Pushdown](/blocklist-control-plan.md)
 + Tutorials
   + [Multiple Data Centers in One City Deployment](/multi-data-centers-in-one-city-deployment.md)
   + [Three Data Centers in Two Cities Deployment](/three-data-centers-in-two-cities-deployment.md)
@@ -147,6 +148,7 @@
     + [Grafana Monitoring](/best-practices/grafana-monitor-best-practices.md)
     + [PD Scheduling](/best-practices/pd-scheduling-best-practices.md)
     + [TiKV Performance Tuning with Massive Regions](/best-practices/massive-regions-best-practices.md)
+    + [Three-node Hybrid Deployment](/best-practices/three-nodes-hybrid-deployment.md)
   + [Use Placement Rules](/configure-placement-rules.md)
   + [Use Load Base Split](/configure-load-base-split.md)
   + [Use Store Limit](/configure-store-limit.md)
@@ -223,6 +225,7 @@
     + [Enable TLS Between TiDB Components](/enable-tls-between-components.md)
     + [Generate Self-signed Certificates](/generate-self-signed-certificates.md)
     + [Encryption at Rest](/encryption-at-rest.md)
+    + [Enable Encryption for Disk Spill](/enable-disk-spill-encrypt.md)
   + Privileges
     + [Security Compatibility with MySQL](/security-compatibility-with-mysql.md)
     + [Privilege Management](/privilege-management.md)
@@ -245,6 +248,10 @@
       + [`ADD COLUMN`](/sql-statements/sql-statement-add-column.md)
       + [`ADD INDEX`](/sql-statements/sql-statement-add-index.md)
       + [`ADMIN`](/sql-statements/sql-statement-admin.md)
+      + [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)
+      + [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)
+      + [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md)
+      + [`ADMIN SHOW DDL [JOBS|QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)
       + [`ALTER DATABASE`](/sql-statements/sql-statement-alter-database.md)
       + [`ALTER INDEX`](/sql-statements/sql-statement-alter-index.md)
       + [`ALTER INSTANCE`](/sql-statements/sql-statement-alter-instance.md)
@@ -479,6 +486,8 @@
     + TiKV
       + [TiKV Overview](/tikv-overview.md)
       + [RocksDB Overview](/storage-engine/rocksdb-overview.md)
+      + [Titan Overview](/storage-engine/titan-overview.md)
+      + [Titan Configuration](/storage-engine/titan-configuration.md)
     + TiFlash
       + [Overview](/tiflash/tiflash-overview.md)
       + [Use TiFlash](/tiflash/use-tiflash.md)
@@ -499,6 +508,7 @@
   + [TiCDC Overview](/ticdc/ticdc-overview.md)
   + [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
   + [Table Filter](/table-filter.md)
+  + [Schedule Replicas by Topology Labels](/schedule-replicas-by-topology-labels.md)
 + FAQs
   + [TiDB FAQs](/faq/tidb-faq.md)
   + [SQL FAQs](/faq/sql-faq.md)
@@ -510,7 +520,10 @@
 + [Glossary](/glossary.md)
 + Release Notes
   + [All Releases](/releases/release-notes.md)
+  + [TiDB Roadmap](/roadmap.md)
   + v4.0
+    + [4.0.7](/releases/release-4.0.7.md)
+    + [4.0.6](/releases/release-4.0.6.md)
     + [4.0.5](/releases/release-4.0.5.md)
     + [4.0.4](/releases/release-4.0.4.md)
     + [4.0.3](/releases/release-4.0.3.md)
@@ -532,6 +545,7 @@
     + [3.1.0-beta.1](/releases/release-3.1.0-beta.1.md)
     + [3.1.0-beta](/releases/release-3.1.0-beta.md)
   + v3.0
+    + [3.0.19](/releases/release-3.0.19.md)
     + [3.0.18](/releases/release-3.0.18.md)
     + [3.0.17](/releases/release-3.0.17.md)
     + [3.0.16](/releases/release-3.0.16.md)
