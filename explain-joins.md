@@ -194,7 +194,7 @@ The operator info column in the `explain` table also records other information a
 
 ### Runtime Statistics
 
-If [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) (default: 1GB) is exceeded, TiDB will attempt to use temporary storage provided that `oom-use-tmp-storage=TRUE` (default). This means that the hash table used as part of the hash join is created on disk. Runtime statistics, such as memory usage are visible in the `execution info` of `EXPLAIN ANALYZE`. The following example shows the output of `EXPLAIN ANALYZE` with a 1GB (default) `tidb_mem_quota_query` quota, and a 500MB quota. At 500MB the hash table spills to disk:
+If [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) (default: 1GB) is exceeded, TiDB will attempt to use temporary storage provided that `oom-use-tmp-storage=TRUE` (default). This means that the `Build` operator used as part of the hash join might be created on disk. Runtime statistics, such as memory usage are visible in the `execution info` of `EXPLAIN ANALYZE`. The following example shows the output of `EXPLAIN ANALYZE` with a 1GB (default) `tidb_mem_quota_query` quota, and a 500MB quota. At 500MB disk is used for temporary storage:
 
 ```sql
 EXPLAIN ANALYZE SELECT /*+ HASH_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
@@ -232,7 +232,7 @@ Query OK, 0 rows affected (0.00 sec)
 
 Hash Join performance is influenced by the following system variables:
 
-* [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) (default: 1GB) - if the memory quota for a query is exceeded, TiDB will attempt to create hash tables on disk to save memory.
+* [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) (default: 1GB) - if the memory quota for a query is exceeded, TiDB will attempt to spill the `Build` operator of a hash join to disk to save memory.
 * [`tidb_hash_join_concurrency`](/system-variables.md#tidb_hash_join_concurrency) (default: 5) - the number of concurrent hash join tasks.
 
 ## Merge Join
