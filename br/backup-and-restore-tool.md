@@ -195,16 +195,20 @@ Each of the above three sub-commands might still include the following three sub
 
 To back up the cluster data, use the `br backup` command. You can add the `full` or `table` sub-command to specify the scope of your backup operation: the whole cluster or a single table.
 
-If the backup time might exceed the [`tikv_gc_life_time`](/garbage-collection-configuration.md#tikv_gc_life_time) configuration which is `10m0s` by default (`10m0s` means 10 minutes), increase the value of this configuration.
+> **Note:**
+>
+> If the BR version is earlier than v4.0.3, and the backup time might exceed the set [`tikv_gc_life_time`](/garbage-collection-configuration.md#tikv_gc_life_time) (default `10m0s`, which means 10 minutes), you need to manually increase this parameter.
+>
+> For example, adjust `tikv_gc_life_time` to `720h`:
+>
+> {{< copyable "sql" >}}
+>
+> ```sql
+> mysql -h${TiDBIP} -P4000 -u${TIDB_USER} ${password_str} -Nse \
+>     "update mysql.tidb set variable_value='720h' where variable_name='tikv_gc_life_time'";
+> ```
 
-For example, set `tikv_gc_life_time` to `720h`:
-
-{{< copyable "sql" >}}
-
-```sql
-mysql -h${TiDBIP} -P4000 -u${TIDB_USER} ${password_str} -Nse \
-    "update mysql.tidb set variable_value='720h' where variable_name='tikv_gc_life_time'";
-```
+Since v4.0.3, BR has supported the self-adaptive GC without manually adjusting `tikv_gc_life_time`.
 
 ### Back up all the cluster data
 
