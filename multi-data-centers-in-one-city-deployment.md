@@ -98,7 +98,7 @@ Because of the limitation described above, `label` is used to describe the locat
 
 #### TiKV labels planning example
 
-To improve the availability and disaster recovery of the system, you need to design and plan TiKV labels according to your existing physical resources and the disaster recovery capability. You also need to configure in the cluster initialization configuration file:
+To improve the availability and disaster recovery of the system, you need to design and plan TiKV labels according to your existing physical resources and the disaster recovery capability. You also need to configure in the cluster initialization configuration file according to the planned topology:
 
 ```ini
 server_configs:
