@@ -197,9 +197,9 @@ To back up the cluster data, use the `br backup` command. You can add the `full`
 
 > **Note:**
 >
-> If the BR version is earlier than v4.0.3, and the backup time might exceed the set [`tikv_gc_life_time`](/garbage-collection-configuration.md#tikv_gc_life_time) (default `10m0s`, which means 10 minutes), you need to manually increase this parameter.
+> If the BR version is earlier than v4.0.3, and the backup time might exceed the [`tikv_gc_life_time`](/garbage-collection-configuration.md#tikv_gc_life_time) configuration which is `10m0s` by default (`10m0s` means 10 minutes), increase the value of this configuration.
 >
-> For example, adjust `tikv_gc_life_time` to `720h`:
+> For example, set `tikv_gc_life_time` to `720h`:
 >
 > {{< copyable "sql" >}}
 >
