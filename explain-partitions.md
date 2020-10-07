@@ -81,7 +81,7 @@ Starting from the inner-most (`└─TableFullScan_19`) operator and working bac
 * The rows that match `└─Selection_20` are then stream aggregated in the coprocessor, which natively understands the `count` function.
 * Each coprocessor request then sends back one row to  `└─TableReader_22` inside TiDB, which is then stream aggregated under `StreamAgg_21` and one row is returned to the client.
 
-The following example shows partition pruning has not applied:
+In the following example, partition pruning does not eliminate any partitions:
 
 {{< copyable "sql" >}}
 
