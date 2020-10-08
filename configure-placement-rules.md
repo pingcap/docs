@@ -243,9 +243,9 @@ pd-ctl config placement save --in=rules.json
 
 ### Use pd-ctl to batch update groups and rules in groups
 
-Use the `rule-bundle` subcommand, you can easily view and modify the rule groups and all the rules in the groups at the same time.
+To view and modify the rule groups and all rules in the groups at the same time, execute the `rule-bundle` subcommand.
 
-You can use the subcommand `get {group_id}` to query a group, and the output result is nested rule groups and rules in the groups:
+In this subcommand, `get {group_id}` is used to query a group, and the output result shows the rule group and rules of the group in a nested form:
 
 {{< copyable "shell-regular" >}}
 
@@ -273,7 +273,7 @@ The output of the above command:
 }
 ```
 
-You can add the `-out` parameter to the `rule-bundle get` subcommand to write the output to the file, which is convenient for subsequent modification and saving.
+To write the output to a file, add the `-out` argument to the `rule-bundle get` subcommand, which is convenient for subsequent modification and saving.
 
 {{< copyable "shell-regular" >}}
 
@@ -281,7 +281,7 @@ You can add the `-out` parameter to the `rule-bundle get` subcommand to write th
 pd-ctl config placement-rules rule-bundle get pd -out="group.json"
 ```
 
-After the modification, you can use the `rule-bundle set` subcommand to save the configuration in the file to the PD server. Unlike the `save` command described earlier, this command replaces all the rules in this group on the server side.
+After the modification is finished, you can use the `rule-bundle set` subcommand to save the configuration in the file to the PD server. Unlike the `save` command described earlier, this command replaces all the rules of this group on the server side.
 
 {{< copyable "shell-regular" >}}
 
@@ -291,9 +291,9 @@ pd-ctl config placement-rules rule-bundle set pd -in="group.json"
 
 ### Use pd-ctl to view and modify all configurations
 
-Users can also view and modify all configurations using pd-ctl, that is, save all configurations to the file, and then overwrite and save after modification. This operation also uses the `rule-bundle` subcommand.
+You can also view and modify all configuration using pd-ctl. To do that, save all configuration to a file, editing the configuration file, and then save the file to the PD server to overwrite the previous configuration. This operation also uses the `rule-bundle` subcommand.
 
-Use the following command to save all configurations to the `rules.json` file:
+For example, to save all configuration to the `rules.json` file, execute the following command:
 
 {{< copyable "shell-regular" >}}
 
