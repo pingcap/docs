@@ -24,7 +24,7 @@ TiDB version: 4.0.6
 
 + Tools
 
-    + TiCDC (TiCDC is **a feature for general availability** since v4.0.6. You can use it in the production environment.)
+    + TiCDC (GA since v4.0.6 and available for production environments)
 
         - Support outputting data in the `maxwell` format [#869](https://github.com/pingcap/ticdc/pull/869)
 
