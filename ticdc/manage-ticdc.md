@@ -604,7 +604,7 @@ For nodes other than owner nodes, executing the above command will return the fo
 curl -X POST -d '"debug"' http://127.0.0.1:8301/admin/log
 ```
 
-In the command above, the `POST` parameter indicates the new log level. The [zap-provided](https://godoc.org/go.uber.org/zap#UnmarshalText) log level options are supported: "debug", "info", "warn", "error", "dpanic", "panic", and "fatal". This interface parameter is JSON-encoded and you need to pay attention to the use of quotation marks. For example: `"debug"`.
+In the command above, the `POST` parameter indicates the new log level. The [zap-provided](https://godoc.org/go.uber.org/zap#UnmarshalText) log level options are supported: "debug", "info", "warn", "error", "dpanic", "panic", and "fatal". This interface parameter is JSON-encoded and you need to pay attention to the use of quotation marks. For example: `'"debug"'`.
 
 ## Task configuration file
 
