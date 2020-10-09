@@ -79,6 +79,14 @@ set @@global.tidb_distsql_scan_concurrency = 10
 - This variable is used to set the scan index concurrency of executing the `ADMIN CHECKSUM TABLE` statement.
 - When the variable is set to a larger value, the execution performance of other queries is affected.
 
+### tidb_distsql_scan_concurrency
+
+- Scope: SESSION | GLOBAL
+- Default value: 15
+- This variable is used to set the concurrency of the `scan` operation.
+- Use a bigger value in OLAP scenarios, and a smaller value in OLTP scenarios.
+- For OLAP scenarios, the maximum value cannot exceed the number of CPU cores of all the TiKV nodes.
+
 ### tidb_current_ts
 
 - Scope: SESSION
@@ -90,14 +98,6 @@ set @@global.tidb_distsql_scan_concurrency = 10
 - Scope: SESSION
 - Default value: ""
 - This variable is read-only. It is used to obtain the configuration information of the current TiDB server.
-
-### tidb_distsql_scan_concurrency
-
-- Scope: SESSION | GLOBAL
-- Default value: 15
-- This variable is used to set the concurrency of the `scan` operation.
-- Use a bigger value in OLAP scenarios, and a smaller value in OLTP scenarios.
-- For OLAP scenarios, the maximum value cannot exceed the number of CPU cores of all the TiKV nodes.
 
 ### tidb_index_lookup_size
 
@@ -137,6 +137,12 @@ set @@global.tidb_distsql_scan_concurrency = 10
 - Scope: SESSION | GLOBAL
 - Default value: 4
 - This variable is used to set the concurrency of the `Projection` operator.
+
+### tidb_union_concurrency
+
+- Scope: SESSION | GLOBAL
+- Default value: 4
+- This variable is used to set the concurrency degree of the `union` operator.
 
 ### tidb_hashagg_partial_concurrency
 
