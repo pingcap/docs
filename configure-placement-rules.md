@@ -281,7 +281,7 @@ To write the output to a file, add the `-out` argument to the `rule-bundle get` 
 pd-ctl config placement-rules rule-bundle get pd -out="group.json"
 ```
 
-After the modification is finished, you can use the `rule-bundle set` subcommand to save the configuration in the file to the PD server. Unlike the `save` command described earlier, this command replaces all the rules of this group on the server side.
+After the modification is finished, you can use the `rule-bundle set` subcommand to save the configuration in the file to the PD server. Unlike the `save` command described in [Set rules using pd-ctl](#set-rules-using-pd-ctl), this command replaces all the rules of this group on the server side.
 
 {{< copyable "shell-regular" >}}
 
@@ -291,7 +291,7 @@ pd-ctl config placement-rules rule-bundle set pd -in="group.json"
 
 ### Use pd-ctl to view and modify all configurations
 
-You can also view and modify all configuration using pd-ctl. To do that, save all configuration to a file, editing the configuration file, and then save the file to the PD server to overwrite the previous configuration. This operation also uses the `rule-bundle` subcommand.
+You can also view and modify all configuration using pd-ctl. To do that, save all configuration to a file, edit the configuration file, and then save the file to the PD server to overwrite the previous configuration. This operation also uses the `rule-bundle` subcommand.
 
 For example, to save all configuration to the `rules.json` file, execute the following command:
 
@@ -301,7 +301,7 @@ For example, to save all configuration to the `rules.json` file, execute the fol
 pd-ctl config placement-rules rule-bundle load -out="rules.json"
 ```
 
-After editing the file, use the following command to save the configuration to the PD server:
+After editing the file, execute the following command to save the configuration to the PD server:
 
 {{< copyable "shell-regular" >}}
 
