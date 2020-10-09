@@ -208,7 +208,7 @@ To back up the cluster data, use the `br backup` command. You can add the `full`
 >     "update mysql.tidb set variable_value='720h' where variable_name='tikv_gc_life_time'";
 > ```
 
-Since v4.0.3, BR has supported the self-adaptive GC without manually adjusting `tikv_gc_life_time`.
+Since v4.0.3, BR began to support the self-adaptive GC without manually adjusting `tikv_gc_life_time`.
 
 ### Back up all the cluster data
 
