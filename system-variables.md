@@ -160,13 +160,6 @@ SET  GLOBAL tidb_distsql_scan_concurrency = 10;
 
     In the case of a poor network environment, appropriately increasing the value of this variable can effectively alleviate error reporting to the application end caused by timeout. If the application end wants to receive the error information more quickly, minimize the value of this variable.
 
-### tidb_build_stats_concurrency
-
-- Scope: SESSION
-- Default value: 4
-- This variable is used to set the concurrency of executing the `ANALYZE` statement.
-- When the variable is set to a larger value, the execution performance of other queries is affected.
-
 ### tidb_capture_plan_baselines <span class="version-mark">New in v4.0</span>
 
 - Scope: SESSION | GLOBAL
@@ -180,13 +173,6 @@ SET  GLOBAL tidb_distsql_scan_concurrency = 10;
 - Default value: 1, indicating check the validity of UTF-8 data. This default behavior is compatible with MySQL.
 - This variable is used to set whether to check the validity of UTF-8 data.
 - To upgrade an earlier version (TiDB v2.1.1 or earlier), you may need to disable this option. Otherwise, you can successfully write invalid strings in an earlier version but fail to do this in a later version, because there is no data validity check in the earlier version. For details, see [FAQs After Upgrade](/faq/upgrade-faq.md).
-
-### tidb_checksum_table_concurrency
-
-- Scope: SESSION
-- Default value: 4
-- This variable is used to set the scan index concurrency of executing the `ADMIN CHECKSUM TABLE` statement.
-- When the variable is set to a larger value, the execution performance of other queries is affected.
 
 ### tidb_config
 
@@ -267,14 +253,6 @@ Constraint checking is always performed in place for pessimistic transactions (d
     This variable does not affect automatically committed implicit transactions and internally executed transactions in TiDB. The maximum retry count of these transactions is determined by the value of `tidb_retry_limit`.
 
     For more details, see [limits of retry](/optimistic-transaction.md#limits-of-retry).
-
-### tidb_distsql_scan_concurrency
-
-- Scope: SESSION | GLOBAL
-- Default value: 15
-- This variable is used to set the concurrency of the `scan` operation.
-- Use a bigger value in OLAP scenarios, and a smaller value in OLTP scenarios.
-- For OLAP scenarios, the maximum value cannot exceed the number of CPU cores of all the TiKV nodes.
 
 ### tidb_enable_cascades_planner
 
@@ -402,6 +380,28 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Default value: 0
 - This variable is used to set whether to record all the SQL statements in the log.
 
+### tidb_build_stats_concurrency
+
+- Scope: SESSION
+- Default value: 4
+- This variable is used to set the concurrency of executing the `ANALYZE` statement.
+- When the variable is set to a larger value, the execution performance of other queries is affected.
+
+### tidb_checksum_table_concurrency
+
+- Scope: SESSION
+- Default value: 4
+- This variable is used to set the scan index concurrency of executing the `ADMIN CHECKSUM TABLE` statement.
+- When the variable is set to a larger value, the execution performance of other queries is affected.
+
+### tidb_distsql_scan_concurrency
+
+- Scope: SESSION | GLOBAL
+- Default value: 15
+- This variable is used to set the concurrency of the `scan` operation.
+- Use a bigger value in OLAP scenarios, and a smaller value in OLTP scenarios.
+- For OLAP scenarios, the maximum value cannot exceed the number of CPU cores of all the TiKV nodes.
+
 ### tidb_hash_join_concurrency
 
 - Scope: SESSION | GLOBAL
@@ -455,6 +455,24 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Default value: 1
 - This variable is used to set the concurrency of the `serial scan` operation.
 - Use a bigger value in OLAP scenarios, and a smaller value in OLTP scenarios.
+
+### tidb_projection_concurrency
+
+- Scope: SESSION | GLOBAL
+- Default value: 4
+- This variable is used to set the concurrency of the `Projection` operator.
+
+### tidb_window_concurrency <span class="version-mark">New in v4.0</span>
+
+- Scope: SESSION | GLOBAL
+- Default value: 4
+- This variable is used to set the concurrency degree of the `window` operator.
+
+### tidb_union_concurrency
+
+- Scope: SESSION | GLOBAL
+- Default value: 4
+- This variable is used to set the concurrency degree of the `union` operator.
 
 ### tidb_init_chunk_size
 
@@ -594,12 +612,6 @@ mysql> desc select count(distinct a) from test.t;
 - Scope: SESSION
 - Default value: 0
 - This variable is used to set whether to allow `insert`, `replace` and `update` statements to operate on the column `_tidb_rowid`. It is not allowed by default. This variable can be used only when importing data with TiDB tools.
-
-### tidb_projection_concurrency
-
-- Scope: SESSION | GLOBAL
-- Default value: 4
-- This variable is used to set the concurrency of the `Projection` operator.
 
 ### tidb_query_log_max_len
 
@@ -777,12 +789,6 @@ SET tidb_slow_log_threshold = 200;
 - Scope: SESSION
 - Default value: 300
 - This variable is used to set the timeout for executing the `SPLIT REGION` statement. The unit is second. If a statement is not executed completely within the specified time value, a timeout error is returned.
-
-### tidb_window_concurrency <span class="version-mark">New in v4.0</span>
-
-- Scope: SESSION | GLOBAL
-- Default value: 4
-- This variable is used to set the concurrency degree of the window operator.
 
 ### time_zone
 
