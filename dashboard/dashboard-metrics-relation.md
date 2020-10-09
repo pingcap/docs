@@ -74,7 +74,6 @@ In addition, `tidb_execute` also has a dotted arrow pointing to `tidb_cop` box a
 
 ![tidb_execute node relation example2](/media/dashboard/dashboard-metrics-relation-relation-example2.png)
 
-
 `tidb_cop` and `tidb_txn_cmd.get`, the parent nodes of `tidb_kv_request`, both have dotted arrows pointing to `tidb_kv_request`, which indicates as follows:
 
 * The duration of `tidb_cop` includes a part of `tidb_kv_request`'s duration.
