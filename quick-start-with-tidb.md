@@ -13,12 +13,12 @@ aliases: ['/docs/dev/quick-start-with-tidb/','/docs/dev/test-deployment-using-do
 This document describes how to try out TiDB, a distributed SQL database, in a few minutes. You can choose any of the following three methods to get started with the TiDB database platform:
 
 - [Quick Start Guide for the TiDB Database Platform](#quick-start-guide-for-the-tidb-database-platform)
-  - [Deploy a local test environment using TiUP Playground](#deploy-a-local-test-environment-using-tiup-playground)
-  - [Set up a test environment on a single machine using TiUP cluster](#set-up-a-test-environment-on-a-single-machine-using-tiup-cluster)
-    - [Prepare](#prepare)
-    - [Deploy](#deploy)
-  - [Try out TiDB with one click using TiDB-Wasm](#try-out-tidb-with-one-click-using-tidb-wasm)
-  - [What's next](#whats-next)
+    - [Deploy a local test environment using TiUP Playground](#deploy-a-local-test-environment-using-tiup-playground)
+    - [Set up a test environment on a single machine using TiUP cluster](#set-up-a-test-environment-on-a-single-machine-using-tiup-cluster)
+        - [Prepare](#prepare)
+        - [Deploy](#deploy)
+    - [Try out TiDB with one click using TiDB-Wasm](#try-out-tidb-with-one-click-using-tidb-wasm)
+    - [What's next](#whats-next)
 
 ## Deploy a local test environment using TiUP Playground
 
