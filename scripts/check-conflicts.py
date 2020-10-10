@@ -7,8 +7,10 @@ flag = 0
 pos = []
 single = []
 f = []
+mark = 0
 
 for filename in sys.argv[1:]:
+    
     if os.path.isfile(filename):
         with open(filename,'r') as file:
             for line in file:
@@ -24,10 +26,30 @@ for filename in sys.argv[1:]:
                     single = []
                 else:
                     continue
+                
+    if len(pos):
+        mark = 1
+        print("There are conflicts in "+ filename + ".")
+        for conflict in pos:
+            print("CONFLICTS: line " + str(conflict[0]) + " to line " + str(conflict[1]))
+    
+    pos = []
+            
+if mark:
+    print("They will cause website build failure.")
+    exit(1)        
+            
+            
+            
+            
+            
+            
+"""           
             if len(pos) :
                 pos.append(filename)
                 f.append(pos)
                 pos = []
+    
 
 if len(f):
     for file in f:
@@ -38,5 +60,6 @@ if len(f):
 
 print("They will cause website build failure.")
 exit(1)
+"""
 
 
