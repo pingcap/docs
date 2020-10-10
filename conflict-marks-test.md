@@ -1,3 +1,5 @@
+# Conflicts Check Test File
+
 title: EXPLAIN Overview
 summary: Learn about the execution plan information returned by the `EXPLAIN` statement in TiDB.
 <<<<<<< HEAD:query-execution-plan.md
