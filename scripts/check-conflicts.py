@@ -6,7 +6,6 @@ lineNum = 0
 flag = 0
 pos = []
 single = []
-f = []
 mark = 0
 
 for filename in sys.argv[1:]:
@@ -26,7 +25,7 @@ for filename in sys.argv[1:]:
                     single = []
                 else:
                     continue
-                
+
     if len(pos):
         mark = 1
         print("There are conflicts in "+ filename + ".")
