@@ -5,7 +5,7 @@ summary: Learn TiDB Dashboard metrics relation map.
 
 # TiDB Dashboard Metrics Relation Map
 
-TiDB Dashboard metrics relation map is a feature introduced in v4.0.7. With this feature, the monitoring data of each internal process's duration in a TiDB cluster is drawn into relation maps. The aim is to help you quickly learn the time consumption of each process and their relations.
+TiDB Dashboard metrics relation map is a feature introduced in v4.0.7. With this feature, the monitoring data of each internal process's duration in a TiDB cluster is drawn into relation maps. The aim is to help you quickly learn the duration of each process and their relations.
 
 ## Access map
 
@@ -21,10 +21,10 @@ The following image is an example of the metrics relation map. This map illustra
 
 ![Metrics relation map example](/media/dashboard/dashboard-metrics-relation-example.png)
 
-For example, the following monitoring map of the `tidb_execute` node indicates:
+For example, the monitoring map of the `tidb_execute` node below indicates as follows:
 
 + The total duration of the `tidb_execute` monitoring metric is 19306.46 seconds, which accounts for 89.4% of the total query duration.
-+ The duration of `tidb_execute` node itself is 9070.18 seconds, which accounts for 42% of the total query duration.
++ The duration of the `tidb_execute` node itself is 9070.18 seconds, which accounts for 42% of the total query duration.
 + Hover your mouse over the box area and you can see the detailed information of the metric's note, including the total duration, the average duration, and the average P99 duration.
 
 ![tidb_execute node example](/media/dashboard/dashboard-metrics-relation-node-example.png)
@@ -53,7 +53,7 @@ The text information displayed in the image above is the note of the metric node
 
 ### The parent-child relations between nodes
 
-This section takes the example of the `tidb_execute` metric node to introduce the metric's child nodes.
+Taking the example of the `tidb_execute` metric node, this section introduces a metric's child nodes.
 
 ![tidb_execute node relation example1](/media/dashboard/dashboard-metrics-relation-relation-example1.png)
 
@@ -62,7 +62,7 @@ From the map above, you can see the two child nodes of `tidb_execute`:
 * `pd_start_tso_wait`: The total duration of waiting for the transaction's `start_tso`, which is 300.66 seconds.
 * `tidb_txn_cmd`: The total duration of TiDB executing the relevant commands, which is 9935.62 seconds.
 
-In addition, `tidb_execute` also has a dotted arrow pointing to `tidb_cop` box area, which indicates as follows:
+In addition, `tidb_execute` also has a dotted arrow pointing to the `tidb_cop` box area, which indicates as follows:
 
 `tidb_execute` includes the duration of the `tidb_cop` metric, but cop requests might be executed concurrently. For example, the `execute` duration of performing `join` queries on two tables is 60 seconds, duration which table scan requests are concurrently executed on the joined two tables. If the execution durations of cop requests are respectively 40 seconds and 30 seconds, the total duration of cop requests are 70 seconds. However, the `execute` duration is only 60 seconds. Therefore, if the duration of a parent node does not completely include the duration of a child node, the dotted arrow is used to point to the child node.
 
