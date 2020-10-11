@@ -101,7 +101,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
 
 > **Note:**
 >
-> TiUP Playground listens on `127.0.0.1` by default, and you can only access the services locally; if you need to access the services externally, you can specify `0.0.0.0` to listen on via the `--host` parameter or bind the network card to an externally accessible IP address.
+> TiUP Playground listens on `127.0.0.1` by default, and you can only access the services locally; if you need to access the services externally, you can specify `0.0.0.0` to listen on via the `--host` parameter or bind the network card to the externally accessible IP address.
 
 ## Set up a test environment on a single machine using TiUP cluster
 
