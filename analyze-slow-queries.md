@@ -250,4 +250,4 @@ Most optimizer issues are explained in [SQL Tuning Overview](/sql-tuning-overvie
 
 1. [Wrong Index Solution](/wrong-index-solution.md)
 2. [Wrong join order](/join-reorder.md)
-3. [Expressions are not pushed down](/blacklist-control-plan.md)
+3. [Expressions are not pushed down](/blocklist-control-plan.md)
