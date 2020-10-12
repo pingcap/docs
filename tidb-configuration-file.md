@@ -558,4 +558,4 @@ For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](
 
 ## experimental
 
-The `experimental` section describes configurations related to the experimental features of TiDB. This section is introduced since v3.1.0. Currently, it has no relevant configuration item.
+The `experimental` section describes configurations related to the experimental features of TiDB. This section is introduced since v3.1.0. Currently, it has no related configuration item.
