@@ -103,7 +103,7 @@ In the example above, perform the following operations in order:
 
 ### Monotonicity
 
-TiDB guarantees that `AUTO_INCREMENT` values are monotonic (always increasing) on a per-server basis. Consider the following example where consecutive `AUTO_INCREMENT` values of 1-3 are generated：
+TiDB guarantees that `AUTO_INCREMENT` values are monotonic (always increasing) on a per-server basis. Consider the following example where consecutive `AUTO_INCREMENT` values of 1-3 are generated:
 
 {{< copyable "sql" >}}
 
