@@ -9,6 +9,7 @@ single = []
 mark = 0
 
 for filename in sys.argv[1:]:
+    single = []
     if os.path.isfile(filename):
         with open(filename,'r') as file:
             for line in file:
@@ -18,19 +19,21 @@ for filename in sys.argv[1:]:
                     single.append(lineNum)
                 elif re.match(r'={7}\n', line) :
                     flag = 2
-                elif re.match(r'>{7}', line) and flag==2:
+                elif re.match(r'>{7}', line) and flag == 2:
                     single.append(lineNum)
                     pos.append(single)
                     single = []
                     flag = 0
                 else:
                     continue
+            
 
     if len(pos):
         mark = 1
         print("There are conflicts in "+ filename + ".")
         for conflict in pos:
-            print("CONFLICTS: line " + str(conflict[0]) + " to line " + str(conflict[1]))
+            if len(conflict) == 2:
+                print("CONFLICTS: line " + str(conflict[0]) + " to line " + str(conflict[1]))
     
     pos = []
 
