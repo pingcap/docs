@@ -92,6 +92,7 @@
   + [Identify Expensive Queries](/identify-expensive-queries.md)
   + [Statement Summary Tables](/statement-summary-tables.md)
   + [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md)
+  + [Troubleshoot Increased Read and Write Latency](/troubleshoot-cpu-issues.md)
   + [Troubleshoot Cluster Setup](/troubleshoot-tidb-cluster.md)
   + [Troubleshoot High Disk I/O Usage](/troubleshoot-high-disk-io.md)
   + [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md)
@@ -522,7 +523,7 @@
   + [All Releases](/releases/release-notes.md)
   + [TiDB Roadmap](/roadmap.md)
   + v4.0
-    + [4.0.7](/releases/release-4.0.6.md)
+    + [4.0.7](/releases/release-4.0.7.md)
     + [4.0.6](/releases/release-4.0.6.md)
     + [4.0.5](/releases/release-4.0.5.md)
     + [4.0.4](/releases/release-4.0.4.md)
