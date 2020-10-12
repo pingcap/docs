@@ -10,10 +10,15 @@ aliases: ['/docs/stable/query-execution-plan/','/docs/v4.0/query-execution-plan/
 ---
 
 # `EXPLAIN` Overview
+
 Based on the latest statistics of your tables, the TiDB optimizer chooses the most efficient query execution plan, which consists of a series of operators. This document details the execution plan in TiDB.
+
 ## Introduction
+
 You can use the `EXPLAIN` command in TiDB to view the execution plan. The result of the `EXPLAIN` statement provides information about how TiDB executes SQL queries:
+
 - `EXPLAIN` works together with statements such as `SELECT` and `DELETE`.
 - When you execute the `EXPLAIN` statement, TiDB returns the final optimized physical execution plan. In other words, `EXPLAIN` displays the complete information about how TiDB executes the SQL statement, such as in which order, how tables are joined, and what the expression tree looks like.
 - For more information about each column of `EXPLAIN`, see [`EXPLAIN` Output Format](/sql-statements/sql-statement-explain.md).
+
 The results of `EXPLAIN` shed light on how to index the data tables so that the execution plan can use the index to speed up the execution of SQL statements. You can also use `EXPLAIN` to check if the optimizer chooses the optimal order to join tables.
