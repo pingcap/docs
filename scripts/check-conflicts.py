@@ -10,6 +10,7 @@ mark = 0
 
 for filename in sys.argv[1:]:
     single = []
+    lineNum = 0
     if os.path.isfile(filename):
         with open(filename,'r') as file:
             for line in file:
