@@ -71,6 +71,23 @@ The following are descriptions of options available in the `cdc server` command:
 - `cert`: The path of the certificate file used by TiCDC, in the PEM format (optional).
 - `key`: The path of the certificate key file used by TiCDC, in the PEM format (optional).
 
+## Upgrade TiCDC using TiUP
+
+This section introduces how to upgrade the TiCDC cluster using TiUP. In the following example, assume that you need to upgrade TiCDC and the entire TiDB cluster to v4.0.6.
+
+{{< copyable "shell-regular" >}}
+
+```shell
+tiup update --self && \
+tiup update --all && \
+tiup cluster upgrade <cluster-name> v4.0.6
+```
+
+### Notes for upgrade
+
+* The `changefeed` configuration has changed in TiCDC v4.0.2. See [Compatibility notes for the configuration file](/production-deployment-using-tiup.md#step-3-edit-the-initialization-configuration-file) for details.
+* If you encounter any issues, see [Upgrade TiDB using TiUP - FAQ](/upgrade-tidb-using-tiup.md#faq).
+
 ## Use TLS
 
 For details about using encrypted data transmission (TLS), see [Enable TLS Between TiDB Components](/enable-tls-between-components.md).
@@ -128,6 +145,9 @@ Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":
 
 - `--changefeed-id`: The ID of the replication task. The format must match the `^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$` regular expression. If this ID is not specified, TiCDC automatically generates a UUID (the version 4 format) as the ID.
 - `--sink-uri`: The downstream address of the replication task. Configure `--sink-uri` according to the following format. Currently, the scheme supports `mysql`/`tidb`/`kafka`/`pulsar`.
+- `--start-ts`: Specifies the starting TSO of the `changefeed`. From this TSO, the TiCDC cluster starts pulling data. The default value is the current time.
+- `--target-ts`: Specifies the ending TSO of the `changefeed`. To this TSO, the TiCDC cluster stops pulling data. The default value is empty, which means that TiCDC does not automatically stop pulling data.
+- `--config`: Specifies the configuration file of the `changefeed`.
 
 {{< copyable "" >}}
 
@@ -578,6 +598,16 @@ For nodes other than owner nodes, executing the above command will return the fo
  "message": ""
 }
 ```
+
+### Dynamically change the log level of TiCDC server
+
+{{< copyable "shell-regular" >}}
+
+```shell
+curl -X POST -d '"debug"' http://127.0.0.1:8301/admin/log
+```
+
+In the command above, the `POST` parameter indicates the new log level. The [zap-provided](https://godoc.org/go.uber.org/zap#UnmarshalText) log level options are supported: "debug", "info", "warn", "error", "dpanic", "panic", and "fatal". This interface parameter is JSON-encoded and you need to pay attention to the use of quotation marks. For example: `'"debug"'`.
 
 ## Task configuration file
 

@@ -280,16 +280,6 @@ Configuration items related to the sharing of block cache among multiple RocksDB
 
 Configuration items related to Raftstore
 
-### `sync-log`
-
-+ Enables or disables synchronous write mode. In the synchronous write mode, each commit is forced to be flushed to raft-log synchronously for persistent storage.
-
-    > **Note:**
-    >
-    > Setting the value to `false` might lead to data loss.
-
-+ Default value: `true`
-
 ### `prevote`
 
 + Enables or disables `prevote`. Enabling this feature helps reduce jitter on the system after recovery from network partition.
@@ -1147,6 +1137,11 @@ Configuration items related to security
 
 + The path of the PEM file that contains the X509 key
 + Default value: ""
+
+### `redact-info-log`
+
++ This configuration item enables or disables log redaction. If the configuration value is set to `true`, all user data in the log will be replaced by `?`.
++ Default value: `false`
 
 ## `import`
 
