@@ -1,6 +1,5 @@
-# Conflicts Check Test File
+# title: EXPLAIN Overview
 
-title: EXPLAIN Overview
 summary: Learn about the execution plan information returned by the `EXPLAIN` statement in TiDB.
 <<<<<<< HEAD:query-execution-plan.md
 aliases: ['/docs/stable/query-execution-plan/','/docs/v4.0/query-execution-plan/','/docs/stable/reference/performance/understanding-the-query-execution-plan/','/docs/stable/index-merge/','/docs/v4.0/index-merge/','/docs/stable/reference/performance/index-merge/','/tidb/stable/index-merge']
