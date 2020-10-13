@@ -203,7 +203,7 @@ select /*+ READ_FROM_STORAGE(TIFLASH[t1], TIKV[t2]) */ t1.a from t t1, t t2 wher
 
 > **Note:**
 >
-> To tell the optimizer that the table to be read is from another schema, you need to explicitly specify the schema name. For example:
+> If you want the optimizer to use a table from another schema, you need to explicitly specify the schema name. For example:
 >
 > {{< copyable "sql" >}}
 >
