@@ -1,9 +1,9 @@
 ---
-title: Partitions
+title: Explain Statements Using Partitions
 summary: Learn about the execution plan information returned by the `EXPLAIN` statement in TiDB.
 ---
 
-# Partitions
+# Explain Statements Using Partitions
 
 The `EXPLAIN` statement displays the partitions that TiDB needs to access in order to execute a query. Because of [partition pruning](/partition-pruning.md), the displayed partitions are often only a subset of the overall partitions. This document describes some of the optimizations for common partitioned tables, and how to interpret the output of `EXPLAIN`.
 
