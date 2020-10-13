@@ -204,6 +204,7 @@ For example, set `tikv_gc_life_time` to `720h`:
 ```sql
 mysql -h${TiDBIP} -P4000 -u${TIDB_USER} ${password_str} -Nse \
     "update mysql.tidb set variable_value='720h' where variable_name='tikv_gc_life_time'";
+```
 
 Since v4.0.3, BR automatically adapts to GC and you do not need to manually adjust the `tikv_gc_life_time` value.
 
