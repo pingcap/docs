@@ -1,7 +1,6 @@
 ---
 title: Deploy a TiDB Cluster Offline Using TiUP
 summary: Introduce how to deploy a TiDB cluster offline using TiUP.
-category: how-to
 aliases: ['/docs/stable/production-offline-deployment-using-tiup/','/docs/v4.0/production-offline-deployment-using-tiup/']
 ---
 
@@ -11,78 +10,61 @@ This document describes how to deploy a TiDB cluster offline using TiUP.
 
 ## Step 1: Prepare the TiUP offline component package
 
-You can either download the official package, or manually pack a component package.
+### Option 1: Download the official TiUP offline component package
 
-### Download the official TiUP offline component package
+Download the offline mirror package of the TiDB server (including the TiUP offline component package) from the [Download TiDB](https://pingcap.com/download/) page.
 
-Download the prepared offline mirror package at `http://download.pingcap.org` by running the following command:
-
-{{< copyable "shell-regular" >}}
-
-```shell
-wget http://download.pingcap.org/tidb-community-server-${version}-linux-amd64.tar.gz
-mv tidb-community-server-${version}-linux-amd64.tar.gz package.tar.gz
-```
-
-In the command above, replace `${version}` with the offline mirror version you want to download, such as `v4.0.0`.
-
-`package.tar.gz` is a separate offline environment package.
-
-### Manually pack an offline component package using `tiup mirror clone`
+### Option 2: Manually pack an offline component package using `tiup mirror clone`
 
 The steps are below.
 
-#### Deploy the online TiUP component
+- Install the TiUP package manager online.
 
-Log in to a machine that has access to the Internet using a regular user account. Perform the following steps:
+    1. Install the TiUP tool:
 
-1. Install the TiUP tool:
+        {{< copyable "shell-regular" >}}
 
-    {{< copyable "shell-regular" >}}
+        ```shell
+        curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
+        ```
 
-    ```shell
-    curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
-    ```
+    2. Redeclare the global environment variables:
 
-2. Redeclare the global environment variables:
+        {{< copyable "shell-regular" >}}
 
-    {{< copyable "shell-regular" >}}
+        ```shell
+        source .bash_profile
+        ```
 
-    ```shell
-    source .bash_profile
-    ```
+    3. Confirm whether TiUP is installed:
 
-3. Confirm whether TiUP is installed:
+        {{< copyable "shell-regular" >}}
 
-    {{< copyable "shell-regular" >}}
+        ```shell
+        which tiup
+        ```
 
-    ```shell
-    which tiup
-    ```
+- Pull the mirror using TiUP
 
-#### Pull the mirror using TiUP
+    1. Pull the needed components on a machine that has access to the Internet:
 
-Assume that you are installing a v4.0.0 TiDB cluster using the `tidb` user account in an isolated environment, take the following steps:
+        {{< copyable "shell-regular" >}}
 
-1. Pull the needed components on a machine that has access to the Internet:
+        ```shell
+        tiup mirror clone tidb-community-server-${version}-linux-amd64 ${version} --os=linux --arch=amd64
+        ```
 
-    {{< copyable "shell-regular" >}}
+        The command above creates a directory named `tidb-community-server-${version}-linux-amd64` in the current directory, which contains the component package necessary for starting a cluster.
 
-    ```shell
-    tiup mirror clone package v4.0.0 --os=linux --arch=amd64
-    ```
+    2. Pack the component package by using the `tar` command and send the package to the control machine in the isolated environment:
 
-    The command above creates a directory named `package` in the current directory, which contains the component package necessary for starting a cluster.
+        {{< copyable "shell-regular" >}}
 
-2. Pack the component package by using the `tar` command and send the package to the control machine in the isolated environment:
+        ```bash
+        tar czvf tidb-community-server-${version}-linux-amd64.tar.gz tidb-community-server-${version}-linux-amd64
+        ```
 
-    {{< copyable "shell-regular" >}}
-
-    ```bash
-    tar czvf package.tar.gz package
-    ```
-
-    `package.tar.gz` is an independent offline environment package.
+        `tidb-community-server-${version}-linux-amd64.tar.gz` is an independent offline environment package.
 
 ## Step 2: Deploy the offline TiUP component
 
@@ -90,12 +72,15 @@ After sending the package to the control machine of the target cluster, install 
 
 {{< copyable "shell-regular" >}}
 
-```shell
-tar xzvf package.tar.gz &&
-cd package &&
-sh local_install.sh &&
+```bash
+tar xzvf tidb-community-server-${version}-linux-amd64.tar.gz
+sh tidb-community-server-${version}-linux-amd64/local_install.sh
 source /home/tidb/.bash_profile
 ```
+
+The `local_install.sh` script automatically executes the `tiup mirror set tidb-community-server-${version}-linux-amd64` command to set the current mirror address to `tidb-community-server-${version}-linux-amd64`.
+
+To switch the mirror to another directory, you can manually execute the `tiup mirror set <mirror-dir>` command.
 
 ## Step 3: Mount the TiKV data disk
 
@@ -255,13 +240,12 @@ alertmanager_servers:
 
 ## Step 5: Deploy the TiDB cluster
 
-`/path/to/mirror` is the location of the offline mirror package that is output by the `local_install.sh` command:
+Execute the following command to deploy the TiDB cluster:
 
 {{< copyable "shell-regular" >}}
 
-```shell
-export TIUP_MIRRORS=/path/to/mirror &&
-tiup cluster deploy tidb-test v4.0.0 topology.yaml --user tidb [-p] [-i /home/root/.ssh/gcp_rsa] &&
+```bash
+tiup cluster deploy tidb-test v4.0.0 topology.yaml --user tidb [-p] [-i /home/root/.ssh/gcp_rsa]
 tiup cluster start tidb-test
 ```
 
@@ -271,7 +255,7 @@ tiup cluster start tidb-test
 > - The deployment version is `v4.0.0`. To obtain other supported versions, run `tiup list tidb`.
 > - The initialization configuration file is `topology.yaml`.
 > - `–user tidb`: log in to the target machine using the `tidb` user account to complete the cluster deployment. The `tidb` user needs to have `ssh` and `sudo` privileges of the target machine. You can use other users with `ssh` and `sudo` privileges to complete the deployment.
-> - `[-i]` and `[-p]`: optional. If you have configured login to the target machine without password, these parameters are not required. If not, choose one of the two parameters. `[-i]` is the private key of the `root` user (or other users specified by `-user`) that has access to the deployment machine. `[-p]` is used to input the user password interactively.
+> - `[-i]` and `[-p]`: optional. If you have configured login to the target machine without password, these parameters are not required. If not, choose one of the two parameters. `[-i]` is the private key of the `root` user (or other users specified by `-user`) that has access to the target machine. `[-p]` is used to input the user password interactively.
 
 If you see the ``Deployed cluster `tidb-test` successfully`` output at the end of the log, the deployment is successful.
 

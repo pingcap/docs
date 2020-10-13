@@ -1,7 +1,6 @@
 ---
 title: REVOKE <privileges> | TiDB SQL Statement Reference
 summary: An overview of the usage of REVOKE <privileges> for the TiDB database.
-category: reference
 aliases: ['/docs/stable/sql-statements/sql-statement-revoke-privileges/','/docs/v4.0/sql-statements/sql-statement-revoke-privileges/','/docs/stable/reference/sql/statements/revoke-privileges/']
 ---
 
@@ -78,7 +77,7 @@ ERROR 1141 (42000): There is no such grant defined for user 'newuser' on host '%
 
 ## MySQL compatibility
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/report-issue.md) on GitHub.
+This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
 
 ## See also
 

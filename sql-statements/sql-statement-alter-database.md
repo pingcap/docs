@@ -1,7 +1,6 @@
 ---
 title: ALTER DATABASE | TiDB SQL Statement Reference
 summary: An overview of the usage of ALTER DATABASE for the TiDB database.
-category: reference
 aliases: ['/docs/stable/sql-statements/sql-statement-alter-database/','/docs/v4.0/sql-statements/sql-statement-alter-database/','/docs/stable/reference/sql/statements/alter-database/']
 ---
 
@@ -9,7 +8,7 @@ aliases: ['/docs/stable/sql-statements/sql-statement-alter-database/','/docs/v4.
 
 `ALTER DATABASE` is used to specify or modify the default character set and collation of the current database. `ALTER SCHEMA` has the same effect as `ALTER DATABASE`.
 
-## 语法图
+## Synopsis
 
 **AlterDatabaseStmt:**
 
@@ -21,15 +20,23 @@ aliases: ['/docs/stable/sql-statements/sql-statement-alter-database/','/docs/v4.
 
 ## Examples
 
+Modify the test database schema to use the utf8mb4 character set:
+
+{{< copyable "sql" >}}
+
 ```sql
-ALTER {DATABASE | SCHEMA} [db_name]
-    alter_specification ...
-alter_specification:
-    [DEFAULT] CHARACTER SET [=] charset_name
-  | [DEFAULT] COLLATE [=] collation_name
+ALTER DATABASE test DEFAULT CHARACTER SET = utf8mb4;
 ```
 
-The `alter_specification` option specifies the `CHARACTER SET` and `COLLATE` of a specified database. Currently, TiDB only supports some character sets and collations. See [Character Set and Collation Support](/character-set-and-collation.md) for details.
+```sql
+Query OK, 0 rows affected (0.00 sec)
+```
+
+Currently, TiDB only supports some character sets and collations. See [Character Set and Collation Support](/character-set-and-collation.md) for details.
+
+## MySQL compatibility
+
+This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
 
 ## See also
 

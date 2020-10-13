@@ -1,7 +1,6 @@
 ---
 title: SHOW CONFIG
 summary: Overview of the use of SHOW CONFIG in the TiDB database
-category: reference
 aliases: ['/docs/stable/sql-statements/sql-statement-show-config/','/docs/v4.0/sql-statements/sql-statement-show-config/']
 ---
 
@@ -84,7 +83,7 @@ SHOW CONFIG LIKE 'tidb';
 
 ## MySQL compatibility
 
-`SHOW CONFIG` is the extended syntax of TiDB, with no counterpart in MySQL.
+This statement is a TiDB extension to MySQL syntax.
 
 ## See also
 

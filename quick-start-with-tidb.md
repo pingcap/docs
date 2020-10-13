@@ -1,8 +1,7 @@
 ---
 title: Quick Start Guide for the TiDB Database Platform
 summary: Learn how to quickly get started with the TiDB platform and see if TiDB is the right choice for you.
-category: how-to
-aliases: ['/docs/stable/quick-start-with-tidb/','/docs/v4.0/quick-start-with-tidb/','/docs/QUICKSTART','/docs/stable/test-deployment-using-docker/']
+aliases: ['/docs/stable/quick-start-with-tidb/','/docs/v4.0/quick-start-with-tidb/','/docs/QUICKSTART','/docs/stable/test-deployment-using-docker/','/docs/op-guide/docker-compose/']
 ---
 
 # Quick Start Guide for the TiDB Database Platform
@@ -86,7 +85,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
 
 5. Access the Prometheus dashboard of TiDB at <http://127.0.0.1:9090>.
 
-6. Access the TiDB Dashboard at <http://127.0.0.1:2379/dashboard>. The default username is `root`, with an empty password.
+6. Access the [TiDB Dashboard](/dashboard/dashboard-intro.md) at <http://127.0.0.1:2379/dashboard>. The default username is `root`, with an empty password.
 
 7. After the test, you can clean the cluster by taking the following steps:
 
@@ -276,7 +275,7 @@ Other requirements for the target machine:
 
     - Access the Grafana monitoring dashboard at <http://{grafana-ip}:3000>. The default username and password are both `admin`.
 
-    - Access the TiDB Dashboard at <http://{pd-ip}:2379/dashboard>. The default username is `root`, and the password is empty.
+    - Access the [TiDB Dashboard](/dashboard/dashboard-intro.md) at <http://{pd-ip}:2379/dashboard>. The default username is `root`, and the password is empty.
 
     - To view the currently deployed cluster list:
 
@@ -308,7 +307,9 @@ Click to try TiDB-Wasm playground: <https://tour.tidb.io>. It takes about 10 sec
 - If you have just deployed a TiDB cluster for the local test environment:
 
     - Learn [Basic SQL operations in TiDB](/basic-sql-operations.md)
+    - [Migrate data to TiDB](/migration-overview.md)
     - Learn [TiDB key features and scenarios](/overview.md)
+    - Learn [TiDB's architecture](/tidb-architecture.md)
     - Learn [TiDB's compatibility with MySQL](/mysql-compatibility.md)
 
 - If you are ready to deploy a TiDB cluster for the production environment:

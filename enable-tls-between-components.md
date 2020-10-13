@@ -1,7 +1,6 @@
 ---
 title: Enable TLS Between TiDB Components
 summary: Learn how to enable TLS authentication between TiDB components.
-category: how-to
 aliases: ['/docs/stable/enable-tls-between-components/','/docs/v4.0/enable-tls-between-components/','/docs/stable/how-to/secure/enable-tls-between-components/']
 ---
 
@@ -32,7 +31,7 @@ Currently, it is not supported to only enable encrypted transmission of some spe
 
    - TiDB
 
-        Configure in the configuration file or command line arguments:
+        Configure in the configuration file or command-line arguments:
 
         ```toml
         [security]
@@ -46,7 +45,7 @@ Currently, it is not supported to only enable encrypted transmission of some spe
 
    - TiKV
 
-        Configure in the configuration file or command line arguments, and set the corresponding URL to https:
+        Configure in the configuration file or command-line arguments, and set the corresponding URL to `https`:
 
         ```toml
         [security]
@@ -58,7 +57,7 @@ Currently, it is not supported to only enable encrypted transmission of some spe
 
    - PD
 
-        Configure in the configuration file or command line arguments, and set the corresponding URL to https:
+        Configure in the configuration file or command-line arguments, and set the corresponding URL to `https`:
 
         ```toml
         [security]
@@ -68,6 +67,40 @@ Currently, it is not supported to only enable encrypted transmission of some spe
         cert-path = "/path/to/pd-server.pem"
         # Path of file that contains X509 key in PEM format.
         key-path = "/path/to/pd-server-key.pem"
+        ```
+
+    - TiFlash (New in v4.0.5)
+
+        Configure in the `tiflash.toml` file, and change the `http_port` item to `https_port`:
+
+         ```toml
+        [security]
+        # Path of file that contains list of trusted SSL CAs. if set, following four settings shouldn't be empty
+        ca_path = "/path/to/ca.pem"
+        # Path of file that contains X509 certificate in PEM format.
+        cert_path = "/path/to/tiflash-server.pem"
+        # Path of file that contains X509 key in PEM format.
+        key_path = "/path/to/tiflash-server-key.pem"
+        ```
+
+        Configure in the `tiflash-learner.toml` file:
+
+        ```toml
+        [security]
+        # Sets the path for certificates. The empty string means that secure connections are disabled.
+        ca-path = "/path/to/ca.pem"
+        cert-path = "/path/to/tiflash-server.pem"
+        key-path = "/path/to/tiflash-server-key.pem"
+        ```
+
+    - TiCDC
+
+        Configure in the command-line arguments and set the corresponding URL to `https`:
+
+        {{< copyable "shell-regular" >}}
+
+        ```bash
+        cdc server --pd=https://127.0.0.1:2379 --log-file=ticdc.log --addr=0.0.0.0:8301 --advertise-addr=127.0.0.1:8301 --ca=/path/to/ca.pem --cert=/path/to/ticdc-cert.pem --key=/path/to/ticdc-key.pem
         ```
 
     Now, encrypted transmission among TiDB components is enabled.
@@ -102,7 +135,7 @@ To verify component caller's identity, you need to mark the certificate user ide
 
 - TiDB
 
-    Configure in the configuration file or command line arguments:
+    Configure in the configuration file or command-line arguments:
 
     ```toml
     [security]
@@ -114,7 +147,7 @@ To verify component caller's identity, you need to mark the certificate user ide
 
 - TiKV
 
-    Configure in the configuration file or command line arguments:
+    Configure in the configuration file or command-line arguments:
 
     ```toml
     [security]
@@ -125,13 +158,39 @@ To verify component caller's identity, you need to mark the certificate user ide
 
 - PD
 
-    Configure in the configuration file or command line arguments:
+    Configure in the configuration file or command-line arguments:
 
     ```toml
     [security]
     cert-allowed-cn = ["TiKV-Server", "TiDB-Server", "PD-Control"]
     ```
 
+- TiCDC
+
+    Configure in the command-line arguments:
+
+    {{< copyable "shell-regular" >}}
+
+    ```bash
+    cdc server --pd=https://127.0.0.1:2379 --log-file=ticdc.log --addr=0.0.0.0:8301 --advertise-addr=127.0.0.1:8301 --ca=/path/to/ca.pem --cert=/path/to/ticdc-cert.pem --key=/path/to/ticdc-key.pem --cert-allowed-cn="client1,client2"
+    ```
+
+- TiFlash (New in v4.0.5)
+
+    Configure in the `tiflash.toml` file or command-line arguments:
+
+    ```toml
+    [security]
+    cert_allowed_cn = ["TiKV-Server", "TiDB-Server"]
+    ```
+
+    Configure in the `tiflash-learner.toml` file:
+
+    ```toml
+    [security]
+    cert-allowed-cn = ["PD-Server", "TiKV-Server", "TiFlash-Server"]
+    ```
+    
 ### Reload certificates
 
 To reload the certificates and the keys, TiDB, PD, TiKV, and all kinds of clients reread the current certificates and the key files each time a new connection is created. Currently, you cannot reload the CA certificate.

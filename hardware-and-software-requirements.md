@@ -1,7 +1,6 @@
 ---
 title: Software and Hardware Recommendations
 summary: Learn the software and hardware recommendations for deploying and running TiDB.
-category: how-to
 aliases: ['/docs/stable/hardware-and-software-requirements/','/docs/v4.0/hardware-and-software-requirements/','/docs/stable/how-to/deploy/hardware-recommendations/']
 ---
 
@@ -35,7 +34,7 @@ As an open source distributed NewSQL database with high performance, TiDB can be
 
 > **Note:**
 >
-> It is required that you deploy TiUP on the control machine to operate and manage TiDB clusters.
+> It is required that you [deploy TiUP on the control machine](/production-deployment-using-tiup.md#step-2-install-tiup-on-the-control-machine) to operate and manage TiDB clusters.
 
 ### Target machines
 
@@ -56,6 +55,7 @@ You can deploy and run TiDB on the 64-bit generic hardware server platform in th
 | PD      | 4 core+   | 8 GB+  | SAS, 200 GB+ | Gigabit network card | 1 (can be deployed on the same machine with TiDB)       |
 | TiKV    | 8 core+   | 32 GB+  | SAS, 200 GB+ | Gigabit network card | 3       |
 | TiFlash | 32 core+  | 64 GB+  | SSD, 200 GB+ | Gigabit network card | 1     |
+| TiCDC | 8 core+ | 16 GB+ | SAS, 200 GB+ | Gigabit network card | 1 |
 
 > **Note:**
 >
@@ -73,6 +73,7 @@ You can deploy and run TiDB on the 64-bit generic hardware server platform in th
 | PD | 4 core+ | 8 GB+ | SSD | 10 Gigabit network card (2 preferred) | 3 |
 | TiKV | 16 core+ | 32 GB+ | SSD | 10 Gigabit network card (2 preferred) | 3 |
 | TiFlash | 48 core+ | 128 GB+ | 1 or more SSDs | 10 Gigabit network card (2 preferred) | 2 |
+| TiCDC | 16 core+ | 64 GB+ | SSD | 10 Gigabit network card (2 preferred) | 2 |
 | Monitor | 8 core+ | 16 GB+ | SAS | Gigabit network card | 1 |
 
 > **Note:**
@@ -88,6 +89,8 @@ Before you deploy TiFlash, note the following items:
 - It is recommended to deploy TiFlash on different nodes from TiKV. If you must deploy TiFlash and TiKV on the same node, increase the number of CPU cores and memory, and try to deploy TiFlash and TiKV on different disks to avoid interfering each other.
 - The total capacity of the TiFlash disks is calculated in this way: `the data volume of the entire TiKV cluster to be replicated / the number of TiKV replicas * the number of TiFlash replicas`. For example, if the overall planned capacity of TiKV is 1 TB, the number of TiKV replicas is 3, and the number of TiFlash replicas is 2, then the recommended total capacity of TiFlash is `1024 GB / 3 * 2`. You can replicate only the data of some tables. In such case, determine the TiFlash capacity according to the data volume of the tables to be replicated.
 
+Before you deploy TiCDC, note that it is recommended to deploy TiCDC on PCIe-SSD disks larger than 200 GB.
+
 ## Network requirements
 
 As an open source distributed NewSQL database, TiDB requires the following network port configuration to run. Based on the TiDB deployment in actual environments, the administrator can open relevant ports in the network side and host side.
@@ -97,6 +100,7 @@ As an open source distributed NewSQL database, TiDB requires the following netwo
 | TiDB |  4000  | the communication port for the application and DBA tools |
 | TiDB | 10080  | the communication port to report TiDB status |
 | TiKV | 20160 | the TiKV communication port |
+| TiKV |  20180 | the communication port to report TiKV status |
 | PD | 2379 | the communication port between TiDB and PD |
 | PD | 2380 | the inter-node communication port within the PD cluster |
 | TiFlash | 9000 | the TiFlash TCP service port |

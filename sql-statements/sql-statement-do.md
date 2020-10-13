@@ -1,7 +1,6 @@
 ---
 title: DO | TiDB SQL Statement Reference
 summary: An overview of the usage of DO for the TiDB database.
-category: reference
 aliases: ['/docs/stable/sql-statements/sql-statement-do/','/docs/v4.0/sql-statements/sql-statement-do/','/docs/stable/reference/sql/statements/do/']
 ---
 
@@ -55,7 +54,7 @@ Query OK, 0 rows affected (2.50 sec)
 
 ## MySQL compatibility
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/report-issue.md) on GitHub.
+This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
 
 ## See also
 

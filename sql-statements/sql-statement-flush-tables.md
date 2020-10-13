@@ -1,7 +1,6 @@
 ---
 title: FLUSH TABLES | TiDB SQL Statement Reference
 summary: An overview of the usage of FLUSH TABLES for the TiDB database.
-category: reference
 aliases: ['/docs/stable/sql-statements/sql-statement-flush-tables/','/docs/v4.0/sql-statements/sql-statement-flush-tables/','/docs/stable/reference/sql/statements/flush-tables/']
 ---
 
@@ -51,8 +50,8 @@ ERROR 1105 (HY000): FLUSH TABLES WITH READ LOCK is not supported.  Please use @@
 
 ## MySQL compatibility
 
-* TiDB does not have a concept of table cache as in MySQL.  Thus, `FLUSH TABLES` is parsed but ignored in TiDB for compatibility.
-* The statement `FLUSH TABLES WITH READ LOCK` produces an error, as TiDB does not currently support locking tables. It is recommended to use [Historical reads] for this purpose instead.
+* TiDB does not have a concept of table cache as in MySQL. Thus, `FLUSH TABLES` is parsed but ignored in TiDB for compatibility.
+* The statement `FLUSH TABLES WITH READ LOCK` produces an error, as TiDB does not currently support locking tables. It is recommended to use [Historical reads](/read-historical-data.md) for this purpose instead.
 
 ## See also
 

@@ -1,7 +1,6 @@
 ---
 title: TiDB Limitations
 summary: Learn the usage limitations of TiDB.
-category: introduction
 aliases: ['/docs/stable/tidb-limitations/','/docs/v4.0/tidb-limitations/']
 ---
 
@@ -65,8 +64,8 @@ This document describes the common usage limitations of TiDB, including the maxi
 | BINARY     | 256 characters      |
 | VARBINARY  | 65535 characters    |
 | VARCHAR    | 16383 characters    |
-| TEXT       | 6 MB bytes      |
-| BLOB       | 6 MB bytes      |
+| TEXT       | 6 MB                |
+| BLOB       | 6 MB                |
 
 ## Limitations on SQL statements
 

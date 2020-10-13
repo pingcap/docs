@@ -1,7 +1,6 @@
 ---
 title: TiDB Data Type
 summary: Learn about default values for data types in TiDB.
-category: reference
 aliases: ['/docs/stable/data-type-default-values/','/docs/v4.0/data-type-default-values/','/docs/stable/reference/sql/data-types/default-values/']
 ---
 

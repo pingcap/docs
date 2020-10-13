@@ -1,6 +1,5 @@
 ---
 title: TiDB 3.1.0 GA Release Notes
-category: Releases
 aliases: ['/docs/stable/releases/release-3.1.0-ga/','/docs/v4.0/releases/release-3.1.0-ga/','/docs/stable/releases/3.1.0-ga/']
 ---
 
@@ -88,7 +87,7 @@ TiDB Ansible version: 3.1.0 GA
 
         * Fix the issue that TiFlash-related DDL jobs might interrupt the replication of Drainer [#948](https://github.com/pingcap/tidb-binlog/pull/948) [#942](https://github.com/pingcap/tidb-binlog/pull/942)
 
-    - BR
+    - Backup & Restore (BR)
 
         * Fix the issue that the `checksum` operation is still executed when it is disabled [#223](https://github.com/pingcap/br/pull/223)
         * Fix the issue that incremental backup fails when TiDB enables `auto-random` or `alter-pk` [#230](https://github.com/pingcap/br/pull/230) [#231](https://github.com/pingcap/br/pull/231)

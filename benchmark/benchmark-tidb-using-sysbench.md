@@ -1,6 +1,5 @@
 ---
 title: How to Test TiDB Using Sysbench
-category: benchmark
 aliases: ['/docs/stable/benchmark/benchmark-tidb-using-sysbench/','/docs/v4.0/benchmark/benchmark-tidb-using-sysbench/','/docs/stable/benchmark/how-to-run-sysbench/']
 ---
 
@@ -60,9 +59,7 @@ enabled = true
 
 Higher log level also means better performance for TiKV.
 
-As TiKV is deployed in clusters, the Raft algorithm can guarantee that data is written into most of the nodes. Therefore, except the scenarios where data safety is extremely important, `sync-log` can be disabled in raftstore.
-
-There are 2 Column Families (Default CF and Write CF) on TiKV cluster which are mainly used to store different types of data. For the Sysbench test, the Column Family that is used to import data has a constant proportion among TiDB clusters:
+There are multiple Column Families on TiKV cluster which are mainly used to store different types of data, including Default CF, Write CF, and Lock CF. For the Sysbench test, you only need to focus on Default CF and Write CF. The Column Family that is used to import data has a constant proportion among TiDB clusters:
 
 Default CF : Write CF = 4 : 1
 
@@ -70,8 +67,6 @@ Configuring the block cache of RocksDB on TiKV should be based on the machine’
 
 ```toml
 log-level = "error"
-[raftstore]
-sync-log = false
 [rocksdb.defaultcf]
 block-cache-size = "24GB"
 [rocksdb.writecf]
@@ -82,8 +77,6 @@ For TiDB 3.0 or later versions, you can also use the shared block cache to confi
 
 ```toml
 log-level = "error"
-[raftstore]
-sync-log = false
 [storage.block-cache]
 capacity = "30GB"
 ```

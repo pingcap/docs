@@ -1,7 +1,6 @@
 ---
 title: ROLLBACK | TiDB SQL Statement Reference
 summary: An overview of the usage of ROLLBACK for the TiDB database.
-category: reference
 aliases: ['/docs/stable/sql-statements/sql-statement-rollback/','/docs/v4.0/sql-statements/sql-statement-rollback/','/docs/stable/reference/sql/statements/rollback/']
 ---
 
@@ -14,6 +13,10 @@ This statement reverts all changes in the current transaction inside of TIDB.  I
 **RollbackStmt:**
 
 ![RollbackStmt](/media/sqlgram/RollbackStmt.png)
+
+**CompletionTypeWithinTransaction:**
+
+![CompletionTypeWithinTransaction](/media/sqlgram/CompletionTypeWithinTransaction.png)
 
 ## Examples
 
@@ -36,7 +39,9 @@ Empty set (0.01 sec)
 
 ## MySQL compatibility
 
-This statement is partly compatible with MySQL. TiDB only has syntactic support for `CompletionTypeWithinTransaction`. Closing the connection or continuing to open a new transaction after the transaction is rolled back is not supported. Any compatibility differences should be [reported via an issue](/report-issue.md) on GitHub.
+* TiDB does not support savepoints or the syntax `ROLLBACK TO SAVEPOINT`.
+* TiDB parses but ignores the syntax `ROLLBACK AND [NO] RELEASE`. This functionality is used in MySQL to disconnect the client session immediately after rolling back the transaction. In TiDB, it is recommended to instead use the `mysql_close()` functionality of your client driver.
+* TiDB parses but ignores the syntax `ROLLBACK AND [NO] CHAIN`. This functionality is used in MySQL to immediately start a new transaction with the same isolation level while the current transaction is being rolled back. In TiDB, it is recommended to instead start a new transaction.
 
 ## See also
 

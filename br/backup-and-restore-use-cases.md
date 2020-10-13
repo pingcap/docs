@@ -1,13 +1,12 @@
 ---
-title: BR Usage Scenarios
-summary: Learn the scenarios of backing up and restoring data using BR.
-category: how-to
+title: BR Use Cases
+summary: Learn the use cases of backing up and restoring data using BR.
 aliases: ['/docs/stable/br/backup-and-restore-use-cases/','/docs/v4.0/br/backup-and-restore-use-cases/','/docs/stable/reference/tools/br/use-cases/']
 ---
 
-# BR Usage Scenarios
+# BR Use Cases
 
-[Backup & Restore](/br/backup-and-restore-tool.md) (BR) is a command-line tool for distributed backup and restoration of the TiDB cluster data. This document describes the processes of operating BR in [four scenarios](#usage-scenarios) that aims to help you achieve the following goals:
+[Backup & Restore](/br/backup-and-restore-tool.md) (BR) is a command-line tool for distributed backup and restoration of the TiDB cluster data. This document describes the processes of operating BR in [four use cases](#use-cases) that aims to help you achieve the following goals:
 
 * Back up and restore data using a network disk or local disk correctly.
 * Get the status of a backup or restoration operation through monitoring metrics.
@@ -24,17 +23,22 @@ You are expected to have a basic understanding of [TiDB](https://docs.pingcap.co
 
 ## Prerequisites
 
-This section introduces the recommended method of deploying TiDB, cluster versions, the hardware information of the TiKV cluster, and the cluster configuration for the scenario demonstrations. You can estimate the performance of your backup or restoration operation based on your own hardware and configuration.
+This section introduces the recommended method of deploying TiDB, cluster versions, the hardware information of the TiKV cluster, and the cluster configuration for the use case demonstrations. You can estimate the performance of your backup or restoration operation based on your own hardware and configuration.
 
 ### Deployment method
 
-It is recommended that you deploy the TiDB cluster using [TiDB Ansible](/online-deployment-using-ansible.md) and get BR by downloading [TiDB Toolkit](/download-ecosystem-tools.md#br-backup-and-restore).
+It is recommended that you deploy the TiDB cluster using [TiUP](/tiup/tiup-cluster.md) and get BR by downloading [TiDB Toolkit](/download-ecosystem-tools.md#br-backup-and-restore).
 
 ### Cluster versions
 
-* TiKV: v3.1.0-beta.1
-* PD: v3.1.0-beta.1
-* br: v3.1.0-beta.1
+* TiDB: v4.0.2
+* TiKV: v4.0.2
+* PD: v4.0.2
+* BR: v4.0.2
+
+> **Note:**
+>
+> v4.0.2 was the latest version at the time this document was written. It is recommended that you use the latest version of [TiDB/TiKV/PD/BR](/releases/release-notes.md) and make sure that the BR version is **consistent with** the TiDB version.
 
 ### TiKV hardware information
 
@@ -44,16 +48,16 @@ It is recommended that you deploy the TiDB cluster using [TiDB Ansible](/online-
 * Disk: 500G SSD * 2
 * NIC: 10000MB/s
 
-### Cluster Configuration
+### Cluster configuration
 
 BR directly sends commands to the TiKV cluster and are not dependent on the TiDB server, so you do not need to configure the TiDB server when using BR.
 
 * TiKV: default configuration
 * PD: default configuration
 
-## Usage scenarios
+## Use cases
 
-This document describes the following four usage scenarios:
+This document describes the following four use cases:
 
 * [Back up a single table to a network disk (recommended)](#back-up-a-single-table-to-a-network-disk-recommended)
 * [Restore data from a network disk (recommended)](#restore-data-from-a-network-disk-recommended)
@@ -171,16 +175,16 @@ During the backup process, pay attention to the following metrics on the monitor
 Before executing the backup command, a path in which the log is stored has been specified. You can get the statistical information of the backup operation from this log. Search "summary" in this log, you can see the following information:
 
 ```
-["Table backup summary: 
-    total backup ranges: 4, 
-    total success: 4, 
-    total failed: 0, 
-    total take(s): 986.43, 
-    total kv: 5659888624, 
-    total size(MB): 353227.18, 
-    avg speed(MB/s): 358.09"] 
-    ["backup total regions"=7196] 
-    ["backup checksum"=6m28.291772955s] 
+["Table backup summary:
+    total backup ranges: 4,
+    total success: 4,
+    total failed: 0,
+    total take(s): 986.43,
+    total kv: 5659888624,
+    total size(MB): 353227.18,
+    avg speed(MB/s): 358.09"]
+    ["backup total regions"=7196]
+    ["backup checksum"=6m28.291772955s]
     ["backup fast checksum"=24.950298ms]
 ```
 
@@ -195,7 +199,7 @@ From the above information, the throughput of a single TiKV instance can be calc
 
 #### Performance tuning
 
-If the resource usage of TiKV does not become an obvious bottleneck during the backup process (for example, in the [Monitoring metrics for the backup](#monitoring-metrics-for-the-backup), the highest CPU usage rate of backup-worker is around `1500%` and the overall I/O usage rate is below `30%`), you can try to increase the value of `--concurrency` to tune the performance. But this performance tuning method is not suitable for the scenarios of many small tables. See the following example:
+If the resource usage of TiKV does not become an obvious bottleneck during the backup process (for example, in the [Monitoring metrics for the backup](#monitoring-metrics-for-the-backup), the highest CPU usage rate of backup-worker is around `1500%` and the overall I/O usage rate is below `30%`), you can try to increase the value of `--concurrency` to tune the performance. But this performance tuning method is not suitable for the use cases of many small tables. See the following example:
 
 {{< copyable "shell-regular" >}}
 
@@ -282,17 +286,17 @@ During the restoration process, pay attention to the following metrics on the mo
 Before executing the restoration command, a path in which the log is stored has been specified. You can get the statistical information of the restoration operation from this log. Search "summary" in this log, you can see the following information:
 
 ```
-["Table Restore summary: 
-    total restore tables: 1, 
-    total success: 1, 
-    total failed: 0, 
-    total take(s): 961.37, 
-    total kv: 5659888624, 
-    total size(MB): 353227.18, 
-    avg speed(MB/s): 367.42"] 
-    ["restore files"=9263] 
-    ["restore ranges"=6888] 
-    ["split region"=49.049182743s] 
+["Table Restore summary:
+    total restore tables: 1,
+    total success: 1,
+    total failed: 0,
+    total take(s): 961.37,
+    total kv: 5659888624,
+    total size(MB): 353227.18,
+    avg speed(MB/s): 367.42"]
+    ["restore files"=9263]
+    ["restore ranges"=6888]
+    ["split region"=49.049182743s]
     ["restore checksum"=6m34.879439498s]
 ```
 

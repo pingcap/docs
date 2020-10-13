@@ -1,7 +1,6 @@
 ---
 title: DROP SEQUENCE
 summary: An overview of the usage of DROP SEQUENCE for the TiDB database.
-category: reference
 aliases: ['/docs/stable/sql-statements/sql-statement-drop-sequence/','/docs/v4.0/sql-statements/sql-statement-drop-sequence/','/docs/stable/reference/sql/statements/drop-sequence/']
 ---
 
@@ -51,7 +50,7 @@ Query OK, 0 rows affected (0.03 sec)
 
 ## MySQL compatibility
 
-Currently, sequence object is not supported by MySQL.
+This statement is a TiDB extension. The implementation is modeled on sequences available in MariaDB.
 
 ## See also
 

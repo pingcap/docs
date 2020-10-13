@@ -1,7 +1,6 @@
 ---
 title: Production Deployment from Binary Tarball
 summary: Use the binary to deploy a TiDB cluster.
-category: how-to
 aliases: ['/docs/stable/production-deployment-from-binary-tarball/','/docs/v4.0/production-deployment-from-binary-tarball/','/docs/stable/how-to/deploy/from-tarball/production-environment/']
 ---
 
@@ -13,7 +12,7 @@ See also [local deployment](/deploy-tidb-from-binary.md) and [testing environmen
 
 ## Prepare
 
-Before you start, see [TiDB architecture](/architecture.md) and [Software and Hardware Recommendations](/hardware-and-software-requirements.md). Make sure the following requirements are satisfied:
+Before you start, see [TiDB architecture](/tidb-architecture.md) and [Software and Hardware Recommendations](/hardware-and-software-requirements.md). Make sure the following requirements are satisfied:
 
 ### Operating system
 

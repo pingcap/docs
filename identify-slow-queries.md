@@ -1,8 +1,7 @@
 ---
 title: Identify Slow Queries
 summary: Use the slow query log to identify problematic SQL statements.
-category: how-to
-aliases: ['/docs/stable/identify-slow-queries/','/docs/v4.0/identify-slow-queries/','/docs/stable/how-to/maintain/identify-abnormal-queries/identify-slow-queries/']
+aliases: ['/docs/stable/identify-slow-queries/','/docs/v4.0/identify-slow-queries/','/docs/stable/how-to/maintain/identify-abnormal-queries/identify-slow-queries/','/docs/v4.0/how-to/maintain/identify-slow-queries/','/docs/stable/how-to/maintain/identify-slow-queries/']
 ---
 
 # Identify Slow Queries
@@ -33,6 +32,7 @@ TiDB enables the slow query log by default. You can enable or disable the featur
 # Cop_backoff_rpcPD_total_times: 200 Cop_backoff_rpcPD_total_time: 0.2 Cop_backoff_rpcPD_max_time: 0.2 Cop_backoff_rpcPD_max_addr: 127.0.0.1 Cop_backoff_rpcPD_avg_time: 0.2 Cop_backoff_rpcPD_p90_time: 0.2
 # Cop_backoff_rpcTiKV_total_times: 200 Cop_backoff_rpcTiKV_total_time: 0.2 Cop_backoff_rpcTiKV_max_time: 0.2 Cop_backoff_rpcTiKV_max_addr: 127.0.0.1 Cop_backoff_rpcTiKV_avg_time: 0.2 Cop_backoff_rpcTiKV_p90_time: 0.2
 # Mem_max: 525211
+# Disk_max: 65536
 # Prepared: false
 # Plan_from_cache: false
 # Succ: true
@@ -77,6 +77,10 @@ Memory usage fields:
 
 * `Mem_max`: The maximum memory space used during the execution period of a SQL statement (the unit is byte).
 
+Hard disk fields:
+
+* `Disk_max`: The maximum disk space used during the execution period of a SQL statement (the unit is byte).
+
 User fields:
 
 * `User`: The name of the user who executes this statement.
@@ -105,9 +109,41 @@ TiKV Coprocessor Task fields:
 * `Cop_backoff_{backoff-type}_avg_time`: The average time of backoff caused by an error.
 * `Cop_backoff_{backoff-type}_p90_time`: The P90 percentile backoff time caused by an error.
 
+## Related system variables
+
+* [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold): Sets the threshold for the slow log. The SQL statement whose execution time exceeds this threshold is recorded in the slow log. The default value is 300 (ms).
+* [`tidb_query_log_max_len`](/system-variables.md#tidb_query_log_max_len): Sets the maximum length of the SQL statement recorded in the slow log. The default value is 4096 (byte).
+* [`tidb_log_desensitization`](/system-variables.md#tidb_log_desensitization): Determines whether to desensitize user data using `?` in the SQL statement recorded in the slow log. The default value is `0`, which means to disable the feature.
+* [`tidb_enable_collect_execution_info`](/system-variables.md#tidb_enable_collect_execution_info): Determines whether to record the execution information of each operator in the execution plan. The default value is `1`. This feature impacts the performance by approximately 3%. After enabling this feature, you can view the `Plan` information as follows:
+
+    ```sql
+    > select tidb_decode_plan('jAOIMAk1XzE3CTAJMQlmdW5jczpjb3VudChDb2x1bW4jNyktPkMJC/BMNQkxCXRpbWU6MTAuOTMxNTA1bXMsIGxvb3BzOjIJMzcyIEJ5dGVzCU4vQQoxCTMyXzE4CTAJMQlpbmRleDpTdHJlYW1BZ2dfOQkxCXQRSAwyNzY4LkgALCwgcnBjIG51bTogMQkMEXMQODg0MzUFK0hwcm9jIGtleXM6MjUwMDcJMjA2HXsIMgk1BWM2zwAAMRnIADcVyAAxHcEQNQlOL0EBBPBbCjMJMTNfMTYJMQkzMTI4MS44NTc4MTk5MDUyMTcJdGFibGU6dCwgaW5kZXg6aWR4KGEpLCByYW5nZTpbLWluZiw1MDAwMCksIGtlZXAgb3JkZXI6ZmFsc2UJMjUBrgnQVnsA');
+    +------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | tidb_decode_plan('jAOIMAk1XzE3CTAJMQlmdW5jczpjb3VudChDb2x1bW4jNyktPkMJC/BMNQkxCXRpbWU6MTAuOTMxNTA1bXMsIGxvb3BzOjIJMzcyIEJ5dGVzCU4vQQoxCTMyXzE4CTAJMQlpbmRleDpTdHJlYW1BZ2dfOQkxCXQRSAwyNzY4LkgALCwgcnBjIG51bTogMQkMEXMQODg0MzUFK0hwcm9jIGtleXM6MjUwMDcJMjA2HXsIMg |
+    +------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    |     id                    task    estRows               operator info                                                  actRows    execution info                                                                  memory       disk                              |
+    |     StreamAgg_17          root    1                     funcs:count(Column#7)->Column#5                                1          time:10.931505ms, loops:2                                                       372 Bytes    N/A                               |
+    |     └─IndexReader_18      root    1                     index:StreamAgg_9                                              1          time:10.927685ms, loops:2, rpc num: 1, rpc time:10.884355ms, proc keys:25007    206 Bytes    N/A                               |
+    |       └─StreamAgg_9       cop     1                     funcs:count(1)->Column#7                                       1          time:11ms, loops:25                                                             N/A          N/A                               |
+    |         └─IndexScan_16    cop     31281.857819905217    table:t, index:idx(a), range:[-inf,50000), keep order:false    25007      time:11ms, loops:25                                                             N/A          N/A                               |
+    +------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    ```
+
+If you are conducting a performance test, you can disable the feature of automatically collecting the execution information of operators:
+
+{{< copyable "sql" >}}
+
+```sql
+set @@tidb_enable_collect_execution_info=0;
+```
+
+The returned result of the `Plan` field has roughly the same format with that of `EXPLAIN` or `EXPLAIN ANALYZE`. For more details of the execution plan, see [`EXPLAIN`](/sql-statements/sql-statement-explain.md) or [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md).
+
+For more information, see [TiDB specific variables and syntax](/system-variables.md).
+
 ## Memory mapping in slow log
 
-You can query the content of the slow query log by querying the `INFORMATION_SCHEMA.SLOW_QUERY` table. Each column name in the table corresponds to one field name in the slow log. For table structure, see the introduction to the `SLOW_QUERY` table in [Information Schema](/system-tables/system-table-information-schema.md#information-schema).
+You can query the content of the slow query log by querying the `INFORMATION_SCHEMA.SLOW_QUERY` table. Each column name in the table corresponds to one field name in the slow log. For table structure, see the introduction to the `SLOW_QUERY` table in [Information Schema](/information-schema/information-schema-slow-query.md).
 
 > **Note:**
 >
@@ -159,7 +195,7 @@ For TiDB 4.0, `SLOW_QUERY` supports querying the slow log of any period of time,
 >
 > If the slow log files of the specified time range are removed, or there is no slow query, the query returns NULL.
 
-TiDB 4.0 adds the [`CLUSTER_SLOW_QUERY`](/system-tables/system-table-information-schema.md#cluster_slow_query-table) system table to query the slow query information of all TiDB nodes. The table schema of the `CLUSTER_SLOW_QUERY` table differs from that of the `SLOW_QUERY` table in that an `INSTANCE` column is added to `CLUSTER_SLOW_QUERY`. The `INSTANCE` column represents the TiDB node address of the row information on the slow query. You can use `CLUSTER_SLOW_QUERY` the way you do with [`SLOW_QUERY`](/system-tables/system-table-information-schema.md#slow_query-table).
+TiDB 4.0 adds the [`CLUSTER_SLOW_QUERY`](/information-schema/information-schema-slow-query.md#cluster_slow_query-table) system table to query the slow query information of all TiDB nodes. The table schema of the `CLUSTER_SLOW_QUERY` table differs from that of the `SLOW_QUERY` table in that an `INSTANCE` column is added to `CLUSTER_SLOW_QUERY`. The `INSTANCE` column represents the TiDB node address of the row information on the slow query. You can use `CLUSTER_SLOW_QUERY` the way you do with [`SLOW_QUERY`](/information-schema/information-schema-slow-query.md).
 
 When you query the `CLUSTER_SLOW_QUERY` table, TiDB pushes the computation and the judgment down to other nodes, instead of retrieving all slow query information from other nodes and executing the operations on one TiDB node.
 

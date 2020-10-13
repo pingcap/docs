@@ -1,7 +1,6 @@
 ---
 title: TiCDC Deployment Topology
 summary: Learn the deployment topology of TiCDC based on the minimal TiDB topology.
-category: how-to
 aliases: ['/docs/stable/ticdc-deployment-topology/','/docs/v4.0/ticdc-deployment-topology/']
 ---
 
@@ -9,9 +8,9 @@ aliases: ['/docs/stable/ticdc-deployment-topology/','/docs/v4.0/ticdc-deployment
 
 > **Note:**
 >
-> TiCDC is an experimental feature. It is **NOT** recommended to use TiCDC in production environments.
+> TiCDC is a feature for general availability (GA) since v4.0.6. You can use it in the production environment.
 
-This document describes the deployment topology of TiCDC based on the minimal cluster topology. 
+This document describes the deployment topology of TiCDC based on the minimal cluster topology.
 
 TiCDC is a tool for replicating the incremental data of TiDB, introduced in TiDB 4.0. It supports multiple downstream platforms, such as TiDB, MySQL, and MQ. Compared with TiDB Binlog, TiCDC has lower latency and native high availability.
 

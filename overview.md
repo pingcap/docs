@@ -1,17 +1,16 @@
 ---
 title: TiDB Introduction
 summary: Learn about the key features and use cases of TiDB.
-category: introduction
-aliases: ['/docs/stable/overview/','/docs/v4.0/overview/','/docs/v4.0/key-features/','/docs/stable/key-features/','/tidb/v4.0/key-features']
+aliases: ['/docs/stable/overview/','/docs/v4.0/overview/','/docs/v4.0/key-features/','/docs/stable/key-features/','/tidb/v4.0/key-features','/tidb/stable/key-features']
 ---
 
 # TiDB Introduction
 
-[TiDB](https://github.com/pingcap/tidb) ("Ti" stands for Titanium) is an open-source NewSQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. It is MySQL compatible and features horizontal scalability, strong consistency, and high availability. The goal of TiDB is to provide users with a one-stop database solution that covers OLTP (Online Transactional Processing), OLAP (Online Analytical Processing), and HTAP services. TiDB is suitable for various use cases that require high availability and strong consistency with large-scale data.
+[TiDB](https://github.com/pingcap/tidb) (/’taɪdiːbi:/, "Ti" stands for Titanium) is an open-source NewSQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. It is MySQL compatible and features horizontal scalability, strong consistency, and high availability. The goal of TiDB is to provide users with a one-stop database solution that covers OLTP (Online Transactional Processing), OLAP (Online Analytical Processing), and HTAP services. TiDB is suitable for various use cases that require high availability and strong consistency with large-scale data.
 
 ## Key features
 
-- **Horizontally scaling out or scale in with only one click**
+- **Horizontally scaling out or scaling in easily**
 
     The TiDB architecture design of separating computing from storage enables you to separately scale out or scale in the computing or storage capacity online as needed. The scaling process is transparent to application operations and maintenance staff.
 

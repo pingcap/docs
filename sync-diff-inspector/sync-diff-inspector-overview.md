@@ -1,7 +1,6 @@
 ---
 title: sync-diff-inspector User Guide
 summary: Use sync-diff-inspector to compare data and repair inconsistent data.
-category: tools
 aliases: ['/docs/stable/sync-diff-inspector/sync-diff-inspector-overview/','/docs/v4.0/sync-diff-inspector/sync-diff-inspector-overview/','/docs/stable/reference/tools/sync-diff-inspector/overview/']
 ---
 
@@ -9,7 +8,7 @@ aliases: ['/docs/stable/sync-diff-inspector/sync-diff-inspector-overview/','/doc
 
 [sync-diff-inspector](https://github.com/pingcap/tidb-tools/tree/master/sync_diff_inspector) is a tool used to compare data stored in the databases with the MySQL protocol. For example, it can compare the data in MySQL with that in TiDB, the data in MySQL with that in MySQL, or the data in TiDB with that in TiDB. In addition, you can also use this tool to repair data in the scenario where a small amount of data is inconsistent.
 
-This guide introduces the key features of sync-diff-inspector and describes how to configure and use this tool. You can download it at [tidb-enterprise-tools-latest-linux-amd64](https://download.pingcap.org/tidb-enterprise-tools-latest-linux-amd64.tar.gz).
+This guide introduces the key features of sync-diff-inspector and describes how to configure and use this tool. You can download it at [tidb-enterprise-tools-nightly-linux-amd64](https://download.pingcap.org/tidb-enterprise-tools-nightly-linux-amd64.tar.gz).
 
 ## Key features
 
@@ -23,7 +22,7 @@ This guide introduces the key features of sync-diff-inspector and describes how 
 
 ### Restrictions
 
-* At present, online check is not supported. Ensure that no data is written into the upstream-downstream checklist, and that data in a certain range is not changed. You can check data in this range by setting `range`.
+* Online check is not supported for data migration between MySQL and TiDB. Ensure that no data is written into the upstream-downstream checklist, and that data in a certain range is not changed. You can check data in this range by setting `range`.
 
 * `JSON`, `BIT`, `BINARY`, `BLOB` and other types of data are not supported. When you perform a data check, you need to set `ignore-columns` to skip checking these types of data.
 
@@ -100,7 +99,7 @@ fix-sql-file = "fix.sql"
 
 ######################### Tables config #########################
 
-# If you need to compare the data of a large number of tables with different schema names or table names, use the table-rule to configure the mapping relationship. You can configure the mapping rule only for the schema or table, or you can also configure the mapping rules for both the schema and table.
+# To compare the data of a large number of tables with different schema names or table names, or check the data of multiple upstream sharded tables and downstream table family, use the table-rule to configure the mapping relationship. You can configure the mapping rule only for the schema or table. Also, you can configure the mapping rules for both the schema and the table.
 #[[table-rules]]
     # schema-pattern and table-pattern support the wildcard *?
     # schema-pattern = "test_*"

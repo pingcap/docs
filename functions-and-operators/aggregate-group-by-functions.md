@@ -1,7 +1,6 @@
 ---
 title: Aggregate (GROUP BY) Functions
 summary: Learn about the supported aggregate functions in TiDB.
-category: reference
 aliases: ['/docs/stable/functions-and-operators/aggregate-group-by-functions/','/docs/v4.0/functions-and-operators/aggregate-group-by-functions/','/docs/stable/reference/sql/functions-and-operators/aggregate-group-by-functions/']
 ---
 
@@ -23,6 +22,9 @@ This section describes the supported MySQL group (aggregate) functions in TiDB.
 | [`MIN()`](https://dev.mysql.com/doc/refman/5.7/en/group-by-functions.html#function_min)                       | Return the minimum value                          |
 | [`GROUP_CONCAT()`](https://dev.mysql.com/doc/refman/5.7/en/group-by-functions.html#function_group-concat)     | Return a concatenated string                     |
 | [`VARIANCE()`, `VAR_POP()`](https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_var-pop) | Return the population standard variance|
+| [`STD()`，`STDDEV()`，`STDDEV_POP`](https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_std) | Return the population standard deviation |
+| [`VAR_SAMP()`](https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_var-samp) | Return the sample variance |
+| [`STDDEV_SAMP()`](https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_stddev-samp) | Return the sample standard deviation |
 | [`JSON_OBJECTAGG(key, value)`](https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_json-objectagg) | Return the result set as a single JSON object containing key-value pairs |
 
 - Unless otherwise stated, group functions ignore `NULL` values.
@@ -118,7 +120,4 @@ group by id, val;
 
 The following aggregate functions are currently unsupported in TiDB. You can track our progress in [TiDB #7623](https://github.com/pingcap/tidb/issues/7623):
 
-- `STD`, `STDDEV`, `STDDEV_POP`
-- `STDDEV_SAMP`
-- `VAR_SAMP`
 - `JSON_ARRAYAGG`

@@ -1,7 +1,6 @@
 ---
 title: Create a Private Mirror
 summary: Learn how to create a private mirror.
-category: tools
 aliases: ['/tidb/v4.0/tiup-mirrors','/docs/stable/tiup/tiup-mirrors/','/docs/v4.0/tiup/tiup-mirrors/','/docs/stable/reference/tools/tiup/mirrors/']
 ---
 
@@ -88,4 +87,4 @@ This section introduces the usage examples of the `mirror` command.
 
 ### Deploy a TiDB Cluster offline using TiUP
 
-Refer to [Deploy a TiDB Cluster Offline Using TiUP](/production-offline-deployment-using-tiup.md#manually-pack-an-offline-component-package-using-tiup-mirror-clone) to install the TiUP offline mirror, deploy a TiDB cluster, and start it.
+Refer to [Deploy a TiDB Cluster Offline Using TiUP](/production-offline-deployment-using-tiup.md#option-2-manually-pack-an-offline-component-package-using-tiup-mirror-clone) to install the TiUP offline mirror, deploy a TiDB cluster, and start it.

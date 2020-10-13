@@ -1,11 +1,14 @@
 ---
 title: Mydumper Instructions
 summary: Use Mydumper to export data from TiDB.
-category: reference
 aliases: ['/docs/stable/mydumper-overview/','/docs/v4.0/mydumper-overview/','/docs/stable/reference/tools/mydumper/']
 ---
 
 # Mydumper Instructions
+
+> **Warning:**
+>
+> PingCAP previously maintained a fork of the [mydumper project](https://github.com/maxbube/mydumper) with enhancements specific to TiDB. This fork has since been replaced by [Dumpling](/dumpling-overview.md), which has been rewritten in Go, and supports more optimizations that are specific to TiDB. It is strongly recommended that you use Dumpling instead of mydumper.
 
 ## What is Mydumper?
 
@@ -80,6 +83,10 @@ The following TiDB versions supports the `_tidb_rowid` index:
 - the latest unpublished version (by default)
 
 ## FAQ
+
+### How to resolve the error that occurs when the `--tidb-snapshot` option is used to export data?
+
+In this situation, you need to add a `--skip-tz-utc` option. Otherwise, Mydumper will pre-configure the UTC time zone and convert the time zone when `tidb-snapshot` is configured, which causes this error.
 
 ### How to determine if the Mydumper I am using is the PingCAP optimized version?
 

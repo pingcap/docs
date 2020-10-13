@@ -1,7 +1,6 @@
 ---
 title: TiUP FAQ
 summary: Provide answers to common questions asked by TiUP users.
-category: tools
 aliases: ['/docs/stable/tiup/tiup-faq/','/docs/v4.0/tiup/tiup-faq/']
 ---
 
@@ -10,6 +9,11 @@ aliases: ['/docs/stable/tiup/tiup-faq/','/docs/v4.0/tiup/tiup-faq/']
 ## Can TiUP not use the official mirror source?
 
 TiUP supports specifying the mirror source through the `TIUP_MIRRORS` environment variable. The address of the mirror source can be a local directory or an HTTP server address. If your environment cannot access the network, you can create your own offline mirror source to use TiUP.
+
+After using an unofficial mirror, if you want the official mirror back and use it, take one of the following measures:
+
+- Set the `TIUP_MIRRORS` variable to the official mirror address: `https://tiup-mirrors.pingcap.com`.
+- Make sure that the `TIUP_MIRRORS` variable is not set, and then execute the `tiup mirror set https://tiup-mirrors.pingcap.com` command.
 
 ## How do I put my own component into the TiUP mirrors?
 
@@ -53,5 +57,5 @@ vi /etc/ssh/sshd_config
 
 ```bash
 MaxSessions 1000
-MaxStartups 1000 
+MaxStartups 1000
 ```

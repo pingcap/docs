@@ -1,8 +1,7 @@
 ---
 title: Migration Overview
 summary: This document describes how to migrate data from databases or data formats (CSV/SQL).
-category: reference
-aliases: ['/docs/stable/migration-overview/','/docs/v4.0/migration-overview/']
+aliases: ['/docs/stable/migration-overview/','/docs/v4.0/migration-overview/','/docs/op-guide/migration-overview/']
 ---
 
 # Migration Overview
@@ -35,7 +34,7 @@ You can use DM to migrate full MySQL data and to replicate incremental data. It 
 
 #### Migration method
 
-For details, refer to [Migrate from MySQL (Amazon Aurora)](/migrate-from-aurora-mysql-database.md)
+For details, refer to [Migrate from MySQL (Amazon Aurora)](https://docs.pingcap.com/tidb-data-migration/v2.0/migrate-from-mysql-aurora).
 
 ## Migrate data from files to TiDB
 

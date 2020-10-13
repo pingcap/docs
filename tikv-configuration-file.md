@@ -1,7 +1,6 @@
-﻿---
+---
 title: TiKV Configuration File
 summary: Learn the TiKV configuration file.
-category: reference
 aliases: ['/docs/stable/tikv-configuration-file/','/docs/v4.0/tikv-configuration-file/','/docs/stable/reference/configuration/tikv-server/configuration-file/']
 ---
 
@@ -284,12 +283,12 @@ Configuration items related to Raftstore
 ### `sync-log`
 
 + Enables or disables synchronous write mode. In the synchronous write mode, each commit is forced to be flushed to raft-log synchronously for persistent storage.
-
-    > **Note:**
-    >
-    > Setting the value to `false` might lead to data loss.
-
 + Default value: `true`
++ This configuration item has been deprecated since v4.0.7.
+
+> **Warning:**
+>
+> For versions <= 4.0.6, setting the value to `false` might lead to **data loss**. It is **strongly recommended** that you do not modify this configuration.
 
 ### `prevote`
 
@@ -390,7 +389,7 @@ Configuration items related to Raftstore
 ### `raftstore.hibernate-regions` (**Experimental**)
 
 + Enables or disables Hibernate Region. When this option is enabled, a Region idle for a long time is automatically set as hibernated. This reduces the extra overhead caused by heartbeat messages between the Raft leader and the followers for idle Regions. You can use `raftstore.peer-stale-state-check-interval` to modify the heartbeat interval between the leader and the followers of hibernated Regions.
-+ Default value: true
++ Default value: false
 
 ### `raftstore.peer-stale-state-check-interval`
 
@@ -653,7 +652,7 @@ Configuration items related to RocksDB
 ### `max-sub-compactions`
 
 + The number of sub-compaction operations performed concurrently in RocksDB
-+ Default value: `1`
++ Default value: `3`
 + Minimum value: `1`
 
 ### `max-open-files`
@@ -831,7 +830,7 @@ Configuration items related to `rocksdb.defaultcf`
 ### `block-cache-size`
 
 + The cache size of a RocksDB block
-+ Default value: `Total machine memory / 4`
++ Default value: `Total machine memory * 25%`
 + Minimum value: `0`
 + Unit: KB|MB|GB
 
@@ -1062,12 +1061,12 @@ Configuration items related to `rocksdb.defaultcf.titan`
 ### `level-merge`
 
 + Determines whether to optimize the read performance. When `level-merge` is enabled, there is more write amplification.
-+ Default value: `true`
++ Default value: `false`
 
 ### `gc-merge-rewrite`
 
 + Determines whether to use the merge operator to write back blob indexes for Titan GC. When `gc-merge-rewrite` is enabled, it reduces the effect of Titan GC on the writes in the foreground.
-+ Default value: `true`
++ Default value: `false`
 
 ## rocksdb.writecf
 
@@ -1122,7 +1121,7 @@ Configuration items related to `raftdb`
 ### `max-sub-compactions`
 
 + The number of concurrent sub-compaction operations performed in RocksDB
-+ Default value: `1`
++ Default value: `2`
 + Minimum value: `1`
 
 ### `wal-dir`
@@ -1149,9 +1148,14 @@ Configuration items related to security
 + The path of the PEM file that contains the X509 key
 + Default value: ""
 
+### `redact-info-log`
+
++ This configuration item enables or disables log redaction. If the configuration value is set to `true`, all user data in the log will be replaced by `?`.
++ Default value: `false`
+
 ## `import`
 
-Configuration items related to `import`
+Configuration items related to TiDB Lightning import and BR restore.
 
 ### `num-threads`
 
@@ -1164,6 +1168,16 @@ Configuration items related to `import`
 + The number of jobs imported concurrently
 + Default value: `8`
 + Minimum value: `1`
+  
+## backup
+
+Configuration items related to BR backup.
+
+### `num-threads`
+
++ The number of worker threads to process backup
++ Default value: `MIN(CPU * 0.75, 32)`.
++ Minimum value: `1` 
 
 ## pessimistic-txn
 

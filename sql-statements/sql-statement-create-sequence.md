@@ -1,7 +1,6 @@
 ---
 title: CREATE SEQUENCE
 summary: An overview of the usage of CREATE SEQUENCE for the TiDB database.
-category: reference
 aliases: ['/docs/stable/sql-statements/sql-statement-create-sequence/','/docs/v4.0/sql-statements/sql-statement-create-sequence/','/docs/stable/reference/sql/statements/create-sequence/']
 ---
 
@@ -299,9 +298,9 @@ You can control a sequence through the following expression functions:
 
 ## MySQL compatibility
 
-Currently, MySQL does not have the sequence option. The TiDB sequence is borrowed from MariaDB. Except for the `SETVAL` function, all other functions have the same progressions with those functions of MariaDB.
+This statement is a TiDB extension. The implementation is modeled on sequences available in MariaDB.
 
-Here "progression" means that the numbers in a sequence follow a certain arithmetic progression rule defined by the sequence. Although you can use `SETVAL` to set the current value of a sequence, the subsequent values of the sequence still follow the original progression rule.
+Except for the `SETVAL` function, all other functions have the same _progressions_ as MariaDB. Here "progression" means that the numbers in a sequence follow a certain arithmetic progression rule defined by the sequence. Although you can use `SETVAL` to set the current value of a sequence, the subsequent values of the sequence still follow the original progression rule.
 
 For example:
 

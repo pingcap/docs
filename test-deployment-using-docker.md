@@ -1,7 +1,6 @@
 ---
 title: Deploy TiDB Using Docker
 summary: Use Docker to manually deploy a multi-node TiDB cluster on multiple machines.
-category: how-to
 aliases: ['/docs/stable/test-deployment-using-docker/','/docs/v4.0/test-deployment-using-docker/','/docs/stable/how-to/deploy/orchestrated/docker/']
 ---
 
@@ -13,7 +12,7 @@ aliases: ['/docs/stable/test-deployment-using-docker/','/docs/v4.0/test-deployme
 
 This document shows you how to manually deploy a multi-node TiDB cluster on multiple machines using Docker.
 
-To learn more, see [TiDB architecture](/architecture.md) and [Software and Hardware Recommendations](/hardware-and-software-requirements.md).
+To learn more, see [TiDB architecture](/tidb-architecture.md) and [Software and Hardware Recommendations](/hardware-and-software-requirements.md).
 
 ## Preparation
 
