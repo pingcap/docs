@@ -11,7 +11,6 @@ This is a list of TiDB adopters in various industries.
 
 | Company | Industry | Case studies |
 | :--- | :--- | :--- |
-| [Bank of China](https://en.wikipedia.org/wiki/Bank_of_China) | Banking | [English](https://pingcap.com/case-studies/how-bank-of-china-uses-a-scale-out-database-to-support-zabbix-monitoring-at-scale); [Chinese](https://pingcap.com/cases-cn/user-case-bank-of-china/) |
 |[VNG](https://en.wikipedia.org/wiki/VNG_Corporation)|Mobile Payment|English [#1](https://pingcap.com/case-studies/tidb-at-zalopay-infrastructure-lesson-learned/), [#2](https://pingcap.com/case-studies/zalopay-using-a-scale-out-mysql-alternative-to-serve-millions-of-users)|
 |[PayPay](https://www.crunchbase.com/organization/paypay#section-overviewy)|Mobile Payment|[English](https://pingcap.com/case-studies/japan-largest-mobile-payment-company-migrates-from-aurora-to-a-scale-out-database); [Chinese](https://pingcap.com/cases-cn/user-case-paypay/)|
 |[Ping++](https://www.crunchbase.com/organization/ping-5)|Mobile Payment|[Chinese](https://pingcap.com/cases-cn/user-case-ping++/)|
@@ -38,6 +37,7 @@ This is a list of TiDB adopters in various industries.
 |[VIPKid](https://www.crunchbase.com/organization/vipkid)|EdTech|[English](https://pingcap.com/case-studies/why-we-chose-a-distributed-sql-database-to-complement-mysql); [Chinese](https://pingcap.com/cases-cn/user-case-vipkid/)|
 |[Yuanfudao.com](https://www.crunchbase.com/organization/yuanfudao)|EdTech|[English](https://pingcap.com/blog/2017-08-08-tidbforyuanfudao/); [Chinese](https://pingcap.com/cases-cn/user-case-yuanfudao/)|
 |[Bank of Beijing](https://en.wikipedia.org/wiki/Bank_of_Beijing)|Banking|[English](https://pingcap.com/case-studies/how-we-use-a-distributed-database-to-achieve-horizontal-scaling-without-downtime); Chinese [#1](https://pingcap.com/cases-cn/user-case-beijing-bank/), [#2](https://pingcap.com/cases-cn/user-case-beijing-bank-2/)|
+| [Bank of China](https://en.wikipedia.org/wiki/Bank_of_China) | Banking | [English](https://pingcap.com/case-studies/how-bank-of-china-uses-a-scale-out-database-to-support-zabbix-monitoring-at-scale); [Chinese](https://pingcap.com/cases-cn/user-case-bank-of-china/) |
 |[Industrial and Commercial Bank of China](https://en.wikipedia.org/wiki/Industrial_and_Commercial_Bank_of_China)|Banking||
 |[Yimian Data](https://www.crunchbase.com/organization/yimian-data)|Big Data|[Chinese](https://pingcap.com/cases-cn/user-case-yimian)|
 |[CAASDATA](https://www.caasdata.com/)|Big Data|[Chinese](https://pingcap.com/cases-cn/user-case-kasi/)|
