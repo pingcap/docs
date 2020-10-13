@@ -289,7 +289,7 @@ Configuration items related to performance.
 
 - The maximum memory limit for the Prepared Least Recently Used (LRU) caching. If this value exceeds `performance.max-memory * (1 - prepared-plan-cache.memory-guard-ratio)`, the elements in the LRU are removed.
 - Default value: `0`
-- This configuration only takes effect when `prepared-plan-cache.enabled` is `true`. When the size of the LRU is greater than `prepared-plan-cache.capacity`, the elements in the LRU are also removed.
+- This configuration takes effect when `prepared-plan-cache.enabled` is `true` (default). When the size of the LRU is greater than `prepared-plan-cache.capacity`, the elements in the LRU are also removed.
 
 ### `stmt-count-limit`
 
@@ -372,14 +372,10 @@ Configuration items related to performance.
 
 The Plan Cache configuration of the `PREPARE` statement.
 
-> **Warning:**
->
-> This is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
-
 ### `enabled`
 
 - Determines whether to enable Plan Cache of the `PREPARE` statement.
-- Default value: `false`
+- Default value: `true`
 
 ### `capacity`
 
@@ -558,15 +554,4 @@ For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](
 
 ## experimental
 
-The `experimental` section describes configurations related to the experimental features of TiDB. This section is introduced since v3.1.0.
-
-### `allow-auto-random` <span class="version-mark">New in v3.1.0</span>
-
-- Determines whether to allow using `AUTO_RANDOM`.
-- Default value: `false`
-- By default, TiDB does not support using `AUTO_RANDOM`. When the value is `true`, you cannot set `alter-primary-key` to `true` at the same time.
-
-### `allow-expression-index` <span class="version-mark">New in v4.0.0</span>
-
-- Determines whether to create the expression index.
-- Default value: `false`
+The `experimental` section, introduced in v3.1.0, describes configurations related to the experimental features of TiDB. Currently, this section has no configuration item.
