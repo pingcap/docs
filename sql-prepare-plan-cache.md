@@ -5,7 +5,7 @@ summary: Learn about SQL Prepare Execution Plan Cache in TiDB.
 
 # SQL Prepare Execution Plan Cache
 
-In the currect development release of TiDB, the execution plan of prepared statements is cached by default. This includes both forms of prepared statements:
+In the current development release of TiDB, the execution plan of prepared statements is cached by default. This includes both forms of prepared statements:
 
 - Using the `COM_STMT_PREPARE` and `COM_STMT_EXECUTE` protocol features.
 - Using the SQL statements `PREPARE` and `EXECUTE`.
