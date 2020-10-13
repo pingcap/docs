@@ -1,12 +1,7 @@
 ---
 title: TiDB Adopters
 summary: Learn about the list of TiDB adopters in various industries.
-<<<<<<< HEAD
-i18n_link: "https://pingcap.com/cases-cn/"
 aliases: ['/docs/v3.1/adopters/']
-=======
-aliases: ['/docs/dev/adopters/']
->>>>>>> 1cd26cad... Update adopters.md (#4039)
 ---
 
 # TiDB Adopters
