@@ -41,7 +41,6 @@ Before TiDB `4.0.5`:
 | [ 30 ] `<Debug>` CoprocessorHandler: grpc::Status DB::CoprocessorHandler::execute() | Handling DAG request, that is, TiFlash starts to handle a Coprocessor request |
 | [ 30 ] `<Debug>` CoprocessorHandler: grpc::Status DB::CoprocessorHandler::execute() | Handling DAG request done, that is, TiFlash finishes handling a Coprocessor request |
 
-
 After TiDB `4.0.5`:
 | Log Information | Log Description |
 |---------------|-------------------|
