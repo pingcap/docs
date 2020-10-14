@@ -34,7 +34,8 @@ There are two ways to check the TiFlash version:
 
 Since we refined TiFlash's log format to make it compatible with TiDB in `4.0.5`, there are two versions of log messages. 
 
-Before TiDB `4.0.5`:
+Before TiDB 4.0.5:
+
 | Log Information | Log Description |
 |---------------|-------------------|
 | [ 23 ] `<Information>` KVStore: Start to persist [region 47, applied: term 6 index 10] | Data starts to be replicated (the number in the square brackets at the start of the log refers to the thread ID |
