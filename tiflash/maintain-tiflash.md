@@ -32,7 +32,7 @@ There are two ways to check the TiFlash version:
 
 ## TiFlash critical logs
 
-Since we refined TiFlash's log format to make it compatible with TiDB in `4.0.5`, there are two versions of log messages. 
+Starting from TiDB 4.0.5, TiFlash's log format has been refined for compatibility with TiDB. Therefore, there are two versions of log messages. 
 
 Before TiDB 4.0.5:
 
