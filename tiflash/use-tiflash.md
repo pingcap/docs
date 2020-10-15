@@ -221,7 +221,7 @@ You can configure this parameter in either of the following ways:
 
 TiFlash mainly supports predicate, aggregate push-down calculations and table joins. Push-down calculations can help TiDB perform distributed acceleration. Currently, `Full Outer Join` and `DISTINCT COUNT` are not the supported calculation types, which will be optimized in later versions.
 
-You can enable the current push-down connection (`Join`) function via the following Session Variables. Currently, `Full Outer Join` is not supported.
+You can enable the push-down connection (`Join`) function via the following Session Variables. Currently, `Full Outer Join` is not supported.
 
 ```
 set @@session.tidb_opt_broadcast_join=1
