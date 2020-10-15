@@ -31,7 +31,7 @@ for filename in sys.argv[1:]:
 
     if len(pos):
         mark = 1
-        print("\n" + filename + "has conflicts in the following lines:\n")
+        print("\n" + filename + ": this file has conflicts in the following lines:\n")
         for conflict in pos:
             if len(conflict) == 2:
                 print("CONFLICTS: line " + str(conflict[0]) + " to line " + str(conflict[1]) + "\n")
