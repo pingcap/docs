@@ -28,12 +28,12 @@ When you start the TiDB cluster, you can use command-line options or environment
 
 ## `--config-check`
 
-- check config file validity and exit
+- Checks the validity of the configuration file and exits
 - Default: false
 
 ## `--config-strict`
 
-- enforce config file validity
+- Enforce the validity of the configuration file
 - Default: false
 
 ## `--cors`
@@ -61,7 +61,7 @@ When you start the TiDB cluster, you can use command-line options or environment
 
 ## `--lease`
 
-- schema lease duration, very dangerous to change only if you know what you do
+- The duration of the schema lease. It is very dangerous to change the value unless you know what you do.
 - Default: "45s"
 
 ## `--log-file`
