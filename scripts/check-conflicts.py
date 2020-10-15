@@ -31,15 +31,13 @@ for filename in sys.argv[1:]:
 
     if len(pos):
         mark = 1
-        print("There are conflicts in "+ filename + ".")
+        print("\nThere are conflicts in "+ filename + ".\n")
         for conflict in pos:
             if len(conflict) == 2:
-                print("CONFLICTS: line " + str(conflict[0]) + " to line " + str(conflict[1]))
+                print("CONFLICTS: line " + str(conflict[0]) + " to line " + str(conflict[1]) + "\n")
     
     pos = []
 
 if mark:
-    print("They will cause website build failure.")
-    exit(1)        
-
-
+    print("The above Conflicts will cause website build failure. Please fix them.")
+    exit(1)
