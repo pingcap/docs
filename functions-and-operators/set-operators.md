@@ -128,3 +128,4 @@ TiDB supports using [`ORDER BY`](/media/sqlgram/OrderByOptional.png) or [`LIMIT`
 | 1 |
 +---+
 2 rows in set (0.00 sec)
+```
