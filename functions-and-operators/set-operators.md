@@ -1,11 +1,11 @@
 ---
 title: Set Operations
-summary: Learn about the supported set operations in TiDB.
+summary: Learn the supported set operations in TiDB.
 ---
 
 # Set Operations
 
-TiDB supports three set operators: UNION, EXCEPT, and INTERSECT. The smallest unit of a set is a [`SELECT` statement](/sql-statements/sql-statement-select.md).
+TiDB supports three set operations using the UNION, EXCEPT, and INTERSECT operators. The smallest unit of a set is a [`SELECT` statement](/sql-statements/sql-statement-select.md).
 
 ## UNION operator
 
@@ -87,7 +87,7 @@ select * from t1 intersect select * from t2;
 1 rows in set (0.00 sec)
 ```
 
-`INTERSECT ALL` operator is not yet supported. INTERSECT operator has higher precedence than EXCEPT and UNION operators.
+`INTERSECT ALL` operator is not yet supported. INTERSECT operator has higher precedence over EXCEPT and UNION operators.
 
 ```sql
 select * from t1 union all select * from t1 intersect select * from t2;
@@ -115,7 +115,7 @@ TiDB supports using parentheses to specify the precedence of set operations. Exp
 1 rows in set (0.00 sec)
 ```
 
-## Using `Order By` and `Limit`
+## Use `Order By` and `Limit`
 
 TiDB supports using [`ORDER BY`](/media/sqlgram/OrderByOptional.png) or [`LIMIT`](/media/sqlgram/LimitClause.png) clause in set operation. These two clauses must be at the end of the entire statement.
 
