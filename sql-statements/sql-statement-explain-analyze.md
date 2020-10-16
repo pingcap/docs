@@ -180,7 +180,7 @@ inner worker channel.
    Note: step a and step b are running concurrently.
 3. The main thread of ʻIndexHashJoin`  receives the join results from the result channel.
 
-The ʻIndexHashJoin` operator contains the following execution information:
+The `IndexHashJoin` operator contains the following execution information:
 
 ```sql
 inner:{total:4.429220003s, concurrency:5, task:17, construct:96.207725ms, fetch:4.239324006s, build:24.567801ms, join:93.607362ms}
