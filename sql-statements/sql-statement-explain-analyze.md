@@ -169,7 +169,7 @@ inner:{total:4.297515932s, concurrency:5, task:17, construct:97.96291ms, fetch:4
 
 ### IndexHashJoin
 
-The execution process of the ʻIndexHashJoin` operator is similar to the ʻIndexJoin` operator. `IndexHashJoin` operator also has 1 outer worker and N inner workers to executed in parallel, but the output order is not promised. The specific execution process is as follows:
+The execution process of the `IndexHashJoin` operator is similar to the `IndexJoin` operator. `IndexHashJoin` operator also has 1 outer worker and N inner workers to executed in parallel, but the output order is not promised. The specific execution process is as follows:
 
 1. The outer worker reads N outer rows, builds a task and sends it to the
 inner worker channel.
