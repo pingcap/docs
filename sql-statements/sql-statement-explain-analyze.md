@@ -119,7 +119,7 @@ cop_task: {num: 6, max: 1.07587ms, min: 844.312µs, avg: 919.601µs, p95: 1.0758
 
 - `cop_task`: Contains the information about executing cop task, such as:
      - `num`: the number of cop tasks
-     - `max`, `min`, ʻavg`, `p95`: the maximum, minimum, average and P95 value of the execution time-consuming of executing cop tasks.
+     - `max`, `min`, `avg`, `p95`: the maximum, minimum, average and P95 value of the execution time-consuming of executing cop tasks.
      - `max_proc_keys`, `p95_proc_keys`: The maximum, P95 value of tikv scan key/value in all cop tasks. If the difference between max and p95 is large, the data distribution may be not balanced.
      - `rpc_num`, `rpc_time`: The total number and total time-consuming of `Cop` RPC requests sent to TiKV.
      - `copr_cache_hit_ratio`: Coprocessor Cache cache hit rate requested by cop task. [Coprocessor Cache Configuration](/tidb-configuration-file.md).
@@ -127,7 +127,7 @@ cop_task: {num: 6, max: 1.07587ms, min: 844.312µs, avg: 919.601µs, p95: 1.0758
 
 ### Insert
 
-The ʻInsert` operator may contain the following execution information:
+The `Insert` operator may contain the following execution information:
 
 ```
 prepare:109.616µs, check_insert:{total_time:1.431678ms, mem_insert_time:667.878µs, prefetch:763.8µs, rpc:{BatchGet:{num_rpc:1, total_time:699.166µs},Get:{num_rpc:1, total_time:378.276µs }}}
@@ -145,14 +145,14 @@ prepare:109.616µs, check_insert:{total_time:1.431678ms, mem_insert_time:667.878
 
 ### IndexJoin
 
-The ʻIndexJoin` operator has 1 outer worker and N inner workers to executed in parallel. The join result preserves the order of the outer table and support batch lookup. The specific execution process is as follows:
+The `IndexJoin` operator has 1 outer worker and N inner workers to executed in parallel. The join result preserves the order of the outer table and support batch lookup. The specific execution process is as follows:
 
 1. Outer worker read N outer rows, build a task and send it to result channel and inner worker channel.
 2. The inner worker receives the task, builds key ranges from outer rows and fetch inner rows, builds inner row hash map.
 3. main thread receives the task, waits for inner worker finish handling the task.
 4. main thread join each outer row by look up the inner rows hash map in the task.
 
-The ʻIndexJoin` operator contains the following execution information:
+The `IndexJoin` operator contains the following execution information:
 
 ```
 inner:{total:4.297515932s, concurrency:5, task:17, construct:97.96291ms, fetch:4.164310088s, build:35.219574ms}, probe:53.574945ms
@@ -186,7 +186,7 @@ The `IndexHashJoin` operator contains the following execution information:
 inner:{total:4.429220003s, concurrency:5, task:17, construct:96.207725ms, fetch:4.239324006s, build:24.567801ms, join:93.607362ms}
 ```
 
--ʻInner`: the execution information of inner worker:
+- `Inner`: the execution information of inner worker:
     - `total`: the total time-consuming by the inner worker.
     - `concurrency`: the number of inner workers.
     - `task`: The total number of tasks processed by the inner worker.
