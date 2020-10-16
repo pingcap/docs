@@ -159,13 +159,13 @@ inner:{total:4.297515932s, concurrency:5, task:17, construct:97.96291ms, fetch:4
 ```
 
 - `Inner`: the execution information of inner worker:
-    - total: the total time-consuming by the inner worker.
-    - concurrency: the number of parallel execution inner workers.
-    - task: The total number of tasks processed by the inner worker.
-    - construct: the preparation time before the inner worker reads the inner table rows corresponding to the task.
-    - fetch: The total time-consuming it takes for inner worker to read inner table rows.
-    - Build: The total time-consuming it takes for inner worker to construct the hash map of the corresponding inner table rows.
--probe: the total time consumed by the main thread of `IndexJoin` to do join with the outer table rows and the hash map of inner table rows.
+    - `total`: the total time-consuming by the inner worker.
+    - `concurrency`: the number of parallel execution inner workers.
+    - `task`: The total number of tasks processed by the inner worker.
+    - `construct`: the preparation time before the inner worker reads the inner table rows corresponding to the task.
+    - `fetch`: The total time-consuming it takes for inner worker to read inner table rows.
+    - `Build`: The total time-consuming it takes for inner worker to construct the hash map of the corresponding inner table rows.
+- `probe`: the total time consumed by the main thread of `IndexJoin` to do join with the outer table rows and the hash map of inner table rows.
 
 ### IndexHashJoin
 
@@ -187,13 +187,13 @@ inner:{total:4.429220003s, concurrency:5, task:17, construct:96.207725ms, fetch:
 ```
 
 -ʻInner`: the execution information of inner worker:
-    - total: the total time-consuming by the inner worker.
-    - concurrency: the number of inner workers.
-    - task: The total number of tasks processed by the inner worker.
-    - construct: the prepare time before the inner worker reads the inner table rows.
-    - fetch: The total time-consuming of inner worker to read inner table rows.
-    - Build: The total time-consuming of inner worker to construct the hash map of the outer table rows.
-    - join:  The total time-consuming of inner worker to do join with the inner table rows and the hash map of outer table rows.
+    - `total`: the total time-consuming by the inner worker.
+    - `concurrency`: the number of inner workers.
+    - `task`: The total number of tasks processed by the inner worker.
+    - `construct`: the prepare time before the inner worker reads the inner table rows.
+    - `fetch`: The total time-consuming of inner worker to read inner table rows.
+    - `Build`: The total time-consuming of inner worker to construct the hash map of the outer table rows.
+    - `join`:  The total time-consuming of inner worker to do join with the inner table rows and the hash map of outer table rows.
 
 ### HashJoin
 
@@ -212,15 +212,15 @@ build_hash_table:{total:146.071334ms, fetch:110.338509ms, build:35.732825ms}, pr
 ```
 
 - `build_hash_table`: Read the data of the inner table and construct the execution information of the hash map:
-    - total: total time spent.
-    - fetch: The total time spent reading inner table data.
-    - build: The total time spent constructing a hash map.
--probe: execution information of join worker:
-    - concurrency: the number of join workers.
-    - total: the total time consumed by all join workers.
-    - max: The maximum time for a single join worker to execute.
-    - probe: The total time consumed for joining with outer table rows and hash map.
-    - fetch: The total time that the join worker waits to read the outer table rows data.
+    - `total`: total time spent.
+    - `fetch`: The total time spent reading inner table data.
+    - `build`: The total time spent constructing a hash map.
+- `probe`: execution information of join worker:
+    - `concurrency`: the number of join workers.
+    - `total`: the total time consumed by all join workers.
+    - `max`: The maximum time for a single join worker to execute.
+    - `probe`: The total time consumed for joining with outer table rows and hash map.
+    - `fetch`: The total time that the join worker waits to read the outer table rows data.
 
 ## Other execution info
 
