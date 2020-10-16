@@ -111,7 +111,7 @@ The execution information of the `Batch_Point_Get` operator is similar to the `P
 
 ### TableReader
 
-The `TableReader` operator may contain the following execution information:
+The execution information from a `TableReader` operator will typically contain the following:
 
 ```
 cop_task: {num: 6, max: 1.07587ms, min: 844.312µs, avg: 919.601µs, p95: 1.07587ms, max_proc_keys: 16, p95_proc_keys: 16, tot_proc: 1ms, tot_wait: 1ms, rpc_num: 6, rpc_time: 5.313996 ms, copr_cache_hit_ratio: 0.00}
