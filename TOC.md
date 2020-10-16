@@ -92,6 +92,7 @@
   + [Identify Expensive Queries](/identify-expensive-queries.md)
   + [Statement Summary Tables](/statement-summary-tables.md)
   + [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md)
+  + [Troubleshoot Increased Read and Write Latency](/troubleshoot-cpu-issues.md)
   + [Troubleshoot Cluster Setup](/troubleshoot-tidb-cluster.md)
   + [Troubleshoot High Disk I/O Usage](/troubleshoot-high-disk-io.md)
   + [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md)
@@ -111,9 +112,10 @@
     + [Coprocessor Cache](/coprocessor-cache.md)
   + SQL Tuning
     + [Overview](/sql-tuning-overview.md)
-    + [SQL Tuning with `EXPLAIN`](/query-execution-plan.md)
-    + SQL Optimization
-      + [SQL Optimization Process](/sql-optimization-concepts.md)
+    + Understanding the Query Execution Plan
+      + [Overview](/explain-overview.md)
+    + SQL Optimization Process
+      + [Overview](/sql-optimization-concepts.md)
       + Logic Optimization
         + [Overview](/sql-logical-optimization.md)
         + [Subquery Related Optimizations](/subquery-optimization.md)
@@ -131,11 +133,11 @@
         + [Wrong Index Solution](/wrong-index-solution.md)
         + [Distinct Optimization](/agg-distinct-optimization.md)
       + [Prepare Execution Plan Cache](/sql-prepare-plan-cache.md)
-      + Control Execution Plan
-        + [Overview](/control-execution-plan.md)
-        + [Optimizer Hints](/optimizer-hints.md)
-        + [SQL Plan Management](/sql-plan-management.md)
-        + [The Blocklist of Optimization Rules and Expression Pushdown](/blocklist-control-plan.md)
+    + Control Execution Plans
+      + [Overview](/control-execution-plan.md)
+      + [Optimizer Hints](/optimizer-hints.md)
+      + [SQL Plan Management](/sql-plan-management.md)
+      + [The Blocklist of Optimization Rules and Expression Pushdown](/blocklist-control-plan.md)
 + Tutorials
   + [Multiple Data Centers in One City Deployment](/multi-data-centers-in-one-city-deployment.md)
   + [Three Data Centers in Two Cities Deployment](/three-data-centers-in-two-cities-deployment.md)
@@ -521,6 +523,7 @@
   + [All Releases](/releases/release-notes.md)
   + [TiDB Roadmap](/roadmap.md)
   + v4.0
+    + [4.0.7](/releases/release-4.0.7.md)
     + [4.0.6](/releases/release-4.0.6.md)
     + [4.0.5](/releases/release-4.0.5.md)
     + [4.0.4](/releases/release-4.0.4.md)
