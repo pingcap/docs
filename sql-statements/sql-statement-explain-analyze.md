@@ -105,7 +105,7 @@ The execution information from a `Point_Get` operator will typically contain the
 
 ### Batch_Point_Get
 
-The execution information of the `Batch_Point_Get` operator is similar to the `Point_get` operator, but `Batch_Point_get` generally sends `BatchGet` type RPC request to TiKV to read the data.
+The execution information of the `Batch_Point_Get` operator is similar to the `Point_get` operator, but `Batch_Point_get` generally sends `BatchGet` RPC requests to TiKV to read the data.
 
 - `BatchGet:{num_rpc:2, total_time:83.13µs}`: The number of RPC requests (`num_rpc`) of type `BatchGet` sent to TiKV and the total time-consuming (`total_time`) of all RPC requests.
 
