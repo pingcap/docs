@@ -118,11 +118,11 @@ cop_task: {num: 6, max: 1.07587ms, min: 844.312µs, avg: 919.601µs, p95: 1.0758
 ```
 
 - `cop_task`: Contains the information about executing cop task, such as:
-     - `num`: the number of cop tasks
-     - `max`, `min`, `avg`, `p95`: the maximum, minimum, average and P95 value of the execution time-consuming of executing cop tasks.
-     - `max_proc_keys`, `p95_proc_keys`: The maximum, P95 value of tikv scan key/value in all cop tasks. If the difference between max and p95 is large, the data distribution may be not balanced.
-     - `rpc_num`, `rpc_time`: The total number and total time-consuming of `Cop` RPC requests sent to TiKV.
-     - `copr_cache_hit_ratio`: Coprocessor Cache cache hit rate requested by cop task. [Coprocessor Cache Configuration](/tidb-configuration-file.md).
+    - `num`: the number of cop tasks.
+    - `max`, `min`, `avg`, `p95`: the maximum, minimum, average and P95 value of the execution time-consuming of executing cop tasks.
+    - `max_proc_keys`, `p95_proc_keys`: The maximum, P95 value of tikv scan key/value in all cop tasks. If the difference between max and p95 is large, the data distribution may be not balanced.
+    - `rpc_num`, `rpc_time`: The total number and total time-consuming of `Cop` RPC requests sent to TiKV.
+    - `copr_cache_hit_ratio`: Coprocessor Cache cache hit rate requested by cop task. [Coprocessor Cache Configuration](/tidb-configuration-file.md).
 - `backoff`: Contains different types of backoff and total backoff waiting time.
 
 ### Insert
