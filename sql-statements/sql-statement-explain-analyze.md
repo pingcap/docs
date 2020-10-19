@@ -240,7 +240,7 @@ lock_keys: {time:94.096168ms, region:6, keys:8, lock_rpc:274.503214ms, rpc_count
 
 ### commit_txn execution information
 
-When executing a write-type DML statement in a transaction with ʻautocommit=1`, the execution information of the write operator will also include the time-consuming information of the transaction commit. an exampleas follows:
+When executing a write-type DML statement in a transaction with `autocommit=1`, the execution information of the write operator will also include the time-consuming information of the transaction commit. For example:
 
 ```
 commit_txn: {prewrite:48.564544ms, wait_prewrite_binlog:47.821579, get_commit_ts:4.277455ms, commit:50.431774ms, region_num:7, write_keys:16, write_byte:536}
