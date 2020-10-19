@@ -140,7 +140,7 @@ prepare:109.616µs, check_insert:{total_time:1.431678ms, mem_insert_time:667.878
     - `prefetch`: The time-consuming of retrieve data that needs to be checked for conflicts from TiKV. This step is mainly to send a `Batch_Get` RPC request to TiKV to retrieve data.
     - `rpc`: The total time-consuming of sending RPC requests to TiKV, which generally includes two types of RPC time, `BatchGet` and `Get`, among which:
         - `BatchGet` RPC request is sent by the `prefetch` step.
-        - `Get` RPC request is sent by ʻinsert on duplicate` statement when executing `duplicate update` step.
+        - `Get` RPC request is sent by `insert on duplicate` statement when executing `duplicate update` step.
 - `backoff`: Contains different types of backoff and total backoff waiting time.
 
 ### IndexJoin
