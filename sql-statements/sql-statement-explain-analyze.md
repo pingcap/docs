@@ -163,8 +163,8 @@ inner:{total:4.297515932s, concurrency:5, task:17, construct:97.96291ms, fetch:4
     - `concurrency`: the number of parallel execution inner workers.
     - `task`: The total number of tasks processed by the inner worker.
     - `construct`: the preparation time before the inner worker reads the inner table rows corresponding to the task.
-    - `fetch`: The total time-consuming it takes for inner worker to read inner table rows.
-    - `Build`: The total time-consuming it takes for inner worker to construct the hash map of the corresponding inner table rows.
+    - `fetch`: The total time-consuming it takes for the inner worker to read inner table rows.
+    - `Build`: The total time-consuming it takes for the inner worker to construct the hash map of the corresponding inner table rows.
 - `probe`: the total time consumed by the main thread of `IndexJoin` to do join with the outer table rows and the hash map of inner table rows.
 
 ### IndexHashJoin
