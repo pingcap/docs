@@ -293,7 +293,7 @@ EXPLAIN SELECT AVG(intkey) FROM t1;
 
 This is considered more efficient than a `TableFullScan` because the width of the value in the index `(intkey + RowID)` is less than the width of the full row.
 
-The following statement does not support using an `IndexFullScan` because additional rows are required from the table:
+The following statement does not support using an `IndexFullScan` because additional columns are required from the table:
 
 {{< copyable "sql" >}}
 
