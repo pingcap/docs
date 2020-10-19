@@ -133,7 +133,7 @@ The `Insert` operator may contain the following execution information:
 prepare:109.616µs, check_insert:{total_time:1.431678ms, mem_insert_time:667.878µs, prefetch:763.8µs, rpc:{BatchGet:{num_rpc:1, total_time:699.166µs},Get:{num_rpc:1, total_time:378.276µs }}}
 ```
 
-- `prepare`: Time-consuming of preparing to write, including expression, default value and auto-increment value calculations, etc.
+- `prepare`: Time-consuming of preparing to write, including expression, default value and auto-increment value calculations.
 - `check_insert`: This information generally appears in ʻinsert ignore` and ʻinsert on duplicate` statements, it including conflict checking and time-consuming writing to TiDB transaction cache. Note that this time-consuming does not include the time-consuming of transaction commit. It contains the following information:
     - `total_time`: the total time spent in the `check_insert` step.
     - `mem_insert_time`: The time-consuming of writing data to the TiDB transaction cache.
