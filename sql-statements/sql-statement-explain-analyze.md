@@ -93,7 +93,7 @@ EXPLAIN ANALYZE SELECT * FROM t1;
 
 ## Operator Execution info
 
-In addition to basic `time` and `loop` execution information, ʻexecution info` also contains operator-specific execution information, which mainly includes the time-consuming information of the operator sending RPC and other steps.
+In addition to basic `time` and `loop` execution information, `execution info` also contains operator-specific execution information, which mainly includes the time-consuming information of the operator sending RPC and other steps.
 
 ### Point_Get
 
@@ -127,14 +127,14 @@ cop_task: {num: 6, max: 1.07587ms, min: 844.312µs, avg: 919.601µs, p95: 1.0758
 
 ### Insert
 
-The `Insert` operator may contain the following execution information:
+The execution information from a `Insert` operator will typically contain the following:
 
 ```
 prepare:109.616µs, check_insert:{total_time:1.431678ms, mem_insert_time:667.878µs, prefetch:763.8µs, rpc:{BatchGet:{num_rpc:1, total_time:699.166µs},Get:{num_rpc:1, total_time:378.276µs }}}
 ```
 
 - `prepare`: Time-consuming of preparing to write, including expression, default value and auto-increment value calculations.
-- `check_insert`: This information generally appears in ʻinsert ignore` and ʻinsert on duplicate` statements, it including conflict checking and time-consuming writing to TiDB transaction cache. Note that this time-consuming does not include the time-consuming of transaction commit. It contains the following information:
+- `check_insert`: This information generally appears in `insert ignore` and `insert on duplicate` statements, it including conflict checking and time-consuming writing to TiDB transaction cache. Note that this time-consuming does not include the time-consuming of transaction commit. It contains the following information:
     - `total_time`: the total time spent in the `check_insert` step.
     - `mem_insert_time`: The time-consuming of writing data to the TiDB transaction cache.
     - `prefetch`: The time-consumed retrieving data that needs to be checked for conflicts from TiKV. This step is mainly to send a `Batch_Get` RPC request to TiKV to retrieve data.
@@ -176,9 +176,8 @@ inner worker channel.
 2. The inner worker receives the tasks and does 3 things for every task:
    a. builds hash table from the outer rows
    b. builds key ranges from outer rows and fetches inner rows
-   c. probes the hash table and sends the join result to the result channel.
-   Note: step a and step b are running concurrently.
-3. The main thread of ʻIndexHashJoin`  receives the join results from the result channel.
+   c. probes the hash table and sends the join result to the result channel. Note: step a and step b are running concurrently.
+3. The main thread of `IndexHashJoin`  receives the join results from the result channel.
 
 The `IndexHashJoin` operator contains the following execution information:
 
@@ -226,7 +225,7 @@ build_hash_table:{total:146.071334ms, fetch:110.338509ms, build:35.732825ms}, pr
 
 ### lock_keys execution information
 
-When executing a DML statement in a pessimistic transaction, the execution information of the operator may also include the execution information of `lock_keys`, an example is as follows:
+When executing a DML statement in a pessimistic transaction, the execution information of the operator may also include the execution information of `lock_keys`. For example:
 
 ```
 lock_keys: {time:94.096168ms, region:6, keys:8, lock_rpc:274.503214ms, rpc_count:6}
