@@ -134,7 +134,7 @@ prepare:109.616µs, check_insert:{total_time:1.431678ms, mem_insert_time:667.878
 ```
 
 - `prepare`: Time-consuming of preparing to write, including expression, default value and auto-increment value calculations.
-- `check_insert`: This information generally appears in ʻinsert ignore` and ʻinsert on duplicate` statements, it including conflict checking and time-consuming writing to TiDB transaction cache. Note that this time-consuming does not include the time-consuming of transaction commit. It contains the following information:
+- `check_insert`: This information generally appears in `insert ignore` and `insert on duplicate` statements. It includes statistics such as time spent conflict checking writing to the TiDB transaction cache. Note that the time does not include transaction commit. It contains the following information:
     - `total_time`: the total time spent in the `check_insert` step.
     - `mem_insert_time`: The time-consuming of writing data to the TiDB transaction cache.
     - `prefetch`: The time-consumed retrieving data that needs to be checked for conflicts from TiKV. This step is mainly to send a `Batch_Get` RPC request to TiKV to retrieve data.
