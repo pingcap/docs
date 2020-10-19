@@ -6,9 +6,9 @@ aliases: ['/docs/dev/basic-features/']
 
 # TiDB Features
 
-The following table provides an overview of the feature development history of TiDB. Note that TiDB 5.0 is under active development, and the final feature set may change before release.
+The following table provides an overview of the feature development history of TiDB. Note that features under active development may change before final release.
 
-| Data types, functions and operators                                                  | 5.0   | 4.0 | 3.1 | 3.0 | 2.1 |
+| Data types, functions and operators                                                  | Development | 4.0 | 3.1 | 3.0 | 2.1 |
 |--------------------------------------------------------------------------------------|:-----:|:---:|:---:|:---:|:---:|
 | [Numeric types](/data-type-numeric.md)                                               | Y     | Y   | Y   | Y   | Y   |
 | [Date and time types](/data-type-date-and-time.md)                                   | Y     | Y   | Y   | Y   | Y   |
@@ -27,13 +27,13 @@ The following table provides an overview of the feature development history of T
 | [Window functions](/functions-and-operators/window-functions.md)                     | Y     | Y   | Y   | Y   | Y   |
 | [Miscellaneous functions](/functions-and-operators/miscellaneous-functions.md)       | Y     | Y   | Y   | Y   | Y   |
 | [Operators](/functions-and-operators/operators.md)                                   | Y     | Y   | Y   | Y   | Y   |
-| **Character sets**                                                                   | **5.0** | **4.0** | **3.1** | **3.0** | **2.1** |
+| **Character sets**                                                                   | **Development** | **4.0** | **3.1** | **3.0** | **2.1** |
 | [`utf8`](/character-set-and-collation.md)                                            | Y     | Y   | Y   | Y   | Y   |
 | [`utf8mb4`](/character-set-and-collation.md)                                         | Y     | Y   | Y   | Y   | Y   |
 | [`ascii`](/character-set-and-collation.md) [^1]                                      | Y     | Y   | Y   | Y   | Y   |
 | [`latin1`](/character-set-and-collation.md)                                          | Y     | Y   | Y   | Y   | Y   |
 | [`binary`](/character-set-and-collation.md)                                          | Y     | Y   | Y   | Y   | Y   |
-| **Collations**                                                                       | **5.0** | **4.0** | **3.1** | **3.0** | **2.1** |
+| **Collations**                                                                       | **Development** | **4.0** | **3.1** | **3.0** | **2.1** |
 | [`utf8_bin`](/character-set-and-collation.md)                                        | Y     | Y   | Y   | Y   | Y   |
 | [`utf8_general_ci`](/character-set-and-collation.md)                                 | Experimental | Experimental | N   | N   | N   |
 | [`utf8_unicode_ci`](/character-set-and-collation.md)                                 | Experimental | Experimental | N   | N   | N   |
@@ -43,7 +43,7 @@ The following table provides an overview of the feature development history of T
 | [`ascii_bin`](/character-set-and-collation.md)                                       | Y     | Y   | Y   | Y   | Y   |
 | [`latin1_bin`](/character-set-and-collation.md)                                      | Y     | Y   | Y   | Y   | Y   |
 | [`binary`](/character-set-and-collation.md)                                          | Y     | Y   | Y   | Y   | Y   |
-| **Indexing and constraints**                                                         | **5.0** | **4.0** | **3.1** | **3.0** | **2.1** |
+| **Indexing and constraints**                                                         | **Development** | **4.0** | **3.1** | **3.0** | **2.1** |
 | [Expression Indexes](/sql-statements/sql-statement-create-index.md#expression-index) | Experimental | Experimental | N   | N   | N   |
 | [Columnar Storage (TiFlash)](/tiflash/tiflash-overview.md)                           | Y     | Y   | Y   | N   | N   |
 | [RocksDB Engine](/storage-engine/rocksdb-overview.md)                                | Y     | Y   | Y   | Y   | Y   |
@@ -53,7 +53,7 @@ The following table provides an overview of the feature development history of T
 | [Unique indexes](/constraints.md)                                                    | Y     | Y   | Y   | Y   | Y   |
 | [Clustered index on integer `PRIMARY KEY`](/constraints.md)                          | Y     | Y   | Y   | Y   | Y   |
 | [Clustered index on composite or non-integer key](/constraints.md)                   | Experimental | N | N | N | N  |
-| **SQL statements** [^2]                                                              | **5.0** | **4.0** | **3.1** | **3.0** | **2.1** |
+| **SQL statements** [^2]                                                              | **Development** | **4.0** | **3.1** | **3.0** | **2.1** |
 | Basic `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `REPLACE`                              | Y     | Y   | Y   | Y   | Y   |
 | `INSERT ON DUPLICATE KEY UPDATE`                                                     | Y     | Y   | Y   | Y   | Y   |
 | `LOAD DATA INFILE`                                                                   | Y     | Y   | Y   | Y   | Y   |
@@ -64,7 +64,7 @@ The following table provides an overview of the feature development history of T
 | `START TRANSACTION`, `COMMIT`, `ROLLBACK`                                            | Y     | Y   | Y   | Y   | Y   |
 | [`EXPLAIN`](/sql-statements/sql-statement-explain.md)                                | Y     | Y   | Y   | Y   | Y   |
 | [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)                | Y     | Y   | Y   | Y   | Y   |
-| **Advanced SQL Features**                                                            | **5.0** | **4.0** | **3.1** | **3.0** | **2.1** |
+| **Advanced SQL Features**                                                            | **Development** | **4.0** | **3.1** | **3.0** | **2.1** |
 | Prepared statement cache                                                             | Y     | Experimental   | N   | N   | N   |
 | [SQL plan management (SPM)](/sql-plan-management.md)                                 | Y     | Y   | N   | N   | N   |
 | [Coprocessor cache](/coprocessor-cache.md)                                           | Y     | Experimental | N | N | N |
@@ -72,7 +72,7 @@ The following table provides an overview of the feature development history of T
 | [Follower reads](/follower-read.md)                                                  | Y     | Y   | Y   | N   | N   |
 | [Read Historical Data (tidb_snapshot)](/read-historical-data.md)                     | Y     | Y   | Y   | Y   | Y   |
 | [Optimizer Hints](/optimizer-hints.md)                                               | Y     | Y   | Y   | Y   | Y   |
-| **Data definition language (DDL)**                                                   | **5.0** | **4.0** | **3.1** | **3.0** | **2.1** |
+| **Data definition language (DDL)**                                                   | **Development** | **4.0** | **3.1** | **3.0** | **2.1** |
 | Basic `CREATE`, `DROP`, `ALTER`, `RENAME`, `TRUNCATE`                                | Y     | Y   | Y   | Y   | Y   |
 | [Generated columns](/generated-columns.md)                                           | Experimental | Experimental | Experimental | Experimental | Experimental |
 | [Views](/views.md)                                                                   | Y     | Y   | Y   | Y   | N   |
@@ -81,21 +81,21 @@ The following table provides an overview of the feature development history of T
 | [Auto random](/auto-random.md)                                                       | Y     | Y   | N   | N   | N   |
 | DDL algorithm assertions                                                             | Y     | Y   | N   | N   | N   |
 | Multi schema change: add column(s)                                                   | Y     | N   | N   | N   | N   |
-| **Transactions**                                                                     | **5.0** | **4.0** | **3.1** | **3.0** | **2.1** |
+| **Transactions**                                                                     | **Development** | **4.0** | **3.1** | **3.0** | **2.1** |
 | Async commit                                                                         | Y     | N   | N   | N   | N   |
 | Large transactions (10GB)                                                            | Y     | Y   | N   | N   | N   |
 | [Pessimistic transactions](/pessimistic-transaction.md)                              | Y     | Y   | Y   | Y   | Experimental |
 | [Optimistic transactions](/optimistic-transaction.md)                                | Y     | Y   | Y   | Y   | Y   |
 | [Repeatable-read isolation (snapshot isolation)](/transaction-isolation-levels.md)   | Y     | Y   | Y   | Y   | Y   |
 | [Read-committed isolation](/transaction-isolation-levels.md)                         | Y     | Y   | N   | N   | N   |
-| **Partitioning**                                                                     | **5.0** | **4.0** | **3.1** | **3.0** | **2.1** |
+| **Partitioning**                                                                     | **Development** | **4.0** | **3.1** | **3.0** | **2.1** |
 | [Range partitioning](/partitioned-table.md)                                          | Y     | Y   | Y   | Y   | N   |
 | [Hash partitioning](/partitioned-table.md)                                           | Y     | Y   | Y   | Y   | N   |
-| **Statistics**                                                                       | **5.0** | **4.0** | **3.1** | **3.0** | **2.1** |
-| [CMSketch](/statistics.md)                                                           | Y     | Y   | Y   | Y   | Y   |
+| **Statistics**                                                                       | **Development** | **4.0** | **3.1** | **3.0** | **2.1** |
+| [CMSketch](/statistics.md)                                                           | Deprecated | Y   | Y   | Y   | Y   |
 | [Histograms](/statistics.md)                                                         | Y     | Y   | Y   | Y   | Y   |
 | [Extended statistics (multiple columns)](/statistics.md)                             | Experimental | N   | N   | N   | N   |
-| **Security**                                                                         | **5.0** | **4.0** | **3.1** | **3.0** | **2.1** |
+| **Security**                                                                         | **Development** | **4.0** | **3.1** | **3.0** | **2.1** |
 | [Transparent layer security (TLS)](/enable-tls-between-clients-and-servers.md)       | Y     | Y   | Y   | Y   | Y   |
 | [Encryption at rest (TDE)](/encryption-at-rest.md)                                   | Y     | Y   | N   | N   | N   |
 | [Role-based authentication (RBAC)](/role-based-access-control.md)                    | Y     | Y   | Y   | Y   | N   |
@@ -103,7 +103,7 @@ The following table provides an overview of the feature development history of T
 | Support for MySQL 8.0 clients                                                        | Y     | Y   | N   | N   | N   |
 | [MySQL compatible `GRANT` system](/privilege-management.md)                          | Y     | Y   | Y   | Y   | Y   |
 | Auditing                                                                             | Y     | Y   | Y   | Y   | Y   |
-| **Data import and export**                                                           | **5.0** | **4.0** | **3.1** | **3.0** | **2.1** |
+| **Data import and export**                                                           | **Development** | **4.0** | **3.1** | **3.0** | **2.1** |
 | [Fast Importer (TiDB Lightning)](/tidb-lightning/tidb-lightning-overview.md)         | Y     | Y   | Y   | Y   | Y   |
 | [mydumper logical dumper](/mydumper-overview.md)                                     | Deprecated | Deprecated | Y   | Y   | Y   |
 | [dumpling logical dumper](/dumpling-overview.md)                                     | Y     | Y   | N   | N   | N   |
@@ -111,7 +111,7 @@ The following table provides an overview of the feature development history of T
 | [Database migration toolkit (DM)](/migration-overview.md)                            | Y     | Y   | Y   | Y   | Y   |
 | [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md)                                  | Deprecated | Deprecated | Y | Y | Y |
 | [Change data capture (CDC)](/ticdc/ticdc-overview.md)                                | Y     | Y   | N   | N   | N   |
-| **Management, observability and tools**                                              | **5.0** | **4.0** | **3.1** | **3.0** | **2.1** |
+| **Management, observability and tools**                                              | **Development** | **4.0** | **3.1** | **3.0** | **2.1** |
 | [TiDB Dashboard](/dashboard/dashboard-intro.md)                                      | Y     | Y   | N   | N   | N   |
 | [SQL diagnostics](/information-schema/information-schema-sql-diagnostics.md)         | Experimental | Experimental | N   | N   | N   |
 | [Information schema](/information-schema/information-schema.md)                      | Y     | Y   | Y   | Y   | Y   |
