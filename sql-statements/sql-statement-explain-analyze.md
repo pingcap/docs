@@ -147,10 +147,10 @@ prepare:109.616µs, check_insert:{total_time:1.431678ms, mem_insert_time:667.878
 
 The `IndexJoin` operator has 1 outer worker and N inner workers to executed in parallel. The join result preserves the order of the outer table and support batch lookup. The specific execution process is as follows:
 
-1. Outer worker read N outer rows, build a task and send it to result channel and inner worker channel.
-2. The inner worker receives the task, builds key ranges from outer rows and fetch inner rows, builds inner row hash map.
-3. main thread receives the task, waits for inner worker finish handling the task.
-4. main thread join each outer row by look up the inner rows hash map in the task.
+1. The outer worker reads N outer rows, builds a task and sends it to the result channel and inner worker channel.
+2. The inner worker receives the task, builds key ranges from outer rows, and fetch inner rows. It then builds the inner row hash map.
+3. The main thread receives the task, waits for the inner worker to finish handling the task.
+4. The main thread joins each outer row by look up to the inner rows hash map.
 
 The `IndexJoin` operator contains the following execution information:
 
