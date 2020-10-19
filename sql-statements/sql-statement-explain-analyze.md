@@ -137,7 +137,7 @@ prepare:109.616µs, check_insert:{total_time:1.431678ms, mem_insert_time:667.878
 - `check_insert`: This information generally appears in ʻinsert ignore` and ʻinsert on duplicate` statements, it including conflict checking and time-consuming writing to TiDB transaction cache. Note that this time-consuming does not include the time-consuming of transaction commit. It contains the following information:
     - `total_time`: the total time spent in the `check_insert` step.
     - `mem_insert_time`: The time-consuming of writing data to the TiDB transaction cache.
-    - `prefetch`: The time-consuming of retrieve data that needs to be checked for conflicts from TiKV. This step is mainly to send a `Batch_Get` RPC request to TiKV to retrieve data.
+    - `prefetch`: The time-consumed retrieving data that needs to be checked for conflicts from TiKV. This step is mainly to send a `Batch_Get` RPC request to TiKV to retrieve data.
     - `rpc`: The total time-consuming of sending RPC requests to TiKV, which generally includes two types of RPC time, `BatchGet` and `Get`, among which:
         - `BatchGet` RPC request is sent by the `prefetch` step.
         - `Get` RPC request is sent by `insert on duplicate` statement when executing `duplicate update` step.
