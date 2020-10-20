@@ -176,13 +176,20 @@ Because `id` is also the internal `RowID`, it is stored in the `intkey` index. A
 
 ## Point_Get and Batch_Point_Get
 
-The `Point_Get` and `Batch_Point_Get` operator is used when retrieving data directly from the Primary Key. This operator is differs from `IndexLookup` in that all data can be retrieved in a single-step: 
+The `Point_Get` and `Batch_Point_Get` operator is used when retrieving data directly from a Primary Key or Unique Key. This operator is more efficient than `IndexLookup`, but only applies to `SELECT` statements against a single table. For example:
 
 {{< copyable "sql" >}}
 
 ```sql
 EXPLAIN SELECT * FROM t1 WHERE id = 1234;
 EXPLAIN SELECT * FROM t1 WHERE id IN (1234,123);
+
+ALTER TABLE t1 ADD unique_key INT;
+UPDATE t1 SET unique_key = id;
+ALTER TABLE t1 ADD UNIQUE KEY (unique_key);
+
+EXPLAIN SELECT * FROM t1 WHERE unique_key = 1234;
+EXPLAIN SELECT * FROM t1 WHERE unique_key IN (1234, 123);
 ```
 
 ```sql
@@ -198,6 +205,27 @@ EXPLAIN SELECT * FROM t1 WHERE id IN (1234,123);
 +-------------------+---------+------+---------------+-------------------------------------------------+
 | Batch_Point_Get_1 | 2.00    | root | table:t1      | handle:[1234 123], keep order:false, desc:false |
 +-------------------+---------+------+---------------+-------------------------------------------------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.27 sec)
+
+Query OK, 1010 rows affected (0.06 sec)
+Rows matched: 1010  Changed: 1010  Warnings: 0
+
+Query OK, 0 rows affected (0.37 sec)
+
++-------------+---------+------+----------------------------------------+---------------+
+| id          | estRows | task | access object                          | operator info |
++-------------+---------+------+----------------------------------------+---------------+
+| Point_Get_1 | 1.00    | root | table:t1, index:unique_key(unique_key) |               |
++-------------+---------+------+----------------------------------------+---------------+
+1 row in set (0.00 sec)
+
++-------------------+---------+------+----------------------------------------+------------------------------+
+| id                | estRows | task | access object                          | operator info                |
++-------------------+---------+------+----------------------------------------+------------------------------+
+| Batch_Point_Get_1 | 2.00    | root | table:t1, index:unique_key(unique_key) | keep order:false, desc:false |
++-------------------+---------+------+----------------------------------------+------------------------------+
 1 row in set (0.00 sec)
 ```
 
