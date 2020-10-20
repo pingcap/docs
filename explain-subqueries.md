@@ -1,6 +1,6 @@
 ---
 title: Explain Statements Using Subqueries
-summary: Learn about the execution plan information returned by the `EXPLAIN` statement in TiDB.
+summary: Learn about the execution plan information returned by the EXPLAIN statement in TiDB.
 ---
 
 # Explain Statements Using Subqueries
