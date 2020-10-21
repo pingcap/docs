@@ -41,7 +41,7 @@ This is a list of TiDB adopters in various industries.
 |[Yimian Data](https://www.crunchbase.com/organization/yimian-data)|Big Data|[Chinese](https://pingcap.com/cases-cn/user-case-yimian)|
 |[CAASDATA](https://www.caasdata.com/)|Big Data|[Chinese](https://pingcap.com/cases-cn/user-case-kasi/)|
 |[Mobikok](http://www.mobikok.com/en/)|AdTech|[Chinese](https://pingcap.com/cases-cn/user-case-mobikok/)|
-|[ZTO Express](https://www.crunchbase.com/organization/zto-express)| Logistics|[English](https://pingcap.com/case-studies/why-we-migrated-from-exadata-to-a-scale-out-htap-database-for-near-real-time-analytics);[Chinese](https://pingcap.com/cases-cn/user-case-zto-express/)|
+|[ZTO Express](https://www.crunchbase.com/organization/zto-express)| Logistics|[English](https://pingcap.com/case-studies/why-we-migrated-from-exadata-to-a-scale-out-htap-database-for-near-real-time-analytics); [Chinese](https://pingcap.com/cases-cn/user-case-zto-express/)|
 |[G7 Networks](https://www.english.g7.com.cn/)| Logistics|[Chinese](https://pingcap.com/cases-cn/user-case-g7/)|
 |[Hive-Box](http://www.fcbox.com/en/pc/index.html#/)|Logistics|[Chinese](https://pingcap.com/cases-cn/user-case-fengchao/)|
 |[GAEA](http://www.gaea.com/en/)|Gaming|[English](https://pingcap.com/blog/2017-05-22-Comparison-between-MySQL-and-TiDB-with-tens-of-millions-of-data-per-day/); [Chinese](https://pingcap.com/cases-cn/user-case-gaea-ad/)|
