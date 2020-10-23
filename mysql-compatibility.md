@@ -1,10 +1,10 @@
 ---
-title: Compatibility with MySQL
+title: MySQL Compatibility
 summary: Learn about the compatibility of TiDB with MySQL, and the unsupported and different features.
 aliases: ['/docs/v2.1/mysql-compatibility/','/docs/v2.1/reference/mysql-compatibility/']
 ---
 
-# Compatibility with MySQL
+# MySQL Compatibility
 
 TiDB supports both the MySQL wire protocol and the majority of its syntax. This means that you can use your existing MySQL connectors and clients, and your existing applications can often be migrated to TiDB without changing any application code.
 
@@ -23,9 +23,9 @@ However, TiDB does not support some of MySQL features or behaves differently fro
 + Triggers
 + Events
 + User-defined functions
-+ `FOREIGN KEY` constraints
-+ `FULLTEXT` functions and indexes
-+ `SPATIAL` functions and indexes
++ `FOREIGN KEY` constraints [#18209](https://github.com/pingcap/tidb/issues/18209)
++ Temporary tables [#1248](https://github.com/pingcap/tidb/issues/1248)
++ `FULLTEXT`/`SPATIAL` functions and indexes [#1793](https://github.com/pingcap/tidb/issues/1793)
 + Character sets other than `utf8`, `utf8mb4`, `ascii`, `latin1` and `binary`
 + Collations other than `BINARY`
 + Add primary key
@@ -37,12 +37,10 @@ However, TiDB does not support some of MySQL features or behaves differently fro
 + Savepoints
 + Column-level privileges
 + `CREATE TABLE tblName AS SELECT stmt` syntax
-+ `CREATE TEMPORARY TABLE` syntax
 + `XA` syntax (TiDB uses a two-phase commit internally, but this is not exposed via an SQL interface)
 + `LOCK TABLE` syntax (TiDB uses `tidb_snapshot` to [produce backups](/mydumper-overview.md))
 + `CHECK TABLE` syntax
 + `CHECKSUM TABLE` syntax
-+ `GET_LOCK` and `RELEASE_LOCK` functions
 
 ## Features that are different from MySQL
 
@@ -71,7 +69,7 @@ The operations are executed as follows:
 1. The client issues the `INSERT INTO t VALUES (1, 1)` statement to Instance B which sets the `id` to 1 and the statement is executed successfully.
 2. The client issues the `INSERT INTO t (c) (1)` statement to Instance A. This statement does not specify the value of `id`, so Instance A allocates the value. Currently, Instances A caches the auto-increment ID of [1, 30000], so it allocates the `id` value to 1 and adds 1 to the local counter. However, at this time the data with the `id` of 1 already exists in the cluster, therefore it reports `Duplicated Error`.
 
-Also, starting from TiDB 2.1.18, TiDB supports using the system variable `tidb_allow_remove_auto_inc` to control whether the `AUTO_INCREMENT` property of a column is allowed to be removed by executing  `ALTER TABLE MODIFY` or `ALTER TABLE CHANGE` statements. It is not allowed by default.
+Also, starting from TiDB 2.1.18, TiDB supports using the system variable `tidb_allow_remove_auto_inc` to control whether the `AUTO_INCREMENT` property of a column is allowed to be removed by executing  `ALTER TABLE MODIFY` or `ALTER TABLE CHANGE` statements. It is not allowed by default. Once the `AUTO_INCREMENT` property is removed, it cannot be recovered, because TiDB does not support adding the `AUTO_INCREMENT` column attribute.
 
 > **Note:**
 >
@@ -120,7 +118,7 @@ In TiDB DDL does not block reads or writes to tables while in operation. However
     - Does not support setting a column as the `PRIMARY KEY`, or creating a unique index, or specifying `AUTO_INCREMENT` while adding it.
 + Drop Column: Does not support dropping the `PRIMARY KEY` column or index column.
 + Change/Modify Column:
-    - Does not support lossy changes, such as from `BIGINT` to `INTEGER` or `VARCHAR(255)` to `VARCHAR(10)`.
+    - Does not support lossy changes, such as from `BIGINT` to `INTEGER` or `VARCHAR(255)` to `VARCHAR(10)`. Otherwise, the `length %d is less than origin %d` error might be output.
     - Does not support modifying the precision of `DECIMAL` data types starting from TiDB v2.1.10.
     - Does not support changing the `UNSIGNED` attribute.
     - Does not support changing from `NULL` to `NOT NULL`.
