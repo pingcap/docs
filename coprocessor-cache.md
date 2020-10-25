@@ -40,7 +40,7 @@ You can check the cache effect of Coprocessor by executing `EXPLAIN ANALYZE` or 
 
 ### Use `EXPLAIN ANALYZE`
 
-Users can view the cache hit rate in [Operators for accessing tables](/choose-index.md#Operators-for-accessing-tables) through [statement `EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md). See the following example:
+Users can view the cache hit rate in [Operators for accessing tables](/choose-index.md#operators-for-accessing-tables) through [statement `EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md). See the following example:
 
 ```sql
 EXPLAIN ANALYZE SELECT * FROM t USE INDEX(a);
