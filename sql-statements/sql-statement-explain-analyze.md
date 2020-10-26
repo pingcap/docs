@@ -28,7 +28,7 @@ The `EXPLAIN ANALYZE` statement works similar to `EXPLAIN`, with the major diffe
 
 ## EXPLAIN ANALYZE output format
 
-Different from `EXPLAIN`, `EXPLAIN ANALYZE` executes the corresponding SQL statement, records its runtime information, and returns the information together with the execution plan. Therefore, you can regard `EXPLAIN ANALYZE` as an extension of the `EXPLAIN` statement. Compared to `EXPLAIN`, the return results of `EXPLAIN ANALYZE` include columns of information such as `actRows`, `execution info`, `memory`, and `disk`. The details of these columns are shown as follows:
+`EXPLAIN ANALYZE` is an extension to `EXPLAIN` where the corresponding SQL statement is executed and runtime information is collected. The runtime information can be compared to the statistics from `EXPLAIN` in order to debug query execution. Compared to `EXPLAIN`, the return results of `EXPLAIN ANALYZE` include columns of information such as `actRows`, `execution info`, `memory`, and `disk`. The details of these columns are shown as follows:
 
 | attribute name          | description |
 |:----------------|:---------------------------------|
