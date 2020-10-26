@@ -33,7 +33,7 @@ When you start the TiDB cluster, you can use command-line options or environment
 
 ## `--config-strict`
 
-- Enforce the validity of the configuration file
+- Enforces the validity of the configuration file
 - Default: false
 
 ## `--cors`
