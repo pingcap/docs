@@ -14,6 +14,12 @@ TiDB version: 4.0.8
 
     - Support new aggregate function APPROX_PERCENTILE [#20197](https://github.com/pingcap/tidb/pull/20197)
 
++ Tools
+
+    + TiCDC
+
+        - Supports snapshot level consistency replication in time [#932](https://github.com/pingcap/ticdc/pull/932)
+
 ## Improvements
 
 + TiDB
@@ -27,6 +33,30 @@ TiDB version: 4.0.8
     - Make the min-max index more accurate if there are deleted data
     - Improved query performance under small volume data
     - Support CAST functions push down
+
++ Tools
+
+    + TiCDC
+
+        - Print statistics in MySQL sink [#1023](https://github.com/pingcap/ticdc/pull/1023)
+
+    + Backup and Restore (BR)
+
+        - Speed up restore by pipeline split and restore [#428](https://github.com/pingcap/br/pull/428)
+        - Support restoring PD schedulers manually [#530](https://github.com/pingcap/br/pull/530)
+        - Use pause instead of remove schedulers [#551](https://github.com/pingcap/br/pull/551)
+
+    + Dumpling
+
+        - Support writing directly to S3 [#155](https://github.com/pingcap/dumpling/pull/155)
+        - Support dumping view [#158](https://github.com/pingcap/dumpling/pull/158)
+        - Support dumping all generated column table [#166](https://github.com/pingcap/dumpling/pull/166)
+
+    + TiDB Lightning
+
+        - Support multi bytes csv delimiter and separator [#406](https://github.com/pingcap/tidb-lightning/pull/406)
+        - Speed up restore by disable some pd scheduler [#408](https://github.com/pingcap/tidb-lightning/pull/408)
+        - Use gc ttl api for checksum gc safepoint in v4.0 cluster [#396](https://github.com/pingcap/tidb-lightning/pull/396)
 
 ## Bug Fixes
 
@@ -50,6 +80,23 @@ TiDB version: 4.0.8
     - Fix the issue that when deployed with multi-paths, the wrong capacity make creating TiFlash replicas failed
     - Fix the bug that TiFlash could throw errors about broken data files after the restart
     - Fix the issue that broken files may be left on disk after TiFlash crashed
+
++ Tools
+
+    + TiCDC
+
+        - Fix unexpected exit due to updating GC safepoint error [#979](https://github.com/pingcap/ticdc/pull/979)
+        - Fix task status is always flushed because of incorrect mod revision cache [#1017](https://github.com/pingcap/ticdc/pull/1017)
+        - Fix Maxwell empty messages [#978](https://github.com/pingcap/ticdc/pull/978)
+
+    + Backup and Restore (BR)
+
+        - Fix send on closed channel panic during restore [#559](https://github.com/pingcap/br/pull/559)
+
+    + TiDB Lightning
+
+        - Fix a bug about wrong column info [#420](https://github.com/pingcap/tidb-lightning/pull/420)
+        - Fix infinity loop in retry get region in local mode [#418](https://github.com/pingcap/tidb-lightning/pull/418)
 
 ## Others
 
@@ -107,15 +154,3 @@ TiDB version: 4.0.8
     - Fix bug: waiting index during learner read may cost long time if proxy can not catch up latest raft lease info
     - Add errors.toml to support standard error code
     - Fix bug: proxy write too much region state info to kv engine while replaying outdated raft log
-
-+ Tools
-
-    - BR
-
-        * Add errors.toml. [#563](https://github.com/pingcap/br/pull/563)
-
-    - TiCDC
-
-        * Fix a bug that processor always flushes task status to the etcd because of incorrect mod revision cache. [#1019](https://github.com/pingcap/ticdc/pull/1019)
-        * Support to replicate tables without explicit row id [#1010](https://github.com/pingcap/ticdc/pull/1010)
-        * <p><em>Sourced from <a href="https://github.com/junit-team/junit4/releases">junit's releases</a>.</em></p> [#1001](https://github.com/pingcap/ticdc/pull/1001)
