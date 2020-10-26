@@ -3,7 +3,7 @@ title: Explain Statements That Use Aggregation
 summary: Learn about the execution plan information returned by the `EXPLAIN` statement in TiDB.
 ---
 
-# Explain Statements Using Aggregation
+# Explain Statements That Use Aggregation
 
 When aggregating data, the SQL Optimizer will select either a Hash Aggregation or Stream Aggregation operator. To improve query efficiency, aggregation is performed at both the coprocessor and TiDB layers. Consider the following example:
 

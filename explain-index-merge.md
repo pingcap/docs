@@ -1,9 +1,9 @@
 ---
-title: Explain Statements Using Index Merge
+title: Explain Statements That Use Index Merge
 summary: Learn about the execution plan information returned by the `EXPLAIN` statement in TiDB.
 ---
 
-# Explain Statements Using Index Merge
+# Explain Statements That Use Index Merge
 
 `IndexMerge` is a method introduced in TiDB v4.0 to access tables. Using this method, the TiDB optimizer can use multiple indexes per table and merge the results returned by each index. In some scenarios, this method makes the query more efficient by avoiding full table scans.
 
