@@ -10,26 +10,28 @@ To address the issue of slow queries, you need to take the following two steps:
 1. Among many queries, identify which type of queries are slow.
 2. Analyze why this type of queries are slow.
 
-You can easily perform step 1 using the [slow query log](/identify-slow-queries.md) and the [statement summary table](/statement-summary-tables.md) features. TiDB Dashboard integrates the two features and directly displays the results in your browser in a convenient way. Therefore, this document focuses on step 2.
+You can easily perform step 1 using the [slow query log](/identify-slow-queries.md) and the [statement summary table](/statement-summary-tables.md) features. It is recommended to use TiDB Dashboard, which integrates the two features and directly displays the slow queries in your browser. 
+
+This document focuses on how to perform step 2 - analyze why this type of queries are slow.
 
 Generally, slow queries have the following major causes:
 
 - Optimizer issues, such as wrong index selected, wrong join type or sequence selected.
-- System issues. All issues not caused by the optimizer are system issues. For example, a busy TiKV instance causes requests to be processed slowly; outdated Region information causes slow queries.
+- System issues. All issues not caused by the optimizer are system issues. For example, a busy TiKV instance processes requests slowly; outdated Region information causes slow queries.
 
-In actual situations, optimizer issues might cause system issues. For example, in a certain type of queries, if the optimizer that should use index actually uses full table scan, the SQL queries will consume many resources, causing the CPU usage of some KV instances to soar. This might appear to be a system issue, but in essence it is an optimizer issue.
+In actual situations, optimizer issues might cause system issues. For example, for a certain type of queries, the optimizer uses a full table scan instead of the index. As a result, the SQL queries consume many resources, which causes the CPU usage of some TiKV instances to soar. This seems like a system issue, but in essence, it is an optimizer issue.
 
-Identifying system issues is relatively simple. However, to analyze optimizer issues, you need to determine whether the execution plan is reasonable or not. It is recommended to analyze slow queries following these procedures:
+To identify system issues is relatively simple. To analyze optimizer issues, you need to determine whether the execution plan is reasonable or not. Therefore, it is recommended to analyze slow queries by following these procedures:
 
-1. Identify the query bottleneck, which means the time-consuming part of the query process.
+1. Identify the performance bottleneck of the query, that is, the time-consuming part of the query process.
 2. Analyze the system issues: analyze the possible causes according to the query bottleneck and the monitoring/log information of that time.
 3. Analyze the optimizer issues: analyze whether there is a better execution plan.
 
 The procedures above are explained in the following sections.
 
-## Identify the query bottleneck
+## Identify the performance bottleneck of the query
 
-To identify the query bottleneck, you need to have a general understanding of the query process. The key stages of the query execution process in TiDB is illustrated in [TiDB performance map](/media/performance-map.png).
+First, you need to have a general understanding of the query process. The key stages of the query execution process in TiDB are illustrated in [TiDB performance map](/media/performance-map.png).
 
 You can get the duration information using the following methods:
 
@@ -41,23 +43,23 @@ The methods above are different in the following aspects:
 - The slow log records the duration of almost all stages of a SQL execution, from parsing to returning results, and is relatively comprehensive (you can query and analyze the slow log in TiDB Dashboard in an intuitive way).
 - By executing `EXPLAIN ANALYZE`, you can learn the time consumption of each operator in an actual SQL execution. The results have more detailed statistics of the execution duration.
 
-In summary, you can use the slow log and execute `EXPLAIN ANALYZE` to accurately identify the query bottleneck. The two methods help you determine the SQL query is slow in which component (TiDB or TiKV) at which stage of the execution.
+In summary, the slow log and `EXPLAIN ANALYZE` statements help you determine the SQL query is slow in which component (TiDB or TiKV) at which stage of the execution. Therefore, you can accurately identify the performance bottleneck of the query.
 
 In addition, since v4.0.3, the `Plan` field in the slow log also includes the SQL execution information, which is the result of `EXPLAIN ANALYZE`. So you can find all information of SQL duration in the slow log.
 
 ## Analyze system issues
 
-System issues can be divided into the following three types according the execution stage:
+System issues can be divided into the following types according to different execution stages:
 
-1. TiKV is slow in data processing. For example, the TiKV coprocessor is slow to process data.
+1. TiKV is slow in data processing. For example, the TiKV coprocessor processes data slowly.
 2. TiDB is slow in execution. For example, in the execution stage, a `Join` operator is slow to process data.
 3. Other key stages are slow. For example, getting the timestamp takes a long time.
 
-For each slow query, you should first determine to which type the query belongs, and then analyze it in detail.
+For each slow query, first determine to which type the query belongs, and then analyze it in detail.
 
 ### TiKV is slow in data processing
 
-If TiKV is slow in data processing, you can easily identify it in the result of `EXPLAIN ANALYZE`. In the following example, `StreamAgg_8` and `TableFullScan_15`, two `tikv-task`s (as indicated by `cop[tikv]` in the `task` column), take `170ms`. After subtracting this `170ms`, the execution time of TiDB operators account for a very small proportion of the total query execution time, which indicates that the bottleneck is in TiKV.
+If TiKV is slow in data processing, you can easily identify it in the result of `EXPLAIN ANALYZE`. In the following example, `StreamAgg_8` and `TableFullScan_15`, two `tikv-task`s (as indicated by `cop[tikv]` in the `task` column), take `170ms` to execute. After subtracting `170ms`, the execution time of TiDB operators account for a very small proportion of the total execution time. This indicates that the bottleneck is in TiKV.
 
 ```sql
 +----------------------------+---------+---------+-----------+---------------+------------------------------------------------------------------------------+---------------------------------+-----------+------+
@@ -70,7 +72,7 @@ If TiKV is slow in data processing, you can easily identify it in the result of 
 +----------------------------+---------+---------+-----------+---------------+------------------------------------------------------------------------------+---------------------------------+-----------+------
 ```
 
-In addition, the `Cop_process` and `Cop_wait` fields in the slow log can also help your analysis. In the following example, the total duration of the query is around `180.85ms`, and the largest `coptask` consumes `171ms`. This indicates that the bottleneck of this query is in the TiKV side.
+In addition, the `Cop_process` and `Cop_wait` fields in the slow log can also help your analysis. In the following example, the total duration of the query is around `180.85ms`, and the largest `coptask` takes `171ms`. This indicates that the bottleneck of this query is on the TiKV side.
 
 For the description of each field in the slow log, see [fields description](/identify-slow-queries.md#fields-description).
 
@@ -82,11 +84,11 @@ For the description of each field in the slow log, see [fields description](/ide
 # Cop_wait: Avg_time: 1ms P90_time: 1ms Max_time: 1ms Max_Addr: 10.6.131.78
 ```
 
-After identifying that TiKV is slow in data processing, you can find out the cause as described in the following sections.
+After identifying that TiKV is the bottleneck, you can find out the cause as described in the following sections.
 
 #### TiKV instance is busy
 
-During the execution of a SQL statement, TiDB might fetch data from multiple TiKV instances. If one TiKV instance is slow to respond, the overall SQL execution speed is slowed down.
+During the execution of a SQL statement, TiDB might fetch data from multiple TiKV instances. If one TiKV instance responds slowly, the overall SQL execution speed is slowed down.
 
 The `Cop_wait` field in the slow log can help you determine this cause.
 
@@ -94,7 +96,7 @@ The `Cop_wait` field in the slow log can help you determine this cause.
 # Cop_wait: Avg_time: 1ms P90_time: 2ms Max_time: 110ms Max_Addr: 10.6.131.78
 ```
 
-From the log above, you can see that a `cop-task` sent to the `10.6.131.78` instance waits `110ms` before it is executed. It might that this instance is busy. You can check the CPU monitoring of that time to confirm the cause.
+The log above shows that a `cop-task` sent to the `10.6.131.78` instance waits `110ms` before being executed. It indicates that this instance is busy. You can check the CPU monitoring of that time to confirm the cause.
 
 #### Too many outdated keys
 
@@ -122,7 +124,7 @@ You can compare `Wait_TS` and `Query_time` in the slow log. The timestamps are p
 
 #### Outdated Region information
 
-Region information in the TiDB side might be outdated. In this situation, TiKV might return the `regionMiss` error. Then TiDB gets the Region information from PD again, which is reflected in the `Cop_backoff` information. Both the failed times and the total duration are recorded.
+Region information on the TiDB side might be outdated. In this situation, TiKV might return the `regionMiss` error. Then TiDB gets the Region information from PD again, which is reflected in the `Cop_backoff` information. Both the failed times and the total duration are recorded.
 
 ```
 # Cop_backoff_regionMiss_total_times: 200 Cop_backoff_regionMiss_total_time: 0.2 Cop_backoff_regionMiss_max_time: 0.2 Cop_backoff_regionMiss_max_addr: 127.0.0.1 Cop_backoff_regionMiss_avg_time: 0.2 Cop_backoff_regionMiss_p90_time: 0.2
