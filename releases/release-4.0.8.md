@@ -1,14 +1,18 @@
 ---
-title: TiDB v4.0.8 Release Notes
-category: Releases
-aliases: ['/docs/dev/releases/v4.0.8/']
+title: TiDB 4.0.8 Release Notes
 ---
 
-# TiDB v4.0.8 Release Notes
+# TiDB 4.0.8 Release Notes
 
-Release date: October 26, 2020
+Release date: October 29, 2020
 
-TiDB version: v4.0.8
+TiDB version: 4.0.8
+
+## New Features
+
++ TiDB
+
+    - Support new aggregate function APPROX_PERCENTILE [#20197](https://github.com/pingcap/tidb/pull/20197)
 
 ## Improvements
 
@@ -19,10 +23,10 @@ TiDB version: v4.0.8
 
 + TiFlash
 
-    - Add metrics about applying Raft logs [#1160](https://github.com/pingcap/tics/pull/1160)
-    - Make the min-max index more accurate if there are deleted data. [#1153](https://github.com/pingcap/tics/pull/1153)
-    - Improved query performance under small volume data [#1144](https://github.com/pingcap/tics/pull/1144)
-    - Support CAST functions push down [#1125](https://github.com/pingcap/tics/pull/1125)
+    - Add metrics about applying Raft logs
+    - Make the min-max index more accurate if there are deleted data
+    - Improved query performance under small volume data
+    - Support CAST functions push down
 
 ## Bug Fixes
 
@@ -42,16 +46,10 @@ TiDB version: v4.0.8
 
 + TiFlash
 
-    - Fix wrong timestamp in log message [#1181](https://github.com/pingcap/tics/pull/1181)
-    - Fix the issue that when deployed with multi-paths, the wrong capacity make creating TiFlash replicas failed [#1172](https://github.com/pingcap/tics/pull/1172)
-    - Fix the bug that TiFlash could throw errors about broken data files after the restart. [#1171](https://github.com/pingcap/tics/pull/1171)
-    - Fix the issue that broken files may be left on disk after TiFlash crashed [#1155](https://github.com/pingcap/tics/pull/1155)
-
-## New Features
-
-+ TiDB
-
-    - Support new aggregate function APPROX_PERCENTILE [#20197](https://github.com/pingcap/tidb/pull/20197)
+    - Fix wrong timestamp in log message
+    - Fix the issue that when deployed with multi-paths, the wrong capacity make creating TiFlash replicas failed
+    - Fix the bug that TiFlash could throw errors about broken data files after the restart
+    - Fix the issue that broken files may be left on disk after TiFlash crashed
 
 ## Others
 
@@ -105,10 +103,10 @@ TiDB version: v4.0.8
 
 + TiFlash
 
-    - Add metrics about memory usage for cop task [#1177](https://github.com/pingcap/tics/pull/1177)
-    - `Fix bug: waiting index during learner read may cost long time if proxy can not catch up latest raft lease info` [#1175](https://github.com/pingcap/tics/pull/1175)
-    - Add errors.toml to support standard error code. [#1165](https://github.com/pingcap/tics/pull/1165)
-    - `Fix bug: proxy write too much region state info to kv engine while replaying outdated raft log` [#1131](https://github.com/pingcap/tics/pull/1131)
+    - Add metrics about memory usage for cop task
+    - Fix bug: waiting index during learner read may cost long time if proxy can not catch up latest raft lease info
+    - Add errors.toml to support standard error code
+    - Fix bug: proxy write too much region state info to kv engine while replaying outdated raft log
 
 + Tools
 
