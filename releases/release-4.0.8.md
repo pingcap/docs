@@ -38,6 +38,8 @@ TiDB version: 4.0.8
     - Make the min-max index more accurate if there are deleted data
     - Improved query performance under small volume data
     - Support CAST functions push down
+    - Add metrics about memory usage for cop task
+    - Add errors.toml to support standard error code
 
 + Tools
 
@@ -91,6 +93,8 @@ TiDB version: 4.0.8
     - Fix the issue that when deployed with multi-paths, the wrong capacity make creating TiFlash replicas failed
     - Fix the bug that TiFlash could throw errors about broken data files after the restart
     - Fix the issue that broken files may be left on disk after TiFlash crashed
+    - Fix bug: waiting index during learner read may cost long time if proxy can not catch up latest raft lease info
+    - Fix bug: proxy write too much region state info to kv engine while replaying outdated raft log
 
 + Tools
 
@@ -153,10 +157,3 @@ TiDB version: 4.0.8
     - Generate the metafile of errors [#3090](https://github.com/pingcap/pd/pull/3090)
     - Fix the bug that PD might panic if there is down store with 10 minutes [#3069](https://github.com/pingcap/pd/pull/3069)
     - Add additional info for operator [#3009](https://github.com/pingcap/pd/pull/3009)
-
-+ TiFlash
-
-    - Add metrics about memory usage for cop task
-    - Fix bug: waiting index during learner read may cost long time if proxy can not catch up latest raft lease info
-    - Add errors.toml to support standard error code
-    - Fix bug: proxy write too much region state info to kv engine while replaying outdated raft log
