@@ -27,6 +27,11 @@ TiDB version: 4.0.8
     - Prioritize low selectivity indexes in the greedy search procedure of `Selectivity()` [#20154](https://github.com/pingcap/tidb/pull/20154)
     - Record more RPC runtime information in cop runtime stats [#19264](https://github.com/pingcap/tidb/pull/19264)
 
++ TiKV
+
+    - Add the Fast-Tune panel page as performance assisted diagnosis [#8804](https://github.com/tikv/tikv/pull/8804)
+    - Add `security.redact-info-log` config, which redacts user data from logs [#8746](https://github.com/tikv/tikv/pull/8746)
+
 + TiFlash
 
     - Add metrics about applying Raft logs
@@ -73,6 +78,12 @@ TiDB version: 4.0.8
     - Fix enum value convert to float failed [#20235](https://github.com/pingcap/tidb/pull/20235)
     - Fix panic in RegionStore.accessStore. [#20210](https://github.com/pingcap/tidb/pull/20210)
     - Fix sort result for max unsigned int in batch-point-get [#20205](https://github.com/pingcap/tidb/pull/20205)
+
++ TiKV
+
+    - Fix the bug that mutex conflict of encryption makes pd-worker deal with heartbeat slow [#8869](https://github.com/tikv/tikv/pull/8869)
+    - Fix generating memory profile [#8790](https://github.com/tikv/tikv/pull/8790)
+    - Fixed failure to backup database on GCS when storage class was provided. [#8763](https://github.com/tikv/tikv/pull/8763)
 
 + TiFlash
 
@@ -132,14 +143,9 @@ TiDB version: 4.0.8
 
     - Error_code: re-format metafile [#8877](https://github.com/tikv/tikv/pull/8877)
     - Move counter metric processing into the scheduler worker. [#8872](https://github.com/tikv/tikv/pull/8872)
-    - Fix the bug that mutex conflict of encryption makes pd-worker deal with heartbeat slow [#8869](https://github.com/tikv/tikv/pull/8869)
-    - Raftstore: record the noop entry message temporarily like pending_votes [#8864](https://github.com/tikv/tikv/pull/8864)
-    - Config: enable dynamically change config pessimistic-txn.pipelined [#8853](https://github.com/tikv/tikv/pull/8853)
-    - Add the Fast-Tune panel page as performance assisted diagnosis [#8804](https://github.com/tikv/tikv/pull/8804)
+    - Record the noop entry message temporarily like pending_votes in raftstore [#8864](https://github.com/tikv/tikv/pull/8864)
+    - Enable dynamically change config pessimistic-txn.pipelined [#8853](https://github.com/tikv/tikv/pull/8853)
     - Enabling profiling features by default [#8801](https://github.com/tikv/tikv/pull/8801)
-    - Fix generating memory profile [#8790](https://github.com/tikv/tikv/pull/8790)
-    - Fixed failure to backup database on GCS when storage class was provided. [#8763](https://github.com/tikv/tikv/pull/8763)
-    - Add `security.redact-info-log` config, which redacts user data from logs [#8746](https://github.com/tikv/tikv/pull/8746)
 
 + PD
 
