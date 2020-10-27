@@ -100,7 +100,7 @@ The log above shows that a `cop-task` sent to the `10.6.131.78` instance waits `
 
 #### Too many outdated keys
 
-If a TiKV instance has much outdated data, you need to clean up the data; otherwise, the processing speed is affected.
+A TiKV instance has much outdated data, which needs to be cleaned up for data scan. This impacts the processing speed.
 
 Check `Total_keys` and `Processed_keys`. If they are greatly different, the TiKV instance has too many keys of the older versions.
 
@@ -167,7 +167,7 @@ If the execution plan is incorrect, see the [Analyze optimizer issues](#analyze-
 
 #### Low concurrency
 
-If you find that the bottleneck is in the operator with concurrency, you can speed up the execution by adjusting the concurrency. For example:
+If the bottleneck is in the operator with concurrency, speed up the execution by adjusting the concurrency. For example:
 
 ```sql
 mysql> explain analyze select sum(t1.a) from t t1, t t2 where t1.a=t2.a;
@@ -187,7 +187,7 @@ mysql> explain analyze select sum(t1.a) from t t1, t t2 where t1.a=t2.a;
 9 rows in set (9.67 sec)
 ```
 
-For the example above, you can see that `HashJoin_14` and `Projection_24` consume much of the execution time. Consider increasing their concurrency using SQL variables to speed up execution.
+As shown above, `HashJoin_14` and `Projection_24` consume much of the execution time. Consider increasing their concurrency using SQL variables to speed up execution.
 
 All system variables are documented in [system-variables](/system-variables.md). To increase the concurrency of `HashJoin_14`, you can modify the `tidb_hash_join_concurrency` system variable.
 
@@ -234,7 +234,7 @@ mysql> explain select * from t t1, t t2 where t1.a>t2.a;
 
 ## Analyze optimizer issues
 
-To analyze optimizer issues, you need to determine whether the execution plan is reasonable or not. You need to have a some understanding of the optimization process and each operator.
+To analyze optimizer issues, you need to determine whether the execution plan is reasonable or not. You need to have some understanding of the optimization process and each operator.
 
 For the following list of examples, the table schema is `create table t (id int, a int, b int, c int, primary key(id), key(a), key(b, c))`.
 
