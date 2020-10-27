@@ -99,6 +99,22 @@ monitoring_servers:
   - host: 172.16.5.134
 ```
 
+By default, TiUP is deployed on the binary running on the amd64 architecture. If the target machine is the arm64 architecture, you can configure it in the topology file:
+
+```yaml
+global:
+  arch: "arm64"           # All machines use the binary of the arm64 architecture by default
+
+tidb_servers:
+  - host: 172.16.5.134
+    arch: "amd64"         # This machine uses the binary of the amd64 architecture
+  - host: 172.16.5.139
+    arch: "arm64"         # This machine uses the binary of the arm64 architecture
+  - host: 172.16.5.140    # Machines that are not configured with the arch field uses the default value in global, which is arm64 in this case.
+
+...
+```
+
 Save the file as `/tmp/topology.yaml`. If you want to use TiDB v3.0.12 and your cluster name is `prod-cluster`, run the following command:
 
 {{< copyable "shell-regular" >}}
@@ -128,7 +144,7 @@ prometheus  172.16.5.134  9090         deploy/prometheus-9090,data/prometheus-90
 grafana     172.16.5.134  3000         deploy/grafana-3000
 Attention:
     1. If the topology is not what you expected, check your yaml file.
-    1. Please confirm there is no port/directory conflicts in same host.
+    2. Please confirm there is no port/directory conflicts in same host.
 Do you want to continue? [y/N]:
 ```
 
