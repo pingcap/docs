@@ -103,13 +103,13 @@ By default, TiUP is deployed as the binary files running on the amd64 architectu
 
 ```yaml
 global:
-  arch: "arm64"           # All machines use the binary of the arm64 architecture by default
+  arch: "arm64"           # Configures all machines to use the binary files of the arm64 architecture by default
 
 tidb_servers:
   - host: 172.16.5.134
-    arch: "amd64"         # This machine uses the binary of the amd64 architecture
+    arch: "amd64"         # Configures this machine to use the binary files of the amd64 architecture
   - host: 172.16.5.139
-    arch: "arm64"         # This machine uses the binary of the arm64 architecture
+    arch: "arm64"         # Configures this machine to use the binary files of the arm64 architecture
   - host: 172.16.5.140    # Machines that are not configured with the arch field use the default value in the global field, which is arm64 in this case.
 
 ...
