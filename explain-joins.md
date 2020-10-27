@@ -61,7 +61,7 @@ EXPLAIN SELECT /*+ INL_JOIN(t1, t2) */ * FROM t1 INNER JOIN t2 ON t1.id = t2.t1_
 6 rows in set (0.00 sec)
 ```
 
-Index join is efficient in memory usage, but may be slower to execute than other join methods when a large number of probe operations are required. Consider also the following query:
+Index join is efficient in memory usage, but might be slower to execute than other join methods when a large number of probe operations are required. Consider also the following query:
 
 ```sql
 SELECT * FROM t1 INNER JOIN t2 ON t1.id=t2.t1_id WHERE t1.pad1 = 'value' and t2.pad1='value';
@@ -186,14 +186,14 @@ An index join using the hint [`INL_JOIN`](/optimizer-hints.md#inl_joint1_name--t
 
 Index Join performance is influenced by the following system variables:
 
-* [`tidb_index_join_batch_size`](/system-variables.md#tidb_index_join_batch_size) (default: 25000) - the batch size of index lookup operations.
-* [`tidb_index_lookup_join_concurrency`](/system-variables.md#tidb_index_lookup_join_concurrency) (default: 4) - the number of concurrent index lookup tasks.
+* [`tidb_index_join_batch_size`](/system-variables.md#tidb_index_join_batch_size) (default value: `25000`) - the batch size of `index lookup join` operations.
+* [`tidb_index_lookup_join_concurrency`](/system-variables.md#tidb_index_lookup_join_concurrency) (default value: `4`) - the number of concurrent index lookup tasks.
 
 ## Hash Join
 
 A hash join reads and caches the data on the `Build` side of the join in a hash table, and then reads the data on the `Probe` side of the join, probing the hash table to access required rows. Hash joins require more memory to execute than Index Joins, but execute much faster when there are a lot of rows that need to be joined. The Hash Join operator is multi-threaded in TiDB, and executes in parallel.
 
-An example Hash Join is as follows:
+An example of Hash Join is as follows:
 
 {{< copyable "sql" >}}
 
@@ -264,8 +264,8 @@ Query OK, 0 rows affected (0.00 sec)
 
 Hash Join performance is influenced by the following system variables:
 
-* [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) (default: 1GB) - if the memory quota for a query is exceeded, TiDB will attempt to spill the `Build` operator of a hash join to disk to save memory.
-* [`tidb_hash_join_concurrency`](/system-variables.md#tidb_hash_join_concurrency) (default: 5) - the number of concurrent hash join tasks.
+* [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) (default value: 1GB) - if the memory quota for a query is exceeded, TiDB will attempt to spill the `Build` operator of a hash join to disk to save memory.
+* [`tidb_hash_join_concurrency`](/system-variables.md#tidb_hash_join_concurrency) (default value: `5`) - the number of concurrent hash join tasks.
 
 ## Merge Join
 
@@ -292,8 +292,8 @@ EXPLAIN SELECT /*+ MERGE_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 5 rows in set (0.00 sec)
 ```
 
-The execution of the `Merge Join` operator is as follows:
+The execution process of the `Merge Join` operator is as follows:
 
-1. Read all the data of a Join Group from the `Build` side into the memory
+1. Read all the data of a Join Group from the `Build` side into the memory.
 2. Read the data of the `Probe` side.
 3. Compare whether each row of data on the `Probe` side matches a complete Join Group on the `Build` side. Apart from equivalent conditions, there are non-equivalent conditions. Here "match" mainly refers to checking whether non-equivalent conditions are met. Join Group refers to the data with the same value among all Join Keys.
