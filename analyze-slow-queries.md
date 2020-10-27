@@ -236,7 +236,7 @@ mysql> explain select * from t t1, t t2 where t1.a>t2.a;
 
 To analyze optimizer issues, you need to determine whether the execution plan is reasonable or not. You need to have some understanding of the optimization process and each operator.
 
-For the following list of examples, the table schema is `create table t (id int, a int, b int, c int, primary key(id), key(a), key(b, c))`.
+For the following examples, assume that the table schema is `create table t (id int, a int, b int, c int, primary key(id), key(a), key(b, c))`.
 
 1. `select * from t`: There is no filter condition and a full table scan is performed. So the `TableFullScan` operator is used to read data.
 2. `select a from t where a=2`: There is a filter condition and only the index columns are read, so the `IndexReader` operator is used to read data.
