@@ -110,7 +110,7 @@ tidb_servers:
     arch: "amd64"         # This machine uses the binary of the amd64 architecture
   - host: 172.16.5.139
     arch: "arm64"         # This machine uses the binary of the arm64 architecture
-  - host: 172.16.5.140    # Machines that are not configured with the arch field uses the default value in global, which is arm64 in this case.
+  - host: 172.16.5.140    # Machines that are not configured with the arch field use the default value in global, which is arm64 in this case.
 
 ...
 ```
