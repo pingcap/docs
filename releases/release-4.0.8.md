@@ -14,6 +14,10 @@ TiDB version: 4.0.8
 
     - Support new aggregate function APPROX_PERCENTILE [#20197](https://github.com/pingcap/tidb/pull/20197)
 
++ TiFlash
+
+    - Support CAST functions push down
+
 + Tools
 
     + TiCDC
@@ -31,14 +35,16 @@ TiDB version: 4.0.8
 
     - Add the Fast-Tune panel page as performance assisted diagnosis [#8804](https://github.com/tikv/tikv/pull/8804)
     - Add `security.redact-info-log` config, which redacts user data from logs [#8746](https://github.com/tikv/tikv/pull/8746)
+    - Error_code: re-format metafile [#8877](https://github.com/tikv/tikv/pull/8877)
+    - Enable dynamically change config pessimistic-txn.pipelined [#8853](https://github.com/tikv/tikv/pull/8853)
+    - Enable profiling features by default [#8801](https://github.com/tikv/tikv/pull/8801)
 
 + TiFlash
 
     - Add metrics about applying Raft logs
+    - Add metrics about memory usage for cop task
     - Make the min-max index more accurate if there are deleted data
     - Improved query performance under small volume data
-    - Support CAST functions push down
-    - Add metrics about memory usage for cop task
     - Add errors.toml to support standard error code
 
 + Tools
@@ -69,23 +75,24 @@ TiDB version: 4.0.8
 
 + TiDB
 
-    - Fix unexpected panic when using partition tables. [#20565](https://github.com/pingcap/tidb/pull/20565)
-    - Fix wrong outer join result when filter outer side using index merge join. [#20427](https://github.com/pingcap/tidb/pull/20427)
+    - Fix unexpected panic when using partition tables [#20565](https://github.com/pingcap/tidb/pull/20565)
+    - Fix wrong outer join result when filter outer side using index merge join [#20427](https://github.com/pingcap/tidb/pull/20427)
     - Fix data too long when converting to bit returns a null value [#20363](https://github.com/pingcap/tidb/pull/20363)
-    - Fix corrupted default value for bit type column. [#20340](https://github.com/pingcap/tidb/pull/20340)
+    - Fix corrupted default value for bit type column [#20340](https://github.com/pingcap/tidb/pull/20340)
     - Fix overflow error when convert bit to int64 [#20312](https://github.com/pingcap/tidb/pull/20312)
-    - Avoid propagate column optimization for Hybrid type. [#20297](https://github.com/pingcap/tidb/pull/20297)
+    - Avoid propagate column optimization for Hybrid type [#20297](https://github.com/pingcap/tidb/pull/20297)
     - Fix panic when storing outdated plans from plan cache [#20246](https://github.com/pingcap/tidb/pull/20246)
     - Fix a bug that `from_unixtime` + `union all` returns truncated result [#20240](https://github.com/pingcap/tidb/pull/20240)
     - Fix enum value convert to float failed [#20235](https://github.com/pingcap/tidb/pull/20235)
-    - Fix panic in RegionStore.accessStore. [#20210](https://github.com/pingcap/tidb/pull/20210)
+    - Fix panic in RegionStore.accessStore [#20210](https://github.com/pingcap/tidb/pull/20210)
     - Fix sort result for max unsigned int in batch-point-get [#20205](https://github.com/pingcap/tidb/pull/20205)
 
 + TiKV
 
     - Fix the bug that mutex conflict of encryption makes pd-worker deal with heartbeat slow [#8869](https://github.com/tikv/tikv/pull/8869)
     - Fix generating memory profile [#8790](https://github.com/tikv/tikv/pull/8790)
-    - Fixed failure to backup database on GCS when storage class was provided. [#8763](https://github.com/tikv/tikv/pull/8763)
+    - Fix failure to backup database on GCS when storage class was provided. [#8763](https://github.com/tikv/tikv/pull/8763)
+    - Fix the bug that a learner cannot find a leader after restarting or splitting [#8864](https://github.com/tikv/tikv/pull/8864)
 
 + TiFlash
 
@@ -131,7 +138,7 @@ TiDB version: 4.0.8
     - The TiDB error log now reports client connect/disconnect activity only under debug level verbosity. [#20321](https://github.com/pingcap/tidb/pull/20321)
     - Add metrics for coprocessor cache [#20293](https://github.com/pingcap/tidb/pull/20293)
     - Fix ambiguous year conversion [#20292](https://github.com/pingcap/tidb/pull/20292)
-    - Fixed an issue where the KV duration panel contains `store0` [#20260](https://github.com/pingcap/tidb/pull/20260)
+    - Fix an issue where the KV duration panel contains `store0` [#20260](https://github.com/pingcap/tidb/pull/20260)
     - Fix FLOAT data type: out of range data should not be inserted [#20252](https://github.com/pingcap/tidb/pull/20252)
     - Fix a bug that the generated column doesn't handle bad null value [#20216](https://github.com/pingcap/tidb/pull/20216)
     - Add pessimistic lock keys runtime information [#20199](https://github.com/pingcap/tidb/pull/20199)
@@ -142,14 +149,6 @@ TiDB version: 4.0.8
     - Fix an issue that alter enum/set type does not check constraint [#20046](https://github.com/pingcap/tidb/pull/20046)
     - Fix cop task runtime information is wrong in the concurrent executor. [#19947](https://github.com/pingcap/tidb/pull/19947)
     - Fix cannot select session scope explicitly with unchangeable variables [#19944](https://github.com/pingcap/tidb/pull/19944)
-
-+ TiKV
-
-    - Error_code: re-format metafile [#8877](https://github.com/tikv/tikv/pull/8877)
-    - Move counter metric processing into the scheduler worker. [#8872](https://github.com/tikv/tikv/pull/8872)
-    - Record the noop entry message temporarily like pending_votes in raftstore [#8864](https://github.com/tikv/tikv/pull/8864)
-    - Enable dynamically change config pessimistic-txn.pipelined [#8853](https://github.com/tikv/tikv/pull/8853)
-    - Enabling profiling features by default [#8801](https://github.com/tikv/tikv/pull/8801)
 
 + PD
 
