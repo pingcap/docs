@@ -99,7 +99,7 @@ monitoring_servers:
   - host: 172.16.5.134
 ```
 
-By default, TiUP is deployed on the binary running on the amd64 architecture. If the target machine is the arm64 architecture, you can configure it in the topology file:
+By default, TiUP is deployed as the binary files running on the amd64 architecture. If the target machine is the arm64 architecture, you can configure it in the topology file:
 
 ```yaml
 global:
@@ -110,7 +110,7 @@ tidb_servers:
     arch: "amd64"         # This machine uses the binary of the amd64 architecture
   - host: 172.16.5.139
     arch: "arm64"         # This machine uses the binary of the arm64 architecture
-  - host: 172.16.5.140    # Machines that are not configured with the arch field use the default value in global, which is arm64 in this case.
+  - host: 172.16.5.140    # Machines that are not configured with the arch field use the default value in the global field, which is arm64 in this case.
 
 ...
 ```
