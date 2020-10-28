@@ -28,11 +28,11 @@ The following table provides an overview of the feature development history of T
 | [Miscellaneous functions](/functions-and-operators/miscellaneous-functions.md)       | Y     | Y   | Y   | Y   | Y   |
 | [Operators](/functions-and-operators/operators.md)                                   | Y     | Y   | Y   | Y   | Y   |
 | [**Character sets**](/character-set-and-collation.md)                                                                   | **Development** | **4.0** | **3.1** | **3.0** | **2.1** |
-| [`utf8`](/character-set-and-collation.md)                                            | Y     | Y   | Y   | Y   | Y   |
-| [`utf8mb4`](/character-set-and-collation.md)                                         | Y     | Y   | Y   | Y   | Y   |
-| [`ascii`](/character-set-and-collation.md) [^1]                                      | Y     | Y   | Y   | Y   | Y   |
-| [`latin1`](/character-set-and-collation.md)                                          | Y     | Y   | Y   | Y   | Y   |
-| [`binary`](/character-set-and-collation.md)                                          | Y     | Y   | Y   | Y   | Y   |
+| `utf8`                                            | Y     | Y   | Y   | Y   | Y   |
+| `utf8mb4`                                         | Y     | Y   | Y   | Y   | Y   |
+| `ascii` [^1]                                      | Y     | Y   | Y   | Y   | Y   |
+| `latin1`                                          | Y     | Y   | Y   | Y   | Y   |
+| `binary`                                          | Y     | Y   | Y   | Y   | Y   |
 | **Collations**                                                                       | **Development** | **4.0** | **3.1** | **3.0** | **2.1** |
 | [`utf8_bin`](/character-set-and-collation.md)                                        | Y     | Y   | Y   | Y   | Y   |
 | [`utf8_general_ci`](/character-set-and-collation.md)                                 | Experimental | Experimental | N   | N   | N   |
