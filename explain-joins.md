@@ -191,7 +191,7 @@ Index Join performance is influenced by the following system variables:
 
 ## Hash Join
 
-A hash join reads and caches the data on the `Build` side of the join in a hash table, and then reads the data on the `Probe` side of the join, probing the hash table to access required rows. Hash joins require more memory to execute than Index Joins, but execute much faster when there are a lot of rows that need to be joined. The Hash Join operator is multi-threaded in TiDB, and executes in parallel.
+In a hash join operation, TiDB reads and caches the data on the `Build` side of the join in a hash table, and then reads the data on the `Probe` side of the join, probing the hash table to access required rows. Hash Joins require more memory to execute than Index Joins but execute much faster when there are a lot of rows that need to be joined. The Hash Join operator is multi-threaded in TiDB and executes in parallel.
 
 An example of Hash Join is as follows:
 
