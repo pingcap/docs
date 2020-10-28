@@ -74,7 +74,7 @@ Index Join is effective if the build side is small and the probe side is pre-ind
 {{< copyable "sql" >}}
 
 ```sql
-# DROP previously added index
+-- DROP previously added index
 ALTER TABLE t2 DROP INDEX t1_id;
 
 EXPLAIN ANALYZE SELECT /*+ INL_JOIN(t1, t2) */  * FROM t1 INNER JOIN t2 ON t1.id = t2.t1_id WHERE t1.int_col = 1;
