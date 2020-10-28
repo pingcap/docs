@@ -106,7 +106,7 @@ The following table provides an overview of the feature development history of T
 | **Data import and export**                                                           | **Development** | **4.0** | **3.1** | **3.0** | **2.1** |
 | [Fast Importer (TiDB Lightning)](/tidb-lightning/tidb-lightning-overview.md)         | Y     | Y   | Y   | Y   | Y   |
 | [mydumper logical dumper](/mydumper-overview.md)                                     | Deprecated | Deprecated | Y   | Y   | Y   |
-| [dumpling logical dumper](/dumpling-overview.md)                                     | Y     | Y   | N   | N   | N   |
+| [Dumpling logical dumper](/dumpling-overview.md)                                     | Y     | Y   | N   | N   | N   |
 | [Transactional `LOAD DATA`](/sql-statements/sql-statement-load-data.md)              | Y     | N   | N   | N   | N   |
 | [Database migration toolkit (DM)](/migration-overview.md)                            | Y     | Y   | Y   | Y   | Y   |
 | [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md)                                  | Deprecated | Deprecated | Y | Y | Y |
