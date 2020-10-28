@@ -39,6 +39,11 @@ TiDB version: 4.0.8
     - Enable dynamically change config pessimistic-txn.pipelined [#8853](https://github.com/tikv/tikv/pull/8853)
     - Enable profiling features by default [#8801](https://github.com/tikv/tikv/pull/8801)
 
++ PD
+
+    - Generate the metafile of errors [#3090](https://github.com/pingcap/pd/pull/3090)
+    - Add additional info for operator [#3009](https://github.com/pingcap/pd/pull/3009)
+
 + TiFlash
 
     - Add metrics about applying Raft logs
@@ -93,6 +98,11 @@ TiDB version: 4.0.8
     - Fix generating memory profile [#8790](https://github.com/tikv/tikv/pull/8790)
     - Fix failure to backup database on GCS when storage class was provided. [#8763](https://github.com/tikv/tikv/pull/8763)
     - Fix the bug that a learner cannot find a leader after restarting or splitting [#8864](https://github.com/tikv/tikv/pull/8864)
+
++ PD
+
+    - TiDB Dashboard: Fix a bug that KeyViz may panic [#3096](https://github.com/pingcap/pd/pull/3096)
+    - Fix the bug that PD might panic if there is down store with 10 minutes [#3069](https://github.com/pingcap/pd/pull/3069)
 
 + TiFlash
 
@@ -149,10 +159,3 @@ TiDB version: 4.0.8
     - Fix an issue that alter enum/set type does not check constraint [#20046](https://github.com/pingcap/tidb/pull/20046)
     - Fix cop task runtime information is wrong in the concurrent executor. [#19947](https://github.com/pingcap/tidb/pull/19947)
     - Fix cannot select session scope explicitly with unchangeable variables [#19944](https://github.com/pingcap/tidb/pull/19944)
-
-+ PD
-
-    - TiDB Dashboard: Fix a bug that KeyViz may panic [#3096](https://github.com/pingcap/pd/pull/3096)
-    - Generate the metafile of errors [#3090](https://github.com/pingcap/pd/pull/3090)
-    - Fix the bug that PD might panic if there is down store with 10 minutes [#3069](https://github.com/pingcap/pd/pull/3069)
-    - Add additional info for operator [#3009](https://github.com/pingcap/pd/pull/3009)
