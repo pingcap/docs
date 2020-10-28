@@ -37,7 +37,6 @@ TiDB version: 4.0.8
     - Add system table `table_storage_stats` [#20431](https://github.com/pingcap/tidb/pull/20431)
     - Add rpc runtime stats information for insert/update/replace statement. [#20430](https://github.com/pingcap/tidb/pull/20430)
     - Add executor information in `explain for connection` result. [#20384](https://github.com/pingcap/tidb/pull/20384)
-    - Config: check if valid storage by simple indexing [#20342](https://github.com/pingcap/tidb/pull/20342)
     - Duplicate order by conditions are eliminated [#20333](https://github.com/pingcap/tidb/pull/20333)
     - The TiDB error log now reports client connect/disconnect activity only under debug level verbosity. [#20321](https://github.com/pingcap/tidb/pull/20321)
     - Add metrics for coprocessor cache [#20293](https://github.com/pingcap/tidb/pull/20293)
