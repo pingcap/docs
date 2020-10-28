@@ -269,7 +269,7 @@ Hash Join performance is influenced by the following system variables:
 
 ## Merge Join
 
-Merge join is a special sort of join that applies when both sides of the join are read in sorted order. It can be described as similar to an _efficient zipper merge_, in that as data is read on both the `Build` and the `Probe` side of the join it can be compared as a streaming operation. Merge joins require far less memory than hash join, but do not execute in parallel.
+Merge join is a special sort of join that applies when both sides of the join are read in sorted order. It can be described as similar to an _efficient zipper merge_: as data is read on both the `Build` and the `Probe` sides of the join, the join operation works like a streaming operation. Merge joins require far less memory than hash join but do not execute in parallel.
 
 The following is an example:
 
