@@ -45,7 +45,7 @@ The following table provides an overview of the feature development history of T
 | [`binary`](/character-set-and-collation.md)                                          | Y     | Y   | Y   | Y   | Y   |
 | **Indexing and constraints**                                                         | **Development** | **4.0** | **3.1** | **3.0** | **2.1** |
 | [Expression indexes](/sql-statements/sql-statement-create-index.md#expression-index) | Experimental | Experimental | N   | N   | N   |
-| [Columnar Storage (TiFlash)](/tiflash/tiflash-overview.md)                           | Y     | Y   | Y   | N   | N   |
+| [Columnar storage (TiFlash)](/tiflash/tiflash-overview.md)                           | Y     | Y   | Y   | N   | N   |
 | [RocksDB engine](/storage-engine/rocksdb-overview.md)                                | Y     | Y   | Y   | Y   | Y   |
 | [Titan plugin](/storage-engine/titan-overview.md)                                    | Y     | Y   | Experimental | Experimental | Experimental |
 | [Invisible indexes](/sql-statements/sql-statement-add-index.md)                      | Y     | N   | N   | N   | N   |
