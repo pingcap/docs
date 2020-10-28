@@ -174,7 +174,7 @@ This section introduces the configuration items of Drainer. For the example of a
 ### initial-commit-ts
 
 * Specifies from which commit timestamp the replication task starts. This configuration is only applicable to the Drainer node that starts replication for the first time. If a checkpoint already exists downstream, the replication will be performed according to the time recorded in the checkpoint.
-* Default value: `-1`. Drainer will get a new timestamp from PD as the starting time.
+* Default value: `0`. Drainer will start pulling data from the earliest timestamp of each Pump.
 
 ### synced-check-time
 
