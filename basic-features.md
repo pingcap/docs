@@ -8,7 +8,7 @@ aliases: ['/docs/dev/basic-features/']
 
 The following table provides an overview of the feature development history of TiDB. Note that features under active development may change before final release.
 
-| Data types, functions and operators                                                  | Development | 4.0 | 3.1 | 3.0 | 2.1 |
+| Data types, functions, and operators                                                  | Development | 4.0 | 3.1 | 3.0 | 2.1 |
 |--------------------------------------------------------------------------------------|:-----:|:---:|:---:|:---:|:---:|
 | [Numeric types](/data-type-numeric.md)                                               | Y     | Y   | Y   | Y   | Y   |
 | [Date and time types](/data-type-date-and-time.md)                                   | Y     | Y   | Y   | Y   | Y   |
