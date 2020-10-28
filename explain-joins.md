@@ -3,7 +3,7 @@ title: Explain Statements That Use Joins
 summary: Learn about the execution plan information returned by the EXPLAIN statement in TiDB.
 ---
 
-# Explain Statements Using Joins
+# Explain Statements That Use Joins
 
 In TiDB, the SQL Optimizer needs to decide which order tables should be joined in, and what is the most efficient join algorithm for a particular SQL statement. The examples are based on the following sample data:
 
