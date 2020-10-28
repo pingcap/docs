@@ -1,5 +1,5 @@
 ---
-title: Explain Statements Using Joins
+title: Explain Statements That Use Joins
 summary: Learn about the execution plan information returned by the EXPLAIN statement in TiDB.
 ---
 
