@@ -122,7 +122,7 @@ Query OK, 0 rows affected (0.29 sec)
 6 rows in set (0.44 sec)
 ```
 
-In the above example, the index join is missing an index on `t1.int_col`. Once this index has been added, the index join improves from `0.61 sec` to `0.14 sec`:
+In the above example, the index join operation is missing an index on `t1.int_col`. Once this index is added, the performance of the operation improves from `0.61 sec` to `0.14 sec`, as the following result shows:
 
 ```sql
 # Re-add index
