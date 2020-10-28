@@ -1,9 +1,9 @@
 ---
-title: Explain Statements Using Indexes
+title: Explain Statements That Use Indexes
 summary: Learn about the execution plan information returned by the EXPLAIN statement in TiDB.
 ---
 
-# Explain Statements Using Indexes
+# Explain Statements That Use Indexes
 
 TiDB supports several operators which make use of indexes to speed up query execution. The examples in this document are based on the following sample data:
 
