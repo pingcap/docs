@@ -27,7 +27,7 @@ The following table provides an overview of the feature development history of T
 | [Window functions](/functions-and-operators/window-functions.md)                     | Y     | Y   | Y   | Y   | Y   |
 | [Miscellaneous functions](/functions-and-operators/miscellaneous-functions.md)       | Y     | Y   | Y   | Y   | Y   |
 | [Operators](/functions-and-operators/operators.md)                                   | Y     | Y   | Y   | Y   | Y   |
-| **Character sets**                                                                   | **Development** | **4.0** | **3.1** | **3.0** | **2.1** |
+| [**Character sets**](/character-set-and-collation.md)                                                                   | **Development** | **4.0** | **3.1** | **3.0** | **2.1** |
 | [`utf8`](/character-set-and-collation.md)                                            | Y     | Y   | Y   | Y   | Y   |
 | [`utf8mb4`](/character-set-and-collation.md)                                         | Y     | Y   | Y   | Y   | Y   |
 | [`ascii`](/character-set-and-collation.md) [^1]                                      | Y     | Y   | Y   | Y   | Y   |
