@@ -12,7 +12,7 @@ TiDB version: 4.0.8
 
 + TiDB
 
-    - Support new aggregate function APPROX_PERCENTILE [#20197](https://github.com/pingcap/tidb/pull/20197)
+    - Support the new aggregate function `APPROX_PERCENTILE` [#20197](https://github.com/pingcap/tidb/pull/20197)
 
 + TiFlash
 
@@ -28,23 +28,21 @@ TiDB version: 4.0.8
 
 + TiDB
 
-    - Prioritize low selectivity indexes in the greedy search procedure of `Selectivity()` [#20154](https://github.com/pingcap/tidb/pull/20154)
-    - Record more RPC runtime information in cop runtime stats [#19264](https://github.com/pingcap/tidb/pull/19264)
-    - Speed up parse slow-log when query slow_query. [#20556](https://github.com/pingcap/tidb/pull/20556)
-    - When verifying potential new plans, plan binding will now wait before timing out worse plans so that more debug information can be written to the TiDB error log. [#20530](https://github.com/pingcap/tidb/pull/20530)
-    - Add execution retry time in slow log and slow_query. [#20495](https://github.com/pingcap/tidb/pull/20495)
-    - Add execution retry count in slow log and slow_query. [#20494](https://github.com/pingcap/tidb/pull/20494)
-    - Add system table `table_storage_stats` [#20431](https://github.com/pingcap/tidb/pull/20431)
-    - Add rpc runtime stats information for insert/update/replace statement. [#20430](https://github.com/pingcap/tidb/pull/20430)
-    - Add executor information in `explain for connection` result. [#20384](https://github.com/pingcap/tidb/pull/20384)
-    - Duplicate order by conditions are eliminated [#20333](https://github.com/pingcap/tidb/pull/20333)
-    - The TiDB error log now reports client connect/disconnect activity only under debug level verbosity. [#20321](https://github.com/pingcap/tidb/pull/20321)
-    - Add metrics for coprocessor cache [#20293](https://github.com/pingcap/tidb/pull/20293)
-    - Add pessimistic lock keys runtime information [#20199](https://github.com/pingcap/tidb/pull/20199)
-    - Add two extra time-consuming sections in runtime information and trace span [#20187](https://github.com/pingcap/tidb/pull/20187)
-    - Add transaction commit runtime information in slow log [#20185](https://github.com/pingcap/tidb/pull/20185)
-    - Disable the index merge join due to it's not stable enough [#20599](https://github.com/pingcap/tidb/pull/20599)
-    - Add iso 8601 and timezone support for temporal string literal [#20670](https://github.com/pingcap/tidb/pull/20670)
+    - Prioritize low-selectivity indexes in the greedy search procedure of `Selectivity()` [#20154](https://github.com/pingcap/tidb/pull/20154)
+    - Record more RPC runtime information in Coprocessor runtime statistics [#19264](https://github.com/pingcap/tidb/pull/19264)
+    - Speed up parsing the slow log to improve query performance [#20556](https://github.com/pingcap/tidb/pull/20556)
+    - Wait for timeout execution plans during the plan binding stage to record more debug information when the SQL optimizer is verifying potential new plans [#20530](https://github.com/pingcap/tidb/pull/20530)
+    - Add the execution retry time in the slow log and the slow query result [#20495](https://github.com/pingcap/tidb/pull/20495) [#20494](https://github.com/pingcap/tidb/pull/20494)
+    - Add the `table_storage_stats` system table [#20431](https://github.com/pingcap/tidb/pull/20431)
+    - Add the RPC runtime statistical information for the `INSERT`/`UPDATE`/`REPLACE` statement [#20430](https://github.com/pingcap/tidb/pull/20430)
+    - Add the operator information in the result of `EXPLAIN FOR CONNECTION` [#20384](https://github.com/pingcap/tidb/pull/20384)
+    - Adjust the TiDB error log to the `DEBUG` level for the client connection/disconnection activities [#20321](https://github.com/pingcap/tidb/pull/20321)
+    - Add monitoring metrics for Coprocessor Cache [#20293](https://github.com/pingcap/tidb/pull/20293)
+    - Add the runtime information of pessimistic lock keys [#20199](https://github.com/pingcap/tidb/pull/20199)
+    - Add two extra sections of time consumption information in the runtime information and `trace` span [#20187](https://github.com/pingcap/tidb/pull/20187)
+    - Add the runtime information of transaction commit in the slow log [#20185](https://github.com/pingcap/tidb/pull/20185)
+    - Disable the index merge join [#20599](https://github.com/pingcap/tidb/pull/20599)
+    - Add the ISO 8601 and timezone supports for temporal string literal [#20670](https://github.com/pingcap/tidb/pull/20670)
 
 + TiKV
 
@@ -106,16 +104,17 @@ TiDB version: 4.0.8
     - Fix enum value convert to float failed [#20235](https://github.com/pingcap/tidb/pull/20235)
     - Fix panic in RegionStore.accessStore [#20210](https://github.com/pingcap/tidb/pull/20210)
     - Fix sort result for max unsigned int in batch-point-get [#20205](https://github.com/pingcap/tidb/pull/20205)
-    - Fix a bug that the coercibilities of enum and set are wrong. [#20364](https://github.com/pingcap/tidb/pull/20364)
+    - Fix a bug that the coercibilities of enum and set are wrong [#20364](https://github.com/pingcap/tidb/pull/20364)
     - Fix ambiguous year conversion [#20292](https://github.com/pingcap/tidb/pull/20292)
     - Fix an issue where the KV duration panel contains `store0` [#20260](https://github.com/pingcap/tidb/pull/20260)
     - Fix FLOAT data type: out of range data should not be inserted [#20252](https://github.com/pingcap/tidb/pull/20252)
     - Fix a bug that the generated column doesn't handle bad null value [#20216](https://github.com/pingcap/tidb/pull/20216)
     - Fix inaccurate error info for year column out of range. [#20170](https://github.com/pingcap/tidb/pull/20170)
-    - Fix unexpected 'invalid auto-id' error in pessimistic txn retry. [#20134](https://github.com/pingcap/tidb/pull/20134)
+    - Fix unexpected 'invalid auto-id' error in pessimistic txn retry [#20134](https://github.com/pingcap/tidb/pull/20134)
     - Fix an issue that alter enum/set type does not check constraint [#20046](https://github.com/pingcap/tidb/pull/20046)
-    - Fix cop task runtime information is wrong in the concurrent executor. [#19947](https://github.com/pingcap/tidb/pull/19947)
+    - Fix cop task runtime information is wrong in the concurrent executor [#19947](https://github.com/pingcap/tidb/pull/19947)
     - Fix cannot select session scope explicitly with unchangeable variables [#19944](https://github.com/pingcap/tidb/pull/19944)
+    - Duplicate order by conditions are eliminated [#20333](https://github.com/pingcap/tidb/pull/20333)
     - Fix the issue that the generated metric profile may fail due to the font size exceeded maximum value [#20637](https://github.com/pingcap/tidb/pull/20637)
 
 + TiKV
