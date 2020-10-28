@@ -103,7 +103,7 @@ TiDB version: 4.0.8
     - Fix the bug that the returned result is mistakenly truncated if `FROM_UNIXTIME` and `UNION ALL` are used together [#20240](https://github.com/pingcap/tidb/pull/20240)
     - Fix the issue that wrong results might be returned when the `Enum` type value is converted to the `Float` type [#20235](https://github.com/pingcap/tidb/pull/20235)
     - Fix the possible panic of `RegionStore.accessStore` [#20210](https://github.com/pingcap/tidb/pull/20210)
-    - Fix sort result for max unsigned int in batch-point-get [#20205](https://github.com/pingcap/tidb/pull/20205)
+    - Fix the wrong result returned when sorting the maximum unsigned integer in `BatchPointGet` [#20205](https://github.com/pingcap/tidb/pull/20205)
     - Fix a bug that the coercibilities of enum and set are wrong [#20364](https://github.com/pingcap/tidb/pull/20364)
     - Fix ambiguous year conversion [#20292](https://github.com/pingcap/tidb/pull/20292)
     - Fix an issue where the KV duration panel contains `store0` [#20260](https://github.com/pingcap/tidb/pull/20260)
