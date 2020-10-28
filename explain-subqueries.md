@@ -1,9 +1,9 @@
 ---
-title: Explain Statements Using Subqueries
+title: Explain Statements That Use Subqueries
 summary: Learn about the execution plan information returned by the EXPLAIN statement in TiDB.
 ---
 
-# Explain Statements Using Subqueries
+# Explain Statements That Use Subqueries
 
 TiDB performs [several optimizations](/subquery-optimization.md) to improve the performance of subqueries. In this section we will describe some of these optimizations for common subqueries, and how to interpret the output of `EXPLAIN`.
 
