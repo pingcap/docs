@@ -21,6 +21,7 @@ Install Zookeeper, Kafka and Schema Registry and make sure they are healthy. We 
 For this tutorial, we will use the [JDBC sink connector](https://docs.confluent.io/current/connect/kafka-connect-jdbc/sink-connector/index.html#load-the-jdbc-sink-connector) to sync TiDB data to a downstream relational database. We will use **SQLite** here as an example because of its simplicity.
 
 Make sure that JDBC sink connector is installed by running
+
 ```shell
 confluent local services connect connector list
 ```
@@ -30,6 +31,7 @@ The result should contain `jdbc-sink`.
 ### Step 2
 
 Save the following configuration into `jdbc-sink-connector.json`
+
 ```json
 {
   "name": "jdbc-sink-connector",
@@ -59,6 +61,7 @@ Then create an instance of the connector by running (assuming Kafka is listening
 ### Step 1 (Skip if TiCDC is already deployed)
 
 You can deploy TiCDC in one of the following ways:
+
 - [Deploy and install TiCDC using TiUP](/ticdc/manage-ticdc.md#deploy-and-install-ticdc-using-tiup)
 - [Use Binary](/ticdc/manage-ticdc.md#use-binary)
 
@@ -67,6 +70,7 @@ Make sure that your TiDB and TiCDC clusters are healthy before proceeding.
 ### Step 2
 
 Create a changefeed by `cdc cli`. Note that we assume PD, Kafka and Schema Registry are running on their respective default port. If yours are not, please adjust accordingly.
+
 ```shell 
 ./cdc cli changefeed create --pd="http://127.0.0.1:2379" --sink-uri="kafka://127.0.0.1:9092/testdb_test?protocol=avro" --opts "registry=http://127.0.0.1:8081"
 ```
@@ -76,11 +80,13 @@ Create a changefeed by `cdc cli`. Note that we assume PD, Kafka and Schema Regis
 ### Step 1
 
 Create database `testdb` in your TiDB cluster.
+
 ```sql
 CREATE DATABASE IF NOT EXISTS testdb;
 ```
 
 Create table `test` in `testdb`.
+
 ```sql
 USE testdb;
 CREATE TABLE test (
@@ -88,11 +94,13 @@ CREATE TABLE test (
     v TEXT
 );
 ```
+
 Note that `topics` in `jdbc-sink-connector.json` should be changed accordingly if you need to change the database name, or the table name.
 
 ### Step 2
 
 Insert data into TiDB.
+
 ```sql
 INSERT INTO test (id, v) values (1, 'a');
 INSERT INTO test (id, v) values (2, 'b');

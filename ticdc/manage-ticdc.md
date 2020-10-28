@@ -219,7 +219,6 @@ Sample configuration:
 
 In order to use the [data connectors](https://docs.confluent.io/current/connect/managing/connectors.html) provided by Confluent to stream data to other sinks such as Elasticseach, Cassandra, etc., the protocol `avro` should be used, and a url for [Confluent Schema Registry](https://www.confluent.io/product/confluent-platform/data-compatibility/) must be provided in `opts`. Note that `avro` protocol and Confluent integration are **experimental**.
 
-
 #### Configure sink URI with `pulsar`
 
 Sample configuration:
