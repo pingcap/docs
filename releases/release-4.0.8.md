@@ -30,7 +30,6 @@ TiDB version: 4.0.8
 
     - Prioritize low selectivity indexes in the greedy search procedure of `Selectivity()` [#20154](https://github.com/pingcap/tidb/pull/20154)
     - Record more RPC runtime information in cop runtime stats [#19264](https://github.com/pingcap/tidb/pull/19264)
-    - Introduce errors documentation generator to generate errors.toml [#20564](https://github.com/pingcap/tidb/pull/20564)
     - Speed up parse slow-log when query slow_query. [#20556](https://github.com/pingcap/tidb/pull/20556)
     - When verifying potential new plans, plan binding will now wait before timing out worse plans so that more debug information can be written to the TiDB error log. [#20530](https://github.com/pingcap/tidb/pull/20530)
     - Add execution retry time in slow log and slow_query. [#20495](https://github.com/pingcap/tidb/pull/20495)
@@ -91,7 +90,7 @@ TiDB version: 4.0.8
 
         - Support multi-byte CSV delimiters and separators [#406](https://github.com/pingcap/tidb-lightning/pull/406)
         - Speed up the restore process by disabling some PD schedulers [#408](https://github.com/pingcap/tidb-lightning/pull/408)
-        - Use the GC TTL API for checksum GC safepoint in v4.0 cluster to avoid the GC error [#396](https://github.com/pingcap/tidb-lightning/pull/396)
+        - Use the GC-TTL API for checksum GC safepoint in the v4.0 cluster to avoid the GC error [#396](https://github.com/pingcap/tidb-lightning/pull/396)
 
 ## Bug Fixes
 
@@ -122,38 +121,38 @@ TiDB version: 4.0.8
 
 + TiKV
 
-    - Fix the bug that mutex conflict of encryption makes pd-worker deal with heartbeat slow [#8869](https://github.com/tikv/tikv/pull/8869)
-    - Fix generating memory profile [#8790](https://github.com/tikv/tikv/pull/8790)
-    - Fix failure to backup database on GCS when storage class was provided. [#8763](https://github.com/tikv/tikv/pull/8763)
-    - Fix the bug that a learner cannot find a leader after restarting or splitting [#8864](https://github.com/tikv/tikv/pull/8864)
+    - Fix the bug that the mutex conflict in encryption causes pd-workers to process heartbeats slowly [#8869](https://github.com/tikv/tikv/pull/8869)
+    - Fix the issue that the memory profile is mistakenly generated [#8790](https://github.com/tikv/tikv/pull/8790)
+    - Fix the failure to back up databases on GCS when the storage class is specified [#8763](https://github.com/tikv/tikv/pull/8763)
+    - Fix the bug that a learner cannot find a leader when the Region is restarted or newly split [#8864](https://github.com/tikv/tikv/pull/8864)
 
 + PD
 
-    - TiDB Dashboard: Fix a bug that KeyViz may panic [#3096](https://github.com/pingcap/pd/pull/3096)
-    - Fix the bug that PD might panic if there is down store with 10 minutes [#3069](https://github.com/pingcap/pd/pull/3069)
+    - Fix a bug that Key Visualizer of TiDB Dashboard might cause PD panic in some cases [#3096](https://github.com/pingcap/pd/pull/3096)
+    - Fix the bug that PD might panic if a PD store is down for more than 10 minutes [#3069](https://github.com/pingcap/pd/pull/3069)
 
 + TiFlash
 
-    - Fix wrong timestamp in log message
-    - Fix the issue that when deployed with multi-paths, the wrong capacity make creating TiFlash replicas failed
-    - Fix the bug that TiFlash could throw errors about broken data files after the restart
-    - Fix the issue that broken files may be left on disk after TiFlash crashed
-    - Fix bug: waiting index during learner read may cost long time if proxy can not catch up latest raft lease info
-    - Fix bug: proxy write too much region state info to kv engine while replaying outdated raft log
+    - Fix the issue of wrong timestamp in the log message
+    - Fix the issue that during the multi-path TiFlash deployment, the wrong capacity causes the creation of TiFlash replicas to fail
+    - Fix the bug that TiFlash might throw errors about broken data files after restart
+    - Fix the issue that broken files might be left on disk after TiFlash crashes
+    - Fix the bug that it might take a long time to wait for index during learner reads if the proxy cannot catch up with the latest Raft lease information
+    - Fix the bug that the proxy writes too much Region state information to the key-value engine while replaying the outdated Raft log
 
 + Tools
 
-    + TiCDC
-
-        - Fix unexpected exit due to updating GC safepoint error [#979](https://github.com/pingcap/ticdc/pull/979)
-        - Fix task status is always flushed because of incorrect mod revision cache [#1017](https://github.com/pingcap/ticdc/pull/1017)
-        - Fix Maxwell empty messages [#978](https://github.com/pingcap/ticdc/pull/978)
-
     + Backup and Restore (BR)
 
-        - Fix send on closed channel panic during restore [#559](https://github.com/pingcap/br/pull/559)
+        - Fix the `send on closed channel` panic during restore [#559](https://github.com/pingcap/br/pull/559)
+
+    + TiCDC
+
+        - Fix the unexpected exit caused by the failure to update the GC safepoint [#979](https://github.com/pingcap/ticdc/pull/979)
+        - Fix the issue that the task status is unexpectedly flushed because of the incorrect mod revision cache [#1017](https://github.com/pingcap/ticdc/pull/1017)
+        - Fix the unexpected empty Maxwell messages [#978](https://github.com/pingcap/ticdc/pull/978)
 
     + TiDB Lightning
 
-        - Fix a bug about wrong column info [#420](https://github.com/pingcap/tidb-lightning/pull/420)
-        - Fix infinity loop in retry get region in local mode [#418](https://github.com/pingcap/tidb-lightning/pull/418)
+        - Fix the issue of wrong column information [#420](https://github.com/pingcap/tidb-lightning/pull/420)
+        - Fix the infinity loop that occurs when retrying to get Region information in the local mode [#418](https://github.com/pingcap/tidb-lightning/pull/418)
