@@ -18,7 +18,7 @@ Confluent Platform is a stream data platform with Kafka at its core. With the nu
 
 Install Zookeeper, Kafka and Schema Registry and make sure they are healthy. We recommend that you follow [the official guide](https://docs.confluent.io/current/quickstart/ce-quickstart.html#ce-quickstart) to deploy a local testing environment.
 
-For this tutorial, we will use the [JDBC sink connector](https://docs.confluent.io/current/connect/kafka-connect-jdbc/sink-connector/index.html#load-the-jdbc-sink-connector) to sync TiDB data to a downstream relational database. We will use **SQLite** here as an example because of its simplicity.
+For this tutorial, we will use the [JDBC sink connector](https://docs.confluent.io/current/connect/kafka-connect-jdbc/sink-connector/index.html#load-the-jdbc-sink-connector) to replicate TiDB data to a downstream relational database. We will use **SQLite** here as an example because of its simplicity.
 
 Make sure that JDBC sink connector is installed by running
 
