@@ -62,7 +62,7 @@ When you start the TiDB cluster, you can use command-line options or environment
 ## `--lease`
 
 - The duration of the schema lease. It is **dangerous** to change the value unless you know what you do.
-- Default: "45s"
+- Default: 45s
 
 ## `--log-file`
 
