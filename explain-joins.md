@@ -222,7 +222,7 @@ The execution process of `HashJoin_27` is as follows:
 4. Use the data of the `Probe` side to probe the Hash Table.
 5. Return qualified data to the user.
 
-The operator info column in the `explain` table also records other information about `Hash Join`, including whether the query is Inner Join or Outer Join, and what are the conditions of Join. In the above example, the query is an Inner Join, where the Join condition `equal:[eq(test.t1.id, test.t2.id)]` partly corresponds with the query statement `WHERE t1.id = t2.id`. The operator info of the other Join operators in the following examples is similar to this one.
+The `operator info` column in the `EXPLAIN` result table also records other information about `HashJoin_27`, including whether the query is Inner Join or Outer Join, and what are the conditions of Join. In the above example, the query is an Inner Join, where the Join condition `equal:[eq(test.t1.id, test.t2.id)]` partly corresponds with the query condition `WHERE t1.id = t2.id`. The operator info of the other Join operators in the following examples is similar to this one.
 
 ### Runtime Statistics
 
