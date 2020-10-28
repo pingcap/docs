@@ -206,6 +206,20 @@ The following are descriptions of parameters and parameter values that can be co
 | `cert` | The path of the certificate file needed to connect to the downstream Kafka instance (optional) |
 | `key` | The path of the certificate key file needed to connect to the downstream Kafka instance (optional) |
 
+#### Integrate TiCDC with Kafka Connect (Confluent Platform)
+
+Sample configuration:
+
+{{< copyable "shell-regular" >}}
+
+```shell
+--sink-uri="kafka://127.0.0.1:9092/cdc-test?kafka-version=2.4.0&protocol=avro&partition-num=6&max-message-bytes=67108864&replication-factor=1"
+--opts registry="http://127.0.0.1:8081"
+```
+
+In order to use the [data connectors](https://docs.confluent.io/current/connect/managing/connectors.html) provided by Confluent to stream data to other sinks such as Elasticseach, Cassandra, etc., the protocol `avro` should be used, and a url for [Confluent Schema Registry](https://www.confluent.io/product/confluent-platform/data-compatibility/) must be provided in `opts`. Note that `avro` protocol and Confluent integration are **experimental**.
+
+
 #### Configure sink URI with `pulsar`
 
 Sample configuration:
