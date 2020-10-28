@@ -70,8 +70,8 @@ The following table provides an overview of the feature development history of T
 | [Coprocessor cache](/coprocessor-cache.md)                                           | Y     | Experimental | N | N | N |
 | [Placement rules](/configure-placement-rules.md)                                     | Y     | Experimental | N   | N   | N   |
 | [Follower reads](/follower-read.md)                                                  | Y     | Y   | Y   | N   | N   |
-| [Read Historical Data (tidb_snapshot)](/read-historical-data.md)                     | Y     | Y   | Y   | Y   | Y   |
-| [Optimizer Hints](/optimizer-hints.md)                                               | Y     | Y   | Y   | Y   | Y   |
+| [Read historical data (tidb_snapshot)](/read-historical-data.md)                     | Y     | Y   | Y   | Y   | Y   |
+| [Optimizer hints](/optimizer-hints.md)                                               | Y     | Y   | Y   | Y   | Y   |
 | **Data definition language (DDL)**                                                   | **Development** | **4.0** | **3.1** | **3.0** | **2.1** |
 | Basic `CREATE`, `DROP`, `ALTER`, `RENAME`, `TRUNCATE`                                | Y     | Y   | Y   | Y   | Y   |
 | [Generated columns](/generated-columns.md)                                           | Experimental | Experimental | Experimental | Experimental | Experimental |
