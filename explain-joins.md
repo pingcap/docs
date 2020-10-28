@@ -176,7 +176,7 @@ Query OK, 0 rows affected (3.65 sec)
 
 > **Note:**
 >
-> In the above example, the SQL Optimizer selected the hash join plan which performs worse than the index join. Query Optimization is an [NP-complete problem](https://en.wikipedia.org/wiki/NP-completeness), and it is not unexpected that less than optimal plans may be chosen. If this is a frequent query, you may wish to use [SQL Plan Management](/sql-plan-management.md) to bind a hint to a query. This can be easier to manage than inserting hints into queries that your application sends to TiDB.
+> In the above example, the SQL Optimizer selects the hash join plan which performs worse than the index join. Query optimization is an [NP-complete problem](https://en.wikipedia.org/wiki/NP-completeness), and less-than-optimal plans might be chosen. If this is a frequent query, it is recommended to use [SQL Plan Management](/sql-plan-management.md) to bind a hint to a query, which can be easier to manage than inserting hints into queries that your application sends to TiDB.
 
 ### Variations of Index Join
 
