@@ -55,7 +55,6 @@ Then create an instance of the connector by running (assuming Kafka is listening
 
 ```
 
-
 ## Deploy and configure TiCDC
 
 ### Step 1 (Skip if TiCDC is already deployed)
