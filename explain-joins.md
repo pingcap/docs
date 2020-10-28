@@ -125,7 +125,7 @@ Query OK, 0 rows affected (0.29 sec)
 In the above example, the index join operation is missing an index on `t1.int_col`. Once this index is added, the performance of the operation improves from `0.61 sec` to `0.14 sec`, as the following result shows:
 
 ```sql
-# Re-add index
+-- Re-add index
 ALTER TABLE t2 ADD INDEX (t1_id);
 
 EXPLAIN ANALYZE SELECT /*+ INL_JOIN(t1, t2) */  * FROM t1 INNER JOIN t2 ON t1.id = t2.t1_id WHERE t1.int_col = 1;
