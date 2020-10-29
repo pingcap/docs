@@ -860,7 +860,7 @@ This variable is an alias for _transaction_isolation_.
 - Scope: SESSION
 - Default value: 0
 - After you set the value of this variable to `1`, the optimizer always prefers index scans over full table scans.
-- In the following example, the TiDB optimizer performs a full table scan before you enable the `tidb_opt_prefer_range_scan`. After you enable the `tidb_opt_prefer_range_scan`, the optimizer selects an index scan.
+- In the following example, before you enable `tidb_opt_prefer_range_scan`, the TiDB optimizer performs a full table scan . After you enable `tidb_opt_prefer_range_scan`, the optimizer selects an index scan.
 
 ```sql
 explain select * from t where age=5;
