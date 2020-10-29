@@ -84,6 +84,6 @@ However, it is hard to determine how much duration of `tidb_kv_request` is inclu
 * `tidb_kv_request.Get`: The duration of TiDB sending the `Get` type key-value requests.
 * `tidb_kv_request.Cop`: The duration of TiDB sending the `Cop` type key-value requests.
 
-The relation between `tidb_kv_request` and the `tidb_kv_request.Get` and `tidb_kv_request.Cop` nodes that point to it is not the parent-child inclusive type, but the component type. The name prefix of the child node is the name of the parent node plus `.xxx`, which is the child class of the parent node. It is appropriate to understand this case in the following way:
+`tidb_kv_request` does not include `tidb_kv_request.Get` and `tidb_kv_request.Cop` nodes as its child nodes, but consists of the latter two nodes. The name prefix of the child node is the name of the parent node plus `.xxx`, which means that the child node is the sub-class of the parent node. You can understand this case in the following way:
 
 The total duration of TiDB sending key-value requests is 14745.07 seconds, during which the key-value requests for the `Get` and `Cop` types respectively consume 9798.02 seconds and 4946.46 seconds.
