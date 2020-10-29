@@ -112,7 +112,7 @@ TiDB version: 4.0.8
     - Fix the inaccurate error information for the `YEAR` type data that is out of range [#20170](https://github.com/pingcap/tidb/pull/20170)
     - Fix the unexpected `invalid auto-id` error that might occur during the pessimistic transaction retry [#20134](https://github.com/pingcap/tidb/pull/20134)
     - Fix the issue that the constraint is not checked when using `ALTER TABLE` to change the `Enum`/`Set` type [#20046](https://github.com/pingcap/tidb/pull/20046)
-    - Fix the wrong runtime information of `cop` tasks recorded when multiple operators are used for concurrency operators [#19947](https://github.com/pingcap/tidb/pull/19947)
+    - Fix the wrong runtime information of `cop` tasks recorded when multiple operators are used for concurrency [#19947](https://github.com/pingcap/tidb/pull/19947)
     - Fix the issue that read-only system variables cannot be explicitly selected as the session variables [#19944](https://github.com/pingcap/tidb/pull/19944)
     - Fix the issue that the repetition of the `ORDER BY` condition might cause sub-optimal execution plans [#20333](https://github.com/pingcap/tidb/pull/20333)
     - Fix the issue that the generated metric profile might fail if the font size exceeds the maximum allowable value [#20637](https://github.com/pingcap/tidb/pull/20637)
