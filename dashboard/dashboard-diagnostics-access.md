@@ -1,14 +1,14 @@
 ---
 title: TiDB Dashboard Cluster Diagnostic Page
 summary: Learn how to use the cluster diagnostic page.
-aliases: ["/docs/dev/dashboard/dashboard-diagnostics-access/"]
+aliases: ['/docs/dev/dashboard/dashboard-diagnostics-access/']
 ---
 
 # TiDB Dashboard Cluster Diagnostics Page
 
 > **Note:**
 >
-> Diagnostics is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
+> Diagnostics in TiDB Dashboard is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
 
 The cluster diagnostics feature in TiDB Dashboard diagnoses the problems that might exist in a cluster within a specified time range, and summarizes the diagnostic results and the cluster-related load monitoring information into a diagnostic report. This diagnostic report is in the form of a web page. You can browse the page offline and circulate this page link after saving the page from a browser.
 
