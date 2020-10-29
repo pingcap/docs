@@ -223,7 +223,7 @@ Sample configuration:
 
 To use the [data connectors](https://docs.confluent.io/current/connect/managing/connectors.html) provided by Confluent to stream data to other sinks such as Elasticseach and Cassandra, you should use `avro` protocol and provide a URL for [Confluent Schema Registry](https://www.confluent.io/product/confluent-platform/data-compatibility/) in `opts`. Note that the `avro` protocol and Confluent integration are **experimental**.
 
-For detailed integration guide, see [Quick Start Guide on Integrating TiDB with Confluent Platform](/ticdc/confluent-integration-using-ticdc.md).
+For detailed integration guide, see [Quick Start Guide on Integrating TiDB with Confluent Platform](/ticdc/integrate-confluent-using-ticdc.md).
 
 #### Configure sink URI with `pulsar`
 
