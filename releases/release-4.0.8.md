@@ -4,7 +4,7 @@ title: TiDB 4.0.8 Release Notes
 
 # TiDB 4.0.8 Release Notes
 
-Release date: October 29, 2020
+Release date: October 30, 2020
 
 TiDB version: 4.0.8
 
