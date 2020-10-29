@@ -29,7 +29,7 @@ To integrate TiDB with Confluent Platform, you can use the TiCDC component with 
 
 ## Integration procedures
 
-1. Add the following configuration into `jdbc-sink-connector.json`:
+1. Save the following configuration into `jdbc-sink-connector.json`:
 
     {{< copyable "" >}}
 
