@@ -7,6 +7,10 @@ summary: Learn how to stream TiDB data to the Confluent Platform using TiCDC.
 
 This document introduces how to integrate TiDB to Confluent Platform using TiCDC.
 
+> **Note:**
+>
+> This is still an experimental feature. Do **NOT** use it in a production environment.
+
 [Confluent Platform](https://docs.confluent.io/current/platform.html) is a data streaming platform with Kafka at its core. With many official and third-party sink connectors, Confluent Platform enables you to easily connect stream sources to data sinks such as Elasticsearch, Cassandra, and other relational databases.
 
 To integrate TiDB with Confluent Platform, you can use the TiCDC component with the Avro protocol. TiCDC can stream data changes to Kafka in the format that Confluent Platform recognizes. For the detailed integration guide, see the following sections:
