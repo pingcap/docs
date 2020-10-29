@@ -217,7 +217,7 @@ Sample configuration:
 --opts registry="http://127.0.0.1:8081"
 ```
 
-To use the [data connectors](https://docs.confluent.io/current/connect/managing/connectors.html) provided by Confluent to stream data to other sinks such as Elasticseach and Cassandra, you should use `avro` protocol and provide a URL for [Confluent Schema Registry](https://www.confluent.io/product/confluent-platform/data-compatibility/) in `opts`. Note that the `avro` protocol and Confluent integration are **experimental**. Do **NOT** use them in the production environment.
+To use the [data connectors](https://docs.confluent.io/current/connect/managing/connectors.html) provided by Confluent to stream data to other sinks such as Elasticseach and Cassandra, you should use `avro` protocol and provide a URL for [Confluent Schema Registry](https://www.confluent.io/product/confluent-platform/data-compatibility/) in `opts`. Note that the `avro` protocol and Confluent integration are **experimental**. Do **NOT** use them in a production environment.
 
 For detailed integration guide, see [Quick Start Guide on Integrating TiDB with Confluent Platform](/ticdc/confluent-integration-using-ticdc.md).
 
