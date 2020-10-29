@@ -98,7 +98,7 @@ TiDB version: 4.0.8
     - Fix the issue that the `NULL` value is returned when converting data to the `BIT` type if the data is too long [#20363](https://github.com/pingcap/tidb/pull/20363)
     - Fix the corrupted default value for the `BIT` type column [#20340](https://github.com/pingcap/tidb/pull/20340)
     - Fix the overflow error that might occur when converting the `BIT` type to the `INT64` type [#20312](https://github.com/pingcap/tidb/pull/20312)
-    - Avoid the propagate column optimization for the hybrid type column [#20297](https://github.com/pingcap/tidb/pull/20297)
+    - Fix the possible wrong result of the propagate column optimization for the hybrid type column [#20297](https://github.com/pingcap/tidb/pull/20297)
     - Fix the panic that might occur when storing outdated plans from the plan cache [#20246](https://github.com/pingcap/tidb/pull/20246)
     - Fix the bug that the returned result is mistakenly truncated if `FROM_UNIXTIME` and `UNION ALL` are used together [#20240](https://github.com/pingcap/tidb/pull/20240)
     - Fix the issue that wrong results might be returned when the `Enum` type value is converted to the `Float` type [#20235](https://github.com/pingcap/tidb/pull/20235)
