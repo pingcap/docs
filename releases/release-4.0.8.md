@@ -69,7 +69,7 @@ TiDB version: 4.0.8
 
     + Backup and Restore (BR)
 
-        - Speed up restore by pipeline split and restore [#428](https://github.com/pingcap/br/pull/428)
+        - Speed up restore by pipeline split and restore [#427](https://github.com/pingcap/br/pull/427)
         - Support manually restoring PD schedulers [#530](https://github.com/pingcap/br/pull/530)
         - Use `pause` schedulers instead of `remove` schedulers [#551](https://github.com/pingcap/br/pull/551)
 
