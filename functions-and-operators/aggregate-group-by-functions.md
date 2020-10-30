@@ -30,6 +30,37 @@ This section describes the supported MySQL group (aggregate) functions in TiDB.
 - Unless otherwise stated, group functions ignore `NULL` values.
 - If you use a group function in a statement containing no `GROUP BY` clause, it is equivalent to grouping on all rows.
 
+Besides，TiDB also provides some extra aggregate functions:
+
+* APPROX_PERCENTILE(*expr*, *constant_integer_expr*)
+  
+  Return percentile of *expr*. The second argument indicates percentage value which is a constant integer in range `[1,100]`. A percentile Pk (k represents percentage) indicates that there are at least k% values in data set less than or equal to Pk. APPROX_PERCENTILE only supports [Numeric type](/data-type-numeric.md) and [Date and Time type](/data-type-date-and-time.md) as return type of *expr*. In other cases, APPROX_PERCENTILE will return NULL.
+
+  An example about how to calculate 50-th percentile of a `INT` column.
+
+{{< copyable "sql" >}}
+
+  ```sql
+  drop table if exists t;
+  create table t(a int);
+  insert into t values(1), (2), (3);
+  ```
+
+{{< copyable "sql" >}}
+  
+  ```sql
+  select approx_percentile(a, 50) from t;
+  ```
+
+  ```
+  +--------------------------+
+  | approx_percentile(a, 50) |
+  +--------------------------+
+  |                        2 |
+  +--------------------------+
+  1 row in set (0.00 sec)
+  ```
+
 ## GROUP BY modifiers
 
 TiDB does not currently support `GROUP BY` modifiers such as `WITH ROLLUP`. We plan to add support in the future. See [TiDB #4250](https://github.com/pingcap/tidb/issues/4250).
