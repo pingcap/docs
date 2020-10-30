@@ -5,7 +5,7 @@ summary: Learn how to stream TiDB data to the Confluent Platform using TiCDC.
 
 # Quick Start Guide on Integrating TiDB with Confluent Platform
 
-This document introduces how to integrate TiDB to Confluent Platform using TiCDC.
+This document introduces how to integrate TiDB to Confluent Platform using [TiCDC](/ticdc/ticdc-overview.md).
 
 > **Note:**
 >
