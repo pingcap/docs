@@ -30,36 +30,38 @@ This section describes the supported MySQL group (aggregate) functions in TiDB.
 - Unless otherwise stated, group functions ignore `NULL` values.
 - If you use a group function in a statement containing no `GROUP BY` clause, it is equivalent to grouping on all rows.
 
-Besides，TiDB also provides some extra aggregate functions:
+In addition, TiDB also provides the following aggregate functions:
 
-* APPROX_PERCENTILE(*expr*, *constant_integer_expr*)
-  
-  Return percentile of *expr*. The second argument indicates percentage value which is a constant integer in range `[1,100]`. A percentile Pk (k represents percentage) indicates that there are at least k% values in data set less than or equal to Pk. APPROX_PERCENTILE only supports [Numeric type](/data-type-numeric.md) and [Date and Time type](/data-type-date-and-time.md) as return type of *expr*. In other cases, APPROX_PERCENTILE will return NULL.
++ `APPROX_PERCENTILE(expr, constant_integer_expr)`
 
-  An example about how to calculate 50-th percentile of a `INT` column.
+    This function returns the percentile of `expr`. The `constant_integer_expr` argument indicates the percentage value which is a constant integer in the range of `[1,100]`. A percentile P<sub>k</sub> (`k` represents percentage) indicates that there are at least `k%` values in the data set that are less than or equal to P<sub>k</sub>.
 
-{{< copyable "sql" >}}
+    This function only supports the [numeric type](/data-type-numeric.md) and the [date and time type](/data-type-date-and-time.md) as the returned type of `expr`. For other returned types, `APPROX_PERCENTILE` only returns `NULL`.
 
-  ```sql
-  drop table if exists t;
-  create table t(a int);
-  insert into t values(1), (2), (3);
-  ```
+    The following example shows how to calculate the 50th percentile of a `INT` column:
 
-{{< copyable "sql" >}}
-  
-  ```sql
-  select approx_percentile(a, 50) from t;
-  ```
+    {{< copyable "sql" >}}
 
-  ```
-  +--------------------------+
-  | approx_percentile(a, 50) |
-  +--------------------------+
-  |                        2 |
-  +--------------------------+
-  1 row in set (0.00 sec)
-  ```
+    ```sql
+    drop table if exists t;
+    create table t(a int);
+    insert into t values(1), (2), (3);
+    ```
+
+    {{< copyable "sql" >}}
+
+    ```sql
+    select approx_percentile(a, 50) from t;
+    ```
+
+    ```sql
+    +--------------------------+
+    | approx_percentile(a, 50) |
+    +--------------------------+
+    |                        2 |
+    +--------------------------+
+    1 row in set (0.00 sec)
+    ```
 
 ## GROUP BY modifiers
 
