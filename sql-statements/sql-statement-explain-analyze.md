@@ -99,7 +99,7 @@ In addition to basic `time` and `loop` execution information, `execution info` a
 
 The execution information from a `Point_Get` operator will typically contain the following information:
 
-- `Get:{num_rpc:1, total_time:697.051µs}`: The number of RPC requests (`num_rpc`) of type `Get` sent to TiKV and the total time-consuming(`total_time`) of all RPC requests.
+- `Get:{num_rpc:1, total_time:697.051µs}`: The number of the `Get` RPC requests (`num_rpc`) sent to TiKV and the total duration (`total_time`) of all RPC requests.
 - `ResolveLock:{num_rpc:1, total_time:12.117495ms}`: If TiDB encounters a lock when reading data, it has to resolve the lock first, which generally occurs in the scenario of read-write conflict. This information indicates the duration of resolving locks.
 - `regionMiss_backoff:{num:11, total_time:2010 ms},tikvRPC_backoff:{num:11, total_time:10691 ms}`: When an RPC request fails, TiDB will wait the backoff time before retrying. Backoff statistics include the type of backoff (such as `regionMiss`, `tikvRPC`), the total time waiting (`total_time`) and the total number of backoffs (`num`).
 
