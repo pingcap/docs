@@ -97,7 +97,7 @@ In addition to basic `time` and `loop` execution information, `execution info` a
 
 ### Point_Get
 
-The execution information from a `Point_Get` operator will typically contain the following:
+The execution information from a `Point_Get` operator will typically contain the following information:
 
 - `Get:{num_rpc:1, total_time:697.051µs}`: The number of RPC requests (`num_rpc`) of type `Get` sent to TiKV and the total time-consuming(`total_time`) of all RPC requests.
 - `ResolveLock:{num_rpc:1, total_time:12.117495ms}`: When reading data encounters a lock, TiDB has to resolve lock first before reading data. Generally, it will appear in the scene of read-write conflict.
