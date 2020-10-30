@@ -22,7 +22,7 @@ TiDB version: 4.0.8
 
     + TiCDC
 
-        - Support snapshot-level consistency replication [#932](https://github.com/pingcap/ticdc/pull/932)
+        - Support snapshot-level consistent replication [#932](https://github.com/pingcap/ticdc/pull/932)
 
 ## Improvements
 
@@ -42,7 +42,7 @@ TiDB version: 4.0.8
     - Add two extra sections of time consumption information in the runtime information and `trace` span [#20187](https://github.com/pingcap/tidb/pull/20187)
     - Add the runtime information of transaction commit in the slow log [#20185](https://github.com/pingcap/tidb/pull/20185)
     - Disable the index merge join [#20599](https://github.com/pingcap/tidb/pull/20599)
-    - Add the ISO 8601 and timezone supports for temporal string literal [#20670](https://github.com/pingcap/tidb/pull/20670)
+    - Add the ISO 8601 and timezone supports for temporal string literals [#20670](https://github.com/pingcap/tidb/pull/20670)
 
 + TiKV
 
@@ -61,7 +61,7 @@ TiDB version: 4.0.8
 
     - Add monitoring metrics of Raft logs
     - Add monitoring metrics of memory usage for `cop` tasks
-    - Make the `min`/`max` index more accurate in the case of deleted data
+    - Make the `min`/`max` index more accurate when data is deleted
     - Improve query performance in the case of a small data volume
     - Add the `errors.toml` file to support the standard error code
 
@@ -106,7 +106,7 @@ TiDB version: 4.0.8
     - Fix the wrong result returned when sorting the maximum unsigned integer in `BatchPointGet` [#20205](https://github.com/pingcap/tidb/pull/20205)
     - Fix the bug that the coercibilities of `Enum` and `Set` are wrong [#20364](https://github.com/pingcap/tidb/pull/20364)
     - Fix an issue of ambiguous `YEAR` conversion [#20292](https://github.com/pingcap/tidb/pull/20292)
-    - Fix the issue of wrong reported result because the **KV duration** panel contains `store0` [#20260](https://github.com/pingcap/tidb/pull/20260)
+    - Fix the issue of wrong reported result that occurs when the **KV duration** panel contains `store0` [#20260](https://github.com/pingcap/tidb/pull/20260)
     - Fix the issue that the `Float` type data is mistakenly inserted regardless of the `out of range` error [#20252](https://github.com/pingcap/tidb/pull/20252)
     - Fix the bug that the generated column does not handle bad `NULL` values [#20216](https://github.com/pingcap/tidb/pull/20216)
     - Fix the inaccurate error information for the `YEAR` type data that is out of range [#20170](https://github.com/pingcap/tidb/pull/20170)
@@ -114,12 +114,12 @@ TiDB version: 4.0.8
     - Fix the issue that the constraint is not checked when using `ALTER TABLE` to change the `Enum`/`Set` type [#20046](https://github.com/pingcap/tidb/pull/20046)
     - Fix the wrong runtime information of `cop` tasks recorded when multiple operators are used for concurrency [#19947](https://github.com/pingcap/tidb/pull/19947)
     - Fix the issue that read-only system variables cannot be explicitly selected as the session variables [#19944](https://github.com/pingcap/tidb/pull/19944)
-    - Fix the issue that the repetition of the `ORDER BY` condition might cause sub-optimal execution plans [#20333](https://github.com/pingcap/tidb/pull/20333)
+    - Fix the issue that the duplicate `ORDER BY` condition might cause sub-optimal execution plans [#20333](https://github.com/pingcap/tidb/pull/20333)
     - Fix the issue that the generated metric profile might fail if the font size exceeds the maximum allowable value [#20637](https://github.com/pingcap/tidb/pull/20637)
 
 + TiKV
 
-    - Fix the bug that the mutex conflict in encryption causes pd-workers to process heartbeats slowly [#8869](https://github.com/tikv/tikv/pull/8869)
+    - Fix the bug that the mutex conflict in encryption causes pd-worker to process heartbeats slowly [#8869](https://github.com/tikv/tikv/pull/8869)
     - Fix the issue that the memory profile is mistakenly generated [#8790](https://github.com/tikv/tikv/pull/8790)
     - Fix the failure to back up databases on GCS when the storage class is specified [#8763](https://github.com/tikv/tikv/pull/8763)
     - Fix the bug that a learner cannot find a leader when the Region is restarted or newly split [#8864](https://github.com/tikv/tikv/pull/8864)
@@ -132,7 +132,7 @@ TiDB version: 4.0.8
 + TiFlash
 
     - Fix the issue of wrong timestamp in the log message
-    - Fix the issue that during the multi-path TiFlash deployment, the wrong capacity causes the creation of TiFlash replicas to fail
+    - Fix the issue that during the multi-disk TiFlash deployment, the wrong capacity causes the creation of TiFlash replicas to fail
     - Fix the bug that TiFlash might throw errors about broken data files after restart
     - Fix the issue that broken files might be left on disk after TiFlash crashes
     - Fix the bug that it might take a long time to wait for index during learner reads if the proxy cannot catch up with the latest Raft lease information
