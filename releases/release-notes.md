@@ -7,6 +7,7 @@ aliases: ['/docs/stable/releases/release-notes/','/docs/v4.0/releases/release-no
 
 ## 4.0
 
+- [4.0.8](/releases/release-4.0.8.md)
 - [4.0.7](/releases/release-4.0.7.md)
 - [4.0.6](/releases/release-4.0.6.md)
 - [4.0.5](/releases/release-4.0.5.md)
