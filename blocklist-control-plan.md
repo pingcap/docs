@@ -153,7 +153,7 @@ To judge whether the blocklist takes effect, observe the results of `EXPLAIN` (S
     {{< copyable "sql" >}}
 
     ```sql
-    explain SELECT * FROM t WHERE a < 2 AND a > 2;
+    EXPLAIN SELECT * FROM t WHERE a < 2 AND a > 2;
     ```
 
     ```sql
@@ -195,7 +195,7 @@ To judge whether the blocklist takes effect, observe the results of `EXPLAIN` (S
     {{< copyable "sql" >}}
 
     ```sql
-    explain SELECT * FROM t WHERE a < 2 and a > 2;
+    EXPLAIN SELECT * FROM t WHERE a < 2 and a > 2;
     ```
 
     ```sql
@@ -236,7 +236,7 @@ To judge whether the blocklist takes effect, observe the results of `EXPLAIN` (S
     {{< copyable "sql" >}}
 
     ```sql
-    explain SELECT * FROM t WHERE a < 2 AND a > 2;
+    EXPLAIN SELECT * FROM t WHERE a < 2 AND a > 2;
     ```
 
     ```sql
