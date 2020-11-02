@@ -369,10 +369,10 @@ Where `DATABASE` can be replaced with `SCHEMA`.
 Different databases can use different character sets and collations. Use the `character_set_database` and  `collation_database` to see the character set and collation of the current database:
 
 ```sql
-mysql> create schema test1 character set utf8 COLLATE uft8_general_ci;
+mysql> CREATE SCHEMA test1 CHARACTER SET utf8 COLLATE uft8_general_ci;
 Query OK, 0 rows affected (0.09 sec)
 
-mysql> use test1;
+mysql> USE test1;
 Database changed
 mysql> SELECT @@character_set_database, @@collation_database;
 +--------------------------|----------------------+
@@ -382,10 +382,10 @@ mysql> SELECT @@character_set_database, @@collation_database;
 +--------------------------|----------------------+
 1 row in set (0.00 sec)
 
-mysql> create schema test2 character set latin1 COLLATE latin1_general_ci;
+mysql> CREATE SCHEMA test2 CHARACTER SET latin1 COLLATE latin1_general_ci;
 Query OK, 0 rows affected (0.09 sec)
 
-mysql> use test2;
+mysql> USE test2;
 Database changed
 mysql> SELECT @@character_set_database, @@collation_database;
 +--------------------------|----------------------+
