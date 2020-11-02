@@ -175,7 +175,7 @@ To show all the indexes in a table, use the `SHOW INDEX` statement:
 {{< copyable "sql" >}}
 
 ```sql
-SHOW INDEX from person;
+SHOW INDEX FROM person;
 ```
 
 ### Delete an index
