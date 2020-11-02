@@ -19,11 +19,7 @@ This page walks you through the basic TiDB SQL statements such as DDL, DML and C
 To create a database, use the `CREATE DATABASE` statement:
 
 ```sql
-<<<<<<< HEAD
 CREATE DATABASE db_name [options];
-=======
-USE mysql;
->>>>>>> 8595ca53... Capitalize sql keywords in several files (#4117)
 ```
 
 For example, to create a database named `samp_db`:
@@ -114,13 +110,7 @@ DROP TABLE IF EXISTS person;
 
 ## Create, show, and drop an index
 
-<<<<<<< HEAD
 ### Create an index
-=======
-```sql
-SHOW INDEX FROM person;
-```
->>>>>>> 8595ca53... Capitalize sql keywords in several files (#4117)
 
 - To create an index for the column whose value is not unique, use the `CREATE INDEX` or `ALTER TABLE` statement:
 
