@@ -49,11 +49,7 @@ To delete a database, use the `DROP DATABASE` statement:
 {{< copyable "sql" >}}
 
 ```sql
-<<<<<<< HEAD
 DROP DATABASE samp_db;
-=======
-USE mysql;
->>>>>>> 8595ca53... Capitalize sql keywords in several files (#4117)
 ```
 
 ## Create, show, and drop a table
