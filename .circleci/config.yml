@@ -53,9 +53,7 @@ jobs:
           command: |
             sudo curl -sfL https://install.goreleaser.com/github.com/ValeLint/vale.sh | sh -s v2.5.1
             export PATH="./bin:$PATH"
-            ./bin/vale $(git diff-tree --name-only --no-commit-id -r upstream/master...HEAD -- '.md' ':(exclude).github/*')
-
-
+            vale test-file.md
   build:
     docker:
       - image: andelf/doc-build:0.1.9
