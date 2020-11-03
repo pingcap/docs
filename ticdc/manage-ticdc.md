@@ -201,10 +201,29 @@ The following are descriptions of parameters and parameter values that can be co
 | `partition-num`      | The number of the downstream Kafka partitions (Optional. The value must be **no greater than** the actual number of partitions. If you do not configure this parameter, the partition number is obtained automatically.) |
 | `max-message-bytes`  | The maximum size of data that is sent to Kafka broker each time (optional, `64MB` by default) |
 | `replication-factor` | The number of Kafka message replicas that can be saved (optional, `1` by default)                       |
-| `protocol` | The protocol with which messages are output to Kafka. The optional values are `default` and `canal` (`default` by default.)    |
+| `protocol` | The protocol with which messages are output to Kafka. The value options are `default`, `canal`, `avro`, and `maxwell` (`default` by default)    |
 | `ca` | The path of the CA certificate file needed to connect to the downstream Kafka instance (optional)  |
 | `cert` | The path of the certificate file needed to connect to the downstream Kafka instance (optional) |
 | `key` | The path of the certificate key file needed to connect to the downstream Kafka instance (optional) |
+
+#### Integrate TiCDC with Kafka Connect (Confluent Platform)
+
+> **Note:**
+>
+> This is still an experimental feature. Do **NOT** use it in a production environment.
+
+Sample configuration:
+
+{{< copyable "shell-regular" >}}
+
+```shell
+--sink-uri="kafka://127.0.0.1:9092/cdc-test?kafka-version=2.4.0&protocol=avro&partition-num=6&max-message-bytes=67108864&replication-factor=1"
+--opts registry="http://127.0.0.1:8081"
+```
+
+To use the [data connectors](https://docs.confluent.io/current/connect/managing/connectors.html) provided by Confluent to stream data to relational or non-relational databases, you should use the `avro` protocol and provide a URL for [Confluent Schema Registry](https://www.confluent.io/product/confluent-platform/data-compatibility/) in `opts`. Note that the `avro` protocol and Confluent integration are **experimental**.
+
+For detailed integration guide, see [Quick Start Guide on Integrating TiDB with Confluent Platform](/ticdc/integrate-confluent-using-ticdc.md).
 
 #### Configure sink URI with `pulsar`
 
@@ -648,7 +667,7 @@ dispatchers = [
     {matcher = ['test3.*', 'test4.*'], dispatcher = "rowid"},
 ]
 # For the sink of MQ type, you can specify the protocol format of the message.
-# Currently two protocols are supported: default and canal. The default protocol is TiCDC Open Protocol.
+# Currently four protocols are supported: default, canal, avro, and maxwell. The default protocol is TiCDC Open Protocol.
 protocol = "default"
 
 [cyclic-replication]
@@ -685,7 +704,7 @@ To use the cyclic replication feature, you need to configure the following param
 
 + `--cyclic-replica-id`: Specifies the data source (to be written) ID of the upstream cluster. Each cluster ID must be unique.
 + `--cyclic-filter-replica-ids`: Specifies the data source ID to be filtered, which is usually the downstream cluster ID.
-+ `--cyclic-sync-ddl`: Determines whether to replicate DDL statements to the downstream. DDL replication can only be enabled in the TiCDC component of one cluster.
++ `--cyclic-sync-ddl`: Determines whether to replicate DDL statements to the downstream.
 
 To create a cyclic replication task, take the following steps:
 
