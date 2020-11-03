@@ -214,7 +214,7 @@ EXPLAIN SELECT /*+ HASH_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 5 rows in set (0.00 sec)
 ```
 
-The execution process of `HashJoin_27` is as follows:
+For the execution process of `HashJoin_27`, TiDB performs the following operations in order:
 
 1. Cache the data of the `Build` side in memory.
 2. Construct a Hash Table on the `Build` side based on the cached data.
