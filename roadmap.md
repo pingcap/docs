@@ -63,6 +63,6 @@ aliases: ['/docs/ROADMAP/','/docs/roadmap/','/docs/stable/roadmap/','/docs/v4.0/
 - [ ] Support `EXCEPT`/`INTERSECT` operators [#18031](https://github.com/pingcap/tidb/issues/18031)
 - [ ] Support migrating the RDS (such as MySQL/Aurora) on cloud to TiDB [#18629](https://github.com/pingcap/tidb/issues/18629)
 
-## See also
+## TiDB Operator
 
-- [TiDB Operator Roadmap](https://docs.pingcap.com/tidb-in-kubernetes/dev/roadmap)
+See [TiDB Operator Roadmap](https://docs.pingcap.com/tidb-in-kubernetes/dev/roadmap).
