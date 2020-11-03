@@ -292,7 +292,7 @@ EXPLAIN SELECT /*+ MERGE_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 5 rows in set (0.00 sec)
 ```
 
-The execution process of the `Merge Join` operator is as follows:
+For the execution process of the `Merge Join` operator, TiDB performs the following operations:
 
 1. Read all the data of a Join Group from the `Build` side into the memory.
 2. Read the data of the `Probe` side.
