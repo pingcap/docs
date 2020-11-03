@@ -147,9 +147,9 @@ prepare:109.616µs, check_insert:{total_time:1.431678ms, mem_insert_time:667.878
 
 The `IndexJoin` operator has 1 outer worker and N inner workers for concurrent execution. The join result preserves the order of the outer table and supports batch lookup. The detailed execution process is as follows:
 
-1. The outer worker reads N outer rows, builds a task and sends it to the result channel and inner worker channel.
+1. The outer worker reads N outer rows, builds a task, and sends it to the result channel and the inner worker channel.
 2. The inner worker receives the task, reads key ranges from outer rows, and fetches inner rows. It then builds the inner row hash map.
-3. The main thread receives the task and waits for the inner worker to finish handling the task.
+3. The main `IndexJoin`  thread receives the task from the result channel and waits for the inner worker to finish handling the task.
 4. The main thread joins each outer row by looking up to the inner rows' hash map.
 
 The `IndexJoin` operator contains the following execution information:
@@ -160,24 +160,23 @@ inner:{total:4.297515932s, concurrency:5, task:17, construct:97.96291ms, fetch:4
 
 - `Inner`: the execution information of inner worker:
     - `total`: the total time-consuming by the inner worker.
-    - `concurrency`: the number of parallel execution inner workers.
+    - `concurrency`: the number of concurrent inner workers.
     - `task`: The total number of tasks processed by the inner worker.
     - `construct`: the preparation time before the inner worker reads the inner table rows corresponding to the task.
     - `fetch`: The total time-consuming it takes for the inner worker to read inner table rows.
     - `Build`: The total time-consuming it takes for the inner worker to construct the hash map of the corresponding inner table rows.
-- `probe`: the total time consumed by the main thread of `IndexJoin` to do join with the outer table rows and the hash map of inner table rows.
+- `probe`: the total time consumed by the main `IndexJoin` thread to perform join operations with the hash map of the outer table rows and the inner table rows.
 
 ### IndexHashJoin
 
-The execution process of the `IndexHashJoin` operator is similar to the `IndexJoin` operator. `IndexHashJoin` operator also has 1 outer worker and N inner workers to executed in parallel, but the output order is not promised. The specific execution process is as follows:
+The execution process of the `IndexHashJoin` operator is similar to that of the `IndexJoin` operator. `IndexHashJoin` operator also has 1 outer worker and N inner workers to execute in parallel, but the output order is not guaranteed to be consistent with that of the outer table. The detailed execution process is as follows:
 
-1. The outer worker reads N outer rows, builds a task and sends it to the
-inner worker channel.
-2. The inner worker receives the tasks and does 3 things for every task:
+1. The outer worker reads N outer rows, builds a task, and sends it to the inner worker channel.
+2. The inner worker receives the tasks from the inner worker channel and performs the following three operations in order for every task:
    a. builds hash table from the outer rows
    b. builds key ranges from outer rows and fetches inner rows
    c. probes the hash table and sends the join result to the result channel. Note: step a and step b are running concurrently.
-3. The main thread of `IndexHashJoin`  receives the join results from the result channel.
+3. The main thread of `IndexHashJoin` receives the join results from the result channel.
 
 The `IndexHashJoin` operator contains the following execution information:
 
@@ -189,19 +188,19 @@ inner:{total:4.429220003s, concurrency:5, task:17, construct:96.207725ms, fetch:
     - `total`: the total time-consuming by the inner worker.
     - `concurrency`: the number of inner workers.
     - `task`: The total number of tasks processed by the inner worker.
-    - `construct`: the prepare time before the inner worker reads the inner table rows.
+    - `construct`: the preparation time before the inner worker reads the inner table rows.
     - `fetch`: The total time-consuming of inner worker to read inner table rows.
     - `Build`: The total time-consuming of inner worker to construct the hash map of the outer table rows.
     - `join`:  The total time-consuming of inner worker to do join with the inner table rows and the hash map of outer table rows.
 
 ### HashJoin
 
-The `HashJoin` operator has an inner worker, an outer worker and N join workers. The specific execution process is as follows:
+The `HashJoin` operator has an inner worker, an outer worker, and N join workers. The detailed execution process is as follows:
 
 1. The inner worker reads inner table rows and constructs a hash map.
 2. The outer worker reads the outer table rows, then wraps it into a task and sends it to the join worker.
-3. Wait for the completion of the hash map construction in step 1.
-4. The join worker uses the outer table rows and hash map in the task to do join, and then sends the join result to the result channel.
+3. Wait for the hash map construction in step 1 to finish.
+4. The join worker uses the outer table rows and hash map in the task to perform join operations, and then sends the join result to the result channel.
 5. The main thread of `HashJoin` receives the join result from the result channel.
 
 The `HashJoin` operator contains the following execution information:
@@ -210,36 +209,36 @@ The `HashJoin` operator contains the following execution information:
 build_hash_table:{total:146.071334ms, fetch:110.338509ms, build:35.732825ms}, probe:{concurrency:5, total:857.162518ms, max:171.48271ms, probe:125.341665ms, fetch:731.820853ms}
 ```
 
-- `build_hash_table`: Read the data of the inner table and construct the execution information of the hash map:
-    - `total`: total time spent.
+- `build_hash_table`: Reads the data of the inner table and constructs the execution information of the hash map:
+    - `total`: The total time consumption.
     - `fetch`: The total time spent reading inner table data.
     - `build`: The total time spent constructing a hash map.
-- `probe`: execution information of join worker:
-    - `concurrency`: the number of join workers.
-    - `total`: the total time consumed by all join workers.
-    - `max`: The maximum time for a single join worker to execute.
-    - `probe`: The total time consumed for joining with outer table rows and hash map.
+- `probe`: The execution information of join workers:
+    - `concurrency`: The number of join workers.
+    - `total`: The total time consumed by all join workers.
+    - `max`: The longest time for a single join worker to execute.
+    - `probe`: The total time consumed for joining with outer table rows and the hash map.
     - `fetch`: The total time that the join worker waits to read the outer table rows data.
 
 ## Other execution info
 
 ### lock_keys execution information
 
-When executing a DML statement in a pessimistic transaction, the execution information of the operator may also include the execution information of `lock_keys`. For example:
+When a DML statement is executed in a pessimistic transaction, the execution information of the operator might also include the execution information of `lock_keys`. For example:
 
 ```
 lock_keys: {time:94.096168ms, region:6, keys:8, lock_rpc:274.503214ms, rpc_count:6}
 ```
 
-- `time`: The total time to execute the `lock_keys` operation.
-- `region`: The number of regions involved in executing the `lock_keys` operation.
-- `keys`: The number of `Key` that need `Lock`.
-- `lock_rpc`: The total time spent sending a RPC of type `Lock` to TiKV. Because multiple RPC requests can be sent in parallel, the total RPC time-consuming may be greater than the total time-consuming `lock_keys` operation.
-- `rpc_count`: The total number of RPCs of `Lock` type sent to TiKV.
+- `time`: The total duration of executing the `lock_keys` operation.
+- `region`: The number of Regions involved in executing the `lock_keys` operation.
+- `keys`: The number of `Key`s that need `Lock`.
+- `lock_rpc`: The total time spent sending an RPC request of the `Lock` type to TiKV. Because multiple RPC requests can be sent in parallel, the total RPC time consumption might be greater than the total time consumption of the `lock_keys` operation.
+- `rpc_count`: The total number of RPC requests of the `Lock` type sent to TiKV.
 
 ### commit_txn execution information
 
-When executing a write-type DML statement in a transaction with `autocommit=1`, the execution information of the write operator will also include the time-consuming information of the transaction commit. For example:
+When a write-type DML statement is executed in a transaction with `autocommit=1`, the execution information of the write operator will also include the duration information of the transaction commit. For example:
 
 ```
 commit_txn: {prewrite:48.564544ms, wait_prewrite_binlog:47.821579, get_commit_ts:4.277455ms, commit:50.431774ms, region_num:7, write_keys:16, write_byte:536}
