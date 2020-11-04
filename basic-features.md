@@ -125,4 +125,5 @@ The following table provides an overview of the feature development history of T
 | Point in time recovery (PITR)                                                        | Planned | N | N   | N   | N   |
 
 [^1]: TiDB incorrectly treats latin1 as a subset of utf8. See [TiDB #18955](https://github.com/pingcap/tidb/issues/18955) for more details.
+
 [^2]: See [Statement Reference](/sql-statements/sql-statement-select.md) for a full list of SQL statements supported.
