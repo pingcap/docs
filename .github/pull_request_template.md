@@ -1,8 +1,8 @@
 <!--Thanks for your contribution to TiDB documentation. Please answer the following questions.-->
 
-### For first-time contributors only
+### First-time contributors' checklist
 
-- [ ] I've signed [**Contributor License Agreement**](https://cla-assistant.io/pingcap/docs) that's required to accept this contribution.
+- [ ] I've signed [**Contributor License Agreement**](https://cla-assistant.io/pingcap/docs) that's required for repo owners to accept my contribution.
 
 ### What is changed, added or deleted? (Required)
 
