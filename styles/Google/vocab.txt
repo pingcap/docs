@@ -63,7 +63,6 @@ Fixe
 Fu
 Gbps
 Gengmei
-Github
 Gogs
 Goleveldb
 Goroutine
@@ -260,7 +259,6 @@ async
 atx
 autocommit
 automatially
-aws
 aylei
 backfilled
 backfilling
@@ -506,9 +504,7 @@ morgo
 mul
 mutex
 mxlxm
-mydumper
 myloader
-mysql
 mysqldump
 mysqli
 mysqlnd
@@ -533,7 +529,6 @@ nullable
 nulleq
 numa
 numactl
-nvme
 objectagg
 oltp
 onlymellb
