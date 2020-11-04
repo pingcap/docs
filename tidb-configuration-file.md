@@ -28,11 +28,6 @@ The TiDB configuration file supports more options than command-line parameters. 
 - Default value: `34359738368`
 - Requests that require more memory than this value are handled based on the behavior defined by `oom-action`.
 
-### `enable-streaming`
-
-- Determines whether to enable the data fetch mode of streaming in Coprocessor
-- Default value: `false`
-
 ### `lower-case-table-names`
 
 - Configures the value of the `lower-case-table-names` system variable.
