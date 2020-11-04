@@ -45,7 +45,7 @@ The following sections introduce the default monitoring information of **TiFlash
 - Request Handle Duration: The duration of all TiFlash instances processing coprocessor requests. The processing time is from starting to execute the coprocessor request to completing the execution.
 - Response Bytes/Seconds: The total bytes of the response from all TiFlash instances.
 - Cop task memory usage: The total memory usage of all TiFlash instances processing coprocessor requests.
-- Handling Request Number: The sum of the number of all TiFlash instances processing coprocessor requests. The classification of the requests is the same as that in the Request QPS.
+- Handling Request Number: The total number of all TiFlash instances processing coprocessor requests. The classification of the requests is the same as that of Request QPS.
 
 ## DDL
 
