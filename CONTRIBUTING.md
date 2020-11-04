@@ -66,6 +66,10 @@ Please perform the following steps to create your Pull Request to this repositor
 >
 > This section takes creating a PR to the `master` branch as an example. Steps of creating PRs to other branches are similar.
 
+### Step 0: Sign the CLA
+
+Your Pull Requests can only be merged after you sign the [Contributor License Agreement](https://cla-assistant.io/pingcap/docs) (CLA). Please make sure you finish signing the CLA before continuing the following steps.
+
 ### Step 1: Fork the repository
 
 1. Visit the project: <https://github.com/pingcap/docs>
