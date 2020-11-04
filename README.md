@@ -8,7 +8,7 @@ If you find documentation issues, feel free to [create an Issue](https://github.
 
 Currently, the official documentation supports two languages:
 
-- `en`: [documentation in English](TOC.md)
+- `en`: [documentation in English](/TOC.md)
 - `zh`: [documentation in Chinese](https://github.com/pingcap/docs-cn/blob/master/TOC.md)
 
 You can use Google Translate to view the documentation in different languages. For example:
