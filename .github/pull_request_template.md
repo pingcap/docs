@@ -33,4 +33,4 @@ If you are not sure of the options, leave it as it is. -->
 
 ### Sign the CLA
 
-If you are a **first-time-contributor** of this repo, make sure you **sign the [Contributor License Agreement](https://cla-assistant.io/pingcap/docs)** before we can accept your contribution.
+If you are a **first-time contributor** of this repo, make sure you **sign the** [Contributor License Agreement](https://cla-assistant.io/pingcap/docs) before we can accept your contribution.
