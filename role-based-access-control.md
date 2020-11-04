@@ -31,7 +31,7 @@ CREATE ROLE 'app_developer', 'app_read', 'app_write';
 
 For the role naming format and rule, see [TiDB User Account Management](/user-account-management.md).
 
-Roles are stored in the `mysql.user` table and the host name of the role name (if omitted) defaults to `'%'`. The name of the role you are trying to create must be unique; otherwise, an error is reported.
+Roles are stored in the `mysql.user` table and the host name part of the role name (if omitted) defaults to `'%'`. The name of the role you are trying to create must be unique; otherwise, an error is reported.
 
 To create a role, you need the `CREATE ROLE` or `CREATE USER` privilege.
 
