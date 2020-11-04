@@ -39,7 +39,7 @@ ANALYZE TABLE t1, t2;
 
 ## Index Join
 
-If the number of estimated rows that need to be joined is small (typically less than 10000 rows), it is preferable to use the Index Join method. This method of join works similar to the primary method of join used in MySQL. In the following example, the operator `├─TableReader_28(Build)` first reads the table `t1`. For each row that matches, TiDB will probe the table `t2`:
+If the number of estimated rows that need to be joined is small (typically less than 10000 rows), it is preferable to use the index join method. This method of join works similar to the primary method of join used in MySQL. In the following example, the operator `├─TableReader_28(Build)` first reads the table `t1`. For each row that matches, TiDB will probe the table `t2`:
 
 {{< copyable "sql" >}}
 
@@ -69,7 +69,7 @@ SELECT * FROM t1 INNER JOIN t2 ON t1.id=t2.t1_id WHERE t1.pad1 = 'value' and t2.
 
 In an inner join operation, TiDB implements join reordering and might access either `t1` or `t2` first. Assume that TiDB selects `t1` as the first table to apply the `build` step, and then TiDB is able to filter on the predicate `t1.col = 'value'` before probing the table `t2`. The filter for the predicate `t2.col='value'` will be applied on each probe of table `t2`, which might be less efficient than other join methods.
 
-Index Join is effective if the build side is small and the probe side is pre-indexed and large. Consider the following query where an index join performs worse than a hash join and is not chosen by the SQL Optimizer:
+Index join is effective if the build side is small and the probe side is pre-indexed and large. Consider the following query where an index join performs worse than a hash join and is not chosen by the SQL Optimizer:
 
 {{< copyable "sql" >}}
 
@@ -180,20 +180,20 @@ Query OK, 0 rows affected (3.65 sec)
 
 ### Variations of Index Join
 
-An index join operation using the hint [`INL_JOIN`](/optimizer-hints.md#inl_joint1_name--tl_name-) creates a hash table of the intermediate results before joining on the outer table. TiDB also supports creating a hash table on the outer table using the hint [`INL_HASH_JOIN`](/optimizer-hints.md#inl_hash_join). If the column sets on the inner table match the columns of the outer table, the [`INL_MERGE_JOIN`](/optimizer-hints.md#inl_merge_join) index join can apply. Each of these variations of Index Join is automatically selected by the SQL Optimizer.
+An index join operation using the hint [`INL_JOIN`](/optimizer-hints.md#inl_joint1_name--tl_name-) creates a hash table of the intermediate results before joining on the outer table. TiDB also supports creating a hash table on the outer table using the hint [`INL_HASH_JOIN`](/optimizer-hints.md#inl_hash_join). If the column sets on the inner table match the columns of the outer table, the [`INL_MERGE_JOIN`](/optimizer-hints.md#inl_merge_join) index join can apply. Each of these variations of index join is automatically selected by the SQL Optimizer.
 
 ### Configuration
 
-Index Join performance is influenced by the following system variables:
+Index join performance is influenced by the following system variables:
 
 * [`tidb_index_join_batch_size`](/system-variables.md#tidb_index_join_batch_size) (default value: `25000`) - the batch size of `index lookup join` operations.
 * [`tidb_index_lookup_join_concurrency`](/system-variables.md#tidb_index_lookup_join_concurrency) (default value: `4`) - the number of concurrent index lookup tasks.
 
 ## Hash Join
 
-In a hash join operation, TiDB reads and caches the data on the `Build` side of the join in a hash table, and then reads the data on the `Probe` side of the join, probing the hash table to access required rows. Hash Joins require more memory to execute than Index Joins but execute much faster when there are a lot of rows that need to be joined. The Hash Join operator is multi-threaded in TiDB and executes in parallel.
+In a hash join operation, TiDB reads and caches the data on the `Build` side of the join in a hash table, and then reads the data on the `Probe` side of the join, probing the hash table to access required rows. Hash joins require more memory to execute than index joins but execute much faster when there are a lot of rows that need to be joined. The hash join operator is multi-threaded in TiDB and executes in parallel.
 
-An example of Hash Join is as follows:
+An example of hash join is as follows:
 
 {{< copyable "sql" >}}
 
@@ -262,7 +262,7 @@ Query OK, 0 rows affected (0.00 sec)
 
 ### Configuration
 
-Hash Join performance is influenced by the following system variables:
+Hash join performance is influenced by the following system variables:
 
 * [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) (default value: 1GB) - if the memory quota for a query is exceeded, TiDB will attempt to spill the `Build` operator of a hash join to disk to save memory.
 * [`tidb_hash_join_concurrency`](/system-variables.md#tidb_hash_join_concurrency) (default value: `5`) - the number of concurrent hash join tasks.
@@ -292,7 +292,7 @@ EXPLAIN SELECT /*+ MERGE_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 5 rows in set (0.00 sec)
 ```
 
-For the execution process of the `Merge Join` operator, TiDB performs the following operations:
+For the execution process of the merge join operator, TiDB performs the following operations:
 
 1. Read all the data of a Join Group from the `Build` side into the memory.
 2. Read the data of the `Probe` side.
