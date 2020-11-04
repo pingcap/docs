@@ -35,3 +35,23 @@ This architecture is highly available. The distribution of Region leaders is res
     - Because the data consistency is achieved by the Raft algorithm, when two DCs in the same city fail at the same time, only one surviving replica remains in the disaster recovery DC in another city (San Francisco). This cannot meet the requirement of the Raft algorithm that most replicas survive. As a result, the cluster can be temporarily unavailable. Maintenance staff needs to recover the cluster from the one surviving replica and a small amount of hot data that has not been replicated will be lost. But this case is a rare occurrence.
     - Because the ISP dedicated network is used, the network infrastructure of this architecture has a high cost.
     - Five replicas are configured in three DCs in two cities, data redundancy increases, which brings a higher storage cost.
+
+## Instance of Join Reorder algorithm
+
+Take the three tables above (t1, t2, and t3) as an example.
+
+First, TiDB obtains all the nodes that participates in the join operation, and sorts the nodes in the ascending order of row numbers.
+
+![join-reorder-1](/media/join-reorder-1.png)
+
+After that, the table with the least rows is selected and joined with other two tables respectively. By comparing the sizes of the output result sets, TiDB selects the pair with a smaller result set.
+
+![join-reorder-2](/media/join-reorder-2.png)
+
+Then TiDB enters the next round of selection. If you try to join four tables, TiDB continues to compare the sizes of the output result sets and selects the pair with a smaller result set.
+
+In this case only three tables are joined, so TiDB gets the final join result.
+
+![join-reorder-3](/media/join-reorder-3.png)
+
+The above process is the Join Reorder algorithm currently used in TiDB.
