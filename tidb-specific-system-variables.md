@@ -197,12 +197,6 @@ set @@global.tidb_distsql_scan_concurrency = 10
 - Default value: 0
 - This variable is used to set whether to record all the SQL statements in the log.
 
-### tidb_enable_streaming
-
-- Scope: SERVER
-- Default value: 0
-- This variable is used to set whether to enable Streaming.
-
 ### tidb_retry_limit
 
 - Scope: SESSION | GLOBAL
