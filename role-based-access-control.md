@@ -291,6 +291,7 @@ For example, you can grant default roles to `rw_user1'@'localhost`:
 
 ```sql
 SET DEFAULT ROLE ALL TO 'rw_user1'@'localhost';
+```
 
 After `rw_user1@localhost` logs in, you can execute the following statement:
 
