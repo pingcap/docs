@@ -51,6 +51,8 @@ jobs:
       - run:
           name: "Vale linter"
           command: |
+            git remote add upstream https://github.com/pingcap/docs.git
+            git fetch upstream
             sudo curl -sfL https://install.goreleaser.com/github.com/ValeLint/vale.sh | sh -s v2.5.1
             export PATH="./bin:$PATH"
             vale $(git diff-tree --name-only --no-commit-id -r upstream/master..HEAD -- '*.md' ':(exclude).github/*')
