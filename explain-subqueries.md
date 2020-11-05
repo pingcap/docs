@@ -72,7 +72,7 @@ The result above shows that TiDB performs an index join operation (merge variant
 
 ## Inner join (unique subquery)
 
-In the previous example, aggregation was required to ensure that the values of `t1_id` were unique before joining against the table `t1`. But in the following example `t3.t1_id` is already guaranteed unique because of a `UNIQUE` constraint:
+In the previous example, aggregation is required to ensure that the values of `t1_id` are unique before joining against the table `t1`. But in the following example, `t3.t1_id` is already guaranteed unique because of a `UNIQUE` constraint:
 
 ```sql
 EXPLAIN SELECT * FROM t1 WHERE id IN (SELECT t1_id FROM t3);
