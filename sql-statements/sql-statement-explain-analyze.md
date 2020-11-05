@@ -150,7 +150,7 @@ The `IndexJoin` operator has 1 outer worker and N inner workers for concurrent e
 1. The outer worker reads N outer rows, builds a task, and sends it to the result channel and the inner worker channel.
 2. The inner worker receives the task, reads key ranges from outer rows, and fetches inner rows. It then builds the inner row hash map.
 3. The main `IndexJoin`  thread receives the task from the result channel and waits for the inner worker to finish handling the task.
-4. The main thread joins each outer row by looking up to the inner rows' hash map.
+4. The main `IndexJoin` thread joins each outer row by looking up to the inner rows' hash map.
 
 The `IndexJoin` operator contains the following execution information:
 
