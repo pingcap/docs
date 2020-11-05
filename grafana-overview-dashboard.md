@@ -39,7 +39,6 @@ PD | Hot write Region's leader distribution | The total number of leaders who ar
 PD | Hot read Region's leader distribution | The total number of leaders who are the read hotspots on each TiKV instance.  |
 PD | Region heartbeat report | The count of heartbeats reported to PD per instance. |
 PD | 99% Region heartbeat latency | The heartbeat latency per TiKV instance (P99). |
-TiDB | Statement OPS | The number of different types of SQL statements executed per second, which is counted according to `SELECT`, `INSERT`, `UPDATE`, and other types of statements. |
 TiDB | Statement OPS | the total number of executed SQL statements, including `SELECT`, `INSERT`, `UPDATE` and so on |
 TiDB | Duration | the execution time of a SQL statement |
 TiDB | QPS By Instance | the QPS on each TiDB instance |
