@@ -95,9 +95,9 @@ Pessimistic transactions in TiDB behave similarly to those in MySQL. See the min
 
 4. After executing `START TRANSACTION WITH CONSISTENT SNAPSHOT`, MySQL can still read the tables that are created later in other transactions, while TiDB cannot.
 
-5. The autocommit transactions do not support the pessimistic locking.
+5. The autocommit transactions prefer the optimistic locking.
 
-    None of the autocommit statements acquire the pessimistic lock. These statements do not display any difference in the user side, because the nature of pessimistic transactions is to turn the retry of the whole transaction into a single DML retry. The autocommit transactions automatically retry even when TiDB closes the retry, which has the same effect as pessimistic transactions.
+    When using the pessimistic transaction model, the autocommit transactions first commit using the optimistic transaction mode with less overhead. If a write conflict occurs, the autocommit transactions use pessimistic transaction mode when retrying. Thus, if `tidb_retry_limit = 0`, the autocommit transaction still reports the `Write Conflict` error when a write conflict occurs.
 
     The autocommit `SELECT FOR UPDATE` statement does not wait for lock, either.
 
