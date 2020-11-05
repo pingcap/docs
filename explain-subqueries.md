@@ -97,7 +97,7 @@ Semantically because `t3.t1_id` is guaranteed unique, it can be executed directl
 
 In the previous two examples, TiDB is able to perform an `INNER JOIN` operation after the data inside the subquery is made unique (via `HashAgg`) or guaranteed unique. Both joins are performed using an Index Join (merge variant).
 
-In this example, TiDB choses to use a different strategy:
+In this example, TiDB chooses a different execution plan:
 
 ```sql
 EXPLAIN SELECT * FROM t1 WHERE id IN (SELECT t1_id FROM t2 WHERE t1_id != t1.int_col);
