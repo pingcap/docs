@@ -77,6 +77,8 @@ TiCDC only replicates the table that has at least one **valid index**. A **valid
     - Every column of the index is explicitly defined as non-nullable (`NOT NULL`).
     - The index does not have the virtual generated column (`VIRTUAL GENERATED COLUMNS`).
 
+Since v4.0.8, TiCDC supports replicating the table **without a valid index** by modifying the task configuration. However, the guarantee of data consistency will be compromised to some extent. For more details, see [Replicate the table without a valid index](/ticdc/manage-ticdc.md#replicate-the-table-without-a-valid-index).
+
 ### Unsupported scenarios
 
 Currently, The following scenarios are not supported:
