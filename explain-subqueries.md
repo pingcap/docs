@@ -117,7 +117,7 @@ EXPLAIN SELECT * FROM t1 WHERE id IN (SELECT t1_id FROM t2 WHERE t1_id != t1.int
 6 rows in set (0.00 sec)
 ```
 
-Here we can see that TiDB is using a `semi join`. Semi-join differs from an `INNER JOIN`, in that it will only permit the first value on the right key (`t2.t1_id`). i.e. the duplicates are eliminated as part of the join operator. The join algorithm is also a Merge Join, which is like an efficient zipper-merge as it reads data from both the left and the right side in sorted order.
+From the result above, you can see that TiDB uses a `Semi Join` algorithm. Semi-join differs from `INNER JOIN`: semi-join only permits the first value on the right key (`t2.t1_id`), which means that the duplicates are eliminated as a part of the join operator task. The join algorithm is also Merge Join, which is like an efficient zipper-merge as the operator reads data from both the left and the right side in sorted order.
 
 The query is said to be a _correlated subquery_ because the column `t1.int_col` is pushed directly into the subquery, but actually from the `EXPLAIN` output we can see that it is not correlated at all. This is because TiDB has rewritten `t1_id != t1.int_col` to `t1.id != t1.int_col` and moved it out of the subquery. This is a lot more efficient to process, because TiDB can perform this check in `└─Selection_21` as it is reading from the table `t1`.
 
