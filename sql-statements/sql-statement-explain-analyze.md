@@ -93,7 +93,7 @@ EXPLAIN ANALYZE SELECT * FROM t1;
 
 ## Execution information of operators
 
-In addition to basic `time` and `loop` execution information, `execution info` also contains operator-specific execution information, which mainly includes the time-consuming information of the operator sending RPC and other steps.
+In addition to the basic `time` and `loop` execution information, `execution info` also contains operator-specific execution information, which mainly includes the time consumed for the operator to send RPC requests and the duration of other steps.
 
 ### Point_Get
 
