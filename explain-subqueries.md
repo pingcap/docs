@@ -95,7 +95,7 @@ Semantically because `t3.t1_id` is guaranteed unique, it can be executed directl
 
 ## Semi join (correlated subquery)
 
-In the previous two examples, TiDB was able to perform an `INNER JOIN` after the data inside the subquery was made unique (via `HashAgg`) or guaranteed unique. Both joins were performed using an Index Join (merge variant).
+In the previous two examples, TiDB is able to perform an `INNER JOIN` operation after the data inside the subquery is made unique (via `HashAgg`) or guaranteed unique. Both joins are performed using an Index Join (merge variant).
 
 In this example, TiDB choses to use a different strategy:
 
