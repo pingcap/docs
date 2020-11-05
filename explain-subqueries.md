@@ -68,7 +68,7 @@ EXPLAIN SELECT * FROM t1 WHERE id IN (SELECT t1_id FROM t2);
 7 rows in set (0.00 sec)
 ```
 
-TiDB uses an Index Join (merge variant) and first reads the index on `t2.t1_id`. The values of `t1_id` are de-duplicated inside TiKV first as part of `└─HashAgg_31`, and then deduplicated again in TiDB as part of `├─HashAgg_38(Build)`. The deduplication is performed by the aggregation function `firstrow(test.t2.t1_id)`. The result is then joined against the table `t1` against its `PRIMARY KEY`.
+The result above shows that TiDB performs an index join operation (merge variant) that starts by reading the index on `t2.t1_id`. The values of `t1_id` are deduplicated inside TiKV first as a part of the `└─HashAgg_31` operator task, and then deduplicated again in TiDB as a part of the `├─HashAgg_38(Build)` operator task. The deduplication is performed by the aggregation function `firstrow(test.t2.t1_id)`. The result is then joined against the `t1` table's `PRIMARY KEY`.
 
 ## Inner join (unique subquery)
 
