@@ -68,8 +68,6 @@ In a `SELECT` statement, you can use an identifier or a string to specify an ali
 SELECT 1 AS `identifier`, 2 AS 'string';
 ```
 
-{{< copyable "sql" >}}
-
 ```sql
 +------------+--------+
 | identifier | string |
@@ -79,7 +77,7 @@ SELECT 1 AS `identifier`, 2 AS 'string';
 1 row in set (0.00 sec)
 ```
 
-For more information, see [MySQL Documentation](https://dev.mysql.com/doc/refman/5.7/en/identifiers.html).
+For more information, see [MySQL Schema Object Names](https://dev.mysql.com/doc/refman/5.7/en/identifiers.html).
 
 ## Identifier qualifiers
 
@@ -115,4 +113,4 @@ Instead of:
 `table_name.col_name`
 ```
 
-For more information, see [MySQL Documentation](https://dev.mysql.com/doc/refman/5.7/en/identifier-qualifiers.html).
+For more information, see [MySQL Schema Object Names](https://dev.mysql.com/doc/refman/5.7/en/identifier-qualifiers.html).
