@@ -107,7 +107,7 @@ The execution information from a `Point_Get` operator will typically contain the
 
 The execution information of the `Batch_Point_Get` operator is similar to the `Point_Get` operator, but `Batch_Point_Get` generally sends `BatchGet` RPC requests to TiKV to read the data.
 
-- `BatchGet:{num_rpc:2, total_time:83.13µs}`: The number of RPC requests (`num_rpc`) of type `BatchGet` sent to TiKV and the total time-consuming (`total_time`) of all RPC requests.
+- `BatchGet:{num_rpc:2, total_time:83.13µs}`: The number of RPC requests (`num_rpc`) of type `BatchGet` sent to TiKV and the total time consumed (`total_time`) of all RPC requests.
 
 ### TableReader
 
@@ -119,9 +119,9 @@ cop_task: {num: 6, max: 1.07587ms, min: 844.312µs, avg: 919.601µs, p95: 1.0758
 
 - `cop_task`: Contains the information about executing cop task, such as:
     - `num`: the number of cop tasks.
-    - `max`, `min`, `avg`, `p95`: the maximum, minimum, average and P95 value of the execution time-consuming of executing cop tasks.
+    - `max`, `min`, `avg`, `p95`: the maximum, minimum, average and P95 value of the execution time consumed of executing cop tasks.
     - `max_proc_keys`, `p95_proc_keys`: The maximum, P95 value of tikv scan key/value in all cop tasks. If the difference between max and p95 is large, the data distribution may be not balanced.
-    - `rpc_num`, `rpc_time`: The total number and total time-consuming of `Cop` RPC requests sent to TiKV.
+    - `rpc_num`, `rpc_time`: The total number and total time consumed of `Cop` RPC requests sent to TiKV.
     - `copr_cache_hit_ratio`: Coprocessor Cache cache hit rate requested by cop task. [Coprocessor Cache Configuration](/tidb-configuration-file.md).
 - `backoff`: Contains different types of backoff and total backoff waiting time.
 
@@ -133,12 +133,12 @@ The execution information from a `Insert` operator will typically contain the fo
 prepare:109.616µs, check_insert:{total_time:1.431678ms, mem_insert_time:667.878µs, prefetch:763.8µs, rpc:{BatchGet:{num_rpc:1, total_time:699.166µs},Get:{num_rpc:1, total_time:378.276µs }}}
 ```
 
-- `prepare`: Time-consuming of preparing to write, including expression, default value and auto-increment value calculations.
-- `check_insert`: This information generally appears in `insert ignore` and `insert on duplicate` statements, it including conflict checking and time-consuming writing to TiDB transaction cache. Note that this time-consuming does not include the time-consuming of transaction commit. It contains the following information:
+- `prepare`: The time consumed of preparing to write, including expression, default value and auto-increment value calculations.
+- `check_insert`: This information generally appears in `insert ignore` and `insert on duplicate` statements, it including conflict checking and time consumed writing to TiDB transaction cache. Note that this time consumed does not include the time consumed of transaction commit. It contains the following information:
     - `total_time`: the total time spent in the `check_insert` step.
-    - `mem_insert_time`: The time-consuming of writing data to the TiDB transaction cache.
+    - `mem_insert_time`: The time consumed of writing data to the TiDB transaction cache.
     - `prefetch`: The time-consumed retrieving data that needs to be checked for conflicts from TiKV. This step is mainly to send a `Batch_Get` RPC request to TiKV to retrieve data.
-    - `rpc`: The total time-consuming of sending RPC requests to TiKV, which generally includes two types of RPC time, `BatchGet` and `Get`, among which:
+    - `rpc`: The total time consumed of sending RPC requests to TiKV, which generally includes two types of RPC time, `BatchGet` and `Get`, among which:
         - `BatchGet` RPC request is sent by the `prefetch` step.
         - `Get` RPC request is sent by `insert on duplicate` statement when executing `duplicate update` step.
 - `backoff`: Contains different types of backoff and the total waiting time of backoff.
@@ -159,12 +159,12 @@ inner:{total:4.297515932s, concurrency:5, task:17, construct:97.96291ms, fetch:4
 ```
 
 - `Inner`: the execution information of inner worker:
-    - `total`: the total time-consuming by the inner worker.
+    - `total`: the total time consumed by the inner worker.
     - `concurrency`: the number of concurrent inner workers.
     - `task`: The total number of tasks processed by the inner worker.
     - `construct`: the preparation time before the inner worker reads the inner table rows corresponding to the task.
-    - `fetch`: The total time-consuming it takes for the inner worker to read inner table rows.
-    - `Build`: The total time-consuming it takes for the inner worker to construct the hash map of the corresponding inner table rows.
+    - `fetch`: The total time consumed it takes for the inner worker to read inner table rows.
+    - `Build`: The total time consumed it takes for the inner worker to construct the hash map of the corresponding inner table rows.
 - `probe`: the total time consumed by the main `IndexJoin` thread to perform join operations with the hash map of the outer table rows and the inner table rows.
 
 ### IndexHashJoin
@@ -185,13 +185,13 @@ inner:{total:4.429220003s, concurrency:5, task:17, construct:96.207725ms, fetch:
 ```
 
 - `Inner`: the execution information of inner worker:
-    - `total`: the total time-consuming by the inner worker.
+    - `total`: the total time consumed by the inner worker.
     - `concurrency`: the number of inner workers.
     - `task`: The total number of tasks processed by the inner worker.
     - `construct`: the preparation time before the inner worker reads the inner table rows.
-    - `fetch`: The total time-consuming of inner worker to read inner table rows.
-    - `Build`: The total time-consuming of inner worker to construct the hash map of the outer table rows.
-    - `join`:  The total time-consuming of inner worker to do join with the inner table rows and the hash map of outer table rows.
+    - `fetch`: The total time consumed of inner worker to read inner table rows.
+    - `Build`: The total time consumed of inner worker to construct the hash map of the outer table rows.
+    - `join`:  The total time consumed of inner worker to do join with the inner table rows and the hash map of outer table rows.
 
 ### HashJoin
 
@@ -244,10 +244,10 @@ When a write-type DML statement is executed in a transaction with `autocommit=1`
 commit_txn: {prewrite:48.564544ms, wait_prewrite_binlog:47.821579, get_commit_ts:4.277455ms, commit:50.431774ms, region_num:7, write_keys:16, write_byte:536}
 ```
 
-- `prewrite`: The time-consuming of the `prewrite` phase of the 2PC commit of the transaction.
-- `wait_prewrite_binlog:`: The time-consuming of waiting to write the prewrite Binlog.
-- `get_commit_ts`: The time-consuming of getting the transaction commit timestamp.
-- `commit`: The time-consuming in the `commit` phase during the 2PC commit of the transaction.
+- `prewrite`: The time consumed of the `prewrite` phase of the 2PC commit of the transaction.
+- `wait_prewrite_binlog:`: The time consumed of waiting to write the prewrite Binlog.
+- `get_commit_ts`: The time consumed of getting the transaction commit timestamp.
+- `commit`: The time consumed in the `commit` phase during the 2PC commit of the transaction.
 - `write_keys`: The total `keys` written in the transaction.
 - `write_byte`: The total bytes of `key-value` written in the transaction, and the unit is byte.
 
