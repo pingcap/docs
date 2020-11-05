@@ -143,4 +143,4 @@ EXPLAIN SELECT * FROM t3 WHERE t1_id NOT IN (SELECT id FROM t1 WHERE int_col < 1
 6 rows in set (0.00 sec)
 ```
 
-This query starts by reading the table `t3`, and then probes the table `t1` based on the `PRIMARY KEY`. The join type is an _anti semi join_; anti because the test is for the non-existence of the value (`NOT IN`) and semi-join because only the first row needs to match before the join is rejected.
+This query starts by reading the table `t3` and then probes the table `t1` based on the `PRIMARY KEY`. The join type is an _anti semi join_; anti because this example is for the non-existence of the value (`NOT IN`) and semi-join because only the first row needs to match before the join is rejected.
