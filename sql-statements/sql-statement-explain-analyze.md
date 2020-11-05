@@ -141,7 +141,7 @@ prepare:109.616µs, check_insert:{total_time:1.431678ms, mem_insert_time:667.878
     - `rpc`: The total time-consuming of sending RPC requests to TiKV, which generally includes two types of RPC time, `BatchGet` and `Get`, among which:
         - `BatchGet` RPC request is sent by the `prefetch` step.
         - `Get` RPC request is sent by `insert on duplicate` statement when executing `duplicate update` step.
-- `backoff`: Contains different types of backoff and total backoff waiting time.
+- `backoff`: Contains different types of backoff and the total waiting time of backoff.
 
 ### IndexJoin
 
