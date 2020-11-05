@@ -52,7 +52,7 @@ In addition, since v4.0.3, the `Plan` field in the slow log also includes the SQ
 System issues can be divided into the following types according to different execution stages:
 
 1. TiKV is slow in data processing. For example, the TiKV coprocessor processes data slowly.
-2. TiDB is slow in execution. For example, in the execution stage, a `Join` operator is slow to process data.
+2. TiDB is slow in execution. For example, a `Join` operator processes data slowly.
 3. Other key stages are slow. For example, getting the timestamp takes a long time.
 
 For each slow query, first determine to which type the query belongs, and then analyze it in detail.
