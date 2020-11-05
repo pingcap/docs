@@ -91,7 +91,7 @@ EXPLAIN ANALYZE SELECT * FROM t1;
 2 rows in set (0.00 sec)
 ```
 
-## Operator Execution info
+## Execution information of operators
 
 In addition to basic `time` and `loop` execution information, `execution info` also contains operator-specific execution information, which mainly includes the time-consuming information of the operator sending RPC and other steps.
 
