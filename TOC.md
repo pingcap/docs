@@ -153,6 +153,7 @@
   + [Use Placement Rules](/configure-placement-rules.md)
   + [Use Load Base Split](/configure-load-base-split.md)
   + [Use Store Limit](/configure-store-limit.md)
+  + [Integrate with Confluent Platform](/ticdc/integrate-confluent-using-ticdc.md)
 + TiDB Ecosystem Tools
   + [Overview](/ecosystem-tool-user-guide.md)
   + [Use Cases](/ecosystem-tool-user-case.md)
@@ -457,6 +458,7 @@
       + [Overview Page](/dashboard/dashboard-overview.md)
       + [Cluster Info Page](/dashboard/dashboard-cluster-info.md)
       + [Key Visualizer Page](/dashboard/dashboard-key-visualizer.md)
+      + [Metrics Relation Graph](/dashboard/dashboard-metrics-relation.md)
       + SQL Statements Analysis
         + [SQL Statements Page](/dashboard/dashboard-statement-list.md)
         + [SQL Details Page](/dashboard/dashboard-statement-details.md)
@@ -524,6 +526,7 @@
   + [All Releases](/releases/release-notes.md)
   + [TiDB Roadmap](/roadmap.md)
   + v4.0
+    + [4.0.8](/releases/release-4.0.8.md)
     + [4.0.7](/releases/release-4.0.7.md)
     + [4.0.6](/releases/release-4.0.6.md)
     + [4.0.5](/releases/release-4.0.5.md)
