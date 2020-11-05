@@ -1,7 +1,6 @@
 ---
 title: TiDB Specific System Variables
 summary: Use system variables specific to TiDB to optimize performance.
-category: reference
 aliases: ['/docs/v3.1/tidb-specific-system-variables/','/docs/v3.1/reference/configuration/tidb-server/tidb-specific-variables/']
 ---
 
@@ -388,29 +387,30 @@ set tidb_query_log_max_len = 20
 
 - Scope: SESSION | GLOBAL
 - Default value: 0
-- TiDB supports the optimistic transaction model. This means that conflict check (unique key check) is performed when the transaction is committed. This variable is used to set whether to do a unique key check each time a row of data is written.
-- If this variable is enabled, the performance might be affected in a scenario where a large batch of data is written. For example:
+- This setting only applies to optimistic transactions. When this variable is set to zero, checking for duplicate values in UNIQUE indexes is deferred until the transaction commits. This helps improve performance, but might be an unexpected behavior for some applications. See [Constraints](/constraints.md) for details.
 
-    - When this variable is disabled:
+    - When set to zero and using optimistic transactions:
 
         ```sql
         tidb >create table t (i int key)
         tidb >insert into t values (1);
-        tidb >begin
+        tidb >begin optimistic;
         tidb >insert into t values (1);
         Query OK, 1 row affected
         tidb >commit; -- Check only when a transaction is committed.
         ERROR 1062 : Duplicate entry '1' for key 'PRIMARY'
         ```
 
-    - After this variable is enabled:
+    - When set to 1 and using optimistic transactions:
 
         ```sql
         tidb >set @@tidb_constraint_check_in_place=1
-        tidb >begin
+        tidb >begin optimistic;
         tidb >insert into t values (1);
         ERROR 1062 : Duplicate entry '1' for key 'PRIMARY'
         ```
+
+Constraint checking is always performed in place for pessimistic transactions (default).
 
 ### tidb_check_mb4_value_in_utf8
 

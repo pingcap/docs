@@ -1,7 +1,6 @@
 ---
 title: The System Variables
 summary: Learn how to use the system variables in TiDB.
-category: reference
 aliases: ['/docs/v3.1/system-variables/','/docs/v3.1/reference/configuration/tidb-server/mysql-variables/']
 ---
 
@@ -116,6 +115,7 @@ The following MySQL system variables are fully supported in TiDB and have the sa
 | tx_isolation | GLOBAL \| SESSION | the isolation level of a transaction |
 | max\_execution\_time | GLOBAL \| SESSION | the execution timeout for a statement, in milliseconds |
 | innodb\_lock\_wait\_timeout | GLOBAL \| SESSION | the lock wait time for pessimistic transactions, in seconds |
+| interactive\_timeout | SESSION \| GLOBAL | the idle timeout of the interactive user session, in seconds   |
 
 > **Note:**
 >

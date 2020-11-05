@@ -1,17 +1,16 @@
 ---
-title: Compatibility with MySQL
+title: MySQL Compatibility
 summary: Learn about the compatibility of TiDB with MySQL, and the unsupported and different features.
-category: reference
 aliases: ['/docs/v3.1/mysql-compatibility/','/docs/v3.1/reference/mysql-compatibility/']
 ---
 
-# Compatibility with MySQL
+# MySQL Compatibility
 
 TiDB supports both the MySQL wire protocol and the majority of its syntax. This means that you can use your existing MySQL connectors and clients, and your existing applications can often be migrated to TiDB without changing any application code.
 
 Currently TiDB Server advertises itself as MySQL 5.7 and works with most MySQL database tools such as PHPMyAdmin, Navicat, MySQL Workbench, mysqldump, and Mydumper/myloader.
 
-However, TiDB does not support some of MySQL features or behaves differently from MySQL because these features cannot be easily implemented in a distributed system. For some MySQL syntax, TiDB can parse but does not process it. For example, the `ENGINE` table option in the `CREATE TABLE` statement can be parsed but is ignored.
+However, some features of MySQL are not supported. This could be because there is now a better way to solve the problem (such as XML functions superseded by JSON), or a lack of current demand versus effort required (such as stored procedures and functions). Some features might also be difficult to implement as a distributed system.
 
 > **Note:**
 >
@@ -23,30 +22,29 @@ However, TiDB does not support some of MySQL features or behaves differently fro
 + Triggers
 + Events
 + User-defined functions
-+ `FOREIGN KEY` constraints
-+ `FULLTEXT`/`SPATIAL` functions and indexes
++ `FOREIGN KEY` constraints [#18209](https://github.com/pingcap/tidb/issues/18209)
++ Temporary tables [#1248](https://github.com/pingcap/tidb/issues/1248)
++ `FULLTEXT`/`SPATIAL` functions and indexes [#1793](https://github.com/pingcap/tidb/issues/1793)
 + Character sets other than `utf8`, `utf8mb4`, `ascii`, `latin1` and `binary`
 + Collations other than `BINARY`
 + Add/drop primary key
 + SYS schema
 + Optimizer trace
 + XML Functions
-+ X-Protocol
-+ Savepoints
-+ Column-level privileges
++ X-Protocol [#1109](https://github.com/pingcap/tidb/issues/1109)
++ Savepoints [#6840](https://github.com/pingcap/tidb/issues/6840)
++ Column-level privileges [#9766](https://github.com/pingcap/tidb/issues/9766)
 + `XA` syntax (TiDB uses a two-phase commit internally, but this is not exposed via an SQL interface)
-+ `CREATE TABLE tblName AS SELECT stmt` syntax
-+ `CREATE TEMPORARY TABLE` syntax
-+ `CHECK TABLE` syntax
-+ `CHECKSUM TABLE` syntax
-+ `SELECT INTO FILE` syntax
-+ `GET_LOCK` and `RELEASE_LOCK` functions
++ `CREATE TABLE tblName AS SELECT stmt` syntax [#4754](https://github.com/pingcap/tidb/issues/4754)
++ `CHECK TABLE` syntax [#4673](https://github.com/pingcap/tidb/issues/4673)
++ `CHECKSUM TABLE` syntax [#1895](https://github.com/pingcap/tidb/issues/1895)
++ `GET_LOCK` and `RELEASE_LOCK` functions [#14994](https://github.com/pingcap/tidb/issues/14994)
 
 ## Features that are different from MySQL
 
 ### Auto-increment ID
 
-In TiDB, auto-increment columns are only guaranteed to be incremental and unique but are *not* guaranteed to be allocated sequentially. Currently, TiDB allocates IDs in batches. If data is inserted into multiple TiDB servers simultaneously, the allocated IDs will not be sequential.
+In TiDB, auto-increment columns are only guaranteed to be unique and incremental on a single TiDB server, but they are *not* guaranteed to be incremental among multiple TiDB servers or allocated sequentially. Currently, TiDB allocates IDs in batches. If you insert data on multiple TiDB servers at the same time, the allocated IDs are not continuous. You can use the `tidb_allow_remove_auto_inc` system variable to enable or disable deleting the `AUTO_INCREMENT` attribute of a column. The syntax for deleting this column attribute is `alter table modify` or `alter table change`.
 
 > **Note:**
 >
@@ -69,7 +67,7 @@ The operations are executed as follows:
 1. The client issues the `INSERT INTO t VALUES (1, 1)` statement to Instance B which sets the `id` to 1 and the statement is executed successfully.
 2. The client issues the `INSERT INTO t (c) (1)` statement to Instance A. This statement does not specify the value of `id`, so Instance A allocates the value. Currently, Instances A caches the auto-increment ID of [1, 30000], so it allocates the `id` value to 1 and adds 1 to the local counter. However, at this time the data with the `id` of 1 already exists in the cluster, therefore it reports `Duplicated Error`.
 
-Also, starting with TiDB 3.0.4, TiDB supports using the system variable `tidb_allow_remove_auto_inc` to control whether the `AUTO_INCREMENT` property of a column is allowed to be removed by executing  `ALTER TABLE MODIFY` or `ALTER TABLE CHANGE` statements. It is not allowed by default.
+Also, starting with TiDB 3.0.4, TiDB supports using the system variable `tidb_allow_remove_auto_inc` to control whether the `AUTO_INCREMENT` property of a column is allowed to be removed by executing  `ALTER TABLE MODIFY` or `ALTER TABLE CHANGE` statements. It is not allowed by default. Once the `AUTO_INCREMENT` property is removed, it cannot be recovered, because TiDB does not support adding the `AUTO_INCREMENT` column attribute.
 
 > **Note:**
 >
@@ -93,6 +91,8 @@ mysql> select _tidb_rowid, id from t;
 +-------------+------+
 3 rows in set (0.01 sec)
 ```
+
+In early versions, the cache size of auto-increment IDs in TiDB is transparent to users. Since v3.0.14, v3.1.2, and v4.0.rc-2, the `AUTO_ID_CACHE` table option has been introduced to allow users to customize the cache size of auto-increment IDs to be allocated. This cache size might be consumed by both auto-increment columns and `_tidb_rowid`. In addition, if the length of continuous IDs needed for an `INSERT` statement exceeds the value set by `AUTO_ID_CACHE`, TiDB will properly increase the cache size so that this insertion can be executed successfully.
 
 ### Performance schema
 
@@ -122,8 +122,9 @@ In TiDB DDL does not block reads or writes to tables while in operation. However
     - Does not support setting a column as the `PRIMARY KEY`, or creating a unique index, or specifying `AUTO_INCREMENT` while adding it.
 + Drop Column: Does not support dropping the `PRIMARY KEY` column or index column.
 + Change/Modify Column:
-    - Does not support lossy changes, such as from `BIGINT` to `INTEGER` or `VARCHAR(255)` to `VARCHAR(10)`.
+    - Does not support lossy changes, such as from `BIGINT` to `INTEGER` or `VARCHAR(255)` to `VARCHAR(10)`. Otherwise, the `length %d is less than origin %d` error might be output.
     - Does not support modifying the precision of `DECIMAL` data types.
+    - Changing the field type to its superset is unsupported. For example, TiDB does not support changing the field type from `INTEGER` to `VARCHAR`, or from `TIMESTAMP` to `DATETIME`. Otherwise, the error information `Unsupported modify column: type %d not match origin %d` might be output.
     - Does not support changing the `UNSIGNED` attribute.
     - Only supports changing the `CHARACTER SET` attribute from `utf8` to `utf8mb4`.
 + `LOCK [=] {DEFAULT|NONE|SHARED|EXCLUSIVE}`: the syntax is supported, but is not applicable to TiDB. All DDL changes that are supported do not lock the table.
@@ -149,6 +150,11 @@ For more information, see [Online Schema Changes](/key-features.md#online-schema
 ### Analyze table
 
 [`ANALYZE TABLE`](/statistics.md#manual-collection) works differently in TiDB than in MySQL, in that it is a relatively lightweight and short-lived operation in MySQL/InnoDB, while in TiDB it completely rebuilds the statistics for a table and can take much longer to complete.
+
+### Limitations of `SELECT` syntax
+
+- The `SELECT ... INTO @variable` syntax is not supported.
+- The `SELECT ... GROUP BY ... WITH ROLLUP` syntax is not supported.
 
 ### Views
 
@@ -187,11 +193,11 @@ Architecturally, TiDB does support a similar storage engine abstraction to MySQL
 
 ### SQL modes
 
-TiDB supports **all of the SQL modes** from MySQL 5.7 with minor exceptions:
+TiDB supports most [SQL modes](/sql-mode.md):
 
-- The compatibility modes deprecated in MySQL 5.7 and removed in MySQL 8.0 are not supported (such as `ORACLE`, `POSTGRESQL` etc).
-- The mode `ONLY_FULL_GROUP_BY` has minor [semantic differences](/functions-and-operators/aggregate-group-by-functions.md#differences-from-mysql) to MySQL 5.7, which we plan to address in the future.
-- The SQL modes `NO_DIR_IN_CREATE` and `NO_ENGINE_SUBSTITUTION` are supported for compatibility, but are not applicable to TiDB.
+- The compatibility modes, such as `ORACLE` and `POSTGRESQL` are parsed but ignored. Compatibility modes are deprecated in MySQL 5.7 and removed in MySQL 8.0.
+- The `ONLY_FULL_GROUP_BY` mode has minor [semantic differences](/functions-and-operators/aggregate-group-by-functions.md#differences-from-mysql) from MySQL 5.7.
+- The `NO_DIR_IN_CREATE` and `NO_ENGINE_SUBSTITUTION` SQL modes in MySQL are accepted for compatibility, but are not applicable to TiDB.
 
 ### Version-specific comments
 

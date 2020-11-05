@@ -1,7 +1,6 @@
 ---
 title: Explore SQL with TiDB
 summary: Learn about the basic SQL statements for the TiDB database.
-category: how-to
 aliases: ['/docs/v3.1/basic-sql-operations/','/docs/v3.1/how-to/get-started/explore-sql/']
 ---
 
@@ -176,7 +175,7 @@ To show all the indexes in a table, use the `SHOW INDEX` statement:
 {{< copyable "sql" >}}
 
 ```sql
-SHOW INDEX from person;
+SHOW INDEX FROM person;
 ```
 
 ### Delete an index

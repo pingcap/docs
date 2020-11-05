@@ -1,7 +1,6 @@
 ---
 title: Bit Functions and Operators
 summary: Learn about the bit functions and operators.
-category: reference
 aliases: ['/docs/v3.1/functions-and-operators/bit-functions-and-operators/','/docs/v3.1/reference/sql/functions-and-operators/bit-functions-and-operators/']
 ---
 
