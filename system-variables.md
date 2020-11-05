@@ -350,12 +350,6 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Default value: 1 (the value of the default configuration file)
 - This variable is used to control whether to enable the statement summary feature. If enabled, SQL execution information like time consumption is recorded to the `information_schema.STATEMENTS_SUMMARY` system table to identify and troubleshoot SQL performance issues.
 
-### tidb_enable_streaming
-
-- Scope: SERVER
-- Default value: 0
-- This variable is used to set whether to enable streaming.
-
 ### tidb_enable_table_partition
 
 - Scope: SESSION | GLOBAL
@@ -688,7 +682,7 @@ set tidb_query_log_max_len = 20
 
 ### tidb_skip_isolation_level_check
 
-- Scope: SESSION
+- Scope: SESSION | GLOBAL
 - Default value: 0
 - After this switch is enabled, if an isolation level unsupported by TiDB is assigned to `tx_isolation`, no error is reported. This helps improve compatibility with applications that set (but do not depend on) a different isolation level.
 
