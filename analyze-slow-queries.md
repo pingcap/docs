@@ -49,7 +49,7 @@ In addition, since v4.0.3, the `Plan` field in the slow log also includes the SQ
 
 ## Analyze system issues
 
-System issues can be divided into the following types according to different execution stages:
+System issues can be divided into the following types according to different execution stages of a SQL statement:
 
 1. TiKV is slow in data processing. For example, the TiKV coprocessor processes data slowly.
 2. TiDB is slow in execution. For example, a `Join` operator processes data slowly.
