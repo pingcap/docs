@@ -249,7 +249,7 @@ commit_txn: {prewrite:48.564544ms, wait_prewrite_binlog:47.821579, get_commit_ts
 - `get_commit_ts`: The time-consuming of getting the transaction commit timestamp.
 - `commit`: The time-consuming in the `commit` phase during the 2PC commit of the transaction.
 - `write_keys`: The total `keys` written in the transaction.
-- `write_byte`: The total bytes of `key/value` writtten in the transaction, the unit is byte.
+- `write_byte`: The total bytes of `key-value` written in the transaction, and the unit is byte.
 
 ## MySQL compatibility
 
