@@ -1,7 +1,6 @@
 ﻿---
 title: TiKV Configuration File
 summary: Learn the TiKV configuration file.
-category: reference
 aliases: ['/docs/v3.1/tikv-configuration-file/','/docs/v3.1/reference/configuration/tikv-server/configuration-file/']
 ---
 
@@ -222,12 +221,11 @@ Configuration items related to Raftstore
 ### `sync-log`
 
 + Enables or disables synchronous write mode. In the synchronous write mode, each commit is forced to be flushed to raft-log synchronously for persistent storage.
-
-    > **Note:**
-    >
-    > Setting the value to `false` might lead to data loss.
-
 + Default value: `true`
+
+> **Warning:**
+>
+> Setting the value to `false` might lead to **data loss**. It is **strongly recommended** that you do not modify this configuration.
 
 ### `prevote`
 
@@ -1049,7 +1047,7 @@ Configuration items related to `raftdb`
 ### `max-sub-compactions`
 
 + The number of concurrent sub-compaction operations performed in RocksDB
-+ Default value: `1`
++ Default value: `2`
 + Minimum value: `1`
 
 ### `wal-dir`
@@ -1078,7 +1076,7 @@ Configuration items related to security
 
 ## `import`
 
-Configuration items related to `import`
+Configuration items related to TiDB Lightning import and BR restore.
 
 ### `num-threads`
 
@@ -1091,6 +1089,16 @@ Configuration items related to `import`
 + The number of jobs imported concurrently
 + Default value: `8`
 + Minimum value: `1`
+  
+## backup
+
+Configuration items related to BR backup.
+
+### `num-threads`
+
++ The number of worker threads to process backup
++ Default value: `MIN(CPU * 0.75, 32)`.
++ Minimum value: `1` 
 
 ## pessimistic-txn
 

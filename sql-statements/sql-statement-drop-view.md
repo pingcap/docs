@@ -1,7 +1,6 @@
 ---
 title: DROP VIEW | TiDB SQL Statement Reference
 summary: An overview of the usage of DROP VIEW for the TiDB database.
-category: reference
 aliases: ['/docs/v3.1/sql-statements/sql-statement-drop-view/','/docs/v3.1/reference/sql/statements/drop-view/']
 ---
 
@@ -76,7 +75,7 @@ mysql> SELECT * FROM t1;
 
 ## MySQL compatibility
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/report-issue.md) on GitHub.
+This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
 
 ## See also
 

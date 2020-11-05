@@ -1,7 +1,6 @@
 ---
 title: SHOW ANALYZE STATUS
 summary: An overview of the usage of SHOW ANALYZE STATUS for the TiDB database。
-category: reference
 aliases: ['/docs/v3.1/sql-statements/sql-statement-show-analyze-status/']
 ---
 
@@ -44,6 +43,10 @@ show analyze status;
 +--------------+------------+----------------+-------------------+----------------+---------------------+----------+
 8 rows in set (0.00 sec)
 ```
+
+## MySQL compatibility
+
+This statement is a TiDB extension to MySQL syntax.
 
 ## See also
 

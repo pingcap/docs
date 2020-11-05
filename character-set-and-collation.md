@@ -1,7 +1,6 @@
 ---
 title: Character Set Support
 summary: Learn about the supported character sets in TiDB.
-category: reference
 aliases: ['/docs/v3.1/character-set-and-collation/','/docs/v3.1/reference/sql/character-set/']
 ---
 
@@ -24,6 +23,10 @@ mysql> SHOW CHARACTER SET;
 +---------|---------------|-------------------|--------+
 5 rows in set (0.00 sec)
 ```
+
+> **Warning:**
+>
+> TiDB incorrectly treats latin1 as a subset of utf8. This can lead to unexpected behaviors when you store characters that differ between latin1 and utf8 encodings. It is strongly recommended to the utf8mb4 character set. See [TiDB #18955](https://github.com/pingcap/tidb/issues/18955) for more details.
 
 > **Note:**
 >
@@ -110,10 +113,10 @@ ALTER DATABASE db_name
 Different databases can use different character sets and collations. Use the `character_set_database` and  `collation_database` to see the character set and collation of the current database:
 
 ```sql
-mysql> create schema test1 character set utf8 COLLATE uft8_general_ci;
+mysql> CREATE SCHEMA test1 CHARACTER SET utf8 COLLATE uft8_general_ci;
 Query OK, 0 rows affected (0.09 sec)
 
-mysql> use test1;
+mysql> USE test1;
 Database changed
 mysql> SELECT @@character_set_database, @@collation_database;
 +--------------------------|----------------------+
@@ -123,7 +126,7 @@ mysql> SELECT @@character_set_database, @@collation_database;
 +--------------------------|----------------------+
 1 row in set (0.00 sec)
 
-mysql> create schema test2 character set latin1 COLLATE latin1_general_ci;
+mysql> CREATE SCHEMA test2 CHARACTER SET latin1 COLLATE latin1_general_ci;
 Query OK, 0 rows affected (0.09 sec)
 
 mysql> use test2;

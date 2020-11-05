@@ -1,7 +1,6 @@
 ---
 title: EXPLAIN ANALYZE | TiDB SQL Statement Reference
 summary: An overview of the usage of EXPLAIN ANALYZE for the TiDB database.
-category: reference
 aliases: ['/docs/v3.1/sql-statements/sql-statement-explain-analyze/','/docs/v3.1/reference/sql/statements/explain-analyze/']
 ---
 
@@ -53,7 +52,7 @@ mysql> EXPLAIN ANALYZE SELECT * FROM t1;
 
 ## MySQL compatibility
 
-This statement is a TiDB extension to MySQL syntax.
+`EXPLAIN ANALYZE` is a feature of MySQL 8.0, but both the output format and the potential execution plans in TiDB differ substantially from MySQL.
 
 ## See also
 

@@ -1,6 +1,5 @@
 ---
 title: Use Mydumper and TiDB Lightning for Backup and Restoration
-category: how-to
 aliases: ['/docs/v3.1/backup-and-restore-using-mydumper-lightning/','/docs/v3.1/how-to/maintain/backup-and-restore/mydumper-lightning/','/docs/v3.1/how-to/maintain/backup-and-restore/']
 ---
 
@@ -81,7 +80,7 @@ Then execute two more commands:
     {{< copyable "sql" >}}
 
     ```sql
-    update mysql.tidb set VARIABLE_VALUE = '720h' where VARIABLE_NAME = 'tikv_gc_life_time';
+    UPDATE mysql.tidb SET VARIABLE_VALUE = '720h' WHERE VARIABLE_NAME = 'tikv_gc_life_time';
     ```
 
 2. After running the `mydumper` command, adjust GC value of the TiDB cluster to its original value in step 1.
@@ -89,7 +88,7 @@ Then execute two more commands:
     {{< copyable "sql" >}}
 
     ```sql
-    update mysql.tidb set VARIABLE_VALUE = '10m' where VARIABLE_NAME = 'tikv_gc_life_time';
+    UPDATE mysql.tidb SET VARIABLE_VALUE = '10m' WHERE VARIABLE_NAME = 'tikv_gc_life_time';
     ```
 
 ## Restore data into TiDB

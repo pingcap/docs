@@ -1,7 +1,6 @@
 ---
 title: PD Configuration File
 summary: Learn the PD configuration file.
-category: reference
 aliases: ['/docs/v3.1/pd-configuration-file/','/docs/v3.1/reference/configuration/pd-server/configuration-file/']
 ---
 
@@ -36,8 +35,8 @@ This document only describes parameters that are not included in command-line pa
 
 ### `quota-backend-bytes`
 
-+ The storage size of the meta-information database, which is 2GB by default
-+ Default value: `2147483648`
++ The storage size of the meta-information database, which is 8GiB by default
++ Default value: `8589934592`
 
 ### `auto-compaction-mod`
 
@@ -132,7 +131,7 @@ Configuration items related to monitoring
 
 ### `interval`
 
-+ The interval at which monitoring metric data is pushed to Promethus
++ The interval at which monitoring metric data is pushed to Prometheus
 + Default value: `15s`
 
 ## `schedule`

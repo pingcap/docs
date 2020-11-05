@@ -1,20 +1,19 @@
 ---
 title: Use BR to Back up and Restore Data
 summary: Learn how to back up and restore data of the TiDB cluster using BR.
-category: how-to
 aliases: ['/docs/v3.1/br/backup-and-restore-tool/','/docs/v3.1/reference/tools/br/br/','/docs/v3.1/how-to/maintain/backup-and-restore/br/']
 ---
 
 # Use BR to Back up and Restore Data
 
-[Backup & Restore](http://github.com/pingcap/br) (BR) is a command-line tool for distributed backup and restoration of the TiDB cluster data. Compared with [`mydumper`/`loader`](/backup-and-restore-using-mydumper-lightning.md), BR is more suitable for scenarios of huge data volume. This document describes the BR command line, detailed use examples, best practices, restrictions, and introduces the implementation principles of BR.
+[Backup & Restore](http://github.com/pingcap/br) (BR) is a command-line tool for distributed backup and restoration of the TiDB cluster data. Compared with [`dumpling`](/export-or-backup-using-dumpling.md) and [`mydumper`/`loader`](/backup-and-restore-using-mydumper-lightning.md), BR is more suitable for scenarios of huge data volume. This document describes the BR command line, detailed use examples, best practices, restrictions, and introduces the implementation principles of BR.
 
 ## Usage restrictions
 
 - BR only supports TiDB v3.1 and later versions.
-- Currently, TiDB does not support backing up and restoring partitioned tables.
 - Currently, you can perform restoration only on new clusters.
 - It is recommended that you execute multiple backup operations serially. Otherwise, different backup operations might interfere with each other.
+- When BR restores data to the upstream cluster of Drainer, Drainer cannot replicate the restored data to the downstream.
 
 ## Recommended deployment configuration
 
@@ -29,7 +28,11 @@ Refer to the [download page](/download-ecosystem-tools.md#br-backup-and-restore)
 
 BR sends the backup or restoration commands to each TiKV node. After receiving these commands, TiKV performs the corresponding backup or restoration operations. Each TiKV node has a path in which the backup files generated in the backup operation are stored and from which the stored backup files are read during the restoration.
 
-### Backup principle
+![br-arch](/media/br-arch.png)
+
+<details>
+
+<summary>Backup principle</summary>
 
 When BR performs a backup operation, it first obtains the following information from PD:
 
@@ -67,14 +70,14 @@ If `StartVersion` is not `0`, the backup is seen as an incremental backup. In ad
 
 If checksum is enabled when you execute the backup command, BR calculates the checksum of each backed up table for data check.
 
-#### Types of backup files
+### Types of backup files
 
 Two types of backup files are generated in the path where backup files are stored:
 
 - **The SST file**: stores the data that the TiKV node backed up.
 - **The `backupmeta` file**: stores the metadata of this backup operation, including the number, the key range, the size, and the Hash (sha256) value of the backup files.
 
-#### The format of the SST file name
+### The format of the SST file name
 
 The SST file is named in the format of `storeID_regionID_regionEpoch_keyHash_cf`, where
 
@@ -84,7 +87,11 @@ The SST file is named in the format of `storeID_regionID_regionEpoch_keyHash_cf`
 - `keyHash` is the Hash (sha256) value of the startKey of a range, which ensures the uniqueness of a key;
 - `cf` indicates the [Column Family](/tune-tikv-performance.md#tune-tikv-performance) of RocksDB (`default` or `write` by default).
 
-### Restoration principle
+</details>
+
+<details>
+
+<summary>Restoration principle</summary>
 
 During the data restoration process, BR performs the following tasks in order:
 
@@ -102,7 +109,7 @@ After TiKV receives the request to load the SST file, TiKV uses the Raft mechani
 
 After the restoration operation is completed, BR performs a checksum calculation on the restored data to compare the stored data with the backed up data.
 
-![br-arch](/media/br-arch.png)
+</details>
 
 ## Command-line description
 
@@ -323,7 +330,7 @@ If you want to back up incrementally, you only need to specify the **last backup
 The incremental backup has two limitations:
 
 - The incremental backup needs to be under a different path from the previous full backup.
-- No GC (Garbage Collection) happens between the start time of the incremental backup and `lastbackupts`.
+- GC (Garbage Collection) safepoint must be before the `lastbackupts`.
 
 To back up the incremental data between `(LAST_BACKUP_TS, current PD timestamp]`, execute the following command:
 
@@ -344,7 +351,7 @@ To get the timestamp of the last backup, execute the `validate` command. For exa
 LAST_BACKUP_TS=`br validate decode --field="end-version" -s local:///home/tidb/backupdata`
 ```
 
-In the above example, the incremental backup data includes the newly written data and the DDLs between `(LAST_BACKUP_TS, current PD timestamp]`. When restoring data, BR restores DDLs first and then restores the written data.
+In the above example, for the incremental backup data, BR records the data changes and the DDL operations during `(LAST_BACKUP_TS, current PD timestamp]`. When restoring data, BR first restores DDL operations and then the data.
 
 ### Back up Raw KV (experimental feature)
 
@@ -577,7 +584,7 @@ During data restoration, writing too much data affects the performance of the on
 - It is recommended that you use a storage hardware with high throughput, because the throughput of a storage hardware limits the backup and restoration speed.
 - It is recommended that you perform the backup operation during off-peak hours to minimize the impact on applications.
 
-For more recommended practices of using BR, refer to [BR Usage Scenarios](/br/backup-and-restore-use-cases.md).
+For more recommended practices of using BR, refer to [BR Use Cases](/br/backup-and-restore-use-cases.md).
 
 ## Examples
 
