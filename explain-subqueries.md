@@ -47,7 +47,7 @@ ANALYZE TABLE t1, t2, t3;
 
 ## Inner join (non-unique subquery)
 
-In the following example, the `IN` subquery is searching for a list of ids from the table `t2`. For the semantics to be correct, TiDB needs to guarantee that the column `t1_id` is unique. Using `EXPLAIN` we can see the strategy used to remove duplicates and perform an `INNER JOIN`:
+In the following example, the `IN` subquery searches for a list of IDs from the table `t2`. For semantic correctness, TiDB needs to guarantee that the column `t1_id` is unique. Using `EXPLAIN`, you can see the execution plan used to remove duplicates and perform an `INNER JOIN` operation:
 
 ```sql
 EXPLAIN SELECT * FROM t1 WHERE id IN (SELECT t1_id FROM t2);
