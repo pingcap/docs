@@ -7,7 +7,7 @@ summary: Learn about the execution plan information returned by the EXPLAIN stat
 
 TiDB performs [several optimizations](/subquery-optimization.md) to improve the performance of subqueries. This document describes some of these optimizations for common subqueries and how to interpret the output of `EXPLAIN`.
 
-Examples use the following sample data:
+The examples in this document are based on the following sample data:
 
 ```sql
 CREATE TABLE t1 (id BIGINT NOT NULL PRIMARY KEY auto_increment, pad1 BLOB, pad2 BLOB, pad3 BLOB, int_col INT NOT NULL DEFAULT 0);
