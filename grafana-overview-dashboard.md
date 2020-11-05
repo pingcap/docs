@@ -33,6 +33,11 @@ PD | Store Status -- Offline Stores | the number of TiKV nodes (still providing 
 PD | Store Status -- Tombstone Stores | the number of TiKV nodes that are successfully offline |
 PD | 99% completed_cmds_duration_seconds | the 99th percentile duration to complete a pd-server request | less than 5ms
 PD | handle_requests_duration_seconds | the request duration of a PD request |
+PD | Region health | The state of each Region. | Generally, the number of pending peers is less than 100, and that of the missing peers cannot always be greater than `0`. |
+PD | Hot write Region's leader distribution | The total number of leaders who are the write hotspots on each TiKV instance. |
+PD | Hot read Region's leader distribution | The total number of leaders who are the read hotspots on each TiKV instance.  |
+PD | Region heartbeat report | The count of heartbeats reported to PD per instance. |
+PD | 99% Region heartbeat latency | The heartbeat latency per TiKV instance (P99). |
 TiDB | Statement OPS | the total number of executed SQL statements, including `SELECT`, `INSERT`, `UPDATE` and so on |
 TiDB | Duration | the execution time of a SQL statement |
 TiDB | QPS By Instance | the QPS on each TiDB instance |
@@ -74,4 +79,4 @@ System Info | IO Util | the disk usage ratio, 100% at a maximum; generally you n
 
 ## Interface of the Overview dashboard
 
-![Overview Dashboard](/media/overview.png)
+![Overview Dashboard](/media/grafana-monitor-overview.png)
