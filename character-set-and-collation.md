@@ -85,6 +85,10 @@ mysql> show collation;
 5 rows in set (0.01 sec)
 ```
 
+> **Warning:**
+>
+> TiDB incorrectly treats latin1 as a subset of utf8. This can lead to unexpected behaviors when you store characters that differ between latin1 and utf8 encodings. It is strongly recommended to the utf8mb4 character set. See [TiDB #18955](https://github.com/pingcap/tidb/issues/18955) for more details.
+
 > **Note:**
 >
 > The default collations in TiDB (binary collations, with the suffix `_bin`) are different than [the default collations in MySQL](https://dev.mysql.com/doc/refman/8.0/en/charset-charsets.html) (typically general collations, with the suffix `_general_ci`). This can cause incompatible behavior when specifying an explicit character set but relying on the implicit default collation to be chosen.
@@ -103,6 +107,7 @@ SHOW COLLATION WHERE Charset = 'utf8mb4';
 +--------------------+---------+------+---------+----------+---------+
 | utf8mb4_bin        | utf8mb4 |   46 | Yes     | Yes      |       1 |
 | utf8mb4_general_ci | utf8mb4 |   45 |         | Yes      |       1 |
+| utf8mb4_unicode_ci | utf8mb4 |  224 |         | Yes      |       1 |
 +--------------------+---------+------+---------+----------+---------+
 2 rows in set (0.00 sec)
 ```
@@ -168,7 +173,7 @@ Different databases can use different character sets and collations. Use the `ch
 {{< copyable "sql" >}}
 
 ```sql
-create schema test1 character set utf8mb4 COLLATE uft8mb4_general_ci;
+CREATE SCHEMA test1 CHARACTER SET utf8mb4 COLLATE uft8mb4_general_ci;
 ```
 
 ```sql
@@ -178,7 +183,7 @@ Query OK, 0 rows affected (0.09 sec)
 {{< copyable "sql" >}}
 
 ```sql
-use test1;
+USE test1;
 ```
 
 ```sql
@@ -203,7 +208,7 @@ SELECT @@character_set_database, @@collation_database;
 {{< copyable "sql" >}}
 
 ```sql
-create schema test2 character set latin1 COLLATE latin1_bin;
+CREATE SCHEMA test2 CHARACTER SET latin1 COLLATE latin1_bin;
 ```
 
 ```sql
@@ -213,7 +218,7 @@ Query OK, 0 rows affected (0.09 sec)
 {{< copyable "sql" >}}
 
 ```sql
-use test2;
+USE test2;
 ```
 
 ```sql
@@ -382,13 +387,13 @@ Before v4.0, you can specify most of the MySQL collations in TiDB, and these col
 {{< copyable "sql" >}}
 
 ```sql
-create table t(a varchar(20) charset utf8mb4 collate utf8mb4_general_ci primary key);
+CREATE TABLE t(a varchar(20) charset utf8mb4 collate utf8mb4_general_ci PRIMARY KEY);
 Query OK, 0 rows affected
-insert into t values ('A');
+INSERT INTO t VALUES ('A');
 Query OK, 1 row affected
-insert into t values ('a');
+INSERT INTO t VALUES ('a');
 Query OK, 1 row affected # In TiDB, it is successfully executed. In MySQL, because utf8mb4_general_ci is case-insensitive, the `Duplicate entry 'a'` error is reported.
-insert into t1 values ('a ');
+INSERT INTO t1 VALUES ('a ');
 Query OK, 1 row affected # In TiDB, it is successfully executed. In MySQL, because comparison is performed after the spaces are filled in, the `Duplicate entry 'a '` error is returned.
 ```
 
@@ -399,7 +404,7 @@ In TiDB 4.0, a complete framework for collations is introduced. This new framewo
 {{< copyable "sql" >}}
 
 ```sql
-select VARIABLE_VALUE from mysql.tidb where VARIABLE_NAME='new_collation_enabled';
+SELECT VARIABLE_VALUE FROM mysql.tidb WHERE VARIABLE_NAME='new_collation_enabled';
 ```
 
 ```sql
@@ -411,20 +416,20 @@ select VARIABLE_VALUE from mysql.tidb where VARIABLE_NAME='new_collation_enabled
 1 row in set (0.00 sec)
 ```
 
-Under the new framework, TiDB support the `utf8_general_ci` and `utf8mb4_general_ci` collations which are compatible with MySQL.
+Under the new framework, TiDB support the `utf8_general_ci`, `utf8mb4_general_ci`, `utf8_unicode_ci`, and `utf8mb4_unicode_ci` collations which are compatible with MySQL.
 
-When `utf8_general_ci` or `utf8mb4_general_ci` is used, the string comparison is case-insensitive and accent-insensitive. At the same time, TiDB also corrects the collation's `PADDING` behavior:
+When one of `utf8_general_ci`, `utf8mb4_general_ci`, `utf8_unicode_ci`, and `utf8mb4_unicode_ci` is used, the string comparison is case-insensitive and accent-insensitive. At the same time, TiDB also corrects the collation's `PADDING` behavior:
 
 {{< copyable "sql" >}}
 
 ```sql
-create table t(a varchar(20) charset utf8mb4 collate utf8mb4_general_ci primary key);
+CREATE TABLE t(a varchar(20) charset utf8mb4 collate utf8mb4_general_ci PRIMARY KEY);
 Query OK, 0 rows affected (0.00 sec)
-insert into t values ('A');
+INSERT INTO t VALUES ('A');
 Query OK, 1 row affected (0.00 sec)
-insert into t values ('a');
+INSERT INTO t VALUES ('a');
 ERROR 1062 (23000): Duplicate entry 'a' for key 'PRIMARY' # TiDB is compatible with the case-insensitive collation of MySQL.
-insert into t values ('a ');
+INSERT INTO t VALUES ('a ');
 ERROR 1062 (23000): Duplicate entry 'a ' for key 'PRIMARY' # TiDB modifies the `PADDING` behavior to be compatible with MySQL.
 ```
 
@@ -437,7 +442,7 @@ ERROR 1062 (23000): Duplicate entry 'a ' for key 'PRIMARY' # TiDB modifies the `
 If an expression involves multiple clauses of different collations, you need to infer the collation used in the calculation. The rules are as follows:
 
 + The coercibility value of the explicit `COLLATE` clause is `0`.
-+ If the collations of two strings are incompatible, the coercibility value of the concatenation of two strings with different collations is `1`. Currently, all implemented collations are compatible with each other.
++ If the collations of two strings are incompatible, the coercibility value of the concatenation of two strings with different collations is `1`.
 + The collation of the column, `CAST()`, `CONVERT()`, or `BINARY()` has a coercibility value of `2`.
 + The system constant (the string returned by `USER ()` or `VERSION ()`) has a coercibility value of `3`.
 + The coercibility value of constants is `4`.
@@ -446,9 +451,12 @@ If an expression involves multiple clauses of different collations, you need to 
 
 When inferring collations, TiDB prefers using the collation of expressions with lower coercibility values. If the coercibility values of two clauses are the same, the collation is determined according to the following priority:
 
-binary > utf8mb4_bin > utf8mb4_general_ci > utf8_bin > utf8_general_ci > latin1_bin > ascii_bin
+binary > utf8mb4_bin > (utf8mb4_general_ci = utf8mb4_unicode_ci) > utf8_bin > (utf8_general_ci = utf8_unicode_ci) > latin1_bin > ascii_bin
 
-If the collations of two clauses are different and the coercibility value of both clauses is `0`, TiDB cannot infer the collation and reports an error.
+TiDB cannot infer the collation and reports an error in the following situations:
+
+- If the collations of two clauses are different and the coercibility value of both clauses is `0`.
+- If the collations of two clauses are incompatible and the returned type of expression is `String`.
 
 ## `COLLATE` clause
 
@@ -457,7 +465,7 @@ TiDB supports using the `COLLATE` clause to specify the collation of an expressi
 {{< copyable "sql" >}}
 
 ```sql
-select 'a' = _utf8mb4 'A' collate utf8mb4_general_ci;
+SELECT 'a' = _utf8mb4 'A' collate utf8mb4_general_ci;
 ```
 
 ```sql

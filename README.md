@@ -6,6 +6,17 @@ This repository stores all the source files of [TiDB Docs at the PingCAP website
 
 If you find documentation issues, feel free to [create an Issue](https://github.com/pingcap/docs/issues/new/choose) to let us know or directly [create a Pull Request](/CONTRIBUTING.md#how-to-contribute) to help fix or update it.
 
+Currently, the official documentation supports two languages:
+
+- `en`: [documentation in English](https://docs.pingcap.com/tidb/stable)
+- `zh`: [documentation in Chinese](https://docs.pingcap.com/zh/tidb/stable)
+
+You can use Google Translate to view the documentation in different languages. For example:
+
+- `fr`: [documentation in French](http://translate.google.com/translate?hl=en&sl=en&tl=fr&u=https%3A%2F%2Fgithub.com%2Fpingcap%2Fdocs%2Fblob%2Fmaster%2FTOC.md)
+- `ja`: [documentation in Japanese](http://translate.google.com/translate?hl=en&sl=en&tl=ja&u=https%3A%2F%2Fgithub.com%2Fpingcap%2Fdocs%2Fblob%2Fmaster%2FTOC.md)
+- `ko`: [documentation in Korean](http://translate.google.com/translate?hl=en&sl=en&tl=ko&u=https%3A%2F%2Fgithub.com%2Fpingcap%2Fdocs%2Fblob%2Fmaster%2FTOC.md)
+
 ## Documentation versions
 
 Currently, we maintain the following versions of TiDB documentation in different branches:
@@ -20,6 +31,6 @@ Currently, we maintain the following versions of TiDB documentation in different
 
 ## Contributing
 
-[<img src="media/contribution-map.png" alt="contribution-map" width="180">](https://github.com/pingcap/community/tree/master/special-interest-groups/sig-docs)
+[<img src="media/contribution-map.png" alt="contribution-map" width="180"></img>](https://github.com/pingcap/community/tree/master/special-interest-groups/sig-docs)
 
 See [TiDB Documentation Contributing Guide](/CONTRIBUTING.md) to become a contributor! 🤓

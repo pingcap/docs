@@ -8,7 +8,13 @@
 + About TiDB
   + [TiDB Introduction](/overview.md)
   + [What's New in TiDB 4.0](/whats-new-in-tidb-4.0.md)
+  + [TiDB 4.0 Experimental Features](/experimental-features-4.0.md)
   + [Basic Features](/basic-features.md)
+  + Benchmarks
+    + [v4.0 Sysbench Performance Test](/benchmark/benchmark-sysbench-v4-vs-v3.md)
+    + [v4.0 TPC-H Performance Test](/benchmark/v4.0-performance-benchmarking-with-tpch.md)
+    + [v4.0 TPC-C Performance Test](/benchmark/v4.0-performance-benchmarking-with-tpcc.md)
+    + [Interaction Test on Online Workloads and `ADD INDEX`](/benchmark/online-workloads-and-add-index-operations.md)
   + [MySQL Compatibility](/mysql-compatibility.md)
   + [TiDB Limitations](/tidb-limitations.md)
   + [TiDB Adopters](/adopters.md)
@@ -25,6 +31,7 @@
     + [TiFlash Topology](/tiflash-deployment-topology.md)
     + [TiCDC Topology](/ticdc-deployment-topology.md)
     + [TiDB Binlog Topology](/tidb-binlog-deployment-topology.md)
+    + [TiSpark Topology](/tispark-deployment-topology.md)
     + [Cross-DC Topology](/geo-distributed-deployment-topology.md)
     + [Hybrid Topology](/hybrid-deployment-topology.md)
   + Install and Start
@@ -35,15 +42,9 @@
       + [Use TiDB Ansible](/online-deployment-using-ansible.md)
       + [Use TiDB Ansible Offline](/offline-deployment-using-ansible.md)
   + [Verify Cluster Status](/post-installation-check.md)
-  + Benchmarks
+  + Benchmarks Methods
     + [Test TiDB Using Sysbench](/benchmark/benchmark-tidb-using-sysbench.md)
     + [Run TPC-C Test on TiDB](/benchmark/benchmark-tidb-using-tpcc.md)
-    + [v4.0 Sysbench Performance Test](/benchmark/benchmark-sysbench-v4-vs-v3.md)
-    + [v4.0 TPC-H Performance Test](/benchmark/v4.0-performance-benchmarking-with-tpch.md)
-    + [v4.0 TPC-C Performance Test](/benchmark/v4.0-performance-benchmarking-with-tpcc.md)
-    + [v3.0 Sysbench Performance Test](/benchmark/v3.0-performance-benchmarking-with-sysbench.md)
-    + [v3.0 TPC-C Performance Test](/benchmark/v3.0-performance-benchmarking-with-tpcc.md)
-    + [Interaction Test on Online Workloads and `ADD INDEX`](/benchmark/online-workloads-and-add-index-operations.md)
 + Migrate
   + [Overview](/migration-overview.md)
   + Migrate from MySQL
@@ -77,6 +78,7 @@
   + [Maintain TiFlash](/tiflash/maintain-tiflash.md)
   + [Maintain TiDB Using TiUP](/maintain-tidb-using-tiup.md)
   + [Maintain TiDB Using Ansible](/maintain-tidb-using-ansible.md)
+  + [Modify Configuration Online](/dynamic-config.md)
 + Monitor and Alert
   + [Monitoring Framework Overview](/tidb-monitoring-framework.md)
   + [Monitoring API](/tidb-monitoring-api.md)
@@ -90,6 +92,7 @@
   + [Identify Expensive Queries](/identify-expensive-queries.md)
   + [Statement Summary Tables](/statement-summary-tables.md)
   + [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md)
+  + [Troubleshoot Increased Read and Write Latency](/troubleshoot-cpu-issues.md)
   + [Troubleshoot Cluster Setup](/troubleshoot-tidb-cluster.md)
   + [Troubleshoot High Disk I/O Usage](/troubleshoot-high-disk-io.md)
   + [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md)
@@ -109,9 +112,10 @@
     + [Coprocessor Cache](/coprocessor-cache.md)
   + SQL Tuning
     + [Overview](/sql-tuning-overview.md)
-    + [SQL Tuning with `EXPLAIN`](/query-execution-plan.md)
-    + SQL Optimization
-      + [SQL Optimization Process](/sql-optimization-concepts.md)
+    + Understanding the Query Execution Plan
+      + [Overview](/explain-overview.md)
+    + SQL Optimization Process
+      + [Overview](/sql-optimization-concepts.md)
       + Logic Optimization
         + [Overview](/sql-logical-optimization.md)
         + [Subquery Related Optimizations](/subquery-optimization.md)
@@ -129,11 +133,11 @@
         + [Wrong Index Solution](/wrong-index-solution.md)
         + [Distinct Optimization](/agg-distinct-optimization.md)
       + [Prepare Execution Plan Cache](/sql-prepare-plan-cache.md)
-      + Control Execution Plan
-        + [Overview](/control-execution-plan.md)
-        + [Optimizer Hints](/optimizer-hints.md)
-        + [SQL Plan Management](/sql-plan-management.md)
-        + [The Blocklist of Optimization Rules and Expression Pushdown](/blocklist-control-plan.md)
+    + Control Execution Plans
+      + [Overview](/control-execution-plan.md)
+      + [Optimizer Hints](/optimizer-hints.md)
+      + [SQL Plan Management](/sql-plan-management.md)
+      + [The Blocklist of Optimization Rules and Expression Pushdown](/blocklist-control-plan.md)
 + Tutorials
   + [Multiple Data Centers in One City Deployment](/multi-data-centers-in-one-city-deployment.md)
   + [Three Data Centers in Two Cities Deployment](/three-data-centers-in-two-cities-deployment.md)
@@ -145,17 +149,19 @@
     + [Grafana Monitoring](/best-practices/grafana-monitor-best-practices.md)
     + [PD Scheduling](/best-practices/pd-scheduling-best-practices.md)
     + [TiKV Performance Tuning with Massive Regions](/best-practices/massive-regions-best-practices.md)
+    + [Three-node Hybrid Deployment](/best-practices/three-nodes-hybrid-deployment.md)
   + [Use Placement Rules](/configure-placement-rules.md)
   + [Use Load Base Split](/configure-load-base-split.md)
   + [Use Store Limit](/configure-store-limit.md)
+  + [Integrate with Confluent Platform](/ticdc/integrate-confluent-using-ticdc.md)
 + TiDB Ecosystem Tools
   + [Overview](/ecosystem-tool-user-guide.md)
   + [Use Cases](/ecosystem-tool-user-case.md)
   + [Download](/download-ecosystem-tools.md)
   + Backup & Restore (BR)
-    + [BR FAQ](/br/backup-and-restore-faq.md)
-    + [Use BR Tool](/br/backup-and-restore-tool.md)
     + [BR Use Cases](/br/backup-and-restore-use-cases.md)
+    + [Use BR Tool](/br/backup-and-restore-tool.md)
+    + [BR FAQ](/br/backup-and-restore-faq.md)
   + TiDB Binlog
     + [Overview](/tidb-binlog/tidb-binlog-overview.md)
     + [Quick Start](/tidb-binlog/get-started-with-tidb-binlog.md)
@@ -185,7 +191,7 @@
       + [Checkpoints](/tidb-lightning/tidb-lightning-checkpoints.md)
       + [Table Filter](/table-filter.md)
       + [CSV Support](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)
-      + [TiDB-backend](/tidb-lightning/tidb-lightning-tidb-backend.md)
+      + [Backends](/tidb-lightning/tidb-lightning-backends.md)
       + [Web Interface](/tidb-lightning/tidb-lightning-web-interface.md)
     + [Monitor](/tidb-lightning/monitor-tidb-lightning.md)
     + [Troubleshoot](/troubleshoot-tidb-lightning.md)
@@ -221,6 +227,7 @@
     + [Enable TLS Between TiDB Components](/enable-tls-between-components.md)
     + [Generate Self-signed Certificates](/generate-self-signed-certificates.md)
     + [Encryption at Rest](/encryption-at-rest.md)
+    + [Enable Encryption for Disk Spill](/enable-disk-spill-encrypt.md)
   + Privileges
     + [Security Compatibility with MySQL](/security-compatibility-with-mysql.md)
     + [Privilege Management](/privilege-management.md)
@@ -243,6 +250,10 @@
       + [`ADD COLUMN`](/sql-statements/sql-statement-add-column.md)
       + [`ADD INDEX`](/sql-statements/sql-statement-add-index.md)
       + [`ADMIN`](/sql-statements/sql-statement-admin.md)
+      + [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)
+      + [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)
+      + [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md)
+      + [`ADMIN SHOW DDL [JOBS|QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)
       + [`ALTER DATABASE`](/sql-statements/sql-statement-alter-database.md)
       + [`ALTER INDEX`](/sql-statements/sql-statement-alter-index.md)
       + [`ALTER INSTANCE`](/sql-statements/sql-statement-alter-instance.md)
@@ -377,6 +388,7 @@
       + [Window Functions](/functions-and-operators/window-functions.md)
       + [Miscellaneous Functions](/functions-and-operators/miscellaneous-functions.md)
       + [Precision Math](/functions-and-operators/precision-math.md)
+      + [Set Operations](/functions-and-operators/set-operators.md)
       + [List of Expressions for Pushdown](/functions-and-operators/expressions-pushed-down.md)
     + [Constraints](/constraints.md)
     + [Generated Columns](/generated-columns.md)
@@ -446,6 +458,7 @@
       + [Overview Page](/dashboard/dashboard-overview.md)
       + [Cluster Info Page](/dashboard/dashboard-cluster-info.md)
       + [Key Visualizer Page](/dashboard/dashboard-key-visualizer.md)
+      + [Metrics Relation Graph](/dashboard/dashboard-metrics-relation.md)
       + SQL Statements Analysis
         + [SQL Statements Page](/dashboard/dashboard-statement-list.md)
         + [SQL Details Page](/dashboard/dashboard-statement-details.md)
@@ -477,6 +490,8 @@
     + TiKV
       + [TiKV Overview](/tikv-overview.md)
       + [RocksDB Overview](/storage-engine/rocksdb-overview.md)
+      + [Titan Overview](/storage-engine/titan-overview.md)
+      + [Titan Configuration](/storage-engine/titan-configuration.md)
     + TiFlash
       + [Overview](/tiflash/tiflash-overview.md)
       + [Use TiFlash](/tiflash/use-tiflash.md)
@@ -497,6 +512,7 @@
   + [TiCDC Overview](/ticdc/ticdc-overview.md)
   + [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
   + [Table Filter](/table-filter.md)
+  + [Schedule Replicas by Topology Labels](/schedule-replicas-by-topology-labels.md)
 + FAQs
   + [TiDB FAQs](/faq/tidb-faq.md)
   + [SQL FAQs](/faq/sql-faq.md)
@@ -508,7 +524,12 @@
 + [Glossary](/glossary.md)
 + Release Notes
   + [All Releases](/releases/release-notes.md)
+  + [TiDB Roadmap](/roadmap.md)
   + v4.0
+    + [4.0.8](/releases/release-4.0.8.md)
+    + [4.0.7](/releases/release-4.0.7.md)
+    + [4.0.6](/releases/release-4.0.6.md)
+    + [4.0.5](/releases/release-4.0.5.md)
     + [4.0.4](/releases/release-4.0.4.md)
     + [4.0.3](/releases/release-4.0.3.md)
     + [4.0.2](/releases/release-4.0.2.md)
@@ -529,6 +550,8 @@
     + [3.1.0-beta.1](/releases/release-3.1.0-beta.1.md)
     + [3.1.0-beta](/releases/release-3.1.0-beta.md)
   + v3.0
+    + [3.0.19](/releases/release-3.0.19.md)
+    + [3.0.18](/releases/release-3.0.18.md)
     + [3.0.17](/releases/release-3.0.17.md)
     + [3.0.16](/releases/release-3.0.16.md)
     + [3.0.15](/releases/release-3.0.15.md)

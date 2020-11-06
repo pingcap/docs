@@ -8,7 +8,7 @@ aliases: ['/docs/dev/ticdc/ticdc-overview/','/docs/dev/reference/tools/ticdc/ove
 
 > **Note:**
 >
-> TiCDC is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
+> TiCDC is a feature for general availability (GA) since v4.0.6. You can use it in the production environment.
 
 [TiCDC](https://github.com/pingcap/ticdc) is a tool for replicating the incremental data of TiDB. This tool is implemented by pulling TiKV change logs. It can restore data to a consistent state with any upstream TSO, and provides [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md) to support other systems to subscribe to data changes.
 
@@ -70,24 +70,33 @@ Currently, the TiCDC sink component supports replicating data to the following d
 
 ## Restrictions
 
-To replicate data to TiDB or MySQL, you must ensure that the following requirements are satisfied to guarantee data correctness:
+TiCDC only replicates the table that has at least one **valid index**. A **valid index** is defined as follows:
 
-- The table to be replicated has the primary key or a unique index.
-- If the table to be replicated only has unique indexes, each column of at least one unique index is explicitly defined in the table schema as `NOT NULL`.
+- The primary key (`PRIMARY KEY`) is a valid index.
+- The unique index (`UNIQUE INDEX`) that meets the following conditions at the same time is a valid index:
+    - Every column of the index is explicitly defined as non-nullable (`NOT NULL`).
+    - The index does not have the virtual generated column (`VIRTUAL GENERATED COLUMNS`).
 
 ### Unsupported scenarios
 
 Currently, The following scenarios are not supported:
 
 - The TiKV cluster that uses RawKV alone.
-- The [new framework for collations](/character-set-and-collation.md#new-framework-for-collations) in TiDB v4.0. Before you enable this feature, make sure that the downstream cluster is the TiDB cluster with the same collation as those in the upstream; otherwise, inconsistent collations lead to the issue that the data cannot be located.
 - The [DDL operation `CREATE SEQUENCE`](/sql-statements/sql-statement-create-sequence.md) and the [SEQUENCE function](/sql-statements/sql-statement-create-sequence.md#sequence-function) in TiDB v4.0. When the upstream TiDB uses `SEQUENCE`, TiCDC ignores `SEQUENCE` DDL operations/functions performed upstream. However, DML operations using `SEQUENCE` functions can be correctly replicated.
 - The [TiKV Hibernate Region](https://github.com/tikv/tikv/blob/master/docs/reference/configuration/raftstore-config.md#hibernate-region). TiCDC prevents the Region from entering the hibernated state.
-- The scheduling of existing replication tables to new TiCDC nodes, after the capacity of the TiCDC cluster is scaled out.
+
+## Install and deploy TiCDC
+
+You can deploy TiCDC components in the process of deploying a new TiDB cluster using TiUP. You only need to [add TiCDC](/production-deployment-using-tiup.md#step-3-edit-the-initialization-configuration-file) to the configuration file when TiUP starts the TiDB cluster.
+
+Currently, you can also add TiCDC components to an existing TiDB cluster using either TiUP or binary. For details, see [Deploy and install TiCDC](/ticdc/manage-ticdc.md#deploy-and-install-ticdc).
 
 ## Manage TiCDC Cluster and Replication Tasks
 
-For details, see [Manage TiCDC Cluster and Replication Tasks](/ticdc/manage-ticdc.md).
+Currently, you can use the `cdc cli` tool to manage the status of a TiCDC cluster and data replication tasks. For details, see:
+
+- [Use `cdc cli` to manage cluster status and data replication task](/ticdc/manage-ticdc.md#use-cdc-cli-to-manage-cluster-status-and-data-replication-task)
+- [Use HTTP interface to manage cluster status and data replication task](/ticdc/manage-ticdc.md#use-http-interface-to-manage-cluster-status-and-data-replication-task)
 
 ## Troubleshoot TiCDC
 

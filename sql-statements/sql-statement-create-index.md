@@ -111,18 +111,6 @@ Query OK, 0 rows affected (0.31 sec)
 
 ## Expression index
 
-> **Warning:**
->
-> Expression index is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
-
-To use this feature, make the following setting in [TiDB Configuration File](/tidb-configuration-file.md#allow-expression-index-new-in-v400):
-
-{{< copyable "sql" >}}
-
-```sql
-allow-expression-index = true
-```
-
 TiDB can build indexes not only on one or more columns in a table, but also on an expression. When queries involve expressions, expression indexes can speed up those queries.
 
 Take the following query as an example:
@@ -151,14 +139,14 @@ Currently, the optimizer can use the indexed expressions when the expressions ar
 
 ## Invisible index
 
-Invisible indexes are a new feature introduced in MySQL 8.0 that sets an index to invisible so that the optimizer no longer uses this index.
+Invisible indexes are indexes that are ignored by the query optimizer:
 
 ```sql
 CREATE TABLE t1 (c1 INT, c2 INT, UNIQUE(c2));
 CREATE UNIQUE INDEX c1 ON t1 (c1) INVISIBLE;
 ```
 
-For details, see [Invisible index](/sql-statements/sql-statement-alter-index.md#invisible-index)
+For details, see [`ALTER INDEX`](/sql-statements/sql-statement-alter-index.md).
 
 ## Associated session variables
 

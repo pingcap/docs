@@ -6,7 +6,12 @@ aliases: ['/tidb/dev/tidb-specific-system-variables','/docs/dev/system-variables
 
 # System Variables
 
-TiDB system variables behave similar to MySQL, in that settings may apply on a `SESSION`, `GLOBAL` or both `SESSION` and `GLOBAL` scope. Changes to `GLOBAL` scoped variables **only apply** to new connections to TiDB. Variables can be set with the [`SET` statement](/sql-statements/sql-statement-set-variable.md) on a per-session or global basis:
+TiDB system variables behave similar to MySQL with some differences, in that settings might apply on a `SESSION`, `INSTANCE`, or `GLOBAL` scope, or on a scope that combines `SESSION`, `INSTANCE`, or `GLOBAL`.
+
+- Changes to `GLOBAL` scoped variables **only apply to new connection sessions with TiDB**. Currently active connection sessions are not affected. These changes are persisted and valid after restarts.
+- Changes to `INSTANCE` scoped variables apply to all active or new connection sessions with the current TiDB instance immediately after the changes are made. Other TiDB instances are not affected. These changes are not persisted and become invalid after TiDB restarts.
+
+Variables can be set with the [`SET` statement](/sql-statements/sql-statement-set-variable.md) on a per-session, instance or global basis:
 
 ```sql
 # These two identical statements change a session variable
@@ -29,11 +34,17 @@ SET  GLOBAL tidb_distsql_scan_concurrency = 10;
 
 - Scope: SESSION | GLOBAL
 - Default value: ON
-- Whether automatically commit a transaction.
+- Controls whether statements should automatically commit when not in an explicit transaction. See [Transaction Overview](/transaction-overview.md#autocommit) for more information.
+
+### `allow_auto_random_explicit_insert` <span class="version-mark">New in v4.0.3</span>
+
+- Scope: SESSION (since v4.0.5: SESSION | GLOBAL)
+- Default value: 0
+- Determines whether to allow explicitly specifying the values of the column with the `AUTO_RANDOM` attribute in the `INSERT` statement. `1` means to allow and `0` means to disallow.
 
 ### ddl_slow_threshold
 
-- Scope: SESSION
+- Scope: INSTANCE
 - Default value: 300
 - DDL operations whose execution time exceeds the threshold value are output to the log. The unit is millisecond.
 
@@ -61,6 +72,12 @@ SET  GLOBAL tidb_distsql_scan_concurrency = 10;
 - Default value: 0
 - This variable is used to show whether the execution plan used in the previous `execute` statement is taken directly from the plan cache.
 
+### last_plan_from_binding <span class="version-mark">New in v4.0</span>
+
+- Scope: SESSION
+- Default value: 0
+- This variable is used to show whether the execution plan used in the previous statement was influenced by a [plan binding](/sql-plan-management.md)
+
 ### max_execution_time
 
 - Scope: SESSION | GLOBAL
@@ -70,6 +87,12 @@ SET  GLOBAL tidb_distsql_scan_concurrency = 10;
 > **Note:**
 >
 > Unlike in MySQL, the `max_execution_time` system variable currently works on all kinds of statements in TiDB, not only restricted to the `SELECT` statement. The precision of the timeout value is roughly 100ms. This means the statement might not be terminated in accurate milliseconds as you specify.
+
+### interactive_timeout
+
+- Scope: SESSION | GLOBAL
+- Default value: 28800
+- This variable represents the idle timeout of the interactive user session, which is measured in seconds. Interactive user session refers to the session established by calling [`mysql_real_connect()`](https://dev.mysql.com/doc/c-api/5.7/en/mysql-real-connect.html) API using the `CLIENT_INTERACTIVE` option (for example, MySQL shell client). This variable is fully compatible with MySQL.
 
 ### sql_mode
 
@@ -153,7 +176,7 @@ SET  GLOBAL tidb_distsql_scan_concurrency = 10;
 
 ### tidb_check_mb4_value_in_utf8
 
-- Scope: SERVER
+- Scope: INSTANCE
 - Default value: 1, indicating check the validity of UTF-8 data. This default behavior is compatible with MySQL.
 - This variable is used to set whether to check the validity of UTF-8 data.
 - To upgrade an earlier version (TiDB v2.1.1 or earlier), you may need to disable this option. Otherwise, you can successfully write invalid strings in an earlier version but fail to do this in a later version, because there is no data validity check in the earlier version. For details, see [FAQs After Upgrade](/faq/upgrade-faq.md).
@@ -175,29 +198,30 @@ SET  GLOBAL tidb_distsql_scan_concurrency = 10;
 
 - Scope: SESSION | GLOBAL
 - Default value: 0
-- TiDB supports the optimistic transaction model. This means that conflict check (unique key check) is performed when the transaction is committed. This variable is used to set whether to do a unique key check each time a row of data is written.
-- If this variable is enabled, the performance might be affected in a scenario where a large batch of data is written. For example:
+- This setting only applies to optimistic transactions. When this variable is set to zero, checking for duplicate values in UNIQUE indexes is deferred until the transaction commits. This helps improve performance, but might be an unexpected behavior for some applications. See [Constraints](/constraints.md) for details.
 
-    - When this variable is disabled:
+    - When set to zero and using optimistic transactions:
 
         ```sql
         tidb> create table t (i int key);
         tidb> insert into t values (1);
-        tidb> begin
+        tidb> begin optimistic;
         tidb> insert into t values (1);
         Query OK, 1 row affected
         tidb> commit; -- Check only when a transaction is committed.
         ERROR 1062 : Duplicate entry '1' for key 'PRIMARY'
         ```
 
-    - After this variable is enabled:
+    - When set to 1 and using optimistic transactions:
 
         ```sql
         tidb> set @@tidb_constraint_check_in_place=1;
-        tidb> begin
+        tidb> begin optimistic;
         tidb> insert into t values (1);
         ERROR 1062 : Duplicate entry '1' for key 'PRIMARY'
         ```
+
+Constraint checking is always performed in place for pessimistic transactions (default).
 
 ### tidb_current_ts
 
@@ -252,11 +276,34 @@ SET  GLOBAL tidb_distsql_scan_concurrency = 10;
 - Use a bigger value in OLAP scenarios, and a smaller value in OLTP scenarios.
 - For OLAP scenarios, the maximum value cannot exceed the number of CPU cores of all the TiKV nodes.
 
+### tidb_dml_batch_size
+
+- Scope: SESSION | GLOBAL
+- Default value: 0
+- When this value is greater than `0`, TiDB will batch commit statements such as `INSERT` or `LOAD DATA` into smaller transactions. This reduces memory usage and helps ensure that the `txn-total-size-limit` is not reached by bulk modifications.
+- Only the value `0` provides ACID compliance. Setting this to any other value will break the atomicity and isolation guarantees of TiDB.
+
 ### tidb_enable_cascades_planner
 
 - Scope: SESSION | GLOBAL
 - Default value: 0
 - This variable is used to control whether to enable the cascades planner, which is currently considered experimental.
+
+### tidb_enable_clustered_index <!-- New in v5.0 -->
+
+- Scope: SESSION | GLOBAL
+- Default value: 1
+- This variable is used to control whether to enable the clustered index feature.
+    - This feature is only applicable to newly created tables and does not affect the existing old tables.
+    - This feature is only applicable to tables whose primary key is the single-column non-integer type or the multi-column type. It does not affect the tables without a primary key or tables with the primary key of the single-column non-integer type.
+    - You can execute `select tidb_pk_type from information_schema.tables where table_name ='{table_name}'` to check whether the clustered index feature has been enabled on a table.
+- After you enable this feature, rows are stored directly on the primary key instead of on the internally allocated `rows_id` to which the extra primary key index is created to point.
+
+    This feature impacts performance in the following aspects:
+    - For each `INSERT` operation, there is one less index key written into each row.
+    - When you make a query using the primary key as the equivalent condition, one read request can be saved.
+    - When you make a query using the primary key as the range condition, multiple read requests can be saved.
+    - When you make a query using the prefix of the multi-column primary key as the equivalent condition or range condition, multiple read requests can be saved.
 
 ### tidb_enable_chunk_rpc <span class="version-mark">New in v4.0</span>
 
@@ -281,11 +328,19 @@ SET  GLOBAL tidb_distsql_scan_concurrency = 10;
 
 - Scope: SESSION | GLOBAL
 - Default value: 0
-- This variable is used to control whether to enable `get_lock` and `release_lock` functions. These two functions are not implemented, and always return 1 in the current version of TiDB.
+- By default, TiDB returns an error when you attempt to use the syntax for functionality that is not yet implemented. When the variable value is set to `1`, TiDB silently ignores such cases of unavailable functionality, which is helpful if you cannot make changes to the SQL code.
+- Enabling `noop` functions controls the following behaviors:
+    * `get_lock` and `release_lock` functions
+    * `LOCK IN SHARE MODE` syntax
+    * `SQL_CALC_FOUND_ROWS` syntax
+
+> **Note:**
+>
+> Only the default value of `0` can be considered safe. Setting `tidb_enable_noop_functions=1` might lead to unexpected behaviors in your application, because it permits TiDB to ignore certain syntax without providing an error.
 
 ### tidb_enable_slow_log
 
-- Scope: SESSION
+- Scope: INSTANCE
 - Default value: `1`
 - This variable is used to control whether to enable the slow log feature. It is enabled by default.
 
@@ -294,12 +349,6 @@ SET  GLOBAL tidb_distsql_scan_concurrency = 10;
 - Scope: SESSION | GLOBAL
 - Default value: 1 (the value of the default configuration file)
 - This variable is used to control whether to enable the statement summary feature. If enabled, SQL execution information like time consumption is recorded to the `information_schema.STATEMENTS_SUMMARY` system table to identify and troubleshoot SQL performance issues.
-
-### tidb_enable_streaming
-
-- Scope: SERVER
-- Default value: 0
-- This variable is used to set whether to enable streaming.
 
 ### tidb_enable_table_partition
 
@@ -359,7 +408,7 @@ SET  GLOBAL tidb_distsql_scan_concurrency = 10;
 
 ### tidb_expensive_query_time_threshold
 
-- Scope: SERVER
+- Scope: INSTANCE
 - Default value: 60
 - This variable is used to set the threshold value that determines whether to print expensive query logs. The unit is second. The difference between expensive query logs and slow query logs is:
     - Slow logs are printed after the statement is executed.
@@ -367,14 +416,14 @@ SET  GLOBAL tidb_distsql_scan_concurrency = 10;
 
 ### tidb_force_priority
 
-- Scope: SESSION
+- Scope: INSTANCE
 - Default value: `NO_PRIORITY`
 - This variable is used to change the default priority for statements executed on a TiDB server. A use case is to ensure that a particular user that is performing OLAP queries receives lower priority than users performing OLTP queries.
 - You can set the value of this variable to `NO_PRIORITY`, `LOW_PRIORITY`, `DELAYED` or `HIGH_PRIORITY`.
 
 ### tidb_general_log
 
-- Scope: SERVER
+- Scope: INSTANCE
 - Default value: 0
 - This variable is used to set whether to record all the SQL statements in the log.
 
@@ -465,61 +514,12 @@ SET  GLOBAL tidb_distsql_scan_concurrency = 10;
 - Default value: 1024
 - This variable is used to set the maximum number of schema versions (the table IDs modified for corresponding versions) allowed to be cached. The value range is 100 ~ 16384.
 
-### tidb_mem_quota_hashjoin
-
-- Scope: SESSION
-- Default value: 32 GB
-- This variable is used to set the threshold value of memory quota for the `HashJoin` operator.
-- If the memory quota of the `HashJoin` operator during execution exceeds the threshold value, TiDB performs the operation designated by the OOMAction option in the configuration file.
-
-### tidb_mem_quota_indexlookupjoin
-
-- Scope: SESSION
-- Default value: 32 GB
-- This variable is used to set the threshold value of memory quota for the `IndexLookupJoin` operator.
-- If the memory quota of the `IndexLookupJoin` operator during execution exceeds the threshold value, TiDB performs the operation designated by the OOMAction option in the configuration file.
-
-### tidb_mem_quota_indexlookupreader
-
-- Scope: SESSION
-- Default value: 32 GB
-- This variable is used to set the threshold value of memory quota for the `IndexLookupReader` operator.
-- If the memory quota of the `IndexLookupReader` operator during execution exceeds the threshold value, TiDB performs the operation designated by the OOMAction option in the configuration file.
-
-### tidb_mem_quota_mergejoin
-
-- Scope: SESSION
-- Default value: 32 GB
-- This variable is used to set the threshold value of memory quota for the `MergeJoin` operator.
-- If the memory quota of the `MergeJoin` operator during execution exceeds the threshold value, TiDB performs the operation designated by the OOMAction option in the configuration file.
-
-### tidb_mem_quota_nestedloopapply
-
-- Scope: SESSION
-- Default value: 32 GB
-- This variable is used to set the threshold value of memory quota for the `NestedLoopApply` operator.
-- If the memory quota of the `NestedLoopApply` operator during execution exceeds the threshold value, TiDB performs the operation designated by the OOMAction option in the configuration file.
-
 ### tidb_mem_quota_query
 
 - Scope: SESSION
 - Default value: 1 GB
 - This variable is used to set the threshold value of memory quota for a query.
 - If the memory quota of a query during execution exceeds the threshold value, TiDB performs the operation designated by the OOMAction option in the configuration file. The initial value of this variable is configured by [`mem-quota-query`](/tidb-configuration-file.md#mem-quota-query).
-
-### tidb_mem_quota_sort
-
-- Scope: SESSION
-- Default value: 32 GB
-- This variable is used to set the threshold value of memory quota for the `Sort` operator.
-- If the memory quota of the `Sort` operator during execution exceeds the threshold value, TiDB performs the operation designated by the OOMAction option in the configuration file.
-
-### tidb_mem_quota_topn
-
-- Scope: SESSION
-- Default value: 32 GB
-- This variable is used to set the threshold value of memory quota for the `TopN` operator.
-- If the memory quota of the `TopN` operator during execution exceeds the threshold value, TiDB performs the operation designated by the OOMAction option in the configuration file.
 
 ### tidb_metric_query_range_duration <span class="version-mark">New in v4.0</span>
 
@@ -563,7 +563,7 @@ SET  GLOBAL tidb_distsql_scan_concurrency = 10;
 - This variable is used to set whether the optimizer executes the optimization operation of pushing down the aggregate function with `distinct` (such as `select count(distinct a) from t`) to Coprocessor.
 - When the aggregate function with the `distinct` operation is slow in the query, you can set the variable value to `1`.
 
-In the following example, before `tidb_opt_distinct_agg_push_down` is enabled, TiDB needs to read all data from TiKV and execute `disctinct` on the TiDB side. After `tidb_opt_distinct_agg_push_down` is enabled, `distinct a` is pushed down to Coprocessor, and a `group by` column `test.t.a` is added to `HashAgg_5`.
+In the following example, before `tidb_opt_distinct_agg_push_down` is enabled, TiDB needs to read all data from TiKV and execute `distinct` on the TiDB side. After `tidb_opt_distinct_agg_push_down` is enabled, `distinct a` is pushed down to Coprocessor, and a `group by` column `test.t.a` is added to `HashAgg_5`.
 
 ```sql
 mysql> desc select count(distinct a) from test.t;
@@ -628,7 +628,7 @@ mysql> desc select count(distinct a) from test.t;
 
 ### tidb_query_log_max_len
 
-- Scope: SESSION
+- Scope: INSTANCE
 - Default value: 4096 (bytes)
 - The maximum length of the SQL statement output. When the output length of a statement is larger than the `tidb_query-log-max-len` value, the statement is truncated to output.
 
@@ -640,13 +640,13 @@ set tidb_query_log_max_len = 20
 
 ### tidb_pprof_sql_cpu <span class="version-mark">New in v4.0</span>
 
-- Scope: SESSION
+- Scope: INSTANCE
 - Default value: 0
 - This variable is used to control whether to mark the corresponding SQL statement in the profile output to identify and troubleshoot performance issues.
 
 ### tidb_record_plan_in_slow_log
 
-- Scope: SESSION
+- Scope: INSTANCE
 - Default value: `1`
 - This variable is used to control whether to include the execution plan of slow queries in the slow log.
 
@@ -682,7 +682,7 @@ set tidb_query_log_max_len = 20
 
 ### tidb_skip_isolation_level_check
 
-- Scope: SESSION
+- Scope: SESSION | GLOBAL
 - Default value: 0
 - After this switch is enabled, if an isolation level unsupported by TiDB is assigned to `tx_isolation`, no error is reported. This helps improve compatibility with applications that set (but do not depend on) a different isolation level.
 
@@ -705,7 +705,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 ### tidb_slow_log_threshold
 
-- Scope: SESSION
+- Scope: INSTANCE
 - Default value: 300ms
 - This variable is used to output the threshold value of the time consumed by the slow log. When the time consumed by a query is larger than this value, this query is considered as a slow log and its log is output to the slow query log.
 
@@ -714,6 +714,19 @@ Usage example:
 ```sql
 SET tidb_slow_log_threshold = 200;
 ```
+
+### tidb_enable_collect_execution_info
+
+- Scope: INSTANCE
+- Default value: 1
+- This variable controls whether to record the execution information of each operator in the slow query log.
+
+### tidb_log_desensitization
+
+- Scope: GLOBAL
+- Default value: 0
+- This variable controls whether to hide user information in the SQL statement being recorded into the TiDB log and slow log.
+- When you set the variable to `1`, user information is hidden. For example, if the executed SQL statement is `insert into t values (1,2)`, the statement is recorded as `insert into t values (?,?)` in the log.
 
 ### tidb_slow_query_file
 
@@ -759,7 +772,7 @@ SET tidb_slow_log_threshold = 200;
 
 ### tidb_store_limit <span class="version-mark">New in v3.0.4 and v4.0</span>
 
-- Scope: SESSION | GLOBAL
+- Scope: INSTANCE | GLOBAL
 - Default value: 0
 - This variable is used to limit the maximum number of requests TiDB can send to TiKV at the same time. 0 means no limit.
 
@@ -794,13 +807,13 @@ SET tidb_slow_log_threshold = 200;
 
 - Scope: SESSION | GLOBAL
 - Default value: 4
-- This variable is used to set the concurrency degree of the window operator. 
+- This variable is used to set the concurrency degree of the window operator.
 
 ### time_zone
 
 - Scope: SESSION | GLOBAL
 - Default value: SYSTEM
-- This variable sets the sytem time zone. Values can be specified as either an offset such as '-8:00' or a named zone 'America/Los_Angeles'.
+- This variable sets the system time zone. Values can be specified as either an offset such as '-8:00' or a named zone 'America/Los_Angeles'.
 
 ### transaction_isolation
 
@@ -835,3 +848,34 @@ This variable is an alias for _transaction_isolation_.
 - Scope: SESSION | GLOBAL
 - Default value: ON
 - This variable controls whether to use the high precision mode when computing the window functions.
+
+### tidb_opt_prefer_range_scan
+
+- Scope: SESSION
+- Default value: 0
+- After you set the value of this variable to `1`, the optimizer always prefers index scans over full table scans.
+- In the following example, before you enable `tidb_opt_prefer_range_scan`, the TiDB optimizer performs a full table scan . After you enable `tidb_opt_prefer_range_scan`, the optimizer selects an index scan.
+
+```sql
+explain select * from t where age=5;
++-------------------------+------------+-----------+---------------+-------------------+
+| id                      | estRows    | task      | access object | operator info     |
++-------------------------+------------+-----------+---------------+-------------------+
+| TableReader_7           | 1048576.00 | root      |               | data:Selection_6  |
+| └─Selection_6           | 1048576.00 | cop[tikv] |               | eq(test.t.age, 5) |
+|   └─TableFullScan_5     | 1048576.00 | cop[tikv] | table:t       | keep order:false  |
++-------------------------+------------+-----------+---------------+-------------------+
+3 rows in set (0.00 sec)
+
+set session tidb_opt_prefer_range_scan = 1;
+
+explain select * from t where age=5;
++-------------------------------+------------+-----------+-----------------------------+-------------------------------+
+| id                            | estRows    | task      | access object               | operator info                 |
++-------------------------------+------------+-----------+-----------------------------+-------------------------------+
+| IndexLookUp_7                 | 1048576.00 | root      |                             |                               |
+| ├─IndexRangeScan_5(Build)     | 1048576.00 | cop[tikv] | table:t, index:idx_age(age) | range:[5,5], keep order:false |
+| └─TableRowIDScan_6(Probe)     | 1048576.00 | cop[tikv] | table:t                     | keep order:false              |
++-------------------------------+------------+-----------+-----------------------------+-------------------------------+
+3 rows in set (0.00 sec)
+```

@@ -45,7 +45,7 @@ If your deployment tool is TiUP, take the following steps to solve this problem.
 
 2. After the upgrade, when a new cluster is deployed with Prometheus instances, the metrics can be displayed normally.
 
-3. For an existing cluster, you can restart this cluster to report the metrics addresses. Replace `CLUSTER_NAME` with the actual cluster name:
+3. After the upgrade, for an existing cluster, you can restart this cluster to report the metrics addresses. Replace `CLUSTER_NAME` with the actual cluster name:
 
     {{< copyable "shell-regular" >}}
 
@@ -57,4 +57,4 @@ If your deployment tool is TiUP, take the following steps to solve this problem.
 
 ### An `invalid connection` error is shown in **Top SQL Statements** and **Recent Slow Queries** on the Overview page
 
-The possible reason is that you have enabled the `prepared-plan-cache` feature of TiDB. As an experimental feature, when enabled, `prepared-plan-cache` might not function properly in specific TiDB versions, which could cause this problem in TiDB Dashboard (and other applications). You can disable `prepared-plan-cache` by updating [TiDB Configuration file](/tidb-configuration-file.md#prepared-plan-cache) to solve this problem.
+This error is possibly related to the `prepared-plan-cache` feature of TiDB. You can disable `prepared-plan-cache` by updating [TiDB Configuration file](/tidb-configuration-file.md#prepared-plan-cache).

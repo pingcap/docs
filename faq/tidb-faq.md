@@ -38,17 +38,7 @@ Yes, it is. When all the required services are started, you can use TiDB as easi
 
 #### How is TiDB compatible with MySQL?
 
-Currently, TiDB supports the majority of MySQL 5.7 syntax, but does not support trigger, stored procedures, user-defined functions, and foreign keys. For more details, see [Compatibility with MySQL](/mysql-compatibility.md).
-
-If you use the MySQL 8.0 client and it fails to connect to TiDB, try to add the `default-auth` and `default-character-set` options:
-
-{{< copyable "shell-regular" >}}
-
-```shell
-mysql -h 127.0.0.1 -u root -P 4000 --default-auth=mysql_native_password --default-character-set=utf8
-```
-
-This problem occurs because MySQL 8.0 changes the [authentication plugin](/security-compatibility-with-mysql.md) default in MySQL 5.7. To solve this problem, you need to add the options above to specify using the old encryption method.
+Currently, TiDB supports the majority of MySQL 5.7 syntax, but does not support triggers, stored procedures, user-defined functions, and foreign keys. For more details, see [Compatibility with MySQL](/mysql-compatibility.md).
 
 #### Does TiDB support distributed transactions?
 
@@ -149,6 +139,16 @@ update mysql.tidb set variable_value='30m' where variable_name='tikv_gc_life_tim
 #### ERROR 9007 (HY000): Write Conflict
 
 Check whether `tidb_disable_txn_auto_retry` is set to `on`. If so, set it to `off`; if it is already `off`, increase the value of `tidb_retry_limit` until the error no longer occurs.
+
+#### ERROR 1105 (HY000): client has multi-statement capability disabled
+
+This error might occur after upgrading from an earlier version of TiDB. To prevent against SQL injection attacks, TiDB now prevents multiple queries being executed in the same `COM_QUERY` call by default.
+
+Check the documentation for your client driver for instructions on how to enable multiple statements. i.e:
+
+* [go-sql-driver](https://github.com/go-sql-driver/mysql#multistatements) (`multiStatements`)
+* [Connector/J](https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-reference-configuration-properties.html) (`allowMultiQueries`)
+* PHP [mysqli](https://dev.mysql.com/doc/apis-php/en/apis-php-mysqli.quickstart.multiple-statement.html) (`mysqli_multi_query`)
 
 ### MySQL native error messages
 

@@ -18,7 +18,7 @@ The configuration of the whole rule system consists of multiple rules. Each rule
 
 The key ranges of multiple rules can have overlapping parts, which means that a Region can match multiple rules. In this case, PD decides whether the rules overwrite each other or take effect at the same time according to the attributes of rules. If multiple rules take effect at the same time, PD will generate schedules in sequence according to the stacking order of the rules for rule matching.
 
-In addition, to meet the requirement that rules from different sources are isolated from each other, the concept of "Group" is also introduced. If you do not want a rule to be affected by other rules in the system (such as being overridden), you can use a separate group for it.
+In addition, to meet the requirement that rules from different sources are isolated from each other, these rules can be organized in a more flexible way. Therefore, the concept of "Group" is introduced. Generally, users can place rules in different groups according to different sources.
 
 ![Placement rules overview](/media/placement-rules-1.png)
 
@@ -38,7 +38,7 @@ The following table shows the meaning of each field in a rule:
 | `Count`           | `int`, positive integer                     |  The number of replicas.                            |
 | `LabelConstraint` | `[]Constraint`                    |  Filers nodes based on the label.               |
 | `LocationLabels`  | `[]string`                        |  Used for physical isolation.                       |
-| `IsolationLevel`  | `string`                          |  Used to set the minimum physical isolation level    
+| `IsolationLevel`  | `string`                          |  Used to set the minimum physical isolation level
 
 `LabelConstraint` is similar to the function in Kubernetes that filters labels based on these four primitives: `in`, `notIn`, `exists`, and `notExists`. The meanings of these four primitives are as follows:
 
@@ -49,7 +49,17 @@ The following table shows the meaning of each field in a rule:
 
 The meaning and function of `LocationLabels` are the same with those earlier than v4.0. For example, if you have deployed `[zone,rack,host]` that defines a three-layer topology: the cluster has multiple zones (Availability Zones), each zone has multiple racks, and each rack has multiple hosts. When performing schedule, PD first tries to place the Region's peers in different zones. If this try fails (such as there are three replicas but only two zones in total), PD guarantees to place these replicas in different racks. If the number of racks is not enough to guarantee isolation, then PD tries the host-level isolation.
 
-The meaning and function of `IsolationLevel` is elaborated in [Cluster topology configuration](/location-awareness.md). For example, if you have deployed `[zone,rack,host]` that defines a three-layer topology with `LocationLabels` and set `IsolationLevel` to `zone`, then PD ensures that all peers of each Region are placed in different zones during the scheduling. If the minimum isolation level restriction on `IsolationLevel` cannot be met (for example, 3 replicas are configured but there are only 2 data zones in total), PD will not try to make up to meet this restriction. The default value of `IsolationLevel` is an empty string, which means that it is disabled.
+The meaning and function of `IsolationLevel` is elaborated in [Cluster topology configuration](/schedule-replicas-by-topology-labels.md). For example, if you have deployed `[zone,rack,host]` that defines a three-layer topology with `LocationLabels` and set `IsolationLevel` to `zone`, then PD ensures that all peers of each Region are placed in different zones during the scheduling. If the minimum isolation level restriction on `IsolationLevel` cannot be met (for example, 3 replicas are configured but there are only 2 data zones in total), PD will not try to make up to meet this restriction. The default value of `IsolationLevel` is an empty string, which means that it is disabled.
+
+### Fields of the rule group
+
+The following table shows the description of each field in a rule group:
+
+| Field name | Type and restriction  | Description |
+| :--- | :--- | :--- |
+| `ID` | `string` | The group ID that marks the source of the rule. |
+| `Index` | `int` | The stacking sequence of different groups. |
+| `Override` | `true`/`false` | Whether to override groups with smaller indexes. |
 
 ## Configure rules
 
@@ -197,23 +207,107 @@ EOF
 pd-ctl config placement save --in=rules.json
 ```
 
-pd-ctl also supports directly saving rules to the file by using the `load` command for easier modification:
+### Use pd-ctl to configure rule groups
+
+- To view the list of all rule groups:
+
+    {{< copyable "shell-regular" >}}
+
+    ```bash
+    pd-ctl config placement-rules rule-group show
+    ```
+
+- To view the rule group of a specific ID:
+
+    {{< copyable "shell-regular" >}}
+
+    ```bash
+    pd-ctl config placement-rules rule-group show pd
+    ```
+
+- To set the `index` and `override` attributes of the rule group:
+
+    {{< copyable "shell-regular" >}}
+
+    ```bash
+    pd-ctl config placement-rules rule-group set pd 100 true
+    ```
+
+- To delete the configuration of a rule group (use the default group configuration if there is any rule in the group):
+
+    {{< copyable "shell-regular" >}}
+
+    ```bash
+    pd-ctl config placement-rules rule-group delete pd
+    ```
+
+### Use pd-ctl to batch update groups and rules in groups
+
+To view and modify the rule groups and all rules in the groups at the same time, execute the `rule-bundle` subcommand.
+
+In this subcommand, `get {group_id}` is used to query a group, and the output result shows the rule group and rules of the group in a nested form:
 
 {{< copyable "shell-regular" >}}
 
 ```bash
-pd-ctl config placement-rules load
+pd-ctl config placement-rules rule-bundle get pd
 ```
 
-Executing the above command saves all rules to the `rules.json` file.
+The output of the above command:
+
+```json
+{
+  "group_id": "pd",
+  "group_index": 0,
+  "group_override": false,
+  "rules": [
+    {
+      "group_id": "pd",
+      "id": "default",
+      "start_key": "",
+      "end_key": "",
+      "role": "voter",
+      "count": 3
+    }
+  ]
+}
+```
+
+To write the output to a file, add the `-out` argument to the `rule-bundle get` subcommand, which is convenient for subsequent modification and saving.
 
 {{< copyable "shell-regular" >}}
 
 ```bash
-pd-ctl config placement-rules load --group=pd --out=rule.txt
+pd-ctl config placement-rules rule-bundle get pd -out="group.json"
 ```
 
-The above command saves the rules of a PD Group to the `rules.json` file.
+After the modification is finished, you can use the `rule-bundle set` subcommand to save the configuration in the file to the PD server. Unlike the `save` command described in [Set rules using pd-ctl](#set-rules-using-pd-ctl), this command replaces all the rules of this group on the server side.
+
+{{< copyable "shell-regular" >}}
+
+```bash
+pd-ctl config placement-rules rule-bundle set pd -in="group.json"
+```
+
+### Use pd-ctl to view and modify all configurations
+
+You can also view and modify all configuration using pd-ctl. To do that, save all configuration to a file, edit the configuration file, and then save the file to the PD server to overwrite the previous configuration. This operation also uses the `rule-bundle` subcommand.
+
+For example, to save all configuration to the `rules.json` file, execute the following command:
+
+{{< copyable "shell-regular" >}}
+
+```bash
+pd-ctl config placement-rules rule-bundle load -out="rules.json"
+```
+
+After editing the file, execute the following command to save the configuration to the PD server:
+
+{{< copyable "shell-regular" >}}
+
+```bash
+pd-ctl config placement-rules rule-bundle save -in="rules.json"
+```
 
 ### Use tidb-ctl to query the table-related key range
 
@@ -353,5 +447,40 @@ The following example shows a more complicated `label_constraints` configuration
     {"key": "disk", "op": "notIn", "values": ["hdd"]}
   ],
   "location_labels": ["host"]
+}
+```
+
+### Scenario 5: Migrate a table to the TiFlash cluster
+
+Different from scenario 3, this scenario is not to add new replica(s) on the basis of the existing configuration, but to forcibly override the other configuration of a data range. So you need to specify an `index` value large enough and set `override` to `true` in the rule group configuration to override the existing rule.
+
+The rule:
+
+{{< copyable "" >}}
+
+```json
+{
+  "group_id": "tiflash-override",
+  "id": "learner-replica-table-ttt",
+  "start_key": "7480000000000000ff2d5f720000000000fa",
+  "end_key": "7480000000000000ff2e00000000000000f8",
+  "role": "voter",
+  "count": 3,
+  "label_constraints": [
+    {"key": "engine", "op": "in", "values": ["tiflash"]}
+  ],
+  "location_labels": ["host"]
+}
+```
+
+The rule group:
+
+{{< copyable "" >}}
+
+```json
+{
+  "id": "tiflash-override",
+  "index": 1024,
+  "override": true,
 }
 ```

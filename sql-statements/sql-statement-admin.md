@@ -10,96 +10,12 @@ This statement is a TiDB extension syntax, used to view the status of TiDB and c
 
 ## DDL related statement
 
-### `admin show DDL`
-
-To view the currently running DDL jobs, use `ADMIN SHOW DDL`:
-
-{{< copyable "sql" >}}
-
-```sql
-ADMIN SHOW DDL;
-```
-
-### `admin show DDL jobs`
-
-To view all the results in the current DDL job queue (including tasks that are running and waiting to be run) and the last ten results in the completed DDL job queue, use `ADMIN SHOW DDL JOBS`:
-
-{{< copyable "sql" >}}
-
-```sql
-ADMIN SHOW DDL JOBS [NUM] [WHERE where_condition];
-```
-
-* `NUM`: to view the last `NUM` results in the completed DDL job queue. If not specified, `NUM` is by default 10.
-* `WHERE`: to add filter conditions.
-
-### `admin show DDL queries`
-
-To view the original SQL statements of the DDL job corresponding to `job_id`, use `ADMIN SHOW DDL JOB QUERIES`:
-
-{{< copyable "sql" >}}
-
-```sql
-ADMIN SHOW DDL JOB QUERIES job_id [, job_id] ...;
-```
-
-You can only searches the running DDL job corresponding to `job_id` and the last ten results in the DDL history job queue.
-
-### `admin cancel DDL jobs`
-
-To cancel the currently running DDL jobs and return whether the corresponding jobs are successfully cancelled, use `ADMIN CANCEL DDL JOBS`:
-
-{{< copyable "sql" >}}
-
-```sql
-ADMIN CANCEL DDL JOBS job_id [, job_id] ...;
-```
-
-If the operation fails to cancel the jobs, specific reasons are displayed.
-
-> **Note:**
->
-> - Only this operation can cancel DDL jobs. All other operations and environment changes (such as machine restart and cluster restart) cannot cancel these jobs.
-> - This operation can cancel multiple DDL jobs at the same time. You can get the ID of DDL jobs using the `ADMIN SHOW DDL JOBS` statement.
-> - If the jobs you want to cancel are finished, the cancellation operation fails.
-
-## `ADMIN CHECK` related statement
-
-To check the consistency of all the data and corresponding indexes in the `tbl_name` table, use `ADMIN CHECK TABLE`:
-
-{{< copyable "sql" >}}
-
-```sql
-ADMIN CHECK TABLE tbl_name [, tbl_name] ...;
-```
-
-If the consistency check is passed, an empty result is returned. Otherwise, an error message is returned indicating that the data is inconsistent.
-
-{{< copyable "sql" >}}
-
-```sql
-ADMIN CHECK INDEX tbl_name idx_name;
-```
-
-The above statement is used to check the consistency of the column data and index data corresponding to the `idx_name` index in the `tbl_name` table. If the consistency check is passed, an empty result is returned; otherwise, an error message is returned indicating that the data is inconsistent.
-
-{{< copyable "sql" >}}
-
-```sql
-ADMIN CHECK INDEX tbl_name idx_name (lower_val, upper_val) [, (lower_val, upper_val)] ...;
-```
-
-The above statement is used to check the consistency of the column data and index data corresponding to the `idx_name` index in the `tbl_name` table, with the data range (to be checked) specified. If the consistency check is passed, an empty result is returned. Otherwise, an error message is returned indicating that the data is inconsistent.
-
-### `admin checksum`
-
-{{< copyable "sql" >}}
-
-```sql
-ADMIN CHECKSUM TABLE tbl_name [, tbl_name] ...;
-```
-
-The above statement is used to get the 64-bit checksum value of `tbl_name`. This value is obtained by calculating CRC64 of all key-value pairs (including row data and index data) in the table.
+| Statement                                                                                | Description                 |
+|------------------------------------------------------------------------------------------|-----------------------------|
+| [`ADMIN CANCEL DDL JOBS`](/sql-statements/sql-statement-admin-cancel-ddl.md)             | Cancels a currently running DDL jobs. |
+| [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)          | Calculates the CRC64 of all rows + indexes of a table. |
+| [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) | Checks for consistency of a table or index. |
+| [`ADMIN SHOW DDL [JOBS|QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)      | Shows details about currently running or recently completed DDL jobs. |
 
 ## `ADMIN RELOAD` statement
 
@@ -277,7 +193,7 @@ admin show ddl jobs 5 where state!='synced' and db_name='test';
 * `JOB_TYPE`: the type of the DDL operations.
 * `SCHEMA_STATE`: the current state of the schema. If the `JOB_TYPE` is `add index`, it is the state of the index; if the `JOB_TYPE` is `add column`, it is the state of the column; if the `JOB_TYPE` is `create table`, it is the state of the table. The common states include:
     * `none`: it indicates not existing. When the `drop` or `create` operation fails and rolls back, it usually becomes the `none` state.
-    * `delete only`, `write only`, `delete reorganization`, `write reorganization`: these four states are intermediate states. For details, see the paper [Online, Asynchronous Schema Change in F1](http://static.googleusercontent.com/media/research.google.com/zh-CN//pubs/archive/41376.pdf). These states are not visible in common operations, because the conversion from the intermediate states is so quick. You can see the `write reorganization` state only in `add index` operations, which means that the index data is being added.
+    * `delete only`, `write only`, `delete reorganization`, `write reorganization`: these four states are intermediate states. For details, see the paper [Online, Asynchronous Schema Change in F1](https://static.googleusercontent.com/media/research.google.com/zh-CN//pubs/archive/41376.pdf). These states are not visible in common operations, because the conversion from the intermediate states is so quick. You can see the `write reorganization` state only in `add index` operations, which means that the index data is being added.
     * `public`: it indicates existing and usable. When operations like `create table` and `add index/column` are finished, it usually becomes the `public` state, which means that the created table/column/index can be normally read and written now.
 * `SCHEMA_ID`: the ID of the database on which the DDL operations are performed.
 * `TABLE_ID`: the ID of the table on which the DDL operations are performed.

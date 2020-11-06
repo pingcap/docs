@@ -280,16 +280,6 @@ Configuration items related to the sharing of block cache among multiple RocksDB
 
 Configuration items related to Raftstore
 
-### `sync-log`
-
-+ Enables or disables synchronous write mode. In the synchronous write mode, each commit is forced to be flushed to raft-log synchronously for persistent storage.
-
-    > **Note:**
-    >
-    > Setting the value to `false` might lead to data loss.
-
-+ Default value: `true`
-
 ### `prevote`
 
 + Enables or disables `prevote`. Enabling this feature helps reduce jitter on the system after recovery from network partition.
@@ -649,10 +639,16 @@ Configuration items related to RocksDB
 + Default value: `8`
 + Minimum value: `1`
 
+### `max-background-flushes`
+
++ The maximum number of concurrent background memtable flush jobs
++ Default value: `2`
++ Minimum value: `1`
+
 ### `max-sub-compactions`
 
 + The number of sub-compaction operations performed concurrently in RocksDB
-+ Default value: `1`
++ Default value: `3`
 + Minimum value: `1`
 
 ### `max-open-files`
@@ -1121,7 +1117,7 @@ Configuration items related to `raftdb`
 ### `max-sub-compactions`
 
 + The number of concurrent sub-compaction operations performed in RocksDB
-+ Default value: `1`
++ Default value: `2`
 + Minimum value: `1`
 
 ### `wal-dir`
@@ -1148,6 +1144,11 @@ Configuration items related to security
 + The path of the PEM file that contains the X509 key
 + Default value: ""
 
+### `redact-info-log`
+
++ This configuration item enables or disables log redaction. If the configuration value is set to `true`, all user data in the log will be replaced by `?`.
++ Default value: `false`
+
 ## `import`
 
 Configuration items related to TiDB Lightning import and BR restore.
@@ -1163,7 +1164,7 @@ Configuration items related to TiDB Lightning import and BR restore.
 + The number of jobs imported concurrently
 + Default value: `8`
 + Minimum value: `1`
-  
+
 ## backup
 
 Configuration items related to BR backup.
@@ -1172,14 +1173,11 @@ Configuration items related to BR backup.
 
 + The number of worker threads to process backup
 + Default value: `MIN(CPU * 0.75, 32)`.
-+ Minimum value: `1` 
++ Minimum value: `1`
 
 ## pessimistic-txn
 
-### `enabled`
-
-- Enables the pessimistic transaction mode. For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](/pessimistic-transaction.md).
-- Default value: `true`
+For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](/pessimistic-transaction.md).
 
 ### `wait-for-lock-timeout`
 
