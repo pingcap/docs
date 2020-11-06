@@ -101,33 +101,33 @@ The execution information from a `Point_Get` operator will typically contain the
 
 - `Get:{num_rpc:1, total_time:697.051µs}`: The number of the `Get` RPC requests (`num_rpc`) sent to TiKV and the total duration (`total_time`) of all RPC requests.
 - `ResolveLock:{num_rpc:1, total_time:12.117495ms}`: If TiDB encounters a lock when reading data, it has to resolve the lock first, which generally occurs in the scenario of read-write conflict. This information indicates the duration of resolving locks.
-- `regionMiss_backoff:{num:11, total_time:2010 ms},tikvRPC_backoff:{num:11, total_time:10691 ms}`: When an RPC request fails, TiDB will wait the backoff time before retrying. Backoff statistics include the type of backoff (such as `regionMiss`, `tikvRPC`), the total time waiting (`total_time`) and the total number of backoffs (`num`).
+- `regionMiss_backoff:{num:11, total_time:2010 ms},tikvRPC_backoff:{num:11, total_time:10691 ms}`: When an RPC request fails, TiDB will wait the backoff time before retrying the request. Backoff statistics include the type of backoff (such as `regionMiss` and `tikvRPC`), the total waiting time (`total_time`), and the total number of backoffs (`num`).
 
 ### Batch_Point_Get
 
-The execution information of the `Batch_Point_Get` operator is similar to the `Point_Get` operator, but `Batch_Point_Get` generally sends `BatchGet` RPC requests to TiKV to read the data.
+The execution information of the `Batch_Point_Get` operator is similar to that of the `Point_Get` operator, but `Batch_Point_Get` generally sends `BatchGet` RPC requests to TiKV to read data.
 
 - `BatchGet:{num_rpc:2, total_time:83.13µs}`: The number of RPC requests (`num_rpc`) of type `BatchGet` sent to TiKV and the total time consumed (`total_time`) for all RPC requests.
 
 ### TableReader
 
-The execution information from a `TableReader` operator will typically contain the following:
+The execution information of a `TableReader` operator is typically as follows:
 
 ```
 cop_task: {num: 6, max: 1.07587ms, min: 844.312µs, avg: 919.601µs, p95: 1.07587ms, max_proc_keys: 16, p95_proc_keys: 16, tot_proc: 1ms, tot_wait: 1ms, rpc_num: 6, rpc_time: 5.313996 ms, copr_cache_hit_ratio: 0.00}
 ```
 
-- `cop_task`: Contains the information about executing cop task, such as:
+- `cop_task`: Contains the execution information of `cop` tasks. For example:
     - `num`: the number of cop tasks.
     - `max`, `min`, `avg`, `p95`: the maximum, minimum, average and P95 value of the execution time consumed for executing cop tasks.
-    - `max_proc_keys`, `p95_proc_keys`: The maximum, P95 value of tikv scan key/value in all cop tasks. If the difference between max and p95 is large, the data distribution may be not balanced.
+    - `max_proc_keys` and `p95_proc_keys`: The maximum and P95 key-values scanned by TiKV in all cop tasks. If the difference between the maximum value and the P95 value is large, the data distribution might be imbalanced.
     - `rpc_num`, `rpc_time`: The total number and total time consumed for `Cop` RPC requests sent to TiKV.
-    - `copr_cache_hit_ratio`: Coprocessor Cache cache hit rate requested by cop task. [Coprocessor Cache Configuration](/tidb-configuration-file.md).
-- `backoff`: Contains different types of backoff and total backoff waiting time.
+    - `copr_cache_hit_ratio`: The hit rate of Coprocessor Cache for `cop` task requests. See [Coprocessor Cache Configuration](/tidb-configuration-file.md) for details.
+- `backoff`: Contains different types of backoff and the total waiting time of backoff.
 
 ### Insert
 
-The execution information from a `Insert` operator will typically contain the following:
+The execution information of an `Insert` operator is typically as follows:
 
 ```
 prepare:109.616µs, check_insert:{total_time:1.431678ms, mem_insert_time:667.878µs, prefetch:763.8µs, rpc:{BatchGet:{num_rpc:1, total_time:699.166µs},Get:{num_rpc:1, total_time:378.276µs }}}
@@ -137,10 +137,10 @@ prepare:109.616µs, check_insert:{total_time:1.431678ms, mem_insert_time:667.878
 - `check_insert`: This information generally appears in `insert ignore` and `insert on duplicate` statements, it including conflict checking and time consumed for writing to TiDB transaction cache. Note that this time consumed does not include the time consumed for transaction commit. It contains the following information:
     - `total_time`: the total time spent in the `check_insert` step.
     - `mem_insert_time`: The time consumed for writing data to the TiDB transaction cache.
-    - `prefetch`: The time-consumed retrieving data that needs to be checked for conflicts from TiKV. This step is mainly to send a `Batch_Get` RPC request to TiKV to retrieve data.
+    - `prefetch`: The duration of retrieving the data that needs to be checked for conflicts from TiKV. This step sends a `Batch_Get` RPC request to TiKV to retrieve data.
     - `rpc`: The total time consumed for sending RPC requests to TiKV, which generally includes two types of RPC time, `BatchGet` and `Get`, among which:
-        - `BatchGet` RPC request is sent by the `prefetch` step.
-        - `Get` RPC request is sent by `insert on duplicate` statement when executing `duplicate update` step.
+        - `BatchGet` RPC request is sent in the `prefetch` step.
+        - `Get` RPC request is sent when the `insert on duplicate` statement executes `duplicate update`.
 - `backoff`: Contains different types of backoff and the total waiting time of backoff.
 
 ### IndexJoin
