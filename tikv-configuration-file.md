@@ -774,7 +774,7 @@ Configuration items related to RocksDB
 ### `info-log-roll-time`
 
 + The time interval at which Info logs are truncated. If the value is `0`, logs are not truncated.
-+ Default value: `0`
++ Default value: `0s`
 
 ### `info-log-keep-log-file-num`
 
