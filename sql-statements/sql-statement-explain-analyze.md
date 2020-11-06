@@ -220,8 +220,6 @@ build_hash_table:{total:146.071334ms, fetch:110.338509ms, build:35.732825ms}, pr
     - `probe`: The total time consumed for joining with outer table rows and the hash map.
     - `fetch`: The total time that the join worker waits to read the outer table rows data.
 
-## Other execution info
-
 ### lock_keys execution information
 
 When a DML statement is executed in a pessimistic transaction, the execution information of the operator might also include the execution information of `lock_keys`. For example:
