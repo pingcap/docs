@@ -97,9 +97,9 @@ Pessimistic transactions in TiDB behave similarly to those in MySQL. See the min
 
 5. The autocommit transactions prefer the optimistic locking.
 
-    When using the pessimistic transaction model, the autocommit transactions first commit using the optimistic transaction mode with less overhead. If a write conflict occurs, the autocommit transactions use pessimistic transaction mode when retrying. Thus, if `tidb_retry_limit = 0`, the autocommit transaction still reports the `Write Conflict` error when a write conflict occurs.
+    When using the pessimistic model, the autocommit transactions first try to commit the statement using the optimistic model that has less overhead. If a write conflict occurs, the pessimistic model is used for transaction retry. Therefore, if `tidb_retry_limit` is set to `0`, the autocommit transaction still reports the `Write Conflict` error when a write conflict occurs.
 
-    The autocommit `SELECT FOR UPDATE` statement does not wait for lock, either.
+    The autocommit `SELECT FOR UPDATE` statement does not wait for lock.
 
 6. The data read by `EMBEDDED SELECT` in the statement is not locked.
 
