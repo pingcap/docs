@@ -57,7 +57,7 @@ This is a list of TiDB adopters in various industries.
 |[Panda.tv](https://www.crunchbase.com/organization/panda-tv)|Live Streaming||
 |[Phoenix New Media](https://www.crunchbase.com/organization/phoenix-new-media)|Media|[Chinese](https://pingcap.com/cases-cn/user-case-ifeng/)|
 |[Tencent OMG](https://en.wikipedia.org/wiki/Tencent)|Media||
-|[Terren](http://webterren.com.zigstat.com/)|Media||
+|[Terren](https://www.crunchbase.com/organization/terren)|Media||
 |[LeCloud](https://www.crunchbase.com/organization/letv-2)|Media||
 |[Miaopai](https://en.wikipedia.org/wiki/Miaopai)|Media||
 |[Meizu](https://en.wikipedia.org/wiki/Meizu)|Media||
@@ -72,7 +72,7 @@ This is a list of TiDB adopters in various industries.
 |[360 Finance](https://www.crunchbase.com/organization/360-finance)|FinTech|[Chinese](https://pingcap.com/cases-cn/user-case-360/)|
 |[Tongdun Technology](https://www.crunchbase.com/organization/tongdun-technology)|FinTech||
 |[Wacai](https://www.crunchbase.com/organization/wacai)|FinTech||
-|[Tree Finance](http://treefinancegroup.com.au/)|FinTech||
+|[Tree Finance](https://www.facebook.com/treefinancegroup/)|FinTech||
 |[Mashang Consumer Finance](https://www.crunchbase.com/organization/ms-finance)|FinTech||
 |[Snowball Finance](https://www.crunchbase.com/organization/snowball-finance)|FinTech||
 |[QuantGroup](https://www.crunchbase.com/organization/quantgroup)|FinTech||
