@@ -183,7 +183,7 @@ The following are descriptions of parameters and parameter values that can be co
 | `ssl-ca` | The path of the CA certificate file needed to connect to the downstream MySQL instance (optional)  |
 | `ssl-cert` | The path of the certificate file needed to connect to the downstream MySQL instance (optional) |
 | `ssl-key` | The path of the certificate key file needed to connect to the downstream MySQL instance (optional) |
-| `time-zone` | The time zone used when connecting to the downstream MySQL instances, which is effective since v4.0.8. This is an optional parameter. If this parameter is not specified, the time zone of TiCDC service processes is used. If this parameter is set to an empty value, no time zone is specified when TiCDC connects to the downstream MySQL instances and the default time zone of the downstream is used. |
+| `time-zone` | The time zone used when connecting to the downstream MySQL instance, which is effective since v4.0.8. This is an optional parameter. If this parameter is not specified, the time zone of TiCDC service processes is used. If this parameter is set to an empty value, no time zone is specified when TiCDC connects to the downstream MySQL instance and the default time zone of the downstream is used. |
 
 #### Configure sink URI with `kafka`
 
