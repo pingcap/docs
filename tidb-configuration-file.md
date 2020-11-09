@@ -447,11 +447,11 @@ The Plan Cache configuration of the `PREPARE` statement.
 >
 > This is still an experimental feature. It is **NOT** recommended that you use it in the production environment. Currently, some known issues are as follows:
 >
-> - This feature is temporarily incompatible with [TiCDC](/ticdc/ticdc-overview.md), it might cause TiCDC to run abnormally.
+> - This feature is temporarily incompatible with [TiCDC](/ticdc/ticdc-overview.md), and the feature might cause TiCDC to run abnormally.
 >
-> - This feature is temporarily incompatible with [Follower Read](/follower-read.md) and [TiFlash](/tiflash/tiflash-overview.md), and has no guarantee for snapshot isolation during the use.
+> - This feature is temporarily incompatible with [Follower Read](/follower-read.md) and [TiFlash](/tiflash/tiflash-overview.md), and snapshot isolation cannot be guaranteed during the use.
 >
-> - No guarantee for external consistency.
+> - External consistency cannot be guaranteed.
 >
 > - If the transaction commit is interrupted abnormally due to the shutdown of the TiDB machine while executing DDL operation, the data format might be incorrect.
 
@@ -459,12 +459,12 @@ The Plan Cache configuration of the `PREPARE` statement.
 
 ### `enable`
 
-- Specifies whether to enable the `Async Commit` feature so that the second phase of the two-phase transaction commit performs asynchronously in the background. Enable this feature to reduce the latency of transaction commit. This feature is not compatible with [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) and does not take effect when Binlog is enabled.
+- Specifies whether to enable the `Async Commit` feature so that the second phase of the two-phase transaction commit performs asynchronously in the background. Enable this feature can reduce the latency of transaction commit. This feature is not compatible with [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) and does not take effect when Binlog is enabled.
 - Default value: `false`
 
 ### `keys-limit`
 
-- Specifies the upper limit of the number of keys in an `Async Commit` transaction. The `Async Commit` feature is not suitable for transactions that are too large, and transactions that exceed this limit use the traditional two-phase commit.
+- Specifies the upper limit of the number of keys in an `Async Commit` transaction. The `Async Commit` feature is not suitable for transactions that are too large. Transactions that exceed this limit use the traditional two-phase commit.
 - Default value: `256`
 
 ### `total-key-size-limit`
@@ -477,9 +477,9 @@ The Plan Cache configuration of the `PREPARE` statement.
 >
 > This is still an experimental feature. It is **NOT** recommended that you use it in the production environment. Currently, some known issues are as follows:
 >
-> - This feature is temporarily incompatible with [Follower Read](/follower-read.md) and [TiFlash](/tiflash/tiflash-overview.md), and has no guarantee for snapshot isolation during the use.
+> - This feature is temporarily incompatible with [Follower Read](/follower-read.md) and [TiFlash](/tiflash/tiflash-overview.md), and snapshot isolation cannot be guaranteed during the use.
 >
-> - No guarantee for external consistency.
+> - External consistency cannot be guaranteed.
 >
 > - If the transaction commit is interrupted abnormally due to the shutdown of the TiDB machine while executing DDL operation, the data format might be incorrect.
 
