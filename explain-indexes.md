@@ -319,7 +319,7 @@ EXPLAIN SELECT AVG(intkey) FROM t1;
 4 rows in set (0.00 sec)
 ```
 
-This is considered more efficient than a `TableFullScan` because the width of the value in the index `(intkey + RowID)` is less than the width of the full row.
+In the above examples, `IndexFullScan` is more efficient than `TableFullScan` because the width of the value in the `(intkey + RowID)` index is less than the width of the full row.
 
 The following statement does not support using an `IndexFullScan` operator because additional columns are required from the table:
 
