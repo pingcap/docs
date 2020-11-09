@@ -99,7 +99,7 @@ The `IndexLookup` operator has two child nodes:
 * The `├─IndexRangeScan_8(Build)` operator performs a range scan on the `intkey` index and retrieves the values of the internal `RowID` (for this table, the primary key).
 * The `└─TableRowIDScan_9(Probe)` operator then retrieves the full row from the table data.
 
-Because an `IndexLookup` requires two steps, the SQL Optimizer may elect to use the `TableFullScan` operator in scenarios where a large number of rows match. The optimizer uses [statistics](/statistics.md) in order to make these decisions. In the following example, a large number of rows match the condition of `intkey > 100`, and a `TableFullScan` is chosen:
+Because an `IndexLookup` task requires two steps, the SQL Optimizer might choose the `TableFullScan` operator based on [statistics](/statistics.md) in scenarios where a large number of rows match. In the following example, a large number of rows match the condition of `intkey > 100`, and a `TableFullScan` is chosen:
 
 {{< copyable "sql" >}}
 
