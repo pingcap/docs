@@ -148,9 +148,9 @@ prepare:109.616µs, check_insert:{total_time:1.431678ms, mem_insert_time:667.878
 The `IndexJoin` operator has 1 outer worker and N inner workers for concurrent execution. The join result preserves the order of the outer table. The detailed execution process is as follows:
 
 1. The outer worker reads N outer rows, then wraps it into a task, and sends it to the result channel and the inner worker channel.
-2. The inner worker receives the task, build key ranges from the task, and fetches inner rows according to the key ranges. It then builds the inner row hash map.
+2. The inner worker receives the task, build key ranges from the task, and fetches inner rows according to the key ranges. It then builds the inner row hash table.
 3. The main `IndexJoin`  thread receives the task from the result channel and waits for the inner worker to finish handling the task.
-4. The main `IndexJoin` thread joins each outer row by looking up to the inner rows' hash map.
+4. The main `IndexJoin` thread joins each outer row by looking up to the inner rows' hash table.
 
 The `IndexJoin` operator contains the following execution information:
 
@@ -164,8 +164,8 @@ inner:{total:4.297515932s, concurrency:5, task:17, construct:97.96291ms, fetch:4
     - `task`: The total number of tasks processed by the inner worker.
     - `construct`: The preparation time before the inner worker reads the inner table rows corresponding to the task.
     - `fetch`: The total time consumed for it takes for the inner worker to read inner table rows.
-    - `Build`: The total time consumed for it takes for the inner worker to construct the hash map of the corresponding inner table rows.
-- `probe`: The total time consumed by the main `IndexJoin` thread to perform join operations with the hash map of the outer table rows and the inner table rows.
+    - `Build`: The total time consumed for it takes for the inner worker to construct the hash table of the corresponding inner table rows.
+- `probe`: The total time consumed by the main `IndexJoin` thread to perform join operations with the hash table of the outer table rows and the inner table rows.
 
 ### IndexHashJoin
 
@@ -190,17 +190,17 @@ inner:{total:4.429220003s, concurrency:5, task:17, construct:96.207725ms, fetch:
     - `task`: The total number of tasks processed by the inner worker.
     - `construct`: the preparation time before the inner worker reads the inner table rows.
     - `fetch`: The total time consumed for inner worker to read inner table rows.
-    - `Build`: The total time consumed for inner worker to construct the hash map of the outer table rows.
-    - `join`:  The total time consumed for inner worker to do join with the inner table rows and the hash map of outer table rows.
+    - `Build`: The total time consumed for inner worker to construct the hash table of the outer table rows.
+    - `join`:  The total time consumed for inner worker to do join with the inner table rows and the hash table of outer table rows.
 
 ### HashJoin
 
 The `HashJoin` operator has an inner worker, an outer worker, and N join workers. The detailed execution process is as follows:
 
-1. The inner worker reads inner table rows and constructs a hash map.
+1. The inner worker reads inner table rows and constructs a hash table.
 2. The outer worker reads the outer table rows, then wraps it into a task and sends it to the join worker.
-3. Wait for the hash map construction in step 1 to finish.
-4. The join worker uses the outer table rows and hash map in the task to perform join operations, and then sends the join result to the result channel.
+3. The join worker Wait for the hash table construction in step 1 to finish.
+4. The join worker uses the outer table rows and hash table in the task to perform join operations, and then sends the join result to the result channel.
 5. The main thread of `HashJoin` receives the join result from the result channel.
 
 The `HashJoin` operator contains the following execution information:
@@ -209,15 +209,15 @@ The `HashJoin` operator contains the following execution information:
 build_hash_table:{total:146.071334ms, fetch:110.338509ms, build:35.732825ms}, probe:{concurrency:5, total:857.162518ms, max:171.48271ms, probe:125.341665ms, fetch:731.820853ms}
 ```
 
-- `build_hash_table`: Reads the data of the inner table and constructs the execution information of the hash map:
+- `build_hash_table`: Reads the data of the inner table and constructs the execution information of the hash table:
     - `total`: The total time consumption.
     - `fetch`: The total time spent reading inner table data.
-    - `build`: The total time spent constructing a hash map.
+    - `build`: The total time spent constructing a hash table.
 - `probe`: The execution information of join workers:
     - `concurrency`: The number of join workers.
     - `total`: The total time consumed by all join workers.
     - `max`: The longest time for a single join worker to execute.
-    - `probe`: The total time consumed for joining with outer table rows and the hash map.
+    - `probe`: The total time consumed for joining with outer table rows and the hash table.
     - `fetch`: The total time that the join worker waits to read the outer table rows data.
 
 ### lock_keys execution information
