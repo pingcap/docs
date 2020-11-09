@@ -118,7 +118,7 @@ cop_task: {num: 6, max: 1.07587ms, min: 844.312µs, avg: 919.601µs, p95: 1.0758
 ```
 
 - `cop_task`: Contains the execution information of `cop` tasks. For example:
-    - `num`: the number of cop tasks.
+    - `num`: The number of cop tasks.
     - `max`, `min`, `avg`, `p95`: the maximum, minimum, average and P95 value of the execution time consumed for executing cop tasks.
     - `max_proc_keys` and `p95_proc_keys`: The maximum and P95 key-values scanned by TiKV in all cop tasks. If the difference between the maximum value and the P95 value is large, the data distribution might be imbalanced.
     - `rpc_num`, `rpc_time`: The total number and total time consumed for `Cop` RPC requests sent to TiKV.
@@ -134,8 +134,8 @@ prepare:109.616µs, check_insert:{total_time:1.431678ms, mem_insert_time:667.878
 ```
 
 - `prepare`: The time consumed for preparing to write, including expression, default value and auto-increment value calculations.
-- `check_insert`: This information generally appears in `insert ignore` and `insert on duplicate` statements, it including conflict checking and time consumed for writing to TiDB transaction cache. Note that this time consumed does not include the time consumed for transaction commit. It contains the following information:
-    - `total_time`: the total time spent on the `check_insert` step.
+- `check_insert`: This information generally appears in `insert ignore` and `insert on duplicate` statements, including conflict checking and the time consumed for writing data to TiDB transaction cache. Note that this time consumption does not include the time consumed for transaction commit. It contains the following information:
+    - `total_time`: The total time spent on the `check_insert` step.
     - `mem_insert_time`: The time consumed for writing data to the TiDB transaction cache.
     - `prefetch`: The duration of retrieving the data that needs to be checked for conflicts from TiKV. This step sends a `Batch_Get` RPC request to TiKV to retrieve data.
     - `rpc`: The total time consumed for sending RPC requests to TiKV, which generally includes two types of RPC time, `BatchGet` and `Get`, among which:
@@ -158,14 +158,14 @@ The `IndexJoin` operator contains the following execution information:
 inner:{total:4.297515932s, concurrency:5, task:17, construct:97.96291ms, fetch:4.164310088s, build:35.219574ms}, probe:53.574945ms
 ```
 
-- `Inner`: the execution information of inner worker:
-    - `total`: the total time consumed by the inner worker.
-    - `concurrency`: the number of concurrent inner workers.
+- `Inner`: The execution information of inner worker:
+    - `total`: The total time consumed by the inner worker.
+    - `concurrency`: The number of concurrent inner workers.
     - `task`: The total number of tasks processed by the inner worker.
-    - `construct`: the preparation time before the inner worker reads the inner table rows corresponding to the task.
+    - `construct`: The preparation time before the inner worker reads the inner table rows corresponding to the task.
     - `fetch`: The total time consumed for it takes for the inner worker to read inner table rows.
     - `Build`: The total time consumed for it takes for the inner worker to construct the hash map of the corresponding inner table rows.
-- `probe`: the total time consumed by the main `IndexJoin` thread to perform join operations with the hash map of the outer table rows and the inner table rows.
+- `probe`: The total time consumed by the main `IndexJoin` thread to perform join operations with the hash map of the outer table rows and the inner table rows.
 
 ### IndexHashJoin
 
