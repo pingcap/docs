@@ -25,7 +25,7 @@ INSERT INTO t1 SELECT NULL, FLOOR(RAND()*1024), RANDOM_BYTES(1024) FROM t1 a JOI
 
 ## IndexLookup operator
 
-The `IndexLookup` operator is used by TiDB when retrieving data from a secondary index. In this case, the following queries will all use the `IndexLookup` operator on the index `intkey`:
+TiDB uses the `IndexLookup` operator when retrieving data from a secondary index. In this case, the following queries will all use the `IndexLookup` operator on the `intkey` index:
 
 {{< copyable "sql" >}}
 
