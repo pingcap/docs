@@ -231,7 +231,7 @@ Query OK, 0 rows affected (0.37 sec)
 
 ## IndexFullScan
 
-Because indexes are ordered, the `IndexFullScan` can be used to optimize common queries such as the `MIN` or `MAX` values for an indexed value:
+Because indexes are ordered, the `IndexFullScan` operator can be used to optimize common queries such as the `MIN` or `MAX` values for an indexed value:
 
 {{< copyable "sql" >}}
 
