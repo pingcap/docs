@@ -96,7 +96,7 @@ EXPLAIN SELECT * FROM t1 WHERE intkey >= 99 AND intkey <= 103;
 
 The `IndexLookup` operator has two child nodes:
 
-* The `├─IndexRangeScan_8(Build)` performs a range scan on the `intkey` index and retries the value of the internal `RowID`, which for this table is also the `PRIMARY KEY`.
+* The `├─IndexRangeScan_8(Build)` operator performs a range scan on the `intkey` index and retrieves the values of the internal `RowID` (for this table, the primary key).
 * The `└─TableRowIDScan_9(Probe)` operator then retrieves the full row from the table data.
 
 Because an `IndexLookup` requires two steps, the SQL Optimizer may elect to use the `TableFullScan` operator in scenarios where a large number of rows match. The optimizer uses [statistics](/statistics.md) in order to make these decisions. In the following example, a large number of rows match the condition of `intkey > 100`, and a `TableFullScan` is chosen:
