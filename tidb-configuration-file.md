@@ -440,7 +440,7 @@ The Plan Cache configuration of the `PREPARE` statement.
 
 ### `enable-one-pc` <!-- New in v5.0 -->
 
-- Specifies whether to use the one-phase commit feature for transactions involving only one Region. Compared with the traditional two-phase commit, first phase commit can greatly reduce transaction commit latency and increase throughput.
+- Specifies whether to use the one-phase commit feature for transactions that involve only one Region. Compared with the two-phase commit, the one-phase commit feature can greatly reduce the commit latency and increase throughput.
 - Default value: `false`
 
 > **Warning:**
