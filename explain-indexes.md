@@ -5,7 +5,14 @@ summary: Learn about the execution plan information returned by the EXPLAIN stat
 
 # Explain Statements That Use Indexes
 
-TiDB supports several operators which make use of indexes to speed up query execution. The examples in this document are based on the following sample data:
+TiDB supports several operators which make use of indexes to speed up query execution:
+
++ [`IndexLookup`](#indexlookup-operator)
++ [`IndexReader`](#indexreader)
++ [`Point_Get` and `Batch_Point_Get`](#point_get-and-batch_point_get)
++ [`IndexFullScan`](#indexfullscan)
+
+The examples in this document are based on the following sample data:
 
 {{< copyable "sql" >}}
 
