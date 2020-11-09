@@ -475,13 +475,13 @@ The Plan Cache configuration of the `PREPARE` statement.
 
 > **Warning:**
 >
-> This is still an experimental feature. It is **NOT** recommended that you use it in the production environment. Currently, some known issues are as follows:
+> This is still an experimental feature. It is **NOT** recommended that you use it in a production environment. Currently, the following issues are found, and be aware of them if you need to use this feature:
 >
-> - This feature is temporarily incompatible with [Follower Read](/follower-read.md) and [TiFlash](/tiflash/tiflash-overview.md), and snapshot isolation cannot be guaranteed during the use.
+> - This feature is incompatible with [Follower Read](/follower-read.md) and [TiFlash](/tiflash/tiflash-overview.md), and snapshot isolation cannot be guaranteed.
 >
 > - External consistency cannot be guaranteed.
 >
-> - If the transaction commit is interrupted abnormally due to the shutdown of the TiDB machine while executing DDL operation, the data format might be incorrect.
+> - If the transaction commit is interrupted abnormally by the machine shutdown when the DDL operation is executed, the data format might be incorrect.
 
 ## tikv-client.copr-cache <span class="version-mark">New in v4.0.0</span>
 
