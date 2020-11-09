@@ -273,7 +273,7 @@ EXPLAIN SELECT MAX(intkey) FROM t1;
 
 In the above statements, an `IndexFullScan` task is performed on each TiKV Region. Despite the name `FullScan`, only the first row needs to be read (`└─Limit_28`). Each TiKV Region returns its `MIN` or `MAX` value to TiDB, which then performs Stream Aggregation to filter for a single row. Stream Aggregation with the aggregation function `MAX` or `MIN` also ensures that `NULL` is returned if the table is empty.
 
-By contrast, executing `MIN` on an unindexed value will result in a `TableFullScan`. The query requires all rows to be scanned in TiKV, but a `TopN` is performed to ensure each TiKV region only returns one row to TiDB. While the `TopN` prevents excessive rows being transfered between TiKV and TiDB, this statement is still considered far less efficient than the above example, where `MIN` is able to make use of an index.
+By contrast, executing the `MIN` function on an unindexed value will result in `TableFullScan`. The query will require all rows to be scanned in TiKV, but a `TopN` calculation is performed to ensure each TiKV Region only returns one row to TiDB. Although `TopN` prevents excessive rows from being transferred between TiKV and TiDB, this statement is still considered far less efficient than the above example where `MIN` is able to make use of an index.
 
 {{< copyable "sql" >}}
 
