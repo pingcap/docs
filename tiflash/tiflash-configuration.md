@@ -38,7 +38,7 @@ This section introduces the configuration parameters of TiFlash.
 tmp_path = The path in which the TiFlash temporary files are stored.
 path = The TiFlash data storage path.     # If there are multiple directories, separate each directory with a comma.
 path_realtime_mode = false # The default value is `false`. If you set it to `true` and multiple directories are deployed in the path, the latest data is stored in the first directory and older data is stored in the rest directories.
-listen_host = tiflash # The listening host for supporting services such as TPC/HTTP. It is recommended to configure it as `0.0.0.0`.
+listen_host = The listening host for supporting services such as TPC/HTTP. It is recommended to configure it as `0.0.0.0`.
 tcp_port = The TiFlash TCP service port.
 http_port = The TiFlash HTTP service port.
 mark_cache_size = 5368709120 # The cache size limit of the metadata of a data block. Generally, you do not need to change this value.
