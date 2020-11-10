@@ -469,7 +469,7 @@ The Plan Cache configuration of the `PREPARE` statement.
 
 ### `total-key-size-limit`
 
-- Specifies the upper limit of the total size of keys in an async commit transaction. The async commit feature is **NOT** suitable for transactions in which the involved key ranges are too long. Transactions that exceed this limit will use the traditional two-phase commit.
+- Specifies the upper limit of the total size of keys in an async commit transaction. The async commit feature is **NOT** suitable for transactions in which the involved key ranges are too long. Transactions that exceed this limit will use the two-phase commit.
 - Default value: `4096`
 - Unit: byte
 
