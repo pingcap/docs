@@ -107,7 +107,7 @@ The execution information from a `Point_Get` operator will typically contain the
 
 The execution information of the `Batch_Point_Get` operator is similar to that of the `Point_Get` operator, but `Batch_Point_Get` generally sends `BatchGet` RPC requests to TiKV to read data.
 
-- `BatchGet:{num_rpc:2, total_time:83.13µs}`: The number of RPC requests (`num_rpc`) of type `BatchGet` sent to TiKV and the total time consumed (`total_time`) for all RPC requests.
+`BatchGet:{num_rpc:2, total_time:83.13µs}`: The number of RPC requests (`num_rpc`) of the `BatchGet` type sent to TiKV and the total time consumed (`total_time`) for all RPC requests.
 
 ### TableReader
 
@@ -119,7 +119,7 @@ cop_task: {num: 6, max: 1.07587ms, min: 844.312µs, avg: 919.601µs, p95: 1.0758
 
 - `cop_task`: Contains the execution information of `cop` tasks. For example:
     - `num`: The number of cop tasks.
-    - `max`, `min`, `avg`, `p95`: the maximum, minimum, average and P95 value of the execution time consumed for executing cop tasks.
+    - `max`, `min`, `avg`, `p95`: The maximum, minimum, average, and P95 values of the execution time consumed for executing cop tasks.
     - `max_proc_keys` and `p95_proc_keys`: The maximum and P95 key-values scanned by TiKV in all cop tasks. If the difference between the maximum value and the P95 value is large, the data distribution might be imbalanced.
     - `rpc_num`, `rpc_time`: The total number and total time consumed for `Cop` RPC requests sent to TiKV.
     - `copr_cache_hit_ratio`: The hit rate of Coprocessor Cache for `cop` task requests. See [Coprocessor Cache Configuration](/tidb-configuration-file.md) for details.
@@ -173,9 +173,9 @@ The execution process of the `IndexHashJoin` operator is similar to that of the 
 
 1. The outer worker reads N outer rows, builds a task, and sends it to the inner worker channel.
 2. The inner worker receives the tasks from the inner worker channel and performs the following three operations in order for every task:
-   a. builds hash table from the outer rows
-   b. builds key ranges from outer rows and fetches inner rows
-   c. probes the hash table and sends the join result to the result channel. Note: step a and step b are running concurrently.
+   a. Build a hash table from the outer rows
+   b. Build key ranges from outer rows and fetches inner rows
+   c. Probe the hash table and sends the join result to the result channel. Note: step a and step b are running concurrently.
 3. The main thread of `IndexHashJoin` receives the join results from the result channel.
 
 The `IndexHashJoin` operator contains the following execution information:
@@ -188,7 +188,7 @@ inner:{total:4.429220003s, concurrency:5, task:17, construct:96.207725ms, fetch:
     - `total`: the total time consumed by the inner worker.
     - `concurrency`: the number of inner workers.
     - `task`: The total number of tasks processed by the inner worker.
-    - `construct`: the preparation time before the inner worker reads the inner table rows.
+    - `construct`: The preparation time before the inner worker reads the inner table rows.
     - `fetch`: The total time consumed for inner worker to read inner table rows.
     - `Build`: The total time consumed for inner worker to construct the hash table of the outer table rows.
     - `join`:  The total time consumed for inner worker to do join with the inner table rows and the hash table of outer table rows.
@@ -199,7 +199,7 @@ The `HashJoin` operator has an inner worker, an outer worker, and N join workers
 
 1. The inner worker reads inner table rows and constructs a hash table.
 2. The outer worker reads the outer table rows, then wraps it into a task and sends it to the join worker.
-3. The join worker Wait for the hash table construction in step 1 to finish.
+3. The join worker waits for the hash table construction in step 1 to finish.
 4. The join worker uses the outer table rows and hash table in the task to perform join operations, and then sends the join result to the result channel.
 5. The main thread of `HashJoin` receives the join result from the result channel.
 
