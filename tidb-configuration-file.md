@@ -453,7 +453,7 @@ The Plan Cache configuration of the `PREPARE` statement.
 >
 > - External consistency cannot be guaranteed.
 >
-> - If the transaction commit is interrupted abnormally by the machine shutdown when the DDL operation is executed, the data format might be incorrect.
+> - If the transaction commit is interrupted abnormally by the machine crash when the DDL operation is executed, the data format might be incorrect.
 
 ## tikv-client.async-commit <!-- New in v5.0 -->
 
@@ -481,7 +481,7 @@ The Plan Cache configuration of the `PREPARE` statement.
 >
 > - External consistency cannot be guaranteed.
 >
-> - If the transaction commit is interrupted abnormally by the machine shutdown when the DDL operation is executed, the data format might be incorrect.
+> - If the transaction commit is interrupted abnormally by the machine crash when the DDL operation is executed, the data format might be incorrect.
 
 ## tikv-client.copr-cache <span class="version-mark">New in v4.0.0</span>
 
