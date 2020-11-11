@@ -11,7 +11,9 @@ This document introduces how to configure synchronous replication for dual data 
 >
 > Synchronous replication is still an experimental feature. Do not use it in a production environment.
 
-In the scenario of dual data centers, one is the primary center and the other is the DR (data recovery) center. When a Region has an odd number of replicas, more replicas are placed in the primary center. When the DR center is down for more than a specified period of time, the asynchronous mode is used by default for the replication between two centers. In this situation, the primary center will serve requests on its own.
+In the scenario of dual data centers, one is the primary center and the other is the DR (data recovery) center. When a Region has an odd number of replicas, more replicas are placed in the primary center. When the DR center is down for more than a specified period of time, the asynchronous mode is used by default for the replication between two centers.
+
+To use the synchronous mode, you can configure in the PD configuration file or change the replication mode manually using pd-ctl.
 
 ## Enable synchronous replication in PD configuration file
 
