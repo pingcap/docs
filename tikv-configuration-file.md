@@ -231,12 +231,6 @@ Configuration items related to the Coprocessor thread pool.
 
 Configuration items related to storage
 
-### `scheduler-notify-capacity`
-
-+ The maximum number of messages that `scheduler` gets each time
-+ Default value: `10240`
-+ Minimum value: `1`
-
 ### `scheduler-concurrency`
 
 + A built-in memory lock mechanism to prevent simultaneous operations on a key. Each key has a hash in a different slot.
@@ -773,8 +767,8 @@ Configuration items related to RocksDB
 
 ### `info-log-roll-time`
 
-+ The time interval at which Info logs are truncated. If the value is `0`, logs are not truncated.
-+ Default value: `0`
++ The time interval at which Info logs are truncated. If the value is `0s`, logs are not truncated.
++ Default value: `0s`
 
 ### `info-log-keep-log-file-num`
 
