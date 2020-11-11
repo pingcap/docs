@@ -269,12 +269,7 @@ Then after you restart TiKV, these Regions can continue to provide services usin
 
 Use the `recover-mvcc` command in circumstances where TiKV cannot run normally caused by MVCC data corruption. It cross-checks 3 CFs ("default", "write", "lock") to recover from various kinds of inconsistency.
 
-<<<<<<< HEAD
 Use the `-r` option to specify involved Regions by `region_id`. Use the `-p` option to specify PD endpoints.
-=======
-- Use the `-r` option to specify involved Regions by `region_id`.
-- Use the `-p` option to specify PD endpoints.
->>>>>>> 12d252bf... Unify tikv port (#4200)
 
 ```bash
 $ tikv-ctl --db /path/to/tikv/db recover-mvcc -r 1001,1002 -p 127.0.0.1:2379
