@@ -183,7 +183,7 @@ Because `id` is also the internal `RowID`, it is stored in the `intkey` index. A
 
 ## Point_Get and Batch_Point_Get
 
-The `Point_Get` and `Batch_Point_Get` operator is used when retrieving data directly from a Primary Key or Unique Key. This operator is more efficient than `IndexLookup`. For example:
+TiDB uses the `Point_Get` or `Batch_Point_Get` operator when retrieving data directly from a primary key or unique key. These operators are more efficient than `IndexLookup`. For example:
 
 {{< copyable "sql" >}}
 
