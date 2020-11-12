@@ -10,11 +10,10 @@ aliases: ['/docs/dev/quick-start-with-tidb/','/docs/dev/test-deployment-using-do
 >
 > For production environments, **do not** deploy TiDB with the following three methods. Instead, it is recommended that you [deploy TiDB using TiUP](/production-deployment-using-tiup.md).
 
-This document describes how to try out TiDB, a distributed SQL database, in a few minutes. You can choose any of the following three methods to get started with the TiDB database platform:
+This document describes how to try out TiDB, a distributed SQL database, in a few minutes. You can choose any of the following two methods to get started with the TiDB database platform:
 
 - [Deploy a local test environment using TiUP Playground](#deploy-a-local-test-environment-using-tiup-playground)
 - [Set up a test environment on a single machine using TiUP Cluster](#set-up-a-test-environment-on-a-single-machine-using-tiup-cluster)
-- [Try out TiDB with one click using TiDB-Wasm](#try-out-tidb-with-one-click-using-tidb-wasm)
 
 ## Deploy a local test environment using TiUP Playground
 
@@ -98,6 +97,10 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
         ```shell
         tiup clean --all
         ```
+
+> **Note:**
+>
+> TiUP Playground listens on `127.0.0.1` by default, and the service is only locally accessible; if you want the service to be externally accessible, you can specify `0.0.0.0` as the listening address using the `--host` parameter or bind the network interface card (NIC) to an externally accessible IP address.
 
 ## Set up a test environment on a single machine using TiUP cluster
 
@@ -201,6 +204,7 @@ Other requirements for the target machine:
        readpool.coprocessor.use-unified-pool: true
      pd:
        replication.enable-placement-rules: true
+       replication.location-labels: ["host"]
      tiflash:
        logger.level: "info"
 
@@ -214,14 +218,20 @@ Other requirements for the target machine:
      - host: 10.0.1.1
        port: 20160
        status_port: 20180
+       config:
+         server.labels: { host: "logic-host-1" }
 
      - host: 10.0.1.1
        port: 20161
        status_port: 20181
+       config:
+         server.labels: { host: "logic-host-2" }
 
      - host: 10.0.1.1
        port: 20162
        status_port: 20182
+       config:
+         server.labels: { host: "logic-host-3" }
 
     tiflash_servers:
      - host: 10.0.1.1
@@ -292,15 +302,6 @@ Other requirements for the target machine:
         ```shell
         tiup cluster display <cluster-name>
         ```
-
-## Try out TiDB with one click using TiDB-Wasm
-
-- Scenario: Experiment with TiDB SQL and test the TiDB compatibility with MySQL queries.
-- Time required: Instant
-
-TiDB-Wasm enables you to run a TiDB server instance in a browser so that you can experiment with SQL and test TiDB compatibility with MySQL queries.
-
-Click to try TiDB-Wasm playground: <https://tour.tidb.io>. It takes about 10 seconds to launch the TiDB server instance in your browser. The playground walks you through the basic TiDB SQL statements such as DDL, DML and CRUD operations.
 
 ## What's next
 

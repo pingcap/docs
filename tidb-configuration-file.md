@@ -54,11 +54,6 @@ The TiDB configuration file supports more options than command-line parameters. 
 - Default value: `"cancel"` (In TiDB v4.0.2 and earlier versions, the default value is `"log"`)
 - The valid options are `"log"` and `"cancel"`. When `oom-action="log"`, it prints the log only. When `oom-action="cancel"`, it cancels the operation and outputs the log.
 
-### `enable-streaming`
-
-- Determines whether to enable the data fetch mode of streaming in Coprocessor.
-- Default value: `false`
-
 ### `lower-case-table-names`
 
 - Configures the value of the `lower-case-table-names` system variable.
@@ -289,7 +284,7 @@ Configuration items related to performance.
 
 - The maximum memory limit for the Prepared Least Recently Used (LRU) caching. If this value exceeds `performance.max-memory * (1 - prepared-plan-cache.memory-guard-ratio)`, the elements in the LRU are removed.
 - Default value: `0`
-- This configuration only takes effect when `prepared-plan-cache.enabled` is `true`. When the size of the LRU is greater than `prepared-plan-cache.capacity`, the elements in the LRU are also removed.
+- This configuration takes effect when `prepared-plan-cache.enabled` is `true` (default). When the size of the LRU is greater than `prepared-plan-cache.capacity`, the elements in the LRU are also removed.
 
 ### `stmt-count-limit`
 
@@ -372,14 +367,10 @@ Configuration items related to performance.
 
 The Plan Cache configuration of the `PREPARE` statement.
 
-> **Warning:**
->
-> This is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
-
 ### `enabled`
 
 - Determines whether to enable Plan Cache of the `PREPARE` statement.
-- Default value: `false`
+- Default value: `true`
 
 ### `capacity`
 
@@ -446,6 +437,51 @@ The Plan Cache configuration of the `PREPARE` statement.
 
 - The threshold of the TiKV load. If the TiKV load exceeds this threshold, more `batch` packets are collected to relieve the pressure of TiKV. It is valid only when the value of `tikv-client.max-batch-size` is greater than `0`. It is recommended not to modify this value.
 - Default value: `200`
+
+### `enable-one-pc` <!-- New in v5.0 -->
+
+- Specifies whether to use the one-phase commit feature for transactions that involve only one Region. Compared with the two-phase commit, the one-phase commit feature can greatly reduce the commit latency and increase throughput.
+- Default value: `false`
+
+> **Warning:**
+>
+> This is still an experimental feature. It is **NOT** recommended that you use it in a production environment. Currently, the following issues are found, and be aware of them if you need to use this feature:
+>
+> - This feature is incompatible with [TiCDC](/ticdc/ticdc-overview.md) and might cause TiCDC to run abnormally.
+>
+> - This feature is incompatible with [Follower Read](/follower-read.md) and [TiFlash](/tiflash/tiflash-overview.md), and snapshot isolation cannot be guaranteed.
+>
+> - External consistency cannot be guaranteed.
+>
+> - If the transaction commit is interrupted abnormally by the machine crash when the DDL operation is executed, the data format might be incorrect.
+
+## tikv-client.async-commit <!-- New in v5.0 -->
+
+### `enable`
+
+- Enables or disables the async commit feature for the second phase of the two-phase transaction commit to perform asynchronously in the background. Enabling this feature can reduce the latency of transaction commit. This feature is not compatible with [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) and does not take effect when Binlog is enabled.
+- Default value: `false`
+
+### `keys-limit`
+
+- Specifies the upper limit of the number of keys in an async commit transaction. The async commit feature is **NOT** suitable for transactions that are too large. Transactions that exceed this limit will use the two-phase commit.
+- Default value: `256`
+
+### `total-key-size-limit`
+
+- Specifies the upper limit of the total size of keys in an async commit transaction. The async commit feature is **NOT** suitable for transactions in which the involved key ranges are too long. Transactions that exceed this limit will use the two-phase commit.
+- Default value: `4096`
+- Unit: byte
+
+> **Warning:**
+>
+> This is still an experimental feature. It is **NOT** recommended that you use it in a production environment. Currently, the following issues are found, and be aware of them if you need to use this feature:
+>
+> - This feature is incompatible with [Follower Read](/follower-read.md) and [TiFlash](/tiflash/tiflash-overview.md), and snapshot isolation cannot be guaranteed.
+>
+> - External consistency cannot be guaranteed.
+>
+> - If the transaction commit is interrupted abnormally by the machine crash when the DDL operation is executed, the data format might be incorrect.
 
 ## tikv-client.copr-cache <span class="version-mark">New in v4.0.0</span>
 
@@ -549,10 +585,7 @@ Configurations related to the `events_statement_summary_by_digest` table.
 
 ## pessimistic-txn
 
-### enable
-
-- Enables the pessimistic transaction mode. For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](/pessimistic-transaction.md).
-- Default value: `true`
+For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](/pessimistic-transaction.md).
 
 ### max-retry-count
 
@@ -561,15 +594,4 @@ Configurations related to the `events_statement_summary_by_digest` table.
 
 ## experimental
 
-The `experimental` section describes configurations related to the experimental features of TiDB. This section is introduced since v3.1.0.
-
-### `allow-auto-random` <span class="version-mark">New in v3.1.0</span>
-
-- Determines whether to allow using `AUTO_RANDOM`.
-- Default value: `false`
-- By default, TiDB does not support using `AUTO_RANDOM`. When the value is `true`, you cannot set `alter-primary-key` to `true` at the same time.
-
-### `allow-expression-index` <span class="version-mark">New in v4.0.0</span>
-
-- Determines whether to create the expression index.
-- Default value: `false`
+The `experimental` section, introduced in v3.1.0, describes configurations related to the experimental features of TiDB. Currently, this section has no configuration item.

@@ -38,7 +38,7 @@ The following table shows the meaning of each field in a rule:
 | `Count`           | `int`, positive integer                     |  The number of replicas.                            |
 | `LabelConstraint` | `[]Constraint`                    |  Filers nodes based on the label.               |
 | `LocationLabels`  | `[]string`                        |  Used for physical isolation.                       |
-| `IsolationLevel`  | `string`                          |  Used to set the minimum physical isolation level    
+| `IsolationLevel`  | `string`                          |  Used to set the minimum physical isolation level
 
 `LabelConstraint` is similar to the function in Kubernetes that filters labels based on these four primitives: `in`, `notIn`, `exists`, and `notExists`. The meanings of these four primitives are as follows:
 
@@ -49,7 +49,7 @@ The following table shows the meaning of each field in a rule:
 
 The meaning and function of `LocationLabels` are the same with those earlier than v4.0. For example, if you have deployed `[zone,rack,host]` that defines a three-layer topology: the cluster has multiple zones (Availability Zones), each zone has multiple racks, and each rack has multiple hosts. When performing schedule, PD first tries to place the Region's peers in different zones. If this try fails (such as there are three replicas but only two zones in total), PD guarantees to place these replicas in different racks. If the number of racks is not enough to guarantee isolation, then PD tries the host-level isolation.
 
-The meaning and function of `IsolationLevel` is elaborated in [Cluster topology configuration](/location-awareness.md). For example, if you have deployed `[zone,rack,host]` that defines a three-layer topology with `LocationLabels` and set `IsolationLevel` to `zone`, then PD ensures that all peers of each Region are placed in different zones during the scheduling. If the minimum isolation level restriction on `IsolationLevel` cannot be met (for example, 3 replicas are configured but there are only 2 data zones in total), PD will not try to make up to meet this restriction. The default value of `IsolationLevel` is an empty string, which means that it is disabled.
+The meaning and function of `IsolationLevel` is elaborated in [Cluster topology configuration](/schedule-replicas-by-topology-labels.md). For example, if you have deployed `[zone,rack,host]` that defines a three-layer topology with `LocationLabels` and set `IsolationLevel` to `zone`, then PD ensures that all peers of each Region are placed in different zones during the scheduling. If the minimum isolation level restriction on `IsolationLevel` cannot be met (for example, 3 replicas are configured but there are only 2 data zones in total), PD will not try to make up to meet this restriction. The default value of `IsolationLevel` is an empty string, which means that it is disabled.
 
 ### Fields of the rule group
 
@@ -207,24 +207,6 @@ EOF
 pd-ctl config placement save --in=rules.json
 ```
 
-pd-ctl also supports directly saving rules to the file by using the `load` command for easier modification:
-
-{{< copyable "shell-regular" >}}
-
-```bash
-pd-ctl config placement-rules load
-```
-
-Executing the above command saves all rules to the `rules.json` file.
-
-{{< copyable "shell-regular" >}}
-
-```bash
-pd-ctl config placement-rules load --group=pd --out=rule.txt
-```
-
-The above command saves the rules of a PD Group to the `rules.txt` file.
-
 ### Use pd-ctl to configure rule groups
 
 - To view the list of all rule groups:
@@ -258,6 +240,74 @@ The above command saves the rules of a PD Group to the `rules.txt` file.
     ```bash
     pd-ctl config placement-rules rule-group delete pd
     ```
+
+### Use pd-ctl to batch update groups and rules in groups
+
+To view and modify the rule groups and all rules in the groups at the same time, execute the `rule-bundle` subcommand.
+
+In this subcommand, `get {group_id}` is used to query a group, and the output result shows the rule group and rules of the group in a nested form:
+
+{{< copyable "shell-regular" >}}
+
+```bash
+pd-ctl config placement-rules rule-bundle get pd
+```
+
+The output of the above command:
+
+```json
+{
+  "group_id": "pd",
+  "group_index": 0,
+  "group_override": false,
+  "rules": [
+    {
+      "group_id": "pd",
+      "id": "default",
+      "start_key": "",
+      "end_key": "",
+      "role": "voter",
+      "count": 3
+    }
+  ]
+}
+```
+
+To write the output to a file, add the `-out` argument to the `rule-bundle get` subcommand, which is convenient for subsequent modification and saving.
+
+{{< copyable "shell-regular" >}}
+
+```bash
+pd-ctl config placement-rules rule-bundle get pd -out="group.json"
+```
+
+After the modification is finished, you can use the `rule-bundle set` subcommand to save the configuration in the file to the PD server. Unlike the `save` command described in [Set rules using pd-ctl](#set-rules-using-pd-ctl), this command replaces all the rules of this group on the server side.
+
+{{< copyable "shell-regular" >}}
+
+```bash
+pd-ctl config placement-rules rule-bundle set pd -in="group.json"
+```
+
+### Use pd-ctl to view and modify all configurations
+
+You can also view and modify all configuration using pd-ctl. To do that, save all configuration to a file, edit the configuration file, and then save the file to the PD server to overwrite the previous configuration. This operation also uses the `rule-bundle` subcommand.
+
+For example, to save all configuration to the `rules.json` file, execute the following command:
+
+{{< copyable "shell-regular" >}}
+
+```bash
+pd-ctl config placement-rules rule-bundle load -out="rules.json"
+```
+
+After editing the file, execute the following command to save the configuration to the PD server:
+
+{{< copyable "shell-regular" >}}
+
+```bash
+pd-ctl config placement-rules rule-bundle save -in="rules.json"
+```
 
 ### Use tidb-ctl to query the table-related key range
 

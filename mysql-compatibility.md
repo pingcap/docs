@@ -79,7 +79,7 @@ TiDB uses a combination of [Prometheus and Grafana](/tidb-monitoring-api.md) to 
 
 ### Query Execution Plan
 
-The output format, output content, and the privilege setting of Query Execution Plan (`EXPLAIN`/`EXPLAIN FOR`) in TiDB is greatly different from those in MySQL. See [Understand the Query Execution Plan](/query-execution-plan.md) for more details.
+The output format, output content, and the privilege setting of Query Execution Plan (`EXPLAIN`/`EXPLAIN FOR`) in TiDB is greatly different from those in MySQL. See [Understand the Query Execution Plan](/explain-overview.md) for more details.
 
 ### Built-in functions
 
@@ -89,17 +89,16 @@ See also: [TiDB SQL Grammar](https://pingcap.github.io/sqlgram/#functioncallkeyw
 
 ### DDL
 
-In TiDB, all supported DDL changes are performed online. The MySQL DDL assertions `ALGORITHM=INSTANT` and `ALGORITHM=INPLACE` can also be used to assert which algorithm will be used to modify the table (which might differ from MySQL).
-
-The following major restrictions apply to DDL versus MySQL:
+In TiDB, all supported DDL changes are performed online. Compared with DDL operations in MySQL, the DDL operations in TiDB have the following major restrictions:
 
 * Multiple operations cannot be completed in a single `ALTER TABLE` statement. For example, it is not possible to add multiple columns or indexes in a single statement. Otherwise, the `Unsupported multi schema change` error might be output.
 * Different types of indexes (`HASH|BTREE|RTREE|FULLTEXT`) are not supported, and will be parsed and ignored when specified.
 * Adding/Dropping the primary key is unsupported unless [`alter-primary-key`](/tidb-configuration-file.md#alter-primary-key) is enabled.
 * Changing the field type to its superset is unsupported. For example, TiDB does not support changing the field type from `INTEGER` to `VARCHAR`, or from `TIMESTAMP` to `DATETIME`. Otherwise, the error information `Unsupported modify column: type %d not match origin %d` might be output.
 * Change/Modify data type does not currently support "lossy changes", such as changing from BIGINT to INT.
-* Change/Modify decimal columns does not support changing the prevision.
+* Change/Modify decimal columns does not support changing the precision.
 * Change/Modify integer columns does not permit changing the `UNSIGNED` attribute.
+* The `ALGORITHM={INSTANT,INPLACE,COPY}` syntax functions only as an assertion in TiDB, and does not modify the `ALTER` algorithm. See [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md) for further details.
 * Table Partitioning supports Hash, Range, and `Add`/`Drop`/`Truncate`/`Coalesce`. The other partition operations are ignored. The `Warning: Unsupported partition type, treat as normal table` error might be output. The following Table Partition syntaxes are not supported:
     - `PARTITION BY LIST`
     - `PARTITION BY KEY`
@@ -184,6 +183,4 @@ By default, the `NO_ZERO_DATE` and `NO_ZERO_IN_DATE` modes are enabled in TiDB, 
 The following column types are supported by MySQL, but **NOT** by TiDB:
 
 + FLOAT4/FLOAT8
-+ FIXED (alias for DECIMAL)
-+ SERIAL (alias for BIGINT UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE)
-+ `SQL_TSI_*` (including SQL_TSI_YEAR, SQL_TSI_MONTH, SQL_TSI_WEEK, SQL_TSI_DAY, SQL_TSI_HOUR, SQL_TSI_MINUTE and SQL_TSI_SECOND)
++ `SQL_TSI_*` (including SQL_TSI_MONTH, SQL_TSI_WEEK, SQL_TSI_DAY, SQL_TSI_HOUR, SQL_TSI_MINUTE and SQL_TSI_SECOND, excluding SQL_TSI_YEAR)

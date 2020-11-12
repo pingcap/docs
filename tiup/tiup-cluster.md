@@ -99,6 +99,22 @@ monitoring_servers:
   - host: 172.16.5.134
 ```
 
+By default, TiUP is deployed as the binary files running on the amd64 architecture. If the target machine is the arm64 architecture, you can configure it in the topology file:
+
+```yaml
+global:
+  arch: "arm64"           # Configures all machines to use the binary files of the arm64 architecture by default
+
+tidb_servers:
+  - host: 172.16.5.134
+    arch: "amd64"         # Configures this machine to use the binary files of the amd64 architecture
+  - host: 172.16.5.139
+    arch: "arm64"         # Configures this machine to use the binary files of the arm64 architecture
+  - host: 172.16.5.140    # Machines that are not configured with the arch field use the default value in the global field, which is arm64 in this case.
+
+...
+```
+
 Save the file as `/tmp/topology.yaml`. If you want to use TiDB v3.0.12 and your cluster name is `prod-cluster`, run the following command:
 
 {{< copyable "shell-regular" >}}
@@ -128,7 +144,7 @@ prometheus  172.16.5.134  9090         deploy/prometheus-9090,data/prometheus-90
 grafana     172.16.5.134  3000         deploy/grafana-3000
 Attention:
     1. If the topology is not what you expected, check your yaml file.
-    1. Please confirm there is no port/directory conflicts in same host.
+    2. Please confirm there is no port/directory conflicts in same host.
 Do you want to continue? [y/N]:
 ```
 
@@ -388,6 +404,42 @@ tiup cluster reload prod-cluster
 ```
 
 The command sends the configuration to the target machine and restarts the cluster to make the configuration take effect.
+
+> **Note:**
+>
+> For monitoring components, customize the configuration by executing the `tiup cluster edit-config` command to add a custom configuration path on the corresponding instance. For example:
+
+```yaml
+---
+
+grafana_servers:
+  - host: 172.16.5.134
+    dashboard_dir: /path/to/local/dashboards/dir
+
+monitoring_servers:
+  - host: 172.16.5.134
+    rule_dir: /path/to/local/rules/dir
+
+alertmanager_servers:
+  - host: 172.16.5.134
+    config_file: /path/to/local/alertmanager.yml
+```
+
+The content and format requirements for files under the specified path are as follows:
+
+- The folder specified in the `dashboard_dir` field of `grafana_servers` must contain full `*.json` files.
+- The folder specified in the `rule_dir` field of `monitoring_servers` must contain full `*.rules.yml` files.
+- For the format of files specified in the `config_file` field of `alertmanager_servers`, refer to [the Alertmanager configuration template](https://github.com/pingcap/tiup/blob/master/templates/config/alertmanager.yml).
+
+When you execute `tiup reload`, TiUP first deletes all old configuration files in the target machine and then uploads the corresponding configuration from the control machine to the corresponding configuration directory of the target machine. Therefore, if you want to modify a particular configuration file, make sure that all configuration files (including the unmodified ones) are in the same directory. For example, to modify Grafana's `tidb.json` file, you need to first copy all the `*.json` files from Grafana's `dashboards` directory to your local directory. Otherwise, other JSON files will be missing from the target machine.
+
+> **Note:**
+>
+> If you have configured the `dashboard_dir` field of `grafana_servers`, after executing the `tiup cluster rename` command to rename the cluster, you need to complete the following operations:
+>
+> 1. In the local `dashboards` directory, change the cluster name to the new cluster name.
+> 2. In the local `dashboards` directory, change `datasource` to the new cluster name, because `datasource` is named after the cluster name.
+> 3. Execute the `tiup cluster reload -R grafana` command.
 
 ## Update component
 

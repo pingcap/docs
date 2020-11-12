@@ -1,170 +1,350 @@
 ---
-title: Explain Statements Using Indexes
-summary: Learn about the execution plan information returned by the `EXPLAIN` statement in TiDB.
+title: Explain Statements That Use Indexes
+summary: Learn about the execution plan information returned by the EXPLAIN statement in TiDB.
 ---
 
-# Explain Statements Using Indexes
+# Explain Statements That Use Indexes
 
-## Operator execution order
+TiDB supports several operators which make use of indexes to speed up query execution:
 
-The execution plan in TiDB has a tree structure, with each node of the tree as an operator. Considering the concurrent execution of multiple threads in each operator, all operators consume CPU and memory resources to process data during the execution of a SQL statement. From this point of view, there is no execution order for the operator.
++ [`IndexLookup`](#indexlookup)
++ [`IndexReader`](#indexreader)
++ [`Point_Get` and `Batch_Point_Get`](#point_get-and-batch_point_get)
++ [`IndexFullScan`](#indexfullscan)
 
-However, from the perspective of which operators process a row of data first, the execution of a piece of data is in order. The following rule roughly summarizes this order:
-
-**`Build` is always executed before `Probe` and always appears before `Probe`.**
-
-The first half of this rule means: if an operator has multiple child nodes, the operator with the `Build` keyword at the end of the child node ID is always executed before the operator with the `Probe` keyword. The second half means: when TiDB shows the execution plan, the `Build` side always appears first, followed by the `Probe` side.
-
-The following examples illustrate this rule:
+The examples in this document are based on the following sample data:
 
 {{< copyable "sql" >}}
 
 ```sql
-explain select * from t use index(idx_a) where a = 1;
+CREATE TABLE t1 (
+ id INT NOT NULL PRIMARY KEY auto_increment,
+ intkey INT NOT NULL,
+ pad1 VARBINARY(1024),
+ INDEX (intkey)
+);
+
+INSERT INTO t1 SELECT NULL, FLOOR(RAND()*1024), RANDOM_BYTES(1024) FROM dual;
+INSERT INTO t1 SELECT NULL, FLOOR(RAND()*1024), RANDOM_BYTES(1024) FROM t1 a JOIN t1 b JOIN t1 c LIMIT 10000;
+INSERT INTO t1 SELECT NULL, FLOOR(RAND()*1024), RANDOM_BYTES(1024) FROM t1 a JOIN t1 b JOIN t1 c LIMIT 10000;
+INSERT INTO t1 SELECT NULL, FLOOR(RAND()*1024), RANDOM_BYTES(1024) FROM t1 a JOIN t1 b JOIN t1 c LIMIT 10000;
+```
+
+## IndexLookup
+
+TiDB uses the `IndexLookup` operator when retrieving data from a secondary index. In this case, the following queries will all use the `IndexLookup` operator on the `intkey` index:
+
+{{< copyable "sql" >}}
+
+```sql
+EXPLAIN SELECT * FROM t1 WHERE intkey = 123;
+EXPLAIN SELECT * FROM t1 WHERE intkey < 10;
+EXPLAIN SELECT * FROM t1 WHERE intkey BETWEEN 300 AND 310;
+EXPLAIN SELECT * FROM t1 WHERE intkey BETWEEN 300 AND 310;
+EXPLAIN SELECT * FROM t1 WHERE intkey IN (123,29,98);
+EXPLAIN SELECT * FROM t1 WHERE intkey >= 99 AND intkey <= 103;
 ```
 
 ```sql
-+-------------------------------+---------+-----------+-------------------------+---------------------------------------------+
-| id                            | estRows | task      | access object           | operator info                               |
-+-------------------------------+---------+-----------+-------------------------+---------------------------------------------+
-| IndexLookUp_7                 | 10.00   | root      |                         |                                             |
-| ├─IndexRangeScan_5(Build)     | 10.00   | cop[tikv] | table:t, index:idx_a(a) | range:[1,1], keep order:false, stats:pseudo |
-| └─TableRowIDScan_6(Probe)     | 10.00   | cop[tikv] | table:t                 | keep order:false, stats:pseudo              |
-+-------------------------------+---------+-----------+-------------------------+---------------------------------------------+
++-------------------------------+---------+-----------+--------------------------------+-----------------------------------+
+| id                            | estRows | task      | access object                  | operator info                     |
++-------------------------------+---------+-----------+--------------------------------+-----------------------------------+
+| IndexLookUp_10                | 1.00    | root      |                                |                                   |
+| ├─IndexRangeScan_8(Build)     | 1.00    | cop[tikv] | table:t1, index:intkey(intkey) | range:[123,123], keep order:false |
+| └─TableRowIDScan_9(Probe)     | 1.00    | cop[tikv] | table:t1                       | keep order:false                  |
++-------------------------------+---------+-----------+--------------------------------+-----------------------------------+
+3 rows in set (0.00 sec)
+
++-------------------------------+---------+-----------+--------------------------------+-----------------------------------+
+| id                            | estRows | task      | access object                  | operator info                     |
++-------------------------------+---------+-----------+--------------------------------+-----------------------------------+
+| IndexLookUp_10                | 3.60    | root      |                                |                                   |
+| ├─IndexRangeScan_8(Build)     | 3.60    | cop[tikv] | table:t1, index:intkey(intkey) | range:[-inf,10), keep order:false |
+| └─TableRowIDScan_9(Probe)     | 3.60    | cop[tikv] | table:t1                       | keep order:false                  |
++-------------------------------+---------+-----------+--------------------------------+-----------------------------------+
+3 rows in set (0.00 sec)
+
++-------------------------------+---------+-----------+--------------------------------+-----------------------------------+
+| id                            | estRows | task      | access object                  | operator info                     |
++-------------------------------+---------+-----------+--------------------------------+-----------------------------------+
+| IndexLookUp_10                | 5.67    | root      |                                |                                   |
+| ├─IndexRangeScan_8(Build)     | 5.67    | cop[tikv] | table:t1, index:intkey(intkey) | range:[300,310], keep order:false |
+| └─TableRowIDScan_9(Probe)     | 5.67    | cop[tikv] | table:t1                       | keep order:false                  |
++-------------------------------+---------+-----------+--------------------------------+-----------------------------------+
+3 rows in set (0.00 sec)
+
++-------------------------------+---------+-----------+--------------------------------+-----------------------------------+
+| id                            | estRows | task      | access object                  | operator info                     |
++-------------------------------+---------+-----------+--------------------------------+-----------------------------------+
+| IndexLookUp_10                | 5.67    | root      |                                |                                   |
+| ├─IndexRangeScan_8(Build)     | 5.67    | cop[tikv] | table:t1, index:intkey(intkey) | range:[300,310], keep order:false |
+| └─TableRowIDScan_9(Probe)     | 5.67    | cop[tikv] | table:t1                       | keep order:false                  |
++-------------------------------+---------+-----------+--------------------------------+-----------------------------------+
+3 rows in set (0.00 sec)
+
++-------------------------------+---------+-----------+--------------------------------+-----------------------------------------------------+
+| id                            | estRows | task      | access object                  | operator info                                       |
++-------------------------------+---------+-----------+--------------------------------+-----------------------------------------------------+
+| IndexLookUp_10                | 4.00    | root      |                                |                                                     |
+| ├─IndexRangeScan_8(Build)     | 4.00    | cop[tikv] | table:t1, index:intkey(intkey) | range:[29,29], [98,98], [123,123], keep order:false |
+| └─TableRowIDScan_9(Probe)     | 4.00    | cop[tikv] | table:t1                       | keep order:false                                    |
++-------------------------------+---------+-----------+--------------------------------+-----------------------------------------------------+
+3 rows in set (0.00 sec)
+
++-------------------------------+---------+-----------+--------------------------------+----------------------------------+
+| id                            | estRows | task      | access object                  | operator info                    |
++-------------------------------+---------+-----------+--------------------------------+----------------------------------+
+| IndexLookUp_10                | 6.00    | root      |                                |                                  |
+| ├─IndexRangeScan_8(Build)     | 6.00    | cop[tikv] | table:t1, index:intkey(intkey) | range:[99,103], keep order:false |
+| └─TableRowIDScan_9(Probe)     | 6.00    | cop[tikv] | table:t1                       | keep order:false                 |
++-------------------------------+---------+-----------+--------------------------------+----------------------------------+
 3 rows in set (0.00 sec)
 ```
 
-The `IndexLookUp_7` operator has two child nodes: `IndexRangeScan_5 (Build)` and `TableRowIDScan_6 (Probe)`. `IndexRangeScan_5 (Build)` appears first.
+The `IndexLookup` operator has two child nodes:
 
-To get a piece of data, first, you need to execute `IndexRangeScan_5 (Build)` to get a RowID. Then, use `TableRowIDScan_6 (Probe)` to get a complete row of data based on the RowID.
+* The `├─IndexRangeScan_8(Build)` operator performs a range scan on the `intkey` index and retrieves the values of the internal `RowID` (for this table, the primary key).
+* The `└─TableRowIDScan_9(Probe)` operator then retrieves the full row from the table data.
 
-The implication of the above rule is: for nodes at the same level, the operator that appears first might be executed first, and the operator that appears last might be executed last. This can be illustrated in the following example:
-
-{{< copyable "sql" >}}
-
-```sql
-explain select * from t t1 use index(idx_a) join t t2 use index() where t1.a = t2.a;
-```
-
-```sql
-+----------------------------------+----------+-----------+--------------------------+------------------------------------------------------------------+
-| id                               | estRows  | task      | access object            | operator info                                                    |
-+----------------------------------+----------+-----------+--------------------------+------------------------------------------------------------------+
-| HashJoin_22                      | 12487.50 | root      |                          | inner join, inner:TableReader_26, equal:[eq(test.t.a, test.t.a)] |
-| ├─TableReader_26(Build)          | 9990.00  | root      |                          | data:Selection_25                                                |
-| │ └─Selection_25                 | 9990.00  | cop[tikv] |                          | not(isnull(test.t.a))                                            |
-| │   └─TableFullScan_24           | 10000.00 | cop[tikv] | table:t2                 | keep order:false, stats:pseudo                                   |
-| └─IndexLookUp_29(Probe)          | 9990.00  | root      |                          |                                                                  |
-|   ├─IndexFullScan_27(Build)      | 9990.00  | cop[tikv] | table:t1, index:idx_a(a) | keep order:false, stats:pseudo                                   |
-|   └─TableRowIDScan_28(Probe)     | 9990.00  | cop[tikv] | table:t1                 | keep order:false, stats:pseudo                                   |
-+----------------------------------+----------+-----------+--------------------------+------------------------------------------------------------------+
-7 rows in set (0.00 sec)
-```
-
-To complete the `HashJoin_22` operation, you need to execute `TableReader_26(Build)`, and then execute `IndexLookUp_29(Probe)`.
-
-When executing `IndexLookUp_29(Probe)`, you need to execute `IndexFullScan_27(Build)` and `TableRowIDScan_28(Probe)` one by one. Therefore, from the perspective of the whole execution link, `TableRowIDScan_28(Probe)` is the last one awoken to be executed.
-
-### Task overview
-
-Currently, calculation tasks of TiDB can be divided into two categories: cop tasks and root tasks. The cop tasks are performed by the Coprocessor in TiKV, and the root tasks are performed in TiDB.
-
-One of the goals of SQL optimization is to push the calculation down to TiKV as much as possible. The Coprocessor in TiKV supports most of the built-in SQL functions (including the aggregate functions and the scalar functions), SQL `LIMIT` operations, index scans, and table scans. However, all `Join` operations can only be performed as root tasks in TiDB.
-
-### Access Object overview
-
-Access Object is the data item accessed by the operator, including `table`, `partition`, and `index` (if any). Only operators that directly access the data have this information.
-
-### Range query
-
-In the `WHERE`/`HAVING`/`ON` conditions, the TiDB optimizer analyzes the result returned by the primary key query or the index key query. For example, these conditions might include comparison operators of the numeric and date type, such as `>`, `<`, `=`, `>=`, `<=`, and the character type such as `LIKE`.
-
-> **Note:**
->
-> - Currently, TiDB only supports the case where a comparison operator is connected by a column (at one end) and a constant value (at the other end), or the case that the calculation result is a constant. You cannot use query conditions like `year(birth_day) < 1992` as the index.
-> - It is recommended to compare data of the same type; otherwise, additional `cast` operations are introduced, which causes the index to be unavailable. For example, regarding the condition `user_id = 123456`, if `user_id` is a string, you must define `123456` as a string constant.
-
-You can also use `AND` (intersection) and `OR` (union) to combine the range query conditions of one column. For a multi-dimensional composite index, you can use conditions in multiple columns. For example, regarding the composite index `(a, b, c)`:
-
-- When `a` is an equivalent query, continue to figure out the query range of `b`; when `b` is also an equivalent query, continue to figure out the query range of `c`.
-- Otherwise, if `a` is a non-equivalent query, you can only figure out the range of `a`.
-
-## Operator overview
-
-Different operators output different information after the `EXPLAIN` statement is executed. This section focuses on the execution plan of different operators, ranging from table scans, table aggregation, to table join.
-
-You can use optimizer hints to control the behavior of the optimizer, and thereby controlling the selection of the physical operators. For example, `/*+ HASH_JOIN(t1, t2) */` means that the optimizer uses the `Hash Join` algorithm. For more details, see [Optimizer Hints](/optimizer-hints.md).
-
-### Read the execution plan of table scans
-
-The operators that perform table scans (of the disk or the TiKV Block Cache) are listed as follows:
-
-- **TableFullScan**: Full table scan.
-- **TableRangeScan**: Table scans with the specified range.
-- **TableRowIDScan**: Accurately scans the table data based on the RowID passed down from the upper layer.
-- **IndexFullScan**: Another type of "full table scan", except that the index data is scanned, rather than the table data.
-- **IndexRangeScan**: Index scans with the specified range.
-
-TiDB aggregates the data or calculation results scanned from TiKV/TiFlash. The data aggregation operators can be divided into the following categories:
-
-- **TableReader**: Aggregates the data obtained by the underlying operators like `TableFullScan` or `TableRangeScan` in TiKV.
-- **IndexReader**: Aggregates the data obtained by the underlying operators like `IndexFullScan` or `IndexRangeScan` in TiKV.
-- **IndexLookUp**: First aggregates the RowID (in TiKV) scanned by the `Build` side. Then at the `Probe` side, accurately reads the data from TiKV based on these RowIDs. At the `Build` side, there are operators like `IndexFullScan` or `IndexRangeScan`; at the `Probe` side, there is the `TableRowIDScan` operator.
-- **IndexMerge**: Similar to `IndexLookUp`. `IndexMerge` can be seen as an extension of `IndexLookupReader`. `IndexMerge` supports reading multiple indexes at the same time. There are many `Build`s and one `Probe`. The execution process of `IndexMerge` the same as that of `IndexLookUp`.
-
-#### Table data and index data
-
-Table data refers to the original data of a table stored in TiKV. For each row of the table data, its `key` is a 64-bit integer called `RowID`. If a primary key of a table is an integer, TiDB uses the value of the primary key as the `RowID` of the table data; otherwise, the system automatically generates `RowID`. The `value` of the table data is encoded from all the data in this row. When reading table data, data is returned in the order of increasing `RowID`s.
-
-Similar to the table data, the index data is also stored in TiKV. Its `key` is the ordered bytes encoded from the index column. `value` is the `RowID` corresponding to a row of index data. The non-index column of the row can be read using `RowID`. When reading index data, TiKV returns data in ascending order of index columns. If there are multiple index columns, firstly, ensure that the first column is incremented; if the i-th column is equivalent, make sure that the (i+1)-th column is incremented.
-
-#### `IndexLookUp` example
+Because an `IndexLookup` task requires two steps, the SQL Optimizer might choose the `TableFullScan` operator based on [statistics](/statistics.md) in scenarios where a large number of rows match. In the following example, a large number of rows match the condition of `intkey > 100`, and a `TableFullScan` is chosen:
 
 {{< copyable "sql" >}}
 
 ```sql
-explain select * from t use index(idx_a);
+EXPLAIN SELECT * FROM t1 WHERE intkey > 100;
 ```
 
 ```sql
-+-------------------------------+----------+-----------+-------------------------+--------------------------------+
-| id                            | estRows  | task      | access object           | operator info                  |
-+-------------------------------+----------+-----------+-------------------------+--------------------------------+
-| IndexLookUp_6                 | 10000.00 | root      |                         |                                |
-| ├─IndexFullScan_4(Build)      | 10000.00 | cop[tikv] | table:t, index:idx_a(a) | keep order:false, stats:pseudo |
-| └─TableRowIDScan_5(Probe)     | 10000.00 | cop[tikv] | table:t                 | keep order:false, stats:pseudo |
-+-------------------------------+----------+-----------+-------------------------+--------------------------------+
++-------------------------+---------+-----------+---------------+-------------------------+
+| id                      | estRows | task      | access object | operator info           |
++-------------------------+---------+-----------+---------------+-------------------------+
+| TableReader_7           | 898.50  | root      |               | data:Selection_6        |
+| └─Selection_6           | 898.50  | cop[tikv] |               | gt(test.t1.intkey, 100) |
+|   └─TableFullScan_5     | 1010.00 | cop[tikv] | table:t1      | keep order:false        |
++-------------------------+---------+-----------+---------------+-------------------------+
 3 rows in set (0.00 sec)
 ```
 
-The `IndexLookUp_6` operator has two child nodes: `IndexFullScan_4(Build)` and `TableRowIDScan_5(Probe)`.
-
-+ `IndexFullScan_4(Build)` performs an index full scan and scans all the data of index `a`. Because it is a full scan, this operation gets the `RowID` of all the data in the table.
-+ `TableRowIDScan_5(Probe)` scans all table data using `RowID`s.
-
-This execution plan is not as efficient as using `TableReader` to perform a full table scan, because `IndexLookUp` performs an extra index scan (which comes with additional overhead), apart from the table scan.
-
-For table scan operations, the operator info column in the `explain` table shows whether the data is sorted. In the above example, the `keep order:false` in the `IndexFullScan` operator indicates that the data is unsorted. The `stats:pseudo` in the operator info means that there is no statistics, or that the statistics will not be used for estimation because it is outdated. For other scan operations, the operator info involves similar information.
-
-#### `TableReader` example
+The `IndexLookup` operator can also be used to efficiently optimize `LIMIT` on an indexed column:
 
 {{< copyable "sql" >}}
 
 ```sql
-explain select * from t where a > 1 or b >100;
+EXPLAIN SELECT * FROM t1 ORDER BY intkey DESC LIMIT 10;
 ```
 
 ```sql
-+-------------------------+----------+-----------+---------------+----------------------------------------+
-| id                      | estRows  | task      | access object | operator info                          |
-+-------------------------+----------+-----------+---------------+----------------------------------------+
-| TableReader_7           | 8000.00  | root      |               | data:Selection_6                       |
-| └─Selection_6           | 8000.00  | cop[tikv] |               | or(gt(test.t.a, 1), gt(test.t.b, 100)) |
-|   └─TableFullScan_5     | 10000.00 | cop[tikv] | table:t       | keep order:false, stats:pseudo         |
-+-------------------------+----------+-----------+---------------+----------------------------------------+
++--------------------------------+---------+-----------+--------------------------------+------------------------------------+
+| id                             | estRows | task      | access object                  | operator info                      |
++--------------------------------+---------+-----------+--------------------------------+------------------------------------+
+| IndexLookUp_21                 | 10.00   | root      |                                | limit embedded(offset:0, count:10) |
+| ├─Limit_20(Build)              | 10.00   | cop[tikv] |                                | offset:0, count:10                 |
+| │ └─IndexFullScan_18           | 10.00   | cop[tikv] | table:t1, index:intkey(intkey) | keep order:true, desc              |
+| └─TableRowIDScan_19(Probe)     | 10.00   | cop[tikv] | table:t1                       | keep order:false, stats:pseudo     |
++--------------------------------+---------+-----------+--------------------------------+------------------------------------+
+4 rows in set (0.00 sec)
+
+```
+
+In the above example, the last 20 rows are read from the index `intkey`. These `RowID` values are then retrieved from the table data.
+
+## IndexReader
+
+TiDB supports the _covering index optimization_. If all rows can be retrieved from an index, TiDB will skip the second step that is usually required in an `IndexLookup`. Consider the following two examples:
+
+{{< copyable "sql" >}}
+
+```sql
+EXPLAIN SELECT * FROM t1 WHERE intkey = 123;
+EXPLAIN SELECT id FROM t1 WHERE intkey = 123;
+```
+
+```sql
++-------------------------------+---------+-----------+--------------------------------+-----------------------------------+
+| id                            | estRows | task      | access object                  | operator info                     |
++-------------------------------+---------+-----------+--------------------------------+-----------------------------------+
+| IndexLookUp_10                | 1.00    | root      |                                |                                   |
+| ├─IndexRangeScan_8(Build)     | 1.00    | cop[tikv] | table:t1, index:intkey(intkey) | range:[123,123], keep order:false |
+| └─TableRowIDScan_9(Probe)     | 1.00    | cop[tikv] | table:t1                       | keep order:false                  |
++-------------------------------+---------+-----------+--------------------------------+-----------------------------------+
+3 rows in set (0.00 sec)
+
++--------------------------+---------+-----------+--------------------------------+-----------------------------------+
+| id                       | estRows | task      | access object                  | operator info                     |
++--------------------------+---------+-----------+--------------------------------+-----------------------------------+
+| Projection_4             | 1.00    | root      |                                | test.t1.id                        |
+| └─IndexReader_6          | 1.00    | root      |                                | index:IndexRangeScan_5            |
+|   └─IndexRangeScan_5     | 1.00    | cop[tikv] | table:t1, index:intkey(intkey) | range:[123,123], keep order:false |
++--------------------------+---------+-----------+--------------------------------+-----------------------------------+
 3 rows in set (0.00 sec)
 ```
 
-In the above example, the child node of the `TableReader_7` operator is `Selection_6`. The subtree rooted at this child node is seen as a `Cop Task` and is delivered to the corresponding TiKV. This `Cop Task` uses the `TableFullScan_5` operator to perform the table scan. `Selection` represents the selection condition in the SQL statement, namely, the `WHERE`/`HAVING`/`ON` clause.
+Because `id` is also the internal `RowID`, it is stored in the `intkey` index. After using the `intkey` index as part of `└─IndexRangeScan_5`, the value of the `RowID` can be returned directly.
 
-`TableFullScan_5` performs a full table scan, and the load on the cluster increases accordingly, which might affect other queries running in the cluster. If an appropriate index is built and the `IndexMerge` operator is used, these will greatly improve query performance and reduce load on the cluster.
+## Point_Get and Batch_Point_Get
+
+TiDB uses the `Point_Get` or `Batch_Point_Get` operator when retrieving data directly from a primary key or unique key. These operators are more efficient than `IndexLookup`. For example:
+
+{{< copyable "sql" >}}
+
+```sql
+EXPLAIN SELECT * FROM t1 WHERE id = 1234;
+EXPLAIN SELECT * FROM t1 WHERE id IN (1234,123);
+
+ALTER TABLE t1 ADD unique_key INT;
+UPDATE t1 SET unique_key = id;
+ALTER TABLE t1 ADD UNIQUE KEY (unique_key);
+
+EXPLAIN SELECT * FROM t1 WHERE unique_key = 1234;
+EXPLAIN SELECT * FROM t1 WHERE unique_key IN (1234, 123);
+```
+
+```sql
++-------------+---------+------+---------------+---------------+
+| id          | estRows | task | access object | operator info |
++-------------+---------+------+---------------+---------------+
+| Point_Get_1 | 1.00    | root | table:t1      | handle:1234   |
++-------------+---------+------+---------------+---------------+
+1 row in set (0.00 sec)
+
++-------------------+---------+------+---------------+-------------------------------------------------+
+| id                | estRows | task | access object | operator info                                   |
++-------------------+---------+------+---------------+-------------------------------------------------+
+| Batch_Point_Get_1 | 2.00    | root | table:t1      | handle:[1234 123], keep order:false, desc:false |
++-------------------+---------+------+---------------+-------------------------------------------------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.27 sec)
+
+Query OK, 1010 rows affected (0.06 sec)
+Rows matched: 1010  Changed: 1010  Warnings: 0
+
+Query OK, 0 rows affected (0.37 sec)
+
++-------------+---------+------+----------------------------------------+---------------+
+| id          | estRows | task | access object                          | operator info |
++-------------+---------+------+----------------------------------------+---------------+
+| Point_Get_1 | 1.00    | root | table:t1, index:unique_key(unique_key) |               |
++-------------+---------+------+----------------------------------------+---------------+
+1 row in set (0.00 sec)
+
++-------------------+---------+------+----------------------------------------+------------------------------+
+| id                | estRows | task | access object                          | operator info                |
++-------------------+---------+------+----------------------------------------+------------------------------+
+| Batch_Point_Get_1 | 2.00    | root | table:t1, index:unique_key(unique_key) | keep order:false, desc:false |
++-------------------+---------+------+----------------------------------------+------------------------------+
+1 row in set (0.00 sec)
+```
+
+## IndexFullScan
+
+Because indexes are ordered, the `IndexFullScan` operator can be used to optimize common queries such as the `MIN` or `MAX` values for an indexed value:
+
+{{< copyable "sql" >}}
+
+```sql
+EXPLAIN SELECT MIN(intkey) FROM t1;
+EXPLAIN SELECT MAX(intkey) FROM t1;
+```
+
+```sql
++------------------------------+---------+-----------+--------------------------------+-------------------------------------+
+| id                           | estRows | task      | access object                  | operator info                       |
++------------------------------+---------+-----------+--------------------------------+-------------------------------------+
+| StreamAgg_12                 | 1.00    | root      |                                | funcs:min(test.t1.intkey)->Column#4 |
+| └─Limit_16                   | 1.00    | root      |                                | offset:0, count:1                   |
+|   └─IndexReader_29           | 1.00    | root      |                                | index:Limit_28                      |
+|     └─Limit_28               | 1.00    | cop[tikv] |                                | offset:0, count:1                   |
+|       └─IndexFullScan_27     | 1.00    | cop[tikv] | table:t1, index:intkey(intkey) | keep order:true                     |
++------------------------------+---------+-----------+--------------------------------+-------------------------------------+
+5 rows in set (0.00 sec)
+
++------------------------------+---------+-----------+--------------------------------+-------------------------------------+
+| id                           | estRows | task      | access object                  | operator info                       |
++------------------------------+---------+-----------+--------------------------------+-------------------------------------+
+| StreamAgg_12                 | 1.00    | root      |                                | funcs:max(test.t1.intkey)->Column#4 |
+| └─Limit_16                   | 1.00    | root      |                                | offset:0, count:1                   |
+|   └─IndexReader_29           | 1.00    | root      |                                | index:Limit_28                      |
+|     └─Limit_28               | 1.00    | cop[tikv] |                                | offset:0, count:1                   |
+|       └─IndexFullScan_27     | 1.00    | cop[tikv] | table:t1, index:intkey(intkey) | keep order:true, desc               |
++------------------------------+---------+-----------+--------------------------------+-------------------------------------+
+5 rows in set (0.00 sec)
+```
+
+In the above statements, an `IndexFullScan` task is performed on each TiKV Region. Despite the name `FullScan`, only the first row needs to be read (`└─Limit_28`). Each TiKV Region returns its `MIN` or `MAX` value to TiDB, which then performs Stream Aggregation to filter for a single row. Stream Aggregation with the aggregation function `MAX` or `MIN` also ensures that `NULL` is returned if the table is empty.
+
+By contrast, executing the `MIN` function on an unindexed value will result in `TableFullScan`. The query will require all rows to be scanned in TiKV, but a `TopN` calculation is performed to ensure each TiKV Region only returns one row to TiDB. Although `TopN` prevents excessive rows from being transferred between TiKV and TiDB, this statement is still considered far less efficient than the above example where `MIN` is able to make use of an index.
+
+{{< copyable "sql" >}}
+
+```sql
+EXPLAIN SELECT MIN(pad1) FROM t1;
+```
+
+```sql
++--------------------------------+---------+-----------+---------------+-----------------------------------+
+| id                             | estRows | task      | access object | operator info                     |
++--------------------------------+---------+-----------+---------------+-----------------------------------+
+| StreamAgg_13                   | 1.00    | root      |               | funcs:min(test.t1.pad1)->Column#4 |
+| └─TopN_14                      | 1.00    | root      |               | test.t1.pad1, offset:0, count:1   |
+|   └─TableReader_23             | 1.00    | root      |               | data:TopN_22                      |
+|     └─TopN_22                  | 1.00    | cop[tikv] |               | test.t1.pad1, offset:0, count:1   |
+|       └─Selection_21           | 1008.99 | cop[tikv] |               | not(isnull(test.t1.pad1))         |
+|         └─TableFullScan_20     | 1010.00 | cop[tikv] | table:t1      | keep order:false                  |
++--------------------------------+---------+-----------+---------------+-----------------------------------+
+6 rows in set (0.00 sec)
+```
+
+The following statements will use the `IndexFullScan` operator to scan every row in the index:
+
+{{< copyable "sql" >}}
+
+```sql
+EXPLAIN SELECT SUM(intkey) FROM t1;
+EXPLAIN SELECT AVG(intkey) FROM t1;
+```
+
+```sql
++----------------------------+---------+-----------+--------------------------------+-------------------------------------+
+| id                         | estRows | task      | access object                  | operator info                       |
++----------------------------+---------+-----------+--------------------------------+-------------------------------------+
+| StreamAgg_20               | 1.00    | root      |                                | funcs:sum(Column#6)->Column#4       |
+| └─IndexReader_21           | 1.00    | root      |                                | index:StreamAgg_8                   |
+|   └─StreamAgg_8            | 1.00    | cop[tikv] |                                | funcs:sum(test.t1.intkey)->Column#6 |
+|     └─IndexFullScan_19     | 1010.00 | cop[tikv] | table:t1, index:intkey(intkey) | keep order:false                    |
++----------------------------+---------+-----------+--------------------------------+-------------------------------------+
+4 rows in set (0.00 sec)
+
++----------------------------+---------+-----------+--------------------------------+----------------------------------------------------------------------------+
+| id                         | estRows | task      | access object                  | operator info                                                              |
++----------------------------+---------+-----------+--------------------------------+----------------------------------------------------------------------------+
+| StreamAgg_20               | 1.00    | root      |                                | funcs:avg(Column#7, Column#8)->Column#4                                    |
+| └─IndexReader_21           | 1.00    | root      |                                | index:StreamAgg_8                                                          |
+|   └─StreamAgg_8            | 1.00    | cop[tikv] |                                | funcs:count(test.t1.intkey)->Column#7, funcs:sum(test.t1.intkey)->Column#8 |
+|     └─IndexFullScan_19     | 1010.00 | cop[tikv] | table:t1, index:intkey(intkey) | keep order:false                                                           |
++----------------------------+---------+-----------+--------------------------------+----------------------------------------------------------------------------+
+4 rows in set (0.00 sec)
+```
+
+In the above examples, `IndexFullScan` is more efficient than `TableFullScan` because the width of the value in the `(intkey + RowID)` index is less than the width of the full row.
+
+The following statement does not support using an `IndexFullScan` operator because additional columns are required from the table:
+
+{{< copyable "sql" >}}
+
+```sql
+EXPLAIN SELECT AVG(intkey), ANY_VALUE(pad1) FROM t1;
+```
+
+```sql
++------------------------------+---------+-----------+---------------+-----------------------------------------------------------------------------------------------------------------------+
+| id                           | estRows | task      | access object | operator info                                                                                                         |
++------------------------------+---------+-----------+---------------+-----------------------------------------------------------------------------------------------------------------------+
+| Projection_4                 | 1.00    | root      |               | Column#4, any_value(test.t1.pad1)->Column#5                                                                           |
+| └─StreamAgg_16               | 1.00    | root      |               | funcs:avg(Column#10, Column#11)->Column#4, funcs:firstrow(Column#12)->test.t1.pad1                                    |
+|   └─TableReader_17           | 1.00    | root      |               | data:StreamAgg_8                                                                                                      |
+|     └─StreamAgg_8            | 1.00    | cop[tikv] |               | funcs:count(test.t1.intkey)->Column#10, funcs:sum(test.t1.intkey)->Column#11, funcs:firstrow(test.t1.pad1)->Column#12 |
+|       └─TableFullScan_15     | 1010.00 | cop[tikv] | table:t1      | keep order:false                                                                                                      |
++------------------------------+---------+-----------+---------------+-----------------------------------------------------------------------------------------------------------------------+
+5 rows in set (0.00 sec)
+```
