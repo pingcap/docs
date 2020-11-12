@@ -68,7 +68,7 @@
     + Use BR Tool (Recommended)
       + [BR Use Cases](/br/backup-and-restore-use-cases.md)
       + [Use BR Tool](/br/backup-and-restore-tool.md)
-      + [BR storages](/br/backup-and-restore-storages.md)
+      + [BR Storages](/br/backup-and-restore-storages.md)
     + [Use Dumpling and TiDB Lightning (Recommended)](/backup-and-restore-using-dumpling-lightning.md)
     + [Use Mydumper and TiDB Lightning](/backup-and-restore-using-mydumper-lightning.md)
   + [Read Historical Data](/read-historical-data.md)
