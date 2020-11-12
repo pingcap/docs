@@ -66,8 +66,8 @@
     + [Use TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.1/scale-a-tidb-cluster)
   + Backup and Restore
     + Use BR Tool (Recommended)
-      + [BR Use Cases](/br/backup-and-restore-use-cases.md)
       + [Use BR Tool](/br/backup-and-restore-tool.md)
+      + [BR Use Cases](/br/backup-and-restore-use-cases.md)
       + [BR Storages](/br/backup-and-restore-storages.md)
     + [Use Dumpling and TiDB Lightning (Recommended)](/backup-and-restore-using-dumpling-lightning.md)
     + [Use Mydumper and TiDB Lightning](/backup-and-restore-using-mydumper-lightning.md)
@@ -159,8 +159,8 @@
   + [Use Cases](/ecosystem-tool-user-case.md)
   + [Download](/download-ecosystem-tools.md)
   + Backup & Restore (BR)
-    + [BR Use Cases](/br/backup-and-restore-use-cases.md)
     + [Use BR Tool](/br/backup-and-restore-tool.md)
+    + [BR Use Cases](/br/backup-and-restore-use-cases.md)
     + [BR FAQ](/br/backup-and-restore-faq.md)
   + TiDB Binlog
     + [Overview](/tidb-binlog/tidb-binlog-overview.md)
