@@ -1,10 +1,10 @@
 ---
 title: EXPLAIN Overview
 summary: Learn about the execution plan information returned by the `EXPLAIN` statement in TiDB.
-aliases: ['/docs/dev/query-execution-plan/','/docs/dev/reference/performance/understanding-the-query-execution-plan/','/docs/dev/index-merge/','/docs/dev/reference/performance/index-merge/','/tidb/dev/index-merge']
+aliases: ['/docs/dev/query-execution-plan/','/docs/dev/reference/performance/understanding-the-query-execution-plan/','/docs/dev/index-merge/','/docs/dev/reference/performance/index-merge/','/tidb/dev/index-merge','/tidb/dev/query-execution-plan']
 ---
 
-# EXPLAIN Overview
+# `EXPLAIN` Overview
 
 Because SQL is a declarative language, it describes what the results of a query should look like, **not the methodology** to actually retrieve those results. TiDB will consider all of the possible ways that a query could be executed, including which order to join tables and if any potential indexes can be used. The process of _considering query execution plans_ is known as SQL optimization.
 
