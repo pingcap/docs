@@ -52,7 +52,6 @@ The following describes the output of the `EXPLAIN` statement above:
 
 * `operator info` shows additional details about the access, such as which conditions were able to be pushed down:
 
-  * `range: [1,1]` shows that the predicate from the where clause of the query (`a = 1`) was pushed right down to TiKV (the task is of `cop[tikv]`).
-  * `keep order:false` shows that the semantics of this query did not require TiKV to return the results in order. If the query were to be modified to require an order (such as `SELECT * FROM t WHERE a = 1 ORDER BY id`), then this would show `keep order:true`.
-  * `stats:pseudo` shows that the estimates shown in `estRows` were based on a heuristic and might not be accurate. TiDB will periodically update statistics as part of a background operation. A manual update can also be performed by running `ANALYZE TABLE t`.
-
+    * `range: [1,1]` shows that the predicate from the where clause of the query (`a = 1`) was pushed right down to TiKV (the task is of `cop[tikv]`).
+    * `keep order:false` shows that the semantics of this query did not require TiKV to return the results in order. If the query were to be modified to require an order (such as `SELECT * FROM t WHERE a = 1 ORDER BY id`), then this would show `keep order:true`.
+    * `stats:pseudo` shows that the estimates shown in `estRows` were based on a heuristic and might not be accurate. TiDB will periodically update statistics as part of a background operation. A manual update can also be performed by running `ANALYZE TABLE t`.
