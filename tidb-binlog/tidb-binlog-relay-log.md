@@ -48,10 +48,6 @@ When Drainer is started, if it fails to connect to the Placement Driver (PD) of 
 
 ### GC mechanism of relay log
 
-While Drainer is running, if it confirms that the whole data of a relay log file has been successfully replicated to the downstream, the file is deleted immediately. Therefore, the relay log does not occupy too much space.
-
-If the size of a relay log file reaches 10MB (by default), the file is split, and data is written into a new relay log file.
-
 Before data is replicated to the downstream, Drainer writes data to the relay log file. If the size of a relay log file reaches 10 MB (by default) and the binlog data of the current transaction is completely written, Drainer starts to write data to the next relay log file. After Drainer successfully replicates data to the downstream, it automatically cleans up the relay log files whose data has been replicated. The relay log into which data is currently being written will not be cleaned up.
 
 ## Configuration
