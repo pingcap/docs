@@ -1,11 +1,11 @@
 ---
 title: Deploy TiCDC
-summary: Learn how to deploy TiCDC and the hardware and software recommendations for deploying it.
+summary: Learn how to deploy TiCDC and the hardware and software recommendations for deploying and running it.
 ---
 
 # Deploy TiCDC
 
-This document describes how to deploy a TiCDC cluster and the hardware and software recommendations for deploying it. You can either deploy TiCDC with a new cluster or add the TiCDC components to an existing TiDB cluster. Generally, it is recommended that you deploy it using TiUP. In special situations, you can also deploy it using binary.
+This document describes how to deploy a TiCDC cluster and the hardware and software recommendations for deploying and running it. You can either deploy TiCDC with a new cluster or add the TiCDC components to an existing TiDB cluster. Generally, it is recommended that you deploy it using TiUP. In special situations, you can also deploy it using binary.
 
 ## Software and hardware recommendations
 
