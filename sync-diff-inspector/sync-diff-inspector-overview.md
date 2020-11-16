@@ -232,7 +232,7 @@ The running sync-diff-inspector periodically prints the progress in log in the f
 
 - `chunk num`: The total number of chunks to be checked.
 - `success num`: The number of chunks that have been checked as consistent.
-- `failed num`: The number of chunks that fail the check. Check failure might be caused by an error or data inconsistency.
+- `failed num`: The number of chunks that fail the check. Check failure might be caused by errors or data inconsistency.
 - `ignore num`: The number of chunks that are ignored for the check. If the value of `sample-percent` is smaller than `100`, sync-diff-inspector checks data by sampling, where some chunks are ignored.
 
 #### Result
@@ -248,7 +248,7 @@ After the check is finished, sync-diff-inspector outputs a report.
     [2020/11/12 17:47:00.174 +08:00] [INFO] [main.go:69] ["check pass!!!"]
     ```
 
-+ If data is inconsistent or an error occurs, a log example is as follows:
++ If data is inconsistent or some errors occur, a log example is as follows:
 
     ```log
     [2020/11/12 18:16:17.068 +08:00] [INFO] [checkpoint.go:276] ["summary info"] [instance_id=target] [schema=test] [table=test1] ["chunk num"=1] ["success num"=0] ["failed num"=1] ["ignore num"=0]
