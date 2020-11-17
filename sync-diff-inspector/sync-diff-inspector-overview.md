@@ -239,7 +239,7 @@ The running sync-diff-inspector periodically prints the progress in log in the f
 
 After the check is finished, sync-diff-inspector outputs a report.
 
-+ If data is consistent, a log example is as follows:
++ If the data is consistent, a log example is as follows:
 
     ```log
     [2020/11/12 17:47:00.174 +08:00] [INFO] [report.go:80] ["check result summary"] ["check passed num"=1] ["check failed num"=0]
@@ -248,7 +248,7 @@ After the check is finished, sync-diff-inspector outputs a report.
     [2020/11/12 17:47:00.174 +08:00] [INFO] [main.go:69] ["check pass!!!"]
     ```
 
-+ If data is inconsistent or some errors occur, a log example is as follows:
++ If the data is inconsistent or some errors occur, a log example is as follows:
 
     ```log
     [2020/11/12 18:16:17.068 +08:00] [INFO] [checkpoint.go:276] ["summary info"] [instance_id=target] [schema=test] [table=test1] ["chunk num"=1] ["success num"=0] ["failed num"=1] ["ignore num"=0]
