@@ -224,7 +224,7 @@ This command outputs a check report to the log and describes the check result of
 
 #### Log
 
-The running sync-diff-inspector periodically prints the progress in log in the following format:
+The running sync-diff-inspector periodically (every 10 seconds) prints the progress in log in the following format:
 
 ```log
 [2020/11/12 17:47:00.170 +08:00] [INFO] [checkpoint.go:276] ["summary info"] [instance_id=target] [schema=test] [table=test_table] ["chunk num"=1000] ["success num"=80] ["failed num"=1] ["ignore num"=0]
