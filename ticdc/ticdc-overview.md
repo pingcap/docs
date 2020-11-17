@@ -89,7 +89,7 @@ Currently, The following scenarios are not supported:
 
 ## Install and deploy TiCDC
 
-You can either deploy TiCDC with a new cluster or add the TiCDC component to an existing TiDB cluster. For details, see [Deploy TiCDC](/ticdc/deploy-ticdc.md).
+You can either deploy TiCDC with a new cluster or add the TiCDC components to an existing TiDB cluster. For details, see [Deploy TiCDC](/ticdc/deploy-ticdc.md).
 
 ## Manage TiCDC Cluster and Replication Tasks
 
