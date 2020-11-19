@@ -42,7 +42,6 @@ In the configuration above:
 + `primary-replicas` is the number of replicas that should be placed in the primary data center.
 + `dr-replicas` is the number of replicas that should be placed in the DR data center.
 + `wait-store-timeout` is the time to wait before falling back to asynchronous replication.
-+ `wait-sync-timeout` is the time to wait before forcing TiKV to change the replication mode (currently not supported).
 
 To check the current replication state of the cluster, use the following URL:
 
