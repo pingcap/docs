@@ -1,6 +1,6 @@
 <!--Thanks for your contribution to TiDB documentation. Please answer the following questions.-->
 
-### First-time contributors' checklist
+### First-time contributors' checklist <!--Remove this section if you're not a first-time contributor.-->
 
 - [ ] I've signed [**Contributor License Agreement**](https://cla-assistant.io/pingcap/docs) that's required for repo owners to accept my contribution.
 
@@ -20,7 +20,7 @@
 
 ### What is the related PR or file link(s)?
 
-<!--Reference link(s) will help reviewers merge your PR quickly.-->
+<!--Reference link(s) will help reviewers review your PR quickly.-->
 
 - This PR is translated from:
 - Other reference link(s):
@@ -29,5 +29,5 @@
 
 - [ ] Delete files
 - [ ] Change aliases
-- [ ] Should vary after applied to another branch
+- [ ] Need modification after applied to another branch <!-- If yes, please add the label "version-specific-changes-required"-->
 - [ ] Might cause conflicts after applied to another branch
