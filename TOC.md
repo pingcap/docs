@@ -200,7 +200,7 @@
     + [Maintain](/ticdc/manage-ticdc.md)
     + [Troubleshoot](/ticdc/troubleshoot-ticdc.md)
     + [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
-    + [Integrate with Confluent Platform](/ticdc/integrate-confluent-using-ticdc.md)
+    + [Integrate TiDB with Confluent Platform](/ticdc/integrate-confluent-using-ticdc.md)
   + [Dumpling](/dumpling-overview.md)
   + sync-diff-inspector
     + [Overview](/sync-diff-inspector/sync-diff-inspector-overview.md)

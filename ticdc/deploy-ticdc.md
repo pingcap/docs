@@ -5,7 +5,7 @@ summary: Learn how to deploy TiCDC and the hardware and software recommendations
 
 # Deploy TiCDC
 
-This document describes how to deploy a TiCDC cluster and the hardware and software recommendations for deploying and running it. You can either deploy TiCDC with a new cluster or add the TiCDC components to an existing TiDB cluster. Generally, it is recommended that you deploy it using TiUP. In special situations, you can also deploy it using binary.
+This document describes how to deploy a TiCDC cluster and the hardware and software recommendations for deploying and running it. You can either deploy TiCDC along with a new TiDB cluster or add the TiCDC component to an existing TiDB cluster. Generally, it is recommended that you deploy TiCDC using TiUP. In addition, you can also deploy it using binary as needed.
 
 ## Software and hardware recommendations
 
@@ -24,11 +24,11 @@ For more information, see [Software and Hardware Recommendations](/hardware-and-
 
 ## Deploy a new TiDB cluster that includes TiCDC using TiUP
 
-When you deploy a new TiDB cluster using TiUP, you can also deploy TiUP at the same time. You only need to add the `cdc_servers` section in the initialization configuration file that TiUP uses to start the TiDB cluster. For detailed operations, see [Edit the initialization configuration file](/production-deployment-using-tiup.md#step-3-edit-the-initialization-configuration-file).
+When you deploy a new TiDB cluster using TiUP, you can also deploy TiCDC at the same time. You only need to add the `cdc_servers` section in the initialization configuration file that TiUP uses to start the TiDB cluster. For detailed operations, see [Edit the initialization configuration file](/production-deployment-using-tiup.md#step-3-edit-the-initialization-configuration-file).
 
 ## Add TiCDC to an existing TiDB cluster using TiUP
 
-You can also use TiUP to add the TiCDC components to an existing TiDB cluster. Take the following procedures:
+You can also use TiUP to add the TiCDC component to an existing TiDB cluster. Take the following procedures:
 
 1. Make sure that the current TiDB version supports TiCDC; otherwise, you need to upgrade the TiDB cluster to `v4.0.0-rc.1` or later versions. Since v4.0.6, TiCDC has become a feature for general availability (GA). It is recommended that you use v4.0.6 or later versions.
 
@@ -36,7 +36,7 @@ You can also use TiUP to add the TiCDC components to an existing TiDB cluster. T
 
 ## Add TiCDC to an existing TiDB cluster using binary (not recommended)
 
-Suppose that the PD cluster has a PD node (the client URL is `10.0.10.25:2379`) that can provide services. If you want to deploy three TiCDC nodes, start the TiCDC cluster by executing the following commands. Note that you only need to specify the same PD address, the newly started nodes automatically join the TiCDC cluster.
+Suppose that the PD cluster has a PD node (the client URL is `10.0.10.25:2379`) that can provide services. If you want to deploy three TiCDC nodes, start the TiCDC cluster by executing the following commands. You only need to specify the same PD address, and the newly started nodes automatically join the TiCDC cluster.
 
 {{< copyable "shell-regular" >}}
 
