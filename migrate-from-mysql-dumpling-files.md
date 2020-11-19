@@ -1,12 +1,16 @@
 ---
 title: Migrate Data from MySQL SQL Files
 summary: Learn how to migrate data from MySQL SQL files to TiDB using TiDB Lightning.
+<<<<<<< HEAD:migrate-from-mysql-mydumper-files.md
 aliases: ['/docs/stable/migrate-from-mysql-mydumper-files/','/docs/v4.0/migrate-from-mysql-mydumper-files/']
+=======
+aliases: ['/docs/dev/migrate-from-mysql-mydumper-files/','/tidb/dev/migrate-from-mysql-mydumper-files/']
+>>>>>>> 0735a55b... dumpling: update and refine dumpling doc (#4236):migrate-from-mysql-dumpling-files.md
 ---
 
 # Migrate Data from MySQL SQL Files
 
-This document describes how to migrate data from MySQL SQL files to TiDB using TiDB Lightning. For details on how to generate MySQL SQL files, refer to [Mydumper](/mydumper-overview.md) or [Dumpling](/dumpling-overview.md).
+This document describes how to migrate data from MySQL SQL files to TiDB using TiDB Lightning. For details on how to generate MySQL SQL files, refer to [Dumpling](/dumpling-overview.md).
 
 The data migration process described in this document uses TiDB Lightning. The steps are as follows.
 
