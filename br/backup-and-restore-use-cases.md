@@ -93,7 +93,7 @@ For the detailed usage of the `br backup` command, refer to [BR command-line des
 
 > **Note:**
 >
-> Since v4.0.8, BR supports the self-adaptive GC. To avoid manually adjusting GC, register `backupTS` in `safePoint` in PD and make sure that `safePoint` does not move forward during the restore process.
+> Since v4.0.8, BR supports the self-adaptive GC. To avoid manually adjusting GC, register `backupTS` in `safePoint` in PD and make sure that `safePoint` does not move forward during the backup process.
 
 ### Preparation for restoration
 
