@@ -63,7 +63,7 @@ To check the current replication state of the cluster, use the following URL:
 
 > **Note:**
 >
-> The replication mode indicates how a single Region is replicated, either `asynchronous` or `synchronous`. The replication state of the cluster indicates how all Regions are replicated, with the options of `async`, `sync-recover`, and `sync`.
+> The replication state of the cluster indicates how all Regions are replicated, with the options of `async`, `sync-recover`, and `sync`.
 
 After the cluster state becomes `sync`, it will not become `async` unless the number of down instances is larger than the specified number of replicas in either data center. Once the cluster state becomes `async`, PD requests TiKV to change the replication mode to `asynchronous` and checks whether TiKV instances are recovered from time to time. When the number of down instances is smaller than the number of replicas in both data centers, the cluster enters the `sync-recover` state, and then requests TiKV to change the replication mode to `synchronous`. After all Regions become `synchronous`, the cluster becomes `sync` again.
 
