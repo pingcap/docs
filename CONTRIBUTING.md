@@ -4,11 +4,7 @@ Welcome to [TiDB](https://github.com/pingcap/tidb) documentation! We are excited
 
 ## What you can contribute
 
-<<<<<<< HEAD
-You can start from any one of the following items to help improve [TiDB Docs at the PingCAP website](https://pingcap.com/docs/stable/):
-=======
 You can start from any one of the following items to help improve [TiDB Docs at the PingCAP website](https://docs.pingcap.com/tidb/stable):
->>>>>>> 106f9bb8... contributing: add guide of signing CLA (#4160)
 
 - Fix typos or format (punctuation, space, indentation, code block, etc.)
 - Fix or update inappropriate or outdated descriptions
