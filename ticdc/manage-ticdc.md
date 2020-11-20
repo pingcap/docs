@@ -6,70 +6,7 @@ aliases: ['/docs/dev/ticdc/manage-ticdc/','/docs/dev/reference/tools/ticdc/manag
 
 # Manage TiCDC Cluster and Replication Tasks
 
-This document describes how to deploy a TiCDC cluster and how to manage the TiCDC cluster and replication tasks through the command line tool `cdc cli` and the HTTP interface.
-
-## Deploy and install TiCDC
-
-You can deploy TiCDC using either TiUP or Binary.
-
-### Software and hardware recommendations
-
-In production environments, the recommendations of software and hardware for TiCDC are as follows:
-
-| Linux OS       | Version        |
-| :----------------------- | :----------: |
-| Red Hat Enterprise Linux | 7.3 or later versions   |
-| CentOS                   | 7.3 or later versions   |
-
-| **CPU** | **Memory** | **Disk type** | **Network** | **Number of TiCDC cluster instances (minimum requirements for production environment)** |
-| --- | --- | --- | --- | --- |
-| 16 core+ | 64 GB+ | SSD | 10 Gigabit network card (2 preferred） | 2 |
-
-For more information, see [Software and Hardware Recommendations](/hardware-and-software-requirements.md)
-
-### Deploy and install TiCDC using TiUP
-
-If you use TiUP to deploy TiCDC, you can choose one of the following ways:
-
-- Deploy TiCDC when deploying a TiDB cluster
-- Deploy a TiCDC component on an existing TiDB cluster
-
-#### Deploy TiCDC when deploying a TiDB cluster
-
-For details, refer to [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md#step-3-edit-the-initialization-configuration-file).
-
-#### Deploy a TiCDC component on an existing TiDB cluster
-
-1. First, make sure that the current TiDB version supports TiCDC; otherwise, you need to upgrade the TiDB cluster to `v4.0.0 rc.1` or later versions.
-
-2. To deploy TiCDC, refer to [Scale out a TiCDC cluster](/scale-tidb-using-tiup.md#scale-out-a-ticdc-cluster).
-
-### Use Binary
-
-Binary only supports deploying the TiCDC component on an existing TiDB cluster.
-
-Suppose that the PD cluster has a PD node (the client URL is `10.0.10.25:2379`) that can provide services. If you want to deploy three TiCDC nodes, start the TiCDC cluster by executing the following commands. Note that you only need to specify the same PD address, the newly started nodes automatically join the TiCDC cluster.
-
-{{< copyable "shell-regular" >}}
-
-```shell
-cdc server --pd=http://10.0.10.25:2379 --log-file=ticdc_1.log --addr=0.0.0.0:8301 --advertise-addr=127.0.0.1:8301
-cdc server --pd=http://10.0.10.25:2379 --log-file=ticdc_2.log --addr=0.0.0.0:8302 --advertise-addr=127.0.0.1:8302
-cdc server --pd=http://10.0.10.25:2379 --log-file=ticdc_3.log --addr=0.0.0.0:8303 --advertise-addr=127.0.0.1:8303
-```
-
-The following are descriptions of options available in the `cdc server` command:
-
-- `gc-ttl`: The TTL (Time To Live) of the service level `GC safepoint` in PD set by TiCDC, in seconds. The default value is `86400`, which means 24 hours.
-- `pd`: The URL of the PD client.
-- `addr`: The listening address of TiCDC, the HTTP API address, and the Prometheus address of the service.
-- `advertise-addr`: The access address of TiCDC to the outside world.
-- `tz`: Time zone used by the TiCDC service. TiCDC uses this time zone when time data types such as `TIMESTAMP` are converted internally or when data are replicated to the downstream. The default is the local time zone in which the process runs.
-- `log-file`: The address of the running log of the TiCDC process. The default is `cdc.log`.
-- `log-level`: The log level when the TiCDC process is running. The default is `info`.
-- `ca`: The path of the CA certificate file used by TiCDC, in the PEM format (optional).
-- `cert`: The path of the certificate file used by TiCDC, in the PEM format (optional).
-- `key`: The path of the certificate key file used by TiCDC, in the PEM format (optional).
+This document describes how to manage the TiCDC cluster and replication tasks using the command line tool `cdc cli` and the HTTP interface.
 
 ## Upgrade TiCDC using TiUP
 
@@ -94,7 +31,12 @@ For details about using encrypted data transmission (TLS), see [Enable TLS Betwe
 
 ## Use `cdc cli` to manage cluster status and data replication task
 
-This section introduces how to use `cdc cli` to manage a TiCDC cluster and data replication tasks. The following interface description assumes that PD listens on `10.0.10.25` and the port is `2379`.
+This section introduces how to use `cdc cli` to manage a TiCDC cluster and data replication tasks. `cdc cli` is the `cli` sub-command executed using the `cdc` binary. The following interface description assumes that:
+
+- `cli` commands are executed directly using the `cdc` binary;
+- PD listens on `10.0.10.25` and the port is `2379`.
+
+If you deploy TiCDC using TiUP, replace `cdc cli` in the following commands with `tiup ctl cdc`.
 
 ### Manage TiCDC service progress (`capture`)
 
@@ -178,6 +120,7 @@ The following are descriptions of parameters and parameter values that can be co
 | `ssl-ca` | The path of the CA certificate file needed to connect to the downstream MySQL instance (optional)  |
 | `ssl-cert` | The path of the certificate file needed to connect to the downstream MySQL instance (optional) |
 | `ssl-key` | The path of the certificate key file needed to connect to the downstream MySQL instance (optional) |
+| `time-zone` | The time zone used when connecting to the downstream MySQL instance, which is effective since v4.0.8. This is an optional parameter. If this parameter is not specified, the time zone of TiCDC service processes is used. If this parameter is set to an empty value, no time zone is specified when TiCDC connects to the downstream MySQL instance and the default time zone of the downstream is used. |
 
 #### Configure sink URI with `kafka`
 
@@ -708,7 +651,7 @@ To use the cyclic replication feature, you need to configure the following param
 
 To create a cyclic replication task, take the following steps:
 
-1. [Enable the TiCDC component](#deploy-and-install-ticdc) in TiDB cluster A, cluster B, and cluster C.
+1. [Enable the TiCDC component](/ticdc/deploy-ticdc.md) in TiDB cluster A, cluster B, and cluster C.
 
     {{< copyable "shell-regular" >}}
 
@@ -807,3 +750,18 @@ enable-old-value = true
 ```
 
 After this feature is enabled, you can see [TiCDC Open Protocol - Row Changed Event](/ticdc/ticdc-open-protocol.md#row-changed-event) for the detailed output format. The new TiDB v4.0 collation framework will also be supported when you use the MySQL sink.
+
+## Replicate tables without a valid index
+
+Since v4.0.8, TiCDC supports replicating tables that have no valid index by modifying the task configuration. To enable this feature, configure in the `changefeed` configuration file as follows:
+
+{{< copyable "" >}}
+
+```toml
+enable-old-value = true
+force-replicate = true
+```
+
+> **Warning:**
+>
+> For tables without a valid index, operations such as `INSERT` and `REPLACE` are not reentrant, so there is a risk of data redundancy. TiCDC guarantees that data is distributed only at least once during the replication process. Therefore, enabling this feature to replicate tables without a valid index will definitely cause data redundancy. If you do not accept data redundancy, it is recommended to add an effective index, such as adding a primary key column with the `AUTO RANDOM` attribute.
