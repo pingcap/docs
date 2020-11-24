@@ -76,7 +76,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
 
 4. Start a new session to access TiDB:
 
-    1. Install the MySQL client. Skip this step if it is already installed.
+    1. Install the MySQL client. If it is already installed, skip this step.
 
         {{< copyable "shell-regular" >}}
 
@@ -285,7 +285,7 @@ Other requirements for the target machine:
 
 8. Access the cluster:
 
-    - Install the MySQL client. Skip this step if it is already installed.
+    - Install the MySQL client. If it is already installed, skip this step.
 
         {{< copyable "shell-regular" >}}
 
