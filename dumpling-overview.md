@@ -82,7 +82,7 @@ For example, you can export all records that match `id < 100` in `test.sbtest1` 
 >
 > - Here you need to execute the `select * from <table-name> where id <100` statement on all tables to be exported. If some tables do not have specified fields, the export fails.
 >
-> - The CSV files do not distinguish between `string` and `keyword`. If the imported data is `true` and `false` of Boolean type, you need to convert them to `1` and `0`.
+> - Strings and keywords are not distinguished in CSV files. If the imported data is the Boolean type, you need to convert `true` and `false` to `1` and `0`.
 
 ### Format of exported files
 
