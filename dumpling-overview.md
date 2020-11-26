@@ -86,7 +86,7 @@ For example, you can export all records that match `id < 100` in `test.sbtest1` 
 
 ### Format of exported files
 
-- `metadata`: This file contains the start time of the exported files and the position of the master binary log.
+- `metadata`: The start time of the exported files and the position of the master binary log.
 
     {{< copyable "shell-regular" >}}
 
@@ -102,7 +102,7 @@ For example, you can export all records that match `id < 100` in `test.sbtest1` 
     Finished dump at: 2020-11-10 10:40:20
     ```
 
-- `{schema}-schema-create.sql`: The SQL file that creates the schema
+- `{schema}-schema-create.sql`: The SQL file used to create the schema
 
     {{< copyable "shell-regular" >}}
 
@@ -114,7 +114,7 @@ For example, you can export all records that match `id < 100` in `test.sbtest1` 
     CREATE DATABASE `test` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
     ```
 
-- `{schema}.{table}-schema.sql`: The SQL file that creates the table
+- `{schema}.{table}-schema.sql`: The SQL file used to create the table
 
     {{< copyable "shell-regular" >}}
 
@@ -128,7 +128,7 @@ For example, you can export all records that match `id < 100` in `test.sbtest1` 
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
     ```
 
-- `{schema}.{table}.{0001}.{sql|csv`}: Date source file
+- `{schema}.{table}.{0001}.{sql|csv`}: The date source file
 
     {{< copyable "shell-regular" >}}
 
