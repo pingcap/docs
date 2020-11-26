@@ -142,7 +142,7 @@ For example, you can export all records that match `id < 100` in `test.sbtest1` 
     (1);
     ```
 
-- `*-schema-view.sql`、`*-schema-trigger.sql`、`*-schema-post.sql`: Other exported files.
+- `*-schema-view.sql`、`*-schema-trigger.sql`、`*-schema-post.sql`: Other exported files
 
 ### Export data to Amazon S3 cloud storage
 
