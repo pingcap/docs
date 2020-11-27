@@ -156,7 +156,7 @@ TiFlash supports multi-disk deployment. If there are multiple disks in your TiFl
 
 If the TiDB cluster version >= v4.0.9:
 
-You can setup TiFlash node on multiple disks by specifying the `[storage]` section in the [`tiflash.toml` file](#configure-the-tiflashtoml-file). The `path` and `path_realtime_mode` are still supported. But TiFlash support storing Raft data and the latest data of storage engine on multiple disks since v4.0.9 to get better performance. It is recommended to specify your storage directories by the `[storage]` section.
+You can setup TiFlash node on multiple disks by specifying the `[storage]` section in the [`tiflash.toml` file](#configure-the-tiflashtoml-file). The `path` and `path_realtime_mode` are still supported. But TiFlash supports storing Raft data and the latest data of storage engine on multiple disks since v4.0.9 to get better performance. It is recommended to specify your storage directories by the `[storage]` section.
 
 If there are multiple disks on your TiFlash node, it is recommended that each directory corresponds to one disk and set the list to `storage.main.dir`.
 
@@ -174,15 +174,15 @@ If there are multiple data storage directories in `path`, separate each with a c
 
 The default value of the `path_realtime_mode` parameter is `false`, which means that data are evenly distributed on all storage directories. This is suit for deploying TiFlash on a node with multiple SSD disks.
 
-If `path_realtime_mode` is set to `true`, and `path` contains multiple directories, it means that the first directory only stores the latest data, and the older data are evenly distributed on other directories. This is suit for deploying TiFlash on a node with one SSD disk and multiple SSD disks.
+If `path_realtime_mode` is set to `true`, and `path` contains multiple directories, it means that the first directory only stores the latest data, and the older data are evenly distributed on other directories. This is suit for deploying TiFlash on a node with one SSD disk and multiple HDD disks.
 
 #### Upgrading TiFlash node to v4.0.9 or higher
 
-For version is lower than v4.0.9, TiFlash only support storing the main data of storage engine on multiple disks. For version v4.0.9 and higher, TiFlash support storing the main data and the latest data of storage engine and the Raft data on multiple disks.
+For cluster version lower than v4.0.9, TiFlash only supports storing the main data of the storage engine on multiple disks. For version v4.0.9 and higher, TiFlash supports storing the main data and the latest data of the storage engine and the Raft data on multiple disks.
 
-If the TiFlash node only use one directory to store data, or the data directories are composed of one SSD with multiple HDDs, the new configurations won't impact TiFlash performance. It is ok to keep your old configurations unchanged.
+If the TiFlash node only uses one directory to store data, or the data directories are composed of one SSD with multiple HDDs, the new configurations won't impact TiFlash performance. It is ok to keep your old configurations unchanged.
 
-But if the data directories is composed of multiple SSDs, properly specifying the new configurations can better make use of I/O resources. If your TiFlash node happen to meets I/O bottleneck, you can update the configurations to try to fix it. Guidelines to update your configurations by using TiUP:
+But if the data directories are composed of multiple SSDs, properly specifying the new configurations can better make use of I/O resources. If your TiFlash node happens to meets the I/O bottleneck, you can update the configurations to try to fix it. Guidelines to update your configurations by using TiUP:
 
 > **Notes:**
 >
@@ -192,11 +192,11 @@ But if the data directories is composed of multiple SSDs, properly specifying th
 
 2. Use TiUP to [upgrade your cluster](/upgrade-tidb-using-tiup.md) to the version you wanted
 
-3. Read the following comparsion between old and new configurations and ensure the behavior of TiFlash
+3. Read the following comparison between old and new configurations and ensure the behavior of TiFlash
 
-4. Use TiUP to [modify the configuration](/maintain-tidb-using-tiup.md#modify-the-configuration) of TiFlash node. Add `storage.main.dir` and `storage.latest.dir` in `config` section. You can check the format in here [The complex template for the TiFlash topology](https://github.com/pingcap/docs/blob/master/config-templates/complex-tiflash.yaml). 
+4. Use TiUP to [modify the configuration](/maintain-tidb-using-tiup.md#modify-the-configuration) of your TiFlash node. Add `storage.main.dir` and `storage.latest.dir` in `config` section. You can check the format here [The complex template for the TiFlash topology](https://github.com/pingcap/docs/blob/master/config-templates/complex-tiflash.yaml). 
 
-Comparsion between old and new configurations:
+Comparison between old and new configurations:
 
 For `path_realtime_mode` is not set or is set to `false`:
 
@@ -208,7 +208,7 @@ tiflash_servers:
       # path_realtime_mode: false # by default
 ```
 
-is equaivalent to following configurations. Check the comment lines to know that adjusting the value of `storage.latest.dir` can get better performance
+is equivalent to the following configurations. Check the comment lines to know that adjusting the value of `storage.latest.dir` can get better performance.
 
 ```yaml
 tiflash_servers:
@@ -233,7 +233,7 @@ tiflash_servers:
       path_realtime_mode: true
 ```
 
-is equaivalent to following configurations.
+is equivalent to the following configurations.
 
 ```yaml
 tiflash_servers:
@@ -249,4 +249,4 @@ tiflash_servers:
 
 > **Notes:**
 >
-> For those TiDB cluster not managed by TiUP, you can modify corresponding configurations in tiflash.toml
+> For those TiDB clusters not managed by TiUP, you can modify corresponding configurations in tiflash.toml
