@@ -35,36 +35,45 @@ This section introduces the configuration parameters of TiFlash.
 ### Configure the `tiflash.toml` file
 
 ```toml
-# The listening host for supporting services such as TPC/HTTP. It is recommended to configure it as "0.0.0.0".
+## The listening host for supporting services such as TPC/HTTP. It is recommended to configure it as "0.0.0.0".
 listen_host = "0.0.0.0"
-tcp_port = 9000 # The TiFlash TCP service port.
-http_port = 8123 # The TiFlash HTTP service port.
-mark_cache_size = 5368709120 # The cache size limit of the metadata of a data block. Generally, you do not need to change this value.
-minmax_index_cache_size = 5368709120 # The cache size limit of the min-max index of a data block. Generally, you do not need to change this value.
+# The TiFlash TCP service port.
+tcp_port = 9000
+# The TiFlash HTTP service port.
+http_port = 8123
+# The cache size limit of the metadata of a data block. Generally, you do not need to change this value.
+mark_cache_size = 5368709120
+# The cache size limit of the min-max index of a data block. Generally, you do not need to change this value.
+minmax_index_cache_size = 5368709120
 
-# The TiFlash data storage path. If there are multiple directories, separate each directory with a comma.
-# `path` and `path_realtime_mode` is deprecated since v4.0.9. Use the configurations in `[storage]` section to get better performance under multi-disk deployment
+## The TiFlash data storage path. If there are multiple directories, separate each directory with a comma.
+## `path` and `path_realtime_mode` is deprecated since v4.0.9. Use the configurations
+## in `[storage]` section to get better performance under multi-disk deployment
 # path = "/tidb-data/tiflash-9000"
-# or
+## or
 # path = "/ssd0/tidb-data/tiflash,/ssd1/tidb-data/tiflash,/ssd2/tidb-data/tiflash"
-# The default value is `false`. If you set it to `true` and multiple directories are set in the path, the latest data is stored in the first directory and older data is stored in the rest directories.
+## The default value is `false`. If you set it to `true` and multiple directories 
+## are set in the path, the latest data is stored in the first directory and older
+## data is stored in the rest directories.
 # path_realtime_mode = false 
 
-# The path in which the TiFlash temporary files are stored.
+## The path in which the TiFlash temporary files are stored.
 # tmp_path = "/tidb-data/tiflash-9000/tmp"
 
 ## Storage paths settings since v4.0.9
 [storage]
-    ## If there are multiple SSD disks on the TiFlash node, specify the path list on `storage.main.dir` to make full use of the node.
+    ## If there are multiple SSD disks on the TiFlash node, specify the path list
+    ## on `storage.main.dir` to make full use of the node.
 
-    ## If there are multiple disks with different IO metrics (e.g. one SSD and some HDDs) on the TiFlash node, you can make full use of the node by:
+    ## If there are multiple disks with different IO metrics
+    ## (e.g. one SSD and some HDDs) on the TiFlash node, you can make full use of the node by:
     ## * setting `storage.latest.dir` to store the latest data on SSD (disks with higher IOPS metrics)
     ## * setting `storage.main.dir` to store the main data on HDD (disks with lower IOPS metrics)
 
     [storage.main]
     ## The path to store main data.
     dir = [ "/tidb-data/tiflash-9000" ] 
-    # or
+    ## or
     # dir = [ "/ssd0/tidb-data/tiflash", "/ssd1/tidb-data/tiflash" ]
 
     ## Store capacity of each path, i.e. max data size allowed.
@@ -72,7 +81,7 @@ minmax_index_cache_size = 5368709120 # The cache size limit of the min-max index
     ## Note that we don't support human-readable big numbers(like "10GB") yet.
     ## Please set in the specified number of bytes.
     ## The size of `capacity` list should be the same with `dir` size.
-    # e.g.
+    ## e.g.
     # capacity = [ 10737418240, 10737418240 ]
 
     [storage.latest]
@@ -92,7 +101,8 @@ minmax_index_cache_size = 5368709120 # The cache size limit of the min-max index
     tidb_status_addr = TiDB status port and address. # Multiple addresses are separated with commas.
     service_addr = The listening address of TiFlash Raft services and coprocessor services.
 
-# Multiple TiFlash nodes elect a master to add or delete placement rules to PD, and you need three parameters to control this process.
+## Multiple TiFlash nodes elect a master to add or delete placement rules to PD,
+## and the configurations in `flash.flash_cluster` control this process.
 [flash.flash_cluster]
     refresh_interval = Master regularly refreshes the valid period.
     update_rule_interval = Master regularly gets the status of TiFlash replicas and interacts with PD.
@@ -117,9 +127,12 @@ minmax_index_cache_size = 5368709120 # The cache size limit of the min-max index
     count = The maximum number of log files to save.
 
 [raft]
-    pd_addr = PD service address. # Multiple addresses are separated with commas.
-    # The storage path of the Raft data. The default setting is "{the first directory of the path}/kvstore"
-    # `raft.kvstore_path` is deprecated since v4.0.9. Use `storage.raft.dir` instead to get better performance on multi-disk deployment.
+    ## PD service address. Multiple addresses are separated with commas.
+    pd_addr = "10.0.1.11:2379,10.0.1.12:2379,10.0.1.13:2379"
+
+    ## The storage path of the Raft data. The default setting is "{the first directory of the path}/kvstore"
+    ## `raft.kvstore_path` is deprecated since v4.0.9. Use `storage.raft.dir`
+    ## instead to get better performance on multi-disk deployment.
     # kvstore_path = "/tidb-data/tiflash-9000/kvstore"
 
 [status]
@@ -128,10 +141,19 @@ minmax_index_cache_size = 5368709120 # The cache size limit of the min-max index
 [profiles]
 
 [profiles.default]
-    # The default value is `true`. This parameter determines whether the segment of DeltaTree Storage Engine uses logical split. Using the logical split can reduce the write amplification, and improve the write speed. However, these are at the cost of disk space waste.
+    ## The default value is `true`. This parameter determines whether the segment
+    ## of DeltaTree Storage Engine uses logical split. Using the logical split
+    ## can reduce the write amplification, and improve the write speed. However,
+    ## these are at the cost of disk space waste.
     dt_enable_logical_split = true 
-    max_memory_usage = 0 # The memory usage limit for the generated intermediate data when a single coprocessor query is executed. The default value is 0, which means no limit.
-    max_memory_usage_for_all_queries = 0 # The memory usage limit for the generated intermediate data when all queries are executed. The default value is 0 (in bytes), which means no limit.
+
+    ## The memory usage limit for the generated intermediate data when a single
+    ## coprocessor query is executed. The default value is 0, which means no limit.
+    max_memory_usage = 0 
+
+    ## The memory usage limit for the generated intermediate data when all queries
+    ## are executed. The default value is 0 (in bytes), which means no limit.
+    max_memory_usage_for_all_queries = 0 
 ```
 
 ### Configure the `tiflash-learner.toml` file
