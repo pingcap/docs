@@ -185,7 +185,7 @@ To view the execution plan of the statement above, execute the following stateme
 {{< copyable "sql" >}}
 
 ```sql
-desc select * from metrics_schema.tidb_query_duration where value is not null and time>='2020-03-25 23:40:00' and time <= '2020-03-25 23:42:00' and quantile=0.99;
+DESC SELECT * FROM metrics_schema.tidb_query_duration WHERE value is not null AND time>='2020-03-25 23:40:00' AND time <= '2020-03-25 23:42:00' AND quantile=0.99;
 ```
 
 ```sql
@@ -215,8 +215,8 @@ To view the values of monitoring items with different granularities, you can mod
     {{< copyable "sql" >}}
 
     ```sql
-    set @@tidb_metric_query_step=30;
-    set @@tidb_metric_query_range_duration=30;
+    SET @@tidb_metric_query_step=30;
+    SET @@tidb_metric_query_range_duration=30;
     ```
 
 2. Query the `tidb_query_duration` monitoring item as follows. From the result, you can see that within the 3-minute time range, each label has 6 time values, and the interval between each value is 30 seconds.
