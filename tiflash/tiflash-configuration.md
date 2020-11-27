@@ -37,13 +37,13 @@ This section introduces the configuration parameters of TiFlash.
 ```toml
 ## The listening host for supporting services such as TPC/HTTP. It is recommended to configure it as "0.0.0.0".
 listen_host = "0.0.0.0"
-# The TiFlash TCP service port.
+## The TiFlash TCP service port.
 tcp_port = 9000
-# The TiFlash HTTP service port.
+## The TiFlash HTTP service port.
 http_port = 8123
-# The cache size limit of the metadata of a data block. Generally, you do not need to change this value.
+## The cache size limit of the metadata of a data block. Generally, you do not need to change this value.
 mark_cache_size = 5368709120
-# The cache size limit of the min-max index of a data block. Generally, you do not need to change this value.
+## The cache size limit of the min-max index of a data block. Generally, you do not need to change this value.
 minmax_index_cache_size = 5368709120
 
 ## The TiFlash data storage path. If there are multiple directories, separate each directory with a comma.
