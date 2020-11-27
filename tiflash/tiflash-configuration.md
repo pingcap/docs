@@ -162,9 +162,13 @@ minmax_index_cache_size = 5368709120
 [server]
     engine-addr = The external access address of the TiFlash coprocessor service.
 [raftstore]
-    # Specifies the number of threads that handle snapshot. The default number is 2. If you set it to 0, the multi-thread optimization is disabled.
+    ## Specifies the number of threads that handle snapshot. The default number 
+    ## is 2. If you set it to 0, the multi-thread optimization is disabled.
     snap-handle-pool-size = 2 
-    # Specifies the shortest interval at which Raft store persists WAL. You can properly increase the latency to reduce IOPS usage. The default value is 4ms. If you set it to 0ms, the optimization is disabled.
+
+    ## Specifies the shortest interval at which Raft store persists WAL. You can
+    ## properly increase the latency to reduce IOPS usage. The default value is "4ms".
+    ## If you set it to 0ms, the optimization is disabled.
     store-batch-retry-recv-timeout = "4ms"
 ```
 
