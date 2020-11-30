@@ -34,13 +34,13 @@ Records: 2  Duplicates: 0  Warnings: 0
 3 rows in set (0.00 sec)
 ```
 
-`EXPLAIN` does not execute the actual query. [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) can be used to both `EXPLAIN` _and_ execute the query. This can be useful in diagnosing cases where the execution plan selected is suboptimal.
+`EXPLAIN` does not execute the actual query. [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) can be used to execute the query and show `EXPLAIN` information. This can be useful in diagnosing cases where the execution plan selected is suboptimal.
 
 ## Understand EXPLAIN output
 
 The following describes the output of the `EXPLAIN` statement above:
 
-* `id` describes the name of an operator, or sub-task that is required to execute the SQL statement. While the structure appears as a tree, executing the query does not strictly require the child nodes to be completed before the parent nodes. TiDB supports intra-query parallelism, so a more accurate way to describe the execution flow is that the child nodes _feed into_ their parent nodes. Parent, child and sibling operators _might_ potentially be executing parts of the query in parallel.
+* `id` describes the name of an operator, or sub-task that is required to execute the SQL statement. While the structure appears as a tree, executing the query does not strictly require the child nodes to be completed before the parent nodes. TiDB supports intra-query parallelism, so a more accurate way to describe the execution is that the child nodes _flow into_ their parent nodes. Parent, child and sibling operators _might_ potentially be executing parts of the query in parallel.
 
   In this case, the `build` operator finds the internal `RowID` for rows that match in the index `idx_a`. The `probe` operator then retrieves these rows from the table.
 
