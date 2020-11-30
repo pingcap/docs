@@ -6,4 +6,5 @@ level: error
 swap:
   (?:whitelist|white list):    allowlist
   (?:blacklist|black list):    blocklist
-  slave:                       secondary
+  slave:                       secondary, follower, agent, or consumer
+  master-slave:                source-replica

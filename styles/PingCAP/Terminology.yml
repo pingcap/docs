@@ -4,3 +4,4 @@ ignorecase: false
 level: warning
 swap:
   (?:Github|github): GitHub
+  mysql: MySQL
