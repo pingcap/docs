@@ -18,9 +18,17 @@ TiDB version: 4.0.9
 
 + TiDB
 
-    - Ban (index) merge join heuristically when convert equal conditions to other conditions. [#21146](https://github.com/pingcap/tidb/pull/21146)
+    - Ban (index) merge join heuristically when converting equal conditions to other conditions. [#21146](https://github.com/pingcap/tidb/pull/21146)
     - Differentiate types for user variables [#21107](https://github.com/pingcap/tidb/pull/21107)
-    - Allow set GOGC in config file. [#20922](https://github.com/pingcap/tidb/pull/20922)
+    - Allow set GOGC in the config file. [#20922](https://github.com/pingcap/tidb/pull/20922)
+    - Make dump binary time more compatible with MySQL [#21135](https://github.com/pingcap/tidb/pull/21135)
+    - TiDB now provides an error for statements that use the syntax `LOCK IN SHARE MODE`. This helps alert users that this feature is not implemented by TiDB, but a workaround to restore the previous behavior is available by setting `tidb_enable_noop_functions=1`. [#21005](https://github.com/pingcap/tidb/pull/21005)
+    - Avoid unnecessary warnings/errors when folding constants in shortcut-able expressions [#21040](https://github.com/pingcap/tidb/pull/21040)
+    - Raise an error when preparing the `load data` statement. [#21199](https://github.com/pingcap/tidb/pull/21199)
+    - Ignore integer zero-fill size attribute when changing the column types [#20986](https://github.com/pingcap/tidb/pull/20986)
+    - Add runtime information for DML in explain analyze [#21066](https://github.com/pingcap/tidb/pull/21066)
+    - Disallow multi-updates on the primary key (i.e. updating primary key of the same table with different alias) [#21113](https://github.com/pingcap/tidb/pull/21113)
+    - Add metric for connection idle time [#21301](https://github.com/pingcap/tidb/pull/21301)
 
 + TiKV
 
@@ -71,26 +79,31 @@ TiDB version: 4.0.9
 + TiDB
 
     - Fix incorrect results when using a prefix index with OR condition [#21287](https://github.com/pingcap/tidb/pull/21287)
-    - Fix a bug cause panic when retry is enable. [#21285](https://github.com/pingcap/tidb/pull/21285)
-    - Fix a bug that checks partition definition according to column type [#21273](https://github.com/pingcap/tidb/pull/21273)
+    - Fix a bug that causes panic when `retry` is enabled. [#21285](https://github.com/pingcap/tidb/pull/21285)
+    - Fix a bug of partition definition checking. The value comparison should be in accord with column type [#21273](https://github.com/pingcap/tidb/pull/21273)
+    - Fix a bug of partition table's partition column values type check [#21136](https://github.com/pingcap/tidb/pull/21136)
     - Fix a bug that hash type partition does not check partition name is unique [#21257](https://github.com/pingcap/tidb/pull/21257)
-    - Fix unexpected error when `INSERT` meets index join in some cases. [#21249](https://github.com/pingcap/tidb/pull/21249)
     - Fix insert value into hash partition table which not int [#21238](https://github.com/pingcap/tidb/pull/21238)
-    - Fix Bigint unsigned column value in CASE WHEN operator is converted to bigint signed #9869 [#21236](https://github.com/pingcap/tidb/pull/21236)
+    - Fix unexpected error when `INSERT` meets index join in some cases. [#21249](https://github.com/pingcap/tidb/pull/21249)
+    - Fix bigint unsigned column value in CASE WHEN operator is converted to bigint signed  [#21236](https://github.com/pingcap/tidb/pull/21236)
     - Fix a bug that index-hash-join and index-merge-join doesn't consider collation [#21219](https://github.com/pingcap/tidb/pull/21219)
+    - Fix a bug that partition table does not consider collation in `create table` and `select` sentence. [#21181](https://github.com/pingcap/tidb/pull/21181)
     - Fix issue of the query result of slow_query maybe miss some rows. [#21211](https://github.com/pingcap/tidb/pull/21211)
     - `DELETE` may not delete data correctly when the database name is not in pure lower representation. [#21206](https://github.com/pingcap/tidb/pull/21206)
-    - Raise an error when preparing the `load data` statement. [#21199](https://github.com/pingcap/tidb/pull/21199)
-    - Fix a bug that partition table does not consider collation in `create table` and `select` sentence. [#21181](https://github.com/pingcap/tidb/pull/21181)
-    - Disallow multi-updates on primary key [#21113](https://github.com/pingcap/tidb/pull/21113)
     - Fix a bug causes schema change after DML [#21050](https://github.com/pingcap/tidb/pull/21050)
     - Fix the bug that can not query the coalesced column when use using-join. [#21021](https://github.com/pingcap/tidb/pull/21021)
-    - Fix wrong results for some semi join queries. [#21019](https://github.com/pingcap/tidb/pull/21019)
+    - Fix wrong results for some semi-join queries. [#21019](https://github.com/pingcap/tidb/pull/21019)
     - Fix table lock for update statement. [#21002](https://github.com/pingcap/tidb/pull/21002)
     - Fix stack overflow when building recursive view. [#21001](https://github.com/pingcap/tidb/pull/21001)
-    - Ddl: ignore integer zerofill size attribute when changing the column types [#20986](https://github.com/pingcap/tidb/pull/20986)
     - Fix unexpected results when do merge join on outer join [#20954](https://github.com/pingcap/tidb/pull/20954)
-    - Fix the issue that sometimes a transaction that has undetermined result may be treated as failed. [#20925](https://github.com/pingcap/tidb/pull/20925)
+    - Fix the issue that sometimes a transaction that has an undetermined result may be treated as failed. [#20925](https://github.com/pingcap/tidb/pull/20925)
+    - Fix issue `explain for connection` can't show the last query plan/ [#21315](https://github.com/pingcap/tidb/pull/21315)
+    - Fix the issue that when Index Merge is used in a transaction with RC isolation level, the result may be incorrect. [#21253](https://github.com/pingcap/tidb/pull/21253)
+    - Fix auto-id allocation failed because of the transaction's write-conflict retry. [#21079](https://github.com/pingcap/tidb/pull/21079)
+    - Fix The JSON Data can not import to TiDB correctly by `load data` [#21074](https://github.com/pingcap/tidb/pull/21074)
+    - Set correct default value for new added enum column. [#20998](https://github.com/pingcap/tidb/pull/20998)
+    - Expression: keep the original data type when doing date arithmetic operations [#21176](https://github.com/pingcap/tidb/pull/21176)
+    - Fix the wrong point get plan generation in fast plan code path [#21244](https://github.com/pingcap/tidb/pull/21244)
 
 + TiKV
 
@@ -134,23 +147,6 @@ TiDB version: 4.0.9
         - Fix a bug that causes panic when manually stops Lightning import in Local-backend mode [#484](https://github.com/pingcap/tidb-lightning/pull/484)
 
 ## Others
-
-+ TiDB
-
-    - Fix issue of explain for connection can't show the last query plan/ [#21315](https://github.com/pingcap/tidb/pull/21315)
-    - Add metric for connection idle time [#21301](https://github.com/pingcap/tidb/pull/21301)
-    - Fix the issue that when Index Merge is used in a transaction with RC isolation level, the result may be incorrect. [#21253](https://github.com/pingcap/tidb/pull/21253)
-    - Planner: fix wrong point get plan generation in fast plan code path [#21244](https://github.com/pingcap/tidb/pull/21244)
-    - Expression: keep the original data type when doing date arithmetic operations [#21176](https://github.com/pingcap/tidb/pull/21176)
-    - Ddl: Fix partition table's partition column values type check [#21136](https://github.com/pingcap/tidb/pull/21136)
-    - Make dump binary time more compatible with MySQL [#21135](https://github.com/pingcap/tidb/pull/21135)
-    - Fix auto-id allocation failed because of transaction's write-conflict retry. [#21079](https://github.com/pingcap/tidb/pull/21079)
-    - Fix The JSON Data can not import to TiDB correctly by `load data` [#21074](https://github.com/pingcap/tidb/pull/21074)
-    - Fix up displaying executor runtime info & Add runtime information for DML in explain analyze [#21066](https://github.com/pingcap/tidb/pull/21066)
-    - Deprecate `enable-streaming`. [#21055](https://github.com/pingcap/tidb/pull/21055)
-    - Avoid unnecessary warnings/errors when folding constants in shortcut-able expressions [#21040](https://github.com/pingcap/tidb/pull/21040)
-    - TiDB now provides an error for statements that use the syntax `LOCK IN SHARE MODE`. This helps alert users that this feature is not implemented by TiDB, but a workaround to restore the previous behavior is available by setting `tidb_enable_noop_functions=1`. [#21005](https://github.com/pingcap/tidb/pull/21005)
-    - Set correct default value for new added enum column. [#20998](https://github.com/pingcap/tidb/pull/20998)
 
 + TiKV
 
