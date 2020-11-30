@@ -16,7 +16,23 @@ TiDB version: 4.0.9
 
 ## Improvements
 
++ TiDB
 
+    - Ban (index) merge join heuristically when convert equal conditions to other conditions. [#21146](https://github.com/pingcap/tidb/pull/21146)
+    - Differentiate types for user variables [#21107](https://github.com/pingcap/tidb/pull/21107)
+    - Allow set GOGC in config file. [#20922](https://github.com/pingcap/tidb/pull/20922)
+
++ TiKV
+
+    - Add tag to split command to trace its source [#8936](https://github.com/tikv/tikv/pull/8936)
+
++ TiFlash
+
+    - Implement `batch_read_index` to reduce latency about replica read. [#1236](https://github.com/pingcap/tics/pull/1236)
+    - Refine TiFlash's error message [#1231](https://github.com/pingcap/tics/pull/1231)
+    - Limit the memory usage of cache data under huge volume data. [#1229](https://github.com/pingcap/tics/pull/1229)
+    - [#1227](https://github.com/pingcap/tics/pull/1227)
+    - Add metric "number of handling cop task". [#1183](https://github.com/pingcap/tics/pull/1183)
 
 ## Bug Fixes
 
@@ -44,6 +60,16 @@ TiDB version: 4.0.9
     - Fix unexpected results when do merge join on outer join [#20954](https://github.com/pingcap/tidb/pull/20954)
     - Fix the issue that sometimes a transaction that has undetermined result may be treated as failed. [#20925](https://github.com/pingcap/tidb/pull/20925)
 
++ TiKV
+
+    - Fix a bug that Coprocessor may return wrong result when there are > 255 columns. [#9131](https://github.com/tikv/tikv/pull/9131)
+    - Fix an issue that region merge may cause data loss during network partition. [#9108](https://github.com/tikv/tikv/pull/9108)
+    - Fix a bug may cause analyze statement panic when using the latin1 character set. [#9082](https://github.com/tikv/tikv/pull/9082)
+    - Fix cast decimal as time expr get wrong result when deal with numbers argument [#9031](https://github.com/tikv/tikv/pull/9031)
+    - Fix the bug that lightning fails to ingest sst files to tikv with importer/local backend when TDE is enabled [#8995](https://github.com/tikv/tikv/pull/8995)
+    - Config: fix invalid advertise-status-addr [#9036](https://github.com/tikv/tikv/pull/9036)
+    - Fix the issue that reports a key-exist error when a key is locked and deleted by a committed transaction. [#8930](https://github.com/tikv/tikv/pull/8930)
+
 + PD
 
     - Fix the issue that the leader role does not take effect when using the replacement rule in some cases [#3208](https://github.com/pingcap/pd/pull/3208)
@@ -63,10 +89,8 @@ TiDB version: 4.0.9
     - Fix the issue that when Index Merge is used in a transaction with RC isolation level, the result may be incorrect. [#21253](https://github.com/pingcap/tidb/pull/21253)
     - Planner: fix wrong point get plan generation in fast plan code path [#21244](https://github.com/pingcap/tidb/pull/21244)
     - Expression: keep the original data type when doing date arithmetic operations [#21176](https://github.com/pingcap/tidb/pull/21176)
-    - Ban (index) merge join heuristically when convert equal conditions to other conditions. [#21146](https://github.com/pingcap/tidb/pull/21146)
     - Ddl: Fix partition table's partition column values type check [#21136](https://github.com/pingcap/tidb/pull/21136)
     - Make dump binary time more compatible with MySQL [#21135](https://github.com/pingcap/tidb/pull/21135)
-    - Differentiate types for user variables [#21107](https://github.com/pingcap/tidb/pull/21107)
     - Fix auto-id allocation failed because of transaction's write-conflict retry. [#21079](https://github.com/pingcap/tidb/pull/21079)
     - Fix The JSON Data can not import to TiDB correctly by `load data` [#21074](https://github.com/pingcap/tidb/pull/21074)
     - Fix up displaying executor runtime info & Add runtime information for DML in explain analyze [#21066](https://github.com/pingcap/tidb/pull/21066)
@@ -74,28 +98,17 @@ TiDB version: 4.0.9
     - Avoid unnecessary warnings/errors when folding constants in shortcut-able expressions [#21040](https://github.com/pingcap/tidb/pull/21040)
     - TiDB now provides an error for statements that use the syntax `LOCK IN SHARE MODE`. This helps alert users that this feature is not implemented by TiDB, but a workaround to restore the previous behavior is available by setting `tidb_enable_noop_functions=1`. [#21005](https://github.com/pingcap/tidb/pull/21005)
     - Set correct default value for new added enum column. [#20998](https://github.com/pingcap/tidb/pull/20998)
-    - Allow set GOGC in config file. [#20922](https://github.com/pingcap/tidb/pull/20922)
 
 + TiKV
 
-    - Fix a bug that Coprocessor may return wrong result when there are > 255 columns. [#9131](https://github.com/tikv/tikv/pull/9131)
-    - Fix an issue that region merge may cause data loss during network partition. [#9108](https://github.com/tikv/tikv/pull/9108)
     - Enable dynamically change config pessimistic-txn.pipelined. [#9100](https://github.com/tikv/tikv/pull/9100)
     - Running checksum in BR and Lightning should have less influence on the cluster performance. [#9098](https://github.com/tikv/tikv/pull/9098)
-    - Revert "encryption: Turn file dictionary into log style" [#9097](https://github.com/tikv/tikv/pull/9097)
     - Add a metrics for ingest sst errors [#9096](https://github.com/tikv/tikv/pull/9096)
     - Prevent hibernation when there are still peers catching up logs [#9093](https://github.com/tikv/tikv/pull/9093)
     - Increase the success rate of pipelined pessimistic locking. [#9086](https://github.com/tikv/tikv/pull/9086)
-    - Fix a bug may cause analyze statement panic when using the latin1 character set. [#9082](https://github.com/tikv/tikv/pull/9082)
-    - Config: fix invalid advertise-status-addr [#9036](https://github.com/tikv/tikv/pull/9036)
-    - Fix cast decimal as time expr get wrong result when deal with numbers argument [#9031](https://github.com/tikv/tikv/pull/9031)
     - Add check to avoid corruption due to RocksDB block cache error #8243. Also disable `force-consistency-checks` by default to improve performance. [#9029](https://github.com/tikv/tikv/pull/9029)
-    - Change the default value of `apply-max-batch-size` and `store-max-batch-size` to 1024. [#9020](https://github.com/tikv/tikv/pull/9020)
-    - Fix the bug that lightning fails to ingest sst files to tikv with importer/local backend when TDE is enabled [#8995](https://github.com/tikv/tikv/pull/8995)
-    - Turn file dictionary into log style. [#8960](https://github.com/tikv/tikv/pull/8960)
+    - Change the default value of `apply-max-batch-size` and `store-max-batch-size` to 1024 [#9020](https://github.com/tikv/tikv/pull/9020)
     - Add config for max-background-flushes [#8947](https://github.com/tikv/tikv/pull/8947)
-    - Add tag to split command to trace its source [#8936](https://github.com/tikv/tikv/pull/8936)
-    - Fix the issue that reports a key-exist error when a key is locked and deleted by a committed transaction. [#8930](https://github.com/tikv/tikv/pull/8930)
     - Enable the unified read pool for the storage module by default. [#8887](https://github.com/tikv/tikv/pull/8887)
 
 + PD
@@ -104,14 +117,6 @@ TiDB version: 4.0.9
     - Check cluster version on stores become tombstone [#3213](https://github.com/pingcap/pd/pull/3213)
     - The store of lower version is no longer allowed to change from `Tombstone` back to `Up`. [#3206](https://github.com/pingcap/pd/pull/3206)
     - Fix a bug that service safe points with  infinite TTL may disappear. [#3143](https://github.com/pingcap/pd/pull/3143)
-
-+ TiFlash
-
-    - Implement `batch_read_index` to reduce latency about replica read. [#1236](https://github.com/pingcap/tics/pull/1236)
-    - Refine TiFlash's error message [#1231](https://github.com/pingcap/tics/pull/1231)
-    - Limit the memory usage of cache data under huge volume data. [#1229](https://github.com/pingcap/tics/pull/1229)
-    - > [#1227](https://github.com/pingcap/tics/pull/1227)
-    - Add metric "number of handling cop task". [#1183](https://github.com/pingcap/tics/pull/1183)
 
 + Tools
 
