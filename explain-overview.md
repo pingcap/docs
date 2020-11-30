@@ -46,7 +46,7 @@ The following describes the output of the `EXPLAIN` statement above:
 
 * `estRows` shows an estimate of the number of rows TiDB expects to process. This number might be based on dictionary information, such as when the access method is based on a primary or unique key, or it could be based on statistics such as a CMSketch or histogram.
 
-* `task` shows where an operator is performing the work. A task of `cop[tikv]` indicates that work is being completed inside TiKV as part of the coprocessor. TiDB will attempt to push as much of the query to the data as possible, since this reduces the amount of data sent across the network. `root` tasks indicate that the operator is executed inside TiDB.
+* `task` shows where an operator is performing the work. A task of `cop[tikv]` indicates that work is being completed inside TiKV as part of the coprocessor. TiDB attempts to push as much of the query to the data as possible, which can reduce the amount of data sent across the network. `root` tasks indicate that the operator is executed inside TiDB.
 
 * `access object` shows the table, partition and index that is being accessed. The parts of the index will also be shown, as in the case above the column `a` from the index was used. This can be useful in cases where you have composite indexes.
 
