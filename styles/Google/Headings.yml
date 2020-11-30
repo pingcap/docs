@@ -2,7 +2,7 @@ extends: capitalization
 message: "'%s' should use sentence-style capitalization."
 link: 'https://developers.google.com/style/capitalization#capitalization-in-titles-and-headings'
 level: warning
-scope: heading
+scope: heading.h{2,3}
 match: $sentence
 exceptions:
   - Azure

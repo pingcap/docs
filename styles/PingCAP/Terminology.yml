@@ -1,0 +1,6 @@
+extends: substitution
+message: Prefer '%s' over '%s'
+ignorecase: false
+level: warning
+swap:
+  (?:Github|github): GitHub
