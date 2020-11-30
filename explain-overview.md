@@ -36,7 +36,7 @@ Records: 2  Duplicates: 0  Warnings: 0
 
 `EXPLAIN` does not execute the actual query. [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) can be used to both `EXPLAIN` _and_ execute the query. This can be useful in diagnosing cases where the execution plan selected is suboptimal.
 
-## Understanding EXPLAIN output
+## Understand EXPLAIN output
 
 The following describes the output of the `EXPLAIN` statement above:
 
