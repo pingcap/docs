@@ -34,6 +34,38 @@ TiDB version: 4.0.9
     - [#1227](https://github.com/pingcap/tics/pull/1227)
     - Add a metric for the number of handling coprocessor tasks [#1183](https://github.com/pingcap/tics/pull/1183)
 
++ Tools
+
+    + Backup & Restore (BR)
+
+        - BR no longer accepts --checksum false in command line, which did not disable checksum. The correct usage always include the = sign: --checksum=false [#588](https://github.com/pingcap/br/pull/588)
+        - Support change PD config temporary [#596](https://github.com/pingcap/br/pull/596)
+        - Support analyze table after restore [#622](https://github.com/pingcap/br/pull/622)
+        - Retry for read index not ready and proposal in merging mode [#626](https://github.com/pingcap/br/pull/626)
+
+    + TiCDC
+
+        - Metrics: add alert for tikv hibernate regions [#1120](https://github.com/pingcap/ticdc/pull/1120)
+        - Reduce memory usage in schema storage by avoiding table info replication [#1127](https://github.com/pingcap/ticdc/pull/1127)
+
+    + Dumpling
+
+        - Retry dumping on failed chunks [#182](https://github.com/pingcap/dumpling/pull/182)
+        - Support configuring both -F and -r arguments at the same time [#177](https://github.com/pingcap/dumpling/pull/177)
+        - Exclude system databases in --filter parameter by default [#194](https://github.com/pingcap/dumpling/pull/194)
+        - Support --transactional-consistency parameter and support rebuild mysql connections during retry [#199](https://github.com/pingcap/dumpling/pull/199)
+
+    + TiDB Lightning
+
+        - Filter out all system schemas by default [#459](https://github.com/pingcap/tidb-lightning/pull/459)
+        - Support set a default value for auto random primary key for local/importer backend [#457](https://github.com/pingcap/tidb-lightning/pull/457)
+        - Use range properties to make range split more precise with local backend [#422](https://github.com/pingcap/tidb-lightning/pull/422)
+        - `tikv-importer.region-split-size`, `mydumper.read-block-size`, `mydumper.batch-size` and `mydumper.max-region-size` can now accept human-readable format in the form "2.5 GiB" [#471](https://github.com/pingcap/tidb-lightning/pull/471)
+
+    + TiDB Binlog
+
+        - Exit Drainer process with non-zero code if upstream PD is down or apply DDL/DML to downstream failed [#1012](https://github.com/pingcap/tidb-binlog/pull/1012)
+
 ## Bug Fixes
 
 + TiDB
@@ -77,8 +109,29 @@ TiDB version: 4.0.9
 
 + TiFlash
 
-    - Fix the problem that `INFORMATION_SCHEMA.CLUSTER_HARDWARE` may contain information about disks not in use. [#1248](https://github.com/pingcap/tics/pull/1248)
-    - Fix the issue that the memory consumption statistic of Delta Cache is smaller than actual the usage. [#1212](https://github.com/pingcap/tics/pull/1212)
+    - Fix the problem that `INFORMATION_SCHEMA.CLUSTER_HARDWARE` may contain information about disks not in use [#1248](https://github.com/pingcap/tics/pull/1248)
+    - Fix the issue that the memory consumption statistic of Delta Cache is smaller than actual the usage [#1212](https://github.com/pingcap/tics/pull/1212)
+
++ Tools
+
+    + Backup & Restore (BR)
+
+        - Fix special characters in S3 secret access keys [#617](https://github.com/pingcap/br/pull/617)
+
+    + TiCDC
+
+        - Fix the bug that multiple owners could exist when owner campaign key is deleted [#1104](https://github.com/pingcap/ticdc/pull/1104)
+        - Kafka_consumer: fix wrong timezone when 'TZ' env is not set and downstream is mysql [#1095](https://github.com/pingcap/ticdc/pull/1095)
+
+    + Dumpling
+
+        - Fix the problem that dumpling may get blocked when its connection to database server is closed [#190](https://github.com/pingcap/dumpling/pull/190)
+
+    + TiDB Lightning
+
+        - Fix a bug about encoding data with wrong field info [#437](https://github.com/pingcap/tidb-lightning/pull/437)
+        - Fix a bug that gc life time ttl does not take effect [#448](https://github.com/pingcap/tidb-lightning/pull/448)
+        - Fix a bug that causes panic when manually stops Lightning import in Local-backend mode [#484](https://github.com/pingcap/tidb-lightning/pull/484)
 
 ## Others
 
@@ -117,11 +170,3 @@ TiDB version: 4.0.9
     - Check cluster version on stores become tombstone [#3213](https://github.com/pingcap/pd/pull/3213)
     - The store of lower version is no longer allowed to change from `Tombstone` back to `Up`. [#3206](https://github.com/pingcap/pd/pull/3206)
     - Fix a bug that service safe points with  infinite TTL may disappear. [#3143](https://github.com/pingcap/pd/pull/3143)
-
-+ Tools
-
-    - TiCDC
-
-        * Metrics: add alert for tikv hibernate regions [#1120](https://github.com/pingcap/ticdc/pull/1120)
-        * Fix the bug that multiple owners could exist when owner campaign key is deleted [#1104](https://github.com/pingcap/ticdc/pull/1104)
-        * Kafka_consumer: fix wrong timezone when 'TZ' env is not set and downstream is mysql [#1095](https://github.com/pingcap/ticdc/pull/1095)
