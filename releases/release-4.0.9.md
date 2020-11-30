@@ -12,7 +12,7 @@ TiDB version: 4.0.9
 
 + TiFlash
 
-    - Support multi-disks for storing latest data [#1159](https://github.com/pingcap/tics/pull/1159)
+    - Support storing the latest data of the storage engine on multiple disks [#1159](https://github.com/pingcap/tics/pull/1159)
 
 ## Improvements
 
@@ -28,11 +28,11 @@ TiDB version: 4.0.9
 
 + TiFlash
 
-    - Implement `batch_read_index` to reduce latency about replica read. [#1236](https://github.com/pingcap/tics/pull/1236)
+    - Reduce the latency of replica reads [#1236](https://github.com/pingcap/tics/pull/1236)
     - Refine TiFlash's error message [#1231](https://github.com/pingcap/tics/pull/1231)
     - Limit the memory usage of cache data under huge volume data. [#1229](https://github.com/pingcap/tics/pull/1229)
     - [#1227](https://github.com/pingcap/tics/pull/1227)
-    - Add metric "number of handling cop task". [#1183](https://github.com/pingcap/tics/pull/1183)
+    - Add a metric for the number of handling coprocessor tasks [#1183](https://github.com/pingcap/tics/pull/1183)
 
 ## Bug Fixes
 
@@ -78,7 +78,7 @@ TiDB version: 4.0.9
 + TiFlash
 
     - Fix the problem that `INFORMATION_SCHEMA.CLUSTER_HARDWARE` may contain information about disks not in use. [#1248](https://github.com/pingcap/tics/pull/1248)
-    - Fix the issue that the memory consumption statistic of Delta Cache is smaller than actual usage. [#1212](https://github.com/pingcap/tics/pull/1212)
+    - Fix the issue that the memory consumption statistic of Delta Cache is smaller than actual the usage. [#1212](https://github.com/pingcap/tics/pull/1212)
 
 ## Others
 
