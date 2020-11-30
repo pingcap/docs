@@ -21,7 +21,7 @@ jobs:
           command: |
             git remote add upstream https://github.com/pingcap/docs.git
             git fetch upstream
-            python3 scripts/check-conflicts.py $(git diff-tree --name-only --no-commit-id -r upstream/master..HEAD -- '*.md' ':(exclude).github/*')
+            python3 scripts/check-conflicts.py $(git diff-tree --name-only --no-commit-id -r upstream/master..HEAD -- '*.md' '*.yml' '*.yaml')
 
       - run:
           name: "Install markdownlint"
@@ -51,9 +51,8 @@ jobs:
       - run:
           name: "Vale linter"
           command: |
-            sudo curl -sfL https://install.goreleaser.com/github.com/ValeLint/vale.sh | sh -s v2.5.1
+            sudo curl -sfL https://install.goreleaser.com/github.com/ValeLint/vale.sh | sh -s latest
             export PATH="./bin:$PATH"
-            echo $(git diff-tree --name-only --no-commit-id -r upstream/master..HEAD -- '*.md' ':(exclude).github/*')
             vale $(git diff-tree --name-only --no-commit-id -r upstream/master..HEAD -- '*.md' ':(exclude).github/*')
 
   build:

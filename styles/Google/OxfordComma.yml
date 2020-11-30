@@ -4,4 +4,4 @@ link: 'https://developers.google.com/style/commas'
 scope: sentence
 level: warning
 tokens:
-  - '(?:[^,A-Z]+,){1,}\s\w+\s(?:and|or)'
+  - '(?:[^,]+,){1,}\s\w+\s(?:and|or)'
