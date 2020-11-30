@@ -1,14 +1,22 @@
 ---
-title: tidb v4.0.9 Release Notes
-category: Releases
-aliases: ['/docs/dev/releases/v4.0.9/']
+title: TiDB 4.0.9 Release Notes
 ---
 
-# tidb v4.0.9 Release Notes
+# TiDB 4.0.9 Release Notes
 
-Release date: November 30, 2020
+Release date: December 3, 2020
 
-TiDB version: v4.0.9
+TiDB version: 4.0.9
+
+## New Features
+
++ TiFlash
+
+    - Support multi-disks for storing latest data [#1159](https://github.com/pingcap/tics/pull/1159)
+
+## Improvements
+
+
 
 ## Bug Fixes
 
@@ -45,12 +53,6 @@ TiDB version: v4.0.9
 
     - Fix the problem that `INFORMATION_SCHEMA.CLUSTER_HARDWARE` may contain information about disks not in use. [#1248](https://github.com/pingcap/tics/pull/1248)
     - Fix the issue that the memory consumption statistic of Delta Cache is smaller than actual usage. [#1212](https://github.com/pingcap/tics/pull/1212)
-
-## New Features
-
-+ TiFlash
-
-    - Support multi-disks for storing latest data [#1159](https://github.com/pingcap/tics/pull/1159)
 
 ## Others
 
