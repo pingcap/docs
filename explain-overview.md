@@ -44,7 +44,7 @@ The following describes the output of the `EXPLAIN` statement above:
 
   In this case, the `build` operator finds the internal `RowID` for rows that match in the index `idx_a`. The `probe` operator then retrieves these rows from the table.
 
-* `estRows` shows an estimate of the number of rows TiDB expects to process. This number might be based on dictionary information, such as if the access method is based on a primary or unique key, or it could be based on statistics such as a CMSketch or histogram.
+* `estRows` shows an estimate of the number of rows TiDB expects to process. This number might be based on dictionary information, such as when the access method is based on a primary or unique key, or it could be based on statistics such as a CMSketch or histogram.
 
 * `task` shows where an operator is performing the work. A task of `cop[tikv]` indicates that work is being completed inside TiKV as part of the coprocessor. TiDB will attempt to push as much of the query to the data as possible, since this reduces the amount of data sent across the network. `root` tasks indicate that the operator is executed inside TiDB.
 
