@@ -247,7 +247,7 @@ It is **NOT** recommended to use Transparent Huge Pages (THP) for database appli
 
 Take the following steps to check whether THP is disabled. If not, follow the steps to disable it:
 
-1. Execute the following command to see whether THP is enabled or disabled. If `[always] madvise never` is returned, THP is enabled.
+1. Execute the following command to see whether THP is enabled or disabled. If `[always] madvise never` is output, THP is enabled.
 
     {{< copyable "shell-regular" >}}
 
