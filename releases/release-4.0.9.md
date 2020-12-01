@@ -34,6 +34,12 @@ TiDB version: 4.0.9
 
     - Add tag to split command to trace its source [#8936](https://github.com/tikv/tikv/pull/8936)
 
++ PD
+
+    - Check cluster version on stores become tombstone [#3213](https://github.com/pingcap/pd/pull/3213)
+    - The store of lower version is no longer allowed to change from `Tombstone` back to `Up`.[#3206](https://github.com/pingcap/pd/pull/3206)
+    - Dashboard: update to v2020.11.26.1 [#3219](https://github.com/pingcap/pd/pull/3219)
+
 + TiFlash
 
     - Reduce the latency of replica reads [#1236](https://github.com/pingcap/tics/pull/1236)
@@ -119,6 +125,7 @@ TiDB version: 4.0.9
 
     - Fix the issue that the leader role does not take effect when using the replacement rule in some cases [#3208](https://github.com/pingcap/pd/pull/3208)
     - Fix the bug that `trace-region-flow` will be accidentally changed to `false`. [#3120](https://github.com/pingcap/pd/pull/3120)
+    - Fix a bug that service safe points with infinite TTL may disappear. [#3143](https://github.com/pingcap/pd/pull/3143)
 
 + TiFlash
 
@@ -159,10 +166,3 @@ TiDB version: 4.0.9
     - Change the default value of `apply-max-batch-size` and `store-max-batch-size` to 1024 [#9020](https://github.com/tikv/tikv/pull/9020)
     - Add config for max-background-flushes [#8947](https://github.com/tikv/tikv/pull/8947)
     - Enable the unified read pool for the storage module by default. [#8887](https://github.com/tikv/tikv/pull/8887)
-
-+ PD
-
-    - Dashboard: update to v2020.11.26.1 [#3219](https://github.com/pingcap/pd/pull/3219)
-    - Check cluster version on stores become tombstone [#3213](https://github.com/pingcap/pd/pull/3213)
-    - The store of lower version is no longer allowed to change from `Tombstone` back to `Up`. [#3206](https://github.com/pingcap/pd/pull/3206)
-    - Fix a bug that service safe points with  infinite TTL may disappear. [#3143](https://github.com/pingcap/pd/pull/3143)
