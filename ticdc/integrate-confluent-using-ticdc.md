@@ -11,7 +11,7 @@ This document introduces how to integrate TiDB to Confluent Platform using [TiCD
 >
 > This is still an experimental feature. Do **NOT** use it in a production environment.
 
-[Confluent Platform](https://docs.confluent.io/current/platform.html) is a data streaming platform with Kafka at its core. With many official and third-party sink connectors, Confluent Platform enables you to easily connect stream sources to relational or non-relational databases.
+[Confluent Platform](https://docs.confluent.io/current/platform.html) is a data streaming platform with Apache Kafka at its core. With many official and third-party sink connectors, Confluent Platform enables you to easily connect stream sources to relational or non-relational databases.
 
 To integrate TiDB with Confluent Platform, you can use the TiCDC component with the Avro protocol. TiCDC can stream data changes to Kafka in the format that Confluent Platform recognizes. For the detailed integration guide, see the following sections:
 
@@ -63,8 +63,9 @@ To integrate TiDB with Confluent Platform, you can use the TiCDC component with 
 
 3. Deploy TiCDC in one of the following ways. If TiCDC is already deployed, you can skip this step.
 
-    - [Deploy and install TiCDC using TiUP](/ticdc/manage-ticdc.md#deploy-and-install-ticdc-using-tiup)
-    - [Use Binary](/ticdc/manage-ticdc.md#use-binary)
+    - [Deploy a new TiDB cluster that includes TiCDC using TiUP](/ticdc/deploy-ticdc.md#deploy-a-new-tidb-cluster-that-includes-ticdc-using-tiup)
+    - [Add TiCDC to an existing TiDB cluster using TiUP](/ticdc/deploy-ticdc.md#add-ticdc-to-an-existing-tidb-cluster-using-tiup)
+    - [Add TiCDC to an existing TiDB cluster using binary (not recommended)](/ticdc/deploy-ticdc.md#add-ticdc-to-an-existing-tidb-cluster-using-binary-not-recommended)
 
     Make sure that your TiDB and TiCDC clusters are healthy before proceeding.
 

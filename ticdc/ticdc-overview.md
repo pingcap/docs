@@ -77,6 +77,8 @@ TiCDC only replicates the table that has at least one **valid index**. A **valid
     - Every column of the index is explicitly defined as non-nullable (`NOT NULL`).
     - The index does not have the virtual generated column (`VIRTUAL GENERATED COLUMNS`).
 
+Since v4.0.8, TiCDC supports replicating tables **without a valid index** by modifying the task configuration. However, this compromises the guarantee of data consistency to some extent. For more details, see [Replicate tables without a valid index](/ticdc/manage-ticdc.md#replicate-tables-without-a-valid-index).
+
 ### Unsupported scenarios
 
 Currently, The following scenarios are not supported:
@@ -87,9 +89,7 @@ Currently, The following scenarios are not supported:
 
 ## Install and deploy TiCDC
 
-You can deploy TiCDC components in the process of deploying a new TiDB cluster using TiUP. You only need to [add TiCDC](/production-deployment-using-tiup.md#step-3-edit-the-initialization-configuration-file) to the configuration file when TiUP starts the TiDB cluster.
-
-Currently, you can also add TiCDC components to an existing TiDB cluster using either TiUP or binary. For details, see [Deploy and install TiCDC](/ticdc/manage-ticdc.md#deploy-and-install-ticdc).
+You can either deploy TiCDC along with a new TiDB cluster or add the TiCDC component to an existing TiDB cluster. For details, see [Deploy TiCDC](/ticdc/deploy-ticdc.md).
 
 ## Manage TiCDC Cluster and Replication Tasks
 

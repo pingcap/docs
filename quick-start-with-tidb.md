@@ -10,11 +10,10 @@ aliases: ['/docs/dev/quick-start-with-tidb/','/docs/dev/test-deployment-using-do
 >
 > For production environments, **do not** deploy TiDB with the following three methods. Instead, it is recommended that you [deploy TiDB using TiUP](/production-deployment-using-tiup.md).
 
-This document describes how to try out TiDB, a distributed SQL database, in a few minutes. You can choose any of the following three methods to get started with the TiDB database platform:
+This document describes how to try out TiDB, a distributed SQL database, in a few minutes. You can choose any of the following two methods to get started with the TiDB database platform:
 
 - [Deploy a local test environment using TiUP Playground](#deploy-a-local-test-environment-using-tiup-playground)
 - [Set up a test environment on a single machine using TiUP Cluster](#set-up-a-test-environment-on-a-single-machine-using-tiup-cluster)
-- [Try out TiDB with one click using TiDB-Wasm](#try-out-tidb-with-one-click-using-tidb-wasm)
 
 ## Deploy a local test environment using TiUP Playground
 
@@ -77,11 +76,21 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
 
 4. Start a new session to access TiDB:
 
-    {{< copyable "shell-regular" >}}
+    1. Install the MySQL client. If it is already installed, skip this step.
 
-    ```shell
-    mysql --host 127.0.0.1 --port 4000 -u root
-    ```
+        {{< copyable "shell-regular" >}}
+
+        ```shell
+        yum -y install mysql
+        ```
+
+    2. Use the MySQL client to connect to TiDB.
+
+        {{< copyable "shell-regular" >}}
+
+        ```shell
+        mysql --host 127.0.0.1 --port 4000 -u root
+        ```
 
 5. Access the Prometheus dashboard of TiDB at <http://127.0.0.1:9090>.
 
@@ -276,6 +285,14 @@ Other requirements for the target machine:
 
 8. Access the cluster:
 
+    - Install the MySQL client. If it is already installed, skip this step.
+
+        {{< copyable "shell-regular" >}}
+
+        ```shell
+        yum -y install mysql
+        ```
+
     - Access TiDB. The password is empty:
 
         {{< copyable "shell-regular" >}}
@@ -303,15 +320,6 @@ Other requirements for the target machine:
         ```shell
         tiup cluster display <cluster-name>
         ```
-
-## Try out TiDB with one click using TiDB-Wasm
-
-- Scenario: Experiment with TiDB SQL and test the TiDB compatibility with MySQL queries.
-- Time required: Instant
-
-TiDB-Wasm enables you to run a TiDB server instance in a browser so that you can experiment with SQL and test TiDB compatibility with MySQL queries.
-
-Click to try TiDB-Wasm playground: <https://tour.tidb.io>. It takes about 10 seconds to launch the TiDB server instance in your browser. The playground walks you through the basic TiDB SQL statements such as DDL, DML and CRUD operations.
 
 ## What's next
 

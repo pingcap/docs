@@ -13,7 +13,8 @@ For backups of SST files (key-value pairs) or backups of incremental data that a
 
 1. Support exporting data in multiple formats, including SQL and CSV
 2. Support the [table-filter](https://github.com/pingcap/tidb-tools/blob/master/pkg/table-filter/README.md) feature, which makes it easier to filter data
-3. More optimizations are made for TiDB:
+3. Support exporting data to Amazon S3 cloud storage.
+4. More optimizations are made for TiDB:
     - Support configuring the memory limit of a single TiDB SQL statement
     - Support automatic adjustment of TiDB GC time for TiDB v4.0.0 and above
     - Use TiDB's hidden column `_tidb_rowid` to optimize the performance of concurrent data export from a single table
@@ -80,6 +81,98 @@ For example, you can export all records that match `id < 100` in `test.sbtest1` 
 > - Currently, the `--sql` option can be used only for exporting to CSV files.
 >
 > - Here you need to execute the `select * from <table-name> where id <100` statement on all tables to be exported. If some tables do not have specified fields, the export fails.
+>
+> - Strings and keywords are not distinguished in CSV files. If the imported data is the Boolean type, you need to convert `true` and `false` to `1` and `0`.
+
+### Format of exported files
+
+- `metadata`: The start time of the exported files and the position of the master binary log.
+
+    {{< copyable "shell-regular" >}}
+
+    ```shell
+    cat metadata
+    ```
+
+    ```shell
+    Started dump at: 2020-11-10 10:40:19
+    SHOW MASTER STATUS:
+            Log: tidb-binlog
+            Pos: 420747102018863124
+    Finished dump at: 2020-11-10 10:40:20
+    ```
+
+- `{schema}-schema-create.sql`: The SQL file used to create the schema
+
+    {{< copyable "shell-regular" >}}
+
+    ```shell
+    cat test-schema-create.sql
+    ```
+
+    ```shell
+    CREATE DATABASE `test` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+    ```
+
+- `{schema}.{table}-schema.sql`: The SQL file used to create the table
+
+    {{< copyable "shell-regular" >}}
+
+    ```shell
+    cat test.t1-schema.sql
+    ```
+
+    ```shell
+    CREATE TABLE `t1` (
+      `id` int(11) DEFAULT NULL
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+    ```
+
+- `{schema}.{table}.{0001}.{sql|csv`}: The date source file
+
+    {{< copyable "shell-regular" >}}
+
+    ```shell
+    cat test.t1.0.sql
+    ```
+
+    ```shell
+    /*!40101 SET NAMES binary*/;
+    INSERT INTO `t1` VALUES
+    (1);
+    ```
+
+- `*-schema-view.sql`、`*-schema-trigger.sql`、`*-schema-post.sql`: Other exported files
+
+### Export data to Amazon S3 cloud storage
+
+Since v4.0.8, Dumpling supports exporting data to cloud storages. If you need to back up data to Amazon's S3 backend storage, you need to specify the S3 storage path in the `-o` parameter.
+
+You need to create an S3 bucket in the specified region (see the [Amazon documentation - How do I create an S3 Bucket](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html)). If you also need to create a folder in the bucket, see the [Amazon documentation - Creating a folder](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-folder.html).
+
+Pass `SecretKey` and `AccessKey` of the account with the permission to access the S3 backend storage to the Dumpling node as environment variables.
+
+{{< copyable "shell-regular" >}}
+
+```shell
+export AWS_ACCESS_KEY_ID=${AccessKey}
+export AWS_SECRET_ACCESS_KEY=${SecretKey}
+```
+
+Dumpling also supports reading credential files from `~/.aws/credentials`. For more Dumpling configuration, see the configuration of [BR storages](/br/backup-and-restore-storages.md), which is consistent with the Dumpling configuration.
+
+When you back up data using Dumpling, explicitly specify the `--s3.region` parameter, which means the region of the S3 storage:
+
+{{< copyable "shell-regular" >}}
+
+```shell
+./dumpling \
+  -u root \
+  -P 4000 \
+  -h 127.0.0.1 \
+  -o "s3://${Bucket}/${Folder}" \
+  --s3.region "${region}"
+```
 
 ### Filter the exported data
 
@@ -190,6 +283,14 @@ The `--snapshot` option can be set to a TSO (the `Position` field output by the 
 
 The TiDB historical data snapshots when the TSO is `417773951312461825` and the time is `2020-07-02 17:12:45` are exported.
 
+### Control the memory usage of exporting large tables
+
+When Dumpling is exporting a large single table from TiDB, Out of Memory (OOM) might occur because the exported data size is too large, which causes connection abort and export failure. You can use the following parameters to reduce the memory usage of TiDB:
+
++ Setting `--rows` to split the data to be exported into chunks. This reduces the memory overhead of TiDB's data scan and enables concurrent table data dump to improve export efficiency.
++ Reduce the value of `--tidb-mem-quota-query` to `8589934592` (8 GB) or lower. `--tidb-mem-quota-query` controls the memory usage of a TiDB query and its default value is 32 GB.
++ Adjust the `--params "tidb_distsql_scan_concurrency=5"` parameter. [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency) is a session variable which controls the concurrency of the scan operations in TiDB.
+
 ### TiDB GC settings when exporting a large volume of data
 
 When exporting data from TiDB, if the TiDB version is greater than v4.0.0 and Dumpling can access the PD address of the TiDB cluster, Dumpling automatically extends the GC time without affecting the original cluster. But for TiDB earlier than v4.0.0, you need to manually modify the GC time.
@@ -253,3 +354,4 @@ Finally, all the exported data can be imported back to TiDB using [Lightning](/t
 | `--output-filename-template` | The filename templates represented in the format of [golang template](https://golang.org/pkg/text/template/#hdr-Arguments) <br/> Support the `{{.DB}}`, `{{.Table}}`, and `{{.Index}}` arguments <br/> The three arguments represent the database name, table name, and chunk ID of the data file | '{{.DB}}.{{.Table}}.{{.Index}}' |
 | `--status-addr` | Dumpling's service address, including the address for Prometheus to pull metrics and pprof debugging | ":8281" |
 | `--tidb-mem-quota-query` | The memory limit of exporting SQL statements by a single line of Dumpling command, the unit is byte, and the default value is 32 GB | 34359738368 |
+| `--params` | Specifies the session variable for the connection of the database to be exported. The required format is `"character_set_client=latin1,character_set_connection=latin1"` |
