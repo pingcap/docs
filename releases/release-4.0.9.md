@@ -45,7 +45,6 @@ TiDB version: 4.0.9
     - Reduce the latency of replica reads [#1236](https://github.com/pingcap/tics/pull/1236)
     - Refine TiFlash's error message [#1231](https://github.com/pingcap/tics/pull/1231)
     - Limit the memory usage of cache data under huge volume data. [#1229](https://github.com/pingcap/tics/pull/1229)
-    - [#1227](https://github.com/pingcap/tics/pull/1227)
     - Add a metric for the number of handling coprocessor tasks [#1183](https://github.com/pingcap/tics/pull/1183)
 
 + Tools
