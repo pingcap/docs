@@ -100,12 +100,6 @@ Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":
 - `--target-ts`: Specifies the ending TSO of the `changefeed`. To this TSO, the TiCDC cluster stops pulling data. The default value is empty, which means that TiCDC does not automatically stop pulling data.
 - `--config`: Specifies the configuration file of the `changefeed`.
 
-{{< copyable "" >}}
-
-```
-[scheme]://[userinfo@][host]:[port][/path]?[query_parameters]
-```
-
 #### Configure sink URI with `mysql`/`tidb`
 
 Sample configuration:
