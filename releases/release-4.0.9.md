@@ -8,11 +8,17 @@ Release date: December 3, 2020
 
 TiDB version: 4.0.9
 
+## Compatibility changes
+
++ TiDB
+
+    - Deprecate `enable-streaming` [#21055](https://github.com/pingcap/tidb/pull/21055)
+
 ## New Features
 
 + TiFlash
 
-    - Support storing the latest data of the storage engine on multiple disks [#1159](https://github.com/pingcap/tics/pull/1159)
+    - Support storing the latest data of the storage engine on multiple disks
 
 ## Improvements
 
@@ -33,6 +39,14 @@ TiDB version: 4.0.9
 + TiKV
 
     - Add tag to split command to trace its source [#8936](https://github.com/tikv/tikv/pull/8936)
+    - Support changing config pessimistic-txn.pipelined dynamically [#9100](https://github.com/tikv/tikv/pull/9100)
+    - Running checksum in BR and Lightning should have less influence on the cluster performance. [#9098](https://github.com/tikv/tikv/pull/9098)
+    - Add a metrics for ingesting sst errors [#9096](https://github.com/tikv/tikv/pull/9096)
+    - Prevent hibernation when there are still peers catching up logs [#9093](https://github.com/tikv/tikv/pull/9093)
+    - Increase the success rate of pipelined pessimistic locking. [#9086](https://github.com/tikv/tikv/pull/9086)
+    - Change the default value of `apply-max-batch-size` and `store-max-batch-size` to 1024 [#9020](https://github.com/tikv/tikv/pull/9020)
+    - Add config for max-background-flushes [#8947](https://github.com/tikv/tikv/pull/8947)
+    - Enable the unified read pool for the storage module by default. [#8887](https://github.com/tikv/tikv/pull/8887)
 
 + PD
 
@@ -42,10 +56,10 @@ TiDB version: 4.0.9
 
 + TiFlash
 
-    - Reduce the latency of replica reads [#1236](https://github.com/pingcap/tics/pull/1236)
-    - Refine TiFlash's error message [#1231](https://github.com/pingcap/tics/pull/1231)
-    - Limit the memory usage of cache data under huge volume data. [#1229](https://github.com/pingcap/tics/pull/1229)
-    - Add a metric for the number of handling coprocessor tasks [#1183](https://github.com/pingcap/tics/pull/1183)
+    - Reduce the latency of replica reads
+    - Refine TiFlash's error message
+    - Limit the memory usage of cache data under huge volume data
+    - Add a metric for the number of handling coprocessor tasks
 
 + Tools
 
@@ -119,6 +133,7 @@ TiDB version: 4.0.9
     - Fix the bug that lightning fails to ingest sst files to tikv with importer/local backend when TDE is enabled [#8995](https://github.com/tikv/tikv/pull/8995)
     - Config: fix invalid advertise-status-addr [#9036](https://github.com/tikv/tikv/pull/9036)
     - Fix the issue that reports a key-exist error when a key is locked and deleted by a committed transaction. [#8930](https://github.com/tikv/tikv/pull/8930)
+    - Add check to avoid corruption due to RocksDB block cache error #8243. Also disable `force-consistency-checks` by default to improve performance. [#9029](https://github.com/tikv/tikv/pull/9029)
 
 + PD
 
@@ -128,8 +143,8 @@ TiDB version: 4.0.9
 
 + TiFlash
 
-    - Fix the problem that `INFORMATION_SCHEMA.CLUSTER_HARDWARE` may contain information about disks not in use [#1248](https://github.com/pingcap/tics/pull/1248)
-    - Fix the issue that the memory consumption statistic of Delta Cache is smaller than actual the usage [#1212](https://github.com/pingcap/tics/pull/1212)
+    - Fix the problem that `INFORMATION_SCHEMA.CLUSTER_HARDWARE` may contain information about disks not in use
+    - Fix the issue that the memory consumption statistic of Delta Cache is smaller than actual the usage
 
 + Tools
 
@@ -151,17 +166,3 @@ TiDB version: 4.0.9
         - Fix a bug about encoding data with wrong field info [#437](https://github.com/pingcap/tidb-lightning/pull/437)
         - Fix a bug that gc life time ttl does not take effect [#448](https://github.com/pingcap/tidb-lightning/pull/448)
         - Fix a bug that causes panic when manually stops Lightning import in Local-backend mode [#484](https://github.com/pingcap/tidb-lightning/pull/484)
-
-## Others
-
-+ TiKV
-
-    - Enable dynamically change config pessimistic-txn.pipelined. [#9100](https://github.com/tikv/tikv/pull/9100)
-    - Running checksum in BR and Lightning should have less influence on the cluster performance. [#9098](https://github.com/tikv/tikv/pull/9098)
-    - Add a metrics for ingest sst errors [#9096](https://github.com/tikv/tikv/pull/9096)
-    - Prevent hibernation when there are still peers catching up logs [#9093](https://github.com/tikv/tikv/pull/9093)
-    - Increase the success rate of pipelined pessimistic locking. [#9086](https://github.com/tikv/tikv/pull/9086)
-    - Add check to avoid corruption due to RocksDB block cache error #8243. Also disable `force-consistency-checks` by default to improve performance. [#9029](https://github.com/tikv/tikv/pull/9029)
-    - Change the default value of `apply-max-batch-size` and `store-max-batch-size` to 1024 [#9020](https://github.com/tikv/tikv/pull/9020)
-    - Add config for max-background-flushes [#8947](https://github.com/tikv/tikv/pull/8947)
-    - Enable the unified read pool for the storage module by default. [#8887](https://github.com/tikv/tikv/pull/8887)
