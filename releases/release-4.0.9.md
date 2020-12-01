@@ -155,7 +155,6 @@ TiDB version: 4.0.9
     + TiCDC
 
         - Fix the bug that multiple owners could exist when owner campaign key is deleted [#1104](https://github.com/pingcap/ticdc/pull/1104)
-        - Kafka_consumer: fix wrong timezone when 'TZ' env is not set and downstream is mysql [#1095](https://github.com/pingcap/ticdc/pull/1095)
 
     + Dumpling
 
