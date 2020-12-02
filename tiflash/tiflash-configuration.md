@@ -46,9 +46,9 @@ mark_cache_size = 5368709120
 ## The cache size limit of the min-max index of a data block. Generally, you do not need to change this value.
 minmax_index_cache_size = 5368709120
 
-## The TiFlash data storage path. If there are multiple directories, separate each directory with a comma.
-## `path` and `path_realtime_mode` is deprecated since v4.0.9. Use the configurations
-## in `[storage]` section to get better performance under multi-disk deployment
+## The storage path of TiFlash data. If there are multiple directories, separate each directory with a comma.
+## `path` and `path_realtime_mode` are deprecated since v4.0.9. Use the configurations
+## in the `[storage]` section to get better performance in the multi-disk deployment scenarios
 # path = "/tidb-data/tiflash-9000"
 ## or
 # path = "/ssd0/tidb-data/tiflash,/ssd1/tidb-data/tiflash,/ssd2/tidb-data/tiflash"
@@ -74,13 +74,13 @@ minmax_index_cache_size = 5368709120
     ## If it is not set, or is set to 0s, the actual disk capacity is used.
     ## Note that we don't support human-readable big numbers(like "10GB") yet.
     ## Please set in the specified number of bytes.
-    ## The size of `capacity` list should be the same with `dir` size.
-    ## e.g.
+    ## The size of the `capacity` list should be the same with the `dir` size.
+    ## For example:
     # capacity = [ 10737418240, 10737418240 ]
 
     [storage.latest]
-    ## The directories to store the latest data. About 10% data is stored in
-    ## these directories. The directories listed here required higher IOPS
+    ## The directories to store the latest data. About 10% of the total data is stored in
+    ## these directories. The directories listed here require higher IOPS
     ## metrics than those in `storage.main.dir`.
     ## If not set, it will be the same with `storage.main.dir`.
     # dir = [ ]
@@ -128,9 +128,9 @@ minmax_index_cache_size = 5368709120
 
 [profiles.default]
     ## The default value is `true`. This parameter determines whether the segment
-    ## of DeltaTree Storage Engine uses logical split. Using the logical split
-    ## can reduce the write amplification, and improve the write speed. However,
-    ## these are at the cost of disk space waste.
+    ## of DeltaTree Storage Engine uses logical split.
+    ## Using the logical split can reduce the write amplification, and improve the write speed.
+    ## However, these are at the cost of disk space waste.
     dt_enable_logical_split = true 
 
     ## The memory usage limit for the generated intermediate data when a single
@@ -148,12 +148,14 @@ minmax_index_cache_size = 5368709120
 [server]
     engine-addr = The external access address of the TiFlash coprocessor service.
 [raftstore]
-    ## Specifies the number of threads that handle snapshot. The default number 
-    ## is 2. If you set it to 0, the multi-thread optimization is disabled.
+    ## Specifies the number of threads that handle snapshots.
+    ## The default number is 2. 
+    ## If you set it to 0, the multi-thread optimization is disabled.
     snap-handle-pool-size = 2 
 
-    ## Specifies the shortest interval at which Raft store persists WAL. You can
-    ## properly increase the latency to reduce IOPS usage. The default value is "4ms".
+    ## Specifies the shortest interval at which Raft store persists WAL.
+    ## You can properly increase the latency to reduce IOPS usage.
+    ## The default value is "4ms".
     ## If you set it to 0ms, the optimization is disabled.
     store-batch-retry-recv-timeout = "4ms"
 ```
@@ -164,25 +166,25 @@ In addition to the items above, other parameters are the same with those of TiKV
 
 TiFlash supports multi-disk deployment. If there are multiple disks in your TiFlash node, you can make full use of those disks by following configurations. You can check the template for TiUP deployment here: [The complex template for the TiFlash topology](https://github.com/pingcap/docs/blob/master/config-templates/complex-tiflash.yaml). 
 
-#### Multi-disk deployment with version < v4.0.9
+#### Multi-disk deployment with TiDB version earlier than v4.0.9
 
-For TiDB clusters with version lower than v4.0.9, TiFlash only supports storing the main data of the storage engine on multiple disks. You can setup a TiFlash node on multiple disks by specifying the `path` (`data_dir` in TiUP) and `path_realtime_mode` configuration.
+For TiDB clusters earlier than v4.0.9, TiFlash only supports storing the main data of the storage engine on multiple disks. You can set up a TiFlash node on multiple disks by specifying the `path` (`data_dir` in TiUP) and `path_realtime_mode` configuration.
 
 If there are multiple directories to store data, join those directories with a comma and set it to `path`. For example, `/nvme_ssd_a/data/tiflash,/sata_ssd_b/data/tiflash,/sata_ssd_c/data/tiflash`. If there are multiple disks on your TiFlash node, it is recommended to put disks with the best I/O metrics at the front of `path` to maximize the performance of the node.
 
-If there are multiple disks with similar I/O metrics on your TiFlash node, you can leave the `path_realtime_mode` parameter to be the default value (or you can specifically set it to `false`). It means that data are evenly distributed on all storage directories. However the latest data is written to the first directory, the corresponding disk is still busier than other disks.
+If there are multiple disks with similar I/O metrics on your TiFlash node, you can leave the `path_realtime_mode` parameter to the default value (or you can explicitly set it to `false`). It means that data will be evenly distributed among all storage directories. However, the latest data is written only to the first directory, so the corresponding disk is busier than other disks.
 
-If there are multiple disks with different I/O metrics on your TiFlash node, it is recommended to set `path_realtime_mode` to `true` and put disks with the best I/O metrics at the front of `path`. It means that the first directory only stores the latest data, and the older data are evenly distributed on the other directories. Notice that in this case, the capacity of the first directory should be planned as 10% of the total capacity of all directories.
+If there are multiple disks with different I/O metrics on your TiFlash node, it is recommended to set `path_realtime_mode` to `true` and put disks with the best I/O metrics at the front of `path`. It means that the first directory only stores the latest data, and the older data are evenly distributed among the other directories. Note that in this case, the capacity of the first directory should be planned as 10% of the total capacity of all directories.
 
-#### Multi-disk deployment with version >= v4.0.9
+#### Multi-disk deployment with TiDB v4.0.9 or later
 
-For TiDB clusters with version v4.0.9 and higher, TiFlash supports storing the main data and the latest data of the storage engine on multiple disks. If you want to deploy a TiFlash node on multiple disks, it is recommended to specify your storage directories by the `[storage]` section to make full use of your node. However, the configurations before v4.0.9 (`path` and `path_realtime_mode`) are still supported.
+For TiDB clusters with v4.0.9 or later versions, TiFlash supports storing the main data and the latest data of the storage engine on multiple disks. If you want to deploy a TiFlash node on multiple disks, it is recommended to specify your storage directories in the `[storage]` section to make full use of your node. Note that the configurations earlier than v4.0.9 (`path` and `path_realtime_mode`) are still supported.
 
-If there are multiple disks with similar I/O metrics on your TiFlash node, it is recommended to specify corresponds directories in the `storage.main.dir` list and leave `storage.latest.dir` to be empty. TiFlash will distribute I/O pressure and data placement among all directories.
+If there are multiple disks with similar I/O metrics on your TiFlash node, it is recommended to specify corresponding directories in the `storage.main.dir` list and leave `storage.latest.dir` empty. TiFlash will distribute I/O pressure and data among all directories.
 
 If there are multiple disks with different I/O metrics on your TiFlash node, it is recommended to specify directories with higher metrics in the `storage.latest.dir` list, and specify directories with lower metrics in the `storage.main.dir` list. For example, there are one NVME-SSD and two SATA-SSDs, you can set `storage.latest.dir` to `["/nvme_ssd_a/data/tiflash"]` and `storage.main.dir` to `["/sata_ssd_b/data/tiflash", "/sata_ssd_c/data/tiflash"]`. TiFlash will distribute I/O pressure and data placement among these two directories list separately. Notice that in this case, the capacity of `storage.latest.dir` should be planned as 10% of the total planned capacity.
 
-> **Notes:**
+> **Warning:**
 >
 > * The [storage] configuration is supported in TiUP since v1.2.5. If your TiDB cluster version is not less than v4.0.9, please make sure that your TiUP version is not less than v1.2.5. Or the data directories defined in [storage] won't be managed by TiUP.
 > * After turning to use the [storage] configurations, downgrading your cluster version to less than v4.0.9 may make some TiFlash data lost.
