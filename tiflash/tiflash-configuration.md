@@ -164,6 +164,16 @@ In addition to the items above, other parameters are the same with those of TiKV
 
 TiFlash supports multi-disk deployment. If there are multiple disks in your TiFlash node, you can make full use of those disks by following configurations. You can check the template for TiUP deployment here: [The complex template for the TiFlash topology](https://github.com/pingcap/docs/blob/master/config-templates/complex-tiflash.yaml). 
 
+#### Multi-disk deployment with version < v4.0.9
+
+For TiDB clusters with version lower than v4.0.9, TiFlash only supports storing the main data of the storage engine on multiple disks. You can setup a TiFlash node on multiple disks by specifying the `path` (`data_dir` in TiUP) and `path_realtime_mode` configuration.
+
+If there are multiple directories to store data, join those directories with a comma and set it to `path`. For example, `/nvme_ssd_a/data/tiflash,/sata_ssd_b/data/tiflash,/sata_ssd_c/data/tiflash`. If there are multiple disks on your TiFlash node, it is recommended to put disks with the best I/O metrics at the front of `path` to maximize the performance of the node.
+
+If there are multiple disks with similar I/O metrics on your TiFlash node, you can leave the `path_realtime_mode` parameter to be the default value (or you can specifically set it to `false`). It means that data are evenly distributed on all storage directories. However the latest data is written to the first directory, the corresponding disk is still busier than other disks.
+
+If there are multiple disks with different I/O metrics on your TiFlash node, it is recommended to set `path_realtime_mode` to `true` and put disks with the best I/O metrics at the front of `path`. It means that the first directory only stores the latest data, and the older data are evenly distributed on the other directories. Notice that in this case, the capacity of the first directory should be planned as 10% of the total capacity of all directories.
+
 #### Multi-disk deployment with version >= v4.0.9
 
 For TiDB clusters with version v4.0.9 and higher, TiFlash supports storing the main data and the latest data of the storage engine on multiple disks. If you want to deploy a TiFlash node on multiple disks, it is recommended to specify your storage directories by the `[storage]` section to make full use of your node. However, the configurations before v4.0.9 (`path` and `path_realtime_mode`) are still supported.
@@ -176,13 +186,3 @@ If there are multiple disks with different I/O metrics on your TiFlash node, it 
 >
 > * The [storage] configuration is supported in TiUP since v1.2.5. If your TiDB cluster version is not less than v4.0.9, please make sure that your TiUP version is not less than v1.2.5. Or the data directories defined in [storage] won't be managed by TiUP.
 > * After turning to use the [storage] configurations, downgrading your cluster version to less than v4.0.9 may make some TiFlash data lost.
-
-#### Multi-disk deployment with version < v4.0.9
-
-For TiDB clusters with version lower than v4.0.9, TiFlash only supports storing the main data of the storage engine on multiple disks. You can setup a TiFlash node on multiple disks by specifying the `path` (`data_dir` in TiUP) and `path_realtime_mode` configuration.
-
-If there are multiple directories to store data, join those directories with a comma and set it to `path`. For example, `/nvme_ssd_a/data/tiflash,/sata_ssd_b/data/tiflash,/sata_ssd_c/data/tiflash`. If there are multiple disks on your TiFlash node, it is recommended to put disks with the best I/O metrics at the front of `path` to maximize the performance of the node.
-
-If there are multiple disks with similar I/O metrics on your TiFlash node, you can leave the `path_realtime_mode` parameter to be the default value (or you can specifically set it to `false`). It means that data are evenly distributed on all storage directories. However the latest data is written to the first directory, the corresponding disk is still busier than other disks.
-
-If there are multiple disks with different I/O metrics on your TiFlash node, it is recommended to set `path_realtime_mode` to `true` and put disks with the best I/O metrics at the front of `path`. It means that the first directory only stores the latest data, and the older data are evenly distributed on the other directories. Notice that in this case, the capacity of the first directory should be planned as 10% of the total capacity of all directories.
