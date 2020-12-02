@@ -72,7 +72,7 @@ minmax_index_cache_size = 5368709120
 
     ## The maximum storage capacity of each directory in `storage.main.dir`.
     ## If it is not set, or is set to multiple 0, the actual disk (the disk where the directory is located) capacity is used.
-    ## Note that big numbers such as "10GB" are not supported yet.
+    ## Note that human-readable numbers such as "10GB" are not supported yet.
     ## Set the specified number in bytes.
     ## The size of the `capacity` list should be the same with the `dir` size.
     ## For example:
@@ -170,7 +170,7 @@ TiFlash supports multi-disk deployment. If there are multiple disks in your TiFl
 
 For TiDB clusters earlier than v4.0.9, TiFlash only supports storing the main data of the storage engine on multiple disks. You can set up a TiFlash node on multiple disks by specifying the `path` (`data_dir` in TiUP) and `path_realtime_mode` configuration.
 
-If there are multiple data storage directories in `path`, separate each with a comma. For example, `/ssd_a/data/tiflash,/hdd_b/data/tiflash,/hdd_c/data/tiflash`. If there are multiple disks in your environment, it is recommended that each directory corresponds to one disk and you put disks with the best performance at the front to maximize the performance of all disks.
+If there are multiple data storage directories in `path`, separate each with a comma. For example, `/nvme_ssd_a/data/tiflash,/sata_ssd_b/data/tiflash,/sata_ssd_c/data/tiflash`. If there are multiple disks in your environment, it is recommended that each directory corresponds to one disk and you put disks with the best performance at the front to maximize the performance of all disks.
 
 If there are multiple disks with similar I/O metrics on your TiFlash node, you can leave the `path_realtime_mode` parameter to the default value (or you can explicitly set it to `false`). It means that data will be evenly distributed among all storage directories. However, the latest data is written only to the first directory, so the corresponding disk is busier than other disks.
 
@@ -186,5 +186,5 @@ If there are multiple disks with different I/O metrics on your TiFlash node, it 
 
 > **Warning:**
 >
-> * The `[storage]` configuration is supported in TiUP since v1.2.5. If your TiDB cluster v4.0.9 or later, make sure that your TiUP version is v1.2.5 or later. Otherwise, the data directories defined in `[storage]` will not be managed by TiUP.
+> * The `[storage]` configuration is supported in TiUP since v1.2.5. If your TiDB cluster version is v4.0.9 or later, make sure that your TiUP version is v1.2.5 or later. Otherwise, the data directories defined in `[storage]` will not be managed by TiUP.
 > * After turning to use the [storage] configurations, downgrading your cluster version to less than v4.0.9 may make some TiFlash data lost.
