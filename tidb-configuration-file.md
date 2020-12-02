@@ -142,6 +142,11 @@ The TiDB configuration file supports more options than command-line parameters. 
 
 Configuration items related to log.
 
+### `level`
+
++ Specifies the log output level. The options are [debug, info, warn, error, fatal].
++ Default value: `info`
+
 ### `format`
 
 - Specifies the log output format.
