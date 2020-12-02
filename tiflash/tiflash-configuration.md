@@ -35,7 +35,7 @@ This section introduces the configuration parameters of TiFlash.
 ### Configure the `tiflash.toml` file
 
 ```toml
-## The listening host for supporting services such as TPC/HTTP. It is recommended to configure it as "0.0.0.0".
+## The listening host for supporting services such as TPC/HTTP. It is recommended to configure it as "0.0.0.0", which means to listen on all IP addresses of this machine.
 listen_host = "0.0.0.0"
 ## The TiFlash TCP service port.
 tcp_port = 9000
@@ -61,19 +61,19 @@ minmax_index_cache_size = 5368709120
 ## or `storage.latest.dir` appended with "/tmp"
 # tmp_path = "/tidb-data/tiflash-9000/tmp"
 
-## Storage paths settings since v4.0.9
+## Storage paths settings effective since v4.0.9
 [storage]
     [storage.main]
-    ## The directories to store the main data. More than 90% data is stored in
+    ## The directory(ies) to store the main data. More than 90% of the total data is stored in
     ## these directories.
     dir = [ "/tidb-data/tiflash-9000" ] 
     ## or
     # dir = [ "/ssd0/tidb-data/tiflash", "/ssd1/tidb-data/tiflash" ]
 
-    ## Store capacity of each directory in `storage.main.dir`, i.e. max data size allowed.
-    ## If it is not set, or is set to 0s, the actual disk capacity is used.
+    ## The maximum storage capacity of each directory in `storage.main.dir`.
+    ## If it is not set, or is set to multiple 0, the actual disk (the disk where the directory is located) capacity is used.
     ## Note that we don't support human-readable big numbers(like "10GB") yet.
-    ## Please set in the specified number of bytes.
+    ## Set the specified number in bytes.
     ## The size of the `capacity` list should be the same with the `dir` size.
     ## For example:
     # capacity = [ 10737418240, 10737418240 ]
@@ -82,10 +82,10 @@ minmax_index_cache_size = 5368709120
     ## The directories to store the latest data. About 10% of the total data is stored in
     ## these directories. The directories listed here require higher IOPS
     ## metrics than those in `storage.main.dir`.
-    ## If not set, it will be the same with `storage.main.dir`.
+    ## If it is not set (by default), the values of `storage.main.dir` are used.
     # dir = [ ]
-    ## Store capacity of each directory in `storage.latest.dir`, i.e. max data size allowed.
-    ## If it is not set, or is set to 0s, the actual disk capacity is used.
+    ## The maximum storage capacity of each directory in `storage.latest.dir`.
+    ## If it is not set, or is set to multiple 0, the actual disk (the disk where the directory is located) capacity is used.
     # capacity = [ 10737418240, 10737418240 ]
 
 [flash]
