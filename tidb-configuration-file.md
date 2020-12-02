@@ -144,13 +144,14 @@ Configuration items related to log.
 
 ### `level`
 
-+ Specifies the log output level. The options are [debug, info, warn, error, fatal].
++ Specifies the log output level.
++ Value options: `debug`, `info`, `warn`, `error`, and `fatal`.
 + Default value: `info`
 
 ### `format`
 
 - Specifies the log output format.
-- Available values: `json`, `text` and `console`.
+- Value options: `json`, `text` and `console`.
 - Default value: `text`
 
 ### `enable-timestamp`
