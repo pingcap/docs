@@ -42,6 +42,12 @@ This document only describes the parameters that are not included in command-lin
 + Default value: `"60s"`
 + Minimum value: `"1s"`
 
+### `server.end-point-slow-log-threshold`
+
++ The threshold for slow TiDB request to print slow log
++ Default value: `"1s"`
++ Minimum value: `"1ms"`
+
 ### `server.snap-max-write-bytes-per-sec`
 
 + The maximum allowable disk bandwidth for processing snapshots
