@@ -44,7 +44,7 @@ This document only describes the parameters that are not included in command-lin
 
 ### `server.end-point-slow-log-threshold`
 
-+ The threshold for slow TiDB request to print slow log
++ The time threshold for a TiDB request to print slow log
 + Default value: `"1s"`
 + Minimum value: `"1ms"`
 
