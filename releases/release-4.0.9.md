@@ -145,6 +145,7 @@ TiDB version: 4.0.9
 
     - Fix the problem that `INFORMATION_SCHEMA.CLUSTER_HARDWARE` may contain information about disks not in use
     - Fix the issue that the memory consumption statistic of Delta Cache is smaller than actual the usage
+    - Fix memory leak about thread info statistics
 
 + Tools
 
