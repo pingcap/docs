@@ -109,6 +109,17 @@ To monitor encryption at rest, if you deploy TiKV with Grafana, you can look at 
 
 For debugging, the `tikv-ctl` command can be used to dump encryption metadata such as encryption method and data key id used to encryption the file, as well as list of data keys. Since the operation can expose sensitive data, it is not recommended to use in production. Please refer to [TiKV Control](/tikv-control.md#dump-encryption-metadata] document.
 
+### Compatibility with earlier TiKV versions
+
+An optimization is introduced in TiKV 4.0.9 to reduce IO and mutex contention overhead to manage encryption metadata. The optimization is gated behind `security.encryption.enable-file-dictionary-log` config. The config is default to off for TiKV 4.0.x (with x >= 9), and default to on for TiKV >= 5.0.0. When the config is turned on, data format of encryption metadata is unrecognizable by TiKV <= 4.0.8. If the config is turned on (e.g. using TiKV >= 5.0.0 with encryption-at-rest and default `enable-file-dictionary-log` config), then downgrade to TiKV <= 4.0.8, TiKV will fail to start, with error in the info log similar to the following one:
+
+```
+[2020/12/07 07:26:31.106 +08:00] [ERROR] [mod.rs:110] ["encryption: failed to load file dictionary."]
+[2020/12/07 07:26:33.598 +08:00] [FATAL] [lib.rs:483] ["called `Result::unwrap()` on an `Err` value: Other(\"[components/encryption/src/encrypted_file/header.rs:18]: unknown version 2\")"]
+```
+
+To workaround the issue, user can set `security.encryption.enable-file-dictionary-log = false`, then start TiKV with version >= 4.0.9. Once TiKV start successfully, the data format of encryption metadata is downgraded the version recognizable to older TiKV versions. At this point, user can then downgrade to older TiKV versions.
+
 ## BR S3 server-side encryption
 
 To enable S3 server-side encryption when backup to S3 using BR, pass `--s3.sse` argument and set value to "aws:kms". S3 will use its own KMS key for encryption. Example:
