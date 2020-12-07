@@ -111,7 +111,7 @@ For debugging, the `tikv-ctl` command can be used to dump encryption metadata su
 
 ### Compatibility with earlier TiKV versions
 
-An optimization is introduced in TiKV 4.0.9 to reduce IO and mutex contention overhead to manage encryption metadata. The optimization is gated behind `security.encryption.enable-file-dictionary-log` config. The config defaults to on for TiKV >= 4.0.9. When the config is turned on, the data format of encryption metadata is unrecognizable by TiKV v4.0.8 or ealier. If the config is turned on (e.g. using TiKV v4.0.9 or later with encryption-at-rest and default `enable-file-dictionary-log` config), then downgrade to TiKV v4.0.8 or earlier, TiKV will fail to start, with an error in the info log similar to the following one:
+An optimization is introduced in TiKV 4.0.9 to reduce IO and mutex contention overhead to manage encryption metadata. The optimization is gated behind `security.encryption.enable-file-dictionary-log` config. The config defaults to on for TiKV 4.0.9 and later versions. When the config is turned on, the data format of encryption metadata is unrecognizable by TiKV v4.0.8 or ealier. If the config is turned on (e.g. using TiKV v4.0.9 or later with encryption-at-rest and default `enable-file-dictionary-log` config), then downgrade to TiKV v4.0.8 or earlier, TiKV will fail to start, with an error in the info log similar to the following one:
 
 ```
 [2020/12/07 07:26:31.106 +08:00] [ERROR] [mod.rs:110] ["encryption: failed to load file dictionary."]
