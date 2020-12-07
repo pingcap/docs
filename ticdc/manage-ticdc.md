@@ -98,8 +98,8 @@ Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":
 
 - `--start-ts`: Specifies the starting TSO of the `changefeed`. From this TSO, the TiCDC cluster starts pulling data. The default value is the current time.
 - `--target-ts`: Specifies the ending TSO of the `changefeed`. To this TSO, the TiCDC cluster stops pulling data. The default value is empty, which means that TiCDC does not automatically stop pulling data.
-- `--sort-engine`: Specifies the sorting engine for the `changefeed`. Because TiDB and TiKV adopt distributed architectures, TiCDC must output sorted data changes. This item supports `memory`/`unified`/`file`.
-    - `memory`: Sorts data changes in memory. It is recommended to `memory` in a production environment.
+- `--sort-engine`: Specifies the sorting engine for the `changefeed`. Because TiDB and TiKV adopt distributed architectures, TiCDC must output sorted data changes. This option supports `memory`/`unified`/`file`.
+    - `memory`: Sorts data changes in memory. It is recommended to use `memory` in a production environment.
     - `unified`: An experimental feature introduced in v4.0.9. When `unified` is used, TiCDC prioritizes data sorting in memory. If the memory is insufficient, TiCDC automatically uses the disk to store the temporary data. It is **NOT** recommended to use it in a production environment unless `memory` cannot be used due to insufficient memory.
     - `file`: Entirely uses the disk to store the temporary data. This feature is **deprecated**. It is not recommended to use it.
 - `--config`: Specifies the configuration file of the `changefeed`.
@@ -152,7 +152,7 @@ The following are descriptions of parameters and parameter values that can be co
 | `max-message-bytes`  | The maximum size of data that is sent to Kafka broker each time (optional, `64MB` by default) |
 | `replication-factor` | The number of Kafka message replicas that can be saved (optional, `1` by default)                       |
 | `protocol` | The protocol with which messages are output to Kafka. The value options are `default`, `canal`, `avro`, and `maxwell` (`default` by default)    |
-| `max-batch-size` | New in v4.0.9. If the message protocol supports outputting multiple data changes to one Kafka message, this parameter specifies the maximum number of allowable data changes in one Kafka message and currently takes effect only when Kafka's `protocol` is `default`. (optional, `4096` by default) |
+| `max-batch-size` | New in v4.0.9. If the message protocol supports outputting multiple data changes to one Kafka message, this parameter specifies the maximum number of data changes in one Kafka message. It currently takes effect only when Kafka's `protocol` is `default`. (optional, `4096` by default) |
 | `ca` | The path of the CA certificate file needed to connect to the downstream Kafka instance (optional)  |
 | `cert` | The path of the certificate file needed to connect to the downstream Kafka instance (optional) |
 | `key` | The path of the certificate key file needed to connect to the downstream Kafka instance (optional) |
