@@ -6,7 +6,7 @@ aliases: ['/docs/stable/dashboard/dashboard-diagnostics-access/','/docs/v4.0/das
 
 # TiDB Dashboard Cluster Diagnostics Page
 
-> **Note:**
+> **Warning:**
 >
 > Diagnostics in TiDB Dashboard is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
 
