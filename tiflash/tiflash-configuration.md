@@ -58,14 +58,14 @@ minmax_index_cache_size = 5368709120
 # path_realtime_mode = false 
 
 ## The path in which the TiFlash temporary files are stored. By default it is the first directory in `path`
-## or `storage.latest.dir` appended with "/tmp"
+## or in `storage.latest.dir` appended with "/tmp".
 # tmp_path = "/tidb-data/tiflash-9000/tmp"
 
 ## Storage paths settings effective since v4.0.9
 [storage]
     [storage.main]
-    ## The directory(ies) to store the main data. More than 90% of the total data is stored in
-    ## these directories.
+    ## The list of directories to store the main data. More than 90% of the total data is stored in
+    ## the directory list.
     dir = [ "/tidb-data/tiflash-9000" ] 
     ## or
     # dir = [ "/ssd0/tidb-data/tiflash", "/ssd1/tidb-data/tiflash" ]
@@ -73,14 +73,14 @@ minmax_index_cache_size = 5368709120
     ## The maximum storage capacity of each directory in `storage.main.dir`.
     ## If it is not set, or is set to multiple 0, the actual disk (the disk where the directory is located) capacity is used.
     ## Note that human-readable numbers such as "10GB" are not supported yet.
-    ## Set the specified number in bytes.
+    ## Numbers are specified in bytes.
     ## The size of the `capacity` list should be the same with the `dir` size.
     ## For example:
     # capacity = [ 10737418240, 10737418240 ]
 
     [storage.latest]
-    ## The directories to store the latest data. About 10% of the total data is stored in
-    ## these directories. The directories listed here require higher IOPS
+    ## The list of directories to store the latest data. About 10% of the total data is stored in
+    ## the directory list. The directories (or directory) listed here require higher IOPS
     ## metrics than those in `storage.main.dir`.
     ## If it is not set (by default), the values of `storage.main.dir` are used.
     # dir = [ ]
@@ -164,7 +164,7 @@ In addition to the items above, other parameters are the same with those of TiKV
 
 ### Multi-disk deployment
 
-TiFlash supports multi-disk deployment. If there are multiple disks in your TiFlash node, you can make full use of those disks by configuring the parameters described in the following sections. For the configuration template used for TiUP, see [The complex template for the TiFlash topology](https://github.com/pingcap/docs/blob/master/config-templates/complex-tiflash.yaml). 
+TiFlash supports multi-disk deployment. If there are multiple disks in your TiFlash node, you can make full use of those disks by configuring the parameters described in the following sections. For TiFlash's configuration template to be used for TiUP, see [The complex template for the TiFlash topology](https://github.com/pingcap/docs/blob/master/config-templates/complex-tiflash.yaml). 
 
 #### Multi-disk deployment with TiDB version earlier than v4.0.9
 
@@ -187,4 +187,4 @@ If there are multiple disks with different I/O metrics on your TiFlash node, it 
 > **Warning:**
 >
 > * The `[storage]` configuration is supported in TiUP since v1.2.5. If your TiDB cluster version is v4.0.9 or later, make sure that your TiUP version is v1.2.5 or later. Otherwise, the data directories defined in `[storage]` will not be managed by TiUP.
-> * After turning to use the [storage] configurations, downgrading your cluster version to less than v4.0.9 may make some TiFlash data lost.
+> * After using the [storage] configurations, downgrading your cluster to a version earlier than v4.0.9 might cause **data loss** on TiFlash..
