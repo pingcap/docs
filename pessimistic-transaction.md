@@ -125,7 +125,7 @@ To reduce the overhead of locking, TiKV implements the pipelined locking process
 
 * Other transactions that modify the same data cannot be blocked. If the application logic relies on locking or lock waiting mechanisms, it affects the correctness of the application logic.
 
-* There is a low probability that the transaction commit fails, but it does not affect the correctness of the transactions.
+* Though there is a low probability that the transaction commit fails, it does not affect the correctness of the transactions.
 
 If the application logic relies on the locking or lock waiting mechanisms, or even in the case of TiKV cluster exceptions, the pipelined locking feature should be disabled to ensure the success rate of the transaction commit as much as possible.
 
@@ -138,7 +138,7 @@ This feature is disabled by default. To enable it, modify the TiKV configuration
 pipelined = true
 ```
 
-If the TiKV cluster is v4.0.9 and above, you can also dynamically enable this feature by [Modifying TiKV configuration online](/dynamic-config.md#modify-tikv-configuration-online):
+If the TiKV cluster is v4.0.9 and above, you can also dynamically enable this feature by [modifying TiKV configuration online](/dynamic-config.md#modify-tikv-configuration-online):
 
 {{< copyable "sql" >}}
 
