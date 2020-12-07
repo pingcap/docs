@@ -879,3 +879,10 @@ explain select * from t where age=5;
 +-------------------------------+------------+-----------+-----------------------------+-------------------------------+
 3 rows in set (0.00 sec)
 ```
+
+### `tidb_enable_rate_limit_action`
+
+- Scope: SESSION | GLOBAL
+- Default value: ON
+- This variable controls whether to enable the dynamic memory control function for the operator that reads the data. By default, the operator reading the data enables the maximum number of threads that [`tidb_disql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency) allowed to read the data. When the memory usage of a single SQL statement exceeds [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) once, the operator that reads the data stops one thread.
+- When the operator that reads the data has only one thread left and the memory usage of a single SQL statement continues to exceed [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query), the SQL statement triggers other memory control behaviors, such as [spill to disk](/tidb-configuration-file.md#spilled-file-encryption-method).
