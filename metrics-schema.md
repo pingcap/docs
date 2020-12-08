@@ -11,7 +11,7 @@ The `METRICS_SCHEMA` is a set of views on top of TiDB metrics that are stored in
 {{< copyable "sql" >}}
 
 ```sql
-use metrics_schema;
+USE metrics_schema;
 SELECT * FROM uptime;
 SELECT * FROM information_schema.metrics_tables WHERE table_name='uptime'\G
 ```
@@ -43,7 +43,7 @@ TABLE_NAME: uptime
 {{< copyable "sql" >}}
 
 ```sql
-show tables;
+SHOW TABLES;
 ```
 
 ```sql
