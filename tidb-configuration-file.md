@@ -292,7 +292,7 @@ Configuration items related to performance.
 >
 > `server-memory-quota` is still an experimental feature. It is **NOT** recommended that you use it in a production environment.
 
-+ The memory usage limit of tidb-server instances. <!-- As of TiDB v5.0 --> This configuration item completely replaces the original [`max-memory`](https://docs.pingcap.com/zh/tidb/stable/tidb-configuration-file#max-memory).
++ The memory usage limit of tidb-server instances. <!-- New in TiDB v5.0 --> This configuration item completely supersedes the previous [`max-memory`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#max-memory).
 + Default value: `0` (in bytes), which means no memory limit.
 
 ### `memory-usage-alarm-ratio`
