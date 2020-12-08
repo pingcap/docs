@@ -43,8 +43,73 @@ _Your contribution is also welcome! Feel free to open a [pull request](https://g
 
 Source code for [all components of the TiDB platform](https://github.com/pingcap) is available on GitHub.
 
+<<<<<<< HEAD
 - [TiDB](https://github.com/pingcap/tidb)
 - [TiKV](https://github.com/tikv/tikv)
 - [PD](https://github.com/pingcap/pd)
 - [TiSpark](https://github.com/pingcap/tispark)
 - [TiDB Operator](https://github.com/pingcap/tidb-operator)
+=======
+<NavColumn>
+<ColumnTitle>Maintain</ColumnTitle>
+
+- [Upgrade TiDB Using TiUP](/upgrade-tidb-using-tiup.md)
+- [Scale TiDB Using TiUP](/scale-tidb-using-tiup.md)
+- [Back up and Restore Data](/br/backup-and-restore-tool.md)
+- [Deploy and Manage TiCDC](/ticdc/manage-ticdc.md)
+- [Maintain TiDB Using TiUP](/maintain-tidb-using-tiup.md)
+- [Maintain TiFlash](/tiflash/maintain-tiflash.md)
+
+</NavColumn>
+
+<NavColumn>
+<ColumnTitle>Monitor and Alert</ColumnTitle>
+
+- [Monitoring Framework](/tidb-monitoring-framework.md)
+- [Monitoring API](/tidb-monitoring-api.md)
+- [Deploy Monitoring Services](/deploy-monitoring-services.md)
+- [Export Grafana Snapshots](/exporting-grafana-snapshots.md)
+- [Alert Rules and Solutions](/alert-rules.md)
+- [TiFlash Alert Rules and Solutions](/tiflash/tiflash-alert-rules.md)
+
+</NavColumn>
+
+<NavColumn>
+<ColumnTitle>Troubleshoot</ColumnTitle>
+
+- [TiDB Troubleshooting Map](/tidb-troubleshooting-map.md)
+- [Identify Slow Queries](/identify-slow-queries.md)
+- [Analyze Slow Queries](/analyze-slow-queries.md)
+- [SQL Diagnostics](/information-schema/information-schema-sql-diagnostics.md)
+- [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md)
+- [Troubleshoot the TiDB Cluster](/troubleshoot-tidb-cluster.md)
+- [Troubleshoot TiCDC](/ticdc/troubleshoot-ticdc.md)
+- [Troubleshoot TiFlash](/tiflash/troubleshoot-tiflash.md)
+
+</NavColumn>
+
+<NavColumn>
+<ColumnTitle>Reference</ColumnTitle>
+
+- [TiDB Architecture](/tidb-architecture.md)
+- [Key Monitoring Metrics](/grafana-overview-dashboard.md)
+- [Enable TLS](/enable-tls-between-clients-and-servers.md)
+- [Privilege Management](/privilege-management.md)
+- [Role-Based Access Control](/role-based-access-control.md)
+- [Certificate-Based Authentication](/certificate-authentication.md)
+
+</NavColumn>
+
+<NavColumn>
+<ColumnTitle>FAQs</ColumnTitle>
+
+- [Product FAQs](/faq/tidb-faq.md)
+- [High Availability FAQs](/faq/high-availability-faq.md)
+- [SQL FAQs](/faq/sql-faq.md)
+- [Deploy and Maintain FAQs](/faq/deploy-and-maintain-faq.md)
+- [Upgrade and After Upgrade FAQs](/faq/upgrade-faq.md)
+- [Migration FAQs](/faq/migration-tidb-faq.md)
+
+</NavColumn>
+</NavColumns>
+>>>>>>> de4cd64d... monitoring: document MetricsTool (Export Grafana Snapshots) (#4302)
