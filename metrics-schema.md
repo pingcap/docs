@@ -105,7 +105,7 @@ Query the information related to the `tidb_query_duration` table on `information
 {{< copyable "sql" >}}
 
 ```sql
-select * from information_schema.metrics_tables where table_name='tidb_query_duration';
+SELECT * FROM information_schema.metrics_tables WHERE table_name='tidb_query_duration';
 ```
 
 ```sql
@@ -129,7 +129,7 @@ To query the schema of the `tidb_query_duration` table, execute the following st
 {{< copyable "sql" >}}
 
 ```sql
-show create table metrics_schema.tidb_query_duration;
+SHOW CREATE TABLE metrics_schema.tidb_query_duration;
 ```
 
 ```sql
@@ -156,7 +156,7 @@ The following statement queries the P99 time within the range of [`2020-03-25 23
 {{< copyable "sql" >}}
 
 ```sql
-select * from metrics_schema.tidb_query_duration where value is not null and time>='2020-03-25 23:40:00' and time <= '2020-03-25 23:42:00' and quantile=0.99;
+SELECT * FROM metrics_schema.tidb_query_duration where value is not null and time>='2020-03-25 23:40:00' and time <= '2020-03-25 23:42:00' and quantile=0.99;
 ```
 
 ```sql
