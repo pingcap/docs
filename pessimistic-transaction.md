@@ -125,7 +125,7 @@ To reduce the overhead of locking, TiKV implements the pipelined locking process
 
 * Other transactions that modify the same data cannot be blocked. If the application logic relies on locking or lock waiting mechanisms, the correctness of the application logic is affected.
 
-* Though there is a low probability that the transaction commit fails, it does not affect the correctness of the transactions.
+* There is a low probability that the transaction commit fails, but it does not affect the correctness of the transactions.
 
 If the application logic relies on the locking or lock waiting mechanisms, or if you want to guarantee as much as possible the success rate of transaction commits even in the case of TiKV cluster anomalies, you should disable the pipelined locking feature.
 
