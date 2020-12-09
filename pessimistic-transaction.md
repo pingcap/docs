@@ -121,7 +121,7 @@ TiDB supports the following two isolation levels in the pessimistic transaction 
 
 Adding a pessimistic lock requires writing data into TiKV. The response of successfully adding a lock can only be returned to TiDB after commit and apply through Raft. Therefore, compared with optimistic transactions, the pessimistic transaction mode inevitably has higher latency.
 
-To reduce the overhead of locking, TiKV implements the pipelined locking process: when the data meets the requirements for locking, TiKV immediately notifies TiDB to execute subsequent requests and writes into the pessimistic lock asynchronously. This process reduces most latency and significantly improves the performance of pessimistic transactions. However, when network partition occurs in TiKV or a TiKV node is down, the asynchronous write into the pessimistic lock might fail and affects the following aspects:
+To reduce the overhead of locking, TiKV implements the pipelined locking process: when the data meets the requirements for locking, TiKV immediately notifies TiDB to execute subsequent requests and writes into the pessimistic lock asynchronously. This process reduces most latency and significantly improves the performance of pessimistic transactions. However, when network partition occurs in TiKV or a TiKV node is down, the asynchronous write into the pessimistic lock might fail and affect the following aspects:
 
 * Other transactions that modify the same data cannot be blocked. If the application logic relies on locking or lock waiting mechanisms, the correctness of the application logic is affected.
 
@@ -138,7 +138,7 @@ This feature is disabled by default. To enable it, modify the TiKV configuration
 pipelined = true
 ```
 
-If the TiKV cluster is v4.0.9 and later, you can also dynamically enable this feature by [modifying TiKV configuration online](/dynamic-config.md#modify-tikv-configuration-online):
+If the TiKV cluster is v4.0.9 or later, you can also dynamically enable this feature by [modifying TiKV configuration online](/dynamic-config.md#modify-tikv-configuration-online):
 
 {{< copyable "sql" >}}
 
