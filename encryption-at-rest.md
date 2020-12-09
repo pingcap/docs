@@ -118,7 +118,7 @@ An optimization is introduced in TiKV 4.0.9 to reduce IO and mutex contention ov
 [2020/12/07 07:26:33.598 +08:00] [FATAL] [lib.rs:483] ["called `Result::unwrap()` on an `Err` value: Other(\"[components/encryption/src/encrypted_file/header.rs:18]: unknown version 2\")"]
 ```
 
-To workaround the issue, user can set `security.encryption.enable-file-dictionary-log = false`, then start TiKV with v4.0.9 or later. Once TiKV starts successfully, the data format of encryption metadata is downgraded the version recognizable to older TiKV versions. At this point, user can then downgrade to older TiKV versions.
+To avoid the error above, you can first set `security.encryption.enable-file-dictionary-log` to `false` and start TiKV with v4.0.9 or later. Once TiKV starts successfully, the data format of encryption metadata is downgraded to the version recognizable to earlier TiKV versions. At this point, you can then downgrade your TiKV cluster to an earlier version.
 
 ## BR S3 server-side encryption
 
