@@ -73,6 +73,7 @@
   + Monitor
     - [Overview](/tidb-monitoring-framework.md)
     - [Monitor a TiDB Cluster](/monitor-a-tidb-cluster.md)
+    - [Export Grafana Snapshots](/exporting-grafana-snapshots.md)
   + Migrate
     - [Migration Tools User Guide](/ecosystem-tool-user-guide.md)
     + Migrate from MySQL
