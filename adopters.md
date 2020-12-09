@@ -42,7 +42,7 @@ This is a list of TiDB adopters in various industries.
 |[WeBank](https://en.wikipedia.org/wiki/WeBank_(China))|Banking|[English](https://pingcap.com/case-studies/how-we-reduced-batch-processing-time-by-58-percent-with-a-scale-out-mysql-alternative/); Chinese [#1](https://pingcap.com/cases-cn/user-case-webank/), [#2](https://pingcap.com/cases-cn/user-case-webank-2/)|
 | [Bank of China](https://en.wikipedia.org/wiki/Bank_of_China) | Banking | [English](https://pingcap.com/case-studies/how-bank-of-china-uses-a-scale-out-database-to-support-zabbix-monitoring-at-scale); [Chinese](https://pingcap.com/cases-cn/user-case-bank-of-china/) |
 |[Industrial and Commercial Bank of China](https://en.wikipedia.org/wiki/Industrial_and_Commercial_Bank_of_China)|Banking||
-|[Ping An Life Insurance](https://www.bloomberg.com/profile/company/OPAHWZ:CH)|Insurance|[English](https://pingcap.com/case-studies/how-chinas-insurance-giant-improved-agile-application-performance-with-a-newsql-database)|
+|[Ping An Life Insurance](https://www.bloomberg.com/profile/company/OPAHWZ:CH)|Insurance|[English](https://pingcap.com/case-studies/how-chinas-insurance-giant-improved-agile-application-performance-with-a-newsql-database); [Chinese](https://pingcap.com/cases-cn/user-case-pingan/)|
 |[Yimian Data](https://www.crunchbase.com/organization/yimian-data)|Big Data|[Chinese](https://pingcap.com/cases-cn/user-case-yimian)|
 |[CAASDATA](https://www.caasdata.com/)|Big Data|[Chinese](https://pingcap.com/cases-cn/user-case-kasi/)|
 |[Mobikok](https://www.linkedin.com/company/shenzhen-keke-network-technology-co.-ltd./)|AdTech|[Chinese](https://pingcap.com/cases-cn/user-case-mobikok/)|
