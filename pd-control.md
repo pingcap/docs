@@ -673,9 +673,9 @@ Usage:
 
 ```bash
 >> scheduler show                                 // Display all schedulers
->> scheduler add grant-leader-scheduler 1         // Schedule all the leaders of the regions on store 1 to store 1
->> scheduler add evict-leader-scheduler 1         // Move all the region leaders on store 1 out
->> scheduler config evict-leader-scheduler        // Display all the stores where this scheduler is located since v4.0.0
+>> scheduler add grant-leader-scheduler 1         // Schedule all the leaders of the Regions on store 1 to store 1
+>> scheduler add evict-leader-scheduler 1         // Move all the Region leaders on store 1 out
+>> scheduler config evict-leader-scheduler        // Display the stores in which the scheduler is located since v4.0.0
 >> scheduler add shuffle-leader-scheduler         // Randomly exchange the leader on different stores
 >> scheduler add shuffle-region-scheduler         // Randomly scheduling the regions on different stores
 >> scheduler remove grant-leader-scheduler-1      // Remove the corresponding scheduler, and `-1` corresponds to the store ID
