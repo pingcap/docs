@@ -193,7 +193,7 @@ In the above three ways of reading TiFlash replicas, engine isolation specifies 
 
 ## Use TiSpark to read TiFlash replicas
 
-Currently, you can use TiSpark to read TiFlash replicas in a method similar to the engine isolation in TiDB. This method is to configure the `spark.tispark.use.tiflash` parameter to `true` (or `false`).
+Currently, you can use TiSpark to read TiFlash replicas in a method similar to the engine isolation in TiDB. This method is to configure the `spark.tispark.isolation_read_engines` parameter. The parameter value defaults to `tikv,tiflash`, which means automatically reading data from TiFlash or TiKV according to CBO. If you set the parameter value to `tiflash`, it means that data is forcibly read from TiFlash.
 
 > **Notes**
 >
@@ -204,14 +204,14 @@ You can configure this parameter in either of the following ways:
 * Add the following item in the `spark-defaults.conf` file:
 
     ```
-    spark.tispark.use.tiflash true
+    spark.tispark.isolation_read_engines tiflash
     ```
 
-* Add `--conf spark.tispark.use.tiflash=true` in the initialization command when initializing Spark shell or Thrift server.
+* Add `--conf spark.tispark.isolation_read_engines=tiflash` in the initialization command when initializing Spark shell or Thrift server.
 
-* Set `spark.conf.set("spark.tispark.use.tiflash", true)` in Spark shell in a real-time manner.
+* Set `spark.conf.set("spark.tispark.isolation_read_engines", "tiflash")` in Spark shell in a real-time manner.
 
-* Set `set spark.tispark.use.tiflash=true` in Thrift server after the server is connected via beeline.
+* Set `set spark.tispark.isolation_read_engines=tiflash` in Thrift server after the server is connected via beeline.
 
 ## Supported push-down calculations
 
