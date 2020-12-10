@@ -12,7 +12,7 @@ TiKV Control (`tikv-ctl`) is a command line tool of TiKV, used to manage the clu
 * If the cluster is deployed using TiUP, `tikv-ctl` directory is in the in `~/.tiup/components/ctl/{VERSION}/` directory.
 
 ## Use TiKV Control in TiUP
-
+ 
 `tikv-ctl` is also integrated in the `tiup` command. Execute the following command to call the `tikv-ctl` tool:
 
 {{< copyable "shell-regular" >}}
