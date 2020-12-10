@@ -18,7 +18,7 @@ TiDB version: 4.0.9
 
 + TiFlash
 
-    - Support storing the latest data of the storage engine on multiple disks
+    - Support storing the latest data of the storage engine on multiple disks (experimental)
 
 ## Improvements
 
