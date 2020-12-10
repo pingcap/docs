@@ -18,6 +18,50 @@ This document only describes the parameters that are not included in command-lin
 + Default value: `1`
 + Minimum value: `1`
 
+<<<<<<< HEAD
+=======
+### `server.concurrent-send-snap-limit`
+
++ The maximum number of snapshots that can be sent at the same time
++ Default value: `32`
++ Minimum value: `1`
+
+### `server.concurrent-recv-snap-limit`
+
++ The maximum number of snapshots that can be received at the same time
++ Default value: `32`
++ Minimum value: `1`
+
+### `server.end-point-recursion-limit`
+
++ The maximum number of recursive layers allowed when TiKV decodes the Coprocessor DAG expression
++ Default value: `1000`
++ Minimum value: `1`
+
+### `server.end-point-request-max-handle-duration`
+
++ The longest duration allowed for a TiDB's push down request to TiKV for processing tasks
++ Default value: `"60s"`
++ Minimum value: `"1s"`
+
+### `server.end-point-slow-log-threshold`
+
++ The time threshold for a TiDB's push down request to print slow log
++ Default value: `"1s"`
++ Minimum value: `0`
+
+### `server.snap-max-write-bytes-per-sec`
+
++ The maximum allowable disk bandwidth for processing snapshots
++ Default value: `"1000MB"`
++ Unit: KB|MB|GB
++ Minimum value: `"1KB"`
+
+## gRPC
+
+Configuration items related to gRPC.
+
+>>>>>>> 1bad1b76... tikv: add server.end-point-slow-log-threshold config (#4327)
 ### `grpc-compression-type`
 
 + The compression algorithm for gRPC messages
