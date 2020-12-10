@@ -193,7 +193,7 @@ In the above three ways of reading TiFlash replicas, engine isolation specifies 
 
 ## Use TiSpark to read TiFlash replicas
 
-Currently, you can use TiSpark to read TiFlash replicas in a method similar to the engine isolation in TiDB. This method is to configure the `spark.tispark.isolation_read_engines` parameter. The parameter value defaults to `tikv,tiflash`, which means automatically reading data from TiFlash or TiKV according to CBO. If you set the parameter value to `tiflash`, it means that data is forcibly read from TiFlash.
+Currently, you can use TiSpark to read TiFlash replicas in a method similar to the engine isolation in TiDB. This method is to configure the `spark.tispark.isolation_read_engines` parameter. The parameter value defaults to `tikv,tiflash`, which means that TiDB reads data from TiFlash or from TiKV according to CBO's selection. If you set the parameter value to `tiflash`, it means that TiDB forcibly reads data from TiFlash.
 
 > **Notes**
 >
