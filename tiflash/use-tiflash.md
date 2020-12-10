@@ -199,7 +199,7 @@ Currently, you can use TiSpark to read TiFlash replicas in a method similar to t
 >
 > When this parameter is set to `true`, only the TiFlash replicas of all tables involved in the query are read and these tables must have TiFlash replicas; for tables that do not have TiFlash replicas, an error is reported. When this parameter is set to `false`, only the TiKV replica is read.
 
-You can configure this parameter in either of the following ways:
+You can configure this parameter in one of the following ways:
 
 * Add the following item in the `spark-defaults.conf` file:
 
