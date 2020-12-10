@@ -823,3 +823,44 @@ This variable is an alias for _transaction_isolation_.
 - Scope: SESSION | GLOBAL
 - Default value: ON
 - This variable controls whether to use the high precision mode when computing the window functions.
+<<<<<<< HEAD
+=======
+
+### tidb_opt_prefer_range_scan
+
+- Scope: SESSION
+- Default value: 0
+- After you set the value of this variable to `1`, the optimizer always prefers index scans over full table scans.
+- In the following example, before you enable `tidb_opt_prefer_range_scan`, the TiDB optimizer performs a full table scan . After you enable `tidb_opt_prefer_range_scan`, the optimizer selects an index scan.
+
+```sql
+explain select * from t where age=5;
++-------------------------+------------+-----------+---------------+-------------------+
+| id                      | estRows    | task      | access object | operator info     |
++-------------------------+------------+-----------+---------------+-------------------+
+| TableReader_7           | 1048576.00 | root      |               | data:Selection_6  |
+| └─Selection_6           | 1048576.00 | cop[tikv] |               | eq(test.t.age, 5) |
+|   └─TableFullScan_5     | 1048576.00 | cop[tikv] | table:t       | keep order:false  |
++-------------------------+------------+-----------+---------------+-------------------+
+3 rows in set (0.00 sec)
+
+set session tidb_opt_prefer_range_scan = 1;
+
+explain select * from t where age=5;
++-------------------------------+------------+-----------+-----------------------------+-------------------------------+
+| id                            | estRows    | task      | access object               | operator info                 |
++-------------------------------+------------+-----------+-----------------------------+-------------------------------+
+| IndexLookUp_7                 | 1048576.00 | root      |                             |                               |
+| ├─IndexRangeScan_5(Build)     | 1048576.00 | cop[tikv] | table:t, index:idx_age(age) | range:[5,5], keep order:false |
+| └─TableRowIDScan_6(Probe)     | 1048576.00 | cop[tikv] | table:t                     | keep order:false              |
++-------------------------------+------------+-----------+-----------------------------+-------------------------------+
+3 rows in set (0.00 sec)
+```
+
+### `tidb_memory_usage_alarm_ratio`
+
+- Scope: SESSION
+- Default value: 0.8
+- TiDB triggers an alarm when the percentage of the memory it takes exceeds a certain threshold. For the detailed usage description of this feature, see [`memory-usage-alarm-ratio`](/tidb-configuration-file.md#memory-usage-alarm-ratio).
+- You can set the initial value of this variable by configuring [`memory-usage-alarm-ratio`](/tidb-configuration-file.md#memory-usage-alarm-ratio).
+>>>>>>> d58f0ba6... Deprecate config item `max-memory` and add items `server-memory-quota` and `memory-usage-alarm-ratio` (#4333)
