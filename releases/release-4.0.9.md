@@ -47,7 +47,6 @@ TiDB version: 4.0.9
     - Change the default value of `apply-max-batch-size` and `store-max-batch-size` to `1024` [#9020](https://github.com/tikv/tikv/pull/9020)
     - Add the `max-background-flushes` configuration item [#8947](https://github.com/tikv/tikv/pull/8947)
     - Enable the unified read pool for the storage module by default [#8887](https://github.com/tikv/tikv/pull/8887)
-    - Add a check to avoid corruption caused by the RocksDB block cache error [#9029](https://github.com/tikv/tikv/pull/9029)
     - Disable `force-consistency-checks` by default to improve performance [#9029](https://github.com/tikv/tikv/pull/9029)
 
 + PD
@@ -128,42 +127,44 @@ TiDB version: 4.0.9
 
 + TiKV
 
-    - Fix a bug that Coprocessor might return wrong result when there are more than 255 columns [#9131](https://github.com/tikv/tikv/pull/9131)
-    - Fix an issue that Region merge might cause data loss during network partition [#9108](https://github.com/tikv/tikv/pull/9108)
-    - Fix a bug might cause analyze statement panic when using the latin1 character set [#9082](https://github.com/tikv/tikv/pull/9082)
-    - Fix cast decimal as time expr get wrong result when deal with numbers argument [#9031](https://github.com/tikv/tikv/pull/9031)
-    - Fix the bug that lightning fails to ingest sst files to TiKV with importer/local backend when TDE is enabled [#8995](https://github.com/tikv/tikv/pull/8995)
-    - Config: fix invalid advertise-status-addr [#9036](https://github.com/tikv/tikv/pull/9036)
-    - Fix the issue that reports a key-exist error when a key is locked and deleted by a committed transaction. [#8930](https://github.com/tikv/tikv/pull/8930)
+    - Fix the issue that Coprocessor might return wrong results when there are more than 255 columns [#9131](https://github.com/tikv/tikv/pull/9131)
+    - Fix the issue that Region Merge might cause data loss during network partition [#9108](https://github.com/tikv/tikv/pull/9108)
+    - Fix the issue that the `ANALYZE` statement might cause panic when using the `latin1` character set [#9082](https://github.com/tikv/tikv/pull/9082)
+    - Fix the wrong results returned when converting the numeric type to the time type [#9031](https://github.com/tikv/tikv/pull/9031)
+    - Fix the bug that TiDB Lightning fails to ingest SST files to TiKV with the Importer-backend or Local-backend when
+ Transparent Data Encryption (TDE) is enabled [#8995](https://github.com/tikv/tikv/pull/8995)
+    - Fix the invalid `advertise-status-addr` value `0.0.0.0` [#9036](https://github.com/tikv/tikv/pull/9036)
+    - Fix the issue that an error is returned indicating that a key exists when this key is locked and deleted in a committed transaction [#8930](https://github.com/tikv/tikv/pull/8930)
+    - Fix the issue that the RocksDB mapping error causes data corruption [#9029](https://github.com/tikv/tikv/pull/9029)
 
 + PD
 
-    - Fix the issue that the leader role does not take effect when using the replacement rule in some cases [#3208](https://github.com/pingcap/pd/pull/3208)
-    - Fix the bug that `trace-region-flow` will be accidentally changed to `false` [#3120](https://github.com/pingcap/pd/pull/3120)
-    - Fix a bug that service safe points with infinite TTL might disappear [#3143](https://github.com/pingcap/pd/pull/3143)
+    - Fix the issue that the leader roles specified using placement rules do not take effect in some cases [#3208](https://github.com/pingcap/pd/pull/3208)
+    - Fix the issue that the `trace-region-flow` value is unexpectedly set to `false` [#3120](https://github.com/pingcap/pd/pull/3120)
+    - Fix a bug that the service safepoint with infinite Time To Live (TTL) does not work [#3143](https://github.com/pingcap/pd/pull/3143)
 
 + TiFlash
 
-    - Fix the problem that `INFORMATION_SCHEMA.CLUSTER_HARDWARE` might contain information about disks not in use
-    - Fix the issue that the memory consumption statistic of Delta Cache is smaller than actual the usage
-    - Fix memory leak about thread info statistics
+    - Fix the issue that `INFORMATION_SCHEMA.CLUSTER_HARDWARE` might contain the information of disks that are not in use
+    - Fix the issue that the estimate on memory usage of Delta Cache is smaller than the actual usage
+    - Fix the memory leak caused by thread information statistics
 
 + Tools
 
     + Backup & Restore (BR)
 
-        - Fix special characters in S3 secret access keys [#617](https://github.com/pingcap/br/pull/617)
+        - Fix the failure caused by special characters in S3 secret access keys [#617](https://github.com/pingcap/br/pull/617)
 
     + TiCDC
 
-        - Fix the bug that multiple owners could exist when owner campaign key is deleted [#1104](https://github.com/pingcap/ticdc/pull/1104)
+        - Fix the issue that multiple owners might exist when the owner campaign key is deleted [#1104](https://github.com/pingcap/ticdc/pull/1104)
 
     + Dumpling
 
-        - Fix the problem that dumpling might get blocked when its connection to database server is closed [#190](https://github.com/pingcap/dumpling/pull/190)
+        - Fix the issue that Dumpling might get blocked when its connection to the MySQL database server is closed [#190](https://github.com/pingcap/dumpling/pull/190)
 
     + TiDB Lightning
 
-        - Fix a bug about encoding data with wrong field information [#437](https://github.com/pingcap/tidb-lightning/pull/437)
-        - Fix a bug that GC life time ttl does not take effect [#448](https://github.com/pingcap/tidb-lightning/pull/448)
-        - Fix a bug that causes panic when manually stops TiDB Lightning import in Local-backend mode [#484](https://github.com/pingcap/tidb-lightning/pull/484)
+        - Fix the issue that keys are encoded using the wrong field information [#437](https://github.com/pingcap/tidb-lightning/pull/437)
+        - Fix the issue that GC life time TTL does not take effect [#448](https://github.com/pingcap/tidb-lightning/pull/448)
+        - Fix the issue that causes panic when manually stops the running TiDB Lightning in the Local-backend mode [#484](https://github.com/pingcap/tidb-lightning/pull/484)
