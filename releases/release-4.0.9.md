@@ -59,72 +59,72 @@ TiDB version: 4.0.9
 + TiFlash
 
     - Reduce the latency of replica reads
-    - Refine TiFlash's error message
-    - Limit the memory usage of cache data under huge volume data
-    - Add a metric for the number of handling coprocessor tasks
+    - Refine TiFlash's error messages
+    - Limit the memory usage of cache data when the data volume is huge
+    - Add a monitoring metric for the number of coprocessor tasks being handled
 
 + Tools
 
     + Backup & Restore (BR)
 
-        - BR no longer accepts --checksum false in command line, which did not disable checksum. The correct usage always include the = sign: --checksum=false [#588](https://github.com/pingcap/br/pull/588)
-        - Support change PD configuration temporary [#596](https://github.com/pingcap/br/pull/596)
-        - Support analyze table after restore [#622](https://github.com/pingcap/br/pull/622)
-        - Retry for read index not ready and proposal in merging mode [#626](https://github.com/pingcap/br/pull/626)
+        - Disallow the ambiguous `--checksum false` argument in the command line, which does not disable checksum. Only `--checksum=false` is accepted. [#588](https://github.com/pingcap/br/pull/588)
+        - Support changing the PD configuration temporarily [#596](https://github.com/pingcap/br/pull/596)
+        - Support analyzing tables after restore [#622](https://github.com/pingcap/br/pull/622)
+        - Retry for the `read index not ready` and `proposal in merging mode` errors [#626](https://github.com/pingcap/br/pull/626)
 
     + TiCDC
 
-        - Metrics: add alert for tikv hibernate Regions [#1120](https://github.com/pingcap/ticdc/pull/1120)
-        - Reduce memory usage in schema storage by avoiding table info replication [#1127](https://github.com/pingcap/ticdc/pull/1127)
+        - Add an alert for enabling TiKV's Hibernate Region feature [#1120](https://github.com/pingcap/ticdc/pull/1120)
+        - Reduce memory usage in the schema storage [#1127](https://github.com/pingcap/ticdc/pull/1127)
 
     + Dumpling
 
-        - Retry dumping on failed chunks [#182](https://github.com/pingcap/dumpling/pull/182)
-        - Support configuring both -F and -r arguments at the same time [#177](https://github.com/pingcap/dumpling/pull/177)
-        - Exclude system databases in --filter parameter by default [#194](https://github.com/pingcap/dumpling/pull/194)
-        - Support --transactional-consistency parameter and support rebuild mysql connections during retry [#199](https://github.com/pingcap/dumpling/pull/199)
+        - Retry dumping data on failed chunks [#182](https://github.com/pingcap/dumpling/pull/182)
+        - Support configuring both the `-F` and `-r` arguments at the same time [#177](https://github.com/pingcap/dumpling/pull/177)
+        - Exclude system databases in `--filter` by default [#194](https://github.com/pingcap/dumpling/pull/194)
+        - Support the `--transactional-consistency` parameter and support rebuilding MySQL connections during retry [#199](https://github.com/pingcap/dumpling/pull/199)
 
     + TiDB Lightning
 
         - Filter out all system schemas by default [#459](https://github.com/pingcap/tidb-lightning/pull/459)
-        - Support set a default value for auto random primary key for local/importer backend [#457](https://github.com/pingcap/tidb-lightning/pull/457)
+        - Support setting a default value for the auto-random primary key for the Local-backend or Importer-backend [#457](https://github.com/pingcap/tidb-lightning/pull/457)
         - Use range properties to make range split more precise with local backend [#422](https://github.com/pingcap/tidb-lightning/pull/422)
-        - `tikv-importer.region-split-size`, `mydumper.read-block-size`, `mydumper.batch-size` and `mydumper.max-region-size` can now accept human-readable format in the form "2.5 GiB" [#471](https://github.com/pingcap/tidb-lightning/pull/471)
+        - Support a human-readable format (such as "2.5 GiB") in `tikv-importer.region-split-size`, `mydumper.read-block-size`, `mydumper.batch-size`, and `mydumper.max-region-size` [#471](https://github.com/pingcap/tidb-lightning/pull/471)
 
     + TiDB Binlog
 
-        - Exit Drainer process with non-zero code if upstream PD is down or apply DDL/DML to downstream failed [#1012](https://github.com/pingcap/tidb-binlog/pull/1012)
+        - Exit the Drainer process with the non-zero code if the upstream PD is down or applying DDL or DML statements to the downstream fails [#1012](https://github.com/pingcap/tidb-binlog/pull/1012)
 
 ## Bug Fixes
 
 + TiDB
 
-    - Fix incorrect results when using a prefix index with OR condition [#21287](https://github.com/pingcap/tidb/pull/21287)
-    - Fix a bug that causes panic when `retry` is enabled [#21285](https://github.com/pingcap/tidb/pull/21285)
-    - Fix a bug of partition definition checking. The value comparison should be in accord with column type [#21273](https://github.com/pingcap/tidb/pull/21273)
-    - Fix a bug of partition table's partition column values type check [#21136](https://github.com/pingcap/tidb/pull/21136)
-    - Fix a bug that hash type partition does not check partition name is unique [#21257](https://github.com/pingcap/tidb/pull/21257)
-    - Fix insert value into hash partition table which not int [#21238](https://github.com/pingcap/tidb/pull/21238)
-    - Fix unexpected error when `INSERT` meets index join in some cases [#21249](https://github.com/pingcap/tidb/pull/21249)
-    - Fix bigint unsigned column value in CASE WHEN operator is converted to bigint signed [#21236](https://github.com/pingcap/tidb/pull/21236)
-    - Fix a bug that index-hash-join and index-merge-join does not consider collation [#21219](https://github.com/pingcap/tidb/pull/21219)
-    - Fix a bug that partition table does not consider collation in `create table` and `select` sentence [#21181](https://github.com/pingcap/tidb/pull/21181)
-    - Fix issue of the query result of slow_query might miss some rows [#21211](https://github.com/pingcap/tidb/pull/21211)
-    - `DELETE` might not delete data correctly when the database name is not in pure lower representation [#21206](https://github.com/pingcap/tidb/pull/21206)
-    - Fix a bug causes schema change after DML [#21050](https://github.com/pingcap/tidb/pull/21050)
-    - Fix the bug that can not query the coalesced column when use using-join [#21021](https://github.com/pingcap/tidb/pull/21021)
-    - Fix wrong results for some semi-join queries [#21019](https://github.com/pingcap/tidb/pull/21019)
-    - Fix table lock for update statement [#21002](https://github.com/pingcap/tidb/pull/21002)
-    - Fix stack overflow when building recursive view [#21001](https://github.com/pingcap/tidb/pull/21001)
-    - Fix unexpected results when do merge join on outer join [#20954](https://github.com/pingcap/tidb/pull/20954)
+    - Fix the issue of incorrect results when using a prefix index with the `OR` condition [#21287](https://github.com/pingcap/tidb/pull/21287)
+    - Fix a bug that might cause panic when automatic retry is enabled [#21285](https://github.com/pingcap/tidb/pull/21285)
+    - Fix a bug that occurs when checking partition definition according to column type [#21273](https://github.com/pingcap/tidb/pull/21273)
+    - Fix a bug that value type of the partition expression is not consistent with the partition column type [#21136](https://github.com/pingcap/tidb/pull/21136)
+    - Fix a bug that hash-type partition does not check whether the partition name is unique [#21257](https://github.com/pingcap/tidb/pull/21257)
+    - Fix the wrong results returned after inserting a value of the non-`INT` type into the hash partitioned table [#21238](https://github.com/pingcap/tidb/pull/21238)
+    - Fix the unexpected errors when using index join in the `INSERT` statement in some cases [#21249](https://github.com/pingcap/tidb/pull/21249)
+    - Fix the issue that the `BigInt` unsigned column value in the `CASE WHEN` operator is incorrectly converted to the `BigInt` signed value [#21236](https://github.com/pingcap/tidb/pull/21236)
+    - Fix a bug that index hash join and index merge join do not consider collation [#21219](https://github.com/pingcap/tidb/pull/21219)
+    - Fix a bug that the partitioned table does not consider collation in the `CREATE TABLE` and `SELECT` syntax [#21181](https://github.com/pingcap/tidb/pull/21181)
+    - Fix the issue that the query result of `slow_query` might miss some rows [#21211](https://github.com/pingcap/tidb/pull/21211)
+    - Fix the issue that `DELETE` might not delete data correctly when the database name is not in a pure lower representation [#21206](https://github.com/pingcap/tidb/pull/21206)
+    - Fix a bug that causes schema change after DML operations [#21050](https://github.com/pingcap/tidb/pull/21050)
+    - Fix the bug that the coalesced column cannot be queried when using join [#21021](https://github.com/pingcap/tidb/pull/21021)
+    - Fix the wrong results of some semi-join queries [#21019](https://github.com/pingcap/tidb/pull/21019)
+    - Fix the issue that the table lock does not take effect on the `UPDATE` statement [#21002](https://github.com/pingcap/tidb/pull/21002)
+    - Fix the issue of stack overflow that occurs when building the recursive view [#21001](https://github.com/pingcap/tidb/pull/21001)
+    - Fix the unexpected results returned when performing index merge join operations on outer join [#20954](https://github.com/pingcap/tidb/pull/20954)
     - Fix the issue that sometimes a transaction that has an undetermined result might be treated as failed [#20925](https://github.com/pingcap/tidb/pull/20925)
-    - Fix issue `explain for connection` cannot show the last query plan [#21315](https://github.com/pingcap/tidb/pull/21315)
-    - Fix the issue that when Index Merge is used in a transaction with RC isolation level, the result might be incorrect [#21253](https://github.com/pingcap/tidb/pull/21253)
-    - Fix auto-id allocation failed because of the transaction's write-conflict retry [#21079](https://github.com/pingcap/tidb/pull/21079)
-    - Fix The JSON Data can not import to TiDB correctly by `load data` [#21074](https://github.com/pingcap/tidb/pull/21074)
-    - Set correct default value for new added enum column [#20998](https://github.com/pingcap/tidb/pull/20998)
-    - Expression: keep the original data type when doing date arithmetic operations [#21176](https://github.com/pingcap/tidb/pull/21176)
-    - Fix the wrong point get plan generation in fast plan code path [#21244](https://github.com/pingcap/tidb/pull/21244)
+    - Fix the issue that `EXPLAIN FOR CONNECTION` cannot show the last query plan [#21315](https://github.com/pingcap/tidb/pull/21315)
+    - Fix the issue that when Index Merge is used in a transaction with the Read Committed isolation level, the result might be incorrect [#21253](https://github.com/pingcap/tidb/pull/21253)
+    - Fix the auto-ID allocation failure caused by the transaction retry after write conflict [#21079](https://github.com/pingcap/tidb/pull/21079)
+    - Fix the issue that JSON data cannot be correctly imported to TiDB using `LOAD DATA` [#21074](https://github.com/pingcap/tidb/pull/21074)
+    - Fix the issue that the default value of newly added `Enum`-type columns are incorrect [#20998](https://github.com/pingcap/tidb/pull/20998)
+    - Fix the issue that the `addata` function inserts invalid characters [#21176](https://github.com/pingcap/tidb/pull/21176)
+    - Fix the issue that the wrong PointGet plan generated in some situations causes wrong results [#21244](https://github.com/pingcap/tidb/pull/21244)
 
 + TiKV
 
