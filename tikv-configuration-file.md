@@ -1172,7 +1172,7 @@ Configuration items related to [encryption at rest](/encryption-at-rest.md) (TDE
 
 ### `data-key-rotation-period`
 
-+ Specifies how often TiKV rotates data encryption key.
++ Specifies how often TiKV rotates the data encryption key.
 + Default value: `7d`
 
 ### enable-file-dictionary-log
