@@ -1183,7 +1183,7 @@ Configuration items related to [encryption at rest](/encryption-at-rest.md) (TDE
 
 ### master-key
 
-+ Specifies master key if encryption is enabled. Please refer to [Encryption at Rest](/encryption-at-rest.md) for how to config a master key.
++ Specifies the master key if encryption is enabled. To learn how to configure a master key, see [Encryption at Rest](/encryption-at-rest.md#configuring-encryption).
 
 ### previous-master-key
 
