@@ -1189,7 +1189,6 @@ Configuration items related to [encryption at rest](/encryption-at-rest.md) (TDE
 
 + Specifies the old master key when rotating the new master key. The configuration format is the same as that of `master-key`. To learn how to configure a master key, see [Encryption at Rest](/encryption-at-rest.md#configuring-encryption).
 
-
 ## `import`
 
 Configuration items related to TiDB Lightning import and BR restore.
