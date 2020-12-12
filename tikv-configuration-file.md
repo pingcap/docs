@@ -1177,7 +1177,8 @@ Configuration items related to [encryption at rest](/encryption-at-rest.md) (TDE
 
 ### enable-file-dictionary-log
 
-+ Enable an optimization to reduce IO and mutex contention for encryption metadata management. Please refer to [Encryption at Rest](/encryption-at-rest.md) for compatibility with previous TiKV versions after turn on (by default) this config.
++ Enables the optimization to reduce I/O and mutex contention when TiKV manages the encryption metadata.
++ To avoid possible compatibility issues when this configuration parameter is enabled (by default), see [Encryption at Rest](/encryption-at-rest.md#compatibility-with-earlier-tikv-versions) for details.
 + Default value: `true`
 
 ### master-key
