@@ -1165,7 +1165,9 @@ Configuration items related to [encryption at rest](/encryption-at-rest.md) (TDE
 
 ### `data-encryption-method`
 
-+ Encryption method to use for data files. Possible values are "plaintext", "aes128-ctr", "aes192-ctr" and "aes256-ctr". Value other than "plaintext" means encryption is enabled, in which case master key must be specified.
++ The encryption method for data files
++ Value options: "plaintext", "aes128-ctr", "aes192-ctr", and "aes256-ctr"
++ A value other than "plaintext" means that encryption is enabled, in which case the master key must be specified.
 + Default value: `plaintext`
 
 ### `data-key-rotation-period`
