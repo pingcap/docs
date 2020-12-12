@@ -1187,7 +1187,7 @@ Configuration items related to [encryption at rest](/encryption-at-rest.md) (TDE
 
 ### previous-master-key
 
-+ Specifies the old master key when rotating master key. Same config format as master-key. Please refer to [Encryption at Rest](/encryption-at-rest.md) for how to config a master key.
++ Specifies the old master key when rotating the new master key. The configuration format is the same as that of `master-key`. To learn how to configure a master key, see [Encryption at Rest](/encryption-at-rest.md#configuring-encryption).
 
 
 ## `import`
