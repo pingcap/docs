@@ -1161,7 +1161,7 @@ Configuration items related to security
 
 ## security.encryption
 
-Configuration items related to encryption-at-rest (TDE).
+Configuration items related to [encryption at rest](/encryption-at-rest.md) (TDE).
 
 ### `data-encryption-method`
 
