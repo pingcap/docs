@@ -53,7 +53,7 @@ When starting the TiCDC server, you can specify the Time To Live (TTL) duration 
 
 ## How do I handle the OOM that occurs after TiCDC is restarted after a task interruption?
 
-If the replication task is interrupted for a long time and a large volume of unconsumed data is accumulated, Out of Memory (OOM) might occur when TiCDC is started. In this situation, you can enable unified sorter, TiCDC's experimental sorting engine. This engine sorts data in the disk when the memory is insufficient. To enable this feature, pass `--sort-engine=unified` and `--sort-dir=/path/to/sort_dir` to the `cdc cli` command when creating a replication task. For example:
+If the replication task is interrupted for a long time and a large volume of new data has been written to TiDB, Out of Memory (OOM) might occur when TiCDC is restarted. In this situation, you can enable unified sorter, TiCDC's experimental sorting engine. This engine sorts data in the disk when the memory is insufficient. To enable this feature, pass `--sort-engine=unified` and `--sort-dir=/path/to/sort_dir` to the `cdc cli` command when creating a replication task. For example:
 
 {{< copyable "shell-regular" >}}
 
@@ -65,7 +65,7 @@ cdc cli changefeed create --pd=http://10.0.10.25:2379 --start-ts=415238226621235
 >
 > + Since v4.0.9, TiCDC supports the unified sorter engine.
 > + TiCDC (the 4.0 version) does not support dynamically modifying the sorting engine yet.
-> + Currently, the unified sorter is an experimental feature. When many tables exist (>=100), the unified sorter might cause performance issues and affect the replication speed. Therefore, it is not recommended to use it in a production environment. Before you enable the unified sorter, make sure that the machine of each TiCDC node has enough disk capacity. If the total data size to be accumulated might exceed 1 TB, it is not recommend to use TiCDC for replication.
+> + Currently, the unified sorter is an experimental feature. When the number of tables is too large (>=100), the unified sorter might cause performance issues and affect replication throughput. Therefore, it is not recommended to use it in a production environment. Before you enable the unified sorter, make sure that the machine of each TiCDC node has enough disk capacity. If the total size of unprocessed data changes might exceed 1 TB, it is not recommend to use TiCDC for replication.
 
 ## How do I handle the `Error 1298: Unknown or incorrect time zone: 'UTC'` error when creating the replication task or replicating data to MySQL?
 

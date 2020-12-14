@@ -159,7 +159,7 @@ The following are descriptions of parameters and parameter values that can be co
 
 > **Note:**
 >
-> When `protocol` is `default`, TiCDC tries to avoid generating messages that exceed `max-message-bytes` in length. However, if a data change needs to exceed `max-message-bytes`, to avoid silent failure, TiCDC tries to output this message and prints a warning in the log.
+> When `protocol` is `default`, TiCDC tries to avoid generating messages that exceed `max-message-bytes` in length. However, if a row is so large that a single change alone exceeds `max-message-bytes` in length , to avoid silent failure, TiCDC tries to output this message and prints a warning in the log.
 
 #### Integrate TiCDC with Kafka Connect (Confluent Platform)
 
