@@ -75,7 +75,9 @@ TiDB version: 4.0.9
 
         - Add an alert for enabling TiKV's Hibernate Region feature [#1120](https://github.com/pingcap/ticdc/pull/1120)
         - Reduce memory usage in the schema storage [#1127](https://github.com/pingcap/ticdc/pull/1127)
-
+        - Add unified sorter, which accelerates replication when the data size of the incremental scan is large (experimental) [#1122](https://github.com/pingcap/ticdc/pull/1122)
+        - Support configuring the maximum message size and the maximum message batch in the TiCDC Open Protocol message (only for Kafka sink) [#1079](https://github.com/pingcap/ticdc/pull/1079)
+        
     + Dumpling
 
         - Retry dumping data on failed chunks [#182](https://github.com/pingcap/dumpling/pull/182)
@@ -159,6 +161,13 @@ TiDB version: 4.0.9
     + TiCDC
 
         - Fix the issue that multiple owners might exist when the owner campaign key is deleted [#1104](https://github.com/pingcap/ticdc/pull/1104)
+        - Fix a bug that TiCDC might fail to continue replicating data when a TiKV node crashes or recovers from a crash. This bug only exists in v4.0.8. [#1198](https://github.com/pingcap/ticdc/pull/1198)
+         - Fix the issue that the metadata is repeatedly flushed to etcd before a table is initialized [#1191](https://github.com/pingcap/ticdc/pull/1191)
+         - Fix an issue of replication interruption caused by early GC or the latency of updating `TableInfo` when the schema storage caches TiDB tables [#1114](https://github.com/pingcap/ticdc/pull/1114)
+         - Fix the issue that the schema storage costs too much memory when DDL operations are frequent [#1127](https://github.com/pingcap/ticdc/pull/1127)
+         - Fix the goroutine leak when a changefeed is paused or stopped [#1075](https://github.com/pingcap/ticdc/pull/1075)
+         - Increase the maximum retry timeout to 60 seconds in Kafka producer to prevent replication interruption caused by the service or network jitter in the downstream Kafka [#1118](https://github.com/pingcap/ticdc/pull/1118)
+         - Fix a bug that the Kafka batch size does not take effect [#1112](https://github.com/pingcap/ticdc/pull/1112)
 
     + Dumpling
 
