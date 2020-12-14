@@ -8,11 +8,11 @@ Release date: December 15, 2020
 
 TiDB version: 4.0.9
 
-## Compatibility changes
+## Compatibility Changes
 
 + TiDB
 
-    - Deprecate the `enable-streaming` configuration [#21055](https://github.com/pingcap/tidb/pull/21055)
+    - Deprecate the `enable-streaming` configuration item [#21055](https://github.com/pingcap/tidb/pull/21055)
 
 ## New Features
 
@@ -24,14 +24,14 @@ TiDB version: 4.0.9
 
 + TiDB
 
-    - Avoid the (index) merge join heuristically when converting equal conditions to other conditions [#21146](https://github.com/pingcap/tidb/pull/21146)
+    - Avoid the (index) merge join in a heuristical way when converting equal conditions to other conditions [#21146](https://github.com/pingcap/tidb/pull/21146)
     - Differentiate the types of user variables [#21107](https://github.com/pingcap/tidb/pull/21107)
     - Support setting the `GOGC` variable in the configuration file [#20922](https://github.com/pingcap/tidb/pull/20922)
     - Make the dumped binary time (`Timestamp` and `Datetime`) more compatible with MySQL [#21135](https://github.com/pingcap/tidb/pull/21135)
     - Provide an error message for statements that use the `LOCK IN SHARE MODE` syntax [#21005](https://github.com/pingcap/tidb/pull/21005)
     - Avoid outputting unnecessary warnings or errors when folding constants in shortcut-able expressions [#21040](https://github.com/pingcap/tidb/pull/21040)
     - Raise an error when preparing the `LOAD DATA` statement [#21199](https://github.com/pingcap/tidb/pull/21199)
-    - Ignore the size attribute of the integer zero-fill when changing the column types [#20986](https://github.com/pingcap/tidb/pull/20986)
+    - Ignore the attribute of the integer zero-fill size when changing the column types [#20986](https://github.com/pingcap/tidb/pull/20986)
     - Add the executor-related runtime information of DML statements in the result of `EXPLAIN ANALYZE` [#21066](https://github.com/pingcap/tidb/pull/21066)
     - Disallow multiple updates on the primary key in a singe SQL statements [#21113](https://github.com/pingcap/tidb/pull/21113)
     - Add a monitoring metric for the connection idle time [#21301](https://github.com/pingcap/tidb/pull/21301)
@@ -42,7 +42,7 @@ TiDB version: 4.0.9
     - Support dynamically changing the `pessimistic-txn.pipelined` configuration [#9100](https://github.com/tikv/tikv/pull/9100)
     - Reduce the impact on performance when running Backup & Restore and TiDB Lightning [#9098](https://github.com/tikv/tikv/pull/9098)
     - Add monitoring metrics for the ingesting SST errors [#9096](https://github.com/tikv/tikv/pull/9096)
-    - Prevent hibernation when there are still peers catching up with logs [#9093](https://github.com/tikv/tikv/pull/9093)
+    - Prevent hibernation when some peers are still catching up with logs [#9093](https://github.com/tikv/tikv/pull/9093)
     - Increase the success rate of the pipelined pessimistic locking [#9086](https://github.com/tikv/tikv/pull/9086)
     - Change the default value of `apply-max-batch-size` and `store-max-batch-size` to `1024` [#9020](https://github.com/tikv/tikv/pull/9020)
     - Add the `max-background-flushes` configuration item [#8947](https://github.com/tikv/tikv/pull/8947)
@@ -51,7 +51,7 @@ TiDB version: 4.0.9
 
 + PD
 
-    - Check TiKV cluster version when a TiKV stores become tombstone [#3213](https://github.com/pingcap/pd/pull/3213)
+    - Check the TiKV cluster version when a TiKV stores become `Tombstone` [#3213](https://github.com/pingcap/pd/pull/3213)
     - Disallow the TiKV store of a lower version to change from `Tombstone` back to `Up` [#3206](https://github.com/pingcap/pd/pull/3206)
     - Update Dashboard to `v2020.11.26.1` [#3219](https://github.com/pingcap/pd/pull/3219)
 
@@ -66,7 +66,7 @@ TiDB version: 4.0.9
 
     + Backup & Restore (BR)
 
-        - Disallow the ambiguous `--checksum false` argument in the command line, which does not disable checksum. Only `--checksum=false` is accepted. [#588](https://github.com/pingcap/br/pull/588)
+        - Disallow the ambiguous `--checksum false` argument in the command line, which does not disable checksum. Accept `--checksum=false` only. [#588](https://github.com/pingcap/br/pull/588)
         - Support changing the PD configuration temporarily [#596](https://github.com/pingcap/br/pull/596)
         - Support analyzing tables after restore [#622](https://github.com/pingcap/br/pull/622)
         - Retry for the `read index not ready` and `proposal in merging mode` errors [#626](https://github.com/pingcap/br/pull/626)
@@ -75,9 +75,9 @@ TiDB version: 4.0.9
 
         - Add an alert for enabling TiKV's Hibernate Region feature [#1120](https://github.com/pingcap/ticdc/pull/1120)
         - Reduce memory usage in the schema storage [#1127](https://github.com/pingcap/ticdc/pull/1127)
-        - Add unified sorter, which accelerates replication when the data size of the incremental scan is large (experimental) [#1122](https://github.com/pingcap/ticdc/pull/1122)
+        - Add the feature of unified sorter, which accelerates replication when the data size of the incremental scan is large (experimental) [#1122](https://github.com/pingcap/ticdc/pull/1122)
         - Support configuring the maximum message size and the maximum message batch in the TiCDC Open Protocol message (only for Kafka sink) [#1079](https://github.com/pingcap/ticdc/pull/1079)
-        
+
     + Dumpling
 
         - Retry dumping data on failed chunks [#182](https://github.com/pingcap/dumpling/pull/182)
@@ -89,12 +89,12 @@ TiDB version: 4.0.9
 
         - Filter out all system schemas by default [#459](https://github.com/pingcap/tidb-lightning/pull/459)
         - Support setting a default value for the auto-random primary key for the Local-backend or Importer-backend [#457](https://github.com/pingcap/tidb-lightning/pull/457)
-        - Use range properties to make range split more precise with local backend [#422](https://github.com/pingcap/tidb-lightning/pull/422)
+        - Use range properties to make the range split more precise in Local-backend [#422](https://github.com/pingcap/tidb-lightning/pull/422)
         - Support a human-readable format (such as "2.5 GiB") in `tikv-importer.region-split-size`, `mydumper.read-block-size`, `mydumper.batch-size`, and `mydumper.max-region-size` [#471](https://github.com/pingcap/tidb-lightning/pull/471)
 
     + TiDB Binlog
 
-        - Exit the Drainer process with the non-zero code if the upstream PD is down or applying DDL or DML statements to the downstream fails [#1012](https://github.com/pingcap/tidb-binlog/pull/1012)
+        - Exit the Drainer process with the non-zero code if the upstream PD is down or if applying DDL or DML statements to the downstream fails [#1012](https://github.com/pingcap/tidb-binlog/pull/1012)
 
 ## Bug Fixes
 
@@ -103,10 +103,10 @@ TiDB version: 4.0.9
     - Fix the issue of incorrect results when using a prefix index with the `OR` condition [#21287](https://github.com/pingcap/tidb/pull/21287)
     - Fix a bug that might cause panic when automatic retry is enabled [#21285](https://github.com/pingcap/tidb/pull/21285)
     - Fix a bug that occurs when checking partition definition according to column type [#21273](https://github.com/pingcap/tidb/pull/21273)
-    - Fix a bug that value type of the partition expression is not consistent with the partition column type [#21136](https://github.com/pingcap/tidb/pull/21136)
-    - Fix a bug that hash-type partition does not check whether the partition name is unique [#21257](https://github.com/pingcap/tidb/pull/21257)
+    - Fix a bug that the value type of the partition expression is not consistent with the partition column type [#21136](https://github.com/pingcap/tidb/pull/21136)
+    - Fix a bug that the hash-type partition does not check whether the partition name is unique [#21257](https://github.com/pingcap/tidb/pull/21257)
     - Fix the wrong results returned after inserting a value of the non-`INT` type into the hash partitioned table [#21238](https://github.com/pingcap/tidb/pull/21238)
-    - Fix the unexpected errors when using index join in the `INSERT` statement in some cases [#21249](https://github.com/pingcap/tidb/pull/21249)
+    - Fix the unexpected error when using index join in the `INSERT` statement in some cases [#21249](https://github.com/pingcap/tidb/pull/21249)
     - Fix the issue that the `BigInt` unsigned column value in the `CASE WHEN` operator is incorrectly converted to the `BigInt` signed value [#21236](https://github.com/pingcap/tidb/pull/21236)
     - Fix a bug that index hash join and index merge join do not consider collation [#21219](https://github.com/pingcap/tidb/pull/21219)
     - Fix a bug that the partitioned table does not consider collation in the `CREATE TABLE` and `SELECT` syntax [#21181](https://github.com/pingcap/tidb/pull/21181)
@@ -117,15 +117,15 @@ TiDB version: 4.0.9
     - Fix the wrong results of some semi-join queries [#21019](https://github.com/pingcap/tidb/pull/21019)
     - Fix the issue that the table lock does not take effect on the `UPDATE` statement [#21002](https://github.com/pingcap/tidb/pull/21002)
     - Fix the issue of stack overflow that occurs when building the recursive view [#21001](https://github.com/pingcap/tidb/pull/21001)
-    - Fix the unexpected results returned when performing index merge join operations on outer join [#20954](https://github.com/pingcap/tidb/pull/20954)
+    - Fix the unexpected result returned when performing index merge join operations on outer join [#20954](https://github.com/pingcap/tidb/pull/20954)
     - Fix the issue that sometimes a transaction that has an undetermined result might be treated as failed [#20925](https://github.com/pingcap/tidb/pull/20925)
     - Fix the issue that `EXPLAIN FOR CONNECTION` cannot show the last query plan [#21315](https://github.com/pingcap/tidb/pull/21315)
     - Fix the issue that when Index Merge is used in a transaction with the Read Committed isolation level, the result might be incorrect [#21253](https://github.com/pingcap/tidb/pull/21253)
-    - Fix the auto-ID allocation failure caused by the transaction retry after write conflict [#21079](https://github.com/pingcap/tidb/pull/21079)
+    - Fix the auto-ID allocation failure caused by the transaction retry after the write conflict [#21079](https://github.com/pingcap/tidb/pull/21079)
     - Fix the issue that JSON data cannot be correctly imported to TiDB using `LOAD DATA` [#21074](https://github.com/pingcap/tidb/pull/21074)
-    - Fix the issue that the default value of newly added `Enum`-type columns are incorrect [#20998](https://github.com/pingcap/tidb/pull/20998)
+    - Fix the issue that the default value of newly added `Enum`-type columns is incorrect [#20998](https://github.com/pingcap/tidb/pull/20998)
     - Fix the issue that the `addata` function inserts invalid characters [#21176](https://github.com/pingcap/tidb/pull/21176)
-    - Fix the issue that the wrong PointGet plan generated in some situations causes wrong results [#21244](https://github.com/pingcap/tidb/pull/21244)
+    - Fix the issue that the wrong `PointGet` plan generated in some situations causes wrong results [#21244](https://github.com/pingcap/tidb/pull/21244)
 
 + TiKV
 
@@ -133,12 +133,11 @@ TiDB version: 4.0.9
     - Fix the issue that Region Merge might cause data loss during network partition [#9108](https://github.com/tikv/tikv/pull/9108)
     - Fix the issue that the `ANALYZE` statement might cause panic when using the `latin1` character set [#9082](https://github.com/tikv/tikv/pull/9082)
     - Fix the wrong results returned when converting the numeric type to the time type [#9031](https://github.com/tikv/tikv/pull/9031)
-    - Fix the bug that TiDB Lightning fails to ingest SST files to TiKV with the Importer-backend or Local-backend when
- Transparent Data Encryption (TDE) is enabled [#8995](https://github.com/tikv/tikv/pull/8995)
-    - Fix the invalid `advertise-status-addr` value `0.0.0.0` [#9036](https://github.com/tikv/tikv/pull/9036)
+    - Fix a bug that TiDB Lightning fails to ingest SST files to TiKV with the Importer-backend or Local-backend when Transparent Data Encryption (TDE) is enabled [#8995](https://github.com/tikv/tikv/pull/8995)
+    - Fix the invalid `advertise-status-addr` value (`0.0.0.0`) [#9036](https://github.com/tikv/tikv/pull/9036)
     - Fix the issue that an error is returned indicating that a key exists when this key is locked and deleted in a committed transaction [#8930](https://github.com/tikv/tikv/pull/8930)
-    - Fix the issue that the RocksDB mapping error causes data corruption [#9029](https://github.com/tikv/tikv/pull/9029)
-    - Fix the bug that Follower Read might return stale data after the leader is transferred [#9240](https://github.com/tikv/tikv/pull/9240)
+    - Fix the issue that the RocksDB cache mapping error causes data corruption [#9029](https://github.com/tikv/tikv/pull/9029)
+    - Fix a bug that Follower Read might return stale data after the leader is transferred [#9240](https://github.com/tikv/tikv/pull/9240)
 
 + PD
 
@@ -162,12 +161,12 @@ TiDB version: 4.0.9
 
         - Fix the issue that multiple owners might exist when the owner campaign key is deleted [#1104](https://github.com/pingcap/ticdc/pull/1104)
         - Fix a bug that TiCDC might fail to continue replicating data when a TiKV node crashes or recovers from a crash. This bug only exists in v4.0.8. [#1198](https://github.com/pingcap/ticdc/pull/1198)
-         - Fix the issue that the metadata is repeatedly flushed to etcd before a table is initialized [#1191](https://github.com/pingcap/ticdc/pull/1191)
-         - Fix an issue of replication interruption caused by early GC or the latency of updating `TableInfo` when the schema storage caches TiDB tables [#1114](https://github.com/pingcap/ticdc/pull/1114)
-         - Fix the issue that the schema storage costs too much memory when DDL operations are frequent [#1127](https://github.com/pingcap/ticdc/pull/1127)
-         - Fix the goroutine leak when a changefeed is paused or stopped [#1075](https://github.com/pingcap/ticdc/pull/1075)
-         - Increase the maximum retry timeout to 60 seconds in Kafka producer to prevent replication interruption caused by the service or network jitter in the downstream Kafka [#1118](https://github.com/pingcap/ticdc/pull/1118)
-         - Fix a bug that the Kafka batch size does not take effect [#1112](https://github.com/pingcap/ticdc/pull/1112)
+        - Fix the issue that the metadata is repeatedly flushed to etcd before a table is initialized [#1191](https://github.com/pingcap/ticdc/pull/1191)
+        - Fix an issue of replication interruption caused by early GC or the latency of updating `TableInfo` when the schema storage caches TiDB tables [#1114](https://github.com/pingcap/ticdc/pull/1114)
+        - Fix the issue that the schema storage costs too much memory when DDL operations are frequent [#1127](https://github.com/pingcap/ticdc/pull/1127)
+        - Fix the goroutine leak when a changefeed is paused or stopped [#1075](https://github.com/pingcap/ticdc/pull/1075)
+        - Increase the maximum retry timeout to 60 seconds in Kafka producer to prevent replication interruption caused by the service or network jitter in the downstream Kafka [#1118](https://github.com/pingcap/ticdc/pull/1118)
+        - Fix a bug that the Kafka batch size does not take effect [#1112](https://github.com/pingcap/ticdc/pull/1112)
 
     + Dumpling
 
