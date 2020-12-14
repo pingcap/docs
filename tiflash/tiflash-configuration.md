@@ -45,7 +45,7 @@ mark_cache_size = 5368709120 # The cache size limit of the metadata of a data bl
 minmax_index_cache_size = 5368709120 # The cache size limit of the min-max index of a data block. Generally, you do not need to change this value.
 
 [storage]
-    bg_task_io_rate_limit = 0 # controls the total write rate of background tasks in bytes per second, 0 means no limit
+    bg_task_io_rate_limit = 0 # Limits the total write rate of background tasks in bytes per second. 0 means no limit.
 ```
 
 ```toml
