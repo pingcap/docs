@@ -262,4 +262,4 @@ If the the Old Value feature is not enabled, you cannot tell whether a Row Chang
 * `INSERT` event only contains the `"u"` field
 * `DELETE` event only contains the `"d"` field
 
-For more information, refer to [Open protocol Row Changed Event format](/ticdc/ticdc-open-protocol.md#row-changed-event)。
+For more information, refer to [Open protocol Row Changed Event format](/ticdc/ticdc-open-protocol.md#row-changed-event).
