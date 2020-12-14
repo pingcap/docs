@@ -123,11 +123,11 @@ The TiCDC server chooses its time zone in the following priority:
 
 ## What is the default behavior of TiCDC if I create a replication task without specifying the configuration file in `--config`?
 
-If you use the `cdc cli changefeed create` command without specifying the `-config` parameter, TiCDC creates the replication task according to the following steps:
+If you use the `cdc cli changefeed create` command without specifying the `-config` parameter, TiCDC creates the replication task in the following default behaviors:
 
-* Replicate all tables except system tables
-* Disable the Old Value feature
-* Skip replicating tables that do not contain [valid indexes](/ticdc/ticdc-overview.md#restrictions)
+* Replicates all tables except system tables
+* Disables the Old Value feature
+* Skips replicating tables that do not contain [valid indexes](/ticdc/ticdc-overview.md#restrictions)
 
 ## How do I handle the incompatibility issue of configuration files caused by TiCDC upgrade?
 
@@ -256,7 +256,7 @@ For more information, refer to [TiCDC Open Protocol column type code](/ticdc/tic
 
 ## How can I tell if a Row Changed Event of TiCDC Open Protocol is an `INSERT` event or an `UPDATE` event?
 
-If the the Old Value feature is not enabled, you cannot tell whether a Row Changed Event of TiCDC Open Protocol is an `INSERT` event or an `UPDATE` event. If the feature is enabled, you can determine the event type by the fields it contains:
+If the Old Value feature is not enabled, you cannot tell whether a Row Changed Event of TiCDC Open Protocol is an `INSERT` event or an `UPDATE` event. If the feature is enabled, you can determine the event type by the fields it contains:
 
 * `UPDATE` event contains both `"p"` and `"u"` fields
 * `INSERT` event only contains the `"u"` field
