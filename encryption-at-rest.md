@@ -4,7 +4,7 @@ summary: Learn how to enable encryption at rest to protect sensitive data.
 aliases: ['/docs/dev/encryption at rest/']
 ---
 
-# Encryption at Rest for TiKV <span class="version-mark">New in v4.0.0</span>
+# Encryption at Rest <span class="version-mark">New in v4.0.0</span>
 
 Encryption at rest means that data is encrypted when it is stored. For databases, this feature is also referred to as TDE (transparent data encryption). This is opposed to encryption in flight (TLS) or encryption in use (rarely used). Different things could be doing encryption at rest (SSD drive, file system, cloud vendor, etc), but by having TiKV do the encryption before storage this helps ensure that attackers must authenticate with the database to gain access to data. For example, when an attacker gains access to the physical machine, data cannot be accessed by copying files on disk.
 
