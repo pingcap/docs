@@ -136,6 +136,7 @@ TiDB version: 4.0.9
     - Fix the invalid `advertise-status-addr` value `0.0.0.0` [#9036](https://github.com/tikv/tikv/pull/9036)
     - Fix the issue that an error is returned indicating that a key exists when this key is locked and deleted in a committed transaction [#8930](https://github.com/tikv/tikv/pull/8930)
     - Fix the issue that the RocksDB mapping error causes data corruption [#9029](https://github.com/tikv/tikv/pull/9029)
+- Fix the bug that Follower Read might return stale data after the leader is transferred [#9240](https://github.com/tikv/tikv/pull/9240)
 
 + PD
 
