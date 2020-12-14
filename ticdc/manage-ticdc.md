@@ -98,9 +98,9 @@ Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":
 
 - `--start-ts`: Specifies the starting TSO of the `changefeed`. From this TSO, the TiCDC cluster starts pulling data. The default value is the current time.
 - `--target-ts`: Specifies the ending TSO of the `changefeed`. To this TSO, the TiCDC cluster stops pulling data. The default value is empty, which means that TiCDC does not automatically stop pulling data.
-- `--sort-engine`: Specifies the sorting engine for the `changefeed`. Because TiDB and TiKV adopt distributed architectures, TiCDC must output sorted data changes. This option supports `memory`/`unified`/`file`.
+- `--sort-engine`: Specifies the sorting engine for the `changefeed`. Because TiDB and TiKV adopt distributed architectures, TiCDC must sort the data changes before writing them to the sink. This option supports `memory`/`unified`/`file`.
     - `memory`: Sorts data changes in memory. It is recommended to use `memory` in a production environment.
-    - `unified`: An experimental feature introduced in v4.0.9. When `unified` is used, TiCDC prioritizes data sorting in memory. If the memory is insufficient, TiCDC automatically uses the disk to store the temporary data. It is **NOT** recommended to use it in a production environment unless `memory` cannot be used due to insufficient memory.
+    - `unified`: An experimental feature introduced in v4.0.9. When `unified` is used, TiCDC prefers data sorting in memory. If the memory is insufficient, TiCDC automatically uses the disk to store the temporary data. It is **NOT** recommended to use it in a production environment unless `memory` cannot be used due to insufficient memory.
     - `file`: Entirely uses the disk to store the temporary data. This feature is **deprecated**. It is not recommended to use it.
 - `--config`: Specifies the configuration file of the `changefeed`.
 
