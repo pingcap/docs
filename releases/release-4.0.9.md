@@ -124,7 +124,7 @@ TiDB version: 4.0.9
     - Fix the auto-ID allocation failure caused by the transaction retry after the write conflict [#21079](https://github.com/pingcap/tidb/pull/21079)
     - Fix the issue that JSON data cannot be correctly imported to TiDB using `LOAD DATA` [#21074](https://github.com/pingcap/tidb/pull/21074)
     - Fix the issue that the default value of newly added `Enum`-type columns is incorrect [#20998](https://github.com/pingcap/tidb/pull/20998)
-    - Fix the issue that the `addata` function inserts invalid characters [#21176](https://github.com/pingcap/tidb/pull/21176)
+    - Fix the issue that the `adddate` function inserts invalid characters [#21176](https://github.com/pingcap/tidb/pull/21176)
     - Fix the issue that the wrong `PointGet` plan generated in some situations causes wrong results [#21244](https://github.com/pingcap/tidb/pull/21244)
 
 + TiKV
