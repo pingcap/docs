@@ -1178,16 +1178,16 @@ Configuration items related to [encryption at rest](/encryption-at-rest.md) (TDE
 ### enable-file-dictionary-log
 
 + Enables the optimization to reduce I/O and mutex contention when TiKV manages the encryption metadata.
-+ To avoid possible compatibility issues when this configuration parameter is enabled (by default), see [Encryption at Rest](/encryption-at-rest.md#compatibility-with-earlier-tikv-versions) for details.
++ To avoid possible compatibility issues when this configuration parameter is enabled (by default), see [Encryption at Rest - Compatibility between TiKV versions](/encryption-at-rest.md#compatibility-between-tikv-versions) for details.
 + Default value: `true`
 
 ### master-key
 
-+ Specifies the master key if encryption is enabled. To learn how to configure a master key, see [Encryption at Rest](/encryption-at-rest.md#configure-encryption).
++ Specifies the master key if encryption is enabled. To learn how to configure a master key, see [Encryption at Rest - configure encryption](/encryption-at-rest.md#configure-encryption).
 
 ### previous-master-key
 
-+ Specifies the old master key when rotating the new master key. The configuration format is the same as that of `master-key`. To learn how to configure a master key, see [Encryption at Rest](/encryption-at-rest.md#configure-encryption).
++ Specifies the old master key when rotating the new master key. The configuration format is the same as that of `master-key`. To learn how to configure a master key, see [Encryption at Rest - configure encryption](/encryption-at-rest.md#configure-encryption).
 
 ## `import`
 
