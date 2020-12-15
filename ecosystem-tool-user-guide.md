@@ -1,6 +1,6 @@
 ---
 title: TiDB Ecosystem Tools Overview
-aliases: ['/docs/stable/ecosystem-tool-user-guide/','/docs/v4.0/ecosystem-tool-user-guide/','/docs/stable/reference/tools/user-guide/']
+aliases: ['/docs/stable/ecosystem-tool-user-guide/','/docs/v4.0/ecosystem-tool-user-guide/','/docs/stable/reference/tools/user-guide/','/docs/stable/how-to/migrate/incrementally-from-mysql/','/docs/stable/how-to/migrate/overview/']
 ---
 
 # TiDB Ecosystem Tools Overview
