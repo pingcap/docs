@@ -90,6 +90,22 @@ Multiple TiFlash nodes elect a master to add or delete placement rules to PD, an
     dt_enable_logical_split = true # The default value is `true`. This parameter determines whether the segment of DeltaTree Storage Engine uses logical split. Using the logical split can reduce the write amplification, and improve the write speed. However, these are at the cost of disk space waste.
     max_memory_usage = 0 # The memory usage limit for the generated intermediate data when a single coprocessor query is executed. The default value is 0, which means no limit.
     max_memory_usage_for_all_queries = 0 # The memory usage limit for the generated intermediate data when all queries are executed. The default value is 0 (in bytes), which means no limit.
+
+## Security settings effective since v4.0.5
+[security]
+    ## This configuration item enables or disables log redaction. If the configuration value
+    ## is set to `true`, all user data in the log will be replaced by `?`. Also, you need to set
+    ## `security.redact-info-log` in tiflash-learner.toml to enable it for tiflash-learner
+    ## logging files.
+    # redact_info_log = false
+
+    ## Path of file that contains list of trusted SSL CAs. if set, the following settings
+    ## `cert_path` and `key_path` shouldn't be empty
+    # ca_path = "/path/to/ca.pem"
+    ## Path of file that contains X509 certificate in PEM format.
+    # cert_path = "/path/to/tiflash-server.pem"
+    ## Path of file that contains X509 key in PEM format.
+    # key_path = "/path/to/tiflash-server-key.pem"
 ```
 
 ### Configure the `tiflash-learner.toml` file
