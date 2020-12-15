@@ -293,7 +293,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
     - `MODIFY COLUMN` or `CHANGE COLUMN` operations which increase the length of a field.
     - `ADD INDEX` or `DROP INDEX` operations in which the index column is created before the transaction is opened.
 
-Currently, this feature is incompatible with TiDB Binlog in some scenarios and might cause changes on the semantics of a transaction. For more usage precautions of this feature, refer to [Incompatibility issues about transaction semantic](https://github.com/pingcap/tidb/issues/21069) and [Incompatibility issues about TiDB Binlog](https://github.com/pingcap/tidb/issues/20996)
+Currently, this feature is incompatible with TiDB Binlog in some scenarios and might cause changes on the semantics of a transaction. For more usage precautions of this feature, refer to [Incompatibility issues about transaction semantic](https://github.com/pingcap/tidb/issues/21069) and [Incompatibility issues about TiDB Binlog](https://github.com/pingcap/tidb/issues/20996).
 
 ### tidb_enable_cascades_planner
 
