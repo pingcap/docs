@@ -45,6 +45,8 @@ http_port = 8123
 mark_cache_size = 5368709120
 ## The cache size limit of the min-max index of a data block. Generally, you do not need to change this value.
 minmax_index_cache_size = 5368709120
+## The cache size limit of the DeltaIndex. The default value is 0, which means no limit.
+delta_index_cache_size = 0
 
 ## The storage path of TiFlash data. If there are multiple directories, separate each directory with a comma.
 ## `path` and `path_realtime_mode` are deprecated since v4.0.9. Use the configurations
@@ -52,10 +54,10 @@ minmax_index_cache_size = 5368709120
 # path = "/tidb-data/tiflash-9000"
 ## or
 # path = "/ssd0/tidb-data/tiflash,/ssd1/tidb-data/tiflash,/ssd2/tidb-data/tiflash"
-## The default value is `false`. If you set it to `true` and multiple directories 
+## The default value is `false`. If you set it to `true` and multiple directories
 ## are set in the path, the latest data is stored in the first directory and older
 ## data is stored in the rest directories.
-# path_realtime_mode = false 
+# path_realtime_mode = false
 
 ## The path in which the TiFlash temporary files are stored. By default it is the first directory in `path`
 ## or in `storage.latest.dir` appended with "/tmp".
@@ -69,7 +71,7 @@ minmax_index_cache_size = 5368709120
     [storage.main]
     ## The list of directories to store the main data. More than 90% of the total data is stored in
     ## the directory list.
-    dir = [ "/tidb-data/tiflash-9000" ] 
+    dir = [ "/tidb-data/tiflash-9000" ]
     ## or
     # dir = [ "/ssd0/tidb-data/tiflash", "/ssd1/tidb-data/tiflash" ]
 
