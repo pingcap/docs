@@ -109,7 +109,7 @@ To monitor encryption at rest, if you deploy TiKV with Grafana, you can look at 
 
 For debugging, the `tikv-ctl` command can be used to dump encryption metadata such as encryption method and data key id used to encryption the file, as well as list of data keys. Since the operation can expose sensitive data, it is not recommended to use in production. Please refer to [TiKV Control](/tikv-control.md#dump-encryption-metadata] document.
 
-### Compatibility with earlier TiKV versions
+### Compatibility between TiKV versions
 
 To reduce the overhead caused by I/O and mutex contention when TiKV manages the encryption metadata, an optimization is introduced in TiKV v4.0.9 and controlled by `security.encryption.enable-file-dictionary-log` in the TiKV configuration file. This configuration parameter takes effect only on TiKV v4.0.9 or later versions.
 
