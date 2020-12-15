@@ -14,7 +14,7 @@ This section describes how to check the TiDB cluster status using [TiDB Dashboar
 
 ### Use TiDB Dashboard
 
-> **Note:**
+> **Warning:**
 >
 > TiDB Dashboard is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
 
@@ -29,8 +29,6 @@ This section describes how to check the TiDB cluster status using [TiDB Dashboar
 ### Use Grafana
 
 1. Log in to the Grafana monitoring at `${Grafana-ip}:3000`. The default username and password are both `admin`.
-
-    ![Grafana-login](/media/tiup/grafana-login.png)
 
 2. To check the TiDB port status and load monitoring information, click **Overview**.
 

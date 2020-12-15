@@ -63,6 +63,9 @@ minmax_index_cache_size = 5368709120
 
 ## Storage paths settings effective since v4.0.9
 [storage]
+    ## Limits the total write rate of background tasks in bytes per second. 0 means no limit.
+    bg_task_io_rate_limit = 0
+
     [storage.main]
     ## The directory(ies) to store the main data. More than 90% of the total data is stored in
     ## these directories.
