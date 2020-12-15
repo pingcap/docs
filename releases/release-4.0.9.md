@@ -126,6 +126,12 @@ TiDB version: 4.0.9
     - Fix the issue that the default value of newly added `Enum`-type columns is incorrect [#20998](https://github.com/pingcap/tidb/pull/20998)
     - Fix the issue that the `adddate` function inserts invalid characters [#21176](https://github.com/pingcap/tidb/pull/21176)
     - Fix the issue that the wrong `PointGet` plan generated in some situations causes wrong results [#21244](https://github.com/pingcap/tidb/pull/21244)
+    - Ignore the conversion of daylight saving time in the `ADD_DATE` function to be compatible with MySQL [#20888](https://github.com/pingcap/tidb/pull/20888)
+    - Fix a bug that prevents inserting strings with trailing spaces that exceed `varchar` or `char`'s length constraint [#21282](https://github.com/pingcap/tidb/pull/21282)
+    - Fix a bug that does not converting the integer from `[1, 69]` to `[2001, 2069]` or from `[70, 99]` to `[1970, 1999]` when comparing `int` with `year` [#21283](https://github.com/pingcap/tidb/pull/21283)
+    - Fix the panic caused by the overflowing result of the `sum()` function when calculating the `Double` type field [#21272](https://github.com/pingcap/tidb/pull/21272)
+    - Fix a bug that `DELETE` fails to add lock on the unique key [#20705](https://github.com/pingcap/tidb/pull/20705)
+    - Fix a bug that snapshot reads hits the lock cache [#21539](https://github.com/pingcap/tidb/pull/21539)
 
 + TiKV
 
