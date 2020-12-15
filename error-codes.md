@@ -333,7 +333,7 @@ In addition, TiDB has the following unique error codes:
 
 * Error Number: 8129
 
-    TiDB doesn't yet support JSON object with key length >= 65536.
+    TiDB does not yet support JSON objects with the key length >= 65536.
 
 * Error Number: 8200
 
