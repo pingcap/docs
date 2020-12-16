@@ -47,7 +47,7 @@ The key parameters in the topology configuration templates are as follows:
 
 - `drainer_servers.config.syncer.to`
 
-    The downstream configuration of binlog. Depending on the `db-type`, this item can configure the connection parameters of the downstream database, the connection parameters of Kafka, and the file save path. For details, refer to [TiDB Binlog Configuration File](/tidb-binlog/tidb-binlog-configuration-file.md#syncerto).
+    The downstream configuration of binlog. Depending on different `db-type`s, this parameter can configure the connection parameters of the downstream database, the connection parameters of Kafka, and the file save path. For details, refer to [TiDB Binlog Configuration File](/tidb-binlog/tidb-binlog-configuration-file.md#syncerto).
 
 > **Note:**
 >
