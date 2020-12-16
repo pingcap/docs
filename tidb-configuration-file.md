@@ -230,8 +230,13 @@ Configuration items related to performance
 
 ### `tcp-keep-alive`
 
+<<<<<<< HEAD
 - Determines whether to enable `keepalive` in the TCP layer
 - Default value: `false`
+=======
+- Determines whether to enable `keepalive` in the TCP layer.
+- Default value: `true`
+>>>>>>> 5b7915fa... fix the default value of tcp-keep-alive (#4413)
 
 ### `cross-join`
 
