@@ -922,7 +922,7 @@ Configuration items related to `rocksdb.defaultcf`
 
 ### `target-file-size-base`
 
-+ The size of the target file at base level
++ The size of the target file at base level. This value is overrided by `compaction-guard-max-output-file-size` when `enable-compaction-guard = true`.
 + Default: `"8MB"`
 + Minimum value: `0`
 + Unit: KB|MB|GB
