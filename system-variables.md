@@ -287,13 +287,15 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 - Scope: SESSION | GLOBAL
 - Default value: 0
-- This variable is used to control whether to enable the `AMEND TRANSACTION` feature. If you enable the `AMEND TRANSACTION` feature with a pessimistic transaction, when there are concurrent DDL operations and SCHEMA VERSION changes on tables associated with this transaction, TiDB attempts to amend the transaction. It corrects the commit of the transaction to make it consistent with the latest valid SCHEMA VERSION, so that the transaction can be successfully committed without getting the `Information schema is changed` error. This feature is effective for the following concurrent DDL operations:
+- This variable is used to control whether to enable the `AMEND TRANSACTION` feature. If you enable the `AMEND TRANSACTION` feature in a pessimistic transaction, when concurrent DDL operations and SCHEMA VERSION changes exist on tables associated with this transaction, TiDB attempts to amend the transaction. TiDB corrects the transaction commit to make the commit consistent with the latest valid SCHEMA VERSION so that the transaction can be successfully committed without getting the `Information schema is changed` error. This feature is effective on the following concurrent DDL operations:
 
     - `ADD COLUMN` or `DROP COLUMN` operations.
     - `MODIFY COLUMN` or `CHANGE COLUMN` operations which increase the length of a field.
     - `ADD INDEX` or `DROP INDEX` operations in which the index column is created before the transaction is opened.
 
-Currently, this feature is incompatible with TiDB Binlog in some scenarios and might cause changes on the semantics of a transaction. For more usage precautions of this feature, refer to [Incompatibility issues about transaction semantic](https://github.com/pingcap/tidb/issues/21069) and [Incompatibility issues about TiDB Binlog](https://github.com/pingcap/tidb/issues/20996).
+> **Note:**
+>
+> Currently, this feature is incompatible with TiDB Binlog in some scenarios and might cause semantic changes on a transaction. For more usage precautions of this feature, refer to [Incompatibility issues about transaction semantic](https://github.com/pingcap/tidb/issues/21069) and [Incompatibility issues about TiDB Binlog](https://github.com/pingcap/tidb/issues/20996).
 
 ### tidb_enable_cascades_planner
 
