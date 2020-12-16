@@ -207,7 +207,7 @@ Configuration about performance.
 ### `tcp-keep-alive`
 
 - To enable `keepalive` in the TCP layer
-- Default: false
+- Default: true
 
 ### `cross-join`
 
