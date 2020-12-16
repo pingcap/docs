@@ -1009,7 +1009,7 @@ Configuration items related to `rocksdb.defaultcf`
 
 ### `compaction-guard-max-output-file-size`
 
-+ The upper bound of SST file size when compaction guard is enabled. The config prevent SST files being too large when compaction guard is enabled. This config overrides `target-file-size-base` for the same CF.
++ The maximum SST file size when the compaction guard is enabled. The config prevents SST files from being too large when the compaction guard is enabled. This config overrides `target-file-size-base` for the same column family.
 + Default value: `"128MB"`
 + Unit: KB|MB|GB
 
