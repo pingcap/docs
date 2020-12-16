@@ -1118,7 +1118,7 @@ Configuration items related to `rocksdb.writecf`
 
 ### `compaction-guard-min-output-file-size`
 
-+ The lower bound of SST file size when compaction guard is enabled. The config prevent SST files being too small when compaction guard is enabled.
++ The minimum of SST file size when the compaction guard is enabled. This configuration prevents SST files from being too small when the compaction guard is enabled.
 + Default value: `"8MB"`
 + Unit: KB|MB|GB
 
