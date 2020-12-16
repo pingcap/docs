@@ -996,6 +996,23 @@ Configuration items related to `rocksdb.defaultcf`
 + Default value: `"256GB"`
 + Unit: KB|MB|GB
 
+### `enable-compaction-guard`
+
++ Enable compaction guard, which is an optimization to split SST files at TiKV region boundaries. The optimization can help reduce compaction IO, and allow us to use larger SST file size (thus less SST files overall) while making sure we can still efficiently cleanup stale data on region migration.
++ Default value: `true`
+
+### `compaction-guard-min-output-file-size
+
++ The lower bound of SST file size when compaction guard is enabled. The config prevent SST files being too small when compaction guard is enabled.
++ Default value: `"8MB"`
++ Unit: KB|MB|GB
+
+### `compaction-guard-max-output-file-size
+
++ The upper bound of SST file size when compaction guard is enabled. The config prevent SST files being too large when compaction guard is enabled. This config overrides `target-file-size-base` for the same CF.
++ Default value: `"128MB"`
++ Unit: KB|MB|GB
+
 ## `rocksdb.defaultcf.titan`
 
 Configuration items related to `rocksdb.defaultcf.titan`
@@ -1093,6 +1110,23 @@ Configuration items related to `rocksdb.writecf`
 
 + Determines whether to put the entire key to bloom filter
 + Default value: `false`
+
+### `enable-compaction-guard`
+
++ Enable compaction guard, which is an optimization to split SST files at TiKV region boundaries. The optimization can help reduce compaction IO, and allow us to use larger SST file size (thus less SST files overall) while making sure we can still efficiently cleanup stale data on region migration.
++ Default value: `true`
+
+### `compaction-guard-min-output-file-size
+
++ The lower bound of SST file size when compaction guard is enabled. The config prevent SST files being too small when compaction guard is enabled.
++ Default value: `"8MB"`
++ Unit: KB|MB|GB
+
+### `compaction-guard-max-output-file-size
+
++ The upper bound of SST file size when compaction guard is enabled. The config prevent SST files being too large when compaction guard is enabled. This config overrides `target-file-size-base` for the same CF.
++ Default value: `"128MB"`
++ Unit: KB|MB|GB
 
 ## rocksdb.lockcf
 
