@@ -91,7 +91,7 @@ Multiple TiFlash nodes elect a master to add or delete placement rules to PD, an
     max_memory_usage = 0 # The memory usage limit for the generated intermediate data when a single coprocessor query is executed. The default value is 0, which means no limit.
     max_memory_usage_for_all_queries = 0 # The memory usage limit for the generated intermediate data when all queries are executed. The default value is 0 (in bytes), which means no limit.
 
-## Security settings effective since v4.0.5
+## Security settings take effect starting from v4.0.5.
 [security]
     ## This configuration item enables or disables log redaction. If the configuration value
     ## is set to `true`, all user data in the log will be replaced by `?`.
