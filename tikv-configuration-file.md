@@ -1124,7 +1124,7 @@ Configuration items related to `rocksdb.writecf`
 
 ### `compaction-guard-max-output-file-size`
 
-+ The maximum of SST file size when the compaction guard is enabled. This configuration prevents SST files from being too large when the compaction guard is enabled. This config overrides `target-file-size-base` for the same column family.
++ The maximum of SST file size when the compaction guard is enabled. This configuration prevents SST files from being too large when the compaction guard is enabled. This configuration overrides `target-file-size-base` for the same column family.
 + Default value: `"128MB"`
 + Unit: KB|MB|GB
 
