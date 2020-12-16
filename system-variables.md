@@ -267,6 +267,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 > **Note:**
 >
 > Currently, this feature is incompatible with TiDB Binlog in some scenarios and might cause semantic changes on a transaction. For more usage precautions of this feature, refer to [Incompatibility issues about transaction semantic](https://github.com/pingcap/tidb/issues/21069) and [Incompatibility issues about TiDB Binlog](https://github.com/pingcap/tidb/issues/20996).
+
 ### tidb_enable_cascades_planner
 
 - Scope: SESSION | GLOBAL
