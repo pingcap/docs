@@ -94,8 +94,9 @@ Multiple TiFlash nodes elect a master to add or delete placement rules to PD, an
 ## Security settings effective since v4.0.5
 [security]
     ## This configuration item enables or disables log redaction. If the configuration value
-    ## is set to `true`, all user data in the log will be replaced by `?`. Also, you need to set
-    ## `security.redact-info-log` in tiflash-learner.toml to enable it for tiflash-learner
+    ## is set to `true`, all user data in the log will be replaced by `?`.
+    ## Note that you need to enable `security.redact-info-log` for tiflash-learner's logging
+    ## in tiflash-learner.toml
     ## logging files.
     # redact_info_log = false
 
