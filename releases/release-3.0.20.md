@@ -1,14 +1,12 @@
 ---
-title: tidb v3.0.20 Release Notes
-category: Releases
-aliases: ['/docs/dev/releases/v3.0.20/']
+title: TiDB 3.0.20 Release Notes
 ---
 
-# tidb v3.0.20 Release Notes
+# TiDB 3.0.20 Release Notes
 
-Release date: December 16, 2020
+Release date: December 23, 2020
 
-TiDB version: v3.0.20
+TiDB version: 3.0.20
 
 ## Bug Fixes
 
