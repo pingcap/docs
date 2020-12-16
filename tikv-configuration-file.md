@@ -1001,13 +1001,13 @@ Configuration items related to `rocksdb.defaultcf`
 + Enable compaction guard, which is an optimization to split SST files at TiKV region boundaries. The optimization can help reduce compaction IO, and allow us to use larger SST file size (thus less SST files overall) while making sure we can still efficiently cleanup stale data on region migration.
 + Default value: `true`
 
-### `compaction-guard-min-output-file-size
+### `compaction-guard-min-output-file-size`
 
 + The lower bound of SST file size when compaction guard is enabled. The config prevent SST files being too small when compaction guard is enabled.
 + Default value: `"8MB"`
 + Unit: KB|MB|GB
 
-### `compaction-guard-max-output-file-size
+### `compaction-guard-max-output-file-size`
 
 + The upper bound of SST file size when compaction guard is enabled. The config prevent SST files being too large when compaction guard is enabled. This config overrides `target-file-size-base` for the same CF.
 + Default value: `"128MB"`
@@ -1116,13 +1116,13 @@ Configuration items related to `rocksdb.writecf`
 + Enable compaction guard, which is an optimization to split SST files at TiKV region boundaries. The optimization can help reduce compaction IO, and allow us to use larger SST file size (thus less SST files overall) while making sure we can still efficiently cleanup stale data on region migration.
 + Default value: `true`
 
-### `compaction-guard-min-output-file-size
+### `compaction-guard-min-output-file-size`
 
 + The lower bound of SST file size when compaction guard is enabled. The config prevent SST files being too small when compaction guard is enabled.
 + Default value: `"8MB"`
 + Unit: KB|MB|GB
 
-### `compaction-guard-max-output-file-size
+### `compaction-guard-max-output-file-size`
 
 + The upper bound of SST file size when compaction guard is enabled. The config prevent SST files being too large when compaction guard is enabled. This config overrides `target-file-size-base` for the same CF.
 + Default value: `"128MB"`
