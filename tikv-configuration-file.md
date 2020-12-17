@@ -738,9 +738,9 @@ Configuration items related to RocksDB
 ### `rate-bytes-per-sec`
 
 + The maximum rate permitted by RocksDB Rate Limiter
-+ Default value: `0`
++ Default value: `10GB`
 + Minimum value: `0`
-+ Unit: Bytes
++ Unit: B|KB|MB|GB
 
 ### `rate-limiter-mode`
 
@@ -753,7 +753,7 @@ Configuration items related to RocksDB
 ### `rate-limiter-auto-tuned`
 
 + Determines whether to automatically optimize the configuration of the RocksDB Rate Limiter
-+ Default value: `false`
++ Default value: `true`
 
 ### `enable-pipelined-write`
 
