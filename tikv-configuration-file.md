@@ -708,7 +708,7 @@ Configuration items related to RocksDB
 
 ### `enable-statistics`
 
-+ Determines whether to automatically optimize the configuration of Rate LImiter
++ Determines whether to enable the statistics of RocksDB.
 + Default value: `false`
 
 ### `stats-dump-period`
@@ -737,22 +737,22 @@ Configuration items related to RocksDB
 
 ### `rate-bytes-per-sec`
 
-+ The maximum rate permitted by Rate Limiter
++ The maximum rate permitted by RocksDB Rate Limiter
 + Default value: `0`
 + Minimum value: `0`
 + Unit: Bytes
 
 ### `rate-limiter-mode`
 
-+ Rate LImiter mode
++ RocksDB Rate Limiter mode
 + Optional values: `1` (`ReadOnly`), `2` (`WriteOnly`), `3` (`AllIo`)
 + Default value: `2`
 + Minimum value: `1`
 + Maximum value: `3`
 
-### `auto-tuned`
+### `rate-limiter-auto-tuned`
 
-+ Determines whether to automatically optimize the configuration of the Rate LImiter
++ Determines whether to automatically optimize the configuration of the RocksDB Rate Limiter
 + Default value: `false`
 
 ### `enable-pipelined-write`
