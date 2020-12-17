@@ -737,14 +737,14 @@ Configuration items related to RocksDB
 
 ### `rate-bytes-per-sec`
 
-+ The maximum rate permitted by RocksDB Rate Limiter
++ The maximum rate permitted by RocksDB compaction rate limiter
 + Default value: `10GB`
 + Minimum value: `0`
 + Unit: B|KB|MB|GB
 
 ### `rate-limiter-mode`
 
-+ RocksDB Rate Limiter mode
++ RocksDB compaction rate limiter mode
 + Optional values: `1` (`ReadOnly`), `2` (`WriteOnly`), `3` (`AllIo`)
 + Default value: `2`
 + Minimum value: `1`
@@ -752,7 +752,7 @@ Configuration items related to RocksDB
 
 ### `rate-limiter-auto-tuned`
 
-+ Determines whether to automatically optimize the configuration of the RocksDB Rate Limiter
++ Determines whether to automatically optimize the configuration of the RocksDB compaction rate limiter
 + Default value: `true`
 
 ### `enable-pipelined-write`
