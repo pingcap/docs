@@ -998,7 +998,7 @@ Configuration items related to `rocksdb.defaultcf`
 
 ### `enable-compaction-guard`
 
-+ Enable compaction guard, which is an optimization to split SST files at TiKV region boundaries. The optimization can help reduce compaction IO, and allow us to use larger SST file size (thus less SST files overall) while making sure we can still efficiently cleanup stale data on region migration.
++ Enables or disables the compaction guard, which is an optimization to split SST files at TiKV Region boundaries. This optimization can help reduce compaction I/O and allows TiKV to use larger SST file size (thus less SST files overall) while making sure that TiKV can still efficiently clean up stale data when migrating Regions.
 + Default value: `true`
 
 ### `compaction-guard-min-output-file-size`
