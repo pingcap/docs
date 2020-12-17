@@ -254,6 +254,25 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
     For more details, see [limits of retry](/optimistic-transaction.md#limits-of-retry).
 
+<<<<<<< HEAD
+=======
+### tidb_distsql_scan_concurrency
+
+- Scope: SESSION | GLOBAL
+- Default value: 15
+- This variable is used to set the concurrency of the `scan` operation.
+- Use a bigger value in OLAP scenarios, and a smaller value in OLTP scenarios.
+- For OLAP scenarios, the maximum value cannot exceed the number of CPU cores of all the TiKV nodes.
+- If a table has a lot of partitions, you can reduce the variable value appropriately to avoid TiKV becoming out of memory (OOM).
+
+### tidb_dml_batch_size
+
+- Scope: SESSION | GLOBAL
+- Default value: 0
+- When this value is greater than `0`, TiDB will batch commit statements such as `INSERT` or `LOAD DATA` into smaller transactions. This reduces memory usage and helps ensure that the `txn-total-size-limit` is not reached by bulk modifications.
+- Only the value `0` provides ACID compliance. Setting this to any other value will break the atomicity and isolation guarantees of TiDB.
+
+>>>>>>> e5197085... Update the description of `tidb_distsql_scan_concurrency` (#4401)
 ### `tidb_enable_amend_pessimistic_txn` <span class="version-mark">New in v4.0.7</span>
 
 - Scope: SESSION | GLOBAL
