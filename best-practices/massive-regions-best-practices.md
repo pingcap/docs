@@ -82,7 +82,7 @@ Enable `Region Merge` by configuring the following parameters:
 >> pd-ctl config set merge-schedule-limit 8
 ```
 
-Refer to [Region Merge](https://github.com/tikv/tikv/blob/master/docs/how-to/configure/region-merge.md) for more details.
+Refer to [Region Merge](https://tikv.org/docs/4.0/tasks/configure/region-merge/) for more details.
 
 The default configuration of the `Region Merge` parameters is rather conservative. You can speed up the `Region Merge` process by referring to the method provided in [PD Scheduling Best Practices](/best-practices/pd-scheduling-best-practices.md#region-merge-is-slow).
 
