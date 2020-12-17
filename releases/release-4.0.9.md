@@ -35,6 +35,7 @@ TiDB version: 4.0.9
     - Add the executor-related runtime information of DML statements in the result of `EXPLAIN ANALYZE` [#21066](https://github.com/pingcap/tidb/pull/21066)
     - Disallow multiple updates on the primary key in a singe SQL statements [#21113](https://github.com/pingcap/tidb/pull/21113)
     - Add a monitoring metric for the connection idle time [#21301](https://github.com/pingcap/tidb/pull/21301)
+    - Temporarily enable the slow log when the `runtime/trace` tool is running [#20578](https://github.com/pingcap/tidb/pull/20578)
 
 + TiKV
 
@@ -132,6 +133,8 @@ TiDB version: 4.0.9
     - Fix the panic caused by the overflowing result of the `sum()` function when calculating the `Double` type field [#21272](https://github.com/pingcap/tidb/pull/21272)
     - Fix a bug that `DELETE` fails to add lock on the unique key [#20705](https://github.com/pingcap/tidb/pull/20705)
     - Fix a bug that snapshot reads hits the lock cache [#21539](https://github.com/pingcap/tidb/pull/21539)
+    - Fix an issue of potential memory leak after reading a lot of data in a long-lived transaction [#21129](https://github.com/pingcap/tidb/pull/21129)
+    - Fix the issue that omitting the table alias in a subquery will have a syntax error returned [#20367](https://github.com/pingcap/tidb/pull/20367)
 
 + TiKV
 
@@ -173,6 +176,9 @@ TiDB version: 4.0.9
         - Fix the goroutine leak when a changefeed is paused or stopped [#1075](https://github.com/pingcap/ticdc/pull/1075)
         - Increase the maximum retry timeout to 60 seconds in Kafka producer to prevent replication interruption caused by the service or network jitter in the downstream Kafka [#1118](https://github.com/pingcap/ticdc/pull/1118)
         - Fix a bug that the Kafka batch size does not take effect [#1112](https://github.com/pingcap/ticdc/pull/1112)
+        - Fix a bug that some tables' row change might be lost when the network between TiCDC and PD has jitter and when there are paused changefeeds being resumed at the same time [#1213](https://github.com/pingcap/ticdc/pull/1213)
+        - Fix a bug that the TiCDC process might exit when the network between TiCDC and PD is not stable [#1218](https://github.com/pingcap/ticdc/pull/1218)
+        - Use a singleton PD client in TiCDC and fix a bug that TiCDC closes PD client by accident which causes replication block [#1217](https://github.com/pingcap/ticdc/pull/1217)
 
     + Dumpling
 
