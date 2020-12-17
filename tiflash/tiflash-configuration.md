@@ -63,7 +63,7 @@ delta_index_cache_size = 0
 ## or in `storage.latest.dir` appended with "/tmp".
 # tmp_path = "/tidb-data/tiflash-9000/tmp"
 
-## Storage paths settings effective since v4.0.9
+## Storage paths settings take effect starting from v4.0.9
 [storage]
     ## Limits the total write rate of background tasks in bytes per second. 0 means no limit.
     bg_task_io_rate_limit = 0
