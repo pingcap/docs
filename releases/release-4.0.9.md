@@ -178,7 +178,7 @@ TiDB version: 4.0.9
         - Fix a bug that some tables' row change might be lost when the network between TiCDC and PD has jitter and when there are paused changefeeds being resumed at the same time [#1213](https://github.com/pingcap/ticdc/pull/1213)
         - Fix a bug that the TiCDC process might exit when the network between TiCDC and PD is not stable [#1218](https://github.com/pingcap/ticdc/pull/1218)
         - Use a singleton PD client in TiCDC and fix a bug that TiCDC closes PD client by accident which causes replication block [#1217](https://github.com/pingcap/ticdc/pull/1217)
-        - Fix a bug that the cdc owner might consume too much memory in the etcd watch client
+        - Fix a bug that the TiCDC owner might consume too much memory in the etcd watch client [#1224](https://github.com/pingcap/ticdc/pull/1224)
 
     + Dumpling
 
