@@ -95,17 +95,17 @@ Multiple TiFlash nodes elect a master to add or delete placement rules to PD, an
 [security]
     ## This configuration item enables or disables log redaction. If the configuration value
     ## is set to `true`, all user data in the log will be replaced by `?`.
-    ## Note that you need to enable `security.redact-info-log` for tiflash-learner's logging
+    ## Note that you also need to set `security.redact-info-log` for tiflash-learner's logging
     ## in tiflash-learner.toml
     ## logging files.
     # redact_info_log = false
 
-    ## Path of file that contains list of trusted SSL CAs. if set, the following settings
-    ## `cert_path` and `key_path` shouldn't be empty
+    ## Path of the file that contains a list of trusted SSL CAs. If set, the following settings
+    ## `cert_path` and `key_path` are also needed.
     # ca_path = "/path/to/ca.pem"
-    ## Path of file that contains X509 certificate in PEM format.
+    ## Path of the file that contains X509 certificate in PEM format.
     # cert_path = "/path/to/tiflash-server.pem"
-    ## Path of file that contains X509 key in PEM format.
+    ## Path of the file that contains X509 key in PEM format.
     # key_path = "/path/to/tiflash-server-key.pem"
 ```
 
