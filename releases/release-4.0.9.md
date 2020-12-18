@@ -31,7 +31,7 @@ TiDB version: 4.0.9
     - Provide an error message for statements that use the `LOCK IN SHARE MODE` syntax [#21005](https://github.com/pingcap/tidb/pull/21005)
     - Avoid outputting unnecessary warnings or errors when folding constants in shortcut-able expressions [#21040](https://github.com/pingcap/tidb/pull/21040)
     - Raise an error when preparing the `LOAD DATA` statement [#21199](https://github.com/pingcap/tidb/pull/21199)
-    - Ignore the attribute of the integer zero-fill size when changing the column types [#20986](https://github.com/pingcap/tidb/pull/20986)
+    - Ignore the attribute of the integer zero-fill size when changing the integer column types [#20986](https://github.com/pingcap/tidb/pull/20986)
     - Add the executor-related runtime information of DML statements in the result of `EXPLAIN ANALYZE` [#21066](https://github.com/pingcap/tidb/pull/21066)
     - Disallow multiple updates on the primary key in a singe SQL statements [#21113](https://github.com/pingcap/tidb/pull/21113)
     - Add a monitoring metric for the connection idle time [#21301](https://github.com/pingcap/tidb/pull/21301)
@@ -43,16 +43,15 @@ TiDB version: 4.0.9
     - Support dynamically changing the `pessimistic-txn.pipelined` configuration [#9100](https://github.com/tikv/tikv/pull/9100)
     - Reduce the impact on performance when running Backup & Restore and TiDB Lightning [#9098](https://github.com/tikv/tikv/pull/9098)
     - Add monitoring metrics for the ingesting SST errors [#9096](https://github.com/tikv/tikv/pull/9096)
-    - Prevent hibernation when some peers are still catching up with logs [#9093](https://github.com/tikv/tikv/pull/9093)
+    - Prevent the leader from being hibernated when some peers still need to replicate logs [#9093](https://github.com/tikv/tikv/pull/9093)
     - Increase the success rate of the pipelined pessimistic locking [#9086](https://github.com/tikv/tikv/pull/9086)
     - Change the default value of `apply-max-batch-size` and `store-max-batch-size` to `1024` [#9020](https://github.com/tikv/tikv/pull/9020)
     - Add the `max-background-flushes` configuration item [#8947](https://github.com/tikv/tikv/pull/8947)
-    - Enable the unified read pool for the storage module by default [#8887](https://github.com/tikv/tikv/pull/8887)
     - Disable `force-consistency-checks` by default to improve performance [#9029](https://github.com/tikv/tikv/pull/9029)
 
 + PD
 
-    - Check the TiKV cluster version when a TiKV stores become `Tombstone` [#3213](https://github.com/pingcap/pd/pull/3213)
+    - Check the TiKV cluster version when a TiKV stores become `Tombstone`, which prevents users from enabling incompatible features during the process of downgrade or upgrade [#3213](https://github.com/pingcap/pd/pull/3213)
     - Disallow the TiKV store of a lower version to change from `Tombstone` back to `Up` [#3206](https://github.com/pingcap/pd/pull/3206)
     - Update Dashboard to `v2020.11.26.1` [#3219](https://github.com/pingcap/pd/pull/3219)
 
@@ -67,7 +66,7 @@ TiDB version: 4.0.9
 
     + Backup & Restore (BR)
 
-        - Disallow the ambiguous `--checksum false` argument in the command line, which does not disable checksum. Accept `--checksum=false` only. [#588](https://github.com/pingcap/br/pull/588)
+        - Disallow the ambiguous `--checksum false` argument in the command line, which does not correctly disable checksum. Only `--checksum=false` is accepted. [#588](https://github.com/pingcap/br/pull/588)
         - Support changing the PD configuration temporarily [#596](https://github.com/pingcap/br/pull/596)
         - Support analyzing tables after restore [#622](https://github.com/pingcap/br/pull/622)
         - Retry for the `read index not ready` and `proposal in merging mode` errors [#626](https://github.com/pingcap/br/pull/626)
