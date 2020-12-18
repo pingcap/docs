@@ -1113,18 +1113,18 @@ Configuration items related to `rocksdb.writecf`
 
 ### `enable-compaction-guard`
 
-+ Enable compaction guard, which is an optimization to split SST files at TiKV region boundaries. The optimization can help reduce compaction IO, and allow us to use larger SST file size (thus less SST files overall) while making sure we can still efficiently cleanup stale data on region migration.
++ Enables or disables the compaction guard, which is an optimization to split SST files at TiKV Region boundaries. This optimization can help reduce compaction I/O and allows TiKV to use larger SST file size (thus less SST files overall) and at the time efficiently clean up stale data when migrating Regions.
 + Default value: `true`
 
 ### `compaction-guard-min-output-file-size`
 
-+ The minimum of SST file size when the compaction guard is enabled. This configuration prevents SST files from being too small when the compaction guard is enabled.
++ The minimum SST file size when the compaction guard is enabled. This configuration prevents SST files from being too small when the compaction guard is enabled.
 + Default value: `"8MB"`
 + Unit: KB|MB|GB
 
 ### `compaction-guard-max-output-file-size`
 
-+ The maximum of SST file size when the compaction guard is enabled. This configuration prevents SST files from being too large when the compaction guard is enabled. This configuration overrides `target-file-size-base` for the same column family.
++ The maximum SST file size when the compaction guard is enabled. The configuration prevents SST files from being too large when the compaction guard is enabled. This configuration overrides `target-file-size-base` for the same column family.
 + Default value: `"128MB"`
 + Unit: KB|MB|GB
 
