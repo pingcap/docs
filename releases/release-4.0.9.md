@@ -14,6 +14,10 @@ TiDB version: 4.0.9
 
     - Deprecate the `enable-streaming` configuration item [#21055](https://github.com/pingcap/tidb/pull/21055)
 
++ TiKV
+
+    - Reduce I/O and mutex contention when encryption at rest is enabled. The change is backwardly incompatible. If users need to downgrade the cluster to a version earlier than v4.0.9, `security.encryption.enable-file-dictionary-log` must be disabled and TiKV must be restarted before the downgrade. [#9195](https://github.com/tikv/tikv/pull/9195)
+
 ## New Features
 
 + TiFlash
@@ -48,6 +52,7 @@ TiDB version: 4.0.9
     - Change the default value of `apply-max-batch-size` and `store-max-batch-size` to `1024` [#9020](https://github.com/tikv/tikv/pull/9020)
     - Add the `max-background-flushes` configuration item [#8947](https://github.com/tikv/tikv/pull/8947)
     - Disable `force-consistency-checks` by default to improve performance [#9029](https://github.com/tikv/tikv/pull/9029)
+    - Offload the queries on the Region size from `pd heartbeat worker` to `split check worker` [#9185](https://github.com/tikv/tikv/pull/9185)
 
 + PD
 
@@ -146,6 +151,9 @@ TiDB version: 4.0.9
     - Fix the issue that an error is returned indicating that a key exists when this key is locked and deleted in a committed transaction [#8930](https://github.com/tikv/tikv/pull/8930)
     - Fix the issue that the RocksDB cache mapping error causes data corruption [#9029](https://github.com/tikv/tikv/pull/9029)
     - Fix a bug that Follower Read might return stale data after the leader is transferred [#9240](https://github.com/tikv/tikv/pull/9240)
+    - Fix the issue that stale old values might be read in the pessimistic lock [#9282](https://github.com/tikv/tikv/pull/9282)
+    - Fix a bug that replica read might get stale data after the leader transfer [#9240](https://github.com/tikv/tikv/pull/9240)
+    - Fix the issue of TiKV crash that occurs when receiving `SIGPROF` after profiling [#9229](https://github.com/tikv/tikv/pull/9229)
 
 + PD
 
