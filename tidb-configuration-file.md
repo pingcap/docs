@@ -616,5 +616,5 @@ The `experimental` section, introduced in v3.1.0, describes configurations relat
 
 ### `allow-expression-index` <span class="version-mark">New in v4.0.0</span>
 
-- Determines whether to allow creating the expression index.
+- Determines whether to create the expression index.
 - Default value: false
