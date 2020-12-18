@@ -24,6 +24,16 @@ TiDB version: 4.0.9
 
     - Support storing the latest data of the storage engine on multiple disks (experimental)
 
++ TiDB Dashboard
+
+    - Support displaying and sorting by all fields in the **SQL Statements** page [#749](https://github.com/pingcap/tidb-dashboard/pull/749)
+    - Support zooming and panning the topology graph [#772](https://github.com/pingcap/tidb-dashboard/pull/772)
+    - Support displaying the disk usage information in the **SQL Statements** and **Slow Queries** pages [#777](https://github.com/pingcap/tidb-dashboard/pull/777)
+    - Support exporting list data in the **SQL Statements** and **Slow Queries** pages [#778](https://github.com/pingcap/tidb-dashboard/pull/778)
+    - Support customizing the Prometheus address [#808](https://github.com/pingcap/tidb-dashboard/pull/808)
+    - Add a page for cluster statistics [#815](https://github.com/pingcap/tidb-dashboard/pull/815)
+    - Add more time-related fields in the **Slow Queries** details [#810](https://github.com/pingcap/tidb-dashboard/pull/810)
+
 ## Improvements
 
 + TiDB
@@ -58,7 +68,13 @@ TiDB version: 4.0.9
 
     - Check the TiKV cluster version when a TiKV stores become `Tombstone`, which prevents users from enabling incompatible features during the process of downgrade or upgrade [#3213](https://github.com/pingcap/pd/pull/3213)
     - Disallow the TiKV store of a lower version to change from `Tombstone` back to `Up` [#3206](https://github.com/pingcap/pd/pull/3206)
-    - Update Dashboard to `v2020.11.26.1` [#3219](https://github.com/pingcap/pd/pull/3219)
+
++ TiDB Dashboard
+
+    - Keep expanding when "Expand" is clicked for SQL statements [#775](https://github.com/pingcap/tidb-dashboard/pull/775)
+    - Open detail pages in new windows for **SQL Statements** and **Slow Queries** [#816](https://github.com/pingcap/tidb-dashboard/pull/816)
+    - Improve descriptions for time-related fields in **Slow Queries** details [#817](https://github.com/pingcap/tidb-dashboard/pull/817)
+    - Display detailed error messages [#794](https://github.com/pingcap/tidb-dashboard/pull/794)
 
 + TiFlash
 
@@ -160,6 +176,13 @@ TiDB version: 4.0.9
     - Fix the issue that the leader roles specified using placement rules do not take effect in some cases [#3208](https://github.com/pingcap/pd/pull/3208)
     - Fix the issue that the `trace-region-flow` value is unexpectedly set to `false` [#3120](https://github.com/pingcap/pd/pull/3120)
     - Fix a bug that the service safepoint with infinite Time To Live (TTL) does not work [#3143](https://github.com/pingcap/pd/pull/3143)
+
++ TiDB Dashboard
+
+    - Fix a display issue of time in the Chinese language [#755](https://github.com/pingcap/tidb-dashboard/pull/755)
+    - Fix a bug that the browser compatibility notice does not work [#776](https://github.com/pingcap/tidb-dashboard/pull/776)
+    - Fix the issue that the transaction `start_ts` is incorrectly displayed in some scenarios [#793](https://github.com/pingcap/tidb-dashboard/pull/793)
+    - Fix the issue that some SQL texts are incorrectly formatted [#805](https://github.com/pingcap/tidb-dashboard/pull/805)
 
 + TiFlash
 
