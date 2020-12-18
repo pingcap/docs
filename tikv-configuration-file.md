@@ -737,7 +737,7 @@ Configuration items related to RocksDB
 
 ### `rate-bytes-per-sec`
 
-+ The maximum rate permitted by RocksDB's compaction rate limiter 
++ The maximum rate permitted by RocksDB's compaction rate limiter
 + Default value: `10GB`
 + Minimum value: `0`
 + Unit: B|KB|MB|GB
