@@ -67,7 +67,7 @@ TiDB version: 4.0.9
     + Backup & Restore (BR)
 
         - Disallow the ambiguous `--checksum false` argument in the command line, which does not correctly disable checksum. Only `--checksum=false` is accepted. [#588](https://github.com/pingcap/br/pull/588)
-        - Support changing the PD configuration temporarily [#596](https://github.com/pingcap/br/pull/596)
+        - Support changing the PD configuration temporarily so that PD can recover the original configuration after BR accidentally exists [#596](https://github.com/pingcap/br/pull/596)
         - Support analyzing tables after restore [#622](https://github.com/pingcap/br/pull/622)
         - Retry for the `read index not ready` and `proposal in merging mode` errors [#626](https://github.com/pingcap/br/pull/626)
 
