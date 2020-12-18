@@ -173,7 +173,7 @@ TiDB version: 4.0.9
         - Fix an issue of replication interruption caused by early GC or the latency of updating `TableInfo` when the schema storage caches TiDB tables [#1114](https://github.com/pingcap/ticdc/pull/1114)
         - Fix the issue that the schema storage costs too much memory when DDL operations are frequent [#1127](https://github.com/pingcap/ticdc/pull/1127)
         - Fix the goroutine leak when a changefeed is paused or stopped [#1075](https://github.com/pingcap/ticdc/pull/1075)
-        - Increase the maximum retry timeout to 60 seconds in Kafka producer to prevent replication interruption caused by the service or network jitter in the downstream Kafka [#1118](https://github.com/pingcap/ticdc/pull/1118)
+        - Increase the maximum retry timeout to 600 seconds in Kafka producer to prevent replication interruption caused by the service or network jitter in the downstream Kafka [#1118](https://github.com/pingcap/ticdc/pull/1118)
         - Fix a bug that the Kafka batch size does not take effect [#1112](https://github.com/pingcap/ticdc/pull/1112)
         - Fix a bug that some tables' row change might be lost when the network between TiCDC and PD has jitter and when there are paused changefeeds being resumed at the same time [#1213](https://github.com/pingcap/ticdc/pull/1213)
         - Fix a bug that the TiCDC process might exit when the network between TiCDC and PD is not stable [#1218](https://github.com/pingcap/ticdc/pull/1218)
