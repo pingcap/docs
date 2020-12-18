@@ -22,8 +22,8 @@ TiDB Binlog is the widely used component for replicating incremental data. It pr
 
 ### Topology templates
 
-- [The simple template for the TiDB Binlog topology (the downstream type is `MySQL`)](https://github.com/pingcap/docs/blob/master/config-templates/simple-tidb-binlog.yaml)
-- [The simple template for the TiDB Binlog topology (the downstream type is `file`)](https://github.com/pingcap/docs/blob/master/config-templates/simple-file-binlog.yaml)
+- [The simple template for the TiDB Binlog topology (with `mysql` as the downstream type)](https://github.com/pingcap/docs/blob/master/config-templates/simple-tidb-binlog.yaml)
+- [The simple template for the TiDB Binlog topology (with `file` as the downstream type)](https://github.com/pingcap/docs/blob/master/config-templates/simple-file-binlog.yaml)
 - [The complex template for the TiDB Binlog topology](https://github.com/pingcap/docs/blob/master/config-templates/complex-tidb-binlog.yaml)
 
 ### Key parameters
@@ -43,11 +43,11 @@ The key parameters in the topology configuration templates are as follows:
 
 - `drainer_servers.config.syncer.db-type`
 
-    The downstream type of binlog. Currently, `mysql`, `tidb`, `kafka` and `file` are supported.
+    The downstream type of TiDB Binlog. Currently, `mysql`, `tidb`, `kafka`, and `file` are supported.
 
 - `drainer_servers.config.syncer.to`
 
-    The downstream configuration of binlog. Depending on different `db-type`s, this parameter can configure the connection parameters of the downstream database, the connection parameters of Kafka, and the file save path. For details, refer to [TiDB Binlog Configuration File](/tidb-binlog/tidb-binlog-configuration-file.md#syncerto).
+    The downstream configuration of TiDB Binlog. Depending on different `db-type`s, you can use this configuration item to configure the connection parameters of the downstream database, the connection parameters of Kafka, and the file save path. For details, refer to [TiDB Binlog Configuration File](/tidb-binlog/tidb-binlog-configuration-file.md#syncerto).
 
 > **Note:**
 >
