@@ -159,4 +159,3 @@ set config tikv pessimistic-txn.pipelined='true';
 3. The execution time limit for pessimistic transactions.
 
     In TiDB 4.0, garbage collection (GC) does not affect the running transactions, but the execution time of pessimistic transactions cannot exceed 10 minutes by default. You can modify this limit by editing `max-txn-ttl` under `[performance]` in the TiDB configuration file.
-
