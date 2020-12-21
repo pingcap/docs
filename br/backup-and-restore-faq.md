@@ -74,6 +74,6 @@ You can use [`filter.rules`](https://github.com/pingcap/ticdc/blob/7c3c2336f9815
 
 If the cluster backed up using BR has TiFlash, the `TableInfo` stores the TiFlash information when BR restoring the backup data. If the restored cluster does not have TiFlash at this time, the error `region is unavailable` is reported. This bug is planned to fix in future versions.
 
-## Does BR support in-place full recovery of some historical backup data?
+## Does BR support in-place full recovery of some historical backup?
 
-No. BR does not support in-place full recovery of some historical backup data.
+No. BR does not support in-place full recovery of some historical backup.
