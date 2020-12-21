@@ -65,4 +65,4 @@ aliases: ['/docs/ROADMAP/','/docs/roadmap/','/docs/stable/roadmap/','/docs/v4.0/
 
 ## TiDB Operator
 
-See [TiDB Operator Roadmap](https://docs.pingcap.com/tidb-in-kubernetes/dev/roadmap).
+See [TiDB Operator Roadmap](https://docs.pingcap.com/tidb-in-kubernetes/stable/roadmap).
