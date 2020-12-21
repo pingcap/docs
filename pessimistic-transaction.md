@@ -138,7 +138,14 @@ This feature is disabled by default. To enable it, modify the TiKV configuration
 pipelined = true
 ```
 
-<<<<<<< HEAD
+If the TiKV cluster is v4.0.9 or later, you can also dynamically enable this feature by [modifying TiKV configuration online](/dynamic-config.md#modify-tikv-configuration-online):
+
+{{< copyable "sql" >}}
+
+```sql
+set config tikv pessimistic-txn.pipelined='true';
+```
+
 ## FAQ
 
 1. The TiDB log shows `pessimistic write conflict, retry statement`.
@@ -152,12 +159,4 @@ pipelined = true
 3. The execution time limit for pessimistic transactions.
 
     In TiDB 4.0, garbage collection (GC) does not affect the running transactions, but the execution time of pessimistic transactions cannot exceed 10 minutes by default. You can modify this limit by editing `max-txn-ttl` under `[performance]` in the TiDB configuration file.
-=======
-If the TiKV cluster is v4.0.9 or later, you can also dynamically enable this feature by [modifying TiKV configuration online](/dynamic-config.md#modify-tikv-configuration-online):
 
-{{< copyable "sql" >}}
-
-```sql
-set config tikv pessimistic-txn.pipelined='true';
-```
->>>>>>> ef5b89ae... add more details to pipelined lock (#4352)
