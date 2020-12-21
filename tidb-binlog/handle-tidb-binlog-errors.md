@@ -33,3 +33,7 @@ Solution: Clean up the disk space and then restart Pump.
 Cause: When Pump is started, it notifies all Drainer nodes that are in the `online` state. If it fails to notify Drainer, this error log is printed.
 
 Solution: Use the [binlogctl tool](/tidb-binlog/binlog-control.md) to check whether each Drainer node is normal or not. This is to ensure that all Drainer nodes that are in the `online` state are working normally. If the state of a Drainer node is not consistent with its actual working status, use the binlogctl tool to change its state and then restart Pump.
+
+## Data loss is found during TiDB Binlog replication
+
+You need to confirm that all TiDB instances enable TiDB Binlog and run normally. If the cluster version is greater than v3.0, use the `curl {TiDB_IP}:{STATUS_PORT}/info/all` command to confirm the TiDB Binlog status on all TiDB instances.需要确认所有 TiDB 实例均开启了 TiDB Binlog，并且运行状态正常。如果集群版本大于 v3.0，可以使用 `curl {TiDB_IP}:{STATUS_PORT}/info/all` 命令确认所有 TiDB 实例上的 TiDB Binlog 状态。

@@ -190,3 +190,7 @@ See also [How to properly restart TiDB Lightning?](#how-to-properly-restart-tidb
 2. Delete the entire "import" directory on the machine hosting `tikv-importer`.
 
 3. Delete all tables and databases created on the TiDB cluster, if needed.
+
+## Why does TiDB Lightning report the `could not find first pair, this shouldn't happen` error?
+
+The reason for the error is that an exception occurs when traversing the locally sorted files, which may occur when the number of files opened by lightning exceeds the upper limit of the system. In Linux system, you can use the `ulimit -n` command to confirm whether this value is too small. It is recommended to adjust this setting to 1000000 (`ulimit -n 1000000`) during lightning import.
