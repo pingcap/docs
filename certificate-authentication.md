@@ -149,7 +149,7 @@ After generating the server key and certificate, you need to generate the key an
     Country Name (2 letter code) [AU]:US
     State or Province Name (full name) [Some-State]:California
     Locality Name (e.g. city) []:San Francisco
-    Organization Name (eg, company) [Internet Widgits Pty Ltd]:PingCAP Inc.
+    Organization Name (e.g. company) [Internet Widgits Pty Ltd]:PingCAP Inc.
     Organizational Unit Name (e.g. section) []:TiDB
     Common Name (e.g. server FQDN or YOUR name) []:tpch-user1
     Email Address []:zz@pingcap.com
