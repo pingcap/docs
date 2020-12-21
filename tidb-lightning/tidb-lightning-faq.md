@@ -120,7 +120,7 @@ To stop the `tidb-lightning` process, you can choose the corresponding operation
 
 - For deployment using TiDB Ansible: run `scripts/stop_lightning.sh` on the Lightning server.
 
-- For manual deployment: if `tidb-lightning` is running in foreground, press <kbd>Ctrl</kbd>+<kbd>C</kbd> to exit. Otherwise, obtain the process ID using the `ps aux | grep tidb-lighting` command and then terminate the process using the `kill -2 «pid»` command.
+- For manual deployment: if `tidb-lightning` is running in foreground, press <kbd>Ctrl</kbd>+<kbd>C</kbd> to exit. Otherwise, obtain the process ID using the `ps aux | grep tidb-lightning` command and then terminate the process using the `kill -2 «pid»` command.
 
 ## Why the `tidb-lightning` process suddenly quits while running in background?
 
@@ -193,4 +193,4 @@ See also [How to properly restart TiDB Lightning?](#how-to-properly-restart-tidb
 
 ## Why does TiDB Lightning report the `could not find first pair, this shouldn't happen` error?
 
-The reason for the error is that an anomaly occurs when scanning the locally sorted files, possibly because the number of files opened in lightning exceeds the system limit. In Linux system, you can use the `ulimit -n` command to confirm whether this value is too small. It is recommended that you adjust this value to `1000000` (`ulimit -n 1000000`) during lightning import.
+The reason for the error is that an anomaly occurs when scanning the locally sorted files, possibly because the number of files opened in Lightning exceeds the system limit. In Linux system, you can use the `ulimit -n` command to confirm whether this value is too small. It is recommended that you adjust this value to `1000000` (`ulimit -n 1000000`) during Lightning import.

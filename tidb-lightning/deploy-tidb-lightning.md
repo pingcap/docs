@@ -117,7 +117,7 @@ You can deploy TiDB Lightning using TiDB Ansible together with the [deployment o
 
 4. Mount the data source to the path specified in the `data_source_dir` setting.
 
-5. Log in to the `tidb-lightning` server and edit the `conf/tidb-lighting.toml` file as follows:
+5. Log in to the `tidb-lightning` server and edit the `conf/tidb-lightning.toml` file as follows:
 
     ```
     [tikv-importer]
