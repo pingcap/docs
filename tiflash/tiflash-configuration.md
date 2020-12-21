@@ -35,17 +35,6 @@ This section introduces the configuration parameters of TiFlash.
 ### Configure the `tiflash.toml` file
 
 ```toml
-<<<<<<< HEAD
-tmp_path = The path in which the TiFlash temporary files are stored.
-path = The TiFlash data storage path.     # If there are multiple directories, separate each directory with a comma.
-path_realtime_mode = false # The default value is `false`. If you set it to `true` and multiple directories are deployed in the path, the latest data is stored in the first directory and older data is stored in the rest directories.
-listen_host = The listening host for supporting services such as TPC/HTTP. It is recommended to configure it as `0.0.0.0`.
-tcp_port = The TiFlash TCP service port.
-http_port = The TiFlash HTTP service port.
-mark_cache_size = 5368709120 # The cache size limit of the metadata of a data block. Generally, you do not need to change this value.
-minmax_index_cache_size = 5368709120 # The cache size limit of the min-max index of a data block. Generally, you do not need to change this value.
-```
-=======
 ## The listening host for supporting services such as TPC/HTTP. It is recommended to configure it as "0.0.0.0", which means to listen on all IP addresses of this machine.
 listen_host = "0.0.0.0"
 ## The TiFlash TCP service port.
@@ -103,7 +92,6 @@ delta_index_cache_size = 0
     ## The maximum storage capacity of each directory in `storage.latest.dir`.
     ## If it is not set, or is set to multiple 0, the actual disk (the disk where the directory is located) capacity is used.
     # capacity = [ 10737418240, 10737418240 ]
->>>>>>> 3c59e93c... tiflash: Add desc of new TiFlash storage settings and guidelines for upgrading in v4.0.9 (#4290)
 
 [flash]
     tidb_status_addr = TiDB status port and address. # Multiple addresses are separated with commas.
@@ -148,15 +136,15 @@ delta_index_cache_size = 0
     ## of DeltaTree Storage Engine uses logical split.
     ## Using the logical split can reduce the write amplification, and improve the write speed.
     ## However, these are at the cost of disk space waste.
-    dt_enable_logical_split = true 
+    dt_enable_logical_split = true
 
     ## The memory usage limit for the generated intermediate data when a single
     ## coprocessor query is executed. The default value is 0, which means no limit.
-    max_memory_usage = 0 
+    max_memory_usage = 0
 
     ## The memory usage limit for the generated intermediate data when all queries
     ## are executed. The default value is 0 (in bytes), which means no limit.
-    max_memory_usage_for_all_queries = 0 
+    max_memory_usage_for_all_queries = 0
 ```
 
 ### Configure the `tiflash-learner.toml` file
@@ -166,9 +154,9 @@ delta_index_cache_size = 0
     engine-addr = The external access address of the TiFlash coprocessor service.
 [raftstore]
     ## Specifies the number of threads that handle snapshots.
-    ## The default number is 2. 
+    ## The default number is 2.
     ## If you set it to 0, the multi-thread optimization is disabled.
-    snap-handle-pool-size = 2 
+    snap-handle-pool-size = 2
 
     ## Specifies the shortest interval at which Raft store persists WAL.
     ## You can properly increase the latency to reduce IOPS usage.
@@ -181,7 +169,7 @@ In addition to the items above, other parameters are the same with those of TiKV
 
 ### Multi-disk deployment
 
-TiFlash supports multi-disk deployment. If there are multiple disks in your TiFlash node, you can make full use of those disks by configuring the parameters described in the following sections. For TiFlash's configuration template to be used for TiUP, see [The complex template for the TiFlash topology](https://github.com/pingcap/docs/blob/master/config-templates/complex-tiflash.yaml). 
+TiFlash supports multi-disk deployment. If there are multiple disks in your TiFlash node, you can make full use of those disks by configuring the parameters described in the following sections. For TiFlash's configuration template to be used for TiUP, see [The complex template for the TiFlash topology](https://github.com/pingcap/docs/blob/release-4.0/config-templates/complex-tiflash.yaml).
 
 #### Multi-disk deployment with TiDB version earlier than v4.0.9
 
