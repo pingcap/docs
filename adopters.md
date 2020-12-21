@@ -53,7 +53,6 @@ This is a list of TiDB adopters in various industries.
 |[GAEA](http://www.gaea.com/en/)|Gaming|[English](https://pingcap.com/case-studies/2017-05-22-Comparison-between-MySQL-and-TiDB-with-tens-of-millions-of-data-per-day); [Chinese](https://pingcap.com/cases-cn/user-case-gaea-ad/)|
 |[YOOZOO Games](https://www.crunchbase.com/organization/yoozoo-games)|Gaming|[Chinese](https://pingcap.com/cases-cn/user-case-youzu/)|
 |[Seasun Games](https://www.crunchbase.com/organization/seasun)|Gaming|[Chinese](https://pingcap.com/cases-cn/user-case-xishanju/)|
-|[NetEase Games](https://game.163.com/en/)|Gaming||
 |[FUNYOURS JAPAN](http://company.funyours.co.jp/)|Gaming|[Chinese](https://pingcap.com/cases-cn/user-case-funyours-japan/)|
 |[Hoodinn](https://www.crunchbase.com/organization/hoodinn)|Gaming||
 |[SEA group](https://sea-group.org/?lang=en)|Gaming||
@@ -94,4 +93,3 @@ This is a list of TiDB adopters in various industries.
 |[Acewill](https://www.crunchbase.com/organization/acewill)|FoodTech||
 |[Ausnutria Dairy](https://www.crunchbase.com/organization/ausnutria-dairy)|FoodTech||
 |[Qingdao Telaidian](https://www.teld.cn/)|Electric Car Charger|[Chinese](https://pingcap.com/cases-cn/user-case-telaidian/)|
-
