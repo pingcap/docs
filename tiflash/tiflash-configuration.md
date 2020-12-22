@@ -65,9 +65,6 @@ delta_index_cache_size = 0
 
 ## Storage paths settings take effect starting from v4.0.9
 [storage]
-    ## Limits the total write rate of background tasks in bytes per second. 0 means no limit.
-    bg_task_io_rate_limit = 0
-
     [storage.main]
     ## The list of directories to store the main data. More than 90% of the total data is stored in
     ## the directory list.
