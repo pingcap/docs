@@ -12,7 +12,7 @@ TiDB version: 3.0.20
 
 + TiDB
 
-    - Deprecate `enable-streaming` [#21054](https://github.com/pingcap/tidb/pull/21054)
+    - Deprecate the `enable-streaming` configuration item [#21054](https://github.com/pingcap/tidb/pull/21054)
 
 ## Improvements
 
@@ -31,25 +31,25 @@ TiDB version: 3.0.20
     - Fix the resolved txn status cache for pessimistic transactions. [#21706](https://github.com/pingcap/tidb/pull/21706)
     - Fix the statistics are inaccurate when querying `INFORMATION_SCHEMA.TIDB_HOT_REGIONS` [#21319](https://github.com/pingcap/tidb/pull/21319)
 [#21222](https://github.com/pingcap/tidb/pull/21222)
-    - `DELETE` may not delete data correctly when the database name is not in pure lower representation [#21205](https://github.com/pingcap/tidb/pull/21205)
-    - Fix stack overflow when building recursive view [#21000](https://github.com/pingcap/tidb/pull/21000)
-    - Fix an goroutine leak issue in TiKV client [#20863](https://github.com/pingcap/tidb/pull/20863)
-    - Fix wrong default zero value for year type [#20828](https://github.com/pingcap/tidb/pull/20828)
-    - Avoid goroutine leak in index lookup join [#20791](https://github.com/pingcap/tidb/pull/20791)
-    - Fix "insert select for update" return malformed packet in pessimistic transaction [#20681](https://github.com/pingcap/tidb/pull/20681)
-    - Fix unknown time zone 'posixrules' [#20605](https://github.com/pingcap/tidb/pull/20605)
-    - Fix a problem of data too long when converting from unsigned integer to bit [#20362](https://github.com/pingcap/tidb/pull/20362)
-    - Fix corrupted default value for bit type column [#20339](https://github.com/pingcap/tidb/pull/20339)
-    - Fix potentially incorrect results when one of the equal condition is Enum of Set type [#20296](https://github.com/pingcap/tidb/pull/20296)
-    - Fix wrong behavior for `!= any()` [#20061](https://github.com/pingcap/tidb/pull/20061)
-    - Fix an issue that invalid results using BETWEEN...AND... with type conversion [#21503](https://github.com/pingcap/tidb/pull/21503)
-    - Fix compatibility for `ADDDATE` function [#21008](https://github.com/pingcap/tidb/pull/21008)
-    - Set correct default value for new added enum column. [#20999](https://github.com/pingcap/tidb/pull/20999)
-    - Fix the result of SQL `select DATE_ADD('2007-03-28 22:08:28',INTERVAL "-2.-2" SECOND)` to be same with the MySQL [#20627](https://github.com/pingcap/tidb/pull/20627)
-    - Fix incorrect default value when modifying column [#20532](https://github.com/pingcap/tidb/pull/20532)
-    - Fix function timestamp() get wrong result when input argument is type of float/decimal [#20469](https://github.com/pingcap/tidb/pull/20469)
-    - Fix a potentially deadlock problem in statistics [#20424](https://github.com/pingcap/tidb/pull/20424)
-    - Fix FLOAT data type: out of range data should not be inserted [#20251](https://github.com/pingcap/tidb/pull/20251)
+    - Fix the issue that `DELETE` might not delete data correctly when the database name is not in a pure lower representation [#21205](https://github.com/pingcap/tidb/pull/21205)
+    - Fix the issue of stack overflow that occurs when building the recursive view [#21000](https://github.com/pingcap/tidb/pull/21000)
+    - Fix the issue of goroutine leak in TiKV client [#20863](https://github.com/pingcap/tidb/pull/20863)
+    - Fix the wrong default zero value for the `year` type [#20828](https://github.com/pingcap/tidb/pull/20828)
+    - Fix the issue of goroutine leak in index lookup join [#20791](https://github.com/pingcap/tidb/pull/20791)
+    - Fix the issue that executing `INSERT SELECT FOR UPDATE` returns the malformed packet in the pessimistic transaction [#20681](https://github.com/pingcap/tidb/pull/20681)
+    - Fix the unknown time zone `'posixrules'` [#20605](https://github.com/pingcap/tidb/pull/20605)
+    - Fix the issue that occurs when converting the unsigned integer type to the bit type [#20362](https://github.com/pingcap/tidb/pull/20362)
+    - Fix the corrupted default value of the bit type column [#20339](https://github.com/pingcap/tidb/pull/20339)
+    - Fix the potentially incorrect results when one of the equal condition is the `Enum` or `Set` type [#20296](https://github.com/pingcap/tidb/pull/20296)
+    - Fix a wrong behavior of `!= any()` [#20061](https://github.com/pingcap/tidb/pull/20061)
+    - Fix the issue that type conversion in `BETWEEN...AND...` returns invalid results [#21503](https://github.com/pingcap/tidb/pull/21503)
+    - Fix a compatibility issue with the `ADDDATE` function [#21008](https://github.com/pingcap/tidb/pull/21008)
+    - Set the correct default value for newly added `Enum` column [#20999](https://github.com/pingcap/tidb/pull/20999)
+    - Fix the result of SQL statements like `SELECT DATE_ADD('2007-03-28 22:08:28',INTERVAL "-2.-2" SECOND)` to be compatible with MySQL [#20627](https://github.com/pingcap/tidb/pull/20627)
+    - Fix the incorrect default value when modifying the column type [#20532](https://github.com/pingcap/tidb/pull/20532)
+    - Fix the issue that the `timestamp` function gets wrong result when the input argument is the `float` or `decimal` type [#20469](https://github.com/pingcap/tidb/pull/20469)
+    - Fix a potential deadlock issue in statistics [#20424](https://github.com/pingcap/tidb/pull/20424)
+    - Fix the issue that the overflown float type data is inserted [#20251](https://github.com/pingcap/tidb/pull/20251)
 
 + TiKV
 
@@ -57,4 +57,5 @@ TiDB version: 3.0.20
 
 + PD
 
-    - Change the log level of the stale Region when loading Regions [#3064](https://github.com/pingcap/pd/pull/3064)
+    - Change the log level of the stale Region when loading Regions
+    - Fix the issue that too many logs are printed when starting PD and when there are too many stale Regions [#3064](https://github.com/pingcap/pd/pull/3064)
