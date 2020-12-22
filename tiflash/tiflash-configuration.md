@@ -45,8 +45,6 @@ http_port = 8123
 mark_cache_size = 5368709120
 ## The cache size limit of the min-max index of a data block. Generally, you do not need to change this value.
 minmax_index_cache_size = 5368709120
-## The cache size limit of the DeltaIndex. The default value is 0, which means no limit.
-delta_index_cache_size = 0
 
 ## The storage path of TiFlash data. If there are multiple directories, separate each directory with a comma.
 ## `path` and `path_realtime_mode` are deprecated since v4.0.9. Use the configurations
