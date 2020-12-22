@@ -1,19 +1,19 @@
 ---
 title: Clustered Indexes
-summary: Learn how Clustered Indexes apply to TiDB.
+summary: Learn how clustered indexes apply to TiDB.
 ---
 
 # Clustered Indexes
 
 > **Warning:**
 >
-> Clustered Indexes is an experimental feature introduced in TiDB 5.0.
+> Clustered indexes is an experimental feature introduced in TiDB 5.0.
 
-Clustered Indexes provide the ability to organize tables in a way that can improve the performance of certain queries. The term _clustered_ in this context refers to the _organization of how data is stored_ and not _a group of database servers working together_. Some database management systems may also refer to clustered indexes as _index-organized tables_ (IOT).
+Clustered indexes provide the ability to organize tables in a way that can improve the performance of certain queries. The term _clustered_ in this context refers to the _organization of how data is stored_ and not _a group of database servers working together_. Some database management systems may also refer to clustered indexes as _index-organized tables_ (IOT).
 
 TiDB only supports clustering by a table's `PRIMARY KEY`. With clustered indexes enabled, the terms _the_ `PRIMARY KEY` and _the clustered index_ might be used interchangeably.
 
-## Default Behavior
+## Default behavior
 
 TiDB has always supported clustered indexes, provided the following criteria are true:
 
@@ -95,7 +95,7 @@ EXPLAIN SELECT guid FROM does_not_cluster_by_default WHERE b = 'aaaa';
 4 rows in set (0.00 sec)
 ```
 
-# Clustered Indexes
+# With clustered indexes
 
 New to TiDB 5.0, clustering is permitted by any `PRIMARY KEY`. The following `EXPLAIN` output shows the previous example with clustered indexes now enabled:
 
@@ -175,7 +175,7 @@ Records: 2  Duplicates: 0  Warnings: 0
 
 This behavior is consistent with MySQL, where the InnoDB storage engine will by default cluster by any `PRIMARY KEY`.
 
-## Storage Considerations
+## Storage considerations
 
 Because the `PRIMARY KEY` replaces a 64-bit `handle` as the internal pointer to table rows, using clustered indexes might increase storage requirements. This is particularly impactful on tables that contain many secondary indexes. Consider the following example:
 
