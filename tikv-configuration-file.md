@@ -737,23 +737,23 @@ Configuration items related to RocksDB
 
 ### `rate-bytes-per-sec`
 
-+ The maximum rate permitted by Rate Limiter
-+ Default value: `0`
++ The maximum rate permitted by RocksDB's compaction rate limiter
++ Default value: `10GB`
 + Minimum value: `0`
-+ Unit: Bytes
++ Unit: B|KB|MB|GB
 
 ### `rate-limiter-mode`
 
-+ Rate LImiter mode
++ RocksDB's compaction rate limiter mode
 + Optional values: `1` (`ReadOnly`), `2` (`WriteOnly`), `3` (`AllIo`)
 + Default value: `2`
 + Minimum value: `1`
 + Maximum value: `3`
 
-### `auto-tuned`
+### `rate-limiter-auto-tuned`
 
-+ Determines whether to automatically optimize the configuration of the Rate LImiter
-+ Default value: `false`
++ Determines whether to automatically optimize the configuration of the RocksDB's compaction rate limiter
++ Default value: `true`
 
 ### `enable-pipelined-write`
 
@@ -922,7 +922,7 @@ Configuration items related to `rocksdb.defaultcf`
 
 ### `target-file-size-base`
 
-+ The size of the target file at base level
++ The size of the target file at base level. This value is overridden by `compaction-guard-max-output-file-size` when the `enable-compaction-guard` value is `true`.
 + Default: `"8MB"`
 + Minimum value: `0`
 + Unit: KB|MB|GB
@@ -994,6 +994,23 @@ Configuration items related to `rocksdb.defaultcf`
 
 + The hard limit on the pending compaction bytes
 + Default value: `"256GB"`
++ Unit: KB|MB|GB
+
+### `enable-compaction-guard`
+
++ Enables or disables the compaction guard, which is an optimization to split SST files at TiKV Region boundaries. This optimization can help reduce compaction I/O and allows TiKV to use larger SST file size (thus less SST files overall) and at the time efficiently clean up stale data when migrating Regions.
++ Default value: `true`
+
+### `compaction-guard-min-output-file-size`
+
++ The minimum SST file size when the compaction guard is enabled. This configuration prevents SST files from being too small when the compaction guard is enabled.
++ Default value: `"8MB"`
++ Unit: KB|MB|GB
+
+### `compaction-guard-max-output-file-size`
+
++ The maximum SST file size when the compaction guard is enabled. The configuration prevents SST files from being too large when the compaction guard is enabled. This configuration overrides `target-file-size-base` for the same column family.
++ Default value: `"128MB"`
 + Unit: KB|MB|GB
 
 ## `rocksdb.defaultcf.titan`
@@ -1094,6 +1111,23 @@ Configuration items related to `rocksdb.writecf`
 + Determines whether to put the entire key to bloom filter
 + Default value: `false`
 
+### `enable-compaction-guard`
+
++ Enables or disables the compaction guard, which is an optimization to split SST files at TiKV Region boundaries. This optimization can help reduce compaction I/O and allows TiKV to use larger SST file size (thus less SST files overall) and at the time efficiently clean up stale data when migrating Regions.
++ Default value: `true`
+
+### `compaction-guard-min-output-file-size`
+
++ The minimum SST file size when the compaction guard is enabled. This configuration prevents SST files from being too small when the compaction guard is enabled.
++ Default value: `"8MB"`
++ Unit: KB|MB|GB
+
+### `compaction-guard-max-output-file-size`
+
++ The maximum SST file size when the compaction guard is enabled. The configuration prevents SST files from being too large when the compaction guard is enabled. This configuration overrides `target-file-size-base` for the same column family.
++ Default value: `"128MB"`
++ Unit: KB|MB|GB
+
 ## rocksdb.lockcf
 
 Configuration items related to `rocksdb.lockcf`
@@ -1158,6 +1192,36 @@ Configuration items related to security
 
 + This configuration item enables or disables log redaction. If the configuration value is set to `true`, all user data in the log will be replaced by `?`.
 + Default value: `false`
+
+## security.encryption
+
+Configuration items related to [encryption at rest](/encryption-at-rest.md) (TDE).
+
+### `data-encryption-method`
+
++ The encryption method for data files
++ Value options: "plaintext", "aes128-ctr", "aes192-ctr", and "aes256-ctr"
++ A value other than "plaintext" means that encryption is enabled, in which case the master key must be specified.
++ Default value: `"plaintext"`
+
+### `data-key-rotation-period`
+
++ Specifies how often TiKV rotates the data encryption key.
++ Default value: `7d`
+
+### enable-file-dictionary-log
+
++ Enables the optimization to reduce I/O and mutex contention when TiKV manages the encryption metadata.
++ To avoid possible compatibility issues when this configuration parameter is enabled (by default), see [Encryption at Rest - Compatibility between TiKV versions](/encryption-at-rest.md#compatibility-between-tikv-versions) for details.
++ Default value: `true`
+
+### master-key
+
++ Specifies the master key if encryption is enabled. To learn how to configure a master key, see [Encryption at Rest - Configure encryption](/encryption-at-rest.md#configure-encryption).
+
+### previous-master-key
+
++ Specifies the old master key when rotating the new master key. The configuration format is the same as that of `master-key`. To learn how to configure a master key, see [Encryption at Rest - Configure encryption](/encryption-at-rest.md#configure-encryption).
 
 ## `import`
 
