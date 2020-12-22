@@ -22,9 +22,9 @@ TiDB version: 3.0.20
     - Avoid goroutine leak in index lookup join [#20791](https://github.com/pingcap/tidb/pull/20791)
     - Fix "insert select for update" return malformed packet in pessimistic txn [#20681](https://github.com/pingcap/tidb/pull/20681)
     - Fix unknown time zone 'posixrules'. [#20605](https://github.com/pingcap/tidb/pull/20605)
-    - Fix data too long when converting to bit returns a null value [#20362](https://github.com/pingcap/tidb/pull/20362)
+    - Fix a problem of data too long when converting from unsigned integer to bit [#20362](https://github.com/pingcap/tidb/pull/20362)
     - Fix corrupted default value for bit type column. [#20339](https://github.com/pingcap/tidb/pull/20339)
-    - Avoid propagate column optimization for Hybrid type. [#20296](https://github.com/pingcap/tidb/pull/20296)
+    - Fix potentially incorrect results when one of the equal condition is Enum of Set type. [#20296](https://github.com/pingcap/tidb/pull/20296)
     - Fix wrong behavior for != any() [#20061](https://github.com/pingcap/tidb/pull/20061)
 
 ## Others
@@ -36,9 +36,9 @@ TiDB version: 3.0.20
     - Fix compatibility for `ADDDATE` function [#21008](https://github.com/pingcap/tidb/pull/21008)
     - Set correct default value for new added enum column. [#20999](https://github.com/pingcap/tidb/pull/20999)
     - Fix the result of SQL `select DATE_ADD('2007-03-28 22:08:28',INTERVAL "-2.-2" SECOND)` to be same with the MySQL; [#20627](https://github.com/pingcap/tidb/pull/20627)
-    - Fix #20490, incorrect default value when modify column [#20532](https://github.com/pingcap/tidb/pull/20532)
+    - Fix incorrect default value when modify column [#20532](https://github.com/pingcap/tidb/pull/20532)
     - Fix function timestamp() get wrong result when input argument is type of float/decimal [#20469](https://github.com/pingcap/tidb/pull/20469)
-    - Statistics: fix an unsafe lock operation and adjust some logging levels [#20424](https://github.com/pingcap/tidb/pull/20424)
+    - fix a potentially deadlock problem in statistic. [#20424](https://github.com/pingcap/tidb/pull/20424)
     - Fix FLOAT data type: out of range data should not be inserted [#20251](https://github.com/pingcap/tidb/pull/20251)
 
 + TiKV
