@@ -152,7 +152,6 @@ delta_index_cache_size = 0
     ## is set to `true`, all user data in the log will be replaced by `?`.
     ## Note that you also need to set `security.redact-info-log` for tiflash-learner's logging
     ## in tiflash-learner.toml
-    ## logging files.
     # redact_info_log = false
 
     ## Path of the file that contains a list of trusted SSL CAs. If set, the following settings
