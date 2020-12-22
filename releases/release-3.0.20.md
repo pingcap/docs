@@ -29,7 +29,7 @@ TiDB version: 3.0.20
 + TiDB
 
     - Fix the resolved txn status cache for pessimistic transactions. [#21706](https://github.com/pingcap/tidb/pull/21706)
-    - Fix the statistics are inaccurate when querying `INFORMATION_SCHEMA.TIDB_HOT_REGIONS` [#21319](https://github.com/pingcap/tidb/pull/21319)
+    - Fix the issue of inaccurate statistics that occurs when querying `INFORMATION_SCHEMA.TIDB_HOT_REGIONS` [#21319](https://github.com/pingcap/tidb/pull/21319)
 [#21222](https://github.com/pingcap/tidb/pull/21222)
     - Fix the issue that `DELETE` might not delete data correctly when the database name is not in a pure lower representation [#21205](https://github.com/pingcap/tidb/pull/21205)
     - Fix the issue of stack overflow that occurs when building the recursive view [#21000](https://github.com/pingcap/tidb/pull/21000)
