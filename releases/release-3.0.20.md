@@ -57,5 +57,4 @@ TiDB version: 3.0.20
 
 + PD
 
-    - Change the log level of the stale Region when loading Regions
     - Fix the issue that too many logs are printed when starting PD and when there are too many stale Regions [#3064](https://github.com/pingcap/pd/pull/3064)
