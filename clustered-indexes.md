@@ -7,7 +7,7 @@ summary: Learn how clustered indexes apply to TiDB.
 
 > **Warning:**
 >
-> Clustered indexes is an experimental feature introduced in TiDB 5.0.
+> Clustered indexes is an experimental feature introduced in TiDB 5.0-rc.
 
 Clustered indexes provide the ability to organize tables in a way that can improve the performance of certain queries. The term _clustered_ in this context refers to the _organization of how data is stored_ and not _a group of database servers working together_. Some database management systems may also refer to clustered indexes as _index-organized tables_ (IOT).
 
