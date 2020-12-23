@@ -250,7 +250,7 @@ Configuration items related to scheduling
 
 ### `high-space-ratio`
 
-+ The threshold ratio below which the capacity of the store is sufficient. This configuration only works when `region-score-formula-version` is set to `v1`.
++ The threshold ratio below which the capacity of the store is sufficient. This configuration takes effect only when `region-score-formula-version` is set to `v1`.
 + Default value: `0.7`
 + Minimum value: greater than `0`
 + Maximum value: less than `1`
