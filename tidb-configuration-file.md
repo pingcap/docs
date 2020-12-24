@@ -281,17 +281,13 @@ Configuration items related to performance.
 - Default value: `0`
 - The default `0` indicates using all the CPUs on the machine. You can also set it to n, and then TiDB uses n CPUs.
 
-<<<<<<< HEAD
 ### `max-memory`
 
 - The maximum memory limit for the Prepared Least Recently Used (LRU) caching. If this value exceeds `performance.max-memory * (1 - prepared-plan-cache.memory-guard-ratio)`, the elements in the LRU are removed.
 - Default value: `0`
 - This configuration only takes effect when `prepared-plan-cache.enabled` is `true`. When the size of the LRU is greater than `prepared-plan-cache.capacity`, the elements in the LRU are also removed.
 
-### `server-memory-quota`
-=======
 ### `server-memory-quota` <span class="version-mark">New in v4.0.9</span>
->>>>>>> 7b5dffb4... Added introduction version description (#4473)
 
 > **Warning:**
 >
