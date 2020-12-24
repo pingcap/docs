@@ -185,4 +185,4 @@ CREATE TABLE t1 (
 );
 ```
 
-Since the pointer to the `guid` is a `char(32)`, each index value for `b` will now require approximately `8 + 32 = 40 bytes` (a `BIGINT` value requires 8 bytes for storage). This compares to `8 + 8 = 16 bytes` for non-clustered tables. The exact storage requirements will differ after compression has been applied.
+Because the pointer to the `guid` is a `char(32)`, each index value for `b` will now require approximately `8 + 32 = 40 bytes` (a `BIGINT` value requires 8 bytes for storage). This compares to `8 + 8 = 16 bytes` for non-clustered tables. The exact storage requirements will differ after compression has been applied.
