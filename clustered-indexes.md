@@ -19,7 +19,7 @@ TiDB has always supported clustered indexes, provided the following criteria are
 - The primary key is an `INTEGER` or `BIGINT`
 - The primary key consists of only one column
 
-When any of these criteria are not met, TiDB will create a hidden 64-bit `handle` to organize the table. Querying table rows by a clustered index is more efficient than by a non-clustered index because it can be completed as a single step. The following `EXPLAIN` output compares a table that supports clustered indexes with one that does not:
+When any of these criteria are not met, TiDB will create a hidden 64-bit `handle` value to organize the table. Querying table rows by a clustered index is more efficient than by a non-clustered index because the query can be completed in a single step. In the following `EXPLAIN` outputs, a table that supports clustered indexes is compared with one that does not:
 
 ```sql
 CREATE TABLE always_clusters_in_all_versions (
