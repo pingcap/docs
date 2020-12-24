@@ -146,7 +146,7 @@ tikv-ctl --host=ip:port modify-tikv-config -m server -n gc.max_write_bytes_per_s
 
 ## GC in Compaction Filter
 
-From v5.0, TiKV introduces the mechanism of GC in Compaction Filter. Based on the distributed GC mode, the mechanism uses the compaction process of RocksDB, instead of a separate GC worker thread, to run GC. It helps to avoid extra disk read caused by GC. Also, after clearing the obsolete data, it prevents leaving behind a large number of deletion marks which degrade the sequential scan performance. This mechanism is enabled by default and is also automatically enabled after the rolling upgrade is completed. The following example shows how to enable this GC mechanism in the TiKV configuration file:
+From v5.0, TiKV introduces the mechanism of GC in Compaction Filter. Based on the distributed GC mode, the mechanism uses the compaction process of RocksDB, instead of a separate GC worker thread, to run GC. It helps to avoid extra disk read caused by GC. Also, after clearing the obsolete data, it prevents leaving behind a large number of deletion marks which degrade the sequential scan performance. This mechanism is enabled by default and is also automatically enabled after a rolling upgrade. The following example shows how to enable this GC mechanism in the TiKV configuration file:
 
 {{< copyable "" >}}
 
