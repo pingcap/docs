@@ -4,7 +4,7 @@ title: TiDB 3.0.20 Release Notes
 
 # TiDB 3.0.20 Release Notes
 
-Release date: December 23, 2020
+Release date: December 25, 2020
 
 TiDB version: 3.0.20
 
