@@ -896,9 +896,9 @@ Configuration items related to `rocksdb.defaultcf`
 
 ### `bottommost-level-compression`
 
-+ Sets the compression algorithm of the bottom most layer. This configuration item overrides the setting of `compression-per-level`.
-+ The bottom most layer does not directly adopt the last compression algorithm in the `compression-per-level` array since the data is written to LSM tree; therefore, using `bottommost-level-compression` enables the bottom layer to use the compression algorithm with the best compression effect from the beginning.
-+ If you don't want to set the compression algorithm of the bottom most layer, you can set the value of this configuration item to `disable`.
++ Sets the compression algorithm of the bottom most layer. This configuration item overrides the setting in the `compression-per-level`.
++ The bottom most layer does not directly adopt the last compression algorithm in the `compression-per-level` array from when the data is written to LSM tree; therefore, using `bottommost-level-compression` enables the bottom most layer to use the compression algorithm with the best compression effect from the beginning.
++ If you don't want to set the compression algorithm of the bottom most layer, set the value of this configuration item to `disable`.
 + Default value: "zstd"
 
 ### `write-buffer-size`
