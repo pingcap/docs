@@ -897,7 +897,7 @@ Configuration items related to `rocksdb.defaultcf`
 ### `bottommost-level-compression`
 
 + Sets the compression algorithm of the bottommost layer. This configuration item overrides the `compression-per-level` setting.
-+ Ever since data is written to LSM-tree, TiKV does not directly adopt the last compression algorithm specified in the `compression-per-level` array for the bottommost layer. `bottommost-level-compression` enables the bottommost layer to use the compression algorithm of the best compression effect from the beginning.
++ Ever since data is written to LSM-tree, RocksDB does not directly adopt the last compression algorithm specified in the `compression-per-level` array for the bottommost layer. `bottommost-level-compression` enables the bottommost layer to use the compression algorithm of the best compression effect from the beginning.
 + If you do not want to set the compression algorithm for the bottommost layer, set the value of this configuration item to `disable`.
 + Default value: "zstd"
 
