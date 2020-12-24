@@ -175,7 +175,7 @@ This behavior is consistent with MySQL, where the InnoDB storage engine will by 
 
 ## Storage considerations
 
-Because the `PRIMARY KEY` replaces a 64-bit `handle` as the internal pointer to table rows, using clustered indexes might increase storage requirements. This is particularly impactful on tables that contain many secondary indexes. Consider the following example:
+Because the `PRIMARY KEY` replaces a 64-bit `handle` value as the internal pointer to table rows, using clustered indexes might increase storage requirements. This is particularly impactful on tables that contain many secondary indexes. Consider the following example:
 
 ```sql
 CREATE TABLE t1 (
