@@ -1239,6 +1239,14 @@ Configuration items related to TiDB Lightning import and BR restore.
 + Default value: `8`
 + Minimum value: `1`
 
+## gc
+
+### `enable-compaction-filter`
+
++ 是否开启 GC in Compaction Filter 特性
++ Default value: `true`
+
+
 ## backup
 
 Configuration items related to BR backup.
