@@ -36,7 +36,7 @@ SET  GLOBAL tidb_distsql_scan_concurrency = 10;
 - Default value: ON
 - Controls whether statements should automatically commit when not in an explicit transaction. See [Transaction Overview](/transaction-overview.md#autocommit) for more information.
 
-### `allow_auto_random_explicit_insert` <span class="version-mark">New in v4.0.3</span>
+### allow_auto_random_explicit_insert <span class="version-mark">New in v4.0.3</span>
 
 - Scope: SESSION (since v4.0.5: SESSION | GLOBAL)
 - Default value: 0
@@ -275,6 +275,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - This variable is used to set the concurrency of the `scan` operation.
 - Use a bigger value in OLAP scenarios, and a smaller value in OLTP scenarios.
 - For OLAP scenarios, the maximum value cannot exceed the number of CPU cores of all the TiKV nodes.
+- If a table has a lot of partitions, you can reduce the variable value appropriately to avoid TiKV becoming out of memory (OOM).
 
 ### tidb_dml_batch_size
 
@@ -306,7 +307,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 ### tidb_enable_clustered_index <!-- New in v5.0 -->
 
 - Scope: SESSION | GLOBAL
-- Default value: 1
+- Default value: 0
 - This variable is used to control whether to enable the clustered index feature.
     - This feature is only applicable to newly created tables and does not affect the existing old tables.
     - This feature is only applicable to tables whose primary key is the single-column non-integer type or the multi-column type. It does not affect the tables without a primary key or tables with the primary key of the single-column non-integer type.
@@ -431,7 +432,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 ### tidb_force_priority
 
 - Scope: INSTANCE
-- Default value: `NO_PRIORITY`
+- Default value: NO_PRIORITY
 - This variable is used to change the default priority for statements executed on a TiDB server. A use case is to ensure that a particular user that is performing OLAP queries receives lower priority than users performing OLTP queries.
 - You can set the value of this variable to `NO_PRIORITY`, `LOW_PRIORITY`, `DELAYED` or `HIGH_PRIORITY`.
 
@@ -439,7 +440,17 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 - Scope: INSTANCE
 - Default value: 0
-- This variable is used to set whether to record all the SQL statements in the log.
+- This variable is used to set whether to record all SQL statements in the [log](/tidb-configuration-file.md#logfile). This feature is disabled by default. If maintenance personnel needs to trace all SQL statements when locating issues, they can enable this feature.
+- To see all records of this feature in the log, query the `"GENERAL_LOG"` string. The following information is recorded:
+    - `conn`: The ID of the current session.
+    - `user`: The current session user.
+    - `schemaVersion`: The current schema version.
+    - `txnStartTS`: The timestamp at which the current transaction starts.
+    - `forUpdateTS`: In the pessimistic transactional model, `forUpdateTS` is the current timestamp of the SQL statement. When a write conflict occurs in the pessimistic transaction, TiDB retries the SQL statement currently being executed and updates this timestamp. You can configure the number of retries via [`max-retry-count`](/tidb-configuration-file.md#max-retry-count). In the optimistic transactional model, `forUpdateTS` is equivalent to `txnStartTS`.
+    - `isReadConsistency`: Indicates whether the current transactional isolation level is Read Committed (RC).
+    - `current_db`: The name of the current database.
+    - `txn_mode`: The transactional mode. Value options are `OPTIMISTIC` and `PESSIMISTIC`.
+    - `sql`: The SQL statement corresponding to the current query.
 
 ### tidb_hash_join_concurrency
 
@@ -893,6 +904,13 @@ explain select * from t where age=5;
 +-------------------------------+------------+-----------+-----------------------------+-------------------------------+
 3 rows in set (0.00 sec)
 ```
+
+### `tidb_enable_rate_limit_action`
+
+- Scope: SESSION | GLOBAL
+- Default value: ON
+- This variable controls whether to enable the dynamic memory control feature for the operator that reads data. By default, this operator enables the maximum number of threads that [`tidb_disql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency) allows to read data. When the memory usage of a single SQL statement exceeds [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) each time, the operator that reads data stops one thread.
+- When the operator that reads data has only one thread left and the memory usage of a single SQL statement continues to exceed [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query), this SQL statement triggers other memory control behaviors, such as [spilling data to disk](/tidb-configuration-file.md#spilled-file-encryption-method).
 
 ### `tidb_memory_usage_alarm_ratio`
 
