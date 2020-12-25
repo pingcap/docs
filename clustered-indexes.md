@@ -65,7 +65,7 @@ Records: 2  Duplicates: 0  Warnings: 0
 1 row in set (0.00 sec)
 ```
 
-The `EXPLAIN` results look similar, but in the second example TiDB must first read the `PRIMARY KEY` index on `guid` in order to find the `handle` value. This is more obvious in the following example where the value of the `PRIMARY KEY` is not in the index on `does_not_cluster_by_default.b`. An extra lookup must be performed on the table rows (`└─TableFullScan_5`) to convert the `handle` to the `PRIMARY KEY` value of `guid`:
+The two `EXPLAIN` results above look similar, but in the second example, TiDB must first read the `PRIMARY KEY` index on the `guid` column in order to find the `handle` value. This is more obvious in the following example where the `PRIMARY KEY` value is not in the index on `does_not_cluster_by_default.b`. TiDB must perform an extra lookup on the table rows (`└─TableFullScan_5`) to convert the `handle` value to the `PRIMARY KEY` value of `guid`:
 
 ```sql
 EXPLAIN SELECT id FROM always_clusters_in_all_versions WHERE b = 'aaaa';
