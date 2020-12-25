@@ -74,7 +74,7 @@ update mysql.tidb set VARIABLE_VALUE="24h" where VARIABLE_NAME="tikv_gc_life_tim
 
     - `"distributed"` (default): Distributed GC mode. In the [Do GC](/garbage-collection-overview.md#do-gc) step, the GC leader on the TiDB side uploads the safe point to PD. Each TiKV node obtains the safe point respectively and performs GC on all leader Regions on the current node. This mode is supported from TiDB 3.0.
 
-    - `"central"`: Central GC mode. In the [Do GC](/garbage-collection-overview.md#do-gc) step, the GC leader sends GC requests to all Regions. This mode is adopted by TiDB 2.1 or earlier versions. Starting from TiKV 5.0, this mode is not supported. Clusters set to this mode automatically switch to the `distributed` mode.
+    - `"central"`: Central GC mode. In the [Do GC](/garbage-collection-overview.md#do-gc) step, the GC leader sends GC requests to all Regions. This mode is adopted by TiDB 2.1 or earlier versions. Starting from TiDB 5.0, this mode is not supported. Clusters set to this mode automatically switch to the `distributed` mode.
 
 ## `tikv_gc_auto_concurrency`
 
