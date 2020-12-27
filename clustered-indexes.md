@@ -16,8 +16,8 @@ TiDB supports clustering only by a table's `PRIMARY KEY`. With clustered indexes
 TiDB has always supported clustered indexes, provided the following criteria are true:
 
 - The table contains a `PRIMARY KEY`
-- The primary key is an `INTEGER` or `BIGINT`
-- The primary key consists of only one column
+- The `PRIMARY KEY` is an `INTEGER` or `BIGINT`
+- The `PRIMARY KEY` consists of only one column
 
 When any of these criteria are not met, TiDB will create a hidden 64-bit `handle` value to organize the table. Querying table rows by a clustered index is more efficient than by a non-clustered index because the query can be completed in a single step. In the following `EXPLAIN` outputs, a table that supports clustered indexes is compared with one that does not:
 
@@ -93,7 +93,7 @@ EXPLAIN SELECT guid FROM does_not_cluster_by_default WHERE b = 'aaaa';
 4 rows in set (0.00 sec)
 ```
 
-# With clustered indexes
+# Changes since TiDB 5.0
 
 Since v5.0, TiDB supports clustering by any `PRIMARY KEY`. The following `EXPLAIN` output shows the previous example with clustered indexes enabled:
 
