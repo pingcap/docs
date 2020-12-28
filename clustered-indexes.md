@@ -13,7 +13,7 @@ TiDB supports clustering only by a table's `PRIMARY KEY`. With clustered indexes
 
 ## Limited support before TiDB v5.0
 
-TiDB has always supported clustered indexes, provided the following criteria are true:
+Before v5.0, TiDB has only limited support for clustered indexes, provided the following criteria are true:
 
 - The table contains a `PRIMARY KEY`
 - The `PRIMARY KEY` is an `INTEGER` or `BIGINT`
