@@ -95,7 +95,7 @@ EXPLAIN SELECT guid FROM does_not_cluster_by_default WHERE b = 'aaaa';
 
 # Full support since TiDB v5.0
 
-Since v5.0, TiDB supports clustering by any `PRIMARY KEY`. The following `EXPLAIN` output shows the previous example with clustered indexes enabled:
+Since v5.0, TiDB provides full support for clustered indexes by any `PRIMARY KEY`. The following `EXPLAIN` output shows the previous example with clustered indexes enabled:
 
 ```sql
 SET tidb_enable_clustered_index = 1;
