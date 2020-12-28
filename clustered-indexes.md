@@ -11,7 +11,7 @@ Clustered indexes provide TiDB the ability to organize tables in a way that can 
 
 TiDB supports clustering only by a table's `PRIMARY KEY`. With clustered indexes enabled, the terms _the_ `PRIMARY KEY` and _the clustered index_ might be used interchangeably. `PRIMARY KEY` refers to the constraint (a logical property), and clustered index describes the physical implementation of how the data is stored.
 
-## Default behavior
+## Limited support before TiDB v5.0
 
 TiDB has always supported clustered indexes, provided the following criteria are true:
 
