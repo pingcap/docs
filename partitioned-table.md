@@ -10,9 +10,9 @@ This document introduces TiDB's implementation of partitioning.
 
 ## Partitioning types
 
-This section introduces the types of partitioning which are available in TiDB. Currently, TiDB supports Range partitioning and Hash partitioning.
+This section introduces the types of partitioning which are available in TiDB. Currently, TiDB supports [Range partitioning](#range-partitioning), [List partitioning](#list-partitioning), [List COLUMNS partitioning](#list-columns-partitioning), and Hash partitioning(#hash-partitioning).
 
-Range partitioning is used to resolve the performance issues caused by a large amount of deletions in the application, and it supports fast drop partition operations. Hash partitioning is used to scatter the data when there are a large amount of writes.
+Range partitioning and List partitioning are used to resolve the performance issues caused by a large amount of deletions in the application, and support fast drop partition operations. Hash partitioning is used to scatter the data when there are a large amount of writes.
 
 ### Range partitioning
 
@@ -163,6 +163,191 @@ Range partitioning is particularly useful when one or more of the following cond
 * You want to delete the old data. If you use the `employees` table in the previous example, you can delete all records of employees who left this company before the year 1991 by simply using `ALTER TABLE employees DROP PARTITION p0;`. It is faster than executing the `DELETE FROM employees WHERE YEAR(separated) <= 1990;` operation.
 * You want to use a column that contains time or date values, or containing values arising from some other series.
 * You need to frequently run queries on the columns used for partitioning. For example, when executing a query like `EXPLAIN SELECT COUNT(*) FROM employees WHERE separated BETWEEN '2000-01-01' AND '2000-12-31' GROUP BY store_id;`, TiDB can quickly know that only the data in the `p2` partition needs to be scanned, because the other partitions do not match the `WHERE` condition.
+
+### List Partitioning
+
+> **Warning:**
+>
+> This feature is introduced from v5.0.0-rc. It is currently an experimental feature, and it is not recommended that you use it in the production environment.
+
+Before creating the List partitioned table, you need to set the value of the session variable `tidb_enable_table_partition` to `nightly`.
+
+{{< copyable "sql" >}}
+
+```sql
+set @@session.tidb_enable_table_partition = 'nightly';
+```
+
+List partitioning is similar to Range partitioning. The main difference between them is that, in the List partitioning, for all rows contained in each partition of the table, the value calculated based on the partition expression belongs to a given data set. The data set defined by each partition has any number of values, but can not have duplicate values. You can use the `PARTITION ... VALUES IN (...)` clause to define these values.
+
+Suppose you want to create a personnel record form. The example is as follows:
+
+{{< copyable "sql" >}}
+
+```sql
+CREATE TABLE employees (
+    id INT NOT NULL,
+    hired DATE NOT NULL DEFAULT '1970-01-01',
+    store_id INT
+);
+```
+
+Suppose there are 20 stores in four districts, as shown in the table below:
+
+```
+| Region  | Store ID Numbers     |
+| ------- | -------------------- |
+| North   | 1, 2, 3, 4, 5        |
+| East    | 6, 7, 8, 9, 10       |
+| West    | 11, 12, 13, 14, 15   |
+| Central | 16, 17, 18, 19, 20   |
+```
+
+If you want to store the personnel data of store employees in the same region in the same partition, you can create a List partitioning based on `store_id`:
+
+{{< copyable "sql" >}}
+
+```sql
+CREATE TABLE employees (
+    id INT NOT NULL,
+    hired DATE NOT NULL DEFAULT '1970-01-01',
+    store_id INT
+)
+PARTITION BY LIST (store_id) (
+    PARTITION pNorth VALUES IN (1, 2, 3, 4, 5),
+    PARTITION pEast VALUES IN (6, 7, 8, 9, 10),
+    PARTITION pWest VALUES IN (11, 12, 13, 14, 15),
+    PARTITION pCentral VALUES IN (16, 17, 18, 19, 20)
+);
+```
+
+You can easily add or delete records related to a specific region in the table via the above operation. For example, suppose all the stores in the East region (East) are sold to another company, and all the row data related to the store employees in this region can be deleted by `ALTER TABLE employees TRUNCATE PARTITION pEast`, which can be executed much more efficiently than the equivalent `DELETE` statement `DELETE FROM employees WHERE store_id IN (6, 7, 8, 9, 10)`.
+
+You can also use `ALTER TABLE employees DROP PARTITION pEast` to delete all these rows, but it also deletes the partition `pEast` from the definition of the table. Then you also need to use the `ALTER TABLE ... ADD PARTITION` statement to restore the original partitioning scheme of the table.
+
+Unlike Range partitioning, the List partitioning does not have a similar `MAXVALUE` partitioning to store all values that do not belong to other partitions. All expected values of the partition expression should be included in the `PARTITION ... VALUES IN (...)` clause. If the value to be inserted by the `INSERT` statement does not match the column value of the partition, the statement fails to execute and reports an error, as shown in the following example:
+
+```sql
+test> CREATE TABLE t (
+    ->   a INT,
+    ->   b INT
+    -> )
+    -> PARTITION BY LIST (a) (
+    ->   PARTITION p0 VALUES IN (1, 2, 3),
+    ->   PARTITION p1 VALUES IN (4, 5, 6)
+    -> );
+Query OK, 0 rows affected (0.11 sec)
+test> INSERT INTO t VALUES (7, 7);
+ERROR 1525 (HY000): Table has no partition for value 7
+```
+
+To ignore the above types of errors, you can use the `IGNORE` keyword. After using this keyword, you avoid inserting rows containing unmatched partition column values, but any rows with matching values are inserted, and no errors are reported:
+
+```sql
+test> TRUNCATE t;
+Query OK, 1 row affected (0.00 sec)
+
+test> INSERT IGNORE INTO t VALUES (1, 1), (7, 7), (8, 8), (3, 3), (5, 5);
+Query OK, 3 rows affected, 2 warnings (0.01 sec)
+Records: 5  Duplicates: 2  Warnings: 2
+
+test> select * from t;
++------+------+
+| a    | b    |
++------+------+
+|    5 |    5 |
+|    1 |    1 |
+|    3 |    3 |
++------+------+
+3 rows in set (0.01 sec)
+```
+
+### List COLUMNS partitioning
+
+> **Warning:**
+>
+> This feature is introduced from v5.0.0-rc. It is currently an experimental feature, and it is not recommended that you use it in the production environment.
+
+List COLUMNS partitioning is a variant of List partitioning. You can use multiple columns as partition keys, and columns of data types other than integer types as partition columns. You can also use string type, `DATE` and `DATETIME` columns.
+
+Suppose you want to divide the store employees of the following 12 cities into 4 regions according to relevant regulations, as shown in the following table:
+
+```
+| Region | Cities                         |
+| :----- | ------------------------------ |
+| 1      | LosAngeles,Seattle, Houston    |
+| 2      | Chicago, Columbus, Boston      |
+| 3      | NewYork, LongIsland, Baltimore |
+| 4      | Atlanta, Raleigh, Cincinnati   |
+```
+
+You can use list column partitioning to create a table for employee data, and store each row of data in the partition corresponding to the employee's city, as shown below:
+
+{{< copyable "sql" >}}
+
+```sql
+CREATE TABLE employees_1 (
+    id INT NOT NULL,
+    fname VARCHAR(30),
+    lname VARCHAR(30),
+    hired DATE NOT NULL DEFAULT '1970-01-01',
+    separated DATE NOT NULL DEFAULT '9999-12-31',
+    job_code INT,
+    store_id INT,
+    city VARCHAR(15)
+)
+PARTITION BY LIST COLUMNS(city) (
+    PARTITION pRegion_1 VALUES IN('LosAngeles', 'Seattle', 'Houston'),
+    PARTITION pRegion_2 VALUES IN('Chicago', 'Columbus', 'Boston'),
+    PARTITION pRegion_3 VALUES IN('NewYork', 'LongIsland', 'Baltimore'),
+    PARTITION pRegion_4 VALUES IN('Atlanta', 'Raleigh', 'Cincinnati')
+);
+```
+
+Unlike the List partitioning, you don't need to use an expression in the `COLUMNS()` clause to convert column values to integers.
+
+List COLUMNS partitioning can also be partitioned using columns of type `DATE` and `DATETIME`, as shown in the following example. This example uses the same names and columns as the previous `employees_1` table, but uses List COLUMNS partitioning based on the `hired` column:
+
+{{< copyable "sql" >}}
+
+```sql
+CREATE TABLE employees_2 (
+    id INT NOT NULL,
+    fname VARCHAR(30),
+    lname VARCHAR(30),
+    hired DATE NOT NULL DEFAULT '1970-01-01',
+    separated DATE NOT NULL DEFAULT '9999-12-31',
+    job_code INT,
+    store_id INT,
+    city VARCHAR(15)
+)
+PARTITION BY LIST COLUMNS(hired) (
+    PARTITION pWeek_1 VALUES IN('2020-02-01', '2020-02-02', '2020-02-03',
+        '2020-02-04', '2020-02-05', '2020-02-06', '2020-02-07'),
+    PARTITION pWeek_2 VALUES IN('2020-02-08', '2020-02-09', '2020-02-10',
+        '2020-02-11', '2020-02-12', '2020-02-13', '2020-02-14'),
+    PARTITION pWeek_3 VALUES IN('2020-02-15', '2020-02-16', '2020-02-17',
+        '2020-02-18', '2020-02-19', '2020-02-20', '2020-02-21'),
+    PARTITION pWeek_4 VALUES IN('2020-02-22', '2020-02-23', '2020-02-24',
+        '2020-02-25', '2020-02-26', '2020-02-27', '2020-02-28')
+);
+```
+
+Besides, you can also add multiple columns in the `COLUMNS()` clause, for example:
+
+{{< copyable "sql" >}}
+
+```sql
+CREATE TABLE t (
+    id int,
+    name varchar(10)
+)
+PARTITION BY LIST COLUMNS(id,name) (
+     partition p0 values IN ((1,'a'),(2,'b')),
+     partition p1 values IN ((3,'c'),(4,'d')),
+     partition p3 values IN ((5,'e'),(null,null))
+);
+```
 
 ### Hash partitioning
 
@@ -949,7 +1134,7 @@ YEARWEEK()
 
 ### Compatibility with MySQL
 
-Currently, TiDB only supports Range partitioning and Hash partitioning. Other partitioning types that are available in MySQL such as list partitioning and key partitioning are not supported yet in TiDB.
+Currently, TiDB only supports Range partitioning, List partitioning, List COLUMNS partitioning and Hash partitioning. Other partitioning types that are available in MySQL such as key partitioning are not supported yet in TiDB.
 
 For a table partitioned by `RANGE COLUMNS`, currently TiDB only supports using a single partitioning column.
 

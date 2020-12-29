@@ -370,11 +370,16 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Scope: SESSION | GLOBAL
 - Default value: "on"
 - This variable is used to set whether to enable the `TABLE PARTITION` feature.
-    - `off` indicates disabling the `TABLE PARTITION` feature. In this case, the syntax that creates a partition table can be executed, but the table created is not a partitioned one.
-    - `on` indicates enabling the `TABLE PARTITION` feature for the supported partition types. Currently, it indicates enabling range partition, hash partition and range column partition with one single column.
-    - `auto` functions the same way as `on` does.
 
-- Currently, TiDB only supports range partition and hash partition.
+    - `on` indicates enabling the partitioned tables of range partition, hash partition and range column partition with one single column.
+    - `auto` functions the same way as `on` does.
+    - `nightly` indicates enabling the partitioned table types of `on`, also list partitioning and list columns partitioning.
+    - `off` indicates disabling the `TABLE PARTITION` feature. In this case, the syntax that creates a partition table can be executed, but the table created is not a partitioned one.
+
+> **Note:**
+>
+> Currently, TiDB only supports range partition and hash partition by default.
+> List partitioning and List COLUMNS partitioning are still experimental features.
 
 ### tidb_enable_telemetry <span class="version-mark">New in v4.0.2 version</span>
 
