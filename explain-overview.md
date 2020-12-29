@@ -55,3 +55,48 @@ The following describes the output of the `EXPLAIN` statement above:
     * `range: [1,1]` shows that the predicate from the where clause of the query (`a = 1`) was pushed right down to TiKV (the task is of `cop[tikv]`).
     * `keep order:false` shows that the semantics of this query did not require TiKV to return the results in order. If the query were to be modified to require an order (such as `SELECT * FROM t WHERE a = 1 ORDER BY id`), then this condition would be `keep order:true`.
     * `stats:pseudo` shows that the estimates shown in `estRows` might not be accurate. TiDB periodically updates statistics as part of a background operation. A manual update can also be performed by running `ANALYZE TABLE t`.
+
+### Task overview
+
+Currently, calculation tasks of TiDB can be divided into two categories: cop tasks and root tasks. The cop tasks are performed by the Coprocessor in TiKV, and the root tasks are performed in TiDB.
+
+One of the goals of SQL optimization is to push the calculation down to TiKV as much as possible. The Coprocessor in TiKV supports most of the built-in SQL functions (including the aggregate functions and the scalar functions), SQL `LIMIT` operations, index scans, and table scans. However, all `Join` operations can only be performed as root tasks in TiDB.
+
+### Access Object overview
+
+Access Object is the data item accessed by the operator, including `table`, `partition`, and `index` (if any). Only operators that directly access the data have this information.
+
+### Range query
+
+In the `WHERE`/`HAVING`/`ON` conditions, the TiDB optimizer analyzes the result returned by the primary key query or the index key query. For example, these conditions might include comparison operators of the numeric and date type, such as `>`, `<`, `=`, `>=`, `<=`, and the character type such as `LIKE`.
+
+> **Note:**
+>
+> - In order to use an index, the condition must be _sargable_. For example, the condition `YEAR(date_column) < 1992` can not use an index, but `date_column < '1992-01-01` can.
+> - It is recommended to compare data of the same type and [character set and collation](/character-set-and-collation.md). Mixing types may require additional `cast` operations, or prevent indexes from being used.
+> - You can also use `AND` (intersection) and `OR` (union) to combine the range query conditions of one column. For a multi-dimensional composite index, you can use conditions in multiple columns. For example, regarding the composite index `(a, b, c)`:
+>   - When `a` is an equivalent query, continue to figure out the query range of `b`; when `b` is also an equivalent query, continue to figure out the query range of `c`.
+>   - Otherwise, if `a` is a non-equivalent query, you can only figure out the range of `a`.
+
+## Operator overview
+
+Different operators output different information after the `EXPLAIN` statement is executed. This section focuses on the execution plan of different operators, ranging from table scans, table aggregation, to table join.
+
+You can use optimizer hints to control the behavior of the optimizer, and thereby controlling the selection of the physical operators. For example, `/*+ HASH_JOIN(t1, t2) */` means that the optimizer uses the `Hash Join` algorithm. For more details, see [Optimizer Hints](/optimizer-hints.md).
+
+### Read the execution plan of table scans
+
+The operators that perform table scans (of the disk or the TiKV Block Cache) are listed as follows:
+
+- **TableFullScan**: Full table scan
+- **TableRangeScan**: Table scans with the specified range
+- **TableRowIDScan**: Scans the table data based on the RowID. Usually follows an index read operation to retrieve the matching data rows.
+- **IndexFullScan**: Similar to a "full table scan", except that an index is scanned, rather than the table data.
+- **IndexRangeScan**: Index scans with the specified range.
+
+TiDB aggregates the data or calculation results scanned from TiKV/TiFlash. The data aggregation operators can be divided into the following categories:
+
+- **TableReader**: Aggregates the data obtained by the underlying operators like `TableFullScan` or `TableRangeScan` in TiKV.
+- **IndexReader**: Aggregates the data obtained by the underlying operators like `IndexFullScan` or `IndexRangeScan` in TiKV.
+- **IndexLookUp**: First aggregates the RowID (in TiKV) scanned by the `Build` side. Then at the `Probe` side, accurately reads the data from TiKV based on these RowIDs. At the `Build` side, there are operators like `IndexFullScan` or `IndexRangeScan`; at the `Probe` side, there is the `TableRowIDScan` operator.
+- **IndexMerge**: Similar to `IndexLookUp`. `IndexMerge` can be seen as an extension of `IndexLookupReader`. `IndexMerge` supports reading multiple indexes at the same time. There are many `Build`s and one `Probe`. The execution process of `IndexMerge` the same as that of `IndexLookUp`.
