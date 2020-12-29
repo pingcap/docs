@@ -6,7 +6,7 @@ aliases: ['/docs/dev/best-practices/grafana-monitor-best-practices/','/docs/dev/
 
 # Best Practices for Monitoring TiDB Using Grafana
 
-When you [deploy a TiDB cluster using TiUP](/production-deployment-using-tiup.md), if you have added Grafana and Prometheus in the topology configuration, a set of [Grafana + Prometheus monitoring platform](/tidb-monitoring-framework.md) is deployed simultaneously to collect and display metrics for various components and machines in the TiDB cluster. This document describes best practices for monitoring TiDB using Grafana. It aims to help you use metrics to analyze the status of the TiDB cluster and diagnose problems.
+When you [deploy a TiDB cluster using TiUP](/production-deployment-using-tiup.md) and have added Grafana and Prometheus in the topology configuration, a set of [Grafana + Prometheus monitoring platform](/tidb-monitoring-framework.md) is deployed simultaneously to collect and display metrics for various components and machines in the TiDB cluster. This document describes best practices for monitoring TiDB using Grafana. It aims to help you use metrics to analyze the status of the TiDB cluster and diagnose problems.
 
 ## Monitoring architecture
 
