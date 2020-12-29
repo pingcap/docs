@@ -199,7 +199,7 @@ Take `Release Version: v1.0.3-1-ga80e796` as an example of version number descri
 
 The TiDB community is highly active. After the 1.0 GA release, the engineers have been keeping optimizing and fixing bugs. Therefore, the TiDB version is updated quite fast. If you want to keep informed of the latest version, see [TiDB Weekly update](https://pingcap.com/weekly/).
 
-It is recommenede to [deploy TiDB using TiUP](/production-deployment-using-tiup.md). TiDB has a unified management of the version number after the 1.0 GA release. You can view the version number using the following two methods:
+It is recommeneded to [deploy TiDB using TiUP](/production-deployment-using-tiup.md). TiDB has a unified management of the version number after the 1.0 GA release. You can view the version number using the following two methods:
 
 - `select tidb_version()`
 - `tidb-server -V`
