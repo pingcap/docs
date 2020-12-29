@@ -34,17 +34,24 @@ Records: 2  Duplicates: 0  Warnings: 0
 3 rows in set (0.00 sec)
 ```
 
-`EXPLAIN` does not execute the actual query. [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) can be used to execute the query and show `EXPLAIN` information. This can be useful in diagnosing cases where the execution plan selected is suboptimal.
+`EXPLAIN` does not execute the actual query. [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) can be used to execute the query and show `EXPLAIN` information. This can be useful in diagnosing cases where the execution plan selected is suboptimal. For additional examples of using `EXPLAIN`, see the following documents:
+
+* [Indexes](/explain-indexes.md)
+* [Joins](/explain-joins.md)
+* [Subqueries](/explain-subqueries.md)
+* [Aggregation](/explain-aggregation.md)
+* [Views](/explain-views.md)
+* [Partitions](/explain-partitions.md)
 
 ## Understand EXPLAIN output
 
 The following describes the output of the `EXPLAIN` statement above:
 
-* `id` describes the name of an operator, or sub-task that is required to execute the SQL statement. See [Operator overview](#operator_overview) for additional details.
+* `id` describes the name of an operator, or sub-task that is required to execute the SQL statement. See [Operator overview](#operator-overview) for additional details.
 * `estRows` shows an estimate of the number of rows TiDB expects to process. This number might be based on dictionary information, such as when the access method is based on a primary or unique key, or it could be based on statistics such as a CMSketch or histogram.
-* `task` shows where an operator is performing the work. See [Task overview](#task_overview) for additional details.
+* `task` shows where an operator is performing the work. See [Task overview](#task-overview) for additional details.
 * `access object` shows the table, partition and index that is being accessed. The parts of the index are also shown, as in the case above that the column `a` from the index was used. This can be useful in cases where you have composite indexes.
-* `operator info` shows additional details about the access. See [Operator info overview](#operator_info_overview) for additional details.
+* `operator info` shows additional details about the access. See [Operator info overview](#operator-info-overview) for additional details.
 
 ### Operator overview
 
