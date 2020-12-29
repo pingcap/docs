@@ -54,7 +54,9 @@ ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 0
     CREATE TABLE table_name like t
     ```
 
-* For the current version, if you create the TiFlash replica before using TiDB Lightning to import the data, the data import will fail. You must import data to the table before creating the TiFlash replica for the table.
+* For the version earlier than v4.0.6, if you create the TiFlash replica before using TiDB Lightning to import the data, the data import will fail. You must import data to the table before creating the TiFlash replica for the table.
+
+* For TiDB and TiDB Lightning version v4.0.6 or later, you can create TiFlash replicas before importing data by using TiDB Lightning. Note that this might slow the TiDB Lightning procedure. It depends on the bandwidth of the NIC on the lightning host, the CPU and disk load of the TiFlash node, and the number of TiFlash replica, etc.
 
 * It is recommended that you do not replicate more than 1,000 tables because this lowers the PD scheduling performance. This limit will be removed in later versions.
 
