@@ -924,7 +924,7 @@ explain select * from t where age=5;
 > **Warning:**
 >
 > `tidb_track_aggregate_memory_usage` is currently an experimental feature. It is not recommended to use this feature in the production environment.
-> 
+
 - Scope: SESSION | GLOBAL
 - Default value: OFF
 - This variable indicates whether to track the memory usage of the aggregate function. When you enable this feature, it counts the memory usage of the aggregate function, which might cause the overall SQL memory statistics to exceed the threshold [`mem-quota-query`](/tidb-configuration-file.md#mem-quota-query), and then be affected by the behavior defined by [`oom-action`](/tidb-configuration-file.md#oom-action).
