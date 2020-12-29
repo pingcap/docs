@@ -42,9 +42,6 @@
       + [Use TiDB Ansible](/online-deployment-using-ansible.md)
       + [Use TiDB Ansible Offline](/offline-deployment-using-ansible.md)
   + [Verify Cluster Status](/post-installation-check.md)
-  + Benchmarks Methods
-    + [Test TiDB Using Sysbench](/benchmark/benchmark-tidb-using-sysbench.md)
-    + [Run TPC-C Test on TiDB](/benchmark/benchmark-tidb-using-tpcc.md)
 + Migrate
   + [Overview](/migration-overview.md)
   + Migrate from MySQL
@@ -395,6 +392,7 @@
       + [Precision Math](/functions-and-operators/precision-math.md)
       + [Set Operations](/functions-and-operators/set-operators.md)
       + [List of Expressions for Pushdown](/functions-and-operators/expressions-pushed-down.md)
+    + [Clustered Indexes](/clustered-indexes.md)
     + [Constraints](/constraints.md)
     + [Generated Columns](/generated-columns.md)
     + [SQL Mode](/sql-mode.md)
