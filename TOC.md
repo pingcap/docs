@@ -395,6 +395,7 @@
       + [Precision Math](/functions-and-operators/precision-math.md)
       + [Set Operations](/functions-and-operators/set-operators.md)
       + [List of Expressions for Pushdown](/functions-and-operators/expressions-pushed-down.md)
+    + [Clustered Indexes](/clustered-indexes.md)
     + [Constraints](/constraints.md)
     + [Generated Columns](/generated-columns.md)
     + [SQL Mode](/sql-mode.md)
@@ -554,6 +555,7 @@
     + [3.1.0-beta.1](/releases/release-3.1.0-beta.1.md)
     + [3.1.0-beta](/releases/release-3.1.0-beta.md)
   + v3.0
+    + [3.0.20](/releases/release-3.0.20.md)
     + [3.0.19](/releases/release-3.0.19.md)
     + [3.0.18](/releases/release-3.0.18.md)
     + [3.0.17](/releases/release-3.0.17.md)
