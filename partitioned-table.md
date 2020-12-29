@@ -168,7 +168,7 @@ Range partitioning is particularly useful when one or more of the following cond
 
 > **Warning:**
 >
-> This feature is introduced fn v5.0.0-rc. It is currently an experimental feature, and it is not recommended that you use it in the production environment.
+> This feature is introduced in v5.0.0-rc. It is currently an experimental feature, and it is not recommended that you use it in the production environment.
 
 Before creating the List partitioned table, you need to set the value of the session variable `tidb_enable_table_partition` to `nightly`.
 
