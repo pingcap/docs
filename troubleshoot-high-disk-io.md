@@ -78,7 +78,7 @@ In addition, some other panel metrics might help you determine whether the bottl
 
 ### I/O issues found in alerts
 
-The cluster deployment tools (TiUP) deploy the cluster with alert components by default that have built-in alert items and thresholds. The following alert items are related to I/O:
+The cluster deployment tool (TiUP) deploys the cluster with alert components by default that have built-in alert items and thresholds. The following alert items are related to I/O:
 
 - TiKV_write_stall
 - TiKV_raft_log_lag

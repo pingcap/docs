@@ -6,7 +6,7 @@ aliases: ['/docs/dev/tidb-lightning/deploy-tidb-lightning/','/docs/dev/reference
 
 # TiDB Lightning Deployment
 
-This document describes the hardware requirements of TiDB Lightning using the Local-backend, and how to deploy it using manually.
+This document describes the hardware requirements of TiDB Lightning using the Local-backend, and how to deploy it manually.
 
 If you do not want the TiDB services to be impacted, read [TiDB Lightning TiDB-backend](/tidb-lightning/tidb-lightning-backends.md#tidb-lightning-tidb-backend) for the changes to the deployment steps.
 
