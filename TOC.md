@@ -11,9 +11,6 @@
   + [TiDB 4.0 Experimental Features](/experimental-features-4.0.md)
   + [Basic Features](/basic-features.md)
   + Benchmarks
-    + [v4.0 Sysbench Performance Test](/benchmark/benchmark-sysbench-v4-vs-v3.md)
-    + [v4.0 TPC-H Performance Test](/benchmark/v4.0-performance-benchmarking-with-tpch.md)
-    + [v4.0 TPC-C Performance Test](/benchmark/v4.0-performance-benchmarking-with-tpcc.md)
     + [Interaction Test on Online Workloads and `ADD INDEX`](/benchmark/online-workloads-and-add-index-operations.md)
   + [MySQL Compatibility](/mysql-compatibility.md)
   + [TiDB Limitations](/tidb-limitations.md)
@@ -40,9 +37,6 @@
       + [Use TiUP Offline (Recommended)](/production-offline-deployment-using-tiup.md)
       + [Deploy in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable)
   + [Verify Cluster Status](/post-installation-check.md)
-  + Benchmarks Methods
-    + [Test TiDB Using Sysbench](/benchmark/benchmark-tidb-using-sysbench.md)
-    + [Run TPC-C Test on TiDB](/benchmark/benchmark-tidb-using-tpcc.md)
 + Migrate
   + [Overview](/migration-overview.md)
   + Migrate from MySQL
