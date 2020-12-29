@@ -18,8 +18,6 @@ This document only describes the parameters that are not included in command-lin
 + Default value: `1`
 + Minimum value: `1`
 
-<<<<<<< HEAD
-=======
 ### `server.concurrent-send-snap-limit`
 
 + The maximum number of snapshots that can be sent at the same time
@@ -53,7 +51,7 @@ This document only describes the parameters that are not included in command-lin
 ### `server.snap-max-write-bytes-per-sec`
 
 + The maximum allowable disk bandwidth for processing snapshots
-+ Default value: `"1000MB"`
++ Default value: `"100MB"`
 + Unit: KB|MB|GB
 + Minimum value: `"1KB"`
 
@@ -61,7 +59,6 @@ This document only describes the parameters that are not included in command-lin
 
 Configuration items related to gRPC.
 
->>>>>>> 1bad1b76... tikv: add server.end-point-slow-log-threshold config (#4327)
 ### `grpc-compression-type`
 
 + The compression algorithm for gRPC messages
