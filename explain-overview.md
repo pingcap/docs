@@ -6,7 +6,7 @@ aliases: ['/docs/dev/query-execution-plan/','/docs/dev/reference/performance/und
 
 # `EXPLAIN` Overview
 
-Because SQL is a declarative language, it describes what the results of a query should look like, **not the methodology** to actually retrieve those results. TiDB considers all the possible ways in which a query could be executed, including using what order to join tables and whether any potential indexes can be used. The process of _considering query execution plans_ is known as SQL optimization.
+SQL is a declarative language. It describes what the results of a query should look like, **not the methodology** to actually retrieve those results. TiDB considers all the possible ways in which a query could be executed, including using what order to join tables and whether any potential indexes can be used. The process of _considering query execution plans_ is known as SQL optimization.
 
 The `EXPLAIN` statement shows the selected execution plan for a given statement. That is, after considering hundreds or thousands of ways in which the query could be executed, TiDB believes that this _plan_ will consume the least resources and execute in the shortest amount of time:
 
@@ -42,7 +42,7 @@ The following describes the output of the `EXPLAIN` statement above:
 
 * `id` describes the name of an operator, or sub-task that is required to execute the SQL statement. While the structure appears as a tree, executing the query does not strictly require the child nodes to be completed before the parent nodes. TiDB supports intra-query parallelism, so a more accurate way to describe the execution is that the child nodes _flow into_ their parent nodes. Parent, child and sibling operators _might_ potentially be executing parts of the query in parallel.
 
-  In this case, the `build` operator finds the internal `RowID` for rows that match in the index `idx_a`. The `probe` operator then retrieves these rows from the table.
+    In this case, the `build` operator finds the internal `RowID` for rows that match the `idx_a` index. The `probe` operator then retrieves these rows from the table.
 
 * `estRows` shows an estimate of the number of rows TiDB expects to process. This number might be based on dictionary information, such as when the access method is based on a primary or unique key, or it could be based on statistics such as a CMSketch or histogram.
 
@@ -75,8 +75,8 @@ In the `WHERE`/`HAVING`/`ON` conditions, the TiDB optimizer analyzes the result 
 > - In order to use an index, the condition must be _sargable_. For example, the condition `YEAR(date_column) < 1992` can not use an index, but `date_column < '1992-01-01` can.
 > - It is recommended to compare data of the same type and [character set and collation](/character-set-and-collation.md). Mixing types may require additional `cast` operations, or prevent indexes from being used.
 > - You can also use `AND` (intersection) and `OR` (union) to combine the range query conditions of one column. For a multi-dimensional composite index, you can use conditions in multiple columns. For example, regarding the composite index `(a, b, c)`:
->   - When `a` is an equivalent query, continue to figure out the query range of `b`; when `b` is also an equivalent query, continue to figure out the query range of `c`.
->   - Otherwise, if `a` is a non-equivalent query, you can only figure out the range of `a`.
+>     - When `a` is an equivalent query, continue to figure out the query range of `b`; when `b` is also an equivalent query, continue to figure out the query range of `c`.
+>     - Otherwise, if `a` is a non-equivalent query, you can only figure out the range of `a`.
 
 ## Operator overview
 
