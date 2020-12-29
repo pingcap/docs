@@ -378,7 +378,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 > **Note:**
 >
-> Currently, TiDB only supports range partition and hash partition by default.
+> Currently, TiDB only supports range partitioning and hash partitioning by default.
 > List partitioning and List COLUMNS partitioning are still experimental features.
 
 ### tidb_enable_telemetry <span class="version-mark">New in v4.0.2 version</span>
