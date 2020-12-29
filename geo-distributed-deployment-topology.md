@@ -1,7 +1,6 @@
 ---
 title: Geo-distributed Deployment topology
 summary: Learn the geo-distributed deployment topology of TiDB.
-aliases: ['/docs/dev/geo-distributed-deployment-topology/']
 ---
 
 # Geo-distributed Deployment topology

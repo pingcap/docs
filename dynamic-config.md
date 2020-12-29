@@ -1,7 +1,6 @@
 ---
 title: Modify Configuration Online
 summary: Learn how to change the cluster configuration online.
-aliases: ['/docs/dev/dynamic-config/']
 ---
 
 # Modify Configuration Online

@@ -1,7 +1,6 @@
 ---
 title: Statement Summary Tables
 summary: Learn about Statement Summary Table in TiDB.
-aliases: ['/docs/dev/statement-summary-tables/','/docs/dev/reference/performance/statement-summary/']
 ---
 
 # Statement Summary Tables
@@ -31,7 +30,6 @@ select * from EMPLOYEE where ID in (4, 5) and SALARY between 3000 and 4000;
 ```
 
 After normalization, they are both of the following category:
-aliases: ['/docs/dev/reference/performance/statement-summary/']
 
 {{< copyable "sql" >}}
 

@@ -1,7 +1,6 @@
 ---
 title: Deploy a TiDB Cluster Offline Using TiUP
 summary: Introduce how to deploy a TiDB cluster offline using TiUP.
-aliases: ['/docs/dev/production-offline-deployment-using-tiup/']
 ---
 
 # Deploy a TiDB Cluster Offline Using TiUP

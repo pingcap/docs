@@ -1,7 +1,6 @@
 ---
 title: BR Storages
 summary: Describes the storage URL format used in BR.
-aliases: ['/docs/dev/br/backup-and-restore-storages/']
 ---
 
 # BR Storages
