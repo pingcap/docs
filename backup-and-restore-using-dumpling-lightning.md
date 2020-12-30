@@ -10,7 +10,7 @@ aliases: ['/docs/dev/export-or-backup-using-dumpling/','/tidb/dev/export-or-back
 >
 > PingCAP previously maintained a fork of the [mydumper project](https://github.com/maxbube/mydumper) with enhancements specific to TiDB. This fork has since been replaced by [Dumpling](/dumpling-overview.md), which has been rewritten in Go, and supports more optimizations that are specific to TiDB. It is strongly recommended that you use Dumpling instead of mydumper.
 >
-> For how to backup and restore using Mydumper/TiDB Lightning, refer to [v4.0 documentation](https://docs.pingcap.com/tidb/v4.0/backup-and-restore-using-mydumper-lightning).
+> For how to perform backup and restore using Mydumper/TiDB Lightning, refer to [v4.0 documentation](https://docs.pingcap.com/tidb/v4.0/backup-and-restore-using-mydumper-lightning).
 
 This document introduces in detail how to use Dumpling and TiDB Lightning to backup and restore full data of TiDB. For incremental backup and replication to downstream, refer to [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md).
 
