@@ -944,7 +944,7 @@ explain select * from t where age=5;
 
 > **Note:**
 >
-> Enabling this feature can not guarantee external consistency of the transactions. For details, refer to [`tidb_guarantee_external_consistency`](#tidb_guarantee_external_consistency-new-in-v500rc).
+> Enabling this feature can not guarantee external consistency of the transactions. For details, refer to [`tidb_guarantee_external_consistency`](#tidb_guarantee_external_consistency-new-in-v500-rc).
 
 ### `tidb_guarantee_external_consistency` <span class="version-mark">New in v5.0.0-rc</span>
 
