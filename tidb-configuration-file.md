@@ -312,10 +312,10 @@ Configuration items related to performance.
 
 ### `txn-entry-size-limit` <span class="version-mark">New in v5.0.0-rc</span>
 
-- The size limit of a single row data in TiDB.
+- The size limit of a single row of data in TiDB.
 - Default value: `6291456` (in bytes)
 - The size limit of a single key-value record in a transaction. If the size limit is exceeded, TiDB returns the `entry too large` error. The maximum value of this configuration item does not exceed `125829120` (120 MB).
-- Note that TiKV has similar limitation. If the data size of a single write request exceeds [`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size), which is 8MB by default, TiKV refuses to process this request. When one row of data of the table is large, you need to modify both configurations at the same time.
+- Note that TiKV has a similar limit. If the data size of a single write request exceeds [`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size), which is 8 MB by default, TiKV refuses to process this request. When a table has a row of large size, you need to modify both configurations at the same time.
 
 ### `txn-total-size-limit`
 
