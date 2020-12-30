@@ -25,7 +25,7 @@ TiDB version: 5.0.0-rc
         - [project](https://github.com/tikv/tikv/projects/34)
         - [document](https://github.com/pingcap/docs-cn/pull/5181)
     - Support clustered Index. Clustered indexes provide TiDB the ability to organize tables in a way that can improve the performance of certain queries. (Experimental)
-        - [project](github.com/pingcap/tidb/projects/45)
+        - [project](https://github.com/pingcap/tidb/projects/45)
         - [document](https://docs.pingcap.com/tidb/dev/clustered-indexes)
     - Support `LIST PARTITION` and `LIST COLUMNS PARTITION` table (Experimental)
         - [project](https://github.com/pingcap/tidb/issues/20678)
