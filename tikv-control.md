@@ -376,7 +376,7 @@ tikv-ctl --host ip:port modify-tikv-config -n raftstore.sync-log -v false
 success
 ```
 
-When compaction rate limiting causes accumulated compaction pending bytes, disable `rate-limiter-auto-tuned` mode or set a higher limit for compaction flow:
+When the compaction rate limit causes accumulated compaction pending bytes, disable the `rate-limiter-auto-tuned` mode or set a higher limit for the compaction flow:
 
 {{< copyable "shell-regular" >}}
 
