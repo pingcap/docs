@@ -180,7 +180,7 @@ set @@session.tidb_enable_table_partition = nightly
 
 List partitioning is similar to Range partitioning. Unlike Range partitioning, in List partitioning, each partition contains rows for which the partitioning expression value belongs to a given data set. This data set defined for each partition has any number of values but cannot have duplicate values. You can use the `PARTITION ... VALUES IN (...)` clause to define these values.
 
-Suppose that you want to create a personnel record form for a chain store. You can create a table as follows:
+Suppose that you want to create a personnel record table for a chain store. You can create a table as follows:
 
 {{< copyable "sql" >}}
 
