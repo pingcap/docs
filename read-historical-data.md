@@ -17,19 +17,19 @@ TiDB implements a feature to read history data using the standard SQL interface 
 
 ## How TiDB reads data from history versions
 
-The `tidb_snapshot` system variable is introduced to support reading history data. About the `tidb_snapshot` variable:
+The [`tidb_snapshot`](/system-variables.md#tidb_snapshot) system variable is introduced to support reading history data. About the `tidb_snapshot` variable:
 
-- The variable is valid in the `Session` scope.
-- Its value can be modified using the `Set` statement.
+- The variable is valid in the `SESSION` scope.
+- Its value can be modified using the `SET` statement.
 - The data type for the variable is text.
 - The variable accepts TSO (Timestamp Oracle) and datetime. TSO is a globally unique time service, which is obtained from PD. The acceptable datetime format is "2016-10-08 16:45:26.999". Generally, the datetime can be set using second precision, for example "2016-10-08 16:45:26".
-- When the variable is set, TiDB creates a Snapshot using its value as the timestamp, just for the data structure and there is no any overhead. After that, all the `Select` operations will read data from this Snapshot.
+- When the variable is set, TiDB creates a Snapshot using its value as the timestamp, just for the data structure and there is no any overhead. After that, all the `SELECT` operations will read data from this Snapshot.
 
 > **Note:**
 >
 > Because the timestamp in TiDB transactions is allocated by Placement Driver (PD), the version of the stored data is also marked based on the timestamp allocated by PD. When a Snapshot is created, the version number is based on the value of the `tidb_snapshot` variable. If there is a large difference between the local time of the TiDB server and the PD server, use the time of the PD server.
 
-After reading data from history versions, you can read data from the latest version by ending the current Session or using the `Set` statement to set the value of the `tidb_snapshot` variable to "" (empty string).
+After reading data from history versions, you can read data from the latest version by ending the current Session or using the `SET` statement to set the value of the `tidb_snapshot` variable to "" (empty string).
 
 ## How TiDB manages the data versions
 

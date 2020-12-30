@@ -74,13 +74,13 @@ It is recommended that you use a network disk to back up and restore data. This 
 
 For the detailed usage of the `br backup` command, refer to [BR command-line description](/br/backup-and-restore-tool.md#command-line-description).
 
-1. Before executing the `br backup` command, check the value of the [`tikv_gc_life_time`](/garbage-collection-configuration.md#tikv_gc_life_time) configuration item, and adjust the value appropriately in the MySQL client to make sure that [Garbage Collection](/garbage-collection-overview.md) (GC) does not run during the backup operation.
+1. Before executing the `br backup` command, check the value of the [`tikv_gc_life_time`](/system-variables.md#tikv_gc_life_time) configuration item, and adjust the value appropriately in the MySQL client to make sure that [Garbage Collection](/garbage-collection-overview.md) (GC) does not run during the backup operation:
 
     {{< copyable "sql" >}}
 
     ```sql
-    SELECT * FROM mysql.tidb WHERE VARIABLE_NAME = 'tikv_gc_life_time';
-    UPDATE mysql.tidb SET VARIABLE_VALUE = '720h' WHERE VARIABLE_NAME = 'tikv_gc_life_time';
+    SHOW GLOBAL VARIABLES LIKE 'tikv_gc_life_time';
+    SET GLOBAL tikv_gc_life_time = '720h';
     ```
 
 2. After the backup operation, set the parameter back to the original value.
@@ -88,7 +88,7 @@ For the detailed usage of the `br backup` command, refer to [BR command-line des
     {{< copyable "sql" >}}
 
     ```sql
-    UPDATE mysql.tidb SET VARIABLE_VALUE = '10m' WHERE VARIABLE_NAME = 'tikv_gc_life_time';
+    SET GLOBAL tikv_gc_life_time = '10m';
     ```
 
 > **Note:**

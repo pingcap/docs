@@ -870,8 +870,8 @@ SET tidb_slow_log_threshold = 200;
 - Scope: GLOBAL
 - Default value: `DISTRIBUTED`
 - Specifies the GC mode. Possible values are:
-    - `DISTRIBUTED`: Distributed GC mode. In the [Do GC](/garbage-collection-overview.md#do-gc) step, the GC leader on the TiDB side uploads the safe point to PD. Each TiKV node obtains the safe point respectively and performs GC on all leader Regions on the current node. This mode is is supported from TiDB 3.0.
-    - `CENTRAL`: Central GC mode. In the [Do GC](/garbage-collection-overview.md#do-gc) step, the GC leader sends GC requests to all Regions. This mode is adopted by TiDB 2.1 or earlier versions.
+    - `DISTRIBUTED`: Distributed GC mode. In the [Do GC](/garbage-collection-overview.md#do-gc) step, the GC leader on the TiDB side uploads the safe point to PD. Each TiKV node obtains the safe point respectively and performs GC on all leader Regions on the current node. This mode is supported from TiDB 3.0.
+    - `CENTRAL`: Central GC mode. In the [Do GC](/garbage-collection-overview.md#do-gc) step, the GC leader sends GC requests to all Regions. This mode is adopted by TiDB 2.1 or earlier versions. Starting from TiDB 5.0, this mode is not supported. Clusters set to this mode automatically switch to the `DISTRIBUTED` mode.
 
 ### tikv_gc_run_interval
 
@@ -888,8 +888,8 @@ SET tidb_slow_log_threshold = 200;
 - Scope: GLOBAL
 - Default value: `LEGACY`
 - Possible values:
-  - `LEGACY`: Uses the old way of scanning, that is, disable Green GC.
-  - `PHYSICAL`: Uses the physical scanning method, that is, enable Green GC.
+    - `LEGACY`: Uses the old way of scanning, that is, disable Green GC.
+    - `PHYSICAL`: Uses the physical scanning method, that is, enable Green GC.
 - This parameter specifies the way of scanning locks in the Resolve Locks step of GC, that is, whether to enable Green GC (experimental feature) or not. In the Resolve Locks step of GC, TiKV needs to scan all locks in the cluster. With Green GC disabled, TiDB scans locks by Regions. Green GC provides the "physical scanning" feature, which means that each TiKV node can bypass the Raft layer to directly scan data. This feature can effectively mitigate the impact of GC wakening up all Regions when the [Hibernate Region](/tikv-configuration-file.md#raftstorehibernate-regions-experimental) feature is enabled, thus improving the execution speed in the Resolve Locks step.
 
 ### time_zone
