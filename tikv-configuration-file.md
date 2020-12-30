@@ -750,9 +750,9 @@ Configuration items related to RocksDB
 + Minimum value: `1`
 + Maximum value: `3`
 
-### `rate-limiter-auto-tuned`
+### `rate-limiter-auto-tuned` <span class="version-mark">New in v5.0.0-rc</span>
 
-+ Determines whether to automatically optimize the configuration of the RocksDB's compaction rate limiter
++ Determines whether to automatically optimize the configuration of the RocksDB's compaction rate limiter based on recent workload. When this configuration is enabled, compaction pending bytes will be slightly higher than usual.
 + Default value: `true`
 
 ### `enable-pipelined-write`
@@ -1245,6 +1245,13 @@ Configuration items related to TiDB Lightning import and BR restore.
 + The number of jobs imported concurrently
 + Default value: `8`
 + Minimum value: `1`
+
+## gc
+
+### `enable-compaction-filter` <!-- New in v5.0 -->
+
++ Controls whether to enable the GC in Compaction Filter feature
++ Default value: `false`
 
 ## backup
 
