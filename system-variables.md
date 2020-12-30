@@ -919,7 +919,7 @@ explain select * from t where age=5;
 - TiDB triggers an alarm when the percentage of the memory it takes exceeds a certain threshold. For the detailed usage description of this feature, see [`memory-usage-alarm-ratio`](/tidb-configuration-file.md#memory-usage-alarm-ratio-new-in-v409).
 - You can set the initial value of this variable by configuring [`memory-usage-alarm-ratio`](/tidb-configuration-file.md#memory-usage-alarm-ratio-new-in-v409).
 
-### `tidb_track_aggregate_memory_usage` <!-- New in v5.0.0-rc -->
+### `tidb_track_aggregate_memory_usage` <span class="version-mark">从 v5.0.0-rc 版本开始引入</span>
 
 > **Warning:**
 >
