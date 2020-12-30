@@ -203,7 +203,7 @@ Suppose that there are 20 stores distributed in 4 districts, as shown in the tab
 | Central | 16, 17, 18, 19, 20   |
 ```
 
-If you want to store the personnel data of employees of the same region in the same partition, you can create List partitions based on `store_id`:
+If you want to store the personnel data of employees of the same region in the same partition, you can create a List partitioned table based on `store_id`:
 
 {{< copyable "sql" >}}
 
@@ -225,7 +225,7 @@ After creating the partitions as above, you can easily add or delete records rel
 
 You can also execute `ALTER TABLE employees DROP PARTITION pEast` to delete all related rows, but this statement also deletes the `pEast` partition from the table definition. In this situation, you must execute the `ALTER TABLE ... ADD PARTITION` statement to recover the original partitioning scheme of the table.
 
-Unlike Range partitioning, List partitioning does not have a similar `MAXVALUE` partition to store all values that do not belong to other partitions. Instead, all expected values of the partition expression must be included in the `PARTITION ... VALUES IN (...)` clause. If the value to be inserted in an `INSERT` statement does not match the column value of a partition, the statement fails to execute and an error is reported. See the following example:
+Unlike Range partitioning, List partitioning does not have a similar `MAXVALUE` partition to store all values that do not belong to other partitions. Instead, all expected values of the partition expression must be included in the `PARTITION ... VALUES IN (...)` clause. If the value to be inserted in an `INSERT` statement does not match the value of any partition, the statement fails to execute and an error is reported. See the following example:
 
 ```sql
 test> CREATE TABLE t (
@@ -242,7 +242,7 @@ test> INSERT INTO t VALUES (7, 7);
 ERROR 1525 (HY000): Table has no partition for value 7
 ```
 
-To ignore the error type above, you can use the `IGNORE` keyword. After using this keyword, if a row contains values that do not match the partition's column values, this row will not be inserted. Instead, any row with matched values is inserted, and no error is reported:
+To ignore the error type above, you can use the `IGNORE` keyword. After using this keyword, if a row contains values that do not match the partition's value lists, this row will not be inserted. Instead, any row with matched values is inserted, and no error is reported:
 
 ```sql
 test> TRUNCATE t;
