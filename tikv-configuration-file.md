@@ -752,7 +752,7 @@ Configuration items related to RocksDB
 
 ### `rate-limiter-auto-tuned`
 
-+ Determines whether to automatically optimize the configuration of the RocksDB's compaction rate limiter based on recent workload. When turned on, compaction pending bytes will be slightly higher than usual.
++ Determines whether to automatically optimize the configuration of the RocksDB's compaction rate limiter based on recent workload. When this configuration is enabled, compaction pending bytes will be slightly higher than usual.
 + Default value: `true`
 
 ### `enable-pipelined-write`
