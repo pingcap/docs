@@ -933,7 +933,7 @@ explain select * from t where age=5;
 
 > **Warning:**
 >
-> `tidb_enable_async_commit` is currently an experimental feature. It is not recommended to use this feature in the production environment. Currently, the following issues are found, and be aware of them if you need to use this feature:
+> `tidb_enable_async_commit` is currently an experimental feature. It is not recommended to use this feature in the production environment. Currently, the following incompatible issues are found, and be aware of them if you need to use this feature:
 
 > - This feature is incompatible with [TiCDC](/ticdc/ticdc-overview.md) and might cause TiCDC to run abnormally.
 > - This feature is incompatible with [Compaction Filter](/tikv-configuration-file.md#enable-compaction-filter). when you use two features at the same time, write loss might occur.
