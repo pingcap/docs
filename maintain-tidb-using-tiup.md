@@ -1,6 +1,10 @@
 ---
 title: TiUP Common Operations
 summary: Learn the common operations to operate and maintain a TiDB cluster using TiUP.
+<<<<<<< HEAD
+=======
+aliases: ['/docs/dev/maintain-tidb-using-tiup/','/docs/dev/how-to/maintain/tiup-operations/','/docs/dev/maintain-tidb-using-ansible/','/docs/dev/how-to/deploy/orchestrated/ansible-operations/','/tidb/dev/maintain-tidb-using-ansible/']
+>>>>>>> 3ec3ceac... Remove all TiDB Ansible related contents from dev and v5.0 (#4513)
 ---
 
 # TiUP Common Operations
@@ -13,6 +17,10 @@ This document describes the following common operations when you operate and mai
 - Modify the configuration
 - Stop the cluster
 - Destroy the cluster
+
+> **Note:**
+>
+> Since TiDB v4.0, PingCAP no longer provides support for TiDB Ansible. Since TiDB v5.0, PingCAP no longer provides TiDB Ansible documents. If you want to read the document that introduces how to maintain a TiDB cluster using TiDB Ansible, see [TiDB Ansible Common Operations](https://docs.pingcap.com/tidb/v4.0/maintain-tidb-using-ansible).
 
 ## View the cluster list
 

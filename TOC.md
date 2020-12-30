@@ -34,8 +34,6 @@
       + [Use TiUP (Recommended)](/production-deployment-using-tiup.md)
       + [Use TiUP Offline (Recommended)](/production-offline-deployment-using-tiup.md)
       + [Deploy in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable)
-      + [Use TiDB Ansible](/online-deployment-using-ansible.md)
-      + [Use TiDB Ansible Offline](/offline-deployment-using-ansible.md)
   + [Verify Cluster Status](/post-installation-check.md)
 + Migrate
   + [Overview](/migration-overview.md)
@@ -51,10 +49,8 @@
     + [Use TiUP (Recommended)](/upgrade-tidb-using-tiup.md)
     + [Use TiUP Offline (Recommended)](/upgrade-tidb-using-tiup-offline.md)
     + [Use TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.1/upgrade-a-tidb-cluster)
-    + [Use TiDB Ansible](/upgrade-tidb-using-ansible.md)
   + Scale
     + [Use TiUP (Recommended)](/scale-tidb-using-tiup.md)
-    + [Use TiDB Ansible](/scale-tidb-using-ansible.md)
     + [Use TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.1/scale-a-tidb-cluster)
   + Backup and Restore
     + Use BR Tool (Recommended)
@@ -68,7 +64,6 @@
   + [Daily Checklist](/daily-check.md)
   + [Maintain TiFlash](/tiflash/maintain-tiflash.md)
   + [Maintain TiDB Using TiUP](/maintain-tidb-using-tiup.md)
-  + [Maintain TiDB Using Ansible](/maintain-tidb-using-ansible.md)
   + [Modify Configuration Online](/dynamic-config.md)
 + Monitor and Alert
   + [Monitoring Framework Overview](/tidb-monitoring-framework.md)

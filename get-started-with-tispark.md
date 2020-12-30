@@ -5,7 +5,7 @@ summary: Learn how to use TiSpark quickly.
 
 # TiSpark Quick Start Guide
 
-To make it easy to [try TiSpark](/tispark-overview.md), the TiDB cluster installed using TiDB Ansible integrates Spark, TiSpark jar package and TiSpark sample data by default.
+To make it easy to [try TiSpark](/tispark-overview.md), the TiDB cluster installed using TiUP integrates Spark and TiSpark jar package by default.
 
 ## Deployment information
 

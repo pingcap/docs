@@ -7,7 +7,6 @@ summary: Use TiKV Control to manage a TiKV cluster.
 
 TiKV Control (`tikv-ctl`) is a command line tool of TiKV, used to manage the cluster. Its installation directory is as follows:
 
-* If the cluster is deployed using TiDB Ansible, `tikv-ctl` directory is in the `resources/bin` subdirectory under the `ansible` directory.
 * If the cluster is deployed using TiUP, `tikv-ctl` directory is in the in `~/.tiup/components/ctl/{VERSION}/` directory.
 
 ## Use TiKV Control in TiUP

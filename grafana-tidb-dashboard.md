@@ -5,7 +5,7 @@ summary: Learn some key metrics displayed on the Grafana TiDB dashboard.
 
 # TiDB Monitoring Metrics
 
-If you use TiDB Ansible or TiUP to deploy the TiDB cluster, the monitoring system (Prometheus & Grafana) is deployed at the same time. For the monitoring architecture, see [TiDB Monitoring Framework Overview](/tidb-monitoring-framework.md).
+If you use TiUP to deploy the TiDB cluster, the monitoring system (Prometheus & Grafana) is deployed at the same time. For the monitoring architecture, see [TiDB Monitoring Framework Overview](/tidb-monitoring-framework.md).
 
 The Grafana dashboard is divided into a series of sub dashboards which include Overview, PD, TiDB, TiKV, Node\_exporter, Disk Performance, and so on. The TiDB dashboard consists of the TiDB panel and the TiDB Summary panel. The differences between the two panels are different in the following aspects:
 
