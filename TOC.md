@@ -11,9 +11,6 @@
   + [TiDB 4.0 Experimental Features](/experimental-features-4.0.md)
   + [Basic Features](/basic-features.md)
   + Benchmarks
-    + [v4.0 Sysbench Performance Test](/benchmark/benchmark-sysbench-v4-vs-v3.md)
-    + [v4.0 TPC-H Performance Test](/benchmark/v4.0-performance-benchmarking-with-tpch.md)
-    + [v4.0 TPC-C Performance Test](/benchmark/v4.0-performance-benchmarking-with-tpcc.md)
     + [Interaction Test on Online Workloads and `ADD INDEX`](/benchmark/online-workloads-and-add-index-operations.md)
   + [MySQL Compatibility](/mysql-compatibility.md)
   + [TiDB Limitations](/tidb-limitations.md)
@@ -39,12 +36,7 @@
       + [Use TiUP (Recommended)](/production-deployment-using-tiup.md)
       + [Use TiUP Offline (Recommended)](/production-offline-deployment-using-tiup.md)
       + [Deploy in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable)
-      + [Use TiDB Ansible](/online-deployment-using-ansible.md)
-      + [Use TiDB Ansible Offline](/offline-deployment-using-ansible.md)
   + [Verify Cluster Status](/post-installation-check.md)
-  + Benchmarks Methods
-    + [Test TiDB Using Sysbench](/benchmark/benchmark-tidb-using-sysbench.md)
-    + [Run TPC-C Test on TiDB](/benchmark/benchmark-tidb-using-tpcc.md)
 + Migrate
   + [Overview](/migration-overview.md)
   + Migrate from MySQL
@@ -59,10 +51,8 @@
     + [Use TiUP (Recommended)](/upgrade-tidb-using-tiup.md)
     + [Use TiUP Offline (Recommended)](/upgrade-tidb-using-tiup-offline.md)
     + [Use TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.1/upgrade-a-tidb-cluster)
-    + [Use TiDB Ansible](/upgrade-tidb-using-ansible.md)
   + Scale
     + [Use TiUP (Recommended)](/scale-tidb-using-tiup.md)
-    + [Use TiDB Ansible](/scale-tidb-using-ansible.md)
     + [Use TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.1/scale-a-tidb-cluster)
   + Backup and Restore
     + Use BR Tool (Recommended)
@@ -76,7 +66,6 @@
   + [Daily Checklist](/daily-check.md)
   + [Maintain TiFlash](/tiflash/maintain-tiflash.md)
   + [Maintain TiDB Using TiUP](/maintain-tidb-using-tiup.md)
-  + [Maintain TiDB Using Ansible](/maintain-tidb-using-ansible.md)
   + [Modify Configuration Online](/dynamic-config.md)
 + Monitor and Alert
   + [Monitoring Framework Overview](/tidb-monitoring-framework.md)
@@ -395,6 +384,7 @@
       + [Precision Math](/functions-and-operators/precision-math.md)
       + [Set Operations](/functions-and-operators/set-operators.md)
       + [List of Expressions for Pushdown](/functions-and-operators/expressions-pushed-down.md)
+    + [Clustered Indexes](/clustered-indexes.md)
     + [Constraints](/constraints.md)
     + [Generated Columns](/generated-columns.md)
     + [SQL Mode](/sql-mode.md)
@@ -554,6 +544,7 @@
     + [3.1.0-beta.1](/releases/release-3.1.0-beta.1.md)
     + [3.1.0-beta](/releases/release-3.1.0-beta.md)
   + v3.0
+    + [3.0.20](/releases/release-3.0.20.md)
     + [3.0.19](/releases/release-3.0.19.md)
     + [3.0.18](/releases/release-3.0.18.md)
     + [3.0.17](/releases/release-3.0.17.md)

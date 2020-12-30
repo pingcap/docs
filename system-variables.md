@@ -307,8 +307,8 @@ Constraint checking is always performed in place for pessimistic transactions (d
 ### tidb_enable_clustered_index <!-- New in v5.0 -->
 
 - Scope: SESSION | GLOBAL
-- Default value: 1
-- This variable is used to control whether to enable the clustered index feature.
+- Default value: 0
+- This variable is used to control whether to enable the [clustered index](/clustered-indexes.md) feature.
     - This feature is only applicable to newly created tables and does not affect the existing old tables.
     - This feature is only applicable to tables whose primary key is the single-column non-integer type or the multi-column type. It does not affect the tables without a primary key or tables with the primary key of the single-column non-integer type.
     - You can execute `select tidb_pk_type from information_schema.tables where table_name ='{table_name}'` to check whether the clustered index feature has been enabled on a table.
@@ -916,5 +916,15 @@ explain select * from t where age=5;
 
 - Scope: SESSION
 - Default value: 0.8
-- TiDB triggers an alarm when the percentage of the memory it takes exceeds a certain threshold. For the detailed usage description of this feature, see [`memory-usage-alarm-ratio`](/tidb-configuration-file.md#memory-usage-alarm-ratio).
-- You can set the initial value of this variable by configuring [`memory-usage-alarm-ratio`](/tidb-configuration-file.md#memory-usage-alarm-ratio).
+- TiDB triggers an alarm when the percentage of the memory it takes exceeds a certain threshold. For the detailed usage description of this feature, see [`memory-usage-alarm-ratio`](/tidb-configuration-file.md#memory-usage-alarm-ratio-new-in-v409).
+- You can set the initial value of this variable by configuring [`memory-usage-alarm-ratio`](/tidb-configuration-file.md#memory-usage-alarm-ratio-new-in-v409).
+
+### `tidb_track_aggregate_memory_usage` <span class="version-mark">New in v5.0.0-rc</span>
+
+> **Warning:**
+>
+> `tidb_track_aggregate_memory_usage` is currently an experimental feature. It is not recommended to use this feature in the production environment.
+
+- Scope: SESSION | GLOBAL
+- Default value: OFF
+- This variable controls whether to track the memory usage of the aggregate function. When you enable this feature, TiDB counts the memory usage of the aggregate function, which might cause the overall SQL memory statistics to exceed the threshold [`mem-quota-query`](/tidb-configuration-file.md#mem-quota-query), and then be affected by the behavior defined by [`oom-action`](/tidb-configuration-file.md#oom-action).
