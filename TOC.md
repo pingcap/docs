@@ -58,7 +58,6 @@
       + [BR Use Cases](/br/backup-and-restore-use-cases.md)
       + [BR Storages](/br/backup-and-restore-storages.md)
     + [Use Dumpling and TiDB Lightning (Recommended)](/backup-and-restore-using-dumpling-lightning.md)
-    + [Use Mydumper and TiDB Lightning](/backup-and-restore-using-mydumper-lightning.md)
   + [Read Historical Data](/read-historical-data.md)
   + [Configure Time Zone](/configure-time-zone.md)
   + [Daily Checklist](/daily-check.md)
@@ -197,7 +196,6 @@
     + [Data Check in Sharding Scenarios](/sync-diff-inspector/shard-diff.md)
     + [Data Check for TiDB Upstream/Downstream Clusters](/sync-diff-inspector/upstream-downstream-diff.md)
   + [Loader](/loader-overview.md)
-  + [Mydumper](/mydumper-overview.md)
   + [Syncer](/syncer-overview.md)
   + TiSpark
     + [Quick Start](/get-started-with-tispark.md)
