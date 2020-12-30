@@ -938,21 +938,22 @@ explain select * from t where age=5;
 
 > **Warning:**
 >
-> `tidb_enable_async_commit` is currently an experimental feature. It is not recommended to use this feature in the production environment. Currently, the following incompatible issues are found, and be aware of them if you need to use this feature:
+> Async commit is still an experimental feature. It is not recommended to use this feature in the production environment. Currently, the following incompatible issues are found, and be aware of them if you need to use this feature:
 
 > - This feature is incompatible with [TiCDC](/ticdc/ticdc-overview.md) and might cause TiCDC to run abnormally.
-> - This feature is incompatible with [Compaction Filter](/tikv-configuration-file.md#enable-compaction-filter). when you use two features at the same time, write loss might occur.
+> - This feature is incompatible with [Compaction Filter](/tikv-configuration-file.md#enable-compaction-filter). If you use the two features at the same time, write loss might occur.
+> - This feature is incompatible with TiDB Binlog and does not take effect when TiDB Binlog is enabled.
 
 - Scope: SESSION | GLOBAL
 - Default value: OFF
-- This variable controls whether to enable the async commit feature for the second phase of the two-phase transaction commit to perform asynchronously in the background. Enabling this feature can reduce the latency of transaction commit. This feature does not take effect when TiDB Binlog is enabled.
+- This variable controls whether to enable the async commit feature for the second phase of the two-phase transaction commit to perform asynchronously in the background. Enabling this feature can reduce the latency of transaction commit.
 
-> **Note:**
+> **Warning:**
 >
-> Enabling this feature can not guarantee external consistency of the transactions. For details, refer to [`tidb_guarantee_external_consistency`](#tidb_guarantee_external_consistency-new-in-v500-rc).
+> When async commit is enabled, the external consistency of transactions cannot be guaranteed. For details, refer to [`tidb_guarantee_external_consistency`](#tidb_guarantee_external_consistency-new-in-v500-rc).
 
 ### `tidb_guarantee_external_consistency` <span class="version-mark">New in v5.0.0-rc</span>
 
 - Scope: SESSION | GLOBAL
 - Default value: OFF
-- This variable controls whether external consistency needs to be guaranteed when enabling the async commit <!-- and one-phase commit--> feature. When this feature is disabled, if the modified contents of two transactions do not intersect, the commit order that transactions observe may not be consistent with the actual commit order. When the async commit <!-- or one-phase commit--> feature is disabled, external consistency can be guaranteed whether this option is enabled or disabled.
+- This variable controls whether the external consistency needs to be guaranteed when the async commit <!-- and one-phase commit--> feature is enabled. When this option is disabled, if the modifications made in two transactions do not have overlapping parts, the commit order that other transactions observe might not be consistent with the actual commit order. When the async commit <!-- or one-phase commit--> feature is disabled, the external consistency can be guaranteed no matter whether this configuration is enabled or disabled.
