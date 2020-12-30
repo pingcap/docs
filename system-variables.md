@@ -940,7 +940,7 @@ explain select * from t where age=5;
 
 - Scope: SESSION | GLOBAL
 - Default value: OFF
-- This variable controls whether to enable the async commit feature for the second phase of the two-phase transaction commit to perform asynchronously in the background. Enabling this feature can reduce the latency of transaction commit. This feature is not compatible with [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) and does not take effect when Binlog is enabled.
+- This variable controls whether to enable the async commit feature for the second phase of the two-phase transaction commit to perform asynchronously in the background. Enabling this feature can reduce the latency of transaction commit. This feature does not take effect when TiDB Binlog is enabled.
 
 > **Note:**
 >
