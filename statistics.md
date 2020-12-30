@@ -6,23 +6,23 @@ aliases: ['/docs/dev/statistics/','/docs/dev/reference/performance/statistics/']
 
 # Introduction to Statistics
 
-TiDB uses statistics to decide [which index to choose](/choose-index.md). The `tidb_analyze_version` variable controls the statistics collected by TiDB. Currently two versions are supported: `tidb_analyze_version = 1` (by default) and `tidb_analyze_version = 2`. The two versions are listed as follows:
+TiDB uses statistics to decide [which index to choose](/choose-index.md). The `tidb_analyze_version` variable controls the statistics collected by TiDB. Currently, two versions of statistics are supported: `tidb_analyze_version = 1` (by default) and `tidb_analyze_version = 2`. These two versions include different information in TiDB:
 
 | Information | Version 1 | Version 2|
 | --- | --- | ---|
 | The total number of rows in the table | √ | √ |
 | Column Count-Min Sketch | √ | × |
-| Count-Min Sketch | √ | × |
+| Index Count-Min Sketch | √ | × |
 | Column Top-N | √ | √ (Maintenance methods and precision are improved) |
-| Index Top-N | √ (Insufficient maintenance precision might cause inaccuracy | √ (Maintenance methods and precision are improved) |
-| Column histogram | √ | √ (The histogram does not include Top-N values) |
-| Index histogram | √ | √ (The histogram buckets records the number different values in each bucket, and the histogram does not include Top-N values) |
+| Index Top-N | √ (Insufficient maintenance precision might cause inaccuracy) | √ (Maintenance methods and precision are improved) |
+| Column histogram | √ | √ (The histogram does not include Top-N values.) |
+| Index histogram | √ | √ (The histogram buckets record the number of different values in each bucket, and the histogram does not include Top-N values.) |
 | The number of `NULL`s in the column | √ | √ |
 | The number of `NULL`s in the index | √ | √ |
 | The average length of columns | √ | √ |
 | The average length of indexes | √ | √ |
 
-Compared to Version 1, Version 2 statistics avoids the possible inaccuracy caused by hash collision in a large amount of data. It also incraease the estimate precision in most scenarios.
+Compared to Version 1, Version 2 statistics avoids the potential inaccuracy caused by hash collision when the data volume is huge. It also increases the estimate precision in most scenarios.
 
 This document briefly introduces the histogram, Count-Min Sketch, and Top-N, and details the collection and maintenance of statistics.
 
@@ -270,7 +270,7 @@ Currently, the `SHOW STATS_HISTOGRAMS` statement returns the following 10 column
 | `column_name` | The column name (when `is_index` is `0`) or the index name (when `is_index` is `1`) |
 | `is_index` | Whether it is an index column or not |
 | `update_time` | The time of the update |
-| `version` | The value of `tidb_analyze_version` in the corresponding `analyze` statement |
+| `version` | The value of `tidb_analyze_version` in the corresponding `ANALYZE` statement |
 | `distinct_count` | The number of different values |
 | `null_count` | The number of `NULL` |
 | `avg_col_size` | The average length of columns |
@@ -307,7 +307,7 @@ Currently, the `SHOW STATS_BUCKETS` statement returns the following 11 columns:
 | `repeats` | The occurrence number of the maximum value |
 | `lower_bound` | The minimum value |
 | `upper_bound` | The maximum value |
-| `ndv` | The number of different values in the bucket. When `tidb_analyze_version` = 1, `ndv` is always 0, which has no actual meaning. |
+| `ndv` | The number of different values in the bucket. When `tidb_analyze_version` = `1`, `ndv` is always `0`, which has no actual meaning. |
 
 ### Top-N information
 
