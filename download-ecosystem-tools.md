@@ -69,3 +69,15 @@ Download [Dumpling](/dumpling-overview.md) from the links below:
 > The `{version}` in the download link is the version number of Dumpling. For example, the link for downloading the `v4.0.2` version of Dumpling is `https://download.pingcap.org/tidb-toolkit-v4.0.2-linux-amd64.tar.gz`. You can view the currently released versions in [Dumpling Releases](https://github.com/pingcap/dumpling/releases).
 >
 > Dumpling supports arm64 linux. You can replace `amd64` in the download link with `arm64`, which means the `arm64` version of Dumpling.
+
+## sync-diff-inspector
+
+Download [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md) from the links below:
+
+| Package name | OS | Architecture | SHA256 checksum |
+|:---|:---|:---|:---|
+| [tidb-enterprise-tools-nightly-linux-amd64.tar.gz](https://download.pingcap.org/tidb-enterprise-tools-nightly-linux-amd64.tar.gz) | Linux | amd64 | [tidb-enterprise-tools-nightly-linux-amd64.sha256](https://download.pingcap.org/tidb-enterprise-tools-nightly-linux-amd64.sha256) |
+
+## TiCDC
+
+To download [TiCDC](/ticdc/ticdc-overview.md), refer to [Deploy TiCDC](/ticdc/deploy-ticdc.md).
