@@ -45,6 +45,10 @@ To deploy TiDB Lightning in the Local-backend mode, see [TiDB Lightning Deployme
 
 ## TiDB Lightning TiDB-backend
 
+> **Note:**
+>
+> Since TiDB v4.0, PingCAP no longer maintains the [Loader](https://docs.pingcap.com/tidb/v4.0/loader-overview) tool. Since v5.0, the Loader documentation is no longer available. Loader's functionality has been completely replaced by the TiDB-backend of TiDB Lightning, so it is highly recommended to switch to TiDB Lightning.
+
 ### Deployment for TiDB-backend
 
 When using the TiDB-backend, deploying `tikv-importer` is not necessary. Compared with the [standard deployment procedure](/tidb-lightning/deploy-tidb-lightning.md), the TiDB-backend deployment has the following two differences:
@@ -91,7 +95,7 @@ on-duplicate = "replace" # or "error" or "ignore"
 
 ### Migrating from Loader to TiDB Lightning TiDB-backend
 
-TiDB Lightning using the TiDB-backend can completely replace functions of [Loader](/loader-overview.md). The following list shows how to translate Loader configurations into [TiDB Lightning configurations](/tidb-lightning/tidb-lightning-configuration.md).
+TiDB Lightning using the TiDB-backend can completely replace functions of [Loader](https://docs.pingcap.com/tidb/v4.0/loader-overview). The following list shows how to translate Loader configurations into [TiDB Lightning configurations](/tidb-lightning/tidb-lightning-configuration.md).
 
 <table>
 <thead><tr><th>Loader</th><th>TiDB Lightning</th></tr></thead>
