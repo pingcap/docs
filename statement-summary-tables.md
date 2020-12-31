@@ -25,7 +25,10 @@ select * from EMPLOYEE where ID in (4, 5) and SALARY between 3000 and 4000;
 ```
 
 After normalization, they are both of the following category:
+<<<<<<< HEAD
 aliases: ['/docs/v3.0/reference/performance/statement-summary/']
+=======
+>>>>>>> 49307188... Fix a typo in docs (#4554)
 
 {{< copyable "sql" >}}
 
