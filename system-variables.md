@@ -950,7 +950,7 @@ explain select * from t where age=5;
 
 > **Warning:**
 >
-> When async commit is enabled, the external consistency of transactions cannot be guaranteed. For details, refer to [`tidb_guarantee_external_consistency`](#tidb_guarantee_external_consistency-new-in-v500-rc).
+> When async commit is enabled, the external consistency of transactions cannot be guaranteed. For details, refer to [`tidb_guarantee_external_consistency`](#tidb_guarantee_external_consistency-).
 
 ### `tidb_guarantee_external_consistency` <!-- New in v5.0.0-rc -->
 
