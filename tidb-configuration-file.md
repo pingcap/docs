@@ -287,7 +287,7 @@ Configuration items related to performance.
 - Default value: `0`
 - This configuration only takes effect when `prepared-plan-cache.enabled` is `true`. When the size of the LRU is greater than `prepared-plan-cache.capacity`, the elements in the LRU are also removed.
 
-### `server-memory-quota`
+### `server-memory-quota` <span class="version-mark">New in v4.0.9</span>
 
 > **Warning:**
 >
@@ -296,11 +296,11 @@ Configuration items related to performance.
 + The memory usage limit of tidb-server instances.
 + Default value: `0` (in bytes), which means no memory limit.
 
-### `memory-usage-alarm-ratio`
+### `memory-usage-alarm-ratio` <span class="version-mark">New in v4.0.9</span>
 
 + TiDB triggers an alarm when the memory usage of tidb-server instance exceeds a certain threshold. The valid value for this configuration item ranges from `0` to `1`. If it is configured as `0` or `1`, this alarm feature is disabled.
 + Default value: `0.8`
-+ When the memory usage alarm is enabled, if [`server-memory-quota`](/tidb-configuration-file.md#server-memory-quota) is not set, then the threshold of memory usage is ```the `memory-usage-alarm-ratio` value * the system memory size```; if [`server-memory-quota`](/tidb-configuration-file.md#server-memory-quota) is set to a value greater than 0, then the threshold of memory usage is ```the `memory-usage-alarm-ratio` value * the `server-memory-quota` value```.
++ When the memory usage alarm is enabled, if [`server-memory-quota`](/tidb-configuration-file.md#server-memory-quota-new-in-v409) is not set, then the threshold of memory usage is ```the `memory-usage-alarm-ratio` value * the system memory size```; if `server-memory-quota` is set to a value greater than 0, then the threshold of memory usage is ```the `memory-usage-alarm-ratio` value * the `server-memory-quota` value```.
 + When TiDB detects that the memory usage of the tidb-server instance exceeds the threshold, it considers that there might be a risk of OOM. Therefore, it records ten SQL statements with the highest memory usage, ten SQL statements with the longest running time, and the heap profile among all SQL statements currently being executed to the directory [`tmp-storage-path/record`](/tidb-configuration-file.md#tmp-storage-path) and outputs a log containing the keyword `tidb-server has the risk of OOM`.
 + The value of this configuration item is the initial value of the system variable [`tidb_memory_usage_alarm_ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio).
 
@@ -477,7 +477,7 @@ This section introduces configuration items related to the Coprocessor Cache fea
 
 ### `admission-max-result-mb`
 
-- Specifies the largest single push-down calculation result set that can be cached. If the result set of a single push-down calculation returned on the Coprocessor is larger than the result set specified by this parameter, the result set is cached. Increasing this value means that more types of push-down requests are cached, but also cause the cache space to be occupied more easily. Note that the size of each push-down calculation result set is generally smaller than the size of the Region. Therefore, it is meaningless to set this value far beyond the size of a Region.
+- Specifies the largest single push-down calculation result set that can be cached. If the result set of a single push-down calculation returned on the Coprocessor is less than the result set specified by this parameter, the result set is cached. Increasing this value means that more types of push-down requests are cached, but also cause the cache space to be occupied more easily. Note that the size of each push-down calculation result set is generally smaller than the size of the Region. Therefore, it is meaningless to set this value far beyond the size of a Region.
 - Default value: `10.0`
 - Unit: MB
 
