@@ -25,7 +25,6 @@ select * from EMPLOYEE where ID in (4, 5) and SALARY between 3000 and 4000;
 ```
 
 After normalization, they are both of the following category:
-aliases: ['/docs/v3.1/reference/performance/statement-summary/']
 
 {{< copyable "sql" >}}
 
