@@ -1,10 +1,6 @@
 ---
 title: TiDB Lightning Backends
 summary: Learn the backends of TiDB Lightning.
-<<<<<<< HEAD
-=======
-aliases: ['/docs/dev/tidb-lightning/tidb-lightning-tidb-backend/','/docs/dev/reference/tools/tidb-lightning/tidb-backend/','/tidb/dev/tidb-lightning-tidb-backend','/docs/dev/loader-overview/','/docs/dev/reference/tools/loader/','/docs/dev/load-misuse-handling/','/docs/dev/reference/tools/error-case-handling/load-misuse-handling/','/tidb/dev/load-misuse-handling','/tidb/dev/loader-overview/']
->>>>>>> 4b77dd1e... delete syncer/loader docs from dev/v5.0 (#4542)
 ---
 
 # TiDB Lightning Backends
