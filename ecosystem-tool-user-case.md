@@ -30,7 +30,7 @@ In addition, BR can also be used to perform [incremental backup](/br/backup-and-
 
 ## Migrate data to TiDB
 
-If you need to migrate data from a TiDB cluster to MySQL or to another TiDB cluster, use [Dumpling](/dumpling-overview.md) to export full data from TiDB as SQL dump files, and then use [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) to import data to TiDB clusters.
+If you need to migrate data from a TiDB cluster to MySQL or to another TiDB cluster, use [Dumpling](/dumpling-overview.md) to export full data from TiDB as SQL dump files, and then use [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) to import data to another TiDB cluster.
 
 If you also need to migrate incremental data, use [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md).
 
