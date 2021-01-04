@@ -5,7 +5,7 @@ summary: Learn the log redaction in TiDB components.
 
 # Log Redaction
 
-When TiDB provides detailed log information, it might print sensitive data (for example, user data) in the log, which causes data security risks. To avoid such risks, each component (TiDB, TiKV, and PD) provides a configuration item that enables log redaction to shield user data values.
+When TiDB provides detailed log information, it might print sensitive data (for example, user data) in the log, which causes data security risks. To avoid such risks, each component (TiDB and TiKV) provides a configuration item that enables log redaction to shield user data values.
 
 ## Log redaction in TiDB side
 
@@ -40,7 +40,3 @@ From the error log above, you can see that all sensitive information is shielded
 ## Log redaction in TiKV side
 
 To enable log redaction in the TiKV side, set the value of [`security.redact-info-log`](/tikv-configuration-file.md#redact-info-log-new-in-v408) to `true`. This configuration value defaults to `false`, which means that log redaction is disabled.
-
-## Log redaction in PD side
-
-To enable log redaction in the PD side, set the value of [`security.redact-info-log`](/pd-configuration-file.md#redact-info-log) to `true`. This configuration value defaults to `false`, which means that log redaction is disabled.
