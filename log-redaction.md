@@ -24,6 +24,7 @@ After the setting, all logs generated in new sessions are redacted:
 ```sql
 create table t (a int, unique key (a));
 Query OK, 0 rows affected (0.00 sec)
+
 insert into t values (1),(1);
 ERROR 1062 (23000): Duplicate entry '1' for key 'a'
 ```
