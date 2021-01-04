@@ -49,7 +49,7 @@ Currently, it is not supported to only enable encrypted transmission of some spe
 
         ```toml
         [security]
-        ## The path for certificates. Empty string means that secure connections are disabled.
+        ## The path for certificates. An empty string means that secure connections are disabled.
         # Path of the file that contains a list of trusted SSL CAs. If it is set, the following settings `cert_path` and `key_path` are also needed.
         ca-path = "/path/to/ca.pem"
         # Path of the file that contains X509 certificate in PEM format.
@@ -64,7 +64,7 @@ Currently, it is not supported to only enable encrypted transmission of some spe
 
         ```toml
         [security]
-        ## The path for certificates. Empty string means that secure connections are disabled.
+        ## The path for certificates. An empty string means that secure connections are disabled.
         # Path of the file that contains a list of trusted SSL CAs. If it is set, the following settings `cert_path` and `key_path` are also needed.
         cacert-path = "/path/to/ca.pem"
         # Path of the file that contains X509 certificate in PEM format.
@@ -79,7 +79,7 @@ Currently, it is not supported to only enable encrypted transmission of some spe
 
          ```toml
         [security]
-        ## The path for certificates. Empty string means that secure connections are disabled.
+        ## The path for certificates. An empty string means that secure connections are disabled.
         # Path of the file that contains a list of trusted SSL CAs. If it is set, the following settings `cert_path` and `key_path` are also needed.
         ca_path = "/path/to/ca.pem"
         # Path of the file that contains X509 certificate in PEM format.
