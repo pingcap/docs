@@ -232,6 +232,7 @@
     + [Enable TLS Between TiDB Components](/enable-tls-between-components.md)
     + [Generate Self-signed Certificates](/generate-self-signed-certificates.md)
     + [Encryption at Rest](/encryption-at-rest.md)
+    + [Log Redaction](/log-redaction.md)
   + Privileges
     + [Security Compatibility with MySQL](/security-compatibility-with-mysql.md)
     + [Privilege Management](/privilege-management.md)
