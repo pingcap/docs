@@ -116,17 +116,11 @@ See the [Checkpoints control](/tidb-lightning/tidb-lightning-checkpoints.md#chec
 
 ## [sql2kv] sql encode error = [types:1292]invalid time format: '{1970 1 1 …}'
 
-**Cause**: A table contains a column with the `timestamp` type, but the time value itself does not exist. This is either because of DST changes or the time value has exceeded the supported range (1970 Jan 1st to 2038 Jan 19th).
+**Cause**: A table contains a column with the `timestamp` type, but the time value itself does not exist. This is either because of DST changes or the time value has exceeded the supported range (Jan 1, 1970 to Jan 19, 2038).
 
 **Solutions**:
 
-1. Ensure Lightning and the source database are using the same time zone. When deploying via TiDB Ansible, the timezone is defined in `inventory.ini`.
-
-    ```ini
-    # inventory.ini
-    [all:vars]
-    timezone = Asia/Shanghai
-    ```
+1. Ensure Lightning and the source database are using the same time zone.
 
     When executing Lightning directly, the time zone can be forced using the `$TZ` environment variable.
 

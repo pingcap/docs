@@ -750,9 +750,9 @@ Configuration items related to RocksDB
 + Minimum value: `1`
 + Maximum value: `3`
 
-### `rate-limiter-auto-tuned`
+### `rate-limiter-auto-tuned` <!-- New in v5.0.0-rc -->
 
-+ Determines whether to automatically optimize the configuration of the RocksDB's compaction rate limiter
++ Determines whether to automatically optimize the configuration of the RocksDB's compaction rate limiter based on recent workload. When this configuration is enabled, compaction pending bytes will be slightly higher than usual.
 + Default value: `true`
 
 ### `enable-pipelined-write`
@@ -893,6 +893,13 @@ Configuration items related to `rocksdb.defaultcf`
 + The default compression algorithm for each level
 + Optional values: ["no", "no", "lz4", "lz4", "lz4", "zstd", "zstd"]
 + Default value: `No` for the first two levels, and `lz4` for the next five levels
+
+### `bottommost-level-compression`
+
++ Sets the compression algorithm of the bottommost layer. This configuration item overrides the `compression-per-level` setting.
++ Ever since data is written to LSM-tree, RocksDB does not directly adopt the last compression algorithm specified in the `compression-per-level` array for the bottommost layer. `bottommost-level-compression` enables the bottommost layer to use the compression algorithm of the best compression effect from the beginning.
++ If you do not want to set the compression algorithm for the bottommost layer, set the value of this configuration item to `disable`.
++ Default value: "zstd"
 
 ### `write-buffer-size`
 
@@ -1188,7 +1195,7 @@ Configuration items related to security
 + The path of the PEM file that contains the X509 key
 + Default value: ""
 
-### `redact-info-log`
+### `redact-info-log` <span class="version-mark">New in v4.0.8</span>
 
 + This configuration item enables or disables log redaction. If the configuration value is set to `true`, all user data in the log will be replaced by `?`.
 + Default value: `false`
@@ -1238,6 +1245,13 @@ Configuration items related to TiDB Lightning import and BR restore.
 + The number of jobs imported concurrently
 + Default value: `8`
 + Minimum value: `1`
+
+## gc
+
+### `enable-compaction-filter` <!-- New in v5.0.0-rc -->
+
++ Controls whether to enable the GC in Compaction Filter feature
++ Default value: `false`
 
 ## backup
 
