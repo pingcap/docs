@@ -43,7 +43,7 @@ If only one table has an error encountered, the rest will still be processed nor
 
 ## How to properly restart TiDB Lightning?
 
-If you want to use Importer-backend, depending on the status of `tikv-importer`, the basic sequence of restarting TiDB Lightning is like this:
+If you are using Importer-backend, depending on the status of `tikv-importer`, the basic sequence of restarting TiDB Lightning is like this:
 
 If `tikv-importer` is still running:
 
@@ -63,7 +63,7 @@ If `tikv-importer` needs to be restarted:
 6. [Destroy the failed tables and checkpoints](/troubleshoot-tidb-lightning.md#checkpoint-for--has-invalid-status-error-code)
 7. Start `tidb-lightning` again.
 
-If you use Local-backend and TiDB-backend, the operation is the same as the `tikv-importer` of Importer-backend when the `tikv-importer` is still running.
+If you are using Local-backend or TiDB-backend, the operations are the same as those of using Importer-backend when the `tikv-importer` is still running.
 
 ## How to ensure the integrity of the imported data?
 
@@ -130,7 +130,7 @@ It is potentially caused by starting `tidb-lightning` incorrectly, which causes 
 
 It is not recommended to directly use `nohup` in the command line to start `tidb-lightning`. You can [start `tidb-lightning`](/tidb-lightning/deploy-tidb-lightning.md#step-3-start-tidb-lightning) by executing a script.
 
-Besides, if the last log of TiDB Lightning shows that the error is "Context canceled", you need to search for the first "ERROR" level log. This log is usually followed by a "get signal to exit", indicating that TiDB Lightning received an interrupt signal and then exited.
+In addition, if the last log of TiDB Lightning shows that the error is "Context canceled", you need to search for the first "ERROR" level log. This "ERROR" level log is usually followed by "got signal to exit", which indicates that TiDB Lightning received an interrupt signal and then exited.
 
 ## Why my TiDB cluster is using lots of CPU resources and running very slowly after using TiDB Lightning?
 
