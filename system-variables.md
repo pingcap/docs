@@ -72,7 +72,7 @@ SET  GLOBAL tidb_distsql_scan_concurrency = 10;
 - Default value: 0
 - This variable is used to show whether the execution plan used in the previous `execute` statement is taken directly from the plan cache.
 
-### last_plan_from_binding <!-- New in v5.0 -->
+### last_plan_from_binding <!-- New in v5.0.0-rc -->
 
 - Scope: SESSION
 - Default value: 0
@@ -304,7 +304,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Default value: 0
 - This variable is used to control whether to enable the cascades planner, which is currently considered experimental.
 
-### tidb_enable_clustered_index <!-- New in v5.0 -->
+### tidb_enable_clustered_index <!-- New in v5.0.0-rc -->
 
 - Scope: SESSION | GLOBAL
 - Default value: 0
@@ -370,11 +370,16 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Scope: SESSION | GLOBAL
 - Default value: "on"
 - This variable is used to set whether to enable the `TABLE PARTITION` feature.
-    - `off` indicates disabling the `TABLE PARTITION` feature. In this case, the syntax that creates a partition table can be executed, but the table created is not a partitioned one.
-    - `on` indicates enabling the `TABLE PARTITION` feature for the supported partition types. Currently, it indicates enabling range partition, hash partition and range column partition with one single column.
-    - `auto` functions the same way as `on` does.
 
-- Currently, TiDB only supports range partition and hash partition.
+    - `on` indicates enabling Range partitioning, Hash partitioning, and Range column partitioning with one single column.
+    - `auto` functions the same way as `on` does.
+    - `nightly` indicates enabling the types of partitioned tables specified in `on`. It also indicates enabling List partitioning and List COLUMNS partitioning.
+    - `off` indicates disabling the `TABLE PARTITION` feature. In this case, the syntax that creates a partition table can be executed, but the table created is not a partitioned one.
+
+> **Note:**
+>
+> Currently, TiDB only supports Range partitioning and Hash partitioning by default.
+> List partitioning and List COLUMNS partitioning are still experimental features.
 
 ### tidb_enable_telemetry <span class="version-mark">New in v4.0.2 version</span>
 
@@ -562,7 +567,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 - Scope: SESSION
 - Default value: 0
-- This variable is used to set whether the optimizer executes the optimization operation of pushing down the aggregate function to the position before Join.
+- This variable is used to set whether the optimizer executes the optimization operation of pushing down the aggregate function to the position before Join, Projection, and UnionAll.
 - When the aggregate operation is slow in query, you can set the variable value to 1.
 
 ### tidb_opt_correlation_exp_factor
@@ -746,9 +751,9 @@ SET tidb_slow_log_threshold = 200;
 - Default value: 1
 - This variable controls whether to record the execution information of each operator in the slow query log.
 
-### tidb_log_desensitization
+### tidb_redact_log
 
-- Scope: GLOBAL
+- Scope: SESSION | GLOBAL
 - Default value: 0
 - This variable controls whether to hide user information in the SQL statement being recorded into the TiDB log and slow log.
 - When you set the variable to `1`, user information is hidden. For example, if the executed SQL statement is `insert into t values (1,2)`, the statement is recorded as `insert into t values (?,?)` in the log.
@@ -919,7 +924,7 @@ explain select * from t where age=5;
 - TiDB triggers an alarm when the percentage of the memory it takes exceeds a certain threshold. For the detailed usage description of this feature, see [`memory-usage-alarm-ratio`](/tidb-configuration-file.md#memory-usage-alarm-ratio-new-in-v409).
 - You can set the initial value of this variable by configuring [`memory-usage-alarm-ratio`](/tidb-configuration-file.md#memory-usage-alarm-ratio-new-in-v409).
 
-### `tidb_track_aggregate_memory_usage` <span class="version-mark">New in v5.0.0-rc</span>
+### `tidb_track_aggregate_memory_usage` <!-- New in v5.0.0-rc -->
 
 > **Warning:**
 >
@@ -928,3 +933,27 @@ explain select * from t where age=5;
 - Scope: SESSION | GLOBAL
 - Default value: OFF
 - This variable controls whether to track the memory usage of the aggregate function. When you enable this feature, TiDB counts the memory usage of the aggregate function, which might cause the overall SQL memory statistics to exceed the threshold [`mem-quota-query`](/tidb-configuration-file.md#mem-quota-query), and then be affected by the behavior defined by [`oom-action`](/tidb-configuration-file.md#oom-action).
+
+### `tidb_enable_async_commit` <!-- New in v5.0.0-rc -->
+
+> **Warning:**
+>
+> Async commit is still an experimental feature. It is not recommended to use this feature in the production environment. Currently, the following incompatible issues are found, and be aware of them if you need to use this feature:
+
+> - This feature is incompatible with [TiCDC](/ticdc/ticdc-overview.md) and might cause TiCDC to run abnormally.
+> - This feature is incompatible with [Compaction Filter](/tikv-configuration-file.md#enable-compaction-filter). If you use the two features at the same time, write loss might occur.
+> - This feature is incompatible with TiDB Binlog and does not take effect when TiDB Binlog is enabled.
+
+- Scope: SESSION | GLOBAL
+- Default value: OFF
+- This variable controls whether to enable the async commit feature for the second phase of the two-phase transaction commit to perform asynchronously in the background. Enabling this feature can reduce the latency of transaction commit.
+
+> **Warning:**
+>
+> When async commit is enabled, the external consistency of transactions cannot be guaranteed. For details, refer to [`tidb_guarantee_external_consistency`](#tidb_guarantee_external_consistency).
+
+### `tidb_guarantee_external_consistency` <!-- New in v5.0.0-rc -->
+
+- Scope: SESSION | GLOBAL
+- Default value: OFF
+- This variable controls whether the external consistency needs to be guaranteed when the async commit <!-- and one-phase commit--> feature is enabled. When this option is disabled, if the modifications made in two transactions do not have overlapping parts, the commit order that other transactions observe might not be consistent with the actual commit order. When the async commit <!-- or one-phase commit--> feature is disabled, the external consistency can be guaranteed no matter whether this configuration is enabled or disabled.
