@@ -193,4 +193,4 @@ See also [How to properly restart TiDB Lightning?](#how-to-properly-restart-tidb
 
 ## Why does TiDB Lightning report the `could not find first pair, this shouldn't happen` error?
 
-The reason for the error is that an anomaly occurs when scanning the locally sorted files, possibly because the number of files opened in Lightning exceeds the system limit. In Linux system, you can use the `ulimit -n` command to confirm whether this value is too small. It is recommended that you adjust this value to `1000000` (`ulimit -n 1000000`) during Lightning import.
+This error occurs possibly because the number of files opened by TiDB Lightning exceeds the system limit when going through the sorted local files. In the Linux system, you can use the `ulimit -n` command to confirm whether the value of this system limit is too small. It is recommended that you adjust this value to `1000000` (`ulimit -n 1000000`) during Lightning import.
