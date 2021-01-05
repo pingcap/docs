@@ -463,11 +463,11 @@ In addition, TiDB has the following unique error codes:
 
     The TiFlash request timed out.
     
-    Check the state/monitor/log of the TiFlash server and the network between TiDB server and TiFlash server.
+    Check the state/monitor/log of the TiFlash server and the network between the TiDB server and TiFlash server.
 
 * Error Number: 9013
 
-    The TiFlash is busy and this usually occurs when the workload is too high.
+    The TiFlash server is busy and this usually occurs when the workload is too high.
 
     Check the state/monitor/log of the TiFlash server.
 
