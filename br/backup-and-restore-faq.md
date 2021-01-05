@@ -72,7 +72,7 @@ You can use [`filter.rules`](https://github.com/pingcap/ticdc/blob/7c3c2336f9815
 
 ## Why is the `region is unavailable` error reported for a SQL query after I use BR to restore the backup data?
 
-If the cluster backed up using BR has TiFlash, `TableInfo` stores the TiFlash information when BR restores the backup data. If the cluster to be restored does not have TiFlash, the `region is unavailable` error is reported. This bug might be fixed in future versions.
+If the cluster backed up using BR has TiFlash, `TableInfo` stores the TiFlash information when BR restores the backup data. If the cluster to be restored does not have TiFlash, the `region is unavailable` error is reported.
 
 ## Does BR support in-place full recovery of some historical backup?
 
