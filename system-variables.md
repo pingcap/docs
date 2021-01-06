@@ -475,16 +475,12 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 ### tidb_gc_scan_lock_mode
 
-> **Warning:**
->
-> Green GC (`PHYSICAL`) is still an experimental feature. It is recommended **NOT** to use it in the production environment.
-
 - Scope: GLOBAL
-- Default value: `LEGACY`
+- Default value: `PHYSICAL`
 - Possible values:
     - `LEGACY`: Uses the old way of scanning, that is, disable Green GC.
     - `PHYSICAL`: Uses the physical scanning method, that is, enable Green GC.
-- This parameter specifies the way of scanning locks in the Resolve Locks step of GC, that is, whether to enable Green GC (experimental feature) or not. In the Resolve Locks step of GC, TiKV needs to scan all locks in the cluster. With Green GC disabled, TiDB scans locks by Regions. Green GC provides the "physical scanning" feature, which means that each TiKV node can bypass the Raft layer to directly scan data. This feature can effectively mitigate the impact of GC wakening up all Regions when the [Hibernate Region](/tikv-configuration-file.md#raftstorehibernate-regions-experimental) feature is enabled, thus improving the execution speed in the Resolve Locks step.
+- This parameter specifies the way of scanning locks in the Resolve Locks step of GC. When set to `LEGACY`, TiDB scans locks by Regions. The value `PHYSICAL` enables each TiKV node to bypass the Raft layer and directly scan data. This feature can effectively mitigate the impact of GC wakening up all Regions when the [Hibernate Region](/tikv-configuration-file.md#raftstorehibernate-regions-experimental) feature is enabled, thus improving the execution speed in the Resolve Locks step.
 
 ### tidb_general_log
 
