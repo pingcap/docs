@@ -195,17 +195,17 @@ Each of the above three sub-commands might still include the following three sub
 
 To back up the cluster data, use the `br backup` command. You can add the `full` or `table` sub-command to specify the scope of your backup operation: the whole cluster or a single table.
 
-If the BR version is earlier than v4.0.3, and the backup duration might exceed the [`tikv_gc_life_time`](/system-variables.md#tikv_gc_life_time) configuration which is `10m0s` by default (`10m0s` means 10 minutes), increase the value of this configuration item.
+If the BR version is earlier than v4.0.3, and the backup duration might exceed the [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time) configuration which is `10m0s` by default (`10m0s` means 10 minutes), increase the value of this configuration item.
 
-For example, set `tikv_gc_life_time` to `720h`:
+For example, set `tidb_gc_life_time` to `720h`:
 
 {{< copyable "sql" >}}
 
 ```sql
-SET GLOBAL tikv_gc_life_time = '720h';
+SET GLOBAL tidb_gc_life_time = '720h';
 ```
 
-Since v4.0.3, BR automatically adapts to GC and you do not need to manually adjust the [`tikv_gc_life_time`](/system-variables.md#tikv_gc_life_time) value.
+Since v4.0.3, BR automatically adapts to GC and you do not need to manually adjust the [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time) value.
 
 ### Back up all the cluster data
 
@@ -666,7 +666,7 @@ Suppose that 4 TiKV nodes is used, each with the following configuration:
 
 Before the backup operation, check the following two items:
 
-- You have set `tikv_gc_life_time` set to a larger value so that the backup operation will not be interrupted because of data loss.
+- You have set [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time) set to a larger value so that the backup operation will not be interrupted because of data loss.
 - No DDL statement is being executed on the TiDB cluster.
 
 Then execute the following command to back up all the cluster data:

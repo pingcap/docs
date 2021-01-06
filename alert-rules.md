@@ -633,7 +633,7 @@ For the critical-level alerts, a close watch on the abnormal metrics is required
 * Solution:
 
     1. It is normally because the GC concurrency is set too high. You can moderately lower the GC concurrency degree, and you need to first confirm that the failed GC is caused by the busy server.
-    2. You can moderately lower the concurrency degree by adjusting [`tikv_gc_concurrency`](/system-variables.md#tikv_gc_concurrency).
+    2. You can moderately lower the concurrency degree by adjusting [`tikv_db_concurrency`](/system-variables.md#tidb_gc_concurrency).
 
 ### Warning-level alerts
 

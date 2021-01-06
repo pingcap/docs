@@ -179,7 +179,7 @@ In addition, TiDB has the following unique error codes:
 
 * Error Number: 8055
 
-    The current snapshot is too old. The data may have been garbage collected. You can increase the value of [`tikv_gc_life_time`](/system-variables.md#tikv_gc_life_time) to avoid this problem. The new version of TiDB automatically reserves data for long-running transactions. Usually this error does not occur. 
+    The current snapshot is too old. The data may have been garbage collected. You can increase the value of [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time) to avoid this problem. The new version of TiDB automatically reserves data for long-running transactions. Usually this error does not occur. 
     
     See [garbage collection overview](/garbage-collection-overview.md) and [garbage collection configuration](/garbage-collection-configuration.md).
 

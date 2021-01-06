@@ -585,7 +585,7 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
     The data index seems to be inconsistent. Run the `admin check table <TableName>` command on the table where the reported index is. If the check fails, disable garbage collection by running the following command, and [report a bug](https://github.com/pingcap/tidb/issues/new?labels=type%2Fbug&template=bug-report.md):
 
     ```sql
-    SET GLOBAL tikv_gc_enable = 0;
+    SET GLOBAL tidb_gc_enable = 0;
     ```
 
 ### 7.2 TiKV

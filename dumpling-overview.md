@@ -307,7 +307,7 @@ In other scenarios, if the data size is very large, to avoid export failure due 
 {{< copyable "sql" >}}
 
 ```sql
-SET GLOBAL tikv_gc_life_time = '720h';
+SET GLOBAL tidb_gc_life_time = '720h';
 ```
 
 After your operation is completed, set the GC time back (the default value is `10m`):
@@ -315,7 +315,7 @@ After your operation is completed, set the GC time back (the default value is `1
 {{< copyable "sql" >}}
 
 ```sql
-SET GLOBAL tikv_gc_life_time = '10m';
+SET GLOBAL tidb_gc_life_time = '10m';
 ```
 
 Finally, all the exported data can be imported back to TiDB using [Lightning](/tidb-lightning/tidb-lightning-backends.md).

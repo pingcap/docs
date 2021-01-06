@@ -42,4 +42,4 @@ In this step, TiDB only needs to send the safe point to PD, and then the whole r
 
 > **Note:**
 >
-> In TiDB v2.1 or earlier versions, the Do GC step is implemented by TiDB sending requests to each Region. In v3.0 or later versions, you can modify the [`tikv_gc_mode`](/system-variables.md#tikv_gc_mode) to use the previous GC mechanism.
+> Starting with TiDB 5.0, the Do GC step will always use the `DISTRIBUTED` gc mode. This replaces the earlier `CENTRAL` gc mode, which was implmented by TiDB servers sending GC requests to each Region.

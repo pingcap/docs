@@ -139,7 +139,7 @@ You can configure concurrent GC to increase the speed of reclaiming storage spac
 {{< copyable "sql" >}}
 
 ```sql
-SET GLOBAL tikv_gc_concurrency = 3;
+SET GLOBAL tidb_gc_concurrency = 3;
 ```
 
 ## Does `SHOW PROCESSLIST` display the system process ID?

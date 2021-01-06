@@ -37,10 +37,10 @@ TiDB implements Multi-Version Concurrency Control (MVCC) to manage data versions
 
 In TiDB, Garbage Collection (GC) runs periodically to remove the obsolete data versions. For GC details, see [TiDB Garbage Collection (GC)](/garbage-collection-overview.md)
 
-Pay special attention to the following two variables:
+Pay special attention to the following:
 
-- `tikv_gc_life_time`: It is used to configure the retention time of the history version. You can modify it manually.
-- `tikv_gc_safe_point`: It records the current `safePoint`. You can safely create the snapshot to read the history data using the timestamp that is later than `safePoint`. `safePoint` automatically updates every time GC runs.
+- [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time): This system variable is used to configure the retention time of earlier modifications (default: `10m0s`).
+- The output of `SELECT * FROM mysql.tidb WHERE variable_name = 'tikv_gc_safe_point'`. This is the current `safePoint` where you can read historical data up to. It is updated every time the garbage collection process is run.
 
 ## Example
 
