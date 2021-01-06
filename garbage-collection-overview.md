@@ -18,7 +18,7 @@ GC runs periodically on TiDB. For each GC, TiDB firstly calculates a timestamp c
 2. Delete Ranges. During this step, the obsolete data of the entire range generated from the `DROP TABLE`/`DROP INDEX` operation is quickly cleared.
 3. Do GC. During this step, each TiKV node scans data on it and deletes unneeded old versions of each key.
 
-In the default configuration, GC is triggered every 10 minutes. Each GC retains data of the recent 10 minutes, which means that the the GC life time is 10 minutes by default (safe point = the current time - GC life time). If one round of GC has been running for too long, before this round of GC is completed, the next round of GC will not start even if it is time to trigger the next GC. In addition, for long-duration transactions to run properly after exceeding the GC life time, the safe point does not exceed the start time (start_ts) of the ongoing transactions.
+In the default configuration, GC is triggered every 10 minutes. Each GC retains data of the recent 10 minutes, which means that the GC life time is 10 minutes by default (safe point = the current time - GC life time). If one round of GC has been running for too long, before this round of GC is completed, the next round of GC will not start even if it is time to trigger the next GC. In addition, for long-duration transactions to run properly after exceeding the GC life time, the safe point does not exceed the start time (start_ts) of the ongoing transactions.
 
 ## Implementation details
 
@@ -42,4 +42,4 @@ In this step, TiDB only needs to send the safe point to PD, and then the whole r
 
 > **Note:**
 >
-> Starting with TiDB 5.0, the Do GC step will always use the `DISTRIBUTED` gc mode. This replaces the earlier `CENTRAL` gc mode, which was implmented by TiDB servers sending GC requests to each Region.
+> Starting with TiDB 5.0, the Do GC step will always use the `DISTRIBUTED` gc mode. This replaces the earlier `CENTRAL` gc mode, which was implemented by TiDB servers sending GC requests to each Region.
