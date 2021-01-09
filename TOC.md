@@ -197,8 +197,6 @@
     + [Data Check for Tables with Different Schema/Table Names](/sync-diff-inspector/route-diff.md)
     + [Data Check in Sharding Scenarios](/sync-diff-inspector/shard-diff.md)
     + [Data Check for TiDB Upstream/Downstream Clusters](/sync-diff-inspector/upstream-downstream-diff.md)
-  + [Loader](/loader-overview.md)
-  + [Syncer](/syncer-overview.md)
   + TiSpark
     + [Quick Start](/get-started-with-tispark.md)
     + [User Guide](/tispark-overview.md)
@@ -220,6 +218,7 @@
     + [Generate Self-signed Certificates](/generate-self-signed-certificates.md)
     + [Encryption at Rest](/encryption-at-rest.md)
     + [Enable Encryption for Disk Spill](/enable-disk-spill-encrypt.md)
+    + [Log Redaction](/log-redaction.md)
   + Privileges
     + [Security Compatibility with MySQL](/security-compatibility-with-mysql.md)
     + [Privilege Management](/privilege-management.md)
