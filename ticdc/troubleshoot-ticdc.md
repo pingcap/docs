@@ -77,6 +77,8 @@ This error is returned when the downstream MySQL does not load the time zone. Yo
 mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root mysql -p
 ```
 
+If you find the output similar to the following, the import is successful:
+
 ```
 Enter password:
 Warning: Unable to load '/usr/share/zoneinfo/iso3166.tab' as time zone. Skipping it.
@@ -85,7 +87,7 @@ Warning: Unable to load '/usr/share/zoneinfo/zone.tab' as time zone. Skipping it
 Warning: Unable to load '/usr/share/zoneinfo/zone1970.tab' as time zone. Skipping it.
 ```
 
-If you use MySQL in a special public cloud environment, such Alibaba Cloud RDS, and if you do not have the permission to modify MySQL, you need to specify the time zone using the `--tz` parameter:
+If the downstream is a special MySQL environment (a public cloud RDS or some MySQL derivative versions, etc.), the time zone import fails using the above method. You need to specify the downstream MySQL time zone using the `time-zone` parameter in `sink-uri`. You can first query the time zone used by MySQL:
 
 1. Query the time zone used by MySQL:
 
@@ -109,20 +111,35 @@ If you use MySQL in a special public cloud environment, such Alibaba Cloud RDS, 
     {{< copyable "shell-regular" >}}
 
     ```shell
-    cdc cli changefeed create --sink-uri="mysql://root@127.0.0.1:3306/" --tz=Asia/Shanghai
+    cdc cli changefeed create --sink-uri="mysql://root@127.0.0.1:3306/?time-zone=CST"
     ```
 
     > **Note:**
     >
-    > In MySQL, CST refers to the China Standard Time (UTC+08:00). Usually you cannot use `CST` directly in your system, but use `Asia/Shanghai` instead.
+    > CST might be an abbreviation for the following four different time zones:、
+    >
+    > + Central Standard Time (USA) UT-6:00
+    > + Central Standard Time (Australia) UT+9:30
+    > + China Standard Time UT+8:00
+    > + Cuba Standard Time UT-4:00
+    >
+    > In China, CST usually means China Standard Time, and pay attention to the discrimination when using it.
 
-Be cautious when you set the time zone of the TiCDC server, because the time zone will be used for the conversion of time type. It is recommended that you use the same time zone in the upstream and downstream databases, and specify the time zone using `--tz` when you start the TiCDC server.
+## How to understand the relationship between TiCDC time zone and upstream and downstream databases time zones?
 
-The TiCDC server chooses its time zone in the following priority:
+||upstream time zone| TiCDC time zone|Downstream time zone|
+| :-: | :-: | :-: | :-: |
+| Configuration method | See [Time Zone Support](/configure-time-zone.md) | The `--tz` parameter when starting ticdc server | The `time-zone` parameter in `sink-uri` |
+| Description | The time zone of the upstream TiDB affects DML operations of timestamp type and DDL operations related to timestamp type columns.| TiCDC assumes that the upstream TiDB's time zone is the same as the TiCDC time zone configuration, and performs related operations on the timestamp column.| The downstream MySQL processes the timestamp contained in the DML and DDL operations according to the downstream time zone settings.|
 
-1. TiCDC first uses the time zone specified by `--tz`.
-2. When `--tz` is not available, TiCDC tries to read the time zone set by the `TZ` environment variable.
-3. When the `TZ` environment variable is not available, TiCDC uses the default time zone of the machine.
+ > **Note:**
+ >
+ > Be cautious when you set the time zone of the TiCDC server, because the time zone will be used for the conversion of time type. You should keep the upstream time zone, TiCDC time zone and downstream time zone consistent.
+ > The TiCDC server chooses its time zone in the following priority:
+ >
+ > - TiCDC first uses the time zone specified by `--tz`.
+ > - When `--tz` is not available, TiCDC tries to read the time zone set by the `TZ` environment variable.
+ > - When the `TZ` environment variable is not available, TiCDC uses the default time zone of the machine.
 
 ## What is the default behavior of TiCDC if I create a replication task without specifying the configuration file in `--config`?
 
@@ -270,3 +287,47 @@ If the Old Value feature is not enabled, you cannot tell whether a Row Changed E
 * `DELETE` event only contains the `"d"` field
 
 For more information, refer to [Open protocol Row Changed Event format](/ticdc/ticdc-open-protocol.md#row-changed-event).
+
+## Does TiCDC support replicating large transactions? Is there any risk?
+
+TiCDC provides partial support for large transactions (more than 5 GB in size). Depending on different scenarios, the following risks might exist:
+
+- When the internal processing capacity of TiCDC is insufficient, the replication task error `ErrBufferReachLimit` might occur.
+- When TiCDC internal processing capacity is insufficient or TiCDC downstream throughput capacity is insufficient, out of memory (OOM) might occur.
+
+When you encounter the above errors, it is recommended to use BR for incremental restore of incremental data containing large transactions. The specific operations are as follows:
+
+1. Record the `checkpoint-ts` of the changefeed that is terminated due to large transactions, use this TSO as the `--lastbackupts` of the BR incremental backup, and execute [Back up incremental data](/br/backup-and-restore-tool.md#back-up-incremental-data).
+2. After backing up the incremental data, you can find a log similar to `["Full backup Failed summary : total backup ranges: 0, total success: 0, total failed: 0"] [BackupTS=421758868510212097]` in the BR log output and record the `BackupTS` in this log.
+3. Execute [Restore incremental data](br/backup-and-restore-tool.md#restore-incremental-data)
+4. Create a new changefeed and start the replication task from `BackupTS`
+5. Delete old changefeed.
+
+## If the downstream of changefeed is a database similar to MySQL, TiCDC executes a long DDL statement and blocks all other changefeed. What should I do?
+
+1. Firstly, suspend the execution of the changefeed of the long DDL. At this point, you can find that after you suspend this changefeed, other changefeeds are no longer blocked.
+2. Search for the `apply job` field in the TiCDC log and confirm the time-consuming DDL `StartTs`.
+3. Execute the DDL statement downstream manually, and perform the following operations after execution.
+4. Modify the changefeed configuration and add the above `StartTs` to the `ignore-txn-start-ts` configuration item.
+5. Restore a suspended changefeed.
+
+## After I upgrade TiCDC cluster to v4.0.8, changefeed reports the error `[CDC:ErrKafkaInvalidConfig]Canal requires old value to be enabled`
+
+Since v4.0.8, if changefeed uses canal or canal-json protocol output, TiCDC checks whether you enable the Old Value feature. If you disable it, an error is reported. You can solve the problem by following the steps below:
+
+1. Set the value of `enable-old-value` in the changefeed configuration file to `true`.
+2. Use `cdc cli changefeed update` to update the original changefeed configuration.
+
+    {{< copyable "shell-regular" >}}
+
+    ```shell
+    cdc cli changefeed update -c test-cf --sink-uri="mysql://127.0.0.1:3306/?max-txn-row=20&worker-number=8" --config=changefeed.toml
+    ```
+
+3. Use `cdc cli changfeed resume` to restore replication tasks
+
+    {{< copyable "shell-regular" >}}
+
+    ```shell
+    cdc cli changefeed resume -c test-cf
+    ```

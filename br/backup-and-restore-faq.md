@@ -77,3 +77,7 @@ If the cluster backed up using BR has TiFlash, `TableInfo` stores the TiFlash in
 ## Does BR support in-place full recovery of some historical backup?
 
 No. BR does not support in-place full recovery of some historical backup.
+
+## How can I use BR for incremental backup in Kubernetes environment?
+
+To get the last BR backup `commitTs` field, you can run the `kubectl -n ${namespace} get bk ${name}` command using kubectl. You can use the content of this field as `--lastbackupts`.
