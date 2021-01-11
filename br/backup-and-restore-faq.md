@@ -73,3 +73,11 @@ You can use [`filter.rules`](https://github.com/pingcap/ticdc/blob/7c3c2336f9815
 ## Does BR back up the `SHARD_ROW_ID_BITS` and `PRE_SPLIT_REGIONS` information of a table? Does the restored table have multiple Regions?
 
 Yes. BR backs up the [`SHARD_ROW_ID_BITS` and `PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions) information of a table. The data of the restored table also split into multiple Regions.
+
+## Why is the `region is unavailable` error reported for a SQL query after I use BR to restore the backup data?
+
+If the cluster backed up using BR has TiFlash, `TableInfo` stores the TiFlash information when BR restores the backup data. If the cluster to be restored does not have TiFlash, the `region is unavailable` error is reported.
+
+## Does BR support in-place full recovery of some historical backup?
+
+No. BR does not support in-place full recovery of some historical backup.
