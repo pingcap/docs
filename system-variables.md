@@ -72,7 +72,7 @@ SET  GLOBAL tidb_distsql_scan_concurrency = 10;
 - Default value: 0
 - This variable is used to show whether the execution plan used in the previous `execute` statement is taken directly from the plan cache.
 
-### last_plan_from_binding <!-- New in v5.0 -->
+### last_plan_from_binding <!-- New in v5.0.0-rc -->
 
 - Scope: SESSION
 - Default value: 0
@@ -304,7 +304,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Default value: 0
 - This variable is used to control whether to enable the cascades planner, which is currently considered experimental.
 
-### tidb_enable_clustered_index <!-- New in v5.0 -->
+### tidb_enable_clustered_index <!-- New in v5.0.0-rc -->
 
 - Scope: SESSION | GLOBAL
 - Default value: 0
@@ -608,7 +608,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 - Scope: SESSION
 - Default value: 0
-- This variable is used to set whether the optimizer executes the optimization operation of pushing down the aggregate function to the position before Join.
+- This variable is used to set whether the optimizer executes the optimization operation of pushing down the aggregate function to the position before Join, Projection, and UnionAll.
 - When the aggregate operation is slow in query, you can set the variable value to 1.
 
 ### tidb_opt_correlation_exp_factor
@@ -792,9 +792,9 @@ SET tidb_slow_log_threshold = 200;
 - Default value: 1
 - This variable controls whether to record the execution information of each operator in the slow query log.
 
-### tidb_log_desensitization
+### tidb_redact_log
 
-- Scope: GLOBAL
+- Scope: SESSION | GLOBAL
 - Default value: 0
 - This variable controls whether to hide user information in the SQL statement being recorded into the TiDB log and slow log.
 - When you set the variable to `1`, user information is hidden. For example, if the executed SQL statement is `insert into t values (1,2)`, the statement is recorded as `insert into t values (?,?)` in the log.
@@ -965,7 +965,7 @@ explain select * from t where age=5;
 - TiDB triggers an alarm when the percentage of the memory it takes exceeds a certain threshold. For the detailed usage description of this feature, see [`memory-usage-alarm-ratio`](/tidb-configuration-file.md#memory-usage-alarm-ratio-new-in-v409).
 - You can set the initial value of this variable by configuring [`memory-usage-alarm-ratio`](/tidb-configuration-file.md#memory-usage-alarm-ratio-new-in-v409).
 
-### `tidb_track_aggregate_memory_usage` <span class="version-mark">New in v5.0.0-rc</span>
+### `tidb_track_aggregate_memory_usage` <!-- New in v5.0.0-rc -->
 
 > **Warning:**
 >
@@ -975,7 +975,7 @@ explain select * from t where age=5;
 - Default value: OFF
 - This variable controls whether to track the memory usage of the aggregate function. When you enable this feature, TiDB counts the memory usage of the aggregate function, which might cause the overall SQL memory statistics to exceed the threshold [`mem-quota-query`](/tidb-configuration-file.md#mem-quota-query), and then be affected by the behavior defined by [`oom-action`](/tidb-configuration-file.md#oom-action).
 
-### `tidb_enable_async_commit` <span class="version-mark">New in v5.0.0-rc</span>
+### `tidb_enable_async_commit` <!-- New in v5.0.0-rc -->
 
 > **Warning:**
 >
@@ -991,9 +991,9 @@ explain select * from t where age=5;
 
 > **Warning:**
 >
-> When async commit is enabled, the external consistency of transactions cannot be guaranteed. For details, refer to [`tidb_guarantee_external_consistency`](#tidb_guarantee_external_consistency-new-in-v500-rc).
+> When async commit is enabled, the external consistency of transactions cannot be guaranteed. For details, refer to [`tidb_guarantee_external_consistency`](#tidb_guarantee_external_consistency).
 
-### `tidb_guarantee_external_consistency` <span class="version-mark">New in v5.0.0-rc</span>
+### `tidb_guarantee_external_consistency` <!-- New in v5.0.0-rc -->
 
 - Scope: SESSION | GLOBAL
 - Default value: OFF

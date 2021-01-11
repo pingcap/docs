@@ -750,7 +750,7 @@ Configuration items related to RocksDB
 + Minimum value: `1`
 + Maximum value: `3`
 
-### `rate-limiter-auto-tuned` <span class="version-mark">New in v5.0.0-rc</span>
+### `rate-limiter-auto-tuned` <!-- New in v5.0.0-rc -->
 
 + Determines whether to automatically optimize the configuration of the RocksDB's compaction rate limiter based on recent workload. When this configuration is enabled, compaction pending bytes will be slightly higher than usual.
 + Default value: `true`
@@ -1195,7 +1195,7 @@ Configuration items related to security
 + The path of the PEM file that contains the X509 key
 + Default value: ""
 
-### `redact-info-log`
+### `redact-info-log` <span class="version-mark">New in v4.0.8</span>
 
 + This configuration item enables or disables log redaction. If the configuration value is set to `true`, all user data in the log will be replaced by `?`.
 + Default value: `false`
@@ -1248,7 +1248,7 @@ Configuration items related to TiDB Lightning import and BR restore.
 
 ## gc
 
-### `enable-compaction-filter` <!-- New in v5.0 -->
+### `enable-compaction-filter` <!-- New in v5.0.0-rc -->
 
 + Controls whether to enable the GC in Compaction Filter feature
 + Default value: `false`

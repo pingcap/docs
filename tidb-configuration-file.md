@@ -310,7 +310,7 @@ Configuration items related to performance.
 - Default value: `5000`
 - If a transaction does not roll back or commit after the number of statements exceeds `stmt-count-limit`, TiDB returns the `statement count 5001 exceeds the transaction limitation, autocommit = false` error. This configuration takes effect **only** in the retriable optimistic transaction. If you use the pessimistic transaction or have disabled the transaction retry, the number of statements in a transaction is not limited by this configuration.
 
-### `txn-entry-size-limit` <span class="version-mark">New in v5.0.0-rc</span>
+### `txn-entry-size-limit` <!-- New in v5.0.0-rc -->
 
 - The size limit of a single row of data in TiDB.
 - Default value: `6291456` (in bytes)
@@ -463,7 +463,7 @@ The Plan Cache configuration of the `PREPARE` statement.
 - The threshold of the TiKV load. If the TiKV load exceeds this threshold, more `batch` packets are collected to relieve the pressure of TiKV. It is valid only when the value of `tikv-client.max-batch-size` is greater than `0`. It is recommended not to modify this value.
 - Default value: `200`
 
-## tikv-client.async-commit <span class="version-mark">New in v5.0.0-rc</span>
+## tikv-client.async-commit <!-- New in v5.0.0-rc -->
 
 ### `keys-limit`
 
@@ -490,12 +490,14 @@ This section introduces configuration items related to the Coprocessor Cache fea
 - The total size of the cached data. When the cache space is full, old cache entries are evicted.
 - Default value: `1000.0`
 - Unit: MB
+- Type: Float
 
 ### `admission-max-result-mb`
 
-- Specifies the largest single push-down calculation result set that can be cached. If the result set of a single push-down calculation returned on the Coprocessor is larger than the result set specified by this parameter, the result set is cached. Increasing this value means that more types of push-down requests are cached, but also cause the cache space to be occupied more easily. Note that the size of each push-down calculation result set is generally smaller than the size of the Region. Therefore, it is meaningless to set this value far beyond the size of a Region.
+- Specifies the largest single push-down calculation result set that can be cached. If the result set of a single push-down calculation returned on the Coprocessor is less than the result set specified by this parameter, the result set is cached. Increasing this value means that more types of push-down requests are cached, but also cause the cache space to be occupied more easily. Note that the size of each push-down calculation result set is generally smaller than the size of the Region. Therefore, it is meaningless to set this value far beyond the size of a Region.
 - Default value: `10.0`
 - Unit: MB
+- Type: Float
 
 ### `admission-min-process-ms`
 
