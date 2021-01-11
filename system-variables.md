@@ -234,7 +234,7 @@ mysql> SELECT * FROM t1;
 
 - Scope: INSTANCE
 - Default value: ON
-- This variable is used to enforce that the `utf8` character set only stores values from the [Basic Multilingual Plane (BMP)](https://en.wikipedia.org/wiki/Plane_(Unicode)#Basic_Multilingual_Plane). To store characters outside the BMP, it is recommended to use the `utf8mb4` character set.
+- This variable is used to enforce that the `utf8` character set only stores values from the [Basic Multilingual Plane (BMP)](https://en.wikipedia.org/wiki/Plane_\(Unicode\)#Basic_Multilingual_Plane). To store characters outside the BMP, it is recommended to use the `utf8mb4` character set.
 - You may need to disable this option when upgrading from an earlier version of TiDB, where `utf8` checking was more relaxed. For details, see [FAQs After Upgrade](/faq/upgrade-faq.md).
 
 ### tidb_checksum_table_concurrency
@@ -513,7 +513,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Default value: 00:00 +0000
 - This variable is used to set the start time of baseline evolution in a day.
 
-### tidb_executor_concurrency <span class="version-mark">New in v4.0</span>
+### tidb_executor_concurrency
 
 - Scope: SESSION | GLOBAL
 - Default value: 5
@@ -580,7 +580,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Default value: -1
 - This variable is used to set the concurrency of executing the concurrent `hash aggregation` algorithm in the `partial` phase.
 - When the parameter of the aggregate function is not distinct, `HashAgg` is run concurrently and respectively in two phases - the `partial` phase and the `final` phase.
--  A value of `-1` means that the value of `tidb_executor_concurrency` will be used instead.
+- A value of `-1` means that the value of `tidb_executor_concurrency` will be used instead.
 
 ### tidb_index_join_batch_size
 
@@ -1036,4 +1036,3 @@ This variable is an alias for _transaction_isolation_.
 - Scope: SESSION | GLOBAL
 - Default value: ON
 - This variable controls whether to use the high precision mode when computing the window functions.
-
