@@ -69,7 +69,7 @@ cdc cli changefeed update -c [changefeed-id] --sort-engine="unified" --sort-dir=
 
 ## What is the complete behavior of TiCDC garbage collection (GC) safepoint?
 
-If a replication task starts after the TiCDC service starts, the TiCDC owner updates the PD service GC safepoint with the smallest value of `checkpoint-ts` among all replication tasks. The service GC safepoint ensures that TiCDC does not delete data generated at that time and after that time. If the replication task is interrupted, the `checkpoint-ts` of this task does not change and PD's corresponding service GC safepoint does not update either. The survival time that TiCDC sets for a service GC safepoint is 24 hours, meaning that the GC mechanism does not deletes any data if the TiCDC service can be recovered within 24 hours after it is interrupted.
+If a replication task starts after the TiCDC service starts, the TiCDC owner updates the PD service GC safepoint with the smallest value of `checkpoint-ts` among all replication tasks. The service GC safepoint ensures that TiCDC does not delete data generated at that time and after that time. If the replication task is interrupted, the `checkpoint-ts` of this task does not change and PD's corresponding service GC safepoint is not updated either. The Time-To-Live (TTL) that TiCDC sets for a service GC safepoint is 24 hours, meaning that the GC mechanism does not delete any data if the TiCDC service can be recovered within 24 hours after it is interrupted.
 
 ## How do I handle the `Error 1298: Unknown or incorrect time zone: 'UTC'` error when creating the replication task or replicating data to MySQL?
 
