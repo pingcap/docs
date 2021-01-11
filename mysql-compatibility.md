@@ -185,3 +185,7 @@ The following column types are supported by MySQL, but **NOT** by TiDB:
 
 + FLOAT4/FLOAT8
 + `SQL_TSI_*` (including SQL_TSI_MONTH, SQL_TSI_WEEK, SQL_TSI_DAY, SQL_TSI_HOUR, SQL_TSI_MINUTE and SQL_TSI_SECOND, excluding SQL_TSI_YEAR)
+
+### Imcompatibility caused by deprecated feature
+
+* According to [MySQL 8.0's document on floating types](https://dev.mysql.com/doc/refman/8.0/en/floating-point-types.html), floating point types with specified precision is deprecated, therefore we won't fix compatibility problems caused by such usage, users should be aware of this and use `DECIMAL` in this case.
