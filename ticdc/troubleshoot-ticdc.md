@@ -87,7 +87,7 @@ Warning: Unable to load '/usr/share/zoneinfo/zone.tab' as time zone. Skipping it
 Warning: Unable to load '/usr/share/zoneinfo/zone1970.tab' as time zone. Skipping it.
 ```
 
-If the downstream is a special MySQL environment (a public cloud RDS or some MySQL derivative versions, etc.), the time zone import fails using the above method. You need to specify the downstream MySQL time zone using the `time-zone` parameter in `sink-uri`. You can first query the time zone used by MySQL:
+If the downstream is a special MySQL environment (a public cloud RDS or some MySQL derivative versions, etc.) and the time zone import using the above method fails, you need to specify the downstream MySQL time zone using the `time-zone` parameter in `sink-uri`. You can first query the time zone used by MySQL:
 
 1. Query the time zone used by MySQL:
 
@@ -127,7 +127,7 @@ If the downstream is a special MySQL environment (a public cloud RDS or some MyS
 
 ## How to understand the relationship between TiCDC time zone and upstream and downstream databases time zones?
 
-||upstream time zone| TiCDC time zone|Downstream time zone|
+||Upstream time zone| TiCDC time zone|Downstream time zone|
 | :-: | :-: | :-: | :-: |
 | Configuration method | See [Time Zone Support](/configure-time-zone.md) | The `--tz` parameter when starting ticdc server | The `time-zone` parameter in `sink-uri` |
 | Description | The time zone of the upstream TiDB affects DML operations of timestamp type and DDL operations related to timestamp type columns.| TiCDC assumes that the upstream TiDB's time zone is the same as the TiCDC time zone configuration, and performs related operations on the timestamp column.| The downstream MySQL processes the timestamp contained in the DML and DDL operations according to the downstream time zone settings.|
