@@ -7,10 +7,7 @@
 
 + About TiDB
   + [TiDB Introduction](/overview.md)
-<<<<<<< HEAD
-=======
   + [What's New in TiDB 5.0](/releases/release-5.0.0-rc.md)
->>>>>>> b7c0d571... releases: add tidb 5.0-rc release notes (#4600)
   + [Basic Features](/basic-features.md)
   + Benchmarks
     + [Interaction Test on Online Workloads and `ADD INDEX`](/benchmark/online-workloads-and-add-index-operations.md)
