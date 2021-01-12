@@ -4,6 +4,10 @@ title: Release Notes
 
 # TiDB Release Notes
 
+## 5.0
+
+- [5.0.0-rc](/releases/release-5.0.0-rc.md)
+
 ## 4.0
 
 - [4.0.9](/releases/release-4.0.9.md)
