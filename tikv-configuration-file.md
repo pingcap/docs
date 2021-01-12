@@ -18,7 +18,7 @@ This document only describes the parameters that are not included in command-lin
 
 ## `status-thread-pool-size`
 
-+ The number of worker threads of the Http API service.
++ The number of worker threads for the Http API service.
 + Default value: `1`
 + Minimum value: `1`
 
@@ -52,7 +52,7 @@ This document only describes the parameters that are not included in command-lin
 + Default: `10`
 + Minimum value: `1`
 
-### `server.grpc-stream-initial-window-size`
+### `grpc-stream-initial-window-size`
 
 + The window size of the gRPC stream
 + Default: 2MB
@@ -79,7 +79,7 @@ This document only describes the parameters that are not included in command-lin
 
 ### `concurrent-recv-snap-limit`
 
-+ The maximum number of snapshots accepted at the same time.
++ The maximum number of snapshots received at the same time.
 + Default value: `32`
 + Minimum value: `1`
 
