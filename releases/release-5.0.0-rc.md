@@ -20,9 +20,6 @@ Optimized `EXPLAIN` features and invisible index, which helps Database Administr
 
 ### Support clustered index (experimental)
 
-+ [User document](/system-variables.md#tidb_enable_clustered_index-new-in-v500-rc)
-+ Related issue: [#4841](https://github.com/pingcap/tidb/issues/4841)
-
 When the clustered index feature is enabled, TiDB performance improves significantly (for example in a TPC-C tpmC test, TiDB's performance, with clustered index enabled, improved by 39%) in the following cases:
 
 + When data is inserted, the clustered index reduces one write of the index data from the network.
@@ -36,32 +33,35 @@ Users can enable the clustered index feature by modifying the `tidb_enable_clust
 
 For example, to check whether a table (`tbl_name`) has a clustered index, execute `select tidb_pk_type from information_schema.tables where tbl_name = '{tbl_name}'`.
 
-### Support invisible indexes
++ [User document](/system-variables.md#tidb_enable_clustered_index-new-in-v500-rc)
++ Related issue: [#4841](https://github.com/pingcap/tidb/issues/4841)
 
-+ [User document](/sql-statements/sql-statement-alter-index.md)
-+ Related issue: [#9246](https://github.com/pingcap/tidb/issues/9246)
+### Support invisible indexes
 
 When users tune performance or select optimal indexes, they can set an index to be `Visible` or `Invisible` by using SQL statements. This setting can avoid performing resource-consuming operations, such as `DROP INDEX` and `ADD INDEX`.
 
 To modify the visibility of an index, use the `ALTER INDEX` statement. After the modification, the optimizer decides whether to add this index to the index list based on the index visibility.
 
-### Support `EXCEPT` and `INTERSECT` operators
++ [User document](/sql-statements/sql-statement-alter-index.md)
++ Related issue: [#9246](https://github.com/pingcap/tidb/issues/9246)
 
-+ [User document](/functions-and-operators/set-operators.md)
-+ Related issue: [#18031](https://github.com/pingcap/tidb/issues/18031)
+### Support `EXCEPT` and `INTERSECT` operators
 
 The `INTERSECT` operator is a set operator, which returns the intersection of the result sets of two or more queries. To some extent, it is an alternative to the `InnerJoin` operator.
 
 The `EXCEPT`operator is a set operator, which combines the result sets of two queries and returns elements that are in the first query result but not in the second.
 
++ [User document](/functions-and-operators/set-operators.md)
++ Related issue: [#18031](https://github.com/pingcap/tidb/issues/18031)
+
 ## Transaction
 
 ### Increase the success rate of executing pessimistic transactions
 
+In the pessimistic transaction mode, if the tables involved in a transaction contain concurrent DDL operations or `SCHEMA VERSION` changes, the system automatically updates the transaction's `SCHEMA VERSION` to the latest to avoid the transaction being interrupted by DDL operations and to ensure the successful transaction commit. If the transaction is interrupted, the client receives the `Information schema is changed` error message.
+
 + [User document](/system-variables.md#tidb_enable_amend_pessimistic_txn-new-in-v407)
 + Related issue: [#18005](https://github.com/pingcap/tidb/issues/18005)
-
-In the pessimistic transaction mode, if the tables involved in a transaction contain concurrent DDL operations or `SCHEMA VERSION` changes, the system automatically updates the transaction's `SCHEMA VERSION` to the latest to avoid the transaction being interrupted by DDL operations and to ensure the successful transaction commit. If the transaction is interrupted, the client receives the `Information schema is changed` error message.
 
 ## Character set and collation
 
@@ -74,9 +74,6 @@ Support case-insensitive comparison sort for character sets.
 
 ### Support desensitizing error messages and log files
 
-+ [User document](/log-redaction.md)
-+ Related issue: [#18566](https://github.com/pingcap/tidb/issues/18566)
-
 TiDB now supports desensitizing error messages and log files to avoid leaking sensitive information, such as ID information and credit card number.
 
 Users can enable the desensitization feature for different components:
@@ -86,12 +83,12 @@ Users can enable the desensitization feature for different components:
 + For the PD side, set the `security.redact-info-log = true` configuration in pd-server. [#2852](https://github.com/tikv/pd/issues/2852) [#3011](https://github.com/tikv/pd/pull/3011)
 + For the TiFlash side, set the `security.redact_info_log = true` configuration in tiflash-server and set `security.redact-info-log = true` in tiflash-learner.
 
++ [User document](/log-redaction.md)
++ Related issue: [#18566](https://github.com/pingcap/tidb/issues/18566)
+
 ## Performance improvements
 
 ### Support async commit (experimental)
-
-+ [User document](/system-variables.md#tidb_enable_async_commit-new-in-v500-rc)
-+ Related issue: [#8316](https://github.com/tikv/tikv/issues/8316)
 
 Enabling the async commit feature can significantly reduce the latency of transactions. For example, with this feature enabled, the latency of transactions in the Sysbench oltp-insert test is 37.3% lower than that when this feature is not enabled.
 
@@ -101,9 +98,10 @@ However, when async commit is enabled, the external consistency of transactions 
 
 Users can enable this feature by setting the global variable `tidb_enable_async_commit = ON`.
 
-### Improve the optimizer's stability in index selection (experimental)
++ [User document](/system-variables.md#tidb_enable_async_commit-new-in-v500-rc)
++ Related issue: [#8316](https://github.com/tikv/tikv/issues/8316)
 
-+ Related issue: [#18065](https://github.com/pingcap/tidb/issues/18065)
+### Improve the optimizer's stability in index selection (experimental)
 
 The optimizer's ability to always select a relatively suitable index greatly determines whether the latency of queries is stable. We have improved and refactored the statistics module to ensure that, for the same SQL statements, the optimizer does not select a different index from multiple candidate indexes each time due to missing or inaccurate statistics. The main improvements to help the optimizer select a relatively suitable index are as follows:
 
@@ -113,9 +111,9 @@ The optimizer's ability to always select a relatively suitable index greatly det
     + Refactor the search logic of `TopN`.
     + Delete the `TopN` information from the histogram and create an index of the histogram for easy maintenance of Bucket NDV.
 
-### Optimize performance jitter caused by imperfect scheduling or imperfect I/O flow control
+Related issue: [#18065](https://github.com/pingcap/tidb/issues/18065)
 
-+ Related issue: [#18005](https://github.com/pingcap/tidb/issues/18005)
+### Optimize performance jitter caused by imperfect scheduling or imperfect I/O flow control
 
 The TiDB scheduling process occupies resources such as I/O, network, CPU, and memory. If TiDB does not control the scheduled tasks, QPS and delay might cause performance jitter due to resource preemption. After the following optimizations, in a 72-hour test, the standard deviation of Sysbench TPS jitter is reduced from 11.09% to 3.36%.
 
@@ -124,6 +122,8 @@ The TiDB scheduling process occupies resources such as I/O, network, CPU, and me
 + Data compaction in the TiKV background takes up a lot of I/O resources. The system automatically adjusts the compaction rate to balance the contention for I/O resources between background tasks and foreground data reads and writes. After enabling this feature via the `rate-limiter-auto-tuned` configuration item, the delay jitter is greatly reduced than that when this feature is disabled. [#18011](https://github.com/pingcap/tidb/issues/18011)
 + When TiKV performs garbage collection (GC) and data compaction, partitions occupy CPU and I/O resources. Overlapping data exists during the execution of these two tasks. To reduce I/O usage, the GC Compaction Filter feature combines these two tasks into one and executes them in the same task. This feature is still experimental and you can enable it via `gc.enable-compaction-filter = ture`. [#18009](https://github.com/pingcap/tidb/issues/18009)
 + When TiFlash compresses or sorts data, it occupies a lot of I/O resources. The system alleviates contention for resources by limiting the compression and data sorting's use of I/O resources. This feature is still experimental and you can enable it via `bg_task_io_rate_limit`.
+
+Related issue: [#18005](https://github.com/pingcap/tidb/issues/18005)
 
 ### Improve the stability of TiFlash in Real-time BI / Data Warehousing scenarios
 
@@ -140,10 +140,10 @@ The TiDB scheduling process occupies resources such as I/O, network, CPU, and me
 
 ### Improve system availability during Region membership change (experimental)
 
+In the process of Region membership changes, "adding a member" and "deleting a member" are two operations performed in two steps. If a failure occurs when the membership change finishes, the Regions will become unavailable and an error of foreground application is returned. The introduced Raft Joint Consensus algorithm can improve the system availability during Region membership changes. "adding a member" and "deleting a member" operations during the membership change are combined into one operation and sent to all members. During the change process, Regions are in an intermediate state. If any modified member fails, the system is still available. Users can enable this feature by modifying the membership variable by executing `pd-ctl config set enable-joint-consensus true`. [#7587](https://github.com/tikv/tikv/issues/7587) [#2860](https://github.com/tikv/pd/issues/2860)
+
 + [User document](/pd-configuration-file.md#enable-joint-consensus-new-in-v500-rc)
 + Related issue: [#18079](https://github.com/pingcap/tidb/issues/18079)
-
-In the process of Region membership changes, "adding a member" and "deleting a member" are two operations performed in two steps. If a failure occurs when the membership change finishes, the Regions will become unavailable and an error of foreground application is returned. The introduced Raft Joint Consensus algorithm can improve the system availability during Region membership changes. "adding a member" and "deleting a member" operations during the membership change are combined into one operation and sent to all members. During the change process, Regions are in an intermediate state. If any modified member fails, the system is still available. Users can enable this feature by modifying the membership variable by executing `pd-ctl config set enable-joint-consensus true`. [#7587](https://github.com/tikv/tikv/issues/7587) [#2860](https://github.com/tikv/pd/issues/2860)
 
 ### Optimize the memory management module to reduce system OOM risks
 
@@ -153,9 +153,9 @@ In the process of Region membership changes, "adding a member" and "deleting a m
 
 ## Backup and restore
 
-+ Related issue: [#89](https://github.com/pingcap/br/issues/89)
 + The Backup & Restore tool (BR) supports backing up data to AWS S3 and Google Cloud GCS. ([User document](/br/backup-and-restore-tool.md#back-up-data-to-amazon-s3-backend))
 + The Backup & Restore tool (BR) supports restoring data from AWS S3 and Google Cloud GCS to TiDB. ([User document](/br/backup-and-restore-tool.md#restore-data-from-amazon-s3-backend))
++ Related issue: [#89](https://github.com/pingcap/br/issues/89)
 
 ## Data import and export
 
@@ -167,14 +167,14 @@ In the process of Region membership changes, "adding a member" and "deleting a m
 
 ### Optimized `EXPLAIN` features with more information collected help users troubleshoot performance issues
 
-+ [User document](/sql-statements/sql-statement-explain.md)
-
 When users troubleshoot SQL performance issues, they need detailed diagnostic information to determine the causes of performance issues. In previous versions, the information collected by the `EXPLAIN` statements was not detailed enough. DBAs performed troubleshooting only based on log information, monitoring information, or even guess, which might be inefficient. The following improvements are made in TiDB v5.0 to help users troubleshoot performance issues with higher efficiency:
 
 + `EXPLAIN ANALYZE` supports analyzing all DML statements and shows the actual performance plans and the execution information of each operator. [#18056](https://github.com/pingcap/tidb/issues/18056)
 + Users can use `EXPLAIN FOR CONNECTION` to analyze the status information of the SQL statements that are being executed. This information includes the execution duration of each operator and the number of processed rows. [#18233](https://github.com/pingcap/tidb/issues/18233)
 + More information is available in the output of `EXPLAIN ANALYZE`, including the number of RPC requests sent by operators, the duration of resolving lock conflicts, network latency, the scanned volume of deleted data in RocksDB, the hit rate of RocksDB caches. [#18663](https://github.com/pingcap/tidb/issues/18663)
 + The detailed execution information of SQL statements is recorded in the slow log, which is consistent with the output information of `EXPLAIN ANALYZE`. This information includes the time consumed by each operator, the number of processed rows, and the number of sent RPC requests. [#15009](https://github.com/pingcap/tidb/issues/15009)
+
+[User document](/sql-statements/sql-statement-explain.md)
 
 ## Deployment and maintenance
 
