@@ -65,10 +65,10 @@ In the pessimistic transaction mode, if the tables involved in a transaction con
 
 ## Character set and collation
 
+Support case-insensitive comparison sort for character sets.
+
 + [User document](/character-set-and-collation.md#new-framework-for-collations)
 + Related issue: [#17596](https://github.com/pingcap/tidb/issues/17596)
-
-Support case-insensitive comparison sort for character sets.
 
 ## Security
 
@@ -83,8 +83,9 @@ Users can enable the desensitization feature for different components:
 + For the PD side, set the `security.redact-info-log = true` configuration in pd-server. [#2852](https://github.com/tikv/pd/issues/2852) [#3011](https://github.com/tikv/pd/pull/3011)
 + For the TiFlash side, set the `security.redact_info_log = true` configuration in tiflash-server and set `security.redact-info-log = true` in tiflash-learner.
 
-+ [User document](/log-redaction.md)
-+ Related issue: [#18566](https://github.com/pingcap/tidb/issues/18566)
+[User document](/log-redaction.md)
+
+Related issue: [#18566](https://github.com/pingcap/tidb/issues/18566)
 
 ## Performance improvements
 
