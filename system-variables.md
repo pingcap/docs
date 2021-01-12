@@ -522,9 +522,8 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 ### `tidb_executor_concurrency` <span class="version-mark">New in v5.0.0-rc</span>
 
-Scope: SESSION | GLOBAL
-
-Default value: 5
+- Scope: SESSION | GLOBAL
+- Default value: 5
 
 This variable is used to set the concurrency of the following SQL operators (to one value):
 
@@ -535,7 +534,7 @@ This variable is used to set the concurrency of the following SQL operators (to 
 - `window`
 - `projection`
 
-`tidb_executor_concurrency` integrates the following existing system variables for easier management:
+`tidb_executor_concurrency` incorporates the following existing system variables as a whole for easier management:
 
 + `tidb_index_lookup_concurrency`
 + `tidb_index_lookup_join_concurrency`
