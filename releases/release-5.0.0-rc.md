@@ -4,6 +4,10 @@ title: TiDB 5.0 RC Release Notes
 
 # TiDB 5.0 RC Release Notes
 
+Release date: January 12, 2021
+
+TiDB version: 5.0.0-rc
+
 TiDB v5.0.0-rc is the predecessor version of TiDB v5.0. In v5.0, PingCAP will be dedicated to helping enterprises quickly build applications based on TiDB, freeing them from worries about database performance, performance jitter, security, high availability, disaster recovery, troubleshooting SQL performance, and so on.
 
 In v5.0, the key new features or improvements are as follows:
