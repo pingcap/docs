@@ -937,7 +937,7 @@ explain select * from t where age=5;
 > Async commit is still an experimental feature. It is not recommended to use this feature in the production environment. Currently, the following incompatible issues are found, and be aware of them if you need to use this feature:
 
 > - This feature is incompatible with [TiCDC](/ticdc/ticdc-overview.md) and might cause TiCDC to run abnormally.
-> - This feature is incompatible with [Compaction Filter](/tikv-configuration-file.md#enable-compaction-filter). If you use the two features at the same time, write loss might occur.
+> - This feature is incompatible with [Compaction Filter](/tikv-configuration-file.md#enable-compaction-filter-new-in-v500-rc). If you use the two features at the same time, write loss might occur.
 > - This feature is incompatible with TiDB Binlog and does not take effect when TiDB Binlog is enabled.
 
 - Scope: SESSION | GLOBAL
