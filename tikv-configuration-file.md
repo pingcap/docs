@@ -18,7 +18,7 @@ This document only describes the parameters that are not included in command-lin
 
 ## `status-thread-pool-size`
 
-+ The number of worker threads for the Http API service.
++ The number of worker threads for the HTTP API service.
 + Default value: `1`
 + Minimum value: `1`
 
@@ -104,7 +104,7 @@ This document only describes the parameters that are not included in command-lin
 
 ### `end-point-slow-log-threshold`
 
-+ The threshold of the endpoint pushing down query requests to output the slow log, and the slow log will be output when the processing time exceeds the threshold.endpoint.
++ The threshold of the endpoint pushing down query requests to output the slow log. The slow log will be output when the processing time exceeds the threshold.
 + Default value: `"1s"`
 + Minimum value: `0`
 
