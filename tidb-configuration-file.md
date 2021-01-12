@@ -310,6 +310,13 @@ Configuration items related to performance.
 - Default value: `5000`
 - If a transaction does not roll back or commit after the number of statements exceeds `stmt-count-limit`, TiDB returns the `statement count 5001 exceeds the transaction limitation, autocommit = false` error. This configuration takes effect **only** in the retriable optimistic transaction. If you use the pessimistic transaction or have disabled the transaction retry, the number of statements in a transaction is not limited by this configuration.
 
+### `txn-entry-size-limit` <!-- New in v5.0.0-rc -->
+
+- The size limit of a single row of data in TiDB.
+- Default value: `6291456` (in bytes)
+- The size limit of a single key-value record in a transaction. If the size limit is exceeded, TiDB returns the `entry too large` error. The maximum value of this configuration item does not exceed `125829120` (120 MB).
+- Note that TiKV has a similar limit. If the data size of a single write request exceeds [`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size), which is 8 MB by default, TiKV refuses to process this request. When a table has a row of large size, you need to modify both configurations at the same time.
+
 ### `txn-total-size-limit`
 
 - The size limit of a single transaction in TiDB.
@@ -456,29 +463,7 @@ The Plan Cache configuration of the `PREPARE` statement.
 - The threshold of the TiKV load. If the TiKV load exceeds this threshold, more `batch` packets are collected to relieve the pressure of TiKV. It is valid only when the value of `tikv-client.max-batch-size` is greater than `0`. It is recommended not to modify this value.
 - Default value: `200`
 
-### `enable-one-pc` <!-- New in v5.0 -->
-
-- Specifies whether to use the one-phase commit feature for transactions that involve only one Region. Compared with the two-phase commit, the one-phase commit feature can greatly reduce the commit latency and increase throughput.
-- Default value: `false`
-
-> **Warning:**
->
-> This is still an experimental feature. It is **NOT** recommended that you use it in a production environment. Currently, the following issues are found, and be aware of them if you need to use this feature:
->
-> - This feature is incompatible with [TiCDC](/ticdc/ticdc-overview.md) and might cause TiCDC to run abnormally.
->
-> - This feature is incompatible with [Follower Read](/follower-read.md) and [TiFlash](/tiflash/tiflash-overview.md), and snapshot isolation cannot be guaranteed.
->
-> - External consistency cannot be guaranteed.
->
-> - If the transaction commit is interrupted abnormally by the machine crash when the DDL operation is executed, the data format might be incorrect.
-
-## tikv-client.async-commit <!-- New in v5.0 -->
-
-### `enable`
-
-- Enables or disables the async commit feature for the second phase of the two-phase transaction commit to perform asynchronously in the background. Enabling this feature can reduce the latency of transaction commit. This feature is not compatible with [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) and does not take effect when Binlog is enabled.
-- Default value: `false`
+## tikv-client.async-commit <!-- New in v5.0.0-rc -->
 
 ### `keys-limit`
 
@@ -490,16 +475,6 @@ The Plan Cache configuration of the `PREPARE` statement.
 - Specifies the upper limit of the total size of keys in an async commit transaction. The async commit feature is **NOT** suitable for transactions in which the involved key ranges are too long. Transactions that exceed this limit will use the two-phase commit.
 - Default value: `4096`
 - Unit: byte
-
-> **Warning:**
->
-> This is still an experimental feature. It is **NOT** recommended that you use it in a production environment. Currently, the following issues are found, and be aware of them if you need to use this feature:
->
-> - This feature is incompatible with [Follower Read](/follower-read.md) and [TiFlash](/tiflash/tiflash-overview.md), and snapshot isolation cannot be guaranteed.
->
-> - External consistency cannot be guaranteed.
->
-> - If the transaction commit is interrupted abnormally by the machine crash when the DDL operation is executed, the data format might be incorrect.
 
 ## tikv-client.copr-cache <span class="version-mark">New in v4.0.0</span>
 
@@ -515,12 +490,14 @@ This section introduces configuration items related to the Coprocessor Cache fea
 - The total size of the cached data. When the cache space is full, old cache entries are evicted.
 - Default value: `1000.0`
 - Unit: MB
+- Type: Float
 
 ### `admission-max-result-mb`
 
-- Specifies the largest single push-down calculation result set that can be cached. If the result set of a single push-down calculation returned on the Coprocessor is larger than the result set specified by this parameter, the result set is cached. Increasing this value means that more types of push-down requests are cached, but also cause the cache space to be occupied more easily. Note that the size of each push-down calculation result set is generally smaller than the size of the Region. Therefore, it is meaningless to set this value far beyond the size of a Region.
+- Specifies the largest single push-down calculation result set that can be cached. If the result set of a single push-down calculation returned on the Coprocessor is less than the result set specified by this parameter, the result set is cached. Increasing this value means that more types of push-down requests are cached, but also cause the cache space to be occupied more easily. Note that the size of each push-down calculation result set is generally smaller than the size of the Region. Therefore, it is meaningless to set this value far beyond the size of a Region.
 - Default value: `10.0`
 - Unit: MB
+- Type: Float
 
 ### `admission-min-process-ms`
 

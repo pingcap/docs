@@ -8,7 +8,6 @@ aliases: ['/docs/dev/tikv-control/','/docs/dev/reference/tools/tikv-control/']
 
 TiKV Control (`tikv-ctl`) is a command line tool of TiKV, used to manage the cluster. Its installation directory is as follows:
 
-* If the cluster is deployed using TiDB Ansible, `tikv-ctl` directory is in the `resources/bin` subdirectory under the `ansible` directory.
 * If the cluster is deployed using TiUP, `tikv-ctl` directory is in the in `~/.tiup/components/ctl/{VERSION}/` directory.
 
 ## Use TiKV Control in TiUP
@@ -371,6 +370,28 @@ success
 
 ```shell
 tikv-ctl --host ip:port modify-tikv-config -n raftstore.sync-log -v false
+```
+
+```
+success
+```
+
+When the compaction rate limit causes accumulated compaction pending bytes, disable the `rate-limiter-auto-tuned` mode or set a higher limit for the compaction flow:
+
+{{< copyable "shell-regular" >}}
+
+```shell
+tikv-ctl --host ip:port modify-tikv-config -n rocksdb.rate-limiter-auto-tuned -v false
+```
+
+```
+success
+```
+
+{{< copyable "shell-regular" >}}
+
+```shell
+tikv-ctl --host ip:port modify-tikv-config -n rocksdb.rate-bytes-per-sec -v "1GB"
 ```
 
 ```
