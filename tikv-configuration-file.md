@@ -14,11 +14,11 @@ This document only describes the parameters that are not included in command-lin
 
 ### server
 
-+ Configuration items related to the server.
++ Configuration items related to the server
 
 ## `status-thread-pool-size`
 
-+ The number of worker threads for the HTTP API service.
++ The number of worker threads for the `HTTP` API service
 + Default value: `1`
 + Minimum value: `1`
 
@@ -73,38 +73,38 @@ This document only describes the parameters that are not included in command-lin
 
 ### `concurrent-send-snap-limit`
 
-+ The maximum number of snapshots sent at the same time.
++ The maximum number of snapshots sent at the same time
 + Default value: `32`
 + Minimum value: `1`
 
 ### `concurrent-recv-snap-limit`
 
-+ The maximum number of snapshots received at the same time.
++ The maximum number of snapshots received at the same time
 + Default value: `32`
 + Minimum value: `1`
 
 ### `end-point-recursion-limit`
 
-+ The maximum number of recursive levels allowed when the endpoint pushes down the query requests to decode messages.
++ The maximum number of recursive levels allowed when TiKV decodes the Coprocessor DAG expression
 + Default value: `1000`
 + Minimum value: `1`
 
 ### `end-point-request-max-handle-duration`
 
-+ The maximum allowable duration of the endpoint pushing down query requests to process tasks.
++ The longest duration allowed for a TiDB's push down request to TiKV for processing tasks
 + Default value: `"60s"`
 + Minimum value: `"1s"`
 
 ### `snap-max-write-bytes-per-sec`
 
-+ The maximum allowable disk bandwidth when processing snapshots.
++ The maximum allowable disk bandwidth when processing snapshots
 + Default value: `"100MB"`
 + Unit: KB|MB|GB
 + Minimum value: `"1KB"`
 
 ### `end-point-slow-log-threshold`
 
-+ The threshold of the endpoint pushing down query requests to output the slow log. The slow log will be output when the processing time exceeds the threshold.
++ The time threshold for a TiDB's push down request to print slow log
 + Default value: `"1s"`
 + Minimum value: `0`
 
@@ -118,17 +118,17 @@ Configuration items related to the single thread pool serving read requests. Thi
 
 ### `min-thread-count`
 
-+ The minimal working thread count of the unified read pool.
++ The minimal working thread count of the unified read pool
 + Default value: `1`
 
 ### `max-thread-count`
 
-+ The maximum working thread count of the unified read pool.
++ The maximum working thread count of the unified read pool
 + Default value: `MAX(4, CPU * 0.8)`
 
 ### `stack-size`
 
-+ The stack size of the threads in the unified thread pool.
++ The stack size of the threads in the unified thread pool
 + Default value: `"10MB"`
 + Unit: KB|MB|GB
 + Minimum value: `"2MB"`
