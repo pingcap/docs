@@ -9,6 +9,13 @@ summary: Learn how to easily deploy a TiDB cluster using TiUP.
 
 TiUP supports deploying TiDB, TiFlash, TiDB Binlog, TiCDC, and the monitoring system. This document introduces how to deploy TiDB clusters of different topologies.
 
+<<<<<<< HEAD
+=======
+> **Note:**
+>
+> Since TiDB v4.0, PingCAP no longer provides support for TiDB Ansible. Since TiDB v5.0, PingCAP no longer provides TiDB Ansible documents. If you want to read the document that introduces how to deploy a TiDB cluster using TiDB Ansible, see [Deploy TiDB Using TiDB Ansible (v4.0)](https://docs.pingcap.com/tidb/v4.0/online-deployment-using-ansible).
+
+>>>>>>> b7c0d571... releases: add tidb 5.0-rc release notes (#4600)
 ## Step 1: Prerequisites and precheck
 
 Make sure that you have read the following documents:

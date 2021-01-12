@@ -9,6 +9,13 @@ This document is targeted for users who want to upgrade from TiDB 3.0 or 3.1 ver
 
 If you have deployed the TiDB cluster using TiDB Ansible, you can use TiUP to import the TiDB Ansible configuration and perform the upgrade.
 
+<<<<<<< HEAD
+=======
+> **Note:**
+>
+> Since TiDB v4.0, PingCAP no longer provides support for TiDB Ansible. Since TiDB v5.0, PingCAP no longer provides TiDB Ansible documents. If you want to read the document that introduces how to upgrade a TiDB cluster using TiDB Ansible, see [Upgrade TiDB Using TiDB Ansible (v4.0)](https://docs.pingcap.com/tidb/v4.0/upgrade-tidb-using-ansible).
+
+>>>>>>> b7c0d571... releases: add tidb 5.0-rc release notes (#4600)
 ## Upgrade caveat
 
 - After the upgrade, rolling back to 3.0 or earlier versions is not supported.

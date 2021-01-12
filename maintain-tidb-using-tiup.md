@@ -14,6 +14,13 @@ This document describes the following common operations when you operate and mai
 - Stop the cluster
 - Destroy the cluster
 
+<<<<<<< HEAD
+=======
+> **Note:**
+>
+> Since TiDB v4.0, PingCAP no longer provides support for TiDB Ansible. Since TiDB v5.0, PingCAP no longer provides TiDB Ansible documents. If you want to read the document that introduces how to maintain a TiDB cluster using TiDB Ansible, see [TiDB Ansible Common Operations (v4.0)](https://docs.pingcap.com/tidb/v4.0/maintain-tidb-using-ansible).
+
+>>>>>>> b7c0d571... releases: add tidb 5.0-rc release notes (#4600)
 ## View the cluster list
 
 You can manage multiple TiDB clusters using the TiUP cluster component. When a TiDB cluster is deployed, the cluster appears in the TiUP cluster list.
