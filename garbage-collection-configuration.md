@@ -34,6 +34,8 @@ In previous releases of TiDB, garbage collection was configured via the `mysql.t
 
 The `CENTRAL` garbage collection mode is no longer supported. The `DISTRIBUTED` GC mode (which has been the default since TiDB 3.0) will automatically be used in its place. This mode is more efficient, since TiDB no longer needs to send requests to each TiKV region to trigger garbage collection.
 
+For information on changes in previous releases, refer to earlier versions of this document using the _TIDB version selector_ in the left hand menu.
+
 ### GC in Compaction Filter
 
 Since v5.0.0-rc, TiDB introduces the mechanism of GC in Compaction Filter. Based on the `DISTRIBUTED` GC mode, the mechanism uses the compaction process of RocksDB, instead of a separate GC worker thread, to run GC. This new GC mechanism helps to avoid extra disk read caused by GC. Also, after clearing the obsolete data, it avoids a large number of left tombstone marks which degrade the sequential scan performance. This GC mechanism is disabled by default. The following example shows how to enable the mechanism in the TiKV configuration file:

@@ -74,26 +74,9 @@ It is recommended that you use a network disk to back up and restore data. This 
 
 For the detailed usage of the `br backup` command, refer to [BR command-line description](/br/backup-and-restore-tool.md#command-line-description).
 
-1. Before executing the `br backup` command, check the value of the [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time) configuration item, and adjust the value appropriately in the MySQL client to make sure that [Garbage Collection](/garbage-collection-overview.md) (GC) does not run during the backup operation:
+1. Before executing the `br backup` command, ensure that no DDL is running on the TiDB cluster.
 
-    {{< copyable "sql" >}}
-
-    ```sql
-    SHOW GLOBAL VARIABLES LIKE 'tidb_gc_life_time';
-    SET GLOBAL tidb_gc_life_time = '720h';
-    ```
-
-2. After the backup operation, set the parameter back to the original value.
-
-    {{< copyable "sql" >}}
-
-    ```sql
-    SET GLOBAL tidb_gc_life_time = '10m';
-    ```
-
-> **Note:**
->
-> Since v4.0.8, BR supports the self-adaptive GC. To avoid manually adjusting GC, register `backupTS` in `safePoint` in PD and make sure that `safePoint` does not move forward during the backup process.
+2. Ensure that the storage device where the backup will be created has sufficient space.
 
 ### Preparation for restoration
 

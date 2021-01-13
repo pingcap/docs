@@ -10,16 +10,10 @@ aliases: ['/docs/dev/br/backup-and-restore-tool/','/docs/dev/reference/tools/br/
 
 ## Usage restrictions
 
-- BR only supports TiDB v3.1 and later versions.
 - BR supports restore on clusters of different topologies. However, the online applications will be greatly impacted during the restore operation. It is recommended that you perform restore during the off-peak hours or use `rate-limit` to limit the rate.
 - It is recommended that you execute multiple backup operations serially. Otherwise, different backup operations might interfere with each other.
 - When BR restores data to the upstream cluster of TiCDC/Drainer, TiCDC/Drainer cannot replicate the restored data to the downstream.
 - BR supports operations only between clusters with the same [`new_collations_enabled_on_first_bootstrap`](/character-set-and-collation.md#collation-support-framework) value because BR only backs up KV data. If the cluster to be backed up and the cluster to be restored use different collations, the data validation fails. Therefore, before restoring a cluster, make sure that the switch value from the query result of the `select VARIABLE_VALUE from mysql.tidb where VARIABLE_NAME='new_collation_enabled';` statement is consistent with that during the backup process.
-
-    - For v3.1 clusters, the new collation framework is not supported, so you can see it as disabled.
-    - For v4.0 clusters, check whether the new collation is enabled by executing `SELECT VARIABLE_VALUE FROM mysql.tidb WHERE VARIABLE_NAME='new_collation_enabled';`.
-
-    For example, assume that data is backed up from a v3.1 cluster and will be restored to a v4.0 cluster. The `new_collation_enabled` value of the v4.0 cluster is `true`, which means that the new collation is enabled in the cluster to be restored when this cluster is created. If you perform the restore in this situation, an error might occur.
 
 ## Recommended deployment configuration
 
@@ -30,7 +24,7 @@ aliases: ['/docs/dev/br/backup-and-restore-tool/','/docs/dev/reference/tools/br/
 >
 > If you do not mount a network disk or use other shared storage, the data backed up by BR will be generated on each TiKV node. Because BR only backs up leader replicas, you should estimate the space reserved for each node based on the leader size.
 >
-> Meanwhile, because TiDB v4.0 uses leader count for load balancing by default, leaders are greatly different in size, resulting in uneven distribution of backup data on each node.
+> Meanwhile, because TiDB uses leader count for load balancing by default, leaders are greatly different in size, resulting in uneven distribution of backup data on each node.
 
 ## Implementation principles
 
@@ -125,11 +119,11 @@ Currently, you can use SQL statements or the command-line tool to back up and re
 
 ### Use SQL statements
 
-TiDB v4.0.2 and later versions support backup and restore operations using SQL statements. For details, see the [Backup syntax](/sql-statements/sql-statement-backup.md#backup) and the [Restore syntax](/sql-statements/sql-statement-restore.md#restore).
+TiDB supports both [`BACKUP`](/sql-statements/sql-statement-backup.md#backup) and [`RESTORE`](/sql-statements/sql-statement-restore.md#restore) SQL statements. The progress of these operations can be monitored with the statement [`SHOW BACKUPS|RESTORES`](/sql-statements/sql-statement-show-backups.md).
 
 ### Use the command-line tool
 
-Also, you can use the command-line tool to perform backup and restore. First, you need to download the binary file of the BR tool. For details, see [download link](/download-ecosystem-tools.md#br-backup-and-restore).
+The `br` command line utility is available as a separate download. For details, see [download link](/download-ecosystem-tools.md#br-backup-and-restore).
 
 The following section takes the command-line tool as an example to introduce how to perform backup and restore operations.
 
@@ -194,18 +188,6 @@ Each of the above three sub-commands might still include the following three sub
 ## Back up cluster data
 
 To back up the cluster data, use the `br backup` command. You can add the `full` or `table` sub-command to specify the scope of your backup operation: the whole cluster or a single table.
-
-If the BR version is earlier than v4.0.3, and the backup duration might exceed the [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time) configuration which is `10m0s` by default (`10m0s` means 10 minutes), increase the value of this configuration item.
-
-For example, set `tidb_gc_life_time` to `720h`:
-
-{{< copyable "sql" >}}
-
-```sql
-SET GLOBAL tidb_gc_life_time = '720h';
-```
-
-Since v4.0.3, BR automatically adapts to GC and you do not need to manually adjust the [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time) value.
 
 ### Back up all the cluster data
 
@@ -664,10 +646,7 @@ Suppose that 4 TiKV nodes is used, each with the following configuration:
 
 ### Backup
 
-Before the backup operation, check the following two items:
-
-- You have set [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time) set to a larger value so that the backup operation will not be interrupted because of data loss.
-- No DDL statement is being executed on the TiDB cluster.
+Before the backup operation, check that no DDL statement is being executed on the TiDB cluster.
 
 Then execute the following command to back up all the cluster data:
 
