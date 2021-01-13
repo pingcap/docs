@@ -24,7 +24,7 @@ aliases: ['/docs/dev/br/backup-and-restore-tool/','/docs/dev/reference/tools/br/
 >
 > If you do not mount a network disk or use other shared storage, the data backed up by BR will be generated on each TiKV node. Because BR only backs up leader replicas, you should estimate the space reserved for each node based on the leader size.
 >
-> Meanwhile, because TiDB uses leader count for load balancing by default, leaders are greatly different in size, resulting in uneven distribution of backup data on each node.
+> Because TiDB uses leader count for load balancing by default, leaders can greatly differ in size. This might resulting in uneven distribution of backup data on each node.
 
 ## Implementation principles
 
@@ -123,7 +123,7 @@ TiDB supports both [`BACKUP`](/sql-statements/sql-statement-backup.md#backup) an
 
 ### Use the command-line tool
 
-The `br` command line utility is available as a separate download. For details, see [download link](/download-ecosystem-tools.md#br-backup-and-restore).
+The `br` command-line utility is available as a separate download. For details, see [download link](/download-ecosystem-tools.md#br-backup-and-restore).
 
 The following section takes the command-line tool as an example to introduce how to perform backup and restore operations.
 
@@ -395,7 +395,7 @@ To restore the cluster data, use the `br restore` command. You can add the `full
 >
 > Even if each TiKV node eventually only need to read a part of the all SST files, they all need full access to the complete archive because:
 >
-> - Data are replicated into multiple peers. When ingesting SSTs, these files have to be present on *all* peers. This is unlike back up where reading from a single node is enough.
+> - Data is replicated into multiple peers. When ingesting SSTs, these files have to be present on *all* peers. This is unlike back up where reading from a single node is enough.
 > - Where each peer is scattered to during restore is random. We don't know in advance which node will read which file.
 >
 > These can be avoided using shared storage, for example mounting an NFS on the local path, or using S3. With network storage, every node can automatically read every SST file, so these caveats no longer apply.
