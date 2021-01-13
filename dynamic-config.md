@@ -69,19 +69,19 @@ When using the `set config` statement, you can modify the configuration of a sin
 >
 > It is recommended to wrap variable names in quotation marks.
 
-    {{< copyable "sql" >}}
+{{< copyable "sql" >}}
 
-    ```sql
-    set config tikv `split.qps-threshold`=1000
-    ```
+```sql
+set config tikv `split.qps-threshold`=1000
+```
 
 - Modify the configuration of a single TiKV instance:
 
-    {{< copyable "sql" >}}
+{{< copyable "sql" >}}
 
-    ```sql
-    set config "127.0.0.1:20180" `split.qps-threshold`=1000
-    ```
+```sql
+set config "127.0.0.1:20180" `split.qps-threshold`=1000
+```
 
 If the modification is successful, `Query OK` is returned:
 
