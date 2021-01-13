@@ -72,7 +72,7 @@ SET  GLOBAL tidb_distsql_scan_concurrency = 10;
 - Default value: 0
 - This variable is used to show whether the execution plan used in the previous `execute` statement is taken directly from the plan cache.
 
-### last_plan_from_binding <!-- New in v5.0.0-rc -->
+### last_plan_from_binding <span class="version-mark">New in v5.0.0-rc</span>
 
 - Scope: SESSION
 - Default value: 0
@@ -304,13 +304,13 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Default value: 0
 - This variable is used to control whether to enable the cascades planner, which is currently considered experimental.
 
-### tidb_enable_clustered_index <!-- New in v5.0.0-rc -->
+### tidb_enable_clustered_index <span class="version-mark">New in v5.0.0-rc</span>
 
 - Scope: SESSION | GLOBAL
 - Default value: 0
 - This variable is used to control whether to enable the [clustered index](/clustered-indexes.md) feature.
     - This feature is only applicable to newly created tables and does not affect the existing old tables.
-    - This feature is only applicable to tables whose primary key is the single-column non-integer type or the multi-column type. It does not affect the tables without a primary key or tables with the primary key of the single-column non-integer type.
+    - This feature is only applicable to tables whose primary key is the single-column non-integer type or the multi-column type. It does not affect the tables without a primary key or tables with the primary key of the single-column integer type.
     - You can execute `select tidb_pk_type from information_schema.tables where table_name ='{table_name}'` to check whether the clustered index feature has been enabled on a table.
 - After you enable this feature, rows are stored directly on the primary key instead of on the internally allocated `rows_id` to which the extra primary key index is created to point.
 
@@ -371,15 +371,11 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Default value: "on"
 - This variable is used to set whether to enable the `TABLE PARTITION` feature.
 
-    - `on` indicates enabling Range partitioning, Hash partitioning, and Range column partitioning with one single column.
-    - `auto` functions the same way as `on` does.
-    - `nightly` indicates enabling the types of partitioned tables specified in `on`. It also indicates enabling List partitioning and List COLUMNS partitioning.
     - `off` indicates disabling the `TABLE PARTITION` feature. In this case, the syntax that creates a partition table can be executed, but the table created is not a partitioned one.
+    - `on` indicates enabling the `TABLE PARTITION` feature for the supported partition types. Currently, it indicates enabling range partition, hash partition and range column partition with one single column.
+    - `auto` functions the same way as `on` does.
 
-> **Note:**
->
-> Currently, TiDB only supports Range partitioning and Hash partitioning by default.
-> List partitioning and List COLUMNS partitioning are still experimental features.
+- Currently, TiDB only supports Range partition and Hash partition.
 
 ### tidb_enable_telemetry <span class="version-mark">New in v4.0.2 version</span>
 
@@ -500,21 +496,33 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 ### tidb_hash_join_concurrency
 
+> **Warning:**
+>
+> Since v5.0.0-rc, this variable is deprecated. Instead, use [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v500-rc) for setting.
+
 - Scope: SESSION | GLOBAL
-- Default value: 5
+- Default value: -1
 - This variable is used to set the concurrency of the `hash join` algorithm.
 
 ### tidb_hashagg_final_concurrency
 
+> **Warning:**
+>
+> Since v5.0.0-rc, this variable is deprecated. Instead, use [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v500-rc) for setting.
+
 - Scope: SESSION | GLOBAL
-- Default value: 4
+- Default value: -1
 - This variable is used to set the concurrency of executing the concurrent `hash aggregation` algorithm in the `final` phase.
 - When the parameter of the aggregate function is not distinct, `HashAgg` is run concurrently and respectively in two phases - the `partial` phase and the `final` phase.
 
 ### tidb_hashagg_partial_concurrency
 
+> **Warning:**
+>
+> Since v5.0.0-rc, this variable is deprecated. Instead, use [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v500-rc) for setting.
+
 - Scope: SESSION | GLOBAL
-- Default value: 4
+- Default value: -1
 - This variable is used to set the concurrency of executing the concurrent `hash aggregation` algorithm in the `partial` phase.
 - When the parameter of the aggregate function is not distinct, `HashAgg` is run concurrently and respectively in two phases - the `partial` phase and the `final` phase.
 
@@ -527,15 +535,23 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 ### tidb_index_lookup_concurrency
 
+> **Warning:**
+>
+> Since v5.0.0-rc, this variable is deprecated. Instead, use [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v500-rc) for setting.
+
 - Scope: SESSION | GLOBAL
-- Default value: 4
+- Default value: -1
 - This variable is used to set the concurrency of the `index lookup` operation.
 - Use a bigger value in OLAP scenarios, and a smaller value in OLTP scenarios.
 
 ### tidb_index_lookup_join_concurrency
 
+> **Warning:**
+>
+> Since v5.0.0-rc, this variable is deprecated. Instead, use [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v500-rc) for setting.
+
 - Scope: SESSION | GLOBAL
-- Default value: 4
+- Default value: -1
 - This variable is used to set the concurrency of the `index lookup join` algorithm.
 
 ### tidb_index_lookup_size
@@ -544,6 +560,34 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Default value: 20000
 - This variable is used to set the batch size of the `index lookup` operation.
 - Use a bigger value in OLAP scenarios, and a smaller value in OLTP scenarios.
+
+### `tidb_executor_concurrency` <span class="version-mark">New in v5.0.0-rc</span>
+
+- Scope: SESSION | GLOBAL
+- Default value: 5
+
+This variable is used to set the concurrency of the following SQL operators (to one value):
+
+- `index lookup`
+- `index lookup join`
+- `hash join`
+- `hash aggregation` (the `partial` and `final` phases)
+- `window`
+- `projection`
+
+`tidb_executor_concurrency` incorporates the following existing system variables as a whole for easier management:
+
++ `tidb_index_lookup_concurrency`
++ `tidb_index_lookup_join_concurrency`
++ `tidb_hash_join_concurrency`
++ `tidb_hashagg_partial_concurrency`
++ `tidb_hashagg_final_concurrency`
++ `tidb_projection_concurrency`
++ `tidb_window_concurrency`
+
+Since v5.0.0-rc, you can still separately modify the system variables listed above (with a deprecation warning returned) and your modification only affects the corresponding single operators. After that, if you use `tidb_executor_concurrency` to modify the operator concurrency, the separately modified operators will not be affected. If you want to use `tidb_executor_concurrency` to modify the concurrency of all operators, you can set the values of all variables listed above to `-1`.
+
+For a system upgraded to v5.0.0-rc from an earlier version, if you have not modified any value of the variables listed above (which means that the `tidb_hash_join_concurrency` value is `5` and the values of the rest are `4`), the operator concurrency previously managed by these variables will automatically be managed by `tidb_executor_concurrency`. If you have modified any of these variables, the concurrency of the corresponding operators will still be controlled by the modified variables.
 
 ### tidb_index_serial_scan_concurrency
 
@@ -693,8 +737,12 @@ mysql> desc select count(distinct a) from test.t;
 
 ### tidb_projection_concurrency
 
+> **Warning:**
+>
+> Since v5.0.0-rc, this variable is deprecated. Instead, use [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v500-rc) for setting.
+
 - Scope: SESSION | GLOBAL
-- Default value: 4
+- Default value: -1
 - This variable is used to set the concurrency of the `Projection` operator.
 
 ### tidb_query_log_max_len
@@ -876,8 +924,12 @@ SET tidb_slow_log_threshold = 200;
 
 ### tidb_window_concurrency <span class="version-mark">New in v4.0</span>
 
+> **Warning:**
+>
+> Since v5.0.0-rc, this variable is deprecated. Instead, use [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v500-rc) for setting.
+
 - Scope: SESSION | GLOBAL
-- Default value: 4
+- Default value: -1
 - This variable is used to set the concurrency degree of the window operator.
 
 ### time_zone
@@ -965,7 +1017,7 @@ explain select * from t where age=5;
 - TiDB triggers an alarm when the percentage of the memory it takes exceeds a certain threshold. For the detailed usage description of this feature, see [`memory-usage-alarm-ratio`](/tidb-configuration-file.md#memory-usage-alarm-ratio-new-in-v409).
 - You can set the initial value of this variable by configuring [`memory-usage-alarm-ratio`](/tidb-configuration-file.md#memory-usage-alarm-ratio-new-in-v409).
 
-### `tidb_track_aggregate_memory_usage` <!-- New in v5.0.0-rc -->
+### `tidb_track_aggregate_memory_usage` <span class="version-mark">New in v5.0.0-rc</span>
 
 > **Warning:**
 >
@@ -975,14 +1027,14 @@ explain select * from t where age=5;
 - Default value: OFF
 - This variable controls whether to track the memory usage of the aggregate function. When you enable this feature, TiDB counts the memory usage of the aggregate function, which might cause the overall SQL memory statistics to exceed the threshold [`mem-quota-query`](/tidb-configuration-file.md#mem-quota-query), and then be affected by the behavior defined by [`oom-action`](/tidb-configuration-file.md#oom-action).
 
-### `tidb_enable_async_commit` <!-- New in v5.0.0-rc -->
+### `tidb_enable_async_commit` <span class="version-mark">New in v5.0.0-rc</span>
 
 > **Warning:**
 >
 > Async commit is still an experimental feature. It is not recommended to use this feature in the production environment. Currently, the following incompatible issues are found, and be aware of them if you need to use this feature:
 
 > - This feature is incompatible with [TiCDC](/ticdc/ticdc-overview.md) and might cause TiCDC to run abnormally.
-> - This feature is incompatible with [Compaction Filter](/tikv-configuration-file.md#enable-compaction-filter). If you use the two features at the same time, write loss might occur.
+> - This feature is incompatible with [Compaction Filter](/tikv-configuration-file.md#enable-compaction-filter-new-in-v500-rc). If you use the two features at the same time, write loss might occur.
 > - This feature is incompatible with TiDB Binlog and does not take effect when TiDB Binlog is enabled.
 
 - Scope: SESSION | GLOBAL
@@ -991,9 +1043,9 @@ explain select * from t where age=5;
 
 > **Warning:**
 >
-> When async commit is enabled, the external consistency of transactions cannot be guaranteed. For details, refer to [`tidb_guarantee_external_consistency`](#tidb_guarantee_external_consistency).
+> When async commit is enabled, the external consistency of transactions cannot be guaranteed. For details, refer to [`tidb_guarantee_external_consistency`](#tidb_guarantee_external_consistency-new-in-v500-rc).
 
-### `tidb_guarantee_external_consistency` <!-- New in v5.0.0-rc -->
+### `tidb_guarantee_external_consistency` <span class="version-mark">New in v5.0.0-rc</span>
 
 - Scope: SESSION | GLOBAL
 - Default value: OFF
