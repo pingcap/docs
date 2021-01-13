@@ -110,7 +110,7 @@ mysql> SELECT * FROM t1;
 - Default value: 28800
 - This variable represents the idle timeout of the interactive user session, which is measured in seconds. Interactive user session refers to the session established by calling [`mysql_real_connect()`](https://dev.mysql.com/doc/c-api/5.7/en/mysql-real-connect.html) API using the `CLIENT_INTERACTIVE` option (for example, MySQL shell client). This variable is fully compatible with MySQL.
 
-### last_plan_from_binding <!-- New in v5.0.0-rc -->
+### last_plan_from_binding <span class="version-mark">New in v5.0.0-rc</span>
 
 - Scope: SESSION
 - Default value: 0
@@ -354,14 +354,14 @@ Constraint checking is always performed in place for pessimistic transactions (d
 >
 > Currently, this feature is incompatible with TiDB Binlog in some scenarios and might cause semantic changes on a transaction. For more usage precautions of this feature, refer to [Incompatibility issues about transaction semantic](https://github.com/pingcap/tidb/issues/21069) and [Incompatibility issues about TiDB Binlog](https://github.com/pingcap/tidb/issues/20996).
 
-### tidb_enable_async_commit <!-- New in v5.0.0-rc -->
+### tidb_enable_async_commit <span class="version-mark">New in v5.0.0-rc</span>
 
 > **Warning:**
 >
 > Async commit is still an experimental feature. It is not recommended to use this feature in the production environment. Currently, the following incompatible issues are found, and be aware of them if you need to use this feature:
 
 > - This feature is incompatible with [TiCDC](/ticdc/ticdc-overview.md) and might cause TiCDC to run abnormally.
-> - This feature is incompatible with [Compaction Filter](/tikv-configuration-file.md#enable-compaction-filter). If you use the two features at the same time, write loss might occur.
+> - This feature is incompatible with [Compaction Filter](/tikv-configuration-file.md#enable-compaction-filter-new-in-v500-rc). If you use the two features at the same time, write loss might occur.
 > - This feature is incompatible with TiDB Binlog and does not take effect when TiDB Binlog is enabled.
 
 - Scope: SESSION | GLOBAL
@@ -370,7 +370,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 > **Warning:**
 >
-> When async commit is enabled, the external consistency of transactions cannot be guaranteed. For details, refer to [`tidb_guarantee_external_consistency`](#tidb_guarantee_external_consistency).
+> When async commit is enabled, the external consistency of transactions cannot be guaranteed. For details, refer to [`tidb_guarantee_external_consistency`](#tidb_guarantee_external_consistency-new-in-v500-rc).
 
 ### tidb_enable_cascades_planner
 
@@ -384,7 +384,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Default value: ON
 - This variable is used to control whether to enable the `Chunk` data encoding format in Coprocessor.
 
-### tidb_enable_clustered_index <!-- New in v5.0.0-rc -->
+### tidb_enable_clustered_index <span class="version-mark">New in v5.0.0-rc</span>
 
 - Scope: SESSION | GLOBAL
 - Default value: OFF
@@ -567,7 +567,7 @@ For a system upgraded to v5.0.0-rc from an earlier version, if you have not modi
     - `txn_mode`: The transactional mode. Value options are `OPTIMISTIC` and `PESSIMISTIC`.
     - `sql`: The SQL statement corresponding to the current query.
 
-### tidb_guarantee_external_consistency <!-- New in v5.0.0-rc -->
+### tidb_guarantee_external_consistency <span class="version-mark">New in v5.0.0-rc</span>
 
 - Scope: SESSION | GLOBAL
 - Default value: OFF
@@ -984,7 +984,7 @@ SET tidb_slow_log_threshold = 200;
 - Default value: 0
 - This variable is used to limit the maximum number of requests TiDB can send to TiKV at the same time. 0 means no limit.
 
-### tidb_track_aggregate_memory_usage <!-- New in v5.0.0-rc -->
+### tidb_track_aggregate_memory_usage <span class="version-mark">New in v5.0.0-rc</span>
 
 > **Warning:**
 >
