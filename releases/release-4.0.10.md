@@ -1,14 +1,18 @@
 ---
-title: tidb v4.0.10 Release Notes
-category: Releases
-aliases: ['/docs/dev/releases/v4.0.10/']
+title: TiDB 4.0.10 Release Notes
 ---
 
-# tidb v4.0.10 Release Notes
+# TiDB 4.0.10 Release Notes
 
-Release date: January 13, 2021
+Release date: January 15, 2021
 
-TiDB version: v4.0.10
+TiDB version: 4.0.10
+
+## Compatibility Changes
+
+## New Features
+
+## Improvements
 
 ## Bug Fixes
 
@@ -24,14 +28,14 @@ TiDB version: v4.0.10
     - Fix a bug that schema change will lead to incorrectness when forUpdateRead [#21596](https://github.com/pingcap/tidb/pull/21596)
     - Fix a bug that doesn't add NoDefaultValueFlag when creating a table [#21474](https://github.com/pingcap/tidb/pull/21474)
     - Set dbName for hinted query block table alias [#21380](https://github.com/pingcap/tidb/pull/21380)
-    - Generate proper hint for IndexHashJoin / IndexMergeJoin` [#21020](https://github.com/pingcap/tidb/pull/21020)
+    - Generate proper hint for IndexHashJoin / IndexMergeJoin [#21020](https://github.com/pingcap/tidb/pull/21020)
 
 + TiFlash
 
     - Fix the problem that TiFlash fail to start when path_realtime_mode is true [#1322](https://github.com/pingcap/tics/pull/1322)
     - Fixed an issue where tables created in the old version of tidb may cause the startup of the new tiflash node to fail. [#1297](https://github.com/pingcap/tics/pull/1297)
 
-## Others
+## 未分类 notes。请对以下 Note 进行分类，挪动到上面 Compatibility changes、New features、Improvement 分类下
 
 + TiDB
 
