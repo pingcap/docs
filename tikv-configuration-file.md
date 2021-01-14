@@ -40,12 +40,6 @@ This document only describes the parameters that are not included in command-lin
 + Default value: `1024`
 + Minimum value: `1`
 
-### `grpc-memory-pool-quota`
-
-+ Limit the memory size that can be used by gRPC
-+ Default: `"32G"`
-+ Limit the memory in case OOM is observed. Note that limit the usage can lead to potential stall
-
 ### `grpc-raft-conn-num`
 
 + The maximum number of links among TiKV nodes for Raft communication
@@ -89,6 +83,12 @@ This document only describes the parameters that are not included in command-lin
 + Default value: `1000`
 + Minimum value: `1`
 
+### `end-point-slow-log-threshold`
+
++ The time threshold for a TiDB's push down request to print slow log
++ Default value: `"1s"`
++ Minimum value: `0`
+
 ### `end-point-request-max-handle-duration`
 
 + The longest duration allowed for a TiDB's push down request to TiKV for processing tasks
@@ -101,12 +101,6 @@ This document only describes the parameters that are not included in command-lin
 + Default value: `"100MB"`
 + Unit: KB|MB|GB
 + Minimum value: `"1KB"`
-
-### `end-point-slow-log-threshold`
-
-+ The time threshold for a TiDB's push down request to print slow log
-+ Default value: `"1s"`
-+ Minimum value: `0`
 
 ## readpool.unified
 
