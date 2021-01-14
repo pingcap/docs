@@ -60,7 +60,7 @@ Two solutions:
 
 ### Why does Dumpling return `The local disk space is insufficient` error when exporting a large table?
 
-It is because the database primary keys are not evenly distributed. When Dumpling splits the data, some data chunks become excessive. Try to allocate more disk space or [contact us](https://tidbcommunity.slack.com/archives/CH7TTLL7P) to get the nightly version of Dumpling.
+This error occurs because the database's primary keys are not evenly distributed. When Dumpling splits the data, some data chunks become excessive. Try to allocate more disk space or [contact us](https://tidbcommunity.slack.com/archives/CH7TTLL7P) to get the nightly version of Dumpling.
 
 ### Does TiDB have a function like the Flashback Query in Oracle? Does it support DDL?
 
