@@ -67,7 +67,7 @@ When using the `set config` statement, you can modify the configuration of a sin
 
 > **Note:**
 >
-> It is recommended to wrap variable names in quotation marks.
+> It is recommended to wrap variable names in backticks.
 
 {{< copyable "sql" >}}
 
