@@ -188,4 +188,7 @@ The following column types are supported by MySQL, but **NOT** by TiDB:
 
 ### Incompatibility caused by deprecated feature
 
-* According to [MySQL 8.0's document on floating types](https://dev.mysql.com/doc/refman/8.0/en/floating-point-types.html), floating point types with specified precision is deprecated, therefore we won't fix compatibility problems caused by such usage, users should be aware of this and use `DECIMAL` in this case.
+TiDB does not implement certain functionality that has been marked as deprecated in MySQL. This includes:
+
+* Specifying precision for floating point types. MySQL 8.0 [deprecates](https://dev.mysql.com/doc/refman/8.0/en/floating-point-types.html) this feature, and it is recommended to use the `DECIMAL` type instead.
+* The `ZEROFILL` attribute. MySQL 8.0 [deprecates](https://dev.mysql.com/doc/refman/8.0/en/numeric-type-attributes.html) this feature, and it is recommended to instead pad numeric values in your application.
