@@ -95,7 +95,7 @@ This document only describes the parameters that are not included in command-lin
 + Default value: `60s`
 + Minimum value: `1s`
 
-### `server.snap-max-write-bytes-per-sec`
+### `snap-max-write-bytes-per-sec`
 
 + The maximum allowable disk bandwidth for processing snapshots
 + Default value: `1000MB`
