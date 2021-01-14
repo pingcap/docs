@@ -513,7 +513,6 @@
 + [Glossary](/glossary.md)
 + Release Notes
   + [All Releases](/releases/release-notes.md)
-  + [TiDB Roadmap](/roadmap.md)
   + v5.0
     + [5.0.0-rc](/releases/release-5.0.0-rc.md)
   + v4.0
