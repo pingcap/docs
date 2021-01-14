@@ -8,71 +8,103 @@ Release date: January 15, 2021
 
 TiDB version: 4.0.10
 
-## Compatibility Changes
-
 ## New Features
 
 + PD
 
-    - Support configuration `enable-redact-log` to enable log desensitization or not [#3266](https://github.com/pingcap/pd/pull/3266)
+    - Add the `enable-redact-log` configuration item to enable log redaction [#3266](https://github.com/pingcap/pd/pull/3266)
 
 + TiFlash
 
-    - Add `security.redact_info_log` config, which can redact user data from logs
+    - Add the `security.redact_info_log` configuration item to redact user data from logs
 
 ## Improvements
 
 + TiDB
 
-    - Make txn entry size limit configurable [#21843](https://github.com/pingcap/tidb/pull/21843)
+    - Make the size limit of transaction entries configurable [#21843](https://github.com/pingcap/tidb/pull/21843)
 
 + PD
 
     - Optimize the store state filter metrics [#3100](https://github.com/tikv/pd/pull/3100)
-    - Upgrade go.etcd.io/bbolt to v1.3.5 [#3331](https://github.com/tikv/pd/pull/3331)
+    - Upgrade `go.etcd.io/bbolt` to v1.3.5 [#3331](https://github.com/tikv/pd/pull/3331)
+
++ Tools
+
+    + TiCDC
+
+        - Enable the old value feature if the protocol is `maxwell` [#1144](https://github.com/pingcap/ticdc/pull/1144)
+        - Enable the unified sorter feature by default [#1230](https://github.com/pingcap/ticdc/pull/1230)
+
+    + Dumpling
+
+        - Support checking unrecognized arguments and printing the current progress during dumping [#228](https://github.com/pingcap/dumpling/pull/228)
+
+    + TiDB Lightning
+
+        - Support retrying S3 reads on error [#533](https://github.com/pingcap/tidb-lightning/pull/533)
 
 ## Bug Fixes
 
 + TiDB
 
-    - Fix a concurrency bug that may cause the batch client timeout [#22336](https://github.com/pingcap/tidb/pull/22336)
+    - Fix a concurrency bug that might cause the batch client timeout [#22336](https://github.com/pingcap/tidb/pull/22336)
     - Avoid duplicate bindings caused by concurrent baseline capture [#22295](https://github.com/pingcap/tidb/pull/22295)
-    - Make baseline capture work when log level is 'debug' [#22293](https://github.com/pingcap/tidb/pull/22293)
-    - Correctly GC locks when region merge happens during scanning & resolving locks [#22267](https://github.com/pingcap/tidb/pull/22267)
-    - Return correct results for user variables of datetime type [#22143](https://github.com/pingcap/tidb/pull/22143)
-    - Avoid using index merge when there are multiple table filters. [#22124](https://github.com/pingcap/tidb/pull/22124)
-    - Fix the `wrong precision` problem in TiFlash caused by prepare plan cache. [#21960](https://github.com/pingcap/tidb/pull/21960)
-    - Fix the bug that schema change will lead to incorrect results. [#21596](https://github.com/pingcap/tidb/pull/21596)
-    - Avoid unnecessary column flag changes incurred by `ALTER TABLE`. [#21474](https://github.com/pingcap/tidb/pull/21474)
-    - Set database name for table aliases of query blocks used in optimizer hint. [#21380](https://github.com/pingcap/tidb/pull/21380)
-    - Generate proper hint for IndexHashJoin / IndexMergeJoin [#21020](https://github.com/pingcap/tidb/pull/21020)
+    - Make the baseline capture work when the log level is `'debug'` [#22293](https://github.com/pingcap/tidb/pull/22293)
+    - Correct GC locks when Region merge occurs during scanning and resolving locks [#22267](https://github.com/pingcap/tidb/pull/22267)
+    - Return correct results for user variables of the `datetime` type [#22143](https://github.com/pingcap/tidb/pull/22143)
+    - Avoid using index merge when there are multiple table filters [#22124](https://github.com/pingcap/tidb/pull/22124)
+    - Fix the `wrong precision` issue in TiFlash caused by the prepare plan cache [#21960](https://github.com/pingcap/tidb/pull/21960)
+    - Fix a bug that the schema change causes incorrect results [#21596](https://github.com/pingcap/tidb/pull/21596)
+    - Avoid unnecessary column flag changes incurred by `ALTER TABLE` [#21474](https://github.com/pingcap/tidb/pull/21474)
+    - Set the database name for table aliases of query blocks used in optimizer hints [#21380](https://github.com/pingcap/tidb/pull/21380)
+    - Generate the proper hint for `IndexHashJoin`/`IndexMergeJoin` [#21020](https://github.com/pingcap/tidb/pull/21020)
 
 + TiKV
 
-    - Fix wrong mapping between ready and peer [#9409](https://github.com/tikv/tikv/pull/9409)
-    - Fix some logs are not redacted when `security.redact-info-log` is on [#9314](https://github.com/tikv/tikv/pull/9314)
+    - Fix the wrong mapping between ready and peer [#9409](https://github.com/tikv/tikv/pull/9409)
+    - Fix the issue that some logs are not redacted when `security.redact-info-log` is set to `true` [#9314](https://github.com/tikv/tikv/pull/9314)
 
 + PD
 
-    - Fix the id allocation is not monotonic [#3308](https://github.com/tikv/pd/pull/3308) [#3323](https://github.com/tikv/pd/pull/3323)
-    - Fix the pd client could be blocked in some cases [#3285](https://github.com/pingcap/pd/pull/3285)
+    - Fix the issue that the ID allocation is not monotonic [#3308](https://github.com/tikv/pd/pull/3308) [#3323](https://github.com/tikv/pd/pull/3323)
+    - Fix the issue that the PD client might be blocked in some cases [#3285](https://github.com/pingcap/pd/pull/3285)
 
 + TiFlash
 
-    - Fixed an issue that TiFlash can't start because TiFlash failed to process the schema of TiDB with an old version
-    - Fixed an issue where TiFlash can't start due to incorrect handling of cpu_time on the RedHat system
-    - Fixed the issue that TiFlash fails to start when path_realtime_mode is true
-    - Fixed the issue of incorrect results when calling the `substr` function with three parameters
-    - Fixed the issue that TiFlash does not support Enum type change even if the change is lossless
- 
-## 未分类 notes。请对以下 Note 进行分类，挪动到上面 Compatibility changes、New features、Improvement 分类下
+    - Fix the issue that TiFlash fails to start because TiFlash fails to process the TiDB schema with an old version
+    - Fix the issue that TiFlash fails to start due to incorrect handling of `cpu_time` on the RedHat system
+    - Fix the issue that TiFlash fails to start when `path_realtime_mode` is `true`
+    - Fix an issue of incorrect results when calling the `substr` function with three parameters
+    - Fix the issue that TiFlash does not support changing the `Enum` type even if the change is lossless
 
 + Tools
 
-    - TiCDC
+    + TiCDC
 
-        * Fix a bug that MySQL connection is not recycled when some transactions executed with failure [#1285](https://github.com/pingcap/ticdc/pull/1285)
-        * Fixed bug in passing `max-batch-size` to codec [#1253](https://github.com/pingcap/ticdc/pull/1253)
-        * Enable Unified Sorter by default [#1230](https://github.com/pingcap/ticdc/pull/1230)
-        * Fix a bug that the cdc owner might consume too much memory in the etcd watch client [#1227](https://github.com/pingcap/ticdc/pull/1227)
-        * Fix a bug that outdated metadata could cause the newly created changefeed abnormal. [#1184](https://github.com/pingcap/ticdc/pull/1184)
+        - Fix the maxwell issues, including the `base64` data output and output TSO to unix timestamp [#1173](https://github.com/pingcap/ticdc/pull/1173)
+        - Fix a bug that outdated metadata might cause the newly created changefeed abnormal [#1184](https://github.com/pingcap/ticdc/pull/1184)
+        - Fix create receiver on closed notifier [#1199](https://github.com/pingcap/ticdc/pull/1199)
+        - Fix memory accumulated when owner consume etcd update slow [#1227](https://github.com/pingcap/ticdc/pull/1227)
+        - Fix the issue that `max-batch-size` does not take effect [#1253](https://github.com/pingcap/ticdc/pull/1253)
+        - Fix cleanup stale tasks before capture information is constructed [#1280](https://github.com/pingcap/ticdc/pull/1280)
+        - Roll back transactions to recycle db conn for MySQL sink [#1285](https://github.com/pingcap/ticdc/pull/1285)
+
+    + Dumpling
+
+        - Do not set `tidb_mem_quota_query` when it is not specified to avoid TiDB OOM [#233](https://github.com/pingcap/dumpling/pull/233)
+
+    + Backup & Restore (BR)
+
+        - Fix the issue that BR v4.0.9 cannot restore the GCS backup files of v4.0.8 [#688](https://github.com/pingcap/br/pull/688)
+        - Fix the issue that BR panics when the GCS storage URL has no prefix [#673](https://github.com/pingcap/br/pull/673)
+
+    + TiDB Binlog
+
+        - Fix the issue that when the amend transaction feature is enabled, Drainer chooses the wrong schema version of DDL to generate the wrong SQL statement [#1033](https://github.com/pingcap/tidb-binlog/pull/1033)
+
+    + TiDB Lightning
+
+        - Fix a bug that the retry scan region key is not encoded, which causes the retried Region is not split [#531](https://github.com/pingcap/tidb-lightning/pull/531)
+        - Fix a bug that lost create table error during multiple tables created [#530](https://github.com/pingcap/tidb-lightning/pull/530)
+        - Fix the bug that lightning will trim all the empty sep when trim-last-sep is true, which causes "column count mismatch" in tidb backend [#535](https://github.com/pingcap/tidb-lightning/pull/535)
