@@ -19,7 +19,6 @@ TiDB version: 4.0.10
 + TiFlash
 
     - Add `security.redact_info_log` config, which can redact user data from logs
-    - Support lossless schema change for enum type
 
 ## Improvements
 
@@ -64,7 +63,8 @@ TiDB version: 4.0.10
     - Fixed an issue where TiFlash can't start due to incorrect handling of cpu_time on the RedHat system
     - Fixed the issue that TiFlash fails to start when path_realtime_mode is true
     - Fixed the issue of incorrect results when calling the `substr` function with three parameters
-
+    - Fixed the issue that TiFlash does not support Enum type change even if the change is lossless
+ 
 ## 未分类 notes。请对以下 Note 进行分类，挪动到上面 Compatibility changes、New features、Improvement 分类下
 
 + Tools
