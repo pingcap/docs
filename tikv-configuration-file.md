@@ -89,7 +89,7 @@ This document only describes the parameters that are not included in command-lin
 + Default value: `"1s"`
 + Minimum value: `0`
 
-### `server.end-point-request-max-handle-duration`
+### `end-point-request-max-handle-duration`
 
 + The longest duration allowed for a TiDB request to TiKV for processing tasks
 + Default value: `60s`
