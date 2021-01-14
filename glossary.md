@@ -24,7 +24,7 @@ ACID refers to the four key properties of a transaction: atomicity, consistency,
 
 ### Changefeed
 
-Changefeed is an incremental migration task in TiCDC. An incremental migration task outputs the data change logs of several tables in a TiDB cluster to the designated downstream.
+An incremental replication task in TiCDC, which outputs the data change logs of several tables in a TiDB cluster to the designated downstream.
 
 ## L
 
