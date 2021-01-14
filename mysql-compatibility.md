@@ -186,7 +186,7 @@ The following column types are supported by MySQL, but **NOT** by TiDB:
 + FLOAT4/FLOAT8
 + `SQL_TSI_*` (including SQL_TSI_MONTH, SQL_TSI_WEEK, SQL_TSI_DAY, SQL_TSI_HOUR, SQL_TSI_MINUTE and SQL_TSI_SECOND, excluding SQL_TSI_YEAR)
 
-### Incompatibility caused by deprecated feature
+### Incompatibility caused by deprecated features
 
 TiDB does not implement certain functionality that has been marked as deprecated in MySQL. This includes:
 
