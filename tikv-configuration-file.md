@@ -12,52 +12,15 @@ The TiKV configuration file supports more options than command-line parameters. 
 
 This document only describes the parameters that are not included in command-line parameters. For more details, see [command-line parameter](/command-line-flags-for-tikv-configuration.md).
 
-### `status-thread-pool-size`
+### server
+
++ Configuration items related to the server
+
+## `status-thread-pool-size`
 
 + The number of worker threads for the `HTTP` API service
 + Default value: `1`
 + Minimum value: `1`
-
-### `server.concurrent-send-snap-limit`
-
-+ The maximum number of snapshots that can be sent at the same time
-+ Default value: `32`
-+ Minimum value: `1`
-
-### `server.concurrent-recv-snap-limit`
-
-+ The maximum number of snapshots that can be received at the same time
-+ Default value: `32`
-+ Minimum value: `1`
-
-### `server.end-point-recursion-limit`
-
-+ The maximum number of recursive layers allowed when TiKV decodes the Coprocessor DAG expression
-+ Default value: `1000`
-+ Minimum value: `1`
-
-### `server.end-point-request-max-handle-duration`
-
-+ The longest duration allowed for a TiDB's push down request to TiKV for processing tasks
-+ Default value: `"60s"`
-+ Minimum value: `"1s"`
-
-### `server.end-point-slow-log-threshold`
-
-+ The time threshold for a TiDB's push down request to print slow log
-+ Default value: `"1s"`
-+ Minimum value: `0`
-
-### `server.snap-max-write-bytes-per-sec`
-
-+ The maximum allowable disk bandwidth for processing snapshots
-+ Default value: `"100MB"`
-+ Unit: KB|MB|GB
-+ Minimum value: `"1KB"`
-
-## gRPC
-
-Configuration items related to gRPC.
 
 ### `grpc-compression-type`
 
@@ -77,56 +40,62 @@ Configuration items related to gRPC.
 + Default value: `1024`
 + Minimum value: `1`
 
-### `server.grpc-raft-conn-num`
+### `grpc-raft-conn-num`
 
 + The maximum number of links among TiKV nodes for Raft communication
 + Default: `10`
 + Minimum value: `1`
 
-### `server.grpc-stream-initial-window-size`
+### `grpc-stream-initial-window-size`
 
 + The window size of the gRPC stream
 + Default: 2MB
 + Unit: KB|MB|GB
 + Minimum value: `1KB`
 
-### `server.grpc-keepalive-time`
+### `grpc-keepalive-time`
 
 + The time interval at which that gRPC sends `keepalive` Ping messages
 + Default: `10s`
 + Minimum value: `1s`
 
-### `server.grpc-keepalive-timeout`
+### `grpc-keepalive-timeout`
 
 + Disables the timeout for gRPC streams
 + Default: `3s`
 + Minimum value: `1s`
 
-### `server.concurrent-send-snap-limit`
+### `concurrent-send-snap-limit`
 
 + The maximum number of snapshots that can be sent at the same time
 + Default value: `32`
 + Minimum value: `1`
 
-### `server.concurrent-recv-snap-limit`
+### `concurrent-recv-snap-limit`
 
 + The maximum number of snapshots that can be received at the same time
 + Default value: `32`
 + Minimum value: `1`
 
-### `server.end-point-recursion-limit`
+### `end-point-recursion-limit`
 
 + The maximum number of recursive layers allowed when TiKV decodes the Coprocessor DAG expression
 + Default value: `1000`
 + Minimum value: `1`
 
-### `server.end-point-request-max-handle-duration`
+### `end-point-slow-log-threshold`
+
++ The time threshold for a TiDB's push down request to print slow log
++ Default value: `"1s"`
++ Minimum value: `0`
+
+### `end-point-request-max-handle-duration`
 
 + The longest duration allowed for a TiDB request to TiKV for processing tasks
 + Default value: `60s`
 + Minimum value: `1s`
 
-### `server.snap-max-write-bytes-per-sec`
+### `snap-max-write-bytes-per-sec`
 
 + The maximum allowable disk bandwidth for processing snapshots
 + Default value: `1000MB`
@@ -182,7 +151,7 @@ Configuration items related to storage thread pool
 
 ## `readpool.coprocessor`
 
- Configuration items related to the Coprocessor thread pool
+Configuration items related to the Coprocessor thread pool
 
 ### `high-concurrency`
 
