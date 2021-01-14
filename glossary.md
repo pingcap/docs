@@ -36,7 +36,7 @@ Leader/Follower/Learner each corresponds to a role in a Raft group of [peers](#r
 
 ### Old value
 
-Old value specifically refers to the "original value" in the incremental change log output by TiCDC. You can specify whether the incremental change log output by TiCDC contains the "original value".
+The "original value" in the incremental change log output by TiCDC. You can specify whether the incremental change log output by TiCDC contains the "original value".
 
 ### Operator
 

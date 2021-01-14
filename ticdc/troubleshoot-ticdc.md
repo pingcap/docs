@@ -77,7 +77,7 @@ This error is returned when the downstream MySQL does not load the time zone. Yo
 mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root mysql -p
 ```
 
-If you find the output similar to the following, the import is successful:
+If the output of the command above is similar to the following one, the import is successful:
 
 ```
 Enter password:
@@ -87,7 +87,7 @@ Warning: Unable to load '/usr/share/zoneinfo/zone.tab' as time zone. Skipping it
 Warning: Unable to load '/usr/share/zoneinfo/zone1970.tab' as time zone. Skipping it.
 ```
 
-If the downstream is a special MySQL environment (a public cloud RDS or some MySQL derivative versions, etc.) and the time zone import using the above method fails, you need to specify the downstream MySQL time zone using the `time-zone` parameter in `sink-uri`. You can first query the time zone used by MySQL:
+If the downstream is a special MySQL environment (a public cloud RDS or some MySQL derivative versions) and importing the time zone using the above method fails, you need to specify the MySQL time zone of the downstream using the `time-zone` parameter in `sink-uri`. You can first query the time zone used by MySQL:
 
 1. Query the time zone used by MySQL:
 
@@ -116,26 +116,25 @@ If the downstream is a special MySQL environment (a public cloud RDS or some MyS
 
     > **Note:**
     >
-    > CST might be an abbreviation for the following four different time zones:、
+    > CST might be an abbreviation for the following four different time zones:
     >
     > + Central Standard Time (USA) UT-6:00
     > + Central Standard Time (Australia) UT+9:30
     > + China Standard Time UT+8:00
     > + Cuba Standard Time UT-4:00
     >
-    > In China, CST usually means China Standard Time, and pay attention to the discrimination when using it.
+    > In China, CST usually stands for China Standard Time.
 
-## How to understand the relationship between TiCDC time zone and upstream and downstream databases time zones?
+## How to understand the relationship of the TiCDC time zone with the time zones of the upstream/downstream databases?
 
 ||Upstream time zone| TiCDC time zone|Downstream time zone|
 | :-: | :-: | :-: | :-: |
-| Configuration method | See [Time Zone Support](/configure-time-zone.md) | The `--tz` parameter when starting ticdc server | The `time-zone` parameter in `sink-uri` |
-| Description | The time zone of the upstream TiDB affects DML operations of timestamp type and DDL operations related to timestamp type columns.| TiCDC assumes that the upstream TiDB's time zone is the same as the TiCDC time zone configuration, and performs related operations on the timestamp column.| The downstream MySQL processes the timestamp contained in the DML and DDL operations according to the downstream time zone settings.|
+| Configuration method | See [Time Zone Support](/configure-time-zone.md) | Configured using the `--tz` parameter when you start the TiCDC server |  Configured using the `time-zone` parameter in `sink-uri` |
+| Description | The time zone of the upstream TiDB, which affects DML operations of the timestamp type and DDL operations related to timestamp type columns.| TiCDC assumes that the upstream TiDB's time zone is the same as the TiCDC time zone configuration, and performs related operations on the timestamp column.| The downstream MySQL processes the timestamp in the DML and DDL operations according to the downstream time zone setting.|
 
  > **Note:**
  >
- > Be cautious when you set the time zone of the TiCDC server, because the time zone will be used for the conversion of time type. You should keep the upstream time zone, TiCDC time zone and downstream time zone consistent.
- > The TiCDC server chooses its time zone in the following priority:
+ > Be careful when you set the time zone of the TiCDC server, because this time zone is used for converting the time type. Keep the upstream time zone, TiCDC time zone, and the downstream time zone consistent. The TiCDC server chooses its time zone in the following priority:
  >
  > - TiCDC first uses the time zone specified by `--tz`.
  > - When `--tz` is not available, TiCDC tries to read the time zone set by the `TZ` environment variable.
@@ -292,18 +291,18 @@ For more information, refer to [Open protocol Row Changed Event format](/ticdc/t
 
 TiCDC provides partial support for large transactions (more than 5 GB in size). Depending on different scenarios, the following risks might exist:
 
-- When the internal processing capacity of TiCDC is insufficient, the replication task error `ErrBufferReachLimit` might occur.
-- When TiCDC internal processing capacity is insufficient or TiCDC downstream throughput capacity is insufficient, out of memory (OOM) might occur.
+- When TiCDC's internal processing capacity is insufficient, the replication task error `ErrBufferReachLimit` might occur.
+- When TiCDC's internal processing capacity is insufficient or the throughput capacity of TiCDC's downstream is insufficient, out of memory (OOM) might occur.
 
 When you encounter the above errors, it is recommended to use BR for incremental restore of incremental data containing large transactions. The specific operations are as follows:
 
 1. Record the `checkpoint-ts` of the changefeed that is terminated due to large transactions, use this TSO as the `--lastbackupts` of the BR incremental backup, and execute [Back up incremental data](/br/backup-and-restore-tool.md#back-up-incremental-data).
-2. After backing up the incremental data, you can find a log similar to `["Full backup Failed summary : total backup ranges: 0, total success: 0, total failed: 0"] [BackupTS=421758868510212097]` in the BR log output and record the `BackupTS` in this log.
-3. Execute [Restore incremental data](/br/backup-and-restore-tool.md#restore-incremental-data).
-4. Create a new changefeed and start the replication task from `BackupTS`
-5. Delete old changefeed.
+2. After backing up the incremental data, you can find a log similar to `["Full backup Failed summary : total backup ranges: 0, total success: 0, total failed: 0"] [BackupTS=421758868510212097]` in the BR log output. Record the `BackupTS` in this log.
+3. [Restore the incremental data ](/br/backup-and-restore-tool.md#restore-incremental-data).
+4. Create a new changefeed and start the replication task from `BackupTS`.
+5. Delete the old changefeed.
 
-## If the downstream of changefeed is a database similar to MySQL, TiCDC executes a long DDL statement and blocks all other changefeed. What should I do?
+## When the downstream of a changefeed is a database similar to MySQL and TiCDC executes a long DDL statement, all other changefeeds are blocked. How should I handle the issue?
 
 1. Firstly, suspend the execution of the changefeed of the long DDL. At this point, you can find that after you suspend this changefeed, other changefeeds are no longer blocked.
 2. Search for the `apply job` field in the TiCDC log and confirm the time-consuming DDL `StartTs`.
