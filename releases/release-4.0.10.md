@@ -98,6 +98,8 @@ TiDB version: 4.0.10
 
         - Fix the issue that BR v4.0.9 cannot restore the GCS backup files of v4.0.8 [#688](https://github.com/pingcap/br/pull/688)
         - Fix the issue that BR panics when the GCS storage URL has no prefix [#673](https://github.com/pingcap/br/pull/673)
+        - Disable backup stats by default to avoid BR OOM [#693](https://github.com/pingcap/br/pull/693)
+
 
     + TiDB Binlog
 
