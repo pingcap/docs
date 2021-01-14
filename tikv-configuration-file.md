@@ -22,32 +22,6 @@ This document only describes the parameters that are not included in command-lin
 + Default value: `1`
 + Minimum value: `1`
 
-<<<<<<< HEAD
-### `server.end-point-request-max-handle-duration`
-
-+ The longest duration allowed for a TiDB's push down request to TiKV for processing tasks
-+ Default value: `"60s"`
-+ Minimum value: `"1s"`
-
-### `server.end-point-slow-log-threshold`
-
-+ The time threshold for a TiDB's push down request to print slow log
-+ Default value: `"1s"`
-+ Minimum value: `0`
-
-### `server.snap-max-write-bytes-per-sec`
-
-+ The maximum allowable disk bandwidth for processing snapshots
-+ Default value: `"100MB"`
-+ Unit: KB|MB|GB
-+ Minimum value: `"1KB"`
-
-## gRPC
-
-Configuration items related to gRPC.
-
-=======
->>>>>>> 057cc084... Refine sections in tikv-configuration-file.md (#4597)
 ### `grpc-compression-type`
 
 + The compression algorithm for gRPC messages
@@ -66,17 +40,7 @@ Configuration items related to gRPC.
 + Default value: `1024`
 + Minimum value: `1`
 
-<<<<<<< HEAD
-### `server.grpc-raft-conn-num`
-=======
-### `grpc-memory-pool-quota`
-
-+ Limit the memory size that can be used by gRPC
-+ Default: `"32G"`
-+ Limit the memory in case OOM is observed. Note that limit the usage can lead to potential stall
-
 ### `grpc-raft-conn-num`
->>>>>>> 057cc084... Refine sections in tikv-configuration-file.md (#4597)
 
 + The maximum number of links among TiKV nodes for Raft communication
 + Default: `10`
@@ -101,39 +65,23 @@ Configuration items related to gRPC.
 + Default: `3s`
 + Minimum value: `1s`
 
-<<<<<<< HEAD
-### `server.concurrent-send-snap-limit`
-=======
 ### `concurrent-send-snap-limit`
 
-+ The maximum number of snapshots sent at the same time
++ The maximum number of snapshots that can be sent at the same time
 + Default value: `32`
 + Minimum value: `1`
 
 ### `concurrent-recv-snap-limit`
 
-+ The maximum number of snapshots received at the same time
++ The maximum number of snapshots that can be received at the same time
 + Default value: `32`
 + Minimum value: `1`
 
 ### `end-point-recursion-limit`
 
-+ The maximum number of recursive levels allowed when TiKV decodes the Coprocessor DAG expression
++ The maximum number of recursive layers allowed when TiKV decodes the Coprocessor DAG expression
 + Default value: `1000`
 + Minimum value: `1`
-
-### `end-point-request-max-handle-duration`
-
-+ The longest duration allowed for a TiDB's push down request to TiKV for processing tasks
-+ Default value: `"60s"`
-+ Minimum value: `"1s"`
-
-### `snap-max-write-bytes-per-sec`
-
-+ The maximum allowable disk bandwidth when processing snapshots
-+ Default value: `"100MB"`
-+ Unit: KB|MB|GB
-+ Minimum value: `"1KB"`
 
 ### `end-point-slow-log-threshold`
 
@@ -141,51 +89,11 @@ Configuration items related to gRPC.
 + Default value: `"1s"`
 + Minimum value: `0`
 
-## readpool.unified
-
-> **Warning:**
->
-> Unified read pool is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
->>>>>>> 057cc084... Refine sections in tikv-configuration-file.md (#4597)
-
-+ The maximum number of snapshots that can be sent at the same time
-+ Default value: `32`
-+ Minimum value: `1`
-
-### `server.concurrent-recv-snap-limit`
-
-<<<<<<< HEAD
-+ The maximum number of snapshots that can be received at the same time
-+ Default value: `32`
-+ Minimum value: `1`
-=======
-+ The minimal working thread count of the unified read pool
-+ Default value: `1`
->>>>>>> 057cc084... Refine sections in tikv-configuration-file.md (#4597)
-
-### `server.end-point-recursion-limit`
-
-<<<<<<< HEAD
-+ The maximum number of recursive layers allowed when TiKV decodes the Coprocessor DAG expression
-+ Default value: `1000`
-+ Minimum value: `1`
-=======
-+ The maximum working thread count of the unified read pool
-+ Default value: `MAX(4, CPU * 0.8)`
->>>>>>> 057cc084... Refine sections in tikv-configuration-file.md (#4597)
-
 ### `server.end-point-request-max-handle-duration`
 
-<<<<<<< HEAD
 + The longest duration allowed for a TiDB request to TiKV for processing tasks
 + Default value: `60s`
 + Minimum value: `1s`
-=======
-+ The stack size of the threads in the unified thread pool
-+ Default value: `"10MB"`
-+ Unit: KB|MB|GB
-+ Minimum value: `"2MB"`
->>>>>>> 057cc084... Refine sections in tikv-configuration-file.md (#4597)
 
 ### `server.snap-max-write-bytes-per-sec`
 
@@ -243,7 +151,7 @@ Configuration items related to storage thread pool
 
 ## `readpool.coprocessor`
 
- Configuration items related to the Coprocessor thread pool
+Configuration items related to the Coprocessor thread pool
 
 ### `high-concurrency`
 
