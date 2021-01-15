@@ -25,7 +25,7 @@ This is a list of TiDB adopters in various industries.
 |[Zhuan Zhuan](https://www.crunchbase.com/organization/zhuan-zhuan)|E-commerce|English [#1](https://pingcap.com/case-studies/tidb-in-zhuanzhuan/), [#2](https://pingcap.com/case-studies/scale-out-database-powers-china-letgo-with-reduced-maintenance-costs); Chinese [#1](https://pingcap.com/cases-cn/user-case-zhuanzhuan/), [#2](https://pingcap.com/cases-cn/user-case-zhuanzhuan-2/), [#3](https://pingcap.com/cases-cn/user-case-zhuanzhuan-3/)|
 |[Xiaohongshu](https://en.wikipedia.org/wiki/Xiaohongshu)|E-commerce|[English](https://pingcap.com/case-studies/how-we-use-a-scale-out-htap-database-for-real-time-analytics-and-complex-queries); Chinese [#1](https://pingcap.com/cases-cn/user-case-xiaohongshu/), [#2](https://pingcap.com/cases-cn/user-case-xiaohongshu-2/)|
 |[Happigo.com](https://www.crunchbase.com/organization/happigo-com)|E-commerce||
-|[Yimutian](http://www.ymt.com/)|E-commerce||
+|[Yimutian](https://www.crunchbase.com/organization/yimutian)|E-commerce||
 |[Youju Tech](https://nn.yjyz.com/)|E-commerce||
 |[Maizuo](https://www.crunchbase.com/organization/maizhuo)|E-commerce||
 |[Mogujie](https://www.crunchbase.com/organization/mogujie)|E-commerce||
