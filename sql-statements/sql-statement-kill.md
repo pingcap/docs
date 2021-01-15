@@ -48,11 +48,13 @@ To enable "global kill", set `enable-global-kill = true` in `experimental` secti
 ## Global kill example
 
 On TiDB instance `127.0.0.1:10180`:
+
 ```sql
 mysql> SELECT SLEEP(60);
 ```
 
 On TiDB instance `127.0.0.1:10080`:
+
 ```sql
 mysql> SELECT * FROM INFORMATION_SCHEMA.CLUSTER_PROCESSLIST;
 +-----------------+---------------------+------+-----------+--------------------+---------+------+------------+------------------------------------------------------+------------------------------------------------------------------+------+----------------------------------------+
