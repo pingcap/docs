@@ -440,9 +440,8 @@ Constraint checking is always performed in place for pessimistic transactions (d
 ### tidb_gc_concurrency
 
 - Scope: GLOBAL
-- Default: -1 (Automatic)
-- Specifies the number of concurrenct garbage collection threads to be used. A value of `-1` means that TiDB will automatically decide the number of garbage collection threads to use.
-- GC concurrency works in the [Resolve Locks](/garbage-collection-overview.md#resolve-locks) step.
+- Default: -1
+- Specifies the number of threads in the [Resolve Locks](/garbage-collection-overview.md#resolve-locks) step of GC. A value of `-1` means that TiDB will automatically decide the number of garbage collection threads to use.
 
 ### tidb_gc_enable
 
