@@ -40,7 +40,7 @@ SET  GLOBAL tidb_distsql_scan_concurrency = 10;
 
 - Scope: SESSION | GLOBAL
 - Default value: 1
-- Controls how `AUTO_INCREMENT` values should be incremented on each allocation. Often used in combination with `auto_increment_offset`.
+- Controls how `AUTO_INCREMENT` values should be incremented on each allocation. It is often used in combination with `auto_increment_offset`.
 
 ### auto_increment_offset
 
