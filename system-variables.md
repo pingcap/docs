@@ -827,7 +827,7 @@ explain select * from t where age=5;
 
 - Scope: SESSION
 - Default value: OFF
-- This variable is used to set whether to allow `INSERT`, `REPLACE` and `UPDATE` statements to operate on the column `_tidb_rowid`. This variable can be used only when importing data with TiDB tools.
+- This variable is used to control whether to allow `INSERT`, `REPLACE`, and `UPDATE` statements to operate on the `_tidb_rowid` column. This variable can be used only when you import data using TiDB tools.
 
 ### tidb_pprof_sql_cpu <span class="version-mark">New in v4.0</span>
 
