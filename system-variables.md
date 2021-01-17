@@ -1013,7 +1013,7 @@ SET tidb_slow_log_threshold = 200;
 - Scope: SESSION
 - Default value: ON
 - It usually takes a long time to scatter Regions, which is determined by PD scheduling and TiKV loads. This variable is used to set whether to return the result to the client after all Regions are scattered completely when the `SPLIT REGION` statement is being executed:
-    - `ON` requires that the `SPLIT REGIONS` statement wait until all Regions are scattered.
+    - `ON` requires that the `SPLIT REGIONS` statement waits until all Regions are scattered.
     - `OFF` permits the `SPLIT REGIONS` statement to return before finishing scattering all Regions.
 - Note that when scattering Regions, the write and read performances for the Region that is being scattered might be affected. In batch-write or data importing scenarios, it is recommended to import data after Regions scattering is finished.
 
