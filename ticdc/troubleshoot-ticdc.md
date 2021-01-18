@@ -302,7 +302,7 @@ If you encounter errors above, it is recommended to use BR for incrementally res
 
 1. Record the `checkpoint-ts` of the changefeed that is terminated due to large transactions, use this TSO as the `--lastbackupts` of the BR incremental backup, and execute [Back up incremental data](/br/backup-and-restore-tool.md#back-up-incremental-data).
 2. After backing up the incremental data, you can find a log similar to `["Full backup Failed summary : total backup ranges: 0, total success: 0, total failed: 0"] [BackupTS=421758868510212097]` in the BR log output. Record the `BackupTS` in this log.
-3. [Restore the incremental data ](/br/backup-and-restore-tool.md#restore-incremental-data).
+3. [Restore the incremental data](/br/backup-and-restore-tool.md#restore-incremental-data).
 4. Create a new changefeed and start the replication task from `BackupTS`.
 5. Delete the old changefeed.
 
