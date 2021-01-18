@@ -129,7 +129,7 @@ If the downstream is a special MySQL environment (a public cloud RDS or some MyS
     >
     > In China, CST usually stands for China Standard Time.
 
-## How to understand the relationship of the TiCDC time zone with the time zones of the upstream/downstream databases?
+## How to understand the relationship between the TiCDC time zone and the time zones of the upstream/downstream databases?
 
 ||Upstream time zone| TiCDC time zone|Downstream time zone|
 | :-: | :-: | :-: | :-: |
