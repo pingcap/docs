@@ -460,7 +460,6 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
     - `ON` indicates enabling Range partitioning, Hash partitioning, and Range column partitioning with one single column.
     - `AUTO` functions the same way as `ON` does.
-    - `NIGHTLY` indicates enabling the types of partitioned tables specified in `ON`. It also indicates enabling List partitioning and List COLUMNS partitioning.
     - `OFF` indicates disabling the `TABLE PARTITION` feature. In this case, the syntax that creates a partition table can be executed, but the table created is not a partitioned one.
 
 ### tidb_enable_telemetry <span class="version-mark">New in v4.0.2 version</span>
