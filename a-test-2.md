@@ -141,4 +141,3 @@ Current database:    test
 Current user:        root@127.0.0.1
 SSL:                 Cipher in use is TLS_AES_256_GCM_SHA384
 ```
-
