@@ -256,14 +256,14 @@ Configuration items related to scheduling
 
 ### `high-space-ratio`
 
-+ The threshold ratio below which the capacity of the store is sufficient. If the space occupancy ratio of the node is less than the threshold, the remaining space of the node is ignored during PD scheduling, and the balance is mainly based on the actual data volume. This configuration takes effect only when `region-score-formula-version` is set to `v1`.
++ The threshold ratio below which the capacity of the store is sufficient. If the space occupancy ratio of the store is smaller than this threshold value, PD ignores the remaining space of the store when performing scheduling, and balances load mainly based on the actual data volume. This configuration takes effect only when `region-score-formula-version` is set to `v1`.
 + Default value: `0.7`
 + Minimum value: greater than `0`
 + Maximum value: less than `1`
 
 ### `low-space-ratio`
 
-+ The threshold ratio above which the capacity of the store is insufficient. If the space occupancy ratio of a node exceeds the threshold, PD avoids migrating data to the node as much as possible. Meanwhile, to avoid the disk space of the corresponding node being exhausted, PD mainly schedules based on the remaining space of the node.
++ The threshold ratio above which the capacity of the store is insufficient. If the space occupancy ratio of a store exceeds this threshold value, PD avoids migrating data to this store as much as possible. Meanwhile, to avoid the disk space of the corresponding store being exhausted, PD performs scheduling mainly based on the remaining space of the store.
 + Default value: `0.8`
 + Minimum value: greater than `0`
 + Maximum value: less than `1`
