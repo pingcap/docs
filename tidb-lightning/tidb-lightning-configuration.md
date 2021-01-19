@@ -145,7 +145,7 @@ header = true
 # Whether the CSV contains any NULL value.
 # If `not-null` is true, all columns from CSV cannot be NULL.
 not-null = false
-# When `not-null` is false (i.e. CSV can contain NULL),
+# When `not-null` is false (that is, CSV can contain NULL),
 # fields equal to this value will be treated as NULL.
 null = '\N'
 # Whether to interpret backslash escapes inside fields.
