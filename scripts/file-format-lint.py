@@ -83,7 +83,10 @@ def check_manual_break(filename):
                         print("MANUAL LINE BREAKS: L" + str(lineNum))
     return mark
 
+
 if __name__ == "__main__":
+
+    count = 0
 
     for filename in sys.argv[1:]:
         if os.path.isfile(filename):
@@ -91,3 +94,7 @@ if __name__ == "__main__":
             mark = check_manual_break(filename)
             if mark:
                 print("\nThe above issues will cause website build failure. Please fix them.")
+                count++
+
+    if count:
+        exit(1)
