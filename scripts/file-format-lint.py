@@ -93,8 +93,8 @@ if __name__ == "__main__":
             check_BOM(filename)
             mark = check_manual_break(filename)
             if mark:
-                print("\nThe above issues will cause website build failure. Please fix them.")
                 count+=1
 
     if count:
+        print("\nThe above issues will cause website build failure. Please fix them.")
         exit(1)
