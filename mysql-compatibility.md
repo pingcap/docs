@@ -297,4 +297,3 @@ TiDB does not implement certain features that have been marked as deprecated in 
 
 * Specifying precision for floating point types. MySQL 8.0 [deprecates](https://dev.mysql.com/doc/refman/8.0/en/floating-point-types.html) this feature, and it is recommended to use the `DECIMAL` type instead.
 * The `ZEROFILL` attribute. MySQL 8.0 [deprecates](https://dev.mysql.com/doc/refman/8.0/en/numeric-type-attributes.html) this feature, and it is recommended to instead pad numeric values in your application.
->>>>>>> 9ff6b9f1... Update mysql-compatibility.md (#4590)
