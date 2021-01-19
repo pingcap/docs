@@ -77,7 +77,7 @@ def check_manual_break(filename):
                             continue
 
                         if mark == 0:
-                            print(filename + ": this file has manual line breaks in the following lines:\n")
+                            print("\n" + filename + ": this file has manual line breaks in the following lines:\n")
                             mark = 1
 
                         print("MANUAL LINE BREAKS: L" + str(lineNum))
@@ -92,7 +92,6 @@ if __name__ == "__main__":
         if os.path.isfile(filename):
             check_BOM(filename)
             mark = check_manual_break(filename)
-            print("\n")
             if mark:
                 count+=1
 
