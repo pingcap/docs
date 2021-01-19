@@ -193,25 +193,25 @@ This error occurs possibly because the number of files opened by TiDB Lightning 
 
 ## Import speed is too slow
 
-Normally it takes TiDB Lightning 2 minutes per thread to import a 256 MB data file. It is an error if the speed is much slower than this. The time taken for each data file can be checked from the log mentioning `restore chunk … takes`. This can also be observed from metrics on Grafana.
+Normally it takes TiDB Lightning 2 minutes per thread to import a 256 MB data file. If the speed is much slower than this, there is an error. You can check the time taken for each data file from the log mentioning `restore chunk … takes`. This can also be observed from metrics on Grafana.
 
 There are several reasons why TiDB Lightning becomes slow:
 
-**Cause 1**: `region-concurrency` is too high, which causes thread contention and reduces performance.
+**Cause 1**: `region-concurrency` is set too high, which causes thread contention and reduces performance.
 
 1. The setting can be found from the start of the log by searching `region-concurrency`.
-2. If Lightning shares the same machine with other services (for example, Importer), `region-concurrency` must be **manually** set to 75% of the total number of CPU cores
-3. If there is a quota on CPU (for example, limited by K8s settings), Lightning may not be able to read this out. In this case, `region-concurrency` must also be **manually** reduced.
+2. If TiDB Lightning shares the same machine with other services (for example, TiKV Importer), `region-concurrency` must be **manually** set to 75% of the total number of CPU cores.
+3. If there is a quota on CPU (for example, limited by Kubernetes settings), TiDB Lightning may not be able to read this out. In this case, `region-concurrency` must also be **manually** reduced.
 
-**Cause 2**: The table is too complex.
+**Cause 2**: The table schema is too complex.
 
-Every additional index will introduce a new KV pair for each row. If there are N indices, the actual size to be imported would be approximately (N+1) times the size of the Dumpling output. If the indices are negligible, you may first remove them from the schema, and add them back via `CREATE INDEX` after import is complete.
+Every additional index introduces a new KV pair for each row. If there are N indices, the actual size to be imported would be approximately (N+1) times the size of the Dumpling output. If the indices are negligible, you may first remove them from the schema, and add them back using `CREATE INDEX` after the import is complete.
 
 **Cause 3**: Each file is too large.
 
-TiDB Lightning works the best when the data source are broken down into multiple files of size around 256 MB, so that the data can be processed in parallel. Lightning seems unresponsive if each file is too large.
+TiDB Lightning works the best when the data source is broken down into multiple files of size around 256 MB so that the data can be processed in parallel. If each file is too large, TiDB Lightning might not respond.
 
-If the data source is CSV, and all CSV files have no fields containing literal new line characters (U+000A and U+000D), you can turn on "strict format" to let Lightning automatically split the large files.
+If the data source is CSV, and all CSV files have no fields containing newline control characters (U+000A and U+000D), you can turn on "strict format" to let TiDB Lightning automatically split the large files.
 
 ```toml
 [mydumper]
@@ -239,21 +239,23 @@ Try the latest version! Maybe there is new speed improvement.
 
 **Solutions**:
 
-1. Delete the corrupted data with via `tidb-lightning-ctl`, and restart Lightning to import the affected tables again.
+1. Delete the corrupted data using `tidb-lightning-ctl`, and restart TiDB Lightning to import the affected tables again.
 
+    {{< copyable "shell-regular" >}}
+    
     ```sh
     tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=all
     ```
 
 2. Consider using an external database to store the checkpoints (change `[checkpoint] dsn`) to reduce the target database's load.
 
-3. If TiDB Lightning was improperly restarted, see also the "[How to properly restart TiDB Lightning](/tidb-lightning/tidb-lightning-faq.md#how-to-properly-restart-tidb-lightning)" section in the FAQ.
+3. If TiDB Lightning was improperly restarted, see also the "[How to properly restart TiDB Lightning](#how-to-properly-restart-tidb-lightning)" section in the FAQ.
 
 ## `Checkpoint for … has invalid status:` (error code)
 
-**Cause**: [Checkpoint](/tidb-lightning/tidb-lightning-checkpoints.md) is enabled, and Lightning or Importer has previously abnormally exited. To prevent accidental data corruption, Lightning will not start until the error is addressed.
+**Cause**: [Checkpoint](/tidb-lightning/tidb-lightning-checkpoints.md) is enabled, and TiDB Lightning or TiKV Importer has previously abnormally exited. To prevent accidental data corruption, Lightning will not start until the error is addressed.
 
-The error code is an integer less than 25, with possible values of 0, 3, 6, 9, 12, 14, 15, 17, 18, 20 and 21. The integer indicates the step where the unexpected exit occurs in the import process. The larger the integer is, the later step where the exit occurs.
+The error code is an integer smaller than 25, with possible values of 0, 3, 6, 9, 12, 14, 15, 17, 18, 20, and 21. The integer indicates the step where the unexpected exit occurs in the import process. The larger the integer is, the later step the exit occurs at.
 
 **Solutions**:
 
