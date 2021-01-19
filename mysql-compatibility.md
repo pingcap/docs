@@ -287,12 +287,9 @@ When making a comparison, MySQL first truncates the constant and the space at th
 The following column types are supported by MySQL, but not by TiDB:
 
 + FLOAT4/FLOAT8
-<<<<<<< HEAD
 + FIXED (alias for DECIMAL)
 + SERIAL (alias for BIGINT UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE)
-+ SQL_TSI_* (including SQL_TSI_YEAR, SQL_TSI_MONTH, SQL_TSI_WEEK, SQL_TSI_DAY, SQL_TSI_HOUR, SQL_TSI_MINUTE and SQL_TSI_SECOND)
-=======
-+ `SQL_TSI_*` (including SQL_TSI_MONTH, SQL_TSI_WEEK, SQL_TSI_DAY, SQL_TSI_HOUR, SQL_TSI_MINUTE and SQL_TSI_SECOND, excluding SQL_TSI_YEAR)
++ `SQL_TSI_*` (including SQL_TSI_YEAR, SQL_TSI_MONTH, SQL_TSI_WEEK, SQL_TSI_DAY, SQL_TSI_HOUR, SQL_TSI_MINUTE and SQL_TSI_SECOND)
 
 ### Incompatibility caused by deprecated features
 
