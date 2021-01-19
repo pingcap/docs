@@ -12,7 +12,7 @@ If you have deployed the TiDB cluster using TiDB Ansible, you can use TiUP to im
 
 > **Note:**
 >
-> Since TiDB v4.0, PingCAP no longer provides support for TiDB Ansible. Since TiDB v5.0, PingCAP no longer provides TiDB Ansible documents. If you want to read the document that introduces how to upgrade a TiDB cluster using TiDB Ansible, see [Upgrade TiDB Using TiDB Ansible](https://docs.pingcap.com/tidb/v4.0/upgrade-tidb-using-ansible).
+> Since TiDB v4.0, PingCAP no longer provides support for TiDB Ansible. Since TiDB v5.0, PingCAP no longer provides TiDB Ansible documents. If you want to read the document that introduces how to upgrade a TiDB cluster using TiDB Ansible, see [Upgrade TiDB Using TiDB Ansible (v4.0)](https://docs.pingcap.com/tidb/v4.0/upgrade-tidb-using-ansible).
 
 ## Upgrade caveat
 
@@ -135,7 +135,7 @@ After the import is complete, you can check the current cluster status by execut
 > - The configuration parameters in the original cluster have not been modified.
 > - You want to use the default parameters of `4.0` after the upgrade.
 
-1. Enter `~/.tiup/storage/cluster/clusters/{cluster_name}/config`, the backup directory of TiDB Ansible, and confirm the modified parameters in the configuration template.
+1. Enter `~/.tiup/storage/cluster/clusters/{cluster_name}/ansible-imported-configs`, the backup directory of TiDB Ansible, and confirm the modified parameters in the configuration template.
 
 2. Enter the `vi` editing mode of the topology file:
 
