@@ -263,7 +263,7 @@ Configuration items related to scheduling
 
 ### `low-space-ratio`
 
-+ The threshold ratio above which the capacity of the store is insufficient. If the space occupancy ratio of a node exceeds the threshold, the PD avoids migrating data to the node as much as possible. Meanwhile, to avoid the disk space of the corresponding node being exhausted, PD mainly schedules based on the remaining space of the node.
++ The threshold ratio above which the capacity of the store is insufficient. If the space occupancy ratio of a node exceeds the threshold, PD avoids migrating data to the node as much as possible. Meanwhile, to avoid the disk space of the corresponding node being exhausted, PD mainly schedules based on the remaining space of the node.
 + Default value: `0.8`
 + Minimum value: greater than `0`
 + Maximum value: less than `1`
