@@ -18,7 +18,7 @@ def check_BOM(filename):
                 chunk = fp.read(BUFSIZE)
             fp.seek(-BOMLEN, os.SEEK_CUR)
             fp.truncate()
-            print("\n" + filename + " has been converted to UTF-8 without BOM.")
+            print("\n" + filename + ": this file's encoding has been converted to UTF-8 without BOM to avoid broken metadata display.")
 
 # Check manual line break within a paragraph.
 def check_manual_break(filename):
