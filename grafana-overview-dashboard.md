@@ -16,8 +16,8 @@ For routine operations, you can get an overview of the component (PD, TiDB, TiKV
 
 To understand the key metrics displayed on the Overview dashboard, check the following table:
 
-| Service | Panel Name | Description | Normal Range
-| ---- | ---------------- | ---------------------------------- | --------------
+| Service | Panel Name | Description | Normal Range |
+| ---- | ---------------- | ---------------------------------- | -------------- |
 | Services Port Status | Services Up | The online nodes number of each service. |
 | PD | PD role | The role of the current PD. |
 | PD | Storage capacity |  The total storage capacity of the TiDB cluster. |
