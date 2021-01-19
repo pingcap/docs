@@ -92,6 +92,7 @@ if __name__ == "__main__":
         if os.path.isfile(filename):
             check_BOM(filename)
             mark = check_manual_break(filename)
+            print("\n")
             if mark:
                 count+=1
 
