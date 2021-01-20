@@ -18,6 +18,10 @@ The following are the basics of Dumpling:
 - Supported TiDB versions: all versions
 - Kubernetes support: No
 
+> **Note:**
+>
+> PingCAP previously maintained a fork of the [mydumper project](https://github.com/maxbube/mydumper) with enhancements specific to TiDB. This fork has since been replaced by [Dumpling](/dumpling-overview.md), which has been rewritten in Go, and supports more optimizations that are specific to TiDB. It is strongly recommended that you use Dumpling instead of mydumper.
+
 ## Full data import
 
 [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) (Lightning) is a tool used for the full import of large amounts of data into a TiDB cluster. Currently, TiDB Lightning supports reading SQL dump exported via Dumpling or CSV data source.
@@ -64,7 +68,7 @@ The following are the basics of TiDB Binlog:
 
 ### Data migration
 
-[TiDB Data Migration](https://docs.pingcap.com/tidb-data-migration/stable) (DM) is an integrated data replication task management platform that supports the full data migration and the incremental data migration from MySQL/MariaDB to TiDB.
+[TiDB Data Migration](https://docs.pingcap.com/tidb-data-migration/stable) (DM) is an integrated data replication task management platform that supports the full data migration and the incremental data replication from MySQL/MariaDB to TiDB.
 
 The following are the basics of DM:
 
@@ -79,7 +83,7 @@ If the data volume is at the TB level, take the following steps:
 
 1. Use [Dumpling](/dumpling-overview.md) to export the full data from MySQL/MariaDB.
 2. Use [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) to import the data exported in Step 1 to the TiDB cluster.
-3. Use DM to migrate the incremental data from MySQL/MariaDB to TiDB.
+3. Use DM to replicate the incremental data from MySQL/MariaDB to TiDB.
 
 > **Note:**
 >

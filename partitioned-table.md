@@ -10,9 +10,9 @@ This document introduces TiDB's implementation of partitioning.
 
 ## Partitioning types
 
-This section introduces the types of partitioning which are available in TiDB. Currently, TiDB supports Range partitioning and Hash partitioning.
+This section introduces the types of partitioning which are available in TiDB. Currently, TiDB supports [Range partitioning](#range-partitioning) and [Hash partitioning](#hash-partitioning).
 
-Range partitioning is used to resolve the performance issues caused by a large amount of deletions in the application, and it supports fast drop partition operations. Hash partitioning is used to scatter the data when there are a large amount of writes.
+Range partitioning and List partitioning are used to resolve the performance issues caused by a large amount of deletions in the application, and support fast drop partition operations. Hash partitioning is used to scatter the data when there are a large amount of writes.
 
 ### Range partitioning
 
@@ -949,7 +949,7 @@ YEARWEEK()
 
 ### Compatibility with MySQL
 
-Currently, TiDB only supports Range partitioning and Hash partitioning. Other partitioning types that are available in MySQL such as list partitioning and key partitioning are not supported yet in TiDB.
+Currently, TiDB only supports Range partitioning and Hash partitioning. Other partitioning types that are available in MySQL such as key partitioning are not supported yet in TiDB.
 
 For a table partitioned by `RANGE COLUMNS`, currently TiDB only supports using a single partitioning column.
 
