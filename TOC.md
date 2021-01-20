@@ -96,7 +96,6 @@
   + Troubleshoot
     - [TiDB Troubleshooting Map](/tidb-troubleshooting-map.md)
     - [Troubleshoot Cluster Setup](/troubleshoot-tidb-cluster.md)
-    - [Troubleshoot TiDB Lightning](/troubleshoot-tidb-lightning.md)
 + Reference
   + SQL
     - [MySQL Compatibility](/mysql-compatibility.md)
@@ -354,7 +353,6 @@
       - [TiDB-backend](/tidb-lightning/tidb-lightning-tidb-backend.md)
       - [Web Interface](/tidb-lightning/tidb-lightning-web-interface.md)
       - [Monitor](/tidb-lightning/monitor-tidb-lightning.md)
-      - [Troubleshoot](/troubleshoot-tidb-lightning.md)
       - [FAQ](/tidb-lightning/tidb-lightning-faq.md)
       - [Glossary](/tidb-lightning/tidb-lightning-glossary.md)
     + sync-diff-inspector
