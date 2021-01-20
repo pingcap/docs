@@ -1,10 +1,7 @@
 ---
 title: TiDB Lightning FAQs
 summary: Learn about the frequently asked questions (FAQs) and answers about TiDB Lightning.
-<<<<<<< HEAD
-=======
-aliases: ['/docs/dev/tidb-lightning/tidb-lightning-faq/','/docs/dev/faq/tidb-lightning/','/docs/dev/troubleshoot-tidb-lightning/','/docs/dev/how-to/troubleshoot/tidb-lightning/','/docs/dev/tidb-lightning/tidb-lightning-misuse-handling/','/docs/dev/reference/tools/error-case-handling/lightning-misuse-handling/','/tidb/dev/tidb-lightning-misuse-handling','/tidb/dev/troubleshoot-tidb-lightning']
->>>>>>> 58274808... lightning: merge lightning trouble shooting into faq (#4660)
+aliases: ['/tidb/v5.0/troubleshoot-tidb-lightning']
 ---
 
 # TiDB Lightning FAQs
