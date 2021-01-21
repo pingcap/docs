@@ -116,6 +116,7 @@ $ sha256sum -c tidb-{version}-linux-amd64.sha256
 $ tar -xzf tidb-{version}-linux-amd64.tar.gz
 $ cd tidb-{version}-linux-amd64
 ```
+
 > **Note:**
 >
 > `{version}` indicates the version number of TiDB. For example, if `{version}` is `v3.1.0`, the package download link is `https://download.pingcap.org/tidb-v3.1.0-linux-amd64.tar.gz`.
