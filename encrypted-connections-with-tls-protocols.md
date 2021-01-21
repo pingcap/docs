@@ -4,7 +4,11 @@ summary: Use the encrypted connection to ensure data security.
 aliases: ['/docs/v2.1/encrypted-connections-with-tls-protocols/','/docs/v2.1/how-to/secure/enable-tls-clients/']
 ---
 
+<<<<<<< HEAD:encrypted-connections-with-tls-protocols.md
 # Enable TLS for MySQL Clients
+=======
+# Enable TLS between TiDB Clients and Servers
+>>>>>>> 17a5853f... unify h1 headlines to the Chicago style (#4495):enable-tls-between-clients-and-servers.md
 
 It is recommended to use the encrypted connection to ensure data security because non-encrypted connection might lead to information leak.
 
