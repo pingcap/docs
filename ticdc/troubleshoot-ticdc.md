@@ -140,8 +140,8 @@ If the downstream is a special MySQL environment (a public cloud RDS or some MyS
  >
  > Be careful when you set the time zone of the TiCDC server, because this time zone is used for converting the time type. Keep the upstream time zone, TiCDC time zone, and the downstream time zone consistent. The TiCDC server chooses its time zone in the following priority:
  >
- > - TiCDC first uses the time zone specified by `--tz`.
- > - When `--tz` is not available, TiCDC tries to read the time zone set by the `TZ` environment variable.
+ > - TiCDC first uses the time zone specified using `--tz`.
+ > - When `--tz` is not available, TiCDC tries to read the time zone set using the `TZ` environment variable.
  > - When the `TZ` environment variable is not available, TiCDC uses the default time zone of the machine.
 
 ## What is the default behavior of TiCDC if I create a replication task without specifying the configuration file in `--config`?
@@ -298,17 +298,17 @@ TiCDC provides partial support for large transactions (more than 5 GB in size). 
 - When TiCDC's internal processing capacity is insufficient, the replication task error `ErrBufferReachLimit` might occur.
 - When TiCDC's internal processing capacity is insufficient or the throughput capacity of TiCDC's downstream is insufficient, out of memory (OOM) might occur.
 
-If you encounter errors above, it is recommended to use BR for incrementally restoring data in large transactions. The detailed operations are as follows:
+If you encounter an error above, it is recommended to use BR to restore the incremental data of large transactions. The detailed operations are as follows:
 
-1. Record the `checkpoint-ts` of the changefeed that is terminated due to large transactions, use this TSO as the `--lastbackupts` of the BR incremental backup, and execute [Back up incremental data](/br/backup-and-restore-tool.md#back-up-incremental-data).
-2. After backing up the incremental data, you can find a log similar to `["Full backup Failed summary : total backup ranges: 0, total success: 0, total failed: 0"] [BackupTS=421758868510212097]` in the BR log output. Record the `BackupTS` in this log.
+1. Record the `checkpoint-ts` of the changefeed that is terminated due to large transactions, use this TSO as the `--lastbackupts` of the BR incremental backup, and execute [incremental data backup](/br/backup-and-restore-tool.md#back-up-incremental-data).
+2. After backing up the incremental data, you can find a log record similar to `["Full backup Failed summary : total backup ranges: 0, total success: 0, total failed: 0"] [BackupTS=421758868510212097]` in the BR log output. Record the `BackupTS` in this log.
 3. [Restore the incremental data](/br/backup-and-restore-tool.md#restore-incremental-data).
 4. Create a new changefeed and start the replication task from `BackupTS`.
 5. Delete the old changefeed.
 
 ## When the downstream of a changefeed is a database similar to MySQL and TiCDC executes a time-consuming DDL statement, all other changefeeds are blocked. How should I handle the issue?
 
-1. Pause the execution of the changefeed that contains the time-consuming DDL statement. Then, you can see that other changefeeds are no longer blocked.
+1. Pause the execution of the changefeed that contains the time-consuming DDL statement. Then you can see that other changefeeds are no longer blocked.
 2. Search for the `apply job` field in the TiCDC log and confirm the `StartTs` of the time-consuming DDL statement.
 3. Manually execute the DDL statement in the downstream. After the execution finishes, go on performing the following operations.
 4. Modify the changefeed configuration and add the above `StartTs` to the `ignore-txn-start-ts` configuration item.

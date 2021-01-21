@@ -84,4 +84,4 @@ No. BR does not support in-place full recovery of some historical backup.
 
 ## How can I use BR for incremental backup in the Kubernetes environment?
 
-To get the last BR backup `commitTs` field, you can run the `kubectl -n ${namespace} get bk ${name}` command using kubectl. You can use the content of this field as `--lastbackupts`.
+To get the `commitTs` field of the last BR backup, run the `kubectl -n ${namespace} get bk ${name}` command using kubectl. You can use the content of this field as `--lastbackupts`.
