@@ -314,7 +314,7 @@ If you encounter errors above, it is recommended to use BR for incrementally res
 4. Modify the changefeed configuration and add the above `StartTs` to the `ignore-txn-start-ts` configuration item.
 5. Resume the paused changefeed.
 
-## After I upgrade the TiCDC cluster to v4.0.8, the `[CDC:ErrKafkaInvalidConfig]Canal requires old value to be enabled` error is reported when I execute a changefeed.
+## After I upgrade the TiCDC cluster to v4.0.8, the `[CDC:ErrKafkaInvalidConfig]Canal requires old value to be enabled` error is reported when I execute a changefeed
 
 Since v4.0.8, if the `canal` or `canal-json` protocol is used for output in a changefeed, TiCDC checks whether the old value feature is also enabled. If you disable the old value feature, this error is reported. To fix the error, take the following steps:
 
