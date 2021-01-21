@@ -3,7 +3,7 @@ title: Geo-distributed Deployment topology
 summary: Learn the geo-distributed deployment topology of TiDB.
 ---
 
-# Geo-distributed Deployment topology
+# Geo-Distributed Deployment Topology
 
 This document takes the typical architecture of three data centers (DC) in two cities as an example, and introduces the geo-distributed deployment architecture and the key configuration.
 

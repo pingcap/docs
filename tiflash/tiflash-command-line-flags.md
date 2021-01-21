@@ -3,7 +3,7 @@ title: TiFlash Command-line Flags
 summary: Learn the command-line startup flags of TiFlash.
 ---
 
-# TiFlash Command-line Flags
+# TiFlash Command-Line Flags
 
 This document introduces the command-line flags that you can use when you launch TiFlash.
 
