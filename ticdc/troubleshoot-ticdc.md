@@ -306,20 +306,20 @@ If you encounter errors above, it is recommended to use BR for incrementally res
 4. Create a new changefeed and start the replication task from `BackupTS`.
 5. Delete the old changefeed.
 
-## When the downstream of a changefeed is a database similar to MySQL and TiCDC executes a long DDL statement, all other changefeeds are blocked. How should I handle the issue?
+## When the downstream of a changefeed is a database similar to MySQL and TiCDC executes a time-consuming DDL statement, all other changefeeds are blocked. How should I handle the issue?
 
-1. Firstly, suspend the execution of the changefeed of the long DDL. At this point, you can find that after you suspend this changefeed, other changefeeds are no longer blocked.
-2. Search for the `apply job` field in the TiCDC log and confirm the time-consuming DDL `StartTs`.
-3. Execute the DDL statement downstream manually, and perform the following operations after execution.
+1. Pause the execution of the changefeed that contains the time-consuming DDL statement. Then, you can see that other changefeeds are no longer blocked.
+2. Search for the `apply job` field in the TiCDC log and confirm the `StartTs` of the time-consuming DDL statement.
+3. Manually execute the DDL statement in the downstream. After the execution finishes, go on performing the following operations.
 4. Modify the changefeed configuration and add the above `StartTs` to the `ignore-txn-start-ts` configuration item.
-5. Restore a suspended changefeed.
+5. Resume the paused changefeed.
 
-## After I upgrade TiCDC cluster to v4.0.8, changefeed reports the error `[CDC:ErrKafkaInvalidConfig]Canal requires old value to be enabled`
+## After I upgrade the TiCDC cluster to v4.0.8, the `[CDC:ErrKafkaInvalidConfig]Canal requires old value to be enabled` error is reported when I execute a changefeed.
 
-Since v4.0.8, if changefeed uses canal or canal-json protocol output, TiCDC checks whether you enable the Old Value feature. If you disable it, an error is reported. You can solve the problem by following the steps below:
+Since v4.0.8, if the `canal` or `canal-json` protocol is used for output in a changefeed, TiCDC checks whether the old value feature is also enabled. If you disable the old value feature, this error is reported. To fix the error, take the following steps:
 
 1. Set the value of `enable-old-value` in the changefeed configuration file to `true`.
-2. Use `cdc cli changefeed update` to update the original changefeed configuration.
+2. Execute `cdc cli changefeed update` to update the original changefeed configuration.
 
     {{< copyable "shell-regular" >}}
 
@@ -327,7 +327,7 @@ Since v4.0.8, if changefeed uses canal or canal-json protocol output, TiCDC chec
     cdc cli changefeed update -c test-cf --sink-uri="mysql://127.0.0.1:3306/?max-txn-row=20&worker-number=8" --config=changefeed.toml
     ```
 
-3. Use `cdc cli changfeed resume` to restore replication tasks
+3. Execute `cdc cli changfeed resume` to resume the replication task.
 
     {{< copyable "shell-regular" >}}
 
