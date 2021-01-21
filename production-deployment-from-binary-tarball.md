@@ -108,30 +108,22 @@ See the following table for the default ports for the optional TiDB components:
 
 ## Download the official binary package
 
-1. Download the package.
+```
+# Download the package.
+$ wget https://download.pingcap.org/tidb-{version}-linux-amd64.tar.gz
+$ wget https://download.pingcap.org/tidb-{version}-linux-amd64.sha256
 
-    {{< copyable "shell-regular" >}}
+# Check the file integrity. If the result is OK, the file is correct.
+$ sha256sum -c tidb-{version}-linux-amd64.sha256
 
-    ```bash
-    wget https://download.pingcap.org/tidb-v3.0-linux-amd64.tar.gz https://download.pingcap.org/tidb-v3.0-linux-amd64.sha256
-    ```
+# Extract the package.
+$ tar -xzf tidb-{version}-linux-amd64.tar.gz
+$ cd tidb-{version}-linux-amd64
+```
 
-2. Check the file integrity. If the result is OK, the file is correct.
-
-    {{< copyable "shell-regular" >}}
-
-    ```bash
-    sha256sum -c tidb-v3.0-linux-amd64.sha256
-    ```
-
-3. Extract the package.
-
-    {{< copyable "shell-regular" >}}
-
-    ```bash
-    tar -xzf tidb-v3.0-linux-amd64.tar.gz &&
-    cd tidb-v3.0-linux-amd64
-    ```
+> **Note:**
+>
+> `{version}` indicates the version number of TiDB. For example, if `{version}` is `v3.0.0`, the package download link is `https://download.pingcap.org/tidb-v3.0.0-linux-amd64.tar.gz`.
 
 ## Multiple nodes cluster deployment
 
