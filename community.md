@@ -3,7 +3,7 @@ title: Connect with us
 summary: Learn about how to connect with us.
 ---
 
-# Connect with us
+# Connect with Us
 
 - **Twitter**: [@PingCAP](https://twitter.com/PingCAP)
 - **Reddit**: <https://www.reddit.com/r/TiDB/>

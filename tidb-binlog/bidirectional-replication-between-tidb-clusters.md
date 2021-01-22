@@ -3,7 +3,7 @@ title: Bidirectional Replication Between TiDB Clusters
 summary: Learn how to perform the bidirectional replication between TiDB clusters.
 ---
 
-# Bidirectional Replication Between TiDB Clusters
+# Bidirectional Replication between TiDB Clusters
 
 This document describes the bidirectional replication between two TiDB clusters, how the replication works, how to enable it, and how to replicate DDL operations.
 
