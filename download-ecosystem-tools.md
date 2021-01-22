@@ -1,7 +1,7 @@
 ---
 title: Download
 summary: Download the most officially maintained versions of TiDB enterprise tools.
-aliases: ['/docs/stable/download-ecosystem-tools/','/docs/v4.0/download-ecosystem-tools/','/docs/stable/reference/tools/download/']
+aliases: ['/docs/stable/download-ecosystem-tools/','/docs/v4.0/download-ecosystem-tools/','/docs/stable/reference/tools/download/','/docs/v4.0/reference/tools/download/']
 ---
 
 # Download
