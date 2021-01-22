@@ -4,7 +4,7 @@ summary: Use `cfssl` to generate self-signed certificates.
 aliases: ['/docs/v3.0/generate-self-signed-certificates/','/docs/v3.0/how-to/secure/generate-self-signed-certificates/','/docs/op-guide/generate-self-signed-certificates/']
 ---
 
-# Generate Self-signed Certificates
+# Generate Self-Signed Certificates
 
 ## Overview
 
