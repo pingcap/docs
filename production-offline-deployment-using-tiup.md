@@ -42,7 +42,7 @@ To prepare the TiUP offline component package, manually pack an offline componen
         which tiup
         ```
 
-- Pull the mirror using TiUP
+2. Pull the mirror using TiUP
 
     1. Pull the needed components on a machine that has access to the Internet:
 
