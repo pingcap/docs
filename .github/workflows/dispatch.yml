@@ -25,10 +25,5 @@ jobs:
       with:
           token: ${{ secrets.PR_TRIGGER_BUILD_TOKEN }}
           repository: pingcap/website-docs/
-<<<<<<< HEAD
-          event-type: triggered
-          client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}", "repo": "${{ github.repository }}"}'
-=======
           event-type: ${{ steps.extract_info.outputs.repo }}/${{ steps.extract_info.outputs.branch }}-${{ steps.extract_info.outputs.sha }}
           client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}", "repo": "${{ github.repository }}"}'
->>>>>>> e7383eea... chore: update dispatch event type (#4698)
