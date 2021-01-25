@@ -12,8 +12,12 @@ aliases: ['/docs/dev/quick-start-with-tidb/','/docs/dev/test-deployment-using-do
 
 This document describes how to try out TiDB, a distributed SQL database, in a few minutes. You can choose any of the following two methods to get started with the TiDB database platform:
 
-- [Deploy a local test environment using TiUP Playground](#deploy-a-local-test-environment-using-tiup-playground)
-- [Set up a test environment on a single machine using TiUP Cluster](#set-up-a-test-environment-on-a-single-machine-using-tiup-cluster)
+- [Quick Start Guide for the TiDB Database Platform](#quick-start-guide-for-the-tidb-database-platform)
+  - [Deploy a local test environment using TiUP Playground](#deploy-a-local-test-environment-using-tiup-playground)
+  - [Set up a test environment on a single machine using TiUP cluster](#set-up-a-test-environment-on-a-single-machine-using-tiup-cluster)
+    - [Prepare](#prepare)
+    - [Deploy](#deploy)
+  - [What's next](#whats-next)
 
 ## Deploy a local test environment using TiUP Playground
 
@@ -110,7 +114,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
 
 > **Note:**
 >
-> TiUP Playground listens on `127.0.0.1` by default, and the service is only locally accessible; if you want the service to be externally accessible, you can specify `0.0.0.0` as the listening address using the `--host` parameter or bind the network interface card (NIC) to an externally accessible IP address.
+> TiUP Playground listens on `127.0.0.1` by default, and the service is only locally accessible; if you want the service to be externally accessible, you can specify the listening address using the `--host` parameter to bind the network interface card (NIC) to an externally accessible IP address.
 
 ## Set up a test environment on a single machine using TiUP cluster
 
