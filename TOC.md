@@ -188,6 +188,7 @@
     + [Deploy](/ticdc/deploy-ticdc.md)
     + [Maintain](/ticdc/manage-ticdc.md)
     + [Troubleshoot](/ticdc/troubleshoot-ticdc.md)
+    + [Monitor](/ticdc/ticdc-grafana-dashboard.md)
     + [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
     + [Integrate TiDB with Confluent Platform](/ticdc/integrate-confluent-using-ticdc.md)
   + [Dumpling](/dumpling-overview.md)
@@ -211,6 +212,7 @@
     + [PD](/grafana-pd-dashboard.md)
     + [TiKV](/grafana-tikv-dashboard.md)
     + [TiFlash](/tiflash/monitor-tiflash.md)
+    + [TiCDC](/ticdc/ticdc-grafana-dashboard.md)
   + Secure
     + [Enable TLS Between TiDB Clients and Servers](/enable-tls-between-clients-and-servers.md)
     + [Enable TLS Between TiDB Components](/enable-tls-between-components.md)
