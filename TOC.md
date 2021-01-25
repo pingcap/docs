@@ -101,6 +101,13 @@
     + [Overview](/sql-tuning-overview.md)
     + Understanding the Query Execution Plan
       + [Overview](/explain-overview.md)
+      + [`EXPLAIN` Walkthrough](/explain-walkthrough.md)
+      + [Indexes](/explain-indexes.md)
+      + [Joins](/explain-joins.md)
+      + [Subqueries](/explain-subqueries.md)
+      + [Aggregation](/explain-aggregation.md)
+      + [Views](/explain-views.md)
+      + [Partitions](/explain-partitions.md)
     + SQL Optimization Process
       + [Overview](/sql-optimization-concepts.md)
       + Logic Optimization
@@ -180,7 +187,6 @@
       + [Backends](/tidb-lightning/tidb-lightning-backends.md)
       + [Web Interface](/tidb-lightning/tidb-lightning-web-interface.md)
     + [Monitor](/tidb-lightning/monitor-tidb-lightning.md)
-    + [Troubleshoot](/troubleshoot-tidb-lightning.md)
     + [FAQ](/tidb-lightning/tidb-lightning-faq.md)
     + [Glossary](/tidb-lightning/tidb-lightning-glossary.md)
   + TiCDC
