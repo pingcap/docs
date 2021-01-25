@@ -3,11 +3,6 @@ on:
   push:
     branches:
       - master
-      - release-2.1
-      - release-3.0
-      - release-3.1
-      - release-4.0
-      - release-5.0
     paths:
       - media/**
 jobs:
