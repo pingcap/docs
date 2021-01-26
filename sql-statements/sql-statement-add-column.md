@@ -13,6 +13,7 @@ The `ALTER TABLE.. ADD COLUMN` statement adds a column to an existing table. Thi
 ```ebnf+diagram
 AlterTableStmt ::=
     'ALTER' IgnoreOptional 'TABLE' TableName ( AlterTableSpecListOpt AlterTablePartitionOpt | 'ANALYZE' 'PARTITION' PartitionNameList ( 'INDEX' IndexNameList )? AnalyzeOptionListOpt )
+
 AlterTableSpec ::=
     TableOptionList
 |   'SET' 'TIFLASH' 'REPLICA' LengthNum LocationLabelList
@@ -35,6 +36,7 @@ AlterTableSpec ::=
 |   ( 'WITH' | 'WITHOUT' ) 'VALIDATION'
 |   'SECONDARY_LOAD'
 |   'SECONDARY_UNLOAD'
+
 ColumnDef ::=
     ColumnName ( Type | 'SERIAL' ) ColumnOptionListOpt
 ColumnPosition ::=
