@@ -39,6 +39,7 @@ AlterTableSpec ::=
 
 ColumnDef ::=
     ColumnName ( Type | 'SERIAL' ) ColumnOptionListOpt
+
 ColumnPosition ::=
     ( 'FIRST' | 'AFTER' ColumnName )?
 ```
