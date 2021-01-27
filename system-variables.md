@@ -710,6 +710,25 @@ For a system upgraded to v5.0.0-rc from an earlier version, if you have not modi
 - Default value: 60
 - This variable is used to set the step of the Prometheus statement generated when querying `METRIC_SCHEMA`. The unit is second.
 
+## tidb_multi_statement_mode <span class="version-mark">New in v4.0.11</span>
+
+- Scope: SESSION | GLOBAL
+- Default value: OFF
+- To prevent against SQL injection attacks, TiDB now prevents multiple queries being executed in the same `COM_QUERY` call by default.
+- This variable is intended to be used as part of an upgrade path from earlier versions of TiDB. The following values are permitted:
+
+    - `OFF` multi-statement is prevented, unless the client sets the multi-statement attribute.
+    - `ON` multi-statement is permitted in all cases.
+    - `WARN` multi-statement is permitted, but a warning is returned indicating that the usage is unsafe.
+
+> **Note:**
+>
+> Only the default value of `OFF` can be considered safe. Setting `tidb_multi_statement_mode=ON` might be required if your application was specifically designed for an earlier version of TiDB. If your application requires multiple statement support, it is recommended to use the setting provided by your client library instead of the `tidb_multi_statement_mode` option. For example:
+>
+> * [go-sql-driver](https://github.com/go-sql-driver/mysql#multistatements) (`multiStatements`)
+> * [Connector/J](https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-reference-configuration-properties.html) (`allowMultiQueries`)
+> * PHP [mysqli](https://dev.mysql.com/doc/apis-php/en/apis-php-mysqli.quickstart.multiple-statement.html) (`mysqli_multi_query`)
+
 ### tidb_opt_agg_push_down
 
 - Scope: SESSION
