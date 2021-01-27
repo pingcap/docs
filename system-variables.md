@@ -714,7 +714,7 @@ For a system upgraded to v5.0.0-rc from an earlier version, if you have not modi
 
 - Scope: SESSION | GLOBAL
 - Default value: OFF
-- To prevent against SQL injection attacks, TiDB now prevents multiple queries being executed in the same `COM_QUERY` call by default.
+- To reduce the impact from SQL injection attacks, TiDB now prevents multiple queries being executed in the same `COM_QUERY` call by default.
 - This variable is intended to be used as part of an upgrade path from earlier versions of TiDB. The following values are permitted:
 
     - `OFF` multi-statement is prevented, unless the client sets the multi-statement attribute.
