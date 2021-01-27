@@ -5,9 +5,9 @@ summary: Learn some key metrics displayed on the Grafana TiCDC dashboard.
 
 # Key Monitoring Metrics of TiCDC
 
-If you use TiUP to deploy the TiDB cluster, you can see a sub dashboard for TiCDC in the monitoring system which is deployed at the same time. You can get an overview of the component TiCDC status from the TiCDC dashboard, where the key metrics are displayed. This document provides a detailed description of these key metrics.
+If you use TiUP to deploy the TiDB cluster, you can see a sub-dashboard for TiCDC in the monitoring system which is deployed at the same time. You can get an overview of TiCDC's current status from the TiCDC dashboard, where the key metrics are displayed. This document provides a detailed description of these key metrics.
 
-The metrics description in this document is based on the following replication task example, which replicates data to MySQL using the default configuration.
+The metric description in this document is based on the following replication task example, which replicates data to MySQL using the default configuration.
 
 ```shell
 cdc cli changefeed create --pd=http://10.0.10.25:2379 --sink-uri="mysql://root:123456@127.0.0.1:3306/" --changefeed-id="simple-replication-task"
@@ -26,15 +26,15 @@ The description of each panel is as follows:
 
 ## Server
 
-Following is an example of the **Server** panel:
+The following is an example of the **Server** panel:
 
 ![TiCDC Dashboard - Server metrics](/media/ticdc/ticdc-dashboard-server.png)
 
 The description of each metric in the **Server** panel is as follows:
 
-- Uptime: The time that TiKV nodes and TiCDC nodes have been running
+- Uptime: The time for which TiKV nodes and TiCDC nodes have been running
 - Goroutine count: The number of goroutines of a TiCDC node
-- Open FD count: TiCDC The number of file handles opened by TiCDC nodes
+- Open FD count: The number of file handles opened by TiCDC nodes
 - Ownership: The current status of nodes in the TiCDC cluster
 - Ownership history: The ownership history of the TiCDC cluster
 - CPU usage: The CPU usage of TiCDC nodes
@@ -42,7 +42,7 @@ The description of each metric in the **Server** panel is as follows:
 
 ## Changefeed
 
-Following is an example of the **Changefeed** panel:
+The following is an example of the **Changefeed** panel:
 
 ![TiCDC Dashboard - Changefeed metrics 1](/media/ticdc/ticdc-dashboard-changefeed-1.png)
 ![TiCDC Dashboard - Changefeed metrics 2](/media/ticdc/ticdc-dashboard-changefeed-2.png)
@@ -53,22 +53,22 @@ The description of each metric in the **Changefeed** panel is as follows:
 - Changefeed table count: The number of tables that each TiCDC node needs to replicate in the replication task
 - Processor resolved ts: The timestamps that have been resolved in the TiCDC cluster
 - Table resolved ts: The replication process of each table in the replication task
-- Changefeed checkpoint: The process of replicating data to the downstream. Normally, the green bars are connected to the yellow line
+- Changefeed checkpoint: The progress of replicating data to the downstream. Normally, the green bars are connected to the yellow line
 - PD etcd requests/s: The number of requests that a TiCDC node sends to PD per second
 - Exit error count: The number of errors that interrupt the replication task per minute
-- Changefeed checkpoint lag: The data replication process lag (the unit is second) between the upstream and the downstream
-- Changefeed resolved ts lag: The data replication process lag (the unit is second) between the upstream and TiCDC nodes
+- Changefeed checkpoint lag: The process lag of data replication (the unit is second) between the upstream and the downstream
+- Changefeed resolved ts lag: The process lag of data replication (the unit is second) between the upstream and TiCDC nodes
 - Flush sink duration: The histogram of the time spent by TiCDC asynchronously flushing data to the downstream
-- Flush sink duration percentile: Within one second, the 95%, 99%, and 99.9% probability of the time spent by TiCDC asynchronously flushing data to the downstream
+- Flush sink duration percentile: The time (P95, P99, and P999) spent by TiCDC asynchronously flushing data to the downstream within one second
 - Sink write duration: The histogram of the time spent by TiCDC writing a transaction change to the downstream
-- Sink write duration percentile: Within one second, the 95%, 99%, and 99.9% probability of the time spent by TiCDC writing a transaction change to the downstream
-- MySQL sink conflict detect duration: The histogram of the time spent by detecting MySQL sink conflicts
-- MySQL sink conflict detect duration percentile: Within one second, the 95%, 99%, and 99.9% probability of the time spent by detecting MySQL sink conflicts
+- Sink write duration percentile: The time (P95, P99, and P999) spent by TiCDC writing a transaction change to the downstream within one second
+- MySQL sink conflict detect duration: The histogram of the time spent on detecting MySQL sink conflicts
+- MySQL sink conflict detect duration percentile: The time (P95, P99, and P999) spent on detecting MySQL sink conflicts within one second
 - MySQL sink worker load: The workload of MySQL sink workers of TiCDC nodes
 
 ## Events
 
-Following is an example of the **Events** panel:
+The following is an example of the **Events** panel:
 
 ![TiCDC Dashboard - Events metrics 2](/media/ticdc/ticdc-dashboard-events-1.png)
 ![TiCDC Dashboard - Events metrics 2](/media/ticdc/ticdc-dashboard-events-2.png)
@@ -76,9 +76,9 @@ Following is an example of the **Events** panel:
 
 The description of each metric in the **Events** panel is as follows:
 
-- Eventfeed count: TiCDC 节点中 Eventfeed RPC 的个数 The number of Eventfeed RPC of TiCDC nodes
-- Event size percentile: Within one second, the 95%, 99%, and 99.9% probability of the event size which TiCDC receives from TiKV
-- Eventfeed error/m: The number of errors reported by Eventfeed RPC of TiCDC nodes per minute
+- Eventfeed count: The number of Eventfeed RPC requests of TiCDC nodes
+- Event size percentile: The event size (P95, P99, and P999) which TiCDC receives from TiKV within one second
+- Eventfeed error/m: The number of errors reported by Eventfeed RPC requests of TiCDC nodes per minute
 - KV client receive events/s: The number of events that the KV client module of TiCDC nodes receives from TiKV per second
 - Puller receive events/s: The number of events that the Puller module of TiCDC nodes receives from the KV client per second
 - Puller output events/s: The number of events that the Puller module of TiCDC nodes sends to the Sorter module per second
@@ -87,18 +87,18 @@ The description of each metric in the **Events** panel is as follows:
 - Entry sorter buffer size: The number of events that TiCDC nodes cache in the Sorter module
 - Processor/Mounter buffer size: The number of events that TiCDC nodes cache in the Processor module and the Mounter module
 - Sink row buffer size: The number of events that TiCDC nodes cache in the Sink module
-- Entry sorter sort duration: TiCDC The histogram of the time spent by TiCDC nodes sorting events
-- Entry sorter sort duration percentile: Within one second, the 95%, 99%, and 99.9% probability of the time spent by TiCDC sorting events
+- Entry sorter sort duration: The histogram of the time spent by TiCDC nodes sorting events
+- Entry sorter sort duration percentile: The time (P95, P99, and P999) spent by TiCDC sorting events within one second
 - Entry sorter merge duration: The histogram of the time spent by TiCDC nodes merging sorted events
-- Entry sorter merge duration percentile: Within one second, the 95%, 99%, and 99.9% probability of the time spent by TiCDC merging sorted events
+- Entry sorter merge duration percentile: The time (P95, P99, and P999) spent by TiCDC merging sorted events within one second
 - Mounter unmarshal duration: The histogram of the time spent by TiCDC nodes unmarshaling events
-- Mounter unmarshal duration percentile: Within one second, the 95%, 99%, and 99.9% probability of the time spent by TiCDC unmarshaling events
+- Mounter unmarshal duration percentile: The time (P95, P99, and P999) spent by TiCDC unmarshaling events within one second
 - KV client dispatch events/s: The number of events that the KV client module dispatches among the TiCDC nodes
 - KV client batch resolved size: The batch size of resolved timestamp messages that TiKV sends to TiCDC
 
 ## TiKV
 
-Following is an example of the **TiKV** panel:
+The following is an example of the **TiKV** panel:
 
 ![TiCDC Dashboard - TiKV metrics 1](/media/ticdc/ticdc-dashboard-tikv-1.png)
 ![TiCDC Dashboard - TiKV metrics 2](/media/ticdc/ticdc-dashboard-tikv-2.png)
@@ -108,10 +108,10 @@ The description of each metric in the **TiKV** panel is as follows:
 - CDC endpoint CPU: The CPU usage of the CDC endpoint threads of TiKV nodes
 - CDC worker CPU: The CPU usage of the CDC worker threads of TiKV nodes
 - Min resolved ts: The minimum resolved timestamp on TiKV nodes
-- Min resolved region: The minimum region ID of resolved timestamp on TiKV nodes
+- Min resolved region: The minimum Region ID of resolved timestamps on TiKV nodes
 - Resolved ts lag duration percentile: The lag between the minimum resolved timestamp on TiKV nodes and the current time
-- Initial scan duration: The histogram of the time spent by incremental scan when TiKV nodes connect to TiCDC nodes
-- Initial scan duration percentile: Within one second, the 95%, 99%, and 99.9% probability of the time spent by the incremental scan of TiKV nodes
-- Memory without block cache: The memory usage of TiKV nodes, not including the RocksDB block cache
+- Initial scan duration: The histogram of the time spent on incremental scan when TiKV nodes connect to TiCDC nodes
+- Initial scan duration percentile: The time (P95, P99, and P999) spent on the incremental scan of TiKV nodes within one second
+- Memory without block cache: The memory usage of TiKV nodes excluding the RocksDB block cache
 - CDC pending bytes in memory: The memory usage of CDC module on TiKV nodes
 - Captured region count: The number of event-capturing Regions on TiKV nodes
