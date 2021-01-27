@@ -40,11 +40,7 @@ Query OK, 0 rows affected (0.00 sec)
 
 ## Global kill <span class="version-mark">New in v5.0.0-rc</span>
 
-<<<<<<< HEAD
-Since v5.0, TiDB provides experimental support for [global kill](https://github.com/pingcap/tidb/blob/master/docs/design/2020-06-01-global-kill.md). When this feature is enabled, each TiDB server will ensure that Connection IDs are globally unique. A `KILL` statement can be issued to any TiDB server, which will internally route the request to the correct TiDB instance. This ensures that `KILL` is safe even when TiDB servers are behind a load balancer.
-=======
 Since v5.0, TiDB provides experimental support for [Global kill](https://github.com/pingcap/tidb/blob/master/docs/design/2020-06-01-global-kill.md). This feature is used to safely terminate any connection between the client and the TiDB server. When this feature is enabled, each TiDB server ensures that each connection ID is globally unique. The client can issue a `KILL` statement to any TiDB server, and the server internally routes the request to the corresponding TiDB instance. This ensures that `KILL` is safe to execute even when the TiDB server is behind a load balancer.
->>>>>>> 84c42b8e... tidb: Refine the doc for global kill (#4729)
 
 To enable Global Kill, set `enable-global-kill = true` in the `experimental` section of the [TiDB configuration file](/tidb-configuration-file.md#enable-global-kill-new-in-v500-rc).
 

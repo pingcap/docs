@@ -597,9 +597,5 @@ The `experimental` section, introduced in v3.1.0, describes configurations relat
 
 ### `enable-global-kill` <span class="version-mark">New in v5.0.0-rc</span>
 
-<<<<<<< HEAD
-- Enables the "global kill" feature to safely kill any connection even when TiDB servers are behind a load balancer.
-=======
 - Determines whether to enable the Global Kill feature. To enable this feature, set the value of this configuration item to `true`. When enabled, this feature can safely kill any connection even when the TiDB server is behind a load balancer.
->>>>>>> 84c42b8e... tidb: Refine the doc for global kill (#4729)
 - Default value: false
