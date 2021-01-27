@@ -41,19 +41,19 @@ Query OK, 0 rows affected (0.00 sec)
 
 ## Global kill <span class="version-mark">New in v5.0.0-rc</span>
 
-Since v5.0, TiDB provides experimental support for [Global kill](https://github.com/pingcap/tidb/blob/master/docs/design/2020-06-01-global-kill.md). This feature is used to safely terminate any connection between the client and the TiDB server. When enabled, each TiDB server ensures that Connection IDs are globally unique. A `KILL` statement can be issued to any TiDB server, which internally routes the request to the correct TiDB instance. This ensures that `KILL` is safe even when TiDB servers are behind a load balancer.
+Since v5.0, TiDB provides experimental support for [Global kill](https://github.com/pingcap/tidb/blob/master/docs/design/2020-06-01-global-kill.md). This feature is used to safely terminate any connection between the client and the TiDB server. When this feature is enabled, each TiDB server ensures that each connection ID is globally unique. The client can issue a `KILL` statement to any TiDB server, and the server internally routes the request to the corresponding TiDB instance. This ensures that `KILL` is safe to execute even when the TiDB server is behind a load balancer.
 
-To enable `global kill`, set `enable-global-kill = true` in the `experimental` section of your configuration file.
+To enable Global Kill, set `enable-global-kill = true` in the `experimental` section of the [TiDB configuration file](/tidb-configuration-file.md#enable-global-kill-new-in-v500-rc).
 
 ## Global kill example
 
-Execute the following command on TiDB instance `127.0.0.1:10180`:
+Execute the following statement on the TiDB instance `127.0.0.1:10180`:
 
 ```sql
 SELECT SLEEP(60);
 ```
 
-Execute the following command on TiDB instance `127.0.0.1:10080`:
+Execute the following statements on the TiDB instance `127.0.0.1:10080`:
 
 ```sql
 SELECT * FROM INFORMATION_SCHEMA.CLUSTER_PROCESSLIST;
