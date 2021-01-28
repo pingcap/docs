@@ -714,12 +714,18 @@ For a system upgraded to v5.0.0-rc from an earlier version, if you have not modi
 
 - Scope: SESSION | GLOBAL
 - Default value: OFF
+- Permitted values: OFF, ON, WARN
 - To reduce the impact from SQL injection attacks, TiDB now prevents multiple queries being executed in the same `COM_QUERY` call by default.
-- This variable is intended to be used as part of an upgrade path from earlier versions of TiDB. The following values are permitted:
+- This variable is intended to be used as part of an upgrade path from earlier versions of TiDB. The following behaviors apply:
 
-    - `OFF` multi-statement is prevented, unless the client sets the multi-statement attribute.
-    - `ON` multi-statement is permitted in all cases.
-    - `WARN` multi-statement is permitted, but a warning is returned indicating that the usage is unsafe.
+| Client setting         | `tidb_multi_statement_mode` value | Multiple statements permitted? |
+|------------------------|-----------------------------------|--------------------------------|
+| Multi Statements = ON  | OFF                               | Yes                            |
+| Multi Statements = ON  | ON                                | Yes                            |
+| Multi Statements = ON  | WARN                              | Yes                            |
+| Multi Statements = OFF | OFF                               | No                             |
+| Multi Statements = OFF | ON                                | Yes                            |
+| Multi Statements = OFF | WARN                              | Yes (+warning returned)        |
 
 > **Note:**
 >
