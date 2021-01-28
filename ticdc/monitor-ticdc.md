@@ -52,12 +52,12 @@ The description of each metric in the **Changefeed** panel is as follows:
 
 - Changefeed table count: The number of tables that each TiCDC node needs to replicate in the replication task
 - Processor resolved ts: The timestamps that have been resolved in the TiCDC cluster
-- Table resolved ts: The replication process of each table in the replication task
+- Table resolved ts: The replication progress of each table in the replication task
 - Changefeed checkpoint: The progress of replicating data to the downstream. Normally, the green bars are connected to the yellow line
 - PD etcd requests/s: The number of requests that a TiCDC node sends to PD per second
 - Exit error count: The number of errors that interrupt the replication task per minute
-- Changefeed checkpoint lag: The process lag of data replication (the unit is second) between the upstream and the downstream
-- Changefeed resolved ts lag: The process lag of data replication (the unit is second) between the upstream and TiCDC nodes
+- Changefeed checkpoint lag: The progress lag of data replication (the unit is second) between the upstream and the downstream
+- Changefeed resolved ts lag: The progress lag of data replication (the unit is second) between the upstream and TiCDC nodes
 - Flush sink duration: The histogram of the time spent by TiCDC asynchronously flushing data to the downstream
 - Flush sink duration percentile: The time (P95, P99, and P999) spent by TiCDC asynchronously flushing data to the downstream within one second
 - Sink write duration: The histogram of the time spent by TiCDC writing a transaction change to the downstream
@@ -105,10 +105,10 @@ The following is an example of the **TiKV** panel:
 
 The description of each metric in the **TiKV** panel is as follows:
 
-- CDC endpoint CPU: The CPU usage of the CDC endpoint threads of TiKV nodes
-- CDC worker CPU: The CPU usage of the CDC worker threads of TiKV nodes
+- CDC endpoint CPU: The CPU usage of the CDC endpoint threads on TiKV nodes
+- CDC worker CPU: The CPU usage of the CDC worker threads on TiKV nodes
 - Min resolved ts: The minimum resolved timestamp on TiKV nodes
-- Min resolved region: The minimum Region ID of resolved timestamps on TiKV nodes
+- Min resolved region: The Region ID of the minimum resolved timestamp on TiKV nodes
 - Resolved ts lag duration percentile: The lag between the minimum resolved timestamp on TiKV nodes and the current time
 - Initial scan duration: The histogram of the time spent on incremental scan when TiKV nodes connect to TiCDC nodes
 - Initial scan duration percentile: The time (P95, P99, and P999) spent on the incremental scan of TiKV nodes within one second
