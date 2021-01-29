@@ -211,12 +211,7 @@ Currently, TiFlash supports pushing down a limited number of expressions. To lea
 
 TiFlash does not support push-down calculations in the following situations:
 
-<<<<<<< HEAD
-- Expressions that contain `Duration` and `JSON` cannot be pushed down.
+- Expressions that contain `Time` and `JSON` types cannot be pushed down.
 - If an aggregate function or a `WHERE` clause contains expressions that are not in [this list](https://github.com/pingcap/tidb/blob/v3.1.0/expression/expression.go#L558), the aggregate or related predicate filtering cannot be pushed down.
-=======
-- Expressions that contain the `Time` type cannot be pushed down.
-- If an aggregate function or a `WHERE` clause contains expressions that are not included in the list above, the aggregate or related predicate filtering cannot be pushed down.
->>>>>>> 033716e1... Rename `Duration` to `Time` (#4743)
 
 If a query encounters unsupported push-down calculations, TiDB needs to complete the remaining calculations, which might greatly affect the TiFlash acceleration effect.
