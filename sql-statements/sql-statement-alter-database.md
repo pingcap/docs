@@ -8,6 +8,19 @@ aliases: ['/docs/v2.1/sql-statements/sql-statement-alter-database/','/docs/v2.1/
 
 `ALTER DATABASE` is used to specify or modify the default character set and collation of the current database. `ALTER SCHEMA` has the same effect as `ALTER DATABASE`.
 
+<<<<<<< HEAD
+=======
+## Synopsis
+
+```ebnf+diagram
+AlterDatabaseStmt ::=
+    'ALTER' 'DATABASE' DBName? DatabaseOptionList
+
+DatabaseOption ::=
+    DefaultKwdOpt ( CharsetKw '='? CharsetName | 'COLLATE' '='? CollationName | 'ENCRYPTION' '='? EncryptionOpt )
+```
+
+>>>>>>> 4c603f53... sql-statements: use EBNF to render syntax diagrams for ADD, ALTER and ANALYZE statements (#4722)
 ## Examples
 
 ```sql
