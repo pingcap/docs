@@ -52,6 +52,7 @@ To understand the key metrics displayed on the TiDB dashboard, check the followi
     - Get Token Duration: the time cost of getting Token on each connection
     - Skip Binlog Count: the number of TiDB failing to write into Binlog
     - Client Data Traffic: data traffic statistics of TiDB and the client
+
 - Transaction
     - Transaction OPS: the number of transactions executed per second
     - Duration: the execution duration of a transaction
