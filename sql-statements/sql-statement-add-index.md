@@ -10,27 +10,6 @@ The `ALTER TABLE.. ADD INDEX` statement adds an index to an existing table. This
 
 ## Synopsis
 
-<<<<<<< HEAD
-**AlterTableStmt:**
-
-![AlterTableStmt](/media/sqlgram/AlterTableStmt.png)
-
-**AlterTableSpec:**
-
-![AlterTableSpec](/media/sqlgram/AlterTableSpec.png)
-
-**ColumnKeywordOpt:**
-
-![ColumnKeywordOpt](/media/sqlgram/ColumnKeywordOpt.png)
-
-**ColumnDef:**
-
-![ColumnDef](/media/sqlgram/ColumnDef.png)
-
-**ColumnPosition:**
-
-![ColumnPosition](/media/sqlgram/ColumnPosition.png)
-=======
 ```ebnf+diagram
 AlterTableStmt ::=
     'ALTER' IgnoreOptional 'TABLE' TableName ( AlterTableSpecListOpt AlterTablePartitionOpt | 'ANALYZE' 'PARTITION' PartitionNameList ( 'INDEX' IndexNameList )? AnalyzeOptionListOpt )
@@ -58,54 +37,15 @@ AlterTableSpec ::=
 |   'SECONDARY_LOAD'
 |   'SECONDARY_UNLOAD'
 
-Constraint ::=
-    ConstraintKeywordOpt ConstraintElem
+ColumnKeywordOpt ::=
+    'COLUMN'?
 
-ConstraintKeywordOpt ::=
-    ( 'CONSTRAINT' Symbol? )?
+ColumnDef ::=
+    ColumnName ( Type | 'SERIAL' ) ColumnOptionListOpt
 
-ConstraintElem ::=
-    ( ( 'PRIMARY' 'KEY' | KeyOrIndex IfNotExists | 'UNIQUE' KeyOrIndexOpt ) IndexNameAndTypeOpt | 'FULLTEXT' KeyOrIndexOpt IndexName ) '(' IndexPartSpecificationList ')' IndexOptionList
-|   'FOREIGN' 'KEY' IfNotExists IndexName '(' IndexPartSpecificationList ')' ReferDef
-|   'CHECK' '(' Expression ')' EnforcedOrNotOpt
-
-IndexNameAndTypeOpt ::=
-    IndexName ( 'USING' IndexTypeName )?
-|   Identifier 'TYPE' IndexTypeName
-
-IndexPartSpecificationList ::=
-    IndexPartSpecification ( ',' IndexPartSpecification )*
-
-IndexPartSpecification ::=
-    ( ColumnName OptFieldLen | '(' Expression ')' ) Order
-
-IndexOptionList ::=
-    IndexOption*
-
-IndexOption ::=
-    'KEY_BLOCK_SIZE' '='? LengthNum
-|   IndexType
-|   'WITH' 'PARSER' Identifier
-|   'COMMENT' stringLit
-|   IndexInvisible
-
-KeyOrIndex ::=
-    'KEY'
-|   'INDEX'
-
-IndexKeyTypeOpt ::=
-    ( 'UNIQUE' | 'SPATIAL' | 'FULLTEXT' )?
-
-IndexInvisible ::=
-    'VISIBLE'
-|   'INVISIBLE'
-
-IndexTypeName ::=
-    'BTREE'
-|   'HASH'
-|   'RTREE'
+ColumnPosition ::=
+    ( 'FIRST' | 'AFTER' ColumnName )?
 ```
->>>>>>> 4c603f53... sql-statements: use EBNF to render syntax diagrams for ADD, ALTER and ANALYZE statements (#4722)
 
 ## Examples
 

@@ -10,27 +10,6 @@ The `ALTER TABLE.. ADD COLUMN` statement adds a column to an existing table. Thi
 
 ## Synopsis
 
-<<<<<<< HEAD
-**AlterTableStmt:**
-
-![AlterTableStmt](/media/sqlgram/AlterTableStmt.png)
-
-**AlterTableSpec:**
-
-![AlterTableSpec](/media/sqlgram/AlterTableSpec.png)
-
-**ColumnKeywordOpt:**
-
-![ColumnKeywordOpt](/media/sqlgram/ColumnKeywordOpt.png)
-
-**ColumnDef:**
-
-![ColumnDef](/media/sqlgram/ColumnDef.png)
-
-**ColumnPosition:**
-
-![ColumnPosition](/media/sqlgram/ColumnPosition.png)
-=======
 ```ebnf+diagram
 AlterTableStmt ::=
     'ALTER' IgnoreOptional 'TABLE' TableName ( AlterTableSpecListOpt AlterTablePartitionOpt | 'ANALYZE' 'PARTITION' PartitionNameList ( 'INDEX' IndexNameList )? AnalyzeOptionListOpt )
@@ -58,13 +37,15 @@ AlterTableSpec ::=
 |   'SECONDARY_LOAD'
 |   'SECONDARY_UNLOAD'
 
+ColumnKeywordOpt ::=
+    'COLUMN'?
+
 ColumnDef ::=
     ColumnName ( Type | 'SERIAL' ) ColumnOptionListOpt
 
 ColumnPosition ::=
     ( 'FIRST' | 'AFTER' ColumnName )?
 ```
->>>>>>> 4c603f53... sql-statements: use EBNF to render syntax diagrams for ADD, ALTER and ANALYZE statements (#4722)
 
 ## Examples
 
