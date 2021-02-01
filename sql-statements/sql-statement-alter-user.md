@@ -10,17 +10,16 @@ This statement changes an existing user inside the TiDB privilege system. In the
 
 ## Synopsis
 
-**AlterUserStmt:**
+```ebnf+diagram
+AlterUserStmt ::=
+    'ALTER' 'USER' IfExists (UserSpecList RequireClauseOpt ConnectionOptions PasswordOrLockOptions | 'USER' '(' ')' 'IDENTIFIED' 'BY' AuthString)
 
-![AlterUserStmt](/media/sqlgram/AlterUserStmt.png)
+UserSpecList ::=
+    UserSpec ( ',' UserSpec )*
 
-**UserSpecList:**
-
-![UserSpecList](/media/sqlgram/UserSpecList.png)
-
-**UserSpec:**
-
-![UserSpec](/media/sqlgram/UserSpec.png)
+UserSpec ::=
+    Username AuthOption
+```
 
 ## Examples
 

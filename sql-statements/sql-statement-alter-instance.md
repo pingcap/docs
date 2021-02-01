@@ -18,7 +18,12 @@ When an error occurs during reloading, by default, this error message is returne
 
 ## Syntax diagram
 
-![AlterInstanceStmt](/media/sqlgram/AlterInstanceStmt.png)
+**AlterInstanceStmt:**
+
+```ebnf+diagram
+AlterInstanceStmt ::=
+    'ALTER' 'INSTANCE' InstanceOption
+```
 
 ## Example
 
