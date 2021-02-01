@@ -18,8 +18,21 @@ When an error occurs during reloading, by default, this error message is returne
 
 ## Syntax diagram
 
+<<<<<<< HEAD
 ![AlterInstanceStmt](/media/sqlgram/AlterInstanceStmt.png)
 
+=======
+**AlterInstanceStmt:**
+
+```ebnf+diagram
+AlterInstanceStmt ::=
+    'ALTER' 'INSTANCE' InstanceOption
+
+InstanceOption ::=
+    'RELOAD' 'TLS' ('NO' 'ROLLBACK' 'ON' 'ERROR')?
+```
+
+>>>>>>> 4c603f53... sql-statements: use EBNF to render syntax diagrams for ADD, ALTER and ANALYZE statements (#4722)
 ## Example
 
 {{< copyable "sql" >}}

@@ -12,17 +12,16 @@ TiDB will also automatically update its statistics over time as it discovers tha
 
 ## Synopsis
 
-**AnalyzeTableStmt:**
+```ebnf+diagram
+AnalyzeTableStmt ::=
+    'ANALYZE' ( 'TABLE' ( TableNameList | TableName ( 'INDEX' IndexNameList | 'PARTITION' PartitionNameList ( 'INDEX' IndexNameList )? ) ) | 'INCREMENTAL' 'TABLE' TableName ( 'PARTITION' PartitionNameList )? 'INDEX' IndexNameList ) AnalyzeOptionListOpt
 
-![AnalyzeTableStmt](/media/sqlgram/AnalyzeTableStmt.png)
+TableNameList ::=
+    TableName (',' TableName)*
 
-**TableNameList:**
-
-![TableNameList](/media/sqlgram/TableNameList.png)
-
-**TableName:**
-
-![TableName](/media/sqlgram/TableName.png)
+TableName ::=
+    Identifier ( '.' Identifier )?
+```
 
 ## Examples
 

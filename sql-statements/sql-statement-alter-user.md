@@ -10,17 +10,28 @@ This statement changes an existing user inside the TiDB privilege system. In the
 
 ## Synopsis
 
-**AlterUserStmt:**
+```ebnf+diagram
+AlterUserStmt ::=
+    'ALTER' 'USER' IfExists (UserSpecList RequireClauseOpt ConnectionOptions PasswordOrLockOptions | 'USER' '(' ')' 'IDENTIFIED' 'BY' AuthString)
 
-![AlterUserStmt](/media/sqlgram/AlterUserStmt.png)
+UserSpecList ::=
+    UserSpec ( ',' UserSpec )*
 
-**UserSpecList:**
+UserSpec ::=
+    Username AuthOption
 
-![UserSpecList](/media/sqlgram/UserSpecList.png)
+Username ::=
+    StringName ('@' StringName | singleAtIdentifier)? | 'CURRENT_USER' OptionalBraces
 
+<<<<<<< HEAD
 **UserSpec:**
 
 ![UserSpec](/media/sqlgram/UserSpec.png)
+=======
+AuthOption ::=
+    ( 'IDENTIFIED' ( 'BY' ( AuthString | 'PASSWORD' HashString ) | 'WITH' StringName ( 'BY' AuthString | 'AS' HashString )? ) )?
+```
+>>>>>>> 4c603f53... sql-statements: use EBNF to render syntax diagrams for ADD, ALTER and ANALYZE statements (#4722)
 
 ## Examples
 
