@@ -24,7 +24,7 @@ To understand the key metrics displayed on the TiDB dashboard, check the followi
         - The duration between the time that the client's network request is sent to TiDB and the time that the request is returned to the client after TiDB has executed it. In general, client requests are sent in the form of SQL statements, but can also include the execution time of commands such as `COM_PING`, `COM_SLEEP`, `COM_STMT_FETCH`, and `COM_SEND_LONG_DATA`
         - Because TiDB supports Multi-Query, it supports sending multiple SQL statements at one time, such as `select 1; select 1; select 1;`. In this case, the total execution time of this query includes the execution time of all SQL statements
     - Command Per Second: the number of commands processed by TiDB per second, which is classified according to the success or failure of command execution results
-    - QPS: the number of SQL statements executed per second on all TiDB instances, which is counted according to `SELECT`, `INSERT`, `UPDATE`, and other types of statements.
+    - QPS: the number of SQL statements executed per second on all TiDB instances, which is counted according to `SELECT`, `INSERT`, `UPDATE`, and other types of statements
     - CPS By Instance: the command statistics on each TiDB instance, which is classified according to the success or failure of command execution results
     - Failed Query OPM: the statistics of error types (such as syntax errors and primary key conflicts) according to the errors occurred when executing SQL statements per second on each TiDB instance. It contains the module in which the error occurs and the error code
     - Slow query: the statistics of the processing time of slow queries (the time cost of the entire slow query, the time cost of Coprocessor，and the waiting time for Coprocessor scheduling). Slow queries are classified into internal and general SQL statements.
@@ -69,7 +69,7 @@ To understand the key metrics displayed on the TiDB dashboard, check the followi
     - Statement Lock Keys: the number of locks for a single statement
     - Send HeartBeat Duration: the duration for the transaction to send heartbeats
     - Transaction Write Size Bytes Rate and sum: the rate and sum of size bytes written by the transaction
-    - Transaction Write Size Bytes：the size of the data written by the transaction
+    - Transaction Write Size Bytes: the size of the data written by the transaction
     - Acquire Pessimistic Locks Duration: the time consumed by adding locks
     - TTL Lifetime Reach Counter: the number of transactions that reach the upper limit of TTL. The default value of the TTL upper limit is 10 minutes. It means that 10 minutes have passed since the first lock of a pessimistic transaction or the first prewrite of an optimistic transaction. The default value of the upper limit of TTL is 10 minutes. The upper limit of TTL life can be changed by modifying `max-txn-TTL` in the TiDB configuration file
     - Pessimistic Statement Retry OPS: the number of retry attempts for pessimistic statements. When the statement tries to add lock, it might encounter a write conflict. At this time, the statement will acquire a new snapshot and add lock again
