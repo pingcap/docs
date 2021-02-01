@@ -1,14 +1,30 @@
 ---
-title: tidb v4.0.11 Release Notes
-category: Releases
-aliases: ['/docs/dev/releases/v4.0.11/']
+title: TiDB 4.0.11 Release Notes
 ---
 
-# tidb v4.0.11 Release Notes
+# TiDB 4.0.11 Release Notes
 
-Release date: February 01, 2021
+Release date: February 4, 2021
 
-TiDB version: v4.0.11
+TiDB version: 4.0.11
+
+## Compatibility Changes
+
+## New Features
+
++ TiFlash
+
+    - A coprocessor thread pool was added to queue coprocessor requests for execution, which can avoid OOM in some cases. Added two configs `cop_pool_size` and `batch_cop_pool_size`, default `NumOfPhysicalCores*2`. [#1312](https://github.com/pingcap/tics/pull/1312)
+
+## Improvements
+
++ TiDB
+
+    - Reorder inner joins simplified from outer joins [#22402](https://github.com/pingcap/tidb/pull/22402)
+
++ TiFlash
+
+    - Metrics: grafana dashboards support multiple clusters [#1384](https://github.com/pingcap/tics/pull/1384)
 
 ## Bug Fixes
 
@@ -64,23 +80,7 @@ TiDB version: v4.0.11
     - Fix the bug that TiFlash may crash when reading data [#1358](https://github.com/pingcap/tics/pull/1358)
     - Fix the issue that some data written after DDL operation may be lost after data compaction [#1350](https://github.com/pingcap/tics/pull/1350)
 
-## Improvements
-
-+ TiDB
-
-    - Reorder inner joins simplified from outer joins [#22402](https://github.com/pingcap/tidb/pull/22402)
-
-+ TiFlash
-
-    - Metrics: grafana dashboards support multiple clusters [#1384](https://github.com/pingcap/tics/pull/1384)
-
-## New Features
-
-+ TiFlash
-
-    - A coprocessor thread pool was added to queue coprocessor requests for execution, which can avoid OOM in some cases. Added two configs `cop_pool_size` and `batch_cop_pool_size`, default `NumOfPhysicalCores*2`. [#1312](https://github.com/pingcap/tics/pull/1312)
-
-## Others
+## 请判断以下 note 是否为本次发版所需。如果是，请移动到以上分类中或指出其所属分类。如果不是，请删除相应的 note
 
 + TiDB
 
