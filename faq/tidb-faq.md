@@ -142,7 +142,7 @@ Check whether `tidb_disable_txn_auto_retry` is set to `on`. If so, set it to `of
 
 #### ERROR 8130 (HY000): client has multi-statement capability disabled
 
-This error might occur after upgrading from an earlier version of TiDB. To reduce the impact from SQL injection attacks, TiDB now prevents multiple queries being executed in the same `COM_QUERY` call by default.
+This error might occur after upgrading from an earlier version of TiDB. To reduce the impact of SQL injection attacks, TiDB now prevents multiple queries from being executed in the same `COM_QUERY` call by default.
 
 The system variable [`tidb_multi_statement_mode`](/system-variables.md#tidb_multi_statement_mode-new-in-v4011) can be used to control this behavior.
 
