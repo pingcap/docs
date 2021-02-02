@@ -720,12 +720,12 @@ For a system upgraded to v5.0.0-rc from an earlier version, if you have not modi
 
 | Client setting         | `tidb_multi_statement_mode` value | Multiple statements permitted? |
 |------------------------|-----------------------------------|--------------------------------|
-| Multi Statements = ON  | OFF                               | Yes                            |
-| Multi Statements = ON  | ON                                | Yes                            |
-| Multi Statements = ON  | WARN                              | Yes                            |
-| Multi Statements = OFF | OFF                               | No                             |
-| Multi Statements = OFF | ON                                | Yes                            |
-| Multi Statements = OFF | WARN                              | Yes (+warning returned)        |
+| Multiple Statements = ON  | OFF                               | Yes                            |
+| Multiple Statements = ON  | ON                                | Yes                            |
+| Multiple Statements = ON  | WARN                              | Yes                            |
+| Multiple Statements = OFF | OFF                               | No                             |
+| Multiple Statements = OFF | ON                                | Yes                            |
+| Multiple Statements = OFF | WARN                              | Yes (+warning returned)        |
 
 > **Note:**
 >
