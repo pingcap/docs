@@ -12,9 +12,14 @@ TiDB version: 4.0.11
 
 ## New Features
 
++ TiKV
+
+    - Add `utf8mb4_unicode_ci` implement [#9577](https://github.com/tikv/tikv/pull/9577)
+    - Add `cast_year_as_time` [#9299](https://github.com/tikv/tikv/pull/9299)
+
 + TiFlash
 
-    - A coprocessor thread pool was added to queue coprocessor requests for execution, which can avoid OOM in some cases. Added two configs `cop_pool_size` and `batch_cop_pool_size`, default `NumOfPhysicalCores*2`. [#1312](https://github.com/pingcap/tics/pull/1312)
+    - A coprocessor thread pool was added to queue coprocessor requests for execution, which can avoid OOM in some cases. Added two configs `cop_pool_size` and `batch_cop_pool_size`, default `NumOfPhysicalCores*2` [#1312](https://github.com/pingcap/tics/pull/1312)
 
 ## Improvements
 
@@ -22,9 +27,20 @@ TiDB version: 4.0.11
 
     - Reorder inner joins simplified from outer joins [#22402](https://github.com/pingcap/tidb/pull/22402)
 
++ TiKV
+
+    - Add server info metrics for DBasS [#9591](https://github.com/tikv/tikv/pull/9591)
+    - Grafana dashboards support multiple clusters [#9572](https://github.com/tikv/tikv/pull/9572)
+    - Report RocksDB metrics to TiDB [#9316](https://github.com/tikv/tikv/pull/9316)
+    - Record suspend time for coprocessor task [#9277](https://github.com/tikv/tikv/pull/9277)
+    - Add key and size threshold for load-base-split [#9354](https://github.com/tikv/tikv/pull/9354)
+    - Check whether file exist before importing [#9544](https://github.com/tikv/tikv/pull/9544)
+    - Improve Fast Tune panels [#9180](https://github.com/tikv/tikv/pull/9180)
+
 + TiFlash
 
-    - Metrics: grafana dashboards support multiple clusters [#1384](https://github.com/pingcap/tics/pull/1384)
+    - Optimize the performance of date_format function in TiFlash [#1339](https://github.com/pingcap/tics/pull/1339)
+    - Optimize memory consumption of handling ingest SST
 
 ## Bug Fixes
 
@@ -70,6 +86,18 @@ TiDB version: 4.0.11
     - Use “round to nearest even” rule instead of “round half away from zero” for approximate-value numbers [#21628](https://github.com/pingcap/tidb/pull/21628)
     - The single-argument `WEEK()` call now recognize the global `@@default_week_format` even when the session one is not set explicitly. [#21623](https://github.com/pingcap/tidb/pull/21623)
 
++ TiKV
+
+    - Fix failed to build TiKV with PROST=1 [#9604](https://github.com/tikv/tikv/pull/9604)
+    - Fix unmatched memory information [#9589](https://github.com/tikv/tikv/pull/9589)
+    - Fix the issue that end key of a partial rawkv-restore range is inclusive [#9583](https://github.com/tikv/tikv/pull/9583)
+    - Fix the issue that when loading old value for CDC's incremental scan on a key where there's a rolled back transaction, in some cases TiKV may panic. [#9569](https://github.com/tikv/tikv/pull/9569)
+    - Fix old value config glitch when changefeeds with different settings connect to one region [#9565](https://github.com/tikv/tikv/pull/9565)
+    - Fix a crash problem when running a TiKV on a machine with a network interface lacking MAC address since v4.0.9. [#9516](https://github.com/tikv/tikv/pull/9516)
+    - Fix the problem that TiKV OOM when we backup a huge region. [#9448](https://github.com/tikv/tikv/pull/9448)
+    - Fix `region-split-check-diff` can not be customized [#9530](https://github.com/tikv/tikv/pull/9530)
+    - Fix TiKV panicked when system time go back [#9542](https://github.com/tikv/tikv/pull/9542)
+
 + PD
 
     - Fix the issue that member health metrics not correct [#3368](https://github.com/pingcap/pd/pull/3368)
@@ -96,31 +124,11 @@ TiDB version: 4.0.11
     - Add `utf8_unicode_ci` and `utf8mb4_unicode_ci` interface. [#22099](https://github.com/pingcap/tidb/pull/22099)
     - Error message redact normalize. [#21889](https://github.com/pingcap/tidb/pull/21889)
 
-+ TiKV
-
-    - No release notes [#9604](https://github.com/tikv/tikv/pull/9604)
-    - Server: add server info metrics for DBasS [#9591](https://github.com/tikv/tikv/pull/9591)
-    - Fix unmatched memory information [#9589](https://github.com/tikv/tikv/pull/9589)
-    - (I'm not sure if it's necessary) [#9583](https://github.com/tikv/tikv/pull/9583)
-    - Add utf8mb4_unicode_ci implement [#9577](https://github.com/tikv/tikv/pull/9577)
-    - Metrics: grafana dashboards support multiple clusters [#9572](https://github.com/tikv/tikv/pull/9572)
-    - Fix the issue that when loading old value for CDC's incremental scan on a key where there's a rolled back transaction, in some cases TiKV may panic. [#9569](https://github.com/tikv/tikv/pull/9569)
-    - Fix old value config glitch when changefeeds with different settings connect to one region [#9565](https://github.com/tikv/tikv/pull/9565)
-    - Fixes a crash problem when running a TiKV on a machine with a network interface lacking MAC address since v4.0.9. [#9516](https://github.com/tikv/tikv/pull/9516)
-    - Fix the problem that TiKV OOM when we backup a huge region. [#9448](https://github.com/tikv/tikv/pull/9448)
-    - Report RocksDB metrics to TiDB [#9316](https://github.com/tikv/tikv/pull/9316)
-    - Add `cast_year_as_time` [#9299](https://github.com/tikv/tikv/pull/9299)
-    - Record suspend time for coprocessor task [#9277](https://github.com/tikv/tikv/pull/9277)
-
 + PD
 
     - Fix the issue that the store limit cannot be persisted [#3403](https://github.com/pingcap/pd/pull/3403)
     - Fix the limit constriction of the scatter range scheduler [#3401](https://github.com/pingcap/pd/pull/3401)
     - Metrics: grafana dashboards support multiple clusters [#3398](https://github.com/pingcap/pd/pull/3398)
-
-+ TiFlash
-
-    - Optimize the performance of date_format function in TiFlash [#1339](https://github.com/pingcap/tics/pull/1339)
 
 + Tools
 
