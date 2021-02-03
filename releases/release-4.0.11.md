@@ -8,9 +8,11 @@ Release date: February 4, 2021
 
 TiDB version: 4.0.11
 
-## Compatibility Changes
-
 ## New Features
+
++ TiDB
+
+    - Implement `utf8_unicode_ci` and `utf8mb4_unicode_ci` collation [#22558](https://github.com/pingcap/tidb/pull/22558)
 
 + TiKV
 
@@ -26,6 +28,10 @@ TiDB version: 4.0.11
 + TiDB
 
     - Reorder inner joins simplified from outer joins [#22402](https://github.com/pingcap/tidb/pull/22402)
+    - Metrics: grafana dashboards support multiple clusters [#22534](https://github.com/pingcap/tidb/pull/22534)
+    - server, sessionctx: add multi statement workaround. [#22468](https://github.com/pingcap/tidb/pull/22468)
+    - Metrics slow query is divided into internal and general [#22405](https://github.com/pingcap/tidb/pull/22405)
+    - Add `utf8_unicode_ci` and `utf8mb4_unicode_ci` interface. [#22099](https://github.com/pingcap/tidb/pull/22099)
 
 + TiKV
 
@@ -37,15 +43,36 @@ TiDB version: 4.0.11
     - Check whether file exist before importing [#9544](https://github.com/tikv/tikv/pull/9544)
     - Improve Fast Tune panels [#9180](https://github.com/tikv/tikv/pull/9180)
 
++ PD
+
+    - Metrics: grafana dashboards support multiple clusters [#3398](https://github.com/pingcap/pd/pull/3398)
+
 + TiFlash
 
     - Optimize the performance of date_format function in TiFlash [#1339](https://github.com/pingcap/tics/pull/1339)
     - Optimize memory consumption of handling ingest SST
 
++ Tools
+
+    + TiCDC
+
+        - Add version in capture info and changefeed info [#1342](https://github.com/pingcap/ticdc/pull/1342)
+
+    + TiDB Lightning
+
+        - Improve import performance by creating tables in parallel [#502](https://github.com/pingcap/tidb-lightning/pull/502)
+        - Improve import performance by skipping split regions if engine total size is smaller than region size [#524](https://github.com/pingcap/tidb-lightning/pull/524)
+        - Add importing progress and optimize the accuracy of restore progress [#506](https://github.com/pingcap/tidb-lightning/pull/506)
+
 ## Bug Fixes
 
 + TiDB
 
+    - Incorporate unicode_ci into constant propagation [#22614](https://github.com/pingcap/tidb/pull/22614)
+    - Fix an issue that cause wrong collation and coercibility [#22602](https://github.com/pingcap/tidb/pull/22602)
+    - Fix an issue that may get wrong collation result [#22599](https://github.com/pingcap/tidb/pull/22599)
+    - Refine `CollationStrictness` to support incompatible strictnessship [#22582](https://github.com/pingcap/tidb/pull/22582)
+    - Fix a bug that the `like` function returns the wrong result when using collation [#22531](https://github.com/pingcap/tidb/pull/22531)
     - Expression: handle duration type infer in least and greatest [#22580](https://github.com/pingcap/tidb/pull/22580)
     - Fixed LIKE expressions when a single character (`_`) wildcard follows a multiple character wildcard (`%`). [#22575](https://github.com/pingcap/tidb/pull/22575)
     - Expression: fix type infer for TiDB's builtin compare(least and greatest) [#22562](https://github.com/pingcap/tidb/pull/22562)
@@ -102,6 +129,8 @@ TiDB version: 4.0.11
 
     - Fix the issue that member health metrics not correct [#3368](https://github.com/pingcap/pd/pull/3368)
     - If a tombstone store still has peers, make it cannot be removed. [#3352](https://github.com/pingcap/pd/pull/3352)
+    - Fix the issue that the store limit cannot be persisted [#3403](https://github.com/pingcap/pd/pull/3403)
+    - Fix the limit constriction of the scatter range scheduler [#3401](https://github.com/pingcap/pd/pull/3401)
 
 + TiFlash
 
@@ -109,42 +138,28 @@ TiDB version: 4.0.11
     - Fix the bug that TiFlash may crash when reading data [#1358](https://github.com/pingcap/tics/pull/1358)
     - Fix the issue that some data written after DDL operation may be lost after data compaction [#1350](https://github.com/pingcap/tics/pull/1350)
 
-## 请判断以下 note 是否为本次发版所需。如果是，请移动到以上分类中或指出其所属分类。如果不是，请删除相应的 note
-
-+ TiDB
-
-    - Incorporate unicode_ci into constant propagation [#22614](https://github.com/pingcap/tidb/pull/22614)
-    - Fix an issue that cause wrong collation and coercibility [#22602](https://github.com/pingcap/tidb/pull/22602)
-    - Fix an issue that may get wrong collation result [#22599](https://github.com/pingcap/tidb/pull/22599)
-    - Refine `CollationStrictness` to support incompatible strictnessship [#22582](https://github.com/pingcap/tidb/pull/22582)
-    - Implement `utf8_unicode_ci` and `utf8mb4_unicode_ci` collation [#22558](https://github.com/pingcap/tidb/pull/22558)
-    - Metrics: grafana dashboards support multiple clusters [#22534](https://github.com/pingcap/tidb/pull/22534)
-    - Fix a bug that the `like` function returns the wrong result when using collation [#22531](https://github.com/pingcap/tidb/pull/22531)
-    - TiDB 4.0.9 fixed a security issue, where TiDB incorrectly permitted multiple statements to be executed in one `COM_QUERY` packet, leading to increased risk of SQL injection. To provide backwards compatibility for applications that depend on this behavior, a new option `tidb_multi_statement_mode` has been added. Assuming you understand the security risks, you can revert to the 4.0.8 by executing `SET GLOBAL tidb_multi_statement_mode='ON'`. The default behavior of `tidb_multi_statement_mode` also relaxes the error introduced in 4.0.9 to a warning. It is intended to be changed to an error again in a future release. [#22468](https://github.com/pingcap/tidb/pull/22468)
-    - Metrics slow query is divided into internal and general [#22405](https://github.com/pingcap/tidb/pull/22405)
-    - Add `utf8_unicode_ci` and `utf8mb4_unicode_ci` interface. [#22099](https://github.com/pingcap/tidb/pull/22099)
-    - Error message redact normalize. [#21889](https://github.com/pingcap/tidb/pull/21889) [#21891](https://github.com/pingcap/tidb/pull/21891) [#22669](https://github.com/pingcap/tidb/pull/22669)
-
-+ PD
-
-    - Fix the issue that the store limit cannot be persisted [#3403](https://github.com/pingcap/pd/pull/3403)
-    - Fix the limit constriction of the scatter range scheduler [#3401](https://github.com/pingcap/pd/pull/3401)
-    - Metrics: grafana dashboards support multiple clusters [#3398](https://github.com/pingcap/pd/pull/3398)
-
 + Tools
 
-    - BR
+    + TiCDC
 
-        * Fix the issue that in rawkv mode, the end key of restoring range may be included, which is expected to be exclusive. [#726](https://github.com/pingcap/br/pull/726)
+        - Fix a bug that cdc server could exit unexpected when meeting ErrTaskStatusNotExists and the capture session is disconnected at the same time [#1240](https://github.com/pingcap/ticdc/pull/1240)
+        - Fix the old-value switch of a changefeed could be affected by another changefeed [#1347](https://github.com/pingcap/ticdc/pull/1347)
+        - Fix a bug that TiCDC server could hang when processing a new changefeed with invalid sort-engine parameter [#1309](https://github.com/pingcap/ticdc/pull/1309)
+        - fix debug info panic on none owner node [#1349](https://github.com/pingcap/ticdc/pull/1349)
+        - Fix metric `ticdc_processor_num_of_tables` and `ticdc_processor_table_resolved_ts` are properly updated when processor removes a table or the processor itself stops [#1351](https://github.com/pingcap/ticdc/pull/1351)
+        - Fix potential data loss if a processor crashes when starting up a table [#1363](https://github.com/pingcap/ticdc/pull/1363)
+        - Fix a bug in the owner that could lead to abnormal CDC server exits during table migrations [#1352](https://github.com/pingcap/ticdc/pull/1352)
+        - Fix a bug TiCDC does not fail in time after service safepoint is lost [#1367](https://github.com/pingcap/ticdc/pull/1367)
+        - Fix a bug that kv client may skip to recreate event feed receiving routine by accident [#1336](https://github.com/pingcap/ticdc/pull/1336)
+        - Fix a bug that atomicity of transactions is broken in the downstream [#1375](https://github.com/pingcap/ticdc/pull/1375)
 
-    - TiCDC
+    + Backup & Restore (BR)
 
-        * Fix atomicity of transactions is broken in the downstream [#1375](https://github.com/pingcap/ticdc/pull/1375)
-        * Fix a bug that kv client may skip to recreate event feed receiving routine by accident. [#1373](https://github.com/pingcap/ticdc/pull/1373)
-        * Adjust default sort-dir and add warnings about choice of sort-dir [#1372](https://github.com/pingcap/ticdc/pull/1372)
-        * Check update safepoint error. [#1367](https://github.com/pingcap/ticdc/pull/1367)
-        * Fix potential data loss if a processor crashes when starting up a table. [#1363](https://github.com/pingcap/ticdc/pull/1363)
-        * Fix metric `ticdc_processor_num_of_tables` and `ticdc_processor_table_resolved_ts` are properly updated when processor removes a table or the processor itself stops. [#1351](https://github.com/pingcap/ticdc/pull/1351)
-        * Metrics: grafana dashboards support multiple clusters [#1350](https://github.com/pingcap/ticdc/pull/1350)
-        * Fix a bug that TiCDC server could hang when processing a new changefeed with invalid sort-engine parameter [#1326](https://github.com/pingcap/ticdc/pull/1326)
-        * Fix the output in changefeed out of order [#1323](https://github.com/pingcap/ticdc/pull/1323)
+        - Fix the issue that missing file size in SSTMeta might cause TiKV to generate a big region [#702](https://github.com/pingcap/br/pull/702)
+        - Fix the issue that br restores table auto id even if the table does not have one [#720](https://github.com/pingcap/br/pull/720)
+
+    + TiDB Lightning
+
+        - Fix the bug that TiDB-Lightning will trim all the empty sep when trim-last-sep is true, which causes "column count mismatch" in tidb backend [#535](https://github.com/pingcap/tidb-lightning/pull/535)
+        - Fix the bug that tidb backend will panics if source file columns are more than target    table columns [#528](https://github.com/pingcap/tidb-lightning/pull/528)
+        - Fix the bug that TiKV may panics if TiDB-Lightning retry ingest with retry write [#554](https://github.com/pingcap/tidb-lightning/pull/554)
