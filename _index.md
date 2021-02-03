@@ -19,7 +19,6 @@ Designed for the cloud, TiDB provides flexible scalability, reliability and secu
 - [Compatibility with MySQL](/mysql-compatibility.md)
 - [Usage Limitations](/tidb-limitations.md)
 - [TiDB Adopters](/adopters.md)
-- [Credits](/credits.md)
 
 </NavColumn>
 
