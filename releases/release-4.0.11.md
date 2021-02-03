@@ -105,6 +105,7 @@ TiDB version: 4.0.11
 
 + TiFlash
 
+    - Fix the bug that `min/max` result is wrong for decimal types
     - Fix the bug that TiFlash may crash when reading data [#1358](https://github.com/pingcap/tics/pull/1358)
     - Fix the issue that some data written after DDL operation may be lost after data compaction [#1350](https://github.com/pingcap/tics/pull/1350)
 
@@ -122,7 +123,7 @@ TiDB version: 4.0.11
     - TiDB 4.0.9 fixed a security issue, where TiDB incorrectly permitted multiple statements to be executed in one `COM_QUERY` packet, leading to increased risk of SQL injection. To provide backwards compatibility for applications that depend on this behavior, a new option `tidb_multi_statement_mode` has been added. Assuming you understand the security risks, you can revert to the 4.0.8 by executing `SET GLOBAL tidb_multi_statement_mode='ON'`. The default behavior of `tidb_multi_statement_mode` also relaxes the error introduced in 4.0.9 to a warning. It is intended to be changed to an error again in a future release. [#22468](https://github.com/pingcap/tidb/pull/22468)
     - Metrics slow query is divided into internal and general [#22405](https://github.com/pingcap/tidb/pull/22405)
     - Add `utf8_unicode_ci` and `utf8mb4_unicode_ci` interface. [#22099](https://github.com/pingcap/tidb/pull/22099)
-    - Error message redact normalize. [#21889](https://github.com/pingcap/tidb/pull/21889)
+    - Error message redact normalize. [#21889](https://github.com/pingcap/tidb/pull/21889) [#21891](https://github.com/pingcap/tidb/pull/21891) [#22669](https://github.com/pingcap/tidb/pull/22669)
 
 + PD
 
