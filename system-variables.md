@@ -1073,3 +1073,9 @@ This variable is an alias for _transaction_isolation_.
 - Scope: SESSION | GLOBAL
 - Default value: ON
 - This variable controls whether to use the high precision mode when computing the window functions.
+
+### tidb_enable_tiflash_fallback_tikv
+
+- Scope: SESSION | GLOBAL
+- Default value: OFF
+- This variable controls whether to retry execution with TiKV when TiFlash's failure causes execution failure of SQL statement.
