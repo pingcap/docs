@@ -108,8 +108,7 @@ trim-last-separator = false
     | `\t`     | Tab (U+0009)             |
     | `\Z`     | Windows EOF (U+001A)     |
 
-    In all other cases (e.g. `\"`) the backslash is simply stripped, leaving the next character (`"`)
-in the field.
+    In all other cases (e.g. `\"`) the backslash is simply stripped, leaving the next character (`"`) in the field.
 
 - Quoting will not affect whether backslash escapes are interpreted.
 

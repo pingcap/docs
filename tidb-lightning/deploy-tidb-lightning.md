@@ -44,10 +44,7 @@ To achieve the best performance, it is recommended to use the following hardware
     - 32+ logical cores CPU
     - An SSD large enough to store the entire data source, preferring higher read speed
     - 10 Gigabit network card (capable of transferring at ≥300 MB/s)
-    - `tidb-lightning` fully consumes all CPU cores when running,
-        and deploying on a dedicated machine is highly recommended.
-        If not possible, `tidb-lightning` could be deployed together with other components like
-        `tidb-server`, and the CPU usage could be limited via the `region-concurrency` setting.
+    - `tidb-lightning` fully consumes all CPU cores when running, and deploying on a dedicated machine is highly recommended. If not possible, `tidb-lightning` could be deployed together with other components like `tidb-server`, and the CPU usage could be limited via the `region-concurrency` setting.
 
 - `tikv-importer`:
 
