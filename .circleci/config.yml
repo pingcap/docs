@@ -19,14 +19,14 @@ jobs:
       - run:
           name: "Check file encoding"
           command: |
+            git remote add upstream https://github.com/pingcap/docs.git
+            git fetch upstream
             wget https://raw.githubusercontent.com/CharLotteiu/pingcap-docs-checks/main/check-file-encoding.py
             python3 check-file-encoding.py $(git diff-tree --name-only --no-commit-id -r upstream/master..HEAD -- '*.md' ':(exclude).github/*')
 
       - run:
           name: "Check git conflicts"
           command: |
-            git remote add upstream https://github.com/pingcap/docs.git
-            git fetch upstream
             wget https://raw.githubusercontent.com/CharLotteiu/pingcap-docs-checks/main/check-conflicts.py
             python3 check-conflicts.py $(git diff-tree --name-only --no-commit-id -r upstream/master..HEAD -- '*.md' '*.yml' '*.yaml')
 
