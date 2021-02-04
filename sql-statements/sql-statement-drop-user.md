@@ -5,8 +5,7 @@ summary: An overview of the usage of DROP USER for the TiDB database.
 
 # DROP USER
 
-This statement removes a user from the TiDB system database. The optional keyword `IF EXISTS` can be used to silence an error if the user does not exist.
-This statement requires the `CREATE USER` privilege.
+This statement removes a user from the TiDB system database. The optional keyword `IF EXISTS` can be used to silence an error if the user does not exist. This statement requires the `CREATE USER` privilege.
 
 ## Synopsis
 
