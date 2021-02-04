@@ -6,7 +6,11 @@ aliases: ['/docs/v3.1/sql-statements/sql-statement-grant-privileges/','/docs/v3.
 
 # `GRANT <privileges>`
 
+<<<<<<< HEAD
 This statement allocates privileges to a pre-existing user in TiDB. The privilege system in TiDB follows MySQL, where credentials are assigned based on a database/table pattern.
+=======
+This statement allocates privileges to a pre-existing user in TiDB. The privilege system in TiDB follows MySQL, where credentials are assigned based on a database/table pattern. Executing this statement requires the `GRANT OPTION` privilege and all privileges you allocate.
+>>>>>>> 88bce7b4... CI: add file format lint script to check manual line breaks and file encoding (#4666)
 
 ## Synopsis
 
