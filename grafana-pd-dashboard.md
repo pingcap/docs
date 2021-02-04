@@ -14,6 +14,7 @@ You can get an overview of the component PD status from the PD dashboard, where 
 
 ## Key metrics description
 
+<<<<<<< HEAD
 To understand the key metrics displayed on the Overview dashboard, check the following table:
 
 Service | Panel name | Description | Normal range
@@ -113,6 +114,96 @@ Region storage | History last index | The last index where the Region change his
 ![PD Dashboard - Operator metrics](/media/pd-dashboard-operator-v2.png)
 
 ### gRPC
+=======
+## Cluster
+
+- PD scheduler config: The list of PD scheduler configurations
+- Cluster ID: The unique identifier of the cluster
+- Current TSO: The physical part of current allocated TSO
+- Current ID allocation: The maximum allocatable ID for new store/peer
+- Region label isolation level: The number of Regions in different label levels
+- Label distribution: The distribution status of the labels in the cluster
+
+![PD Dashboard - Cluster metrics](/media/pd-dashboard-cluster-v4.png)
+
+## Operator
+
+- Schedule operator create: The number of newly created operators per type
+- Schedule operator check: The number of checked operator per type. It mainly checks whether the current step is finished; if yes, it returns the next step to be executed
+- Schedule operator finish: The number of finished operators per type
+- Schedule operator timeout: The number of timeout operators per type
+- Schedule operator replaced or canceled: The number of replaced or canceled operators per type
+- Schedule operators count by state: The number of operators per state
+- Operator finish duration: The maximum duration of finished operators
+- Operator step duration: The maximum duration of finished operator steps
+
+![PD Dashboard - Operator metrics](/media/pd-dashboard-operator-v4.png)
+
+## Statistics - Balance
+
+- Store capacity: The capacity size per TiKV instance
+- Store available: The available capacity size per TiKV instance
+- Store used: The used capacity size per TiKV instance
+- Size amplification: The size amplification ratio per TiKV instance, which is equal to (Store Region size)/(Store used capacity size)
+- Size available ratio: The size availability ratio per TiKV instance, which is equal to (Store available capacity size)/(Store capacity size)
+- Store leader score: The leader score per TiKV instance
+- Store Region score: The Region score per TiKV instance
+- Store leader size: The total leader size per TiKV instance
+- Store Region size: The total Region size per TiKV instance
+- Store leader count: The leader count per TiKV instance
+- Store Region count: The Region count per TiKV instance
+
+![PD Dashboard - Balance metrics](/media/pd-dashboard-balance-v4.png)
+
+## Statistics - hot write
+
+- Hot Region's leader distribution: The total number of leader Regions that have become write hotspots on each TiKV instance
+- Total written bytes on hot leader Regions: The total written bytes by leader Regions that have become write hotspots on each TiKV instance
+- Hot write Region's peer distribution: The total number of peer Regions that have become write hotspots on each TiKV instance
+- Total written bytes on hot peer Regions: The written bytes of all peer Regions that have become write hotspots on each TiKV instance
+- Store Write rate bytes: The total written bytes on each TiKV instance
+- Store Write rate keys: The total written keys on each TiKV instance
+- Hot cache write entry number: The number of peers on each TiKV instance that are in the write hotspot statistics module
+- Selector events: The event count of Selector in the hotspot scheduling module
+- Direction of hotspot move leader: The direction of leader movement in the hotsport scheduling. The positive number means scheduling into the instance. The negtive number means scheduling out of the instance
+- Direction of hotspot move peer: The direction of peer movement in the hotspot scheduling. The positive number means scheduling into the instance. The negative number means scheduling out of the instance
+
+![PD Dashboard - Hot write metrics](/media/pd-dashboard-hotwrite-v4.png)
+
+## Statistics - hot read
+
+- Hot Region's leader distribution: The total number of leader Regions that have become read hotspots on each TiKV instance
+- Total read bytes on hot leader Regions: The total read bytes of leaders that have become read hotspots on each TiKV instance
+- Store read rate bytes: The total read bytes of each TiKV instance
+- Store read rate keys: The total read keys of each TiKV instance
+- Hot cache read entry number: The number of peers that are in the read hotspot statistics module on each TiKV instance
+
+![PD Dashboard - Hot read metrics](/media/pd-dashboard-hotread-v4.png)
+
+## Scheduler
+
+- Scheduler is running: The current running schedulers
+- Balance leader movement: The leader movement details among TiKV instances
+- Balance Region movement: The Region movement details among TiKV instances
+- Balance leader event: The count of balance leader events
+- Balance Region event: The count of balance Region events
+- Balance leader scheduler: The inner status of balance leader scheduler
+- Balance Region scheduler: The inner status of balance Region scheduler
+- Replica checker: The replica checker's status
+- Rule checker: The rule checker's status
+- Region merge checker: The merge checker's status
+- Filter target: The number of attempts that the store is selected as the scheduling target but failed to pass the filter
+- Filter source: The number of attempts that the store is selected as the scheduling source but failed to pass the filter
+- Balance Direction: The number of times that the Store is selected as the target or source of scheduling
+- Store Limit: The flow control limitation of scheduling on the Store
+
+![PD Dashboard - Scheduler metrics](/media/pd-dashboard-scheduler-v4.png)
+
+## gRPC
+
+- Completed commands rate: The rate per command type at which gRPC commands are completed
+- 99% Completed commands duration: The rate per command type at which gRPC commands are completed (P99)
+>>>>>>> 88bce7b4... CI: add file format lint script to check manual line breaks and file encoding (#4666)
 
 ![PD Dashboard - gRPC metrics](/media/pd-dashboard-grpc-v2.png)
 
