@@ -62,8 +62,12 @@ or [CSV files](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md) stored 
 
 ## Could TiDB Lightning skip creating schema and tables?
 
+<<<<<<< HEAD
 Yes. If you have already created the tables in the target database, you could set `no-schema = true` in the `[mydumper]` section in `tidb-lightning.toml`. This makes Lightning skip the
 `CREATE TABLE` invocations and fetch the metadata directly from the target database. Lightning will exit with error if a table is actually missing.
+=======
+Yes. If you have already created the tables in the target database, you could set `no-schema = true` in the `[mydumper]` section in `tidb-lightning.toml`. This makes TiDB Lightning skip the `CREATE TABLE` invocations and fetch the metadata directly from the target database. TiDB Lightning will exit with error if a table is actually missing.
+>>>>>>> 88bce7b4... CI: add file format lint script to check manual line breaks and file encoding (#4666)
 
 ## Can the Strict SQL Mode be disabled to allow importing invalid data?
 
