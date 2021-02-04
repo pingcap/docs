@@ -116,8 +116,7 @@ tidb-lightning-ctl --switch-mode=normal
 
 ## Can TiDB Lightning be used with 1-Gigabit network card?
 
-The TiDB Lightning toolset requires a 10-Gigabit network card. The 1-Gigabit network card is *not acceptable*, especially for `tikv-importer`.
-A 1-Gigabit network card can only provide a total bandwidth of 120 MB/s, which has to be shared among all target TiKV stores. TiDB Lightning can easily saturate all bandwidth of the 1-Gigabit network, and brings down the cluster because PD is unable to contact it anymore.
+The TiDB Lightning toolset requires a 10-Gigabit network card. The 1-Gigabit network card is *not acceptable*, especially for `tikv-importer`. A 1-Gigabit network card can only provide a total bandwidth of 120 MB/s, which has to be shared among all target TiKV stores. TiDB Lightning can easily saturate all bandwidth of the 1-Gigabit network, and brings down the cluster because PD is unable to contact it anymore.
 
 ## Why TiDB Lightning requires so much free space in the target TiKV cluster?
 
