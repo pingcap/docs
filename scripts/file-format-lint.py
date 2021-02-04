@@ -20,6 +20,31 @@ def check_BOM(filename):
             fp.truncate()
             print("\n" + filename + ": this file's encoding has been converted to UTF-8 without BOM to avoid broken metadata display.")
 
+# Check control characters.
+def check_control_char(filename):
+
+    lineNum = 0
+    pos = []
+    flag = 0
+
+    with open(filename,'r') as file:
+        for line in file:
+
+            lineNum += 1
+
+            if re.search(r'[\b]', line):
+                pos.append(lineNum)
+                flag = 1
+
+    if flag:
+        print("\n" + filename + ": this file has control characters in the following lines:\n")
+        for cc in pos:
+            print("CONTROL CHARACTERS IN L" + str(cc))
+        print("Please delete these control characters.")
+
+    return flag
+
+
 # Check manual line break within a paragraph.
 def check_manual_break(filename):
 
@@ -91,8 +116,9 @@ if __name__ == "__main__":
     for filename in sys.argv[1:]:
         if os.path.isfile(filename):
             check_BOM(filename)
+            flag = check_control_char(filename)
             mark = check_manual_break(filename)
-            if mark:
+            if mark or flag:
                 count+=1
 
     if count:
