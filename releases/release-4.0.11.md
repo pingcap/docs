@@ -28,41 +28,41 @@ TiDB version: 4.0.11
 + TiDB
 
     - Reorder inner joins that are simplified from outer joins [#22402](https://github.com/pingcap/tidb/pull/22402)
-    - Supports multiple clusters in Grafana dashboards [#22534](https://github.com/pingcap/tidb/pull/22534)
+    - Support multiple clusters in Grafana dashboards [#22534](https://github.com/pingcap/tidb/pull/22534)
     - Add a workaround for the issue of multiple statements [#22468](https://github.com/pingcap/tidb/pull/22468)
     - Divide the metrics of slow query into `internal` and `general` [#22405](https://github.com/pingcap/tidb/pull/22405)
-    - Add the interface for `utf8_unicode_ci` and `utf8mb4_unicode_ci` collations [#22099](https://github.com/pingcap/tidb/pull/22099)
+    - Add interface for `utf8_unicode_ci` and `utf8mb4_unicode_ci` collations [#22099](https://github.com/pingcap/tidb/pull/22099)
 
 + TiKV
 
     - Add metrics of server information for DBasS [#9591](https://github.com/tikv/tikv/pull/9591)
-    - Supports multiple clusters in Grafana dashboards [#9572](https://github.com/tikv/tikv/pull/9572)
+    - Support multiple clusters in Grafana dashboards [#9572](https://github.com/tikv/tikv/pull/9572)
     - Report RocksDB metrics to TiDB [#9316](https://github.com/tikv/tikv/pull/9316)
     - Record the suspension time for Coprocessor tasks [#9277](https://github.com/tikv/tikv/pull/9277)
-    - Add thresholds of key counts and key size for load-base-split [#9354](https://github.com/tikv/tikv/pull/9354)
+    - Add thresholds of key counts and key size for Load Base Split [#9354](https://github.com/tikv/tikv/pull/9354)
     - Check whether the file exists before data import [#9544](https://github.com/tikv/tikv/pull/9544)
     - Improve Fast Tune panels [#9180](https://github.com/tikv/tikv/pull/9180)
 
 + PD
 
-    - Supports multiple clusters in Grafana dashboards [#3398](https://github.com/pingcap/pd/pull/3398)
+    - Support multiple clusters in Grafana dashboards [#3398](https://github.com/pingcap/pd/pull/3398)
 
 + TiFlash
 
-    - Optimize the performance of the `date_format` function in TiFlash
+    - Optimize the performance of the `date_format` function
     - Optimize the memory consumption of handling ingest SST
 
 + Tools
 
     + TiCDC
 
-        - Add the version information in the `capture` metadata and add the CLI version of a `changefeed` in its metadata [#1342](https://github.com/pingcap/ticdc/pull/1342)
+        - Add the version information in the `capture` metadata and add the CLI version of a `changefeed` in the `changefeed` metadata [#1342](https://github.com/pingcap/ticdc/pull/1342)
 
     + TiDB Lightning
 
-        - Create tables in parallel to improve the import performance [#502](https://github.com/pingcap/tidb-lightning/pull/502)
-        - Skip splitting Regions to improve the import performance if the engine's total size is smaller than the Region size [#524](https://github.com/pingcap/tidb-lightning/pull/524)
-        - Add the import progress bar and optimize the accuracy of restore progress [#506](https://github.com/pingcap/tidb-lightning/pull/506)
+        - Create tables in parallel to improve import performance [#502](https://github.com/pingcap/tidb-lightning/pull/502)
+        - Skip splitting Regions to improve import performance if the engine's total size is smaller than the Region size [#524](https://github.com/pingcap/tidb-lightning/pull/524)
+        - Add a import progress bar and optimize the accuracy of restore progress [#506](https://github.com/pingcap/tidb-lightning/pull/506)
 
 ## Bug Fixes
 
@@ -71,11 +71,11 @@ TiDB version: 4.0.11
     - Fix the issue of abnormal `unicode_ci` constant propagation [#22614](https://github.com/pingcap/tidb/pull/22614)
     - Fix the issue that might causes wrong collation and coercibility [#22602](https://github.com/pingcap/tidb/pull/22602)
     - Fix the issue that might cause wrong collation results [#22599](https://github.com/pingcap/tidb/pull/22599)
-    - Fix the issue of constant substitution between collations [#22582](https://github.com/pingcap/tidb/pull/22582)
-    - Fix a bug that the `like` function might return the wrong result when using collation [#22531](https://github.com/pingcap/tidb/pull/22531)
-    - Fix the error of inferring the `duration` type in `least` and `greatest` functions [#22580](https://github.com/pingcap/tidb/pull/22580)
+    - Fix the issue of constant substitution for different collations [#22582](https://github.com/pingcap/tidb/pull/22582)
+    - Fix a bug that the `like` function might return wrong result when using collation [#22531](https://github.com/pingcap/tidb/pull/22531)
+    - Fix the issue of incorrect `duration` type inference in `least` and `greatest` functions [#22580](https://github.com/pingcap/tidb/pull/22580)
     - Fix a bug that occurs when the `like` function handles a single character wildcard (`_`) followed by a multiple character wildcard (`%`) [#22575](https://github.com/pingcap/tidb/pull/22575)
-    - Fix the error of type inference when comparing TiDB's built-in functions (least and greatest) [#22562](https://github.com/pingcap/tidb/pull/22562)
+    - Fix the error of type inference when comparing TiDB's built-in functions (`least` and `greatest`) [#22562](https://github.com/pingcap/tidb/pull/22562)
     - Fix a bug that makes the `like` function get the wrong result if the pattern string is a unicode string [#22529](https://github.com/pingcap/tidb/pull/22529)
     - Fix a bug that the point get query does not get the snapshot data when the `@@tidb_snapshot` variable is set [#22527](https://github.com/pingcap/tidb/pull/22527)
     - Fix the potential panic that occurs when generating hints from joins [#22518](https://github.com/pingcap/tidb/pull/22518)
@@ -84,15 +84,15 @@ TiDB version: 4.0.11
     - Fix a bug that the cached plan is incorrectly used [#22353](https://github.com/pingcap/tidb/pull/22353)
     - Fix the runtime panic in the `WEIGHT_STRING` function when the length of the binary/char string is too large [#22332](https://github.com/pingcap/tidb/pull/22332)
     - Fix the issue that the generated column is incorrectly used when argument numbers are invalid [#22174](https://github.com/pingcap/tidb/pull/22174)
-    - Show the process information when building the execution plan [#22148](https://github.com/pingcap/tidb/pull/22148)
+    - Correctly set the process information before building the execution plan [#22148](https://github.com/pingcap/tidb/pull/22148)
     - Fix the issue of inaccurate runtime statistics of `IndexLookUp` [#22136](https://github.com/pingcap/tidb/pull/22136)
-    - Add cache for the memory usage information when the cluster is deployed in container [#22116](https://github.com/pingcap/tidb/pull/22116)
+    - Add cache for the memory usage information when the cluster is deployed in a container [#22116](https://github.com/pingcap/tidb/pull/22116)
     - Fix the issue that the execution plan is incorrectly decoded [#22022](https://github.com/pingcap/tidb/pull/22022)
     - Report errors for using invalid window specifications [#21976](https://github.com/pingcap/tidb/pull/21976)
     - Throw errors when the `PREPARE` statement is nested with `EXECUTE`, `DEALLOCATE` or `PREPARE` [#21972](https://github.com/pingcap/tidb/pull/21972)
     - Fix the issue that no error is reported when the `INSERT IGNORE` statement is used on a non-existing partition [#21971](https://github.com/pingcap/tidb/pull/21971)
-    - Unify the encoding for `EXPLAIN` results and slow log [#21964](https://github.com/pingcap/tidb/pull/21964)
-    - Fix the issue of unknown column in join when using the aggregation function [#21957](https://github.com/pingcap/tidb/pull/21957)
+    - Unify the encoding of `EXPLAIN` results and slow log [#21964](https://github.com/pingcap/tidb/pull/21964)
+    - Fix the issue of unknown column in join when using the aggregate operator [#21957](https://github.com/pingcap/tidb/pull/21957)
     - Fix the wrong type inference in the `ceiling` function [#21936](https://github.com/pingcap/tidb/pull/21936)
     - Fix the issue that the `Double` type column ignores its decimal [#21916](https://github.com/pingcap/tidb/pull/21916)
     - Fix the issue that the correlated aggregation is calculated in subqueries [#21877](https://github.com/pingcap/tidb/pull/21877)
@@ -110,17 +110,17 @@ TiDB version: 4.0.11
     - Fix the issue that `LEAD` and `LAG`'s default value cannot adapt to the field type [#21665](https://github.com/pingcap/tidb/pull/21665)
     - Perform a check to ensure that the `LOAD DATA` statement can only load data into base tables [#21638](https://github.com/pingcap/tidb/pull/21638)
     - Fix the issue that occurs when `addtime` and `subtime` functions handle invalid arguments [#21635](https://github.com/pingcap/tidb/pull/21635)
-    - Change the round rule for approximate values to "round to nearest even" [#21628](https://github.com/pingcap/tidb/pull/21628)
+    - Change the round rule for approximate values to "round to the nearest even number" [#21628](https://github.com/pingcap/tidb/pull/21628)
     - Fix the issue that `WEEK()` does not recognize `@@GLOBAL.default_week_format` until it has been explicitly read [#21623](https://github.com/pingcap/tidb/pull/21623)
 
 + TiKV
 
     - Fix the issue that TiKV is failed to build with `PROST=1` [#9604](https://github.com/tikv/tikv/pull/9604)
-    - Fix the unmatched memory information [#9589](https://github.com/tikv/tikv/pull/9589)
+    - Fix the unmatched memory diagnostics [#9589](https://github.com/tikv/tikv/pull/9589)
     - Fix the issue that the end key of a partial RawKV-restore range is inclusive [#9583](https://github.com/tikv/tikv/pull/9583)
-    - Fix the issue that TiKV might panic when loading the old value of a key in a rolled-back transaction during TiCDC's incremental scan [#9569](https://github.com/tikv/tikv/pull/9569)
+    - Fix the issue that TiKV might panic when loading the old value of a key of a rolled-back transaction during TiCDC's incremental scan [#9569](https://github.com/tikv/tikv/pull/9569)
     - Fix the configuration glitch of old values when changefeeds with different settings connect to one Region [#9565](https://github.com/tikv/tikv/pull/9565)
-    - Fix a crash issue that occurs when running a TiKV cluster on a machine with a network interface without the MAC address (introduced in v4.0.9) [#9516](https://github.com/tikv/tikv/pull/9516)
+    - Fix a crash issue that occurs when running a TiKV cluster on a machine with a network interface that lacks the MAC address (introduced in v4.0.9) [#9516](https://github.com/tikv/tikv/pull/9516)
     - Fix the issue of TiKV OOM when backing up a huge Region [#9448](https://github.com/tikv/tikv/pull/9448)
     - Fix the issue that `region-split-check-diff` cannot be customized [#9530](https://github.com/tikv/tikv/pull/9530)
     - Fix the issue of TiKV panic when the system time goes back [#9542](https://github.com/tikv/tikv/pull/9542)
@@ -147,7 +147,7 @@ TiDB version: 4.0.11
         - Fix a bug that the TiCDC service might hang when processing a new `changefeed` with invalid the `sort-engine` parameter [#1309](https://github.com/pingcap/ticdc/pull/1309)
         - Fix the issue of panic that occurs when getting the debugging information on none owner nodes [#1349](https://github.com/pingcap/ticdc/pull/1349)
         - Fix the issue that the `ticdc_processor_num_of_tables` and `ticdc_processor_table_resolved_ts` metrics are not properly updated when when adding or removing tables [#1351](https://github.com/pingcap/ticdc/pull/1351)
-        - Fix the issue of potential data loss if a processor crashes when starting up a table [#1363](https://github.com/pingcap/ticdc/pull/1363)
+        - Fix the issue of potential data loss if a processor crashes when adding a table [#1363](https://github.com/pingcap/ticdc/pull/1363)
         - Fix a bug that the owner might lead to abnormal TiCDC server exits during table migrations [#1352](https://github.com/pingcap/ticdc/pull/1352)
         - Fix a bug that TiCDC does not exit in time after the service GC safepoint is lost [#1367](https://github.com/pingcap/ticdc/pull/1367)
         - Fix a bug that the KV client might skip creating the event feed [#1336](https://github.com/pingcap/ticdc/pull/1336)
