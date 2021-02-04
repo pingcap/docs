@@ -46,7 +46,8 @@ jobs:
       - run:
           name: "Check manual line breaks and file encoding"
           command: |
-            python3 scripts/file-format-lint.py $(git diff-tree --name-only --no-commit-id -r upstream/master..HEAD -- '*.md' ':(exclude).github/*')
+            wget https://raw.githubusercontent.com/CharLotteiu/file-format-lint/main/file-format-lint.py
+            python3 file-format-lint.py $(git diff-tree --name-only --no-commit-id -r upstream/master..HEAD -- '*.md' ':(exclude).github/*')
 
       - run:
           name: "Check unclosed tags"
