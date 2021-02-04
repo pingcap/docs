@@ -61,13 +61,9 @@ See the following for the situations when the `tikv-server` cannot be started:
 See the following for the situations when the `pd-server` cannot be started:
 
 - Error in the startup parameters.
-<<<<<<< HEAD
+
     See the [PD configuration and options](/pd-configuration-file.md).
-=======
 
-    See the [PD configuration and options](/command-line-flags-for-pd-configuration.md).
-
->>>>>>> 88bce7b4... CI: add file format lint script to check manual line breaks and file encoding (#4666)
 - The port is occupied.
 
     Use the `lsof -i:port` command to show all the networking related to a given port and make sure the port to start the `pd-server` is not occupied.

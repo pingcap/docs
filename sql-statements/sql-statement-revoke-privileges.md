@@ -6,11 +6,7 @@ aliases: ['/docs/v2.1/sql-statements/sql-statement-revoke-privileges/','/docs/v2
 
 # `REVOKE <privileges>`
 
-<<<<<<< HEAD
 This statement removes privileges from an existing user.
-=======
-This statement removes privileges from an existing user. Executing this statement requires the `GRANT OPTION` privilege and all privileges you revoke.
->>>>>>> 88bce7b4... CI: add file format lint script to check manual line breaks and file encoding (#4666)
 
 ## Synopsis
 

@@ -107,23 +107,6 @@ key: zmDB:29\000\000\377\000\374\000\000\000\000\000\000\377\000H\000\000\000\00
 
 In this command, the key is also the escaped form of raw key.
 
-<<<<<<< HEAD
-=======
-### Scan raw keys
-
-The `raw-scan` command scans directly from the RocksDB. Note that to scan data keys you need to add a `'z'` prefix to keys.
-
-Use `--from` and `--to` options to specify the range to scan (unbounded by default). Use `--limit` to limit at most how many keys to print out (30 by default). Use `--cf` to specify which cf to scan (can be `default`, `write` or `lock`).
-
-```bash
-$ ./tikv-ctl --db /var/lib/tikv/db/ raw-scan --from 'zt' --limit 2 --cf default
-key: "zt\200\000\000\000\000\000\000\377\005_r\200\000\000\000\000\377\000\000\001\000\000\000\000\000\372\372b2,^\033\377\364", value: "\010\002\002\002%\010\004\002\010root\010\006\002\000\010\010\t\002\010\n\t\002\010\014\t\002\010\016\t\002\010\020\t\002\010\022\t\002\010\024\t\002\010\026\t\002\010\030\t\002\010\032\t\002\010\034\t\002\010\036\t\002\010 \t\002\010\"\t\002\010s\t\002\010&\t\002\010(\t\002\010*\t\002\010,\t\002\010.\t\002\0100\t\002\0102\t\002\0104\t\002"
-key: "zt\200\000\000\000\000\000\000\377\025_r\200\000\000\000\000\377\000\000\023\000\000\000\000\000\372\372b2,^\033\377\364", value: "\010\002\002&slow_query_log_file\010\004\002P/usr/local/mysql/data/localhost-slow.log"
-
-Total scanned keys: 2
-```
-
->>>>>>> 88bce7b4... CI: add file format lint script to check manual line breaks and file encoding (#4666)
 ### Print a specific key value
 
 To print the value of a key, use the `print` command.
@@ -150,15 +133,7 @@ The properties can be used to check whether the Region is healthy or not. If not
 
 ### Compact data of each TiKV manually
 
-<<<<<<< HEAD
 Use the `compact` command to manually compact data of each TiKV. If you specify the `--from` and `--to` options, then their flags are also in the form of escaped raw key. You can use the `--host` option to specify the TiKV that you need to compact. The `-d` option is used to specify the RocksDB that will be compacted. The optional values are `kv` and `raft`. Also, the `--threads` option allows you to specify the concurrency that you compact and its default value is 8. Generally, a higher concurrency comes with a faster compact speed, which might yet affect the service. You need to choose an appropriate concurrency based on the scenario.
-=======
-Use the `compact` command to manually compact data of each TiKV. If you specify the `--from` and `--to` options, then their flags are also in the form of escaped raw key.
-
-- Use the `--host` option to specify the TiKV that you need to compact.
-- Use the `-d` option to specify the RocksDB that you need to compact. The optional values are `kv` and `raft`.
-- Use the `--threads` option allows you to specify the concurrency that you compact and its default value is 8. Generally, a higher concurrency comes with a faster compact speed, which might yet affect the service. You need to choose an appropriate concurrency based on the scenario.
->>>>>>> 88bce7b4... CI: add file format lint script to check manual line breaks and file encoding (#4666)
 
 ```bash
 $ tikv-ctl --host 127.0.0.1:20160 compact -d kv
@@ -305,87 +280,4 @@ success!
 >
 > - This command only supports the local mode. It prints `success!` when successfully run.
 > - The argument of the `-p` option specifies the PD endpoints without the `http` prefix. Specifying the PD endpoints is to query whether the specified `region_id` is validated or not.
-<<<<<<< HEAD
 > - You need to run this command for all stores where specified Regions' peers locate.
-=======
-> - You need to run this command for all stores where specified Regions' peers are located.
-
-### Ldb Command
-
-The `ldb` command line tool offers multiple data access and database administration commands. Some examples are listed below. For more information, refer to the help message displayed when running `tikv-ctl ldb` or check the documents from RocksDB.
-
-Examples of data access sequence:
-
-To dump an existing RocksDB in HEX:
-
-```bash
-$ tikv-ctl ldb --hex --db=/tmp/db dump
-```
-
-To dump the manifest of an existing RocksDB:
-
-```bash
-$ tikv-ctl ldb --hex manifest_dump --path=/tmp/db/MANIFEST-000001
-```
-
-You can specify the column family that your query is against using the `--column_family=<string>` command line.
-
-`--try_load_options` loads the database options file to open the database. It is recommended to always keep this option on when the database is running. If you open the database with default options, the LSM-tree might be messed up, which cannot be recovered automatically.
-
-### Dump encryption metadata
-
-Use the `encryption-meta` subcommand to dump encryption metadata. The subcommand can dump two types of metadata: encryption info for data files, and the list of data encryption keys used.
-
-To dump encryption info for data files, use the `encryption-meta dump-file` subcommand. You need to create a TiKV config file to specify `data-dir` for the TiKV deployment:
-
-```
-# conf.toml
-[storage]
-data-dir = "/path/to/tikv/data"
-```
-
-The `--path` option can be used to specify an absolute or relative path to the data file of interest. The command might give empty output if the data file is not encrypted. If `--path` is not provided, encryption info for all data files will be printed.
-
-```bash
-$ tikv-ctl --config=./conf.toml encryption-meta dump-file --path=/path/to/tikv/data/db/CURRENT
-/path/to/tikv/data/db/CURRENT: key_id: 9291156302549018620 iv: E3C2FDBF63FC03BFC28F265D7E78283F method: Aes128Ctr
-```
-
-To dump data encryption keys, use the `encryption-meta dump-key` subcommand. In additional to `data-dir`, you also need to specify the current master key used in the config file. For how to config master key, refer to [Encryption-At-Rest](/encryption-at-rest.md). Also with this command, the `security.encryption.previous-master-key` config will be ignored, and the master key rotation will not be triggered.
-
-```
-# conf.toml
-[storage]
-data-dir = "/path/to/tikv/data"
-
-[security.encryption.master-key]
-type = "kms"
-key-id = "0987dcba-09fe-87dc-65ba-ab0987654321"
-region = "us-west-2"
-```
-
-Note if the master key is a AWS KMS key, `tikv-ctl` needs to have access to the KMS key. Access to a AWS KMS key can be granted to `tikv-ctl` via environment variable, AWS default config file, or IAM role, whichever is suitable. Refer to AWS document for usage.
-
-The `--ids` option can be used to specified a list of comma-separated data encryption key ids to print. If `--ids` is not provided, all data encryption keys will be printed, along with current key id, which is the id of the latest active data encryption key.
-
-When using the command, you will see a prompt warning that the action will expose sensitive information. Type "I consent" to continue.
-
-```bash
-$ ./tikv-ctl --config=./conf.toml encryption-meta dump-key
-This action will expose encryption key(s) as plaintext. Do not output the result in file on disk.
-Type "I consent" to continue, anything else to exit: I consent
-current key id: 9291156302549018620
-9291156302549018620: key: 8B6B6B8F83D36BE2467ED55D72AE808B method: Aes128Ctr creation_time: 1592938357
-```
-
-```bash
-$ ./tikv-ctl --config=./conf.toml encryption-meta dump-key --ids=9291156302549018620
-This action will expose encryption key(s) as plaintext. Do not output the result in file on disk.
-Type "I consent" to continue, anything else to exit: I consent
-9291156302549018620: key: 8B6B6B8F83D36BE2467ED55D72AE808B method: Aes128Ctr creation_time: 1592938357
-```
-
-> **Note**
->
-> The command will expose data encryption keys as plaintext. In production, DO NOT redirect the output to a file. Even deleting the output file afterward may not cleanly wipe out the content from disk.
->>>>>>> 88bce7b4... CI: add file format lint script to check manual line breaks and file encoding (#4666)

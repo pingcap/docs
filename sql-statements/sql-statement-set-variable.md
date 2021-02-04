@@ -6,15 +6,7 @@ aliases: ['/docs/v2.1/sql-statements/sql-statement-set-variable/','/docs/v2.1/re
 
 # `SET [GLOBAL|SESSION] <variable>`
 
-<<<<<<< HEAD
 The statement `SET [GLOBAL|SESSION]` modifies one of TiDB's built in variables, of either `SESSION` or `GLOBAL` scope. Note that similar to MySQL, changes to `GLOBAL` variables will not apply to either existing connections, or the local connection. Only new sessions will reflect the changes to the value.
-=======
-The statement `SET [GLOBAL|SESSION]` modifies one of TiDB's built in variables, of either `SESSION` or `GLOBAL` scope.
-
-> **Note:**
->
-> Similar to MySQL, changes to `GLOBAL` variables do not apply to either existing connections, or the local connection. Only new sessions reflect the changes to the value.
->>>>>>> 88bce7b4... CI: add file format lint script to check manual line breaks and file encoding (#4666)
 
 ## Synopsis
 
