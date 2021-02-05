@@ -46,7 +46,7 @@ To understand the key metrics displayed on the Overview dashboard, check the fol
 | Server | Average Region written keys | The average rate of written keys to Regions per TiKV instance |
 | Server | Average Region written bytes | The average rate of writing bytes to Regions per TiKV instance |
 | Server | Active written leaders | The number of leaders being written on each TiKV instance |
-Server | Approximate Region size | The approximate Region size |
+| Server | Approximate Region size | The approximate Region size |
 | Raft IO | Apply log duration | The time consumed for Raft to apply logs |
 | Raft IO | Apply log duration per server | The time consumed for Raft to apply logs per TiKV instance |
 | Raft IO | Append log duration | The time consumed for Raft to append logs |
