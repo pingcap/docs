@@ -6,13 +6,11 @@ aliases: ['/docs/v3.0/tidb-lightning/migrate-from-csv-using-tidb-lightning/','/d
 
 # TiDB Lightning CSV Support
 
-TiDB Lightning supports reading CSV (comma-separated values) data source, as well as other
-delimited format such as TSV (tab-separated values).
+TiDB Lightning supports reading CSV (comma-separated values) data source, as well as other delimited format such as TSV (tab-separated values).
 
 ## File name
 
-A CSV file representing a whole table must be named as `db_name.table_name.csv`. This will be
-restored as a table `table_name` inside the database `db_name`.
+A CSV file representing a whole table must be named as `db_name.table_name.csv`. This will be restored as a table `table_name` inside the database `db_name`.
 
 If a table spans multiple CSV files, they should be named like `db_name.table_name.003.csv`.
 
@@ -20,18 +18,14 @@ The file extension must be `*.csv`, even if the content is not separated by comm
 
 ## Schema
 
-CSV files are schema-less. To import them into TiDB, a table schema must be provided. This could be
-done either by:
+CSV files are schema-less. To import them into TiDB, a table schema must be provided. This could be done either by:
 
-* Providing a file named `db_name.table_name-schema.sql` containing the `CREATE TABLE` DDL
-    statement
-* Creating the empty tables directly in TiDB in the first place, and then setting
-    `[mydumper] no-schema = true` in `tidb-lightning.toml`.
+* Providing a file named `db_name.table_name-schema.sql` containing the `CREATE TABLE` DDL statement
+* Creating the empty tables directly in TiDB in the first place, and then setting `[mydumper] no-schema = true` in `tidb-lightning.toml`.
 
 ## Configuration
 
-The CSV format can be configured in `tidb-lightning.toml` under the `[mydumper.csv]` section.
-Most settings have a corresponding option in the MySQL [`LOAD DATA`] statement.
+The CSV format can be configured in `tidb-lightning.toml` under the `[mydumper.csv]` section. Most settings have a corresponding option in the MySQL [`LOAD DATA`] statement.
 
 ```toml
 [mydumper.csv]
@@ -83,14 +77,12 @@ trim-last-separator = false
 ### `header`
 
 - Whether *all* CSV files contain a header row.
-- If `header` is true, the first row will be used as the
-*column names*. If `header` is false, the first row is not special and treated as an ordinary data row.
+- If `header` is true, the first row will be used as the *column names*. If `header` is false, the first row is not special and treated as an ordinary data row.
 
 ### `not-null` and `null`
 
 - The `not-null` setting controls whether all fields are non-nullable.
-- If `not-null` is false, the
-string specified by `null` will be transformed to the SQL NULL instead of a concrete value.
+- If `not-null` is false, the string specified by `null` will be transformed to the SQL NULL instead of a concrete value.
 - Quoting will not affect whether a field is null.
 
     For example, with the CSV file:
@@ -100,15 +92,12 @@ string specified by `null` will be transformed to the SQL NULL instead of a conc
     \N,"\N",
     ```
 
-    In the default settings (`not-null = false; null = '\N'`), the columns `A` and `B` are both
-converted to NULL after importing to TiDB. The column `C` is simply the empty string `''` but not
-NULL.
+    In the default settings (`not-null = false; null = '\N'`), the columns `A` and `B` are both converted to NULL after importing to TiDB. The column `C` is simply the empty string `''` but not NULL.
 
 ### `backslash-escape`
 
 - Whether to interpret backslash escapes inside fields.
-- If `backslash-escape` is true, the following sequences are
-recognized and transformed:
+- If `backslash-escape` is true, the following sequences are recognized and transformed:
 
     | Sequence | Converted to             |
     |----------|--------------------------|
