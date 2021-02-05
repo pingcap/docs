@@ -12,11 +12,7 @@ TiDB Lightning supports reading CSV (comma-separated values) data source, as wel
 
 A CSV file representing a whole table must be named as `db_name.table_name.csv`. This will be restored as a table `table_name` inside the database `db_name`.
 
-<<<<<<< HEAD
 If a table spans multiple CSV files, they should be named like `db_name.table_name.003.csv`.
-=======
-If a table spans multiple CSV files, they should be named like `db_name.table_name.003.csv`. The number part do not need to be continuous, but must be increasing and zero-padded.
->>>>>>> 88bce7b4... CI: add file format lint script to check manual line breaks and file encoding (#4666)
 
 The file extension must be `*.csv`, even if the content is not separated by commas.
 
