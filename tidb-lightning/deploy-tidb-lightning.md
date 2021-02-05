@@ -46,10 +46,7 @@ To achieve the best performance, it is recommended to use the following hardware
     - 32+ logical cores CPU
     - An SSD large enough to store the entire data source, preferring higher read speed
     - 10 Gigabit network card (capable of transferring at ≥300 MB/s)
-    - `tidb-lightning` fully consumes all CPU cores when running,
-        and deploying on a dedicated machine is highly recommended.
-        If not possible, `tidb-lightning` could be deployed together with other components like
-        `tidb-server`, and the CPU usage could be limited via the `region-concurrency` setting.
+    - `tidb-lightning` fully consumes all CPU cores when running, and deploying on a dedicated machine is highly recommended. If not possible, `tidb-lightning` could be deployed together with other components like `tidb-server`, and the CPU usage could be limited via the `region-concurrency` setting.
 
 - `tikv-importer`:
 
@@ -58,8 +55,7 @@ To achieve the best performance, it is recommended to use the following hardware
     - 1 TB+ SSD, preferring higher IOPS (≥ 8000 is recommended)
         * The disk should be larger than the total size of the top N tables, where N = max(index-concurrency, table-concurrency).
     - 10 Gigabit network card (capable of transferring at ≥300 MB/s)
-    - `tikv-importer` fully consumes all CPU, disk I/O and network bandwidth when running,
-        and deploying on a dedicated machine is strongly recommended.
+    - `tikv-importer` fully consumes all CPU, disk I/O and network bandwidth when running, and deploying on a dedicated machine is strongly recommended.
 
 If you have sufficient machines, you can deploy multiple Lightning/Importer servers, with each working on a distinct set of tables, to import the data in parallel.
 
