@@ -36,9 +36,13 @@ For other information, see [Frequently Asked Questions (FAQ)](/faq/tidb-faq.md).
 See the following for the situations when the `tidb-server` cannot be started:
 
 + Error in the startup parameters.
+
     See the [TiDB configuration and options](/command-line-flags-for-tidb-configuration.md).
+
 + The port is occupied.
+
     Use the `lsof -i:port` command to show all the networking related to a given port and make sure the port to start the `tidb-server` is not occupied.
+
 + Cannot connect to `pd-server`.
 
     - Check if the network between TiDB and PD is running smoothly, including whether the network can be pinged or if there is any issue with the Firewall configuration.
@@ -53,8 +57,7 @@ See the following for the situations when the `tikv-server` cannot be started:
 + Cannot connect to `pd-server`.
     - Check if the network between TiDB and PD is running smoothly, including whether the network can be pinged or if there is any issue with the Firewall configuration.
     - If there is no issue with the network, check the state and log of the `pd-server` process.
-+ The file is occupied.
-    Do not open two TiKV files on one database file directory.
++ The file is occupied. Do not open two TiKV files on one database file directory.
 
 ## Cannot start `pd-server`
 
@@ -91,8 +94,7 @@ Before starting the process, make sure the result of `ulimit -n` is large enough
 
 ## Database access times out and the system load is too high
 
-First, check the [slow query log](/identify-slow-queries.md) and see if it is because of some inappropriate SQL statement.
-If you failed to solve the problem, provide the following information:
+First, check the [slow query log](/identify-slow-queries.md) and see if it is because of some inappropriate SQL statement. If you failed to solve the problem, provide the following information:
 
 + The deployment topology
     - How many `tidb-server`/`pd-server`/`tikv-server` instances are deployed?
