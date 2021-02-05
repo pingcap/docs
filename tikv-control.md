@@ -135,8 +135,7 @@ In this command, the key is also the escaped form of raw key.
 
 The `raw-scan` command scans directly from the RocksDB. Note that to scan data keys you need to add a `'z'` prefix to keys.
 
-Use `--from` and `--to` options to specify the range to scan (unbounded by default). Use `--limit` to limit at most how
-many keys to print out (30 by default). Use `--cf` to specify which cf to scan (can be `default`, `write` or `lock`).
+Use `--from` and `--to` options to specify the range to scan (unbounded by default). Use `--limit` to limit at most how many keys to print out (30 by default). Use `--cf` to specify which cf to scan (can be `default`, `write` or `lock`).
 
 ```bash
 $ ./tikv-ctl --db /var/lib/tikv/db/ raw-scan --from 'zt' --limit 2 --cf default
@@ -172,7 +171,7 @@ The properties can be used to check whether the Region is healthy or not. If not
 
 ### Compact data of each TiKV manually
 
-Use the `compact` command to manually compact data of each TiKV. If you specify the `--from` and `--to` options, then their flags are also in the form of escaped raw key. 
+Use the `compact` command to manually compact data of each TiKV. If you specify the `--from` and `--to` options, then their flags are also in the form of escaped raw key.
 
 - Use the `--host` option to specify the TiKV that you need to compact.
 - Use the `-d` option to specify the RocksDB that you need to compact. The optional values are `kv` and `raft`.
@@ -280,9 +279,7 @@ If the command is successfully executed, it prints the above information. If the
 You can use the `modify-tikv-config` command to dynamically modify the configuration arguments. Currently, it only supports dynamically modifying RocksDB related arguments.
 
 - `-m` is used to specify the target RocksDB. You can set it to `kvdb` or `raftdb`.
-- `-n` is used to specify the configuration name.
-    You can refer to the arguments of `[rocksdb]` and `[raftdb]` (corresponding to `kvdb` and `raftdb`) in the [TiKV configuration template](https://github.com/tikv/tikv/blob/master/etc/config-template.toml#L213-L500).
-    You can use `default|write|lock + . + argument name` to specify the configuration of different CFs. For `kvdb`, you can set it to `default`, `write`, or `lock`; for `raftdb`, you can only set it to `default`.
+- `-n` is used to specify the configuration name. You can refer to the arguments of `[rocksdb]` and `[raftdb]` (corresponding to `kvdb` and `raftdb`) in the [TiKV configuration template](https://github.com/tikv/tikv/blob/master/etc/config-template.toml#L213-L500). You can use `default|write|lock + . + argument name` to specify the configuration of different CFs. For `kvdb`, you can set it to `default`, `write`, or `lock`; for `raftdb`, you can only set it to `default`.
 - `-v` is used to specify the configuration value.
 
 ```bash
@@ -330,8 +327,7 @@ success!
 
 ### Ldb Command
 
-The `ldb` command line tool offers multiple data access and database administration commands. Some examples are listed below.
-For more information, refer to the help message displayed when running `tikv-ctl ldb` or check the documents from RocksDB.
+The `ldb` command line tool offers multiple data access and database administration commands. Some examples are listed below. For more information, refer to the help message displayed when running `tikv-ctl ldb` or check the documents from RocksDB.
 
 Examples of data access sequence:
 

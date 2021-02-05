@@ -46,10 +46,7 @@ To achieve the best performance, it is recommended to use the following hardware
     - 32+ logical cores CPU
     - An SSD large enough to store the entire data source, preferring higher read speed
     - 10 Gigabit network card (capable of transferring at ≥300 MB/s)
-    - `tidb-lightning` fully consumes all CPU cores when running,
-        and deploying on a dedicated machine is highly recommended.
-        If not possible, `tidb-lightning` could be deployed together with other components like
-        `tidb-server`, and the CPU usage could be limited via the `region-concurrency` setting.
+    - `tidb-lightning` fully consumes all CPU cores when running, and deploying on a dedicated machine is highly recommended. If not possible, `tidb-lightning` could be deployed together with other components like `tidb-server`, and the CPU usage could be limited via the `region-concurrency` setting.
 
 - `tikv-importer`:
 
@@ -58,8 +55,7 @@ To achieve the best performance, it is recommended to use the following hardware
     - 1 TB+ SSD, preferring higher IOPS (≥ 8000 is recommended)
         * The disk should be larger than the total size of the top N tables, where N = max(index-concurrency, table-concurrency).
     - 10 Gigabit network card (capable of transferring at ≥300 MB/s)
-    - `tikv-importer` fully consumes all CPU, disk I/O and network bandwidth when running,
-        and deploying on a dedicated machine is strongly recommended.
+    - `tikv-importer` fully consumes all CPU, disk I/O and network bandwidth when running, and deploying on a dedicated machine is strongly recommended.
 
 If you have sufficient machines, you can deploy multiple Lightning/Importer servers, with each working on a distinct set of tables, to import the data in parallel.
 
@@ -69,8 +65,7 @@ If you have sufficient machines, you can deploy multiple Lightning/Importer serv
 >
 > - `tikv-importer` stores intermediate data on the RAM to speed up the import process. The typical memory usage can be calculated by using **(`max-open-engines` × `write-buffer-size` × 2) + (`num-import-jobs` × `region-split-size` × 2)**. If the speed of writing to disk is slow, the memory usage could be even higher due to buffering.
 
-Additionally, the target TiKV cluster should have enough space to absorb the new data.
-Besides [the standard requirements](/hardware-and-software-requirements.md), the total free space of the target TiKV cluster should be larger than **Size of data source × [Number of replicas](/faq/tidb-faq.md#is-the-number-of-replicas-in-each-region-configurable-if-yes-how-to-configure-it) × 2**.
+Additionally, the target TiKV cluster should have enough space to absorb the new data. Besides [the standard requirements](/hardware-and-software-requirements.md), the total free space of the target TiKV cluster should be larger than **Size of data source × [Number of replicas](/faq/tidb-faq.md#is-the-number-of-replicas-in-each-region-configurable-if-yes-how-to-configure-it) × 2**.
 
 With the default replica count of 3, this means the total free space should be at least 6 times the size of data source.
 
@@ -265,8 +260,7 @@ Refer to the [TiDB enterprise tools download page](/download-ecosystem-tools.md#
     status-port = 10080
     ```
 
-    The above only shows the essential settings.
-    See the [Configuration](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-global) section for the full list of settings.
+    The above only shows the essential settings. See the [Configuration](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-global) section for the full list of settings.
 
 4. Run `tidb-lightning`.
 
