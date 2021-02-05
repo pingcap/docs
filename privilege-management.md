@@ -387,19 +387,3 @@ Manually editing tables such as `mysql.user` with statements such as `INSERT`, `
 ```sql
 FLUSH PRIVILEGES;
 ```
-
-### Limitations and constraints
-
-Currently, the following privileges are not checked yet because they are less frequently used:
-
-- FILE
-- USAGE
-- SHUTDOWN
-- EXECUTE
-- PROCESS
-- INDEX
-- ...
-
-> **Note:**
->
-> Column-level privileges are not implemented at this stage.
