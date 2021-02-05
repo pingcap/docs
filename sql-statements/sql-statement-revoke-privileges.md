@@ -6,8 +6,7 @@ aliases: ['/docs/stable/sql-statements/sql-statement-revoke-privileges/','/docs/
 
 # `REVOKE <privileges>`
 
-This statement removes privileges from an existing user.
-Executing this statement requires the `GRANT OPTION` privilege and all privileges you revoke.
+This statement removes privileges from an existing user. Executing this statement requires the `GRANT OPTION` privilege and all privileges you revoke.
 
 ## Synopsis
 
