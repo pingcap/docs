@@ -6,11 +6,7 @@ aliases: ['/docs/v3.0/sql-statements/sql-statement-drop-user/','/docs/v3.0/refer
 
 # DROP USER
 
-<<<<<<< HEAD
 This statement removes a user from the TiDB system database. The optional keyword `IF EXISTS` can be used to silence an error if the user does not exist.
-=======
-This statement removes a user from the TiDB system database. The optional keyword `IF EXISTS` can be used to silence an error if the user does not exist. This statement requires the `CREATE USER` privilege.
->>>>>>> 88bce7b4... CI: add file format lint script to check manual line breaks and file encoding (#4666)
 
 ## Synopsis
 

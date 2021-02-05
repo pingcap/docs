@@ -6,15 +6,7 @@ aliases: ['/docs/v3.0/sql-statements/sql-statement-set-variable/','/docs/v3.0/re
 
 # `SET [GLOBAL|SESSION] <variable>`
 
-<<<<<<< HEAD
 The statement `SET [GLOBAL|SESSION]` modifies one of TiDB's built in variables, of either `SESSION` or `GLOBAL` scope. Note that similar to MySQL, changes to `GLOBAL` variables will not apply to either existing connections, or the local connection. Only new sessions will reflect the changes to the value.
-=======
-The statement `SET [GLOBAL|SESSION]` modifies one of TiDB's built in variables, of either `SESSION` or `GLOBAL` scope.
-
-> **Note:**
->
-> Similar to MySQL, changes to `GLOBAL` variables do not apply to either existing connections, or the local connection. Only new sessions reflect the changes to the value.
->>>>>>> 88bce7b4... CI: add file format lint script to check manual line breaks and file encoding (#4666)
 
 ## Synopsis
 
@@ -41,12 +33,6 @@ mysql> SHOW SESSION VARIABLES LIKE 'sql_mode';
 +---------------+-------------------------------------------------------------------------------------------------------------------------------------------+
 1 row in set (0.00 sec)
 
-<<<<<<< HEAD
-=======
-Update the value of `sql_mode` globally. If you check the value of `SQL_mode` after the update, you can see that the value of `SESSION` level has not been updated:
-
-```sql
->>>>>>> 88bce7b4... CI: add file format lint script to check manual line breaks and file encoding (#4666)
 mysql> SET GLOBAL sql_mode = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER';
 Query OK, 0 rows affected (0.03 sec)
 
