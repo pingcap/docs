@@ -9,10 +9,8 @@ TiDB supports execution plan caching for `Prepare` / `Execute` queries.
 
 There are two forms of `Prepare` / `Execute` queries:
 
-- In the binary communication protocol, use `COM_STMT_PREPARE` and
-  `COM_STMT_EXECUTE` to execute general parameterized SQL queries;
-- In the text communication protocol, use `COM_QUERY` to execute `Prepare` and
-  `Execution` SQL queries.
+- In the binary communication protocol, use `COM_STMT_PREPARE` and `COM_STMT_EXECUTE` to execute general parameterized SQL queries;
+- In the text communication protocol, use `COM_QUERY` to execute `Prepare` and `Execution` SQL queries.
 
 The optimizer handles these two types of queries in the same way: when preparing, the parameterized query is parsed into an AST (Abstract Syntax Tree) and cached; in later execution, the execution plan is generated based on the stored AST and specific parameter values.
 
