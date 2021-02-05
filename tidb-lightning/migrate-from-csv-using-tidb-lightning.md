@@ -20,15 +20,8 @@ The file extension must be `*.csv`, even if the content is not separated by comm
 
 CSV files are schema-less. To import them into TiDB, a table schema must be provided. This could be done either by:
 
-<<<<<<< HEAD
-* Providing a file named `db_name.table_name-schema.sql` containing the `CREATE TABLE` DDL
-    statement
-* Creating the empty tables directly in TiDB in the first place, and then setting
-    `[mydumper] no-schema = true` in `tidb-lightning.toml`.
-=======
-* Providing a file named `db_name.table_name-schema.sql` containing the `CREATE TABLE` DDL statement, and also a file named `db_name-schema-create.sql` containing the `CREATE DATABASE` DDL statement.
+* Providing a file named `db_name.table_name-schema.sql` containing the `CREATE TABLE` DDL statement
 * Creating the empty tables directly in TiDB in the first place, and then setting `[mydumper] no-schema = true` in `tidb-lightning.toml`.
->>>>>>> 88bce7b4... CI: add file format lint script to check manual line breaks and file encoding (#4666)
 
 ## Configuration
 
