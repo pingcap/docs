@@ -5,8 +5,7 @@ summary: An overview of the usage of REVOKE <privileges> for the TiDB database.
 
 # `REVOKE <privileges>`
 
-This statement removes privileges from an existing user.
-Executing this statement requires the `GRANT OPTION` privilege and all privileges you revoke.
+This statement removes privileges from an existing user. Executing this statement requires the `GRANT OPTION` privilege and all privileges you revoke.
 
 ## Synopsis
 
