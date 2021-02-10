@@ -76,5 +76,5 @@ This document introduces the basic features of TiDB.
 ## Tools
 
 - Supports fast backup
-- Supports data migration from MySQL to TiDB using tools
-- Supports deploying and maintaining TiDB using tools
+- Provides data migration tools for migration from MySQL to TiDB
+- Provides tools for deployment and maintenance of TiDB
