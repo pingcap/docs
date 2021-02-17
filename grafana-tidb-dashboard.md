@@ -28,7 +28,7 @@ To understand the key metrics displayed on the TiDB dashboard, check the followi
     - CPS By Instance: the command statistics on each TiDB instance, which is classified according to the success or failure of command execution results
     - Failed Query OPM: the statistics of error types (such as syntax errors and primary key conflicts) according to the errors occurred when executing SQL statements per second on each TiDB instance. It contains the module in which the error occurs and the error code
     - Slow query: the statistics of the processing time of slow queries (the time cost of the entire slow query, the time cost of Coprocessor，and the waiting time for Coprocessor scheduling). Slow queries are classified into internal and general SQL statements.
-    - Connection Idle Duration: duration of idle connection
+    - Connection Idle Duration: the duration of idle connections
     - 999/99/95/80 Duration: the statistics of the execution time for different types of SQL statements (different percentiles)
 
 - Query Detail
@@ -47,10 +47,10 @@ To understand the key metrics displayed on the TiDB dashboard, check the followi
     - Goroutine Count: the number of Goroutines on each TiDB instance
     - Prepare Statement Count: the number of `Prepare` statements that are executed on each TiDB instance and the total count of them
     - Keep Alive OPM: the number of times that the metrics are refreshed every minute on each TiDB instance. It usually needs no attention.
-    - Panic And Critical Error: the number that Panic and Critical Errors occur in TiDB
+    - Panic And Critical Error: the number of panics and critical errors occurred in TiDB
     - Time Jump Back OPS: the number of times that the operating system rewinds every second on each TiDB instance
     - Get Token Duration: the time cost of getting Token on each connection
-    - Skip Binlog Count: the number of TiDB failing to write into Binlog
+    - Skip Binlog Count: the number of binlog write failures in TiDB
     - Client Data Traffic: data traffic statistics of TiDB and the client
 
 - Transaction
@@ -58,23 +58,24 @@ To understand the key metrics displayed on the TiDB dashboard, check the followi
     - Duration: the execution duration of a transaction
     - Transaction Statement Num: the number of SQL statements in a transaction
     - Transaction Retry Num: the number of times that a transaction retries
-    - Session Retry Error OPS: the number of errors encountered during the transaction retry per second. It is divided into two types: retry failure and exceeding the maximum number of retries
+    - Session Retry Error OPS: the number of errors encountered during the transaction retry per second. This metric includes two error types: retry failure and exceeding the maximum number of retries
     - Commit Token Wait Duration: the wait duration in the flow control queue during the transaction commit. If the wait duration is long, it means that the transaction to commit is too large and the flow is controlled. If the system still has resources available, you can speed up the commit process by increasing the `committer-concurrency` value in the TiDB configuration file
     - KV Transaction OPS: the number of transactions executed per second within each TiDB instance
         - A user transaction might trigger multiple transaction executions in TiDB, including reading internal metadata, atomic retries of the user transaction, and so on
         - TiDB's internally scheduled tasks also operate on the database through transactions, which are also included in this panel
     - KV Transaction Duration: the time spent on executing transactions within each TiDB
-    - Transaction Regions Num: the number of Regions for transaction operations
-    - Transaction Write KV Num Rate and Sum: the rate and sum of transactions written to KV
-    - Transaction Write KV Num: the number of KVs for transaction operations
+    - Transaction Regions Num: the number of Regions operated in the transaction
+    - Transaction Write KV Num Rate and Sum: the rate at which KVs are written and the sum of these written KVs in the transaction
+    - Transaction Write KV Num: the number of KVs operated in the transaction
     - Statement Lock Keys: the number of locks for a single statement
     - Send HeartBeat Duration: the duration for the transaction to send heartbeats
-    - Transaction Write Size Bytes Rate and sum: the rate and sum of size bytes written by the transaction
-    - Transaction Write Size Bytes: the size of the data written by the transaction
+    - Transaction Write Size Bytes Rate and sum: the rate at which bytes are written and the sum of these written bytes in the transaction
+    - Transaction Write Size Bytes: the size of the data written in the transaction
     - Acquire Pessimistic Locks Duration: the time consumed by adding locks
     - TTL Lifetime Reach Counter: the number of transactions that reach the upper limit of TTL. The default value of the TTL upper limit is 10 minutes. It means that 10 minutes have passed since the first lock of a pessimistic transaction or the first prewrite of an optimistic transaction. The default value of the upper limit of TTL is 10 minutes. The upper limit of TTL life can be changed by modifying `max-txn-TTL` in the TiDB configuration file
+    - Load Safepoint OPS: the number of times that `Safepoint` is loaded. `Safepoint` is to ensure that the data before `Safepoint` is not read when the transaction reads data, thus ensuring data safety. The data before `Safepoint` might be cleaned up by the GC
     - Pessimistic Statement Retry OPS: the number of retry attempts for pessimistic statements. When the statement tries to add lock, it might encounter a write conflict. At this time, the statement will acquire a new snapshot and add lock again
-    - Async Commit Transaction Counter: the number of transactions that enable the Async commit mechanism, which is divided into two types: success and failure
+    - Async Commit Transaction Counter: the number of transactions that have async commit enabled, which has two statuses: successful and failed
 
 - Executor
     - Parse Duration: the statistics of the parsing time of SQL statements
