@@ -593,7 +593,7 @@ This section introduces the configuration of a replication task.
 # This configuration item affects configurations related to filter and sink.
 case-sensitive = true
 
-# Specifies whether to output the old value. New in v4.0.5. The default value is true since v5.0.0-rc.
+# Specifies whether to output the old value. New in v4.0.5. Since v5.0.0-rc, the default value is `true`.
 enable-old-value = true
 
 [filter]
