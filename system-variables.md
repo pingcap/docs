@@ -40,13 +40,13 @@ SET  GLOBAL tidb_distsql_scan_concurrency = 10;
 
 - Scope: SESSION | GLOBAL
 - Default value: 1
-- Controls how `AUTO_INCREMENT` values should be incremented on each allocation. It is often used in combination with `auto_increment_offset`.
+- Controls the step size of `AUTO_INCREMENT` values to be allocated to a column. It is often used in combination with `auto_increment_offset`.
 
 ### auto_increment_offset
 
 - Scope: SESSION | GLOBAL
 - Default value: 1
-- Controls the initial offset of `AUTO_INCREMENT` values being allocated. This setting is often used in combination with `auto_increment_increment`. For example:
+- Controls the initial offset of `AUTO_INCREMENT` values to be allocated to a column. This setting is often used in combination with `auto_increment_increment`. For example:
 
 ```sql
 mysql> CREATE TABLE t1 (a int not null primary key auto_increment);
