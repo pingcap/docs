@@ -249,22 +249,22 @@ To solve the problem, follow these steps:
 
 4. Modify the `drainer.toml` configuration file. Add the `commit-ts` in the `ignore-txn-commit-ts` item and restart the Drainer node.
 
-## TiDB fails to write to binlog, causing TiDB to get stuck, and `listener stopped, waiting for manual stop` appears in the log
+## TiDB fails to write to binlog and gets stuck, and `listener stopped, waiting for manual stop` appears in the log
 
-In TiDB v3.0.12 and earlier versions, binlog write failure causes TiDB to report the fatal error. TiDB doesn't quit automatically but stop the service, which seems like getting stuck. You can see `listener stopped, waiting for manual stop` in the log.
+In TiDB v3.0.12 and earlier versions, the binlog write failure causes TiDB to report the fatal error. TiDB doesn't quit automatically but stop the service, which seems like getting stuck. You can see `listener stopped, waiting for manual stop` in the log.
 
 When encountering this problem, you need to determine what causes the binlog write failure according to the specific situation. If it is caused by the slow writing of binlog into the downstream, you can consider scaling out Pump or increasing the timeout for writing binlog.
 
-In v3.0.13, TiDB has optimized this logic. Binlog write failure causes transaction execution failure and returns an error, but does not get TiDB stuck.
+In v3.0.13, TiDB optimizes this logic. The Binlog write failure causes transaction execution failure and returns an error, but does not get TiDB stuck.
 
 ## TiDB writes duplicate binlog to Pump
 
-In the case of failure or timeout of writing binlog, TiDB retries to write binlog to the next available Pump node until the write succeeds. Therefore, if writing to a Pump node is slow, causing TiDB to time out (default 15s), then TiDB determines that the writing fails and tries to write to the next Pump node. If the timeout Pump node is actually written successfully, the same binlog is written to multiple Pump nodes. When Drainer processes the binlog, it automatically de-duplicates the same binlog as the TSO, so this duplicate writing has no perception on downstream and does not affect the replication logic.
+In the case of the failure or timeout of writing binlog, TiDB retries to write binlog to the next available Pump node until the write succeeds. Therefore, if writing to a Pump node is slow, causing TiDB to time out (default 15s), then TiDB determines that the writing fails and tries to write to the next Pump node. If the timeout Pump node is actually written successfully, the same binlog is written to multiple Pump nodes. When Drainer processes the binlog, it automatically de-duplicates the same binlog as the TSO, so this duplicate writing does not affect the downstream and replication logic.
 
 ## Reparo is interrupted during the full and incremental restore process. Can I use the last TSO in the log to restore replication?
 
-Yes. Reparo does not automatically enable the safe-mode when you start it. You need to operate manually:
+Yes. Reparo does not automatically enable the safe-mode when you start it. You need to follow the following steps manually:
 
 1. After Reparo is interrupted, record the last TSO in the log as `checkpoint-tso`.
-2. Modify the Reparo configuration file, set the configuration item `start-tso` to `checkpoint-tso + 1`, and set `stop-tso` to `checkpoint-tso + 80,000,000,000` (probably `checkpoint-tso` defer by 5 minutes), set `safe-mode` to `true`. Start Reparo, Reparo replicates data to `stop-tso` and then stops automatically.
+2. Modify the Reparo configuration file, set the configuration item `start-tso` to `checkpoint-tso + 1`, and set `stop-tso` to `checkpoint-tso + 80,000,000,000` (probably `checkpoint-tso` defer by 5 minutes), and set `safe-mode` to `true`. Start Reparo, Reparo replicates data to `stop-tso` and then stops automatically.
 3. After Reparo stops automatically, set `start-tso` to `checkpoint tso + 80,000,000,001`, set `stop-tso` to `0`, and set `safe-mode` to `false`. Start Reparo to continue replication.
