@@ -266,5 +266,5 @@ In the case of the failure or timeout of writing binlog, TiDB retries to write b
 Yes. Reparo does not automatically enable the safe-mode when you start it. You need to perform the following steps manually:
 
 1. After Reparo is interrupted, record the last TSO in the log as `checkpoint-tso`.
-2. Modify the Reparo configuration file, set the configuration item `start-tso` to `checkpoint-tso + 1`, and set `stop-tso` to `checkpoint-tso + 80,000,000,000` (probably `checkpoint-tso` is delayed by five minutes), and set `safe-mode` to `true`. Start Reparo, Reparo replicates data to `stop-tso` and then stops automatically.
+2. Modify the Reparo configuration file, set the configuration item `start-tso` to `checkpoint-tso + 1`, and set `stop-tso` to `checkpoint-tso + 80,000,000,000` (probably five minutes after the `checkpoint-tso`), and set `safe-mode` to `true`. Start Reparo, Reparo replicates data to `stop-tso` and then stops automatically.
 3. After Reparo stops automatically, set `start-tso` to `checkpoint tso + 80,000,000,001`, set `stop-tso` to `0`, and set `safe-mode` to `false`. Start Reparo to continue replication.
