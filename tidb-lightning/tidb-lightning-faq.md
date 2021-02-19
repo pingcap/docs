@@ -336,7 +336,7 @@ Currently, the limitation of TiDB cannot be bypassed. You can only ignore this t
 
 ## `tidb lightning encountered error: TiDB version too old, expected '>=4.0.0', found '3.0.18'`
 
-TiDB Lightning Local-backend only supports importing to TiDB clusters of v4.0.0 and above versions. If you try to use Local-backend to import to a v2.x or v3.x cluster, the above error is reported. At this time, you can modify the configuration and use Importer-backend or TiDB-backend to import.
+TiDB Lightning Local-backend only supports importing to TiDB clusters of v4.0.0 and later versions. If you try to use Local-backend to import to a v2.x or v3.x cluster, the above error is reported. At this time, you can modify the configuration and use Importer-backend or TiDB-backend to import.
 
 Some TiDB cluster versions of `nightly` version might be similar to v4.0.0-beta.2. This version of TiDB Lightning actually supports Local-backend. If you encounter this error when using the `nightly` version, you can skip the version check by setting the configuration `check-requirements = false`. Before setting this parameter, make sure that the configuration of TiDB Lightning supports the corresponding version, otherwise the import cannot be guaranteed.
 
