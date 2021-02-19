@@ -58,7 +58,7 @@ Currently, the TiCDC sink component supports replicating data to the following d
 
 - MySQL sink
 
-    - TiCDC does not split in-table transactions. This is to **ensure** the transactional consistency within a single table. However, TiCDC does **not ensure** that the transactional order in the upstream table is consistent.
+    - TiCDC does not split in-table transactions. This is to **ensure** the transactional consistency within a single table. However, TiCDC does **not ensure** consistency with the transactional order in the upstream table. If the primary keys between transactions have intersections, TiCDC still **ensures** consistency with the transactional order in the upstream table.
     - TiCDC splits cross-table transactions in the unit of tables. TiCDC does **not ensure** that cross-table transactions are always consistent.
     - TiCDC **ensures** that the order of single-row updates are consistent with that in the upstream.
 
@@ -77,19 +77,21 @@ TiCDC only replicates the table that has at least one **valid index**. A **valid
     - Every column of the index is explicitly defined as non-nullable (`NOT NULL`).
     - The index does not have the virtual generated column (`VIRTUAL GENERATED COLUMNS`).
 
+Since v4.0.8, TiCDC supports replicating tables **without a valid index** by modifying the task configuration. However, this compromises the guarantee of data consistency to some extent. For more details, see [Replicate tables without a valid index](/ticdc/manage-ticdc.md#replicate-tables-without-a-valid-index).
+
 ### Unsupported scenarios
 
 Currently, The following scenarios are not supported:
 
 - The TiKV cluster that uses RawKV alone.
 - The [DDL operation `CREATE SEQUENCE`](/sql-statements/sql-statement-create-sequence.md) and the [SEQUENCE function](/sql-statements/sql-statement-create-sequence.md#sequence-function) in TiDB v4.0. When the upstream TiDB uses `SEQUENCE`, TiCDC ignores `SEQUENCE` DDL operations/functions performed upstream. However, DML operations using `SEQUENCE` functions can be correctly replicated.
-- The [TiKV Hibernate Region](https://github.com/tikv/tikv/blob/master/docs/reference/configuration/raftstore-config.md#hibernate-region). TiCDC prevents the Region from entering the hibernated state.
+- The [TiKV Hibernate Region](/best-practices/massive-regions-best-practices.md#method-2-enable-hibernate-region). TiCDC prevents the Region from entering the hibernated state.
+
+TiCDC only provides partial support for scenarios of large transactions in the upstream. For details, refer to [FAQ: Does TiCDC support replicating large transactions? Is there any risk?](/ticdc/troubleshoot-ticdc.md#does-ticdc-support-replicating-large-transactions-is-there-any-risk).
 
 ## Install and deploy TiCDC
 
-You can deploy TiCDC components in the process of deploying a new TiDB cluster using TiUP. You only need to [add TiCDC](/production-deployment-using-tiup.md#step-3-edit-the-initialization-configuration-file) to the configuration file when TiUP starts the TiDB cluster.
-
-Currently, you can also add TiCDC components to an existing TiDB cluster using either TiUP or binary. For details, see [Deploy and install TiCDC](/ticdc/manage-ticdc.md#deploy-and-install-ticdc).
+You can either deploy TiCDC along with a new TiDB cluster or add the TiCDC component to an existing TiDB cluster. For details, see [Deploy TiCDC](/ticdc/deploy-ticdc.md).
 
 ## Manage TiCDC Cluster and Replication Tasks
 

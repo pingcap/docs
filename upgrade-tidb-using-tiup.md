@@ -131,7 +131,7 @@ After the import is complete, you can check the current cluster status by execut
 > - The configuration parameters in the original cluster have not been modified.
 > - You want to use the default parameters of `4.0` after the upgrade.
 
-1. Enter `~/.tiup/storage/cluster/clusters/{cluster_name}/config`, the backup directory of TiDB Ansible, and confirm the modified parameters in the configuration template.
+1. Enter `~/.tiup/storage/cluster/clusters/{cluster_name}/ansible-imported-configs`, the backup directory of TiDB Ansible, and confirm the modified parameters in the configuration template.
 
 2. Enter the `vi` editing mode of the topology file:
 
@@ -159,7 +159,7 @@ After the import is complete, you can check the current cluster status by execut
 >    ```yaml
 >      tiflash_servers:
 >            - host: 10.0.1.14
->              data_dir: data/tiflash-11315 # Modify it to the `path` value of the TiFlash configuration file
+>              data_dir: /data/tiflash-11315 # Modify it to the `path` value of the TiFlash configuration file
 >    ```
 
 ## Perform a rolling upgrade to the TiDB cluster

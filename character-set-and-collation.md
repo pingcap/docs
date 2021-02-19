@@ -111,13 +111,13 @@ SHOW COLLATION WHERE Charset = 'utf8mb4';
 2 rows in set (0.00 sec)
 ```
 
-## `utf8` and `ut8mb4` in TiDB
+## `utf8` and `utf8mb4` in TiDB
 
 In MySQL, the character set `utf8` is limited to a maximum of three bytes. This is sufficient to store characters in the Basic Multilingual Plane (BMP), but not enough to store characters such as emojis. For this, it is recommended to use the character set `utf8mb4` instead.
 
 By default, TiDB provides the same 3-byte limit on `utf8` to ensure that data created in TiDB can still safely be restored in MySQL. This can be disabled by changing the value of `check-mb4-value-in-utf8` to `FALSE` in your TiDB configuration file.
 
-The following demonstrates the default behavior when inserting a 4-byte emoji character into a table. The `INSERT` statement fails for the `utf8` character set, but succeeds for `ut8mb4`:
+The following demonstrates the default behavior when inserting a 4-byte emoji character into a table. The `INSERT` statement fails for the `utf8` character set, but succeeds for `utf8mb4`:
 
 ```sql
 mysql> CREATE TABLE utf8_test (
@@ -172,7 +172,7 @@ Different databases can use different character sets and collations. Use the `ch
 {{< copyable "sql" >}}
 
 ```sql
-create schema test1 character set utf8mb4 COLLATE uft8mb4_general_ci;
+CREATE SCHEMA test1 CHARACTER SET utf8mb4 COLLATE uft8mb4_general_ci;
 ```
 
 ```sql
@@ -182,7 +182,7 @@ Query OK, 0 rows affected (0.09 sec)
 {{< copyable "sql" >}}
 
 ```sql
-use test1;
+USE test1;
 ```
 
 ```sql
@@ -207,7 +207,7 @@ SELECT @@character_set_database, @@collation_database;
 {{< copyable "sql" >}}
 
 ```sql
-create schema test2 character set latin1 COLLATE latin1_bin;
+CREATE SCHEMA test2 CHARACTER SET latin1 COLLATE latin1_bin;
 ```
 
 ```sql
@@ -217,7 +217,7 @@ Query OK, 0 rows affected (0.09 sec)
 {{< copyable "sql" >}}
 
 ```sql
-use test2;
+USE test2;
 ```
 
 ```sql
@@ -386,24 +386,24 @@ Before v4.0, you can specify most of the MySQL collations in TiDB, and these col
 {{< copyable "sql" >}}
 
 ```sql
-create table t(a varchar(20) charset utf8mb4 collate utf8mb4_general_ci primary key);
+CREATE TABLE t(a varchar(20) charset utf8mb4 collate utf8mb4_general_ci PRIMARY KEY);
 Query OK, 0 rows affected
-insert into t values ('A');
+INSERT INTO t VALUES ('A');
 Query OK, 1 row affected
-insert into t values ('a');
+INSERT INTO t VALUES ('a');
 Query OK, 1 row affected # In TiDB, it is successfully executed. In MySQL, because utf8mb4_general_ci is case-insensitive, the `Duplicate entry 'a'` error is reported.
-insert into t1 values ('a ');
+INSERT INTO t1 VALUES ('a ');
 Query OK, 1 row affected # In TiDB, it is successfully executed. In MySQL, because comparison is performed after the spaces are filled in, the `Duplicate entry 'a '` error is returned.
 ```
 
 ### New framework for collations
 
-In TiDB 4.0, a complete framework for collations is introduced. This new framework supports semantically parsing collations and introduces the `new_collations_enabled_on_first_bootstrap` configuration item to decide whether to enable the new framework when a cluster is first initialized. If you initialize the cluster after the configuration item is enabled, you can check whether the new collation is enabled through the `new_collation_enabled` variable in the `mysql`.`tidb` table:
+In TiDB 4.0, a complete framework for collations is introduced. This new framework supports semantically parsing collations and introduces the [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) configuration item to decide whether to enable the new framework when a cluster is first initialized. If you initialize the cluster after the configuration item is enabled, you can check whether the new collation is enabled through the `new_collation_enabled` variable in the `mysql`.`tidb` table:
 
 {{< copyable "sql" >}}
 
 ```sql
-select VARIABLE_VALUE from mysql.tidb where VARIABLE_NAME='new_collation_enabled';
+SELECT VARIABLE_VALUE FROM mysql.tidb WHERE VARIABLE_NAME='new_collation_enabled';
 ```
 
 ```sql
@@ -422,13 +422,13 @@ When `utf8_general_ci` or `utf8mb4_general_ci` is used, the string comparison is
 {{< copyable "sql" >}}
 
 ```sql
-create table t(a varchar(20) charset utf8mb4 collate utf8mb4_general_ci primary key);
+CREATE TABLE t(a varchar(20) charset utf8mb4 collate utf8mb4_general_ci PRIMARY KEY);
 Query OK, 0 rows affected (0.00 sec)
-insert into t values ('A');
+INSERT INTO t VALUES ('A');
 Query OK, 1 row affected (0.00 sec)
-insert into t values ('a');
+INSERT INTO t VALUES ('a');
 ERROR 1062 (23000): Duplicate entry 'a' for key 'PRIMARY' # TiDB is compatible with the case-insensitive collation of MySQL.
-insert into t values ('a ');
+INSERT INTO t VALUES ('a ');
 ERROR 1062 (23000): Duplicate entry 'a ' for key 'PRIMARY' # TiDB modifies the `PADDING` behavior to be compatible with MySQL.
 ```
 
@@ -461,7 +461,7 @@ TiDB supports using the `COLLATE` clause to specify the collation of an expressi
 {{< copyable "sql" >}}
 
 ```sql
-select 'a' = _utf8mb4 'A' collate utf8mb4_general_ci;
+SELECT 'a' = _utf8mb4 'A' collate utf8mb4_general_ci;
 ```
 
 ```sql

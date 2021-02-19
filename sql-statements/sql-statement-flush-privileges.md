@@ -6,8 +6,7 @@ aliases: ['/docs/stable/sql-statements/sql-statement-flush-privileges/','/docs/v
 
 # FLUSH PRIVILEGES
 
-This statement triggers TiDB to reload the in-memory copy of privileges from the privilege tables. You should execute `FLUSH PRIVILEGES` after making manual edits to tables such as `mysql.user`. Executing this statement is not required after using privilege statements such as `GRANT` or `REVOKE`.
-Executing this statement requires the `RELOAD` privilege.
+This statement triggers TiDB to reload the in-memory copy of privileges from the privilege tables. You should execute `FLUSH PRIVILEGES` after making manual edits to tables such as `mysql.user`. Executing this statement is not required after using privilege statements such as `GRANT` or `REVOKE`. Executing this statement requires the `RELOAD` privilege.
 
 ## Synopsis
 

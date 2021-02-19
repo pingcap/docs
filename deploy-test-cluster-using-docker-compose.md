@@ -1,7 +1,7 @@
 ---
 title: TiDB Docker Compose Deployment
 summary: Use Docker Compose to quickly deploy a TiDB testing cluster.
-aliases: ['/docs/stable/deploy-test-cluster-using-docker-compose/','/docs/v4.0/deploy-test-cluster-using-docker-compose/','/docs/stable/how-to/get-started/deploy-tidb-from-docker-compose/']
+aliases: ['/docs/stable/deploy-test-cluster-using-docker-compose/','/docs/v4.0/deploy-test-cluster-using-docker-compose/','/docs/stable/how-to/get-started/deploy-tidb-from-docker-compose/','/docs/v4.0/how-to/get-started/deploy-tidb-from-docker-compose/']
 ---
 
 # TiDB Docker Compose Deployment
@@ -68,6 +68,7 @@ To customize the cluster, you can edit the `docker-compose.yml` file directly. I
 1. Install Helm.
 
     [Helm](https://helm.sh) can be used as a template rendering engine. Make sure your Helm version >= 2.9.0 and < 3.0.0.
+
     To use Helm, you only need to download its binary file:
 
     ```bash

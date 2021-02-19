@@ -12,7 +12,11 @@ The TiKV configuration file supports more options than command-line parameters. 
 
 This document only describes the parameters that are not included in command-line parameters. For more details, see [command-line parameter](/command-line-flags-for-tikv-configuration.md).
 
-### `status-thread-pool-size`
+### server
+
++ Configuration items related to the server
+
+## `status-thread-pool-size`
 
 + The number of worker threads for the `HTTP` API service
 + Default value: `1`
@@ -21,8 +25,8 @@ This document only describes the parameters that are not included in command-lin
 ### `grpc-compression-type`
 
 + The compression algorithm for gRPC messages
-+ Optional values: `none`, `deflate`, `gzip`
-+ Default value: `none`
++ Optional values: `"none"`, `"deflate"`, `"gzip"`
++ Default value: `"none"`
 
 ### `grpc-concurrency`
 
@@ -36,61 +40,73 @@ This document only describes the parameters that are not included in command-lin
 + Default value: `1024`
 + Minimum value: `1`
 
-### `server.grpc-raft-conn-num`
+### `grpc-memory-pool-quota`
+
++ Limit the memory size that can be used by gRPC
++ Default: `"32G"`
++ Limit the memory in case OOM is observed. Note that limit the usage can lead to potential stall
+
+### `grpc-raft-conn-num`
 
 + The maximum number of links among TiKV nodes for Raft communication
 + Default: `10`
 + Minimum value: `1`
 
-### `server.grpc-stream-initial-window-size`
+### `grpc-stream-initial-window-size`
 
 + The window size of the gRPC stream
 + Default: 2MB
 + Unit: KB|MB|GB
-+ Minimum value: `1KB`
++ Minimum value: `"1KB"`
 
-### `server.grpc-keepalive-time`
+### `grpc-keepalive-time`
 
 + The time interval at which that gRPC sends `keepalive` Ping messages
-+ Default: `10s`
-+ Minimum value: `1s`
++ Default: `"10s"`
++ Minimum value: `"1s"`
 
-### `server.grpc-keepalive-timeout`
+### `grpc-keepalive-timeout`
 
 + Disables the timeout for gRPC streams
-+ Default: `3s`
-+ Minimum value: `1s`
++ Default: `"3s"`
++ Minimum value: `"1s"`
 
-### `server.concurrent-send-snap-limit`
+### `concurrent-send-snap-limit`
 
-+ The maximum number of snapshots that can be sent at the same time
++ The maximum number of snapshots sent at the same time
 + Default value: `32`
 + Minimum value: `1`
 
-### `server.concurrent-recv-snap-limit`
+### `concurrent-recv-snap-limit`
 
-+ The maximum number of snapshots that can be received at the same time
++ The maximum number of snapshots received at the same time
 + Default value: `32`
 + Minimum value: `1`
 
-### `server.end-point-recursion-limit`
+### `end-point-recursion-limit`
 
-+ The maximum number of recursive layers allowed when TiKV decodes the Coprocessor DAG expression
++ The maximum number of recursive levels allowed when TiKV decodes the Coprocessor DAG expression
 + Default value: `1000`
 + Minimum value: `1`
 
-### `server.end-point-request-max-handle-duration`
+### `end-point-request-max-handle-duration`
 
-+ The longest duration allowed for a TiDB request to TiKV for processing tasks
-+ Default value: `60s`
-+ Minimum value: `1s`
++ The longest duration allowed for a TiDB's push down request to TiKV for processing tasks
++ Default value: `"60s"`
++ Minimum value: `"1s"`
 
-### `server.snap-max-write-bytes-per-sec`
+### `snap-max-write-bytes-per-sec`
 
-+ The maximum allowable disk bandwidth for processing snapshots
-+ Default value: `1000MB`
++ The maximum allowable disk bandwidth when processing snapshots
++ Default value: `"100MB"`
 + Unit: KB|MB|GB
-+ Minimum value: `1KB`
++ Minimum value: `"1KB"`
+
+### `end-point-slow-log-threshold`
+
++ The time threshold for a TiDB's push down request to print slow log
++ Default value: `"1s"`
++ Minimum value: `0`
 
 ## readpool.unified
 
@@ -102,20 +118,20 @@ Configuration items related to the single thread pool serving read requests. Thi
 
 ### `min-thread-count`
 
-+ The minimal working thread count of the unified read pool.
++ The minimal working thread count of the unified read pool
 + Default value: `1`
 
 ### `max-thread-count`
 
-+ The maximum working thread count of the unified read pool.
++ The maximum working thread count of the unified read pool
 + Default value: `MAX(4, CPU * 0.8)`
 
 ### `stack-size`
 
-+ The stack size of the threads in the unified thread pool.
-+ Default value: `10MB`
++ The stack size of the threads in the unified thread pool
++ Default value: `"10MB"`
 + Unit: KB|MB|GB
-+ Minimum value: `2MB`
++ Minimum value: `"2MB"`
 
 ### `max-tasks-per-worker`
 
@@ -171,9 +187,9 @@ Configuration items related to storage thread pool.
 ### `stack-size`
 
 + The stack size of threads in the Storage read thread pool
-+ Default value: `10MB`
++ Default value: `"10MB"`
 + Unit: KB|MB|GB
-+ Minimum value: `2MB`
++ Minimum value: `"2MB"`
 
 ## `readpool.coprocessor`
 
@@ -223,19 +239,13 @@ Configuration items related to the Coprocessor thread pool.
 ### `stack-size`
 
 + The stack size of the thread in the Coprocessor thread pool
-+ Default value: `10MB`
++ Default value: `"10MB"`
 + Unit: KB|MB|GB
-+ Minimum value: `2MB`
++ Minimum value: `"2MB"`
 
 ## storage
 
 Configuration items related to storage
-
-### `scheduler-notify-capacity`
-
-+ The maximum number of messages that `scheduler` gets each time
-+ Default value: `10240`
-+ Minimum value: `1`
 
 ### `scheduler-concurrency`
 
@@ -252,13 +262,13 @@ Configuration items related to storage
 ### `scheduler-pending-write-threshold`
 
 + The maximum size of the write queue. A `Server Is Busy` error is returned for a new write to TiKV when this value is exceeded.
-+ Default value: `100MB`
++ Default value: `"100MB"`
 + Unit: MB|GB
 
 ### `reserve-space`
 
-+ The size of the temporary file that preoccupies the extra space when TiKV is started. The name of temporary file is `space_placeholder_file`, located in the `storage.data-dir` directory. When TiKV runs out of disk space and cannot be started normally, you can delete this file as an emergency intervention and set `reserve-space` to `0MB`.
-+ Default value: `2GB`
++ The size of the temporary file that preoccupies the extra space when TiKV is started. The name of temporary file is `space_placeholder_file`, located in the `storage.data-dir` directory. When TiKV runs out of disk space and cannot be started normally, you can delete this file as an emergency intervention and set `reserve-space` to `"0MB"`.
++ Default value: `"2GB"`
 + Unite: MB|GB
 
 ## storage.block-cache
@@ -284,11 +294,10 @@ Configuration items related to Raftstore
 
 + Enables or disables synchronous write mode. In the synchronous write mode, each commit is forced to be flushed to raft-log synchronously for persistent storage.
 + Default value: `true`
-+ This configuration item has been deprecated since v4.0.7.
 
 > **Warning:**
 >
-> For versions <= 4.0.6, setting the value to `false` might lead to **data loss**. It is **strongly recommended** that you do not modify this configuration.
+> Setting this value to `false` might lead to **data loss**. It is **strongly recommended** that you do not modify this configuration.
 
 ### `prevote`
 
@@ -303,7 +312,7 @@ Configuration items related to Raftstore
 ### `raft-base-tick-interval`
 
 + The time interval at which the Raft state machine ticks
-+ Default value: `1s`
++ Default value: `"1s"`
 + Minimum value: greater than `0`
 
 ### `raft-heartbeat-ticks`
@@ -333,7 +342,7 @@ Configuration items related to Raftstore
 ### `raft-max-size-per-message`
 
 + The soft limit on the size of a single message packet
-+ Default value: `1MB`
++ Default value: `"1MB"`
 + Minimum value: `0`
 + Unit: MB
 
@@ -346,14 +355,14 @@ Configuration items related to Raftstore
 ### `raft-entry-max-size`
 
 + The hard limit on the maximum size of a single log
-+ Default value: `8MB`
++ Default value: `"8MB"`
 + Minimum value: `0`
 + Unit: MB|GB
 
 ### `raft-log-gc-tick-interval`
 
 + The time interval at which the polling task of deleting Raft logs is scheduled. `0` means that this feature is disabled.
-+ Default value: `10s`
++ Default value: `"10s"`
 + Minimum value: `0`
 
 ### `raft-log-gc-threshold`
@@ -377,13 +386,13 @@ Configuration items related to Raftstore
 ### `raft-entry-cache-life-time`
 
 + The maximum remaining time allowed for the log cache in memory.
-+ Default value: `30s`
++ Default value: `"30s"`
 + Minimum value: `0`
 
 ### `raft-reject-transfer-leader-duration`
 
 + The protection time for new nodes, which is used to control the shortest interval to migrate a leader to the newly added node. Setting this value too small might cause the failure of leader transfer.
-+ Default value: `3s`
++ Default value: `"3s"`
 + Minimum value: `0`
 
 ### `raftstore.hibernate-regions` (**Experimental**)
@@ -399,7 +408,7 @@ Configuration items related to Raftstore
 ### `split-region-check-tick-interval`
 
 + Specifies the interval at which to check whether the Region split is needed. `0` means that this feature is disabled.
-+ Default value: `10s`
++ Default value: `"10s"`
 + Minimum value: `0`
 
 ### `region-split-check-diff`
@@ -411,13 +420,13 @@ Configuration items related to Raftstore
 ### `region-compact-check-interval`
 
 + The time interval at which to check whether it is necessary to manually trigger RocksDB compaction. `0` means that this feature is disabled.
-+ Default value: `5m`
++ Default value: `"5m"`
 + Minimum value: `0`
 
 ### `clean-stale-peer-delay`
 
 + Delays the time in deleting expired replica data
-+ Default value: `10m`
++ Default value: `"10m"`
 + Minimum value: `0`
 
 ### `region-compact-check-step`
@@ -442,38 +451,38 @@ Configuration items related to Raftstore
 ### `pd-heartbeat-tick-interval`
 
 + The time interval at which a Region's heartbeat to PD is triggered. `0` means that this feature is disabled.
-+ Default value: `1m`
++ Default value: `"1m"`
 + Minimum value: `0`
 
 ### `pd-store-heartbeat-tick-interval`
 
 + The time interval at which a store's heartbeat to PD is triggered. `0` means that this feature is disabled.
-+ Default value: `10s`
++ Default value: `"10s"`
 + Minimum value: `0`
 
 ### `snap-mgr-gc-tick-interval`
 
 + The time interval at which the recycle of expired snapshot files is triggered. `0` means that this feature is disabled.
-+ Default value: `5s`
++ Default value: `"5s"`
 + Minimum value: `0`
 
 ### `snap-gc-timeout`
 
 + The longest time for which a snapshot file is saved
-+ Default value: `4h`
++ Default value: `"4h"`
 + Minimum value: `0`
 
 ### `lock-cf-compact-interval`
 
 + The time interval at which TiKV triggers a manual compaction for the Lock Column Family
-+ Default value: `256MB`
-+ Default value: `10m`
++ Default value: `"256MB"`
++ Default value: `"10m"`
 + Minimum value: `0`
 
 ### `lock-cf-compact-bytes-threshold`
 
 + The size out of which TiKV triggers a manual compaction for the Lock Column Family
-+ Default value: `256MB`
++ Default value: `"256MB"`
 + Minimum value: `0`
 + Unit: MB
 
@@ -492,25 +501,25 @@ Configuration items related to Raftstore
 ### `max-peer-down-duration`
 
 + The longest inactive duration allowed for a peer. A peer with timeout is marked as `down`, and PD tries to delete it later.
-+ Default value: `5m`
++ Default value: `"5m"`
 + Minimum value: `0`
 
 ### `max-leader-missing-duration`
 
 + The longest duration allowed for a peer to be in the state where a Raft group is missing the leader. If this value is exceeded, the peer verifies with PD whether the peer has been deleted.
-+ Default value: `2h`
++ Default value: `"2h"`
 + Minimum value: greater than `abnormal-leader-missing-duration`
 
 ### `abnormal-leader-missing-duration`
 
 + The longest duration allowed for a peer to be in the state where a Raft group is missing the leader. If this value is exceeded, the peer is seen as abnormal and marked in metrics and logs.
-+ Default value: `10m`
++ Default value: `"10m"`
 + Minimum value: greater than `peer-stale-state-check-interval`
 
 ### `peer-stale-state-check-interval`
 
 + The time interval to trigger the check for whether a peer is in the state where a Raft group is missing the leader.
-+ Default value: `5m`
++ Default value: `"5m"`
 + Minimum value: greater than `2 * election-timeout`
 
 ### `leader-transfer-max-log-lag`
@@ -522,20 +531,20 @@ Configuration items related to Raftstore
 ### `snap-apply-batch-size`
 
 + The memory cache size required when the imported snapshot file is written into the disk
-+ Default value: `10MB`
++ Default value: `"10MB"`
 + Minimum value: `0`
 + Unit: MB
 
 ### `consistency-check-interval`
 
 + The time interval at which the consistency check is triggered. `0` means that this feature is disabled.
-+ Default value: `0s`
++ Default value: `"0s"`
 + Minimum value: `0`
 
 ### `raft-store-max-leader-lease`
 
 + The longest trusted period of a Raft leader
-+ Default value: `9s`
++ Default value: `"9s"`
 + Minimum value: `0`
 
 ### `allow-remove-leader`
@@ -552,7 +561,7 @@ Configuration items related to Raftstore
 ### `merge-check-tick-interval`
 
 + The time interval at which TiKV checks whether a Region needs merge
-+ Default value: `10s`
++ Default value: `"10s"`
 + Minimum value: greater than `0`
 
 ### `use-delete-range`
@@ -563,7 +572,7 @@ Configuration items related to Raftstore
 ### `cleanup-import-sst-interval`
 
 + The time interval at which the expired SST file is checked. `0` means that this feature is disabled.
-+ Default value: `10m`
++ Default value: `"10m"`
 + Minimum value: `0`
 
 ### `local-read-batch-size`
@@ -620,13 +629,13 @@ Configuration items related to Coprocessor
 ### `region-max-size`
 
 + The maximum size of a Region. When the value is exceeded, the Region splits into many.
-+ Default value: `144MB`
++ Default value: `"144MB"`
 + Unit: KB|MB|GB
 
 ### `region-split-size`
 
 + The size of the newly split Region. This value is an estimate.
-+ Default value: `96MB`
++ Default value: `"96MB"`
 + Unit: KB|MB|GB
 
 ### `region-max-keys`
@@ -649,6 +658,12 @@ Configuration items related to RocksDB
 + Default value: `8`
 + Minimum value: `1`
 
+### `max-background-flushes`
+
++ The maximum number of concurrent background memtable flush jobs
++ Default value: `2`
++ Minimum value: `1`
+
 ### `max-sub-compactions`
 
 + The number of sub-compaction operations performed concurrently in RocksDB
@@ -664,7 +679,7 @@ Configuration items related to RocksDB
 ### `max-manifest-file-size`
 
 + The maximum size of a RocksDB Manifest file
-+ Default value: `128MB`
++ Default value: `"128MB"`
 + Minimum value: `0`
 + Unit: B|KB|MB|GB
 
@@ -684,7 +699,7 @@ Configuration items related to RocksDB
 ### `wal-dir`
 
 + The directory in which WAL files are stored
-+ Default value: `/tmp/tikv/store`
++ Default value: `"/tmp/tikv/store"`
 
 ### `wal-ttl-seconds`
 
@@ -702,8 +717,8 @@ Configuration items related to RocksDB
 
 ### `enable-statistics`
 
-+ Determines whether to automatically optimize the configuration of Rate LImiter
-+ Default value: `false`
++ Determines whether to enable the statistics of RocksDB
++ Default value: `true`
 
 ### `stats-dump-period`
 
@@ -720,7 +735,7 @@ Configuration items related to RocksDB
 ### `writable-file-max-buffer-size`
 
 + The maximum buffer size used in WritableFileWrite
-+ Default value: `1MB`
++ Default value: `"1MB"`
 + Minimum value: `0`
 + Unit: B|KB|MB|GB
 
@@ -757,28 +772,28 @@ Configuration items related to RocksDB
 ### `bytes-per-sync`
 
 + The rate at which OS incrementally synchronizes files to disk while these files are being written asynchronously
-+ Default value: `1MB`
++ Default value: `"1MB"`
 + Minimum value: `0`
 + Unit: B|KB|MB|GB
 
 ### `wal-bytes-per-sync`
 
 + The rate at which OS incrementally synchronizes WAL files to disk while the WAL files are being written
-+ Default value: `512KB`
++ Default value: `"512KB"`
 + Minimum value: `0`
 + Unit: B|KB|MB|GB
 
 ### `info-log-max-size`
 
 + The maximum size of Info log
-+ Default value: `1GB`
++ Default value: `"1GB"`
 + Minimum value: `0`
 + Unit: B|KB|MB|GB
 
 ### `info-log-roll-time`
 
-+ The time interval at which Info logs are truncated. If the value is `0`, logs are not truncated.
-+ Default value: `0`
++ The time interval at which Info logs are truncated. If the value is `0s`, logs are not truncated.
++ Default value: `"0s"`
 
 ### `info-log-keep-log-file-num`
 
@@ -803,7 +818,7 @@ Configuration items related to Titan
 ### `dirname`
 
 + The directory in which the Titan Blob file is stored
-+ Default value: `titandb`
++ Default value: `"titandb"`
 
 ### `disable-gc`
 
@@ -823,8 +838,8 @@ Configuration items related to `rocksdb.defaultcf`
 ### `block-size`
 
 + The default size of a RocksDB block
-+ Default value: `64KB`
-+ Minimum value: `1KB`
++ Default value: `"64KB"`
++ Minimum value: `"1KB"`
 + Unit: KB|MB|GB
 
 ### `block-cache-size`
@@ -891,7 +906,7 @@ Configuration items related to `rocksdb.defaultcf`
 ### `write-buffer-size`
 
 + Memtable size
-+ Default value: `128MB`
++ Default value: `"128MB"`
 + Minimum value: `0`
 + Unit: KB|MB|GB
 
@@ -910,14 +925,14 @@ Configuration items related to `rocksdb.defaultcf`
 ### `max-bytes-for-level-base`
 
 + The maximum number of bytes at base level (L1). Generally, it is set to 4 times the size of a memtable.
-+ Default value: `512MB`
++ Default value: `"512MB"`
 + Minimum value: `0`
 + Unit: KB|MB|GB
 
 ### `target-file-size-base`
 
 + The size of the target file at base level
-+ Default: `8MB`
++ Default: `"8MB"`
 + Minimum value: `0`
 + Unit: KB|MB|GB
 
@@ -942,7 +957,7 @@ Configuration items related to `rocksdb.defaultcf`
 ### `max-compaction-bytes`
 
 + The maximum number of bytes written into disk per compaction
-+ Default value: `2GB`
++ Default value: `"2GB"`
 + Minimum value: `0`
 + Unit: KB|MB|GB
 
@@ -970,8 +985,8 @@ Configuration items related to `rocksdb.defaultcf`
 ### `rocksdb.defaultcf.compaction-style`
 
 + Compaction method
-+ Optional values: `level`, `universal`
-+ Default value: `level`
++ Optional values: `"level"`, `"universal"`
++ Default value: `"level"`
 
 ### `disable-auto-compactions`
 
@@ -981,13 +996,13 @@ Configuration items related to `rocksdb.defaultcf`
 ### `soft-pending-compaction-bytes-limit`
 
 + The soft limit on the pending compaction bytes
-+ Default value: `64GB`
++ Default value: `"64GB"`
 + Unit: KB|MB|GB
 
 ### `hard-pending-compaction-bytes-limit`
 
 + The hard limit on the pending compaction bytes
-+ Default value: `256GB`
++ Default value: `"256GB"`
 + Unit: KB|MB|GB
 
 ## `rocksdb.defaultcf.titan`
@@ -997,34 +1012,34 @@ Configuration items related to `rocksdb.defaultcf.titan`
 ### `min-blob-size`
 
 + The smallest value stored in a Blob file. Values smaller than the specified size are stored in the LSM-Tree.
-+ Default value: `1KB`
++ Default value: `"1KB"`
 + Minimum value: `0`
 + Unit: KB|MB|GB
 
 ### `blob-file-compression`
 
 + The compression algorithm used in a Blob file
-+ Optional values: `no`, `snappy`, `zlib`, `bzip2`, `lz4`, `lz4hc`, `zstd`
-+ Default value: `lz4`
++ Optional values: `"no"`, `"snappy"`, `"zlib"`, `"bzip2"`, `"lz4"`, `"lz4hc"`, `"zstd"`
++ Default value: `"lz4"`
 
 ### `blob-cache-size`
 
 + The cache size of a Blob file
-+ Default value: `0GB`
++ Default value: `"0GB"`
 + Minimum value: `0`
 + Unit: KB|MB|GB
 
 ### `min-gc-batch-size`
 
 + The minimum total size of Blob files required to perform GC for one time
-+ Default value: `16MB`
++ Default value: `"16MB"`
 + Minimum value: `0`
 + Unit: KB|MB|GB
 
 ### `max-gc-batch-size`
 
 + The maximum total size of Blob files allowed to perform GC for one time
-+ Default value: `64MB`
++ Default value: `"64MB"`
 + Minimum value: `0`
 + Unit: KB|MB|GB
 
@@ -1045,7 +1060,7 @@ Configuration items related to `rocksdb.defaultcf.titan`
 ### `merge-small-file-threshold`
 
 + When the size of a Blob file is smaller than this value, the Blob file might still be selected for GC. In this situation, `discardable-ratio` is ignored.
-+ Default value: `8MB`
++ Default value: `"8MB"`
 + Minimum value: `0`
 + Unit: KB|MB|GB
 
@@ -1127,7 +1142,7 @@ Configuration items related to `raftdb`
 ### `wal-dir`
 
 + The directory in which WAL files are stored
-+ Default value: `/tmp/tikv/store`
++ Default value: `"/tmp/tikv/store"`
 
 ## security
 
@@ -1148,10 +1163,40 @@ Configuration items related to security
 + The path of the PEM file that contains the X509 key
 + Default value: ""
 
-### `redact-info-log`
+### `redact-info-log` <span class="version-mark">New in v4.0.8</span>
 
 + This configuration item enables or disables log redaction. If the configuration value is set to `true`, all user data in the log will be replaced by `?`.
 + Default value: `false`
+
+## security.encryption
+
+Configuration items related to [encryption at rest](/encryption-at-rest.md) (TDE).
+
+### `data-encryption-method`
+
++ The encryption method for data files
++ Value options: "plaintext", "aes128-ctr", "aes192-ctr", and "aes256-ctr"
++ A value other than "plaintext" means that encryption is enabled, in which case the master key must be specified.
++ Default value: `"plaintext"`
+
+### `data-key-rotation-period`
+
++ Specifies how often TiKV rotates the data encryption key.
++ Default value: `7d`
+
+### enable-file-dictionary-log
+
++ Enables the optimization to reduce I/O and mutex contention when TiKV manages the encryption metadata.
++ To avoid possible compatibility issues when this configuration parameter is enabled (by default), see [Encryption at Rest - Compatibility between TiKV versions](/encryption-at-rest.md#compatibility-between-tikv-versions) for details.
++ Default value: `true`
+
+### master-key
+
++ Specifies the master key if encryption is enabled. To learn how to configure a master key, see [Encryption at Rest - Configure encryption](/encryption-at-rest.md#configure-encryption).
+
+### previous-master-key
+
++ Specifies the old master key when rotating the new master key. The configuration format is the same as that of `master-key`. To learn how to configure a master key, see [Encryption at Rest - Configure encryption](/encryption-at-rest.md#configure-encryption).
 
 ## `import`
 
@@ -1189,13 +1234,13 @@ Configuration items related to BR backup.
 ### `wait-for-lock-timeout`
 
 - The longest time that a pessimistic transaction in TiKV waits for other transactions to release the lock. If the time is out, an error is returned to TiDB, and TiDB retries to add a lock. The lock wait timeout is set by `innodb_lock_wait_timeout`.
-- Default value: 1 s
-- Minimum value: 1 ms
+- Default value: `"1s"`
+- Minimum value: `"1ms"`
 
 ### `wait-up-delay-duration`
 
 - When pessimistic transactions release the lock, among all the transactions waiting for lock, only the transaction with the smallest `start_ts` is woken up. Other transactions will be woken up after `wait-up-delay-duration`.
-- Default value: 20 ms
+- Default value: `"20ms"`
 
 ### `pipelined`
 

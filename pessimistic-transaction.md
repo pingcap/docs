@@ -95,11 +95,11 @@ Pessimistic transactions in TiDB behave similarly to those in MySQL. See the min
 
 4. After executing `START TRANSACTION WITH CONSISTENT SNAPSHOT`, MySQL can still read the tables that are created later in other transactions, while TiDB cannot.
 
-5. The autocommit transactions do not support the pessimistic locking.
+5. The autocommit transactions prefer the optimistic locking.
 
-    None of the autocommit statements acquire the pessimistic lock. These statements do not display any difference in the user side, because the nature of pessimistic transactions is to turn the retry of the whole transaction into a single DML retry. The autocommit transactions automatically retry even when TiDB closes the retry, which has the same effect as pessimistic transactions.
+    When using the pessimistic model, the autocommit transactions first try to commit the statement using the optimistic model that has less overhead. If a write conflict occurs, the pessimistic model is used for transaction retry. Therefore, if `tidb_retry_limit` is set to `0`, the autocommit transaction still reports the `Write Conflict` error when a write conflict occurs.
 
-    The autocommit `SELECT FOR UPDATE` statement does not wait for lock, either.
+    The autocommit `SELECT FOR UPDATE` statement does not wait for lock.
 
 6. The data read by `EMBEDDED SELECT` in the statement is not locked.
 
@@ -121,7 +121,13 @@ TiDB supports the following two isolation levels in the pessimistic transaction 
 
 Adding a pessimistic lock requires writing data into TiKV. The response of successfully adding a lock can only be returned to TiDB after commit and apply through Raft. Therefore, compared with optimistic transactions, the pessimistic transaction mode inevitably has higher latency.
 
-To reduce the overhead of locking, TiKV implements the pipelined locking process: when the data meets the requirements for locking, TiKV immediately notifies TiDB to execute subsequent requests and writes into the pessimistic lock asynchronously. This process reduces most latency and significantly improves the performance of pessimistic transactions. However, there is a low probability that the asynchronous write into the pessimistic lock might fail, resulting in the commit failure of the pessimistic transaction.
+To reduce the overhead of locking, TiKV implements the pipelined locking process: when the data meets the requirements for locking, TiKV immediately notifies TiDB to execute subsequent requests and writes into the pessimistic lock asynchronously. This process reduces most latency and significantly improves the performance of pessimistic transactions. However, when network partition occurs in TiKV or a TiKV node is down, the asynchronous write into the pessimistic lock might fail and affect the following aspects:
+
+* Other transactions that modify the same data cannot be blocked. If the application logic relies on locking or lock waiting mechanisms, the correctness of the application logic is affected.
+
+* There is a low probability that the transaction commit fails, but it does not affect the correctness of the transactions.
+
+If the application logic relies on the locking or lock waiting mechanisms, or if you want to guarantee as much as possible the success rate of transaction commits even in the case of TiKV cluster anomalies, you should disable the pipelined locking feature.
 
 ![Pipelined pessimistic lock](/media/pessimistic-transaction-pipelining.png)
 
@@ -130,6 +136,14 @@ This feature is disabled by default. To enable it, modify the TiKV configuration
 ```toml
 [pessimistic-txn]
 pipelined = true
+```
+
+If the TiKV cluster is v4.0.9 or later, you can also dynamically enable this feature by [modifying TiKV configuration online](/dynamic-config.md#modify-tikv-configuration-online):
+
+{{< copyable "sql" >}}
+
+```sql
+set config tikv pessimistic-txn.pipelined='true';
 ```
 
 ## FAQ

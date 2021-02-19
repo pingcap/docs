@@ -113,8 +113,9 @@ These differences are documented further in [`ANALYZE TABLE`](/sql-statements/sq
 
 ### Limitations of `SELECT` syntax
 
-- The `SELECT ... INTO @variable` syntax is not supported.
-- The `SELECT ... GROUP BY ... WITH ROLLUP` syntax is not supported.
+- The syntax `SELECT ... INTO @variable` is not supported.
+- The syntax `SELECT ... GROUP BY ... WITH ROLLUP` is not supported.
+- The syntax `SELECT .. GROUP BY expr` does not imply `GROUP BY expr ORDER BY expr` as it does in MySQL 5.7. TiDB instead matches the behavior of MySQL 8.0 and does not imply a default order.
 
 ### Views
 
@@ -183,6 +184,11 @@ By default, the `NO_ZERO_DATE` and `NO_ZERO_IN_DATE` modes are enabled in TiDB, 
 The following column types are supported by MySQL, but **NOT** by TiDB:
 
 + FLOAT4/FLOAT8
-+ FIXED (alias for DECIMAL)
-+ SERIAL (alias for BIGINT UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE)
-+ `SQL_TSI_*` (including SQL_TSI_YEAR, SQL_TSI_MONTH, SQL_TSI_WEEK, SQL_TSI_DAY, SQL_TSI_HOUR, SQL_TSI_MINUTE and SQL_TSI_SECOND)
++ `SQL_TSI_*` (including SQL_TSI_MONTH, SQL_TSI_WEEK, SQL_TSI_DAY, SQL_TSI_HOUR, SQL_TSI_MINUTE and SQL_TSI_SECOND, excluding SQL_TSI_YEAR)
+
+### Incompatibility caused by deprecated features
+
+TiDB does not implement certain features that have been marked as deprecated in MySQL, including:
+
+* Specifying precision for floating point types. MySQL 8.0 [deprecates](https://dev.mysql.com/doc/refman/8.0/en/floating-point-types.html) this feature, and it is recommended to use the `DECIMAL` type instead.
+* The `ZEROFILL` attribute. MySQL 8.0 [deprecates](https://dev.mysql.com/doc/refman/8.0/en/numeric-type-attributes.html) this feature, and it is recommended to instead pad numeric values in your application.

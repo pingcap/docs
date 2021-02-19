@@ -1,7 +1,7 @@
 ---
 title: TiDB Cluster Alert Rules
 summary: Learn the alert rules in a TiDB cluster.
-aliases: ['/docs/stable/alert-rules/','/docs/v4.0/alert-rules/','/docs/stable/reference/alert-rules/']
+aliases: ['/docs/stable/alert-rules/','/docs/v4.0/alert-rules/','/docs/stable/reference/alert-rules/','/docs/v4.0/reference/alert-rules/']
 ---
 
 <!-- markdownlint-disable MD024 -->
@@ -121,7 +121,7 @@ Warning-level alerts are a reminder for an issue or error.
 
 * Description:
 
-    The latency of handling a request in TiDB. If the 99th percentile latency exceeds 1 second, an alert is triggered.
+    The latency of handling a request in TiDB. If the ninety-ninth percentile latency exceeds 1 second, an alert is triggered.
 
 * Solution:
 

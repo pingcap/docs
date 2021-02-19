@@ -143,7 +143,7 @@ read-block-size = 65536 # Byte (default = 64 KB)
 # This value should be in the range (0 <= batch-import-ratio < 1).
 batch-import-ratio = 0.75
 
-# mydumper local source data directory.
+# Local source data directory.
 data-source-dir = "/data/my_database"
 # If no-schema is set to true, tidb-lightning assumes that the table skeletons
 # already exist on the target TiDB cluster, and will not execute the `CREATE
@@ -165,7 +165,7 @@ character-set = "auto"
 # Assumes the input data are "strict" to speed up processing.
 # Implications of strict-format = true are:
 #  * in CSV, every value cannot contain literal new lines (U+000A and U+000D, or \r and \n) even
-#    when quoted, i.e. new lines are strictly used to separate rows.
+#    when quoted, which means new lines are strictly used to separate rows.
 # Strict format allows Lightning to quickly locate split positions of a large file for parallel
 # processing. However, if the input data is not strict, it may split a valid data in half and
 # corrupt the result.
@@ -191,7 +191,7 @@ header = true
 # Whether the CSV contains any NULL value.
 # If `not-null` is true, all columns from CSV cannot be NULL.
 not-null = false
-# When `not-null` is false (i.e. CSV can contain NULL),
+# When `not-null` is false (that is, CSV can contain NULL),
 # fields equal to this value will be treated as NULL.
 null = '\N'
 # Whether to interpret backslash escapes inside fields.

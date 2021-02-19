@@ -1,6 +1,6 @@
 ---
 title: TiDB Ecosystem Tools Overview
-aliases: ['/docs/stable/ecosystem-tool-user-guide/','/docs/v4.0/ecosystem-tool-user-guide/','/docs/stable/reference/tools/user-guide/']
+aliases: ['/docs/stable/ecosystem-tool-user-guide/','/docs/v4.0/ecosystem-tool-user-guide/','/docs/stable/reference/tools/user-guide/','/docs/stable/how-to/migrate/incrementally-from-mysql/','/docs/stable/how-to/migrate/overview/']
 ---
 
 # TiDB Ecosystem Tools Overview
@@ -17,6 +17,10 @@ The following are the basics of Dumpling:
 - Output: SQL/CSV file
 - Supported TiDB versions: all versions
 - Kubernetes support: No
+
+> **Note:**
+>
+> PingCAP previously maintained a fork of the [mydumper project](https://github.com/maxbube/mydumper) with enhancements specific to TiDB. This fork has since been replaced by [Dumpling](/dumpling-overview.md), which has been rewritten in Go, and supports more optimizations that are specific to TiDB. It is strongly recommended that you use Dumpling instead of mydumper.
 
 ## Full data import
 

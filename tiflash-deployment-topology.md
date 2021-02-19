@@ -6,7 +6,7 @@ aliases: ['/docs/stable/tiflash-deployment-topology/','/docs/v4.0/tiflash-deploy
 
 # TiFlash Deployment Topology
 
-This document describes the deployment topology of TiFlash based on the minimal TiDB topology.
+This document describes the deployment topology of [TiFlash](/tiflash/tiflash-overview.md) based on the minimal TiDB topology.
 
 TiFlash is a columnar storage engine, and gradually becomes the standard cluster topology. It is suitable for real-time HTAP applications.
 

@@ -1,7 +1,7 @@
 ---
 title: TiDB FAQ
 summary: Learn about the most frequently asked questions (FAQs) relating to TiDB.
-aliases: ['/docs/stable/faq/tidb-faq/','/docs/v4.0/faq/tidb-faq/','/docs/stable/faq/tidb/','/docs/stable/tiflash/tiflash-faq/','/docs/stable/reference/tiflash/faq/','/tidb/v4.0/tiflash-faq']
+aliases: ['/docs/stable/faq/tidb-faq/','/docs/v4.0/faq/tidb-faq/','/docs/stable/faq/tidb/','/docs/stable/tiflash/tiflash-faq/','/docs/stable/reference/tiflash/faq/','/tidb/v4.0/tiflash-faq','/tidb/stable/tiflash-faq']
 ---
 
 # TiDB FAQ

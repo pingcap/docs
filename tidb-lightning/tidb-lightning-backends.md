@@ -123,7 +123,7 @@ on-duplicate = "replace" # or "error" or "ignore"
 
 ### Migrating from Loader to TiDB Lightning TiDB-backend
 
-TiDB Lightning using the TiDB-backend can completely replace functions of [Loader](/loader-overview.md). The following list shows how to translate Loader configurations into [TiDB Lightning configurations](/tidb-lightning/tidb-lightning-configuration.md).
+If you need to import data into a TiDB cluster, TiDB Lightning using the TiDB-backend can completely replace the functionalities of [Loader](/loader-overview.md). The following list shows how to translate Loader configurations into [TiDB Lightning configurations](/tidb-lightning/tidb-lightning-configuration.md).
 
 <table>
 <thead><tr><th>Loader</th><th>TiDB Lightning</th></tr></thead>
@@ -461,8 +461,7 @@ Refer to the [TiDB enterprise tools download page](/download-ecosystem-tools.md#
     status-port = 10080
     ```
 
-    The above only shows the essential settings.
-    See the [Configuration](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-global) section for the full list of settings.
+    The above only shows the essential settings. See the [Configuration](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-global) section for the full list of settings.
 
 4. Run `tidb-lightning`. If you directly run the command in the command-line, the process might exit because of the SIGHUP signal received. Instead, it's preferable to run a bash script that contains the `nohup` command:
 

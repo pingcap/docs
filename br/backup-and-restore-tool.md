@@ -6,13 +6,14 @@ aliases: ['/docs/stable/br/backup-and-restore-tool/','/docs/v4.0/br/backup-and-r
 
 # Use BR to Back up and Restore Data
 
-[Backup & Restore](http://github.com/pingcap/br) (BR) is a command-line tool for distributed backup and restoration of the TiDB cluster data. Compared with [`dumpling`](/backup-and-restore-using-dumpling-lightning.md) and [`mydumper`/`loader`](/backup-and-restore-using-mydumper-lightning.md), BR is more suitable for scenarios of huge data volume. This document describes the BR command line, detailed use examples, best practices, restrictions, and introduces the implementation principles of BR.
+[Backup & Restore](http://github.com/pingcap/br) (BR) is a command-line tool for distributed backup and restoration of the TiDB cluster data. Compared with [`dumpling`](/backup-and-restore-using-dumpling-lightning.md) and [`mydumper`](/backup-and-restore-using-mydumper-lightning.md), BR is more suitable for scenarios of huge data volume. This document describes the BR command line, detailed use examples, best practices, restrictions, and introduces the implementation principles of BR.
 
 ## Usage restrictions
 
 - BR only supports TiDB v3.1 and later versions.
 - BR supports restore on clusters of different topologies. However, the online applications will be greatly impacted during the restore operation. It is recommended that you perform restore during the off-peak hours or use `rate-limit` to limit the rate.
-- It is recommended that you execute multiple backup operations serially. Otherwise, different backup operations might interfere with each other.
+- It is recommended that you execute multiple backup operations serially. Running different backup operations in parallel reduces backup performance and also affects the online application.
+- It is recommended that you execute multiple restore operations serially. Running different restore operations in parallel increases Region conflicts and also reduces restore performance.
 - When BR restores data to the upstream cluster of TiCDC/Drainer, TiCDC/Drainer cannot replicate the restored data to the downstream.
 - BR supports operations only between clusters with the same [`new_collations_enabled_on_first_bootstrap`](/character-set-and-collation.md#collation-support-framework) value because BR only backs up KV data. If the cluster to be backed up and the cluster to be restored use different collations, the data validation fails. Therefore, before restoring a cluster, make sure that the switch value from the query result of the `select VARIABLE_VALUE from mysql.tidb where VARIABLE_NAME='new_collation_enabled';` statement is consistent with that during the backup process.
 
@@ -195,7 +196,7 @@ Each of the above three sub-commands might still include the following three sub
 
 To back up the cluster data, use the `br backup` command. You can add the `full` or `table` sub-command to specify the scope of your backup operation: the whole cluster or a single table.
 
-If the backup time might exceed the [`tikv_gc_life_time`](/garbage-collection-configuration.md#tikv_gc_life_time) configuration which is `10m0s` by default (`10m0s` means 10 minutes), increase the value of this configuration.
+If the BR version is earlier than v4.0.3, and the backup duration might exceed the [`tikv_gc_life_time`](/garbage-collection-configuration.md#tikv_gc_life_time) configuration which is `10m0s` by default (`10m0s` means 10 minutes), increase the value of this configuration item.
 
 For example, set `tikv_gc_life_time` to `720h`:
 
@@ -205,6 +206,8 @@ For example, set `tikv_gc_life_time` to `720h`:
 mysql -h${TiDBIP} -P4000 -u${TIDB_USER} ${password_str} -Nse \
     "update mysql.tidb set variable_value='720h' where variable_name='tikv_gc_life_time'";
 ```
+
+Since v4.0.3, BR automatically adapts to GC and you do not need to manually adjust the `tikv_gc_life_time` value.
 
 ### Back up all the cluster data
 
@@ -265,7 +268,7 @@ br backup db \
     --log-file backuptable.log
 ```
 
-In the above command, `--db` specifies the name of the database to be backed up. For descriptions of other options, see [Back up all the cluster data](/br/backup-and-restore-tool.md#back-up-all-the-cluster-data).
+In the above command, `--db` specifies the name of the database to be backed up. For descriptions of other options, see [Back up all the cluster data](/br/backup-and-restore-tool.md#back-up-cluster-data).
 
 A progress bar is displayed in the terminal during the backup. When the progress bar advances to 100%, the backup is complete. Then the BR also checks the backup data to ensure data safety.
 
@@ -294,7 +297,7 @@ The `table` sub-command has two options:
 * `--db`: specifies the database name
 * `--table`: specifies the table name.
 
-For descriptions of other options, see [Back up all cluster data](#back-up-all-the-cluster-data).
+For descriptions of other options, see [Back up all cluster data](#back-up-cluster-data).
 
 A progress bar is displayed in the terminal during the backup operation. When the progress bar advances to 100%, the backup is complete. Then the BR also checks the backup data to ensure data safety.
 

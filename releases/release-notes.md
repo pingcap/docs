@@ -7,6 +7,9 @@ aliases: ['/docs/stable/releases/release-notes/','/docs/v4.0/releases/release-no
 
 ## 4.0
 
+- [4.0.10](/releases/release-4.0.10.md)
+- [4.0.9](/releases/release-4.0.9.md)
+- [4.0.8](/releases/release-4.0.8.md)
 - [4.0.7](/releases/release-4.0.7.md)
 - [4.0.6](/releases/release-4.0.6.md)
 - [4.0.5](/releases/release-4.0.5.md)
@@ -34,6 +37,7 @@ aliases: ['/docs/stable/releases/release-notes/','/docs/v4.0/releases/release-no
 
 ## 3.0
 
+- [3.0.20](/releases/release-3.0.20.md)
 - [3.0.19](/releases/release-3.0.19.md)
 - [3.0.18](/releases/release-3.0.18.md)
 - [3.0.17](/releases/release-3.0.17.md)

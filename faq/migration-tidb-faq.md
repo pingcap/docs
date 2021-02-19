@@ -9,14 +9,6 @@ This document summarizes the FAQs related to TiDB data migration.
 
 ## Full data export and import
 
-### Does TiDB support Mydumper?
-
-Yes. See [Mydumper Instructions](/mydumper-overview.md).
-
-### Does TiDB support Loader?
-
-Yes. See [Loader Instructions](/loader-overview.md).
-
 ### How to migrate an application running on MySQL to TiDB?
 
 Because TiDB supports most MySQL syntax, generally you can migrate your applications to TiDB without changing a single line of code in most cases.
@@ -69,6 +61,10 @@ Two solutions:
     ```
 
 - You can also increase the limited number of statements in a single TiDB transaction, but this will consume more memory.
+
+### Why does Dumpling return `The local disk space is insufficient` error when exporting a large table?
+
+This error occurs because the database's primary keys are not evenly distributed. When Dumpling splits the data, some data chunks become excessive. Try to allocate more disk space or [contact us](https://tidbcommunity.slack.com/archives/CH7TTLL7P) to get the nightly version of Dumpling.
 
 ### Does TiDB have a function like the Flashback Query in Oracle? Does it support DDL?
 

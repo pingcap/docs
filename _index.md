@@ -20,7 +20,6 @@ Designed for the cloud, TiDB provides flexible scalability, reliability and secu
 - [Compatibility with MySQL](/mysql-compatibility.md)
 - [Usage Limitations](/tidb-limitations.md)
 - [TiDB Adopters](/adopters.md)
-- [Credits](/credits.md)
 
 </NavColumn>
 
@@ -47,9 +46,9 @@ Designed for the cloud, TiDB provides flexible scalability, reliability and secu
 <ColumnTitle>Migrate Data</ColumnTitle>
 
 - [Migration Overview](/migration-overview.md)
-- [Migrate from MySQL SQL Files](/migrate-from-mysql-mydumper-files.md)
 - [Migrate from Aurora MySQL Database](/migrate-from-aurora-mysql-database.md)
 - [Migrate from CSV Files](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)
+- [Migrate from MySQL SQL Files](/migrate-from-mysql-dumpling-files.md)
 
 </NavColumn>
 
@@ -71,6 +70,7 @@ Designed for the cloud, TiDB provides flexible scalability, reliability and secu
 - [Monitoring Framework](/tidb-monitoring-framework.md)
 - [Monitoring API](/tidb-monitoring-api.md)
 - [Deploy Monitoring Services](/deploy-monitoring-services.md)
+- [Export Grafana Snapshots](/exporting-grafana-snapshots.md)
 - [Alert Rules and Solutions](/alert-rules.md)
 - [TiFlash Alert Rules and Solutions](/tiflash/tiflash-alert-rules.md)
 
@@ -81,6 +81,7 @@ Designed for the cloud, TiDB provides flexible scalability, reliability and secu
 
 - [TiDB Troubleshooting Map](/tidb-troubleshooting-map.md)
 - [Identify Slow Queries](/identify-slow-queries.md)
+- [Analyze Slow Queries](/analyze-slow-queries.md)
 - [SQL Diagnostics](/information-schema/information-schema-sql-diagnostics.md)
 - [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md)
 - [Troubleshoot the TiDB Cluster](/troubleshoot-tidb-cluster.md)

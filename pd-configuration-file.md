@@ -1,7 +1,7 @@
 ---
 title: PD Configuration File
 summary: Learn the PD configuration file.
-aliases: ['/docs/stable/pd-configuration-file/','/docs/v4.0/pd-configuration-file/','/docs/stable/reference/configuration/pd-server/configuration-file/']
+aliases: ['/docs/stable/pd-configuration-file/','/docs/v4.0/pd-configuration-file/','/docs/stable/reference/configuration/pd-server/configuration-file/','/docs/v4.0/reference/configuration/pd-server/configuration/']
 ---
 
 # PD Configuration File
@@ -35,8 +35,8 @@ This document only describes parameters that are not included in command-line pa
 
 ### `quota-backend-bytes`
 
-+ The storage size of the meta-information database, which is 2GB by default
-+ Default value: `2147483648`
++ The storage size of the meta-information database, which is 8GiB by default
++ Default value: `8589934592`
 
 ### `auto-compaction-mod`
 
@@ -131,7 +131,7 @@ Configuration items related to monitoring
 
 ### `interval`
 
-+ The interval at which monitoring metric data is pushed to Promethus
++ The interval at which monitoring metric data is pushed to Prometheus
 + Default value: `15s`
 
 ## `schedule`
@@ -195,14 +195,14 @@ Configuration items related to scheduling
 
 ### `high-space-ratio`
 
-+ The threshold ratio below which the capacity of the store is sufficient
++ The threshold ratio below which the capacity of the store is sufficient. If the space occupancy ratio of the store is smaller than this threshold value, PD ignores the remaining space of the store when performing scheduling, and balances load mainly based on the Region size. This configuration takes effect only when `region-score-formula-version` is set to `v1`.
 + Default value: `0.7`
 + Minimum value: greater than `0`
 + Maximum value: less than `1`
 
 ### `low-space-ratio`
 
-+ The threshold ratio above which the capacity of the store is insufficient
++ The threshold ratio above which the capacity of the store is insufficient. If the space occupancy ratio of a store exceeds this threshold value, PD avoids migrating data to this store as much as possible. Meanwhile, to avoid the disk space of the corresponding store being exhausted, PD performs scheduling mainly based on the remaining space of the store.
 + Default value: `0.8`
 + Minimum value: greater than `0`
 + Maximum value: less than `1`

@@ -46,7 +46,7 @@ It is recommended that you deploy the TiDB cluster using [TiUP](/tiup/tiup-clust
 * CPU: 16-Core Common KVM processor
 * RAM: 32GB
 * Disk: 500G SSD * 2
-* NIC: 10000MB/s
+* NIC: 10 Gigabit network card
 
 ### Cluster configuration
 
@@ -90,6 +90,10 @@ For the detailed usage of the `br backup` command, refer to [BR command-line des
     ```sql
     UPDATE mysql.tidb SET VARIABLE_VALUE = '10m' WHERE VARIABLE_NAME = 'tikv_gc_life_time';
     ```
+
+> **Note:**
+>
+> Since v4.0.8, BR supports the self-adaptive GC. To avoid manually adjusting GC, register `backupTS` in `safePoint` in PD and make sure that `safePoint` does not move forward during the backup process.
 
 ### Preparation for restoration
 

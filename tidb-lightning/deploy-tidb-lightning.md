@@ -49,26 +49,24 @@ Before starting TiDB Lightning, note that:
 >
 > - `tidb-lightning` is a CPU intensive program. In an environment with mixed components, the resources allocated to `tidb-lightning` must be limited. Otherwise, other components might not be able to run. It is recommended to set the `region-concurrency` to 75% of CPU logical cores. For instance, if the CPU has 32 logical cores, you can set the `region-concurrency` to 24.
 
-Additionally, the target TiKV cluster should have enough space to absorb the new data.
-Besides [the standard requirements](/hardware-and-software-requirements.md), the total free space of the target TiKV cluster should be larger than **Size of data source × [Number of replicas](/faq/deploy-and-maintain-faq.md#is-the-number-of-replicas-in-each-region-configurable-if-yes-how-to-configure-it) × 2**.
+Additionally, the target TiKV cluster should have enough space to absorb the new data. Besides [the standard requirements](/hardware-and-software-requirements.md), the total free space of the target TiKV cluster should be larger than **Size of data source × [Number of replicas](/faq/deploy-and-maintain-faq.md#is-the-number-of-replicas-in-each-region-configurable-if-yes-how-to-configure-it) × 2**.
 
 With the default replica count of 3, this means the total free space should be at least 6 times the size of data source.
 
 ## Export data
 
-Use the [`mydumper` tool](/mydumper-overview.md) to export data from MySQL by using the following command:
+Use the [`dumpling` tool](/dumpling-overview.md) to export data from MySQL by using the following command:
 
 ```sh
-./bin/mydumper -h 127.0.0.1 -P 3306 -u root -t 16 -F 256 -B test -T t1,t2 --skip-tz-utc -o /data/my_database/
+./bin/dumpling -h 127.0.0.1 -P 3306 -u root -t 16 -F 256MB -B test -f 'test.t[12]' -o /data/my_database/
 ```
 
 In this command,
 
 - `-B test`: means the data is exported from the `test` database.
-- `-T t1,t2`: means only the `t1` and `t2` tables are exported.
+- `-f test.t[12]`: means only the `test.t1` and `test.t2` tables are exported.
 - `-t 16`: means 16 threads are used to export the data.
-- `-F 256`: means a table is partitioned into chunks and one chunk is 256 MB.
-- `--skip-tz-utc`: the purpose of adding this parameter is to ignore the inconsistency of time zone setting between MySQL and the data exporting machine, and to disable automatic conversion.
+- `-F 256MB`: means a table is partitioned into chunks and one chunk is 256 MB.
 
 If the data source consists of CSV files, see [CSV support](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md) for configuration.
 
@@ -105,7 +103,7 @@ You can deploy TiDB Lightning using TiDB Ansible together with the [deployment o
         # The listening port for metrics gathering. Should be open to the monitoring servers.
         tidb_lightning_pprof_port: 8289
 
-        # The file path that tidb-lightning reads the data source (Mydumper SQL dump or CSV) from.
+        # The file path that tidb-lightning reads the data source (Dumpling SQL dump or CSV) from.
         data_source_dir: "{{ deploy_dir }}/mydumper"
         ```
 
@@ -177,7 +175,7 @@ Refer to the [TiDB enterprise tools download page](/download-ecosystem-tools.md#
     sorted-kv-dir = "/mnt/ssd/sorted-kv-dir"
 
     [mydumper]
-    # mydumper local source data directory
+    # Local source data directory
     data-source-dir = "/data/my_database"
 
     [tidb]
@@ -192,8 +190,7 @@ Refer to the [TiDB enterprise tools download page](/download-ecosystem-tools.md#
     pd-addr = "172.16.31.4:2379"
     ```
 
-    The above only shows the essential settings.
-    See the [Configuration](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-global) section for the full list of settings.
+    The above only shows the essential settings. See the [Configuration](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-global) section for the full list of settings.
 
 4. Run `tidb-lightning`.
 
