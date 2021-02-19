@@ -342,7 +342,7 @@ Some TiDB cluster versions of `nightly` version might be similar to v4.0.0-beta.
 
 ## `restore table test.district failed: unknown columns in header [...]`
 
-This error usually occurs because the CSV format data file does not contain header (the data of the first row). Therefore, you need to add the following configuration items to the configuration file of TiDB Lightning:
+This error usually occurs because the CSV format data file does not contain header (the first row is not column names but data). Therefore, you need to add the following configuration items to the configuration file of TiDB Lightning:
 
 ```
 [mydumper.csv]
