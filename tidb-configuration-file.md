@@ -595,11 +595,3 @@ The `experimental` section describes configurations related to the experimental 
 
 - Determines whether to create the expression index.
 - Default value: `false`
-<<<<<<< HEAD
-=======
-
-### `enable-global-kill` <span class="version-mark">New in v5.0.0-rc</span>
-
-- Determines whether to enable the Global Kill feature. To enable this feature, set the value of this configuration item to `true`. When enabled, this feature can safely kill any connection even when the TiDB server is behind a load balancer.
-- Default value: `false`
->>>>>>> 8083b5ba... add a new tidb configuration of coprocessor cache (#4833)
