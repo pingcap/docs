@@ -496,6 +496,12 @@ This section introduces configuration items related to the Coprocessor Cache fea
 - Default value: `5`
 - Unit: ms
 
+### `admission-max-ranges` <span class="version-mark">New in v4.0.8</span>
+
++ Specifies the maximum number of ranges in a single push-down calculation result set that can be cached. If the push-down calculation has more ranges than the number specified by this configuration, the result set will not be cached. Generally, when there are too many ranges, the extra calculation overhead of parsing the range brought by Coprocessor Cache is large.
++ Default value: `500`
++ Type: uint
+
 ### txn-local-latches
 
 Configuration related to the transaction latch. It is recommended to enable it when many local transaction conflicts occur.
@@ -589,3 +595,11 @@ The `experimental` section describes configurations related to the experimental 
 
 - Determines whether to create the expression index.
 - Default value: `false`
+<<<<<<< HEAD
+=======
+
+### `enable-global-kill` <span class="version-mark">New in v5.0.0-rc</span>
+
+- Determines whether to enable the Global Kill feature. To enable this feature, set the value of this configuration item to `true`. When enabled, this feature can safely kill any connection even when the TiDB server is behind a load balancer.
+- Default value: `false`
+>>>>>>> 8083b5ba... add a new tidb configuration of coprocessor cache (#4833)
