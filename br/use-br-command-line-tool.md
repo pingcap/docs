@@ -7,9 +7,7 @@ summary: Learn how to use the BR command line to backup and restore cluster data
 
 This document describes how to back up and restore TiDB cluster data using the BR command line.
 
-在阅读本文前，请确保你已通读[备份与恢复工具 BR 简介](/br/backup-and-restore-tool.md)，尤其是[使用限制](/br/backup-and-restore-tool.md#使用限制)和[最佳实践](/br/backup-and-restore-tool.md#最佳实践)这两节。
-
-Make sure you have read [BR Tool Overview](/br/backup-and-restore-tool.md), especially [Usage Restrictions](/br/backup-and-restore-tool.md#usage-restrictions) and [Best Practices](/br/backup-and-restore-tool.md#Best Practices).
+Make sure you have read [BR Tool Overview](/br/backup-and-restore-tool.md), especially [Usage Restrictions](/br/backup-and-restore-tool.md#usage-restrictions) and [Best Practices](/br/backup-and-restore-tool.md#best-practices).
 
 ## BR command-line description
 
