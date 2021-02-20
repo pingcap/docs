@@ -516,7 +516,7 @@ Configuration items related to Raftstore
 ### `leader-transfer-max-log-lag`
 
 + The maximum number of missing logs allowed for the transferee during a Raft leader transfer
-+ Default value: `10`
++ Default value: `128`
 + Minimum value: `10`
 
 ### `snap-apply-batch-size`
@@ -552,7 +552,7 @@ Configuration items related to Raftstore
 ### `merge-check-tick-interval`
 
 + The time interval at which TiKV checks whether a Region needs merge
-+ Default value: `"10s"`
++ Default value: `"2s"`
 + Minimum value: greater than `0`
 
 ### `use-delete-range`
