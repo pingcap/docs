@@ -301,7 +301,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 ### tidb_ddl_reorg_priority
 
-- Scope: SESSION | GLOBAL
+- Scope: SESSION
 - Default value: `PRIORITY_LOW`
 - This variable is used to set the priority of executing the `ADD INDEX` operation in the `re-organize` phase.
 - You can set the value of this variable to `PRIORITY_LOW`, `PRIORITY_NORMAL` or `PRIORITY_HIGH`.
@@ -395,6 +395,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - After you enable this feature, rows are stored directly on the primary key instead of on the internally allocated `rows_id` to which the extra primary key index is created to point.
 
     This feature impacts performance in the following aspects:
+
     - For each `INSERT` operation, there is one less index key written into each row.
     - When you make a query using the primary key as the equivalent condition, one read request can be saved.
     - When you make a query using the primary key as the range condition, multiple read requests can be saved.
