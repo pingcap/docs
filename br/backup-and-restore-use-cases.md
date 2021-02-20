@@ -8,7 +8,7 @@ aliases: ['/docs/dev/br/backup-and-restore-use-cases/','/docs/dev/reference/tool
 
 [BR](/br/backup-and-restore-tool.md) is a tool for distributed backup and restoration of the TiDB cluster data.
 
-This document describes how to runn BR in the following use cases:
+This document describes how to run BR in the following use cases:
 
 - Back up a single table to a network disk (recommended in production environment)
 - Restore data from a network disk (recommended in production environment)
@@ -82,9 +82,9 @@ Before the backup or restoration operations, you need to do some preparations:
 
 ### Preparation for backup
 
-In TiDB v4.0.8 and higher versions, BR supports the self-adaptive Garbage Collection (GC). So to avoid manually configuring GC, you only need to register `backupTS` in `safePoint` in PD and make sure that `safePoint` does not move forward during the backup process.
+In TiDB v4.0.8 and later versions, BR supports the self-adaptive Garbage Collection (GC). So to avoid manually configuring GC, you only need to register `backupTS` in `safePoint` in PD and make sure that `safePoint` does not move forward during the backup process.
 
-In TiDB v4.0.7 and lower versions, you need to manually configure GC before and after the BR backup through the following steps:
+In TiDB v4.0.7 and earlier versions, you need to manually configure GC before and after the BR backup through the following steps:
 
 1. Before executing the [`br backup` command](/br/use-br-command-line-tool.md#br-command-line-description), check the value of the [`tikv_gc_life_time`](/garbage-collection-configuration.md#tikv_gc_life_time) configuration item, and adjust the value appropriately in the MySQL client to make sure that GC does not run during the backup operation.
 
@@ -459,7 +459,7 @@ This section introduces the common errors occurred during the backup process.
 
 Error message in the log: `log - ["backup occur kv error"][error="{\"KvError\":{\"locked\":`
 
-If a key is locked during the backup process, BR tries to resolve the lock. A small number of this error does not affect the correctness of the backup.
+If a key is locked during the backup process, BR tries to resolve the lock. A small number of these errors do not affect the correctness of the backup.
 
 ### Backup failure
 
