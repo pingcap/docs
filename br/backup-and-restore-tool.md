@@ -1,22 +1,12 @@
 ---
-<<<<<<< HEAD
-title: Use BR to Backup and Restore Data
-summary: Learn how to back up and restore data of the TiDB cluster using BR.
-aliases: ['/docs/stable/br/backup-and-restore-tool/','/docs/v4.0/br/backup-and-restore-tool/','/docs/stable/reference/tools/br/br/']
-=======
 title: BR Tool Overview
 summary: Learn what is BR and how to use the tool.
-aliases: ['/docs/dev/br/backup-and-restore-tool/','/docs/dev/reference/tools/br/br/','/docs/dev/how-to/maintain/backup-and-restore/br/']
->>>>>>> 7956a695... BR: reorganize content about BR tool (#4810)
+aliases: ['/docs/stable/br/backup-and-restore-tool/','/docs/v4.0/br/backup-and-restore-tool/','/docs/stable/reference/tools/br/br/']
 ---
 
 # BR Tool Overview
 
-<<<<<<< HEAD
-[Backup & Restore](http://github.com/pingcap/br) (BR) is a command-line tool for distributed backup and restoration of the TiDB cluster data. Compared with [`dumpling`](/backup-and-restore-using-dumpling-lightning.md) and [`mydumper`](/backup-and-restore-using-mydumper-lightning.md), BR is more suitable for scenarios of huge data volume. This document describes the BR command line, detailed use examples, best practices, restrictions, and introduces the implementation principles of BR.
-=======
 [BR](http://github.com/pingcap/br) (Backup & Restore) is a command-line tool for distributed backup and restoration of the TiDB cluster data. It is supported to use BR only in TiDB v3.1 and later versions.
->>>>>>> 7956a695... BR: reorganize content about BR tool (#4810)
 
 Compared with [`dumpling`](/backup-and-restore-using-dumpling-lightning.md), BR is more suitable for scenarios of huge data volume.
 

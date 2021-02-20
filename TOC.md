@@ -69,12 +69,6 @@
       + [BR Tool Overview](/br/backup-and-restore-tool.md)
       + [Use BR Command-line](/br/use-br-command-line-tool.md)
       + [BR Use Cases](/br/backup-and-restore-use-cases.md)
-<<<<<<< HEAD
-      + [BR Storages](/br/backup-and-restore-storages.md)
-    + [Use Dumpling and TiDB Lightning](/backup-and-restore-using-dumpling-lightning.md)
-    + [Use Mydumper and TiDB Lightning](/backup-and-restore-using-mydumper-lightning.md)
-=======
->>>>>>> 7956a695... BR: reorganize content about BR tool (#4810)
   + [Read Historical Data](/read-historical-data.md)
   + [Configure Time Zone](/configure-time-zone.md)
   + [Daily Checklist](/daily-check.md)
