@@ -24,13 +24,9 @@ This document aims to help you achieve the following goals:
 
 ## Audience
 
-<<<<<<< HEAD
-You are expected to have a basic understanding of [TiDB](https://pingcap.com/docs/stable/) and [TiKV](https://tikv.org/). Before reading this document, it is recommended that you read [Use BR to Back up and Restore Data](/br/backup-and-restore-tool.md) first.
-=======
 You are expected to have a basic understanding of [TiDB](https://docs.pingcap.com/tidb/v4.0) and [TiKV](https://tikv.org/).
 
 Before reading on, make sure you have read [BR Tool Overview](/br/backup-and-restore-tool.md), especially [Usage Restrictions](/br/backup-and-restore-tool.md#usage-restrictions) and [Best Practices](/br/backup-and-restore-tool.md#best-practices).
->>>>>>> 7956a695... BR: reorganize content about BR tool (#4810)
 
 ## Prerequisites
 
