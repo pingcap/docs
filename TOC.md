@@ -84,10 +84,9 @@
   + Maintain
     - [Common Ansible Operations](/maintain-tidb-using-ansible.md)
     + Backup and Restore
-      - [Use Mydumper and TiDB Lightning](/backup-and-restore-using-mydumper-lightning.md)
-      - [Use Dumpling for Export or Backup](/export-or-backup-using-dumpling.md)
-      + Use BR
-        - [Use BR](/br/backup-and-restore-tool.md)
+      + Use BR (recommended)
+        - [BR Tool Overview](/br/backup-and-restore-tool.md)
+        - [Use BR Command-line](/br/use-br-command-line-tool.md)
         - [BR Use Cases](/br/backup-and-restore-use-cases.md)
     + Identify Abnormal Queries
       - [Identify Slow Queries](/identify-slow-queries.md)
