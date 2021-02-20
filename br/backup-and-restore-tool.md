@@ -108,24 +108,13 @@ After the restoration operation is completed, BR performs a checksum calculation
 - It is recommended that you deploy BR on the PD node.
 - It is recommended that you mount a high-performance SSD to BR nodes and all TiKV nodes. A 10-gigabit network card is recommended. Otherwise, bandwidth is likely to be the performance bottleneck during the backup and restore process.
 
-> **Note:**
->
-> - If you do not mount a network disk or use other shared storage, the data backed up by BR will be generated on each TiKV node. Because BR only backs up leader replicas, you should estimate the space reserved for each node based on the leader size.
->
-> - Meanwhile, because TiDB v4.0 uses leader count for load balancing by default, leaders are greatly different in size, resulting in uneven distribution of backup data on each node.
-
 ### Usage restrictions
 
 The following are the limitations of using BR for backup and restoration:
 
 - It is supported to use BR only in TiDB v3.1 and later versions.
-- When BR restores data to the upstream cluster of TiCDC/Drainer, TiCDC/Drainer cannot replicate the restored data to the downstream.
-- BR supports operations only between clusters with the same [`new_collations_enabled_on_first_bootstrap`](/character-set-and-collation.md#collation-support-framework) value because BR only backs up KV data. If the cluster to be backed up and the cluster to be restored use different collations, the data validation fails. Therefore, before restoring a cluster, make sure that the switch value from the query result of the `select VARIABLE_VALUE from mysql.tidb where VARIABLE_NAME='new_collation_enabled';` statement is consistent with that during the backup process.
-
-    - For v3.1 clusters, the new collation framework is not supported, so you can see it as disabled.
-    - For v4.0 clusters, check whether the new collation is enabled by executing `SELECT VARIABLE_VALUE FROM mysql.tidb WHERE VARIABLE_NAME='new_collation_enabled';`.
-
-    For example, assume that data is backed up from a v3.1 cluster and will be restored to a v4.0 cluster. The `new_collation_enabled` value of the v4.0 cluster is `true`, which means that the new collation is enabled in the cluster to be restored when this cluster is created. If you perform the restore in this situation, an error might occur.
+- When BR restores data to the upstream cluster of Drainer, Drainer cannot replicate the restored data to the downstream.
+- In v3.1, you can perform restoration only on new clusters.
 
 ### Best practices
 
@@ -140,47 +129,14 @@ The following are some recommended operations for using BR for backup and restor
 
 ### How to use BR
 
-Currently, the following methods are supported to run the BR tool:
-
-- Use SQL statements
-- Use the command-line tool
-- Use BR In the Kubernetes environment
-
-#### Use SQL statements
-
-In TiDB v4.0.2 and later versions, you can run the BR tool using SQL statements.
-
-For detailed operations, see the following documents:
-
-- [Backup syntax](/sql-statements/sql-statement-backup.md#backup)
-- [Restore syntax](/sql-statements/sql-statement-restore.md#restore)
-
-#### Use the command-line tool
-
 In TiDB versions above v3.1, you can run the BR tool using the command-line tool.
 
 First, you need to download the binary file of the BR tool. See [download link](/download-ecosystem-tools.md#br-backup-and-restore).
 
 For how to use the command-line tool to perform backup and restore operations, see [Use the BR command-line tool](/br/use-br-command-line-tool.md).
 
-#### In the Kubernetes environment
-
-In the Kubernetes environment, you can use the BR tool to back up TiDB cluster data to S3-compatible storage, Google Cloud Storage (GCS) and persistent volumes (PV), and restore them:
-
-> **Note:**
->
-> For Amazon S3 and Google Cloud Storage parameter descriptions, see the [BR Storages](/br/backup-and-restore-storages.md) document.
-
-- [Back up Data to S3-Compatible Storage Using BR](https://docs.pingcap.com/tidb-in-kubernetes/stable/backup-to-aws-s3-using-br)
-- [Restore Data from S3-Compatible Storage Using BR](https://docs.pingcap.com/tidb-in-kubernetes/stable/restore-from-aws-s3-using-br)
-- [Back up Data to GCS Using BR](https://docs.pingcap.com/tidb-in-kubernetes/stable/backup-to-gcs-using-br)
-- [Restore Data from GCS Using BR](https://docs.pingcap.com/tidb-in-kubernetes/stable/restore-from-gcs-using-br)
-- [Back up Data to PV Using BR](https://docs.pingcap.com/tidb-in-kubernetes/stable/backup-to-pv-using-br)
-- [Restore Data from PV Using BR](https://docs.pingcap.com/tidb-in-kubernetes/stable/restore-from-pv-using-br)
-
 ## Other documents about BR
 
 - [Use BR Command-line](/br/use-br-command-line-tool.md)
 - [BR Use Cases](/br/backup-and-restore-use-cases.md)
 - [BR FAQ](/br/backup-and-restore-faq.md)
-- [BR Storages](/br/backup-and-restore-storages.md)
