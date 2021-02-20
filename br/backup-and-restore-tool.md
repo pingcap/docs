@@ -1,12 +1,6 @@
 ---
-<<<<<<< HEAD
-title: Use BR to Back up and Restore Data
-summary: Learn how to back up and restore data of the TiDB cluster using BR.
-=======
 title: BR Tool Overview
 summary: Learn what is BR and how to use the tool.
-aliases: ['/docs/dev/br/backup-and-restore-tool/','/docs/dev/reference/tools/br/br/','/docs/dev/how-to/maintain/backup-and-restore/br/']
->>>>>>> 7956a695... BR: reorganize content about BR tool (#4810)
 ---
 
 # BR Tool Overview
