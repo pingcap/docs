@@ -5,6 +5,10 @@ aliases: ['/docs/v3.1/backup-and-restore-using-mydumper-lightning/','/docs/v3.1/
 
 # Use Mydumper and TiDB Lightning for Data Backup and Restoration
 
+> **Warning:**
+>
+> It is no longer recommended to use Mydumper and TiDB Lightning for data backup and restoration. It is strongly recommended to use [BR tool](/br/backup-and-restore-tool.md) instead for a better tool experience.
+
 This document describes how to perform full backup and restoration of the TiDB data using Mydumper and TiDB Lightning. For incremental backup and restoration, refer to [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md).
 
 Suppose that the TiDB service information is as follows:
