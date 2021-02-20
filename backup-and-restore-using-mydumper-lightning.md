@@ -48,13 +48,13 @@ Use `mydumper` to backup data from TiDB.
 ./bin/mydumper -h 127.0.0.1 -P 4000 -u root -t 32 -F 256 -B test -T t1,t2 --skip-tz-utc -o ./var/test
 ```
 
-In this command,
+In this command:
 
-`-B test` means that the data is exported from the `test` database.
-`-T t1,t2` means that only the `t1` and `t2` tables are exported.
-`-t 32` means that 32 threads are used to export the data.
-`-F 256` means that a table is partitioned into chunks, and one chunk is 256MB.
-`--skip-tz-utc` means to ignore the inconsistency of time zone setting between MySQL and the data exporting machine and to disable automatic conversion.
+- `-B test` means that the data is exported from the `test` database.
+- `-T t1,t2` means that only the `t1` and `t2` tables are exported.
+- `-t 32` means that 32 threads are used to export the data.
+- `-F 256` means that a table is partitioned into chunks, and one chunk is 256MB.
+- `--skip-tz-utc` means to ignore the inconsistency of time zone setting between MySQL and the data exporting machine and to disable automatic conversion.
 
 If `mydumper` returns the following error:
 
