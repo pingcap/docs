@@ -136,7 +136,7 @@ The minimum machine configuration requirements for running BR are as follows:
 | --- | --- | --- | --- |
 | 1 core | 4 GB | HDD | Gigabit network card |
 
-In general scenarios (less than 1000 backup and restore tables), the CPU consumption of BR during run does not exceed 200%, and the memory consumption does not exceed 1 GB. However, when backing up and restoring a large number of tables, the memory consumption of BR might rise to more than 3 GB. In the actual test, backing up 24,000 tables consumes about 2.7 GB of memory, and the CPU consumption remains below 100%.
+In general scenarios (less than 1000 backup and restore tables), the CPU consumption of BR during the run does not exceed 200%, and the memory consumption does not exceed 1 GB. However, when backing up and restoring a large number of tables, the memory consumption of BR might rise to more than 3 GB. In the actual test, backing up 24,000 tables consumes about 2.7 GB of memory, and the CPU consumption remains below 100%.
 
 ### Best practices
 
