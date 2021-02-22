@@ -146,9 +146,9 @@ delta_index_cache_size = 0
     ## are executed. The default value is 0 (in bytes), which means no limit.
     max_memory_usage_for_all_queries = 0
 
-    ## New in v4.0.11. It indicates the maximum number of cop requests for TiFlash Coprocessor to execute simultaneously. If the number of requests exceeds the value specified in this configuration, the additional requests will queue. If the configuration value is set to 0 or not set, the default value is used, which is twice the number of physical cores.
+    ## New in v5.0.0-rc. This item specifies the maximum number of cop requests that TiFlash Coprocessor executes at the same time. If the number of requests exceeds the specified value, the exceeded requests will queue. If the configuration value is set to 0 or not set, the default value is used, which is twice the number of physical cores.
     cop_pool_size = 0
-    ## New in v4.0.11. It indicates the maximum number of batch requests for TiFlash Coprocessor to execute simultaneously. If the number of requests exceeds the value specified in the configuration, the additional requests will queue. If the configuration value is set to 0 or not set, the default value is used, which is twice the number of physical cores.
+    ## New in v5.0.0-rc. This item specifies the maximum number of batch requests that TiFlash Coprocessor executes at the same time. If the number of requests exceeds the specified value, the exceeded requests will queue. If the configuration value is set to 0 or not set, the default value is used, which is twice the number of physical cores.
     batch_cop_pool_size = 0
 
 ## Security settings take effect starting from v4.0.5.
