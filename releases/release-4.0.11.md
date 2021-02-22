@@ -35,7 +35,7 @@ TiDB version: 4.0.11
 
 + TiKV
 
-    - Add metrics of server information for DBasS [#9591](https://github.com/tikv/tikv/pull/9591)
+    - Add metrics of server information for DBaaS [#9591](https://github.com/tikv/tikv/pull/9591)
     - Support multiple clusters in Grafana dashboards [#9572](https://github.com/tikv/tikv/pull/9572)
     - Report RocksDB metrics to TiDB [#9316](https://github.com/tikv/tikv/pull/9316)
     - Record the suspension time for Coprocessor tasks [#9277](https://github.com/tikv/tikv/pull/9277)
