@@ -66,6 +66,7 @@ Two types of backup files are generated in the path where backup files are store
 
 - **The SST file**: stores the data that the TiKV node backed up.
 - **The `backupmeta` file**: stores the metadata of this backup operation, including the number, the key range, the size, and the Hash (sha256) value of the backup files.
+- **The `backup.lock` file**: prevents multiple backups to the same directory
 
 ### The format of the SST file name
 
@@ -126,6 +127,16 @@ The following are the limitations of using BR for backup and restoration:
     - For v4.0 clusters, check whether the new collation is enabled by executing `SELECT VARIABLE_VALUE FROM mysql.tidb WHERE VARIABLE_NAME='new_collation_enabled';`.
 
     For example, assume that data is backed up from a v3.1 cluster and will be restored to a v4.0 cluster. The `new_collation_enabled` value of the v4.0 cluster is `true`, which means that the new collation is enabled in the cluster to be restored when this cluster is created. If you perform the restore in this situation, an error might occur.
+
+### Minimum machine configuration requirements for running BR
+
+The minimum machine configuration requirements for running BR are as follows:
+
+| CPU | Memory | Hard Disk Type | Network |
+| --- | --- | --- | --- |
+| 1 core | 4 GB | HDD | Gigabit network card |
+
+In general scenarios (less than 1000 backup and restore tables), the CPU consumption of BR during run does not exceed 200%, and the memory consumption does not exceed 1 GB. However, when backing up and restoring a large number of tables, the memory consumption of BR might rise to more than 3 GB. In the actual test, backing up 24,000 tables consumes about 2.7 GB of memory, and the CPU consumption remains below 100%.
 
 ### Best practices
 
