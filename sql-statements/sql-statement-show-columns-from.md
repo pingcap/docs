@@ -8,7 +8,7 @@ aliases: ['/docs/dev/sql-statements/sql-statement-show-columns-from/','/docs/dev
 
 The statement `SHOW [FULL] COLUMNS FROM <table_name>` describes the columns of a table or view in a useful tabular format. The optional keyword `FULL` displays the privileges the current user has to that column, and the `comment` from the table definition.
 
-The statements `SHOW [FULL] FIELDS FROM <table_name>`, `DESC <table_name>`, `DESCRIBE <table_name>` and `EXPLAIN <table_name>` are aliases of this statement.
+The statements `SHOW [FULL] FIELDS FROM <table_name>`, `DESC <table_name>`, `DESCRIBE <table_name>`, and `EXPLAIN <table_name>` are aliases of this statement.
 
 > **Note:**
 >
