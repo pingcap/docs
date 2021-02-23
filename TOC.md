@@ -107,6 +107,7 @@
       + [Aggregation](/explain-aggregation.md)
       + [Views](/explain-views.md)
       + [Partitions](/explain-partitions.md)
+      + [IndexMerge](/explain-index-merge.md)
     + SQL Optimization Process
       + [Overview](/sql-optimization-concepts.md)
       + Logic Optimization
