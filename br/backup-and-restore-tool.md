@@ -66,7 +66,7 @@ Two types of backup files are generated in the path where backup files are store
 
 - **The SST file**: stores the data that the TiKV node backed up.
 - **The `backupmeta` file**: stores the metadata of this backup operation, including the number, the key range, the size, and the Hash (sha256) value of the backup files.
-- **The `backup.lock` file**: prevents multiple backups to the same directory
+- **The `backup.lock` file**: prevents multiple backup operations from storing data to the same directory.
 
 ### The format of the SST file name
 
@@ -136,7 +136,7 @@ The minimum machine configuration required for running BR is as follows:
 | --- | --- | --- | --- |
 | 1 core | 4 GB | HDD | Gigabit network card |
 
-In general scenarios (less than 1000 tables for backup and restore), the CPU consumption of BR at runtime does not exceed 200%, and the memory consumption does not exceed 1 GB. However, when backing up and restoring a large number of tables, the memory consumption of BR might increase to more than 3 GB. In a test, backing up 24000 tables consumes about 2.7 GB of memory, and the CPU consumption remains below 100%.
+In general scenarios (less than 1000 tables for backup and restore), the CPU consumption of BR at runtime does not exceed 200%, and the memory consumption does not exceed 1 GB. However, when backing up and restoring a large number of tables, BR might consume more than 3 GB of memory. In a test of backing up 24000 tables, BR consumes about 2.7 GB of memory, and the CPU consumption remains below 100%.
 
 ### Best practices
 
