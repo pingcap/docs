@@ -128,15 +128,15 @@ The following are the limitations of using BR for backup and restoration:
 
     For example, assume that data is backed up from a v3.1 cluster and will be restored to a v4.0 cluster. The `new_collation_enabled` value of the v4.0 cluster is `true`, which means that the new collation is enabled in the cluster to be restored when this cluster is created. If you perform the restore in this situation, an error might occur.
 
-### Minimum machine configuration requirements for running BR
+### Minimum machine configuration required for running BR
 
-The minimum machine configuration requirements for running BR are as follows:
+The minimum machine configuration required for running BR is as follows:
 
 | CPU | Memory | Hard Disk Type | Network |
 | --- | --- | --- | --- |
 | 1 core | 4 GB | HDD | Gigabit network card |
 
-In general scenarios (less than 1000 backup and restore tables), the CPU consumption of BR during the run does not exceed 200%, and the memory consumption does not exceed 1 GB. However, when backing up and restoring a large number of tables, the memory consumption of BR might rise to more than 3 GB. In the actual test, backing up 24,000 tables consumes about 2.7 GB of memory, and the CPU consumption remains below 100%.
+In general scenarios (less than 1000 tables for backup and restore), the CPU consumption of BR at runtime does not exceed 200%, and the memory consumption does not exceed 1 GB. However, when backing up and restoring a large number of tables, the memory consumption of BR might increase to more than 3 GB. In a test, backing up 24000 tables consumes about 2.7 GB of memory, and the CPU consumption remains below 100%.
 
 ### Best practices
 
