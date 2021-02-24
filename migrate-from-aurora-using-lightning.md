@@ -66,15 +66,15 @@ Based on different deployment methods, edit the `tidb-lighting.toml` configurati
 
 > **Note:**
 >
-> - The example in this document uses the Local-backend for best performance. You can also choose TiDB-backend or Importer-backend according to your need. For detailed introduction of the three backend modes, see [TiDB Lightning Backends](/tidb-lightning/tidb-lightning-backends.md).
+> - The above example uses the Local-backend for best performance. You can also choose TiDB-backend or Importer-backend according to your need. For detailed introduction of the three backend modes, see [TiDB Lightning Backends](/tidb-lightning/tidb-lightning-backends.md).
 > - Because the path for exporting snapshot data from Aurora is different from the default file naming format supported by TiDB Lightning, you need to set additional file routing configuration.
 > - If TLS is enabled in the target TiDB cluster, you also need to configure TLS.
 
-For other configuration, see [TiDB Lightning Configuration](/tidb-lightning/tidb-lightning-configuration.md).
+For other configurations, see [TiDB Lightning Configuration](/tidb-lightning/tidb-lightning-configuration.md).
 
 ## Step 4: Create table schema
 
-Because the snapshot data exported from Aurora to S3 does not contain the SQL statement file used to create database tables, you need to manually export and import the table creation statements corresponding to the database tables into TiDB. You can use Dumpling + TiDB Lightning to create all table schemas:
+Because the snapshot data exported from Aurora to S3 does not contain the SQL statement file used to create database tables, you need to manually export and import the table creation statements corresponding to the database tables into TiDB. You can use Dumpling and TiDB Lightning to create all table schemas:
 
 1. Use Dumpling to export table schema files:
 
@@ -82,10 +82,10 @@ Because the snapshot data exported from Aurora to S3 does not contain the SQL st
     ./dumpling --host 127.0.0.1 --port 4000 --user root --password password --no-data --output ./schema --filter "mydb.*"
     ```
 
-    > **Note**
+    > **Note:**
     >
     > - Set the parameters of the data source address and the path of output files according to your actual situation.
-    > - If you need export all database tables, you do not need to set the `--filter` parameter. If you only need to export some of the database tables, configure `--filter` according to [table-filter](https://github.com/pingcap/tidb-tools/blob/master/pkg/table-filter/README.md).
+    > - If you need to export all database tables, you do not need to set the `--filter` parameter. If you only need to export some of the database tables, configure `--filter` according to [table-filter](https://github.com/pingcap/tidb-tools/blob/master/pkg/table-filter/README.md).
 
 2. Use TiDB Lightning to create table schemas:
 
@@ -97,7 +97,7 @@ Because the snapshot data exported from Aurora to S3 does not contain the SQL st
 
 > **Note:**
 >
-> If there are fewer database tables to create, you can manually create the corresponding databases and tables in TiDB directly, or use other tools such as mysqldump to export the schema and then import it into TiDB.
+> If the number of database tables to create is relatively small, you can manually create the corresponding databases and tables in TiDB directly, or use other tools such as mysqldump to export the schema and then import it into TiDB.
 
 ## Step 5: Run TiDB Lightning to import data
 
