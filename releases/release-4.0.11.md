@@ -137,6 +137,9 @@ TiDB version: 4.0.11
     - Fix a bug that the `min`/`max` result is wrong for decimal types
     - Fix a bug that TiFlash might crash when reading data [#1358](https://github.com/pingcap/tics/pull/1358)
     - Fix the issue that some data written after DDL operations might be lost after data compaction [#1350](https://github.com/pingcap/tics/pull/1350)
+    - Fix the issue that TiFlash incorrectly handles decimal constants in Coprocessor
+    - Fix the potential crash during the learner read process
+    - Fix the inconsistent behaviors of division by `0` or `NULL` between TiDB and TiFlash
 
 + Tools
 
