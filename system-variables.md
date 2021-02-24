@@ -1075,7 +1075,7 @@ This variable is an alias for _transaction_isolation_.
 - Default value: ON
 - This variable controls whether to use the high precision mode when computing the window functions.
 
-### tidb_enable_tiflash_fallback_tikv
+### tidb_enable_engine_fallback
 
 - Scope: SESSION | GLOBAL
 - Default value: OFF
