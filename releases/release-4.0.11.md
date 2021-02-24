@@ -51,6 +51,7 @@ TiDB version: 4.0.11
 
     - Optimize the performance of the `date_format` function
     - Optimize the memory consumption of handling ingest SST
+    - Optimize the retrying logic in Batch Coprocessor to reduce the probability of Region error
 
 + Tools
 
