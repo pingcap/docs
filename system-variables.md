@@ -1078,4 +1078,4 @@ This variable is an alias for _transaction_isolation_.
 
 - Scope: SESSION | GLOBAL
 - Default value: OFF
-- This variable controls whether to retry execution with TiKV when TiFlash's failure causes execution failure of SQL statement.
+- This variable controls whether to retry execution with another engine when the used engine's failure causes execution failure of SQL statement. If the variable turns on, currently TiDB supports retrying execution with TiKV when TiFlash's failure causes execution failure of SQL statement.
