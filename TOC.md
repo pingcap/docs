@@ -55,10 +55,9 @@
     + [Use TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.1/scale-a-tidb-cluster)
   + Backup and Restore
     + Use BR Tool (Recommended)
-      + [Use BR Tool](/br/backup-and-restore-tool.md)
+      + [BR Tool Overview](/br/backup-and-restore-tool.md)
+      + [Use BR Command-line](/br/use-br-command-line-tool.md)
       + [BR Use Cases](/br/backup-and-restore-use-cases.md)
-      + [BR Storages](/br/backup-and-restore-storages.md)
-    + [Use Dumpling and TiDB Lightning (Recommended)](/backup-and-restore-using-dumpling-lightning.md)
   + [Read Historical Data](/read-historical-data.md)
   + [Configure Time Zone](/configure-time-zone.md)
   + [Daily Checklist](/daily-check.md)
@@ -101,6 +100,13 @@
     + [Overview](/sql-tuning-overview.md)
     + Understanding the Query Execution Plan
       + [Overview](/explain-overview.md)
+      + [`EXPLAIN` Walkthrough](/explain-walkthrough.md)
+      + [Indexes](/explain-indexes.md)
+      + [Joins](/explain-joins.md)
+      + [Subqueries](/explain-subqueries.md)
+      + [Aggregation](/explain-aggregation.md)
+      + [Views](/explain-views.md)
+      + [Partitions](/explain-partitions.md)
     + SQL Optimization Process
       + [Overview](/sql-optimization-concepts.md)
       + Logic Optimization
@@ -145,8 +151,10 @@
   + [Use Cases](/ecosystem-tool-user-case.md)
   + [Download](/download-ecosystem-tools.md)
   + Backup & Restore (BR)
-    + [Use BR Tool](/br/backup-and-restore-tool.md)
+    + [BR Tool Overview](/br/backup-and-restore-tool.md)
+    + [Use BR Command-line for Backup and Restoration](/br/backup-and-restore-tool.md)
     + [BR Use Cases](/br/backup-and-restore-use-cases.md)
+    + [BR Storages](/br/backup-and-restore-storages.md)
     + [BR FAQ](/br/backup-and-restore-faq.md)
   + TiDB Binlog
     + [Overview](/tidb-binlog/tidb-binlog-overview.md)
@@ -180,7 +188,6 @@
       + [Backends](/tidb-lightning/tidb-lightning-backends.md)
       + [Web Interface](/tidb-lightning/tidb-lightning-web-interface.md)
     + [Monitor](/tidb-lightning/monitor-tidb-lightning.md)
-    + [Troubleshoot](/troubleshoot-tidb-lightning.md)
     + [FAQ](/tidb-lightning/tidb-lightning-faq.md)
     + [Glossary](/tidb-lightning/tidb-lightning-glossary.md)
   + TiCDC
@@ -188,6 +195,7 @@
     + [Deploy](/ticdc/deploy-ticdc.md)
     + [Maintain](/ticdc/manage-ticdc.md)
     + [Troubleshoot](/ticdc/troubleshoot-ticdc.md)
+    + [Monitor](/ticdc/monitor-ticdc.md)
     + [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
     + [Integrate TiDB with Confluent Platform](/ticdc/integrate-confluent-using-ticdc.md)
   + [Dumpling](/dumpling-overview.md)
@@ -211,6 +219,7 @@
     + [PD](/grafana-pd-dashboard.md)
     + [TiKV](/grafana-tikv-dashboard.md)
     + [TiFlash](/tiflash/monitor-tiflash.md)
+    + [TiCDC](/ticdc/monitor-ticdc.md)
   + Secure
     + [Enable TLS Between TiDB Clients and Servers](/enable-tls-between-clients-and-servers.md)
     + [Enable TLS Between TiDB Components](/enable-tls-between-components.md)
@@ -517,6 +526,7 @@
   + v5.0
     + [5.0.0-rc](/releases/release-5.0.0-rc.md)
   + v4.0
+    + [4.0.10](/releases/release-4.0.10.md)
     + [4.0.9](/releases/release-4.0.9.md)
     + [4.0.8](/releases/release-4.0.8.md)
     + [4.0.7](/releases/release-4.0.7.md)

@@ -13,9 +13,9 @@ TiDB v5.0.0-rc is the predecessor version of TiDB v5.0. In v5.0, PingCAP will be
 In v5.0, the key new features or improvements are as follows:
 
 + Clustered index. When this feature is enabled, database performance is improved. For example, in the TPC-C tpmC test, TiDB's performance, with clustered index enabled, improves by 39%.
-+ Asynchronous commit or async commit. When this feature is enabled, the write latency is reduced. For example, in the Sysbench olpt-insert test, the write latency of TiDB, with async commit enabled, is reduced by 37.3%.
++ Async commit. When this feature is enabled, the write latency is reduced. For example, in the Sysbench olpt-insert test, the write latency of TiDB, with async commit enabled, is reduced by 37.3%.
 + Reduced jitters. This is achieved by improving the optimizer stability and by limiting system tasks' usages of I/O, network, CPU, and memory resources. For example, in the 72-hour performance test, the standard deviation of Sysbench TPS jitter is reduced from 11.09% to 3.36%.
-+ Raft Join Consensus algorithm, which ensures the system availability during the Region membership change.
++ Raft Joint Consensus algorithm, which ensures the system availability during the Region membership change.
 + Optimized `EXPLAIN` features and invisible index, which helps Database Administrators (DBAs) debug SQL statements more efficiently.
 + Guaranteed reliability for enterprise data. You can back up data from TiDB to AWS S3 storage and Google Cloud GCS, or restore data from these cloud storage platforms.
 + Improved performance of data import from or data export to AWS S3 storage or TiDB/MySQL, which helps enterprises quickly build applications on the cloud. For example, in the TPC-C test, the performance of importing 1 TiB data improves by 40%, from 254 GiB/h to 366 GiB/h.
@@ -35,7 +35,7 @@ Clustered index defines the physical storage order of data in a table. The data 
 
 Users can enable the clustered index feature by modifying the `tidb_enable_clustered_index` variable. When enabled, the feature takes effect only on newly created tables and applies to the primary key that has multiple columns or is non-integer types in a single column. If the primary key is an integer type in a single column, or if the table has no primary key, the data is sorted in the same way as before, without being affected by the clustered index.
 
-For example, to check whether a table (`tbl_name`) has a clustered index, execute `select tidb_pk_type from information_schema.tables where tbl_name = '{tbl_name}'`.
+For example, to check whether a table (`tbl_name`) has a clustered index, execute `select tidb_pk_type from information_schema.tables where table_name = '{tbl_name}'`.
 
 + [User document](/system-variables.md#tidb_enable_clustered_index-new-in-v500-rc)
 + Related issue: [#4841](https://github.com/pingcap/tidb/issues/4841)
@@ -158,8 +158,8 @@ In the process of Region membership changes, "adding a member" and "deleting a m
 
 ## Backup and restore
 
-+ The Backup & Restore tool (BR) supports backing up data to AWS S3 and Google Cloud GCS. ([User document](/br/backup-and-restore-tool.md#back-up-data-to-amazon-s3-backend))
-+ The Backup & Restore tool (BR) supports restoring data from AWS S3 and Google Cloud GCS to TiDB. ([User document](/br/backup-and-restore-tool.md#restore-data-from-amazon-s3-backend))
++ The Backup & Restore tool (BR) supports backing up data to AWS S3 and Google Cloud GCS. ([User document](/br/use-br-command-line-tool.md#back-up-data-to-amazon-s3-backend))
++ The Backup & Restore tool (BR) supports restoring data from AWS S3 and Google Cloud GCS to TiDB. ([User document](/br/use-br-command-line-tool.md#restore-data-from-amazon-s3-backend))
 + Related issue: [#89](https://github.com/pingcap/br/issues/89)
 
 ## Data import and export
