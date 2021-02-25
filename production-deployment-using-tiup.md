@@ -1,7 +1,7 @@
 ---
 title: Deploy a TiDB Cluster Using TiUP
 summary: Learn how to easily deploy a TiDB cluster using TiUP.
-aliases: ['/docs/dev/production-deployment-using-tiup/','/docs/dev/how-to/deploy/orchestrated/tiup/','/docs/dev/tiflash/deploy-tiflash/','/docs/dev/reference/tiflash/deploy/']
+aliases: ['/docs/dev/production-deployment-using-tiup/','/docs/dev/how-to/deploy/orchestrated/tiup/','/docs/dev/tiflash/deploy-tiflash/','/docs/dev/reference/tiflash/deploy/','/tidb/dev/deploy-tidb-from-dbdeployer/','/docs/dev/deploy-tidb-from-dbdeployer/','/docs/dev/how-to/get-started/deploy-tidb-from-dbdeployer/','/tidb/dev/deploy-tidb-from-homebrew/','/docs/dev/deploy-tidb-from-homebrew/','/docs/dev/how-to/get-started/deploy-tidb-from-homebrew/','/docs/dev/online-deployment-using-ansible/','/docs/dev/how-to/deploy/orchestrated/ansible/','/tidb/dev/online-deployment-using-ansible/']
 ---
 
 # Deploy a TiDB Cluster Using TiUP
@@ -9,6 +9,10 @@ aliases: ['/docs/dev/production-deployment-using-tiup/','/docs/dev/how-to/deploy
 [TiUP](https://github.com/pingcap/tiup) is a cluster operation and maintenance tool introduced in TiDB 4.0. TiUP provides [TiUP cluster](https://github.com/pingcap/tiup/tree/master/components/cluster), a cluster management component written in Golang. By using TiUP cluster, you can easily perform daily database operations, including deploying, starting, stopping, destroying, scaling, and upgrading a TiDB cluster, and manage TiDB cluster parameters.
 
 TiUP supports deploying TiDB, TiFlash, TiDB Binlog, TiCDC, and the monitoring system. This document introduces how to deploy TiDB clusters of different topologies.
+
+> **Note:**
+>
+> Since TiDB v4.0, PingCAP no longer provides support for TiDB Ansible. Since TiDB v5.0, PingCAP no longer provides TiDB Ansible documents. If you want to read the document that introduces how to deploy a TiDB cluster using TiDB Ansible, see [Deploy TiDB Using TiDB Ansible (v4.0)](https://docs.pingcap.com/tidb/v4.0/online-deployment-using-ansible).
 
 ## Step 1: Prerequisites and precheck
 
@@ -134,13 +138,13 @@ The following topology documents provide a cluster configuration template for ea
 {{< copyable "shell-regular" >}}
 
 ```shell
-tiup cluster deploy tidb-test v4.0.0 ./topology.yaml --user root [-p] [-i /home/root/.ssh/gcp_rsa]
+tiup cluster deploy tidb-test v5.0.0 ./topology.yaml --user root [-p] [-i /home/root/.ssh/gcp_rsa]
 ```
 
 In the above command:
 
 - The name of the deployed TiDB cluster is `tidb-test`.
-- The version of the TiDB cluster is `v4.0.0`. You can see other supported versions by running `tiup list tidb`.
+- You can see the latest supported versions by running `tiup list tidb`. This document takes `v5.0.0` as an example.
 - The initialization configuration file is `topology.yaml`.
 - `--user root`: Log in to the target machine through the `root` key to complete the cluster deployment, or you can use other users with `ssh` and `sudo` privileges to complete the deployment.
 - `[-i]` and `[-p]`: optional. If you have configured login to the target machine without password, these parameters are not required. If not, choose one of the two parameters. `[-i]` is the private key of the `root` user (or other users specified by `--user`) that has access to the target machine. `[-p]` is used to input the user password interactively.
@@ -159,10 +163,10 @@ tiup cluster list
 TiUP supports managing multiple TiDB clusters. The command above outputs information of all the clusters currently managed by TiUP, including the name, deployment user, version, and secret key information:
 
 ```log
-Starting /home/tidb/.tiup/components/cluster/v1.0.0/cluster list
+Starting /home/tidb/.tiup/components/cluster/v1.3.0/cluster list
 Name              User  Version        Path                                                        PrivateKey
 ----              ----  -------        ----                                                        ----------
-tidb-test         tidb  v4.0.0      /home/tidb/.tiup/storage/cluster/clusters/tidb-test         /home/tidb/.tiup/storage/cluster/clusters/tidb-test/ssh/id_rsa
+tidb-test         tidb  v5.0.0      /home/tidb/.tiup/storage/cluster/clusters/tidb-test         /home/tidb/.tiup/storage/cluster/clusters/tidb-test/ssh/id_rsa
 ```
 
 ## Step 6: Check the status of the deployed TiDB cluster

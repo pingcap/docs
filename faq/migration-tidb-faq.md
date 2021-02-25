@@ -9,14 +9,6 @@ This document summarizes the FAQs related to TiDB data migration.
 
 ## Full data export and import
 
-### Does TiDB support Mydumper?
-
-Yes. See [Mydumper Instructions](/mydumper-overview.md).
-
-### Does TiDB support Loader?
-
-Yes. See [Loader Instructions](/loader-overview.md).
-
 ### How to migrate an application running on MySQL to TiDB?
 
 Because TiDB supports most MySQL syntax, generally you can migrate your applications to TiDB without changing a single line of code in most cases.
@@ -24,10 +16,6 @@ Because TiDB supports most MySQL syntax, generally you can migrate your applicat
 ### If I accidentally import the MySQL user table into TiDB, or forget the password and cannot log in, how to deal with it?
 
 Restart the TiDB service, add the `-skip-grant-table=true` parameter in the configuration file. Log into the cluster without password and recreate the user, or recreate the `mysql.user` table. For the specific table schema, search the official documentation.
-
-### Can TiDB provide services while Loader is running?
-
-TiDB can provide services while Loader is running because Loader inserts the data logically. But do not perform the related DDL operations.
 
 ### How to export the data in TiDB?
 
@@ -70,63 +58,25 @@ Two solutions:
 
 - You can also increase the limited number of statements in a single TiDB transaction, but this will consume more memory.
 
+### Why does Dumpling return `The local disk space is insufficient` error when exporting a large table?
+
+This error occurs because the database's primary keys are not evenly distributed. When Dumpling splits the data, some data chunks become excessive. Try to allocate more disk space or [contact us](https://tidbcommunity.slack.com/archives/CH7TTLL7P) to get the nightly version of Dumpling.
+
 ### Does TiDB have a function like the Flashback Query in Oracle? Does it support DDL?
 
  Yes, it does. And it supports DDL as well. For details, see [how TiDB reads data from history versions](/read-historical-data.md).
 
 ## Migrate the data online
 
-### Syncer infrastructure
-
-See [Parsing TiDB online data synchronization tool Syncer](https://pingcap.com/blog-cn/tidb-syncer/) in Chinese.
-
-#### Syncer user guide
-
-See [Syncer User Guide](/syncer-overview.md).
-
-#### How to configure to monitor Syncer status?
-
-Download and import [Syncer Json](https://github.com/pingcap/docs/blob/master/etc/Syncer.json) to Grafana. Edit the Prometheus configuration file and add the following content:
-
-```
-- job_name: 'syncer_ops' // task name
-    static_configs:
-      - targets: [’10.10.1.1:10096’] // Syncer monitoring address and port, informing Prometheus to pull the data of Syncer
-```
-
-Restart Prometheus.
-
-#### Is there a current solution to replicating data from TiDB to other databases like HBase and Elasticsearch?
+### Is there a current solution to replicating data from TiDB to other databases like HBase and Elasticsearch?
 
 No. Currently, the data replication depends on the application itself.
-
-#### Does Syncer support replicating only some of the tables when Syncer is replicating data?
-
-Yes. For details, see [Syncer User Guide](/syncer-overview.md).
-
-#### Do frequent DDL operations affect the replication speed of Syncer?
-
-Frequent DDL operations may affect the replication speed. For Syncer, DDL operations are executed serially. When DDL operations are executed during data replication, data will be replicated serially and thus the replication speed will be slowed down.
-
-#### If the machine that Syncer is in is broken and the directory of the `syncer.meta` file is lost, what should I do?
-
-When you replicate data using Syncer GTID, the `syncer.meta` file is constantly updated during the replication process. The current version of Syncer does not contain the design for high availability. The `syncer.meta` configuration file of Syncer is directly stored on the hard disks, which is similar to other tools in the MySQL ecosystem, such as Mydumper.
-
-Two solutions:
-
-- Put the `syncer.meta` file in a relatively secure disk. For example, use disks with RAID 1.
-- Restore the location information of history replication according to the monitoring data that Syncer reports to Prometheus regularly. But the location information might be inaccurate due to the delay when a large amount of data is replicated.
-
-#### If the downstream TiDB data is not consistent with the MySQL data during the replication process of Syncer, will DML operations cause exits?
-
-- If the data exists in the upstream MySQL but does not exist in the downstream TiDB, when the upstream MySQL performs the `UPDATE` or `DELETE` operation on this row of data, Syncer will not report an error and the replication process will not exit, and this row of data does not exist in the downstream.
-- If a conflict exists in the primary key indexes or the unique indexes in the downstream, preforming the `UPDATE` operation will cause an exit and performing the `INSERT` operation will not cause an exit.
 
 ## Migrate the traffic
 
 ### How to migrate the traffic quickly?
 
-It is recommended to build a multi-source MySQL -> TiDB real-time replication environment using Syncer tool. You can migrate the read and write traffic in batches by editing the network configuration as needed. Deploy a stable network LB (HAproxy, LVS, F5, DNS, etc.) on the upper layer, in order to implement seamless migration by directly editing the network configuration.
+It is recommended to migrate application data from MySQL to TiDB using [TiDB Data Migration](https://docs.pingcap.com/tidb-data-migration/v2.0/overview) tool. You can migrate the read and write traffic in batches by editing the network configuration as needed. Deploy a stable network LB (HAproxy, LVS, F5, DNS, etc.) on the upper layer, in order to implement seamless migration by directly editing the network configuration.
 
 ### Is there a limit for the total write and read capacity in TiDB?
 

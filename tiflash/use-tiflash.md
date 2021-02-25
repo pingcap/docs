@@ -54,7 +54,9 @@ ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 0
     CREATE TABLE table_name like t
     ```
 
-* For the current version, if you create the TiFlash replica before using TiDB Lightning to import the data, the data import will fail. You must import data to the table before creating the TiFlash replica for the table.
+* For versions earlier than v4.0.6, if you create the TiFlash replica before using TiDB Lightning to import the data, the data import will fail. You must import data to the table before creating the TiFlash replica for the table.
+
+* If TiDB and TiDB Lightning are both v4.0.6 or later, no matter a table has TiFlash replica(s) or not, you can import data to that table using TiDB Lightning. Note that this might slow the TiDB Lightning procedure, which depends on the NIC bandwidth on the lightning host, the CPU and disk load of the TiFlash node, and the number of TiFlash replicas.
 
 * It is recommended that you do not replicate more than 1,000 tables because this lowers the PD scheduling performance. This limit will be removed in later versions.
 
@@ -193,25 +195,25 @@ In the above three ways of reading TiFlash replicas, engine isolation specifies 
 
 ## Use TiSpark to read TiFlash replicas
 
-Currently, you can use TiSpark to read TiFlash replicas in a method similar to the engine isolation in TiDB. This method is to configure the `spark.tispark.use.tiflash` parameter to `true` (or `false`).
+Currently, you can use TiSpark to read TiFlash replicas in a method similar to the engine isolation in TiDB. This method is to configure the `spark.tispark.isolation_read_engines` parameter. The parameter value defaults to `tikv,tiflash`, which means that TiDB reads data from TiFlash or from TiKV according to CBO's selection. If you set the parameter value to `tiflash`, it means that TiDB forcibly reads data from TiFlash.
 
 > **Notes**
 >
 > When this parameter is set to `true`, only the TiFlash replicas of all tables involved in the query are read and these tables must have TiFlash replicas; for tables that do not have TiFlash replicas, an error is reported. When this parameter is set to `false`, only the TiKV replica is read.
 
-You can configure this parameter in either of the following ways:
+You can configure this parameter in one of the following ways:
 
 * Add the following item in the `spark-defaults.conf` file:
 
     ```
-    spark.tispark.use.tiflash true
+    spark.tispark.isolation_read_engines tiflash
     ```
 
-* Add `--conf spark.tispark.use.tiflash=true` in the initialization command when initializing Spark shell or Thrift server.
+* Add `--conf spark.tispark.isolation_read_engines=tiflash` in the initialization command when initializing Spark shell or Thrift server.
 
-* Set `spark.conf.set("spark.tispark.use.tiflash", true)` in Spark shell in a real-time manner.
+* Set `spark.conf.set("spark.tispark.isolation_read_engines", "tiflash")` in Spark shell in a real-time manner.
 
-* Set `set spark.tispark.use.tiflash=true` in Thrift server after the server is connected via beeline.
+* Set `set spark.tispark.isolation_read_engines=tiflash` in Thrift server after the server is connected via beeline.
 
 ## Supported push-down calculations
 
@@ -230,15 +232,15 @@ set @@session.tidb_opt_broadcast_join=1
 Currently, TiFlash supports pushing down a limited number of expressions, including:
 
 ```
-+, -, /, *, >=, <=, =, !=, <, >, ifnull, isnull, bitor, in, mod, bitand, or, and, like, not,
-case when, month, substr, timestampdiff, date_format, from_unixtime, json_length, if, bitneg, bitxor, cast(int as decimal), date_add(datetime, int), date_add(datetime, string)
++, -, /, *, >=, <=, =, !=, <, >, ifnull, isnull, bitor, in, bitand, or, and, like, not, case when, month, substr, timestampdiff, date_format, from_unixtime, json_length, if, bitneg, bitxor, 
+round without fraction, cast(int as decimal), date_add(datetime, int), date_add(datetime, string), min, max, sum, count, avg, approx_count_distinct
 ```
 
 Among them, the push-down of `cast` and `date_add` is not enabled by default. To enable it, refer to [Blocklist of Optimization Rules and Expression Pushdown](/blocklist-control-plan.md).
 
 TiFlash does not support push-down calculations in the following situations:
 
-- Expressions that contain `Duration` cannot be pushed down.
+- Expressions that contain the `Time` type cannot be pushed down.
 - If an aggregate function or a `WHERE` clause contains expressions that are not included in the list above, the aggregate or related predicate filtering cannot be pushed down.
 
 If a query encounters unsupported push-down calculations, TiDB needs to complete the remaining calculations, which might greatly affect the TiFlash acceleration effect.

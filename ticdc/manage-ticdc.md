@@ -6,70 +6,7 @@ aliases: ['/docs/dev/ticdc/manage-ticdc/','/docs/dev/reference/tools/ticdc/manag
 
 # Manage TiCDC Cluster and Replication Tasks
 
-This document describes how to deploy a TiCDC cluster and how to manage the TiCDC cluster and replication tasks through the command line tool `cdc cli` and the HTTP interface.
-
-## Deploy and install TiCDC
-
-You can deploy TiCDC using either TiUP or Binary.
-
-### Software and hardware recommendations
-
-In production environments, the recommendations of software and hardware for TiCDC are as follows:
-
-| Linux OS       | Version        |
-| :----------------------- | :----------: |
-| Red Hat Enterprise Linux | 7.3 or later versions   |
-| CentOS                   | 7.3 or later versions   |
-
-| **CPU** | **Memory** | **Disk type** | **Network** | **Number of TiCDC cluster instances (minimum requirements for production environment)** |
-| --- | --- | --- | --- | --- |
-| 16 core+ | 64 GB+ | SSD | 10 Gigabit network card (2 preferred） | 2 |
-
-For more information, see [Software and Hardware Recommendations](/hardware-and-software-requirements.md)
-
-### Deploy and install TiCDC using TiUP
-
-If you use TiUP to deploy TiCDC, you can choose one of the following ways:
-
-- Deploy TiCDC when deploying a TiDB cluster
-- Deploy a TiCDC component on an existing TiDB cluster
-
-#### Deploy TiCDC when deploying a TiDB cluster
-
-For details, refer to [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md#step-3-edit-the-initialization-configuration-file).
-
-#### Deploy a TiCDC component on an existing TiDB cluster
-
-1. First, make sure that the current TiDB version supports TiCDC; otherwise, you need to upgrade the TiDB cluster to `v4.0.0 rc.1` or later versions.
-
-2. To deploy TiCDC, refer to [Scale out a TiCDC cluster](/scale-tidb-using-tiup.md#scale-out-a-ticdc-cluster).
-
-### Use Binary
-
-Binary only supports deploying the TiCDC component on an existing TiDB cluster.
-
-Suppose that the PD cluster has a PD node (the client URL is `10.0.10.25:2379`) that can provide services. If you want to deploy three TiCDC nodes, start the TiCDC cluster by executing the following commands. Note that you only need to specify the same PD address, the newly started nodes automatically join the TiCDC cluster.
-
-{{< copyable "shell-regular" >}}
-
-```shell
-cdc server --pd=http://10.0.10.25:2379 --log-file=ticdc_1.log --addr=0.0.0.0:8301 --advertise-addr=127.0.0.1:8301
-cdc server --pd=http://10.0.10.25:2379 --log-file=ticdc_2.log --addr=0.0.0.0:8302 --advertise-addr=127.0.0.1:8302
-cdc server --pd=http://10.0.10.25:2379 --log-file=ticdc_3.log --addr=0.0.0.0:8303 --advertise-addr=127.0.0.1:8303
-```
-
-The following are descriptions of options available in the `cdc server` command:
-
-- `gc-ttl`: The TTL (Time To Live) of the service level `GC safepoint` in PD set by TiCDC, in seconds. The default value is `86400`, which means 24 hours.
-- `pd`: The URL of the PD client.
-- `addr`: The listening address of TiCDC, the HTTP API address, and the Prometheus address of the service.
-- `advertise-addr`: The access address of TiCDC to the outside world.
-- `tz`: Time zone used by the TiCDC service. TiCDC uses this time zone when time data types such as `TIMESTAMP` are converted internally or when data are replicated to the downstream. The default is the local time zone in which the process runs.
-- `log-file`: The address of the running log of the TiCDC process. The default is `cdc.log`.
-- `log-level`: The log level when the TiCDC process is running. The default is `info`.
-- `ca`: The path of the CA certificate file used by TiCDC, in the PEM format (optional).
-- `cert`: The path of the certificate file used by TiCDC, in the PEM format (optional).
-- `key`: The path of the certificate key file used by TiCDC, in the PEM format (optional).
+This document describes how to manage the TiCDC cluster and replication tasks using the command line tool `cdc cli` and the HTTP interface.
 
 ## Upgrade TiCDC using TiUP
 
@@ -94,7 +31,16 @@ For details about using encrypted data transmission (TLS), see [Enable TLS Betwe
 
 ## Use `cdc cli` to manage cluster status and data replication task
 
-This section introduces how to use `cdc cli` to manage a TiCDC cluster and data replication tasks. The following interface description assumes that PD listens on `10.0.10.25` and the port is `2379`.
+This section introduces how to use `cdc cli` to manage a TiCDC cluster and data replication tasks. `cdc cli` is the `cli` sub-command executed using the `cdc` binary. The following interface description assumes that:
+
+- `cli` commands are executed directly using the `cdc` binary;
+- PD listens on `10.0.10.25` and the port is `2379`.
+
+> **Note:**
+>
+> The IP address and port that PD listens on correspond to the `advertise-client-urls` parameter specified during the `pd-server` startup. Multiple `pd-server`s have multiple `advertise-client-urls` parameters and you can specify one or multiple parameters. For example, `--pd=http://10.0.10.25:2379` or `--pd=http://10.0.10.25:2379,http://10.0.10.26:2379,http://10.0.10.27:2379`.
+
+If you deploy TiCDC using TiUP, replace `cdc cli` in the following commands with `tiup ctl cdc`.
 
 ### Manage TiCDC service progress (`capture`)
 
@@ -145,15 +91,22 @@ Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":
 
 - `--changefeed-id`: The ID of the replication task. The format must match the `^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$` regular expression. If this ID is not specified, TiCDC automatically generates a UUID (the version 4 format) as the ID.
 - `--sink-uri`: The downstream address of the replication task. Configure `--sink-uri` according to the following format. Currently, the scheme supports `mysql`/`tidb`/`kafka`/`pulsar`.
+
+    {{< copyable "" >}}
+
+    ```
+    [scheme]://[userinfo@][host]:[port][/path]?[query_parameters]
+    ```
+
+    When a URI contains special characters, you need to process these special characters using URL encoding.
+
 - `--start-ts`: Specifies the starting TSO of the `changefeed`. From this TSO, the TiCDC cluster starts pulling data. The default value is the current time.
 - `--target-ts`: Specifies the ending TSO of the `changefeed`. To this TSO, the TiCDC cluster stops pulling data. The default value is empty, which means that TiCDC does not automatically stop pulling data.
+- `--sort-engine`: Specifies the sorting engine for the `changefeed`. Because TiDB and TiKV adopt distributed architectures, TiCDC must sort the data changes before writing them to the sink. This option supports `memory`/`unified`/`file`.
+    - `memory`: Sorts data changes in memory. It is recommended to use `memory` in a production environment.
+    - `unified`: An experimental feature introduced in v4.0.9. When `unified` is used, TiCDC prefers data sorting in memory. If the memory is insufficient, TiCDC automatically uses the disk to store the temporary data. It is **NOT** recommended to use it in a production environment unless `memory` cannot be used due to insufficient memory.
+    - `file`: Entirely uses the disk to store the temporary data. This feature is **deprecated**. It is not recommended to use it.
 - `--config`: Specifies the configuration file of the `changefeed`.
-
-{{< copyable "" >}}
-
-```
-[scheme]://[userinfo@][host]:[port][/path]?[query_parameters]
-```
 
 #### Configure sink URI with `mysql`/`tidb`
 
@@ -178,6 +131,7 @@ The following are descriptions of parameters and parameter values that can be co
 | `ssl-ca` | The path of the CA certificate file needed to connect to the downstream MySQL instance (optional)  |
 | `ssl-cert` | The path of the certificate file needed to connect to the downstream MySQL instance (optional) |
 | `ssl-key` | The path of the certificate key file needed to connect to the downstream MySQL instance (optional) |
+| `time-zone` | The time zone used when connecting to the downstream MySQL instance, which is effective since v4.0.8. This is an optional parameter. If this parameter is not specified, the time zone of TiCDC service processes is used. If this parameter is set to an empty value, no time zone is specified when TiCDC connects to the downstream MySQL instance and the default time zone of the downstream is used. |
 
 #### Configure sink URI with `kafka`
 
@@ -196,19 +150,24 @@ The following are descriptions of parameters and parameter values that can be co
 | `127.0.0.1`          | The IP address of the downstream Kafka services                                 |
 | `9092`               | The port for the downstream Kafka                                          |
 | `cdc-test`           | The name of the Kafka topic                                      |
-| `kafka-version`      | The version of the downstream Kafka (optional, `2.4.0` by default. Currently, the earlist supported Kafka version is `0.11.0.2` and the latest one is `2.6.0`.)                      |
+| `kafka-version`      | The version of the downstream Kafka (optional, `2.4.0` by default. Currently, the earlist supported Kafka version is `0.11.0.2` and the latest one is `2.7.0`. This value needs to be consistent with the actual version of the downstream Kafka.)                      |
 | `kafka-client-id`    | Specifies the Kafka client ID of the replication task (optional, `TiCDC_sarama_producer_replication ID` by default) |
 | `partition-num`      | The number of the downstream Kafka partitions (Optional. The value must be **no greater than** the actual number of partitions. If you do not configure this parameter, the partition number is obtained automatically.) |
 | `max-message-bytes`  | The maximum size of data that is sent to Kafka broker each time (optional, `64MB` by default) |
 | `replication-factor` | The number of Kafka message replicas that can be saved (optional, `1` by default)                       |
 | `protocol` | The protocol with which messages are output to Kafka. The value options are `default`, `canal`, `avro`, and `maxwell` (`default` by default)    |
+| `max-batch-size` | New in v4.0.9. If the message protocol supports outputting multiple data changes to one Kafka message, this parameter specifies the maximum number of data changes in one Kafka message. It currently takes effect only when Kafka's `protocol` is `default`. (optional, `4096` by default) |
 | `ca` | The path of the CA certificate file needed to connect to the downstream Kafka instance (optional)  |
 | `cert` | The path of the certificate file needed to connect to the downstream Kafka instance (optional) |
 | `key` | The path of the certificate key file needed to connect to the downstream Kafka instance (optional) |
 
+> **Note:**
+>
+> When `protocol` is `default`, TiCDC tries to avoid generating messages that exceed `max-message-bytes` in length. However, if a row is so large that a single change alone exceeds `max-message-bytes` in length , to avoid silent failure, TiCDC tries to output this message and prints a warning in the log.
+
 #### Integrate TiCDC with Kafka Connect (Confluent Platform)
 
-> **Note:**
+> **Warning:**
 >
 > This is still an experimental feature. Do **NOT** use it in a production environment.
 
@@ -472,9 +431,9 @@ Starting from v4.0.4, TiCDC supports modifying the configuration of the replicat
 {{< copyable "shell-regular" >}}
 
 ```shell
-cdc cli changefeed pause -c test-cf
-cdc cli changefeed update -c test-cf --sink-uri="mysql://127.0.0.1:3306/?max-txn-row=20&worker-number=8" --config=changefeed.toml
-cdc cli changefeed resume -c test-cf
+cdc cli changefeed pause -c test-cf --pd=http://10.0.10.25:2379
+cdc cli changefeed update -c test-cf --pd=http://10.0.10.25:2379 --sink-uri="mysql://127.0.0.1:3306/?max-txn-row=20&worker-number=8" --config=changefeed.toml
+cdc cli changefeed resume -c test-cf --pd=http://10.0.10.25:2379
 ```
 
 Currently, you can modify the following configuration items:
@@ -638,8 +597,8 @@ This section introduces the configuration of a replication task.
 # This configuration item affects configurations related to filter and sink.
 case-sensitive = true
 
-# Specifies whether to output the old value. New in v4.0.5.
-enable-old-value = false
+# Specifies whether to output the old value. New in v4.0.5. Since v5.0.0-rc, the default value is `true`.
+enable-old-value = true
 
 [filter]
 # Ignores the transaction of specified start_ts.
@@ -708,7 +667,7 @@ To use the cyclic replication feature, you need to configure the following param
 
 To create a cyclic replication task, take the following steps:
 
-1. [Enable the TiCDC component](#deploy-and-install-ticdc) in TiDB cluster A, cluster B, and cluster C.
+1. [Enable the TiCDC component](/ticdc/deploy-ticdc.md) in TiDB cluster A, cluster B, and cluster C.
 
     {{< copyable "shell-regular" >}}
 
@@ -807,3 +766,18 @@ enable-old-value = true
 ```
 
 After this feature is enabled, you can see [TiCDC Open Protocol - Row Changed Event](/ticdc/ticdc-open-protocol.md#row-changed-event) for the detailed output format. The new TiDB v4.0 collation framework will also be supported when you use the MySQL sink.
+
+## Replicate tables without a valid index
+
+Since v4.0.8, TiCDC supports replicating tables that have no valid index by modifying the task configuration. To enable this feature, configure in the `changefeed` configuration file as follows:
+
+{{< copyable "" >}}
+
+```toml
+enable-old-value = true
+force-replicate = true
+```
+
+> **Warning:**
+>
+> For tables without a valid index, operations such as `INSERT` and `REPLACE` are not reentrant, so there is a risk of data redundancy. TiCDC guarantees that data is distributed only at least once during the replication process. Therefore, enabling this feature to replicate tables without a valid index will definitely cause data redundancy. If you do not accept data redundancy, it is recommended to add an effective index, such as adding a primary key column with the `AUTO RANDOM` attribute.

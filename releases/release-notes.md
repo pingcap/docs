@@ -5,8 +5,14 @@ aliases: ['/docs/dev/releases/release-notes/','/docs/dev/releases/rn/']
 
 # TiDB Release Notes
 
+## 5.0
+
+- [5.0.0-rc](/releases/release-5.0.0-rc.md)
+
 ## 4.0
 
+- [4.0.10](/releases/release-4.0.10.md)
+- [4.0.9](/releases/release-4.0.9.md)
 - [4.0.8](/releases/release-4.0.8.md)
 - [4.0.7](/releases/release-4.0.7.md)
 - [4.0.6](/releases/release-4.0.6.md)
@@ -35,6 +41,7 @@ aliases: ['/docs/dev/releases/release-notes/','/docs/dev/releases/rn/']
 
 ## 3.0
 
+- [3.0.20](/releases/release-3.0.20.md)
 - [3.0.19](/releases/release-3.0.19.md)
 - [3.0.18](/releases/release-3.0.18.md)
 - [3.0.17](/releases/release-3.0.17.md)

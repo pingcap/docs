@@ -1,24 +1,22 @@
 ---
 title: Deploy a TiDB Cluster Offline Using TiUP
 summary: Introduce how to deploy a TiDB cluster offline using TiUP.
-aliases: ['/docs/dev/production-offline-deployment-using-tiup/']
+aliases: ['/docs/dev/production-offline-deployment-using-tiup/','/docs/dev/offline-deployment-using-ansible/','/docs/dev/how-to/deploy/orchestrated/offline-ansible/','/tidb/dev/offline-deployment-using-ansible/']
 ---
 
 # Deploy a TiDB Cluster Offline Using TiUP
 
 This document describes how to deploy a TiDB cluster offline using TiUP.
 
+> **Note:**
+>
+> Since TiDB v4.0, PingCAP no longer provides support for TiDB Ansible. Since TiDB v5.0, PingCAP no longer provides TiDB Ansible documents. If you want to read the document that introduces how to deploy a TiDB cluster using TiDB Ansible offline, see [Deploy TiDB Offline Using TiDB Ansible (v4.0)](https://docs.pingcap.com/tidb/v4.0/offline-deployment-using-ansible).
+
 ## Step 1: Prepare the TiUP offline component package
 
-### Option 1: Download the official TiUP offline component package
+To prepare the TiUP offline component package, manually pack an offline component package using `tiup mirror clone`.
 
-Download the offline mirror package of the TiDB server (including the TiUP offline component package) from the [Download TiDB](https://pingcap.com/download/) page.
-
-### Option 2: Manually pack an offline component package using `tiup mirror clone`
-
-The steps are below.
-
-- Install the TiUP package manager online.
+1. Install the TiUP package manager online.
 
     1. Install the TiUP tool:
 
@@ -44,7 +42,7 @@ The steps are below.
         which tiup
         ```
 
-- Pull the mirror using TiUP
+2. Pull the mirror using TiUP.
 
     1. Pull the needed components on a machine that has access to the Internet:
 
@@ -80,7 +78,7 @@ source /home/tidb/.bash_profile
 
 The `local_install.sh` script automatically executes the `tiup mirror set tidb-community-server-${version}-linux-amd64` command to set the current mirror address to `tidb-community-server-${version}-linux-amd64`.
 
-To switch the mirror to another directory, you can manually execute the `tiup mirror set <mirror-dir>` command.
+To switch the mirror to another directory, you can manually execute the `tiup mirror set <mirror-dir>` command. To switch the mirror to the online environment, you can execute the `tiup mirror set https://tiup-mirrors.pingcap.com` command.
 
 ## Step 3: Mount the TiKV data disk
 
@@ -245,14 +243,14 @@ Execute the following command to deploy the TiDB cluster:
 {{< copyable "shell-regular" >}}
 
 ```bash
-tiup cluster deploy tidb-test v4.0.0 topology.yaml --user tidb [-p] [-i /home/root/.ssh/gcp_rsa]
+tiup cluster deploy tidb-test v5.0.0 topology.yaml --user tidb [-p] [-i /home/root/.ssh/gcp_rsa]
 tiup cluster start tidb-test
 ```
 
 > **Parameter description:**
 >
 > - The name of the cluster deployed by the TiUP cluster is `tidb-test`.
-> - The deployment version is `v4.0.0`. To obtain other supported versions, run `tiup list tidb`.
+> - The deployment version is `v5.0.0`. To obtain other supported versions, run `tiup list tidb`.
 > - The initialization configuration file is `topology.yaml`.
 > - `–user tidb`: log in to the target machine using the `tidb` user account to complete the cluster deployment. The `tidb` user needs to have `ssh` and `sudo` privileges of the target machine. You can use other users with `ssh` and `sudo` privileges to complete the deployment.
 > - `[-i]` and `[-p]`: optional. If you have configured login to the target machine without password, these parameters are not required. If not, choose one of the two parameters. `[-i]` is the private key of the `root` user (or other users specified by `-user`) that has access to the target machine. `[-p]` is used to input the user password interactively.

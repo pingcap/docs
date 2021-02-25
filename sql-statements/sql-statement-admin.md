@@ -14,8 +14,8 @@ This statement is a TiDB extension syntax, used to view the status of TiDB and c
 |------------------------------------------------------------------------------------------|-----------------------------|
 | [`ADMIN CANCEL DDL JOBS`](/sql-statements/sql-statement-admin-cancel-ddl.md)             | Cancels a currently running DDL jobs. |
 | [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)          | Calculates the CRC64 of all rows + indexes of a table. |
-| [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) | Checks for consistency of a table or index. |
-| [`ADMIN SHOW DDL [JOBS|QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)      | Shows details about currently running or recently completed DDL jobs. |
+| [<code>ADMIN CHECK [TABLE\|INDEX]</code>](/sql-statements/sql-statement-admin-check-table-index.md) | Checks for consistency of a table or index. |
+| [<code>ADMIN SHOW DDL [JOBS\|QUERIES]</code>](/sql-statements/sql-statement-admin-show-ddl.md)      | Shows details about currently running or recently completed DDL jobs. |
 
 ## `ADMIN RELOAD` statement
 
@@ -117,9 +117,10 @@ For details, refer to [admin show slow statement](/identify-slow-queries.md#admi
 
 ## Synopsis
 
-**AdminStmt:**
-
-![AdminStmt](/media/sqlgram/AdminStmt.png)
+```ebnf+diagram
+AdminStmt ::=
+    'ADMIN' ( 'SHOW' ( 'DDL' ( 'JOBS' Int64Num? WhereClauseOptional | 'JOB' 'QUERIES' NumList )? | TableName 'NEXT_ROW_ID' | 'SLOW' AdminShowSlow ) | 'CHECK' ( 'TABLE' TableNameList | 'INDEX' TableName Identifier ( HandleRange ( ',' HandleRange )* )? ) | 'RECOVER' 'INDEX' TableName Identifier | 'CLEANUP' ( 'INDEX' TableName Identifier | 'TABLE' 'LOCK' TableNameList ) | 'CHECKSUM' 'TABLE' TableNameList | 'CANCEL' 'DDL' 'JOBS' NumList | 'RELOAD' ( 'EXPR_PUSHDOWN_BLACKLIST' | 'OPT_RULE_BLACKLIST' | 'BINDINGS' ) | 'PLUGINS' ( 'ENABLE' | 'DISABLE' ) PluginNameList | 'REPAIR' 'TABLE' TableName CreateTableStmt | ( 'FLUSH' | 'CAPTURE' | 'EVOLVE' ) 'BINDINGS' )
+```
 
 ## Examples
 

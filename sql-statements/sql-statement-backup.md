@@ -20,25 +20,28 @@ Only one `BACKUP` and [`RESTORE`](/sql-statements/sql-statement-restore.md) task
 
 ## Synopsis
 
-**BackupStmt:**
+```ebnf+diagram
+BackupStmt ::=
+    "BACKUP" BRIETables "TO" stringLit BackupOption*
 
-![BackupStmt](/media/sqlgram/BackupStmt.png)
+BRIETables ::=
+    "DATABASE" ( '*' | DBName (',' DBName)* )
+|   "TABLE" TableNameList
 
-**BRIETables:**
+BackupOption ::=
+    "RATE_LIMIT" '='? LengthNum "MB" '/' "SECOND"
+|   "CONCURRENCY" '='? LengthNum
+|   "CHECKSUM" '='? Boolean
+|   "SEND_CREDENTIALS_TO_TIKV" '='? Boolean
+|   "LAST_BACKUP" '='? BackupTSO
+|   "SNAPSHOT" '='? ( BackupTSO | LengthNum TimestampUnit "AGO" )
 
-![BRIETables](/media/sqlgram/BRIETables.png)
+Boolean ::=
+    NUM | "TRUE" | "FALSE"
 
-**BackupOption:**
-
-![BackupOption](/media/sqlgram/BackupOption.png)
-
-**Boolean:**
-
-![Boolean](/media/sqlgram/Boolean.png)
-
-**BackupTSO:**
-
-![BackupTSO](/media/sqlgram/BackupTSO.png)
+BackupTSO ::=
+    LengthNum | stringLit
+```
 
 ## Examples
 
@@ -102,7 +105,7 @@ BR supports backing up data to S3 or GCS:
 {{< copyable "sql" >}}
 
 ```sql
-BACKUP DATABASE `test` TO 's3://example-bucket-2020/backup-05/?region=us-west-2';
+BACKUP DATABASE `test` TO 's3://example-bucket-2020/backup-05/?region=us-west-2&access-key={YOUR_ACCESS_KEY}&secret-access-key={YOUR_SECRET_KEY}';
 ```
 
 The URL syntax is further explained in [BR storages](/br/backup-and-restore-storages.md).

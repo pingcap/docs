@@ -6,7 +6,7 @@ aliases: ['/docs/dev/grafana-pd-dashboard/','/docs/dev/reference/key-monitoring-
 
 # Key Monitoring Metrics of PD
 
-If you use TiUP or TiDB Ansible to deploy the TiDB cluster, the monitoring system (Prometheus & Grafana) is deployed at the same time. For more information, see [Overview of the Monitoring Framework](/tidb-monitoring-framework.md).
+If you use TiUP to deploy the TiDB cluster, the monitoring system (Prometheus & Grafana) is deployed at the same time. For more information, see [Overview of the Monitoring Framework](/tidb-monitoring-framework.md).
 
 The Grafana dashboard is divided into a series of sub dashboards which include Overview, PD, TiDB, TiKV, Node\_exporter, Disk Performance, and so on. A lot of metrics are there to help you diagnose.
 
@@ -40,7 +40,7 @@ The following is the description of PD Dashboard metrics items:
 
 ## Operator
 
-- Schedule operator create: The number of newly created operators per type  
+- Schedule operator create: The number of newly created operators per type
 - Schedule operator check: The number of checked operator per type. It mainly checks whether the current step is finished; if yes, it returns the next step to be executed
 - Schedule operator finish: The number of finished operators per type
 - Schedule operator timeout: The number of timeout operators per type
@@ -130,10 +130,6 @@ The following is the description of PD Dashboard metrics items:
 - Raft applied index: The last applied index of Raft
 
 ![PD Dashboard - etcd metrics](/media/pd-dashboard-etcd-v2.png)
-
-Cluster | Label distribution | The distribution status of the labels in the cluster |
-Cluster | pd_cluster_metadata | The metadata of the PD cluster including cluster ID, the timestamp, and the generated ID. |
-Cluster | Region health | The health status of Regions indicated via count of unusual Regions including pending peers, down peers, extra peers, offline peers, missing peers, learner peers and incorrect namespaces | The number of pending peers should be less than `100`. The missing peers should not be persistently greater than `0`.
 
 ## TiDB
 

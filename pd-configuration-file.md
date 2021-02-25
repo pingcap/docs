@@ -143,6 +143,12 @@ Configuration items related to security
 + The path of the PEM file that contains the X509 key
 + Default value: ""
 
+### `redact-info-log` <span class="version-mark">New in v5.0.0-rc</span>
+
++ Controls whether to enable log redaction in the PD log.
++ When you set the configuration value to `true`, user data is redacted in the PD log.
++ Default value: `false`
+
 ## `log`
 
 Configuration items related to log
@@ -250,14 +256,14 @@ Configuration items related to scheduling
 
 ### `high-space-ratio`
 
-+ The threshold ratio below which the capacity of the store is sufficient
++ The threshold ratio below which the capacity of the store is sufficient. If the space occupancy ratio of the store is smaller than this threshold value, PD ignores the remaining space of the store when performing scheduling, and balances load mainly based on the Region size. This configuration takes effect only when `region-score-formula-version` is set to `v1`.
 + Default value: `0.7`
 + Minimum value: greater than `0`
 + Maximum value: less than `1`
 
 ### `low-space-ratio`
 
-+ The threshold ratio above which the capacity of the store is insufficient
++ The threshold ratio above which the capacity of the store is insufficient. If the space occupancy ratio of a store exceeds this threshold value, PD avoids migrating data to this store as much as possible. Meanwhile, to avoid the disk space of the corresponding store being exhausted, PD performs scheduling mainly based on the remaining space of the store.
 + Default value: `0.8`
 + Minimum value: greater than `0`
 + Maximum value: less than `1`
@@ -267,6 +273,17 @@ Configuration items related to scheduling
 + Controls the `balance` buffer size
 + Default value: `0` (automatically adjusts the buffer size)
 + Minimum value: `0`
+
+### `enable-cross-table-merge`
+
++ Determines whether to enable the merging of cross-table Regions
++ Default value: `true`
+
+### `region-score-formula-version`
+
++ Controls the version of the Region score formula
++ Default value: `v2`
++ Optional values: `v1` and `v2`
 
 ### `disable-remove-down-replica`
 
@@ -297,6 +314,15 @@ Configuration items related to scheduling
 
 + Determines the maximum number of operations related to adding peers within a minute
 + Default value: `15`
+
+### `enable-joint-consensus` <span class="version-mark">New in v5.0.0-rc</span>
+
+> **Warning:**
+>
+> Currently, Joint Consensus is an experimental feature. It is **NOT** recommended that you use it in the production environment.
+
++ Controls whether to use Joint Consensus for replica scheduling. If this configuration is disabled, PD schedules one replica at a time.
++ Default value: `true`
 
 ## `replication`
 
@@ -375,3 +401,7 @@ Configuration items related to the [TiDB Dashboard](/dashboard/dashboard-intro.m
 + Determines whether to enable the telemetry collection feature in TiDB Dashboard.
 + Default value: `true`
 + See [Telemetry](/telemetry.md) for details.
+
+## `replication-mode`
+
+Configuration items related to the replication mode of all Regions. See [Enable synchronous replication in PD configuration file](/synchronous-replication.md#enable-synchronous-replication-in-the-pd-configuration-file) for details.

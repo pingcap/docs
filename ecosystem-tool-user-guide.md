@@ -18,6 +18,10 @@ The following are the basics of Dumpling:
 - Supported TiDB versions: all versions
 - Kubernetes support: No
 
+> **Note:**
+>
+> PingCAP previously maintained a fork of the [mydumper project](https://github.com/maxbube/mydumper) with enhancements specific to TiDB. This fork has since been replaced by [Dumpling](/dumpling-overview.md), which has been rewritten in Go, and supports more optimizations that are specific to TiDB. It is strongly recommended that you use Dumpling instead of mydumper.
+
 ## Full data import
 
 [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) (Lightning) is a tool used for the full import of large amounts of data into a TiDB cluster. Currently, TiDB Lightning supports reading SQL dump exported via Dumpling or CSV data source.
@@ -34,7 +38,7 @@ The following are the basics of TiDB Lightning:
     - The output file of Dumpling
     - Other compatible CSV file
 - Supported TiDB versions: v2.1 or later
-- Kubernetes support: Yes. See [Quickly restore data into a TiDB cluster in Kubernetes using TiDB Lightning](https://docs.pingcap.com/tidb-in-kubernetes/v1.1/restore-data-using-tidb-lightning) for details.
+- Kubernetes support: Yes. See [Quickly restore data into a TiDB cluster in Kubernetes using TiDB Lightning](https://docs.pingcap.com/tidb-in-kubernetes/stable/restore-data-using-tidb-lightning) for details.
 
 > **Note:**
 >
@@ -48,7 +52,7 @@ The following are the basics of BR:
 
 - [Input and output data source](/br/backup-and-restore-tool.md#types-of-backup-files): SST + `backupmeta` file
 - Supported TiDB versions: v3.1 and v4.0
-- Kubernetes support: Yes. See [Back up Data to S3-Compatible Storage Using BR](https://docs.pingcap.com/tidb-in-kubernetes/v1.1/backup-to-aws-s3-using-br) and [Restore Data from S3-Compatible Storage Using BR](https://docs.pingcap.com/tidb-in-kubernetes/v1.1/restore-from-aws-s3-using-br) for details.
+- Kubernetes support: Yes. See [Back up Data to S3-Compatible Storage Using BR](https://docs.pingcap.com/tidb-in-kubernetes/stable/backup-to-aws-s3-using-br) and [Restore Data from S3-Compatible Storage Using BR](https://docs.pingcap.com/tidb-in-kubernetes/stable/restore-from-aws-s3-using-br) for details.
 
 ## Incremental data replication
 
@@ -60,11 +64,11 @@ The following are the basics of TiDB Binlog:
     - Input: TiDB cluster
     - Output: TiDB cluster, MySQL, Kafka or incremental backup files
 - Supported TiDB versions: v2.1 or later
-- Kubernetes support: Yes. See [TiDB Binlog Cluster Operations](https://docs.pingcap.com/tidb-in-kubernetes/v1.1/deploy-tidb-binlog) and [TiDB Binlog Drainer Configurations in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/v1.1/configure-tidb-binlog-drainer) for details.
+- Kubernetes support: Yes. See [TiDB Binlog Cluster Operations](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-tidb-binlog) and [TiDB Binlog Drainer Configurations in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-tidb-binlog-drainer) for details.
 
 ### Data migration
 
-[TiDB Data Migration](https://docs.pingcap.com/tidb-data-migration/v2.0) (DM) is an integrated data replication task management platform that supports the full data migration and the incremental data migration from MySQL/MariaDB to TiDB.
+[TiDB Data Migration](https://docs.pingcap.com/tidb-data-migration/stable) (DM) is an integrated data replication task management platform that supports the full data migration and the incremental data replication from MySQL/MariaDB to TiDB.
 
 The following are the basics of DM:
 
@@ -79,7 +83,7 @@ If the data volume is at the TB level, take the following steps:
 
 1. Use [Dumpling](/dumpling-overview.md) to export the full data from MySQL/MariaDB.
 2. Use [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) to import the data exported in Step 1 to the TiDB cluster.
-3. Use DM to migrate the incremental data from MySQL/MariaDB to TiDB.
+3. Use DM to replicate the incremental data from MySQL/MariaDB to TiDB.
 
 > **Note:**
 >

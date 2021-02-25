@@ -26,6 +26,7 @@ The TiDB configuration file supports more options than command-line parameters. 
 
 - The maximum memory available for a single SQL statement.
 - Default value: `1073741824` (in bytes)
+- Note: When you upgrade the cluster from v2.0.x or v3.0.x to v4.0.9 or later versions, the default value of this configuration is `34359738368`.
 - Requests that require more memory than this value are handled based on the behavior defined by `oom-action`.
 - This value is the initial value of the system variable [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query).
 
@@ -142,10 +143,16 @@ The TiDB configuration file supports more options than command-line parameters. 
 
 Configuration items related to log.
 
+### `level`
+
++ Specifies the log output level.
++ Value options: `debug`, `info`, `warn`, `error`, and `fatal`.
++ Default value: `info`
+
 ### `format`
 
 - Specifies the log output format.
-- Available values: `json`, `text` and `console`.
+- Value options: `json`, `text` and `console`.
 - Default value: `text`
 
 ### `enable-timestamp`
@@ -280,17 +287,35 @@ Configuration items related to performance.
 - Default value: `0`
 - The default `0` indicates using all the CPUs on the machine. You can also set it to n, and then TiDB uses n CPUs.
 
-### `max-memory`
+### `server-memory-quota` <span class="version-mark">New in v4.0.9</span>
 
-- The maximum memory limit for the Prepared Least Recently Used (LRU) caching. If this value exceeds `performance.max-memory * (1 - prepared-plan-cache.memory-guard-ratio)`, the elements in the LRU are removed.
-- Default value: `0`
-- This configuration takes effect when `prepared-plan-cache.enabled` is `true` (default). When the size of the LRU is greater than `prepared-plan-cache.capacity`, the elements in the LRU are also removed.
+> **Warning:**
+>
+> `server-memory-quota` is still an experimental feature. It is **NOT** recommended that you use it in a production environment.
+
++ The memory usage limit of tidb-server instances. <!-- New in TiDB v5.0 --> This configuration item completely supersedes the previous [`max-memory`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#max-memory).
++ Default value: `0` (in bytes), which means no memory limit.
+
+### `memory-usage-alarm-ratio` <span class="version-mark">New in v4.0.9</span>
+
++ TiDB triggers an alarm when the memory usage of tidb-server instance exceeds a certain threshold. The valid value for this configuration item ranges from `0` to `1`. If it is configured as `0` or `1`, this alarm feature is disabled.
++ Default value: `0.8`
++ When the memory usage alarm is enabled, if [`server-memory-quota`](/tidb-configuration-file.md#server-memory-quota-new-in-v409) is not set, then the threshold of memory usage is ```the `memory-usage-alarm-ratio` value * the system memory size```; if `server-memory-quota` is set to a value greater than 0, then the threshold of memory usage is ```the `memory-usage-alarm-ratio` value * the `server-memory-quota` value```.
++ When TiDB detects that the memory usage of the tidb-server instance exceeds the threshold, it considers that there might be a risk of OOM. Therefore, it records ten SQL statements with the highest memory usage, ten SQL statements with the longest running time, and the heap profile among all SQL statements currently being executed to the directory [`tmp-storage-path/record`](/tidb-configuration-file.md#tmp-storage-path) and outputs a log containing the keyword `tidb-server has the risk of OOM`.
++ The value of this configuration item is the initial value of the system variable [`tidb_memory_usage_alarm_ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio).
 
 ### `stmt-count-limit`
 
 - The maximum number of statements allowed in a single TiDB transaction.
 - Default value: `5000`
 - If a transaction does not roll back or commit after the number of statements exceeds `stmt-count-limit`, TiDB returns the `statement count 5001 exceeds the transaction limitation, autocommit = false` error. This configuration takes effect **only** in the retriable optimistic transaction. If you use the pessimistic transaction or have disabled the transaction retry, the number of statements in a transaction is not limited by this configuration.
+
+### `txn-entry-size-limit` <span class="version-mark">New in v5.0.0-rc</span>
+
+- The size limit of a single row of data in TiDB.
+- Default value: `6291456` (in bytes)
+- The size limit of a single key-value record in a transaction. If the size limit is exceeded, TiDB returns the `entry too large` error. The maximum value of this configuration item does not exceed `125829120` (120 MB).
+- Note that TiKV has a similar limit. If the data size of a single write request exceeds [`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size), which is 8 MB by default, TiKV refuses to process this request. When a table has a row of large size, you need to modify both configurations at the same time.
 
 ### `txn-total-size-limit`
 
@@ -301,7 +326,7 @@ Configuration items related to performance.
 ### `tcp-keep-alive`
 
 - Determines whether to enable `keepalive` in the TCP layer.
-- Default value: `false`
+- Default value: `true`
 
 ### `cross-join`
 
@@ -438,6 +463,19 @@ The Plan Cache configuration of the `PREPARE` statement.
 - The threshold of the TiKV load. If the TiKV load exceeds this threshold, more `batch` packets are collected to relieve the pressure of TiKV. It is valid only when the value of `tikv-client.max-batch-size` is greater than `0`. It is recommended not to modify this value.
 - Default value: `200`
 
+## tikv-client.async-commit <span class="version-mark">New in v5.0.0-rc</span>
+
+### `keys-limit`
+
+- Specifies the upper limit of the number of keys in an async commit transaction. The async commit feature is **NOT** suitable for transactions that are too large. Transactions that exceed this limit will use the two-phase commit.
+- Default value: `256`
+
+### `total-key-size-limit`
+
+- Specifies the upper limit of the total size of keys in an async commit transaction. The async commit feature is **NOT** suitable for transactions in which the involved key ranges are too long. Transactions that exceed this limit will use the two-phase commit.
+- Default value: `4096`
+- Unit: byte
+
 ## tikv-client.copr-cache <span class="version-mark">New in v4.0.0</span>
 
 This section introduces configuration items related to the Coprocessor Cache feature.
@@ -452,18 +490,26 @@ This section introduces configuration items related to the Coprocessor Cache fea
 - The total size of the cached data. When the cache space is full, old cache entries are evicted.
 - Default value: `1000.0`
 - Unit: MB
+- Type: Float
 
 ### `admission-max-result-mb`
 
-- Specifies the largest single push-down calculation result set that can be cached. If the result set of a single push-down calculation returned on the Coprocessor is larger than the result set specified by this parameter, the result set is cached. Increasing this value means that more types of push-down requests are cached, but also cause the cache space to be occupied more easily. Note that the size of each push-down calculation result set is generally smaller than the size of the Region. Therefore, it is meaningless to set this value far beyond the size of a Region.
+- Specifies the largest single push-down calculation result set that can be cached. If the result set of a single push-down calculation returned on the Coprocessor is less than the result set specified by this parameter, the result set is cached. Increasing this value means that more types of push-down requests are cached, but also cause the cache space to be occupied more easily. Note that the size of each push-down calculation result set is generally smaller than the size of the Region. Therefore, it is meaningless to set this value far beyond the size of a Region.
 - Default value: `10.0`
 - Unit: MB
+- Type: Float
 
 ### `admission-min-process-ms`
 
 - Specifies the minimum calculation time for a single push-down calculation result set that can be cached. If the calculation time of a single push-down calculation on the Coprocessor is less than the time specified by this parameter, the result set is not cached. Requests that are processed quickly do not need to be cached, and only the requests that take a long time to process need to be cached, which makes the cache less likely to be evicted.
 - Default value: `5`
 - Unit: ms
+
+### `admission-max-ranges` <span class="version-mark">New in v4.0.8</span>
+
++ Specifies the maximum number of ranges in a single push-down calculation result set that can be cached. If the push-down calculation has more ranges than the number specified by this configuration, the result set will not be cached. Generally, when there are too many ranges, the extra calculation overhead of parsing the range brought by Coprocessor Cache is large.
++ Default value: `500`
++ Type: uint
 
 ### txn-local-latches
 
@@ -549,4 +595,14 @@ For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](
 
 ## experimental
 
-The `experimental` section, introduced in v3.1.0, describes configurations related to the experimental features of TiDB. Currently, this section has no configuration item.
+The `experimental` section, introduced in v3.1.0, describes configurations related to the experimental features of TiDB.
+
+### `allow-expression-index` <span class="version-mark">New in v4.0.0</span>
+
+- Determines whether to create the expression index.
+- Default value: `false`
+
+### `enable-global-kill` <span class="version-mark">New in v5.0.0-rc</span>
+
+- Determines whether to enable the Global Kill feature. To enable this feature, set the value of this configuration item to `true`. When enabled, this feature can safely kill any connection even when the TiDB server is behind a load balancer.
+- Default value: `false`

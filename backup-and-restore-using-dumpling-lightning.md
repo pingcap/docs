@@ -1,10 +1,14 @@
 ---
 title: Use Dumpling and TiDB Lightning for Data Backup and Restoration
 summary: Introduce how to use Dumpling and TiDB Lightning to backup and restore full data of TiDB.
-aliases: ['/docs/dev/export-or-backup-using-dumpling/','/tidb/dev/export-or-backup-using-dumpling']
+aliases: ['/docs/dev/export-or-backup-using-dumpling/','/tidb/dev/export-or-backup-using-dumpling','/docs/dev/backup-and-restore-using-mydumper-lightning/','/docs/dev/how-to/maintain/backup-and-restore/mydumper-lightning/','/docs/dev/how-to/maintain/backup-and-restore/','/tidb/dev/backup-and-restore-using-mydumper-lightning/']
 ---
 
 # Use Dumpling and TiDB Lightning for Data Backup and Restoration
+
+> **Warning:**
+>
+> It is no longer recommended to use Dumpling and TiDB Lightning for data backup and restoration. It is strongly recommended to use [BR tool](/br/backup-and-restore-tool.md) instead for a better tool experience.
 
 This document introduces in detail how to use Dumpling and TiDB Lightning to backup and restore full data of TiDB. For incremental backup and replication to downstream, refer to [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md).
 

@@ -24,7 +24,7 @@ aliases: ['/docs/dev/key-features/','/tidb/dev/key-features','/docs/dev/overview
 
 - **Cloud-native distributed database**
 
-    TiDB is a distributed database designed for the cloud, providing flexible scalability, reliability and security on the cloud platform. Users can elastically scale TiDB to meet the requirements of their changing workloads. In TiDB, each piece of data has 3 replicas at least, which can be scheduled in different cloud availability zones to tolerate the outage of a whole data center. [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.1/tidb-operator-overview) helps manage TiDB on Kubernetes and automates tasks related to operating the TiDB cluster, which makes TiDB easier to deploy on any cloud that provides managed Kubernetes. [TiDB Cloud](https://pingcap.com/products/tidbcloud) (Beta), the fully-managed TiDB service, is the easiest, most economical, and most resilient way to unlock the full power of [TiDB in the cloud](https://docs.pingcap.com/tidbcloud/beta), allowing you to deploy and run TiDB clusters with just a few clicks.
+    TiDB is a distributed database designed for the cloud, providing flexible scalability, reliability and security on the cloud platform. Users can elastically scale TiDB to meet the requirements of their changing workloads. In TiDB, each piece of data has 3 replicas at least, which can be scheduled in different cloud availability zones to tolerate the outage of a whole data center. [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/tidb-operator-overview) helps manage TiDB on Kubernetes and automates tasks related to operating the TiDB cluster, which makes TiDB easier to deploy on any cloud that provides managed Kubernetes. [TiDB Cloud](https://pingcap.com/products/tidbcloud) (Beta), the fully-managed TiDB service, is the easiest, most economical, and most resilient way to unlock the full power of [TiDB in the cloud](https://docs.pingcap.com/tidbcloud/beta), allowing you to deploy and run TiDB clusters with just a few clicks.
 
 - **Compatible with the MySQL 5.7 protocol and MySQL ecosystem**
 
@@ -47,3 +47,10 @@ aliases: ['/docs/dev/key-features/','/tidb/dev/key-features','/docs/dev/overview
 - **Data aggregation and secondary processing scenarios**
 
     The application data of most companies are scattered in different systems. As the application grows, the decision-making leaders need to understand the business status of the entire company to make decisions in time. In this case, the company needs to aggregate the scattered data into the same system and execute secondary processing to generate a T+0 or T+1 report. The traditional solution is to use ETL and Hadoop, but the Hadoop system is complicated, with high operations and maintenance cost and storage cost. Compared with Hadoop, TiDB is much simpler. You can replicate data into TiDB using ETL tools or data migration tools provided by TiDB. Reports can be directly generated using SQL statements.
+
+## See also
+
+- [TiDB Architecture](/tidb-architecture.md)
+- [TiDB Storage](/tidb-storage.md)
+- [TiDB Computing](/tidb-computing.md)
+- [TiDB Scheduling](/tidb-scheduling.md)

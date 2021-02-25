@@ -8,7 +8,7 @@ aliases: ['/docs/dev/quick-start-with-tidb/','/docs/dev/test-deployment-using-do
 
 > **Warning:**
 >
-> For production environments, **do not** deploy TiDB with the following three methods. Instead, it is recommended that you [deploy TiDB using TiUP](/production-deployment-using-tiup.md).
+> For production environments, **do not** deploy TiDB with the following two methods. Instead, it is recommended that you [deploy TiDB using TiUP](/production-deployment-using-tiup.md).
 
 This document describes how to try out TiDB, a distributed SQL database, in a few minutes. You can choose any of the following two methods to get started with the TiDB database platform:
 
@@ -76,11 +76,21 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
 
 4. Start a new session to access TiDB:
 
-    {{< copyable "shell-regular" >}}
+    1. Install the MySQL client. If it is already installed, skip this step.
 
-    ```shell
-    mysql --host 127.0.0.1 --port 4000 -u root
-    ```
+        {{< copyable "shell-regular" >}}
+
+        ```shell
+        yum -y install mysql
+        ```
+
+    2. Use the MySQL client to connect to TiDB.
+
+        {{< copyable "shell-regular" >}}
+
+        ```shell
+        mysql --host 127.0.0.1 --port 4000 -u root
+        ```
 
 5. Access the Prometheus dashboard of TiDB at <http://127.0.0.1:9090>.
 
@@ -100,7 +110,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
 
 > **Note:**
 >
-> TiUP Playground listens on `127.0.0.1` by default, and the service is only locally accessible; if you want the service to be externally accessible, you can specify `0.0.0.0` as the listening address using the `--host` parameter or bind the network interface card (NIC) to an externally accessible IP address.
+> TiUP Playground listens on `127.0.0.1` by default, and the service is only locally accessible; if you want the service to be externally accessible, you can specify the listening address using the `--host` parameter to bind the network interface card (NIC) to an externally accessible IP address.
 
 ## Set up a test environment on a single machine using TiUP cluster
 
@@ -275,6 +285,14 @@ Other requirements for the target machine:
 
 8. Access the cluster:
 
+    - Install the MySQL client. If it is already installed, skip this step.
+
+        {{< copyable "shell-regular" >}}
+
+        ```shell
+        yum -y install mysql
+        ```
+
     - Access TiDB. The password is empty:
 
         {{< copyable "shell-regular" >}}
@@ -317,7 +335,7 @@ Other requirements for the target machine:
 
     - [Deploy TiDB online using TiUP](/production-deployment-using-tiup.md)
     - [Deploy TiDB offline using TiUP](/production-offline-deployment-using-tiup.md)
-    - [Deploy TiDB on Cloud using TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.1)
+    - [Deploy TiDB on Cloud using TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable)
 
 > **Note:**
 >
