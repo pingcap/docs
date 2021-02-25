@@ -325,4 +325,3 @@ This error occurs usually because the CSV data file does not contain a header (t
 [mydumper.csv]
 header = false
 ```
->>>>>>> e6559606... tools: update tools faq (#4828)
