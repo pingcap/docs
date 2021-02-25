@@ -224,7 +224,7 @@ Configuration about performance.
     - At intervals of `stats-lease`, TiDB checks for column statistics that need to be loaded to the memory
     - At intervals of `200 * stats-lease`, TiDB writes the feedback cached in the memory to the system table
     - At intervals of `5 * stats-lease`, TiDB reads the feedback in the system table, and updates the statistics
-- When `stats-lease` is set to 0, all of the above operations are skipped.
+- When `stats-lease` is set to 0s, all of the above operations are skipped.
 
 ### `run-auto-analyze`
 
