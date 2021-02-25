@@ -95,19 +95,19 @@ TiCDC only provides partial support for scenarios of large transactions in the u
 
 When using the `cdc cli` tool of TiCDC v5.0.0-rc to operate a v4.0.x TiCDC cluster, you might encounter the following abnormal situations:
 
-- If the TiCDC cluster version is v4.0.8 or earlier, using the v5.0.0-rc of `cdc cli` to create a replication task changefeed will cause the TiCDC cluster to fall into an abnormal state and get replication stuck.
+- If the TiCDC cluster is v4.0.8 or earlier versions, using the v5.0.0-rc of `cdc cli` to create a replication task changefeed will cause the TiCDC cluster to fall into an abnormal state and get replication stuck.
 
-- If the TiCDC cluster version is v4.0.9 or later, using the v5.0.0-rc of `cdc cli` to create a replication task changefeed will cause the Old Value and Unified Sorter features enabled by default unexpectedly.
+- If the TiCDC cluster is v4.0.9 or later versions, using the v5.0.0-rc of `cdc cli` to create a replication task changefeed will cause the Old Value and Unified Sorter features enabled by default unexpectedly.
 
 Solutions: Use the `cdc` executable file corresponding to the TiCDC cluster version to perform the following operations:
 
-1. Delete the changefeed created using v5.0.0-rc. For example, run the command `tiup cdc:v4.0.9 cli changefeed remove -c xxxx --pd=xxxxx --force`.
-2. If TiCDC replication is stuck, you can restart the TiCDC cluster. For example, run the command`tiup cluster restart <cluster_name> -R cdc`.
-3. Re-create changefeed. For example, run the command `tiup cdc:v4.0.9 cli changefeed create --sink-uri=xxxx --pd=xxx`.
+1. Delete the changefeed created using v5.0.0-rc. For example, run the `tiup cdc:v4.0.9 cli changefeed remove -c xxxx --pd=xxxxx --force` command.
+2. If TiCDC replication is stuck, you can restart the TiCDC cluster. For example, run the `tiup cluster restart <cluster_name> -R cdc` command.
+3. Re-create changefeed. For example, run the `tiup cdc:v4.0.9 cli changefeed create --sink-uri=xxxx --pd=xxx` command.
 
 > **Note:**
 >
-> The above problems only exist when the version of `cdc cli` is v5.0.0-rc. In the future, other v5.0.x versions of `cdc cli` can be compatible with v4.0.x clusters.
+> The above problems only exist when `cdc cli` is v5.0.0-rc. In the future, other v5.0.x versions of `cdc cli` can be compatible with v4.0.x clusters.
 
 ## Install and deploy TiCDC
 
