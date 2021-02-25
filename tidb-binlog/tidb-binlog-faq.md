@@ -251,20 +251,22 @@ To solve the problem, follow these steps:
 
 ## TiDB fails to write to binlog and gets stuck, and `listener stopped, waiting for manual stop` appears in the log
 
-In TiDB v3.0.12 and earlier versions, the binlog write failure causes TiDB to report the fatal error. TiDB doesn't quit automatically but stop the service, which seems like getting stuck. You can see `listener stopped, waiting for manual stop` in the log.
+In TiDB v3.0.12 and earlier versions, the binlog write failure causes TiDB to report the fatal error. TiDB does not automatically exit but only stops the service, which seems like getting stuck. You can see the `listener stopped, waiting for manual stop` error in the log.
 
-When encountering this problem, you need to determine what causes the binlog write failure according to the specific situation. If it is caused by the slow writing of binlog into the downstream, you can consider scaling out Pump or increasing the timeout for writing binlog.
+You need to determine the specific causes of the binlog write failure. If the failure occurs because binlog is slowly written into the downstream, you can consider scaling out Pump or increasing the timeout time for writing binlog.
 
-In v3.0.13, TiDB optimizes this logic. The Binlog write failure causes transaction execution failure and returns an error, but does not get TiDB stuck.
+Since v3.0.13, the error-reporting logic is optimized. The binlog write failure causes transaction execution to fail and TiDB Binlog will return an error but will not get TiDB stuck.
 
-## TiDB writes duplicate binlog to Pump
+## TiDB writes duplicate binlogs to Pump
 
-In the case of the failure or timeout of writing binlog, TiDB retries to write binlog to the next available Pump node until the write succeeds. Therefore, if writing to a Pump node is slow, causing TiDB to time out (default 15s), then TiDB determines that the writing fails and tries to write to the next Pump node. If the timeout Pump node is actually written successfully, the same binlog is written to multiple Pump nodes. When Drainer processes the binlog, it automatically de-duplicates the same binlog as the TSO, so this duplicate writing does not affect the downstream and replication logic.
+This issue does not affect the downstream and replication logic.
 
-## Reparo is interrupted during the full and incremental restore process. Can I use the last TSO in the log to restore replication?
+When the binlog write fails or becomes timeout, TiDB retries writing binlog to the next available Pump node until the write succeeds. Therefore, if the binlog write to a Pump node is slow and causes TiDB timeout (default 15s), then TiDB determines that the write fails and tries to write to the next Pump node. If binlog is actually successfully written to the timeout-causing Pump node, the same binlog is written to multiple Pump nodes. When Drainer processes the binlog, it automatically de-duplicates binlogs with the same TSO, so this duplicate write does not affect the downstream and replication logic.
+
+## Reparo is interrupted during the full and incremental restore process. Can I use the last TSO in the log to resume replication?
 
 Yes. Reparo does not automatically enable the safe-mode when you start it. You need to perform the following steps manually:
 
 1. After Reparo is interrupted, record the last TSO in the log as `checkpoint-tso`.
-2. Modify the Reparo configuration file, set the configuration item `start-tso` to `checkpoint-tso + 1`, and set `stop-tso` to `checkpoint-tso + 80,000,000,000` (probably five minutes after the `checkpoint-tso`), and set `safe-mode` to `true`. Start Reparo, Reparo replicates data to `stop-tso` and then stops automatically.
-3. After Reparo stops automatically, set `start-tso` to `checkpoint tso + 80,000,000,001`, set `stop-tso` to `0`, and set `safe-mode` to `false`. Start Reparo to continue replication.
+2. Modify the Reparo configuration file, set the configuration item `start-tso` to `checkpoint-tso + 1`, set `stop-tso` to `checkpoint-tso + 80,000,000,000` (approximately five minutes after the `checkpoint-tso`), and set `safe-mode` to `true`. Start Reparo, and Reparo replicates data to `stop-tso` and then stops automatically.
+3. After Reparo stops automatically, set `start-tso` to `checkpoint tso + 80,000,000,001`, set `stop-tso` to `0`, and set `safe-mode` to `false`. Start Reparo to resume replication.
