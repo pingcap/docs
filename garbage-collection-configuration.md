@@ -89,6 +89,30 @@ update mysql.tidb set VARIABLE_VALUE="24h" where VARIABLE_NAME="tikv_gc_life_tim
 - Specifies the GC concurrency manually. This parameter works only when you set [`tikv_gc_auto_concurrency`](#tikv_gc_auto_concurrency) to `false`.
 - Default: 2
 
+<<<<<<< HEAD
+=======
+## `tikv_gc_scan_lock_mode` (**experimental feature**)
+
+> **Warning:**
+>
+> Green GC is still an experimental feature. It is recommended **NOT** to use it in the production environment.
+
+This parameter specifies the way of scanning locks in the Resolve Locks step of GC, that is, whether to enable Green GC (experimental feature) or not. In the Resolve Locks step of GC, TiKV needs to scan all locks in the cluster. With Green GC disabled, TiDB scans locks by Regions. Green GC provides the "physical scanning" feature, which means that each TiKV node can bypass the Raft layer to directly scan data. This feature can effectively mitigate the impact of GC wakening up all Regions when the [Hibernate Region](/tikv-configuration-file.md#hibernate-regions-experimental) feature is enabled, thus improving the execution speed in the Resolve Locks step.
+
+- `"legacy"` (default): Uses the old way of scanning, that is, disable Green GC.
+- `"physical"`: Uses the physical scanning method, that is, enable Green GC.
+
+> **Note:**
+>
+> The configuration of Green GC is hidden. Execute the following statement when you enable Green GC for the first time:
+>
+> {{< copyable "sql" >}}
+>
+> ```sql
+> insert into mysql.tidb values ('tikv_gc_scan_lock_mode', 'legacy', '');
+> ```
+
+>>>>>>> bccf172b... Fix a wrong tikv config name (#4890)
 ## Notes on GC process changes
 
 Since TiDB 3.0, some configuration options have changed with support for the distributed GC mode and concurrent Resolve Locks processing. The changes are shown in the following table:
@@ -119,3 +143,52 @@ You can dynamically modify this configuration using tikv-ctl:
 ```bash
 tikv-ctl --host=ip:port modify-tikv-config -m server -n gc.max_write_bytes_per_sec -v 10MB
 ```
+<<<<<<< HEAD
+=======
+
+## GC in Compaction Filter
+
+Since v5.0.0-rc, TiDB introduces the mechanism of GC in Compaction Filter. Based on the distributed GC mode, the mechanism uses the compaction process of RocksDB, instead of a separate GC worker thread, to run GC. This new GC mechanism helps to avoid extra disk read caused by GC. Also, after clearing the obsolete data, it avoids a large number of left tombstone marks which degrade the sequential scan performance. This GC mechanism is disabled by default. The following example shows how to enable the mechanism in the TiKV configuration file:
+
+{{< copyable "" >}}
+
+```toml
+[gc]
+enable-compaction-filter = true
+```
+
+You can also enable this GC mechanism by modifying the configuration online. See the following example:
+
+{{< copyable "sql" >}}
+
+```sql
+show config where type = 'tikv' and name like '%enable-compaction-filter%';
+```
+
+```sql
++------+-------------------+-----------------------------+-------+
+| Type | Instance          | Name                        | Value |
++------+-------------------+-----------------------------+-------+
+| tikv | 172.16.5.37:20163 | gc.enable-compaction-filter | false |
+| tikv | 172.16.5.36:20163 | gc.enable-compaction-filter | false |
+| tikv | 172.16.5.35:20163 | gc.enable-compaction-filter | false |
++------+-------------------+-----------------------------+-------+
+```
+
+{{< copyable "sql" >}}
+
+```sql
+set config tikv gc.enable-compaction-filter = true;
+show config where type = 'tikv' and name like '%enable-compaction-filter%';
+```
+
+```sql
++------+-------------------+-----------------------------+-------+
+| Type | Instance          | Name                        | Value |
++------+-------------------+-----------------------------+-------+
+| tikv | 172.16.5.37:20163 | gc.enable-compaction-filter | true  |
+| tikv | 172.16.5.36:20163 | gc.enable-compaction-filter | true  |
+| tikv | 172.16.5.35:20163 | gc.enable-compaction-filter | true  |
++------+-------------------+-----------------------------+-------+
+```
+>>>>>>> bccf172b... Fix a wrong tikv config name (#4890)
