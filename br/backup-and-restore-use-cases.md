@@ -82,7 +82,7 @@ Before the backup or restoration operations, you need to do some preparations:
 
 ### Preparation for backup
 
-For the detailed usage of the `br backup` command, refer to [BR command-line description](/br/backup-and-restore-tool.md#command-line-description).
+For the detailed usage of the `br backup` command, refer to [Use BR Command-line for Backup and Restoration](/br/use-br-command-line-tool.md).
 
 1. Before executing the `br backup` command, ensure that no DDL is running on the TiDB cluster.
 2. Ensure that the storage device where the backup will be created has sufficient space.

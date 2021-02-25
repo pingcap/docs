@@ -157,7 +157,7 @@ TiDB supports both [`BACKUP`](/sql-statements/sql-statement-backup.md#backup) an
 
 #### Use the command-line tool
 
-The `br` command-line utility is available as a separate download. For details, see [download link](/download-ecosystem-tools.md#br-backup-and-restore).
+The `br` command-line utility is available as a separate download. For details, see [Use BR Command-line for Backup and Restoration](/br/use-br-command-line-tool.md).
 
 #### In the Kubernetes environment
 
