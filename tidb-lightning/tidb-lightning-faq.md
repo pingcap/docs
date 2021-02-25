@@ -306,8 +306,6 @@ See the [Checkpoints control](/tidb-lightning/tidb-lightning-checkpoints.md#chec
 3. Ensure the entire cluster is using the same and latest version of `tzdata` (version 2018i or above).
 
     On CentOS, run `yum info tzdata` to check the installed version and whether there is an update. Run `yum upgrade tzdata` to upgrade the package.
-<<<<<<< HEAD
-=======
 
 ## `[Error 8025: entry too large, the max entry size is 6291456]`
 
