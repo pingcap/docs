@@ -29,9 +29,16 @@ If the `ANSI_QUOTES` SQL MODE is enabled, string literals can be quoted only wit
 
 A binary string is a string of bytes. Each binary string has a character set and collation named `binary`. A non-binary string is a string of characters. It has a character set other than `binary` and a collation that is compatible with the character set.
 
+<<<<<<< HEAD
 For both types of strings, comparisons are based on the numeric values of the string unit. For binary strings, the unit is the byte. For non-binary strings, the unit is the character and some character sets support multibyte characters.
 
 A string literal may have an optional `character set introducer` and `COLLATE clause`, to designate it as a string that uses a specific character set and collation. TiDB only supports this in syntax, but does not process it.
+=======
++ Binary string: It consists of a sequence of bytes, whose charset and collation are both `binary`, and uses **byte** as the unit when compared with each other.
++ Non-binary string: It consists of a sequence of characters and has various charsets and collations other than `binary`. When compared with each other, non-binary strings use **characters** as the unit. A character might contain multiple bytes, depending on the charset.
+
+A string literal may have an optional `character set introducer` and `COLLATE clause`, to designate it as a string that uses a specific character set and collation.
+>>>>>>> eaf50fc7... fix some typos detected by Vale (#4908)
 
 ```
 [_charset_name]'string' [COLLATE collation_name]
