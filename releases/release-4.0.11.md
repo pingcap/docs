@@ -4,7 +4,7 @@ title: TiDB 4.0.11 Release Notes
 
 # TiDB 4.0.11 Release Notes
 
-Release date: February , 2021 (TBD)
+Release date: February 26, 2021
 
 TiDB version: 4.0.11
 
