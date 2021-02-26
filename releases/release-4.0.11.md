@@ -119,7 +119,7 @@ TiDB version: 4.0.11
     - Fix the issue that TiKV is failed to build with `PROST=1` [#9604](https://github.com/tikv/tikv/pull/9604)
     - Fix the unmatched memory diagnostics [#9589](https://github.com/tikv/tikv/pull/9589)
     - Fix the issue that the end key of a partial RawKV-restore range is inclusive [#9583](https://github.com/tikv/tikv/pull/9583)
-    - Fix the issue of TiKV panic occurred when loading the old value of a key of a rolled-back transaction during TiCDC's incremental scan [#9569](https://github.com/tikv/tikv/pull/9569)
+    - Fix the issue of TiKV panic that occurs when loading the old value of a key of a rolled-back transaction during TiCDC's incremental scan [#9569](https://github.com/tikv/tikv/pull/9569)
     - Fix the configuration glitch of old values when changefeeds with different settings connect to one Region [#9565](https://github.com/tikv/tikv/pull/9565)
     - Fix a crash issue that occurs when running a TiKV cluster on a machine with a network interface that lacks the MAC address (introduced in v4.0.9) [#9516](https://github.com/tikv/tikv/pull/9516)
     - Fix the issue of TiKV OOM when backing up a huge Region [#9448](https://github.com/tikv/tikv/pull/9448)
