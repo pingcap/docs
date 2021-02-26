@@ -108,7 +108,7 @@ TiDB version: 4.0.11
     - Fix the issue that the `NULL` result returned from JSON search is incompatible with MySQL [#21700](https://github.com/pingcap/tidb/pull/21700)
     - Fix the issue that occurs when checking the `only_full_group_by` mode using `ORDER BY` and `HAVING` [#21697](https://github.com/pingcap/tidb/pull/21697)
     - Fix the issue that the units of `Day` and `Time` are incompatible with MySQL [#21676](https://github.com/pingcap/tidb/pull/21676)
-    - Fix the issue that `LEAD` and `LAG`'s default values cannot adapt to the field type [#21665](https://github.com/pingcap/tidb/pull/21665)
+    - Fix the issue that the default values of `LEAD` and `LAG` cannot adapt to the field type [#21665](https://github.com/pingcap/tidb/pull/21665)
     - Perform a check to ensure that the `LOAD DATA` statement can only load data into base tables [#21638](https://github.com/pingcap/tidb/pull/21638)
     - Fix the issue that occurs when `addtime` and `subtime` functions handle invalid arguments [#21635](https://github.com/pingcap/tidb/pull/21635)
     - Change the round rule for approximate values to "round to the nearest even number" [#21628](https://github.com/pingcap/tidb/pull/21628)
