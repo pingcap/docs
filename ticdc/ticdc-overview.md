@@ -91,13 +91,13 @@ TiCDC only provides partial support for scenarios of large transactions in the u
 
 ## Compatibility issue tips
 
-### Incompatibility issues caused by using the `cdc cli` tool of TiCDC v5.0.0-rc to operate a v4.0.x cluster
+### Incompatibility issues caused by using TiCDC v5.0.0-rc `cdc cli` tool to operate a v4.0.x cluster
 
-When using the `cdc cli` tool of TiCDC v5.0.0-rc to operate a v4.0.x TiCDC cluster, you might encounter the following abnormal situations:
+When using TiCDC v5.0.0-rc `cdc cli` tool to operate a v4.0.x TiCDC cluster, you might encounter the following abnormal situations:
 
-- If the TiCDC cluster is v4.0.8 or earlier versions, using the v5.0.0-rc of `cdc cli` to create a replication task changefeed will cause the TiCDC cluster to fall into an abnormal state and get replication stuck.
+- If the TiCDC cluster is v4.0.8 or earlier versions, using the v5.0.0-rc `cdc cli` tool to create a replication task changefeed will cause the TiCDC cluster to fall into an abnormal state and get replication stuck.
 
-- If the TiCDC cluster is v4.0.9 or later versions, using the v5.0.0-rc of `cdc cli` to create a replication task changefeed will cause the Old Value and Unified Sorter features enabled by default unexpectedly.
+- If the TiCDC cluster is v4.0.9 or later versions, using the v5.0.0-rc `cdc cli` tool to create a replication task changefeed will cause the Old Value and Unified Sorter features enabled by default unexpectedly.
 
 Solutions: Use the `cdc` executable file corresponding to the TiCDC cluster version to perform the following operations:
 
@@ -107,7 +107,7 @@ Solutions: Use the `cdc` executable file corresponding to the TiCDC cluster vers
 
 > **Note:**
 >
-> The above problems only exist when `cdc cli` is v5.0.0-rc. In the future, other v5.0.x versions of `cdc cli` can be compatible with v4.0.x clusters.
+> The above problems only exist when `cdc cli` is v5.0.0-rc. In the future, other v5.0.x `cdc cli` tool can be compatible with v4.0.x clusters.
 
 ## Install and deploy TiCDC
 
