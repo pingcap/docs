@@ -84,7 +84,7 @@ TiDB version: 4.0.11
     - Fix the `index out of range` error that occurs when inserting values to the `tidb_rowid` column [#22359](https://github.com/pingcap/tidb/pull/22359)
     - Fix a bug that the cached plan is incorrectly used [#22353](https://github.com/pingcap/tidb/pull/22353)
     - Fix the runtime panic in the `WEIGHT_STRING` function when the length of the binary/char string is too large [#22332](https://github.com/pingcap/tidb/pull/22332)
-    - Fix the issue that the generated column is incorrectly used when argument numbers are invalid [#22174](https://github.com/pingcap/tidb/pull/22174)
+    - Forbid using the generated column when the number of function parameters is invalid [#22174](https://github.com/pingcap/tidb/pull/22174)
     - Correctly set the process information before building the execution plan [#22148](https://github.com/pingcap/tidb/pull/22148)
     - Fix the issue of inaccurate runtime statistics of `IndexLookUp` [#22136](https://github.com/pingcap/tidb/pull/22136)
     - Add cache for the memory usage information when the cluster is deployed in a container [#22116](https://github.com/pingcap/tidb/pull/22116)
