@@ -31,4 +31,4 @@ A [capture](#capture) of a special role that manages the TiCDC cluster and sched
 
 ### Processor
 
-TiCDC replication tasks allocate data tables on TiCDC instances and the processor refers to the replication processing unit of these tables. Processor tasks include pulling, sorting, restoring, and distributing changed data.
+TiCDC replication tasks allocate data tables on TiCDC instances, and the processor refers to the replication processing unit of these tables. Processor tasks include pulling, sorting, restoring, and distributing changed data.
