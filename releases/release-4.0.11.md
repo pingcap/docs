@@ -165,5 +165,5 @@ TiDB version: 4.0.11
     + TiDB Lightning
 
         - Fix a bug that `column count mismatch` might be triggered when using the TiDB-backend [#535](https://github.com/pingcap/tidb-lightning/pull/535)
-        - Fix a bug that TiDB-backend panics if the column counts of the source file and the column counts of the target table mismatch [#528](https://github.com/pingcap/tidb-lightning/pull/528)
+        - Fix a bug that TiDB-backend panics if the column count of the source file and the column count of the target table mismatch [#528](https://github.com/pingcap/tidb-lightning/pull/528)
         - Fix a bug that TiKV might unexpectedly panic during TiDB Lightning's data import [#554](https://github.com/pingcap/tidb-lightning/pull/554)
