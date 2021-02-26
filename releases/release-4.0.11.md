@@ -21,7 +21,7 @@ TiDB version: 4.0.11
 
 + TiFlash
 
-    - Add a Coprocessor thread pool to queue Coprocessor requests for execution, which avoids out of memory (OOM) in some cases, and add the `cop_pool_size` and `batch_cop_pool_size` configuration items with the default values of `NumOfPhysicalCores * 2` [#1312](https://github.com/pingcap/tics/pull/1312)
+    - Add a Coprocessor thread pool to queue Coprocessor requests for execution, which avoids out of memory (OOM) in some cases, and add the `cop_pool_size` and `batch_cop_pool_size` configuration items with the default values of `NumOfPhysicalCores * 2`
 
 ## Improvements
 
@@ -136,8 +136,8 @@ TiDB version: 4.0.11
 + TiFlash
 
     - Fix a bug that the `min`/`max` result is wrong for decimal types
-    - Fix a bug that TiFlash might crash when reading data [#1358](https://github.com/pingcap/tics/pull/1358)
-    - Fix the issue that some data written after DDL operations might be lost after data compaction [#1350](https://github.com/pingcap/tics/pull/1350)
+    - Fix a bug that TiFlash might crash when reading data
+    - Fix the issue that some data written after DDL operations might be lost after data compaction
     - Fix the issue that TiFlash incorrectly handles decimal constants in Coprocessor
     - Fix the potential crash during the learner read process
     - Fix the inconsistent behaviors of division by `0` or `NULL` between TiDB and TiFlash
