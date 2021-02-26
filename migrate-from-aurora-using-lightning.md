@@ -93,7 +93,7 @@ Because the snapshot data exported from Aurora to S3 does not contain the SQL st
     ./tidb-lightning -config tidb-lightning.toml -d ./schema -no-schema=false
     ```
 
-    In this example, TiDB Lightning is only used to create table schemas, so you need to execute the above command quickly. At a regular speed, ten table creation statements can be executed in one second.
+    In this example, TiDB Lightning is only used to create table schemas and can quickly execute the above command. At a regular speed, ten table creation statements can be executed in one second.
 
 > **Note:**
 >
