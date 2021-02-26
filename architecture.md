@@ -8,7 +8,7 @@ aliases: ['/docs/v3.1/architecture/']
 
 The TiDB platform is comprised of three key components: the TiDB server, the PD server, and the TiKV server. In addition, TiDB also provides the [TiSpark](https://github.com/pingcap/tispark/) component for complex OLAP requirements and the [TiDB Operator](https://pingcap.com/docs/tidb-in-kubernetes/stable/tidb-operator-overview/) to make things simpler for the deployment and management on cloud.
 
-![image alt text](/media/tidb-architecture.png)
+![TiDB architecture](/media/tidb-architecture-v3.1.png)
 
 ## TiDB server
 
