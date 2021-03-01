@@ -248,7 +248,7 @@ With the above options specified, Dumpling can have a higher degree of paralleli
 >
 > In most scenarios, you do not need to adjust the default data consistency options of Dumpling.
 
-Dumpling uses the `--consistency <consistency level>` option to control the way in which data is exported for "consistency assurance". For TiDB, data consistency is guaranteed by getting a snapshot of a certain timestamp by default (i.e. `--consistency snapshot`). When using snapshot for consistency, you can use the `--snapshot` option to specify the timestamp to be backed up. You can also use the following levels of consistency:
+Dumpling uses the `--consistency <consistency level>` option to control the way in which data is exported for "consistency assurance". For TiDB, data consistency is guaranteed by getting a snapshot of a certain timestamp by default (namely, `--consistency snapshot`). When using snapshot for consistency, you can use the `--snapshot` option to specify the timestamp to be backed up. You can also use the following levels of consistency:
 
 - `flush`: Use [`FLUSH TABLES WITH READ LOCK`](https://dev.mysql.com/doc/refman/8.0/en/flush.html#flush-tables-with-read-lock) to ensure consistency.
 - `snapshot`: Get a consistent snapshot of the specified timestamp and export it.
@@ -344,7 +344,7 @@ Finally, all the exported data can be imported back to TiDB using [Lightning](/t
 | `--filetype` | Exported file type (csv/sql) | "sql" |
 | `-o` or `--output` | Exported file path | "./export-${time}" |
 | `-S` or `--sql` | Export data according to the specified SQL statement. This command does not support concurrent export. |
-| `--consistency` | flush: use FTWRL before the dump <br/> snapshot: dump the TiDB data of a specific snapshot of a TSO <br/> lock: execute `lock tables read` on all tables to be dumped <br/> none: dump without adding locks, which cannot guarantee consistency <br/> auto: MySQL defaults to using flush, TiDB defaults to using snapshot | "auto" |
+| `--consistency` | flush: use FTWRL before the dump <br/> snapshot: dump the TiDB data of a specific snapshot of a TSO <br/> lock: execute `lock tables read` on all tables to be dumped <br/> none: dump without adding locks, which cannot guarantee consistency <br/> auto: use --consistency flush for MySQL; use --consistency snapshot for TiDB | "auto" |
 | `--snapshot` | Snapshot TSO; valid only when `consistency=snapshot` |
 | `--where` | Specify the scope of the table backup through the `where` condition |
 | `-p` or `--password` | The password of the connected database host |

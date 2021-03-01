@@ -12,7 +12,7 @@ This document lists the frequently asked questions (FAQs) and the solutions abou
 
 When you restore data, each node must have access to **all** backup files (SST files). By default, if `local` storage is used, you cannot restore data because the backup files are scattered among different nodes. Therefore, you have to copy the backup file of each TiKV node to the other TiKV nodes.
 
-It is recommended to mount an NFS disk as a backup disk during backup. For details, see [Back up a single table to a network disk](/br/backup-and-restore-use-cases.md#back-up-a-single-table-to-a-network-disk-recommended).
+It is recommended to mount an NFS disk as a backup disk during backup. For details, see [Back up a single table to a network disk](/br/backup-and-restore-use-cases.md#back-up-a-single-table-to-a-network-disk-recommended-in-production-environment).
 
 ## How much does it affect the cluster during backup using BR?
 
@@ -81,3 +81,7 @@ If the cluster backed up using BR has TiFlash, `TableInfo` stores the TiFlash in
 ## Does BR support in-place full recovery of some historical backup?
 
 No. BR does not support in-place full recovery of some historical backup.
+
+## How can I use BR for incremental backup in the Kubernetes environment?
+
+To get the `commitTs` field of the last BR backup, run the `kubectl -n ${namespace} get bk ${name}` command using kubectl. You can use the content of this field as `--lastbackupts`.

@@ -36,6 +36,10 @@ This section introduces how to use `cdc cli` to manage a TiCDC cluster and data 
 - `cli` commands are executed directly using the `cdc` binary;
 - PD listens on `10.0.10.25` and the port is `2379`.
 
+> **Note:**
+>
+> The IP address and port that PD listens on correspond to the `advertise-client-urls` parameter specified during the `pd-server` startup. Multiple `pd-server`s have multiple `advertise-client-urls` parameters and you can specify one or multiple parameters. For example, `--pd=http://10.0.10.25:2379` or `--pd=http://10.0.10.25:2379,http://10.0.10.26:2379,http://10.0.10.27:2379`.
+
 If you deploy TiCDC using TiUP, replace `cdc cli` in the following commands with `tiup ctl cdc`.
 
 ### Manage TiCDC service progress (`capture`)
@@ -146,7 +150,7 @@ The following are descriptions of parameters and parameter values that can be co
 | `127.0.0.1`          | The IP address of the downstream Kafka services                                 |
 | `9092`               | The port for the downstream Kafka                                          |
 | `cdc-test`           | The name of the Kafka topic                                      |
-| `kafka-version`      | The version of the downstream Kafka (optional, `2.4.0` by default. Currently, the earlist supported Kafka version is `0.11.0.2` and the latest one is `2.6.0`.)                      |
+| `kafka-version`      | The version of the downstream Kafka (optional, `2.4.0` by default. Currently, the earlist supported Kafka version is `0.11.0.2` and the latest one is `2.7.0`. This value needs to be consistent with the actual version of the downstream Kafka.)                      |
 | `kafka-client-id`    | Specifies the Kafka client ID of the replication task (optional, `TiCDC_sarama_producer_replication ID` by default) |
 | `partition-num`      | The number of the downstream Kafka partitions (Optional. The value must be **no greater than** the actual number of partitions. If you do not configure this parameter, the partition number is obtained automatically.) |
 | `max-message-bytes`  | The maximum size of data that is sent to Kafka broker each time (optional, `64MB` by default) |
@@ -427,9 +431,9 @@ Starting from v4.0.4, TiCDC supports modifying the configuration of the replicat
 {{< copyable "shell-regular" >}}
 
 ```shell
-cdc cli changefeed pause -c test-cf
-cdc cli changefeed update -c test-cf --sink-uri="mysql://127.0.0.1:3306/?max-txn-row=20&worker-number=8" --config=changefeed.toml
-cdc cli changefeed resume -c test-cf
+cdc cli changefeed pause -c test-cf --pd=http://10.0.10.25:2379
+cdc cli changefeed update -c test-cf --pd=http://10.0.10.25:2379 --sink-uri="mysql://127.0.0.1:3306/?max-txn-row=20&worker-number=8" --config=changefeed.toml
+cdc cli changefeed resume -c test-cf --pd=http://10.0.10.25:2379
 ```
 
 Currently, you can modify the following configuration items:
@@ -593,8 +597,8 @@ This section introduces the configuration of a replication task.
 # This configuration item affects configurations related to filter and sink.
 case-sensitive = true
 
-# Specifies whether to output the old value. New in v4.0.5.
-enable-old-value = false
+# Specifies whether to output the old value. New in v4.0.5. Since v5.0.0-rc, the default value is `true`.
+enable-old-value = true
 
 [filter]
 # Ignores the transaction of specified start_ts.
