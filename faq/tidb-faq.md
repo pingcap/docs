@@ -144,15 +144,7 @@ Check whether `tidb_disable_txn_auto_retry` is set to `on`. If so, set it to `of
 
 This error might occur after upgrading from an earlier version of TiDB. To reduce the impact of SQL injection attacks, TiDB now prevents multiple queries from being executed in the same `COM_QUERY` call by default.
 
-<<<<<<< HEAD
-Check the following documentation for your client driver for instructions on how to enable multiple statements:
-
-* [go-sql-driver](https://github.com/go-sql-driver/mysql#multistatements) (`multiStatements`)
-* [Connector/J](https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-reference-configuration-properties.html) (`allowMultiQueries`)
-* PHP [mysqli](https://dev.mysql.com/doc/apis-php/en/apis-php-mysqli.quickstart.multiple-statement.html) (`mysqli_multi_query`)
-=======
 The system variable [`tidb_multi_statement_mode`](/system-variables.md#tidb_multi_statement_mode-new-in-v4011) can be used to control this behavior.
->>>>>>> e047be6e... faq, sysvars: add tidb_multi_statement_mode (#4741)
 
 ### MySQL native error messages
 
