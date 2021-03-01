@@ -79,6 +79,9 @@ Download the TiDB Lightning installation package from the following link:
     # Local source data directory
     data-source-dir = "/data/my_datasource/"
 
+    # Configures wildcard rules. By default, these rules filter mysql, sys, INFORMATION_SCHEMA, PERFORMANCE_SCHEMA, METRICS_SCHEMA, and all tables in the INSPECTION_SCHEMA system database
+    # If this item is not configured, the error "Cannot find schema" occurs when importing system tables. 
+    filter = ['*.*', '!mysql.*', '!sys.*', '!INFORMATION_SCHEMA.*', '!PERFORMANCE_SCHEMA.*', '!METRICS_SCHEMA.*', '!INSPECTION_SCHEMA.*']
     [tidb]
     # Information of the target cluster
     host = "172.16.31.2"
