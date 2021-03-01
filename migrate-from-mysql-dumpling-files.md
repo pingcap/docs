@@ -47,6 +47,23 @@ This document takes the TiDB-backend as an example. Create the `tidb-lightning.t
     password = ""
     ```
 
+3. Add the necessary parameters of TiDB-backend. This document uses TiDB-backend mode. Here, it can also be set to "local" or "importer" according to actual application scenarios. For details, refer to [Backend Mode](/tidb-lightning/tidb-lightning-backends.md).
+
+    ```
+    [tikv-importer]
+    backend = "tidb"
+    ```
+
+4. Add necessary parameters for importing TiDB cluster.
+
+    ```
+    [tidb]
+    host = "{{tidb-host}}"
+    port = {{tidb-port}}
+    user = "{{tidb-user}}"
+    password = "{{tidb-password}}"
+    ```
+
 For other configurations, see [TiDB Lightning Configuration](/tidb-lightning/tidb-lightning-configuration.md).
 
 ## Step 3: Run TiDB Lightning to import data
