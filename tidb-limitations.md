@@ -38,8 +38,8 @@ This document describes the common usage limitations of TiDB, including the maxi
 
 | Type       | Upper limit (default value)  |
 |:----------|:----------|
-| Columns   | The default is 1017, the upper limit can be adjusted to 4096.      |
-| Indexes   | The default is 64, the upper limit can be adjusted to 512.        |
+| Columns   | The default is 1017, and the upper limit can be adjusted to 4096.      |
+| Indexes   | The default is 64, and the upper limit can be adjusted to 512.        |
 | Rows      | unlimited |
 | Size      | unlimited |
 | Partitions | 1024      |
