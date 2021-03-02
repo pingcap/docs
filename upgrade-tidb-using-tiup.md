@@ -12,7 +12,7 @@ If you have deployed the TiDB cluster using TiDB Ansible, you can use TiUP to im
 
 > **Note:**
 >
-> TiUP is the recommended upgrade path for users of TiDB Ansible. Support for Ansible was deprecated in TiDB v4.0 and removed starting with TiDB v5.0.
+> TiUP is the recommended upgrade path for users of TiDB Ansible. Support for TiDB Ansible was deprecated in TiDB v4.0 and the TiDB Ansible documentation has been removed since TiDB v5.0.
 
 ## Upgrade caveat
 

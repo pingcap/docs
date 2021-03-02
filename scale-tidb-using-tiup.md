@@ -12,7 +12,7 @@ This document describes how to scale the TiDB, TiKV, PD, TiCDC, or TiFlash clust
 
 > **Note:**
 >
-> TiUP is the recommended method to scale a TiDB cluster. Support for Ansible was deprecated in TiDB v4.0 and removed starting with TiDB v5.0.
+> TiUP is the recommended method to scale a TiDB cluster. Support for TiDB Ansible was deprecated in TiDB v4.0 and the TiDB Ansible documentation has been removed since TiDB v5.0.
 
 To view the current cluster name list, run `tiup cluster list`.
 
