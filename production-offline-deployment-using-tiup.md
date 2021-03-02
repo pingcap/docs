@@ -8,10 +8,6 @@ aliases: ['/docs/dev/production-offline-deployment-using-tiup/']
 
 This document describes how to deploy a TiDB cluster offline using TiUP.
 
-> **Note:**
->
-> TiUP is the recommended upgrade path for users of TiDB Ansible. Support for TiDB Ansible was deprecated in TiDB v4.0 and the TiDB Ansible documentation has been removed since TiDB v5.0.
-
 ## Step 1: Prepare the TiUP offline component package
 
 To prepare the TiUP offline component package, manually pack an offline component package using `tiup mirror clone`.

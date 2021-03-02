@@ -15,10 +15,6 @@ This document describes the following common operations when you operate and mai
 - Stop the cluster
 - Destroy the cluster
 
-> **Note:**
->
-> TiUP is the recommended method to maintain a TiDB cluster. Support for TiDB Ansible was deprecated in TiDB v4.0 and the TiDB Ansible documentation has been removed since TiDB v5.0.
-
 ## View the cluster list
 
 You can manage multiple TiDB clusters using the TiUP cluster component. When a TiDB cluster is deployed, the cluster appears in the TiUP cluster list.

@@ -10,10 +10,6 @@ aliases: ['/docs/dev/production-deployment-using-tiup/','/docs/dev/how-to/deploy
 
 TiUP supports deploying TiDB, TiFlash, TiDB Binlog, TiCDC, and the monitoring system. This document introduces how to deploy TiDB clusters of different topologies.
 
-> **Note:**
->
-> TiUP is the recommended upgrade path for users of TiDB Ansible. Support for TiDB Ansible was deprecated in TiDB v4.0 and the TiDB Ansible documentation has been removed since TiDB v5.0.
-
 ## Step 1: Prerequisites and precheck
 
 Make sure that you have read the following documents:

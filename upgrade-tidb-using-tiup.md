@@ -10,10 +10,6 @@ This document is targeted for users who want to upgrade from TiDB 3.0 or 3.1 ver
 
 If you have deployed the TiDB cluster using TiDB Ansible, you can use TiUP to import the TiDB Ansible configuration and perform the upgrade.
 
-> **Note:**
->
-> TiUP is the recommended upgrade path for users of TiDB Ansible. Support for TiDB Ansible was deprecated in TiDB v4.0 and the TiDB Ansible documentation has been removed since TiDB v5.0.
-
 ## Upgrade caveat
 
 - After the upgrade, rolling back to 3.0 or earlier versions is not supported.

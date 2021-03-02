@@ -10,10 +10,6 @@ The capacity of a TiDB cluster can be increased or decreased without interruptin
 
 This document describes how to scale the TiDB, TiKV, PD, TiCDC, or TiFlash cluster using TiUP. If you have not installed TiUP, refer to the steps in [Install TiUP on the control machine](/upgrade-tidb-using-tiup.md#install-tiup-on-the-control-machine) and import the cluster into TiUP before you use TiUP to scale the TiDB cluster.
 
-> **Note:**
->
-> TiUP is the recommended method to scale a TiDB cluster. Support for TiDB Ansible was deprecated in TiDB v4.0 and the TiDB Ansible documentation has been removed since TiDB v5.0.
-
 To view the current cluster name list, run `tiup cluster list`.
 
 For example, if the original topology of the cluster is as follows:
