@@ -1,7 +1,7 @@
 ---
 title: Scale the TiDB Cluster Using TiDB Ansible
 summary: Use TiDB Ansible to increase/decrease the capacity of a TiDB/TiKV/PD node.
-aliases: ['/docs/stable/scale-tidb-using-ansible/','/docs/v4.0/scale-tidb-using-ansible/','/docs/stable/how-to/scale/with-ansible/']
+aliases: ['/docs/stable/scale-tidb-using-ansible/','/docs/v4.0/scale-tidb-using-ansible/','/docs/stable/how-to/scale/with-ansible/','/docs/dev/scale-tidb-using-ansible/','/docs/dev/how-to/scale/with-ansible/','/tidb/dev/scale-tidb-using-ansible/']
 ---
 
 # Scale the TiDB Cluster Using TiDB Ansible
@@ -10,7 +10,9 @@ The capacity of a TiDB cluster can be increased or decreased without affecting t
 
 > **Warning:**
 >
-> In decreasing the capacity, if your cluster has a mixed deployment of other services, do not perform the following procedures. The following examples assume that the removed nodes have no mixed deployment of other services.
+> + For production environments, it is recommended that you [scale TiDB using TiUP](/scale-tidb-using-tiup.md). Since v4.0, PingCAP no longer provides support for scaling TiDB using TiDB Ansible (deprecated). If you really need to use it for scaling, be aware of any risk.
+>
+> + In decreasing the capacity, if your cluster has a mixed deployment of other services, do not perform the following procedures. The following examples assume that the removed nodes have no mixed deployment of other services.
 
 Assume that the topology is as follows:
 
