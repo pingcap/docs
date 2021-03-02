@@ -231,7 +231,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 ### tidb_ddl_reorg_priority
 
-- Scope: SESSION | GLOBAL
+- Scope: SESSION
 - Default value: `PRIORITY_LOW`
 - This variable is used to set the priority of executing the `ADD INDEX` operation in the `re-organize` phase.
 - You can set the value of this variable to `PRIORITY_LOW`, `PRIORITY_NORMAL` or `PRIORITY_HIGH`.
@@ -544,6 +544,31 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Scope: SESSION
 - Default value: 60
 - This variable is used to set the step of the Prometheus statement generated when querying `METRIC_SCHEMA`. The unit is second.
+
+## tidb_multi_statement_mode <span class="version-mark">New in v4.0.11</span>
+
+- Scope: SESSION | GLOBAL
+- Default value: WARN
+- Permitted values: OFF, ON, WARN
+- This variable controls whether to allow multiple queries to be executed in the same `COM_QUERY` call.
+- To reduce the impact of SQL injection attacks, TiDB now prevents multiple queries from being executed in the same `COM_QUERY` call by default. This variable is intended to be used as part of an upgrade path from earlier versions of TiDB. The following behaviors apply:
+
+| Client setting         | `tidb_multi_statement_mode` value | Multiple statements permitted? |
+|------------------------|-----------------------------------|--------------------------------|
+| Multiple Statements = ON  | OFF                               | Yes                            |
+| Multiple Statements = ON  | ON                                | Yes                            |
+| Multiple Statements = ON  | WARN                              | Yes                            |
+| Multiple Statements = OFF | OFF                               | No                             |
+| Multiple Statements = OFF | ON                                | Yes                            |
+| Multiple Statements = OFF | WARN                              | Yes (+warning returned)        |
+
+> **Note:**
+>
+> Only the default value of `OFF` can be considered safe. Setting `tidb_multi_statement_mode=ON` might be required if your application was specifically designed for an earlier version of TiDB. If your application requires multiple statement support, it is recommended to use the setting provided by your client library instead of the `tidb_multi_statement_mode` option. For example:
+>
+> * [go-sql-driver](https://github.com/go-sql-driver/mysql#multistatements) (`multiStatements`)
+> * [Connector/J](https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-reference-configuration-properties.html) (`allowMultiQueries`)
+> * PHP [mysqli](https://dev.mysql.com/doc/apis-php/en/apis-php-mysqli.quickstart.multiple-statement.html) (`mysqli_multi_query`)
 
 ### tidb_opt_agg_push_down
 

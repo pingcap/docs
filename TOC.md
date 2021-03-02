@@ -48,6 +48,7 @@
 + Migrate
   + [Overview](/migration-overview.md)
   + Migrate from MySQL
+    + [Migrate from Amazon Aurora MySQL Using TiDB Lightning](/migrate-from-aurora-using-lightning.md)
     + [Migrate Using Dumpling and TiDB Lightning](/migrate-from-mysql-dumpling-files.md)
     + [Migrate from Amazon Aurora MySQL Using DM](/migrate-from-aurora-mysql-database.md)
   + Migrate from CSV Files
@@ -66,11 +67,9 @@
     + [Use TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.1/scale-a-tidb-cluster)
   + Backup and Restore
     + Use BR Tool (Recommended)
-      + [Use BR Tool](/br/backup-and-restore-tool.md)
+      + [BR Tool Overview](/br/backup-and-restore-tool.md)
+      + [Use BR Command-line](/br/use-br-command-line-tool.md)
       + [BR Use Cases](/br/backup-and-restore-use-cases.md)
-      + [BR Storages](/br/backup-and-restore-storages.md)
-    + [Use Dumpling and TiDB Lightning (Recommended)](/backup-and-restore-using-dumpling-lightning.md)
-    + [Use Mydumper and TiDB Lightning](/backup-and-restore-using-mydumper-lightning.md)
   + [Read Historical Data](/read-historical-data.md)
   + [Configure Time Zone](/configure-time-zone.md)
   + [Daily Checklist](/daily-check.md)
@@ -165,8 +164,10 @@
   + [Use Cases](/ecosystem-tool-user-case.md)
   + [Download](/download-ecosystem-tools.md)
   + Backup & Restore (BR)
-    + [Use BR Tool](/br/backup-and-restore-tool.md)
+    + [BR Tool Overview](/br/backup-and-restore-tool.md)
+    + [Use BR Command-line for Backup and Restoration](/br/backup-and-restore-tool.md)
     + [BR Use Cases](/br/backup-and-restore-use-cases.md)
+    + [BR Storages](/br/backup-and-restore-storages.md)
     + [BR FAQ](/br/backup-and-restore-faq.md)
   + TiDB Binlog
     + [Overview](/tidb-binlog/tidb-binlog-overview.md)
@@ -210,6 +211,7 @@
     + [Monitor](/ticdc/monitor-ticdc.md)
     + [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
     + [Integrate TiDB with Confluent Platform](/ticdc/integrate-confluent-using-ticdc.md)
+    + [Glossary](/ticdc/ticdc-glossary.md)
   + [Dumpling](/dumpling-overview.md)
   + sync-diff-inspector
     + [Overview](/sync-diff-inspector/sync-diff-inspector-overview.md)
@@ -534,6 +536,7 @@
 + Release Notes
   + [All Releases](/releases/release-notes.md)
   + v4.0
+    + [4.0.11](/releases/release-4.0.11.md)
     + [4.0.10](/releases/release-4.0.10.md)
     + [4.0.9](/releases/release-4.0.9.md)
     + [4.0.8](/releases/release-4.0.8.md)

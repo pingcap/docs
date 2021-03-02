@@ -6,6 +6,10 @@ aliases: ['/docs/stable/export-or-backup-using-dumpling/','/docs/v4.0/export-or-
 
 # Use Dumpling and TiDB Lightning for Data Backup and Restoration
 
+> **Warning:**
+>
+> It is no longer recommended to use Dumpling and TiDB Lightning for data backup and restoration. It is strongly recommended to use [BR tool](/br/backup-and-restore-tool.md) instead for a better tool experience.
+
 This document introduces in detail how to use Dumpling and TiDB Lightning to backup and restore full data of TiDB. For incremental backup and replication to downstream, refer to [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md).
 
 Suppose that the TiDB server information is as follows:
