@@ -135,13 +135,13 @@ The TiDB configuration file supports more options than command-line parameters. 
 
 ### `table-column-count-limit` <span class="version-mark">New in v5.0.0-rc</span>
 
-- Sets the number limits of columns in a single table.
+- Sets a limit on the number of columns in a single table.
 - Default value: `1017`
 - Currently, the valid value range is `[1017, 4096]`.
 
 ### `index-limit` <span class="version-mark">New in v5.0.0-rc</span>
 
-- Sets the number limits of indexes in a single table.
+- Sets a limit on the number of indexes in a single table.
 - Default value: `64`
 - Currently, the valid value range is `[64, 512]`.
 
