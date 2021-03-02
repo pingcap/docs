@@ -17,7 +17,7 @@ This document describes the following common operations when you operate and mai
 
 > **Note:**
 >
-> TiUP is the recommended method to maintain a TiDB cluster. Support for Ansible was deprecated in TiDB v4.0 and removed starting with TiDB v5.0..
+> TiUP is the recommended method to maintain a TiDB cluster. Support for Ansible was deprecated in TiDB v4.0 and removed starting with TiDB v5.0.
 
 ## View the cluster list
 
