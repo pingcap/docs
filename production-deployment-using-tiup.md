@@ -1,7 +1,7 @@
 ---
 title: Deploy a TiDB Cluster Using TiUP
 summary: Learn how to easily deploy a TiDB cluster using TiUP.
-aliases: ['/docs/dev/production-deployment-using-tiup/','/docs/dev/how-to/deploy/orchestrated/tiup/','/docs/dev/tiflash/deploy-tiflash/','/docs/dev/reference/tiflash/deploy/','/tidb/dev/deploy-tidb-from-dbdeployer/','/docs/dev/deploy-tidb-from-dbdeployer/','/docs/dev/how-to/get-started/deploy-tidb-from-dbdeployer/','/tidb/dev/deploy-tidb-from-homebrew/','/docs/dev/deploy-tidb-from-homebrew/','/docs/dev/how-to/get-started/deploy-tidb-from-homebrew/','/docs/dev/online-deployment-using-ansible/','/docs/dev/how-to/deploy/orchestrated/ansible/','/tidb/dev/online-deployment-using-ansible/']
+aliases: ['/docs/dev/production-deployment-using-tiup/','/docs/dev/how-to/deploy/orchestrated/tiup/','/docs/dev/tiflash/deploy-tiflash/','/docs/dev/reference/tiflash/deploy/','/tidb/dev/deploy-tidb-from-dbdeployer/','/docs/dev/deploy-tidb-from-dbdeployer/','/docs/dev/how-to/get-started/deploy-tidb-from-dbdeployer/','/tidb/dev/deploy-tidb-from-homebrew/','/docs/dev/deploy-tidb-from-homebrew/','/docs/dev/how-to/get-started/deploy-tidb-from-homebrew/']
 ---
 
 # Deploy a TiDB Cluster Using TiUP
@@ -12,7 +12,7 @@ TiUP supports deploying TiDB, TiFlash, TiDB Binlog, TiCDC, and the monitoring sy
 
 > **Note:**
 >
-> Since TiDB v4.0, PingCAP no longer provides support for TiDB Ansible. Since TiDB v5.0, PingCAP no longer provides TiDB Ansible documents. If you want to read the document that introduces how to deploy a TiDB cluster using TiDB Ansible, see [Deploy TiDB Using TiDB Ansible (v4.0)](https://docs.pingcap.com/tidb/v4.0/online-deployment-using-ansible).
+> TiUP is the recommended upgrade path for users of TiDB Ansible. Support for Ansible was deprecated in TiDB v4.0 and removed starting with TiDB v5.0.
 
 ## Step 1: Prerequisites and precheck
 

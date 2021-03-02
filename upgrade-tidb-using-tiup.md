@@ -1,7 +1,7 @@
 ---
 title: Upgrade TiDB Using TiUP
 summary: Learn how to upgrade TiDB using TiUP.
-aliases: ['/docs/dev/upgrade-tidb-using-tiup/','/docs/dev/how-to/upgrade/using-tiup/','/docs/dev/upgrade-tidb-using-ansible/','/docs/dev/how-to/upgrade/from-previous-version/','/docs/dev/how-to/upgrade/rolling-updates-with-ansible/','/tidb/dev/upgrade-tidb-using-ansible/']
+aliases: ['/docs/dev/upgrade-tidb-using-tiup/','/docs/dev/how-to/upgrade/using-tiup/']
 ---
 
 # Upgrade TiDB Using TiUP
@@ -12,7 +12,7 @@ If you have deployed the TiDB cluster using TiDB Ansible, you can use TiUP to im
 
 > **Note:**
 >
-> Since TiDB v4.0, PingCAP no longer provides support for TiDB Ansible. Since TiDB v5.0, PingCAP no longer provides TiDB Ansible documents. If you want to read the document that introduces how to upgrade a TiDB cluster using TiDB Ansible, see [Upgrade TiDB Using TiDB Ansible (v4.0)](https://docs.pingcap.com/tidb/v4.0/upgrade-tidb-using-ansible).
+> TiUP is the recommended upgrade path for users of TiDB Ansible. Support for Ansible was deprecated in TiDB v4.0 and removed starting with TiDB v5.0.
 
 ## Upgrade caveat
 

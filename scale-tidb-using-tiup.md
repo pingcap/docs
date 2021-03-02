@@ -1,7 +1,7 @@
 ---
 title: Scale the TiDB Cluster Using TiUP
 summary: Learn how to scale the TiDB cluster using TiUP.
-aliases: ['/docs/dev/scale-tidb-using-tiup/','/docs/dev/how-to/scale/with-tiup/','/docs/dev/scale-tidb-using-ansible/','/docs/dev/how-to/scale/with-ansible/','/tidb/dev/scale-tidb-using-ansible/']
+aliases: ['/docs/dev/scale-tidb-using-tiup/','/docs/dev/how-to/scale/with-tiup/']
 ---
 
 # Scale the TiDB Cluster Using TiUP
@@ -12,7 +12,7 @@ This document describes how to scale the TiDB, TiKV, PD, TiCDC, or TiFlash clust
 
 > **Note:**
 >
-> Since TiDB v4.0, PingCAP no longer provides support for TiDB Ansible. Since TiDB v5.0, PingCAP no longer provides TiDB Ansible documents. If you want to read the document that introduces how to scale a TiDB cluster using TiDB Ansible, see [Scale the TiDB Cluster Using TiDB Ansible (v4.0)](https://docs.pingcap.com/tidb/v4.0/scale-tidb-using-ansible).
+> TiUP is the recommended method to scale a TiDB cluster. Support for Ansible was deprecated in TiDB v4.0 and removed starting with TiDB v5.0.
 
 To view the current cluster name list, run `tiup cluster list`.
 
