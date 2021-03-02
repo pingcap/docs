@@ -36,13 +36,16 @@ This document describes the common usage limitations of TiDB, including the maxi
 
 ## Limitations on a single table
 
-| Type       | Upper limit   |
+| Type       | Upper limit (default value)  |
 |:----------|:----------|
-| Columns   | 4096       |
-| Indexes    | 64        |
+| Columns   | The default is 1017, the upper limit can be adjusted to 4096.      |
+| Indexes   | The default is 64, the upper limit can be adjusted to 512.        |
 | Rows      | unlimited |
 | Size      | unlimited |
 | Partitions | 1024      |
+
+* The upper limit of Columns can be modified by [`table-column-count-limit`](/tidb-configuration-file.md#table-column-count-limit-new-in-v500-rc).
+* The upper limit of Indexes can be modified by [`index-limit`](/tidb-configuration-file.md#index-limit-new-in-v500-rc).
 
 ## Limitation on a single row
 
