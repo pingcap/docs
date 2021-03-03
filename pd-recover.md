@@ -115,7 +115,7 @@ To deploy a new PD cluster, run the following command:
 {{< copyable "shell-regular" >}}
 
 ```
-ansible-playbook bootsrap.yml --tags=pd &&
+ansible-playbook bootstrap.yml --tags=pd &&
 ansible-playbook deploy.yml --tags=pd &&
 ansible-playbook start.yml --tags=pd
 ```
