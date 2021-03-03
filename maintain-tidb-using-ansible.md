@@ -1,10 +1,14 @@
 ---
 title: TiDB Ansible Common Operations
 summary: Learn some common operations when using TiDB Ansible to administer a TiDB cluster.
-aliases: ['/docs/stable/maintain-tidb-using-ansible/','/docs/v4.0/maintain-tidb-using-ansible/','/docs/stable/how-to/deploy/orchestrated/ansible-operations/']
+aliases: ['/docs/stable/maintain-tidb-using-ansible/','/docs/v4.0/maintain-tidb-using-ansible/','/docs/stable/how-to/deploy/orchestrated/ansible-operations/','/docs/dev/maintain-tidb-using-ansible/','/docs/dev/how-to/deploy/orchestrated/ansible-operations/','/tidb/dev/maintain-tidb-using-ansible/']
 ---
 
 # TiDB Ansible Common Operations
+
+> **Warning:**
+>
+> For production environments, it is recommended that you [maintain TiDB using TiUP](/maintain-tidb-using-tiup.md). Since v4.0, PingCAP no longer provides support for maintaining TiDB using TiDB Ansible (deprecated). If you really need to use it for maintenance, be aware of any risk.
 
 This guide describes the common operations when you administer a TiDB cluster using TiDB Ansible.
 
