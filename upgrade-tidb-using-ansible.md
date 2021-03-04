@@ -1,10 +1,14 @@
 ---
 title: Upgrade TiDB Using TiDB Ansible
 summary: Learn how to upgrade TiDB using TiDB Ansible.
-aliases: ['/docs/stable/upgrade-tidb-using-ansible/','/docs/v4.0/upgrade-tidb-using-ansible/','/docs/stable/how-to/upgrade/from-previous-version/','/docs/op-guide/ansible-deployment-rolling-update/','/docs/op-guide/tidb-v2-upgrade-guide/','/docs/stable/how-to/upgrade/rolling-updates-with-ansible/','/docs/dev/how-to/maintain/upgrade/rolling-updates-with-ansible/']
+aliases: ['/docs/stable/upgrade-tidb-using-ansible/','/docs/v4.0/upgrade-tidb-using-ansible/','/docs/stable/how-to/upgrade/from-previous-version/','/docs/op-guide/ansible-deployment-rolling-update/','/docs/op-guide/tidb-v2-upgrade-guide/','/docs/stable/how-to/upgrade/rolling-updates-with-ansible/','/docs/dev/how-to/maintain/upgrade/rolling-updates-with-ansible/','/docs/dev/upgrade-tidb-using-ansible/','/docs/dev/how-to/upgrade/from-previous-version/','/docs/dev/how-to/upgrade/rolling-updates-with-ansible/','/tidb/dev/upgrade-tidb-using-ansible/']
 ---
 
 # Upgrade TiDB Using TiDB Ansible
+
+> **Warning:**
+>
+> For production environments, it is recommended that you [upgrade TiDB using TiUP](/upgrade-tidb-using-tiup.md). Since v4.0, PingCAP no longer provides support for upgrading TiDB using TiDB Ansible (deprecated). If you really need to use it for upgrading, be aware of any risk.
 
 This document is targeted for users who want to upgrade from TiDB 2.0, 2.1, 3.0, or 3.1 versions to the TiDB 4.0 version, or from an earlier version of TiDB 4.0 to the later version of TiDB 4.0. The TiDB 4.0 version version is compatible with [TiDB Binlog of the cluster version](/tidb-binlog/tidb-binlog-overview.md).
 
