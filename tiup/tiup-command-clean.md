@@ -4,7 +4,7 @@ title: tiup clean
 
 # tiup clean
 
-The command `tiup clean` is used to clear the data generated during component operation.
+The command `tiup clean` is used to clean the data generated during component operation.
 
 ## Syntax
 
@@ -16,9 +16,9 @@ The value of `[name]` is the `Name` field output by [status command](/tiup/tiup-
 
 ## Option
 
-### --all (boolean, default false)
+### --all (boolean, by default is false)
 
-Clear all running records.
+Clean all running records.
 
 ## Output
 
