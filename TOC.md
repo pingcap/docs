@@ -199,6 +199,7 @@
     + [Monitor](/ticdc/monitor-ticdc.md)
     + [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
     + [Integrate TiDB with Confluent Platform](/ticdc/integrate-confluent-using-ticdc.md)
+    + [Glossary](/ticdc/ticdc-glossary.md)
   + [Dumpling](/dumpling-overview.md)
   + sync-diff-inspector
     + [Overview](/sync-diff-inspector/sync-diff-inspector-overview.md)
@@ -527,6 +528,7 @@
   + v5.0
     + [5.0.0-rc](/releases/release-5.0.0-rc.md)
   + v4.0
+    + [4.0.11](/releases/release-4.0.11.md)
     + [4.0.10](/releases/release-4.0.10.md)
     + [4.0.9](/releases/release-4.0.9.md)
     + [4.0.8](/releases/release-4.0.8.md)
