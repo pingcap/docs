@@ -1,0 +1,25 @@
+---
+title: tiup install
+---
+
+# tiup install
+
+The command `tiup install` is used for component installation. It downloads the specified version of the component package from the mirror repository and decompresses it in the local TiUP data directory for later use. In addition, when TiUP needs to run a component that does not exist in the mirror warehouse, it tries to download the component first and then runs it automatically. If it does not exist in the warehouse, an error is reported.
+
+## Syntax
+
+```sh
+tiup install <component1>[:version] [component2...N] [flags]
+```
+
+`<component1>` and `<component2>` represent component names, and `[version]` represents an optional version number. If `version` is not added, the latest stable version of the specified component is installed. `[component2...N]` means that you can specify multiple components or multiple versions of the same component at the same time.
+
+## Option
+
+None
+
+## Output
+
+- Under normal circumstances, output the download information of components.
+- If the component does not exist, an error `The component "%s" not found` is reported.
+- If the version does not exist, an error `version %s not supported by component %s` is reported.
