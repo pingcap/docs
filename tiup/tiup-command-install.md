@@ -4,7 +4,7 @@ title: tiup install
 
 # tiup install
 
-The command `tiup install` is used for component installation. It downloads the specified version of the component package from the mirror repository and decompresses it in the local TiUP data directory for later use. In addition, when TiUP needs to run a component that does not exist in the mirror warehouse, it tries to download the component first and then runs it automatically. If it does not exist in the warehouse, an error is reported.
+The command `tiup install` is used for component installation. It downloads the component package of the specified version from the mirror repository and decompresses it in the local TiUP data directory for later use. In addition, when TiUP needs to run a component that does not exist in the mirror warehouse, it tries to download the component first and then runs it automatically. If it does not exist in the warehouse, an error is reported.
 
 ## Syntax
 
