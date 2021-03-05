@@ -89,25 +89,25 @@ Currently, The following scenarios are not supported:
 
 TiCDC only provides partial support for scenarios of large transactions in the upstream. For details, refer to [FAQ: Does TiCDC support replicating large transactions? Is there any risk?](/ticdc/troubleshoot-ticdc.md#does-ticdc-support-replicating-large-transactions-is-there-any-risk).
 
-## Compatibility issue tips
+## Notice for compatibility issues
 
 ### Incompatibility issues caused by using TiCDC v5.0.0-rc `cdc cli` tool to operate a v4.0.x cluster
 
 When using TiCDC v5.0.0-rc `cdc cli` tool to operate a v4.0.x TiCDC cluster, you might encounter the following abnormal situations:
 
-- If the TiCDC cluster is v4.0.8 or earlier versions, using the v5.0.0-rc `cdc cli` tool to create a replication task changefeed will cause the TiCDC cluster to fall into an abnormal state and get replication stuck.
+- If the TiCDC cluster is v4.0.8 or an earlier version, using the v5.0.0-rc `cdc cli` tool to create a replication task might cause cluster anomalies and get the replication task stuck.
 
-- If the TiCDC cluster is v4.0.9 or later versions, using the v5.0.0-rc `cdc cli` tool to create a replication task changefeed will cause the Old Value and Unified Sorter features enabled by default unexpectedly.
+- If the TiCDC cluster is v4.0.9 or a later version, using the v5.0.0-rc `cdc cli` tool to create a replication task will cause the old value and unified sorter features to be unexpectedly enabled by default.
 
 Solutions: Use the `cdc` executable file corresponding to the TiCDC cluster version to perform the following operations:
 
-1. Delete the changefeed created using v5.0.0-rc. For example, run the `tiup cdc:v4.0.9 cli changefeed remove -c xxxx --pd=xxxxx --force` command.
-2. If TiCDC replication is stuck, you can restart the TiCDC cluster. For example, run the `tiup cluster restart <cluster_name> -R cdc` command.
+1. Delete the changefeed created using the v5.0.0-rc `cdc cli` tool. For example, run the `tiup cdc:v4.0.9 cli changefeed remove -c xxxx --pd=xxxxx --force` command.
+2. If the replication task is stuck, restart the TiCDC cluster. For example, run the `tiup cluster restart <cluster_name> -R cdc` command.
 3. Re-create changefeed. For example, run the `tiup cdc:v4.0.9 cli changefeed create --sink-uri=xxxx --pd=xxx` command.
 
 > **Note:**
 >
-> The above problems only exist when `cdc cli` is v5.0.0-rc. In the future, other v5.0.x `cdc cli` tool can be compatible with v4.0.x clusters.
+> The above issue exists only when `cdc cli` is v5.0.0-rc. Other v5.0.x `cdc cli` tool can be compatible with v4.0.x clusters.
 
 ## Install and deploy TiCDC
 
