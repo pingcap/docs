@@ -1,7 +1,7 @@
 ---
 title: Deploy a TiDB Cluster Using TiUP
 summary: Learn how to easily deploy a TiDB cluster using TiUP.
-aliases: ['/docs/dev/production-deployment-using-tiup/','/docs/dev/how-to/deploy/orchestrated/tiup/','/docs/dev/tiflash/deploy-tiflash/','/docs/dev/reference/tiflash/deploy/','/tidb/dev/deploy-tidb-from-dbdeployer/','/docs/dev/deploy-tidb-from-dbdeployer/','/docs/dev/how-to/get-started/deploy-tidb-from-dbdeployer/','/tidb/dev/deploy-tidb-from-homebrew/','/docs/dev/deploy-tidb-from-homebrew/','/docs/dev/how-to/get-started/deploy-tidb-from-homebrew/','/docs/dev/online-deployment-using-ansible/','/docs/dev/how-to/deploy/orchestrated/ansible/','/tidb/dev/online-deployment-using-ansible/']
+aliases: ['/docs/dev/production-deployment-using-tiup/','/docs/dev/how-to/deploy/orchestrated/tiup/','/docs/dev/tiflash/deploy-tiflash/','/docs/dev/reference/tiflash/deploy/','/tidb/dev/deploy-tidb-from-dbdeployer/','/docs/dev/deploy-tidb-from-dbdeployer/','/docs/dev/how-to/get-started/deploy-tidb-from-dbdeployer/','/tidb/dev/deploy-tidb-from-homebrew/','/docs/dev/deploy-tidb-from-homebrew/','/docs/dev/how-to/get-started/deploy-tidb-from-homebrew/']
 ---
 
 # Deploy a TiDB Cluster Using TiUP
@@ -9,10 +9,6 @@ aliases: ['/docs/dev/production-deployment-using-tiup/','/docs/dev/how-to/deploy
 [TiUP](https://github.com/pingcap/tiup) is a cluster operation and maintenance tool introduced in TiDB 4.0. TiUP provides [TiUP cluster](https://github.com/pingcap/tiup/tree/master/components/cluster), a cluster management component written in Golang. By using TiUP cluster, you can easily perform daily database operations, including deploying, starting, stopping, destroying, scaling, and upgrading a TiDB cluster, and manage TiDB cluster parameters.
 
 TiUP supports deploying TiDB, TiFlash, TiDB Binlog, TiCDC, and the monitoring system. This document introduces how to deploy TiDB clusters of different topologies.
-
-> **Note:**
->
-> Since TiDB v4.0, PingCAP no longer provides support for TiDB Ansible. Since TiDB v5.0, PingCAP no longer provides TiDB Ansible documents. If you want to read the document that introduces how to deploy a TiDB cluster using TiDB Ansible, see [Deploy TiDB Using TiDB Ansible (v4.0)](https://docs.pingcap.com/tidb/v4.0/online-deployment-using-ansible).
 
 ## Step 1: Prerequisites and precheck
 
@@ -117,7 +113,7 @@ The following topology documents provide a cluster configuration template for ea
 >
 > - For parameters that should be globally effective, configure these parameters of corresponding components in the `server_configs` section of the configuration file.
 > - For parameters that should be effective on a specific node, configure these parameters in the `config` of this node.
-> - Use `.` to indicate the subcategory of the configuration, such as `log.slow-threshold`. For more formats, see [TiUP configuration template](https://github.com/pingcap/tiup/blob/master/examples/topology.example.yaml).
+> - Use `.` to indicate the subcategory of the configuration, such as `log.slow-threshold`. For more formats, see [TiUP configuration template](https://github.com/pingcap/tiup/blob/master/embed/templates/examples/topology.example.yaml).
 > - For more parameter description, see [TiDB `config.toml.example`](https://github.com/pingcap/tidb/blob/master/config/config.toml.example), [TiKV `config.toml.example`](https://github.com/tikv/tikv/blob/master/etc/config-template.toml), [PD `config.toml.example`](https://github.com/pingcap/pd/blob/master/conf/config.toml), and [TiFlash configuration](/tiflash/tiflash-configuration.md).
 
 ## Step 4: Execute the deployment command
@@ -148,7 +144,7 @@ In the above command:
 - The initialization configuration file is `topology.yaml`.
 - `--user root`: Log in to the target machine through the `root` key to complete the cluster deployment, or you can use other users with `ssh` and `sudo` privileges to complete the deployment.
 - `[-i]` and `[-p]`: optional. If you have configured login to the target machine without password, these parameters are not required. If not, choose one of the two parameters. `[-i]` is the private key of the `root` user (or other users specified by `--user`) that has access to the target machine. `[-p]` is used to input the user password interactively.
-- If you need to specify the user group name to be created on the target machine, see [this example](https://github.com/pingcap/tiup/blob/master/examples/topology.example.yaml#L7).
+- If you need to specify the user group name to be created on the target machine, see [this example](https://github.com/pingcap/tiup/blob/master/embed/templates/examples/topology.example.yaml#L7).
 
 At the end of the output log, you will see ```Deployed cluster `tidb-test` successfully```. This indicates that the deployment is successful.
 

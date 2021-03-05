@@ -1,7 +1,7 @@
 ---
 title: Upgrade TiDB Using TiUP
 summary: Learn how to upgrade TiDB using TiUP.
-aliases: ['/docs/dev/upgrade-tidb-using-tiup/','/docs/dev/how-to/upgrade/using-tiup/','/docs/dev/upgrade-tidb-using-ansible/','/docs/dev/how-to/upgrade/from-previous-version/','/docs/dev/how-to/upgrade/rolling-updates-with-ansible/','/tidb/dev/upgrade-tidb-using-ansible/']
+aliases: ['/docs/dev/upgrade-tidb-using-tiup/','/docs/dev/how-to/upgrade/using-tiup/']
 ---
 
 # Upgrade TiDB Using TiUP
@@ -9,10 +9,6 @@ aliases: ['/docs/dev/upgrade-tidb-using-tiup/','/docs/dev/how-to/upgrade/using-t
 This document is targeted for users who want to upgrade from TiDB 3.0 or 3.1 versions to TiDB 4.0 versions, or from TiDB 4.0 to a later version.
 
 If you have deployed the TiDB cluster using TiDB Ansible, you can use TiUP to import the TiDB Ansible configuration and perform the upgrade.
-
-> **Note:**
->
-> Since TiDB v4.0, PingCAP no longer provides support for TiDB Ansible. Since TiDB v5.0, PingCAP no longer provides TiDB Ansible documents. If you want to read the document that introduces how to upgrade a TiDB cluster using TiDB Ansible, see [Upgrade TiDB Using TiDB Ansible (v4.0)](https://docs.pingcap.com/tidb/v4.0/upgrade-tidb-using-ansible).
 
 ## Upgrade caveat
 
@@ -26,7 +22,7 @@ If you have deployed the TiDB cluster using TiDB Ansible, you can use TiUP to im
     - `Spark` is enabled for the cluster.
     - `Lightning` / `Importer` is enabled for the cluster.
     - You still use the `'push'` method to collect monitoring metrics (since v3.0, `pull` is the default mode, which is supported if you have not modified this mode).
-    - In the `inventory.ini` configuration file, the `node_exporter` or `blackbox_exporter` item of the machine is set to non-default ports through `node_exporter_port` or `blackbox_exporter_port`, which is compatible if you have unified the configuration in the `group_vars` directory.
+    - In the `inventory.ini` configuration file, the `node_exporter` or `blackbox_exporter` item of the machine is set to non-default ports through `node_exporter_port` or `blackbox_exporter_port`, which is compatible if you have unified the configuration in the `group_vars` directory. Or the `node_exporter` or `blackbox_exporter` item of a machine is set to a `deploy_dir` that is different from that of other machines.
 - Support upgrading the versions of TiDB Binlog, TiCDC, TiFlash, and other components.
 - Before you upgrade from v2.0.6 or earlier to v4.0.0 or later, you must make sure that no DDL operations are running in the cluster, especially the `Add Index` operation that is time-consuming. Perform the upgrade after all DDL operations are completed.
 - Starting from v2.1, TiDB enables parallel DDL. Therefore, clusters **older than v2.0.1** cannot be upgraded to v4.0.0 or later via a direct rolling upgrade. Instead, you can choose one of the following solutions:
@@ -145,7 +141,7 @@ After the import is complete, you can check the current cluster status by execut
     tiup cluster edit-config <cluster-name>
     ```
 
-3. See the configuration template format of [topology](https://github.com/pingcap/tiup/blob/master/examples/topology.example.yaml) and fill in the modified parameters of the original cluster in the `server_configs` section of the topology file.
+3. See the configuration template format of [topology](https://github.com/pingcap/tiup/blob/master/embed/templates/examples/topology.example.yaml) and fill in the modified parameters of the original cluster in the `server_configs` section of the topology file.
 
     Even if the label has been configured for the cluster, you also need to fill in the label in the configuration according to the format in the template. In later versions, the label will be automatically imported.
 

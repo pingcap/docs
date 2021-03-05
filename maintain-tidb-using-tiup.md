@@ -1,7 +1,7 @@
 ---
 title: TiUP Common Operations
 summary: Learn the common operations to operate and maintain a TiDB cluster using TiUP.
-aliases: ['/docs/dev/maintain-tidb-using-tiup/','/docs/dev/how-to/maintain/tiup-operations/','/docs/dev/maintain-tidb-using-ansible/','/docs/dev/how-to/deploy/orchestrated/ansible-operations/','/tidb/dev/maintain-tidb-using-ansible/']
+aliases: ['/docs/dev/maintain-tidb-using-tiup/','/docs/dev/how-to/maintain/tiup-operations/']
 ---
 
 # TiUP Common Operations
@@ -14,10 +14,6 @@ This document describes the following common operations when you operate and mai
 - Modify the configuration
 - Stop the cluster
 - Destroy the cluster
-
-> **Note:**
->
-> Since TiDB v4.0, PingCAP no longer provides support for TiDB Ansible. Since TiDB v5.0, PingCAP no longer provides TiDB Ansible documents. If you want to read the document that introduces how to maintain a TiDB cluster using TiDB Ansible, see [TiDB Ansible Common Operations (v4.0)](https://docs.pingcap.com/tidb/v4.0/maintain-tidb-using-ansible).
 
 ## View the cluster list
 
@@ -113,7 +109,7 @@ When the cluster is in operation, if you need to modify the parameters of a comp
                 log.slow-threshold: 300
         ```
 
-    For the parameter format, see the [TiUP parameter template](https://github.com/pingcap/tiup/blob/master/examples/topology.example.yaml).
+    For the parameter format, see the [TiUP parameter template](https://github.com/pingcap/tiup/blob/master/embed/templates/examples/topology.example.yaml).
 
     **Use `.` to represent the hierarchy of the configuration items**.
 
