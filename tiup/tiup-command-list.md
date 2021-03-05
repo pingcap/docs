@@ -6,7 +6,7 @@ title: tiup list
 
 The command `tiup list` is used to get the list of available components of a mirror.
 
-## 语法
+## Syntax
 
 ```sh
 tiup list [component] [flags]
