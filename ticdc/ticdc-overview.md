@@ -91,7 +91,7 @@ TiCDC only provides partial support for scenarios of large transactions in the u
 
 ## Notice for compatibility issues
 
-### Incompatibility issues caused by using the TiCDC v5.0.0-rc `cdc cli` tool to operate a v4.0.x cluster
+### Incompatibility issue caused by using the TiCDC v5.0.0-rc `cdc cli` tool to operate a v4.0.x cluster
 
 When using the `cdc cli` tool of TiCDC v5.0.0-rc to operate a v4.0.x TiCDC cluster, you might encounter the following abnormal situations:
 
