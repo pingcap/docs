@@ -58,9 +58,9 @@ Currently, the TiCDC sink component supports replicating data to the following d
 
 - MySQL sink
 
-    - TiCDC does not split single table transactions and **ensures** the atomicity of single table transactions.
+    - TiCDC does not split single-table transactions and **ensures** the atomicity of single-table transactions.
     - TiCDC does **not ensure** that the execution order of downstream transactions is the same as that of upstream transactions.
-    - TiCDC splits cross-table transactions in the unit of tables and does **not ensure** the atomicity of cross-table transactions.
+    - TiCDC splits cross-table transactions in the unit of table and does **not ensure** the atomicity of cross-table transactions.
     - TiCDC **ensures** that the order of single-row updates is consistent with that in the upstream.
 
 - Kafka sink
