@@ -28,10 +28,10 @@ None
 A table consisting of the following fields:
 
 - `Name`: The tag name specified by `-T/--tag`. If not specified, it is a random string.
-- `Component`: The operating components
-- `PID`: The corresponding process ID of the operating components
-- `Status`: The status of the operating components
-- `Created Time`: The starting time of the components
-- `Directory`: The data directory of the components
-- `Binary`: The binary file path of the components
-- `Args`: The starting arguments of the operating components
+- `Component`: The operating components.
+- `PID`: The corresponding process ID of the operating components.
+- `Status`: The status of the operating components.
+- `Created Time`: The starting time of the components.
+- `Directory`: The data directory of the components.
+- `Binary`: The binary file path of the components.
+- `Args`: The starting arguments of the operating components.
