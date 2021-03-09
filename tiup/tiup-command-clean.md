@@ -12,16 +12,15 @@ The command `tiup clean` is used to clear the data generated during component op
 tiup clean [name] [flags]
 ```
 
-The value of `[name]` is the `Name` field output by [status command](/tiup/tiup-command-status.md). If you omit the `[name]`, it must be used with the `--all` option.
+The value of `[name]` is the `Name` field output by the [`status` command](/tiup/tiup-command-status.md). If `[name]` is omitted, you must add the `--all` option in the `tiup clean` command.
 
 ## Option
 
 ### --all
 
++ Clears all operation records.
 - Data type: Boolean
 - Default: false
-
-Clear all running records.
 
 ## Output
 
