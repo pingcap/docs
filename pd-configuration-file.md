@@ -88,6 +88,12 @@ Configuration items related to security
 + The path of the PEM file that contains the X509 key
 + Default value: ""
 
+### `redact-info-log` <span class="version-mark">New in v4.0.10</span>
+
++ Enables or disables log redaction in PD.
++ If the configuration value is set to `true`, all user data in the PD log will be redacted.
++ Default value: `false`
+
 ## `log`
 
 Configuration items related to log
