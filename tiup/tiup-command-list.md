@@ -24,7 +24,6 @@ tiup list [component] [flags]
 
 ### --installed
 
-- 只显示已经安装的组件或版本。
 - Only displays components and versions that have been installed.
 - Data type: `BOOLEAN`
 - Default: false
@@ -41,5 +40,5 @@ tiup list [component] [flags]
     - If `--verbose` is specified: TiUP outputs a component information list consisting of `Name` (component name), `Installed` (installed versions), `Owner` (component owner), and `Description` (component description).
     - If `--verbose` is not specified: TiUP outputs a component information list consisting of `Name` (component name), `Owner` (component owner), and `Description` (component description).
 - If `[component]` is set:
-    - If the specified component exists: TiUP outputs a version information list of the specified component, consisting of `Version` (version number), `Installed` (installation status),`Release` (release date), and `Platforms` (supported platforms).
+    - If the specified component exists: TiUP outputs a version information list of the specified component, consisting of `Version` (version number), `Installed` (installation status), `Release` (release date), and `Platforms` (supported platforms).
     - If the specified component does not exist: TiUP reports the error `failed to fetch component: unknown component`.
