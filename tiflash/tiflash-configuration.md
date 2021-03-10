@@ -184,7 +184,7 @@ delta_index_cache_size = 0
     ## If you set it to 0ms, the optimization is disabled.
     store-batch-retry-recv-timeout = "4ms"
 [security]
-    ## This configuration item enables or disables log redaction.
+    ## New in v4.0.10. This configuration item enables or disables log redaction.
     ## If the configuration value is set to true,
     ## all user data in the log will be replaced by ?. The default value is false.
     redact-info-log = false
