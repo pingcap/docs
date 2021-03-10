@@ -47,4 +47,4 @@ To enable log redaction in the PD side, set the value of [`security.redact-info-
 
 ## Log redaction in TiFlash side
 
-To enable log redaction in the TiFlash side, set the value of the [`security.redact_info_log`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file) in the tiflash-server and the value of the [`security.redact-info-log`](/tiflash/tiflash-configuration.md#configure-the-tiflash-learnertoml-file) in the tiflash-learner to `true`. The default values of these two configuration items are both `false`, which means that log redaction is disabled.
+To enable log redaction in the TiFlash side, set both the [`security.redact_info_log`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file) value in tiflash-server and the [`security.redact-info-log`](/tiflash/tiflash-configuration.md#configure-the-tiflash-learnertoml-file) value in tiflash-learner to `true`. Both configuration values default to `false`, which means that log redaction is disabled.
