@@ -158,8 +158,7 @@ minmax_index_cache_size = 5368709120
 
     ## New in v4.0.10. This configuration item enables or disables log redaction. If the configuration value
     ## is set to `true`, all user data in the log will be replaced by `?`.
-    ## Note that you also need to set `security.redact-info-log` for tiflash-learner's logging
-    ## in tiflash-learner.toml
+    ## Note that you also need to set `security.redact-info-log` for tiflash-learner's logging in tiflash-learner.toml.
     # redact_info_log = false
 ```
 
