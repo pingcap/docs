@@ -125,6 +125,78 @@ With the default settings of 3 replicas, the space requirement of the target TiK
 - The space occupied by indices
 - Space amplification in RocksDB
 
+<<<<<<< HEAD
 ## Can TiKV-Importer be restarted while TiDB Lightning is running?
+=======
+## Can TiKV Importer be restarted while TiDB Lightning is running?
+
+No. Importer stores some information of engines in memory. If `tikv-importer` is restarted, `tidb-lightning` will be stopped due to lost connection. At this point, you need to [destroy the failed checkpoints](/tidb-lightning/tidb-lightning-checkpoints.md#--checkpoint-error-destroy) as those Importer-specific information is lost. You can restart Lightning afterwards.
+
+See also [How to properly restart TiDB Lightning?](#how-to-properly-restart-tidb-lightning) for the correct sequence.
+
+## How to completely destroy all intermediate data associated with TiDB Lightning?
+
+1. Delete the checkpoint file.
+
+    {{< copyable "shell-regular" >}}
+
+    ```sh
+    tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-remove=all
+    ```
+
+    If, for some reason, you cannot run this command, try manually deleting the file `/tmp/tidb_lightning_checkpoint.pb`.
+
+2. If you are using Local-backend, delete the `sorted-kv-dir` directory in the configuration. If you are using Importer-backend, delete the entire `import` directory on the machine hosting `tikv-importer`.
+
+3. Delete all tables and databases created on the TiDB cluster, if needed.
+
+## Why does TiDB Lightning report the `could not find first pair, this shouldn't happen` error?
+
+This error occurs possibly because the number of files opened by TiDB Lightning exceeds the system limit when TiDB Lightning reads the sorted local files. In the Linux system, you can use the `ulimit -n` command to confirm whether the value of this system limit is too small. It is recommended that you adjust this value to `1000000` (`ulimit -n 1000000`) during TiDB Lightning import.
+
+## Import speed is too slow
+
+Normally it takes TiDB Lightning 2 minutes per thread to import a 256 MB data file. If the speed is much slower than this, there is an error. You can check the time taken for each data file from the log mentioning `restore chunk … takes`. This can also be observed from metrics on Grafana.
+
+There are several reasons why TiDB Lightning becomes slow:
+
+**Cause 1**: `region-concurrency` is set too high, which causes thread contention and reduces performance.
+
+1. The setting can be found from the start of the log by searching `region-concurrency`.
+2. If TiDB Lightning shares the same machine with other services (for example, TiKV Importer), `region-concurrency` must be **manually** set to 75% of the total number of CPU cores.
+3. If there is a quota on CPU (for example, limited by Kubernetes settings), TiDB Lightning may not be able to read this out. In this case, `region-concurrency` must also be **manually** reduced.
+
+**Cause 2**: The table schema is too complex.
+
+Every additional index introduces a new KV pair for each row. If there are N indices, the actual size to be imported would be approximately (N+1) times the size of the Dumpling output. If the indices are negligible, you may first remove them from the schema, and add them back using `CREATE INDEX` after the import is complete.
+
+**Cause 3**: Each file is too large.
+
+TiDB Lightning works the best when the data source is broken down into multiple files of size around 256 MB so that the data can be processed in parallel. If each file is too large, TiDB Lightning might not respond.
+
+If the data source is CSV, and all CSV files have no fields containing newline control characters (U+000A and U+000D), you can turn on "strict format" to let TiDB Lightning automatically split the large files.
+
+```toml
+[mydumper]
+strict-format = true
+```
+
+**Cause 4**: TiDB Lightning is too old.
+
+Try the latest version! Maybe there is new speed improvement.
+
+## `checksum failed: checksum mismatched remote vs local`
+
+**Cause**: The checksum of a table in the local data source and the remote imported database differ. This error has several deeper reasons:
+
+1. The table might already have data before. These old data can affect the final checksum.
+
+2. If the remote checksum is 0, which means nothing is imported, it is possible that the cluster is too hot and fails to take in any data.
+
+3. If the data is mechanically generated, ensure it respects the constrains of the table:
+
+    * `AUTO_INCREMENT` columns need to be positive, and do not contain the value "0".
+    * The UNIQUE and PRIMARY KEYs must have no duplicated entries.
+>>>>>>> 85994579... *: refine alert-rules.md and the titles of several migration docs (#5001)
 
 No. Importer stores some information of engines in memory. If Importer is restarted, Lightning must be restarted.
