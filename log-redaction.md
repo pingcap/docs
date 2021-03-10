@@ -43,4 +43,12 @@ To enable log redaction in the TiKV side, set the value of [`security.redact-inf
 
 ## Log redaction in PD side
 
+<<<<<<< HEAD
 To enable log redaction in the PD side, set the value of [`security.redact-info-log`](/pd-configuration-file.md#redact-info-log-new-in-v500-rc) to `true`. This configuration value defaults to `false`, which means that log redaction is disabled.
+=======
+To enable log redaction in the PD side, set the value of [`security.redact-info-log`](/pd-configuration-file.md#redact-info-log-new-in-v4010) to `true`. This configuration value defaults to `false`, which means that log redaction is disabled.
+
+## Log redaction in TiFlash side
+
+To enable log redaction in the TiFlash side, set both the [`security.redact_info_log`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file) value in tiflash-server and the [`security.redact-info-log`](/tiflash/tiflash-configuration.md#configure-the-tiflash-learnertoml-file) value in tiflash-learner to `true`. Both configuration values default to `false`, which means that log redaction is disabled.
+>>>>>>> 5b116f80... Log redact on TiFlash and PD (4.0) (#4997)

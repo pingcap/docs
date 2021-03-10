@@ -165,6 +165,11 @@ delta_index_cache_size = 0
     # cert_path = "/path/to/tiflash-server.pem"
     ## Path of the file that contains X509 key in PEM format.
     # key_path = "/path/to/tiflash-server-key.pem"
+
+    ## New in v4.0.10. This configuration item enables or disables log redaction. If the configuration value
+    ## is set to `true`, all user data in the log will be replaced by `?`.
+    ## Note that you also need to set `security.redact-info-log` for tiflash-learner's logging in tiflash-learner.toml.
+    # redact_info_log = false
 ```
 
 ### Configure the `tiflash-learner.toml` file
@@ -183,6 +188,11 @@ delta_index_cache_size = 0
     ## The default value is "4ms".
     ## If you set it to 0ms, the optimization is disabled.
     store-batch-retry-recv-timeout = "4ms"
+[security]
+    ## New in v4.0.10. This configuration item enables or disables log redaction.
+    ## If the configuration value is set to true,
+    ## all user data in the log will be replaced by ?. The default value is false.
+    redact-info-log = false
 ```
 
 In addition to the items above, other parameters are the same with those of TiKV. Note that the configuration items in `tiflash.toml [flash.proxy]` will override the overlapping parameters in `tiflash-learner.toml`; The `label` whose key is `engine` is reserved and cannot be configured manually.
