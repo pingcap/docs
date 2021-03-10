@@ -8,6 +8,7 @@
 + Introduction
   - [TiDB Introduction](/overview.md)
   + Benchmarks
+<<<<<<< HEAD
     - [How to Test TiDB Using Sysbench](/benchmark/benchmark-tidb-using-sysbench.md)
     - [How to Run TPC-C Test on TiDB](/benchmark/benchmark-tidb-using-tpcc.md)
     - [Sysbench Performance Test - v3.0 vs. v2.1](/benchmark/v3.0-performance-benchmarking-with-sysbench.md)
@@ -88,6 +89,49 @@
     + Identify Abnormal Queries
       - [Identify Slow Queries](/identify-slow-queries.md)
       - [Identify Expensive Queries](/identify-expensive-queries.md)
+=======
+    + [Interaction Test on Online Workloads and `ADD INDEX`](/benchmark/online-workloads-and-add-index-operations.md)
+  + [MySQL Compatibility](/mysql-compatibility.md)
+  + [TiDB Limitations](/tidb-limitations.md)
+  + [TiDB Adopters](/adopters.md)
+  + [Credits](/credits.md)
++ Quick Start
+  + [Try Out TiDB](/quick-start-with-tidb.md)
+  + [Learn TiDB SQL](/basic-sql-operations.md)
+  + [Import Example Database](/import-example-data.md)
++ Deploy
+  + [Software and Hardware Requirements](/hardware-and-software-requirements.md)
+  + [Environment Configuration Checklist](/check-before-deployment.md)
+  + Topology Patterns
+    + [Minimal Topology](/minimal-deployment-topology.md)
+    + [TiFlash Topology](/tiflash-deployment-topology.md)
+    + [TiCDC Topology](/ticdc-deployment-topology.md)
+    + [TiDB Binlog Topology](/tidb-binlog-deployment-topology.md)
+    + [TiSpark Topology](/tispark-deployment-topology.md)
+    + [Cross-DC Topology](/geo-distributed-deployment-topology.md)
+    + [Hybrid Topology](/hybrid-deployment-topology.md)
+  + Install and Start
+    + Linux OS
+      + [Use TiUP (Recommended)](/production-deployment-using-tiup.md)
+      + [Use TiUP Offline (Recommended)](/production-offline-deployment-using-tiup.md)
+      + [Deploy in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable)
+  + [Verify Cluster Status](/post-installation-check.md)
++ Migrate
+  + [Overview](/migration-overview.md)
+  + Migrate from MySQL
+    + [Migrate from Amazon Aurora MySQL Using TiDB Lightning](/migrate-from-aurora-using-lightning.md)
+    + [Migrate from MySQL SQL Files Using TiDB Lightning](/migrate-from-mysql-dumpling-files.md)
+    + [Migrate from Amazon Aurora MySQL Using DM](/migrate-from-aurora-mysql-database.md)
+  + Migrate from CSV Files
+    + [Use TiDB Lightning](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)
+    + [Use `LOAD DATA` Statement](/sql-statements/sql-statement-load-data.md)
+  + [Migrate from SQL Files](/migrate-from-mysql-dumpling-files.md)
++ Maintain
+  + Upgrade
+    + [Use TiUP (Recommended)](/upgrade-tidb-using-tiup.md)
+    + [Use TiUP Offline (Recommended)](/upgrade-tidb-using-tiup-offline.md)
+    + [Use TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.1/upgrade-a-tidb-cluster)
+>>>>>>> 85994579... *: refine alert-rules.md and the titles of several migration docs (#5001)
   + Scale
     - [Scale using Ansible](/scale-tidb-using-ansible.md)
     - [Scale a TiDB Cluster](/horizontal-scale.md)
