@@ -143,11 +143,7 @@ Configuration items related to security
 + The path of the PEM file that contains the X509 key
 + Default value: ""
 
-<<<<<<< HEAD
 ### `redact-info-log` <span class="version-mark">New in v5.0.0-rc</span>
-=======
-### `redact-info-log` <span class="version-mark">New in v4.0.10</span>
->>>>>>> 5b116f80... Log redact on TiFlash and PD (4.0) (#4997)
 
 + Controls whether to enable log redaction in the PD log.
 + When you set the configuration value to `true`, user data is redacted in the PD log.
