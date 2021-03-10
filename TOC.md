@@ -78,7 +78,7 @@
     - [Migration Tools User Guide](/ecosystem-tool-user-guide.md)
     + Migrate from MySQL
       - [Migrate from Mydumper Files](/migrate-from-mysql-mydumper-files.md)
-      - [Migration Case of Amazon Aurora](/migrate-from-aurora-mysql-database.md)
+      - [Migrate from Amazon Aurora MySQL Using DM](/migrate-from-aurora-mysql-database.md)
     - [Migrate from CSV Files](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)
     - [Migrate from SQL Files](/migrate-from-mysql-mydumper-files.md)
   + Maintain
