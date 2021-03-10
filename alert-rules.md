@@ -9,15 +9,19 @@ summary: Learn the alert rules in a TiDB cluster.
 
 This document describes the alert rules for different components in a TiDB cluster, including the rule descriptions and solutions of the alert items in TiDB, TiKV, PD, TiDB Binlog, Node_exporter and Blackbox_exporter.
 
-According to the severity level, alert rules are divided into three categories (from high to low): emergency-level, critical-level and warning-level.
+According to the severity level, alert rules are divided into three categories (from high to low): emergency-level, critical-level, and warning-level. This division of severity levels applies to all alert items of each component below.
+
+|  Severity level |  Description   |
+| :-------- | :----- |
+|  Emergency-level  |  The highest severity level at which the service is unavailable. Emergency-level alerts are often caused by a service or node failure. **Manual intervention is required immediately**. |
+|  Critical-level  |  Decreased service availability. For the critical-level alerts, a close watch on the abnormal metrics is required. |
+|  Warning-level  |  Warning-level alerts are a reminder for an issue or error.   |
 
 ## TiDB alert rules
 
 This section gives the alert rules for the TiDB component.
 
 ### Emergency-level alerts
-
-Emergency-level alerts are often caused by a service or node failure. Manual intervention is required immediately.
 
 #### `TiDB_schema_error`
 
@@ -78,8 +82,6 @@ Emergency-level alerts are often caused by a service or node failure. Manual int
 
 ### Critical-level alerts
 
-For the critical-level alerts, a close watch on the abnormal metrics is required.
-
 #### `TiDB_server_panic_total`
 
 * Alert rule:
@@ -95,8 +97,6 @@ For the critical-level alerts, a close watch on the abnormal metrics is required
     Collect the panic logs to locate the issue.
 
 ### Warning-level alerts
-
-Warning-level alerts are a reminder for an issue or error.
 
 #### `TiDB_memory_abnormal`
 
@@ -192,8 +192,6 @@ This section gives the alert rules for the PD component.
 
 ### Emergency-level alerts
 
-Emergency-level alerts are often caused by a service or node failure. Manual intervention is required immediately.
-
 #### `PD_cluster_offline_tikv_nums`
 
 * Alert rule:
@@ -210,8 +208,6 @@ Emergency-level alerts are often caused by a service or node failure. Manual int
     * If the TiKV instance cannot be recovered, you can make it offline.
 
 ### Critical-level alerts
-
-For the critical-level alerts, a close watch on the abnormal metrics is required.
 
 #### `PD_etcd_write_disk_latency`
 
@@ -245,8 +241,6 @@ For the critical-level alerts, a close watch on the abnormal metrics is required
     * Watch the Region health panel and see whether `miss_peer_region_count` is continuously decreasing.
 
 ### Warning-level alerts
-
-Warning-level alerts are a reminder for an issue or error.
 
 #### `PD_cluster_lost_connect_tikv_nums`
 
@@ -412,8 +406,6 @@ This section gives the alert rules for the TiKV component.
 
 ### Emergency-level alerts
 
-Emergency-level alerts are often caused by a service or node failure. Manual intervention is required immediately.
-
 #### `TiKV_memory_used_too_fast`
 
 * Alert rule:
@@ -449,8 +441,6 @@ Emergency-level alerts are often caused by a service or node failure. Manual int
     3. If you find that the GC worker has been resolving locks (the last log is "start resolve locks") or deleting ranges (the last log is “start delete {number} ranges”) during this time, it means the GC process is running normally. Otherwise, contact [support@pingcap.com](mailto:support@pingcap.com) to resolve this issue.
 
 ### Critical-level alerts
-
-For the critical-level alerts, a close watch on the abnormal metrics is required.
 
 #### `TiKV_server_report_failure_msg_total`
 
@@ -636,8 +626,6 @@ For the critical-level alerts, a close watch on the abnormal metrics is required
 
 ### Warning-level alerts
 
-Warning-level alerts are a reminder for an issue or error.
-
 #### `TiKV_leader_drops`
 
 * Alert rule:
@@ -816,8 +804,6 @@ This section gives the alert rules for the Node_exporter host.
 
 ### Emergency-level alerts
 
-Emergency-level alerts are often caused by a service or node failure. Manual intervention is required immediately.
-
 #### `NODE_disk_used_more_than_80%`
 
 * Alert rule:
@@ -865,8 +851,6 @@ Emergency-level alerts are often caused by a service or node failure. Manual int
 
 ### Critical-level alerts
 
-For the critical-level alerts, a close watch on the abnormal metrics is required.
-
 #### `NODE_memory_used_more_than_80%`
 
 * Alert rule:
@@ -883,8 +867,6 @@ For the critical-level alerts, a close watch on the abnormal metrics is required
     * Log in to the machine and run the `free -m` command to view the memory usage. You can run `top` to check whether there is any abnormal process that has an overly high memory usage.
 
 ### Warning-level alerts
-
-Warning-level alerts are a reminder for an issue or error.
 
 #### `NODE_node_overload`
 
@@ -968,8 +950,6 @@ Warning-level alerts are a reminder for an issue or error.
 This section gives the alert rules for the Blackbox_exporter TCP, ICMP, and HTTP.
 
 ### Emergency-level alerts
-
-Emergency-level alerts are often caused by a service or node failure. Manual intervention is required immediately.
 
 #### `TiDB_server_is_down`
 
@@ -1148,8 +1128,6 @@ Emergency-level alerts are often caused by a service or node failure. Manual int
     * Check whether the network between the monitoring machine and the Pushgateway machine is normal.
 
 ### Warning-level alerts
-
-Warning-level alerts are a reminder for an issue or error.
 
 #### `BLACKER_ping_latency_more_than_1s`
 
