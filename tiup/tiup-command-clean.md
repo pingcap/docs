@@ -18,7 +18,7 @@ The value of `[name]` is the `Name` field output by the [`status` command](/tiup
 
 ### --all
 
-- Clears all operation records.
+- Clears all operation records
 - Data type: Boolean
 - Default: false
 
