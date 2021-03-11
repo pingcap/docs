@@ -353,7 +353,7 @@ Since v4.0.8, if the `canal` or `maxwell` protocol is used for output in a chang
 
 ## How can I find out whether a DDL statement fails to execute in downstream during TiCDC replication? How to resume the replication?
 
-Since v4.0.11, If a DDL statement fails to execute, the replication task (changefeed)automatically stops. The checkpoint-ts is the DDL statement's finish-ts minus one. If you want that TiCDC retries executing this statement in the downstream, use `cdc cli changefeed resume` to resume the replication task. For example:
+Since v4.0.11, If a DDL statement fails to execute, the replication task (changefeed) automatically stops. The checkpoint-ts is the DDL statement's finish-ts minus one. If you want TiCDC to retry executing this statement in the downstream, use `cdc cli changefeed resume` to resume the replication task. For example:
 
 {{< copyable "shell-regular" >}}
 
