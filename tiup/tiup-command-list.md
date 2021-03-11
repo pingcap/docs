@@ -14,7 +14,7 @@ tiup list [component] [flags]
 
 `[component]` is an optional parameter used to specify a certain component. If `[component]` is set, TiUP lists all versions of the specified component; if not, TiUP lists all components.
 
-## Flags
+## Options
 
 ### --all
 

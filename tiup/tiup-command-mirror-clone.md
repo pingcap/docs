@@ -15,7 +15,7 @@ tiup mirror clone <target-dir> [global version] [flags]
 - `<target-dir>` is used to set the local path to the cloned mirror. If the path does not exist, TiUP automatically creates one.
 - If `[global version]` is specified, TiUP tries to clone all components of the specified version. If some components do not have the specified version, then TiUP clones its latest version.
 
-## Flags
+## Options
 
 ### -f, --full
 
