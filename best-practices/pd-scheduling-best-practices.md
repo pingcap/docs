@@ -102,6 +102,12 @@ The processes of scale-down and failure recovery are basically the same. `replic
 
 Region merge refers to the process of merging adjacent small regions. It serves to avoid unnecessary resource consumption by a large number of small or even empty regions after data deletion. Region merge is performed by `mergeChecker`, which processes in a similar way to `replicaChecker`: PD continuously scans all regions in the background, and generates an operator when contiguous small regions are found.
 
+Specifically, when the existence of a newly split Region exceeds the value of the [`split-merge-interval`](/pd-configuration-file.md#split-merge-interval), If any of the following conditions occur, this Region triggers Region merge scheduling:
+
+- The size of this Region is smaller than the value of the [`max-merge-region-size`](/pd-configuration-file.md#max-merge-region-size) (default 20MiB)
+
+- The number of keys in this Region is less than the value of the [`max-merge-region-keys`](/pd-configuration-file.md#max-merge-region-keys) (default 200000).
+
 ## Query scheduling status
 
 You can check the status of scheduling system through metrics, pd-ctl and logs. This section briefly introduces the methods of metrics and pd-ctl. Refer to [PD Monitoring Metrics](/grafana-pd-dashboard.md) and [PD Control](/pd-control.md) for details.
