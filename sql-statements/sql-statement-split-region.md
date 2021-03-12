@@ -423,8 +423,6 @@ region4:   [ 3<<61     ,  +inf  )
 
 The [Region merge](/best-practices/pd-scheduling-best-practices.md#region-merge) scheduling in PD controls the Region split by the Split Region statement. You need to [dynamically modify](/pd-control.md) configuration items related to `Region merge`, to avoid PD re-merging the newly split Region soon after.
 
-Split Region 语句切分的 Region 会受到 PD 中 [Region merge](/best-practices/pd-scheduling-best-practices.md#region-merge) 调度的控制，需要[动态修改](/pd-control.md) Region merge 相关的配置项，避免新切分的 Region 不久后又被 PD 重新合并的情况。
-
 ## MySQL compatibility
 
 This statement is a TiDB extension to MySQL syntax.
