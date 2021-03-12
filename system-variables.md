@@ -545,7 +545,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Default value: 60
 - This variable is used to set the step of the Prometheus statement generated when querying `METRIC_SCHEMA`. The unit is second.
 
-## tidb_multi_statement_mode <span class="version-mark">New in v4.0.11</span>
+### tidb_multi_statement_mode <span class="version-mark">New in v4.0.11</span>
 
 - Scope: SESSION | GLOBAL
 - Default value: WARN
