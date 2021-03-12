@@ -500,7 +500,7 @@ This section introduces configuration items related to the Coprocessor Cache fea
 
 ### `capacity-mb`
 
-- The total size of the cached data. When the cache space is full, old cache entries are evicted. When the value is `0.0`, it means to disable the Coprocessor Cache feature.
+- The total size of the cached data. When the cache space is full, old cache entries are evicted. When the value is `0.0`, the Coprocessor Cache feature is disabled.
 - Default value: `1000.0`
 - Unit: MB
 - Type: Float
