@@ -40,7 +40,7 @@
   + [Overview](/migration-overview.md)
   + Migrate from MySQL
     + [Migrate from Amazon Aurora MySQL Using TiDB Lightning](/migrate-from-aurora-using-lightning.md)
-    + [Migrate Using Dumpling and TiDB Lightning](/migrate-from-mysql-dumpling-files.md)
+    + [Migrate from MySQL SQL Files Using TiDB Lightning](/migrate-from-mysql-dumpling-files.md)
     + [Migrate from Amazon Aurora MySQL Using DM](/migrate-from-aurora-mysql-database.md)
   + Migrate from CSV Files
     + [Use TiDB Lightning](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)
@@ -136,7 +136,7 @@
   + [Multiple Data Centers in One City Deployment](/multi-data-centers-in-one-city-deployment.md)
   + [Three Data Centers in Two Cities Deployment](/three-data-centers-in-two-cities-deployment.md)
   + Best Practices
-    + [Use TiDB](/tidb-best-practices.md)
+    + [Use TiDB](/best-practices/tidb-best-practices.md)
     + [Java Application Development](/best-practices/java-app-best-practices.md)
     + [Use HAProxy](/best-practices/haproxy-best-practices.md)
     + [Highly Concurrent Write](/best-practices/high-concurrency-best-practices.md)
