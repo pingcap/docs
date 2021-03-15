@@ -58,7 +58,7 @@ In a TiUP mirror, the root certificate is used to store the public key of other 
 
 The root certificate's format is as follows:
 
-```json
+```
 {
     "signatures": [                                             # Each metadata file has a series of signatures which are signed by several private keys corresponding to the file.
         {
