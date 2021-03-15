@@ -39,8 +39,8 @@ tiup mirror set <mirror-addr> -r /path/to/local/root.json
 
 In this mode of operation, if a man-in-the-middle attacks the mirror image before the `wget`, the user might find that the root certificate is incorrect. If the mirror image is attacked after `wget`, TiUP finds that the mirror image does not match the root certificate.
 
-Data type: `String`
-Default: `{mirror-dir}/root.json`
+- Data type: `String`
+- Default: `{mirror-dir}/root.json`
 
 ## Output
 
