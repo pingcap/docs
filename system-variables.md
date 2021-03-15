@@ -172,6 +172,12 @@ mysql> SELECT * FROM t1;
     * `1`: Aggregation and join requests are sent in batches
     * `2`: All coprocessor requests are sent in batches
 
+### tidb_allow_fallback_to_tikv
+
+- Scope: SESSION | GLOBAL
+- Default value: ""
+- When the execution of an SQL statement fails due to a failure of the storage engine specified by this variable, TiDB will use TiKV to execute the SQL statement again. Currently, this variable can be set to "" or "tiflash". When this variable is set to "tiflash", TiDB will retry with TiKV if the execution of the SQL statement fails due to a failure of TiFlash.
+
 ### tidb_allow_remove_auto_inc <span class="version-mark">New in v2.1.18 and v3.0.4</span>
 
 - Scope: SESSION
@@ -1074,9 +1080,3 @@ This variable is an alias for _transaction_isolation_.
 - Scope: SESSION | GLOBAL
 - Default value: ON
 - This variable controls whether to use the high precision mode when computing the window functions.
-
-### tidb_enable_engine_fallback
-
-- Scope: SESSION | GLOBAL
-- Default value: OFF
-- This variable controls whether to retry execution with another engine when the used engine's failure causes execution failure of SQL statement. If the variable turns on, currently TiDB supports retrying execution with TiKV when TiFlash's failure causes execution failure of SQL statement.
