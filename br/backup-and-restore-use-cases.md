@@ -181,30 +181,41 @@ During the backup process, pay attention to the following metrics on the monitor
 
 #### Backup results explanation
 
+When finishing the backup, BR outputs the backup summary to the console.
+
 Before executing the backup command, a path in which the log is stored has been specified. You can get the statistical information of the backup operation from this log. Search "summary" in this log, you can see the following information:
 
 ```
-["Table backup summary:
-    total backup ranges: 4,
-    total success: 4,
+["Full backup Success summary:
+    total backup ranges: 2,
+    total success: 2,
     total failed: 0,
-    total take(s): 986.43,
-    total kv: 5659888624,
-    total size(MB): 353227.18,
-    avg speed(MB/s): 358.09"]
-    ["backup total regions"=7196]
-    ["backup checksum"=6m28.291772955s]
-    ["backup fast checksum"=24.950298ms]
+    total take(Full backup time): 31.802912166s,
+    total take(real time): 49.799662427s,
+    total size(MB): 5997.49,
+    avg speed(MB/s): 188.58,
+    total kv: 120000000"]
+    ["backup checksum"=17.907153678s]
+    ["backup fast checksum"=349.333µs]
+    ["backup total regions"=43]
+    [BackupTS=422618409346269185]
+    [Size=826765915]
 ```
 
 The above log includes the following information:
 
-* Backup duration: `total take(s): 986.43`
-* Data size: `total size(MB): 353227.18`
-* Backup throughput: `avg speed(MB/s): 358.09`
-* Backup checksum duration: `take=6m28.29s`
+* Backup duration: `total take(Full backup time): 31.802912166s`
+* Total running duration of the program: `total take(real time): 49.799662427s`
+* Backup data size: `total size(MB): 5997.49`
+* Backup throughput: `avg speed(MB/s): 188.58`
+* Backup KV logarithm: `total kv: 120000000`
+* Backup checksum duration: `["backup checksum"=17.907153678s]`
+* Calculate the duration of the information sum of the checksum, KV and bytes of each table: `["backup fast checksum"=349.333µs]`
+* Total number of backup Regions: `["backup total regions"=43]`
+* The actual size of the backup archive on the disk after compression: `[Size=826765915]`
+* Snapshot timestamp of the backup archive: `[BackupTS=422618409346269185]`
 
-From the above information, the throughput of a single TiKV instance can be calculated: `avg speed(MB/s)`/`tikv_count` = `89`.
+From the above information, the throughput of a single TiKV instance can be calculated: `avg speed(MB/s)`/`tikv_count` = `62.86`.
 
 #### Performance tuning
 
