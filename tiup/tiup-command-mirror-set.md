@@ -4,9 +4,9 @@ title: tiup mirror set
 
 # tiup mirror set
 
-The `tiup mirror set` command is used to switch the current mirror and supports both local file system and remote network mirroring.
+The `tiup mirror set` command is used to switch the current mirror and supports two forms of mirrors: local file system and remote network.
 
-The official mirror is `https://tiup-mirrors.pingcap.com`.
+The address of the official mirror is `https://tiup-mirrors.pingcap.com`.
 
 ## Syntax
 
@@ -37,7 +37,7 @@ Then perform a manual check and confirm that it is correct, and then switch the 
 tiup mirror set <mirror-addr> -r /path/to/local/root.json
 ```
 
-In this mode of operation, if a man-in-the-middle attacks the mirror image before the `wget`, the user might find that the root certificate is incorrect. If the mirror image is attacked after `wget`, TiUP finds that the mirror image does not match the root certificate.
+In this mode of operation, if a man-in-the-middle attacks the mirror before the `wget`, the users might find that the root certificate is incorrect. If the mirror is attacked after `wget`, TiUP finds that the mirror does not match the root certificate.
 
 - Data type: `String`
 - Default: `{mirror-dir}/root.json`

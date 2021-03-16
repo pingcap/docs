@@ -4,7 +4,7 @@ title: tiup update
 
 # tiup update
 
-The `tiup update` command is used to upgrade the installed components or itself.
+The `tiup update` command is used to update the installed components or itself.
 
 ## Syntax
 
@@ -12,11 +12,11 @@ The `tiup update` command is used to upgrade the installed components or itself.
 tiup update [component1][:version] [component2..N] [flags]
 ```
 
-- `[component1]`: The name of the component to be upgraded.
-- `[version]`: The version to be uninstalled. If omitted, it means upgrading to the latest stable version of the component.
-- `[component2...N]`: Specifies upgrading multiple components or versions. If no component is specified, which means `[component1][:version] [component2..N]` is empty, you need to use the `--all` or the `--self` option together.
+- `[component1]`: The name of the component to be updated.
+- `[version]`: The version to be uninstalled. If omitted, it means updating to the latest stable version of the component.
+- `[component2...N]`: Specifies updating multiple components or versions. If no component is specified, which means `[component1][:version] [component2..N]` is empty, you need to use the `--all` or the `--self` option together.
 
-The upgrade operation does not delete the old version. You can still specify using the old version during execution.
+The update operation does not delete the old version. You can still specify using the old version during execution.
 
 ## Options
 
@@ -29,14 +29,14 @@ If no component is specified, this option must be specified.
 
 ### --force
 
-If the version of the specified component is already installed, the upgrade operation is skipped by default. Specifying this option forcibly upgrades the installed version.
+If the version of the specified component is already installed, the update operation is skipped by default. Specifying this option forcibly updates the installed version.
 
 - Data type: `BOOLEAN`
 - Default: `false`
 
 ### --nightly
 
-Upgrades the specified components to the nightly version. The command using this option is equivalent to `tiup update <component>:nightly`.
+Updates the specified components to the nightly version. The command using this option is equivalent to the `tiup update <component>:nightly` command.
 
 - Data type: `BOOLEAN`
 - Default: `false`
