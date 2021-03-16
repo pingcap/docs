@@ -5,19 +5,19 @@ summary: Learn the general information of TiUP mirrors.
 
 # TiUP Mirror Reference Guide
 
-TiUP mirrors are TiUP's component warehouse, which store a series of components and their metadata. TiUP mirrors take two form:
+TiUP mirrors are TiUP's component warehouse, which stores components and their metadata. TiUP mirrors take the following two forms:
 
 + Directory on the local disk: serves the local TiUP client, which is called a local mirror in this document.
 + HTTP mirror started based on the remote disk directory: serves the remote TiUP client, which is called a remote mirror in this document.
 
 ## Create and update mirror
 
-You can create a TiUP mirror using one of the following two method:
+You can create a TiUP mirror using one of the following two methods:
 
 + Execute `tiup mirror init` to create a mirror from scratch.
 + Execute `tiup mirrir clone` to clone from an existing mirror.
 
-After the mirror is created, you can add components to or delete components from the mirror using the `tiup mirror` related commands. TiUP updates a mirror by adding files and assigning new version number to them, rather than deleting any files from the mirror.
+After the mirror is created, you can add components to or delete components from the mirror using the `tiup mirror` commands. TiUP updates a mirror by adding files and assigning new version number to them, rather than deleting any files from the mirror.
 
 ## Mirror structure
 
@@ -49,18 +49,18 @@ A typical mirror structure is as follows:
 
 > **Note:**
 >
-> + The `commits` directory stores the logs generated in the process of mirror update and is used to roll back the mirror. You can delete the old directories regularly when the disk space is insufficient.
+> + The `commits` directory stores the logs generated in the process of mirror update and is used to roll back the mirror. You can delete the old log directories regularly when the disk space is insufficient.
 > + The private key stored in the `keys` directory is sensitive. It is recommended to keep it separately.
 
 ### Root directory
 
-In a TiUP mirror, the root certificate is used to store the public key of other metadata files. Each time any metadata file (`*.json`) is obtained, TiUP needs to find the corresponding public key in the installed `root.json` based on the metadata file type (root, index, snapshot, timestamp). Then TiUP uses the public key to verify whether the signature is legal.
+In a TiUP mirror, the root certificate is used to store the public key of other metadata files. Each time any metadata file (`*.json`) is obtained, TiUP needs to find the corresponding public key in the installed `root.json` based on the metadata file type (root, index, snapshot, timestamp). Then TiUP uses the public key to verify whether the signature is valid.
 
 The root certificate's format is as follows:
 
 ```
 {
-    "signatures": [                                             # Each metadata file has a series of signatures which are signed by several private keys corresponding to the file.
+    "signatures": [                                             # Each metadata file has some signatures which are signed by several private keys corresponding to the file.
         {
             "keyid": "{id-of-root-key-1}",                      # The ID of the first private key that participates in the signature. This ID is obtained by hashing the content of the public key that corresponds to the private key.
             "sig": "{signature-by-root-key-1}"                  # The signed part of this file by this private key.
@@ -72,7 +72,7 @@ The root certificate's format is as follows:
         }
     ],
     "signed": {                                                 # The signed part.
-        "_type": "root",                                        # The type of this file. `root.json`'s type is `root`.
+        "_type": "root",                                        # The type of this file. root.json's type is root.
         "expires": "{expiration-date-of-this-file}",            # The expiration time of the file. After the file expires, the client will reject the file.
         "roles": {                                              # Records the keys used to sign each metadata file.
             "{role:index,root,snapshot,timestamp}": {           # Each involved metadata file has index, root, snapshot, and timestamp.
@@ -96,7 +96,7 @@ The root certificate's format is as follows:
                 "url": "/{role}.json"                           # The address from which the file can be obtained. For index files, prefix it with the version number (for example, /{N}.index.json).
             }
         },
-        "spec_version": "0.1.0",                                # The specification version followed by this file. If the file structure is changed in the future, the version number needs to be upgraded. The current version number is 0.1.0.
+        "spec_version": "0.1.0",                                # The specified version followed by this file. If the file structure is changed in the future, the version number needs to be upgraded. The current version number is 0.1.0.
         "version": {N}                                          # The version number of this file. You need to create a new {N+1}.root.json every time you update the file, and set its version to N + 1.
     }
 }
@@ -161,7 +161,7 @@ The index file's format is as follows:
                 ...
             }
         }
-        "spec_version": "0.1.0",                                # The specification version followed by this file. If the file structure is changed in the future, the version number needs to be upgraded. The current version number is 0.1.0.
+        "spec_version": "0.1.0",                                # The specified version followed by this file. If the file structure is changed in the future, the version number needs to be upgraded. The current version number is 0.1.0.
         "version": {N}                                          # The version number of this file. You need to create a new {N+1}.index.json every time you update the file, and set its version to N + 1.
     }
 }
@@ -192,7 +192,7 @@ The component metadata file's format is as follows:
         "expires": "{expiration-date-of-this-file}",            # The expiration time of the file. After the file expires, the client will reject the file.
         "id": "{component-id}",                                 # The globally unique ID of the component.
         "nightly": "{nightly-cursor}",                          # The nightly cursor, and the value is the latest nightly version number (for example, v5.0.0-nightly-20201209).
-        "platforms": {                                          # The component's supported platforms (such as darwin/amd64, linux/arm64)
+        "platforms": {                                          # The component's supported platforms (such as darwin/amd64, linux/arm64).
             "{platform-pair-1}": {
                 "{version-1}": {                                # The semantic version number (for example, v1.0.0).
                     "dependencies": null,                       # Specifies the dependency relationship between components. The field is not used yet and is fixed as null.
@@ -212,14 +212,14 @@ The component metadata file's format is as follows:
                 ...
             }
         },
-        "spec_version": "0.1.0",                                # The specification version followed by this file. If the file structure is changed in the future, the version number needs to be upgraded. The current version number is 0.1.0.
+        "spec_version": "0.1.0",                                # The specified version followed by this file. If the file structure is changed in the future, the version number needs to be upgraded. The current version number is 0.1.0.
         "version": {N}                                          # The version number of this file. You need to create a new {N+1}.{component}.json every time you update the file, and set its version to N + 1.
 }
 ```
 
 ### Snapshot
 
-The snapshot file records the version number of each metafile:
+The snapshot file records the version number of each metadata file:
 
 The snapshot file's structure is as follows:
 
@@ -239,7 +239,7 @@ The snapshot file's structure is as follows:
     "signed": {
         "_type": "snapshot",                                    # The file type.
         "expires": "{expiration-date-of-this-file}",            # The expiration time of the file. After the file expires, the client will reject the file.
-        "meta": {                                               # Other metafiles' information.
+        "meta": {                                               # Other metadata files' information.
             "/root.json": {
                 "length": {length-of-json-file},                # The length of root.json
                 "version": {version-of-json-file}               # The version of root.json
@@ -257,7 +257,7 @@ The snapshot file's structure is as follows:
                 ...
             }
         },
-        "spec_version": "0.1.0",                                # The specification version followed by this file. If the file structure is changed in the future, the version number needs to be upgraded. The current version number is 0.1.0.
+        "spec_version": "0.1.0",                                # The specified version followed by this file. If the file structure is changed in the future, the version number needs to be upgraded. The current version number is 0.1.0.
         "version": 0                                            # The version number of this file, which is fixed as 0.
     }
 ```
@@ -292,7 +292,7 @@ The timestamp file's format is as follows:
                 "length": {length-of-json-file}                 # The length of snapshot.json.
             }
         },
-        "spec_version": "0.1.0",                                # The specification version followed by this file. If the file structure is changed in the future, the version number needs to be upgraded. The current version number is 0.1.0.
+        "spec_version": "0.1.0",                                # The specified version followed by this file. If the file structure is changed in the future, the version number needs to be upgraded. The current version number is 0.1.0.
         "version": {N}                                          # The version number of this file. You need to overwrite timestamp.json every time you update the file, and set its version to N + 1.
 ```
 
