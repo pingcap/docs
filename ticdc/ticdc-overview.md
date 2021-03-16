@@ -58,9 +58,10 @@ Currently, the TiCDC sink component supports replicating data to the following d
 
 - MySQL sink
 
-    - TiCDC does not split in-table transactions. This is to **ensure** the transactional consistency within a single table. However, TiCDC does **not ensure** consistency with the transactional order in the upstream table. If the primary keys between transactions have intersections, TiCDC still **ensures** consistency with the transactional order in the upstream table.
-    - TiCDC splits cross-table transactions in the unit of tables. TiCDC does **not ensure** that cross-table transactions are always consistent.
-    - TiCDC **ensures** that the order of single-row updates are consistent with that in the upstream.
+    - TiCDC does not split single-table transactions and **ensures** the atomicity of single-table transactions.
+    - TiCDC does **not ensure** that the execution order of downstream transactions is the same as that of upstream transactions.
+    - TiCDC splits cross-table transactions in the unit of table and does **not ensure** the atomicity of cross-table transactions.
+    - TiCDC **ensures** that the order of single-row updates is consistent with that in the upstream.
 
 - Kafka sink
 
@@ -88,6 +89,26 @@ Currently, The following scenarios are not supported:
 - The [TiKV Hibernate Region](/best-practices/massive-regions-best-practices.md#method-2-enable-hibernate-region). TiCDC prevents the Region from entering the hibernated state.
 
 TiCDC only provides partial support for scenarios of large transactions in the upstream. For details, refer to [FAQ: Does TiCDC support replicating large transactions? Is there any risk?](/ticdc/troubleshoot-ticdc.md#does-ticdc-support-replicating-large-transactions-is-there-any-risk).
+
+## Notice for compatibility issues
+
+### Incompatibility issue caused by using the TiCDC v5.0.0-rc `cdc cli` tool to operate a v4.0.x cluster
+
+When using the `cdc cli` tool of TiCDC v5.0.0-rc to operate a v4.0.x TiCDC cluster, you might encounter the following abnormal situations:
+
+- If the TiCDC cluster is v4.0.8 or an earlier version, using the v5.0.0-rc `cdc cli` tool to create a replication task might cause cluster anomalies and get the replication task stuck.
+
+- If the TiCDC cluster is v4.0.9 or a later version, using the v5.0.0-rc `cdc cli` tool to create a replication task will cause the old value and unified sorter features to be unexpectedly enabled by default.
+
+Solutions: Use the `cdc` executable file corresponding to the TiCDC cluster version to perform the following operations:
+
+1. Delete the changefeed created using the v5.0.0-rc `cdc cli` tool. For example, run the `tiup cdc:v4.0.9 cli changefeed remove -c xxxx --pd=xxxxx --force` command.
+2. If the replication task is stuck, restart the TiCDC cluster. For example, run the `tiup cluster restart <cluster_name> -R cdc` command.
+3. Re-create the changefeed. For example, run the `tiup cdc:v4.0.9 cli changefeed create --sink-uri=xxxx --pd=xxx` command.
+
+> **Note:**
+>
+> The above issue exists only when `cdc cli` is v5.0.0-rc. Other v5.0.x `cdc cli` tool can be compatible with v4.0.x clusters.
 
 ## Install and deploy TiCDC
 
