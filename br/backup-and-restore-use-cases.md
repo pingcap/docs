@@ -387,10 +387,10 @@ Before executing the backup command, a path in which the log is stored has been 
 
 The information from the above log includes:
 
-+ Backup duration: `total take(s): 551.31`
-+ Data size: `total size(MB): 353227.18`
-+ Backup throughput: `avg speed(MB/s): 640.71`
-+ Backup checksum duration: `take=6m33.962719217s`
+- Backup duration: `total take(s): 551.31`
+- Data size: `total size(MB): 353227.18`
+- Backup throughput: `avg speed(MB/s): 640.71`
+- Backup checksum duration: `take=6m33.962719217s`
 
 From the above information, the throughput of a single TiKV instance can be calculated: `avg speed(MB/s)`/`tikv_count` = `160`.
 
@@ -440,11 +440,11 @@ Before executing the restoration command, a path in which the log is stored has 
 
 The above log includes the following information:
 
-+ Restoration duration: `total take(s): 908.42`
-+ Data size: `total size(MB): 353227.18`
-+ Restoration throughput: `avg speed(MB/s):  388.84`
-+ `Region Split` duration: `take=58.7885518s`
-+ Restoration checksum duration: `take=6m19.349067937s`
+- Restoration duration: `total take(s): 908.42`
+- Data size: `total size(MB): 353227.18`
+- Restoration throughput: `avg speed(MB/s):  388.84`
+- `Region Split` duration: `take=58.7885518s`
+- Restoration checksum duration: `take=6m19.349067937s`
 
 From the above information, the following items can be calculated:
 
