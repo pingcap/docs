@@ -308,23 +308,23 @@ Before executing the restoration command, a path in which the log is stored has 
 
 The above log includes the following information:
 
-* Restoration duration: `total take(Full restore time): 17m1.001611365s`
+* Restore duration: `total take(Full restore time): 17m1.001611365s`
 * Total runtime of the application: `total take(real time): 16m1.371611365s`
-* Restoration data size: `total size(MB): 353227.18`
-* Restoration KV pair number: `total kv: 5659888624`
-* Restoration throughput: `avg speed(MB/s): 367.42`
+* Restore data size: `total size(MB): 353227.18`
+* Restore KV pair number: `total kv: 5659888624`
+* Restore throughput: `avg speed(MB/s): 367.42`
 * `Region Split` duration: `take=49.049182743s`
-* Restoration checksum duration: `restore checksum=6m34.879439498s`
+* Restore checksum duration: `restore checksum=6m34.879439498s`
 * The actual size of the restored data in the disk: `[Size=48693068713]`
 
 From the above information, the following items can be calculated:
 
 * The throughput of a single TiKV instance: `avg speed(MB/s)`/`tikv_count` = `91.8`
-* The average restoration speed of a single TiKV instance: `total size(MB)`/(`split time` + `restore time`)/`tikv_count` = `87.4`
+* The average restore speed of a single TiKV instance: `total size(MB)`/(`split time` + `restore time`)/`tikv_count` = `87.4`
 
 #### Performance tuning
 
-If the resource usage of TiKV does not become an obvious bottleneck during the restoration process, you can try to increase the value of `--concurrency` which is `128` by default. See the following example:
+If the resource usage of TiKV does not become an obvious bottleneck during the restore process, you can try to increase the value of `--concurrency` which is `128` by default. See the following example:
 
 {{< copyable "shell-regular" >}}
 
@@ -334,10 +334,10 @@ bin/br restore table --db batchmark --table order_line -s local:///br_data/ --pd
 
 The tuned performance results are as follows (with the same data size):
 
-+ Restoration duration: `total take(s)` reduced from `961.37` to `443.49`
-+ Restoration throughput: `avg speed(MB/s)` increased from `367.42` to `796.47`
++ Restore duration: `total take(s)` reduced from `961.37` to `443.49`
++ Restore throughput: `avg speed(MB/s)` increased from `367.42` to `796.47`
 + Throughput of a single TiKV instance: `avg speed(MB/s)`/`tikv_count` increased from `91.8` to `199.1`
-+ Average restoration speed of a single TiKV instance: `total size(MB)`/(`split time` + `restore time`)/`tikv_count` increased from `87.4` to `162.3`
++ Average restore speed of a single TiKV instance: `total size(MB)`/(`split time` + `restore time`)/`tikv_count` increased from `87.4` to `162.3`
 
 ### Back up a single table to a local disk (recommended in testing environment)
 
