@@ -359,7 +359,7 @@ If the result of `pd-ctl service-gc-safepoint --pd <pd-addrs>` does not have `gc
 
 ## `enable-old-value` is set to `true` when I create a TiCDC replication task, but `INSERT`/`UPDATE` statements from the upstream become `REPLACE INTO` after being replicated to the downstream
 
-TiCDC defaults to specifying the `safe-mode` to `true` when creating a changefeed, thereby generating `REPLACE INTO` execution statements for the upstream `INSERT`/`UPDATE` statements.
+When a changefeed is created in TiCDC, the `safe-mode` setting defaults to `true`, which generates the `REPLACE INTO` statement to execute for the upstream `INSERT`/`UPDATE` statements.
 
 Currently, users cannot modify the `safe-mode` setting, so this issue currently has no solution.
 

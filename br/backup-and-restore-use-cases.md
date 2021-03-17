@@ -208,7 +208,7 @@ The above log includes the following information:
 * Total runtime of the application: `total take(real time): 49.799662427s`
 * Backup data size: `total size(MB): 5997.49`
 * Backup throughput: `avg speed(MB/s): 188.58`
-* Backup KV pair number: `total kv: 120000000`
+* Number of backed-up KV pairs: `total kv: 120000000`
 * Backup checksum duration: `["backup checksum"=17.907153678s]`
 * Total duration of calculating the checksum, KV pairs, and bytes of each table: `["backup fast checksum"=349.333µs]`
 * Total number of backup Regions: `["backup total regions"=43]`
