@@ -349,30 +349,30 @@ Since v4.0.8, if the `canal` or `maxwell` protocol is used for output in a chang
 
 ## The `[tikv:9006]GC life time is shorter than transaction duration, transaction starts at xx, GC safe point is yy` error is reported when I use TiCDC to create the changefeed
 
-Solution: You need to execute the `pd-ctl service-gc-safepoint --pd <pd-addrs>` command to query the current GC safepoint and service GC safepoint. If the GC safepoint is less than the start timestamp `start-ts` of the TiCDC changefeed replication task, the user can directly add the `--disable-gc-check` parameter to the `cdc cli create changefeed` command to create a changefeed.
+Solution: You need to execute the `pd-ctl service-gc-safepoint --pd <pd-addrs>` command to query the current GC safepoint and service GC safepoint. If the GC safepoint is smaller than the start timestamp `start-ts` of the TiCDC changefeed replication task, the user can directly add the `--disable-gc-check` parameter to the `cdc cli create changefeed` command to create a changefeed.
 
 If the result of `pd-ctl service-gc-safepoint --pd <pd-addrs>` does not have `gc_worker service_id`:
 
-- If the PD version <= v4.0.8, see [PD issue #3128](https://github.com/tikv/pd/issues/3128) for details.
-- If the PD is upgraded from v4.0.8 or earlier versions to the latest version, refer to [PD issue#3366](https://github.com/tikv/pd/issues/3366) for details.
-- For other situations, give your feedback on the execution result of the above command to [AskTUG](https://asktug.com/tags/ticdc).
+- If the PD version is earlier than v4.0.8, refer to [PD issue #3128](https://github.com/tikv/pd/issues/3128) for details.
+- If the PD is upgraded from v4.0.8 or earlier versions to the latest version, refer to [PD issue #3366](https://github.com/tikv/pd/issues/3366) for details.
+- For other situations, feedback the execution result of the above command to [AskTUG](https://asktug.com/tags/ticdc).
 
 ## When using TiCDC to create a replication task, set the `enable-old-value` to `true`, the upstream `INSERT`/`UPDATE` statement becomes `REPLACE INTO` after being replicated to the downstream by TiCDC
 
-TiCDC defaults to specifying `safe-mode` to `true` when creating a changefeed, thereby generating `REPLACE INTO` execution statements for the upstream `INSERT`/`UPDATE` statements.
+TiCDC defaults to specifying the `safe-mode` to `true` when creating a changefeed, thereby generating `REPLACE INTO` execution statements for the upstream `INSERT`/`UPDATE` statements.
 
 Currently, users can not modify the `safe-mode` setting, thus this issue has no solution.
 
 ## When using TiCDC to replicate messages to Kafka, Kafka returns the `Message was too large` error
 
-For TiCDC v4.0.8 or earlier versions, only configuring the `max-message-bytes` parameter for Kafka in the Sink URI can not effectively control the size of the message output to Kafka. To increase the byte limit of Kafka receiving messages, you need to add the following configuration to the Kafka server configuration.
+For TiCDC v4.0.8 or earlier versions, only configuring the `max-message-bytes` for Kafka in the Sink URI does not effectively control the size of the message output to Kafka. To increase the byte limit of Kafka receiving messages, you need to add the following configuration to the Kafka server configuration.
 
 ```
-#The maximum bytes number of a message that the broker can receive
+# The maximum bytes number of a message that the broker receives
 message.max.bytes=2147483648
-# The maximum bytes number of a message that the broker can copy
+# The maximum bytes number of a message that the broker copies
 replica.fetch.max.bytes=2147483648
-# The maximum message bytes number that can be read on the consumer side
+# The maximum message bytes number that the consumer side reads
 fetch.message.max.bytes=2147483648
 ```
 
