@@ -205,15 +205,15 @@ Before executing the backup command, a path in which the log is stored has been 
 The above log includes the following information:
 
 * Backup duration: `total take(Full backup time): 31.802912166s`
-* Total running duration of the program: `total take(real time): 49.799662427s`
+* Total runtime of the application: `total take(real time): 49.799662427s`
 * Backup data size: `total size(MB): 5997.49`
 * Backup throughput: `avg speed(MB/s): 188.58`
 * Backup KV pair number: `total kv: 120000000`
 * Backup checksum duration: `["backup checksum"=17.907153678s]`
-* Calculate the duration of the information sum of the checksum, KV and bytes of each table: `["backup fast checksum"=349.333µs]`
+* Total duration of calculating the checksum, KV pairs, and bytes of each table: `["backup fast checksum"=349.333µs]`
 * Total number of backup Regions: `["backup total regions"=43]`
-* The actual size of the backup archive in the disk after compression: `[Size=826765915]`
-* Snapshot timestamp of the backup archive: `[BackupTS=422618409346269185]`
+* The actual size of the backup data in the disk after compression: `[Size=826765915]`
+* Snapshot timestamp of the backup data: `[BackupTS=422618409346269185]`
 
 From the above information, the throughput of a single TiKV instance can be calculated: `avg speed(MB/s)`/`tikv_count` = `62.86`.
 
@@ -325,13 +325,13 @@ Before executing the restoration command, a path in which the log is stored has 
 The above log includes the following information:
 
 * Restoration duration: `total take(Full restore time): 17m1.001611365s`
-* Total running duration of the program: `total take(real time): 16m1.371611365s`
+* Total runtime of the application: `total take(real time): 16m1.371611365s`
 * Restoration data size: `total size(MB): 353227.18`
 * Restoration KV pair number: `total kv: 5659888624`
 * Restoration throughput: `avg speed(MB/s): 367.42`
 * `Region Split` duration: `take=49.049182743s`
 * Restoration checksum duration: `restore checksum=6m34.879439498s`
-* The actual size of the restoration archive in the disk: `[Size=48693068713]`
+* The actual size of the restored data in the disk: `[Size=48693068713]`
 
 From the above information, the following items can be calculated:
 

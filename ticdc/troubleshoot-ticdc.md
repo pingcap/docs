@@ -347,32 +347,32 @@ Since v4.0.8, if the `canal` or `maxwell` protocol is used for output in a chang
     cdc cli changefeed resume -c test-cf --pd=http://10.0.10.25:2379
     ```
 
-## The `[tikv:9006]GC life time is shorter than transaction duration, transaction starts at xx, GC safe point is yy` error is reported when I use TiCDC to create the changefeed
+## The `[tikv:9006]GC life time is shorter than transaction duration, transaction starts at xx, GC safe point is yy` error is reported when I use TiCDC to create a changefeed
 
-Solution: You need to execute the `pd-ctl service-gc-safepoint --pd <pd-addrs>` command to query the current GC safepoint and service GC safepoint. If the GC safepoint is smaller than the start timestamp `start-ts` of the TiCDC changefeed replication task, the user can directly add the `--disable-gc-check` parameter to the `cdc cli create changefeed` command to create a changefeed.
+Solution: You need to execute the `pd-ctl service-gc-safepoint --pd <pd-addrs>` command to query the current GC safepoint and service GC safepoint. If the GC safepoint is smaller than the `start-ts` of the TiCDC replication task (changefeed), you can directly add the `--disable-gc-check` option to the `cdc cli create changefeed` command to create a changefeed.
 
 If the result of `pd-ctl service-gc-safepoint --pd <pd-addrs>` does not have `gc_worker service_id`:
 
-- If the PD version is earlier than v4.0.8, refer to [PD issue #3128](https://github.com/tikv/pd/issues/3128) for details.
-- If the PD is upgraded from v4.0.8 or earlier versions to the latest version, refer to [PD issue #3366](https://github.com/tikv/pd/issues/3366) for details.
-- For other situations, feedback the execution result of the above command to [AskTUG](https://asktug.com/tags/ticdc).
+- If your PD version is v4.0.8 or earlier, refer to [PD issue #3128](https://github.com/tikv/pd/issues/3128) for details.
+- If your PD is upgraded from v4.0.8 or an earlier version to a later version, refer to [PD issue #3366](https://github.com/tikv/pd/issues/3366) for details.
+- For other situations, report the execution result of the above command to [AskTUG](https://asktug.com/tags/ticdc).
 
-## When using TiCDC to create a replication task, set the `enable-old-value` to `true`, the upstream `INSERT`/`UPDATE` statement becomes `REPLACE INTO` after being replicated to the downstream by TiCDC
+## `enable-old-value` is set to `true` when I create a TiCDC replication task, but `INSERT`/`UPDATE` statements from the upstream become `REPLACE INTO` after being replicated to the downstream
 
 TiCDC defaults to specifying the `safe-mode` to `true` when creating a changefeed, thereby generating `REPLACE INTO` execution statements for the upstream `INSERT`/`UPDATE` statements.
 
-Currently, users can not modify the `safe-mode` setting, thus this issue has no solution.
+Currently, users cannot modify the `safe-mode` setting, so this issue currently has no solution.
 
-## When using TiCDC to replicate messages to Kafka, Kafka returns the `Message was too large` error
+## When I use TiCDC to replicate messages to Kafka, Kafka returns the `Message was too large` error
 
-For TiCDC v4.0.8 or earlier versions, only configuring the `max-message-bytes` for Kafka in the Sink URI does not effectively control the size of the message output to Kafka. To increase the byte limit of Kafka receiving messages, you need to add the following configuration to the Kafka server configuration.
+For TiCDC v4.0.8 or earlier versions, you cannot effectively control the size of the message output to Kafka only by configuring the `max-message-bytes` setting for Kafka in the Sink URI. To control the message size, you also need to increase the limit on the bytes of messages to be received by Kafka. To add such a limit, add the following configuration to the Kafka server configuration.
 
 ```
-# The maximum bytes number of a message that the broker receives
+# The maximum byte number of a message that the broker receives
 message.max.bytes=2147483648
-# The maximum bytes number of a message that the broker copies
+# The maximum byte number of a message that the broker copies
 replica.fetch.max.bytes=2147483648
-# The maximum message bytes number that the consumer side reads
+# The maximum message byte number that the consumer side reads
 fetch.message.max.bytes=2147483648
 ```
 

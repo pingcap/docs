@@ -88,7 +88,7 @@ To get the `commitTs` field of the last BR backup, run the `kubectl -n ${namespa
 
 ## After BR restores the archive, do I need to execute the `ANALYZE` statement in the table to update the statistics left by TiDB on the table and index?
 
-BR does not back up statistics (except v4.0.9). Therefore, after restoring the archive, you need to manually execute `ANALYZE TABLE` or wait for TiDB to automatically execute `ANALYZE`.
+BR does not back up statistics (except for v4.0.9). Therefore, after restoring the backup data, you need to manually execute `ANALYZE TABLE` or wait for TiDB to automatically execute `ANALYZE`.
 
 BR v4.0.9 backup statistics makes BR consume too much memory. To ensure the normal backup process, the backup statistics feature is disabled by default starting from v4.0.10.
 
