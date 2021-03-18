@@ -4,7 +4,7 @@ title: tiup cluster edit-config
 
 # tiup cluster edit-config
 
-If you need to modify the cluster configuration after the cluster is deployed, you can use the `tiup cluster edit-config` command that starts a editor for you to modify the topology file<!-- (/tiup/tiup-cluster-topology-reference.md) --> of a cluster. This editor is specified in the `$EDITOR` environment variable by default. If the `$EDITOR` environment variable does not exist, the `vi` editor is used.
+If you need to modify the cluster configuration after the cluster is deployed, you can use the `tiup cluster edit-config` command that starts an editor for you to modify the topology file<!-- (/tiup/tiup-cluster-topology-reference.md) --> of a cluster. This editor is specified in the `$EDITOR` environment variable by default. If the `$EDITOR` environment variable does not exist, the `vi` editor is used.
 
 > **Note:**
 >
