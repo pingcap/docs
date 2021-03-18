@@ -22,29 +22,25 @@ The update operation does not delete the old version. You can still specify usin
 
 ### --all
 
-If no component is specified, this option must be specified.
-
+- If no component is specified, this option must be specified.
 - Data type: `BOOLEAN`
 - Default: `false`
 
 ### --force
 
-If the version of the specified component is already installed, the update operation is skipped by default. Specifying this option forcibly updates the installed version.
-
+- If the version of the specified component is already installed, the update operation is skipped by default. Specifying this option forcibly updates the installed version.
 - Data type: `BOOLEAN`
 - Default: `false`
 
 ### --nightly
 
-Updates the specified components to the nightly version. The command using this option is equivalent to the `tiup update <component>:nightly` command.
-
+- Updates the specified components to the nightly version. The command using this option is equivalent to the `tiup update <component>:nightly` command.
 - Data type: `BOOLEAN`
 - Default: `false`
 
 ### --self
 
-Updates TiUP itself.
-
+- Updates TiUP itself.
 - Data type: `BOOLEAN`
 - Default: `false`
 
