@@ -20,13 +20,13 @@ tiup cluster deploy <cluster-name> <version> <topology.yaml> [flags]
 
 ### -u, --user
 
-- Specifies the user name that is used to connect to the target machine. This user must have the secret-free sudo root permission on the target machine.
+- Specifies the user name used to connect to the target machine. This user must have the secret-free sudo root permission on the target machine.
 - Data type: `STRING`
-- Default: The current user who executes the command.
+- Default: the current user who executes the command.
 
 ### -i, --identity_file
 
-- Specifies the key file that is used to connect to the target machine.
+- Specifies the key file used to connect to the target machine.
 - Data type: `STRING`
 - Default: `~/.ssh/id_rsa`
 

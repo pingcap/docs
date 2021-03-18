@@ -8,8 +8,8 @@ If you need to modify the cluster configuration after the cluster is deployed, y
 
 > **Note:**
 >
-> + When you modify the configuration, you cannot add or delete machines. For how to adding machines, see Scale out a cluster <!-- (/tiup/tiup-component-cluster-scale-out.md) -->. For how to deleting machines, see Scale in a cluster <!-- (/tiup/tiup-component-cluster-scale-in.md) -->.
-> + After you execute the `tiup cluster edit-config` command, the configuration is modified only on the control machine. Then you need to execute `tiup cluster reload` to reload the configuration.
+> + When you modify the configuration, you cannot add or delete machines. For how to add machines, see Scale out a cluster<!-- (/tiup/tiup-component-cluster-scale-out.md) -->. For how to delete machines, see Scale in a cluster<!-- (/tiup/tiup-component-cluster-scale-in.md) -->.
+> + After you execute the `tiup cluster edit-config` command, the configuration is modified only on the control machine. Then you need to execute the `tiup cluster reload` command to reload the configuration.
 
 ## Syntax
 
@@ -17,7 +17,7 @@ If you need to modify the cluster configuration after the cluster is deployed, y
 tiup cluster edit-config <cluster-name> [flags]
 ```
 
-`<cluster-name>` is the cluster to operator on.
+`<cluster-name>` is the cluster to operate on.
 
 ## Option
 
@@ -30,4 +30,4 @@ tiup cluster edit-config <cluster-name> [flags]
 ## Output
 
 - Normally, no output.
-- If you have mistakenly modified the fields that cannot be modified, when you save the file, an error will be reported reminding you to edit the file again. For the fields that cannot be modified, see topology file<!-- (/tiup/tiup-cluster-topology-reference.md) -->.
+- If you have mistakenly modified the fields that cannot be modified, when you save the file, an error will be reported, reminding you to edit the file again. For the fields that cannot be modified, see topology file<!-- (/tiup/tiup-cluster-topology-reference.md) -->.

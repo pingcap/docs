@@ -4,7 +4,7 @@ title: tiup cluster clean
 
 # tiup cluster clean
 
-In the test environment, sometimes you might need to reset the cluster back to the state as it has been just deployed, which means to delete all data. You can do that easily using the `tiup cluster clean` command. After running it, the cluster is stopped and then cluster data is deleted. After restarting the cluster, you will get a clean cluster.
+In the test environment, sometimes you might need to reset the cluster back to the state as it has been just deployed, which means deleting all data. You can do that easily using the `tiup cluster clean` command. After running it, the cluster is stopped and then cluster data is deleted. After restarting the cluster manually, you will get a clean cluster.
 
 > **Warning:**
 >
@@ -22,22 +22,22 @@ tiup cluster clean <cluster-name> [flags]
 
 ### --all
 
-- Cleans data and log at the same time. It is equivalent to specifying `--data` and `--log` at the same time.
+- Cleans data and the log at the same time. It is equivalent to specifying `--data` and `--log` at the same time.
 - Data type: `BOOLEAN`
 - Default: false
 - If it is not specified, you must specify at lease one of the following options:
     - --data: Cleans data
-    - --log：Cleans log
+    - --log: Cleans the log
 
 ### --data
 
-- Cleans data. If neither of it and `--all` are specified, data will not be cleaned.
+- Cleans data. If neither of it nor `--all` is specified, data will not be cleaned.
 - Data type: `BOOLEAN`
 - Default: false
 
 ### --log
 
-- Cleans log. If neither of it and `--all` are specified, log will not be cleaned.
+- Cleans the log. If neither of it nor `--all` is specified, the log will not be cleaned.
 - Data type: `BOOLEAN`
 - Default: false
 
