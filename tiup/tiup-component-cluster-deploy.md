@@ -45,7 +45,7 @@ tiup cluster deploy <cluster-name> <version> <topology.yaml> [flags]
 ### --no-labels
 
 - This option is used to skip the label check.
-- When two or more TiKV nodes are deployed on the same physical machine, there is a risk: PD cannot learn the cluster topology, so it might schedule multiple replicas of a Region to different TiKV nodes on one physical machine, which makes this physical machine a single point. To avoid this risk, you can use labels to tell PD not to schedule the same Region to the same machine. See [Schedule Replicas by Topology Labels](/schedule-replicas-by-topology-labels.md) for label configuration.
+- When two or more TiKV nodes are deployed on the same physical machine, a risk exists: PD cannot learn the cluster topology, so PD might schedule multiple replicas of a Region to different TiKV nodes on one physical machine, which makes this physical machine a single point. To avoid this risk, you can use labels to tell PD not to schedule the same Region to the same machine. See [Schedule Replicas by Topology Labels](/schedule-replicas-by-topology-labels.md) for label configuration.
 - For the test environment, this risk might matter and you can use `--no-labels` to skip the check.
 - Data type: `BOOLEAN`
 - Default: false
