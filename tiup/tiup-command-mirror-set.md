@@ -16,8 +16,8 @@ tiup mirror set <mirror-addr> [flags]
 
 `<mirror-addr>` is the mirror address, which has two forms:
 
-- Network address: Start with `http` or `https`. For example, `http://172.16.5.5:8080`, `https://tiup-mirrors.pingcap.com`, etc.
-- Local file path: The absolute path of the mirror directory. For example, `/path/to/local-tiup-mirror`.
+- Network address: start with `http` or `https`. For example, `http://172.16.5.5:8080`, `https://tiup-mirrors.pingcap.com`, etc.
+- Local file path: the absolute path of the mirror directory. For example, `/path/to/local-tiup-mirror`.
 
 ## Option
 
@@ -31,7 +31,7 @@ The root certificate of each mirror is different, and the root certificate is th
 wget <mirror-addr>/root.json -O /path/to/local/root.json
 ```
 
-Then perform a manual check and confirm that it is correct, and then switch the mirror by manually specifying the root certificate:
+Perform a manual check and confirm that the root certificate is correct, and then switch the mirror by manually specifying the root certificate:
 
 ```
 tiup mirror set <mirror-addr> -r /path/to/local/root.json

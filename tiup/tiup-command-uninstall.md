@@ -12,9 +12,9 @@ The `tiup uninstall` command is used to uninstall the installed components.
 tiup uninstall <component1>:<version> [component2...N] [flags]
 ```
 
-- `<component1>`: The name of a component to be uninstalled.
-- `<version>`: The version to be uninstalled. If omitted, it uninstalls all installed versions of a component. For security reasons, the `--all` option must be added when `<version>` is omitted, indicating that all versions of a component need to be uninstalled.
-- `[component2...N]`: Uninstalls multiple components or versions.
+- `<component1>`: the name of a component to uninstall.
+- `<version>`: the version to uninstall. If omitted, it uninstalls all installed versions of a component. For security reasons, the `--all` option must be added when `<version>` is omitted, indicating that all versions of a component need to be uninstalled.
+- `[component2...N]`: multiple components or versions to uninstall.
 
 ## Options
 

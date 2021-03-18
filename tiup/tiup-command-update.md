@@ -12,9 +12,9 @@ The `tiup update` command is used to update the installed components or itself.
 tiup update [component1][:version] [component2..N] [flags]
 ```
 
-- `[component1]`: The name of the component to be updated.
-- `[version]`: The version to be uninstalled. If omitted, it means updating to the latest stable version of the component.
-- `[component2...N]`: Specifies updating multiple components or versions. If no component is specified, which means `[component1][:version] [component2..N]` is empty, you need to use the `--all` or the `--self` option together.
+- `[component1]`: the name of the component to update.
+- `[version]`: the version to update. If omitted, it means updating to the latest stable version of the component.
+- `[component2...N]`: specifies updating multiple components or versions. If no component is specified, which means `[component1][:version] [component2..N]` is empty, you need to use the `--all` or the `--self` option together.
 
 The update operation does not delete the old version. You can still specify using the old version during execution.
 
