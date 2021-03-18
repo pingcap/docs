@@ -245,8 +245,13 @@ Constraint checking is always performed in place for pessimistic transactions (d
 ### tidb_disable_txn_auto_retry
 
 - Scope: SESSION | GLOBAL
+<<<<<<< HEAD
 - Default: on
 - This variable is used to set whether to disable the automatic retry of explicit transactions. The default value of `on` means that transactions will not automatically retry in TiDB and `COMMIT` statements might return errors that need to be handled in the application layer.
+=======
+- Default value: ON
+- This variable is used to set whether to disable the automatic retry of explicit optimistic transactions. The default value of `ON` means that transactions will not automatically retry in TiDB and `COMMIT` statements might return errors that need to be handled in the application layer.
+>>>>>>> e80ff2e5... Add declaration for scopes of transaction related variables and configurations (#5056)
 
     Setting the value to `off` means that TiDB will automatically retry transactions, resulting in fewer errors from `COMMIT` statements. Be careful when making this change, because it might result in lost updates.
 
@@ -254,7 +259,22 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
     For more details, see [limits of retry](/optimistic-transaction.md#limits-of-retry).
 
+<<<<<<< HEAD
 ### `tidb_enable_amend_pessimistic_txn` <span class="version-mark">New in v4.0.7</span>
+=======
+    This variable only applies to optimistic transactions, not to pessimistic transactions. The number of retries for pessimistic transactions is controlled by [`max_retry_count`](/tidb-configuration-file.md#max-retry-count).
+
+### tidb_distsql_scan_concurrency
+
+- Scope: SESSION | GLOBAL
+- Default value: 15
+- This variable is used to set the concurrency of the `scan` operation.
+- Use a bigger value in OLAP scenarios, and a smaller value in OLTP scenarios.
+- For OLAP scenarios, the maximum value cannot exceed the number of CPU cores of all the TiKV nodes.
+- If a table has a lot of partitions, you can reduce the variable value appropriately to avoid TiKV becoming out of memory (OOM).
+
+### tidb_dml_batch_size
+>>>>>>> e80ff2e5... Add declaration for scopes of transaction related variables and configurations (#5056)
 
 - Scope: SESSION | GLOBAL
 - Default value: 0
@@ -695,7 +715,7 @@ set tidb_query_log_max_len = 20
 
 - Scope: SESSION | GLOBAL
 - Default value: 10
-- This variable is used to set the maximum number of the retries. When a transaction encounters retryable errors (such as transaction conflicts, very slow transaction commit, or table schema changes), this transaction is re-executed according to this variable. Note that setting `tidb_retry_limit` to `0` disables the automatic retry.
+- This variable is used to set the maximum number of the retries for optimistic transactions. When a transaction encounters retryable errors (such as transaction conflicts, very slow transaction commit, or table schema changes), this transaction is re-executed according to this variable. Note that setting `tidb_retry_limit` to `0` disables the automatic retry. This variable only applies to optimistic transactions, not to pessimistic transactions.
 
 ### tidb_row_format_version
 
