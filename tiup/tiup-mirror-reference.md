@@ -17,7 +17,7 @@ You can create a TiUP mirror using one of the following two methods:
 + Execute `tiup mirror init` to create a mirror from scratch.
 + Execute `tiup mirrir clone` to clone from an existing mirror.
 
-After the mirror is created, you can add components to or delete components from the mirror using the `tiup mirror` commands. TiUP updates a mirror by adding files and assigning new version number to them, rather than deleting any files from the mirror.
+After the mirror is created, you can add components to or delete components from the mirror using the `tiup mirror` commands. TiUP updates a mirror by adding files and assigning a new version number to it, rather than deleting any files from the mirror.
 
 ## Mirror structure
 
@@ -73,9 +73,9 @@ The root certificate's format is as follows:
     ],
     "signed": {                                                 # The signed part.
         "_type": "root",                                        # The type of this file. root.json's type is root.
-        "expires": "{expiration-date-of-this-file}",            # The expiration time of the file. After the file expires, the client will reject the file.
+        "expires": "{expiration-date-of-this-file}",            # The expiration time of the file. If the file expires, the client rejects the file.
         "roles": {                                              # Records the keys used to sign each metadata file.
-            "{role:index,root,snapshot,timestamp}": {           # Each involved metadata file has index, root, snapshot, and timestamp.
+            "{role:index,root,snapshot,timestamp}": {           # Each involved metadata file includes index, root, snapshot, and timestamp.
                 "keys": {                                       # Only the key's signature recorded in `keys` is valid.
                     "{id-of-the-key-1}": {                      # The ID of the first key used to sign {role}.
                         "keytype": "rsa",                       # The key's type. Currently, the key type is fixed as rsa.
@@ -126,10 +126,10 @@ The index file's format is as follows:
         "components": {                                         # The component list.
             "{component1}": {                                   # The name of the first component.
                 "hidden": {bool},                               # Whether it is a hidden component.
-                "owner": "{owner-id}",                          # The component administrator's ID.
+                "owner": "{owner-id}",                          # The component owner's ID.
                 "standalone": {bool},                           # Whether it is a standalone component.
                 "url": "/{component}.json",                     # The address from which the component can be obtained. You need to prefix it with the version number (for example, /{N}.{component}.json).
-                "yanked": {bool}                                # Whether the component is marked as deleted.
+                "yanked": {bool}                                # Indicates whether the component is marked as deleted.
             },
             ...
             "{componentN}": {                                   # The name of the Nth component.
@@ -137,7 +137,7 @@ The index file's format is as follows:
             },
         },
         "default_components": ["{component1}".."{componentN}"], # The default component that a mirror must contain. Currently, this field defaults to empty (disabled).
-        "expires": "{expiration-date-of-this-file}",            # The expiration time of the file. After the file expires, the client will reject the file.
+        "expires": "{expiration-date-of-this-file}",            # The expiration time of the file. If the file expires, the client rejects the file.
         "owners": {
             "{owner1}": {                                       # The ID of the first owner.
                 "keys": {                                       # Only the key's signature recorded in `keys` is valid.
@@ -189,7 +189,7 @@ The component metadata file's format is as follows:
     "signed": {
         "_type": "component",                                   # The file type.
         "description": "{description-of-the-component}",        # The description of the component.
-        "expires": "{expiration-date-of-this-file}",            # The expiration time of the file. After the file expires, the client will reject the file.
+        "expires": "{expiration-date-of-this-file}",            # The expiration time of the file. If the file expires, the client rejects the file.
         "id": "{component-id}",                                 # The globally unique ID of the component.
         "nightly": "{nightly-cursor}",                          # The nightly cursor, and the value is the latest nightly version number (for example, v5.0.0-nightly-20201209).
         "platforms": {                                          # The component's supported platforms (such as darwin/amd64, linux/arm64).
@@ -204,7 +204,7 @@ The component metadata file's format is as follows:
                     "length": {length-of-tar},                  # The length of the tar package.
                     "released": "{release-time}",               # The release date of the version.
                     "url": "{url-of-tar}",                      # The download address of the tar package.
-                    "yanked": {bool}                            # Whether this version is disabled.
+                    "yanked": {bool}                            # Indicates whether this version is disabled.
                 }
             },
             ...
@@ -238,7 +238,7 @@ The snapshot file's structure is as follows:
     ],
     "signed": {
         "_type": "snapshot",                                    # The file type.
-        "expires": "{expiration-date-of-this-file}",            # The expiration time of the file. After the file expires, the client will reject the file.
+        "expires": "{expiration-date-of-this-file}",            # The expiration time of the file. If the file expires, the client rejects the file.
         "meta": {                                               # Other metadata files' information.
             "/root.json": {
                 "length": {length-of-json-file},                # The length of root.json
@@ -283,7 +283,7 @@ The timestamp file's format is as follows:
     ],
     "signed": {
         "_type": "timestamp",                                   # The file type.
-        "expires": "{expiration-date-of-this-file}",            # The expiration time of the file. After the file expires, the client will reject the file.
+        "expires": "{expiration-date-of-this-file}",            # The expiration time of the file. If the file expires, the client rejects the file.
         "meta": {                                               # The information of snapshot.json.
             "/snapshot.json": {
                 "hashes": {
