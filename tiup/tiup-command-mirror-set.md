@@ -31,7 +31,7 @@ The root certificate of each mirror is different, and the root certificate is th
 wget <mirror-addr>/root.json -O /path/to/local/root.json
 ```
 
-Perform a manual check and confirm that the root certificate is correct, and then switch the mirror by manually specifying the root certificate:
+Perform a manual check and ensure that the root certificate is correct, and then switch the mirror by manually specifying the root certificate:
 
 ```
 tiup mirror set <mirror-addr> -r /path/to/local/root.json
