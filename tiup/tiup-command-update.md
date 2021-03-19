@@ -4,7 +4,7 @@ title: tiup update
 
 # tiup update
 
-The `tiup update` command is used to update the installed components or itself.
+The `tiup update` command is used to update the installed components or TiUP itself.
 
 ## Syntax
 
@@ -13,7 +13,7 @@ tiup update [component1][:version] [component2..N] [flags]
 ```
 
 - `[component1]`: the name of the component to update.
-- `[version]`: the version to update. If omitted, it means updating to the latest stable version of the component.
+- `[version]`: the version to update. If this field is omitted, it means updating to the latest stable version of the component.
 - `[component2...N]`: specifies updating multiple components or versions. If no component is specified, which means `[component1][:version] [component2..N]` is empty, you need to use the `--all` or the `--self` option together.
 
 The update operation does not delete the old version. You can still specify using the old version during execution.
@@ -28,7 +28,7 @@ The update operation does not delete the old version. You can still specify usin
 
 ### --force
 
-- If the version of the specified component is already installed, the update operation is skipped by default. Specifying this option forcibly updates the installed version.
+- If the specified version of the component is already installed, the update operation is skipped by default. Specifying this option will have the installed version forcibly updated.
 - Data type: `BOOLEAN`
 - Default: `false`
 
@@ -46,5 +46,5 @@ The update operation does not delete the old version. You can still specify usin
 
 ## Outputs
 
-- If updates successfully, output `Updated successfully!`.
+- If the update is successful, `Updated successfully!` is output.
 - If target version does not exist, the `Error: version %s not supported by component %s` error is reported.
