@@ -14,9 +14,9 @@ When TiUP telemetry is enabled, usage information will be shared with PingCAP wh
 
 The information below will not be shared:
 
-- Accurate name of the cluster
-- Topology of the cluster
-- Configuration file of the cluster
+- The accurate name of the cluster
+- Cluster topology
+- Cluster configuration file
 
 TiUP uses the `tiup telemetry` command to control telemetry.
 
