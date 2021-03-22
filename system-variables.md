@@ -409,6 +409,13 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Default value: ON
 - This variable controls whether to record the execution information of each operator in the slow query log.
 
+### tidb_enable_dynamic_privileges
+
+- Scope: SESSION | GLOBAL
+- Default value: OFF
+- This variable is used to control whether the experimental feature [dynamic privileges](/privilege-management#dynamic-privileges) is enabled.
+- Dynamic privileges are intended to replace the `SUPER` privilege by implementing more fine-grained access to certain operations. For example, with dynamic privileges it is possible to grant access to perform `BACKUP` and `RESTORE` operations but not `SHOW PROCESSLIST`.
+
 ### tidb_enable_fast_analyze
 
 - Scope: SESSION | GLOBAL
