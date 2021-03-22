@@ -322,13 +322,15 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 - Scope: SESSION | GLOBAL
 - Default value: ON
-- This variable is used to set whether to disable the automatic retry of explicit transactions. The default value of `ON` means that transactions will not automatically retry in TiDB and `COMMIT` statements might return errors that need to be handled in the application layer.
+- This variable is used to set whether to disable the automatic retry of explicit optimistic transactions. The default value of `ON` means that transactions will not automatically retry in TiDB and `COMMIT` statements might return errors that need to be handled in the application layer.
 
     Setting the value to `OFF` means that TiDB will automatically retry transactions, resulting in fewer errors from `COMMIT` statements. Be careful when making this change, because it might result in lost updates.
 
     This variable does not affect automatically committed implicit transactions and internally executed transactions in TiDB. The maximum retry count of these transactions is determined by the value of `tidb_retry_limit`.
 
     For more details, see [limits of retry](/optimistic-transaction.md#limits-of-retry).
+
+    This variable only applies to optimistic transactions, not to pessimistic transactions. The number of retries for pessimistic transactions is controlled by [`max_retry_count`](/tidb-configuration-file.md#max-retry-count).
 
 ### tidb_distsql_scan_concurrency
 
@@ -435,6 +437,8 @@ Constraint checking is always performed in place for pessimistic transactions (d
     * `get_lock` and `release_lock` functions
     * `LOCK IN SHARE MODE` syntax
     * `SQL_CALC_FOUND_ROWS` syntax
+    * `CREATE TEMPORARY TABLE` syntax
+    * `DROP TEMPORARY TABLE` syntax
 
 > **Note:**
 >
@@ -556,6 +560,46 @@ For a system upgraded to v5.0.0-rc from an earlier version, if you have not modi
 - Default value: NO_PRIORITY
 - This variable is used to change the default priority for statements executed on a TiDB server. A use case is to ensure that a particular user that is performing OLAP queries receives lower priority than users performing OLTP queries.
 - You can set the value of this variable to `NO_PRIORITY`, `LOW_PRIORITY`, `DELAYED` or `HIGH_PRIORITY`.
+
+### tidb_gc_concurrency
+
+- Scope: GLOBAL
+- Default: -1
+- Specifies the number of threads in the [Resolve Locks](/garbage-collection-overview.md#resolve-locks) step of GC. A value of `-1` means that TiDB will automatically decide the number of garbage collection threads to use.
+
+### tidb_gc_enable
+
+- Scope: GLOBAL
+- Default value: ON
+- Enables garbage collection for TiKV. Disabling garbage collection will reduce system performance, as old versions of rows will no longer be purged.
+
+## tidb_gc_life_time
+
+- Scope: GLOBAL
+- Default: `"10m0s"`
+- The time limit during which data is retained for each GC, in the format of Go Duration. When a GC happens, the current time minus this value is the safe point.
+
+> **Note:**
+>
+> - In scenarios of frequent updates, a large value (days or even months) for `tidb_gc_life_time` may cause potential issues, such as:
+>     - Larger storage use
+>     - A large amount of history data may affect performance to a certain degree, especially for range queries such as `select count(*) from t`
+> - If there is any transaction that has been running longer than `tidb_gc_life_time`, during GC, the data since `start_ts` is retained for this transaction to continue execution. For example, if `tidb_gc_life_time` is configured to 10 minutes, among all transactions being executed, the transaction that starts earliest has been running for 15 minutes, GC will retain data of the recent 15 minutes.
+
+### tidb_gc_run_interval
+
+- Scope: GLOBAL
+- Default value: `"10m0s"`
+- Specifies the GC interval, in the format of Go Duration, for example, `"1h30m"`, and `"15m"`
+
+### tidb_gc_scan_lock_mode
+
+- Scope: GLOBAL
+- Default value: `PHYSICAL`
+- Possible values:
+    - `LEGACY`: Uses the old way of scanning, that is, disable Green GC.
+    - `PHYSICAL`: Uses the physical scanning method, that is, enable Green GC.
+- This parameter specifies the way of scanning locks in the Resolve Locks step of GC. When set to `LEGACY`, TiDB scans locks by Regions. The value `PHYSICAL` enables each TiKV node to bypass the Raft layer and directly scan data. This feature can effectively mitigate the impact of GC wakening up all Regions when the [Hibernate Region](/tikv-configuration-file.md#hibernate-regions-experimental) feature is enabled, thus improving the execution speed in the Resolve Locks step.
 
 ### tidb_general_log
 
@@ -716,6 +760,31 @@ For a system upgraded to v5.0.0-rc from an earlier version, if you have not modi
 - Scope: SESSION
 - Default value: 60
 - This variable is used to set the step of the Prometheus statement generated when querying `METRIC_SCHEMA`. The unit is second.
+
+### tidb_multi_statement_mode <span class="version-mark">New in v4.0.11</span>
+
+- Scope: SESSION | GLOBAL
+- Default value: OFF
+- Permitted values: OFF, ON, WARN
+- This variable controls whether to allow multiple queries to be executed in the same `COM_QUERY` call.
+- To reduce the impact of SQL injection attacks, TiDB now prevents multiple queries from being executed in the same `COM_QUERY` call by default. This variable is intended to be used as part of an upgrade path from earlier versions of TiDB. The following behaviors apply:
+
+| Client setting         | `tidb_multi_statement_mode` value | Multiple statements permitted? |
+|------------------------|-----------------------------------|--------------------------------|
+| Multiple Statements = ON  | OFF                               | Yes                            |
+| Multiple Statements = ON  | ON                                | Yes                            |
+| Multiple Statements = ON  | WARN                              | Yes                            |
+| Multiple Statements = OFF | OFF                               | No                             |
+| Multiple Statements = OFF | ON                                | Yes                            |
+| Multiple Statements = OFF | WARN                              | Yes (+warning returned)        |
+
+> **Note:**
+>
+> Only the default value of `OFF` can be considered safe. Setting `tidb_multi_statement_mode=ON` might be required if your application was specifically designed for an earlier version of TiDB. If your application requires multiple statement support, it is recommended to use the setting provided by your client library instead of the `tidb_multi_statement_mode` option. For example:
+>
+> * [go-sql-driver](https://github.com/go-sql-driver/mysql#multistatements) (`multiStatements`)
+> * [Connector/J](https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-reference-configuration-properties.html) (`allowMultiQueries`)
+> * PHP [mysqli](https://dev.mysql.com/doc/apis-php/en/apis-php-mysqli.quickstart.multiple-statement.html) (`mysqli_multi_query`)
 
 ### tidb_opt_agg_push_down
 
@@ -891,7 +960,7 @@ SET tidb_query_log_max_len = 20
 
 - Scope: SESSION | GLOBAL
 - Default value: 10
-- This variable is used to set the maximum number of the retries. When a transaction encounters retryable errors (such as transaction conflicts, very slow transaction commit, or table schema changes), this transaction is re-executed according to this variable. Note that setting `tidb_retry_limit` to `0` disables the automatic retry.
+- This variable is used to set the maximum number of the retries for optimistic transactions. When a transaction encounters retryable errors (such as transaction conflicts, very slow transaction commit, or table schema changes), this transaction is re-executed according to this variable. Note that setting `tidb_retry_limit` to `0` disables the automatic retry. This variable only applies to optimistic transactions, not to pessimistic transactions.
 
 ### tidb_row_format_version
 

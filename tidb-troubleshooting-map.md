@@ -129,7 +129,7 @@ Refer to [5 PD issues](#5-pd-issues).
 
   > **Note:**
   >
-  > The default threshold for a single SQL memory usage is `32GB` (in bytes, scope:`SESSION`). You can set this parameter by configuring `tidb_mem_quota_query`. You can also modify the `mem-quota-query` item (in bytes) in the configuration file by hot loading the configuration items.
+  > The default threshold for a single SQL memory usage is `1GB` (in bytes, scope:`SESSION`). You can set this parameter by configuring `tidb_mem_quota_query`. You can also modify the `mem-quota-query` item (in bytes) in the configuration file by hot loading the configuration items.
 
 - 3.2.3 Mitigate OOM issues
 
@@ -436,7 +436,7 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
 
     - Solution: Use the binlogctl tool to check whether each Drainer node is normal or not. This is to ensure that all Drainer nodes in the `online` state are working normally. If the state of a Drainer node is not consistent with its actual working status, use the binlogctl tool to change its state and then restart Pump. See the case [fail-to-notify-all-living-drainer](/tidb-binlog/handle-tidb-binlog-errors.md#fail-to-notify-all-living-drainer-is-returned-when-pump-is-started).
 
-- 6.1.9 Draienr reports the `gen update sqls failed: table xxx: row data is corruption []` error.
+- 6.1.9 Drainer reports the `gen update sqls failed: table xxx: row data is corruption []` error.
 
     - Trigger: The upstream performs DML operations on this table while performing `DROP COLUMN` DDL. This issue has been fixed in v3.0.6. See [case-820](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case820.md) in Chinese.
 
@@ -555,7 +555,7 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
 
     The transaction duration exceeds the GC lifetime (10 minutes by default).
 
-    You can increase the GC lifetime by modifying the `mysql.tidb` table. Generally, it is not recommended to modify this parameter, because changing it might cause many old versions to pile up if this transaction has a large number of `update` and `delete` statements.
+    You can increase the GC lifetime by modifying the [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time) system variable. Generally, it is not recommended to modify this parameter, because changing it might cause many old versions to pile up if this transaction has a large number of `UPDATE` and `DELETE` statements.
 
 - 7.1.2 `txn takes too much time`.
 
@@ -582,12 +582,10 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
 
 - 7.1.5 `distsql.go` reports `inconsistent index`.
 
-    The data index seems to be inconsistent. Run the `admin check table <TableName>` command on the table where the reported index is. If the check fails, close GC by running the following command, and [report a bug](https://github.com/pingcap/tidb/issues/new?labels=type%2Fbug&template=bug-report.md):
+    The data index seems to be inconsistent. Run the `admin check table <TableName>` command on the table where the reported index is. If the check fails, disable garbage collection by running the following command, and [report a bug](https://github.com/pingcap/tidb/issues/new?labels=type%2Fbug&template=bug-report.md):
 
     ```sql
-    begin;
-    update mysql.tidb set variable_value='72h' where variable_name='tikv_gc_life_time';
-    commit;
+    SET GLOBAL tidb_gc_enable = 0;
     ```
 
 ### 7.2 TiKV
