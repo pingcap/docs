@@ -8,7 +8,7 @@ After the business goes offline, if you want to release the machines occupied by
 
 - Stops the cluster.
 - For each service, delete its log directory, deployment directory, and data directory.
-- If the parent directory of the data director or deployment directory of each service is created by tiup-cluster, also delete it.
+- If the parent directory of the data directory or deployment directory of each service is created by tiup-cluster, also delete it.
 
 ## Syntax
 
