@@ -378,6 +378,11 @@ Configuration items related to performance.
 - Determines whether to enable `keepalive` in the TCP layer.
 - Default value: `true`
 
+### `tcp-no-delay`
+
+- Determines whether to enable `no delay` in the TCP layer.
+- Default value: `true`
+
 ### `cross-join`
 
 - Default value: `true`
