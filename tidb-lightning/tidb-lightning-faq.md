@@ -192,7 +192,7 @@ See also [How to properly restart TiDB Lightning?](#how-to-properly-restart-tidb
 
 ## Why does TiDB Lightning report the `could not find first pair, this shouldn't happen` error?
 
-This error occurs possibly because the number of files opened by TiDB Lightning exceeds the system limit when TiDB Lightning reads the sorted local files. In the Linux system, you can use the `ulimit -n` command to confirm whether the value of this system limit is too small. It is recommended that you adjust this value to `1000000` (`ulimit -n 1000000`) during Lightning import.
+This error occurs possibly because the number of files opened by TiDB Lightning exceeds the system limit when TiDB Lightning reads the sorted local files. In the Linux system, you can use the `ulimit -n` command to confirm whether the value of this system limit is too small. It is recommended that you adjust this value to `1000000` (`ulimit -n 1000000`) during TiDB Lightning import.
 
 ## Import speed is too slow
 
@@ -337,3 +337,18 @@ Currently, the limitation of TiDB cannot be bypassed. You can only ignore this t
 
 - If there are TiFlash nodes in the cluster, you can update the cluster to `v4.0.0-rc.2` or higher versions.
 - Temporarily disable TiFlash if you do not want to upgrade the cluster.
+
+## `tidb lightning encountered error: TiDB version too old, expected '>=4.0.0', found '3.0.18'`
+
+TiDB Lightning Local-backend only supports importing data to TiDB clusters of v4.0.0 and later versions. If you try to use Local-backend to import data to a v2.x or v3.x cluster, the above error is reported. At this time, you can modify the configuration to use Importer-backend or TiDB-backend for data import.
+
+Some `nightly` versions might be similar to v4.0.0-beta.2. These `nightly` versions of TiDB Lightning actually support Local-backend. If you encounter this error when using a `nightly` version, you can skip the version check by setting the configuration `check-requirements = false`. Before setting this parameter, make sure that the configuration of TiDB Lightning supports the corresponding version; otherwise, the import might fail.
+
+## `restore table test.district failed: unknown columns in header [...]`
+
+This error occurs usually because the CSV data file does not contain a header (the first row is not column names but data). Therefore, you need to add the following configuration to the TiDB Lightning configuration file:
+
+```
+[mydumper.csv]
+header = false
+```

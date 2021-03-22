@@ -141,6 +141,11 @@ minmax_index_cache_size = 5368709120
     ## are executed. The default value is 0 (in bytes), which means no limit.
     max_memory_usage_for_all_queries = 0
 
+    ## New in v4.0.11. This item specifies the maximum number of cop requests that TiFlash Coprocessor executes at the same time. If the number of requests exceeds the specified value, the exceeded requests will queue. If the configuration value is set to 0 or not set, the default value is used, which is twice the number of physical cores.
+    cop_pool_size = 0
+    ## New in v4.0.11. This item specifies the maximum number of batch requests that TiFlash Coprocessor executes at the same time. If the number of requests exceeds the specified value, the exceeded requests will queue. If the configuration value is set to 0 or not set, the default value is used, which is twice the number of physical cores.
+    batch_cop_pool_size = 0
+
 ## Security settings take effect starting from v4.0.5.
 [security]
     ## Path of the file that contains a list of trusted SSL CAs. If set, the following settings
@@ -150,6 +155,11 @@ minmax_index_cache_size = 5368709120
     # cert_path = "/path/to/tiflash-server.pem"
     ## Path of the file that contains X509 key in PEM format.
     # key_path = "/path/to/tiflash-server-key.pem"
+
+    ## New in v4.0.10. This configuration item enables or disables log redaction. If the configuration value
+    ## is set to `true`, all user data in the log will be replaced by `?`.
+    ## Note that you also need to set `security.redact-info-log` for tiflash-learner's logging in tiflash-learner.toml.
+    # redact_info_log = false
 ```
 
 ### Configure the `tiflash-learner.toml` file
@@ -168,6 +178,11 @@ minmax_index_cache_size = 5368709120
     ## The default value is "4ms".
     ## If you set it to 0ms, the optimization is disabled.
     store-batch-retry-recv-timeout = "4ms"
+[security]
+    ## New in v4.0.10. This configuration item enables or disables log redaction.
+    ## If the configuration value is set to true,
+    ## all user data in the log will be replaced by ?. The default value is false.
+    redact-info-log = false
 ```
 
 In addition to the items above, other parameters are the same with those of TiKV. Note that the configuration items in `tiflash.toml [flash.proxy]` will override the overlapping parameters in `tiflash-learner.toml`; The `label` whose key is `engine` is reserved and cannot be configured manually.

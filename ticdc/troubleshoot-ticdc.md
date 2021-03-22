@@ -8,6 +8,10 @@ aliases: ['/docs/stable/ticdc/troubleshoot-ticdc/','/docs/v4.0/ticdc/troubleshoo
 
 This document introduces the common issues and errors that you might encounter when using TiCDC, and the corresponding maintenance and troubleshooting methods.
 
+> **Note:**
+>
+> In this document, the PD address specified in `cdc cli` commands is `--pd=http://10.0.10.25:2379`. When you use the command, replace the address with your actual PD address.
+
 ## How do I choose `start-ts` when creating a task in TiCDC?
 
 The `start-ts` of a replication task corresponds to a Timestamp Oracle (TSO) in the upstream TiDB cluster. TiCDC requests data from this TSO in a replication task. Therefore, the `start-ts` of the replication task must meet the following requirements:
@@ -58,7 +62,7 @@ If the replication task is interrupted for a long time and a large volume of new
 {{< copyable "shell-regular" >}}
 
 ```shell
-cdc cli changefeed update -c [changefeed-id] --sort-engine="unified" --sort-dir="/data/cdc/sort"
+cdc cli changefeed update -c [changefeed-id] --sort-engine="unified" --sort-dir="/data/cdc/sort" --pd=http://10.0.10.25:2379
 ```
 
 > **Note:**
@@ -115,7 +119,7 @@ If the downstream is a special MySQL environment (a public cloud RDS or some MyS
     {{< copyable "shell-regular" >}}
 
     ```shell
-    cdc cli changefeed create --sink-uri="mysql://root@127.0.0.1:3306/?time-zone=CST"
+    cdc cli changefeed create --sink-uri="mysql://root@127.0.0.1:3306/?time-zone=CST" --pd=http://10.0.10.25:2379
     ```
 
     > **Note:**
@@ -300,9 +304,9 @@ TiCDC provides partial support for large transactions (more than 5 GB in size). 
 
 If you encounter an error above, it is recommended to use BR to restore the incremental data of large transactions. The detailed operations are as follows:
 
-1. Record the `checkpoint-ts` of the changefeed that is terminated due to large transactions, use this TSO as the `--lastbackupts` of the BR incremental backup, and execute [incremental data backup](/br/backup-and-restore-tool.md#back-up-incremental-data).
+1. Record the `checkpoint-ts` of the changefeed that is terminated due to large transactions, use this TSO as the `--lastbackupts` of the BR incremental backup, and execute [incremental data backup](/br/use-br-command-line-tool.md#back-up-incremental-data).
 2. After backing up the incremental data, you can find a log record similar to `["Full backup Failed summary : total backup ranges: 0, total success: 0, total failed: 0"] [BackupTS=421758868510212097]` in the BR log output. Record the `BackupTS` in this log.
-3. [Restore the incremental data](/br/backup-and-restore-tool.md#restore-incremental-data).
+3. [Restore the incremental data](/br/use-br-command-line-tool.md#restore-incremental-data).
 4. Create a new changefeed and start the replication task from `BackupTS`.
 5. Delete the old changefeed.
 
@@ -316,23 +320,31 @@ If you encounter an error above, it is recommended to use BR to restore the incr
 
 ## After I upgrade the TiCDC cluster to v4.0.8, the `[CDC:ErrKafkaInvalidConfig]Canal requires old value to be enabled` error is reported when I execute a changefeed
 
-Since v4.0.8, if the `canal` or `canal-json` protocol is used for output in a changefeed, TiCDC checks whether the old value feature is also enabled. If you disable the old value feature, this error is reported. To fix the error, take the following steps:
+Since v4.0.8, if the `canal` or `maxwell` protocol is used for output in a changefeed, TiCDC enables the old value feature automatically. However, if you have upgraded TiCDC from an earlier version to v4.0.8 or later, when the changefeed uses the `canal` or `maxwell` protocol and the old value feature is disabled, this error is reported. To fix the error, take the following steps:
 
 1. Set the value of `enable-old-value` in the changefeed configuration file to `true`.
-2. Execute `cdc cli changefeed update` to update the original changefeed configuration.
+2. Execute `cdc cli changefeed pause` to pause the replication task.
 
     {{< copyable "shell-regular" >}}
 
     ```shell
-    cdc cli changefeed update -c test-cf --sink-uri="mysql://127.0.0.1:3306/?max-txn-row=20&worker-number=8" --config=changefeed.toml
+    cdc cli changefeed pause -c test-cf --pd=http://10.0.10.25:2379
     ```
 
-3. Execute `cdc cli changfeed resume` to resume the replication task.
+3. Execute `cdc cli changefeed update` to update the original changefeed configuration.
 
     {{< copyable "shell-regular" >}}
 
     ```shell
-    cdc cli changefeed resume -c test-cf
+    cdc cli changefeed update -c test-cf --pd=http://10.0.10.25:2379 --sink-uri="mysql://127.0.0.1:3306/?max-txn-row=20&worker-number=8" --config=changefeed.toml
+    ```
+
+4. Execute `cdc cli changfeed resume` to resume the replication task.
+
+    {{< copyable "shell-regular" >}}
+
+    ```shell
+    cdc cli changefeed resume -c test-cf --pd=http://10.0.10.25:2379
     ```
 
 ## How much PD storage does TiCDC use?
