@@ -176,7 +176,7 @@ mysql> SELECT * FROM t1;
 
 - Scope: SESSION | GLOBAL
 - Default value: ""
-- This variable is used to specify a storage engine. If the execution of an SQL statement fails due to a failure of the specified storage engine, TiDB retries executing this SQL statement with TiKV. This variable can be set to "" or "tiflash". When this variable is set to "tiflash", if the execution of an SQL statement fails due to a failure of TiFlash, TiDB retries executing the SQL statement with TiKV.
+- This variable is used to specify a list of storage engines that might fall back to TiKV. If the execution of a SQL statement fails due to a failure of the specified storage engine in the list, TiDB retries executing this SQL statement with TiKV. This variable can be set to "" or "tiflash". When this variable is set to "tiflash", if the execution of a SQL statement fails due to a failure of TiFlash, TiDB retries executing this SQL statement with TiKV.
 
 ### tidb_allow_remove_auto_inc <span class="version-mark">New in v2.1.18 and v3.0.4</span>
 
