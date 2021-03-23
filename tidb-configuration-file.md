@@ -416,10 +416,21 @@ Configuration items related to performance.
 
 The Plan Cache configuration of the `PREPARE` statement.
 
+<<<<<<< HEAD
 ### `enabled`
 
 - Determines whether to enable Plan Cache of the `PREPARE` statement.
 - Default value: `true`
+=======
+> **Warning:**
+>
+> This is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
+
+### `enabled`
+
+- Determines whether to enable Plan Cache of the `PREPARE` statement.
+- Default value: `false`
+>>>>>>> bbd7e20f... Revert "prepared plan cache: Enable by default (#4036)" (#5007)
 
 ### `capacity`
 
