@@ -145,7 +145,11 @@ tikv-ctl --host=ip:port modify-tikv-config -m server -n gc.max_write_bytes_per_s
 
 ## GC in Compaction Filter
 
+<<<<<<< HEAD
 Since v5.0.0-rc, TiDB introduces the mechanism of GC in Compaction Filter. Based on the distributed GC mode, the mechanism uses the compaction process of RocksDB, instead of a separate GC worker thread, to run GC. This new GC mechanism helps to avoid extra disk read caused by GC. Also, after clearing the obsolete data, it avoids a large number of left tombstone marks which degrade the sequential scan performance. This GC mechanism is disabled by default. The following example shows how to enable the mechanism in the TiKV configuration file:
+=======
+Based on the `DISTRIBUTED` GC mode, the mechanism of GC in Compaction Filter uses the compaction process of RocksDB, instead of a separate GC worker thread, to run GC. This new GC mechanism helps to avoid extra disk read caused by GC. Also, after clearing the obsolete data, it avoids a large number of left tombstone marks which degrade the sequential scan performance. The following example shows how to enable the mechanism in the TiKV configuration file:
+>>>>>>> 6b8230cb... enable compaction filter by default  (#5072)
 
 {{< copyable "" >}}
 
