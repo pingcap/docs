@@ -321,7 +321,7 @@ Configuration items related to scheduling
 > Currently, Joint Consensus is an experimental feature. It is **NOT** recommended that you use it in the production environment.
 
 + Controls whether to use Joint Consensus for replica scheduling. If this configuration is disabled, PD schedules one replica at a time.
-+ Default value: `false` for v5.0.0-rc, and `true` for v5.0.0 GA.
++ Default value: `false` for v5.0 RC, and `true` for v5.0 GA.
 
 ## `replication`
 
