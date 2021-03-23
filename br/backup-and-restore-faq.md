@@ -86,10 +86,10 @@ No. BR does not support in-place full recovery of some historical backup.
 
 To get the `commitTs` field of the last BR backup, run the `kubectl -n ${namespace} get bk ${name}` command using kubectl. You can use the content of this field as `--lastbackupts`.
 
-## After BR restores the archive, do I need to execute the `ANALYZE` statement in the table to update the statistics left by TiDB on the table and index?
+## After BR restores the backup data, do I need to execute the `ANALYZE` statement on the table to update the statistics left by TiDB on the table and index?
 
-BR does not back up statistics (except for v4.0.9). Therefore, after restoring the backup data, you need to manually execute `ANALYZE TABLE` or wait for TiDB to automatically execute `ANALYZE`.
+BR does not back up statistics (except in v4.0.9). Therefore, after restoring the backup data, you need to manually execute `ANALYZE TABLE` or wait for TiDB to automatically execute `ANALYZE`.
 
-BR v4.0.9 backup statistics makes BR consume too much memory. To ensure the normal backup process, the backup statistics feature is disabled by default starting from v4.0.10.
+In v4.0.9, BR backs up statistics by default, which consumes too much memory. To ensure that the backup process goes well, the backup for statistics is disabled by default starting from v4.0.10.
 
 If you do not execute `ANALYZE` on the table, TiDB fails to select the most optimized execution plan due to inaccurate statistics. If query performance is not a key concern, you can ignore `ANALYZE`.
