@@ -426,8 +426,6 @@ The Plan Cache configuration of the `PREPARE` statement.
 >
 > This is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
 
-### `enabled`
-
 - Determines whether to enable Plan Cache of the `PREPARE` statement.
 - Default value: `false`
 
