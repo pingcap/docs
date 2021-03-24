@@ -1155,4 +1155,4 @@ This variable is an alias for _transaction_isolation_.
 
 - Scope: SESSION | GLOBAL
 - Default value: 0
-- This variable controls whether to enable the Apply operator concurrency, and the number of concurrency is controlled by the `tidb_executor_concurrency` variable. The Apply operator is used to process related subqueries and has no concurrency by default, so the execution speed is slow. Enable the Apply concurrency switch can increase concurrency and speed up execution. Currently, it defaults to be disabled.
+- This variable controls whether to enable the Apply operator concurrency, and the number of concurrency is controlled by the `tidb_executor_concurrency` variable. The Apply operator is used to process correlated subqueries and has no concurrency by default, so the execution speed is slow. Enable the Apply concurrency switch can increase concurrency and speed up execution. Currently, this variable defaults to be disabled.
