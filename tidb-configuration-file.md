@@ -416,7 +416,6 @@ Configuration items related to performance.
 
 The Plan Cache configuration of the `PREPARE` statement.
 
-<<<<<<< HEAD
 ### `enabled`
 
 > **Warning:**
