@@ -430,7 +430,6 @@ The Plan Cache configuration of the `PREPARE` statement.
 
 - Determines whether to enable Plan Cache of the `PREPARE` statement.
 - Default value: `false`
->>>>>>> bbd7e20f... Revert "prepared plan cache: Enable by default (#4036)" (#5007)
 
 ### `capacity`
 
