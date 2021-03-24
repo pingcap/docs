@@ -344,7 +344,7 @@ Other requirements for the target machine:
 - If you look for analytics solution with TiFlash:
 
     - [Use TiFlash](/tiflash/use-tiflash.md)
-    - [TiFlash Overfllow](/tiflash/tiflash-overview.md)
+    - [TiFlash Overview](/tiflash/tiflash-overview.md)
 
 > **Note:**
 >
