@@ -96,9 +96,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
 
 6. Access the [TiDB Dashboard](/dashboard/dashboard-intro.md) at <http://127.0.0.1:2379/dashboard>. The default username is `root`, with an empty password.
 
-7. Load data to TiFlash for analysis:
-
-    - See also [Use TiFlash](/tiflash/use-tiflash.md).
+7. (Optional) [Load data to TiFlash](/tiflash/use-tiflash.md) for analysis.
 
 8. After the test, you can clean the cluster by taking the following steps:
 
