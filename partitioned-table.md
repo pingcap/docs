@@ -10,7 +10,7 @@ This document introduces TiDB's implementation of partitioning.
 
 ## Partitioning types
 
-This section introduces the types of partitioning which are available in TiDB. Currently, TiDB supports [Range partitioning](#range-partitioning), [List partitioning](#list-partitioning), [List COLUMNS partitioning](#list-columns-partitioning), and [Hash partitioning](#hash-partitioning).
+This section introduces the types of partitioning in TiDB. Currently, TiDB supports [Range partitioning](#range-partitioning), [List partitioning](#list-partitioning), [List COLUMNS partitioning](#list-columns-partitioning), and [Hash partitioning](#hash-partitioning).
 
 Range partitioning, List partitioning and List COLUMNS partitioning are used to resolve the performance issues caused by a large amount of deletions in the application, and support fast drop partition operations. Hash partitioning is used to scatter the data when there are a large amount of writes.
 
@@ -178,7 +178,7 @@ Before creating a List partitioned table, you need to set the value of the sessi
 set @@session.tidb_enable_table_partition = ON
 ```
 
-List partitioning is similar to Range partitioning. Unlike Range partitioning, in List partitioning, each partition contains rows for which the partitioning expression value belongs to a given value list. This value list defined for each partition has any number of values but cannot have duplicate values. You can use the `PARTITION ... VALUES IN (...)` clause to define these value lists.
+List partitioning is similar to Range partitioning. Unlike Range partitioning, in List partitioning, the partitioning expression values for all rows in each partition are in a given value set. This value set defined for each partition can have any number of values but cannot have duplicate values. You can use the `PARTITION ... VALUES IN (...)` clause to define a value set.
 
 Suppose that you want to create a personnel record table. You can create a table as follows:
 
@@ -225,7 +225,7 @@ After creating the partitions as above, you can easily add or delete records rel
 
 You can also execute `ALTER TABLE employees DROP PARTITION pEast` to delete all related rows, but this statement also deletes the `pEast` partition from the table definition. In this situation, you must execute the `ALTER TABLE ... ADD PARTITION` statement to recover the original partitioning scheme of the table.
 
-Unlike Range partitioning, List partitioning does not have a similar `MAXVALUE` partition to store all values that do not belong to other partitions. Instead, all expected values of the partition expression must be included in the `PARTITION ... VALUES IN (...)` clause. If the value to be inserted in an `INSERT` statement does not match the value of any partition, the statement fails to execute and an error is reported. See the following example:
+Unlike Range partitioning, List partitioning does not have a similar `MAXVALUE` partition to store all values that do not belong to other partitions. Instead, all expected values of the partition expression must be included in the `PARTITION ... VALUES IN (...)` clause. If the value to be inserted in an `INSERT` statement does not match the column value of any partition, the statement fails to execute and an error is reported. See the following example:
 
 ```sql
 test> CREATE TABLE t (
