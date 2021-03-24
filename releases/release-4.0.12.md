@@ -48,7 +48,7 @@ TiDB version: 4.0.12
         - No release note (it's not released yet.) [#854](https://github.com/pingcap/br/pull/854)
         - Fix the bug that importer may ignore write rows error if open engine returns `file exists` error [#848](https://github.com/pingcap/br/pull/848)
 
-## Others
+## 请判断下面未分类 note，对下面 note 进行分类并移动到以上三个分类部分中
 
 + TiKV
 
