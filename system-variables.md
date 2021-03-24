@@ -464,7 +464,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - This variable is used to control if tables can be created with invalid definitions of type `DOUBLE`. This setting is intended to provide an upgrade path from earlier versions of TiDB, which were less strict in validating types.
 - The default value of `ON` is compatible with MySQL.
 
-For example, the type `DOUBLE(10)` is now considered invalid because the precision of floating point types is not guaranteed. After changing `tidb_enable_strict_double_type_check` to `OFF` the table is created:
+For example, the type `DOUBLE(10)` is now considered invalid because the precision of floating point types is not guaranteed. After changing `tidb_enable_strict_double_type_check` to `OFF`, the table is created:
 
 ```sql
 mysql> CREATE TABLE t1 (id int, c double(10));
