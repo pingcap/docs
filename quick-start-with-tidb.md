@@ -339,7 +339,7 @@ Other requirements for the target machine:
     - [Deploy TiDB offline using TiUP](/production-offline-deployment-using-tiup.md)
     - [Deploy TiDB on Cloud using TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.1)
 
-- If you look for analytics solution with TiFlash:
+- If you're looking for analytics solution with TiFlash:
 
     - [Use TiFlash](/tiflash/use-tiflash.md)
     - [TiFlash Overview](/tiflash/tiflash-overview.md)
