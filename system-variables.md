@@ -1156,9 +1156,3 @@ This variable is an alias for _transaction_isolation_.
 - Scope: SESSION | GLOBAL
 - Default value: ON
 - This variable controls whether to use the high precision mode when computing the window functions.
-
-### tidb_enable_parallel_apply <span class="version-mark">New in v5.0 GA</span>
-
-- Scope: SESSION | GLOBAL
-- Default value: 0
-- This variable controls whether to enable the Apply operator concurrency, and the number of concurrency is controlled by the `tidb_executor_concurrency` variable. The Apply operator is used to process correlated subqueries and has no concurrency by default, so the execution speed is slow. Enable the Apply concurrency switch can increase concurrency and speed up execution. Currently, this variable defaults to be disabled.
