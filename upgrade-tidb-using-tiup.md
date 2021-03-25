@@ -13,8 +13,8 @@ If your cluster to upgrade is v3.1 or an earlier version (v3.0 or v2.1), you nee
 ## Upgrade caveat
 
 - After the upgrade, rolling back to 4.0 or earlier versions is not supported.
-- For the v4.0 cluster managed using TiDB Ansible, you need to import the cluster to TiUP (`tiup cluster`) for new management according to [Upgrade TiDB Using TiUP (v4.0)](/upgrade-tidb-using-tiup#import-tidb-ansible-and-the-inventoryini-configuration-to-tiup). Then you can upgrade the cluster to v5.0 according to this document.
-- To update versions earlier than 3.0 to 5.0, first update this version to 3.0 using [TiDB Ansible](https://docs.pingcap.com/tidb/v3.0/upgrade-tidb-using-ansible), use TiUP (`tiup cluster`) to import the TiDB Ansible configuration and, update the 3.0 version to 4.0 according to [Upgrade TiDB Using TiUP (v4.0)](/upgrade-tidb-using-tiup#import-tidb-ansible-and-the-inventoryini-configuration-to-tiup). Then you can upgrade the cluster to v5.0 according to this document.
+- For the v4.0 cluster managed using TiDB Ansible, you need to import the cluster to TiUP (`tiup cluster`) for new management according to [Upgrade TiDB Using TiUP (v4.0)](https://docs.pingcap.com/tidb/v4.0/upgrade-tidb-using-tiup#import-tidb-ansible-and-the-inventoryini-configuration-to-tiup). Then you can upgrade the cluster to v5.0 according to this document.
+- To update versions earlier than 3.0 to 5.0, first update this version to 3.0 using [TiDB Ansible](https://docs.pingcap.com/tidb/v3.0/upgrade-tidb-using-ansible), use TiUP (`tiup cluster`) to import the TiDB Ansible configuration and, update the 3.0 version to 4.0 according to [Upgrade TiDB Using TiUP (v4.0)](https://docs.pingcap.com/tidb/v4.0/upgrade-tidb-using-tiup#import-tidb-ansible-and-the-inventoryini-configuration-to-tiup). Then you can upgrade the cluster to v5.0 according to this document.
 - Support upgrading the versions of TiDB Binlog, TiCDC, TiFlash, and other components.
 
 > **Note:**
