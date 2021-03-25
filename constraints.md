@@ -268,6 +268,7 @@ ALTER TABLE t5 DROP PRIMARY KEY;
 ```
 Query OK, 0 rows affected (0.10 sec)
 ```
+
 For more details about the primary key of `CLUSTERED`, refer to [clustered index](/clustered-indexes.md).
 
 ## FOREIGN KEY
