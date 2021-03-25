@@ -96,7 +96,7 @@ The TiDB configuration file supports more options than command-line parameters. 
 
 > **Note:**
 >
-> This configuration item no longer takes effect. If you need to add or delete the primary key, use `NONCLUSTERED` instead. For more details about the primary key of `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
+> This configuration item no longer takes effect. If you need to add or delete the primary key, use `NONCLUSTERED` instead. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
 
 ### `server-version`
 

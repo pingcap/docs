@@ -269,7 +269,7 @@ ALTER TABLE t5 DROP PRIMARY KEY;
 Query OK, 0 rows affected (0.10 sec)
 ```
 
-For more details about the primary key of `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
+For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
 
 ## FOREIGN KEY
 
