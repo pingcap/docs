@@ -168,7 +168,7 @@ The global variables associated with the `CREATE INDEX` statement are `tidb_ddl_
 
 * `FULLTEXT`, `HASH` and `SPATIAL` indexes are not supported.
 * Descending indexes are not supported (similar to MySQL 5.7).
-* Adding the primary key of the `CLUSTERED` type to a table is not supported. For more details about the primary key of `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
+* Adding the primary key of the `CLUSTERED` type to a table is not supported. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
 
 ## See also
 
