@@ -795,6 +795,6 @@ Unified sorter is the sorting engine in TiCDC. This feature is enabled by defaul
 
 > **Note:**
 >
-> + Use the unified sorter with caution if your servers use mechanical hard drives or other storage devices that have latency or bottlenecks in throughput.
-> + The total free capacity of hard drives must be greater than or equal to 128G. If you need to replicate a large amount of historical data, make sure that the free capacity of each node is greater than or equal to the the size of incremental data that needs to be replicated.
-> + Unified sorter is enabled by default. If your servers do not match the above requirements and want to disenable the unified sorter, you need to manually set `sort-engine` to `memory` for the changefeed.
+> + If your servers use mechanical hard drives or other storage devices that have latency or bottlenecks in throughput, use the unified sorter with caution.
+> + The total free capacity of hard drives must be greater than or equal to 128G. If you need to replicate a large amount of historical data, make sure that the free capacity of each node is greater than or equal to the size of incremental data that needs to be replicated.
+> + Unified sorter is enabled by default. If your servers do not match the above requirements and you want to disable the unified sorter, you need to manually set `sort-engine` to `memory` for the changefeed.
