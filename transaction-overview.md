@@ -325,7 +325,7 @@ Two transactions with causal consistency enabled have the following characterist
 
 + [Transactions with potential causal relationship have the consistent logical order and physical commit order](#transactions-with-potential-causal-relationship-have-the-consistent-logical-order-and-physical-commit-order)
 + [Transactions with no causal relationship do not guarantee consistent logical order and physical commit order](#transactions-with-no-causal-relationship-do-not-guarantee-consistent-logical-order-and-physical-commit-order)
-+ [Reads without lock do not create causal relationship](#reads-with-no-lock-do-not-create-causal-relationship)
++ [Reads without lock do not create causal relationship](#reads-without-lock-do-not-create-causal-relationship)
 
 ### Transactions with potential causal relationship have the consistent logical order and physical commit order
 
