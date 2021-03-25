@@ -47,4 +47,4 @@ TiDB Lightning also supports using TiDB-backend for data import. In this mode, `
 
 > **Note：**
 >
-> TiDB Lightning does not support importing data into tables with TiFlash replicas. Make sure to remove all TiFlash replcas before importing data. You can add TiFlash replcas back after importing finished.
+> TiDB Lightning does not support importing data into tables with TiFlash replicas. Make sure to remove all TiFlash replcas before importing data. You can add TiFlash replicas back after import is finished.
