@@ -71,6 +71,33 @@ When you analyze regular columns, you can use the `tidb_distsql_scan_concurrency
 
 When you analyze index columns, you can use the `tidb_index_serial_scan_concurrency` parameter to control the number of Region to be read at one time. The default value is `1`.
 
+<<<<<<< HEAD
+=======
+### View `ANALYZE` state
+
+When executing the `ANALYZE` statement, you can view the current state of `ANALYZE` using the following SQL statement:
+
+{{< copyable "sql" >}}
+
+```sql
+SHOW ANALYZE STATUS [ShowLikeOrWhere]
+```
+
+This statement returns the state of `ANALYZE`. You can use `ShowLikeOrWhere` to filter the information you need.
+
+Currently, the `SHOW ANALYZE STATUS` statement returns the following 7 columns:
+
+| Syntax Element | Description            |
+| :-------- | :------------- |
+| table_schema  |  The database name    |
+| table_name | The table name |
+| partition_name| The partition name |
+| job_info | The task information. The element includes index names when index analysis is performed. |
+| row_count | The number of rows that have been analyzed |
+| start_time | The time at which the task starts |
+| state | The state of a task, including `pending`, `running`, `finished`, and `failed` |
+
+>>>>>>> 0047027b... Update statistics.md to remove the duplicate the (#5112)
 ## View statistics
 
 You can view the statistics status using the following statements.
