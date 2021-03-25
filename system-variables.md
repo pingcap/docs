@@ -1151,7 +1151,7 @@ This variable is an alias for _transaction_isolation_.
 - Default value: ON
 - This variable controls whether to use the high precision mode when computing the window functions.
 
-### `tidb_enable_parallel_apply` <span class="version-mark">New in v5.0 GA</span>
+### tidb_enable_parallel_apply <span class="version-mark">New in v5.0 GA</span>
 
 - Scope: SESSION | GLOBAL
 - Default value: 0
