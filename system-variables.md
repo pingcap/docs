@@ -178,6 +178,12 @@ mysql> SELECT * FROM t1;
 - Default value: ON
 - This variable controls whether to use the MPP mode of TiFlash to query data. If the value is set to ON, TiDB automatically determines through the optimizer whether to choose MPP to execute queries. MPP is a distributed computing framework provided by the TiFlash engine, which allows data exchange between nodes and provides high-performance, high-throughput SQL algorithms.
 
+### tidb_allow_fallback_to_tikv <span class="version-mark">New in v5.0 GA</span>
+
+- Scope: SESSION | GLOBAL
+- Default value: ""
+- This variable is used to specify a list of storage engines that might fall back to TiKV. If the execution of a SQL statement fails due to a failure of the specified storage engine in the list, TiDB retries executing this SQL statement with TiKV. This variable can be set to "" or "tiflash". When this variable is set to "tiflash", if the execution of a SQL statement fails due to a failure of TiFlash, TiDB retries executing this SQL statement with TiKV.
+
 ### tidb_allow_remove_auto_inc <span class="version-mark">New in v2.1.18 and v3.0.4</span>
 
 - Scope: SESSION
@@ -474,6 +480,30 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Scope: SESSION | GLOBAL
 - Default value: ON (the value of the default configuration file)
 - This variable is used to control whether to enable the statement summary feature. If enabled, SQL execution information like time consumption is recorded to the `information_schema.STATEMENTS_SUMMARY` system table to identify and troubleshoot SQL performance issues.
+
+### tidb_enable_strict_double_type_check <span class="version-mark">New in v5.0.0-rc</span>
+
+- Scope: SESSION | GLOBAL
+- Default value: ON
+- This variable is used to control if tables can be created with invalid definitions of type `DOUBLE`. This setting is intended to provide an upgrade path from earlier versions of TiDB, which were less strict in validating types.
+- The default value of `ON` is compatible with MySQL.
+
+For example, the type `DOUBLE(10)` is now considered invalid because the precision of floating point types is not guaranteed. After changing `tidb_enable_strict_double_type_check` to `OFF`, the table is created:
+
+```sql
+mysql> CREATE TABLE t1 (id int, c double(10));
+ERROR 1149 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use
+
+mysql> SET tidb_enable_strict_double_type_check = 'OFF';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> CREATE TABLE t1 (id int, c double(10));
+Query OK, 0 rows affected (0.09 sec)
+```
+
+> **Note:**
+> 
+> This setting only applies to the type `DOUBLE` since MySQL permits precision for `FLOAT` types. This behavior is deprecated starting with MySQL 8.0.17, and it is not recommended to specify precision for either `FLOAT` or `DOUBLE` types.
 
 ### tidb_enable_table_partition
 
@@ -1077,16 +1107,6 @@ SET tidb_slow_log_threshold = 200;
 - Scope: INSTANCE | GLOBAL
 - Default value: 0
 - This variable is used to limit the maximum number of requests TiDB can send to TiKV at the same time. 0 means no limit.
-
-### tidb_track_aggregate_memory_usage <span class="version-mark">New in v5.0.0-rc</span>
-
-> **Warning:**
->
-> `tidb_track_aggregate_memory_usage` is currently an experimental feature. It is not recommended to use this feature in the production environment.
-
-- Scope: SESSION | GLOBAL
-- Default value: OFF
-- This variable controls whether to track the memory usage of the aggregate function. When you enable this feature, TiDB counts the memory usage of the aggregate function, which might cause the overall SQL memory statistics to exceed the threshold [`mem-quota-query`](/tidb-configuration-file.md#mem-quota-query), and then be affected by the behavior defined by [`oom-action`](/tidb-configuration-file.md#oom-action).
 
 ### tidb_txn_mode
 
