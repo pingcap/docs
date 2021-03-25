@@ -44,3 +44,7 @@ The complete import process is as follows:
 If the target cluster of data import is v3.x or earlier versions, you need to use the Importer-backend to import data. In this mode, `tidb-lightning` sends the parsed KV pairs to `tikv-importer` via gRPC and `tikv-importer` imports the data.
 
 TiDB Lightning also supports using TiDB-backend for data import. In this mode, `tidb-lightning` transforms data into `INSERT` SQL statements and directly executes them on the target cluster. See [TiDB Lightning Backends](/tidb-lightning/tidb-lightning-backends.md) for details.
+
+> **Note：**
+>
+> TiDB Lightning does not support importing data into tables with TiFlash replicas. Make sure to remove all TiFlash replcas before importing data. You can add TiFlash replcas back after importing finished.
