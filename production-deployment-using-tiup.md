@@ -140,8 +140,8 @@ After sending the package to the control machine of the target cluster, install 
 {{< copyable "shell-regular" >}}
 
 ```bash
-tar xzvf tidb-community-server-${version}-linux-amd64.tar.gz
-sh tidb-community-server-${version}-linux-amd64/local_install.sh
+tar xzvf tidb-community-server-${version}-linux-amd64.tar.gz && \
+sh tidb-community-server-${version}-linux-amd64/local_install.sh && \
 source /home/tidb/.bash_profile
 ```
 
@@ -195,8 +195,6 @@ alertmanager_servers:
 ```
 
 The following examples cover six common scenarios. You need to modify the configuration file (named `topology.yaml`) according to the topology description and templates in the corresponding links. For other scenarios, edit the configuration template accordingly.
-
-The following topology documents provide a cluster configuration template for each of the following common scenarios:
 
 - [Minimal deployment topology](/minimal-deployment-topology.md)
 

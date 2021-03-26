@@ -83,9 +83,9 @@ Now, the offline mirror has been upgraded successfully. If an error occurs durin
 
 > **Note:**
 >
-> Skip this step if the one of the following situations applies:
+> Skip this step if one of the following situations applies:
 >
-> + You have not modify the configuration parameters of the original cluster. Or you have modified the configuration parameters using `tiup cluster` but no more modification is needed.
+> + You have not modified the configuration parameters of the original cluster. Or you have modified the configuration parameters using `tiup cluster` but no more modification is needed.
 > + After the upgrade, you want to use v5.0's default parameter values for the unmodified configuration items.
 
 1. Enter the `vi` editing mode to edit the topology file:
@@ -117,7 +117,7 @@ tiup cluster check <cluster-name> --cluster
 After the command is executed, the "Region status" check result will be output.
 
 + If the result is "All Regions are healthy", all Regions in the current cluster are healthy and you can continue the upgrade.
-+ If the result is "Regions are not fully healthy: m miss-peer, n pending-peer" with the "Please fix unhealthy regions before other operations." reminder, some Regions in the current cluster are abnormal. You need to troubleshoot the anomalies until the check result becomes "All Regions are healthy". Then you can continue the upgrade.
++ If the result is "Regions are not fully healthy: m miss-peer, n pending-peer" with the "Please fix unhealthy regions before other operations." prompt, some Regions in the current cluster are abnormal. You need to troubleshoot the anomalies until the check result becomes "All Regions are healthy". Then you can continue the upgrade.
 
 ## Perform a rolling upgrade to the TiDB cluster
 
