@@ -172,6 +172,12 @@ mysql> SELECT * FROM t1;
     * `1`: Aggregation and join requests are sent in batches
     * `2`: All coprocessor requests are sent in batches
 
+### tidb_allow_fallback_to_tikv <span class="version-mark">New in v5.0 GA</span>
+
+- Scope: SESSION | GLOBAL
+- Default value: ""
+- This variable is used to specify a list of storage engines that might fall back to TiKV. If the execution of a SQL statement fails due to a failure of the specified storage engine in the list, TiDB retries executing this SQL statement with TiKV. This variable can be set to "" or "tiflash". When this variable is set to "tiflash", if the execution of a SQL statement fails due to a failure of TiFlash, TiDB retries executing this SQL statement with TiKV.
+
 ### tidb_allow_remove_auto_inc <span class="version-mark">New in v2.1.18 and v3.0.4</span>
 
 - Scope: SESSION
@@ -437,6 +443,12 @@ Constraint checking is always performed in place for pessimistic transactions (d
 > **Note:**
 >
 > Only the default value of `OFF` can be considered safe. Setting `tidb_enable_noop_functions=1` might lead to unexpected behaviors in your application, because it permits TiDB to ignore certain syntax without providing an error.
+
+### tidb_enable_parallel_apply <span class="version-mark">New in v5.0 GA</span>
+
+- Scope: SESSION | GLOBAL
+- Default value: 0
+- This variable controls whether to enable concurrency for the `Apply` operator. The number of concurrencies is controlled by the `tidb_executor_concurrency` variable. The `Apply` operator processes correlated subqueries and has no concurrency by default, so the execution speed is slow. Setting this variable value to `1` can increase concurrency and speed up execution. Currently, concurrency for `Apply` is disabled by default.
 
 ### tidb_enable_rate_limit_action
 
@@ -1083,16 +1095,6 @@ SET tidb_slow_log_threshold = 200;
 - Scope: INSTANCE | GLOBAL
 - Default value: 0
 - This variable is used to limit the maximum number of requests TiDB can send to TiKV at the same time. 0 means no limit.
-
-### tidb_track_aggregate_memory_usage <span class="version-mark">New in v5.0.0-rc</span>
-
-> **Warning:**
->
-> `tidb_track_aggregate_memory_usage` is currently an experimental feature. It is not recommended to use this feature in the production environment.
-
-- Scope: SESSION | GLOBAL
-- Default value: OFF
-- This variable controls whether to track the memory usage of the aggregate function. When you enable this feature, TiDB counts the memory usage of the aggregate function, which might cause the overall SQL memory statistics to exceed the threshold [`mem-quota-query`](/tidb-configuration-file.md#mem-quota-query), and then be affected by the behavior defined by [`oom-action`](/tidb-configuration-file.md#oom-action).
 
 ### tidb_txn_mode
 
