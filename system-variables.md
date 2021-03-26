@@ -228,7 +228,7 @@ mysql> SELECT * FROM t1;
 
     In the case of a poor network environment, appropriately increasing the value of this variable can effectively alleviate error reporting to the application end caused by timeout. If the application end wants to receive the error information more quickly, minimize the value of this variable.
 
-### `tidb_broadcast_join_threshold_count` <span class="version-mark">New in v5.0 GA</span>
+### tidb_broadcast_join_threshold_count <span class="version-mark">New in v5.0 GA</span>
 
 - Scope: SESSION | GLOBAL
 - Default value: 10240
