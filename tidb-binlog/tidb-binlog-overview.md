@@ -73,5 +73,4 @@ The TiDB Binlog cluster is composed of Pump and Drainer.
     - If your TiDB version is earlier than 2.1.9, set `db-type="pb"`.
     - If your TiDB version is 2.1.9 or later, set `db-type="file"` or `db-type="pb"`.
 
-* If your TiDB version is earlier than 2.1.9, set `db-type="pb"`.
-    - If your TiDB version is 2.1.9 or later, set `db-type="file"` or `db-type="pb"`.
+* If the downstream is MySQL, MariaDB, or another TiDB cluster, you can use [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md) to verify the data after data replication.
