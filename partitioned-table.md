@@ -167,7 +167,7 @@ Range partitioning is particularly useful when one or more of the following cond
 
 > **Warning:**
 >
-> List partitioning is an experimental feature. It is not recommended that you use it in the production environment.
+> List partitioning is an experimental feature introduced in v5.0 GA. It is not recommended that you use it in the production environment.
 
 Before creating a List partitioned table, you need to set the value of the session variable `tidb_enable_table_partition` to `ON`.
 
@@ -266,7 +266,7 @@ test> select * from t;
 
 > **Warning:**
 >
-> List COLUMNS partitioning is an experimental feature. It is not recommended that you use it in the production environment.
+> List COLUMNS partitioning is an experimental feature introduced v5.0 GA. It is not recommended that you use it in the production environment.
 
 List COLUMNS partitioning is a variant of List partitioning. You can use multiple columns as partition keys. Besides the integer data type, you can also use the columns in the string, `DATE`, and `DATETIME` data types as partition columns.
 
