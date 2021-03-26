@@ -237,7 +237,7 @@ mysql> SELECT * FROM t1;
 ### tidb_broadcast_join_threshold_size <span class="version-mark">New in v5.0 GA</span>
 
 - Scope: SESSION | GLOBAL
-- Default value: 104857600 (Which equals 100 megabytes)
+- Default value: 104857600 (which equals 100 megabytes)
 - If the table size (in the unit of bytes) is less than the value of the variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used.
 
 ### tidb_build_stats_concurrency
