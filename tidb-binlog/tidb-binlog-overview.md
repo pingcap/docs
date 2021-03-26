@@ -17,7 +17,7 @@ TiDB Binlog has the following features:
 
 > **Note:**
 >
-> TiDB Binlog is not compatible with some features introduced in TiDB v5.0.0-rc and cannot be used together. For details, see [Notes](#Notes). It is recommended to use [TiCDC](/ticdc/ticdc-overview.md) instead.
+> TiDB Binlog is not compatible with some features introduced in TiDB v5.0.0-rc and cannot be used together. For details, see [Notes](#notes). It is recommended to use [TiCDC](/ticdc/ticdc-overview.md) instead.
 
 ## TiDB Binlog architecture
 
@@ -60,6 +60,6 @@ The TiDB Binlog cluster is composed of Pump and Drainer.
     - TiDB system variable [tidb_enable_async_commit](/system-variables.md#tidb_enable_async_commit-new-in-v500-rc): After TiDB Binlog is enabled, performance cannot be improved by enabling this option. To improve performance, it is recommended to use [TiCDC](/ticdc/ticdc-overview.md) instead.
     - TiDB system variable [tidb_enable_1pc](/system-variables.md#tidb_enable_1pc-new-in-v500-rc): After TiDB Binlog is enabled, performance cannot be improved by enabling this option. To improve performance, it is recommended to use [TiCDC](/ticdc/ticdc-overview.md) instead.
 
-* TiDB Binlog is incompatible with the following features introduced in TiDB v4.0.7 and cannot be used together:
+* TiDB Binlog is incompatible with the following feature introduced in TiDB v4.0.7 and cannot be used together:
 
-    - TiDB system variable [tidb_enable_amend_pessimistic_txn](/system-variables.md#tidb_enable_amend_pessimistic_txn-new-in-v407): The two features have compatibility issues. Using them together will cause correctness issues with inconsistent TiDB Binlog replication data.
+    - TiDB system variable [tidb_enable_amend_pessimistic_txn](/system-variables.md#tidb_enable_amend_pessimistic_txn-new-in-v407): The two features have compatibility issues. Using them together will cause correctness issues with inconsistent replication data of TiDB Binlog.
