@@ -258,7 +258,7 @@ MPP mode supports these physical algorithms: Broadcast Hash Join, Shuffled Hash 
 The following statement takes the table structure in the TPC-H test set as an example：
 
 ```sql
-mysql> explain select count(*) from customer c join nation n on c.c_nationkey=n.n_nationkey;
+explain select count(*) from customer c join nation n on c.c_nationkey=n.n_nationkey;
 +------------------------------------------+------------+-------------------+---------------+----------------------------------------------------------------------------+
 | id                                       | estRows    | task              | access object | operator info                                                              |
 +------------------------------------------+------------+-------------------+---------------+----------------------------------------------------------------------------+
