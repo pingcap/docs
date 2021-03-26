@@ -466,7 +466,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
     - `AUTO` functions the same way as `ON` does.
     - `OFF` indicates disabling the `TABLE PARTITION` feature. In this case, the syntax that creates a partition table can be executed, but the table created is not a partitioned one.
 
-### `tidb_enable_list_partition` <span class="version-mark">New in v5.0 GA</span>
+### tidb_enable_list_partition <span class="version-mark">New in v5.0 GA</span>
 
 > **Warning:**
 >

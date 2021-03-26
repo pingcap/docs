@@ -269,7 +269,7 @@ test> select * from t;
 >
 > List COLUMNS partitioning is an experimental feature. It is not recommended that you use it in the production environment.
 
-List COLUMNS partitioning is a variant of List partitioning. You can use multiple columns as partition keys and use columns of the data types other than integer as partition columns. You can also use columns of the string, `DATE`, and `DATETIME` types.
+List COLUMNS partitioning is a variant of List partitioning. You can use multiple columns as partition keys. Besides the integer data type, you can also use the columns in the string, `DATE`, and `DATETIME` data types as partition columns.
 
 Suppose that you want to divide the store employees from the following 12 cities into 4 regions, as shown in the following table:
 
@@ -1135,7 +1135,7 @@ YEARWEEK()
 
 ### Compatibility with MySQL
 
-Currently, TiDB only supports Range partitioning, List partitioning, List COLUMNS partitioning and Hash partitioning. Other partitioning types that are available in MySQL such as key partitioning are not supported yet in TiDB.
+Currently, TiDB supports Range partitioning, List partitioning, List COLUMNS partitioning, and Hash partitioning. Other partitioning types that are available in MySQL such as key partitioning are not supported yet in TiDB.
 
 For a table partitioned by `RANGE COLUMNS`, currently TiDB only supports using a single partitioning column.
 
@@ -1235,6 +1235,6 @@ select * from t;
 5 rows in set (0.00 sec)
 ```
 
-The `tidb_enable_table_partition` environment variable controls whether to enable the partitioned table feature. If this variable is set to `OFF`, the partition information will be ignored when a table is created, and this table will be created as a normal table.
+The `tidb_enable_list_partition` environment variable controls whether to enable the partitioned table feature. If this variable is set to `OFF`, the partition information will be ignored when a table is created, and this table will be created as a normal table.
 
 This variable is only used in table creation. After the table is created, modify this variable value takes no effect. For details, see [system variables](/system-variables.md#tidb_enable_list_partition-new-in-v50-ga).
