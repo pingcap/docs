@@ -75,13 +75,13 @@ using
     insert /*+ use_index(@sel_1 t2, a) */ into t1 select * from t2 where a > 1 and b = 1;
 ```
 
-If you do not specify the scope when creating an execution plan binding, the default scope is SESSION. The TiDB optimizer standardizes bound SQL statements and stores them in the system table. When processing SQL queries, if a standardized statement matches one of the bound SQL statements in the system table and the system variable `tidb_use_plan_baselines` is set to `on` (the default value is `on`), TiDB then uses the corresponding optimizer hint for this statement. If there are multiple matchable execution plans, the optimizer choose the least costly one to bind.
+If you do not specify the scope when creating an execution plan binding, the default scope is SESSION. The TiDB optimizer normalizes bound SQL statements and stores them in the system table. When processing SQL queries, if a normalized statement matches one of the bound SQL statements in the system table and the system variable `tidb_use_plan_baselines` is set to `on` (the default value is `on`), TiDB then uses the corresponding optimizer hint for this statement. If there are multiple matchable execution plans, the optimizer choose the least costly one to bind.
 
-`Standardization` is a process that converts a constant in an SQL statement to a variable parameter and explicitly specifies the database for tables referenced in the query, with standardized processing on the spaces and line breaks in the SQL statement. See the following example:
+`Normalization` is a process that converts a constant in an SQL statement to a variable parameter and explicitly specifies the database for tables referenced in the query, with standardized processing on the spaces and line breaks in the SQL statement. See the following example:
 
 ```sql
 select * from t where a >    1
--- Standardized:
+-- Normalized:
 select * from test . t where a > ?
 ```
 
@@ -117,7 +117,7 @@ In addition, when you create a binding, TiDB requires that the session is in a d
 
 > **Note:**
 >
-> The text must be the same before and after standardization and hint removal for both the original SQL statement and the bound statement, or the binding will fail. Take the following examples:
+> The text must be the same before and after normalization and hint removal for both the original SQL statement and the bound statement, or the binding will fail. Take the following examples:
 >
 > - This binding can be created successfully because the texts before and after parameterization and hint removal are the same: `select * from test . t where a > ?`
 >
@@ -189,15 +189,15 @@ To enable baseline capturing, set `tidb_capture_plan_baselines` to `on`. The def
 >
 > Because the automatic binding creation function relies on [Statement Summary](/statement-summary-tables.md), make sure to enable Statement Summary before using automatic binding.
 
-After automatic binding creation is enabled, the historical SQL statements in the Statement Summary are traversed every `bind-info-lease` (the default value is `3s`), and baseline capturing is automatically created for SQL statements that appear at least twice. For these SQL statements, TiDB automatically binds the execution plan recorded in Statement Summary.
+After automatic binding creation is enabled, the historical SQL statements in the Statement Summary are traversed every `bind-info-lease` (the default value is `3s`), and a binding is automatically created for SQL statements that appear at least twice. For these SQL statements, TiDB automatically binds the execution plan recorded in Statement Summary.
 
-However, TiDB does not automatically capture bindings from the baseline for the following types of SQL statements:
+However, TiDB does not automatically capture bindings for the following types of SQL statements:
 
 - `EXPLAIN` and `EXPLAIN ANALYZE` statements.
 - SQL statements executed internally in TiDB, such as `SELECT` queries used for automatically loading statistical information.
 - SQL statements that are bound to a manually created execution plan.
 
-For `PREPARE` / `EXECUTE` statements and queries executed with binary protocols, TiDB automatically captures bindings from the baseline for real query statements, not for the `PREPARE` / `EXECUTE` statements.
+For `PREPARE` / `EXECUTE` statements and queries executed with binary protocols, TiDB automatically captures bindings for the real query statements, not for the `PREPARE` / `EXECUTE` statements.
 
 > **Note:**
 >
