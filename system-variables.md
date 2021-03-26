@@ -172,17 +172,17 @@ mysql> SELECT * FROM t1;
     * `1`: Aggregation and join requests are sent in batches
     * `2`: All coprocessor requests are sent in batches
 
-### tidb_allow_mpp <span class="version-mark">New in v5.0 GA</span>
-
-- Scope: SESSION | GLOBAL
-- Default value: ON
-- This variable controls whether to use the MPP mode of TiFlash to execute queries. If the value is set to `ON`, TiDB automatically determines using the optimizer whether to choose MPP to execute queries. MPP is a distributed computing framework provided by the TiFlash engine, which allows data exchange between nodes and provides high-performance, high-throughput SQL algorithms.
-
 ### tidb_allow_fallback_to_tikv <span class="version-mark">New in v5.0 GA</span>
 
 - Scope: SESSION | GLOBAL
 - Default value: ""
 - This variable is used to specify a list of storage engines that might fall back to TiKV. If the execution of a SQL statement fails due to a failure of the specified storage engine in the list, TiDB retries executing this SQL statement with TiKV. This variable can be set to "" or "tiflash". When this variable is set to "tiflash", if the execution of a SQL statement fails due to a failure of TiFlash, TiDB retries executing this SQL statement with TiKV.
+
+### tidb_allow_mpp <span class="version-mark">New in v5.0 GA</span>
+
+- Scope: SESSION | GLOBAL
+- Default value: ON
+- This variable controls whether to use the MPP mode of TiFlash to execute queries. If the value is set to `ON`, TiDB automatically determines using the optimizer whether to choose MPP to execute queries. MPP is a distributed computing framework provided by the TiFlash engine, which allows data exchange between nodes and provides high-performance, high-throughput SQL algorithms.
 
 ### tidb_allow_remove_auto_inc <span class="version-mark">New in v2.1.18 and v3.0.4</span>
 
