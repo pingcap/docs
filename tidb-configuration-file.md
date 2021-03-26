@@ -96,7 +96,7 @@ The TiDB configuration file supports more options than command-line parameters. 
 
 > **Note:**
 >
-> This configuration item no longer takes effect. If you need to add or delete the primary key, use `NONCLUSTERED` instead. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
+> This configuration item has been deprecated, and currently only takes effect when the value of `@tidb_enable_clustered_index` is `INT_ONLY`.If you need to add or remove the primary key, use the `NONCLUSTERED` keyword instead when creating the table. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
 
 ### `server-version`
 
