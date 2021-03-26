@@ -470,7 +470,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 > **Warning:**
 >
-> Currently, List partition and List COLUMNS partition are experimental features and you are not recommended to use them in a production environment.
+> Currently, List partition and List COLUMNS partition are experimental features. It is not recommended that you use it in the production environment.
 
 - Scope: SESSION
 - Default value: OFF
