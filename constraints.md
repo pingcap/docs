@@ -245,7 +245,7 @@ Query OK, 0 rows affected (0.10 sec)
 * Table `t3` failed to be created, because a table can only have one primary key.
 * Table `t4` was created successfully, because even though there can be only one primary key, TiDB supports defining multiple columns as the composite primary key.
 
-In addition to the rules above, TiDB currently only supports adding and deleting the primary keys of `NONCLUSTERED`. For example:
+In addition to the rules above, TiDB currently only supports adding and deleting the primary keys of the `NONCLUSTERED` type. For example:
 
 {{< copyable "sql" >}}
 

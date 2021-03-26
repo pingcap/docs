@@ -72,7 +72,7 @@ Query OK, 0 rows affected (0.30 sec)
 
 ## MySQL compatibility
 
-* Deleting the primary key of the `CLUSTERED` type is not supported. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
+* Dropping the primary key of the `CLUSTERED` type is not supported. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
 
 ## See also
 
