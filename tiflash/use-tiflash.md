@@ -247,7 +247,7 @@ If a query encounters unsupported push-down calculations, TiDB needs to complete
 
 ## Use the MPP mode
 
-TiFlash supports using the MPP mode to execute queries, which introduces cross-node data exchange (data shuffle process) into the computation. The MPP mode is turned on by default and can be turned off by setting the value of the global/session variable [`tidb_allow_mpp`](/system-variables.md#tidb_allow_mpp-new-in-v50-ga) to `0` or `OFF`.
+TiFlash supports using the MPP mode to execute queries, which introduces cross-node data exchange (data shuffle process) into the computation. The MPP mode is enabled by default and can be disabled by setting the value of the global/session variable [`tidb_allow_mpp`](/system-variables.md#tidb_allow_mpp-new-in-v50-ga) to `0` or `OFF`.
 
 ```shell
 set @@session.tidb_allow_mpp=0
