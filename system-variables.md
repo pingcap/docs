@@ -380,23 +380,25 @@ Constraint checking is always performed in place for pessimistic transactions (d
 >
 > Currently, this feature is incompatible with TiDB Binlog in some scenarios and might cause semantic changes on a transaction. For more usage precautions of this feature, refer to [Incompatibility issues about transaction semantic](https://github.com/pingcap/tidb/issues/21069) and [Incompatibility issues about TiDB Binlog](https://github.com/pingcap/tidb/issues/20996).
 
-### tidb_enable_async_commit <span class="version-mark">New in v5.0.0-rc</span>
-
-> **Warning:**
->
-> Async commit is still an experimental feature. It is not recommended to use this feature in the production environment. Currently, the following incompatible issues are found, and be aware of them if you need to use this feature:
-
-> - This feature is incompatible with [TiCDC](/ticdc/ticdc-overview.md) and might cause TiCDC to run abnormally.
-> - This feature is incompatible with [Compaction Filter](/tikv-configuration-file.md#enable-compaction-filter-new-in-v500-rc). If you use the two features at the same time, write loss might occur.
-> - This feature is incompatible with TiDB Binlog and does not take effect when TiDB Binlog is enabled.
+### tidb_enable_async_commit <span class="version-mark">New in v5.0 RC</span>
 
 - Scope: SESSION | GLOBAL
-- Default value: OFF
+- Default value: `ON` for newly created clusters. If your cluster before upgrade was v5.0 RC or later, the variable value stays unchanged. If your cluster before upgrade was v4.0 or earlier, the variable value defaults to `OFF` after the upgrade.
 - This variable controls whether to enable the async commit feature for the second phase of the two-phase transaction commit to perform asynchronously in the background. Enabling this feature can reduce the latency of transaction commit.
 
-> **Warning:**
+> **Note:**
 >
-> When async commit is enabled, the external consistency of transactions cannot be guaranteed. For details, refer to [`tidb_guarantee_external_consistency`](#tidb_guarantee_external_consistency-new-in-v500-rc).
+> If you have enabled TiDB Binlog, enabling this variable cannot improve the performance. To improve the performance, it is recommended to use [TiCDC](/ticdc/ticdc-overview.md) instead.
+
+### tidb_enable_1pc <span class="version-mark">New in v5.0 RC</span>
+
+- Scope: SESSION | GLOBAL
+- Default value: `ON` for newly created clusters. If your cluster before upgrade was v5.0 RC or later, the variable value stays unchanged. If your cluster before upgrade was v4.0 or earlier, the variable value defaults to `OFF` after the upgrade.
+- This variable is used to specify whether to enable the one-phase commit feature for transactions that only affect one Region. Compared with the often-used two-phase commit, one-phase commit can greatly reduce the latency of transaction commit and increase the throughput.
+
+> **Note:**
+>
+> If you have enabled TiDB Binlog, enabling this variable cannot improve the performance. To improve the performance, it is recommended to use [TiCDC](/ticdc/ticdc-overview.md) instead.
 
 ### tidb_enable_cascades_planner
 
@@ -461,6 +463,12 @@ Constraint checking is always performed in place for pessimistic transactions (d
 > **Note:**
 >
 > Only the default value of `OFF` can be considered safe. Setting `tidb_enable_noop_functions=1` might lead to unexpected behaviors in your application, because it permits TiDB to ignore certain syntax without providing an error.
+
+### tidb_enable_parallel_apply <span class="version-mark">New in v5.0 GA</span>
+
+- Scope: SESSION | GLOBAL
+- Default value: 0
+- This variable controls whether to enable concurrency for the `Apply` operator. The number of concurrencies is controlled by the `tidb_executor_concurrency` variable. The `Apply` operator processes correlated subqueries and has no concurrency by default, so the execution speed is slow. Setting this variable value to `1` can increase concurrency and speed up execution. Currently, concurrency for `Apply` is disabled by default.
 
 ### tidb_enable_rate_limit_action
 
@@ -658,12 +666,6 @@ For a system upgraded to v5.0.0-rc from an earlier version, if you have not modi
     - `current_db`: The name of the current database.
     - `txn_mode`: The transactional mode. Value options are `OPTIMISTIC` and `PESSIMISTIC`.
     - `sql`: The SQL statement corresponding to the current query.
-
-### tidb_guarantee_external_consistency <span class="version-mark">New in v5.0.0-rc</span>
-
-- Scope: SESSION | GLOBAL
-- Default value: OFF
-- This variable controls whether the external consistency needs to be guaranteed when the async commit <!-- and one-phase commit--> feature is enabled. When this option is disabled, if the modifications made in two transactions do not have overlapping parts, the commit order that other transactions observe might not be consistent with the actual commit order. When the async commit <!-- or one-phase commit--> feature is disabled, the external consistency can be guaranteed no matter whether this configuration is enabled or disabled.
 
 ### tidb_hash_join_concurrency
 
