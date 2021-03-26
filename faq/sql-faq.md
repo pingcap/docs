@@ -136,8 +136,6 @@ Deleting a large amount of data leaves a lot of useless keys, affecting the quer
 
 Because TiDB uses Multiversion concurrency control (MVCC), deleting data does not immediately reclaim space. Garbage collection is delayed so that concurrent transactions are able to see earlier versions of rows. This can be configured via the [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time) (default: `10m0s`) system variable.
 
-When performing a backup, the `tidb_gc_life_time` is also automatically extended so that the backup can complete successfully.
-
 ## Does `SHOW PROCESSLIST` display the system process ID?
 
 The display content of TiDB `SHOW PROCESSLIST` is almost the same as that of MySQL `SHOW PROCESSLIST`. TiDB `show processlist` does not display the system process ID. The ID that it displays is the current session ID. The differences between TiDB `show processlist` and MySQL `show processlist` are as follows:
