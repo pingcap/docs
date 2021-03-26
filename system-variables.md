@@ -172,7 +172,7 @@ mysql> SELECT * FROM t1;
     * `1`: Aggregation and join requests are sent in batches
     * `2`: All coprocessor requests are sent in batches
 
-### `tidb_allow_mpp` <span class="version-mark">New in v5.0 GA</span>
+### tidb_allow_mpp <span class="version-mark">New in v5.0 GA</span>
 
 - Scope: SESSION | GLOBAL
 - Default value: ON
