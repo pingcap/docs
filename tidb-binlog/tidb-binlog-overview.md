@@ -52,7 +52,7 @@ The TiDB Binlog cluster is composed of Pump and Drainer.
 
 * TiDB Binlog is incompatible with the following feature introduced in TiDB v4.0.7 and they cannot be used together:
 
-    - TiDB system variable [tidb_enable_amend_pessimistic_txn](/system-variables.md#tidb_enable_amend_pessimistic_txn-new-in-v407): The two features have compatibility issues. Using them together will cause correctness issues with inconsistent replication data of TiDB Binlog.
+    - TiDB system variable [tidb_enable_amend_pessimistic_txn](/system-variables.md#tidb_enable_amend_pessimistic_txn-new-in-v407): The two features have compatibility issues. Using them together might cause the issue that TiDB Binlog replicates data inconsistently.
 
 * Drainer supports replicating binlogs to MySQL, TiDB, Kafka or local files. If you need to replicate binlogs to other Drainer unsuppored destinations, you can set Drainer to replicate the binlog to Kafka and read the data in Kafka for customized processing according to binlog consumer protocol. See [Binlog Consumer Client User Guide](/tidb-binlog/binlog-consumer-client.md).
 
