@@ -101,8 +101,8 @@
     + [Overview](/sql-tuning-overview.md)
     + Understanding the Query Execution Plan
       + [Overview](/explain-overview.md)
-      + [MPP Queries](/explain-mpp.md)
       + [`EXPLAIN` Walkthrough](/explain-walkthrough.md)
+      + [MPP Queries](/explain-mpp.md)
       + [Indexes](/explain-indexes.md)
       + [Joins](/explain-joins.md)
       + [Subqueries](/explain-subqueries.md)

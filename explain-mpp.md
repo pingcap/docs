@@ -29,13 +29,13 @@ In the MPP mode, a query is logically sliced into multiple query fragments. Take
 EXPLAIN SELECT COUNT(*) FROM t1 GROUP BY id;
 ```
 
-This query is divided into two fragments in the MPP mode. One for the first-stage aggregation and the other for the second-stage aggregation, also the final aggregation. When executing the query, each query fragment is instantiated into one or more MPP tasks.
+This query is divided into two fragments in the MPP mode. One for the first-stage aggregation and the other for the second-stage aggregation, also the final aggregation. When this query is executed, each query fragment is instantiated into one or more MPP tasks.
 
 ## Exchange operators
 
 `ExchangeReceiver` and `ExchangeSender`are two exchange operators specific for MPP execution plans. The `ExchangeReceiver` operator reads data from downstream query fragments and the `ExchangeSender` operator sends data from downstream query fragments to upstream query fragments. In the MPP mode, the root operator of each MPP query fragment is `ExchangeSender`, meaning that query fragments are delimited by the `ExchangeSender` operator.
 
-Following is a simple MPP execution plan:
+The following is a simple MPP execution plan:
 
 {{< copyable "sql" >}}
 
@@ -73,15 +73,18 @@ In the example execution plan, the exchange type of the operator `ExchangeSender
 
 MPP is also often applied to join operations. The MPP mode in TiDB supports the following two join algorithms:
 
-* Shuffle Hash Join: Shuffle the data input from the join operation using the HashPartition exchange type. Then, upstream MPP tasks joins data within the same partition.
+* Shuffle Hash Join: Shuffle the data input from the join operation using the HashPartition exchange type. Then, upstream MPP tasks join data within the same partition.
 * Broadcast Join: Broadcast data of the small table in the join operation to each node, after which each node joins the data separately.
 
-Following is a typical execution plan for Shuffle Hash Join:
+The following is a typical execution plan for Shuffle Hash Join:
 
 {{< copyable "sql" >}}
 
 ```sql
-SET tidb_opt_broadcast_join=0; SET tidb_broadcast_join_threshold_count=0; SET tidb_broadcast_join_threshold_size=0; EXPLAIN SELECT COUNT(*) FROM t1 a JOIN t1 b ON a.id = b.id;
+SET tidb_opt_broadcast_join=0;
+SET tidb_broadcast_join_threshold_count=0;
+SET tidb_broadcast_join_threshold_size=0;
+EXPLAIN SELECT COUNT(*) FROM t1 a JOIN t1 b ON a.id = b.id;
 ```
 
 ```sql
@@ -106,8 +109,8 @@ SET tidb_opt_broadcast_join=0; SET tidb_broadcast_join_threshold_count=0; SET ti
 
 The work process in the above execution plan is as follows:
 
-* The query fragment `[TableFullScan_20, Selection_21, ExchangeSender_22]` reads data from table b and shuffles data to upstream MPP tasks
-* The query fragment `[TableFullScan_16, Selection_17, ExchangeSender_18]` reads data from table a and shuffles data to upstream MPP tasks
+* The query fragment `[TableFullScan_20, Selection_21, ExchangeSender_22]` reads data from table b and shuffles data to upstream MPP tasks.
+* The query fragment `[TableFullScan_16, Selection_17, ExchangeSender_18]` reads data from table a and shuffles data to upstream MPP tasks.
 * The query fragment `[ExchangeReceiver_19, ExchangeReceiver_23, HashJoin_44, ExchangeSender_47]` joins all data and returns it to TiDB.
 
 A typical execution plan for Broadcast Join is as follows:
@@ -137,14 +140,14 @@ EXPLAIN SELECT COUNT(*) FROM t1 a JOIN t1 b ON a.id = b.id;
 
 The work process in the above execution plan is as follows:
 
-* The query fragment `[TableFullScan_17, Selection_18, ExchangeSender_19]` reads data from the small table (table a) and broadcast the data to each node that contains data from the huge table (table b).
+* The query fragment `[TableFullScan_17, Selection_18, ExchangeSender_19]` reads data from the small table and broadcasts the data to each node that contains data from the large table (table a).
 * The query fragment `[TableFullScan_21, Selection_22, ExchangeReceiver_20, HashJoin_43, ExchangeSender_46]` joins all data and returns it to TiDB.
 
 ## `EXPLAIN ANALYZE` statements in the MPP mode
 
 The `EXPLAIN ANALYZE` statement is similar to `EXPLAIN`, but it also outputs some runtime information.
 
-Following is the output of a simple `EXPLAIN ANALYZE` example:
+The following is the output of a simple `EXPLAIN ANALYZE` example:
 
 {{< copyable "sql" >}}
 
