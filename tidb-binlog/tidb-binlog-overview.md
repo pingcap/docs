@@ -15,6 +15,10 @@ TiDB Binlog has the following features:
 * **Data replication:** replicate the data in the TiDB cluster to other databases
 * **Real-time backup and restoration:** back up the data in the TiDB cluster and restore the TiDB cluster when the cluster fails
 
+> **Note:**
+>
+> TiDB Binlog is not compatible with some features introduced in TiDB v5.0.0-rc and cannot be used together. For details, see [Notes](#Notes). It is recommended to use [TiCDC](/ticdc/ticdc-overview.md) instead.
+
 ## TiDB Binlog architecture
 
 The TiDB Binlog architecture is as follows:
@@ -50,15 +54,12 @@ The TiDB Binlog cluster is composed of Pump and Drainer.
 
 ## Notes
 
-* You need to use TiDB v2.0.8-binlog, v2.1.0-rc.5 or a later version. Older versions of TiDB cluster are not compatible with the cluster version of TiDB Binlog.
+* TiDB Binlog is not compatible with the following features introduced in TiDB v5.0.0-rc and cannot be used together:
 
-* Drainer supports replicating binlogs to MySQL, TiDB, Kafka or local files. If you need to replicate binlogs to other Drainer unsuppored destinations, you can set Drainer to replicate the binlog to Kafka and read the data in Kafka for customized processing according to binlog consumer protocol. See [Binlog Consumer Client User Guide](/tidb-binlog/binlog-consumer-client.md).
+    - [TiDB Clustered Index](/clustered-indexes.md#limitations): After TiDB Binlog is enabled, TiDB does not allow creating clustered indexes with non-single integer columns as primary keys; data insertion, deletion, and update for created clustered index tables will not be replicated downstream via TiDB Binlog. To replicate clustered index tables, you can use [TiCDC](/ticdc/ticdc-overview.md).
+    - TiDB system variable [tidb_enable_async_commit](/system-variables.md#tidb_enable_async_commit-new-in-v500-rc): After TiDB Binlog is enabled, performance cannot be improved by enabling this option. To improve performance, it is recommended to use [TiCDC](/ticdc/ticdc-overview.md) instead.
+    - TiDB system variable [tidb_enable_1pc](/system-variables.md#tidb_enable_1pc-new-in-v500-rc): After TiDB Binlog is enabled, performance cannot be improved by enabling this option. To improve performance, it is recommended to use [TiCDC](/ticdc/ticdc-overview.md) instead.
 
-* To use TiDB Binlog for recovering incremental data, set the config `db-type` to `file` (local files in the proto buffer format). Drainer converts the binlog to data in the specified [proto buffer format](https://github.com/pingcap/tidb-binlog/blob/master/proto/binlog.proto) and writes the data to local files. In this way, you can use [Reparo](/tidb-binlog/tidb-binlog-reparo.md) to recover data incrementally.
+* TiDB Binlog is incompatible with the following features introduced in TiDB v4.0.7 and cannot be used together:
 
-    Pay attention to the value of `db-type`:
-
-    - If your TiDB version is earlier than 2.1.9, set `db-type="pb"`.
-    - If your TiDB version is 2.1.9 or later, set `db-type="file"` or `db-type="pb"`.
-
-* If the downstream is MySQL, MariaDB, or another TiDB cluster, you can use [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md) to verify the data after data replication.
+    - TiDB system variable [tidb_enable_amend_pessimistic_txn](/system-variables.md#tidb_enable_amend_pessimistic_txn-new-in-v407): The two features have compatibility issues. Using them together will cause correctness issues with inconsistent TiDB Binlog replication data.
