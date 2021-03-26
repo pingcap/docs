@@ -373,4 +373,4 @@ Assume that both transaction 1 and transaction 2 adopt causal consistency and ha
 | | COMMIT |
 | COMMIT | |
 
-In the example above, reads without lock do not create causal relationship. Transaction 1 and transaction 2 have created write skew. In this case, it would have been unreasonable if the two transaction still had causal relationship. Therefore, the two transactions with causal consistency enabled have no definite logical order.
+In the example above, reads without lock do not create causal relationship. Transaction 1 and transaction 2 have created write skew. In this case, it would have been unreasonable if the two transactions still had causal relationship. Therefore, the two transactions with causal consistency enabled have no definite logical order.
