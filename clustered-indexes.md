@@ -11,10 +11,10 @@ The term _clustered_ in this context refers to the _organization of how data is 
 
 Currently, tables containing primary keys in TiDB are divided into the following two categories:
 
-- `NONCLUSTERD`: The primary key of the table is non-clustered index. In tables with non-clustered indexes, the keys for row data are consists of internal `_tidb_rowid` implicitly assigned by TiDB. Because primary keys are essentially unique indexes, tables with non-clustered indexes need at least two key-value pairs to store a row, which are:
+- `NONCLUSTERD`: The primary key of the table is non-clustered index. In tables with non-clustered indexes, the keys for row data are consist of internal `_tidb_rowid` implicitly assigned by TiDB. Because primary keys are essentially unique indexes, tables with non-clustered indexes need at least two key-value pairs to store a row, which are:
     - `_tidb_rowid` (key) - row data (value)
     - Primary key data (key) - `_tidb_rowid` (value)
-- `CLUSTERED`: The primary key of the table is clustered index. In tables with clustered indexes, the keys for row data are consists of primary keys consists of primary key data given by the user. There is no need to simulate unique indexes, so tables with clustered indexes need only one key-value pair to store a row, which is:
+- `CLUSTERED`: The primary key of the table is clustered index. In tables with clustered indexes, the keys for row data are consist of primary keys consists of primary key data given by the user. There is no need to simulate unique indexes, so tables with clustered indexes need only one key-value pair to store a row, which is:
     - Primary key data (key) - row data (value)
 
 > **Note:**
@@ -23,7 +23,7 @@ Currently, tables containing primary keys in TiDB are divided into the following
 
 ## User scenario
 
-Compared to tables with non-clustered indexes, tables with clustered indexes offer greater performance and throughput advantages in following scenarios:
+Compared to tables with non-clustered indexes, tables with clustered indexes offer greater performance and throughput advantages in the following scenarios:
 
 + When data is inserted, the clustered index reduces one write of the index data from the network.
 + When a query with an equivalent condition only involves the primary key, the clustered index reduces one read of index data from the network.
@@ -61,7 +61,7 @@ CREATE TABLE t (a BIGINT, b VARCHAR(255), PRIMARY KEY(a, b) /*T![clustered_index
 CREATE TABLE t (a BIGINT, b VARCHAR(255), PRIMARY KEY(a, b) /*T![clustered_index] NONCLUSTERED */);
 ```
 
-For statements that do not explicitly specify the keyword `CLUSTERED`/`NONCLUSTERED`, the default behavior is affected by the the global variable `@@global.tidb_enable_clustered_index`. Supported values for this variable are as follows:
+For statements that do not explicitly specify the keyword `CLUSTERED`/`NONCLUSTERED`, the default behavior is affected by the global variable `@@global.tidb_enable_clustered_index`. Supported values for this variable are as follows:
 
 - `OFF` indicates that primary keys are created as non-clustered indexes by default.
     - `ON` indicates that primary keys are created as clustered indexes by default.
@@ -143,7 +143,7 @@ mysql> SELECT TIDB_PK_TYPE FROM information_schema.tables WHERE table_schema = '
 Currently, there are two types of limitations for the clustered indexes feature. See the following:
 
 - Situations that are not supported and not in the support plan:
-    - It is not supported to use the clustered indexes feature together with TiDB Binlog. After TiDB Binlog is started, TiDB does not allow to create a single integer primary key as a clustered index. TiDB Binlog does not replicate data changes of existing tables with clustered indexes to the downstream. If you need to replicate tables with clustered indexes, use [TiCDC](/ticdc/ticdc-overview.md) instead.
+    - It is not supported using the clustered indexes feature together with TiDB Binlog. After TiDB Binlog is started, TiDB does not allow to create a single integer primary key as a clustered index. TiDB Binlog does not replicate data changes of existing tables with clustered indexes to the downstream. If you need to replicate tables with clustered indexes, use [TiCDC](/ticdc/ticdc-overview.md) instead.
     - It is not supported to use clustered indexes together with the attribute [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md). Also, the attribute [`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions) does not take effect on tables with clustered indexes.
     - It is not supported to degrade tables with clustered indexes. If you need to do so, use logical backup tools to migrate data instead.
 - Situations that are not supported yet but in the support plan:
