@@ -279,7 +279,7 @@ In the example execution plan, the `ExchangeReceiver` and `ExchangeSender` opera
 
 > **Note:**
 >
-> By default, TiFlash does not support using the MPP mode in partition tables.
+> By default, TiFlash does not support using the MPP mode in partitioned tables.
 
 TiFlash provides the following two global/session variables to control whether to use Broadcast Hash Join:
 
