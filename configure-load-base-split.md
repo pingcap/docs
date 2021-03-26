@@ -31,7 +31,7 @@ The Region split by Load Base Split will not be merged quickly. On the one hand,
 
 The Load Base Split feature is currently controlled by the `split.qps-threshold` parameter (QPS threshold) and `split.byte-threshold` parameter (traffic threshold). If the sum of all types of read requests per second for a Region exceeds the QPS threshold or traffic threshold for 10 consecutive seconds, PD splits the Region.
 
-Load Base Split is enabled by default, but the parameter is set to a rather high value. `split.qps-threshold` defaults to `3000` and `split.byte-threshold` defaults to 30MB/s. If you want to disable this feature, set the two thresholds high enough at the same.
+Load Base Split is enabled by default, but the parameter is set to a rather high value. `split.qps-threshold` defaults to `3000` and `split.byte-threshold` defaults to 30MB/s. If you want to disable this feature, set the two thresholds high enough at the same time.
 
 To modify the parameter, take either of the following two methods:
 
