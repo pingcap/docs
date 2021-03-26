@@ -17,7 +17,7 @@ TiDB Binlog has the following features:
 
 > **Note:**
 >
-> TiDB Binlog is not compatible with some features introduced in TiDB v5.0.0-rc and cannot be used together. For details, see [Notes](#notes). It is recommended to use [TiCDC](/ticdc/ticdc-overview.md) instead.
+> TiDB Binlog is not compatible with some features introduced in TiDB v5.0.0-rc and they cannot be used together. For details, see [Notes](#notes). It is recommended to use [TiCDC](/ticdc/ticdc-overview.md) instead.
 
 ## TiDB Binlog architecture
 
@@ -54,9 +54,9 @@ The TiDB Binlog cluster is composed of Pump and Drainer.
 
 ## Notes
 
-* TiDB Binlog is not compatible with the following features introduced in TiDB v5.0.0-rc and cannot be used together:
+* TiDB Binlog is not compatible with the following features introduced in TiDB v5.0.0-rc and they cannot be used together:
 
-    - [TiDB Clustered Index](/clustered-indexes.md#limitations): After TiDB Binlog is enabled, TiDB does not allow creating clustered indexes with non-single integer columns as primary keys; data insertion, deletion, and update for created clustered index tables will not be replicated downstream via TiDB Binlog. To replicate clustered index tables, you can use [TiCDC](/ticdc/ticdc-overview.md).
+    - [TiDB Clustered Index](/clustered-indexes.md#limitations): After TiDB Binlog is enabled, TiDB does not allow creating clustered indexes with non-single integer columns as primary keys; data insertion, deletion, and update of the created clustered index tables will not be replicated downstream via TiDB Binlog. To replicate clustered index tables, you can use [TiCDC](/ticdc/ticdc-overview.md).
     - TiDB system variable [tidb_enable_async_commit](/system-variables.md#tidb_enable_async_commit-new-in-v500-rc): After TiDB Binlog is enabled, performance cannot be improved by enabling this option. To improve performance, it is recommended to use [TiCDC](/ticdc/ticdc-overview.md) instead.
     - TiDB system variable [tidb_enable_1pc](/system-variables.md#tidb_enable_1pc-new-in-v500-rc): After TiDB Binlog is enabled, performance cannot be improved by enabling this option. To improve performance, it is recommended to use [TiCDC](/ticdc/ticdc-overview.md) instead.
 
