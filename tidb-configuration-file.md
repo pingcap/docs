@@ -94,6 +94,10 @@ The TiDB configuration file supports more options than command-line parameters. 
 - Default value: `false`
 - With this default setting, adding or removing the primary key constraint is not supported. You can enable this feature by setting `alter-primary-key` to `true`. However, if a table already exists before the switch is on, and the data type of its primary key column is an integer, dropping the primary key from the column is not possible even if you set this configuration item to `true`.
 
+> **Note:**
+>
+> This configuration item has been deprecated, and currently only takes effect when the value of `@tidb_enable_clustered_index` is `INT_ONLY`.If you need to add or remove the primary key, use the `NONCLUSTERED` keyword instead when creating the table. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
+
 ### `server-version`
 
 + Modifies the version string returned by TiDB in the following situations:
