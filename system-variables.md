@@ -234,7 +234,7 @@ mysql> SELECT * FROM t1;
 - Default value: 10240
 - The unit of the variable is rows. If the objects of the join operation belong to a subquery, the optimizer cannot estimate the size of the subquery result set. In this situation, the size is determined by the number of rows in the result set. If the estimated number of rows in the subquery is less than the value of this variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used.
 
-### `tidb_broadcast_join_threshold_size` <span class="version-mark">New in v5.0 GA</span>
+### tidb_broadcast_join_threshold_size <span class="version-mark">New in v5.0 GA</span>
 
 - Scope: SESSION | GLOBAL
 - Default value: 104857600 (Which equals 100 megabytes)
