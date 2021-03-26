@@ -277,7 +277,7 @@ mysql> explain select count(*) from customer c join nation n on c.c_nationkey=n.
 
 In the example execution plan, the `ExchangeReceiver` and `ExchangeSender` operators are included. The execution plan indicates that after the `nation` table is read, the `ExchangeSender` operator broadcasts the table to each node, the `HashJoin` and `HashAgg` operations are performed on the `nation` table and the `customer` table, and then the results are returned to TiDB.
 
-> **Notes:**
+> **Note:**
 >
 > By default, TiFlash does not support using the MPP mode in partition tables.
 
