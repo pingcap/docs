@@ -50,7 +50,7 @@ The TiDB Binlog cluster is composed of Pump and Drainer.
 
 ## Notes
 
-* TiDB Binlog is incompatible with the following feature introduced in TiDB v4.0.7 and cannot be used together:
+* TiDB Binlog is incompatible with the following feature introduced in TiDB v4.0.7 and they cannot be used together:
 
     - TiDB system variable [tidb_enable_amend_pessimistic_txn](/system-variables.md#tidb_enable_amend_pessimistic_txn-new-in-v407): The two features have compatibility issues. Using them together will cause correctness issues with inconsistent replication data of TiDB Binlog.
 
