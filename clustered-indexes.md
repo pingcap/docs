@@ -61,6 +61,14 @@ CREATE TABLE t (a BIGINT, b VARCHAR(255), PRIMARY KEY(a, b) /*T![clustered_index
 CREATE TABLE t (a BIGINT, b VARCHAR(255), PRIMARY KEY(a, b) /*T![clustered_index] NONCLUSTERED */);
 ```
 
+For statements that do not explicitly specify the keyword `CLUSTERED`/`NONCLUSTERED`, the default behavior is affected by the the global variable `@@global.tidb_enable_clustered_index`. Supported values for this variable are as follows:
+
+- `OFF` indicates that primary keys are created as non-clustered indexes by default.
+    - `ON` indicates that primary keys are created as clustered indexes by default.
+    - `INT_ONLY` indicates that the behavior is controlled by the configuration item `alter-primary-key`. If `alter-primary-key` is set to `true`, primary keys are created as non-clustered indexes by default. If it is set to `false`, single integer primary keys are created as clustered indexes and others are created as non-clustered indexes.
+
+The default value of `@@global.tidb_enable_clustered_index` is `INT_ONLY`.
+
 ### Add or drop clustered indexes
 
 TiDB does not support adding or dropping clustered indexes after tables are created. Nor does it support the mutual conversion of clustered indexes and non-clustered indexes. For example:
