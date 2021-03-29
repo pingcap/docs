@@ -84,19 +84,6 @@ TiDB version: 4.0.12
 
 ## 请判断下面未分类 note，对下面 note 进行分类并移动到以上三个分类部分中
 
-+ TiDB
-
-    - Fix ddl hang over when it meets panic in cancelling path. [#23297](https://github.com/pingcap/tidb/pull/23297)
-    - Refine explain info for batch cop [#23164](https://github.com/pingcap/tidb/pull/23164)
-    - Fix wrong key range of index scan when filter is comparing year column with NULL [#23104](https://github.com/pingcap/tidb/pull/23104)
-    - Fix create view success but failed when using it [#23083](https://github.com/pingcap/tidb/pull/23083)
-    - Add warning info for exprs that can not be pushed to storage layer for explain statement. [#23020](https://github.com/pingcap/tidb/pull/23020)
-    - Ddl: migrate part of ddl package code from Execute/ExecRestricted to safe API (2) [#22935](https://github.com/pingcap/tidb/pull/22935)
-    - Ddl: migrate part of ddl package code from Execute/ExecRestricted to safe API (1). [#22929](https://github.com/pingcap/tidb/pull/22929)
-    - Add optimization-time and wait-TS-time into the slow log [#22918](https://github.com/pingcap/tidb/pull/22918)
-    - Support query partition_id from infoschema.partitions [#22489](https://github.com/pingcap/tidb/pull/22489)
-    - Add 'last_plan_from_binding' to help know whether sql's plan is matched with the hints in the binding [#21430](https://github.com/pingcap/tidb/pull/21430)
-
 + TiKV
 
     - Pd_client: prevent a large number of reconnections in a short time [#9879](https://github.com/tikv/tikv/pull/9879)
