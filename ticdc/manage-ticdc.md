@@ -790,11 +790,11 @@ force-replicate = true
 
 Unified sorter is the sorting engine in TiCDC. This feature is enabled by default. It can mitigate OOM problems caused by the following scenarios:
 
-+ The data changes subscription task in TiCDC is paused for a long time, during which a large amount of incremental data is accumulated to be replicated.
-+ The data changes subscription task is started from a early time point with a high volume of data writes, thus accumulating a large amount of update data that need to be replicated.
++ The data replication task in TiCDC is paused for a long time, during which a large amount of incremental data is accumulated and need to be replicated.
++ The data replication task is started from an early timestamp so it becomes necessary to replicate a large amount of incremental data.
 
 > **Note:**
 >
-> + If your servers use mechanical hard drives or other storage devices that have latency or bottlenecks in throughput, use the unified sorter with caution.
-> + The total free capacity of hard drives must be greater than or equal to 128G. If you need to replicate a large amount of historical data, make sure that the free capacity of each node is greater than or equal to the size of incremental data that needs to be replicated.
+> + If your servers use mechanical hard drives or other storage devices that have high latency or limited bandwidth, use the unified sorter with caution.
+> + The total free capacity of hard drives must be greater than or equal to 128G. If you need to replicate a large amount of historical data, make sure that the free capacity on each node is greater than or equal to the size of the incremental data that needs to be replicated.
 > + Unified sorter is enabled by default. If your servers do not match the above requirements and you want to disable the unified sorter, you need to manually set `sort-engine` to `memory` for the changefeed.
