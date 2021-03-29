@@ -175,7 +175,7 @@ The clustered index feature is partially supported in TiDB v3.0 and v4.0. It is 
 - The `PRIMARY KEY` consists of only one column.
 - The `PRIMARY KEY` is an `INTEGER`.
 
-Since TiDB v5.0, the clustered index feature is fully supported for all types of primary keys, but the default behavior is consistent with TiDB v3.0 and v4.0. To change the default behavior, you can configure the system variable `@@tidb_enable_clustered_index` to `ON` or `OFF`. For more details, see [Create a table with clustered indexes](#create-a-table-with-clustered-indexes) .
+Since TiDB v5.0, the clustered index feature is fully supported for all types of primary keys, but the default behavior is consistent with TiDB v3.0 and v4.0. To change the default behavior, you can configure the system variable `@@tidb_enable_clustered_index` to `ON` or `OFF`. For more details, see [Create a table with clustered indexes](#create-a-table-with-clustered-indexes).
 
 ### Compatibility with MySQL
 
