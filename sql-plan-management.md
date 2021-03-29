@@ -30,6 +30,7 @@ create global binding for
     select * from t t1 join t t2
 using
     select * from t t1 join t t2;
+
 -- Type two: `DELETE` statements that contain the `using` keyword.
 create global binding for
     delete from t1 using t1 join t2 on t1.a = t2.a
@@ -45,11 +46,13 @@ create global binding for
     select * from t t1 join t t2 using (a)
 using
     select * from t t1 join t t2 using (a);
+
 -- Second rewrite of type one statements: Delete the `join` keyword.
 create global binding for
     select * from t t1, t t2
 using
     select * from t t1, t t2;
+
 -- Rewrite of type two statements: Remove the `using` keyword from the `delete` statement.
 create global binding for
     delete t1 from t1 join t2 on t1.a = t2.a
@@ -58,6 +61,7 @@ using
 ```
 
 > **Note:**
+>
 > When creating execution plan bindings for `INSERT` / `REPLACE` statements with `SELECT` subqueries, you need to specify the optimizer hints you want to bind in the `SELECT` subquery, not after the `INSERT` / `REPLACE` keyword. Otherwise, the optimizer hints do not take effect as intended.
 
 Here are two examples:
@@ -68,6 +72,7 @@ create global binding for
     insert into t1 select * from t2 where a > 1 and b = 1
 using
     insert into t1 select /*+ use_index(@sel_1 t2, a) */ * from t2 where a > 1 and b = 1;
+
 -- The hint cannot take effect in the following statement.
 create global binding for
     insert into t1 select * from t2 where a > 1 and b = 1
@@ -75,7 +80,7 @@ using
     insert /*+ use_index(@sel_1 t2, a) */ into t1 select * from t2 where a > 1 and b = 1;
 ```
 
-If you do not specify the scope when creating an execution plan binding, the default scope is SESSION. The TiDB optimizer normalizes bound SQL statements and stores them in the system table. When processing SQL queries, if a normalized statement matches one of the bound SQL statements in the system table and the system variable `tidb_use_plan_baselines` is set to `on` (the default value is `on`), TiDB then uses the corresponding optimizer hint for this statement. If there are multiple matchable execution plans, the optimizer choose the least costly one to bind.
+If you do not specify the scope when creating an execution plan binding, the default scope is SESSION. The TiDB optimizer normalizes bound SQL statements and stores them in the system table. When processing SQL queries, if a normalized statement matches one of the bound SQL statements in the system table and the system variable `tidb_use_plan_baselines` is set to `on` (the default value is `on`), TiDB then uses the corresponding optimizer hint for this statement. If there are multiple matchable execution plans, the optimizer chooses the least costly one to bind.
 
 `Normalization` is a process that converts a constant in an SQL statement to a variable parameter and explicitly specifies the database for tables referenced in the query, with standardized processing on the spaces and line breaks in the SQL statement. See the following example:
 
@@ -133,7 +138,7 @@ In addition, when you create a binding, TiDB requires that the session is in a d
 
 > **Note:**
 >
-> For `PREPARE` / `EXECUTE` statements and queries executed with binary protocols, you need to create execution plan bindings for the real query statements, not for the `PREPARE` / `EXECUTE` statements.
+> For `PREPARE` / `EXECUTE` statements and for queries executed with binary protocols, you need to create execution plan bindings for the real query statements, not for the `PREPARE` / `EXECUTE` statements.
 
 ### Remove binding
 
@@ -197,7 +202,7 @@ However, TiDB does not automatically capture bindings for the following types of
 - SQL statements executed internally in TiDB, such as `SELECT` queries used for automatically loading statistical information.
 - SQL statements that are bound to a manually created execution plan.
 
-For `PREPARE` / `EXECUTE` statements and queries executed with binary protocols, TiDB automatically captures bindings for the real query statements, not for the `PREPARE` / `EXECUTE` statements.
+For `PREPARE` / `EXECUTE` statements and for queries executed with binary protocols, TiDB automatically captures bindings for the real query statements, not for the `PREPARE` / `EXECUTE` statements.
 
 > **Note:**
 >
