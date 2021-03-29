@@ -14,7 +14,7 @@ Currently, tables containing primary keys in TiDB are divided into the following
 - `NONCLUSTERD`: The primary key of the table is non-clustered index. In tables with non-clustered indexes, the keys for row data are consist of internal `_tidb_rowid` implicitly assigned by TiDB. Because primary keys are essentially unique indexes, tables with non-clustered indexes need at least two key-value pairs to store a row, which are:
     - `_tidb_rowid` (key) - row data (value)
     - Primary key data (key) - `_tidb_rowid` (value)
-- `CLUSTERED`: The primary key of the table is clustered index. In tables with clustered indexes, the keys for row data are consist of primary keys consists of primary key data given by the user. There is no need to simulate unique indexes, so tables with clustered indexes need only one key-value pair to store a row, which is:
+- `CLUSTERED`: The primary key of the table is clustered index. In tables with clustered indexes, the keys for row data consist of primary key data given by the user. There is no need to simulate unique indexes, so tables with clustered indexes need only one key-value pair to store a row, which is:
     - Primary key data (key) - row data (value)
 
 > **Note:**
