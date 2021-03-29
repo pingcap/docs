@@ -178,6 +178,12 @@ mysql> SELECT * FROM t1;
 - Default value: ""
 - This variable is used to specify a list of storage engines that might fall back to TiKV. If the execution of a SQL statement fails due to a failure of the specified storage engine in the list, TiDB retries executing this SQL statement with TiKV. This variable can be set to "" or "tiflash". When this variable is set to "tiflash", if the execution of a SQL statement fails due to a failure of TiFlash, TiDB retries executing this SQL statement with TiKV.
 
+### tidb_allow_mpp <span class="version-mark">New in v5.0 GA</span>
+
+- Scope: SESSION | GLOBAL
+- Default value: ON
+- This variable controls whether to use the MPP mode of TiFlash to execute queries. If the value is set to `ON`, TiDB automatically determines using the optimizer whether to choose MPP to execute queries. MPP is a distributed computing framework provided by the TiFlash engine, which allows data exchange between nodes and provides high-performance, high-throughput SQL algorithms.
+
 ### tidb_allow_remove_auto_inc <span class="version-mark">New in v2.1.18 and v3.0.4</span>
 
 - Scope: SESSION
@@ -221,6 +227,18 @@ mysql> SELECT * FROM t1;
     For example, the base timeout for TiDB to take TSO from PD is 15 seconds. When `tidb_backoff_weight = 2`, the maximum timeout for taking TSO is: *base time \* 2 = 30 seconds*.
 
     In the case of a poor network environment, appropriately increasing the value of this variable can effectively alleviate error reporting to the application end caused by timeout. If the application end wants to receive the error information more quickly, minimize the value of this variable.
+
+### tidb_broadcast_join_threshold_count <span class="version-mark">New in v5.0 GA</span>
+
+- Scope: SESSION | GLOBAL
+- Default value: 10240
+- The unit of the variable is rows. If the objects of the join operation belong to a subquery, the optimizer cannot estimate the size of the subquery result set. In this situation, the size is determined by the number of rows in the result set. If the estimated number of rows in the subquery is less than the value of this variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used.
+
+### tidb_broadcast_join_threshold_size <span class="version-mark">New in v5.0 GA</span>
+
+- Scope: SESSION | GLOBAL
+- Default value: 104857600 (which equals 100 megabytes)
+- If the table size (in the unit of bytes) is less than the value of the variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used.
 
 ### tidb_build_stats_concurrency
 
@@ -362,23 +380,25 @@ Constraint checking is always performed in place for pessimistic transactions (d
 >
 > Currently, this feature is incompatible with TiDB Binlog in some scenarios and might cause semantic changes on a transaction. For more usage precautions of this feature, refer to [Incompatibility issues about transaction semantic](https://github.com/pingcap/tidb/issues/21069) and [Incompatibility issues about TiDB Binlog](https://github.com/pingcap/tidb/issues/20996).
 
-### tidb_enable_async_commit <span class="version-mark">New in v5.0.0-rc</span>
-
-> **Warning:**
->
-> Async commit is still an experimental feature. It is not recommended to use this feature in the production environment. Currently, the following incompatible issues are found, and be aware of them if you need to use this feature:
-
-> - This feature is incompatible with [TiCDC](/ticdc/ticdc-overview.md) and might cause TiCDC to run abnormally.
-> - This feature is incompatible with [Compaction Filter](/tikv-configuration-file.md#enable-compaction-filter-new-in-v500-rc). If you use the two features at the same time, write loss might occur.
-> - This feature is incompatible with TiDB Binlog and does not take effect when TiDB Binlog is enabled.
+### tidb_enable_async_commit <span class="version-mark">New in v5.0 RC</span>
 
 - Scope: SESSION | GLOBAL
-- Default value: OFF
+- Default value: `ON` for newly created clusters. If your cluster before upgrade was v5.0 RC or later, the variable value stays unchanged. If your cluster before upgrade was v4.0 or earlier, the variable value defaults to `OFF` after the upgrade.
 - This variable controls whether to enable the async commit feature for the second phase of the two-phase transaction commit to perform asynchronously in the background. Enabling this feature can reduce the latency of transaction commit.
 
-> **Warning:**
+> **Note:**
 >
-> When async commit is enabled, the external consistency of transactions cannot be guaranteed. For details, refer to [`tidb_guarantee_external_consistency`](#tidb_guarantee_external_consistency-new-in-v500-rc).
+> If you have enabled TiDB Binlog, enabling this variable cannot improve the performance. To improve the performance, it is recommended to use [TiCDC](/ticdc/ticdc-overview.md) instead.
+
+### tidb_enable_1pc <span class="version-mark">New in v5.0 RC</span>
+
+- Scope: SESSION | GLOBAL
+- Default value: `ON` for newly created clusters. If your cluster before upgrade was v5.0 RC or later, the variable value stays unchanged. If your cluster before upgrade was v4.0 or earlier, the variable value defaults to `OFF` after the upgrade.
+- This variable is used to specify whether to enable the one-phase commit feature for transactions that only affect one Region. Compared with the often-used two-phase commit, one-phase commit can greatly reduce the latency of transaction commit and increase the throughput.
+
+> **Note:**
+>
+> If you have enabled TiDB Binlog, enabling this variable cannot improve the performance. To improve the performance, it is recommended to use [TiCDC](/ticdc/ticdc-overview.md) instead.
 
 ### tidb_enable_cascades_planner
 
@@ -444,6 +464,12 @@ Constraint checking is always performed in place for pessimistic transactions (d
 >
 > Only the default value of `OFF` can be considered safe. Setting `tidb_enable_noop_functions=1` might lead to unexpected behaviors in your application, because it permits TiDB to ignore certain syntax without providing an error.
 
+### tidb_enable_parallel_apply <span class="version-mark">New in v5.0 GA</span>
+
+- Scope: SESSION | GLOBAL
+- Default value: 0
+- This variable controls whether to enable concurrency for the `Apply` operator. The number of concurrencies is controlled by the `tidb_executor_concurrency` variable. The `Apply` operator processes correlated subqueries and has no concurrency by default, so the execution speed is slow. Setting this variable value to `1` can increase concurrency and speed up execution. Currently, concurrency for `Apply` is disabled by default.
+
 ### tidb_enable_rate_limit_action
 
 - Scope: SESSION | GLOBAL
@@ -492,10 +518,19 @@ Query OK, 0 rows affected (0.09 sec)
 - Scope: SESSION | GLOBAL
 - Default value: ON
 - This variable is used to set whether to enable the `TABLE PARTITION` feature:
-
     - `ON` indicates enabling Range partitioning, Hash partitioning, and Range column partitioning with one single column.
     - `AUTO` functions the same way as `ON` does.
     - `OFF` indicates disabling the `TABLE PARTITION` feature. In this case, the syntax that creates a partition table can be executed, but the table created is not a partitioned one.
+
+### tidb_enable_list_partition <span class="version-mark">New in v5.0 GA</span>
+
+> **Warning:**
+>
+> Currently, List partition and List COLUMNS partition are experimental features. It is not recommended that you use it in the production environment.
+
+- Scope: SESSION
+- Default value: OFF
+- This variable is used to set whether to enable the `LIST (COLUMNS) TABLE PARTITION` feature.
 
 ### tidb_enable_telemetry <span class="version-mark">New in v4.0.2 version</span>
 
@@ -640,12 +675,6 @@ For a system upgraded to v5.0.0-rc from an earlier version, if you have not modi
     - `current_db`: The name of the current database.
     - `txn_mode`: The transactional mode. Value options are `OPTIMISTIC` and `PESSIMISTIC`.
     - `sql`: The SQL statement corresponding to the current query.
-
-### tidb_guarantee_external_consistency <span class="version-mark">New in v5.0.0-rc</span>
-
-- Scope: SESSION | GLOBAL
-- Default value: OFF
-- This variable controls whether the external consistency needs to be guaranteed when the async commit <!-- and one-phase commit--> feature is enabled. When this option is disabled, if the modifications made in two transactions do not have overlapping parts, the commit order that other transactions observe might not be consistent with the actual commit order. When the async commit <!-- or one-phase commit--> feature is disabled, the external consistency can be guaranteed no matter whether this configuration is enabled or disabled.
 
 ### tidb_hash_join_concurrency
 
