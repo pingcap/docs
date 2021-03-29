@@ -14,7 +14,7 @@ Currently, tables containing primary keys in TiDB are divided into the following
 - `NONCLUSTERD`: The primary key of the table is non-clustered index. In tables with non-clustered indexes, the keys for row data consist of internal `_tidb_rowid` implicitly assigned by TiDB. Because primary keys are essentially unique indexes, tables with non-clustered indexes need at least two key-value pairs to store a row, which are:
     - `_tidb_rowid` (key) - row data (value)
     - Primary key data (key) - `_tidb_rowid` (value)
-- `CLUSTERED`: The primary key of the table is clustered index. In tables with clustered indexes, the keys for row data consist of primary key data given by the user. There is no need to simulate unique indexes, so tables with clustered indexes need only one key-value pair to store a row, which is:
+- `CLUSTERED`: The primary key of the table is clustered index. In tables with clustered indexes, the keys for row data consist of primary key data given by the user. Therefore, tables with clustered indexes need only one key-value pair to store a row, which is:
     - Primary key data (key) - row data (value)
 
 > **Note:**
@@ -33,7 +33,7 @@ Compared to tables with non-clustered indexes, tables with clustered indexes off
 On the other hand, tables with clustered indexes have certain disadvantages. See the following:
 
 - There might be write hotspot issues when inserting a large number of primary keys with close values.
-- The table itself takes up more storage space if the data type of the primary key is larger than 64 bits, especially when there are multiple secondary indexes.
+- The table data takes up more storage space if the data type of the primary key is larger than 64 bits, especially when there are multiple secondary indexes.
 
 ## Usages
 
@@ -96,7 +96,7 @@ You can check whether the primary key of a table is a clustered index using one 
 
 - Execute the command `SHOW CREATE TABLE`.
 - Execute the command `SHOW INDEX FROM`.
-- Query information in `information_schema.tables`.
+- Query the `TIDB_PK_TYPE` column in the system table `information_schema.tables`.
 
 By running the command `SHOW CREATE TABLE`, you can see whether the attribute of `PRIMARY KEY` is `CLUSTERED` or `NONCLUSTERED`. For example:
 
@@ -149,7 +149,7 @@ Currently, there are two types of limitations for the clustered index feature. S
 - Situations that are not supported yet but in the support plan:
     - Adding, dropping, and altering clustered indexes using `ALTER TABLE` statements are not supported.
 
-After TiDB Binlog is enabled, if the primary key you create as a clustered index does not consist of only one integer column, TiDB returns the following error:
+After TiDB Binlog is enabled, if the clustered index you create is not a single integer primary key, TiDB returns the following error:
 
 ```sql
 mysql> CREATE TABLE t (a VARCHAR(255) PRIMARY KEY CLUSTERED);
@@ -175,11 +175,11 @@ The clustered index feature is partially supported in TiDB v3.0 and v4.0. It is 
 - The `PRIMARY KEY` consists of only one column.
 - The `PRIMARY KEY` is an `INTEGER`.
 
-However, since v5.0, TiDB creates all types of primary keys as non-clustered indexes by default. This behavior change might cause TiDB in the default configuration to perform worse in some scenarios. You can consider explicitly specifying a primary key as a clustered index.
+Since TiDB v5.0, the clustered index feature is fully supported for all types of primary keys, but the default behavior is consistent with TiDB v3.0 and v4.0. To change the default behavior, you can configure the system variable `@@tidb_enable_clustered_index` to `ON` or `OFF`. For more details, see [Create a table with clustered indexes](#create-a-table-with-clustered-indexes) .
 
 ### Compatibility with MySQL
 
-TiDB specific comment syntax supports wrapping the keywords `CLUSTERED` and `NONCLUSTERED` in a comment. The result of `SHOW CREATE TABLE` also contains TiDB specific SQL comments. MySQL databases and TiDB databases of a lower version can identify and execute DDL statements with these comments.
+TiDB specific comment syntax supports wrapping the keywords `CLUSTERED` and `NONCLUSTERED` in a comment. The result of `SHOW CREATE TABLE` also contains TiDB specific SQL comments. MySQL databases and TiDB databases of an earlier version will ignore these comments.
 
 ### Compatibility with TiDB ecosystem tools
 
