@@ -25,7 +25,7 @@ This statement binds SQL execution plans at the GLOBAL or SESSION level. Current
 Specifically, two types of these statements cannot be bound to execution plans due to syntax conflicts. See the following examples:
 
 ```sql
--- Type one: Statements that use the `join` keyword to get the Cartesian product but not specify the associated columns with the `using` keyword.
+-- Type one: Statements that get the Cartesian product by using the `join` keyword and not specifying the associated columns with the `using` keyword.
 create global binding for
     select * from t t1 join t t2
 using
