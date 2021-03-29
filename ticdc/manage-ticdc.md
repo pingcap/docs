@@ -790,7 +790,7 @@ force-replicate = true
 
 Unified sorter is the sorting engine in TiCDC. This feature is enabled by default. It can mitigate OOM problems caused by the following scenarios:
 
-+ The data replication task in TiCDC is paused for a long time, during which a large amount of incremental data is accumulated and need to be replicated.
++ The data replication task in TiCDC is paused for a long time, during which a large amount of incremental data is accumulated and needs to be replicated.
 + The data replication task is started from an early timestamp so it becomes necessary to replicate a large amount of incremental data.
 
 > **Note:**
