@@ -122,7 +122,7 @@ In addition, when you create a binding, TiDB requires that the session is in a d
 
 > **Note:**
 >
-> The text must be the same before and after normalization and hint removal for both the original SQL statement and the bound statement, or the binding will fail. Take the following examples:
+> The original SQL statement and the bound statement must have the same text after normalization and hint removal, or the binding will fail. Take the following examples:
 >
 > - This binding can be created successfully because the texts before and after parameterization and hint removal are the same: `select * from test . t where a > ?`
 >
