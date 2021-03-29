@@ -102,9 +102,9 @@
     + Understanding the Query Execution Plan
       + [Overview](/explain-overview.md)
       + [`EXPLAIN` Walkthrough](/explain-walkthrough.md)
-      + [MPP Queries](/explain-mpp.md)
       + [Indexes](/explain-indexes.md)
       + [Joins](/explain-joins.md)
+      + [MPP Queries](/explain-mpp.md)
       + [Subqueries](/explain-subqueries.md)
       + [Aggregation](/explain-aggregation.md)
       + [Views](/explain-views.md)

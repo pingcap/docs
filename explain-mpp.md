@@ -107,7 +107,7 @@ EXPLAIN SELECT COUNT(*) FROM t1 a JOIN t1 b ON a.id = b.id;
 12 rows in set (0.00 sec)
 ```
 
-The work process in the above execution plan is as follows:
+In the above execution plan:
 
 * The query fragment `[TableFullScan_20, Selection_21, ExchangeSender_22]` reads data from table b and shuffles data to upstream MPP tasks.
 * The query fragment `[TableFullScan_16, Selection_17, ExchangeSender_18]` reads data from table a and shuffles data to upstream MPP tasks.
@@ -138,7 +138,7 @@ EXPLAIN SELECT COUNT(*) FROM t1 a JOIN t1 b ON a.id = b.id;
 +----------------------------------------+---------+--------------+---------------+------------------------------------------------+
 ```
 
-The work process in the above execution plan is as follows:
+In the above execution plan:
 
 * The query fragment `[TableFullScan_17, Selection_18, ExchangeSender_19]` reads data from the small table and broadcasts the data to each node that contains data from the large table (table a).
 * The query fragment `[TableFullScan_21, Selection_22, ExchangeReceiver_20, HashJoin_43, ExchangeSender_46]` joins all data and returns it to TiDB.
