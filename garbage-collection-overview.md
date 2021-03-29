@@ -30,6 +30,10 @@ The Resolve Locks step clears the locks before the safe point. This means that i
 
 The Resolve Locks step is implemented in either of the following two ways, which can be configured using the system variable [`tidb_gc_scan_lock_mode`](/system-variables.md#tidb_gc_scan_lock_mode-new-in-v50-ga):
 
+> **Warning:**
+>
+> Currently, `PHYSICAL` (Green GC) is an experimental feature. It is not recommended that you use it in the production environment.
+
 - `LEGACY` (default): The GC leader sends requests to all Regions to scan obsolete locks, checks the primary key statuses of scanned locks, and sends requests to commit or roll back the corresponding transaction.
 - `PHYSICAL`: TiDB bypasses the Raft layer and directly scans data on each TiKV node.
 
