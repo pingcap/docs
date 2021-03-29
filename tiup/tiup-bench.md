@@ -15,11 +15,7 @@ tiup bench
 ```
 
 ```
-<<<<<<< HEAD
-Starting component `bench`: /Users/joshua/.tiup/components/bench/v0.0.1/bench 
-=======
 Starting component `bench`: /home/tidb/.tiup/components/bench/v1.3.0/bench 
->>>>>>> 0334c8f5... Remove private info in TiUP document (#5086)
 Benchmark database with different workloads
 
 Usage:
