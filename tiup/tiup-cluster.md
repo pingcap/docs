@@ -17,13 +17,7 @@ tiup cluster
 ```
 
 ```
-<<<<<<< HEAD
-The component `cluster` is not installed; downloading from repository.
-download https://tiup-mirrors.pingcap.com/cluster-v0.4.9-darwin-amd64.tar.gz 15.32 MiB / 15.34 MiB 99.90% 10.04 MiB p/s
-Starting component `cluster`: /Users/joshua/.tiup/components/cluster/v0.4.9/cluster
-=======
 Starting component `cluster`: /home/tidb/.tiup/components/cluster/v1.3.0/cluster
->>>>>>> 0334c8f5... Remove private info in TiUP document (#5086)
 Deploy a TiDB cluster for production
 
 Usage:
