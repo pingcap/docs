@@ -838,6 +838,34 @@ logic:  120102
 ...
 ```
 
+### Query all nodes whose status is not `Up`
+
+{{< copyable "" >}}
+
+```bash
+» store --jq='.stores[].store | select(.state_name!="Up") | { id, address, state_name}'
+```
+
+```
+{"id":1,"address":"127.0.0.1:20161""state_name":"Offline"}
+{"id":5,"address":"127.0.0.1:20162""state_name":"Offline"}
+...
+```
+
+### Query all TiFlash nodes
+
+{{< copyable "" >}}
+
+```bash
+» store --jq='.stores[].store | select(.labels | length>0 and contains([{"key":"engine","value":"tiflash"}])) | { id, address, state_name}'
+```
+
+```
+{"id":1,"address":"127.0.0.1:20161""state_name":"Up"}
+{"id":5,"address":"127.0.0.1:20162""state_name":"Up"}
+...
+```
+
 ### Query the distribution status of the Region replicas
 
 ```bash
@@ -906,3 +934,4 @@ When [store30, store31] is down, find out all Regions that can be safely process
 {"id":22,"remove_peer":[30]}
 ...
 ```
+
