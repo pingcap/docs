@@ -934,4 +934,3 @@ When [store30, store31] is down, find out all Regions that can be safely process
 {"id":22,"remove_peer":[30]}
 ...
 ```
-
