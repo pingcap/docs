@@ -165,7 +165,7 @@ ERROR 8200 (HY000): Unsupported shard_row_id_bits for table with primary key as 
 
 ## Compatibility
 
-### Compatibility with higher and lower TiDB versions
+### Compatibility with earlier and later TiDB versions
 
 TiDB supports upgrading tables with clustered indexes but not downgrading such tables, which means that data in tables with clustered indexes on a later TiDB version is not available on an earlier one.
 
