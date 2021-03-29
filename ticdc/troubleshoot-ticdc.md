@@ -371,5 +371,5 @@ cdc cli changefeed resume -c test-cf --pd=http://10.0.10.25:2379
 
 > **Note:**
 >
-> + The steps above only apply to TiCDC v5.0 or later (excluding v5.0.0-rc).
+> + The steps above only apply to TiCDC v5.0.0 or later (excluding v5.0.0-rc).
 > + In v5.0.0-rc, the changefeed's checkpoint-ts after the DDL execution failure is the DDL statement's finish-ts. After using `cdc cli changefeed resume` to resume the replication task, this DDL statement will be skipped.
