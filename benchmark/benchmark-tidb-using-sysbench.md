@@ -38,7 +38,7 @@ server_configs:
     rocksdb.writecf.block-cache-size: "6GB"
 ```
 
-You can also use the shared block cache to configure:
+You can also configure TiKV to share block cache:
 
 ```yaml
 server_configs:
