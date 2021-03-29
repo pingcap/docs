@@ -12,15 +12,30 @@ TiDB version: 4.0.12
 
 + TiFlash
 
-    - Add tools to check exact tiflash replica status for online rolling update [#1512](https://github.com/pingcap/tics/pull/1512)
+    - Add tools to check exact status of `tiflash replica` for online rolling update
 
 ## Improvements
+
++ TiDB
+
+    - Refine explain info for batch cop [#23164](https://github.com/pingcap/tidb/pull/23164)
+    - Add warning info for exprs that can not be pushed to storage layer for explain statement. [#23020](https://github.com/pingcap/tidb/pull/23020)
+    - Ddl: migrate part of ddl package code from Execute/ExecRestricted to safe API (2) [#22935](https://github.com/pingcap/tidb/pull/22935)
+    - Ddl: migrate part of ddl package code from Execute/ExecRestricted to safe API (1). [#22929](https://github.com/pingcap/tidb/pull/22929)
+    - Add optimization-time and wait-TS-time into the slow log [#22918](https://github.com/pingcap/tidb/pull/22918)
+    - Support query partition_id from infoschema.partitions [#22489](https://github.com/pingcap/tidb/pull/22489)
+    - Add 'last_plan_from_binding' to help know whether sql's plan is matched with the hints in the binding [#21430](https://github.com/pingcap/tidb/pull/21430)
+    - Do not report error for prepared stmt execution if tidb_snapshot is set [#22641](https://github.com/pingcap/tidb/pull/22641)
+    - Record prepare execute fail as "Failed Query OPM" in monitor [#22672](https://github.com/pingcap/tidb/pull/22672)
+    - Add three format specifier for str_to_date expression [#22812](https://github.com/pingcap/tidb/pull/22812)
+    - Scattering truncated tables without pre-split option. [#22872](https://github.com/pingcap/tidb/pull/22872)
 
 + TiFlash
 
     - Automatically clean archive data to free up disk space [#1638](https://github.com/pingcap/tics/pull/1638)
-    - Allow omitting deprecated "users.*" settings in the configuration file of TiFlash. [#1535](https://github.com/pingcap/tics/pull/1535)
+    - Optimize configuration file and remove useless items [#1535](https://github.com/pingcap/tics/pull/1535)
     - Reduce the size of TiFlash binary file. [#1414](https://github.com/pingcap/tics/pull/1414)
+    - Use an adaptive aggressive GC strategy to reduce memory usage
 
 ## Bug Fixes
 
@@ -37,12 +52,11 @@ TiDB version: 4.0.12
     - Fix a bug that collation is not handle for text type [#23092](https://github.com/pingcap/tidb/pull/23092)
     - Fix range partition prune bug for IN expr [#23074](https://github.com/pingcap/tidb/pull/23074)
     - Fix request block forever when replace a tombstone store with the store has same IP addr [#23071](https://github.com/pingcap/tidb/pull/23071)
-    - Scattering truncated tables without pre-split option. [#22872](https://github.com/pingcap/tidb/pull/22872)
     - Do not ajust int when it is null and compared year [#22844](https://github.com/pingcap/tidb/pull/22844)
-    - Add three format specifier for str_to_date expression [#22812](https://github.com/pingcap/tidb/pull/22812)
     - Fix load data lost connection error on tables with auto_random column [#22736](https://github.com/pingcap/tidb/pull/22736)
-    - Record prepare execute fail as "Failed Query OPM" in monitor [#22672](https://github.com/pingcap/tidb/pull/22672)
-    - Do not report error for prepared stmt execution if tidb_snapshot is set [#22641](https://github.com/pingcap/tidb/pull/22641)
+    - Fix ddl hang over when it meets panic in cancelling path. [#23297](https://github.com/pingcap/tidb/pull/23297)
+    - Fix wrong key range of index scan when filter is comparing year column with NULL [#23104](https://github.com/pingcap/tidb/pull/23104)
+    - Fix create view success but failed when using it [#23083](https://github.com/pingcap/tidb/pull/23083)
 
 + PD
 
@@ -51,15 +65,14 @@ TiDB version: 4.0.12
 
 + TiFlash
 
-    - Fix the issue that binary type column's default value containing leading zero bytes is trimmed and does not contain padded tailing zero bytes [#1571](https://github.com/pingcap/tics/pull/1571)
-    - Fix the bug that TiFlash fail to sync schema if the database name contains special character [#1559](https://github.com/pingcap/tics/pull/1559)
-    - Use an adaptive aggressive data GC strategy to avoid OOM [#1553](https://github.com/pingcap/tics/pull/1553)
-    - Fix wrong result of IN function [#1532](https://github.com/pingcap/tics/pull/1532)
-    - Fix the bug that opened file count shown in Grafana is high [#1503](https://github.com/pingcap/tics/pull/1503)
-    - Support timestamp literal in dag requeset [#1501](https://github.com/pingcap/tics/pull/1501)
-    - Fix potential segmentation fault in TiFlash [#1491](https://github.com/pingcap/tics/pull/1491)
-    - Fix problem CastStringAsInt may produce wrong result. [#1481](https://github.com/pingcap/tics/pull/1481)
-    - Fix a bug that the `like` function may return wrong result [#1461](https://github.com/pingcap/tics/pull/1461)
+    - Fix an issue of incorrect results when the default value of `binary` type column contains leading or tailing zero bytes
+    - Fix the bug that TiFlash fail to sync schema if the name of database contains special characters
+    - Fix an issue of incorrect results when handling `IN` expression with decimal values
+    - Fix the bug that metrics about opened file count shown in Grafana is high
+    - Fix the bug that TiFlash does not support `Timestamp` literal
+    - Fix the potential crash while handling `FROM_UNIXTIME` expression
+    - Fix an issue of incorrect results when casting string as integer
+    - Fix a bug that `like` function may return wrong result
 
 + Tools
 
