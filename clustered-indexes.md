@@ -63,9 +63,9 @@ CREATE TABLE t (a BIGINT, b VARCHAR(255), PRIMARY KEY(a, b) /*T![clustered_index
 
 For statements that do not explicitly specify the keyword `CLUSTERED`/`NONCLUSTERED`, the default behavior is controlled by the global variable `@@global.tidb_enable_clustered_index`. Supported values for this variable are as follows:
 
-    - `OFF` indicates that primary keys are created as non-clustered indexes by default.
-    - `ON` indicates that primary keys are created as clustered indexes by default.
-    - `INT_ONLY` indicates that the behavior is controlled by the configuration item `alter-primary-key`. If `alter-primary-key` is set to `true`, primary keys are created as non-clustered indexes by default. If it is set to `false`, only the primary keys consist of an integer column are created as clustered indexes.
+- `OFF` indicates that primary keys are created as non-clustered indexes by default.
+- `ON` indicates that primary keys are created as clustered indexes by default.
+- `INT_ONLY` indicates that the behavior is controlled by the configuration item `alter-primary-key`. If `alter-primary-key` is set to `true`, primary keys are created as non-clustered indexes by default. If it is set to `false`, only the primary keys consist of an integer column are created as clustered indexes.
 
 The default value of `@@global.tidb_enable_clustered_index` is `INT_ONLY`.
 
