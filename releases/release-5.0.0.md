@@ -1,20 +1,23 @@
 ---
-title: TiDB 5.0 RC Release Notes
+title: What's New in TiDB 5.0
+aliases: ['/tidb/dev/release-5.0.0-rc/']
 ---
 
-# TiDB 5.0 RC Release Notes
+# What's New in TiDB 5.0
 
-Release date: January 12, 2021
+Release date: March 31, 2021
 
-TiDB version: 5.0.0-rc
+TiDB version: 5.0.0
 
-TiDB v5.0.0-rc is the predecessor version of TiDB v5.0. In v5.0, PingCAP will be dedicated to helping enterprises quickly build applications based on TiDB, freeing them from worries about database performance, performance jitter, security, high availability, disaster recovery, troubleshooting SQL performance, and so on.
+In v5.0, PingCAP is dedicated to helping enterprises quickly build applications based on TiDB, freeing them from worries about database performance, performance jitter, security, high availability, disaster recovery, troubleshooting SQL performance, and so on.
 
 In v5.0, the key new features or improvements are as follows:
 
++ MPP architecture introduced in TiFlash, which enables the execution workload of large join queries to be shared among TiFlash nodes. When the MPP mode is enabled, TiDB, based on cost, determines whether the calculation should be performed using the MPP framework. In the MPP mode, the join keys are redistributed while being calculated (`Exchange` operation), which distributes the calculation pressure to each TiFlash node and speeds up the calculation.
 + Clustered index. When this feature is enabled, database performance is improved. For example, in the TPC-C tpmC test, TiDB's performance, with clustered index enabled, improves by 39%.
 + Async commit. When this feature is enabled, the write latency is reduced. For example, in the Sysbench olpt-insert test, the write latency of TiDB, with async commit enabled, is reduced by 37.3%.
 + Reduced jitters. This is achieved by improving the optimizer stability and by limiting system tasks' usages of I/O, network, CPU, and memory resources. For example, in the 72-hour performance test, the standard deviation of Sysbench TPS jitter is reduced from 11.09% to 3.36%.
++ Enhanced system stability by improving scheduling and by keeping execution plans unchanged as much as possible.
 + Raft Joint Consensus algorithm, which ensures the system availability during the Region membership change.
 + Optimized `EXPLAIN` features and invisible index, which helps Database Administrators (DBAs) debug SQL statements more efficiently.
 + Guaranteed reliability for enterprise data. You can back up data from TiDB to AWS S3 storage and Google Cloud GCS, or restore data from these cloud storage platforms.
