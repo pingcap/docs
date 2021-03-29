@@ -623,7 +623,7 @@ This section gives the alert rules for the TiKV component.
 * Solution:
 
     1. It is normally because the GC concurrency is set too high. You can moderately lower the GC concurrency degree, and you need to first confirm that the failed GC is caused by the busy server.
-    2. You can moderately lower the concurrency degree by adjusting [`tikv_db_concurrency`](/system-variables.md#tidb_gc_concurrency).
+    2. You can moderately lower the concurrency degree by adjusting [`tikv_db_concurrency`](/system-variables.md#tidb_gc_concurrency-new-in-v50-ga).
 
 ### Warning-level alerts
 

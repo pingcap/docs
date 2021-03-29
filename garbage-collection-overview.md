@@ -28,7 +28,7 @@ The TiDB transaction model is implemented based on [Google's Percolator](https:/
 
 The Resolve Locks step clears the locks before the safe point. This means that if the primary key of a lock is committed, this lock needs to be committed; otherwise, it needs to be rolled back. If the primary key is still locked (not committed or rolled back), this transaction is seen as timing out and rolled back.
 
-There are two scan modes as follows. You can configure the mode using the system variable [`tidb_gc_scan_lock_mode`](/system-variables.md#tidb_gc_scan_lock_mode).
+There are two scan modes as follows. You can configure the mode using the system variable [`tidb_gc_scan_lock_mode`](/system-variables.md#tidb_gc_scan_lock_mode-new-in-v50-ga).
 
 - `LEGACY` (default mode): The GC leader sends requests to all Regions to scan obsolete locks, checks the primary key statuses of scanned locks, and sends requests to commit or roll back the corresponding transaction.
 - `PHYSICAL`: TiDB bypasses the Raft layer and directly scans data on each TiKV node.
