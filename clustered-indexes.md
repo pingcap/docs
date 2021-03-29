@@ -1,6 +1,6 @@
 ---
 title: Clustered Indexes
-summary: Learn the concept, user scenario, usages, limitations, and compatibility of clustered indexes.
+summary: Learn the concept, user scenarios, usages, limitations, and compatibility of clustered indexes.
 ---
 
 # Clustered Indexes
@@ -143,13 +143,13 @@ mysql> SELECT TIDB_PK_TYPE FROM information_schema.tables WHERE table_schema = '
 Currently, there are two types of limitations for the clustered index feature. See the following:
 
 - Situations that are not supported and not in the support plan:
-    - It is not supported using the clustered indexes feature together with TiDB Binlog. After TiDB Binlog is started, TiDB does not allow to create a single integer primary key as a clustered index. TiDB Binlog does not replicate data changes of existing tables with clustered indexes to the downstream. If you need to replicate tables with clustered indexes, use [TiCDC](/ticdc/ticdc-overview.md) instead.
+    - Using the clustered index feature together with TiDB Binlog is not supported. After TiDB Binlog is enabled, TiDB only allows creating a single integer primary key as a clustered index. TiDB Binlog does not replicate data changes of existing tables with clustered indexes to the downstream. If you need to replicate tables with clustered indexes, use [TiCDC](/ticdc/ticdc-overview.md) instead.
     - Using clustered indexes together with the attribute [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md) is not supported. Also, the attribute [`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions) does not take effect on tables with clustered indexes.
     - Downgrading tables with clustered indexes is not supported. If you need to downgrade such tables, use logical backup tools to migrate data instead.
 - Situations that are not supported yet but in the support plan:
     - Adding, dropping, and altering clustered indexes using `ALTER TABLE` statements are not supported.
 
-After TiDB Binlog is enabled, if you create a single integer primary key as a clustered index, TiDB returns the following error:
+After TiDB Binlog is enabled, if the primary key you create as a clustered index does not consist of only one integer column, TiDB returns the following error:
 
 ```sql
 mysql> CREATE TABLE t (a VARCHAR(255) PRIMARY KEY CLUSTERED);
@@ -167,7 +167,7 @@ ERROR 8200 (HY000): Unsupported shard_row_id_bits for table with primary key as 
 
 ### Compatibility with higher and lower TiDB versions
 
-TiDB supports upgrading tables with clustered indexes but not degrading them, meaning that data in tables with clustered indexes is available on a higher TiDB version, but not on a lower one.
+TiDB supports upgrading tables with clustered indexes but not downgrading such tables, which means that data in tables with clustered indexes on a later TiDB version is not available on an earlier one.
 
 The clustered index feature is partially supported in TiDB v3.0 and v4.0. It is enabled by default when the following requirements are fully met:
 
@@ -175,7 +175,7 @@ The clustered index feature is partially supported in TiDB v3.0 and v4.0. It is 
 - The `PRIMARY KEY` consists of only one column.
 - The `PRIMARY KEY` is an `INTEGER`.
 
-However, since v5.0, TiDB creates all types of primary keys as non-clustered indexes by default. Because this behavior change may cause TiDB in the default configuration to perform worse in some scenarios, you can consider explicitly specifying clustered indexes.
+However, since v5.0, TiDB creates all types of primary keys as non-clustered indexes by default. This behavior change might cause TiDB in the default configuration to perform worse in some scenarios. You can consider explicitly specifying a primary key as a clustered index.
 
 ### Compatibility with MySQL
 
@@ -188,7 +188,7 @@ The clustered index feature is only compatible with the following ecosystem tool
 - Backup and restore tools: BR, Dumpling, and TiDB Lightning.
 - Data migration and replication tools: DM and TiCDC.
 
-However, you cannot convert a table with non-clustered indexes to a table with clustered indexes by using the v5.0 BR to backup and recover tables, and vice versa.
+However, you cannot convert a table with non-clustered indexes to a table with clustered indexes by backing up and restoring the table using the v5.0 BR tool, and vice versa.
 
 ### Compatibility with other TiDB features
 
