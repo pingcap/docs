@@ -28,14 +28,43 @@ TiDB version: 4.0.12
     - Do not report error for prepared stmt execution if tidb_snapshot is set [#22641](https://github.com/pingcap/tidb/pull/22641)
     - Record prepare execute fail as "Failed Query OPM" in monitor [#22672](https://github.com/pingcap/tidb/pull/22672)
     - Add three format specifier for str_to_date expression [#22812](https://github.com/pingcap/tidb/pull/22812)
-    - Scattering truncated tables without pre-split option. [#22872](https://github.com/pingcap/tidb/pull/22872)
+    - Scattering truncated tables without pre-split option [#22872](https://github.com/pingcap/tidb/pull/22872)
+
++ TiKV
+
+    * Pd_client: prevent a large number of reconnections in a short time [#9879](https://github.com/tikv/tikv/pull/9879)
+    * Optimize seek write for many tombstones [#9729](https://github.com/tikv/tikv/pull/9729)
+    * Change the default value of `leader-transfer-max-log-lag` to 128 to increase the success rate of leader transfer [#9605](https://github.com/tikv/tikv/pull/9605)
 
 + TiFlash
 
-    - Automatically clean archive data to free up disk space [#1638](https://github.com/pingcap/tics/pull/1638)
-    - Optimize configuration file and remove useless items [#1535](https://github.com/pingcap/tics/pull/1535)
-    - Reduce the size of TiFlash binary file. [#1414](https://github.com/pingcap/tics/pull/1414)
+    - Optimize configuration file and remove useless items
+    - Reduce the size of TiFlash binary file
     - Use an adaptive aggressive GC strategy to reduce memory usage
+
++ Tools
+
+    + TiCDC
+
+        - Add double confirm when creating or resuming changefeed with start-ts or checkpoint-ts 1 day before current ts [#1497](https://github.com/pingcap/ticdc/pull/1497)
+
+    + Backup & Restore (BR)
+
+        - Log `HTTP_PROXY` and `HTTPS_PROXY`. [#827](https://github.com/pingcap/br/pull/827)
+        - Improve backup performance when there are many tables. [#745](https://github.com/pingcap/br/pull/745)
+        - Report error if service safe point check fails. [#826](https://github.com/pingcap/br/pull/826)
+        - Add cluster_version and br_version info in backupmeta [#803](https://github.com/pingcap/br/pull/803)
+        - Added retry for external storage errors. [#851](https://github.com/pingcap/br/pull/851)
+        - Reduce memory usage during backup. [#886](https://github.com/pingcap/br/pull/886)
+
+    + TiDB Lightning
+
+        - Check TiDB cluster version before running TiDB-Lightning to avoid unexpected errors. [#787](https://github.com/pingcap/br/pull/787)
+        - Fail fast when lightning meets error in engine/chunk restore and do not retry context.Cancel error. [#867](https://github.com/pingcap/br/pull/867)
+        - Added configurations tikv-importer.engine-mem-cache-size and tikv-importer.local-writer-mem-cache-size to tune between memory usage and performance. [#866](https://github.com/pingcap/br/pull/866)
+        - Run batch split regions in parallel for Lightning local backend. [#868](https://github.com/pingcap/br/pull/868)
+        - When using Lightning to import from S3, Lightning no longer require s3:ListBucket permission on the entire bucket, only the data source prefix itself. [#919](https://github.com/pingcap/br/pull/919)
+        - When resuming from checkpoint, Lightning now keeps restoring the original engines instead of starting to process some random new ones. [#924](https://github.com/pingcap/br/pull/924)
 
 ## Bug Fixes
 
@@ -58,10 +87,17 @@ TiDB version: 4.0.12
     - Fix wrong key range of index scan when filter is comparing year column with NULL [#23104](https://github.com/pingcap/tidb/pull/23104)
     - Fix create view success but failed when using it [#23083](https://github.com/pingcap/tidb/pull/23083)
 
++ TiKV
+
+    - Fix the issue that the IN expr(coprocessor) didn't handle unsigned/signed int properly [#9850](https://github.com/tikv/tikv/pull/9850)
+    - Fix the issue that the ingests operation cannot reentrant. [#9779](https://github.com/tikv/tikv/pull/9779)
+    - Fix the issue that the space missed when converting json to string in TiKV coprocessor [#9666](https://github.com/tikv/tikv/pull/9666)
+
 + PD
 
     - Save to the region cache when pending-peers or down-peers change [#3471](https://github.com/pingcap/pd/pull/3471)
     - Checker: prevent the regions in split-cache from becoming the target of merge [#3459](https://github.com/pingcap/pd/pull/3459)
+    - Fix the bug that the isolation level is wrong when the store lacks label [#3474](https://github.com/pingcap/pd/pull/3474)
 
 + TiFlash
 
@@ -76,42 +112,19 @@ TiDB version: 4.0.12
 
 + Tools
 
-    - BR
+    + TiCDC
 
-        * Fix the bug that lightning generated ts may be to large or small that query may return incorrect result. [#860](https://github.com/pingcap/br/pull/860)
-        * No release note (it's not released yet.) [#854](https://github.com/pingcap/br/pull/854)
-        * Fix the bug that importer may ignore write rows error if open engine returns `file exists` error [#848](https://github.com/pingcap/br/pull/848)
+        - Fix a resolved ts event disorder problems caused by concurrency [#1464](https://github.com/pingcap/ticdc/pull/1464)
+        - Fix a data loss bug when capture restarts due to network issue, and some table on it is scheduled at the same time [#1508](https://github.com/pingcap/ticdc/pull/1508)
 
-## 请判断下面未分类 note，对下面 note 进行分类并移动到以上三个分类部分中
+    + Backup & Restore (BR)
 
-+ TiKV
+        - Fix the bug that WalkDir for s3 storage returns nil if the target path is bucket name. [#773](https://github.com/pingcap/br/pull/773)
+        - Fixed a bug that caused, even BR started with TLS config, the pprof endpoints won't be served with TLS. [#839](https://github.com/pingcap/br/pull/839)
 
-    - Pd_client: prevent a large number of reconnections in a short time [#9879](https://github.com/tikv/tikv/pull/9879)
-    - Fix IN expr(coprocessor) didn't handle unsigned/signed int properly [#9850](https://github.com/tikv/tikv/pull/9850)
-    - Fix the issue that ingests operation cannot reentrant. [#9779](https://github.com/tikv/tikv/pull/9779)
-    - Optimize seek write for many tombstones [#9729](https://github.com/tikv/tikv/pull/9729)
-    - Fix missing space when casting json to string in TiKV coprocessor [#9666](https://github.com/tikv/tikv/pull/9666)
-    - Change the default `leader-transfer-max-log-lag` to 128 to increase the success rate of leader transfer [#9605](https://github.com/tikv/tikv/pull/9605)
+    + TiDB Lightning
 
-+ PD
-
-    - Fix the bug that the isolation level is wrong when the store lacks label [#3474](https://github.com/pingcap/pd/pull/3474)
-
-+ Tools
-
-    - BR
-
-        * Reduce memory usage during backup. [#886](https://github.com/pingcap/br/pull/886)
-        * Added configurations `tikv-importer.engine-mem-cache-size` and `tikv-importer.local-writer-mem-cache-size` to tune between memory usage and performance. [#866](https://github.com/pingcap/br/pull/866)
-        * BR would log `HTTP_PROXY` and `HTTPS_PROXY` now. [#827](https://github.com/pingcap/br/pull/827)
-        * Add cluster_version and br_version info in backupmeta [#803](https://github.com/pingcap/br/pull/803)
-        * Check TiDB cluster version before running TiDB-Lightning to avoid unexpected errors. [#787](https://github.com/pingcap/br/pull/787)
-        * Improve backup performance when there are many tables. [#745](https://github.com/pingcap/br/pull/745)
-
-    - TiCDC
-
-        * Fix a data loss bug when capture restarts due to network issue, and some table on it is scheduled at the same time. [#1523](https://github.com/pingcap/ticdc/pull/1523)
-        * Add double confirm when creating or resuming changefeed with `start-ts` or `checkpoint-ts` 1 day before current ts. [#1499](https://github.com/pingcap/ticdc/pull/1499)
-        * No release note, the bug is never released [#1475](https://github.com/pingcap/ticdc/pull/1475)
-        * Fix a resolved ts event disorder problems caused by concurrency [#1472](https://github.com/pingcap/ticdc/pull/1472)
-        * No release note, this bug is never released [#1470](https://github.com/pingcap/ticdc/pull/1470)
+        - Fix a bug that importer may ignore write rows error if open engine returns file exists error. [#848](https://github.com/pingcap/br/pull/848)
+        - Fix a bug that lightning generated ts may be to large or small that query may return incorrect result. [#850](https://github.com/pingcap/br/pull/850)
+        - Fix a bug that lightning unexpected exit may cause checkpoint file truncated to 0 sized. [#889](https://github.com/pingcap/br/pull/889)
+        - Fix a bug that chunk restore task may ignore context cancel error and causes data loss. [#874](https://github.com/pingcap/br/pull/874)
