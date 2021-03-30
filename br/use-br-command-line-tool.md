@@ -275,7 +275,7 @@ To restore the cluster data, use the `br restore` command. You can add the `full
 >
 > If you use the local storage, you **must** copy all back up SST files to every TiKV node in the path specified by `--storage`.
 >
-> Even if each TiKV node eventually only needs to read a part of all SST files, they all need full access to the complete archive because:
+> Even if each TiKV node eventually only need to read a part of the all SST files, they all need full access to the complete archive because:
 >
 > - Data are replicated into multiple peers. When ingesting SSTs, these files have to be present on *all* peers. This is unlike back up where reading from a single node is enough.
 > - Where each peer is scattered to during restore is random. We don't know in advance which node will read which file.
