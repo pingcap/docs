@@ -34,7 +34,7 @@ The update operation does not delete the old version. You can still specify usin
 
 ### --nightly
 
-- Updates the specified components to the nightly version. The command using this option is equivalent to the `tiup update <component>:nightly` command.
+- Updates the specified components to the nightly version. The `tiup update` command with this option is equivalent to the `tiup update <component>:nightly` command.
 - Data type: `BOOLEAN`
 - Default: `false`
 
