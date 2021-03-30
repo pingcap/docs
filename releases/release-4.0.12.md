@@ -4,7 +4,7 @@ title: TiDB 4.0.12 Release Notes
 
 # TiDB 4.0.12 Release Notes
 
-Release date: March 31, 2021
+Release date: April 2, 2021
 
 TiDB version: 4.0.12
 
@@ -12,14 +12,14 @@ TiDB version: 4.0.12
 
 + TiFlash
 
-    - Add tools to check exact status of `tiflash replica` for online rolling update
+    - Add tools to check the exact status of `tiflash replica` for online rolling update
 
 ## Improvements
 
 + TiDB
 
     - Refine explain info for batch cop [#23164](https://github.com/pingcap/tidb/pull/23164)
-    - Add warning info for exprs that can not be pushed to storage layer for explain statement. [#23020](https://github.com/pingcap/tidb/pull/23020)
+    - Add warning information for expressions that cannot be pushed to the storage layer in `EXPLAIN` statement [#23020](https://github.com/pingcap/tidb/pull/23020)
     - Ddl: migrate part of ddl package code from Execute/ExecRestricted to safe API (2) [#22935](https://github.com/pingcap/tidb/pull/22935)
     - Ddl: migrate part of ddl package code from Execute/ExecRestricted to safe API (1). [#22929](https://github.com/pingcap/tidb/pull/22929)
     - Add optimization-time and wait-TS-time into the slow log [#22918](https://github.com/pingcap/tidb/pull/22918)
