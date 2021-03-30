@@ -36,6 +36,11 @@ TiDB version: 4.0.12
     * Optimize seek write for many tombstones [#9729](https://github.com/tikv/tikv/pull/9729)
     * Change the default value of `leader-transfer-max-log-lag` to 128 to increase the success rate of leader transfer [#9605](https://github.com/tikv/tikv/pull/9605)
 
++ PD
+
+    - Save to the region cache when pending-peers or down-peers change [#3471](https://github.com/pingcap/pd/pull/3471)
+    - Checker: prevent the regions in split-cache from becoming the target of merge [#3459](https://github.com/pingcap/pd/pull/3459)
+
 + TiFlash
 
     - Optimize configuration file and remove useless items
@@ -95,8 +100,6 @@ TiDB version: 4.0.12
 
 + PD
 
-    - Save to the region cache when pending-peers or down-peers change [#3471](https://github.com/pingcap/pd/pull/3471)
-    - Checker: prevent the regions in split-cache from becoming the target of merge [#3459](https://github.com/pingcap/pd/pull/3459)
     - Fix the bug that the isolation level is wrong when the store lacks label [#3474](https://github.com/pingcap/pd/pull/3474)
 
 + TiFlash
@@ -120,11 +123,11 @@ TiDB version: 4.0.12
     + Backup & Restore (BR)
 
         - Fix the bug that WalkDir for s3 storage returns nil if the target path is bucket name. [#773](https://github.com/pingcap/br/pull/773)
-        - Fixed a bug that caused, even BR started with TLS config, the pprof endpoints won't be served with TLS. [#839](https://github.com/pingcap/br/pull/839)
+        - Fixed a bug that caused, even BR started with TLS config, the pprof endpoints won't be served with TLS [#839](https://github.com/pingcap/br/pull/839)
 
     + TiDB Lightning
 
-        - Fix a bug that importer may ignore write rows error if open engine returns file exists error. [#848](https://github.com/pingcap/br/pull/848)
-        - Fix a bug that lightning generated ts may be to large or small that query may return incorrect result. [#850](https://github.com/pingcap/br/pull/850)
-        - Fix a bug that lightning unexpected exit may cause checkpoint file truncated to 0 sized. [#889](https://github.com/pingcap/br/pull/889)
-        - Fix a bug that chunk restore task may ignore context cancel error and causes data loss. [#874](https://github.com/pingcap/br/pull/874)
+        - Fix a bug that importer may ignore write rows error if open engine returns file exists error [#848](https://github.com/pingcap/br/pull/848)
+        - Fix a bug that lightning generated ts may be to large or small that query may return incorrect result [#850](https://github.com/pingcap/br/pull/850)
+        - Fix a bug that lightning unexpected exit may cause checkpoint file truncated to 0 sized [#889](https://github.com/pingcap/br/pull/889)
+        - Fix a bug that chunk restore task may ignore context cancel error and causes data loss [#874](https://github.com/pingcap/br/pull/874)
