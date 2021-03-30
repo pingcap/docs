@@ -155,6 +155,12 @@ The TiDB configuration file supports more options than command-line parameters. 
 - Default value: `true`
 - When this configuration is set to `false` on all TiDB instances, the telemetry collection in TiDB is disabled and the [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402-version) system variable does not take effect. See [Telemetry](/telemetry.md) for details.
 
+### `enable-tcp4-only` <span class="version-mark">New in v5.0.0</span>
+
+- Enables or disables listening on TCP4 only.
+- Default value: `false`.
+- Enabling this option is useful when TiDB is used with LVS for load balancing since the `toa` module can correctly parse the real client IP from the TCP header.
+
 ## Log
 
 Configuration items related to log.
