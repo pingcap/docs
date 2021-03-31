@@ -19,78 +19,78 @@ TiDB version: 4.0.12
 + TiDB
 
     - Refine explain info for batch cop [#23164](https://github.com/pingcap/tidb/pull/23164)
-    - Add warning information for expressions that cannot be pushed to the storage layer in `EXPLAIN` statement [#23020](https://github.com/pingcap/tidb/pull/23020)
-    - Ddl: migrate part of ddl package code from Execute/ExecRestricted to safe API (2) [#22935](https://github.com/pingcap/tidb/pull/22935)
-    - Ddl: migrate part of ddl package code from Execute/ExecRestricted to safe API (1). [#22929](https://github.com/pingcap/tidb/pull/22929)
-    - Add optimization-time and wait-TS-time into the slow log [#22918](https://github.com/pingcap/tidb/pull/22918)
-    - Support query partition_id from infoschema.partitions [#22489](https://github.com/pingcap/tidb/pull/22489)
-    - Add 'last_plan_from_binding' to help know whether sql's plan is matched with the hints in the binding [#21430](https://github.com/pingcap/tidb/pull/21430)
-    - Do not report error for prepared stmt execution if tidb_snapshot is set [#22641](https://github.com/pingcap/tidb/pull/22641)
-    - Record prepare execute fail as "Failed Query OPM" in monitor [#22672](https://github.com/pingcap/tidb/pull/22672)
-    - Add three format specifier for str_to_date expression [#22812](https://github.com/pingcap/tidb/pull/22812)
-    - Scattering truncated tables without pre-split option [#22872](https://github.com/pingcap/tidb/pull/22872)
+    - Add the warning information for expressions that cannot be pushed to the storage layer in `EXPLAIN` statement [#23020](https://github.com/pingcap/tidb/pull/23020)
+    - Migrate a part of the DDL package code from `Execute`/`ExecRestricted` to the safe API (2) [#22935](https://github.com/pingcap/tidb/pull/22935)
+    - Migrate a part of the DDL package code from `Execute`/`ExecRestricted` to the safe API (1) [#22929](https://github.com/pingcap/tidb/pull/22929)
+    - Add `optimization-time` and `wait-TS-time` into the slow log [#22918](https://github.com/pingcap/tidb/pull/22918)
+    - Support querying `partition_id` from the `infoschema.partitions` table [#22489](https://github.com/pingcap/tidb/pull/22489)
+    - Add `last_plan_from_binding` to help the user know whether a SQL statement's execution plan is matched with the hints in the binding [#21430](https://github.com/pingcap/tidb/pull/21430)
+    - Scatter truncated tables without the `pre-split` option [#22872](https://github.com/pingcap/tidb/pull/22872)
+    - Add three format specifier for the `str_to_date` expression [#22812](https://github.com/pingcap/tidb/pull/22812)
+    - Record the `PREPARE` execution failure as `Failed Query OPM` in the metrics monitor [#22672](https://github.com/pingcap/tidb/pull/22672)
+    - Do not report errors for the `PREPARE` execution if `tidb_snapshot` is set [#22641](https://github.com/pingcap/tidb/pull/22641)
 
 + TiKV
 
-    * Pd_client: prevent a large number of reconnections in a short time [#9879](https://github.com/tikv/tikv/pull/9879)
-    * Optimize seek write for many tombstones [#9729](https://github.com/tikv/tikv/pull/9729)
-    * Change the default value of `leader-transfer-max-log-lag` to 128 to increase the success rate of leader transfer [#9605](https://github.com/tikv/tikv/pull/9605)
+    - Prevent a large number of reconnections in a short period of time [#9879](https://github.com/tikv/tikv/pull/9879)
+    - Optimize the write operations in the scenarios of many tombstones [#9729](https://github.com/tikv/tikv/pull/9729)
+    - Change the default value of `leader-transfer-max-log-lag` to `128` to increase the success rate of leader transfer [#9605](https://github.com/tikv/tikv/pull/9605)
 
 + PD
 
-    - Save to the region cache when pending-peers or down-peers change [#3471](https://github.com/pingcap/pd/pull/3471)
-    - Checker: prevent the regions in split-cache from becoming the target of merge [#3459](https://github.com/pingcap/pd/pull/3459)
+    - Update the Region cache only when `pending-peers` or `down-peers` change, which reduces the pressure of updating heartbeats [#3471](https://github.com/pingcap/pd/pull/3471)
+    - Prevent the Regions in `split-cache` from becoming the target of merge [#3459](https://github.com/pingcap/pd/pull/3459)
 
 + TiFlash
 
-    - Optimize configuration file and remove useless items
-    - Reduce the size of TiFlash binary file
+    - Optimize the configuration file and remove useless items
+    - Reduce the size of TiFlash binary files
     - Use an adaptive aggressive GC strategy to reduce memory usage
 
 + Tools
 
     + TiCDC
 
-        - Add double confirm when creating or resuming changefeed with start-ts or checkpoint-ts 1 day before current ts [#1497](https://github.com/pingcap/ticdc/pull/1497)
+        - Add a double confirmation when creating or resuming the changefeed with the `start-ts` or `checkpoint-ts` 1 day before the current timestamp [#1497](https://github.com/pingcap/ticdc/pull/1497)
 
     + Backup & Restore (BR)
 
-        - Log `HTTP_PROXY` and `HTTPS_PROXY`. [#827](https://github.com/pingcap/br/pull/827)
-        - Improve backup performance when there are many tables. [#745](https://github.com/pingcap/br/pull/745)
-        - Report error if service safe point check fails. [#826](https://github.com/pingcap/br/pull/826)
-        - Add cluster_version and br_version info in backupmeta [#803](https://github.com/pingcap/br/pull/803)
-        - Added retry for external storage errors. [#851](https://github.com/pingcap/br/pull/851)
-        - Reduce memory usage during backup. [#886](https://github.com/pingcap/br/pull/886)
+        - Log the `HTTP_PROXY` and `HTTPS_PROXY` environmental variables [#827](https://github.com/pingcap/br/pull/827)
+        - Improve backup performance when there are many tables [#745](https://github.com/pingcap/br/pull/745)
+        - Report errors if the service safe point check fails [#826](https://github.com/pingcap/br/pull/826)
+        - Add the `cluster_version` and `br_version` information in `backupmeta` [#803](https://github.com/pingcap/br/pull/803)
+        - Add retry for external storage errors to increase the success rate of backup [#851](https://github.com/pingcap/br/pull/851)
+        - Reduce memory usage during backup [#886](https://github.com/pingcap/br/pull/886)
 
     + TiDB Lightning
 
-        - Check TiDB cluster version before running TiDB-Lightning to avoid unexpected errors. [#787](https://github.com/pingcap/br/pull/787)
-        - Fail fast when lightning meets error in engine/chunk restore and do not retry context.Cancel error. [#867](https://github.com/pingcap/br/pull/867)
-        - Added configurations tikv-importer.engine-mem-cache-size and tikv-importer.local-writer-mem-cache-size to tune between memory usage and performance. [#866](https://github.com/pingcap/br/pull/866)
-        - Run batch split regions in parallel for Lightning local backend. [#868](https://github.com/pingcap/br/pull/868)
-        - When using Lightning to import from S3, Lightning no longer require s3:ListBucket permission on the entire bucket, only the data source prefix itself. [#919](https://github.com/pingcap/br/pull/919)
-        - When resuming from checkpoint, Lightning now keeps restoring the original engines instead of starting to process some random new ones. [#924](https://github.com/pingcap/br/pull/924)
+        - Check the TiDB cluster version before running TiDB Lightning to avoid unexpected errors [#787](https://github.com/pingcap/br/pull/787)
+        - Fail fast when TiDB Lightning meets the `cancel` error [#867](https://github.com/pingcap/br/pull/867)
+        - Add `tikv-importer.engine-mem-cache-size` and `tikv-importer.local-writer-mem-cache-size` configuration items to balance between memory usage and performance [#866](https://github.com/pingcap/br/pull/866)
+        - Run `batch split region` in parallel for TiDB Lightning's Local-backend to increase import speed [#868](https://github.com/pingcap/br/pull/868)
+        - When using TiDB Lightning to import data from a S3 storage, TiDB Lightning no longer requires the `s3:ListBucket` permission [#919](https://github.com/pingcap/br/pull/919)
+        - When resuming from a checkpoint, TiDB Lightning keeps using the original engine [#924](https://github.com/pingcap/br/pull/924)
 
 ## Bug Fixes
 
 + TiDB
 
-    - Fix get var expr when session var is hex literal [#23372](https://github.com/pingcap/tidb/pull/23372)
-    - Fix the bug that wrong collation is used when try fast path for enum or set [#23292](https://github.com/pingcap/tidb/pull/23292)
-    - Wrong result of nullif expr when used with is null expr [#23279](https://github.com/pingcap/tidb/pull/23279)
-    - Statistics: fix a case that auto-analyze is triggered outside its time range [#23219](https://github.com/pingcap/tidb/pull/23219)
-    - Executor: fix cast function will ignore the error for point get key construction [#23211](https://github.com/pingcap/tidb/pull/23211)
-    - Fixed a bug that prevented SPM from taking effect [#23209](https://github.com/pingcap/tidb/pull/23209)
-    - Fix wrong table filters for index merge plan [#23165](https://github.com/pingcap/tidb/pull/23165)
-    - Fix unexpected NotNullFlag in case when expr ret type [#23135](https://github.com/pingcap/tidb/pull/23135)
-    - Fix a bug that collation is not handle for text type [#23092](https://github.com/pingcap/tidb/pull/23092)
-    - Fix range partition prune bug for IN expr [#23074](https://github.com/pingcap/tidb/pull/23074)
-    - Fix request block forever when replace a tombstone store with the store has same IP addr [#23071](https://github.com/pingcap/tidb/pull/23071)
-    - Do not ajust int when it is null and compared year [#22844](https://github.com/pingcap/tidb/pull/22844)
-    - Fix load data lost connection error on tables with auto_random column [#22736](https://github.com/pingcap/tidb/pull/22736)
-    - Fix ddl hang over when it meets panic in cancelling path. [#23297](https://github.com/pingcap/tidb/pull/23297)
-    - Fix wrong key range of index scan when filter is comparing year column with NULL [#23104](https://github.com/pingcap/tidb/pull/23104)
-    - Fix create view success but failed when using it [#23083](https://github.com/pingcap/tidb/pull/23083)
+    - Fix the issue that the `get` variable expression goes wrong when the session variable is hexadecimal literals[#23372](https://github.com/pingcap/tidb/pull/23372)
+    - Fix the issue that wrong collation is used when creating the fast execution plan for the `Enum` or `Set` type [#23292](https://github.com/pingcap/tidb/pull/23292)
+    - Fix the possible wrong result of the `nullif` expression when it is used with `is-null` [#23279](https://github.com/pingcap/tidb/pull/23279)
+    - Fix the issue that the auto-analysis is triggered outside its time range [#23219](https://github.com/pingcap/tidb/pull/23219)
+    - Fix the issue that the `CAST` function might ignore errors for the `point get` plan [#23211](https://github.com/pingcap/tidb/pull/23211)
+    - Fix a bug that prevents SPM from taking effect when `CurrentDB` is empty [#23209](https://github.com/pingcap/tidb/pull/23209)
+    - Fix the issue of possible wrong table filters for the IndexMerge plan [#23165](https://github.com/pingcap/tidb/pull/23165)
+    - Fix the issue of unexpected `NotNullFlag` in the returning types of the `NULL` constant [#23135](https://github.com/pingcap/tidb/pull/23135)
+    - Fix a bug that collation might not be handled by the text type [#23092](https://github.com/pingcap/tidb/pull/23092)
+    - Fix the issue that the range partition might incorrectly handle the `IN` expression [#23074](https://github.com/pingcap/tidb/pull/23074)
+    - Fix the issue that after marking a TiKV store as tombstone, starting new TiKV stores with different StoreIDs with the same IP address and port will keep returning the `StoreNotMatch` error [#23071](https://github.com/pingcap/tidb/pull/23071)
+    - Do not adjust the `INT` type when it is `NULL` and compared with `YEAR` [#22844](https://github.com/pingcap/tidb/pull/22844)
+    - Fix the issue of lost connection when loading data on tables with the `auto_random` column [#22736](https://github.com/pingcap/tidb/pull/22736)
+    - Fix the issue of DDL hangover when the DDL operation meets panic in the cancelling path [#23297](https://github.com/pingcap/tidb/pull/23297)
+    - Fix the wrong key range of index scan when comparing the `YEAR` column with `NULL` [#23104](https://github.com/pingcap/tidb/pull/23104)
+    - Fix the issue that a successfully created view is failed to use [#23083](https://github.com/pingcap/tidb/pull/23083)
 
 + TiKV
 
