@@ -285,11 +285,13 @@ TiFlash provides the following two global/session variables to control whether t
 > **Note:**
 >
 > TiFlash Computation layer does not support:
+>
 > - Overflow check. For example, adding 2 maximum value of `bigint` type `9223372036854775807 + 9223372036854775807` results in error message `ERROR 1690 (22003): BIGINT value is out of range` for TiDB engine. However, pushing this expression into TiFlash leads to an overflowed result `2` without any error message.
 > - Window Function
 > - Reading data from TiKV
 >
 > In addition, in MPP mode TiFlash does not support:
+>
 > - Partition table. For any query on a partitioned table, MPP mode is triggered.
 > - When `new_collations_enabled_on_first_bootstrap`(/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) is `true`, `join` or `group by` on string is not supported by MPP mode. In such conditions, MPP mode is not triggered.
 
