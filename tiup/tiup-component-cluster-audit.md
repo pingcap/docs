@@ -12,7 +12,7 @@ The `tiup cluster audit` command is used to view commands executed on all cluste
 tiup cluster audit [audit-id] [flags]
 ```
 
-- If you don’t fill in the `[audit-id]`, the table of operation records will be output in reverse chronological order. The first column is the `audit-id`.
+- If you do not fill in the `[audit-id]`, the table of operation records is output in reverse chronological order. The first column is the `audit-id`.
 - If you fill in the `[audit-id]`, it means checking the execution log of the specified `audit-id`.
 
 ## Option
@@ -25,7 +25,7 @@ tiup cluster audit [audit-id] [flags]
 
 ## Outputs
 
-- If `[audit-id]` is specified, the corresponding execution log will be output.
+- If `[audit-id]` is specified, the corresponding execution log is output.
 - If `[audit-id]` is not specified, a table with the following fields will be output:
     - ID: the `audit-id` corresponding to the record
     - Time: the execution time of the command corresponding to the record

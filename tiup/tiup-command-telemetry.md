@@ -6,17 +6,17 @@ title: tiup telemetry
 
 TiDB, TiUP, and TiDB Dashboard collect usage information by default and share the information with PingCAP to improve the product. For example, through this usage information, PingCAP learns about common TiDB cluster operations and thereby determines the priority of new features.
 
-When TiUP telemetry is enabled, usage information will be shared with PingCAP when TiUP commands are executed, including (but not limited to):
+When TiUP telemetry is enabled, usage information is shared with PingCAP when TiUP commands are executed, including (but not limited to):
 
 - Randomly generated telemetry identifiers.
-- The execution status of the TiUP command, such as whether the command execution is successful, the duration of command execution, etc.
-- Situations using TiUP for deployment, such as target machine hardware information, component version number, modified deployment configuration name, etc.
+- The execution status of the TiUP command, such as whether the command execution is successful and the duration of command execution.
+- Situations using TiUP for deployment, such as target machine hardware information, component version number, and modified deployment configuration name.
 
-The information below will not be shared:
+The information below is not shared:
 
 - The accurate name of the cluster
-- Cluster topology
-- Cluster configuration file
+- The cluster topology
+- The cluster configuration file
 
 TiUP uses the `tiup telemetry` command to control telemetry.
 
@@ -26,7 +26,7 @@ TiUP uses the `tiup telemetry` command to control telemetry.
 
 ## Syntax
 
-```sh
+```shell
 tiup telemetry <command>
 ```
 

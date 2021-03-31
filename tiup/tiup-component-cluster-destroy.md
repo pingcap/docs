@@ -4,11 +4,11 @@ title: tiup cluster destroy
 
 # tiup cluster destroy
 
-After the business goes offline, if you want to release the machines occupied by the cluster for use by other businesses, you need to clean up the data on the cluster and the deployed binary files. To destroy the cluster, the `tiup cluster destroy` command performs the following operations:
+After an application goes offline, if you want to release the machines occupied by the cluster for use by other applications, you need to clean up the data on the cluster and the deployed binary files. To destroy the cluster, the `tiup cluster destroy` command performs the following operations:
 
 - Stops the cluster.
 - For each service, delete its log directory, deployment directory, and data directory.
-- If the parent directory of the data directory or deployment directory of each service is created by tiup-cluster, also delete it.
+- If the parent directory of the data directory or deployment directory of each service is created by tiup-cluster, also delete the parent directory.
 
 ## Syntax
 
