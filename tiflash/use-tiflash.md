@@ -294,5 +294,3 @@ TiFlash provides the following two global/session variables to control whether t
 >
 > - Partition table. For any query on a partitioned table, MPP mode is triggered.
 > - When `new_collations_enabled_on_first_bootstrap`(/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) is `true`, `join` or `group by` on string is not supported by MPP mode. In such conditions, MPP mode is not triggered.
-
-
