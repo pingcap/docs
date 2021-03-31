@@ -323,7 +323,7 @@ Configuration items related to performance.
 ### `max-txn-ttl`
 
 - The longest time that a single transaction can hold locks. If this time is exceeded, the locks of a transaction might be cleared by other transactions so that this transaction cannot be successfully committed.
-- Default value: `600000`
+- Default value: `3600000`
 - Unit: Millisecond
 - The transaction that holds locks longer than this time can only be committed or rolled back. The commit might not be successful.
 
@@ -447,7 +447,7 @@ The Plan Cache configuration of the `PREPARE` statement.
 ### `grpc-connection-count`
 
 - The maximum number of connections established with each TiKV.
-- Default value: `16`
+- Default value: `4`
 
 ### `grpc-keepalive-time`
 
