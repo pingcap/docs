@@ -94,40 +94,40 @@ TiDB version: 4.0.12
 
 + TiKV
 
-    - Fix the issue that the IN expr(coprocessor) didn't handle unsigned/signed int properly [#9850](https://github.com/tikv/tikv/pull/9850)
-    - Fix the issue that the ingests operation cannot reentrant. [#9779](https://github.com/tikv/tikv/pull/9779)
-    - Fix the issue that the space missed when converting json to string in TiKV coprocessor [#9666](https://github.com/tikv/tikv/pull/9666)
+    - Fix the issue that the `IN` expression does not properly handle unsigned/signed integers [#9850](https://github.com/tikv/tikv/pull/9850)
+    - Fix the issue that the ingest operation is not re-entrant [#9779](https://github.com/tikv/tikv/pull/9779)
+    - Fix the issue that the space is missed when converting JSON to string in TiKV coprocessor [#9666](https://github.com/tikv/tikv/pull/9666)
 
 + PD
 
-    - Fix the bug that the isolation level is wrong when the store lacks label [#3474](https://github.com/pingcap/pd/pull/3474)
+    - Fix the bug that the isolation level is wrong when the store lacks the label [#3474](https://github.com/pingcap/pd/pull/3474)
 
 + TiFlash
 
-    - Fix an issue of incorrect results when the default value of `binary` type column contains leading or tailing zero bytes
-    - Fix the bug that TiFlash fail to sync schema if the name of database contains special characters
-    - Fix an issue of incorrect results when handling `IN` expression with decimal values
-    - Fix the bug that metrics about opened file count shown in Grafana is high
-    - Fix the bug that TiFlash does not support `Timestamp` literal
+    - Fix an issue of incorrect execution results when the default value of the `binary` type column contains leading or tailing zero bytes
+    - Fix the bug that TiFlash fails to synchronize schema if the name of the database contains special characters
+    - Fix an issue of incorrect results when handling the `IN` expression with decimal values
+    - Fix a bug that the metric for the opened file count shown in Grafana is high
+    - Fix a bug that TiFlash does not support the `Timestamp` literal
     - Fix the potential crash while handling `FROM_UNIXTIME` expression
     - Fix an issue of incorrect results when casting string as integer
-    - Fix a bug that `like` function may return wrong result
+    - Fix a bug that the `like` function might return wrong results
 
 + Tools
 
     + TiCDC
 
-        - Fix a resolved ts event disorder problems caused by concurrency [#1464](https://github.com/pingcap/ticdc/pull/1464)
-        - Fix a data loss bug when capture restarts due to network issue, and some table on it is scheduled at the same time [#1508](https://github.com/pingcap/ticdc/pull/1508)
+        - Fix a disorder issue of the `resolved ts` event [#1464](https://github.com/pingcap/ticdc/pull/1464)
+        - Fix a data loss issue caused by wrong table scheduling due to the network problem [#1508](https://github.com/pingcap/ticdc/pull/1508)
 
     + Backup & Restore (BR)
 
-        - Fix the bug that WalkDir for s3 storage returns nil if the target path is bucket name. [#773](https://github.com/pingcap/br/pull/773)
-        - Fixed a bug that caused, even BR started with TLS config, the pprof endpoints won't be served with TLS [#839](https://github.com/pingcap/br/pull/839)
+        - Fix a bug that `WalkDir` for the s3 storage returns `nil` if the target path is bucket name [#773](https://github.com/pingcap/br/pull/773)
+        - Fix a bug that the `status` port is not served with TLS [#839](https://github.com/pingcap/br/pull/839)
 
     + TiDB Lightning
 
-        - Fix a bug that importer may ignore write rows error if open engine returns file exists error [#848](https://github.com/pingcap/br/pull/848)
-        - Fix a bug that lightning generated ts may be to large or small that query may return incorrect result [#850](https://github.com/pingcap/br/pull/850)
-        - Fix a bug that lightning unexpected exit may cause checkpoint file truncated to 0 sized [#889](https://github.com/pingcap/br/pull/889)
-        - Fix a bug that chunk restore task may ignore context cancel error and causes data loss [#874](https://github.com/pingcap/br/pull/874)
+        - Fix the error that TiKV Importer might ignore that the file has already existed [#848](https://github.com/pingcap/br/pull/848)
+        - Fix a bug that the TiDB Lightning might use the wrong timestamp and read the wrong data [#850](https://github.com/pingcap/br/pull/850)
+        - Fix a bug that TiDB Lightning's unexpected exit might cause damaged checkpoint file [#889](https://github.com/pingcap/br/pull/889)
+        - Fix the issue of possible data error that occurs because the `cancel` error is ignored [#874](https://github.com/pingcap/br/pull/874)
