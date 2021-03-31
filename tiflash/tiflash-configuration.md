@@ -65,7 +65,12 @@ delta_index_cache_size = 0
 
 ## Storage paths settings take effect starting from v4.0.9
 [storage]
-    ## [Experimental] Introduced in v5.0. Limits the total write rate of background tasks in bytes per second. By default 0, means no limit. It is not recommended to use this experimental feature in a production environment.
+    ## [Experimental] New in v5.0. This item limits the number of bytes written per second by background tasks. It is currently an experimental feature and is not recommended for use in production environments. It is still an experimental feature. It is not recommended that you use it in a production environment.
+    ## The unit is byte. Currently, setting such as "10GB" is not supported.
+    ## The default value is 0, which means no limit.
+    ## This parameter is mainly for the scenario when TiFlash is deployed on AWS EBS (gp2/gp3) disks and is used to control the usage of machine disk bandwidth by background tasks.
+    ## Improves the stability of TiFlash query performance. The recommended configuration in this scenario is 50% of the disk bandwidth.
+    ## It is not recommended to modify this configuration in other scenarios.
     bg_task_io_rate_limit = 0
 
     [storage.main]
