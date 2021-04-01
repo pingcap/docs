@@ -27,7 +27,7 @@ DESC analyze_status;
 | END_TIME       | datetime            | YES  |      | NULL    |       |
 | STATE          | varchar(64)         | YES  |      | NULL    |       |
 +----------------+---------------------+------+------+---------+-------+
-7 rows in set (0.00 sec)
+8 rows in set (0.00 sec)
 ```
 
 {{< copyable "sql" >}}
