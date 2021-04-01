@@ -158,7 +158,7 @@ The TiDB configuration file supports more options than command-line parameters. 
 ### `enable-tcp4-only` <span class="version-mark">New in v5.0.0</span>
 
 - Enables or disables listening on TCP4 only.
-- Default value: `false`.
+- Default value: `false`
 - Enabling this option is useful when TiDB is used with LVS for load balancing since the [real client IP from the TCP header](https://github.com/alibaba/LVS/tree/master/kernel/net/toa) can be correctly parsed by "tcp4" protocol.
 
 ## Log
