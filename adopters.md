@@ -51,11 +51,13 @@ This is a list of TiDB adopters in various industries.
 |[CAASDATA](https://www.caasdata.com/)|Big Data|[Chinese](https://pingcap.com/cases-cn/user-case-kasi/)|
 |[58.com](https://www.crunchbase.com/organization/58-com)|Advertising|[English](https://pingcap.com/case-studies/no-sharding-no-etl-use-scale-out-mysql-alternative-to-store-160-tb-of-data); [Chinese](https://pingcap.com/cases-cn/user-case-58/)|
 |[Mobikok](https://www.linkedin.com/company/shenzhen-keke-network-technology-co.-ltd./)|AdTech|[Chinese](https://pingcap.com/cases-cn/user-case-mobikok/)|
+|[Ninja Van](https://www.crunchbase.com/organization/ninja-van-2)| Logistics|[English](https://pingcap.com/case-studies/choose-a-mysql-alternative-over-vitess-and-crdb-to-scale-out-our-databases-on-k8s)|
 |[ZTO Express](https://www.crunchbase.com/organization/zto-express)| Logistics|[English](https://pingcap.com/case-studies/why-we-migrated-from-exadata-to-a-scale-out-htap-database-for-near-real-time-analytics); [Chinese](https://pingcap.com/cases-cn/user-case-zto-express/)|
 |[G7 Networks](https://www.crunchbase.com/organization/g7)| Logistics|[Chinese](https://pingcap.com/cases-cn/user-case-g7/)|
 |[Hive-Box](http://www.fcbox.com/en/pc/index.html#/)|Logistics|[Chinese](https://pingcap.com/cases-cn/user-case-fengchao/)|
 |[NetEase Games](https://www.linkedin.com/company/netease-games)|Gaming|[English](https://pingcap.com/case-studies/why-we-chose-tidb-over-other-mysql-based-and-newsql-storage-solutions); [Chinese](https://pingcap.com/cases-cn/user-case-wangyihuyu/)|
 |[GAEA](http://www.gaea.com/en/)|Gaming|[English](https://pingcap.com/case-studies/2017-05-22-Comparison-between-MySQL-and-TiDB-with-tens-of-millions-of-data-per-day); [Chinese](https://pingcap.com/cases-cn/user-case-gaea-ad/)|
+|[Kunlun](https://www.crunchbase.com/organization/kunlun)|Gaming|[English](https://pingcap.com/case-studies/empowering-your-gaming-application-with-a-scale-out-newsql-database)|
 |[YOOZOO Games](https://www.crunchbase.com/organization/yoozoo-games)|Gaming|[Chinese](https://pingcap.com/cases-cn/user-case-youzu/)|
 |[Seasun Games](https://www.crunchbase.com/organization/seasun)|Gaming|[Chinese](https://pingcap.com/cases-cn/user-case-xishanju/)|
 |[FUNYOURS JAPAN](http://company.funyours.co.jp/)|Gaming|[Chinese](https://pingcap.com/cases-cn/user-case-funyours-japan/)|

@@ -88,11 +88,15 @@ The TiDB configuration file supports more options than command-line parameters. 
 - Determines whether to treat the `utf8` character set in old tables as `utf8mb4`.
 - Default value: `true`
 
-### `alter-primary-key`
+### `alter-primary-key` (Deprecated)
 
 - Determines whether to add or remove the primary key constraint to or from a column.
 - Default value: `false`
 - With this default setting, adding or removing the primary key constraint is not supported. You can enable this feature by setting `alter-primary-key` to `true`. However, if a table already exists before the switch is on, and the data type of its primary key column is an integer, dropping the primary key from the column is not possible even if you set this configuration item to `true`.
+
+> **Note:**
+>
+> This configuration item has been deprecated, and currently takes effect only when the value of `@tidb_enable_clustered_index` is `INT_ONLY`. If you need to add or remove the primary key, use the `NONCLUSTERED` keyword instead when creating the table. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
 
 ### `server-version`
 
@@ -150,6 +154,12 @@ The TiDB configuration file supports more options than command-line parameters. 
 - Enables or disables the telemetry collection in TiDB.
 - Default value: `true`
 - When this configuration is set to `false` on all TiDB instances, the telemetry collection in TiDB is disabled and the [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402-version) system variable does not take effect. See [Telemetry](/telemetry.md) for details.
+
+### `enable-tcp4-only` <span class="version-mark">New in v5.0.0</span>
+
+- Enables or disables listening on TCP4 only.
+- Default value: `false`
+- Enabling this option is useful when TiDB is used with LVS for load balancing because the [real client IP from the TCP header](https://github.com/alibaba/LVS/tree/master/kernel/net/toa) can be correctly parsed by the "tcp4" protocol.
 
 ## Log
 
@@ -316,6 +326,13 @@ Configuration items related to performance.
 + When TiDB detects that the memory usage of the tidb-server instance exceeds the threshold, it considers that there might be a risk of OOM. Therefore, it records ten SQL statements with the highest memory usage, ten SQL statements with the longest running time, and the heap profile among all SQL statements currently being executed to the directory [`tmp-storage-path/record`](/tidb-configuration-file.md#tmp-storage-path) and outputs a log containing the keyword `tidb-server has the risk of OOM`.
 + The value of this configuration item is the initial value of the system variable [`tidb_memory_usage_alarm_ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio).
 
+### `max-txn-ttl`
+
+- The longest time that a single transaction can hold locks. If this time is exceeded, the locks of a transaction might be cleared by other transactions so that this transaction cannot be successfully committed.
+- Default value: `3600000`
+- Unit: Millisecond
+- The transaction that holds locks longer than this time can only be committed or rolled back. The commit might not be successful.
+
 ### `committer-concurrency`
 
 + The number of goroutines for requests related to executing commit in the commit phase of the single transaction.
@@ -410,10 +427,14 @@ Configuration items related to performance.
 
 The Plan Cache configuration of the `PREPARE` statement.
 
+> **Warning:**
+>
+> This is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
+
 ### `enabled`
 
 - Determines whether to enable Plan Cache of the `PREPARE` statement.
-- Default value: `true`
+- Default value: `false`
 
 ### `capacity`
 
@@ -432,7 +453,7 @@ The Plan Cache configuration of the `PREPARE` statement.
 ### `grpc-connection-count`
 
 - The maximum number of connections established with each TiKV.
-- Default value: `16`
+- Default value: `4`
 
 ### `grpc-keepalive-time`
 
@@ -451,13 +472,6 @@ The Plan Cache configuration of the `PREPARE` statement.
 - The maximum timeout when executing a transaction commit.
 - Default value: `41s`
 - It is required to set this value larger than twice of the Raft election timeout.
-
-### `max-txn-ttl`
-
-- The longest time that a single transaction can hold locks. If this time is exceeded, the locks of a transaction might be cleared by other transactions so that this transaction cannot be successfully committed.
-- Default value: `600000`
-- Unit: Millisecond
-- The transaction that holds locks longer than this time can only be committed or rolled back. The commit might not be successful.
 
 ### `max-batch-size`
 
@@ -481,19 +495,6 @@ The Plan Cache configuration of the `PREPARE` statement.
 - The threshold of the TiKV load. If the TiKV load exceeds this threshold, more `batch` packets are collected to relieve the pressure of TiKV. It is valid only when the value of `tikv-client.max-batch-size` is greater than `0`. It is recommended not to modify this value.
 - Default value: `200`
 
-## tikv-client.async-commit <span class="version-mark">New in v5.0.0-rc</span>
-
-### `keys-limit`
-
-- Specifies the upper limit of the number of keys in an async commit transaction. The async commit feature is **NOT** suitable for transactions that are too large. Transactions that exceed this limit will use the two-phase commit.
-- Default value: `256`
-
-### `total-key-size-limit`
-
-- Specifies the upper limit of the total size of keys in an async commit transaction. The async commit feature is **NOT** suitable for transactions in which the involved key ranges are too long. Transactions that exceed this limit will use the two-phase commit.
-- Default value: `4096`
-- Unit: byte
-
 ## tikv-client.copr-cache <span class="version-mark">New in v4.0.0</span>
 
 This section introduces configuration items related to the Coprocessor Cache feature.
@@ -505,29 +506,10 @@ This section introduces configuration items related to the Coprocessor Cache fea
 
 ### `capacity-mb`
 
-- The total size of the cached data. When the cache space is full, old cache entries are evicted.
+- The total size of the cached data. When the cache space is full, old cache entries are evicted. When the value is `0.0`, the Coprocessor Cache feature is disabled.
 - Default value: `1000.0`
 - Unit: MB
 - Type: Float
-
-### `admission-max-result-mb`
-
-- Specifies the largest single push-down calculation result set that can be cached. If the result set of a single push-down calculation returned on the Coprocessor is less than the result set specified by this parameter, the result set is cached. Increasing this value means that more types of push-down requests are cached, but also cause the cache space to be occupied more easily. Note that the size of each push-down calculation result set is generally smaller than the size of the Region. Therefore, it is meaningless to set this value far beyond the size of a Region.
-- Default value: `10.0`
-- Unit: MB
-- Type: Float
-
-### `admission-min-process-ms`
-
-- Specifies the minimum calculation time for a single push-down calculation result set that can be cached. If the calculation time of a single push-down calculation on the Coprocessor is less than the time specified by this parameter, the result set is not cached. Requests that are processed quickly do not need to be cached, and only the requests that take a long time to process need to be cached, which makes the cache less likely to be evicted.
-- Default value: `5`
-- Unit: ms
-
-### `admission-max-ranges` <span class="version-mark">New in v4.0.8</span>
-
-+ Specifies the maximum number of ranges in a single push-down calculation result set that can be cached. If the push-down calculation has more ranges than the number specified by this configuration, the result set will not be cached. Generally, when there are too many ranges, the extra calculation overhead of parsing the range brought by Coprocessor Cache is large.
-+ Default value: `500`
-+ Type: uint
 
 ### txn-local-latches
 
@@ -618,9 +600,4 @@ The `experimental` section, introduced in v3.1.0, describes configurations relat
 ### `allow-expression-index` <span class="version-mark">New in v4.0.0</span>
 
 - Determines whether to create the expression index.
-- Default value: `false`
-
-### `enable-global-kill` <span class="version-mark">New in v5.0.0-rc</span>
-
-- Determines whether to enable the Global Kill feature. To enable this feature, set the value of this configuration item to `true`. When enabled, this feature can safely kill any connection even when the TiDB server is behind a load balancer.
 - Default value: `false`

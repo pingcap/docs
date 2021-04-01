@@ -22,7 +22,7 @@
 + Deploy
   + [Software and Hardware Requirements](/hardware-and-software-requirements.md)
   + [Environment Configuration Checklist](/check-before-deployment.md)
-  + Topology Patterns
+  + Plan Cluster Topology
     + [Minimal Topology](/minimal-deployment-topology.md)
     + [TiFlash Topology](/tiflash-deployment-topology.md)
     + [TiCDC Topology](/ticdc-deployment-topology.md)
@@ -31,16 +31,17 @@
     + [Cross-DC Topology](/geo-distributed-deployment-topology.md)
     + [Hybrid Topology](/hybrid-deployment-topology.md)
   + Install and Start
-    + Linux OS
-      + [Use TiUP (Recommended)](/production-deployment-using-tiup.md)
-      + [Use TiUP Offline (Recommended)](/production-offline-deployment-using-tiup.md)
-      + [Deploy in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable)
+    + [Use TiUP (Recommended)](/production-deployment-using-tiup.md)
+    + [Deploy in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable)
   + [Verify Cluster Status](/post-installation-check.md)
+  + Test Cluster Performance
+    + [Test TiDB Using Sysbench](/benchmark/benchmark-tidb-using-sysbench.md)
+    + [Test TiDB Using TPC-C](/benchmark/benchmark-tidb-using-tpcc.md)
 + Migrate
   + [Overview](/migration-overview.md)
   + Migrate from MySQL
     + [Migrate from Amazon Aurora MySQL Using TiDB Lightning](/migrate-from-aurora-using-lightning.md)
-    + [Migrate Using Dumpling and TiDB Lightning](/migrate-from-mysql-dumpling-files.md)
+    + [Migrate from MySQL SQL Files Using TiDB Lightning](/migrate-from-mysql-dumpling-files.md)
     + [Migrate from Amazon Aurora MySQL Using DM](/migrate-from-aurora-mysql-database.md)
   + Migrate from CSV Files
     + [Use TiDB Lightning](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)
@@ -49,7 +50,6 @@
 + Maintain
   + Upgrade
     + [Use TiUP (Recommended)](/upgrade-tidb-using-tiup.md)
-    + [Use TiUP Offline (Recommended)](/upgrade-tidb-using-tiup-offline.md)
     + [Use TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.1/upgrade-a-tidb-cluster)
   + Scale
     + [Use TiUP (Recommended)](/scale-tidb-using-tiup.md)
@@ -104,6 +104,7 @@
       + [`EXPLAIN` Walkthrough](/explain-walkthrough.md)
       + [Indexes](/explain-indexes.md)
       + [Joins](/explain-joins.md)
+      + [MPP Queries](/explain-mpp.md)
       + [Subqueries](/explain-subqueries.md)
       + [Aggregation](/explain-aggregation.md)
       + [Views](/explain-views.md)
@@ -136,7 +137,7 @@
   + [Multiple Data Centers in One City Deployment](/multi-data-centers-in-one-city-deployment.md)
   + [Three Data Centers in Two Cities Deployment](/three-data-centers-in-two-cities-deployment.md)
   + Best Practices
-    + [Use TiDB](/tidb-best-practices.md)
+    + [Use TiDB](/best-practices/tidb-best-practices.md)
     + [Java Application Development](/best-practices/java-app-best-practices.md)
     + [Use HAProxy](/best-practices/haproxy-best-practices.md)
     + [Highly Concurrent Write](/best-practices/high-concurrency-best-practices.md)
