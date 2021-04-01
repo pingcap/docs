@@ -26,7 +26,7 @@ tiup cluster audit [audit-id] [flags]
 ## Outputs
 
 - If `[audit-id]` is specified, the corresponding execution log is output.
-- If `[audit-id]` is not specified, a table with the following fields will be output:
+- If `[audit-id]` is not specified, a table with the following fields is output:
     - ID: the `audit-id` corresponding to the record
     - Time: the execution time of the command corresponding to the record
     - Command：the command corresponding to the record
