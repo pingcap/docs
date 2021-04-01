@@ -68,8 +68,8 @@ delta_index_cache_size = 0
     ## [Experimental] New in v5.0. This item limits the total write rate of background tasks in bytes per second. It is not recommanded to use this experimental feature in a production environment. 
     ## The unit is bytes. Currently, the setting such as "10GB" is not supported.
     ## The default value is 0, which means no limit.
-    ## This parameter is mainly for the scenario when TiFlash is deployed on AWS EBS (gp2/gp3) disks and is used to control the usage of machine disk bandwidth by background tasks.
-    ## Improves the stability of TiFlash query performance. The recommended configuration in this scenario is 50% of the disk bandwidth.
+    ## This parameter is used to control the usage of machine disk bandwidth by background tasks mainly for the scenario where TiFlash is deployed on the AWS EBS (gp2/gp3) disk.
+    ## This parameter can be used to improve the stability of the TiFlash query performance. The recommended configuration in this scenario is 50% of the disk bandwidth.
     ## It is not recommended to modify this configuration in other scenarios.
     bg_task_io_rate_limit = 0
 
