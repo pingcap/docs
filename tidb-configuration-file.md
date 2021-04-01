@@ -159,7 +159,7 @@ The TiDB configuration file supports more options than command-line parameters. 
 
 - Enables or disables listening on TCP4 only.
 - Default value: `false`
-- Enabling this option is useful when TiDB is used with LVS for load balancing since the [real client IP from the TCP header](https://github.com/alibaba/LVS/tree/master/kernel/net/toa) can be correctly parsed by "tcp4" protocol.
+- Enabling this option is useful when TiDB is used with LVS for load balancing because the [real client IP from the TCP header](https://github.com/alibaba/LVS/tree/master/kernel/net/toa) can be correctly parsed by the "tcp4" protocol.
 
 ## Log
 
