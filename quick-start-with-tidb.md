@@ -56,10 +56,10 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
         {{< copyable "shell-regular" >}}
 
         ```shell
-        tiup playground v4.0.0 --db 2 --pd 3 --kv 3 --monitor
+        tiup playground v4.0.11 --db 2 --pd 3 --kv 3 --monitor
         ```
 
-        The command downloads a v4.0.0 cluster to the local machine and starts it. `--monitor` means that the monitoring component is also deployed.
+        The command downloads a version cluster to the local machine and starts it，such as v4.0.11. `--monitor` means that the monitoring component is also deployed.
 
         To view the latest version, run `tiup list tidb`.
 
@@ -75,15 +75,15 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
 
 4. Start a new session to access TiDB:
 
-    1. Install the MySQL client. If it is already installed, skip this step.
+    1. Use the TiUP client to connect to TiDBs.
 
         {{< copyable "shell-regular" >}}
 
         ```shell
-        yum -y install mysql
+        tiup client
         ```
 
-    2. Use the MySQL client to connect to TiDB.
+    2. Also can use the MySQL client to connect to TiDB.
 
         {{< copyable "shell-regular" >}}
 
