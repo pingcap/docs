@@ -155,6 +155,12 @@ The TiDB configuration file supports more options than command-line parameters. 
 - Default value: `true`
 - When this configuration is set to `false` on all TiDB instances, the telemetry collection in TiDB is disabled and the [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402-version) system variable does not take effect. See [Telemetry](/telemetry.md) for details.
 
+### `enable-tcp4-only` <span class="version-mark">New in v5.0.0</span>
+
+- Enables or disables listening on TCP4 only.
+- Default value: `false`
+- Enabling this option is useful when TiDB is used with LVS for load balancing because the [real client IP from the TCP header](https://github.com/alibaba/LVS/tree/master/kernel/net/toa) can be correctly parsed by the "tcp4" protocol.
+
 ## Log
 
 Configuration items related to log.
@@ -323,7 +329,7 @@ Configuration items related to performance.
 ### `max-txn-ttl`
 
 - The longest time that a single transaction can hold locks. If this time is exceeded, the locks of a transaction might be cleared by other transactions so that this transaction cannot be successfully committed.
-- Default value: `600000`
+- Default value: `3600000`
 - Unit: Millisecond
 - The transaction that holds locks longer than this time can only be committed or rolled back. The commit might not be successful.
 
@@ -447,7 +453,7 @@ The Plan Cache configuration of the `PREPARE` statement.
 ### `grpc-connection-count`
 
 - The maximum number of connections established with each TiKV.
-- Default value: `16`
+- Default value: `4`
 
 ### `grpc-keepalive-time`
 
