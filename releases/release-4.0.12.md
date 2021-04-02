@@ -121,7 +121,7 @@ TiDB version: 4.0.12
         - Fix a disorder issue of the `resolved ts` event [#1464](https://github.com/pingcap/ticdc/pull/1464)
         - Fix a data loss issue caused by wrong table scheduling due to the network problem [#1508](https://github.com/pingcap/ticdc/pull/1508)
         - Fix a bug of untimely release of resources when stopping a processor [#1547](https://github.com/pingcap/ticdc/pull/1547)
-        - Fix a bug that txn counter is not correctly updated which may cause database connection leak [#1524](https://github.com/pingcap/ticdc/pull/1524)
+        - Fix a bug that the transaction counter is not correctly updated, which might cause database connection leak [#1524](https://github.com/pingcap/ticdc/pull/1524)
         - Fix the issue that multiple owners can co-exist when PD has jitter, which might lead to table missing [#1540](https://github.com/pingcap/ticdc/pull/1540)
 
     + Backup & Restore (BR)
