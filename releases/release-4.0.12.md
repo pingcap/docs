@@ -33,7 +33,7 @@ TiDB version: 4.0.12
 + TiKV
 
     - Prevent a large number of reconnections in a short period of time [#9879](https://github.com/tikv/tikv/pull/9879)
-    - Optimize the write operations in the scenarios of many tombstones [#9729](https://github.com/tikv/tikv/pull/9729)
+    - Optimize the write operations and Batch Get in the scenarios of many tombstones [#9729](https://github.com/tikv/tikv/pull/9729)
     - Change the default value of `leader-transfer-max-log-lag` to `128` to increase the success rate of leader transfer [#9605](https://github.com/tikv/tikv/pull/9605)
 
 + PD
