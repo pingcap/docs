@@ -76,7 +76,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
 
 4. Start a new session to access TiDB:
 
-    1. Use the TiUP client to connect to TiDBs.
+    + Use the TiUP client to connect to TiDBs.
 
         {{< copyable "shell-regular" >}}
 
@@ -84,7 +84,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
         tiup client
         ```
 
-    2. Also can use the MySQL client to connect to TiDB.
+    + You can also use the MySQL client to connect to TiDB.
 
         {{< copyable "shell-regular" >}}
 
