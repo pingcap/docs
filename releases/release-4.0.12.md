@@ -52,7 +52,7 @@ TiDB version: 4.0.12
     + TiCDC
 
         - Add a double confirmation when users create or resume the changefeed with the `start-ts` or `checkpoint-ts` 1 day before the current timestamp [#1497](https://github.com/pingcap/ticdc/pull/1497)
-        - Add grafana panels for old value [#1571](https://github.com/pingcap/ticdc/pull/1571)
+        - Add Grafana panels for the Old Value feature [#1571](https://github.com/pingcap/ticdc/pull/1571)
 
     + Backup & Restore (BR)
 
