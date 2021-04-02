@@ -189,6 +189,7 @@ SHOW GRANTS FOR `rw_user`@`192.168.%`;
 <!-- include a "since" for the version number after TiDB 5.0 --> TiDB features experimental support dynamic privileges, a feature borrowed from MySQL 8.0. Dynamic privileges are intended to replace the `SUPER` privilege by implementing more fine-grained access to certain operations. For example, with dynamic privileges it is possible to grant access to perform `BACKUP` and `RESTORE` operations but not `SHOW PROCESSLIST`.
 
 Dynamic privileges include:
+
 * `BACKUP_ADMIN`
 * `ROLE_ADMIN`
 * `CONNECTION_ADMIN`
