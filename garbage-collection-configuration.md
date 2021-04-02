@@ -8,11 +8,11 @@ aliases: ['/docs/dev/garbage-collection-configuration/','/docs/dev/reference/gar
 
 Garbage collection is configured via the following system variables:
 
-* [`tidb_gc_enable`](/system-variables.md#tidb_gc_enable)
-* [`tidb_gc_run_interval`](/system-variables.md#tidb_gc_run_interval)
-* [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time)
-* [`tidb_gc_concurrency`](/system-variables.md#tidb_gc_concurrency)
-* [`tidb_gc_scan_lock_mode`](/system-variables.md#tidb_gc_scan_lock_mode)
+* [`tidb_gc_enable`](/system-variables.md#tidb_gc_enable-new-in-v50-ga)
+* [`tidb_gc_run_interval`](/system-variables.md#tidb_gc_run_interval-new-in-v50-ga)
+* [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50-ga)
+* [`tidb_gc_concurrency`](/system-variables.md#tidb_gc_concurrency-new-in-v50-ga)
+* [`tidb_gc_scan_lock_mode`](/system-variables.md#tidb_gc_scan_lock_mode-new-in-v50-ga)
 
 ## GC I/O limit
 
@@ -38,7 +38,7 @@ For information on changes in previous releases, refer to earlier versions of th
 
 ### GC in Compaction Filter
 
-Since v5.0.0-rc, TiDB introduces the mechanism of GC in Compaction Filter. Based on the `DISTRIBUTED` GC mode, the mechanism uses the compaction process of RocksDB, instead of a separate GC worker thread, to run GC. This new GC mechanism helps to avoid extra disk read caused by GC. Also, after clearing the obsolete data, it avoids a large number of left tombstone marks which degrade the sequential scan performance. This GC mechanism is disabled by default. The following example shows how to enable the mechanism in the TiKV configuration file:
+Based on the `DISTRIBUTED` GC mode, the mechanism of GC in Compaction Filter uses the compaction process of RocksDB, instead of a separate GC worker thread, to run GC. This new GC mechanism helps to avoid extra disk read caused by GC. Also, after clearing the obsolete data, it avoids a large number of left tombstone marks which degrade the sequential scan performance. The following example shows how to enable the mechanism in the TiKV configuration file:
 
 {{< copyable "" >}}
 
