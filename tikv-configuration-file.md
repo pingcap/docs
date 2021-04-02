@@ -151,19 +151,19 @@ Configuration items related to storage thread pool.
 ### `high-concurrency`
 
 + The allowable number of concurrent threads that handle high-priority `read` requests
-+ When `8` ≤ cpu num ≤ `16`, the default value is `cpu_num * 0.5`; when cpu num is greater than `8`, the default value is `4`; when cpu num is greater than `16`, the default value is `8`.
++ When `8` ≤ `cpu num` ≤ `16`, the default value is `cpu_num * 0.5`; when `cpu num` is greater than `8`, the default value is `4`; when `cpu num` is greater than `16`, the default value is `8`.
 + Minimum value: `1`
 
 ### `normal-concurrency`
 
 + The allowable number of concurrent threads that handle normal-priority `read` requests
-+ When `8` ≤ cpu num ≤ `16`, the default value is `cpu_num * 0.5`; when cpu num is greater than `8`, the default value is `4`; when cpu num is greater than `16`, the default value is `8`.
++ When `8` ≤ `cpu num` ≤ `16`, the default value is `cpu_num * 0.5`; when `cpu num` is greater than `8`, the default value is `4`; when `cpu num` is greater than `16`, the default value is `8`.
 + Minimum value: `1`
 
 ### `low-concurrency`
 
 + The allowable number of concurrent threads that handle low-priority `read` requests
-+ When `8` ≤ cpu num ≤ `16`, the default value is `cpu_num * 0.5`; when cpu num is greater than `8`, the default value is `4`; when cpu num is greater than `16`, the default value is `8`.
++ When `8` ≤ `cpu num` ≤ `16`, the default value is `cpu_num * 0.5`; when `cpu num` is greater than `8`, the default value is `4`; when `cpu num` is greater than `16`, the default value is `8`.
 + Minimum value: `1`
 
 ### `max-tasks-per-worker-high`
