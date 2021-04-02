@@ -52,6 +52,7 @@ TiDB version: 4.0.12
     + TiCDC
 
         - Add a double confirmation when users create or resume the changefeed with the `start-ts` or `checkpoint-ts` 1 day before the current timestamp [#1497](https://github.com/pingcap/ticdc/pull/1497)
+        - Add grafana panels for old value [#1571](https://github.com/pingcap/ticdc/pull/1571)
 
     + Backup & Restore (BR)
 
@@ -119,6 +120,9 @@ TiDB version: 4.0.12
 
         - Fix a disorder issue of the `resolved ts` event [#1464](https://github.com/pingcap/ticdc/pull/1464)
         - Fix a data loss issue caused by wrong table scheduling due to the network problem [#1508](https://github.com/pingcap/ticdc/pull/1508)
+        - Fix a bug of untimely release of resources when stopping a processor [#1547](https://github.com/pingcap/ticdc/pull/1547)
+        - Fix a bug that txn counter is not correctly updated which may cause database connection leak [#1524](https://github.com/pingcap/ticdc/pull/1524)
+        - Fix multiple owner could co-exist when pd has jitter, which may lead to table missing [#1540](https://github.com/pingcap/ticdc/pull/1540)
 
     + Backup & Restore (BR)
 
