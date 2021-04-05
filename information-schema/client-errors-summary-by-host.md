@@ -56,7 +56,7 @@ Field description:
 * `FIRST_SEEN`: The first time this error (or warning) was seen from the client host.
 * `LAST_SEEN`: The most recent time this error (or warning) was seen from the client host.
 
-The following example shows a warning being generated when connecting to a local TiDB server. The summary is reset after executing `FLUSH CLIENT_ERRORS_SUMMARY`:
+The following example shows a warning being generated when the client connects to a local TiDB server. The summary is reset after executing `FLUSH CLIENT_ERRORS_SUMMARY`:
 
 {{< copyable "sql" >}}
 
