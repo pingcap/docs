@@ -5,7 +5,7 @@ summary: Learn about the `CLIENT_ERRORS_SUMMARY_BY_USER` information_schema tabl
 
 # CLIENT_ERROR_SUMMARY_BY_HOST
 
-The table `CLIENT_ERRORS_SUMMARY_BY_USER` provides a summary of SQL errors and warnings that have been returned to clients, _or_ applications that connect to a TiDB server. These include:
+The table `CLIENT_ERRORS_SUMMARY_BY_USER` provides a summary of SQL errors and warnings that have been returned to clients that connect to a TiDB server. These include:
 
 * Malformed SQL statements.
 * Division by zero errors.
@@ -13,7 +13,7 @@ The table `CLIENT_ERRORS_SUMMARY_BY_USER` provides a summary of SQL errors and w
 * Permission errors.
 * A table does not exist.
 
-Client errors are returned to the client via the MySQL server protocol, where applications are expected to appropriate action. The `information_schema` table `CLIENT_ERRORS_SUMMARY_BY_USER` provides an useful method to inspect errors in the scenario that applications are not correctly handling (or logging) errors returned by the TiDB server.
+Client errors are returned to the client via the MySQL server protocol, where applications are expected to take appropriate action. The `information_schema`.`CLIENT_ERRORS_SUMMARY_BY_USER` table provides an useful method to inspect errors in the scenario that applications are not correctly handling (or logging) errors returned by the TiDB server.
 
 Because `CLIENT_ERRORS_SUMMARY_BY_USER` summarizes the errors on a per-user basis, it can be useful to diagnose scenarios where one user server is generating more errors than other servers. Possible scenarios include:
 
