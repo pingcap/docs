@@ -9,7 +9,7 @@ The table `CLIENT_ERRORS_SUMMARY_BY_USER` provides a summary of SQL errors and w
 
 * Malformed SQL statements.
 * Division by zero errors.
-* Attempting to insert out-of-range of duplicate key values.
+* Attempting to insert out-of-range or duplicate key values.
 * Permission errors.
 * A table does not exist.
 
@@ -48,7 +48,7 @@ DESC CLIENT_ERRORS_SUMMARY_BY_USER;
 Field description:
 
 * `USER`: The authenticated user.
-* `ERROR_NUMBER`: The MySQL compatible error number that was returned.
+* `ERROR_NUMBER`: The MySQL-compatible error number that was returned.
 * `ERROR_MESSAGE`: The error message which matches the error number (in prepared statement form).
 * `ERROR_COUNT`: The number of times this error was returned to the user.
 * `WARNING_COUNT`: The number of times this warning was returned to the user.

@@ -40,7 +40,7 @@ DESC CLIENT_ERRORS_SUMMARY_GLOBAL;
 
 Field description:
 
-* `ERROR_NUMBER`: The MySQL compatible error number that was returned.
+* `ERROR_NUMBER`: The MySQL-compatible error number that was returned.
 * `ERROR_MESSAGE`: The error message which matches the error number (in prepared statement form).
 * `ERROR_COUNT`: The number of times this error was returned.
 * `WARNING_COUNT`: The number of times this warning was returned.
