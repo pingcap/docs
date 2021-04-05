@@ -13,7 +13,7 @@ The table `CLIENT_ERRORS_SUMMARY_BY_HOST` provides a summary of SQL errors and w
 * Permission errors.
 * A table does not exist.
 
-Client errors are returned to the client via the MySQL server protocol, where applications are expected to appropriate action. The `information_schema` table `CLIENT_ERRORS_SUMMARY_BY_HOST` provides an useful method to inspect errors in the scenario that applications are not correctly handling (or logging) errors returned by the TiDB server.
+These errors are returned to the client via the MySQL server protocol, where applications are expected to appropriate action. The `information_schema`.`CLIENT_ERRORS_SUMMARY_BY_HOST` table provides a useful method to inspect errors in the scenario where applications are not correctly handling (or logging) errors returned by the TiDB server.
 
 Because `CLIENT_ERRORS_SUMMARY_BY_HOST` summarizes the errors on a per-remote-host basis, it can be useful to diagnose scenarios where one application server is generating more errors than other servers. Possible scenarios include:
 
