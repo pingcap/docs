@@ -22,7 +22,7 @@ Because `CLIENT_ERRORS_SUMMARY_BY_HOST` summarizes the errors on a per-remote-ho
 * Incorrect use of the "host" portion of user permissions.
 * Unreliable network connectivity generating more timeouts or disconnected connections.
 
-The summarized counts can be reset with the statement `FLUSH CLIENT_ERRORS_SUMMARY`. The summary is local to each TiDB server and is only retained in memory. Summaries will be lost if the TiDB server restarts.
+The summarized counts can be reset using the statement `FLUSH CLIENT_ERRORS_SUMMARY`. The summary is local to each TiDB server and is only retained in memory. Summaries will be lost if the TiDB server restarts.
 
 {{< copyable "sql" >}}
 
