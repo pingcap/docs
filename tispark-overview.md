@@ -66,6 +66,13 @@ spark.tispark.pd.addresses $your_pd_servers
 spark.sql.extensions org.apache.spark.sql.TiExtensions
 ```
 
+Add the following configuration in the `CDH` spark version:
+
+```
+spark.tispark.pd.addresses=$your_pd_servers
+spark.sql.extensions=org.apache.spark.sql.TiExtensions
+```
+
 `your_pd_servers` are comma-separated PD addresses, with each in the format of `$your_pd_address:$port`.
 
 For example, when you have multiple PD servers on `10.16.20.1,10.16.20.2,10.16.20.3` with the port 2379, put it as `10.16.20.1:2379,10.16.20.2:2379,10.16.20.3:2379`.
@@ -164,8 +171,7 @@ spark-sql> select count(*) from lineitem;
 Time taken: 0.673 seconds, Fetched 1 row(s)
 ```
 
-For JDBC connection with Thrift Server, you can try it with various JDBC supported tools including SQuirreLSQL and hive-beeline.
-For example, to use it with beeline:
+For JDBC connection with Thrift Server, you can try it with various JDBC supported tools including SQuirreLSQL and hive-beeline. For example, to use it with beeline:
 
 ```sh
 ./beeline

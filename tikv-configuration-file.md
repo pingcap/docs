@@ -271,6 +271,18 @@ Configuration items related to storage
 + Default value: `"2GB"`
 + Unite: MB|GB
 
+### `enable-ttl`
+
++ TTL is short for "Time to live". If this item is enabled, TiKV automatically deletes data that reaches its TTL. To set the value of TTL, you need to specify it in the requests when writing data via the client. If the TTL is not specified, it means that TiKV does not automatically delete the corresponding data.
++ Note: The TTL feature is only available for the RawKV interface for now. You can only configure this feature when creating a new cluster because TTL uses different data formats in the storage layer. If you modify this item on an existing cluster, TiKV reports errors when it starts.
++ Default value: `false`
+
+### `ttl-poll-check-interval`
+
++ The interval of checking data to reclaim physical spaces. If data reaches its TTL, TiKV forcibly reclaims its physical space during the check.
++ Default value: `"12h"`
++ Minimum value: `"0s"`
+
 ## storage.block-cache
 
 Configuration items related to the sharing of block cache among multiple RocksDB Column Families (CF). When these configuration items are enabled, block cache separately configured for each column family is disabled.
@@ -386,7 +398,7 @@ Configuration items related to Raftstore
 + Default value: `"3s"`
 + Minimum value: `0`
 
-### `raftstore.hibernate-regions` (**Experimental**)
+### `hibernate-regions` (**Experimental**)
 
 + Enables or disables Hibernate Region. When this option is enabled, a Region idle for a long time is automatically set as hibernated. This reduces the extra overhead caused by heartbeat messages between the Raft leader and the followers for idle Regions. You can use `raftstore.peer-stale-state-check-interval` to modify the heartbeat interval between the leader and the followers of hibernated Regions.
 + Default value: true
@@ -1280,6 +1292,6 @@ For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](
 
 ### `pipelined`
 
-This configuration item enables the pipelined process of adding the pessimistic lock. With this feature enabled, after detecting that data can be locked, TiKV immediately notifies TiDB to execute the subsequent requests and write the pessimistic lock asynchronously, which reduces most of the latency and significantly improves the performance of pessimistic transactions. But there is a still low probability that the asynchronous write of the pessimistic lock fails, which might cause the failure of pessimistic transaction commits.
++ This configuration item enables the pipelined process of adding the pessimistic lock. With this feature enabled, after detecting that data can be locked, TiKV immediately notifies TiDB to execute the subsequent requests and write the pessimistic lock asynchronously, which reduces most of the latency and significantly improves the performance of pessimistic transactions. But there is a still low probability that the asynchronous write of the pessimistic lock fails, which might cause the failure of pessimistic transaction commits.
 
-The default value of `pipelined` is `false`.
++ Default value: `true`

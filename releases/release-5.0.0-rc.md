@@ -103,7 +103,7 @@ However, when async commit is enabled, the external consistency of transactions 
 
 Users can enable this feature by setting the global variable `tidb_enable_async_commit = ON`.
 
-+ [User document](/system-variables.md#tidb_enable_async_commit-new-in-v500-rc)
++ [User document](/system-variables.md#tidb_enable_async_commit-new-in-v50-rc)
 + Related issue: [#8316](https://github.com/tikv/tikv/issues/8316)
 
 ### Improve the optimizer's stability in index selection (experimental)
@@ -158,8 +158,8 @@ In the process of Region membership changes, "adding a member" and "deleting a m
 
 ## Backup and restore
 
-+ The Backup & Restore tool (BR) supports backing up data to AWS S3 and Google Cloud GCS. ([User document](/br/backup-and-restore-tool.md#back-up-data-to-amazon-s3-backend))
-+ The Backup & Restore tool (BR) supports restoring data from AWS S3 and Google Cloud GCS to TiDB. ([User document](/br/backup-and-restore-tool.md#restore-data-from-amazon-s3-backend))
++ The Backup & Restore tool (BR) supports backing up data to AWS S3 and Google Cloud GCS. ([User document](/br/use-br-command-line-tool.md#back-up-data-to-amazon-s3-backend))
++ The Backup & Restore tool (BR) supports restoring data from AWS S3 and Google Cloud GCS to TiDB. ([User document](/br/use-br-command-line-tool.md#restore-data-from-amazon-s3-backend))
 + Related issue: [#89](https://github.com/pingcap/br/issues/89)
 
 ## Data import and export

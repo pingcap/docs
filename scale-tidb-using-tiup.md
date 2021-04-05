@@ -1,18 +1,14 @@
 ---
 title: Scale the TiDB Cluster Using TiUP
 summary: Learn how to scale the TiDB cluster using TiUP.
-aliases: ['/docs/dev/scale-tidb-using-tiup/','/docs/dev/how-to/scale/with-tiup/','/docs/dev/scale-tidb-using-ansible/','/docs/dev/how-to/scale/with-ansible/','/tidb/dev/scale-tidb-using-ansible/']
+aliases: ['/docs/dev/scale-tidb-using-tiup/','/docs/dev/how-to/scale/with-tiup/']
 ---
 
 # Scale the TiDB Cluster Using TiUP
 
 The capacity of a TiDB cluster can be increased or decreased without interrupting the online services.
 
-This document describes how to scale the TiDB, TiKV, PD, TiCDC, or TiFlash cluster using TiUP. If you have not installed TiUP, refer to the steps in [Install TiUP on the control machine](/upgrade-tidb-using-tiup.md#install-tiup-on-the-control-machine) and import the cluster into TiUP before you use TiUP to scale the TiDB cluster.
-
-> **Note:**
->
-> Since TiDB v4.0, PingCAP no longer provides support for TiDB Ansible. Since TiDB v5.0, PingCAP no longer provides TiDB Ansible documents. If you want to read the document that introduces how to scale a TiDB cluster using TiDB Ansible, see [Scale the TiDB Cluster Using TiDB Ansible (v4.0)](https://docs.pingcap.com/tidb/v4.0/scale-tidb-using-ansible).
+This document describes how to scale the TiDB, TiKV, PD, TiCDC, or TiFlash cluster using TiUP. If you have not installed TiUP, refer to the steps in [Install TiUP on the control machine](/production-deployment-using-tiup.md#step-2-install-tiup-on-the-control-machine).
 
 To view the current cluster name list, run `tiup cluster list`.
 
@@ -147,8 +143,8 @@ If you want to add a TiFlash node to the `10.0.1.4` host, take the following ste
 >
 > When adding a TiFlash node to an existing TiDB cluster, you need to note the following things:
 >
-> 1. Confirm that the current TiDB version supports using TiFlash, otherwise upgrade your TiDB cluster to v5.0.0-rc or higher.
-> 2. Download [pd-ctl](https://download.pingcap.org/tidb-v5.0.0-rc-linux-amd64.tar.gz) and execute the `config set enable-placement-rules true` command to enable the PD's Placement Rules.
+> 1. Confirm that the current TiDB version supports using TiFlash. Otherwise, upgrade your TiDB cluster to v5.0 or later versions.
+> 2. Execute the `tiup ctl pd -u <pd-host>:<pd-port> config set enable-placement-rules true` command to enable the Placement Rules feature. Or execute the corresponding command in [pd-ctl](/pd-control.md).
 
 1. Add the node information to the `scale-out.yaml` file:
 

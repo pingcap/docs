@@ -22,7 +22,7 @@
 + Deploy
   + [Software and Hardware Requirements](/hardware-and-software-requirements.md)
   + [Environment Configuration Checklist](/check-before-deployment.md)
-  + Topology Patterns
+  + Plan Cluster Topology
     + [Minimal Topology](/minimal-deployment-topology.md)
     + [TiFlash Topology](/tiflash-deployment-topology.md)
     + [TiCDC Topology](/ticdc-deployment-topology.md)
@@ -31,15 +31,17 @@
     + [Cross-DC Topology](/geo-distributed-deployment-topology.md)
     + [Hybrid Topology](/hybrid-deployment-topology.md)
   + Install and Start
-    + Linux OS
-      + [Use TiUP (Recommended)](/production-deployment-using-tiup.md)
-      + [Use TiUP Offline (Recommended)](/production-offline-deployment-using-tiup.md)
-      + [Deploy in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable)
+    + [Use TiUP (Recommended)](/production-deployment-using-tiup.md)
+    + [Deploy in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable)
   + [Verify Cluster Status](/post-installation-check.md)
+  + Test Cluster Performance
+    + [Test TiDB Using Sysbench](/benchmark/benchmark-tidb-using-sysbench.md)
+    + [Test TiDB Using TPC-C](/benchmark/benchmark-tidb-using-tpcc.md)
 + Migrate
   + [Overview](/migration-overview.md)
   + Migrate from MySQL
-    + [Migrate Using Dumpling and TiDB Lightning](/migrate-from-mysql-dumpling-files.md)
+    + [Migrate from Amazon Aurora MySQL Using TiDB Lightning](/migrate-from-aurora-using-lightning.md)
+    + [Migrate from MySQL SQL Files Using TiDB Lightning](/migrate-from-mysql-dumpling-files.md)
     + [Migrate from Amazon Aurora MySQL Using DM](/migrate-from-aurora-mysql-database.md)
   + Migrate from CSV Files
     + [Use TiDB Lightning](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)
@@ -48,17 +50,15 @@
 + Maintain
   + Upgrade
     + [Use TiUP (Recommended)](/upgrade-tidb-using-tiup.md)
-    + [Use TiUP Offline (Recommended)](/upgrade-tidb-using-tiup-offline.md)
     + [Use TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.1/upgrade-a-tidb-cluster)
   + Scale
     + [Use TiUP (Recommended)](/scale-tidb-using-tiup.md)
     + [Use TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.1/scale-a-tidb-cluster)
   + Backup and Restore
     + Use BR Tool (Recommended)
-      + [Use BR Tool](/br/backup-and-restore-tool.md)
+      + [BR Tool Overview](/br/backup-and-restore-tool.md)
+      + [Use BR Command-line](/br/use-br-command-line-tool.md)
       + [BR Use Cases](/br/backup-and-restore-use-cases.md)
-      + [BR Storages](/br/backup-and-restore-storages.md)
-    + [Use Dumpling and TiDB Lightning (Recommended)](/backup-and-restore-using-dumpling-lightning.md)
   + [Read Historical Data](/read-historical-data.md)
   + [Configure Time Zone](/configure-time-zone.md)
   + [Daily Checklist](/daily-check.md)
@@ -104,6 +104,7 @@
       + [`EXPLAIN` Walkthrough](/explain-walkthrough.md)
       + [Indexes](/explain-indexes.md)
       + [Joins](/explain-joins.md)
+      + [MPP Queries](/explain-mpp.md)
       + [Subqueries](/explain-subqueries.md)
       + [Aggregation](/explain-aggregation.md)
       + [Views](/explain-views.md)
@@ -136,7 +137,7 @@
   + [Multiple Data Centers in One City Deployment](/multi-data-centers-in-one-city-deployment.md)
   + [Three Data Centers in Two Cities Deployment](/three-data-centers-in-two-cities-deployment.md)
   + Best Practices
-    + [Use TiDB](/tidb-best-practices.md)
+    + [Use TiDB](/best-practices/tidb-best-practices.md)
     + [Java Application Development](/best-practices/java-app-best-practices.md)
     + [Use HAProxy](/best-practices/haproxy-best-practices.md)
     + [Highly Concurrent Write](/best-practices/high-concurrency-best-practices.md)
@@ -152,8 +153,10 @@
   + [Use Cases](/ecosystem-tool-user-case.md)
   + [Download](/download-ecosystem-tools.md)
   + Backup & Restore (BR)
-    + [Use BR Tool](/br/backup-and-restore-tool.md)
+    + [BR Tool Overview](/br/backup-and-restore-tool.md)
+    + [Use BR Command-line for Backup and Restoration](/br/backup-and-restore-tool.md)
     + [BR Use Cases](/br/backup-and-restore-use-cases.md)
+    + [BR Storages](/br/backup-and-restore-storages.md)
     + [BR FAQ](/br/backup-and-restore-faq.md)
   + TiDB Binlog
     + [Overview](/tidb-binlog/tidb-binlog-overview.md)
@@ -194,8 +197,10 @@
     + [Deploy](/ticdc/deploy-ticdc.md)
     + [Maintain](/ticdc/manage-ticdc.md)
     + [Troubleshoot](/ticdc/troubleshoot-ticdc.md)
+    + [Monitor](/ticdc/monitor-ticdc.md)
     + [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
     + [Integrate TiDB with Confluent Platform](/ticdc/integrate-confluent-using-ticdc.md)
+    + [Glossary](/ticdc/ticdc-glossary.md)
   + [Dumpling](/dumpling-overview.md)
   + sync-diff-inspector
     + [Overview](/sync-diff-inspector/sync-diff-inspector-overview.md)
@@ -217,6 +222,7 @@
     + [PD](/grafana-pd-dashboard.md)
     + [TiKV](/grafana-tikv-dashboard.md)
     + [TiFlash](/tiflash/monitor-tiflash.md)
+    + [TiCDC](/ticdc/monitor-ticdc.md)
   + Secure
     + [Enable TLS Between TiDB Clients and Servers](/enable-tls-between-clients-and-servers.md)
     + [Enable TLS Between TiDB Components](/enable-tls-between-components.md)
@@ -526,6 +532,8 @@
   + v5.0
     + [5.0.0-rc](/releases/release-5.0.0-rc.md)
   + v4.0
+    + [4.0.12](/releases/release-4.0.12.md)
+    + [4.0.11](/releases/release-4.0.11.md)
     + [4.0.10](/releases/release-4.0.10.md)
     + [4.0.9](/releases/release-4.0.9.md)
     + [4.0.8](/releases/release-4.0.8.md)

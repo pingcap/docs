@@ -192,7 +192,6 @@ You can check privileges of TiDB users in the `INFORMATION_SCHEMA.USER_PRIVILEGE
 | Index          | `IndexPriv`      | Creates or deletes an index          |
 | Alter          | `AlterPriv`      | Executes the `ALTER` statement          |
 | Super          | `SuperPriv`      | All the privileges                 |
-| Grant          | `GrantPriv`      | Grants another user a privilege         |
 | Create         | `CreatePriv`     | Creates a schema or table        |
 | Select         | `SelectPriv`     | Reads the table data               |
 | Insert         | `InsertPriv`     | Inserts data to a table             |
@@ -355,7 +354,7 @@ In this record, `Host` and `User` determine that the connection request sent by 
 
 > **Note:**
 >
-> It is recommended to only update the privilege tables via the supplied syntax such as `GRANT`, `CREATE USER` and `DROP USER`. Making direct edits to the underlying privilege tables will not automatially update the privilege cache, leading to unpredictable behavior until `FLUSH PRIVILEGES` is executed.
+> It is recommended to only update the privilege tables via the supplied syntax such as `GRANT`, `CREATE USER` and `DROP USER`. Making direct edits to the underlying privilege tables will not automatically update the privilege cache, leading to unpredictable behavior until `FLUSH PRIVILEGES` is executed.
 
 ### Connection verification
 
@@ -388,19 +387,3 @@ Manually editing tables such as `mysql.user` with statements such as `INSERT`, `
 ```sql
 FLUSH PRIVILEGES;
 ```
-
-### Limitations and constraints
-
-Currently, the following privileges are not checked yet because they are less frequently used:
-
-- FILE
-- USAGE
-- SHUTDOWN
-- EXECUTE
-- PROCESS
-- INDEX
-- ...
-
-> **Note:**
->
-> Column-level privileges are not implemented at this stage.

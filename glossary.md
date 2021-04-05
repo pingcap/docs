@@ -28,6 +28,10 @@ Leader/Follower/Learner each corresponds to a role in a Raft group of [peers](#r
 
 ## O
 
+### Old value
+
+The "original value" in the incremental change log output by TiCDC. You can specify whether the incremental change log output by TiCDC contains the "original value".
+
 ### Operator
 
 An operator is a collection of actions that applies to a Region for scheduling purposes. Operators perform scheduling tasks such as "migrate the leader of Region 2 to Store 5" and "migrate replicas of Region 2 to Store 1, 4, 5".

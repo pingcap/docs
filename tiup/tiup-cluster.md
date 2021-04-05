@@ -17,9 +17,7 @@ tiup cluster
 ```
 
 ```
-The component `cluster` is not installed; downloading from repository.
-download https://tiup-mirrors.pingcap.com/cluster-v1.3.0-darwin-amd64.tar.gz 15.32 MiB / 15.34 MiB 99.90% 10.04 MiB p/s
-Starting component `cluster`: /Users/joshua/.tiup/components/cluster/v1.3.0/cluster
+Starting component `cluster`: /home/tidb/.tiup/components/cluster/v1.3.0/cluster
 Deploy a TiDB cluster for production
 
 Usage:
@@ -65,7 +63,7 @@ tiup cluster deploy <cluster-name> <version> <topology.yaml> [flags]
 
 This command requires you to provide the cluster name, the TiDB cluster version, and a topology file of the cluster.
 
-To write a topology file, refer to [the example](https://github.com/pingcap/tiup/blob/master/examples/topology.example.yaml). The following file is an example of the simplest topology:
+To write a topology file, refer to [the example](https://github.com/pingcap/tiup/blob/master/embed/templates/examples/topology.example.yaml). The following file is an example of the simplest topology:
 
 > **Note:**
 >
@@ -429,7 +427,7 @@ The content and format requirements for files under the specified path are as fo
 
 - The folder specified in the `dashboard_dir` field of `grafana_servers` must contain full `*.json` files.
 - The folder specified in the `rule_dir` field of `monitoring_servers` must contain full `*.rules.yml` files.
-- For the format of files specified in the `config_file` field of `alertmanager_servers`, refer to [the Alertmanager configuration template](https://github.com/pingcap/tiup/blob/master/templates/config/alertmanager.yml).
+- For the format of files specified in the `config_file` field of `alertmanager_servers`, refer to [the Alertmanager configuration template](https://github.com/pingcap/tiup/blob/master/embed/templates/config/alertmanager.yml).
 
 When you execute `tiup reload`, TiUP first deletes all old configuration files in the target machine and then uploads the corresponding configuration from the control machine to the corresponding configuration directory of the target machine. Therefore, if you want to modify a particular configuration file, make sure that all configuration files (including the unmodified ones) are in the same directory. For example, to modify Grafana's `tidb.json` file, you need to first copy all the `*.json` files from Grafana's `dashboards` directory to your local directory. Otherwise, other JSON files will be missing from the target machine.
 
@@ -559,14 +557,14 @@ tiup cluster audit
 ```
 
 ```
-Starting component `cluster`: /Users/joshua/.tiup/components/cluster/v1.3.0/cluster audit
+Starting component `cluster`: /home/tidb/.tiup/components/cluster/v1.3.0/cluster audit
 ID      Time                       Command
 --      ----                       -------
-4BLhr0  2020-04-29T13:25:09+08:00  /Users/joshua/.tiup/components/cluster/v1.3.0/cluster deploy test v5.0.0-rc /tmp/topology.yaml
-4BKWjF  2020-04-28T23:36:57+08:00  /Users/joshua/.tiup/components/cluster/v1.3.0/cluster deploy test v5.0.0-rc /tmp/topology.yaml
-4BKVwH  2020-04-28T23:02:08+08:00  /Users/joshua/.tiup/components/cluster/v1.3.0/cluster deploy test v5.0.0-rc /tmp/topology.yaml
-4BKKH1  2020-04-28T16:39:04+08:00  /Users/joshua/.tiup/components/cluster/v1.3.0/cluster destroy test
-4BKKDx  2020-04-28T16:36:57+08:00  /Users/joshua/.tiup/components/cluster/v1.3.0/cluster deploy test v5.0.0-rc /tmp/topology.yaml
+4BLhr0  2020-04-29T13:25:09+08:00  /home/tidb/.tiup/components/cluster/v1.3.0/cluster deploy test v5.0.0-rc /tmp/topology.yaml
+4BKWjF  2020-04-28T23:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.3.0/cluster deploy test v5.0.0-rc /tmp/topology.yaml
+4BKVwH  2020-04-28T23:02:08+08:00  /home/tidb/.tiup/components/cluster/v1.3.0/cluster deploy test v5.0.0-rc /tmp/topology.yaml
+4BKKH1  2020-04-28T16:39:04+08:00  /home/tidb/.tiup/components/cluster/v1.3.0/cluster destroy test
+4BKKDx  2020-04-28T16:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.3.0/cluster deploy test v5.0.0-rc /tmp/topology.yaml
 ```
 
 The first column is `audit-id`. To view the execution log of a certain command, pass the `audit-id` of a command as the flag as follows:
