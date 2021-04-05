@@ -791,7 +791,7 @@ For a system upgraded to v5.0.0-rc from an earlier version, if you have not modi
 - This variable is used to set the threshold value of memory quota for a query.
 - If the memory quota of a query during execution exceeds the threshold value, TiDB performs the operation designated by the OOMAction option in the configuration file. The initial value of this variable is configured by [`mem-quota-query`](/tidb-configuration-file.md#mem-quota-query).
 
-### `tidb_mem_quota_apply_cache`
+### tidb_mem_quota_apply_cache
 
 - Scope: SESSION | GLOBAL
 - Default value: 32 MB
