@@ -13,7 +13,7 @@ The table `CLIENT_ERRORS_SUMMARY_BY_HOST` provides a summary of SQL errors and w
 * Permission errors.
 * A table does not exist.
 
-Client errors are returned to the client via the MySQL server protocol, where applications are expected to appropriate action. The `information_schema` table `CLIENT_ERRORS_SUMMARY_BY_HOST` provides an useful method to inspect errors in the scenario that applications are not correctly handling (or logging) errors returned by the TiDB server.
+These errors are returned to the client via the MySQL server protocol, where applications are expected to appropriate action. The `information_schema`.`CLIENT_ERRORS_SUMMARY_BY_HOST` table provides a useful method to inspect errors in the scenario where applications are not correctly handling (or logging) errors returned by the TiDB server.
 
 Because `CLIENT_ERRORS_SUMMARY_BY_HOST` summarizes the errors on a per-remote-host basis, it can be useful to diagnose scenarios where one application server is generating more errors than other servers. Possible scenarios include:
 
@@ -22,7 +22,7 @@ Because `CLIENT_ERRORS_SUMMARY_BY_HOST` summarizes the errors on a per-remote-ho
 * Incorrect use of the "host" portion of user permissions.
 * Unreliable network connectivity generating more timeouts or disconnected connections.
 
-The summarized counts can be reset with the statement `FLUSH CLIENT_ERRORS_SUMMARY`. The summary is local to each TiDB server and is only retained in memory. Summaries will be lost if the TiDB server restarts.
+The summarized counts can be reset using the statement `FLUSH CLIENT_ERRORS_SUMMARY`. The summary is local to each TiDB server and is only retained in memory. Summaries will be lost if the TiDB server restarts.
 
 {{< copyable "sql" >}}
 
@@ -56,7 +56,7 @@ Field description:
 * `FIRST_SEEN`: The first time this error (or warning) was seen from the client host.
 * `LAST_SEEN`: The most recent time this error (or warning) was seen from the client host.
 
-The following example shows a warning being generated when connecting to a local TiDB server. The summary is reset after executing `FLUSH CLIENT_ERRORS_SUMMARY`:
+The following example shows a warning being generated when the client connects to a local TiDB server. The summary is reset after executing `FLUSH CLIENT_ERRORS_SUMMARY`:
 
 {{< copyable "sql" >}}
 
