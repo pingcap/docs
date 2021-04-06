@@ -165,7 +165,7 @@ The TiDB configuration file supports more options than command-line parameters. 
 
 + Determines whether to limit the maximum length of a single `ENUM` element and a single `SET` element.
 + Default value: `true`
-+ When this configuration value is `true`, the maximum length of a single `ENUM` element and a single `SET` element is 255 characters, which is compatible with [MySQL 8.0](https://dev.mysql.com/doc/refman/8.0/en/string-type-syntax.html); when this configuration value is `false`, there is no limit on the length of a single element, which is compatible with TiDB (earlier than v5.0).
++ When this configuration value is `true`, the maximum length of a single `ENUM` element and a single `SET` element is 255 characters, which is compatible with [MySQL 8.0](https://dev.mysql.com/doc/refman/8.0/en/string-type-syntax.html). When this configuration value is `false`, there is no limit on the length of a single element, which is compatible with TiDB (earlier than v5.0).
 
 ## Log
 
