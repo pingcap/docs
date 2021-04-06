@@ -795,8 +795,8 @@ For a system upgraded to v5.0.0-rc from an earlier version, if you have not modi
 
 - Scope: SESSION | GLOBAL
 - Default value: 32 MB
-- This variable is used to set the memory usage threshold of the local Cache in the `Apply` operator.
-- The local Cache in the `Apply` operator is used to speed up the computation of the `Apply` operator. You can set the variable to `0` to disable the `Apply` Cache feature.
+- This variable is used to set the memory usage threshold of the local cache in the `Apply` operator.
+- The local cache in the `Apply` operator is used to speed up the computation of the `Apply` operator. You can set the variable to `0` to disable the `Apply` cache feature.
 
 ### tidb_memory_usage_alarm_ratio
 
