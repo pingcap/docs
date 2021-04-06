@@ -593,9 +593,9 @@ This variable is used to set the concurrency of the following SQL operators (to 
 + `tidb_projection_concurrency`
 + `tidb_window_concurrency`
 
-Since v5.0.0-rc, you can still separately modify the system variables listed above (with a deprecation warning returned) and your modification only affects the corresponding single operators. After that, if you use `tidb_executor_concurrency` to modify the operator concurrency, the separately modified operators will not be affected. If you want to use `tidb_executor_concurrency` to modify the concurrency of all operators, you can set the values of all variables listed above to `-1`.
+Since v5.0, you can still separately modify the system variables listed above (with a deprecation warning returned) and your modification only affects the corresponding single operators. After that, if you use `tidb_executor_concurrency` to modify the operator concurrency, the separately modified operators will not be affected. If you want to use `tidb_executor_concurrency` to modify the concurrency of all operators, you can set the values of all variables listed above to `-1`.
 
-For a system upgraded to v5.0.0-rc from an earlier version, if you have not modified any value of the variables listed above (which means that the `tidb_hash_join_concurrency` value is `5` and the values of the rest are `4`), the operator concurrency previously managed by these variables will automatically be managed by `tidb_executor_concurrency`. If you have modified any of these variables, the concurrency of the corresponding operators will still be controlled by the modified variables.
+For a system upgraded to v5.0 from an earlier version, if you have not modified any value of the variables listed above (which means that the `tidb_hash_join_concurrency` value is `5` and the values of the rest are `4`), the operator concurrency previously managed by these variables will automatically be managed by `tidb_executor_concurrency`. If you have modified any of these variables, the concurrency of the corresponding operators will still be controlled by the modified variables.
 
 ### tidb_expensive_query_time_threshold
 
@@ -676,7 +676,7 @@ For a system upgraded to v5.0.0-rc from an earlier version, if you have not modi
 
 > **Warning:**
 >
-> Since v5.0.0-rc, this variable is deprecated. Instead, use [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v500-rc) for setting.
+> Since v5.0, this variable is deprecated. Instead, use [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v500-rc) for setting.
 
 - Scope: SESSION | GLOBAL
 - Default value: -1
@@ -687,7 +687,7 @@ For a system upgraded to v5.0.0-rc from an earlier version, if you have not modi
 
 > **Warning:**
 >
-> Since v5.0.0-rc, this variable is deprecated. Instead, use [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v500-rc) for setting.
+> Since v5.0, this variable is deprecated. Instead, use [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v500-rc) for setting.
 
 - Scope: SESSION | GLOBAL
 - Default value: -1
@@ -699,7 +699,7 @@ For a system upgraded to v5.0.0-rc from an earlier version, if you have not modi
 
 > **Warning:**
 >
-> Since v5.0.0-rc, this variable is deprecated. Instead, use [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v500-rc) for setting.
+> Since v5.0, this variable is deprecated. Instead, use [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v500-rc) for setting.
 
 - Scope: SESSION | GLOBAL
 - Default value: -1
@@ -718,7 +718,7 @@ For a system upgraded to v5.0.0-rc from an earlier version, if you have not modi
 
 > **Warning:**
 >
-> Since v5.0.0-rc, this variable is deprecated. Instead, use [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v500-rc) for setting.
+> Since v5.0, this variable is deprecated. Instead, use [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v500-rc) for setting.
 
 - Scope: SESSION | GLOBAL
 - Default value: -1
@@ -730,7 +730,7 @@ For a system upgraded to v5.0.0-rc from an earlier version, if you have not modi
 
 > **Warning:**
 >
-> Since v5.0.0-rc, this variable is deprecated. Instead, use [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v500-rc) for setting.
+> Since v5.0, this variable is deprecated. Instead, use [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v500-rc) for setting.
 
 - Scope: SESSION | GLOBAL
 - Default value: -1
@@ -963,7 +963,7 @@ explain select * from t where age=5;
 
 > **Warning:**
 >
-> Since v5.0.0-rc, this variable is deprecated. Instead, use [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v500-rc) for setting.
+> Since v5.0, this variable is deprecated. Instead, use [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v500-rc) for setting.
 
 - Scope: SESSION | GLOBAL
 - Default value: -1
@@ -1148,7 +1148,7 @@ SET tidb_slow_log_threshold = 200;
 
 > **Warning:**
 >
-> Since v5.0.0-rc, this variable is deprecated. Instead, use [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v500-rc) for setting.
+> Since v5.0, this variable is deprecated. Instead, use [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v500-rc) for setting.
 
 - Scope: SESSION | GLOBAL
 - Default value: -1
