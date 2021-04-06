@@ -280,7 +280,7 @@ TiFlash provides the following two global/session variables to control whether t
 
 ## Notes
 
-Currently, TiFlash does not support some features. These features might be incompatible with the native TiDB:
+Currently, TiFlash does not support some features. These features might be incompatible with the native TiDB: 
 
 * In the TiFlash computation layer:
     * Checking overflowed numerical values is not supported. For example, adding two maximum values of the `BIGINT` type `9223372036854775807 + 9223372036854775807`. The expected behavior of this calculation in TiDB is to return the `ERROR 1690 (22003): BIGINT value is out of range` error. However, if this calculation is performed in TiFlash, an overflow value of `-2` is returned without any error.
