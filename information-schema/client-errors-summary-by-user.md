@@ -11,7 +11,7 @@ The table `CLIENT_ERRORS_SUMMARY_BY_USER` provides a summary of SQL errors and w
 * Division by zero errors.
 * The attempt to insert out-of-range or duplicate key values.
 * Permission errors.
-* A table does not exist.
+* A table that does not exist.
 
 Client errors are returned to the client via the MySQL server protocol, where applications are expected to take appropriate action. The `information_schema`.`CLIENT_ERRORS_SUMMARY_BY_USER` table provides an useful method to inspect errors in the scenario where applications are not correctly handling (or logging) errors returned by the TiDB server.
 
