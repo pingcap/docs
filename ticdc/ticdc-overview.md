@@ -108,7 +108,7 @@ Solutions: Use the `cdc` executable file corresponding to the TiCDC cluster vers
 
 > **Note:**
 >
-> The above issue exists only when `cdc cli` is v5.0.0-rc. Other v5.0.0-rc.x `cdc cli` tool can be compatible with v4.0.x clusters.
+> The above issue exists only when `cdc cli` is v5.0.0-rc. Other v5.0.x `cdc cli` tool can be compatible with v4.0.x clusters.
 
 ## Install and deploy TiCDC
 
