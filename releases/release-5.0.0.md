@@ -149,7 +149,6 @@ In the benchmark test on three 40C 189G physical machines at the scale of TPC-H 
 
 Currently, the main features that the MPP mode does not support are as follows (For details, refer to [Use TiFlash](/tiflash/use-tiflash.md)):
 
-
 + Table partitioning
 + Window Function
 + Collation
