@@ -151,7 +151,6 @@ When the MPP mode is on, TiDB determines whether to send a query to the MPP engi
 
 In the TPC-H 100 benchmark test, TiFlash MPP delivers significant processing speed over analytic engines of traditional analytic databases and SQL on Hadoop. With this architecture, you can perform large-scale analytic queries directly on the latest transaction data, with a higher performance than traditional offline analytic solutions. According to the benchmark, with the same cluster resource, TiDB 5.0 MPP shows 2 to 3 times of speedup over Greenplum 6.15.0 and Apache Spark 3.1.1.
 
-
 Currently, the main features that the MPP mode does not support are as follows (For details, refer to [Use TiFlash](/tiflash/use-tiflash.md)):
 
 + Table partitioning
