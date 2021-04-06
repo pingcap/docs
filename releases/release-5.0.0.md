@@ -26,7 +26,7 @@ In v5.0, the key new features or improvements are as follows:
 
 ### System variables
 
-+ Add the [`tidb_executor_concurrency`](/system-variables.md#tidb_executor_concurrency#tidb_executor_concurrency-new-in-v500-rc) system variable to control the concurrency of multiple operators. The previous `tidb_*_concurrency` settings (such as `tidb_projection_concurrency`) still take effect but with a warning when you use them.
++ Add the [`tidb_executor_concurrency`](/system-variables.md#tidb_executor_concurrency-new-in-v50) system variable to control the concurrency of multiple operators. The previous `tidb_*_concurrency` settings (such as `tidb_projection_concurrency`) still take effect but with a warning when you use them.
 + Add the [`tidb_skip_ascii_check`](/system-variables.md#tidb_skip_ascii_check) system variable to specify whether to skip the ASCII validation check when the ASCII character set is written. This default value is `OFF`.
 + Add the [`tidb_enable_strict_double_type_check`](/system-variables.md#tidb_enable_strict_double_type_check-new-in-v50) system variable to determine whether the syntax like `double(N)` can be defined in the table schema. This default value is `OFF`.
 + Change the default value of [`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size) from `2000` to `0`. This means that batch DML statements are no longer used by default in `LOAD`/`INSERT INTO SELECT ...`. Instead, large transactions are used to comply with the strict ACID semantics.
@@ -47,7 +47,7 @@ In v5.0, the key new features or improvements are as follows:
 ### Configuration file parameters
 
 + Add the [`index-limit`](/tidb-configuration-file.md#index-limit-new-in-v50) configuration item for TiDB to be compatible with MySQL’s limit on the maximum number of indexes. If the index setting exceeds the default value of this configuration item, when the table schema is re-imported into MySQL, an error is reported. This item’s value defaults to `64` and ranges between `[64,64*8]`.
-+ Add the [`enable-enum-length-limit`](/tidb-configuration-file.md#enable-enum-length-limit) configuration item for TiDB to be compatible and consistent with MySQL’s enum/set length (enum length < 255). The default value is `true`.
++ Add the [`enable-enum-length-limit`](/tidb-configuration-file.md#enable-enum-length-limit-new-in-v50) configuration item for TiDB to be compatible and consistent with MySQL’s enum/set length (enum length < 255). The default value is `true`.
 + Add the [`deprecate-integer-display-length`](/tidb-configuration-file.md#deprecate-integer-display-length) configuration item for TiDB to be compatible with MySQL’s explicit declaration on the length of integer types. But a warning similar to `Integer display width is deprecated and will be removed in a future release` is returned.
 + Replace the `pessimistic-txn.enable` configuration item with the [`tidb_txn_mode`](/system-variables.md#tidb_txn_mode) environment variable.
 + Replace the `performance.max-memory` configuration item with [`performance.server-memory-quota`](/tidb-configuration-file.md#server-memory-quota-new-in-v409)
@@ -78,7 +78,7 @@ To enable list partitioning, set the session variable [`tidb_enable_list_partiti
 
 List COLUMNS partitioning is a variant of list partitioning. You can use multiple columns as partition keys. Besides the integer data type, you can also use the columns in the string, `DATE`, and `DATETIME` data types as partition columns.
 
-To enable List COLUMNS partitioning, set the session variable [`tidb_enable_list_partition`](/system-variables.md#tidb_enable_list_partition-new-in-v50-ga) to `ON`.
+To enable List COLUMNS partitioning, set the session variable [`tidb_enable_list_partition`](/system-variables.md#tidb_enable_list_partition-new-in-v50) to `ON`.
 
 #### Invisible indexes
 
@@ -322,7 +322,7 @@ This feature is disbled by default. You can enable it by modifying the server or
 
 ### Improve stability of TiFlash queries
 
-Add a system variable [`tidb_allow_fallback_to_tikv`](/system-variables.md#tidb_allow_fallback_to_tikv-new-in-v50-ga) to fall back queries to TiKV when TiFlash fails. The default value is `OFF`.
+Add a system variable [`tidb_allow_fallback_to_tikv`](/system-variables.md#tidb_allow_fallback_to_tikv-new-in-v50) to fall back queries to TiKV when TiFlash fails. The default value is `OFF`.
 
 ### Improve TiCDC stability and alleviate the OOM issue caused by replicating too much incremental data
 
