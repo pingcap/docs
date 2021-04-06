@@ -13,7 +13,7 @@ The table `CLIENT_ERRORS_SUMMARY_GLOBAL` provides a global summary of all SQL er
 * Permission errors.
 * A table does not exist.
 
-Client errors are returned to the client via the MySQL server protocol, where applications are expected to take appropriate action. The `information_schema`.`CLIENT_ERRORS_SUMMARY_GLOBAL` table provides a high level overview, and is useful in the scenario that applications are not correctly handling (or logging) errors returned by the TiDB server.
+Client errors are returned to the client via the MySQL server protocol, where applications are expected to take appropriate action. The `information_schema`.`CLIENT_ERRORS_SUMMARY_GLOBAL` table provides a high-level overview, and is useful in the scenario where applications are not correctly handling (or logging) errors returned by the TiDB server.
 
 The summarized counts can be reset with the statement `FLUSH CLIENT_ERRORS_SUMMARY`. The summary is local to each TiDB server and is only retained in memory. Summaries will be lost if the TiDB server restarts.
 
