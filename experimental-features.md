@@ -14,12 +14,12 @@ This document introduces the experimental features of TiDB in different versions
 + Improve the stability of the optimizer's choice of indexes (Introduced in v5.0)
     + Extend the statistics feature by collecting the multi-column order dependency information.
     + Refactor the statistics module, including deleting the `TopN` value from `CMSKetch` and the histogram, and adding NDV information for histogram buckets of each table index.
++ [hibernate-regions](/tikv-configuration-file.md#hibernate-regions-experimental). A Region that idles for a long time is automatically set as hibernated. This reduces the extra overhead caused by heartbeat messages between the Raft leader and the followers for idle Regions.
 
 ## Scheduling
 
 + Cascading Placement Rules feature. It is a replica rule system that guides PD to generate corresponding schedules for different types of data. By combining different scheduling rules, you can finely control the attributes of any continuous data range, such as the number of replicas, the storage location, the host type, whether to participate in Raft election, and whether to act as the Raft leader. See [Cascading Placement Rules](/configure-placement-rules.md) for details. (Introduced in v4.0)
 + Elastic scheduling feature. It enables the TiDB cluster to dynamically scale out and in on Kubernetes based on real-time workloads, which effectively reduces the stress during your application's peak hours and saves overheads. See [Enable TidbCluster Auto-scaling](https://docs.pingcap.com/tidb-in-kubernetes/stable/enable-tidb-cluster-auto-scaling) for details. (Introduced in v4.0)
-+ [hibernate-regions](/tikv-configuration-file.md#hibernate-regions-experimental). A Region that idles for a long time is automatically set as hibernated. This reduces the extra overhead caused by heartbeat messages between the Raft leader and the followers for idle Regions.
 
 ## SQL
 
