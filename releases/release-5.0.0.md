@@ -13,7 +13,8 @@ In v5.0, PingCAP is dedicated to helping enterprises quickly build applications 
 In v5.0, the key new features or improvements are as follows:
 
 + Introduce Massively Parallel Processing (MPP) architecture through TiFlash nodes, which shares the execution workloads of large join queries among TiFlash nodes. When the MPP mode is enabled, TiDB, based on cost, determines whether to use the MPP framework to perform the calculation. In the MPP mode, the join keys are redistributed through the `Exchange` operation while being calculated, which distributes the calculation pressure to each TiFlash node and speeds up the calculation.
-+ Enable the clustered index feature to improve database performance. For example, in the Sysbench test, TiDB's read and write performance, with clustered index enabled, improves by 58.1%.
++ Introduce the clustered index feature to improve database performance. For example, in the Sysbench test, TiDB's read and write performance, with clustered index enabled, improves by 58.1%.
+
 + Enable the async commit feature to reduce the write latency. For example, in the 64-thread Sysbench test, the average latency of updating indexes, with async commit enabled, is reduced by 41.7%, from 12.04 ms to 7.01 ms.
 + Reduce jitters. This is achieved by improving the optimizer stability and by limiting system tasks' usages of I/O, network, CPU, and memory resources. For example, in the 72-hour performance test, the standard deviation of Sysbench TPS jitter is reduced from 11.09% to 3.36%.
 + Enhance system stability by improving scheduling and by keeping execution plans stable as much as possible.
