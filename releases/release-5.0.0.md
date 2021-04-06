@@ -14,7 +14,7 @@ In v5.0, the key new features or improvements are as follows:
 
 + TiDB introduces Massively Parallel Processing (MPP) architecture through TiFlash nodes, which shares the execution workloads of large join queries among TiFlash nodes. When the MPP mode is enabled, TiDB, based on cost, determines whether to use the MPP framework to perform the calculation. In the MPP mode, the join keys are redistributed through the `Exchange` operation while being calculated, which distributes the calculation pressure to each TiFlash node and speeds up the calculation.
 + Enables the clustered index feature to improve database performance. For example, in the Sysbench test, TiDB's read and write performance, with clustered index enabled, improves by 58.1%.
-+ Enables the async commit feature to reduce the write latency. For example, in the 64-thread Sysbench test, the average latency of  updating indexes, with async commit enabled, is reduced by 41.7%, from 12.04 ms to 7.01 ms.
++ Enables the async commit feature to reduce the write latency. For example, in the 64-thread Sysbench test, the average latency of updating indexes, with async commit enabled, is reduced by 41.7%, from 12.04 ms to 7.01 ms.
 + Reduces jitters. This is achieved by improving the optimizer stability and by limiting system tasks' usages of I/O, network, CPU, and memory resources. For example, in the 72-hour performance test, the standard deviation of Sysbench TPS jitter is reduced from 11.09% to 3.36%.
 + Enhances system stability by improving scheduling and by keeping execution plans stable as much as possible.
 + Introduces Raft Joint Consensus algorithm, which ensures the system availability during the Region membership change.
@@ -138,13 +138,13 @@ This feature is introduced in v5.0. To use the feature, enable the system variab
 
 ### MPP architecture
 
-+ [User document](/tiflash/use-tiflash.md)
+[User document](/tiflash/use-tiflash.md)
 
 TiDB introduces the MPP architecture through TiFlash nodes. This architecture allows multiple TiFlash nodes to share the execution workload of large join queries.
 
 When the MPP mode is on, TiDB determines whether to send a query to the MPP engine for computation based on the calculation cost. In the MPP mode, TiDB distributes the computation of table joins to each running TiFlash node by redistributing the join key during data calculation (`Exchange` operation), and thus accelerates the calculation. Furthermore, with the aggregation computing feature that TiFlash has already supported, TiDB can pushdown the computation of a query to the TiFlash MPP cluster. Then the distributed environment can help accelerate the entire execution process and dramatically increase the speed of analytic queries.
 
-In the benchmark test on three 40C 189G physical machines at the scale of TPC-H 100, TiFlash MPP delivers significant processing speed over analytic engines of traditional analytic databases and data lakes. With this architecture, you can perform large-scale analytic queries directly on the latest transaction data, with a higher  performance than traditional offline analytic solutions.
+In the benchmark test on three 40C 189G physical machines at the scale of TPC-H 100, TiFlash MPP delivers significant processing speed over analytic engines of traditional analytic databases and data lakes. With this architecture, you can perform large-scale analytic queries directly on the latest transaction data, with a higher performance than traditional offline analytic solutions.
 
 Currently, the MPP mode does not support the following features:
 
@@ -157,12 +157,11 @@ Currently, the MPP mode does not support the following features:
 
 ### Clustered index
 
-+ [User document](/clustered-indexes.md)
-+ Related issue: [#4841](https://github.com/pingcap/tidb/issues/4841)
+[User document](/clustered-indexes.md), [#4841](https://github.com/pingcap/tidb/issues/4841)
 
 When you are designing table structures or analyzing database behaviors, it is recommended to use the clustered index feature if you find that some columns with primary keys are often grouped and sorted, queries on these columns often return a certain range of data or a small amount of data with different values, and the corresponding data does not cause read or write hotspot issues.
 
-Clustered indexes, also known as  _index-organized tables_ in some database management systems, is a storage structure associated with the data of a table. When creating a clustered index, you can specify one or more columns from the table as the keys for the index. TiDB stores these keys in a specific structure, which allows TiDB to quickly and efficiently find the rows associated with the keys, thus improves the performance of querying and writing data.
+Clustered indexes, also known as _index-organized tables_ in some database management systems, is a storage structure associated with the data of a table. When creating a clustered index, you can specify one or more columns from the table as the keys for the index. TiDB stores these keys in a specific structure, which allows TiDB to quickly and efficiently find the rows associated with the keys, thus improves the performance of querying and writing data.
 
 When the clustered index feature is enabled, the TiDB performance improves significantly (for example in the Sysbench test, the read and write performance of TiDB, with clustered index enabled, improves by 58.1%) in the following cases:
 
@@ -174,7 +173,7 @@ When the clustered index feature is enabled, the TiDB performance improves signi
 Each table can either use a clustered or non-clustered index to sort and store data. The differences of these two storage structures are as follows:
 
 + When creating a clustered index, you can specify one or more columns in the table as the key value of the index. A clustered index sorts and stores the data of a table according to the key value. Each table can have only one clustered index. If a table has a clustered index, it is called a clustered index table. Otherwise, it is called a non-clustered index table.
-+ When you create a non-clustered index, the data in the table is stored in an unordered structure. You do not need to explicitly specify the key value of the non-clustered index, because TiDB automatically assigns a unique ROWID to each row of data. During a query, the ROWID is used to locate the corresponding row. Because there are at least two network I/O operations when you query or insert  data, the performance is degraded compared with clustered indexes.
++ When you create a non-clustered index, the data in the table is stored in an unordered structure. You do not need to explicitly specify the key value of the non-clustered index, because TiDB automatically assigns a unique ROWID to each row of data. During a query, the ROWID is used to locate the corresponding row. Because there are at least two network I/O operations when you query or insert data, the performance is degraded compared with clustered indexes.
 
 When table data is modified, the database system automatically maintains clustered indexes and non-clustered indexes for you.
 
@@ -219,7 +218,7 @@ Limitations for the clustered index are as follows:
 
 ### Async Commit
 
-[User document](/system-variables.md#tidb_enable_async_commit-new-in-v50)，[#8316](https://github.com/tikv/tikv/issues/8316)
+[User document](/system-variables.md#tidb_enable_async_commit-new-in-v50), [#8316](https://github.com/tikv/tikv/issues/8316)
 
 The client of the database will wait for the database system to complete the transaction commit in two phases (2PC) synchronously. The transaction returns the result to the client after the first phase commit is successful, and the system executes the second phase commit operation in the background asynchronously to reduce the transaction commit latency. If the transaction write involves only one Region, the second phase is omitted directly, and the transaction becomes a one-phase commit.
 
@@ -231,7 +230,7 @@ After the causal consistency is enabled, with the same hardware and configuratio
 
 After the consistency of transactions is reduced from the linear consistency to causal consistency, if there is no interdependence between multiple transactions in the application, the transactions do not have a globally consistent order.
 
-**The Async Commit  feature is enabled by default for newly created v5.0 clusters.**
+**The Async Commit feature is enabled by default for newly created v5.0 clusters.**
 
 This feature is disabled by default for clusters upgraded from earlier versions to v5.0. You can enable this feature by executing the `set global tidb_enable_async_commit = ON;` and `set global tidb_enable_1pc = ON;` statements.
 
@@ -241,13 +240,11 @@ The limitation for the Async Commit feature is as follows:
 
 ### Enable the Coprocessor cache feature by default
 
-[User document](/tidb-configuration-file.md#tikv-clientcopr-cache-new-in-v400)
+[User document](/tidb-configuration-file.md#tikv-clientcopr-cache-new-in-v400), [#18028](https://github.com/pingcap/tidb/issues/18028)
 
 In 5.0 GA, the Coprocessor cache feature is enabled by default. After this feature is enabled, to reduce the latency of reading data, TiDB caches the calculation results of the operators pushed down to tikv-server in tidb-server.
 
 To disable the Coprocessor cache feature, you can modify the `capacity-mb` configuration item of `tikv-client.copr-cache` to `0.0`.
-
-[#18028](https://github.com/pingcap/tidb/issues/18028)
 
 ### Improve the execution performance of `delete * from table where id <? Limit ?` statement
 
@@ -346,7 +343,7 @@ Limitations:
 
 ### Improve system availability during Region membership change
 
-[User document](/pd-configuration-file.md#enable-joint-consensus-new-in-v50), [#18079](https://github.com/pingcap/tidb/issues/18079), [#7587](https://github.com/tikv/tikv/issues/7587),  [#2860](https://github.com/tikv/pd/issues/2860)
+[User document](/pd-configuration-file.md#enable-joint-consensus-new-in-v50), [#18079](https://github.com/pingcap/tidb/issues/18079), [#7587](https://github.com/tikv/tikv/issues/7587), [#2860](https://github.com/tikv/pd/issues/2860)
 
 In the process of Region membership changes, "adding a member" and "deleting a member" are two operations performed in two steps. If a failure occurs when the membership change finishes, the Regions will become unavailable and an error of foreground application is returned.
 
@@ -364,7 +361,7 @@ Track the memory usage of aggregate functions. This feature is enabled by defaul
 
 ### Migrate data from S3/Aurora to TiDB
 
-TiDB data migration tools support using Amazon S3 (and other S3-compatible storage services) as the intermediate for data migration and  initializing Aurora snapshot data directly into TiDB, providing more options for migrating data from Amazon S3/Aurora to TiDB.
+TiDB data migration tools support using Amazon S3 (and other S3-compatible storage services) as the intermediate for data migration and initializing Aurora snapshot data directly into TiDB, providing more options for migrating data from Amazon S3/Aurora to TiDB.
 
 To use this feature, refer to the following documents:
 
@@ -377,9 +374,9 @@ TiDB Lightning optimizes its data import performance specifically for AWS T1.sta
 
 ## TiDB data sharing subscription
 
-### Integrate TiDB to  Kafka Connect (Confluent Platform) using TiCDC (**experimental feature**)
+### Integrate TiDB to Kafka Connect (Confluent Platform) using TiCDC (**experimental feature**)
 
-[User documentation](/ticdc/integrate-confluent-using-ticdc.md)，[#660](https://github.com/pingcap/ticdc/issues/660)
+[User document](/ticdc/integrate-confluent-using-ticdc.md), [#660](https://github.com/pingcap/ticdc/issues/660)
 
 To support the business requirements of streaming TiDB data to other systems, this feature achieves the data streaming architecture and enables you to stream TiDB data to the systems such as Kafka, Hadoop, and Oracle.
 
@@ -387,9 +384,9 @@ The Kafka connectors protocol provided by the Confluent platform is widely used 
 
 ### Support cyclic replication between TiDB clusters using TiCDC (**experimental feature**)
 
-[User documentation](/ticdc/manage-ticdc.md#cyclic-replication)，[#471](https://github.com/pingcap/ticdc/issues/471)
+[User document](/ticdc/manage-ticdc.md#cyclic-replication), [#471](https://github.com/pingcap/ticdc/issues/471)
 
-Because of the communication latency and other issues caused by geographical differences, this scenario exists: to support the local business, users deploy multiple TiDB clusters in different geographical areas, and then to accomplish tasks such as analytics and settlements, users replicate data  across multiple TiDB clusters or aggregate the replicated data to a central TiDB hub.
+Because of the communication latency and other issues caused by geographical differences, this scenario exists: to support the local business, users deploy multiple TiDB clusters in different geographical areas, and then to accomplish tasks such as analytics and settlements, users replicate data across multiple TiDB clusters or aggregate the replicated data to a central TiDB hub.
 
 TiCDC supports replicating data across multiple independent TiDB clusters. For example, TiDB cluster A, cluster B, and cluster C all have a table named `test.user_data` and write data into this table respectively. With the cyclic replication feature, the data written into `test.user_data` in one cluster can be replicated to the other two clusters, so that the `test.user_data` table in the three clusters is consistent with each other.
 
@@ -420,7 +417,8 @@ In TiDB v5.0, the following improvements are made to help you troubleshoot perfo
 
 ### Optimize the logic of cluster deployment operations, to help DBAs deploy a set of standard TiDB production cluster faster
 
-[User Documentation](/production-deployment-using-tiup.md)
+[User Document](/production-deployment-using-tiup.md)
+
 In previous TiDB versions, DBAs using TiUP to deploy TiDB clusters find that the environment initialization is complicated, the checksum configuration is excessive, and the cluster topology file is difficult to edit. All of these issues lead to low deployment efficiency for DBAs. In TiDB v5.0, the TiDB deployment efficiency using TiUP is improved for DBAs through the following items:
 
 + TiUP Cluster supports the `check topo.yaml` command to perform a more comprehensive one-click environment check and provide repair recommendations.
@@ -432,7 +430,7 @@ In previous TiDB versions, DBAs using TiUP to deploy TiDB clusters find that the
 
 ### Improve upgrade stability
 
-Before TiUP v1.4.0, during the upgrade of a TiDB cluster using tiup-cluster,  the SQL responses of the cluster jitter for a long period of time, and during PD online rolling upgrades, the QPS of the cluster jitter between 10s to 30s.
+Before TiUP v1.4.0, during the upgrade of a TiDB cluster using tiup-cluster, the SQL responses of the cluster jitter for a long period of time, and during PD online rolling upgrades, the QPS of the cluster jitter between 10s to 30s.
 
 TiUP v1.4.0 adjusts the logic and makes the following optimizations:
 
