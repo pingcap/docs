@@ -116,7 +116,7 @@ Currently, this feature still has the following incompatibility issues:
 
 ### Character set and collation
 
-- Support the `utf8mb4_unicode_ci` and `utf8_unicode_ci` collations. [User document](/character-set-and-collation#new-framework-for-collations), [#17596](https://github.com/pingcap/tidb/issues/17596)
+- Support the `utf8mb4_unicode_ci` and `utf8_unicode_ci` collations. [User document](/character-set-and-collation.md#new-framework-for-collations), [#17596](https://github.com/pingcap/tidb/issues/17596)
 - Support the case-insensitive comparison sort for collations
 
 ### Security
@@ -326,7 +326,7 @@ Add a system variable [`tidb_allow_fallback_to_tikv`](/system-variables.md#tidb_
 
 ### Improve TiCDC stability and alleviate the OOM issue caused by replicating too much incremental data
 
-[User document](/manage-ticdc.md#unified-sorter), [#1150](https://github.com/pingcap/ticdc/issues/1150)
+[User document](/ticdc/manage-ticdc.md#unified-sorter), [#1150](https://github.com/pingcap/ticdc/issues/1150)
 
 In TiCDC v4.0.9 or earlier versions, replicating too much data change might cause OOM. In v5.0, the Unified Sorter feature is enabled by default to mitigate OOM issues caused by the following scenarios:
 
