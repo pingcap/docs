@@ -29,7 +29,6 @@ This document introduces the experimental features of TiDB in different versions
 + [Generated Columns](/generated-columns.md).
 + [User-Defined Variables](/user-defined-variables.md).
 + [JSON data type](/data-type-json.md) and [JSON functions](/functions-and-operators/json-functions.md).
-+ [Global Kill](/sql-statements/sql-statement-kill.md).
 + [View](/information-schema/information-schema-views.md).
 
 ## Configuration management
