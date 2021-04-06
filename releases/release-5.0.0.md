@@ -14,7 +14,6 @@ In v5.0, the key new features or improvements are as follows:
 
 + Introduce Massively Parallel Processing (MPP) architecture through TiFlash nodes, which shares the execution workloads of large join queries among TiFlash nodes. When the MPP mode is enabled, TiDB, based on cost, determines whether to use the MPP framework to perform the calculation. In the MPP mode, the join keys are redistributed through the `Exchange` operation while being calculated, which distributes the calculation pressure to each TiFlash node and speeds up the calculation.
 + Introduce the clustered index feature to improve database performance. For example, in the Sysbench test, TiDB's read and write performance, with clustered index enabled, improves by 58.1%.
-
 + Enable the async commit feature to reduce the write latency. For example, in the 64-thread Sysbench test, the average latency of updating indexes, with async commit enabled, is reduced by 41.7%, from 12.04 ms to 7.01 ms.
 + Reduce jitters. This is achieved by improving the optimizer stability and by limiting system tasks' usages of I/O, network, CPU, and memory resources. For example, in the 72-hour performance test, the standard deviation of Sysbench TPS jitter is reduced from 11.09% to 3.36%.
 + Enhance system stability by improving scheduling and by keeping execution plans stable as much as possible.
@@ -30,7 +29,12 @@ In v5.0, the key new features or improvements are as follows:
 + Add the [`tidb_executor_concurrency`](/system-variables.md#tidb_executor_concurrency-new-in-v50) system variable to control the concurrency of multiple operators. The previous `tidb_*_concurrency` settings (such as `tidb_projection_concurrency`) still take effect but with a warning when you use them.
 + Add the [`tidb_skip_ascii_check`](/system-variables.md#tidb_skip_ascii_check) system variable to specify whether to skip the ASCII validation check when the ASCII character set is written. This default value is `OFF`.
 + Add the [`tidb_enable_strict_double_type_check`](/system-variables.md#tidb_enable_strict_double_type_check-new-in-v50) system variable to determine whether the syntax like `double(N)` can be defined in the table schema. This default value is `OFF`.
-+ Change the default value of [`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size) from `2000` to `0`. This means that batch DML statements are no longer used by default in `LOAD`/`INSERT INTO SELECT ...`. Instead, large transactions are used to comply with the strict ACID semantics.
++ Change the default value of [`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size) from `20000` to `0`. This means that batch DML statements are no longer used by default in `LOAD`/`INSERT INTO SELECT ...`. Instead, large transactions are used to comply with the strict ACID semantics.
+
+    > **Note:**
+    >
+    > The scope of the variable is changed from session to global, and the default value is changed from `20000` to `0`. If the application relies on the original default value, you need to use the `set global` statement to modify the variable to the original value after the upgrade.
+
 + Control temporary tables’ syntax compatibility using the [`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40) system variable. When this variable value is `OFF`, the `CREATE TEMPORARY TABLE` syntax returns an error.
 + Add the following system variables to directly control the garbage collection-related parameters:
     - [`tidb_gc_concurrency`](/system-variables.md#tidb_gc_concurrency-new-in-v50)
@@ -133,7 +137,6 @@ TiDB supports desensitizing the output log information. To enable this feature, 
 + The configuration item `security.redact-info-log`. Its default value is `false`, which means that desensitization is disabled. To enable desensitization for pd-server logs, set the variable value to `true`.
 + The configuration item `security.redact_info_log` for tiflash-server and `security.redact-info-log` for tiflash-learner. Their default values are both `false`, which means that desensitization is disabled. To enable desensitization for tiflash-server and tiflash-learner logs, set the values of both variables to `true`.
 
-
 This feature is introduced in v5.0. To use the feature, enable the system variable and all configuration items above.
 
 ## Performance optimization
@@ -201,7 +204,6 @@ You can execute the statement `SHOW INDEX FROM tbl-name` to query whether a tabl
     + `ON`: Indicates that the clustered index feature is enabled for all types of primary keys. Adding and dropping non-clustered indexes are supported.
     + `OFF`: Indicates that the clustered index feature is disabled for all types of primary keys. Adding and dropping non-clustered indexes are supported.
     + `INT_ONLY`: The default value. If the variable is set to `INT_ONLY` and `alter-primary-key` is set to `false`, the primary keys which consist of single integer columns are created as clustered indexes by default. The behavior is consistent with that of TiDB v5.0 and earlier versions.
-
 
 If a `CREATE TABLE` statement contains the keyword `CLUSTERED | NONCLUSTERED`, the statement overrides the configuration of the system variable and the configuration item.
 
@@ -379,13 +381,11 @@ TiDB Lightning optimizes its data import performance specifically for AWS T1.sta
 
 ## Data sharing and subscription
 
-
 ### Integrate TiDB to Kafka Connect (Confluent Platform) using TiCDC (**experimental feature**)
 
 [User document](/ticdc/integrate-confluent-using-ticdc.md), [#660](https://github.com/pingcap/ticdc/issues/660)
 
 To support the business requirements of streaming TiDB data to other systems, this feature enables you to stream TiDB data to the systems such as Kafka, Hadoop, and Oracle.
-
 
 The Kafka connectors protocol provided by the Confluent platform is widely used in the community, and it supports transferring data to either relational or non-relational databases in different protocols. By integrating TiCDC to Kafka Connect of the Confluent platform, TiDB extends the ability to stream TiDB data to other heterogeneous databases or systems.
 
