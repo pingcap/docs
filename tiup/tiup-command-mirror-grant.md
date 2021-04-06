@@ -6,7 +6,7 @@ title: tiup mirror grant
 
 The `tiup mirror grant` command is used to introduce a component owner to the current mirror.
 
-Component owners can use their keys to publish new components or to modify components they previously published. Before adding a new component owner, current component owner needs to send his or her own public key to the mirror administrator.
+Component owners can use their keys to publish new components or to modify components they previously published. Before adding a new component owner, the current component owner being added needs to send his or her own public key to the mirror administrator.
 
 > **Note:**
 >
@@ -25,7 +25,7 @@ tiup mirror grant <id> [flags]
 ### -k, --key
 
 - Specifies the key of the introduced component owner. This key can either be public or private. If it is a private key, TiUP converts it to the corresponding public key before stores it in the mirror.
-- A key can only be used by a component owner.
+- A key can be used by only one component owner.
 - Data type: `STRING`
 - Default: "${TIUP_HOME}/keys/private.json"
 
