@@ -172,13 +172,13 @@ mysql> SELECT * FROM t1;
     * `1`: Aggregation and join requests are sent in batches
     * `2`: All coprocessor requests are sent in batches
 
-### tidb_allow_fallback_to_tikv <span class="version-mark">New in v5.0 GA</span>
+### tidb_allow_fallback_to_tikv <span class="version-mark">New in v5.0</span>
 
 - Scope: SESSION | GLOBAL
 - Default value: ""
 - This variable is used to specify a list of storage engines that might fall back to TiKV. If the execution of a SQL statement fails due to a failure of the specified storage engine in the list, TiDB retries executing this SQL statement with TiKV. This variable can be set to "" or "tiflash". When this variable is set to "tiflash", if the execution of a SQL statement fails due to a failure of TiFlash, TiDB retries executing this SQL statement with TiKV.
 
-### tidb_allow_mpp <span class="version-mark">New in v5.0 GA</span>
+### tidb_allow_mpp <span class="version-mark">New in v5.0</span>
 
 - Scope: SESSION | GLOBAL
 - Default value: ON
@@ -228,13 +228,13 @@ mysql> SELECT * FROM t1;
 
     In the case of a poor network environment, appropriately increasing the value of this variable can effectively alleviate error reporting to the application end caused by timeout. If the application end wants to receive the error information more quickly, minimize the value of this variable.
 
-### tidb_broadcast_join_threshold_count <span class="version-mark">New in v5.0 GA</span>
+### tidb_broadcast_join_threshold_count <span class="version-mark">New in v5.0</span>
 
 - Scope: SESSION | GLOBAL
 - Default value: 10240
 - The unit of the variable is rows. If the objects of the join operation belong to a subquery, the optimizer cannot estimate the size of the subquery result set. In this situation, the size is determined by the number of rows in the result set. If the estimated number of rows in the subquery is less than the value of this variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used.
 
-### tidb_broadcast_join_threshold_size <span class="version-mark">New in v5.0 GA</span>
+### tidb_broadcast_join_threshold_size <span class="version-mark">New in v5.0</span>
 
 - Scope: SESSION | GLOBAL
 - Default value: 104857600 (which equals 100 megabytes)
@@ -380,7 +380,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 >
 > Currently, this feature is incompatible with TiDB Binlog in some scenarios and might cause semantic changes on a transaction. For more usage precautions of this feature, refer to [Incompatibility issues about transaction semantic](https://github.com/pingcap/tidb/issues/21069) and [Incompatibility issues about TiDB Binlog](https://github.com/pingcap/tidb/issues/20996).
 
-### tidb_enable_async_commit <span class="version-mark">New in v5.0 RC</span>
+### tidb_enable_async_commit <span class="version-mark">New in v5.0</span>
 
 - Scope: SESSION | GLOBAL
 - Default value: `ON` for newly created clusters. If your cluster before upgrade was v5.0 RC or later, the variable value stays unchanged. If your cluster before upgrade was v4.0 or earlier, the variable value defaults to `OFF` after the upgrade.
@@ -390,7 +390,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 >
 > If you have enabled TiDB Binlog, enabling this variable cannot improve the performance. To improve the performance, it is recommended to use [TiCDC](/ticdc/ticdc-overview.md) instead.
 
-### tidb_enable_1pc <span class="version-mark">New in v5.0 RC</span>
+### tidb_enable_1pc <span class="version-mark">New in v5.0</span>
 
 - Scope: SESSION | GLOBAL
 - Default value: `ON` for newly created clusters. If your cluster before upgrade was v5.0 RC or later, the variable value stays unchanged. If your cluster before upgrade was v4.0 or earlier, the variable value defaults to `OFF` after the upgrade.
@@ -412,7 +412,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Default value: ON
 - This variable is used to control whether to enable the `Chunk` data encoding format in Coprocessor.
 
-### tidb_enable_clustered_index <span class="version-mark">New in v5.0.0-rc</span>
+### tidb_enable_clustered_index <span class="version-mark">New in v5.0</span>
 
 - Scope: GLOBAL
 - Default value: INT_ONLY
@@ -456,7 +456,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 >
 > Only the default value of `OFF` can be considered safe. Setting `tidb_enable_noop_functions=1` might lead to unexpected behaviors in your application, because it permits TiDB to ignore certain syntax without providing an error.
 
-### tidb_enable_parallel_apply <span class="version-mark">New in v5.0 GA</span>
+### tidb_enable_parallel_apply <span class="version-mark">New in v5.0</span>
 
 - Scope: SESSION | GLOBAL
 - Default value: 0
@@ -481,7 +481,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Default value: ON (the value of the default configuration file)
 - This variable is used to control whether to enable the statement summary feature. If enabled, SQL execution information like time consumption is recorded to the `information_schema.STATEMENTS_SUMMARY` system table to identify and troubleshoot SQL performance issues.
 
-### tidb_enable_strict_double_type_check <span class="version-mark">New in v5.0.0-rc</span>
+### tidb_enable_strict_double_type_check <span class="version-mark">New in v5.0</span>
 
 - Scope: SESSION | GLOBAL
 - Default value: ON
@@ -502,7 +502,7 @@ Query OK, 0 rows affected (0.09 sec)
 ```
 
 > **Note:**
-> 
+>
 > This setting only applies to the type `DOUBLE` since MySQL permits precision for `FLOAT` types. This behavior is deprecated starting with MySQL 8.0.17, and it is not recommended to specify precision for either `FLOAT` or `DOUBLE` types.
 
 ### tidb_enable_table_partition
@@ -514,7 +514,7 @@ Query OK, 0 rows affected (0.09 sec)
     - `AUTO` functions the same way as `ON` does.
     - `OFF` indicates disabling the `TABLE PARTITION` feature. In this case, the syntax that creates a partition table can be executed, but the table created is not a partitioned one.
 
-### tidb_enable_list_partition <span class="version-mark">New in v5.0 GA</span>
+### tidb_enable_list_partition <span class="version-mark">New in v5.0</span>
 
 > **Warning:**
 >
@@ -569,7 +569,7 @@ Query OK, 0 rows affected (0.09 sec)
 - Default value: 00:00 +0000
 - This variable is used to set the start time of baseline evolution in a day.
 
-### tidb_executor_concurrency <span class="version-mark">New in v5.0.0-rc</span>
+### tidb_executor_concurrency <span class="version-mark">New in v5.0</span>
 
 - Scope: SESSION | GLOBAL
 - Default value: 5
@@ -612,19 +612,19 @@ For a system upgraded to v5.0.0-rc from an earlier version, if you have not modi
 - This variable is used to change the default priority for statements executed on a TiDB server. A use case is to ensure that a particular user that is performing OLAP queries receives lower priority than users performing OLTP queries.
 - You can set the value of this variable to `NO_PRIORITY`, `LOW_PRIORITY`, `DELAYED` or `HIGH_PRIORITY`.
 
-### tidb_gc_concurrency <span class="version-mark">New in v5.0 GA</span>
+### tidb_gc_concurrency <span class="version-mark">New in v5.0</span>
 
 - Scope: GLOBAL
 - Default: -1
 - Specifies the number of threads in the [Resolve Locks](/garbage-collection-overview.md#resolve-locks) step of GC. A value of `-1` means that TiDB will automatically decide the number of garbage collection threads to use.
 
-### tidb_gc_enable <span class="version-mark">New in v5.0 GA</span>
+### tidb_gc_enable <span class="version-mark">New in v5.0</span>
 
 - Scope: GLOBAL
 - Default value: ON
 - Enables garbage collection for TiKV. Disabling garbage collection will reduce system performance, as old versions of rows will no longer be purged.
 
-### tidb_gc_life_time <span class="version-mark">New in v5.0 GA</span>
+### tidb_gc_life_time <span class="version-mark">New in v5.0</span>
 
 - Scope: GLOBAL
 - Default: `"10m0s"`
@@ -637,13 +637,13 @@ For a system upgraded to v5.0.0-rc from an earlier version, if you have not modi
 >     - A large amount of history data may affect performance to a certain degree, especially for range queries such as `select count(*) from t`
 > - If there is any transaction that has been running longer than `tidb_gc_life_time`, during GC, the data since `start_ts` is retained for this transaction to continue execution. For example, if `tidb_gc_life_time` is configured to 10 minutes, among all transactions being executed, the transaction that starts earliest has been running for 15 minutes, GC will retain data of the recent 15 minutes.
 
-### tidb_gc_run_interval <span class="version-mark">New in v5.0 GA</span>
+### tidb_gc_run_interval <span class="version-mark">New in v5.0</span>
 
 - Scope: GLOBAL
 - Default value: `"10m0s"`
 - Specifies the GC interval, in the format of Go Duration, for example, `"1h30m"`, and `"15m"`
 
-### tidb_gc_scan_lock_mode <span class="version-mark">New in v5.0 GA</span>
+### tidb_gc_scan_lock_mode <span class="version-mark">New in v5.0</span>
 
 > **Warning:**
 >
