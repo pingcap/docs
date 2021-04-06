@@ -147,7 +147,8 @@ When the MPP mode is on, TiDB determines whether to send a query to the MPP engi
 
 In the benchmark test on three 40C 189G physical machines at the scale of TPC-H 100, TiFlash MPP delivers significant processing speed over analytic engines of traditional analytic databases and data lakes. With this architecture, you can perform large-scale analytic queries directly on the latest transaction data, with a higher performance than traditional offline analytic solutions.
 
-Currently, the MPP mode does not support the following features:
+Currently, the main features that the MPP mode does not support are as follows (For details, refer to [Use TiFlash](/tiflash/use-tiflash.md)):
+
 
 + Table partitioning
 + Window Function
@@ -155,6 +156,8 @@ Currently, the MPP mode does not support the following features:
 + Some built-in functions
 + Reading data from TiKV
 + OOM spill
++ Union
++ Full Outer Join
 
 ### Clustered index
 
