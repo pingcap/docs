@@ -75,7 +75,11 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
 
 4. Start a new session to access TiDB:
 
+<<<<<<< HEAD
     1. Install the MySQL client. If it is already installed, skip this step.
+=======
+    + Use the TiUP client to connect to TiDBs.
+>>>>>>> 44ad83ed... releases: correct the order of notes (#5204)
 
         {{< copyable "shell-regular" >}}
 
@@ -83,7 +87,11 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
         yum -y install mysql
         ```
 
+<<<<<<< HEAD
     2. Use the MySQL client to connect to TiDB.
+=======
+    + You can also use the MySQL client to connect to TiDB.
+>>>>>>> 44ad83ed... releases: correct the order of notes (#5204)
 
         {{< copyable "shell-regular" >}}
 
