@@ -31,7 +31,7 @@ TiKV's read requests are divided into the following types:
 - Simple queries that specify a certain row or several rows, running in the Storage Read Pool.
 - Complex aggregate calculation and range queries, running in the Coprocessor Read Pool.
 
-Starting from TiKV 5.0, all read requests use the unified thread pool for queries by default. If the TiKV cluster is upgraded from TiKV 4.0 and the `use-unified-pool` configuration of `readpool.storage` is set as `false` before the upgrade, all read requests continue using different thread pools after the upgrade. In this scenario, to make all read requests use the unified thread pool for queries, you can set the value of `readpool.storage.use-unified-pool` to `true`.
+Starting from TiKV v5.0, all read requests use the unified thread pool for queries by default. If your TiKV cluster is upgraded from TiKV v4.0 and the `use-unified-pool` configuration of `readpool.storage` was set to `false` before the upgrade, all read requests continue using different thread pools after the upgrade. In this scenario, to make all read requests use the unified thread pool for queries, you can set the value of `readpool.storage.use-unified-pool` to `true`.
 
 ## Performance tuning for TiKV thread pools
 
