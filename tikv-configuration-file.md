@@ -43,7 +43,7 @@ This document only describes the parameters that are not included in command-lin
 ### `grpc-memory-pool-quota`
 
 + Limit the memory size that can be used by gRPC
-+ Default: unlimited
++ Default: No limit
 + Limit the memory in case OOM is observed. Note that limit the usage can lead to potential stall
 
 ### `grpc-raft-conn-num`
@@ -146,7 +146,7 @@ Configuration items related to storage thread pool.
 ### `use-unified-pool`
 
 + Determines whether to use the unified thread pool (configured in [`readpool.unified`](#readpoolunified)) for storage requests. If the value of this parameter is `false`, a separate thread pool is used, which is configured through the rest parameters in this section (`readpool.storage`).
-+ Default value: If this section (`readpool.storage`) has no other configurations, the default value is `true`. Otherwise, to upgrade compatibility, the default value is `false`. Change the configuration in [`readpool.unified`](#readpoolunified) as needed before enabling this option.
++ Default value: If this section (`readpool.storage`) has no other configurations, the default value is `true`. Otherwise, for the forward compatibility, the default value is `false`. Change the configuration in [`readpool.unified`](#readpoolunified) as needed before enabling this option.
 
 ### `high-concurrency`
 
@@ -719,7 +719,7 @@ Configuration items related to RocksDB
 
 ### `stats-dump-period`
 
-+ The interval time that outputs statistics to the log.
++ The interval at which statistics are output to the log.
 + Default value: `10m`
 
 ### `compaction-readahead-size`
