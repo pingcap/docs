@@ -383,7 +383,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 ### tidb_enable_async_commit <span class="version-mark">New in v5.0</span>
 
 - Scope: SESSION | GLOBAL
-- Default value: `ON` for newly created clusters. If your cluster before upgrade was v5.0 RC or later, the variable value stays unchanged. If your cluster before upgrade was v4.0 or earlier, the variable value defaults to `OFF` after the upgrade.
+- Default value: `ON` for newly created clusters. If your cluster before upgrade was earlier than v5.0, the variable value defaults to `OFF` after the upgrade.
 - This variable controls whether to enable the async commit feature for the second phase of the two-phase transaction commit to perform asynchronously in the background. Enabling this feature can reduce the latency of transaction commit.
 
 > **Note:**
@@ -393,7 +393,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 ### tidb_enable_1pc <span class="version-mark">New in v5.0</span>
 
 - Scope: SESSION | GLOBAL
-- Default value: `ON` for newly created clusters. If your cluster before upgrade was v5.0 RC or later, the variable value stays unchanged. If your cluster before upgrade was v4.0 or earlier, the variable value defaults to `OFF` after the upgrade.
+- Default value: `ON` for newly created clusters. If your cluster before upgrade was earlier than v5.0, the variable value defaults to `OFF` after the upgrade.
 - This variable is used to specify whether to enable the one-phase commit feature for transactions that only affect one Region. Compared with the often-used two-phase commit, one-phase commit can greatly reduce the latency of transaction commit and increase the throughput.
 
 > **Note:**
