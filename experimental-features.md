@@ -10,7 +10,7 @@ This document introduces the experimental features of TiDB in different versions
 
 ## Stability
 
-+ TiFlash limits the use of I/O resources by compressing or sorting data, alleviating the contention for I/O resources between background tasks and front-end data reading and writing (v5.0 experimental feature)
++ TiFlash limits the use of I/O resources by compressing or sorting data, mitigating the contention for I/O resources between background tasks and front-end data reading and writing (v5.0 experimental feature)
 + Improve the stability of the optimizer's choice of indexes (v5.0 experimental feature)
     + Extend the statistics feature by collecting more information such as multi-column NDV (Number of Distinct Values), multi-column order dependency, and multi-column function dependency.
     + Refactor the statistics module, including deleting the `TopN` value from `CMSKetch`, refactoring the `TopN` search logic and deleting the `TopN` information from the histogram, and create a histogram index to help maintain bucket NDV.

@@ -196,7 +196,8 @@ You can execute the statement `SHOW INDEX FROM tbl-name` to query whether a tabl
 + Configure the system variable `tidb_enable_clustered_index` to control the clustered index feature. Supported values are `ON`, `OFF`, and `INT_ONLY`.
     + `ON`: Indicates that the clustered index feature is enabled for all types of primary keys. Adding and dropping non-clustered indexes are supported.
     + `OFF`: Indicates that the clustered index feature is disabled for all types of primary keys. Adding and dropping non-clustered indexes are supported.
-    + `INT_ONLY`: The default value. If the variable is set to `INT_ONLY` and `alter-primary-key` is set to `false`, the primary keys consist of single integer columns are created as clustered indexes by default. The behavior is consistent with that of TiDB v5.0 and earlier versions.
+    + `INT_ONLY`: The default value. If the variable is set to `INT_ONLY` and `alter-primary-key` is set to `false`, the primary keys which consist of single integer columns are created as clustered indexes by default. The behavior is consistent with that of TiDB v5.0 and earlier versions.
+
 
 If a `CREATE TABLE` statement contains the keyword `CLUSTERED | NONCLUSTERED`, the statement overrides the configuration of the system variable and the configuration item.
 
@@ -379,7 +380,8 @@ TiDB Lightning optimizes its data import performance specifically for AWS T1.sta
 
 [User document](/ticdc/integrate-confluent-using-ticdc.md), [#660](https://github.com/pingcap/ticdc/issues/660)
 
-To support the business requirements of streaming TiDB data to other systems, this feature achieves the data streaming architecture and enables you to stream TiDB data to the systems such as Kafka, Hadoop, and Oracle.
+To support the business requirements of streaming TiDB data to other systems, this feature enables you to stream TiDB data to the systems such as Kafka, Hadoop, and Oracle.
+
 
 The Kafka connectors protocol provided by the Confluent platform is widely used in the community, and it supports transferring data to either relational or non-relational databases in different protocols. By integrating TiCDC to Kafka Connect of the Confluent platform, TiDB extends the ability to stream TiDB data to other heterogeneous databases or systems.
 
