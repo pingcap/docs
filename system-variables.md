@@ -382,11 +382,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 ### tidb_enable_async_commit <span class="version-mark">New in v5.0</span>
 
 - Scope: SESSION | GLOBAL
-<<<<<<< HEAD
 - Default value: For newly created clusters, the default value of v5.0 RC is `OFF` and the default value of v5.0 GA or later is `ON`. If your cluster was upgraded to v5.0 GA from v5.0 RC, the variable value stays unchanged. If your cluster is upgraded to v5.0 GA from v4.0 or earlier, the variable value defaults to `OFF` after the upgrade.
-=======
-- Default value: `ON` for newly created clusters. If your cluster before upgrade was earlier than v5.0, the variable value defaults to `OFF` after the upgrade.
->>>>>>> 4d6d5c84... *: update all 5.0-rc descriptions to v5.0 (#5208)
 - This variable controls whether to enable the async commit feature for the second phase of the two-phase transaction commit to perform asynchronously in the background. Enabling this feature can reduce the latency of transaction commit.
 
 > **Note:**
@@ -396,11 +392,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 ### tidb_enable_1pc <span class="version-mark">New in v5.0</span>
 
 - Scope: SESSION | GLOBAL
-<<<<<<< HEAD
 - Default value: For newly created clusters, the default value of v5.0 RC is `OFF` and the default value of v5.0 GA or later is `ON`. If your cluster was upgraded to v5.0 GA from v5.0 RC, the variable value stays unchanged. If your cluster is upgraded to v5.0 GA from v4.0 or earlier, the variable value defaults to `OFF` after the upgrade.
-=======
-- Default value: `ON` for newly created clusters. If your cluster before upgrade was earlier than v5.0, the variable value defaults to `OFF` after the upgrade.
->>>>>>> 4d6d5c84... *: update all 5.0-rc descriptions to v5.0 (#5208)
 - This variable is used to specify whether to enable the one-phase commit feature for transactions that only affect one Region. Compared with the often-used two-phase commit, one-phase commit can greatly reduce the latency of transaction commit and increase the throughput.
 
 > **Note:**
