@@ -12,13 +12,13 @@ If you want to see the operation status of each component in the cluster, it is 
 tiup cluster display <cluster-name> [flags]
 ```
 
-`<cluster-name>`: the name of the cluster to operate. If you forget the cluster name, you can check it through [cluster list](/tiup/tiup-component-cluster-list.md).
+`<cluster-name>`: the name of the cluster to operate. If you forget the cluster name, you can check it by the [cluster list](/tiup/tiup-component-cluster-list.md).
 
 ## Options
 
 ### --dashboard
 
-- By default, all node information of the entire cluster is displayed. After adding this option, only dashboard information is displayed.
+- By default, all node information of the entire cluster is displayed. After adding the `--dashboard` option, only dashboard information is displayed.
 - Data type: `BOOLEAN`
 - Default: false
 
@@ -55,11 +55,11 @@ tiup cluster display <cluster-name> [flags]
 - SSH Client Type
 - Dashboard address
 - The table with the following fields:
-    - ID: node ID, composed of `IP:PORT`
+    - ID: the node ID, composed of `IP:PORT`
     - Role: the service role deployed on this node (such as TiDB, TiKV)
     - Host: the IP of the machine corresponding to the node
     - Ports: the port number occupied by the service
-    - OS/Arch: the operating system and machine architecture of this node
+    - OS/Arch: the operating system and the machine architecture of this node
     - Status: the current status of the node service
     - Data Dir: the data directory of the service. `-` means no data directory.
     - Deploy Dir: the deployment directory of the service

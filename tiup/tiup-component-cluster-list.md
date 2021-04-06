@@ -26,10 +26,10 @@ tiup cluster list [flags]
 
 ## Outputs
 
-Output the table with the following fields:
+Outputs the table with the following fields:
 
 - Name: the cluster name
 - User: the deployment user
 - Version: the cluster version
 - Path: the path of the cluster deployment data on the central control machine
-- PrivateKey: the path of the private key connected to the cluster
+- PrivateKey: the path of the private key that is connected to the cluster
