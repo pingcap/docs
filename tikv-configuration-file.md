@@ -31,7 +31,7 @@ This document only describes the parameters that are not included in command-lin
 ### `grpc-concurrency`
 
 + The number of gRPC worker threads
-+ Default value: `4`
++ Default value: `5`
 + Minimum value: `1`
 
 ### `grpc-concurrent-stream`
@@ -43,13 +43,13 @@ This document only describes the parameters that are not included in command-lin
 ### `grpc-memory-pool-quota`
 
 + Limit the memory size that can be used by gRPC
-+ Default: `"32G"`
++ Default: No limit
 + Limit the memory in case OOM is observed. Note that limit the usage can lead to potential stall
 
 ### `grpc-raft-conn-num`
 
 + The maximum number of links among TiKV nodes for Raft communication
-+ Default: `10`
++ Default: `1`
 + Minimum value: `1`
 
 ### `grpc-stream-initial-window-size`
@@ -146,24 +146,28 @@ Configuration items related to storage thread pool.
 ### `use-unified-pool`
 
 + Determines whether to use the unified thread pool (configured in [`readpool.unified`](#readpoolunified)) for storage requests. If the value of this parameter is `false`, a separate thread pool is used, which is configured through the rest parameters in this section (`readpool.storage`).
+<<<<<<< HEAD
 + Default value: `false`
+=======
++ Default value: If this section (`readpool.storage`) has no other configurations, the default value is `true`. Otherwise, for the backward compatibility, the default value is `false`. Change the configuration in [`readpool.unified`](#readpoolunified) as needed before enabling this option.
+>>>>>>> eeb98c08... update doc to match config default value with TiKV codebase. (#5188)
 
 ### `high-concurrency`
 
 + The allowable number of concurrent threads that handle high-priority `read` requests
-+ Default value: `4`
++ When `8` ≤ `cpu num` ≤ `16`, the default value is `cpu_num * 0.5`; when `cpu num` is greater than `8`, the default value is `4`; when `cpu num` is greater than `16`, the default value is `8`.
 + Minimum value: `1`
 
 ### `normal-concurrency`
 
 + The allowable number of concurrent threads that handle normal-priority `read` requests
-+ Default value: `4`
++ When `8` ≤ `cpu num` ≤ `16`, the default value is `cpu_num * 0.5`; when `cpu num` is greater than `8`, the default value is `4`; when `cpu num` is greater than `16`, the default value is `8`.
 + Minimum value: `1`
 
 ### `low-concurrency`
 
 + The allowable number of concurrent threads that handle low-priority `read` requests
-+ Default value: `4`
++ When `8` ≤ `cpu num` ≤ `16`, the default value is `cpu_num * 0.5`; when `cpu num` is greater than `8`, the default value is `4`; when `cpu num` is greater than `16`, the default value is `8`.
 + Minimum value: `1`
 
 ### `max-tasks-per-worker-high`
@@ -250,12 +254,12 @@ Configuration items related to storage
 ### `scheduler-concurrency`
 
 + A built-in memory lock mechanism to prevent simultaneous operations on a key. Each key has a hash in a different slot.
-+ Default value: `2048000`
++ Default value: `524288`
 + Minimum value: `1`
 
 ### `scheduler-worker-pool-size`
 
-+ The number of `scheduler` threads, mainly used for checking transaction consistency before data writing
++ The number of `scheduler` threads, mainly used for checking transaction consistency before data writing. If the number of CPU cores is greater than or equal to `16`, the default value is `8`; otherwise, the default value is `4`.
 + Default value: `4`
 + Minimum value: `1`
 
@@ -268,7 +272,7 @@ Configuration items related to storage
 ### `reserve-space`
 
 + The size of the temporary file that preoccupies the extra space when TiKV is started. The name of temporary file is `space_placeholder_file`, located in the `storage.data-dir` directory. When TiKV runs out of disk space and cannot be started normally, you can delete this file as an emergency intervention and set `reserve-space` to `"0MB"`.
-+ Default value: `"2GB"`
++ Default value: `"5GB"`
 + Unite: MB|GB
 
 ## storage.block-cache
@@ -339,7 +343,7 @@ Configuration items related to Raftstore
 + Default value: `0`
 + Minimum value: `0`
 
-### `raft-max-size-per-message`
+### `raft-max-size-per-msg`
 
 + The soft limit on the size of a single message packet
 + Default value: `"1MB"`
@@ -423,12 +427,6 @@ Configuration items related to Raftstore
 + Default value: `"5m"`
 + Minimum value: `0`
 
-### `clean-stale-peer-delay`
-
-+ Delays the time in deleting expired replica data
-+ Default value: `"10m"`
-+ Minimum value: `0`
-
 ### `region-compact-check-step`
 
 + The number of Regions checked at one time for each round of manual compaction
@@ -463,7 +461,7 @@ Configuration items related to Raftstore
 ### `snap-mgr-gc-tick-interval`
 
 + The time interval at which the recycle of expired snapshot files is triggered. `0` means that this feature is disabled.
-+ Default value: `"5s"`
++ Default value: `"1m"`
 + Minimum value: `0`
 
 ### `snap-gc-timeout`
@@ -525,7 +523,7 @@ Configuration items related to Raftstore
 ### `leader-transfer-max-log-lag`
 
 + The maximum number of missing logs allowed for the transferee during a Raft leader transfer
-+ Default value: `10`
++ Default value: `128`
 + Minimum value: `10`
 
 ### `snap-apply-batch-size`
@@ -561,7 +559,7 @@ Configuration items related to Raftstore
 ### `merge-check-tick-interval`
 
 + The time interval at which TiKV checks whether a Region needs merge
-+ Default value: `"10s"`
++ Default value: `"2s"`
 + Minimum value: greater than `0`
 
 ### `use-delete-range`
@@ -618,7 +616,7 @@ Configuration items related to Coprocessor
 ### `split-region-on-table`
 
 + Determines whether to split Region by table. It is recommended for you to use the feature only in TiDB mode.
-+ Default value: `true`
++ Default value: `false`
 
 ### `batch-split-limit`
 
@@ -656,7 +654,7 @@ Configuration items related to RocksDB
 
 + The number of background threads in RocksDB
 + Default value: `8`
-+ Minimum value: `1`
++ Minimum value: `2`
 
 ### `max-background-flushes`
 
@@ -722,8 +720,8 @@ Configuration items related to RocksDB
 
 ### `stats-dump-period`
 
-+ Enables or disables Pipelined Write
-+ Default value: `true`
++ The interval at which statistics are output to the log.
++ Default value: `10m`
 
 ### `compaction-readahead-size`
 
@@ -828,7 +826,7 @@ Configuration items related to Titan
 ### `max-background-gc`
 
 + The maximum number of GC threads in Titan
-+ Default value: `1`
++ Default value: `4`
 + Minimum value: `1`
 
 ## rocksdb.defaultcf
@@ -1130,8 +1128,8 @@ Configuration items related to `raftdb`
 ### `max-background-jobs`
 
 + The number of background threads in RocksDB
-+ Default value: `2`
-+ Minimum value: `1`
++ Default value: `4`
++ Minimum value: `2`
 
 ### `max-sub-compactions`
 
@@ -1244,6 +1242,11 @@ Configuration items related to BR backup.
 
 ### `pipelined`
 
+<<<<<<< HEAD
 This configuration item enables the pipelined process of adding the pessimistic lock. With this feature enabled, after detecting that data can be locked, TiKV immediately notifies TiDB to execute the subsequent requests and write the pessimistic lock asynchronously, which reduces most of the latency and significantly improves the performance of pessimistic transactions. But there is a still low probability that the asynchronous write of the pessimistic lock fails, which might cause the failure of pessimistic transaction commits.
 
 The default value of `pipelined` is `false`.
+=======
+- This configuration item enables the pipelined process of adding the pessimistic lock. With this feature enabled, after detecting that data can be locked, TiKV immediately notifies TiDB to execute the subsequent requests and write the pessimistic lock asynchronously, which reduces most of the latency and significantly improves the performance of pessimistic transactions. But there is a still low probability that the asynchronous write of the pessimistic lock fails, which might cause the failure of pessimistic transaction commits.
+- Default value: `true`
+>>>>>>> eeb98c08... update doc to match config default value with TiKV codebase. (#5188)
