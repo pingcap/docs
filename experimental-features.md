@@ -45,7 +45,7 @@ This document introduces the experimental features of TiDB in different versions
 
 ## Storage
 
-+ [Disable Titan](/storage-engine/titan-configuration.md#diisable-titan).
++ [Disable Titan](/storage-engine/titan-configuration.md#disable-titan-experimental).
 + [Titan Level Merge](/storage-engine/titan-configuration.md#level-merge-experimental).
 + TiFlash supports distributing the new data of the storage engine on multiple hard drives to share the I/O pressure. (v4.0 experimental feature)
 
