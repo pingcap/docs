@@ -146,11 +146,7 @@ Configuration items related to storage thread pool.
 ### `use-unified-pool`
 
 + Determines whether to use the unified thread pool (configured in [`readpool.unified`](#readpoolunified)) for storage requests. If the value of this parameter is `false`, a separate thread pool is used, which is configured through the rest parameters in this section (`readpool.storage`).
-<<<<<<< HEAD
 + Default value: `false`
-=======
-+ Default value: If this section (`readpool.storage`) has no other configurations, the default value is `true`. Otherwise, for the backward compatibility, the default value is `false`. Change the configuration in [`readpool.unified`](#readpoolunified) as needed before enabling this option.
->>>>>>> eeb98c08... update doc to match config default value with TiKV codebase. (#5188)
 
 ### `high-concurrency`
 
@@ -1242,11 +1238,5 @@ Configuration items related to BR backup.
 
 ### `pipelined`
 
-<<<<<<< HEAD
-This configuration item enables the pipelined process of adding the pessimistic lock. With this feature enabled, after detecting that data can be locked, TiKV immediately notifies TiDB to execute the subsequent requests and write the pessimistic lock asynchronously, which reduces most of the latency and significantly improves the performance of pessimistic transactions. But there is a still low probability that the asynchronous write of the pessimistic lock fails, which might cause the failure of pessimistic transaction commits.
-
-The default value of `pipelined` is `false`.
-=======
 - This configuration item enables the pipelined process of adding the pessimistic lock. With this feature enabled, after detecting that data can be locked, TiKV immediately notifies TiDB to execute the subsequent requests and write the pessimistic lock asynchronously, which reduces most of the latency and significantly improves the performance of pessimistic transactions. But there is a still low probability that the asynchronous write of the pessimistic lock fails, which might cause the failure of pessimistic transaction commits.
 - Default value: `true`
->>>>>>> eeb98c08... update doc to match config default value with TiKV codebase. (#5188)
