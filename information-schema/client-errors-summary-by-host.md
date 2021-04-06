@@ -9,7 +9,7 @@ The table `CLIENT_ERRORS_SUMMARY_BY_HOST` provides a summary of SQL errors and w
 
 * Malformed SQL statements.
 * Division by zero errors.
-* Attempting to insert out-of-range or duplicate key values.
+* The attempt to insert out-of-range or duplicate key values.
 * Permission errors.
 * A table that does not exist.
 
