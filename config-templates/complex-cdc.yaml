@@ -40,7 +40,11 @@ server_configs:
     schedule.leader-schedule-limit: 4
     schedule.region-schedule-limit: 2048
     schedule.replica-schedule-limit: 64
+<<<<<<< HEAD
   cdc:
+=======
+  ticdc:
+>>>>>>> 944f614f5 (update the scope of 'tidb_enable_clustered_index' and add cdc server … (#5198))
     # capture-session-ttl: 10
     # sorter.sort-dir: "/tmp/cdc_sort"
 
