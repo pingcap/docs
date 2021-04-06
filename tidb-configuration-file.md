@@ -137,13 +137,13 @@ The TiDB configuration file supports more options than command-line parameters. 
 - Unit: byte
 - Currently, the valid value range is `[3072, 3072*4]`. MySQL and TiDB (version < v3.0.11) do not have this configuration item, but both limit the length of the newly created index. This limit in MySQL is `3072`. In TiDB (version =< 3.0.7), this limit is `3072*4`. In TiDB (3.0.7 < version < 3.0.11), this limit is `3072`. This configuration is added to be compatible with MySQL and earlier versions of TiDB.
 
-### `table-column-count-limit` <span class="version-mark">New in v5.0.0-rc</span>
+### `table-column-count-limit` <span class="version-mark">New in v5.0</span>
 
 - Sets the limit on the number of columns in a single table.
 - Default value: `1017`
 - Currently, the valid value range is `[1017, 4096]`.
 
-### `index-limit` <span class="version-mark">New in v5.0.0-rc</span>
+### `index-limit` <span class="version-mark">New in v5.0</span>
 
 - Sets the limit on the number of indexes in a single table.
 - Default value: `64`
@@ -154,6 +154,12 @@ The TiDB configuration file supports more options than command-line parameters. 
 - Enables or disables the telemetry collection in TiDB.
 - Default value: `true`
 - When this configuration is set to `false` on all TiDB instances, the telemetry collection in TiDB is disabled and the [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402-version) system variable does not take effect. See [Telemetry](/telemetry.md) for details.
+
+### `enable-tcp4-only` <span class="version-mark">New in v5.0.0</span>
+
+- Enables or disables listening on TCP4 only.
+- Default value: `false`
+- Enabling this option is useful when TiDB is used with LVS for load balancing because the [real client IP from the TCP header](https://github.com/alibaba/LVS/tree/master/kernel/net/toa) can be correctly parsed by the "tcp4" protocol.
 
 ## Log
 
@@ -323,7 +329,7 @@ Configuration items related to performance.
 ### `max-txn-ttl`
 
 - The longest time that a single transaction can hold locks. If this time is exceeded, the locks of a transaction might be cleared by other transactions so that this transaction cannot be successfully committed.
-- Default value: `600000`
+- Default value: `3600000`
 - Unit: Millisecond
 - The transaction that holds locks longer than this time can only be committed or rolled back. The commit might not be successful.
 
@@ -339,7 +345,7 @@ Configuration items related to performance.
 - Default value: `5000`
 - If a transaction does not roll back or commit after the number of statements exceeds `stmt-count-limit`, TiDB returns the `statement count 5001 exceeds the transaction limitation, autocommit = false` error. This configuration takes effect **only** in the retriable optimistic transaction. If you use the pessimistic transaction or have disabled the transaction retry, the number of statements in a transaction is not limited by this configuration.
 
-### `txn-entry-size-limit` <span class="version-mark">New in v5.0.0-rc</span>
+### `txn-entry-size-limit` <span class="version-mark">New in v5.0</span>
 
 - The size limit of a single row of data in TiDB.
 - Default value: `6291456` (in bytes)
@@ -447,7 +453,7 @@ The Plan Cache configuration of the `PREPARE` statement.
 ### `grpc-connection-count`
 
 - The maximum number of connections established with each TiKV.
-- Default value: `16`
+- Default value: `4`
 
 ### `grpc-keepalive-time`
 

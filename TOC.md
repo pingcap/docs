@@ -22,7 +22,7 @@
 + Deploy
   + [Software and Hardware Requirements](/hardware-and-software-requirements.md)
   + [Environment Configuration Checklist](/check-before-deployment.md)
-  + Topology Patterns
+  + Plan Cluster Topology
     + [Minimal Topology](/minimal-deployment-topology.md)
     + [TiFlash Topology](/tiflash-deployment-topology.md)
     + [TiCDC Topology](/ticdc-deployment-topology.md)
@@ -31,11 +31,12 @@
     + [Cross-DC Topology](/geo-distributed-deployment-topology.md)
     + [Hybrid Topology](/hybrid-deployment-topology.md)
   + Install and Start
-    + Linux OS
-      + [Use TiUP (Recommended)](/production-deployment-using-tiup.md)
-      + [Use TiUP Offline (Recommended)](/production-offline-deployment-using-tiup.md)
-      + [Deploy in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable)
+    + [Use TiUP (Recommended)](/production-deployment-using-tiup.md)
+    + [Deploy in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable)
   + [Verify Cluster Status](/post-installation-check.md)
+  + Test Cluster Performance
+    + [Test TiDB Using Sysbench](/benchmark/benchmark-tidb-using-sysbench.md)
+    + [Test TiDB Using TPC-C](/benchmark/benchmark-tidb-using-tpcc.md)
 + Migrate
   + [Overview](/migration-overview.md)
   + Migrate from MySQL
@@ -49,7 +50,6 @@
 + Maintain
   + Upgrade
     + [Use TiUP (Recommended)](/upgrade-tidb-using-tiup.md)
-    + [Use TiUP Offline (Recommended)](/upgrade-tidb-using-tiup-offline.md)
     + [Use TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.1/upgrade-a-tidb-cluster)
   + Scale
     + [Use TiUP (Recommended)](/scale-tidb-using-tiup.md)
@@ -530,6 +530,7 @@
     + [5.0 GA](/releases/release-5.0.0.md)
     + [5.0.0-rc](/releases/release-5.0.0-rc.md)
   + v4.0
+    + [4.0.12](/releases/release-4.0.12.md)
     + [4.0.11](/releases/release-4.0.11.md)
     + [4.0.10](/releases/release-4.0.10.md)
     + [4.0.9](/releases/release-4.0.9.md)

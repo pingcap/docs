@@ -587,7 +587,7 @@ Configuration items related to Raftstore
 ### `apply-max-batch-size`
 
 + The maximum number of requests for data flushing in one batch
-+ Default value: `1024`
++ Default value: `256`
 + Minimum value: greater than `0`
 
 ### `apply-pool-size`
@@ -599,7 +599,7 @@ Configuration items related to Raftstore
 ### `store-max-batch-size`
 
 + The maximum number of requests processed in one batch
-+ Default value: `1024`
++ If `hibernate-regions` is enabled, the default value is `256`. If `hibernate-regions` is disabled, the default value is `1024`.
 + Minimum value: greater than `0`
 
 ### `store-pool-size`
@@ -762,7 +762,7 @@ Configuration items related to RocksDB
 + Minimum value: `1`
 + Maximum value: `3`
 
-### `rate-limiter-auto-tuned` <span class="version-mark">New in v5.0.0-rc</span>
+### `rate-limiter-auto-tuned` <span class="version-mark">New in v5.0</span>
 
 + Determines whether to automatically optimize the configuration of the RocksDB's compaction rate limiter based on recent workload. When this configuration is enabled, compaction pending bytes will be slightly higher than usual.
 + Default value: `true`
@@ -1260,7 +1260,7 @@ Configuration items related to TiDB Lightning import and BR restore.
 
 ## gc
 
-### `enable-compaction-filter` <span class="version-mark">New in v5.0.0-rc</span>
+### `enable-compaction-filter` <span class="version-mark">New in v5.0</span>
 
 + Controls whether to enable the GC in Compaction Filter feature
 + Default value: `false`
@@ -1292,6 +1292,6 @@ For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](
 
 ### `pipelined`
 
-This configuration item enables the pipelined process of adding the pessimistic lock. With this feature enabled, after detecting that data can be locked, TiKV immediately notifies TiDB to execute the subsequent requests and write the pessimistic lock asynchronously, which reduces most of the latency and significantly improves the performance of pessimistic transactions. But there is a still low probability that the asynchronous write of the pessimistic lock fails, which might cause the failure of pessimistic transaction commits.
++ This configuration item enables the pipelined process of adding the pessimistic lock. With this feature enabled, after detecting that data can be locked, TiKV immediately notifies TiDB to execute the subsequent requests and write the pessimistic lock asynchronously, which reduces most of the latency and significantly improves the performance of pessimistic transactions. But there is a still low probability that the asynchronous write of the pessimistic lock fails, which might cause the failure of pessimistic transaction commits.
 
-The default value of `pipelined` is `false`.
++ Default value: `true`
