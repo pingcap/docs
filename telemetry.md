@@ -22,7 +22,7 @@ When the telemetry collection feature is enabled in TiDB, the TiDB cluster colle
 
 - A randomly generated telemetry ID.
 - Deployment characteristics, such as the size of hardware (CPU, memory, disk), TiDB components versions, OS name.
-- Component usage, for example, whether the Async Commit function is in use or not.
+- Component usage, for example, whether the Async Commit feature is in use or not.
 
 To view the full content of the usage information shared to PingCAP, execute the following SQL statement:
 
