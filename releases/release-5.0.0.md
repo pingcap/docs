@@ -372,7 +372,8 @@ To use this feature, refer to the following documents:
 
 TiDB Lightning optimizes its data import performance specifically for AWS T1.standard configurations (or equivalent) of TiDB Cloud. Test results show that TiDB Lightning improves its speed of importing 1TB of TPC-C data into TiDB by 40%, from 254 GiB/h to 366 GiB/h.
 
-## TiDB data sharing subscription
+## Data sharing and subscription
+
 
 ### Integrate TiDB to Kafka Connect (Confluent Platform) using TiCDC (**experimental feature**)
 
