@@ -44,7 +44,7 @@ tiup cluster display <cluster-name> [flags]
 
 ### -h, --help
 
-- Outputs the help information.
+- Prints the help information.
 - Data type: `BOOLEAN`
 - Default: false
 
