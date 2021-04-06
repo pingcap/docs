@@ -9,7 +9,7 @@ The table `CLIENT_ERRORS_SUMMARY_GLOBAL` provides a global summary of all SQL er
 
 * Malformed SQL statements.
 * Division by zero errors.
-* Attempting to insert out-of-range of duplicate key values.
+* The attempt to insert out-of-range of duplicate key values.
 * Permission errors.
 * A table does not exist.
 
