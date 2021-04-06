@@ -599,7 +599,7 @@ Configuration items related to Raftstore
 ### `store-max-batch-size`
 
 + The maximum number of requests processed in one batch
-+ Default value: if `hibernate-regions` is enabled, it's `256` , otherwise `1024`
++ If `hibernate-regions` is enabled, the default value is `256`. If `hibernate-regions` is disabled, the default value is `1024`.
 + Minimum value: greater than `0`
 
 ### `store-pool-size`
