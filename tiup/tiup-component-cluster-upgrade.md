@@ -39,7 +39,7 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 
 ### --ignore-config-check
 
-- After the binary is updated, a configuration check is performed on the TiDB, TiKV and PD components using `<binary> --config-check <config-file>`. `<bianry>` is the path to the newly deployed binary and `<config-file>` is the configuration file generated based on the user configuration. You can use this option if you want to skip this check.
+- After the binary is updated, a configuration check is performed on the TiDB, TiKV and PD components using `<binary> --config-check <config-file>`. `<bianry>` is the path to the newly deployed binary and `<config-file>` is the configuration file generated based on the user configuration. To skip this check, you can use the `--ignore-config-check` option.
 - Data type: `BOOLEAN`
 - Default: false
 
