@@ -131,7 +131,8 @@ TiDB supports desensitizing the output log information. To enable this feature, 
 + The global variable [`tidb_redact_log`](/system-variables.md#tidb_redact_log). Its default value is `0`, which means that desensitization is disabled. To enable desensitization for tidb-server logs, set the variable value to `1`.
 + The configuration item `security.redact-info-log`. Its default value is `false`, which means that desensitization is disabled. To enable desensitization for tikv-server logs, set the variable value to `true`.
 + The configuration item `security.redact-info-log`. Its default value is `false`, which means that desensitization is disabled. To enable desensitization for pd-server logs, set the variable value to `true`.
-+ The configuration item `security.redact_info_log`. Its default value is `false`, which means that desensitization is disabled. To enable desensitization for tiflash-server and tiflash-learner logs, set the variable value to `true`.
++ The configuration item `security.redact_info_log` for tiflash and `security.redact-info-log` for tiflash-learner. Its default value is `false`, which means that desensitization is disabled. To enable desensitization for tiflash-server and tiflash-learner logs, set the variable value to `true`.
+
 
 This feature is introduced in v5.0. To use the feature, enable the system variable and all configuration items above.
 
