@@ -12,7 +12,7 @@ The `tiup cluster disable` command is used to disable the auto-enabling after re
 tiup cluster disable <cluster-name> [flags]
 ```
 
-`<cluster-name>`: the cluster to disable the auto-enabling.
+`<cluster-name>`: the cluster whose auto-enabling service is to be disabled.
 
 ## Options
 
@@ -24,7 +24,7 @@ tiup cluster disable <cluster-name> [flags]
 
 > **Note:**
 >
-> If the `-R, --role` are specified at the same time, the auto-enabling of services in their intersection is disabled.
+> If the `-R, --role` option is specified at the same time, the auto-enabling of services in their intersection is disabled.
 
 ### -R, --role strings
 
@@ -34,7 +34,7 @@ tiup cluster disable <cluster-name> [flags]
 
 > **Note:**
 >
-> If the `-N, --node` are specified at the same time, the auto-enabling of services in their intersection is disabled.
+> If the `-N, --node` option is specified at the same time, the auto-enabling of services in their intersection is disabled.
 
 ### -h, --help
 

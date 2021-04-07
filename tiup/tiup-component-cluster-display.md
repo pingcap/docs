@@ -12,7 +12,7 @@ If you want to see the operation status of each component in the cluster, it is 
 tiup cluster display <cluster-name> [flags]
 ```
 
-`<cluster-name>`: the name of the cluster to operate. If you forget the cluster name, you can check it by the [cluster list](/tiup/tiup-component-cluster-list.md).
+`<cluster-name>`: the name of the cluster to operate on. If you forget the cluster name, you can check it in the [cluster list](/tiup/tiup-component-cluster-list.md).
 
 ## Options
 
