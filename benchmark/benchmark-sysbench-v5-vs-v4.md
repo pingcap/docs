@@ -35,7 +35,7 @@ This test aims at comparing the Sysbench performance of TiDB 5.0 and TiDB 4.0 in
 {{< copyable "" >}}
 
 ```yaml
-log.level: “error”
+log.level: "error"
 performance.max-procs: 20
 prepared-plan-cache.enabled: true
 tikv-client.max-batch-wait-time: 2000000
