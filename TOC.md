@@ -10,7 +10,7 @@
   + [What's New in TiDB 5.0](/releases/release-5.0.0.md)
   + [Basic Features](/basic-features.md)
   + Benchmarks
-    + [TiDB Sysbench Performance Test Report - v5.0 vs. v4.0](/benchmark/benchmark-sysbench-v5-vs-v4.md)
+    + [v5.0 Sysbench Performance Test Report](/benchmark/benchmark-sysbench-v5-vs-v4.md)
     + [TiDB TPC-C Performance Test Report -- v5.0 vs. v4.0](/benchmark/v5.0-performance-benchmarking-with-tpcc.md)
   + [MySQL Compatibility](/mysql-compatibility.md)
   + [TiDB Limitations](/tidb-limitations.md)
