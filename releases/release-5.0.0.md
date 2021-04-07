@@ -56,7 +56,7 @@ In v5.0, the key new features or improvements are as follows:
 ### Configuration file parameters
 
 + Add the [`index-limit`](/tidb-configuration-file.md#index-limit-new-in-v50) configuration item for TiDB to be compatible with MySQL’s limit on the maximum number of indexes. If the index setting exceeds the default value of this configuration item, when the table schema is re-imported into MySQL, an error is reported. This item’s value defaults to `64` and ranges between `[64,64*8]`.
-+ Add the [`enable-enum-length-limit`](/tidb-configuration-file.md#enable-enum-length-limit-new-in-v50) configuration item for TiDB to be compatible and consistent with MySQL’s enum/set length (enum length < 255). The default value is `true`.
++ Add the [`enable-enum-length-limit`](/tidb-configuration-file.md#enable-enum-length-limit-new-in-v50) configuration item for TiDB to be compatible and consistent with MySQL’s ENUM/SET length (ENUM length < 255). The default value is `true`.
 + Replace the `pessimistic-txn.enable` configuration item with the [`tidb_txn_mode`](/system-variables.md#tidb_txn_mode) environment variable.
 + Replace the `performance.max-memory` configuration item with [`performance.server-memory-quota`](/tidb-configuration-file.md#server-memory-quota-new-in-v409)
 + Replace the `tikv-client.copr-cache.enable` configuration item with [`tikv-client.copr-cache.capacity-mb`](/tidb-configuration-file.md#capacity-mb). If the item’s value is `0.0`, this feature is disabled. If the item’s value is greater than `0.0`, this feature is enabled. Its default value is `1000.0`.
