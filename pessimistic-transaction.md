@@ -137,7 +137,7 @@ This feature is enabled by default. To disable it, modify the TiKV configuration
 pipelined = false
 ```
 
-If the TiKV cluster is v4.0.9 or later, you can also dynamically disable this feature by [modifying TiKV configuration online](/dynamic-config.md#modify-tikv-configuration-online):
+You can also dynamically disable this feature by [modifying TiKV configuration online](/dynamic-config.md#modify-tikv-configuration-online):
 
 {{< copyable "sql" >}}
 
