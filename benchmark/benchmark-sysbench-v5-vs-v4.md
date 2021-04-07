@@ -1,12 +1,12 @@
 ---
-title: TiDB Sysbench Performance Test Report - v5.0 vs. v4.0
+title: TiDB Sysbench Performance Test Report -- v5.0 vs. v4.0
 ---
 
 # TiDB Sysbench Performance Test Report -- v5.0 vs. v4.0
 
 ## Test purpose
 
-This test aims at comparing the Sysbench performance of TiDB 5.0 and TiDB 4.0 in the Online Transactional Processing (OLTP) scenario.
+This test aims at comparing the Sysbench performance of TiDB v5.0 and TiDB v4.0 in the Online Transactional Processing (OLTP) scenario.
 
 ## Test environment (AWS EC2）
 
@@ -35,7 +35,7 @@ This test aims at comparing the Sysbench performance of TiDB 5.0 and TiDB 4.0 in
 {{< copyable "" >}}
 
 ```yaml
-log.level: “error”
+log.level: "error"
 performance.max-procs: 20
 prepared-plan-cache.enabled: true
 tikv-client.max-batch-wait-time: 2000000
@@ -65,7 +65,7 @@ pessimistic-txn.pipelined: true
 {{< copyable "" >}}
 
 ```yaml
-log.level: “error”
+log.level: "error"
 performance.max-procs: 20
 prepared-plan-cache.enabled: true
 tikv-client.max-batch-wait-time: 2000000
