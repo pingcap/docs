@@ -60,12 +60,15 @@ In v5.0, the key new features or improvements are as follows:
 + Replace the `pessimistic-txn.enable` configuration item with the [`tidb_txn_mode`](/system-variables.md#tidb_txn_mode) environment variable.
 + Replace the `performance.max-memory` configuration item with [`performance.server-memory-quota`](/tidb-configuration-file.md#server-memory-quota-new-in-v409)
 + Replace the `tikv-client.copr-cache.enable` configuration item with [`tikv-client.copr-cache.capacity-mb`](/tidb-configuration-file.md#capacity-mb). If the item’s value is `0.0`, this feature is disabled. If the item’s value is greater than `0.0`, this feature is enabled. Its default value is `1000.0`.
-
 + Replace the `rocksdb.auto-tuned` configuration item with [`rocksdb.rate-limiter-auto-tuned`](/tikv-configuration-file.md#rate-limiter-auto-tuned-new-in-v50).
 + Delete the `raftstore.sync-log` configuration item. By default, written data is forcibly spilled to the disk. Before v5.0, you can explicitly disable `raftstore.sync-log`. Since v5.0, the configuration value is forcibly set to `true`.
 + Change the default value of the `gc.enable-compaction-filter` configuration item from `false` to `true`.
 + Change the default value of the `enable-cross-table-merge` configuration item from `false` to `true`.
 + Change the default value of the [`rate-limiter-auto-tuned`](/tikv-configuration-file.md#rate-limiter-auto-tuned-new-in-v50) configuration item from `false` to `true`.
+
+### Others
+
++ Forbid conversion between `VARCHAR` type and `CHAR` type during the column type change to avoid data correctness issues.
 
 ## New features
 
