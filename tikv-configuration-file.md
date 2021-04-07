@@ -31,7 +31,7 @@ This document only describes the parameters that are not included in command-lin
 ### `grpc-concurrency`
 
 + The number of gRPC worker threads
-+ Default value: `5`
++ Default value: `4`
 + Minimum value: `1`
 
 ### `grpc-concurrent-stream`
@@ -268,7 +268,7 @@ Configuration items related to storage
 ### `reserve-space`
 
 + The size of the temporary file that preoccupies the extra space when TiKV is started. The name of temporary file is `space_placeholder_file`, located in the `storage.data-dir` directory. When TiKV runs out of disk space and cannot be started normally, you can delete this file as an emergency intervention and set `reserve-space` to `"0MB"`.
-+ Default value: `"5GB"`
++ Default value: `"2GB"`
 + Unite: MB|GB
 
 ## storage.block-cache
@@ -555,7 +555,7 @@ Configuration items related to Raftstore
 ### `merge-check-tick-interval`
 
 + The time interval at which TiKV checks whether a Region needs merge
-+ Default value: `"2s"`
++ Default value: `"10s"`
 + Minimum value: greater than `0`
 
 ### `use-delete-range`
