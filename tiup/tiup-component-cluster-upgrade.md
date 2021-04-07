@@ -12,7 +12,7 @@ The `tiup cluster upgrade` command is used to upgrade the specified cluster to a
 tiup cluster upgrade <cluster-name> <version> [flags]
 ```
 
-- `<cluster-name>`: the cluster name to operate. If you forget the cluster name, you can check it through [cluster list](/tiup/tiup-component-cluster-list.md).
+- `<cluster-name>`: the cluster name to operate on. If you forget the cluster name, you can check it in the [cluster list](/tiup/tiup-component-cluster-list.md).
 - `<version>`: the target version to upgrade to. Currently, it is only allowed to upgrade to a version higher than the current cluster, and is not allowed to upgrade to a version lower than the current cluster, that is, no downgrade is allowed. It is also not allowed to upgrade to the nightly version.
 
 ## Options
@@ -25,7 +25,7 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 
 > **Note:**
 >
-> Forcing an upgrade of the cluster that is providing services might result in unavailability of cluster services. Clusters are started automatically after a successful upgrade.
+> Forcing an upgrade of the cluster that is providing services might result in service unavailability. Unstarted clusters are started automatically after a successful upgrade.
 
 ### --transfer-timeout
 
@@ -39,7 +39,7 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 
 ### --ignore-config-check
 
-- After the binary is updated, a configuration check is performed on the TiDB, TiKV and PD components using `<binary> --config-check <config-file>`. `<bianry>` is the path to the newly deployed binary and `<config-file>` is the configuration file generated based on the user configuration. To skip this check, you can use the `--ignore-config-check` option.
+- After the binary is updated, a configuration check is performed on the TiDB, TiKV and PD components using `<binary> --config-check <config-file>`. `<binary>` is the path to the newly deployed binary and `<config-file>` is the configuration file generated based on the user configuration. To skip this check, you can use the `--ignore-config-check` option.
 - Data type: `BOOLEAN`
 - Default: false
 
