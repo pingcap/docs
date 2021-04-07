@@ -18,13 +18,13 @@ Component owners can use their keys to publish new components or to modify compo
 tiup mirror grant <id> [flags]
 ```
 
-`<id>` stands for the component owner's ID, which must be unique in the whole mirror. It is recommended to use an ID that matches the regular expression `^[a-z\d](? :[a-z\d]|-(? =[a-z\d])){0,38}$`.
+`<id>` stands for the component owner's ID, which must be unique in the whole mirror. It is recommended to use an ID that matches the regular expression `^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$`.
 
 ## Options
 
 ### -k, --key
 
-- Specifies the key of the introduced component owner. This key can either be public or private. If it is a private key, TiUP converts it to the corresponding public key before stores it in the mirror.
+- Specifies the key of the introduced component owner. This key can either be public or private. If it is a private key, TiUP converts it to the corresponding public key before storing it in the mirror.
 - A key can be used by only one component owner.
 - Data type: `STRING`
 - Default: "${TIUP_HOME}/keys/private.json"

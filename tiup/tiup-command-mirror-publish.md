@@ -12,12 +12,12 @@ The command `tiup mirror publish` is used to publish a new component or a new ve
 tiup mirror publish <comp-name> <version> <tarball> <entry> [flags]
 ```
 
-Meanings of each parameter are as follows:
+The meaning of each parameter is as follows:
 
 - `<comp-name>`: The name of the components, such as `tidb`. It is recommended to use a string that matches the regular expression `^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$`.
 - `<version>`: The version of the component to be published. The version number needs to follow the requirements of [Semantic Versioning](https://semver.org/).
 - `<tarball>`: The local directory of the `.tar.gz` package. You need to put dependencies and the executable file of the component in this package. TiUP uploads this package to the mirror.
-- `<entry>`: The location of the component executable file in `<tarball>`.
+- `<entry>`: The location of the component's executable file in `<tarball>`.
 
 ## Options
 
@@ -48,7 +48,7 @@ Meanings of each parameter are as follows:
 
     - `linux`: Indicates that the files run on the Linux operating system.
     - `darwin`: Indicates that the files run on the Darwin operating system.
-    - `any`: Indicates that the files, such as scripts, run on both the Linux and Darwin operating system.
+    - `any`: Indicates that the files, such as scripts, run on both the Linux and Darwin operating systems.
 
 - Data type: `STRING`
 - Default: "${GOOS}"

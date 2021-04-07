@@ -4,13 +4,13 @@ title: tiup mirror genkey
 
 # tiup mirror genkey
 
-According to the definition of TiUP [mirror](/tiup/tiup-mirror-reference.md), it has three roles of users:
+TiUP [mirror](/tiup/tiup-mirror-reference.md), according its definition, has three roles of users:
 
 - Mirror administrators: They have the permission to modify `root.json`, `index.json`, `snapshot.json`, and `timestamp.json`.
 - Component owners: They have the permission to modify the corresponding component.
 - Normal users: They can download and use the components.
 
- Since TiUP requires the signature of the corresponding owner/administrator to modify a file, owners/administrators must have his or her own private key. The command `tiup mirror genkey` is used to generate a private key.
+ Because TiUP requires the signature of the corresponding owner/administrator to modify a file, owners/administrators must have his or her own private key. The command `tiup mirror genkey` is used to generate a private key.
 
 > **Warning:**
 >
