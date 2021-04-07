@@ -18,7 +18,7 @@ tiup cluster display <cluster-name> [flags]
 
 ### --dashboard
 
-- By default, all node information of the entire cluster is displayed. After adding the `--dashboard` option, only dashboard information is displayed.
+- By default, all node information of the entire cluster is displayed. With the `--dashboard` option, only dashboard information is displayed.
 - Data type: `BOOLEAN`
 - Default: false
 
