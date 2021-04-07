@@ -1,5 +1,5 @@
 ---
-title: TiDB Sysbench Performance Test Report - v5.0 vs. v4.0
+title: TiDB Sysbench Performance Test Report -- v5.0 vs. v4.0
 ---
 
 # TiDB Sysbench Performance Test Report -- v5.0 vs. v4.0
