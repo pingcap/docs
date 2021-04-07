@@ -1269,7 +1269,7 @@ Configuration items related to BR backup.
 + Default value: `MIN(CPU * 0.75, 32)`.
 + Minimum value: `1`
 
-## cdc <span class="version-mark">New in v4.0.5</span>
+## cdc
 
 Configuration items related to TiCDC capturing changed data.
 
