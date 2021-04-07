@@ -1052,7 +1052,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - This variable is used to set whether to skip UTF-8 validation.
 - Validating UTF-8 characters affects the performance. When you are sure that the input characters are valid UTF-8 characters, you can set the variable value to `ON`.
 
-### tidb_skip_ascii_check <span class="version-mark">New in v5.0 RC</span>
+### tidb_skip_ascii_check <span class="version-mark">New in v5.0</span>
 
 - Scope: SESSION | GLOBAL
 - Default value: OFF
