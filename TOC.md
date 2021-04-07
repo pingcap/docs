@@ -9,9 +9,11 @@
   + [TiDB Introduction](/overview.md)
   + [What's New in TiDB 5.0](/releases/release-5.0.0.md)
   + [Basic Features](/basic-features.md)
+  + [Experimental Features](/experimental-features.md)
   + Benchmarks
     + [v5.0 Sysbench Performance Test Report](/benchmark/benchmark-sysbench-v5-vs-v4.md)
     + [v5.0 TPC-C Performance Test Report](/benchmark/v5.0-performance-benchmarking-with-tpcc.md)
+    + [v5.0 MPP mode TPC-H 100GB Performance Test](/benchmark/v5.0-performance-benchmarking-with-tpch.md)
   + [MySQL Compatibility](/mysql-compatibility.md)
   + [TiDB Limitations](/tidb-limitations.md)
   + [TiDB Adopters](/adopters.md)
