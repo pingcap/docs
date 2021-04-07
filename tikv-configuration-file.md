@@ -1278,12 +1278,12 @@ Configuration items related to TiCDC capturing changed data.
 + The interval at which timestamps are resolved.
 + Default value: `"1s"`
 
-### `old-value-cache-size` <span class="version-mark">New in v5.0</span>
+### `old-value-cache-size`
 
 + The entry number of TiCDC old values cached in memory.
 + Default value: `1024`
 
-### `incremental-scan-speed-limit` <span class="version-mark">New in v5.0</span>
+### `incremental-scan-speed-limit`
 
 + The maximum speed at which historical data is incrementally scanned.
 + Default value: `"128MB"`, which means 128 MB per second.
