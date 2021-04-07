@@ -1271,7 +1271,7 @@ Configuration items related to BR backup.
 
 ## cdc
 
-Configuration items related to TiCDC capturing changed data.
+Configuration items related to TiCDC.
 
 ### `min-ts-interval`
 
