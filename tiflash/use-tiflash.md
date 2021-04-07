@@ -222,7 +222,7 @@ TiFlash supports the push-down of the following operators:
 * TableScan: Reads data from tables.
 * Selection: Filters data.
 * HashAgg: Performs data aggregation based on the [Hash Aggregation](/explain-aggregation.md#hash-aggregation) algorithm.
-* StreamAgg: Performs data aggregation based on the [Stream Aggregation](/explain-aggregation.md#stream-aggregation) algorithm. SteamAgg only supports the column without the `GROUP BY` condition.
+* StreamAgg: Performs data aggregation based on the [Stream Aggregation](/explain-aggregation.md#stream-aggregation) algorithm. SteamAgg only supports the aggregation without the `GROUP BY` condition.
 * TopN: Performs the TopN calculation.
 * Limit: Performs the limit calculation.
 * Project: Performs the projection calculation.
