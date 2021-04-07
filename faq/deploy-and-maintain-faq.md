@@ -110,7 +110,7 @@ Check the time difference between the machine time of the monitor and the time w
 >
 > It is not recommended to deploy TiDB using TiDB Ansible since TiDB v4.0. [Use TiUP to deploy TiDB](/production-deployment-using-tiup.md) instead.
 
-If the central control machine cannot access the Internet, you can [deploy TiDB offline using TiDB Ansible](https://docs.pingcap.com/tidb/v4.0/offline-deployment-using-ansible).
+If the central control machine cannot access the Internet, you can [deploy TiDB offline using TiDB Ansible](/offline-deployment-using-ansible.md).
 
 ### How to deploy TiDB quickly using Docker Compose on a single machine?
 
