@@ -6,7 +6,7 @@ title: TiDB Sysbench Performance Test Report - v5.0 vs. v4.0
 
 ## Test purpose
 
-This test aim at comparing the Sysbench performance of TiDB 5.0 and TiDB 4.0 in the Online Transactional Processing (OLTP) scenario.
+This test aims at comparing the Sysbench performance of TiDB 5.0 and TiDB 4.0 in the Online Transactional Processing (OLTP) scenario.
 
 ## Test environment (AWS EC2）
 
