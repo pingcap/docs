@@ -231,10 +231,10 @@ TiFlash supports the push-down of the following operators:
     * The operator must have the join condition with the equivalent value.
     * The push-down of `Full Outer Join` is not supported.
 
-In TiDB, operators are organized in a tree-like structure. For an operator to be pushed down to TiFlash, all of the following prerequisites must be met:
+In TiDB, operators are organized in a tree structure. For an operator to be pushed down to TiFlash, all of the following prerequisites must be met:
 
-+ All of its child operators must be able to be pushed down to TiFlash.
-+ All of the operator's expressions can be pushed down to TiFlash, because most of the operators contain expressions.
++ All of its child operators can be pushed down to TiFlash.
++ If an operator contains expressions (most of the operators contain expressions), all expressions of the operator can be pushed down to TiFlash.
 
 ```
 +, -, /, *, >=, <=, =, !=, <, >, ifnull, isnull, bitor, in, bitand, or, and, like, not, case when, month, substr, timestampdiff, date_format, from_unixtime, json_length, if, bitneg, bitxor,
@@ -245,7 +245,7 @@ Among them, the push-down of `cast` and `date_add` is not enabled by default. To
 
 In addition, expressions that contain the Time/Bit/Set/Enum/Geometry type cannot be pushed down to TiFlash.
 
-If a query encounters unsupported push-down calculations, TiDB needs to complete the remaining calculations, which might greatly affect the TiFlash acceleration effect. The currently unsupported operators/expressions might be supported in future versions.
+If a query encounters unsupported push-down calculations, TiDB needs to complete the remaining calculations, which might greatly affect the TiFlash acceleration effect. The currently unsupported operators and expressions might be supported in future versions.
 
 ## Use the MPP mode
 
