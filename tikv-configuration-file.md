@@ -1269,6 +1269,25 @@ Configuration items related to BR backup.
 + Default value: `MIN(CPU * 0.75, 32)`.
 + Minimum value: `1`
 
+## cdc <span class="version-mark">New in v4.0.5</span>
+
+Configuration items related to TiCDC capturing changed data.
+
+### `min-ts-interval`
+
++ The interval at which timestamps are resolved.
++ Default value: `"1s"`
+
+### `old-value-cache-size` <span class="version-mark">New in v5.0</span>
+
++ The entry number of TiCDC old values cached in memory.
++ Default value: `1024`
+
+### `incremental-scan-speed-limit` <span class="version-mark">New in v5.0</span>
+
++ The maximum speed at which historical data is incrementally scanned.
++ Default value: `"128MB"`, which means 128 MB per second.
+
 ## pessimistic-txn
 
 For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](/pessimistic-transaction.md).
