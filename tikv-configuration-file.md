@@ -1218,6 +1218,15 @@ Configuration items related to BR backup.
 + Default value: `MIN(CPU * 0.75, 32)`.
 + Minimum value: `1` 
 
+## cdc <span class="version-mark">New in v4.0.5</span>
+
+Configuration items related to TiCDC.
+
+### `min-ts-interval`
+
++ The interval at which Resolved TS is calculated and forwarded.
++ Default value: `"1s"`
+
 ## pessimistic-txn
 
 ### `enabled`
