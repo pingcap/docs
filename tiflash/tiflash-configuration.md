@@ -28,6 +28,8 @@ You can adjust the PD scheduling parameters using [pd-ctl](/pd-control.md). Note
     - If you do not set the scheduling rate for Regions of a specified store, this store inherits the setting of `store-balance-rate`.
     - You can execute the `pd-ctl -u <pd_ip:pd_port> store limit` command to view the current setting value of `store-balance-rate`.
 
+- [`replication.location-labels`](/pd-configuration-file.md#location-labels): indicates the topological relationship of TiKV instances. The order of the keys indicates the layering relationship of different labels. If TiFlash is enabled, you need to use [`pd-ctl config placement-rules`](/pd-control.md#config-show--set-option-value--placement-rules) to set the default value. For details, see [geo-distributed-deployment-topology](/geo-distributed-deployment-topology.md).
+
 ## TiFlash configuration parameters
 
 This section introduces the configuration parameters of TiFlash.
@@ -117,6 +119,7 @@ delta_index_cache_size = 0
     data-dir = The data storage path of proxy.
     config = The proxy configuration file path.
     log-file = The proxy log path.
+    log-level = The proxy log level. "info" is used by default.
     status-addr = The listening address from which the proxy metrics | status information is pulled.
     advertise-status-addr = The external access address of status-addr. If it is left empty, status-addr is used by default.
 
