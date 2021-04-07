@@ -11,7 +11,7 @@
   + [Basic Features](/basic-features.md)
   + Benchmarks
     + [v5.0 Sysbench Performance Test Report](/benchmark/benchmark-sysbench-v5-vs-v4.md)
-    + [TiDB TPC-C Performance Test Report -- v5.0 vs. v4.0](/benchmark/v5.0-performance-benchmarking-with-tpcc.md)
+    + [v5.0 TPC-C Performance Test Report](/benchmark/v5.0-performance-benchmarking-with-tpcc.md)
   + [MySQL Compatibility](/mysql-compatibility.md)
   + [TiDB Limitations](/tidb-limitations.md)
   + [TiDB Adopters](/adopters.md)
