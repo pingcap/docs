@@ -55,7 +55,7 @@ In v5.0, the key new features or improvements are as follows:
 
 ### Configuration file parameters
 
-+ Add the [`index-limit`](/tidb-configuration-file.md#index-limit-new-in-v50) configuration item for TiDB to be compatible with MySQL’s limit on the maximum number of indexes. If the index setting exceeds the default value of this configuration item, when the table schema is re-imported into MySQL, an error is reported. This item’s value defaults to `64` and ranges between `[64,64*8]`.
++ Add the [`index-limit`](/tidb-configuration-file.md#index-limit-new-in-v50) configuration item for TiDB. Its value defaults to `64` and ranges between `[64,512]`. A MySQL table supports 64 indexes at most. If its value exceeds the default setting and more than 64 indexes are created for a table, when the table schema is re-imported into MySQL, an error will be reported.
 + Add the [`enable-enum-length-limit`](/tidb-configuration-file.md#enable-enum-length-limit-new-in-v50) configuration item for TiDB to be compatible and consistent with MySQL’s ENUM/SET length (ENUM length < 255). The default value is `true`.
 + Replace the `pessimistic-txn.enable` configuration item with the [`tidb_txn_mode`](/system-variables.md#tidb_txn_mode) environment variable.
 + Replace the `performance.max-memory` configuration item with [`performance.server-memory-quota`](/tidb-configuration-file.md#server-memory-quota-new-in-v409)
