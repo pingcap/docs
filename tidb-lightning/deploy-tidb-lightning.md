@@ -78,7 +78,7 @@ This section describes how to [deploy TiDB Lightning manually](#deploy-tidb-ligh
 
 #### Step 1: Deploy a TiDB cluster
 
-Before importing data, you need to have a deployed TiDB cluster. It is highly recommended to use the latest version.
+Before importing data, you need to have a deployed TiDB cluster. It is highly recommended to use the latest stable version.
 
 You can find deployment instructions in [TiDB Quick Start Guide](/quick-start-with-tidb.md).
 
