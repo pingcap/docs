@@ -84,7 +84,7 @@ You can find deployment instructions in [TiDB Quick Start Guide](/quick-start-wi
 
 #### Step 2: Download the TiDB Lightning installation package
 
-Refer to the [TiDB enterprise tools download page](/download-ecosystem-tools.md#tidb-lightning) to download the TiDB Lightning package (choose the same version as that of the TiDB cluster).
+Refer to the [TiDB enterprise tools download page](/download-ecosystem-tools.md#tidb-lightning) to download the TiDB Lightning package. TiDB Lightning is compatible with TiDB clusters in lower versions. It is recommended that you download the latest stable version of the TiDB Lightning installation package.
 
 #### Step 3: Start `tidb-lightning`
 
