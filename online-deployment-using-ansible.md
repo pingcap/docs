@@ -1,7 +1,7 @@
 ---
 title: Deploy TiDB Using TiDB Ansible
 summary: Use TiDB Ansible to deploy a TiDB cluster.
-aliases: ['/docs/stable/online-deployment-using-ansible/','/docs/v4.0/online-deployment-using-ansible/','/docs/stable/how-to/deploy/orchestrated/ansible/','/docs/dev/online-deployment-using-ansible/','/docs/dev/how-to/deploy/orchestrated/ansible/','/tidb/dev/online-deployment-using-ansible/']
+aliases: ['/docs/stable/online-deployment-using-ansible/','/docs/v4.0/online-deployment-using-ansible/','/docs/stable/how-to/deploy/orchestrated/ansible/','/docs/dev/online-deployment-using-ansible/','/docs/dev/how-to/deploy/orchestrated/ansible/','/tidb/dev/online-deployment-using-ansible/','/tidb/stable/online-deployment-using-ansible/']
 ---
 
 # Deploy TiDB Using TiDB Ansible
