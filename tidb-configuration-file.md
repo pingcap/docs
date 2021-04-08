@@ -505,11 +505,6 @@ The Plan Cache configuration of the `PREPARE` statement.
 
 This section introduces configuration items related to the Coprocessor Cache feature.
 
-### `enable`
-
-- Determines whether to enable [Coprocessor Cache](/coprocessor-cache.md).
-- Default value: `false` (which means that Coprocessor Cache is disabled by default)
-
 ### `capacity-mb`
 
 - The total size of the cached data. When the cache space is full, old cache entries are evicted. When the value is `0.0`, the Coprocessor Cache feature is disabled.
