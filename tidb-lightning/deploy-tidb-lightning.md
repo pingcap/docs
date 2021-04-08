@@ -88,7 +88,7 @@ Refer to the [TiDB enterprise tools download page](/download-ecosystem-tools.md#
 
 > **Note:**
 >
-> TiDB Lightning is compatible with TiDB clusters in lower versions. It is recommended that you download the latest stable version of the TiDB Lightning installation package.
+> TiDB Lightning is compatible with TiDB clusters of earlier versions. It is recommended that you download the latest stable version of the TiDB Lightning installation package.
 
 #### Step 3: Start `tidb-lightning`
 
