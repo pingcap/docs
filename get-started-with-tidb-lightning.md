@@ -54,7 +54,7 @@ Download the TiDB Lightning installation package from the following link:
 
 > **Note:**
 >
-> TiDB Lightning is compatible with TiDB clusters in lower versions. It is recommended that you download the latest stable version of the TiDB Lightning installation package.
+> TiDB Lightning is compatible with TiDB clusters of earlier versions. It is recommended that you download the latest stable version of the TiDB Lightning installation package.
 
 ### Step 3: Start `tidb-lightning`
 
