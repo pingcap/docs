@@ -33,26 +33,27 @@ tiup cluster scale-in <cluster-name> [flags]
 
 ## Options
 
-### -N, --node ${strings}
+### -N, --node
 
-- Data type: `STRING`
 - Specifies the nodes to be scaled down, split by commas if scaling multiple nodes.
-- There is no default value. This option is mandatory.
+- Data type: `STRING`
+- There is no default value. This option is mandatory and the value must be not null.
 
 ### --force
 
+- Controls whether to forcibly remove the specified nodes from the cluster. In some cases, it is possible that the host of the node to be scaled down is down, making it impossible to connect to the node via SSH for operations, so you can forcibly remove the node from the cluster using the `-force` option.
 - Data type: `BOOLEAN`
-- Controls whether to forcibly remove the specified nodes from the cluster. In some cases, it is possible that the host of the node to be scaled down is down, making it impossible to connect to the node via SSH for operations, so you can forcibly remove it from the cluster using the `-force` option.
-- The default value is `false`. If you do not add this option in the command, the specified nodes are not forcibly removed.
+- Default: false. If this option is not specified in the command, the specified nodes are not forcibly removed.
 
 > **Note:**
 >
 > Because the forced removal of a TiKV node does not wait for data to be scheduled, removing more than one serving TiKV node is in the risk of data loss.
 
-### --transfer-timeout ${unit}
+### --transfer-timeout
 
 - When a PD or TiKV node is to be scaled down, the leader role of the node will be migrated to other nodes first. Because the migration process takes some time, you can set the maximum waiting time (in seconds) by configuring `-transfer-timeout`. After the timeout, the `tiup cluster scale-in` command skips waiting and starts the scaling down directly.
-- If you do not add this option in the command, the default waiting time of leader migration is `300` seconds.
+- Data type: `UINT`
+- If this option is not specified in the command, the default waiting time of leader migration is `300` seconds.
 
 > **Note:**
 >
@@ -60,9 +61,9 @@ tiup cluster scale-in <cluster-name> [flags]
 
 ### -h, --help
 
+- Shows the help information in the output.
 - Data type: `BOOLEAN`
-- Shows the help information.
-- If you do not specify this option in the command, the default value is `false` so the help information is not shown.
+- Default: false
 
 ## Output
 
