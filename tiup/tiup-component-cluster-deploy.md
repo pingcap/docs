@@ -32,7 +32,7 @@ tiup cluster deploy <cluster-name> <version> <topology.yaml> [flags]
 
 ### -p, --password
 
-- Specifies the password used to connect to the target machine. Do not use it with `-i/--identity_file` at the same time.
+- Specifies the password used to connect to the target machine. Do not use this option with `-i/--identity_file` at the same time.
 - Data type: `BOOLEAN`
 - Default: false
 
