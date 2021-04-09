@@ -26,10 +26,10 @@ tiup dm list [flags]
 
 ## Output
 
-The output of the command is a table containing the following fields:
+A table consisting of the following fields:
 
-- Name: the cluster name
-- User: the user who deployed the cluster
-- Version: the cluster version
-- Path: the path of the cluster deployment data on the central control machine
-- PrivateKey: the path of the private key to the cluster
+- `Name`: the cluster name.
+- `User`: the user who deployed the cluster.
+- `Version`: the cluster version.
+- `Path`: the path of the cluster deployment data on the central control machine.
+- `PrivateKey`: the path of the private key to the cluster.
