@@ -29,7 +29,7 @@ Because the TiKV, TiFlash and TiDB Binlog components are taken to offline asynch
 tiup cluster scale-in <cluster-name> [flags]
 ```
 
-`<cluster-name>` is the name of the cluster to be scaled down. If you forget the cluster name, check the name in [cluster-list](/tiup/tiup-component-cluster-list.md).
+`<cluster-name>` is the name of the cluster to be scaled down. If you forget the cluster name, check the name in [tiup cluster list](/tiup/tiup-component-cluster-list.md).
 
 ## Options
 
