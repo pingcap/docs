@@ -13,7 +13,7 @@ tiup dm deploy <cluster-name> <version> <topology.yaml> [flags]
 ```
 
 - `<cluster-name>`: the name of the new cluster, which cannot be the same as the existing cluster names.
-- `<version>`: the version number of the TiDB cluster to deploy, such as `v2.0.0`.
+- `<version>`: the version number of the DM cluster to be deployed, such as `v2.0.0`.
 - `<topology.yaml>`: the prepared [topology file](/tiup/tiup-dm-topology-reference.md)
 
 ## Options
@@ -32,7 +32,7 @@ tiup dm deploy <cluster-name> <version> <topology.yaml> [flags]
 
 ### -p, --password
 
-- Specifies the password used to connect to the target machine. Do not use it with `-i/--identity_file` at the same time.
+- Specifies the password used to connect to the target machine. Do not use this option and `-i/--identity_file` at the same time.
 - Data type: `BOOLEAN`
 - Default: false
 
