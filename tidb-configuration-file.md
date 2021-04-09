@@ -512,7 +512,7 @@ This section introduces configuration items related to the Coprocessor Cache fea
 - Unit: MB
 - Type: Float
 
-### txn-local-latches
+## txn-local-latches
 
 Configuration related to the transaction latch. It is recommended to enable it when many local transaction conflicts occur.
 
