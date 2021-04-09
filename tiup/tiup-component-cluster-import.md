@@ -4,7 +4,7 @@ title: tiup cluster import
 
 # tiup cluster import
 
-Before TiDB 4.0, clusters were usually deployed using TiDB Ansible. From TiDB 4.0 onwards, TiUP Cluster provides the `import` command to transfer these clusters to the tiup-cluster component for the management.
+Before TiDB 4.0, clusters were usually deployed using TiDB Ansible. For TiDB 4.0 and later releases, TiUP Cluster provides the `import` command to transfer these clusters to the tiup-cluster component for the management.
 
 > **Note:**
 >
@@ -26,41 +26,41 @@ tiup cluster import [flags]
 
 ## Options
 
-### -d, --dir ${string}
+### -d, --dir
 
-- Data type: `STRING`
 - Specifies the directory where TiDB Ansible is located.
-- If you do not specify this option in the command, the current directory is regarded as the directory where TiDB Ansible is located.
-
-### --ansible-config ${string}
-
 - Data type: `STRING`
+- If this option is not specified in the command, the current directory is regarded as the directory where TiDB Ansible is located.
+
+### --ansible-config
+
 - Specifies the path of the Ansible configuration file.
-- If you do not specify this option in the command, the default path `. /ansible.cfg` is used in the import.
-
-### --inventory ${string}
-
 - Data type: `STRING`
+- If this option is not specified in the command, the default path `. /ansible.cfg` is used in the import.
+
+### --inventory
+
 - Specifies the name of the Ansible inventory file.
-- If you do not specify this option in the command, the default name `inventory.ini` is used in the import.
+- Data type: `STRING`
+- If this option is not specified in the command, the default name `inventory.ini` is used in the import.
 
 ### --no-backup
 
-- Data type: `BOOLEAN`
 - Controls whether to disable the backup of files in the directory where TiDB Ansible is located.
-- If you do not specify this option in the command, after a successful import, everything in the directory specified by the `-dir` option is backed up to the `${TIUP_HOME}/.tiup/storage/cluster/clusters/{cluster-name}/ansible-backup` directory. If there are multiple inventory files (which indicates multiple clusters are deployed) in this directory, it is recommended to include this option in the `import` command to disable the default backup step.
+- Data type: `BOOLEAN`
+- Default: false. If this option is not specified in the command, after a successful import, everything in the directory specified by the `-dir` option is backed up to the `${TIUP_HOME}/.tiup/storage/cluster/clusters/{cluster-name}/ansible-backup` directory. If there are multiple inventory files (which indicates multiple clusters are deployed) in this directory, it is recommended to add this option in the `import` command to disable the default backup step.
 
-### --rename ${string}
+### --rename
 
+- Renames the imported cluster.
 - Data type: `STRING`
-- Renames the imported cluster. 
-- If you do not specify this option in the command, the cluster_name specified in inventory is used as the cluster name.
+- Default: NULL. If this option is not specified in the command, the cluster_name specified in inventory is used as the cluster name.
 
 ### -h, --help
 
+- Shows the help information in the output.
 - Data type: `BOOLEAN`
-- Shows the help information.
-- If you do not specify this option in the command, the default value is `false` so the help information is not shown.
+- Default: false
 
 ## Output
 
