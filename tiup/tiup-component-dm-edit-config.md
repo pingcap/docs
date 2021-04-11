@@ -23,7 +23,7 @@ tiup dm edit-config <cluster-name> [flags]
 
 ### -h, --help
 
-- Prints help information.
+- Prints the help information.
 - Data type: `BOOLEAN`
 - Default: false
 
