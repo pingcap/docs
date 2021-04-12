@@ -17,7 +17,7 @@ If you need to modify the cluster service configuration after the cluster is dep
 tiup dm edit-config <cluster-name> [flags]
 ```
 
-`<cluster-name>`: the cluster to operate on
+`<cluster-name>`: the cluster to operate on.
 
 ## Option
 
@@ -30,4 +30,4 @@ tiup dm edit-config <cluster-name> [flags]
 ## Output
 
 - Normally, no output.
-- If you have mistakenly modified the fields that cannot be modified, when you save the file, an error is reported, reminding you to edit the file again. For the fields that cannot be modified, see [topology file](/tiup/tiup-dm-topology-reference.md).
+- If you have mistakenly modified the fields that cannot be modified, when you save the file, an error is reported, reminding you to edit the file again. For the fields that cannot be modified, see [the topology file](/tiup/tiup-dm-topology-reference.md).
