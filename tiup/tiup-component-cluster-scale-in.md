@@ -35,6 +35,7 @@ tiup cluster scale-in <cluster-name> [flags]
 
 ### -N, --node
 
+- Specifies the nodes to scale down, splitting by commas for multiple nodes.
 - Data type: `STRING`
 - There is no default value. This option is mandatory and the value must be not null.
 
