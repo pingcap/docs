@@ -64,13 +64,13 @@ Size tables:
 
 | size table | size table | size table | ...... | size table | bytes of size tables |
 | :--------- | :--------- | :--------- | :----- | :--------- | :------------------- |
-| size of serialized keys | size of serialized values | size of serialized column groups 1 | ...... | size of serialized column groups N | uvarint in little byte order |
+| size of serialized headers | size of serialized events | size of serialized column groups 1 | ...... | size of serialized column groups N | uvarint in little byte order |
 
 Size table:
 
 | uvarint | uvarint chunk |
 | :------ | :------------ |
-| number of elements | Consecutive element encoded in uvarint format |
+| number of elements | Consecutive elements encoded in uvarint format |
 
 Primitive types:
 
@@ -86,6 +86,7 @@ Primitive types:
 Chunk of primitive types:
 
 | chunk type | encoding |
+| :--------- | :------- |
 | uvarint chunk | Consecutive elements encoded in uvarint format |
 | varint chunk | Consecutive elements encoded in varint format |
 | delta uvarint chunk | Base number encoded in uvarint format followed by delta of each element to last element encoded in uvarint format |
