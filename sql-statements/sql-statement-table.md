@@ -26,6 +26,8 @@ CREATE TABLE t1(id INT PRIMARY KEY);
 Query OK, 0 rows affected (0.31 sec)
 ```
 
+{{< copyable "sql" >}}
+
 ```sql
 INSERT INTO t1 VALUES (1),(2),(3);
 ```
