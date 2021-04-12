@@ -89,7 +89,7 @@ RESTORE DATABASE `test` FROM 'local:///mnt/backup/2020/04/';
 RESTORE TABLE `test`.`sbtest01`, `test`.`sbtest02` FROM 'local:///mnt/backup/2020/04/';
 ```
 
-### Remote destinations
+### External storages
 
 BR supports restoring data from S3 or GCS:
 

@@ -98,7 +98,7 @@ BACKUP DATABASE * TO 'local:///mnt/backup/full/';
 
 Note that the system tables (`mysql.*`, `INFORMATION_SCHEMA.*`, `PERFORMANCE_SCHEMA.*`, …) will not be included into the backup.
 
-### Remote destinations
+### External storages
 
 BR supports backing up data to S3 or GCS:
 
