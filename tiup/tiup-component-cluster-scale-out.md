@@ -1,20 +1,19 @@
 ---
-title: tiup cluster deploy
+title: tiup cluster scale-out
 ---
 
-# tiup cluster deploy
+# tiup cluster scale-out
 
-The `tiup cluster deploy` command is used to deploy a new cluster.
+The `tiup cluster scale-out` command is used for scaling out the cluster. The internal logic of scaling out the cluster is similar to the cluster deployment. The tiup-cluster component first establishes an SSH connection to the new node, creates the necessary directories on the target node, then performs the deployment and starts the service. The scaling out of the PD node is added to the cluster by the join operation, and the configuration of the services associated with the PD is updated; other services are directly started and added to the cluster.
 
 ## Syntax
 
-```sh
-tiup cluster deploy <cluster-name> <version> <topology.yaml> [flags]
+```shell
+tiup cluster scale-out <cluster-name> <topology.yaml> [flags]
 ```
 
-- `<cluster-name>`: the name of the new cluster, which cannot be the same as the existing cluster names.
-- `<version>`: the version number of the TiDB cluster to deploy, such as `v4.0.9`.
-- `<topology.yaml>`: the prepared topology file<!-- (/tiup/tiup-cluster-topology-reference.md) -->.
+`<cluster-name>`: the name of the cluster to operate on. If you forget the cluster name, you can check it with the [cluster list](/tiup/tiup-component-dm-list.md) command.
+`<topology.yaml>`: the prepared [topology file](/tiup/tiup-dm-topology-reference.md). This topology file should only contain the new nodes that are to be added to the current cluster.
 
 ## Options
 
@@ -28,17 +27,11 @@ tiup cluster deploy <cluster-name> <version> <topology.yaml> [flags]
 
 - Specifies the key file used to connect to the target machine.
 - Data type: `STRING`
-- Default: `~/.ssh/id_rsa`
+- If this option is not specified in the command, the `~/.ssh/id_rsa` file is used to connect to the target machine by default.
 
 ### -p, --password
 
-- Specifies the password used to connect to the target machine. Do not use it with `-i/--identity_file` at the same time.
-- Data type: `BOOLEAN`
-- Default: false
-
-### --ignore-config-check
-
-- This option is used to skip the configuration check. After the binary files of components are deployed, the configurations of TiDB, TiKV, and PD components are checked using `<binary> --config-check <config-file>`. `<binary>` is the path of the deployed binary file. `<config-file>` is the configuration file generated based on the user configuration.
+- Specifies the password used to connect to the target machine. Do not use this option and `-i/--identity_file` at the same time.
 - Data type: `BOOLEAN`
 - Default: false
 
@@ -58,10 +51,10 @@ tiup cluster deploy <cluster-name> <version> <topology.yaml> [flags]
 
 ### -h, --help
 
-- Prints help information.
+- Prints the help information.
 - Data type: `BOOLEAN`
 - Default: false
 
 ## Output
 
-The deployment log.
+The log of scaling out.
