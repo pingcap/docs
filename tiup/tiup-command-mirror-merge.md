@@ -8,8 +8,8 @@ The `tiup mirror merge` command is used to merge one or more mirrors to the curr
 
 To execute this command, you need to meet the following conditions:
 
--The owner IDs of all components of the target mirror must exist in the current mirror.
--The user's `${TIUP_HOME}/keys` directory has all the private keys corresponding to the above owner ID in the current mirror (you can use the command [`tiup mirror set`](/tiup/tiup-command-mirror-set.md) to switch the current mirror to the mirror that is currently authorized to modify).
+- The owner IDs of all components of the target mirror must exist in the current mirror.
+- The user's `${TIUP_HOME}/keys` directory has all the private keys corresponding to the above owner ID in the current mirror (you can use the command [`tiup mirror set`](/tiup/tiup-command-mirror-set.md) to switch the current mirror to the mirror that is currently authorized to modify).
 
 ## Syntax
 
