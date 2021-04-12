@@ -71,6 +71,8 @@ TABLE t1 ORDER BY id DESC;
 3 rows in set (0.01 sec)
 ```
 
+{{< copyable "sql" >}}
+
 ```sql
 TABLE t1 LIMIT 1;
 ```
