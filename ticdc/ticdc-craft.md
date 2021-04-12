@@ -39,7 +39,7 @@ Header:
 
 Body for [Row Changed Event](#row-changed-event):
 
-| column group | column group |
+| Column group | Column group |
 | :------ | :------ |
 | column group 1 | column group 2 (optional) |
 
@@ -118,19 +118,19 @@ This section introduces the formats of Row Changed Event, DDL Event, and Resolve
 
     `Insert` event. The newly added row data is output.
 
-    | column group(s) |
+    | Column group(s) |
     | :-------------- |
     | New values |
 
     `Update` event. The newly added row data and the row data before the update are output. Old values are only available when the old value feature is enabled.
 
-    | column group(s) |
+    | Column group(s) |
     | :-------------- |
     | New values |
     | Old values |
 
     `Delete` event. The deleted row data is output. When the old value feature is enabled, the `Delete` event includes all the columns of the deleted row data; when this feature is disabled, the `Delete` event only includes the [HandleKey](#bit-flags-of-columns) column.
-    | column group(s) |
+    | Column group(s) |
     | :-------------- |
     | Deleted values |
 
@@ -148,17 +148,17 @@ This section introduces the formats of Row Changed Event, DDL Event, and Resolve
 
 + **Header:**
 
-    | Data | Type   | Description                                 |
-    | :---------- | :----- | :---------------------------------- |
+    | Data | Type   | Description                         |
+    | :--- | :----- | :---------------------------------- |
     | Commit TS | uint64 | The timestamp of the transaction that performs the DDL change. |
     | Schema | string | The schema name of the DDL change, which might be an empty string. |
     | Table | string | The table name of the DDL change, which might be am empty string. |
 
 + **Event:**
 
-    | Parameter       | Type   | Description           |
-    | :-------- | :----- | :------------ |
-    | Type  | uint64 | The DDL type. For details, see [DDL Type Code](#ddl-type-code).    |
+    | Data | Type   | Description   |
+    | :--- | :----- | :------------ |
+    | Type | uint64 | The DDL type. For details, see [DDL Type Code](#ddl-type-code).    |
     | Query | string | DDL Query SQL |
 
 ### Resolved Event
@@ -327,15 +327,15 @@ Currently, TiCDC does not provide the standard parsing library for TiCDC Craft, 
 The bit flags represent specific attributes of columns.
 
 | Bit | Value | Name | Description |
-| :-- | :- | :- | :- |
+| :-- | :---- | :--- | :---------- |
 | 1   | 0x01 | BinaryFlag          | Whether the column is a binary-encoded column. |
 | 2   | 0x02 | HandleKeyFlag       | Whether the column is a Handle index column. |
-| 3   | 0x04 | GeneratedColumnFlag | Whether the column is a generated column.     |
-| 4   | 0x08 | PrimaryKeyFlag      | Whether the column is a primary key column.      |
-| 5   | 0x10 | UniqueKeyFlag       | Whether the column is a unique index column.  |
-| 6   | 0x20 | MultipleKeyFlag     | Whether the column is a composite index column.   |
-| 7   | 0x40 | NullableFlag        | Whether the column is a nullable column.       |
-| 8   | 0x80 | UnsignedFlag        | Whether the column is an unsigned column.     |
+| 3   | 0x04 | GeneratedColumnFlag | Whether the column is a generated column. |
+| 4   | 0x08 | PrimaryKeyFlag      | Whether the column is a primary key column. |
+| 5   | 0x10 | UniqueKeyFlag       | Whether the column is a unique index column. |
+| 6   | 0x20 | MultipleKeyFlag     | Whether the column is a composite index column. |
+| 7   | 0x40 | NullableFlag        | Whether the column is a nullable column. |
+| 8   | 0x80 | UnsignedFlag        | Whether the column is an unsigned column. |
 
 Example:
 
