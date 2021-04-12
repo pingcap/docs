@@ -32,7 +32,7 @@ tiup cluster enable <cluster-name> [flags]
 
 ### -R, --role
 
-- Specifies the roles whose auto-enabling service is to be disabled. The value of this option is a comma-separated list of node roles. The role is the second column of the [cluster status](/tiup/tiup-component-cluster-display.md) table.
+- Specifies the roles whose auto-enabling service is to be enabled. The value of this option is a comma-separated list of node roles. The role is the second column of the [cluster status](/tiup/tiup-component-cluster-display.md) table.
 - Data type: `strings`
 - Default: `[]`, which means no role is selected.
 
