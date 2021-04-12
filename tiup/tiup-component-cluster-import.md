@@ -30,25 +30,25 @@ tiup cluster import [flags]
 
 - Specifies the directory where TiDB Ansible is located.
 - Data type: `STRING`
-- If this option is not specified in the command, the current directory is regarded as the directory where TiDB Ansible is located.
+- The option is enabled by default with the current directory (the default value) passed in.
 
 ### --ansible-config
 
 - Specifies the path of the Ansible configuration file.
 - Data type: `STRING`
-- If this option is not specified in the command, the default path `. /ansible.cfg` is used in the import.
+- The option is enabled by default with `. /ansible.cfg` (the default value) passed in.
 
 ### --inventory
 
 - Specifies the name of the Ansible inventory file.
 - Data type: `STRING`
-- If this option is not specified in the command, the default name `inventory.ini` is used in the import.
+- The option is enabled by default with `inventory.ini` (the default value) passed in.
 
 ### --no-backup
 
 - Controls whether to disable the backup of files in the directory where TiDB Ansible is located.
 - Data type: `BOOLEAN`
-- Default: false. If this option is not specified in the command, after a successful import, everything in the directory specified by the `-dir` option is backed up to the `${TIUP_HOME}/.tiup/storage/cluster/clusters/{cluster-name}/ansible-backup` directory. If there are multiple inventory files (which indicates multiple clusters are deployed) in this directory, it is recommended to add this option in the `import` command to disable the default backup step.
+- This option is disabled by default with the `false` value. After a successful import, everything in the directory specified by the `-dir` option is backed up to the `${TIUP_HOME}/.tiup/storage/cluster/clusters/{cluster-name}/ansible-backup` directory. If there are multiple inventory files (when multiple clusters are deployed) in this directory, it is recommended to enable this option. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
 
 ### --rename
 
@@ -58,9 +58,9 @@ tiup cluster import [flags]
 
 ### -h, --help
 
-- Shows the help information in the output.
+- Prints the help information.
 - Data type: `BOOLEAN`
-- Default: false
+- This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
 
 ## Output
 
