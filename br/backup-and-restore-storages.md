@@ -67,7 +67,7 @@ Cloud storages such as S3 and GCS sometimes require additional configuration for
 
 > **Note:**
 >
-> It is not recommended to pass in the access key and secret access key directly in the storage URL, because these keys are logged in plain text. The migration tool tries to infer these keys from the environment in the following order:
+> It is not recommended to pass in the access key and secret access key directly in the storage URL, because these keys are logged in plain text. The migration tools try to infer these keys from the environment in the following order:
 
 1. `$AWS_ACCESS_KEY_ID` and `$AWS_SECRET_ACCESS_KEY` environment variables
 2. `$AWS_ACCESS_KEY` and `$AWS_SECRET_KEY` environment variables
