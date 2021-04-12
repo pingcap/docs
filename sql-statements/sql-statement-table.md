@@ -37,6 +37,8 @@ Query OK, 3 rows affected (0.06 sec)
 Records: 3  Duplicates: 0  Warnings: 0
 ```
 
+{{< copyable "sql" >}}
+
 ```sql
 TABLE t1;
 ```
