@@ -33,5 +33,5 @@ None
 - [publish](/tiup/tiup-command-mirror-publish.md): pushes new components to the current mirror
 - [modify](/tiup/tiup-command-mirror-modify.md): modifies the properties of the components in the current mirror
 - [rotate](/tiup/tiup-command-mirror-rotate.md): updates the root certificate in the current mirror
-- [clone](/tiup/tiup-command-mirror-rotate.md): clones a new mirror from an existing one
+- [clone](/tiup/tiup-command-mirror-clone.md): clones a new mirror from an existing one
 - [merge](/tiup/tiup-command-mirror-merge.md): merges mirrors
