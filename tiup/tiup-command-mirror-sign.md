@@ -19,8 +19,8 @@ tiup mirror sign <manifest-file> [flags]
 
 If it is a network address, the address must provide the following functions:
 
--Support access with `http get`, at this time the complete content of the signed file (including the signatures field) should be returned
--Support access with `http post`, the client adds this signature to the signatures field of the content returned by `http get` and POST to this address
+- Support access with `http get`, at this time the complete content of the signed file (including the signatures field) should be returned
+- Support access with `http post`, the client adds this signature to the signatures field of the content returned by `http get` and POST to this address
 
 ## Options
 
