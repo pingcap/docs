@@ -62,11 +62,7 @@ You can perform full collection using the following syntax.
     {{< copyable "sql" >}}
 
     ```sql
-<<<<<<< HEAD
-    ANALYZE TABLE TableName PARTITION PartitionNameList [IndexNameList] [WITH NUM BUCKETS];
-=======
-    ANALYZE TABLE TableName PARTITION PartitionNameList INDEX [IndexNameList] [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH|SAMPLES];
->>>>>>> f30cd38d... Fix a typo in statistics.md (#5297)
+    ANALYZE TABLE TableName PARTITION PartitionNameList INDEX [IndexNameList] [WITH NUM BUCKETS];
     ```
 
 #### Incremental collection
