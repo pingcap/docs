@@ -4,7 +4,9 @@ title: tiup cluster scale-out
 
 # tiup cluster scale-out
 
-The `tiup cluster scale-out` command is used for scaling out the cluster. The internal logic of scaling out the cluster is similar to the cluster deployment. The tiup-cluster component first establishes an SSH connection to the new node, creates the necessary directories on the target node, then performs the deployment and starts the service. The scaling out of the PD node is added to the cluster by the join operation, and the configuration of the services associated with the PD is updated; other services are directly started and added to the cluster.
+The `tiup cluster scale-out` command is used for scaling out the cluster. The internal logic of scaling out the cluster is similar to the cluster deployment. The tiup-cluster component first establishes an SSH connection to the new node, creates the necessary directories on the target node, then performs the deployment and starts the service.
+
+When PD is scaled out, new PD nodes are added to the cluster by the join operation, and the configuration of the services associated with PD is updated; other services are directly started and added to the cluster.
 
 ## Syntax
 
@@ -38,8 +40,8 @@ tiup cluster scale-out <cluster-name> <topology.yaml> [flags]
 ### --no-labels
 
 - This option is used to skip the label check.
-- When two or more TiKV nodes are deployed on the same physical machine, a risk exists: PD cannot learn the cluster topology, so PD might schedule multiple replicas of a Region to different TiKV nodes on one physical machine, which makes this physical machine a single point. To avoid this risk, you can use labels to tell PD not to schedule the same Region to the same machine. See [Schedule Replicas by Topology Labels](/schedule-replicas-by-topology-labels.md) for label configuration.
-- For the test environment, this risk might matter and you can use `--no-labels` to skip the check.
+- When two or more TiKV nodes are deployed on the same physical machine, a risk exists: PD does not know the cluster topology, so it might schedule multiple replicas of a Region to different TiKV nodes on one physical machine, which makes this physical machine a single point of failure. To avoid this risk, you can use labels to tell PD not to schedule the same Region to the same machine. See [Schedule Replicas by Topology Labels](/schedule-replicas-by-topology-labels.md) for label configuration.
+- For the test environment, this risk might not matter, and you can use `--no-labels` to skip the check.
 - Data type: `BOOLEAN`
 - Default: false
 

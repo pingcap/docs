@@ -4,7 +4,7 @@ title: tiup cluster reload
 
 # tiup cluster reload
 
-After [modifying the cluster configuration](/tiup/tiup-component-cluster-edit-config.md), the cluster needs to be reloaded using the `tiup cluster reload` command for the configuration to take effect. This command publishes the configuration of the control machine to the remote machine where the service is running, and follows the upgrade process to restart the services in order according to the upgrade process, and the cluster is still available during the restart process.
+After [modifying the cluster configuration](/tiup/tiup-component-cluster-edit-config.md), the cluster needs to be reloaded using the `tiup cluster reload` command for the configuration to take effect. This command publishes the configuration of the control machine to the remote machine where the service is running, and follows the upgrade process to restart the services in order according to the upgrade process. The cluster is still available during the restart process.
 
 ## Syntax
 
