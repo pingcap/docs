@@ -141,7 +141,7 @@ However, even after you have ensured that the above features are consistently en
 
 #### Version check
 
-Before performing backup and restore, BR compares and checks the TiDB cluster version and the BR version. If there is a major-version inconsistency (for example, BR v4.x and TiDB v5.x), BR prompts a reminder to exit. To forcibly skip the version check, you can set `--check-requirements=false`.
+Before performing backup and restore, BR compares and checks the TiDB cluster version and the BR version. If there is a major-version mismatch (for example, BR v4.x and TiDB v5.x), BR prompts a reminder to exit. To forcibly skip the version check, you can set `--check-requirements=false`.
 
 Note that skipping the version check might introduce incompatibility. The version compatibility information between BR and TiDB versions are as follows:
 
