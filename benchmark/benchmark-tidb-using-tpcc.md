@@ -182,7 +182,7 @@ This process might last for several hours depending on the machine configuration
 
 ### Use TiDB Lightning to load data
 
-The amount of loaded data increases as the number of warehouses increases. When you need to load more than 1000 warehouses of data, you can first use BenchmarkSQL to generate CSV files, and then quickly load the CSV files through TiDB Lightning (hereinafter referred to as Lightning). The CSV files can be reused multiple times, which saves the time required for each generation.
+The amount of loaded data increases as the number of warehouses increases. When you need to load more than 1000 warehouses of data, you can first use BenchmarkSQL to generate CSV files, and then quickly load the CSV files through TiDB Lightning. The CSV files can be reused multiple times, which saves the time required for each generation.
 
 Follow the steps below to use TiDB Lightning to load data:
 
@@ -194,7 +194,7 @@ Follow the steps below to use TiDB Lightning to load data:
     fileLocation=/home/user/csv/  # The absolute path of the directory where your CSV files are stored
     ```
 
-    It is recommended that the CSV file names adhere to the naming rules in Lightning, that is, `{database}.{table}.csv`, because eventually you'll use Lightning to load data. Here you can modify the above configuration as follows:
+    It is recommended that the CSV file names adhere to the naming rules in TiDB Lightning, that is, `{database}.{table}.csv`, because eventually you'll use TiDB Lightning to load data. Here you can modify the above configuration as follows:
 
     ```text
     fileLocation=/home/user/csv/tpcc.  # The absolute path of the directory where your CSV files are stored + the file name prefix (database)
@@ -210,9 +210,9 @@ Follow the steps below to use TiDB Lightning to load data:
     ./runLoader.sh props.mysql
     ```
 
-3. Use Lightning to load data.
+3. Use TiDB Lightning to load data.
 
-    To load data using Lightning, see [TiDB Lightning Deployment](/tidb-lightning/deploy-tidb-lightning.md). The following steps introduce how to use TiDB Ansible to deploy Lightning and use Lightning to load data.
+    To load data using TiDB Lightning, see [TiDB Lightning Deployment](/tidb-lightning/deploy-tidb-lightning.md). The following steps introduce how to use TiDB Ansible to deploy TiDB Lightning and use TiDB Lightning to load data.
 
     1. Edit `inventory.ini`.
 
@@ -240,7 +240,7 @@ Follow the steps below to use TiDB Lightning to load data:
                 trim-last-separator: false
         ```
 
-    3. Deploy Lightning and Importer.
+    3. Deploy TiDB Lightning and TiKV Importer.
 
         {{< copyable "shell-regular" >}}
 
@@ -248,14 +248,14 @@ Follow the steps below to use TiDB Lightning to load data:
         ansible-playbook deploy.yml --tags=lightning
         ```
 
-    4. Start Lightning and Importer.
+    4. Start TiDB Lightning and TiKV Importer.
 
-       * Log into the server where Lightning and Importer are deployed.
+       * Log into the server where TiDB Lightning and TiKV Importer are deployed.
        * Enter the deployment directory.
-       * Execute `scripts/start_importer.sh` under the Importer directory to start Importer.
-       * Execute `scripts/start_lightning.sh` under the Lightning directory to begin to load data.
+       * Execute `scripts/start_importer.sh` under the TiKV Importer directory to start Importer.
+       * Execute `scripts/start_lightning.sh` under the TiDB Lightning directory to begin to load data.
 
-       Because you've used TiDB Ansible deployment method, you can see the loading progress of Lightning on the monitoring page, or check whether the loading process is completed through the log.
+       Because you've used TiDB Ansible deployment method, you can see the loading progress of TiDB Lightning on the monitoring page, or check whether the loading process is completed through the log.
 
 Fourth, after successfully loading data, you can run `sql.common/test.sql` to validate the correctness of the data. If all SQL statements return an empty result, then the data is correctly loaded.
 

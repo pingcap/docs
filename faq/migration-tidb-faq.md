@@ -90,9 +90,9 @@ See [Syncer User Guide](/syncer-overview.md).
 Download and import [Syncer Json](https://github.com/pingcap/docs/blob/master/etc/Syncer.json) to Grafana. Edit the Prometheus configuration file and add the following content:
 
 ```
-- job_name: 'syncer_ops' // task name
+- job_name: 'syncer_ops'  # task name
     static_configs:
-      - targets: [’10.10.1.1:10096’] // Syncer monitoring address and port, informing Prometheus to pull the data of Syncer
+      - targets: [’10.10.1.1:10096’]  # Syncer monitoring address and port, informing Prometheus to pull the data of Syncer
 ```
 
 Restart Prometheus.
