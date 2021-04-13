@@ -421,7 +421,7 @@ region4:   [ 3<<61     ,  +inf  )
 
 ## Notes
 
-The [Region merge](/best-practices/pd-scheduling-best-practices.md#region-merge) scheduling in PD controls the Region split by the Split Region statement. You need to [dynamically modify](/pd-control.md) configuration items related to `Region merge`, to avoid PD re-merging the newly split Region soon after.
+The Region split by the Split Region statement is controlled by the [Region merge](/best-practices/pd-scheduling-best-practices.md#region-merge) scheduler in PD. To avoid PD re-merging the newly split Region soon after, you need to [dynamically modify](/pd-control.md) configuration items related to the Region merge feature.
 
 ## MySQL compatibility
 
