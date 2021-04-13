@@ -47,8 +47,7 @@ scrape_configs:
 
 [Grafana](https://grafana.com/) is a web interface to visualize Prometheus metrics as dashboards.
 
-If TiDB Lightning is installed using TiDB Ansible, its dashboard is already installed.
-Otherwise, the dashboard JSON can be imported from <https://raw.githubusercontent.com/pingcap/tidb-ansible/master/scripts/lightning.json>.
+If TiDB Lightning is installed using TiDB Ansible, its dashboard is already installed. Otherwise, the dashboard JSON can be imported from <https://raw.githubusercontent.com/pingcap/tidb-ansible/master/scripts/lightning.json>.
 
 ### Row 1: Speed
 
@@ -56,7 +55,7 @@ Otherwise, the dashboard JSON can be imported from <https://raw.githubuserconten
 
 | Panel | Series | Description |
 |:-----|:-----|:-----|
-| Import speed | write from lightning | Speed of sending KVs from TiDB Lightning to TiKV Importer, which depends on each table's complexity |
+| Import speed | write from TiDB Lightning | Speed of sending KVs from TiDB Lightning to TiKV Importer, which depends on each table's complexity |
 | Import speed | upload to tikv | Total upload speed from TiKV Importer to all TiKV replicas |
 | Chunk process duration | | Average time needed to completely encode one single data file |
 
@@ -79,7 +78,7 @@ Sometimes the import speed will drop to zero allowing other parts to catch up. T
 | Panel | Description |
 |:-----|:-----|
 | Memory usage | Amount of memory occupied by each service |
-| Number of Lightning Goroutines | Number of running goroutines used by TiDB Lightning |
+| Number of TiDB Lightning Goroutines | Number of running goroutines used by TiDB Lightning |
 | CPU% | Number of logical CPU cores utilized by each service |
 
 ### Row 4: Quota
@@ -165,11 +164,11 @@ Metrics provided by `tikv-importer` are listed under the namespace `tikv_import_
 
 - **`tikv_import_write_chunk_bytes`** (Histogram)
 
-    Bucketed histogram for the uncompressed size of a block of KV pairs received from Lightning.
+    Bucketed histogram for the uncompressed size of a block of KV pairs received from TiDB Lightning.
 
 - **`tikv_import_write_chunk_duration`** (Histogram)
 
-    Bucketed histogram for the time needed to receive a block of KV pairs from Lightning.
+    Bucketed histogram for the time needed to receive a block of KV pairs from TiDB Lightning.
 
 - **`tikv_import_upload_chunk_bytes`** (Histogram)
 

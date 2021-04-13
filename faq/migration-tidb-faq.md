@@ -90,9 +90,9 @@ See [Syncer User Guide](/syncer-overview.md).
 Download and import [Syncer Json](https://github.com/pingcap/docs/blob/master/etc/Syncer.json) to Grafana. Edit the Prometheus configuration file and add the following content:
 
 ```
-- job_name: 'syncer_ops' // task name
+- job_name: 'syncer_ops'  # task name
     static_configs:
-      - targets: [’10.10.1.1:10096’] // Syncer monitoring address and port, informing Prometheus to pull the data of Syncer
+      - targets: [’10.10.1.1:10096’]  # Syncer monitoring address and port, informing Prometheus to pull the data of Syncer
 ```
 
 Restart Prometheus.
@@ -169,7 +169,7 @@ If the amount of data that needs to be deleted at a time is very large, this loo
 
 ### How to improve the data loading speed in TiDB?
 
-- The [Lightning](/tidb-lightning/tidb-lightning-overview.md) tool is developed for distributed data import. It should be noted that the data import process does not perform a complete transaction process for performance reasons. Therefore, the ACID constraint of the data being imported during the import process cannot be guaranteed. The ACID constraint of the imported data can only be guaranteed after the entire import process ends. Therefore, the applicable scenarios mainly include importing new data (such as a new table or a new index) or the full backup and restoring (truncate the original table and then import data).
+- The [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) tool is developed for distributed data import. It should be noted that the data import process does not perform a complete transaction process for performance reasons. Therefore, the ACID constraint of the data being imported during the import process cannot be guaranteed. The ACID constraint of the imported data can only be guaranteed after the entire import process ends. Therefore, the applicable scenarios mainly include importing new data (such as a new table or a new index) or the full backup and restoring (truncate the original table and then import data).
 - Data loading in TiDB is related to the status of disks and the whole cluster. When loading data, pay attention to metrics like the disk usage rate of the host, TiClient Error, Backoff, Thread CPU and so on. You can analyze the bottlenecks using these metrics.
 
 ### What should I do if it is slow to reclaim storage space after deleting data?
