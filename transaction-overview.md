@@ -10,6 +10,10 @@ TiDB supports complete distributed transactions. Both [optimistic transaction mo
 
 The common variables include [`autocommit`](#autocommit), [`tidb_disable_txn_auto_retry`](/tidb-specific-system-variables.md#tidb_disable_txn_auto_retry), and [`tidb_retry_limit`](/tidb-specific-system-variables.md#tidb_retry_limit).
 
+> **Note:**
+>
+> The [`tidb_disable_txn_auto_retry`](/tidb-specific-system-variables.md#tidb_disable_txn_auto_retry) and [`tidb_retry_limit`](/tidb-specific-system-variables.md#tidb_retry_limit) variables only apply to optimistic transactions, not to pessimistic transactions.
+
 ## Common syntax
 
 ### `BEGIN`, `START TRANSACTION` and `START TRANSACTION WITH CONSISTENT SNAPSHOT`
