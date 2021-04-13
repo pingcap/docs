@@ -35,7 +35,7 @@ Table filters can be applied to the tools using multiple `-f` or `--filter` comm
     #          ^~~~~~~~~~~~~~~~~~~~~~~
     ```
 
-* [Lightning](/tidb-lightning/tidb-lightning-overview.md):
+* [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md):
 
     {{< copyable "shell-regular" >}}
 
@@ -48,7 +48,7 @@ Table filters can be applied to the tools using multiple `-f` or `--filter` comm
 
 Table filters in TOML files are specified as [array of strings](https://toml.io/en/v1.0.0-rc.1#section-15). The following lists the example usage in each tool.
 
-* Lightning:
+* TiDB Lightning:
 
     ```toml
     [mydumper]
