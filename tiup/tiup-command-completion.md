@@ -13,7 +13,7 @@ If you want to complete `bash` commands, you need to install `bash-completion` f
 
 ## Syntax
 
-```sh
+```shell
 tiup completion <shell>
 ```
 

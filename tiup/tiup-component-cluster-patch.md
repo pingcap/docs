@@ -31,7 +31,7 @@ tiup cluster patch <cluster-name> <package-path> [flags]
 
 ## Options
 
-### --overwrite（boolean，默认 false）
+### --overwrite
 
 - After you patch a certain component (such as TiDB or TiKV), when the tiup cluster scales out the component, TiUP uses the original component version by default. To use the version that you patch when the cluster scales out in the future, you need to specified the option `--overwrite` in the command.
 - Data type: `BOOLEAN`
