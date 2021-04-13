@@ -43,7 +43,7 @@ This document only describes the parameters that are not included in command-lin
 ### `grpc-raft-conn-num`
 
 + The maximum number of links among TiKV nodes for Raft communication
-+ Default: `10`
++ Default: `1`
 + Minimum value: `1`
 
 ### `grpc-stream-initial-window-size`
