@@ -172,6 +172,18 @@ mysql> SELECT * FROM t1;
     * `1`: Aggregation and join requests are sent in batches
     * `2`: All coprocessor requests are sent in batches
 
+### tidb_allow_fallback_to_tikv <span class="version-mark">New in v5.0</span>
+
+- Scope: SESSION | GLOBAL
+- Default value: ""
+- This variable is used to specify a list of storage engines that might fall back to TiKV. If the execution of a SQL statement fails due to a failure of the specified storage engine in the list, TiDB retries executing this SQL statement with TiKV. This variable can be set to "" or "tiflash". When this variable is set to "tiflash", if the execution of a SQL statement fails due to a failure of TiFlash, TiDB retries executing this SQL statement with TiKV.
+
+### tidb_allow_mpp <span class="version-mark">New in v5.0</span>
+
+- Scope: SESSION | GLOBAL
+- Default value: ON
+- This variable controls whether to use the MPP mode of TiFlash to execute queries. If the value is set to `ON`, TiDB automatically determines using the optimizer whether to choose MPP to execute queries. MPP is a distributed computing framework provided by the TiFlash engine, which allows data exchange between nodes and provides high-performance, high-throughput SQL algorithms.
+
 ### tidb_allow_remove_auto_inc <span class="version-mark">New in v2.1.18 and v3.0.4</span>
 
 - Scope: SESSION
@@ -215,6 +227,18 @@ mysql> SELECT * FROM t1;
     For example, the base timeout for TiDB to take TSO from PD is 15 seconds. When `tidb_backoff_weight = 2`, the maximum timeout for taking TSO is: *base time \* 2 = 30 seconds*.
 
     In the case of a poor network environment, appropriately increasing the value of this variable can effectively alleviate error reporting to the application end caused by timeout. If the application end wants to receive the error information more quickly, minimize the value of this variable.
+
+### tidb_broadcast_join_threshold_count <span class="version-mark">New in v5.0</span>
+
+- Scope: SESSION | GLOBAL
+- Default value: 10240
+- The unit of the variable is rows. If the objects of the join operation belong to a subquery, the optimizer cannot estimate the size of the subquery result set. In this situation, the size is determined by the number of rows in the result set. If the estimated number of rows in the subquery is less than the value of this variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used.
+
+### tidb_broadcast_join_threshold_size <span class="version-mark">New in v5.0</span>
+
+- Scope: SESSION | GLOBAL
+- Default value: 104857600 (which equals 100 megabytes)
+- If the table size (in the unit of bytes) is less than the value of the variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used.
 
 ### tidb_build_stats_concurrency
 
@@ -316,13 +340,15 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 - Scope: SESSION | GLOBAL
 - Default value: ON
-- This variable is used to set whether to disable the automatic retry of explicit transactions. The default value of `ON` means that transactions will not automatically retry in TiDB and `COMMIT` statements might return errors that need to be handled in the application layer.
+- This variable is used to set whether to disable the automatic retry of explicit optimistic transactions. The default value of `ON` means that transactions will not automatically retry in TiDB and `COMMIT` statements might return errors that need to be handled in the application layer.
 
     Setting the value to `OFF` means that TiDB will automatically retry transactions, resulting in fewer errors from `COMMIT` statements. Be careful when making this change, because it might result in lost updates.
 
     This variable does not affect automatically committed implicit transactions and internally executed transactions in TiDB. The maximum retry count of these transactions is determined by the value of `tidb_retry_limit`.
 
     For more details, see [limits of retry](/optimistic-transaction.md#limits-of-retry).
+
+    This variable only applies to optimistic transactions, not to pessimistic transactions. The number of retries for pessimistic transactions is controlled by [`max_retry_count`](/tidb-configuration-file.md#max-retry-count).
 
 ### tidb_distsql_scan_concurrency
 
@@ -354,23 +380,25 @@ Constraint checking is always performed in place for pessimistic transactions (d
 >
 > Currently, this feature is incompatible with TiDB Binlog in some scenarios and might cause semantic changes on a transaction. For more usage precautions of this feature, refer to [Incompatibility issues about transaction semantic](https://github.com/pingcap/tidb/issues/21069) and [Incompatibility issues about TiDB Binlog](https://github.com/pingcap/tidb/issues/20996).
 
-### tidb_enable_async_commit <span class="version-mark">New in v5.0.0-rc</span>
-
-> **Warning:**
->
-> Async commit is still an experimental feature. It is not recommended to use this feature in the production environment. Currently, the following incompatible issues are found, and be aware of them if you need to use this feature:
-
-> - This feature is incompatible with [TiCDC](/ticdc/ticdc-overview.md) and might cause TiCDC to run abnormally.
-> - This feature is incompatible with [Compaction Filter](/tikv-configuration-file.md#enable-compaction-filter-new-in-v500-rc). If you use the two features at the same time, write loss might occur.
-> - This feature is incompatible with TiDB Binlog and does not take effect when TiDB Binlog is enabled.
+### tidb_enable_async_commit <span class="version-mark">New in v5.0</span>
 
 - Scope: SESSION | GLOBAL
-- Default value: OFF
+- Default value: `ON` for newly created clusters. If your cluster before upgrade was earlier than v5.0, the variable value defaults to `OFF` after the upgrade.
 - This variable controls whether to enable the async commit feature for the second phase of the two-phase transaction commit to perform asynchronously in the background. Enabling this feature can reduce the latency of transaction commit.
 
-> **Warning:**
+> **Note:**
 >
-> When async commit is enabled, the external consistency of transactions cannot be guaranteed. For details, refer to [`tidb_guarantee_external_consistency`](#tidb_guarantee_external_consistency-new-in-v500-rc).
+> If you have enabled TiDB Binlog, enabling this variable cannot improve the performance. To improve the performance, it is recommended to use [TiCDC](/ticdc/ticdc-overview.md) instead.
+
+### tidb_enable_1pc <span class="version-mark">New in v5.0</span>
+
+- Scope: SESSION | GLOBAL
+- Default value: `ON` for newly created clusters. If your cluster before upgrade was earlier than v5.0, the variable value defaults to `OFF` after the upgrade.
+- This variable is used to specify whether to enable the one-phase commit feature for transactions that only affect one Region. Compared with the often-used two-phase commit, one-phase commit can greatly reduce the latency of transaction commit and increase the throughput.
+
+> **Note:**
+>
+> If you have enabled TiDB Binlog, enabling this variable cannot improve the performance. To improve the performance, it is recommended to use [TiCDC](/ticdc/ticdc-overview.md) instead.
 
 ### tidb_enable_cascades_planner
 
@@ -384,22 +412,14 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Default value: ON
 - This variable is used to control whether to enable the `Chunk` data encoding format in Coprocessor.
 
-### tidb_enable_clustered_index <span class="version-mark">New in v5.0.0-rc</span>
+### tidb_enable_clustered_index <span class="version-mark">New in v5.0</span>
 
 - Scope: SESSION | GLOBAL
-- Default value: OFF
-- This variable is used to control whether to enable the [clustered index](/clustered-indexes.md) feature.
-    - This feature is only applicable to newly created tables and does not affect the existing old tables.
-    - This feature is only applicable to tables whose primary key is the single-column non-integer type or the multi-column type. It does not affect the tables without a primary key or tables with the primary key of the single-column integer type.
-    - You can execute `select tidb_pk_type from information_schema.tables where table_name ='{table_name}'` to check whether the clustered index feature has been enabled on a table.
-- After you enable this feature, rows are stored directly on the primary key instead of on the internally allocated `rows_id` to which the extra primary key index is created to point.
-
-    This feature impacts performance in the following aspects:
-
-    - For each `INSERT` operation, there is one less index key written into each row.
-    - When you make a query using the primary key as the equivalent condition, one read request can be saved.
-    - When you make a query using the primary key as the range condition, multiple read requests can be saved.
-    - When you make a query using the prefix of the multi-column primary key as the equivalent condition or range condition, multiple read requests can be saved.
+- Default value: INT_ONLY
+- This variable is used to control whether to create the primary key as a [clustered index](/clustered-indexes.md) by default. "By default" here means that the statement does not explicitly specify the keyword `CLUSTERED`/`NONCLUSTERED`. Supported values are `OFF`, `ON`, and `INT_ONLY`:
+    - `OFF` indicates that primary keys are created as non-clustered indexes by default.
+    - `ON` indicates that primary keys are created as clustered indexes by default.
+    - `INT_ONLY` indicates that the behavior is controlled by the configuration item `alter-primary-key`. If `alter-primary-key` is set to `true`, all primary keys are created as non-clustered indexes by default. If it is set to `false`, only the primary keys which consist of an integer column are created as clustered indexes.
 
 ### tidb_enable_collect_execution_info
 
@@ -436,6 +456,12 @@ Constraint checking is always performed in place for pessimistic transactions (d
 >
 > Only the default value of `OFF` can be considered safe. Setting `tidb_enable_noop_functions=1` might lead to unexpected behaviors in your application, because it permits TiDB to ignore certain syntax without providing an error.
 
+### tidb_enable_parallel_apply <span class="version-mark">New in v5.0</span>
+
+- Scope: SESSION | GLOBAL
+- Default value: 0
+- This variable controls whether to enable concurrency for the `Apply` operator. The number of concurrencies is controlled by the `tidb_executor_concurrency` variable. The `Apply` operator processes correlated subqueries and has no concurrency by default, so the execution speed is slow. Setting this variable value to `1` can increase concurrency and speed up execution. Currently, concurrency for `Apply` is disabled by default.
+
 ### tidb_enable_rate_limit_action
 
 - Scope: SESSION | GLOBAL
@@ -455,15 +481,48 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Default value: ON (the value of the default configuration file)
 - This variable is used to control whether to enable the statement summary feature. If enabled, SQL execution information like time consumption is recorded to the `information_schema.STATEMENTS_SUMMARY` system table to identify and troubleshoot SQL performance issues.
 
+### tidb_enable_strict_double_type_check <span class="version-mark">New in v5.0</span>
+
+- Scope: SESSION | GLOBAL
+- Default value: ON
+- This variable is used to control if tables can be created with invalid definitions of type `DOUBLE`. This setting is intended to provide an upgrade path from earlier versions of TiDB, which were less strict in validating types.
+- The default value of `ON` is compatible with MySQL.
+
+For example, the type `DOUBLE(10)` is now considered invalid because the precision of floating point types is not guaranteed. After changing `tidb_enable_strict_double_type_check` to `OFF`, the table is created:
+
+```sql
+mysql> CREATE TABLE t1 (id int, c double(10));
+ERROR 1149 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use
+
+mysql> SET tidb_enable_strict_double_type_check = 'OFF';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> CREATE TABLE t1 (id int, c double(10));
+Query OK, 0 rows affected (0.09 sec)
+```
+
+> **Note:**
+>
+> This setting only applies to the type `DOUBLE` since MySQL permits precision for `FLOAT` types. This behavior is deprecated starting with MySQL 8.0.17, and it is not recommended to specify precision for either `FLOAT` or `DOUBLE` types.
+
 ### tidb_enable_table_partition
 
 - Scope: SESSION | GLOBAL
 - Default value: ON
 - This variable is used to set whether to enable the `TABLE PARTITION` feature:
-
     - `ON` indicates enabling Range partitioning, Hash partitioning, and Range column partitioning with one single column.
     - `AUTO` functions the same way as `ON` does.
     - `OFF` indicates disabling the `TABLE PARTITION` feature. In this case, the syntax that creates a partition table can be executed, but the table created is not a partitioned one.
+
+### tidb_enable_list_partition <span class="version-mark">New in v5.0</span>
+
+> **Warning:**
+>
+> Currently, List partition and List COLUMNS partition are experimental features. It is not recommended that you use it in the production environment.
+
+- Scope: SESSION
+- Default value: OFF
+- This variable is used to set whether to enable the `LIST (COLUMNS) TABLE PARTITION` feature.
 
 ### tidb_enable_telemetry <span class="version-mark">New in v4.0.2 version</span>
 
@@ -510,7 +569,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Default value: 00:00 +0000
 - This variable is used to set the start time of baseline evolution in a day.
 
-### tidb_executor_concurrency <span class="version-mark">New in v5.0.0-rc</span>
+### tidb_executor_concurrency <span class="version-mark">New in v5.0</span>
 
 - Scope: SESSION | GLOBAL
 - Default value: 5
@@ -534,9 +593,9 @@ This variable is used to set the concurrency of the following SQL operators (to 
 + `tidb_projection_concurrency`
 + `tidb_window_concurrency`
 
-Since v5.0.0-rc, you can still separately modify the system variables listed above (with a deprecation warning returned) and your modification only affects the corresponding single operators. After that, if you use `tidb_executor_concurrency` to modify the operator concurrency, the separately modified operators will not be affected. If you want to use `tidb_executor_concurrency` to modify the concurrency of all operators, you can set the values of all variables listed above to `-1`.
+Since v5.0, you can still separately modify the system variables listed above (with a deprecation warning returned) and your modification only affects the corresponding single operators. After that, if you use `tidb_executor_concurrency` to modify the operator concurrency, the separately modified operators will not be affected. If you want to use `tidb_executor_concurrency` to modify the concurrency of all operators, you can set the values of all variables listed above to `-1`.
 
-For a system upgraded to v5.0.0-rc from an earlier version, if you have not modified any value of the variables listed above (which means that the `tidb_hash_join_concurrency` value is `5` and the values of the rest are `4`), the operator concurrency previously managed by these variables will automatically be managed by `tidb_executor_concurrency`. If you have modified any of these variables, the concurrency of the corresponding operators will still be controlled by the modified variables.
+For a system upgraded to v5.0 from an earlier version, if you have not modified any value of the variables listed above (which means that the `tidb_hash_join_concurrency` value is `5` and the values of the rest are `4`), the operator concurrency previously managed by these variables will automatically be managed by `tidb_executor_concurrency`. If you have modified any of these variables, the concurrency of the corresponding operators will still be controlled by the modified variables.
 
 ### tidb_expensive_query_time_threshold
 
@@ -552,6 +611,50 @@ For a system upgraded to v5.0.0-rc from an earlier version, if you have not modi
 - Default value: NO_PRIORITY
 - This variable is used to change the default priority for statements executed on a TiDB server. A use case is to ensure that a particular user that is performing OLAP queries receives lower priority than users performing OLTP queries.
 - You can set the value of this variable to `NO_PRIORITY`, `LOW_PRIORITY`, `DELAYED` or `HIGH_PRIORITY`.
+
+### tidb_gc_concurrency <span class="version-mark">New in v5.0</span>
+
+- Scope: GLOBAL
+- Default: -1
+- Specifies the number of threads in the [Resolve Locks](/garbage-collection-overview.md#resolve-locks) step of GC. A value of `-1` means that TiDB will automatically decide the number of garbage collection threads to use.
+
+### tidb_gc_enable <span class="version-mark">New in v5.0</span>
+
+- Scope: GLOBAL
+- Default value: ON
+- Enables garbage collection for TiKV. Disabling garbage collection will reduce system performance, as old versions of rows will no longer be purged.
+
+### tidb_gc_life_time <span class="version-mark">New in v5.0</span>
+
+- Scope: GLOBAL
+- Default: `"10m0s"`
+- The time limit during which data is retained for each GC, in the format of Go Duration. When a GC happens, the current time minus this value is the safe point.
+
+> **Note:**
+>
+> - In scenarios of frequent updates, a large value (days or even months) for `tidb_gc_life_time` may cause potential issues, such as:
+>     - Larger storage use
+>     - A large amount of history data may affect performance to a certain degree, especially for range queries such as `select count(*) from t`
+> - If there is any transaction that has been running longer than `tidb_gc_life_time`, during GC, the data since `start_ts` is retained for this transaction to continue execution. For example, if `tidb_gc_life_time` is configured to 10 minutes, among all transactions being executed, the transaction that starts earliest has been running for 15 minutes, GC will retain data of the recent 15 minutes.
+
+### tidb_gc_run_interval <span class="version-mark">New in v5.0</span>
+
+- Scope: GLOBAL
+- Default value: `"10m0s"`
+- Specifies the GC interval, in the format of Go Duration, for example, `"1h30m"`, and `"15m"`
+
+### tidb_gc_scan_lock_mode <span class="version-mark">New in v5.0</span>
+
+> **Warning:**
+>
+> Currently, Green GC is an experimental feature. It is not recommended that you use it in the production environment.
+
+- Scope: GLOBAL
+- Default value: `LEGACY`
+- Possible values:
+    - `LEGACY`: Uses the old way of scanning, that is, disable Green GC.
+    - `PHYSICAL`: Uses the physical scanning method, that is, enable Green GC.
+- This parameter specifies the way of scanning locks in the Resolve Locks step of GC. When set to `LEGACY`, TiDB scans locks by Regions. The value `PHYSICAL` enables each TiKV node to bypass the Raft layer and directly scan data. This feature can effectively mitigate the impact of GC wakening up all Regions when the [Hibernate Region](/tikv-configuration-file.md#hibernate-regions-experimental) feature is enabled, thus improving the execution speed in the Resolve Locks step.
 
 ### tidb_general_log
 
@@ -569,17 +672,11 @@ For a system upgraded to v5.0.0-rc from an earlier version, if you have not modi
     - `txn_mode`: The transactional mode. Value options are `OPTIMISTIC` and `PESSIMISTIC`.
     - `sql`: The SQL statement corresponding to the current query.
 
-### tidb_guarantee_external_consistency <span class="version-mark">New in v5.0.0-rc</span>
-
-- Scope: SESSION | GLOBAL
-- Default value: OFF
-- This variable controls whether the external consistency needs to be guaranteed when the async commit <!-- and one-phase commit--> feature is enabled. When this option is disabled, if the modifications made in two transactions do not have overlapping parts, the commit order that other transactions observe might not be consistent with the actual commit order. When the async commit <!-- or one-phase commit--> feature is disabled, the external consistency can be guaranteed no matter whether this configuration is enabled or disabled.
-
 ### tidb_hash_join_concurrency
 
 > **Warning:**
 >
-> Since v5.0.0-rc, this variable is deprecated. Instead, use [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v500-rc) for setting.
+> Since v5.0, this variable is deprecated. Instead, use [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v50) for setting.
 
 - Scope: SESSION | GLOBAL
 - Default value: -1
@@ -590,7 +687,7 @@ For a system upgraded to v5.0.0-rc from an earlier version, if you have not modi
 
 > **Warning:**
 >
-> Since v5.0.0-rc, this variable is deprecated. Instead, use [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v500-rc) for setting.
+> Since v5.0, this variable is deprecated. Instead, use [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v50) for setting.
 
 - Scope: SESSION | GLOBAL
 - Default value: -1
@@ -602,7 +699,7 @@ For a system upgraded to v5.0.0-rc from an earlier version, if you have not modi
 
 > **Warning:**
 >
-> Since v5.0.0-rc, this variable is deprecated. Instead, use [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v500-rc) for setting.
+> Since v5.0, this variable is deprecated. Instead, use [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v50) for setting.
 
 - Scope: SESSION | GLOBAL
 - Default value: -1
@@ -621,7 +718,7 @@ For a system upgraded to v5.0.0-rc from an earlier version, if you have not modi
 
 > **Warning:**
 >
-> Since v5.0.0-rc, this variable is deprecated. Instead, use [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v500-rc) for setting.
+> Since v5.0, this variable is deprecated. Instead, use [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v50) for setting.
 
 - Scope: SESSION | GLOBAL
 - Default value: -1
@@ -633,7 +730,7 @@ For a system upgraded to v5.0.0-rc from an earlier version, if you have not modi
 
 > **Warning:**
 >
-> Since v5.0.0-rc, this variable is deprecated. Instead, use [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v500-rc) for setting.
+> Since v5.0, this variable is deprecated. Instead, use [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v50) for setting.
 
 - Scope: SESSION | GLOBAL
 - Default value: -1
@@ -694,6 +791,13 @@ For a system upgraded to v5.0.0-rc from an earlier version, if you have not modi
 - This variable is used to set the threshold value of memory quota for a query.
 - If the memory quota of a query during execution exceeds the threshold value, TiDB performs the operation designated by the OOMAction option in the configuration file. The initial value of this variable is configured by [`mem-quota-query`](/tidb-configuration-file.md#mem-quota-query).
 
+### tidb_mem_quota_apply_cache <span class="version-mark">New in v5.0</span>
+
+- Scope: SESSION | GLOBAL
+- Default value: 32 MB
+- This variable is used to set the memory usage threshold of the local cache in the `Apply` operator.
+- The local cache in the `Apply` operator is used to speed up the computation of the `Apply` operator. You can set the variable to `0` to disable the `Apply` cache feature.
+
 ### tidb_memory_usage_alarm_ratio
 
 - Scope: SESSION
@@ -721,8 +825,8 @@ For a system upgraded to v5.0.0-rc from an earlier version, if you have not modi
 - This variable controls whether to allow multiple queries to be executed in the same `COM_QUERY` call.
 - To reduce the impact of SQL injection attacks, TiDB now prevents multiple queries from being executed in the same `COM_QUERY` call by default. This variable is intended to be used as part of an upgrade path from earlier versions of TiDB. The following behaviors apply:
 
-| Client setting         | `tidb_multi_statement_mode` value | Multiple statements permitted? |
-|------------------------|-----------------------------------|--------------------------------|
+| Client setting            | `tidb_multi_statement_mode` value | Multiple statements permitted? |
+| ------------------------- | --------------------------------- | ------------------------------ |
 | Multiple Statements = ON  | OFF                               | Yes                            |
 | Multiple Statements = ON  | ON                                | Yes                            |
 | Multiple Statements = ON  | WARN                              | Yes                            |
@@ -819,7 +923,7 @@ mysql> desc select count(distinct a) from test.t;
     select * from t, t1 where t.a=t1.a
     ```
 
-### tidb_opt_prefer_range_scan
+### tidb_opt_prefer_range_scan <span class="version-mark">New in v5.0</span>
 
 - Scope: SESSION
 - Default value: 0
@@ -866,7 +970,7 @@ explain select * from t where age=5;
 
 > **Warning:**
 >
-> Since v5.0.0-rc, this variable is deprecated. Instead, use [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v500-rc) for setting.
+> Since v5.0, this variable is deprecated. Instead, use [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v50) for setting.
 
 - Scope: SESSION | GLOBAL
 - Default value: -1
@@ -912,7 +1016,7 @@ SET tidb_query_log_max_len = 20
 
 - Scope: SESSION | GLOBAL
 - Default value: 10
-- This variable is used to set the maximum number of the retries. When a transaction encounters retryable errors (such as transaction conflicts, very slow transaction commit, or table schema changes), this transaction is re-executed according to this variable. Note that setting `tidb_retry_limit` to `0` disables the automatic retry.
+- This variable is used to set the maximum number of the retries for optimistic transactions. When a transaction encounters retryable errors (such as transaction conflicts, very slow transaction commit, or table schema changes), this transaction is re-executed according to this variable. Note that setting `tidb_retry_limit` to `0` disables the automatic retry. This variable only applies to optimistic transactions, not to pessimistic transactions.
 
 ### tidb_row_format_version
 
@@ -951,6 +1055,13 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - This variable is used to set whether to skip UTF-8 validation.
 - Validating UTF-8 characters affects the performance. When you are sure that the input characters are valid UTF-8 characters, you can set the variable value to `ON`.
 
+### tidb_skip_ascii_check <span class="version-mark">New in v5.0</span>
+
+- Scope: SESSION | GLOBAL
+- Default value: OFF
+- This variable is used to set whether to skip ASCII validation.
+- Validating ASCII characters affects the performance. When you are sure that the input characters are valid ASCII characters, you can set the variable value to `ON`.
+
 ### tidb_slow_log_threshold
 
 - Scope: INSTANCE
@@ -979,6 +1090,8 @@ SET tidb_slow_log_threshold = 200;
 
 - Scope: SESSION | GLOBAL
 - Default value: 24 (the value of the default configuration file)
+- Minimum value: 0
+- Maximum value: 255
 - This variable is used to set the history capacity of the statement summary.
 
 ### tidb_stmt_summary_internal_query <span class="version-mark">New in v4.0</span>
@@ -991,18 +1104,24 @@ SET tidb_slow_log_threshold = 200;
 
 - Scope: SESSION | GLOBAL
 - Default value: 4096 (the value of the default configuration file)
+- Minimum value: 0
+- Maximum value: 2147483647
 - This variable is used to control the length of the SQL string in the statement summary.
 
 ### tidb_stmt_summary_max_stmt_count <span class="version-mark">New in v4.0</span>
 
 - Scope: SESSION | GLOBAL
 - Default value: 200 (the value of the default configuration file)
+- Minimum value: 0
+- Maximum value: 32767
 - This variable is used to set the maximum number of statements that the statement summary stores in memory.
 
 ### tidb_stmt_summary_refresh_interval <span class="version-mark">New in v4.0</span>
 
 - Scope: SESSION | GLOBAL
 - Default value: 1800 (the value of the default configuration file)
+- Minimum value: 1
+- Maximum value: 2147483647
 - This variable is used to set the refresh time of the statement summary. The unit is second.
 
 ### tidb_store_limit <span class="version-mark">New in v3.0.4 and v4.0</span>
@@ -1010,16 +1129,6 @@ SET tidb_slow_log_threshold = 200;
 - Scope: INSTANCE | GLOBAL
 - Default value: 0
 - This variable is used to limit the maximum number of requests TiDB can send to TiKV at the same time. 0 means no limit.
-
-### tidb_track_aggregate_memory_usage <span class="version-mark">New in v5.0.0-rc</span>
-
-> **Warning:**
->
-> `tidb_track_aggregate_memory_usage` is currently an experimental feature. It is not recommended to use this feature in the production environment.
-
-- Scope: SESSION | GLOBAL
-- Default value: OFF
-- This variable controls whether to track the memory usage of the aggregate function. When you enable this feature, TiDB counts the memory usage of the aggregate function, which might cause the overall SQL memory statistics to exceed the threshold [`mem-quota-query`](/tidb-configuration-file.md#mem-quota-query), and then be affected by the behavior defined by [`oom-action`](/tidb-configuration-file.md#oom-action).
 
 ### tidb_txn_mode
 
@@ -1054,7 +1163,7 @@ SET tidb_slow_log_threshold = 200;
 
 > **Warning:**
 >
-> Since v5.0.0-rc, this variable is deprecated. Instead, use [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v500-rc) for setting.
+> Since v5.0, this variable is deprecated. Instead, use [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v50) for setting.
 
 - Scope: SESSION | GLOBAL
 - Default value: -1

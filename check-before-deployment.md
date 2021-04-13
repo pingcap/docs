@@ -530,6 +530,33 @@ Take the following steps to check the current operating system configuration and
                   The governor "performance" may decide which speed to use within this range.
     ```
 
+9. Execute the following commands to modify the `sysctl` parameters:
+
+    {{< copyable "shell-regular" >}}
+
+    ```bash
+    echo "fs.file-max = 1000000">> /etc/sysctl.conf
+    echo "net.core.somaxconn = 32768">> /etc/sysctl.conf
+    echo "net.ipv4.tcp_tw_recycle = 0">> /etc/sysctl.conf
+    echo "net.ipv4.tcp_syncookies = 0">> /etc/sysctl.conf
+    echo "vm.overcommit_memory = 1">> /etc/sysctl.conf
+    echo "vm.swappiness = 0">> /etc/sysctl.conf
+    sysctl -p
+    ```
+
+10. Execute the following command to configure the user's `limits.conf` file:
+
+    {{< copyable "shell-regular" >}}
+
+    ```bash
+    cat << EOF >>/etc/security/limits.conf
+    tidb           soft    nofile          1000000
+    tidb           hard    nofile          1000000
+    tidb           soft    stack          32768
+    tidb           hard    stack          32768
+    EOF
+    ```
+
 ## Manually configure the SSH mutual trust and sudo without password
 
 This section describes how to manually configure the SSH mutual trust and sudo without password. It is recommended to use TiUP for deployment, which automatically configure SSH mutual trust and login without password. If you deploy TiDB clusters using TiUP, ignore this section.
@@ -555,11 +582,12 @@ This section describes how to manually configure the SSH mutual trust and sudo w
     tidb ALL=(ALL) NOPASSWD: ALL
     ```
 
-3. Use the `tidb` user to log in to the control machine, and run the following command. Replace `10.0.1.1` with the IP of your target machine, and enter the `tidb` user password of the target machine as prompted. After the command is executed, SSH mutual trust is already created. This applies to other machines as well.
+3. Use the `tidb` user to log in to the control machine, and run the following command. Replace `10.0.1.1` with the IP of your target machine, and enter the `tidb` user password of the target machine as prompted. After the command is executed, SSH mutual trust is already created. This applies to other machines as well. Newly created `tidb` users do not have the `.ssh` directory. To create such a directory, execute the command that generates the RSA key. To deploy TiDB components on the control machine, configure mutual trust for the control machine and the control machine itself.
 
     {{< copyable "shell-regular" >}}
 
     ```bash
+    ssh-keygen -t rsa
     ssh-copy-id -i ~/.ssh/id_rsa.pub 10.0.1.1
     ```
 

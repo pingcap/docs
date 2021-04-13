@@ -7,10 +7,13 @@
 
 + About TiDB
   + [TiDB Introduction](/overview.md)
-  + [What's New in TiDB 5.0](/releases/release-5.0.0-rc.md)
+  + [What's New in TiDB 5.0](/releases/release-5.0.0.md)
   + [Basic Features](/basic-features.md)
+  + [Experimental Features](/experimental-features.md)
   + Benchmarks
-    + [Interaction Test on Online Workloads and `ADD INDEX`](/benchmark/online-workloads-and-add-index-operations.md)
+    + [v5.0 Sysbench Performance Test Report](/benchmark/benchmark-sysbench-v5-vs-v4.md)
+    + [v5.0 TPC-C Performance Test Report](/benchmark/v5.0-performance-benchmarking-with-tpcc.md)
+    + [v5.0 MPP mode TPC-H 100GB Performance Test](/benchmark/v5.0-performance-benchmarking-with-tpch.md)
   + [MySQL Compatibility](/mysql-compatibility.md)
   + [TiDB Limitations](/tidb-limitations.md)
   + [TiDB Adopters](/adopters.md)
@@ -22,7 +25,7 @@
 + Deploy
   + [Software and Hardware Requirements](/hardware-and-software-requirements.md)
   + [Environment Configuration Checklist](/check-before-deployment.md)
-  + Topology Patterns
+  + Plan Cluster Topology
     + [Minimal Topology](/minimal-deployment-topology.md)
     + [TiFlash Topology](/tiflash-deployment-topology.md)
     + [TiCDC Topology](/ticdc-deployment-topology.md)
@@ -31,11 +34,12 @@
     + [Cross-DC Topology](/geo-distributed-deployment-topology.md)
     + [Hybrid Topology](/hybrid-deployment-topology.md)
   + Install and Start
-    + Linux OS
-      + [Use TiUP (Recommended)](/production-deployment-using-tiup.md)
-      + [Use TiUP Offline (Recommended)](/production-offline-deployment-using-tiup.md)
-      + [Deploy in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable)
+    + [Use TiUP (Recommended)](/production-deployment-using-tiup.md)
+    + [Deploy in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable)
   + [Verify Cluster Status](/post-installation-check.md)
+  + Test Cluster Performance
+    + [Test TiDB Using Sysbench](/benchmark/benchmark-tidb-using-sysbench.md)
+    + [Test TiDB Using TPC-C](/benchmark/benchmark-tidb-using-tpcc.md)
 + Migrate
   + [Overview](/migration-overview.md)
   + Migrate from MySQL
@@ -49,7 +53,6 @@
 + Maintain
   + Upgrade
     + [Use TiUP (Recommended)](/upgrade-tidb-using-tiup.md)
-    + [Use TiUP Offline (Recommended)](/upgrade-tidb-using-tiup-offline.md)
     + [Use TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.1/upgrade-a-tidb-cluster)
   + Scale
     + [Use TiUP (Recommended)](/scale-tidb-using-tiup.md)
@@ -104,6 +107,7 @@
       + [`EXPLAIN` Walkthrough](/explain-walkthrough.md)
       + [Indexes](/explain-indexes.md)
       + [Joins](/explain-joins.md)
+      + [MPP Queries](/explain-mpp.md)
       + [Subqueries](/explain-subqueries.md)
       + [Aggregation](/explain-aggregation.md)
       + [Views](/explain-views.md)
@@ -361,6 +365,7 @@
       + [`SHUTDOWN`](/sql-statements/sql-statement-shutdown.md)
       + [`SPLIT REGION`](/sql-statements/sql-statement-split-region.md)
       + [`START TRANSACTION`](/sql-statements/sql-statement-start-transaction.md)
+      + [`TABLE`](/sql-statements/sql-statement-table.md)
       + [`TRACE`](/sql-statements/sql-statement-trace.md)
       + [`TRUNCATE`](/sql-statements/sql-statement-truncate.md)
       + [`UPDATE`](/sql-statements/sql-statement-update.md)
@@ -411,6 +416,9 @@
       + INFORMATION_SCHEMA
         + [Overview](/information-schema/information-schema.md)
         + [`ANALYZE_STATUS`](/information-schema/information-schema-analyze-status.md)
+        + [`CLIENT_ERRORS_SUMMARY_BY_HOST`](/information-schema/client-errors-summary-by-host.md)
+        + [`CLIENT_ERRORS_SUMMARY_BY_USER`](/information-schema/client-errors-summary-by-user.md)
+        + [`CLIENT_ERRORS_SUMMARY_GLOBAL`](/information-schema/client-errors-summary-global.md)
         + [`CHARACTER_SETS`](/information-schema/information-schema-character-sets.md)
         + [`CLUSTER_CONFIG`](/information-schema/information-schema-cluster-config.md)
         + [`CLUSTER_HARDWARE`](/information-schema/information-schema-cluster-hardware.md)
@@ -526,8 +534,10 @@
   + [All Releases](/releases/release-notes.md)
   + [TiDB Roadmap](/roadmap.md)
   + v5.0
+    + [5.0 GA](/releases/release-5.0.0.md)
     + [5.0.0-rc](/releases/release-5.0.0-rc.md)
   + v4.0
+    + [4.0.12](/releases/release-4.0.12.md)
     + [4.0.11](/releases/release-4.0.11.md)
     + [4.0.10](/releases/release-4.0.10.md)
     + [4.0.9](/releases/release-4.0.9.md)

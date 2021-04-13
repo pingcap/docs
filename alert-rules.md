@@ -437,7 +437,7 @@ This section gives the alert rules for the TiKV component.
 
 * Solution:
 
-    1. Perform `select VARIABLE_VALUE from mysql.tidb where VARIABLE_NAME = "tikv_gc_leader_desc"` to locate the `tidb-server` corresponding to the GC leader;
+    1. Perform `SELECT VARIABLE_VALUE FROM mysql.tidb WHERE VARIABLE_NAME = "tikv_gc_leader_desc"` to locate the `tidb-server` corresponding to the GC leader;
     2. View the log of the `tidb-server`, and grep gc_worker tidb.log;
     3. If you find that the GC worker has been resolving locks (the last log is "start resolve locks") or deleting ranges (the last log is “start delete {number} ranges”) during this time, it means the GC process is running normally. Otherwise, contact [support@pingcap.com](mailto:support@pingcap.com) to resolve this issue.
 
@@ -605,25 +605,6 @@ This section gives the alert rules for the TiKV component.
 * Description:
 
     The pressure on the apply Raft log thread is too high. It is often caused by a burst of writes.
-
-#### `TiDB_tikvclient_gc_action_fail` (only happen when in special configurations)
-
-* Alert rule:
-
-    `sum(increase(tidb_tikvclient_gc_action_result{type="fail”}[1m])) > 10`
-
-    > **Note:**
-    >
-    > In TiDB 3.* versions, the `tidb_tikvclient_gc_action_result` metric exists but does not have a value. It's because distributed garbage collection (GC) is introduced in the TiDB 3.0 version but will not be performed in TiDB.
-
-* Description:
-
-    There are many Regions where GC fails to work.
-
-* Solution:
-
-    1. It is normally because the GC concurrency is set too high. You can moderately lower the GC concurrency degree, and you need to first confirm that the failed GC is caused by the busy server.
-    2. You can moderately lower the concurrency degree by running `update set VARIABLE_VALUE="{number}” where VARIABLE_NAME=”tikv_gc_concurrency”`.
 
 ### Warning-level alerts
 
