@@ -67,7 +67,8 @@ The `tiup cluster reload` command performs two operations:
 - Refreshes all node configurations
 - Restarts the specified node
 
-- After you specify the `--skip-restart` option, it only refreshes the configuration and does not restart any nodes, so that the refreshed configuration is not applied and does not take effect until the next restart of the corresponding service.
+After you specify the `--skip-restart` option, it only refreshes the configuration without restarting any nodes, so that the refreshed configuration is not applied and does not take effect until the next restart of the corresponding service.
+
 - Data type: `BOOLEAN`
 - Default: false
 
