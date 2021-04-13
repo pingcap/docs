@@ -127,13 +127,13 @@ The above configuration specifies that `node_exporter` uses the `9100` port and 
 
 - `pd`: PD service-related configuration. For the complete configuration, see [PD configuration file](/pd-configuration-file.md).
 
-- `tiflash`: TiFlash service-related configuration. For the complete configuration, see [TiFlash configuration file](/tiflash-configuration-file.md).
+- `tiflash`: TiFlash service-related configuration. For the complete configuration, see [TiFlash configuration file](/tiflash/tiflash-configuration.md).
 
 - `tiflash_learner`: Each TiFlash node has a special built-in TiKV. This configuration item is used to configure this special TiKV. It is generally not recommended to modify the content under this configuration item.
 
-- `pump`: Pump service-related configuration. For the complete configuration, see [TiDB Binlog configuration file](/tidb-binlog-configuration-file.md#pump).
+- `pump`: Pump service-related configuration. For the complete configuration, see [TiDB Binlog configuration file](/tidb-binlog/tidb-binlog-configuration-file.md#pump).
 
-- `drainer`: Drainer service-related configuration. For the complete configuration, see [TiDB Binlog configuration file](/tidb-binlog-configuration-file.md#drainer).
+- `drainer`: Drainer service-related configuration. For the complete configuration, see [TiDB Binlog configuration file](/tidb-binlog/tidb-binlog-configuration-file.md#drainer).
 
 - `cdc`: TiCDC service-related configuration. For the complete configuration, see [Deploy TiCDC](/ticdc/deploy-ticdc.md).
 
