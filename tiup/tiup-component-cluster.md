@@ -51,7 +51,7 @@ tiup cluster [command] [flags]
 - Data type: `BOOLEAN`
 - This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
 
-### -h, --help (boolean, default false)
+### -h, --help
 
 - Prints the help information of the related commands.
 - Data type: `BOOLEAN`
