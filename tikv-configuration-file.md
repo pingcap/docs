@@ -109,10 +109,6 @@ This document only describes the parameters that are not included in command-lin
 
 ## readpool.unified
 
-> **Warning:**
->
-> Unified read pool is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
-
 Configuration items related to the single thread pool serving read requests. This thread pool supersedes the original storage thread pool and coprocessor thread pool since the 4.0 version.
 
 ### `min-thread-count`
@@ -400,7 +396,7 @@ Configuration items related to Raftstore
 ### `hibernate-regions` (**Experimental**)
 
 + Enables or disables Hibernate Region. When this option is enabled, a Region idle for a long time is automatically set as hibernated. This reduces the extra overhead caused by heartbeat messages between the Raft leader and the followers for idle Regions. You can use `raftstore.peer-stale-state-check-interval` to modify the heartbeat interval between the leader and the followers of hibernated Regions.
-+ Default value: true
++ Default value: false
 
 ### `raftstore.peer-stale-state-check-interval`
 
