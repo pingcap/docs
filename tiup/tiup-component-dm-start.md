@@ -44,4 +44,4 @@ tiup dm start <cluster-name> [flags]
 
 ## Output
 
-The log of startup.
+The log of starting the service.

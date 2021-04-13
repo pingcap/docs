@@ -56,6 +56,6 @@ After you specify the `--skip-restart` option, it only refreshes the configurati
 - Data type: `BOOLEAN`
 - Default: false
 
-## 输出
+## Output
 
 The execution log of the tiup-dm.
