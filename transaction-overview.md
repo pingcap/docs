@@ -10,21 +10,13 @@ TiDB supports complete distributed transactions. Both [optimistic transaction mo
 
 The common variables include [`autocommit`](#autocommit), [`tidb_disable_txn_auto_retry`](/tidb-specific-system-variables.md#tidb_disable_txn_auto_retry), and [`tidb_retry_limit`](/tidb-specific-system-variables.md#tidb_retry_limit).
 
-## Common syntax
-
-<<<<<<< HEAD
-### `BEGIN`, `START TRANSACTION` and `START TRANSACTION WITH CONSISTENT SNAPSHOT`
-=======
 > **Note:**
 >
-> The [`tidb_disable_txn_auto_retry`](/system-variables.md#tidb_disable_txn_auto_retry) and [`tidb_retry_limit`](/system-variables.md#tidb_retry_limit) variables only apply to optimistic transactions, not to pessimistic transactions.
+> The [`tidb_disable_txn_auto_retry`](/tidb-specific-system-variables.md#tidb_disable_txn_auto_retry) and [`tidb_retry_limit`](/tidb-specific-system-variables.md#tidb_retry_limit) variables only apply to optimistic transactions, not to pessimistic transactions.
 
-## Common statements
+## Common syntax
 
-### Starting a transaction
-
-The statements [`BEGIN`](/sql-statements/sql-statement-begin.md) and [`START TRANSACTION`](/sql-statements/sql-statement-start-transaction.md) can be used interchangeably to explicitly start a new transaction.
->>>>>>> e80ff2e5... Add declaration for scopes of transaction related variables and configurations (#5056)
+### `BEGIN`, `START TRANSACTION` and `START TRANSACTION WITH CONSISTENT SNAPSHOT`
 
 Syntax:
 
