@@ -52,8 +52,8 @@ tiup cluster reload <cluster-name> [flags]
 ### -R, --role
 
 - Data type: `strings`
-- Default: `[]`, which means no role is selected.
-- Specifies the roles whose auto-enabling service is to be disabled. The value of this option is a comma-separated list of node roles. The role is the second column of the [cluster status](/tiup/tiup-component-cluster-display.md) table.
+- Default: `[]`, which means no role is selected.S
+- Specifies the roles to be restarted. If not specified, all roles are restarted. The value of this option is a comma-separated list of node roles. The role is the second column of the [cluster status](/tiup/tiup-component-cluster-display.md) table.
 
 > **Note:**
 >
