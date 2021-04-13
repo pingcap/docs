@@ -4,7 +4,7 @@ title: tiup cluster reload
 
 # tiup cluster reload
 
-After [modifying the cluster configuration](/tiup/tiup-component-cluster-edit-config.md), the cluster needs to be reloaded using the `tiup cluster reload` command for the configuration to take effect. This command publishes the configuration of the control machine to the remote machine where the service is running, and follow the upgrade process to restart the services in order according to the upgrade process, and the cluster is still available during the restart process.
+After [modifying the cluster configuration](/tiup/tiup-component-cluster-edit-config.md), the cluster needs to be reloaded using the `tiup cluster reload` command for the configuration to take effect. This command publishes the configuration of the control machine to the remote machine where the service is running, and follows the upgrade process to restart the services in order according to the upgrade process, and the cluster is still available during the restart process.
 
 ## Syntax
 
@@ -67,8 +67,9 @@ The `tiup cluster reload` command performs two operations:
 - Refreshes all node configurations
 - Restarts the specified node
 
-- After you specify this option, it only refreshes the configuration and does not restart any nodes, so that the refreshed configuration is not applied and does not take effect until the next restart of the corresponding service.
+- After you specify the `--skip-restart` option, it only refreshes the configuration and does not restart any nodes, so that the refreshed configuration is not applied and does not take effect until the next restart of the corresponding service.
 - Data type: `BOOLEAN`
+- Default: false
 
 ### -h, --help
 
