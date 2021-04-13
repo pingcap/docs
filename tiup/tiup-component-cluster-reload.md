@@ -42,7 +42,7 @@ tiup cluster reload <cluster-name> [flags]
 
 - Specifies the nodes to be restarted. If not specified, all nodes are restarted. The value of this option is a comma-separated list of node IDs. The node ID is the first column of the [cluster status](/tiup/tiup-component-cluster-display.md) table.
 - Data type: `strings`
-- Default: `[]`, which means no node is selected.
+- Default: `[]`, which means all nodes are selected.
 
 > **Note:**
 >
@@ -51,9 +51,9 @@ tiup cluster reload <cluster-name> [flags]
 
 ### -R, --role
 
-- Data type: `strings`
-- Default: `[]`, which means no role is selected.S
 - Specifies the roles to be restarted. If not specified, all roles are restarted. The value of this option is a comma-separated list of node roles. The role is the second column of the [cluster status](/tiup/tiup-component-cluster-display.md) table.
+- Data type: `strings`
+- Default: `[]`, which means all roles are selected.
 
 > **Note:**
 >
