@@ -4,7 +4,7 @@ title: tiup cluster disable
 
 # tiup cluster disable
 
-The `tiup cluster disable` command is used to disable the auto-enabling after rebooting the machine where the cluster service is located. This command executes the `systemctl disable <service>` on the specified node to disable the auto-enabling of the service.
+The `tiup cluster disable` command is used to disable the auto-enabling after restarting the machine where the cluster service is located. This command executes the `systemctl disable <service>` on the specified node to disable the auto-enabling of the service.
 
 ## Syntax
 
