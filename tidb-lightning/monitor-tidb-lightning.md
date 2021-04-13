@@ -47,8 +47,7 @@ scrape_configs:
 
 [Grafana](https://grafana.com/) is a web interface to visualize Prometheus metrics as dashboards.
 
-If TiDB Lightning is installed using TiDB Ansible, its dashboard is already installed.
-Otherwise, the dashboard JSON can be imported from <https://raw.githubusercontent.com/pingcap/tidb-ansible/master/scripts/lightning.json>.
+If TiDB Lightning is installed using TiDB Ansible, its dashboard is already installed. Otherwise, the dashboard JSON can be imported from <https://raw.githubusercontent.com/pingcap/tidb-ansible/master/scripts/lightning.json>.
 
 ### Row 1: Speed
 
