@@ -35,7 +35,7 @@ tiup cluster patch <cluster-name> <package-path> [flags]
 
 - After you patch a certain component (such as TiDB or TiKV), when the tiup cluster scales out the component, TiUP uses the original component version by default. To use the version that you patch when the cluster scales out in the future, you need to specified the option `--overwrite` in the command.
 - Data type: `BOOLEAN`
-- Default: false. If this option is not specified in the command, TiUP uses the original component version when scaling out the cluster component.
+- This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
 
 ### --transfer-timeout
 
@@ -71,13 +71,13 @@ tiup cluster patch <cluster-name> <package-path> [flags]
 
 - Declares that the current cluster is not running. When the option is specified, TiUP does not migrate service leader to another node or restart the service, but only replaces the binary files of cluster components
 - Data type: `BOOLEAN`
-- Default: false. If this option is not specified in the command, then the cluster is running.
+- This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
 
 ### -h, --help
 
 - Outputs help information.
 - Data type: `BOOLEAN`
-- Default: false. If this option is not specified in the command, TiUP does not output help information.
+- This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
 
 ## Outputs
 
