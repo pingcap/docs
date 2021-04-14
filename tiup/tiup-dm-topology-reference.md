@@ -10,7 +10,7 @@ Here is an [example topology file](https://github.com/pingcap/tiup/blob/master/e
 
 ## File structure
 
-The topology file of a DM cluster might contain the following blocks:
+The topology file of a DM cluster might contain the following sections:
 
 - [global](/tiup/tiup-dm-topology-reference.md#global): the global configuration of the cluster. Some of the configuration items use the default values on the cluster, and you can configure them separately in each instance.
 - [server_configs](/tiup/tiup-dm-topology-reference.md#server_configs): the global configuration of the components. You can configure each component separately. If an instance has a configuration item with the same name, the items configured in the instance will take effect.
