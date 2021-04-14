@@ -75,7 +75,7 @@ tiup cluster patch <cluster-name> <package-path> [flags]
 
 ### -h, --help
 
-- Outputs help information.
+- Prints help information.
 - Data type: `BOOLEAN`
 - This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
 
