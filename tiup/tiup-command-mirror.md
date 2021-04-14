@@ -4,7 +4,7 @@ title: tiup mirror
 
 # tiup mirror
 
-TiUP [mirror](/tiup/tiup-mirror-reference.md) is a very important concept, and it currently supports two forms of mirroring:
+TiUP [mirror](/tiup/tiup-mirror-reference.md) is a very important concept, and TiUP currently supports two forms of mirroring:
 
 - Local mirror: the TiUP client and mirror are on the same machine, and the client accesses the mirror through the file system
 - Remote mirror: the TiUP client and the mirror are not on the same machine, and the client accesses the mirror through the network
@@ -27,10 +27,10 @@ None
 
 - [genkey](/tiup/tiup-command-mirror-genkey.md): generates a private key file
 - [sign](/tiup/tiup-command-mirror-sign.md): signs a specific file with a private key file
-- [init](/tiup/tiup-command-mirror-init.md): creates an empty mirror
+- [init](/tiup/tiup-command-mirror-init.md): initiates an empty mirror
 - [set](/tiup/tiup-command-mirror-set.md): sets the current mirror
-- [grant](/tiup/tiup-command-mirror-grant.md): introduces a new component owner for the current mirror
-- [publish](/tiup/tiup-command-mirror-publish.md): pushes new components to the current mirror
+- [grant](/tiup/tiup-command-mirror-grant.md): grants a new component owner for the current mirror
+- [publish](/tiup/tiup-command-mirror-publish.md): publishes new components to the current mirror
 - [modify](/tiup/tiup-command-mirror-modify.md): modifies the properties of the components in the current mirror
 - [rotate](/tiup/tiup-command-mirror-rotate.md): updates the root certificate in the current mirror
 - [clone](/tiup/tiup-command-mirror-clone.md): clones a new mirror from an existing one

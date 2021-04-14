@@ -4,7 +4,7 @@ title: tiup mirror modify
 
 # tiup mirror modify
 
-The `tiup mirror modify` command is used to modify published components. Only authorized component owners can modify components, and only modify their own published components. For the component publishing method, refer to the [`publish` command](/tiup/tiup-command-mirror-publish.md).
+The `tiup mirror modify` command is used to modify published components. Only valid component owners can modify components, and only modify their own published components. For the component publishing method, refer to the [`publish` command](/tiup/tiup-command-mirror-publish.md).
 
 ## Syntax
 
@@ -27,10 +27,10 @@ Each parameter is explained as follows:
 
 ### --yank
 
-Mark the specified component or version as unavailable.
+Marks the specified component or version as unavailable.
 
-- After marking the component as unavailable, the component cannot be seen in the  `tiup list`, nor can the new version of the component be installed.
-- After marking the component as unavailable, the version cannot be seen in the `tiup list <component>`, nor can this version be installed.
+- After you mark the component as unavailable, the component cannot be seen in the  `tiup list`, nor can the new version of the component be installed.
+- After you mark the component as unavailable, the version cannot be seen in the `tiup list <component>`, nor can this version be installed.
 - Data type: `BOOLEAN`
 - Default: false
 

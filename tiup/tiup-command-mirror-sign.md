@@ -4,7 +4,7 @@ title: tiup mirror sign
 
 # tiup mirror sign
 
-The `tiup mirror sign` command is used to sign the meta-information files (*.json）defined in TiUP [mirror](/tiup/tiup-mirror-reference.md). These meta-information files might be stored on the local file system or remotely stored using the http protocol to provide a signature entry.
+The `tiup mirror sign` command is used to sign the metadata files (*.json）defined in TiUP [mirror](/tiup/tiup-mirror-reference.md). These metadata files might be stored on the local file system or remotely stored using the http protocol to provide a signature entry.
 
 ## Syntax
 
@@ -17,10 +17,10 @@ tiup mirror sign <manifest-file> [flags]
 - Network address: start with http or https, such as `http://172.16.5.5:8080/rotate/root.json`
 - Local file path: relative path or absolute path
 
-If it is a network address, the address must provide the following functions:
+If it is a network address, this address must provide the following functions:
 
-- Support access with `http get`, at this time the complete content of the signed file (including the signatures field) should be returned
-- Support access with `http post`, the client adds this signature to the signatures field of the content returned by `http get` and POST to this address
+- Supports access with `http get`, at this time the complete content of the signed file (including the signatures field) should be returned
+- Supports access with `http post`, the client adds this signature to the signatures field of the content that is returned by `http get` and POST to this address
 
 ## Options
 
@@ -32,7 +32,7 @@ If it is a network address, the address must provide the following functions:
 
 ### --timeout
 
-- Specifies the access timeout of the network when signing through the network. The unit is seconds.
+- Specifies the access timeout of the network when signing through the network. The unit is in seconds.
 - Data type: `int`
 - Default: 10
 
