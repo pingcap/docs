@@ -52,7 +52,7 @@ Marks a specified component or version as unavailable.
 
 > **Note:**
 >
-> This option can only be applied to the component, not to the version of the component.
+> This option can only be applied to the component, not to the component version.
 
 ## Outputs
 
