@@ -82,7 +82,7 @@ The `global` section corresponds to the cluster's global configuration and has t
 
     - `limit_core`: Controls the size of core dump.
 
-A `global` configuration example:
+A `global` configuration example is as follows:
 
 ```yaml
 global:
@@ -107,7 +107,7 @@ In the above configuration, the `tidb` user is used to start the cluster. At the
 
 - `log_dir`: Specifies the log directory. If it is not specified or specified as a relative directory, the log is generated according to the `log_dir` directory configured in `global`.
 
-A `monitored` configuration example:
+A `monitored` configuration example is as follows:
 
 ```yaml
 monitored:
@@ -137,7 +137,7 @@ The above configuration specifies that `node_exporter` uses the `9100` port and 
 
 - `cdc`: TiCDC service-related configuration. For the complete configuration, see [Deploy TiCDC](/ticdc/deploy-ticdc.md).
 
-A `server_configs` configuration example:
+A `server_configs` configuration example is as follows:
 
 ```yaml
 server_configs:
@@ -198,7 +198,7 @@ For the above fields, you cannot modify these configured fields after the deploy
 - `arch`
 - `os`
 
-A `pd_servers` configuration example:
+A `pd_servers` configuration example is as follows:
 
 ```yaml
 pd_servers:
@@ -250,7 +250,7 @@ For the above fields, you cannot modify these configured fields after the deploy
 - `arch`
 - `os`
 
-A `tidb_servers` configuration example:
+A `tidb_servers` configuration example is as follows:
 
 ```yaml
 tidb_servers:
@@ -303,7 +303,7 @@ For the above fields, you cannot modify these configured fields after the deploy
 - `arch`
 - `os`
 
-A `tikv_servers` configuration example:
+A `tikv_servers` configuration example is as follows:
 
 ```yaml
 tikv_servers:
@@ -370,7 +370,7 @@ After the deployment, for the fields above, you can only add directories to `dat
 - `arch`
 - `os`
 
-A `tiflash_servers` configuration example:
+A `tiflash_servers` configuration example is as follows:
 
 ```yaml
 tiflash_servers:
@@ -414,7 +414,7 @@ For the above fields, you cannot modify these configured fields after the deploy
 - `arch`
 - `os`
 
-A `pump_servers` configuration example:
+A `pump_servers` configuration example is as follows:
 
 ```yaml
 pump_servers:
@@ -463,7 +463,7 @@ For the above fields, you cannot modify these configured fields after the deploy
 - `arch`
 - `os`
 
-A `drainer_servers` configuration example:
+A `drainer_servers` configuration example is as follows:
 
 ```yaml
 drainer_servers:
@@ -520,7 +520,7 @@ For the above fields, you cannot modify these configured fields after the deploy
 - `arch`
 - `os`
 
-A `cdc_servers` configuration example:
+A `cdc_servers` configuration example is as follows:
 
 ```yaml
 cdc_servers:
@@ -533,7 +533,7 @@ cdc_servers:
 
 `tispark_masters` specifies the machines on which the master node of TiSpark is deployed. It also specifies the service configuration on each machine. `tispark_masters` is an array. Each array element contains the following fields:
 
-- `host`: Specifies the machine on which the TiSpark master is deploy. The field value is the IP address and cannot be omitted.
+- `host`: Specifies the machine on which the TiSpark master is deployed. The field value is the IP address and cannot be omitted.
 
 - `listen_host`: When the machine has multiple IP addresses, `listen_host` specifies the listening IP address of the service. The default value is `0.0.0.0`.
 
@@ -545,9 +545,9 @@ cdc_servers:
 
 - `deploy_dir`: Specifies the deployment directory. If it is not specified or specified as a relative directory, the directory is generated according to the `deploy_dir` directory configured in `global`.
 
-- `java_home`: Specifies the path in which the JRE environment to be used is located. This parameter corresponds to the `JAVA_HOME` system environment variable.
+- `java_home`: Specifies the path of the JRE environment to be used. This parameter corresponds to the `JAVA_HOME` system environment variable.
 
-- `spark_config`: Used to configure the TiSpark services. Then, a configuration file is generated and sent to the machine specified in `host`.
+- `spark_config`: Configures to configure the TiSpark services. Then, a configuration file is generated and sent to the machine specified in `host`.
 
 - `spark_env`: Configures the environment variables when Spark starts.
 
@@ -565,7 +565,7 @@ For the above fields, you cannot modify these configured fields after the deploy
 - `arch`
 - `os`
 
-A `tispark_masters` configuration example:
+A `tispark_masters` configuration example is as follows:
 
 ```yaml
 tispark_masters:
@@ -618,7 +618,7 @@ For the above fields, you cannot modify these configured fields after the deploy
 - `arch`
 - `os`
 
-A `tispark_workers` configuration example:
+A `tispark_workers` configuration example is as follows:
 
 ```yaml
 tispark_workers:
@@ -644,9 +644,9 @@ tispark_workers:
 
 - `numa_node`: Allocates the NUMA policy to the instance. If this parameter is specified, you need to ensure that the target machine has [numactl](https://linux.die.net/man/8/numactl) installed. If this parameter is specified, cpubind and membind policies are allocated via [numactl](https://linux.die.net/man/8/numactl). This parameter field is the string type. The field value is the ID of the NUMA node, such as "0,1".
 
-- `storage_retention`: The retention time of the Prometheus monitoring data. The default value is "15d".
+- `storage_retention`: The retention time of the Prometheus monitoring data. The default value is `"15d"`.
 
-- `rule_dir`: This field specifies a local directory that should contain complete `*.rules.yml` files. These files are transferred to the target machine during the initialization phase of the cluster configuration as the rules for Prometheus.
+- `rule_dir`: Specifies a local directory that should contain complete `*.rules.yml` files. These files are transferred to the target machine during the initialization phase of the cluster configuration as the rules for Prometheus.
 
 - `os`: The operating system of the machine specified in `host`. If this field is not specified, the default value is the `os` value in `global`.
 
@@ -664,7 +664,7 @@ For the above fields, you cannot modify these configured fields after the deploy
 - `arch`
 - `os`
 
-A `monitoring_servers` configuration example:
+A `monitoring_servers` configuration example is as follows:
 
 ```yaml
 monitoring_servers:
@@ -692,7 +692,7 @@ monitoring_servers:
 
 - `password`: The password corresponding to Grafana.
 
-- `dashboard_dir`: This field specifies a local directory that should contain complete `dashboard(*.json)` files. These files are transferred to the target machine during the initialization phase of the cluster configuration as the dashboards for Grafana.
+- `dashboard_dir`: Specifies a local directory that should contain complete `dashboard(*.json)` files. These files are transferred to the target machine during the initialization phase of the cluster configuration as the dashboards for Grafana.
 
 - `resource_control`: Resource control for the service. If this field is configured, the field content is merged with the `resource_control` content in `global` (if the two fields overlap, the content of this field takes effect). Then, a systemd configuration file is generated and sent to the machine specified in `host`. The configuration rules of `resource_control` are the same as the `resource_control` content in `global`.
 
@@ -700,8 +700,8 @@ monitoring_servers:
 >
 > If the `dashboard_dir` field of `grafana_servers` is configured, after executing the `tiup cluster rename` command to rename the cluster, you need to perform the following operations:
 >
-> + For the `*.json` files in the local dashboards directory, update the value of the `datasource` field to the new cluster name (because `datasource` is named after the cluster name).
-> + Execute the `tiup cluster reload -R grafana` command.
+> 1. For the `*.json` files in the local dashboards directory, update the value of the `datasource` field to the new cluster name (because `datasource` is named after the cluster name).
+> 2. Execute the `tiup cluster reload -R grafana` command.
 
 For the above fields, you cannot modify these configured fields after the deployment:
 
@@ -711,7 +711,7 @@ For the above fields, you cannot modify these configured fields after the deploy
 - `arch`
 - `os`
 
-A `grafana_servers` configuration example:
+A `grafana_servers` configuration example is as follows:
 
 ```yaml
 grafana_servers:
@@ -739,7 +739,7 @@ grafana_servers:
 
 - `numa_node`: Allocates the NUMA policy to the instance. If this parameter is specified, you need to ensure that the target machine has [numactl](https://linux.die.net/man/8/numactl) installed. If this parameter is specified, cpubind and membind policies are allocated via [numactl](https://linux.die.net/man/8/numactl). This parameter field is the string type. The field value is the ID of the NUMA node, such as "0,1".
 
-- `config_file`: This field specifies a local file that is transferred to the target machine during the initialization phase of the cluster configuration as the configuration of Alertmanager.
+- `config_file`: Specifies a local file that is transferred to the target machine during the initialization phase of the cluster configuration as the configuration of Alertmanager.
 
 - `os`: The operating system of the machine specified in `host`. If this field is not specified, the default value is the `os` value in `global`.
 
@@ -758,7 +758,7 @@ For the above fields, you cannot modify these configured fields after the deploy
 - `arch`
 - `os`
 
-A `alertmanager_servers` configuration example:
+A `alertmanager_servers` configuration example is as follows:
 
 ```yaml
 alertmanager_servers:
