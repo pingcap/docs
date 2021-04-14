@@ -87,11 +87,11 @@ server_configs:
 - `host`: specifies the machine to deploy to. The field value is an IP address and is mandatory.
 - `ssh_port`: specifies the SSH port to connect to the target machine for operations. If the field is not specified, the `ssh_port` in the `global` block is used.
 - `name`: specifies the name of the DM master instance. The name must be unique for different instances. Otherwise, the cluster cannot be deployed.
-- `port`: specifies the port on which DM master provides services. The default values is "8261".
+- `port`: specifies the port on which DM master provides services. The default value is "8261".
 - `peer_port`: specifies the port that DM masters use to communicate with each other. The default value is "8291".
 - `deploy_dir`: specifies the deployment directory. If the field is not specified, or specified as a relative directory, the deployment directory is generated according to the `deploy_dir` configuration in the `global` block.
 - `data_dir`: specifies the data directory. If the field is not specified, or specified as a relative directory, the data directory is generated according to the `data_dir` configuration in the `global` block.
-- `log_dir`: specifies the log directory. If the field not specified, or specified as a relative directory, the log directory is generated according to the `log_dir` configuration in the `global` block.
+- `log_dir`: specifies the log directory. If the field is not specified, or specified as a relative directory, the log directory is generated according to the `log_dir` configuration in the `global` block.
 - `numa_node`: assigns the NUMA policy to the instance. If the field is specified, make sure that [numactl](https://linux.die.net/man/8/numactl) is installed on the target machine, then [numactl](https://linux.die.net/man/8/numactl) will assign the cpubind and membind policies. The field value type is `STRING`. The field value is the NUMA node ID, for example, "0,1".
 - `config`: the configuration rules of this field are the same as that of `master` in the `server_configs` block. If `config` is specified, the configuration of `config` will be merged with the configuration of `master` in `server_configs` (if the two fields overlap, the configuration of this field takes effect), and then the configuration file is generated and distributed to the machine specified in the `host` field.
 - `os`: the operating system of the machine specified in the `host` field. If the field is not specified, the default value is the `os` value configured in the `global` block.
@@ -144,10 +144,10 @@ master_servers:
 - `host`: specifies the machine to deploy to. The field value is an IP address and is mandatory.
 - `ssh_port`: specifies the SSH port to connect to the target machine for operations. If the field is not specified, the `ssh_port` in the `global` block is used.
 - `name`: specifies the name of the DM worker instance. The name must be unique for different instances. Otherwise, the cluster cannot be deployed.
-- `port`: specifies the port on which DM worker provides services. The default values is "8262".
+- `port`: specifies the port on which DM worker provides services. The default value is "8262".
 - `deploy_dir`: specifies the deployment directory. If the field is not specified, or specified as a relative directory, the deployment directory is generated according to the `deploy_dir` configuration in the `global` block.
 - `data_dir`: specifies the data directory. If the field is not specified, or specified as a relative directory, the data directory is generated according to the `data_dir` configuration in the `global` block.
-- `log_dir`: specifies the log directory. If the field not specified, or specified as a relative directory, the log directory is generated according to the `log_dir` configuration in the `global` block.
+- `log_dir`: specifies the log directory. If the field is not specified, or specified as a relative directory, the log directory is generated according to the `log_dir` configuration in the `global` block.
 - `numa_node`: assigns the NUMA policy to the instance. If the field is specified, make sure that [numactl](https://linux.die.net/man/8/numactl) is installed on the target machine, then [numactl](https://linux.die.net/man/8/numactl) will assign the cpubind and membind policies. The field value type is `STRING`. The field value is the NUMA node ID, for example, "0,1".
 - `config`: the configuration rules of this field are the same as that of `worker` in the `server_configs` block. If `config` is specified, the configuration of `config` will be merged with the configuration of `worker` in `server_configs` (if the two fields overlap, the configuration of this field takes effect), and then the configuration file is generated and distributed to the machine specified in the `host` field.
 - `os`: the operating system of the machine specified in the `host` field. If the field is not specified, the default value is the `os` value configured in the `global` block.
@@ -187,10 +187,10 @@ worker_servers:
 
 - `host`: specifies the machine to deploy to. The field value is an IP address and is mandatory.
 - `ssh_port`: specifies the SSH port to connect to the target machine for operations. If the field is not specified, the `ssh_port` in the `global` block is used.
-- `port`: specifies the port on which Prometheus provides services. The default values is "9090".
+- `port`: specifies the port on which Prometheus provides services. The default value is "9090".
 - `deploy_dir`: specifies the deployment directory. If the field is not specified, or specified as a relative directory, the deployment directory is generated according to the `deploy_dir` configuration in the `global` block.
 - `data_dir`: specifies the data directory. If the field is not specified, or specified as a relative directory, the data directory is generated according to the `data_dir` configuration in the `global` block.
-- `log_dir`: specifies the log directory. If the field not specified, or specified as a relative directory, the log directory is generated according to the `log_dir` configuration in the `global` block.
+- `log_dir`: specifies the log directory. If the field is not specified, or specified as a relative directory, the log directory is generated according to the `log_dir` configuration in the `global` block.
 - `numa_node`: assigns the NUMA policy to the instance. If the field is specified, make sure that [numactl](https://linux.die.net/man/8/numactl) is installed on the target machine, then [numactl](https://linux.die.net/man/8/numactl) will assign the cpubind and membind policies. The field value type is `STRING`. The field value is the NUMA node ID, for example, "0,1".
 - `storage_retention`: specifies the retention time of the Prometheus monitoring data. The default value is "15d".
 - `rule_dir`: specifies a local directory where the complete `*.rules.yml` files are located. The files in the specified directory will be sent to the target machine as the Prometheus rules during the initialization phase of the cluster configuration.
@@ -222,7 +222,7 @@ monitoring_servers:
 
 - `host`: specifies the machine to deploy to. The field value is an IP address and is mandatory.
 - `ssh_port`: specifies the SSH port to connect to the target machine for operations. If the field is not specified, the `ssh_port` in the `global` block is used.
-- `port`: specifies the port on which Grafana provides services. The default values is "3000".
+- `port`: specifies the port on which Grafana provides services. The default value is "3000".
 - `deploy_dir`: specifies the deployment directory. If the field is not specified, or specified as a relative directory, the deployment directory is generated according to the `deploy_dir` configuration in the `global` block.
 - `os`: the operating system of the machine specified in the `host` field. If the field is not specified, the default value is the `os` value configured in the `global` block.
 - `arch`: the architecture of the machine specified by the `host` field. If the field is not specified, the default value is the `arch` value configured in the `global` block.
@@ -264,7 +264,7 @@ grafana_servers:
 - `cluster_port`: Specify the port on which Alertmanger communicates with Alertmanagers. The default value is "9094".
 - `deploy_dir`: specifies the deployment directory. If the field is not specified, or specified as a relative directory, the deployment directory is generated according to the `deploy_dir` configuration in the `global` block.
 - `data_dir`: specifies the data directory. If the field is not specified, or specified as a relative directory, the data directory is generated according to the `data_dir` configuration in the `global` block.
-- `log_dir`: specifies the log directory. If the field not specified, or specified as a relative directory, the log directory is generated according to the `log_dir` configuration in the `global` block.
+- `log_dir`: specifies the log directory. If the field is not specified, or specified as a relative directory, the log directory is generated according to the `log_dir` configuration in the `global` block.
 - `numa_node`: assigns the NUMA policy to the instance. If the field is specified, make sure that [numactl](https://linux.die.net/man/8/numactl) is installed on the target machine, then [numactl](https://linux.die.net/man/8/numactl) will assign the cpubind and membind policies. The field value type is `STRING`. The field value is the NUMA node ID, for example, "0,1".
 - `config_file`: specifies a local file. The specified file will be sent to the target machine as the configuration for Alertmanager during the initialization phase of the cluster configuration.
 - `os`: the operating system of the machine specified in the `host` field. If the field is not specified, the default value is the `os` value configured in the `global` block.
