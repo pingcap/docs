@@ -20,7 +20,7 @@ tiup cluster patch <cluster-name> <package-path> [flags]
 
 - `<cluster-name>`: The name of the cluster to be operated.
 - `<package-path>`: The path to the binary package used for replacement. The steps to generate the package are as follows:
-    - Determine the name `${component}` of the component to be replaced (tidb, tikv, pd...), the `${version}` of the component (v4.0.0, v4.0.1 ...), and the operating system `${os}` and platform `${arch}` on which the component runs.
+    - Determine the name `${component}` of the component to be replaced (tidb, tikv, pd...), the `${version}` of the component (v4.0.0, v4.0.1 ...), and the operating system `${os}` (`linux`) and platform `${arch}` on which the component runs.
     - Download the current component package using the command `wget https://tiup-mirrors.pingcap.com/${component}-${version}-${os}-${arch}.tar.gz -O /tmp/${component}-${version}-${os}-${arch}.tar.gz`.
     - Run `mkdir -p /tmp/package && cd /tmp/package` to create a temporary directory to pack files.
     - Run `tar xf /tmp/${component}-${version}-${os}-${arch}.tar.gz` to unpack the original binary package.
@@ -49,7 +49,7 @@ tiup cluster patch <cluster-name> <package-path> [flags]
 
 ### -N, --node
 
-- Specifies nodes to be replaced. The value of this option is a comma-separated list of node IDs. You can get the node ID from the first column of the [cluster status table](/tiup/tiup-component-cluster-display.md).
+- Specifies nodes to be replaced. The value of this option is a comma-separated list of node IDs. You can get the node ID from the first column of the [cluster status table](/tiup/tiup-component-cluster-display.md) returned by the `tiup cluster display` command.
 - Data type: `STRINGS`
 - If this option is not specified, TiUP does not select any nodes to replace by default.
 
@@ -59,7 +59,7 @@ tiup cluster patch <cluster-name> <package-path> [flags]
 
 ### -R, --role
 
-- Specified roles to be replaced. The value of this option is a comma-separated list of the roles of the nodes. You can get the roles of the nodes from the second column of the [cluster status table](/tiup/tiup-component-cluster-display.md).
+- Specifies the roles to be replaced. The value of this option is a comma-separated list of the roles of the nodes. You can get the role deployed on a node from the second column of the [cluster status table](/tiup/tiup-component-cluster-display.md) returned by the `tiup cluster display` command.
 - Data type: `STRINGS`
 - If this option is not specified, TiUP does not select any roles to replace by default.
 
@@ -69,7 +69,7 @@ tiup cluster patch <cluster-name> <package-path> [flags]
 
 ## --offline
 
-- Declares that the current cluster is not running. When the option is specified, TiUP does not migrate service leader to another node or restart the service, but only replaces the binary files of cluster components
+- Declares that the current cluster is not running. When the option is specified, TiUP does not migrate the service leader to another node or restart the service, but only replaces the binary files of cluster components.
 - Data type: `BOOLEAN`
 - This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
 
