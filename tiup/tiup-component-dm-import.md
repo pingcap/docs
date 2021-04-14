@@ -53,7 +53,7 @@ tiup dm import [flags]
 
 - Prints help information.
 - Data type: `BOOLEAN`
-- Default: false
+- This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
 
 ## Outputs
 

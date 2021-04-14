@@ -11,7 +11,6 @@ The cluster name is specified when [the cluster is deployed](/tiup/tiup-componen
 > If the tiup cluster is configured with the `dashboard_dir` field of `grafana_servers`, when you execute the command `tiup cluster rename` to rename the cluster, the following additional steps are required:
 >
 > + For the `*.json` files in the local dashboards directory, update the `datasource` field of each file to the new cluster name, because the value of `datasource` must be the name of the cluster.
-> + 执行 `tiup cluster reload -R grafana` 命令
 > + Execute the command `tiup cluster reload -R grafana`.
 
 ## Syntax
@@ -29,8 +28,8 @@ tiup cluster rename <old-cluster-name> <new-cluster-name> [flags]
 
 - Prints help information.
 - Data type: `BOOLEAN`
-- Default: false
+- This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
 
 ## Outputs
 
-The execution log of the tiup-cluster
+The execution log of the tiup-cluster.
