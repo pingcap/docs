@@ -10,7 +10,7 @@ Similarly, to modify the cluster topology, you need to modify the topology file.
 
 ## File structure
 
-A topology configuration file for TiDB deployment using TiUP might contains the following sections:
+A topology configuration file for TiDB deployment using TiUP might contain the following sections:
 
 - [global](#global): The cluster's global configuration. Some of the configuration items use the default values and you can configure them separately in each instance.
 - [monitored](#monitored): Configuration for monitoring services, namely, the blackbox_exporter and the `node_exporter`. On each machine, a `node_exporter` and a `blackbox_exporter` are deployed.
