@@ -4,7 +4,7 @@ title: tiup mirror modify
 
 # tiup mirror modify
 
-The `tiup mirror modify` command is used to modify published components. Only valid component owners can modify components, and only modify their own published components. For the component publishing method, refer to the [`publish` command](/tiup/tiup-command-mirror-publish.md).
+The `tiup mirror modify` command is used to modify published components. Only valid component owners can modify the components that they have published on their own. For the method to publish a component, refer to the [`publish` command](/tiup/tiup-command-mirror-publish.md).
 
 ## Syntax
 
@@ -15,30 +15,30 @@ tiup mirror modify <component>[:version] [flags]
 Each parameter is explained as follows:
 
 - `<component>`: the component name
-- `[version]`: the version you want to modify. If not specified, the entire component is modified.
+- `[version]`: the component version to modify. If it is not specified, the entire component is modified.
 
 ## Options
 
 ### -k, --key
 
-- Specifies the location of the private key used for signing the `{component}.json` files.
+- Specifies the component owner's private key used for signing the component information (`{component}.json`).
 - Data type: `STRING`
-- Default: "${TIUP_HOME}/keys/private.json"
+- If this option is not specified in the command, `"${TIUP_HOME}/keys/private.json"` is used by default to sign the component information.
 
 ### --yank
 
-Marks the specified component or version as unavailable.
+Marks a specified component or version as unavailable.
 
-- After you mark the component as unavailable, the component cannot be seen in the  `tiup list`, nor can the new version of the component be installed.
-- After you mark the component as unavailable, the version cannot be seen in the `tiup list <component>`, nor can this version be installed.
+- After the component is marked as unavailable, you can neither see it in the result list of `tiup list` nor install the new version of the component.
+- After a component version is marked as unavailable, you can neither see it in the result list of `tiup list <component>` nor install this version.
 - Data type: `BOOLEAN`
 - Default: false
 
 ### --hide
 
-- Specifies whether the component is hidden. If it is a hidden component, it can be seen in the result list of `tiup list -all`, but not in that of `tiup list`.
-- Data type: `STRING`
-- Default: NULL
+- Specifies whether to hide the component. If a component is hidden, you cannot see it in the result list of `tiup list`. To see the hidden component, you can use `tiup list --all`.
+- Data type: `BOOLEAN`
+- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command and pass in the `true` value or no value.
 
 > **Note:**
 >
@@ -48,7 +48,7 @@ Marks the specified component or version as unavailable.
 
 - Controls whether the component can run standalone. This option is currently **NOT available**.
 - Data type: `BOOLEAN`
-- Default: false
+- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command and pass in the `true` value or no value.
 
 > **Note:**
 >

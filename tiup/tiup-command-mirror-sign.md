@@ -4,7 +4,7 @@ title: tiup mirror sign
 
 # tiup mirror sign
 
-The `tiup mirror sign` command is used to sign the metadata files (*.json）defined in TiUP [mirror](/tiup/tiup-mirror-reference.md). These metadata files might be stored on the local file system or remotely stored using the http protocol to provide a signature entry.
+The `tiup mirror sign` command is used to sign the metadata files (*.json）defined in TiUP [mirror](/tiup/tiup-mirror-reference.md). These metadata files might be stored on the local file system or remotely stored using the HTTP protocol to provide a signature entry.
 
 ## Syntax
 
@@ -12,28 +12,28 @@ The `tiup mirror sign` command is used to sign the metadata files (*.json）defi
 tiup mirror sign <manifest-file> [flags]
 ```
 
-`<manifest-file>` is the address of the signed file, which has two forms:
+`<manifest-file>` is the address of the file to be signed, which has two forms:
 
-- Network address: start with http or https, such as `http://172.16.5.5:8080/rotate/root.json`
-- Local file path: relative path or absolute path
+- Network address, which starts with HTTP or HTTPS, such as `http://172.16.5.5:8080/rotate/root.json`
+- Local file path, which is a relative path or an absolute path
 
 If it is a network address, this address must provide the following functions:
 
-- Supports access with `http get`, at this time the complete content of the signed file (including the signatures field) should be returned
-- Supports access with `http post`, the client adds this signature to the signatures field of the content that is returned by `http get` and POST to this address
+- Supports the access via `http get` that returns the complete content of the signed file (including the `signatures` field).
+- Supports the access via `http post`. The client adds the signature to the `signatures` field of the content that is returned by `http get` and posts to this network address.
 
 ## Options
 
 ### -k, --key
 
-- Specifies the location of the private key used for signing the `{component}.json` files.
+- Specifies the location of the private key used for signing the `{component}.json` file.
 - Data type: `STRING`
-- Default: "${TIUP_HOME}/keys/private.json"
+- - If this option is not specified in the command, `"${TIUP_HOME}/keys/private.json"` is used by default.
 
 ### --timeout
 
 - Specifies the access timeout of the network when signing through the network. The unit is in seconds.
-- Data type: `int`
+- Data type: `INT`
 - Default: 10
 
 > **Note:**
