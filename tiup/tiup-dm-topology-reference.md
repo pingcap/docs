@@ -67,7 +67,7 @@ In the example, the configuration specifies that the `tidb` user is used to star
 - `master`: configuration related to the DM master service. For all the supported configuration items, see [DM-master Configuration File](https://docs.pingcap.com/zh/tidb-data-migration/stable/dm-master-configuration-file).
 - `worker`: configuration related to the DM worker service, For all the supported configuration items, see [DM-worker Configuration File](https://docs.pingcap.com/zh/tidb-data-migration/stable/dm-worker-configuration-file).
 
-`server_configs` configuration example:
+A `server_configs` configuration example:
 
 ```yaml
 server_configs:
@@ -112,7 +112,7 @@ In the `master_servers` block, the following fields cannot be modified after the
 - `os`
 - `v1_source_path`
 
-`master_servers` configuration example:
+A `master_servers` configuration example:
 
 ```yaml
 master_servers:
@@ -165,7 +165,7 @@ In the `worker_servers` block, the following fields cannot be modified after the
 - `arch`
 - `os`
 
-`worker_servers` configuration example:
+A `worker_servers` configuration example:
 
 ```yaml
 worker_servers:
@@ -208,7 +208,7 @@ In the `monitoring_servers` block, the following fields cannot be modified after
 - `arch`
 - `os`
 
-`monitoring_servers` configuration example:
+A `monitoring_servers` configuration example:
 
 ```yaml
 monitoring_servers:
@@ -246,7 +246,7 @@ In `grafana_servers`, the following fields cannot be modified after the deployme
 - `arch`
 - `os`
 
-`grafana_servers` configuration example：
+A `grafana_servers` configuration example：
 
 ```yaml
 grafana_servers:
@@ -282,7 +282,7 @@ In `alertmanager_servers`, the following fields cannot be modified after the dep
 - `arch`
 - `os`
 
-`alertmanager_servers` configuration example：
+An `alertmanager_servers` configuration example：
 
 ```yaml
 alertmanager_servers:
