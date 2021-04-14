@@ -6,11 +6,11 @@ title: tiup cluster patch
 
 If you need to dynamically replace the binaries of a service while the cluster is running (namely, keep the cluster available during the replacement process), you can use the `tiup cluster patch` command. After the command is executed, TiUP does the following things:
 
-- Upload the binary package for replacement to the target machine.
+- Uploads the binary package for replacement to the target machine.
 - If the target service is a storage service such as TiKV, TiFlash, or TiDB Binlog, TiUP first takes the related nodes offline via the API.
-- Stop the target service.
-- Unpack the binary package and replace the service.
-- Start the target service.
+- Stops the target service.
+- Unpacks the binary package and replace the service.
+- Starts the target service.
 
 ## Syntax
 
@@ -81,4 +81,4 @@ tiup cluster patch <cluster-name> <package-path> [flags]
 
 ## Outputs
 
-The execution log of the tiup cluster.
+The execution log of the tiup-cluster.
