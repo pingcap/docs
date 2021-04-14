@@ -2,7 +2,7 @@
 title: Topology Configuration File for DM Cluster Deployment Using TiUP
 ---
 
-# Topology Configuration File for DM Cluster Deployment using TiUP
+# Topology Configuration File for DM Cluster Deployment Using TiUP
 
 To deploy or scale a TiDB Data Migration (DM) cluster, you need to provide a topology file to describe the cluster topology. Similarly, to modify the cluster topology, you need to modify the topology file. The difference is that you can only modify a part of the fields in the topology file.
 
