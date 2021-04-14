@@ -8,7 +8,7 @@ To deploy or scale a TiDB Data Migration (DM) cluster, you need to provide a top
 
 Here is an [example topology file](https://github.com/pingcap/tiup/blob/master/embed/templates/examples/dm/topology.example.yaml) for your reference.
 
-## File Structure
+## File structure
 
 The topology file of a DM cluster might contain the following blocks:
 
