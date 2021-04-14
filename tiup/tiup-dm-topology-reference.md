@@ -10,19 +10,19 @@ Here is an [example topology file](https://github.com/pingcap/tiup/blob/master/e
 
 ## File structure
 
-The topology file of a DM cluster might contain the following sections:
+A topology configuration file for DM cluster deployment using TiUP might contain the following sections:
 
-- [global](/tiup/tiup-dm-topology-reference.md#global): the global configuration of the cluster. Some of the configuration items use the default values on the cluster, and you can configure them separately in each instance.
-- [server_configs](/tiup/tiup-dm-topology-reference.md#server_configs): the global configuration of the components. You can configure each component separately. If an instance has a configuration item with the same name, the items configured in the instance will take effect.
-- [master_servers](/tiup/tiup-dm-topology-reference.md#master_servers): the configuration of DM master instance. The block is used to specify the machines to which the master service of the DM component is deployed.
-- [worker_servers](/tiup/tiup-dm-topology-reference.md#worker_servers): the configuration of DM worker instance. The block is used to specify the machines to which the worker service of the DM component is deployed.
-- [monitoring_servers](/tiup/tiup-cluster-topology-reference.md#monitoring_servers): specifies the machines to which the Prometheus instances are deployed. TiUP supports the deployment of multiple Prometheus instances, but only the first instance is actually in use.
-- [grafana_servers](/tiup/tiup-cluster-topology-reference.md#grafana_servers): the configuration of Grafana instances. The block is used to specify the machines to which the Grafana instances are deployed.
-- [alertmanager_servers](/tiup/tiup-cluster-topology-reference.md#alertmanager_servers): the configuration of the Alertemanager instances. The block is used to specify the machines to which the Alertmanager instances are deployed.
+- [global](#global): the cluster's global configuration. Some of the configuration items use the default values on the cluster, and you can configure them separately in each instance.
+- [server_configs](#server_configs): the global configuration of the components. You can configure each component separately. If an instance has a configuration item with the same name, the items configured in the instance will take effect.
+- [master_servers](#master_servers): the configuration of DM master instance. The block is used to specify the machines to which the master service of the DM component is deployed.
+- [worker_servers](#worker_servers): the configuration of DM worker instance. The block is used to specify the machines to which the worker service of the DM component is deployed.
+- [monitoring_servers](#monitoring_servers): specifies the machines to which the Prometheus instances are deployed. TiUP supports the deployment of multiple Prometheus instances, but only the first instance is actually in use.
+- [grafana_servers](#grafana_servers): the configuration of Grafana instances. The block is used to specify the machines to which the Grafana instances are deployed.
+- [alertmanager_servers](#alertmanager_servers): the configuration of the Alertemanager instances. The block is used to specify the machines to which the Alertmanager instances are deployed.
 
 ### `global`
 
-The `global` block corresponds to the global configuration of the cluster and contains the following fields:
+The `global` section corresponds to the global configuration of the cluster and contains the following fields:
 
 - `user`: the user to start the deployed cluster. The default value is "tidb". If the user specified in the `<user>` field does not exist on the target machine, TiUP will automatically try to create the user.
 - `group`: the user group to which a user belongs when the user is automatically created. The default value is the same as the `<user>` field. If the specified group does not exist, it will be created automatically.
