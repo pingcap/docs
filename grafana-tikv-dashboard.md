@@ -233,7 +233,7 @@ This document provides a detailed description of these key metrics on the **TiKV
 - TiKV Auto GC SafePoint: The value of TiKV GC safe point. The safe point is the current GC timestamp
 - GC lifetime: The lifetime of TiDB GC
 - GC interval: The interval of TiDB GC
-- GC in Compaction Filter: count of filterd versions in write CF compaction filter.
+- GC in Compaction Filter: The count of filtered versions in the compaction filter of write CF.
 
 ## Snapshot
 
