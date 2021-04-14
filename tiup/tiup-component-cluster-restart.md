@@ -1,0 +1,53 @@
+---
+title: tiup cluster restart
+---
+
+# tiup cluster restart
+
+The command `tiup cluster restart` is used to restart all or some of the services of the specified cluster.
+
+> **Note:**
+>
+> During the restart process, the related services are unavailable for a period of time.
+
+## Syntax
+
+```shell
+tiup cluster restart <cluster-name> [flags]
+```
+
+`<cluster-name>`: the name of the cluster to operate on. If you forget the cluster name, you can check it with the [cluster list](/tiup/tiup-component-cluster-list.md) command.
+
+`<cluster-name>`
+
+## Options
+
+### -N, --node
+
+- Specifies the nodes to be restarted. The value of this option is a comma-separated list of node IDs. You can get the node ID from the first column of the [cluster status table](/tiup/tiup-component-cluster-display.md).
+- Data type: `STRINGS`
+- If this option is not specified, TiUP restarts all nodes by default.
+
+> **Note:**
+>
+> If the option `-R, --role` is specified at the same time, TiUP restarts service nodes that match both the requirements of `-N, --node` and `-R, --role`.
+
+### -R, --role
+
+- Specified roles of nodes to be restarted. The value of this option is a comma-separated list of the roles of the nodes. You can get the roles of the nodes from the second column of the [cluster status table](/tiup/tiup-component-cluster-display.md).
+- Data type: `STRINGS`
+- If this option is not specified, TiUP restarts nodes of all roles by default.
+
+> **Note:**
+>
+> If the option `-N, --node` is specified at the same time, TiUP restarts service nodes that match both the requirements of `-N, --node` and `-R, --role`.
+
+### -h, --help
+
+- Prints help information.
+- Data type: `BOOLEAN`
+- Default: false
+
+## Outputs
+
+The log of the service restart process.
