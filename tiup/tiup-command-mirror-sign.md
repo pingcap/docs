@@ -17,7 +17,7 @@ tiup mirror sign <manifest-file> [flags]
 - Network address, which starts with HTTP or HTTPS, such as `http://172.16.5.5:8080/rotate/root.json`
 - Local file path, which is a relative path or an absolute path
 
-If it is a network address, this address must provide the following functions:
+If it is a network address, this address must provide the following features:
 
 - Supports the access via `http get` that returns the complete content of the signed file (including the `signatures` field).
 - Supports the access via `http post`. The client adds the signature to the `signatures` field of the content that is returned by `http get` and posts to this network address.
@@ -32,7 +32,7 @@ If it is a network address, this address must provide the following functions:
 
 ### --timeout
 
-- Specifies the access timeout of the network when signing through the network. The unit is in seconds.
+- Specifies the access timeout time for signing through the network. The unit is in seconds.
 - Data type: `INT`
 - Default: 10
 

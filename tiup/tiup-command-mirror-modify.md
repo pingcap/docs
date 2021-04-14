@@ -32,7 +32,7 @@ Marks a specified component or version as unavailable.
 - After the component is marked as unavailable, you can neither see it in the result list of `tiup list` nor install the new version of the component.
 - After a component version is marked as unavailable, you can neither see it in the result list of `tiup list <component>` nor install this version.
 - Data type: `BOOLEAN`
-- Default: false
+- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command and pass in the `true` value or no value.
 
 ### --hide
 
@@ -42,7 +42,7 @@ Marks a specified component or version as unavailable.
 
 > **Note:**
 >
-> This option can only be applied to the component, not to the version of the component.
+> This option can only be applied to the component, not to the component version.
 
 ### --standalone
 
