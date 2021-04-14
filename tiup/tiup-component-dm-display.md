@@ -18,23 +18,23 @@ tiup dm display <cluster-name> [flags]
 
 ### -N, --node
 
-Specifies the IDs of the nodes to query, splitting by commas for multiple nodes. The node IDs are in the first column of the [tiup cluster display](/tiup/tiup-component-cluster-display.md) table.
+Specifies the IDs of the nodes to query, splitting by commas for multiple nodes. If you are not sure about the ID of a node, you can skip this option in the command to show the IDs and status of all nodes in the output.
 Data type: `STRING`
-Default: []. If this option is not specified in the command, the command queries all the nodes.
+This option is enabled by default with `[]` (which means all nodes) passed in.
 
 > **Note:**
 > 
-> If `-R, --role` is also specified, only the services in the intersection of the specified nodes and roles will be queried.
+> If `-R, --role` is also specified, only the services in the intersection of the specified nodes and roles is queried.
 
 ### -R, --role strings
 
-Specifies the roles to be queried, splitting by commas for multiple roles. The roles are in the second column of the [tiup cluster display](/tiup/tiup-component-cluster-display.md) table.
+Specifies the roles to query, splitting by commas for multiple roles. If you are not sure about the role deployed on a node, you can skip this option in the command to show the roles and status of all nodes in the output.
 Data type: `STRING`
-Default: []. If this option is not specified in the command, the command queries all the roles.
+This option is enabled by default with `[]` (which means all roles) passed in.
 
 > **Note:**
 > 
-> If `-N, --node` is also specified, only the services in the intersection of the specified nodes and roles will be queried.
+> If `-N, --node` is also specified, only the services in the intersection of the specified nodes and roles is queried.
 
 ### -h, --help
 
@@ -48,9 +48,9 @@ Default: []. If this option is not specified in the command, the command queries
 - Cluster version
 - SSH client type
 - A table containing the following fields:
-    - `ID`: Node ID, consisting of IP:PORT.
+    - `ID`: the Node ID, consisting of IP:PORT.
     - `Role`: the service role deployed on the node (for example, TiDB or TiKV).
-    - `Host`: IP address of the machine corresponding to the node.
+    - `Host`: the IP address of the machine corresponding to the node.
     - `Ports`: the port number used by the service.
     - `OS/Arch`: the operating system and machine architecture of the node.
     - `Status`: the current status of the services on the node.
