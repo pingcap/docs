@@ -1,5 +1,5 @@
 ---
-title: Topology Configuration File for DM Cluster Deployment using TiUP
+title: Topology Configuration File for DM Cluster Deployment Using TiUP
 ---
 
 # Topology Configuration File for DM Cluster Deployment using TiUP
