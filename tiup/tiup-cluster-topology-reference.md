@@ -6,27 +6,27 @@ title: Topology Configuration File for TiDB Deployment Using TiUP
 
 To deploy or scale TiDB using TiUP, you need to provide a topology file ([sample](https://github.com/pingcap/tiup/blob/master/embed/templates/examples/topology.example.yaml)) to describe the cluster topology.
 
-Similarly, to modify the cluster topology, you need to modify the topology file. The difference is that you can only modify a part of the fields in the topology file. This document introduces each section of the topology file and each field in each section.
+Similarly, to modify the cluster topology, you need to modify the topology file. The difference is that you can modify only a part of the fields in the topology file. This document introduces each section of the topology file and each field in each section.
 
 ## File structure
 
 A topology configuration file for TiDB deployment using TiUP might contains the following sections:
 
-- [global](/tiup/tiup-cluster-topology-reference.md#global): The cluster's global configuration. Some of the configuration items use the default values and you can configure them separately in each instance.
-- [monitored](/tiup/tiup-cluster-topology-reference.md#monitored): Configuration for monitoring services, namely, the blackbox_exporter and the node_exporter. On each machine, a node_exporter and a blackbox_exporter are deployed.
-- [server_configs](/tiup/tiup-cluster-topology-reference.md#server_configs): Components' global configuration. You can configure each component separately. If an instance has a configuration item with the same name, the instance's configuration item will take effect.
-- [pd_servers](/tiup/tiup-cluster-topology-reference.md#pd_servers): The configuration of the PD instance. This configuration specifies the machines on which the PD component is deployed.
-- [tidb_servers](/tiup/tiup-cluster-topology-reference.md#tidb_servers): The configuration of the TiDB instance. This configuration specifies the machines on which the TiDB component is deployed.
-- [tikv_servers](/tiup/tiup-cluster-topology-reference.md#tikv_servers): The configuration of the TiKV instance. This configuration specifies the machines on which the TiKV component is deployed.
-- [tiflash_servers](/tiup/tiup-cluster-topology-reference.md#tiflash_servers): The configuration of the TiFlash instance. This configuration specifies the machines on which the TiFlash component is deployed.
-- [pump_servers](/tiup/tiup-cluster-topology-reference.md#pump_servers): The configuration of the Pump instance. This configuration specifies the machines on which the Pump component is deployed.
-- [drainer_servers](/tiup/tiup-cluster-topology-reference.md#drainer_servers): The configuration of the Drainer instance. This configuration specifies the machines on which the Drainer component is deployed.
-- [cdc_servers](/tiup/tiup-cluster-topology-reference.md#cdc_servers): The configuration of the TiCDC instance. This configuration specifies the machines on which the TiCDC component is deployed.
-- [tispark_masters](/tiup/tiup-cluster-topology-reference.md#tispark_masters): The configuration of the TiSpark master instance. This configuration specifies the machines on which the TiSpark master component is deployed. Only one node of TiSpark master can be deployed.
-- [tispark_workers](/tiup/tiup-cluster-topology-reference.md#tispark_workers): The configuration of the TiSpark worker instance. This configuration specifies the machines on which the TiSpark worker component is deployed.
-- [monitoring_servers](/tiup/tiup-cluster-topology-reference.md#monitoring_servers): Specifies the machines on which Prometheus is deployed. TiUP supports deploying multiple Prometheus instances but only the first instance is used.
-- [grafana_servers](/tiup/tiup-cluster-topology-reference.md#grafana_servers): The configuration of the Grafana instance. This configuration specifies the machines on which Grafana is deployed.
-- [alertmanager_servers](/tiup/tiup-cluster-topology-reference.md#alertmanager_servers): The configuration of the Alertmanager instance. This configuration specifies the machines on which Alertmanager is deployed.
+- [global](#global): The cluster's global configuration. Some of the configuration items use the default values and you can configure them separately in each instance.
+- [monitored](#monitored): Configuration for monitoring services, namely, the blackbox_exporter and the `node_exporter`. On each machine, a `node_exporter` and a `blackbox_exporter` are deployed.
+- [server_configs](#server_configs): Components' global configuration. You can configure each component separately. If an instance has a configuration item with the same name, the instance's configuration item will take effect.
+- [pd_servers](#pd_servers): The configuration of the PD instance. This configuration specifies the machines on which the PD component is deployed.
+- [tidb_servers](#tidb_servers): The configuration of the TiDB instance. This configuration specifies the machines on which the TiDB component is deployed.
+- [tikv_servers](#tikv_servers): The configuration of the TiKV instance. This configuration specifies the machines on which the TiKV component is deployed.
+- [tiflash_servers](#tiflash_servers): The configuration of the TiFlash instance. This configuration specifies the machines on which the TiFlash component is deployed.
+- [pump_servers](#pump_servers): The configuration of the Pump instance. This configuration specifies the machines on which the Pump component is deployed.
+- [drainer_servers](#drainer_servers): The configuration of the Drainer instance. This configuration specifies the machines on which the Drainer component is deployed.
+- [cdc_servers](#cdc_servers): The configuration of the TiCDC instance. This configuration specifies the machines on which the TiCDC component is deployed.
+- [tispark_masters](#tispark_masters): The configuration of the TiSpark master instance. This configuration specifies the machines on which the TiSpark master component is deployed. Only one node of TiSpark master can be deployed.
+- [tispark_workers](#tispark_workers): The configuration of the TiSpark worker instance. This configuration specifies the machines on which the TiSpark worker component is deployed.
+- [monitoring_servers](#monitoring_servers): Specifies the machines on which Prometheus is deployed. TiUP supports deploying multiple Prometheus instances but only the first instance is used.
+- [grafana_servers](#grafana_servers): The configuration of the Grafana instance. This configuration specifies the machines on which Grafana is deployed.
+- [alertmanager_servers](#alertmanager_servers): The configuration of the Alertmanager instance. This configuration specifies the machines on which Alertmanager is deployed.
 
 ### `global`
 
@@ -50,7 +50,7 @@ The `global` section corresponds to the cluster's global configuration and has t
 
     - If `global.deploy_dir` is a relative path, the component is deployed to the `/home/<global.user>/<global.deploy_dir>/<instance.deploy_dir>` directory.
 
-- `data_dir`: The data directory. Default value: "data". Its application rules are as follows:
+- `data_dir`: The data directory. Default value: `"data"`. Its application rules are as follows:
 
     - If the absolute path of `data_dir` is configured at the instance level, the actual deployment directory is `data_dir` configured for the instance.
 
@@ -58,7 +58,7 @@ The `global` section corresponds to the cluster's global configuration and has t
 
     - If `data_dir` is a relative path, the component data is placed in `<deploy_dir>/<data_dir>`. For the calculation rules of `<deploy_dir>`, see the application rules of the `deploy_dir` field.
 
-- `log_dir`: The data directory. Default value: "log". Its application rules are as follows:
+- `log_dir`: The data directory. Default value: `"log"`. Its application rules are as follows:
 
     - If the absolute path `log_dir` is configured at the instance level, the actual log directory is the `log_dir` configured for the instance.
 
@@ -70,7 +70,7 @@ The `global` section corresponds to the cluster's global configuration and has t
 
 - `arch`: The CPU architecture of the target machine. This field determines the binary package of which platform is pushed to the target machine. Value options are `amd64` (default) and `arm64`.
 
-- `resource_control`: Runtime resource control. All configurations in this field are written into the service file of systemd. There is no limit by default. The resources that support control are as follows:
+- `resource_control`: Runtime resource control. All configurations in this field are written into the service file of systemd. There is no limit by default. The resources that can be controlled are as follows:
 
     - `memory_limit`: Limits the maximum runtime memory. For example, "2G" means that the maximum memory of 2 GB can be used.
 
@@ -95,11 +95,11 @@ In the above configuration, the `tidb` user is used to start the cluster. At the
 
 ### `monitored`
 
-`monitored` is used to configure the monitoring service on the target machine: [node_exporter](https://github.com/prometheus/node_exporter) and [blackbox_exporter](https://github.com/prometheus/blackbox_exporter). The following fields are included:
+`monitored` is used to configure the monitoring service on the target machine: [`node_exporter`](https://github.com/prometheus/node_exporter) and [`blackbox_exporter`](https://github.com/prometheus/blackbox_exporter). The following fields are included:
 
-- `node_exporter_port`: The service port of node_exporter. The default value is `9100`.
+- `node_exporter_port`: The service port of `node_exporter`. The default value is `9100`.
 
-- `blackbox_exporter_port`: The service port of blackbox_exporter. The default value is `9115`.
+- `blackbox_exporter_port`: The service port of `blackbox_exporter`. The default value is `9115`.
 
 - `deploy_dir`: Specifies the deployment directory. If it is not specified or specified as a relative directory, the directory is generated according to the `deploy_dir` directory configured in `global`.
 
@@ -119,7 +119,7 @@ The above configuration specifies that `node_exporter` uses the `9100` port and 
 
 ### `server_configs`
 
-`server_configs` is used to configure services and to generate configuration files for each component, which is similar to the `global` section. The configuration of this section can be overwritten in a specific instance. `server_configs`mainly includes the following fields:
+`server_configs` is used to configure services and to generate configuration files for each component, which is similar to the `global` section. The configuration of this section can be overwritten in a specific instance. `server_configs` mainly includes the following fields:
 
 - `tidb`: TiDB service-related configuration. For the complete configuration, see [TiDB configuration file](/tidb-configuration-file.md).
 
@@ -179,7 +179,7 @@ The above configuration specifies the global configuration of TiDB and TiKV.
 
 - `config`: The configuration rule of this field is the same as the `pd` configuration rule in `server_configs`. If this field is configured, the field content is merged with the `pd` content in `server_configs` (if the two fields overlap, the content of this field takes effect). Then, a configuration file is generated and sent to the machine specified in `host`.
 
-- `os`: The operating system of the machine specified in`host`. If this field is not specified, the default value is the `os` value in `global`.
+- `os`: The operating system of the machine specified in `host`. If this field is not specified, the default value is the `os` value in `global`.
 
 - `arch`: The architecture of the machine specified in `host`. If this field is not specified, the default value is the `arch` value in `global`.
 
@@ -233,7 +233,7 @@ The above configuration specifies that PD will be deployed on `10.0.1.11` and `1
 
 - `config`: The configuration rule of this field is the same as the `tidb` configuration rule in `server_configs`. If this field is configured, the field content is merged with the `tidb` content in `server_configs` (if the two fields overlap, the content of this field takes effect). Then, a configuration file is generated and sent to the machine specified in `host`.
 
-- `os`: The operating system of the machine specified in`host`. If this field is not specified, the default value is the `os` value in `global`.
+- `os`: The operating system of the machine specified in `host`. If this field is not specified, the default value is the `os` value in `global`.
 
 - `arch`: The architecture of the machine specified in `host`. If this field is not specified, the default value is the `arch` value in `global`.
 
@@ -273,7 +273,7 @@ tidb_servers:
 
 - `port`: The listening port of the TiKV services. The default value is `20160`.
 
-- `status_port`: The listening port of the TiDB status service. The default value is `20180`.
+- `status_port`: The listening port of the TiKV status service. The default value is `20180`.
 
 - `deploy_dir`: Specifies the deployment directory. If it is not specified or specified as a relative directory, the directory is generated according to the `deploy_dir` directory configured in `global`.
 
@@ -285,7 +285,7 @@ tidb_servers:
 
 - `config`: The configuration rule of this field is the same as the `tikv` configuration rule in `server_configs`. If this field is configured, the field content is merged with the `tikv` content in `server_configs` (if the two fields overlap, the content of this field takes effect). Then, a configuration file is generated and sent to the machine specified in `host`.
 
-- `os`: The operating system of the machine specified in`host`. If this field is not specified, the default value is the `os` value in `global`.
+- `os`: The operating system of the machine specified in `host`. If this field is not specified, the default value is the `os` value in `global`.
 
 - `arch`: The architecture of the machine specified in `host`. If this field is not specified, the default value is the `arch` value in `global`.
 
@@ -349,7 +349,7 @@ tikv_servers:
 
 - `learner_config`: Each TiFlash node has a special built-in TiKV. This configuration item is used to configure this special TiKV. It is generally not recommended to modify the content under this configuration item.
 
-- `os`: The operating system of the machine specified in`host`. If this field is not specified, the default value is the `os` value in `global`.
+- `os`: The operating system of the machine specified in `host`. If this field is not specified, the default value is the `os` value in `global`.
 
 - `arch`: The architecture of the machine specified in `host`. If this field is not specified, the default value is the `arch` value in `global`.
 
@@ -398,7 +398,7 @@ tiflash_servers:
 
 - `config`: The configuration rule of this field is the same as the `pump` configuration rule in `server_configs`. If this field is configured, the field content is merged with the `pump` content in `server_configs` (if the two fields overlap, the content of this field takes effect). Then, a configuration file is generated and sent to the machine specified in `host`.
 
-- `os`: The operating system of the machine specified in`host`. If this field is not specified, the default value is the `os` value in `global`.
+- `os`: The operating system of the machine specified in `host`. If this field is not specified, the default value is the `os` value in `global`.
 
 - `arch`: The architecture of the machine specified in `host`. If this field is not specified, the default value is the `arch` value in `global`.
 
@@ -446,7 +446,7 @@ pump_servers:
 
 - `config`: The configuration rule of this field is the same as the `drainer` configuration rule in `server_configs`. If this field is configured, the field content is merged with the `drainer` content in `server_configs` (if the two fields overlap, the content of this field takes effect). Then, a configuration file is generated and sent to the machine specified in `host`.
 
-- `os`: The operating system of the machine specified in`host`. If this field is not specified, the default value is the `os` value in `global`.
+- `os`: The operating system of the machine specified in `host`. If this field is not specified, the default value is the `os` value in `global`.
 
 - `arch`: The architecture of the machine specified in `host`. If this field is not specified, the default value is the `arch` value in `global`.
 
@@ -551,7 +551,7 @@ cdc_servers:
 
 - `spark_env`: Configures the environment variables when Spark starts.
 
-- `os`: The operating system of the machine specified in`host`. If this field is not specified, the default value is the `os` value in `global`.
+- `os`: The operating system of the machine specified in `host`. If this field is not specified, the default value is the `os` value in `global`.
 
 - `arch`: The architecture of the machine specified in `host`. If this field is not specified, the default value is the `arch` value in `global`.
 
@@ -604,7 +604,7 @@ tispark_masters:
 
 - `java_home`: Specifies the path in which the JRE environment to be used is located. This parameter corresponds to the `JAVA_HOME` system environment variable.
 
-- `os`: The operating system of the machine specified in`host`. If this field is not specified, the default value is the `os` value in `global`.
+- `os`: The operating system of the machine specified in `host`. If this field is not specified, the default value is the `os` value in `global`.
 
 - `arch`: The architecture of the machine specified in `host`. If this field is not specified, the default value is the `arch` value in `global`.
 
@@ -648,7 +648,7 @@ tispark_workers:
 
 - `rule_dir`: This field specifies a local directory that should contain complete `*.rules.yml` files. These files are transferred to the target machine during the initialization phase of the cluster configuration as the rules for Prometheus.
 
-- `os`: The operating system of the machine specified in`host`. If this field is not specified, the default value is the `os` value in `global`.
+- `os`: The operating system of the machine specified in `host`. If this field is not specified, the default value is the `os` value in `global`.
 
 - `arch`: The architecture of the machine specified in `host`. If this field is not specified, the default value is the `arch` value in `global`.
 
@@ -684,7 +684,7 @@ monitoring_servers:
 
 - `deploy_dir`: Specifies the deployment directory. If it is not specified or specified as a relative directory, the directory is generated according to the `deploy_dir` directory configured in `global`.
 
-- `os`: The operating system of the machine specified in`host`. If this field is not specified, the default value is the `os` value in `global`.
+- `os`: The operating system of the machine specified in `host`. If this field is not specified, the default value is the `os` value in `global`.
 
 - `arch`: The architecture of the machine specified in `host`. If this field is not specified, the default value is the `arch` value in `global`.
 
@@ -741,7 +741,7 @@ grafana_servers:
 
 - `config_file`: This field specifies a local file that is transferred to the target machine during the initialization phase of the cluster configuration as the configuration of Alertmanager.
 
-- `os`: The operating system of the machine specified in`host`. If this field is not specified, the default value is the `os` value in `global`.
+- `os`: The operating system of the machine specified in `host`. If this field is not specified, the default value is the `os` value in `global`.
 
 - `arch`: The architecture of the machine specified in `host`. If this field is not specified, the default value is the `arch` value in `global`.
 
