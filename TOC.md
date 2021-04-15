@@ -159,7 +159,7 @@
     + [BR Tool Overview](/br/backup-and-restore-tool.md)
     + [Use BR Command-line for Backup and Restoration](/br/backup-and-restore-tool.md)
     + [BR Use Cases](/br/backup-and-restore-use-cases.md)
-    + [BR Storages](/br/backup-and-restore-storages.md)
+    + [External Storages](/br/backup-and-restore-storages.md)
     + [BR FAQ](/br/backup-and-restore-faq.md)
   + TiDB Binlog
     + [Overview](/tidb-binlog/tidb-binlog-overview.md)
@@ -365,6 +365,7 @@
       + [`SHUTDOWN`](/sql-statements/sql-statement-shutdown.md)
       + [`SPLIT REGION`](/sql-statements/sql-statement-split-region.md)
       + [`START TRANSACTION`](/sql-statements/sql-statement-start-transaction.md)
+      + [`TABLE`](/sql-statements/sql-statement-table.md)
       + [`TRACE`](/sql-statements/sql-statement-trace.md)
       + [`TRUNCATE`](/sql-statements/sql-statement-truncate.md)
       + [`UPDATE`](/sql-statements/sql-statement-update.md)
