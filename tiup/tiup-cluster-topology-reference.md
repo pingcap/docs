@@ -36,7 +36,7 @@ The `global` section corresponds to the cluster's global configuration and has t
 
 - `group`: The user group to which a user belongs. It is specified when the user is created. The value defaults to that of the `<user>` field. If the specified group does not exist, it is automatically created.
 
-- `ssh_port`: The SSH port used when connecting to the target machine for operations. The default value is `22`.
+- `ssh_port`: Specifies the SSH port to connect to the target machine for operations. The default value is `22`.
 
 - `enable_tls`: Specifies whether to enable TLS for the cluster. After TLS is enabled, the generated TLS certificate must be used for connections between components or between the client and the component. **Once it is enabled, it cannot be disabled**. The default value is `false`.
 
@@ -66,9 +66,9 @@ The `global` section corresponds to the cluster's global configuration and has t
 
     - If `log_dir` is a relative path, the component log is placed in `<deploy_dir>/<log_dir>`. For the calculation rules of `<deploy_dir>`, see the application rules of the `deploy_dir` field.
 
-- `os`: The operating system of the target machine. This field determines the components applicable to which system are pushed to the target machine. Its default value is `linux`.
+- `os`: The operating system of the target machine. The field controls which operating system to adapt to for the components pushed to the target machine. The default value is "linux".
 
-- `arch`: The CPU architecture of the target machine. This field determines the binary package of which platform is pushed to the target machine. Value options are `amd64` (default) and `arm64`.
+- `arch`: The CPU architecture of the target machine. The field controls which platform to adapt to for the binary packages pushed to the target machine. The supported values are "amd64" and "arm64". The default value is "amd64".
 
 - `resource_control`: Runtime resource control. All configurations in this field are written into the service file of systemd. There is no limit by default. The resources that can be controlled are as follows:
 
@@ -76,9 +76,9 @@ The `global` section corresponds to the cluster's global configuration and has t
 
     - `cpu_quota`: Limits the maximum CPU usage at runtime. For example, "200%".
 
-    - `io_read_bandwidth_max`: The maximum I/O bandwidth for disk reads. For example, `"/dev/disk/by-path/pci-0000:00:1f.2-scsi-0:0:0:0 100M"`.
+    - `io_read_bandwidth_max`: Limits the maximum I/O bandwidth for disk reads. For example, `"/dev/disk/by-path/pci-0000:00:1f.2-scsi-0:0:0:0 100M"`.
 
-    - `io_write_bandwidth_max`: The maximum I/O bandwidth for disk writes. For example, `/dev/disk/by-path/pci-0000:00:1f.2-scsi-0:0:0:0 100M`.
+    - `io_write_bandwidth_max`: Limits maximum I/O bandwidth for disk writes. For example, `/dev/disk/by-path/pci-0000:00:1f.2-scsi-0:0:0:0 100M`.
 
     - `limit_core`: Controls the size of core dump.
 
@@ -119,7 +119,7 @@ The above configuration specifies that `node_exporter` uses the `9100` port and 
 
 ### `server_configs`
 
-`server_configs` is used to configure services and to generate configuration files for each component, which is similar to the `global` section. The configuration of this section can be overwritten in a specific instance. `server_configs` mainly includes the following fields:
+`server_configs` is used to configure services and to generate configuration files for each component. Similar to the `global` section, the configuration of this section can be overwritten by the configurations with the same names in an instance. `server_configs` mainly includes the following fields:
 
 - `tidb`: TiDB service-related configuration. For the complete configuration, see [TiDB configuration file](/tidb-configuration-file.md).
 
@@ -157,11 +157,11 @@ The above configuration specifies the global configuration of TiDB and TiKV.
 
 `pd_servers` specifies the machines to which PD services are deployed. It also specifies the service configuration on each machine. `pd_servers` is an array, and each element of the array contains the following fields:
 
-- `host`: Specifies the machine to which the PD services are deployed. The field value is the IP address and cannot be omitted.
+- `host`: Specifies the machine to which the PD services are deployed. The field value is an IP address and is mandatory.
 
 - `listen_host`: When the machine has multiple IP addresses, `listen_host` specifies the listening IP address of the service. The default value is `0.0.0.0`.
 
-- `ssh_port`: The SSH port used when connecting to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
+- `ssh_port`: Specifies the SSH port to connect to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
 
 - `name`: Specifies the name of the PD instance. Different instances must have unique names; otherwise, instances cannot be deployed.
 
@@ -175,7 +175,7 @@ The above configuration specifies the global configuration of TiDB and TiKV.
 
 - `log_dir`: Specifies the log directory. If it is not specified or specified as a relative directory, the log is generated according to the `log_dir` directory configured in `global`.
 
-- `numa_node`: Allocates the NUMA policy to the instance. If this parameter is specified, you need to ensure that the target machine has [numactl](https://linux.die.net/man/8/numactl) installed. When this parameter is specified, cpubind and membind policies are allocated via [numactl](https://linux.die.net/man/8/numactl). This parameter field is the string type. The field value is the ID of the NUMA node, such as "0,1".
+- `numa_node`: Allocates the NUMA policy to the instance. Before specifying this field, you need to make sure that the target machine has [numactl](https://linux.die.net/man/8/numactl) installed. If this field is specified, cpubind and membind policies are allocated using [numactl](https://linux.die.net/man/8/numactl). This field is the string type. The field value is the ID of the NUMA node, such as "0,1".
 
 - `config`: The configuration rule of this field is the same as the `pd` configuration rule in `server_configs`. If this field is configured, the field content is merged with the `pd` content in `server_configs` (if the two fields overlap, the content of this field takes effect). Then, a configuration file is generated and sent to the machine specified in `host`.
 
@@ -215,11 +215,11 @@ The above configuration specifies that PD will be deployed on `10.0.1.11` and `1
 
 `tidb_servers` specifies the machines to which TiDB services are deployed. It also specifies the service configuration on each machine. `tidb_servers` is an array, and each element of the array contains the following fields:
 
-- `host`: Specifies the machine to which the TiDB services are deployed. The field value is the IP address and cannot be omitted.
+- `host`: Specifies the machine to which the TiDB services are deployed. The field value is an IP address and is mandatory.
 
 - `listen_host`: When the machine has multiple IP addresses, `listen_host` specifies the listening IP address of the service. The default value is `0.0.0.0`.
 
-- `ssh_port`: The SSH port used when connecting to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
+- `ssh_port`: Specifies the SSH port to connect to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
 
 - `port`: The listening port of TiDB services, which is used to provide connection to the MySQL client. The default value is `4000`.
 
@@ -229,7 +229,7 @@ The above configuration specifies that PD will be deployed on `10.0.1.11` and `1
 
 - `log_dir`: Specifies the log directory. If it is not specified or specified as a relative directory, the log is generated according to the `log_dir` directory configured in `global`.
 
-- `numa_node`: Allocates the NUMA policy to the instance. If this parameter is specified, you need to ensure that the target machine has [numactl](https://linux.die.net/man/8/numactl) installed. If this parameter is specified, cpubind and membind policies are allocated via [numactl](https://linux.die.net/man/8/numactl). This parameter field is the string type. The field value is the ID of the NUMA node, such as "0,1".
+- `numa_node`: Allocates the NUMA policy to the instance. Before specifying this field, you need to make sure that the target machine has [numactl](https://linux.die.net/man/8/numactl) installed. If this field is specified, cpubind and membind policies are allocated using [numactl](https://linux.die.net/man/8/numactl). This field is the string type. The field value is the ID of the NUMA node, such as "0,1".
 
 - `config`: The configuration rule of this field is the same as the `tidb` configuration rule in `server_configs`. If this field is configured, the field content is merged with the `tidb` content in `server_configs` (if the two fields overlap, the content of this field takes effect). Then, a configuration file is generated and sent to the machine specified in `host`.
 
@@ -265,11 +265,11 @@ tidb_servers:
 
 `tikv_servers` specifies the machines to which TiKV services are deployed. It also specifies the service configuration on each machine. `tikv_servers` is an array, and each element of the array contains the following fields:
 
-- `host`: Specifies the machine to which the TiKV services are deployed. The field value is the IP address and cannot be omitted.
+- `host`: Specifies the machine to which the TiKV services are deployed. The field value is an IP address and is mandatory.
 
 - `listen_host`: When the machine has multiple IP addresses, `listen_host` specifies the listening IP address of the service. The default value is `0.0.0.0`.
 
-- `ssh_port`: The SSH port used when connecting to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
+- `ssh_port`: Specifies the SSH port to connect to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
 
 - `port`: The listening port of the TiKV services. The default value is `20160`.
 
@@ -281,7 +281,7 @@ tidb_servers:
 
 - `log_dir`: Specifies the log directory. If it is not specified or specified as a relative directory, the log is generated according to the `log_dir` directory configured in `global`.
 
-- `numa_node`: Allocates the NUMA policy to the instance. If this parameter is specified, you need to ensure that the target machine has [numactl](https://linux.die.net/man/8/numactl) installed. If this parameter is specified, cpubind and membind policies are allocated via [numactl](https://linux.die.net/man/8/numactl). This parameter field is the string type. The field value is the ID of the NUMA node, such as "0,1".
+- `numa_node`: Allocates the NUMA policy to the instance. Before specifying this field, you need to make sure that the target machine has [numactl](https://linux.die.net/man/8/numactl) installed. If this field is specified, cpubind and membind policies are allocated using [numactl](https://linux.die.net/man/8/numactl). This field is the string type. The field value is the ID of the NUMA node, such as "0,1".
 
 - `config`: The configuration rule of this field is the same as the `tikv` configuration rule in `server_configs`. If this field is configured, the field content is merged with the `tikv` content in `server_configs` (if the two fields overlap, the content of this field takes effect). Then, a configuration file is generated and sent to the machine specified in `host`.
 
@@ -319,9 +319,9 @@ tikv_servers:
 
 `tiflash_servers` specifies the machines to which TiFlash services are deployed. It also specifies the service configuration on each machine. This section is an array, and each element of the array contains the following fields:
 
-- `host`: Specifies the machine to which the TiFlash services are deployed. The field value is the IP address and cannot be omitted.
+- `host`: Specifies the machine to which the TiFlash services are deployed. The field value is an IP address and is mandatory.
 
-- `ssh_port`: The SSH port used when connecting to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
+- `ssh_port`: Specifies the SSH port to connect to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
 
 - `tcp_port`: The port of the TiFlash TCP service. The default value is `9000`.
 
@@ -343,7 +343,7 @@ tikv_servers:
 
 - `tmp_path`: The storage path of TiFlash temporary files. The default value is [`path` or the first directory of `storage.latest.dir`] + "/tmp".
 
-- `numa_node`: Allocates the NUMA policy to the instance. If this parameter is specified, you need to ensure that the target machine has [numactl](https://linux.die.net/man/8/numactl) installed. If this parameter is specified, cpubind and membind policies are allocated via [numactl](https://linux.die.net/man/8/numactl). This parameter field is the string type. The field value is the ID of the NUMA node, such as "0,1".
+- `numa_node`: Allocates the NUMA policy to the instance. Before specifying this field, you need to make sure that the target machine has [numactl](https://linux.die.net/man/8/numactl) installed. If this field is specified, cpubind and membind policies are allocated using [numactl](https://linux.die.net/man/8/numactl). This field is the string type. The field value is the ID of the NUMA node, such as "0,1".
 
 - `config`: The configuration rule of this field is the same as the `tiflash` configuration rule in `server_configs`. If this field is configured, the field content is merged with the `tiflash` content in `server_configs` (if the two fields overlap, the content of this field takes effect). Then, a configuration file is generated and sent to the machine specified in `host`.
 
@@ -382,9 +382,9 @@ tiflash_servers:
 
 `pump_servers` specifies the machines to which the Pump services of TiDB Binlog are deployed. It also specifies the service configuration on each machine. `pump_servers` is an array, and each element of the array contains the following fields:
 
-- `host`: Specifies the machine to which the Pump services are deployed. The field value is the IP address and cannot be omitted.
+- `host`: Specifies the machine to which the Pump services are deployed. The field value is an IP address and is mandatory.
 
-- `ssh_port`: The SSH port used when connecting to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
+- `ssh_port`: Specifies the SSH port to connect to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
 
 - `port`: The listening port of the Pump services. The default value is `8250`.
 
@@ -394,7 +394,7 @@ tiflash_servers:
 
 - `log_dir`: Specifies the log directory. If it is not specified or specified as a relative directory, the log is generated according to the `log_dir` directory configured in `global`.
 
-- `numa_node`: Allocates the NUMA policy to the instance. If this parameter is specified, you need to ensure that the target machine has [numactl](https://linux.die.net/man/8/numactl) installed. If this parameter is specified, cpubind and membind policies are allocated via [numactl](https://linux.die.net/man/8/numactl). This parameter field is the string type. The field value is the ID of the NUMA node, such as "0,1".
+- `numa_node`: Allocates the NUMA policy to the instance. Before specifying this field, you need to make sure that the target machine has [numactl](https://linux.die.net/man/8/numactl) installed. If this field is specified, cpubind and membind policies are allocated using [numactl](https://linux.die.net/man/8/numactl). This field is the string type. The field value is the ID of the NUMA node, such as "0,1".
 
 - `config`: The configuration rule of this field is the same as the `pump` configuration rule in `server_configs`. If this field is configured, the field content is merged with the `pump` content in `server_configs` (if the two fields overlap, the content of this field takes effect). Then, a configuration file is generated and sent to the machine specified in `host`.
 
@@ -428,9 +428,9 @@ pump_servers:
 
 `drainer_servers` specifies the machines to which the Drainer services of TiDB Binlog are deployed. It also specifies the service configuration on each machine. `drainer_servers` is an array. Each array element contains the following fields:
 
-- `host`: Specifies the machine to which the Drainer services are deployed. The field value is the IP address and cannot be omitted.
+- `host`: Specifies the machine to which the Drainer services are deployed. The field value is an IP address and is mandatory.
 
-- `ssh_port`: The SSH port used when connecting to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
+- `ssh_port`: Specifies the SSH port to connect to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
 
 - `port`: The listening port of Drainer services. The default value is `8249`.
 
@@ -442,7 +442,7 @@ pump_servers:
 
 - `commit_ts`: When Drainer starts, it reads the checkpoint. If Drainer cannot read the checkpoint, it uses this field as the replication time point for the initial startup. This field defaults to `-1` (Drainer always gets the latest timestamp from the PD as the commit_ts).
 
-- `numa_node`: Allocates the NUMA policy to the instance. If this parameter is specified, you need to ensure that the target machine has [numactl](https://linux.die.net/man/8/numactl) installed. If this parameter is specified, cpubind and membind policies are allocated via [numactl](https://linux.die.net/man/8/numactl). This parameter field is the string type. The field value is the ID of the NUMA node, such as "0,1".
+- `numa_node`: Allocates the NUMA policy to the instance. Before specifying this field, you need to make sure that the target machine has [numactl](https://linux.die.net/man/8/numactl) installed. If this field is specified, cpubind and membind policies are allocated using [numactl](https://linux.die.net/man/8/numactl). This field is the string type. The field value is the ID of the NUMA node, such as "0,1".
 
 - `config`: The configuration rule of this field is the same as the `drainer` configuration rule in `server_configs`. If this field is configured, the field content is merged with the `drainer` content in `server_configs` (if the two fields overlap, the content of this field takes effect). Then, a configuration file is generated and sent to the machine specified in `host`.
 
@@ -485,9 +485,9 @@ drainer_servers:
 
 `cdc_servers` specifies the machines to which the TiCDC services are deployed. It also specifies the service configuration on each machine. `cdc_servers` is an array. Each array element contains the following fields:
 
-- `host`: Specifies the machine to which the TiCDC services are deployed. The field value is the IP address and cannot be omitted.
+- `host`: Specifies the machine to which the TiCDC services are deployed. The field value is an IP address and is mandatory.
 
-- `ssh_port`: The SSH port used when connecting to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
+- `ssh_port`: Specifies the SSH port to connect to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
 
 - `port`: The listening port of the TiCDC services. The default value is `8300`.
 
@@ -499,7 +499,7 @@ drainer_servers:
 
 - `tz`: The time zone that the TiCDC services use. TiCDC uses this time zone when internally converting time data types such as timestamp and when replicating data to the downstream. The default value is the local time zone where the process runs.
 
-- `numa_node`: Allocates the NUMA policy to the instance. If this parameter is specified, you need to ensure that the target machine has [numactl](https://linux.die.net/man/8/numactl) installed. If this parameter is specified, cpubind and membind policies are allocated via [numactl](https://linux.die.net/man/8/numactl). This parameter field is the string type. The field value is the ID of the NUMA node, such as "0,1".
+- `numa_node`: Allocates the NUMA policy to the instance. Before specifying this field, you need to make sure that the target machine has [numactl](https://linux.die.net/man/8/numactl) installed. If this field is specified, cpubind and membind policies are allocated using [numactl](https://linux.die.net/man/8/numactl). This field is the string type. The field value is the ID of the NUMA node, such as "0,1".
 
 - `config`: The field content is merged with the `cdc` content in `server_configs` (if the two fields overlap, the content of this field takes effect). Then, a configuration file is generated and sent to the machine specified in `host`.
 
@@ -533,11 +533,11 @@ cdc_servers:
 
 `tispark_masters` specifies the machines to which the master node of TiSpark is deployed. It also specifies the service configuration on each machine. `tispark_masters` is an array. Each array element contains the following fields:
 
-- `host`: Specifies the machine to which the TiSpark master is deployed. The field value is the IP address and cannot be omitted.
+- `host`: Specifies the machine to which the TiSpark master is deployed. The field value is an IP address and is mandatory.
 
 - `listen_host`: When the machine has multiple IP addresses, `listen_host` specifies the listening IP address of the service. The default value is `0.0.0.0`.
 
-- `ssh_port`: The SSH port used when connecting to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
+- `ssh_port`: Specifies the SSH port to connect to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
 
 - `port`: Spark's listening port, used for communication before the node. The default value is `7077`.
 
@@ -590,11 +590,11 @@ tispark_masters:
 
 `tispark_workers` specifies the machines to which the worker nodes of TiSpark are deployed. It also specifies the service configuration on each machine. `tispark_workers` is an array. Each array element contains the following fields:
 
-- `host`: Specifies the machine to which the TiSpark workers are deployed. The field value is the IP address and cannot be omitted.
+- `host`: Specifies the machine to which the TiSpark workers are deployed. The field value is an IP address and is mandatory.
 
 - `listen_host`: When the machine has multiple IP addresses, `listen_host` specifies the listening IP address of the service. The default value is `0.0.0.0`.
 
-- `ssh_port`: The SSH port used when connecting to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
+- `ssh_port`: Specifies the SSH port to connect to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
 
 - `port`: Spark's listening port, used for communication before the node. The default value is `7077`.
 
@@ -630,9 +630,9 @@ tispark_workers:
 
 `monitoring_servers` specifies the machines to which the Prometheus services are deployed. It also specifies the service configuration on each machine. `monitoring_servers` is an array. Each array element contains the following fields:
 
-- `host`: Specifies the machine to which the monitoring services are deployed. The field value is the IP address and cannot be omitted.
+- `host`: Specifies the machine to which the monitoring services are deployed. The field value is an IP address and is mandatory.
 
-- `ssh_port`: The SSH port used when connecting to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
+- `ssh_port`: Specifies the SSH port to connect to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
 
 - `port`: The listening port of the Prometheus services. The default value is `9090`.
 
@@ -642,7 +642,7 @@ tispark_workers:
 
 - `log_dir`: Specifies the log directory. If it is not specified or specified as a relative directory, the log is generated according to the `log_dir` directory configured in `global`.
 
-- `numa_node`: Allocates the NUMA policy to the instance. If this parameter is specified, you need to ensure that the target machine has [numactl](https://linux.die.net/man/8/numactl) installed. If this parameter is specified, cpubind and membind policies are allocated via [numactl](https://linux.die.net/man/8/numactl). This parameter field is the string type. The field value is the ID of the NUMA node, such as "0,1".
+- `numa_node`: Allocates the NUMA policy to the instance. Before specifying this field, you need to make sure that the target machine has [numactl](https://linux.die.net/man/8/numactl) installed. If this field is specified, cpubind and membind policies are allocated using [numactl](https://linux.die.net/man/8/numactl). This field is the string type. The field value is the ID of the NUMA node, such as "0,1".
 
 - `storage_retention`: The retention time of the Prometheus monitoring data. The default value is `"15d"`.
 
@@ -676,9 +676,9 @@ monitoring_servers:
 
 `grafana_servers` specifies the machines to which the Grafana services are deployed. It also specifies the service configuration on each machine. `grafana_servers` is an array. Each array element contains the following fields:
 
-- `host`: Specifies the machine to which the Grafana services are deployed. The field value is the IP address and cannot be omitted.
+- `host`: Specifies the machine to which the Grafana services are deployed. The field value is an IP address and is mandatory.
 
-- `ssh_port`: The SSH port used when connecting to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
+- `ssh_port`: Specifies the SSH port to connect to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
 
 - `port`: The listening port of the Grafana services. The default value is `3000`.
 
@@ -723,9 +723,9 @@ grafana_servers:
 
 `alertmanager_servers` specifies the machines to which the Alertmanager services are deployed. It also specifies the service configuration on each machine. `alertmanager_servers` is an array. Each array element contains the following fields:
 
-- `host`: Specifies the machine to which the Alertmanager services are deployed. The field value is the IP address and cannot be omitted.
+- `host`: Specifies the machine to which the Alertmanager services are deployed. The field value is an IP address and is mandatory.
 
-- `ssh_port`: The SSH port used when connecting to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
+- `ssh_port`: Specifies the SSH port to connect to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
 
 - `web_port`: Specifies the port used that Alertmanager uses to provide web services. The default value is `9093`.
 
@@ -737,7 +737,7 @@ grafana_servers:
 
 - `log_dir`: Specifies the log directory. If it is not specified or specified as a relative directory, the log is generated according to the `log_dir` directory configured in `global`.
 
-- `numa_node`: Allocates the NUMA policy to the instance. If this parameter is specified, you need to ensure that the target machine has [numactl](https://linux.die.net/man/8/numactl) installed. If this parameter is specified, cpubind and membind policies are allocated via [numactl](https://linux.die.net/man/8/numactl). This parameter field is the string type. The field value is the ID of the NUMA node, such as "0,1".
+- `numa_node`: Allocates the NUMA policy to the instance. Before specifying this field, you need to make sure that the target machine has [numactl](https://linux.die.net/man/8/numactl) installed. If this field is specified, cpubind and membind policies are allocated using [numactl](https://linux.die.net/man/8/numactl). This field is the string type. The field value is the ID of the NUMA node, such as "0,1".
 
 - `config_file`: Specifies a local file that is transferred to the target machine during the initialization phase of the cluster configuration as the configuration of Alertmanager.
 
