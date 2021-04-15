@@ -54,7 +54,7 @@ You need to pack the binary package required for this command in advance accordi
 
 ### -R, --role
 
-- Specified the roles to be replaced. The value of this option is a comma-separated list of the roles of the nodes. You can get the roles of the nodes from the second column of the cluster status table returned by the `[tiup dm display](/tiup/tiup-component-dm-display.md)` command.
+- Specifies the roles to be replaced. The value of this option is a comma-separated list of the roles of the nodes. You can get the roles of the nodes from the second column of the cluster status table returned by the `[tiup dm display](/tiup/tiup-component-dm-display.md)` command.
 - Data type: `STRING`
 - If this option is not specified, TiUP selects all roles to replace by default.
 
