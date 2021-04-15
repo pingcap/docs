@@ -18,14 +18,12 @@ tiup cluster restart <cluster-name> [flags]
 
 `<cluster-name>`: the name of the cluster to operate on. If you forget the cluster name, you can check it with the [cluster list](/tiup/tiup-component-cluster-list.md) command.
 
-`<cluster-name>`
-
 ## Options
 
 ### -N, --node
 
-- Specifies the nodes to be restarted. The value of this option is a comma-separated list of node IDs. You can get the node ID from the first column of the [cluster status table](/tiup/tiup-component-cluster-display.md).
-- Data type: `STRINGS`
+- Specifies the nodes to be restarted. The value of this option is a comma-separated list of node IDs. You can get the node IDs from the first column of the [cluster status table](/tiup/tiup-component-cluster-display.md) returned by the `tiup cluster display` command.
+- Data type: `STRING`
 - If this option is not specified, TiUP restarts all nodes by default.
 
 > **Note:**
@@ -34,8 +32,8 @@ tiup cluster restart <cluster-name> [flags]
 
 ### -R, --role
 
-- Specified roles of nodes to be restarted. The value of this option is a comma-separated list of the roles of the nodes. You can get the roles of the nodes from the second column of the [cluster status table](/tiup/tiup-component-cluster-display.md).
-- Data type: `STRINGS`
+- Specified the roles of nodes to be restarted. The value of this option is a comma-separated list of the roles of the nodes. You can get the roles of the nodes from the second column of the [cluster status table](/tiup/tiup-component-cluster-display.md) returned by the `tiup cluster display` command.
+- Data type: `STRING`
 - If this option is not specified, TiUP restarts nodes of all roles by default.
 
 > **Note:**
