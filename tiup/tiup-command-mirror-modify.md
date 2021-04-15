@@ -32,13 +32,13 @@ Marks a specified component or version as unavailable.
 - After the component is marked as unavailable, you can neither see it in the result list of `tiup list` nor install the new version of the component.
 - After a component version is marked as unavailable, you can neither see it in the result list of `tiup list <component>` nor install this version.
 - Data type: `BOOLEAN`
-- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command and pass in the `true` value or no value.
+- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command, and pass the `true` value or do not pass any value.
 
 ### --hide
 
 - Specifies whether to hide the component. If a component is hidden, you cannot see it in the result list of `tiup list`. To see the hidden component, you can use `tiup list --all`.
 - Data type: `BOOLEAN`
-- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command and pass in the `true` value or no value.
+- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command, and pass the `true` value or do not pass any value.
 
 > **Note:**
 >
@@ -48,7 +48,7 @@ Marks a specified component or version as unavailable.
 
 - Controls whether the component can run standalone. This option is currently **NOT available**.
 - Data type: `BOOLEAN`
-- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command and pass in the `true` value or no value.
+- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command, and pass the `true` value or do not pass any value.
 
 > **Note:**
 >
