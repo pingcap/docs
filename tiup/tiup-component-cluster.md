@@ -26,7 +26,7 @@ tiup cluster [command] [flags]
   - `system`: uses the default SSH client of the current operating system.
   - `none`: The SSH client is not used. The deployment is only for the current machine.
 
-- The option is enabled by default with `builtin` (the default value) passed in.
+- If this option is not specified in the command, `builtin` is used as the default value.
 
 ### --ssh-timeout
 
@@ -38,7 +38,7 @@ tiup cluster [command] [flags]
 
 - Specifies the maximum waiting time (in seconds) for each step in the operation process. The operation process consists of many steps, such as specifying systemctl to start or stop services, and waiting for ports to be online or offline. Each step may take several seconds. If the execution time of a step exceeds the specified timeout, the step exits with an error.
 - Data type: `UINT`
-- The option is enabled by default with `120` seconds (the default value) passed in.
+- If this option is not specified in the command, the maximum waiting time for each step is `120` seconds.
 
 ### -y, --yes
 
