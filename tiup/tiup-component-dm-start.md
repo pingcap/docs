@@ -24,7 +24,7 @@ tiup dm start <cluster-name> [flags]
 
 > **Note:**
 >
-> If the `-R, --role` option is specified at the same time, then the service status in their intersection is started.
+> If the `-R, --role` option is specified at the same time, then the services in their intersection are started.
 
 ### -R, --role
 
@@ -34,7 +34,7 @@ tiup dm start <cluster-name> [flags]
 
 > **Note:**
 >
-> If the `-N, --node` option is specified at the same time, the services in their intersection is started.
+> If the `-N, --node` option is specified at the same time, the services in their intersection are started.
 
 ### -h, --help
 
