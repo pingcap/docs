@@ -8,7 +8,7 @@ The `tiup cluster start` command is used to start all services or some services 
 
 ## Syntax
 
-```sh
+```shell
 tiup cluster start <cluster-name> [flags]
 ```
 
