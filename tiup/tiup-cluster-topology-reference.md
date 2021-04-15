@@ -6,7 +6,7 @@ title: Topology Configuration File for TiDB Deployment Using TiUP
 
 To deploy or scale TiDB using TiUP, you need to provide a topology file ([sample](https://github.com/pingcap/tiup/blob/master/embed/templates/examples/topology.example.yaml)) to describe the cluster topology.
 
-Similarly, to modify the cluster topology, you need to modify the topology file. The difference is that you can modify only a part of the fields in the topology file. This document introduces each section of the topology file and each field in each section.
+Similarly, to modify the cluster topology, you need to modify the topology file. The difference is that, after the cluster is deployed, you can only modify a part of the fields in the topology file. This document introduces each section of the topology file and each field in each section.
 
 ## File structure
 
