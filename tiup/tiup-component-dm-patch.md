@@ -19,15 +19,20 @@ tiup dm patch <cluster-name> <package-path> [flags]
 ```
 
 - `<cluster-name>`: The name of the cluster to be operated.
-- `<package-path>`: The path to the binary package used for replacement. The steps to generate the package are as follows:
-    - Determine the name `${component}` (dm-master, dm-worker ...) of the component to be replaced, the `${version}` of the component (v2.0.0, v2.0.1 ...), and the operating system `${os}` and platform `${arch}` on which the component runs.
-    - Download the current component package using the command `wget https://tiup-mirrors.pingcap.com/${component}-${version}-${os}-${arch}.tar.gz -O /tmp/${component}-${version}-${os}-${arch}.tar.gz`.
-    - Run `mkdir -p /tmp/package && cd /tmp/package` to create a temporary directory to pack files.
-    - Run `tar xf /tmp/${component}-${version}-${os}-${arch}.tar.gz` to unpack the original binary package.
-    - Run `find .` to view the file structure in the temporary package directory.
-    - Copy the binary files or configuration files to the corresponding locations in the temporary directory.
-    - Run `tar czf /tmp/${component}-hotfix-${os}-${arch}.tar.gz *` to pack the files in the temporary directory.
-    - Finally, you can use `/tmp/${component}-hotfix-${os}-${arch}.tar.gz` as the `<package-path>` in the `tiup dm patch` command.
+- `<package-path>`: The path to the binary package used for replacement.
+
+### Preparation
+
+You need to pack the binary package required for this command in advance according to the following steps:
+
+- Determine the name `${component}` of the component to be replaced (dm-master, dm-worker ...), the `${version}` of the component (v2.0.0, v2.0.1 ...), and the operating system `${os}` and platform `${arch}` on which the component runs.
+- Download the current component package using the command `wget https://tiup-mirrors.pingcap.com/${component}-${version}-${os}-${arch}.tar.gz -O /tmp/${component}-${version}-${os}-${arch}.tar.gz`.
+- Run `mkdir -p /tmp/package && cd /tmp/package` to create a temporary directory to pack files.
+- Run `tar xf /tmp/${component}-${version}-${os}-${arch}.tar.gz` to unpack the original binary package.
+- Run `find .` to view the file structure in the temporary package directory.
+- Copy the binary files or configuration files to the corresponding locations in the temporary directory.
+- Run `tar czf /tmp/${component}-hotfix-${os}-${arch}.tar.gz *` to pack the files in the temporary directory.
+- Finally, you can use `/tmp/${component}-hotfix-${os}-${arch}.tar.gz` as the value of `<package-path>` in the `tiup dm patch` command.
 
 ## Options
 
