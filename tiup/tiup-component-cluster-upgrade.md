@@ -51,4 +51,4 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 
 ## Output
 
-The log of the upgrade service.
+The log of the upgrading progress.
