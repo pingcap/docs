@@ -17,4 +17,4 @@ aliases: ['/docs/dev/tiup/tiup-documentation-guide/']
 
 ## TiUP resources
 
-- [TiUP Issues](https://github.com/pingcap/tiup/issues): Lists TiUP Github issues
+- [TiUP Issues](https://github.com/pingcap/tiup/issues): Lists TiUP GitHub issues
