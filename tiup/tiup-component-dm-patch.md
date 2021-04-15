@@ -27,7 +27,7 @@ tiup dm patch <cluster-name> <package-path> [flags]
     - Run `find .` to view the file structure in the temporary package directory.
     - Copy the binary files or configuration files to the corresponding locations in the temporary directory.
     - Run `tar czf /tmp/${component}-hotfix-${os}-${arch}.tar.gz *` to pack the files in the temporary directory.
-    - Finally, you can use `/tmp/${component}-hotfix-${os}-${arch}.tar.gz` as the `<package-path>` in the `tiup cluster patch` command.
+    - Finally, you can use `/tmp/${component}-hotfix-${os}-${arch}.tar.gz` as the `<package-path>` in the `tiup dm patch` command.
 
 ## Options
 
