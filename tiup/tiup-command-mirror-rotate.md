@@ -6,13 +6,13 @@ title: tiup mirror rotate
 
 `root.json` is an important file in a TiUP mirror. It stores the public keys needed for the entire system and is the basis of the chain of trust in TiUP. It mainly contains the following parts:
 
-- Signatures of mirror administrators. For an official mirror, there are five signatures. For an initialized mirror, there are three signatures by default.
+- Signatures of mirror administrators. For the official mirror, there are five signatures. For an initialized mirror, there are three signatures by default.
 - The public keys used to verify the following files:
     - root.json
     - index.json
     - snapshot.json
     - timestamp.json
-- Expiration date of `root.json`. For an official mirror, the expiration date is one year later than the creation date of `root.json`.
+- Expiration date of `root.json`. For the official mirror, the expiration date is one year later than the creation date of `root.json`.
 
 For detailed description of TiUP mirror, see [TiUP Mirror Reference](/tiup/tiup-mirror-reference.md).
 
@@ -25,10 +25,10 @@ After the content of `root.json` is updated, the file must be re-signed by all a
 
 1. Update the content of `root.json`.
 2. All administrators sign the new `root.json` file.
-3. Update `snapshot.json` to record the version of the new `root.json` file.
-4. All administrators sign the new `snapshot.json` file.
-5. Update `timestamp.json` to record the hash value of the new `snapshot.json` file.
-6. All administrators sign the new `timestamp.json` file.
+3. tiup-server updates `snapshot.json` to record the version of the new `root.json` file.
+4. tiup-server signs the new `snapshot.json` file.
+5. tiup-server updates `timestamp.json` to record the hash value of the new `snapshot.json` file.
+6. tiup-server signs the new `timestamp.json` file.
 
 TiUP uses the command `tiup mirror rotate` to automate the above process.
 
@@ -43,7 +43,7 @@ TiUP uses the command `tiup mirror rotate` to automate the above process.
 tiup mirror rotate [flags]
 ```
 
-After executing this command, TiUP starts an editor to modify the file content to the target value, such as changing the value of the `expires` field to a later date. Then, TiUP changes the `version` field from `N` to `N+1` and saves the file. After the file is saved, TiUP starts a temporary HTTP server and waits for all mirror administrators to sign the file.
+After executing this command, TiUP starts an editor for the user to modify the file content to the target value, such as changing the value of the `expires` field to a later date. Then, TiUP changes the `version` field from `N` to `N+1` and saves the file. After the file is saved, TiUP starts a temporary HTTP server and waits for all mirror administrators to sign the file.
 
 For how mirror administrators sign files, refer to the [`sign` command](/tiup/tiup-command-mirror-sign.md).
 

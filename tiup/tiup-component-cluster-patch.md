@@ -39,13 +39,13 @@ tiup cluster patch <cluster-name> <package-path> [flags]
 
 ### --transfer-timeout
 
-- When restarting the PD or TiKV service, TiUP first migrates the leader of the node to be restarted to another node. Because the migration process takes some time, you can use the option `--transfer-timeout` to set the maximum waiting time (in seconds). After the timeout, TiUP directly restarts the service.
+- When restarting the PD or TiKV service, TiKV/PD first transfers the leader of the node to be restarted to another node. Because the transfer process takes some time, you can use the option `--transfer-timeout` to set the maximum waiting time (in seconds). After the timeout, TiUP directly restarts the service.
 - Data type: `UINT`
 - If this option is not specified, TiUP directly restarts the service after waiting for `300` seconds.
 
 > **Note:**
 >
-> If TiUP directly restarts the service after the timeout, the service performance may jitter.
+> If TiUP directly restarts the service after the timeout, the service performance might jitter.
 
 ### -N, --node
 

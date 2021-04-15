@@ -27,7 +27,7 @@ For the specific usage and content format of the above files, refer to [TiUP Mir
 tiup mirror init <path> [flags]
 ```
 
-`<path>` is used to specify a local directory where TiUP generates and stores mirror files. The local directory can be a  relative path. If the specified directory already exists, it must be empty; if it does not exist, TiUP creates it automatically.
+`<path>` is used to specify a local directory where TiUP generates and stores mirror files. The local directory can be a relative path. If the specified directory already exists, it must be empty; if it does not exist, TiUP creates it automatically.
 
 ## Options
 
