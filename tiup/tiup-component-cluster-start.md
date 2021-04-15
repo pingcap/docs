@@ -44,4 +44,4 @@ Default: []. If this option is not specified in the command, the command starts 
 
 ## Output
 
-The output contains the starting logs.
+The log of starting the service.

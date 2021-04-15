@@ -1,10 +1,10 @@
 ---
-title: TiUP cluster
+title: TiUP Cluster
 ---
 
 # TiUP Cluster
 
-TiUP Cluster is a cluster management component of TiUP written in Golang. You can use the TiUP Cluster component to perform daily operations and maintenance tasks, including deploying, starting, shutting down, destroying, elastic scaling, upgrading TiDB clusters, and managing TiDB cluster parameters.
+TiUP Cluster is a cluster management component of TiUP written in Golang. You can use the TiUP Cluster component to perform daily operations and maintenance, including deploying, starting, shutting down, destroying, elastic scaling, upgrading TiDB clusters, and managing TiDB cluster parameters.
 
 ## Syntax
 
@@ -12,7 +12,7 @@ TiUP Cluster is a cluster management component of TiUP written in Golang. You ca
 tiup cluster [command] [flags]
 ```
 
-`[command]` is the command name as in the following command list:
+`[command]` is the name of the command. For the list of supported commands, refer to the [command list](#command-list) below.
 
 ## Options
 
@@ -57,9 +57,9 @@ tiup cluster [command] [flags]
 - Data type: `BOOLEAN`
 - This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
 
-## List of commands
+## Command list
 
-- [import](/tiup/tiup-component-cluster-import.md): import a cluster deployed by Ansible
+- [import](/tiup/tiup-component-cluster-import.md): imports a cluster deployed by Ansible
 - [check](/tiup/tiup-component-cluster-check.md): check a cluster before and after the deployment
 - [deploy](/tiup/tiup-component-cluster-deploy.md): deploy a cluster based on a specified topology
 - [list](/tiup/tiup-component-cluster-list.md): query the list of deployed clusters
@@ -80,4 +80,4 @@ tiup cluster [command] [flags]
 - [audit](/tiup/tiup-component-cluster-audit.md): query the operation audit log of a specified cluster
 - [enable](/tiup/tiup-component-cluster-enable.md): enable a specified cluster or service to start on boot
 - [disable](/tiup/tiup-component-cluster-disable.md): disable a specified cluster or service to start on boot
-- [help](/tiup/tiup-component-cluster-help.md): print help information
+- [help](/tiup/tiup-component-cluster-help.md): print the help information

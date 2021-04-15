@@ -12,11 +12,11 @@ The `tiup cluster stop` command is used to stop all services or some services of
 
 ## Syntax
 
-```sh
+```shell
 tiup cluster stop <cluster-name> [flags]
 ```
 
-``<cluster-name>` is the name of the cluster to operate on. If you forget the cluster name, check it in [tiup cluster list](/tiup/tiup-component-cluster-list.md).
+`<cluster-name>` is the name of the cluster to operate on. If you forget the cluster name, check it with the [cluster list](/tiup/tiup-component-cluster-list.md) command.
 
 ## Options
 
