@@ -15,18 +15,18 @@ A topology configuration file for TiDB deployment using TiUP might contain the f
 - [global](#global): The cluster's global configuration. Some of the configuration items use the default values and you can configure them separately in each instance.
 - [monitored](#monitored): Configuration for monitoring services, namely, the blackbox_exporter and the `node_exporter`. On each machine, a `node_exporter` and a `blackbox_exporter` are deployed.
 - [server_configs](#server_configs): Components' global configuration. You can configure each component separately. If an instance has a configuration item with the same name, the instance's configuration item will take effect.
-- [pd_servers](#pd_servers): The configuration of the PD instance. This configuration specifies the machines on which the PD component is deployed.
-- [tidb_servers](#tidb_servers): The configuration of the TiDB instance. This configuration specifies the machines on which the TiDB component is deployed.
-- [tikv_servers](#tikv_servers): The configuration of the TiKV instance. This configuration specifies the machines on which the TiKV component is deployed.
-- [tiflash_servers](#tiflash_servers): The configuration of the TiFlash instance. This configuration specifies the machines on which the TiFlash component is deployed.
-- [pump_servers](#pump_servers): The configuration of the Pump instance. This configuration specifies the machines on which the Pump component is deployed.
-- [drainer_servers](#drainer_servers): The configuration of the Drainer instance. This configuration specifies the machines on which the Drainer component is deployed.
-- [cdc_servers](#cdc_servers): The configuration of the TiCDC instance. This configuration specifies the machines on which the TiCDC component is deployed.
-- [tispark_masters](#tispark_masters): The configuration of the TiSpark master instance. This configuration specifies the machines on which the TiSpark master component is deployed. Only one node of TiSpark master can be deployed.
-- [tispark_workers](#tispark_workers): The configuration of the TiSpark worker instance. This configuration specifies the machines on which the TiSpark worker component is deployed.
-- [monitoring_servers](#monitoring_servers): Specifies the machines on which Prometheus is deployed. TiUP supports deploying multiple Prometheus instances but only the first instance is used.
-- [grafana_servers](#grafana_servers): The configuration of the Grafana instance. This configuration specifies the machines on which Grafana is deployed.
-- [alertmanager_servers](#alertmanager_servers): The configuration of the Alertmanager instance. This configuration specifies the machines on which Alertmanager is deployed.
+- [pd_servers](#pd_servers): The configuration of the PD instance. This configuration specifies the machines to which the PD component is deployed.
+- [tidb_servers](#tidb_servers): The configuration of the TiDB instance. This configuration specifies the machines to which the TiDB component is deployed.
+- [tikv_servers](#tikv_servers): The configuration of the TiKV instance. This configuration specifies the machines to which the TiKV component is deployed.
+- [tiflash_servers](#tiflash_servers): The configuration of the TiFlash instance. This configuration specifies the machines to which the TiFlash component is deployed.
+- [pump_servers](#pump_servers): The configuration of the Pump instance. This configuration specifies the machines to which the Pump component is deployed.
+- [drainer_servers](#drainer_servers): The configuration of the Drainer instance. This configuration specifies the machines to which the Drainer component is deployed.
+- [cdc_servers](#cdc_servers): The configuration of the TiCDC instance. This configuration specifies the machines to which the TiCDC component is deployed.
+- [tispark_masters](#tispark_masters): The configuration of the TiSpark master instance. This configuration specifies the machines to which the TiSpark master component is deployed. Only one node of TiSpark master can be deployed.
+- [tispark_workers](#tispark_workers): The configuration of the TiSpark worker instance. This configuration specifies the machines to which the TiSpark worker component is deployed.
+- [monitoring_servers](#monitoring_servers): Specifies the machines to which Prometheus is deployed. TiUP supports deploying multiple Prometheus instances but only the first instance is used.
+- [grafana_servers](#grafana_servers): The configuration of the Grafana instance. This configuration specifies the machines to which Grafana is deployed.
+- [alertmanager_servers](#alertmanager_servers): The configuration of the Alertmanager instance. This configuration specifies the machines to which Alertmanager is deployed.
 
 ### `global`
 
@@ -155,9 +155,9 @@ The above configuration specifies the global configuration of TiDB and TiKV.
 
 ### `pd_servers`
 
-`pd_servers` specifies the machines on which PD services are deployed. It also specifies the service configuration on each machine. `pd_servers` is an array, and each element of the array contains the following fields:
+`pd_servers` specifies the machines to which PD services are deployed. It also specifies the service configuration on each machine. `pd_servers` is an array, and each element of the array contains the following fields:
 
-- `host`: Specifies the machine on which the PD services are deployed. The field value is the IP address and cannot be omitted.
+- `host`: Specifies the machine to which the PD services are deployed. The field value is the IP address and cannot be omitted.
 
 - `listen_host`: When the machine has multiple IP addresses, `listen_host` specifies the listening IP address of the service. The default value is `0.0.0.0`.
 
@@ -213,9 +213,9 @@ The above configuration specifies that PD will be deployed on `10.0.1.11` and `1
 
 ### `tidb_servers`
 
-`tidb_servers` specifies the machines on which TiDB services are deployed. It also specifies the service configuration on each machine. `tidb_servers` is an array, and each element of the array contains the following fields:
+`tidb_servers` specifies the machines to which TiDB services are deployed. It also specifies the service configuration on each machine. `tidb_servers` is an array, and each element of the array contains the following fields:
 
-- `host`: Specifies the machine on which the TiDB services are deployed. The field value is the IP address and cannot be omitted.
+- `host`: Specifies the machine to which the TiDB services are deployed. The field value is the IP address and cannot be omitted.
 
 - `listen_host`: When the machine has multiple IP addresses, `listen_host` specifies the listening IP address of the service. The default value is `0.0.0.0`.
 
@@ -263,9 +263,9 @@ tidb_servers:
 
 ### `tikv_servers`
 
-`tikv_servers` specifies the machines on which TiKV services are deployed. It also specifies the service configuration on each machine. `tikv_servers` is an array, and each element of the array contains the following fields:
+`tikv_servers` specifies the machines to which TiKV services are deployed. It also specifies the service configuration on each machine. `tikv_servers` is an array, and each element of the array contains the following fields:
 
-- `host`: Specifies the machine on which the TiKV services are deployed. The field value is the IP address and cannot be omitted.
+- `host`: Specifies the machine to which the TiKV services are deployed. The field value is the IP address and cannot be omitted.
 
 - `listen_host`: When the machine has multiple IP addresses, `listen_host` specifies the listening IP address of the service. The default value is `0.0.0.0`.
 
@@ -317,9 +317,9 @@ tikv_servers:
 
 ### `tiflash_servers`
 
-`tiflash_servers` specifies the machines on which TiFlash services are deployed. It also specifies the service configuration on each machine. This section is an array, and each element of the array contains the following fields:
+`tiflash_servers` specifies the machines to which TiFlash services are deployed. It also specifies the service configuration on each machine. This section is an array, and each element of the array contains the following fields:
 
-- `host`: Specifies the machine on which the TiFlash services are deployed. The field value is the IP address and cannot be omitted.
+- `host`: Specifies the machine to which the TiFlash services are deployed. The field value is the IP address and cannot be omitted.
 
 - `ssh_port`: The SSH port used when connecting to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
 
@@ -380,9 +380,9 @@ tiflash_servers:
 
 ### `pump_servers`
 
-`pump_servers` specifies the machines on which the Pump services of TiDB Binlog are deployed. It also specifies the service configuration on each machine. `pump_servers` is an array, and each element of the array contains the following fields:
+`pump_servers` specifies the machines to which the Pump services of TiDB Binlog are deployed. It also specifies the service configuration on each machine. `pump_servers` is an array, and each element of the array contains the following fields:
 
-- `host`: Specifies the machine on which the Pump services are deployed. The field value is the IP address and cannot be omitted.
+- `host`: Specifies the machine to which the Pump services are deployed. The field value is the IP address and cannot be omitted.
 
 - `ssh_port`: The SSH port used when connecting to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
 
@@ -426,9 +426,9 @@ pump_servers:
 
 ### `drainer_servers`
 
-`drainer_servers` specifies the machines on which the Drainer services of TiDB Binlog are deployed. It also specifies the service configuration on each machine. `drainer_servers` is an array. Each array element contains the following fields:
+`drainer_servers` specifies the machines to which the Drainer services of TiDB Binlog are deployed. It also specifies the service configuration on each machine. `drainer_servers` is an array. Each array element contains the following fields:
 
-- `host`: Specifies the machine on which the Drainer services are deployed. The field value is the IP address and cannot be omitted.
+- `host`: Specifies the machine to which the Drainer services are deployed. The field value is the IP address and cannot be omitted.
 
 - `ssh_port`: The SSH port used when connecting to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
 
@@ -483,9 +483,9 @@ drainer_servers:
 
 ### `cdc_servers`
 
-`cdc_servers` specifies the machines on which the TiCDC services are deployed. It also specifies the service configuration on each machine. `cdc_servers` is an array. Each array element contains the following fields:
+`cdc_servers` specifies the machines to which the TiCDC services are deployed. It also specifies the service configuration on each machine. `cdc_servers` is an array. Each array element contains the following fields:
 
-- `host`: Specifies the machine on which the TiCDC services are deployed. The field value is the IP address and cannot be omitted.
+- `host`: Specifies the machine to which the TiCDC services are deployed. The field value is the IP address and cannot be omitted.
 
 - `ssh_port`: The SSH port used when connecting to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
 
@@ -531,9 +531,9 @@ cdc_servers:
 
 ### `tispark_masters`
 
-`tispark_masters` specifies the machines on which the master node of TiSpark is deployed. It also specifies the service configuration on each machine. `tispark_masters` is an array. Each array element contains the following fields:
+`tispark_masters` specifies the machines to which the master node of TiSpark is deployed. It also specifies the service configuration on each machine. `tispark_masters` is an array. Each array element contains the following fields:
 
-- `host`: Specifies the machine on which the TiSpark master is deployed. The field value is the IP address and cannot be omitted.
+- `host`: Specifies the machine to which the TiSpark master is deployed. The field value is the IP address and cannot be omitted.
 
 - `listen_host`: When the machine has multiple IP addresses, `listen_host` specifies the listening IP address of the service. The default value is `0.0.0.0`.
 
@@ -588,9 +588,9 @@ tispark_masters:
 
 ### `tispark_workers`
 
-`tispark_workers` specifies the machines on which the worker nodes of TiSpark are deployed. It also specifies the service configuration on each machine. `tispark_workers` is an array. Each array element contains the following fields:
+`tispark_workers` specifies the machines to which the worker nodes of TiSpark are deployed. It also specifies the service configuration on each machine. `tispark_workers` is an array. Each array element contains the following fields:
 
-- `host`: Specifies the machine on which the TiSpark workers are deployed. The field value is the IP address and cannot be omitted.
+- `host`: Specifies the machine to which the TiSpark workers are deployed. The field value is the IP address and cannot be omitted.
 
 - `listen_host`: When the machine has multiple IP addresses, `listen_host` specifies the listening IP address of the service. The default value is `0.0.0.0`.
 
@@ -628,9 +628,9 @@ tispark_workers:
 
 ### `monitoring_servers`
 
-`monitoring_servers` specifies the machines on which the Prometheus services are deployed. It also specifies the service configuration on each machine. `monitoring_servers` is an array. Each array element contains the following fields:
+`monitoring_servers` specifies the machines to which the Prometheus services are deployed. It also specifies the service configuration on each machine. `monitoring_servers` is an array. Each array element contains the following fields:
 
-- `host`: Specifies the machine on which the monitoring services are deployed. The field value is the IP address and cannot be omitted.
+- `host`: Specifies the machine to which the monitoring services are deployed. The field value is the IP address and cannot be omitted.
 
 - `ssh_port`: The SSH port used when connecting to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
 
@@ -674,9 +674,9 @@ monitoring_servers:
 
 ### `grafana_servers`
 
-`grafana_servers` specifies the machines on which the Grafana services are deployed. It also specifies the service configuration on each machine. `grafana_servers` is an array. Each array element contains the following fields:
+`grafana_servers` specifies the machines to which the Grafana services are deployed. It also specifies the service configuration on each machine. `grafana_servers` is an array. Each array element contains the following fields:
 
-- `host`: Specifies the machine on which the Grafana services are deployed. The field value is the IP address and cannot be omitted.
+- `host`: Specifies the machine to which the Grafana services are deployed. The field value is the IP address and cannot be omitted.
 
 - `ssh_port`: The SSH port used when connecting to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
 
@@ -721,9 +721,9 @@ grafana_servers:
 
 ### `alertmanager_servers`
 
-`alertmanager_servers` specifies the machines on which the Alertmanager services are deployed. It also specifies the service configuration on each machine. `alertmanager_servers` is an array. Each array element contains the following fields:
+`alertmanager_servers` specifies the machines to which the Alertmanager services are deployed. It also specifies the service configuration on each machine. `alertmanager_servers` is an array. Each array element contains the following fields:
 
-- `host`: Specifies the machine on which the Alertmanager services are deployed. The field value is the IP address and cannot be omitted.
+- `host`: Specifies the machine to which the Alertmanager services are deployed. The field value is the IP address and cannot be omitted.
 
 - `ssh_port`: The SSH port used when connecting to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
 
