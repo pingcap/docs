@@ -22,7 +22,7 @@ tiup dm restart <cluster-name> [flags]
 
 ### -N, --node
 
-- Specifies the nodes to be restarted. The value of this option is a comma-separated list of node IDs. You can get the node IDs from the first column of the [cluster status table](/tiup/tiup-component-dm-display.md) returned by the `tiup cluster display` command.
+- Specifies the nodes to be restarted. The value of this option is a comma-separated list of node IDs. You can get the node IDs from the first column of the [cluster status table](/tiup/tiup-component-dm-display.md) returned by the `tiup dm display` command.
 - Data type: `STRING`
 - If this option is not specified, TiUP restarts all nodes by default.
 
