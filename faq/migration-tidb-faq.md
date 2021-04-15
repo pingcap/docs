@@ -58,9 +58,14 @@ Two solutions:
 
 - You can also increase the limited number of statements in a single TiDB transaction, but this will consume more memory.
 
-### Why does Dumpling return `The local disk space is insufficient` error when exporting a large table?
+### Why does Dumpling return `The local disk space is insufficient` error or cause the upstream database to run out of memory when exporting a table?
 
-This error occurs because the database's primary keys are not evenly distributed. When Dumpling splits the data, some data chunks become excessive. Try to allocate more disk space or [contact us](https://tidbcommunity.slack.com/archives/CH7TTLL7P) to get the nightly version of Dumpling.
+This issue might have the following causes:
+
++ The database's primary keys are not evenly distributed (for example, when you enable [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)).
++ The upstream database is TiDB and the exported table is a partitioned table.
+
+For the above cases, Dumpling splits excessively large data chunk for the export and sends queries with excessively large results. To address the issue, you can [contact us](https://tidbcommunity.slack.com/archives/CH7TTLL7P) to get the nightly version of Dumpling.
 
 ### Does TiDB have a function like the Flashback Query in Oracle? Does it support DDL?
 
@@ -118,5 +123,5 @@ If the amount of data that needs to be deleted at a time is very large, this loo
 
 ### How to improve the data loading speed in TiDB?
 
-- The [Lightning](/tidb-lightning/tidb-lightning-overview.md) tool is developed for distributed data import. It should be noted that the data import process does not perform a complete transaction process for performance reasons. Therefore, the ACID constraint of the data being imported during the import process cannot be guaranteed. The ACID constraint of the imported data can only be guaranteed after the entire import process ends. Therefore, the applicable scenarios mainly include importing new data (such as a new table or a new index) or the full backup and restoring (truncate the original table and then import data).
+- The [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) tool is developed for distributed data import. It should be noted that the data import process does not perform a complete transaction process for performance reasons. Therefore, the ACID constraint of the data being imported during the import process cannot be guaranteed. The ACID constraint of the imported data can only be guaranteed after the entire import process ends. Therefore, the applicable scenarios mainly include importing new data (such as a new table or a new index) or the full backup and restoring (truncate the original table and then import data).
 - Data loading in TiDB is related to the status of disks and the whole cluster. When loading data, pay attention to metrics like the disk usage rate of the host, TiClient Error, Backoff, Thread CPU and so on. You can analyze the bottlenecks using these metrics.
