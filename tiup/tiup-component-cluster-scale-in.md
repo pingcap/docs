@@ -12,7 +12,7 @@ Because the TiKV, TiFlash and TiDB Binlog components are taken to offline asynch
 
     - Exit tiup-cluster directly after it is stopped by the API without waiting for the entire stopping process to be completed.
     - Execute the `tiup cluster display` command to check the status of the nodes being scaled down and wait for the status to change to `Tombstone`.
-    - Execute the `tiup cluster prune` command to clean up the nodes in the `Tombstone` status, which performs the following operations:
+    - Execute the `tiup cluster prune` command to clean up the nodes in the `Tombstone` status. The `tiup cluster prune` command performs the following operations:
 
         - Stop the services of the nodes that have been taken offline.
         - Clean up the data files of the nodes that have been taken offline.
@@ -21,15 +21,15 @@ Because the TiKV, TiFlash and TiDB Binlog components are taken to offline asynch
 - For other components, the `tiup cluster scale-in` command makes the following operations:
 
     - To take the PD nodes offline, the command uses the API to remove the specified PD nodes from the cluster (this process is fast), stops the services of the specified PD nodes, and then cleans up the data files of the specified PD nodes.
-    - To take other components offline, the command stops the nodes and cleans up the related data files directly.
+    - To take other components offline, the command directly stops the nodes and cleans up the related data files.
 
 ## Syntax
 
-```sh
+```shell
 tiup cluster scale-in <cluster-name> [flags]
 ```
 
-`<cluster-name>` is the name of the cluster to scale down. If you forget the cluster name, check the name in [tiup cluster list](/tiup/tiup-component-cluster-list.md).
+`<cluster-name>` is the name of the cluster to scale in. If you forget the cluster name, check the name returned by [`tiup cluster list`](/tiup/tiup-component-cluster-list.md).
 
 ## Options
 
@@ -47,7 +47,7 @@ tiup cluster scale-in <cluster-name> [flags]
 
 > **Note:**
 >
-> Because the forced removal of a TiKV node does not wait for data to be scheduled, removing more than one serving TiKV node is in the risk of data loss.
+> Because the forced removal of a TiKV node does not wait for data to be scheduled, removing more than one serving TiKV node is at the risk of data loss.
 
 ### --transfer-timeout
 
@@ -57,7 +57,7 @@ tiup cluster scale-in <cluster-name> [flags]
 
 > **Note:**
 >
-> If a PD or TiKV node is scaled down directly without waiting for the leader role migration to be completed, the service performance may jitter.
+> If a PD or TiKV node is taken offline directly without waiting for the leader transfer to be completed, the service performance might jitter.
 
 ### -h, --help
 
@@ -67,4 +67,4 @@ tiup cluster scale-in <cluster-name> [flags]
 
 ## Output
 
-Shows the logs of the scaling down process.
+Shows the logs of the scaling-in process.

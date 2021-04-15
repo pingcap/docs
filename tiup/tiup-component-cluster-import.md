@@ -4,23 +4,23 @@ title: tiup cluster import
 
 # tiup cluster import
 
-Before TiDB 4.0, clusters were usually deployed using TiDB Ansible. For TiDB 4.0 and later releases, TiUP Cluster provides the `import` command to transfer these clusters to the tiup-cluster component for the management.
+Before TiDB v4.0, TiDB clusters were mainly deployed using TiDB Ansible. For TiDB v4.0 and later releases, TiUP Cluster provides the `import` command to transfer the clusters to the tiup-cluster component for management.
 
 > **Note:**
 >
-> + After importing the TiDB Ansible configuration to TiUP for the management, do not use TiDB Ansible for cluster operations anymore. Otherwise, conflicts might be caused due to inconsistent meta information.
-> + The `import` command does not support the import of the following clusters. If the clusters deployed using TiDB Ansible are in any of the following scenarios, do not use the `import` command.
+> + After importing the TiDB Ansible configuration to TiUP for management, **DO NOT** use TiDB Ansible for cluster operations anymore. Otherwise, conflicts might be caused due to inconsistent meta information.
+> + If the clusters deployed using TiDB Ansible are in any of the following situations, do not use the `import` command.
 > + Clusters with TLS encryption enabled
 > + Pure KV clusters (clusters without TiDB instances)
-> + Clusters with `Kafka` enabled
-> + Clusters with `Spark` enabled
-> + Clusters with TiDB Lightning/Importer enabled
+> + Clusters with Kafka enabled
+> + Clusters with Spark enabled
+> + Clusters with TiDB Lightning/TiKV Importer enabled
 > + Clusters still using the old `push` mode to collect monitoring metrics (if you keep the default mode `pull` unchanged, using the `import` command is supported)
 > + Clusters in which the non-default ports (the ports configured in the `group_vars` directory are compatible) are separately configured in the `inventory.ini` configuration file using `node_exporter_port` / `blackbox_exporter_port`
 
 ## Syntax
 
-```sh
+```shell
 tiup cluster import [flags]
 ```
 
