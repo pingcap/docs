@@ -14,7 +14,7 @@ tiup [flags] <command> [args...]        # Executes a command
 tiup [flags] <component> [args...]      # Runs a component
 ```
 
-You can use the `help` command to get the information of a specific command. The summary of each command shows its parameters and their usage. Required parameters are shown in angle brackets, and optional parameters are shown in square brackets.
+You can use the `help` command to get the information of a specific command. The summary of each command shows its parameters and their usage. Mandatory parameters are shown in angle brackets, and optional parameters are shown in square brackets.
 
 `<command>` represents the command name. For the list of supported commands, see the [Command list](#command-list) below. `<component>` represents the component name. For the list of supported components, see the [Component list](#component-list) below.
 
@@ -23,7 +23,7 @@ You can use the `help` command to get the information of a specific command. The
 ### -B, --binary
 
 - Data type: `BOOLEAN`
-- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command and pass in the `true` value or no value.
+- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command, and pass the `true` value or do not pass any value.
 - If you enable this option, the specified binary file path is printed.
 
     - Executing `tiup -B/--binary <component>` will have the path of the latest stable installed `<component>` component printed. If `<component>` is not installed, an error is returned.
@@ -49,7 +49,7 @@ You can use the `help` command to get the information of a specific command. The
 > This option is deprecated since v1.3.0.
 
 - Data type: `BOOLEAN`
-- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command and pass in the `true` value or no value.
+- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command, and pass the `true` value or do not pass any value.
 - Skips the validity check for version numbers. By default, the specified version number can only be the semantic version.
 
 ### -T, --tag
