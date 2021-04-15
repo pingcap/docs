@@ -4,7 +4,7 @@ title: tiup dm prune
 
 # tiup dm prune
 
-When [scaling in the cluster](/tiup/tiup-component-dm-scale-in.md), a small amount of meta-information in etcd is not cleaned up, which usually causes no problem. If you need to clean the meta-information up, you can manually execute the `tiup cluster prune` command.
+When [scaling in the cluster]<!--(/tiup/tiup-component-dm-scale-in.md) -->, a small amount of meta-information in etcd is not cleaned up, which usually causes no problem. If you need to clean the meta-information up, you can manually execute the `tiup cluster prune` command.
 
 ## Syntax
 

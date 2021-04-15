@@ -20,7 +20,7 @@ tiup dm start <cluster-name> [flags]
 
 - Specifies the nodes to be started. If not specified, all nodes are started. The value of this option is a comma-separated list of node IDs. The node ID is the first column of the [cluster status](/tiup/tiup-component-dm-display.md) table.
 - Data type: `strings`
-- Default: `[]`, which means all nodes are selected.
+- Default: `[]`. If this option is not specified in the command, all nodes are started.
 
 > **Note:**
 >
@@ -28,9 +28,9 @@ tiup dm start <cluster-name> [flags]
 
 ### -R, --role
 
-- Specifies the roles to be started. If not specified, all roles are started. The value of this option is a comma-separated list of node roles. The role is the second column of the [cluster status](/tiup/tiup-component-dm-display.md) table.
+- Specifies the roles to be started. If not specified, all roles are started. The value of this option is a comma-separated list of node roles. The role is the second column of the [cluster status]<!--(/tiup/tiup-component-dm-display.md) --> table.
 - Data type: `strings`
-- Default: `[]`, which means all roles are selected.
+- Default: `[]`. If this option is not specified in the command, all roles are started.
 
 > **Note:**
 >
