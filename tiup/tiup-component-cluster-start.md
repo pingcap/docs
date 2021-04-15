@@ -18,13 +18,13 @@ tiup cluster start <cluster-name> [flags]
 
 ### -N, --node
 
-Specifies the IDs of the nodes to start, splitting by commas if starting multiple nodes. The node IDs are in the first column of the [tiup cluster display](/tiup/tiup-component-cluster-display.md) table.
-Data type: `STRING`
-Default: []. If this option is not specified in the command, the command starts all the nodes.
+- Specifies the nodes to be started. If not specified, all nodes are started. The value of this option is a comma-separated list of node IDs. The node ID is the first column of the [cluster status](/tiup/tiup-component-cluster-display.md) table.
+- Data type: `STRING`
+- Default: `[]`. If this option is not specified in the command, all nodes are started.
 
 > **Note:**
-> 
-> If `-R, --role` is also specified, only the services in the intersection of the specified nodes and roles will be started.
+>
+> If the `-R, --role` option is specified at the same time, then the services in their intersection are started.
 
 ### -R, --role strings
 
