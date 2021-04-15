@@ -26,15 +26,15 @@ tiup cluster start <cluster-name> [flags]
 >
 > If the `-R, --role` option is specified at the same time, then the services in their intersection are started.
 
-### -R, --role strings
+### -R, --role
 
-Specifies the roles to be started, splitting by commas if starting multiple roles. The roles are in the second column of the [tiup cluster display](/tiup/tiup-component-cluster-display.md) table.
-Data type: `STRING`
-Default: []. If this option is not specified in the command, the command starts all the roles.
+- Specifies the roles to be started. If not specified, all roles are started. The value of this option is a comma-separated list of node roles. The role is the second column of the [cluster status](/tiup/tiup-component-cluster-display.md) table.
+- Data type: `STRING`
+- Default: `[]`.  If this option is not specified in the command, all roles are started.
 
 > **Note:**
-> 
-> If `-N, --node` is also specified, only the services in the intersection of the specified nodes and roles will be started.
+>
+> If the `-N, --node` option is specified at the same time, the services in their intersection are started.
 
 ### -h, --help
 
