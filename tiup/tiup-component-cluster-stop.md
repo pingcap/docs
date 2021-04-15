@@ -22,23 +22,23 @@ tiup cluster stop <cluster-name> [flags]
 
 ### -N, --node
 
-Specifies the IDs of the nodes to stop, splitting by commas for multiple nodes. The node IDs are in the first column of the [tiup cluster display](/tiup/tiup-component-cluster-display.md) table.
+Specifies the nodes to be restarted. The value of this option is a comma-separated list of node IDs. You can get the node IDs from the first column of the [cluster status table](/tiup/tiup-component-cluster-display.md) returned by the `tiup cluster display` command.
 Data type: `STRING`
 Default: []. If this option is not specified in the command, the command stops all the nodes.
 
 > **Note:**
 > 
-> If `-R, --role` is also specified, only the services in the intersection of the specified nodes and roles are stopped.
+> If the `-R, --role` option is specified at the same time, only the service nodes that match both the specifications of `-N, --node` and `-R, --role` are restarted.
 
-### -R, --role strings
+### -R, --role
 
-Specifies the roles to stop, splitting by commas for multiple roles. The roles are in the second column of the [tiup cluster display](/tiup/tiup-component-cluster-display.md) table.
+Specified the roles of nodes to be restarted. The value of this option is a comma-separated list of the roles of the nodes. You can get the roles of the nodes from the second column of the [cluster status table](/tiup/tiup-component-cluster-display.md) returned by the `tiup cluster display` command.
 Data type: `STRING`
 Default: []. If this option is not specified in the command, the command stops all the roles.
 
 > **Note:**
 > 
-> If `-N, --node` is also specified, only the services in the intersection of the specified nodes and roles are stopped.
+> If the `-N, --node` option is specified at the same time, only the service nodes that match both the specifications of `-N, --node` and `-R, --role` are restarted.
 
 ### -h, --help
 

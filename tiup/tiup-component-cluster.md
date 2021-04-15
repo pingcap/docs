@@ -12,7 +12,7 @@ TiUP Cluster is a cluster management component of TiUP written in Golang. You ca
 tiup cluster [command] [flags]
 ```
 
-`[command]` is the name of the command. For the list of supported commands, refer to the [command list](#command-list) below.
+`[command]` is the name of the command. For the supported commands, refer to the [command list](#command-list) below.
 
 ## Options
 

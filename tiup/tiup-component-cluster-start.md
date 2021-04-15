@@ -12,29 +12,29 @@ The `tiup cluster start` command is used to start all services or some services 
 tiup cluster start <cluster-name> [flags]
 ```
 
-`<cluster-name>` is the name of the cluster to operate on. If you forget the cluster name, check it with the [cluster list](/tiup/tiup-component-cluster-list.md) command.
+`<cluster-name>` is the name of the cluster to operate on. If you forget the cluster name, check it using the [cluster list](/tiup/tiup-component-cluster-list.md) command.
 
 ## Options
 
 ### -N, --node
 
-- Specifies the nodes to be started. If not specified, all nodes are started. The value of this option is a comma-separated list of node IDs. The node ID is the first column of the [cluster status](/tiup/tiup-component-cluster-display.md) table.
+- Specifies the nodes to be restarted. The value of this option is a comma-separated list of node IDs. You can get the node IDs from the first column of the [cluster status table](/tiup/tiup-component-cluster-display.md) returned by the `tiup cluster display` command.
 - Data type: `STRING`
 - Default: `[]`. If this option is not specified in the command, all nodes are started.
 
 > **Note:**
 >
-> If the `-R, --role` option is specified at the same time, then the services in their intersection are started.
+> If the `-R, --role` option is specified at the same time, only the service nodes that match both the specifications of `-N, --node` and `-R, --role` are restarted.
 
 ### -R, --role
 
-- Specifies the roles to be started. If not specified, all roles are started. The value of this option is a comma-separated list of node roles. The role is the second column of the [cluster status](/tiup/tiup-component-cluster-display.md) table.
+- Specified the roles of nodes to be restarted. The value of this option is a comma-separated list of the roles of the nodes. You can get the roles of the nodes from the second column of the [cluster status table](/tiup/tiup-component-cluster-display.md) returned by the `tiup cluster display` command.
 - Data type: `STRING`
 - Default: `[]`.  If this option is not specified in the command, all roles are started.
 
 > **Note:**
 >
-> If the `-N, --node` option is specified at the same time, the services in their intersection are started.
+> If the `-N, --node` option is specified at the same time, only the service nodes that match both the specifications of `-N, --node` and `-R, --role` are restarted.
 
 ### -h, --help
 
