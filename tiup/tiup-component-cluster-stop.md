@@ -48,4 +48,4 @@ Default: []. If this option is not specified in the command, the command stops a
 
 ## Output
 
-The output contains the stopping logs.
+The log of stopping the service.
