@@ -24,7 +24,7 @@ tiup dm [command] [flags]
 
     - `builtin`: Uses the built-in easyssh client of tiup-cluster as the SSH client.
     - `system`: Uses the default SSH client of the current operating system.
-    - `none`: The SSH client is not used. The deployment is only for the current machine.
+    - `none`: No SSH client is used. The deployment is only for the current machine.
 
 - If this option is not specified in the command, `builtin` is used as the default value.
 
