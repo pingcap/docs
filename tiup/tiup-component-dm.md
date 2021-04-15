@@ -4,7 +4,7 @@ title: TiUP DM
 
 # TiUP DM
 
-Similar to [TiUP Cluster](/tiup/tiup-component-cluster.md) which is used to manage TiDB clusters, TiUP DM is a cluster management component for DM clusters. You can use the TiUP DM component to perform daily operations and maintenance tasks of DM clusters, including deploying, starting, stopping, destroying, elastic scaling, upgrading DM clusters, and managing the configuration parameters of the DM cluster.
+Similar to [TiUP Cluster](/tiup/tiup-component-cluster.md) which is used to manage TiDB clusters, TiUP DM is used to manage DM clusters. You can use the TiUP DM component to perform daily operations and maintenance tasks of DM clusters, including deploying, starting, stopping, destroying, elastic scaling, upgrading DM clusters, and managing the configuration parameters of DM clusters.
 
 ## Syntax
 
@@ -48,11 +48,11 @@ tiup dm [command] [flags]
 
 ### -v, --version
 
-- Prints the current version of TiUP Cluster.
+- Prints the current version of TiUP DM.
 - Data type:`BOOLEAN`
 - This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
 
-### -h, --help（boolean，默认 false）
+### -h, --help
 
 - Prints help information about the specified command.
 - Data type: `BOOLEAN`

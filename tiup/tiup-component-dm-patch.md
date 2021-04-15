@@ -4,12 +4,12 @@ title: tiup dm patch
 
 # tiup dm patch
 
-If you need to dynamically replace the binaries of a service while the cluster is running (namely, keep the cluster available during the replacement process), you can use the `tiup dm patch` command. After the command is executed, TiUP does the following things:
+If you need to dynamically replace the binaries of a service while the cluster is running (that is, to keep the cluster available during the replacement), you can use the `tiup dm patch` command. The command does the following:
 
 - Uploads the binary package for replacement to the target machine.
-- Takes the related nodes offline via the API.
+- Takes the related nodes offline using the API.
 - Stops the target service.
-- Unpacks the binary package and replace the service.
+- Unpacks the binary package and replaces the service.
 - Starts the target service.
 
 ## Syntax
@@ -20,7 +20,7 @@ tiup dm patch <cluster-name> <package-path> [flags]
 
 - `<cluster-name>`: The name of the cluster to be operated.
 - `<package-path>`: The path to the binary package used for replacement. The steps to generate the package are as follows:
-    - Determine the name `${component}` (dm-master, dm-worker ...) of the component to be replaced (tidb, tikv, pd...), the `${version}` of the component (v2.0.0, v2.0.1 ...), and the operating system `${os}` and platform `${arch}` on which the component runs.
+    - Determine the name `${component}` (dm-master, dm-worker ...) of the component to be replaced, the `${version}` of the component (v2.0.0, v2.0.1 ...), and the operating system `${os}` and platform `${arch}` on which the component runs.
     - Download the current component package using the command `wget https://tiup-mirrors.pingcap.com/${component}-${version}-${os}-${arch}.tar.gz -O /tmp/${component}-${version}-${os}-${arch}.tar.gz`.
     - Run `mkdir -p /tmp/package && cd /tmp/package` to create a temporary directory to pack files.
     - Run `tar xf /tmp/${component}-${version}-${os}-${arch}.tar.gz` to unpack the original binary package.
@@ -33,15 +33,15 @@ tiup dm patch <cluster-name> <package-path> [flags]
 
 ### --overwrite
 
-- After you patch a certain component (such as TiDB or TiKV), when the tiup cluster scales out the component, tiup-dm uses the original component version by default. To use the version that you patch when the cluster scales out in the future, you need to specified the option `--overwrite` in the command.
+- After you patch a certain component (such as TiDB or TiKV), when the tiup cluster scales out the component, tiup-dm uses the original component version by default. To use the version that you patch when the cluster scales out in the future, you need to specify the option `--overwrite` in the command.
 - Data type: `BOOLEAN`
 - This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
 
 ### -N, --node
 
-- Specifies nodes to be replaced. The value of this option is a comma-separated list of node IDs. You can get the node ID from the first column of the [cluster status table](/tiup/tiup-component-cluster-display.md).
-- Data type: `STRINGS`
-- If this option is not specified, TiUP does not select any nodes to replace by default.
+- Specifies the nodes to be replaced. The value of this option is a comma-separated list of node IDs. You can get the node IDs from the first column of the [cluster status table](/tiup/tiup-component-dm-display.md) returned by the `tiup cluster display` command.
+- Data type: `STRING`
+- If this option is not specified, TiUP selects all nodes to replace by default.
 
 > **Note:**
 >
@@ -49,9 +49,9 @@ tiup dm patch <cluster-name> <package-path> [flags]
 
 ### -R, --role
 
-- Specified roles to be replaced. The value of this option is a comma-separated list of the roles of the nodes. You can get the roles of the nodes from the second column of the [cluster status table](/tiup/tiup-component-cluster-display.md).
-- Data type: `STRINGS`
-- If this option is not specified, TiUP does not select any roles to replace by default.
+- Specified the roles to be replaced. The value of this option is a comma-separated list of the roles of the nodes. You can get the roles of the nodes from the second column of the [cluster status table](/tiup/tiup-component-dm-display.md) returned by the `tiup cluster display` command.
+- Data type: `STRING`
+- If this option is not specified, TiUP selects all roles to replace by default.
 
 > **Note:**
 >
