@@ -155,11 +155,17 @@ The TiDB configuration file supports more options than command-line parameters. 
 - Default value: `true`
 - When this configuration is set to `false` on all TiDB instances, the telemetry collection in TiDB is disabled and the [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402-version) system variable does not take effect. See [Telemetry](/telemetry.md) for details.
 
-### `enable-tcp4-only` <span class="version-mark">New in v5.0.0</span>
+### `enable-tcp4-only` <span class="version-mark">New in v5.0</span>
 
 - Enables or disables listening on TCP4 only.
 - Default value: `false`
 - Enabling this option is useful when TiDB is used with LVS for load balancing because the [real client IP from the TCP header](https://github.com/alibaba/LVS/tree/master/kernel/net/toa) can be correctly parsed by the "tcp4" protocol.
+
+### `enable-enum-length-limit` <span class="version-mark">New in v5.0</span>
+
++ Determines whether to limit the maximum length of a single `ENUM` element and a single `SET` element.
++ Default value: `true`
++ When this configuration value is `true`, the maximum length of a single `ENUM` element and a single `SET` element is 255 characters, which is compatible with [MySQL 8.0](https://dev.mysql.com/doc/refman/8.0/en/string-type-syntax.html). When this configuration value is `false`, there is no limit on the length of a single element, which is compatible with TiDB (earlier than v5.0).
 
 ## Log
 
@@ -499,11 +505,6 @@ The Plan Cache configuration of the `PREPARE` statement.
 
 This section introduces configuration items related to the Coprocessor Cache feature.
 
-### `enable`
-
-- Determines whether to enable [Coprocessor Cache](/coprocessor-cache.md).
-- Default value: `false` (which means that Coprocessor Cache is disabled by default)
-
 ### `capacity-mb`
 
 - The total size of the cached data. When the cache space is full, old cache entries are evicted. When the value is `0.0`, the Coprocessor Cache feature is disabled.
@@ -511,7 +512,7 @@ This section introduces configuration items related to the Coprocessor Cache fea
 - Unit: MB
 - Type: Float
 
-### txn-local-latches
+## txn-local-latches
 
 Configuration related to the transaction latch. It is recommended to enable it when many local transaction conflicts occur.
 
