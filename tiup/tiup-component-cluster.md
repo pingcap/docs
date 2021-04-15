@@ -32,7 +32,7 @@ tiup cluster [command] [flags]
 
 - Specifies the SSH connection timeout in seconds.
 - Data type: `UINT`
-- The option is enabled by default with `5` seconds (the default value) passed in.
+- If this option is not specified in the command, the default timeout is `5` seconds.
 
 ### --wait-timeout
 
