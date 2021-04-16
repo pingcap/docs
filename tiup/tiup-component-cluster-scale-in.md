@@ -8,20 +8,20 @@ The `tiup cluster scale-in` command is used to scale in the cluster, which takes
 
 Because the TiKV, TiFlash, and TiDB Binlog components are taken offline asynchronously (which requires TiUP to remove the node through API first) and the stopping process takes a long time (which requires TiUP to continuously check whether the node is successfully taken offline), the TiKV, TiFlash, and TiDB Binlog components are handled particularly as follows:
 
-- For TiKV, TiFlash and TiDB Binlog components:
+- For TiKV, TiFlash and, TiDB Binlog components:
 
-    1. TiUP takes the node offline through API and directly exits without waiting for the process to be completed.
-    2. To check the status of the nodes being scaled in, you need to execute the `tiup cluster display` command, and wait for the status to be changed to `Tombstone`.
+    1. TiUP Cluster takes the node offline through API and directly exits without waiting for the process to be completed.
+    2. To check the status of the nodes being scaled in, you need to execute the `tiup cluster display` command and wait for the status to become `Tombstone`.
     3. To clean up the nodes in the `Tombstone` status, you need to execute the `tiup cluster prune` command. The `tiup cluster prune` command performs the following operations:
 
         - Stops the services of the nodes that have been taken offline.
         - Cleans up the data files of the nodes that have been taken offline.
-        - Updates the cluster topology and remove the nodes that have been taken offline.
+        - Updates the cluster topology and removes the nodes that have been taken offline.
 
-- For other components:
+For other components:
 
-    - When taking the PD components offline, TiUP cluster quickly deletes the specified nodes from the cluster through API, stops the service of the specified PD nodes, and then deletes the related data files from the nodes.
-    - When taking other components down, TiUP cluster directly stops the node services and deletes the related data files from the specified nodes.
+- When taking the PD components offline, TiUP Cluster quickly deletes the specified nodes from the cluster through API, stops the service of the specified PD nodes, and then deletes the related data files from the nodes.
+- When taking other components down, TiUP Cluster directly stops the node services and deletes the related data files from the specified nodes.
 
 ## Syntax
 
@@ -35,7 +35,7 @@ tiup cluster scale-in <cluster-name> [flags]
 
 ### -N, --node
 
-- Specifies the nodes to scale in, splitting by commas for multiple nodes.
+- Specifies the nodes to take down. Multiple nodes are separated by commas.
 - Data type: `STRING`
 - There is no default value. This option is mandatory and the value must be not null.
 
