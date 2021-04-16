@@ -14,8 +14,8 @@ A topology configuration file for DM cluster deployment using TiUP might contain
 
 - [global](#global): the cluster's global configuration. Some of the configuration items use the default values of the cluster, and you can configure them separately in each instance.
 - [server_configs](#server_configs): the components' global configuration. You can configure each component separately. If an instance has a configuration item with the same key, the instance's configuration item will take effect.
-- [master_servers](#master_servers): the configuration of DM master instance. The configuration specifies the machines to which the master service of the DM component is deployed.
-- [worker_servers](#worker_servers): the configuration of DM worker instance. The configuration specifies the machines to which the worker service of the DM component is deployed.
+- [master_servers](#master_servers): the configuration of the DM-master instance. The configuration specifies the machines to which the master service of the DM component is deployed.
+- [worker_servers](#worker_servers): the configuration of the DM-worker instance. The configuration specifies the machines to which the worker service of the DM component is deployed.
 - [monitoring_servers](#monitoring_servers): specifies the machines to which the Prometheus instances are deployed. TiUP supports deploying multiple Prometheus instances but only the first instance is used.
 - [grafana_servers](#grafana_servers): the configuration of the Grafana instances. The configuration specifies the machines to which the Grafana instances are deployed.
 - [alertmanager_servers](#alertmanager_servers): the configuration of the Alertemanager instances. The configuration specifies the machines to which the Alertmanager instances are deployed.
