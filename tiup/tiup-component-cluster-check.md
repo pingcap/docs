@@ -147,12 +147,12 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 > **Note:**
 >
 > tiup-cluster supports checking both un-deployed clusters and deployed clusters with the following command format:
-
-```shell
-tiup cluster check <topology.yml | cluster-name> [flags]
-```
-
-If the `tiup cluster check <cluster-name>` command is used, you must add the `--cluster` option: `tiup cluster check <cluster-name> --cluster`.
+> 
+> ```shell
+> tiup cluster check <topology.yml | cluster-name> [flags]
+> ```
+> 
+> If the `tiup cluster check <cluster-name>` command is used, you must add the `--cluster` option: `tiup cluster check <cluster-name> --cluster`.
 
 ### --enable-cpu
 
