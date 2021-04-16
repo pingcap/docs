@@ -55,7 +55,7 @@ You can use the `help` command to get the information of a specific command. The
 ### -T, --tag
 
 - Data type: `STRING`
-- Specifies a tag for the component to be started. Some components need to use disk storage during the execution, and TiUP will allocate a temporary storage directory for this execution. If you want TiUP to allocate a fixed directory, you can use `-T/--tag` to specify the name of the directory, so that the same batch of files can be read and written in multiple executions with the same tag.
+- Specifies a tag for the component to be started. Some components need to use disk storage during the execution, and TiUP allocates a temporary storage directory for this execution. If you want TiUP to allocate a fixed directory, you can use `-T/--tag` to specify the name of the directory, so that the same batch of files can be read and written in multiple executions with the same tag.
 
 ### -v, --version
 
