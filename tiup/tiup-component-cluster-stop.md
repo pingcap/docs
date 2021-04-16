@@ -22,7 +22,7 @@ tiup cluster stop <cluster-name> [flags]
 
 ### -N, --node
 
-- Specifies the nodes to be restarted. The value of this option is a comma-separated list of node IDs. You can get the node IDs from the first column of the [cluster status table](/tiup/tiup-component-cluster-display.md) returned by the `tiup cluster display` command.
+- Specifies the nodes to be stoped. The value of this option is a comma-separated list of node IDs. You can get the node IDs from the first column of the [cluster status table](/tiup/tiup-component-cluster-display.md) returned by the `tiup cluster display` command.
 - Data type: `STRING`
 - Default: []. If this option is not specified in the command, the command stops all the nodes.
 
@@ -32,7 +32,7 @@ tiup cluster stop <cluster-name> [flags]
 
 ### -R, --role
 
-- Specifies the roles of nodes to be restarted. The value of this option is a comma-separated list of the roles of the nodes. You can get the roles of the nodes from the second column of the [cluster status table](/tiup/tiup-component-cluster-display.md) returned by the `tiup cluster display` command.
+- Specifies the roles of nodes to be stoped. The value of this option is a comma-separated list of the roles of the nodes. You can get the roles of the nodes from the second column of the [cluster status table](/tiup/tiup-component-cluster-display.md) returned by the `tiup cluster display` command.
 - Data type: `STRING`
 - Default: []. If this option is not specified in the command, the command stops all the roles.
 
