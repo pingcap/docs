@@ -45,8 +45,8 @@ The `global` section corresponds to the cluster's global configuration and has t
 - `resource_control`: runtime resource control. All configurations in this field are written to the service file of systemd. There is no limit by default. The resources that can be controlled are as follows:
     - `memory_limit`: limits the maximum memory at runtime. For example, "2G" means that the maximum memory of 2 GB can be used.
     - `cpu_quota`: limits the maximum CPU usage at runtime. For example, "200%".
-    - `io_read_bandwidth_max`: limits the maximum I/O bandwidth for disk reads. For example, "/dev/disk/by-path/pci-0000:00:1f.2-scsi-0:0:0:0:0 100M".
-    - `io_write_bandwidth_max`: limits the maximum I/O bandwidth for disk writes. For example, "/dev/disk/by-path/pci-0000:00:1f.2-scsi-0:0:0:0:0 100M".
+    - `io_read_bandwidth_max`: limits the maximum I/O bandwidth for disk reads. For example, `"/dev/disk/by-path/pci-0000:00:1f.2-scsi-0:0:0:0:0 100M"`.
+    - `io_write_bandwidth_max`: limits the maximum I/O bandwidth for disk writes. For example, `"/dev/disk/by-path/pci-0000:00:1f.2-scsi-0:0:0:0:0 100M"`.
     - `limit_core`: controls the size of core dump.
 
 A `global` configuration example:
@@ -58,7 +58,7 @@ global:
     memory_limit: "2G"
 ```
 
-In the example, the configuration specifies that the `tidb` user is used to start the cluster, and that each component is limited to a maximum of 2GB of memory when it is running.
+In the example, the configuration specifies that the `tidb` user is used to start the cluster, and that each component is limited to a maximum of 2 GB of memory when it is running.
 
 ### `server_configs`
 
@@ -216,7 +216,7 @@ monitoring_servers:
     rule_dir: /local/rule/dir
 ```
 
-### ``grafana_servers``
+### `grafana_servers`
 
 `grafana_servers` specifies the machines to which the Grafana service is deployed. You can also specify the service configuration on the machine. `grafana_servers` is an array. Each array element contains the following fields:
 
@@ -233,9 +233,9 @@ monitoring_servers:
 
 > **Note:**
 >
-> If the `dashboard_dir` field of `grafana_servers` is configured, after executing the `tiup cluster rename` command to rename the cluster, you need to do the following:
+> If the `dashboard_dir` field of `grafana_servers` is configured, after executing the `tiup cluster rename` command to rename the cluster, you need to perform the following operations:
 >
-> 1. In the local `dashboards` directory, update the value of the `datasource` field to the new cluster name (the `datasource` is named according to the cluster name).
+> 1. In the local `dashboards` directory, update the value of the `datasource` field to the new cluster name (the `datasource` is named after the cluster name).
 > 2. Execute the `tiup cluster reload -R grafana` command.
 
 In `grafana_servers`, the following fields cannot be modified after the deployment is completed:
@@ -260,8 +260,8 @@ grafana_servers:
 
 - `host`: specifies the machine to deploy to. The field value is an IP address and is mandatory.
 - `ssh_port`: specifies the SSH port to connect to the target machine for operations. If the field is not specified, the `ssh_port` in the `global` section is used.
-- `web_port`: specify the port on which Alertmanager provides webpage services. The default value is "9093".
-- `cluster_port`: Specify the port on which Alertmanger communicates with Alertmanagers. The default value is "9094".
+- `web_port`: specify the port on which Alertmanager provides web services. The default value is "9093".
+- `cluster_port`: Specify the communication port between one Alertmanger and other Alertmanager. The default value is "9094".
 - `deploy_dir`: specifies the deployment directory. If the field is not specified, or specified as a relative directory, the deployment directory is generated according to the `deploy_dir` configuration in the `global` section.
 - `data_dir`: specifies the data directory. If the field is not specified, or specified as a relative directory, the data directory is generated according to the `data_dir` configuration in the `global` section.
 - `log_dir`: specifies the log directory. If the field is not specified, or specified as a relative directory, the log directory is generated according to the `log_dir` configuration in the `global` section.
