@@ -8,7 +8,7 @@ The `tiup cluster deploy` command is used to deploy a new cluster.
 
 ## Syntax
 
-```sh
+```shell
 tiup cluster deploy <cluster-name> <version> <topology.yaml> [flags]
 ```
 
@@ -28,11 +28,11 @@ tiup cluster deploy <cluster-name> <version> <topology.yaml> [flags]
 
 - Specifies the key file used to connect to the target machine.
 - Data type: `STRING`
-- Default: `~/.ssh/id_rsa`
+- If this option is not specified in the command, the `~/.ssh/id_rsa` file is used to connect to the target machine by default.
 
 ### -p, --password
 
-- Specifies the password used to connect to the target machine. Do not use it with `-i/--identity_file` at the same time.
+- Specifies the password used to connect to the target machine. Do not use this option with `-i/--identity_file` at the same time.
 - Data type: `BOOLEAN`
 - Default: false
 
@@ -50,7 +50,7 @@ tiup cluster deploy <cluster-name> <version> <topology.yaml> [flags]
 - Data type: `BOOLEAN`
 - Default: false
 
-### --skip-create-user（boolean，false）
+### --skip-create-user
 
 - During the cluster deployment, tiup-cluster checks whether the specified user name in the topology file exists or not. If not, it creates one. To skip this check, you can use the `--skip-create-user` option.
 - Data type: `BOOLEAN`
