@@ -12,7 +12,7 @@ The `tiup dm upgrade` command is used to upgrade a specified cluster to a specif
 tiup dm upgrade <cluster-name> <version> [flags]
 ```
 
-- `<cluster-name>` is the name of the cluster to operate on. If you forget the cluster name, check it in [tiup cluster list](/tiup/tiup-component-cluster-list.md).
+- `<cluster-name>` is the name of the cluster to be operated on. If you forget the cluster name, check it in [tiup DM cluster list](/tiup/tiup-component-dm-list.md).
 - `<version>` is the target version to be upgraded to. Currently, only upgrading to a later version is allowed, and upgrading to an earlier version is not allowed, which means the downgrade is not allowed. Upgrading to a nightly version is not allowed either.
 
 ## Options

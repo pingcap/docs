@@ -12,7 +12,7 @@ If you want to check the operational status of each component in a DM cluster, i
 tiup dm display <cluster-name> [flags]
 ```
 
-`<cluster-name>` is the name of the cluster to operate on. If you forget the cluster name, check it in [tiup cluster list](/tiup/tiup-component-cluster-list.md).
+`<cluster-name>` is the name of the cluster to be operated. If you forget the cluster name, check it in the [tiup dm cluster list](/tiup/tiup-component-dm-list.md).
 
 ## Options
 
