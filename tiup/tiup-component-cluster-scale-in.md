@@ -41,7 +41,7 @@ tiup cluster scale-in <cluster-name> [flags]
 
 ### --force
 
-- Controls whether to forcibly remove the specified nodes from the cluster. In some cases, it is possible that the host of the node to scale down is down, making it impossible to connect to the node via SSH for operations, so you can forcibly remove the node from the cluster using the `-force` option.
+- Controls whether to forcibly remove the specified nodes from the cluster. Sometimes, the host of the node to take offline might be down, which makes it impossible to connect to the node via SSH for operations, so you can forcibly remove the node from the cluster using the `-force` option.
 - Data type: `BOOLEAN`
 - This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
 
