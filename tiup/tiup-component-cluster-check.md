@@ -22,7 +22,7 @@ Check whether numactl is installed on the target machine. If tied cores are conf
 
 ### System time
 
-Check whether the system time of the target machine is synchronized: compare the system time of the target machine with that of the central control machine, and report an error if the deviation exceeds a certain threshold (500ms).
+Check whether the system time of the target machine is synchronized. Compare the system time of the target machine with that of the central control machine, and report an error if the deviation exceeds a certain threshold (500ms).
 
 ### Time synchronization service
 
