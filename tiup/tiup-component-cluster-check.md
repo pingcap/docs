@@ -176,7 +176,7 @@ If the `tiup cluster check <cluster-name>` command is used, you must add the `--
 
 - Specifies the user name to connect to the target machine. The specified user needs to have the password-free sudo root privileges on the target machine.
 - Data type: `STRING`
-- If this option is not specified in the command, user who executes the command is used as the default value.
+- If this option is not specified in the command, the user who executes the command is used as the default value.
 
 > **Note:**
 >
