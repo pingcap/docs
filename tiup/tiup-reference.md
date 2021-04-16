@@ -67,7 +67,7 @@ Prints the help information.
 
 ## Command list
 
-TiUP has multiple commands, and these commands have multiple sub-commands. For the specific commands and their detailed descriptions, click the corresponding links in list below:
+TiUP has multiple commands, and these commands have multiple sub-commands. For the specific commands and their detailed descriptions, click the corresponding links in the list below:
 
 - [install](/tiup/tiup-command-install.md): Installs a component.
 - [list](/tiup/tiup-command-list.md): Shows the component list.
