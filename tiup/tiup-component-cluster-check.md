@@ -20,7 +20,7 @@ Check whether the CPU of the target machine supports EPOLLEXCLUSIVE.
 
 Check whether numactl is installed on the target machine. If tied cores are configured on the target machine, you must install numactl.
 
-### system time
+### System time
 
 Check whether the system time of the target machine is synchronized: compare the system time of the target machine with that of the central control machine, and report an error if the deviation exceeds a certain threshold (500ms).
 
