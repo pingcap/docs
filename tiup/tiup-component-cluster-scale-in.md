@@ -6,22 +6,22 @@ title: tiup cluster scale-in
 
 The `tiup cluster scale-in` command is used to scale in the cluster, which takes the services of the specified nodes offline, removes the specified nodes from the cluster, and deletes the remaining files from those nodes.
 
-Because the TiKV, TiFlash, and TiDB Binlog components are taken offline asynchronously (the removal needs to be executed through the API first) and the stopping process takes a long time (TiUP needs to keep checking whether the specified nodes have been successfully stopped), the `tiup cluster scale-in` command handles the TiKV, TiFlash, and TiDB Binlog components particularly as follows:
+Because the TiKV, TiFlash, and TiDB Binlog components are taken offline asynchronously (which requires TiUP to remove the node through API first) and the stopping process takes a long time (which requires TiUP to continuously check whether the node is successfully taken offline), the TiKV, TiFlash, and TiDB Binlog components are handled particularly as follows:
 
-- For TiKV, TiFlash and TiDB Binlog components, the `tiup cluster scale-in` command makes the following operations:
+- For TiKV, TiFlash and TiDB Binlog components:
 
-    - Exit tiup-cluster directly after it is stopped by the API without waiting for the entire stopping process to be completed.
-    - Execute the `tiup cluster display` command to check the status of the nodes being scaled down and wait for the status to change to `Tombstone`.
-    - Execute the `tiup cluster prune` command to clean up the nodes in the `Tombstone` status, which performs the following operations:
+    1. TiUP takes the node offline through API and directly exits without waiting for the process to be completed.
+    2. To check the status of the nodes being scaled in, you need to execute the `tiup cluster display` command, and wait for the status to be changed to `Tombstone`.
+    3. To clean up the nodes in the `Tombstone` status, you need to execute the `tiup cluster prune` command. The `tiup cluster prune` command performs the following operations:
 
-        - Stop the services of the nodes that have been taken offline.
-        - Clean up the data files of the nodes that have been taken offline.
-        - Update the cluster topology and remove the nodes that have been taken offline.
+        - Stops the services of the nodes that have been taken offline.
+        - Cleans up the data files of the nodes that have been taken offline.
+        - Updates the cluster topology and remove the nodes that have been taken offline.
 
-- For other components, the `tiup cluster scale-in` command makes the following operations:
+- For other components:
 
-    - To take the PD nodes offline, the command uses the API to remove the specified PD nodes from the cluster (this process is fast), stops the services of the specified PD nodes, and then cleans up the data files of the specified PD nodes.
-    - To take other components offline, the command directly stops the nodes and cleans up the related data files.
+    - When taking the PD components offline, TiUP cluster quickly deletes the specified nodes from the cluster through API, stops the service of the specified PD nodes, and then deletes the related data files from the nodes.
+    - When taking other components down, TiUP cluster directly stops the node services and deletes the related data files from the specified nodes.
 
 ## Syntax
 
@@ -29,13 +29,13 @@ Because the TiKV, TiFlash, and TiDB Binlog components are taken offline asynchro
 tiup cluster scale-in <cluster-name> [flags]
 ```
 
-`<cluster-name>` is the name of the cluster to scale in. If you forget the cluster name, check the name returned by [`tiup cluster list`](/tiup/tiup-component-cluster-list.md).
+`<cluster-name>` is the name of the cluster to scale in. If you forget the cluster name, you can check it using the [`tiup cluster list`](/tiup/tiup-component-cluster-list.md) command.
 
 ## Options
 
 ### -N, --node
 
-- Specifies the nodes to scale down, splitting by commas for multiple nodes.
+- Specifies the nodes to scale in, splitting by commas for multiple nodes.
 - Data type: `STRING`
 - There is no default value. This option is mandatory and the value must be not null.
 
