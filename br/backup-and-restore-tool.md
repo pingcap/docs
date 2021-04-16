@@ -126,8 +126,8 @@ The following are the limitations of using BR for backup and restoration:
 
 The compatibility issues of BR and the TiDB cluster are divided into the following categories:
 
-+ The KV format might change when some features are enabled or disabled. If these features are not consistently enabled or disabled during backup and restore, compatibility issues might occur.
 + Some versions of BR are not compatible with the interface of the TiDB cluster.
++ The KV format might change when some features are enabled or disabled. If these features are not consistently enabled or disabled during backup and restore, compatibility issues might occur.
 
 These features are as follows:
 
