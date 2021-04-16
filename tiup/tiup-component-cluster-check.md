@@ -26,7 +26,7 @@ Check whether the system time of the target machine is synchronized. Compare the
 
 ### Time synchronization service
 
-Check whether the time synchronization service is configured on the target machine: check whether ntpd is running.
+Check whether the time synchronization service is configured on the target machine. Namely, check whether ntpd is running.
 
 ### Swap partitioning
 
@@ -34,14 +34,14 @@ Check whether swap partitioning is enabled on the target machine. It is recommen
 
 ### Kernel parameters
 
-Check the values of the kernel parameters.
+Check the values of the following kernel parameters:
 
-- net.ipv4.tcp_tw_recycle: 0
-- net.ipv4.tcp_syncookies: 0
-- net.core.somaxconn: 32768
-- vm.swappiness: 0
-- vm.overcommit_memory: 0 or 1
-- fs.file-max: 1000000
+- `net.ipv4.tcp_tw_recycle`: 0
+- `net.ipv4.tcp_syncookies`: 0
+- `net.core.somaxconn`: 32768
+- `vm.swappiness`: 0
+- `vm.overcommit_memory`: 0 or 1
+- `fs.file-max`: 1000000
 
 ### Transparent Huge Pages (THP)
 
@@ -57,7 +57,7 @@ Check the limit values in the `/etc/security/limits.conf` file:
 <deploy-user> soft stack 10240
 ```
 
-where `<deploy-user>` is the user who deploys and runs the TiDB cluster, and the last column is the minimum value required for the system.
+`<deploy-user>` is the user who deploys and runs the TiDB cluster, and the last column is the minimum value required for the system.
 
 ### SELinux
 
@@ -85,19 +85,19 @@ Check if the ports defined in the topology (including the auto-completion defaul
 
 ### CPU core number
 
-Check the CPU information of the target machine. For the production cluster, it is recommended that CPU logical core number >= 16.
+Check the CPU information of the target machine. For a production cluster, it is recommended that the number of the CPU logical core is greater than or equal to 16.
 
 > **Note:**
 >
-> CPU core number is not checked by default. To enable the check, you need to add the `-enable-cpu` option.
+> CPU core number is not checked by default. To enable the check, you need to add the `-enable-cpu` option to the command.
 
 ### Memory size
 
-Check the memory size of the target machine. For the production cluster, it is recommended that the total memory capacity >= 32GB.
+Check the memory size of the target machine. For a production cluster, it is recommended that the total memory capacity is greater than or equal to 32GB.
 
 > **Note:**
 >
-> Memory size is not checked by default. To enable the check, you need to add the `-enable-mem` option.
+> Memory size is not checked by default. To enable the check, you need to add the `-enable-mem` option to the command.
 
 ### Fio disk performance test
 
@@ -109,7 +109,7 @@ Use flexible I/O tester (fio) to test the performance of the disk where `data_di
 
 > **Note:**
 >
-> The fio disk performance test is not performed by default. To perform the test, you need to add the `-enable-disk` option.
+> The fio disk performance test is not performed by default. To perform the test, you need to add the `-enable-disk` option to the command.
 
 ## Syntax
 
@@ -117,7 +117,7 @@ Use flexible I/O tester (fio) to test the performance of the disk where `data_di
 tiup cluster check <topology.yml | cluster-name> [flags]
 ```
 
-- If a cluster is not deployed yet, you need to pass the [topology.yml](/tiup/tiup-cluster-topology-reference.md) file that will be used to deploy the cluster. According to the content in this file, tiup-cluster will connect to the corresponding machine to do the check. 
+- If a cluster is not deployed yet, you need to pass the [topology.yml](/tiup/tiup-cluster-topology-reference.md) file that is used to deploy the cluster. According to the content in this file, tiup-cluster connects to the corresponding machine to perform the check. 
 - If a cluster is already deployed, you can use the `<cluster-name>` as the check object.
 
 > **Note:**
@@ -128,7 +128,7 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 
 ### --apply
 
-- Attempts to automatically repair the failed check items. Currently, tiup-cluster only attempts to repair the following:
+- Attempts to automatically repair the failed check items. Currently, tiup-cluster only attempts to repair the following check items:
     - SELinux
     - firewall
     - irqbalance
@@ -176,7 +176,7 @@ If the `tiup cluster check <cluster-name>` command is used, you must add the `--
 
 - Specifies the user name to connect to the target machine. The specified user needs to have the password-free sudo root privileges on the target machine.
 - Data type: `STRING`
-- The option is enabled by default with the user currently executing the command (the default value) passed in.
+- If this option is not specified in the command, user who executes the command is used as the default value.
 
 > **Note:**
 >
@@ -190,7 +190,7 @@ If the `tiup cluster check <cluster-name>` command is used, you must add the `--
 
 > **Note:**
 >
-> This option is valid only if the `--cluster` option is false. Otherwise the value of this option is fixed to `${TIUP_HOME}/storage/cluster/clusters/<cluster-name>/ssh/id_rsa`.
+> This option is valid only if the `--cluster` option is false. Otherwise, the value of this option is fixed to `${TIUP_HOME}/storage/cluster/clusters/<cluster-name>/ssh/id_rsa`.
 
 ### -p, --password
 

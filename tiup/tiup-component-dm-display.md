@@ -4,7 +4,7 @@ title: tiup dm display
 
 # tiup dm display
 
-If you want to check the operational status of each component in a cluster, it is inefficient to log in to each machine one by one. Therefore, tiup-dm provides the `tiup dm display` command to do this job efficiently.
+If you want to check the operational status of each component in a DM cluster, it is inefficient to log in to each machine one by one. Therefore, tiup-dm provides the `tiup dm display` command to do this job efficiently.
 
 ## Syntax
 
@@ -26,7 +26,7 @@ This option is enabled by default with `[]` (which means all nodes) passed in.
 > 
 > If `-R, --role` is also specified, only the services in the intersection of the specified nodes and roles is queried.
 
-### -R, --role strings
+### -R, --role
 
 Specifies the roles to query, splitting by commas for multiple roles. If you are not sure about the role deployed on a node, you can skip this option in the command to show the roles and status of all nodes in the output.
 Data type: `STRING`
@@ -48,7 +48,7 @@ This option is enabled by default with `[]` (which means all roles) passed in.
 - Cluster version
 - SSH client type
 - A table containing the following fields:
-    - `ID`: the Node ID, consisting of IP:PORT.
+    - `ID`: the node ID, consisting of IP:PORT.
     - `Role`: the service role deployed on the node (for example, TiDB or TiKV).
     - `Host`: the IP address of the machine corresponding to the node.
     - `Ports`: the port number used by the service.
