@@ -62,10 +62,10 @@ In the example, the configuration specifies that the `tidb` user is used to star
 
 ### `server_configs`
 
-`server_configs` is used to configure services and to generate configuration files for each component. Similar to the `global` section, the configurations in the `server_configs` section can be overwritten by the configurations with the same names in an instance. `server_configs` mainly contains the following fields:
+`server_configs` is used to configure services and to generate configuration files for each component. Similar to the `global` section, the configurations in the `server_configs` section can be overwritten by the configurations with the same keys in an instance. `server_configs` mainly contains the following fields:
 
-- `master`: The configuration related to the DM-master service. For all the supported configuration items, see [DM-master Configuration File](https://docs.pingcap.com/tidb-data-migration/stable/dm-master-configuration-file).
-- `worker`: The configuration related to the DM-worker service, For all the supported configuration items, see [DM-worker Configuration File](https://docs.pingcap.com/tidb-data-migration/stable/dm-worker-configuration-file).
+- `master`: the configuration related to the DM-master service. For all the supported configuration items, see [DM-master Configuration File](https://docs.pingcap.com/tidb-data-migration/stable/dm-master-configuration-file).
+- `worker`: the configuration related to the DM-worker service, For all the supported configuration items, see [DM-worker Configuration File](https://docs.pingcap.com/tidb-data-migration/stable/dm-worker-configuration-file).
 
 A `server_configs` configuration example is as follows:
 
@@ -87,8 +87,8 @@ server_configs:
 - `host`: specifies the machine to deploy to. The field value is an IP address and is mandatory.
 - `ssh_port`: specifies the SSH port to connect to the target machine for operations. If the field is not specified, the `ssh_port` in the `global` section is used.
 - `name`: specifies the name of the DM-master instance. The name must be unique for different instances. Otherwise, the cluster cannot be deployed.
-- `port`: specifies the port on which DM master provides services. The default value is "8261".
-- `peer_port`: specifies the port for communication between DM masters. The default value is "8291".
+- `port`: specifies the port on which DM-master provides services. The default value is "8261".
+- `peer_port`: specifies the port for communication between DM-masters. The default value is "8291".
 - `deploy_dir`: specifies the deployment directory. If the field is not specified, or specified as a relative directory, the deployment directory is generated according to the `deploy_dir` configuration in the `global` section.
 - `data_dir`: specifies the data directory. If the field is not specified, or specified as a relative directory, the data directory is generated according to the `data_dir` configuration in the `global` section.
 - `log_dir`: specifies the log directory. If the field is not specified, or specified as a relative directory, the log directory is generated according to the `log_dir` configuration in the `global` section.
@@ -143,15 +143,15 @@ master_servers:
 
 - `host`: specifies the machine to deploy to. The field value is an IP address and is mandatory.
 - `ssh_port`: specifies the SSH port to connect to the target machine for operations. If the field is not specified, the `ssh_port` in the `global` section is used.
-- `name`: specifies the name of the DM worker instance. The name must be unique for different instances. Otherwise, the cluster cannot be deployed.
-- `port`: specifies the port on which DM worker provides services. The default value is "8262".
+- `name`: specifies the name of the DM-worker instance. The name must be unique for different instances. Otherwise, the cluster cannot be deployed.
+- `port`: specifies the port on which DM-worker provides services. The default value is "8262".
 - `deploy_dir`: specifies the deployment directory. If the field is not specified, or specified as a relative directory, the deployment directory is generated according to the `deploy_dir` configuration in the `global` section.
 - `data_dir`: specifies the data directory. If the field is not specified, or specified as a relative directory, the data directory is generated according to the `data_dir` configuration in the `global` section.
 - `log_dir`: specifies the log directory. If the field is not specified, or specified as a relative directory, the log directory is generated according to the `log_dir` configuration in the `global` section.
 - `numa_node`: allocates the NUMA policy to the instance. Before specifying this field, you need to make sure that the target machine has [numactl](https://linux.die.net/man/8/numactl) installed. If this field is specified, cpubind and membind policies are allocated using [numactl](https://linux.die.net/man/8/numactl). This field is a string type. The field value is the ID of the NUMA node, such as "0,1".
 - `config`: the configuration rules of this field are the same as that of `worker` in the `server_configs` section. If `config` is specified, the configuration of `config` will be merged with the configuration of `worker` in `server_configs` (if the two fields overlap, the configuration of this field takes effect), and then the configuration file is generated and distributed to the machine specified in the `host` field.
 - `os`: the operating system of the machine specified in the `host` field. If the field is not specified, the default value is the `os` value configured in the `global` section.
-- `arch`: the architecture of the machine specified by the `host` field. If the field is not specified, the default value is the `arch` value configured in the `global` section.
+- `arch`: the architecture of the machine specified in the `host` field. If the field is not specified, the default value is the `arch` value configured in the `global` section.
 - `resource_control`: resource control on this service. If this field is specified, the configuration of this field will be merged with the configuration of `resource_control` in the `global` section (if the two fields overlap, the configuration of this field takes effect), and then the configuration file of systemd is generated and distributed to the machine specified in the `host` field. The configuration rules of this field are the same as that of `resource_control` in the `global` section.
 
 In the `worker_servers` section, the following fields cannot be modified after the deployment is completed: 
@@ -195,7 +195,7 @@ worker_servers:
 - `storage_retention`: specifies the retention time of the Prometheus monitoring data. The default value is "15d".
 - `rule_dir`: specifies a local directory where the complete `*.rules.yml` files are located. The files in the specified directory will be sent to the target machine as the Prometheus rules during the initialization phase of the cluster configuration.
 - `os`: the operating system of the machine specified in the `host` field. If the field is not specified, the default value is the `os` value configured in the `global` section.
-- `arch`: the architecture of the machine specified by the `host` field. If the field is not specified, the default value is the `arch` value configured in the `global` section.
+- `arch`: the architecture of the machine specified in the `host` field. If the field is not specified, the default value is the `arch` value configured in the `global` section.
 - `resource_control`: resource control on this service. If this field is specified, the configuration of this field will be merged with the configuration of `resource_control` in the `global` section (if the two fields overlap, the configuration of this field takes effect), and then the configuration file of systemd is generated and distributed to the machine specified in the `host` field. The configuration rules of this field are the same as that of `resource_control` in the `global` section.
 
 In the `monitoring_servers` section, the following fields cannot be modified after the deployment is completed: 
@@ -225,7 +225,7 @@ monitoring_servers:
 - `port`: specifies the port on which Grafana provides services. The default value is "3000".
 - `deploy_dir`: specifies the deployment directory. If the field is not specified, or specified as a relative directory, the deployment directory is generated according to the `deploy_dir` configuration in the `global` section.
 - `os`: the operating system of the machine specified in the `host` field. If the field is not specified, the default value is the `os` value configured in the `global` section.
-- `arch`: the architecture of the machine specified by the `host` field. If the field is not specified, the default value is the `arch` value configured in the `global` section.
+- `arch`: the architecture of the machine specified in the `host` field. If the field is not specified, the default value is the `arch` value configured in the `global` section.
 - `username`: specifies the username of the Grafana login screen.
 - `password`: specifies the corresponding password of Grafana.
 - `dashboard_dir`: specifies a local directory where the complete `dashboard(*.json)` files are located. The files in the specified directory will be sent to the target machine as Grafana dashboards during the initialization phase of the cluster configuration.
@@ -268,7 +268,7 @@ grafana_servers:
 - `numa_node`: allocates the NUMA policy to the instance. Before specifying this field, you need to make sure that the target machine has [numactl](https://linux.die.net/man/8/numactl) installed. If this field is specified, cpubind and membind policies are allocated using [numactl](https://linux.die.net/man/8/numactl). This field is a string type. The field value is the ID of the NUMA node, such as "0,1"
 - `config_file`: specifies a local file. The specified file will be sent to the target machine as the configuration for Alertmanager during the initialization phase of the cluster configuration.
 - `os`: the operating system of the machine specified in the `host` field. If the field is not specified, the default value is the `os` value configured in the `global` section.
-- `arch`: the architecture of the machine specified by the `host` field. If the field is not specified, the default value is the `arch` value configured in the `global` section.
+- `arch`: the architecture of the machine specified in the `host` field. If the field is not specified, the default value is the `arch` value configured in the `global` section.
 - `resource_control`: resource control on this service. If this field is specified, the configuration of this field will be merged with the configuration of `resource_control` in the `global` section (if the two fields overlap, the configuration of this field takes effect), and then the configuration file of systemd is generated and distributed to the machine specified in the `host` field. The configuration rules of this field are the same as that of `resource_control` in the `global` section.
 
 In `alertmanager_servers`, the following fields cannot be modified after the deployment is completed:
