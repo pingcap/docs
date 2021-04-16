@@ -22,9 +22,9 @@ tiup cluster [command] [flags]
 - Data type: `STRING`
 - Supported values:
 
-  - `builtin`: uses the easyssh client built in tiup-cluster as the SSH client.
-  - `system`: uses the default SSH client of the current operating system.
-  - `none`: The SSH client is not used. The deployment is only for the current machine.
+    - `builtin`: uses the easyssh client built in tiup-cluster as the SSH client.
+    - `system`: uses the default SSH client of the current operating system.
+    - `none`: The SSH client is not used. The deployment is only for the current machine.
 
 - If this option is not specified in the command, `builtin` is used as the default value.
 
