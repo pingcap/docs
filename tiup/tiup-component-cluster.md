@@ -59,25 +59,29 @@ tiup cluster [command] [flags]
 
 ## Command list
 
-- [import](/tiup/tiup-component-cluster-import.md): imports a cluster deployed by Ansible
-- [check](/tiup/tiup-component-cluster-check.md): check a cluster before and after the deployment
-- [deploy](/tiup/tiup-component-cluster-deploy.md): deploy a cluster based on a specified topology
-- [list](/tiup/tiup-component-cluster-list.md): query the list of deployed clusters
-- [display](/tiup/tiup-component-cluster-display.md): display the status of a specified cluster
-- [start](/tiup/tiup-component-cluster-start.md): start a specified cluster
-- [stop](/tiup/tiup-component-cluster-stop.md): stop a specified cluster
-- [restart](/tiup/tiup-component-cluster-restart.md): restart a specified cluster
-- [scale-in](/tiup/tiup-component-cluster-scale-in.md): scale in a specified cluster
-- [scale-out](/tiup/tiup-component-cluster-scale-out.md): scale out a specified cluster
-- [upgrade](/tiup/tiup-component-cluster-upgrade.md): upgrade a specified cluster
-- [prune](/tiup/tiup-component-cluster-prune.md): clean up the instances in the Tombstone status for a specified cluster
-- [edit-config](/tiup/tiup-component-cluster-edit-config.md): modify the configuration of a specified cluster
-- [reload](/tiup/tiup-component-cluster-reload.md): reload the configuration of a specified cluster
-- [patch](/tiup/tiup-component-cluster-patch.md): replace a service in a deployed cluster
-- [rename](/tiup/tiup-component-cluster-rename.md): rename a cluster
-- [clean](/tiup/tiup-component-cluster-clean.md): delete data from the specified cluster
-- [destroy](/tiup/tiup-component-cluster-destroy.md): destroy a specified cluster
-- [audit](/tiup/tiup-component-cluster-audit.md): query the operation audit log of a specified cluster
-- [enable](/tiup/tiup-component-cluster-enable.md): enable a specified cluster or service to start on boot
-- [disable](/tiup/tiup-component-cluster-disable.md): disable a specified cluster or service to start on boot
-- [help](/tiup/tiup-component-cluster-help.md): print the help information
+- import: imports a cluster deployed by Ansible
+<!--- - [import](/tiup/tiup-component-cluster-import.md): imports a cluster deployed by Ansible-->
+- check: checks a cluster before and after the deployment
+<!--- - [check](/tiup/tiup-component-cluster-check.md): checks a cluster before and after the deployment-->
+- [deploy](/tiup/tiup-component-cluster-deploy.md): deploys a cluster based on a specified topology
+- [list](/tiup/tiup-component-cluster-list.md): queries the list of deployed clusters
+- [display](/tiup/tiup-component-cluster-display.md): displays the status of a specified cluster
+- [start](/tiup/tiup-component-cluster-start.md): starts a specified cluster
+- [stop](/tiup/tiup-component-cluster-stop.md): stops a specified cluster
+- restart: restarts a specified cluster
+<!--- - [restart](/tiup/tiup-component-cluster-restart.md): restarts a specified cluster-->
+- scale-in: scales in a specified cluster
+<!--- - [scale-in](/tiup/tiup-component-cluster-scale-in.md): scales in a specified cluster-->
+- [scale-out](/tiup/tiup-component-cluster-scale-out.md): scales out a specified cluster
+- [upgrade](/tiup/tiup-component-cluster-upgrade.md): upgrades a specified cluster
+- [prune](/tiup/tiup-component-cluster-prune.md): cleans up the instances in the Tombstone status for a specified cluster
+- [edit-config](/tiup/tiup-component-cluster-edit-config.md): modifies the configuration of a specified cluster
+- [reload](/tiup/tiup-component-cluster-reload.md): reloads the configuration of a specified cluster
+- [patch](/tiup/tiup-component-cluster-patch.md): replaces a service in a deployed cluster
+<!---- [rename](/tiup/tiup-component-cluster-rename.md): renames a cluster-->
+- [clean](/tiup/tiup-component-cluster-clean.md): deletes data from the specified cluster
+- [destroy](/tiup/tiup-component-cluster-destroy.md): destroys a specified cluster
+- [audit](/tiup/tiup-component-cluster-audit.md): queries the operation audit log of a specified cluster
+- [enable](/tiup/tiup-component-cluster-enable.md): enables a specified cluster or service to start on boot
+- [disable](/tiup/tiup-component-cluster-disable.md): disables a specified cluster or service to start on boot
+- [help](/tiup/tiup-component-cluster-help.md): prints the help information
