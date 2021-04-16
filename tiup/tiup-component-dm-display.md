@@ -18,9 +18,9 @@ tiup dm display <cluster-name> [flags]
 
 ### -N, --node
 
-Specifies the IDs of the nodes to query, splitting by commas for multiple nodes. If you are not sure about the ID of a node, you can skip this option in the command to show the IDs and status of all nodes in the output.
-Data type: `STRING`
-This option is enabled by default with `[]` (which means all nodes) passed in.
+ - Specifies the IDs of the nodes to query, splitting by commas for multiple nodes. If you are not sure about the ID of a node, you can skip this option in the command to show the IDs and status of all nodes in the output.
+- Data type: `STRING`
+- This option is enabled by default with `[]` (which means all nodes) passed in.
 
 > **Note:**
 > 
@@ -28,9 +28,9 @@ This option is enabled by default with `[]` (which means all nodes) passed in.
 
 ### -R, --role
 
-Specifies the roles to query, splitting by commas for multiple roles. If you are not sure about the role deployed on a node, you can skip this option in the command to show the roles and status of all nodes in the output.
-Data type: `STRING`
-This option is enabled by default with `[]` (which means all roles) passed in.
+- Specifies the roles to query, splitting by commas for multiple roles. If you are not sure about the role deployed on a node, you can skip this option in the command to show the roles and status of all nodes in the output.
+- Data type: `STRING`
+- This option is enabled by default with `[]` (which means all roles) passed in.
 
 > **Note:**
 > 
