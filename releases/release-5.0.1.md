@@ -1,20 +1,24 @@
 ---
-title: tidb v5.0.1 Release Notes
-category: Releases
-aliases: ['/docs/dev/releases/v5.0.1/']
+title: TiDB 5.0.1 Release Notes
 ---
 
-# tidb v5.0.1 Release Notes
+# TiDB 5.0.1 Release Notes
 
-Release date: April 19, 2021
+Release date: April 23, 2021
 
-TiDB version: v5.0.1
+TiDB version: 5.0.1
+
+## Compatibility Changes
+
+## New Features
+
+## Improvements
 
 ## Bug Fixes
 
 + TiDB
 
-    - Donot prune all columns for Projection [#24093](https://github.com/pingcap/tidb/pull/24093)
+    - Do not prune all columns for Projection [#24093](https://github.com/pingcap/tidb/pull/24093)
     - Fix wrong query result when column contains null values [#24063](https://github.com/pingcap/tidb/pull/24063)
     - Do not build MPP plan for scan with virtual columns [#24058](https://github.com/pingcap/tidb/pull/24058)
     - Fix wrong PointGet / TableDual plan reused in plan cache [#24043](https://github.com/pingcap/tidb/pull/24043)
@@ -39,7 +43,7 @@ TiDB version: v5.0.1
     - Fix the crash that causes by applying Raft commands to dropped tables [#1702](https://github.com/pingcap/tics/pull/1702)
     - Fix the issue that TiFlash may panic during br restore [#1698](https://github.com/pingcap/tics/pull/1698)
 
-## Others
+## 下面是未分类的 notes。请对以下 notes 分为 [New Features](#new-features)、[Compatibility Changes](#compatibility-changes)、[Improvements](#improvements)、[Bug Fixes](#bug-fixes) 四类，并移动到上面对应的标题下面。如果 Notes 多余，请进行移除。
 
 + TiDB
 
