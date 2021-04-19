@@ -77,7 +77,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
         > **Note:**
         >
         > For the playground operated in this way, after the test is finished, TiUP will clean up the original cluster data. You will get a new cluster after running the command.
-        > If you want the data to be persisted on storage，run `tiup --tag <your-tag> playground ...`. For details, refer to [TiUP Reference Guide](/tiup/tiup-reference.md#-t---tag-string).
+        > If you want the data to be persisted on storage，run `tiup --tag <your-tag> playground ...`. For details, refer to [TiUP Reference Guide](/tiup/tiup-reference.md#-t---tag).
 
 4. Start a new session to access TiDB:
 
