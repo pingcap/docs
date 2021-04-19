@@ -176,7 +176,7 @@ export AWS_ACCESS_KEY_ID=${AccessKey}
 export AWS_SECRET_ACCESS_KEY=${SecretKey}
 ```
 
-Dumpling also supports reading credential files from `~/.aws/credentials`. For more Dumpling configuration, see the configuration of [BR storages](/br/backup-and-restore-storages.md), which is consistent with the Dumpling configuration.
+Dumpling also supports reading credential files from `~/.aws/credentials`. For more Dumpling configuration, see the configuration of [External storages](/br/backup-and-restore-storages.md).
 
 When you back up data using Dumpling, explicitly specify the `--s3.region` parameter, which means the region of the S3 storage:
 
@@ -249,6 +249,7 @@ Examples:
 The exported file is stored in the `./export-<current local time>` directory by default. Commonly used options are as follows:
 
 - The `t` option specifies the number of threads for the export. Increasing the number of threads will increase the concurrency of Dumpling but will also increase the database's memory consumption. Therefore, it is not recommended to set the number too large.
+- The `-F` option is used to specify the maximum size of a single file (the unit here is `MiB`; inputs like `5GiB` or `8KB` are also acceptable). It is recommended to keep its value to 256 MiB or less if you plan to use TiDB Lightning to load this file into a TiDB instance.
 - The `-r` option specifies the maximum number of records (or the number of rows in the database) for a single file. When it is enabled, Dumpling enables concurrency in the table to improve the speed of exporting large tables.
 
 With the above options specified, Dumpling can have a quicker speed of data export.
@@ -329,7 +330,7 @@ After your operation is completed, set the GC time back (the default value is `1
 SET GLOBAL tidb_gc_life_time = '10m';
 ```
 
-Finally, all the exported data can be imported back to TiDB using [Lightning](/tidb-lightning/tidb-lightning-backends.md).
+Finally, all the exported data can be imported back to TiDB using [TiDB Lightning](/tidb-lightning/tidb-lightning-backends.md).
 
 ## Option list of Dumpling
 
@@ -353,7 +354,7 @@ Finally, all the exported data can be imported back to TiDB using [Lightning](/t
 | `-s` or `--statement-size`   | Control the size of the `INSERT` statements; the unit is bytes                                                                                                                                                                                                                                                                     |
 | `-F` or `--filesize`         | The file size of the divided tables. The unit must be specified such as `128B`, `64KiB`, `32MiB`, and `1.5GiB`.                                                                                                                                                                                                                    |
 | `--filetype`                 | Exported file type (csv/sql)                                                                                                                                                                                                                                                                                                       | "sql"                                      |
-| `-o` or `--output`           | Exported file path                                                                                                                                                                                                                                                                                                                 | "./export-${time}"                         |
+| `-o` or `--output`           | The path of exported local files or [the URL of the external storage](/br/backup-and-restore-storages.md)                                                                                                                                                                                                                                                                                                    | "./export-${time}"                         |
 | `-S` or `--sql`              | Export data according to the specified SQL statement. This command does not support concurrent export.                                                                                                                                                                                                                             |
 | `--consistency`              | flush: use FTWRL before the dump <br/> snapshot: dump the TiDB data of a specific snapshot of a TSO <br/> lock: execute `lock tables read` on all tables to be dumped <br/> none: dump without adding locks, which cannot guarantee consistency <br/> auto: use --consistency flush for MySQL; use --consistency snapshot for TiDB | "auto"                                     |
 | `--snapshot`                 | Snapshot TSO; valid only when `consistency=snapshot`                                                                                                                                                                                                                                                                               |
