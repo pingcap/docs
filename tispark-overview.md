@@ -214,10 +214,10 @@ Compared to Spark + JDBC writes, TiSpark batch writes have the following feature
 
 |  Comparative aspects     | TiSpark batch writes | Spark + JDBC writes|
 | ------- | --------------- | --------------- |
-| Atomicity   | The data in the DataFrame is either all written successfully or all written unsuccessfully | If the spark task fails to exit during the writing process, part of the data is written successfully |
-| Isolation   | During the writing process, other transactions are invisible to the data being written | Some successfully written data can be seen by other transactions during the writing process |
-| Error recovery | Only need to re-run the Spark program after failure | Idempotence is achieved through business. For example, after a failure, you need to clean up part of the successfully written data, and then re-run the Spark program. You need to set `spark.task.maxFailures=1` to prevent data duplication caused by retry in the task. |
-| Speed    | Write directly to TiKV for faster speed | Re-writing TiKV through TiDB has an impact on speed |
+| Atomicity   | The data in the DataFrame is either all written successfully or all written unsuccessfully. | If the Spark task fails to exit during the writing process, part of the data is written successfully. |
+| Isolation   | During the writing process, other transactions are invisible to the data being written. | During the writing process, some successfully written data are visible to other transactions.  |
+| Error recovery | If batch writes fail, you only need to re-run the Spark. | Idempotence is achieved through business. For example, if batch writes fail, you need to clean up part of the successfully written data, and then re-run the Spark. You need to set `spark.task.maxFailures=1` to prevent data duplication caused by retry in the task. |
+| Speed    | Write directly to TiKV, which has a faster speed. | Re-writing TiKV through TiDB has an impact on the speed |
 
 The following demonstrates how to use TiSpark batch writes via the scala API:
 
