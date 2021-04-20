@@ -68,19 +68,20 @@ TiDB version: 5.0.1
     - Avoid unexpected statistic modify after adding scatter region scheduler [#3602](https://github.com/pingcap/pd/pull/3602)
 
 + Tools
+- Lightning
 
+* Fix the bug that the table count in the progress log is wrong. [#1005](https://github.com/pingcap/br/pull/1005)
     - BR
-
-        * BR now can tolerate minor TiKV disconnection. [#1019](https://github.com/pingcap/br/pull/1019)
-        * Summary now become more clear. [#1009](https://github.com/pingcap/br/pull/1009)
+* Fix the bug that caused the real backup speed may go beyond far the `--ratelimit`. [#1026](https://github.com/pingcap/br/pull/1026)
+        * Fix the issue that BR cannot tolerate minor TiKV disconnection. [#1019](https://github.com/pingcap/br/pull/1019)
+        * Fix the issue that the summary log is not clear. [#1009](https://github.com/pingcap/br/pull/1009)
 
     - TiCDC
 
         * Fix Unified Sorter returning unhelpful error messages & other misc. fixes. [#1678](https://github.com/pingcap/ticdc/pull/1678)
-        * S3Sink:  cancel create existing table directory on s3 when initialize s3Sink to avoid uploading objects faild [#1672](https://github.com/pingcap/ticdc/pull/1672)
+        * Fix the issue that creates the existing table directory on minio when initializing causes uploading objects to fail. [#1672](https://github.com/pingcap/ticdc/pull/1672)
         * Fix text type decode for old row format [#1669](https://github.com/pingcap/ticdc/pull/1669)
-        * No release note (this bug is never released) [#1667](https://github.com/pingcap/ticdc/pull/1667)
         * Set session variable `explicit_defaults_for_timestamp` to `ON` to make downstream MySQL5.7 keeps the same behavior with upstream TiDB. [#1659](https://github.com/pingcap/ticdc/pull/1659)
         * Fix the error handling for io.EOF may cause replication interuption. [#1648](https://github.com/pingcap/ticdc/pull/1648)
         * Correct TiKV CDC endpoint CPU metric in TiCDC dashboard. [#1645](https://github.com/pingcap/ticdc/pull/1645)
-        * S3 sink: increase the defaultBufferChanSize of logSink to avoid blocking [#1632](https://github.com/pingcap/ticdc/pull/1632)
+        * Increase the defaultBufferChanSize of logSink to avoid blocking [#1632](https://github.com/pingcap/ticdc/pull/1632)
