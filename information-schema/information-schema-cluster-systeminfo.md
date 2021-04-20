@@ -1,7 +1,7 @@
 ---
 title: CLUSTER_SYSTEMINFO
 summary: Learn the `CLUSTER_SYSTEMINFO` kernel parameter table.
-aliases: ['/docs/stable/system-tables/system-table-cluster-systeminfo/','/docs/v4.0/system-tables/system-table-cluster-systeminfo/','/docs/stable/reference/system-databases/cluster-systeminfo/','/tidb/stable/system-table-cluster-systeminfo/']
+aliases: ['/docs/stable/system-tables/system-table-cluster-systeminfo/','/docs/v4.0/system-tables/system-table-cluster-systeminfo/','/docs/stable/reference/system-databases/cluster-systeminfo/','/tidb/stable/system-table-cluster-systeminfo/','/tidb/v4.0/system-table-cluster-systeminfo/']
 ---
 
 # CLUSTER_SYSTEMINFO

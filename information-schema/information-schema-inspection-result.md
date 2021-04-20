@@ -1,7 +1,7 @@
 ---
 title: INSPECTION_RESULT
 summary: Learn the `INSPECTION_RESULT` diagnostic result table.
-aliases: ['/docs/stable/system-tables/system-table-inspection-result/','/docs/v4.0/system-tables/system-table-inspection-result/','/docs/stable/reference/system-databases/inspection-result/','/tidb/stable/system-table-inspection-result/']
+aliases: ['/docs/stable/system-tables/system-table-inspection-result/','/docs/v4.0/system-tables/system-table-inspection-result/','/docs/stable/reference/system-databases/inspection-result/','/tidb/stable/system-table-inspection-result/','/tidb/v4.0/system-table-inspection-result/']
 ---
 
 # INSPECTION_RESULT

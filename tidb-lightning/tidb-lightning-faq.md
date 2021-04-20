@@ -1,7 +1,7 @@
 ---
 title: TiDB Lightning FAQs
 summary: Learn about the frequently asked questions (FAQs) and answers about TiDB Lightning.
-aliases: ['/docs/stable/tidb-lightning/tidb-lightning-faq/','/docs/v4.0/tidb-lightning/tidb-lightning-faq/','/docs/stable/faq/tidb-lightning/','/docs/stable/troubleshoot-tidb-lightning/','/docs/v4.0/troubleshoot-tidb-lightning/','/docs/stable/how-to/troubleshoot/tidb-lightning/','/docs/stable/tidb-lightning/tidb-lightning-misuse-handling/','/docs/v4.0/tidb-lightning/tidb-lightning-misuse-handling/','/docs/stable/reference/tools/error-case-handling/lightning-misuse-handling/','/tidb/stable/tidb-lightning-misuse-handling','/tidb/stable/troubleshoot-tidb-lightning','/tidb/v4.0/troubleshoot-tidb-lightning']
+aliases: ['/docs/stable/tidb-lightning/tidb-lightning-faq/','/docs/v4.0/tidb-lightning/tidb-lightning-faq/','/docs/stable/faq/tidb-lightning/','/docs/stable/troubleshoot-tidb-lightning/','/docs/v4.0/troubleshoot-tidb-lightning/','/docs/stable/how-to/troubleshoot/tidb-lightning/','/docs/stable/tidb-lightning/tidb-lightning-misuse-handling/','/docs/v4.0/tidb-lightning/tidb-lightning-misuse-handling/','/docs/stable/reference/tools/error-case-handling/lightning-misuse-handling/','/tidb/stable/tidb-lightning-misuse-handling','/tidb/stable/troubleshoot-tidb-lightning','/tidb/v4.0/troubleshoot-tidb-lightning','/tidb/v4.0/tidb-lightning-misuse-handling']
 ---
 
 # TiDB Lightning FAQs

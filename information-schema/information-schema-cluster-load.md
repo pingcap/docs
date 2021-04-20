@@ -1,7 +1,7 @@
 ---
 title: CLUSTER_LOAD
 summary: Learn the `CLUSTER_LOAD` cluster load table.
-aliases: ['/docs/stable/system-tables/system-table-cluster-load/','/docs/v4.0/system-tables/system-table-cluster-load/','/docs/stable/reference/system-databases/cluster-load/','/tidb/stable/system-table-cluster-load/']
+aliases: ['/docs/stable/system-tables/system-table-cluster-load/','/docs/v4.0/system-tables/system-table-cluster-load/','/docs/stable/reference/system-databases/cluster-load/','/tidb/stable/system-table-cluster-load/','/tidb/v4.0/system-table-cluster-load/']
 ---
 
 # CLUSTER_LOAD
