@@ -5,7 +5,7 @@ aliases: ['/docs/dev/ticdc/ticdc-craft/','/docs/dev/reference/tools/ticdc/craft/
 
 # TiCDC Craft
 
-TiCDC Craft is a row-level data change notification protocol that provides data sources for monitoring, caching, full-text indexing, analysis engines, and primary-secondary replication between different databases. TiCDC complies with TiCDC Craft and replicates data changes of TiDB to third-party data medium such as MQ (Message Queue).
+TiCDC Craft is a row-level data change notification protocol that provides data sources for monitoring, caching, full-text indexing, analysis engines, and primary-secondary replication between different databases. TiCDC complies with TiCDC Craft and replicates data changes of TiDB to third-party data medium such as MQ (Message Queue). Compared to JSON based Open Protocol, craft is a binary protocol therefore is more compact and use less resources to encode and decode. For large TiDB clusters which have high write throughput, performance is more important than human readability to support such high change events traffic.
 
 TiCDC Craft uses Event as the basic unit to replicate data change events to the downstream. The Event is divided into three categories:
 
@@ -20,6 +20,30 @@ TiCDC Craft uses Event as the basic unit to replicate data change events to the 
 * Resolved Events are periodically broadcasted to each MQ Partition. The Resolved Event means that any Event with a TS earlier than Resolved Event TS has been sent to the downstream.
 * DDL Events are broadcasted to each MQ Partition.
 * Multiple Row Changed Events of a row are sent to the same MQ Partition.
+
+## Benchmark
+
+* Binary protocol encodes the same events with far less amount of bytes.
+* Protobuf is a popular binary format that can be used instead of craft format. Since craft format can apply sophisticated optimizations, it can be more compact and faster than protobuf.
+
+Serialized size:
+
+| case | craft size | json size | protobuf 1 size | protobuf 2 size | craft compressed | json compressed | protobuf 1 compressed | protobuf 2 compressed |
+| :---- | :--------- | :-------- | :-------------- | :-------------- | :--------------- | :-------------- | :-------------------- | :-------------------- |
+| case 0 | 180 | 390 (116%)+ | 197 (9%)+ | 199 (10%)+ | 136 | 190 (39%)+ | 157 (15%)+ | 150 (10)%+ |
+| case 1 | 722 | 1576 (118%)+ | 820 (13%)+ | 810 (12%)+ | 256 | 305 (19%)+ | 266 (3%)+ | 262 (2)%+ |
+
+Encoding speed:
+
+| craft | json | protobuf 1 | protobuf 2 |
+| :---- | :--- | :--------- | :--------- |
+| 2052 ns/op | 15326 ns/op (647%)+ | 2278 ns/op (11%)+ | 2746 ns/op (34%)+ |
+
+Decoding speed:
+
+| craft | json | protobuf 1 | protobuf 2 |
+| :---- | :--- | :--------- | :--------- |
+| 4227 ns/op | 40547 ns/op (859%)+ | 4089 ns/op (3%)- | 4670 ns/op (10%) |
 
 ## Message format
 
@@ -358,3 +382,4 @@ If the value of a column is `46`, the column is a composite index column, a prim
 > + This feature is still experimental. Do **NOT** use it in the production environment.
 > + `BinaryFlag` is meaningful only when the column type is BLOB/TEXT (including TINYBLOB/TINYTEXT and BINARY/CHAR). When the upstream column is the BLOB type, the `BinaryFlag` value is set to `1`. When the upstream column is the TEXT type, the `BinaryFlag` value is set to `0`.
 > + To replicate a table from the upstream, TiCDC selects a [valid index](/ticdc/ticdc-overview.md#restrictions) as the Handle index. The `HandleKeyFlag` value of the Handle index column is set to `1`.
+> + [Protobuf definition for benchmark](https://github.com/sunxiaoguang/ticdc/blob/craft/proto/CraftBenchmark.proto)
