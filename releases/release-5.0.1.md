@@ -80,7 +80,6 @@ TiDB version: 5.0.1
 
         * Fix Unified Sorter returning unhelpful error messages & other misc. fixes. [#1678](https://github.com/pingcap/ticdc/pull/1678)
         * Fix the issue that creates the existing table directory on minio when initializing causes uploading objects to fail. [#1672](https://github.com/pingcap/ticdc/pull/1672)
-        * Fix text type decode for old row format [#1669](https://github.com/pingcap/ticdc/pull/1669)
         * Set session variable `explicit_defaults_for_timestamp` to `ON` to make downstream MySQL5.7 keeps the same behavior with upstream TiDB. [#1659](https://github.com/pingcap/ticdc/pull/1659)
         * Fix the error handling for io.EOF may cause replication interuption. [#1648](https://github.com/pingcap/ticdc/pull/1648)
         * Correct TiKV CDC endpoint CPU metric in TiCDC dashboard. [#1645](https://github.com/pingcap/ticdc/pull/1645)
