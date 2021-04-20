@@ -14,6 +14,10 @@ TiDB version: 5.0.1
 
 ## Improvements
 
++ TiKV
+
+    - Use `zstd` to compress the snapshot [#10005](https://github.com/tikv/tikv/pull/10005)
+
 ## Bug Fixes
 
 + TiDB
@@ -23,9 +27,22 @@ TiDB version: 5.0.1
     - Do not build MPP plan for scan with virtual columns [#24058](https://github.com/pingcap/tidb/pull/24058)
     - Fix wrong PointGet / TableDual plan reused in plan cache [#24043](https://github.com/pingcap/tidb/pull/24043)
     - Append common handle columns into the schema of index merge table plan [#24042](https://github.com/pingcap/tidb/pull/24042)
-    - Fix type merge about bit type. [#24027](https://github.com/pingcap/tidb/pull/24027)
-    - Planner: fix wrong TableDual plans caused by comparing Binary and Bytes incorrectly [#23918](https://github.com/pingcap/tidb/pull/23918)
-    - Planner: fix the issue that planner hints don't work in some batch/point-get plans [#23685](https://github.com/pingcap/tidb/pull/23685)
+    - Fix the type merging about BIT type [#24027](https://github.com/pingcap/tidb/pull/24027)
+    - Fix wrong TableDual plans caused by comparing Binary and Bytes incorrectly [#23918](https://github.com/pingcap/tidb/pull/23918)
+    - Fix the issue that planner hints don't work in some batch/point-get plans [#23685](https://github.com/pingcap/tidb/pull/23685)
+    - Fix the cases that DDL would parse the args failed when converting job status to rolling back [#24080](https://github.com/pingcap/tidb/pull/24080)
+    - Fix range building for binary literal [#24041](https://github.com/pingcap/tidb/pull/24041)
+    - Fix wrong results for in clause [#24023](https://github.com/pingcap/tidb/pull/24023)
+    - Fix the wrong result of some string functions  [#23879](https://github.com/pingcap/tidb/pull/23879)
+    - Users now need both INSERT and DELETE privileges on a table to perform REPLACE [#23939](https://github.com/pingcap/tidb/pull/23939)
+    - Fix performance regression of point select [#24070](https://github.com/pingcap/tidb/pull/24070)
+
++ TiKV
+
+    - Fix IN expr(coprocessor) didn't handle unsigned/signed int properly [#10018](https://github.com/tikv/tikv/pull/10018)
+    - Fix the issue that there are lots of empty regions after batch ingest. [#10015](https://github.com/tikv/tikv/pull/10015)
+    - Fix potential panics when input of cast_string_as_time is invalid UTF-8 bytes [#9995](https://github.com/tikv/tikv/pull/9995)
+    - Fix the bug that TiKV cannot startup when the end of file dict file is damaged. [#9992](https://github.com/tikv/tikv/pull/9992)
 
 + TiFlash
 
@@ -44,23 +61,6 @@ TiDB version: 5.0.1
     - Fix the issue that TiFlash may panic during br restore [#1698](https://github.com/pingcap/tics/pull/1698)
 
 ## 下面是未分类的 notes。请对以下 notes 分为 [New Features](#new-features)、[Compatibility Changes](#compatibility-changes)、[Improvements](#improvements)、[Bug Fixes](#bug-fixes) 四类，并移动到上面对应的标题下面。如果 Notes 多余，请进行移除。
-
-+ TiDB
-
-    - Ddl: fix the covert job to rollingback job [#24080](https://github.com/pingcap/tidb/pull/24080)
-    - `Fix performance regression of point select.` [#24070](https://github.com/pingcap/tidb/pull/24070)
-    - Fix range building for binary literal [#24041](https://github.com/pingcap/tidb/pull/24041)
-    - Fix wrong results for in clause. [#24023](https://github.com/pingcap/tidb/pull/24023)
-    - Users now need both Insert and Delete privileges on a table to perform REPLACE. [#23939](https://github.com/pingcap/tidb/pull/23939)
-    - Fix some string function get wrong result [#23879](https://github.com/pingcap/tidb/pull/23879)
-
-+ TiKV
-
-    - Fix IN expr(coprocessor) didn't handle unsigned/signed int properly [#10018](https://github.com/tikv/tikv/pull/10018)
-    - Fix the issue that there are lots of empty regions after batch ingest. [#10015](https://github.com/tikv/tikv/pull/10015)
-    - Use `zstd` to compress the snapshot [#10005](https://github.com/tikv/tikv/pull/10005)
-    - Fix potential panics when input of cast_string_as_time is invalid UTF-8 bytes [#9995](https://github.com/tikv/tikv/pull/9995)
-    - Fix the bug that TiKV cannot startup when the end of file dict file is damaged. [#9992](https://github.com/tikv/tikv/pull/9992)
 
 + PD
 
