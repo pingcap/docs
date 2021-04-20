@@ -1,7 +1,7 @@
 ---
 title: EXPLAIN Overview
 summary: Learn about the execution plan information returned by the `EXPLAIN` statement in TiDB.
-aliases: ['/docs/stable/query-execution-plan/','/docs/v4.0/query-execution-plan/','/docs/stable/reference/performance/understanding-the-query-execution-plan/','/docs/stable/index-merge/','/docs/v4.0/index-merge/','/docs/stable/reference/performance/index-merge/','/tidb/stable/index-merge','/tidb/stable/query-execution-plan']
+aliases: ['/docs/stable/query-execution-plan/','/docs/v4.0/query-execution-plan/','/docs/stable/reference/performance/understanding-the-query-execution-plan/','/docs/stable/index-merge/','/docs/v4.0/index-merge/','/docs/stable/reference/performance/index-merge/','/tidb/stable/index-merge','/tidb/stable/query-execution-plan','/tidb/v4.0/index-merge','/tidb/v4.0/query-execution-plan']
 ---
 
 # `EXPLAIN` Overview

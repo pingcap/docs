@@ -1,7 +1,7 @@
 ---
 title: Scale the TiDB Cluster Using TiDB Ansible
 summary: Use TiDB Ansible to increase/decrease the capacity of a TiDB/TiKV/PD node.
-aliases: ['/docs/stable/scale-tidb-using-ansible/','/docs/v4.0/scale-tidb-using-ansible/','/docs/stable/how-to/scale/with-ansible/','/docs/dev/scale-tidb-using-ansible/','/docs/dev/how-to/scale/with-ansible/','/tidb/dev/scale-tidb-using-ansible/','/tidb/stable/scale-tidb-using-ansible/']
+aliases: ['/docs/stable/scale-tidb-using-ansible/','/docs/v4.0/scale-tidb-using-ansible/','/docs/stable/how-to/scale/with-ansible/','/docs/dev/scale-tidb-using-ansible/','/docs/dev/how-to/scale/with-ansible/','/tidb/dev/scale-tidb-using-ansible/','/tidb/stable/scale-tidb-using-ansible/','/tidb/v4.0/scale-tidb-using-ansible/']
 ---
 
 # Scale the TiDB Cluster Using TiDB Ansible

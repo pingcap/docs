@@ -1,7 +1,7 @@
 ---
 title: CLUSTER_INFO
 summary: Learn the `CLUSTER_INFO` cluster topology information table.
-aliases: ['/docs/stable/system-tables/system-table-cluster-info/','/docs/v4.0/system-tables/system-table-cluster-info/','/docs/stable/reference/system-databases/cluster-info/','/tidb/stable/system-table-cluster-info/']
+aliases: ['/docs/stable/system-tables/system-table-cluster-info/','/docs/v4.0/system-tables/system-table-cluster-info/','/docs/stable/reference/system-databases/cluster-info/','/tidb/stable/system-table-cluster-info/','/tidb/v4.0/system-table-cluster-info/']
 ---
 
 # CLUSTER_INFO
