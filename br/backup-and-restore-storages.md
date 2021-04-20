@@ -41,7 +41,7 @@ Cloud storages such as S3 and GCS sometimes require additional configuration for
         -d 's3://my-bucket/sql-backup?region=us-west-2'
     ```
 
-+ Use TiDB Lightning to import data from S3 (using the path style in the request mode):
++ Use TiDB Lightning to import data from S3 (using the path style in the request mode). If you are using TiDB v4.0.11 and earlier versions, you need to set `force-path-style=true` to use the path style in the request mode.
 
     {{< copyable "shell-regular" >}}
 
