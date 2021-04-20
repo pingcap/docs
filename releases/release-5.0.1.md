@@ -18,6 +18,12 @@ TiDB version: 5.0.1
 
     - Use `zstd` to compress the snapshot [#10005](https://github.com/tikv/tikv/pull/10005)
 
++ Tools
+
+    + Backup & Restore (BR)
+
+        - Fix the issue that the summary log is not clear [#1009](https://github.com/pingcap/br/pull/1009)
+
 ## Bug Fixes
 
 + TiDB
@@ -46,19 +52,39 @@ TiDB version: 5.0.1
 
 + TiFlash
 
-    - Fix a potential issue that the DeleteRange in the storage engine failed to remove some data. [#1790](https://github.com/pingcap/tics/pull/1790)
-    - Fix problem that TiFlash coprocessor's cast time as int function may produce incorrect result. [#1786](https://github.com/pingcap/tics/pull/1786)
-    - Fix the bug that receiver cannot find tasks within 10s. [#1784](https://github.com/pingcap/tics/pull/1784)
-    - Fix potential invalid iterator in cancelMPPQuery [#1777](https://github.com/pingcap/tics/pull/1777)
-    - Fix problem that behavior of TiFlash coprocessor's bitwise operator is different from TiDB [#1774](https://github.com/pingcap/tics/pull/1774)
-    - Fix false alert of overlapped ranges if prefix next key is used [#1771](https://github.com/pingcap/tics/pull/1771)
-    - Fix the problem that TiFlash coprocessor's cast string as int function may produce incorrect result. [#1768](https://github.com/pingcap/tics/pull/1768)
-    - Fix the issue that continuous and fast writing may make TiFlash OOM [#1739](https://github.com/pingcap/tics/pull/1739)
-    - Fix bug that duplicated column name will make TiFlash throw error. [#1732](https://github.com/pingcap/tics/pull/1732)
-    - Support complex query plan tree with a max depth of 100. [#1722](https://github.com/pingcap/tics/pull/1722)
-    - Fix potential NPE in schema sync service when database is dropped between GC and getting the database info. [#1708](https://github.com/pingcap/tics/pull/1708)
-    - Fix the crash that causes by applying Raft commands to dropped tables [#1702](https://github.com/pingcap/tics/pull/1702)
-    - Fix the issue that TiFlash may panic during br restore [#1698](https://github.com/pingcap/tics/pull/1698)
+    - Fix the potential issue that storage engine fails to remove some data while executing `DeleteRange`
+    - Fix a bug that the function to cast time as int may produce incorrect result
+    - Fix a bug that receiver cannot find tasks within 10s
+    - Fix the potential issue that there may be invalid iterators in `cancelMPPQuery`
+    - Fix a bug that behavior of `bitwise` operator is different from TiDB
+    - Fix the issue that alert about overlapped ranges will be raised when using prefix key
+    - Fix a bug that the function to cast string as int may produce incorrect result
+    - Fix the issue that continuous and fast writing may make TiFlash OOM
+    - Fix the issue that duplicated column name will make TiFlash raise error
+    - Fix the issue that TiFlash fails to decode MPP plan
+    - Fix the potential issue that null pointer exception may be raised during table GC
+    - Fix the issue that TiFlash may panic while applying raft commands to dropped tables
+    - Fix the issue that TiFlash may panic during BR restore
+
++ Tools
+
+    + TiDB Lightning
+
+        - Fix the bug that the table count in the progress log is wrong. [#1005](https://github.com/pingcap/br/pull/1005)
+
+    + Backup & Restore (BR)
+
+        - Fix the bug that caused the real backup speed may go beyond far the `--ratelimit`. [#1026](https://github.com/pingcap/br/pull/1026)
+        - Fix the issue that BR cannot tolerate minor TiKV disconnection [#1019](https://github.com/pingcap/br/pull/1019)
+
+    + TiCDC
+
+        - Fix data race and unhelpful error message in unified sorter. [#1678](https://github.com/pingcap/ticdc/pull/1678)
+        - Fix the issue that creates the existing table directory on minio when initializing causes uploading objects to fail. [#1672]
+        - Set session variable `explicit_defaults_for_timestamp` to `ON` to make downstream MySQL5.7 keeps the same behavior with upstream TiDB. [#1659](https://github.com/pingcap/ticdc/pull/1659)
+        - Fix the error handling for io.EOF may cause replication interruption. [#1648](https://github.com/pingcap/ticdc/pull/1648)
+        - Correct TiKV CDC endpoint CPU metric in TiCDC dashboard. [#1645](https://github.com/pingcap/ticdc/pull/1645)
+        - Increase the defaultBufferChanSize of logSink to avoid blocking [#1632](https://github.com/pingcap/ticdc/pull/1632)
 
 ## 下面是未分类的 notes。请对以下 notes 分为 [New Features](#new-features)、[Compatibility Changes](#compatibility-changes)、[Improvements](#improvements)、[Bug Fixes](#bug-fixes) 四类，并移动到上面对应的标题下面。如果 Notes 多余，请进行移除。
 
@@ -66,21 +92,3 @@ TiDB version: 5.0.1
 
     - Modify score calculator to satisfy isomerous stores [#3605](https://github.com/pingcap/pd/pull/3605)
     - Avoid unexpected statistic modify after adding scatter region scheduler [#3602](https://github.com/pingcap/pd/pull/3602)
-
-+ Tools
-- Lightning
-
-* Fix the bug that the table count in the progress log is wrong. [#1005](https://github.com/pingcap/br/pull/1005)
-    - BR
-* Fix the bug that caused the real backup speed may go beyond far the `--ratelimit`. [#1026](https://github.com/pingcap/br/pull/1026)
-        * Fix the issue that BR cannot tolerate minor TiKV disconnection. [#1019](https://github.com/pingcap/br/pull/1019)
-        * Fix the issue that the summary log is not clear. [#1009](https://github.com/pingcap/br/pull/1009)
-
-    - TiCDC
-
-        * Fix data race and unhelpful error message in unified sorter. [#1678](https://github.com/pingcap/ticdc/pull/1678)
-        * Fix the issue that creates the existing table directory on minio when initializing causes uploading objects to fail. [#1672](https://github.com/pingcap/ticdc/pull/1672)
-        * Set session variable `explicit_defaults_for_timestamp` to `ON` to make downstream MySQL5.7 keeps the same behavior with upstream TiDB. [#1659](https://github.com/pingcap/ticdc/pull/1659)
-        * Fix the error handling for io.EOF which may cause replication interruption. [#1648](https://github.com/pingcap/ticdc/pull/1648)
-        * Correct TiKV CDC endpoint CPU metric in TiCDC dashboard. [#1645](https://github.com/pingcap/ticdc/pull/1645)
-        * Increase the defaultBufferChanSize of logSink to avoid blocking [#1632](https://github.com/pingcap/ticdc/pull/1632)
