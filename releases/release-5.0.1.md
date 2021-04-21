@@ -8,15 +8,16 @@ Release date: April 23, 2021
 
 TiDB version: 5.0.1
 
-## Compatibility Changes
-
-## New Features
-
 ## Improvements
 
 + TiKV
 
     - Use `zstd` to compress the snapshot [#10005](https://github.com/tikv/tikv/pull/10005)
+
++ PD
+
+    - Modify score calculator to satisfy isomerous stores [#3605](https://github.com/pingcap/pd/pull/3605)
+    - Avoid unexpected statistic modify after adding scatter region scheduler [#3602](https://github.com/pingcap/pd/pull/3602)
 
 + Tools
 
@@ -85,10 +86,3 @@ TiDB version: 5.0.1
         - Fix the error handling for io.EOF may cause replication interruption. [#1648](https://github.com/pingcap/ticdc/pull/1648)
         - Correct TiKV CDC endpoint CPU metric in TiCDC dashboard. [#1645](https://github.com/pingcap/ticdc/pull/1645)
         - Increase the defaultBufferChanSize of logSink to avoid blocking [#1632](https://github.com/pingcap/ticdc/pull/1632)
-
-## 下面是未分类的 notes。请对以下 notes 分为 [New Features](#new-features)、[Compatibility Changes](#compatibility-changes)、[Improvements](#improvements)、[Bug Fixes](#bug-fixes) 四类，并移动到上面对应的标题下面。如果 Notes 多余，请进行移除。
-
-+ PD
-
-    - Modify score calculator to satisfy isomerous stores [#3605](https://github.com/pingcap/pd/pull/3605)
-    - Avoid unexpected statistic modify after adding scatter region scheduler [#3602](https://github.com/pingcap/pd/pull/3602)
