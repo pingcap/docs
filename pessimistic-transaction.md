@@ -102,7 +102,7 @@ Pessimistic transactions in TiDB behave similarly to those in MySQL. See the min
 
 6. The data read by `EMBEDDED SELECT` in the statement is not locked.
 
-7. Open transactions in TiDB do not block garbage collection (GC). By default, this limits the maximum execution time of pessimistic transactions to 10 minutes. You can modify this limit by editing `max-txn-ttl` under `[performance]` in the TiDB configuration file.
+7. Open transactions in TiDB do not block garbage collection (GC). By default, this limits the maximum execution time of pessimistic transactions to 1 hour. You can modify this limit by editing `max-txn-ttl` under `[performance]` in the TiDB configuration file.
 
 ## Isolation level
 
@@ -130,17 +130,17 @@ If the application logic relies on the locking or lock waiting mechanisms, or if
 
 ![Pipelined pessimistic lock](/media/pessimistic-transaction-pipelining.png)
 
-This feature is disabled by default. To enable it, modify the TiKV configuration:
+This feature is enabled by default. To disable it, modify the TiKV configuration:
 
 ```toml
 [pessimistic-txn]
-pipelined = true
+pipelined = false
 ```
 
-If the TiKV cluster is v4.0.9 or later, you can also dynamically enable this feature by [modifying TiKV configuration online](/dynamic-config.md#modify-tikv-configuration-online):
+You can also dynamically disable this feature by [modifying TiKV configuration online](/dynamic-config.md#modify-tikv-configuration-online):
 
 {{< copyable "sql" >}}
 
 ```sql
-set config tikv pessimistic-txn.pipelined='true';
+set config tikv pessimistic-txn.pipelined='false';
 ```
