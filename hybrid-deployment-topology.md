@@ -22,8 +22,8 @@ The deployment machine has multiple CPU processors with sufficient memory. To im
 
 ### Topology templates
 
-- [The simple template for the hybrid deployment](https://github.com/pingcap/docs-cn/blob/master/config-templates/simple-multi-instance.yaml)
-- [The complex template for the hybrid deployment](https://github.com/pingcap/docs/blob/master/config-templates/complex-multi-instance.yaml)
+- [The simple template for the hybrid deployment](https://github.com/pingcap/docs-cn/blob/release-5.0/config-templates/simple-multi-instance.yaml)
+- [The complex template for the hybrid deployment](https://github.com/pingcap/docs/blob/release-5.0/config-templates/complex-multi-instance.yaml)
 
 ### Key parameters
 

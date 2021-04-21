@@ -27,8 +27,8 @@ For more information about the TiSpark architecture and how to use it, see [TiSp
 
 ## Topology templates
 
-- [Simple TiSpark topology template](https://github.com/pingcap/docs/blob/master/config-templates/simple-tispark.yaml)
-- [Complex TiSpark topology template](https://github.com/pingcap/docs/blob/master/config-templates/complex-tispark.yaml)
+- [Simple TiSpark topology template](https://github.com/pingcap/docs/blob/release-5.0/config-templates/simple-tispark.yaml)
+- [Complex TiSpark topology template](https://github.com/pingcap/docs/blob/release-5.0/config-templates/complex-tispark.yaml)
 
 > **Note:**
 >
