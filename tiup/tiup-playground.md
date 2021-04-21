@@ -78,7 +78,7 @@ This command starts Prometheus on port 9090 to display the time series data in t
 
 ### Override PD's default configuration
 
-First, you need to copy the [PD configuration template](https://github.com/pingcap/pd/blob/master/conf/config.toml). Assume you place the copied file to `~/config/pd.toml` and make some changes according to your need, then you can execute the following command to override PD's default configuration:
+First, you need to copy the [PD configuration template](https://github.com/tikv/pd/blob/release-4.0/conf/config.toml). Assume you place the copied file to `~/config/pd.toml` and make some changes according to your need, then you can execute the following command to override PD's default configuration:
 
 {{< copyable "shell-regular" >}}
 
