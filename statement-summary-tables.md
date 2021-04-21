@@ -10,10 +10,16 @@ To better handle SQL performance issues, MySQL has provided [statement summary t
 
 Therefore, starting from v4.0.0-rc.1, TiDB provides system tables in `information_schema`. These system tables are similar to `events_statements_summary_by_digest` in terms of features.
 
-- [`statements_summary`](#statements_summary)
-- [`statements_summary_history`](#statements_summary_history)
-- [`cluster_statements_summary`](#cluster_statements_summary-and-cluster_statements_summary_history)
-- [`cluster_statements_summary_history`](#cluster_statements_summary-and-cluster_statements_summary_history)
+- [Statement Summary Tables](#statement-summary-tables)
+  - [`statements_summary`](#statements_summary)
+  - [`statements_summary_history`](#statements_summary_history)
+  - [`cluster_statements_summary` and `cluster_statements_summary_history`](#cluster_statements_summary-and-cluster_statements_summary_history)
+  - [Parameter configuration](#parameter-configuration)
+  - [Limitation](#limitation)
+  - [Troubleshooting examples](#troubleshooting-examples)
+    - [Could high SQL latency be caused by the server end?](#could-high-sql-latency-be-caused-by-the-server-end)
+    - [Which categories of SQL statements consume the longest total time?](#which-categories-of-sql-statements-consume-the-longest-total-time)
+    - [Fields description](#fields-description)
 
 This document details these tables and introduces how to use them to troubleshoot SQL performance issues.
 
@@ -105,6 +111,10 @@ The following system variables are used to control the statement summary:
 - `tidb_stmt_summary_max_stmt_count`: Limits the number of SQL statements that can be stored in statement summary tables. The default value is `200`. If the limit is exceeded, those SQL statements that recently remain unused are cleared.
 - `tidb_stmt_summary_max_sql_length`: Specifies the longest display length of `DIGEST_TEXT` and `QUERY_SAMPLE_TEXT`. The default value is `4096`.
 - `tidb_stmt_summary_internal_query`: Determines whether to count the TiDB SQL statements. `1` means to count, and `0` means not to count. The default value is `0`.
+
+> **Note:**
+>
+> When a kind of SQL statement is removed because it reaches the `tidb_stmt_summary_max_stmt_count` limit, TiDB will remove the data of that SQL statement in all periods. Therefore, even if the number of SQL types in a period does not reach the upper limit, the number of displayed SQL statements is less than the actual number of SQL statement. If you encounter this situation, it is recommended to increase the value of `tidb_stmt_summary_max_stmt_count`.
 
 An example of the statement summary configuration is shown as follows:
 
