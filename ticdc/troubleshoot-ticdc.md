@@ -246,7 +246,7 @@ For more information, refer to [Replication task configuration file](/ticdc/mana
 
 ## When TiCDC replicates data to Kafka, can I control the maximum size of a single message in TiDB?
 
-You can set `max-message-bytes` to control the maximum size of data sent to the Kafka broker each time (optional, the default value is 64MB); set the `max-batch-size` parameter to specify the maximum number of change records in each Kafka message, Currently only take effect when Kafka's protocol is `default` (optional, the default value is `4096`);
+Yes. You can set `max-message-bytes` to control the maximum size of data sent to the Kafka broker each time (optional, `64MB` by default). You can also set the `max-batch-size` parameter to specify the maximum number of change records in each Kafka message. Currently it only takes effect when Kafka's protocol is `default` (optional, `4096` by default).
 
 ## When TiCDC replicates data to Kafka, does a message contain multiple types of data changes?
 
