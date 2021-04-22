@@ -206,20 +206,20 @@ tisparkDF.write.saveAsTable("hive_table") // save table to hive
 spark.sql("select * from hive_table a, tispark_table b where a.col1 = b.col1").show // join table across Hive and Tispark
 ```
 
-## Write DataFrame batches to TiDB using TiSpark
+## Batch write DataFrames into TiDB using TiSpark
 
-Starting from v2.3, TiSpark natively supports writing DataFrame batches to TiDB clusters. This writing mode is implemented through two-phase commit protocol of TiKV.
+Starting from v2.3, TiSpark natively supports batch writing DataFrames into TiDB clusters. This writing mode is implemented through the two-phase commit protocol of TiKV.
 
-Compared to Spark + JDBC writes, TiSpark batch writes have the following features:
+Compared with the writing through Spark + JDBC, the TiSpark batch writing has the following characteristics:
 
-|  Comparative aspects     | TiSpark batch writes | Spark + JDBC writes|
+|  Aspects to compare    | TiSpark batch writes | Spark + JDBC writes|
 | ------- | --------------- | --------------- |
-| Atomicity   | The data in the DataFrame is either all written successfully or all written unsuccessfully. | If the Spark task fails to exit during the writing process, part of the data is written successfully. |
-| Isolation   | During the writing process, other transactions are invisible to the data being written. | During the writing process, some successfully written data are visible to other transactions.  |
-| Error recovery | If batch writes fail, you only need to re-run the Spark. | Idempotence is achieved through business. For example, if batch writes fail, you need to clean up part of the successfully written data, and then re-run the Spark. You need to set `spark.task.maxFailures=1` to prevent data duplication caused by retry in the task. |
-| Speed    | Write directly to TiKV, which has a faster speed. | Re-writing TiKV through TiDB has an impact on the speed |
+| Atomicity   | The DataFrames either are all written successfully or all fail to write. | If the Spark task fails and exits during the writing process, a part of the data is written successfully. |
+| Isolation   | During the writing process, the data being written is invisible to other transactions. | During the writing process, some successfully written data is visible to other transactions.  |
+| Error recovery | If the batch write fails, you only need to re-run Spark. | An application is required to achieve idempotence. For example, if the batch write fails, you need to clean up the part of the successfully written data and re-run Spark. You need to set `spark.task.maxFailures=1` to prevent data duplication caused by retry in the task. |
+| Speed    | Data is directly written into TiKV, which is faster. | Data is written to TiKV through TiDB, which has an impact on speed. |
 
-The following demonstrates how to use TiSpark batch writes via the scala API:
+The following example shows how to batch write data using TiSpark via the scala API:
 
 ```scala
 // select data to write
@@ -238,7 +238,7 @@ df.write.
   save()
 ```
 
-If the amount of data to be written is large and the write time exceeds ten minutes, you need to ensure that the GC time is greater than the write time.
+If the amount of data to write is large and the writing time exceeds ten minutes, you need to ensure that the GC time is longer than the writing time.
 
 ```sql
 update mysql.tidb set VARIABLE_VALUE="6h" where VARIABLE_NAME="tikv_gc_life_time";
@@ -248,7 +248,7 @@ Refer to [this document](https://github.com/pingcap/tispark/blob/master/docs/dat
 
 ## Load Spark Dataframe into TiDB using JDBC
 
-In addition to using TiSpark to write DataFrames in batches to the TiDB cluster, you can also use Spark's native JDBC support for writing:
+In addition to using TiSpark to write DataFrames in batches to the TiDB cluster, you can also use Spark's native JDBC support for the data writing:
 
 ```scala
 import org.apache.spark.sql.execution.datasources.jdbc.JDBCOptions
