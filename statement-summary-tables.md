@@ -108,7 +108,7 @@ The following system variables are used to control the statement summary:
 
 > **Note:**
 >
-> When a kind of SQL statement is removed because it reaches the `tidb_stmt_summary_max_stmt_count` limit, TiDB will remove the data of that SQL statement in all periods. Therefore, even if the number of SQL types in a period does not reach the upper limit, the number of displayed SQL statements is less than the actual number of SQL statement. If you encounter this situation, it is recommended to increase the value of `tidb_stmt_summary_max_stmt_count`.
+> When a category of SQL statement needs to be removed because the `tidb_stmt_summary_max_stmt_count` limit is exceeded, TiDB removes the data of that SQL statement category of all time ranges from the `statement summary history` table. Therefore, even if the number of SQL statement categories in a certain time range does not reach the limit, the number of SQL statements stored in the `statement summary history` table is less than the actual number of SQL statements. If this situation occurs, you are recommended to increase the value of `tidb_stmt_summary_max_stmt_count`.
 
 An example of the statement summary configuration is shown as follows:
 
