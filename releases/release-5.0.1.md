@@ -36,7 +36,7 @@ TiDB version: 5.0.1
     - Fix the error that occurs when the optimizer builds the `IndexMerge` plan for clustered indexes [#24042](https://github.com/pingcap/tidb/pull/24042)
     - Fix the type inference of the BIT-type errors [#24027](https://github.com/pingcap/tidb/pull/24027)
     - Fix the issue that some optimizer hints do not take effect when the `PointGet` operator exists [#23685](https://github.com/pingcap/tidb/pull/23685)
-    - Fix the issue that DDL operations might get stuck when rolling back due to an error [#24080](https://github.com/pingcap/tidb/pull/24080)
+    - Fix the issue that DDL operations might fail when rolling back due to an error [#24080](https://github.com/pingcap/tidb/pull/24080)
     - Fix the issue that the index range of the binary literal constant is incorrectly built [#24041](https://github.com/pingcap/tidb/pull/24041)
     - Fix the potential wrong results of the `IN` clause in some cases [#24023](https://github.com/pingcap/tidb/pull/24023)
     - Fix the wrong results of some string functions  [#23879](https://github.com/pingcap/tidb/pull/23879)
