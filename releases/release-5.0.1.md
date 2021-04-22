@@ -33,10 +33,10 @@ TiDB version: 5.0.1
     - Fix the issue of wrong query results when the column contains `NULL` values in some cases [#24063](https://github.com/pingcap/tidb/pull/24063)
     - Forbid generating MPP plans when the scan contains virtual columns [#24058](https://github.com/pingcap/tidb/pull/24058)
     - Fix the wrong reuse of `PointGet` and `TableDual` in Plan Cache [#24043](https://github.com/pingcap/tidb/pull/24043)
-    - ping @eurekaka @winoros: Append common handle columns into the schema of index merge table plan [#24042](https://github.com/pingcap/tidb/pull/24042)
+    - Fix the error that occurs when the optimizer builds the `IndexMerge` plan for clustered indexes [#24042](https://github.com/pingcap/tidb/pull/24042)
     - Fix the type inference of the BIT-type errors [#24027](https://github.com/pingcap/tidb/pull/24027)
     - Fix the issue that some optimizer hints do not take effect when the `PointGet` operator exists [#23685](https://github.com/pingcap/tidb/pull/23685)
-    - ping @winoros @AilinKid: Fix the cases that DDL would parse the args failed when converting job status to rolling back [#24080](https://github.com/pingcap/tidb/pull/24080)
+    - Fix the issue that DDL operations might get stuck when rolling back due to an error [#24080](https://github.com/pingcap/tidb/pull/24080)
     - Fix the issue that the index range of the binary literal constant is incorrectly built [#24041](https://github.com/pingcap/tidb/pull/24041)
     - Fix the potential wrong results of the `IN` clause in some cases [#24023](https://github.com/pingcap/tidb/pull/24023)
     - Fix the wrong results of some string functions  [#23879](https://github.com/pingcap/tidb/pull/23879)
@@ -81,7 +81,7 @@ TiDB version: 5.0.1
     + TiCDC
 
         - Fix the concurrency issue in Unified Sorter and improve the unhelpful error messages [#1678](https://github.com/pingcap/ticdc/pull/1678)
-        - ping @amyangfei @3pointer: Fix the issue that creates the existing table directory on minio when initializing causes uploading objects to fail [#1672](https://github.com/pingcap/ticdc/pull/1672)
+        - Fix a bug that the creation of redundant directories might interrupt the replication with MinIO [#1672](https://github.com/pingcap/ticdc/pull/1672)
         - Set the value of the `explicit_defaults_for_timestamp` session variable to `ON` to make the MySQL 5.7 downstream keeps the same behavior with the upstream TiDB [#1659](https://github.com/pingcap/ticdc/pull/1659)
         - Fix the issue that the incorrect handling of `io.EOF` might cause replication interruption [#1648](https://github.com/pingcap/ticdc/pull/1648)
         - Correct the TiKV CDC endpoint CPU metric in the TiCDC dashboard [#1645](https://github.com/pingcap/ticdc/pull/1645)
