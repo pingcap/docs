@@ -21,8 +21,8 @@ TiFlash is a columnar storage engine, and gradually becomes the standard cluster
 
 ### Topology templates
 
-- [The simple template for the TiFlash topology](https://github.com/pingcap/docs/blob/master/config-templates/simple-tiflash.yaml)
-- [The complex template for the TiFlash topology](https://github.com/pingcap/docs/blob/master/config-templates/complex-tiflash.yaml)
+- [The simple template for the TiFlash topology](https://github.com/pingcap/docs/blob/release-5.0/config-templates/simple-tiflash.yaml)
+- [The complex template for the TiFlash topology](https://github.com/pingcap/docs/blob/release-5.0/config-templates/complex-tiflash.yaml)
 
 For detailed descriptions of the configuration items in the above TiDB cluster topology file, see [Topology Configuration File for Deploying TiDB Using TiUP](/tiup/tiup-cluster-topology-reference.md).
 

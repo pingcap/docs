@@ -201,7 +201,7 @@ In addition to the items above, other parameters are the same with those of TiKV
 
 ### Multi-disk deployment
 
-TiFlash supports multi-disk deployment. If there are multiple disks in your TiFlash node, you can make full use of those disks by configuring the parameters described in the following sections. For TiFlash's configuration template to be used for TiUP, see [The complex template for the TiFlash topology](https://github.com/pingcap/docs/blob/master/config-templates/complex-tiflash.yaml).
+TiFlash supports multi-disk deployment. If there are multiple disks in your TiFlash node, you can make full use of those disks by configuring the parameters described in the following sections. For TiFlash's configuration template to be used for TiUP, see [The complex template for the TiFlash topology](https://github.com/pingcap/docs/blob/release-5.0/config-templates/complex-tiflash.yaml).
 
 #### Multi-disk deployment with TiDB version earlier than v4.0.9
 

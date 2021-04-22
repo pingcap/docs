@@ -229,7 +229,7 @@ The following examples cover six common scenarios. You need to modify the config
 > - For parameters that should be globally effective, configure these parameters of corresponding components in the `server_configs` section of the configuration file.
 > - For parameters that should be effective on a specific node, configure these parameters in the `config` of this node.
 > - Use `.` to indicate the subcategory of the configuration, such as `log.slow-threshold`. For more formats, see [TiUP configuration template](https://github.com/pingcap/tiup/blob/master/embed/templates/examples/topology.example.yaml).
-> - For more parameter description, see [TiDB `config.toml.example`](https://github.com/pingcap/tidb/blob/master/config/config.toml.example), [TiKV `config.toml.example`](https://github.com/tikv/tikv/blob/master/etc/config-template.toml), [PD `config.toml.example`](https://github.com/pingcap/pd/blob/master/conf/config.toml), and [TiFlash configuration](/tiflash/tiflash-configuration.md).
+> - For more parameter description, see [TiDB `config.toml.example`](https://github.com/pingcap/tidb/blob/release-5.0/config/config.toml.example), [TiKV `config.toml.example`](https://github.com/tikv/tikv/blob/release-5.0/etc/config-template.toml), [PD `config.toml.example`](https://github.com/tikv/pd/blob/release-5.0/conf/config.toml), and [TiFlash configuration](/tiflash/tiflash-configuration.md).
 
 ## Step 4: Execute the deployment command
 

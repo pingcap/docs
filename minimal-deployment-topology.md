@@ -18,8 +18,8 @@ This document describes the minimal deployment topology of TiDB clusters.
 
 ### Topology templates
 
-- [The simple template for the minimal topology](https://github.com/pingcap/docs/blob/master/config-templates/simple-mini.yaml)
-- [The complex template for the minimal topology](https://github.com/pingcap/docs/blob/master/config-templates/complex-mini.yaml)
+- [The simple template for the minimal topology](https://github.com/pingcap/docs/blob/release-5.0/config-templates/simple-mini.yaml)
+- [The complex template for the minimal topology](https://github.com/pingcap/docs/blob/release-5.0/config-templates/complex-mini.yaml)
 
 For detailed descriptions of the configuration items in the above TiDB cluster topology file, see [Topology Configuration File for Deploying TiDB Using TiUP](/tiup/tiup-cluster-topology-reference.md).
 

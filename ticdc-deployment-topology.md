@@ -25,8 +25,8 @@ TiCDC is a tool for replicating the incremental data of TiDB, introduced in TiDB
 
 ### Topology templates
 
-- [The simple template for the TiCDC topology](https://github.com/pingcap/docs/blob/master/config-templates/simple-cdc.yaml)
-- [The complex template for the TiCDC topology](https://github.com/pingcap/docs/blob/master/config-templates/complex-cdc.yaml)
+- [The simple template for the TiCDC topology](https://github.com/pingcap/docs/blob/release-5.0/config-templates/simple-cdc.yaml)
+- [The complex template for the TiCDC topology](https://github.com/pingcap/docs/blob/release-5.0/config-templates/complex-cdc.yaml)
 
 For detailed descriptions of the configuration items in the above TiDB cluster topology file, see [Topology Configuration File for Deploying TiDB Using TiUP](/tiup/tiup-cluster-topology-reference.md).
 
