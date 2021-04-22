@@ -12,7 +12,7 @@ As a command line tool of PD, PD Control obtains the state information of the cl
 
 > **Note:**
 >
-> It is recommended that the Control tool version used be consistent with the cluster version.
+> It is recommended that the Control tool version you use is consistent with the cluster version.
 
 ### Use TiUP command
 
