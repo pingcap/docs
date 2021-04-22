@@ -279,7 +279,7 @@ The following example shows how to modify `slow-threshold` online by using the `
 {{< copyable "sql" >}}
 
 ```sql
-set `tidb_slow_log_threshold` = 200;
+set tidb_slow_log_threshold = 200;
 ```
 
 ```sql
