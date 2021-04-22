@@ -12,77 +12,77 @@ TiDB version: 5.0.1
 
 + TiKV
 
-    - Use `zstd` to compress the snapshot [#10005](https://github.com/tikv/tikv/pull/10005)
+    - Use `zstd` to compress the Region snapshot [#10005](https://github.com/tikv/tikv/pull/10005)
 
 + PD
 
-    - Modify score calculator to satisfy isomerous stores [#3605](https://github.com/pingcap/pd/pull/3605)
-    - Avoid unexpected statistic modify after adding scatter region scheduler [#3602](https://github.com/pingcap/pd/pull/3602)
+    - Modify the Region score calculator to better satisfy isomerous stores [#3605](https://github.com/pingcap/pd/pull/3605)
+    - Avoid the unexpected statistics after adding the `scatter region` scheduler [#3602](https://github.com/pingcap/pd/pull/3602)
 
 + Tools
 
     + Backup & Restore (BR)
 
-        - Fix the issue that the summary log is not clear [#1009](https://github.com/pingcap/br/pull/1009)
+        - Remove some might-be-misunderstood information in the summary log [#1009](https://github.com/pingcap/br/pull/1009)
 
 ## Bug Fixes
 
 + TiDB
 
-    - Do not prune all columns for Projection [#24093](https://github.com/pingcap/tidb/pull/24093)
-    - Fix wrong query result when column contains null values [#24063](https://github.com/pingcap/tidb/pull/24063)
-    - Do not build MPP plan for scan with virtual columns [#24058](https://github.com/pingcap/tidb/pull/24058)
-    - Fix wrong PointGet / TableDual plan reused in plan cache [#24043](https://github.com/pingcap/tidb/pull/24043)
-    - Append common handle columns into the schema of index merge table plan [#24042](https://github.com/pingcap/tidb/pull/24042)
-    - Fix the type merging about BIT type [#24027](https://github.com/pingcap/tidb/pull/24027)
-    - Fix wrong TableDual plans caused by comparing Binary and Bytes incorrectly [#23918](https://github.com/pingcap/tidb/pull/23918)
-    - Fix the issue that planner hints don't work in some batch/point-get plans [#23685](https://github.com/pingcap/tidb/pull/23685)
-    - Fix the cases that DDL would parse the args failed when converting job status to rolling back [#24080](https://github.com/pingcap/tidb/pull/24080)
-    - Fix range building for binary literal [#24041](https://github.com/pingcap/tidb/pull/24041)
-    - Fix wrong results for in clause [#24023](https://github.com/pingcap/tidb/pull/24023)
-    - Fix the wrong result of some string functions  [#23879](https://github.com/pingcap/tidb/pull/23879)
-    - Users now need both INSERT and DELETE privileges on a table to perform REPLACE [#23939](https://github.com/pingcap/tidb/pull/23939)
-    - Fix performance regression of point select [#24070](https://github.com/pingcap/tidb/pull/24070)
+    - Fix the issue that the execution result of project elimination might be wrong when the projection result is empty [#24093](https://github.com/pingcap/tidb/pull/24093)
+    - Fix the issue of wrong query results when the column contains `NULL` values in some cases [#24063](https://github.com/pingcap/tidb/pull/24063)
+    - Forbid generating MPP plans when the scan contains virtual columns [#24058](https://github.com/pingcap/tidb/pull/24058)
+    - Fix the wrong reuse of `PointGet` and `TableDual` in Plan Cache [#24043](https://github.com/pingcap/tidb/pull/24043)
+    - ping @eurekaka @winoros: Append common handle columns into the schema of index merge table plan [#24042](https://github.com/pingcap/tidb/pull/24042)
+    - Fix the type inference of the BIT-type errors [#24027](https://github.com/pingcap/tidb/pull/24027)
+    - Fix the issue that some optimizer hints do not take effect when the `PointGet` operator exists [#23685](https://github.com/pingcap/tidb/pull/23685)
+    - ping @winoros @AilinKid: Fix the cases that DDL would parse the args failed when converting job status to rolling back [#24080](https://github.com/pingcap/tidb/pull/24080)
+    - Fix the issue that the index range of the binary literal constant is incorrectly built [#24041](https://github.com/pingcap/tidb/pull/24041)
+    - Fix the potential wrong results of the `IN` clause in some cases [#24023](https://github.com/pingcap/tidb/pull/24023)
+    - Fix the wrong results of some string functions  [#23879](https://github.com/pingcap/tidb/pull/23879)
+    - Users now need both `INSERT` and `DELETE` privileges on a table to perform `REPLACE` operations [#23939](https://github.com/pingcap/tidb/pull/23939)
+    - Fix the performance regression when executing the point query [#24070](https://github.com/pingcap/tidb/pull/24070)
+    - Fix the wrong `TableDual` plans caused by incorrectly comparing binaries and bytes incorrectly [#23918](https://github.com/pingcap/tidb/pull/23918)
 
 + TiKV
 
-    - Fix IN expr(coprocessor) didn't handle unsigned/signed int properly [#10018](https://github.com/tikv/tikv/pull/10018)
-    - Fix the issue that there are lots of empty regions after batch ingest. [#10015](https://github.com/tikv/tikv/pull/10015)
-    - Fix potential panics when input of cast_string_as_time is invalid UTF-8 bytes [#9995](https://github.com/tikv/tikv/pull/9995)
-    - Fix the bug that TiKV cannot startup when the end of file dict file is damaged. [#9992](https://github.com/tikv/tikv/pull/9992)
+    - Fix the issue that the `IN` expression in the coprocessor fails to properly handle the signed or unsigned integer types [#10018](https://github.com/tikv/tikv/pull/10018)
+    - Fix the issue of many empty Regions after batch ingesting SST files [#10015](https://github.com/tikv/tikv/pull/10015)
+    - Fix the potential panic that occurs when the input of `cast_string_as_time` is invalid UTF-8 bytes [#9995](https://github.com/tikv/tikv/pull/9995)
+    - Fix a bug that TiKV cannot start up after the file dictionary file is damaged [#9992](https://github.com/tikv/tikv/pull/9992)
 
 + TiFlash
 
-    - Fix the potential issue that storage engine fails to remove some data while executing `DeleteRange`
-    - Fix a bug that the function to cast time as int may produce incorrect result
-    - Fix a bug that receiver cannot find tasks within 10s
-    - Fix the potential issue that there may be invalid iterators in `cancelMPPQuery`
-    - Fix a bug that behavior of `bitwise` operator is different from TiDB
-    - Fix the issue that alert about overlapped ranges will be raised when using prefix key
-    - Fix a bug that the function to cast string as int may produce incorrect result
-    - Fix the issue that continuous and fast writing may make TiFlash OOM
-    - Fix the issue that duplicated column name will make TiFlash raise error
-    - Fix the issue that TiFlash fails to decode MPP plan
-    - Fix the potential issue that null pointer exception may be raised during table GC
-    - Fix the issue that TiFlash may panic while applying raft commands to dropped tables
-    - Fix the issue that TiFlash may panic during BR restore
+    - Fix the issue that the storage engine fails to remove the data of some ranges
+    - Fix the issue of incorrect results when casting the time type to the integer type
+    - Fix a bug that the `receiver` cannot find corresponding tasks within 10 seconds
+    - Fix the issue that there might be invalid iterators in `cancelMPPQuery`
+    - Fix a bug that the behavior of the `bitwise` operator is different from that of TiDB
+    - Fix the alert issue caused by overlapping ranges when using the prefix key
+    - Fix the issue of incorrect results when casting the string type to the integer type
+    - Fix the issue that consecutive and fast writes might make TiFlash out of memory
+    - Fix the issue that duplicated column names will make TiFlash raise errors
+    - Fix the issue that TiFlash fails to parse MPP plans
+    - Fix the potential issue that the exception of null pointer might be raised during the table GC
+    - Fix the TiFlash panic issue that occurs when writing data to dropped tables
+    - Fix the issue that TiFlash might panic during BR restore
 
 + Tools
 
     + TiDB Lightning
 
-        - Fix the bug that the table count in the progress log is wrong. [#1005](https://github.com/pingcap/br/pull/1005)
+        - Fix the issue of the inaccurate table count in the progress log during the import [#1005](https://github.com/pingcap/br/pull/1005)
 
     + Backup & Restore (BR)
 
-        - Fix the bug that caused the real backup speed may go beyond far the `--ratelimit`. [#1026](https://github.com/pingcap/br/pull/1026)
-        - Fix the issue that BR cannot tolerate minor TiKV disconnection [#1019](https://github.com/pingcap/br/pull/1019)
+        - Fix a bug that the real backup speed goes beyond the `--ratelimit` limit [#1026](https://github.com/pingcap/br/pull/1026)
+        - Fix the issue that BR cannot tolerate the failure of a small number of TiKV nodes [#1019](https://github.com/pingcap/br/pull/1019)
 
     + TiCDC
 
-        - Fix data race and unhelpful error message in unified sorter. [#1678](https://github.com/pingcap/ticdc/pull/1678)
-        - Fix the issue that creates the existing table directory on minio when initializing causes uploading objects to fail. [#1672]
-        - Set session variable `explicit_defaults_for_timestamp` to `ON` to make downstream MySQL5.7 keeps the same behavior with upstream TiDB. [#1659](https://github.com/pingcap/ticdc/pull/1659)
-        - Fix the error handling for io.EOF may cause replication interruption. [#1648](https://github.com/pingcap/ticdc/pull/1648)
-        - Correct TiKV CDC endpoint CPU metric in TiCDC dashboard. [#1645](https://github.com/pingcap/ticdc/pull/1645)
-        - Increase the defaultBufferChanSize of logSink to avoid blocking [#1632](https://github.com/pingcap/ticdc/pull/1632)
+        - Fix the concurrency issue in Unified Sorter and improve the unhelpful error messages [#1678](https://github.com/pingcap/ticdc/pull/1678)
+        - ping @amyangfei @3pointer: Fix the issue that creates the existing table directory on minio when initializing causes uploading objects to fail [#1672](https://github.com/pingcap/ticdc/pull/1672)
+        - Set the value of the `explicit_defaults_for_timestamp` session variable to `ON` to make the MySQL 5.7 downstream keeps the same behavior with the upstream TiDB [#1659](https://github.com/pingcap/ticdc/pull/1659)
+        - Fix the issue that the incorrect handling of `io.EOF` might cause replication interruption [#1648](https://github.com/pingcap/ticdc/pull/1648)
+        - Correct the TiKV CDC endpoint CPU metric in the TiCDC dashboard [#1645](https://github.com/pingcap/ticdc/pull/1645)
+        - Increase `defaultBufferChanSize` to avoid replication blocking in some cases [#1632](https://github.com/pingcap/ticdc/pull/1632)
