@@ -248,7 +248,7 @@ Refer to [this document](https://github.com/pingcap/tispark/blob/master/docs/dat
 
 ## Load Spark Dataframe into TiDB using JDBC
 
-In addition to using TiSpark to write DataFrames in batches to the TiDB cluster, you can also use Spark's native JDBC support for the data writing:
+In addition to using TiSpark to batch write DataFrames into the TiDB cluster, you can also use Spark's native JDBC support for the data writing:
 
 ```scala
 import org.apache.spark.sql.execution.datasources.jdbc.JDBCOptions
