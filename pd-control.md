@@ -10,6 +10,10 @@ As a command line tool of PD, PD Control obtains the state information of the cl
 
 ## Install PD Control
 
+> **Note:**
+>
+> It is recommended that the Control tool version used be consistent with the cluster version.
+
 ### Use TiUP command
 
 To use PD Control, execute the `tiup ctl pd:<pd_version> -u http://<pd_ip>:<pd_port> [-i]` command.
