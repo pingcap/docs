@@ -110,9 +110,6 @@ ALTER DATABASE db_name
 
 `DATABASE` can be replaced with `SCHEMA` here.
 
-<<<<<<< HEAD
-Different databases can use different character sets and collations. Use the `character_set_database` and  `collation_database` to see the character set and collation of the current database:
-=======
 Different databases can use different character sets and collations. Use the `character_set_database` and `collation_database` to see the character set and collation of the current database:
 
 {{< copyable "sql" >}}
@@ -120,10 +117,9 @@ Different databases can use different character sets and collations. Use the `ch
 ```sql
 CREATE SCHEMA test1 CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 ```
->>>>>>> 0a574297... Fix a typo in Update character-set-and-collation.md (#5448)
 
 ```sql
-mysql> CREATE SCHEMA test1 CHARACTER SET utf8 COLLATE uft8_general_ci;
+mysql> CREATE SCHEMA test1 CHARACTER SET utf8 COLLATE utf8_general_ci;
 Query OK, 0 rows affected (0.09 sec)
 
 mysql> USE test1;
@@ -132,11 +128,7 @@ mysql> SELECT @@character_set_database, @@collation_database;
 +--------------------------|----------------------+
 | @@character_set_database | @@collation_database |
 +--------------------------|----------------------+
-<<<<<<< HEAD
-| utf8                     | uft8_general_ci      |
-=======
 | utf8mb4                  | utf8mb4_general_ci   |
->>>>>>> 0a574297... Fix a typo in Update character-set-and-collation.md (#5448)
 +--------------------------|----------------------+
 1 row in set (0.00 sec)
 
