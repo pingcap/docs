@@ -76,7 +76,7 @@ TiDB version: 5.0.1
     + Backup & Restore (BR)
 
         - Fix a bug that the actual backup speed exceeds the `--ratelimit` limit [#1026](https://github.com/pingcap/br/pull/1026)
-        - Fix the issue of backup interruption caused by the failure of a few TiKV node [#1019](https://github.com/pingcap/br/pull/1019)
+        - Fix the issue of backup interruption caused by the failure of a few TiKV nodes [#1019](https://github.com/pingcap/br/pull/1019)
 
     + TiCDC
 
