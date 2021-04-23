@@ -112,13 +112,6 @@ ALTER DATABASE db_name
 
 Different databases can use different character sets and collations. Use the `character_set_database` and `collation_database` to see the character set and collation of the current database:
 
-{{< copyable "sql" >}}
-
-```sql
-CREATE SCHEMA test1 CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-```
-
-```sql
 mysql> CREATE SCHEMA test1 CHARACTER SET utf8 COLLATE utf8_general_ci;
 Query OK, 0 rows affected (0.09 sec)
 
