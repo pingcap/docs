@@ -446,6 +446,7 @@ col_name {ENUM | SET} (val_list)
 
 - The character set and collation of the default database are the values of the `character_set_database` and `collation_database` system variables.
     You can use `character_set_connection` and `collation_connection` to specify the character set and collation for each connection.
+
     The `character_set_client` variable is to set the client character set. Before returning the result, the `character_set_results` system variable indicates the character set in which the server returns query results to the client, including the metadata of the result.
 
 You can use the following statement to specify a particular collation that is related to the client:
