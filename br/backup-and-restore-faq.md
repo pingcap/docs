@@ -86,7 +86,7 @@ No. BR does not support in-place full recovery of some historical backup.
 
 To get the `commitTs` field of the last BR backup, run the `kubectl -n ${namespace} get bk ${name}` command using kubectl. You can use the content of this field as `--lastbackupts`.
 
-## How does BR backupTS convert to Unix time?
+## How can I convert BR backupTS to Unix time?
 
 BR `backupTS` defaults to the latest timestamp obtained from PD before the backup starts. You can use `pd-ctl tso timestamp` to parse the timestamp to obtain an accurate value, or use `backupTS >> 18` to quickly obtain an estimated value.
 
