@@ -21,7 +21,7 @@ The TiDB configuration file supports more options than command-line parameters. 
 
 + The number of sessions that can execute requests concurrently.
 + Default value: `1000`
-+ Value range: \> `0`
++ Value range: (`0`, `+∞`)
 
 ### `mem-quota-query`
 
