@@ -112,6 +112,7 @@ ALTER DATABASE db_name
 
 Different databases can use different character sets and collations. Use the `character_set_database` and `collation_database` to see the character set and collation of the current database:
 
+```sql
 mysql> CREATE SCHEMA test1 CHARACTER SET utf8 COLLATE utf8_general_ci;
 Query OK, 0 rows affected (0.09 sec)
 
@@ -137,6 +138,7 @@ mysql> SELECT @@character_set_database, @@collation_database;
 | latin1                   | latin1_general_ci    |
 +--------------------------|----------------------+
 1 row in set (0.00 sec)
+```
 
 You can also see the two values in INFORMATION_SCHEMA:
 
