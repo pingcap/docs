@@ -17,20 +17,20 @@ TiDB version: 5.0.1
 + PD
 
     - Modify the Region score calculator to better satisfy isomerous stores [#3605](https://github.com/pingcap/pd/pull/3605)
-    - Avoid the unexpected statistics after adding the `scatter region` scheduler [#3602](https://github.com/pingcap/pd/pull/3602)
+    - Avoid unexpected statistics after adding the `scatter region` scheduler [#3602](https://github.com/pingcap/pd/pull/3602)
 
 + Tools
 
     + Backup & Restore (BR)
 
-        - Remove some might-be-misunderstood information in the summary log [#1009](https://github.com/pingcap/br/pull/1009)
+        - Remove some misleading information from the summary log [#1009](https://github.com/pingcap/br/pull/1009)
 
 ## Bug Fixes
 
 + TiDB
 
     - Fix the issue that the execution result of project elimination might be wrong when the projection result is empty [#24093](https://github.com/pingcap/tidb/pull/24093)
-    - Fix the issue of wrong query results when the column contains `NULL` values in some cases [#24063](https://github.com/pingcap/tidb/pull/24063)
+    - Fix the issue of wrong query results when a column contains `NULL` values in some cases [#24063](https://github.com/pingcap/tidb/pull/24063)
     - Forbid generating MPP plans when the scan contains virtual columns [#24058](https://github.com/pingcap/tidb/pull/24058)
     - Fix the wrong reuse of `PointGet` and `TableDual` in Plan Cache [#24043](https://github.com/pingcap/tidb/pull/24043)
     - Fix the error that occurs when the optimizer builds the `IndexMerge` plan for clustered indexes [#24042](https://github.com/pingcap/tidb/pull/24042)
@@ -42,7 +42,7 @@ TiDB version: 5.0.1
     - Fix the wrong results of some string functions  [#23879](https://github.com/pingcap/tidb/pull/23879)
     - Users now need both `INSERT` and `DELETE` privileges on a table to perform `REPLACE` operations [#23939](https://github.com/pingcap/tidb/pull/23939)
     - Fix the performance regression when executing the point query [#24070](https://github.com/pingcap/tidb/pull/24070)
-    - Fix the wrong `TableDual` plans caused by incorrectly comparing binaries and bytes incorrectly [#23918](https://github.com/pingcap/tidb/pull/23918)
+    - Fix the wrong `TableDual` plans caused by incorrectly comparing binaries and bytes [#23918](https://github.com/pingcap/tidb/pull/23918)
 
 + TiKV
 
@@ -58,7 +58,7 @@ TiDB version: 5.0.1
     - Fix a bug that the `receiver` cannot find corresponding tasks within 10 seconds
     - Fix the issue that there might be invalid iterators in `cancelMPPQuery`
     - Fix a bug that the behavior of the `bitwise` operator is different from that of TiDB
-    - Fix the alert issue caused by overlapping ranges when using the prefix key
+    - Fix the alert issue caused by overlapping ranges when using the `prefix key`
     - Fix the issue of incorrect results when casting the string type to the integer type
     - Fix the issue that consecutive and fast writes might make TiFlash out of memory
     - Fix the issue that duplicated column names will make TiFlash raise errors
@@ -75,14 +75,14 @@ TiDB version: 5.0.1
 
     + Backup & Restore (BR)
 
-        - Fix a bug that the real backup speed goes beyond the `--ratelimit` limit [#1026](https://github.com/pingcap/br/pull/1026)
+        - Fix a bug that the actual backup speed exceeds the `--ratelimit` limit [#1026](https://github.com/pingcap/br/pull/1026)
         - Fix the issue that BR cannot tolerate the failure of a small number of TiKV nodes [#1019](https://github.com/pingcap/br/pull/1019)
 
     + TiCDC
 
         - Fix the concurrency issue in Unified Sorter and improve the unhelpful error messages [#1678](https://github.com/pingcap/ticdc/pull/1678)
         - Fix a bug that the creation of redundant directories might interrupt the replication with MinIO [#1672](https://github.com/pingcap/ticdc/pull/1672)
-        - Set the value of the `explicit_defaults_for_timestamp` session variable to `ON` to make the MySQL 5.7 downstream keeps the same behavior with the upstream TiDB [#1659](https://github.com/pingcap/ticdc/pull/1659)
+        - Set the value of the `explicit_defaults_for_timestamp` session variable to `ON` by default to make the MySQL 5.7 downstream keep the same behavior with the upstream TiDB [#1659](https://github.com/pingcap/ticdc/pull/1659)
         - Fix the issue that the incorrect handling of `io.EOF` might cause replication interruption [#1648](https://github.com/pingcap/ticdc/pull/1648)
         - Correct the TiKV CDC endpoint CPU metric in the TiCDC dashboard [#1645](https://github.com/pingcap/ticdc/pull/1645)
         - Increase `defaultBufferChanSize` to avoid replication blocking in some cases [#1632](https://github.com/pingcap/ticdc/pull/1632)
