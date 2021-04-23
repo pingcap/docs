@@ -137,7 +137,6 @@ mysql> SELECT @@character_set_database, @@collation_database;
 | latin1                   | latin1_general_ci    |
 +--------------------------|----------------------+
 1 row in set (0.00 sec)
-```
 
 You can also see the two values in INFORMATION_SCHEMA:
 
