@@ -46,7 +46,7 @@ TiDB version: 5.0.1
 
 + TiKV
 
-    - Fix the issue that the `IN` expression in the coprocessor fails to properly handle the signed or unsigned integer types [#10018](https://github.com/tikv/tikv/pull/10018)
+    - Fix the issue that the coprocessor fails to properly handle the signed or unsigned integer types in the `IN` expression [#10018](https://github.com/tikv/tikv/pull/10018)
     - Fix the issue of many empty Regions after batch ingesting SST files [#10015](https://github.com/tikv/tikv/pull/10015)
     - Fix the potential panic that occurs when the input of `cast_string_as_time` is invalid UTF-8 bytes [#9995](https://github.com/tikv/tikv/pull/9995)
     - Fix a bug that TiKV cannot start up after the file dictionary file is damaged [#9992](https://github.com/tikv/tikv/pull/9992)
