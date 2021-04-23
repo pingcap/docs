@@ -128,7 +128,7 @@ mysql> SELECT @@character_set_database, @@collation_database;
 +--------------------------|----------------------+
 | @@character_set_database | @@collation_database |
 +--------------------------|----------------------+
-| utf8mb4                  | utf8mb4_general_ci   |
+| utf8                  | utf8_general_ci   |
 +--------------------------|----------------------+
 1 row in set (0.00 sec)
 
