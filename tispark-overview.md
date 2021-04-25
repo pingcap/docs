@@ -214,10 +214,10 @@ Compared with the writing through Spark + JDBC, the TiSpark batch writing has th
 
 |  Aspects to compare    | TiSpark batch writes | Spark + JDBC writes|
 | ------- | --------------- | --------------- |
-| Atomicity   | The DataFrames either are all written successfully or all fail to write. | If the Spark task fails and exits during the writing process, a part of the data is written successfully. |
+| Atomicity   | The DataFrames either are all written successfully or all fail to write. | If the Spark task fails and exits during the writing process, a part of the data might be written successfully. |
 | Isolation   | During the writing process, the data being written is invisible to other transactions. | During the writing process, some successfully written data is visible to other transactions.  |
-| Error recovery | If the batch write fails, you only need to re-run Spark. | An application is required to achieve idempotence. For example, if the batch write fails, you need to clean up the part of the successfully written data and re-run Spark. You need to set `spark.task.maxFailures=1` to prevent data duplication caused by retry in the task. |
-| Speed    | Data is directly written into TiKV, which is faster. | Data is written to TiKV through TiDB, which has an impact on speed. |
+| Error recovery | If the batch write fails, you only need to re-run Spark. | An application is required to achieve idempotence. For example, if the batch write fails, you need to clean up the part of the successfully written data and re-run Spark. You need to set `spark.task.maxFailures=1` to prevent data duplication caused by task retry. |
+| Speed    | Data is directly written into TiKV, which is faster. | Data is written to TiKV through TiDB, which affects the speed. |
 
 The following example shows how to batch write data using TiSpark via the scala API:
 
