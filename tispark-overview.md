@@ -210,7 +210,7 @@ spark.sql("select * from hive_table a, tispark_table b where a.col1 = b.col1").s
 
 Starting from v2.3, TiSpark natively supports batch writing DataFrames into TiDB clusters. This writing mode is implemented through the two-phase commit protocol of TiKV.
 
-Compared with the writing through Spark + JDBC, the TiSpark batch writing has the following characteristics:
+Compared with the writing through Spark + JDBC, the TiSpark batch writing has the following advantages:
 
 |  Aspects to compare    | TiSpark batch writes | Spark + JDBC writes|
 | ------- | --------------- | --------------- |
