@@ -384,7 +384,7 @@ If you restore data from the Amazon S3 backend, instead of `local` storage, you 
 
 > **Note:**
 >
-> To complete one restoration，tikv and BR usually require the minimum privileges `s3:ListBucket` and `s3:GetObject`.
+> To complete one restoration, tikv and BR usually require the minimum privileges `s3:ListBucket` and `s3:GetObject`.
 
 Pass `SecretKey` and `AccessKey` of the account that has privilege to access the S3 backend to the BR node. Here `SecretKey` and `AccessKey` are passed as environment variables. Then pass the privilege to the TiKV node through BR.
 
