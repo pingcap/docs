@@ -12,7 +12,7 @@ TiDB version: 5.0.1
 
 + TiDB
 
-    - Support builtin function `VITESS_HASH()` [#23915](https://github.com/pingcap/tidb/pull/23915)
+    - Support the built-in function `VITESS_HASH()` [#23915](https://github.com/pingcap/tidb/pull/23915)
 
 + TiKV
 
