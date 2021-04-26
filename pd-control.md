@@ -10,8 +10,16 @@ As a command line tool of PD, PD Control obtains the state information of the cl
 
 ## Compile from source code
 
+<<<<<<< HEAD
 1. [Go](https://golang.org/) Version 1.13 or later because the Go modules are used.
 2. In the root directory of the [PD project](https://github.com/pingcap/pd), use the `make` command to compile and generate `bin/pd-ctl`.
+=======
+> **Note:**
+>
+> It is recommended that the version of the Control tool you use is consistent with the version of the cluster.
+
+### Use TiUP command
+>>>>>>> 70a6d90f... ctl: add a note for all ctl docs (#5435)
 
 > **Note:**
 >
