@@ -57,10 +57,10 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
         {{< copyable "shell-regular" >}}
 
         ```shell
-        tiup playground v4.0.0 --db 2 --pd 3 --kv 3 --monitor
+        tiup playground v4.0.11 --db 2 --pd 3 --kv 3 --monitor
         ```
 
-        The command downloads a v4.0.0 cluster to the local machine and starts it. `--monitor` means that the monitoring component is also deployed.
+        The command downloads a version cluster to the local machine and starts it，such as v4.0.11. `--monitor` means that the monitoring component is also deployed.
 
         To view the latest version, run `tiup list tidb`.
 
@@ -73,18 +73,23 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
         To view the dashboard: http://127.0.0.1:2379/dashboard
         To view the monitor: http://127.0.0.1:9090
         ```
+        
+        > **Note:**
+        >
+        > For the playground operated in this way, after the test is finished, TiUP will clean up the original cluster data. You will get a new cluster after re-running the command.
+        > If you want the data to be persisted on storage，run `tiup --tag <your-tag> playground ...`. For details, refer to [TiUP Reference Guide](/tiup/tiup-reference.md#-t---tag).
 
 4. Start a new session to access TiDB:
 
-    1. Install the MySQL client. If it is already installed, skip this step.
+    + Use the TiUP client to connect to TiDBs.
 
         {{< copyable "shell-regular" >}}
 
         ```shell
-        yum -y install mysql
+        tiup client
         ```
 
-    2. Use the MySQL client to connect to TiDB.
+    + You can also use the MySQL client to connect to TiDB.
 
         {{< copyable "shell-regular" >}}
 
@@ -142,7 +147,7 @@ Other requirements for the target machine:
 
 - The `root` user and its password is required
 - [Stop the firewall service of the target machine](/check-before-deployment.md#check-and-stop-the-firewall-service-of-target-machines), or open the port needed by the TiDB cluster nodes
-- Currently, TiUP only supports deploying TiDB on the x86_64 (AMD64) architecture (the ARM architecture will be supported in TiDB 4.0 GA):
+- Currently, TiUP supports deploying TiDB on the x86_64 (AMD64 and ARM) architectures:
 
     - It is recommended to use CentOS 7.3 or later versions on AMD64
     - It is recommended to use CentOS 7.6 1810 on ARM

@@ -204,8 +204,8 @@ Solutions:
 * If the above error occurs frequently, it is recommended to adjust the application logic.
 
 #### TTL manager has timed out
- 
-The transaction execution time can not exceed the GC time limit. In addition, the TTL time of pessimistic transactions has an upper limit, whose default value is 10 minutes. Therefore, a pessimistic transaction executed for more than 10 minutes will fail to commit. This timeout threshold is controlled by the TiDB parameter [performance.max-txn-ttl](https://github.com/pingcap/tidb/blob/master/config/config.toml.example).
+
+The transaction execution time can not exceed the GC time limit. In addition, the TTL time of pessimistic transactions has an upper limit, whose default value is 10 minutes. Therefore, a pessimistic transaction executed for more than 10 minutes will fail to commit. This timeout threshold is controlled by the TiDB parameter [performance.max-txn-ttl](https://github.com/pingcap/tidb/blob/release-4.0/config/config.toml.example).
 
 When the execution time of a pessimistic transaction exceeds the TTL time, the following error message occurs in the TiDB log:
 
@@ -215,7 +215,7 @@ TTL manager has timed out, pessimistic locks may expire, please commit or rollba
 
 Solutions:
 
-* First, confirm whether the application logic can be optimized. For example, large transactions may trigger TiDB's transaction size limit, which can be split into multiple small transactions. 
+* First, confirm whether the application logic can be optimized. For example, large transactions may trigger TiDB's transaction size limit, which can be split into multiple small transactions.
 * Also, you can adjust the related parameters properly to meet the application transaction logic.
 
 #### Deadlock found when trying to get lock

@@ -6,7 +6,7 @@ aliases: ['/docs/stable/tidb-binlog/binlog-control/','/docs/v4.0/tidb-binlog/bin
 
 # binlogctl
 
-[Binlog Control](https://github.com/pingcap/tidb-binlog/tree/master/binlogctl) (`binlogctl` for short) is a command line tool for TiDB Binlog. You can use `binlogctl` to manage TiDB Binlog clusters.
+[Binlog Control](https://github.com/pingcap/tidb-binlog/tree/release-4.0/binlogctl) (`binlogctl` for short) is a command line tool for TiDB Binlog. You can use `binlogctl` to manage TiDB Binlog clusters.
 
 You can use `binlogctl` to:
 
@@ -21,6 +21,10 @@ The following are its usage scenarios:
 * A Pump or Drainer process exits abnormally, while the node state is not updated or is unexpected. This affects the data replication task.
 
 ## Download `binlogctl`
+
+> **Note:**
+>
+> It is recommended that the version of the Control tool you use is consistent with the version of the cluster.
 
 {{< copyable "shell-regular" >}}
 

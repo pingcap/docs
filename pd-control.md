@@ -10,6 +10,10 @@ As a command line tool of PD, PD Control obtains the state information of the cl
 
 ## Install PD Control
 
+> **Note:**
+>
+> It is recommended that the version of the Control tool you use is consistent with the version of the cluster.
+
 ### Use TiUP command
 
 To use PD Control, execute the `tiup ctl pd -u http://<pd_ip>:<pd_port> [-i]` command.
@@ -811,6 +815,34 @@ logic:  120102
 » store --jq=".stores[] | {id: .store.id, available: .status.available}"
 {"id":1,"available":"10 GiB"}
 {"id":30,"available":"10 GiB"}
+...
+```
+
+### Query all nodes whose status is not `Up`
+
+{{< copyable "" >}}
+
+```bash
+» store --jq='.stores[].store | select(.state_name!="Up") | { id, address, state_name}'
+```
+
+```
+{"id":1,"address":"127.0.0.1:20161""state_name":"Offline"}
+{"id":5,"address":"127.0.0.1:20162""state_name":"Offline"}
+...
+```
+
+### Query all TiFlash nodes
+
+{{< copyable "" >}}
+
+```bash
+» store --jq='.stores[].store | select(.labels | length>0 and contains([{"key":"engine","value":"tiflash"}])) | { id, address, state_name}'
+```
+
+```
+{"id":1,"address":"127.0.0.1:20161""state_name":"Up"}
+{"id":5,"address":"127.0.0.1:20162""state_name":"Up"}
 ...
 ```
 

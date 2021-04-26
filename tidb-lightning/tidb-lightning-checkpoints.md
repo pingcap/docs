@@ -6,7 +6,7 @@ aliases: ['/docs/stable/tidb-lightning/tidb-lightning-checkpoints/','/docs/v4.0/
 
 # TiDB Lightning Checkpoints
 
-Importing a large database usually takes hours or days, and if such long running processes spuriously crashes, it can be very time-wasting to redo the previously completed tasks. To solve this, Lightning uses *checkpoints* to store the import progress, so that `tidb-lightning` continues importing from where it lefts off after restarting.
+Importing a large database usually takes hours or days, and if such long running processes spuriously crashes, it can be very time-wasting to redo the previously completed tasks. To solve this, TiDB Lightning uses *checkpoints* to store the import progress, so that `tidb-lightning` continues importing from where it lefts off after restarting.
 
 This document describes how to enable, configure, store, and control *checkpoints*.
 
@@ -15,8 +15,8 @@ This document describes how to enable, configure, store, and control *checkpoint
 ```toml
 [checkpoint]
 # Whether to enable checkpoints.
-# While importing data, Lightning records which tables have been imported, so
-# even if Lightning or some other component crashes, you can start from a known
+# While importing data, TiDB Lightning records which tables have been imported, so
+# even if TiDB Lightning or some other component crashes, you can start from a known
 # good state instead of redoing everything.
 enable = true
 
@@ -31,7 +31,7 @@ driver = "file"
 
 # The data source name (DSN) indicating the location of the checkpoint storage.
 #
-# For the "file" driver, the DSN is a path. If the path is not specified, Lightning would
+# For the "file" driver, the DSN is a path. If the path is not specified, TiDB Lightning would
 # default to "/tmp/CHECKPOINT_SCHEMA.pb".
 #
 # For the "mysql" driver, the DSN is a URL in the form of "USER:PASS@tcp(HOST:PORT)/".
@@ -54,7 +54,7 @@ TiDB Lightning supports two kinds of checkpoint storage: a local file or a remot
 
 * With `driver = "mysql"`, checkpoints can be saved in any databases compatible with MySQL 5.7 or later, including MariaDB and TiDB. By default, the checkpoints are saved in the target database.
 
-While using the target database as the checkpoints storage, Lightning is importing large amounts of data at the same time. This puts extra stress on the target database and sometimes leads to communication timeout. Therefore, **it is strongly recommended to install a temporary MySQL server to store these checkpoints**. This server can be installed on the same host as `tidb-lightning` and can be uninstalled after the importer progress is completed.
+While using the target database as the checkpoints storage, TiDB Lightning is importing large amounts of data at the same time. This puts extra stress on the target database and sometimes leads to communication timeout. Therefore, **it is strongly recommended to install a temporary MySQL server to store these checkpoints**. This server can be installed on the same host as `tidb-lightning` and can be uninstalled after the importer progress is completed.
 
 ## Checkpoints control
 
