@@ -244,6 +244,16 @@ LAST_BACKUP_TS=`br validate decode --field="end-version" -s local:///home/tidb/b
 
 In the above example, for the incremental backup data, BR records the data changes and the DDL operations during `(LAST_BACKUP_TS, current PD timestamp]`. When restoring data, BR first restores DDL operations and then the data.
 
+### Point in Time recovery (experimental feature)
+
+```shell
+br backup restore cdclog --storage local:///data/cdclog --start-ts $START_TS --end-ts $END_TS
+```
+
+1. Restore a full backup with `br backup restore`
+2. Restore incremental backup(s) (optional)
+3. Use `br backup restore cdclog` to restore the transactions that happened after the last incremental backup.
+
 ### Back up Raw KV (experimental feature)
 
 > **Warning:**
