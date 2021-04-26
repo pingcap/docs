@@ -10,7 +10,7 @@ TiDB Control is a command-line tool of TiDB, usually used to obtain the status i
 
 ## Get TiDB Control
 
-You can get TiDB Control by installing it using TiUP or by compiling it from source code.
+You can get TiDB Control by installing it using TiDB Ansible or by compiling it from source code.
 
 > **Note:**
 >
