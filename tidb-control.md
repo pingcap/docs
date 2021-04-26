@@ -16,9 +16,9 @@ You can get TiDB Control by installing it using TiUP or by compiling it from sou
 >
 > It is recommended that the version of the Control tool you use is consistent with the version of the cluster.
 
-### Install TiDB Control using TiUP
+### Install TiDB Control using TiDB Ansible
 
-After installing TiUP, you can use `tiup ctl tidb` command to get and execute TiDB Control.
+For TiDB clusters deployed using [TiDB Ansible](/online-deployment-using-ansible.md), you can find the TiDB Control binary program `tidb-ctl` under the TiDB installation path.
 
 ### Compile from source code
 
