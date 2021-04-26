@@ -82,13 +82,9 @@ Before the backup or restoration operations, you need to do some preparations:
 
 ### Preparation for backup
 
-<<<<<<< HEAD
-In TiDB v4.0.8 and later versions, BR supports the self-adaptive Garbage Collection (GC). So to avoid manually configuring GC, you only need to register `backupTS` in `safePoint` in PD and make sure that `safePoint` does not move forward during the backup process.
-=======
 The BR tool already supports self-adapting to GC. It automatically registers `backupTS` (the latest PD timestamp by default) to PD's `safePoint` to ensure that TiDB's GC Safe Point does not move forward during the backup, thus avoiding manually setting GC configurations.
 
 For the detailed usage of the `br backup` command, refer to [Use BR Command-line for Backup and Restoration](/br/use-br-command-line-tool.md).
->>>>>>> 897d1ccd... br: update some faq from oncall (#5411)
 
 In TiDB v4.0.7 and earlier versions, you need to manually configure GC before and after the BR backup through the following steps:
 
