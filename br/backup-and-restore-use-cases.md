@@ -82,7 +82,7 @@ Before the backup or restoration operations, you need to do some preparations:
 
 ### Preparation for backup
 
-The BR tool already supports self-adapting to GC. It automatically registers `backupTS` (the latest PD timestamp by default) to PD's `safePoint` to ensure that TiDB's GC Safe Point does not move forward during the backup, thus avoiding manually setting GC configurations.
+In TiDB v4.0.8 and later versions, the BR tool already supports the self-adaptive Garbage Collection (GC). It automatically registers `backupTS` (the latest PD timestamp by default) to PD's `safePoint` to ensure that TiDB's GC Safe Point does not move forward during the backup, thus avoiding manually setting GC configurations.
 
 For the detailed usage of the `br backup` command, refer to [Use BR Command-line for Backup and Restoration](/br/use-br-command-line-tool.md).
 
