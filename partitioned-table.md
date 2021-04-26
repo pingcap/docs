@@ -578,7 +578,15 @@ You can see that the inserted record `(NULL, 'mothra')` falls into the same part
 
 ## Partition management
 
-You can add, drop, merge, split, redefine partitions by using `ALTER TABLE` statements.
+For `LIST` and `RANGE` partitioned tables, you can add and drop partitions with `ALTER TABLE <table name> ADD PARTITION (<partition specification>)` / `ALTER TABLE <table name> DROP PARTITION <list of partitions>`
+For `HASH` partitioned tables, `COALESCE PARTITION` and `ADD PARTITION` is not yet supported.
+`REORGANIZE PARTITION` is not yet supported.
+
+> **Warning**
+> `EXCHANGE PARTITION` is an experimental feature and should not be used in production environment, it can be enabled by setting `tidb_enable_exchange_partition` system variable to ON.
+> 
+> It works by swapping a partition and a non partitioned table, similar to how rename table like `RENAME TABLE t1 TO t1_tmp, t2 TO t1, t1_tmp TO t2` works.
+> `ALTER TABLE partitioned_table EXCHANGE PARTITION p1 WITH TABLE non_partitioned_table`
 
 ### Range partition management
 
