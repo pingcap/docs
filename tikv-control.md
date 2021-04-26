@@ -6,37 +6,13 @@ aliases: ['/docs/v3.0/tikv-control/','/docs/v3.0/reference/tools/tikv-control/',
 
 # TiKV Control User Guide
 
-TiKV Control (`tikv-ctl`) is a command line tool of TiKV, used to manage the cluster. Its installation directory is as follows:
+TiKV Control (`tikv-ctl`) is a command line tool of TiKV, used to manage the cluster.
 
-* If the cluster is deployed using TiDB Ansible, `tikv-ctl` directory is in the `resources/bin` subdirectory under the `ansible` directory.
-* If the cluster is deployed using TiUP, `tikv-ctl` directory is in the in `~/.tiup/components/ctl/{VERSION}/` directory.
+When you compile TiKV, the `tikv-ctl` command is also compiled at the same time. If the cluster is deployed using TiDB Ansible, the `tikv-ctl` binary file exists in the corresponding `tidb-ansible/resources/bin` directory. If the cluster is deployed using the binary, the `tikv-ctl` file is in the `bin` directory together with other files such as `tidb-server`, `pd-server`, `tikv-server`, etc.
 
 > **Note:**
 >
 > It is recommended that the version of the Control tool you use is consistent with the version of the cluster.
-
-[TiUP](https://github.com/pingcap-incubator/tiuptiup) is a deployment tool introduced later than TiDB Ansible, and its usage is simpler. `tikv-ctl` is also integrated in the `tiup` command. Execute the following command to call the `tikv-ctl` tool:
-
-{{< copyable "shell-regular" >}}
-
-```bash
-tiup ctl tikv
-```
-
-```
-Starting component `ctl`: ~/.tiup/components/ctl/v4.0.0-rc.2/ctl tikv
-TiKV Control (tikv-ctl)
-Release Version:   4.0.0-rc.2
-Edition:           Community
-Git Commit Hash:   2fdb2804bf8ffaab4b18c4996970e19906296497
-Git Commit Branch: heads/refs/tags/v4.0.0-rc.2
-UTC Build Time:    2020-05-15 11:58:49
-Rust Version:      rustc 1.42.0-nightly (0de96d37f 2019-12-19)
-Enable Features:   jemalloc portable sse protobuf-codec
-Profile:           dist_release
-```
-
-You can add corresponding parameters and subcommands after `tiup ctl tikv`.
 
 ## General options
 
