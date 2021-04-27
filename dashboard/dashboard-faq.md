@@ -58,3 +58,7 @@ If your deployment tool is TiUP, take the following steps to solve this problem.
 ### An `invalid connection` error is shown in **Top SQL Statements** and **Recent Slow Queries** on the Overview page
 
 The possible reason is that you have enabled the `prepared-plan-cache` feature of TiDB. As an experimental feature, when enabled, `prepared-plan-cache` might not function properly in specific TiDB versions, which could cause this problem in TiDB Dashboard (and other applications). You can disable `prepared-plan-cache` by updating [TiDB Configuration file](/tidb-configuration-file.md#prepared-plan-cache) to solve this problem.
+
+### An `unknown field` error is shown in **Slow Queries** page
+
+If the `unknown field` error appears on the Slow Queries page after the cluster upgrade, that is a compatibility issue caused by the difference between TiDB Dashboard server fields (which may be updated) and user preferences fields (which are in the browser cache). In this case, you can try to [clear the browser cache](https://developer.chrome.com/docs/devtools/storage/localstorage/#deleteall) to clear the user preferences.
