@@ -8,14 +8,14 @@ aliases: ['/docs/v2.1/pd-control/','/docs/v2.1/reference/tools/pd-control/']
 
 As a command line tool of PD, PD Control obtains the state information of the cluster and tunes the cluster.
 
+> **Note:**
+>
+> It is recommended that the version of the Control tool you use is consistent with the version of the cluster.
+
 ## Compile from source code
 
 1. [Go](https://golang.org/) Version 1.13 or later because the Go modules are used.
 2. In the root directory of the [PD project](https://github.com/pingcap/pd), use the `make` command to compile and generate `bin/pd-ctl`.
-
-> **Note:**
->
-> Generally, you don't need to compile source code as the PD Control tool already exists in the released Binary or Docker. However, dev users can refer to the above instruction for compiling source code.
 
 ## Download TiDB installation package
 

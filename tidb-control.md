@@ -10,11 +10,15 @@ TiDB Control is a command-line tool of TiDB, usually used to obtain the status i
 
 ## Get TiDB Control
 
-You can get TiDB Control by installing it using TiUP or by compiling it from source code.
+You can get TiDB Control by installing it using TiDB Ansible or by compiling it from source code.
 
-### Install TiDB Control using TiUP
+> **Note:**
+>
+> It is recommended that the version of the Control tool you use is consistent with the version of the cluster.
 
-After installing TiUP, you can use `tiup ctl tidb` command to get and execute TiDB Control.
+### Install TiDB Control using TiDB Ansible
+
+For TiDB clusters deployed using [TiDB Ansible](/online-deployment-using-ansible.md), you can find the TiDB Control binary program `tidb-ctl` under the TiDB installation path.
 
 ### Compile from source code
 
