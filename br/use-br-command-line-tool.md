@@ -247,7 +247,7 @@ In the above example, for the incremental backup data, BR records the data chang
 ### Point in Time recovery (experimental feature)
 
 ```shell
-br backup restore cdclog --storage local:///data/cdclog --start-ts $START_TS --end-ts $END_TS
+br restore cdclog --storage local:///data/cdclog --start-ts $START_TS --end-ts $END_TS
 ```
 
 1. Restore a full backup with `br backup restore`
