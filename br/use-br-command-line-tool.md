@@ -250,7 +250,7 @@ In the above example, for the incremental backup data, BR records the data chang
 br restore cdclog --storage local:///data/cdclog --start-ts $START_TS --end-ts $END_TS
 ```
 
-1. Restore a full backup with `br backup restore`
+1. Restore a full backup with `br restore full`
 2. Restore incremental backup(s) (optional)
 3. Use `br backup restore cdclog` to restore the transactions that happened after the last incremental backup.
 
