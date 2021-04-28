@@ -17,8 +17,10 @@ The bound SQL statement is parameterized and stored in the system table. When a 
 ```ebnf+diagram
 CreateBindingStmt ::=
     'CREATE' GlobalScope 'BINDING' 'FOR' SelectStmt 'USING' SelectStmt
+
 GlobalScope ::=
     ( 'GLOBAL' | 'SESSION' )?
+
 SelectStmt ::=
     ( SelectStmtBasic | SelectStmtFromDualTable | SelectStmtFromTable ) OrderByOptional SelectStmtLimit SelectLockOpt SelectStmtIntoOption
 ```
