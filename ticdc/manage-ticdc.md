@@ -222,7 +222,7 @@ For more parameters of Pulsar, see [pulsar-client-go ClientOptions](https://godo
 
 #### Configure sink URI with cdclog
 
-The cdclog files can be use together with `br` to provide point-in-time (PITR) recovery. This is experimental functionality.
+The cdclog files can be used together with `br` to provide point-in-time (PiTR) recovery. This is experimental feature.
 
 See `br restore cdclog --help` for more information on this command.
 
