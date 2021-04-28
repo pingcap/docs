@@ -252,7 +252,7 @@ br restore cdclog --storage local:///data/cdclog --start-ts $START_TS --end-ts $
 
 1. Restore a full backup with `br restore full`
 2. Restore incremental backup(s) (optional)
-3. Use `br backup restore cdclog` to restore the transactions that happened after the last incremental backup.
+3. Use `br restore cdclog` to restore the transactions that happened after the last incremental backup.
 
 ### Back up Raw KV (experimental feature)
 
