@@ -73,6 +73,8 @@ TiDB supports both methods, but it is preferred that you use the first method, b
 
 JDBC usually provides implementation-related configurations in the form of JDBC URL parameters. This section introduces [MySQL Connector/J's parameter configurations](https://dev.mysql.com/doc/connector-j/5.1/en/connector-j-reference-configuration-properties.html) (If you use MariaDB, see [MariaDB's parameter configurations](https://mariadb.com/kb/en/library/about-mariadb-connector-j/#optional-url-parameters)). Because this document cannot cover all configuration items, it mainly focuses on several parameters that might affect performance.
 
+Details about how to use the builtin loadbalancing features of Connector/J with TiDB can be found [here](/loadbalancing.md#mysql-connectorj).
+
 #### Prepare-related parameters
 
 This section introduces parameters related to `Prepare`.
