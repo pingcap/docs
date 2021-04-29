@@ -24,9 +24,9 @@ tiup cluster display <cluster-name> [flags]
 
 ### -N, --node
 
-- Specifies the node to query. If not specified, all nodes are queried. The value of this option is a comma-separated list of node IDs. The node ID is the first column of the [cluster status](/tiup/tiup-component-cluster-display.md) table.
+- Specifies the node to query. If not specified, all nodes are queried. The value of this option is a comma-separated list of node IDs. You can get the node IDs from the first column of the cluster status table returned by the [`tiup-component-cluster-display`](/tiup/tiup-component-cluster-display.md) command.
 - Data type: `STRINGS`
-- Default: `[]`, which means all nodes.
+- If this option is not specified in the command, all nodes are selected by default.
 
 > **Note:**
 >
@@ -34,9 +34,9 @@ tiup cluster display <cluster-name> [flags]
 
 ### -R, --role
 
-- Specifies the role to query. If not specified, all roles are queried. The value of this option is a comma-separated list of node roles. The role is the second column of the [cluster status](/tiup/tiup-component-cluster-display.md) table.
+- Specifies the role to query. If not specified, all roles are queried. The value of this option is a comma-separated list of node roles. You can get the roles of nodes from the second column of the cluster status table returned by the [`tiup-component-cluster-display`](/tiup/tiup-component-cluster-display.md) command.
 - Data type: `STRINGS`
-- Default: `[]`, which means all roles.
+- If this option is not specified in the command, all roles are selected by default.
 
 > **Note:**
 >
