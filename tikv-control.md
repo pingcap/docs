@@ -398,7 +398,7 @@ success!
 > **Note:**
 >
 > - This command only supports the local mode. It prints `success!` when successfully run.
-> - You must run this command for all stores where specified Regions' peers are located. If `-r` is not set, all Regions are involved, and you need to run this command for all stores.
+> - You must run this command for all stores where specified Regions' peers are located. If `-r` is not set, all Regions are involved, and you need to run this command for all stores. You need to restart the healthy stores before restoring them. Otherwise, the inconsistency of the peer lists in Region replicas will cause an error when you execute `split-region` or `remove-peer`, resulting in the inconsistency of other metadata, and finally the Regions will become unavailable.
 
 ### Recover from MVCC data corruption
 
