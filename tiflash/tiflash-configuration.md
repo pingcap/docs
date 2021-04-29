@@ -63,17 +63,6 @@ minmax_index_cache_size = 5368709120
 
 ## Storage paths settings take effect starting from v4.0.9
 [storage]
-<<<<<<< HEAD
-=======
-    ## [Experimental] New in v5.0. This item limits the total write rate of background tasks in bytes per second. It is not recommended to use this experimental feature in a production environment.
-    ## The unit is bytes. Currently, the setting such as "10GB" is not supported.
-    ## The default value is 0, which means no limit.
-    ## This parameter is used to control the usage of machine disk bandwidth by background tasks mainly for the scenario where TiFlash is deployed on the AWS EBS (gp2/gp3) disk.
-    ## This parameter can be used to improve the stability of the TiFlash query performance. The recommended configuration in this scenario is 50% of the disk bandwidth.
-    ## It is not recommended to modify this configuration in other scenarios.
-    bg_task_io_rate_limit = 0
-
->>>>>>> 3ae1a337... Fix typos in the document (#5544)
     [storage.main]
     ## The list of directories to store the main data. More than 90% of the total data is stored in
     ## the directory list.
