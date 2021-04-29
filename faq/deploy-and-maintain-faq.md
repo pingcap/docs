@@ -247,7 +247,7 @@ Two reasons:
 
 #### Why does the transaction not use the Async Commit or the one-phase commit feature?
 
-In the following conditions, even you enable [Async Commit](/system-variables.md#tidb_enable_async_commit-new-in-v50) using the system variables and [one-phase commit](/system-variables.md#tidb_enable_1pc-new-in-v50), TiDB will not use the features:
+In the following situations, even you have enabled the [Async Commit](/system-variables.md#tidb_enable_async_commit-new-in-v50) feature and the [one-phase commit](/system-variables.md#tidb_enable_1pc-new-in-v50) feature using the system variables, TiDB will not use these features:
 
 - If you enable TiDB Binlog, limited by the implementation principles of TiDB Binlog, TiDB will not have Async Commit or one-phase commit enabled to use the features.
 - Only when TiDB writes no more than 256 Key-value pairs in the transaction and the total size of keys is no more than 4KB, TiDB will have Async Commit or one-phase commit enabled to use the features. This is because for the transaction where the amount of data to be written is large, Async Commit is unable to greatly improve performance.
