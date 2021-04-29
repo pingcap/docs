@@ -60,7 +60,7 @@ tiup cluster [command] [flags]
 ## Command list
 
 - [import](/tiup/tiup-component-cluster-import.md): imports a cluster deployed by Ansible
-- [template](/tiup/tiup-component-cluster-template.md): prints the topology template
+- [template](/tiup/tiup-component-cluster-template.md): outputs the topology template
 - [check](/tiup/tiup-component-cluster-check.md): checks a cluster before and after the deployment
 - [deploy](/tiup/tiup-component-cluster-deploy.md): deploys a cluster based on a specified topology
 - [list](/tiup/tiup-component-cluster-list.md): queries the list of deployed clusters

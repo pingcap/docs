@@ -38,7 +38,7 @@ tiup dm disable <cluster-name> [flags]
 
 ### -h, --help
 
-- Prints the help information.
+Prints the help information.
 
 ## Output
 

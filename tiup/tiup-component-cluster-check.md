@@ -156,7 +156,7 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 
 > ### -N, --node
 
-- Specifies the nodes to be queried. The value of this option is a comma-separated list of node IDs. You can get the node IDs from the first column of the cluster status table returned by the [`tiup cluster display`](/tiup/tiup-component-cluster-display.md) command.
+- Specifies the nodes to be queried. The value of this option is a comma-separated list of node IDs. You can get the node IDs from the first column of the cluster status table returned by the [`tiup-component-cluster-display`](/tiup/tiup-component-cluster-display.md) command.
 - Data type: `STRINGS`
 - If this option is not specified in the command, all nodes are queried by default.
 
@@ -166,7 +166,7 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 
 ### -R, --role
 
-- Specifies the roles to be queried. The value of this option is a comma-separated list of node roles. The role is the second column of the cluster status table returned by the [`tiup cluster display`](/tiup/tiup-component-cluster-display.md) command.
+- Specifies the roles to be queried. The value of this option is a comma-separated list of node roles. The role is the second column of the cluster status table returned by the [`tiup-component-cluster-display`](/tiup/tiup-component-cluster-display.md) command.
 - Data type: `STRINGS`
 - If this option is not specified in the command, all roles are queried by default.
 
@@ -195,7 +195,7 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 ### --u, --user
 
 - Specifies the user name to connect to the target machine. The specified user needs to have the password-free sudo root privileges on the target machine.
-- Data type: `STRING`
+- Data type: `STRINGS`
 - If this option is not specified in the command, the user who executes the command is used as the default value.
 
 > **Note:**
