@@ -54,7 +54,7 @@ If you want to save machine resources and have no requirement on isolation, you 
     set @@tidb_opt_distinct_agg_push_down = 1;
     ```
 
-5. If `Join` operator doesn't choose the MPP mode, you can modify the variable value `tidb_opt_network_factor` to make `Join` operator choose MPP mode:
+5. If the `JOIN` operator does not choose the MPP mode, you can modify the value of `tidb_opt_network_factor` to make the`JOIN` operator choose the MPP mode:
 
     The variable `tidb_opt_network_factor` sets the ratio of network overhead when the optimizer is counting. The smaller the variable value is, the smaller the estimate for a large amount of network transmissions is and the more TiDB inclined to choose the MPP operator.
 
