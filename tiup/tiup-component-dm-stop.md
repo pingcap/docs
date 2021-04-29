@@ -23,7 +23,7 @@ tiup dm stop <cluster-name> [flags]
 ### -N, --node
 
 - Specifies the nodes to be stopped. If not specified, all nodes are stopped. The value of this option is a comma-separated list of node IDs. The node ID is the first column of the [cluster status](/tiup/tiup-component-dm-display.md) table.
-- Data type: `strings`
+- Data type: `STRINGS`
 - Default: `[]`, which means all nodes are selected.
 
 > **Note:**
@@ -33,7 +33,7 @@ tiup dm stop <cluster-name> [flags]
 ### -R, --role
 
 - Specifies the roles to be stopped. If not specified, all roles are stopped. The value of this option is a comma-separated list of node roles. The role is the second column of the [cluster status](/tiup/tiup-component-dm-display.md) table.
-- Data type: `strings`
+- Data type: `STRINGS`
 - Default: `[]`, which means all roles are selected.
 
 > **Note:**

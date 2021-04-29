@@ -154,6 +154,26 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 > 
 > If the `tiup cluster check <cluster-name>` command is used, you must add the `--cluster` option: `tiup cluster check <cluster-name> --cluster`.
 
+> ### -N, --node
+
+- Specifies the nodes to be queried. The value of this option is a comma-separated list of node IDs. You can get the node IDs from the first column of the cluster status table returned by the [`tiup cluster display`](/tiup/tiup-component-cluster-display.md) command.
+- Data type: `STRINGS`
+- If this option is not specified in the command, all nodes are queried by default.
+
+> **Note:**
+>
+> If the `-R, --role` option is specified at the same time, then the service status in their intersection is queried.
+
+### -R, --role
+
+- Specifies the roles to be queried. The value of this option is a comma-separated list of node roles. The role is the second column of the cluster status table returned by the [`tiup cluster display`](/tiup/tiup-component-cluster-display.md) command.
+- Data type: `STRINGS`
+- If this option is not specified in the command, all roles are queried by default.
+
+> **Note:**
+>
+> If the `-N, --node` option is specified at the same time, then the service status in their intersection is queried.
+
 ### --enable-cpu
 
 - Enables the check of CPU core number.

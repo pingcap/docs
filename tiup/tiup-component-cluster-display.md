@@ -25,17 +25,17 @@ tiup cluster display <cluster-name> [flags]
 ### -N, --node
 
 - Specifies the node to query. If not specified, all nodes are queried. The value of this option is a comma-separated list of node IDs. The node ID is the first column of the [cluster status](/tiup/tiup-component-cluster-display.md) table.
-- Data type: `strings`
+- Data type: `STRINGS`
 - Default: `[]`, which means all nodes.
 
 > **Note:**
 >
 > If the `-R, --role` option is specified at the same time, then the service status in their intersection is queried.
 
-### -R, --role strings
+### -R, --role
 
 - Specifies the role to query. If not specified, all roles are queried. The value of this option is a comma-separated list of node roles. The role is the second column of the [cluster status](/tiup/tiup-component-cluster-display.md) table.
-- Data type: `strings`
+- Data type: `STRINGS`
 - Default: `[]`, which means all roles.
 
 > **Note:**

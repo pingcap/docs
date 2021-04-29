@@ -1,0 +1,45 @@
+---
+title: tiup dm enable
+---
+
+# tiup dm enable
+
+The `tiup dm enable` command is used to set the auto-enabling of the cluster service after a machine restarts. To enable the auto-enabling of the service, this command executes `systemctl enable <service>` at the specified node.
+
+## Syntax
+
+```shell
+tiup dm enable <cluster-name> [flags]
+```
+
+`<cluster-name>`: the cluster whose auto-enabling service is to be enabled.
+
+## Options
+
+### -N, --node
+
+- Specifies the nodes whose auto-enabling service is to be enabled. The value of this option is a comma-separated list of node IDs. The node ID is the first column of the cluster status table returned by the `tiup dm display`(/tiup/tiup-component-dm-display.md) command.
+- Data type: `STRINGS`
+- If this option is not specified in the command, the auto-enabling of all nodes is enabled by default.
+
+> **Note:**
+>
+> If the `-R, --role` option is specified at the same time, the auto-enabling of services in their intersection is enabled.
+
+### -R, --role
+
+- Specifies the roles whose auto-enabling service is to be enabled. The value of this option is a comma-separated list of node roles. The role is the second column of the cluster status table returned by the `tiup dm display`(/tiup/tiup-component-dm-display.md) command.
+- Data type: `STRINGS`
+- If this option is not specified in the command, the auto-enabling of all roles is enabled by default.
+
+> **Note:**
+>
+> If the `-N, --node` option is specified at the same time, the auto-enabling of services in their intersection is enabled.
+
+### -h, --help
+
+Prints the help information.
+
+## Output
+
+the execution log of tiup-dm.

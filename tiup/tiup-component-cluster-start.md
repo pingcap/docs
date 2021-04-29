@@ -28,8 +28,8 @@ tiup cluster start <cluster-name> [flags]
 
 ### -R, --role
 
-- Specified the roles of nodes to be started. The value of this option is a comma-separated list of the roles of the nodes. You can get the roles of the nodes from the second column of the [cluster status table](/tiup/tiup-component-cluster-display.md) returned by the `tiup cluster display` command.
-- Data type: `STRING`
+- Specifies the roles of nodes to be started. The value of this option is a comma-separated list of the roles of the nodes. You can get the roles of the nodes from the second column of the [cluster status table](/tiup/tiup-component-cluster-display.md) returned by the `tiup cluster display` command.
+- Data type: `STRINGS`
 - Default: `[]`.  If this option is not specified in the command, all roles are started.
 
 > **Note:**
