@@ -231,6 +231,10 @@ Use the `compact` command to manually compact data of each TiKV. If you specify 
 - Use the `--host` option to specify the TiKV that you need to compact.
 - Use the `-d` option to specify the RocksDB that you need to compact. The optional values are `kv` and `raft`.
 - Use the `--threads` option allows you to specify the concurrency that you compact and its default value is 8. Generally, a higher concurrency comes with a faster compact speed, which might yet affect the service. You need to choose an appropriate concurrency based on the scenario.
+- Use the `--bottommost` option to include or exclude the bottommost file when you compact. The option values are `default`、`skip` and `force`. The default value is `default`.
+    - `default` means that the bottommost file is included only when you enable the Compaction Filter feature.
+    - `skip` means that the bottommost file is exclueded when you compact.
+    - `force` means that the bottommost file is always included when you compact.
 
 ```bash
 $ tikv-ctl --db /path/to/tikv/db compact -d kv
