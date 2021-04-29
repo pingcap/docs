@@ -16,6 +16,7 @@ A `BINDING` can be on either a `GLOBAL` or `SESSION` basis. The default is `SESS
 DropBindingStmt ::=
     'DROP' GlobalScope 'BINDING' 'FOR' BindableStmt ( 'USING' BindableStmt )?
 
+
 GlobalScope ::=
     ( 'GLOBAL' | 'SESSION' )?
 
