@@ -4,7 +4,7 @@ title: tiup dm replay
 
 # tiup dm replay
 
-When you perform operations such as upgrading or restarting the cluster, the operation might accidentally fail due to environmental reasons. If you restart the operation, you need to perform all the steps from the beginning. If the cluster is large, it takes a long time. In this case, you can use the `tiup dm replay` command to retry the failed commands and skip the steps that already succeeded.
+When you perform a cluster operation such as upgrade or restart, the operation might fail due to cluster environment issues. If you re-perform the operation, you need to perform all the steps from the very beginning. If the cluster is large, re-performing these steps will take a long time. In this case, you can use the `tiup dm replay` command to retry the failed commands and skip the successfully performed steps.
 
 ## Syntax
 
