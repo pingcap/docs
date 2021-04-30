@@ -78,6 +78,6 @@ tiup dm [command] [flags]
 - [destroy](/tiup/tiup-component-dm-destroy.md): Destroys a specified cluster.
 - [audit](/tiup/tiup-component-dm-audit.md): Queries the operation audit log of a specified cluster.
 - [replay](/tiup/tiup-component-dm-replay.md): Replays the specified commands
-- [enable](/tiup/tiup-component-dm-enable.md): Enables the auto-enabling of the cluster service after a machine restarts
-- [disable](/tiup/tiup-component-dm-disable.md): Disables the auto-enabling of the cluster service after a machine restarts
+- [enable](/tiup/tiup-component-dm-enable.md): Enables the auto-enabling of the cluster service after a machine is restarted.
+- [disable](/tiup/tiup-component-dm-disable.md): Disables the auto-enabling of the cluster service after a machine is restarted.
 - [help](/tiup/tiup-component-dm-help.md): Prints help information.
