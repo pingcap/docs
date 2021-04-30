@@ -8,7 +8,7 @@ aliases: ['/docs/stable/upgrade-tidb-using-tiup/','/docs/v4.0/upgrade-tidb-using
 
 This document is targeted for users who want to upgrade from TiDB 3.0 or 3.1 versions to TiDB 4.0 versions, or from TiDB 4.0 to a later version.
 
-If you have deployed the TiDB cluster using TiDB Ansible, you can use TiUP to import the TiDB Ansible configuration and perform the upgrade.
+If you have deployed the TiDB cluster using TiDB Ansible, you can use TiUP to import the TiDB Ansible configuration. You can refer to [`tiup cluster import`](/tiup/tiup-component-cluster-import.md) and perform the upgrade.
 
 ## Upgrade caveat
 
@@ -26,8 +26,8 @@ If you have deployed the TiDB cluster using TiDB Ansible, you can use TiUP to im
 - Support upgrading the versions of TiDB Binlog, TiCDC, TiFlash, and other components.
 - Before you upgrade from v2.0.6 or earlier to v4.0.0 or later, you must make sure that no DDL operations are running in the cluster, especially the `Add Index` operation that is time-consuming. Perform the upgrade after all DDL operations are completed.
 - Starting from v2.1, TiDB enables parallel DDL. Therefore, clusters **older than v2.0.1** cannot be upgraded to v4.0.0 or later via a direct rolling upgrade. Instead, you can choose one of the following solutions:
-    - Upgrade directly from TiDB v2.0.1 or earlier to v4.0.0 or later in planned downtime
-    - Perform a rolling upgrade from the current version to v2.0.1 or a later 2.0 version, then perform another rolling upgrade to v4.0.0 or later
+    - Upgrade directly from TiDB v2.0.1 or earlier to v4.0.0 or later in planned downtime. Then use `tiup cluster import` command provided by TiUP Cluster to import configurations and use TiUP as the management tool at the same time.
+    - Perform a rolling upgrade from the current version to v2.0.1 or a later 2.0 version, then perform another rolling upgrade to v4.0.0 or later. Then use `tiup cluster import` command provided by TiUP Cluster to import configurations and use TiUP as the management tool at the same time.
 
 > **Note:**
 >
