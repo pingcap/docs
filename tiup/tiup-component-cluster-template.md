@@ -4,7 +4,7 @@ title: tiup cluster template
 
 # tiup cluster template
 
-Before deploying the cluster, you need to prepare a [topology file](/tiup/tiup-cluster-topology-reference.md) of the cluster. TiUP has a built-in topology file template, and users can modify this template to generate the final topology file. You can output the template content built in TiUP using the `tiup cluster template` command.
+Before deploying the cluster, you need to prepare a [topology file](/tiup/tiup-cluster-topology-reference.md) of the cluster. TiUP has a built-in topology file template, and you can modify this template to create the final topology file. To output the built-in template content, you can use the `tiup cluster template` command.
 
 ## Syntax
 
@@ -26,7 +26,7 @@ If this option is not specified, the output default template contains the follow
 ### --full
 
 - Outputs a detailed topology template that is annotated with configurable parameters. To enable this option, add it to the command.
-- If this option is not specified, the simplest topology template is output by default.
+- If this option is not specified, the simple topology template is output by default.
 
 ### --multi-dc
 
