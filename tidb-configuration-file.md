@@ -9,7 +9,7 @@ aliases: ['/docs/stable/tidb-configuration-file/','/docs/v4.0/tidb-configuration
 
 # TiDB Configuration File
 
-The TiDB configuration file supports more options than command-line parameters. You can download the default configuration file [`config.toml.example`](https://github.com/pingcap/tidb/blob/master/config/config.toml.example) and rename it to `config.toml`. This document describes only the options that are not involved in [command line options](/command-line-flags-for-tidb-configuration.md).
+The TiDB configuration file supports more options than command-line parameters. You can download the default configuration file [`config.toml.example`](https://github.com/pingcap/tidb/blob/release-4.0/config/config.toml.example) and rename it to `config.toml`. This document describes only the options that are not involved in [command line options](/command-line-flags-for-tidb-configuration.md).
 
 ### `split-table`
 
@@ -418,7 +418,7 @@ The Plan Cache configuration of the `PREPARE` statement.
 
 - The number of cached statements.
 - Default value: `100`
-- The type is `uint`. Values less than `0` are converted to large integers.
+- The type is `UINT`. Values less than `0` are converted to large integers.
 
 ### `memory-guard-ratio`
 

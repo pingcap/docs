@@ -1,7 +1,7 @@
 ---
 title: INSPECTION_SUMMARY
 summary: Learn the `INSPECTION_SUMMARY` inspection summary table.
-aliases: ['/docs/stable/system-tables/system-table-inspection-summary/','/docs/v4.0/system-tables/system-table-inspection-summary/','/docs/stable/reference/system-databases/inspection-summary/','/tidb/stable/system-table-inspection-summary/']
+aliases: ['/docs/stable/system-tables/system-table-inspection-summary/','/docs/v4.0/system-tables/system-table-inspection-summary/','/docs/stable/reference/system-databases/inspection-summary/','/tidb/stable/system-table-inspection-summary/','/tidb/v4.0/system-table-inspection-summary/']
 ---
 
 # INSPECTION_SUMMARY

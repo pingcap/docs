@@ -1,7 +1,7 @@
 ---
 title: CLUSTER_LOG
 summary: Learn the `CLUSTER_LOG` cluster log table.
-aliases: ['/docs/stable/system-tables/system-table-cluster-log/','/docs/v4.0/system-tables/system-table-cluster-log/','/docs/stable/reference/system-databases/cluster-log/','/tidb/stable/system-table-cluster-log/']
+aliases: ['/docs/stable/system-tables/system-table-cluster-log/','/docs/v4.0/system-tables/system-table-cluster-log/','/docs/stable/reference/system-databases/cluster-log/','/tidb/stable/system-table-cluster-log/','/tidb/v4.0/system-table-cluster-log/']
 ---
 
 # CLUSTER_LOG

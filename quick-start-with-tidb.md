@@ -20,6 +20,10 @@ This document describes how to try out TiDB, a distributed SQL database, in a fe
 - Scenario: Quickly deploy a TiDB cluster on a local Mac or Linux OS machine. You can see the basic architecture of TiDB and how TiDB, TiKV, PD, monitoring, and other components run in a TiDB cluster.
 - Time required: 1 minute
 
+> **Note:**
+>
+> Currently, some TiDB components do not have a released version that supports the Apple M1 chip. Therefore, the `tiup playground` command currently cannot be executed on the local Mac machine that uses the Apple M1 chip.
+
 As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB instances, 3 TiKV instances, 3 PD instances, and optional TiFlash instances. With TiUP Playground, you can quickly build the above test cluster by taking the following steps:
 
 1. Download and install TiUP:
@@ -73,6 +77,11 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
         To view the dashboard: http://127.0.0.1:2379/dashboard
         To view the monitor: http://127.0.0.1:9090
         ```
+        
+        > **Note:**
+        >
+        > For the playground operated in this way, after the test is finished, TiUP will clean up the original cluster data. You will get a new cluster after re-running the command.
+        > If you want the data to be persisted on storage，run `tiup --tag <your-tag> playground ...`. For details, refer to [TiUP Reference Guide](/tiup/tiup-reference.md#-t---tag).
 
 4. Start a new session to access TiDB:
 
@@ -142,7 +151,7 @@ Other requirements for the target machine:
 
 - The `root` user and its password is required
 - [Stop the firewall service of the target machine](/check-before-deployment.md#check-and-stop-the-firewall-service-of-target-machines), or open the port needed by the TiDB cluster nodes
-- Currently, TiUP only supports deploying TiDB on the x86_64 (AMD64) architecture (the ARM architecture will be supported in TiDB 4.0 GA):
+- Currently, TiUP supports deploying TiDB on the x86_64 (AMD64 and ARM) architectures:
 
     - It is recommended to use CentOS 7.3 or later versions on AMD64
     - It is recommended to use CentOS 7.6 1810 on ARM
