@@ -12,7 +12,7 @@ When you perform operations such as upgrading or restarting the cluster, the ope
 tiup cluster replay <audit-id> [flags]
 ```
 
-- `<audit-id>`: the `audit-id` of the command to be retried. You can view the historical commands and their `audit-id` using the [`tiup cluster audit`](/tiup/tiup-component-cluster-audit.md) command.
+- `<audit-id>`: the `audit-id` of the command to be retried. You can view the historical commands and their `audit-id`s using the [`tiup cluster audit`](/tiup/tiup-component-cluster-audit.md) command.
 
 ## Option
 

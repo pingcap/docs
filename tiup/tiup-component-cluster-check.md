@@ -154,11 +154,11 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 > 
 > If the `tiup cluster check <cluster-name>` command is used, you must add the `--cluster` option: `tiup cluster check <cluster-name> --cluster`.
 
-> ### -N, --node
+### -N, --node
 
-- Specifies the nodes to be queried. The value of this option is a comma-separated list of node IDs. You can get the node IDs from the first column of the cluster status table returned by the [`tiup-component-cluster-display`](/tiup/tiup-component-cluster-display.md) command.
+- Specifies the nodes to be checked. The value of this option is a comma-separated list of node IDs. You can get the node IDs from the first column of the cluster status table returned by the [`tiup-component-cluster-display`](/tiup/tiup-component-cluster-display.md) command.
 - Data type: `STRINGS`
-- If this option is not specified in the command, all nodes are queried by default.
+- If this option is not specified in the command, all nodes are checked by default.
 
 > **Note:**
 >
@@ -168,11 +168,11 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 
 - Specifies the roles to be queried. The value of this option is a comma-separated list of node roles. You can get the roles of nodes from the second column of the cluster status table returned by the [`tiup-component-cluster-display`](/tiup/tiup-component-cluster-display.md) command.
 - Data type: `STRINGS`
-- If this option is not specified in the command, all roles are queried by default.
+- If this option is not specified in the command, all roles are checked by default.
 
 > **Note:**
 >
-> If the `-N, --node` option is specified at the same time, then the service status in their intersection is queried.
+> If the `-N, --node` option is specified at the same time, only the service nodes that match both the specifications of `-N, --node` and `-R, --role` are checked.
 
 ### --enable-cpu
 

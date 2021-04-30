@@ -30,7 +30,7 @@ If this option is not specified, the output default template contains the follow
 
 ### --multi-dc
 
-- Outputs the topology template of multiple data centers. To enable this option, add this option to the command.
+- Outputs the topology template of multiple data centers. To enable this option, add it to the command.
 - If this option is not specified, the topology template of a single data center is output by default.
 
 ### -h, --help

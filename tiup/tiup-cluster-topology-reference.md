@@ -647,11 +647,10 @@ tispark_workers:
 - `storage_retention`: The retention time of the Prometheus monitoring data. The default value is `"15d"`.
 
 - `rule_dir`: Specifies a local directory that should contain complete `*.rules.yml` files. These files are transferred to the target machine during the initialization phase of the cluster configuration as the rules for Prometheus.
-
 - `remote_config`: Supports writing Prometheus data to the remote, or reading data from the remote. This field has two configurations:
-    - `remote_write`: see Prometheus [`<remote_write>`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_write).
-    - `remote_read`: see Prometheus [`<remote_read>`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_read).
-- `external_alertmanagers`: If the `external_alertmanagers` field is configured, Prometheus notifies the configuration alert behavior to the Alertmanager that is outside of the cluster. This field is an array, and the elements of this array are each external Alertmanager, which consists of the `host` and `web_port` fields.
+    - `remote_write`: See the Prometheus document [`<remote_write>`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_write).
+    - `remote_read`: See the Prometheus document [`<remote_read>`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_read).
+- `external_alertmanagers`: If the `external_alertmanagers` field is configured, Prometheus alerts the configuration behavior to the Alertmanager that is outside the cluster. This field is an array, each element of which is an external Alertmanager and consists of the `host` and `web_port` fields.
 
 - `os`: The operating system of the machine specified in `host`. If this field is not specified, the default value is the `os` value in `global`.
 
