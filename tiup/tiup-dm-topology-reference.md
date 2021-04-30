@@ -217,7 +217,7 @@ A `monitoring_servers` configuration example is as follows:
 ```yaml
 monitoring_servers:
   - host: 10.0.1.11
-    rule_dir: /local/rule/
+    rule_dir: /local/rule/dir
     remote_config:
       remote_write:
       - queue_config:
