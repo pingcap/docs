@@ -30,7 +30,7 @@ tiup cluster display <cluster-name> [flags]
 
 > **Note:**
 >
-> If the `-R, --role` option is specified at the same time, then the service status in their intersection is queried.
+> If the `-R, --role` option is specified at the same time, only the service nodes that match both the specifications of `-N, --node` and `-R, --role` are queried.
 
 ### -R, --role
 
@@ -40,7 +40,7 @@ tiup cluster display <cluster-name> [flags]
 
 > **Note:**
 >
-> If the `-N, --node` option is specified at the same time, then the service status in their intersection is queried.
+> If the `-N, --node` option is specified at the same time, only the service nodes that match both the specifications of `-N, --node` and `-R, --role` are queried.
 
 ### -h, --help
 

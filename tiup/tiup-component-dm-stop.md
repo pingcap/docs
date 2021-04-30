@@ -28,7 +28,7 @@ tiup dm stop <cluster-name> [flags]
 
 > **Note:**
 >
-> If the `-R, --role` option is specified at the same time, then the service status in their intersection is stopped.
+> If the `-R, --role` option is specified at the same time, only the service nodes that match both the specifications of `-N, --node` and `-R, --role` are stopped.
 
 ### -R, --role
 
@@ -38,7 +38,7 @@ tiup dm stop <cluster-name> [flags]
 
 > **Note:**
 >
-> If the `-N, --node` option is specified at the same time, the services in their intersection is stopped.
+> If the `-N, --node` option is specified at the same time, only the service nodes that match both the specifications of `-N, --node` and `-R, --role` are stopped.
 
 ### -h, --help
 

@@ -24,7 +24,7 @@ tiup dm enable <cluster-name> [flags]
 
 > **Note:**
 >
-> If the `-R, --role` option is specified at the same time, the auto-enabling of services in their intersection is enabled.
+> If the `-R, --role` option is specified at the same time, the auto-enabling of services that match both the specifications of `-N, --node` and `-R, --role` is enabled.
 
 ### -R, --role
 
@@ -34,7 +34,7 @@ tiup dm enable <cluster-name> [flags]
 
 > **Note:**
 >
-> If the `-N, --node` option is specified at the same time, the auto-enabling of services in their intersection is enabled.
+> If the `-N, --node` option is specified at the same time, the auto-enabling of services that match both the specifications of `-N, --node` and `-R, --role` is enabled.
 
 ### -h, --help
 

@@ -24,7 +24,7 @@ tiup cluster disable <cluster-name> [flags]
 
 > **Note:**
 >
-> If the `-R, --role` option is specified at the same time, the auto-enabling of services in their intersection is disabled.
+> If the `-R, --role` option is specified at the same time, the auto-enabling of services that match both the specifications of `-N, --node` and `-R, --role` is disabled.
 
 ### -R, --role
 
@@ -34,7 +34,7 @@ tiup cluster disable <cluster-name> [flags]
 
 > **Note:**
 >
-> If the `-N, --node` option is specified at the same time, the auto-enabling of services in their intersection is disabled.
+> If the `-N, --node` option is specified at the same time, the auto-enabling of services that match both the specifications of `-N, --node` and `-R, --role` is disabled.
 
 ### -h, --help
 

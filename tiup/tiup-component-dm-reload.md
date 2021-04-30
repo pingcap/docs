@@ -24,7 +24,7 @@ tiup dm reload <cluster-name> [flags]
 
 > **Note:**
 >
-> + If the `-R, --role` option is specified at the same time, then the service status in their intersection is restarted.
+> + If the `-R, --role` option is specified at the same time, only the service nodes that match both the specifications of `-N, --node` and `-R, --role` are restarted.
 > + If the `--skip-restart` option is specified, the `-N, --node` option is invalid.
 
 ### -R, --role
@@ -35,7 +35,7 @@ tiup dm reload <cluster-name> [flags]
 
 > **Note:**
 >
-> + If the `-N, --node` option is specified at the same time, the services in their intersection is restarted.
+> + If the `-N, --node` option is specified at the same time, only the service nodes that match both the specifications of `-N, --node` and `-R, --role` are restarted.
 > + If the `--skip-restart` option is specified, the `-R, --role` option is invalid.
 
 ### --skip-restart
