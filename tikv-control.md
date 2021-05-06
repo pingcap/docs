@@ -418,7 +418,8 @@ success!
 > **Note:**
 >
 > - This command only supports the local mode. It prints `success!` when successfully run.
-> - You must run this command for all stores where specified Regions' peers are located. If `-r` is not set, all Regions are involved, and you need to run this command for all stores. You need to ensure that the healthy stores stop providing services before restoring these stores. Otherwise, the inconsistent peer lists among Region replicas will cause an error when you execute `split-region` or `remove-peer`, which causes inconsistency between other metadata, and finally, the Regions will become unavailable.
+> - You must run this command for all stores where specified Regions' peers are located.
+> - If you use the `--all-regions` command, usually you need to run this command for all the remaining healthy stores in the cluster. You need to ensure that the healthy stores stop providing services before restoring these stores. Otherwise, the inconsistent peer lists among Region replicas will cause an error when you execute `split-region` or `remove-peer`, which causes inconsistency between other metadata, and finally, the Regions will become unavailable.
 
 ### Recover from MVCC data corruption
 
