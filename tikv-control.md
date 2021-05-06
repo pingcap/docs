@@ -230,10 +230,10 @@ Use the `compact` command to manually compact data of each TiKV. If you specify 
 - Use the `--host` option to specify the TiKV that you need to compact.
 - Use the `-d` option to specify the RocksDB that you need to compact. The optional values are `kv` and `raft`.
 - Use the `--threads` option allows you to specify the concurrency that you compact and its default value is 8. Generally, a higher concurrency comes with a faster compact speed, which might yet affect the service. You need to choose an appropriate concurrency based on the scenario.
-- Use the `--bottommost` option to include or exclude the bottommost file when you compact. The option values are `default`、`skip` and `force`. The default value is `default`.
-    - `default` means that the bottommost file is included only when you enable the Compaction Filter feature.
-    - `skip` means that the bottommost file is exclueded when you compact.
-    - `force` means that the bottommost file is always included when you compact.
+- Use the `--bottommost` option to include or exclude the bottommost files when TiKV performs compaction. The value options are `default`, `skip`, and `force`. The default value is `default`.
+    - `default` means that the bottommost files are included only when the Compaction Filter feature is enabled.
+    - `skip` means that the bottommost files are excluded when TiKV performs compaction.
+    - `force` means that the bottommost files are always included when TiKV performs compaction.
 
 ```bash
 $ tikv-ctl --db /path/to/tikv/db compact -d kv
@@ -419,7 +419,7 @@ success!
 > **Note:**
 >
 > - This command only supports the local mode. It prints `success!` when successfully run.
-> - You must run this command for all stores where specified Regions' peers are located. If `-r` is not set, all Regions are involved, and you need to run this command for all stores. You need to restart the healthy stores before restoring them. Otherwise, the inconsistency of the peer lists in Region replicas will cause an error when you execute `split-region` or `remove-peer`, resulting in the inconsistency of other metadata, and finally the Regions will become unavailable.
+> - You must run this command for all stores where specified Regions' peers are located. If `-r` is not set, all Regions are involved, and you need to run this command for all stores. You need to ensure that the healthy stores stop providing services before restoring these stores. Otherwise, the inconsistent peer lists among Region replicas will cause an error when you execute `split-region` or `remove-peer`, which causes inconsistency between other metadata, and finally, the Regions will become unavailable.
 
 ### Recover from MVCC data corruption
 
