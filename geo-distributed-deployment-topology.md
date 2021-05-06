@@ -6,7 +6,7 @@ aliases: ['/docs/dev/geo-distributed-deployment-topology/']
 
 # Geo-Distributed Deployment Topology
 
-This document takes the typical architecture of three data centers (DC) in two cities as an example, and introduces the geo-distributed deployment architecture and the key configuration. The cities uses in this example are Shanghai (refered to as `sha` in the example) and Beijing (refered to as bja and bjb in the example).
+This document takes the typical architecture of three data centers (DC) in two cities as an example, and introduces the geo-distributed deployment architecture and the key configuration. The cities uses in this example are Shanghai (refered to as `sha` in the example) and Beijing (refered to as `bja` and `bjb` in the example).
 
 ## Topology information
 
