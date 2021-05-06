@@ -166,7 +166,7 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 
 ### -R, --role
 
-- Specifies the roles to be queried. The value of this option is a comma-separated list of node roles. You can get the roles of nodes from the second column of the cluster status table returned by the [`tiup-component-cluster-display`](/tiup/tiup-component-cluster-display.md) command.
+- Specifies the roles to be checked. The value of this option is a comma-separated list of node roles. You can get the roles of nodes from the second column of the cluster status table returned by the [`tiup-component-cluster-display`](/tiup/tiup-component-cluster-display.md) command.
 - Data type: `STRINGS`
 - If this option is not specified in the command, all roles are checked by default.
 
