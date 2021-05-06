@@ -20,7 +20,7 @@ tiup dm reload <cluster-name> [flags]
 
 - Specifies the nodes to be restarted. If not specified, all nodes are restarted. The value of this option is a comma-separated list of node IDs. You can get the node IDs from the first column of the cluster status table returned by the [`tiup-component-dm-display`](/tiup/tiup-component-dm-display.md) command.
 - Data type: `STRINGS`
-- If this option is not specified in the command, all nodes are selected by default.
+- If this option is not specified in the command, all nodes are checked by default.
 
 > **Note:**
 >
@@ -31,7 +31,7 @@ tiup dm reload <cluster-name> [flags]
 
 - Specifies the roles to be restarted. If not specified, all roles are restarted. The value of this option is a comma-separated list of node roles. You can get the roles of nodes from the second column of the cluster status table returned by the [`tiup-component-dm-display`](/tiup/tiup-component-dm-display.md) command.
 - Data type: `STRINGS`
-- If this option is not specified in the command, all roles are selected by default.
+- If this option is not specified in the command, all roles are checked by default.
 
 > **Note:**
 >
