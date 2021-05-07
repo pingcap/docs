@@ -87,4 +87,6 @@ This section introduces the usage examples of the `mirror` command.
 
 ### Deploy a TiDB Cluster offline using TiUP
 
+The repository that is cloned using `tiup mirror clone` can be shared among hosts either by sharing the files via SCP, NFS or by making the repository available over the HTTP or HTTPS protocol. Use `tiup mirror set <location>` to specify the location of the repository.
+
 Refer to [Deploy a TiDB Cluster Offline Using TiUP](/production-offline-deployment-using-tiup.md#step-1-prepare-the-tiup-offline-component-package) to install the TiUP offline mirror, deploy a TiDB cluster, and start it.
