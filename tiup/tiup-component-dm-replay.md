@@ -12,7 +12,7 @@ When you perform a cluster operation such as upgrade or restart, the operation m
 tiup dm replay <audit-id> [flags]
 ```
 
-- `<audit-id>`: the `audit-id` of the command to be retried. You can view the historical commands and their `audit-id` using the [`tiup dm audit`](/tiup/tiup-component-dm-audit.md) command.
+- `<audit-id>`: the `audit-id` of the command to be retried. You can view the historical commands and their `audit-id`s using the [`tiup dm audit`](/tiup/tiup-component-dm-audit.md) command.
 
 ## Option
 

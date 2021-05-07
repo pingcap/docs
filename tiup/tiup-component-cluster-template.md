@@ -25,7 +25,7 @@ If this option is not specified, the output default template contains the follow
 
 ### --full
 
-- Outputs a detailed topology template that is annotated with configurable parameters. To enable this option, add it to the command.
+- Outputs a detailed topology template that is commented with configurable parameters. To enable this option, add it to the command.
 - If this option is not specified, the simple topology template is output by default.
 
 ### --multi-dc

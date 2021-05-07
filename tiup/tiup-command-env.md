@@ -4,7 +4,7 @@ title: tiup env
 
 # tiup env
 
-TiUP provides users with flexible and customized interfaces, some of which are implemented using environment variables. The `tiup env` command is used to check the user-defined environment variables that TiUP supports and their values.
+TiUP provides users with flexible and customized interfaces, some of which are implemented using environment variables. The `tiup env` command is used to query the user-defined environment variables that TiUP supports and their values.
 
 ## Syntax
 

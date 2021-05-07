@@ -20,7 +20,7 @@ This document introduces the common component management operations and the corr
 
 ## Check the component list
 
-You can use the `tiup list` command to check the component list. This usage of this command is as follows:
+You can use the `tiup list` command to query the component list. This usage of this command is as follows:
 
 - `tiup list`: checks which components can be installed.
 - `tiup list ${component}`: checks which versions of a specific component can be installed.
@@ -49,7 +49,7 @@ tiup list tikv
 
 ## Install components
 
-You can use the `tiup install` command to check the component list. This usage of this command is as follows:
+You can use the `tiup install` command to query the component list. This usage of this command is as follows:
 
 - `tiup install <component>`: installs the latest stable version of a specified component.
 - `tiup install <component>:[version]`: installs the specified version of a specified component.
@@ -144,7 +144,7 @@ Example 2: Specify the tag with which TiKV operates.
 tiup --tag=experiment tikv
 ```
 
-### Check the operating status of a component
+### Query the operating status of a component
 
 You can use the `tiup status` command to check the operating status of a component:
 
