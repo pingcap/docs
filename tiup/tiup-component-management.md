@@ -18,7 +18,7 @@ You can use the following TiUP commands to manage components in the TiUP ecosyst
 
 This document introduces the common component management operations and the corresponding TiUP commands.
 
-## Check the component list
+## Query the component list
 
 You can use the `tiup list` command to query the component list. This usage of this command is as follows:
 
