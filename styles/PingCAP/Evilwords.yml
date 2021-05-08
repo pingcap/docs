@@ -1,0 +1,10 @@
+extends: substitution
+message: "Use '%s' instead of '%s'."
+ignorecase: true
+scope: text
+level: error
+swap:
+  (?:whitelist|white list):    allowlist
+  (?:blacklist|black list):    blocklist
+  slave:                       secondary, follower, agent, or consumer
+  master-slave:                source-replica

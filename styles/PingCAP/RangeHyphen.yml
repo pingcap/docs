@@ -1,0 +1,11 @@
+extends: existence
+message: "Don't put a space before or after a hyphen when describing a range."
+nonword: true
+level: error
+action:
+  name: edit
+  params:
+    - remove
+    - ' '
+tokens:
+  - '\d+\s[-]\s\d+'

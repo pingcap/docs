@@ -68,6 +68,13 @@ jobs:
             wget https://raw.githubusercontent.com/CharLotteiu/pingcap-docs-checks/main/check-manual-line-breaks.py
             python3 check-manual-line-breaks.py $(git diff-tree --name-only --no-commit-id -r upstream/master..HEAD -- '*.md' ':(exclude).github/*')
 
+      - run:
+          name: "Vale linter"
+          command: |
+            sudo curl -sfL https://install.goreleaser.com/github.com/ValeLint/vale.sh | sh -s latest
+            export PATH="./bin:$PATH"
+            vale $(git diff-tree --name-only --no-commit-id -r upstream/master..HEAD -- '*.md' ':(exclude).github/*')
+
   build:
     docker:
       - image: andelf/doc-build:0.1.9
