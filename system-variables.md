@@ -25,8 +25,9 @@ SET  GLOBAL tidb_distsql_scan_concurrency = 10;
 
 > **Note:**
 >
-> TiDB differs from MySQL in that `GLOBAL` scoped variables **persist** through TiDB server restarts. Changes are also propagated to other TiDB servers every 2 seconds [TiDB #14531](https://github.com/pingcap/tidb/issues/14531).
-> Additionally, TiDB presents several MySQL variables from MySQL 5.7 as both readable and settable. This is required for compatibility, since it is common for both applications and connectors to read MySQL variables. For example: JDBC connectors both read and set query cache settings, despite not relying on the behavior.
+> <!-- Since next_version version --> Executing `SET GLOBAL` applies immediately on the TiDB server where the statement was issued. All TiDB servers in the cluster are sent a notification to refresh their global variables, which will begin immediately as a background operation.
+>
+> TiDB differs from MySQL in that `GLOBAL` scoped variables **persist** through TiDB server restarts. Additionally, TiDB presents several MySQL variables as both readable and settable. This is required for compatibility, since it is common for both applications and connectors to read MySQL variables. For example: JDBC connectors both read and set query cache settings, despite not relying on the behavior.
 
 ## Variable Reference
 
