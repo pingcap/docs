@@ -24,7 +24,7 @@ tiup cluster display <cluster-name> [flags]
 
 ### -N, --node
 
-- Specifies the node to check. If this option is not specified, all nodes are checked. The value of this option is a comma-separated list of node IDs. If you are not sure about the ID of a node, you can skip this option in the command to show the IDs and status of all nodes in the output.
+- Specifies the node to display. If this option is not specified, all nodes are displayed. The value of this option is a comma-separated list of node IDs. If you are not sure about the ID of a node, you can skip this option in the command to show the IDs and status of all nodes in the output.
 - Data type: `STRINGS`
 - If this option is not specified in the command, all nodes are checked by default.
 
@@ -34,13 +34,13 @@ tiup cluster display <cluster-name> [flags]
 
 ### -R, --role
 
-- Specifies the role to check. If it is not specified, all roles are checked. The value of this option is a comma-separated list of node roles. If you are not sure about the role deployed on a node, you can skip this option in the command to show the roles and status of all nodes in the output.
+- Specifies the role to display. If it is not specified, all roles are displayed. The value of this option is a comma-separated list of node roles. If you are not sure about the role deployed on a node, you can skip this option in the command to show the roles and status of all nodes in the output.
 - Data type: `STRINGS`
-- If this option is not specified in the command, all roles are checked by default.
+- If this option is not specified in the command, all roles are displayed by default.
 
 > **Note:**
 >
-> If the `-N, --node` option is specified at the same time, only the service nodes that match both the specifications of `-N, --node` and `-R, --role` are checked.
+> If the `-N, --node` option is specified at the same time, only the service nodes that match both the specifications of `-N, --node` and `-R, --role` are displayed.
 
 ### -h, --help
 

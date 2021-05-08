@@ -18,7 +18,7 @@ tiup dm disable <cluster-name> [flags]
 
 ### -N, --node
 
-- Specifies the nodes whose service auto-enabling is to be disabled. The value of this option is a comma-separated list of node IDs. You can get the node IDs from the first column of the cluster status table returned by the [`tiup-component-dm-display`](/tiup/tiup-component-dm-display.md) command.
+- Specifies the nodes whose service auto-enabling is to be disabled. The value of this option is a comma-separated list of node IDs. You can get the node IDs from the first column of the cluster status table returned by the [`tiup dm display`](/tiup/tiup-component-dm-display.md) command.
 - Data type: `STRINGS`
 - If this option is not specified in the command, the auto-enabling of all nodes is disabled by default.
 
@@ -28,7 +28,7 @@ tiup dm disable <cluster-name> [flags]
 
 ### -R, --role
 
-- Specifies the roles whose service auto-enabling is to be disabled. The value of this option is a comma-separated list of node roles. You can get the roles of nodes from the second column of the cluster status table returned by the [`tiup-component-dm-display`](/tiup/tiup-component-dm-display.md) command.
+- Specifies the roles whose service auto-enabling is to be disabled. The value of this option is a comma-separated list of node roles. You can get the roles of nodes from the second column of the cluster status table returned by the [`tiup dm display`](/tiup/tiup-component-dm-display.md) command.
 - Data type: `STRINGS`
 - If this option is not specified in the command, the auto-enabling of all roles is disabled by default.
 
