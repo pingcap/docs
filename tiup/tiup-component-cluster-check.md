@@ -195,7 +195,7 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 ### --u, --user
 
 - Specifies the user name to connect to the target machine. The specified user needs to have the password-free sudo root privileges on the target machine.
-- Data type: `STRINGS`
+- Data type: `STRING`
 - If this option is not specified in the command, the user who executes the command is used as the default value.
 
 > **Note:**
