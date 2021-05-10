@@ -10,7 +10,7 @@ The `tiup cluster audit` command is used to view commands executed on all cluste
 
 ## Syntax
 
-```sh
+```shell
 tiup cluster audit [audit-id] [flags]
 ```
 

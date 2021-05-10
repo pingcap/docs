@@ -14,7 +14,7 @@ In the test environment, sometimes you might need to reset the cluster back to t
 
 ## Syntax
 
-```sh
+```shell
 tiup cluster clean <cluster-name> [flags]
 ```
 

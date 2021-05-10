@@ -10,7 +10,7 @@ The `tiup uninstall` command is used to uninstall the installed components.
 
 ## Syntax
 
-```sh
+```shell
 tiup uninstall <component1>:<version> [component2...N] [flags]
 ```
 
