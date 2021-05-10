@@ -26,7 +26,7 @@ As an open source distributed NewSQL database with high performance, TiDB can be
 > - Support for CentOS 8 Linux is not planned because its upstream support ends on December 31, 2021.
 > - Support for Ubuntu 16.04 will be removed in future versions of TiDB. Upgrading to Ubuntu 18.04 or later is strongly recommended.
 
-Other Linux OS versions like Debian Linux and Fedora Linux are likely to work, but are not officially supported.
+Other Linux OS versions such as Debian Linux and Fedora Linux might work but are not officially supported.
 
 ## Software recommendations
 
