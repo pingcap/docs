@@ -22,7 +22,7 @@ As an open source distributed NewSQL database with high performance, TiDB can be
 > - For Oracle Enterprise Linux, TiDB supports the Red Hat Compatible Kernel (RHCK) and does not support the Unbreakable Enterprise Kernel provided by Oracle Enterprise Linux.
 > - A large number of TiDB tests have been run on the CentOS 7.3 system, and in our community there are a lot of best practices in which TiDB is deployed on the Linux operating system. Therefore, it is recommended to deploy TiDB on CentOS 7.3 or later.
 > - The support for the Linux operating systems above includes the deployment and operation in physical servers as well as in major virtualized environments like VMware, KVM and XEN.
-> - Red Hat Enterprise Linux 8.0, CentOS 8 Stream and Oracle Enterprise Linux 8.0 are not supported yet as testing of these platforms is in progress.
+> - Red Hat Enterprise Linux 8.0, CentOS 8 Stream, and Oracle Enterprise Linux 8.0 are not supported yet as the testing of these platforms is in progress.
 > - Support for CentOS 8 Linux is not planned as upstream support ends on 31 December 2021.
 > - Support for Ubuntu 16.04 will be removed in future versions of TiDB. Upgrading to Ubuntu 18.04 of newer is strongly recommended.
 
