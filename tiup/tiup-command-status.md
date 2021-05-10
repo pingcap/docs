@@ -4,6 +4,8 @@ title: tiup status
 
 # tiup status
 
+[<< Back to the previous page - TiUP Reference command list](/tiup/tiup-reference.md#command-list)
+
 The `tiup status` command is used to view the operation information of the components after you run the components using the `tiup [flags] <component> [args...]` command.
 
 > **Note:**

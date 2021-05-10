@@ -4,6 +4,8 @@ title: tiup clean
 
 # tiup clean
 
+[<< Back to the previous page - TiUP Reference command list](/tiup/tiup-reference.md#command-list)
+
 The `tiup clean` command is used to clear the data generated during component operation.
 
 ## Syntax

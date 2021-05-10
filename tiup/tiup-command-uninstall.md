@@ -4,6 +4,8 @@ title: tiup uninstall
 
 # tiup uninstall
 
+[<< Back to the previous page - TiUP Reference command list](/tiup/tiup-reference.md#command-list)
+
 The `tiup uninstall` command is used to uninstall the installed components.
 
 ## Syntax

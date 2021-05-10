@@ -4,6 +4,8 @@ title: tiup list
 
 # tiup list
 
+[<< Back to the previous page - TiUP Reference command list](/tiup/tiup-reference.md#command-list)
+
 The command `tiup list` is used to get the list of available components of a mirror.
 
 ## Syntax

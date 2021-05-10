@@ -4,11 +4,13 @@ title: tiup update
 
 # tiup update
 
+[<< Back to the previous page - TiUP Reference command list](/tiup/tiup-reference.md#command-list)
+
 The `tiup update` command is used to update the installed components or TiUP itself.
 
 ## Syntax
 
-```sh
+```shell
 tiup update [component1][:version] [component2..N] [flags]
 ```
 

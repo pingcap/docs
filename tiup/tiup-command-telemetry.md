@@ -4,6 +4,8 @@ title: tiup telemetry
 
 # tiup telemetry
 
+[<< Back to the previous page - TiUP Reference command list](/tiup/tiup-reference.md#command-list)
+
 TiDB, TiUP, and TiDB Dashboard collect usage information by default and share the information with PingCAP to improve the product. For example, through this usage information, PingCAP learns about common TiDB cluster operations and thereby determines the priority of new features.
 
 When TiUP telemetry is enabled, usage information is shared with PingCAP when TiUP commands are executed, including (but not limited to):

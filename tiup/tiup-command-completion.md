@@ -4,6 +4,8 @@ title: tiup completion
 
 # tiup completion
 
+[<< Back to the previous page - TiUP Reference command list](/tiup/tiup-reference.md#command-list)
+
 To reduce user costs, TiUP provides the `tiup completion` command to generate a configuration file for automatic command-line completion. Currently, TiUP supports completing `bash` and `zsh` commands.
 
 If you want to complete `bash` commands, you need to install `bash-completion` first. See the following instructions:
