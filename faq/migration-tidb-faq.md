@@ -15,7 +15,7 @@ Because TiDB supports most MySQL syntax, generally you can migrate your applicat
 
 ### Data import and export is slow, and lots of retries, EOF errors appear in each component log without other errors displayed
 
-If no other logical error , retries and EOF might be caused by network issues. First, it is recommended to use relevant tools to check network connectivity. The following example uses [iperf](https://iperf.fr/) to troubleshoot:
+If no other logical errors occur, retries and EOF might be caused by network issues. First, it is recommended to use relevant tools to check network connectivity. The following example uses [iperf](https://iperf.fr/) to troubleshoot:
 
 + Execute the following command on the server-side node where the retries and EOF errors occur:
 
