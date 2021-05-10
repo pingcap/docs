@@ -4,6 +4,8 @@ title: tiup cluster restart
 
 # tiup cluster restart
 
+[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
+
 The command `tiup cluster restart` is used to restart all or some of the services of the specified cluster.
 
 > **Note:**

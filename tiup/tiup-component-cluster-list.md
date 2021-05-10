@@ -4,6 +4,8 @@ title: tiup cluster list
 
 # tiup cluster list
 
+[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
+
 tiup-cluster supports deploying multiple clusters using the same control machine. The `tiup cluster list` command outputs all clusters deployed by the currently logged-in user using this control machine.
 
 > **Note:**

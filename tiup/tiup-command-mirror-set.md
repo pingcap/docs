@@ -4,6 +4,8 @@ title: tiup mirror set
 
 # tiup mirror set
 
+[<< Back to the previous page - TiUP Mirror command list](/tiup/tiup-command-mirror.md#command-list)
+
 The `tiup mirror set` command is used to switch the current mirror and supports two forms of mirrors: local file system and remote network address.
 
 The address of the official mirror is `https://tiup-mirrors.pingcap.com`.

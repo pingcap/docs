@@ -4,6 +4,8 @@ title: tiup mirror grant
 
 # tiup mirror grant
 
+[<< Back to the previous page - TiUP Mirror command list](/tiup/tiup-command-mirror.md#command-list)
+
 The `tiup mirror grant` command is used to introduce a component owner to the current mirror.
 
 Component owners can use their keys to publish new components or to modify components they previously published. Before adding a new component owner, the component owner to be added needs to send his or her own public key to the mirror administrator.

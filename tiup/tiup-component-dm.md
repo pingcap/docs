@@ -4,6 +4,8 @@ title: TiUP DM
 
 # TiUP DM
 
+[<< Back to the previous page - TiUP Reference component list](/tiup/tiup-reference.md#component-list)
+
 Similar to [TiUP Cluster](/tiup/tiup-component-cluster.md) which is used to manage TiDB clusters, TiUP DM is used to manage DM clusters. You can use the TiUP DM component to perform daily operations and maintenance tasks of DM clusters, including deploying, starting, stopping, destroying, elastic scaling, upgrading DM clusters, and managing the configuration parameters of DM clusters.
 
 ## Syntax
@@ -12,14 +14,14 @@ Similar to [TiUP Cluster](/tiup/tiup-component-cluster.md) which is used to mana
 tiup dm [command] [flags]
 ```
 
-`[command]` is used to pass the name of the command. See the [command list](#list-of-commands) for supported commands.
+`[command]` is used to pass the name of the command. See the [Command list](#command-list) for supported commands.
 
 ## Options
 
 ### --ssh
 
 - Specifies the SSH client to connect to the remote end (the machine where the TiDB service is deployed) for the command execution.
-- Data type:`STRING`
+- Data type: `STRING`
 - Support values:
 
     - `builtin`: Uses the built-in easyssh client of tiup-cluster as the SSH client.
@@ -37,13 +39,13 @@ tiup dm [command] [flags]
 ### --wait-timeout
 
 - Specifies the maximum waiting time (in seconds) for each step in the operation process. The operation process consists of many steps, such as specifying systemctl to start or stop services, and waiting for ports to be online or offline. Each step may take several seconds. If the execution time of a step exceeds the specified timeout, the step exits with an error.
-- Data type:`UINT`
+- Data type: `UINT`
 - If this option is not specified in the command, the maximum waiting time for each steps is `120` seconds.
 
 ### -y, --yes
 
 - Skips the secondary confirmation of all risky operations. It is not recommended to use this option unless you use a script to call TiUP.
-- Data type:`BOOLEAN`
+- Data type: `BOOLEAN`
 - This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
 
 ### -v, --version
@@ -58,7 +60,7 @@ tiup dm [command] [flags]
 - Data type: `BOOLEAN`
 - This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
 
-## List of commands
+## Command list
 
 - [import](/tiup/tiup-component-dm-import.md): Imports a DM v1.0 cluster deployed by DM-Ansible.
 - [template](/tiup/tiup-component-dm-template.md): Outputs the topology template.

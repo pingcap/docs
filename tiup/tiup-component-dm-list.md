@@ -4,6 +4,8 @@ title: tiup dm list
 
 # tiup dm list
 
+[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)
+
 `tiup-dm` supports deploying multiple clusters using the same control machine. You can use the `tiup dm list` command to check which clusters are deployed using the control machine by the currently logged-in user.
 
 > **Note:**

@@ -4,6 +4,8 @@ title: tiup mirror init
 
 # tiup mirror init
 
+[<< Back to the previous page - TiUP Mirror command list](/tiup/tiup-command-mirror.md#command-list)
+
 The command `tiup mirror init` is used to initialize an empty mirror. The initialized mirror does not contain any components or component owners. The command only generates the following files for the initialized mirror:
 
 ```

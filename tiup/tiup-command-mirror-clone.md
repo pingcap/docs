@@ -4,6 +4,8 @@ title: tiup mirror clone
 
 # tiup mirror clone
 
+[<< Back to the previous page - TiUP Mirror command list](/tiup/tiup-command-mirror.md#command-list)
+
 The command `tiup mirror clone` is used to clone an existing mirror or clone some of its components to create a new mirror. The new mirror has the same components as the old one, but uses a different signature key.
 
 ## Syntax

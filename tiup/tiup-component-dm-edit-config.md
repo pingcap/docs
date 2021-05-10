@@ -4,6 +4,8 @@ title: tiup dm edit-config
 
 # tiup dm edit-config
 
+[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)
+
 If you need to modify the cluster service configuration after the cluster is deployed, you can use the `tiup dm edit-config` command that starts an editor for you to modify the [topology file](/tiup/tiup-dm-topology-reference.md). of the specified cluster. This editor is specified in the `$EDITOR` environment variable by default. If the `$EDITOR` environment variable does not exist, the `vi` editor is used.
 
 > **Note:**

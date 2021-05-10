@@ -4,6 +4,8 @@ title: tiup cluster patch
 
 # tiup cluster patch
 
+[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
+
 If you need to dynamically replace the binaries of a service while the cluster is running (namely, keep the cluster available during the replacement process), you can use the `tiup cluster patch` command. After the command is executed, TiUP does the following things:
 
 - Uploads the binary package for replacement to the target machine.

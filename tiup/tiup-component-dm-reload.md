@@ -4,6 +4,8 @@ title: tiup dm reload
 
 # tiup dm reload
 
+[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)
+
 After [modifying the cluster configuration](/tiup/tiup-component-dm-edit-config.md), the cluster needs to be reloaded using the `tiup dm reload` command for the configuration to take effect. This command publishes the configuration of the control machine to the remote machine where the service is running and restarts the service in order according to the upgrade process. The cluster remains available during the restart process.
 
 ## Syntax

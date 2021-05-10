@@ -4,6 +4,8 @@ title: tiup dm enable
 
 # tiup dm enable
 
+[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)
+
 The `tiup dm enable` command is used to set the auto-enabling of the cluster service after a machine is restarted. This command enables the auto-enabling of the service by executing `systemctl enable <service>` at the specified node.
 
 ## Syntax

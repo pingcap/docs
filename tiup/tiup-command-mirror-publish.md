@@ -4,6 +4,8 @@ title: tiup mirror publish
 
 # tiup mirror publish
 
+[<< Back to the previous page - TiUP Mirror command list](/tiup/tiup-command-mirror.md#command-list)
+
 The command `tiup mirror publish` is used to publish a new component or a new version of an existing component. Only component owner that has the access to the target component can publish it. To add a new component owner, see the usage of the [`grant` command](/tiup/tiup-command-mirror-grant.md).
 
 ## Syntax

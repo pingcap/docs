@@ -4,6 +4,8 @@ title: tiup cluster stop
 
 # tiup cluster stop
 
+[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
+
 The `tiup cluster stop` command is used to stop all services or some services of the specified cluster.
 
 > **Note:**

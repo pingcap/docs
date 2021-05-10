@@ -4,6 +4,8 @@ title: tiup mirror genkey
 
 # tiup mirror genkey
 
+[<< Back to the previous page - TiUP Mirror command list](/tiup/tiup-command-mirror.md#command-list)
+
 TiUP [mirror](/tiup/tiup-mirror-reference.md), according its definition, has three roles of users:
 
 - Mirror administrators: They have the permission to modify `root.json`, `index.json`, `snapshot.json`, and `timestamp.json`.

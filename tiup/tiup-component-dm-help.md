@@ -4,6 +4,8 @@ title: tiup dm help
 
 # tiup dm help
 
+[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)
+
 tiup-dm command-line interface provides users with a wealth of help information. You can view it via the `help` command or the `--help` option. Basically, `tiup dm help <command>` is equivalent to `tiup dm <command> --help`.
 
 ## Syntax

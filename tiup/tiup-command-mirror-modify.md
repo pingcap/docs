@@ -4,6 +4,8 @@ title: tiup mirror modify
 
 # tiup mirror modify
 
+[<< Back to the previous page - TiUP Mirror command list](/tiup/tiup-command-mirror.md#command-list)
+
 The `tiup mirror modify` command is used to modify published components. Only valid component owners can modify the components that they have published on their own. For the method to publish a component, refer to the [`publish` command](/tiup/tiup-command-mirror-publish.md).
 
 ## Syntax

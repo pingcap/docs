@@ -4,6 +4,8 @@ title: tiup cluster deploy
 
 # tiup cluster deploy
 
+[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
+
 The `tiup cluster deploy` command is used to deploy a new cluster.
 
 ## Syntax
