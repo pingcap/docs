@@ -102,7 +102,7 @@ Use the `br backup` command to back up the single table data `--db batchmark --t
 * Configure a high-performance SSD hard disk host as the NFS server to store data, and all BR nodes, TiKV nodes, and TiFlash nodes as NFS clients. Mount the same path (for example, `/br_data`) to the NFS server for NFS clients to access the server.
 * The total transfer rate between the NFS server and all NFS clients must reach at least `the number of TiKV instances * 150MB/s`. Otherwise the network I/O might become the performance bottleneck.
 
- **Note:**
+> **Note:**
 >
 > * During data backup, because only data in leader replicas are backed up, even if there is a TiFlash replica in the cluster，BR can complete backup without mounting TiFlash nodes.
 > * When restoring data, BR will restore the data of all replicas. Therefore, TiFlash nodes need the access to backup data so that BR will complete the data restoration. You also must mount TiFlash nodes to NFS server.
