@@ -578,7 +578,7 @@ You can see that the inserted record `(NULL, 'mothra')` falls into the same part
 
 ## Partition management
 
-For `LIST` and `RANGE` partitioned tables, you can add and drop partitions with `ALTER TABLE <table name> ADD PARTITION (<partition specification>)` / `ALTER TABLE <table name> DROP PARTITION <list of partitions>`.
+For `LIST` and `RANGE` partitioned tables, you can add and drop partitions using the `ALTER TABLE <table name> ADD PARTITION (<partition specification>)` or `ALTER TABLE <table name> DROP PARTITION <list of partitions>` statement.
 
 For `HASH` partitioned tables, `COALESCE PARTITION` and `ADD PARTITION` is not yet supported.
 
