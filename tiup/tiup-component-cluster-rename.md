@@ -4,8 +4,6 @@ title: tiup cluster rename
 
 # tiup cluster rename
 
-[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
-
 The cluster name is specified when [the cluster is deployed](/tiup/tiup-component-cluster-deploy.md). If you want to change the cluster name after the cluster is deployed, you can use the command `tiup cluster rename`.
 
 > **Note:**
@@ -35,3 +33,5 @@ tiup cluster rename <old-cluster-name> <new-cluster-name> [flags]
 ## Outputs
 
 The execution log of the tiup-cluster.
+
+[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)

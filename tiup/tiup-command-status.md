@@ -4,8 +4,6 @@ title: tiup status
 
 # tiup status
 
-[<< Back to the previous page - TiUP Reference command list](/tiup/tiup-reference.md#command-list)
-
 The `tiup status` command is used to view the operation information of the components after you run the components using the `tiup [flags] <component> [args...]` command.
 
 > **Note:**
@@ -37,3 +35,5 @@ A table consisting of the following fields:
 - `Directory`: The data directory of the components.
 - `Binary`: The binary file path of the components.
 - `Args`: The starting arguments of the operating components.
+
+[<< Back to the previous page - TiUP Reference command list](/tiup/tiup-reference.md#command-list)

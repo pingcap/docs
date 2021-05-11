@@ -4,8 +4,6 @@ title: tiup dm audit
 
 # tiup dm audit
 
-[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)
-
 The `tiup dm audit` command is used to view historical commands executed on all clusters and the execution log of each command.
 
 ## Syntax
@@ -32,3 +30,5 @@ tiup dm audit [audit-id] [flags]
     - ID: the `audit-id` corresponding to this record
     - Time: the execution time of the command corresponding to the record
     - Command: the command corresponding to the record
+
+[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)

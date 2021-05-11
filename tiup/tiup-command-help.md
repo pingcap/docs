@@ -4,8 +4,6 @@ title: tiup help
 
 # tiup help
 
-[<< Back to the previous page - TiUP Reference command list](/tiup/tiup-reference.md#command-list)
-
 The TiUP command-line interface provides users with a wealth of help information. You can view it via the `help` command or the `--help` option.
 
 ## Syntax
@@ -23,3 +21,5 @@ None
 ## Output
 
 The help information of `[command]` or TiUP.
+
+[<< Back to the previous page - TiUP Reference command list](/tiup/tiup-reference.md#command-list)

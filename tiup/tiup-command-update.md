@@ -4,8 +4,6 @@ title: tiup update
 
 # tiup update
 
-[<< Back to the previous page - TiUP Reference command list](/tiup/tiup-reference.md#command-list)
-
 The `tiup update` command is used to update the installed components or TiUP itself.
 
 ## Syntax
@@ -50,3 +48,5 @@ The update operation does not delete the old version. You can still specify usin
 
 - If the update is successful, `Updated successfully!` is output.
 - If target version does not exist, the `Error: version %s not supported by component %s` error is reported.
+
+[<< Back to the previous page - TiUP Reference command list](/tiup/tiup-reference.md#command-list)

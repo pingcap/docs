@@ -4,8 +4,6 @@ title: tiup dm import
 
 # tiup dm import
 
-[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)
-
 In DM v1.0, the cluster is basically deployed using TiDB Ansible. TiUP DM provides the `import` command to import v1.0 clusters and redeploy the clusters in DM v2.0.
 
 > **Note:**
@@ -60,3 +58,5 @@ tiup dm import [flags]
 ## Outputs
 
 The log of the importing process.
+
+[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)

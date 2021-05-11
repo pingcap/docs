@@ -4,8 +4,6 @@ title: tiup dm template
 
 # tiup dm template
 
-[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)
-
 Before deploying the cluster, you need to prepare a [topology file](/tiup/tiup-dm-topology-reference.md) of the cluster. TiUP has a built-in topology file template, and you can modify this template to create the final topology file. To output the built-in template content, you can use the `tiup dm template` command.
 
 ## Syntax
@@ -36,3 +34,5 @@ Prints the help information.
 ## Output
 
 Outputs the topology template according to the specified options, which can be redirected to the topology file for deployment.
+
+[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)

@@ -4,8 +4,6 @@ title: tiup cluster scale-out
 
 # tiup cluster scale-out
 
-[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
-
 The `tiup cluster scale-out` command is used for scaling out the cluster. The internal logic of scaling out the cluster is similar to the cluster deployment. The tiup-cluster component first establishes an SSH connection to the new node, creates the necessary directories on the target node, then performs the deployment and starts the service.
 
 When PD is scaled out, new PD nodes are added to the cluster by the join operation, and the configuration of the services associated with PD is updated; other services are directly started and added to the cluster.
@@ -63,3 +61,5 @@ tiup cluster scale-out <cluster-name> <topology.yaml> [flags]
 ## Output
 
 The log of scaling out.
+
+[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)

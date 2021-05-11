@@ -4,8 +4,6 @@ title: tiup dm stop
 
 # tiup dm stop
 
-[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)
-
 The `tiup dm stop` command is used to stop all or part of the services of the specified cluster.
 
 > **Note:**
@@ -51,3 +49,5 @@ tiup dm stop <cluster-name> [flags]
 ## Output
 
 The log of stopping the service.
+
+[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)

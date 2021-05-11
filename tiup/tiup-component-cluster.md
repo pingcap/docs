@@ -4,8 +4,6 @@ title: TiUP Cluster
 
 # TiUP Cluster
 
-[<< Back to the previous page - TiUP Reference component list](/tiup/tiup-reference.md#component-list)
-
 TiUP Cluster is a cluster management component of TiUP written in Golang. You can use the TiUP Cluster component to perform daily operations and maintenance, including deploying, starting, shutting down, destroying, elastic scaling, upgrading TiDB clusters, and managing TiDB cluster parameters.
 
 ## Syntax
@@ -85,3 +83,5 @@ tiup cluster [command] [flags]
 - [enable](/tiup/tiup-component-cluster-enable.md): enables the auto-enabling of the cluster service after a machine is restarted.
 - [disable](/tiup/tiup-component-cluster-disable.md): disables the auto-enabling of the cluster service after a machine is restarted.
 - [help](/tiup/tiup-component-cluster-help.md): prints the help information
+
+[<< Back to the previous page - TiUP Reference component list](/tiup/tiup-reference.md#component-list)

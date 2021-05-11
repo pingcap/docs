@@ -4,8 +4,6 @@ title: tiup dm scale-out
 
 # tiup dm scale-out
 
-[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)
-
 The `tiup dm scale-out` command is used for scaling out the cluster. The internal logic of scaling out the cluster is similar to the cluster deployment. The `tiup-dm` components first establish an SSH connection to the new node, create the necessary directories on the target node, then perform the deployment and start the service.
 
 ## Syntax
@@ -47,3 +45,5 @@ tiup dm scale-out <cluster-name> <topology.yaml> [flags]
 ## Output
 
 The log of scaling out.
+
+[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)

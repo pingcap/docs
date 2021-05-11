@@ -4,8 +4,6 @@ title: tiup cluster clean
 
 # tiup cluster clean
 
-[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
-
 In the test environment, sometimes you might need to reset the cluster back to the state as it has been just deployed, which means deleting all data. You can do that easily using the `tiup cluster clean` command. After running it, the cluster is stopped and then cluster data is deleted. After restarting the cluster manually, you will get a clean cluster.
 
 > **Warning:**
@@ -64,3 +62,5 @@ tiup cluster clean <cluster-name> [flags]
 ## Output
 
 The execution logs of tiup-cluster.
+
+[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)

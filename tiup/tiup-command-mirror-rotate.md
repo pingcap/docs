@@ -4,8 +4,6 @@ title: tiup mirror rotate
 
 # tiup mirror rotate
 
-[<< Back to the previous page - TiUP Mirror command list](/tiup/tiup-command-mirror.md#command-list)
-
 `root.json` is an important file in a TiUP mirror. It stores the public keys needed for the entire system and is the basis of the chain of trust in TiUP. It mainly contains the following parts:
 
 - Signatures of mirror administrators. For the official mirror, there are five signatures. For an initialized mirror, there are three signatures by default.
@@ -60,3 +58,5 @@ For how mirror administrators sign files, refer to the [`sign` command](/tiup/ti
 ## Outputs
 
 The current signature status of each mirror administrator.
+
+[<< Back to the previous page - TiUP Mirror command list](/tiup/tiup-command-mirror.md#command-list)

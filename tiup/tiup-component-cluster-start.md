@@ -4,8 +4,6 @@ title: tiup cluster start
 
 # tiup cluster start
 
-[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
-
 The `tiup cluster start` command is used to start all services or some services of the specified cluster.
 
 ## Syntax
@@ -47,3 +45,5 @@ tiup cluster start <cluster-name> [flags]
 ## Output
 
 The log of starting the service.
+
+[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)

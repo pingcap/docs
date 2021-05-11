@@ -4,8 +4,6 @@ title: tiup dm patch
 
 # tiup dm patch
 
-[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)
-
 If you need to dynamically replace the binaries of a service while the cluster is running (that is, to keep the cluster available during the replacement), you can use the `tiup dm patch` command. The command does the following:
 
 - Uploads the binary package for replacement to the target machine.
@@ -77,3 +75,5 @@ You need to pack the binary package required for this command in advance accordi
 ## Outputs
 
 The execution log of tiup-dm.
+
+[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)

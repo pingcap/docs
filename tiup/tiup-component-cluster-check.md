@@ -4,8 +4,6 @@ title: tiup cluster check
 
 # tiup cluster check
 
-[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
-
 For a formal production environment, before the environment goes live, you need to perform a series of checks to ensure the clusters are in their best performance. To simplify the manual check steps, TiUP Cluster provides the `check` command to check whether the hardware and software environments of the target machines of a specified cluster meet the requirements to work normally.
 
 ## List of check items
@@ -236,3 +234,5 @@ A table containing the following fields:
 - `Check`: the check item
 - `Result`: the check result (Pass, Warn, or Fail)
 - `Message`: the result description
+
+[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)

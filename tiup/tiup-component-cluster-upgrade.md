@@ -4,8 +4,6 @@ title: tiup cluster upgrade
 
 # tiup cluster upgrade
 
-[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
-
 The `tiup cluster upgrade` command is used to upgrade the specified cluster to a specific version.
 
 ## Syntax
@@ -60,3 +58,5 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 ## Output
 
 The log of the upgrading progress.
+
+[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)

@@ -4,8 +4,6 @@ title: tiup dm restart
 
 # tiup dm restart
 
-[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)
-
 The command `tiup dm restart` is used to restart all or some of the services of the specified cluster.
 
 > **Note:**
@@ -51,3 +49,5 @@ tiup dm restart <cluster-name> [flags]
 ## Outputs
 
 The log of the service restart process.
+
+[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)

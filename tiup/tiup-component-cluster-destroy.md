@@ -4,8 +4,6 @@ title: tiup cluster destroy
 
 # tiup cluster destroy
 
-[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
-
 After an application goes offline, if you want to release the machines occupied by the cluster for use by other applications, you need to clean up the data on the cluster and the deployed binary files. To destroy the cluster, the `tiup cluster destroy` command performs the following operations:
 
 - Stops the cluster.
@@ -49,3 +47,5 @@ tiup cluster destroy <cluster-name> [flags]
 ## Output
 
 The execution log of the tiup-cluster.
+
+[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)

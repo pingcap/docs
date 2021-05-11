@@ -4,8 +4,6 @@ title: tiup cluster display
 
 # tiup cluster display
 
-[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
-
 If you want to see the operation status of each component in the cluster, it is obviously inefficient to log in to each machine one by one. Therefore, tiup-cluster provides the `tiup cluster display` command to efficiently complete this task.
 
 ## Syntax
@@ -65,3 +63,5 @@ tiup cluster display <cluster-name> [flags]
     - Status: the current status of the node service
     - Data Dir: the data directory of the service. `-` means no data directory.
     - Deploy Dir: the deployment directory of the service
+
+[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)

@@ -4,8 +4,6 @@ title: tiup cluster list
 
 # tiup cluster list
 
-[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
-
 tiup-cluster supports deploying multiple clusters using the same control machine. The `tiup cluster list` command outputs all clusters deployed by the currently logged-in user using this control machine.
 
 > **Note:**
@@ -35,3 +33,5 @@ Outputs the table with the following fields:
 - Version: the cluster version
 - Path: the path of the cluster deployment data on the control machine
 - PrivateKey: the path of the private key that is used to connect the cluster
+
+[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)

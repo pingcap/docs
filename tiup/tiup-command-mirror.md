@@ -4,8 +4,6 @@ title: tiup mirror
 
 # tiup mirror
 
-[<< Back to the previous page - TiUP Reference command list](/tiup/tiup-reference.md#command-list)
-
 In TiUP, [mirror](/tiup/tiup-mirror-reference.md) is an important concept. TiUP currently supports two forms of mirroring:
 
 - Local mirror: the TiUP client and the mirror are on the same machine, and the client accesses the mirror through the file system.
@@ -37,3 +35,5 @@ None
 - [rotate](/tiup/tiup-command-mirror-rotate.md): updates the root certificate in the current mirror
 - [clone](/tiup/tiup-command-mirror-clone.md): clones a new mirror from an existing one
 - [merge](/tiup/tiup-command-mirror-merge.md): merges mirrors
+
+[<< Back to the previous page - TiUP Reference command list](/tiup/tiup-reference.md#command-list)

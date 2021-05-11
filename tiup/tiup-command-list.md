@@ -4,8 +4,6 @@ title: tiup list
 
 # tiup list
 
-[<< Back to the previous page - TiUP Reference command list](/tiup/tiup-reference.md#command-list)
-
 The command `tiup list` is used to get the list of available components of a mirror.
 
 ## Syntax
@@ -44,3 +42,5 @@ tiup list [component] [flags]
 - If `[component]` is set:
     - If the specified component exists: TiUP outputs a version information list of the specified component, consisting of `Version` (version number), `Installed` (installation status), `Release` (release date), and `Platforms` (supported platforms).
     - If the specified component does not exist: TiUP reports the error `failed to fetch component: unknown component`.
+
+[<< Back to the previous page - TiUP Reference command list](/tiup/tiup-reference.md#command-list)

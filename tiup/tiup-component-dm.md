@@ -4,8 +4,6 @@ title: TiUP DM
 
 # TiUP DM
 
-[<< Back to the previous page - TiUP Reference component list](/tiup/tiup-reference.md#component-list)
-
 Similar to [TiUP Cluster](/tiup/tiup-component-cluster.md) which is used to manage TiDB clusters, TiUP DM is used to manage DM clusters. You can use the TiUP DM component to perform daily operations and maintenance tasks of DM clusters, including deploying, starting, stopping, destroying, elastic scaling, upgrading DM clusters, and managing the configuration parameters of DM clusters.
 
 ## Syntax
@@ -83,3 +81,5 @@ tiup dm [command] [flags]
 - [enable](/tiup/tiup-component-dm-enable.md): Enables the auto-enabling of the cluster service after a machine is restarted.
 - [disable](/tiup/tiup-component-dm-disable.md): Disables the auto-enabling of the cluster service after a machine is restarted.
 - [help](/tiup/tiup-component-dm-help.md): Prints help information.
+
+[<< Back to the previous page - TiUP Reference component list](/tiup/tiup-reference.md#component-list)

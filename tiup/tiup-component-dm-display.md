@@ -4,8 +4,6 @@ title: tiup dm display
 
 # tiup dm display
 
-[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)
-
 If you want to check the operational status of each component in a DM cluster, it is inefficient to log in to each machine one by one. Therefore, tiup-dm provides the `tiup dm display` command to do this job efficiently.
 
 ## Syntax
@@ -58,3 +56,5 @@ tiup dm display <cluster-name> [flags]
     - `Status`: the current status of the services on the node.
     - `Data Dir`: the data directory of the service. `-` means that there is no data directory.
     - `Deploy Dir`: the deployment directory of the service.
+
+[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)

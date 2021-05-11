@@ -4,8 +4,6 @@ title: tiup cluster import
 
 # tiup cluster import
 
-[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
-
 Before TiDB v4.0, TiDB clusters were mainly deployed using TiDB Ansible. For TiDB v4.0 and later releases, TiUP Cluster provides the `import` command to transfer the clusters to the tiup-cluster component for management.
 
 > **Note:**
@@ -67,3 +65,5 @@ tiup cluster import [flags]
 ## Output
 
 Shows the logs of the import process.
+
+[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)

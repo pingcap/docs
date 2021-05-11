@@ -4,8 +4,6 @@ title: tiup dm destroy
 
 # tiup dm destroy
 
-[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)
-
 After an application goes offline, if you want to release the machines occupied by the cluster for use by other applications, you need to clean up the data on the cluster and the deployed binary files. To destroy the cluster, the `tiup dm destroy` command performs the following operations:
 
 - Stops the cluster.
@@ -31,3 +29,5 @@ tiup dm destroy <cluster-name> [flags]
 ## Output
 
 The execution log of the tiup-dm.
+
+[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)
