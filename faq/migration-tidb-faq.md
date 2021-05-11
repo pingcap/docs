@@ -13,9 +13,9 @@ This document summarizes the FAQs related to TiDB data migration.
 
 Because TiDB supports most MySQL syntax, generally you can migrate your applications to TiDB without changing a single line of code in most cases.
 
-### Data import and export is slow, and lots of retries, EOF errors appear in each component log without other errors displayed
+### Data import and export is slow, and many retries and EOF errors appear in the log of each component without other errors
 
-If no other logical errors occur, retries and EOF errors might be caused by network issues. First, it is recommended to use relevant tools to check network connectivity. The following example uses [iperf](https://iperf.fr/) to troubleshoot:
+If no other logical errors occur, retries and EOF errors might be caused by network issues. It is recommended to first use tools to check the network connectivity. In the following example, [iperf](https://iperf.fr/) is used for troubleshooting:
 
 + Execute the following command on the server-side node where the retries and EOF errors occur:
 
@@ -25,7 +25,7 @@ If no other logical errors occur, retries and EOF errors might be caused by netw
     iperf3 -s
     ```
 
-+ Execute the following command on the server-side node where the retries and EOF errors occur:
++ Execute the following command on the client-side node where the retries and EOF errors occur:
 
     {{< copyable "shell-regular" >}}
 
@@ -60,7 +60,7 @@ iperf Done.
 
 If the output shows low network bandwidth and high bandwidth fluctuations, a large number of retries and EOF errors might appear in each component log. In this case, you need to consult your network service provider to improve the network quality.
 
-If the output of each metric is good, try to update each component version. If the problem is still not solved after updating, you can [contact us](https://tidbcommunity.slack.com/archives/CH7TTLL7P).
+If the output of each metric looks good, try to update each component. If the problem persists after the updating, you can [contact us](https://tidbcommunity.slack.com/archives/CH7TTLL7P).
 
 ### If I accidentally import the MySQL user table into TiDB, or forget the password and cannot log in, how to deal with it?
 
