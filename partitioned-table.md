@@ -584,11 +584,13 @@ For `HASH` partitioned tables, `COALESCE PARTITION` and `ADD PARTITION` is not y
 
 `REORGANIZE PARTITION` is not yet supported.
 
-> **Warning**
-> `EXCHANGE PARTITION` is an experimental feature and should not be used in production environment, it can be enabled by setting `tidb_enable_exchange_partition` system variable to ON.
+> **Warning:**
+>
+> - `EXCHANGE PARTITION` is an experimental feature. It is not recommended to use it in a production environment. To enable it, set the `tidb_enable_exchange_partition` system variable to `ON`.
 > 
-> It works by swapping a partition and a non partitioned table, similar to how rename table like `RENAME TABLE t1 TO t1_tmp, t2 TO t1, t1_tmp TO t2` works.
-> `ALTER TABLE partitioned_table EXCHANGE PARTITION p1 WITH TABLE non_partitioned_table`
+> - It works by swapping a partition and a non-partitioned table, similar to how renaming a  table like `RENAME TABLE t1 TO t1_tmp, t2 TO t1, t1_tmp TO t2` works.
+>
+> - `ALTER TABLE partitioned_table EXCHANGE PARTITION p1 WITH TABLE non_partitioned_table`
 
 ### Range partition management
 
