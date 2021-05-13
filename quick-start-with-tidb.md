@@ -13,10 +13,7 @@ If you want to deploy an on-premise production cluster instead, head to [product
 <SimpleTab>
 <div label="Mac">
 
-## Deploy a local test environment using TiUP Playground
-
-- Scenario: Quickly deploy a TiDB cluster on a local Mac machine. You can see the basic architecture of TiDB, and how TiDB, TiKV, PD, monitoring, and other components run in a TiDB cluster.
-- Time required: 1 minute
+## Deploy a local test environment on Mac OS
 
 > **Note:**
 >
@@ -125,10 +122,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
 
 <div label="Linux">
 
-## Deploy a local test environment using TiUP Playground
-
-- Scenario: Quickly deploy a TiDB cluster on a local Linux OS machine. You can see the basic architecture of TiDB, and how TiDB, TiKV, PD, monitoring, and other components run in a TiDB cluster.
-- Time required: 1 minute
+## Deploy a local test environment on Linux OS
 
 As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB instances, 3 TiKV instances, 3 PD instances, and optional TiFlash instances. With TiUP Playground, you can quickly build the test cluster by taking the following steps:
 
