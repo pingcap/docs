@@ -36,15 +36,15 @@ DESC inspection_summary;
 
 Field description:
 
-* `RULE`: Summary rules. Because new rules are being added continuously, you can execute the `select * from inspection_rules where type='summary'` statement to query the latest rule list.
+* `RULE`: Summary rules. Because new rules are being added continuously, you can execute the `SELECT * FROM inspection_rules where type='summary'` statement to query the latest rule list.
 * `INSTANCE`: The monitored instance.
 * `METRICS_NAME`: The monitoring metrics name.
-* `QUANTILE`: Takes effect on monitoring tables that contain `QUANTILE`. You can specify multiple percentiles by pushing down predicates. For example, you can execute `select * from inspection_summary where rule='ddl' and quantile in (0.80, 0.90, 0.99, 0.999)` to summarize the DDL-related monitoring metrics and query the P80/P90/P99/P999 results. `AVG_VALUE`, `MIN_VALUE`, and `MAX_VALUE` respectively indicate the average value, minimum value, and maximum value of the aggregation.
+* `QUANTILE`: Takes effect on monitoring tables that contain `QUANTILE`. You can specify multiple percentiles by pushing down predicates. For example, you can execute `SELECT * FROM inspection_summary where rule='ddl' and quantile in (0.80, 0.90, 0.99, 0.999)` to summarize the DDL-related monitoring metrics and query the P80/P90/P99/P999 results. `AVG_VALUE`, `MIN_VALUE`, and `MAX_VALUE` respectively indicate the average value, minimum value, and maximum value of the aggregation.
 * `COMMENT`: The comment about the corresponding monitoring metric.
 
 > **Note:**
 >
-> Because summarizing all results causes overhead, it is recommended to display the specific `rule` in the SQL predicate to reduce overhead. For example, executing `select * from inspection_summary where rule in ('read-link', 'ddl')` summarizes the read link and DDL-related monitoring metrics.
+> Because summarizing all results causes overhead, it is recommended to display the specific `rule` in the SQL predicate to reduce overhead. For example, executing `SELECT * FROM inspection_summary where rule in ('read-link', 'ddl')` summarizes the read link and DDL-related monitoring metrics.
 
 Usage example:
 

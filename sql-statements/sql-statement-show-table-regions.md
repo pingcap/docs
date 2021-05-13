@@ -89,7 +89,7 @@ The output should show that the table is split into Regions. The `REGION_ID`, `S
 
 ```sql
 ...
-mysql> SHOW TABLE t1 REGIONS;
+SHOW TABLE t1 REGIONS;
 +-----------+--------------+--------------+-----------+-----------------+-------+------------+---------------+------------+----------------------+------------------+
 | REGION_ID | START_KEY    | END_KEY      | LEADER_ID | LEADER_STORE_ID | PEERS | SCATTERING | WRITTEN_BYTES | READ_BYTES | APPROXIMATE_SIZE(MB) | APPROXIMATE_KEYS |
 +-----------+--------------+--------------+-----------+-----------------+-------+------------+---------------+------------+----------------------+------------------+
@@ -105,7 +105,7 @@ In the output above, a `START_KEY` of `t_75_r_31717` and `END_KEY` of `t_75_r_63
 TiDB automatically rebalances Regions as needed. For manual rebalancing, use the `SPLIT TABLE REGION` statement:
 
 ```sql
-mysql> SPLIT TABLE t1 BETWEEN (31717) AND (63434) REGIONS 2;
+SPLIT TABLE t1 BETWEEN (31717) AND (63434) REGIONS 2;
 +--------------------+----------------------+
 | TOTAL_SPLIT_REGION | SCATTER_FINISH_RATIO |
 +--------------------+----------------------+
@@ -113,7 +113,7 @@ mysql> SPLIT TABLE t1 BETWEEN (31717) AND (63434) REGIONS 2;
 +--------------------+----------------------+
 1 row in set (42.34 sec)
 
-mysql> SHOW TABLE t1 REGIONS;
+SHOW TABLE t1 REGIONS;
 +-----------+--------------+--------------+-----------+-----------------+-------+------------+---------------+------------+----------------------+------------------+
 | REGION_ID | START_KEY    | END_KEY      | LEADER_ID | LEADER_STORE_ID | PEERS | SCATTERING | WRITTEN_BYTES | READ_BYTES | APPROXIMATE_SIZE(MB) | APPROXIMATE_KEYS |
 +-----------+--------------+--------------+-----------+-----------------+-------+------------+---------------+------------+----------------------+------------------+
@@ -133,7 +133,7 @@ The above output shows that Region 96 was split, with a new Region 98 being crea
 For a more detailed example:
 
 ```sql
-mysql> show table t regions;
+show table t regions;
 +-----------+--------------+--------------+-----------+-----------------+---------------+------------+---------------+------------+----------------------+------------------+
 | REGION_ID | START_KEY    | END_KEY      | LEADER_ID | LEADER_STORE_ID | PEERS         | SCATTERING | WRITTEN_BYTES | READ_BYTES | APPROXIMATE_SIZE(MB) | APPROXIMATE_KEYS |
 +-----------+--------------+--------------+-----------+-----------------+---------------+------------+---------------+------------+----------------------+------------------+

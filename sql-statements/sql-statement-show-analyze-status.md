@@ -23,7 +23,7 @@ The `SHOW ANALYZE STATUS` statement shows the statistics collection tasks being 
 {{< copyable "sql" >}}
 
 ```sql
-create table t(x int, index idx(x)) partition by hash(x) partition 4;
+CREATE TABLE t(x int, index idx(x)) partition by hash(x) partition 4;
 analyze table t;
 show analyze status;
 ```

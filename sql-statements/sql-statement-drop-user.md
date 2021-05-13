@@ -21,19 +21,19 @@ Username ::=
 ## Examples
 
 ```sql
-mysql> DROP USER idontexist;
+DROP USER idontexist;
 ERROR 1396 (HY000): Operation DROP USER failed for idontexist@%
 
-mysql> DROP USER IF EXISTS 'idontexist';
+DROP USER IF EXISTS 'idontexist';
 Query OK, 0 rows affected (0.01 sec)
 
-mysql> CREATE USER 'newuser' IDENTIFIED BY 'mypassword';
+CREATE USER 'newuser' IDENTIFIED BY 'mypassword';
 Query OK, 1 row affected (0.02 sec)
 
-mysql> GRANT ALL ON test.* TO 'newuser';
+GRANT ALL ON test.* TO 'newuser';
 Query OK, 0 rows affected (0.03 sec)
 
-mysql> SHOW GRANTS FOR 'newuser';
+SHOW GRANTS FOR 'newuser';
 +-------------------------------------------------+
 | Grants for newuser@%                            |
 +-------------------------------------------------+
@@ -42,10 +42,10 @@ mysql> SHOW GRANTS FOR 'newuser';
 +-------------------------------------------------+
 2 rows in set (0.00 sec)
 
-mysql> REVOKE ALL ON test.* FROM 'newuser';
+REVOKE ALL ON test.* FROM 'newuser';
 Query OK, 0 rows affected (0.03 sec)
 
-mysql> SHOW GRANTS FOR 'newuser';
+SHOW GRANTS FOR 'newuser';
 +-------------------------------------+
 | Grants for newuser@%                |
 +-------------------------------------+
@@ -53,10 +53,10 @@ mysql> SHOW GRANTS FOR 'newuser';
 +-------------------------------------+
 1 row in set (0.00 sec)
 
-mysql> DROP USER 'newuser';
+DROP USER 'newuser';
 Query OK, 0 rows affected (0.14 sec)
 
-mysql> SHOW GRANTS FOR 'newuser';
+SHOW GRANTS FOR 'newuser';
 ERROR 1141 (42000): There is no such grant defined for user 'newuser' on host '%'
 ```
 

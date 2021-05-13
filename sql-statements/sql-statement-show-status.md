@@ -25,7 +25,7 @@ This statement is included for compatibility with MySQL. It has no effect on TiD
 ## Examples
 
 ```sql
-mysql> show status;
+show status;
 +--------------------+--------------------------------------+
 | Variable_name      | Value                                |
 +--------------------+--------------------------------------+
@@ -38,7 +38,7 @@ mysql> show status;
 +--------------------+--------------------------------------+
 6 rows in set (0.01 sec)
 
-mysql> show global status;
+show global status;
 +--------------------+--------------------------------------+
 | Variable_name      | Value                                |
 +--------------------+--------------------------------------+

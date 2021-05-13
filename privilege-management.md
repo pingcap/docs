@@ -31,10 +31,10 @@ GRANT ALL PRIVILEGES ON *.* TO 'xxx'@'%';
 By default, `GRANT` statements will return an error if the user specified does not exist. This behavior depends on if the SQL Mode `NO_AUTO_CREATE_USER` is specified:
 
 ```sql
-mysql> SET sql_mode=DEFAULT;
+SET sql_mode=DEFAULT;
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> SELECT @@sql_mode;
+SELECT @@sql_mode;
 +-------------------------------------------------------------------------------------------------------------------------------------------+
 | @@sql_mode                                                                                                                                |
 +-------------------------------------------------------------------------------------------------------------------------------------------+
@@ -42,23 +42,23 @@ mysql> SELECT @@sql_mode;
 +-------------------------------------------------------------------------------------------------------------------------------------------+
 1 row in set (0.00 sec)
 
-mysql> SELECT * FROM mysql.user WHERE user='idontexist';
+SELECT * FROM mysql.user WHERE user='idontexist';
 Empty set (0.00 sec)
 
-mysql> GRANT ALL PRIVILEGES ON test.* TO 'idontexist';
+GRANT ALL PRIVILEGES ON test.* TO 'idontexist';
 ERROR 1105 (HY000): You are not allowed to create a user with GRANT
 
-mysql> SELECT user,host,password FROM mysql.user WHERE user='idontexist';
+SELECT user,host,password FROM mysql.user WHERE user='idontexist';
 Empty set (0.00 sec)
 ```
 
 In the following example, the user `idontexist` is automatically created with an empty password because the SQL Mode `NO_AUTO_CREATE_USER` was not set. This is **not recommended** since it presents a security risk: miss-spelling a username will result in a new user created with an empty password:
 
 ```sql
-mysql> SET @@sql_mode='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+SET @@sql_mode='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> SELECT @@sql_mode;
+SELECT @@sql_mode;
 +-----------------------------------------------------------------------------------------------------------------------+
 | @@sql_mode                                                                                                            |
 +-----------------------------------------------------------------------------------------------------------------------+
@@ -66,13 +66,13 @@ mysql> SELECT @@sql_mode;
 +-----------------------------------------------------------------------------------------------------------------------+
 1 row in set (0.00 sec)
 
-mysql> SELECT * FROM mysql.user WHERE user='idontexist';
+SELECT * FROM mysql.user WHERE user='idontexist';
 Empty set (0.00 sec)
 
-mysql> GRANT ALL PRIVILEGES ON test.* TO 'idontexist';
+GRANT ALL PRIVILEGES ON test.* TO 'idontexist';
 Query OK, 1 row affected (0.05 sec)
 
-mysql> SELECT user,host,password FROM mysql.user WHERE user='idontexist';
+SELECT user,host,password FROM mysql.user WHERE user='idontexist';
 +------------+------+----------+
 | user       | host | password |
 +------------+------+----------+
@@ -84,10 +84,10 @@ mysql> SELECT user,host,password FROM mysql.user WHERE user='idontexist';
 You can use fuzzy matching in `GRANT` to grant privileges to databases.
 
 ```sql
-mysql> GRANT ALL PRIVILEGES ON `te%`.* TO genius;
+GRANT ALL PRIVILEGES ON `te%`.* TO genius;
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> SELECT user,host,db FROM mysql.db WHERE user='genius';
+SELECT user,host,db FROM mysql.db WHERE user='genius';
 +--------|------|-----+
 | user   | host | db  |
 +--------|------|-----+
@@ -113,14 +113,14 @@ REVOKE ALL PRIVILEGES ON `test`.* FROM 'genius'@'localhost';
 > To revoke privileges, you need the exact match. If the matching result cannot be found, an error will be displayed:
 
 ```sql
-mysql> REVOKE ALL PRIVILEGES ON `te%`.* FROM 'genius'@'%';
+REVOKE ALL PRIVILEGES ON `te%`.* FROM 'genius'@'%';
 ERROR 1141 (42000): There is no such grant defined for user 'genius' on host '%'
 ```
 
 About fuzzy matching, escape, string and identifier:
 
 ```sql
-mysql> GRANT ALL PRIVILEGES ON `te\%`.* TO 'genius'@'localhost';
+GRANT ALL PRIVILEGES ON `te\%`.* TO 'genius'@'localhost';
 Query OK, 0 rows affected (0.00 sec)
 ```
 
@@ -129,19 +129,19 @@ This example uses exact match to find the database named `te%`. Note that the `%
 A string is enclosed in single quotation marks(''), while an identifier is enclosed in backticks (``). See the differences below:
 
 ```sql
-mysql> GRANT ALL PRIVILEGES ON 'test'.* TO 'genius'@'localhost';
+GRANT ALL PRIVILEGES ON 'test'.* TO 'genius'@'localhost';
 ERROR 1064 (42000): You have an error in your SQL syntax; check the
 manual that corresponds to your MySQL server version for the right
 syntax to use near ''test'.* to 'genius'@'localhost'' at line 1
 
-mysql> GRANT ALL PRIVILEGES ON `test`.* TO 'genius'@'localhost';
+GRANT ALL PRIVILEGES ON `test`.* TO 'genius'@'localhost';
 Query OK, 0 rows affected (0.00 sec)
 ```
 
 If you want to use special keywords as table names, enclose them in backticks (``). For example:
 
 ```sql
-mysql> CREATE TABLE `select` (id int);
+CREATE TABLE `select` (id int);
 Query OK, 0 rows affected (0.27 sec)
 ```
 
@@ -339,7 +339,7 @@ The following system tables are special because all the privilege-related data i
 These tables contain the effective range and privilege information of the data. For example, in the `mysql.user` table:
 
 ```sql
-mysql> SELECT User,Host,Select_priv,Insert_priv FROM mysql.user LIMIT 1;
+SELECT User,Host,Select_priv,Insert_priv FROM mysql.user LIMIT 1;
 +------|------|-------------|-------------+
 | User | Host | Select_priv | Insert_priv |
 +------|------|-------------|-------------+

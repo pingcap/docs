@@ -107,7 +107,7 @@ To view the statement that creates the table (DDL), use the `SHOW CREATE` statem
 {{< copyable "sql" >}}
 
 ```sql
-SHOW CREATE table person;
+SHOW CREATE TABLE person;
 ```
 
 To delete a table, use the `DROP TABLE` statement:

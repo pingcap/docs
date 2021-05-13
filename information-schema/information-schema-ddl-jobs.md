@@ -45,7 +45,7 @@ SELECT * FROM ddl_jobs LIMIT 3\G
       JOB_ID: 44
      DB_NAME: mysql
   TABLE_NAME: opt_rule_blacklist
-    JOB_TYPE: create table
+    JOB_TYPE: CREATE TABLE
 SCHEMA_STATE: public
    SCHEMA_ID: 3
     TABLE_ID: 43
@@ -60,7 +60,7 @@ SCHEMA_STATE: public
       JOB_ID: 42
      DB_NAME: mysql
   TABLE_NAME: expr_pushdown_blacklist
-    JOB_TYPE: create table
+    JOB_TYPE: CREATE TABLE
 SCHEMA_STATE: public
    SCHEMA_ID: 3
     TABLE_ID: 41
@@ -77,7 +77,7 @@ SCHEMA_STATE: public
       JOB_ID: 40
      DB_NAME: mysql
   TABLE_NAME: stats_top_n
-    JOB_TYPE: create table
+    JOB_TYPE: CREATE TABLE
 SCHEMA_STATE: public
    SCHEMA_ID: 3
     TABLE_ID: 39

@@ -49,20 +49,20 @@ ColumnPosition ::=
 ## Examples
 
 ```sql
-mysql> CREATE TABLE t1 (id int not null primary key AUTO_INCREMENT, col1 INT);
+CREATE TABLE t1 (id int not null primary key AUTO_INCREMENT, col1 INT);
 Query OK, 0 rows affected (0.11 sec)
 
-mysql> INSERT INTO t1 (col1) VALUES (1),(2),(3),(4),(5);
+INSERT INTO t1 (col1) VALUES (1),(2),(3),(4),(5);
 Query OK, 5 rows affected (0.02 sec)
 Records: 5  Duplicates: 0  Warnings: 0
 
-mysql> ALTER TABLE t1 MODIFY col1 BIGINT;
+ALTER TABLE t1 MODIFY col1 BIGINT;
 Query OK, 0 rows affected (0.09 sec)
 
-mysql> SHOW CREATE TABLE t1\G
+SHOW CREATE TABLE t1\G
 *************************** 1. row ***************************
        Table: t1
-Create Table: CREATE TABLE `t1` (
+CREATE TABLE: CREATE TABLE `t1` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `col1` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`)

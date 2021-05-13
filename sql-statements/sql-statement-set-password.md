@@ -17,13 +17,13 @@ This statement changes the user password for a user account in the TiDB system d
 ## Examples
 
 ```sql
-mysql> SET PASSWORD='test'; -- change my password
+SET PASSWORD='test'; -- change my password
 Query OK, 0 rows affected (0.01 sec)
 
-mysql> CREATE USER 'newuser' IDENTIFIED BY 'test';
+CREATE USER 'newuser' IDENTIFIED BY 'test';
 Query OK, 1 row affected (0.00 sec)
 
-mysql> SHOW CREATE USER 'newuser';
+SHOW CREATE USER 'newuser';
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | CREATE USER for newuser@%                                                                                                                                            |
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -31,10 +31,10 @@ mysql> SHOW CREATE USER 'newuser';
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 1 row in set (0.00 sec)
 
-mysql> SET PASSWORD FOR newuser = 'test';
+SET PASSWORD FOR newuser = 'test';
 Query OK, 0 rows affected (0.01 sec)
 
-mysql> SHOW CREATE USER 'newuser';
+SHOW CREATE USER 'newuser';
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | CREATE USER for newuser@%                                                                                                                                            |
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -42,10 +42,10 @@ mysql> SHOW CREATE USER 'newuser';
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 1 row in set (0.00 sec)
 
-mysql> SET PASSWORD FOR newuser = PASSWORD('test'); -- deprecated syntax from earlier MySQL releases
+SET PASSWORD FOR newuser = PASSWORD('test'); -- deprecated syntax from earlier MySQL releases
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> SHOW CREATE USER 'newuser';
+SHOW CREATE USER 'newuser';
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | CREATE USER for newuser@%                                                                                                                                            |
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------+

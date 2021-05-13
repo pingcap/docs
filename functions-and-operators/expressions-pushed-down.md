@@ -66,10 +66,10 @@ The following example demonstrates how to add the `<` and `>` operators to the b
 You can see whether the blocklist takes effect by checking the results returned by `EXPLAIN` statement (See [Understanding `EXPLAIN` results](/explain-overview.md)).
 
 ```sql
-tidb> create table t(a int);
+tidb> CREATE TABLE t(a int);
 Query OK, 0 rows affected (0.06 sec)
 
-tidb> explain select * from t where a < 2 and a > 2;
+tidb> explain SELECT * FROM t where a < 2 and a > 2;
 +-------------------------+----------+-----------+---------------+------------------------------------+
 | id                      | estRows  | task      | access object | operator info                      |
 +-------------------------+----------+-----------+---------------+------------------------------------+
@@ -79,14 +79,14 @@ tidb> explain select * from t where a < 2 and a > 2;
 +-------------------------+----------+-----------+---------------+------------------------------------+
 3 rows in set (0.00 sec)
 
-tidb> insert into mysql.expr_pushdown_blacklist values('<', 'tikv',''), ('>','tikv','');
+tidb> INSERT INTO mysql.expr_pushdown_blacklist values('<', 'tikv',''), ('>','tikv','');
 Query OK, 2 rows affected (0.01 sec)
 Records: 2  Duplicates: 0  Warnings: 0
 
 tidb> admin reload expr_pushdown_blacklist;
 Query OK, 0 rows affected (0.00 sec)
 
-tidb> explain select * from t where a < 2 and a > 2;
+tidb> explain SELECT * FROM t where a < 2 and a > 2;
 +-------------------------+----------+-----------+---------------+------------------------------------+
 | id                      | estRows  | task      | access object | operator info                      |
 +-------------------------+----------+-----------+---------------+------------------------------------+
@@ -102,7 +102,7 @@ Query OK, 1 row affected (0.01 sec)
 tidb> admin reload expr_pushdown_blacklist;
 Query OK, 0 rows affected (0.00 sec)
 
-tidb> explain select * from t where a < 2 and a > 2;
+tidb> explain SELECT * FROM t where a < 2 and a > 2;
 +---------------------------+----------+-----------+---------------+--------------------------------+
 | id                        | estRows  | task      | access object | operator info                  |
 +---------------------------+----------+-----------+---------------+--------------------------------+

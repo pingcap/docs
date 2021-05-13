@@ -49,20 +49,20 @@ SET  GLOBAL tidb_distsql_scan_concurrency = 10;
 - Controls the initial offset of `AUTO_INCREMENT` values to be allocated to a column. This setting is often used in combination with `auto_increment_increment`. For example:
 
 ```sql
-mysql> CREATE TABLE t1 (a int not null primary key auto_increment);
+CREATE TABLE t1 (a int not null primary key auto_increment);
 Query OK, 0 rows affected (0.10 sec)
 
-mysql> set auto_increment_offset=1;
+set auto_increment_offset=1;
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> set auto_increment_increment=3;
+set auto_increment_increment=3;
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> INSERT INTO t1 VALUES (),(),(),();
+INSERT INTO t1 VALUES (),(),(),();
 Query OK, 4 rows affected (0.04 sec)
 Records: 4  Duplicates: 0  Warnings: 0
 
-mysql> SELECT * FROM t1;
+SELECT * FROM t1;
 +----+
 | a  |
 +----+
@@ -283,10 +283,10 @@ mysql> SELECT * FROM t1;
     - When set to zero and using optimistic transactions:
 
         ```sql
-        tidb> create table t (i int key);
-        tidb> insert into t values (1);
+        tidb> CREATE TABLE t (i int key);
+        tidb> INSERT INTO t values (1);
         tidb> begin optimistic;
-        tidb> insert into t values (1);
+        tidb> INSERT INTO t values (1);
         Query OK, 1 row affected
         tidb> commit; -- Check only when a transaction is committed.
         ERROR 1062 : Duplicate entry '1' for key 'PRIMARY'
@@ -297,7 +297,7 @@ mysql> SELECT * FROM t1;
         ```sql
         tidb> set @@tidb_constraint_check_in_place=1;
         tidb> begin optimistic;
-        tidb> insert into t values (1);
+        tidb> INSERT INTO t values (1);
         ERROR 1062 : Duplicate entry '1' for key 'PRIMARY'
         ```
 
@@ -493,13 +493,13 @@ Constraint checking is always performed in place for pessimistic transactions (d
 For example, the type `DOUBLE(10)` is now considered invalid because the precision of floating point types is not guaranteed. After changing `tidb_enable_strict_double_type_check` to `OFF`, the table is created:
 
 ```sql
-mysql> CREATE TABLE t1 (id int, c double(10));
+CREATE TABLE t1 (id int, c double(10));
 ERROR 1149 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use
 
-mysql> SET tidb_enable_strict_double_type_check = 'OFF';
+SET tidb_enable_strict_double_type_check = 'OFF';
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> CREATE TABLE t1 (id int, c double(10));
+CREATE TABLE t1 (id int, c double(10));
 Query OK, 0 rows affected (0.09 sec)
 ```
 
@@ -877,7 +877,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 In the following example, before `tidb_opt_distinct_agg_push_down` is enabled, TiDB needs to read all data from TiKV and execute `distinct` on the TiDB side. After `tidb_opt_distinct_agg_push_down` is enabled, `distinct a` is pushed down to Coprocessor, and a `group by` column `test.t.a` is added to `HashAgg_5`.
 
 ```sql
-mysql> desc select count(distinct a) from test.t;
+desc select count(distinct a) from test.t;
 +-------------------------+----------+-----------+---------------+------------------------------------------+
 | id                      | estRows  | task      | access object | operator info                            |
 +-------------------------+----------+-----------+---------------+------------------------------------------+
@@ -887,10 +887,10 @@ mysql> desc select count(distinct a) from test.t;
 +-------------------------+----------+-----------+---------------+------------------------------------------+
 3 rows in set (0.01 sec)
 
-mysql> set session tidb_opt_distinct_agg_push_down = 1;
+set session tidb_opt_distinct_agg_push_down = 1;
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> desc select count(distinct a) from test.t;
+desc select count(distinct a) from test.t;
 +---------------------------+----------+-----------+---------------+------------------------------------------+
 | id                        | estRows  | task      | access object | operator info                            |
 +---------------------------+----------+-----------+---------------+------------------------------------------+
@@ -1002,7 +1002,7 @@ SET tidb_query_log_max_len = 20
 - Scope: SESSION | GLOBAL
 - Default value: OFF
 - This variable controls whether to hide user information in the SQL statement being recorded into the TiDB log and slow log.
-- When you set the variable to `1`, user information is hidden. For example, if the executed SQL statement is `insert into t values (1,2)`, the statement is recorded as `insert into t values (?,?)` in the log.
+- When you set the variable to `1`, user information is hidden. For example, if the executed SQL statement is `INSERT INTO t values (1,2)`, the statement is recorded as `INSERT INTO t values (?,?)` in the log.
 
 ### tidb_replica_read <span class="version-mark">New in v4.0</span>
 

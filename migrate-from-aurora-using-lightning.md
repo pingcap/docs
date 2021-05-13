@@ -72,7 +72,7 @@ Based on different deployment methods, edit the `tidb-lighting.toml` configurati
 
 For other configurations, see [TiDB Lightning Configuration](/tidb-lightning/tidb-lightning-configuration.md).
 
-## Step 4: Create table schema
+## Step 4: CREATE TABLE schema
 
 Because the snapshot data exported from Aurora to S3 does not contain the SQL statement file used to create database tables, you need to manually export and import the table creation statements corresponding to the database tables into TiDB. You can use Dumpling and TiDB Lightning to create all table schemas:
 
@@ -87,13 +87,13 @@ Because the snapshot data exported from Aurora to S3 does not contain the SQL st
     > - Set the parameters of the data source address and the path of output files according to your actual situation.
     > - If you need to export all database tables, you do not need to set the `--filter` parameter. If you only need to export some of the database tables, configure `--filter` according to [table-filter](https://github.com/pingcap/tidb-tools/blob/master/pkg/table-filter/README.md).
 
-2. Use TiDB Lightning to create table schemas:
+2. Use TiDB Lightning to CREATE TABLE schemas:
 
     ```
     ./tidb-lightning -config tidb-lightning.toml -d ./schema -no-schema=false
     ```
 
-    In this example, TiDB Lightning is only used to create table schemas, so you need to execute the above command quickly. At a regular speed, ten table creation statements can be executed in one second.
+    In this example, TiDB Lightning is only used to CREATE TABLE schemas, so you need to execute the above command quickly. At a regular speed, ten table creation statements can be executed in one second.
 
 > **Note:**
 >

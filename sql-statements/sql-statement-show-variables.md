@@ -27,7 +27,7 @@ This statement shows a list of variables for the scope of either `GLOBAL` or `SE
 List all TiDB specific variables. For detailed description, refer to [System Variables](/system-variables.md).
 
 ```sql
-mysql> SHOW GLOBAL VARIABLES LIKE 'tidb%';
+SHOW GLOBAL VARIABLES LIKE 'tidb%';
 +-------------------------------------+---------------------+
 | Variable_name                       | Value               |
 +-------------------------------------+---------------------+
@@ -141,7 +141,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'tidb%';
 +-------------------------------------+---------------------+
 108 rows in set (0.01 sec)
 
-mysql> SHOW GLOBAL VARIABLES LIKE 'time_zone%';
+SHOW GLOBAL VARIABLES LIKE 'time_zone%';
 +---------------+--------+
 | Variable_name | Value  |
 +---------------+--------+

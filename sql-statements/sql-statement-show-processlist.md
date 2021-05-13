@@ -21,7 +21,7 @@ This statement lists the current sessions connected to the same TiDB server. The
 ## Examples
 
 ```sql
-mysql> SHOW PROCESSLIST;
+SHOW PROCESSLIST;
 +------+------+-----------+------+---------+------+-------+------------------+
 | Id   | User | Host      | db   | Command | Time | State | Info             |
 +------+------+-----------+------+---------+------+-------+------------------+

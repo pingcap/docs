@@ -22,13 +22,13 @@ PrepareSQL ::=
 ## Examples
 
 ```sql
-mysql> PREPARE mystmt FROM 'SELECT ? as num FROM DUAL';
+PREPARE mystmt FROM 'SELECT ? as num FROM DUAL';
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> SET @number = 5;
+SET @number = 5;
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> EXECUTE mystmt USING @number;
+EXECUTE mystmt USING @number;
 +------+
 | num  |
 +------+
@@ -36,7 +36,7 @@ mysql> EXECUTE mystmt USING @number;
 +------+
 1 row in set (0.00 sec)
 
-mysql> DEALLOCATE PREPARE mystmt;
+DEALLOCATE PREPARE mystmt;
 Query OK, 0 rows affected (0.00 sec)
 ```
 

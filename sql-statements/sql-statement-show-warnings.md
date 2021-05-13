@@ -17,13 +17,13 @@ This statement shows a list of warnings that occurred for previously executed st
 ## Examples
 
 ```sql
-mysql> CREATE TABLE t1 (a INT UNSIGNED);
+CREATE TABLE t1 (a INT UNSIGNED);
 Query OK, 0 rows affected (0.11 sec)
 
-mysql> INSERT INTO t1 VALUES (0);
+INSERT INTO t1 VALUES (0);
 Query OK, 1 row affected (0.02 sec)
 
-mysql> SELECT 1/a FROM t1;
+SELECT 1/a FROM t1;
 +------+
 | 1/a  |
 +------+
@@ -31,7 +31,7 @@ mysql> SELECT 1/a FROM t1;
 +------+
 1 row in set, 1 warning (0.00 sec)
 
-mysql> SHOW WARNINGS;
+SHOW WARNINGS;
 +---------+------+---------------+
 | Level   | Code | Message       |
 +---------+------+---------------+
@@ -39,9 +39,9 @@ mysql> SHOW WARNINGS;
 +---------+------+---------------+
 1 row in set (0.00 sec)
 
-mysql> INSERT INTO t1 VALUES (-1);
+INSERT INTO t1 VALUES (-1);
 ERROR 1264 (22003): Out of range value for column 'a' at row 1
-mysql> SELECT * FROM t1;
+SELECT * FROM t1;
 +------+
 | a    |
 +------+
@@ -49,13 +49,13 @@ mysql> SELECT * FROM t1;
 +------+
 1 row in set (0.00 sec)
 
-mysql> SET sql_mode='';
+SET sql_mode='';
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> INSERT INTO t1 VALUES (-1);
+INSERT INTO t1 VALUES (-1);
 Query OK, 1 row affected, 1 warning (0.01 sec)
 
-mysql> SHOW WARNINGS;
+SHOW WARNINGS;
 +---------+------+---------------------------+
 | Level   | Code | Message                   |
 +---------+------+---------------------------+
@@ -63,7 +63,7 @@ mysql> SHOW WARNINGS;
 +---------+------+---------------------------+
 1 row in set (0.00 sec)
 
-mysql> SELECT * FROM t1;
+SELECT * FROM t1;
 +------+
 | a    |
 +------+

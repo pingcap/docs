@@ -44,8 +44,8 @@ In addition, TiDB also provides the following aggregate functions:
 
     ```sql
     drop table if exists t;
-    create table t(a int);
-    insert into t values(1), (2), (3);
+    CREATE TABLE t(a int);
+    INSERT INTO t values(1), (2), (3);
     ```
 
     {{< copyable "sql" >}}
@@ -73,10 +73,10 @@ TiDB supports the SQL Mode `ONLY_FULL_GROUP_BY`, and when enabled TiDB will refu
 
 ```sql
 drop table if exists t;
-create table t(a bigint, b bigint, c bigint);
-insert into t values(1, 2, 3), (2, 2, 3), (3, 2, 3);
+CREATE TABLE t(a bigint, b bigint, c bigint);
+INSERT INTO t values(1, 2, 3), (2, 2, 3), (3, 2, 3);
 
-mysql> select a, b, sum(c) from t group by a;
+select a, b, sum(c) from t group by a;
 +------+------+--------+
 | a    | b    | sum(c) |
 +------+------+--------+
@@ -86,10 +86,10 @@ mysql> select a, b, sum(c) from t group by a;
 +------+------+--------+
 3 rows in set (0.01 sec)
 
-mysql> set sql_mode = 'ONLY_FULL_GROUP_BY';
+set sql_mode = 'ONLY_FULL_GROUP_BY';
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> select a, b, sum(c) from t group by a;
+select a, b, sum(c) from t group by a;
 ERROR 1055 (42000): Expression #2 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'b' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
 ```
 
@@ -101,8 +101,8 @@ The current implementation of `ONLY_FULL_GROUP_BY` is less strict than that in M
 
 ```sql
 drop table if exists t;
-create table t(a bigint, b bigint, c bigint);
-insert into t values(1, 2, 1), (1, 2, 2), (1, 3, 1), (1, 3, 2);
+CREATE TABLE t(a bigint, b bigint, c bigint);
+INSERT INTO t values(1, 2, 1), (1, 2, 2), (1, 3, 1), (1, 3, 2);
 select distinct a, b from t order by c;
 ```
 

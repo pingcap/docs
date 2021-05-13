@@ -40,7 +40,7 @@ When column `a` has an index, or when column `a` is the prefix of some composite
 The example statement has the following execution plan:
 
 ```sql
-mysql> explain select max(a) from t;
+explain select max(a) from t;
 +------------------------------+---------+-----------+-------------------------+-------------------------------------+
 | id                           | estRows | task      | access object           | operator info                       |
 +------------------------------+---------+-----------+-------------------------+-------------------------------------+
@@ -96,7 +96,7 @@ Similarly, if column `a` has an index to preserve its order, the optimized execu
 The final execution plan is as follows:
 
 ```sql
-mysql> explain select max(a)-min(a) from t;
+explain select max(a)-min(a) from t;
 +------------------------------------+---------+-----------+-------------------------+-------------------------------------+
 | id                                 | estRows | task      | access object           | operator info                       |
 +------------------------------------+---------+-----------+-------------------------+-------------------------------------+

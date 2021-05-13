@@ -17,7 +17,7 @@ This statement shows a list of assignable privileges in TiDB. It is a static lis
 ## Examples
 
 ```sql
-mysql> show privileges;
+show privileges;
 +-------------------------+---------------------------------------+-------------------------------------------------------+
 | Privilege               | Context                               | Comment                                               |
 +-------------------------+---------------------------------------+-------------------------------------------------------+
@@ -50,7 +50,7 @@ mysql> show privileges;
 | Shutdown                | Server Admin                          | To shut down the server                               |
 | Super                   | Server Admin                          | To use KILL thread, SET GLOBAL, CHANGE MASTER, etc.   |
 | Trigger                 | Tables                                | To use triggers                                       |
-| Create tablespace       | Server Admin                          | To create/alter/drop tablespaces                      |
+| CREATE TABLEspace       | Server Admin                          | To create/alter/drop tablespaces                      |
 | Update                  | Tables                                | To update existing rows                               |
 | Usage                   | Server Admin                          | No privileges - allow connect only                    |
 +-------------------------+---------------------------------------+-------------------------------------------------------+

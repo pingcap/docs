@@ -29,7 +29,7 @@ FlushOption ::=
 ## Examples
 
 ```sql
-mysql> show status;
+show status;
 +--------------------+--------------------------------------+
 | Variable_name      | Value                                |
 +--------------------+--------------------------------------+
@@ -42,7 +42,7 @@ mysql> show status;
 +--------------------+--------------------------------------+
 6 rows in set (0.01 sec)
 
-mysql> show global status;
+show global status;
 +--------------------+--------------------------------------+
 | Variable_name      | Value                                |
 +--------------------+--------------------------------------+
@@ -55,10 +55,10 @@ mysql> show global status;
 +--------------------+--------------------------------------+
 6 rows in set (0.00 sec)
 
-mysql> flush status;
+flush status;
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> show status;
+show status;
 +--------------------+--------------------------------------+
 | Variable_name      | Value                                |
 +--------------------+--------------------------------------+

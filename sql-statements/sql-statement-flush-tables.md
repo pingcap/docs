@@ -42,10 +42,10 @@ WithReadLockOpt ::=
 ## Examples
 
 ```sql
-mysql> FLUSH TABLES;
+FLUSH TABLES;
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> FLUSH TABLES WITH READ LOCK;
+FLUSH TABLES WITH READ LOCK;
 ERROR 1105 (HY000): FLUSH TABLES WITH READ LOCK is not supported.  Please use @@tidb_snapshot
 ```
 

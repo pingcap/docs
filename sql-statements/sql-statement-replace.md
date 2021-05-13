@@ -36,14 +36,14 @@ InsertValues ::=
 ## Examples
 
 ```sql
-mysql> CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, c1 INT NOT NULL);
+CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, c1 INT NOT NULL);
 Query OK, 0 rows affected (0.12 sec)
 
-mysql> INSERT INTO t1 (c1) VALUES (1), (2), (3);
+INSERT INTO t1 (c1) VALUES (1), (2), (3);
 Query OK, 3 rows affected (0.02 sec)
 Records: 3  Duplicates: 0  Warnings: 0
 
-mysql> SELECT * FROM t1;
+SELECT * FROM t1;
 +----+----+
 | id | c1 |
 +----+----+
@@ -53,10 +53,10 @@ mysql> SELECT * FROM t1;
 +----+----+
 3 rows in set (0.00 sec)
 
-mysql> REPLACE INTO t1 (id, c1) VALUES(3, 99);
+REPLACE INTO t1 (id, c1) VALUES(3, 99);
 Query OK, 2 rows affected (0.01 sec)
 
-mysql> SELECT * FROM t1;
+SELECT * FROM t1;
 +----+----+
 | id | c1 |
 +----+----+

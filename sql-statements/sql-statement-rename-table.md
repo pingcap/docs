@@ -21,10 +21,10 @@ TableToTable ::=
 ## Examples
 
 ```sql
-mysql> CREATE TABLE t1 (a int);
+CREATE TABLE t1 (a int);
 Query OK, 0 rows affected (0.12 sec)
 
-mysql> SHOW TABLES;
+SHOW TABLES;
 +----------------+
 | Tables_in_test |
 +----------------+
@@ -32,10 +32,10 @@ mysql> SHOW TABLES;
 +----------------+
 1 row in set (0.00 sec)
 
-mysql> RENAME TABLE t1 TO t2;
+RENAME TABLE t1 TO t2;
 Query OK, 0 rows affected (0.08 sec)
 
-mysql> SHOW TABLES;
+SHOW TABLES;
 +----------------+
 | Tables_in_test |
 +----------------+

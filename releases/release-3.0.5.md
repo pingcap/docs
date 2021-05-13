@@ -42,8 +42,8 @@ TiDB Ansible version: 3.0.5
     - Fix the issue that the `INSERT IGNORE` statement performance is decreased because `tikvSnapshot` does not properly cache the KV results of `BatchGet()` [#12872](https://github.com/pingcap/tidb/pull/12872)
     - Fix the issue that the TiDB response speed was relatively low because of slow connection to some KV services [#12814](https://github.com/pingcap/tidb/pull/12814)
 + DDL
-    - Fix the issue that the `Create Table` operation does not correctly set the Int type default value for the Set column [#12267](https://github.com/pingcap/tidb/pull/12267)
-    - Support multiple `unique`s when creating a unique index in the `Create Table` statement [#12463](https://github.com/pingcap/tidb/pull/12463)
+    - Fix the issue that the `CREATE TABLE` operation does not correctly set the Int type default value for the Set column [#12267](https://github.com/pingcap/tidb/pull/12267)
+    - Support multiple `unique`s when creating a unique index in the `CREATE TABLE` statement [#12463](https://github.com/pingcap/tidb/pull/12463)
     - Fix the issue that populating the default value of this column for existing rows might cause an error when adding a Bit type column using `Alter Table` [#12489](https://github.com/pingcap/tidb/pull/12489)
     - Fix the failure of adding a partition when the Range partitioned table uses a Date or Datetime type column as the partitioning key [#12815](https://github.com/pingcap/tidb/pull/12815)
     - Support checking the consistency of the partition type and the partition key type when creating a table or adding a partition, for the Range partitioned table with the Date or Datetime type column as the partition key [#12792](https://github.com/pingcap/tidb/pull/12792)

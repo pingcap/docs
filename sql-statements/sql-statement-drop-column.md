@@ -44,14 +44,14 @@ ColumnName ::=
 ## Examples
 
 ```sql
-mysql> CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, col1 INT NOT NULL, col2 INT NOT NULL);
+CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, col1 INT NOT NULL, col2 INT NOT NULL);
 Query OK, 0 rows affected (0.12 sec)
 
-mysql> INSERT INTO t1 (col1,col2) VALUES (1,1),(2,2),(3,3),(4,4),(5,5);
+INSERT INTO t1 (col1,col2) VALUES (1,1),(2,2),(3,3),(4,4),(5,5);
 Query OK, 5 rows affected (0.02 sec)
 Records: 5  Duplicates: 0  Warnings: 0
 
-mysql> SELECT * FROM t1;
+SELECT * FROM t1;
 +----+------+------+
 | id | col1 | col2 |
 +----+------+------+
@@ -63,9 +63,9 @@ mysql> SELECT * FROM t1;
 +----+------+------+
 5 rows in set (0.01 sec)
 
-mysql> ALTER TABLE t1 DROP COLUMN col1, DROP COLUMN col2;
+ALTER TABLE t1 DROP COLUMN col1, DROP COLUMN col2;
 ERROR 1105 (HY000): can't run multi schema change
-mysql> SELECT * FROM t1;
+SELECT * FROM t1;
 +----+------+------+
 | id | col1 | col2 |
 +----+------+------+
@@ -77,10 +77,10 @@ mysql> SELECT * FROM t1;
 +----+------+------+
 5 rows in set (0.00 sec)
 
-mysql> ALTER TABLE t1 DROP COLUMN col1;
+ALTER TABLE t1 DROP COLUMN col1;
 Query OK, 0 rows affected (0.27 sec)
 
-mysql> SELECT * FROM t1;
+SELECT * FROM t1;
 +----+------+
 | id | col2 |
 +----+------+

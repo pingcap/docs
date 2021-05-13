@@ -33,10 +33,10 @@ The statement `SHOW INDEXES [FROM|IN]` lists the indexes on a specified table.  
 ## Examples
 
 ```sql
-mysql> CREATE TABLE t1 (id int not null primary key AUTO_INCREMENT, col1 INT, INDEX(col1));
+CREATE TABLE t1 (id int not null primary key AUTO_INCREMENT, col1 INT, INDEX(col1));
 Query OK, 0 rows affected (0.12 sec)
 
-mysql> SHOW INDEXES FROM t1;
+SHOW INDEXES FROM t1;
 +-------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
 | Table | Non_unique | Key_name | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment | Visible | Expression |
 +-------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
@@ -47,7 +47,7 @@ mysql> SHOW INDEXES FROM t1;
 +-------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
 2 rows in set (0.00 sec)
 
-mysql> SHOW INDEX FROM t1;
+SHOW INDEX FROM t1;
 +-------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
 | Table | Non_unique | Key_name | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment | Visible | Expression |
 +-------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
@@ -58,7 +58,7 @@ mysql> SHOW INDEX FROM t1;
 +-------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
 2 rows in set (0.00 sec)
 
-mysql> SHOW KEYS FROM t1;
+SHOW KEYS FROM t1;
 +-------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
 | Table | Non_unique | Key_name | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment | Visible | Expression |
 +-------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+

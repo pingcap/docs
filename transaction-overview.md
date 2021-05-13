@@ -91,13 +91,13 @@ As required for MySQL compatibility, TiDB will by default _autocommit_ statement
 For example:
 
 ```sql
-mysql> CREATE TABLE t1 (
+CREATE TABLE t1 (
     ->  id INT NOT NULL PRIMARY KEY auto_increment,
     ->  pad1 VARCHAR(100)
     -> );
 Query OK, 0 rows affected (0.09 sec)
 
-mysql> SELECT @@autocommit;
+SELECT @@autocommit;
 +--------------+
 | @@autocommit |
 +--------------+
@@ -105,13 +105,13 @@ mysql> SELECT @@autocommit;
 +--------------+
 1 row in set (0.00 sec)
 
-mysql> INSERT INTO t1 VALUES (1, 'test');
+INSERT INTO t1 VALUES (1, 'test');
 Query OK, 1 row affected (0.02 sec)
 
-mysql> ROLLBACK;
+ROLLBACK;
 Query OK, 0 rows affected (0.01 sec)
 
-mysql> SELECT * FROM t1;
+SELECT * FROM t1;
 +----+------+
 | id | pad1 |
 +----+------+
@@ -131,13 +131,13 @@ COMMIT;
 Autocommit will not apply if a transaction has been explicitly started. In the following example, the `ROLLBACK` statement successfully reverts the `INSERT` statement:
 
 ```sql
-mysql> CREATE TABLE t2 (
+CREATE TABLE t2 (
     ->  id INT NOT NULL PRIMARY KEY auto_increment,
     ->  pad1 VARCHAR(100)
     -> );
 Query OK, 0 rows affected (0.10 sec)
 
-mysql> SELECT @@autocommit;
+SELECT @@autocommit;
 +--------------+
 | @@autocommit |
 +--------------+
@@ -145,16 +145,16 @@ mysql> SELECT @@autocommit;
 +--------------+
 1 row in set (0.00 sec)
 
-mysql> START TRANSACTION;
+START TRANSACTION;
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> INSERT INTO t2 VALUES (1, 'test');
+INSERT INTO t2 VALUES (1, 'test');
 Query OK, 1 row affected (0.02 sec)
 
-mysql> ROLLBACK;
+ROLLBACK;
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> SELECT * FROM t2;
+SELECT * FROM t2;
 Empty set (0.00 sec)
 ```
 
@@ -205,24 +205,24 @@ SELECT * FROM t1; -- MySQL returns 1 2; TiDB returns 1.
 ```
 
 ```sql
-mysql> CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY);
+CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY);
 Query OK, 0 rows affected (0.10 sec)
 
-mysql> INSERT INTO t1 VALUES (1);
+INSERT INTO t1 VALUES (1);
 Query OK, 1 row affected (0.02 sec)
 
-mysql> BEGIN OPTIMISTIC;
+BEGIN OPTIMISTIC;
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> INSERT INTO t1 VALUES (1); -- MySQL returns an error; TiDB returns success.
+INSERT INTO t1 VALUES (1); -- MySQL returns an error; TiDB returns success.
 Query OK, 1 row affected (0.00 sec)
 
-mysql> INSERT INTO t1 VALUES (2);
+INSERT INTO t1 VALUES (2);
 Query OK, 1 row affected (0.00 sec)
 
-mysql> COMMIT; -- It is successfully committed in MySQL; TiDB returns an error and the transaction rolls back.
+COMMIT; -- It is successfully committed in MySQL; TiDB returns an error and the transaction rolls back.
 ERROR 1062 (23000): Duplicate entry '1' for key 'PRIMARY'
-mysql> SELECT * FROM t1; -- MySQL returns 1 2; TiDB returns 1.
+SELECT * FROM t1; -- MySQL returns 1 2; TiDB returns 1.
 +----+
 | id |
 +----+
@@ -256,26 +256,26 @@ SELECT * FROM test;
 ```
 
 ```sql
-mysql> CREATE TABLE test (id INT NOT NULL PRIMARY KEY);
+CREATE TABLE test (id INT NOT NULL PRIMARY KEY);
 Query OK, 0 rows affected (0.09 sec)
 
-mysql> BEGIN;
+BEGIN;
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> INSERT INTO test VALUES (1);
+INSERT INTO test VALUES (1);
 Query OK, 1 row affected (0.02 sec)
 
-mysql> INSERT INTO tset VALUES (2);  -- Statement does not take effect because "test" is misspelled as "tset".
+INSERT INTO tset VALUES (2);  -- Statement does not take effect because "test" is misspelled as "tset".
 ERROR 1146 (42S02): Table 'test.tset' doesn't exist
-mysql> INSERT INTO test VALUES (1),(2);  -- Entire statement does not take effect because it violates a PRIMARY KEY constraint
+INSERT INTO test VALUES (1),(2);  -- Entire statement does not take effect because it violates a PRIMARY KEY constraint
 ERROR 1062 (23000): Duplicate entry '1' for key 'PRIMARY'
-mysql> INSERT INTO test VALUES (3);
+INSERT INTO test VALUES (3);
 Query OK, 1 row affected (0.00 sec)
 
-mysql> COMMIT;
+COMMIT;
 Query OK, 0 rows affected (0.01 sec)
 
-mysql> SELECT * FROM test;
+SELECT * FROM test;
 +----+
 | id |
 +----+

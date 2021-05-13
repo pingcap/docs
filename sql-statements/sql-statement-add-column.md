@@ -47,13 +47,13 @@ ColumnPosition ::=
 ## Examples
 
 ```sql
-mysql> CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT);
+CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT);
 Query OK, 0 rows affected (0.11 sec)
 
-mysql> INSERT INTO t1 VALUES (NULL);
+INSERT INTO t1 VALUES (NULL);
 Query OK, 1 row affected (0.02 sec)
 
-mysql> SELECT * FROM t1;
+SELECT * FROM t1;
 +----+
 | id |
 +----+
@@ -61,10 +61,10 @@ mysql> SELECT * FROM t1;
 +----+
 1 row in set (0.00 sec)
 
-mysql> ALTER TABLE t1 ADD COLUMN c1 INT NOT NULL;
+ALTER TABLE t1 ADD COLUMN c1 INT NOT NULL;
 Query OK, 0 rows affected (0.28 sec)
 
-mysql> SELECT * FROM t1;
+SELECT * FROM t1;
 +----+----+
 | id | c1 |
 +----+----+
@@ -72,10 +72,10 @@ mysql> SELECT * FROM t1;
 +----+----+
 1 row in set (0.00 sec)
 
-mysql> ALTER TABLE t1 ADD c2 INT NOT NULL AFTER c1;
+ALTER TABLE t1 ADD c2 INT NOT NULL AFTER c1;
 Query OK, 0 rows affected (0.28 sec)
 
-mysql> SELECT * FROM t1;
+SELECT * FROM t1;
 +----+----+----+
 | id | c1 | c2 |
 +----+----+----+

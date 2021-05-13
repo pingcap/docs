@@ -296,24 +296,24 @@ Currently, TiFlash does not support some features. These features might be incom
     * Currently, TiFlash's decimal division calculation is incompatible with that of TiDB. For example, when dividing decimal, TiFlash performs the calculation always using the type inferred from the compiling. However, TiDB performs this calculation using a type that is more precise than that inferred from the compiling. Therefore, some SQL statements involving the decimal division return different execution results when executed in TiDB + TiKV and in TiDB + TiFlash. For example:
 
         ```sql
-        mysql> create table t (a decimal(3,0), b decimal(10, 0));
+        CREATE TABLE t (a decimal(3,0), b decimal(10, 0));
         Query OK, 0 rows affected (0.07 sec)
-        mysql> insert into t values (43, 1044774912);
+        INSERT INTO t values (43, 1044774912);
         Query OK, 1 row affected (0.03 sec)
-        mysql> alter table t set tiflash replica 1;
+        alter table t set tiflash replica 1;
         Query OK, 0 rows affected (0.07 sec)
-        mysql> set session tidb_isolation_read_engines='tikv';
+        set session tidb_isolation_read_engines='tikv';
         Query OK, 0 rows affected (0.00 sec)
-        mysql> select a/b, a/b + 0.0000000000001 from t where a/b;
+        select a/b, a/b + 0.0000000000001 from t where a/b;
         +--------+-----------------------+
         | a/b    | a/b + 0.0000000000001 |
         +--------+-----------------------+
         | 0.0000 |       0.0000000410001 |
         +--------+-----------------------+
         1 row in set (0.00 sec)
-        mysql> set session tidb_isolation_read_engines='tiflash';
+        set session tidb_isolation_read_engines='tiflash';
         Query OK, 0 rows affected (0.00 sec)
-        mysql> select a/b, a/b + 0.0000000000001 from t where a/b;
+        select a/b, a/b + 0.0000000000001 from t where a/b;
         Empty set (0.01 sec)
         ```
 

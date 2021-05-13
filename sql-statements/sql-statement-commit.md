@@ -24,16 +24,16 @@ CompletionTypeWithinTransaction ::=
 ## Examples
 
 ```sql
-mysql> CREATE TABLE t1 (a int NOT NULL PRIMARY KEY);
+CREATE TABLE t1 (a int NOT NULL PRIMARY KEY);
 Query OK, 0 rows affected (0.12 sec)
 
-mysql> START TRANSACTION;
+START TRANSACTION;
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> INSERT INTO t1 VALUES (1);
+INSERT INTO t1 VALUES (1);
 Query OK, 1 row affected (0.00 sec)
 
-mysql> COMMIT;
+COMMIT;
 Query OK, 0 rows affected (0.01 sec)
 ```
 

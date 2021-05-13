@@ -43,16 +43,16 @@ owners.
 
 Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 
-mysql> CREATE ROLE analyticsteam;
+CREATE ROLE analyticsteam;
 Query OK, 0 rows affected (0.02 sec)
 
-mysql> GRANT SELECT ON test.* TO analyticsteam;
+GRANT SELECT ON test.* TO analyticsteam;
 Query OK, 0 rows affected (0.02 sec)
 
-mysql> CREATE USER jennifer;
+CREATE USER jennifer;
 Query OK, 0 rows affected (0.01 sec)
 
-mysql> GRANT analyticsteam TO jennifer;
+GRANT analyticsteam TO jennifer;
 Query OK, 0 rows affected (0.01 sec)
 ```
 
@@ -72,7 +72,7 @@ owners.
 
 Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 
-mysql> SHOW GRANTS;
+SHOW GRANTS;
 +---------------------------------------------+
 | Grants for User                             |
 +---------------------------------------------+
@@ -81,12 +81,12 @@ mysql> SHOW GRANTS;
 +---------------------------------------------+
 2 rows in set (0.00 sec)
 
-mysql> SHOW TABLES in test;
+SHOW TABLES in test;
 ERROR 1044 (42000): Access denied for user 'jennifer'@'%' to database 'test'
-mysql> SET ROLE analyticsteam;
+SET ROLE analyticsteam;
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> SHOW GRANTS;
+SHOW GRANTS;
 +---------------------------------------------+
 | Grants for User                             |
 +---------------------------------------------+
@@ -96,7 +96,7 @@ mysql> SHOW GRANTS;
 +---------------------------------------------+
 3 rows in set (0.00 sec)
 
-mysql> SHOW TABLES IN test;
+SHOW TABLES IN test;
 +----------------+
 | Tables_in_test |
 +----------------+
@@ -121,7 +121,7 @@ owners.
 
 Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 
-mysql> SET DEFAULT ROLE analyticsteam TO jennifer;
+SET DEFAULT ROLE analyticsteam TO jennifer;
 Query OK, 0 rows affected (0.02 sec)
 ```
 
@@ -139,7 +139,7 @@ owners.
 
 Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 
-mysql> SHOW GRANTS;
+SHOW GRANTS;
 +---------------------------------------------+
 | Grants for User                             |
 +---------------------------------------------+
@@ -149,7 +149,7 @@ mysql> SHOW GRANTS;
 +---------------------------------------------+
 3 rows in set (0.00 sec)
 
-mysql> SHOW TABLES IN test;
+SHOW TABLES IN test;
 +----------------+
 | Tables_in_test |
 +----------------+
@@ -161,7 +161,7 @@ mysql> SHOW TABLES IN test;
 `SET DEFAULT ROLE` will not automatically `GRANT` the associated role to the user. Attempting to `SET DEFAULT ROLE` for a role that `jennifer` does not have granted results in the following error:
 
 ```sql
-mysql> SET DEFAULT ROLE analyticsteam TO jennifer;
+SET DEFAULT ROLE analyticsteam TO jennifer;
 ERROR 3530 (HY000): `analyticsteam`@`%` is is not granted to jennifer@%
 ```
 

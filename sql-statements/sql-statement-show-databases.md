@@ -23,7 +23,7 @@ This statement shows a list of databases that the current user has privileges to
 ## Examples
 
 ```sql
-mysql> SHOW DATABASES;
+SHOW DATABASES;
 +--------------------+
 | Database           |
 +--------------------+
@@ -34,10 +34,10 @@ mysql> SHOW DATABASES;
 +--------------------+
 4 rows in set (0.00 sec)
 
-mysql> CREATE DATABASE mynewdb;
+CREATE DATABASE mynewdb;
 Query OK, 0 rows affected (0.10 sec)
 
-mysql> SHOW DATABASES;
+SHOW DATABASES;
 +--------------------+
 | Database           |
 +--------------------+

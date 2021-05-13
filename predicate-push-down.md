@@ -17,8 +17,8 @@ The following cases describe the optimization of PPD. Case 1, 2, and 3 are scena
 ### Case 1: push predicates to storage layer
 
 ```sql
-create table t(id int primary key, a int);
-explain select * from t where a < 1;
+CREATE TABLE t(id int primary key, a int);
+explain SELECT * FROM t where a < 1;
 +-------------------------+----------+-----------+---------------+--------------------------------+
 | id                      | estRows  | task      | access object | operator info                  |
 +-------------------------+----------+-----------+---------------+--------------------------------+
@@ -34,8 +34,8 @@ In this query, pushing down the predicate `a < 1` to the TiKV layer to filter th
 ### Case 2: push predicates to storage layer
 
 ```sql
-create table t(id int primary key, a int not null);
-explain select * from t where a < substring('123', 1, 1);
+CREATE TABLE t(id int primary key, a int not null);
+explain SELECT * FROM t where a < substring('123', 1, 1);
 +-------------------------+----------+-----------+---------------+--------------------------------+
 | id                      | estRows  | task      | access object | operator info                  |
 +-------------------------+----------+-----------+---------------+--------------------------------+
@@ -50,9 +50,9 @@ This query has the same execution plan as the query in case 1, because the input
 ### Case 3: push predicates below join operator
 
 ```sql
-create table t(id int primary key, a int not null);
-create table s(id int primary key, a int not null);
-explain select * from t join s on t.a = s.a where t.a < 1;
+CREATE TABLE t(id int primary key, a int not null);
+CREATE TABLE s(id int primary key, a int not null);
+explain SELECT * FROM t join s on t.a = s.a where t.a < 1;
 +------------------------------+----------+-----------+---------------+--------------------------------------------+
 | id                           | estRows  | task      | access object | operator info                              |
 +------------------------------+----------+-----------+---------------+--------------------------------------------+
@@ -74,8 +74,8 @@ In addition，This SQL statement has an inner join executed, and the `ON` condit
 ### Case 4: predicates that are not supported by storage layers cannot be pushed down
 
 ```sql
-create table t(id int primary key, a int not null);
-desc select * from t where substring('123', a, 1) = '1';
+CREATE TABLE t(id int primary key, a int not null);
+desc SELECT * FROM t where substring('123', a, 1) = '1';
 +-------------------------+---------+-----------+---------------+----------------------------------------+
 | id                      | estRows | task      | access object | operator info                          |
 +-------------------------+---------+-----------+---------------+----------------------------------------+
@@ -92,9 +92,9 @@ From the `explain` results, we can see that the predicate is not pushed down to 
 ### Case 5: predicates of inner tables on the outer join can't be pushed down
 
 ```sql
-create table t(id int primary key, a int not null);
-create table s(id int primary key, a int not null);
-explain select * from t left join s on t.a = s.a where s.a is null;
+CREATE TABLE t(id int primary key, a int not null);
+CREATE TABLE s(id int primary key, a int not null);
+explain SELECT * FROM t left join s on t.a = s.a where s.a is null;
 +-------------------------------+----------+-----------+---------------+-------------------------------------------------+
 | id                            | estRows  | task      | access object | operator info                                   |
 +-------------------------------+----------+-----------+---------------+-------------------------------------------------+
@@ -115,9 +115,9 @@ From the `explain` results，we can see that the predicate is not pushed below j
 ### Case 6: the predicates which contain user variables cannot be pushed down
 
 ```sql
-create table t(id int primary key, a char);
+CREATE TABLE t(id int primary key, a char);
 set @a = 1;
-explain select * from t where a < @a;
+explain SELECT * FROM t where a < @a;
 +-------------------------+----------+-----------+---------------+--------------------------------+
 | id                      | estRows  | task      | access object | operator info                  |
 +-------------------------+----------+-----------+---------------+--------------------------------+
@@ -135,8 +135,8 @@ As can be seen from `explain` results, the predicate is not like case 2, which i
 An example to help you understand is as follows：
 
 ```sql
-create table t(id int primary key, a int);
-insert into t values(1, 1), (2,2);
+CREATE TABLE t(id int primary key, a int);
+INSERT INTO t values(1, 1), (2,2);
 set @a = 1;
 select id, a, @a:=@a+1 from t where a = @a;
 +----+------+----------+

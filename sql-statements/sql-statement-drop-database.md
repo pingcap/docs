@@ -20,7 +20,7 @@ IfExists ::= ( 'IF' 'EXISTS' )?
 ## Examples
 
 ```sql
-mysql> SHOW DATABASES;
+SHOW DATABASES;
 +--------------------+
 | Database           |
 +--------------------+
@@ -31,10 +31,10 @@ mysql> SHOW DATABASES;
 +--------------------+
 4 rows in set (0.00 sec)
 
-mysql> DROP DATABASE test;
+DROP DATABASE test;
 Query OK, 0 rows affected (0.25 sec)
 
-mysql> SHOW DATABASES;
+SHOW DATABASES;
 +--------------------+
 | Database           |
 +--------------------+

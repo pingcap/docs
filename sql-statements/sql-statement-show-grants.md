@@ -33,7 +33,7 @@ This statement shows a list of privileges associated with a user. As in MySQL, t
 ## Examples
 
 ```sql
-mysql> SHOW GRANTS;
+SHOW GRANTS;
 +-------------------------------------------+
 | Grants for User                           |
 +-------------------------------------------+
@@ -41,15 +41,15 @@ mysql> SHOW GRANTS;
 +-------------------------------------------+
 1 row in set (0.00 sec)
 
-mysql> SHOW GRANTS FOR 'u1';
+SHOW GRANTS FOR 'u1';
 ERROR 1141 (42000): There is no such grant defined for user 'u1' on host '%'
-mysql> CREATE USER u1;
+CREATE USER u1;
 Query OK, 1 row affected (0.04 sec)
 
-mysql> GRANT SELECT ON test.* TO u1;
+GRANT SELECT ON test.* TO u1;
 Query OK, 0 rows affected (0.04 sec)
 
-mysql> SHOW GRANTS FOR u1;
+SHOW GRANTS FOR u1;
 +------------------------------------+
 | Grants for u1@%                    |
 +------------------------------------+

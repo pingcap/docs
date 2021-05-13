@@ -50,7 +50,7 @@ TiDB Ansible version: 3.0.6
     - Stop updating pessimistic transaction TTL when pessimistic transactional queries are killed to prevent other transactions from waiting unnecessarily [#13046](https://github.com/pingcap/tidb/pull/13046)
 + DDL
     - Fix the issue that the execution result of `SHOW CREATE VIEW` in TiDB is inconsistent with that in MySQL [#12912](https://github.com/pingcap/tidb/pull/12912)
-    - Support creating `View` based on `union`, for example, `create view v as select * from t1 union select * from t2` [#12955](https://github.com/pingcap/tidb/pull/12955)
+    - Support creating `View` based on `union`, for example, `create view v as SELECT * FROM t1 union SELECT * FROM t2` [#12955](https://github.com/pingcap/tidb/pull/12955)
     - Add more transaction-related fields for the `slow_query` table: [#13072](https://github.com/pingcap/tidb/pull/13072)
         - `Prewrite_time`
         - `Commit_time`

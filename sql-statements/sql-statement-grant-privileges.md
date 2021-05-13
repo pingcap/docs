@@ -60,13 +60,13 @@ UserSpecList ::=
 ## Examples
 
 ```sql
-mysql> CREATE USER 'newuser' IDENTIFIED BY 'mypassword';
+CREATE USER 'newuser' IDENTIFIED BY 'mypassword';
 Query OK, 1 row affected (0.02 sec)
 
-mysql> GRANT ALL ON test.* TO 'newuser';
+GRANT ALL ON test.* TO 'newuser';
 Query OK, 0 rows affected (0.03 sec)
 
-mysql> SHOW GRANTS FOR 'newuser';
+SHOW GRANTS FOR 'newuser';
 +-------------------------------------------------+
 | Grants for newuser@%                            |
 +-------------------------------------------------+

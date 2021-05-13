@@ -85,7 +85,7 @@ Refer to [5 PD issues](#5-pd-issues).
 
     - Solution：The first two causes do not impact the application, as the related DML operations retry after failure. For cause 3, you need to check the network between TiDB and TiKV/PD.
 
-    - Background: The increased number of `schema version` is consistent with the number of `schema state` of each DDL change operation. For example, the `create table` operation has 1 version change, and the `add column` operation has 4 version changes. Therefore, too many column change operations might cause `schema version` to increase fast. For details, refer to [online schema change](https://static.googleusercontent.com/media/research.google.com/zh-CN//pubs/archive/41376.pdf).
+    - Background: The increased number of `schema version` is consistent with the number of `schema state` of each DDL change operation. For example, the `CREATE TABLE` operation has 1 version change, and the `add column` operation has 4 version changes. Therefore, too many column change operations might cause `schema version` to increase fast. For details, refer to [online schema change](https://static.googleusercontent.com/media/research.google.com/zh-CN//pubs/archive/41376.pdf).
 
 - 3.1.4 TiDB reports `information schema is out of date` in log
 

@@ -264,7 +264,7 @@ You can control a sequence through the following expression functions:
     {{< copyable "sql" >}}
 
     ```sql
-    INSERT into t values();
+    INSERT INTO t values();
     ```
 
     ```
@@ -274,7 +274,7 @@ You can control a sequence through the following expression functions:
     {{< copyable "sql" >}}
 
     ```sql
-    SELECT * from t;
+    SELECT * FROM t;
     ```
 
     ```
@@ -291,7 +291,7 @@ You can control a sequence through the following expression functions:
     {{< copyable "sql" >}}
 
     ```sql
-    INSERT into t values();
+    INSERT INTO t values();
     ```
 
     ```

@@ -21,12 +21,12 @@ This statement shows the exact statement to recreate an existing table using SQL
 ## Examples
 
 ```sql
-mysql> CREATE TABLE t1 (a INT);
+CREATE TABLE t1 (a INT);
 Query OK, 0 rows affected (0.12 sec)
 
-mysql> SHOW CREATE TABLE t1;
+SHOW CREATE TABLE t1;
 +-------+------------------------------------------------------------------------------------------------------------+
-| Table | Create Table                                                                                               |
+| Table | CREATE TABLE                                                                                               |
 +-------+------------------------------------------------------------------------------------------------------------+
 | t1    | CREATE TABLE `t1` (
   `a` int(11) DEFAULT NULL

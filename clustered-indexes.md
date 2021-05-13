@@ -101,9 +101,9 @@ You can check whether the primary key of a table is a clustered index using one 
 By running the command `SHOW CREATE TABLE`, you can see whether the attribute of `PRIMARY KEY` is `CLUSTERED` or `NONCLUSTERED`. For example:
 
 ```sql
-mysql> SHOW CREATE TABLE t;
+SHOW CREATE TABLE t;
 +-------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Table | Create Table                                                                                                                                                                                      |
+| Table | CREATE TABLE                                                                                                                                                                                      |
 +-------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | t     | CREATE TABLE `t` (
   `a` bigint(20) NOT NULL,
@@ -117,7 +117,7 @@ mysql> SHOW CREATE TABLE t;
 By running the command `SHOW INDEX FROM`, you can check whether the result in the column `Clustered` shows `YES` or `NO`. For example:
 
 ```sql
-mysql> SHOW INDEX FROM t;
+SHOW INDEX FROM t;
 +-------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+-----------+
 | Table | Non_unique | Key_name | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment | Visible | Expression | Clustered |
 +-------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+-----------+
@@ -129,7 +129,7 @@ mysql> SHOW INDEX FROM t;
 You can also query the column `TIDB_PK_TYPE` in the system table `information_schema.tables` to see whether the result is `CLUSTERED` or `NONCLUSTERED`. For example:
 
 ```sql
-mysql> SELECT TIDB_PK_TYPE FROM information_schema.tables WHERE table_schema = 'test' AND table_name = 't';
+SELECT TIDB_PK_TYPE FROM information_schema.tables WHERE table_schema = 'test' AND table_name = 't';
 +--------------+
 | TIDB_PK_TYPE |
 +--------------+
@@ -152,14 +152,14 @@ Currently, there are two types of limitations for the clustered index feature. S
 After TiDB Binlog is enabled, if the clustered index you create is not a single integer primary key, TiDB returns the following error:
 
 ```sql
-mysql> CREATE TABLE t (a VARCHAR(255) PRIMARY KEY CLUSTERED);
+CREATE TABLE t (a VARCHAR(255) PRIMARY KEY CLUSTERED);
 ERROR 8200 (HY000): Cannot create clustered index table when the binlog is ON
 ```
 
 If you use clustered indexes together with the attribute `SHARD_ROW_ID_BITS`, TiDB reports the following error:
 
 ```sql
-mysql> CREATE TABLE t (a VARCHAR(255) PRIMARY KEY CLUSTERED) SHARD_ROW_ID_BITS = 3;
+CREATE TABLE t (a VARCHAR(255) PRIMARY KEY CLUSTERED) SHARD_ROW_ID_BITS = 3;
 ERROR 8200 (HY000): Unsupported shard_row_id_bits for table with primary key as row id
 ```
 
@@ -195,20 +195,20 @@ However, you cannot convert a table with non-clustered indexes to a table with c
 For a table with a combined primary key or a single non-integer primary key, if you change the primary key from a non-clustered index to a clustered index, the keys of its row data change as well. Therefore, `SPLIT TABLE BY/BETWEEN` statements that are executable in TiDB versions earlier than v5.0 are no longer workable in v5.0 and later versions of TiDB. If you want to split a table with clustered indexes using `SPLIT TABLE BY/BETWEEN`, you need to provide the value of the primary key column, instead of specifying an integer value. See the following example:
 
 ```sql
-mysql> create table t (a int, b varchar(255), primary key(a, b) clustered);
+CREATE TABLE t (a int, b varchar(255), primary key(a, b) clustered);
 Query OK, 0 rows affected (0.01 sec)
-mysql> split table t between (0) and (1000000) regions 5;
+split table t between (0) and (1000000) regions 5;
 ERROR 1105 (HY000): Split table region lower value count should be 2
-mysql> split table t by (0), (50000), (100000);
+split table t by (0), (50000), (100000);
 ERROR 1136 (21S01): Column count doesn't match value count at row 0
-mysql> split table t between (0, 'aaa') and (1000000, 'zzz') regions 5;
+split table t between (0, 'aaa') and (1000000, 'zzz') regions 5;
 +--------------------+----------------------+
 | TOTAL_SPLIT_REGION | SCATTER_FINISH_RATIO |
 +--------------------+----------------------+
 |                  4 |                    1 |
 +--------------------+----------------------+
 1 row in set (0.00 sec)
-mysql> split table t by (0, ''), (50000, ''), (100000, '');
+split table t by (0, ''), (50000, ''), (100000, '');
 +--------------------+----------------------+
 | TOTAL_SPLIT_REGION | SCATTER_FINISH_RATIO |
 +--------------------+----------------------+
@@ -220,6 +220,6 @@ mysql> split table t by (0, ''), (50000, ''), (100000, '');
 The attribute [`AUTO_RANDOM`](/auto-random.md) can only be used on clustered indexes. Otherwise, TiDB returns the following error:
 
 ```sql
-mysql> create table t (a bigint primary key nonclustered auto_random);
+CREATE TABLE t (a bigint primary key nonclustered auto_random);
 ERROR 8216 (HY000): Invalid auto random: column a is not the integer primary key, or the primary key is nonclustered
 ```

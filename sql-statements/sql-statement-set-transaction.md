@@ -25,7 +25,7 @@ The `SET TRANSACTION` statement can be used to change the current isolation leve
 ## Examples
 
 ```sql
-mysql> SHOW SESSION VARIABLES LIKE 'transaction_isolation';
+SHOW SESSION VARIABLES LIKE 'transaction_isolation';
 +-----------------------+-----------------+
 | Variable_name         | Value           |
 +-----------------------+-----------------+
@@ -33,10 +33,10 @@ mysql> SHOW SESSION VARIABLES LIKE 'transaction_isolation';
 +-----------------------+-----------------+
 1 row in set (0.00 sec)
 
-mysql> SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED;
+SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED;
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> SHOW SESSION VARIABLES LIKE 'transaction_isolation';
+SHOW SESSION VARIABLES LIKE 'transaction_isolation';
 +-----------------------+----------------+
 | Variable_name         | Value          |
 +-----------------------+----------------+
@@ -44,10 +44,10 @@ mysql> SHOW SESSION VARIABLES LIKE 'transaction_isolation';
 +-----------------------+----------------+
 1 row in set (0.01 sec)
 
-mysql> SET SESSION transaction_isolation = 'REPEATABLE-READ';
+SET SESSION transaction_isolation = 'REPEATABLE-READ';
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> SHOW SESSION VARIABLES LIKE 'transaction_isolation';
+SHOW SESSION VARIABLES LIKE 'transaction_isolation';
 +-----------------------+-----------------+
 | Variable_name         | Value           |
 +-----------------------+-----------------+

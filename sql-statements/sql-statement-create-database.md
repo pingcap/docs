@@ -44,15 +44,15 @@ The `create_specification` option is used to specify the specific `CHARACTER SET
 ## Examples
 
 ```sql
-mysql> CREATE DATABASE mynewdatabase;
+CREATE DATABASE mynewdatabase;
 Query OK, 0 rows affected (0.09 sec)
 
-mysql> USE mynewdatabase;
+USE mynewdatabase;
 Database changed
-mysql> CREATE TABLE t1 (a int);
+CREATE TABLE t1 (a int);
 Query OK, 0 rows affected (0.11 sec)
 
-mysql> SHOW TABLES;
+SHOW TABLES;
 +-------------------------+
 | Tables_in_mynewdatabase |
 +-------------------------+

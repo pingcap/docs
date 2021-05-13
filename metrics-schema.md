@@ -134,7 +134,7 @@ SHOW CREATE TABLE metrics_schema.tidb_query_duration;
 
 ```sql
 +---------------------+--------------------------------------------------------------------------------------------------------------------+
-| Table               | Create Table                                                                                                       |
+| Table               | CREATE TABLE                                                                                                       |
 +---------------------+--------------------------------------------------------------------------------------------------------------------+
 | tidb_query_duration | CREATE TABLE `tidb_query_duration` (                                                                               |
 |                     |   `time` datetime unsigned DEFAULT CURRENT_TIMESTAMP,                                                              |
@@ -224,7 +224,7 @@ To view the values of monitoring items with different granularities, you can mod
     {{< copyable "sql" >}}
 
     ```sql
-    select * from metrics_schema.tidb_query_duration where value is not null and time>='2020-03-25 23:40:00' and time <= '2020-03-25 23:42:00' and quantile=0.99;
+    SELECT * FROM metrics_schema.tidb_query_duration where value is not null and time>='2020-03-25 23:40:00' and time <= '2020-03-25 23:42:00' and quantile=0.99;
     ```
 
     ```sql
@@ -254,7 +254,7 @@ To view the values of monitoring items with different granularities, you can mod
     {{< copyable "sql" >}}
 
     ```sql
-    desc select * from metrics_schema.tidb_query_duration where value is not null and time>='2020-03-25 23:40:00' and time <= '2020-03-25 23:42:00' and quantile=0.99;
+    desc SELECT * FROM metrics_schema.tidb_query_duration where value is not null and time>='2020-03-25 23:40:00' and time <= '2020-03-25 23:42:00' and quantile=0.99;
     ```
 
     ```sql

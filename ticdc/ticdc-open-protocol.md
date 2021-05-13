@@ -317,7 +317,7 @@ Currently, TiCDC does not provide the standard parsing library for TiCDC Open Pr
 | :-------------------------------- | :- |
 | Create Schema                     | 1  |
 | Drop Schema                       | 2  |
-| Create Table                      | 3  |
+| CREATE TABLE                      | 3  |
 | Drop Table                        | 4  |
 | Add Column                        | 5  |
 | Drop Column                       | 6  |

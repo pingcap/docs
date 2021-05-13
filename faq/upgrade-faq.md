@@ -34,7 +34,7 @@ To avoid this issue, you need to pay attention to:
 
 - Before v2.1.3, TiDB does not support modifying the charset of the column. Therefore, when you execute DDL operations, you need to make sure that the charset of the new column is consistent with that of the original column.
 
-- Before v2.1.3, even if the charset of the column is different from that of the table, `show create table` does not show the charset of the column. But as shown in the following example, you can view it by obtaining the metadata of the table through the HTTP API.
+- Before v2.1.3, even if the charset of the column is different from that of the table, `show CREATE TABLE` does not show the charset of the column. But as shown in the following example, you can view it by obtaining the metadata of the table through the HTTP API.
 
 #### `unsupported modify column charset utf8mb4 not match origin utf8`
 
@@ -43,7 +43,7 @@ To avoid this issue, you need to pay attention to:
     {{< copyable "sql" >}}
 
     ```sql
-    create table t(a varchar(10)) charset=utf8;
+    CREATE TABLE t(a varchar(10)) charset=utf8;
     ```
 
     ```
@@ -54,12 +54,12 @@ To avoid this issue, you need to pay attention to:
     {{< copyable "sql" >}}
 
     ```sql
-    show create table t;
+    show CREATE TABLE t;
     ```
 
     ```
     +-------+-------------------------------------------------------+
-    | Table | Create Table                                          |
+    | Table | CREATE TABLE                                          |
     +-------+-------------------------------------------------------+
     | t     | CREATE TABLE `t` (                                    |
     |       |   `a` varchar(10) DEFAULT NULL                        |
@@ -142,7 +142,7 @@ alter table t change column a a varchar(22) character set utf8;
     {{< copyable "sql" >}}
 
     ```sql
-    create table t(a varchar(10)) charset=utf8;
+    CREATE TABLE t(a varchar(10)) charset=utf8;
     ```
 
     ```
@@ -153,12 +153,12 @@ alter table t change column a a varchar(22) character set utf8;
     {{< copyable "sql" >}}
 
     ```sql
-    show create table t;
+    show CREATE TABLE t;
     ```
 
     ```
     +-------+-------------------------------------------------------+
-    | Table | Create Table                                          |
+    | Table | CREATE TABLE                                          |
     +-------+-------------------------------------------------------+
     | t     | CREATE TABLE `t` (                                    |
     |       |   `a` varchar(10) DEFAULT NULL                        |
@@ -166,19 +166,19 @@ alter table t change column a a varchar(22) character set utf8;
     +-------+-------------------------------------------------------+
     ```
 
-    In the above example, `show create table` only shows the charset of the table, but the charset of the column is actually UTF8MB4, which can be confirmed by obtaining the schema through the HTTP API. However, when a new table is created, the charset of the column should stay consistent with that of the table. This bug has been fixed in v2.1.3.
+    In the above example, `show CREATE TABLE` only shows the charset of the table, but the charset of the column is actually UTF8MB4, which can be confirmed by obtaining the schema through the HTTP API. However, when a new table is created, the charset of the column should stay consistent with that of the table. This bug has been fixed in v2.1.3.
 
 - After upgrading, the following operations are executed in v2.1.3 and the later versions.
 
     {{< copyable "sql" >}}
 
     ```sql
-    show create table t;
+    show CREATE TABLE t;
     ```
 
     ```
     +-------+--------------------------------------------------------------------+
-    | Table | Create Table                                                       |
+    | Table | CREATE TABLE                                                       |
     +-------+--------------------------------------------------------------------+
     | t     | CREATE TABLE `t` (                                                 |
     |       |   `a` varchar(10) CHARSET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL |
@@ -225,7 +225,7 @@ In TiDB v2.1.1 and earlier versions, if the charset is UTF-8, there is no UTF-8 
     {{< copyable "sql" >}}
 
     ```sql
-    create table t(a varchar(100) charset utf8);
+    CREATE TABLE t(a varchar(100) charset utf8);
     ```
 
     ```

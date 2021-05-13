@@ -66,14 +66,14 @@ KeyOrIndex ::=
 ## Examples
 
 ```sql
-mysql> CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, c1 INT NOT NULL);
+CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, c1 INT NOT NULL);
 Query OK, 0 rows affected (0.10 sec)
 
-mysql> INSERT INTO t1 (c1) VALUES (1),(2),(3),(4),(5);
+INSERT INTO t1 (c1) VALUES (1),(2),(3),(4),(5);
 Query OK, 5 rows affected (0.02 sec)
 Records: 5  Duplicates: 0  Warnings: 0
 
-mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
+EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 +-------------------------+----------+-----------+---------------+--------------------------------+
 | id                      | estRows  | task      | access object | operator info                  |
 +-------------------------+----------+-----------+---------------+--------------------------------+
@@ -83,10 +83,10 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 +-------------------------+----------+-----------+---------------+--------------------------------+
 3 rows in set (0.00 sec)
 
-mysql> CREATE INDEX c1 ON t1 (c1);
+CREATE INDEX c1 ON t1 (c1);
 Query OK, 0 rows affected (0.30 sec)
 
-mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
+EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 +------------------------+---------+-----------+------------------------+---------------------------------------------+
 | id                     | estRows | task      | access object          | operator info                               |
 +------------------------+---------+-----------+------------------------+---------------------------------------------+
@@ -95,10 +95,10 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 +------------------------+---------+-----------+------------------------+---------------------------------------------+
 2 rows in set (0.00 sec)
 
-mysql> ALTER TABLE t1 DROP INDEX c1;
+ALTER TABLE t1 DROP INDEX c1;
 Query OK, 0 rows affected (0.30 sec)
 
-mysql> CREATE UNIQUE INDEX c1 ON t1 (c1);
+CREATE UNIQUE INDEX c1 ON t1 (c1);
 Query OK, 0 rows affected (0.31 sec)
 ```
 

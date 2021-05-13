@@ -8,7 +8,7 @@ aliases: ['/docs/dev/dashboard/dashboard-statement-list/']
 
 The SQL statements page shows the execution status of all SQL statements in the cluster. This page is often used to analyze the SQL statement whose total or single execution time is long.
 
-On this page, SQL queries with a consistent structure (even if the query parameters are inconsistent) are classified as the same SQL statement. For example, both `SELECT * FROM employee WHERE id IN (1, 2, 3)` and `select * from EMPLOYEE where ID in (4, 5)` are classified as the same `select * from employee where id in (...)` SQL statement.
+On this page, SQL queries with a consistent structure (even if the query parameters are inconsistent) are classified as the same SQL statement. For example, both `SELECT * FROM employee WHERE id IN (1, 2, 3)` and `SELECT * FROM EMPLOYEE where ID in (4, 5)` are classified as the same `SELECT * FROM employee where id in (...)` SQL statement.
 
 ## Access the page
 

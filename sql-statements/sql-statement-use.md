@@ -21,12 +21,12 @@ The `USE` statement selects a current database for the user session.
 ## Examples
 
 ```sql
-mysql> USE mysql;
+USE mysql;
 Reading table information for completion of table and column names
 You can turn off this feature to get a quicker startup with -A
 
 Database changed
-mysql> SHOW TABLES;
+SHOW TABLES;
 +-------------------------+
 | Tables_in_mysql         |
 +-------------------------+
@@ -53,18 +53,18 @@ mysql> SHOW TABLES;
 +-------------------------+
 20 rows in set (0.01 sec)
 
-mysql> CREATE DATABASE newtest;
+CREATE DATABASE newtest;
 Query OK, 0 rows affected (0.10 sec)
 
-mysql> USE newtest;
+USE newtest;
 Database changed
-mysql> SHOW TABLES;
+SHOW TABLES;
 Empty set (0.00 sec)
 
-mysql> CREATE TABLE t1 (a int);
+CREATE TABLE t1 (a int);
 Query OK, 0 rows affected (0.10 sec)
 
-mysql> SHOW TABLES;
+SHOW TABLES;
 +-------------------+
 | Tables_in_newtest |
 +-------------------+

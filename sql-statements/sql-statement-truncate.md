@@ -27,14 +27,14 @@ Both `TRUNCATE TABLE tableName` and `TRUNCATE tableName` are valid syntax.
 ## Examples
 
 ```sql
-mysql> CREATE TABLE t1 (a INT NOT NULL PRIMARY KEY);
+CREATE TABLE t1 (a INT NOT NULL PRIMARY KEY);
 Query OK, 0 rows affected (0.11 sec)
 
-mysql> INSERT INTO t1 VALUES (1),(2),(3),(4),(5);
+INSERT INTO t1 VALUES (1),(2),(3),(4),(5);
 Query OK, 5 rows affected (0.01 sec)
 Records: 5  Duplicates: 0  Warnings: 0
 
-mysql> SELECT * FROM t1;
+SELECT * FROM t1;
 +---+
 | a |
 +---+
@@ -46,17 +46,17 @@ mysql> SELECT * FROM t1;
 +---+
 5 rows in set (0.00 sec)
 
-mysql> TRUNCATE t1;
+TRUNCATE t1;
 Query OK, 0 rows affected (0.11 sec)
 
-mysql> SELECT * FROM t1;
+SELECT * FROM t1;
 Empty set (0.00 sec)
 
-mysql> INSERT INTO t1 VALUES (1),(2),(3),(4),(5);
+INSERT INTO t1 VALUES (1),(2),(3),(4),(5);
 Query OK, 5 rows affected (0.01 sec)
 Records: 5  Duplicates: 0  Warnings: 0
 
-mysql> TRUNCATE TABLE t1;
+TRUNCATE TABLE t1;
 Query OK, 0 rows affected (0.11 sec)
 ```
 
