@@ -31,7 +31,7 @@ INSERT INTO t(c) VALUES (3), (4), (5);
 ```
 
 ```sql
-SELECT * FROM t;
+mysql> SELECT * FROM t;
 +----+---+
 | id | c |
 +----+---+
@@ -53,7 +53,7 @@ INSERT INTO t(id, c) VALUES (6, 6);
 ```
 
 ```sql
-SELECT * FROM t;
+mysql> SELECT * FROM t;
 +----+---+
 | id | c |
 +----+---+
@@ -155,10 +155,10 @@ Query OK, 1 row affected (0.03 sec)
 A new `INSERT` operation against the initial TiDB server generates the `AUTO_INCREMENT` value of `4`. This is because the initial TiDB server still has space left in the `AUTO_INCREMENT` cache for allocation. In this case, the sequence of values cannot be considered globally monotonic, because the value of `4` is inserted after the value of `2000001`:
 
 ```sql
-INSERT INTO t (a) VALUES (NULL);
+mysql> INSERT INTO t (a) VALUES (NULL);
 Query OK, 1 row affected (0.01 sec)
 
-SELECT * FROM t ORDER BY b;
+mysql> SELECT * FROM t ORDER BY b;
 +---------+---------------------+
 | a       | b                   |
 +---------+---------------------+
@@ -174,10 +174,10 @@ SELECT * FROM t ORDER BY b;
 The `AUTO_INCREMENT` cache does not persist across TiDB server restarts. The following `INSERT` statement is performed after the initial TiDB server is restarted:
 
 ```sql
-INSERT INTO t (a) VALUES (NULL);
+mysql> INSERT INTO t (a) VALUES (NULL);
 Query OK, 1 row affected (0.01 sec)
 
-SELECT * FROM t ORDER BY b;
+mysql> SELECT * FROM t ORDER BY b;
 +---------+---------------------+
 | a       | b                   |
 +---------+---------------------+
@@ -196,22 +196,22 @@ A high rate of TiDB server restarts might contribute to the exhaustion of `AUTO_
 It is not recommended to rely on`AUTO_INCREMENT` values being continuous. Consider the following example, where a TiDB server has a cache of values `[2000001-2030000]`. By manually inserting the value `2029998`, you can see the behavior as a new cache range is retrieved:
 
 ```sql
-INSERT INTO t (a) VALUES (2029998);
+mysql> INSERT INTO t (a) VALUES (2029998);
 Query OK, 1 row affected (0.01 sec)
 
-INSERT INTO t (a) VALUES (NULL);
+mysql> INSERT INTO t (a) VALUES (NULL);
 Query OK, 1 row affected (0.01 sec)
 
-INSERT INTO t (a) VALUES (NULL);
+mysql> INSERT INTO t (a) VALUES (NULL);
 Query OK, 1 row affected (0.00 sec)
 
-INSERT INTO t (a) VALUES (NULL);
+mysql> INSERT INTO t (a) VALUES (NULL);
 Query OK, 1 row affected (0.02 sec)
 
-INSERT INTO t (a) VALUES (NULL);
+mysql> INSERT INTO t (a) VALUES (NULL);
 Query OK, 1 row affected (0.01 sec)
 
-SELECT * FROM t ORDER BY b;
+mysql> SELECT * FROM t ORDER BY b;
 +---------+---------------------+
 | a       | b                   |
 +---------+---------------------+
@@ -237,14 +237,14 @@ After the value `2030000` is inserted, the next value is `2060001`. This jump in
 In earlier versions of TiDB, the cache size of the auto-increment ID was transparent to users. Starting from v3.0.14, v3.1.2, and v4.0.rc-2, TiDB has introduced the `AUTO_ID_CACHE` table option to allow users to set the cache size for allocating the auto-increment ID.
 
 ```sql
-CREATE TABLE t(a int AUTO_INCREMENT key) AUTO_ID_CACHE 100;
+mysql> CREATE TABLE t(a int AUTO_INCREMENT key) AUTO_ID_CACHE 100;
 Query OK, 0 rows affected (0.02 sec)
 
-INSERT INTO t values();
+mysql> INSERT INTO t values();
 Query OK, 1 row affected (0.00 sec)
 Records: 1  Duplicates: 0  Warnings: 0
 
-SELECT * FROM t;
+mysql> SELECT * FROM t;
 +---+
 | a |
 +---+
@@ -256,16 +256,16 @@ SELECT * FROM t;
 At this time, if you invalidate the auto-increment cache of this column and redo the implicit insertion, the result is as follows:
 
 ```sql
-DELETE FROM t;
+mysql> DELETE FROM t;
 Query OK, 1 row affected (0.01 sec)
 
-RENAME TABLE t to t1;
+mysql> RENAME TABLE t to t1;
 Query OK, 0 rows affected (0.01 sec)
 
-INSERT INTO t1 values()
+mysql> INSERT INTO t1 values()
 Query OK, 1 row affected (0.00 sec)
 
-SELECT * FROM t;
+mysql> SELECT * FROM t;
 +-----+
 | a   |
 +-----+

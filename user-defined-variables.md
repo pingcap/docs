@@ -153,7 +153,7 @@ The contents of the user-defined variables are not recognized as identifiers in 
 {{< copyable "sql" >}}
 
 ```sql
-SELECT * FROM t;
+SELECT * from t;
 ```
 
 ```

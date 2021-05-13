@@ -34,11 +34,11 @@ For transactions running on different nodes, the start and commit order depends 
 Transactions of the Repeatable Read isolation level cannot concurrently update a same row. When committing, if the transaction finds that the row has been updated by another transaction after it starts, then the transaction rolls back. For example:
 
 ```sql
-CREATE TABLE t1(id int);
-INSERT INTO t1 values(0);
+create table t1(id int);
+insert into t1 values(0);
 
 start transaction;              |               start transaction;
-SELECT * FROM t1;               |               SELECT * FROM t1;
+select * from t1;               |               select * from t1;
 update t1 set id=id+1;          |               update t1 set id=id+1; -- In pessimistic transactions, the `update` statement executed later waits for the lock until the transaction holding the lock commits or rolls back and releases the row lock.
 commit;                         |
                                 |               commit; -- The transaction commit fails and rolls back. Pessimistic transactions can commit successfully.

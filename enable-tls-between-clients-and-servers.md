@@ -126,7 +126,7 @@ Use the `SHOW STATUS LIKE "%Ssl%";` statement to get the details of the current 
 See the following example of the result in an encrypted connection. The results change according to different TLS versions or encryption protocols supported by the client.
 
 ```
-SHOW STATUS LIKE "%Ssl%";
+mysql> SHOW STATUS LIKE "%Ssl%";
 ......
 | Ssl_verify_mode | 5                            |
 | Ssl_version     | TLSv1.2                      |
@@ -137,7 +137,7 @@ SHOW STATUS LIKE "%Ssl%";
 For the official MySQL client, you can also use the `STATUS` or `\s` statement to view the connection status:
 
 ```
-\s
+mysql> \s
 ...
 SSL: Cipher in use is ECDHE-RSA-AES128-GCM-SHA256
 ...

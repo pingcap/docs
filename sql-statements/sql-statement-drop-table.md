@@ -25,21 +25,21 @@ TableNameList ::=
 ## Examples
 
 ```sql
-CREATE TABLE t1 (a INT);
+mysql> CREATE TABLE t1 (a INT);
 Query OK, 0 rows affected (0.11 sec)
 
-DROP TABLE t1;
+mysql> DROP TABLE t1;
 Query OK, 0 rows affected (0.22 sec)
 
-DROP TABLE table_not_exists;
+mysql> DROP TABLE table_not_exists;
 ERROR 1051 (42S02): Unknown table 'test.table_not_exists'
-DROP TABLE IF EXISTS table_not_exists;
+mysql> DROP TABLE IF EXISTS table_not_exists;
 Query OK, 0 rows affected (0.01 sec)
 
-CREATE VIEW v1 AS SELECT 1;
+mysql> CREATE VIEW v1 AS SELECT 1;
 Query OK, 0 rows affected (0.10 sec)
 
-DROP TABLE v1;
+mysql> DROP TABLE v1;
 Query OK, 0 rows affected (0.23 sec)
 ```
 

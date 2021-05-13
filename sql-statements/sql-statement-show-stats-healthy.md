@@ -51,7 +51,7 @@ SHOW STATS_HEALTHY; # should be 100% healthy
 
 ```sql
 ...
-SHOW STATS_HEALTHY;
+mysql> SHOW STATS_HEALTHY;
 +---------+------------+----------------+---------+
 | Db_name | Table_name | Partition_name | Healthy |
 +---------+------------+----------------+---------+
@@ -70,7 +70,7 @@ SHOW STATS_HEALTHY;
 ```
 
 ```sql
-SHOW STATS_HEALTHY;
+mysql> SHOW STATS_HEALTHY;
 +---------+------------+----------------+---------+
 | Db_name | Table_name | Partition_name | Healthy |
 +---------+------------+----------------+---------+

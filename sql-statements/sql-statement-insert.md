@@ -45,23 +45,23 @@ OnDuplicateKeyUpdate ::=
 ## Examples
 
 ```sql
-CREATE TABLE t1 (a INT);
+mysql> CREATE TABLE t1 (a INT);
 Query OK, 0 rows affected (0.11 sec)
 
-CREATE TABLE t2 LIKE t1;
+mysql> CREATE TABLE t2 LIKE t1;
 Query OK, 0 rows affected (0.11 sec)
 
-INSERT INTO t1 VALUES (1);
+mysql> INSERT INTO t1 VALUES (1);
 Query OK, 1 row affected (0.02 sec)
 
-INSERT INTO t1 (a) VALUES (1);
+mysql> INSERT INTO t1 (a) VALUES (1);
 Query OK, 1 row affected (0.01 sec)
 
-INSERT INTO t2 SELECT * FROM t1;
+mysql> INSERT INTO t2 SELECT * FROM t1;
 Query OK, 2 rows affected (0.01 sec)
 Records: 2  Duplicates: 0  Warnings: 0
 
-SELECT * FROM t1;
+mysql> SELECT * FROM t1;
 +------+
 | a    |
 +------+
@@ -70,7 +70,7 @@ SELECT * FROM t1;
 +------+
 2 rows in set (0.00 sec)
 
-SELECT * FROM t2;
+mysql> SELECT * FROM t2;
 +------+
 | a    |
 +------+
@@ -79,11 +79,11 @@ SELECT * FROM t2;
 +------+
 2 rows in set (0.00 sec)
 
-INSERT INTO t2 VALUES (2),(3),(4);
+mysql> INSERT INTO t2 VALUES (2),(3),(4);
 Query OK, 3 rows affected (0.02 sec)
 Records: 3  Duplicates: 0  Warnings: 0
 
-SELECT * FROM t2;
+mysql> SELECT * FROM t2;
 +------+
 | a    |
 +------+

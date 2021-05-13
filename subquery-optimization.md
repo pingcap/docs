@@ -15,7 +15,7 @@ Subqueries usually appear in the following situations:
 - `EXISTS (SELECT ... FROM ...)`
 - `... >/>=/</<=/=/!= (SELECT ... FROM ...)`
 
-Sometimes a subquery contains non-subquery columns, such as `SELECT * FROM t where t.a in (SELECT * FROM t2 where t.b=t2.b)`. The `t.b` column in the subquery does not belong to the subquery, it is introduced from the outside of the subquery. This kind of subquery is usually called a "correlated subquery", and the externally introduced column is called a "correlated column". For optimizations about correlated subquery, see [Decorrelation of correlated subquery](/correlated-subquery-optimization.md). This article focuses on subqueries that do not involve correlated columns.
+Sometimes a subquery contains non-subquery columns, such as `select * from t where t.a in (select * from t2 where t.b=t2.b)`. The `t.b` column in the subquery does not belong to the subquery, it is introduced from the outside of the subquery. This kind of subquery is usually called a "correlated subquery", and the externally introduced column is called a "correlated column". For optimizations about correlated subquery, see [Decorrelation of correlated subquery](/correlated-subquery-optimization.md). This article focuses on subqueries that do not involve correlated columns.
 
 By default, subqueries use `semi join` mentioned in [Understanding TiDB Execution Plan](/explain-overview.md) as the execution method. For some special subqueries, TiDB do some logical rewrite to get better performance.
 
@@ -30,24 +30,24 @@ In this case, `ALL` and `ANY` can be replaced by `MAX` and `MIN`. When the table
 
 In this case, if all the values from the subquery are distinct, it is enough to compare the query with them. If the number of different values in the subquery is more than one, then there must be inequality. Therefore, such subqueries can be rewritten as follows:
 
-- `SELECT * FROM t where t.id != any (select s.id from s)` is rewritten as `select t.* from t, (select s.id, count(distinct s.id) as cnt_distinct from s) where (t.id != s.id or cnt_distinct > 1)`
+- `select * from t where t.id != any (select s.id from s)` is rewritten as `select t.* from t, (select s.id, count(distinct s.id) as cnt_distinct from s) where (t.id != s.id or cnt_distinct > 1)`
 
 ## `... = ALL (SELECT ... FROM ...)`
 
 In this case, when the number of different values in the subquery is more than one, then the result of this expression must be false. Therefore, such subquery is rewritten into the following form in TiDB:
 
-- `SELECT * FROM t where t.id = all (select s.id from s)` is rewritten as `select t.* from t, (select s.id, count(distinct s.id) as cnt_distinct from s ) where (t.id = s.id and cnt_distinct <= 1)`
+- `select * from t where t.id = all (select s.id from s)` is rewritten as `select t.* from t, (select s.id, count(distinct s.id) as cnt_distinct from s ) where (t.id = s.id and cnt_distinct <= 1)`
 
 ## `... IN (SELECT ... FROM ...)`
 
 In this case, the subquery of `IN` is rewritten into `SELECT ... FROM ... GROUP ...`, and then rewritten into the normal form of `JOIN`.
 
-For example, `SELECT * FROM t1 where t1.a in (select t2.a from t2)` is rewritten as `select t1.* from t1, (select distinct(a) a from t2) t2 where t1.a = t2. The form of a`. The `DISTINCT` attribute here can be eliminated automatically if `t2.a` has the `UNIQUE` attribute.
+For example, `select * from t1 where t1.a in (select t2.a from t2)` is rewritten as `select t1.* from t1, (select distinct(a) a from t2) t2 where t1.a = t2. The form of a`. The `DISTINCT` attribute here can be eliminated automatically if `t2.a` has the `UNIQUE` attribute.
 
 {{< copyable "sql" >}}
 
 ```sql
-explain SELECT * FROM t1 where t1.a in (select t2.a from t2);
+explain select * from t1 where t1.a in (select t2.a from t2);
 ```
 
 ```sql
@@ -72,10 +72,10 @@ At present, for a subquery in such scenarios, if the subquery is not a correlate
 {{< copyable "sql" >}}
 
 ```sql
-CREATE TABLE t1(a int);
-CREATE TABLE t2(a int);
-INSERT INTO t2 values(1);
-explain SELECT * FROM t where exists (SELECT * FROM t2);
+create table t1(a int);
+create table t2(a int);
+insert into t2 values(1);
+explain select * from t where exists (select * from t2);
 ```
 
 ```sql

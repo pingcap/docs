@@ -48,7 +48,7 @@ TiDB Ansible version: 2.1.17
     - Replace the `Index_ids` filed in slow query logs with the `Index_names` field to improve the usability of slow query logs [#12063](https://github.com/pingcap/tidb/pull/12063)
     - Fix the connection break issue caused by TiDB parsing `-` into EOF Error when `Duration` contains `-` (like `select time(‘--’)`) [#11910](https://github.com/pingcap/tidb/pull/11910)
     - Remove an invalid Region from `RegionCache` more quickly to reduce the number of requests sent to this Region [#11931](https://github.com/pingcap/tidb/pull/11931)
-    - Fix the connection break issue caused by incorrectly handling the OOM panic issue when `oom-action = "cancel"` and OOM occurs in the `INSERT INTO … Select` syntax [#12126](https://github.com/pingcap/tidb/pull/12126)
+    - Fix the connection break issue caused by incorrectly handling the OOM panic issue when `oom-action = "cancel"` and OOM occurs in the `Insert Into … Select` syntax [#12126](https://github.com/pingcap/tidb/pull/12126)
 + DDL
     - Add the reverse scan interface for `tikvSnapshot` to efficiently query DDL history jobs. After using this interface, the execution time of `ADMIN SHOW DDL JOBS` is remarkably decreased [#11789](https://github.com/pingcap/tidb/pull/11789)
     - Improve the `CREATE TABLE ... PRE_SPLIT_REGION` syntax: change the number of pre-splitting Regions from 2^(N-1) to 2^N when `PRE_SPLIT_REGION = N` [#11797](https://github.com/pingcap/tidb/pull/11797/files)

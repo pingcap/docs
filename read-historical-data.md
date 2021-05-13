@@ -47,17 +47,17 @@ Pay special attention to the following:
 1. At the initial stage, create a table and insert several rows of data:
 
     ```sql
-    CREATE TABLE t (c int);
+    mysql> create table t (c int);
     Query OK, 0 rows affected (0.01 sec)
 
-    INSERT INTO t values (1), (2), (3);
+    mysql> insert into t values (1), (2), (3);
     Query OK, 3 rows affected (0.00 sec)
     ```
 
 2. View the data in the table:
 
     ```sql
-    select * from t;
+    mysql> select * from t;
     +------+
     | c    |
     +------+
@@ -71,7 +71,7 @@ Pay special attention to the following:
 3. View the timestamp of the table:
 
     ```sql
-    select now();
+    mysql> select now();
     +---------------------+
     | now()               |
     +---------------------+
@@ -83,14 +83,14 @@ Pay special attention to the following:
 4. Update the data in one row:
 
     ```sql
-    update t set c=22 where c=2;
+    mysql> update t set c=22 where c=2;
     Query OK, 1 row affected (0.00 sec)
     ```
 
 5. Make sure the data is updated:
 
     ```sql
-    select * from t;
+    mysql> select * from t;
     +------+
     | c    |
     +------+
@@ -108,7 +108,7 @@ Pay special attention to the following:
     > In this example, the value is set to be the time before the update operation.
 
     ```sql
-    set @@tidb_snapshot="2016-10-08 16:45:26";
+    mysql> set @@tidb_snapshot="2016-10-08 16:45:26";
     Query OK, 0 rows affected (0.00 sec)
     ```
 
@@ -119,7 +119,7 @@ Pay special attention to the following:
     **Result:** The read from the following statement is the data before the update operation, which is the history data.
 
     ```sql
-    select * from t;
+    mysql> select * from t;
     +------+
     | c    |
     +------+
@@ -133,12 +133,12 @@ Pay special attention to the following:
 7. Set the  `tidb_snapshot` variable to be "" (empty string) and you can read the data from the latest version:
 
     ```sql
-    set @@tidb_snapshot="";
+    mysql> set @@tidb_snapshot="";
     Query OK, 0 rows affected (0.00 sec)
     ```
 
     ```sql
-    select * from t;
+    mysql> select * from t;
     +------+
     | c    |
     +------+

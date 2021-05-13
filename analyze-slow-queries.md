@@ -136,7 +136,7 @@ Region information on the TiDB side might be outdated. In this situation, TiKV m
 For statements with non-correlated subqueries, the subquery part might be executed in advance. For example, in `select * from t1 where a = (select max(a) from t2)`, the `select max(a) from t2` part might be executed in advance in the optimization stage. The result of `EXPLAIN ANALYZE` does not show the duration of this type of subqueries.
 
 ```sql
-explain analyze select count(*) from t where a=(select max(t1.a) from t t1, t t2 where t1.a=t2.a);
+mysql> explain analyze select count(*) from t where a=(select max(t1.a) from t t1, t t2 where t1.a=t2.a);
 +------------------------------+----------+---------+-----------+---------------+--------------------------+----------------------------------+-----------+------+
 | id                           | estRows  | actRows | task      | access object | execution info           | operator info                    | memory    | disk |
 +------------------------------+----------+---------+-----------+---------------+--------------------------+----------------------------------+-----------+------+
@@ -170,7 +170,7 @@ If the execution plan is incorrect, see the [Analyze optimizer issues](#analyze-
 If the bottleneck is in the operator with concurrency, speed up the execution by adjusting the concurrency. For example:
 
 ```sql
-explain analyze select sum(t1.a) from t t1, t t2 where t1.a=t2.a;
+mysql> explain analyze select sum(t1.a) from t t1, t t2 where t1.a=t2.a;
 +----------------------------------+--------------+-----------+-----------+---------------+-------------------------------------------------------------------------------------+------------------------------------------------+------------------+---------+
 | id                               | estRows      | actRows   | task      | access object | execution info                                                                      | operator info                                  | memory           | disk    |
 +----------------------------------+--------------+-----------+-----------+---------------+-------------------------------------------------------------------------------------+------------------------------------------------+------------------+---------+
@@ -218,7 +218,7 @@ Join operations with Cartesian product generate data volume as large as `left ch
 This type of join operations is marked `CARTESIAN` in the execution plan. For example:
 
 ```sql
-explain select * from t t1, t t2 where t1.a>t2.a;
+mysql> explain select * from t t1, t t2 where t1.a>t2.a;
 +------------------------------+-------------+-----------+---------------+---------------------------------------------------------+
 | id                           | estRows     | task      | access object | operator info                                           |
 +------------------------------+-------------+-----------+---------------+---------------------------------------------------------+
@@ -236,7 +236,7 @@ explain select * from t t1, t t2 where t1.a>t2.a;
 
 To analyze optimizer issues, you need to determine whether the execution plan is reasonable or not. You need to have some understanding of the optimization process and each operator.
 
-For the following examples, assume that the table schema is `CREATE TABLE t (id int, a int, b int, c int, primary key(id), key(a), key(b, c))`.
+For the following examples, assume that the table schema is `create table t (id int, a int, b int, c int, primary key(id), key(a), key(b, c))`.
 
 1. `select * from t`: There is no filter condition and a full table scan is performed. So the `TableFullScan` operator is used to read data.
 2. `select a from t where a=2`: There is a filter condition and only the index columns are read, so the `IndexReader` operator is used to read data.

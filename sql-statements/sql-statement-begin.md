@@ -21,16 +21,16 @@ BeginTransactionStmt ::=
 ## Examples
 
 ```sql
-CREATE TABLE t1 (a int NOT NULL PRIMARY KEY);
+mysql> CREATE TABLE t1 (a int NOT NULL PRIMARY KEY);
 Query OK, 0 rows affected (0.12 sec)
 
-BEGIN;
+mysql> BEGIN;
 Query OK, 0 rows affected (0.00 sec)
 
-INSERT INTO t1 VALUES (1);
+mysql> INSERT INTO t1 VALUES (1);
 Query OK, 1 row affected (0.00 sec)
 
-COMMIT;
+mysql> COMMIT;
 Query OK, 0 rows affected (0.01 sec)
 ```
 

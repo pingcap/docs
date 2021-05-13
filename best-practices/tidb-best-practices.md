@@ -98,7 +98,7 @@ Lots of MySQL experience is also applicable to TiDB. It is noted that TiDB has i
     - For columns with a high degree of differentiation, filtered rows are remarkably reduced through indexes.
     - If there are multiple query criteria, you can choose composite indexes. Note to put the columns with the equivalent condition before composite indexes.
 
-    For example, if a commonly used query is `SELECT * FROM t where c1 = 10 and c2 = 100 and c3 > 10`, you can create a composite index `Index cidx (c1, c2, c3)`. In this way, you can use the query condition to create an index prefix and then scan.
+    For example, if a commonly used query is `select * from t where c1 = 10 and c2 = 100 and c3 > 10`, you can create a composite index `Index cidx (c1, c2, c3)`. In this way, you can use the query condition to create an index prefix and then scan.
 
 * The difference between querying through indexes and directly scanning the table
 

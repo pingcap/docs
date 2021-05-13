@@ -28,7 +28,7 @@ BindableStmt ::=
 {{< copyable "sql" >}}
 
 ```sql
-CREATE TABLE t1 (
+mysql> CREATE TABLE t1 (
     ->  id INT NOT NULL PRIMARY KEY auto_increment,
     ->  b INT NOT NULL,
     ->  pad VARBINARY(255),
@@ -36,35 +36,35 @@ CREATE TABLE t1 (
     -> );
 Query OK, 0 rows affected (0.07 sec)
 
-INSERT INTO t1 SELECT NULL, FLOOR(RAND()*1000), RANDOM_BYTES(255) FROM dual;
+mysql> INSERT INTO t1 SELECT NULL, FLOOR(RAND()*1000), RANDOM_BYTES(255) FROM dual;
 Query OK, 1 row affected (0.01 sec)
 Records: 1  Duplicates: 0  Warnings: 0
 
-INSERT INTO t1 SELECT NULL, FLOOR(RAND()*1000), RANDOM_BYTES(255) FROM t1 a JOIN t1 b JOIN t1 c LIMIT 100000;
+mysql> INSERT INTO t1 SELECT NULL, FLOOR(RAND()*1000), RANDOM_BYTES(255) FROM t1 a JOIN t1 b JOIN t1 c LIMIT 100000;
 Query OK, 1 row affected (0.00 sec)
 Records: 1  Duplicates: 0  Warnings: 0
 
-INSERT INTO t1 SELECT NULL, FLOOR(RAND()*1000), RANDOM_BYTES(255) FROM t1 a JOIN t1 b JOIN t1 c LIMIT 100000;
+mysql> INSERT INTO t1 SELECT NULL, FLOOR(RAND()*1000), RANDOM_BYTES(255) FROM t1 a JOIN t1 b JOIN t1 c LIMIT 100000;
 Query OK, 8 rows affected (0.00 sec)
 Records: 8  Duplicates: 0  Warnings: 0
 
-INSERT INTO t1 SELECT NULL, FLOOR(RAND()*1000), RANDOM_BYTES(255) FROM t1 a JOIN t1 b JOIN t1 c LIMIT 100000;
+mysql> INSERT INTO t1 SELECT NULL, FLOOR(RAND()*1000), RANDOM_BYTES(255) FROM t1 a JOIN t1 b JOIN t1 c LIMIT 100000;
 Query OK, 1000 rows affected (0.04 sec)
 Records: 1000  Duplicates: 0  Warnings: 0
 
-INSERT INTO t1 SELECT NULL, FLOOR(RAND()*1000), RANDOM_BYTES(255) FROM t1 a JOIN t1 b JOIN t1 c LIMIT 100000;
+mysql> INSERT INTO t1 SELECT NULL, FLOOR(RAND()*1000), RANDOM_BYTES(255) FROM t1 a JOIN t1 b JOIN t1 c LIMIT 100000;
 Query OK, 100000 rows affected (1.74 sec)
 Records: 100000  Duplicates: 0  Warnings: 0
 
-INSERT INTO t1 SELECT NULL, FLOOR(RAND()*1000), RANDOM_BYTES(255) FROM t1 a JOIN t1 b JOIN t1 c LIMIT 100000;
+mysql> INSERT INTO t1 SELECT NULL, FLOOR(RAND()*1000), RANDOM_BYTES(255) FROM t1 a JOIN t1 b JOIN t1 c LIMIT 100000;
 Query OK, 100000 rows affected (2.15 sec)
 Records: 100000  Duplicates: 0  Warnings: 0
 
-INSERT INTO t1 SELECT NULL, FLOOR(RAND()*1000), RANDOM_BYTES(255) FROM t1 a JOIN t1 b JOIN t1 c LIMIT 100000;
+mysql> INSERT INTO t1 SELECT NULL, FLOOR(RAND()*1000), RANDOM_BYTES(255) FROM t1 a JOIN t1 b JOIN t1 c LIMIT 100000;
 Query OK, 100000 rows affected (2.64 sec)
 Records: 100000  Duplicates: 0  Warnings: 0
 
-SELECT SLEEP(1);
+mysql> SELECT SLEEP(1);
 +----------+
 | SLEEP(1) |
 +----------+
@@ -72,10 +72,10 @@ SELECT SLEEP(1);
 +----------+
 1 row in set (1.00 sec)
 
-ANALYZE TABLE t1;
+mysql> ANALYZE TABLE t1;
 Query OK, 0 rows affected (1.33 sec)
 
-EXPLAIN ANALYZE SELECT * FROM t1 WHERE b = 123;
+mysql> EXPLAIN ANALYZE SELECT * FROM t1 WHERE b = 123;
 +-------------------------------+---------+---------+-----------+----------------------+---------------------------------------------------------------------------+-----------------------------------+----------------+------+
 | id                            | estRows | actRows | task      | access object        | execution info                                                            | operator info                     | memory         | disk |
 +-------------------------------+---------+---------+-----------+----------------------+---------------------------------------------------------------------------+-----------------------------------+----------------+------+
@@ -85,13 +85,13 @@ EXPLAIN ANALYZE SELECT * FROM t1 WHERE b = 123;
 +-------------------------------+---------+---------+-----------+----------------------+---------------------------------------------------------------------------+-----------------------------------+----------------+------+
 3 rows in set (0.02 sec)
 
-CREATE SESSION BINDING FOR
+mysql> CREATE SESSION BINDING FOR
     ->  SELECT * FROM t1 WHERE b = 123
     -> USING
     ->  SELECT * FROM t1 IGNORE INDEX (b) WHERE b = 123;
 Query OK, 0 rows affected (0.00 sec)
 
-EXPLAIN ANALYZE  SELECT * FROM t1 WHERE b = 123;
+mysql> EXPLAIN ANALYZE  SELECT * FROM t1 WHERE b = 123;
 +-------------------------+-----------+---------+-----------+---------------+--------------------------------------------------------------------------------+--------------------+---------------+------+
 | id                      | estRows   | actRows | task      | access object | execution info                                                                 | operator info      | memory        | disk |
 +-------------------------+-----------+---------+-----------+---------------+--------------------------------------------------------------------------------+--------------------+---------------+------+
@@ -101,7 +101,7 @@ EXPLAIN ANALYZE  SELECT * FROM t1 WHERE b = 123;
 +-------------------------+-----------+---------+-----------+---------------+--------------------------------------------------------------------------------+--------------------+---------------+------+
 3 rows in set (0.22 sec)
 
-SHOW SESSION BINDINGS\G
+mysql> SHOW SESSION BINDINGS\G
 *************************** 1. row ***************************
 Original_sql: select * from t1 where b = ?
     Bind_sql: SELECT * FROM t1 IGNORE INDEX (b) WHERE b = 123
@@ -113,10 +113,10 @@ Original_sql: select * from t1 where b = ?
    Collation: utf8mb4_0900_ai_ci
 1 row in set (0.00 sec)
 
-DROP SESSION BINDING FOR SELECT * FROM t1 WHERE b = 123;
+mysql> DROP SESSION BINDING FOR SELECT * FROM t1 WHERE b = 123;
 Query OK, 0 rows affected (0.00 sec)
 
-EXPLAIN ANALYZE  SELECT * FROM t1 WHERE b = 123;
+mysql> EXPLAIN ANALYZE  SELECT * FROM t1 WHERE b = 123;
 +-------------------------------+---------+---------+-----------+----------------------+-------------------------------------------------------------------------+-----------------------------------+----------------+------+
 | id                            | estRows | actRows | task      | access object        | execution info                                                          | operator info                     | memory         | disk |
 +-------------------------------+---------+---------+-----------+----------------------+-------------------------------------------------------------------------+-----------------------------------+----------------+------+
@@ -126,7 +126,7 @@ EXPLAIN ANALYZE  SELECT * FROM t1 WHERE b = 123;
 +-------------------------------+---------+---------+-----------+----------------------+-------------------------------------------------------------------------+-----------------------------------+----------------+------+
 3 rows in set (0.01 sec)
 
-SHOW SESSION BINDINGS\G
+mysql> SHOW SESSION BINDINGS\G
 Empty set (0.00 sec)
 ```
 

@@ -12,7 +12,7 @@ This document introduces the `distinct` optimization in the TiDB query optimizer
 The `DISTINCT` modifier specifies removal of duplicate rows from the result set. `SELECT DISTINCT` is transformed to `GROUP BY`, for example：
 
 ```sql
-explain SELECT DISTINCT a from t;
+mysql> explain SELECT DISTINCT a from t;
 +--------------------------+---------+-----------+---------------+-------------------------------------------------------+
 | id                       | estRows | task      | access object | operator info                                         |
 +--------------------------+---------+-----------+---------------+-------------------------------------------------------+
@@ -32,7 +32,7 @@ The [`tidb_opt_distinct_agg_push_down`](/system-variables.md#tidb_opt_distinct_a
 Take the following queries as an example of this optimization. `tidb_opt_distinct_agg_push_down` is disabled by default, which means the aggregate functions are executed in the TiDB layer. After enabling this optimization by setting its value to `1`, the `distinct a` part of `count(distinct a)` is pushed to TiKV/TiFlash Coprocessor: there is a HashAgg_5 to remove the duplicated values on column a in the TiKV Coprocessor. It might reduce the computation overhead of `HashAgg_8` in the TiDB layer.
 
 ```sql
-desc select count(distinct a) from test.t;
+mysql> desc select count(distinct a) from test.t;
 +-------------------------+----------+-----------+---------------+------------------------------------------+
 | id                      | estRows  | task      | access object | operator info                            |
 +-------------------------+----------+-----------+---------------+------------------------------------------+
@@ -42,10 +42,10 @@ desc select count(distinct a) from test.t;
 +-------------------------+----------+-----------+---------------+------------------------------------------+
 3 rows in set (0.01 sec)
 
-set session tidb_opt_distinct_agg_push_down = 1;
+mysql> set session tidb_opt_distinct_agg_push_down = 1;
 Query OK, 0 rows affected (0.00 sec)
 
-desc select count(distinct a) from test.t;
+mysql> desc select count(distinct a) from test.t;
 +---------------------------+----------+-----------+---------------+------------------------------------------+
 | id                        | estRows  | task      | access object | operator info                            |
 +---------------------------+----------+-----------+---------------+------------------------------------------+

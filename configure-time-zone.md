@@ -51,7 +51,7 @@ The current session time zone setting affects the display and storage of time va
 {{< copyable "sql" >}}
 
 ```sql
-CREATE TABLE t (ts timestamp, dt datetime);
+create table t (ts timestamp, dt datetime);
 ```
 
 ```
@@ -71,7 +71,7 @@ Query OK, 0 rows affected (0.00 sec)
 {{< copyable "sql" >}}
 
 ```sql
-INSERT INTO t values ('2017-09-30 11:11:11', '2017-09-30 11:11:11');
+insert into t values ('2017-09-30 11:11:11', '2017-09-30 11:11:11');
 ```
 
 ```
@@ -91,7 +91,7 @@ Query OK, 0 rows affected (0.00 sec)
 {{< copyable "sql" >}}
 
 ```sql
-SELECT * FROM t;
+select * from t;
 ```
 
 ```

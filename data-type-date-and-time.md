@@ -17,7 +17,7 @@ When dealing with date and time value types, note:
 + If a numeric value is needed in the context, TiDB automatically converts the date or time value into a numeric type. For example:
 
     ```sql
-    SELECT NOW(), NOW()+0, NOW(3)+0;
+    mysql> SELECT NOW(), NOW()+0, NOW(3)+0;
     +---------------------+----------------+--------------------+
     | NOW()               | NOW()+0        | NOW(3)+0           |
     +---------------------+----------------+--------------------+
@@ -28,9 +28,9 @@ When dealing with date and time value types, note:
 + TiDB might automatically convert invalid values or values beyond the supported range to a zero value of that type. This behavior is dependent on the SQL Mode set. For example:
 
     ```sql
-    show CREATE TABLE t1;
+    mysql> show create table t1;
     +-------+---------------------------------------------------------------------------------------------------------+
-    | Table | CREATE TABLE                                                                                            |
+    | Table | Create Table                                                                                            |
     +-------+---------------------------------------------------------------------------------------------------------+
     | t1    | CREATE TABLE `t1` (
       `a` time DEFAULT NULL
@@ -38,7 +38,7 @@ When dealing with date and time value types, note:
     +-------+---------------------------------------------------------------------------------------------------------+
     1 row in set (0.00 sec)
 
-    select @@sql_mode;
+    mysql> select @@sql_mode;
     +-------------------------------------------------------------------------------------------------------------------------------------------+
     | @@sql_mode                                                                                                                                |
     +-------------------------------------------------------------------------------------------------------------------------------------------+
@@ -46,14 +46,14 @@ When dealing with date and time value types, note:
     +-------------------------------------------------------------------------------------------------------------------------------------------+
     1 row in set (0.00 sec)
 
-    INSERT INTO t1 values ('2090-11-32:22:33:44');
+    mysql> insert into t1 values ('2090-11-32:22:33:44');
     ERROR 1292 (22007): Truncated incorrect time value: '2090-11-32:22:33:44'
-    set @@sql_mode='';                                                                                                                                                                                                                     Query OK, 0 rows affected (0.01 sec)
+    mysql> set @@sql_mode='';                                                                                                                                                                                                                     Query OK, 0 rows affected (0.01 sec)
 
-    INSERT INTO t1 values ('2090-11-32:22:33:44');
+    mysql> insert into t1 values ('2090-11-32:22:33:44');
     Query OK, 1 row affected, 1 warning (0.01 sec)
 
-    select * from t1;
+    mysql> select * from t1;
     +----------+
     | a        |
     +----------+
@@ -187,14 +187,14 @@ CREATE TABLE t1 (
 + When inserting `TIME`, `DATETIME` or `TIMESTAMP` which contain a fractional part, if the number of digit of the fraction is too few, or too many, rounding might be needed in the situation. For example:
 
     ```sql
-    CREATE TABLE fractest( c1 TIME(2), c2 DATETIME(2), c3 TIMESTAMP(2) );
+    mysql> CREATE TABLE fractest( c1 TIME(2), c2 DATETIME(2), c3 TIMESTAMP(2) );
     Query OK, 0 rows affected (0.33 sec)
 
-    INSERT INTO fractest VALUES
+    mysql> INSERT INTO fractest VALUES
          > ('17:51:04.777', '2014-09-08 17:51:04.777',   '2014-09-08 17:51:04.777');
     Query OK, 1 row affected (0.03 sec)
 
-    SELECT * FROM fractest;
+    mysql> SELECT * FROM fractest;
     +-------------|------------------------|------------------------+
     | c1          | c2                     | c3                     |
     +-------------|------------------------|------------------------+
@@ -230,13 +230,13 @@ date_col = CAST(datetime_col AS DATE)
 Converting `TIME` and `DATETIME` to numeric format. For example:
 
 ```sql
-SELECT CURTIME(), CURTIME()+0, CURTIME(3)+0;
+mysql> SELECT CURTIME(), CURTIME()+0, CURTIME(3)+0;
 +-----------|-------------|--------------+
 | CURTIME() | CURTIME()+0 | CURTIME(3)+0 |
 +-----------|-------------|--------------+
 | 09:28:00  |       92800 |    92800.887 |
 +-----------|-------------|--------------+
-SELECT NOW(), NOW()+0, NOW(3)+0;
+mysql> SELECT NOW(), NOW()+0, NOW(3)+0;
 +---------------------|----------------|--------------------+
 | NOW()               | NOW()+0        | NOW(3)+0           |
 +---------------------|----------------|--------------------+

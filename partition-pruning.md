@@ -54,8 +54,8 @@ Partition pruning applies only to the query condition of equality comparison in 
 {{< copyable "sql" >}}
 
 ```sql
-CREATE TABLE t (x int) partition by hash(x) partitions 4;
-explain SELECT * FROM t where x = 1;
+create table t (x int) partition by hash(x) partitions 4;
+explain select * from t where x = 1;
 ```
 
 ```sql
@@ -81,8 +81,8 @@ If you cannot confirm the condition that the query result falls in only one part
 {{< copyable "sql" >}}
 
 ```sql
-CREATE TABLE t (x int) partition by hash(x) partitions 4;
-explain SELECT * FROM t where x > 2;
+create table t (x int) partition by hash(x) partitions 4;
+explain select * from t where x > 2;
 ```
 
 ```sql
@@ -114,8 +114,8 @@ Because the rule optimization of partition pruning is performed during the gener
 {{< copyable "sql" >}}
 
 ```sql
-CREATE TABLE t (x int) partition by hash(x) partitions 4;
-explain SELECT * FROM t2 where x = (SELECT * FROM t1 where t2.x = t1.x and t2.x < 2);
+create table t (x int) partition by hash(x) partitions 4;
+explain select * from t2 where x = (select * from t1 where t2.x = t1.x and t2.x < 2);
 ```
 
 ```sql
@@ -156,12 +156,12 @@ Partition pruning applies to the query condition of equality comparison in Range
 {{< copyable "sql" >}}
 
 ```sql
-CREATE TABLE t (x int) partition by range (x) (
+create table t (x int) partition by range (x) (
     partition p0 values less than (5),
     partition p1 values less than (10),
     partition p2 values less than (15)
     );
-explain SELECT * FROM t where x = 3;
+explain select * from t where x = 3;
 ```
 
 ```sql
@@ -179,12 +179,12 @@ Partition pruning also applies to the equality comparison that uses the `in` que
 {{< copyable "sql" >}}
 
 ```sql
-CREATE TABLE t (x int) partition by range (x) (
+create table t (x int) partition by range (x) (
     partition p0 values less than (5),
     partition p1 values less than (10),
     partition p2 values less than (15)
     );
-explain SELECT * FROM t where x in(1,13);
+explain select * from t where x in(1,13);
 ```
 
 ```sql
@@ -210,12 +210,12 @@ Partition pruning applies to the query condition of interval comparison，such a
 {{< copyable "sql" >}}
 
 ```sql
-CREATE TABLE t (x int) partition by range (x) (
+create table t (x int) partition by range (x) (
     partition p0 values less than (5),
     partition p1 values less than (10),
     partition p2 values less than (15)
     );
-explain SELECT * FROM t where x between 7 and 14;
+explain select * from t where x between 7 and 14;
 ```
 
 ```sql
@@ -248,10 +248,10 @@ For example, partition pruning takes effect when the partition expression is in 
 {{< copyable "sql" >}}
 
 ```sql
-CREATE TABLE t (id datetime) partition by range (to_days(id)) (
+create table t (id datetime) partition by range (to_days(id)) (
     partition p0 values less than (to_days('2020-04-01')),
     partition p1 values less than (to_days('2020-05-01')));
-explain SELECT * FROM t where id > '2020-04-18';
+explain select * from t where id > '2020-04-18';
 ```
 
 ```sql
@@ -271,11 +271,11 @@ Because the rule optimization of partition pruning is performed during the gener
 {{< copyable "sql" >}}
 
 ```sql
-CREATE TABLE t1 (x int) partition by range (x) (
+create table t1 (x int) partition by range (x) (
     partition p0 values less than (5),
     partition p1 values less than (10));
-CREATE TABLE t2 (x int);
-explain SELECT * FROM t2 where x < (SELECT * FROM t1 where t2.x < t1.x and t2.x < 2);
+create table t2 (x int);
+explain select * from t2 where x < (select * from t1 where t2.x < t1.x and t2.x < 2);
 ```
 
 ```sql

@@ -92,14 +92,14 @@ For example, you can export all records that match `id < 100` in `test.sbtest1` 
   -h 127.0.0.1 \
   -o /tmp/test \
   --filetype csv \
-  --sql 'SELECT * FROM `test`.`sbtest1` where id < 100'
+  --sql 'select * from `test`.`sbtest1` where id < 100'
 ```
 
 > **Note:**
 >
 > - Currently, the `--sql` option can be used only for exporting to CSV files.
 >
-> - Here you need to execute the `SELECT * FROM <table-name> where id <100` statement on all tables to be exported. If some tables do not have specified fields, the export fails.
+> - Here you need to execute the `select * from <table-name> where id <100` statement on all tables to be exported. If some tables do not have specified fields, the export fails.
 >
 > - Strings and keywords are not distinguished in CSV files. If the imported data is the Boolean type, you need to convert `true` and `false` to `1` and `0`.
 

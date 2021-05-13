@@ -21,7 +21,7 @@ You can query the downstream checkpoint table as follows:
 {{< copyable "sql" >}}
 
 ```sql
-SELECT * FROM tidb_binlog.checkpoint;
+select * from tidb_binlog.checkpoint;
 ```
 
 ```

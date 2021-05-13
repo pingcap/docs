@@ -29,7 +29,7 @@ FlushOption ::=
 ## Examples
 
 ```sql
-FLUSH PRIVILEGES;
+mysql> FLUSH PRIVILEGES;
 Query OK, 0 rows affected (0.01 sec)
 ```
 

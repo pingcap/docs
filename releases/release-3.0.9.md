@@ -30,7 +30,7 @@ TiDB Ansible version: 3.0.9
     - Fix the issue that the results of anonymous indexes created using `alter table ... add index` on the `primary` column is inconsistent with MySQL [#14310](https://github.com/pingcap/tidb/pull/14310)
     - Fix the issue that `VIEW`s are mistakenly dropped by the  `drop table` syntax [#14052](https://github.com/pingcap/tidb/pull/14052)
 + Planner
-    - Optimize the performance of statements such as `select max(a), min(a) from t`. If an index exists in the `a` column, the statement is optimized to `SELECT * FROM (select a from t order by a desc limit 1) as t1, (select a from t order by a limit 1) as t2` to avoid full table scan [#14410](https://github.com/pingcap/tidb/pull/14410)
+    - Optimize the performance of statements such as `select max(a), min(a) from t`. If an index exists in the `a` column, the statement is optimized to `select * from (select a from t order by a desc limit 1) as t1, (select a from t order by a limit 1) as t2` to avoid full table scan [#14410](https://github.com/pingcap/tidb/pull/14410)
 
 ## TiKV
 

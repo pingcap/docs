@@ -37,14 +37,14 @@ The `UPDATE` statement is used to modify data in a specified table.
 ## Examples
 
 ```sql
-CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, c1 INT NOT NULL);
+mysql> CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, c1 INT NOT NULL);
 Query OK, 0 rows affected (0.11 sec)
 
-INSERT INTO t1 (c1) VALUES (1), (2), (3);
+mysql> INSERT INTO t1 (c1) VALUES (1), (2), (3);
 Query OK, 3 rows affected (0.02 sec)
 Records: 3  Duplicates: 0  Warnings: 0
 
-SELECT * FROM t1;
+mysql> SELECT * FROM t1;
 +----+----+
 | id | c1 |
 +----+----+
@@ -54,11 +54,11 @@ SELECT * FROM t1;
 +----+----+
 3 rows in set (0.00 sec)
 
-UPDATE t1 SET c1=5 WHERE c1=3;
+mysql> UPDATE t1 SET c1=5 WHERE c1=3;
 Query OK, 1 row affected (0.01 sec)
 Rows matched: 1  Changed: 1  Warnings: 0
 
-SELECT * FROM t1;
+mysql> SELECT * FROM t1;
 +----+----+
 | id | c1 |
 +----+----+

@@ -101,7 +101,7 @@ Both `INSERT` and `UPDATE` statements check virtual column definitions. Rows tha
 {{< copyable "sql" >}}
 
 ```sql
-INSERT INTO person (name, address_info) VALUES ('Morgan', JSON_OBJECT('Country', 'Canada'));
+mysql> INSERT INTO person (name, address_info) VALUES ('Morgan', JSON_OBJECT('Country', 'Canada'));
 ERROR 1048 (23000): Column 'city' cannot be null
 ```
 
@@ -112,7 +112,7 @@ When an expression in a query is equivalent to a generated column with an index,
 For example, the following example creates a generated column for the expression `a+1` and adds an index:
 
 ```sql
-CREATE TABLE t(a int);
+create table t(a int);
 desc select a+1 from t where a+1=3;
 +---------------------------+----------+-----------+---------------+--------------------------------+
 | id                        | estRows  | task      | access object | operator info                  |

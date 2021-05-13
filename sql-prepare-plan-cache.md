@@ -55,9 +55,9 @@ After the execution plan cache feature is enabled, you can use the session-level
 {{< copyable "sql" >}}
 
 ```sql
-MySQL [test]> CREATE TABLE t(a int);
+MySQL [test]> create table t(a int);
 Query OK, 0 rows affected (0.00 sec)
-MySQL [test]> prepare stmt from 'SELECT * FROM t where a = ?';
+MySQL [test]> prepare stmt from 'select * from t where a = ?';
 Query OK, 0 rows affected (0.00 sec)
 MySQL [test]> set @a = 1;
 Query OK, 0 rows affected (0.00 sec)

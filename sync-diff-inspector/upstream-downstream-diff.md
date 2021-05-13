@@ -13,7 +13,7 @@ You can use TiDB Binlog to build upstream and downstream clusters of TiDB. When 
 To obtain `ts-map`, execute the following SQL statement in the downstream TiDB cluster:
 
 ```sql
-select * from tidb_binlog.checkpoint;
+mysql> select * from tidb_binlog.checkpoint;
 +---------------------+---------------------------------------------------------------------------------------------------------+
 | clusterID           | checkPoint                                                                                              |
 +---------------------+---------------------------------------------------------------------------------------------------------+

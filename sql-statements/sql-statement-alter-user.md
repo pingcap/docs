@@ -30,10 +30,10 @@ AuthOption ::=
 ## Examples
 
 ```sql
-CREATE USER 'newuser' IDENTIFIED BY 'newuserpassword';
+mysql> CREATE USER 'newuser' IDENTIFIED BY 'newuserpassword';
 Query OK, 1 row affected (0.01 sec)
 
-SHOW CREATE USER 'newuser';
+mysql> SHOW CREATE USER 'newuser';
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | CREATE USER for newuser@%                                                                                                                                            |
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -41,10 +41,10 @@ SHOW CREATE USER 'newuser';
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 1 row in set (0.00 sec)
 
-ALTER USER 'newuser' IDENTIFIED BY 'newnewpassword';
+mysql> ALTER USER 'newuser' IDENTIFIED BY 'newnewpassword';
 Query OK, 0 rows affected (0.02 sec)
 
-SHOW CREATE USER 'newuser';
+mysql> SHOW CREATE USER 'newuser';
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | CREATE USER for newuser@%                                                                                                                                            |
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------+

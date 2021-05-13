@@ -33,7 +33,7 @@ Expression ::=
 This SELECT statement pauses, but also produces a result set.
 
 ```sql
-SELECT SLEEP(5);
+mysql> SELECT SLEEP(5);
 +----------+
 | SLEEP(5) |
 +----------+
@@ -45,10 +45,10 @@ SELECT SLEEP(5);
 DO, on the other hand, pauses without producing a result set.
 
 ```sql
-DO SLEEP(5);
+mysql> DO SLEEP(5);
 Query OK, 0 rows affected (5.00 sec)
 
-DO SLEEP(1), SLEEP(1.5);
+mysql> DO SLEEP(1), SLEEP(1.5);
 Query OK, 0 rows affected (2.50 sec)
 ```
 

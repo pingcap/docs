@@ -18,14 +18,14 @@ DeleteFromStmt ::=
 ## Examples
 
 ```sql
-CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, c1 INT NOT NULL);
+mysql> CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, c1 INT NOT NULL);
 Query OK, 0 rows affected (0.11 sec)
 
-INSERT INTO t1 (c1) VALUES (1),(2),(3),(4),(5);
+mysql> INSERT INTO t1 (c1) VALUES (1),(2),(3),(4),(5);
 Query OK, 5 rows affected (0.03 sec)
 Records: 5  Duplicates: 0  Warnings: 0
 
-SELECT * FROM t1;
+mysql> SELECT * FROM t1;
 +----+----+
 | id | c1 |
 +----+----+
@@ -37,10 +37,10 @@ SELECT * FROM t1;
 +----+----+
 5 rows in set (0.00 sec)
 
-DELETE FROM t1 WHERE id = 4;
+mysql> DELETE FROM t1 WHERE id = 4;
 Query OK, 1 row affected (0.02 sec)
 
-SELECT * FROM t1;
+mysql> SELECT * FROM t1;
 +----+----+
 | id | c1 |
 +----+----+

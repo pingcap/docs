@@ -41,7 +41,7 @@ The statements `SET NAMES`, `SET CHARACTER SET` and `SET CHARSET` modify the var
 ## Examples
 
 ```sql
-SHOW VARIABLES LIKE 'character_set%';
+mysql> SHOW VARIABLES LIKE 'character_set%';
 +--------------------------+--------------------------------------------------------+
 | Variable_name            | Value                                                  |
 +--------------------------+--------------------------------------------------------+
@@ -56,10 +56,10 @@ SHOW VARIABLES LIKE 'character_set%';
 +--------------------------+--------------------------------------------------------+
 8 rows in set (0.01 sec)
 
-SET NAMES utf8;
+mysql> SET NAMES utf8;
 Query OK, 0 rows affected (0.00 sec)
 
-SHOW VARIABLES LIKE 'character_set%';
+mysql> SHOW VARIABLES LIKE 'character_set%';
 +--------------------------+--------------------------------------------------------+
 | Variable_name            | Value                                                  |
 +--------------------------+--------------------------------------------------------+
@@ -74,10 +74,10 @@ SHOW VARIABLES LIKE 'character_set%';
 +--------------------------+--------------------------------------------------------+
 8 rows in set (0.00 sec)
 
-SET CHARACTER SET utf8mb4;
+mysql> SET CHARACTER SET utf8mb4;
 Query OK, 0 rows affected (0.00 sec)
 
-SHOW VARIABLES LIKE 'character_set%';
+mysql> SHOW VARIABLES LIKE 'character_set%';
 +--------------------------+--------------------------------------------------------+
 | Variable_name            | Value                                                  |
 +--------------------------+--------------------------------------------------------+

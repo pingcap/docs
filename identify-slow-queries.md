@@ -40,7 +40,7 @@ TiDB enables the slow query log by default. You can enable or disable the featur
 # Succ: true
 # Plan: tidb_decode_plan('ZJAwCTMyXzcJMAkyMAlkYXRhOlRhYmxlU2Nhbl82CjEJMTBfNgkxAR0AdAEY1Dp0LCByYW5nZTpbLWluZiwraW5mXSwga2VlcCBvcmRlcjpmYWxzZSwgc3RhdHM6cHNldWRvCg==')
 use test;
-INSERT INTO t SELECT * FROM t;
+insert into t select * from t;
 ```
 
 ## Fields description
@@ -229,7 +229,7 @@ Output example:
 +--------------+------------------------------------------------------------------+
 | query_time   | query                                                            |
 +--------------+------------------------------------------------------------------+
-| 12.77583857  | SELECT * FROM t_slim, t_wide where t_slim.c0=t_wide.c0;          |
+| 12.77583857  | select * from t_slim, t_wide where t_slim.c0=t_wide.c0;          |
 |  0.734982725 | select t0.c0, t1.c1 from t_slim t0, t_wide t1 where t0.c0=t1.c0; |
 +--------------+------------------------------------------------------------------+
 ```
@@ -281,7 +281,7 @@ After querying the Top-N SQL statements, continue to query similar slow queries 
     +-------------+-----------------------------+------------------------------------------------------------------+
     | query_time  | query                       | digest                                                           |
     +-------------+-----------------------------+------------------------------------------------------------------+
-    | 0.302558006 | SELECT * FROM t1 where a=1; | 4751cb6008fda383e22dacb601fde85425dc8f8cf669338d55d944bafb46a6fa |
+    | 0.302558006 | select * from t1 where a=1; | 4751cb6008fda383e22dacb601fde85425dc8f8cf669338d55d944bafb46a6fa |
     +-------------+-----------------------------+------------------------------------------------------------------+
     ```
 
@@ -301,8 +301,8 @@ After querying the Top-N SQL statements, continue to query similar slow queries 
     +-----------------------------+-------------+
     | query                       | query_time  |
     +-----------------------------+-------------+
-    | SELECT * FROM t1 where a=1; | 0.302558006 |
-    | SELECT * FROM t1 where a=2; | 0.401313532 |
+    | select * from t1 where a=1; | 0.302558006 |
+    | select * from t1 where a=2; | 0.401313532 |
     +-----------------------------+-------------+
     ```
 
@@ -323,11 +323,11 @@ Output example:
 +-----------------------------+-------------+---------------------------------+
 | query                       | query_time  | stats                           |
 +-----------------------------+-------------+---------------------------------+
-| SELECT * FROM t1 where a=1; | 0.302558006 | t1:pseudo                       |
-| SELECT * FROM t1 where a=2; | 0.401313532 | t1:pseudo                       |
-| SELECT * FROM t1 where a>2; | 0.602011247 | t1:pseudo                       |
-| SELECT * FROM t1 where a>3; | 0.50077719  | t1:pseudo                       |
-| SELECT * FROM t1 join t2;   | 0.931260518 | t1:407872303825682445,t2:pseudo |
+| select * from t1 where a=1; | 0.302558006 | t1:pseudo                       |
+| select * from t1 where a=2; | 0.401313532 | t1:pseudo                       |
+| select * from t1 where a>2; | 0.602011247 | t1:pseudo                       |
+| select * from t1 where a>3; | 0.50077719  | t1:pseudo                       |
+| select * from t1 join t2;   | 0.931260518 | t1:407872303825682445,t2:pseudo |
 +-----------------------------+-------------+---------------------------------+
 ```
 

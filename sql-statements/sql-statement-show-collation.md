@@ -23,7 +23,7 @@ This statement provides a static list of collations, and is included to provide 
 When new collation framework is disabled, only binary collations are displayed.
 
 ```sql
-SHOW COLLATION;
+mysql> SHOW COLLATION;
 +-------------+---------+------+---------+----------+---------+
 | Collation   | Charset | Id   | Default | Compiled | Sortlen |
 +-------------+---------+------+---------+----------+---------+
@@ -39,7 +39,7 @@ SHOW COLLATION;
 When new collation framework is enabled, `utf8_general_ci` and `utf8mb4_general_ci` are additionally supported.
 
 ```sql
-SHOW COLLATION;
+mysql> SHOW COLLATION;
 +--------------------+---------+------+---------+----------+---------+
 | Collation          | Charset | Id   | Default | Compiled | Sortlen |
 +--------------------+---------+------+---------+----------+---------+

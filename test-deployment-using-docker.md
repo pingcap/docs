@@ -160,7 +160,7 @@ Install the [MySQL client](http://dev.mysql.com/downloads/mysql/) on **host1** a
 
 ```bash
 $ mysql -h 127.0.0.1 -P 4000 -u root -D test
-show databases;
+mysql> show databases;
 +--------------------+
 | Database           |
 +--------------------+

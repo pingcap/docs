@@ -126,5 +126,5 @@ After TiDB is integrated with Confluent Platform, you can follow the example pro
 
     ```shell
     sqlite3 test.db
-    sqlite> SELECT * FROM test;
+    sqlite> SELECT * from test;
     ```

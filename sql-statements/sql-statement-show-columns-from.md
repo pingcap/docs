@@ -59,10 +59,10 @@ The statements `SHOW [FULL] FIELDS FROM <table_name>`, `DESC <table_name>`, `DES
 ## Examples
 
 ```sql
-create view v1 as select 1;
+mysql> create view v1 as select 1;
 Query OK, 0 rows affected (0.11 sec)
 
-show columns from v1;
+mysql> show columns from v1;
 +-------+-----------+------+------+---------+-------+
 | Field | Type      | Null | Key  | Default | Extra |
 +-------+-----------+------+------+---------+-------+
@@ -70,7 +70,7 @@ show columns from v1;
 +-------+-----------+------+------+---------+-------+
 1 row in set (0.00 sec)
 
-desc v1;
+mysql> desc v1;
 +-------+-----------+------+------+---------+-------+
 | Field | Type      | Null | Key  | Default | Extra |
 +-------+-----------+------+------+---------+-------+
@@ -78,7 +78,7 @@ desc v1;
 +-------+-----------+------+------+---------+-------+
 1 row in set (0.00 sec)
 
-describe v1;
+mysql> describe v1;
 +-------+-----------+------+------+---------+-------+
 | Field | Type      | Null | Key  | Default | Extra |
 +-------+-----------+------+------+---------+-------+
@@ -86,7 +86,7 @@ describe v1;
 +-------+-----------+------+------+---------+-------+
 1 row in set (0.00 sec)
 
-explain v1;
+mysql> explain v1;
 +-------+-----------+------+------+---------+-------+
 | Field | Type      | Null | Key  | Default | Extra |
 +-------+-----------+------+------+---------+-------+
@@ -94,7 +94,7 @@ explain v1;
 +-------+-----------+------+------+---------+-------+
 1 row in set (0.00 sec)
 
-show fields from v1;
+mysql> show fields from v1;
 +-------+-----------+------+------+---------+-------+
 | Field | Type      | Null | Key  | Default | Extra |
 +-------+-----------+------+------+---------+-------+
@@ -102,7 +102,7 @@ show fields from v1;
 +-------+-----------+------+------+---------+-------+
 1 row in set (0.00 sec)
 
-show full columns from v1;
+mysql> show full columns from v1;
 +-------+-----------+-----------+------+------+---------+-------+---------------------------------+---------+
 | Field | Type      | Collation | Null | Key  | Default | Extra | Privileges                      | Comment |
 +-------+-----------+-----------+------+------+---------+-------+---------------------------------+---------+
@@ -110,7 +110,7 @@ show full columns from v1;
 +-------+-----------+-----------+------+------+---------+-------+---------------------------------+---------+
 1 row in set (0.00 sec)
 
-show full columns from mysql.user;
+mysql> show full columns from mysql.user;
 +-----------------------+---------------+-------------+------+------+---------+-------+---------------------------------+---------+
 | Field                 | Type          | Collation   | Null | Key  | Default | Extra | Privileges                      | Comment |
 +-----------------------+---------------+-------------+------+------+---------+-------+---------------------------------+---------+

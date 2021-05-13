@@ -50,26 +50,26 @@ ColumnPosition ::=
 ## Examples
 
 ```sql
-CREATE TABLE t1 (id int not null primary key AUTO_INCREMENT, col1 INT);
+mysql> CREATE TABLE t1 (id int not null primary key AUTO_INCREMENT, col1 INT);
 Query OK, 0 rows affected (0.11 sec)
 
-INSERT INTO t1 (col1) VALUES (1),(2),(3),(4),(5);
+mysql> INSERT INTO t1 (col1) VALUES (1),(2),(3),(4),(5);
 Query OK, 5 rows affected (0.02 sec)
 Records: 5  Duplicates: 0  Warnings: 0
 
 mysql>
-ALTER TABLE t1 CHANGE col1 col2 INT;
+mysql> ALTER TABLE t1 CHANGE col1 col2 INT;
 Query OK, 0 rows affected (0.09 sec)
 
-ALTER TABLE t1 CHANGE col2 col3 BIGINT, ALGORITHM=INSTANT;
+mysql> ALTER TABLE t1 CHANGE col2 col3 BIGINT, ALGORITHM=INSTANT;
 Query OK, 0 rows affected (0.08 sec)
 
 mysql>
-ALTER TABLE t1 CHANGE col3 col3 INT;
+mysql> ALTER TABLE t1 CHANGE col3 col3 INT;
 ERROR 1105 (HY000): unsupported modify column length 11 is less than origin 20
-ALTER TABLE t1 CHANGE col3 col3 BLOB;
+mysql> ALTER TABLE t1 CHANGE col3 col3 BLOB;
 ERROR 1105 (HY000): unsupported modify column type 252 not match origin 8
-ALTER TABLE t1 CHANGE col3 col4 BIGINT, CHANGE id id2 INT NOT NULL;
+mysql> ALTER TABLE t1 CHANGE col3 col4 BIGINT, CHANGE id id2 INT NOT NULL;
 ERROR 1105 (HY000): can't run multi schema change
 ```
 

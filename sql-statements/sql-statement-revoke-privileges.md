@@ -60,13 +60,13 @@ UserSpecList ::=
 ## Examples
 
 ```sql
-CREATE USER 'newuser' IDENTIFIED BY 'mypassword';
+mysql> CREATE USER 'newuser' IDENTIFIED BY 'mypassword';
 Query OK, 1 row affected (0.02 sec)
 
-GRANT ALL ON test.* TO 'newuser';
+mysql> GRANT ALL ON test.* TO 'newuser';
 Query OK, 0 rows affected (0.03 sec)
 
-SHOW GRANTS FOR 'newuser';
+mysql> SHOW GRANTS FOR 'newuser';
 +-------------------------------------------------+
 | Grants for newuser@%                            |
 +-------------------------------------------------+
@@ -75,10 +75,10 @@ SHOW GRANTS FOR 'newuser';
 +-------------------------------------------------+
 2 rows in set (0.00 sec)
 
-REVOKE ALL ON test.* FROM 'newuser';
+mysql> REVOKE ALL ON test.* FROM 'newuser';
 Query OK, 0 rows affected (0.03 sec)
 
-SHOW GRANTS FOR 'newuser';
+mysql> SHOW GRANTS FOR 'newuser';
 +-------------------------------------+
 | Grants for newuser@%                |
 +-------------------------------------+
@@ -86,10 +86,10 @@ SHOW GRANTS FOR 'newuser';
 +-------------------------------------+
 1 row in set (0.00 sec)
 
-DROP USER 'newuser';
+mysql> DROP USER 'newuser';
 Query OK, 0 rows affected (0.14 sec)
 
-SHOW GRANTS FOR 'newuser';
+mysql> SHOW GRANTS FOR 'newuser';
 ERROR 1141 (42000): There is no such grant defined for user 'newuser' on host '%'
 ```
 

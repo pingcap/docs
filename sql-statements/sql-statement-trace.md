@@ -23,7 +23,7 @@ The `TRACE` statement provides detailed information about query execution. It is
 {{< copyable "sql" >}}
 
 ```sql
-trace format='row' SELECT * FROM mysql.user;
+trace format='row' select * from mysql.user;
 ```
 
 ```
@@ -50,7 +50,7 @@ trace format='row' SELECT * FROM mysql.user;
 {{< copyable "sql" >}}
 
 ```sql
-trace format='json' SELECT * FROM mysql.user;
+trace format='json' select * from mysql.user;
 ```
 
 The JSON formatted trace can be pasted into the trace viewer, which is accessed via the TiDB status port:

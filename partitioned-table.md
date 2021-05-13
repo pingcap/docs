@@ -254,7 +254,7 @@ test> INSERT IGNORE INTO t VALUES (1, 1), (7, 7), (8, 8), (3, 3), (5, 5);
 Query OK, 3 rows affected, 2 warnings (0.01 sec)
 Records: 5  Duplicates: 2  Warnings: 2
 
-test> SELECT * FROM t;
+test> select * from t;
 +------+------+
 | a    | b    |
 +------+------+
@@ -460,7 +460,7 @@ Query OK, 0 rows affected (0.09 sec)
 {{< copyable "sql" >}}
 
 ```sql
-SELECT * FROM t1 partition(p0);
+select * from t1 partition(p0);
 ```
 
 ```
@@ -475,7 +475,7 @@ SELECT * FROM t1 partition(p0);
 {{< copyable "sql" >}}
 
 ```sql
-SELECT * FROM t1 partition(p1);
+select * from t1 partition(p1);
 ```
 
 ```
@@ -485,7 +485,7 @@ Empty set (0.00 sec)
 {{< copyable "sql" >}}
 
 ```sql
-SELECT * FROM t1 partition(p2);
+select * from t1 partition(p2);
 ```
 
 ```
@@ -507,7 +507,7 @@ Query OK, 0 rows affected (0.08 sec)
 {{< copyable "sql" >}}
 
 ```sql
-SELECT * FROM t1;
+select * from t1;
 ```
 
 ```
@@ -547,7 +547,7 @@ Query OK, 2 rows affected (0.04 sec)
 {{< copyable "sql" >}}
 
 ```sql
-SELECT * FROM th partition (p0);
+select * from th partition (p0);
 ```
 
 ```
@@ -563,7 +563,7 @@ SELECT * FROM th partition (p0);
 {{< copyable "sql" >}}
 
 ```sql
-SELECT * FROM th partition (p1);
+select * from th partition (p1);
 ```
 
 ```
@@ -719,22 +719,22 @@ The optimizer can prune partitions through `WHERE` conditions in the following t
     {{< copyable "sql" >}}
 
     ```sql
-    CREATE TABLE t1 (x int) partition by range (x) (
+    create table t1 (x int) partition by range (x) (
             partition p0 values less than (5),
             partition p1 values less than (10));
-    CREATE TABLE t2 (x int);
+    create table t2 (x int);
     ```
 
     {{< copyable "sql" >}}
 
     ```sql
-    explain SELECT * FROM t1 left join t2 on t1.x = t2.x where t2.x > 5;
+    explain select * from t1 left join t2 on t1.x = t2.x where t2.x > 5;
     ```
 
     In this query, the left out join is converted to the inner join, and then `t1.x > 5` is derived from `t1.x = t2.x` and `t2.x > 5`, so it could be used in partition pruning and only the partition `p1` remains.
 
     ```sql
-    explain SELECT * FROM t1 left join t2 on t1.x = t2.x and t2.x > 5;
+    explain select * from t1 left join t2 on t1.x = t2.x and t2.x > 5;
     ```
 
     In this query, `t2.x > 5` can not be pushed down to the `t1` partitioned table, so partition pruning would not take effect for this query.
@@ -746,7 +746,7 @@ The optimizer can prune partitions through `WHERE` conditions in the following t
     {{< copyable "sql" >}}
 
     ```sql
-    CREATE TABLE t1 (x int) partition by range (x) (
+    create table t1 (x int) partition by range (x) (
             partition p0 values less than (5),
             partition p1 values less than (10));
     ```
@@ -754,7 +754,7 @@ The optimizer can prune partitions through `WHERE` conditions in the following t
     {{< copyable "sql" >}}
 
     ```sql
-    explain SELECT * FROM t2 where x < (SELECT * FROM t1 where t2.x < t1.x and t2.x < 2);
+    explain select * from t2 where x < (select * from t1 where t2.x < t1.x and t2.x < 2);
     ```
 
     This query reads a row from `t2` and uses the result for the subquery on `t1`. Theoretically, partition pruning could benefit from `t1.x > val` expression in the subquery, but it does not take effect there as that happens in the execution phase.
@@ -783,10 +783,10 @@ The optimizer can prune partitions through `WHERE` conditions in the following t
     {{< copyable "sql" >}}
 
     ```sql
-    CREATE TABLE t (id int) partition by range (id) (
+    create table t (id int) partition by range (id) (
             partition p0 values less than (5),
             partition p1 values less than (10));
-    SELECT * FROM t where t > 6;
+    select * from t where t > 6;
     ```
 
     Or the partition expression is in the form of `fn(col)` where `fn` is `to_days`:
@@ -794,10 +794,10 @@ The optimizer can prune partitions through `WHERE` conditions in the following t
     {{< copyable "sql" >}}
 
     ```sql
-    CREATE TABLE t (dt datetime) partition by range (to_days(id)) (
+    create table t (dt datetime) partition by range (to_days(id)) (
             partition p0 values less than (to_days('2020-04-01')),
             partition p1 values less than (to_days('2020-05-01')));
-    SELECT * FROM t where t > '2020-04-18';
+    select * from t where t > '2020-04-18';
     ```
 
     An exception is `floor(unix_timestamp())` as the partition expression. TiDB does some optimization for that case by case, so it is supported by partition pruning.
@@ -805,11 +805,11 @@ The optimizer can prune partitions through `WHERE` conditions in the following t
     {{< copyable "sql" >}}
 
     ```sql
-    CREATE TABLE t (ts timestamp(3) not null default current_timestamp(3))
+    create table t (ts timestamp(3) not null default current_timestamp(3))
     partition by range (floor(unix_timestamp(ts))) (
             partition p0 values less than (unix_timestamp('2020-04-01 00:00:00')),
             partition p1 values less than (unix_timestamp('2020-05-01 00:00:00')));
-    SELECT * FROM t where t > '2020-04-18 02:00:42.123';
+    select * from t where t > '2020-04-18 02:00:42.123';
     ```
 
 ## Partition selection
@@ -1150,7 +1150,7 @@ The `LOAD DATA` syntax does not support partition selection currently in TiDB.
 {{< copyable "sql" >}}
 
 ```sql
-CREATE TABLE t (id int, val int) partition by hash(id) partitions 4;
+create table t (id int, val int) partition by hash(id) partitions 4;
 ```
 
 The regular `LOAD DATA` operation is supported:
@@ -1169,12 +1169,12 @@ But `Load Data` does not support partition selection:
 load local data infile "xxx" into t partition (p1)...
 ```
 
-For a partitioned table, the result returned by `SELECT * FROM t` is unordered between the partitions. This is different from the result in MySQL, which is ordered between the partitions but unordered inside the partitions.
+For a partitioned table, the result returned by `select * from t` is unordered between the partitions. This is different from the result in MySQL, which is ordered between the partitions but unordered inside the partitions.
 
 {{< copyable "sql" >}}
 
 ```sql
-CREATE TABLE t (id int, val int) partition by range (id) (
+create table t (id int, val int) partition by range (id) (
     partition p0 values less than (3),
     partition p1 values less than (7),
     partition p2 values less than (11));
@@ -1187,7 +1187,7 @@ Query OK, 0 rows affected (0.10 sec)
 {{< copyable "sql" >}}
 
 ```sql
-INSERT INTO t values (1, 2), (3, 4),(5, 6),(7,8),(9,10);
+insert into t values (1, 2), (3, 4),(5, 6),(7,8),(9,10);
 ```
 
 ```
@@ -1200,7 +1200,7 @@ TiDB returns a different result every time, for example:
 {{< copyable "sql" >}}
 
 ```sql
-SELECT * FROM t;
+select * from t;
 ```
 
 ```
@@ -1221,7 +1221,7 @@ The result returned in MySQL:
 {{< copyable "sql" >}}
 
 ```sql
-SELECT * FROM t;
+select * from t;
 ```
 
 ```

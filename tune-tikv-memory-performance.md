@@ -253,7 +253,7 @@ Besides `block cache` and `write buffer` which occupy the system memory, the sys
 
 + Some of the memory is reserved as the system's page cache.
 
-+ When TiKV processes large queries such as `SELECT * FROM ...`, it reads data, generates the corresponding data structure in the memory, and returns this structure to TiDB. During this process, TiKV occupies some of the memory.
++ When TiKV processes large queries such as `select * from ...`, it reads data, generates the corresponding data structure in the memory, and returns this structure to TiDB. During this process, TiKV occupies some of the memory.
 
 ## Recommended configuration of TiKV
 

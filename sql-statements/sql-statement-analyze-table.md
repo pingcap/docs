@@ -28,17 +28,17 @@ TableName ::=
 ## Examples
 
 ```sql
-CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, c1 INT NOT NULL);
+mysql> CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, c1 INT NOT NULL);
 Query OK, 0 rows affected (0.11 sec)
 
-INSERT INTO t1 (c1) VALUES (1),(2),(3),(4),(5);
+mysql> INSERT INTO t1 (c1) VALUES (1),(2),(3),(4),(5);
 Query OK, 5 rows affected (0.03 sec)
 Records: 5  Duplicates: 0  Warnings: 0
 
-ALTER TABLE t1 ADD INDEX (c1);
+mysql> ALTER TABLE t1 ADD INDEX (c1);
 Query OK, 0 rows affected (0.30 sec)
 
-EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
+mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 +------------------------+---------+-----------+------------------------+---------------------------------------------+
 | id                     | estRows | task      | access object          | operator info                               |
 +------------------------+---------+-----------+------------------------+---------------------------------------------+
@@ -47,10 +47,10 @@ EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 +------------------------+---------+-----------+------------------------+---------------------------------------------+
 2 rows in set (0.00 sec)
 
-analyze table t1;
+mysql> analyze table t1;
 Query OK, 0 rows affected (0.13 sec)
 
-EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
+mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 +------------------------+---------+-----------+------------------------+-------------------------------+
 | id                     | estRows | task      | access object          | operator info                 |
 +------------------------+---------+-----------+------------------------+-------------------------------+

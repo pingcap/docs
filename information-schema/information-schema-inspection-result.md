@@ -8,7 +8,7 @@ aliases: ['/docs/dev/system-tables/system-table-inspection-result/','/docs/dev/r
 
 TiDB has some built-in diagnostic rules for detecting faults and hidden issues in the system.
 
-The `INSPECTION_RESULT` diagnostic feature can help you quickly find problems and reduce your repetitive manual work. You can use the `SELECT * FROM information_schema.inspection_result` statement to trigger the internal diagnostics.
+The `INSPECTION_RESULT` diagnostic feature can help you quickly find problems and reduce your repetitive manual work. You can use the `select * from information_schema.inspection_result` statement to trigger the internal diagnostics.
 
 The structure of the `information_schema.inspection_result` diagnostic result table `information_schema.inspection_result` is as follows:
 
@@ -81,7 +81,7 @@ INSTANCE  |
 VALUE     | inconsistent
 REFERENCE | consistent
 SEVERITY  | critical
-DETAILS   | the cluster has 2 different tidb version, execute the sql to see more detail: SELECT * FROM information_schema.cluster_info where type='tidb'
+DETAILS   | the cluster has 2 different tidb version, execute the sql to see more detail: select * from information_schema.cluster_info where type='tidb'
 ***************************[ 3. row ]***************************
 RULE      | threshold-check
 ITEM      | storage-write-duration
@@ -147,7 +147,7 @@ You can also specify conditions, for example, to query the `critical` level diag
 {{< copyable "sql" >}}
 
 ```sql
-SELECT * FROM information_schema.inspection_result where severity='critical';
+select * from information_schema.inspection_result where severity='critical';
 ```
 
 Query only the diagnostic result of the `critical-error` rule:
@@ -155,7 +155,7 @@ Query only the diagnostic result of the `critical-error` rule:
 {{< copyable "sql" >}}
 
 ```sql
-SELECT * FROM information_schema.inspection_result where rule='critical-error';
+select * from information_schema.inspection_result where rule='critical-error';
 ```
 
 ## Diagnostic rules
@@ -167,7 +167,7 @@ You can query the existing diagnostic rules by querying the `inspection_rules` s
 {{< copyable "sql" >}}
 
 ```sql
-SELECT * FROM information_schema.inspection_rules where type='inspection';
+select * from information_schema.inspection_rules where type='inspection';
 ```
 
 ```sql

@@ -112,7 +112,7 @@ TiDB version: 4.0.0-rc.1
 - Fix the issue that the TiFlash store information in the `cluster_info` system table is wrong [#16024](https://github.com/pingcap/tidb/pull/16024)
 - Fix the panic that might occur during the Index Merge process [#16360](https://github.com/pingcap/tidb/pull/16360)
 - Fix the issue that an incorrect result might occur when the Index Merge reader reads the generated columns [#16359](https://github.com/pingcap/tidb/pull/16359)
-- Fix the incorrect display of the default sequence value in the `show CREATE TABLE` statement [#16526](https://github.com/pingcap/tidb/pull/16526)
+- Fix the incorrect display of the default sequence value in the `show create table` statement [#16526](https://github.com/pingcap/tidb/pull/16526)
 - Fix the issue that the `not-null` error is returned because the sequence is used as the default values of the primary key [#16510](https://github.com/pingcap/tidb/pull/16510)
 - Fix the issue that no error is reported for a blocked SQL execution when TiKV continues to return the `StaleCommand` error [#16530](https://github.com/pingcap/tidb/pull/16530)
 - Fix the issue that an error is reported if you only specify `COLLATE` when creating a database; add the missing `COLLATE` part in the result of `SHOW CREATE DATABASE` [#16540](https://github.com/pingcap/tidb/pull/16540)

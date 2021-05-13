@@ -9,7 +9,7 @@ summary: Understand how to decorrelate correlated subqueries.
 
 ## Introduction
 
-Take `SELECT * FROM t1 where t1.a < (select sum(t2.a) from t2 where t2.b = t1.b)` as an example. The subquery `t1.a < (select sum(t2.a) from t2 where t2.b = t1.b)` here refers to the correlated column in the query condition `t2.b=t1.b`, this condition happens to be an equivalent condition, so the query can be rewritten as `select t1.* from t1, (select b, sum(a) sum_a from t2 group by b) t2 where t1.b = t2.b and t1.a < t2.sum_a;`. In this way, a correlated subquery is rewritten into `JOIN`.
+Take `select * from t1 where t1.a < (select sum(t2.a) from t2 where t2.b = t1.b)` as an example. The subquery `t1.a < (select sum(t2.a) from t2 where t2.b = t1.b)` here refers to the correlated column in the query condition `t2.b=t1.b`, this condition happens to be an equivalent condition, so the query can be rewritten as `select t1.* from t1, (select b, sum(a) sum_a from t2 group by b) t2 where t1.b = t2.b and t1.a < t2.sum_a;`. In this way, a correlated subquery is rewritten into `JOIN`.
 
 The reason why TiDB needs to do this rewriting is that the correlated subquery is bound to its external query result every time the subquery is executed. In the above example, if `t1.a` has 10 million values, this subquery would repeat 10 million times, because the condition `t2.b=t1.b` varies with the value of `t1.a`. When the correlation is lifted somehow, this subquery would execute only once.
 
@@ -24,9 +24,9 @@ Therefore, when there are few external values, do not perform decorrelation, bec
 {{< copyable "sql" >}}
 
 ```sql
-CREATE TABLE t1(a int, b int);
-CREATE TABLE t2(a int, b int, index idx(b));
-explain SELECT * FROM t1 where t1.a < (select sum(t2.a) from t2 where t2.b = t1.b);
+create table t1(a int, b int);
+create table t2(a int, b int, index idx(b));
+explain select * from t1 where t1.a < (select sum(t2.a) from t2 where t2.b = t1.b);
 ```
 
 ```sql
@@ -53,9 +53,9 @@ Then, turn off the subquery decorrelation rules:
 {{< copyable "sql" >}}
 
 ```sql
-INSERT INTO mysql.opt_rule_blacklist values("decorrelate");
+insert into mysql.opt_rule_blacklist values("decorrelate");
 admin reload opt_rule_blacklist;
-explain SELECT * FROM t1 where t1.a < (select sum(t2.a) from t2 where t2.b = t1.b);
+explain select * from t1 where t1.a < (select sum(t2.a) from t2 where t2.b = t1.b);
 ```
 
 ```sql

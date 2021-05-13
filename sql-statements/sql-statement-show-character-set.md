@@ -21,7 +21,7 @@ This statement provides a static list of available character sets in TiDB. The o
 ## Examples
 
 ```sql
-SHOW CHARACTER SET;
+mysql> SHOW CHARACTER SET;
 +---------+---------------+-------------------+--------+
 | Charset | Description   | Default collation | Maxlen |
 +---------+---------------+-------------------+--------+

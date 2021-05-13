@@ -39,8 +39,8 @@ Field description:
 
 * `METRICS_NAME`: The monitoring table name.
 * `QUANTILE`: The percentile. You can specify `QUANTILE` using SQL statements. For example:
-    * `SELECT * FROM metrics_summary where quantile=0.99` specifies viewing the data of the 0.99 percentile.
-    * `SELECT * FROM metrics_summary where quantile in (0.80, 0.90, 0.99, 0.999)` specifies viewing the data of the 0.8, 0.90, 0.99, 0.999 percentiles at the same time.
+    * `select * from metrics_summary where quantile=0.99` specifies viewing the data of the 0.99 percentile.
+    * `select * from metrics_summary where quantile in (0.80, 0.90, 0.99, 0.999)` specifies viewing the data of the 0.8, 0.90, 0.99, 0.999 percentiles at the same time.
 * `SUM_VALUE`, `AVG_VALUE`, `MIN_VALUE`, and `MAX_VALUE` respectively mean the sum, the average value, the minimum value, and the maximum value.
 * `COMMENT`: The comment for the corresponding monitoring table.
 

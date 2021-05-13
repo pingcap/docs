@@ -31,13 +31,13 @@ To show tables in a different database, use `SHOW TABLES IN DatabaseName`.
 ## Examples
 
 ```sql
-CREATE TABLE t1 (a int);
+mysql> CREATE TABLE t1 (a int);
 Query OK, 0 rows affected (0.12 sec)
 
-CREATE VIEW v1 AS SELECT 1;
+mysql> CREATE VIEW v1 AS SELECT 1;
 Query OK, 0 rows affected (0.10 sec)
 
-SHOW TABLES;
+mysql> SHOW TABLES;
 +----------------+
 | Tables_in_test |
 +----------------+
@@ -46,7 +46,7 @@ SHOW TABLES;
 +----------------+
 2 rows in set (0.00 sec)
 
-SHOW FULL TABLES;
+mysql> SHOW FULL TABLES;
 +----------------+------------+
 | Tables_in_test | Table_type |
 +----------------+------------+
@@ -55,7 +55,7 @@ SHOW FULL TABLES;
 +----------------+------------+
 2 rows in set (0.00 sec)
 
-SHOW TABLES IN mysql;
+mysql> SHOW TABLES IN mysql;
 +-------------------------+
 | Tables_in_mysql         |
 +-------------------------+

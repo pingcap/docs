@@ -170,8 +170,8 @@ tidb-ctl base64decode [table_id] [base64_data]
 
     ```sql
     use test;
-    CREATE TABLE t (a int, b varchar(20),c datetime default current_timestamp , d timestamp default current_timestamp, unique index(a));
-    INSERT INTO t (a,b,c) values(1,"哈哈 hello",NULL);
+    create table t (a int, b varchar(20),c datetime default current_timestamp , d timestamp default current_timestamp, unique index(a));
+    insert into t (a,b,c) values(1,"哈哈 hello",NULL);
     alter table t add column e varchar(20);
     ```
 

@@ -36,14 +36,14 @@ StringName ::=
 Create a user with the `newuserpassword` password.
 
 ```sql
-CREATE USER 'newuser' IDENTIFIED BY 'newuserpassword';
+mysql> CREATE USER 'newuser' IDENTIFIED BY 'newuserpassword';
 Query OK, 1 row affected (0.04 sec)
 ```
 
 Create a user who can only log in to `192.168.1.1`.
 
 ```sql
-CREATE USER 'newuser2'@'192.168.1.1' IDENTIFIED BY 'newuserpassword';
+mysql> CREATE USER 'newuser2'@'192.168.1.1' IDENTIFIED BY 'newuserpassword';
 Query OK, 1 row affected (0.02 sec)
 ```
 

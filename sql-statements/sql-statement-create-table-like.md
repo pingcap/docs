@@ -22,14 +22,14 @@ LikeTableWithOrWithoutParen ::=
 ## Examples
 
 ```sql
-CREATE TABLE t1 (a INT NOT NULL);
+mysql> CREATE TABLE t1 (a INT NOT NULL);
 Query OK, 0 rows affected (0.13 sec)
 
-INSERT INTO t1 VALUES (1),(2),(3),(4),(5);
+mysql> INSERT INTO t1 VALUES (1),(2),(3),(4),(5);
 Query OK, 5 rows affected (0.02 sec)
 Records: 5  Duplicates: 0  Warnings: 0
 
-SELECT * FROM t1;
+mysql> SELECT * FROM t1;
 +---+
 | a |
 +---+
@@ -41,10 +41,10 @@ SELECT * FROM t1;
 +---+
 5 rows in set (0.00 sec)
 
-CREATE TABLE t2 LIKE t1;
+mysql> CREATE TABLE t2 LIKE t1;
 Query OK, 0 rows affected (0.10 sec)
 
-SELECT * FROM t2;
+mysql> SELECT * FROM t2;
 Empty set (0.00 sec)
 ```
 

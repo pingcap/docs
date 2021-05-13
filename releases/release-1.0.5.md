@@ -9,14 +9,14 @@ On December 26, 2017, TiDB 1.0.5 is released with the following updates:
 
 ## TiDB
 
-- [Add the max value for the current Auto_Increment ID in the `Show CREATE TABLE` statement.](https://github.com/pingcap/tidb/pull/5489)
+- [Add the max value for the current Auto_Increment ID in the `Show Create Table` statement.](https://github.com/pingcap/tidb/pull/5489)
 - [Fix a potential goroutine leak.](https://github.com/pingcap/tidb/pull/5486)
 - [Support outputting slow queries into a separate file.](https://github.com/pingcap/tidb/pull/5484)
 - [Load the `TimeZone` variable from TiKV when creating a new session.](https://github.com/pingcap/tidb/pull/5479)
-- [Support the schema state check so that the `Show CREATE TABLE`and `Analyze` statements process the public table/index only.](https://github.com/pingcap/tidb/pull/5474)
+- [Support the schema state check so that the `Show Create Table`and `Analyze` statements process the public table/index only.](https://github.com/pingcap/tidb/pull/5474)
 - [The `set transaction read only` should affect the `tx_read_only` variable.](https://github.com/pingcap/tidb/pull/5491)
 - [Clean up incremental statistic data when rolling back.](https://github.com/pingcap/tidb/pull/5391)
-- [Fix the issue of missing index length in the `Show CREATE TABLE` statement.](https://github.com/pingcap/tidb/pull/5421)
+- [Fix the issue of missing index length in the `Show Create Table` statement.](https://github.com/pingcap/tidb/pull/5421)
 
 ## PD
 

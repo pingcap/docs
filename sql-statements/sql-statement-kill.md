@@ -19,7 +19,7 @@ KillOrKillTiDB ::= 'KILL' 'TIDB'?
 ## Examples
 
 ```sql
-SHOW PROCESSLIST;
+mysql> SHOW PROCESSLIST;
 +------+------+-----------+------+---------+------+-------+------------------+
 | Id   | User | Host      | db   | Command | Time | State | Info             |
 +------+------+-----------+------+---------+------+-------+------------------+

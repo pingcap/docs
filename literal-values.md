@@ -168,9 +168,9 @@ X'1z' (z is not a hexadecimal legal digit)
 Hexadecimal literals written using `X'val'` notation must contain an even number of digits. If the length of `val` is an odd number (for example, `X'A'` or `X'11A'`), to avoid the syntax error, pad the value with a leading zero:
 
 ```sql
-select X'aff';
+mysql> select X'aff';
 ERROR 1105 (HY000): line 0 column 13 near ""hex literal: invalid hexadecimal format, must even numbers, but 3 (total length 13)
-select X'0aff';
+mysql> select X'0aff';
 +---------+
 | X'0aff' |
 +---------+
@@ -184,7 +184,7 @@ By default, a hexadecimal literal is a binary string.
 To convert a string or a number to a string in hexadecimal format, use the `HEX()` function:
 
 ```sql
-SELECT HEX('TiDB');
+mysql> SELECT HEX('TiDB');
 +-------------+
 | HEX('TiDB') |
 +-------------+
@@ -192,7 +192,7 @@ SELECT HEX('TiDB');
 +-------------+
 1 row in set (0.01 sec)
 
-SELECT X'54694442';
+mysql> SELECT X'54694442';
 +-------------+
 | X'54694442' |
 +-------------+
@@ -230,7 +230,7 @@ INSERT INTO t SET b = b'00010011';
 INSERT INTO t SET b = b'1110';
 INSERT INTO t SET b = b'100101';
 
-SELECT b+0, BIN(b), HEX(b) FROM t;
+mysql> SELECT b+0, BIN(b), HEX(b) FROM t;
 +------+--------+--------+
 | b+0  | BIN(b) | HEX(b) |
 +------+--------+--------+

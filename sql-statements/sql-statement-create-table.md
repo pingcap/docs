@@ -113,13 +113,13 @@ SELECT * FROM t1;
 ```
 
 ```
-drop table if exists t1;
+mysql> drop table if exists t1;
 Query OK, 0 rows affected (0.23 sec)
 
-CREATE TABLE t1 (a int);
+mysql> CREATE TABLE t1 (a int);
 Query OK, 0 rows affected (0.09 sec)
 
-DESC t1;
+mysql> DESC t1;
 +-------+---------+------+------+---------+-------+
 | Field | Type    | Null | Key  | Default | Extra |
 +-------+---------+------+------+---------+-------+
@@ -127,18 +127,18 @@ DESC t1;
 +-------+---------+------+------+---------+-------+
 1 row in set (0.00 sec)
 
-SHOW CREATE TABLE t1\G
+mysql> SHOW CREATE TABLE t1\G
 *************************** 1. row ***************************
        Table: t1
-CREATE TABLE: CREATE TABLE `t1` (
+Create Table: CREATE TABLE `t1` (
   `a` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
 1 row in set (0.00 sec)
 
-INSERT INTO t1 (a) VALUES (1);
+mysql> INSERT INTO t1 (a) VALUES (1);
 Query OK, 1 row affected (0.03 sec)
 
-SELECT * FROM t1;
+mysql> SELECT * FROM t1;
 +------+
 | a    |
 +------+
@@ -161,16 +161,16 @@ DESC t1;
 ```
 
 ```sql
-DROP TABLE IF EXISTS t1;
+mysql> DROP TABLE IF EXISTS t1;
 Query OK, 0 rows affected (0.22 sec)
 
-CREATE TABLE IF NOT EXISTS t1 (
+mysql> CREATE TABLE IF NOT EXISTS t1 (
     ->  id BIGINT NOT NULL PRIMARY KEY auto_increment,
     ->  b VARCHAR(200) NOT NULL
     -> );
 Query OK, 0 rows affected (0.08 sec)
 
-DESC t1;
+mysql> DESC t1;
 +-------+--------------+------+------+---------+----------------+
 | Field | Type         | Null | Key  | Default | Extra          |
 +-------+--------------+------+------+---------+----------------+

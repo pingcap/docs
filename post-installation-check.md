@@ -149,7 +149,7 @@ Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
     {{< copyable "sql" >}}
 
     ```sql
-    INSERT INTO `tab_tidb` values (1,'TiDB',5,'TiDB-v5.0.0');
+    insert into `tab_tidb` values (1,'TiDB',5,'TiDB-v5.0.0');
     ```
 
     Expected output:
@@ -163,7 +163,7 @@ Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
     {{< copyable "sql" >}}
 
     ```sql
-    SELECT * FROM tab_tidb;
+    select * from tab_tidb;
     ```
 
     Expected output:

@@ -28,13 +28,13 @@ Identifier ::=
 ## Examples
 
 ```sql
-PREPARE mystmt FROM 'SELECT ? as num FROM DUAL';
+mysql> PREPARE mystmt FROM 'SELECT ? as num FROM DUAL';
 Query OK, 0 rows affected (0.00 sec)
 
-SET @number = 5;
+mysql> SET @number = 5;
 Query OK, 0 rows affected (0.00 sec)
 
-EXECUTE mystmt USING @number;
+mysql> EXECUTE mystmt USING @number;
 +------+
 | num  |
 +------+
@@ -42,7 +42,7 @@ EXECUTE mystmt USING @number;
 +------+
 1 row in set (0.00 sec)
 
-DEALLOCATE PREPARE mystmt;
+mysql> DEALLOCATE PREPARE mystmt;
 Query OK, 0 rows affected (0.00 sec)
 ```
 

@@ -8,7 +8,7 @@ summary: Learn about the execution plan information returned by the `EXPLAIN` st
 `IndexMerge` is a method introduced in TiDB v4.0 to access tables. Using this method, the TiDB optimizer can use multiple indexes per table and merge the results returned by each index. In some scenarios, this method makes the query more efficient by avoiding full table scans.
 
 ```sql
-EXPLAIN SELECT * from t where a = 1 or b = 1;
+mysql> EXPLAIN SELECT * from t where a = 1 or b = 1;
 +-------------------------+----------+-----------+---------------+--------------------------------------+
 | id                      | estRows  | task      | access object | operator info                        |
 +-------------------------+----------+-----------+---------------+--------------------------------------+
@@ -16,8 +16,8 @@ EXPLAIN SELECT * from t where a = 1 or b = 1;
 | └─Selection_6           | 8000.00  | cop[tikv] |               | or(eq(test.t.a, 1), eq(test.t.b, 1)) |
 |   └─TableFullScan_5     | 10000.00 | cop[tikv] | table:t       | keep order:false, stats:pseudo       |
 +-------------------------+----------+-----------+---------------+--------------------------------------+
-set @@tidb_enable_index_merge = 1;
-explain select * from t use index(idx_a, idx_b) where a > 1 or b > 1;
+mysql> set @@tidb_enable_index_merge = 1;
+mysql> explain select * from t use index(idx_a, idx_b) where a > 1 or b > 1;
 +--------------------------------+---------+-----------+-------------------------+------------------------------------------------+
 | id                             | estRows | task      | access object           | operator info                                  |
 +--------------------------------+---------+-----------+-------------------------+------------------------------------------------+
