@@ -296,9 +296,9 @@ Currently, TiFlash does not support some features. These features might be incom
     * Currently, TiFlash's decimal division calculation is incompatible with that of TiDB. For example, when dividing decimal, TiFlash performs the calculation always using the type inferred from the compiling. However, TiDB performs this calculation using a type that is more precise than that inferred from the compiling. Therefore, some SQL statements involving the decimal division return different execution results when executed in TiDB + TiKV and in TiDB + TiFlash. For example:
 
         ```sql
-        mysql> create table t (a decimal(3,0), b decimal(10, 0));
+        mysql> CREATE TABLE t (a decimal(3,0), b decimal(10, 0));
         Query OK, 0 rows affected (0.07 sec)
-        mysql> insert into t values (43, 1044774912);
+        mysql> INSERT INTO t values (43, 1044774912);
         Query OK, 1 row affected (0.03 sec)
         mysql> alter table t set tiflash replica 1;
         Query OK, 0 rows affected (0.07 sec)

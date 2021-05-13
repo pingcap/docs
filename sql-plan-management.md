@@ -27,9 +27,9 @@ Specifically, two types of these statements cannot be bound to execution plans d
 ```sql
 -- Type one: Statements that get the Cartesian product by using the `join` keyword and not specifying the associated columns with the `using` keyword.
 create global binding for
-    select * from t t1 join t t2
+    SELECT * FROM t t1 join t t2
 using
-    select * from t t1 join t t2;
+    SELECT * FROM t t1 join t t2;
 
 -- Type two: `DELETE` statements that contain the `using` keyword.
 create global binding for
@@ -43,15 +43,15 @@ You can bypass syntax conflicts by using equivalent statements. For example, you
 ```sql
 -- First rewrite of type one statements: Add a `using` clause for the `join` keyword.
 create global binding for
-    select * from t t1 join t t2 using (a)
+    SELECT * FROM t t1 join t t2 using (a)
 using
-    select * from t t1 join t t2 using (a);
+    SELECT * FROM t t1 join t t2 using (a);
 
 -- Second rewrite of type one statements: Delete the `join` keyword.
 create global binding for
-    select * from t t1, t t2
+    SELECT * FROM t t1, t t2
 using
-    select * from t t1, t t2;
+    SELECT * FROM t t1, t t2;
 
 -- Rewrite of type two statements: Remove the `using` keyword from the `delete` statement.
 create global binding for
@@ -69,15 +69,15 @@ Here are two examples:
 ```sql
 -- The hint takes effect in the following statement.
 create global binding for
-    insert into t1 select * from t2 where a > 1 and b = 1
+    INSERT INTO t1 SELECT * FROM t2 where a > 1 and b = 1
 using
-    insert into t1 select /*+ use_index(@sel_1 t2, a) */ * from t2 where a > 1 and b = 1;
+    INSERT INTO t1 select /*+ use_index(@sel_1 t2, a) */ * from t2 where a > 1 and b = 1;
 
 -- The hint cannot take effect in the following statement.
 create global binding for
-    insert into t1 select * from t2 where a > 1 and b = 1
+    INSERT INTO t1 SELECT * FROM t2 where a > 1 and b = 1
 using
-    insert /*+ use_index(@sel_1 t2, a) */ into t1 select * from t2 where a > 1 and b = 1;
+    insert /*+ use_index(@sel_1 t2, a) */ into t1 SELECT * FROM t2 where a > 1 and b = 1;
 ```
 
 If you do not specify the scope when creating an execution plan binding, the default scope is SESSION. The TiDB optimizer normalizes bound SQL statements and stores them in the system table. When processing SQL queries, if a normalized statement matches one of the bound SQL statements in the system table and the system variable `tidb_use_plan_baselines` is set to `on` (the default value is `on`), TiDB then uses the corresponding optimizer hint for this statement. If there are multiple matchable execution plans, the optimizer chooses the least costly one to bind.
@@ -85,9 +85,9 @@ If you do not specify the scope when creating an execution plan binding, the def
 `Normalization` is a process that converts a constant in an SQL statement to a variable parameter and explicitly specifies the database for tables referenced in the query, with standardized processing on the spaces and line breaks in the SQL statement. See the following example:
 
 ```sql
-select * from t where a >    1
+SELECT * FROM t where a >    1
 -- Normalized:
-select * from test . t where a > ?
+SELECT * FROM test . t where a > ?
 ```
 
 When a SQL statement has bound execution plans in both GLOBAL and SESSION scopes, because the optimizer ignores the bound execution plan in the GLOBAL scope when it encounters the SESSION binding, the bound execution plan of this statement in the SESSION scope shields the execution plan in the GLOBAL scope.
@@ -97,21 +97,21 @@ For example:
 ```sql
 --  Creates a GLOBAL binding and specifies using `sort merge join` in this binding.
 create global binding for
-    select * from t1, t2 where t1.id = t2.id
+    SELECT * FROM t1, t2 where t1.id = t2.id
 using
     select /*+ merge_join(t1, t2) */ * from t1, t2 where t1.id = t2.id;
 
 -- The execution plan of this SQL statement uses the `sort merge join` specified in the GLOBAL binding.
-explain select * from t1, t2 where t1.id = t2.id;
+explain SELECT * FROM t1, t2 where t1.id = t2.id;
 
 -- Creates another SESSION binding and specifies using `hash join` in this binding.
 create binding for
-    select * from t1, t2 where t1.id = t2.id
+    SELECT * FROM t1, t2 where t1.id = t2.id
 using
     select /*+ hash_join(t1, t2) */ * from t1, t2 where t1.id = t2.id;
 
 -- In the execution plan of this statement, `hash join` specified in the SESSION binding is used, instead of `sort merge join` specified in the GLOBAL binding.
-explain select * from t1, t2 where t1.id = t2.id;
+explain SELECT * FROM t1, t2 where t1.id = t2.id;
 ```
 
 When the first `select` statement is being executed, the optimizer adds the `sm_join(t1, t2)` hint to the statement through the binding in the GLOBAL scope. The top node of the execution plan in the `explain` result is MergeJoin. When the second `select` statement is being executed, the optimizer uses the binding in the SESSION scope instead of the binding in the GLOBAL scope and adds the `hash_join(t1, t2)` hint to the statement. The top node of the execution plan in the `explain` result is HashJoin.
@@ -122,13 +122,13 @@ In addition, when you create a binding, TiDB requires that the session is in a d
 
 The original SQL statement and the bound statement must have the same text after normalization and hint removal, or the binding will fail. Take the following examples:
 
-- This binding can be created successfully because the texts before and after parameterization and hint removal are the same: `select * from test . t where a > ?`
+- This binding can be created successfully because the texts before and after parameterization and hint removal are the same: `SELECT * FROM test . t where a > ?`
 
      ```sql
      CREATE BINDING FOR SELECT * FROM t WHERE a > 1 USING SELECT * FROM t use index  (idx) WHERE a > 2
      ```
 
-- This binding will fail because the original SQL statement is processed as `select * from test . t where a > ?`, while the bound SQL statement is processed differently as `select * from test . t where b > ?`.
+- This binding will fail because the original SQL statement is processed as `SELECT * FROM test . t where a > ?`, while the bound SQL statement is processed differently as `SELECT * FROM test . t where b > ?`.
 
      ```sql
      CREATE BINDING FOR SELECT * FROM t WHERE a > 1 USING SELECT * FROM t use index(idx) WHERE b > 2
@@ -154,10 +154,10 @@ The following example is based on the example in [create binding](#create-a-bind
 
 ```sql
 -- Drops the binding created in the SESSION scope.
-drop session binding for select * from t1, t2 where t1.id = t2.id;
+drop session binding for SELECT * FROM t1, t2 where t1.id = t2.id;
 
 -- Views the SQL execution plan again.
-explain select * from t1,t2 where t1.id = t2.id;
+explain SELECT * FROM t1,t2 where t1.id = t2.id;
 ```
 
 In the example above, the dropped binding in the SESSION scope shields the corresponding binding in the GLOBAL scope. The optimizer does not add the `sm_join(t1, t2)` hint to the statement. The top node of the execution plan in the `explain` result is not fixed to MergeJoin by this hint. Instead, the top node is independently selected by the optimizer according to the cost estimation.
@@ -237,7 +237,7 @@ Assume that table `t` is defined as follows:
 {{< copyable "sql" >}}
 
 ```sql
-create table t(a int, b int, key(a), key(b));
+CREATE TABLE t(a int, b int, key(a), key(b));
 ```
 
 Perform the following query on table `t`:
@@ -245,7 +245,7 @@ Perform the following query on table `t`:
 {{< copyable "sql" >}}
 
 ```sql
-select * from t where a < 100 and b < 100;
+SELECT * FROM t where a < 100 and b < 100;
 ```
 
 In the table defined above, few rows meet the `a < 100` condition. But for some reason, the optimizer mistakenly selects the full table scan instead of the optimal execution plan that uses index `a`. You can first use the following statement to create a binding:
@@ -253,7 +253,7 @@ In the table defined above, few rows meet the `a < 100` condition. But for some 
 {{< copyable "sql" >}}
 
 ```sql
-create global binding for select * from t where a < 100 and b < 100 using select * from t use index(a) where a < 100 and b < 100;
+create global binding for SELECT * FROM t where a < 100 and b < 100 using SELECT * FROM t use index(a) where a < 100 and b < 100;
 ```
 
 When the query above is executed again, the optimizer selects index `a` (influenced by the binding created above) to reduce the query time.

@@ -112,7 +112,7 @@ When an expression in a query is equivalent to a generated column with an index,
 For example, the following example creates a generated column for the expression `a+1` and adds an index:
 
 ```sql
-create table t(a int);
+CREATE TABLE t(a int);
 desc select a+1 from t where a+1=3;
 +---------------------------+----------+-----------+---------------+--------------------------------+
 | id                        | estRows  | task      | access object | operator info                  |

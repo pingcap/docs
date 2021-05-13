@@ -236,7 +236,7 @@ Here we can already see the `tidb_binlog` database, which contains the `checkpoi
 ```sql
 MariaDB [tidb_binlog]> use tidb_binlog;
 Database changed
-MariaDB [tidb_binlog]> select * from checkpoint;
+MariaDB [tidb_binlog]> SELECT * FROM checkpoint;
 +---------------------+---------------------------------------------+
 | clusterID           | checkPoint                                  |
 +---------------------+---------------------------------------------+
@@ -254,9 +254,9 @@ mysql -h 127.0.0.1 -P 4000 --prompt='TiDB [\d]> ' -u root
 ```sql
 create database tidbtest;
 use tidbtest;
-create table t1 (id int unsigned not null AUTO_INCREMENT primary key);
-insert into t1 () values (),(),(),(),();
-select * from t1;
+CREATE TABLE t1 (id int unsigned not null AUTO_INCREMENT primary key);
+INSERT INTO t1 () values (),(),(),(),();
+SELECT * FROM t1;
 ```
 
 Expected output:
@@ -267,14 +267,14 @@ Query OK, 0 rows affected (0.12 sec)
 
 TiDB [(none)]> use tidbtest;
 Database changed
-TiDB [tidbtest]> create table t1 (id int unsigned not null AUTO_INCREMENT primary key);
+TiDB [tidbtest]> CREATE TABLE t1 (id int unsigned not null AUTO_INCREMENT primary key);
 Query OK, 0 rows affected (0.11 sec)
 
-TiDB [tidbtest]> insert into t1 () values (),(),(),(),();
+TiDB [tidbtest]> INSERT INTO t1 () values (),(),(),(),();
 Query OK, 5 rows affected (0.01 sec)
 Records: 5  Duplicates: 0  Warnings: 0
 
-TiDB [tidbtest]> select * from t1;
+TiDB [tidbtest]> SELECT * FROM t1;
 +----+
 | id |
 +----+
@@ -292,7 +292,7 @@ Switching back to the MariaDB client, we should find the new database, new table
 ```sql
 use tidbtest;
 show tables;
-select * from t1;
+SELECT * FROM t1;
 ```
 
 Expected output:
@@ -311,7 +311,7 @@ MariaDB [tidbtest]> show tables;
 +--------------------+
 1 row in set (0.00 sec)
 
-MariaDB [tidbtest]> select * from t1;
+MariaDB [tidbtest]> SELECT * FROM t1;
 +----+
 | id |
 +----+

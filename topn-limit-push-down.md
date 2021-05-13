@@ -22,8 +22,8 @@ This section illustrates TopN pushdown through some examples.
 {{< copyable "sql" >}}
 
 ```sql
-create table t(id int primary key, a int not null);
-explain select * from t order by a limit 10;
+CREATE TABLE t(id int primary key, a int not null);
+explain SELECT * FROM t order by a limit 10;
 ```
 
 ```
@@ -45,9 +45,9 @@ In this query, the TopN operator node is pushed down to TiKV for data filtering,
 {{< copyable "sql" >}}
 
 ```sql
-create table t(id int primary key, a int not null);
-create table s(id int primary key, a int not null);
-explain select * from t left join s on t.a = s.a order by t.a limit 10;
+CREATE TABLE t(id int primary key, a int not null);
+CREATE TABLE s(id int primary key, a int not null);
+explain SELECT * FROM t left join s on t.a = s.a order by t.a limit 10;
 ```
 
 ```
@@ -73,9 +73,9 @@ In this query, the sorting rule of the TopN operator only depends on the columns
 {{< copyable "sql" >}}
 
 ```sql
-create table t(id int primary key, a int not null);
-create table s(id int primary key, a int not null);
-explain select * from t join s on t.a = s.a order by t.id limit 10;
+CREATE TABLE t(id int primary key, a int not null);
+CREATE TABLE s(id int primary key, a int not null);
+explain SELECT * FROM t join s on t.a = s.a order by t.id limit 10;
 ```
 
 ```
@@ -101,9 +101,9 @@ Similarly, TopN can neither be pushed down to the inner table of Outer Join, nor
 {{< copyable "sql" >}}
 
 ```sql
-create table t(id int primary key, a int not null);
-create table s(id int primary key, a int not null);
-explain select * from t left join s on t.a = s.a order by t.id limit 10;
+CREATE TABLE t(id int primary key, a int not null);
+CREATE TABLE s(id int primary key, a int not null);
+explain SELECT * FROM t left join s on t.a = s.a order by t.id limit 10;
 ```
 
 ```

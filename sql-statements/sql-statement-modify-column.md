@@ -62,7 +62,7 @@ Query OK, 0 rows affected (0.09 sec)
 mysql> SHOW CREATE TABLE t1\G
 *************************** 1. row ***************************
        Table: t1
-Create Table: CREATE TABLE `t1` (
+CREATE TABLE: CREATE TABLE `t1` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `col1` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`)

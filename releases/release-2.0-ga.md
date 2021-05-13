@@ -24,7 +24,7 @@ On April 27, 2018, TiDB 2.0 GA is released! Compared with TiDB 1.0, this release
 - SQL Execution Engine
     - Refactor all operators using the Chunk architecture, improve the execution performance of analytical queries, and reduce memory usage. There is a significant improvement in the TPC-H benchmark result.
     - Support the Streaming Aggregation operators pushdown
-    - Optimize the `Insert Into Ignore` statement to improve the performance by over 10 times
+    - Optimize the `INSERT INTO Ignore` statement to improve the performance by over 10 times
     - Optimize the `Insert On Duplicate Key Update` statement to improve the performance by over 10 times
     - Optimize `Load Data` to improve the performance by over 10 times
     - Push down more data types and functions to TiKV

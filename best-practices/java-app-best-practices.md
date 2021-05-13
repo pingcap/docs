@@ -124,7 +124,7 @@ To verify that this setting already takes effect, you can do:
 While processing batch writes, it is recommended to configure `rewriteBatchedStatements=true`. After using `addBatch()` or `executeBatch()`, JDBC still sends SQL one by one by default, for example:
 
 ```java
-pstmt = prepare(“insert into t (a) values(?)”);
+pstmt = prepare(“INSERT INTO t (a) values(?)”);
 pstmt.setInt(1, 10);
 pstmt.addBatch();
 pstmt.setInt(1, 11);
@@ -138,9 +138,9 @@ Although `Batch` methods are used, the SQL statements sent to TiDB are still ind
 {{< copyable "sql" >}}
 
 ```sql
-insert into t(a) values(10);
-insert into t(a) values(11);
-insert into t(a) values(12);
+INSERT INTO t(a) values(10);
+INSERT INTO t(a) values(11);
+INSERT INTO t(a) values(12);
 ```
 
 But if you set `rewriteBatchedStatements=true`, the SQL statements sent to TiDB will be a single `INSERT` statement:
@@ -148,7 +148,7 @@ But if you set `rewriteBatchedStatements=true`, the SQL statements sent to TiDB 
 {{< copyable "sql" >}}
 
 ```sql
-insert into t(a) values(10),(11),(12);
+INSERT INTO t(a) values(10),(11),(12);
 ```
 
 Note that the rewrite of the `INSERT` statements is to concatenate the values after multiple "values" keywords into a whole SQL statement. If the `INSERT` statements have other differences, they cannot be rewritten, for example:
@@ -156,9 +156,9 @@ Note that the rewrite of the `INSERT` statements is to concatenate the values af
 {{< copyable "sql" >}}
 
 ```sql
-insert into t (a) values (10) on duplicate key update a = 10;
-insert into t (a) values (11) on duplicate key update a = 11;
-insert into t (a) values (12) on duplicate key update a = 12;
+INSERT INTO t (a) values (10) on duplicate key update a = 10;
+INSERT INTO t (a) values (11) on duplicate key update a = 11;
+INSERT INTO t (a) values (12) on duplicate key update a = 12;
 ```
 
 The above `INSERT` statements cannot be rewritten into one statement. But if you change the three statements into the following ones:
@@ -166,9 +166,9 @@ The above `INSERT` statements cannot be rewritten into one statement. But if you
 {{< copyable "sql" >}}
 
 ```sql
-insert into t (a) values (10) on duplicate key update a = values(a);
-insert into t (a) values (11) on duplicate key update a = values(a);
-insert into t (a) values (12) on duplicate key update a = values(a);
+INSERT INTO t (a) values (10) on duplicate key update a = values(a);
+INSERT INTO t (a) values (11) on duplicate key update a = values(a);
+INSERT INTO t (a) values (12) on duplicate key update a = values(a);
 ```
 
 Then they meet the rewrite requirement. The above `INSERT` statements will be rewritten into the following one statement:
@@ -176,7 +176,7 @@ Then they meet the rewrite requirement. The above `INSERT` statements will be re
 {{< copyable "sql" >}}
 
 ```sql
-insert into t (a) values (10), (11), (12) on duplicate key update a = values(a);
+INSERT INTO t (a) values (10), (11), (12) on duplicate key update a = values(a);
 ```
 
 If there are three or more updates during the batch update, the SQL statements will be rewritten and sent as multiple queries. This effectively reduces the client-to-server request overhead, but the side effect is that a larger SQL statement is generated. For example:
@@ -265,7 +265,7 @@ To support the automatic rewriting of multiple `INSERT` statements into the form
 
 ```xml
 <insert id="insertTestBatch" parameterType="java.util.List" fetchSize="1">
-  insert into test
+  INSERT INTO test
    (id, v1, v2)
   values
   <foreach item="item" index="index" collection="list" separator=",">
@@ -293,14 +293,14 @@ If you configure mappings using XML, you can stream read results by configuring 
 
 ```xml
 <select id="getAll" resultMap="postResultMap" fetchSize="-2147483648">
-  select * from post;
+  SELECT * FROM post;
 </select>
 ```
 
 If you configure mappings using code, you can add the `@Options(fetchSize = Integer.MIN_VALUE)` annotation and keep the type of results as `Cursor` so that the SQL results can be read in streaming.
 
 ```java
-@Select("select * from post")
+@Select("SELECT * FROM post")
 @Options(fetchSize = Integer.MIN_VALUE)
 Cursor<Post> queryAllPost();
 ```

@@ -133,7 +133,7 @@ Region information on the TiDB side might be outdated. In this situation, TiKV m
 
 #### Subqueries are executed in advance
 
-For statements with non-correlated subqueries, the subquery part might be executed in advance. For example, in `select * from t1 where a = (select max(a) from t2)`, the `select max(a) from t2` part might be executed in advance in the optimization stage. The result of `EXPLAIN ANALYZE` does not show the duration of this type of subqueries.
+For statements with non-correlated subqueries, the subquery part might be executed in advance. For example, in `SELECT * FROM t1 where a = (select max(a) from t2)`, the `select max(a) from t2` part might be executed in advance in the optimization stage. The result of `EXPLAIN ANALYZE` does not show the duration of this type of subqueries.
 
 ```sql
 mysql> explain analyze select count(*) from t where a=(select max(t1.a) from t t1, t t2 where t1.a=t2.a);
@@ -218,7 +218,7 @@ Join operations with Cartesian product generate data volume as large as `left ch
 This type of join operations is marked `CARTESIAN` in the execution plan. For example:
 
 ```sql
-mysql> explain select * from t t1, t t2 where t1.a>t2.a;
+mysql> explain SELECT * FROM t t1, t t2 where t1.a>t2.a;
 +------------------------------+-------------+-----------+---------------+---------------------------------------------------------+
 | id                           | estRows     | task      | access object | operator info                                           |
 +------------------------------+-------------+-----------+---------------+---------------------------------------------------------+
@@ -236,11 +236,11 @@ mysql> explain select * from t t1, t t2 where t1.a>t2.a;
 
 To analyze optimizer issues, you need to determine whether the execution plan is reasonable or not. You need to have some understanding of the optimization process and each operator.
 
-For the following examples, assume that the table schema is `create table t (id int, a int, b int, c int, primary key(id), key(a), key(b, c))`.
+For the following examples, assume that the table schema is `CREATE TABLE t (id int, a int, b int, c int, primary key(id), key(a), key(b, c))`.
 
-1. `select * from t`: There is no filter condition and a full table scan is performed. So the `TableFullScan` operator is used to read data.
+1. `SELECT * FROM t`: There is no filter condition and a full table scan is performed. So the `TableFullScan` operator is used to read data.
 2. `select a from t where a=2`: There is a filter condition and only the index columns are read, so the `IndexReader` operator is used to read data.
-3. `select * from t where a=2`: There is a filter condition for `a` but the `a` index cannot fully cover the data to be read, so the `IndexLookup` operator is used.
+3. `SELECT * FROM t where a=2`: There is a filter condition for `a` but the `a` index cannot fully cover the data to be read, so the `IndexLookup` operator is used.
 4. `select b from t where c=3`: Without the prefix condition, the multi-column index cannot be used. So the `IndexFullScan` is used.
 5. ...
 

@@ -130,7 +130,7 @@ mysql> DESC t1;
 mysql> SHOW CREATE TABLE t1\G
 *************************** 1. row ***************************
        Table: t1
-Create Table: CREATE TABLE `t1` (
+CREATE TABLE: CREATE TABLE `t1` (
   `a` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
 1 row in set (0.00 sec)

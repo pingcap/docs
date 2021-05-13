@@ -28,7 +28,7 @@ On June 21, 2019, TiDB 3.0.0-rc.3 is released. The corresponding TiDB Ansible ve
 
 + Execution Engine
     - Fix the issue that resources are not correctly released when calling the `Close` function in `StreamAggExec` [#10636](https://github.com/pingcap/tidb/pull/10636)
-    - Fix the issue that the order of `table_option` and `partition_options` is incorrect in the result of executing the `show create table` statement for partitioned tables [#10689](https://github.com/pingcap/tidb/pull/10689)
+    - Fix the issue that the order of `table_option` and `partition_options` is incorrect in the result of executing the `show CREATE TABLE` statement for partitioned tables [#10689](https://github.com/pingcap/tidb/pull/10689)
     - Improve the performance of `admin show ddl jobs` by supporting scanning data in reverse order [#10687](https://github.com/pingcap/tidb/pull/10687)
     - Fix the issue that the result of the `show grants` statement in RBAC is incompatible with that of MySQL when this statement has the `current_user` field [#10684](https://github.com/pingcap/tidb/pull/10684)
     - Fix the issue that UUIDs might generate duplicate values on multiple nodes [#10712](https://github.com/pingcap/tidb/pull/10712)

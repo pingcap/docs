@@ -201,9 +201,9 @@ You can use TiSpark together with Hive.
 Before starting Spark, you need to set the `HADOOP_CONF_DIR` environment variable to your Hadoop configuration folder and copy `hive-site.xml` to the `spark/conf` folder.
 
 ```
-val tisparkDF = spark.sql("select * from tispark_table").toDF
+val tisparkDF = spark.sql("SELECT * FROM tispark_table").toDF
 tisparkDF.write.saveAsTable("hive_table") // save table to hive
-spark.sql("select * from hive_table a, tispark_table b where a.col1 = b.col1").show // join table across Hive and Tispark
+spark.sql("SELECT * FROM hive_table a, tispark_table b where a.col1 = b.col1").show // join table across Hive and Tispark
 ```
 
 ## Batch write DataFrames into TiDB using TiSpark
@@ -223,7 +223,7 @@ The following example shows how to batch write data using TiSpark via the scala 
 
 ```scala
 // select data to write
-val df = spark.sql("select * from tpch.ORDERS")
+val df = spark.sql("SELECT * FROM tpch.ORDERS")
 
 // write data to tidb
 df.write.
@@ -253,7 +253,7 @@ In addition to using TiSpark to batch write DataFrames into the TiDB cluster, yo
 ```scala
 import org.apache.spark.sql.execution.datasources.jdbc.JDBCOptions
 
-val customer = spark.sql("select * from customer limit 100000")
+val customer = spark.sql("SELECT * FROM customer limit 100000")
 // You might repartition the source to make it balance across nodes
 // and increase the concurrency.
 val df = customer.repartition(32)

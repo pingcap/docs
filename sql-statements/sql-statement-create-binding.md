@@ -107,7 +107,7 @@ mysql> EXPLAIN ANALYZE  SELECT * FROM t1 WHERE b = 123;
 
 mysql> SHOW SESSION BINDINGS\G
 *************************** 1. row ***************************
-Original_sql: select * from t1 where b = ?
+Original_sql: SELECT * FROM t1 where b = ?
     Bind_sql: SELECT * FROM t1 IGNORE INDEX (b) WHERE b = 123
   Default_db: test
       Status: using

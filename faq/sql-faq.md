@@ -24,7 +24,7 @@ The reference can be found in [ISO/IEC 9075:1992, Database Language SQL- July 30
 In the following two queries, both results are considered legal:
 
 ```sql
-> select * from t;
+> SELECT * FROM t;
 +------+------+
 | a    | b    |
 +------+------+
@@ -35,7 +35,7 @@ In the following two queries, both results are considered legal:
 ```
 
 ```sql
-> select * from t; -- the order of results is not guaranteed
+> SELECT * FROM t; -- the order of results is not guaranteed
 +------+------+
 | a    | b    |
 +------+------+
@@ -48,7 +48,7 @@ In the following two queries, both results are considered legal:
 A statement is also considered non-deterministic if the list of columns used in the `ORDER BY` is non-unique. In the following example, the column `a` has duplicate values. Thus, only `ORDER BY a, b` would be guaranteed deterministic:
 
 ```sql
-> select * from t order by a;
+> SELECT * FROM t order by a;
 +------+------+
 | a    | b    |
 +------+------+
@@ -60,7 +60,7 @@ A statement is also considered non-deterministic if the list of columns used in 
 ```
 
 ```sql
-> select * from t order by a; -- the order of column a is guaranteed, but b is not
+> SELECT * FROM t order by a; -- the order of column a is guaranteed, but b is not
 +------+------+
 | a    | b    |
 +------+------+

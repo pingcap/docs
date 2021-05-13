@@ -30,7 +30,7 @@ For newly created tables, `NEXT_GLOBAL_ROW_ID` is `1` because no Row ID is alloc
 {{< copyable "sql" >}}
 
 ```sql
-create table t(a int);
+CREATE TABLE t(a int);
 Query OK, 0 rows affected (0.06 sec)
 ```
 
@@ -47,7 +47,7 @@ show table t next_row_id;
 Data have been written to the table. The TiDB server that inserts the data allocates and caches 30000 IDs at once. Thus, NEXT_GLOBAL_ROW_ID is 30001 now.
 
 ```sql
-insert into t values (), (), ();
+INSERT INTO t values (), (), ();
 Query OK, 3 rows affected (0.02 sec)
 Records: 3  Duplicates: 0  Warnings: 0
 ```

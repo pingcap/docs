@@ -58,10 +58,10 @@ However, some features of MySQL are not supported. This could be because there i
 > + If you have not specified the primary key when creating a table, TiDB uses `_tidb_rowid` to identify the row. The allocation of this value shares an allocator with the auto-increment column (if such a column exists). If you specify an auto-increment column as the primary key, TiDB uses this column to identify the row. In this situation, the following situation might happen:
 
 ```sql
-mysql> create table t(id int unique key AUTO_INCREMENT);
+mysql> CREATE TABLE t(id int unique key AUTO_INCREMENT);
 Query OK, 0 rows affected (0.05 sec)
 
-mysql> insert into t values(),(),();
+mysql> INSERT INTO t values(),(),();
 Query OK, 3 rows affected (0.00 sec)
 Records: 3  Duplicates: 0  Warnings: 0
 
@@ -126,7 +126,7 @@ Views in TiDB are not updatable. They do not support write operations such as `U
 
 ### Storage engines
 
-For compatibility reasons, TiDB supports the syntax to create tables with alternative storage engines. In implementation, TiDB describes the metadata as the InnoDB storage engine.
+For compatibility reasons, TiDB supports the syntax to CREATE TABLEs with alternative storage engines. In implementation, TiDB describes the metadata as the InnoDB storage engine.
 
 TiDB supports storage engine abstraction similar to MySQL, but you need to specify the storage engine using the [`--store`](/command-line-flags-for-tidb-configuration.md#--store) option when you start the TiDB server.
 

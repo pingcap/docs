@@ -27,7 +27,7 @@ The "SQL digest" here means the same as used in slow logs, which is a unique ide
 
 ```sql
 SELECT * FROM employee WHERE id IN (1, 2, 3) AND salary BETWEEN 1000 AND 2000;
-select * from EMPLOYEE where ID in (4, 5) and SALARY between 3000 and 4000;
+SELECT * FROM EMPLOYEE where ID in (4, 5) and SALARY between 3000 and 4000;
 ```
 
 After normalization, they are both of the following category:
@@ -35,7 +35,7 @@ After normalization, they are both of the following category:
 {{< copyable "sql" >}}
 
 ```sql
-select * from employee where id in (...) and salary between ? and ?;
+SELECT * FROM employee where id in (...) and salary between ? and ?;
 ```
 
 The "plan digest" here refers to the unique identifier calculated through normalized execution plan. The normalization process ignores constants. The same SQL statements might be grouped into different categories because the same statements might have different execution plans. SQL statements of the same category have the same execution plan.
@@ -52,7 +52,7 @@ The following is a sample output of querying `statements_summary`:
             STMT_TYPE: Select
           SCHEMA_NAME: test
                DIGEST: 0611cc2fe792f8c146cc97d39b31d9562014cf15f8d41f23a4938ca341f54182
-          DIGEST_TEXT: select * from employee where id = ?
+          DIGEST_TEXT: SELECT * FROM employee where id = ?
           TABLE_NAMES: test.employee
           INDEX_NAMES: NULL
           SAMPLE_USER: root
@@ -73,7 +73,7 @@ The following is a sample output of querying `statements_summary`:
     AVG_AFFECTED_ROWS: 0
            FIRST_SEEN: 2020-01-02 11:12:54
             LAST_SEEN: 2020-01-02 11:25:24
-    QUERY_SAMPLE_TEXT: select * from employee where id=3100
+    QUERY_SAMPLE_TEXT: SELECT * FROM employee where id=3100
      PREV_SAMPLE_TEXT:
           PLAN_DIGEST: f415b8d52640b535b9b12a9c148a8630d2c6d59e419aad29397842e32e8e5de3
                  PLAN:  Point_Get_1     root    1       table:employee, handle:3100
@@ -152,7 +152,7 @@ In this example, the client shows slow performance with point queries on the `em
 ```sql
 SELECT avg_latency, exec_count, query_sample_text
     FROM information_schema.statements_summary
-    WHERE digest_text LIKE 'select * from employee%';
+    WHERE digest_text LIKE 'SELECT * FROM employee%';
 ```
 
  `1ms` and `0.3ms` are considered within the normal range of `avg_latency`. Therefore, it can be concluded that the server end is not the cause. You can troubleshoot with the client or the network.
@@ -163,8 +163,8 @@ SELECT avg_latency, exec_count, query_sample_text
 +-------------+------------+------------------------------------------+
 | avg_latency | exec_count | query_sample_text                        |
 +-------------+------------+------------------------------------------+
-|     1042040 |          2 | select * from employee where name='eric' |
-|      345053 |          3 | select * from employee where id=3100     |
+|     1042040 |          2 | SELECT * FROM employee where name='eric' |
+|      345053 |          3 | SELECT * FROM employee where id=3100     |
 +-------------+------------+------------------------------------------+
 2 rows in set (0.00 sec)
 ```
@@ -191,8 +191,8 @@ The result shows that the following three categories of SQL statements consume t
 | sum_latency | avg_latency | exec_count | query_sample_text                                                     |
 +-------------+-------------+------------+-----------------------------------------------------------------------+
 |     7855660 |     1122237 |          7 | select avg(salary) from employee where company_id=2013                |
-|     7241960 |     1448392 |          5 | select * from employee join company on employee.company_id=company.id |
-|     2084081 |     1042040 |          2 | select * from employee where name='eric'                              |
+|     7241960 |     1448392 |          5 | SELECT * FROM employee join company on employee.company_id=company.id |
+|     2084081 |     1042040 |          2 | SELECT * FROM employee where name='eric'                              |
 +-------------+-------------+------------+-----------------------------------------------------------------------+
 3 rows in set (0.00 sec)
 ```

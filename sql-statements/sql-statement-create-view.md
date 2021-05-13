@@ -85,7 +85,7 @@ mysql> SELECT * FROM v1;
 4 rows in set (0.00 sec)
 
 mysql> INSERT INTO v1 (c1) VALUES (7);
-ERROR 1105 (HY000): insert into view v1 is not supported now.
+ERROR 1105 (HY000): INSERT INTO view v1 is not supported now.
 ```
 
 ## MySQL compatibility

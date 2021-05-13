@@ -270,7 +270,7 @@ Splitting Regions for partitioned tables is the same as splitting Regions for or
     {{< copyable "sql" >}}
 
     ```sql
-    create table t (a int,b int,index idx(a)) partition by hash(a) partitions 2;
+    CREATE TABLE t (a int,b int,index idx(a)) partition by hash(a) partitions 2;
     ```
 
     After creating the table `t`, a Region is split for each partition. Use the `SHOW TABLE REGIONS` syntax to view the Regions of this table:
@@ -340,7 +340,7 @@ You can specify the partition to be split. See the following usage example:
     {{< copyable "sql" >}}
 
     ```sql
-    create table t ( a int, b int, index idx(b)) partition by range( a ) (
+    CREATE TABLE t ( a int, b int, index idx(b)) partition by range( a ) (
         partition p1 values less than (10000),
         partition p2 values less than (20000),
         partition p3 values less than (MAXVALUE) );
@@ -405,7 +405,7 @@ The `tidb_scatter_region` global variable affects the behavior of `PRE_SPLIT_REG
 {{< copyable "sql" >}}
 
 ```sql
-create table t (a int, b int,index idx1(a)) shard_row_id_bits = 4 pre_split_regions=2;
+CREATE TABLE t (a int, b int,index idx1(a)) shard_row_id_bits = 4 pre_split_regions=2;
 ```
 
 After building the table, this statement splits `4 + 1` Regions for table t. `4 (2^2)` Regions are used to save table row data, and 1 Region is for saving the index data of `idx1`.

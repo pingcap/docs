@@ -47,17 +47,17 @@ Pay special attention to the following:
 1. At the initial stage, create a table and insert several rows of data:
 
     ```sql
-    mysql> create table t (c int);
+    mysql> CREATE TABLE t (c int);
     Query OK, 0 rows affected (0.01 sec)
 
-    mysql> insert into t values (1), (2), (3);
+    mysql> INSERT INTO t values (1), (2), (3);
     Query OK, 3 rows affected (0.00 sec)
     ```
 
 2. View the data in the table:
 
     ```sql
-    mysql> select * from t;
+    mysql> SELECT * FROM t;
     +------+
     | c    |
     +------+
@@ -90,7 +90,7 @@ Pay special attention to the following:
 5. Make sure the data is updated:
 
     ```sql
-    mysql> select * from t;
+    mysql> SELECT * FROM t;
     +------+
     | c    |
     +------+
@@ -119,7 +119,7 @@ Pay special attention to the following:
     **Result:** The read from the following statement is the data before the update operation, which is the history data.
 
     ```sql
-    mysql> select * from t;
+    mysql> SELECT * FROM t;
     +------+
     | c    |
     +------+
@@ -138,7 +138,7 @@ Pay special attention to the following:
     ```
 
     ```sql
-    mysql> select * from t;
+    mysql> SELECT * FROM t;
     +------+
     | c    |
     +------+

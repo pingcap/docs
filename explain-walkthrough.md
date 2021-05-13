@@ -127,7 +127,7 @@ SHOW CREATE TABLE trips\G
 ```sql
 *************************** 1. row ***************************
        Table: trips
-Create Table: CREATE TABLE `trips` (
+CREATE TABLE: CREATE TABLE `trips` (
   `trip_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `duration` int(11) NOT NULL,
   `start_date` datetime DEFAULT NULL,

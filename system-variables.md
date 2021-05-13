@@ -283,10 +283,10 @@ mysql> SELECT * FROM t1;
     - When set to zero and using optimistic transactions:
 
         ```sql
-        tidb> create table t (i int key);
-        tidb> insert into t values (1);
+        tidb> CREATE TABLE t (i int key);
+        tidb> INSERT INTO t values (1);
         tidb> begin optimistic;
-        tidb> insert into t values (1);
+        tidb> INSERT INTO t values (1);
         Query OK, 1 row affected
         tidb> commit; -- Check only when a transaction is committed.
         ERROR 1062 : Duplicate entry '1' for key 'PRIMARY'
@@ -297,7 +297,7 @@ mysql> SELECT * FROM t1;
         ```sql
         tidb> set @@tidb_constraint_check_in_place=1;
         tidb> begin optimistic;
-        tidb> insert into t values (1);
+        tidb> INSERT INTO t values (1);
         ERROR 1062 : Duplicate entry '1' for key 'PRIMARY'
         ```
 
@@ -910,19 +910,19 @@ mysql> desc select count(distinct a) from test.t;
 - For example, after you enable this optimization rule, the subquery is converted as follows:
 
     ```sql
-    select * from t where t.a in (select aa from t1)
+    SELECT * FROM t where t.a in (select aa from t1)
     ```
 
     The subquery is converted to join as follows:
 
     ```sql
-    select * from t, (select aa from t1 group by aa) tmp_t where t.a = tmp_t.aa
+    SELECT * FROM t, (select aa from t1 group by aa) tmp_t where t.a = tmp_t.aa
     ```
 
     If `t1` is limited to be `unique` and `not null` in the `aa` column. You can use the following statement, without aggregation.
 
     ```sql
-    select * from t, t1 where t.a=t1.a
+    SELECT * FROM t, t1 where t.a=t1.a
     ```
 
 ### tidb_opt_prefer_range_scan <span class="version-mark">New in v5.0</span>
@@ -933,7 +933,7 @@ mysql> desc select count(distinct a) from test.t;
 - In the following example, before you enable `tidb_opt_prefer_range_scan`, the TiDB optimizer performs a full table scan. After you enable `tidb_opt_prefer_range_scan`, the optimizer selects an index scan.
 
 ```sql
-explain select * from t where age=5;
+explain SELECT * FROM t where age=5;
 +-------------------------+------------+-----------+---------------+-------------------+
 | id                      | estRows    | task      | access object | operator info     |
 +-------------------------+------------+-----------+---------------+-------------------+
@@ -945,7 +945,7 @@ explain select * from t where age=5;
 
 set session tidb_opt_prefer_range_scan = 1;
 
-explain select * from t where age=5;
+explain SELECT * FROM t where age=5;
 +-------------------------------+------------+-----------+-----------------------------+-------------------------------+
 | id                            | estRows    | task      | access object               | operator info                 |
 +-------------------------------+------------+-----------+-----------------------------+-------------------------------+
@@ -1002,7 +1002,7 @@ SET tidb_query_log_max_len = 20
 - Scope: SESSION | GLOBAL
 - Default value: OFF
 - This variable controls whether to hide user information in the SQL statement being recorded into the TiDB log and slow log.
-- When you set the variable to `1`, user information is hidden. For example, if the executed SQL statement is `insert into t values (1,2)`, the statement is recorded as `insert into t values (?,?)` in the log.
+- When you set the variable to `1`, user information is hidden. For example, if the executed SQL statement is `INSERT INTO t values (1,2)`, the statement is recorded as `INSERT INTO t values (?,?)` in the log.
 
 ### tidb_replica_read <span class="version-mark">New in v4.0</span>
 

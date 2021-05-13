@@ -47,7 +47,7 @@ Usage example:
 {{< copyable "sql" >}}
 
 ```sql
-select * from information_schema.views;
+SELECT * FROM information_schema.views;
 ```
 
 You can view the relevant meta information of the view by querying this table, such as `TABLE_CATALOG`, `TABLE_SCHEMA`, `TABLE_NAME`, `VIEW_DEFINITION`, `CHECK_OPTION`, `IS_UPDATABLE`, `DEFINER`, `SECURITY_TYPE`, `CHARACTER_SET_CLIENT`, and `COLLATION_CONNECTION`.
@@ -158,7 +158,7 @@ The following example creates a view, queries this view, and delete this view:
 {{< copyable "sql" >}}
 
 ```sql
-create table t(a int, b int);
+CREATE TABLE t(a int, b int);
 ```
 
 ```
@@ -168,7 +168,7 @@ Query OK, 0 rows affected (0.01 sec)
 {{< copyable "sql" >}}
 
 ```sql
-insert into t values(1, 1),(2,2),(3,3);
+INSERT INTO t values(1, 1),(2,2),(3,3);
 ```
 
 ```
@@ -179,7 +179,7 @@ Records: 3  Duplicates: 0  Warnings: 0
 {{< copyable "sql" >}}
 
 ```sql
-create table s(a int);
+CREATE TABLE s(a int);
 ```
 
 ```
@@ -189,7 +189,7 @@ Query OK, 0 rows affected (0.01 sec)
 {{< copyable "sql" >}}
 
 ```sql
-insert into s values(2),(3);
+INSERT INTO s values(2),(3);
 ```
 
 ```
@@ -210,7 +210,7 @@ Query OK, 0 rows affected (0.01 sec)
 {{< copyable "sql" >}}
 
 ```sql
-select * from v;
+SELECT * FROM v;
 ```
 
 ```

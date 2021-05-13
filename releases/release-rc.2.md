@@ -20,7 +20,7 @@ On August 4, 2017, TiDB RC4 is released! This release is focused on the compatib
 + Support basic privilege management
 + Add lots of MySQL built-in functions
 + Improve the Alter Table statement and support the modification of table name, default value and comment
-+ Support the Create Table Like statement
++ Support the CREATE TABLE Like statement
 + Support the Show Warnings statement
 + Support the Rename Table statement
 + Restrict the size of a single transaction to avoid the cluster blocking of large transactions

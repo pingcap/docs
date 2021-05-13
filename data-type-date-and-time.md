@@ -28,9 +28,9 @@ When dealing with date and time value types, note:
 + TiDB might automatically convert invalid values or values beyond the supported range to a zero value of that type. This behavior is dependent on the SQL Mode set. For example:
 
     ```sql
-    mysql> show create table t1;
+    mysql> show CREATE TABLE t1;
     +-------+---------------------------------------------------------------------------------------------------------+
-    | Table | Create Table                                                                                            |
+    | Table | CREATE TABLE                                                                                            |
     +-------+---------------------------------------------------------------------------------------------------------+
     | t1    | CREATE TABLE `t1` (
       `a` time DEFAULT NULL
@@ -46,14 +46,14 @@ When dealing with date and time value types, note:
     +-------------------------------------------------------------------------------------------------------------------------------------------+
     1 row in set (0.00 sec)
 
-    mysql> insert into t1 values ('2090-11-32:22:33:44');
+    mysql> INSERT INTO t1 values ('2090-11-32:22:33:44');
     ERROR 1292 (22007): Truncated incorrect time value: '2090-11-32:22:33:44'
     mysql> set @@sql_mode='';                                                                                                                                                                                                                     Query OK, 0 rows affected (0.01 sec)
 
-    mysql> insert into t1 values ('2090-11-32:22:33:44');
+    mysql> INSERT INTO t1 values ('2090-11-32:22:33:44');
     Query OK, 1 row affected, 1 warning (0.01 sec)
 
-    mysql> select * from t1;
+    mysql> SELECT * FROM t1;
     +----------+
     | a        |
     +----------+

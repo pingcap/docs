@@ -103,7 +103,7 @@ By running the command `SHOW CREATE TABLE`, you can see whether the attribute of
 ```sql
 mysql> SHOW CREATE TABLE t;
 +-------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Table | Create Table                                                                                                                                                                                      |
+| Table | CREATE TABLE                                                                                                                                                                                      |
 +-------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | t     | CREATE TABLE `t` (
   `a` bigint(20) NOT NULL,
@@ -195,7 +195,7 @@ However, you cannot convert a table with non-clustered indexes to a table with c
 For a table with a combined primary key or a single non-integer primary key, if you change the primary key from a non-clustered index to a clustered index, the keys of its row data change as well. Therefore, `SPLIT TABLE BY/BETWEEN` statements that are executable in TiDB versions earlier than v5.0 are no longer workable in v5.0 and later versions of TiDB. If you want to split a table with clustered indexes using `SPLIT TABLE BY/BETWEEN`, you need to provide the value of the primary key column, instead of specifying an integer value. See the following example:
 
 ```sql
-mysql> create table t (a int, b varchar(255), primary key(a, b) clustered);
+mysql> CREATE TABLE t (a int, b varchar(255), primary key(a, b) clustered);
 Query OK, 0 rows affected (0.01 sec)
 mysql> split table t between (0) and (1000000) regions 5;
 ERROR 1105 (HY000): Split table region lower value count should be 2
@@ -220,6 +220,6 @@ mysql> split table t by (0, ''), (50000, ''), (100000, '');
 The attribute [`AUTO_RANDOM`](/auto-random.md) can only be used on clustered indexes. Otherwise, TiDB returns the following error:
 
 ```sql
-mysql> create table t (a bigint primary key nonclustered auto_random);
+mysql> CREATE TABLE t (a bigint primary key nonclustered auto_random);
 ERROR 8216 (HY000): Invalid auto random: column a is not the integer primary key, or the primary key is nonclustered
 ```
