@@ -59,7 +59,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
         tiup playground v4.0.12 --db 2 --pd 3 --kv 3 --monitor
         ```
 
-        The command downloads a version cluster to the local machine and starts it, such as v5.0.1. `--monitor` means that the monitoring component is also deployed.
+        The command downloads a version cluster to the local machine and starts it, such as v4.0.12. `--monitor` means that the monitoring component is also deployed.
 
         To view the latest version, run `tiup list tidb`.
 
