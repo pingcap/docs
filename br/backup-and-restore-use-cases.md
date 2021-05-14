@@ -104,8 +104,8 @@ Use the `br backup` command to back up the single table data `--db batchmark --t
 
 > **Note:**
 >
-> * During data backup, because only data in leader replicas are backed up, even if there is a TiFlash replica in the cluster，BR can complete backup without mounting TiFlash nodes.
-> * When restoring data, BR will restore the data of all replicas. Therefore, TiFlash nodes need the access to backup data so that BR will complete the data restoration. You also must mount TiFlash nodes to NFS server.
+> * During data backup, because only the data of leader replicas are backed up, even if there is a TiFlash replica in the cluster, BR can complete the backup without mounting TiFlash nodes.
+> * When restoring data, BR will restore the data of all replicas. Also, TiFlash nodes need access to the backup data for BR to complete the restore. Therefore, before the restore, you must mount TiFlash nodes to the NFS server.
 
 #### Topology
 
