@@ -7,7 +7,7 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
 
 This guide walks you through the quickest way to get started with TiDB. You will be using TiUP, a package manager in the TiDB ecosystem, to help you run any TiDB cluster component with only a single line of commands.
 
-If you want to deploy an on-premise production cluster instead, head to [production installation guide](/production-deployment-using-tiup.md). If you want to deploy TiDB in Kubernetes, head to [Get Started with TiDB in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/get-started).
+To deploy an on-premise production cluster instead, head to [production installation guide](/production-deployment-using-tiup.md). To deploy TiDB in Kubernetes, head to [Get Started with TiDB in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/get-started). To manage TiDB in the cloud, head to [TiDB Cloud Quick Start](https://docs.pingcap.com/tidbcloud/beta/tidb-cloud-quickstart).
 
 <SimpleTab>
 <div label="Mac">
