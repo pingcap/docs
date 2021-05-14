@@ -6,9 +6,9 @@ aliases: ['/docs/dev/quick-start-with-tidb/','/docs/dev/test-deployment-using-do
 
 # Quick Start Guide for the TiDB Database Platform
 
-This guide walks you through the quickest way to get started with TiDB. You will be using TiUP, a package manager in the TiDB ecosystem, to help you run any TiDB cluster component with only a single line of commands.
+This guide walks you through the quickest way to get started with TiDB. You will be using TiUP, a package manager in the TiDB ecosystem, to help you run any TiDB cluster component with only a single line of command.
 
-To deploy an on-premise production cluster instead, head to [production installation guide](/production-deployment-using-tiup.md). To deploy TiDB in Kubernetes, head to [Get Started with TiDB in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/get-started). To manage TiDB in the cloud, head to [TiDB Cloud Quick Start](https://docs.pingcap.com/tidbcloud/beta/tidb-cloud-quickstart).
+To deploy an on-premise production cluster instead, go to [production installation guide](/production-deployment-using-tiup.md). To deploy TiDB in Kubernetes, go to [Get Started with TiDB in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/get-started). To manage TiDB in the cloud, go to [TiDB Cloud Quick Start](https://docs.pingcap.com/tidbcloud/beta/tidb-cloud-quickstart).
 
 <SimpleTab>
 <div label="Mac">
@@ -75,12 +75,12 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
 
         > **Note:**
         >
-        > For the playground operated in this way, after the test is finished, TiUP will clean up the original cluster data. You will get a new cluster after re-running the command.
+        > For the playground operated in this way, after the test deployment is finished, TiUP will clean up the original cluster data. You will get a new cluster after re-running the command.
         > If you want the data to be persisted on storage，run `tiup --tag <your-tag> playground ...`. For details, refer to [TiUP Reference Guide](/tiup/tiup-reference.md#-t---tag).
 
 4. Start a new session to access TiDB:
 
-    + Use the TiUP client to connect to TiDBs.
+    + Use the TiUP client to connect to TiDB.
 
         {{< copyable "shell-regular" >}}
 
@@ -102,7 +102,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
 
 7. (Optional) [Load data to TiFlash](/tiflash/use-tiflash.md) for analysis.
 
-8. Clean up the cluster after the test:
+8. Clean up the cluster after the test deployment:
 
     1. Stop the process by pressing `ctrl-c`.
 
@@ -116,7 +116,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
 
 > **Note:**
 >
-> TiUP Playground listens on `127.0.0.1` by default, and the service is only locally accessible; if you want the service to be externally accessible, specify the listening address using the `--host` parameter to bind the network interface card (NIC) to an externally accessible IP address.
+> TiUP Playground listens on `127.0.0.1` by default, and the service is only locally accessible. If you want the service to be externally accessible, specify the listening address using the `--host` parameter to bind the network interface card (NIC) to an externally accessible IP address.
 
 </div>
 
@@ -442,8 +442,6 @@ Other requirements for the target machine:
 
     - Learn [Basic SQL operations in TiDB](/basic-sql-operations.md)
     - [Migrate data to TiDB](/migration-overview.md)
-    - Learn [TiDB key features and scenarios](/overview.md)
-    - Learn [TiDB's compatibility with MySQL](/mysql-compatibility.md)
 
 - If you are ready to deploy a TiDB cluster for the production environment:
 
