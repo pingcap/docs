@@ -1,14 +1,16 @@
 ---
-title: tidb v4.0.13 Release Notes
-category: Releases
-aliases: ['/docs/dev/releases/v4.0.13/']
+title: TiDB 4.0.13 Release Notes
 ---
 
-# tidb v4.0.13 Release Notes
+# TiDB 4.0.13 Release Notes
 
-Release date: May 14, 2021
+Release date: TBD
 
-TiDB version: v4.0.13
+TiDB version: 4.0.13
+
+## Compatibility Changes
+
+## New Features
 
 ## Improvements
 
@@ -51,7 +53,7 @@ TiDB version: v4.0.13
     - Fix wrong return value of timestamp column if the timestamp value is `1970-01-01` and the timezone offset is negative [#1601](https://github.com/pingcap/tics/pull/1601)
     - Fix bug that Decimal256's hash value is not stable [#1597](https://github.com/pingcap/tics/pull/1597)
 
-## Others
+## 请对以下未分类的 PR 进行分类，并挪动到以上对应类别中（Compatibility Changes, New Features, Improvements, Bug Fixes）。如果某条 note 不属于本次发版，请删除
 
 + TiDB
 
