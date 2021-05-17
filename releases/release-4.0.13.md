@@ -89,6 +89,7 @@ TiDB version: 4.0.13
 
     - TiCDC
 
+        * Fix bug in flow control [#1779](https://github.com/pingcap/ticdc/pull/1779)
         * Modified the update strategy of gcSafePoint.  Fix the problem that TiKV GC safe point is blocked indefinitely due to TiCDC changefeed checkpoint stagnation. [#1756](https://github.com/pingcap/ticdc/pull/1756)
         * Implement processor flow control to avoid OOM. [#1751](https://github.com/pingcap/ticdc/pull/1751)
         * Revert the update for explicit_defaults_for_timestamp which requires `SUPER` privilege when replicating to MySQL. [#1749](https://github.com/pingcap/ticdc/pull/1749)
