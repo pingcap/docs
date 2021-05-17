@@ -25,7 +25,7 @@ The system libraries (`information_schema`, `performance_schema`, `mysql`) are f
 
 Because these system libraries do not exist in the backup files, no conflict occurs among system tables during data restoration.
 
-## What should I do to handle the `Permission denied` error or `No such file or directory` error, even if I have tried to run BR using root in vain?
+## What should I do to handle the `Permission denied` or `No such file or directory` error, even if I have tried to run BR using root in vain?
 
 You need to confirm whether TiKV has access to the backup directory. To back up data, confirm whether TiKV has the write permission. To restore data, confirm whether it has the read permission.
 
