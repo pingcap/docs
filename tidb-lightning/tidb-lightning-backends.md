@@ -132,8 +132,10 @@ If you need to import data into a TiDB cluster, TiDB Lightning using the TiDB-ba
 
 ```toml
 
-# logging
+# log level
 log-level = "info"
+
+# log output directory
 log-file = "loader.log"
 
 # Prometheus
@@ -147,8 +149,10 @@ pool-size = 16
 
 ```toml
 [lightning]
-# logging
+# log level
 level = "info"
+
+# log output directory. If this location directory is not specified, the default is the directory where the command is executed.
 file = "tidb-lightning.log"
 
 # Prometheus
@@ -236,7 +240,9 @@ password = ""
 # TiDB connection parameters
 host = "127.0.0.1"
 port = 4000
-status-port = 10080  # <- this is required
+
+# In TiDB-backend mode, this parameter is optional.
+# status-port = 10080
 user = "root"
 password = ""
 
