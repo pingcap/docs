@@ -427,6 +427,17 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Default value: ON
 - This variable controls whether to record the execution information of each operator in the slow query log.
 
+### tidb_enable_enhanced_security
+
+- Scope: NONE
+- Default value: OFF
+- This variable indicates if the TiDB server you are connected to was started with Security Enhanced Mode (SEM) enabled.
+- SEM is inspired by the design of systems such as [Security-Enhanced Linux](https://en.wikipedia.org/wiki/Security-Enhanced_Linux). It reduces the capabilities of users with the MySQL `SUPER` privilege, and instead requires `RESTRICTED` fine grained privileges to be granted as a replacement. These include:
+    - `RESTRICTED_TABLES_ADMIN`: The ability to write to system tables in the `mysql` schema, and see sensitive columns on `information_schema` tables.
+    - `RESTRICTED_STATUS_ADMIN`: The ability to see sensitive variables in the command `SHOW STATUS`.
+    - `RESTRICTED_VARIABLES_ADMIN`: The ability to see and set sensitive variables in `SHOW [GLOBAL] VARIABLES` and `SET`.
+    - `RESTRICTED_USER_ADMIN`: The ability to prevent other users from making changes or dropping a user account.
+
 ### tidb_enable_fast_analyze
 
 - Scope: SESSION | GLOBAL
