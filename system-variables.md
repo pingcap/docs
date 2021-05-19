@@ -388,7 +388,8 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 > **Note:**
 >
-> If you have enabled TiDB Binlog, enabling this variable cannot improve the performance. To improve the performance, it is recommended to use [TiCDC](/ticdc/ticdc-overview.md) instead.
+> - If you have enabled TiDB Binlog, enabling this variable cannot improve the performance. To improve the performance, it is recommended to use [TiCDC](/ticdc/ticdc-overview.md) instead.
+> - Enabling this parameter only means that Async Commit becomes an optional transaction commit mode. In fact, it is up to TiDB to choose the most suitable transaction commit mode.
 
 ### tidb_enable_1pc <span class="version-mark">New in v5.0</span>
 
@@ -398,7 +399,8 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 > **Note:**
 >
-> If you have enabled TiDB Binlog, enabling this variable cannot improve the performance. To improve the performance, it is recommended to use [TiCDC](/ticdc/ticdc-overview.md) instead.
+> - If you have enabled TiDB Binlog, enabling this variable cannot improve the performance. To improve the performance, it is recommended to use [TiCDC](/ticdc/ticdc-overview.md) instead.
+> - Enabling this parameter only means that one-phase commit becomes an optional transaction commit mode. In fact, it is up to TiDB to choose the most suitable transaction commit mode.
 
 ### tidb_enable_cascades_planner
 
