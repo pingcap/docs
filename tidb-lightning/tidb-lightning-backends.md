@@ -124,7 +124,7 @@ pool-size = 16
 # log level
 level = "info"
 
-# The directory to which the log is output. If this directory is not specified, the file path where the command is executed is the default directory.
+# The directory to which the log is output. If this directory is not specified, it defaults to the directory where the command is executed.
 file = "tidb-lightning.log"
 
 # Prometheus
