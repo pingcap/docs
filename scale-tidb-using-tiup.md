@@ -369,6 +369,10 @@ In special cases (such as when a node needs to be forcibly taken down), or if th
         tiup ctl:<cluster-version> pd -u http://<pd_ip>:<pd_port> store
         ```
 
+        > **Note:**
+        >
+        > If multiple PD instances exist in the cluster, you just need to specify the IP address:port of an active PD instance in the above command.
+
 2. Remove the TiFlash node in pd-ctl:
 
     * Enter `store delete <store_id>` in pd-ctl (`<store_id>` is the store ID of the TiFlash node found in the previous step.
@@ -381,6 +385,10 @@ In special cases (such as when a node needs to be forcibly taken down), or if th
         tiup ctl:<cluster-version> pd -u http://<pd_ip>:<pd_port> store delete <store_id>
         ```
 
+        > **Note:**
+        >
+        > If multiple PD instances exist in the cluster, you just need to specify the IP address:port of an active PD instance in the above command.
+        
 3. Wait for the store of the TiFlash node to disappear or for the `state_name` to become `Tombstone` before you stop the TiFlash process.
 
     If, after waiting for a long time, the node still fails to disappear or the `state_name` fails to become `Tombstone`, consider using the following command to force the node out of the cluster.
