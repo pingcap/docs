@@ -144,7 +144,7 @@ If you want to add a TiFlash node to the `10.0.1.4` host, take the following ste
 > When adding a TiFlash node to an existing TiDB cluster, you need to note the following things:
 >
 > 1. Confirm that the current TiDB version supports using TiFlash. Otherwise, upgrade your TiDB cluster to v5.0 or later versions.
-> 2. Execute the `tiup ctl pd -u <pd-host>:<pd-port> config set enable-placement-rules true` command to enable the Placement Rules feature. Or execute the corresponding command in [pd-ctl](/pd-control.md).
+> 2. Execute the `tiup ctl:<cluster-version> pd -u http://<pd_ip>:<pd_port> config set enable-placement-rules true` command to enable the Placement Rules feature. Or execute the corresponding command in [pd-ctl](/pd-control.md).
 
 1. Add the node information to the `scale-out.yaml` file:
 
@@ -366,7 +366,7 @@ In special cases (such as when a node needs to be forcibly taken down), or if th
         {{< copyable "shell-regular" >}}
 
         ```shell
-        tiup ctl pd -u <pd-address> store
+        tiup ctl:<cluster-version> pd -u http://<pd_ip>:<pd_port> store
         ```
 
 2. Remove the TiFlash node in pd-ctl:
@@ -378,7 +378,7 @@ In special cases (such as when a node needs to be forcibly taken down), or if th
         {{< copyable "shell-regular" >}}
 
         ```shell
-        tiup ctl pd -u <pd-address> store delete <store_id>
+        tiup ctl:<cluster-version> pd -u http://<pd_ip>:<pd_port> store delete <store_id>
         ```
 
 3. Wait for the store of the TiFlash node to disappear or for the `state_name` to become `Tombstone` before you stop the TiFlash process.
