@@ -162,6 +162,6 @@ SET GLOBAL tidb_gc_life_time="60m";
 
 For simple cases you could use `SELECT` after setting the `tidb_snapshot` variable and copy-paste the output or use `SELECT ... INTO LOCAL OUTFLE` and use `LOAD DATA` to import the data later on.
 
-Another option is to use [dumpling to export a historical snapshot](/dumpling-overview.md#export-historical-data-snapshot-of-tidb). This is a good tool for exporting larger sets of data.
+- Use [Dumpling](/dumpling-overview.md#export-historical-data-snapshot-of-tidb) to export a historical snapshot. Dumpling performs well in exporting larger sets of data.
 
 If you plan to use this feature to do restores you probably want to increase the GC life time from the default 10m to something like half an hour. This will result in additional versions of rows being retained, which is likely to require slightly more disk space. The performance of certain options such as scans may also degrade, when additional versions of the same rows need to be skipped when reading.
