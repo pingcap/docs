@@ -371,7 +371,7 @@ In special cases (such as when a node needs to be forcibly taken down), or if th
 
         > **Note:**
         >
-        > If multiple PD instances exist in the cluster, you just need to specify the IP address:port of an active PD instance in the above command.
+        > If multiple PD instances exist in the cluster, you only need to specify the IP address:port of an active PD instance in the above command.
 
 2. Remove the TiFlash node in pd-ctl:
 
@@ -387,7 +387,7 @@ In special cases (such as when a node needs to be forcibly taken down), or if th
 
         > **Note:**
         >
-        > If multiple PD instances exist in the cluster, you just need to specify the IP address:port of an active PD instance in the above command.
+        > If multiple PD instances exist in the cluster, you only need to specify the IP address:port of an active PD instance in the above command.
         
 3. Wait for the store of the TiFlash node to disappear or for the `state_name` to become `Tombstone` before you stop the TiFlash process.
 
