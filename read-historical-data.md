@@ -165,4 +165,6 @@ For simple cases you could use `SELECT` after setting the `tidb_snapshot` variab
 
 - Use [Dumpling](/dumpling-overview.md#export-historical-data-snapshot-of-tidb) to export a historical snapshot. Dumpling performs well in exporting larger sets of data.
 
-If you plan to use this feature to do restores you probably want to increase the GC life time from the default 10m to something like half an hour. This will result in additional versions of rows being retained, which is likely to require slightly more disk space. The performance of certain options such as scans may also degrade, when additional versions of the same rows need to be skipped when reading.
+> **Note:**
+>
+> Increasing the GC life time from the default 10 minutes to half an hour or more will result in additional versions of rows being retained, which might require more disk space. This might also affect the performance of certain operations such as scans when TiDB needs to skip these additional versions of the same rows during data reads.
