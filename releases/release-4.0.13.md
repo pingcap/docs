@@ -14,10 +14,14 @@ TiDB version: 4.0.13
 
     - Skip reading mysql.stats_histograms if cached stats is up-to-date [#24352](https://github.com/pingcap/tidb/pull/24352)
 
++ PD
+
+    - Metrics: let tso processing time not include consumption on the network [#3524](https://github.com/pingcap/pd/pull/3524)
+    - Dashboard: update to v2021.03.12.1 [#3469](https://github.com/pingcap/pd/pull/3469)
+
 + TiFlash
 
-    - Automatically clean archive data to free up disk space [#1638](https://github.com/pingcap/tics/pull/1638)
-    - No release notes [#1625](https://github.com/pingcap/tics/pull/1625)
+    - Automatically clean archive data to free up disk space
 
 ## Bug Fixes
 
@@ -54,23 +58,24 @@ TiDB version: 4.0.13
 
 + TiFlash
 
-    - Fix the bug that the number of storage delta-merge-tasks is not reported to Prometheus [#1838](https://github.com/pingcap/tics/pull/1838)
-    - Fix a bug that causes TiFlash crash during Segment Split. [#1814](https://github.com/pingcap/tics/pull/1814)
-    - Fix the bug that the Grafana panel `Region write Duration (write blocks)` may be shown in wrong place [#1804](https://github.com/pingcap/tics/pull/1804)
-    - Fix a potential issue that the DeleteRange in the storage engine failed to remove some data. [#1789](https://github.com/pingcap/tics/pull/1789)
-    - Fix problem that TiFlash coprocessor's cast time as int function may produce incorrect result. [#1785](https://github.com/pingcap/tics/pull/1785)
-    - Fix problem that behavior of TiFlash coprocessor's bitwise operator is different from TiDB [#1773](https://github.com/pingcap/tics/pull/1773)
-    - Fix the problem that TiFlash coprocessor's cast string as int function may produce incorrect result. [#1767](https://github.com/pingcap/tics/pull/1767)
-    - Fix the issue that continuous and fast writing may make TiFlash OOM [#1737](https://github.com/pingcap/tics/pull/1737)
-    - Fix the crash that causes by applying Raft commands to dropped tables [#1724](https://github.com/pingcap/tics/pull/1724)
-    - Fix potential NPE in schema sync service when database is dropped between GC and getting the database info. [#1707](https://github.com/pingcap/tics/pull/1707)
-    - Fix the issue that TiFlash may panic during br restore [#1697](https://github.com/pingcap/tics/pull/1697)
-    - Fix the bug that some characters have wrong weights when using general CI collation [#1667](https://github.com/pingcap/tics/pull/1667)
-    - Fix potential data loss when recovering a table that is previously dropped. [#1662](https://github.com/pingcap/tics/pull/1662)
-    - Fix a string compare bug that sometimes >= and <= will return wrong result if the contains with `\0` [#1658](https://github.com/pingcap/tics/pull/1658)
-    - Fix bug 1. logical function only accept numeric type as its input type, 2. logical function return wrong result if input column contains a null constant. [#1636](https://github.com/pingcap/tics/pull/1636)
-    - Fix wrong return value of timestamp column if the timestamp value is `1970-01-01` and the timezone offset is negative [#1601](https://github.com/pingcap/tics/pull/1601)
-    - Fix bug that Decimal256's hash value is not stable [#1597](https://github.com/pingcap/tics/pull/1597)
+    - Fix the issue that number of `delta-merge-tasks` is not reported to Prometheus
+    - Fix the TiFlash panic issue that occurs during `Segment Split`
+    - Fix the issue that panel `Region write Duration (write blocks)` in Grafana is shown in wrong place
+    - Fix the potential issue that `DeleteRange` in storage engine fail to remove data
+    - Fix the issue of incorrect results when casting the time type to the integer type
+    - Fix a bug that the behavior of the bitwise operator is different from that of TiDB
+    - Fix the issue of incorrect results when casting the string type to the integer type
+    - Fix the issue that consecutive and fast writes might make TiFlash out of memory
+    - Fix the TiFlash panic issue that occurs when writing data to dropped tables
+    - Fix the potential issue that the exception of null pointer might be raised during the table GC
+    - Fix the issue that TiFlash might panic during BR restore
+    - Fix a bug that weights of some characters are wrong when using general CI collation
+    - Fix the potential issue that data will be lost in tombstoned table
+    - Fix the issue of incorrect results when comparing string which contains zero bytes
+    - Fix the issue that logical function returns wrong result if input column contains null constants
+    - Fix the issue that logical function only accept numeric type
+    - Fix the issue of incorrect results when timestamp value is `1970-01-01` and the timezone offset is negative
+    - Fix the issue that hash value of Decimal256 is not stable
 
 ## 请对以下未分类的 PR 进行分类，并挪动到以上对应类别中（Compatibility Changes, New Features, Improvements, Bug Fixes）。如果某条 note 不属于本次发版，请删除
 
@@ -105,24 +110,19 @@ TiDB version: 4.0.13
     - Cdc: limit scan speed (128MB/s by default) [#9983](https://github.com/tikv/tikv/pull/9983)
     - Fix the bug that TiKV cannot startup when the end of file dict file is damaged. [#9963](https://github.com/tikv/tikv/pull/9963)
 
-+ PD
-
-    - Metrics: let tso processing time not include consumption on the network [#3524](https://github.com/pingcap/pd/pull/3524)
-    - Dashboard: update to v2021.03.12.1 [#3469](https://github.com/pingcap/pd/pull/3469)
-
 + Tools
 
     - BR
 
-        * BR would check cluster version of backup now. [#1090](https://github.com/pingcap/br/pull/1090)
-        * BR now support backing up user tables created in the `mysql` schema. [#1077](https://github.com/pingcap/br/pull/1077)
-        * BR now can tolerate minor TiKV disconnection. [#1062](https://github.com/pingcap/br/pull/1062)
+        * Update the `checkVersion` to check both cluster and backup data. [#1090](https://github.com/pingcap/br/pull/1090)
+        * BR now supports backing up user tables created in the `mysql` schema. [#1077](https://github.com/pingcap/br/pull/1077)
+        * BR now can tolerate minor TiKV disconnection during backup. [#1062](https://github.com/pingcap/br/pull/1062)
 
     - TiCDC
 
-        * Fix bug in flow control [#1779](https://github.com/pingcap/ticdc/pull/1779)
-        * Modified the update strategy of gcSafePoint.  Fix the problem that TiKV GC safe point is blocked indefinitely due to TiCDC changefeed checkpoint stagnation. [#1756](https://github.com/pingcap/ticdc/pull/1756)
+        * Fix the deadlock caused by flow-control when the sorter's input channel has been blocked. [#1779](https://github.com/pingcap/ticdc/pull/1779)
+        * Fix the problem that TiKV GC safe point is blocked indefinitely due to TiCDC changefeed checkpoint stagnation. [#1756](https://github.com/pingcap/ticdc/pull/1756)
         * Implement processor flow control to avoid OOM. [#1751](https://github.com/pingcap/ticdc/pull/1751)
         * Revert the update for explicit_defaults_for_timestamp which requires `SUPER` privilege when replicating to MySQL. [#1749](https://github.com/pingcap/ticdc/pull/1749)
         * Add stale temporary files clean-up in Unified Sorter, and forbids sharing sort-dir. [#1741](https://github.com/pingcap/ticdc/pull/1741)
-        * Aadd http handler for failpoint [#1732](https://github.com/pingcap/ticdc/pull/1732)
+        * Add HTTP handler for failpoint [#1732](https://github.com/pingcap/ticdc/pull/1732)
