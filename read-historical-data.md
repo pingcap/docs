@@ -154,7 +154,7 @@ Pay special attention to the following:
 
 ## Restoring old versions
 
-The first thing you probably want to do when you need to restore from an older version is to make sure GC doesn't remove it while you are working on it. This can be done by setting the GC as is done in the example below. Don't forget to set it back to the previous value after the restore.
+Before you restore data from an older version, make sure that Garbage Collection (GC) does not clear the history data while you are working on it. This can be done by setting the `tidb_gc_life_time` variable as the following example shows. Do not forget to set the variable back to the previous value after the restore.
 
 ```sql
 SET GLOBAL tidb_gc_life_time="60m";
