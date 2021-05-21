@@ -21,6 +21,12 @@ TiDB version: 4.0.13
 
     - Skip reading mysql.stats_histograms if cached stats is up-to-date [#24352](https://github.com/pingcap/tidb/pull/24352)
 
++ TiKV
+
+    - Make the calculation process of store used size precise [9904](https://github.com/tikv/tikv/pull/9904)
+    - Set more regions in `EpochNotMatch` to reduce region miss [9731](https://github.com/tikv/tikv/pull/9731)
+    - Speed up memory freeing [10035](https://github.com/tikv/tikv/pull/10035)
+
 + PD
 
     - Metrics: let tso processing time not include consumption on the network [#3524](https://github.com/pingcap/pd/pull/3524)
@@ -29,6 +35,20 @@ TiDB version: 4.0.13
 + TiFlash
 
     - Automatically clean archive data to free up disk space
+
++ Tools
+
+    + Backup & Restore (BR)
+
+        - BR now supports backing up user tables created in the `mysql` schema. [#1077](https://github.com/pingcap/br/pull/1077)
+        - Update the `checkVersion` to check both cluster and backup data. [#1090](https://github.com/pingcap/br/pull/1090)
+        - BR now can tolerate minor TiKV disconnection during backup. [#1062](https://github.com/pingcap/br/pull/1062)
+
+    + TiCDC
+
+        - Implement processor flow control to avoid OOM. [#1751](https://github.com/pingcap/ticdc/pull/1751)
+        - Add stale temporary files clean-up in Unified Sorter, and forbids sharing sort-dir. [#1741](https://github.com/pingcap/ticdc/pull/1741)
+        - Add HTTP handler for failpoint [#1732](https://github.com/pingcap/ticdc/pull/1732)
 
 ## Bug Fixes
 
@@ -78,6 +98,16 @@ TiDB version: 4.0.13
     - Fix the bug that the grafana panel of coprocessor cache does not work. [#22617](https://github.com/pingcap/tidb/pull/22617)
     - Fix panic occurs when stats inconsistency. [#22565](https://github.com/pingcap/tidb/pull/22565)
 
++ TiKV
+
+    - Fix the bug that TiKV cannot startup when the end of file dict file is damaged [9963](https://github.com/tikv/tikv/pull/9963)
+    - Limit CDC scan speed (128MB/s by default) [9983](https://github.com/tikv/tikv/pull/9983)
+    - Reduce memory usage of CDC initial scan [10133](https://github.com/tikv/tikv/pull/10133)
+    - Support back pressure CDC scan speed [10142](https://github.com/tikv/tikv/pull/10142)
+    - Fix a potential OOM issue by avoiding unnecessary read for getting CDC old values [10031](https://github.com/tikv/tikv/pull/10031)
+    - Fix a CDC OOM issue caused by reading old values [10197](https://github.com/tikv/tikv/pull/10197)
+    - Add a timeout for s3 storage client to avoid client hangs without responses [10132](https://github.com/tikv/tikv/pull/10132)
+
 + TiFlash
 
     - Fix the issue that number of `delta-merge-tasks` is not reported to Prometheus
@@ -99,31 +129,10 @@ TiDB version: 4.0.13
     - Fix the issue of incorrect results when timestamp value is `1970-01-01` and the timezone offset is negative
     - Fix the issue that hash value of Decimal256 is not stable
 
-## 请对以下未分类的 PR 进行分类，并挪动到以上对应类别中（Compatibility Changes, New Features, Improvements, Bug Fixes）。如果某条 note 不属于本次发版，请删除
-
-+ TiKV
-
-    - Support back pressure CDC scan speed. [#10145](https://github.com/tikv/tikv/pull/10145)
-    - Fix interference between connections to the same region. [#10144](https://github.com/tikv/tikv/pull/10144)
-    - Cdc: skip seek old value for Put if cache returns None [#10141](https://github.com/tikv/tikv/pull/10141)
-    - Reduce memory usage of CDC initial scan. [#10134](https://github.com/tikv/tikv/pull/10134)
-    - Fix potential panics when input of cast_string_as_time is invalid UTF-8 bytes [#9994](https://github.com/tikv/tikv/pull/9994)
-    - Cdc: limit scan speed (128MB/s by default) [#9983](https://github.com/tikv/tikv/pull/9983)
-    - Fix the bug that TiKV cannot startup when the end of file dict file is damaged. [#9963](https://github.com/tikv/tikv/pull/9963)
-
 + Tools
 
-    - BR
+    + TiCDC
 
-        * Update the `checkVersion` to check both cluster and backup data. [#1090](https://github.com/pingcap/br/pull/1090)
-        * BR now supports backing up user tables created in the `mysql` schema. [#1077](https://github.com/pingcap/br/pull/1077)
-        * BR now can tolerate minor TiKV disconnection during backup. [#1062](https://github.com/pingcap/br/pull/1062)
-
-    - TiCDC
-
-        * Fix the deadlock caused by flow-control when the sorter's input channel has been blocked. [#1779](https://github.com/pingcap/ticdc/pull/1779)
-        * Fix the problem that TiKV GC safe point is blocked indefinitely due to TiCDC changefeed checkpoint stagnation. [#1756](https://github.com/pingcap/ticdc/pull/1756)
-        * Implement processor flow control to avoid OOM. [#1751](https://github.com/pingcap/ticdc/pull/1751)
-        * Revert the update for explicit_defaults_for_timestamp which requires `SUPER` privilege when replicating to MySQL. [#1749](https://github.com/pingcap/ticdc/pull/1749)
-        * Add stale temporary files clean-up in Unified Sorter, and forbids sharing sort-dir. [#1741](https://github.com/pingcap/ticdc/pull/1741)
-        * Add HTTP handler for failpoint [#1732](https://github.com/pingcap/ticdc/pull/1732)
+        - Fix the deadlock caused by flow-control when the sorter's input channel has been blocked. [#1779](https://github.com/pingcap/ticdc/pull/1779)
+        - Fix the problem that TiKV GC safe point is blocked indefinitely due to TiCDC changefeed checkpoint stagnation. [#1756](https://github.com/pingcap/ticdc/pull/1756)
+        - Revert the update for explicit_defaults_for_timestamp which requires `SUPER` privilege when replicating to MySQL. [#1749](https://github.com/pingcap/ticdc/pull/1749)
