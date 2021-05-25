@@ -57,7 +57,7 @@ TiDB version: 4.0.13
     - Fix the panic issue that occurs when the `UPDATE` statement with a subquery updates the generated column [#24658](https://github.com/pingcap/tidb/pull/24658)
     - Fix the issue that causes duplicate query results when using the multi-column index for data reads [#24634](https://github.com/pingcap/tidb/pull/24634)
     - Fix the issue that causes wrong query result when using the `BIT` type constant as the divisor in the DIV expression [#24266](https://github.com/pingcap/tidb/pull/24266)
-    - Fix the issue that the default column value set in DDL statements is invalid due to the restriction of the `NO_ZERO_IN_DATE` SQL mode [#24185](https://github.com/pingcap/tidb/pull/24185)
+    - Fix the issue that the `NO_ZERO_IN_DATE` SQL mode does not take effect for the default column value set in DDL statements [#24185](https://github.com/pingcap/tidb/pull/24185)
     - Fix an issue which causes wrong query results when using `UNION` between a `BIT` type column and an `INTEGER` type column [#24026](https://github.com/pingcap/tidb/pull/24026)
     - Fix the wrong `TableDual` plans caused by incorrectly comparing the `BINARY` type and the `CHAR` type [#23917](https://github.com/pingcap/tidb/pull/23917)
     - Fix the issue that the `insert ignore on duplicate` statement might unexpectedly delete table records [#23825](https://github.com/pingcap/tidb/pull/23825)
