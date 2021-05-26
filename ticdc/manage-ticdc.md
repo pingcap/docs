@@ -230,13 +230,12 @@ The following command creates a changefeed that will write cdclog files locally 
 ```shell
 cdc cli changefeed create --pd=http://10.0.10.25:2379 --sink-uri="local:///data/cdclog" --config changefeed.toml
 
+The following command creates a changefeed that will write cdclog files to an external S3 storage in the `logbucket` bucket with a subdirectory of `test`. The endpoint is set in the URI, which is needed if you are using an S3-compatible storage other than Amazon S3.
+
 {{< copyable "shell-regular" >}}
 
 ```shell
 cdc cli changefeed create --pd=http://10.0.10.25:2379 --sink-uri="s3://logbucket/test?endpoint=http://$S3_ENDPOINT/" --config changefeed.toml
-```
-
-This command creates a changefeed that would write cdclog files to external S3 storage in the `logbucket` bucket with a subdirectory of test. The endpoint is set in the URI, this is needed if you are using S3 compatible storage instead of Amazon S3.
 
 #### Use the task configuration file
 
