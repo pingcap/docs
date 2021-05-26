@@ -19,17 +19,17 @@ TiDB version: 4.0.13
 
 + TiDB
 
-    - Skip reading the `mysql.stats_histograms` table if the cached statistics is up-to-date [#24352](https://github.com/pingcap/tidb/pull/24352)
+    - Avoid frequently reading the `mysql.stats_histograms` table if the cached statistics is up-to-date to avoid high CPU usage [#24352](https://github.com/pingcap/tidb/pull/24352)
 
 + TiKV
 
     - Make the calculation process of `store used size` more precise [9904](https://github.com/tikv/tikv/pull/9904)
     - Set more Regions in the `EpochNotMatch` message to reduce Region misses [9731](https://github.com/tikv/tikv/pull/9731)
-    - Speed up the memory freeing [10035](https://github.com/tikv/tikv/pull/10035)
+    - Speed up freeing the memory accumulated in the long-running cluster [10035](https://github.com/tikv/tikv/pull/10035)
 
 + PD
 
-    - Optimize the metrics of TSO processing time [#3524](https://github.com/pingcap/pd/pull/3524)
+    - Optimize the metrics of TSO processing time to help users determine whether the TSO processing time at the PD side is too long [#3524](https://github.com/pingcap/pd/pull/3524)
     - Update the dashboard version to v2021.03.12.1 [#3469](https://github.com/pingcap/pd/pull/3469)
 
 + TiFlash
@@ -59,7 +59,7 @@ TiDB version: 4.0.13
     - Fix the issue that causes wrong query result when using the `BIT` type constant as the divisor in the DIV expression [#24266](https://github.com/pingcap/tidb/pull/24266)
     - Fix the issue that the `NO_ZERO_IN_DATE` SQL mode does not take effect for the default column value set in DDL statements [#24185](https://github.com/pingcap/tidb/pull/24185)
     - Fix an issue which causes wrong query results when using `UNION` between a `BIT` type column and an `INTEGER` type column [#24026](https://github.com/pingcap/tidb/pull/24026)
-    - Fix the wrong `TableDual` plans caused by incorrectly comparing the `BINARY` type and the `CHAR` type [#23917](https://github.com/pingcap/tidb/pull/23917)
+    - Fix the issue that the `TableDual` plans are mistakenly created when comparing the `BINARY` type and the `CHAR` type [#23917](https://github.com/pingcap/tidb/pull/23917)
     - Fix the issue that the `insert ignore on duplicate` statement might unexpectedly delete table records [#23825](https://github.com/pingcap/tidb/pull/23825)
     - Fix the issue that the Audit plugin causes TiDB panic [#23819](https://github.com/pingcap/tidb/pull/23819)
     - Fix the issue that the `HashJoin` operator incorrectly processes the collation [#23812](https://github.com/pingcap/tidb/pull/23812)
@@ -70,7 +70,7 @@ TiDB version: 4.0.13
     - Fix a bug that causes TiDB to mistakenly report the `TiKV server timeout` error when executing TiFlash batch requests [#23700](https://github.com/pingcap/tidb/pull/23700)
     - Fix the issue that the `IndexJoin` operator returns wrong results on the prefix column index [#23691](https://github.com/pingcap/tidb/pull/23691)
     - Fix the issue which causes wrong query results because the collation on the `BINARY` type column is not properly handled [#23598](https://github.com/pingcap/tidb/pull/23598)
-    - Fix the issue of wrong query results that occurs when the `UPDATE` statement contains the join query with the `HAVING` clause [#23575](https://github.com/pingcap/tidb/pull/23575)
+    - Fix the issue of query panic that occurs when the `UPDATE` statement contains the join query with the `HAVING` clause [#23575](https://github.com/pingcap/tidb/pull/23575)
     - Fix the issue that causes TiFlash to return wrong results when using the `NULL` constant in the comparison expression [#23474](https://github.com/pingcap/tidb/pull/23474)
     - Fix the issue of wrong results when comparing the `YEAR` type column with the `STRING` constant [#23335](https://github.com/pingcap/tidb/pull/23335)
     - Fix the issue that `group_concat` panics when `session.group_concat_max_len` is set too small [#23257](https://github.com/pingcap/tidb/pull/23257)
