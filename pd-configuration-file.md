@@ -71,6 +71,12 @@ This document only describes parameters that are not included in command-line pa
 + Default value: `"pd-cluster"`
 + If multiple clusters that have nodes with same configurations are deployed successively, you must specify different tokens to isolate different cluster nodes.
 
+### `lease`
+
++ The timeout of the PD Leader Key lease. After the timeout, the system re-elects a Leader.
++ Default value: `3`
++ Unit: second
+
 ### `quota-backend-bytes`
 
 + The storage size of the meta-information database, which is 8GiB by default
