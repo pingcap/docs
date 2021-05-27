@@ -137,7 +137,6 @@ TiDB version: 4.0.13
         - Fix the issue that the TiKV GC safe point is blocked due to the stagnation of TiCDC changefeed checkpoint [#1756](https://github.com/pingcap/ticdc/pull/1756)
         - Revert the update in `explicit_defaults_for_timestamp` which requires the `SUPER` privilege when replicating data to MySQL [#1749](https://github.com/pingcap/ticdc/pull/1749)
 
-
     + TiDB Lightning
 
         - Fix a bug that TiDB Lightning's TiDB-backend cannot load any data when autocommit is disabled
