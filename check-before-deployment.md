@@ -249,7 +249,7 @@ To check whether the NTP service is installed and whether it synchronizes with t
     chronyc tracking
     ```
 
-    - If it returns `Leap status     : Normal`, then the synchronization process is normal.
+    - If the command returns `Leap status     : Normal`, the synchronization process is normal.
 
         ```
         Reference ID    : 5EC69F0A (ntp1.time.nl)
