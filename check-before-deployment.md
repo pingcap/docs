@@ -202,7 +202,7 @@ To check whether the NTP service is installed and whether it synchronizes with t
     Active: active (running) since Mon 2021-04-05 09:55:29 EDT; 3 days ago
     ```
 
-    This would mean that your system is configured to use `chronyd` instead of `ntpd` to do synchronization with NTP. If this is the case proceed to step 3.
+    If your system is configured to use `chronyd`, proceed to step 3.
 
 2. Run the `ntpstat` command to check whether the NTP service synchronizes with the NTP server.
 
