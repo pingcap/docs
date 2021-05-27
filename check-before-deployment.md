@@ -267,13 +267,13 @@ To check whether the NTP service is installed and whether it synchronizes with t
         Leap status     : Normal
         ```
 
-    - The following situation indicates the synchronization is not synchronizing normally:
+    - If the command returns the following result, an error occurs in the synchronization:
 
         ```
         Leap status    : Not synchronised
         ```
 
-    - The following situation indicates the `chronyd` service is not running normally:
+    - If the command returns the following result, the `chronyd` service is not running normally:
 
         ```
         506 Cannot talk to daemon
