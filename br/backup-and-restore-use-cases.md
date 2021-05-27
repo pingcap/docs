@@ -40,14 +40,14 @@ It is recommended that you deploy the TiDB cluster using [TiUP](/tiup/tiup-clust
 
 ### Cluster versions
 
-* TiDB: v4.0.2
-* TiKV: v4.0.2
-* PD: v4.0.2
-* BR: v4.0.2
+* TiDB: v5.0.0
+* TiKV: v5.0.0
+* PD: v5.0.0
+* BR: v5.0.0
 
 > **Note:**
 >
-> v4.0.2 was the latest version at the time this document was written. It is recommended that you use the latest version of [TiDB/TiKV/PD/BR](/releases/release-notes.md) and make sure that the BR version is **consistent with** the TiDB version.
+> v5.0.0 was the latest version at the time this document was written. It is recommended that you use the latest version of [TiDB/TiKV/PD/BR](/releases/release-notes.md) and make sure that the BR version is **consistent with** the TiDB version.
 
 ### TiKV hardware information
 
@@ -82,6 +82,8 @@ Before the backup or restoration operations, you need to do some preparations:
 
 ### Preparation for backup
 
+The BR tool already supports self-adapting to GC. It automatically registers `backupTS` (the latest PD timestamp by default) to PD's `safePoint` to ensure that TiDB's GC Safe Point does not move forward during the backup, thus avoiding manually setting GC configurations.
+
 For the detailed usage of the `br backup` command, refer to [Use BR Command-line for Backup and Restoration](/br/use-br-command-line-tool.md).
 
 1. Before executing the `br backup` command, ensure that no DDL is running on the TiDB cluster.
@@ -98,8 +100,13 @@ Use the `br backup` command to back up the single table data `--db batchmark --t
 #### Backup prerequisites
 
 * [Preparation for backup](#preparation-for-backup)
-* Configure a high-performance SSD hard disk host as the NFS server to store data, and all BR nodes and TiKV nodes as NFS clients. Mount the same path (for example, `/br_data`) to the NFS server for NFS clients to access the server.
+* Configure a high-performance SSD hard disk host as the NFS server to store data, and all BR nodes, TiKV nodes, and TiFlash nodes as NFS clients. Mount the same path (for example, `/br_data`) to the NFS server for NFS clients to access the server.
 * The total transfer rate between the NFS server and all NFS clients must reach at least `the number of TiKV instances * 150MB/s`. Otherwise the network I/O might become the performance bottleneck.
+
+> **Note:**
+>
+> * During data backup, because only the data of leader replicas are backed up, even if there is a TiFlash replica in the cluster, BR can complete the backup without mounting TiFlash nodes.
+> * When restoring data, BR will restore the data of all replicas. Also, TiFlash nodes need access to the backup data for BR to complete the restore. Therefore, before the restore, you must mount TiFlash nodes to the NFS server.
 
 #### Topology
 
@@ -203,7 +210,7 @@ From the above information, the throughput of a single TiKV instance can be calc
 
 #### Performance tuning
 
-If the resource usage of TiKV does not become an obvious bottleneck during the backup process (for example, in the [Monitoring metrics for the backup](#monitoring-metrics-for-the-backup), the highest CPU usage rate of backup-worker is around `1500%` and the overall I/O usage rate is below `30%`), you can try to increase the value of `--concurrency` to tune the performance. But this performance tuning method is not suitable for the use cases of many small tables. See the following example:
+If the resource usage of TiKV does not become an obvious bottleneck during the backup process (for example, in the [Monitoring metrics for the backup](#monitoring-metrics-for-the-backup), the highest CPU usage rate of backup-worker is around `1500%` and the overall I/O usage rate is below `30%`), you can try to increase the value of `--concurrency` (`4` by default) to tune the performance. But this performance tuning method is not suitable for the use cases of many small tables. See the following example:
 
 {{< copyable "shell-regular" >}}
 

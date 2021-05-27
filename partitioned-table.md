@@ -59,7 +59,7 @@ PARTITION BY RANGE (store_id) (
 
 In this partition scheme, all rows corresponding to employees whose `store_id` is 1 through 5 are stored in the `p0` partition while all employees whose `store_id` is 6 through 10 are stored in `p1`. Range partitioning requires the partitions to be ordered, from lowest to highest.
 
-If you insert a row of data `(72, 'Mitchell', 'Wilson', '1998-06-25', NULL, 13)`, it falls in the `p2` partition. But if you insert a record whose `store_id` is larger than 20, an error is reported because TiDB can not know which partition this record should be inserted into. In this case, you can use `MAXVALUE` when creating a table:
+If you insert a row of data `(72, 'Tom', 'John', '2015-06-25', NULL, 15)`, it falls in the `p2` partition. But if you insert a record whose `store_id` is larger than 20, an error is reported because TiDB can not know which partition this record should be inserted into. In this case, you can use `MAXVALUE` when creating a table:
 
 {{< copyable "sql" >}}
 
@@ -170,13 +170,15 @@ Range partitioning is particularly useful when one or more of the following cond
 >
 > List partitioning is an experimental feature. It is not recommended that you use it in the production environment.
 
-Before creating a List partitioned table, you need to set the value of the session variable `tidb_enable_table_partition` to `ON`.
+Before creating a List partitioned table, you need to set the value of the session variable `tidb_enable_list_partition` to `ON`.
 
 {{< copyable "sql" >}}
 
 ```sql
-set @@session.tidb_enable_table_partition = ON
+set @@session.tidb_enable_list_partition = ON
 ```
+
+Also, make sure that `tidb_enable_table_partition` is set to `ON`, which is the default setting.
 
 List partitioning is similar to Range partitioning. Unlike Range partitioning, in List partitioning, the partitioning expression values for all rows in each partition are in a given value set. This value set defined for each partition can have any number of values but cannot have duplicate values. You can use the `PARTITION ... VALUES IN (...)` clause to define a value set.
 
@@ -572,7 +574,7 @@ You can see that the inserted record `(NULL, 'mothra')` falls into the same part
 
 > **Note:**
 > `NULL` values by Hash partitions in TiDB are handled in the same way as described in [How MySQL Partitioning Handles NULL](https://dev.mysql.com/doc/refman/8.0/en/partitioning-handling-nulls.html), which, however, is not consistent with the actual behavior of MySQL. In other words, MySQL's implementation in this case is not consistent with its documentation.
-> 
+>
 > In this case, the actual behavior of TiDB is in line with the description of this document.
 
 ## Partition management
@@ -1237,4 +1239,4 @@ select * from t;
 
 The `tidb_enable_list_partition` environment variable controls whether to enable the partitioned table feature. If this variable is set to `OFF`, the partition information will be ignored when a table is created, and this table will be created as a normal table.
 
-This variable is only used in table creation. After the table is created, modify this variable value takes no effect. For details, see [system variables](/system-variables.md#tidb_enable_list_partition-new-in-v50-ga).
+This variable is only used in table creation. After the table is created, modify this variable value takes no effect. For details, see [system variables](/system-variables.md#tidb_enable_list_partition-new-in-v50).

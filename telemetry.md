@@ -18,10 +18,11 @@ The following sections describe the shared usage information in detail for each 
 
 ### TiDB
 
-When the telemetry collection feature is enabled in TiDB, the TiDB cluster collects usage details on a daily basis. These usage details include but are not limited to:
+When the telemetry collection feature is enabled in TiDB, the TiDB cluster collects usage details on a 6-hour basis. These usage details include but are not limited to:
 
 - A randomly generated telemetry ID.
 - Deployment characteristics, such as the size of hardware (CPU, memory, disk), TiDB components versions, OS name.
+- Component usage, for example, whether the Async Commit feature is in use or not.
 
 To view the full content of the usage information shared to PingCAP, execute the following SQL statement:
 
@@ -33,7 +34,7 @@ ADMIN SHOW TELEMETRY;
 
 ### TiDB Dashboard
 
-When the telemetry collection feature is enabled in TiDB Dashboard, usage information on the TiDB Dashboard web UI will be shared, including (but not limited to):
+When the telemetry collection feature is enabled for TiDB Dashboard, usage information on the TiDB Dashboard web UI will be shared, including (but not limited to):
 
 - A randomly generated telemetry ID.
 - User operation information, such as the name of the TiDB Dashboard web page accessed by the user.

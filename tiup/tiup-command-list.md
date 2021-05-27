@@ -8,7 +8,7 @@ The command `tiup list` is used to get the list of available components of a mir
 
 ## Syntax
 
-```sh
+```shell
 tiup list [component] [flags]
 ```
 
@@ -20,19 +20,19 @@ tiup list [component] [flags]
 
 - Displays all components. By default, TiUP does not show hidden components.
 - Data type: `BOOLEAN`
-- Default: false
+- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command, and pass the `true` value or do not pass any value.
 
 ### --installed
 
 - Only displays components and versions that have been installed.
 - Data type: `BOOLEAN`
-- Default: false
+- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command, and pass the `true` value or do not pass any value.
 
 ### --verbose
 
 - Displays installed component versions in the components list.
 - Data type: `BOOLEAN`
-- Default: false
+- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command, and pass the `true` value or do not pass any value.
 
 ## Outputs
 
@@ -42,3 +42,5 @@ tiup list [component] [flags]
 - If `[component]` is set:
     - If the specified component exists: TiUP outputs a version information list of the specified component, consisting of `Version` (version number), `Installed` (installation status), `Release` (release date), and `Platforms` (supported platforms).
     - If the specified component does not exist: TiUP reports the error `failed to fetch component: unknown component`.
+
+[<< Back to the previous page - TiUP Reference command list](/tiup/tiup-reference.md#command-list)

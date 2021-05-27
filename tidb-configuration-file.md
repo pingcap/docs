@@ -20,7 +20,11 @@ The TiDB configuration file supports more options than command-line parameters. 
 ### `token-limit`
 
 + The number of sessions that can execute requests concurrently.
++ Type: Integer
 + Default value: `1000`
++ Minimum value: `1`
++ Maximum Value (64-bit platforms): `18446744073709551615`
++ Maximum Value (32-bit platforms): `4294967295`
 
 ### `mem-quota-query`
 
@@ -137,13 +141,13 @@ The TiDB configuration file supports more options than command-line parameters. 
 - Unit: byte
 - Currently, the valid value range is `[3072, 3072*4]`. MySQL and TiDB (version < v3.0.11) do not have this configuration item, but both limit the length of the newly created index. This limit in MySQL is `3072`. In TiDB (version =< 3.0.7), this limit is `3072*4`. In TiDB (3.0.7 < version < 3.0.11), this limit is `3072`. This configuration is added to be compatible with MySQL and earlier versions of TiDB.
 
-### `table-column-count-limit` <span class="version-mark">New in v5.0.0-rc</span>
+### `table-column-count-limit` <span class="version-mark">New in v5.0</span>
 
 - Sets the limit on the number of columns in a single table.
 - Default value: `1017`
 - Currently, the valid value range is `[1017, 4096]`.
 
-### `index-limit` <span class="version-mark">New in v5.0.0-rc</span>
+### `index-limit` <span class="version-mark">New in v5.0</span>
 
 - Sets the limit on the number of indexes in a single table.
 - Default value: `64`
@@ -155,11 +159,17 @@ The TiDB configuration file supports more options than command-line parameters. 
 - Default value: `true`
 - When this configuration is set to `false` on all TiDB instances, the telemetry collection in TiDB is disabled and the [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402-version) system variable does not take effect. See [Telemetry](/telemetry.md) for details.
 
-### `enable-tcp4-only` <span class="version-mark">New in v5.0.0</span>
+### `enable-tcp4-only` <span class="version-mark">New in v5.0</span>
 
 - Enables or disables listening on TCP4 only.
 - Default value: `false`
 - Enabling this option is useful when TiDB is used with LVS for load balancing because the [real client IP from the TCP header](https://github.com/alibaba/LVS/tree/master/kernel/net/toa) can be correctly parsed by the "tcp4" protocol.
+
+### `enable-enum-length-limit` <span class="version-mark">New in v5.0</span>
+
++ Determines whether to limit the maximum length of a single `ENUM` element and a single `SET` element.
++ Default value: `true`
++ When this configuration value is `true`, the maximum length of a single `ENUM` element and a single `SET` element is 255 characters, which is compatible with [MySQL 8.0](https://dev.mysql.com/doc/refman/8.0/en/string-type-syntax.html). When this configuration value is `false`, there is no limit on the length of a single element, which is compatible with TiDB (earlier than v5.0).
 
 ## Log
 
@@ -258,6 +268,12 @@ Configuration items related to log files.
 
 Configuration items related to security.
 
+### `enable-sem`
+
+- Enable the Security Enhanced Mode (SEM).
+- Default value: `false`
+- The status of security enhanced mode is available via the system variable [`tidb_enable_enhanced_security`](/system-variables.md#tidb_enable_enhanced_security).
+
 ### `ssl-ca`
 
 - The file path of the trusted CA certificate in the PEM format.
@@ -345,7 +361,7 @@ Configuration items related to performance.
 - Default value: `5000`
 - If a transaction does not roll back or commit after the number of statements exceeds `stmt-count-limit`, TiDB returns the `statement count 5001 exceeds the transaction limitation, autocommit = false` error. This configuration takes effect **only** in the retriable optimistic transaction. If you use the pessimistic transaction or have disabled the transaction retry, the number of statements in a transaction is not limited by this configuration.
 
-### `txn-entry-size-limit` <span class="version-mark">New in v5.0.0-rc</span>
+### `txn-entry-size-limit` <span class="version-mark">New in v5.0</span>
 
 - The size limit of a single row of data in TiDB.
 - Default value: `6291456` (in bytes)
@@ -440,7 +456,7 @@ The Plan Cache configuration of the `PREPARE` statement.
 
 - The number of cached statements.
 - Default value: `100`
-- The type is `uint`. Values less than `0` are converted to large integers.
+- The type is `UINT`. Values less than `0` are converted to large integers.
 
 ### `memory-guard-ratio`
 
@@ -499,11 +515,6 @@ The Plan Cache configuration of the `PREPARE` statement.
 
 This section introduces configuration items related to the Coprocessor Cache feature.
 
-### `enable`
-
-- Determines whether to enable [Coprocessor Cache](/coprocessor-cache.md).
-- Default value: `false` (which means that Coprocessor Cache is disabled by default)
-
 ### `capacity-mb`
 
 - The total size of the cached data. When the cache space is full, old cache entries are evicted. When the value is `0.0`, the Coprocessor Cache feature is disabled.
@@ -511,7 +522,7 @@ This section introduces configuration items related to the Coprocessor Cache fea
 - Unit: MB
 - Type: Float
 
-### txn-local-latches
+## txn-local-latches
 
 Configuration related to the transaction latch. It is recommended to enable it when many local transaction conflicts occur.
 

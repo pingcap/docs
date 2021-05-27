@@ -8,7 +8,7 @@ The `tiup install` command is used for component installation. It downloads the 
 
 ## Syntax
 
-```sh
+```shell
 tiup install <component1>[:version] [component2...N] [flags]
 ```
 
@@ -23,3 +23,5 @@ None
 - Normally outputs the download information of the component.
 - If the component does not exist, the `The component "%s" not found` error is reported.
 - If the version does not exist, the `version %s not supported by component %s` error is reported.
+
+[<< Back to the previous page - TiUP Reference command list](/tiup/tiup-reference.md#command-list)

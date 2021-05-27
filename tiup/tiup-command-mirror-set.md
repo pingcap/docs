@@ -10,7 +10,7 @@ The address of the official mirror is `https://tiup-mirrors.pingcap.com`.
 
 ## Syntax
 
-```sh
+```shell
 tiup mirror set <mirror-addr> [flags]
 ```
 
@@ -45,3 +45,5 @@ In the steps above, if the mirror is attacked before the `wget` command, you can
 ## Output
 
 None
+
+[<< Back to the previous page - TiUP Mirror command list](/tiup/tiup-command-mirror.md#command-list)

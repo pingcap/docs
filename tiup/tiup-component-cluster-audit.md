@@ -8,7 +8,7 @@ The `tiup cluster audit` command is used to view commands executed on all cluste
 
 ## Syntax
 
-```sh
+```shell
 tiup cluster audit [audit-id] [flags]
 ```
 
@@ -21,7 +21,7 @@ tiup cluster audit [audit-id] [flags]
 
 - Prints the help information.
 - Data type: `Boolean`
-- Default: false
+- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command, and pass the `true` value or do not pass any value.
 
 ## Outputs
 
@@ -30,3 +30,5 @@ tiup cluster audit [audit-id] [flags]
     - ID: the `audit-id` corresponding to the record
     - Time: the execution time of the command corresponding to the record
     - Command：the command corresponding to the record
+
+[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)

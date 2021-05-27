@@ -425,15 +425,11 @@ This section gives the alert rules for the TiKV component.
 
 * Alert rule:
 
-    `sum(increase(tidb_tikvclient_gc_action_result{type="success"}[6h])) < 1`
-
-    > **Note:**
-    >
-    > In TiDB 3.* versions, the `tidb_tikvclient_gc_action_result` metric exists but does not have a value. It's because distributed garbage collection (GC) is introduced in the TiDB 3.0 version but will not be performed in TiDB.
+    `sum(increase(tikv_gcworker_gc_tasks_vec{task="gc"}[1d])) < 1 and sum(increase(tikv_gc_compaction_filter_perform[1d])) < 1`
 
 * Description:
 
-    GC is not performed successfully in a Region within 6 hours, which indicates that GC is not working properly. If GC does not run in a short term, it will not cause much trouble; but if GC keeps down, more and more versions are retained, which slows down the query.
+    GC is not performed successfully on a TiKV instance within 24 hours, which indicates that GC is not working properly. If GC does not run in a short term, it will not cause much trouble; but if GC keeps down, more and more versions are retained, which slows down the query.
 
 * Solution:
 
@@ -813,7 +809,7 @@ This section gives the alert rules for the Node_exporter host.
 
 * Solution:
 
-    * Log in to the machine and run the `df -i` command to view the inode usage of the filesystem.
+    * Log in to the machine and run the `df -i` command to view the node usage of the filesystem.
     * Make a plan to increase the disk capacity or delete some data or increase cluster node depending on different situations.
 
 #### `NODE_disk_readonly`

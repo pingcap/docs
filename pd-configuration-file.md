@@ -143,7 +143,7 @@ Configuration items related to security
 + The path of the PEM file that contains the X509 key
 + Default value: ""
 
-### `redact-info-log` <span class="version-mark">New in v5.0.0-rc</span>
+### `redact-info-log` <span class="version-mark">New in v5.0</span>
 
 + Controls whether to enable log redaction in the PD log.
 + When you set the configuration value to `true`, user data is redacted in the PD log.
@@ -313,13 +313,12 @@ Configuration items related to scheduling
 ### `store-balance-rate`
 
 + Determines the maximum number of operations related to adding peers within a minute
++ Type: Integer
 + Default value: `15`
++ Minimum value: `0`
++ Maximum value: `200`
 
-### `enable-joint-consensus` <span class="version-mark">New in v5.0.0-rc</span>
-
-> **Warning:**
->
-> Currently, Joint Consensus is an experimental feature. It is **NOT** recommended that you use it in the production environment.
+### `enable-joint-consensus` <span class="version-mark">New in v5.0</span>
 
 + Controls whether to use Joint Consensus for replica scheduling. If this configuration is disabled, PD schedules one replica at a time.
 + Default value: `true`

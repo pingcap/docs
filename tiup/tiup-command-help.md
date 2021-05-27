@@ -8,7 +8,7 @@ The TiUP command-line interface provides users with a wealth of help information
 
 ## Syntax
 
-```sh
+```shell
 tiup help [command]
 ```
 
@@ -21,3 +21,5 @@ None
 ## Output
 
 The help information of `[command]` or TiUP.
+
+[<< Back to the previous page - TiUP Reference command list](/tiup/tiup-reference.md#command-list)
