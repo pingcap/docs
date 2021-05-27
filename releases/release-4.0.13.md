@@ -103,7 +103,7 @@ TiDB version: 4.0.13
     - Fix a bug that TiKV cannot start if the `file_dict` file is not fully written into the disk that has been full [9963](https://github.com/tikv/tikv/pull/9963)
     - Limit TiCDC's scan speed at 128MB/s by default [9983](https://github.com/tikv/tikv/pull/9983)
     - Reduce the memory usage of TiCDC's initial scan [10133](https://github.com/tikv/tikv/pull/10133)
-    - Support imposing back pressure on TiCDC's scan speed [10142](https://github.com/tikv/tikv/pull/10142)
+    - Support the back pressure for TiCDC's scan speed [10142](https://github.com/tikv/tikv/pull/10142)
     - Fix a potential OOM issue by avoiding unnecessary reads to get TiCDC old values [10031](https://github.com/tikv/tikv/pull/10031)
     - Fix a TiCDC OOM issue caused by reading old values [10197](https://github.com/tikv/tikv/pull/10197)
     - Add a timeout mechanism for S3 storages to avoid the client hanging without responses [10132](https://github.com/tikv/tikv/pull/10132)
