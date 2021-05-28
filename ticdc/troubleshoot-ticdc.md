@@ -318,7 +318,7 @@ If you encounter an error above, it is recommended to use BR to restore the incr
 ## When the downstream of a changefeed is a database similar to MySQL and TiCDC executes a time-consuming DDL statement, all other changefeeds are blocked. How should I handle the issue?
 
 1. Pause the execution of the changefeed that contains the time-consuming DDL statement. Then you can see that other changefeeds are no longer blocked.
-2. Search for the `apply job` field in the TiCDC log and confirm the `start-ts` of the time-consuming DDL statement. If the TiCDC version is earlier than or equal to v4.0.13 and the `start-ts` is not printed in the log, you can query the TiDB DDL history and find the `binlog.TableInfo.update_timestamp` field of the DDL statement. This field is the required `start-ts`. 
+2. Search for the `apply job` field in the TiCDC log and confirm the `start-ts` of the time-consuming DDL statement. If the TiCDC version is earlier than or equal to v4.0.13 and the `start-ts` is not printed in the log, you can query the TiDB DDL history and find the `binlog.TableInfo.update_timestamp` field of the DDL statement. This field is the required `start-ts`.
 3. Manually execute the DDL statement in the downstream. After the execution finishes, go on performing the following operations.
 4. Modify the changefeed configuration and add the above `start-ts` to the `ignore-txn-start-ts` configuration item.
 5. Resume the paused changefeed.
