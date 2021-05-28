@@ -368,7 +368,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 ### tidb_enable_1pc <span class="version-mark">New in v5.0</span>
 
 - Scope: SESSION | GLOBAL
-- Default value: `ON` for newly created clusters. If your cluster before upgrade was earlier than v5.0, the variable value defaults to `OFF` after the upgrade.
+- Default value: For newly created clusters, the default value of v5.0 RC is `OFF` and the default value of v5.0 GA or later is `ON`. If your cluster was upgraded to v5.0 GA from v5.0 RC, the variable value stays unchanged. If your cluster is upgraded to v5.0 GA from v4.0 or earlier, the variable value defaults to `OFF` after the upgrade.
 - This variable is used to specify whether to enable the one-phase commit feature for transactions that only affect one Region. Compared with the often-used two-phase commit, one-phase commit can greatly reduce the latency of transaction commit and increase the throughput.
 
 > **Note:**
