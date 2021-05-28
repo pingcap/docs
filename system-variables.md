@@ -282,24 +282,6 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Default value: 1
 - This variable is used to control whether to enable the `Chunk` data encoding format in Coprocessor.
 
-<<<<<<< HEAD
-=======
-### tidb_enable_clustered_index <span class="version-mark">New in v5.0</span>
-
-- Scope: SESSION | GLOBAL
-- Default value: INT_ONLY
-- This variable is used to control whether to create the primary key as a [clustered index](/clustered-indexes.md) by default. "By default" here means that the statement does not explicitly specify the keyword `CLUSTERED`/`NONCLUSTERED`. Supported values are `OFF`, `ON`, and `INT_ONLY`:
-    - `OFF` indicates that primary keys are created as non-clustered indexes by default.
-    - `ON` indicates that primary keys are created as clustered indexes by default.
-    - `INT_ONLY` indicates that the behavior is controlled by the configuration item `alter-primary-key`. If `alter-primary-key` is set to `true`, all primary keys are created as non-clustered indexes by default. If it is set to `false`, only the primary keys consist of an integer column are created as clustered indexes.
-
-### tidb_enable_collect_execution_info
-
-- Scope: INSTANCE
-- Default value: ON
-- This variable controls whether to record the execution information of each operator in the slow query log.
-
->>>>>>> 944f614f5 (update the scope of 'tidb_enable_clustered_index' and add cdc server … (#5198))
 ### tidb_enable_fast_analyze
 
 - Scope: SESSION | GLOBAL
