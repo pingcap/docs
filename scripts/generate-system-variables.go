@@ -24,6 +24,10 @@ func formatDefaultValue(sv *variable.SysVar) string {
 		return "(string)"
 	case variable.Socket:
 		return `""` // TODO: need to fix this in the code.
+	case variable.TiDBEnable1PC, variable.TiDBEnableAsyncCommit:
+		return "ON" // These are OFF in the source, which is for OLD versions. For NEW its on.
+	case variable.TiDBRowFormatVersion:
+		return "2" // Same story, for old clusters it is 1.
 	}
 	return sv.Value
 
@@ -64,11 +68,13 @@ func printWarning(sv *variable.SysVar) string {
 	switch sv.Name {
 	case variable.TiDBHashJoinConcurrency, variable.TiDBHashAggFinalConcurrency, variable.TiDBHashAggPartialConcurrency,
 		variable.TiDBIndexLookupConcurrency, variable.TiDBIndexLookupJoinConcurrency, variable.TiDBWindowConcurrency, variable.TiDBProjectionConcurrency:
-		return "> **Warning:**\n>\n> Since v5.0, this variable is deprecated. Instead, use [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v50) for setting.\n"
+		return "> **Warning:**\n>\n> Since v5.0, this variable is deprecated. Instead, use [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v50) for setting.\n\n"
 	case variable.TiDBEnableListTablePartition:
-		return "> **Warning:**\n>\n> Currently, List partition and List COLUMNS partition are experimental features. It is not recommended that you use it in the production environment.\n"
+		return "> **Warning:**\n>\n> Currently, List partition and List COLUMNS partition are experimental features. It is not recommended that you use it in the production environment.\n\n"
 	case variable.TiDBGCScanLockMode:
-		return "> **Warning:**\n>\n> Currently, Green GC is an experimental feature. It is not recommended that you use it in the production environment.\n"
+		return "> **Warning:**\n>\n> Currently, Green GC is an experimental feature. It is not recommended that you use it in the production environment.\n\n"
+	case variable.TiDBEnable1PC, variable.TiDBEnableAsyncCommit:
+		return "> **Note:**\n>\n> The default of `ON` only applies to new clusters. When upgrading from an earlier version of TiDB, the value `OFF` will be used instead.\n\n"
 	}
 	return ""
 }
@@ -239,7 +245,7 @@ func getExtendedDescription(sv *variable.SysVar) string {
 	case variable.TiDBBCJThresholdCount:
 		return "- The unit of the variable is rows. If the objects of the join operation belong to a subquery, the optimizer cannot estimate the size of the subquery result set. In this situation, the size is determined by the number of rows in the result set. If the estimated number of rows in the subquery is less than the value of this variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used."
 	case variable.TiDBBCJThresholdSize:
-		return "- If the table size (in the unit of bytes) is less than the value of the variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used."
+		return "- If the table size (in the unit of bytes) is less than the value of the variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used. The default of 104857600 equals 100 megabytes."
 	case variable.TiDBBuildStatsConcurrency:
 		return "- This variable is used to set the concurrency of executing the `ANALYZE` statement.\n- When the variable is set to a larger value, the execution performance of other queries is affected."
 	case variable.TiDBCapturePlanBaseline:
@@ -470,7 +476,8 @@ func getExtendedDescription(sv *variable.SysVar) string {
 	case variable.TiDBGCRunInterval:
 		return "- Specifies the GC interval, in the format of Go Duration, for example, `\"1h30m\"`, and `\"15m\"`"
 	case variable.TiDBGCScanLockMode:
-		return "- This parameter specifies the way of scanning locks in the Resolve Locks step of GC. When set to `LEGACY`, TiDB scans locks by Regions. The value `PHYSICAL` enables each TiKV node to bypass the Raft layer and directly scan data. This feature can effectively mitigate the impact of GC wakening up all Regions when the [Hibernate Region](/tikv-configuration-file.md#hibernate-regions-experimental) feature is enabled, thus improving the execution speed in the Resolve Locks step."
+		return "    - `LEGACY`: Uses the old way of scanning, that is, disable Green GC.\n    - `PHYSICAL`: Uses the physical scanning method, that is, enable Green GC.\n" +
+			"- This parameter specifies the way of scanning locks in the Resolve Locks step of GC. When set to `LEGACY`, TiDB scans locks by Regions. The value `PHYSICAL` enables each TiKV node to bypass the Raft layer and directly scan data. This feature can effectively mitigate the impact of GC wakening up all Regions when the [Hibernate Region](/tikv-configuration-file.md#hibernate-regions-experimental) feature is enabled, thus improving the execution speed in the Resolve Locks step."
 	case variable.TiDBGeneralLog:
 		return "- This variable is used to set whether to record all SQL statements in the [log](/tidb-configuration-file.md#logfile). This feature is disabled by default. If maintenance personnel needs to trace all SQL statements when locating issues, they can enable this feature.\n" +
 			"- To see all records of this feature in the log, query the `\"GENERAL_LOG\"` string. The following information is recorded:\n" +
@@ -532,9 +539,9 @@ func getExtendedDescription(sv *variable.SysVar) string {
 	case variable.TiDBMaxDeltaSchemaCount:
 		return "- This variable is used to set the maximum number of schema versions (the table IDs modified for corresponding versions) allowed to be cached. The value range is 100 ~ 16384."
 	case variable.TIDBMemQuotaQuery:
-		return "- This variable is used to set the threshold value of memory quota for a query.\n- If the memory quota of a query during execution exceeds the threshold value, TiDB performs the operation designated by the OOMAction option in the configuration file. The initial value of this variable is configured by [`mem-quota-query`](/tidb-configuration-file.md#mem-quota-query)."
+		return "- This variable is used to set the threshold value of memory quota for a query in bytes.\n- If the memory quota of a query during execution exceeds the threshold value, TiDB performs the operation designated by the OOMAction option in the configuration file. The initial value of this variable is configured by [`mem-quota-query`](/tidb-configuration-file.md#mem-quota-query)."
 	case variable.TiDBMemQuotaApplyCache:
-		return "- This variable is used to set the memory usage threshold of the local cache in the `Apply` operator.\n- The local cache in the `Apply` operator is used to speed up the computation of the `Apply` operator. You can set the variable to `0` to disable the `Apply` cache feature."
+		return "- This variable is used to set the memory usage threshold of the local cache in the `Apply` operator in bytes.\n- The local cache in the `Apply` operator is used to speed up the computation of the `Apply` operator. You can set the variable to `0` to disable the `Apply` cache feature."
 	case variable.TiDBMemoryUsageAlarmRatio:
 		return "- TiDB triggers an alarm when the percentage of the memory it takes exceeds a certain threshold. For the detailed usage description of this feature, see [`memory-usage-alarm-ratio`](/tidb-configuration-file.md#memory-usage-alarm-ratio-new-in-v409).\n- You can set the initial value of this variable by configuring [`memory-usage-alarm-ratio`](/tidb-configuration-file.md#memory-usage-alarm-ratio-new-in-v409)."
 	case variable.TiDBOptAggPushDown:
@@ -620,7 +627,7 @@ func getExtendedDescription(sv *variable.SysVar) string {
 		return "- This variable is used to set whether to skip UTF-8 validation.\n" +
 			"- Validating UTF-8 characters affects the performance. When you are sure that the input characters are valid UTF-8 characters, you can set the variable value to `ON`."
 	case variable.TiDBSlowLogThreshold:
-		return "- This variable is used to output the threshold value of the time consumed by the slow log. When the time consumed by a query is larger than this value, this query is considered as a slow log and its log is output to the slow query log.\n" +
+		return "- This variable is used to output the threshold value of the time consumed by the slow log, measured in ms. When the time consumed by a query is larger than this value, this query is considered as a slow log and its log is output to the slow query log.\n" +
 			"\n" +
 			"Usage example:\n" +
 			"\n" +
@@ -630,7 +637,7 @@ func getExtendedDescription(sv *variable.SysVar) string {
 	case variable.TiDBSlowQueryFile:
 		return "- When `INFORMATION_SCHEMA.SLOW_QUERY` is queried, only the slow query log name set by `slow-query-file` in the configuration file is parsed. The default slow query log name is \"tidb-slow.log\". To parse other logs, set the `tidb_slow_query_file` session variable to a specific file path, and then query `INFORMATION_SCHEMA.SLOW_QUERY` to parse the slow query log based on the set file path. For details, see [Identify Slow Queries](/identify-slow-queries.md)."
 	case variable.TiDBQueryLogMaxLen:
-		return "- The maximum length of the SQL statement output. When the output length of a statement is larger than the `tidb_query-log-max-len` value, the statement is truncated to output.\n" +
+		return "- The maximum length of the SQL statement output in bytes. When the output length of a statement is larger than the `tidb_query-log-max-len` value, the statement is truncated to output.\n" +
 			"\n" +
 			"Usage example:\n" +
 			"\n" +
@@ -685,7 +692,16 @@ func getExtendedDescription(sv *variable.SysVar) string {
 	case variable.TiDBSkipASCIICheck:
 		return "- This variable is used to set whether to skip ASCII validation.\n- Validating ASCII characters affects the performance. When you are sure that the input characters are valid ASCII characters, you can set the variable value to `ON`."
 	case variable.TiDBSkipIsolationLevelCheck:
-		return "- After this switch is enabled, if an isolation level unsupported by TiDB is assigned to `tx_isolation`, no error is reported. This helps improve compatibility with applications that set (but do not depend on) a different isolation level."
+		return "- After this switch is enabled, if an isolation level unsupported by TiDB is assigned to `tx_isolation`, no error is reported. This helps improve compatibility with applications that set (but do not depend on) a different isolation level.\n" +
+			"```sql\n" +
+			"tidb> set tx_isolation='serializable';\n" +
+			"ERROR 8048 (HY000): The isolation level 'serializable' is not supported. Set tidb_skip_isolation_level_check=1 to skip this error\n" +
+			"tidb> set tidb_skip_isolation_level_check=1;\n" +
+			"Query OK, 0 rows affected (0.00 sec)\n" +
+			"\n" +
+			"tidb> set tx_isolation='serializable';\n" +
+			"Query OK, 0 rows affected, 1 warning (0.00 sec)\n" +
+			"```"
 	case variable.TiDBSnapshot:
 		return "- This variable is used to set the time point at which the data is read by the session. For example, when you set the variable to \"2017-11-11 20:20:20\" or a TSO number like \"400036290571534337\", the current session reads the data of this moment."
 	case variable.TiDBStmtSummaryHistorySize:
@@ -795,7 +811,11 @@ func main() {
 		}
 
 		// This is the main description
-		fmt.Println(getExtendedDescription(sv) + "\n")
+		fmt.Println(getExtendedDescription(sv))
+
+		if sv.Name != variable.WindowingUseHighPrecision {
+			fmt.Print("\n")
+		}
 
 	}
 
