@@ -105,7 +105,7 @@ Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":
 - `--sort-engine`: Specifies the sorting engine for the `changefeed`. Because TiDB and TiKV adopt distributed architectures, TiCDC must sort the data changes before writing them to the sink. This option supports `unified`(by default)/`memory`/`file`.
 
     - `unified`: When `unified` is used, TiCDC prefers data sorting in memory. If the memory is insufficient, TiCDC automatically uses the disk to store the temporary data. This is the default value of `--sort-engine`.
-    - `memory`: Sorts data changes in memory. It is **NOT recommended** to use it, because OOM is easily triggered when replicating large amounts of data.
+    - `memory`: Sorts data changes in memory. It is **NOT recommended** to use this feature, because OOM is easily triggered when you replicate large amounts of data.
     - `file`: Entirely uses the disk to store the temporary data. This feature is **deprecated**. It is **NOT recommended** to use it in **any** situation.
 
 - `--sort-dir`: Specifies the temporary file directory of the sorting engine. It is **NOT recommended** to use this option in the command `cdc cli changefeed create`. You are recommended to use this option [in the command `cdc server` to set the temporary file directory](/ticdc/deploy-ticdc.md#ticdc-cdc-server-command-line-parameter-description). The default value of this option is `/tmp/cdc_sort`. When the unified sorter is enabled, if the default directory `/tmp/cdc_sort` on the sever is not writable or there is not enough space, you need to manually specify a directory in `sort-dir`. If the directory specified in `sort-dir` is not writable, `changefeed` stops automatically.
@@ -825,11 +825,11 @@ To make sure whether the Unified Sorter feature is enabled on a changefeed, you 
 cdc cli --pd="http://10.0.10.25:2379" changefeed query --changefeed-id=simple-replication-task | grep 'sort-engine'
 ```
 
-In the the above result, if the value of `sort-engine` is "unified", it means that Unified Sorter is enabled on the changefeed.
+In the above result, if the value of `sort-engine` is "unified", it means that Unified Sorter is enabled on the changefeed.
 
 > **Note:**
 >
 > + If your servers use mechanical hard drives or other storage devices that have high latency or limited bandwidth, use the unified sorter with caution.
 > + The total free capacity of hard drives must be greater than or equal to 128G. If you need to replicate a large amount of historical data, make sure that the free capacity on each node is greater than or equal to the size of the incremental data that needs to be replicated.
 > + Unified sorter is enabled by default. If your servers do not match the above requirements and you want to disable the unified sorter, you need to manually set `sort-engine` to `memory` for the changefeed.
-> + To enable Unified Sorter on an existing changefeed, see the methods in [How do I handle the OOM that occurs after TiCDC is restarted after a task interruption?](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-the-oom-that-occurs-after-ticdc-is-restarted-after-a-task-interruption)
+> + To enable Unified Sorter on an existing changefeed, see the methods provided in [How do I handle the OOM that occurs after TiCDC is restarted after a task interruption?](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-the-oom-that-occurs-after-ticdc-is-restarted-after-a-task-interruption)
