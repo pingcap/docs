@@ -432,7 +432,7 @@ func getExtendedDescription(sv *variable.SysVar) string {
 	case variable.TiDBEvolvePlanTaskStartTime:
 		return "- This variable is used to set the start time of baseline evolution in a day."
 	case variable.TiDBExecutorConcurrency:
-		return "This variable is used to set the concurrency of the following SQL operators (to one value):\n" +
+		return "\nThis variable is used to set the concurrency of the following SQL operators (to one value):\n" +
 			"\n" +
 			"- `index lookup`\n" +
 			"- `index lookup join`\n" +
@@ -692,7 +692,7 @@ func getExtendedDescription(sv *variable.SysVar) string {
 	case variable.TiDBSkipASCIICheck:
 		return "- This variable is used to set whether to skip ASCII validation.\n- Validating ASCII characters affects the performance. When you are sure that the input characters are valid ASCII characters, you can set the variable value to `ON`."
 	case variable.TiDBSkipIsolationLevelCheck:
-		return "- After this switch is enabled, if an isolation level unsupported by TiDB is assigned to `tx_isolation`, no error is reported. This helps improve compatibility with applications that set (but do not depend on) a different isolation level.\n" +
+		return "- After this switch is enabled, if an isolation level unsupported by TiDB is assigned to `tx_isolation`, no error is reported. This helps improve compatibility with applications that set (but do not depend on) a different isolation level.\n\n" +
 			"```sql\n" +
 			"tidb> set tx_isolation='serializable';\n" +
 			"ERROR 8048 (HY000): The isolation level 'serializable' is not supported. Set tidb_skip_isolation_level_check=1 to skip this error\n" +

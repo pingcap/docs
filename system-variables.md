@@ -619,6 +619,7 @@ Query OK, 0 rows affected (0.09 sec)
 - Scope: SESSION | GLOBAL
 - Default value: 5
 - Range: [1, 18446744073709551615]
+
 This variable is used to set the concurrency of the following SQL operators (to one value):
 
 - `index lookup`
@@ -1110,6 +1111,7 @@ SET tidb_query_log_max_len = 20
 - Scope: SESSION | GLOBAL
 - Default value: OFF
 - After this switch is enabled, if an isolation level unsupported by TiDB is assigned to `tx_isolation`, no error is reported. This helps improve compatibility with applications that set (but do not depend on) a different isolation level.
+
 ```sql
 tidb> set tx_isolation='serializable';
 ERROR 8048 (HY000): The isolation level 'serializable' is not supported. Set tidb_skip_isolation_level_check=1 to skip this error
