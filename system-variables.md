@@ -401,20 +401,6 @@ Constraint checking is always performed in place for pessimistic transactions (d
 > - If you have enabled TiDB Binlog, enabling this variable cannot improve the performance. To improve the performance, it is recommended to use [TiCDC](/ticdc/ticdc-overview.md) instead.
 > - Enabling this parameter only means that Async Commit becomes an optional mode of transaction commit. In fact, the most suitable mode of transaction commit is determined by TiDB.
 
-<<<<<<< HEAD
-### tidb_enable_1pc <span class="version-mark">New in v5.0</span>
-
-- Scope: SESSION | GLOBAL
-- Default value: For newly created clusters, the default value of v5.0 RC is `OFF` and the default value of v5.0 GA or later is `ON`. If your cluster was upgraded to v5.0 GA from v5.0 RC, the variable value stays unchanged. If your cluster is upgraded to v5.0 GA from v4.0 or earlier, the variable value defaults to `OFF` after the upgrade.
-- This variable is used to specify whether to enable the one-phase commit feature for transactions that only affect one Region. Compared with the often-used two-phase commit, one-phase commit can greatly reduce the latency of transaction commit and increase the throughput.
-
-> **Note:**
->
-> - If you have enabled TiDB Binlog, enabling this variable cannot improve the performance. To improve the performance, it is recommended to use [TiCDC](/ticdc/ticdc-overview.md) instead.
-> - Enabling this parameter only means that one-phase commit becomes an optional mode of transaction commit. In fact, the most suitable mode of transaction commit is determined by TiDB.
-
-=======
->>>>>>> c89a1f629 (system-variables: ensure alphabetical order (#5711))
 ### tidb_enable_cascades_planner
 
 - Scope: SESSION | GLOBAL
