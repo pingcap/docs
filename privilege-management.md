@@ -9,7 +9,7 @@ aliases: ['/docs/dev/privilege-management/','/docs/dev/reference/security/privil
 TiDB supports MySQL 5.7's privilege management system, including the syntax and privilege types. The following features from MySQL 8.0 are also supported:
 
 * SQL Roles, starting with TiDB 3.0.
-* Dynamic privileges (experimental) <!-- include the version number after TiDB 5.0 -->
+* Dynamic privileges <!-- include the version number after TiDB 5.0 -->
 
 This document introduces privilege-related TiDB operations, privileges required for TiDB operations and implementation of the privilege system.
 
@@ -186,7 +186,7 @@ SHOW GRANTS FOR `rw_user`@`192.168.%`;
 
 ### Dynamic privileges
 
-<!-- include a "since" for the version number after TiDB 5.0 --> TiDB features experimental support dynamic privileges, a feature borrowed from MySQL 8.0. Dynamic privileges are intended to replace the `SUPER` privilege by implementing more fine-grained access to certain operations. For example, with dynamic privileges it is possible to grant access to perform `BACKUP` and `RESTORE` operations but not `SHOW PROCESSLIST`.
+<!-- include a "since" for the version number after TiDB 5.0 --> TiDB features support dynamic privileges, a feature borrowed from MySQL 8.0. Dynamic privileges are intended to replace the `SUPER` privilege by implementing more fine-grained access to certain operations. For example, with dynamic privileges it is possible to grant access to perform `BACKUP` and `RESTORE` operations but not `SHOW PROCESSLIST`.
 
 Dynamic privileges include:
 
@@ -196,10 +196,6 @@ Dynamic privileges include:
 * `SYSTEM_VARIABLES_ADMIN`
 
 The full set of dynamic privileges can be observed with `SHOW PRIVILEGES`. Because plugins are permitted to add new privileges, it is possible that the list of privileges that are assignable will differ based on your TiDB installation.
-
-> **Note:**
->
-> Support for dynamic privileges is currently disabled by default. See [`tidb_enable_dynamic_privileges`](/system-variables.md#tidb_enable_dynamic_privileges) for details.
 
 ## Privileges required for TiDB operations
 
