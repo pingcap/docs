@@ -300,6 +300,20 @@ Configuration items related to the sharing of block cache among multiple RocksDB
 + Default value: 45% of the size of total system memory
 + Unit: KB|MB|GB
 
+## storage.io-rate-limit
+
+Configuration items related to the I/O rate limiter.
+
+### `max-bytes-per-sec`
+
++ Maximum I/O bytes that this server can write to or read from disk (determined by mode) in one second. Internally it prefers throttling background operations over foreground ones. This value should be set to the disk's optimal IO bandwidth, e.g. maximum IO bandwidth specified by cloud disk vendors. When set to zero, disk IO operations are not limited.
++ Default value: `"0MB"`
+
+### `mode`
+
++ Determine which types of IO operations are counted and restrained below threshold. Three different modes are: write-only, read-only, all-io. Only write-only mode is supported for now.
++ Default value: `"write-only"`
+
 ## raftstore
 
 Configuration items related to Raftstore
