@@ -60,9 +60,5 @@ The following are descriptions of options available in the `cdc server` command:
 - `ca`: The path of the CA certificate file used by TiCDC, in the PEM format (optional).
 - `cert`: The path of the certificate file used by TiCDC, in the PEM format (optional).
 - `key`: The path of the certificate key file used by TiCDC, in the PEM format (optional).
-<<<<<<< HEAD
 - `config`: The address of the configuration file that TiCDC uses (optional). This option is supported since TiCDC v4.0.13. This option can be used in the TiCDC deployment since TiUP v1.4.0.
-=======
-- `config`: The address of the configuration file that TiCDC uses (optional). This option is supported since TiCDC v5.0.0. This option can be used in the TiCDC deployment since TiUP v1.4.0.
 - `sort-dir`: Specifies the temporary file directory of the sorting engine. The default value of this configuration item is `/tmp/cdc_sort`. When Unified Sorter is enabled, if this directory on the server is not writable or the available space is insufficient, you need to manually specify a directory in `sort-dir`. Make sure that TiCDC can read and write data in the `sort-dir` path.
->>>>>>> 73471fea6 (ticdc: add more docs about unified sorter (#5719))
