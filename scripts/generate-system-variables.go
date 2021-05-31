@@ -10,9 +10,6 @@ import (
 )
 
 func formatDefaultValue(sv *variable.SysVar) string {
-	if sv.Value == "" {
-		return `""` // make it easier to read that it's an empty string default
-	}
 	switch sv.Name {
 	case variable.SystemTimeZone:
 		return "(system dependent)"
@@ -28,9 +25,13 @@ func formatDefaultValue(sv *variable.SysVar) string {
 		return "ON" // These are OFF in the source, which is for OLD versions. For NEW its on.
 	case variable.TiDBRowFormatVersion:
 		return "2" // Same story, for old clusters it is 1.
+	case variable.TiDBTxnMode:
+		return "pessimistic"
+	}
+	if sv.Value == "" {
+		return `""` // make it easier to read that it's an empty string default
 	}
 	return sv.Value
-
 }
 
 func skipSv(sv *variable.SysVar) bool {
@@ -56,8 +57,8 @@ func skipSv(sv *variable.SysVar) bool {
 		variable.TIDBMemQuotaSort, variable.TiDBMergeJoinConcurrency, variable.TiDBOptCPUFactor, variable.TiDBOptDescScanFactor,
 		variable.TiDBOptDiskFactor, variable.TiDBOptJoinReorderThreshold, variable.TiDBOptMemoryFactor, variable.TiDBOptNetworkFactor,
 		variable.TiDBOptScanFactor, variable.TiDBOptTiFlashConcurrencyFactor, variable.TiDBOptimizerSelectivityLevel, variable.TiDBPartitionPruneMode,
-		variable.TiDBOptSeekFactor,
-		variable.LogBin, "license":
+		variable.TiDBOptSeekFactor, variable.LogBin, "license", variable.TiDBEnableTopSQL, variable.TiDBTopSQLAgentAddress, variable.TiDBTopSQLPrecisionSeconds,
+		variable.TiDBTopSQLMaxStatementCount:
 		return true
 	}
 	return false
