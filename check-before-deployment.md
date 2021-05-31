@@ -188,7 +188,7 @@ To check whether the NTP service is installed and whether it synchronizes with t
     Active: active (running) since 一 2017-12-18 13:13:19 CST; 3s ago
     ```
 
-    - If it returns `Unit ntpd.service could not be found.` then try the following:
+    - If it returns `Unit ntpd.service could not be found.`, then try the following command to see whether your system is configured to use `chronyd` instead of `ntpd` to perform clock synchronization with NTP:
 
     {{< copyable "shell-regular" >}}
 
