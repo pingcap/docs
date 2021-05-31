@@ -102,23 +102,13 @@ Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":
 
 - `--start-ts`: Specifies the starting TSO of the `changefeed`. From this TSO, the TiCDC cluster starts pulling data. The default value is the current time.
 - `--target-ts`: Specifies the ending TSO of the `changefeed`. To this TSO, the TiCDC cluster stops pulling data. The default value is empty, which means that TiCDC does not automatically stop pulling data.
-<<<<<<< HEAD
-- `--sort-engine`: Specifies the sorting engine for the `changefeed`. Because TiDB and TiKV adopt distributed architectures, TiCDC must sort the data changes before writing them to the sink. This option supports `memory`/`unified`/`file`.
-
-    - `memory`: Sorts data changes in memory.
-    - `unified`: This feature is introduced since v4.0.9 and becomes a stable feature since v4.0.11. When `unified` is used, TiCDC prefers data sorting in memory. If the memory is insufficient, TiCDC automatically uses the disk to store the temporary data. It is recommended to enable this feature when there is a risk of memory shortage, but **NOT recommended** to enable it in v4.0.9 and v4.0.10.
-    - `file`: Entirely uses the disk to store the temporary data. This feature is **deprecated**. It is **NOT recommended** to use it in **any** situation.
-
-- `--sort-dir`: Specifies the temporary file directory of the sorting engine. For TiDB v4.0.12 and later versions, it is **NOT recommended** to use this option in the command `cdc cli changefeed create`. You are recommended to use this option in the command `cdc server` to set the temporary file directory. The default value of this option is `/tmp/cdc_sort`. When the unified sorter is enabled, if the default directory `/tmp/cdc_sort` on the sever is not writable or there is not enough space, you need to manually specify a directory in `sort-dir`. If the directory specified in `sort-dir` is not writable, `changefeed` stops automatically.
-=======
 - `--sort-engine`: Specifies the sorting engine for the `changefeed`. Because TiDB and TiKV adopt distributed architectures, TiCDC must sort the data changes before writing them to the sink. This option supports `unified` (by default)/`memory`/`file`.
 
-    - `unified`: When `unified` is used, TiCDC prefers data sorting in memory. If the memory is insufficient, TiCDC automatically uses the disk to store the temporary data. This is the default value of `--sort-engine`.
-    - `memory`: Sorts data changes in memory. It is **NOT recommended** to use this sorting engine, because OOM is easily triggered when you replicate a large amount of data.
+    - `unified`: When `unified` is used, TiCDC prefers data sorting in memory. If the memory is insufficient, TiCDC automatically uses the disk to store the temporary data. This is the default value of `--sort-engine` since v4.0.13.
+    - `memory`: Sorts data changes in memory. It is **NOT recommended** to use it, because memory overflow might occur when a large amount of data is replicated.
     - `file`: Entirely uses the disk to store the temporary data. This feature is **deprecated**. It is **NOT recommended** to use it in **any** situation.
 
-- `--sort-dir`: Specifies the temporary file directory of the sorting engine. It is **NOT recommended** to use this option in the command `cdc cli changefeed create`. You are recommended to use this option [in the command `cdc server` to set the temporary file directory](/ticdc/deploy-ticdc.md#description-of-ticdc-cdc-server-command-line-parameters). The default value of this option is `/tmp/cdc_sort`. When the unified sorter is enabled, if the default directory `/tmp/cdc_sort` on the sever is not writable or there is not enough space, you need to manually specify a directory in `sort-dir`. If the directory specified in `sort-dir` is not writable, `changefeed` stops automatically.
->>>>>>> 73471fea6 (ticdc: add more docs about unified sorter (#5719))
+- `--sort-dir`: Specifies the temporary file directory of the sorting engine. For TiDB v4.0.12 and later versions, it is **NOT recommended** to use this option [in the command `cdc server` to set the temporary file directory](/ticdc/deploy-ticdc.md#description-of-ticdc-cdc-server-command-line-parameters). You are recommended to use this option in the command `cdc server` to set the temporary file directory. The default value of this option is `/tmp/cdc_sort`. When the unified sorter is enabled, if the default directory `/tmp/cdc_sort` on the sever is not writable or there is not enough space, you need to manually specify a directory in `sort-dir`. If the directory specified in `sort-dir` is not writable, `changefeed` stops automatically.
 
 - `--config`: Specifies the configuration file of the `changefeed`.
 
@@ -800,11 +790,7 @@ force-replicate = true
 
 ## Unified Sorter
 
-<<<<<<< HEAD
 Unified sorter is the sorting engine in TiCDC. This feature is introduced since v4.0.9. It can mitigate OOM problems caused by the following scenarios:
-=======
-Unified sorter is the sorting engine in TiCDC. It can mitigate OOM problems caused by the following scenarios:
->>>>>>> 73471fea6 (ticdc: add more docs about unified sorter (#5719))
 
 + The data replication task in TiCDC is paused for a long time, during which a large amount of incremental data is accumulated and needs to be replicated.
 + The data replication task is started from an early timestamp so it becomes necessary to replicate a large amount of incremental data.
@@ -825,9 +811,5 @@ In the output of the above command, if the value of `sort-engine` is "unified", 
 >
 > + If your servers use mechanical hard drives or other storage devices that have high latency or limited bandwidth, use the unified sorter with caution.
 > + The total free capacity of hard drives must be greater than or equal to 128G. If you need to replicate a large amount of historical data, make sure that the free capacity on each node is greater than or equal to the size of the incremental data that needs to be replicated.
-<<<<<<< HEAD
-> + If your servers do not match the above requirements and you want to disable the unified sorter, you need to manually set `sort-engine` to `memory` for the changefeed.
-=======
-> + Unified sorter is enabled by default. If your servers do not match the above requirements and you want to disable the unified sorter, you need to manually set `sort-engine` to `memory` for the changefeed.
+> + Since v4.0.13, Unified sorter is enabled by default. If your servers do not match the above requirements and you want to disable the unified sorter, you need to manually set `sort-engine` to `memory` for the changefeed.
 > + To enable Unified Sorter on an existing changefeed, see the methods provided in [How do I handle the OOM that occurs after TiCDC is restarted after a task interruption?](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-the-oom-that-occurs-after-ticdc-is-restarted-after-a-task-interruption).
->>>>>>> 73471fea6 (ticdc: add more docs about unified sorter (#5719))
