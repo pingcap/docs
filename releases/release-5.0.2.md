@@ -1,14 +1,28 @@
 ---
-title: tidb v5.0.2 Release Notes
-category: Releases
-aliases: ['/docs/dev/releases/v5.0.2/']
+title: TiDB 5.0.2 Release Notes
 ---
 
-# tidb v5.0.2 Release Notes
+# TiDB 5.0.2 Release Notes
 
-Release date: June 01, 2021
+Release date: June 9, 2021
 
-TiDB version: v5.0.2
+TiDB version: 5.0.2
+
+## Compatibility Changes
+
+## New Features
+
+## Improvements
+
++ TiDB
+
+    - Skip reading mysql.stats_histograms if cached stats is up-to-date [#24317](https://github.com/pingcap/tidb/pull/24317)
+
++ TiFlash
+
+    - Support push down filter on timestamp type column to storage layer. [#1906](https://github.com/pingcap/tics/pull/1906)
+    - Apply Region snapshots by ingesting files to greatly reduce the memory usage [#1867](https://github.com/pingcap/tics/pull/1867)
+    - Optimize the table lock to avoid reading and DDL jobs from blocking each other [#1858](https://github.com/pingcap/tics/pull/1858)
 
 ## Bug Fixes
 
@@ -36,28 +50,16 @@ TiDB version: v5.0.2
     - Fix problem that TiFlash can not resolve fallen back async commit lock [#1870](https://github.com/pingcap/tics/pull/1870)
     - Fix unexpected timezone cast which may cause wrong result if the return column contains timestamp column [#1827](https://github.com/pingcap/tics/pull/1827)
     - Fix a bug that TiFlash crash during Segment Split. [#1823](https://github.com/pingcap/tics/pull/1823)
+    - Fix bug that execution info for non root mpp task is not accurate enough [#1840](https://github.com/pingcap/tics/pull/1840)
+    - Fix the problem that obsolete data may not be removed when there is no more write to the storage [#1828](https://github.com/pingcap/tics/pull/1828)
 
 + Tools
 
-    - BR
+    - Backup & Restore (BR)
 
-        * Fix the bug that batch split region fails due to total key size exceeds raft entry limit [#1148](https://github.com/pingcap/br/pull/1148)
+        + Fix the bug that batch split region fails due to total key size exceeds raft entry limit [#1148](https://github.com/pingcap/br/pull/1148)
 
-## Improvements
-
-+ TiDB
-
-    - Skip reading mysql.stats_histograms if cached stats is up-to-date [#24317](https://github.com/pingcap/tidb/pull/24317)
-
-+ TiFlash
-
-    - Support push down filter on timestamp type column to storage layer. [#1906](https://github.com/pingcap/tics/pull/1906)
-    - Apply Region snapshots by ingesting files to greatly reduce the memory usage [#1867](https://github.com/pingcap/tics/pull/1867)
-    - Optimize the table lock to avoid reading and DDL jobs from blocking each other [#1858](https://github.com/pingcap/tics/pull/1858)
-    - Fix bug that execution info for non root mpp task is not acurate enough [#1840](https://github.com/pingcap/tics/pull/1840)
-    - Fix the problem that obsolete data may not be removed when there is no more write to the storage. [#1828](https://github.com/pingcap/tics/pull/1828)
-
-## Others
+## 以下 note 未分类。请将以下 note 进行分类 (New feature, Improvements, Bug fixes, Compatibility Changes 四类)，并移动到上面对应的标题下。如果某条 note 为多余的，请删除。如果漏抓取了 note，请手动补充
 
 + TiDB
 
@@ -69,7 +71,7 @@ TiDB version: v5.0.2
 
 + TiKV
 
-    - ```release-note [#10278](https://github.com/tikv/tikv/pull/10278)
+    - release-note [#10278](https://github.com/tikv/tikv/pull/10278)
     - No release notes [#10273](https://github.com/tikv/tikv/pull/10273)
     - Enable hibernate regions by default (i.e. `raftstore.hibernate-regions = true`). [#10266](https://github.com/tikv/tikv/pull/10266)
     - Fix CDC OOM issue caused by reading old values. [#10246](https://github.com/tikv/tikv/pull/10246)
@@ -94,26 +96,26 @@ TiDB version: v5.0.2
 
 + Tools
 
-    - BR
+    + Backup & Restore (BR)
 
-        * Fix the issue that restore from `mysql` schema would failed. [#1143](https://github.com/pingcap/br/pull/1143)
-        * BR would check cluster version of backup now. [#1091](https://github.com/pingcap/br/pull/1091)
-        * Fix the issue that log restore lost delete key during restore. [#1083](https://github.com/pingcap/br/pull/1083)
-        * BR now support backing up user tables created in the `mysql` schema. [#1078](https://github.com/pingcap/br/pull/1078)
-        * Fix a bug that caused, when backup failed, nothing would be printed to terminal. [#1043](https://github.com/pingcap/br/pull/1043)
-        * Fix a bug that caused BR send too many useless RPCs to TiKV. [#1037](https://github.com/pingcap/br/pull/1037)
+        - Fix the issue that restore from `mysql` schema would failed. [#1143](https://github.com/pingcap/br/pull/1143)
+        - BR would check cluster version of backup now. [#1091](https://github.com/pingcap/br/pull/1091)
+        - Fix the issue that log restore lost delete key during restore. [#1083](https://github.com/pingcap/br/pull/1083)
+        - BR now support backing up user tables created in the `mysql` schema. [#1078](https://github.com/pingcap/br/pull/1078)
+        - Fix a bug that caused, when backup failed, nothing would be printed to terminal. [#1043](https://github.com/pingcap/br/pull/1043)
+        - Fix a bug that caused BR send too many useless RPCs to TiKV [#1037](https://github.com/pingcap/br/pull/1037)
 
     - TiCDC
 
-        * Add metrics for table memory consumption [#1885](https://github.com/pingcap/ticdc/pull/1885)
-        * Owner:  When tikv_gc_life_time is greater than gcttl, use tikv_gc_life_time to calculate the lower bound of gcSafePoint. [#1872](https://github.com/pingcap/ticdc/pull/1872)
-        * Reduce memory malloc in sort heap to avoid too much CPU overhead. [#1863](https://github.com/pingcap/ticdc/pull/1863)
-        * Flow Control bug fix (no released version affected) [#1859](https://github.com/pingcap/ticdc/pull/1859)
-        * Support sink flow control to reduce OOM [#1840](https://github.com/pingcap/ticdc/pull/1840)
-        * Fix a bug about resolved ts stopped when move a table. [#1828](https://github.com/pingcap/ticdc/pull/1828)
-        * Fix a deadlock bug in the kv client that deadlock happens when large stale regions exist. [#1801](https://github.com/pingcap/ticdc/pull/1801)
-        * Modified the update strategy of gcSafePoint.  Fix the problem that TiKV GC safe point is blocked indefinitely due to TiCDC changefeed checkpoint stagnation. [#1759](https://github.com/pingcap/ticdc/pull/1759)
-        * Revert the update for explicit_defaults_for_timestamp which requires `SUPER` privilege when replicating to MySQL. [#1750](https://github.com/pingcap/ticdc/pull/1750)
-        * Add stale temporary files clean-up in Unified Sorter, and forbids sharing sort-dir. [#1742](https://github.com/pingcap/ticdc/pull/1742)
-        * Aadd http handler for failpoint [#1733](https://github.com/pingcap/ticdc/pull/1733)
-        * Fix time zone lost in Avro output. [#1712](https://github.com/pingcap/ticdc/pull/1712)
+        - Add metrics for table memory consumption [#1885](https://github.com/pingcap/ticdc/pull/1885)
+        - Owner:  When tikv_gc_life_time is greater than gcttl, use tikv_gc_life_time to calculate the lower bound of gcSafePoint. [#1872](https://github.com/pingcap/ticdc/pull/1872)
+        - Reduce memory malloc in sort heap to avoid too much CPU overhead. [#1863](https://github.com/pingcap/ticdc/pull/1863)
+        - Flow Control bug fix (no released version affected) [#1859](https://github.com/pingcap/ticdc/pull/1859)
+        - Support sink flow control to reduce OOM [#1840](https://github.com/pingcap/ticdc/pull/1840)
+        - Fix a bug about resolved ts stopped when move a table. [#1828](https://github.com/pingcap/ticdc/pull/1828)
+        - Fix a deadlock bug in the kv client that deadlock happens when large stale regions exist. [#1801](https://github.com/pingcap/ticdc/pull/1801)
+        - Modified the update strategy of gcSafePoint.  Fix the problem that TiKV GC safe point is blocked indefinitely due to TiCDC changefeed checkpoint stagnation. [#1759](https://github.com/pingcap/ticdc/pull/1759)
+        - Revert the update for explicit_defaults_for_timestamp which requires `SUPER` privilege when replicating to MySQL. [#1750](https://github.com/pingcap/ticdc/pull/1750)
+        - Add stale temporary files clean-up in Unified Sorter, and forbids sharing sort-dir. [#1742](https://github.com/pingcap/ticdc/pull/1742)
+        - Add http handler for failpoint [#1733](https://github.com/pingcap/ticdc/pull/1733)
+        - Fix time zone lost in Avro output. [#1712](https://github.com/pingcap/ticdc/pull/1712)
