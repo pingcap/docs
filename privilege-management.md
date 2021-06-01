@@ -191,6 +191,7 @@ Since v5.1, TiDB features support dynamic privileges, a feature borrowed from My
 Dynamic privileges include:
 
 * `BACKUP_ADMIN`
+* `RESTORE_ADMIN`
 * `ROLE_ADMIN`
 * `CONNECTION_ADMIN`
 * `SYSTEM_VARIABLES_ADMIN`
