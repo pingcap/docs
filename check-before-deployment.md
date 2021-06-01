@@ -190,19 +190,19 @@ To check whether the NTP service is installed and whether it synchronizes with t
 
     - If it returns `Unit ntpd.service could not be found.`, then try the following command to see whether your system is configured to use `chronyd` instead of `ntpd` to perform clock synchronization with NTP:
 
-    {{< copyable "shell-regular" >}}
-
-    ```bash
-    sudo systemctl status cronyd.service
-    ```
-
-    ```
-    chronyd.service - NTP client/server
-    Loaded: loaded (/usr/lib/systemd/system/chronyd.service; enabled; vendor preset: enabled)
-    Active: active (running) since Mon 2021-04-05 09:55:29 EDT; 3 days ago
-    ```
-
-    If your system is configured to use `chronyd`, proceed to step 3.
+        {{< copyable "shell-regular" >}}
+    
+        ```bash
+        sudo systemctl status cronyd.service
+        ```
+    
+        ```
+        chronyd.service - NTP client/server
+        Loaded: loaded (/usr/lib/systemd/system/chronyd.service; enabled; vendor preset: enabled)
+        Active: active (running) since Mon 2021-04-05 09:55:29 EDT; 3 days ago
+        ```
+    
+        If your system is configured to use `chronyd`, proceed to step 3.
 
 2. Run the `ntpstat` command to check whether the NTP service synchronizes with the NTP server.
 
