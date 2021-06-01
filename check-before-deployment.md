@@ -241,7 +241,7 @@ To check whether the NTP service is installed and whether it synchronizes with t
 
     > **Note:**
     >
-    > This only applies to system that use Chrony instead of NTPd.
+    > This only applies to systems that use Chrony instead of NTPd.
 
     {{< copyable "shell-regular" >}}
 
