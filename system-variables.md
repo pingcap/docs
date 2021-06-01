@@ -131,7 +131,7 @@ mysql> SELECT * FROM t1;
 
 - Scope: SESSION | GLOBAL
 - Default value: 0
-- Range: [0, 18446744073709551615]
+- Range: [0, 2147483647]
 - The maximum execution time of a statement in milliseconds. The default value is unlimited (zero).
 
 > **Note:**
@@ -226,14 +226,14 @@ mysql> SELECT * FROM t1;
 
 - Scope: SESSION | GLOBAL
 - Default value: 100
-- Range: [1, 18446744073709551615]
+- Range: [1, 2147483647]
 - This variable is used to set the `backoff` time when the read request meets a lock.
 
 ### tidb_backoff_weight
 
 - Scope: SESSION | GLOBAL
 - Default value: 2
-- Range: [1, 18446744073709551615]
+- Range: [1, 2147483647]
 - This variable is used to increase the weight of the maximum time of TiDB `backoff`, that is, the maximum retry time for sending a retry request when an internal network or other component (TiKV, PD) failure is encountered. This variable can be used to adjust the maximum retry time and the minimum value is 1.
 
     For example, the base timeout for TiDB to take TSO from PD is 15 seconds. When `tidb_backoff_weight = 2`, the maximum timeout for taking TSO is: *base time \* 2 = 30 seconds*.
@@ -371,7 +371,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 - Scope: SESSION | GLOBAL
 - Default value: 15
-- Range: [1, 18446744073709551615]
+- Range: [1, 2147483647]
 - This variable is used to set the concurrency of the `scan` operation.
 - Use a bigger value in OLAP scenarios, and a smaller value in OLTP scenarios.
 - For OLAP scenarios, the maximum value cannot exceed the number of CPU cores of all the TiKV nodes.
@@ -381,7 +381,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 - Scope: SESSION | GLOBAL
 - Default value: 0
-- Range: [0, 18446744073709551615]
+- Range: [0, 2147483647]
 - When this value is greater than `0`, TiDB will batch commit statements such as `INSERT` or `LOAD DATA` into smaller transactions. This reduces memory usage and helps ensure that the `txn-total-size-limit` is not reached by bulk modifications.
 - Only the value `0` provides ACID compliance. Setting this to any other value will break the atomicity and isolation guarantees of TiDB.
 
@@ -618,7 +618,7 @@ Query OK, 0 rows affected (0.09 sec)
 
 - Scope: SESSION | GLOBAL
 - Default value: 5
-- Range: [1, 18446744073709551615]
+- Range: [1, 2147483647]
 
 This variable is used to set the concurrency of the following SQL operators (to one value):
 
@@ -647,7 +647,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: INSTANCE
 - Default value: 60
-- Range: [10, 9223372036854775807]
+- Range: [10, 2147483647]
 - This variable is used to set the threshold value that determines whether to print expensive query logs. The unit is second. The difference between expensive query logs and slow query logs is:
     - Slow logs are printed after the statement is executed.
     - Expensive query logs print the statements that are being executed, with execution time exceeding the threshold value, and their related information.
@@ -728,7 +728,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: SESSION | GLOBAL
 - Default value: -1
-- Range: [1, 9223372036854775807]
+- Range: [1, 2147483647]
 - This variable is used to set the concurrency of the `hash join` algorithm.
 - A value of `-1` means that the value of `tidb_executor_concurrency` will be used instead.
 
@@ -740,7 +740,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: SESSION | GLOBAL
 - Default value: -1
-- Range: [1, 9223372036854775807]
+- Range: [1, 2147483647]
 - This variable is used to set the concurrency of executing the concurrent `hash aggregation` algorithm in the `final` phase.
 - When the parameter of the aggregate function is not distinct, `HashAgg` is run concurrently and respectively in two phases - the `partial` phase and the `final` phase.
 - A value of `-1` means that the value of `tidb_executor_concurrency` will be used instead.
@@ -753,7 +753,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: SESSION | GLOBAL
 - Default value: -1
-- Range: [1, 9223372036854775807]
+- Range: [1, 2147483647]
 - This variable is used to set the concurrency of executing the concurrent `hash aggregation` algorithm in the `partial` phase.
 - When the parameter of the aggregate function is not distinct, `HashAgg` is run concurrently and respectively in two phases - the `partial` phase and the `final` phase.
 - A value of `-1` means that the value of `tidb_executor_concurrency` will be used instead.
@@ -762,7 +762,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: SESSION | GLOBAL
 - Default value: 25000
-- Range: [1, 18446744073709551615]
+- Range: [1, 2147483647]
 - This variable is used to set the batch size of the `index lookup join` operation.
 - Use a bigger value in OLAP scenarios, and a smaller value in OLTP scenarios.
 
@@ -774,7 +774,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: SESSION | GLOBAL
 - Default value: -1
-- Range: [1, 9223372036854775807]
+- Range: [1, 2147483647]
 - This variable is used to set the concurrency of the `index lookup` operation.
 - Use a bigger value in OLAP scenarios, and a smaller value in OLTP scenarios.
 - A value of `-1` means that the value of `tidb_executor_concurrency` will be used instead.
@@ -787,7 +787,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: SESSION | GLOBAL
 - Default value: -1
-- Range: [1, 9223372036854775807]
+- Range: [1, 2147483647]
 - This variable is used to set the concurrency of the `index lookup join` algorithm.
 - A value of `-1` means that the value of `tidb_executor_concurrency` will be used instead.
 
@@ -795,7 +795,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: SESSION | GLOBAL
 - Default value: 20000
-- Range: [1, 18446744073709551615]
+- Range: [1, 2147483647]
 - This variable is used to set the batch size of the `index lookup` operation.
 - Use a bigger value in OLAP scenarios, and a smaller value in OLTP scenarios.
 
@@ -803,7 +803,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: SESSION | GLOBAL
 - Default value: 1
-- Range: [1, 18446744073709551615]
+- Range: [1, 2147483647]
 - This variable is used to set the concurrency of the `serial scan` operation.
 - Use a bigger value in OLAP scenarios, and a smaller value in OLTP scenarios.
 
@@ -831,7 +831,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: SESSION | GLOBAL
 - Default value: 1024
-- Range: [32, 18446744073709551615]
+- Range: [32, 2147483647]
 - This variable is used to set the maximum number of rows in a chunk during the execution process. Setting to too large of a value may cause cache locality issues.
 
 ### tidb_max_delta_schema_count <span class="version-mark">New in v2.1.18 and v3.0.5</span>
@@ -845,6 +845,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: SESSION | GLOBAL
 - Default value: 33554432
+- Range: [0, 9223372036854775807]
 - This variable is used to set the memory usage threshold of the local cache in the `Apply` operator in bytes.
 - The local cache in the `Apply` operator is used to speed up the computation of the `Apply` operator. You can set the variable to `0` to disable the `Apply` cache feature.
 
@@ -913,7 +914,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: SESSION | GLOBAL
 - Default value: 1
-- Range: [0, 18446744073709551615]
+- Range: [0, 2147483647]
 - When the method that estimates the number of rows based on column order correlation is not available, the heuristic estimation method is used. This variable is used to control the behavior of the heuristic method.
     - When the value is 0, the heuristic method is not used.
     - When the value is greater than 0:
@@ -1036,7 +1037,7 @@ explain select * from t where age=5;
 
 - Scope: SESSION | GLOBAL
 - Default value: -1
-- Range: [-1, 9223372036854775807]
+- Range: [-1, 2147483647]
 - This variable is used to set the concurrency of the `Projection` operator.
 - A value of `-1` means that the value of `tidb_executor_concurrency` will be used instead.
 
@@ -1223,7 +1224,7 @@ SET tidb_slow_log_threshold = 200;
 
 - Scope: SESSION
 - Default value: 300
-- Range: [1, 9223372036854775807]
+- Range: [1, 2147483647]
 - This variable is used to set the timeout for executing the `SPLIT REGION` statement. The unit is second. If a statement is not executed completely within the specified time value, a timeout error is returned.
 
 ### tidb_window_concurrency <span class="version-mark">New in v4.0</span>
@@ -1234,7 +1235,7 @@ SET tidb_slow_log_threshold = 200;
 
 - Scope: SESSION | GLOBAL
 - Default value: -1
-- Range: [1, 9223372036854775807]
+- Range: [1, 2147483647]
 - This variable is used to set the concurrency degree of the window operator.
 - A value of `-1` means that the value of `tidb_executor_concurrency` will be used instead.
 

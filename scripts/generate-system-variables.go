@@ -50,11 +50,11 @@ func skipSv(sv *variable.SysVar) bool {
 		variable.TiDBEnableDynamicPrivileges, variable.TiDBEnableExchangePartition, variable.TiDBEnableExtendedStats, variable.TiDBEnablePointGetCache,
 		variable.TiDBEnableStreaming, variable.TiDBGuaranteeLinearizability, variable.WarningCount, variable.TiDBTxnScope, variable.TiDBTxnReadTS,
 		variable.TxnIsolationOneShot, variable.Timestamp, variable.TiDBLastQueryInfo, variable.TiDBLastTxnInfo,
-		variable.TIDBMemQuotaHashJoin, variable.TiDBStreamAggConcurrency, variable.TiDBTrackAggregateMemoryUsage, variable.TiDBOptBCJ,
+		variable.TiDBMemQuotaHashJoin, variable.TiDBStreamAggConcurrency, variable.TiDBTrackAggregateMemoryUsage, variable.TiDBOptBCJ,
 		variable.TiDBOptConcurrencyFactor, variable.TiDBOptCopCPUFactor, variable.TiDBEnableIndexMergeJoin,
-		variable.TIDBMemQuotaIndexLookupJoin, variable.TIDBMemQuotaIndexLookupReader, variable.TIDBMemQuotaMergeJoin,
-		variable.TiDBEnableAlterPlacement, variable.TiDBSlowLogMasking, variable.TiDBShardAllocateStep, variable.TIDBMemQuotaTopn,
-		variable.TIDBMemQuotaSort, variable.TiDBMergeJoinConcurrency, variable.TiDBOptCPUFactor, variable.TiDBOptDescScanFactor,
+		variable.TiDBMemQuotaIndexLookupJoin, variable.TiDBMemQuotaIndexLookupReader, variable.TiDBMemQuotaMergeJoin,
+		variable.TiDBEnableAlterPlacement, variable.TiDBSlowLogMasking, variable.TiDBShardAllocateStep, variable.TiDBMemQuotaTopn,
+		variable.TiDBMemQuotaSort, variable.TiDBMergeJoinConcurrency, variable.TiDBOptCPUFactor, variable.TiDBOptDescScanFactor,
 		variable.TiDBOptDiskFactor, variable.TiDBOptJoinReorderThreshold, variable.TiDBOptMemoryFactor, variable.TiDBOptNetworkFactor,
 		variable.TiDBOptScanFactor, variable.TiDBOptTiFlashConcurrencyFactor, variable.TiDBOptimizerSelectivityLevel, variable.TiDBPartitionPruneMode,
 		variable.TiDBOptSeekFactor, variable.LogBin, "license", variable.TiDBEnableTopSQL, variable.TiDBTopSQLAgentAddress, variable.TiDBTopSQLPrecisionSeconds,
@@ -539,7 +539,7 @@ func getExtendedDescription(sv *variable.SysVar) string {
 		return "- This variable is used to set the maximum number of rows in a chunk during the execution process. Setting to too large of a value may cause cache locality issues."
 	case variable.TiDBMaxDeltaSchemaCount:
 		return "- This variable is used to set the maximum number of schema versions (the table IDs modified for corresponding versions) allowed to be cached. The value range is 100 ~ 16384."
-	case variable.TIDBMemQuotaQuery:
+	case variable.TiDBMemQuotaQuery:
 		return "- This variable is used to set the threshold value of memory quota for a query in bytes.\n- If the memory quota of a query during execution exceeds the threshold value, TiDB performs the operation designated by the OOMAction option in the configuration file. The initial value of this variable is configured by [`mem-quota-query`](/tidb-configuration-file.md#mem-quota-query)."
 	case variable.TiDBMemQuotaApplyCache:
 		return "- This variable is used to set the memory usage threshold of the local cache in the `Apply` operator in bytes.\n- The local cache in the `Apply` operator is used to speed up the computation of the `Apply` operator. You can set the variable to `0` to disable the `Apply` cache feature."
