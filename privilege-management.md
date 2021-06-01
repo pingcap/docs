@@ -195,7 +195,7 @@ Dynamic privileges include:
 * `CONNECTION_ADMIN`
 * `SYSTEM_VARIABLES_ADMIN`
 
-The full set of dynamic privileges can be observed with `SHOW PRIVILEGES`. Because plugins are permitted to add new privileges, it is possible that the list of privileges that are assignable will differ based on your TiDB installation.
+To see the full set of dynamic privileges, execute the `SHOW PRIVILEGES` statement. Because plugins are permitted to add new privileges, the list of privileges that are assignable might differ based on your TiDB installation.
 
 ## Privileges required for TiDB operations
 
