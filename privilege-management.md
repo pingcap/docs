@@ -9,7 +9,7 @@ aliases: ['/docs/dev/privilege-management/','/docs/dev/reference/security/privil
 TiDB supports MySQL 5.7's privilege management system, including the syntax and privilege types. The following features from MySQL 8.0 are also supported:
 
 * SQL Roles, starting with TiDB 3.0.
-* Dynamic privileges <!-- include the version number after TiDB 5.0 -->
+* Dynamic privileges, starting with TiDB 5.1.
 
 This document introduces privilege-related TiDB operations, privileges required for TiDB operations and implementation of the privilege system.
 
