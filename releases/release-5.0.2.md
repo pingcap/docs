@@ -20,7 +20,6 @@ TiDB version: 5.0.2
 
 + TiFlash
 
-    - Support push down filter on timestamp type column to storage layer. [#1906](https://github.com/pingcap/tics/pull/1906)
     - Apply Region snapshots by ingesting files to greatly reduce the memory usage [#1867](https://github.com/pingcap/tics/pull/1867)
     - Optimize the table lock to avoid reading and DDL jobs from blocking each other [#1858](https://github.com/pingcap/tics/pull/1858)
 
@@ -51,7 +50,6 @@ TiDB version: 5.0.2
     - Fix unexpected timezone cast which may cause wrong result if the return column contains timestamp column [#1827](https://github.com/pingcap/tics/pull/1827)
     - Fix a bug that TiFlash crash during Segment Split. [#1823](https://github.com/pingcap/tics/pull/1823)
     - Fix bug that execution info for non root mpp task is not accurate enough [#1840](https://github.com/pingcap/tics/pull/1840)
-    - Fix the problem that obsolete data may not be removed when there is no more write to the storage [#1828](https://github.com/pingcap/tics/pull/1828)
 
 + Tools
 
