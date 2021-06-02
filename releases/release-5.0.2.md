@@ -38,6 +38,11 @@ TiDB version: 5.0.2
     - Fix the bug that primary lock fallen back from async commit cannot be resolved. [#24397](https://github.com/pingcap/tidb/pull/24397)
     - Statistics: fix a statistics GC problem that can cause duplicated fm-sketch records [#24357](https://github.com/pingcap/tidb/pull/24357)
     - Avoid unnecessary pessimistic rollback when pessimistic locking receives ErrKeyExists [#23800](https://github.com/pingcap/tidb/pull/23800)
+    - Fix numeric literals cannot be recognized when set 'ANSI_QUOTES' sql_mode [#25015](https://github.com/pingcap/tidb/pull/25015)
+    - No longer allowing `INSERT INTO table PARTITION (<partitions>) ... ON DUPLICATE KEY UPDATE` to read from non-listed partitions [#25000](https://github.com/pingcap/tidb/pull/25000)
+    - Fix "index out of range" error when a SQL contains both group by and union. [#24551](https://github.com/pingcap/tidb/pull/24551)
+    - Fix wrong collation for concat function [#24301](https://github.com/pingcap/tidb/pull/24301)
+    - Fix global variable collation_server does not take effect in new session [#24156](https://github.com/pingcap/tidb/pull/24156)
 
 + TiFlash
 
@@ -58,14 +63,6 @@ TiDB version: 5.0.2
         + Fix the bug that batch split region fails due to total key size exceeds raft entry limit [#1148](https://github.com/pingcap/br/pull/1148)
 
 ## 以下 note 未分类。请将以下 note 进行分类 (New feature, Improvements, Bug fixes, Compatibility Changes 四类)，并移动到上面对应的标题下。如果某条 note 为多余的，请删除。如果漏抓取了 note，请手动补充
-
-+ TiDB
-
-    - Update parser to fix lexer bug [#25015](https://github.com/pingcap/tidb/pull/25015)
-    - Fixed issue-24746, no longer allowing `INSERT INTO table PARTITION (<partitions>) ... ON DUPLICATE KEY UPDATE` to read from non-listed partitions [#25000](https://github.com/pingcap/tidb/pull/25000)
-    - Fix "index out of range" error when a SQL contains both group by and union. [#24551](https://github.com/pingcap/tidb/pull/24551)
-    - Fix wrong collation for concat function [#24301](https://github.com/pingcap/tidb/pull/24301)
-    - Fix global variable collation_server does not take effect in new session [#24156](https://github.com/pingcap/tidb/pull/24156)
 
 + TiKV
 
