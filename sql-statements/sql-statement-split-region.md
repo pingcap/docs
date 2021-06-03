@@ -343,9 +343,9 @@ Splitting Regions for partitioned tables is the same as splitting Regions for or
 
 #### Examples of Split Region for a single partition
 
-You can specify the partition to be split. If you want to create a Range table divided into three partitions, the example statement is as follows:
+You can specify the partition to be split.
 
-1. Create a partitioned table:
+1. Create a partitioned table. Suppose that you want to create a Range partitioned table split into three partitions. The example statement is as follows:
 
     {{< copyable "sql" >}}
 
