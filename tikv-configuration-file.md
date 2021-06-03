@@ -1108,7 +1108,7 @@ Configuration items related to `rocksdb.defaultcf.titan`
 
 ## rocksdb.writecf
 
-Configuration items related to `rocksdb.writecf`, which are identical to `rocksdb.defaultcf`. Those not listed here have the same default value and are recommended to be set the same as `rocksdb.defaultcf`.
+Configuration items related to `rocksdb.writecf`, which are identical to `rocksdb.defaultcf`. Those not listed here have the same default value as `rocksdb.defaultcf`.
 
 ### `block-cache-size`
 
@@ -1128,7 +1128,7 @@ Configuration items related to `rocksdb.writecf`, which are identical to `rocksd
 
 ## rocksdb.lockcf
 
-Configuration items related to `rocksdb.lockcf`, which are identical to `rocksdb.defaultcf`. Those not listed here have the same default value and are recommended to be set the same as `rocksdb.defaultcf`.
+Configuration items related to `rocksdb.lockcf`, which are identical to `rocksdb.defaultcf`. Those not listed here have the same default value as `rocksdb.defaultcf`.
 
 ### `block-size`
 
