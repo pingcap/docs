@@ -269,7 +269,7 @@ Splitting Regions for partitioned tables is the same as splitting Regions for or
 
 #### Examples of Split Regions for partitioned tables
 
-1. Create a partitioned table `t`. If you want to create a Hash table divided into two partitions, the example statement is as follows:
+1. Create a partitioned table `t`. Suppose that you want to create a Hash table divided into two partitions. The example statement is as follows:
 
     {{< copyable "sql" >}}
 
@@ -294,7 +294,7 @@ Splitting Regions for partitioned tables is the same as splitting Regions for or
     +-----------+-----------+---------+-----------+-----------------+------------------+------------+---------------+------------+----------------------+------------------+
     ```
 
-2. Use the `SPLIT` syntax to split a Region for each partition. If you want to divide the data in the `[0,10000]` range of each partition into four Regions, the example statement is as follows:
+2. Use the `SPLIT` syntax to split a Region for each partition. Suppose that you want to split the data in the `[0,10000]` range of each partition into four Regions. The example statement is as follows:
 
     {{< copyable "sql" >}}
 
@@ -302,11 +302,11 @@ Splitting Regions for partitioned tables is the same as splitting Regions for or
     split partition table t between (0) and (10000) regions 4;
     ```
 
-    In the above statement, `0` and `10000` respectively represent the `row_id` of the upper and lower boundaries corresponding to the hotspot data you want to break up.
+    In the above statement, `0` and `10000` respectively represent the `row_id` of the upper and lower boundaries corresponding to the hotspot data you want to scatter.
 
     > **Note:**
     >
-    > This example only applies to scenarios where data hotspots are evenly distributed. If the hotspot data is unevenly distributed in the data range you specify, refer to the syntax of uneven split in [Split Regions for partitioned tables](#split-regions-for-partitioned-tables).
+    > This example only applies to scenarios where hotspot data is evenly distributed. If the hotspot data is unevenly distributed in a specified data range, refer to the syntax of uneven split in [Split Regions for partitioned tables](#split-regions-for-partitioned-tables).
 
 3. Use the `SHOW TABLE REGIONS` syntax to view the Regions of this table again. You can see that this table now has ten Regions, each partition with five Regions, four of which are the row data and one is the index data.
 
@@ -356,7 +356,7 @@ You can specify the partition to be split. If you want to create a Range table d
         partition p3 values less than (MAXVALUE) );
     ```
 
-2. If you want to pre-split the data in the range [0,10000] of the `p1` partition into two Regions, the example statement is as follows:
+2. Suppose that you want to split the data in the `[0,10000]` range of the `p1` partition into two Regions. The example statement is as follows:
 
     {{< copyable "sql" >}}
 
@@ -364,7 +364,7 @@ You can specify the partition to be split. If you want to create a Range table d
     split partition table t partition (p1) between (0) and (10000) regions 2;
     ```
 
-3. If you want to pre-split the data in the range [10000,20000] of the `p2` partition into two Regions, the example statement is as follows:
+3. Suppose that you want to split the data in the `[10000,20000]` range of the `p2` partition into two Regions. The example statement is as follows:
 
     {{< copyable "sql" >}}
 
@@ -392,7 +392,7 @@ You can specify the partition to be split. If you want to create a Range table d
     +-----------+----------------+----------------+-----------+-----------------+------------------+------------+---------------+------------+----------------------+------------------+
     ```
 
-5. If you want to pre-split the [0,20000] range of the index `idx` of the `p1` and `p2` partitions into two Regions, the example statement is as follows:
+5. Suppose that you want to split the `[0,20000]` range of the `idx` index of the `p1` and `p2` partitions into two Regions. The example statement is as follows:
 
     {{< copyable "sql" >}}
 
