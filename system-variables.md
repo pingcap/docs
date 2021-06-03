@@ -698,7 +698,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 > Currently, Green GC is an experimental feature. It is not recommended that you use it in the production environment.
 
 - Scope: GLOBAL
-- Default value: PHYSICAL
+- Default value: LEGACY
 - Possible values: PHYSICAL, LEGACY
     - `LEGACY`: Uses the old way of scanning, that is, disable Green GC.
     - `PHYSICAL`: Uses the physical scanning method, that is, enable Green GC.
@@ -817,7 +817,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 ### tidb_isolation_read_engines <span class="version-mark">New in v4.0</span>
 
 - Scope: SESSION
-- Default value: tikv, tiflash, tidb
+- Default value: tikv,tiflash,tidb
 - This variable is used to set the storage engine list that TiDB can use when reading data.
 
 ### tidb_low_resolution_tso

@@ -58,7 +58,7 @@ func skipSv(sv *variable.SysVar) bool {
 		variable.TiDBOptDiskFactor, variable.TiDBOptJoinReorderThreshold, variable.TiDBOptMemoryFactor, variable.TiDBOptNetworkFactor,
 		variable.TiDBOptScanFactor, variable.TiDBOptTiFlashConcurrencyFactor, variable.TiDBOptimizerSelectivityLevel, variable.TiDBPartitionPruneMode,
 		variable.TiDBOptSeekFactor, variable.LogBin, "license", variable.TiDBEnableTopSQL, variable.TiDBTopSQLAgentAddress, variable.TiDBTopSQLPrecisionSeconds,
-		variable.TiDBTopSQLMaxStatementCount:
+		variable.TiDBTopSQLMaxStatementCount, variable.TiDBEnableGlobalTemporaryTable, variable.TiDBEnablePipelinedWindowFunction, variable.TiDBOptCartesianBCJ:
 		return true
 	}
 	return false
