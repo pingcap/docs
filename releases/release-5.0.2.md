@@ -20,8 +20,9 @@ TiDB version: 5.0.2
 
 + TiFlash
 
-    - Apply Region snapshots by ingesting files to greatly reduce the memory usage [#1867](https://github.com/pingcap/tics/pull/1867)
-    - Optimize the table lock to avoid reading and DDL jobs from blocking each other [#1858](https://github.com/pingcap/tics/pull/1858)
+    - Apply Region snapshots by ingesting files to reduce memory usage
+    - Optimize the table lock to avoid reading and DDL jobs blocking each other
+    - Support casting the integer or real type to real type
 
 ## Bug Fixes
 
@@ -46,21 +47,21 @@ TiDB version: 5.0.2
 
 + TiFlash
 
-    - Fix the potential concurrency problem when clone the shared delta index. [#2033](https://github.com/pingcap/tics/pull/2033)
-    - Fix the bug that incomplete data may make TiFlash fail to restart [#2003](https://github.com/pingcap/tics/pull/2003)
-    - Fix the problem that old dmfile is not removed atomically [#1925](https://github.com/pingcap/tics/pull/1925)
-    - Fix the issue that TiFlash may panic when `compaction filter` is enabled [#1891](https://github.com/pingcap/tics/pull/1891)
-    - Fix problem ExchangeSender will sometimes send duplicated data chunks [#1883](https://github.com/pingcap/tics/pull/1883)
-    - Fix problem that TiFlash can not resolve fallen back async commit lock [#1870](https://github.com/pingcap/tics/pull/1870)
-    - Fix unexpected timezone cast which may cause wrong result if the return column contains timestamp column [#1827](https://github.com/pingcap/tics/pull/1827)
-    - Fix a bug that TiFlash crash during Segment Split. [#1823](https://github.com/pingcap/tics/pull/1823)
-    - Fix bug that execution info for non root mpp task is not accurate enough [#1840](https://github.com/pingcap/tics/pull/1840)
+    - Fix the issue of incorrect results when cloning shared delta index concurrently
+    - Fix the potential issue that TiFlash fails to restart with incomplete data
+    - Fix the issue that old dm files are not removed atomically
+    - Fix the potential panic that occurs when feature `compaction filter` is enabled
+    - Fix the potential issue that `ExchangeSender` will send duplicated chunks
+    - Fix the issue that TiFlash can not resolve fallen back `async commit` lock
+    - Fix the issue of incorrect results when the return columns of casting timezone contains timestamp type
+    - Fix the issue that TiFlash panics during Segment Split
+    - Fix the issue that execution information about non root MPP task is not accurate
 
 + Tools
 
     - Backup & Restore (BR)
 
-        + Fix the bug that batch split region fails due to total key size exceeds raft entry limit [#1148](https://github.com/pingcap/br/pull/1148)
+        - Fix the bug that batch split region fails due to total key size exceeds raft entry limit [#1148](https://github.com/pingcap/br/pull/1148)
 
 ## 以下 note 未分类。请将以下 note 进行分类 (New feature, Improvements, Bug fixes, Compatibility Changes 四类)，并移动到上面对应的标题下。如果某条 note 为多余的，请删除。如果漏抓取了 note，请手动补充
 
@@ -82,10 +83,6 @@ TiDB version: 5.0.2
 + PD
 
     - Fix offline_stats statistic after merge offline peer [#3615](https://github.com/pingcap/pd/pull/3615)
-
-+ TiFlash
-
-    - Support int/real as real [#1928](https://github.com/pingcap/tics/pull/1928)
 
 + Tools
 
