@@ -48,23 +48,23 @@ There are two types of Split Region syntax:
 
 - The syntax of even split:
 
-{{< copyable "sql" >}}
+    {{< copyable "sql" >}}
 
-```sql
-SPLIT TABLE table_name [INDEX index_name] BETWEEN (lower_value) AND (upper_value) REGIONS region_num
-```
+    ```sql
+    SPLIT TABLE table_name [INDEX index_name] BETWEEN (lower_value) AND (upper_value) REGIONS region_num
+    ```
 
-`BETWEEN lower_value AND upper_value REGIONS region_num` defines the upper boundary, the lower boundary, and the Region amount. Then the current region will be evenly spilt into the number of regions (as specified in `region_num`) between the upper and lower boundaries.
+    `BETWEEN lower_value AND upper_value REGIONS region_num` defines the upper boundary, the lower boundary, and the Region amount. Then the current region will be evenly spilt into the number of regions (as specified in `region_num`) between the upper and lower boundaries.
 
 - The syntax of uneven split:
 
-{{< copyable "sql" >}}
+    {{< copyable "sql" >}}
 
-```sql
-SPLIT TABLE table_name [INDEX index_name] BY (value_list) [, (value_list)] ...
-```
+    ```sql
+    SPLIT TABLE table_name [INDEX index_name] BY (value_list) [, (value_list)] ...
+    ```
 
-`BY value_list…` specifies a series of points manually, based on which the current Region is spilt. It is suitable for scenarios with unevenly distributed data.
+    `BY value_list…` specifies a series of points manually, based on which the current Region is spilt. It is suitable for scenarios with unevenly distributed data.
 
 The following example shows the result of the `SPLIT` statement:
 
