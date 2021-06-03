@@ -311,7 +311,8 @@ Configuration items related to the I/O rate limiter.
 
 ### `mode`
 
-+ Determine which types of IO operations are counted and restrained below threshold. Three different modes are: write-only, read-only, all-io. Only write-only mode is supported for now.
++ Determine which types of IO operations are counted and restrained below threshold. Only write-only mode is supported for now.
++ Optional value: `"write-only"`, `"read-only"`, `"all-io"`
 + Default value: `"write-only"`
 
 ## raftstore
