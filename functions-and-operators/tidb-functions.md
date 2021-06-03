@@ -13,7 +13,7 @@ The `TIDB_BOUNDED_STALENESS` function is an internal function of TiDB.
 
 ## TIDB_DECODE_KEY
 
-The `TIDB_DECODE_KEY` function can be used to decode a TiDB-encoded key entry into a JSON structure containing `_tidb_rowid` and the `table_id`. These encoded keys can be found in some system tables and in logging outputs.
+The `TIDB_DECODE_KEY` function can be used to decode a TiDB-encoded key entry into a JSON structure containing `_tidb_rowid` and `table_id`. These encoded keys can be found in some system tables and in logging outputs.
 
 ### Synopsis
 
