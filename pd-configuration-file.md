@@ -195,7 +195,8 @@ Configuration items related to scheduling
 + Default value: `4`
 
 ### `hot-region-cache-hits-threshold`
-+ The threshold used to set the number of minutes required to identify the hotspot region. Only after the region is in the hotspot state for more than this number of minutes can it participate in hot region scheduling
+
++ The threshold used to set the number of minutes required to identify a hot Region. PD can participate in the hotspot scheduling only after the Region is in the hotspot state for more than this number of minutes.
 + Default value: `3`
 
 ### `replica-schedule-limit`
