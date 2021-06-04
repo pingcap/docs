@@ -1038,7 +1038,7 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 + Default value: `"128MB"`
 + Unit: KB|MB|GB
 
-## `rocksdb.defaultcf.titan` | `rocksdb.writecf.titan` | `rocksdb.lockcf.titan`
+## rocksdb.defaultcf.titan | rocksdb.writecf.titan | rocksdb.lockcf.titan
 
 Configuration items related to `rocksdb.defaultcf.titan`, `rocksdb.writecf.titan`, and `rocksdb.lockcf.titan`.
 
