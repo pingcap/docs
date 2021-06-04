@@ -832,7 +832,7 @@ Configuration items related to Titan
 
 ## rocksdb.defaultcf | rocksdb.writecf | rocksdb.lockcf
 
-Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf` and `rocksdb.lockcf`.
+Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rocksdb.lockcf`.
 
 ### `block-size`
 
@@ -881,7 +881,7 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf` and `rocks
 
 + Determines whether to put the entire key to bloom filter
 + Default value for `defaultcf`: `true`
-+ Default value for `writecf` and `lockcf`: `true`
++ Default value for `writecf` and `lockcf`: `false`
 
 ### `bloom-filter-bits-per-key`
 
@@ -1040,7 +1040,7 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf` and `rocks
 
 ## `rocksdb.defaultcf.titan` | `rocksdb.writecf.titan` | `rocksdb.lockcf.titan`
 
-Configuration items related to `rocksdb.defaultcf.titan`, `rocksdb.writecf.titan` and `rocksdb.lockcf.titan`.
+Configuration items related to `rocksdb.defaultcf.titan`, `rocksdb.writecf.titan`, and `rocksdb.lockcf.titan`.
 
 ### `min-blob-size`
 
