@@ -190,6 +190,7 @@ Configuration items related to scheduling
 + Default value: `2048`
 
 ### `hot-region-schedule-limit`
+
 + The number of Hot Region scheduling tasks performed at the same time. It is independent with Region scheduling.
 + Default value: `4`
 
