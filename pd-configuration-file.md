@@ -245,7 +245,7 @@ Configuration items related to scheduling
 
 ### `hot-region-schedule-limit`
 
-+ The number of Hot Region scheduling tasks performed at the same time. It is independent with Region scheduling.
++ Controls the hot Region scheduling tasks that are running at the same time. It is independent of the Region scheduling.
 + Default value: `4`
 
 ### `hot-region-cache-hits-threshold`
