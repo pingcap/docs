@@ -840,21 +840,24 @@ Configuration items related to Titan
 + Default value: `4`
 + Minimum value: `1`
 
-## rocksdb.defaultcf
+## rocksdb.defaultcf | rocksdb.writecf | rocksdb.lockcf
 
-Configuration items related to `rocksdb.defaultcf`
+Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf` and `rocksdb.lockcf`.
 
 ### `block-size`
 
 + The default size of a RocksDB block
-+ Default value: `"64KB"`
++ Default value for `defaultcf` and `writecf`: `"64KB"`
++ Default value for `lockcf`: `"16KB"`
 + Minimum value: `"1KB"`
 + Unit: KB|MB|GB
 
 ### `block-cache-size`
 
 + The cache size of a RocksDB block
-+ Default value: `Total machine memory * 25%`
++ Default value for `defaultcf`: `Total machine memory * 25%`
++ Default value for `writecf`: `Total machine memory * 15%`
++ Default value for `lockcf`: `Total machine memory * 2%`
 + Minimum value: `0`
 + Unit: KB|MB|GB
 
@@ -881,12 +884,14 @@ Configuration items related to `rocksdb.defaultcf`
 ### `optimize-filters-for-hits`
 
 + Determines whether to optimize the hit ratio of filters
-+ Default value: `true`
++ Default value for `defaultcf`: `true`
++ Default value for `writecf` and `lockcf`: `false`
 
 ### `whole-key-filtering`
 
 + Determines whether to put the entire key to bloom filter
-+ Default value: `true`
++ Default value for `defaultcf`: `true`
++ Default value for `writecf` and `lockcf`: `true`
 
 ### `bloom-filter-bits-per-key`
 
@@ -922,7 +927,8 @@ Configuration items related to `rocksdb.defaultcf`
 ### `write-buffer-size`
 
 + Memtable size
-+ Default value: `"128MB"`
++ Default value for `defaultcf` and `writecf`: `"128MB"`
++ Default value for `lockcf`: `"32MB"`
 + Minimum value: `0`
 + Unit: KB|MB|GB
 
@@ -941,7 +947,8 @@ Configuration items related to `rocksdb.defaultcf`
 ### `max-bytes-for-level-base`
 
 + The maximum number of bytes at base level (L1). Generally, it is set to 4 times the size of a memtable.
-+ Default value: `"512MB"`
++ Default value for `defaultcf` and `writecf`: `"512MB"`
++ Default value for `lockcf`: `"128MB"`
 + Minimum value: `0`
 + Unit: KB|MB|GB
 
@@ -955,7 +962,8 @@ Configuration items related to `rocksdb.defaultcf`
 ### `level0-file-num-compaction-trigger`
 
 + The maximum number of files at L0 that trigger compaction
-+ Default value: `4`
++ Default value for `defaultcf` and `writecf`: `4`
++ Default value for `lockcf`: `1`
 + Minimum value: `0`
 
 ### `level0-slowdown-writes-trigger`
@@ -981,7 +989,8 @@ Configuration items related to `rocksdb.defaultcf`
 
 + The priority type of compaction
 + Optional values: `0` (`ByCompensatedSize`), `1` (`OldestLargestSeqFirst`), `2` (`OldestSmallestSeqFirst`), `3` (`MinOverlappingRatio`)
-+ Default value: `3`
++ Default value for `defaultcf` and `writecf`: `3`
++ Default value for `lockcf`: `1`
 
 ### `dynamic-level-bytes`
 
@@ -1024,7 +1033,8 @@ Configuration items related to `rocksdb.defaultcf`
 ### `enable-compaction-guard`
 
 + Enables or disables the compaction guard, which is an optimization to split SST files at TiKV Region boundaries. This optimization can help reduce compaction I/O and allows TiKV to use larger SST file size (thus less SST files overall) and at the time efficiently clean up stale data when migrating Regions.
-+ Default value: `true`
++ Default value for `defaultcf` and `writecf`: `true`
++ Default value for `lockcf`: `false`
 
 ### `compaction-guard-min-output-file-size`
 
@@ -1038,9 +1048,9 @@ Configuration items related to `rocksdb.defaultcf`
 + Default value: `"128MB"`
 + Unit: KB|MB|GB
 
-## `rocksdb.defaultcf.titan`
+## `rocksdb.defaultcf.titan` | `rocksdb.writecf.titan` | `rocksdb.lockcf.titan`
 
-Configuration items related to `rocksdb.defaultcf.titan`
+Configuration items related to `rocksdb.defaultcf.titan`, `rocksdb.writecf.titan` and `rocksdb.lockcf.titan`.
 
 ### `min-blob-size`
 
@@ -1114,84 +1124,6 @@ Configuration items related to `rocksdb.defaultcf.titan`
 ### `gc-merge-rewrite`
 
 + Determines whether to use the merge operator to write back blob indexes for Titan GC. When `gc-merge-rewrite` is enabled, it reduces the effect of Titan GC on the writes in the foreground.
-+ Default value: `false`
-
-## rocksdb.writecf
-
-Configuration items related to `rocksdb.writecf`, which are identical to `rocksdb.defaultcf`. Those not listed here have the same default value as `rocksdb.defaultcf`.
-
-### `block-cache-size`
-
-+ Block cache size
-+ Default value: `Total machine memory * 15%`
-+ Unit: MB|GB
-
-### `optimize-filters-for-hits`
-
-+ Determines whether to optimize the hit ratio of the filter
-+ Default value: `false`
-
-### `whole-key-filtering`
-
-+ Determines whether to put the entire key to bloom filter
-+ Default value: `false`
-
-## rocksdb.lockcf
-
-Configuration items related to `rocksdb.lockcf`, which are identical to `rocksdb.defaultcf`. Those not listed here have the same default value as `rocksdb.defaultcf`.
-
-### `block-size`
-
-+ The default size of a RocksDB block
-+ Default value: `"16KB"`
-+ Minimum value: `"1KB"`
-+ Unit: KB|MB|GB
-
-### `block-cache-size`
-
-+ Block cache size
-+ Default value: `Total machine memory * 2%`
-+ Unit: MB|GB
-
-### `optimize-filters-for-hits`
-
-+ Determines whether to optimize the hit ratio of the filter
-+ Default value: `false`
-
-### `whole-key-filtering`
-
-+ Determines whether to put the entire key to bloom filter
-+ Default value: `false`
-
-### `write-buffer-size`
-
-+ Memtable size
-+ Default value: `"32MB"`
-+ Minimum value: `0`
-+ Unit: KB|MB|GB
-
-### `max-bytes-for-level-base`
-
-+ The maximum number of bytes at base level (L1). Generally, it is set to 4 times the size of a memtable.
-+ Default value: `"128MB"`
-+ Minimum value: `0`
-+ Unit: KB|MB|GB
-
-### `level0-file-num-compaction-trigger`
-
-+ The maximum number of files at L0 that trigger compaction
-+ Default value: `1`
-+ Minimum value: `0`
-
-### `compaction-pri`
-
-+ The priority type of compaction
-+ Optional values: `0` (`ByCompensatedSize`), `1` (`OldestLargestSeqFirst`), `2` (`OldestSmallestSeqFirst`), `3` (`MinOverlappingRatio`)
-+ Default value: `1`
-
-### `enable-compaction-guard`
-
-+ Enables or disables the compaction guard, which is an optimization to split SST files at TiKV Region boundaries. This optimization can help reduce compaction I/O and allows TiKV to use larger SST file size (thus less SST files overall) and at the time efficiently clean up stale data when migrating Regions.
 + Default value: `false`
 
 ## `raftdb`
