@@ -306,13 +306,13 @@ Configuration items related to the I/O rate limiter.
 
 ### `max-bytes-per-sec`
 
-+ Maximum I/O bytes that this server can write to or read from disk (determined by mode) in one second. Internally it prefers throttling background operations over foreground ones. This value should be set to the disk's optimal IO bandwidth, e.g. maximum IO bandwidth specified by cloud disk vendors. When set to zero, disk IO operations are not limited.
++ Limits the maximum I/O bytes that a server can write to or read from the disk (determined by the `mode` configuration item below) in one second. With this limit is reached, TiKV prefers throttling background operations over foreground ones. The value of this configuration item should be set to the disk's optimal I/O bandwidth, for example, the maximum I/O bandwidth specified by your cloud disk vendor. When this configuration value is set to zero, disk I/O operations are not limited.
 + Default value: `"0MB"`
 
 ### `mode`
 
-+ Determine which types of IO operations are counted and restrained below threshold. Only write-only mode is supported for now.
-+ Optional value: `"write-only"`, `"read-only"`, `"all-io"`
++ Determines which types of I/O operations are counted and restrained below the `max-bytes-per-sec` threshold. Currently, only the write-only mode is supported.
++ Optional value: `"write-only"`
 + Default value: `"write-only"`
 
 ## raftstore
