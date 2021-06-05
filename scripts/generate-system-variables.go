@@ -75,7 +75,19 @@ func printWarning(sv *variable.SysVar) string {
 	case variable.TiDBGCScanLockMode:
 		return "> **Warning:**\n>\n> Currently, Green GC is an experimental feature. It is not recommended that you use it in the production environment.\n\n"
 	case variable.TiDBEnable1PC, variable.TiDBEnableAsyncCommit:
-		return "> **Note:**\n>\n> The default of `ON` only applies to new clusters. When upgrading from an earlier version of TiDB, the value `OFF` will be used instead.\n\n"
+		return "> **Note:**\n>\n> The default value of `ON` only applies to new clusters. if your cluster was upgraded from an earlier version of TiDB, the value `OFF` will be used instead.\n\n"
+	}
+	return ""
+}
+
+func printUnits(sv *variable.SysVar) string {
+	switch sv.Name {
+	case variable.TiDBMemQuotaApplyCache, variable.TiDBMemQuotaQuery, variable.TiDBQueryLogMaxLen, variable.TiDBBCJThresholdSize:
+		return "- Unit: Bytes\n"
+	case variable.TiDBSlowLogThreshold, variable.MaxExecutionTime:
+		return "- Unit: milliseconds\n"
+	case variable.InteractiveTimeout, variable.WaitTimeout:
+		return "- Unit: seconds\n"
 	}
 	return ""
 }
@@ -210,7 +222,7 @@ func getExtendedDescription(sv *variable.SysVar) string {
 	case variable.SystemTimeZone:
 		return "- This variable shows the system time zone from when TiDB was first bootstrapped. See also [`time_zone`](#time_zone)."
 	case variable.WaitTimeout:
-		return "- This variable controls the idle timeout of user sessions in seconds. A zero-value means unlimited."
+		return "- This variable controls the idle timeout of user sessions. A zero-value means unlimited."
 	case variable.WindowingUseHighPrecision:
 		return "- This variable controls whether to use the high precision mode when computing the window functions."
 	case variable.TiDBAllowBatchCop:
@@ -246,7 +258,7 @@ func getExtendedDescription(sv *variable.SysVar) string {
 	case variable.TiDBBCJThresholdCount:
 		return "- The unit of the variable is rows. If the objects of the join operation belong to a subquery, the optimizer cannot estimate the size of the subquery result set. In this situation, the size is determined by the number of rows in the result set. If the estimated number of rows in the subquery is less than the value of this variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used."
 	case variable.TiDBBCJThresholdSize:
-		return "- If the table size (in the unit of bytes) is less than the value of the variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used. The default of 104857600 equals 100 megabytes."
+		return "- If the table size is less than the value of the variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used."
 	case variable.TiDBBuildStatsConcurrency:
 		return "- This variable is used to set the concurrency of executing the `ANALYZE` statement.\n- When the variable is set to a larger value, the execution performance of other queries is affected."
 	case variable.TiDBCapturePlanBaseline:
@@ -540,9 +552,9 @@ func getExtendedDescription(sv *variable.SysVar) string {
 	case variable.TiDBMaxDeltaSchemaCount:
 		return "- This variable is used to set the maximum number of schema versions (the table IDs modified for corresponding versions) allowed to be cached. The value range is 100 ~ 16384."
 	case variable.TiDBMemQuotaQuery:
-		return "- This variable is used to set the threshold value of memory quota for a query in bytes.\n- If the memory quota of a query during execution exceeds the threshold value, TiDB performs the operation designated by the OOMAction option in the configuration file. The initial value of this variable is configured by [`mem-quota-query`](/tidb-configuration-file.md#mem-quota-query)."
+		return "- This variable is used to set the threshold value of memory quota for a query.\n- If the memory quota of a query during execution exceeds the threshold value, TiDB performs the operation designated by the OOMAction option in the configuration file. The initial value of this variable is configured by [`mem-quota-query`](/tidb-configuration-file.md#mem-quota-query)."
 	case variable.TiDBMemQuotaApplyCache:
-		return "- This variable is used to set the memory usage threshold of the local cache in the `Apply` operator in bytes.\n- The local cache in the `Apply` operator is used to speed up the computation of the `Apply` operator. You can set the variable to `0` to disable the `Apply` cache feature."
+		return "- This variable is used to set the memory usage threshold of the local cache in the `Apply` operator.\n- The local cache in the `Apply` operator is used to speed up the computation of the `Apply` operator. You can set the variable to `0` to disable the `Apply` cache feature."
 	case variable.TiDBMemoryUsageAlarmRatio:
 		return "- TiDB triggers an alarm when the percentage of the memory it takes exceeds a certain threshold. For the detailed usage description of this feature, see [`memory-usage-alarm-ratio`](/tidb-configuration-file.md#memory-usage-alarm-ratio-new-in-v409).\n- You can set the initial value of this variable by configuring [`memory-usage-alarm-ratio`](/tidb-configuration-file.md#memory-usage-alarm-ratio-new-in-v409)."
 	case variable.TiDBOptAggPushDown:
@@ -628,7 +640,7 @@ func getExtendedDescription(sv *variable.SysVar) string {
 		return "- This variable is used to set whether to skip UTF-8 validation.\n" +
 			"- Validating UTF-8 characters affects the performance. When you are sure that the input characters are valid UTF-8 characters, you can set the variable value to `ON`."
 	case variable.TiDBSlowLogThreshold:
-		return "- This variable is used to output the threshold value of the time consumed by the slow log, measured in ms. When the time consumed by a query is larger than this value, this query is considered as a slow log and its log is output to the slow query log.\n" +
+		return "- This variable is used to output the threshold value of the time consumed by the slow log. When the time consumed by a query is larger than this value, this query is considered as a slow log and its log is output to the slow query log.\n" +
 			"\n" +
 			"Usage example:\n" +
 			"\n" +
@@ -638,7 +650,7 @@ func getExtendedDescription(sv *variable.SysVar) string {
 	case variable.TiDBSlowQueryFile:
 		return "- When `INFORMATION_SCHEMA.SLOW_QUERY` is queried, only the slow query log name set by `slow-query-file` in the configuration file is parsed. The default slow query log name is \"tidb-slow.log\". To parse other logs, set the `tidb_slow_query_file` session variable to a specific file path, and then query `INFORMATION_SCHEMA.SLOW_QUERY` to parse the slow query log based on the set file path. For details, see [Identify Slow Queries](/identify-slow-queries.md)."
 	case variable.TiDBQueryLogMaxLen:
-		return "- The maximum length of the SQL statement output in bytes. When the output length of a statement is larger than the `tidb_query-log-max-len` value, the statement is truncated to output.\n" +
+		return "- The maximum length of the SQL statement output. When the output length of a statement is larger than the `tidb_query-log-max-len` value, the statement is truncated to output.\n" +
 			"\n" +
 			"Usage example:\n" +
 			"\n" +
@@ -654,9 +666,9 @@ func getExtendedDescription(sv *variable.SysVar) string {
 			"    - leader-and-follower: Read from leader or follower node\n" +
 			"- See [follower reads](/follower-read.md) for additional details."
 	case variable.TiDBEnableEnhancedSecurity:
-		return "- This variable indicates if the TiDB server you are connected to has Security Enhanced Mode (SEM) enabled, and can not be changed without restarting the TiDB server.\n" +
-			"- SEM is inspired by the design of systems such as [Security-Enhanced Linux](https://en.wikipedia.org/wiki/Security-Enhanced_Linux). It reduces the capabilities of users with the MySQL `SUPER` privilege, and instead requires `RESTRICTED` fine grained privileges to be granted as a replacement. These include:\n" +
-			"    - `RESTRICTED_TABLES_ADMIN`: The ability to write to system tables in the `mysql` schema, and see sensitive columns on `information_schema` tables.\n" +
+		return "- This variable indicates whether the TiDB server you are connected to has the Security Enhanced Mode (SEM) enabled. To change its value, you need to modify the value of `enable-sem` in your TiDB server configuration file and restart the TiDB server.\n" +
+			"- SEM is inspired by the design of systems such as [Security-Enhanced Linux](https://en.wikipedia.org/wiki/Security-Enhanced_Linux). It reduces the abilities of users with the MySQL `SUPER` privilege and instead requires `RESTRICTED` fine-grained privileges to be granted as a replacement. These fine-grained privileges include:\n" +
+			"    - `RESTRICTED_TABLES_ADMIN`: The ability to write data to system tables in the `mysql` schema and to see sensitive columns on `information_schema` tables.\n" +
 			"    - `RESTRICTED_STATUS_ADMIN`: The ability to see sensitive variables in the command `SHOW STATUS`.\n" +
 			"    - `RESTRICTED_VARIABLES_ADMIN`: The ability to see and set sensitive variables in `SHOW [GLOBAL] VARIABLES` and `SET`.\n" +
 			"    - `RESTRICTED_USER_ADMIN`: The ability to prevent other users from making changes or dropping a user account."
@@ -810,6 +822,8 @@ func main() {
 		if sv.Type == variable.TypeEnum {
 			fmt.Printf("- Possible values: %s\n", formatPossibleValues(sv))
 		}
+
+		fmt.Print(printUnits(sv))
 
 		// This is the main description
 		fmt.Println(getExtendedDescription(sv))
