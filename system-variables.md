@@ -113,6 +113,7 @@ mysql> SELECT * FROM t1;
 - Scope: SESSION | GLOBAL
 - Default value: 28800
 - Range: [1, 31536000]
+- Unit: seconds
 - This variable represents the idle timeout of the interactive user session, which is measured in seconds. Interactive user session refers to the session established by calling [`mysql_real_connect()`](https://dev.mysql.com/doc/c-api/5.7/en/mysql-real-connect.html) API using the `CLIENT_INTERACTIVE` option (for example, MySQL shell client). This variable is fully compatible with MySQL.
 
 ### last_plan_from_binding <span class="version-mark">New in v4.0</span>
@@ -132,6 +133,7 @@ mysql> SELECT * FROM t1;
 - Scope: SESSION | GLOBAL
 - Default value: 0
 - Range: [0, 2147483647]
+- Unit: milliseconds
 - The maximum execution time of a statement in milliseconds. The default value is unlimited (zero).
 
 > **Note:**
@@ -252,7 +254,8 @@ mysql> SELECT * FROM t1;
 - Scope: SESSION | GLOBAL
 - Default value: 104857600
 - Range: [0, 9223372036854775807]
-- If the table size (in the unit of bytes) is less than the value of the variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used. The default of 104857600 equals 100 megabytes.
+- Unit: Bytes
+- If the table size is less than the value of the variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used.
 
 ### tidb_build_stats_concurrency
 
@@ -389,7 +392,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 > **Note:**
 >
-> The default of `ON` only applies to new clusters. When upgrading from an earlier version of TiDB, the value `OFF` will be used instead.
+> The default value of `ON` only applies to new clusters. if your cluster was upgraded from an earlier version of TiDB, the value `OFF` will be used instead.
 
 - Scope: SESSION | GLOBAL
 - Default value: ON
@@ -418,7 +421,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 > **Note:**
 >
-> The default of `ON` only applies to new clusters. When upgrading from an earlier version of TiDB, the value `OFF` will be used instead.
+> The default value of `ON` only applies to new clusters. if your cluster was upgraded from an earlier version of TiDB, the value `OFF` will be used instead.
 
 - Scope: SESSION | GLOBAL
 - Default value: ON
@@ -461,9 +464,9 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 - Scope: NONE
 - Default value: OFF
-- This variable indicates if the TiDB server you are connected to has Security Enhanced Mode (SEM) enabled, and can not be changed without restarting the TiDB server.
-- SEM is inspired by the design of systems such as [Security-Enhanced Linux](https://en.wikipedia.org/wiki/Security-Enhanced_Linux). It reduces the capabilities of users with the MySQL `SUPER` privilege, and instead requires `RESTRICTED` fine grained privileges to be granted as a replacement. These include:
-    - `RESTRICTED_TABLES_ADMIN`: The ability to write to system tables in the `mysql` schema, and see sensitive columns on `information_schema` tables.
+- This variable indicates whether the TiDB server you are connected to has the Security Enhanced Mode (SEM) enabled. To change its value, you need to modify the value of `enable-sem` in your TiDB server configuration file and restart the TiDB server.
+- SEM is inspired by the design of systems such as [Security-Enhanced Linux](https://en.wikipedia.org/wiki/Security-Enhanced_Linux). It reduces the abilities of users with the MySQL `SUPER` privilege and instead requires `RESTRICTED` fine-grained privileges to be granted as a replacement. These fine-grained privileges include:
+    - `RESTRICTED_TABLES_ADMIN`: The ability to write data to system tables in the `mysql` schema and to see sensitive columns on `information_schema` tables.
     - `RESTRICTED_STATUS_ADMIN`: The ability to see sensitive variables in the command `SHOW STATUS`.
     - `RESTRICTED_VARIABLES_ADMIN`: The ability to see and set sensitive variables in `SHOW [GLOBAL] VARIABLES` and `SET`.
     - `RESTRICTED_USER_ADMIN`: The ability to prevent other users from making changes or dropping a user account.
@@ -846,7 +849,8 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Scope: SESSION | GLOBAL
 - Default value: 33554432
 - Range: [0, 9223372036854775807]
-- This variable is used to set the memory usage threshold of the local cache in the `Apply` operator in bytes.
+- Unit: Bytes
+- This variable is used to set the memory usage threshold of the local cache in the `Apply` operator.
 - The local cache in the `Apply` operator is used to speed up the computation of the `Apply` operator. You can set the variable to `0` to disable the `Apply` cache feature.
 
 ### tidb_mem_quota_query
@@ -854,7 +858,8 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Scope: SESSION
 - Default value: 1073741824
 - Range: [-1, 9223372036854775807]
-- This variable is used to set the threshold value of memory quota for a query in bytes.
+- Unit: Bytes
+- This variable is used to set the threshold value of memory quota for a query.
 - If the memory quota of a query during execution exceeds the threshold value, TiDB performs the operation designated by the OOMAction option in the configuration file. The initial value of this variable is configured by [`mem-quota-query`](/tidb-configuration-file.md#mem-quota-query).
 
 ### tidb_memory_usage_alarm_ratio
@@ -1046,7 +1051,8 @@ explain select * from t where age=5;
 - Scope: INSTANCE
 - Default value: 4096
 - Range: [-1, 9223372036854775807]
-- The maximum length of the SQL statement output in bytes. When the output length of a statement is larger than the `tidb_query-log-max-len` value, the statement is truncated to output.
+- Unit: Bytes
+- The maximum length of the SQL statement output. When the output length of a statement is larger than the `tidb_query-log-max-len` value, the statement is truncated to output.
 
 Usage example:
 
@@ -1135,7 +1141,8 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - Scope: INSTANCE
 - Default value: 300
 - Range: [-1, 9223372036854775807]
-- This variable is used to output the threshold value of the time consumed by the slow log, measured in ms. When the time consumed by a query is larger than this value, this query is considered as a slow log and its log is output to the slow query log.
+- Unit: milliseconds
+- This variable is used to output the threshold value of the time consumed by the slow log. When the time consumed by a query is larger than this value, this query is considered as a slow log and its log is output to the slow query log.
 
 Usage example:
 
@@ -1274,7 +1281,8 @@ This variable is an alias for _transaction_isolation_.
 - Scope: SESSION | GLOBAL
 - Default value: 0
 - Range: [0, 31536000]
-- This variable controls the idle timeout of user sessions in seconds. A zero-value means unlimited.
+- Unit: seconds
+- This variable controls the idle timeout of user sessions. A zero-value means unlimited.
 
 ### windowing_use_high_precision
 
