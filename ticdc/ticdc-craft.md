@@ -70,7 +70,7 @@ Body for [Row Changed Event](#row-changed-event):
 Column group:
 | 1 byte | uvarint | string chunk | uvarint chunk | uvarint chunk | nullable bytes chunk |
 | :------ | :------ | :------ | :------ | :------ | :------ |
-| type: 1 New, 2 Old, 3 Delete | number of columns | name | type | flag | value |
+| type: 1 New, 2 Old | number of columns | name | type | flag | value |
 
 Body for [DDL Event](#ddl-event):
 
@@ -164,7 +164,6 @@ This section introduces the formats of Row Changed Event, DDL Event, and Resolve
     | :--- | :--- | :---------- |
     | Name | string | The column name. |
     | Type | uint64 | The column type. For details, see [Column Type Code](#column-type-code). |
-    | Where Handle | boolean | Determines whether this column can be the filter condition of the `Where` clause. When this column is unique on the table, `Where Handle` is `true`. |
     | Flag (**experimental**) | numeric | The bit flags of columns. For details, see [Bit flags of columns](#bit-flags-of-columns). |
     | Value | any | The Column value. For details, see [Binary encoding for different column types](#column-type-code). |
 
