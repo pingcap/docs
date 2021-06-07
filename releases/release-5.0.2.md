@@ -70,6 +70,14 @@ TiDB version: 5.0.2
     - Fix wrong collation for concat function [#24301](https://github.com/pingcap/tidb/pull/24301)
     - Fix global variable collation_server does not take effect in new session [#24156](https://github.com/pingcap/tidb/pull/24156)
 
++ PD
+
+    - Fix offline_stats statistic after merge offline peer [#3615](https://github.com/pingcap/pd/pull/3615)
+    - Fix the issue that leader re-election be slow when there are many stores [#3719](https://github.com/tikv/pd/pull/3719)
+    - Fix the panic issue about remove evict leader scheduler from a nonexistent store
+[#3679](https://github.com/tikv/pd/pull/3679)
+    - Fix the statistic issue that offline Peer not clean after been merged [#3614](https://github.com/tikv/pd/pull/3614)
+
 + TiFlash
 
     - Fix the issue of incorrect results when cloning shared delta index concurrently
@@ -120,11 +128,3 @@ TiDB version: 5.0.2
     - Fix sysbench point-get performance regression when TiKV readpool is not busy. [#10115](https://github.com/tikv/tikv/pull/10115)
     - Improve CDC old value cache hit ratio in pessimistic txn [#10089](https://github.com/tikv/tikv/pull/10089)
     - Approximate split range evenly [#10086](https://github.com/tikv/tikv/pull/10086)
-
-+ PD
-
-    - Fix offline_stats statistic after merge offline peer [#3615](https://github.com/pingcap/pd/pull/3615)
-    - Fix the issue that leader re-election be slow when there are many stores [#3719] (https://github.com/tikv/pd/pull/3719)
-    - Fix the panic issue about remove evict leader scheduler from a nonexistent store
-[#3679](https://github.com/tikv/pd/pull/3679)
-    - Fix the statistic issue that offline Peer not clean after been merged [#3614](https://github.com/tikv/pd/pull/3614)
