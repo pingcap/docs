@@ -99,6 +99,14 @@ mysql> SELECT * FROM t1;
 - Default value: (system hostname)
 - The hostname of the TiDB server as a read-only variable.
 
+### init_connect
+
+- Scope: GLOBAL
+- Default value: ""
+- The `init_connect` feature permits a SQL statement to be executed when users first connect to a TiDB server.
+- Users that have the `CONNECTION_ADMIN` or `SUPER` privileges will not execute the `init_connect` statement.
+- If the `init_connect` statement results in an error, the user connection will be terminated.
+
 ### innodb_lock_wait_timeout
 
 - Scope: SESSION | GLOBAL
