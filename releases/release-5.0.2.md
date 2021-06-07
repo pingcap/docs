@@ -131,5 +131,3 @@ TiDB version: 5.0.2
         - Fix the issue that lightning panic due to batch kv greater than 4 GB. [#5739](https://github.com/pingcap/br/pull/5739)
         - Fix the bug that lightning tidb backend cannot load any data when autocommit is disabled [#1125](https://github.com/pingcap/br/pull/1125)
         - Fix the bug that batch split region fails due to total key size exceeds raft entry limit [#1065](https://github.com/pingcap/br/pull/1065)
-
-
