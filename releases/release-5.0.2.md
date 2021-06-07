@@ -18,11 +18,24 @@ TiDB version: 5.0.2
 
 ## New Features
 
++ TiKV
+
+    - Enable hibernate regions by default (i.e. `raftstore.hibernate-regions = true`). [#10266](https://github.com/tikv/tikv/pull/10266)
+
 ## Improvements
 
 + TiDB
 
     - Skip reading mysql.stats_histograms if cached stats is up-to-date [#24317](https://github.com/pingcap/tidb/pull/24317)
+
++ TiKV
+
+    - BR now supports S3-compatible storage using virtual-host addressing style. [#10243](https://github.com/tikv/tikv/pull/10243)
+    - Support back pressure CDC scan speed. [#10151](https://github.com/tikv/tikv/pull/10151)
+    - Reduce memory usage of CDC initial scan. [#10133](https://github.com/tikv/tikv/pull/10133)
+    - Fix sysbench point-get performance regression when TiKV readpool is not busy. [#10115](https://github.com/tikv/tikv/pull/10115)
+    - Improve CDC old value cache hit ratio in pessimistic txn [#10089](https://github.com/tikv/tikv/pull/10089)
+    - Approximate split range evenly [#10086](https://github.com/tikv/tikv/pull/10086)
 
 + TiFlash
 
@@ -74,9 +87,14 @@ TiDB version: 5.0.2
 
     - Fix offline_stats statistic after merge offline peer [#3615](https://github.com/pingcap/pd/pull/3615)
     - Fix the issue that leader re-election be slow when there are many stores [#3719](https://github.com/tikv/pd/pull/3719)
-    - Fix the panic issue about remove evict leader scheduler from a nonexistent store
-[#3679](https://github.com/tikv/pd/pull/3679)
+    - Fix the panic issue about remove evict leader scheduler from a nonexistent store [#3679](https://github.com/tikv/pd/pull/3679)
     - Fix the statistic issue that offline Peer not clean after been merged [#3614](https://github.com/tikv/pd/pull/3614)
+
++ TiKV
+
+    - Fix CDC OOM issue caused by reading old values. [#10246](https://github.com/tikv/tikv/pull/10246)
+    - Allow to read empty value for the clustered primary key column in the secondary index when collation is latin1_bin. [#10239](https://github.com/tikv/tikv/pull/10239)
+    - Add `abort-on-panic` config, which allow core dump to be generated when panic. Users still need to correctly config the environment to enable core dump. [#10216](https://github.com/tikv/tikv/pull/10216)
 
 + TiFlash
 
@@ -114,17 +132,4 @@ TiDB version: 5.0.2
         - Fix the bug that lightning tidb backend cannot load any data when autocommit is disabled [#1125](https://github.com/pingcap/br/pull/1125)
         - Fix the bug that batch split region fails due to total key size exceeds raft entry limit [#1065](https://github.com/pingcap/br/pull/1065)
 
-## 以下 note 未分类。请将以下 note 进行分类 (New feature, Improvements, Bug fixes, Compatibility Changes 四类)，并移动到上面对应的标题下。如果某条 note 为多余的，请删除。如果漏抓取了 note，请手动补充
 
-+ TiKV
-
-    - Enable hibernate regions by default (i.e. `raftstore.hibernate-regions = true`). [#10266](https://github.com/tikv/tikv/pull/10266)
-    - Fix CDC OOM issue caused by reading old values. [#10246](https://github.com/tikv/tikv/pull/10246)
-    - BR now supports S3-compatible storage using virtual-host addressing style. [#10243](https://github.com/tikv/tikv/pull/10243)
-    - Allow to read empty value for the clustered primary key column in the secondary index when collation is latin1_bin. [#10239](https://github.com/tikv/tikv/pull/10239)
-    - Add `abort-on-panic` config, which allow core dump to be generated when panic. Users still need to correctly config the environment to enable core dump. [#10216](https://github.com/tikv/tikv/pull/10216)
-    - Support back pressure CDC scan speed. [#10151](https://github.com/tikv/tikv/pull/10151)
-    - Reduce memory usage of CDC initial scan. [#10133](https://github.com/tikv/tikv/pull/10133)
-    - Fix sysbench point-get performance regression when TiKV readpool is not busy. [#10115](https://github.com/tikv/tikv/pull/10115)
-    - Improve CDC old value cache hit ratio in pessimistic txn [#10089](https://github.com/tikv/tikv/pull/10089)
-    - Approximate split range evenly [#10086](https://github.com/tikv/tikv/pull/10086)
