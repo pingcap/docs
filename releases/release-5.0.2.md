@@ -33,9 +33,8 @@ TiDB version: 5.0.2
     - BR now supports the S3-compatible storage using the virtual-host addressing mode [#10243](https://github.com/tikv/tikv/pull/10243)
     - Support the back pressure for TiCDC's scan speed [#10151](https://github.com/tikv/tikv/pull/10151)
     - Reduce the memory usage of TiCDC's initial scan [#10133](https://github.com/tikv/tikv/pull/10133)
-
     - Improve the cache hit ratio of the TiCDC's Old Value feature in the pessimistic transaction [#10089](https://github.com/tikv/tikv/pull/10089)
-    - Split Regions more evenly to avoid the excessively large Region size due to the splitting speed not catching up with the writing speed [#10086](https://github.com/tikv/tikv/pull/10086)
+    - Split Regions more evenly [#10086](https://github.com/tikv/tikv/pull/10086)
 
 + TiFlash
 
@@ -87,11 +86,10 @@ TiDB version: 5.0.2
     - Fix a TiCDC OOM issue caused by reading old values [#9996](https://github.com/tikv/tikv/issues/9996) [#9981](https://github.com/tikv/tikv/issues/9981)
     - Fix the issue of empty value in the secondary index for the clustered primary key column when collation is `latin1_bin` [#24548](https://github.com/pingcap/tidb/issues/24548)
     - Add the `abort-on-panic` configuration, which allows TiKV to generate the core dump file when panic occurs. Users still need to correctly configure the environment to enable core dump [#10216](https://github.com/tikv/tikv/pull/10216)
-    - Fix sysbench point-get performance regression when TiKV readpool is not busy [#10046](https://github.com/tikv/tikv/issues/10046)
+    - Fix the performance regression issue of `point get` queries that occurs when TiKV is not busy [#10046](https://github.com/tikv/tikv/issues/10046)
 
 + PD
 
-    - Fix the issue of inaccurate `offline_stats` statistics after merging offline peers [#3611](https://github.com/tikv/pd/issues/3611)
     - Fix the issue that the PD Leader re-election is slow when there are many stores [#3697](https://github.com/tikv/pd/issues/3697)
     - Fix the panic issue that occurs when removing the evict leader scheduler from a non-existent store [#3660](https://github.com/tikv/pd/issues/3660)
     - Fix the issue that the statistics are not updated after offline peers are merged [#3611](https://github.com/tikv/pd/issues/3611)
