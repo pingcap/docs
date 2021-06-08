@@ -16,22 +16,22 @@ func formatDefaultValue(sv *variable.SysVar) string {
 	case variable.Hostname:
 		return "(system hostname)"
 	case variable.Version:
-		return "5.7.25-TiDB-(tidb version)"
+		return "`5.7.25-TiDB-`(tidb version)"
 	case variable.VersionComment:
 		return "(string)"
 	case variable.Socket:
 		return `""` // TODO: need to fix this in the code.
 	case variable.TiDBEnable1PC, variable.TiDBEnableAsyncCommit:
-		return "ON" // These are OFF in the source, which is for OLD versions. For NEW its on.
+		return "`ON`" // These are OFF in the source, which is for OLD versions. For NEW its on.
 	case variable.TiDBRowFormatVersion:
-		return "2" // Same story, for old clusters it is 1.
+		return "`2`" // Same story, for old clusters it is 1.
 	case variable.TiDBTxnMode:
-		return "pessimistic"
+		return "`pessimistic`"
 	}
 	if sv.Value == "" {
 		return `""` // make it easier to read that it's an empty string default
 	}
-	return sv.Value
+	return fmt.Sprintf("`%s`", sv.Value)
 }
 
 func skipSv(sv *variable.SysVar) bool {
@@ -48,7 +48,7 @@ func skipSv(sv *variable.SysVar) bool {
 		variable.MaxPreparedStmtCount, variable.PluginDir, variable.PluginLoad, variable.SQLLogBin, "ssl_ca", "ssl_cert", "ssl_key", variable.TiDBAnalyzeVersion,
 		variable.TiDBBatchCommit, variable.TiDBBatchDelete, variable.TiDBBatchInsert, variable.TiDBEnableChangeColumnType, variable.TiDBEnableChangeMultiSchema,
 		variable.TiDBEnableDynamicPrivileges, variable.TiDBEnableExchangePartition, variable.TiDBEnableExtendedStats, variable.TiDBEnablePointGetCache,
-		variable.TiDBEnableStreaming, variable.TiDBGuaranteeLinearizability, variable.WarningCount, variable.TiDBTxnScope, variable.TiDBTxnReadTS,
+		variable.TiDBEnableStreaming, variable.TiDBGuaranteeLinearizability, variable.TiDBTxnScope, variable.TiDBTxnReadTS,
 		variable.TxnIsolationOneShot, variable.Timestamp, variable.TiDBLastQueryInfo, variable.TiDBLastTxnInfo,
 		variable.TiDBMemQuotaHashJoin, variable.TiDBStreamAggConcurrency, variable.TiDBTrackAggregateMemoryUsage, variable.TiDBOptBCJ,
 		variable.TiDBOptConcurrencyFactor, variable.TiDBOptCopCPUFactor, variable.TiDBEnableIndexMergeJoin,
@@ -85,9 +85,9 @@ func printUnits(sv *variable.SysVar) string {
 	case variable.TiDBMemQuotaApplyCache, variable.TiDBMemQuotaQuery, variable.TiDBQueryLogMaxLen, variable.TiDBBCJThresholdSize:
 		return "- Unit: Bytes\n"
 	case variable.TiDBSlowLogThreshold, variable.MaxExecutionTime:
-		return "- Unit: milliseconds\n"
+		return "- Unit: Milliseconds\n"
 	case variable.InteractiveTimeout, variable.WaitTimeout:
-		return "- Unit: seconds\n"
+		return "- Unit: Seconds\n"
 	}
 	return ""
 }
@@ -115,7 +115,8 @@ func formatScope(sv *variable.SysVar) string {
 }
 
 func formatPossibleValues(sv *variable.SysVar) string {
-	return strings.Join(sv.PossibleValues, ", ")
+	tmp := strings.Join(sv.PossibleValues, "`, `")
+	return fmt.Sprintf("`%s`", tmp)
 }
 
 func formatSpecialVersionComment(sv *variable.SysVar) string {
@@ -738,6 +739,8 @@ func getExtendedDescription(sv *variable.SysVar) string {
 			"- Note that when scattering Regions, the write and read performances for the Region that is being scattered might be affected. In batch-write or data importing scenarios, it is recommended to import data after Regions scattering is finished."
 	case variable.TiDBWaitSplitRegionTimeout:
 		return "- This variable is used to set the timeout for executing the `SPLIT REGION` statement. The unit is second. If a statement is not executed completely within the specified time value, a timeout error is returned."
+	case variable.WarningCount:
+		return "- This read-only variable indicates the number of warnings that occurred in the statement that was previously executed."
 	default:
 		return "- No documentation is currently available for this variable."
 	}
