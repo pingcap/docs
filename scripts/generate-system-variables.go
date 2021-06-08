@@ -74,8 +74,6 @@ func printWarning(sv *variable.SysVar) string {
 		return "> **Warning:**\n>\n> Currently, List partition and List COLUMNS partition are experimental features. It is not recommended that you use it in the production environment.\n\n"
 	case variable.TiDBGCScanLockMode:
 		return "> **Warning:**\n>\n> Currently, Green GC is an experimental feature. It is not recommended that you use it in the production environment.\n\n"
-	case variable.TiDBEnable1PC, variable.TiDBEnableAsyncCommit:
-		return "> **Note:**\n>\n> The default value of `ON` only applies to new clusters. if your cluster was upgraded from an earlier version of TiDB, the value `OFF` will be used instead.\n\n"
 	}
 	return ""
 }
@@ -340,6 +338,7 @@ func getExtendedDescription(sv *variable.SysVar) string {
 			"\n" +
 			"> **Note:**\n" +
 			">\n" +
+			"> - The default value of `ON` only applies to new clusters. if your cluster was upgraded from an earlier version of TiDB, the value `OFF` will be used instead.\n" +
 			"> - If you have enabled TiDB Binlog, enabling this variable cannot improve the performance. To improve the performance, it is recommended to use [TiCDC](/ticdc/ticdc-overview.md) instead.\n" +
 			"> - Enabling this parameter only means that Async Commit becomes an optional mode of transaction commit. In fact, the most suitable mode of transaction commit is determined by TiDB."
 	case variable.TiDBEnable1PC:
@@ -347,6 +346,7 @@ func getExtendedDescription(sv *variable.SysVar) string {
 			"\n" +
 			"> **Note:**\n" +
 			">\n" +
+			"> - The default value of `ON` only applies to new clusters. if your cluster was upgraded from an earlier version of TiDB, the value `OFF` will be used instead.\n" +
 			"> - If you have enabled TiDB Binlog, enabling this variable cannot improve the performance. To improve the performance, it is recommended to use [TiCDC](/ticdc/ticdc-overview.md) instead.\n" +
 			"> - Enabling this parameter only means that one-phase commit becomes an optional mode of transaction commit. In fact, the most suitable mode of transaction commit is determined by TiDB."
 	case variable.TiDBEnableCascadesPlanner:
@@ -818,7 +818,7 @@ func main() {
 
 		// If the type is an integer, always print the range
 		if sv.Type == variable.TypeInt || sv.Type == variable.TypeUnsigned {
-			fmt.Printf("- Range: [%d, %d]\n", sv.MinValue, sv.MaxValue)
+			fmt.Printf("- Range: `[%d, %d]`\n", sv.MinValue, sv.MaxValue)
 		}
 
 		// If it's an ENUM, always print the possible values.
