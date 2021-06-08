@@ -123,12 +123,12 @@ TiDB version: 5.0.2
 
     + Backup & Restore (BR)
 
-        ?- Fix the issue that log restore lost delete key during restore [#1063](https://github.com/pingcap/br/issues/1063)
+        - Fix the issue that the `DELETE` events are lost during the log restore [#1063](https://github.com/pingcap/br/issues/1063)
         - Fix a bug that causes BR to send too many useless RPC requests to TiKV [#1037](https://github.com/pingcap/br/pull/1037)
         - Fix the issue that no error is output when a backup operation fails [#1043](https://github.com/pingcap/br/pull/1043)
 
     + TiDB Lightning
 
-        ?(死链)- Fix the issue of TiDB Lightning panic that occurs when generating KV data [#5739](https://github.com/pingcap/br/pull/5739)
+        - Fix the issue of TiDB Lightning panic that occurs when generating KV data [#1127](https://github.com/pingcap/br/pull/1127)
         - Fix the issue that TiDB Lightning in the TiDB-backend mode cannot load any data when the autocommit is disabled [#1104](https://github.com/pingcap/br/issues/1104)
         - Fix a bug that the batch split region fails due to the total key size exceeding the raft entry limit during the data import [#969](https://github.com/pingcap/br/issues/969)
