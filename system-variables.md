@@ -1208,7 +1208,7 @@ This variable is an alias for _transaction_isolation_.
 
 - Scope: SESSION
 - Default value: 0
-- This read only variable indicates the number of warnings that occurred in the statement that was previously executed.
+- This read-only variable indicates the number of warnings that occurred in the statement that was previously executed.
 
 ### windowing_use_high_precision
 
