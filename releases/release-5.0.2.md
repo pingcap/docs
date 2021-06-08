@@ -65,35 +65,35 @@ TiDB version: 5.0.2
 
 + TiDB
 
-    - Fix the panic issue caused by using the prefix index and index join in some cases [#24824](https://github.com/pingcap/tidb/pull/24824)
-    - Fix the issue that the prepared plan cache of `point get` is incorrectly used by the `point get` statement in the transaction [#24765](https://github.com/pingcap/tidb/pull/24765)
-    - Fix the issue of writing the wrong prefix index value when the collation is `ascii_bin` or `latin1_bin` [#24680](https://github.com/pingcap/tidb/pull/24680)
-    - Fix the issue that the ongoing transaction might be aborted by the GC worker [#24652](https://github.com/pingcap/tidb/pull/24652)
-    - Fix a bug that the point query might get wrong on the clustered index when `new-collation` is enabled but `new-row-format` is disabled [#24611](https://github.com/pingcap/tidb/pull/24611)
+    - Fix the panic issue caused by using the prefix index and index join in some cases [#24547](https://github.com/pingcap/tidb/issues/24547) [#24716](https://github.com/pingcap/tidb/issues/24716) [#24717](https://github.com/pingcap/tidb/issues/24717)
+    - Fix the issue that the prepared plan cache of `point get` is incorrectly used by the `point get` statement in the transaction [#24741](https://github.com/pingcap/tidb/issues/24741)
+    - Fix the issue of writing the wrong prefix index value when the collation is `ascii_bin` or `latin1_bin` [#24569](https://github.com/pingcap/tidb/issues/24569)
+    - Fix the issue that the ongoing transaction might be aborted by the GC worker [#24591](https://github.com/pingcap/tidb/issues/24591)
+    - Fix a bug that the point query might get wrong on the clustered index when `new-collation` is enabled but `new-row-format` is disabled [#24541](https://github.com/pingcap/tidb/issues/24541)
     - Refactor the conversion of partition keys for shuffle hash join [#24490](https://github.com/pingcap/tidb/pull/24490)
-    - Fix the panic issue that occurs when building the plan for queries that contain the `HAVING` clause [#24489](https://github.com/pingcap/tidb/pull/24489)
-    - Fix the issue that the column pruning improvement causes the `Apply` and `Join` operators' results to go wrong [#24437](https://github.com/pingcap/tidb/pull/24437)
-    - Fix a bug that the primary lock fallen back from async commit cannot be resolved [#24397](https://github.com/pingcap/tidb/pull/24397)
+    - Fix the panic issue that occurs when building the plan for queries that contain the `HAVING` clause [#24045](https://github.com/pingcap/tidb/issues/24045)
+    - Fix the issue that the column pruning improvement causes the `Apply` and `Join` operators' results to go wrong [#23887](https://github.com/pingcap/tidb/issues/23887)
+    - Fix a bug that the primary lock fallen back from async commit cannot be resolved [#24384](https://github.com/pingcap/tidb/issues/24384)
     - Fix a GC issue of statistics that might cause duplicated fm-sketch records [#24357](https://github.com/pingcap/tidb/pull/24357)
-    - Avoid unnecessary pessimistic rollback when the pessimistic locking receives the `ErrKeyExists` error [#23800](https://github.com/pingcap/tidb/pull/23800)
-    - Fix the issue that numeric literals cannot be recognized when the sql_mode contains `ANSI_QUOTES` [#25015](https://github.com/pingcap/tidb/pull/25015)
-    - Forbid statements such as `INSERT INTO table PARTITION (<partitions>) ... ON DUPLICATE KEY UPDATE` to read data from non-listed partitions [#25000](https://github.com/pingcap/tidb/pull/25000)
-    - Fix the potential `index out of range` error when a SQL statement contains both `GROUP BY` and `UNION` [#24551](https://github.com/pingcap/tidb/pull/24551)
-    - Fix the issue that the `CONCAT` function incorrectly handles the collation [#24301](https://github.com/pingcap/tidb/pull/24301)
+    - Avoid unnecessary pessimistic rollback when the pessimistic locking receives the `ErrKeyExists` error [#23799](https://github.com/pingcap/tidb/issues/23799)
+    - Fix the issue that numeric literals cannot be recognized when the sql_mode contains `ANSI_QUOTES` [#24522](https://github.com/pingcap/tidb/pull/24522)
+    - Forbid statements such as `INSERT INTO table PARTITION (<partitions>) ... ON DUPLICATE KEY UPDATE` to read data from non-listed partitions [#24746](https://github.com/pingcap/tidb/issues/24746)
+    - Fix the potential `index out of range` error when a SQL statement contains both `GROUP BY` and `UNION` [#24281](https://github.com/pingcap/tidb/issues/24281)
+    - Fix the issue that the `CONCAT` function incorrectly handles the collation [#24296](https://github.com/pingcap/tidb/issues/24296)
     - Fix the issue that the `collation_server` global variable does not take effect in new sessions [#24156](https://github.com/pingcap/tidb/pull/24156)
-
-+ PD
-
-    - Fix offline_stats statistic after merge offline peer [#3615](https://github.com/pingcap/pd/pull/3615)
-    - Fix the issue that leader re-election be slow when there are many stores [#3719](https://github.com/tikv/pd/pull/3719)
-    - Fix the panic issue about remove evict leader scheduler from a nonexistent store [#3679](https://github.com/tikv/pd/pull/3679)
-    - Fix the statistic issue that offline Peer not clean after been merged [#3614](https://github.com/tikv/pd/pull/3614)
 
 + TiKV
 
-    - Fix CDC OOM issue caused by reading old values. [#10246](https://github.com/tikv/tikv/pull/10246)
-    - Allow to read empty value for the clustered primary key column in the secondary index when collation is latin1_bin. [#10239](https://github.com/tikv/tikv/pull/10239)
-    - Add `abort-on-panic` config, which allow core dump to be generated when panic. Users still need to correctly config the environment to enable core dump. [#10216](https://github.com/tikv/tikv/pull/10216)
+    - Fix CDC OOM issue caused by reading old values [#9996](https://github.com/tikv/tikv/issues/9996) [#9981](https://github.com/tikv/tikv/issues/9981)
+    - Allow to read empty value for the clustered primary key column in the secondary index when collation is latin1_bin [#24548](https://github.com/pingcap/tidb/issues/24548)
+    - Add `abort-on-panic` config, which allow core dump to be generated when panic. Users still need to correctly config the environment to enable core dump [#10216](https://github.com/tikv/tikv/pull/10216)
+
++ PD
+
+    - Fix offline_stats statistic after merge offline peer [#3611](https://github.com/tikv/pd/issues/3611)
+    - Fix the issue that leader re-election be slow when there are many stores [#3697](https://github.com/tikv/pd/issues/3697)
+    - Fix the panic issue about remove evict leader scheduler from a nonexistent store [#3660](https://github.com/tikv/pd/issues/3660)
+    - Fix the statistic issue that offline Peer not clean after been merged [#3611](https://github.com/tikv/pd/issues/3611)
 
 + TiFlash
 
@@ -122,12 +122,12 @@ TiDB version: 5.0.2
 
     + Backup & Restore (BR)
 
-        ?- Fix the issue that log restore lost delete key during restore [#1083](https://github.com/pingcap/br/pull/1083)
+        ?- Fix the issue that log restore lost delete key during restore [#1063](https://github.com/pingcap/br/issues/1063)
         - Fix a bug that causes BR to send too many useless RPC requests to TiKV [#1037](https://github.com/pingcap/br/pull/1037)
         - Fix the issue that no error is output when a backup operation fails [#1043](https://github.com/pingcap/br/pull/1043)
 
     + TiDB Lightning
 
-        - Fix the issue of TiDB Lightning panic that occurs when generating KV data [#5739](https://github.com/pingcap/br/pull/5739)
-        - Fix the issue that TiDB Lightning in the TiDB-backend mode cannot load any data when autocommit is disabled [#1125](https://github.com/pingcap/br/pull/1125)
-        - Fix a bug that the batch split region fails due to total key size exceeding the raft entry limit during the data import [#1065](https://github.com/pingcap/br/pull/1065)
+        ?(死链)- Fix the issue of TiDB Lightning panic that occurs when generating KV data [#5739](https://github.com/pingcap/br/pull/5739)
+        - Fix the issue that TiDB Lightning in the TiDB-backend mode cannot load any data when autocommit is disabled [#1104](https://github.com/pingcap/br/issues/1104)
+        - Fix a bug that the batch split region fails due to total key size exceeding the raft entry limit during the data import [#969](https://github.com/pingcap/br/issues/969)
