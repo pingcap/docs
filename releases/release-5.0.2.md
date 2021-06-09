@@ -38,7 +38,6 @@ TiDB version: 5.0.2
 
 + TiFlash
 
-    - Apply Region snapshots by ingesting files to reduce memory usage
     - Optimize the table lock to prevent DDL jobs and data reads from blocking each other
     - Support casting the `INTEGER` or `REAL` type to `REAL` type
 
