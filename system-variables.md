@@ -81,6 +81,13 @@ mysql> SELECT * FROM t1;
 - Default value: ON
 - Controls whether statements should automatically commit when not in an explicit transaction. See [Transaction Overview](/transaction-overview.md#autocommit) for more information.
 
+### datadir
+
+- Scope: NONE
+- Default value: /tmp/tidb
+- This variable indicates the location where data is stored.
+- Typically the value when be in the format of `ip_address:port`, indicating the PD server that TiDB connected to on startup.
+
 ### ddl_slow_threshold
 
 - Scope: INSTANCE
@@ -122,6 +129,12 @@ mysql> SELECT * FROM t1;
 - Scope: SESSION
 - Default value: 0
 - This variable is used to show whether the execution plan used in the previous `execute` statement is taken directly from the plan cache.
+
+### license
+
+- Scope: NONE
+- Default value: Apache License 2.0
+- This variable indicates the license of your TiDB server installation.
 
 ### max_execution_time
 
