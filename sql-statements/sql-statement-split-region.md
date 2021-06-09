@@ -6,7 +6,7 @@ aliases: ['/docs/dev/sql-statements/sql-statement-split-region/','/docs/dev/refe
 
 # Split Region
 
-For each new table created in TiDB, one [Region](/tidb-storage.md#region) is segmented by default to store the data of this table. This default behavior is controlled by `split-table` in the configuration file. When the data in this Region exceeds the default Region size limit, the Region starts to split into two.
+For each new table created in TiDB, one [Region](/tidb-storage.md#region) is segmented by default to store the data of this table. This default behavior is controlled by `split-table` in the TiDB configuration file. When the data in this Region exceeds the default Region size limit, the Region starts to split into two.
 
 In the above case, because there is only one Region at the beginning, all write requests occur on the TiKV where the Region is located. If there are a large number of writes for the newly created table, hotspots are caused.
 
