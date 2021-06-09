@@ -128,4 +128,4 @@ TiDB version: 5.0.2
 
         - Fix the issue of TiDB Lightning panic that occurs when generating KV data [#1127](https://github.com/pingcap/br/pull/1127)
         - Fix the issue that TiDB Lightning in the TiDB-backend mode cannot load any data when the autocommit is disabled [#1104](https://github.com/pingcap/br/issues/1104)
-        - Fix a bug that the batch split region fails due to the total key size exceeding the raft entry limit during the data import [#969](https://github.com/pingcap/br/issues/969)
+        - Fix a bug that the batch split Region fails due to the total key size exceeding the raft entry limit during the data import [#969](https://github.com/pingcap/br/issues/969)
