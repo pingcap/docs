@@ -24,7 +24,7 @@ TiDB version: 4.0.13
 + TiKV
 
     - Make the calculation process of `store used size` more precise [#9904](https://github.com/tikv/tikv/pull/9904)
-    - Set more Regions in the `EpochNotMatch` message to reduce Region misses #[9731](https://github.com/tikv/tikv/pull/9731)
+    - Set more Regions in the `EpochNotMatch` message to reduce Region misses [#9731](https://github.com/tikv/tikv/pull/9731)
     - Speed up freeing the memory accumulated in the long-running cluster [#10035](https://github.com/tikv/tikv/pull/10035)
 
 + PD
