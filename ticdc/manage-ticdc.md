@@ -9,14 +9,14 @@ This document describes how to manage the TiCDC cluster and replication tasks us
 
 ## Upgrade TiCDC using TiUP
 
-This section introduces how to upgrade the TiCDC cluster using TiUP. In the following example, assume that you need to upgrade TiCDC and the entire TiDB cluster to v4.0.6.
+This section introduces how to upgrade the TiCDC cluster using TiUP. In the following example, assume that you need to upgrade TiCDC and the entire TiDB cluster to v5.0.2.
 
 {{< copyable "shell-regular" >}}
 
 ```shell
 tiup update --self && \
 tiup update --all && \
-tiup cluster upgrade <cluster-name> v4.0.6
+tiup cluster upgrade <cluster-name> v5.0.2
 ```
 
 ### Notes for upgrade
