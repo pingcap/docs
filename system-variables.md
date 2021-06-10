@@ -86,7 +86,7 @@ mysql> SELECT * FROM t1;
 - Scope: NONE
 - Default value: /tmp/tidb
 - This variable indicates the location where data is stored. This can be a local path or point to a PD server in case the data is stored on TiKV.
-- Typically the value when be in the format of `ip_address:port`, indicating the PD server that TiDB connected to on startup.
+- A value in the format of `ip_address:port` indicates the PD server that TiDB connects to on startup.
 
 ### ddl_slow_threshold
 
