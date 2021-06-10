@@ -34,7 +34,7 @@ TiDB version: 5.0.2
     - Support the back pressure for TiCDC's scan speed [#10151](https://github.com/tikv/tikv/pull/10151)
     - Reduce the memory usage of TiCDC's initial scan [#10133](https://github.com/tikv/tikv/pull/10133)
     - Improve the cache hit ratio of the TiCDC's Old Value feature in the pessimistic transaction [#10089](https://github.com/tikv/tikv/pull/10089)
-    - Split Regions more evenly [#10086](https://github.com/tikv/tikv/pull/10086)
+    - Split Regions more evenly to mitigate the issue that the growth of Region size exceeds the splitting speed when there are hotspot writes [#9785](https://github.com/tikv/tikv/issues/9785)
 
 + TiFlash
 
