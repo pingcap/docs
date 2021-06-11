@@ -235,7 +235,6 @@ In TiDB, operators are organized in a tree structure. For an operator to be push
 + All of its child operators can be pushed down to TiFlash.
 + If an operator contains expressions (most of the operators contain expressions), all expressions of the operator can be pushed down to TiFlash.
 
-
 Currently, TiFlash supports the following push-down expressions:
 
 * Mathematical functions: `+, -, /, *, >=, <=, =, !=, <, >, round(int), round(double), abs, floor(int), ceil(int), ceiling(int)`
