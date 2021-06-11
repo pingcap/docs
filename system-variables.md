@@ -86,7 +86,7 @@ mysql> SELECT * FROM t1;
 
 - Scope：SESSION | GLOBAL
 - Default value：1000
-- This variable is used to control the maximum recursion depth in Common Table Expressions.
+- Controls the maximum recursion depth in Common Table Expressions.
 
 ### ddl_slow_threshold
 
