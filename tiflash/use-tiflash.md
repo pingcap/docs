@@ -236,10 +236,16 @@ In TiDB, operators are organized in a tree structure. For an operator to be push
 + All of its child operators can be pushed down to TiFlash.
 + If an operator contains expressions (most of the operators contain expressions), all expressions of the operator can be pushed down to TiFlash.
 
-```
-+, -, /, *, >=, <=, =, !=, <, >, ifnull, isnull, bitor, in, bitand, or, and, like, not, case when, month, substr, timestampdiff, date_format, from_unixtime, json_length, if, bitneg, bitxor,
-round without fraction, cast(int as decimal), date_add(datetime, int), date_add(datetime, string), min, max, sum, count, avg, approx_count_distinct
-```
+Currently, TiFlash supports the following push-down expressions:
+
+* Mathematical functions: `+, -, /, *, >=, <=, =, !=, <, >, round(int), round(double), abs, floor(int), ceil(int), ceiling(int)`
+* Logical functions: `and, or, not, case when, if, ifnull, isnull, in`
+* Bitwise operations: `bitand, bitor, bigneg, bitxor`
+* String functions: `substr, char_length, replace, concat, concat_ws, left, right`
+* Date functions: `date_format, timestampdiff, from_unixtime, unix_timestamp(int), unix_timestamp(decimal), str_to_date(date), str_to_date(datetime), date_add(string, int), date_add(datetime, int), date_sub(datetime, int), date_sub(string, int), datediff, year, month, day, extract(datetime)`
+* JSON function: `json_length`
+* Conversion functions: `cast(int as double), cast(int as decimal), cast(int as string), cast(int as time), cast(double as int), cast(double as decimal), cast(double as string), cast(double as time), cast(string as int), cast(string as double), cast(string as decimal), cast(string as time), cast(decimal as int), cast(decimal as string), cast(decimal as time), cast(time as int), cast(time as decimal), cast(time as string)`
+* Aggregate functions: `min, max, sum, count, avg, approx_count_distinct`
 
 Among them, the push-down of `cast` and `date_add` is not enabled by default. To enable it, refer to [Blocklist of Optimization Rules and Expression Pushdown](/blocklist-control-plan.md).
 
@@ -255,7 +261,7 @@ TiFlash supports using the MPP mode to execute queries, which introduces cross-n
 set @@session.tidb_allow_mpp=0
 ```
 
-MPP mode supports these physical algorithms: Broadcast Hash Join, Shuffled Hash Join, and Shuffled Hash Aggregation. The optimizer automatically determines which algorithm to be used in a query. To check the specific query execution plan, you can execute the `EXPLAIN` statement. If the result of the `EXPLAIN` statement shows ExchangeSender and ExchangeReceiver operators, it indicates that the MPP mode has taken effect.
+MPP mode supports these physical algorithms: Broadcast Hash Join, Shuffled Hash Join, Shuffled Hash Aggregation, Union All, TopN, and Limit. The optimizer automatically determines which algorithm to be used in a query. To check the specific query execution plan, you can execute the `EXPLAIN` statement. If the result of the `EXPLAIN` statement shows ExchangeSender and ExchangeReceiver operators, it indicates that the MPP mode has taken effect.
 
 The following statement takes the table structure in the TPC-H test set as an example:
 
@@ -320,5 +326,4 @@ Currently, TiFlash does not support some features. These features might be incom
         In the example above, `a/b`'s inferred type from the compiling is `Decimal(7,4)` both in TiDB and in TiFlash. Constrained by `Decimal(7,4)`, `a/b`'s returned type should be `0.0000`. In TiDB, `a/b`'s runtime precision is higher than `Decimal(7,4)`, so the original table data is not filtered by the `where a/b` condition. However, in TiFlash, the calculation of `a/b` uses `Decimal(7,4)` as the result type, so the original table data is filtered by the `where a/b` condition.
 
 * The MPP mode in TiFlash does not support the following features:
-    * The partitioned table is not supported. For queries on the partitioned tables, the MPP mode is not chosen by default.
     * If the [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) configuration item's value is `true`, the MPP mode does not support the string-type join key or the string column type in the `group by` aggregation. For these two query types, the MPP mode is not chosen by default.
