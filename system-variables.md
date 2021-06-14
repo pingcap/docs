@@ -103,9 +103,7 @@ mysql> SELECT * FROM t1;
 
 - Scope: GLOBAL
 - Default value: ""
-- The `init_connect` feature permits a SQL statement to be executed when users first connect to a TiDB server.
-- Users that have the `CONNECTION_ADMIN` or `SUPER` privileges will not execute the `init_connect` statement.
-- If the `init_connect` statement results in an error, the user connection will be terminated.
+- The `init_connect` feature permits a SQL statement to be automatically executed when you first connect to a TiDB server. If you have the `CONNECTION_ADMIN` or `SUPER` privileges, this `init_connect` statement will not be executed. If the `init_connect` statement results in an error, your user connection will be terminated.
 
 ### innodb_lock_wait_timeout
 
