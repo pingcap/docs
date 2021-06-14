@@ -3,11 +3,36 @@ package main
 import (
 	"fmt"
 	"sort"
+	"strconv"
 	"strings"
+	"time"
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/pingcap/tidb/sessionctx/variable"
 )
+
+func fmtDuration(d time.Duration) string {
+	d = d.Round(time.Minute)
+	h := d / time.Hour
+	d -= h * time.Hour
+	m := d / time.Minute
+	return fmt.Sprintf("%02d:%02d", h, m)
+}
+
+func ByteCountIEC(s string) string {
+	b, _ := strconv.Atoi(s)
+	const unit = 1024
+	if b < unit {
+		return fmt.Sprintf("%d B", b)
+	}
+	div, exp := int64(unit), 0
+	for n := b / unit; n >= unit; n /= unit {
+		div *= unit
+		exp++
+	}
+	return fmt.Sprintf("%.0f %ciB",
+		float64(b)/float64(div), "KMGTPE"[exp])
+}
 
 func formatDefaultValue(sv *variable.SysVar) string {
 	switch sv.Name {
@@ -27,6 +52,8 @@ func formatDefaultValue(sv *variable.SysVar) string {
 		return "`2`" // Same story, for old clusters it is 1.
 	case variable.TiDBTxnMode:
 		return "`pessimistic`"
+	case variable.TiDBMemQuotaApplyCache, variable.TiDBMemQuotaQuery, variable.TiDBQueryLogMaxLen, variable.TiDBBCJThresholdSize:
+		return fmt.Sprintf("`%s` (%s)", sv.Value, ByteCountIEC(sv.Value))
 	}
 	if sv.Value == "" {
 		return `""` // make it easier to read that it's an empty string default
@@ -815,6 +842,14 @@ func main() {
 
 		fmt.Printf("- Scope: %s\n", formatScope(sv))
 		fmt.Printf("- Default value: %s\n", formatDefaultValue(sv))
+
+		/*
+			if sv.Type == variable.TypeDuration {
+				min := time.Duration(sv.MinValue)
+				max := time.Duration(sv.MaxValue)
+				fmt.Printf("- Range: `[%s, %s]`\n", fmtDuration(min), fmtDuration(max))
+			}
+		*/
 
 		// If the type is an integer, always print the range
 		if sv.Type == variable.TypeInt || sv.Type == variable.TypeUnsigned {
