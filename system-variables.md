@@ -252,7 +252,7 @@ mysql> SELECT * FROM t1;
 ### tidb_broadcast_join_threshold_size <span class="version-mark">New in v5.0</span>
 
 - Scope: SESSION | GLOBAL
-- Default value: `104857600`
+- Default value: `104857600` (100 MiB)
 - Range: `[0, 9223372036854775807]`
 - Unit: Bytes
 - If the table size is less than the value of the variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used.
@@ -841,7 +841,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 ### tidb_mem_quota_apply_cache <span class="version-mark">New in v5.0</span>
 
 - Scope: SESSION | GLOBAL
-- Default value: `33554432`
+- Default value: `33554432` (32 MiB)
 - Range: `[0, 9223372036854775807]`
 - Unit: Bytes
 - This variable is used to set the memory usage threshold of the local cache in the `Apply` operator.
@@ -850,7 +850,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 ### tidb_mem_quota_query
 
 - Scope: SESSION
-- Default value: `1073741824`
+- Default value: `1073741824` (1 GiB)
 - Range: `[-1, 9223372036854775807]`
 - Unit: Bytes
 - This variable is used to set the threshold value of memory quota for a query.
@@ -1043,7 +1043,7 @@ explain select * from t where age=5;
 ### tidb_query_log_max_len
 
 - Scope: INSTANCE
-- Default value: `4096`
+- Default value: `4096` (4 KiB)
 - Range: `[-1, 9223372036854775807]`
 - Unit: Bytes
 - The maximum length of the SQL statement output. When the output length of a statement is larger than the `tidb_query-log-max-len` value, the statement is truncated to output.
@@ -1277,12 +1277,6 @@ This variable is an alias for _transaction_isolation_.
 - Range: `[0, 31536000]`
 - Unit: Seconds
 - This variable controls the idle timeout of user sessions. A zero-value means unlimited.
-
-### warning_count
-
-- Scope: SESSION
-- Default value: `0`
-- This read-only variable indicates the number of warnings that occurred in the statement that was previously executed.
 
 ### windowing_use_high_precision
 
