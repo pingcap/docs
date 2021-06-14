@@ -19,6 +19,12 @@ To migrate data from MySQL to TiDB, it is recommended to use one of the followin
 - [Use Dumpling and TiDB Lightning](#use-dumpling-and-tidb-lightning-full-data) to migrate full data.
 - [Use TiDB Data Migration (DM)](#use-dm) to migrate full and incremental data.
 
+## Migrate from non-MySQL compatible databases
+
+To migrate data from databases like Oracle RDBMS, Microsoft SQL-Server and PostgreSQL you can use the following method:
+
+- [Migrate from non-MySQL databases](/migrate-from-non-mysql.md)
+
 ### Use Dumpling and TiDB Lightning (full data)
 
 #### Scenarios
