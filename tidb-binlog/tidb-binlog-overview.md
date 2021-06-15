@@ -54,14 +54,14 @@ The TiDB Binlog cluster is composed of Pump and Drainer.
 
 ## Notes
 
-* In v5.1, the incompatibility between introduced clustered index and TiDB Binlog has been solved. After you update TiDB Binlog and TiDB Server to v5.1 and enable TiDB Binlog, TiDB will support creating clustered indexes and data insertion, deletion, and update of the created clustered index tables will be replicated downstream via TiDB Binlog. Pay attention to the replication of clustered index tables:
+* In v5.1, the incompatibility between the clustered index feature introduced in v5.0 and TiDB Binlog has been resolved. After you upgrade TiDB Binlog and TiDB Server to v5.1 and enable TiDB Binlog, TiDB will support creating tables with clustered indexes; data insertion, deletion, and update on the created tables with clustered indexes will be replicated to the downstream via TiDB Binlog. When you use TiDB Binlog to replicate the tables with clustered indexes, pay attention to the following:
 
     - If you manually control the upgrade sequence to upgrade v5.0, make sure that TiDB binlog is upgraded to v5.1 before upgrading the TiDB server to v5.1.
     - It is recommended to configure the system variable [`tidb_enable_clustered_index`](/system-variables.md#tidb_enable_clustered_index-new-in-v50) to a same value to ensure that the structure of TiDB clustered index tables between the upstream and downstream is consistent.
 
 * TiDB Binlog is incompatible with the following features introduced in TiDB v5.0 and they cannot be used together.
 
-    - [TiDB Clustered Index](/clustered-indexes.md#limitations): After TiDB Binlog is enabled, TiDB does not allow creating clustered indexes with non-single integer columns as primary keys; data insertion, deletion, and update of the created clustered index tables will not be replicated downstream via TiDB Binlog. If you need to replicate tables with clustered indexes, update to v5.1 or use [TiCDC](/ticdc/ticdc-overview.md) instead.
+    - [TiDB Clustered Index](/clustered-indexes.md#limitations): After TiDB Binlog is enabled, TiDB does not allow creating clustered indexes with non-single integer columns as primary keys; data insertion, deletion, and update of the created clustered index tables will not be replicated downstream via TiDB Binlog. If you need to replicate tables with clustered indexes, upgrade your cluster to v5.1 or use [TiCDC](/ticdc/ticdc-overview.md) instead.
     - TiDB system variable [tidb_enable_async_commit](/system-variables.md#tidb_enable_async_commit-new-in-v50): After TiDB Binlog is enabled, performance cannot be improved by enabling this option. It is recommended to use [TiCDC](/ticdc/ticdc-overview.md) instead of TiDB Binlog.
     - TiDB system variable [tidb_enable_1pc](/system-variables.md#tidb_enable_1pc-new-in-v50): After TiDB Binlog is enabled, performance cannot be improved by enabling this option. It is recommended to use [TiCDC](/ticdc/ticdc-overview.md) instead of TiDB Binlog.
 
