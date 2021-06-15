@@ -204,7 +204,6 @@ CREATE TABLE `t1` (
 
 * Does not support modifying some data types (for example, some TIME types, Bit, Set, Enum, JSON) are not supported due to some compatibility issues of the `cast` function's behavior between TiDB and MySQL.
 
-
     ```sql
     CREATE TABLE t (a DECIMAL(13, 7));
     ALTER TABLE t MODIFY COLUMN a DATETIME;
