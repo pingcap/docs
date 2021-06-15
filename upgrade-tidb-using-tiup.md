@@ -259,4 +259,4 @@ tiup install ctl:v5.0.2
 
 ## TiDB 5.0 compatibility changes
 
-- See TiDB 5.1 GA Release Notes for the compatibility changes.
+- See TiDB 5.0 GA Release Notes for the compatibility changes.
