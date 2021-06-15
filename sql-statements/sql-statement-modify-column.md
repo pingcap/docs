@@ -178,7 +178,7 @@ CREATE TABLE `t1` (
     ERROR 1105 (HY000): Unsupported multi schema change
     ```
 
-* Does not support changes of data types on the primary key columns. For example:
+* Does not support modifying data types on the primary key columns. For example:
 
     ```sql
     CREATE TABLE t (a int primary key);
@@ -205,7 +205,7 @@ CREATE TABLE `t1` (
     ERROR 8200 (HY000): Unsupported modify column: table is partition table
     ```
 
-* Does not support changes of some data types (for example, some TIME types, Bit, Set, Enum, JSON, etc.) are not supported due to some compatibility issues of TIDB cast function with MySQL's behavior.
+* Does not support modifying some data types (for example, some TIME types, Bit, Set, Enum, JSON, etc.) are not supported due to some compatibility issues of TIDB cast function with MySQL's behavior.
 
     ```sql
     CREATE TABLE t (a DECIMAL(13, 7));

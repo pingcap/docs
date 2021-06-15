@@ -95,7 +95,7 @@ See also: [TiDB SQL Grammar](https://pingcap.github.io/sqlgram/#functioncallkeyw
 In TiDB, all supported DDL changes are performed online. Compared with DDL operations in MySQL, the DDL operations in TiDB have the following major restrictions:
 
 * Multiple operations cannot be completed in a single `ALTER TABLE` statement. For example, it is not possible to add multiple columns or indexes in a single statement. Otherwise, the `Unsupported multi schema change` error might be output.
-* `ALTER TABLE` does not support changes of some types. For example, TiDB does not support the change from `DECIMAL` type to `DATE` type. When TiDB encounters the changes of unsupported types, TiDB reports the `Unsupported modify column: type %d not match origin %d` error. See [`ALTER TABLE`](/sql-statements/sql-statement-modify-column.md) for more details.
+* `ALTER TABLE` does not support changes of some data types. For example, TiDB does not support the change from the `DECIMAL` type to the `DATE` type. When the changes of data types are unsupported, TiDB reports the `Unsupported modify column: type %d not match origin %d` error. See [`ALTER TABLE`](/sql-statements/sql-statement-modify-column.md) for more details.
 * The `ALGORITHM={INSTANT,INPLACE,COPY}` syntax functions only as an assertion in TiDB, and does not modify the `ALTER` algorithm. See [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md) for further details.
 * Adding/Dropping the primary key of the `CLUSTERED` type is unsupported. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
 * Different types of indexes (`HASH|BTREE|RTREE|FULLTEXT`) are not supported, and will be parsed and ignored when specified.
