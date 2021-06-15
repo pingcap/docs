@@ -10,9 +10,9 @@ The `ALTER TABLE.. MODIFY COLUMN` statement modifies a column on an existing tab
 
 Since v5.1.0, TiDB has supported changes of data types for Reorg data, including but not limited to:
 
-- Change from varchar to bigint
-- Modify decimal precision
-- Length compression from varchar(10) to varchar(5)
+- Changing `VARCHAR` to `BIGINT`
+- Modifying the `DECIMAL` precision
+- Compressing the length of `VARCHAR(10)` to `VARCHAR(5)`
 
 ## Synopsis
 
@@ -202,7 +202,8 @@ CREATE TABLE `t1` (
     ERROR 8200 (HY000): Unsupported modify column: table is partition table
     ```
 
-* Does not support modifying some data types (for example, some TIME types, Bit, Set, Enum, JSON, etc.) are not supported due to some compatibility issues of TIDB cast function with MySQL's behavior.
+* Does not support modifying some data types (for example, some TIME types, Bit, Set, Enum, JSON) are not supported due to some compatibility issues of the `cast` function's behavior between TiDB and MySQL.
+
 
     ```sql
     CREATE TABLE t (a DECIMAL(13, 7));
