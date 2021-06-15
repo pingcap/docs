@@ -1297,12 +1297,12 @@ Configuration items related to TiCDC.
 
 ### `old-value-cache-memory-quota`
 
-+ The upper limit of memory usage by TiCDC old values cached in memory.
++ The upper limit of memory usage by TiCDC old values.
 + Default value: `512MB`
 
 ### `sink-memory-quota`
 
-+ The upper limit of memory usage by TiCDC data change events cached in memory.
++ The upper limit of memory usage by TiCDC data change events.
 + Default value: `512MB`
 
 ### `incremental-scan-speed-limit`
