@@ -55,7 +55,7 @@ The TiDB Binlog cluster is composed of Pump and Drainer.
 
 * In v5.1, the incompatibility between the clustered index feature introduced in v5.0 and TiDB Binlog has been resolved. After you upgrade TiDB Binlog and TiDB Server to v5.1 and enable TiDB Binlog, TiDB will support creating tables with clustered indexes; data insertion, deletion, and update on the created tables with clustered indexes will be replicated to the downstream via TiDB Binlog. When you use TiDB Binlog to replicate the tables with clustered indexes, pay attention to the following:
 
-    - If you manually control the upgrade sequence to upgrade v5.0, make sure that TiDB binlog is upgraded to v5.1 before upgrading the TiDB server to v5.1.
+    - If you have upgraded the cluster to v5.1 from v5.0 by manually controlling the upgrade sequence, make sure that TiDB binlog is upgraded to v5.1 before upgrading the TiDB server to v5.1.
     - It is recommended to configure the system variable [`tidb_enable_clustered_index`](/system-variables.md#tidb_enable_clustered_index-new-in-v50) to a same value to ensure that the structure of TiDB clustered index tables between the upstream and downstream is consistent.
 
 * TiDB Binlog is incompatible with the following features introduced in TiDB v5.0 and they cannot be used together.
