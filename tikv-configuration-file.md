@@ -1297,12 +1297,12 @@ Configuration items related to TiCDC.
 
 ### `old-value-cache-memory-quota`
 
-+ The upper limit of memory occupied by TiCDC old values cached in memory.
++ The upper limit of memory usage by TiCDC old values cached in memory.
 + Default value: `512MB`
 
 ### `sink-memory-quota`
 
-+ The upper limit of memory occupied by TiCDC data change events cached in memory.
++ The upper limit of memory usage by TiCDC data change events cached in memory.
 + Default value: `512MB`
 
 ### `incremental-scan-speed-limit`
@@ -1312,14 +1312,14 @@ Configuration items related to TiCDC.
 
 ### `incremental-scan-threads`
 
-+ The number of threads for historical data tasks is incrementally scanned.
++ The number of threads for the task of incrementally scanning historical data.
 + Default value: `4`, which means 4 threads.
 
 ### `incremental-scan-concurrency`
 
-+ The maximum number of concurrent execution for  historical data tasks is incrementally scanned.
++ The maximum number of concurrent executions for the tasks of incrementally scanning historical data.
 + Default value: `6`, which means 6 tasks can be concurrent executed at most.
-+ Note: `incremental-scan-concurrency` needs to be greater than or equal to `incremental-scan-threads`, otherwise TiKV will report an error when enabled.
++ Note: The value of `incremental-scan-concurrency` must be greater than or equal to that of `incremental-scan-threads`; otherwise, TiKV will report an error at startup.
 
 ## pessimistic-txn
 
