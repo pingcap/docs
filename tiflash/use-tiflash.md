@@ -229,7 +229,7 @@ TiFlash supports the push-down of the following operators:
 * HashJoin (having the join condition with the equivalent value): Performs the join calculation based on the [Hash Join](/explain-joins.md#hash-join) algorithm, but with the following conditions:
     * The operator can be pushed down only in the [MPP mode](#use-the-mpp-mode).
     * The push-down of `Full Outer Join` is not supported.
-* Hashjoin (Cartesian Join, which does not have the join condition with the equivalent value): Performs the Cartesian Join algorithm, but with the following conditions:
+* HashJoin (Cartesian Join, which does not have the join condition with the equivalent value): Performs the Cartesian Join algorithm, but with the following conditions:
     * The operator can be pushed down only in the [MPP mode](#use-the-mpp-mode).
     * Cartesian Join is supported only in Broadcast Join.
 
