@@ -158,7 +158,6 @@ ERROR 8200 (HY000): Unsupported modify column: change from original type decimal
 * Changes of column types on the generated columns are not supported.
 * Changes of some data types (for example, some TIME types, Bit, Set, Enum, JSON, etc.) are not supported due to some compatibility issues of TIDB cast function with MySQL's behavior.
 
-
 ## See also
 
 * [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
