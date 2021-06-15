@@ -154,20 +154,20 @@ CREATE TABLE `t1` (
 1 row in set (0.00 sec)
 ```
 
-**Note:**
-
+> **Note:**
+>
 > - TiDB returns an error when the changed data type conflicts with an existing data row. In the above example, TiDB returns the following error:
 >
->   ```
->   alter table t1 modify column col1 varchar(4);
->   ERROR 1406 (22001): Data Too Long, field len 4, data len 5
->   ```
+>    ```
+>    alter table t1 modify column col1 varchar(4);
+>    ERROR 1406 (22001): Data Too Long, field len 4, data len 5
+>    ```
 >
-> - Due to the compatibility with the Async Commit feature, the DDL waits for a certain amount of time (about 2.5s) before starting to process into Reorg Data.
+> - Due to the compatibility with the Async Commit feature, the DDL statement waits for a period of time (about 2.5s) before starting to process into Reorg Data.
 >
->   ```
->   Query OK, 0 rows affected (2.52 sec)
->   ```
+>    ```
+>    Query OK, 0 rows affected (2.52 sec)
+>    ```
 
 ## MySQL compatibility
 
@@ -178,7 +178,7 @@ CREATE TABLE `t1` (
     ERROR 1105 (HY000): Unsupported multi schema change
     ```
 
-* Does not support modifying data types on the primary key columns. For example:
+* Does not support modifying the data types on the primary key columns. For example:
 
     ```sql
     CREATE TABLE t (a int primary key);
@@ -189,9 +189,6 @@ CREATE TABLE `t1` (
 * Does not support modifying the types of generate columns. For example:
 
     ```sql
-    CREATE TABLE t1 (col1 BIGINT);
-    ALTER TABLE t1 MODIFY col1 INT;
-    ERROR 8200 (HY000): Unsupported modify column length 11 is less than origin 20
     CREATE TABLE t (a INT, b INT as (a+1));
     ALTER TABLE t MODIFY COLUMN b VARCHAR(10);
     ERROR 8200 (HY000): Unsupported modify column: column is generated

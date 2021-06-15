@@ -8,11 +8,11 @@ aliases: ['/docs/dev/sql-statements/sql-statement-change-column/','/docs/dev/ref
 
 The `ALTER TABLE.. CHANGE COLUMN` statement changes a column on an existing table. The change can include both renaming the column, and changing the data type to a compatible type.
 
-Since v5.1.0, TiDB has supported changes of data types for Reorg data, including but not limited to:
+Since v5.1.0, TiDB has supported changing the Reorg data type, including but not limited to:
 
-- Change from varchar to bigint
-- Modify decimal precision
-- Length compression from varchar(10) to varchar(5)
+- Changing `VARCHAR` to `BIGINT`
+- Modifying the `DECIMAL` precision
+- Compressing the length of `VARCHAR(10)` to `VARCHAR(5)`
 
 ## Synopsis
 
@@ -153,10 +153,10 @@ ERROR 8200 (HY000): Unsupported modify column: change from original type decimal
 ## MySQL compatibility
 
 * Making multiple changes in a single `ALTER TABLE` statement is not currently supported.
-* Changes of data type on primary key columns are not supported.
+* Changes of data types on primary key columns are not supported.
 * Changes of column types on partitioned tables are not supported.
 * Changes of column types on the generated columns are not supported.
-* Changes of some data types (for example, some TIME types, Bit, Set, Enum, JSON, etc.) are not supported due to some compatibility issues of TIDB cast function with MySQL's behavior.
+* Changes of some data types (for example, some TIME types, Bit, Set, Enum, JSON) are not supported due to some compatibility issues of the `cast` function's behavior between TiDB and MySQL.
 
 ## See also
 
