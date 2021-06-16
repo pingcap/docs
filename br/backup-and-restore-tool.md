@@ -156,7 +156,7 @@ Note that skipping the version check might introduce incompatibility. The versio
 
 Before v5.1.0, BR filtered out data from the system schema tables during the backup.
 
-Since v5.1.0, BR **backups** all data by default, including the system schema (`mysql.*`). But to be compatible with the earlier versions of BR, the system tables are **not** restored by default during the **restore**. Only when the [`filter` parameter](/br/use-br-command-line-tool.md#back-up-with-table-filter) is set will the system tables be restored to the temporary database. Then restore to the system schema by renaming the temporary schema table.
+Since v5.1.0, BR **backups** all data by default, including the system schema (`mysql.*`). But to be compatible with the earlier versions of BR, the system tables are **not** restored by default during the **restore**. Only when the [`filter` parameter](/br/use-br-command-line-tool.md#back-up-with-table-filter) is set will the system tables be restored to the temporary schema, and then restored to the system schema by renaming the temporary schema table.
 
 Meanwhile, special treatment is performed on the following system schema tables:
 
