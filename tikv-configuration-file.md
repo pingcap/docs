@@ -1337,7 +1337,7 @@ Configuration items related to maintaining the Resolved TS to serve Stale Read r
 
 ### `scan-lock-pool-size`
 
-+ The number of threads that TiKV scans for MVCC (multi-version concurrency control) lock data when initializing the Resolved TS.
++ The number of threads that TiKV uses to scan the MVCC (multi-version concurrency control) lock data when initializing the Resolved TS.
 + Default value: `2`, which means 2 threads.
 
 ## pessimistic-txn
