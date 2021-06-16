@@ -75,7 +75,7 @@ If you deploy TiCDC using TiUP, replace `cdc cli` in the following commands with
 
 #### State transfer of replication tasks
 
-The state of replication tasks identifies the running status of the replication tasks. During the operation of TiCDC, replication tasks might fail with errors, be manually stopped, resumed, or reach the specified `TargetTs`. These behaviors can lead to the change of the replication task state. This section describes the various states of the TiCDC replication tasks and the transfer relationships between the states.
+The state of replication tasks represents the running status of the replication tasks. During the operation of TiCDC, replication tasks might fail with errors, be manually paused, resumed, or reach the specified `TargetTs`. These behaviors can lead to the change of the replication task state. This section describes the various states of the TiCDC replication tasks and the transfer relationships between the states.
 
 ![TiCDC state transfer](/media/ticdc-state-transfer.png)
 
@@ -94,7 +94,7 @@ The numbering in the above state transfer diagram is described as follows.
 - ③ Recoverable errors occur during the `changefeed` operation
 - ④ Execute the `changefeed resume` command to resume the replication task
 - ⑤ Recoverable errors occur during the `changefeed` operation
-- ⑥ The replication task has reached the preset TargetTs, and the replication is automatically stopped.
+- ⑥ The replication task has reached the preset `TargetTs`, and the replication is automatically stopped.
 
 #### Create a replication task
 
