@@ -1321,6 +1321,25 @@ Configuration items related to TiCDC.
 + Default value: `6`, which means 6 tasks can be concurrent executed at most.
 + Note: The value of `incremental-scan-concurrency` must be greater than or equal to that of `incremental-scan-threads`; otherwise, TiKV will report an error at startup.
 
+## resolved-ts
+
+Configuration items related to maintaining the Resolved TS to serve Stale Read requests.
+
+### `enable`
+
++ Enables whether to maintain the Resolved TS for all Regions.
++ Default value: `false`
+
+### `advanced-ts-interval`
+
++ The time interval for regularly advancing the Resolved TS.
++ Default value: `"1s"`
+
+### `scan-lock-pool-size`
+
++ The number of threads that TiKV scans for MVCC (multi-version concurrency control) lock data when initializing the Resolved TS.
++ Default value: `2`, which means 2 threads.
+
 ## pessimistic-txn
 
 For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](/pessimistic-transaction.md).
