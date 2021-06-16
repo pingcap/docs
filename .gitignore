@@ -11,3 +11,5 @@ gen
 *.swp
 
 /node_modules/
+/server_help/*.txt
+/server_help/*.sql

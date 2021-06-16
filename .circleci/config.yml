@@ -112,6 +112,26 @@ jobs:
       - store_artifacts:
           path: /tmp/artifacts
 
+  server_help:
+    docker:
+      - image: golang:1.16
+    working_directory: /go/src/github.com/pingcap/docs
+
+    steps:
+      - checkout
+
+      - run:
+          name: "Install dependencies"
+          command: apt-get update && apt-get install -y pandoc
+
+      - run:
+          name: "Generate Help Files"
+          command: scripts/server_help.sh
+
+      - run:
+          name: "Go tests"
+          command: pushd server_help; go test; popd
+
 workflows:
   version: 2
   lint:
@@ -124,3 +144,6 @@ workflows:
             branches:
               only:
                 - master
+  server_help:
+    jobs:
+      - server_help
