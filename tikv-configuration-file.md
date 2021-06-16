@@ -1332,7 +1332,7 @@ Configuration items related to maintaining the Resolved TS to serve Stale Read r
 
 ### `advanced-ts-interval`
 
-+ The time interval at which the Resolved TS is processed.
++ The interval at which Resolved TS is calculated and forwarded.
 + Default value: `"1s"`
 
 ### `scan-lock-pool-size`
