@@ -231,7 +231,7 @@ When a pessimistic transaction has a deadlock, one of the transactions must be t
 Solutions:
 
 * If it is difficult to confirm the cause of the deadlock, for v5.1 and later versions, you are recommended to try to query the `INFORMATION_SCHEMA.DEADLOCKS` or `INFORMATION_SCHEMA.CLUSTER_DEADLOCKS` system table to get the information of deadlock waiting chain. For details, see the [Deadlock error](#deadlock-error) section and the [`DEADLOCKS` table](/information-schema/information-schema-deadlocks.md) document.
-* If the deadlock occurs frequently, you need to adjust your application code to reduce such occurrences.	* If the deadlock occurs frequently, you need to adjust your application code to reduce such occurrences.
+* If the deadlock occurs frequently, you need to adjust your application code to reduce such occurrences.
 
 ### Use Lock View to troubleshoot issues related to pessimistic locks
 
