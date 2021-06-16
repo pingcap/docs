@@ -1327,12 +1327,12 @@ Configuration items related to maintaining the Resolved TS to serve Stale Read r
 
 ### `enable`
 
-+ Enables whether to maintain the Resolved TS for all Regions.
-+ Default value: `false`
++ Determines whether to maintain the Resolved TS for all Regions.
++ Default value: `true`
 
 ### `advanced-ts-interval`
 
-+ The time interval for regularly advancing the Resolved TS.
++ The time interval at which the Resolved TS is processed.
 + Default value: `"1s"`
 
 ### `scan-lock-pool-size`
