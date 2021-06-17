@@ -18,7 +18,7 @@ This document only describes the parameters that are not included in command-lin
 + Sets whether to call `abort()` to exit the process when TiKV panics. This option affects whether TiKV allows the system to generate core dump files.
 
     + If the value of this configuration item is `false`, when TiKV panics, it calls `exit()` to exit the process.
-    + If the value of this configuration item is `true`, when TiKV panics, TiKV calls `abort()` to exit the process. At this time, TiKV allows the system to generate core dump files when exiting. To generate a core dump file, you also need to perform the system configuration related to the core dump (for example, enable the `ulimit -c` and configure the core dump path. Different operating systems have different configuration methods). To avoid the core dump file occupying too much disk space and causing insufficient TiKV disk space, it is recommended to set the core dump generation path to different disk partitions of TiKV data.
+    + If the value of this configuration item is `true`, when TiKV panics, TiKV calls `abort()` to exit the process. At this time, TiKV allows the system to generate core dump files when exiting. To generate a core dump file, you also need to perform the system configuration related to the core dump (for example, setting core dump file size limit via `ulimit -c` command, and/or configure the core dump path. Different operating systems have different related configurations). To avoid the core dump files occupying too much disk space and causing insufficient TiKV disk space, it is recommended to set the core dump generation path to a disk partition different to that of TiKV data.
 
 + Default value: `false`
 
