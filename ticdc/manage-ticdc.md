@@ -75,19 +75,19 @@ If you deploy TiCDC using TiUP, replace `cdc cli` in the following commands with
 
 #### State transfer of replication tasks
 
-The state of replication tasks represents the running status of the replication tasks. During the operation of TiCDC, replication tasks might fail with errors, be manually paused, resumed, or reach the specified `TargetTs`. These behaviors can lead to the change of the replication task state. This section describes the various states of the TiCDC replication tasks and the transfer relationships between the states.
+The state of a replication task represents the running status of the replication task. During the operation of TiCDC, replication tasks might fail with errors, be manually paused, resumed, or reach the specified `TargetTs`. These behaviors can lead to the change of the replication task state. This section describes the states of TiCDC replication tasks and the transfer relationships between states.
 
 ![TiCDC state transfer](/media/ticdc-state-transfer.png)
 
 The states in the above state transfer diagram are described as follows:
 
-- `Normal`: The replication task runs normally and checkpoint-ts advances normally.
-- `Stopped`: The replication task is stopped, because the user manually pauses the changefeed. The changefeed in this state blocks GC advances.
-- `Error`: The replication task returns errors and the replication cannot continue due to some recoverable internal errors. The changefeed in this state keeps trying to continue advancing until the state transfers to `Normal`. The changefeed in this state blocks GC advances.
-- `Finished`: The replication task is finished and has reached the preset `TargetTs`. The changefeed in this state does not block GC advances.
-- `Failed`: The replication task fails. Due to some unrecoverable errors, the replication task cannot continue and cannot be restored. The changefeed in this state does not block GC advances.
+- `Normal`: The replication task runs normally and the checkpoint-ts proceeds normally.
+- `Stopped`: The replication task is stopped, because the user manually pauses the changefeed. The changefeed in this state blocks GC operations.
+- `Error`: The replication task returns an error. The replication cannot continue due to some recoverable internal errors. The changefeed in this state keeps trying to resume until the state transfers to `Normal`. The changefeed in this state blocks GC operations.
+- `Finished`: The replication task is finished and has reached the preset `TargetTs`. The changefeed in this state does not block GC operations.
+- `Failed`: The replication task fails. Due to some unrecoverable errors, the replication task cannot resume and cannot be recovered. The changefeed in this state does not block GC operations.
 
-The numbering in the above state transfer diagram is described as follows.
+The numbers in the above state transfer diagram are described as follows.
 
 - ① Execute the `changefeed pause` command
 - ② Execute the `changefeed resume` command to resume the replication task
@@ -303,7 +303,7 @@ cdc cli changefeed list --pd=http://10.0.10.25:2379
 - `state` indicates the state of the replication task.
     - `normal`: The replication task runs normally.
     - `stopped`: The replication task is stopped (manually paused).
-    - `error`: The replication task is stopped (stopped by an error).
+    - `error`: The replication task is stopped (by an error).
     - `removed`: The replication task is removed. Tasks of this state are displayed only when you have specified the `--all` option. To see these tasks when this option is not specified, execute the `changefeed query` command.
     - `finished`: The replication task is finished (data is replicated to the `target-ts`). Tasks of this state are displayed only when you have specified the `--all` option. To see these tasks when this option is not specified, execute the `changefeed query` command.
 
