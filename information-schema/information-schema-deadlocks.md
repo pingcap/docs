@@ -40,11 +40,11 @@ The meaning of each column field in the `DEADLOCKS` table is as follows:
 * `OCCUR_TIME`: The time when the deadlock error occurs.
 * `RETRYABLE`: Whether the deadlock error can be retried. Currently, TiDB does not support collecting the information of the retryable deadlock error, so the value of this field is always `0`. For the description of retryable deadlock errors, see the [Retryable deadlock errors](#retryable-deadlock-errors) section.
 * `TRY_LOCK_TRX_ID`: The ID of the transaction that tries to add lock, which is the `start_ts` of the transaction.
-* `CURRENT_SQL_DIGEST`: The digest of the SQL statement currently being executed in the transaction that is trying to add lock.
+* `CURRENT_SQL_DIGEST`: The digest of the SQL statement currently being executed in the lock-adding transaction.
 * `KEY`: The blocked key that the transaction tries to lock. This value of this field is displayed in the form of hexadecimal code.
-* `TRX_HOLDING_LOCK`: The transaction ID that currently holds the lock on the key and causes blocking, which is the transaction's `start_ts`.
+* `TRX_HOLDING_LOCK`: The ID of the transaction that currently holds the lock on the key and causes blocking, which is the `start_ts` of the transaction.
 
-To adjust the number of deadlock events that can be accommodated in the `DEADLOCKS` table, adjust the [`pessimistic-txn.deadlock-history-capacity`](/tidb-configuration-file.md#deadlock-history-capacity) configuration in the TiDB configuration file. By default, the information of the recent 10 deadlock events is accommodated in the table..
+To adjust the number of deadlock events that can be displayed in the `DEADLOCKS` table, adjust the [`pessimistic-txn.deadlock-history-capacity`](/tidb-configuration-file.md#deadlock-history-capacity) configuration in the TiDB configuration file. By default, the information of the recent 10 deadlock events is displayed in the table.
 
 ## Example 1
 
@@ -83,7 +83,7 @@ select * from information_schema.deadlocks;
 +-------------+----------------------------+-----------+--------------------+------------------------------------------------------------------+----------------------------------------+--------------------+
 ```
 
-Two rows of data are generated in the above table. The `DEADLOCK_ID` field of both rows is `1`, which means that the two rows of data contain the same deadlock error information. The first row shows that the transaction of the ID `425405959304904707` is blocked on the key of `"7480000000000000385F728000000000000002"` by the transaction of the ID `"425405959304904708"`. The second row shows that the transaction of the ID `"425405959304904708"` is blocked on the key of `"7480000000000000385F728000000000000001"` by the transaction of the ID `425405959304904707`, which constitutes mutual blocking and forms a deadlock.
+Two rows of data are generated in the above table. The `DEADLOCK_ID` field of both rows is `1`, which means that the two rows of data display the same deadlock error information. The first row shows that the transaction of the ID `425405959304904707` is blocked on the key of `"7480000000000000385F728000000000000002"` by the transaction of the ID `"425405959304904708"`. The second row shows that the transaction of the ID `"425405959304904708"` is blocked on the key of `"7480000000000000385F728000000000000001"` by the transaction of the ID `425405959304904707`, which constitutes mutual blocking and forms a deadlock.
 
 ## Example 2
 
@@ -107,7 +107,7 @@ The `DEADLOCK_ID` column in the above query result shows that the first two rows
 
 > **Note:**
 >
-> Currently, TiDB does not support collecting retryable deadlock errors in `DEADLOCKS` table.
+> Currently, TiDB does not support collecting retryable deadlock errors in the `DEADLOCKS` table.
 
 When transaction A is blocked by a lock already held by another transaction, and transaction B is directly or indirectly blocked by the lock held by the current transaction, a deadlock error will occur. In this deadlock event, there might be two cases:
 
@@ -138,7 +138,7 @@ Then if transaction A locks the two rows with `id = 1` and `id = 2`, and the two
 1. Transaction A locks the row with `id = 1`.
 2. Transaction B executes the first statement and locks the row with `id = 2`.
 3. Transaction B executes the second statement and tries to lock the row with `id = 1`, which is blocked by transaction A.
-4. Transaction A tries to lock the row with `id = 2` and is blocked by B, which forms a deadlock.
+4. Transaction A tries to lock the row with `id = 2` and is blocked by transaction B, which forms a deadlock.
 
 For this case, because the statement of transaction A that blocks other transactions is also the statement currently being executed, the pessimistic lock on the current statement can be resolved (so that transaction B can continue to run), and the current statement can be retried. TiDB uses the key hash internally to determine whether this is the case.
 

@@ -5,7 +5,7 @@ summary: Learn the `DATA_LOCK_WAITS` information_schema table.
 
 # DATA_LOCK_WAITS
 
-The `DATA_LOCK_WAITS` table shows the on-going pessimistic lock waiting on all TiKV nodes in the cluster.
+The `DATA_LOCK_WAITS` table shows the ongoing pessimistic lock waiting on all TiKV nodes in the cluster.
 
 > **Warning:**
 >
@@ -32,13 +32,13 @@ DESC data_lock_waits;
 The meaning of each column field in the `DATA_LOCK_WAITS` table is as follows:
 
 * `KEY`: The KEY that is waiting for the lock and displayed in the form of hexadecimal code.
-* `TRX_ID`: The ID of the transaction that is waiting for the lock, which is the `start_ts`.
-* `CURRENT_HOLDING_TRX_ID`: The ID of the transaction that currently holds the lock, which is the `start_ts`.
+* `TRX_ID`: The ID of the transaction that is waiting for the lock, which is the `start_ts` of the transaction.
+* `CURRENT_HOLDING_TRX_ID`: The ID of the transaction that currently holds the lock, which is the `start_ts` of the transaction.
 * `SQL_DIGEST`: The digest of the SQL statement that is currently blocked in the lock-waiting transaction.
 
 > **Warning:**
 >
-> * The information in this table is obtained in real time from all TiKV nodes during the query. Currently, even if the `WHERE` condition is added, TiDB might still collect information from all TiKV nodes. If the cluster is large and the load is high, querying this table might cause potential risk of performance jitter. Therefore, use this table according to your actual situation.
+> * The information in this table is obtained in real time from all TiKV nodes during the query. Currently, even if the `WHERE` condition is added, TiDB might still collect information from all TiKV nodes. If the cluster is large and the load is high, querying this table might cause a potential risk of performance jitter. Therefore, use this table according to your actual situation.
 > * The information from different TiKV nodes is not necessarily the snapshot at the same point in time.
 
 ## Example
@@ -67,7 +67,7 @@ The `DATA_LOCK_WAITS` table records the SQL digest but not the original SQL stat
 SQL digest is the hash value after the SQL normalization. To find the original SQL statement corresponding to the SQL digest, perform one of the following operations:
 
 - For the statements executed on the current TiDB node in the recent period of time, you can find the corresponding orginal SQL statement from the SQL digest in `STATEMENTS_SUMMARY` or `STATEMENTS_SUMMARY_HISTORY`.
-- For the statements executed on all TiDB nodes in the entire cluster in the recent period of time, you can find the corresponding SQL statement from the SQL Digest in `CLUSTER_STATEMENTS_SUMMARY` or `CLUSTER_STATEMENTS_SUMMARY_HISTORY`.
+- For the statements executed on all TiDB nodes in the entire cluster in the recent period of time, you can find the corresponding SQL statement from the SQL digest in `CLUSTER_STATEMENTS_SUMMARY` or `CLUSTER_STATEMENTS_SUMMARY_HISTORY`.
 
 {{< copyable "sql" >}}
 

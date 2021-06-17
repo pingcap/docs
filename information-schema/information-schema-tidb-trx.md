@@ -79,7 +79,7 @@ WAITING_START_TIME: NULL
 1 row in set (0.00 sec)
 ```
 
-The query result of the above example indicates that a transaction is being executed on the current node (the `STATE` is `Normal`), and this transaction is currently idle (`CURRENT_SQL_DIGEST` is `NULL`). This transaction has executed 3 statements (there are three records in the `ALL_SQL_DIGESTS` list and they are the digests of the three executed statements).
+The query result of the above example indicates that a transaction is being executed on the current node (the `STATE` is `Normal`), and this transaction is currently idle (`CURRENT_SQL_DIGEST` is `NULL`). This transaction has executed three statements (there are three records in the `ALL_SQL_DIGESTS` list and they are the digests of the three executed statements).
 
 ## CLUSTER_TIDB_TRX
 
@@ -118,7 +118,7 @@ The `TIDB_TRX` table only records SQL digests, not the original SQL statement.
 SQL digest is the hash value after the SQL normalization. To find the original SQL statement corresponding to the SQL digest, perform one of the following operations:
 
 - For the statements executed on the current TiDB node in the recent period of time, you can find the corresponding orginal SQL statement from the SQL digest in `STATEMENTS_SUMMARY` or `STATEMENTS_SUMMARY_HISTORY`.
-- For the statements executed on all TiDB nodes in the entire cluster in the recent period of time, you can find the corresponding SQL statement from the SQL Digest in `CLUSTER_STATEMENTS_SUMMARY` or `CLUSTER_STATEMENTS_SUMMARY_HISTORY`.
+- For the statements executed on all TiDB nodes in the entire cluster in the recent period of time, you can find the corresponding SQL statement from the SQL digest in `CLUSTER_STATEMENTS_SUMMARY` or `CLUSTER_STATEMENTS_SUMMARY_HISTORY`.
 
 {{< copyable "sql" >}}
 
