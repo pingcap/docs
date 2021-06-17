@@ -13,7 +13,7 @@ This document only describes the parameters that are not included in command-lin
 
 ## Global configuration
 
-### abort-on-panic
+### abort-on-panic <span class="version-mark">New in v5.0.2</span>
 
 + Sets whether to call `abort()` to exit the process when TiKV panics. This option affects whether TiKV allows the system to generate core dump files.
 
