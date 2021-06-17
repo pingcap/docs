@@ -410,10 +410,14 @@ Configuration items related to Raftstore
 + Default value: `"3s"`
 + Minimum value: `0`
 
-### `hibernate-regions` (**Experimental**)
+### `hibernate-regions`
 
 + Enables or disables Hibernate Region. When this option is enabled, a Region idle for a long time is automatically set as hibernated. This reduces the extra overhead caused by heartbeat messages between the Raft leader and the followers for idle Regions. You can use `raftstore.peer-stale-state-check-interval` to modify the heartbeat interval between the leader and the followers of hibernated Regions.
+<<<<<<< HEAD
 + Default value: false
+=======
++ Default value: `true` in v5.0.2 and later versions; `false` in versions before v5.0.2
+>>>>>>> 70333f5e0 (tikv config: hibernate region GA (#5789))
 
 ### `raftstore.peer-stale-state-check-interval`
 
