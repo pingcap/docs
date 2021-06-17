@@ -156,7 +156,7 @@ Note that skipping the version check might introduce incompatibility. The versio
 
 Before v5.1.0, BR filtered out data from the system schemas during the backup.
 
-Since v5.1.0, BR **backups** all data by default, including the system schema (`mysql.*`). But to be compatible with the earlier versions of BR, the system tables are **not** restored by default during the **restore**. If you want the system tables to be restored to the system schemas, you need to set the [`filter` parameter](/br/use-br-command-line-tool.md#back-up-with-table-filter). Then, the system tables are first restored to the temporary schemas and then to the system schemas (by renaming the temporary schemas).
+Since v5.1.0, BR **backups** all data by default, including the system schema (`mysql.*`). But to be compatible with the earlier versions of BR, the system tables are **not** restored by default during the **restore**. If you want the tables to be restored to the system schemas, you need to set the [`filter` parameter](/br/use-br-command-line-tool.md#back-up-with-table-filter). Then, the system tables are first restored to the temporary schemas and then to the system schemas (by renaming the temporary schemas).
 
 In addition, TiDB performs special operations on the following system tables:
 
