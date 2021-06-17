@@ -152,15 +152,15 @@ Note that skipping the version check might introduce incompatibility. The versio
 | Use BR v4.0 to back up TiDB v4.0 | ✅ | ✅ | ✅ (If TiKV >= v4.0.0-rc.1, and if BR contains the [#233](https://github.com/pingcap/br/pull/233) bug fix and TiKV does not contain the [#7241](https://github.com/tikv/tikv/pull/7241) bug fix, BR will cause the TiKV node to restart.) |
 | Use BR nightly or v5.0 to back up TiDB v4.0 | ❌ (If the TiDB version is earlier than v4.0.9, the [#609](https://github.com/pingcap/br/issues/609) issue might occur.) | ❌ (If the TiDB version is earlier than v4.0.9, the [#609](https://github.com/pingcap/br/issues/609) issue might occur.) | ❌ (If the TiDB version is earlier than v4.0.9, the [#609](https://github.com/pingcap/br/issues/609) issue might occur.) |
 
-### Backup and restore of system schema tables
+### Backup and restore of system schemas
 
-Before v5.1.0, BR filtered out data from the system schema tables during the backup.
+Before v5.1.0, BR filtered out data from the system schemas during the backup.
 
-Since v5.1.0, BR **backups** all data by default, including the system schema (`mysql.*`). But to be compatible with the earlier versions of BR, the system tables are **not** restored by default during the **restore**. Only when the [`filter` parameter](/br/use-br-command-line-tool.md#back-up-with-table-filter) is set will the system tables be restored to the temporary schema, and then restored to the system schema by renaming the temporary schema table.
+Since v5.1.0, BR **backups** all data by default, including the system schema (`mysql.*`). But to be compatible with the earlier versions of BR, the system tables are **not** restored by default during the **restore**. Only when the [`filter` parameter](/br/use-br-command-line-tool.md#back-up-with-table-filter) is set will the system tables be restored to the temporary schemas and then restored to the system schemas by renaming the temporary schemas.
 
-Meanwhile, special treatment is performed on the following system schema tables:
+Meanwhile, special treatment is performed on the following system tables:
 
-- Tables related to statistical information: No restore is performed because the table id of the statistical information has changed.
+- Tables related to statistical information: No restore is performed because the table ID of the statistical information has changed.
 - `tidb` and `global_variables` tables under the `mysql` schema: No restore is performed because the tables cannot be overwritten. For example, the overwriting of GC safepoint affects the cluster.
 - The `user` table under the `mysql` schema: After restoring the `user` table, you need to manually execute the `FLUSH PRIVILEGE` command to make it take effect.
 
