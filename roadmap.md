@@ -54,10 +54,10 @@ aliases: ['/tidb/v5.0/roadmap','/docs/ROADMAP/','/docs/roadmap/','/docs/stable/r
 - [ ] Data import
     - [ ] TiDB Lightning supports detecting conflicts in the imported data.
     - [ ] TiDB Lightning supports distributed parallel import.
-- [ ] Data Replication: TiCDC is compatible with features related to TiDB Binlog, reducing the cost of TiDB Binlog users using TiCDC [#690](https://github.com/pingcap/ticdc/issues/690)
+- [ ] Data replication: TiCDC is compatible with features related to TiDB Binlog, reducing the cost of TiDB Binlog users using TiCDC [#690](https://github.com/pingcap/ticdc/issues/690)
     - [ ] Support exporting data to file systems and cloud storage (S3/GCS)
-- [ ] Data disaster recovery: Support snapshot-level consistent data replication in disaster recovery [#691](https://github.com/pingcap/ticdc/issues/691)
-    - [ ] Support for the TiDB disaster recovery cluster to replicate the standby cluster to a consistent state at the snapshot level in the event of a disaster in the primary cluster.
+- [ ] Data disaster recovery: Support snapshot-level consistent data replication in the disaster recovery [#691](https://github.com/pingcap/ticdc/issues/691)
+    - [ ] Support for the TiDB disaster recovery cluster to replicate the backup cluster to a consistent state at the snapshot level when a disaster occurs in the primary cluster.
 - [ ] Manage TiCDC using API [#736](https://github.com/pingcap/ticdc/issues/736)
 - [x] Data sharing: TiCDC supports Avro receivers, making TiCDC compatible with Kafka connect [#660](https://github.com/pingcap/ticdc/issues/660)
 - [ ] Support Spark 3.0 [#1173](https://github.com/pingcap/tispark/issues/1173)
