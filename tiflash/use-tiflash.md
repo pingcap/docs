@@ -259,7 +259,7 @@ If a query encounters unsupported push-down calculations, TiDB needs to complete
 
 ## Use the MPP mode
 
-TiFlash supports using the MPP mode to execute queries, which introduces cross-node data exchange (data shuffle process) into the computation. TiDB automatically determines using the optimizer whether to choose MPP mode. You can change the selection strategy by modifying the values of [`tidb_allow_mpp`](/system-variables.md#tidb-allow-mpp-new-in-v50) and [`tidb_enforce_mpp`](/system-variables.md#tidb-enforce-mpp-new-in-v51).
+TiFlash supports using the MPP mode to execute queries, which introduces cross-node data exchange (data shuffle process) into the computation. TiDB automatically determines using the optimizer whether to choose MPP mode. You can change the selection strategy by modifying the values of [`tidb_allow_mpp`](/system-variables.md#tidb_allow_mpp-new-in-v50) and [`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51).
 
 ### Control whether to choose the MPP mode
 
