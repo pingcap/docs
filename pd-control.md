@@ -326,7 +326,7 @@ Usage:
 
 - `enable-debug-metrics` is used to enable the metrics for debugging. When you set it to `true`, PD enables some metrics such as `balance-tolerant-size`.
 
-- `enable-placement-rules` is used to enable placement rules.
+- `enable-placement-rules` is used to enable placement rules, which is enabled by default in v5.0 and later versions.
 
 - `store-limit-mode` is used to control the mode of limiting the store speed. The optional modes are `auto` and `manual`. In `auto` mode, the stores are automatically balanced according to the load (experimental).
 
