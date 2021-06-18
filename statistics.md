@@ -111,7 +111,7 @@ You can perform full collection using the following syntax.
 
 > **Note:**
 >
-> To ensure the consistency of the statistical information both before and after, when you set `tidb_analyze_version=2`, `ANALYZE TABLE TableName INDEX` will also collect statistics of the whole table instead of the given index.
+> To ensure that the statistical information before and after the collection is consistent, when you set `tidb_analyze_version=2`, `ANALYZE TABLE TableName INDEX` will also collect statistics of the whole table instead of the given index.
 
 #### Incremental collection
 
