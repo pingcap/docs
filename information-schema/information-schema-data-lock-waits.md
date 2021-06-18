@@ -39,7 +39,7 @@ The meaning of each column field in the `DATA_LOCK_WAITS` table is as follows:
 > **Warning:**
 >
 > * The information in this table is obtained in real time from all TiKV nodes during the query. Currently, even if the `WHERE` condition is added, TiDB might still collect information from all TiKV nodes. If the cluster is large and the load is high, querying this table might cause a potential risk of performance jitter. Therefore, use this table according to your actual situation.
-> * The information from different TiKV nodes is guaranteed to be the snapshot at the same point in time.
+> * The information from different TiKV nodes is NOT guaranteed to be the snapshot at the same point in time.
 
 ## Example
 
