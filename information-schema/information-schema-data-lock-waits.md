@@ -31,15 +31,15 @@ DESC data_lock_waits;
 
 The meaning of each column field in the `DATA_LOCK_WAITS` table is as follows:
 
-* `KEY`: The KEY that is waiting for the lock and displayed in the form of hexadecimal code.
-* `TRX_ID`: The ID of the transaction that is waiting for the lock, which is the `start_ts` of the transaction.
-* `CURRENT_HOLDING_TRX_ID`: The ID of the transaction that currently holds the lock, which is the `start_ts` of the transaction.
+* `KEY`: The KEY that is waiting for the lock and displayed in the form of hexadecimal string.
+* `TRX_ID`: The ID of the transaction that is waiting for the lock. This ID is also the `start_ts` of the transaction.
+* `CURRENT_HOLDING_TRX_ID`: The ID of the transaction that currently holds the lock. This ID is also the `start_ts` of the transaction.
 * `SQL_DIGEST`: The digest of the SQL statement that is currently blocked in the lock-waiting transaction.
 
 > **Warning:**
 >
 > * The information in this table is obtained in real time from all TiKV nodes during the query. Currently, even if the `WHERE` condition is added, TiDB might still collect information from all TiKV nodes. If the cluster is large and the load is high, querying this table might cause a potential risk of performance jitter. Therefore, use this table according to your actual situation.
-> * The information from different TiKV nodes is not necessarily the snapshot at the same point in time.
+> * The information from different TiKV nodes is guaranteed to be the snapshot at the same point in time.
 
 ## Example
 
@@ -58,15 +58,15 @@ CURRENT_HOLDING_TRX_ID: 425405016242126849
 2 rows in set (0.01 sec)
 ```
 
-The above query result shows that the transaction of the ID `425405024158875649` was trying to obtain the pessimistic lock on the key `7480000000000000355f728000000000000002` when the statement with digest `"f7530877a35ae65300c42250abd8bc731bbaf0a7cabc05dab843565230611bb22"` was being executed, but this key was held by the transaction of the ID `425405016242126849`.
+The above query result shows that the transaction of the ID `425405024158875649` was trying to obtain the pessimistic lock on the key `7480000000000000355f728000000000000002` when the statement with digest `"f7530877a35ae65300c42250abd8bc731bbaf0a7cabc05dab843565230611bb22"` was being executed, but the lock on this key was held by the transaction of the ID `425405016242126849`.
 
 ## SQL Digest
 
 The `DATA_LOCK_WAITS` table records the SQL digest but not the original SQL statement.
 
-SQL digest is the hash value after the SQL normalization. To find the original SQL statement corresponding to the SQL digest, perform one of the following operations:
+SQL digest is the hash value of the normalized SQL statement. To find the original SQL statement corresponding to the SQL digest, perform one of the following operations:
 
-- For the statements executed on the current TiDB node in the recent period of time, you can find the corresponding orginal SQL statement from the SQL digest in `STATEMENTS_SUMMARY` or `STATEMENTS_SUMMARY_HISTORY`.
+- For the statements executed on the current TiDB node in the recent period of time, you can find the corresponding original SQL statement from the SQL digest in `STATEMENTS_SUMMARY` or `STATEMENTS_SUMMARY_HISTORY`.
 - For the statements executed on all TiDB nodes in the entire cluster in the recent period of time, you can find the corresponding SQL statement from the SQL digest in `CLUSTER_STATEMENTS_SUMMARY` or `CLUSTER_STATEMENTS_SUMMARY_HISTORY`.
 
 {{< copyable "sql" >}}

@@ -44,7 +44,7 @@ The meaning of each column field in the `TIDB_TRX` table is as follows:
 * `CURRENT_SQL_DIGEST`: The digest of the SQL statement currently being executed in the transaction.
 * `STATE`: The current state of the transaction. The possible values ​​include:
     * `Normal`: The transaction is being executed normally or in an idle state.
-    * `LockWaiting`: The transaction is waiting for the pessimistic lock to be added. Note that the transaction enters this state at the beginning of the pessimistic locking operation, no matter whether it is blocked by other transactions or not.
+    * `LockWaiting`: The transaction is waiting for the pessimistic lock to be acquired. Note that the transaction enters this state at the beginning of the pessimistic locking operation, no matter whether it is blocked by other transactions or not.
     * `Committing`: The transaction is in the process of commit.
     * `RollingBack`: The transaction is being rolled back.
 * `WAITING_START_TIME`: When the value of `STATE` is `LockWaiting`, this column shows the start time of the waiting.
@@ -83,7 +83,7 @@ The query result of the above example indicates that a transaction is being exec
 
 ## CLUSTER_TIDB_TRX
 
-The `TIDB_TRX` table only provides information about the transactions that are being executed on a single TiDB node. If you want to view the information of the transaction that is being executed on all TiDB nodes in the entire cluster, you need to query the `CLUSTER_TIDB_TRX` table. Compared with the query result of the `TIDB_TRX` table, the query result of the `CLUSTER_TIDB_TRX` table contains an extra `INSTANCE` field. The `INSTANCE` field displays the IP address and port of each node in the cluster, which is used to distinguish the TiDB node where the transaction is located.
+The `TIDB_TRX` table only provides information about the transactions that are being executed on a single TiDB node. If you want to view the information of the transactions that are being executed on all TiDB nodes in the entire cluster, you need to query the `CLUSTER_TIDB_TRX` table. Compared with the query result of the `TIDB_TRX` table, the query result of the `CLUSTER_TIDB_TRX` table contains an extra `INSTANCE` field. The `INSTANCE` field displays the IP address and port of each node in the cluster, which is used to distinguish the TiDB node where the transaction is located.
 
 {{< copyable "sql" >}}
 
