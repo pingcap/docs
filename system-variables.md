@@ -501,6 +501,16 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Default value: `OFF`
 - This variable is used to set whether to enable the `LIST (COLUMNS) TABLE PARTITION` feature.
 
+### `tidb_partition_prune_mode` <span class="version-mark">New in v5.1</span>
+
+> **Warning:**
+>
+> Currently, the dynamic mode for partitioned tables is an experimental feature. It is not recommended that you use it in the production environment.
+
+- Scope: SESSION | GLOBAL
+- Default value: `static`
+- This variable is used to set whether to enable `dynamic` mode for partitioned tables. For more details about dynamic mode, see [Partition Table Dynamic Mode](/partitioned-table.md#dynamic-mode).
+
 ### tidb_enable_noop_functions <span class="version-mark">New in v4.0</span>
 
 - Scope: SESSION | GLOBAL

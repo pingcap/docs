@@ -1240,3 +1240,195 @@ select * from t;
 The `tidb_enable_list_partition` environment variable controls whether to enable the partitioned table feature. If this variable is set to `OFF`, the partition information will be ignored when a table is created, and this table will be created as a normal table.
 
 This variable is only used in table creation. After the table is created, modify this variable value takes no effect. For details, see [system variables](/system-variables.md#tidb_enable_list_partition-new-in-v50).
+
+### Dynamic mode
+
+> **Warning:**
+>
+> This is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
+
+There are two modes for TiDB accessing partitioned tables: `dynamic` and `static`. Currently, the `static` mode is used by default. If you want to enable `dynamic` mode, you need to manually set `tidb_partition_prune_mode` to `dynamic`.
+
+{{< copyable "sql" >}}
+
+```sql
+set @@session.tidb_partition_prune_mode = 'dynamic'
+```
+
+In `static` mode, TiDB accesses each partition separately with multiple operators, and then merges the results through `Union`. The following example is a simple read operation, where you can find that TiDB merges the results of two corresponding partitions with `Union`:
+
+{{< copyable "sql" >}}
+
+```sql
+mysql> create table t1(id int, age int, key(id)) partition by range(id) (
+    ->     partition p0 values less than (100),
+    ->     partition p1 values less than (200),
+    ->     partition p2 values less than (300),
+    ->     partition p3 values less than (400));
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> explain select * from t1 where id < 150;
++------------------------------+----------+-----------+------------------------+--------------------------------+
+| id                           | estRows  | task      | access object          | operator info                  |
++------------------------------+----------+-----------+------------------------+--------------------------------+
+| PartitionUnion_9             | 6646.67  | root      |                        |                                |
+| ├─TableReader_12             | 3323.33  | root      |                        | data:Selection_11              |
+| │ └─Selection_11             | 3323.33  | cop[tikv] |                        | lt(test.t1.id, 150)            |
+| │   └─TableFullScan_10       | 10000.00 | cop[tikv] | table:t1, partition:p0 | keep order:false, stats:pseudo |
+| └─TableReader_18             | 3323.33  | root      |                        | data:Selection_17              |
+|   └─Selection_17             | 3323.33  | cop[tikv] |                        | lt(test.t1.id, 150)            |
+|     └─TableFullScan_16       | 10000.00 | cop[tikv] | table:t1, partition:p1 | keep order:false, stats:pseudo |
++------------------------------+----------+-----------+------------------------+--------------------------------+
+7 rows in set (0.00 sec)
+```
+
+In `dynamic` mode, each operator supports direct access to multiple partitions, so TiDB no longer uses `Union`.
+
+{{< copyable "sql" >}}
+
+```sql
+mysql> set @@session.tidb_partition_prune_mode = 'dynamic';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> explain select * from t1 where id < 150;
++-------------------------+----------+-----------+-----------------+--------------------------------+
+| id                      | estRows  | task      | access object   | operator info                  |
++-------------------------+----------+-----------+-----------------+--------------------------------+
+| TableReader_7           | 3323.33  | root      | partition:p0,p1 | data:Selection_6               |
+| └─Selection_6           | 3323.33  | cop[tikv] |                 | lt(test.t1.id, 150)            |
+|   └─TableFullScan_5     | 10000.00 | cop[tikv] | table:t1        | keep order:false, stats:pseudo |
++-------------------------+----------+-----------+-----------------+--------------------------------+
+3 rows in set (0.00 sec)
+```
+
+From the above query results, it can be seen that the `Union` opearator in the execution plan disappears while the partition pruning is still in effect and the execution plan only accesses `p0` and `p1`.
+
+`dynamic` mode makes execution plans more simple and clear. Omitting the Union operation can improve the execution efficiency and avoid the problem of Union concurrent execution. In addition, `dynamic` mode also solves two problems that cannot be solved in `static` mode:
+
++ Do not use Plan Cache (see example 1 and 2)
++ Do not use IndexJoin type (see example 3 and 4)
+
+**Example 1**：The following example enables Plan Cache function in the configuration file and executes the same query twice in `static` mode:
+
+{{< copyable "sql" >}}
+
+```sql
+mysql> set @a=150;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> set @@tidb_partition_prune_mode = 'static';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> prepare stmt from 'select * from t1 where id < ?';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> execute stmt using @a;
+Empty set (0.00 sec)
+
+mysql> execute stmt using @a;
+Empty set (0.00 sec)
+
+-- In static mode, when the same query is executed twice, the cache cannot be hit the second time
+mysql> select @@last_plan_from_cache;
++------------------------+
+| @@last_plan_from_cache |
++------------------------+
+|                      0 |
++------------------------+
+1 row in set (0.00 sec)
+```
+
+`last_plan_from_cache` variable can display whether the last query hit the Plan Cache. As can be seen from above, in `static` mode, even if the same query is executed multiple times on the partitioned table, the Plan Cache will not be hit.
+
+**Example 2**: The following example performs the same operations as example 1 in `dynamic` mode:
+
+{{< copyable "sql" >}}
+
+```sql
+mysql> set @@tidb_partition_prune_mode = 'dynamic';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> prepare stmt from 'select * from t1 where id < ?';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> execute stmt using @a;
+Empty set (0.00 sec)
+
+mysql> execute stmt using @a;
+Empty set (0.00 sec)
+
+-- in dynamic mode, the cache can be hit the second time
+mysql> select @@last_plan_from_cache;
++------------------------+
+| @@last_plan_from_cache |
++------------------------+
+|                      1 |
++------------------------+
+1 row in set (0.00 sec)
+```
+
+As can be seen from above, in `dynamic` mode, querying partitioned tables can hit the Plan Cache.
+
+**Example 3**: The following example tries the execution plan with IndexJoin query in `static` mode:
+
+{{< copyable "sql" >}}
+
+```sql
+mysql> create table t2(id int, code int);
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> set @@tidb_partition_prune_mode = 'static';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> explain select /*+ TIDB_INLJ(t1, t2) */ t1.* from t1, t2 where t2.code = 0 and t2.id = t1.id;
++--------------------------------+----------+-----------+------------------------+------------------------------------------------+
+| id                             | estRows  | task      | access object          | operator info                                  |
++--------------------------------+----------+-----------+------------------------+------------------------------------------------+
+| HashJoin_13                    | 12.49    | root      |                        | inner join, equal:[eq(test.t1.id, test.t2.id)] |
+| ├─TableReader_42(Build)        | 9.99     | root      |                        | data:Selection_41                              |
+| │ └─Selection_41               | 9.99     | cop[tikv] |                        | eq(test.t2.code, 0), not(isnull(test.t2.id))   |
+| │   └─TableFullScan_40         | 10000.00 | cop[tikv] | table:t2               | keep order:false, stats:pseudo                 |
+| └─PartitionUnion_15(Probe)     | 39960.00 | root      |                        |                                                |
+|   ├─TableReader_18             | 9990.00  | root      |                        | data:Selection_17                              |
+|   │ └─Selection_17             | 9990.00  | cop[tikv] |                        | not(isnull(test.t1.id))                        |
+|   │   └─TableFullScan_16       | 10000.00 | cop[tikv] | table:t1, partition:p0 | keep order:false, stats:pseudo                 |
+|   ├─TableReader_24             | 9990.00  | root      |                        | data:Selection_23                              |
+|   │ └─Selection_23             | 9990.00  | cop[tikv] |                        | not(isnull(test.t1.id))                        |
+|   │   └─TableFullScan_22       | 10000.00 | cop[tikv] | table:t1, partition:p1 | keep order:false, stats:pseudo                 |
+|   ├─TableReader_30             | 9990.00  | root      |                        | data:Selection_29                              |
+|   │ └─Selection_29             | 9990.00  | cop[tikv] |                        | not(isnull(test.t1.id))                        |
+|   │   └─TableFullScan_28       | 10000.00 | cop[tikv] | table:t1, partition:p2 | keep order:false, stats:pseudo                 |
+|   └─TableReader_36             | 9990.00  | root      |                        | data:Selection_35                              |
+|     └─Selection_35             | 9990.00  | cop[tikv] |                        | not(isnull(test.t1.id))                        |
+|       └─TableFullScan_34       | 10000.00 | cop[tikv] | table:t1, partition:p3 | keep order:false, stats:pseudo                 |
++--------------------------------+----------+-----------+------------------------+------------------------------------------------+
+17 rows in set, 1 warning (0.00 sec)
+```
+
+As can be seen from above, even if the hint of `TIDB_INLJ` is used, the query with partitioned table can not select the execution plan with IndexJoin.
+
+**Example 4**: The following example tries the execution plan with IndexJoin query in `dynamic` mode:
+
+{{< copyable "sql" >}}
+
+```sql
+mysql> set @@tidb_partition_prune_mode = 'dynamic';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> explain select /*+ TIDB_INLJ(t1, t2) */ t1.* from t1, t2 where t2.code = 0 and t2.id = t1.id;
++---------------------------------+----------+-----------+------------------------+---------------------------------------------------------------------------------------------------------------------+
+| id                              | estRows  | task      | access object          | operator info                                                                                                       |
++---------------------------------+----------+-----------+------------------------+---------------------------------------------------------------------------------------------------------------------+
+| IndexJoin_11                    | 12.49    | root      |                        | inner join, inner:IndexLookUp_10, outer key:test.t2.id, inner key:test.t1.id, equal cond:eq(test.t2.id, test.t1.id) |
+| ├─TableReader_16(Build)         | 9.99     | root      |                        | data:Selection_15                                                                                                   |
+| │ └─Selection_15                | 9.99     | cop[tikv] |                        | eq(test.t2.code, 0), not(isnull(test.t2.id))                                                                        |
+| │   └─TableFullScan_14          | 10000.00 | cop[tikv] | table:t2               | keep order:false, stats:pseudo                                                                                      |
+| └─IndexLookUp_10(Probe)         | 1.25     | root      | partition:all          |                                                                                                                     |
+|   ├─Selection_9(Build)          | 1.25     | cop[tikv] |                        | not(isnull(test.t1.id))                                                                                             |
+|   │ └─IndexRangeScan_7          | 1.25     | cop[tikv] | table:t1, index:id(id) | range: decided by [eq(test.t1.id, test.t2.id)], keep order:false, stats:pseudo                                      |
+|   └─TableRowIDScan_8(Probe)     | 1.25     | cop[tikv] | table:t1               | keep order:false, stats:pseudo                                                                                      |
++---------------------------------+----------+-----------+------------------------+---------------------------------------------------------------------------------------------------------------------+
+8 rows in set (0.00 sec)
+```
+
+As can be seen from above, in `dynamic` mode, the plan with IndexJoin is selected when you execute query.
