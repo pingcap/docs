@@ -369,7 +369,7 @@ Configuration items related to replicas
 ### `flow-round-by-digit` <span class="version-mark">New in TiDB 5.1</span>
 
 + Default value: 3
-+ PD will round the number of flow information to reduce the update of statistics caused by changes in Region flow information. This configuration item is used to specify the number of digits to round the Region flow information. For example, the flow `100512` will be rounded to `100500` because the default value is `3`. This configuration replaces `trace-region-flow`.
++ PD will round the number of flow information to reduce the update of statistics caused by changes in Region flow information. This configuration item is used to specify the number of digits to round the Region flow information. For example, the flow `100512` will be rounded to `101000` because the default value is `3`. This configuration replaces `trace-region-flow`.
 
 ## `label-property`
 
