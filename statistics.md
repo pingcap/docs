@@ -6,7 +6,7 @@ aliases: ['/docs/dev/statistics/','/docs/dev/reference/performance/statistics/']
 
 # Introduction to Statistics
 
-TiDB uses statistics to decide [which index to choose](/choose-index.md). The `tidb_analyze_version` variable controls the statistics collected by TiDB. Currently, two versions of statistics are supported: `tidb_analyze_version = 1` and `tidb_analyze_version = 2`. In versions before v5.1, the default value of this variable is `1`. In v5.1, the default value of this variable is `2`, which is enabled as an experimental feature. These two versions include different information in TiDB:
+TiDB uses statistics to decide [which index to choose](/choose-index.md). The `tidb_analyze_version` variable controls the statistics collected by TiDB. Currently, two versions of statistics are supported: `tidb_analyze_version = 1` and `tidb_analyze_version = 2`. In versions before v5.1, the default value of this variable is `1`. In v5.1, the default value of this variable is `2`, which serves as an experimental feature. These two versions include different information in TiDB:
 
 | Information | Version 1 | Version 2|
 | --- | --- | ---|
@@ -63,7 +63,7 @@ You can run the `ANALYZE` statement to collect statistics.
 >
 > After Quick Analysis is enabled, TiDB randomly samples approximately 10,000 rows of data to build statistics. Therefore, in the case of uneven data distribution or a relatively small amount of data, the accuracy of statistical information is relatively poor. It might lead to poor execution plans, such as choosing the wrong index. If the execution time of the normal `ANALYZE` statement is acceptable, it is recommended to disable the Quick Analysis feature.
 >
-> `tidb_enable_fast_analyze` is an experimental feature, which at present **does not match exactly** with the statistical information of `tidb_analyze_version=2`. Therefore, you need to set the value of `tidb_analyze_version` to `1` when enabling `tidb_enable_fast_analyze`.
+> `tidb_enable_fast_analyze` is an experimental feature, which currently **does not match exactly** with the statistical information of `tidb_analyze_version=2`. Therefore, you need to set the value of `tidb_analyze_version` to `1` when `tidb_enable_fast_analyze` is enabled.
 
 #### Full collection
 
