@@ -259,11 +259,54 @@ If a query encounters unsupported push-down calculations, TiDB needs to complete
 
 ## Use the MPP mode
 
-TiFlash supports using the MPP mode to execute queries, which introduces cross-node data exchange (data shuffle process) into the computation. The MPP mode is enabled by default and can be disabled by setting the value of the global/session variable [`tidb_allow_mpp`](/system-variables.md#tidb_allow_mpp-new-in-v50) to `0` or `OFF`.
+TiFlash supports using the MPP mode to execute queries, which introduces cross-node data exchange (data shuffle process) into the computation. TiDB automatically determines using the optimizer whether to choose MPP mode. You can change the selection strategy by modifying the values of [`tidb_allow_mpp`](/system-variables.md#tidb-allow-mpp-new-in-v50) and [`tidb_enforce_mpp`](/system-variables.md#tidb-enforce-mpp-new-in-v51).
 
-```shell
-set @@session.tidb_allow_mpp=0
+### Control whether to choose the MPP mode
+
+`tidb_allow_mpp` controls whether TiDB can select MPP mode to execute queries. `tidb_enforce_mpp` controls whether the optimizer cost estimate is ignored and TiFlash's MPP mode is forced to execute queries.
+
+The results corresponding to all values of these two variables are as follows:
+
+|                        | tidb_allow_mpp=off | tidb_allow_mpp=on (by default)              |
+| ---------------------- | -------------------- | -------------------------------- |
+| tidb_enforce_mpp=off (by default) | MPP mode is not used. | The optimizer selects based on cost estimation. (by default)|
+| tidb_enforce_mpp=on  | MPP mode is not used.   | TiDB ignores the cost estimate and selects MPP mode.      |
+
+For example, if you do not want to use MPP mode, you can set by executing the following statement:
+
+{{< copyable "sql" >}}
+
+```sql
+set @@session.tidb_allow_mpp=1;
+set @@session.tidb_enforce_mpp=0;
 ```
+
+The initial value of the Session variable `tidb_enforce_mpp` is equal to the[`enforce-mpp`](/tidb-configuration-file.md#enforce-mpp) configuration item value of this tidb-server instance (which is `false` by default). In a TiDB cluster, if several tidb-server instances only perform analytical queries, to ensure that they can check MPP mode, you can change their [`enforce-mpp`](/tidb-configuration-file.md#enforce-mpp) configuration value to `true`.
+
+> **Note:**
+>
+> When `tidb_enforce_mpp=1` takes effect, the TiDB optimizer will ignore the cost estimate to select MPP mode. However, TiDB will not select MPP mode if other factors that do not support MPP mode occur, such as no TiFlash copy, the replication of TiFlash copies is not completed, and the statements contain operators or functions that are not supported by MPP mode.
+> 
+> If the TiDB optimizer cannot select MPP mode due to reasons other than cost estimation, when you use the `EXPLAIN` statement to view the execution plan, a warning is returned to explain the reason, for example:
+> 
+> {{< copyable "sql" >}}
+> 
+> ```sql
+> set @@session.tidb_enforce_mpp=1;
+> create table t(a int);
+> explain select count(*) from t; 
+> show warnings;
+> ```
+> 
+> ```
+> +---------+------+-----------------------------------------------------------------------------+
+> | Level   | Code | Message                                                                     |
+> +---------+------+-----------------------------------------------------------------------------+
+> | Warning | 1105 | MPP mode may be blocked because there aren't tiflash replicas of table `t`. |
+> +---------+------+-----------------------------------------------------------------------------+
+> ```
+
+### Algorithm support for MPP mode
 
 MPP mode supports these physical algorithms: Broadcast Hash Join, Shuffled Hash Join, Shuffled Hash Aggregation, Union All, TopN, and Limit. The optimizer automatically determines which algorithm to be used in a query. To check the specific query execution plan, you can execute the `EXPLAIN` statement. If the result of the `EXPLAIN` statement shows ExchangeSender and ExchangeReceiver operators, it indicates that the MPP mode has taken effect.
 
