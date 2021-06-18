@@ -39,12 +39,12 @@ The meaning of each column field in the `DEADLOCKS` table is as follows:
 * `DEADLOCK_ID`: The ID of the deadlock event. When multiple deadlock errors exist in the table, you can use this column to distinguish rows that belong to different deadlock errors.
 * `OCCUR_TIME`: The time when the deadlock error occurs.
 * `RETRYABLE`: Whether the deadlock error can be retried. Currently, TiDB does not support collecting the information of the retryable deadlock error, so the value of this field is always `0`. For the description of retryable deadlock errors, see the [Retryable deadlock errors](#retryable-deadlock-errors) section.
-* `TRY_LOCK_TRX_ID`: The ID of the transaction that tries to add lock, which is the `start_ts` of the transaction.
-* `CURRENT_SQL_DIGEST`: The digest of the SQL statement currently being executed in the lock-adding transaction.
-* `KEY`: The blocked key that the transaction tries to lock. This value of this field is displayed in the form of hexadecimal code.
-* `TRX_HOLDING_LOCK`: The ID of the transaction that currently holds the lock on the key and causes blocking, which is the `start_ts` of the transaction.
+* `TRY_LOCK_TRX_ID`: The ID of the transaction that tries to acquire lock. This ID is also the `start_ts` of the transaction.
+* `CURRENT_SQL_DIGEST`: The digest of the SQL statement currently being executed in the lock-acquiring transaction.
+* `KEY`: The blocked key that the transaction tries to lock. This value of this field is displayed in the form of hexadecimal string.
+* `TRX_HOLDING_LOCK`: The ID of the transaction that currently holds the lock on the key and causes blocking. This ID is also the `start_ts` of the transaction.
 
-To adjust the number of deadlock events that can be displayed in the `DEADLOCKS` table, adjust the [`pessimistic-txn.deadlock-history-capacity`](/tidb-configuration-file.md#deadlock-history-capacity) configuration in the TiDB configuration file. By default, the information of the recent 10 deadlock events is displayed in the table.
+To adjust the maximum number of deadlock events that can be recorded in the `DEADLOCKS` table, adjust the [`pessimistic-txn.deadlock-history-capacity`](/tidb-configuration-file.md#deadlock-history-capacity) configuration in the TiDB configuration file. By default, the information of the recent 10 deadlock events is recorded in the table.
 
 ## Example 1
 
@@ -83,7 +83,7 @@ select * from information_schema.deadlocks;
 +-------------+----------------------------+-----------+--------------------+------------------------------------------------------------------+----------------------------------------+--------------------+
 ```
 
-Two rows of data are generated in the above table. The `DEADLOCK_ID` field of both rows is `1`, which means that the two rows of data display the same deadlock error information. The first row shows that the transaction of the ID `425405959304904707` is blocked on the key of `"7480000000000000385F728000000000000002"` by the transaction of the ID `"425405959304904708"`. The second row shows that the transaction of the ID `"425405959304904708"` is blocked on the key of `"7480000000000000385F728000000000000001"` by the transaction of the ID `425405959304904707`, which constitutes mutual blocking and forms a deadlock.
+Two rows of data are generated in the `DEADLOCKS` table. The `DEADLOCK_ID` field of both rows is `1`, which means that the two rows of data display the same deadlock error information. The first row shows that the transaction of the ID `425405959304904707` is blocked on the key of `"7480000000000000385F728000000000000002"` by the transaction of the ID `"425405959304904708"`. The second row shows that the transaction of the ID `"425405959304904708"` is blocked on the key of `"7480000000000000385F728000000000000001"` by the transaction of the ID `425405959304904707`, which constitutes mutual blocking and forms a deadlock.
 
 ## Example 2
 
@@ -101,7 +101,7 @@ Assume that you query the `DEADLOCKS` table and get the following result:
 +-------------+----------------------------+-----------+--------------------+------------------------------------------------------------------+----------------------------------------+--------------------+
 ```
 
-The `DEADLOCK_ID` column in the above query result shows that the first two rows together represent the information of a deadlock error, and the two transactions that wait for each other form a deadlock. The next three rows together represent another deadlock information, and the three transactions that wait in a cycle form a deadlock.
+The `DEADLOCK_ID` column in the above query result shows that the first two rows together represent the information of a deadlock error, and the two transactions that wait for each other form the deadlock. The next three rows together represent another deadlock information, and the three transactions that wait in a cycle form the deadlock.
 
 ## Retryable deadlock errors
 
@@ -109,7 +109,7 @@ The `DEADLOCK_ID` column in the above query result shows that the first two rows
 >
 > Currently, TiDB does not support collecting retryable deadlock errors in the `DEADLOCKS` table.
 
-When transaction A is blocked by a lock already held by another transaction, and transaction B is directly or indirectly blocked by the lock held by the current transaction, a deadlock error will occur. In this deadlock event, there might be two cases:
+When transaction A is blocked by a lock already held by transaction B, and transaction B is directly or indirectly blocked by the lock held by the current transaction, a deadlock error will occur. In this deadlock, there might be two cases:
 
 + Case 1: Transaction B might (directly or indirectly) be blocked by a lock generated by a statement that has been executed before transaction A.
 + Case 2: Transaction B might also be blocked by the statement currently being executed in Transaction A.
