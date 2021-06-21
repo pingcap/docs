@@ -98,13 +98,13 @@ Size tables:
 
 Size table:
 
-| uvarint | uvarint chunk |
+| uvarint | delta varint chunk |
 | :------ | :------------ |
-| number of elements | Consecutive elements encoded in uvarint format |
+| number of elements | Consecutive elements encoded in delta varint format |
 
 Meta data size table:
 
-| uvarint | uvarint |
+| varint | varint |
 | :------ | :------ |
 | header size | term dictionary size |
 
