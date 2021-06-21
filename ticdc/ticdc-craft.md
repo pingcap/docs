@@ -133,7 +133,6 @@ This section introduces the formats of Row Changed Event, DDL Event, and Resolve
     | :-------- | :--- | :---------- |
     | Commit TS | uint64 | The timestamp of transaction that causes the row change.  |
     | Type | uint64 | Type of the event. 0x1: Row Changed, 0x2: DDL, 0x3: Resolved |
-    | Row ID | uint64 | Row ID (Deprecated, it is empty when the RowID comes from clustered index table). |
     | Partition ID | uint64 | Partition ID (It is -1 when the physical table is not part of partitioned table)|
     | Schema | string |  The name of the schema where the row is in. |
     | Table | String |  The name of the table where the row is in. |
