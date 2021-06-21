@@ -209,7 +209,7 @@ mysql> SELECT * FROM t1;
     - `0` or `OFF`, which means that the MPP mode will not be used.
     - `1` or `ON`, which means that the optimizer determines whether to use the MPP mode based on the cost estimation (by default).
 
-MPP is a distributed computing framework provided by the TiFlash engine, which allows data exchange between nodes and provides high-performance, high-throughput SQL algorithms. For details about the selection of the MPP mode, refer to [Control whether to select the MPP mode](/tiflash/use-tiflash.md#control-whether-to-choose-the-mpp-mode).
+MPP is a distributed computing framework provided by the TiFlash engine, which allows data exchange between nodes and provides high-performance, high-throughput SQL algorithms. For details about the selection of the MPP mode, refer to [Control whether to select the MPP mode](/tiflash/use-tiflash.md#control-whether-to-select-the-mpp-mode).
 
 ### tidb_allow_remove_auto_inc <span class="version-mark">New in v2.1.18 and v3.0.4</span>
 
