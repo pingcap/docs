@@ -302,7 +302,7 @@ The initial value of the session variable `tidb_enforce_mpp` is equal to the [`e
 
 > **Note:**
 >
-> When `tidb_enforce_mpp=1` takes effect, TiDB optimizer will ignore the cost estimation to choose MPP mode. However, TiDB will not select MPP mode if there are other factors that block MPP mode, such as no TiFlash replica, the replication of TiFlash replicas is not completed, and statements contain operators or functions that are not supported by MPP mode.
+> When `tidb_enforce_mpp=1` takes effect, TiDB optimizer will ignore the cost estimation to choose MPP mode. However, TiDB will not select MPP mode if other factors block MPP mode, such as no TiFlash replica, the replication of TiFlash replicas is not completed, and statements contain operators or functions that are not supported by MPP mode.
 > 
 > If TiDB optimizer cannot select MPP mode due to reasons other than cost estimation, when you use the `EXPLAIN` statement to view the execution plan, a warning is returned to explain the reason. For example:
 > 
