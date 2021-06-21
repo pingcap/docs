@@ -1338,7 +1338,7 @@ mysql> select @@last_plan_from_cache;
 1 row in set (0.00 sec)
 ```
 
-The `last_plan_from_cache` variable can show whether the last query hits the Plan Cache or not. From example 1, you can see that in `static` mode, even if the same query is executed multiple times on the partitioned table, the Plan Cache is not be hit.
+The `last_plan_from_cache` variable can show whether the last query hits the Plan Cache or not. From example 1, you can see that in `static` mode, even if the same query is executed multiple times on the partitioned table, the Plan Cache is not hit.
 
 **Example 2**: In the following example, the same operations are performed in `dynamic` mode as done in example 1:
 
