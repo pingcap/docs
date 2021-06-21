@@ -258,20 +258,20 @@ If a query encounters unsupported push-down calculations, TiDB needs to complete
 
 ## Use the MPP mode
 
-TiFlash supports using the MPP mode to execute queries, which introduces cross-node data exchange (data shuffle process) into the computation. TiDB automatically determines using the optimizer whether to choose MPP mode. You can change the selection strategy by modifying the values of [`tidb_allow_mpp`](/system-variables.md#tidb_allow_mpp-new-in-v50) and [`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51).
+TiFlash supports using the MPP mode to execute queries, which introduces cross-node data exchange (data shuffle process) into the computation. TiDB automatically determines whether to choose the MPP mode using the optimizer. You can change the selection strategy by modifying the values of [`tidb_allow_mpp`](/system-variables.md#tidb_allow_mpp-new-in-v50) and [`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51).
 
 ### Control whether to choose the MPP mode
 
-`tidb_allow_mpp` controls whether TiDB can select MPP mode to execute queries. `tidb_enforce_mpp` controls whether the optimizer cost estimate is ignored and TiFlash's MPP mode is forced to execute queries.
+`tidb_allow_mpp` controls whether TiDB can select MPP mode to execute queries. `tidb_enforce_mpp` controls whether the optimizer cost estimate is ignored and the MPP mode of TiFlash is forced to execute queries.
 
 The results corresponding to all values of these two variables are as follows:
 
 |                        | tidb_allow_mpp=off | tidb_allow_mpp=on (by default)              |
 | ---------------------- | -------------------- | -------------------------------- |
-| tidb_enforce_mpp=off (by default) | MPP mode is not used. | The optimizer selects based on cost estimation. (by default)|
-| tidb_enforce_mpp=on  | MPP mode is not used.   | TiDB ignores the cost estimate and selects MPP mode.      |
+| tidb_enforce_mpp=off (by default) | MPP mode is not used. | The optimizer selects the MPP mode based on cost estimation. (by default)|
+| tidb_enforce_mpp=on  | MPP mode is not used.   | TiDB ignores the cost estimate and chooses MPP mode.      |
 
-For example, if you do not want to use MPP mode, you can set by executing the following statement:
+For example, if you do not want to use MPP mode, you can execute the following statement:
 
 {{< copyable "sql" >}}
 
@@ -280,11 +280,29 @@ set @@session.tidb_allow_mpp=1;
 set @@session.tidb_enforce_mpp=0;
 ```
 
-The initial value of the Session variable `tidb_enforce_mpp` is equal to the[`enforce-mpp`](/tidb-configuration-file.md#enforce-mpp) configuration item value of this tidb-server instance (which is `false` by default). In a TiDB cluster, if several tidb-server instances only perform analytical queries, to ensure that they can check MPP mode, you can change their [`enforce-mpp`](/tidb-configuration-file.md#enforce-mpp) configuration value to `true`.
+If you want to automatically choose whether or not to use the MPP mode (by default) using the cost estimation of TiDB optimizer, you can execute the following statement:
+
+{{< copyable "sql" >}}
+
+```sql
+set @@session.tidb_allow_mpp=1;
+set @@session.tidb_enforce_mpp=0;
+```
+
+If you want TiDB to ignore the optimizer's cost estimates and force to choose the MPP mode, you can execute the following statement:
+
+{{< copyable "sql" >}}
+
+```sql
+set @@session.tidb_allow_mpp=1;
+set @@session.tidb_enforce_mpp=1;
+```
+
+The initial value of the Session variable `tidb_enforce_mpp` is equal to the[`enforce-mpp`](/tidb-configuration-file.md#enforce-mpp) configuration item value of this tidb-server instance (which is `false` by default). In a TiDB cluster, if several tidb-server instances only perform analytical queries, to ensure that they can choose MPP mode, you can change their [`enforce-mpp`](/tidb-configuration-file.md#enforce-mpp) configuration value to `true`.
 
 > **Note:**
 >
-> When `tidb_enforce_mpp=1` takes effect, the TiDB optimizer will ignore the cost estimate to select MPP mode. However, TiDB will not select MPP mode if other factors that do not support MPP mode occur, such as no TiFlash copy, the replication of TiFlash copies is not completed, and the statements contain operators or functions that are not supported by MPP mode.
+> When `tidb_enforce_mpp=1` takes effect, the TiDB optimizer will ignore the cost estimation to choose MPP mode. However, TiDB will not choose the MPP mode if other factors that do not support the MPP mode occur, such as no TiFlash copy, the replication of TiFlash copies is not completed, and statements contain operators or functions that are not supported by the MPP mode.
 > 
 > If the TiDB optimizer cannot select MPP mode due to reasons other than cost estimation, when you use the `EXPLAIN` statement to view the execution plan, a warning is returned to explain the reason, for example:
 > 
