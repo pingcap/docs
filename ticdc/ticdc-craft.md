@@ -30,20 +30,20 @@ Serialized size:
 
 | case | craft size | json size | protobuf 1 size | protobuf 2 size | craft compressed | json compressed | protobuf 1 compressed | protobuf 2 compressed |
 | :---- | :--------- | :-------- | :-------------- | :-------------- | :--------------- | :-------------- | :-------------------- | :-------------------- |
-| case 0 | 180 | 390 (116%)+ | 197 (9%)+ | 199 (10%)+ | 136 | 190 (39%)+ | 157 (15%)+ | 150 (10)%+ |
-| case 1 | 722 | 1576 (118%)+ | 820 (13%)+ | 810 (12%)+ | 256 | 305 (19%)+ | 266 (3%)+ | 262 (2)%+ |
+| case 0 | 300 | 708 (136%)+ | 382 (27%)+ | 375 (25%)+ | 168 | 223 (32%)+ | 198 (17%)+ | 181 (7%)+ |
+| case 1 | 993 | 2816 (183%)+ | 1528 (53%)+ | 1482 (49%)+ | 209 | 286 (36%)+ | 235 (12%)+ | 221 (5%)+ |
 
 Encoding speed:
 
 | craft | json | protobuf 1 | protobuf 2 |
 | :---- | :--- | :--------- | :--------- |
-| 2052 ns/op | 15326 ns/op (647%)+ | 2278 ns/op (11%)+ | 2746 ns/op (34%)+ |
+| 4809 ns/op | 28388 ns/op (490%)+ | 3921 ns/op (19%)- | 3645 ns/op (25%)- |
 
 Decoding speed:
 
 | craft | json | protobuf 1 | protobuf 2 |
 | :---- | :--- | :--------- | :--------- |
-| 4227 ns/op | 40547 ns/op (859%)+ | 4089 ns/op (3%)- | 4670 ns/op (10%) |
+| 7944 ns/op | 75822 ns/op (854%)+ | 8020 ns/op (1%)+ | 8462 ns/op (6%) |
 
 ## Message format
 
@@ -51,15 +51,15 @@ A Message contains one or more Events, arranged in the following format:
 
 Message:
 
-| uvarint | uvarint | header | body | size tables |
-| :------ | :------ | :------ | :------ | :------ |
-| version | number of events | events header | events body | size tables |
+| uvarint | header | body | term dictionary | size tables |
+| :------ | :------ | :------ | :------ |
+| version | events header | events body | term dictionary | size tables |
 
 Header:
 
-| delta uvarint chunk | uvarint chunk | uvarint chunk | varint chunk | string chunk | string chunk |
+| delta uvarint chunk | uvarint chunk | varint chunk | varint chunk | varint chunk |
 | :------ | :------ | :------ | :------ | :------ | :------ |
-| commit ts | event type | row id | partition id (-1 for no partition) | schema | table |
+| commit ts | event type | partition id (-1 for no partition) | schema | table |
 
 Body for [Row Changed Event](#row-changed-event):
 
@@ -68,7 +68,7 @@ Body for [Row Changed Event](#row-changed-event):
 | column group 1 | column group 2 (optional) |
 
 Column group:
-| 1 byte | uvarint | string chunk | uvarint chunk | uvarint chunk | nullable bytes chunk |
+| 1 byte | uvarint | uvarint chunk | uvarint chunk | uvarint chunk | nullable bytes chunk |
 | :------ | :------ | :------ | :------ | :------ | :------ |
 | type: 1 New, 2 Old | number of columns | name | type | flag | value |
 
@@ -84,17 +84,29 @@ Body for [Resolved Event](#resolved-event):
 | :---- |
 | empty |
 
+Term dictionary:
+
+| uvarint | string chunk |
+| :------ | :----------- |
+| size | terms sorted by id |
+
 Size tables:
 
 | size table | size table | size table | ...... | size table | bytes of size tables |
 | :--------- | :--------- | :--------- | :----- | :--------- | :------------------- |
-| size of serialized headers | size of serialized events | size of serialized column groups 1 | ...... | size of serialized column groups N | uvarint in little byte order |
+| meta data size, including header size and term dictionary size | size of serialized events | size of serialized column groups 1 | ...... | size of serialized column groups N | uvarint in little byte order |
 
 Size table:
 
 | uvarint | uvarint chunk |
 | :------ | :------------ |
 | number of elements | Consecutive elements encoded in uvarint format |
+
+Meta data size table:
+
+| uvarint | uvarint |
+| :------ | :------ |
+| header size | term dictionary size |
 
 Primitive types:
 
