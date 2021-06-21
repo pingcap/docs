@@ -192,7 +192,7 @@ In the above three ways of reading TiFlash replicas, engine isolation specifies 
 
 > **Note:**
 >
-> Before v4.0.3, the behavior of reading from TiFlash replica in a non-read-only SQL statement (for example, `INSERT INTO ... SELECT`, `SELECT ... FOR UPDATE`, `UPDATE ...`, `DELETE ...`) is undefined. In v4.0.3 and later versions, internally TiDB ignores the TiFlash replica for a non-read-only SQL statement to guarantee the data correctness. That is, for [smart selection](#smart-selection), TiDB automatically chooses the non-TiFlash replica; for [engine isolation](#engine-isolation) that specifies TiFlash replica **only**, TiDB reports an error; and for [manual hint](#manual-hint), TiDB ignores the hint.
+> Before v4.0.3, the behavior of reading from TiFlash replica in a non-read-only SQL statement (for example, `INSERT INTO ... SELECT`, `SELECT ... FOR UPDATE`, `UPDATE ...`, `DELETE ...`) is undefined. In v4.0.3 and later versions, internally TiDB ignores the TiFlash replica for a non-read-only SQL statement to guarantee the data correctness. That is, for [smart selection](#smart-selection), TiDB automatically selects the non-TiFlash replica; for [engine isolation](#engine-isolation) that specifies TiFlash replica **only**, TiDB reports an error; and for [manual hint](#manual-hint), TiDB ignores the hint.
 
 ## Use TiSpark to read TiFlash replicas
 
@@ -258,29 +258,20 @@ If a query encounters unsupported push-down calculations, TiDB needs to complete
 
 ## Use the MPP mode
 
-TiFlash supports using the MPP mode to execute queries, which introduces cross-node data exchange (data shuffle process) into the computation. TiDB automatically determines whether to choose the MPP mode using the optimizer. You can change the selection strategy by modifying the values of [`tidb_allow_mpp`](/system-variables.md#tidb_allow_mpp-new-in-v50) and [`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51).
+TiFlash supports using the MPP mode to execute queries, which introduces cross-node data exchange (data shuffle process) into the computation. TiDB automatically determines whether to select the MPP mode using the optimizer. You can change the selection strategy by modifying the values of [`tidb_allow_mpp`](/system-variables.md#tidb_allow_mpp-new-in-v50) and [`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51).
 
-### Control whether to choose the MPP mode
+### Control whether to select the MPP mode
 
-`tidb_allow_mpp` controls whether TiDB can select MPP mode to execute queries. `tidb_enforce_mpp` controls whether the optimizer cost estimate is ignored and the MPP mode of TiFlash is forced to execute queries.
+`tidb_allow_mpp` controls whether TiDB can select the MPP mode to execute queries. `tidb_enforce_mpp` controls whether the optimizer cost estimate is ignored and the MPP mode of TiFlash is forced to execute queries.
 
 The results corresponding to all values of these two variables are as follows:
 
 |                        | tidb_allow_mpp=off | tidb_allow_mpp=on (by default)              |
 | ---------------------- | -------------------- | -------------------------------- |
-| tidb_enforce_mpp=off (by default) | MPP mode is not used. | The optimizer selects the MPP mode based on cost estimation. (by default)|
-| tidb_enforce_mpp=on  | MPP mode is not used.   | TiDB ignores the cost estimate and chooses MPP mode.      |
+| tidb_enforce_mpp=off (by default) | The MPP mode is not used. | The optimizer selects the MPP mode based on cost estimation. (by default)|
+| tidb_enforce_mpp=on  | The MPP mode is not used.   | TiDB ignores the cost estimate and selects the MPP mode.      |
 
-For example, if you do not want to use MPP mode, you can execute the following statements:
-
-{{< copyable "sql" >}}
-
-```sql
-set @@session.tidb_allow_mpp=1;
-set @@session.tidb_enforce_mpp=0;
-```
-
-If you want to use the cost estimation of TiDB optimizer to intelligently choose whether to use MPP mode (by default), you can execute the following statements:
+For example, if you do not want to use the MPP mode, you can execute the following statements:
 
 {{< copyable "sql" >}}
 
@@ -289,7 +280,16 @@ set @@session.tidb_allow_mpp=1;
 set @@session.tidb_enforce_mpp=0;
 ```
 
-If you want TiDB to ignore the optimizer's cost estimations and force to choose the MPP mode, you can execute the following statements:
+If you want to use the cost estimation of TiDB optimizer to intelligently selects whether to use the MPP mode (by default), you can execute the following statements:
+
+{{< copyable "sql" >}}
+
+```sql
+set @@session.tidb_allow_mpp=1;
+set @@session.tidb_enforce_mpp=0;
+```
+
+If you want TiDB to ignore the optimizer's cost estimations and force to select the MPP mode, you can execute the following statements:
 
 {{< copyable "sql" >}}
 
@@ -298,13 +298,13 @@ set @@session.tidb_allow_mpp=1;
 set @@session.tidb_enforce_mpp=1;
 ```
 
-The initial value of the session variable `tidb_enforce_mpp` is equal to the [`enforce-mpp`](/tidb-configuration-file.md#enforce-mpp) configuration item value of this tidb-server instance (which is `false` by default). If you want to make several tidb servers only serve analytical quries in a TiDB cluster and to force them to use MPP mode, you can change their [`enforce-mpp`](/tidb-configuration-file.md#enforce-mpp) configuration value to `true`.
+The initial value of the session variable `tidb_enforce_mpp` is equal to the [`enforce-mpp`](/tidb-configuration-file.md#enforce-mpp) configuration item value of this tidb-server instance (which is `false` by default). If you want to make several tidb servers only serve analytical quries in a TiDB cluster and to force them to use the MPP mode, you can change their [`enforce-mpp`](/tidb-configuration-file.md#enforce-mpp) configuration value to `true`.
 
 > **Note:**
 >
-> When `tidb_enforce_mpp=1` takes effect, TiDB optimizer will ignore the cost estimation to choose MPP mode. However, TiDB will not select MPP mode if other factors block MPP mode, such as no TiFlash replica, the replication of TiFlash replicas is not completed, and statements contain operators or functions that are not supported by MPP mode.
+> When `tidb_enforce_mpp=1` takes effect, TiDB optimizer will ignore the cost estimation to select the MPP mode. However, TiDB will not select the MPP mode if other factors block the MPP mode, such as no TiFlash replica, the replication of TiFlash replicas is not completed, and statements contain operators or functions that are not supported by the MPP mode.
 > 
-> If TiDB optimizer cannot select MPP mode due to reasons other than cost estimation, when you use the `EXPLAIN` statement to view the execution plan, a warning is returned to explain the reason. For example:
+> If TiDB optimizer cannot select the MPP mode due to reasons other than cost estimation, when you use the `EXPLAIN` statement to view the execution plan, a warning is returned to explain the reason. For example:
 > 
 > {{< copyable "sql" >}}
 > 
@@ -323,9 +323,9 @@ The initial value of the session variable `tidb_enforce_mpp` is equal to the [`e
 > +---------+------+-----------------------------------------------------------------------------+
 > ```
 
-### Algorithm support for MPP mode
+### Algorithm support for the MPP mode
 
-MPP mode supports these physical algorithms: Broadcast Hash Join, Shuffled Hash Join, Shuffled Hash Aggregation, Union All, TopN, and Limit. The optimizer automatically determines which algorithm to be used in a query. To check the specific query execution plan, you can execute the `EXPLAIN` statement. If the result of the `EXPLAIN` statement shows ExchangeSender and ExchangeReceiver operators, it indicates that the MPP mode has taken effect.
+The MPP mode supports these physical algorithms: Broadcast Hash Join, Shuffled Hash Join, Shuffled Hash Aggregation, Union All, TopN, and Limit. The optimizer automatically determines which algorithm to be used in a query. To check the specific query execution plan, you can execute the `EXPLAIN` statement. If the result of the `EXPLAIN` statement shows ExchangeSender and ExchangeReceiver operators, it indicates that the MPP mode has taken effect.
 
 The following statement takes the table structure in the TPC-H test set as an example:
 
@@ -390,4 +390,4 @@ Currently, TiFlash does not support some features. These features might be incom
         In the example above, `a/b`'s inferred type from the compiling is `Decimal(7,4)` both in TiDB and in TiFlash. Constrained by `Decimal(7,4)`, `a/b`'s returned type should be `0.0000`. In TiDB, `a/b`'s runtime precision is higher than `Decimal(7,4)`, so the original table data is not filtered by the `where a/b` condition. However, in TiFlash, the calculation of `a/b` uses `Decimal(7,4)` as the result type, so the original table data is filtered by the `where a/b` condition.
 
 * The MPP mode in TiFlash does not support the following features:
-    * If the [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) configuration item's value is `true`, the MPP mode does not support the string-type join key or the string column type in the `group by` aggregation. For these two query types, the MPP mode is not chosen by default.
+    * If the [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) configuration item's value is `true`, the MPP mode does not support the string-type join key or the string column type in the `group by` aggregation. For these two query types, the MPP mode is not selected by default.
