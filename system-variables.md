@@ -205,9 +205,9 @@ mysql> SELECT * FROM t1;
 
 - Scope: SESSION | GLOBAL
 - Default value: `ON`
-- This variable controls whether to use the MPP mode of TiFlash to execute queries. You can set the following values, including:
-    - `0` or `OFF`, which means never use MPP mode.
-    - `1` or `ON`, which means that the optimizer determines whether to use MPP mode based on the cost estimation (by default).
+- This variable controls whether to use the MPP mode of TiFlash to execute queries. The value options are as follows:
+    - `0` or `OFF`, which means that the MPP mode will not be used.
+    - `1` or `ON`, which means that the optimizer determines whether to use the MPP mode based on the cost estimation (by default).
 
 MPP is a distributed computing framework provided by the TiFlash engine, which allows data exchange between nodes and provides high-performance, high-throughput SQL algorithms. For details about the MPP mode selection, refer to [Control whether to select the MPP mode](/tiflash/use-tiflash.md#control-whether-to-select-the-mpp-mode).
 
@@ -612,7 +612,7 @@ Query OK, 0 rows affected (0.09 sec)
 
 - Scope: SESSION
 - Default value: `OFF`
-- This variable is used to control whether to ignore the optimizer cost estimation and force queries to be executed using TiFlash's MPP mode. You can set the following values:
+- Controls whether to ignore the optimizer's cost estimation and to force queries to be executed using TiFlash's MPP mode. The value options are as follows:
     - `0` or `OFF`, which means the MPP mode is not mandatory (by default).
     - `1` or `ON`, which means that the cost estimation is ignored and the MPP mode is forced to use. Note that this setting only takes effect when `tidb_allow_mpp=true`.
 
