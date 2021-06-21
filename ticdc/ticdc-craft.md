@@ -57,7 +57,7 @@ Message:
 
 Header:
 
-| delta uvarint chunk | uvarint chunk | varint chunk | varint chunk | varint chunk |
+| delta uvarint chunk | uvarint chunk | delta varint chunk | delta varint chunk | delta varint chunk |
 | :------ | :------ | :------ | :------ | :------ | :------ |
 | commit ts | event type | partition id (-1 for no partition) | schema | table |
 
@@ -68,7 +68,7 @@ Body for [Row Changed Event](#row-changed-event):
 | column group 1 | column group 2 (optional) |
 
 Column group:
-| 1 byte | uvarint | uvarint chunk | uvarint chunk | uvarint chunk | nullable bytes chunk |
+| 1 byte | uvarint | delta varint chunk | uvarint chunk | uvarint chunk | nullable bytes chunk |
 | :------ | :------ | :------ | :------ | :------ | :------ |
 | type: 1 New, 2 Old | number of columns | name | type | flag | value |
 
