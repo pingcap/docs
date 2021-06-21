@@ -271,7 +271,7 @@ The results corresponding to all values of these two variables are as follows:
 | tidb_enforce_mpp=off (by default) | MPP mode is not used. | The optimizer selects the MPP mode based on cost estimation. (by default)|
 | tidb_enforce_mpp=on  | MPP mode is not used.   | TiDB ignores the cost estimate and chooses MPP mode.      |
 
-For example, if you do not want to use MPP mode, you can execute the following statement:
+For example, if you do not want to use MPP mode, you can execute the following statements:
 
 {{< copyable "sql" >}}
 
@@ -280,7 +280,7 @@ set @@session.tidb_allow_mpp=1;
 set @@session.tidb_enforce_mpp=0;
 ```
 
-If you want to intelligently choose whether to use the MPP mode (by default) using the cost estimation of TiDB optimizer, you can execute the following statement:
+If you want to use the cost estimation of TiDB optimizer to intelligently choose whether to use MPP mode(by default), you can execute the following statements:
 
 {{< copyable "sql" >}}
 
@@ -289,7 +289,7 @@ set @@session.tidb_allow_mpp=1;
 set @@session.tidb_enforce_mpp=0;
 ```
 
-If you want TiDB to ignore the optimizer's cost estimates and force to choose the MPP mode, you can execute the following statement:
+If you want TiDB to ignore the optimizer's cost estimations and force to choose the MPP mode, you can execute the following statements:
 
 {{< copyable "sql" >}}
 
@@ -298,7 +298,7 @@ set @@session.tidb_allow_mpp=1;
 set @@session.tidb_enforce_mpp=1;
 ```
 
-The initial value of the Session variable `tidb_enforce_mpp` is equal to the[`enforce-mpp`](/tidb-configuration-file.md#enforce-mpp) configuration item value of this tidb-server instance (which is `false` by default). In a TiDB cluster, if several tidb-server instances only perform analytical queries, to ensure that they can choose MPP mode, you can change their [`enforce-mpp`](/tidb-configuration-file.md#enforce-mpp) configuration value to `true`.
+The initial value of the session variable `tidb_enforce_mpp` is equal to the[`enforce-mpp`](/tidb-configuration-file.md#enforce-mpp) configuration item value of this tidb-server instance (which is `false` by default). If you want to make several tidb servers only serve analytical quries in a TiDB cluster and to force them to use MPP mode, you can change their [`enforce-mpp`](/tidb-configuration-file.md#enforce-mpp) configuration value to `true`.
 
 > **Note:**
 >
