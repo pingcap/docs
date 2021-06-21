@@ -509,7 +509,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 - Scope: SESSION | GLOBAL
 - Default value: `static`
-- This variable is used to set whether to enable `dynamic` mode for partitioned tables. For more details about dynamic mode, see [Partition Table Dynamic Mode](/partitioned-table.md#dynamic-mode).
+- Specifies whether to enable `dynamic` mode for partitioned tables. For details about the dynamic mode, see [Dynamic Mode for Partitioned Tables](/partitioned-table.md#dynamic-mode).
 
 ### tidb_enable_noop_functions <span class="version-mark">New in v4.0</span>
 
