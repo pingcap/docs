@@ -299,7 +299,7 @@ set @@session.tidb_allow_mpp=1;
 set @@session.tidb_enforce_mpp=1;
 ```
 
-The initial value of the session variable `tidb_enforce_mpp` is equal to the[`enforce-mpp`](/tidb-configuration-file.md#enforce-mpp) configuration item value of this tidb-server instance (which is `false` by default). If you want to make several tidb servers only serve analytical quries in a TiDB cluster and to force them to use MPP mode, you can change their [`enforce-mpp`](/tidb-configuration-file.md#enforce-mpp) configuration value to `true`.
+The initial value of the session variable `tidb_enforce_mpp` is equal to the [`enforce-mpp`](/tidb-configuration-file.md#enforce-mpp) configuration item value of this tidb-server instance (which is `false` by default). If you want to make several tidb servers only serve analytical quries in a TiDB cluster and to force them to use MPP mode, you can change their [`enforce-mpp`](/tidb-configuration-file.md#enforce-mpp) configuration value to `true`.
 
 > **Note:**
 >
