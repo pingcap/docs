@@ -1369,7 +1369,7 @@ mysql> select @@last_plan_from_cache;
 
 From example 2, you can see that in `dynamic` mode, querying the partitioned table hits the Plan Cache.
 
-**Example 3**: The following example tries the execution plan with IndexJoin query in `static` mode:
+**Example 3**: In the following example, a query is performed in `static` mode using the execution plan with IndexJoin:
 
 {{< copyable "sql" >}}
 
