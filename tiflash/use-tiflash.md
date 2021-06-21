@@ -262,14 +262,14 @@ TiFlash supports using the MPP mode to execute queries, which introduces cross-n
 
 ### Control whether to select the MPP mode
 
-`tidb_allow_mpp` controls whether TiDB can select the MPP mode to execute queries. `tidb_enforce_mpp` controls whether the optimizer cost estimate is ignored and the MPP mode of TiFlash is forced to execute queries.
+The `tidb_allow_mpp` variable controls whether TiDB can select the MPP mode to execute queries. The `tidb_enforce_mpp` variable controls whether the optimizer's cost estimation is ignored and the MPP mode of TiFlash is forcibly used to execute queries.
 
 The results corresponding to all values of these two variables are as follows:
 
 |                        | tidb_allow_mpp=off | tidb_allow_mpp=on (by default)              |
 | ---------------------- | -------------------- | -------------------------------- |
 | tidb_enforce_mpp=off (by default) | The MPP mode is not used. | The optimizer selects the MPP mode based on cost estimation. (by default)|
-| tidb_enforce_mpp=on  | The MPP mode is not used.   | TiDB ignores the cost estimate and selects the MPP mode.      |
+| tidb_enforce_mpp=on  | The MPP mode is not used.   | TiDB ignores the cost estimation and selects the MPP mode.      |
 
 For example, if you do not want to use the MPP mode, you can execute the following statements:
 
@@ -280,7 +280,7 @@ set @@session.tidb_allow_mpp=1;
 set @@session.tidb_enforce_mpp=0;
 ```
 
-If you want to use the cost estimation of TiDB optimizer to intelligently selects whether to use the MPP mode (by default), you can execute the following statements:
+If you want TiDB to use the optimizer's cost estimation to intelligently select whether to use the MPP mode (by default), you can execute the following statements:
 
 {{< copyable "sql" >}}
 
@@ -289,7 +289,7 @@ set @@session.tidb_allow_mpp=1;
 set @@session.tidb_enforce_mpp=0;
 ```
 
-If you want TiDB to ignore the optimizer's cost estimations and force to select the MPP mode, you can execute the following statements:
+If you want TiDB to ignore the optimizer's cost estimation and to forcibly select the MPP mode, you can execute the following statements:
 
 {{< copyable "sql" >}}
 
@@ -298,11 +298,11 @@ set @@session.tidb_allow_mpp=1;
 set @@session.tidb_enforce_mpp=1;
 ```
 
-The initial value of the session variable `tidb_enforce_mpp` is equal to the [`enforce-mpp`](/tidb-configuration-file.md#enforce-mpp) configuration item value of this tidb-server instance (which is `false` by default). If you want to make several tidb servers only serve analytical quries in a TiDB cluster and to force them to use the MPP mode, you can change their [`enforce-mpp`](/tidb-configuration-file.md#enforce-mpp) configuration value to `true`.
+The initial value of the `tidb_enforce_mpp` session variable is equal to the [`enforce-mpp`](/tidb-configuration-file.md#enforce-mpp) configuration value of this tidb-server instance (which is `false` by default). If multiple tidb-server instances in a TiDB cluster only perform analytical queries and you want to make sure that the MPP mode is used on these instances, you can change their [`enforce-mpp`](/tidb-configuration-file.md#enforce-mpp) configuration values to `true`.
 
 > **Note:**
 >
-> When `tidb_enforce_mpp=1` takes effect, TiDB optimizer will ignore the cost estimation to select the MPP mode. However, TiDB will not select the MPP mode if other factors block the MPP mode, such as no TiFlash replica, the replication of TiFlash replicas is not completed, and statements contain operators or functions that are not supported by the MPP mode.
+> When `tidb_enforce_mpp=1` takes effect, the TiDB optimizer will ignore the cost estimation to choose the MPP mode. However, if other factors block the MPP mode, TiDB will not select the MPP mode. These factors include the absence of TiFlash replica, unfinished replication of TiFlash replicas, and statements containing operators or functions that are not supported by the MPP mode.
 > 
 > If TiDB optimizer cannot select the MPP mode due to reasons other than cost estimation, when you use the `EXPLAIN` statement to view the execution plan, a warning is returned to explain the reason. For example:
 > 
