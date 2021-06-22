@@ -32,7 +32,7 @@ DESC deadlocks;
 +--------------------+---------------------+------+------+---------+-------+
 ```
 
-The `DEADLOCKS` table uses multiple rows to show the same deadlock event, and each row displays the information about one of the transactions involved in the deadlock event. When the TiDB node records multiple deadlock errors, each error is distinguished using the `DEADLOCK_ID` column. The same `DEADLOCK_ID` indicates the same deadlock event. Note that `DEADLOCK_ID` **does not guarantee global uniqueness and will not be persisted**. It only shows the same deadlock event in the same result set.
+The `DEADLOCKS` table uses multiple rows to show the same deadlock event, and each row displays the information about one of the transactions involved in the deadlock event. If the TiDB node records multiple deadlock errors, each error is distinguished using the `DEADLOCK_ID` column. The same `DEADLOCK_ID` indicates the same deadlock event. Note that `DEADLOCK_ID` **does not guarantee global uniqueness and will not be persisted**. It only shows the same deadlock event in the same result set.
 
 The meaning of each column field in the `DEADLOCKS` table is as follows:
 
@@ -41,7 +41,7 @@ The meaning of each column field in the `DEADLOCKS` table is as follows:
 * `RETRYABLE`: Whether the deadlock error can be retried. Currently, TiDB does not support collecting the information of the retryable deadlock error, so the value of this field is always `0`. For the description of retryable deadlock errors, see the [Retryable deadlock errors](#retryable-deadlock-errors) section.
 * `TRY_LOCK_TRX_ID`: The ID of the transaction that tries to acquire lock. This ID is also the `start_ts` of the transaction.
 * `CURRENT_SQL_DIGEST`: The digest of the SQL statement currently being executed in the lock-acquiring transaction.
-* `KEY`: The blocked key that the transaction tries to lock. This value of this field is displayed in the form of hexadecimal string.
+* `KEY`: The blocked key that the transaction tries to lock. The value of this field is displayed in the form of hexadecimal string.
 * `TRX_HOLDING_LOCK`: The ID of the transaction that currently holds the lock on the key and causes blocking. This ID is also the `start_ts` of the transaction.
 
 To adjust the maximum number of deadlock events that can be recorded in the `DEADLOCKS` table, adjust the [`pessimistic-txn.deadlock-history-capacity`](/tidb-configuration-file.md#deadlock-history-capacity) configuration in the TiDB configuration file. By default, the information of the recent 10 deadlock events is recorded in the table.
@@ -66,13 +66,15 @@ Execute the two transactions in the following order:
 | `update t set v = 12 where id = 2;`  |                                      | Transaction 1 gets blocked.          |
 |                                      | `update t set v = 22 where id = 1;`  | Transaction 2 reports a deadlock error.  |
 
-Next, transaction 2 reports a deadlock error. At this time, query the `DEADLOCKS` table, and you will get the following result:
+Next, transaction 2 reports a deadlock error. At this time, query the `DEADLOCKS` table:
 
 {{< copyable "sql" >}}
 
 ```sql
 select * from information_schema.deadlocks;
 ```
+
+The expected output is as follows:
 
 ```sql
 +-------------+----------------------------+-----------+--------------------+------------------------------------------------------------------+----------------------------------------+--------------------+
@@ -83,7 +85,7 @@ select * from information_schema.deadlocks;
 +-------------+----------------------------+-----------+--------------------+------------------------------------------------------------------+----------------------------------------+--------------------+
 ```
 
-Two rows of data are generated in the `DEADLOCKS` table. The `DEADLOCK_ID` field of both rows is `1`, which means that the two rows of data display the same deadlock error information. The first row shows that the transaction of the ID `425405959304904707` is blocked on the key of `"7480000000000000385F728000000000000002"` by the transaction of the ID `"425405959304904708"`. The second row shows that the transaction of the ID `"425405959304904708"` is blocked on the key of `"7480000000000000385F728000000000000001"` by the transaction of the ID `425405959304904707`, which constitutes mutual blocking and forms a deadlock.
+Two rows of data are generated in the `DEADLOCKS` table. The `DEADLOCK_ID` field of both rows is `1`, which means that the information in both rows belongs to the same deadlock error. The first row shows that the transaction of the ID `425405959304904707` is blocked on the key of `"7480000000000000385F728000000000000002"` by the transaction of the ID `"425405959304904708"`. The second row shows that the transaction of the ID `"425405959304904708"` is blocked on the key of `"7480000000000000385F728000000000000001"` by the transaction of the ID `425405959304904707`, which constitutes mutual blocking and forms a deadlock.
 
 ## Example 2
 
@@ -112,7 +114,7 @@ The `DEADLOCK_ID` column in the above query result shows that the first two rows
 When transaction A is blocked by a lock already held by transaction B, and transaction B is directly or indirectly blocked by the lock held by the current transaction, a deadlock error will occur. In this deadlock, there might be two cases:
 
 + Case 1: Transaction B might (directly or indirectly) be blocked by a lock generated by a statement that has been executed before transaction A.
-+ Case 2: Transaction B might also be blocked by the statement currently being executed in Transaction A.
++ Case 2: Transaction B might also be blocked by the statement currently being executed in transaction A.
 
 In case 1, TiDB will report a deadlock error to the client of transaction A and terminate the transaction.
 
@@ -148,7 +150,7 @@ When a retryable deadlock occurs, the internal automatic retry will not cause a 
 
 The `CLUSTER_DEADLOCKS` table returns information about the recent deadlock errors on each TiDB node in the entire cluster, which is the information of the `DEADLOCKS` table on each node combined together. `CLUSTER_DEADLOCKS` also contains an additional `INSTANCE` column to display the IP address and port of the node to distinguish between different TiDB nodes.
 
-Note that, because `DEADLOCK_ID` does not guarantee global uniqueness, in the query result of the `CLUSTER_DEADLOCKS` table, the two fields of `INSTANCE` and `DEADLOCK_ID` are used to distinguish the information of different deadlock errors in the result set.
+Note that, because `DEADLOCK_ID` does not guarantee global uniqueness, in the query result of the `CLUSTER_DEADLOCKS` table, you need to use the `INSTANCE` and `DEADLOCK_ID` together to distinguish the information of different deadlock errors in the result set.
 
 {{< copyable "sql" >}}
 

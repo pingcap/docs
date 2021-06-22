@@ -5,7 +5,7 @@ summary: Learn the `DATA_LOCK_WAITS` information_schema table.
 
 # DATA_LOCK_WAITS
 
-The `DATA_LOCK_WAITS` table shows the ongoing pessimistic lock waiting on all TiKV nodes in the cluster.
+The `DATA_LOCK_WAITS` table shows the ongoing pessimistic locks waiting on all TiKV nodes in the cluster.
 
 > **Warning:**
 >

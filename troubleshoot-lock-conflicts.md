@@ -231,7 +231,7 @@ When a pessimistic transaction has a deadlock, one of the transactions must be t
 Solutions:
 
 * If it is difficult to confirm the cause of the deadlock, for v5.1 and later versions, you are recommended to try to query the `INFORMATION_SCHEMA.DEADLOCKS` or `INFORMATION_SCHEMA.CLUSTER_DEADLOCKS` system table to get the information of deadlock waiting chain. For details, see the [Deadlock errors](#deadlock-errors) section and the [`DEADLOCKS` table](/information-schema/information-schema-deadlocks.md) document.
-* If the deadlock occurs frequently, you need to adjust your application code to reduce such occurrences.
+* If the deadlock occurs frequently, you need to adjust the transaction query logic in your application to reduce such occurrences.
 
 ### Use Lock View to troubleshoot issues related to pessimistic locks
 
@@ -268,7 +268,7 @@ select * from information_schema.deadlocks;
 
 The query result above shows the waiting relationship among multiple transactions in the deadlock error, the digest of the SQL statement currently being executed in each transaction, and the key on which the conflict occurs.
 
-You can get the text of the normalized SQL statement corresponding to the digest of the SQL statements executed recently from the `STATEMENTS_SUMMARY` or `STATEMENTS_SUMMARY_HISTORY` table. For details, see [`STATEMENTS_SUMMARY` and `STATEMENTS_SUMMARY_HISTORY` tables](/statement-summary-tables.md). You can also join the obtained results directly with the `DEADLOCKS` table. Note: `STATEMENTS_SUMMARY` might not contain the information of all SQL statements, so left join is used in the following example:
+You can get the text of the normalized SQL statement corresponding to the digest of the SQL statements executed recently from the `STATEMENTS_SUMMARY` or `STATEMENTS_SUMMARY_HISTORY` table. For details, see [`STATEMENTS_SUMMARY` and `STATEMENTS_SUMMARY_HISTORY` tables](/statement-summary-tables.md). You can also join the obtained results directly with the `DEADLOCKS` table. Note that the `STATEMENTS_SUMMARY` table might not contain the information of all SQL statements, so left join is used in the following example:
 
 {{< copyable "sql" >}}
 
@@ -287,7 +287,7 @@ select l.deadlock_id, l.occur_time, l.try_lock_trx_id, l.trx_holding_lock, s.dig
 
 #### A few hot keys cause queueing locks
 
-The `DATA_LOCK_WAITS` system table provides the lock-waiting status on the TiKV nodes. When you query this table, TiDB automatically obtains the real-time lock-waiting information from all TiKV nodes. If a few hot keys are frequently locked and block many transactions, you can query the `DATA_LOCK_WAITS` table and aggregate the results by key to try to find the key on which issues frequently occur:
+The `DATA_LOCK_WAITS` system table provides the lock-waiting status on the TiKV nodes. When you query this table, TiDB automatically obtains the real-time lock-waiting information from all TiKV nodes. If a few hot keys are frequently locked and block many transactions, you can query the `DATA_LOCK_WAITS` table and aggregate the results by key to try to find the keys on which issues frequently occur:
 
 {{< copyable "sql" >}}
 
@@ -374,4 +374,4 @@ ba07e3cc34b6b3be7b7c2de7fe9, a4e28cc182bdd18288e2a34180499b9404cd0ba07e3cc34b6b3
 1 row in set (0.01 sec)
 ```
 
-If the `start_ts` of the current transaction is unknown, you can try to find it out from the information in the `TIDB_TRX` / `CLUSTER_TIDB_TRX` table or [`PROCESSLIST` / `CLUSTER_PROCESSLIST`](/information-schema/information-schema-processlist.md) table.
+If the `start_ts` of the current transaction is unknown, you can try to find it out from the information in the `TIDB_TRX` / `CLUSTER_TIDB_TRX` table or in the [`PROCESSLIST` / `CLUSTER_PROCESSLIST`](/information-schema/information-schema-processlist.md) table.
