@@ -20,10 +20,10 @@ Note that if both the TiKV and TiDB nodes have the configuration item `labels` c
 zone=dc-1
 ```
 
-## Perform local read using stale reads
+## Perform local read using Stale Read
 
-[Stale Read](/stale-read.md) is a mechanism that TiDB provides for the users to read historical data. With this mechanism, you can read the corresponding historical data of a specific point in time or within a specified time range, and thus save the latency brought by data replication between storage nodes. When using stale reads in some scenarios of geo-distributed deployment, TiDB sacrifices some real-time performance but accesses the replica in the current data center to read the corresponding data, which avoids network latency brought by cross-center connection and reduces the access latency for the entire query process.
+[Stale Read](/stale-read.md) is a mechanism that TiDB provides for the users to read historical data. Using this mechanism, you can read the corresponding historical data of a specific point in time or within a specified time range, and thus save the latency brought by data replication between storage nodes. When using Stale Read in some scenarios of geo-distributed deployment, TiDB accesses the replica in the current data center to read the corresponding data at the expense of some real-time performance, which avoids network latency brought by cross-center connection and reduces the access latency for the entire query process.
 
-When TiDB receives a stale read query, if the `zone` label of that TiDB node is configured, then TiDB sends the request to the TiKV node with the same `zone` label where the corresponding data replica resides.
+When TiDB receives a Stale Read query, if the `zone` label of that TiDB node is configured, then TiDB sends the request to the TiKV node with the same `zone` label where the corresponding data replica resides.
 
-For how to perform stale reads, see [Read historical data using the `AS OF TIMESTAMP` clause](/as-of-timestamp.md).
+For how to perform Stale Read, see [Perform Stale Read using the `AS OF TIMESTAMP` clause](/as-of-timestamp.md).
