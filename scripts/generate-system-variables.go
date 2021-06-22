@@ -12,11 +12,7 @@ import (
 )
 
 func fmtDuration(d time.Duration) string {
-	d = d.Round(time.Minute)
-	h := d / time.Hour
-	d -= h * time.Hour
-	m := d / time.Minute
-	return fmt.Sprintf("%02d:%02d", h, m)
+	return d.String()
 }
 
 func ByteCountIEC(s string) string {
@@ -70,11 +66,11 @@ func skipSv(sv *variable.SysVar) bool {
 	switch sv.Name {
 	case variable.BlockEncryptionMode, variable.CharacterSetClient, variable.CharacterSetConnection, variable.CharsetDatabase,
 		variable.CharacterSetFilesystem, variable.CharacterSetResults, variable.CharacterSetServer, variable.CollationConnection, variable.CollationDatabase,
-		variable.CollationServer, variable.CTEMaxRecursionDepth, variable.DataDir, variable.DefaultWeekFormat, variable.ErrorCount, variable.GroupConcatMaxLen,
-		"have_openssl", "have_ssl", variable.InitConnect, "last_insert_id", variable.LowerCaseTableNames, variable.MaxAllowedPacket, variable.MaxConnections,
+		variable.CollationServer, variable.DataDir, variable.DefaultWeekFormat, variable.ErrorCount, variable.GroupConcatMaxLen,
+		"have_openssl", "have_ssl", "last_insert_id", variable.LowerCaseTableNames, variable.MaxAllowedPacket, variable.MaxConnections,
 		variable.MaxPreparedStmtCount, variable.PluginDir, variable.PluginLoad, variable.SQLLogBin, "ssl_ca", "ssl_cert", "ssl_key", variable.TiDBAnalyzeVersion,
-		variable.TiDBBatchCommit, variable.TiDBBatchDelete, variable.TiDBBatchInsert, variable.TiDBEnableChangeColumnType, variable.TiDBEnableChangeMultiSchema,
-		variable.TiDBEnableDynamicPrivileges, variable.TiDBEnableExchangePartition, variable.TiDBEnableExtendedStats, variable.TiDBEnablePointGetCache,
+		variable.TiDBBatchCommit, variable.TiDBBatchDelete, variable.TiDBBatchInsert, variable.TiDBEnableChangeMultiSchema,
+		variable.TiDBEnableExchangePartition, variable.TiDBEnableExtendedStats, variable.TiDBEnablePointGetCache,
 		variable.TiDBEnableStreaming, variable.TiDBGuaranteeLinearizability, variable.TiDBTxnScope, variable.TiDBTxnReadTS,
 		variable.TxnIsolationOneShot, variable.Timestamp, variable.TiDBLastQueryInfo, variable.TiDBLastTxnInfo,
 		variable.TiDBMemQuotaHashJoin, variable.TiDBStreamAggConcurrency, variable.TiDBTrackAggregateMemoryUsage, variable.TiDBOptBCJ,
@@ -83,9 +79,11 @@ func skipSv(sv *variable.SysVar) bool {
 		variable.TiDBEnableAlterPlacement, variable.TiDBSlowLogMasking, variable.TiDBShardAllocateStep, variable.TiDBMemQuotaTopn,
 		variable.TiDBMemQuotaSort, variable.TiDBMergeJoinConcurrency, variable.TiDBOptCPUFactor, variable.TiDBOptDescScanFactor,
 		variable.TiDBOptDiskFactor, variable.TiDBOptJoinReorderThreshold, variable.TiDBOptMemoryFactor, variable.TiDBOptNetworkFactor,
-		variable.TiDBOptScanFactor, variable.TiDBOptTiFlashConcurrencyFactor, variable.TiDBOptimizerSelectivityLevel, variable.TiDBPartitionPruneMode,
+		variable.TiDBOptScanFactor, variable.TiDBOptTiFlashConcurrencyFactor, variable.TiDBOptimizerSelectivityLevel,
 		variable.TiDBOptSeekFactor, variable.LogBin, "license", variable.TiDBEnableTopSQL, variable.TiDBTopSQLAgentAddress, variable.TiDBTopSQLPrecisionSeconds,
-		variable.TiDBTopSQLMaxStatementCount, variable.TiDBEnableGlobalTemporaryTable, variable.TiDBEnablePipelinedWindowFunction, variable.TiDBOptCartesianBCJ:
+		variable.TiDBTopSQLMaxStatementCount, variable.TiDBEnableGlobalTemporaryTable, variable.TiDBEnablePipelinedWindowFunction, variable.TiDBOptCartesianBCJ,
+		variable.TiDBEnableLocalTxn, variable.TiDBTopSQLMaxCollect, variable.TiDBTopSQLReportIntervalSeconds, variable.SkipNameResolve, variable.TMPTableSize,
+		variable.TiDBOptMPPOuterJoinFixedBuildSide:
 		return true
 	}
 	return false
@@ -101,6 +99,8 @@ func printWarning(sv *variable.SysVar) string {
 		return "> **Warning:**\n>\n> Currently, List partition and List COLUMNS partition are experimental features. It is not recommended that you use it in the production environment.\n\n"
 	case variable.TiDBGCScanLockMode:
 		return "> **Warning:**\n>\n> Currently, Green GC is an experimental feature. It is not recommended that you use it in the production environment.\n\n"
+	case variable.TiDBPartitionPruneMode:
+		return "> **Warning:**\n\n> Currently, the dynamic mode for partitioned tables is an experimental feature. It is not recommended that you use it in the production environment.\n\n"
 	}
 	return ""
 }
@@ -175,6 +175,8 @@ func formatSpecialVersionComment(sv *variable.SysVar) string {
 		return ` <span class="version-mark">New in v4.0.11</span>`
 	case variable.TiDBStoreLimit:
 		return ` <span class="version-mark">New in v3.0.4 and v4.0</span>`
+	case variable.TiDBPartitionPruneMode, variable.TiDBEnforceMPPExecution:
+		return ` <span class="version-mark">New in v5.1</span>`
 	default:
 		return ""
 	}
@@ -260,7 +262,10 @@ func getExtendedDescription(sv *variable.SysVar) string {
 	case "tidb_allow_fallback_to_tikv":
 		return `- This variable is used to specify a list of storage engines that might fall back to TiKV. If the execution of a SQL statement fails due to a failure of the specified storage engine in the list, TiDB retries executing this SQL statement with TiKV. This variable can be set to "" or "tiflash". When this variable is set to "tiflash", if the execution of a SQL statement fails due to a failure of TiFlash, TiDB retries executing this SQL statement with TiKV.`
 	case "tidb_allow_mpp":
-		return "- This variable controls whether to use the MPP mode of TiFlash to execute queries. If the value is set to `ON`, TiDB automatically determines using the optimizer whether to choose MPP to execute queries. MPP is a distributed computing framework provided by the TiFlash engine, which allows data exchange between nodes and provides high-performance, high-throughput SQL algorithms."
+		return "- Controls whether to use the MPP mode of TiFlash to execute queries. The value options are as follows:\n" +
+			"    - `0` or `OFF`, which means that the MPP mode will not be used.\n" +
+			"    - `1` or `ON`, which means that the optimizer determines whether to use the MPP mode based on the cost estimation (by default).\n\n" +
+			"MPP is a distributed computing framework provided by the TiFlash engine, which allows data exchange between nodes and provides high-performance, high-throughput SQL algorithms. For details about the selection of the MPP mode, refer to [Control whether to select the MPP mode](/tiflash/use-tiflash.md#control-whether-to-select-the-mpp-mode)."
 	case variable.TiDBAllowRemoveAutoInc:
 		return "- This variable is used to set whether the `AUTO_INCREMENT` property of a column is allowed to be removed by executing `ALTER TABLE MODIFY` or `ALTER TABLE CHANGE` statements. It is not allowed by default."
 	case variable.TiDBAutoAnalyzeEndTime:
@@ -518,7 +523,7 @@ func getExtendedDescription(sv *variable.SysVar) string {
 		return "- Specifies the GC interval, in the format of Go Duration, for example, `\"1h30m\"`, and `\"15m\"`"
 	case variable.TiDBGCScanLockMode:
 		return "    - `LEGACY`: Uses the old way of scanning, that is, disable Green GC.\n    - `PHYSICAL`: Uses the physical scanning method, that is, enable Green GC.\n" +
-			"- This parameter specifies the way of scanning locks in the Resolve Locks step of GC. When set to `LEGACY`, TiDB scans locks by Regions. The value `PHYSICAL` enables each TiKV node to bypass the Raft layer and directly scan data. This feature can effectively mitigate the impact of GC wakening up all Regions when the [Hibernate Region](/tikv-configuration-file.md#hibernate-regions-experimental) feature is enabled, thus improving the execution speed in the Resolve Locks step."
+			"- This variable specifies the way of scanning locks in the Resolve Locks step of GC. When the variable value is set to `LEGACY`, TiDB scans locks by Regions. When the value `PHYSICAL` is used, it enables each TiKV node to bypass the Raft layer and directly scan data, which can effectively mitigate the impact of GC wakening up all Regions when the [Hibernate Region](/tikv-configuration-file.md#hibernate-regions) feature is enabled, thus improving the execution speed in the Resolve Locks step."
 	case variable.TiDBGeneralLog:
 		return "- This variable is used to set whether to record all SQL statements in the [log](/tidb-configuration-file.md#logfile). This feature is disabled by default. If maintenance personnel needs to trace all SQL statements when locating issues, they can enable this feature.\n" +
 			"- To see all records of this feature in the log, query the `\"GENERAL_LOG\"` string. The following information is recorded:\n" +
@@ -768,6 +773,17 @@ func getExtendedDescription(sv *variable.SysVar) string {
 		return "- This variable is used to set the timeout for executing the `SPLIT REGION` statement. The unit is second. If a statement is not executed completely within the specified time value, a timeout error is returned."
 	case variable.WarningCount:
 		return "- This read-only variable indicates the number of warnings that occurred in the statement that was previously executed."
+	case variable.CTEMaxRecursionDepth:
+		return "- Controls the maximum recursion depth in Common Table Expressions."
+	case variable.InitConnect:
+		return "- The `init_connect` feature permits a SQL statement to be automatically executed when you first connect to a TiDB server. If you have the `CONNECTION_ADMIN` or `SUPER` privileges, this `init_connect` statement will not be executed. If the `init_connect` statement results in an error, your user connection will be terminated."
+	case variable.TiDBPartitionPruneMode:
+		return "- Specifies whether to enable `dynamic` mode for partitioned tables. For details about the dynamic mode, see [Dynamic Mode for Partitioned Tables](/partitioned-table.md#dynamic-mode)."
+	case variable.TiDBEnforceMPPExecution:
+		return "- Controls whether to ignore the optimizer's cost estimation and to forcibly use TiFlash's MPP mode for query execution. The value options are as follows:\n" +
+			"    - `0` or `OFF`, which means that the MPP mode is not forcibly used (by default).\n" +
+			"    - `1` or `ON`, which means that the cost estimation is ignored and the MPP mode is forcibly used. Note that this setting only takes effect when `tidb_allow_mpp=true`.\n\n" +
+			"MPP is a distributed computing framework provided by the TiFlash engine, which allows data exchange between nodes and provides high-performance, high-throughput SQL algorithms. For details about the selection of the MPP mode, refer to [Control whether to select the MPP mode](/tiflash/use-tiflash.md#control-whether-to-select-the-mpp-mode)."
 	default:
 		return "- No documentation is currently available for this variable."
 	}
@@ -812,8 +828,9 @@ func main() {
 		"\n" +
 		"> **Note:**\n" +
 		">\n" +
-		"> TiDB differs from MySQL in that `GLOBAL` scoped variables **persist** through TiDB server restarts. Changes are also propagated to other TiDB servers every 2 seconds [TiDB #14531](https://github.com/pingcap/tidb/issues/14531).\n" +
-		"> Additionally, TiDB presents several MySQL variables from MySQL 5.7 as both readable and settable. This is required for compatibility, since it is common for both applications and connectors to read MySQL variables. For example: JDBC connectors both read and set query cache settings, despite not relying on the behavior.\n" +
+		"> Executing `SET GLOBAL` applies immediately on the TiDB server where the statement was issued. A notification is then sent to all TiDB servers to refresh their system variable cache, which will start immediately as a background operation. Because there is a risk that some TiDB servers might miss the notification, the system variable cache is also refreshed automatically every 30 seconds. This helps ensure that all servers are operating with the same configuration.\n" +
+		">\n" +
+		"> TiDB differs from MySQL in that `GLOBAL` scoped variables **persist** through TiDB server restarts. Additionally, TiDB presents several MySQL variables as both readable and settable. This is required for compatibility, because it is common for both applications and connectors to read MySQL variables. For example, JDBC connectors both read and set query cache settings, despite not relying on the behavior.\n" +
 		"\n" +
 		"## Variable Reference\n\n")
 
@@ -843,13 +860,11 @@ func main() {
 		fmt.Printf("- Scope: %s\n", formatScope(sv))
 		fmt.Printf("- Default value: %s\n", formatDefaultValue(sv))
 
-		/*
-			if sv.Type == variable.TypeDuration {
-				min := time.Duration(sv.MinValue)
-				max := time.Duration(sv.MaxValue)
-				fmt.Printf("- Range: `[%s, %s]`\n", fmtDuration(min), fmtDuration(max))
-			}
-		*/
+		if sv.Type == variable.TypeDuration {
+			min := time.Duration(sv.MinValue)
+			max := time.Duration(sv.MaxValue)
+			fmt.Printf("- Range: `[%s, %s]`\n", fmtDuration(min), fmtDuration(max))
+		}
 
 		// If the type is an integer, always print the range
 		if sv.Type == variable.TypeInt || sv.Type == variable.TypeUnsigned {
