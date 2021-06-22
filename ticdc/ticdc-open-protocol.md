@@ -1,6 +1,5 @@
 ---
 title: TiCDC Open Protocol
-aliases: ['/docs/dev/ticdc/ticdc-open-protocol/','/docs/dev/reference/tools/ticdc/open-protocol/','/docs/dev/ticdc/column-ddl-type-codes/']
 ---
 
 # TiCDC Open Protocol

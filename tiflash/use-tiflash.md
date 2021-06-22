@@ -1,6 +1,5 @@
 ---
 title: Use TiFlash
-aliases: ['/docs/dev/tiflash/use-tiflash/','/docs/dev/reference/tiflash/use-tiflash/']
 ---
 
 # Use TiFlash

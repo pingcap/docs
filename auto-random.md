@@ -1,7 +1,6 @@
 ---
 title: AUTO_RANDOM
 summary: Learn the AUTO_RANDOM attribute.
-aliases: ['/docs/dev/auto-random/','/docs/dev/reference/sql/attributes/auto-random/']
 ---
 
 # AUTO_RANDOM <span class="version-mark">New in v3.1.0</span>

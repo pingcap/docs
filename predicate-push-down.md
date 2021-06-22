@@ -1,7 +1,6 @@
 ---
 title: Predicates Push Down
 summary: Introduce one of the TiDB's logic optimization rules—Predicate Push Down (PPD).
-aliases: ['/tidb/dev/predicates-push-down']
 ---
 
 # Predicates Push Down (PPD)

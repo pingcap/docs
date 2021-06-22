@@ -1,7 +1,6 @@
 ---
 title: TiDB Lightning Overview
 summary: Learn about Lightning and the whole architecture.
-aliases: ['/docs/dev/tidb-lightning/tidb-lightning-overview/','/docs/dev/reference/tools/tidb-lightning/overview/']
 ---
 
 # TiDB Lightning Overview
