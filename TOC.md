@@ -64,11 +64,6 @@
       + [BR Use Cases](/br/backup-and-restore-use-cases.md)
       + [External Storages](/br/backup-and-restore-storages.md)
       + [BR FAQ](/br/backup-and-restore-faq.md)
-  + Read Historical Data
-    + Use Stale Read (Recommended)
-      + [Usage Scenarios of Stale Read](/stale-read.md)
-      + [Perform Stale Read Using `As OF TIMESTAMP`](/as-of-timestamp.md)
-    + [Use the `tidb_snapshot` System Variable](/read-historical-data.md)
   + [Configure Time Zone](/configure-time-zone.md)
   + [Daily Checklist](/daily-check.md)
   + [Maintain TiFlash](/tiflash/maintain-tiflash.md)
@@ -145,6 +140,11 @@
 + Tutorials
   + [Multiple Data Centers in One City Deployment](/multi-data-centers-in-one-city-deployment.md)
   + [Three Data Centers in Two Cities Deployment](/three-data-centers-in-two-cities-deployment.md)
+  + Read Historical Data
+    + Use Stale Read (Recommended)
+      + [Usage Scenarios of Stale Read](/stale-read.md)
+      + [Perform Stale Read Using `As OF TIMESTAMP`](/as-of-timestamp.md)
+    + [Use the `tidb_snapshot` System Variable](/read-historical-data.md)
   + Best Practices
     + [Use TiDB](/best-practices/tidb-best-practices.md)
     + [Java Application Development](/best-practices/java-app-best-practices.md)
