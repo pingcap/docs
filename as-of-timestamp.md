@@ -175,7 +175,7 @@ commit;
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-After the transaction is committed, you can read the historical data.
+After the transaction is committed, you can read the latest data.
 
 ```sql
 select * from t;
@@ -239,7 +239,7 @@ commit;
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-After the transaction is committed, you can read the historical data.
+After the transaction is committed, you can read the latest data.
 
 ```sql
 select * from t;
