@@ -440,7 +440,7 @@ Configuration items related to performance.
 
 ### `enforce-mpp`
 
-+ Determines whether to ignore the optimizer's cost estimation and to force queries to be executed using TiFlash's MPP mode.
++ Determines whether to ignore the optimizer's cost estimation and to forcibly use TiFlash's MPP mode for query execution.
 + Default value: `false`
 + This configuration item is the initial value of [`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51).
 
