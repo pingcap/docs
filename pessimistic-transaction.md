@@ -1,7 +1,6 @@
 ---
 title: TiDB Pessimistic Transaction Model
 summary: Learn the pessimistic transaction model in TiDB.
-aliases: ['/docs/dev/pessimistic-transaction/','/docs/dev/reference/transactions/transaction-pessimistic/']
 ---
 
 # TiDB Pessimistic Transaction Model

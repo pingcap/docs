@@ -1,7 +1,6 @@
 ---
 title: TiDB Technical Writing Project Ideas
 summary: Learn about the technical writing project ideas of TiDB for Google Season of Docs 2020.
-aliases: ['/docs/dev/technical-writing-project-ideas/']
 ---
 
 # TiDB Technical Writing Project Ideas

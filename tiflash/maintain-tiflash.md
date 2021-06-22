@@ -1,7 +1,6 @@
 ---
 title: Maintain a TiFlash Cluster
 summary: Learn common operations when you maintain a TiFlash cluster.
-aliases: ['/docs/dev/tiflash/maintain-tiflash/','/docs/dev/reference/tiflash/maintain/']
 ---
 
 # Maintain a TiFlash Cluster
