@@ -379,6 +379,11 @@ Configuration items related to performance.
 - Determines whether to enable `keepalive` in the TCP layer.
 - Default value: `true`
 
+### `tcp-no-delay`
+
+- Determines whether to enable TCP_NODELAY at the TCP layer. After it is enabled, TiDB disables the Nagle algorithm in the TCP/IP protocol and allows sending small data packets to reduce network latency. This is suitable for latency-sensitive applications with a small transmission volume of data.
+- Default value: `true`
+
 ### `cross-join`
 
 - Default value: `true`
@@ -407,8 +412,8 @@ Configuration items related to performance.
 ### `feedback-probability`
 
 - The probability that TiDB collects the feedback statistics of each query.
-- Default value: `0.05`
-- TiDB collects the feedback of each query at the probability of `feedback-probability`, to update statistics.
+- Default value: `0`
+- This feature is disabled by default, and it is not recommended to enable this feature. If it is enabled, TiDB collects the feedback of each query at the probability of `feedback-probability`, to update statistics.
 
 ### `query-feedback-limit`
 
@@ -438,6 +443,12 @@ Configuration items related to performance.
 + The maximum memory usage for the Least Recently Used (LRU) algorithm of the nested loop join cache (in bytes).
 + Default value: `20971520`
 + When `nested-loop-join-cache-capacity` is set to `0`, nested loop join cache is disabled by default. When the LRU size is larger than the value of `nested-loop-join-cache-capacity`, the elements in the LRU are removed.
+
+### `enforce-mpp`
+
++ Determines whether to ignore the optimizer's cost estimation and to forcibly use TiFlash's MPP mode for query execution.
++ Default value: `false`
++ This configuration item is the initial value of [`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51).
 
 ## prepared-plan-cache
 
@@ -603,6 +614,13 @@ For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](
 
 - The maximum number of retries of each statement in pessimistic transactions. If the number of retries exceeds this limit, an error occurs.
 - Default value: `256`
+
+### deadlock-history-capacity
+
++ The maximum number of deadlock events that can be recorded in the [`INFORMATION_SCHEMA.DEADLOCKS`](/information-schema/information-schema-deadlocks.md) table of a single TiDB server. If this table is in full volume and an additional deadlock event occurs, the earliest record in the table will be removed to make place for the newest error.
++ Default value: `10`
++ Minimum value: `0`
++ Maximum value: `10000`
 
 ## experimental
 

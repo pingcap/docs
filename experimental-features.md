@@ -14,7 +14,6 @@ This document introduces the experimental features of TiDB in different versions
 + Improve the stability of the optimizer's choice of indexes (Introduced in v5.0)
     + Extend the statistics feature by collecting the multi-column order dependency information.
     + Refactor the statistics module, including deleting the `TopN` value from `CMSKetch` and the histogram, and adding NDV information for histogram buckets of each table index.
-+ [hibernate-regions](/tikv-configuration-file.md#hibernate-regions-experimental). A Region that idles for a long time is automatically set as hibernated. This reduces the extra overhead caused by heartbeat messages between the Raft leader and the followers for idle Regions.
 
 ## Scheduling
 
@@ -25,6 +24,7 @@ This document introduces the experimental features of TiDB in different versions
 
 + List Partition (Introduced in v5.0)
 + List COLUMNS Partition (Introduced in v5.0)
++ [Dynamic Mode for Partitioned Tables](/partitioned-table.md#dynamic-mode). (Introduced in v5.1)
 + The expression index feature. The expression index is also called the function-based index. When you create an index, the index fields do not have to be a specific column but can be an expression calculated from one or more columns. This feature is useful for quickly accessing the calculation-based tables. See [Expression index](/sql-statements/sql-statement-create-index.md) for details. (Introduced in v4.0)
 + [Generated Columns](/generated-columns.md).
 + [User-Defined Variables](/user-defined-variables.md).
