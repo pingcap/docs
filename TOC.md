@@ -65,10 +65,10 @@
       + [External Storages](/br/backup-and-restore-storages.md)
       + [BR FAQ](/br/backup-and-restore-faq.md)
   + Read Historical Data
-    + Read Historical Data Using Stale Read (Recommended)
+    + Use Stale Read (Recommended)
       + [Usage Scenarios of Stale Read](/stale-read.md)
-      + [Read Historical Data Using SQL Statments](/as-of-timestamp.md)
-    + [Read Historical Data Using System Variables](/read-historical-data.md)
+      + [Perform Stale Read Using `As OF TIMESTAMP`](/as-of-timestamp.md)
+    + [Use the `tidb_snapshot` System Variable](/read-historical-data.md)
   + [Configure Time Zone](/configure-time-zone.md)
   + [Daily Checklist](/daily-check.md)
   + [Maintain TiFlash](/tiflash/maintain-tiflash.md)

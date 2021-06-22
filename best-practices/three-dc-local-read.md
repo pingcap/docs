@@ -11,7 +11,7 @@ This document describes how to use the [Stale Read](/stale-read.md) feature to a
 
 ## Deploy a TiDB cluster of three data centers
 
-For how to deploy three data centers, refer to [Multiple Data Centers in One City Deployment](/multi-data-centers-in-one-city-deployment.md)
+For the three-data-center deployment method, refer to [Multiple Data Centers in One City Deployment](/multi-data-centers-in-one-city-deployment.md).
 
 Note that if both the TiKV and TiDB nodes have the configuration item `labels` configured, the TiKV and TiDB nodes in the same data center must have the same value for the `zone` label. For example, if a TiKV node and a TiDB node are both in the data center `dc-1`, then the two nodes need to be configured with the following label:
 
