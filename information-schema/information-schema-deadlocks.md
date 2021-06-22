@@ -180,8 +180,8 @@ The `DEADLOCKS` table records the SQL digest but not the original SQL statement.
 
 SQL digest is the hash value after the SQL normalization. To find the original SQL statement corresponding to the SQL digest, perform one of the following operations:
 
-- For the statements executed on the current TiDB node in the recent period of time, you can find the corresponding orginal SQL statement from the SQL digest in `STATEMENTS_SUMMARY` or `STATEMENTS_SUMMARY_HISTORY`.
-- For the statements executed on all TiDB nodes in the entire cluster in the recent period of time, you can find the corresponding SQL statement from the SQL Digest in `CLUSTER_STATEMENTS_SUMMARY` or `CLUSTER_STATEMENTS_SUMMARY_HISTORY`.
+- For the statements executed on the current TiDB node in the recent period of time, you can find the corresponding original SQL statement in the `STATEMENTS_SUMMARY` or `STATEMENTS_SUMMARY_HISTORY` table according to the SQL digest.
+- For the statements executed on all TiDB nodes in the entire cluster in the recent period of time, you can find the corresponding SQL statement in the `CLUSTER_STATEMENTS_SUMMARY` or `CLUSTER_STATEMENTS_SUMMARY_HISTORY` table according to the SQL digest.
 
 {{< copyable "sql" >}}
 
