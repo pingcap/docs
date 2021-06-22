@@ -611,7 +611,7 @@ For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](
 
 ### deadlock-history-capacity
 
-+ The maximum number of deadlock events on a single TiDB server that can be recorded in the [`INFORMATION_SCHEMA.DEADLOCKS`](/information-schema/information-schema-deadlocks.md) table. If this table is in full volume and an additional deadlock event occurs, the earliest record in the table will be removed to make place for the newest error.
++ The maximum number of deadlock events that can be recorded in the [`INFORMATION_SCHEMA.DEADLOCKS`](/information-schema/information-schema-deadlocks.md) table of a single TiDB server. If this table is in full volume and an additional deadlock event occurs, the earliest record in the table will be removed to make place for the newest error.
 + Default value: `10`
 + Minimum value: `0`
 + Maximum value: `10000`
