@@ -280,7 +280,7 @@ set @@session.tidb_allow_mpp=1;
 set @@session.tidb_enforce_mpp=0;
 ```
 
-If you want TiDB to use the optimizer's cost estimation to intelligently select whether to use the MPP mode (by default), you can execute the following statements:
+If you want TiDB's cost-based optimizer to automatically decide whether to use the MPP mode (by default), you can execute the following statements:
 
 {{< copyable "sql" >}}
 
