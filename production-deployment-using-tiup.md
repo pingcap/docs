@@ -1,7 +1,7 @@
 ---
 title: Deploy a TiDB Cluster Using TiUP
 summary: Learn how to easily deploy a TiDB cluster using TiUP.
-aliases: ['/tidb/v5.0/production-offline-deployment-using-tiup','/tidb/stable/deploy-tidb-from-binary','/tidb/stable/production-deployment-from-binary-tarball','/tidb/stable/test-deployment-from-binary-tarball','/tidb/v5.0/deploy-tidb-from-binary','/tidb/v5.0/production-deployment-from-binary-tarball','/tidb/v5.0/test-deployment-from-binary-tarball']
+aliases: ['/tidb/v5.0/production-offline-deployment-using-tiup','/tidb/stable/deploy-tidb-from-binary','/tidb/stable/production-deployment-from-binary-tarball','/tidb/stable/test-deployment-from-binary-tarball','/tidb/v5.0/deploy-tidb-from-binary','/tidb/v5.0/production-deployment-from-binary-tarball','/tidb/v5.0/test-deployment-from-binary-tarball','/tidb/v5.0/deploy-test-cluster-using-docker-compose','/tidb/v5.0/test-deployment-using-docker','/tidb/stable/deploy-test-cluster-using-docker-compose','/tidb/stable/test-deployment-using-docker']
 ---
 
 # Deploy a TiDB Cluster Using TiUP
