@@ -1,12 +1,6 @@
 ---
-<<<<<<< HEAD
-title: Read Historical Data
-summary: Learn about how TiDB reads data from history versions.
-=======
 title: Read Historical Data Using the System Variable `tidb_snapshot`
 summary: Learn about how TiDB reads data from history versions using the system variable `tidb_snapshot`.
-aliases: ['/docs/dev/read-historical-data/','/docs/dev/how-to/get-started/read-historical-data/']
->>>>>>> cadb37234 (add document about stale read transaction (#5809))
 ---
 
 # Read Historical Data Using the System Variable `tidb_snapshot`
