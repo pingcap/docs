@@ -1,7 +1,11 @@
 ---
 title: Deploy a TiDB Cluster Using TiUP
 summary: Learn how to easily deploy a TiDB cluster using TiUP.
+<<<<<<< HEAD
 aliases: ['/tidb/v5.0/production-offline-deployment-using-tiup','/tidb/stable/deploy-tidb-from-binary','/tidb/stable/production-deployment-from-binary-tarball','/tidb/stable/test-deployment-from-binary-tarball','/tidb/v5.0/deploy-tidb-from-binary','/tidb/v5.0/production-deployment-from-binary-tarball','/tidb/v5.0/test-deployment-from-binary-tarball']
+=======
+aliases: ['/docs/dev/production-deployment-using-tiup/','/docs/dev/how-to/deploy/orchestrated/tiup/','/docs/dev/tiflash/deploy-tiflash/','/docs/dev/reference/tiflash/deploy/','/tidb/dev/deploy-tidb-from-dbdeployer/','/docs/dev/deploy-tidb-from-dbdeployer/','/docs/dev/how-to/get-started/deploy-tidb-from-dbdeployer/','/tidb/dev/deploy-tidb-from-homebrew/','/docs/dev/deploy-tidb-from-homebrew/','/docs/dev/how-to/get-started/deploy-tidb-from-homebrew/','/tidb/dev/production-offline-deployment-using-tiup','/docs/dev/production-offline-deployment-using-tiup/','/tidb/dev/deploy-tidb-from-binary','/tidb/dev/production-deployment-from-binary-tarball','/tidb/dev/test-deployment-from-binary-tarball','/tidb/dev/deploy-test-cluster-using-docker-compose','/tidb/dev/test-deployment-using-docker']
+>>>>>>> 6de845fdf (Delete docker deployment docs (#5830))
 ---
 
 # Deploy a TiDB Cluster Using TiUP
