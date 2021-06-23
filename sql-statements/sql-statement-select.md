@@ -31,7 +31,13 @@ The `SELECT` statement is used to read data from TiDB.
 
 **TableRefsClause:**
 
-![TableRefsClause](/media/sqlgram/TableRefsClause.png)
+```ebnf+diagram
+TableRefsClause ::=
+    TableRef AsOfClause? ( ',' TableRef AsOfClause? )*
+
+AsOfClause ::=
+    'AS' 'OF' 'TIMESTAMP' Expression
+```
 
 **WhereClauseOptional:**
 
