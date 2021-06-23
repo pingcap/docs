@@ -8,7 +8,7 @@ The `tiup status` command is used to view the operation information of the compo
 
 > **Note:**
 >
-> You can only query the information of the following components:
+> You can only check the information of the following components:
 >
 > - Components that are still in operation
 > - Components that run through the tag specified by `tiup -T/--tag`
@@ -35,3 +35,5 @@ A table consisting of the following fields:
 - `Directory`: The data directory of the components.
 - `Binary`: The binary file path of the components.
 - `Args`: The starting arguments of the operating components.
+
+[<< Back to the previous page - TiUP Reference command list](/tiup/tiup-reference.md#command-list)

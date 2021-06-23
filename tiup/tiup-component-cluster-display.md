@@ -24,23 +24,23 @@ tiup cluster display <cluster-name> [flags]
 
 ### -N, --node
 
-- Specifies the node to query. If not specified, all nodes are queried. The value of this option is a comma-separated list of node IDs. The node ID is the first column of the [cluster status](/tiup/tiup-component-cluster-display.md) table.
-- Data type: `strings`
-- Default: `[]`, which means all nodes.
+- Specifies the node to display. If this option is not specified, all nodes are displayed. The value of this option is a comma-separated list of node IDs. If you are not sure about the ID of a node, you can skip this option in the command to show the IDs and status of all nodes in the output.
+- Data type: `STRINGS`
+- If this option is not specified in the command, all nodes are checked by default.
 
 > **Note:**
 >
-> If the `-R, --role` option is specified at the same time, then the service status in their intersection is queried.
+> If the `-R, --role` option is specified at the same time, only the service nodes that match both the specifications of `-N, --node` and `-R, --role` are checked.
 
-### -R, --role strings
+### -R, --role
 
-- Specifies the role to query. If not specified, all roles are queried. The value of this option is a comma-separated list of node roles. The role is the second column of the [cluster status](/tiup/tiup-component-cluster-display.md) table.
-- Data type: `strings`
-- Default: `[]`, which means all roles.
+- Specifies the role to display. If it is not specified, all roles are displayed. The value of this option is a comma-separated list of node roles. If you are not sure about the role deployed on a node, you can skip this option in the command to show the roles and status of all nodes in the output.
+- Data type: `STRINGS`
+- If this option is not specified in the command, all roles are displayed by default.
 
 > **Note:**
 >
-> If the `-N, --node` option is specified at the same time, then the service status in their intersection is queried.
+> If the `-N, --node` option is specified at the same time, only the service nodes that match both the specifications of `-N, --node` and `-R, --role` are displayed.
 
 ### -h, --help
 
@@ -63,3 +63,5 @@ tiup cluster display <cluster-name> [flags]
     - Status: the current status of the node service
     - Data Dir: the data directory of the service. `-` means no data directory.
     - Deploy Dir: the deployment directory of the service
+
+[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)

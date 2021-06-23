@@ -12,6 +12,17 @@ The TiKV configuration file supports more options than command-line parameters. 
 
 This document only describes the parameters that are not included in command-line parameters. For more details, see [command-line parameter](/command-line-flags-for-tikv-configuration.md).
 
+## Global configuration
+
+### abort-on-panic
+
++ Sets whether to call `abort()` to exit the process when TiKV panics. This option affects whether TiKV allows the system to generate core dump files.
+
+    + If the value of this configuration item is `false`, when TiKV panics, it calls `exit()` to exit the process.
+    + If the value of this configuration item is `true`, when TiKV panics, TiKV calls `abort()` to exit the process. At this time, TiKV allows the system to generate core dump files when exiting. To generate the core dump file, you also need to perform the system configuration related to core dump (for example, setting the size limit of the core dump file via `ulimit -c` command, and configure the core dump path. Different operating systems have different related configurations). To avoid the core dump files occupying too much disk space and causing insufficient TiKV disk space, it is recommended to set the core dump generation path to a disk partition different to that of TiKV data.
+
++ Default value: `false`
+
 ### server
 
 + Configuration items related to the server
@@ -42,7 +53,7 @@ This document only describes the parameters that are not included in command-lin
 
 ### `grpc-memory-pool-quota`
 
-+ Limit the memory size that can be used by gRPC
++ Limits the memory size that can be used by gRPC
 + Default: No limit
 + Limit the memory in case OOM is observed. Note that limit the usage can lead to potential stall
 
@@ -125,9 +136,11 @@ Configuration items related to the single thread pool serving read requests. Thi
 ### `stack-size`
 
 + The stack size of the threads in the unified thread pool
++ Type: Integer + Unit
 + Default value: `"10MB"`
 + Unit: KB|MB|GB
 + Minimum value: `"2MB"`
++ Maximum value: The number of Kbytes output in the result of the `ulimit -sH` command executed in the system.
 
 ### `max-tasks-per-worker`
 
@@ -183,9 +196,11 @@ Configuration items related to storage thread pool.
 ### `stack-size`
 
 + The stack size of threads in the Storage read thread pool
++ Type: Integer + Unit
 + Default value: `"10MB"`
 + Unit: KB|MB|GB
 + Minimum value: `"2MB"`
++ Maximum value: The number of Kbytes output in the result of the `ulimit -sH` command executed in the system.
 
 ## `readpool.coprocessor`
 
@@ -235,9 +250,11 @@ Configuration items related to the Coprocessor thread pool.
 ### `stack-size`
 
 + The stack size of the thread in the Coprocessor thread pool
++ Type: Integer + Unit
 + Default value: `"10MB"`
 + Unit: KB|MB|GB
 + Minimum value: `"2MB"`
++ Maximum value: The number of Kbytes output in the result of the `ulimit -sH` command executed in the system.
 
 ## storage
 
@@ -273,7 +290,7 @@ Configuration items related to storage
 + Note: The TTL feature is only available for the RawKV interface for now. You can only configure this feature when creating a new cluster because TTL uses different data formats in the storage layer. If you modify this item on an existing cluster, TiKV reports errors when it starts.
 + Default value: `false`
 
-### `ttl-poll-check-interval`
+### `ttl-check-poll-interval`
 
 + The interval of checking data to reclaim physical spaces. If data reaches its TTL, TiKV forcibly reclaims its physical space during the check.
 + Default value: `"12h"`
@@ -293,6 +310,21 @@ Configuration items related to the sharing of block cache among multiple RocksDB
 + The size of the shared block cache.
 + Default value: 45% of the size of total system memory
 + Unit: KB|MB|GB
+
+## storage.io-rate-limit
+
+Configuration items related to the I/O rate limiter.
+
+### `max-bytes-per-sec`
+
++ Limits the maximum I/O bytes that a server can write to or read from the disk (determined by the `mode` configuration item below) in one second. When this limit is reached, TiKV prefers throttling background operations over foreground ones. The value of this configuration item should be set to the disk's optimal I/O bandwidth, for example, the maximum I/O bandwidth specified by your cloud disk vendor. When this configuration value is set to zero, disk I/O operations are not limited.
++ Default value: `"0MB"`
+
+### `mode`
+
++ Determines which types of I/O operations are counted and restrained below the `max-bytes-per-sec` threshold. Currently, only the write-only mode is supported.
++ Optional value: `"write-only"`
++ Default value: `"write-only"`
 
 ## raftstore
 
@@ -394,10 +426,10 @@ Configuration items related to Raftstore
 + Default value: `"3s"`
 + Minimum value: `0`
 
-### `hibernate-regions` (**Experimental**)
+### `hibernate-regions`
 
 + Enables or disables Hibernate Region. When this option is enabled, a Region idle for a long time is automatically set as hibernated. This reduces the extra overhead caused by heartbeat messages between the Raft leader and the followers for idle Regions. You can use `raftstore.peer-stale-state-check-interval` to modify the heartbeat interval between the leader and the followers of hibernated Regions.
-+ Default value: true
++ Default value: `true` in v5.0.2 and later versions; `false` in versions before v5.0.2
 
 ### `raftstore.peer-stale-state-check-interval`
 
@@ -996,7 +1028,7 @@ Configuration items related to `rocksdb.defaultcf`
 ### `soft-pending-compaction-bytes-limit`
 
 + The soft limit on the pending compaction bytes
-+ Default value: `"64GB"`
++ Default value: `"192GB"`
 + Unit: KB|MB|GB
 
 ### `hard-pending-compaction-bytes-limit`
@@ -1274,15 +1306,50 @@ Configuration items related to TiCDC.
 + The interval at which Resolved TS is calculated and forwarded.
 + Default value: `"1s"`
 
-### `old-value-cache-size`
+### `old-value-cache-memory-quota`
 
-+ The entry number of TiCDC old values cached in memory.
-+ Default value: `1024`
++ The upper limit of memory usage by TiCDC old values.
++ Default value: `512MB`
+
+### `sink-memory-quota`
+
++ The upper limit of memory usage by TiCDC data change events.
++ Default value: `512MB`
 
 ### `incremental-scan-speed-limit`
 
 + The maximum speed at which historical data is incrementally scanned.
 + Default value: `"128MB"`, which means 128 MB per second.
+
+### `incremental-scan-threads`
+
++ The number of threads for the task of incrementally scanning historical data.
++ Default value: `4`, which means 4 threads.
+
+### `incremental-scan-concurrency`
+
++ The maximum number of concurrent executions for the tasks of incrementally scanning historical data.
++ Default value: `6`, which means 6 tasks can be concurrent executed at most.
++ Note: The value of `incremental-scan-concurrency` must be greater than or equal to that of `incremental-scan-threads`; otherwise, TiKV will report an error at startup.
+
+## resolved-ts
+
+Configuration items related to maintaining the Resolved TS to serve Stale Read requests.
+
+### `enable`
+
++ Determines whether to maintain the Resolved TS for all Regions.
++ Default value: `true`
+
+### `advanced-ts-interval`
+
++ The interval at which Resolved TS is calculated and forwarded.
++ Default value: `"1s"`
+
+### `scan-lock-pool-size`
+
++ The number of threads that TiKV uses to scan the MVCC (multi-version concurrency control) lock data when initializing the Resolved TS.
++ Default value: `2`, which means 2 threads.
 
 ## pessimistic-txn
 
