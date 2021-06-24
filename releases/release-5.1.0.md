@@ -12,7 +12,7 @@ In v5.1, the key new features or improvements are as follows:
 
 - Support the Common Table Expression (CTE) feature of MySQL 8.0 to improve the readability and execution efficiency of SQL statements.
 - Support changing column types online to improve code development flexibility
-- Introduce a new statistics type `tidb_analyze_version = 2` to improve query stability, which is enabled as an experimental feature by default.
+- Introduce a new statistics type to improve query stability, which is enabled as an experimental feature by default.
 - Support the dynamic privilege feature of MySQL 8.0 to implement more fine-grained control over certain operations.
 - Support directly reading data from the local replica using the Stale Read feature to reduce read latency and improve query performance (Experimental).
 - Add the Lock View feature to facilitate database administrators (DBAs) to observe transaction locking events and troubleshoot deadlock problems (Experimental).
@@ -33,7 +33,7 @@ In v5.1, the key new features or improvements are as follows:
 | [`tidb_analyze_version`](/system-variables.md#tidb_analyze_version-new-in-v510)  | Newly added | Controls how TiDB collects statistics. The default value of this variable is `2`. This is an experimental feature. |
 | [`tidb_enable_enhanced_security`](/system-variables.md#tidb_enable_enhanced_security) | Newly added | Indicates whether the TiDB server you are connected to has the Security Enhanced Mode (SEM) enabled. This variable setting cannot be changed without restarting the TiDB server. |
 | [`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51) | Newly added | Controls whether to ignore the optimizer's cost estimation and to forcibly use the MPP mode for query execution. The data type of this variable is `BOOL` and the default value is `false`. |
-| [`tidb_partition_prune_mode`](/system-variables.md#tidb_partition_prune_mode-new-in-v51) | Newly added | Specifies whether to enable dynamic mode for partitioned tables. This feature is experimental. The default value of this variable is `static`, which means the dynamic mode for partitioned tables is disabled by default.  |
+| [`tidb_partition_prune_mode`](/system-variables.md#tidb_partition_prune_mode-new-in-v51) | Newly added | Specifies whether to enable dynamic prune mode for partitioned tables. This feature is experimental. The default value of this variable is `static`, which means the dynamic mode for partitioned tables is disabled by default.  |
 
 ### Configuration file parameters
 
@@ -42,6 +42,8 @@ In v5.1, the key new features or improvements are as follows:
 | TiDB configuration file | [`security.enable-sem`](tidb-configuration-file.md#enable-sem)  | Newly added  | Controls whether to enable the Security Enhanced Mode (SEM). The default value of this configuration item is `false`, which means the SEM is disabled. |
 | TiDB configuration file | [`performance.committer-concurrency`](/tidb-configuration-file.md#committer-concurrency)  | Modified  | The number of goroutines for requests related to executing commits in the commit phase of a single transaction. The default value is changed from `16` to `128`. |
 | TiDB configuration file | [`performance.tcp-no-delay`](/tidb-configuration-file.md#tcp-no-delay)  | Newly added  | Determines whether to enable TCP_NODELAY at the TCP layer. The default value is `true`, which means TCP_NODELAY is enabled. |
+| TiDB configuration file | [`performance.enforce-mpp`](/tidb-configuration-file.md#enforce-mpp)  | Newly added  | Controls whether TiDB ignores cost estimates of Optimizer at the instance level and enforces the MPP mode. The default value is `false`. |
+
 | TiDB configuration file | [`pessimistic-txn.deadlock-history-capacity`](tidb-configuration-file.md#deadlock-history-capacity)  | Newly added  | Sets the maximum number of deadlock events that can be recorded in the [`INFORMATION_SCHEMA.DEADLOCKS`](/information-schema/information-schema-deadlocks.md) table of a single TiDB server. The default value is `10`. |
 | TiKV configuration file | [`abort-on-panic`](/tikv-configuration-file.md#abort-on-panic)  | Newly added  | Sets whether the `abort` process allows the system to generate core dump files when TiKV panics. The default value is `false`, which means it is not allowed to generate core dump files. |
 | TiKV configuration file | [`hibernate-regions`](/tikv-configuration-file.md#hibernate-regions)  | Modified  | The default value is changed from `false` to `true`. If a Region is idle for a long time, it is automatically set as hibernated. |
