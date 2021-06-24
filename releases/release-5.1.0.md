@@ -125,9 +125,7 @@ In v5.1, the key new features or improvements are as follows:
     
     User document:
 
-<<<<<<< HEAD
     - View the pessimistic locks and other locks that currently occur on all TiKV nodes in the clusters:
-=======
     - View the pessimistic locks and other locks that currently occur on all TiKV nodes in the clusters: 
 >>>>>>> 1ff667e0a (Update v5.1 release notes for lint issues (#5854))
 [`DATA_LOCK_WAITS`](/information-schema/information-schema-data-lock-waits.md)
