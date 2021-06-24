@@ -67,10 +67,14 @@ In v5.1, the key new features or improvements are as follows:
 
 ### SQL
 
-- Support the Common Table Expression (CTE) feature of MySQL 8.0, which empowers TiDB with the capability of querying hierarchical data recursively or non-recursively. This meets the needs of using tree queries to implement application logics in multiple sectors such as human resources, manufacturing, financial markets, and education. 
+- Support the Common Table Expression (CTE) feature of MySQL 8.0, which empowers TiDB with the capability of querying hierarchical data recursively or non-recursively. 
+
+    This feature meets the needs of using tree queries to implement application logics in multiple sectors such as human resources, manufacturing, financial markets, and education. 
 [User document](/sql-statements/sql-statement-with.md), [#17472](https://github.com/pingcap/tidb/issues/17472)
 
-- Support the dynamic privilege feature of MySQL 8.0. Dynamic privileges are used to limit the `SUPER` privilege and provide TiDB with more flexible privilege configuration for more fine-grained access control. For example, you can use dynamic privileges to create a user account that can only perform `BACKUP` and `RESTORE` operations.
+- Support the dynamic privilege feature of MySQL 8.0. 
+
+    Dynamic privileges are used to limit the `SUPER` privilege and provide TiDB with more flexible privilege configuration for more fine-grained access control. For example, you can use dynamic privileges to create a user account that can only perform `BACKUP` and `RESTORE` operations.
 
     The supported dynamic privileges are as follows:
 
@@ -82,7 +86,9 @@ In v5.1, the key new features or improvements are as follows:
 
     You can also use plugins to add new privileges. To check out all supported privileges, execute the `SHOW PRIVILEGES` statement. [User document](/privilege-management.md)
 
-- Add a new configuration item for the Security Enhanced Mode (SEM), which divides the TiDB administrator privileges in a finer-grained way. The Security Enhanced Mode is disabled by default. To enable it, see the [user document](/system-variables.md#tidb_enable_enhanced_security).
+- Add a new configuration item for the Security Enhanced Mode (SEM), which divides the TiDB administrator privileges in a finer-grained way. 
+
+    The Security Enhanced Mode is disabled by default. To enable it, see the [user document](/system-variables.md#tidb_enable_enhanced_security).
 
 - Enhance the capability of changing column types online. Support changing the column type online using the `ALTER TABLE` statement, including but not limited to:
 
@@ -114,14 +120,14 @@ In v5.1, the key new features or improvements are as follows:
 
 + Support the Lock View feature (Experimental Feature)
 
-The Lock View feature provides more information about lock conflicts and lock waits of pessimistic locks, which helps DBAs to observe transaction locking conditions and troubleshoot deadlock problems. [#24199](https://github.com/pingcap/tidb/issues/24199)
+    The Lock View feature provides more information about lock conflicts and lock waits of pessimistic locks, which helps DBAs to observe transaction locking conditions and troubleshoot deadlock problems. [#24199](https://github.com/pingcap/tidb/issues/24199)
 
- User document:
-    - View the pessimistic locks and other locks that currently occur on all TiKV nodes in the clusters: 
+    User document:
+        - View the pessimistic locks and other locks that currently occur on all TiKV nodes in the clusters: 
 [`DATA_LOCK_WAITS`](/information-schema/information-schema-data-lock-waits.md)
-    - View several deadlock errors that recently occured on the TiDB nodes:
+        - View several deadlock errors that recently occured on the TiDB nodes:
 [`DEADLOCKS`](/information-schema/information-schema-deadlocks.md)
-    - View the transaction information executed currently on the TiDB nodes:
+        - View the transaction information executed currently on the TiDB nodes:
 [`TIDB_TRX`](/information-schema/information-schema-tidb-trx.md)
 
 ### Performance
@@ -177,8 +183,7 @@ To learn more about the information and how to disable this behavior, refer to [
     - Fix the `Region is Unavailable` issue that occurs in multiple scenarios [project#62](https://github.com/pingcap/tidb/projects/62)
     - Fix multiple `Region is Unavailable` issues that might occur in frequent scheduling situations
     - Fix `Region is Unavailable` issue that might occur in some high stress write situations
-
-- Avoid frequently reading the `mysql.stats_histograms` table if the cached statistics is up-to-date to avoid high CPU usage [#24317](https://github.com/pingcap/tidb/pull/24317)
+    - Avoid frequently reading the `mysql.stats_histograms` table if the cached statistics is up-to-date to avoid high CPU usage [#24317](https://github.com/pingcap/tidb/pull/24317)
 
 + TiKV
 
