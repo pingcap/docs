@@ -7,22 +7,22 @@ summary: Learn how to upgrade TiDB using TiUP.
 
 This document is targeted for the following upgrade paths:
 
-- Upgrade from TiDB 4.0 versions to TiDB 5.1 versions, or from TiDB 5.1 to a later v5.1 patch version.
-- Upgrade from TiDB 5.0 versions to TiDB 5.1 versions, or from TiDB 5.1 to a later v5.1 patch version.
+- Upgrade from TiDB 4.0 versions to TiDB 5.1 versions.
+- Upgrade from TiDB 5.0 versions to TiDB 5.1 versions,
 
 > **Note:**
 >
-> If your cluster to upgrade is v3.1 or an earlier version (v3.0 or v2.1), direct upgrade to v5.1 or its patch versions is not supported. You need to upgrade your cluster first to v4.0 and then to v5.1.
+> If your cluster to be upgraded is v3.1 or an earlier version (v3.0 or v2.1), the direct upgrade to v5.1 or its patch versions is not supported. You need to upgrade your cluster first to v4.0 and then to v5.1.
 
 ## Upgrade caveat
 
 - TiDB currently does not support version downgrade or rolling back to an earlier version after the upgrade.
 - For the v4.0 cluster managed using TiDB Ansible, you need to import the cluster to TiUP (`tiup cluster`) for new management according to [Upgrade TiDB Using TiUP (v4.0)](https://docs.pingcap.com/tidb/v4.0/upgrade-tidb-using-tiup#import-tidb-ansible-and-the-inventoryini-configuration-to-tiup). Then you can upgrade the cluster to v5.1 or its patch versions according to this document.
-- To update versions earlier than 3.0 to 5.0:
+- To update versions earlier than 3.0 to 5.1:
     1. Update this version to 3.0 using [TiDB Ansible](https://docs.pingcap.com/tidb/v3.0/upgrade-tidb-using-ansible).
     2. Use TiUP (`tiup cluster`) to import the TiDB Ansible configuration.
     3. Update the 3.0 version to 4.0 according to [Upgrade TiDB Using TiUP (v4.0)](https://docs.pingcap.com/tidb/v4.0/upgrade-tidb-using-tiup#import-tidb-ansible-and-the-inventoryini-configuration-to-tiup).
-    4. Then you can upgrade the cluster to v5.1 according to this document.
+    4. Upgrade the cluster to v5.1 according to this document.
 - Support upgrading the versions of TiDB Binlog, TiCDC, TiFlash, and other components.
 - For detailed compatibility changes of different versions, see the [Release Notes](/releases/release-notes.md) of each version. Modify your cluster configuration according the "Compatibility Changes" section of the corresponding release notes.
 
