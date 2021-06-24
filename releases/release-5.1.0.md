@@ -125,18 +125,9 @@ In v5.1, the key new features or improvements are as follows:
 
     User document:
 
-<<<<<<< HEAD
-    - View the pessimistic locks and other locks that currently occur on all TiKV nodes in the clusters:
-[`DATA_LOCK_WAITS`](/information-schema/information-schema-data-lock-waits.md)
-    - View several deadlock errors that recently occured on the TiDB nodes:
-[`DEADLOCKS`](/information-schema/information-schema-deadlocks.md)
-    - View the transaction information executed currently on the TiDB nodes:
-[`TIDB_TRX`](/information-schema/information-schema-tidb-trx.md)
-=======
     - View the pessimistic locks and other locks that currently occur on all TiKV nodes in the clusters: [`DATA_LOCK_WAITS`](/information-schema/information-schema-data-lock-waits.md)
     - View several deadlock errors that recently occurred on the TiDB nodes: [`DEADLOCKS`](/information-schema/information-schema-deadlocks.md)
     - View the transaction information executed currently on the TiDB nodes: [`TIDB_TRX`](/information-schema/information-schema-tidb-trx.md)
->>>>>>> e535b1208 (Fix the display issues of two lists (#5857))
 
 ### Performance
 
