@@ -124,6 +124,7 @@ In v5.1, the key new features or improvements are as follows:
     The Lock View feature provides more information about lock conflicts and lock waits of pessimistic locks, which helps DBAs to observe transaction locking conditions and troubleshoot deadlock problems. [#24199](https://github.com/pingcap/tidb/issues/24199)
 
     User document:
+
         - View the pessimistic locks and other locks that currently occur on all TiKV nodes in the clusters: 
 [`DATA_LOCK_WAITS`](/information-schema/information-schema-data-lock-waits.md)
         - View several deadlock errors that recently occured on the TiDB nodes:
@@ -137,6 +138,7 @@ In v5.1, the key new features or improvements are as follows:
 
     Read local replicas data directly to reduce read latency and improve the query performance
     [User document](/stale-read.md), [#21094](https://github.com/pingcap/tidb/issues/21094)
+
 + Enable the Hibernate Region feature by default.
 
     If a Region is in an inactive state for a long time, it is automatically set to a silent state, which reduces the system overhead of the heartbeat information between the Leader and the Follower.
