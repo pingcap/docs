@@ -126,7 +126,6 @@ In v5.1, the key new features or improvements are as follows:
     User document:
 
     - View the pessimistic locks and other locks that currently occur on all TiKV nodes in the clusters:
-    - View the pessimistic locks and other locks that currently occur on all TiKV nodes in the clusters: 
 [`DATA_LOCK_WAITS`](/information-schema/information-schema-data-lock-waits.md)
     - View several deadlock errors that recently occured on the TiDB nodes:
 [`DEADLOCKS`](/information-schema/information-schema-deadlocks.md)
