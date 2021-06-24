@@ -4,7 +4,7 @@ title: TiDB Sysbench Performance Test Report -- v5.1.0 vs. v5.0.2
 
 # TiDB Sysbench Performance Test Report -- v5.1.0 vs. v5.0.2
 
-## Test purpose
+## Test overview
 
 This test aims at comparing the Sysbench performance of TiDB v5.1.0 and TiDB v5.0.2 in the Online Transactional Processing (OLTP) scenario. The results show that compared with v5.0.2, the Point Select performance of 5.1.0 is improved by 19.4%, and the performance of the Read Write and Update Index is slightly reduced.
 
@@ -30,7 +30,7 @@ This test aims at comparing the Sysbench performance of TiDB v5.1.0 and TiDB v5.
 
 ### Parameter configuration
 
-TiDB v5.1.0 and TiDB v5.0.2 use the same configuration.
+TiDB v5.1.0 and v5.0.2 use the same configuration.
 
 #### TiDB parameter configuration
 
@@ -60,15 +60,6 @@ readpool.unified.max-thread-count: 20
 readpool.storage.normal-concurrency: 10
 pessimistic-txn.pipelined: true
 server.enable-request-batch: false
-```
-
-#### TiDB global variable configuration
-
-{{< copyable "sql" >}}
-
-```sql
-set global tidb_hashagg_final_concurrency=1;
-set global tidb_hashagg_partial_concurrency=1;
 ```
 
 #### TiDB global variable configuration
