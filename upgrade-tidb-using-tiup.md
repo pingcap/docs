@@ -25,7 +25,7 @@ This document is targeted for the following upgrade paths:
     3. Update the 3.0 version to 4.0 according to [Upgrade TiDB Using TiUP (v4.0)](https://docs.pingcap.com/tidb/v4.0/upgrade-tidb-using-tiup#import-tidb-ansible-and-the-inventoryini-configuration-to-tiup).
     4. Upgrade the cluster to v5.1 according to this document.
 - Support upgrading the versions of TiDB Binlog, TiCDC, TiFlash, and other components.
-- For detailed compatibility changes of different versions, see the [Release Notes](/releases/release-notes.md) of each version. Modify your cluster configuration according the "Compatibility Changes" section of the corresponding release notes.
+- For detailed compatibility changes of different versions, see the [Release Notes](/releases/release-notes.md) of each version. Modify your cluster configuration according to the "Compatibility Changes" section of the corresponding release notes.
 
 > **Note:**
 >
