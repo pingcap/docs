@@ -40,7 +40,7 @@ Here are some examples of the `AS OF TIMESTAMP` clause:
 >
 > In addition to specifying a timestamp, the most common use of the `AS OF TIMESTAMP` clause is to read data that is several seconds old. If this approach is used, it is recommended to read historical data older than 5 seconds.
 >
-> You need to deploy the NTP service for your TiDB and PD nodes when you use Stale Read. This avoids the situation where the specified timestamp of TiDB goes ahead of the latest TSO distribution progress (such as a timestamp several seconds ahead), or goes ahead of the timestamp of GC safe point. When the specified timestamp goes beyond the service scope, TiDB returns an error or waits for the transaction to commit.
+> You need to deploy the NTP service for your TiDB and PD nodes when you use Stale Read. This avoids the situation where the specified timestamp used by TiDB goes ahead of the latest TSO allocating progress (such as a timestamp several seconds ahead), or goes behind the GC safe point timestamp. When the specified timestamp goes beyond the service scope, TiDB returns an error or waits for the transaction to commit.
 >
 > The `Prepare` statement and the `AS OF TIMESTAMP` syntax are not perfectly compatible. It is not recommended to use them together.
 
