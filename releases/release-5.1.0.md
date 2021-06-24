@@ -222,7 +222,7 @@ To learn more about the information and how to disable this behavior, refer to [
     + Backup & Restore (BR)
 
         - Support backing up and restoring system tables in the `mysql` schema [#1143](https://github.com/pingcap/br/pull/1143) [#1078](https://github.com/pingcap/br/pull/1078)
-        - Support S3-compatible storage (based on the virtual-host addressing mode) [#10243](https://github.com/tikv/tikv/pull/10243)
+        - Support the S3-compatible storage that is based on the virtual-host addressing mode [#10243](https://github.com/tikv/tikv/pull/10243)
         - Optimize the format of backupmeta to reduce memory usage [#1171](https://github.com/pingcap/br/pull/1171)
 
     + TiCDC
