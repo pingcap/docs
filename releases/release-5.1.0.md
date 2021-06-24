@@ -217,7 +217,6 @@ To learn more about the information and how to disable this behavior, refer to [
 [#3693](https://github.com/tikv/pd/issues/3693) [#3739](https://github.com/tikv/pd/issues/3739) [#3728](https://github.com/tikv/pd/issues/3728) [#3751](https://github.com/tikv/pd/issues/3751)
         - Reduce the space discrepancies of large clusters due to scheduling, and optimize the scheduling formula to prevent the bursting issue (which is similar to heterogeneous space clusters) caused by large compression rate discrepancies [#3592](https://github.com/tikv/pd/issues/3592) [#10005](https://github.com/tikv/tikv/pull/10005)
 
-
 + Tools
 
     + Backup & Restore (BR)
@@ -226,14 +225,12 @@ To learn more about the information and how to disable this behavior, refer to [
         - Support S3-compatible storage (based on the virtual-host addressing mode) [#10243](https://github.com/tikv/tikv/pull/10243)
         - Optimize the format of backupmeta to reduce memory usage [#1171](https://github.com/pingcap/br/pull/1171)
 
-
     + TiCDC
 
         - Improve the descriptions of some log messages to be clearer and more useful for diagnosing problems [#1759](https://github.com/pingcap/ticdc/pull/1759)
         - Support the back pressure feature to allow the TiCDC scanning speed to sense the downstream processing capacity [#10151](https://github.com/tikv/tikv/pull/10151)
         - Reduce memory usage when TiCDC performs the initial scan  [#10133](https://github.com/tikv/tikv/pull/10133)
         - Improve the cache hit rate for the TiCDC Old Value in pessimistic transactions [#10089](https://github.com/tikv/tikv/pull/10089)
-
 
     + Dumpling
 
@@ -246,8 +243,6 @@ To learn more about the information and how to disable this behavior, refer to [
         - Improve data importing speed. The optimization results show that the speed of importing TPC-C data is increased by 30%, and the speed of importing large tables (2TB+) with more indexes (5 indexes) is increased by more than 50%. [#753](https://github.com/pingcap/br/pull/753)
         - Add a pre-check on the data to be imported and also on the target cluster before importing, and report errors to reject the import process if it does not meet the import requirements [#999](https://github.com/pingcap/br/pull/999)
         - Optimize the timing of checkpoint updates on the Local backend to improve performance of restarting from breakpoints[#1080](https://github.com/pingcap/br/pull/1080)
-
-
 
 ## Bug Fixes
 
