@@ -14,8 +14,8 @@ In v5.1, the key new features or improvements are as follows:
 - Support changing column types online to improve code development flexibility
 - Introduce a new statistics type `tidb_analyze_version = 2` to improve query stability, which is enabled as an experimental feature by default.
 - Support the dynamic privilege feature of MySQL 8.0 to implement more fine-grained control over certain operations.
-- Support directly reading data from the local replica using the Stale Read feature to reduce read latency and improve query performance.
-- Add the Lock View feature (experimental) to facilitate database administrators (DBAs) to observe transaction locking events and troubleshoot deadlock problems.
+- Support directly reading data from the local replica using the Stale Read feature to reduce read latency and improve query performance (Experimental).
+- Add the Lock View feature to facilitate database administrators (DBAs) to observe transaction locking events and troubleshoot deadlock problems (Experimental).
 - Add TiKV write rate limiter for background tasks to ensure that the latency of read and write requests is stable.
 
 ## Compatibility changes
@@ -98,7 +98,7 @@ In v5.1, the key new features or improvements are as follows:
 
     [User document](/sql-statements/sql-statement-modify-column.md)
 
-- Introduce a new SQL syntax `AS OF TIMESTAMP` to perform Stale Read, a new feature used to read historical data from a specified point in time or from a specified time range.
+- Introduce a new SQL syntax `AS OF TIMESTAMP` to perform Stale Read, a new experimental feature used to read historical data from a specified point in time or from a specified time range.
 
     [User document](/stale-read.md), [#21094](https://github.com/pingcap/tidb/issues/21094)
 
@@ -132,7 +132,7 @@ In v5.1, the key new features or improvements are as follows:
 
 ### Performance
 
-+ Stale read of data replicas
++ Stale read of data replicas (Experimental)
 
     Read local replicas data directly to reduce read latency and improve the query performance
     [User document](/stale-read.md), [#21094](https://github.com/pingcap/tidb/issues/21094)
