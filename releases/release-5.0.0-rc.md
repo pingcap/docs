@@ -37,7 +37,7 @@ Users can enable the clustered index feature by modifying the `tidb_enable_clust
 
 For example, to check whether a table (`tbl_name`) has a clustered index, execute `select tidb_pk_type from information_schema.tables where table_name = '{tbl_name}'`.
 
-+ [User document](/system-variables.md#tidb_enable_clustered_index-new-in-v500-rc)
++ [User document](/system-variables.md#tidb_enable_clustered_index-new-in-v50)
 + Related issue: [#4841](https://github.com/pingcap/tidb/issues/4841)
 
 ### Support invisible indexes
@@ -107,7 +107,7 @@ However, when async commit is enabled, the external consistency of transactions 
 
 Users can enable this feature by setting the global variable `tidb_enable_async_commit = ON`.
 
-+ [User document](/system-variables.md#tidb_enable_async_commit-new-in-v500-rc)
++ [User document](/system-variables.md#tidb_enable_async_commit-new-in-v50)
 + Related issue: [#8316](https://github.com/tikv/tikv/issues/8316)
 
 ### Improve the optimizer's stability in index selection (experimental)
@@ -126,7 +126,7 @@ Related issue: [#18065](https://github.com/pingcap/tidb/issues/18065)
 
 The TiDB scheduling process occupies resources such as I/O, network, CPU, and memory. If TiDB does not control the scheduled tasks, QPS and delay might cause performance jitter due to resource preemption. After the following optimizations, in the 72-hour test, the standard deviation of Sysbench TPS jitter is reduced from 11.09% to 3.36%.
 
-+ Reduce the scheduling issues caused by fluctuations of node capacity (always near the waterline) and caused by PD's `store-limit` configuration value set too large. This is achieved by introducing a new set of scheduling calculation formulas enabled via the `region-score-formula-version = v2` configuration item. [#3269](https://github.com/tikv/pd/pull/3269)
++ Reduce the redundant scheduling issues caused by fluctuations of node capacity (always near the waterline) and caused by PD's `store-limit` configuration value set too large. This is achieved by introducing a new set of scheduling calculation formulas enabled via the `region-score-formula-version = v2` configuration item. [#3269](https://github.com/tikv/pd/pull/3269)
 + Enable the cross-Region merge feature by modifying `enable-cross-table-merge = true` to reduce the number of empty Regions. [#3129](https://github.com/tikv/pd/pull/3129)
 + Data compaction in the TiKV background occupies a lot of I/O resources. The system automatically adjusts the compaction rate to balance the contention for I/O resources between background tasks and foreground reads and writes. After enabling this feature via the `rate-limiter-auto-tuned` configuration item, the delay jitter is greatly reduced. [#18011](https://github.com/pingcap/tidb/issues/18011)
 + When TiKV performs garbage collection (GC) and data compaction, partitions occupy CPU and I/O resources. Overlapping data exists during the execution of these two tasks. To reduce I/O usage, the GC Compaction Filter feature combines these two tasks into one and executes them in the same task. This feature is still experimental and you can enable it via `gc.enable-compaction-filter = ture`. [#18009](https://github.com/pingcap/tidb/issues/18009)
@@ -151,7 +151,7 @@ Related issue: [#18005](https://github.com/pingcap/tidb/issues/18005)
 
 In the process of Region membership changes, "adding a member" and "deleting a member" are two operations performed in two steps. If a failure occurs when the membership change finishes, the Regions will become unavailable and an error of foreground application is returned. The introduced Raft Joint Consensus algorithm can improve the system availability during Region membership change. "adding a member" and "deleting a member" operations during the membership change are combined into one operation and sent to all members. During the change process, Regions are in an intermediate state. If any modified member fails, the system is still available. Users can enable this feature by modifying the membership variable by executing `pd-ctl config set enable-joint-consensus true`. [#7587](https://github.com/tikv/tikv/issues/7587) [#2860](https://github.com/tikv/pd/issues/2860)
 
-+ [User document](/pd-configuration-file.md#enable-joint-consensus-new-in-v500-rc)
++ [User document](/pd-configuration-file.md#enable-joint-consensus-new-in-v50)
 + Related issue: [#18079](https://github.com/pingcap/tidb/issues/18079)
 
 ### Optimize the memory management module to reduce system OOM risks
@@ -187,7 +187,7 @@ When users troubleshoot SQL performance issues, they need detailed diagnostic in
 
 ## Deployment and maintenance
 
-+ Previously, when the configuration information of TiDB Ansible was imported to TiUP, TiUP put the user configuration in the `ansible-imported-configs` directory. When users later needed to edit the configuration using `tiup cluster edit`, the imported configuration was not displayed in the editor interface, which could be confusing for users. In TiDB v5.0, when TiDB Ansible configuration is imported, TiUP puts the configuration information both in `ansible-imported-configs` and in the editor interface. With this improvement, users can see the imported configuration when they are editing the cluster configuration.
++ Previously, when the configuration information of TiDB Ansible was imported to TiUP, TiUP put the user configuration in the `ansible-imported-configs` directory. When users later needed to edit the configuration using `tiup cluster edit-config`, the imported configuration was not displayed in the editor interface, which could be confusing for users. In TiDB v5.0, when TiDB Ansible configuration is imported, TiUP puts the configuration information both in `ansible-imported-configs` and in the editor interface. With this improvement, users can see the imported configuration when they are editing the cluster configuration.
 + Enhanced `mirror` command that supports merging multiple mirrors into one, publishing components in the local mirror, and adding component owners in the local mirror. [#814](https://github.com/pingcap/tiup/issues/814)
     + For a large enterprise, especially for the financial industry, any change in the production environment is given careful consideration. It can be troublesome if each version requires users to use a CD for installation. In TiDB v5.0, the `merge` command of TiUP supports merging multiple installation packages into one, which makes the installation easier.
     + In v4.0, users had to start tiup-server to publish the self-built mirror, which was not convenient enough. In v5.0, users can publish the self-built mirror simply by using `tiup mirror set` to set the current mirror to the local mirror.
