@@ -83,6 +83,10 @@ TiDB now supports desensitizing error messages and log files to avoid leaking se
 Users can enable the desensitization feature for different components:
 
 + For the TiDB side, set the `tidb_redact_log=1` variable using SQL statements in tidb-server.
+
+    This feature meets the needs of using tree queries to implement application logics in multiple sectors such as human resources, manufacturing, financial markets, and education.
+[User document](/log-redaction.md) Related issue: [#18566](https://github.com/pingcap/tidb/issues/18566)
+
 + For the TiKV side, set the `security.redact-info-log = true` configuration in tikv-server.
 + For the PD side, set the `security.redact-info-log = true` configuration in pd-server. [#2852](https://github.com/tikv/pd/issues/2852) [#3011](https://github.com/tikv/pd/pull/3011)
 + For the TiFlash side, set the `security.redact_info_log = true` configuration in tiflash-server and set `security.redact-info-log = true` in tiflash-learner.
