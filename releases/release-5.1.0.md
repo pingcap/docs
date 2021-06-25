@@ -151,7 +151,7 @@ In v5.1, the key new features or improvements are as follows:
     - Large amounts of data writes cause OOM problems in TiCDC.
     - Reduce the possibility of  TiCDC replication interruption in the following scenarios:
         [project#11](https://github.com/pingcap/ticdc/projects/11)
-       
+
         - Replication interruption when the network is unstable
         - Replication interruption when some TiKV/PD/TiCDC nodes are down
 
@@ -203,7 +203,7 @@ To learn more about the information and how to disable this behavior, refer to [
     - Support `Union All`, `TopN`, and `Limit` functions
     - Support the Cartesian product including left outer join and semi anti join in MPP mode
     - Optimize lock operations to avoid that running DDL statements and read operations are blocked by each other
-    - Optimize cleanup of expired data by TiFlash 
+    - Optimize cleanup of expired data by TiFlash
     - Support further filtering of query filters on `timestamp` columns at the TiFlash storage level
     - Improve the startup and scalability speed of TiFlash when a large number of tables are in a cluster
     - Improve TiFlash compatibility when running on unknown CPUs
