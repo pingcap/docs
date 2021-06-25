@@ -138,7 +138,7 @@ In v5.1, the key new features or improvements are as follows:
 
 + Enable the Hibernate Region feature by default.
 
-    If a Region is in an inactive state for a long time, it is automatically set to a silent state, which reduces the system overhead of the heartbeat information between the Leader and the Follower. [User document](/tikv-configuration-file.md#hibernate-regions)，[#10266](https://github.com/tikv/tikv/pull/10266)
+    If a Region is in an inactive state for a long time, it is automatically set to a silent state, which reduces the system overhead of the heartbeat information between the Leader and the Follower. [User document](/tikv-configuration-file.md#hibernate-regions), [#10266](https://github.com/tikv/tikv/pull/10266)
 
 ### Stability
 
