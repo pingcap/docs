@@ -88,9 +88,9 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 * Error Number: 8025
 
-    The single Key-Value pair being written is too large. The largest single Key-Value pair supported in TiDB is 6 MB.
+    The single Key-Value pair being written is too large. The largest single Key-Value pair supported in TiDB is 6 MB by default.
 
-    If a pair exceeds this limit, you need to manually deal with this row of data to meet the 6 MB limit.
+    If a pair exceeds this limit, you need to properly adjust the [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50) configuration value to relax the limit.
 
 * Error Number: 8026
 
@@ -98,7 +98,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 * Error Number: 8027
 
-    The table schema version is outdated. TiDB uses the F1 online schema change algorithm to execute DDL statements. When the table schema version of the TiDB server is earlier than that of the entire system, this error is returned if you execute a SQL statement.
+    The table schema version is outdated. TiDB applies schema changes online. When the table schema version of the TiDB server is earlier than that of the entire system, this error is returned if you execute a SQL statement.
 
     When this error occurs, check the network between the TiDB server and the PD Leader.
 
@@ -150,7 +150,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
     An unsupported database isolation level is set.
 
-    If you cannot modify the codes because you are using a third-party tool or framework, consider using `tidb_skip_isolation_level_check` to bypass this check.
+    If you cannot modify the codes because you are using a third-party tool or framework, consider using [`tidb_skip_isolation_level_check`](/system-variables.md#tidb_skip_isolation_level_check) to bypass this check.
 
     {{< copyable "sql" >}}
 
@@ -178,15 +178,9 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 * Error Number: 8055
 
-    The current snapshot is too old. The data may have been garbage collected. You can increase the value of `tikv_gc_life_time` to avoid this problem. The new version of TiDB automatically reserves data for long-running transactions. Usually this error does not occur.
+    The current snapshot is too old. The data may have been garbage collected. You can increase the value of [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) to avoid this problem. TiDB automatically reserves data for long-running transactions. Usually this error does not occur.
 
     See [garbage collection overview](/garbage-collection-overview.md) and [garbage collection configuration](/garbage-collection-configuration.md).
-
-    {{< copyable "sql" >}}
-
-    ```sql
-    update mysql.tidb set VARIABLE_VALUE="24h" where VARIABLE_NAME="tikv_gc_life_time";
-    ```
 
 * Error Number: 8059
 

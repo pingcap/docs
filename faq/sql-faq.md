@@ -134,13 +134,7 @@ Deleting a large amount of data leaves a lot of useless keys, affecting the quer
 
 ## What should I do if it is slow to reclaim storage space after deleting data?
 
-You can configure concurrent GC to increase the speed of reclaiming storage space. The default concurrency is 1, and you can modify it to at most 50% of the number of TiKV instances using the following command:
-
-{{< copyable "sql" >}}
-
-```sql
-update mysql.tidb set VARIABLE_VALUE="3" where VARIABLE_NAME="tikv_gc_concurrency";
-```
+Because TiDB uses Multiversion concurrency control (MVCC), deleting data does not immediately reclaim space. Garbage collection is delayed so that concurrent transactions are able to see earlier versions of rows. This can be configured via the [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) (default: `10m0s`) system variable.
 
 ## Does `SHOW PROCESSLIST` display the system process ID?
 

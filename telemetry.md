@@ -18,10 +18,12 @@ The following sections describe the shared usage information in detail for each 
 
 ### TiDB
 
-When the telemetry collection feature is enabled in TiDB, the TiDB cluster collects usage details on a daily basis. These usage details include but are not limited to:
+When the telemetry collection feature is enabled in TiDB, the TiDB cluster collects usage details on a 6-hour basis. These usage details include but are not limited to:
 
 - A randomly generated telemetry ID.
 - Deployment characteristics, such as the size of hardware (CPU, memory, disk), TiDB components versions, OS name.
+- The status of query requests in the system, such as the number of query requests and the duration.
+- Component usage, for example, whether the Async Commit feature is in use or not.
 
 To view the full content of the usage information shared to PingCAP, execute the following SQL statement:
 
@@ -33,7 +35,7 @@ ADMIN SHOW TELEMETRY;
 
 ### TiDB Dashboard
 
-When the telemetry collection feature is enabled in TiDB Dashboard, usage information on the TiDB Dashboard web UI will be shared, including (but not limited to):
+When the telemetry collection feature is enabled for TiDB Dashboard, usage information on the TiDB Dashboard web UI will be shared, including (but not limited to):
 
 - A randomly generated telemetry ID.
 - User operation information, such as the name of the TiDB Dashboard web page accessed by the user.
@@ -135,7 +137,7 @@ See [Deploy TiDB Operator in Kubernetes](https://docs.pingcap.com/tidb-in-kubern
 
 ### Disable TiDB telemetry for deployed TiDB clusters
 
-In existing TiDB clusters, you can also modify the system variable [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402-version) to dynamically disable the TiDB telemetry collection:
+In existing TiDB clusters, you can also modify the system variable [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402) to dynamically disable the TiDB telemetry collection:
 
 {{< copyable "sql" >}}
 

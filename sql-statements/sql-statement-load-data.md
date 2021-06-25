@@ -10,9 +10,10 @@ The `LOAD DATA` statement batch loads data into a TiDB table.
 
 ## Synopsis
 
-**LoadDataStmt:**
-
-![LoadDataStmt](/media/sqlgram/LoadDataStmt.png)
+```ebnf+diagram
+LoadDataStmt ::=
+    'LOAD' 'DATA' LocalOpt 'INFILE' stringLit DuplicateOpt 'INTO' 'TABLE' TableName CharsetOpt Fields Lines IgnoreLines ColumnNameOrUserVarListOptWithBrackets LoadDataSetSpecOpt
+```
 
 ## Parameters
 
@@ -60,17 +61,17 @@ In addition, TiDB currently only supports parsing the syntax of the `DuplicateOp
 
 ```sql
 CREATE TABLE trips (
-    ->  trip_id bigint NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    ->  duration integer not null,
-    ->  start_date datetime,
-    ->  end_date datetime,
-    ->  start_station_number integer,
-    ->  start_station varchar(255),
-    ->  end_station_number integer,
-    ->  end_station varchar(255),
-    ->  bike_number varchar(255),
-    ->  member_type varchar(255)
-    -> );
+    trip_id bigint NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    duration integer not null,
+    start_date datetime,
+    end_date datetime,
+    start_station_number integer,
+    start_station varchar(255),
+    end_station_number integer,
+    end_station varchar(255),
+    bike_number varchar(255),
+    member_type varchar(255)
+    );
 ```
 
 ```
@@ -104,7 +105,7 @@ In the above example, `x'2c'` is the hexadecimal representation of the `,` chara
 
 ## MySQL compatibility
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
+This statement is understood to be fully compatible with MySQL except for the `LOAD DATA...REPLACE INTO` syntax [#24515](https://github.com/pingcap/tidb/issues/24515). Any other compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
 
 > **Note:**
 >

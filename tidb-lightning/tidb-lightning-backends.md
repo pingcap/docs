@@ -16,7 +16,7 @@ TiDB Lightning supports the following [backends](/tidb-lightning/tidb-lightning-
 
 The **Importer-backend** (default): `tidb-lightning` first encodes the SQL or CSV data into KV pairs, and relies on the external `tikv-importer` program to sort these KV pairs and ingest directly into the TiKV nodes.
 
-The **Local-backend**: `tidb-lightning` first encodes data into key-value pairs, sorts and stores them in a local temporary directory, and writes these key-value pairs to each TiKV node in batches. Then, TiKV ingests these key-value pairs into the cluster. The implementation of Local-backend is the same with that of Importer-backend but does not rely on the external `tikv-importer` component.
+The **Local-backend**: `tidb-lightning` first encodes data into key-value pairs, sorts and stores them in a local temporary directory, and *upload* these key-value pairs to each TiKV node *as SST files*. Then, TiKV ingests these *SST files* into the cluster. The implementation of Local-backend is the same with that of Importer-backend but does not rely on the external `tikv-importer` component.
 
 The **TiDB-backend**: `tidb-lightning` first encodes these data into SQL `INSERT` statements, and has these statements executed directly on the TiDB node.
 
@@ -105,8 +105,10 @@ If you need to import data into a TiDB cluster, TiDB Lightning using the TiDB-ba
 
 ```toml
 
-# logging
+# log level
 log-level = "info"
+
+# The directory to which the log is output
 log-file = "loader.log"
 
 # Prometheus
@@ -120,8 +122,10 @@ pool-size = 16
 
 ```toml
 [lightning]
-# logging
+# log level
 level = "info"
+
+# The directory to which the log is output. If this directory is not specified, it defaults to the directory where the command is executed.
 file = "tidb-lightning.log"
 
 # Prometheus
@@ -209,7 +213,9 @@ password = ""
 # TiDB connection parameters
 host = "127.0.0.1"
 port = 4000
-status-port = 10080  # <- this is required
+
+# In the TiDB-backend mode, this parameter is optional.
+# status-port = 10080
 user = "root"
 password = ""
 

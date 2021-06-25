@@ -77,14 +77,14 @@ The `tiup mirror clone` command provides many optional flags (might provide more
 
     If you want to clone only one version (not all versions) of a component, use `--<component>=<version>` to specify this version. For example:
 
-    - Execute the `tiup mirror clone <target-dir> --tidb v5.0.0` command to clone the v5.0.0 version of the TiDB component.
-    - Execute the `tiup mirror clone <target-dir> --tidb v5.0.0 --tikv all` command to clone the v5.0.0 version of the TiDB component and all versions of the TiKV component.
-    - Execute the `tiup mirror clone <target-dir> v5.0.0` command to clone the v5.0.0 version of all components in a cluster.
+    - Execute the `tiup mirror clone <target-dir> --tidb v5.1.0` command to clone the v5.1.0 version of the TiDB component.
+    - Execute the `tiup mirror clone <target-dir> --tidb v5.1.0 --tikv all` command to clone the v5.1.0 version of the TiDB component and all versions of the TiKV component.
+    - Execute the `tiup mirror clone <target-dir> v5.1.0` command to clone the v5.1.0 version of all components in a cluster.
 
 ## Usage examples
 
 This section introduces the usage examples of the `mirror` command.
 
-### Deploy a TiDB Cluster offline using TiUP
+The repository that is cloned using `tiup mirror clone` can be shared among hosts either by sharing the files via SCP, NFS or by making the repository available over the HTTP or HTTPS protocol. Use `tiup mirror set <location>` to specify the location of the repository.
 
-Refer to [Deploy a TiDB Cluster Offline Using TiUP](/production-offline-deployment-using-tiup.md#step-1-prepare-the-tiup-offline-component-package) to install the TiUP offline mirror, deploy a TiDB cluster, and start it.
+Refer to [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md#method-2-deploy-tiup-offline) to install the TiUP offline mirror, deploy a TiDB cluster, and start it.

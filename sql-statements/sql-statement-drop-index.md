@@ -10,29 +10,25 @@ This statement removes an index from a specified table, marking space as free in
 
 ## Synopsis
 
-**AlterTableDropIndexStmt:**
+```ebnf+diagram
+AlterTableDropIndexStmt ::=
+    'ALTER' IgnoreOptional 'TABLE' AlterTableDropIndexSpec
 
-![AlterTableDropIndexStmt](/media/sqlgram/AlterTableDropIndexStmt.png)
+IgnoreOptional ::=
+    'IGNORE'?
 
-**IgnoreOptional:**
+TableName ::=
+    Identifier ('.' Identifier)?
 
-![IgnoreOptional](/media/sqlgram/IgnoreOptional.png)
+AlterTableDropIndexSpec ::=
+    'DROP' ( KeyOrIndex | 'FOREIGN' 'KEY' ) IfExists Identifier
 
-**TableName:**
+KeyOrIndex ::=
+    'KEY'
+|   'INDEX'
 
-![TableName](/media/sqlgram/TableName.png)
-
-**AlterTableDropIndexSpec:**
-
-![AlterTableDropIndexSpec](/media/sqlgram/AlterTableDropIndexSpec.png)
-
-**KeyOrIndex:**
-
-![KeyOrIndex](/media/sqlgram/KeyOrIndex.png)
-
-**IfExists:**
-
-![IfExists](/media/sqlgram/IfExists.png)
+IfExists ::= ( 'IF' 'EXISTS' )?
+```
 
 ## Examples
 
@@ -72,7 +68,7 @@ Query OK, 0 rows affected (0.30 sec)
 
 ## MySQL compatibility
 
-* Removing the primary key constraint from a column is not supported by default. You can enable the feature by setting the `alter-primary-key` configuration item to `true`. For details, see [alter-primary-key](/tidb-configuration-file.md#alter-primary-key).
+* Dropping the primary key of the `CLUSTERED` type is not supported. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
 
 ## See also
 

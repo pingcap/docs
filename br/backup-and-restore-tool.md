@@ -6,11 +6,11 @@ aliases: ['/docs/dev/br/backup-and-restore-tool/','/docs/dev/reference/tools/br/
 
 # BR Tool Overview
 
-[BR](http://github.com/pingcap/br) (Backup & Restore) is a command-line tool for distributed backup and restoration of the TiDB cluster data. It is supported to use BR only in TiDB v3.1 and later versions.
+[BR](http://github.com/pingcap/br) (Backup & Restore) is a command-line tool for distributed backup and restoration of the TiDB cluster data.
 
 Compared with [`dumpling`](/backup-and-restore-using-dumpling-lightning.md), BR is more suitable for scenarios of huge data volume.
 
-This document describes BR's implementation principles, recommended deployment configuration, usage restrictions, several methods to use BR, etc.
+This document describes BR's implementation principles, recommended deployment configuration, usage restrictions and several methods to use BR.
 
 ## Implementation principles
 
@@ -66,6 +66,7 @@ Two types of backup files are generated in the path where backup files are store
 
 - **The SST file**: stores the data that the TiKV node backed up.
 - **The `backupmeta` file**: stores the metadata of this backup operation, including the number, the key range, the size, and the Hash (sha256) value of the backup files.
+- **The `backup.lock` file**: prevents multiple backup operations from storing data to the same directory.
 
 ### The format of the SST file name
 
@@ -103,7 +104,7 @@ After the restoration operation is completed, BR performs a checksum calculation
 
 ## Deploy and use BR
 
-## Recommended deployment configuration
+### Recommended deployment configuration
 
 - It is recommended that you deploy BR on the PD node.
 - It is recommended that you mount a high-performance SSD to BR nodes and all TiKV nodes. A 10-gigabit network card is recommended. Otherwise, bandwidth is likely to be the performance bottleneck during the backup and restore process.
@@ -112,20 +113,66 @@ After the restoration operation is completed, BR performs a checksum calculation
 >
 > - If you do not mount a network disk or use other shared storage, the data backed up by BR will be generated on each TiKV node. Because BR only backs up leader replicas, you should estimate the space reserved for each node based on the leader size.
 >
-> - Meanwhile, because TiDB v4.0 uses leader count for load balancing by default, leaders are greatly different in size, resulting in uneven distribution of backup data on each node.
+> - Because TiDB uses leader count for load balancing by default, leaders can greatly differ in size. This might resulting in uneven distribution of backup data on each node.
 
 ### Usage restrictions
 
 The following are the limitations of using BR for backup and restoration:
 
-- It is supported to use BR only in TiDB v3.1 and later versions.
 - When BR restores data to the upstream cluster of TiCDC/Drainer, TiCDC/Drainer cannot replicate the restored data to the downstream.
 - BR supports operations only between clusters with the same [`new_collations_enabled_on_first_bootstrap`](/character-set-and-collation.md#collation-support-framework) value because BR only backs up KV data. If the cluster to be backed up and the cluster to be restored use different collations, the data validation fails. Therefore, before restoring a cluster, make sure that the switch value from the query result of the `select VARIABLE_VALUE from mysql.tidb where VARIABLE_NAME='new_collation_enabled';` statement is consistent with that during the backup process.
 
-    - For v3.1 clusters, the new collation framework is not supported, so you can see it as disabled.
-    - For v4.0 clusters, check whether the new collation is enabled by executing `SELECT VARIABLE_VALUE FROM mysql.tidb WHERE VARIABLE_NAME='new_collation_enabled';`.
+### Compatibility
 
-    For example, assume that data is backed up from a v3.1 cluster and will be restored to a v4.0 cluster. The `new_collation_enabled` value of the v4.0 cluster is `true`, which means that the new collation is enabled in the cluster to be restored when this cluster is created. If you perform the restore in this situation, an error might occur.
+The compatibility issues of BR and the TiDB cluster are divided into the following categories:
+
++ Some versions of BR are not compatible with the interface of the TiDB cluster.
++ The KV format might change when some features are enabled or disabled. If these features are not consistently enabled or disabled during backup and restore, compatibility issues might occur.
+
+These features are as follows:
+
+| Features | Related issues | Solutions |
+|  ----  | ----  | ----- |
+| Clustered index | [#565](https://github.com/pingcap/br/issues/565)       | Make sure that the value of the `tidb_enable_clustered_index` global variable during restore is consistent with that during backup. Otherwise, data inconsistency might occur, such as `default not found` and inconsistent data index. |
+| New collation  | [#352](https://github.com/pingcap/br/issues/352)       |  Make sure that the value of the `new_collations_enabled_on_first_bootstrap` variable is consistent with that during backup. Otherwise, inconsistent data index might occur and checksum might fail to pass. |
+| TiCDC enabled on the restore cluster | [#364](https://github.com/pingcap/br/issues/364#issuecomment-646813965) | Currently, TiKV cannot push down the BR-ingested SST files to TiCDC. Therefore, you need to disable TiCDC when using BR to restore data. |
+
+However, even after you have ensured that the above features are consistently enabled or disabled during backup and restore, compatibility issues might still occur due to the inconsistent internal versions or inconsistent interfaces between BR and TiKV/TiDB/PD. To avoid such cases, BR has the built-in version check.
+
+#### Version check
+
+Before performing backup and restore, BR compares and checks the TiDB cluster version and the BR version. If there is a major-version mismatch (for example, BR v4.x and TiDB v5.x), BR prompts a reminder to exit. To forcibly skip the version check, you can set `--check-requirements=false`.
+
+Note that skipping the version check might introduce incompatibility. The version compatibility information between BR and TiDB versions are as follows:
+
+| Backup version (vertical) \ Restore version (horizontal) | Use BR nightly to restore TiDB nightly | Use BR v5.0 to restore TiDB v5.0| Use BR v4.0 to restore TiDB v4.0 |
+|  ----  |  ----  | ---- | ---- |
+| Use BR nightly to back up TiDB nightly | ✅ | ✅ | ❌ (If a table with the primary key of the non-integer clustered index type is restored to a TiDB v4.0 cluster, BR will cause data error without warning.)  |
+| Use BR v5.0 to back up TiDB v5.0 | ✅ | ✅ | ❌  (If a table with the primary key of the non-integer clustered index type is restored to a TiDB v4.0 cluster, BR will cause data error without warning.) 
+| Use BR v4.0 to back up TiDB v4.0 | ✅ | ✅ | ✅ (If TiKV >= v4.0.0-rc.1, and if BR contains the [#233](https://github.com/pingcap/br/pull/233) bug fix and TiKV does not contain the [#7241](https://github.com/tikv/tikv/pull/7241) bug fix, BR will cause the TiKV node to restart.) |
+| Use BR nightly or v5.0 to back up TiDB v4.0 | ❌ (If the TiDB version is earlier than v4.0.9, the [#609](https://github.com/pingcap/br/issues/609) issue might occur.) | ❌ (If the TiDB version is earlier than v4.0.9, the [#609](https://github.com/pingcap/br/issues/609) issue might occur.) | ❌ (If the TiDB version is earlier than v4.0.9, the [#609](https://github.com/pingcap/br/issues/609) issue might occur.) |
+
+### Backup and restore system schemas
+
+Before v5.1.0, BR filtered out data from the system schemas during the backup.
+
+Since v5.1.0, BR **backups** all data by default, including the system schema (`mysql.*`). But to be compatible with the earlier versions of BR, the tables in system schema are **not** restored by default during the **restore**. If you want the tables to be restored to the system schemas, you need to set the [`filter` parameter](/br/use-br-command-line-tool.md#back-up-with-table-filter). Then, the system tables are first restored to the temporary schemas and then to the system schemas (by renaming the temporary schemas).
+
+In addition, TiDB performs special operations on the following system tables:
+
+- Tables related to statistical information are not restored, because the table ID of the statistical information has changed.
+- `tidb` and `global_variables` tables in the `mysql` schema are not restored, because these tables cannot be overwritten. For example, overwriting these tables by the GC safepoint will affect the cluster.
+- The restore of the `user` table in the `mysql` schema does not take effect until you manually execute the `FLUSH PRIVILEGE` command.
+
+### Minimum machine configuration required for running BR
+
+The minimum machine configuration required for running BR is as follows:
+
+| CPU | Memory | Hard Disk Type | Network |
+| --- | --- | --- | --- |
+| 1 core | 4 GB | HDD | Gigabit network card |
+
+In general scenarios (less than 1000 tables for backup and restore), the CPU consumption of BR at runtime does not exceed 200%, and the memory consumption does not exceed 4 GB. However, when backing up and restoring a large number of tables, BR might consume more than 4 GB of memory. In a test of backing up 24000 tables, BR consumes about 2.7 GB of memory, and the CPU consumption remains below 100%.
 
 ### Best practices
 
@@ -148,20 +195,11 @@ Currently, the following methods are supported to run the BR tool:
 
 #### Use SQL statements
 
-In TiDB v4.0.2 and later versions, you can run the BR tool using SQL statements.
-
-For detailed operations, see the following documents:
-
-- [Backup syntax](/sql-statements/sql-statement-backup.md#backup)
-- [Restore syntax](/sql-statements/sql-statement-restore.md#restore)
+TiDB supports both [`BACKUP`](/sql-statements/sql-statement-backup.md#backup) and [`RESTORE`](/sql-statements/sql-statement-restore.md#restore) SQL statements. The progress of these operations can be monitored with the statement [`SHOW BACKUPS|RESTORES`](/sql-statements/sql-statement-show-backups.md).
 
 #### Use the command-line tool
 
-In TiDB versions above v3.1, you can run the BR tool using the command-line tool.
-
-First, you need to download the binary file of the BR tool. See [download link](/download-ecosystem-tools.md#br-backup-and-restore).
-
-For how to use the command-line tool to perform backup and restore operations, see [Use the BR command-line tool](/br/use-br-command-line-tool.md).
+The `br` command-line utility is available as a [separate download](/download-ecosystem-tools.md#br-backup-and-restore). For details, see [Use BR Command-line for Backup and Restoration](/br/use-br-command-line-tool.md).
 
 #### In the Kubernetes environment
 
@@ -169,7 +207,7 @@ In the Kubernetes environment, you can use the BR tool to back up TiDB cluster d
 
 > **Note:**
 >
-> For Amazon S3 and Google Cloud Storage parameter descriptions, see the [BR Storages](/br/backup-and-restore-storages.md) document.
+> For Amazon S3 and Google Cloud Storage parameter descriptions, see the [External Storages](/br/backup-and-restore-storages.md#url-parameters) document.
 
 - [Back up Data to S3-Compatible Storage Using BR](https://docs.pingcap.com/tidb-in-kubernetes/stable/backup-to-aws-s3-using-br)
 - [Restore Data from S3-Compatible Storage Using BR](https://docs.pingcap.com/tidb-in-kubernetes/stable/restore-from-aws-s3-using-br)
@@ -183,4 +221,4 @@ In the Kubernetes environment, you can use the BR tool to back up TiDB cluster d
 - [Use BR Command-line](/br/use-br-command-line-tool.md)
 - [BR Use Cases](/br/backup-and-restore-use-cases.md)
 - [BR FAQ](/br/backup-and-restore-faq.md)
-- [BR Storages](/br/backup-and-restore-storages.md)
+- [External Storages](/br/backup-and-restore-storages.md)

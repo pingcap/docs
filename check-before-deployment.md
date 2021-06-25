@@ -189,6 +189,22 @@ To check whether the NTP service is installed and whether it synchronizes with t
     Active: active (running) since 一 2017-12-18 13:13:19 CST; 3s ago
     ```
 
+    - If it returns `Unit ntpd.service could not be found.`, then try the following command to see whether your system is configured to use `chronyd` instead of `ntpd` to perform clock synchronization with NTP:
+
+        {{< copyable "shell-regular" >}}
+    
+        ```bash
+        sudo systemctl status cronyd.service
+        ```
+    
+        ```
+        chronyd.service - NTP client/server
+        Loaded: loaded (/usr/lib/systemd/system/chronyd.service; enabled; vendor preset: enabled)
+        Active: active (running) since Mon 2021-04-05 09:55:29 EDT; 3 days ago
+        ```
+    
+        If your system is configured to use `chronyd`, proceed to step 3.
+
 2. Run the `ntpstat` command to check whether the NTP service synchronizes with the NTP server.
 
     > **Note:**
@@ -219,6 +235,48 @@ To check whether the NTP service is installed and whether it synchronizes with t
 
         ```
         Unable to talk to NTP daemon. Is it running?
+        ```
+
+3. Run the `chronyc tracking` command to check wheter the Chrony service synchronizes with the NTP server.
+
+    > **Note:**
+    >
+    > This only applies to systems that use Chrony instead of NTPd.
+
+    {{< copyable "shell-regular" >}}
+
+    ```bash
+    chronyc tracking
+    ```
+
+    - If the command returns `Leap status     : Normal`, the synchronization process is normal.
+
+        ```
+        Reference ID    : 5EC69F0A (ntp1.time.nl)
+        Stratum         : 2
+        Ref time (UTC)  : Thu May 20 15:19:08 2021
+        System time     : 0.000022151 seconds slow of NTP time
+        Last offset     : -0.000041040 seconds
+        RMS offset      : 0.000053422 seconds
+        Frequency       : 2.286 ppm slow
+        Residual freq   : -0.000 ppm
+        Skew            : 0.012 ppm
+        Root delay      : 0.012706812 seconds
+        Root dispersion : 0.000430042 seconds
+        Update interval : 1029.8 seconds
+        Leap status     : Normal
+        ```
+
+    - If the command returns the following result, an error occurs in the synchronization:
+
+        ```
+        Leap status    : Not synchronised
+        ```
+
+    - If the command returns the following result, the `chronyd` service is not running normally:
+
+        ```
+        506 Cannot talk to daemon
         ```
 
 To make the NTP service start synchronizing as soon as possible, run the following command. Replace `pool.ntp.org` with your NTP server.
@@ -530,6 +588,33 @@ Take the following steps to check the current operating system configuration and
                   The governor "performance" may decide which speed to use within this range.
     ```
 
+9. Execute the following commands to modify the `sysctl` parameters:
+
+    {{< copyable "shell-regular" >}}
+
+    ```bash
+    echo "fs.file-max = 1000000">> /etc/sysctl.conf
+    echo "net.core.somaxconn = 32768">> /etc/sysctl.conf
+    echo "net.ipv4.tcp_tw_recycle = 0">> /etc/sysctl.conf
+    echo "net.ipv4.tcp_syncookies = 0">> /etc/sysctl.conf
+    echo "vm.overcommit_memory = 1">> /etc/sysctl.conf
+    echo "vm.swappiness = 0">> /etc/sysctl.conf
+    sysctl -p
+    ```
+
+10. Execute the following command to configure the user's `limits.conf` file:
+
+    {{< copyable "shell-regular" >}}
+
+    ```bash
+    cat << EOF >>/etc/security/limits.conf
+    tidb           soft    nofile          1000000
+    tidb           hard    nofile          1000000
+    tidb           soft    stack          32768
+    tidb           hard    stack          32768
+    EOF
+    ```
+
 ## Manually configure the SSH mutual trust and sudo without password
 
 This section describes how to manually configure the SSH mutual trust and sudo without password. It is recommended to use TiUP for deployment, which automatically configure SSH mutual trust and login without password. If you deploy TiDB clusters using TiUP, ignore this section.
@@ -555,11 +640,12 @@ This section describes how to manually configure the SSH mutual trust and sudo w
     tidb ALL=(ALL) NOPASSWD: ALL
     ```
 
-3. Use the `tidb` user to log in to the control machine, and run the following command. Replace `10.0.1.1` with the IP of your target machine, and enter the `tidb` user password of the target machine as prompted. After the command is executed, SSH mutual trust is already created. This applies to other machines as well.
+3. Use the `tidb` user to log in to the control machine, and run the following command. Replace `10.0.1.1` with the IP of your target machine, and enter the `tidb` user password of the target machine as prompted. After the command is executed, SSH mutual trust is already created. This applies to other machines as well. Newly created `tidb` users do not have the `.ssh` directory. To create such a directory, execute the command that generates the RSA key. To deploy TiDB components on the control machine, configure mutual trust for the control machine and the control machine itself.
 
     {{< copyable "shell-regular" >}}
 
     ```bash
+    ssh-keygen -t rsa
     ssh-copy-id -i ~/.ssh/id_rsa.pub 10.0.1.1
     ```
 

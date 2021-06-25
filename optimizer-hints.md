@@ -119,10 +119,6 @@ The parameter(s) given in `INL_JOIN()` is the candidate table for the inner tabl
 
 The `INL_HASH_JOIN(t1_name [, tl_name])` hint tells the optimizer to use the index nested loop hash join algorithm. The conditions for using this algorithm are the same with the conditions for using the index nested loop join algorithm. The difference between the two algorithms is that `INL_JOIN` creates a hash table on the joined inner table, but `INL_HASH_JOIN` creates a hash table on the joined outer table. `INL_HASH_JOIN` has a fixed limit on memory usage, while the memory used by `INL_JOIN` depends on the number of rows matched in the inner table.
 
-### INL_MERGE_JOIN
-
-The `INL_MERGE_JOIN(t1_name [, tl_name])` hint tells the optimizer to use the index nested loop merge join algorithm. This hint is used in the same scenario as in that of `INL_JOIN`. Compared with `INL_JOIN` and `INL_HASH_JOIN`, it saves more memory but requires more strict usage conditions: the column sets of the inner table in join keys is the prefix of the inner table index, or the index of the inner table is the prefix of the column sets of the inner table in join keys.
-
 ### HASH_JOIN(t1_name [, tl_name ...])
 
 The `HASH_JOIN(t1_name [, tl_name ...])` hint tells the optimizer to use the hash join algorithm for the given table(s). This algorithm allows the query to be executed concurrently with multiple threads, which achieves a higher processing speed but consumes more memory. For example:
@@ -314,7 +310,7 @@ In addition to this hint, setting the `tidb_replica_read` environment variable t
 
 The `IGNORE_PLAN_CACHE()` hint reminds the optimizer not to use the Plan Cache when handling the current `prepare` statement.
 
-This hint is used to temporarily disable the Plan Cache for a certain type of queries.
+This hint is used to temporarily disable the Plan Cache for a certain type of queries when [prepare-plan-cache](/tidb-configuration-file.md#prepared-plan-cache) is enabled.
 
 In the following example, the Plan Cache is forcibly disabled when executing the `prepare` statement.
 

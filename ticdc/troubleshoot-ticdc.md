@@ -246,7 +246,7 @@ For more information, refer to [Replication task configuration file](/ticdc/mana
 
 ## When TiCDC replicates data to Kafka, can I control the maximum size of a single message in TiDB?
 
-No. Currently TiCDC sets the maximum size of batch messages to 512 MB, and that of a single message to 4 MB.
+Yes. You can set the `max-message-bytes` parameter to control the maximum size of data sent to the Kafka broker each time (optional, `64MB` by default). You can also set `max-batch-size` to specify the maximum number of change records in each Kafka message. Currently, the setting only takes effect when Kafka's protocol is `default` (optional, `4096` by default).
 
 ## When TiCDC replicates data to Kafka, does a message contain multiple types of data changes?
 
@@ -295,6 +295,10 @@ If the Old Value feature is not enabled, you cannot tell whether a Row Changed E
 
 For more information, refer to [Open protocol Row Changed Event format](/ticdc/ticdc-open-protocol.md#row-changed-event).
 
+## How much PD storage does TiCDC use?
+
+TiCDC uses etcd in PD to store and regularly update the metadata. Because the time interval between the MVCC of etcd and PD's default compaction is one hour, the amount of PD storage that TiCDC uses is proportional to the amount of metadata versions generated within this hour. However, in v4.0.5, v4.0.6, and v4.0.7, TiCDC has a problem of frequent writing, so if there are 1000 tables created or scheduled in an hour, it then takes up all the etcd storage and returns the `etcdserver: mvcc: database space exceeded` error. You need to clean up the etcd storage after getting this error. See [etcd maintaince space-quota](https://etcd.io/docs/v3.4.0/op-guide/maintenance/#space-quota) for details. It is recommended to upgrade your cluster to v4.0.9 or later versions.
+
 ## Does TiCDC support replicating large transactions? Is there any risk?
 
 TiCDC provides partial support for large transactions (more than 5 GB in size). Depending on different scenarios, the following risks might exist:
@@ -313,14 +317,14 @@ If you encounter an error above, it is recommended to use BR to restore the incr
 ## When the downstream of a changefeed is a database similar to MySQL and TiCDC executes a time-consuming DDL statement, all other changefeeds are blocked. How should I handle the issue?
 
 1. Pause the execution of the changefeed that contains the time-consuming DDL statement. Then you can see that other changefeeds are no longer blocked.
-2. Search for the `apply job` field in the TiCDC log and confirm the `StartTs` of the time-consuming DDL statement.
+2. Search for the `apply job` field in the TiCDC log and confirm the `start-ts` of the time-consuming DDL statement.
 3. Manually execute the DDL statement in the downstream. After the execution finishes, go on performing the following operations.
-4. Modify the changefeed configuration and add the above `StartTs` to the `ignore-txn-start-ts` configuration item.
+4. Modify the changefeed configuration and add the above `start-ts` to the `ignore-txn-start-ts` configuration item.
 5. Resume the paused changefeed.
 
 ## After I upgrade the TiCDC cluster to v4.0.8, the `[CDC:ErrKafkaInvalidConfig]Canal requires old value to be enabled` error is reported when I execute a changefeed
 
-Since v4.0.8, if the `canal` or `canal-json` protocol is used for output in a changefeed, TiCDC checks whether the old value feature is also enabled. If you disable the old value feature, this error is reported. To fix the error, take the following steps:
+Since v4.0.8, if the `canal` or `maxwell` protocol is used for output in a changefeed, TiCDC enables the old value feature automatically. However, if you have upgraded TiCDC from an earlier version to v4.0.8 or later, when the changefeed uses the `canal` or `maxwell` protocol and the old value feature is disabled, this error is reported. To fix the error, take the following steps:
 
 1. Set the value of `enable-old-value` in the changefeed configuration file to `true`.
 2. Execute `cdc cli changefeed pause` to pause the replication task.
@@ -347,6 +351,50 @@ Since v4.0.8, if the `canal` or `canal-json` protocol is used for output in a ch
     cdc cli changefeed resume -c test-cf --pd=http://10.0.10.25:2379
     ```
 
-## How much PD storage does TiCDC use?
+## The `[tikv:9006]GC life time is shorter than transaction duration, transaction starts at xx, GC safe point is yy` error is reported when I use TiCDC to create a changefeed
 
-TiCDC uses etcd in PD to store and regularly update the metadata. Because the time interval between the MVCC of etcd and PD's default compaction is one hour, the amount of PD storage that TiCDC uses is proportional to the amount of metadata versions generated within this hour. However, in v4.0.5, v4.0.6, and v4.0.7, TiCDC has a problem of frequent writing, so if there are 1000 tables created or scheduled in an hour, it then takes up all the etcd storage and returns the `etcdserver: mvcc: database space exceeded` error. You need to clean up the etcd storage after getting this error. See [etcd maintaince space-quota](https://etcd.io/docs/v3.4.0/op-guide/maintenance/#space-quota) for details. It is recommended to upgrade your cluster to v4.0.9 or later versions.
+Solution: You need to execute the `pd-ctl service-gc-safepoint --pd <pd-addrs>` command to query the current GC safepoint and service GC safepoint. If the GC safepoint is smaller than the `start-ts` of the TiCDC replication task (changefeed), you can directly add the `--disable-gc-check` option to the `cdc cli create changefeed` command to create a changefeed.
+
+If the result of `pd-ctl service-gc-safepoint --pd <pd-addrs>` does not have `gc_worker service_id`:
+
+- If your PD version is v4.0.8 or earlier, refer to [PD issue #3128](https://github.com/tikv/pd/issues/3128) for details.
+- If your PD is upgraded from v4.0.8 or an earlier version to a later version, refer to [PD issue #3366](https://github.com/tikv/pd/issues/3366) for details.
+- For other situations, report the execution result of the above command to our [Slack channel](https://slack.tidb.io/invite?team=tidb-community&channel=sig-migrate&ref=pingcap-community).
+
+## `enable-old-value` is set to `true` when I create a TiCDC replication task, but `INSERT`/`UPDATE` statements from the upstream become `REPLACE INTO` after being replicated to the downstream
+
+When a changefeed is created in TiCDC, the `safe-mode` setting defaults to `true`, which generates the `REPLACE INTO` statement to execute for the upstream `INSERT`/`UPDATE` statements.
+
+Currently, users cannot modify the `safe-mode` setting, so this issue currently has no solution.
+
+## When I use TiCDC to replicate messages to Kafka, Kafka returns the `Message was too large` error
+
+For TiCDC v4.0.8 or earlier versions, you cannot effectively control the size of the message output to Kafka only by configuring the `max-message-bytes` setting for Kafka in the Sink URI. To control the message size, you also need to increase the limit on the bytes of messages to be received by Kafka. To add such a limit, add the following configuration to the Kafka server configuration.
+
+```
+# The maximum byte number of a message that the broker receives
+message.max.bytes=2147483648
+# The maximum byte number of a message that the broker copies
+replica.fetch.max.bytes=2147483648
+# The maximum message byte number that the consumer side reads
+fetch.message.max.bytes=2147483648
+```
+
+## How can I find out whether a DDL statement fails to execute in downstream during TiCDC replication? How to resume the replication?
+
+If a DDL statement fails to execute, the replication task (changefeed) automatically stops. The checkpoint-ts is the DDL statement's finish-ts minus one. If you want TiCDC to retry executing this statement in the downstream, use `cdc cli changefeed resume` to resume the replication task. For example:
+
+{{< copyable "shell-regular" >}}
+
+```shell
+cdc cli changefeed resume -c test-cf --pd=http://10.0.10.25:2379
+```
+
+If you want to skip this DDL statement that goes wrong, set the start-ts of the changefeed to the checkpoint-ts (the timestamp at which the DDL statement goes wrong) plus one. For example, if the checkpoint-ts at which the DDL statement goes wrong is `415241823337054209`, execute the following commands to skip this DDL statement:
+
+{{< copyable "shell-regular" >}}
+
+```shell
+cdc cli changefeed update -c test-cf --pd=http://10.0.10.25:2379 --start-ts 415241823337054210
+cdc cli changefeed resume -c test-cf --pd=http://10.0.10.25:2379
+```

@@ -26,6 +26,8 @@ The deployment machine has multiple CPU processors with sufficient memory. To im
 - [The simple template for the hybrid deployment](https://github.com/pingcap/docs-cn/blob/master/config-templates/simple-multi-instance.yaml)
 - [The complex template for the hybrid deployment](https://github.com/pingcap/docs/blob/master/config-templates/complex-multi-instance.yaml)
 
+For detailed descriptions of the configuration items in the above TiDB cluster topology file, see [Topology Configuration File for Deploying TiDB Using TiUP](/tiup/tiup-cluster-topology-reference.md).
+
 ### Key parameters
 
 This section introduces the key parameters when you deploy multiple instances on a single machine, which is mainly used in scenarios when multiple instances of TiDB and TiKV are deployed on a single machine. You need to fill in the results into the configuration template according to the calculation methods provided below.
@@ -69,7 +71,7 @@ This section introduces the key parameters when you deploy multiple instances on
 
 - The label scheduling configuration
 
-    Since multiple instances of TiKV are deployed on a single machine, if the physical machines go down, the Region Group might lose two of the default three replicas, which causes the cluster unavailability. To address this issue, you can use the label to enable the smart scheduling of PD, which ensures that the Region Group has more than two replicas in multiple TiKV instances on the same machine.
+    Since multiple instances of TiKV are deployed on a single machine, if the physical machines go down, the Raft Group might lose two of the default three replicas, which causes the cluster unavailability. To address this issue, you can use the label to enable the smart scheduling of PD, which ensures that the Raft Group has more than two replicas in multiple TiKV instances on the same machine.
 
     - The TiKV configuration
 

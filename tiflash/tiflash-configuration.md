@@ -24,9 +24,11 @@ You can adjust the PD scheduling parameters using [pd-ctl](/pd-control.md). Note
     >
     > Since v4.0.2, the `store-balance-rate` parameter has been deprecated and changes have been made to the `store limit` command. See [store-limit](/configure-store-limit.md) for details.
 
-    - Execute the `pd-ctl -u <pd_ip:pd_port> store limit <store_id> <value>` command to set the scheduling rate of a specified store. (To get `store_id`, you can execute the `pd-ctl -u <pd_ip:pd_port> store` command. 
+    - Execute the `pd-ctl -u <pd_ip:pd_port> store limit <store_id> <value>` command to set the scheduling rate of a specified store. (To get `store_id`, you can execute the `pd-ctl -u <pd_ip:pd_port> store` command.
     - If you do not set the scheduling rate for Regions of a specified store, this store inherits the setting of `store-balance-rate`.
     - You can execute the `pd-ctl -u <pd_ip:pd_port> store limit` command to view the current setting value of `store-balance-rate`.
+
+- [`replication.location-labels`](/pd-configuration-file.md#location-labels): indicates the topological relationship of TiKV instances. The order of the keys indicates the layering relationship of different labels. If TiFlash is enabled, you need to use [`pd-ctl config placement-rules`](/pd-control.md#config-show--set-option-value--placement-rules) to set the default value. For details, see [geo-distributed-deployment-topology](/geo-distributed-deployment-topology.md).
 
 ## TiFlash configuration parameters
 
@@ -65,7 +67,12 @@ delta_index_cache_size = 0
 
 ## Storage paths settings take effect starting from v4.0.9
 [storage]
-    ## [Experimental] Introduced in v5.0. Limits the total write rate of background tasks in bytes per second. By default 0, means no limit. It is not recommended to use this experimental feature in a production environment.
+    ## [Experimental] New in v5.0. This item limits the total write rate of background tasks in bytes per second. It is not recommended to use this experimental feature in a production environment.
+    ## The unit is bytes. Currently, the setting such as "10GB" is not supported.
+    ## The default value is 0, which means no limit.
+    ## This parameter is used to control the usage of machine disk bandwidth by background tasks mainly for the scenario where TiFlash is deployed on the AWS EBS (gp2/gp3) disk.
+    ## This parameter can be used to improve the stability of the TiFlash query performance. The recommended configuration in this scenario is 50% of the disk bandwidth.
+    ## It is not recommended to modify this configuration in other scenarios.
     bg_task_io_rate_limit = 0
 
     [storage.main]
@@ -112,6 +119,7 @@ delta_index_cache_size = 0
     data-dir = The data storage path of proxy.
     config = The proxy configuration file path.
     log-file = The proxy log path.
+    log-level = The proxy log level. "info" is used by default.
     status-addr = The listening address from which the proxy metrics | status information is pulled.
     advertise-status-addr = The external access address of status-addr. If it is left empty, status-addr is used by default.
 
@@ -136,22 +144,26 @@ delta_index_cache_size = 0
     ## of DeltaTree Storage Engine uses logical split.
     ## Using the logical split can reduce the write amplification, and improve the write speed.
     ## However, these are at the cost of disk space waste.
-    dt_enable_logical_split = true 
+    dt_enable_logical_split = true
 
     ## The memory usage limit for the generated intermediate data when a single
     ## coprocessor query is executed. The default value is 0, which means no limit.
-    max_memory_usage = 0 
+    max_memory_usage = 0
 
     ## The memory usage limit for the generated intermediate data when all queries
     ## are executed. The default value is 0 (in bytes), which means no limit.
     max_memory_usage_for_all_queries = 0
 
+    ## New in v5.0. This item specifies the maximum number of cop requests that TiFlash Coprocessor executes at the same time. If the number of requests exceeds the specified value, the exceeded requests will queue. If the configuration value is set to 0 or not set, the default value is used, which is twice the number of physical cores.
+    cop_pool_size = 0
+    ## New in v5.0. This item specifies the maximum number of batch requests that TiFlash Coprocessor executes at the same time. If the number of requests exceeds the specified value, the exceeded requests will queue. If the configuration value is set to 0 or not set, the default value is used, which is twice the number of physical cores.
+    batch_cop_pool_size = 0
+
 ## Security settings take effect starting from v4.0.5.
 [security]
-    ## This configuration item enables or disables log redaction. If the configuration value
+    ## New in v5.0. This configuration item enables or disables log redaction. If the configuration value
     ## is set to `true`, all user data in the log will be replaced by `?`.
-    ## Note that you also need to set `security.redact-info-log` for tiflash-learner's logging
-    ## in tiflash-learner.toml
+    ## Note that you also need to set `security.redact-info-log` for tiflash-learner's logging in tiflash-learner.toml.
     # redact_info_log = false
 
     ## Path of the file that contains a list of trusted SSL CAs. If set, the following settings
@@ -161,6 +173,11 @@ delta_index_cache_size = 0
     # cert_path = "/path/to/tiflash-server.pem"
     ## Path of the file that contains X509 key in PEM format.
     # key_path = "/path/to/tiflash-server-key.pem"
+
+    ## New in v5.0. This configuration item enables or disables log redaction. If the configuration value
+    ## is set to `true`, all user data in the log will be replaced by `?`.
+    ## Note that you also need to set `security.redact-info-log` for tiflash-learner's logging in tiflash-learner.toml.
+    # redact_info_log = false
 ```
 
 ### Configure the `tiflash-learner.toml` file
@@ -170,22 +187,27 @@ delta_index_cache_size = 0
     engine-addr = The external access address of the TiFlash coprocessor service.
 [raftstore]
     ## Specifies the number of threads that handle snapshots.
-    ## The default number is 2. 
+    ## The default number is 2.
     ## If you set it to 0, the multi-thread optimization is disabled.
-    snap-handle-pool-size = 2 
+    snap-handle-pool-size = 2
 
     ## Specifies the shortest interval at which Raft store persists WAL.
     ## You can properly increase the latency to reduce IOPS usage.
     ## The default value is "4ms".
     ## If you set it to 0ms, the optimization is disabled.
     store-batch-retry-recv-timeout = "4ms"
+[security]
+    ## New in v5.0. This configuration item enables or disables log redaction.
+    ## If the configuration value is set to true,
+    ## all user data in the log will be replaced by ?. The default value is false.
+    redact-info-log = false
 ```
 
 In addition to the items above, other parameters are the same with those of TiKV. Note that the configuration items in `tiflash.toml [flash.proxy]` will override the overlapping parameters in `tiflash-learner.toml`; The `label` whose key is `engine` is reserved and cannot be configured manually.
 
 ### Multi-disk deployment
 
-TiFlash supports multi-disk deployment. If there are multiple disks in your TiFlash node, you can make full use of those disks by configuring the parameters described in the following sections. For TiFlash's configuration template to be used for TiUP, see [The complex template for the TiFlash topology](https://github.com/pingcap/docs/blob/master/config-templates/complex-tiflash.yaml). 
+TiFlash supports multi-disk deployment. If there are multiple disks in your TiFlash node, you can make full use of those disks by configuring the parameters described in the following sections. For TiFlash's configuration template to be used for TiUP, see [The complex template for the TiFlash topology](https://github.com/pingcap/docs/blob/master/config-templates/complex-tiflash.yaml).
 
 #### Multi-disk deployment with TiDB version earlier than v4.0.9
 
