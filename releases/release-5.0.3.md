@@ -56,6 +56,11 @@ TiDB version: 5.0.3
     - Fix a nulleq bug [#24633](https://github.com/pingcap/tidb/pull/24633)
     - Executor: fix data race of parallel apply operator [#24345](https://github.com/pingcap/tidb/pull/24345)
     - Fix an issue that sorting on index-merge results in partition union reports 'index out of range'. [#24155](https://github.com/pingcap/tidb/pull/24155)
+    - Do not allow setting read timestamp to a future time. [#25761](https://github.com/pingcap/tidb/pull/25761)
+    - Fix the issue that ODBC-styled literal(like `{d '2020-01-01'}`...) cannot be used as the expression. [#25577](https://github.com/pingcap/tidb/pull/25577)
+    - Planner: select distinct should bypass batchget [#25533](https://github.com/pingcap/tidb/pull/25533)
+    - Store/tikv: change backoff type for missed tiflash peer. [#24600](https://github.com/pingcap/tidb/pull/24600)
+    - Fix index-out-of-range error when checking only_full_group_by [#24016](https://github.com/pingcap/tidb/pull/24016)
 
 + TiFlash
 
