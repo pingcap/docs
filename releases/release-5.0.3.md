@@ -22,6 +22,19 @@ TiDB version: 5.0.3
 + TiDB
 
     - Support planner pushing down the TopN operator to MPP. [#25162](https://github.com/pingcap/tidb/pull/25162)
+    - Enable the pushdown of builtin function `json_unquote()` to TiKV. [#25720](https://github.com/pingcap/tidb/pull/25720)
+    - Planner/core: remove the union branch with dual table. [#25614](https://github.com/pingcap/tidb/pull/25614)
+    - Support push down function replace to TiFlash. [#25565](https://github.com/pingcap/tidb/pull/25565)
+    - Support push fucntion unix_timestamp,concat,year,day,datediff,datesub,castTimeAsString,concat_ws down to TiFlash. [#25564](https://github.com/pingcap/tidb/pull/25564)
+    - Planner/core: change agg cost factor [#25241](https://github.com/pingcap/tidb/pull/25241)
+    - Planner/core: support limit push down [#25159](https://github.com/pingcap/tidb/pull/25159)
+    - Support pushing down the `str_to_date` functions to TiFlash [#25148](https://github.com/pingcap/tidb/pull/25148)
+    - Allow mpp outer join to choose the build table based on table row count [#25142](https://github.com/pingcap/tidb/pull/25142)
+    - Push down left/right/abs to tiflash [#25133](https://github.com/pingcap/tidb/pull/25133)
+    - Support push down broadcast cartesian join to TiFlash [#25106](https://github.com/pingcap/tidb/pull/25106)
+    - Planner/core: support union all for mpp. [#25051](https://github.com/pingcap/tidb/pull/25051)
+    - Balance region for batch cop task [#24724](https://github.com/pingcap/tidb/pull/24724)
+    - Store/copr: invalidate stale regions for Mpp query. [#24432](https://github.com/pingcap/tidb/pull/24432)
 
 + TiFlash
 
