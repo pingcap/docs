@@ -12,11 +12,6 @@ TiDB version: 5.0.3
 
 ## New Features
 
-+ TiFlash
-
-    - Support cast string as double push down [#2068](https://github.com/pingcap/tics/pull/2068)
-    - Support pushing down the `str_to_date` function to TiFlash [#2063](https://github.com/pingcap/tics/pull/2063)
-
 ## Improvements
 
 + TiDB
@@ -38,7 +33,13 @@ TiDB version: 5.0.3
 
 + TiFlash
 
-    - Use multi threads for not joined data in right outer join. [#2094](https://github.com/pingcap/tics/pull/2094)
+    - Support casting the `STRING`  type to `DOUBLE` type
+    - Support `STR_TO_DATE` function
+    - Optimize non-joined data in right outer join by multi-threads
+    - Support cartesian join
+    - Support `LEFT` and `RIGHT` function
+    - Invalidate stale regions for MPP queries
+    - Support `ABS` function
 
 ## Bug Fixes
 
@@ -64,19 +65,21 @@ TiDB version: 5.0.3
 
 + TiFlash
 
-    - Fix the issue that TiFlash nodes keep restart because of split failure. [#2219](https://github.com/pingcap/tics/pull/2219)
-    - Fix the bug that TiFlash can not GC delta data under rare case [#2185](https://github.com/pingcap/tics/pull/2185)
-    - Fix the bug that tiflash wrongly add padding for non-binary chars in cast function [#2092](https://github.com/pingcap/tics/pull/2092)
-    - Fix a bug that aggregation query with complex group by column may got wrong results. [#2072](https://github.com/pingcap/tics/pull/2072)
-    - Fix the bug that TiFlash may panic under heavy write pressure [#2055](https://github.com/pingcap/tics/pull/2055)
+    - Fix the issue that TiFlash keeps restarting because of split failure
+    - Fix the potential issue that TiFlash can not GC delta data
+    - Fix the bug that TiFlash adds wrong padding for non-binary chars in `CAST` function
+    - Fix the issue of incorrect results when handling aggregation queries with complex `GROUP BY` columns
+    - Fix the TiFlash panic issue that occurs under heavy write pressure
+    - Fix the panic that occurs when right join if the right jon key is not nullalbe and the left join key is nullable
+    - Fix the potential issue that read-index requests cost long time
 
 + Tools
 
     - BR
 
         * Fix parquet parse when parse decimal type [#1277](https://github.com/pingcap/br/pull/1277)
-        * Fix the bug that lightning returns EOF error when CSV file without '\r\n' at the last line and `strict-format = true`. [#1189](https://github.com/pingcap/br/pull/1189)
-        * Fix the bug that lightning rebase wrong auto_increment base when the auto_increment field type is float or double. [#1186](https://github.com/pingcap/br/pull/1186)
+        * Fix the bug that lightning returns EOF error when CSV file without '\r\n' at the last line and `strict-format = true` [#1189](https://github.com/pingcap/br/pull/1189)
+        * Fix the bug that lightning rebase wrong auto_increment base when the auto_increment field type is float or double [#1186](https://github.com/pingcap/br/pull/1186)
 
 ## 以下 note 未分类。请将以下 note 进行分类 (New feature, Improvements, Bug fixes, Compatibility Changes 四类)，并移动到上面对应的标题下。如果某条 note 为多余的，请删除。如果漏抓取了 note，请手动补充
 
@@ -96,15 +99,6 @@ TiDB version: 5.0.3
 + PD
 
     - release-note [#3798](https://github.com/pingcap/pd/pull/3798)
-
-+ TiFlash
-
-    - Fix segment fault for right join if the right jon key is not nullalbe and the left join key is nullable [#2201](https://github.com/pingcap/tics/pull/2201)
-    - Fix the potential issue that read-index requests cost long time [#2091](https://github.com/pingcap/tics/pull/2091)
-    - Support cartesian join in TiFlash [#2078](https://github.com/pingcap/tics/pull/2078)
-    - Push down Left/right to tiflash [#2076](https://github.com/pingcap/tics/pull/2076)
-    - Push down abs() to tiflash [#2075](https://github.com/pingcap/tics/pull/2075)
-    - Invalidate stale regions for Mpp query. [#1877](https://github.com/pingcap/tics/pull/1877)
 
 + Tools
 
