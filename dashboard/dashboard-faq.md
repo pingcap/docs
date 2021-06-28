@@ -65,10 +65,10 @@ If the `unknown field` error appears on the Slow Queries page after the cluster 
 
 1. Open Dashboard page
 
-1. Click **Customize and control Google Chrome** and then select **More Tools > Developer Tools**.
+2. Click **Customize and control Google Chrome** and then select **More Tools > Developer Tools**.
 
 ![Opening DevTools from Chrome's main menu](/media/dashboard/dashboard-faq-devtools.png)
 
-1. Select the **Application** panel, expand the **Local Storage** menu and select the **Dashboard page domain**, click the **Clear All** button.
+3. Select the **Application** panel, expand the **Local Storage** menu and select the **Dashboard page domain**, click the **Clear All** button.
 
 ![Clear the Local Storage](/media/dashboard/dashboard-faq-devtools-application.png)
