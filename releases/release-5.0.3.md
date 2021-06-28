@@ -1,14 +1,31 @@
 ---
-title: tidb v5.0.3 Release Notes
-category: Releases
-aliases: ['/docs/dev/releases/v5.0.3/']
+title: TiDB 5.0.3 Release Notes
 ---
 
-# tidb v5.0.3 Release Notes
+# TiDB 5.0.3 Release Notes
 
-Release date: June 28, 2021
+Release date: June 30, 2021
 
-TiDB version: v5.0.3
+TiDB version: 5.0.3
+
+## Compatibility Changes
+
+## New Features
+
++ TiFlash
+
+    - Support cast string as double push down [#2068](https://github.com/pingcap/tics/pull/2068)
+    - Support pushing down the `str_to_date` function to TiFlash [#2063](https://github.com/pingcap/tics/pull/2063)
+
+## Improvements
+
++ TiDB
+
+    - Planner: push down topN to mpp. [#25162](https://github.com/pingcap/tidb/pull/25162)
+
++ TiFlash
+
+    - Use multi threads for not joined data in right outer join. [#2094](https://github.com/pingcap/tics/pull/2094)
 
 ## Bug Fixes
 
@@ -43,24 +60,7 @@ TiDB version: v5.0.3
         * Fix the bug that lightning returns EOF error when CSV file without '\r\n' at the last line and `strict-format = true`. [#1189](https://github.com/pingcap/br/pull/1189)
         * Fix the bug that lightning rebase wrong auto_increment base when the auto_increment field type is float or double. [#1186](https://github.com/pingcap/br/pull/1186)
 
-## Improvements
-
-+ TiDB
-
-    - Planner: push down topN to mpp. [#25162](https://github.com/pingcap/tidb/pull/25162)
-
-+ TiFlash
-
-    - Use multi threads for not joined data in right outer join. [#2094](https://github.com/pingcap/tics/pull/2094)
-
-## New Features
-
-+ TiFlash
-
-    - Support cast string as double push down [#2068](https://github.com/pingcap/tics/pull/2068)
-    - Support pushing down the `str_to_date` function to TiFlash [#2063](https://github.com/pingcap/tics/pull/2063)
-
-## Others
+## 以下 note 未分类。请将以下 note 进行分类 (New feature, Improvements, Bug fixes, Compatibility Changes 四类)，并移动到上面对应的标题下。如果某条 note 为多余的，请删除。如果漏抓取了 note，请手动补充
 
 + TiDB
 
@@ -85,21 +85,20 @@ TiDB version: v5.0.3
 
 + TiKV
 
-    - ```release-note [#10434](https://github.com/tikv/tikv/pull/10434)
-    - ```release-note [#10431](https://github.com/tikv/tikv/pull/10431)
+    - release-note [#10431](https://github.com/tikv/tikv/pull/10431)
     - Copr: fix the wrong arguments type of json_unquote [#10424](https://github.com/tikv/tikv/pull/10424)
     - Fix the issue that br reports file already exists error when TDE enabled during restoration. [#10421](https://github.com/tikv/tikv/pull/10421)
     - This bug does not affects existing releases. [#10417](https://github.com/tikv/tikv/pull/10417)
-    - ```release-note [#10401](https://github.com/tikv/tikv/pull/10401)
-    - ```release-note [#10396](https://github.com/tikv/tikv/pull/10396)
+    - release-note [#10401](https://github.com/tikv/tikv/pull/10401)
+    - release-note [#10396](https://github.com/tikv/tikv/pull/10396)
     - Fix a bug that share read index for replica reads on a leader [#10391](https://github.com/tikv/tikv/pull/10391)
-    - ```release-note [#10388](https://github.com/tikv/tikv/pull/10388)
-    - ```release-note [#10313](https://github.com/tikv/tikv/pull/10313)
+    - release-note [#10388](https://github.com/tikv/tikv/pull/10388)
+    - release-note [#10313](https://github.com/tikv/tikv/pull/10313)
     - Limit CDC sink memory consumption. [#10305](https://github.com/tikv/tikv/pull/10305)
 
 + PD
 
-    - ```release-note [#3798](https://github.com/pingcap/pd/pull/3798)
+    - release-note [#3798](https://github.com/pingcap/pd/pull/3798)
 
 + TiFlash
 
