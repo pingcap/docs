@@ -21,7 +21,7 @@ TiDB version: 5.0.3
 
 + TiDB
 
-    - Planner: push down topN to mpp. [#25162](https://github.com/pingcap/tidb/pull/25162)
+    - Support planner pushing down the TopN operator to MPP. [#25162](https://github.com/pingcap/tidb/pull/25162)
 
 + TiFlash
 
@@ -31,8 +31,8 @@ TiDB version: 5.0.3
 
 + TiDB
 
-    - Fix incorrect result of set type for merge join [#25694](https://github.com/pingcap/tidb/pull/25694)
-    - Expression: fix IN expr critical bug [#25666](https://github.com/pingcap/tidb/pull/25666)
+    - Fix the issue that an incorrect result is returned when using merge join on the `SET` types. [#25694](https://github.com/pingcap/tidb/pull/25694)
+    - Fix the `IN` expression arguments corruption issue. [#25666](https://github.com/pingcap/tidb/pull/25666)
     - Avoid sessions of GC being affected by global variables [#25609](https://github.com/pingcap/tidb/pull/25609)
     - Make sure limit outputs no more columns than its child [#25517](https://github.com/pingcap/tidb/pull/25517)
     - Planner: fix a panic caused by sinking a Limit with inlined Proj into IndexLookUp when accessing a partition table [#25139](https://github.com/pingcap/tidb/pull/25139)
