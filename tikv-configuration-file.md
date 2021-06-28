@@ -798,21 +798,33 @@ Configuration items related to Titan
 + Default value: `1`
 + Minimum value: `1`
 
-## rocksdb.defaultcf
+## rocksdb.defaultcf | rocksdb.writecf | rocksdb.lockcf
 
-Configuration items related to `rocksdb.defaultcf`
+Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rocksdb.lockcf`.
 
 ### `block-size`
 
 + The default size of a RocksDB block
+<<<<<<< HEAD
 + Default value: `64KB`
 + Minimum value: `1KB`
+=======
++ Default value for `defaultcf` and `writecf`: `"64KB"`
++ Default value for `lockcf`: `"16KB"`
++ Minimum value: `"1KB"`
+>>>>>>> b6cde3dd8 (Overhauling TiKV RocksDB configuration file (#5746))
 + Unit: KB|MB|GB
 
 ### `block-cache-size`
 
 + The cache size of a RocksDB block
+<<<<<<< HEAD
 + Default value: `Total machine memory / 4`
+=======
++ Default value for `defaultcf`: `Total machine memory * 25%`
++ Default value for `writecf`: `Total machine memory * 15%`
++ Default value for `lockcf`: `Total machine memory * 2%`
+>>>>>>> b6cde3dd8 (Overhauling TiKV RocksDB configuration file (#5746))
 + Minimum value: `0`
 + Unit: KB|MB|GB
 
@@ -839,12 +851,14 @@ Configuration items related to `rocksdb.defaultcf`
 ### `optimize-filters-for-hits`
 
 + Determines whether to optimize the hit ratio of filters
-+ Default value: `true`
++ Default value for `defaultcf`: `true`
++ Default value for `writecf` and `lockcf`: `false`
 
-### `whole_key_filtering`
+### `whole-key-filtering`
 
 + Determines whether to put the entire key to bloom filter
-+ Default value: `true`
++ Default value for `defaultcf`: `true`
++ Default value for `writecf` and `lockcf`: `false`
 
 ### `bloom-filter-bits-per-key`
 
@@ -873,7 +887,12 @@ Configuration items related to `rocksdb.defaultcf`
 ### `write-buffer-size`
 
 + Memtable size
+<<<<<<< HEAD
 + Default value: `128MB`
+=======
++ Default value for `defaultcf` and `writecf`: `"128MB"`
++ Default value for `lockcf`: `"32MB"`
+>>>>>>> b6cde3dd8 (Overhauling TiKV RocksDB configuration file (#5746))
 + Minimum value: `0`
 + Unit: KB|MB|GB
 
@@ -892,7 +911,12 @@ Configuration items related to `rocksdb.defaultcf`
 ### `max-bytes-for-level-base`
 
 + The maximum number of bytes at base level (L1). Generally, it is set to 4 times the size of a memtable.
+<<<<<<< HEAD
 + Default value: `512MB`
+=======
++ Default value for `defaultcf` and `writecf`: `"512MB"`
++ Default value for `lockcf`: `"128MB"`
+>>>>>>> b6cde3dd8 (Overhauling TiKV RocksDB configuration file (#5746))
 + Minimum value: `0`
 + Unit: KB|MB|GB
 
@@ -906,7 +930,8 @@ Configuration items related to `rocksdb.defaultcf`
 ### `level0-file-num-compaction-trigger`
 
 + The maximum number of files at L0 that trigger compaction
-+ Default value: `4`
++ Default value for `defaultcf` and `writecf`: `4`
++ Default value for `lockcf`: `1`
 + Minimum value: `0`
 
 ### `level0-slowdown-writes-trigger`
@@ -931,8 +956,14 @@ Configuration items related to `rocksdb.defaultcf`
 ### `compaction-pri`
 
 + The priority type of compaction
+<<<<<<< HEAD
 + Available values: `3` (`MinOverlappingRatio`), `0` (`ByCompensatedSize`), `1` (`OldestLargestSeqFirst`), `2` (`OldestSmallestSeqFirst`)
 + Default value: `3`
+=======
++ Optional values: `0` (`ByCompensatedSize`), `1` (`OldestLargestSeqFirst`), `2` (`OldestSmallestSeqFirst`), `3` (`MinOverlappingRatio`)
++ Default value for `defaultcf` and `writecf`: `3`
++ Default value for `lockcf`: `1`
+>>>>>>> b6cde3dd8 (Overhauling TiKV RocksDB configuration file (#5746))
 
 ### `dynamic-level-bytes`
 
@@ -949,7 +980,7 @@ Configuration items related to `rocksdb.defaultcf`
 + The default amplification multiple for each layer
 + Default value: `10`
 
-### `rocksdb.defaultcf.compaction-style`
+### `compaction-style`
 
 + Compaction method
 + Available values: `level`, `universal`
@@ -969,12 +1000,34 @@ Configuration items related to `rocksdb.defaultcf`
 ### `hard-pending-compaction-bytes-limit`
 
 + The hard limit on the pending compaction bytes
+<<<<<<< HEAD
 + Default value: `256GB`
+=======
++ Default value: `"256GB"`
 + Unit: KB|MB|GB
 
-## `rocksdb.defaultcf.titan`
+### `enable-compaction-guard`
 
-Configuration items related to `rocksdb.defaultcf.titan`
++ Enables or disables the compaction guard, which is an optimization to split SST files at TiKV Region boundaries. This optimization can help reduce compaction I/O and allows TiKV to use larger SST file size (thus less SST files overall) and at the time efficiently clean up stale data when migrating Regions.
++ Default value for `defaultcf` and `writecf`: `true`
++ Default value for `lockcf`: `false`
+
+### `compaction-guard-min-output-file-size`
+
++ The minimum SST file size when the compaction guard is enabled. This configuration prevents SST files from being too small when the compaction guard is enabled.
++ Default value: `"8MB"`
++ Unit: KB|MB|GB
+
+### `compaction-guard-max-output-file-size`
+
++ The maximum SST file size when the compaction guard is enabled. The configuration prevents SST files from being too large when the compaction guard is enabled. This configuration overrides `target-file-size-base` for the same column family.
++ Default value: `"128MB"`
+>>>>>>> b6cde3dd8 (Overhauling TiKV RocksDB configuration file (#5746))
++ Unit: KB|MB|GB
+
+## rocksdb.defaultcf.titan | rocksdb.writecf.titan | rocksdb.lockcf.titan
+
+Configuration items related to `rocksdb.defaultcf.titan`, `rocksdb.writecf.titan`, and `rocksdb.lockcf.titan`.
 
 ### `min-blob-size`
 
@@ -1031,6 +1084,7 @@ Configuration items related to `rocksdb.defaultcf.titan`
 + Minimum value: `0`
 + Unit: KB|MB|GB
 
+<<<<<<< HEAD
 ## rocksdb.writecf
 
 Configuration items related to `rocksdb.writecf`
@@ -1071,6 +1125,27 @@ Configuration items related to `rocksdb.lockcf`
 + The number of files at L0 required to trigger compaction
 + Default value: `1`
 
+=======
+### `blob-run-mode`
+
++ Specifies the running mode of Titan.
++ Optional values:
+    + `normal`: Writes data to the blob file when the value size exceeds `min-blob-size`.
+    + `read_only`: Refuses to write new data to the blob file, but still reads the original data from the blob file.
+    + `fallback`: Writes data in the blob file back to LSM.
++ Default value: `normal`
+
+### `level-merge`
+
++ Determines whether to optimize the read performance. When `level-merge` is enabled, there is more write amplification.
++ Default value: `false`
+
+### `gc-merge-rewrite`
+
++ Determines whether to use the merge operator to write back blob indexes for Titan GC. When `gc-merge-rewrite` is enabled, it reduces the effect of Titan GC on the writes in the foreground.
++ Default value: `false`
+
+>>>>>>> b6cde3dd8 (Overhauling TiKV RocksDB configuration file (#5746))
 ## `raftdb`
 
 Configuration items related to `raftdb`
