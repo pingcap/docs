@@ -78,7 +78,7 @@ TiDB version: 5.0.3
     - Fix the issue that more results than expected are returned when executing SQL statements using multi-column prefix indexes [#24635](https://github.com/pingcap/tidb/pull/24635)
     - Fix the issue that the `<=>` operator cannot correctly take effect [#24633](https://github.com/pingcap/tidb/pull/24633)
     - Fix the data race issue of the parallel `Apply` operator [#24345](https://github.com/pingcap/tidb/pull/24345)
-    ?- Fix the issue that the sorting on `IndexMerge` results in the partition union reports the `index out of range` error [#24155](https://github.com/pingcap/tidb/pull/24155)
+    - Fix the issue that the `index out of range` error is reported when sorting the IndexMerge results of the PartitionUnion operator [#24155](https://github.com/pingcap/tidb/pull/24155)
     - Do not allow setting a read timestamp to a future time [#25761](https://github.com/pingcap/tidb/pull/25761)
     - Fix the issue that the ODBC-styled constant (for example, `{d '2020-01-01'}`) cannot be used as the expression [#25577](https://github.com/pingcap/tidb/pull/25577)
     - Fix the issue that `SELECT DISTINCT` converted to `Batch Get` causes incorrect results [#25533](https://github.com/pingcap/tidb/pull/25533)
@@ -97,7 +97,7 @@ TiDB version: 5.0.3
 + TiFlash
 
     - Fix the issue that TiFlash keeps restarting because of the split failure
-    ?- Fix the potential issue that TiFlash cannot GC delta data
+    - Fix the potential issue that TiFlash cannot delete the delta data
     - Fix a bug that TiFlash adds wrong padding for non-binary characters in the `CAST` function
     - Fix the issue of incorrect results when handling aggregation queries with complex `GROUP BY` columns
     - Fix the TiFlash panic issue that occurs under heavy write pressure
