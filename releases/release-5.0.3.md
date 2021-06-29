@@ -31,6 +31,11 @@ TiDB version: 5.0.3
     - Balance region for batch cop task [#24724](https://github.com/pingcap/tidb/pull/24724)
     - Store/copr: invalidate stale regions for Mpp query. [#24432](https://github.com/pingcap/tidb/pull/24432)
 
++ TiKV
+
+    - CDC: limit CDC sink memory consumption [#10305](https://github.com/tikv/tikv/pull/10305)
+    - CDC: change old value cache to memory-bounded [#10313](https://github.com/tikv/tikv/pull/10313)
+
 + TiFlash
 
     - Support casting the `STRING`  type to `DOUBLE` type
@@ -63,6 +68,15 @@ TiDB version: 5.0.3
     - Store/tikv: change backoff type for missed tiflash peer. [#24600](https://github.com/pingcap/tidb/pull/24600)
     - Fix index-out-of-range error when checking only_full_group_by [#24016](https://github.com/pingcap/tidb/pull/24016)
 
++ TiKV
+
+    - Fix wrong tikv_raftstore_hibernated_peer_state metric [#10431](https://github.com/tikv/tikv/pull/10431)
+    - Copr: fix the wrong arguments type of json_unquote [#10424](https://github.com/tikv/tikv/pull/10424)
+    - Fix the issue that br reports file already exists error when TDE enabled during restoration [#10421](https://github.com/tikv/tikv/pull/10421)
+    - Skip clearing callback during graceful shutdown to avoid breaking ACID in some cases [#10396](https://github.com/tikv/tikv/pull/10396)
+    - Fix the bug that share read index for replica reads on a leader [#10391](https://github.com/tikv/tikv/pull/10391)
+    - Copr: fix wrong function cast double to double [#10388](https://github.com/tikv/tikv/pull/10388)
+
 + TiFlash
 
     - Fix the issue that TiFlash keeps restarting because of split failure
@@ -82,19 +96,6 @@ TiDB version: 5.0.3
         * Fix the bug that lightning rebase wrong auto_increment base when the auto_increment field type is float or double [#1186](https://github.com/pingcap/br/pull/1186)
 
 ## 以下 note 未分类。请将以下 note 进行分类 (New feature, Improvements, Bug fixes, Compatibility Changes 四类)，并移动到上面对应的标题下。如果某条 note 为多余的，请删除。如果漏抓取了 note，请手动补充
-
-+ TiKV
-
-    - release-note [#10431](https://github.com/tikv/tikv/pull/10431)
-    - Copr: fix the wrong arguments type of json_unquote [#10424](https://github.com/tikv/tikv/pull/10424)
-    - Fix the issue that br reports file already exists error when TDE enabled during restoration. [#10421](https://github.com/tikv/tikv/pull/10421)
-    - This bug does not affects existing releases. [#10417](https://github.com/tikv/tikv/pull/10417)
-    - release-note [#10401](https://github.com/tikv/tikv/pull/10401)
-    - release-note [#10396](https://github.com/tikv/tikv/pull/10396)
-    - Fix a bug that share read index for replica reads on a leader [#10391](https://github.com/tikv/tikv/pull/10391)
-    - release-note [#10388](https://github.com/tikv/tikv/pull/10388)
-    - release-note [#10313](https://github.com/tikv/tikv/pull/10313)
-    - Limit CDC sink memory consumption. [#10305](https://github.com/tikv/tikv/pull/10305)
 
 + PD
 
