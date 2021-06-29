@@ -8,9 +8,15 @@ Release date: June 30, 2021
 
 TiDB version: 5.0.3
 
-## Compatibility Changes
-
 ## New Features
+
++ Tools
+
+    + TiCDC
+
+        - Add an HTTP API to get the changefeed information and the health information of the node [#1955](https://github.com/pingcap/ticdc/pull/1955)
+        - Add the SASL/SCRAM support for the kafka sink [#1942](https://github.com/pingcap/ticdc/pull/1942)
+        - Makes TiCDC support `--data-dir` at the server level [#2070](https://github.com/pingcap/ticdc/pull/2070)
 
 ## Improvements
 
@@ -36,6 +42,10 @@ TiDB version: 5.0.3
     - Limit the TiCDC sink's memory consumption [#10305](https://github.com/tikv/tikv/pull/10305)
     - Add the memory-bounded upper limit for the TiCDC old value cache [#10313](https://github.com/tikv/tikv/pull/10313)
 
++ PD
+
+    - Update TiDB Dashboard to v2021.06.15.1 [#3798](https://github.com/pingcap/pd/pull/3798)
+
 + TiFlash
 
     - Support casting the `STRING` type to the `DOUBLE` type
@@ -45,6 +55,13 @@ TiDB version: 5.0.3
     - Support the `LEFT()` and `RIGHT()` functions
     - Support automatically invalidating stale Regions in MPP queries
     - Support the `ABS()` function
+
++ Tools
+
+    + TiCDC
+
+        - Refine gRPC's reconnection logic and increase the KV client's throughput [#1922](https://github.com/pingcap/ticdc/pull/1922)
+        - Make the sorter I/O errors more user-friendly [#1977](https://github.com/pingcap/ticdc/pull/1977)
 
 ## Bug Fixes
 
@@ -89,27 +106,22 @@ TiDB version: 5.0.3
 
 + Tools
 
-    - BR
+    + TiCDC
 
-        * Fix parquet parse when parse decimal type [#1277](https://github.com/pingcap/br/pull/1277)
-        * Fix the bug that lightning returns EOF error when CSV file without '\r\n' at the last line and `strict-format = true` [#1189](https://github.com/pingcap/br/pull/1189)
-        * Fix the bug that lightning rebase wrong auto_increment base when the auto_increment field type is float or double [#1186](https://github.com/pingcap/br/pull/1186)
+        - Fix the issue that TiCDC owner exits when refreshing the checkpoint [#2031](https://github.com/pingcap/ticdc/pull/2031)
+        - Fix a bug that some MySQL connection might leak after MySQL sink meets the error and pauses [#1946](https://github.com/pingcap/ticdc/pull/1946)
+        - Fix the panic issue that occurs when TiCDC fails to read `/proc/meminfo` [#2024](https://github.com/pingcap/ticdc/pull/2024)
+        - Reduce TiCDC's runtime memory consumption [#2012](https://github.com/pingcap/ticdc/pull/2012), [#1958](https://github.com/pingcap/ticdc/pull/1958)
+        - Fix a bug that might cause TiCDC server panic due to the late calculation of resolved ts [#2047](https://github.com/pingcap/ticdc/pull/2047)
+        - Fix the potential deadlock issue for the processor [#2142](https://github.com/pingcap/ticdc/pull/2142)
 
-## 以下 note 未分类。请将以下 note 进行分类 (New feature, Improvements, Bug fixes, Compatibility Changes 四类)，并移动到上面对应的标题下。如果某条 note 为多余的，请删除。如果漏抓取了 note，请手动补充
+    + Backup & Restore (BR)
 
-+ PD
+        - Fix a bug that all system tables are filtered during restore [#1224](https://github.com/pingcap/br/pull/1224)
 
-    - release-note [#3798](https://github.com/pingcap/pd/pull/3798)
+    + TiDB Lightning
 
-+ Tools
-
-    - TiCDC
-
-        * Fix potential deadlocks [#2142](https://github.com/pingcap/ticdc/pull/2142)
-        * Fix a bug that could cause cdc server panic because of the late calculation of resolved ts [#2047](https://github.com/pingcap/ticdc/pull/2047)
-        * Fix panic when TiCDC fails to read `/proc/meminfo` [#2024](https://github.com/pingcap/ticdc/pull/2024)
-        * Reduce unnecessary memory consumption [#2012](https://github.com/pingcap/ticdc/pull/2012)
-        * Make sorter IO errors more user-friendly. [#1977](https://github.com/pingcap/ticdc/pull/1977)
-        * Fix Unified Sorter memory consumption when tables are many. [#1958](https://github.com/pingcap/ticdc/pull/1958)
-        * Decrease the default gRPC connection pool size to decrease goroutines count. [#1951](https://github.com/pingcap/ticdc/pull/1951)
-        * Fix a bug that some MySQL connection could leak after MySQL sink meets error and pauses. [#1946](https://github.com/pingcap/ticdc/pull/1946)
+        - Fix the TiDB Lightning panic issue for some special data [#1268](https://github.com/pingcap/br/pull/1268)
+        - Fix the EOF error reported when TiDB Lightning splits the imported large CSV files [#1189](https://github.com/pingcap/br/pull/1189)
+        ?- Fix a bug that TiDB Lightning rebase wrong `auto_increment` base when the `auto_increment` field type is `FLOAT` or `DOUBLE` [#1186](https://github.com/pingcap/br/pull/1186)
+        - Fix the issue that TiDB fails to parse the `DECIMAL` type data in Parquet files [#1277](https://github.com/pingcap/br/pull/1277)
