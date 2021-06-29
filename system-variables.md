@@ -111,7 +111,7 @@ mysql> SELECT * FROM t1;
 
 - Scope: SESSION | GLOBAL
 - Default value: `utf8mb4`
-- The collation used for new schemas in case none is provided by the `CREATE SCHEMA` statement.
+- The character set used for new schemas in case none is provided by the `CREATE SCHEMA` statement.
 
 ### `cte_max_recursion_depth`
 
