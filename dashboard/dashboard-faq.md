@@ -62,9 +62,15 @@ The possible reason is that you have enabled the `prepared-plan-cache` feature o
 
 If the `unknown field` error appears on the Slow Queries page after the cluster upgrade, that is a compatibility issue caused by the difference between TiDB Dashboard server fields (which may be updated) and user preferences fields (which are in the browser cache). This issue has been fixed in v4.0.14/v5.0.3 and later, older versions can be resolved by clearing the browser Local Storage.
 
-1. Open TiDB Dashboard page
+1. Open TiDB Dashboard page.
 
-2. Click **Customize and control Google Chrome** and then select **More Tools > Developer Tools**.
+2. Open Developer Tools, click the **Menu Bar** and
+  - Firefox: Menu ➤ Web Developer ➤ Toggle Tools, or Tools ➤ Web Developer ➤ Toggle Tools
+  - Chrome: More tools ➤ Developer tools
+  - Safari: Develop ➤ Show Web Inspector. If you can't see the Develop menu, go to Safari ➤ Preferences ➤ Advanced, and check the Show Develop menu in menu bar checkbox. 
+  - Opera: Developer ➤ Developer tools
+
+Example in chrome
 
 ![Opening DevTools from Chrome's main menu](/media/dashboard/dashboard-faq-devtools.png)
 
