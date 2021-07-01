@@ -4,7 +4,7 @@ title: TiDB 5.0.3 Release Notes
 
 # TiDB 5.0.3 Release Notes
 
-Release date: June 30, 2021
+Release date: July 2, 2021
 
 TiDB version: 5.0.3
 
