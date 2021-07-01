@@ -26,7 +26,7 @@ TiDB version: 5.0.3
     - Support pushing down the built-in function `json_unquote()` to TiKV [#25720](https://github.com/pingcap/tidb/pull/25720)
     - Support removing the union branch from the dual table [#25614](https://github.com/pingcap/tidb/pull/25614)
     - Support pushing down the built-in function `replace()` to TiFlash [#25565](https://github.com/pingcap/tidb/pull/25565)
-    - Support pushing down the built-in functions `unix_timestamp()`, `concat()`, `year()`, `day()`, `datediff()`, `datesub()`, `castTimeAsString()`, and `concat_ws()` to TiFlash [#25564](https://github.com/pingcap/tidb/pull/25564)
+    - Support pushing down the built-in functions `unix_timestamp()`, `concat()`, `year()`, `day()`, `datediff()`, `datesub()`, and `concat_ws()` to TiFlash [#25564](https://github.com/pingcap/tidb/pull/25564)
     - Optimize the aggregate operator's cost factor [#25241](https://github.com/pingcap/tidb/pull/25241)
     - Support pushing down the `Limit` operator to TiFlash [#25159](https://github.com/pingcap/tidb/pull/25159)
     - Support pushing down the built-in function `str_to_date` to TiFlash [#25148](https://github.com/pingcap/tidb/pull/25148)
