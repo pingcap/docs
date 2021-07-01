@@ -8,7 +8,7 @@ Release date: July 2, 2021
 
 TiDB version: 5.0.3
 
-## New Features
+## Feature Enhancements
 
 + Tools
 
@@ -61,8 +61,8 @@ TiDB version: 5.0.3
 
     + TiCDC
 
-        - Refine gRPC's reconnection logic and increase the KV client's throughput [#1922](https://github.com/pingcap/ticdc/pull/1922)
-        - Make the sorter I/O errors more user-friendly [#1977](https://github.com/pingcap/ticdc/pull/1977)
+        - Refine gRPC's reconnection logic and increase the KV client's throughput [#1586](https://github.com/pingcap/ticdc/issues/1586) [#1501](https://github.com/pingcap/ticdc/issues/1501#issuecomment-820027078) [#1682](https://github.com/pingcap/ticdc/pull/1682) [#1393](https://github.com/pingcap/ticdc/issues/1393) [#184s7](https://github.com/pingcap/ticdc/pull/1847) [#1905](https://github.com/pingcap/ticdc/issues/1905) [#1904](https://github.com/pingcap/ticdc/issues/1904)
+        - Make the sorter I/O errors more user-friendly
 
 ## Bug Fixes
 
@@ -80,10 +80,10 @@ TiDB version: 5.0.3
     - Fix the issue that the `<=>` operator cannot correctly take effect [#24477](https://github.com/pingcap/tidb/issues/24477)
     - Fix the data race issue of the parallel `Apply` operator [#23280](https://github.com/pingcap/tidb/issues/23280)
     - Fix the issue that the `index out of range` error is reported when sorting the IndexMerge results of the PartitionUnion operator [#23919](https://github.com/pingcap/tidb/issues/23919)
-    - Do not allow setting a read timestamp to a future time [#25761](https://github.com/pingcap/tidb/pull/25761)
+    - Fix the issue that setting the `tidb_snapshot` variable to an unexpectedly large value might damage the transaction isolation [25680](https://github.com/pingcap/tidb/issues/25680)
     - Fix the issue that the ODBC-styled constant (for example, `{d '2020-01-01'}`) cannot be used as the expression [#25531](https://github.com/pingcap/tidb/issues/25531)
     - Fix the issue that `SELECT DISTINCT` converted to `Batch Get` causes incorrect results [#25320](https://github.com/pingcap/tidb/issues/25320)
-    - Fix the issue that backing off queries from TiFlash to TiKV cannot be triggered [#24600](https://github.com/pingcap/tidb/pull/24600)
+    - Fix the issue that backing off queries from TiFlash to TiKV cannot be triggered [#23665](https://github.com/pingcap/tidb/issues/23665) [#24421](https://github.com/pingcap/tidb/issues/24421)
     - Fix the `index-out-of-range` error that occurs when checking `only_full_group_by` [#23839](https://github.com/pingcap/tidb/issues/23839))
     - Fix the issue that queries with `TABLESAMPLE` on an empty table returns unexpected rows [#25257](https://github.com/pingcap/tidb/issues/25257)
     - Fix the issue that the result of index join in correlated subqueries is wrong [#25799](https://github.com/pingcap/tidb/issues/25799)
@@ -92,7 +92,6 @@ TiDB version: 5.0.3
 
     - Fix the wrong `tikv_raftstore_hibernated_peer_state` metric [#10330](https://github.com/tikv/tikv/issues/10330)
     - Fix the wrong arguments type of the `json_unquote()` function in the coprocessor [#10176](https://github.com/tikv/tikv/issues/10176)
-    - Fix the issue that Backup & Restore reports the error of "file already exists" when TDE is enabled during the restore [#1179](https://github.com/pingcap/br/issues/1179)
     - Skip clearing callback during graceful shutdown to avoid breaking ACID in some cases [#10353](https://github.com/tikv/tikv/issues/10353) [#10307](https://github.com/tikv/tikv/issues/10307)
     - Fix a bug that the read index is shared for replica reads on a Leader [#10347](https://github.com/tikv/tikv/issues/10347)
     - Fix the wrong function that casts `DOUBLE` to `DOUBLE` [#25200](https://github.com/pingcap/tidb/issues/25200)
@@ -113,6 +112,7 @@ TiDB version: 5.0.3
     - Fix the panic that occurs when the right jon key is not nullalbe and the left join key is nullable
     - Fix the potential issue that the `read-index` requests take a long time
     - Fix the panic issue that occurs when the read load is heavy
+    - Fix the panic issue that might occur when the `Date_Format` function is called with the `STRING` type argument and `NULL` values
 
 + Tools
 
@@ -128,6 +128,7 @@ TiDB version: 5.0.3
     + Backup & Restore (BR)
 
         - Fix a bug that all system tables are filtered during restore [#1197](https://github.com/pingcap/br/issues/1197) [#1201](https://github.com/pingcap/br/issues/1201)
+        - Fix the issue that Backup & Restore reports the error of "file already exists" when TDE is enabled during the restore [#1179](https://github.com/pingcap/br/issues/1179)
 
     + TiDB Lightning
 
