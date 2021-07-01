@@ -100,7 +100,7 @@ mysql> SELECT * FROM t1;
 
 - Scope: SESSION | GLOBAL
 - Default value: `utf8mb4`
-- This indicates the character set of the default database that is in use. Setting this variable is not recommended. The server changes this varible when a new default database is selected.
+- This variable indicates the character set of the default database in use. **It is NOT recommended to set this variable**. When a new default database is selected, the server changes the variable value.
 
 ### character_set_results
 
