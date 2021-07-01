@@ -24,6 +24,8 @@ Currently, we maintain the following versions of TiDB documentation in different
 | Branch name | TiDB docs version |
 | :---------|:----------|
 | [`master`](https://github.com/pingcap/docs/tree/master) | The latest development version |
+| [`release-5.1`](https://github.com/pingcap/docs/tree/release-5.1) | 5.1 version |
+| [`release-5.0`](https://github.com/pingcap/docs/tree/release-5.0) | 5.0 stable version |
 | [`release-4.0`](https://github.com/pingcap/docs/tree/release-4.0) | 4.0 stable version |
 | [`release-3.1`](https://github.com/pingcap/docs/tree/release-3.1) | 3.1 stable version |
 | [`release-3.0`](https://github.com/pingcap/docs/tree/release-3.0) | 3.0 stable version |
@@ -31,6 +33,6 @@ Currently, we maintain the following versions of TiDB documentation in different
 
 ## Contributing
 
-[<img src="media/contribution-map.png" alt="contribution-map" width="180">](https://github.com/pingcap/community/tree/master/special-interest-groups/sig-docs)
+[<img src="media/contribution-map.png" alt="contribution-map" width="180" />](https://github.com/pingcap/community/tree/master/special-interest-groups/sig-docs)
 
 See [TiDB Documentation Contributing Guide](/CONTRIBUTING.md) to become a contributor! 🤓
