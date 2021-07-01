@@ -27,7 +27,7 @@ TiDB version: 5.0.3
     - Support removing the union branch from the dual table [#25614](https://github.com/pingcap/tidb/pull/25614)
     - Support pushing down the built-in function `replace()` to TiFlash [#25565](https://github.com/pingcap/tidb/pull/25565)
     - Support pushing down the built-in functions `unix_timestamp()`, `concat()`, `year()`, `day()`, `datediff()`, `datesub()`, `castTimeAsString()`, and `concat_ws()` to TiFlash [#25564](https://github.com/pingcap/tidb/pull/25564)
-    - Change the aggregate operator's cost factor [#25241](https://github.com/pingcap/tidb/pull/25241)
+    - Optimize the aggregate operator's cost factor [#25241](https://github.com/pingcap/tidb/pull/25241)
     - Support pushing down the `Limit` operator to TiFlash [#25159](https://github.com/pingcap/tidb/pull/25159)
     - Support pushing down the built-in function `str_to_date` to TiFlash [#25148](https://github.com/pingcap/tidb/pull/25148)
     - Allow the MPP outer join to choose the build table based on the table row count [#25142](https://github.com/pingcap/tidb/pull/25142)
@@ -36,6 +36,7 @@ TiDB version: 5.0.3
     - Support pushing down the `Union All` operator to TiFlash [#25051](https://github.com/pingcap/tidb/pull/25051)
     - Support balancing the MPP query workload among different TiFlash nodes based on Regions [#24724](https://github.com/pingcap/tidb/pull/24724)
     - Support invalidating stale Regions in the cache after the MPP query is executed [#24432](https://github.com/pingcap/tidb/pull/24432)
+    - Improve the MySQL compatibility of the built-in function `str_to_date` for the format specifiers `%b/%M/%r/%T` [#25767](https://github.com/pingcap/tidb/pull/25767)
 
 + TiKV
 
@@ -84,6 +85,8 @@ TiDB version: 5.0.3
     - Fix the issue that `SELECT DISTINCT` converted to `Batch Get` causes incorrect results [#25533](https://github.com/pingcap/tidb/pull/25533)
     - Fix the issue that backing off queries from TiFlash to TiKV cannot be triggered [#24600](https://github.com/pingcap/tidb/pull/24600)
     - Fix the `index-out-of-range` error that occurs when checking `only_full_group_by` [#24016](https://github.com/pingcap/tidb/pull/24016)
+    - Fix the issue that queries with `TABLESAMPLE` on an empty table returns unexpected rows [#25795](https://github.com/pingcap/tidb/pull/25795)
+    - Fix the issue that the result of index join in correlated subqueries is wrong [#25818](https://github.com/pingcap/tidb/pull/25818)
 
 + TiKV
 
@@ -103,6 +106,7 @@ TiDB version: 5.0.3
     - Fix the TiFlash panic issue that occurs under heavy write pressure
     - Fix the panic that occurs when the right jon key is not nullalbe and the left join key is nullable
     - Fix the potential issue that the `read-index` requests take a long time
+    - Fix the panic issue that occurs when the read load is heavy
 
 + Tools
 
@@ -123,5 +127,5 @@ TiDB version: 5.0.3
 
         - Fix the TiDB Lightning panic issue for some special data [#1268](https://github.com/pingcap/br/pull/1268)
         - Fix the EOF error reported when TiDB Lightning splits the imported large CSV files [#1189](https://github.com/pingcap/br/pull/1189)
-        ?- Fix a bug that TiDB Lightning rebase wrong `auto_increment` base when the `auto_increment` field type is `FLOAT` or `DOUBLE` [#1186](https://github.com/pingcap/br/pull/1186)
+        - Fix a bug that an excessively large base value is generated when TiDB Lightning imports tables with the `auto_increment` column of the `FLOAT` or `DOUBLE` type [#1186](https://github.com/pingcap/br/pull/1186)
         - Fix the issue that TiDB fails to parse the `DECIMAL` type data in Parquet files [#1277](https://github.com/pingcap/br/pull/1277)
