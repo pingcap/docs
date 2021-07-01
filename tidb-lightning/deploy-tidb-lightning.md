@@ -8,7 +8,7 @@ aliases: ['/docs/stable/tidb-lightning/deploy-tidb-lightning/','/docs/v4.0/tidb-
 
 This document describes the hardware requirements of TiDB Lightning using the Local-backend, and how to deploy it using TiDB Ansible or manually.
 
-If Local-backend is used for data import, during the import process, **the cluster cannot provide normal services**. If you do not want the TiDB services to be impacted, read [TiDB Lightning TiDB-backend](/tidb-lightning/tidb-lightning-backends.md#tidb-lightning-tidb-backend) for the changes to the deployment steps.
+If Local-backend is used for data import, during the import process, **the cluster cannot provide services**. If you do not want the TiDB services to be impacted, perform the data import according to [TiDB Lightning TiDB-backend](/tidb-lightning/tidb-lightning-backends.md#tidb-lightning-tidb-backend).
 
 ## Notes
 
