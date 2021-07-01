@@ -68,39 +68,39 @@ TiDB version: 5.0.3
 
 + TiDB
 
-    - Fix the issue that an incorrect result is returned when using merge join on the `SET` type column [#25694](https://github.com/pingcap/tidb/pull/25694)
-    - Fix the data corruption issue in the `IN` expression's arguments [#25666](https://github.com/pingcap/tidb/pull/25666)
-    - Avoid the sessions of GC being affected by global variables [#25609](https://github.com/pingcap/tidb/pull/25609)
-    - Fix the panic issue that occurs when using `limit` in the window function queries [#25517](https://github.com/pingcap/tidb/pull/25517)
-    - Fix the wrong value returned when querying a partitioned table using `Limit` [#25139](https://github.com/pingcap/tidb/pull/25139)
-    - Fix the issue that `IFNULL` does not correctly take effect on the `ENUM` or `SET` type column [#25116](https://github.com/pingcap/tidb/pull/25116)
-    - Fix the wrong results caused by changing the `count` in the join subqueries to `first_row` [#25062](https://github.com/pingcap/tidb/pull/25062)
-    - Fix the query hang issue that occurs when `ParallelApply` is used under the `TopN` operator [#25011](https://github.com/pingcap/tidb/pull/25011)
-    - Fix the issue that more results than expected are returned when executing SQL statements using multi-column prefix indexes [#24635](https://github.com/pingcap/tidb/pull/24635)
-    - Fix the issue that the `<=>` operator cannot correctly take effect [#24633](https://github.com/pingcap/tidb/pull/24633)
-    - Fix the data race issue of the parallel `Apply` operator [#24345](https://github.com/pingcap/tidb/pull/24345)
-    - Fix the issue that the `index out of range` error is reported when sorting the IndexMerge results of the PartitionUnion operator [#24155](https://github.com/pingcap/tidb/pull/24155)
+    - Fix the issue that an incorrect result is returned when using merge join on the `SET` type column [#25669](https://github.com/pingcap/tidb/issues/25669)
+    - Fix the data corruption issue in the `IN` expression's arguments [#25591](https://github.com/pingcap/tidb/issues/25591)
+    - Avoid the sessions of GC being affected by global variables [#24976](https://github.com/pingcap/tidb/issues/24976)
+    - Fix the panic issue that occurs when using `limit` in the window function queries [#25344](https://github.com/pingcap/tidb/issues/25344)
+    - Fix the wrong value returned when querying a partitioned table using `Limit` [#24636](https://github.com/pingcap/tidb/issues/24636)
+    - Fix the issue that `IFNULL` does not correctly take effect on the `ENUM` or `SET` type column [#24944](https://github.com/pingcap/tidb/issues/24944)
+    - Fix the wrong results caused by changing the `count` in the join subqueries to `first_row` [#24865](https://github.com/pingcap/tidb/issues/24865)
+    - Fix the query hang issue that occurs when `ParallelApply` is used under the `TopN` operator [#24930](https://github.com/pingcap/tidb/issues/24930)
+    - Fix the issue that more results than expected are returned when executing SQL statements using multi-column prefix indexes [#24356](https://github.com/pingcap/tidb/issues/24356)
+    - Fix the issue that the `<=>` operator cannot correctly take effect [#24477](https://github.com/pingcap/tidb/issues/24477)
+    - Fix the data race issue of the parallel `Apply` operator [#23280](https://github.com/pingcap/tidb/issues/23280)
+    - Fix the issue that the `index out of range` error is reported when sorting the IndexMerge results of the PartitionUnion operator [#23919](https://github.com/pingcap/tidb/issues/23919)
     - Do not allow setting a read timestamp to a future time [#25761](https://github.com/pingcap/tidb/pull/25761)
-    - Fix the issue that the ODBC-styled constant (for example, `{d '2020-01-01'}`) cannot be used as the expression [#25577](https://github.com/pingcap/tidb/pull/25577)
-    - Fix the issue that `SELECT DISTINCT` converted to `Batch Get` causes incorrect results [#25533](https://github.com/pingcap/tidb/pull/25533)
+    - Fix the issue that the ODBC-styled constant (for example, `{d '2020-01-01'}`) cannot be used as the expression [#25531](https://github.com/pingcap/tidb/issues/25531)
+    - Fix the issue that `SELECT DISTINCT` converted to `Batch Get` causes incorrect results [#25320](https://github.com/pingcap/tidb/issues/25320)
     - Fix the issue that backing off queries from TiFlash to TiKV cannot be triggered [#24600](https://github.com/pingcap/tidb/pull/24600)
-    - Fix the `index-out-of-range` error that occurs when checking `only_full_group_by` [#24016](https://github.com/pingcap/tidb/pull/24016)
-    - Fix the issue that queries with `TABLESAMPLE` on an empty table returns unexpected rows [#25795](https://github.com/pingcap/tidb/pull/25795)
-    - Fix the issue that the result of index join in correlated subqueries is wrong [#25818](https://github.com/pingcap/tidb/pull/25818)
+    - Fix the `index-out-of-range` error that occurs when checking `only_full_group_by` [#23839](https://github.com/pingcap/tidb/issues/23839))
+    - Fix the issue that queries with `TABLESAMPLE` on an empty table returns unexpected rows [#25257](https://github.com/pingcap/tidb/issues/25257)
+    - Fix the issue that the result of index join in correlated subqueries is wrong [#25799](https://github.com/pingcap/tidb/issues/25799)
 
 + TiKV
 
-    - Fix the wrong `tikv_raftstore_hibernated_peer_state` metric [#10431](https://github.com/tikv/tikv/pull/10431)
-    - Fix the wrong arguments type of the `json_unquote()` function in the coprocessor [#10424](https://github.com/tikv/tikv/pull/10424)
-    - Fix the issue that Backup & Restore reports the error of "file already exists" when TDE is enabled during the restore [#10421](https://github.com/tikv/tikv/pull/10421)
-    - Skip clearing callback during graceful shutdown to avoid breaking ACID in some cases [#10396](https://github.com/tikv/tikv/pull/10396)
-    - Fix a bug that the read index is shared for replica reads on a Leader [#10391](https://github.com/tikv/tikv/pull/10391)
-    - Fix the wrong function that casts `DOUBLE` to `DOUBLE` [#10388](https://github.com/tikv/tikv/pull/10388)
+    - Fix the wrong `tikv_raftstore_hibernated_peer_state` metric [#10330](https://github.com/tikv/tikv/issues/10330)
+    - Fix the wrong arguments type of the `json_unquote()` function in the coprocessor [#10176](https://github.com/tikv/tikv/issues/10176)
+    - Fix the issue that Backup & Restore reports the error of "file already exists" when TDE is enabled during the restore [#1179](https://github.com/pingcap/br/issues/1179)
+    - Skip clearing callback during graceful shutdown to avoid breaking ACID in some cases [#10353](https://github.com/tikv/tikv/issues/10353) [#10307](https://github.com/tikv/tikv/issues/10307)
+    - Fix a bug that the read index is shared for replica reads on a Leader [#10347](https://github.com/tikv/tikv/issues/10347)
+    - Fix the wrong function that casts `DOUBLE` to `DOUBLE` [#25200](https://github.com/pingcap/tidb/issues/25200)
 + PD
 
-    - Fix the data race issue that occurs when loading TTL configurations after the scheduler is started [#3774](https://github.com/tikv/pd/pull/3774)
-    - Fix a bug that the `is_learner` field of the `TIKV_REGION_PEERS` table in TiDB is incorrect [#3743](https://github.com/tikv/pd/pull/3743)
-    - Fix the issue that when all TiKV nodes in a zone are offline or down, PD does not schedule replicas to other zones [#3742](https://github.com/tikv/pd/pull/3742)
+    - Fix the data race issue that occurs when loading TTL configurations after the scheduler is started [#3771](https://github.com/tikv/pd/issues/3771)
+    - Fix a bug that the `is_learner` field of the `TIKV_REGION_PEERS` table in TiDB is incorrect [#3372](https://github.com/tikv/pd/issues/3372) [#24293](https://github.com/pingcap/tidb/issues/24293)
+    - Fix the issue that when all TiKV nodes in a zone are offline or down, PD does not schedule replicas to other zones [#3705](https://github.com/tikv/pd/issues/3705)
     - Fix the issue that PD might get panic after the scatter Region scheduler is added [#3762](https://github.com/tikv/pd/pull/3762)
 
 + TiFlash
@@ -118,20 +118,20 @@ TiDB version: 5.0.3
 
     + TiCDC
 
-        - Fix the issue that TiCDC owner exits when refreshing the checkpoint [#2031](https://github.com/pingcap/ticdc/pull/2031)
+        - Fix the issue that TiCDC owner exits when refreshing the checkpoint [#1902](https://github.com/pingcap/ticdc/issues/1902)
         - Fix a bug that some MySQL connection might leak after MySQL sink meets the error and pauses [#1946](https://github.com/pingcap/ticdc/pull/1946)
         - Fix the panic issue that occurs when TiCDC fails to read `/proc/meminfo` [#2024](https://github.com/pingcap/ticdc/pull/2024)
-        - Reduce TiCDC's runtime memory consumption [#2012](https://github.com/pingcap/ticdc/pull/2012), [#1958](https://github.com/pingcap/ticdc/pull/1958)
-        - Fix a bug that might cause TiCDC server panic due to the late calculation of resolved ts [#2047](https://github.com/pingcap/ticdc/pull/2047)
+        - Reduce TiCDC's runtime memory consumption [#2012](https://github.com/pingcap/ticdc/pull/2012) [#1958](https://github.com/pingcap/ticdc/pull/1958)
+        - Fix a bug that might cause TiCDC server panic due to the late calculation of resolved ts [#1576](https://github.com/pingcap/ticdc/issues/1576)
         - Fix the potential deadlock issue for the processor [#2142](https://github.com/pingcap/ticdc/pull/2142)
 
     + Backup & Restore (BR)
 
-        - Fix a bug that all system tables are filtered during restore [#1224](https://github.com/pingcap/br/pull/1224)
+        - Fix a bug that all system tables are filtered during restore [#1197](https://github.com/pingcap/br/issues/1197) [#1201](https://github.com/pingcap/br/issues/1201)
 
     + TiDB Lightning
 
-        - Fix the TiDB Lightning panic issue for some special data [#1268](https://github.com/pingcap/br/pull/1268)
-        - Fix the EOF error reported when TiDB Lightning splits the imported large CSV files [#1189](https://github.com/pingcap/br/pull/1189)
+        - Fix the TiDB Lightning panic issue for some special data [#1213](https://github.com/pingcap/br/issues/1213)
+        - Fix the EOF error reported when TiDB Lightning splits the imported large CSV files [#1133](https://github.com/pingcap/br/issues/1133)
         - Fix a bug that an excessively large base value is generated when TiDB Lightning imports tables with the `auto_increment` column of the `FLOAT` or `DOUBLE` type [#1186](https://github.com/pingcap/br/pull/1186)
         - Fix the issue that TiDB fails to parse the `DECIMAL` type data in Parquet files [#1277](https://github.com/pingcap/br/pull/1277)
