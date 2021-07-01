@@ -79,8 +79,6 @@ mysql> SELECT * FROM t1;
 - Default value: ON
 - Controls whether statements should automatically commit when not in an explicit transaction. See [Transaction Overview](/transaction-overview.md#autocommit) for more information.
 
-<<<<<<< HEAD
-=======
 ### character_set_client
 
 - Scope: SESSION | GLOBAL
@@ -117,7 +115,6 @@ mysql> SELECT * FROM t1;
 - Default value：1000
 - Controls the maximum recursion depth in Common Table Expressions.
 
->>>>>>> 79f4f71df (system-variables: Add charset documentation (#5867))
 ### datadir
 
 - Scope: NONE
