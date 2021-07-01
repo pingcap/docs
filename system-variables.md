@@ -93,7 +93,7 @@ mysql> SELECT * FROM t1;
 
 - Scope: SESSION | GLOBAL
 - Default value: `utf8mb4`
-- Character set for string literals that don't have a character set specified.
+- The character set for string literals that do not have a specified character set.
 
 ### character_set_database
 
