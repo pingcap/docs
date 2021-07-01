@@ -96,6 +96,12 @@ TiDB version: 5.0.3
     - Skip clearing callback during graceful shutdown to avoid breaking ACID in some cases [#10396](https://github.com/tikv/tikv/pull/10396)
     - Fix a bug that the read index is shared for replica reads on a Leader [#10391](https://github.com/tikv/tikv/pull/10391)
     - Fix the wrong function that casts `DOUBLE` to `DOUBLE` [#10388](https://github.com/tikv/tikv/pull/10388)
++ PD
+
+    - Fix the data race issue that occurs when loading TTL configurations after the scheduler is started [#3774](https://github.com/tikv/pd/pull/3774)
+    - Fix a bug that the `is_learner` field of the `TIKV_REGION_PEERS` table in TiDB is incorrect [#3743](https://github.com/tikv/pd/pull/3743)
+    - Fix the issue that when all TiKV nodes in a zone are offline or down, PD does not schedule replicas to other zones [#3742](https://github.com/tikv/pd/pull/3742)
+    - Fix the issue that PD might get panic after the scatter Region scheduler is added [#3762](https://github.com/tikv/pd/pull/3762)
 
 + TiFlash
 
