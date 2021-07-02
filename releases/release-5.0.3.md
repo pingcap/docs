@@ -92,7 +92,6 @@ TiDB version: 5.0.3
     - Fix the issue that `SELECT DISTINCT` converted to `Batch Get` causes incorrect results [#25320](https://github.com/pingcap/tidb/issues/25320)
     - Fix the issue that backing off queries from TiFlash to TiKV cannot be triggered [#23665](https://github.com/pingcap/tidb/issues/23665) [#24421](https://github.com/pingcap/tidb/issues/24421)
     - Fix the `index-out-of-range` error that occurs when checking `only_full_group_by` [#23839](https://github.com/pingcap/tidb/issues/23839))
-    - Fix the issue that queries with `TABLESAMPLE` on an empty table returns unexpected rows [#25257](https://github.com/pingcap/tidb/issues/25257)
     - Fix the issue that the result of index join in correlated subqueries is wrong [#25799](https://github.com/pingcap/tidb/issues/25799)
 
 + TiKV
