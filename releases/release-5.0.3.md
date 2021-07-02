@@ -23,7 +23,7 @@ TiDB version: 5.0.3
 
         - Add an HTTP API to get the changefeed information and the health information of the node [#1955](https://github.com/pingcap/ticdc/pull/1955)
         - Add the SASL/SCRAM support for the kafka sink [#1942](https://github.com/pingcap/ticdc/pull/1942)
-        - Makes TiCDC support `--data-dir` at the server level [#2070](https://github.com/pingcap/ticdc/pull/2070)
+        - Make TiCDC support `--data-dir` at the server level [#2070](https://github.com/pingcap/ticdc/pull/2070)
 
 ## Improvements
 
@@ -87,7 +87,7 @@ TiDB version: 5.0.3
     - Fix the issue that the `<=>` operator cannot correctly take effect [#24477](https://github.com/pingcap/tidb/issues/24477)
     - Fix the data race issue of the parallel `Apply` operator [#23280](https://github.com/pingcap/tidb/issues/23280)
     - Fix the issue that the `index out of range` error is reported when sorting the IndexMerge results of the PartitionUnion operator [#23919](https://github.com/pingcap/tidb/issues/23919)
-    - Fix the issue that setting the `tidb_snapshot` variable to an unexpectedly large value might damage the transaction isolation [25680](https://github.com/pingcap/tidb/issues/25680)
+    - Fix the issue that setting the `tidb_snapshot` variable to an unexpectedly large value might damage the transaction isolation [#25680](https://github.com/pingcap/tidb/issues/25680)
     - Fix the issue that the ODBC-styled constant (for example, `{d '2020-01-01'}`) cannot be used as the expression [#25531](https://github.com/pingcap/tidb/issues/25531)
     - Fix the issue that `SELECT DISTINCT` converted to `Batch Get` causes incorrect results [#25320](https://github.com/pingcap/tidb/issues/25320)
     - Fix the issue that backing off queries from TiFlash to TiKV cannot be triggered [#23665](https://github.com/pingcap/tidb/issues/23665) [#24421](https://github.com/pingcap/tidb/issues/24421)
