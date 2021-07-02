@@ -8,6 +8,12 @@ Release date: July 2, 2021
 
 TiDB version: 5.0.3
 
+## Compatibility Change
+
++ TiDB
+
+    - After a v4.0 cluster is upgraded to v5.0 or a later version (dev or v5.1), the default value of the `tidb_multi_statement_mode` variable changes from `WARN` to `OFF`
+
 ## Feature Enhancements
 
 + Tools
