@@ -15,8 +15,8 @@ This document describes how to perform the [Stale Read](/stale-read.md) feature 
 >
 > You can fix the problem by disabling TiFlash replica for your Stale Read query as follows:
 > 
-> - Use variable to let TiDB read from TiKV `set session tidb_isolation_read_engines='tidb,tikv'`.
-> - Use [hint](https://docs.pingcap.com/tidb/dev/optimizer-hints#read_from_storagetiflasht1_name--tl_name--tikvt2_name--tl_name-) to enforce TiDB to read from TiKV.
+> - Use the `set session tidb_isolation_read_engines='tidb,tikv'` variable.
+> - Use the [hint](/optimizer-hints.md#read_from_storagetiflasht1_name--tl_name--tikvt2_name--tl_name-) to enforce TiDB to read data from TiKV.
 
 TiDB supports reading historical data through a standard SQL interface, which is the `AS OF TIMESTAMP` SQL clause, without the need for special clients or drivers. After data is updated or deleted, you can read the historical data before the update or deletion using this SQL interface.
 
