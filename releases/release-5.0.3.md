@@ -67,7 +67,7 @@ TiDB version: 5.0.3
 
     + TiCDC
 
-        - Refine gRPC's reconnection logic and increase the KV client's throughput [#1586](https://github.com/pingcap/ticdc/issues/1586) [#1501](https://github.com/pingcap/ticdc/issues/1501#issuecomment-820027078) [#1682](https://github.com/pingcap/ticdc/pull/1682) [#1393](https://github.com/pingcap/ticdc/issues/1393) [#184s7](https://github.com/pingcap/ticdc/pull/1847) [#1905](https://github.com/pingcap/ticdc/issues/1905) [#1904](https://github.com/pingcap/ticdc/issues/1904)
+        - Refine gRPC's reconnection logic and increase the KV client's throughput [#1586](https://github.com/pingcap/ticdc/issues/1586) [#1501](https://github.com/pingcap/ticdc/issues/1501#issuecomment-820027078) [#1682](https://github.com/pingcap/ticdc/pull/1682) [#1393](https://github.com/pingcap/ticdc/issues/1393) [#1847](https://github.com/pingcap/ticdc/pull/1847) [#1905](https://github.com/pingcap/ticdc/issues/1905) [#1904](https://github.com/pingcap/ticdc/issues/1904)
         - Make the sorter I/O errors more user-friendly
 
 ## Bug Fixes
