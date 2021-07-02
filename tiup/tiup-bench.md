@@ -15,7 +15,7 @@ tiup bench
 ```
 
 ```
-Starting component `bench`: /home/tidb/.tiup/components/bench/v1.3.0/bench 
+Starting component `bench`: /home/tidb/.tiup/components/bench/v1.5.0/bench
 Benchmark database with different workloads
 
 Usage:
@@ -74,6 +74,8 @@ Flags:
 ### Test procedures
 
 1. Create 4 warehouses using 4 partitions via hash:
+
+    {{< copyable "shell-regular" >}}
 
     ```shell
     tiup bench tpcc --warehouses 4 --parts 4 prepare

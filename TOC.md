@@ -7,13 +7,13 @@
 
 + About TiDB
   + [TiDB Introduction](/overview.md)
-  + [What's New in TiDB 5.0](/releases/release-5.0.0.md)
+  + [TiDB 5.1 Release Notes](/releases/release-5.1.0.md)
   + [Basic Features](/basic-features.md)
   + [Experimental Features](/experimental-features.md)
   + Benchmarks
-    + [v5.0 Sysbench Performance Test Report](/benchmark/benchmark-sysbench-v5-vs-v4.md)
-    + [v5.0 TPC-C Performance Test Report](/benchmark/v5.0-performance-benchmarking-with-tpcc.md)
-    + [v5.0 MPP mode TPC-H 100GB Performance Test](/benchmark/v5.0-performance-benchmarking-with-tpch.md)
+    + [v5.1 Sysbench Performance Test Report](/benchmark/benchmark-sysbench-v5.1.0-vs-v5.0.2.md)
+    + [v5.1 TPC-C Performance Test Report](/benchmark/v5.1-performance-benchmarking-with-tpcc.md)
+    + [v5.1 MPP mode TPC-H 100GB Performance Test](/benchmark/v5.1-performance-benchmarking-with-tpch.md)
   + [MySQL Compatibility](/mysql-compatibility.md)
   + [TiDB Limitations](/tidb-limitations.md)
   + [TiDB Adopters](/adopters.md)
@@ -64,7 +64,6 @@
       + [BR Use Cases](/br/backup-and-restore-use-cases.md)
       + [External Storages](/br/backup-and-restore-storages.md)
       + [BR FAQ](/br/backup-and-restore-faq.md)
-  + [Read Historical Data](/read-historical-data.md)
   + [Configure Time Zone](/configure-time-zone.md)
   + [Daily Checklist](/daily-check.md)
   + [Maintain TiFlash](/tiflash/maintain-tiflash.md)
@@ -141,6 +140,11 @@
 + Tutorials
   + [Multiple Data Centers in One City Deployment](/multi-data-centers-in-one-city-deployment.md)
   + [Three Data Centers in Two Cities Deployment](/three-data-centers-in-two-cities-deployment.md)
+  + Read Historical Data
+    + Use Stale Read (Recommended)
+      + [Usage Scenarios of Stale Read](/stale-read.md)
+      + [Perform Stale Read Using `As OF TIMESTAMP`](/as-of-timestamp.md)
+    + [Use the `tidb_snapshot` System Variable](/read-historical-data.md)
   + Best Practices
     + [Use TiDB](/best-practices/tidb-best-practices.md)
     + [Java Application Development](/best-practices/java-app-best-practices.md)
@@ -150,6 +154,7 @@
     + [PD Scheduling](/best-practices/pd-scheduling-best-practices.md)
     + [TiKV Performance Tuning with Massive Regions](/best-practices/massive-regions-best-practices.md)
     + [Three-node Hybrid Deployment](/best-practices/three-nodes-hybrid-deployment.md)
+    + [Local Read Under Three Data Centers Deployment](/best-practices/three-dc-local-read.md)
   + [Use Placement Rules](/configure-placement-rules.md)
   + [Use Load Base Split](/configure-load-base-split.md)
   + [Use Store Limit](/configure-store-limit.md)
@@ -543,7 +548,10 @@
 + Release Notes
   + [All Releases](/releases/release-notes.md)
   + [TiDB Roadmap](/roadmap.md)
+  + v5.1
+    + [5.1.0](/releases/release-5.1.0.md)
   + v5.0
+    + [5.0.3](/releases/release-5.0.3.md)
     + [5.0.2](/releases/release-5.0.2.md)
     + [5.0.1](/releases/release-5.0.1.md)
     + [5.0 GA](/releases/release-5.0.0.md)
