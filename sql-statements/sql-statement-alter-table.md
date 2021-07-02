@@ -149,9 +149,15 @@ Query OK, 0 rows affected, 1 warning (0.25 sec)
 
 The following major restrictions apply to `ALTER TABLE` in TiDB:
 
-* Multiple operations cannot be completed in a single `ALTER TABLE` statement.
+* Making multiple changes in a single `ALTER TABLE` statement is not currently supported.
 
-* Lossy changes such as changing from `BIGINT` to `INT` are currently not supported.
+* Changes of [Reorg-Data](/sql-statements/sql-statement-modify-column.md#Reorg-Data Change) types on primary key columns are not supported.
+
+* Changes of column types on partitioned tables are not supported.
+
+* Changes of column types on generated columns are not supported.
+
+* Changes of some data types (for example, some TIME types, Bit, Set, Enum, JSON) are not supported due to the compatibility issues of the `CAST` function's behavior between TiDB and MySQL.
 
 * Spatial data types are not supported.
 
