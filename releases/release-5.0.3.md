@@ -57,7 +57,7 @@ TiDB version: 5.0.3
 + TiFlash
 
     - Support casting the `STRING` type to the `DOUBLE` type
-    - Support the `STR_TO_DATE` function
+    - Support the `STR_TO_DATE()` function
     - Optimize the non-joined data in right outer join using multiple threads
     - Support the Cartesian join
     - Support the `LEFT()` and `RIGHT()` functions
