@@ -1279,11 +1279,7 @@ Configuration items related to TiCDC.
 + The interval at which Resolved TS is calculated and forwarded.
 + Default value: `"1s"`
 
-<<<<<<< HEAD
-### `old-value-cache-size` <span class="version-mark">New in v5.0</span>
-=======
-### `old-value-cache-memory-quota`
->>>>>>> 2b396e6c0 (tikv: update cdc config (#5780))
+### `old-value-cache-memory-quota` <span class="version-mark">New in v5.0.3</span>
 
 + The upper limit of memory usage by TiCDC old values.
 + Default value: `512MB`
