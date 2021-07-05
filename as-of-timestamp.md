@@ -13,7 +13,7 @@ This document describes how to perform the [Stale Read](/stale-read.md) feature 
 >
 > Currently, you cannot use Stale Read together with TiFlash. If your SQL query contains the `AS OF TIMESTAMP` clause and TiDB might read data from TiFlash replicas, you might encounter an error with a message like `ERROR 1105 (HY000): stale requests require tikv backend`.
 >
-> You can fix the problem by disabling TiFlash replica for your Stale Read query as follows:
+> To fix the problem, disable TiFlash replicas for your Stale Read query. To do that, perform one of the following operations:
 > 
 > - Use the `set session tidb_isolation_read_engines='tidb,tikv'` variable.
 > - Use the [hint](/optimizer-hints.md#read_from_storagetiflasht1_name--tl_name--tikvt2_name--tl_name-) to enforce TiDB to read data from TiKV.
