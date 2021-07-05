@@ -85,21 +85,12 @@ SET  GLOBAL tidb_distsql_scan_concurrency = 10;
 - Default value: 0
 - This variable is used to show whether the execution plan used in the previous statement was influenced by a [plan binding](/sql-plan-management.md)
 
-<<<<<<< HEAD
-=======
-### last_plan_from_cache <span class="version-mark">New in v4.0</span>
-
-- Scope: SESSION
-- Default value: `OFF`
-- This variable is used to show whether the execution plan used in the previous `execute` statement is taken directly from the plan cache.
-
 ### license
 
 - Scope: NONE
 - Default value: Apache License 2.0
 - This variable indicates the license of your TiDB server installation.
 
->>>>>>> 7253ade52 (system-variables: add datadir and license (#5761))
 ### max_execution_time
 
 - Scope: SESSION | GLOBAL
