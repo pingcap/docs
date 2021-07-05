@@ -81,6 +81,49 @@ mysql> SELECT * FROM t1;
 - Default value: `ON`
 - Controls whether statements should automatically commit when not in an explicit transaction. See [Transaction Overview](/transaction-overview.md#autocommit) for more information.
 
+### character_set_client
+
+- Scope: SESSION | GLOBAL
+- Default value: `utf8mb4`
+- The character set for data sent from the client. See [Character Set and Collation](/character-set-and-collation.md) for details on the use of character sets and collations in TiDB. It is recommended to use [`SET NAMES`](/sql-statements/sql-statement-set-names.md) to change the character set when needed.
+
+### character_set_connection
+
+- Scope: SESSION | GLOBAL
+- Default value: `utf8mb4`
+- The character set for string literals that do not have a specified character set.
+
+### character_set_database
+
+- Scope: SESSION | GLOBAL
+- Default value: `utf8mb4`
+- This variable indicates the character set of the default database in use. **It is NOT recommended to set this variable**. When a new default database is selected, the server changes the variable value.
+
+### character_set_results
+
+- Scope: SESSION | GLOBAL
+- Default value: `utf8mb4`
+- The character set that is used when data is sent to the client.
+
+### character_set_server
+
+- Scope: SESSION | GLOBAL
+- Default value: `utf8mb4`
+- The character set used for new schemas when no character set is specified in the `CREATE SCHEMA` statement.
+
+### `cte_max_recursion_depth`
+
+- Scope：SESSION | GLOBAL
+- Default value：1000
+- Controls the maximum recursion depth in Common Table Expressions.
+
+### datadir
+
+- Scope: NONE
+- Default value: /tmp/tidb
+- This variable indicates the location where data is stored. This location can be a local path or point to a PD server if the data is stored on TiKV.
+- A value in the format of `ip_address:port` indicates the PD server that TiDB connects to on startup.
+
 ### ddl_slow_threshold
 
 - Scope: INSTANCE
@@ -125,6 +168,12 @@ mysql> SELECT * FROM t1;
 - Scope: SESSION
 - Default value: `OFF`
 - This variable is used to show whether the execution plan used in the previous `execute` statement is taken directly from the plan cache.
+
+### license
+
+- Scope: NONE
+- Default value: Apache License 2.0
+- This variable indicates the license of your TiDB server installation.
 
 ### max_execution_time
 
@@ -389,11 +438,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 ### tidb_enable_1pc <span class="version-mark">New in v5.0</span>
 
 - Scope: SESSION | GLOBAL
-<<<<<<< HEAD
-- Default value: For newly created clusters, the default value of v5.0 RC is `OFF` and the default value of v5.0 GA or later is `ON`. If your cluster was upgraded to v5.0 GA from v5.0 RC, the variable value stays unchanged. If your cluster is upgraded to v5.0 GA from v4.0 or earlier, the variable value defaults to `OFF` after the upgrade.
-=======
 - Default value: `ON`
->>>>>>> e1d5394e6 (system-variables: update from generated source (#5752))
 - This variable is used to specify whether to enable the one-phase commit feature for transactions that only affect one Region. Compared with the often-used two-phase commit, one-phase commit can greatly reduce the latency of transaction commit and increase the throughput.
 
 > **Note:**
@@ -419,11 +464,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 ### tidb_enable_async_commit <span class="version-mark">New in v5.0</span>
 
 - Scope: SESSION | GLOBAL
-<<<<<<< HEAD
-- Default value: For newly created clusters, the default value of v5.0 RC is `OFF` and the default value of v5.0 GA or later is `ON`. If your cluster was upgraded to v5.0 GA from v5.0 RC, the variable value stays unchanged. If your cluster is upgraded to v5.0 GA from v4.0 or earlier, the variable value defaults to `OFF` after the upgrade.
-=======
 - Default value: `ON`
->>>>>>> e1d5394e6 (system-variables: update from generated source (#5752))
 - This variable controls whether to enable the async commit feature for the second phase of the two-phase transaction commit to perform asynchronously in the background. Enabling this feature can reduce the latency of transaction commit.
 
 > **Note:**
@@ -460,20 +501,6 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Default value: `ON`
 - This variable controls whether to record the execution information of each operator in the slow query log.
 
-<<<<<<< HEAD
-=======
-### tidb_enable_enhanced_security
-
-- Scope: NONE
-- Default value: `OFF`
-- This variable indicates whether the TiDB server you are connected to has the Security Enhanced Mode (SEM) enabled. To change its value, you need to modify the value of `enable-sem` in your TiDB server configuration file and restart the TiDB server.
-- SEM is inspired by the design of systems such as [Security-Enhanced Linux](https://en.wikipedia.org/wiki/Security-Enhanced_Linux). It reduces the abilities of users with the MySQL `SUPER` privilege and instead requires `RESTRICTED` fine-grained privileges to be granted as a replacement. These fine-grained privileges include:
-    - `RESTRICTED_TABLES_ADMIN`: The ability to write data to system tables in the `mysql` schema and to see sensitive columns on `information_schema` tables.
-    - `RESTRICTED_STATUS_ADMIN`: The ability to see sensitive variables in the command `SHOW STATUS`.
-    - `RESTRICTED_VARIABLES_ADMIN`: The ability to see and set sensitive variables in `SHOW [GLOBAL] VARIABLES` and `SET`.
-    - `RESTRICTED_USER_ADMIN`: The ability to prevent other users from making changes or dropping a user account.
-
->>>>>>> e1d5394e6 (system-variables: update from generated source (#5752))
 ### tidb_enable_fast_analyze
 
 - Scope: SESSION | GLOBAL
@@ -704,7 +731,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Possible values: `PHYSICAL`, `LEGACY`
     - `LEGACY`: Uses the old way of scanning, that is, disable Green GC.
     - `PHYSICAL`: Uses the physical scanning method, that is, enable Green GC.
-- This parameter specifies the way of scanning locks in the Resolve Locks step of GC. When set to `LEGACY`, TiDB scans locks by Regions. The value `PHYSICAL` enables each TiKV node to bypass the Raft layer and directly scan data. This feature can effectively mitigate the impact of GC wakening up all Regions when the [Hibernate Region](/tikv-configuration-file.md#hibernate-regions-experimental) feature is enabled, thus improving the execution speed in the Resolve Locks step.
+- This variable specifies the way of scanning locks in the Resolve Locks step of GC. When the variable value is set to `LEGACY`, TiDB scans locks by Regions. When the value `PHYSICAL` is used, it enables each TiKV node to bypass the Raft layer and directly scan data, which can effectively mitigate the impact of GC wakening up all Regions when the [Hibernate Region](/tikv-configuration-file.md#hibernate-regions) feature is enabled, thus improving the execution speed in the Resolve Locks step.
 
 ### tidb_general_log
 
