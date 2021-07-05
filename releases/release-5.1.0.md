@@ -152,6 +152,7 @@ In v5.1, the key new features or improvements are as follows:
     - If large amounts of data is accumulated during the replication interruption, exceeding 1TB, the re-replication causes OOM problems.
     - Large amounts of data writes cause OOM problems in TiCDC.
     - Reduce the possibility of  TiCDC replication interruption in the following scenarios:
+
         [project#11](https://github.com/pingcap/ticdc/projects/11)
 
         - Replication interruption when the network is unstable
