@@ -68,9 +68,9 @@ In v5.1, the key new features or improvements are as follows:
 
 ### SQL
 
-- Support the Common Table Expression (CTE) feature of MySQL 8.0, which empowers TiDB with the capability of querying hierarchical data recursively or non-recursively.
+- Support the Common Table Expression (CTE) feature of MySQL 8.0.
 
-    This feature meets the needs of using tree queries to implement application logics in multiple sectors such as human resources, manufacturing, financial markets, and education.
+    This feature empowers TiDB with the capability of querying hierarchical data recursively or non-recursively and meets the needs of using tree queries to implement application logics in multiple sectors such as human resources, manufacturing, financial markets, and education.
 
     In TiDB, you can apply the `WITH` statement to use Common Table Expressions. [User document](/sql-statements/sql-statement-with.md), [#17472](https://github.com/pingcap/tidb/issues/17472)
 
