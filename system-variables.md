@@ -111,12 +111,6 @@ mysql> SELECT * FROM t1;
 - Default value: `utf8mb4`
 - The character set used for new schemas when no character set is specified in the `CREATE SCHEMA` statement.
 
-### `cte_max_recursion_depth`
-
-- Scope：SESSION | GLOBAL
-- Default value：1000
-- Controls the maximum recursion depth in Common Table Expressions.
-
 ### datadir
 
 - Scope: NONE
@@ -240,7 +234,6 @@ mysql> SELECT * FROM t1;
 
 - Scope: SESSION | GLOBAL
 - Default value: `ON`
-- Possible values: `OFF`, `ON`, `ENFORCE`
 - This variable controls whether to use the MPP mode of TiFlash to execute queries. If the value is set to `ON`, TiDB automatically determines using the optimizer whether to choose MPP to execute queries. MPP is a distributed computing framework provided by the TiFlash engine, which allows data exchange between nodes and provides high-performance, high-throughput SQL algorithms.
 
 ### tidb_allow_remove_auto_inc <span class="version-mark">New in v2.1.18 and v3.0.4</span>
@@ -438,7 +431,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 ### tidb_enable_1pc <span class="version-mark">New in v5.0</span>
 
 - Scope: SESSION | GLOBAL
-- Default value: `ON`
+- Default value: For newly created clusters, the default value of v5.0 RC is `OFF` and the default value of v5.0 GA or later is `ON`. If your cluster was upgraded to v5.0 GA from v5.0 RC, the variable value stays unchanged. If your cluster is upgraded to v5.0 GA from v4.0 or earlier, the variable value defaults to `OFF` after the upgrade.
 - This variable is used to specify whether to enable the one-phase commit feature for transactions that only affect one Region. Compared with the often-used two-phase commit, one-phase commit can greatly reduce the latency of transaction commit and increase the throughput.
 
 > **Note:**
@@ -464,7 +457,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 ### tidb_enable_async_commit <span class="version-mark">New in v5.0</span>
 
 - Scope: SESSION | GLOBAL
-- Default value: `ON`
+- Default value: For newly created clusters, the default value of v5.0 RC is `OFF` and the default value of v5.0 GA or later is `ON`. If your cluster was upgraded to v5.0 GA from v5.0 RC, the variable value stays unchanged. If your cluster is upgraded to v5.0 GA from v4.0 or earlier, the variable value defaults to `OFF` after the upgrade.
 - This variable controls whether to enable the async commit feature for the second phase of the two-phase transaction commit to perform asynchronously in the background. Enabling this feature can reduce the latency of transaction commit.
 
 > **Note:**
