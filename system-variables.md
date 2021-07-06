@@ -443,7 +443,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 > **Note:**
 >
-> - The default value of `ON` only applies to new clusters. if your cluster was upgraded from an earlier version of TiDB, the value `OFF` will be used instead.
+> - The default value of `ON` only applies to new clusters. If your cluster was upgraded to v5.0.0 or later from an earlier version of TiDB, the value `OFF` will be used instead.
 > - If you have enabled TiDB Binlog, enabling this variable cannot improve the performance. To improve the performance, it is recommended to use [TiCDC](/ticdc/ticdc-overview.md) instead.
 > - Enabling this parameter only means that one-phase commit becomes an optional mode of transaction commit. In fact, the most suitable mode of transaction commit is determined by TiDB.
 
@@ -469,7 +469,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 > **Note:**
 >
-> - The default value of `ON` only applies to new clusters. if your cluster was upgraded from an earlier version of TiDB, the value `OFF` will be used instead.
+> - The default value of `ON` only applies to new clusters. If your cluster was upgraded to v5.0.0 or later from an earlier version of TiDB, the value `OFF` will be used instead.
 > - If you have enabled TiDB Binlog, enabling this variable cannot improve the performance. To improve the performance, it is recommended to use [TiCDC](/ticdc/ticdc-overview.md) instead.
 > - Enabling this parameter only means that Async Commit becomes an optional mode of transaction commit. In fact, the most suitable mode of transaction commit is determined by TiDB.
 
@@ -1293,7 +1293,7 @@ This variable is an alias for _transaction_isolation_.
 ### version
 
 - Scope: NONE
-- Default value: `5.7.25-TiDB-`(tidb version)
+- Default value: `5.7.25-TiDB-(tidb version)`
 - This variable returns the MySQL version, followed by the TiDB version. For example '5.7.25-TiDB-v4.0.0-beta.2-716-g25e003253'.
 
 ### version_comment
