@@ -42,6 +42,13 @@ SET  GLOBAL tidb_distsql_scan_concurrency = 10;
 - Default value: 0
 - Determines whether to allow explicitly specifying the values of the column with the `AUTO_RANDOM` attribute in the `INSERT` statement. `1` means to allow and `0` means to disallow.
 
+### datadir
+
+- Scope: NONE
+- Default value: /tmp/tidb
+- This variable indicates the location where data is stored. This location can be a local path or point to a PD server if the data is stored on TiKV.
+- A value in the format of `ip_address:port` indicates the PD server that TiDB connects to on startup.
+
 ### ddl_slow_threshold
 
 - Scope: INSTANCE
@@ -77,6 +84,12 @@ SET  GLOBAL tidb_distsql_scan_concurrency = 10;
 - Scope: SESSION
 - Default value: 0
 - This variable is used to show whether the execution plan used in the previous statement was influenced by a [plan binding](/sql-plan-management.md)
+
+### license
+
+- Scope: NONE
+- Default value: Apache License 2.0
+- This variable indicates the license of your TiDB server installation.
 
 ### max_execution_time
 
