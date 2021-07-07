@@ -1141,7 +1141,7 @@ Configuration items related to `rocksdb.defaultcf.titan`.
 + Determines whether to use the merge operator to write back blob indexes for Titan GC. When `gc-merge-rewrite` is enabled, it reduces the effect of Titan GC on the writes in the foreground.
 + Default value: `false`
 
-## `raftdb`
+## raftdb
 
 Configuration items related to `raftdb`
 
