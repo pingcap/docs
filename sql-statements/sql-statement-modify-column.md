@@ -177,7 +177,7 @@ CREATE TABLE `t1` (
     ERROR 1105 (HY000): Unsupported multi schema change
     ```
 
-* Does not support modifying Reorg-Data types on the primary key columns but support for Meta-Only types. For example:
+* Does not support modifying the Reorg-Data types on the primary key columns but supports modifying the Meta-Only types. For example:
 
     ```sql
     CREATE TABLE t (a int primary key);
