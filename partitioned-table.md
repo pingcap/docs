@@ -1079,7 +1079,7 @@ PARTITION BY HASH( YEAR(col2) )
 PARTITIONS 4;
 ```
 
-In the above examples, the primary key does not include all columns referenced in the partitioning expression. After adding the missing column in the primary key, The statement becomes legal:
+In the above examples, the primary key does not include all columns referenced in the partitioning expression. After adding the missing column in the primary key, the statement becomes legal:
 
 {{< copyable "sql" >}}
 
