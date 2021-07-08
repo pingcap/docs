@@ -240,7 +240,7 @@ The smallest TiDB cluster topology is as follows:
 
 **Note:**
 >
-> The IP of the following instances is the example IP. In actual deployment, you need to replace with the actual IP.
+> The IP address of the following instances only serves as an example IP. In your actual deployment, you need to replace the IP with your actual IP.
 
 | Instance | Count | IP | Configuration |
 |:-- | :-- | :-- | :-- |
