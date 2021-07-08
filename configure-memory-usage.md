@@ -26,6 +26,7 @@ mem-quota-query = 34359738368
 
 In addition, you can control the memory quota of a query using the following session variables. Generally, you only need to configure `tidb_mem_quota_query`. Other variables are used for advanced configuration which most users do not need to care about.
 
+<<<<<<< HEAD
 | Variable Name | Description | Unit | Default Value |
 |-----------------------------------|---------------------------------------------------|-------|-----------|
 | tidb_mem_quota_query              | Control the memory quota of a query | Byte | 32 << 30 |
@@ -36,6 +37,18 @@ In addition, you can control the memory quota of a query using the following ses
 | tidb_mem_quota_indexlookupreader | Control the memory quota of "IndexLookUpExecutor" | Byte | 32 << 30 |
 | tidb_mem_quota_indexlookupjoin | Control the memory quota of "IndexLookUpJoin" | Byte | 32 << 30 |
 | tidb_mem_quota_nestedloopapply | Control the memory quota of "NestedLoopApplyExec" | Byte | 32 << 30 |
+=======
+| Variable Name                    | Description                                       | Unit | Default Value |
+| -------------------------------- | ------------------------------------------------- | ---- | ------------- |
+| tidb_mem_quota_query             | Control the memory quota of a query               | Byte | 1 << 30 (1 GB)  |
+| tidb_mem_quota_hashjoin          | Control the memory quota of "HashJoinExec"        | Byte | 32 << 30      |
+| tidb_mem_quota_mergejoin         | Control the memory quota of "MergeJoinExec"       | Byte | 32 << 30      |
+| tidb_mem_quota_sort              | Control the memory quota of "SortExec"            | Byte | 32 << 30      |
+| tidb_mem_quota_topn              | Control the memory quota of "TopNExec"            | Byte | 32 << 30      |
+| tidb_mem_quota_indexlookupreader | Control the memory quota of "IndexLookUpExecutor" | Byte | 32 << 30      |
+| tidb_mem_quota_indexlookupjoin   | Control the memory quota of "IndexLookUpJoin"     | Byte | 32 << 30      |
+| tidb_mem_quota_nestedloopapply   | Control the memory quota of "NestedLoopApplyExec" | Byte | 32 << 30      |
+>>>>>>> f61e5da72 (configure-memory-usage: update default value (#5913))
 
 Some usage examples:
 
