@@ -38,6 +38,8 @@ This document only describes the parameters that are not included in command-lin
 + The compression algorithm for gRPC messages
 + Optional values: `"none"`, `"deflate"`, `"gzip"`
 + Default value: `"none"`
++ Note: When the value is `gzip`, some parts of the TiDB Dashboard will be seen as abnormal because the corresponding compression operation might not be able to be completed. If adjusted back to the default value `none`, the TiDB Dashboard will display normally. 
+
 
 ### `grpc-concurrency`
 
