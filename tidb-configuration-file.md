@@ -455,7 +455,6 @@ Configuration items related to performance.
 + Default value: `false`
 + This configuration item controls the initial value of [`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51). For example, when this configuration item is set to true, the default value of `tidb_enforce_mpp` is ON.
 
-
 ## prepared-plan-cache
 
 The Plan Cache configuration of the `PREPARE` statement.
