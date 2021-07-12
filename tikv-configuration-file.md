@@ -821,7 +821,8 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 ### `whole-key-filtering`
 
 + Determines whether to put the entire key to bloom filter
-+ Default value: `true`
++ Default value for `defaultcf`and `lockcf`: `true`
++ Default value for `writecf`: `false`
 
 ### `bloom-filter-bits-per-key`
 
