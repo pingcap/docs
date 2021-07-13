@@ -106,14 +106,3 @@ The following JSON functions are unsupported in TiDB. You can track the progress
 [json_arrayagg]: https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_json-arrayagg
 
 [json_depth]: https://dev.mysql.com/doc/refman/5.7/en/json-attribute-functions.html#function_json-depth
-<<<<<<< HEAD
-=======
-
-[json_search]: https://dev.mysql.com/doc/refman/5.7/en/json-search-functions.html#function_json-search
-
-[json_append]: https://dev.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-append
-
-[json_array_append]: https://dev.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-array-append
-
-[json_array_insert]: https://dev.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-array-insert
->>>>>>> 9bf5eaf83 (fix-broken-external-links (#5971))
