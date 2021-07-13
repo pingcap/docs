@@ -14,19 +14,29 @@ TiDB supports the `EXPLAIN [options] FOR CONNECTION connection_id` statement. Ho
 
 ## Synopsis
 
-**ExplainSym:**
+```ebnf+diagram
+ExplainSym ::=
+    'EXPLAIN'
+|   'DESCRIBE'
+|   'DESC'
 
-![ExplainSym](/media/sqlgram/ExplainSym.png)
+ExplainStmt ::=
+    ExplainSym ( TableName ColumnName? | 'ANALYZE'? ExplainableStmt | 'FOR' 'CONNECTION' NUM | 'FORMAT' '=' ( stringLit | ExplainFormatType ) ( 'FOR' 'CONNECTION' NUM | ExplainableStmt ) )
 
-**ExplainStmt:**
-
-![ExplainStmt](/media/sqlgram/ExplainStmt.png)
-
-**ExplainableStmt:**
-
-![ExplainableStmt](/media/sqlgram/ExplainableStmt.png)
+ExplainableStmt ::=
+    SelectStmt
+|   DeleteFromStmt
+|   UpdateStmt
+|   InsertIntoStmt
+|   ReplaceIntoStmt
+|   UnionStmt
+```
 
 ## `EXPLAIN` output format
+
+> **Note:**
+>
+> When you use the MySQL client to connect to TiDB, to read the output result in a clearer way without line wrapping, you can use the `pager less -S` command. Then, after the `EXPLAIN` result is output, you can press the right arrow <kbd>→</kbd> button on your keyboard to horizontally scroll through the output.
 
 Currently, `EXPLAIN` in TiDB outputs 5 columns: `id`, `estRows`, `task`, `access object`, `operator info`. Each operator in the execution plan is described by these attributes, with each row in the `EXPLAIN` output describing an operator. The description of each attribute is as follows:
 
@@ -239,7 +249,7 @@ If the `dot` program is not installed on your computer, copy the result to [this
 
 ## `EXPLAIN FOR CONNECTION`
 
-`EXPLAIN FOR CONNECTION` is used to get the execution plan of the last executed query in a connection. The output format is the same as that of `EXPLAIN`. However, the implementation of `EXPLAIN FOR CONNECTION` in TiDB is different from that in MySQL. Their differences (apart from the output format) are listed as follows:
+`EXPLAIN FOR CONNECTION` is used to get the execution plan of the currently executed SQL query or the last executed SQL query in a connection. The output format is the same as that of `EXPLAIN`. However, the implementation of `EXPLAIN FOR CONNECTION` in TiDB is different from that in MySQL. Their differences (apart from the output format) are listed as follows:
 
 - MySQL returns the query plan that is **being executing**, while TiDB returns the **last executed** query plan.
 - MySQL requires the login user to be the same as the connection being queried, or the login user has the **`PROCESS`** privilege; while TiDB requires the login user to be the same as the connection being queried, or the login user has the **`SUPER`** privilege.

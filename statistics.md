@@ -6,7 +6,25 @@ aliases: ['/docs/dev/statistics/','/docs/dev/reference/performance/statistics/']
 
 # Introduction to Statistics
 
-In TiDB, the statistical information you need to maintain includes the total number of rows in the table, the equal-depth histogram of columns, Count-Min Sketch, the number of `Null`s, the average length, the number of different values, etc. This document briefly introduces the histogram and Count-Min Sketch, and details the collection and maintenance of statistics.
+TiDB uses statistics to decide [which index to choose](/choose-index.md). The `tidb_analyze_version` variable controls the statistics collected by TiDB. Currently, two versions of statistics are supported: `tidb_analyze_version = 1` and `tidb_analyze_version = 2`. In versions before v5.1.0, the default value of this variable is `1`. In v5.1.0, the default value of this variable is `2`, which serves as an experimental feature. These two versions include different information in TiDB:
+
+| Information | Version 1 | Version 2|
+| --- | --- | ---|
+| The total number of rows in the table | √ | √ |
+| Column Count-Min Sketch | √ | × |
+| Index Count-Min Sketch | √ | × |
+| Column Top-N | √ | √ (Maintenance methods and precision are improved) |
+| Index Top-N | √ (Insufficient maintenance precision might cause inaccuracy) | √ (Maintenance methods and precision are improved) |
+| Column histogram | √ | √ (The histogram does not include Top-N values.) |
+| Index histogram | √ | √ (The histogram buckets record the number of different values in each bucket, and the histogram does not include Top-N values.) |
+| The number of `NULL`s in the column | √ | √ |
+| The number of `NULL`s in the index | √ | √ |
+| The average length of columns | √ | √ |
+| The average length of indexes | √ | √ |
+
+Compared to Version 1, Version 2 statistics avoids the potential inaccuracy caused by hash collision when the data volume is huge. It also maintains the estimate precision in most scenarios.
+
+This document briefly introduces the histogram, Count-Min Sketch, and Top-N, and details the collection and maintenance of statistics.
 
 ## Histogram
 
@@ -27,13 +45,15 @@ A hash collision might occur since Count-Min Sketch is a hash structure. In the 
 - Modify the `WITH NUM TOPN` parameter. TiDB stores the high-frequency (top x) data separately, with the other data stored in Count-Min Sketch. Therefore, to prevent a larger value and a smaller value from being hashed together, you can increase the value of `WITH NUM TOPN`. In TiDB, its default value is 20. The maximum value is 1024. For more information about this parameter, see [Full Collection](#full-collection).
 - Modify two parameters `WITH NUM CMSKETCH DEPTH` and `WITH NUM CMSKETCH WIDTH`. Both affect the number of hash buckets and the collision probability. You can increase the values of the two parameters appropriately according to the actual scenario to reduce the probability of hash collision, but at the cost of higher memory usage of statistics. In TiDB, the default value of `WITH NUM CMSKETCH DEPTH` is 5, and the default value of `WITH NUM CMSKETCH WIDTH` is 2048. For more information about the two parameters, see [Full Collection](#full-collection).
 
+## Top-N values
+
+Top-N values are values with the top N occurrences in a column or index. TiDB records the values and occurences of Top-N values.
+
 ## Collect statistics
 
 ### Manual collection
 
 You can run the `ANALYZE` statement to collect statistics.
-
-#### Full collection
 
 > **Note:**
 >
@@ -42,6 +62,10 @@ You can run the `ANALYZE` statement to collect statistics.
 > For quicker analysis, you can set `tidb_enable_fast_analyze` to `1` to enable the Quick Analysis feature. The default value for this parameter is `0`.
 >
 > After Quick Analysis is enabled, TiDB randomly samples approximately 10,000 rows of data to build statistics. Therefore, in the case of uneven data distribution or a relatively small amount of data, the accuracy of statistical information is relatively poor. It might lead to poor execution plans, such as choosing the wrong index. If the execution time of the normal `ANALYZE` statement is acceptable, it is recommended to disable the Quick Analysis feature.
+>
+> `tidb_enable_fast_analyze` is an experimental feature, which currently **does not match exactly** with the statistical information of `tidb_analyze_version=2`. Therefore, you need to set the value of `tidb_analyze_version` to `1` when `tidb_enable_fast_analyze` is enabled.
+
+#### Full collection
 
 You can perform full collection using the following syntax.
 
@@ -82,8 +106,12 @@ You can perform full collection using the following syntax.
     {{< copyable "sql" >}}
 
     ```sql
-    ANALYZE TABLE TableName PARTITION PartitionNameList [IndexNameList] [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH|SAMPLES];
+    ANALYZE TABLE TableName PARTITION PartitionNameList INDEX [IndexNameList] [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH|SAMPLES];
     ```
+
+> **Note:**
+>
+> To ensure that the statistical information before and after the collection is consistent, when you set `tidb_analyze_version=2`, `ANALYZE TABLE TableName INDEX` will also collect statistics of the whole table instead of the given index.
 
 #### Incremental collection
 
@@ -126,11 +154,7 @@ Three system variables related to automatic update of statistics are as follows:
 
 When the ratio of the number of modified rows to the total number of rows of `tbl` in a table is greater than `tidb_auto_analyze_ratio`, and the current time is between `tidb_auto_analyze_start_time` and `tidb_auto_analyze_end_time`, TiDB executes the `ANALYZE TABLE tbl` statement in the background to automatically update the statistics of this table.
 
-When the query is executed, TiDB collects feedback with the probability of `feedback-probability` and uses it to update the histogram and Count-Min Sketch. You can modify the value of `feedback-probability` in the configuration file. The default value is `0.05`. You can set the value to `0.0` to disable this feature.
-
-> **Note:**
->
-> If you set the value of `feedback-probability` to `0` in the configuration file, a failure will occur and an error will be reported. To disable `feedback-probability`, you need to set the value to `0.0`.
+Before v5.0, when the query is executed, TiDB collects feedback with the probability of `feedback-probability` and uses it to update the histogram and Count-Min Sketch. **In v5.0, this feature is disabled by default, and it is not recommended to enable this feature.**
 
 ### Control `ANALYZE` concurrency
 
@@ -168,7 +192,7 @@ Currently, the `SHOW ANALYZE STATUS` statement returns the following 7 columns:
 | table_name | The table name |
 | partition_name| The partition name |
 | job_info | The task information. The element includes index names when index analysis is performed. |
-| row_count | The the number of rows that have been analyzed |
+| row_count | The number of rows that have been analyzed |
 | start_time | The time at which the task starts |
 | state | The state of a task, including `pending`, `running`, `finished`, and `failed` |
 
@@ -238,7 +262,7 @@ SHOW STATS_HISTOGRAMS [ShowLikeOrWhere]
 
 This statement returns the number of different values and the number of `NULL` in all the columns. You can use `ShowLikeOrWhere` to filter the information you need.
 
-Currently, the `SHOW STATS_HISTOGRAMS` statement returns the following 8 columns:
+Currently, the `SHOW STATS_HISTOGRAMS` statement returns the following 10 columns:
 
 | Syntax Element | Description    |
 | :-------- | :------------- |
@@ -251,6 +275,7 @@ Currently, the `SHOW STATS_HISTOGRAMS` statement returns the following 8 columns
 | `distinct_count` | The number of different values |
 | `null_count` | The number of `NULL` |
 | `avg_col_size` | The average length of columns |
+| correlation | The Pearson correlation coefficient of the column and the integer primary key, which indicates the degree of association between the two columns|
 
 ### Buckets of histogram
 
@@ -270,7 +295,7 @@ The diagram is as follows:
 
 This statement returns information about all the buckets. You can use `ShowLikeOrWhere` to filter the information you need.
 
-Currently, the `SHOW STATS_BUCKETS` statement returns the following 10 columns:
+Currently, the `SHOW STATS_BUCKETS` statement returns the following 11 columns:
 
 | Syntax Element | Description   |
 | :-------- | :------------- |
@@ -284,6 +309,31 @@ Currently, the `SHOW STATS_BUCKETS` statement returns the following 10 columns:
 | `repeats` | The occurrence number of the maximum value |
 | `lower_bound` | The minimum value |
 | `upper_bound` | The maximum value |
+| `ndv` | The number of different values in the bucket. When `tidb_analyze_version` = `1`, `ndv` is always `0`, which has no actual meaning. |
+
+### Top-N information
+
+You can use the `SHOW STATS_TOPN` statement to view the Top-N information currently collected by TiDB.
+
+The syntax is as follows:
+
+{{< copyable "sql" >}}
+
+```sql
+SHOW STATS_TOPN [ShowLikeOrWhere];
+```
+
+Currently, the `SHOW STATS_TOPN` statement returns the following 7 columns:
+
+| Syntax Element | Description |
+| ---- | ----|
+| `db_name` | The database name |
+| `table_name` | The table name |
+| `partition_name` | The partition name |
+| `column_name` | The column name (when `is_index` is `0`) or the index name (when `is_index` is `1`) |
+| `is_index` | Whether it is an index column or not |
+| `value` | The value of this column |
+| `count` | How many times the value appears |
 
 ## Delete statistics
 

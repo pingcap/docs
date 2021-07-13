@@ -8,10 +8,15 @@ aliases: ['/docs/dev/tidb-lightning/tidb-lightning-overview/','/docs/dev/referen
 
 [TiDB Lightning](https://github.com/pingcap/tidb-lightning) is a tool used for fast full import of large amounts of data into a TiDB cluster. You can download TiDB Lightning from [here](/download-ecosystem-tools.md#tidb-lightning).
 
-Currently, TiDB Lightning supports reading SQL dump exported via Dumpling or CSV data source. You can use it in the following two scenarios:
+Currently, TiDB Lightning can mainly be used in the following two scenarios:
 
 - Importing **large amounts** of **new** data **quickly**
 - Restore all backup data
+
+Currently, TiDB Lightning supports:
+
+- The data source of the [Dumpling](/dumpling-overview.md), CSV or [Amazon Aurora Parquet](/migrate-from-aurora-using-lightning.md) exported formats.
+- Reading data from a local disk or from the Amazon S3 storage. For details, see [External Storages](/br/backup-and-restore-storages.md).
 
 ## TiDB Lightning architecture
 
@@ -39,4 +44,10 @@ The complete import process is as follows:
 
 If the target cluster of data import is v3.x or earlier versions, you need to use the Importer-backend to import data. In this mode, `tidb-lightning` sends the parsed KV pairs to `tikv-importer` via gRPC and `tikv-importer` imports the data.
 
-TiDB Lightning also supports using TiDB-backend for data import. In this mode, `tidb-lightning` transforms data into `INSERT` SQL statements and directly executes them on the target cluster, which is similar to Loader's operations. See [TiDB Lightning Backends](/tidb-lightning/tidb-lightning-backends.md) for details.
+TiDB Lightning also supports using TiDB-backend for data import. In this mode, `tidb-lightning` transforms data into `INSERT` SQL statements and directly executes them on the target cluster. See [TiDB Lightning Backends](/tidb-lightning/tidb-lightning-backends.md) for details.
+
+## Restrictions
+
+If you use TiDB Lighting together with TiFlash:
+
+No matter a table has TiFlash replica(s) or not, you can import data to that table using TiDB Lightning. Note that this might slow the TiDB Lightning procedure, which depends on the NIC bandwidth on the lightning host, the CPU and disk load of the TiFlash node, and the number of TiFlash replicas.

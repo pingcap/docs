@@ -10,9 +10,9 @@ The TiDB Dashboard UI is built into the PD component for v4.0 or higher versions
 
 See the following documents to learn how to deploy a standard TiDB cluster:
 
-+ [Quick Start Guide for the TiDB Database Platform](/quick-start-with-tidb.md#deploy-a-local-test-environment-using-tiup-playground)
++ [Quick Start Guide for the TiDB Database Platform](/quick-start-with-tidb.md)
 + [Deploy TiDB in Production Environment](/production-deployment-using-tiup.md)
-+ [Kubernetes environment deployment](https://docs.pingcap.com/tidb-in-kubernetes/v1.1/access-dashboard)
++ [Kubernetes environment deployment](https://docs.pingcap.com/tidb-in-kubernetes/stable/access-dashboard)
 
 > **Note:**
 >

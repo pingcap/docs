@@ -103,7 +103,7 @@ Pessimistic transactions in TiDB behave similarly to those in MySQL. See the min
 
 6. The data read by `EMBEDDED SELECT` in the statement is not locked.
 
-7. Open transactions in TiDB do not block garbage collection (GC). By default, this limits the maximum execution time of pessimistic transactions to 10 minutes. You can modify this limit by editing `max-txn-ttl` under `[performance]` in the TiDB configuration file.
+7. Open transactions in TiDB do not block garbage collection (GC). By default, this limits the maximum execution time of pessimistic transactions to 1 hour. You can modify this limit by editing `max-txn-ttl` under `[performance]` in the TiDB configuration file.
 
 ## Isolation level
 
@@ -121,13 +121,27 @@ TiDB supports the following two isolation levels in the pessimistic transaction 
 
 Adding a pessimistic lock requires writing data into TiKV. The response of successfully adding a lock can only be returned to TiDB after commit and apply through Raft. Therefore, compared with optimistic transactions, the pessimistic transaction mode inevitably has higher latency.
 
-To reduce the overhead of locking, TiKV implements the pipelined locking process: when the data meets the requirements for locking, TiKV immediately notifies TiDB to execute subsequent requests and writes into the pessimistic lock asynchronously. This process reduces most latency and significantly improves the performance of pessimistic transactions. However, there is a low probability that the asynchronous write into the pessimistic lock might fail, resulting in the commit failure of the pessimistic transaction.
+To reduce the overhead of locking, TiKV implements the pipelined locking process: when the data meets the requirements for locking, TiKV immediately notifies TiDB to execute subsequent requests and writes into the pessimistic lock asynchronously. This process reduces most latency and significantly improves the performance of pessimistic transactions. However, when network partition occurs in TiKV or a TiKV node is down, the asynchronous write into the pessimistic lock might fail and affect the following aspects:
+
+* Other transactions that modify the same data cannot be blocked. If the application logic relies on locking or lock waiting mechanisms, the correctness of the application logic is affected.
+
+* There is a low probability that the transaction commit fails, but it does not affect the correctness of the transactions.
+
+If the application logic relies on the locking or lock waiting mechanisms, or if you want to guarantee as much as possible the success rate of transaction commits even in the case of TiKV cluster anomalies, you should disable the pipelined locking feature.
 
 ![Pipelined pessimistic lock](/media/pessimistic-transaction-pipelining.png)
 
-This feature is disabled by default. To enable it, modify the TiKV configuration:
+This feature is enabled by default. To disable it, modify the TiKV configuration:
 
 ```toml
 [pessimistic-txn]
-pipelined = true
+pipelined = false
+```
+
+If the TiKV cluster is v4.0.9 or later, you can also dynamically disable this feature by [modifying TiKV configuration online](/dynamic-config.md#modify-tikv-configuration-online):
+
+{{< copyable "sql" >}}
+
+```sql
+set config tikv pessimistic-txn.pipelined='false';
 ```

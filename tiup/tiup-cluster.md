@@ -8,7 +8,7 @@ aliases: ['/docs/dev/tiup/tiup-cluster/','/docs/dev/reference/tools/tiup/cluster
 
 This document focuses on how to use the TiUP cluster component. For the complete steps of online deployment, refer to [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md).
 
-Similar to [the TiUP playground component](/tiup/tiup-playground.md) used for local deployment, the TiUP cluster component quickly deploys TiDB for production environment. Compared with playground, the cluster component provides more powerful cluster management features, including upgrading, scaling, and even operation and auditing.
+Similar to [the TiUP playground component](/tiup/tiup-playground.md) used for a local test deployment, the TiUP cluster component quickly deploys TiDB for production environment. Compared with playground, the cluster component provides more powerful production cluster management features, including upgrading, scaling, and even operation and auditing.
 
 For the help information of the cluster component, run the following command:
 
@@ -17,9 +17,7 @@ tiup cluster
 ```
 
 ```
-The component `cluster` is not installed; downloading from repository.
-download https://tiup-mirrors.pingcap.com/cluster-v0.4.9-darwin-amd64.tar.gz 15.32 MiB / 15.34 MiB 99.90% 10.04 MiB p/s
-Starting component `cluster`: /Users/joshua/.tiup/components/cluster/v0.4.9/cluster
+Starting component `cluster`: /home/tidb/.tiup/components/cluster/v1.3.0/cluster
 Deploy a TiDB cluster for production
 
 Usage:
@@ -41,7 +39,7 @@ Available Commands:
   display     Display information of a TiDB cluster
   list        List all clusters
   audit       Show audit log of cluster operation
-  import      Import an exist TiDB cluster from TiDB-Ansible
+  import      Import an exist TiDB cluster from TiDB Ansible
   edit-config Edit TiDB cluster config
   reload      Reload a TiDB cluster's config and restart if needed
   patch       Replace the remote package with a specified package and restart the service
@@ -65,7 +63,7 @@ tiup cluster deploy <cluster-name> <version> <topology.yaml> [flags]
 
 This command requires you to provide the cluster name, the TiDB cluster version, and a topology file of the cluster.
 
-To write a topology file, refer to [the example](https://github.com/pingcap/tiup/blob/master/examples/topology.example.yaml). The following file is an example of the simplest topology:
+To write a topology file, refer to [the example](https://github.com/pingcap/tiup/blob/master/embed/templates/examples/topology.example.yaml). The following file is an example of the simplest topology:
 
 > **Note:**
 >
@@ -165,7 +163,7 @@ tiup cluster list
 ```
 
 ```
-Starting /root/.tiup/components/cluster/v0.4.5/cluster list
+Starting /root/.tiup/components/cluster/v1.3.0/cluster list
 Name          User  Version    Path                                               PrivateKey
 ----          ----  -------    ----                                               ----------
 prod-cluster  tidb  v3.0.12    /root/.tiup/storage/cluster/clusters/prod-cluster  /root/.tiup/storage/cluster/clusters/prod-cluster/ssh/id_rsa
@@ -194,7 +192,7 @@ tiup cluster display prod-cluster
 ```
 
 ```
-Starting /root/.tiup/components/cluster/v0.4.5/cluster display prod-cluster
+Starting /root/.tiup/components/cluster/v1.3.0/cluster display prod-cluster
 TiDB Cluster: prod-cluster
 TiDB Version: v3.0.12
 ID                  Role        Host          Ports        Status     Data Dir              Deploy Dir
@@ -222,7 +220,7 @@ For the PD component, `|L` or `|UI` might be appended to `Up` or `Down`. `|L` in
 >
 > This section describes only the syntax of the scale-in command. For detailed steps of online scaling, refer to [Scale the TiDB Cluster Using TiUP](/scale-tidb-using-tiup.md).
 
-Scaling in a cluster means making some node(s) offline. This operation removes the specific node(s) from the cluster and deletes the remaining data files.
+Scaling in a cluster means making some node(s) offline. This operation removes the specific node(s) from the cluster and deletes the remaining files.
 
 Because the offline process of the TiKV and TiDB Binlog components is asynchronous (which requires removing the node through API), and the process takes a long time (which requires continuous observation on whether the node is successfully taken offline), special treatment is given to the TiKV and TiDB Binlog components.
 
@@ -265,7 +263,7 @@ tiup cluster display prod-cluster
 ```
 
 ```
-Starting /root/.tiup/components/cluster/v0.4.5/cluster display prod-cluster
+Starting /root/.tiup/components/cluster/v1.3.0/cluster display prod-cluster
 TiDB Cluster: prod-cluster
 TiDB Version: v3.0.12
 ID                  Role        Host          Ports        Status     Data Dir              Deploy Dir
@@ -375,12 +373,12 @@ Global Flags:
   -y, --yes               Skip all confirmations and assumes 'yes'
 ```
 
-For example, the following command upgrades the cluster to v4.0.0-rc:
+For example, the following command upgrades the cluster to v5.0.0:
 
 {{< copyable "shell-regular" >}}
 
 ```bash
-tiup cluster upgrade tidb-test v4.0.0-rc
+tiup cluster upgrade tidb-test v5.0.0
 ```
 
 ## Update configuration
@@ -429,7 +427,7 @@ The content and format requirements for files under the specified path are as fo
 
 - The folder specified in the `dashboard_dir` field of `grafana_servers` must contain full `*.json` files.
 - The folder specified in the `rule_dir` field of `monitoring_servers` must contain full `*.rules.yml` files.
-- For the format of files specified in the `config_file` field of `alertmanager_servers`, refer to [the Alertmanager configuration template](https://github.com/pingcap/tiup/blob/master/templates/config/alertmanager.yml).
+- For the format of files specified in the `config_file` field of `alertmanager_servers`, refer to [the Alertmanager configuration template](https://github.com/pingcap/tiup/blob/master/embed/templates/config/alertmanager.yml).
 
 When you execute `tiup reload`, TiUP first deletes all old configuration files in the target machine and then uploads the corresponding configuration from the control machine to the corresponding configuration directory of the target machine. Therefore, if you want to modify a particular configuration file, make sure that all configuration files (including the unmodified ones) are in the same directory. For example, to modify Grafana's `tidb.json` file, you need to first copy all the `*.json` files from Grafana's `dashboards` directory to your local directory. Otherwise, other JSON files will be missing from the target machine.
 
@@ -559,14 +557,14 @@ tiup cluster audit
 ```
 
 ```
-Starting component `cluster`: /Users/joshua/.tiup/components/cluster/v0.6.0/cluster audit
+Starting component `cluster`: /home/tidb/.tiup/components/cluster/v1.3.0/cluster audit
 ID      Time                       Command
 --      ----                       -------
-4BLhr0  2020-04-29T13:25:09+08:00  /Users/joshua/.tiup/components/cluster/v0.6.0/cluster deploy test v4.0.0-rc /tmp/topology.yaml
-4BKWjF  2020-04-28T23:36:57+08:00  /Users/joshua/.tiup/components/cluster/v0.6.0/cluster deploy test v4.0.0-rc /tmp/topology.yaml
-4BKVwH  2020-04-28T23:02:08+08:00  /Users/joshua/.tiup/components/cluster/v0.6.0/cluster deploy test v4.0.0-rc /tmp/topology.yaml
-4BKKH1  2020-04-28T16:39:04+08:00  /Users/joshua/.tiup/components/cluster/v0.4.9/cluster destroy test
-4BKKDx  2020-04-28T16:36:57+08:00  /Users/joshua/.tiup/components/cluster/v0.4.9/cluster deploy test v4.0.0-rc /tmp/topology.yaml
+4BLhr0  2020-04-29T13:25:09+08:00  /home/tidb/.tiup/components/cluster/v1.3.0/cluster deploy test v5.0.0-rc /tmp/topology.yaml
+4BKWjF  2020-04-28T23:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.3.0/cluster deploy test v5.0.0-rc /tmp/topology.yaml
+4BKVwH  2020-04-28T23:02:08+08:00  /home/tidb/.tiup/components/cluster/v1.3.0/cluster deploy test v5.0.0-rc /tmp/topology.yaml
+4BKKH1  2020-04-28T16:39:04+08:00  /home/tidb/.tiup/components/cluster/v1.3.0/cluster destroy test
+4BKKDx  2020-04-28T16:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.3.0/cluster deploy test v5.0.0-rc /tmp/topology.yaml
 ```
 
 The first column is `audit-id`. To view the execution log of a certain command, pass the `audit-id` of a command as the flag as follows:
@@ -590,7 +588,7 @@ Flags:
   -h, --help             help for exec
   -N, --node strings     Only exec on host with specified nodes
   -R, --role strings     Only exec on host with specified roles
-      --sudo            use root permissions (default false)
+      --sudo             use root permissions (default false)
 
 Global Flags:
       --ssh-timeout int   Timeout in seconds to connect host via SSH, ignored for operations that don't need an SSH connection. (default 5)
@@ -690,7 +688,7 @@ You can add `--native-ssh` in all cluster operation commands above to use the sy
 
 To avoid adding such a flag in every command, you can use the `TIUP_NATIVE_SSH` system variable to specify whether to use the local SSH client:
 
-```sh
+```shell
 export TIUP_NATIVE_SSH=true
 # or
 export TIUP_NATIVE_SSH=1
@@ -709,11 +707,11 @@ If you specify this environment variable and `--native-ssh` at the same time, `-
 The TiUP data is stored in the `.tiup` directory in the user's home directory. To migrate the control machine, you can take the following steps to copy the `.tiup` directory to the corresponding target machine:
 
 1. Execute `tar czvf tiup.tar.gz .tiup` in the home directory of the original machine.
-2. Copy `tip.tar.gz` to the home directory of the target machine.
+2. Copy `tiup.tar.gz` to the home directory of the target machine.
 3. Execute `tar xzvf tiup.tar.gz` in the home directory of the target machine.
 4. Add the `.tiup` directory to the `PATH` environment variable.
 
-    If you use `bash` and you are a `tidb` user, you can add `export PATH=/home/tidb/.tiup/bin:$PATH` in `~/.bashr` and execute `source ~/.bashrc`. Then make corresponding adjustments according to the shell and the user you use.
+    If you use `bash` and you are a `tidb` user, you can add `export PATH=/home/tidb/.tiup/bin:$PATH` in `~/.bashrc` and execute `source ~/.bashrc`. Then make corresponding adjustments according to the shell and the user you use.
 
 > **Note:**
 >

@@ -24,21 +24,17 @@ RECOVER TABLE BY JOB ddl_job_id
 
 ## Synopsis
 
-**RecoverTableStmt:**
+```ebnf+diagram
+RecoverTableStmt ::=
+    'RECOVER' 'TABLE' ( 'BY' 'JOB' Int64Num | TableName Int64Num? )
 
-![RecoverTableStmt](/media/sqlgram/RecoverTableStmt.png)
+TableName ::=
+    Identifier ( '.' Identifier )?
 
-**TableName:**
+Int64Num ::= NUM
 
-![TableName](/media/sqlgram/TableName.png)
-
-**Int64Num:**
-
-![Int64Num](/media/sqlgram/Int64Num.png)
-
-**NUM:**
-
-![NUM](/media/sqlgram/NUM.png)
+NUM ::= intLit
+```
 
 > **Note:**
 >
@@ -48,7 +44,7 @@ RECOVER TABLE BY JOB ddl_job_id
 >
 > + `RECOVER TABLE` is supported in the Binlog version 3.0.1, so you can use `RECOVER TABLE` in the following three situations:
 >
->     - Binglog version is 3.0.1 or later.
+>     - Binlog version is 3.0.1 or later.
 >     - TiDB 3.0 is used both in the upstream cluster and the downstream cluster.
 >     - The GC life time of the secondary cluster must be longer than that of the primary cluster. However, as latency occurs during data replication between upstream and downstream databases, data recovery might fail in the downstream.
 

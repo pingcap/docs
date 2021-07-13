@@ -6,7 +6,7 @@ aliases: ['/docs/dev/grafana-tikv-dashboard/','/docs/dev/reference/key-monitorin
 
 # Key Monitoring Metrics of TiKV
 
-If you use TiUP or TiDB Ansible to deploy the TiDB cluster, the monitoring system (Prometheus/Grafana) is deployed at the same time. For more information, see [Overview of the Monitoring Framework](/tidb-monitoring-framework.md).
+If you use TiUP to deploy the TiDB cluster, the monitoring system (Prometheus/Grafana) is deployed at the same time. For more information, see [Overview of the Monitoring Framework](/tidb-monitoring-framework.md).
 
 The Grafana dashboard is divided into a series of sub dashboards which include Overview, PD, TiDB, TiKV, Node\_exporter, and so on. A lot of metrics are there to help you diagnose.
 
@@ -77,9 +77,8 @@ This document provides a detailed description of these key metrics on the **TiKV
 - Storage ReadPool CPU: The CPU utilization of the `storage read pool` thread
 - Coprocessor CPU: The CPU utilization of the `coprocessor` thread
 - RocksDB CPU: The CPU utilization of the RocksDB thread
-- Split check CPU: The CPU utilization of the `split check` thread
 - GC worker CPU: The CPU utilization of the `GC worker` thread
-- Snapshot worker CPU: The CPU utilization of the `snapshot worker` thread
+- BackGround worker CPU: The CPU utilization of the `background worker` thread
 
 ## PD
 
@@ -224,20 +223,17 @@ This document provides a detailed description of these key metrics on the **TiKV
 
 ## GC
 
-- MVCC versions: The number of versions for each key
-- MVCC delete versions: The number of versions deleted by GC for each key
 - GC tasks: The count of GC tasks processed by gc_worker
 - GC tasks Duration: The time consumed when executing GC tasks
-- GC keys (write CF): The count of keys in write CF affected during GC
-- TiDB GC worker actions: The count of TiDB GC worker actions
 - TiDB GC seconds: The GC duration
-- GC speed: The number of keys deleted by GC per second
-- TiKV AutoGC Working: The status of Auto GC
+- TiDB GC worker actions: The count of TiDB GC worker actions
 - ResolveLocks Progress: The progress of the first phase of GC (Resolve Locks)
 - TiKV Auto GC Progress: The progress of the second phase of GC
+- GC speed: The number of keys deleted by GC per second
 - TiKV Auto GC SafePoint: The value of TiKV GC safe point. The safe point is the current GC timestamp
 - GC lifetime: The lifetime of TiDB GC
 - GC interval: The interval of TiDB GC
+- GC in Compaction Filter: The count of filtered versions in the compaction filter of write CF.
 
 ## Snapshot
 

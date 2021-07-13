@@ -77,17 +77,6 @@ This document only describes parameters that are not included in command-line pa
 + Default value: `3`
 + Unit: second
 
-### `tso-save-interval`
-
-+ The interval for PD to allocate TSOs for persistent storage in etcd
-+ Default value: `3`
-+ Unit: second
-
-### `enable-prevote`
-
-+ Enables or disables `raft prevote`
-+ Default value: `true`
-
 ### `quota-backend-bytes`
 
 + The storage size of the meta-information database, which is 8GiB by default
@@ -109,21 +98,6 @@ This document only describes parameters that are not included in command-line pa
 + Determines whether to force PD to start as a new cluster and modify the number of Raft members to `1`
 + Default value: `false`
 
-### `tick-interval`
-
-+ The tick period of etcd Raft
-+ Default value: `100ms`
-
-### `election-interval`
-
-+ The timeout for the etcd leader election
-+ Default value: `3s`
-
-### `use-region-storage`
-
-+ Enables or disables independent Region storage
-+ Default value: `false`
-
 ## security
 
 Configuration items related to security
@@ -142,6 +116,12 @@ Configuration items related to security
 
 + The path of the PEM file that contains the X509 key
 + Default value: ""
+
+### `redact-info-log` <span class="version-mark">New in v5.0</span>
+
++ Controls whether to enable log redaction in the PD log.
++ When you set the configuration value to `true`, user data is redacted in the PD log.
++ Default value: `false`
 
 ## `log`
 
@@ -215,7 +195,7 @@ Configuration items related to scheduling
 
 ### `max-snapshot-count`
 
-+ Control the maximum number of snapshots that a single store receives or sends at the same time. PD schedulers depend on this configuration to prevent the resources used for normal traffic from being preempted.
++ Controls the maximum number of snapshots that a single store receives or sends at the same time. PD schedulers depend on this configuration to prevent the resources used for normal traffic from being preempted.
 + Default value value: `3`
 
 ### `max-pending-peer-count`
@@ -238,6 +218,16 @@ Configuration items related to scheduling
 + The number of Region scheduling tasks performed at the same time
 + Default value: `2048`
 
+### `hot-region-schedule-limit`
+
++ Controls the hot Region scheduling tasks that are running at the same time. It is independent of the Region scheduling.
++ Default value: `4`
+
+### `hot-region-cache-hits-threshold`
+
++ The threshold used to set the number of minutes required to identify a hot Region. PD can participate in the hotspot scheduling only after the Region is in the hotspot state for more than this number of minutes.
++ Default value: `3`
+
 ### `replica-schedule-limit`
 
 + The number of Replica scheduling tasks performed at the same time
@@ -250,14 +240,14 @@ Configuration items related to scheduling
 
 ### `high-space-ratio`
 
-+ The threshold ratio below which the capacity of the store is sufficient
++ The threshold ratio below which the capacity of the store is sufficient. If the space occupancy ratio of the store is smaller than this threshold value, PD ignores the remaining space of the store when performing scheduling, and balances load mainly based on the Region size. This configuration takes effect only when `region-score-formula-version` is set to `v1`.
 + Default value: `0.7`
 + Minimum value: greater than `0`
 + Maximum value: less than `1`
 
 ### `low-space-ratio`
 
-+ The threshold ratio above which the capacity of the store is insufficient
++ The threshold ratio above which the capacity of the store is insufficient. If the space occupancy ratio of a store exceeds this threshold value, PD avoids migrating data to this store as much as possible. Meanwhile, to avoid the disk space of the corresponding store being exhausted, PD performs scheduling mainly based on the remaining space of the store.
 + Default value: `0.8`
 + Minimum value: greater than `0`
 + Maximum value: less than `1`
@@ -268,35 +258,21 @@ Configuration items related to scheduling
 + Default value: `0` (automatically adjusts the buffer size)
 + Minimum value: `0`
 
-### `disable-remove-down-replica`
+### `enable-cross-table-merge`
 
-+ Determines whether to disable the feature that automatically removes `DownReplica`. When this parameter is set to `true`, PD does not automatically clean up the copy in the down state.
-+ Default value: `false`
++ Determines whether to enable the merging of cross-table Regions
++ Default value: `true`
 
-### `disable-replace-offline-replica`
+### `region-score-formula-version`
 
-+ Determines whether to disable the feature that migrates `OfflineReplica`. When this parameter is set to `true`, PD does not migrate the replicas in the offline state.
-+ Default value: `false`
++ Controls the version of the Region score formula
++ Default value: `v2`
++ Optional values: `v1` and `v2`
 
-### `disable-make-up-replica`
+### `enable-joint-consensus` <span class="version-mark">New in v5.0</span>
 
-+ Determines whether to disable the feature that automatically supplements replicas. When this parameter is set to `true`, PD does not supplement replicas for the Region with insufficient replicas.
-+ Default value: `false`
-
-### `disable-remove-extra-replica`
-
-+ Determines whether to disable the feature that removes extra replicas. When this parameter is set to `true`, PD does not remove the extra replicas from the Region with excessive replicas.
-+ Default value: `false`
-
-### `disable-location-replacement`
-
-+ Determines whether to disable isolation level check. When this parameter is set to `true`, PD does not increase the isolation level of the Region replicas through scheduling.
-+ Default value: `false`
-
-### `store-balance-rate`
-
-+ Determines the maximum number of operations related to adding peers within a minute
-+ Default value: `15`
++ Controls whether to use Joint Consensus for replica scheduling. If this configuration is disabled, PD schedules one replica at a time.
++ Default value: `true`
 
 ## `replication`
 
@@ -330,6 +306,11 @@ Configuration items related to replicas
 + Default value: `false`
 + See [Placement Rules](/configure-placement-rules.md).
 + An experimental feature of TiDB 4.0.
+
+### `flow-round-by-digit` <span class="version-mark">New in TiDB 5.1</span>
+
++ Default value: 3
++ PD rounds the lowest digits of the flow number, which reduces the update of statistics caused by the changes of the Region flow information. This configuration item is used to specify the number of lowest digits to round for the Region flow information. For example, the flow `100512` will be rounded to `101000` because the default value is `3`. This configuration replaces `trace-region-flow`.
 
 ## `label-property`
 

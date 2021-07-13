@@ -6,17 +6,25 @@ aliases: ['/docs/dev/post-installation-check/']
 
 # Check Cluster Status
 
-This document describes how to check the cluster status via [TiDB Dashboard](/dashboard/dashboard-intro.md) and Grafana, and how to log in to the TiDB database to perform simple DML and DDL operations and SQL queries.
+After a TiDB cluster is deployed, you need to check whether the cluster runs normally. This document introduces how to check the cluster status using TiUP commands, [TiDB Dashboard](/dashboard/dashboard-intro.md) and Grafana, and how to log into the TiDB database to perform simple SQL operations.
 
 ## Check the TiDB cluster status
 
-This section describes how to check the TiDB cluster status using [TiDB Dashboard](/dashboard/dashboard-intro.md) and Grafana.
+This section describes how to check the TiDB cluster status using TiUP commands, [TiDB Dashboard](/dashboard/dashboard-intro.md), and Grafana.
+
+### Use TiUP
+
+Use the `tiup cluster display <cluster-name>` command to check the cluster status. For example:
+
+{{< copyable "shell-regular" >}}
+
+```shell
+tiup cluster display tidb-test
+```
+
+Expected output: If the `Status` information of each node is `Up`, the cluster runs normally.
 
 ### Use TiDB Dashboard
-
-> **Note:**
->
-> TiDB Dashboard is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
 
 1. Log in to TiDB Dashboard at `${pd-ip}:${pd-port}/dashboard`. The username and password is the same as that of the TiDB `root` user. If you have modified the `root` password, enter the modified password. The password is empty by default.
 
@@ -29,8 +37,6 @@ This section describes how to check the TiDB cluster status using [TiDB Dashboar
 ### Use Grafana
 
 1. Log in to the Grafana monitoring at `${Grafana-ip}:3000`. The default username and password are both `admin`.
-
-    ![Grafana-login](/media/tiup/grafana-login.png)
 
 2. To check the TiDB port status and load monitoring information, click **Overview**.
 
@@ -55,7 +61,7 @@ The following information indicates successful login:
 ```sql
 Welcome to the MySQL monitor.  Commands end with ; or \g.
 Your MySQL connection id is 3
-Server version: 5.7.25-TiDB-v4.0.0 TiDB Server (Apache License 2.0) Community Edition, MySQL 5.7 compatible
+Server version: 5.7.25-TiDB-v5.0.0 TiDB Server (Apache License 2.0) Community Edition, MySQL 5.7 compatible
 Copyright (c) 2000, 2015, Oracle and/or its affiliates. All rights reserved.
 Oracle is a registered trademark of Oracle Corporation and/or its
 affiliates. Other names may be trademarks of their respective
@@ -78,7 +84,7 @@ Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 
     ```sql
     *************************** 1. row ***************************
-    tidb_version(): Release Version: v4.0.0
+    tidb_version(): Release Version: v5.0.0
     Edition: Community
     Git Commit Hash: 689a6b6439ae7835947fcaccf329a3fc303986cb
     Git Branch: HEAD
@@ -143,7 +149,7 @@ Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
     {{< copyable "sql" >}}
 
     ```sql
-    insert into `tab_tidb` values (1,'TiDB',5,'TiDB-v4.0.0');
+    insert into `tab_tidb` values (1,'TiDB',5,'TiDB-v5.0.0');
     ```
 
     Expected output:
@@ -166,7 +172,7 @@ Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
     +----+------+-----+-------------+
     | id | name | age | version     |
     +----+------+-----+-------------+
-    |  1 | TiDB |   5 | TiDB-v4.0.0 |
+    |  1 | TiDB |   5 | TiDB-v5.0.0 |
     +----+------+-----+-------------+
     1 row in set (0.00 sec)
     ```

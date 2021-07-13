@@ -10,65 +10,58 @@ This statement adds a new index to an existing table. It is an alternative synta
 
 ## Synopsis
 
-**CreateIndexStmt:**
+```ebnf+diagram
+CreateIndexStmt ::=
+    'CREATE' IndexKeyTypeOpt 'INDEX' IfNotExists Identifier IndexTypeOpt 'ON' TableName '(' IndexPartSpecificationList ')' IndexOptionList IndexLockAndAlgorithmOpt
 
-![CreateIndexStmt](/media/sqlgram/CreateIndexStmt.png)
+IndexKeyTypeOpt ::=
+    ( 'UNIQUE' | 'SPATIAL' | 'FULLTEXT' )?
 
-**IndexKeyTypeOpt:**
+IfNotExists ::=
+    ( 'IF' 'NOT' 'EXISTS' )?
 
-![IndexKeyTypeOpt](/media/sqlgram/IndexKeyTypeOpt.png)
+IndexTypeOpt ::=
+    IndexType?
 
-**IfNotExists:**
+IndexPartSpecificationList ::=
+    IndexPartSpecification ( ',' IndexPartSpecification )*
 
-![IfNotExists](/media/sqlgram/IfNotExists.png)
+IndexOptionList ::=
+    IndexOption*
 
-**IndexTypeOpt:**
+IndexLockAndAlgorithmOpt ::=
+    ( LockClause AlgorithmClause? | AlgorithmClause LockClause? )?
 
-![IndexTypeOpt](/media/sqlgram/IndexTypeOpt.png)
+IndexType ::=
+    ( 'USING' | 'TYPE' ) IndexTypeName
 
-**IndexPartSpecificationList:**
+IndexPartSpecification ::=
+    ( ColumnName OptFieldLen | '(' Expression ')' ) Order
 
-![IndexPartSpecificationList](/media/sqlgram/IndexPartSpecificationList.png)
+IndexOption ::=
+    'KEY_BLOCK_SIZE' '='? LengthNum
+|   IndexType
+|   'WITH' 'PARSER' Identifier
+|   'COMMENT' stringLit
+|   IndexInvisible
 
-**IndexOptionList:**
+IndexTypeName ::=
+    'BTREE'
+|   'HASH'
+|   'RTREE'
 
-![IndexOptionList](/media/sqlgram/IndexOptionList.png)
+ColumnName ::=
+    Identifier ( '.' Identifier ( '.' Identifier )? )?
 
-**IndexLockAndAlgorithmOpt:**
+OptFieldLen ::=
+    FieldLen?
 
-![IndexLockAndAlgorithmOpt](/media/sqlgram/IndexLockAndAlgorithmOpt.png)
+IndexNameList ::=
+    ( Identifier | 'PRIMARY' )? ( ',' ( Identifier | 'PRIMARY' ) )*
 
-**IndexType:**
-
-![IndexType](/media/sqlgram/IndexType.png)
-
-**IndexPartSpecification:**
-
-![IndexPartSpecification](/media/sqlgram/IndexPartSpecification.png)
-
-**IndexOption:**
-
-![IndexOption](/media/sqlgram/IndexOption.png)
-
-**IndexTypeName:**
-
-![IndexTypeName](/media/sqlgram/IndexTypeName.png)
-
-**ColumnName:**
-
-![ColumnName](/media/sqlgram/ColumnName.png)
-
-**OptFieldLen:**
-
-![OptFieldLen](/media/sqlgram/OptFieldLen.png)
-
-**IndexNameList:**
-
-![IndexNameList](/media/sqlgram/IndexNameList.png)
-
-**KeyOrIndex:**
-
-![KeyOrIndex](/media/sqlgram/KeyOrIndex.png)
+KeyOrIndex ::=
+    'Key' | 'Index'
+```
 
 ## Examples
 
@@ -110,6 +103,18 @@ Query OK, 0 rows affected (0.31 sec)
 ```
 
 ## Expression index
+
+> **Note:**
+>
+> Expression index is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
+
+To use this feature, make the following setting in [TiDB Configuration File](/tidb-configuration-file.md#allow-expression-index-new-in-v400):
+
+{{< copyable "sql" >}}
+
+```sql
+allow-expression-index = true
+```
 
 TiDB can build indexes not only on one or more columns in a table, but also on an expression. When queries involve expressions, expression indexes can speed up those queries.
 
@@ -156,7 +161,7 @@ The global variables associated with the `CREATE INDEX` statement are `tidb_ddl_
 
 * `FULLTEXT`, `HASH` and `SPATIAL` indexes are not supported.
 * Descending indexes are not supported (similar to MySQL 5.7).
-* Adding the primary key constraint to a table is not supported by default. You can enable the feature by setting the `alter-primary-key` configuration item to `true`. For details, see [alter-primary-key](/tidb-configuration-file.md#alter-primary-key).
+* Adding the primary key of the `CLUSTERED` type to a table is not supported. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
 
 ## See also
 

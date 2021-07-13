@@ -10,13 +10,11 @@ The statement `KILL TIDB` is used to terminate connections in TiDB.
 
 ## Synopsis
 
-**KillStmt:**
+```ebnf+diagram
+KillStmt ::= KillOrKillTiDB ( 'CONNECTION' | 'QUERY' )? NUM
 
-![KillStmt](/media/sqlgram/KillStmt.png)
-
-**KillOrKillTiDB:**
-
-![KillOrKillTiDB](/media/sqlgram/KillOrKillTiDB.png)
+KillOrKillTiDB ::= 'KILL' 'TIDB'?
+```
 
 ## Examples
 
@@ -30,7 +28,7 @@ mysql> SHOW PROCESSLIST;
 +------+------+-----------+------+---------+------+-------+------------------+
 2 rows in set (0.00 sec)
 
-mysql> KILL TIDB 2;
+KILL TIDB 2;
 Query OK, 0 rows affected (0.00 sec)
 ```
 
@@ -42,3 +40,4 @@ Query OK, 0 rows affected (0.00 sec)
 ## See also
 
 * [SHOW \[FULL\] PROCESSLIST](/sql-statements/sql-statement-show-processlist.md)
+* [CLUSTER_PROCESSLIST](/information-schema/information-schema-processlist.md#cluster_processlist)

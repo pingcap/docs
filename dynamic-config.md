@@ -33,7 +33,6 @@ show config;
 | Type | Instance        | Name                                                      | Value                                                                                                                                                                                                                                                                            |
 +------+-----------------+-----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | tidb | 127.0.0.1:4001  | advertise-address                                         | 127.0.0.1                                                                                                                                                                                                                                                                        |
-| tidb | 127.0.0.1:4001  | alter-primary-key                                         | false                                                                                                                                                                                                                                                                            |
 | tidb | 127.0.0.1:4001  | binlog.binlog-socket                                      |                                                                                                                                                                                                                                                                                  |
 | tidb | 127.0.0.1:4001  | binlog.enable                                             | false                                                                                                                                                                                                                                                                            |
 | tidb | 127.0.0.1:4001  | binlog.ignore-error                                       | false                                                                                                                                                                                                                                                                            |
@@ -66,18 +65,22 @@ When using the `set config` statement, you can modify the configuration of a sin
 
 - Modify the configuration of all TiKV instances:
 
-    {{< copyable "sql" >}}
+> **Note:**
+>
+> It is recommended to wrap variable names in backticks.
 
-    ```sql
-    set config tikv log.level="info"
-    ```
+{{< copyable "sql" >}}
+
+```sql
+set config tikv `split.qps-threshold`=1000
+```
 
 - Modify the configuration of a single TiKV instance:
 
     {{< copyable "sql" >}}
 
     ```sql
-    set config "127.0.0.1:20180" log.level="info"
+    set config "127.0.0.1:20180" `split.qps-threshold`=1000
     ```
 
 If the modification is successful, `Query OK` is returned:
@@ -91,7 +94,7 @@ If an error occurs during the batch modification, a warning is returned:
 {{< copyable "sql" >}}
 
 ```sql
-set config tikv log-level='warn';
+set config `tikv log-level`='warn';
 ```
 
 ```sql
@@ -192,9 +195,10 @@ The following TiKV configuration items can be modified online:
 | `{db-name}.{cf-name}.titan.blob-run-mode` | The mode of processing blob files |
 | `storage.block-cache.capacity` | The size of shared block cache (supported since v4.0.3) |
 | `backup.num-threads` | The number of backup threads (supported since v4.0.3) |
-| `split.qps-threshold` | The threshold to execute `load-base-split` on a Region. If the read QPS is higher than this value for 10 consecutive seconds, this Region should be split. |
-| `split.split-balance-score` | The parameter of `load-base-split`, which ensures the load of the two split Regions is as balanced as possible |
-| `split.split-contained-score` | The parameter of `load-base-split`, which reduces the cross-Region visits after split as much as possible |
+| `split.qps-threshold` | The threshold to execute `load-base-split` on a Region. If the QPS of read requests for a Region exceeds `qps-threshold` for a consecutive period of time, this Region should be split.|
+| `split.byte-threshold` | The threshold to execute `load-base-split` on a Region. If the traffic of read requests for a Region exceeds the `byte-threshold` for a consecutive period of time, this Region should be split. |
+| `split.split-balance-score` | The parameter of `load-base-split`, which ensures the load of the two split Regions is as balanced as possible. The smaller the value is, the more balanced the load is. But setting it too small might cause split failure. |
+| `split.split-contained-score` | The parameter of `load-base-split`. The smaller the value, the fewer cross-Region visits after Region split. |
 
 In the table above, parameters with the `{db-name}` or `{db-name}.{cf-name}` prefix are configurations related to RocksDB. The optional values of `db-name` are `rocksdb` and `raftdb`.
 
@@ -212,7 +216,7 @@ You can modify the PD configurations using the following statement:
 {{< copyable "sql" >}}
 
 ```sql
-set config pd log.level="info"
+set config pd `log.level`='info'
 ```
 
 If the modification is successful, `Query OK` is returned:

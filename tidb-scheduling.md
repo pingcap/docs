@@ -5,7 +5,7 @@ summary: Introduces the PD scheduling component in a TiDB cluster.
 
 # TiDB Scheduling
 
-PD works as the manager in a TiDB cluster, and it also schedules Regions in the cluster. This article introduces the design and core concepts of the PD scheduling component.
+The Placement Driver ([PD](https://github.com/tikv/pd)) works as the manager in a TiDB cluster, and it also schedules Regions in the cluster. This article introduces the design and core concepts of the PD scheduling component.
 
 ## Scheduling situations
 
@@ -18,11 +18,11 @@ Now consider about the following situations:
 * When a new TiKV store is added, data can be rebalanced to it;
 * When a TiKV store fails, PD needs to consider:
     * Recovery time of the failed store.
-        * If it's short (e.g. the service is restarted), whether scheduling is necessary or not.
-        * If it's long (e.g. disk fault, data is lost, etc.), how to do scheduling.
+        * If it's short (for example, the service is restarted), whether scheduling is necessary or not.
+        * If it's long (for example, disk fault, data is lost, etc.), how to do scheduling.
     * Replicas of all Regions.
         * If the number of replicas is not enough for some Regions, PD needs to complete them.
-        * If the number of replicas is more than expected (e.g. the failed store re-joins into the cluster after recovery), PD needs to delete them.
+        * If the number of replicas is more than expected (for example, the failed store re-joins into the cluster after recovery), PD needs to delete them.
 * Read/Write operations are performed on leaders, which can not be distributed only on a few individual stores;
 * Not all Regions are hot, so loads of all TiKV stores need to be balanced;
 * When Regions are in balancing, data transferring utilizes much network/disk traffic and CPU time, which can influence online services.
@@ -67,7 +67,7 @@ Scheduling is based on information collection. In short, the PD scheduling compo
 
 - State information reported by each TiKV peer:
 
-    Each TiKV peer sends heartbeats to PD periodically. PD not only checks whether the store is alive, but also collects [`StoreState`](https://github.com/pingcap/kvproto/blob/release-3.1/proto/pdpb.proto#L421) in the heartbeat message. `StoreState` includes:
+    Each TiKV peer sends heartbeats to PD periodically. PD not only checks whether the store is alive, but also collects [`StoreState`](https://github.com/pingcap/kvproto/blob/master/proto/pdpb.proto#L473) in the heartbeat message. `StoreState` includes:
 
     * Total disk space
     * Available disk space
@@ -79,7 +79,7 @@ Scheduling is based on information collection. In short, the PD scheduling compo
 
 - Information reported by Region leaders:
 
-    Each Region leader sends heartbeats to PD periodically to report [`RegionState`](https://github.com/pingcap/kvproto/blob/release-3.1/proto/pdpb.proto#L271), including:
+    Each Region leader sends heartbeats to PD periodically to report [`RegionState`](https://github.com/pingcap/kvproto/blob/master/proto/pdpb.proto#L312), including:
 
     * Position of the leader itself
     * Positions of other replicas

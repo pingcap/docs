@@ -13,17 +13,36 @@ This statement modifies an existing table to conform to a new table structure. T
 
 ## Synopsis
 
-**AlterTableStmt:**
+```ebnf+diagram
+AlterTableStmt ::=
+    'ALTER' IgnoreOptional 'TABLE' TableName ( AlterTableSpecListOpt AlterTablePartitionOpt | 'ANALYZE' 'PARTITION' PartitionNameList ( 'INDEX' IndexNameList )? AnalyzeOptionListOpt )
 
-![AlterTableStmt](/media/sqlgram/AlterTableStmt.png)
+TableName ::=
+    Identifier ('.' Identifier)?
 
-**TableName:**
-
-![TableName](/media/sqlgram/TableName.png)
-
-**AlterTableSpec:**
-
-![AlterTableSpec](/media/sqlgram/AlterTableSpec.png)
+AlterTableSpec ::=
+    TableOptionList
+|   'SET' 'TIFLASH' 'REPLICA' LengthNum LocationLabelList
+|   'CONVERT' 'TO' CharsetKw ( CharsetName | 'DEFAULT' ) OptCollate
+|   'ADD' ( ColumnKeywordOpt IfNotExists ( ColumnDef ColumnPosition | '(' TableElementList ')' ) | Constraint | 'PARTITION' IfNotExists NoWriteToBinLogAliasOpt ( PartitionDefinitionListOpt | 'PARTITIONS' NUM ) )
+|   ( ( 'CHECK' | 'TRUNCATE' ) 'PARTITION' | ( 'OPTIMIZE' | 'REPAIR' | 'REBUILD' ) 'PARTITION' NoWriteToBinLogAliasOpt ) AllOrPartitionNameList
+|   'COALESCE' 'PARTITION' NoWriteToBinLogAliasOpt NUM
+|   'DROP' ( ColumnKeywordOpt IfExists ColumnName RestrictOrCascadeOpt | 'PRIMARY' 'KEY' |  'PARTITION' IfExists PartitionNameList | ( KeyOrIndex IfExists | 'CHECK' ) Identifier | 'FOREIGN' 'KEY' IfExists Symbol )
+|   'EXCHANGE' 'PARTITION' Identifier 'WITH' 'TABLE' TableName WithValidationOpt
+|   ( 'IMPORT' | 'DISCARD' ) ( 'PARTITION' AllOrPartitionNameList )? 'TABLESPACE'
+|   'REORGANIZE' 'PARTITION' NoWriteToBinLogAliasOpt ReorganizePartitionRuleOpt
+|   'ORDER' 'BY' AlterOrderItem ( ',' AlterOrderItem )*
+|   ( 'DISABLE' | 'ENABLE' ) 'KEYS'
+|   ( 'MODIFY' ColumnKeywordOpt IfExists | 'CHANGE' ColumnKeywordOpt IfExists ColumnName ) ColumnDef ColumnPosition
+|   'ALTER' ( ColumnKeywordOpt ColumnName ( 'SET' 'DEFAULT' ( SignedLiteral | '(' Expression ')' ) | 'DROP' 'DEFAULT' ) | 'CHECK' Identifier EnforcedOrNot | 'INDEX' Identifier IndexInvisible )
+|   'RENAME' ( ( 'COLUMN' | KeyOrIndex ) Identifier 'TO' Identifier | ( 'TO' | '='? | 'AS' ) TableName )
+|   LockClause
+|   AlgorithmClause
+|   'FORCE'
+|   ( 'WITH' | 'WITHOUT' ) 'VALIDATION'
+|   'SECONDARY_LOAD'
+|   'SECONDARY_UNLOAD'
+```
 
 ## Examples
 
@@ -131,9 +150,15 @@ Query OK, 0 rows affected, 1 warning (0.25 sec)
 
 The following major restrictions apply to `ALTER TABLE` in TiDB:
 
-* Multiple operations cannot be completed in a single `ALTER TABLE` statement.
+* Making multiple changes in a single `ALTER TABLE` statement is currently not supported. 
 
-* Lossy changes such as changing from `BIGINT` to `INT` are currently not supported.
+* Changes of the [Reorg-Data](/sql-statements/sql-statement-modify-column.md#reorg-data-change) types on primary key columns are not supported.
+
+* Changes of column types on partitioned tables are not supported.
+
+* Changes of column types on generated columns are not supported.
+
+* Changes of some data types (for example, some TIME, Bit, Set, Enum, and JSON types) are not supported due to the compatibility issues of the `CAST` function's behavior between TiDB and MySQL.
 
 * Spatial data types are not supported.
 

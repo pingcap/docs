@@ -1,7 +1,7 @@
 ---
 title: TiDB Lightning Backends
 summary: Learn the backends of TiDB Lightning.
-aliases: ['/docs/dev/tidb-lightning/tidb-lightning-tidb-backend/','/docs/dev/reference/tools/tidb-lightning/tidb-backend/','/tidb/dev/tidb-lightning-tidb-backend']
+aliases: ['/docs/dev/tidb-lightning/tidb-lightning-tidb-backend/','/docs/dev/reference/tools/tidb-lightning/tidb-backend/','/tidb/dev/tidb-lightning-tidb-backend','/docs/dev/loader-overview/','/docs/dev/reference/tools/loader/','/docs/dev/load-misuse-handling/','/docs/dev/reference/tools/error-case-handling/load-misuse-handling/','/tidb/dev/load-misuse-handling','/tidb/dev/loader-overview/']
 ---
 
 # TiDB Lightning Backends
@@ -16,7 +16,7 @@ TiDB Lightning supports the following [backends](/tidb-lightning/tidb-lightning-
 
 The **Importer-backend** (default): `tidb-lightning` first encodes the SQL or CSV data into KV pairs, and relies on the external `tikv-importer` program to sort these KV pairs and ingest directly into the TiKV nodes.
 
-The **Local-backend**: `tidb-lightning` first encodes data into key-value pairs, sorts and stores them in a local temporary directory, and writes these key-value pairs to each TiKV node in batches. Then, TiKV ingests these key-value pairs into the cluster. The implementation of Local-backend is the same with that of Importer-backend but does not rely on the external `tikv-importer` component.
+The **Local-backend**: `tidb-lightning` first encodes data into key-value pairs, sorts and stores them in a local temporary directory, and *upload* these key-value pairs to each TiKV node *as SST files*. Then, TiKV ingests these *SST files* into the cluster. The implementation of Local-backend is the same with that of Importer-backend but does not rely on the external `tikv-importer` component.
 
 The **TiDB-backend**: `tidb-lightning` first encodes these data into SQL `INSERT` statements, and has these statements executed directly on the TiDB node.
 
@@ -29,6 +29,7 @@ The **TiDB-backend**: `tidb-lightning` first encodes these data into SQL `INSERT
 | Target tables | Must be empty | Must be empty | Can be populated |
 | Additional component required | No | `tikv-importer` | No |
 | TiDB versions supported | >= v4.0.0 | All | All |
+| TiDB services impacted | Yes | Yes | No |
 
 ## How to choose the backend modes
 
@@ -46,6 +47,10 @@ To deploy TiDB Lightning in the Local-backend mode, see [TiDB Lightning Deployme
 
 ## TiDB Lightning TiDB-backend
 
+> **Note:**
+>
+> Since TiDB v4.0, PingCAP no longer maintains the [Loader](https://docs.pingcap.com/tidb/v4.0/loader-overview) tool. Since v5.0, the Loader documentation is no longer available. Loader's functionality has been completely replaced by the TiDB-backend of TiDB Lightning, so it is highly recommended to switch to TiDB Lightning.
+
 ### Deployment for TiDB-backend
 
 When using the TiDB-backend, deploying `tikv-importer` is not necessary. Compared with the [standard deployment procedure](/tidb-lightning/deploy-tidb-lightning.md), the TiDB-backend deployment has the following two differences:
@@ -60,37 +65,6 @@ The speed of TiDB Lightning using TiDB-backend is limited by the SQL processing 
 * 16 logical cores CPU
 * An SSD large enough to store the entire data source, preferring higher read speed
 * 1 Gigabit network card
-
-#### Deploy TiDB Lightning using TiDB Ansible
-
-1. The `[importer_server]` section in `inventory.ini` can be left blank.
-
-    ```ini
-    ...
-
-    [importer_server]
-    # keep empty
-
-    [lightning_server]
-    192.168.20.10
-
-    ...
-    ```
-
-2. The `tikv_importer_port` setting in `group_vars/all.yml` is ignored, and the file `group_vars/importer_server.yml` does not need to be changed. But you need to edit `conf/tidb-lightning.yml` and change the `backend` setting to `tidb`.
-
-    ```yaml
-    ...
-    tikv_importer:
-        backend: "tidb"   # <-- change this
-    ...
-    ```
-
-3. Bootstrap and deploy the cluster as usual.
-
-4. Mount the data source for TiDB Lightning as usual.
-
-5. Start `tidb-lightning` as usual.
 
 #### Manual deployment
 
@@ -123,7 +97,7 @@ on-duplicate = "replace" # or "error" or "ignore"
 
 ### Migrating from Loader to TiDB Lightning TiDB-backend
 
-TiDB Lightning using the TiDB-backend can completely replace functions of [Loader](/loader-overview.md). The following list shows how to translate Loader configurations into [TiDB Lightning configurations](/tidb-lightning/tidb-lightning-configuration.md).
+If you need to import data into a TiDB cluster, TiDB Lightning using the TiDB-backend can completely replace the functionalities of [Loader](https://docs.pingcap.com/tidb/v4.0/loader-overview). The following list shows how to translate Loader configurations into [TiDB Lightning configurations](/tidb-lightning/tidb-lightning-configuration.md).
 
 <table>
 <thead><tr><th>Loader</th><th>TiDB Lightning</th></tr></thead>
@@ -132,8 +106,10 @@ TiDB Lightning using the TiDB-backend can completely replace functions of [Loade
 
 ```toml
 
-# logging
+# log level
 log-level = "info"
+
+# The directory to which the log is output
 log-file = "loader.log"
 
 # Prometheus
@@ -147,8 +123,10 @@ pool-size = 16
 
 ```toml
 [lightning]
-# logging
+# log level
 level = "info"
+
+# The directory to which the log is output. If this directory is not specified, it defaults to the directory where the command is executed.
 file = "tidb-lightning.log"
 
 # Prometheus
@@ -236,7 +214,9 @@ password = ""
 # TiDB connection parameters
 host = "127.0.0.1"
 port = 4000
-status-port = 10080  # <- this is required
+
+# In the TiDB-backend mode, this parameter is optional.
+# status-port = 10080
 user = "root"
 password = ""
 
@@ -273,10 +253,7 @@ password = ""
 
 ### Deployment for Importer-backend mode
 
-This section describes two deployment methods of TiDB Lightning in the Importer-backend mode:
-
-- [Deploy TiDB Lightning using TiDB Ansible](#deploy-tidb-lightning-using-tidb-ansible)
-- [Deploy TiDB Lightning manually](#deploy-tidb-lightning-manually)
+This section describes how to [deploy TiDB Lightning manually](#deploy-tidb-lightning-manually) in the Importer-backend mode:
 
 #### Hardware requirements
 
@@ -301,81 +278,6 @@ To achieve the best performance, it is recommended to use the following hardware
     - `tikv-importer` fully consumes all CPU, disk I/O and network bandwidth when running, and deploying on a dedicated machine is strongly recommended.
 
 If you have sufficient machines, you can deploy multiple `tidb lightning` + `tikv importer` servers, with each working on a distinct set of tables, to import the data in parallel.
-
-#### Deploy TiDB Lightning using TiDB Ansible
-
-You can deploy TiDB Lightning using TiDB Ansible together with the [deployment of the TiDB cluster itself using TiDB Ansible](/online-deployment-using-ansible.md).
-
-1. Edit `inventory.ini` to add the addresses of the `tidb-lightning` and `tikv-importer` servers.
-
-    ```ini
-    ...
-
-    [importer_server]
-    192.168.20.9
-
-    [lightning_server]
-    192.168.20.10
-
-    ...
-    ```
-
-2. Configure these tools by editing the settings under `group_vars/*.yml`.
-
-    * `group_vars/all.yml`
-
-        ```yaml
-        ...
-        # The listening port of tikv-importer. Should be open to the tidb-lightning server.
-        tikv_importer_port: 8287
-        ...
-        ```
-
-    * `group_vars/lightning_server.yml`
-
-        ```yaml
-        ---
-        dummy:
-
-        # The listening port for metrics gathering. Should be open to the monitoring servers.
-        tidb_lightning_pprof_port: 8289
-
-        # The file path that tidb-lightning reads the data source (Mydumper SQL dump or CSV) from.
-        data_source_dir: "{{ deploy_dir }}/mydumper"
-        ```
-
-    * `group_vars/importer_server.yml`
-
-        ```yaml
-        ---
-        dummy:
-
-        # The file path to store engine files. Should reside on a partition with a large capacity.
-        import_dir: "{{ deploy_dir }}/data.import"
-        ```
-
-3. Deploy the cluster.
-
-    ```sh
-    ansible-playbook bootstrap.yml &&
-    ansible-playbook deploy.yml
-    ```
-
-4. Mount the data source to the path specified in the `data_source_dir` setting.
-
-5. Log in to the `tikv-importer` server, and manually run the following command to start Importer.
-
-    ```sh
-    scripts/start_importer.sh
-    ```
-
-6. Log in to the `tidb-lightning` server, and manually run the following command to start Lightning and import the data into the TiDB cluster.
-
-    ```sh
-    scripts/start_lightning.sh
-    ```
-
-7. After completion, run `scripts/stop_importer.sh` on the `tikv-importer` server to stop Importer.
 
 #### Deploy TiDB Lightning manually
 
@@ -461,8 +363,7 @@ Refer to the [TiDB enterprise tools download page](/download-ecosystem-tools.md#
     status-port = 10080
     ```
 
-    The above only shows the essential settings.
-    See the [Configuration](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-global) section for the full list of settings.
+    The above only shows the essential settings. See the [Configuration](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-global) section for the full list of settings.
 
 4. Run `tidb-lightning`. If you directly run the command in the command-line, the process might exit because of the SIGHUP signal received. Instead, it's preferable to run a bash script that contains the `nohup` command:
 

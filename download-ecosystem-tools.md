@@ -18,7 +18,7 @@ If you want to download the latest version of [TiDB Binlog](/tidb-binlog/tidb-bi
 
 > **Note:**
 >
-> `{version}` in the above download link indicates the version number of TiDB. For example, the download link for `v3.0.5` is `https://download.pingcap.org/tidb-v3.0.5-linux-amd64.tar.gz`.
+> `{version}` in the above download link indicates the version number of TiDB. For example, the download link for `v5.1.0` is `https://download.pingcap.org/tidb-v5.1.0-linux-amd64.tar.gz`.
 
 ## TiDB Lightning
 
@@ -30,23 +30,23 @@ Download [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) by using t
 
 > **Note:**
 >
-> `{version}` in the above download link indicates the version number of TiDB Lightning. For example, the download link for `v3.0.5` is `https://download.pingcap.org/tidb-toolkit-v3.0.5-linux-amd64.tar.gz`.
+> `{version}` in the above download link indicates the version number of TiDB Lightning. For example, the download link for `v5.1.0` is `https://download.pingcap.org/tidb-toolkit-v5.1.0-linux-amd64.tar.gz`.
 
 ## BR (backup and restore)
 
 Download [BR](/br/backup-and-restore-tool.md) by using the download link in the following table:
 
-| Package name | OS | Architecure | SHA256 checksum |
+| Package name | OS | Architecture | SHA256 checksum |
 |:---|:---|:---|:---|
 | `http://download.pingcap.org/tidb-toolkit-{version}-linux-amd64.tar.gz` | Linux | amd64 | `http://download.pingcap.org/tidb-toolkit-{version}-linux-amd64.sha256` |
 
 > **Note:**
 >
-> `{version}` in the above download link indicates the version number of BR. For example, the download link for `v3.1.0-beta` is `http://download.pingcap.org/tidb-toolkit-v3.1.0-beta-linux-amd64.tar.gz`.
+> `{version}` in the above download link indicates the version number of BR. For example, the download link for `v5.0.0-beta` is `http://download.pingcap.org/tidb-toolkit-v5.0.0-beta-linux-amd64.tar.gz`.
 
 ## TiDB DM (Data Migration)
 
-Download [DM](https://docs.pingcap.com/tidb-data-migration/v1.0/overview) by using the download link in the following table:
+Download [DM](https://docs.pingcap.com/tidb-data-migration/stable/overview) by using the download link in the following table:
 
 | Package name | OS | Architecture | SHA256 checksum |
 |:---|:---|:---|:---|
@@ -54,7 +54,7 @@ Download [DM](https://docs.pingcap.com/tidb-data-migration/v1.0/overview) by usi
 
 > **Note:**
 >
-> `{version}` in the above download link indicates the version number of DM. For example, the download link for `v1.0.1` is `https://download.pingcap.org/dm-v1.0.1-linux-amd64.tar.gz`. You can check the published DM versions in the [DM Release](https://github.com/pingcap/dm/releases) page.
+> `{version}` in the above download link indicates the version number of DM. For example, the download link for `v2.0.4` is `https://download.pingcap.org/dm-v2.0.4-linux-amd64.tar.gz`. You can check the published DM versions in the [DM Release](https://github.com/pingcap/dm/releases) page.
 
 ## Dumpling
 
@@ -66,21 +66,18 @@ Download [Dumpling](/dumpling-overview.md) from the links below:
 
 > **Note:**
 >
-> The `{version}` in the download link is the version number of Dumpling. For example, the link for downloading the `v4.0.2` version of Dumpling is `https://download.pingcap.org/tidb-toolkit-v4.0.2-linux-amd64.tar.gz`. You can view the currently released versions in [Dumpling Releases](https://github.com/pingcap/dumpling/releases).
+> The `{version}` in the download link is the version number of Dumpling. For example, the link for downloading the `v5.1.0` version of Dumpling is `https://download.pingcap.org/tidb-toolkit-v5.1.0-linux-amd64.tar.gz`. You can view the currently released versions in [Dumpling Releases](https://github.com/pingcap/dumpling/releases).
 >
 > Dumpling supports arm64 linux. You can replace `amd64` in the download link with `arm64`, which means the `arm64` version of Dumpling.
 
-## Syncer, Loader, and Mydumper
+## sync-diff-inspector
 
-If you want to download the latest version of [Syncer](/syncer-overview.md), [Loader](/loader-overview.md), or [Mydumper](/mydumper-overview.md), directly download the tidb-enterprise-tools package, because all these tools are included in this package.
+Download [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md) from the links below:
 
 | Package name | OS | Architecture | SHA256 checksum |
 |:---|:---|:---|:---|
 | [tidb-enterprise-tools-nightly-linux-amd64.tar.gz](https://download.pingcap.org/tidb-enterprise-tools-nightly-linux-amd64.tar.gz) | Linux | amd64 | [tidb-enterprise-tools-nightly-linux-amd64.sha256](https://download.pingcap.org/tidb-enterprise-tools-nightly-linux-amd64.sha256) |
 
-This enterprise tools package includes all the following tools:
+## TiCDC
 
-- Syncer
-- Loader
-- Mydumper
-- [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md)
+To download [TiCDC](/ticdc/ticdc-overview.md), refer to [Deploy TiCDC](/ticdc/deploy-ticdc.md).

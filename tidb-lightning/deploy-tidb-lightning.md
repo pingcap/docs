@@ -6,15 +6,14 @@ aliases: ['/docs/dev/tidb-lightning/deploy-tidb-lightning/','/docs/dev/reference
 
 # TiDB Lightning Deployment
 
-This document describes the hardware requirements of TiDB Lightning using the Local-backend, and how to deploy it using TiDB Ansible or manually.
+This document describes the hardware requirements of TiDB Lightning using the Local-backend, and how to deploy it manually.
 
-If you do not want the TiDB services to be impacted, read [TiDB Lightning TiDB-backend](/tidb-lightning/tidb-lightning-backends.md#tidb-lightning-tidb-backend) for the changes to the deployment steps.
+If Local-backend is used for data import, during the import process, **the cluster cannot provide services**. If you do not want the TiDB services to be impacted, perform the data import according to [TiDB Lightning TiDB-backend](/tidb-lightning/tidb-lightning-backends.md#tidb-lightning-tidb-backend).
 
 ## Notes
 
 Before starting TiDB Lightning, note that:
 
-- During the import process, the cluster cannot provide normal services.
 - If `tidb-lightning` crashes, the cluster is left in "import mode". Forgetting to switch back to "normal mode" can lead to a high amount of uncompacted data on the TiKV cluster, and cause abnormally high CPU usage and stall. You can manually switch the cluster back to "normal mode" via the `tidb-lightning-ctl` tool:
 
     ```sh
@@ -49,8 +48,7 @@ Before starting TiDB Lightning, note that:
 >
 > - `tidb-lightning` is a CPU intensive program. In an environment with mixed components, the resources allocated to `tidb-lightning` must be limited. Otherwise, other components might not be able to run. It is recommended to set the `region-concurrency` to 75% of CPU logical cores. For instance, if the CPU has 32 logical cores, you can set the `region-concurrency` to 24.
 
-Additionally, the target TiKV cluster should have enough space to absorb the new data.
-Besides [the standard requirements](/hardware-and-software-requirements.md), the total free space of the target TiKV cluster should be larger than **Size of data source × [Number of replicas](/faq/deploy-and-maintain-faq.md#is-the-number-of-replicas-in-each-region-configurable-if-yes-how-to-configure-it) × 2**.
+Additionally, the target TiKV cluster should have enough space to absorb the new data. Besides [the standard requirements](/hardware-and-software-requirements.md), the total free space of the target TiKV cluster should be larger than **Size of data source × [Number of replicas](/faq/deploy-and-maintain-faq.md#is-the-number-of-replicas-in-each-region-configurable-if-yes-how-to-configure-it) × 2**.
 
 With the default replica count of 3, this means the total free space should be at least 6 times the size of data source.
 
@@ -73,82 +71,23 @@ If the data source consists of CSV files, see [CSV support](/tidb-lightning/migr
 
 ## Deploy TiDB Lightning
 
-This section describes two deployment methods of TiDB Lightning:
-
-- [Deploy TiDB Lightning using TiDB Ansible](#deploy-tidb-lightning-using-tidb-ansible)
-- [Deploy TiDB Lightning manually](#deploy-tidb-lightning-manually)
-
-### Deploy TiDB Lightning using TiDB Ansible
-
-You can deploy TiDB Lightning using TiDB Ansible together with the [deployment of the TiDB cluster itself using TiDB Ansible](/online-deployment-using-ansible.md).
-
-1. Edit `inventory.ini` to configure an IP address for `tidb-lightning`.
-
-    ```ini
-    ...
-
-    [lightning_server]
-    192.168.20.10
-
-    ...
-    ```
-
-2. Configure `tidb-lightning` by editing the settings under `group_vars/*.yml`.
-
-    * `group_vars/lightning_server.yml`
-
-        ```yaml
-        ---
-        dummy:
-
-        # The listening port for metrics gathering. Should be open to the monitoring servers.
-        tidb_lightning_pprof_port: 8289
-
-        # The file path that tidb-lightning reads the data source (Dumpling SQL dump or CSV) from.
-        data_source_dir: "{{ deploy_dir }}/mydumper"
-        ```
-
-3. Deploy the cluster.
-
-    ```sh
-    ansible-playbook bootstrap.yml &&
-    ansible-playbook deploy.yml
-    ```
-
-4. Mount the data source to the path specified in the `data_source_dir` setting.
-
-5. Log in to the `tidb-lightning` server and edit the `conf/tidb-lighting.toml` file as follows:
-
-    ```
-    [tikv-importer]
-    # Uses the Local-backend.
-    backend = "local"
-    # Sets the directory for temporarily storing the sorted key-value pairs.
-    # The target directory must be empty.
-    "sorted-kv-dir" = "/mnt/ssd/sorted-kv-dir"
-
-    [tidb]
-    # An address of pd-server.
-    pd-addr = "172.16.31.4:2379
-    ```
-
-6. Log in to the `tidb-lightning` server, and manually run the following command to start Lightning and import the data into the TiDB cluster.
-
-    ```sh
-    scripts/start_lightning.sh
-    ```
+This section describes how to [deploy TiDB Lightning manually](#deploy-tidb-lightning-manually).
 
 ### Deploy TiDB Lightning manually
 
 #### Step 1: Deploy a TiDB cluster
 
-Before importing data, you need to have a deployed TiDB cluster, with the cluster version 2.0.9 or above. It is highly recommended to use the latest version.
+Before importing data, you need to have a deployed TiDB cluster. It is highly recommended to use the latest stable version.
 
 You can find deployment instructions in [TiDB Quick Start Guide](/quick-start-with-tidb.md).
 
 #### Step 2: Download the TiDB Lightning installation package
 
-Refer to the [TiDB enterprise tools download page](/download-ecosystem-tools.md#tidb-lightning) to download the TiDB Lightning package (choose the same version as that of the TiDB cluster).
+Refer to the [TiDB enterprise tools download page](/download-ecosystem-tools.md#tidb-lightning) to download the TiDB Lightning package. 
+
+> **Note:**
+>
+> TiDB Lightning is compatible with TiDB clusters of earlier versions. It is recommended that you download the latest stable version of the TiDB Lightning installation package.
 
 #### Step 3: Start `tidb-lightning`
 
@@ -191,8 +130,7 @@ Refer to the [TiDB enterprise tools download page](/download-ecosystem-tools.md#
     pd-addr = "172.16.31.4:2379"
     ```
 
-    The above only shows the essential settings.
-    See the [Configuration](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-global) section for the full list of settings.
+    The above only shows the essential settings. See the [Configuration](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-global) section for the full list of settings.
 
 4. Run `tidb-lightning`.
 

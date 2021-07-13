@@ -10,6 +10,10 @@ TiDB is fully compatible with the MySQL 5.7 protocol and the common features and
 
 However, some features of MySQL are not supported. This could be because there is now a better way to solve the problem (such as XML functions superseded by JSON), or a lack of current demand versus effort required (such as stored procedures and functions). Some features might also be difficult to implement as a distributed system.
 
+- In addition, TiDB does not support the MySQL replication protocol, but provides specific tools to replicate data with MySQL.
+    - Replicate data from MySQL: [TiDB Data Migration (DM)](https://docs.pingcap.com/tidb-data-migration/stable/overview) is a tool that supports the full data migration and the incremental data replication from MySQL/MariaDB into TiDB.
+    - Replicate data to MySQL: [TiCDC](/ticdc/ticdc-overview.md) is a tool for replicating the incremental data of TiDB by pulling TiKV change logs. TiCDC uses the [MySQL sink](/ticdc/ticdc-overview.md#sink-support) to replicate the incremental data of TiDB to MySQL.
+
 > **Note:**
 >
 > This page refers to general differences between MySQL and TiDB. Refer to the dedicated pages for [Security](/security-compatibility-with-mysql.md) and [Pessimistic Transaction Model](/pessimistic-transaction.md#difference-with-mysql-innodb) compatibility.
@@ -35,6 +39,7 @@ However, some features of MySQL are not supported. This could be because there i
 + `CHECK TABLE` syntax [#4673](https://github.com/pingcap/tidb/issues/4673)
 + `CHECKSUM TABLE` syntax [#1895](https://github.com/pingcap/tidb/issues/1895)
 + `GET_LOCK` and `RELEASE_LOCK` functions [#14994](https://github.com/pingcap/tidb/issues/14994)
++ [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) with the `REPLACE` keyword [#24515](https://github.com/pingcap/tidb/issues/24515)
 
 ## Features that are different from MySQL
 
@@ -50,8 +55,6 @@ However, some features of MySQL are not supported. This could be because there i
 
 > **Note:**
 >
-> + To use the `tidb_allow_remove_auto_inc` system variable, your TiDB version must be >= v2.1.18 or >= v3.0.4.
-> + The `AUTO_ID_CACHE` table attribute requires that your TiDB version >= v3.0.14 or >= v3.1.2 or >= v4.0.0-rc.2.
 > + If you have not specified the primary key when creating a table, TiDB uses `_tidb_rowid` to identify the row. The allocation of this value shares an allocator with the auto-increment column (if such a column exists). If you specify an auto-increment column as the primary key, TiDB uses this column to identify the row. In this situation, the following situation might happen:
 
 ```sql
@@ -92,13 +95,10 @@ See also: [TiDB SQL Grammar](https://pingcap.github.io/sqlgram/#functioncallkeyw
 In TiDB, all supported DDL changes are performed online. Compared with DDL operations in MySQL, the DDL operations in TiDB have the following major restrictions:
 
 * Multiple operations cannot be completed in a single `ALTER TABLE` statement. For example, it is not possible to add multiple columns or indexes in a single statement. Otherwise, the `Unsupported multi schema change` error might be output.
-* Different types of indexes (`HASH|BTREE|RTREE|FULLTEXT`) are not supported, and will be parsed and ignored when specified.
-* Adding/Dropping the primary key is unsupported unless [`alter-primary-key`](/tidb-configuration-file.md#alter-primary-key) is enabled.
-* Changing the field type to its superset is unsupported. For example, TiDB does not support changing the field type from `INTEGER` to `VARCHAR`, or from `TIMESTAMP` to `DATETIME`. Otherwise, the error information `Unsupported modify column: type %d not match origin %d` might be output.
-* Change/Modify data type does not currently support "lossy changes", such as changing from BIGINT to INT.
-* Change/Modify decimal columns does not support changing the precision.
-* Change/Modify integer columns does not permit changing the `UNSIGNED` attribute.
+* `ALTER TABLE` in TiDB does not support the changes of some data types. For example, TiDB does not support the change from the `DECIMAL` type to the `DATE` type. If a data type change is unsupported, TiDB reports the `Unsupported modify column: type %d not match origin %d` error. Refer to [`ALTER TABLE`](/sql-statements/sql-statement-modify-column.md) for more details.
 * The `ALGORITHM={INSTANT,INPLACE,COPY}` syntax functions only as an assertion in TiDB, and does not modify the `ALTER` algorithm. See [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md) for further details.
+* Adding/Dropping the primary key of the `CLUSTERED` type is unsupported. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
+* Different types of indexes (`HASH|BTREE|RTREE|FULLTEXT`) are not supported, and will be parsed and ignored when specified.
 * Table Partitioning supports Hash, Range, and `Add`/`Drop`/`Truncate`/`Coalesce`. The other partition operations are ignored. The `Warning: Unsupported partition type, treat as normal table` error might be output. The following Table Partition syntaxes are not supported:
     - `PARTITION BY LIST`
     - `PARTITION BY KEY`
@@ -113,8 +113,9 @@ These differences are documented further in [`ANALYZE TABLE`](/sql-statements/sq
 
 ### Limitations of `SELECT` syntax
 
-- The `SELECT ... INTO @variable` syntax is not supported.
-- The `SELECT ... GROUP BY ... WITH ROLLUP` syntax is not supported.
+- The syntax `SELECT ... INTO @variable` is not supported.
+- The syntax `SELECT ... GROUP BY ... WITH ROLLUP` is not supported.
+- The syntax `SELECT .. GROUP BY expr` does not imply `GROUP BY expr ORDER BY expr` as it does in MySQL 5.7. TiDB instead matches the behavior of MySQL 8.0 and does not imply a default order.
 
 ### Views
 
@@ -171,16 +172,16 @@ TiDB supports most [SQL modes](/sql-mode.md):
 + TiDB uses all time zone rules currently installed in the system for calculation (usually the `tzdata` package). You can use all time zone names without importing the time zone table data. You cannot modify the calculation rules by importing the time zone table data.
 + MySQL uses the local time zone by default and relies on the current time zone rules built into the system (such as when to start daylight saving time) for calculation; and the time zone cannot be specified by the time zone name without [importing the time zone table data](https://dev.mysql.com/doc/refman/5.7/en/time-zone-support.html#time-zone-installation).
 
-#### Zero month and zero day
-
-By default, the `NO_ZERO_DATE` and `NO_ZERO_IN_DATE` modes are enabled in TiDB, which is the same in MySQL, but TiDB and MySQL handle the two SQL modes differently in the following aspects:
-
-- The two SQL modes above are enabled in TiDB in the non-strict mode where no warning is prompted for inserting values of zero month/zero day/zero date. In MySQL, such `INSERT` operations prompt warning.
-- In the strict mode, when `NO_ZERO_DATE` is enabled, you can still insert values of zero date; when `NO_ZERO_IN_DATE` is enabled, you cannot insert date of zero month/zero day. In the strict mode of MySQL, you can insert neither of them.
-
 ### Type system differences
 
 The following column types are supported by MySQL, but **NOT** by TiDB:
 
 + FLOAT4/FLOAT8
 + `SQL_TSI_*` (including SQL_TSI_MONTH, SQL_TSI_WEEK, SQL_TSI_DAY, SQL_TSI_HOUR, SQL_TSI_MINUTE and SQL_TSI_SECOND, excluding SQL_TSI_YEAR)
+
+### Incompatibility caused by deprecated features
+
+TiDB does not implement certain features that have been marked as deprecated in MySQL, including:
+
+* Specifying precision for floating point types. MySQL 8.0 [deprecates](https://dev.mysql.com/doc/refman/8.0/en/floating-point-types.html) this feature, and it is recommended to use the `DECIMAL` type instead.
+* The `ZEROFILL` attribute. MySQL 8.0 [deprecates](https://dev.mysql.com/doc/refman/8.0/en/numeric-type-attributes.html) this feature, and it is recommended to instead pad numeric values in your application.

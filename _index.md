@@ -16,11 +16,10 @@ Designed for the cloud, TiDB provides flexible scalability, reliability and secu
 
 - [TiDB Introduction](/overview.md)
 - [Basic Features](/basic-features.md)
-- [What's New in TiDB 4.0](/whats-new-in-tidb-4.0.md)
+- [TiDB 5.1 Release Notes](/releases/release-5.1.0.md)
 - [Compatibility with MySQL](/mysql-compatibility.md)
 - [Usage Limitations](/tidb-limitations.md)
 - [TiDB Adopters](/adopters.md)
-- [Credits](/credits.md)
 
 </NavColumn>
 
@@ -47,7 +46,8 @@ Designed for the cloud, TiDB provides flexible scalability, reliability and secu
 <ColumnTitle>Migrate Data</ColumnTitle>
 
 - [Migration Overview](/migration-overview.md)
-- [Migrate from Aurora MySQL Database](/migrate-from-aurora-mysql-database.md)
+- [Migrate full data from Aurora](/migrate-from-aurora-using-lightning.md)
+- [Migrate continuously from Aurora/MySQL Database](/migrate-from-aurora-mysql-database.md)
 - [Migrate from CSV Files](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)
 - [Migrate from MySQL SQL Files](/migrate-from-mysql-dumpling-files.md)
 
@@ -71,6 +71,7 @@ Designed for the cloud, TiDB provides flexible scalability, reliability and secu
 - [Monitoring Framework](/tidb-monitoring-framework.md)
 - [Monitoring API](/tidb-monitoring-api.md)
 - [Deploy Monitoring Services](/deploy-monitoring-services.md)
+- [Export Grafana Snapshots](/exporting-grafana-snapshots.md)
 - [Alert Rules and Solutions](/alert-rules.md)
 - [TiFlash Alert Rules and Solutions](/tiflash/tiflash-alert-rules.md)
 

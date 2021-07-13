@@ -32,9 +32,9 @@ If the `ANSI_QUOTES` SQL MODE is enabled, string literals can be quoted only wit
 The string is divided into the following two types:
 
 + Binary string: It consists of a sequence of bytes, whose charset and collation are both `binary`, and uses **byte** as the unit when compared with each other.
-+ Non-binary string: It consists of a sequence of characters and has various charsets and collations other than `binary`. When compared with each other, non-binary strings use **characters** as the unit. A charater might contian multiple bytes, depending on the charset.
++ Non-binary string: It consists of a sequence of characters and has various charsets and collations other than `binary`. When compared with each other, non-binary strings use **characters** as the unit. A character might contain multiple bytes, depending on the charset.
 
-A string literal may have an optional `character set introducer` and `COLLATE clause`, to designate it as a string that uses a specific character set and collation. 
+A string literal may have an optional `character set introducer` and `COLLATE clause`, to designate it as a string that uses a specific character set and collation.
 
 ```
 [_charset_name]'string' [COLLATE collation_name]
@@ -95,12 +95,12 @@ Date and time literal values can be represented in several formats, such as quot
 TiDB supports the following date formats:
 
 * `'YYYY-MM-DD'` or `'YY-MM-DD'`: The `-` delimiter here is not strict. It can be any punctuation. For example, `'2017-08-24'`, `'2017&08&24'`, `'2012@12^31'` are all valid date formats. The only special punctuation is '.', which is is treated as a decimal point to separate the integer and fractional parts. Date and time can be separated by `T` or a white space. For example, `2017-8-24 10:42:00` and `2017-8-24T10:42:00` represents the same date and time.
-* `'YYYYMMDDHHMMSS'` or `'YYMMDDHHMMSS'`: For example, `'20170824104520'` and `'170824104520'` are regarded as `'2017-08-24 10:45:20'`. However, if you provide a value out of range, such as `'170824304520'`, it is not treated as a valid date.
+* `'YYYYMMDDHHMMSS'` or `'YYMMDDHHMMSS'`: For example, `'20170824104520'` and `'170824104520'` are regarded as `'2017-08-24 10:45:20'`. However, if you provide a value out of range, such as `'170824304520'`, it is not treated as a valid date. Note that incorrect formats such as `YYYYMMDD HHMMSS`, `YYYYMMDD HH:MM:DD`, or `YYYY-MM-DD HHMMSS` will fail to insert.
 * `YYYYMMDDHHMMSS` or `YYMMDDHHMMSS`: Note that these formats have no single or double quotes, but a number. For example, `20170824104520` is interpreted as `'2017-08-24 10:45:20'`.
 
 DATETIME or TIMESTAMP values can be followed by a fractional part, used to represent microseconds precision (6 digits).  The fractional part should always be separated from the rest of the time by a decimal point `.`.
 
-The year value containing only two digits is ambiguous. It is recommended to use the four-digit year format. TiDB interpretes the two-digit year value according to the following rules:
+The year value containing only two digits is ambiguous. It is recommended to use the four-digit year format. TiDB interprets the two-digit year value according to the following rules:
 
 * If the year value is in the range of `70-99`, it is converted to `1970-1999`.
 * If the year value is in the range of `00-69`, it is converted to `2000-2069`.
@@ -165,7 +165,7 @@ X'1z' (z is not a hexadecimal legal digit)
 0X12AC (0X must be written as 0x)
 ```
 
-Hexadecimal literals written using `X'val'` notation must contain an even number of digits. To avoid the syntax error, pad the value with a leading zero:
+Hexadecimal literals written using `X'val'` notation must contain an even number of digits. If the length of `val` is an odd number (for example, `X'A'` or `X'11A'`), to avoid the syntax error, pad the value with a leading zero:
 
 ```sql
 mysql> select X'aff';

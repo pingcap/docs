@@ -6,18 +6,17 @@ aliases: ['/docs/dev/sql-statements/sql-statement-drop-user/','/docs/dev/referen
 
 # DROP USER
 
-This statement removes a user from the TiDB system database. The optional keyword `IF EXISTS` can be used to silence an error if the user does not exist.
-This statement requires the `CREATE USER` privilege.
+This statement removes a user from the TiDB system database. The optional keyword `IF EXISTS` can be used to silence an error if the user does not exist. This statement requires the `CREATE USER` privilege.
 
 ## Synopsis
 
-**DropUserStmt:**
+```ebnf+diagram
+DropUserStmt ::=
+    'DROP' 'USER' ( 'IF' 'EXISTS' )? UsernameList
 
-![DropUserStmt](/media/sqlgram/DropUserStmt.png)
-
-**Username:**
-
-![Username](/media/sqlgram/Username.png)
+Username ::=
+    StringName ('@' StringName | singleAtIdentifier)? | 'CURRENT_USER' OptionalBraces
+```
 
 ## Examples
 

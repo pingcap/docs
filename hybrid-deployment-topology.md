@@ -17,7 +17,7 @@ The deployment machine has multiple CPU processors with sufficient memory. To im
 | Instance | Count | Physical machine configuration | IP | Configuration |
 | :-- | :-- | :-- | :-- | :-- |
 | TiDB | 6 | 32 VCore 64GB | 10.0.1.1<br/> 10.0.1.2<br/> 10.0.1.3 | Configure NUMA to bind CPU cores |
-| PD | 3 | 16 VCore 32 GB | 10.0.1.4<br/> 10.0.1.5<br/> 10.0.1.6 | Configure the `location_lables` parameter |
+| PD | 3 | 16 VCore 32 GB | 10.0.1.4<br/> 10.0.1.5<br/> 10.0.1.6 | Configure the `location_labels` parameter |
 | TiKV | 6 | 32 VCore 64GB | 10.0.1.7<br/> 10.0.1.8<br/> 10.0.1.9 | 1. Separate the instance-level port and status_port; <br/> 2. Configure the global parameters `readpool`, `storage` and `raftstore`; <br/> 3. Configure labels of the instance-level host; <br/> 4. Configure NUMA to bind CPU cores |
 | Monitoring & Grafana | 1 | 4 VCore 8GB * 1 500GB (ssd)  | 10.0.1.10 | Default configuration |
 
@@ -25,6 +25,8 @@ The deployment machine has multiple CPU processors with sufficient memory. To im
 
 - [The simple template for the hybrid deployment](https://github.com/pingcap/docs-cn/blob/master/config-templates/simple-multi-instance.yaml)
 - [The complex template for the hybrid deployment](https://github.com/pingcap/docs/blob/master/config-templates/complex-multi-instance.yaml)
+
+For detailed descriptions of the configuration items in the above TiDB cluster topology file, see [Topology Configuration File for Deploying TiDB Using TiUP](/tiup/tiup-cluster-topology-reference.md).
 
 ### Key parameters
 
@@ -37,7 +39,7 @@ This section introduces the key parameters when you deploy multiple instances on
         - Enable `readpool.storage` and `readpool.coprocessor`:
 
             ```yaml
-            readpool.storage.use-unified-pool: false
+            readpool.storage.use-unified-pool: true
             readpool.coprocessor.use-unified-pool: true
             ```
 
@@ -69,7 +71,7 @@ This section introduces the key parameters when you deploy multiple instances on
 
 - The label scheduling configuration
 
-    Since multiple instances of TiKV are deployed on a single machine, if the physical machines go down, the Region Group might lose two of the default three replicas, which causes the cluster unavailability. To address this issue, you can use the label to enable the smart scheduling of PD, which ensures that the Region Group has more than two replicas in multiple TiKV instances on the same machine.
+    Since multiple instances of TiKV are deployed on a single machine, if the physical machines go down, the Raft Group might lose two of the default three replicas, which causes the cluster unavailability. To address this issue, you can use the label to enable the smart scheduling of PD, which ensures that the Raft Group has more than two replicas in multiple TiKV instances on the same machine.
 
     - The TiKV configuration
 

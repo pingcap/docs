@@ -109,11 +109,11 @@ When the cluster is in operation, if you need to modify the parameters of a comp
                 log.slow-threshold: 300
         ```
 
-    For the parameter format, see the [TiUP parameter template](https://github.com/pingcap/tiup/blob/master/examples/topology.example.yaml).
+    For the parameter format, see the [TiUP parameter template](https://github.com/pingcap/tiup/blob/master/embed/templates/examples/topology.example.yaml).
 
     **Use `.` to represent the hierarchy of the configuration items**.
 
-    For more information on the configuration parameters of components, refer to [TiDB `config.toml.example`](https://github.com/pingcap/tidb/blob/v4.0.0-rc/config/config.toml.example), [TiKV `config.toml.example`](https://github.com/tikv/tikv/blob/v4.0.0-rc/etc/config-template.toml), and [PD `config.toml.example`](https://github.com/pingcap/pd/blob/v4.0.0-rc/conf/config.toml).
+    For more information on the configuration parameters of components, refer to [TiDB `config.toml.example`](https://github.com/pingcap/tidb/blob/master/config/config.toml.example), [TiKV `config.toml.example`](https://github.com/tikv/tikv/blob/master/etc/config-template.toml), and [PD `config.toml.example`](https://github.com/tikv/pd/blob/master/conf/config.toml).
 
 3. Rolling update the configuration and restart the corresponding components by running the `reload` command:
 
@@ -125,7 +125,7 @@ When the cluster is in operation, if you need to modify the parameters of a comp
 
 ### Example
 
-If you want to set the transaction size limit parameter (`txn-total-size-limit` in the [performance](https://github.com/pingcap/tidb/blob/v4.0.0-rc/config/config.toml.example) module) to `1G` in tidb-server, edit the configuration as follows:
+If you want to set the transaction size limit parameter (`txn-total-size-limit` in the [performance](https://github.com/pingcap/tidb/blob/master/config/config.toml.example) module) to `1G` in tidb-server, edit the configuration as follows:
 
 ```
 server_configs:

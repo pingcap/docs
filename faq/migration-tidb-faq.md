@@ -13,17 +13,62 @@ This document summarizes the FAQs related to TiDB data migration.
 
 Because TiDB supports most MySQL syntax, generally you can migrate your applications to TiDB without changing a single line of code in most cases.
 
+### Data import and export is slow, and many retries and EOF errors appear in the log of each component without other errors
+
+If no other logical errors occur, retries and EOF errors might be caused by network issues. It is recommended to first use tools to check the network connectivity. In the following example, [iperf](https://iperf.fr/) is used for troubleshooting:
+
++ Execute the following command on the server-side node where the retries and EOF errors occur:
+
+    {{< copyable "shell-regular" >}}
+
+    ```shell
+    iperf3 -s
+    ```
+
++ Execute the following command on the client-side node where the retries and EOF errors occur:
+
+    {{< copyable "shell-regular" >}}
+
+    ```shell
+    iperf3 -c <server-IP>
+    ```
+
+The following example is the output of a client node with a good network connection:
+
+```shell
+$ iperf3 -c 192.168.196.58
+Connecting to host 192.168.196.58, port 5201
+[  5] local 192.168.196.150 port 55397 connected to 192.168.196.58 port 5201
+[ ID] Interval           Transfer     Bitrate
+[  5]   0.00-1.00   sec  18.0 MBytes   150 Mbits/sec
+[  5]   1.00-2.00   sec  20.8 MBytes   175 Mbits/sec
+[  5]   2.00-3.00   sec  18.2 MBytes   153 Mbits/sec
+[  5]   3.00-4.00   sec  22.5 MBytes   188 Mbits/sec
+[  5]   4.00-5.00   sec  22.4 MBytes   188 Mbits/sec
+[  5]   5.00-6.00   sec  22.8 MBytes   191 Mbits/sec
+[  5]   6.00-7.00   sec  20.8 MBytes   174 Mbits/sec
+[  5]   7.00-8.00   sec  20.1 MBytes   168 Mbits/sec
+[  5]   8.00-9.00   sec  20.8 MBytes   175 Mbits/sec
+[  5]   9.00-10.00  sec  21.8 MBytes   183 Mbits/sec
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate
+[  5]   0.00-10.00  sec   208 MBytes   175 Mbits/sec                  sender
+[  5]   0.00-10.00  sec   208 MBytes   174 Mbits/sec                  receiver
+
+iperf Done.
+```
+
+If the output shows low network bandwidth and high bandwidth fluctuations, a large number of retries and EOF errors might appear in each component log. In this case, you need to consult your network service provider to improve the network quality.
+
+If the output of each metric looks good, try to update each component. If the problem persists after the updating, you can [contact us](https://tidbcommunity.slack.com/archives/CH7TTLL7P).
+
 ### If I accidentally import the MySQL user table into TiDB, or forget the password and cannot log in, how to deal with it?
 
 Restart the TiDB service, add the `-skip-grant-table=true` parameter in the configuration file. Log into the cluster without password and recreate the user, or recreate the `mysql.user` table. For the specific table schema, search the official documentation.
 
-### Can TiDB provide services while Loader is running?
-
-TiDB can provide services while Loader is running because Loader inserts the data logically. But do not perform the related DDL operations.
-
 ### How to export the data in TiDB?
 
-Currently, TiDB does not support `select into outfile`. You can use the following methods to export the data in TiDB:
+You can use the following methods to export the data in TiDB:
 
 - See [MySQL uses mysqldump to export part of the table data](https://blog.csdn.net/xin_yu_xin/article/details/7574662) in Chinese and export data using mysqldump and the `WHERE` clause.
 - Use the MySQL client to export the results of `select` to a file.
@@ -62,63 +107,30 @@ Two solutions:
 
 - You can also increase the limited number of statements in a single TiDB transaction, but this will consume more memory.
 
+### Why does Dumpling return `The local disk space is insufficient` error or cause the upstream database to run out of memory when exporting a table?
+
+This issue might have the following causes:
+
++ The database's primary keys are not evenly distributed (for example, when you enable [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)).
++ The upstream database is TiDB and the exported table is a partitioned table.
+
+For the above cases, Dumpling splits excessively large data chunk for the export and sends queries with excessively large results. To address the issue, you can [contact us](https://tidbcommunity.slack.com/archives/CH7TTLL7P) to get the nightly version of Dumpling.
+
 ### Does TiDB have a function like the Flashback Query in Oracle? Does it support DDL?
 
  Yes, it does. And it supports DDL as well. For details, see [how TiDB reads data from history versions](/read-historical-data.md).
 
 ## Migrate the data online
 
-### Syncer infrastructure
-
-See [Parsing TiDB online data synchronization tool Syncer](https://pingcap.com/blog-cn/tidb-syncer/) in Chinese.
-
-#### Syncer user guide
-
-See [Syncer User Guide](/syncer-overview.md).
-
-#### How to configure to monitor Syncer status?
-
-Download and import [Syncer Json](https://github.com/pingcap/docs/blob/master/etc/Syncer.json) to Grafana. Edit the Prometheus configuration file and add the following content:
-
-```
-- job_name: 'syncer_ops' // task name
-    static_configs:
-      - targets: [’10.10.1.1:10096’] // Syncer monitoring address and port, informing Prometheus to pull the data of Syncer
-```
-
-Restart Prometheus.
-
-#### Is there a current solution to replicating data from TiDB to other databases like HBase and Elasticsearch?
+### Is there a current solution to replicating data from TiDB to other databases like HBase and Elasticsearch?
 
 No. Currently, the data replication depends on the application itself.
-
-#### Does Syncer support replicating only some of the tables when Syncer is replicating data?
-
-Yes. For details, see [Syncer User Guide](/syncer-overview.md).
-
-#### Do frequent DDL operations affect the replication speed of Syncer?
-
-Frequent DDL operations may affect the replication speed. For Syncer, DDL operations are executed serially. When DDL operations are executed during data replication, data will be replicated serially and thus the replication speed will be slowed down.
-
-#### If the machine that Syncer is in is broken and the directory of the `syncer.meta` file is lost, what should I do?
-
-When you replicate data using Syncer GTID, the `syncer.meta` file is constantly updated during the replication process. The current version of Syncer does not contain the design for high availability. The `syncer.meta` configuration file of Syncer is directly stored on the hard disks, which is similar to other tools in the MySQL ecosystem, such as Mydumper.
-
-Two solutions:
-
-- Put the `syncer.meta` file in a relatively secure disk. For example, use disks with RAID 1.
-- Restore the location information of history replication according to the monitoring data that Syncer reports to Prometheus regularly. But the location information might be inaccurate due to the delay when a large amount of data is replicated.
-
-#### If the downstream TiDB data is not consistent with the MySQL data during the replication process of Syncer, will DML operations cause exits?
-
-- If the data exists in the upstream MySQL but does not exist in the downstream TiDB, when the upstream MySQL performs the `UPDATE` or `DELETE` operation on this row of data, Syncer will not report an error and the replication process will not exit, and this row of data does not exist in the downstream.
-- If a conflict exists in the primary key indexes or the unique indexes in the downstream, preforming the `UPDATE` operation will cause an exit and performing the `INSERT` operation will not cause an exit.
 
 ## Migrate the traffic
 
 ### How to migrate the traffic quickly?
 
-It is recommended to build a multi-source MySQL -> TiDB real-time replication environment using Syncer tool. You can migrate the read and write traffic in batches by editing the network configuration as needed. Deploy a stable network LB (HAproxy, LVS, F5, DNS, etc.) on the upper layer, in order to implement seamless migration by directly editing the network configuration.
+It is recommended to migrate application data from MySQL to TiDB using [TiDB Data Migration](https://docs.pingcap.com/tidb-data-migration/v2.0/overview) tool. You can migrate the read and write traffic in batches by editing the network configuration as needed. Deploy a stable network LB (HAproxy, LVS, F5, DNS, etc.) on the upper layer, in order to implement seamless migration by directly editing the network configuration.
 
 ### Is there a limit for the total write and read capacity in TiDB?
 
@@ -126,7 +138,7 @@ The total read capacity has no limit. You can increase the read capacity by addi
 
 ### The error message `transaction too large` is displayed
 
-Due to the limitation of the underlying storage engine, each key-value entry (one row) in TiDB should be no more than 6MB.
+Due to the limitation of the underlying storage engine, each key-value entry (one row) in TiDB should be no more than 6MB. You can adjust the [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50) configuration value up to 120MB.
 
 Distributed transactions need two-phase commit and the bottom layer performs the Raft replication. If a transaction is very large, the commit process would be quite slow and the write conflict is more likely to occur. Moreover, the rollback of a failed transaction leads to an unnecessary performance penalty. To avoid these problems, we limit the total size of key-value entries to no more than 100MB in a transaction by default. If you need larger transactions, modify the value of `txn-total-size-limit` in the TiDB configuration file. The maximum value of this configuration item is up to 10G. The actual limitation is also affected by the physical memory of the machine.
 
@@ -160,15 +172,5 @@ If the amount of data that needs to be deleted at a time is very large, this loo
 
 ### How to improve the data loading speed in TiDB?
 
-- The [Lightning](/tidb-lightning/tidb-lightning-overview.md) tool is developed for distributed data import. It should be noted that the data import process does not perform a complete transaction process for performance reasons. Therefore, the ACID constraint of the data being imported during the import process cannot be guaranteed. The ACID constraint of the imported data can only be guaranteed after the entire import process ends. Therefore, the applicable scenarios mainly include importing new data (such as a new table or a new index) or the full backup and restoring (truncate the original table and then import data).
+- The [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) tool is developed for distributed data import. It should be noted that the data import process does not perform a complete transaction process for performance reasons. Therefore, the ACID constraint of the data being imported during the import process cannot be guaranteed. The ACID constraint of the imported data can only be guaranteed after the entire import process ends. Therefore, the applicable scenarios mainly include importing new data (such as a new table or a new index) or the full backup and restoring (truncate the original table and then import data).
 - Data loading in TiDB is related to the status of disks and the whole cluster. When loading data, pay attention to metrics like the disk usage rate of the host, TiClient Error, Backoff, Thread CPU and so on. You can analyze the bottlenecks using these metrics.
-
-### What should I do if it is slow to reclaim storage space after deleting data?
-
-You can configure concurrent GC to increase the speed of reclaiming storage space. The default concurrency is 1, and you can modify it to at most 50% of the number of TiKV instances using the following command:
-
-{{< copyable "sql" >}}
-
-```sql
-update mysql.tidb set VARIABLE_VALUE="3" where VARIABLE_NAME="tikv_gc_concurrency";
-```

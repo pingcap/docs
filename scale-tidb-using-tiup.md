@@ -8,7 +8,7 @@ aliases: ['/docs/dev/scale-tidb-using-tiup/','/docs/dev/how-to/scale/with-tiup/'
 
 The capacity of a TiDB cluster can be increased or decreased without interrupting the online services.
 
-This document describes how to scale the TiDB, TiKV, PD, TiCDC, or TiFlash cluster using TiUP. If you have not installed TiUP, refer to the steps in [Install TiUP on the control machine](/upgrade-tidb-using-tiup.md#install-tiup-on-the-control-machine) and import the cluster into TiUP before you use TiUP to scale the TiDB cluster.
+This document describes how to scale the TiDB, TiKV, PD, TiCDC, or TiFlash cluster using TiUP. If you have not installed TiUP, refer to the steps in [Install TiUP on the control machine](/production-deployment-using-tiup.md#step-2-install-tiup-on-the-control-machine).
 
 To view the current cluster name list, run `tiup cluster list`.
 
@@ -143,8 +143,8 @@ If you want to add a TiFlash node to the `10.0.1.4` host, take the following ste
 >
 > When adding a TiFlash node to an existing TiDB cluster, you need to note the following things:
 >
-> 1. Confirm that the current TiDB version supports using TiFlash, otherwise upgrade your TiDB cluster to v4.0.0-rc or higher.
-> 2. Download [pd-ctl](https://download.pingcap.org/tidb-v4.0.0-rc.2-linux-amd64.tar.gz) and execute the `config set enable-placement-rules true` command to enable the PD's Placement Rules.
+> 1. Confirm that the current TiDB version supports using TiFlash. Otherwise, upgrade your TiDB cluster to v5.0 or later versions.
+> 2. Execute the `tiup ctl:<cluster-version> pd -u http://<pd_ip>:<pd_port> config set enable-placement-rules true` command to enable the Placement Rules feature. Or execute the corresponding command in [pd-ctl](/pd-control.md).
 
 1. Add the node information to the `scale-out.yaml` file:
 
@@ -256,9 +256,9 @@ If you want to remove a TiKV node from the `10.0.1.5` host, take the following s
     ```
 
     ```
-    Starting /root/.tiup/components/cluster/v0.4.6/cluster display <cluster-name>
+    Starting /root/.tiup/components/cluster/v1.5.0/cluster display <cluster-name>
     TiDB Cluster: <cluster-name>
-    TiDB Version: v4.0.0-rc
+    TiDB Version: v5.1.0
     ID              Role         Host        Ports                            Status  Data Dir                Deploy Dir
     --              ----         ----        -----                            ------  --------                ----------
     10.0.1.3:8300   cdc          10.0.1.3    8300                             Up      -                       deploy/cdc-8300
@@ -366,8 +366,12 @@ In special cases (such as when a node needs to be forcibly taken down), or if th
         {{< copyable "shell-regular" >}}
 
         ```shell
-        tiup ctl pd -u <pd-address> store
+        tiup ctl:<cluster-version> pd -u http://<pd_ip>:<pd_port> store
         ```
+
+        > **Note:**
+        >
+        > If multiple PD instances exist in the cluster, you only need to specify the IP address:port of an active PD instance in the above command.
 
 2. Remove the TiFlash node in pd-ctl:
 
@@ -378,20 +382,14 @@ In special cases (such as when a node needs to be forcibly taken down), or if th
         {{< copyable "shell-regular" >}}
 
         ```shell
-        tiup ctl pd -u <pd-address> store delete <store_id>
+        tiup ctl:<cluster-version> pd -u http://<pd_ip>:<pd_port> store delete <store_id>
         ```
 
+        > **Note:**
+        >
+        > If multiple PD instances exist in the cluster, you only need to specify the IP address:port of an active PD instance in the above command.
+        
 3. Wait for the store of the TiFlash node to disappear or for the `state_name` to become `Tombstone` before you stop the TiFlash process.
-
-    If, after waiting for a long time, the node still fails to disappear or the `state_name` fails to become `Tombstone`, consider using the following command to force the node out of the cluster.
-
-    **Note that the command will directly discard the replicas on the TiFlash node, which might cause the query to fail.**
-
-    {{< copyable "shell-regular" >}}
-
-    ```shell
-    curl -X POST 'http://<pd-address>/pd/api/v1/store/<store_id>/state?state=Tombstone'
-    ```
 
 4. Manually delete TiFlash data files (whose location can be found in the `data_dir` directory under the TiFlash configuration of the cluster topology file).
 

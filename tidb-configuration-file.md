@@ -20,12 +20,17 @@ The TiDB configuration file supports more options than command-line parameters. 
 ### `token-limit`
 
 + The number of sessions that can execute requests concurrently.
++ Type: Integer
 + Default value: `1000`
++ Minimum value: `1`
++ Maximum Value (64-bit platforms): `18446744073709551615`
++ Maximum Value (32-bit platforms): `4294967295`
 
 ### `mem-quota-query`
 
 - The maximum memory available for a single SQL statement.
 - Default value: `1073741824` (in bytes)
+- Note: When you upgrade the cluster from v2.0.x or v3.0.x to v4.0.9 or later versions, the default value of this configuration is `34359738368`.
 - Requests that require more memory than this value are handled based on the behavior defined by `oom-action`.
 - This value is the initial value of the system variable [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query).
 
@@ -87,11 +92,15 @@ The TiDB configuration file supports more options than command-line parameters. 
 - Determines whether to treat the `utf8` character set in old tables as `utf8mb4`.
 - Default value: `true`
 
-### `alter-primary-key`
+### `alter-primary-key` (Deprecated)
 
 - Determines whether to add or remove the primary key constraint to or from a column.
 - Default value: `false`
 - With this default setting, adding or removing the primary key constraint is not supported. You can enable this feature by setting `alter-primary-key` to `true`. However, if a table already exists before the switch is on, and the data type of its primary key column is an integer, dropping the primary key from the column is not possible even if you set this configuration item to `true`.
+
+> **Note:**
+>
+> This configuration item has been deprecated, and currently takes effect only when the value of `@tidb_enable_clustered_index` is `INT_ONLY`. If you need to add or remove the primary key, use the `NONCLUSTERED` keyword instead when creating the table. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
 
 ### `server-version`
 
@@ -132,20 +141,56 @@ The TiDB configuration file supports more options than command-line parameters. 
 - Unit: byte
 - Currently, the valid value range is `[3072, 3072*4]`. MySQL and TiDB (version < v3.0.11) do not have this configuration item, but both limit the length of the newly created index. This limit in MySQL is `3072`. In TiDB (version =< 3.0.7), this limit is `3072*4`. In TiDB (3.0.7 < version < 3.0.11), this limit is `3072`. This configuration is added to be compatible with MySQL and earlier versions of TiDB.
 
+### `table-column-count-limit` <span class="version-mark">New in v5.0</span>
+
+- Sets the limit on the number of columns in a single table.
+- Default value: `1017`
+- Currently, the valid value range is `[1017, 4096]`.
+
+### `index-limit` <span class="version-mark">New in v5.0</span>
+
+- Sets the limit on the number of indexes in a single table.
+- Default value: `64`
+- Currently, the valid value range is `[64, 512]`.
+
 ### `enable-telemetry` <span class="version-mark">New in v4.0.2</span>
 
 - Enables or disables the telemetry collection in TiDB.
 - Default value: `true`
-- When this configuration is set to `false` on all TiDB instances, the telemetry collection in TiDB is disabled and the [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402-version) system variable does not take effect. See [Telemetry](/telemetry.md) for details.
+- When this configuration is set to `false` on all TiDB instances, the telemetry collection in TiDB is disabled and the [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402) system variable does not take effect. See [Telemetry](/telemetry.md) for details.
+
+### `enable-tcp4-only` <span class="version-mark">New in v5.0</span>
+
+- Enables or disables listening on TCP4 only.
+- Default value: `false`
+- Enabling this option is useful when TiDB is used with LVS for load balancing because the [real client IP from the TCP header](https://github.com/alibaba/LVS/tree/master/kernel/net/toa) can be correctly parsed by the "tcp4" protocol.
+
+### `enable-enum-length-limit` <span class="version-mark">New in v5.0</span>
+
++ Determines whether to limit the maximum length of a single `ENUM` element and a single `SET` element.
++ Default value: `true`
++ When this configuration value is `true`, the maximum length of a single `ENUM` element and a single `SET` element is 255 characters, which is compatible with [MySQL 8.0](https://dev.mysql.com/doc/refman/8.0/en/string-type-syntax.html). When this configuration value is `false`, there is no limit on the length of a single element, which is compatible with TiDB (earlier than v5.0).
+
+#### `graceful-wait-before-shutdown` <span class="version-mark">New in v5.0</span>
+
+- Specifies the number of seconds that TiDB waits when you shut down the server, which allows the clients to disconnect.
+- Default value: `0`
+- When TiDB is waiting for shutdown (in the grace period), the HTTP status will indicate a failure, which allows the load balancers to reroute traffic.
 
 ## Log
 
 Configuration items related to log.
 
+### `level`
+
++ Specifies the log output level.
++ Value options: `debug`, `info`, `warn`, `error`, and `fatal`.
++ Default value: `info`
+
 ### `format`
 
 - Specifies the log output format.
-- Available values: `json`, `text` and `console`.
+- Value options: `json`, `text` and `console`.
 - Default value: `text`
 
 ### `enable-timestamp`
@@ -229,6 +274,12 @@ Configuration items related to log files.
 
 Configuration items related to security.
 
+### `enable-sem`
+
+- Enables the Security Enhanced Mode (SEM).
+- Default value: `false`
+- The status of SEM is available via the system variable [`tidb_enable_enhanced_security`](/system-variables.md#tidb_enable_enhanced_security).
+
 ### `ssl-ca`
 
 - The file path of the trusted CA certificate in the PEM format.
@@ -280,17 +331,48 @@ Configuration items related to performance.
 - Default value: `0`
 - The default `0` indicates using all the CPUs on the machine. You can also set it to n, and then TiDB uses n CPUs.
 
-### `max-memory`
+### `server-memory-quota` <span class="version-mark">New in v4.0.9</span>
 
-- The maximum memory limit for the Prepared Least Recently Used (LRU) caching. If this value exceeds `performance.max-memory * (1 - prepared-plan-cache.memory-guard-ratio)`, the elements in the LRU are removed.
-- Default value: `0`
-- This configuration takes effect when `prepared-plan-cache.enabled` is `true` (default). When the size of the LRU is greater than `prepared-plan-cache.capacity`, the elements in the LRU are also removed.
+> **Warning:**
+>
+> `server-memory-quota` is still an experimental feature. It is **NOT** recommended that you use it in a production environment.
+
++ The memory usage limit of tidb-server instances. <!-- New in TiDB v5.0 --> This configuration item completely supersedes the previous [`max-memory`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#max-memory).
++ Default value: `0` (in bytes), which means no memory limit.
+
+### `memory-usage-alarm-ratio` <span class="version-mark">New in v4.0.9</span>
+
++ TiDB triggers an alarm when the memory usage of tidb-server instance exceeds a certain threshold. The valid value for this configuration item ranges from `0` to `1`. If it is configured as `0` or `1`, this alarm feature is disabled.
++ Default value: `0.8`
++ When the memory usage alarm is enabled, if [`server-memory-quota`](/tidb-configuration-file.md#server-memory-quota-new-in-v409) is not set, then the threshold of memory usage is ```the `memory-usage-alarm-ratio` value * the system memory size```; if `server-memory-quota` is set to a value greater than 0, then the threshold of memory usage is ```the `memory-usage-alarm-ratio` value * the `server-memory-quota` value```.
++ When TiDB detects that the memory usage of the tidb-server instance exceeds the threshold, it considers that there might be a risk of OOM. Therefore, it records ten SQL statements with the highest memory usage, ten SQL statements with the longest running time, and the heap profile among all SQL statements currently being executed to the directory [`tmp-storage-path/record`](/tidb-configuration-file.md#tmp-storage-path) and outputs a log containing the keyword `tidb-server has the risk of OOM`.
++ The value of this configuration item is the initial value of the system variable [`tidb_memory_usage_alarm_ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio).
+
+### `max-txn-ttl`
+
+- The longest time that a single transaction can hold locks. If this time is exceeded, the locks of a transaction might be cleared by other transactions so that this transaction cannot be successfully committed.
+- Default value: `3600000`
+- Unit: Millisecond
+- The transaction that holds locks longer than this time can only be committed or rolled back. The commit might not be successful.
+
+### `committer-concurrency`
+
++ The number of goroutines for requests related to executing commit in the commit phase of the single transaction.
++ Default value: `16`
++ If the transaction to commit is too large, the waiting time for the flow control queue when the transaction is committed might be too long. In this situation, you can increase the configuration value to speed up the commit.
 
 ### `stmt-count-limit`
 
 - The maximum number of statements allowed in a single TiDB transaction.
 - Default value: `5000`
 - If a transaction does not roll back or commit after the number of statements exceeds `stmt-count-limit`, TiDB returns the `statement count 5001 exceeds the transaction limitation, autocommit = false` error. This configuration takes effect **only** in the retriable optimistic transaction. If you use the pessimistic transaction or have disabled the transaction retry, the number of statements in a transaction is not limited by this configuration.
+
+### `txn-entry-size-limit` <span class="version-mark">New in v5.0</span>
+
+- The size limit of a single row of data in TiDB.
+- Default value: `6291456` (in bytes)
+- The size limit of a single key-value record in a transaction. If the size limit is exceeded, TiDB returns the `entry too large` error. The maximum value of this configuration item does not exceed `125829120` (120 MB).
+- Note that TiKV has a similar limit. If the data size of a single write request exceeds [`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size), which is 8 MB by default, TiKV refuses to process this request. When a table has a row of large size, you need to modify both configurations at the same time.
 
 ### `txn-total-size-limit`
 
@@ -301,7 +383,12 @@ Configuration items related to performance.
 ### `tcp-keep-alive`
 
 - Determines whether to enable `keepalive` in the TCP layer.
-- Default value: `false`
+- Default value: `true`
+
+### `tcp-no-delay`
+
+- Determines whether to enable TCP_NODELAY at the TCP layer. After it is enabled, TiDB disables the Nagle algorithm in the TCP/IP protocol and allows sending small data packets to reduce network latency. This is suitable for latency-sensitive applications with a small transmission volume of data.
+- Default value: `true`
 
 ### `cross-join`
 
@@ -318,7 +405,7 @@ Configuration items related to performance.
     - At intervals of `stats-lease`, TiDB checks for column statistics that need to be loaded to the memory.
     - At intervals of `200 * stats-lease`, TiDB writes the feedback cached in the memory to the system table.
     - At intervals of `5 * stats-lease`, TiDB reads the feedback in the system table, and updates the statistics cached in the memory.
-- When `stats-lease` is set to 0, TiDB periodically reads the feedback in the system table, and updates the statistics cached in the memory every three seconds. But TiDB no longer automatically modifies the following statistics-related system tables:
+- When `stats-lease` is set to 0s, TiDB periodically reads the feedback in the system table, and updates the statistics cached in the memory every three seconds. But TiDB no longer automatically modifies the following statistics-related system tables:
     - `mysql.stats_meta`: TiDB no longer automatically records the number of table rows that are modified by the transaction and updates it to this system table.
     - `mysql.stats_histograms`/`mysql.stats_buckets` and `mysql.stats_top_n`: TiDB no longer automatically analyzes and proactively updates statistics.
     - `mysql.stats_feedback`: TiDB no longer updates the statistics of the tables and indexes according to a part of statistics returned by the queried data.
@@ -331,8 +418,8 @@ Configuration items related to performance.
 ### `feedback-probability`
 
 - The probability that TiDB collects the feedback statistics of each query.
-- Default value: `0.05`
-- TiDB collects the feedback of each query at the probability of `feedback-probability`, to update statistics.
+- Default value: `0`
+- This feature is disabled by default, and it is not recommended to enable this feature. If it is enabled, TiDB collects the feedback of each query at the probability of `feedback-probability`, to update statistics.
 
 ### `query-feedback-limit`
 
@@ -363,20 +450,30 @@ Configuration items related to performance.
 + Default value: `20971520`
 + When `nested-loop-join-cache-capacity` is set to `0`, nested loop join cache is disabled by default. When the LRU size is larger than the value of `nested-loop-join-cache-capacity`, the elements in the LRU are removed.
 
+### `enforce-mpp`
+
++ Determines whether to ignore the optimizer's cost estimation and to forcibly use TiFlash's MPP mode for query execution.
++ Default value: `false`
++ This configuration item controls the initial value of [`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51). For example, when this configuration item is set to `true`, the default value of `tidb_enforce_mpp` is `ON`.
+
 ## prepared-plan-cache
 
 The Plan Cache configuration of the `PREPARE` statement.
 
+> **Warning:**
+>
+> This is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
+
 ### `enabled`
 
 - Determines whether to enable Plan Cache of the `PREPARE` statement.
-- Default value: `true`
+- Default value: `false`
 
 ### `capacity`
 
 - The number of cached statements.
 - Default value: `100`
-- The type is `uint`. Values less than `0` are converted to large integers.
+- The type is `UINT`. Values less than `0` are converted to large integers.
 
 ### `memory-guard-ratio`
 
@@ -389,7 +486,7 @@ The Plan Cache configuration of the `PREPARE` statement.
 ### `grpc-connection-count`
 
 - The maximum number of connections established with each TiKV.
-- Default value: `16`
+- Default value: `4`
 
 ### `grpc-keepalive-time`
 
@@ -408,13 +505,6 @@ The Plan Cache configuration of the `PREPARE` statement.
 - The maximum timeout when executing a transaction commit.
 - Default value: `41s`
 - It is required to set this value larger than twice of the Raft election timeout.
-
-### `max-txn-ttl`
-
-- The longest time that a single transaction can hold locks. If this time is exceeded, the locks of a transaction might be cleared by other transactions so that this transaction cannot be successfully committed.
-- Default value: `600000`
-- Unit: Millisecond
-- The transaction that holds locks longer than this time can only be committed or rolled back. The commit might not be successful.
 
 ### `max-batch-size`
 
@@ -438,79 +528,18 @@ The Plan Cache configuration of the `PREPARE` statement.
 - The threshold of the TiKV load. If the TiKV load exceeds this threshold, more `batch` packets are collected to relieve the pressure of TiKV. It is valid only when the value of `tikv-client.max-batch-size` is greater than `0`. It is recommended not to modify this value.
 - Default value: `200`
 
-### `enable-one-pc` <!-- New in v5.0 -->
-
-- Specifies whether to use the one-phase commit feature for transactions that involve only one Region. Compared with the two-phase commit, the one-phase commit feature can greatly reduce the commit latency and increase throughput.
-- Default value: `false`
-
-> **Warning:**
->
-> This is still an experimental feature. It is **NOT** recommended that you use it in a production environment. Currently, the following issues are found, and be aware of them if you need to use this feature:
->
-> - This feature is incompatible with [TiCDC](/ticdc/ticdc-overview.md) and might cause TiCDC to run abnormally.
->
-> - This feature is incompatible with [Follower Read](/follower-read.md) and [TiFlash](/tiflash/tiflash-overview.md), and snapshot isolation cannot be guaranteed.
->
-> - External consistency cannot be guaranteed.
->
-> - If the transaction commit is interrupted abnormally by the machine crash when the DDL operation is executed, the data format might be incorrect.
-
-## tikv-client.async-commit <!-- New in v5.0 -->
-
-### `enable`
-
-- Enables or disables the async commit feature for the second phase of the two-phase transaction commit to perform asynchronously in the background. Enabling this feature can reduce the latency of transaction commit. This feature is not compatible with [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) and does not take effect when Binlog is enabled.
-- Default value: `false`
-
-### `keys-limit`
-
-- Specifies the upper limit of the number of keys in an async commit transaction. The async commit feature is **NOT** suitable for transactions that are too large. Transactions that exceed this limit will use the two-phase commit.
-- Default value: `256`
-
-### `total-key-size-limit`
-
-- Specifies the upper limit of the total size of keys in an async commit transaction. The async commit feature is **NOT** suitable for transactions in which the involved key ranges are too long. Transactions that exceed this limit will use the two-phase commit.
-- Default value: `4096`
-- Unit: byte
-
-> **Warning:**
->
-> This is still an experimental feature. It is **NOT** recommended that you use it in a production environment. Currently, the following issues are found, and be aware of them if you need to use this feature:
->
-> - This feature is incompatible with [Follower Read](/follower-read.md) and [TiFlash](/tiflash/tiflash-overview.md), and snapshot isolation cannot be guaranteed.
->
-> - External consistency cannot be guaranteed.
->
-> - If the transaction commit is interrupted abnormally by the machine crash when the DDL operation is executed, the data format might be incorrect.
-
 ## tikv-client.copr-cache <span class="version-mark">New in v4.0.0</span>
 
 This section introduces configuration items related to the Coprocessor Cache feature.
 
-### `enable`
-
-- Determines whether to enable [Coprocessor Cache](/coprocessor-cache.md).
-- Default value: `false` (which means that Coprocessor Cache is disabled by default)
-
 ### `capacity-mb`
 
-- The total size of the cached data. When the cache space is full, old cache entries are evicted.
+- The total size of the cached data. When the cache space is full, old cache entries are evicted. When the value is `0.0`, the Coprocessor Cache feature is disabled.
 - Default value: `1000.0`
 - Unit: MB
+- Type: Float
 
-### `admission-max-result-mb`
-
-- Specifies the largest single push-down calculation result set that can be cached. If the result set of a single push-down calculation returned on the Coprocessor is larger than the result set specified by this parameter, the result set is cached. Increasing this value means that more types of push-down requests are cached, but also cause the cache space to be occupied more easily. Note that the size of each push-down calculation result set is generally smaller than the size of the Region. Therefore, it is meaningless to set this value far beyond the size of a Region.
-- Default value: `10.0`
-- Unit: MB
-
-### `admission-min-process-ms`
-
-- Specifies the minimum calculation time for a single push-down calculation result set that can be cached. If the calculation time of a single push-down calculation on the Coprocessor is less than the time specified by this parameter, the result set is not cached. Requests that are processed quickly do not need to be cached, and only the requests that take a long time to process need to be cached, which makes the cache less likely to be evicted.
-- Default value: `5`
-- Unit: ms
-
-### txn-local-latches
+## txn-local-latches
 
 Configuration related to the transaction latch. It is recommended to enable it when many local transaction conflicts occur.
 
@@ -592,6 +621,18 @@ For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](
 - The maximum number of retries of each statement in pessimistic transactions. If the number of retries exceeds this limit, an error occurs.
 - Default value: `256`
 
+### deadlock-history-capacity
+
++ The maximum number of deadlock events that can be recorded in the [`INFORMATION_SCHEMA.DEADLOCKS`](/information-schema/information-schema-deadlocks.md) table of a single TiDB server. If this table is in full volume and an additional deadlock event occurs, the earliest record in the table will be removed to make place for the newest error.
++ Default value: `10`
++ Minimum value: `0`
++ Maximum value: `10000`
+
 ## experimental
 
-The `experimental` section, introduced in v3.1.0, describes configurations related to the experimental features of TiDB. Currently, this section has no configuration item.
+The `experimental` section, introduced in v3.1.0, describes configurations related to the experimental features of TiDB.
+
+### `allow-expression-index` <span class="version-mark">New in v4.0.0</span>
+
+- Determines whether to create the expression index.
+- Default value: `false`

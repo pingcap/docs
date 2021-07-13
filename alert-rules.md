@@ -10,15 +10,19 @@ aliases: ['/docs/dev/alert-rules/','/docs/dev/reference/alert-rules/']
 
 This document describes the alert rules for different components in a TiDB cluster, including the rule descriptions and solutions of the alert items in TiDB, TiKV, PD, TiDB Binlog, Node_exporter and Blackbox_exporter.
 
-According to the severity level, alert rules are divided into three categories (from high to low): emergency-level, critical-level and warning-level.
+According to the severity level, alert rules are divided into three categories (from high to low): emergency-level, critical-level, and warning-level. This division of severity levels applies to all alert items of each component below.
+
+|  Severity level |  Description   |
+| :-------- | :----- |
+|  Emergency-level  |  The highest severity level at which the service is unavailable. Emergency-level alerts are often caused by a service or node failure. **Manual intervention is required immediately**. |
+|  Critical-level  |  Decreased service availability. For the critical-level alerts, a close watch on the abnormal metrics is required. |
+|  Warning-level  |  Warning-level alerts are a reminder for an issue or error.   |
 
 ## TiDB alert rules
 
 This section gives the alert rules for the TiDB component.
 
 ### Emergency-level alerts
-
-Emergency-level alerts are often caused by a service or node failure. Manual intervention is required immediately.
 
 #### `TiDB_schema_error`
 
@@ -79,8 +83,6 @@ Emergency-level alerts are often caused by a service or node failure. Manual int
 
 ### Critical-level alerts
 
-For the critical-level alerts, a close watch on the abnormal metrics is required.
-
 #### `TiDB_server_panic_total`
 
 * Alert rule:
@@ -96,8 +98,6 @@ For the critical-level alerts, a close watch on the abnormal metrics is required
     Collect the panic logs to locate the issue.
 
 ### Warning-level alerts
-
-Warning-level alerts are a reminder for an issue or error.
 
 #### `TiDB_memory_abnormal`
 
@@ -121,7 +121,7 @@ Warning-level alerts are a reminder for an issue or error.
 
 * Description:
 
-    The latency of handling a request in TiDB. If the 99th percentile latency exceeds 1 second, an alert is triggered.
+    The latency of handling a request in TiDB. If the ninety-ninth percentile latency exceeds 1 second, an alert is triggered.
 
 * Solution:
 
@@ -193,8 +193,6 @@ This section gives the alert rules for the PD component.
 
 ### Emergency-level alerts
 
-Emergency-level alerts are often caused by a service or node failure. Manual intervention is required immediately.
-
 #### `PD_cluster_offline_tikv_nums`
 
 * Alert rule:
@@ -211,8 +209,6 @@ Emergency-level alerts are often caused by a service or node failure. Manual int
     * If the TiKV instance cannot be recovered, you can make it offline.
 
 ### Critical-level alerts
-
-For the critical-level alerts, a close watch on the abnormal metrics is required.
 
 #### `PD_etcd_write_disk_latency`
 
@@ -246,8 +242,6 @@ For the critical-level alerts, a close watch on the abnormal metrics is required
     * Watch the Region health panel and see whether `miss_peer_region_count` is continuously decreasing.
 
 ### Warning-level alerts
-
-Warning-level alerts are a reminder for an issue or error.
 
 #### `PD_cluster_lost_connect_tikv_nums`
 
@@ -413,8 +407,6 @@ This section gives the alert rules for the TiKV component.
 
 ### Emergency-level alerts
 
-Emergency-level alerts are often caused by a service or node failure. Manual intervention is required immediately.
-
 #### `TiKV_memory_used_too_fast`
 
 * Alert rule:
@@ -433,25 +425,19 @@ Emergency-level alerts are often caused by a service or node failure. Manual int
 
 * Alert rule:
 
-    `sum(increase(tidb_tikvclient_gc_action_result{type="success"}[6h])) < 1`
-
-    > **Note:**
-    >
-    > In TiDB 3.* versions, the `tidb_tikvclient_gc_action_result` metric exists but does not have a value. It's because distributed garbage collection (GC) is introduced in the TiDB 3.0 version but will not be performed in TiDB.
+    `sum(increase(tikv_gcworker_gc_tasks_vec{task="gc"}[1d])) < 1 and sum(increase(tikv_gc_compaction_filter_perform[1d])) < 1`
 
 * Description:
 
-    GC is not performed successfully in a Region within 6 hours, which indicates that GC is not working properly. If GC does not run in a short term, it will not cause much trouble; but if GC keeps down, more and more versions are retained, which slows down the query.
+    GC is not performed successfully on a TiKV instance within 24 hours, which indicates that GC is not working properly. If GC does not run in a short term, it will not cause much trouble; but if GC keeps down, more and more versions are retained, which slows down the query.
 
 * Solution:
 
-    1. Perform `select VARIABLE_VALUE from mysql.tidb where VARIABLE_NAME = "tikv_gc_leader_desc"` to locate the `tidb-server` corresponding to the GC leader;
+    1. Perform `SELECT VARIABLE_VALUE FROM mysql.tidb WHERE VARIABLE_NAME = "tikv_gc_leader_desc"` to locate the `tidb-server` corresponding to the GC leader;
     2. View the log of the `tidb-server`, and grep gc_worker tidb.log;
     3. If you find that the GC worker has been resolving locks (the last log is "start resolve locks") or deleting ranges (the last log is “start delete {number} ranges”) during this time, it means the GC process is running normally. Otherwise, contact [support@pingcap.com](mailto:support@pingcap.com) to resolve this issue.
 
 ### Critical-level alerts
-
-For the critical-level alerts, a close watch on the abnormal metrics is required.
 
 #### `TiKV_server_report_failure_msg_total`
 
@@ -616,28 +602,7 @@ For the critical-level alerts, a close watch on the abnormal metrics is required
 
     The pressure on the apply Raft log thread is too high. It is often caused by a burst of writes.
 
-#### `TiDB_tikvclient_gc_action_fail` (only happen when in special configurations)
-
-* Alert rule:
-
-    `sum(increase(tidb_tikvclient_gc_action_result{type="fail”}[1m])) > 10`
-
-    > **Note:**
-    >
-    > In TiDB 3.* versions, the `tidb_tikvclient_gc_action_result` metric exists but does not have a value. It's because distributed garbage collection (GC) is introduced in the TiDB 3.0 version but will not be performed in TiDB.
-
-* Description:
-
-    There are many Regions where GC fails to work.
-
-* Solution:
-
-    1. It is normally because the GC concurrency is set too high. You can moderately lower the GC concurrency degree, and you need to first confirm that the failed GC is caused by the busy server.
-    2. You can moderately lower the concurrency degree by running `update set VARIABLE_VALUE="{number}” where VARIABLE_NAME=”tikv_gc_concurrency”`.
-
 ### Warning-level alerts
-
-Warning-level alerts are a reminder for an issue or error.
 
 #### `TiKV_leader_drops`
 
@@ -817,8 +782,6 @@ This section gives the alert rules for the Node_exporter host.
 
 ### Emergency-level alerts
 
-Emergency-level alerts are often caused by a service or node failure. Manual intervention is required immediately.
-
 #### `NODE_disk_used_more_than_80%`
 
 * Alert rule:
@@ -846,7 +809,7 @@ Emergency-level alerts are often caused by a service or node failure. Manual int
 
 * Solution:
 
-    * Log in to the machine and run the `df -i` command to view the inode usage of the filesystem.
+    * Log in to the machine and run the `df -i` command to view the node usage of the filesystem.
     * Make a plan to increase the disk capacity or delete some data or increase cluster node depending on different situations.
 
 #### `NODE_disk_readonly`
@@ -866,8 +829,6 @@ Emergency-level alerts are often caused by a service or node failure. Manual int
 
 ### Critical-level alerts
 
-For the critical-level alerts, a close watch on the abnormal metrics is required.
-
 #### `NODE_memory_used_more_than_80%`
 
 * Alert rule:
@@ -884,8 +845,6 @@ For the critical-level alerts, a close watch on the abnormal metrics is required
     * Log in to the machine and run the `free -m` command to view the memory usage. You can run `top` to check whether there is any abnormal process that has an overly high memory usage.
 
 ### Warning-level alerts
-
-Warning-level alerts are a reminder for an issue or error.
 
 #### `NODE_node_overload`
 
@@ -969,8 +928,6 @@ Warning-level alerts are a reminder for an issue or error.
 This section gives the alert rules for the Blackbox_exporter TCP, ICMP, and HTTP.
 
 ### Emergency-level alerts
-
-Emergency-level alerts are often caused by a service or node failure. Manual intervention is required immediately.
 
 #### `TiDB_server_is_down`
 
@@ -1149,8 +1106,6 @@ Emergency-level alerts are often caused by a service or node failure. Manual int
     * Check whether the network between the monitoring machine and the Pushgateway machine is normal.
 
 ### Warning-level alerts
-
-Warning-level alerts are a reminder for an issue or error.
 
 #### `BLACKER_ping_latency_more_than_1s`
 

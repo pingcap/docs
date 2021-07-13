@@ -10,9 +10,13 @@ As a command line tool of PD, PD Control obtains the state information of the cl
 
 ## Install PD Control
 
+> **Note:**
+>
+> It is recommended that the version of the Control tool you use is consistent with the version of the cluster.
+
 ### Use TiUP command
 
-To use PD Control, execute the `tiup ctl pd -u http://<pd_ip>:<pd_port> [-i]` command.
+To use PD Control, execute the `tiup ctl:<cluster-version> pd -u http://<pd_ip>:<pd_port> [-i]` command.
 
 ### Download TiDB installation package
 
@@ -24,7 +28,7 @@ If you want to download the latest version of `pd-ctl`, directly download the Ti
 
 > **Note:**
 >
-> `{version}` indicates the version number of TiDB. For example, if `{version}` is `v4.0.0-rc.2`, the package download link is `https://download.pingcap.org/tidb-v4.0.0-rc.2-linux-amd64.tar.gz`. You can also download the latest unpublished version by replacing `{version}` with `latest`.
+> `{version}` indicates the version number of TiDB. For example, if `{version}` is `v5.1.0`, the package download link is `https://download.pingcap.org/tidb-v5.1.0-linux-amd64.tar.gz`.
 
 ### Compile from source code
 
@@ -134,7 +138,7 @@ Usage:
     "strictly-match-label": "false"
   },
   "schedule": {
-    "enable-cross-table-merge": "false",
+    "enable-cross-table-merge": "true",
     "enable-debug-metrics": "false",
     "enable-location-replacement": "true",
     "enable-make-up-replica": "true",
@@ -156,6 +160,7 @@ Usage:
     "merge-schedule-limit": 8,
     "patrol-region-interval": "100ms",
     "region-schedule-limit": 2048,
+    "region-score-formula-version": "v2",
     "replica-schedule-limit": 64,
     "scheduler-max-waiting-operator": 5,
     "split-merge-interval": "1h0m0s",
@@ -174,7 +179,7 @@ Usage:
 }
 
 >> config show cluster-version                // Display the current version of the cluster, which is the current minimum version of TiKV nodes in the cluster and does not correspond to the binary version.
-"4.0.0"
+"5.1.0"
 ```
 
 - `max-snapshot-count` controls the maximum number of snapshots that a single store receives or sends out at the same time. The scheduler is restricted by this configuration to avoid taking up normal application resources. When you need to improve the speed of adding replicas or balancing, increase this value.
@@ -227,10 +232,18 @@ Usage:
     >> config set key-type raw  // Enable cross table merge.
     ```
 
+- `region-score-formula-version` controls the version of the Region score formula. The value options are `v1` and `v2`. The version 2 of the formula helps to reduce redundant balance Region scheduling in some scenarios, such as taking TiKV nodes online or offline.
+
+    {{< copyable "" >}}
+
+    ```bash
+    >> config set region-score-formula-version v2
+    ```
+
 - `patrol-region-interval` controls the execution frequency that `replicaChecker` checks the health status of Regions. A shorter interval indicates a higher execution frequency. Generally, you do not need to adjust it.
 
     ```bash
-    >> config set patrol-region-interval 10ms // Set the execution frequency of replicaChecker to 10ms
+    >> config set patrol-region-interval 50ms // Set the execution frequency of replicaChecker to 50ms
     ```
 
 - `max-store-down-time` controls the time that PD decides the disconnected store cannot be restored if exceeded. If PD does not receive heartbeats from a store within the specified period of time, PD adds replicas in other nodes.
@@ -269,12 +282,12 @@ Usage:
     >> config set hot-region-schedule-limit 4       // 4 tasks of hot Region scheduling at the same time at most
     ```
 
-- `hot-region-cache-hits-threshold` is used to set the threshold of a hot Region. A Region is considered as hot only if the number of its cache hits exceeds this threshold.
+- `hot-region-cache-hits-threshold` is used to set the number of minutes required to identify a hot Region. PD can participate in the hotspot scheduling only after the Region is in the hotspot state for more than this number of minutes.
 
 - `tolerant-size-ratio` controls the size of the balance buffer area. When the score difference between the leader or Region of the two stores is less than specified multiple times of the Region size, it is considered in balance by PD.
 
     ```bash
-    >> config set tolerant-size-ratio 20        // Set the size of the buffer area to about 20 times of the average regionSize
+    >> config set tolerant-size-ratio 20        // Set the size of the buffer area to about 20 times of the average Region Size
     ```
 
 - `low-space-ratio` controls the threshold value that is considered as insufficient store space. When the ratio of the space occupied by the node exceeds the specified value, PD tries to avoid migrating data to the corresponding node as much as possible. At the same time, PD mainly schedules the remaining space to avoid using up the disk space of the corresponding node.
@@ -283,7 +296,7 @@ Usage:
     config set low-space-ratio 0.9              // Set the threshold value of insufficient space to 0.9
     ```
 
-- `high-space-ratio` controls the threshold value that is considered as sufficient store space. When the ratio of the space occupied by the node is less than the specified value, PD ignores the remaining space and mainly schedules the actual data volume.
+- `high-space-ratio` controls the threshold value that is considered as sufficient store space. This configuration takes effect only when `region-score-formula-version` is set to `v1`. When the ratio of the space occupied by the node is less than the specified value, PD ignores the remaining space and mainly schedules the actual data volume.
 
     ```bash
     config set high-space-ratio 0.5             // Set the threshold value of sufficient space to 0.5
@@ -313,9 +326,19 @@ Usage:
 
 - `enable-debug-metrics` is used to enable the metrics for debugging. When you set it to `true`, PD enables some metrics such as `balance-tolerant-size`.
 
-- `enable-placement-rules` is used to enable placement rules.
+- `enable-placement-rules` is used to enable placement rules, which is enabled by default in v5.0 and later versions.
 
 - `store-limit-mode` is used to control the mode of limiting the store speed. The optional modes are `auto` and `manual`. In `auto` mode, the stores are automatically balanced according to the load (experimental).
+
+- PD rounds the lowest digits of the flow number, which reduces the update of statistics caused by the changes of the Region flow information. This configuration item is used to specify the number of lowest digits to round for the Region flow information. For example, the flow `100512` will be rounded to `101000` because the default value is `3`. This configuration replaces `trace-region-flow`.
+
+- For example, set the value of `flow-round-by-digit` to `4`:
+
+    {{< copyable "" >}}
+
+    ```bash
+    config set flow-round-by-digit 4
+    ```
 
 #### `config placement-rules [disable | enable | load | save | show | rule-group]`
 
@@ -436,18 +459,18 @@ time: 43.12698ms
 
 ### `region <region_id> [--jq="<query string>"]`
 
-Use this command to view the region information. For a jq formatted output, see [jq-formatted-json-output-usage](#jq-formatted-json-output-usage).
+Use this command to view the Region information. For a jq formatted output, see [jq-formatted-json-output-usage](#jq-formatted-json-output-usage).
 
 Usage:
 
 ```bash
->> region                               //　Display the information of all regions
+>> region                               //　Display the information of all Regions
 {
   "count": 1,
   "regions": [......]
 }
 
->> region 2                             // Display the information of the region with the id of 2
+>> region 2                             // Display the information of the Region with the ID of 2
 {
   "id": 2,
   "start_key": "7480000000000000FF1D00000000000000F8",
@@ -673,11 +696,12 @@ Usage:
 
 ```bash
 >> scheduler show                                 // Display all schedulers
->> scheduler add grant-leader-scheduler 1         // Schedule all the leaders of the regions on store 1 to store 1
->> scheduler add evict-leader-scheduler 1         // Move all the region leaders on store 1 out
+>> scheduler add grant-leader-scheduler 1         // Schedule all the leaders of the Regions on store 1 to store 1
+>> scheduler add evict-leader-scheduler 1         // Move all the Region leaders on store 1 out
+>> scheduler config evict-leader-scheduler        // Display the stores in which the scheduler is located since v4.0.0
 >> scheduler add shuffle-leader-scheduler         // Randomly exchange the leader on different stores
 >> scheduler add shuffle-region-scheduler         // Randomly scheduling the regions on different stores
->> scheduler remove grant-leader-scheduler-1      // Remove the corresponding scheduler
+>> scheduler remove grant-leader-scheduler-1      // Remove the corresponding scheduler, and `-1` corresponds to the store ID
 >> scheduler pause balance-region-scheduler 10    // Pause the balance-region scheduler for 10 seconds
 >> scheduler pause all 10                         // Pause all schedulers for 10 seconds
 >> scheduler resume balance-region-scheduler      // Continue to run the balance-region scheduler
@@ -761,7 +785,7 @@ Usage:
 >> store delete 1                      // Delete the store with the store id of 1
   ......
 >> store label 1 zone cn               // Set the value of the label with the "zone" key to "cn" for the store with the store id of 1
->> store weight 1 5 10                 // Set the leader weight to 5 and region weight to 10 for the store with the store id of 1
+>> store weight 1 5 10                 // Set the leader weight to 5 and Region weight to 10 for the store with the store id of 1
 >> store remove-tombstone              // Remove stores that are in tombstone state
 >> store limit                         // Show the speed limit of adding-peer operations and the limit of removing-peer operations per minute in all stores
 >> store limit add-peer                // Show the speed limit of adding-peer operations per minute in all stores
@@ -825,6 +849,34 @@ logic:  120102
 » store --jq=".stores[] | {id: .store.id, available: .status.available}"
 {"id":1,"available":"10 GiB"}
 {"id":30,"available":"10 GiB"}
+...
+```
+
+### Query all nodes whose status is not `Up`
+
+{{< copyable "" >}}
+
+```bash
+» store --jq='.stores[].store | select(.state_name!="Up") | { id, address, state_name}'
+```
+
+```
+{"id":1,"address":"127.0.0.1:20161""state_name":"Offline"}
+{"id":5,"address":"127.0.0.1:20162""state_name":"Offline"}
+...
+```
+
+### Query all TiFlash nodes
+
+{{< copyable "" >}}
+
+```bash
+» store --jq='.stores[].store | select(.labels | length>0 and contains([{"key":"engine","value":"tiflash"}])) | { id, address, state_name}'
+```
+
+```
+{"id":1,"address":"127.0.0.1:20161""state_name":"Up"}
+{"id":5,"address":"127.0.0.1:20162""state_name":"Up"}
 ...
 ```
 

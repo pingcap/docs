@@ -30,7 +30,7 @@ See [TiDB Binlog Cluster User Guide](/tidb-binlog/tidb-binlog-overview.md) for m
 
 TiDB Binlog comprises two components: the **Pump** and the **Drainer**. Several Pump nodes make up a pump cluster. Each Pump node connects to TiDB Server instances and receives updates made to each of the TiDB Server instances in a cluster. A Drainer connects to the Pump cluster and transforms the received updates into the correct format for a particular downstream destination, for example, Kafka, another TiDB Cluster or a MySQL/MariaDB server.
 
-![TiDB-Binlog architecture](/media/tidb_binlog_cluster_architecture.png)
+![TiDB-Binlog architecture](/media/tidb-binlog-cluster-architecture.png)
 
 The clustered architecture of Pump ensures that updates won't be lost as new TiDB Server instances join or leave the TiDB Cluster or Pump nodes join or leave the Pump cluster.
 
@@ -41,8 +41,6 @@ We're using MariaDB Server in this case instead of MySQL Server because RHEL/Cen
 ```bash
 sudo yum install -y mariadb-server
 ```
-
-Even if you've already started a TiDB cluster, it will be easier to follow along with this tutorial where we will set up a new, simple cluster. We will install from a tarball, using a simplified form of the [Local Deployment](/deploy-tidb-from-binary.md) guide. You may also wish to refer to [Testing Deployment from Binary Tarball](/test-deployment-from-binary-tarball.md) for best practices of establishing a real testing deployment, but that goes beyond the scope of this tutorial.
 
 ```bash
 curl -L https://download.pingcap.org/tidb-latest-linux-amd64.tar.gz | tar xzf -

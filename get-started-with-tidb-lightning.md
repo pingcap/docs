@@ -44,17 +44,17 @@ After executing this command, the full backup data is exported to the `/data/my_
 
 ### Step 1: Deploy TiDB cluster
 
-Before the data import, you need to deploy a TiDB cluster (later than v2.0.9). In this tutorial, TiDB v4.0.3 is used. For the deployment method, refer to [TiDB Introduction](/overview.md).
+Before the data import, you need to deploy a TiDB cluster. In this tutorial, TiDB v5.0.0 is used as an example. For the deployment method, refer to [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md).
 
 ### Step 2: Download TiDB Lightning installation package
 
 Download the TiDB Lightning installation package from the following link:
 
-- **v4.0.3**: [tidb-toolkit-v4.0.3-linux-amd64.tar.gz](https://download.pingcap.org/tidb-toolkit-v4.0.3-linux-amd64.tar.gz)
+- **v5.0.0**: [tidb-toolkit-v5.0.0-linux-amd64.tar.gz](https://download.pingcap.org/tidb-toolkit-v5.0.0-linux-amd64.tar.gz)
 
 > **Note:**
 >
-> Choose the same version of TiDB Lightning as that of the TiDB cluster.
+> TiDB Lightning is compatible with TiDB clusters of earlier versions. It is recommended that you download the latest stable version of the TiDB Lightning installation package.
 
 ### Step 3: Start `tidb-lightning`
 
@@ -73,12 +73,15 @@ Download the TiDB Lightning installation package from the following link:
     backend = "local"
     # Sets the directory for temporarily storing the sorted key-value pairs.
     # The target directory must be empty.
-    "sorted-kv-dir" = "/mnt/ssd/sorted-kv-dir"
+    sorted-kv-dir = "/mnt/ssd/sorted-kv-dir"
 
     [mydumper]
     # Local source data directory
     data-source-dir = "/data/my_datasource/"
 
+    # Configures the wildcard rule. By default, all tables in the mysql, sys, INFORMATION_SCHEMA, PERFORMANCE_SCHEMA, METRICS_SCHEMA, and INSPECTION_SCHEMA system databases are filtered.
+    # If this item is not configured, the "cannot find schema" error occurs when system tables are imported.
+    filter = ['*.*', '!mysql.*', '!sys.*', '!INFORMATION_SCHEMA.*', '!PERFORMANCE_SCHEMA.*', '!METRICS_SCHEMA.*', '!INSPECTION_SCHEMA.*']
     [tidb]
     # Information of the target cluster
     host = "172.16.31.2"
@@ -104,7 +107,7 @@ Download the TiDB Lightning installation package from the following link:
 
 After the import is completed, TiDB Lightning exits automatically. If the import is successful, you can find `tidb lightning exit` in the last line of the log file.
 
-If any error occurs, refer to [TiDB Lightning Troubleshooting](/troubleshoot-tidb-lightning.md).
+If any error occurs, refer to [TiDB Lightning FAQs](/tidb-lightning/tidb-lightning-faq.md).
 
 ## Summary
 

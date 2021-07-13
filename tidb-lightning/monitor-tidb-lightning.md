@@ -10,8 +10,7 @@ aliases: ['/docs/dev/tidb-lightning/monitor-tidb-lightning/','/docs/dev/referenc
 
 ## Monitor configuration
 
-- If TiDB Lightning is installed using TiDB Ansible, simply add the servers to the `[monitored_servers]` section in the `inventory.ini` file. Then the Prometheus server can collect their metrics.
-- If TiDB Lightning is manually installed, follow the instructions below.
+If TiDB Lightning is manually installed, follow the instructions below.
 
 The metrics of `tidb-lightning` can be gathered directly by Prometheus as long as it is discovered. You can set the metrics port in `tidb-lightning.toml`:
 
@@ -47,8 +46,7 @@ scrape_configs:
 
 [Grafana](https://grafana.com/) is a web interface to visualize Prometheus metrics as dashboards.
 
-If TiDB Lightning is installed using TiDB Ansible, its dashboard is already installed.
-Otherwise, the dashboard JSON can be imported from <https://raw.githubusercontent.com/pingcap/tidb-ansible/master/scripts/lightning.json>.
+When you [deploy a TiDB cluster using TiUP](/production-deployment-using-tiup.md) and have added Grafana and Prometheus in the topology configuration, a set of [Grafana + Prometheus monitoring platform](/tidb-monitoring-framework.md) is deployed simultaneously. In this situation, you must first import [the JSON file of the dashboard](https://raw.githubusercontent.com/pingcap/tidb-ansible/master/scripts/lightning.json).
 
 ### Row 1: Speed
 
@@ -56,7 +54,7 @@ Otherwise, the dashboard JSON can be imported from <https://raw.githubuserconten
 
 | Panel | Series | Description |
 |:-----|:-----|:-----|
-| Import speed | write from lightning | Speed of sending KVs from TiDB Lightning to TiKV Importer, which depends on each table's complexity |
+| Import speed | write from TiDB Lightning | Speed of sending KVs from TiDB Lightning to TiKV Importer, which depends on each table's complexity |
 | Import speed | upload to tikv | Total upload speed from TiKV Importer to all TiKV replicas |
 | Chunk process duration | | Average time needed to completely encode one single data file |
 
@@ -79,7 +77,7 @@ Sometimes the import speed will drop to zero allowing other parts to catch up. T
 | Panel | Description |
 |:-----|:-----|
 | Memory usage | Amount of memory occupied by each service |
-| Number of Lightning Goroutines | Number of running goroutines used by TiDB Lightning |
+| Number of TiDB Lightning Goroutines | Number of running goroutines used by TiDB Lightning |
 | CPU% | Number of logical CPU cores utilized by each service |
 
 ### Row 4: Quota
@@ -165,11 +163,11 @@ Metrics provided by `tikv-importer` are listed under the namespace `tikv_import_
 
 - **`tikv_import_write_chunk_bytes`** (Histogram)
 
-    Bucketed histogram for the uncompressed size of a block of KV pairs received from Lightning.
+    Bucketed histogram for the uncompressed size of a block of KV pairs received from TiDB Lightning.
 
 - **`tikv_import_write_chunk_duration`** (Histogram)
 
-    Bucketed histogram for the time needed to receive a block of KV pairs from Lightning.
+    Bucketed histogram for the time needed to receive a block of KV pairs from TiDB Lightning.
 
 - **`tikv_import_upload_chunk_bytes`** (Histogram)
 

@@ -10,9 +10,9 @@ This document introduces TiDB's implementation of partitioning.
 
 ## Partitioning types
 
-This section introduces the types of partitioning which are available in TiDB. Currently, TiDB supports Range partitioning and Hash partitioning.
+This section introduces the types of partitioning in TiDB. Currently, TiDB supports [Range partitioning](#range-partitioning), [List partitioning](#list-partitioning), [List COLUMNS partitioning](#list-columns-partitioning), and [Hash partitioning](#hash-partitioning).
 
-Range partitioning is used to resolve the performance issues caused by a large amount of deletions in the application, and it supports fast drop partition operations. Hash partitioning is used to scatter the data when there are a large amount of writes.
+Range partitioning, List partitioning and List COLUMNS partitioning are used to resolve the performance issues caused by a large amount of deletions in the application, and support fast drop partition operations. Hash partitioning is used to scatter the data when there are a large amount of writes.
 
 ### Range partitioning
 
@@ -28,8 +28,8 @@ CREATE TABLE employees (
     fname VARCHAR(30),
     lname VARCHAR(30),
     hired DATE NOT NULL DEFAULT '1970-01-01',
-    separated DATE NOT NULL DEFAULT '9999-12-31',
-    job_code INT NOT NULL,
+    separated DATE DEFAULT '9999-12-31',
+    job_code INT,
     store_id INT NOT NULL
 );
 ```
@@ -44,8 +44,8 @@ CREATE TABLE employees (
     fname VARCHAR(30),
     lname VARCHAR(30),
     hired DATE NOT NULL DEFAULT '1970-01-01',
-    separated DATE NOT NULL DEFAULT '9999-12-31',
-    job_code INT NOT NULL,
+    separated DATE DEFAULT '9999-12-31',
+    job_code INT,
     store_id INT NOT NULL
 )
 
@@ -59,7 +59,7 @@ PARTITION BY RANGE (store_id) (
 
 In this partition scheme, all rows corresponding to employees whose `store_id` is 1 through 5 are stored in the `p0` partition while all employees whose `store_id` is 6 through 10 are stored in `p1`. Range partitioning requires the partitions to be ordered, from lowest to highest.
 
-If you insert a row of data `(72, 'Mitchell', 'Wilson', '1998-06-25', NULL, 13)`, it falls in the `p2` partition. But if you insert a record whose `store_id` is larger than 20, an error is reported because TiDB can not know which partition this record should be inserted into. In this case, you can use `MAXVALUE` when creating a table:
+If you insert a row of data `(72, 'Tom', 'John', '2015-06-25', NULL, NULL, 15)`, it falls in the `p2` partition. But if you insert a record whose `store_id` is larger than 20, an error is reported because TiDB can not know which partition this record should be inserted into. In this case, you can use `MAXVALUE` when creating a table:
 
 {{< copyable "sql" >}}
 
@@ -69,8 +69,8 @@ CREATE TABLE employees (
     fname VARCHAR(30),
     lname VARCHAR(30),
     hired DATE NOT NULL DEFAULT '1970-01-01',
-    separated DATE NOT NULL DEFAULT '9999-12-31',
-    job_code INT NOT NULL,
+    separated DATE DEFAULT '9999-12-31',
+    job_code INT,
     store_id INT NOT NULL
 )
 
@@ -94,8 +94,8 @@ CREATE TABLE employees (
     fname VARCHAR(30),
     lname VARCHAR(30),
     hired DATE NOT NULL DEFAULT '1970-01-01',
-    separated DATE NOT NULL DEFAULT '9999-12-31',
-    job_code INT NOT NULL,
+    separated DATE DEFAULT '9999-12-31',
+    job_code INT,
     store_id INT NOT NULL
 )
 
@@ -118,7 +118,7 @@ CREATE TABLE employees (
     fname VARCHAR(30),
     lname VARCHAR(30),
     hired DATE NOT NULL DEFAULT '1970-01-01',
-    separated DATE NOT NULL DEFAULT '9999-12-31',
+    separated DATE DEFAULT '9999-12-31',
     job_code INT,
     store_id INT
 )
@@ -164,6 +164,194 @@ Range partitioning is particularly useful when one or more of the following cond
 * You want to use a column that contains time or date values, or containing values arising from some other series.
 * You need to frequently run queries on the columns used for partitioning. For example, when executing a query like `EXPLAIN SELECT COUNT(*) FROM employees WHERE separated BETWEEN '2000-01-01' AND '2000-12-31' GROUP BY store_id;`, TiDB can quickly know that only the data in the `p2` partition needs to be scanned, because the other partitions do not match the `WHERE` condition.
 
+### List partitioning
+
+> **Warning:**
+>
+> List partitioning is an experimental feature. It is not recommended that you use it in the production environment.
+
+Before creating a List partitioned table, you need to set the value of the session variable `tidb_enable_list_partition` to `ON`.
+
+{{< copyable "sql" >}}
+
+```sql
+set @@session.tidb_enable_list_partition = ON
+```
+
+Also, make sure that `tidb_enable_table_partition` is set to `ON`, which is the default setting.
+
+List partitioning is similar to Range partitioning. Unlike Range partitioning, in List partitioning, the partitioning expression values for all rows in each partition are in a given value set. This value set defined for each partition can have any number of values but cannot have duplicate values. You can use the `PARTITION ... VALUES IN (...)` clause to define a value set.
+
+Suppose that you want to create a personnel record table. You can create a table as follows:
+
+{{< copyable "sql" >}}
+
+```sql
+CREATE TABLE employees (
+    id INT NOT NULL,
+    hired DATE NOT NULL DEFAULT '1970-01-01',
+    store_id INT
+);
+```
+
+Suppose that there are 20 stores distributed in 4 districts, as shown in the table below:
+
+```
+| Region  | Store ID Numbers     |
+| ------- | -------------------- |
+| North   | 1, 2, 3, 4, 5        |
+| East    | 6, 7, 8, 9, 10       |
+| West    | 11, 12, 13, 14, 15   |
+| Central | 16, 17, 18, 19, 20   |
+```
+
+If you want to store the personnel data of employees of the same region in the same partition, you can create a List partitioned table based on `store_id`:
+
+{{< copyable "sql" >}}
+
+```sql
+CREATE TABLE employees (
+    id INT NOT NULL,
+    hired DATE NOT NULL DEFAULT '1970-01-01',
+    store_id INT
+)
+PARTITION BY LIST (store_id) (
+    PARTITION pNorth VALUES IN (1, 2, 3, 4, 5),
+    PARTITION pEast VALUES IN (6, 7, 8, 9, 10),
+    PARTITION pWest VALUES IN (11, 12, 13, 14, 15),
+    PARTITION pCentral VALUES IN (16, 17, 18, 19, 20)
+);
+```
+
+After creating the partitions as above, you can easily add or delete records related to a specific region in the table. For example, suppose that all stores in the East region (East) are sold to another company. Then all the row data related to the store employees of this region can be deleted by executing `ALTER TABLE employees TRUNCATE PARTITION pEast`, which is much more efficient than the equivalent statement `DELETE FROM employees WHERE store_id IN (6, 7, 8, 9, 10)`.
+
+You can also execute `ALTER TABLE employees DROP PARTITION pEast` to delete all related rows, but this statement also deletes the `pEast` partition from the table definition. In this situation, you must execute the `ALTER TABLE ... ADD PARTITION` statement to recover the original partitioning scheme of the table.
+
+Unlike Range partitioning, List partitioning does not have a similar `MAXVALUE` partition to store all values that do not belong to other partitions. Instead, all expected values of the partition expression must be included in the `PARTITION ... VALUES IN (...)` clause. If the value to be inserted in an `INSERT` statement does not match the column value set of any partition, the statement fails to execute and an error is reported. See the following example:
+
+```sql
+test> CREATE TABLE t (
+    ->   a INT,
+    ->   b INT
+    -> )
+    -> PARTITION BY LIST (a) (
+    ->   PARTITION p0 VALUES IN (1, 2, 3),
+    ->   PARTITION p1 VALUES IN (4, 5, 6)
+    -> );
+Query OK, 0 rows affected (0.11 sec)
+
+test> INSERT INTO t VALUES (7, 7);
+ERROR 1525 (HY000): Table has no partition for value 7
+```
+
+To ignore the error type above, you can use the `IGNORE` keyword. After using this keyword, if a row contains values that do not match the column value set of any partition, this row will not be inserted. Instead, any row with matched values is inserted, and no error is reported:
+
+```sql
+test> TRUNCATE t;
+Query OK, 1 row affected (0.00 sec)
+
+test> INSERT IGNORE INTO t VALUES (1, 1), (7, 7), (8, 8), (3, 3), (5, 5);
+Query OK, 3 rows affected, 2 warnings (0.01 sec)
+Records: 5  Duplicates: 2  Warnings: 2
+
+test> select * from t;
++------+------+
+| a    | b    |
++------+------+
+|    5 |    5 |
+|    1 |    1 |
+|    3 |    3 |
++------+------+
+3 rows in set (0.01 sec)
+```
+
+### List COLUMNS partitioning
+
+> **Warning:**
+>
+> List COLUMNS partitioning is an experimental feature. It is not recommended that you use it in the production environment.
+
+List COLUMNS partitioning is a variant of List partitioning. You can use multiple columns as partition keys. Besides the integer data type, you can also use the columns in the string, `DATE`, and `DATETIME` data types as partition columns.
+
+Suppose that you want to divide the store employees from the following 12 cities into 4 regions, as shown in the following table:
+
+```
+| Region | Cities                         |
+| :----- | ------------------------------ |
+| 1      | LosAngeles,Seattle, Houston    |
+| 2      | Chicago, Columbus, Boston      |
+| 3      | NewYork, LongIsland, Baltimore |
+| 4      | Atlanta, Raleigh, Cincinnati   |
+```
+
+You can use List COLUMNS partitioning to create a table and store each row in the partition that corresponds to the employee's city, as shown below:
+
+{{< copyable "sql" >}}
+
+```sql
+CREATE TABLE employees_1 (
+    id INT NOT NULL,
+    fname VARCHAR(30),
+    lname VARCHAR(30),
+    hired DATE NOT NULL DEFAULT '1970-01-01',
+    separated DATE DEFAULT '9999-12-31',
+    job_code INT,
+    store_id INT,
+    city VARCHAR(15)
+)
+PARTITION BY LIST COLUMNS(city) (
+    PARTITION pRegion_1 VALUES IN('LosAngeles', 'Seattle', 'Houston'),
+    PARTITION pRegion_2 VALUES IN('Chicago', 'Columbus', 'Boston'),
+    PARTITION pRegion_3 VALUES IN('NewYork', 'LongIsland', 'Baltimore'),
+    PARTITION pRegion_4 VALUES IN('Atlanta', 'Raleigh', 'Cincinnati')
+);
+```
+
+Unlike List partitioning, in List COLUMNS partitioning, you do not need to use the expression in the `COLUMNS()` clause to convert column values to integers.
+
+List COLUMNS partitioning can also be implemented using columns of the `DATE` and `DATETIME` types, as shown in the following example. This example uses the same names and columns as the previous `employees_1` table, but uses List COLUMNS partitioning based on the `hired` column:
+
+{{< copyable "sql" >}}
+
+```sql
+CREATE TABLE employees_2 (
+    id INT NOT NULL,
+    fname VARCHAR(30),
+    lname VARCHAR(30),
+    hired DATE NOT NULL DEFAULT '1970-01-01',
+    separated DATE DEFAULT '9999-12-31',
+    job_code INT,
+    store_id INT,
+    city VARCHAR(15)
+)
+PARTITION BY LIST COLUMNS(hired) (
+    PARTITION pWeek_1 VALUES IN('2020-02-01', '2020-02-02', '2020-02-03',
+        '2020-02-04', '2020-02-05', '2020-02-06', '2020-02-07'),
+    PARTITION pWeek_2 VALUES IN('2020-02-08', '2020-02-09', '2020-02-10',
+        '2020-02-11', '2020-02-12', '2020-02-13', '2020-02-14'),
+    PARTITION pWeek_3 VALUES IN('2020-02-15', '2020-02-16', '2020-02-17',
+        '2020-02-18', '2020-02-19', '2020-02-20', '2020-02-21'),
+    PARTITION pWeek_4 VALUES IN('2020-02-22', '2020-02-23', '2020-02-24',
+        '2020-02-25', '2020-02-26', '2020-02-27', '2020-02-28')
+);
+```
+
+In addition, you can also add multiple columns in the `COLUMNS()` clause. For example:
+
+{{< copyable "sql" >}}
+
+```sql
+CREATE TABLE t (
+    id int,
+    name varchar(10)
+)
+PARTITION BY LIST COLUMNS(id,name) (
+     partition p0 values IN ((1,'a'),(2,'b')),
+     partition p1 values IN ((3,'c'),(4,'d')),
+     partition p3 values IN ((5,'e'),(null,null))
+);
+```
+
 ### Hash partitioning
 
 Hash partitioning is used to make sure that data is evenly scattered into a certain number of partitions. With Range partitioning, you must specify the range of the column values for each partition when you use Range partitioning, while you just need to specify the number of partitions when you use Hash partitioning.
@@ -180,7 +368,7 @@ CREATE TABLE employees (
     fname VARCHAR(30),
     lname VARCHAR(30),
     hired DATE NOT NULL DEFAULT '1970-01-01',
-    separated DATE NOT NULL DEFAULT '9999-12-31',
+    separated DATE DEFAULT '9999-12-31',
     job_code INT,
     store_id INT
 )
@@ -201,7 +389,7 @@ CREATE TABLE employees (
     fname VARCHAR(30),
     lname VARCHAR(30),
     hired DATE NOT NULL DEFAULT '1970-01-01',
-    separated DATE NOT NULL DEFAULT '9999-12-31',
+    separated DATE DEFAULT '9999-12-31',
     job_code INT,
     store_id INT
 )
@@ -220,7 +408,7 @@ In conclusion, when the expression has a form that is closer to `y = cx`, it is 
 
 In theory, pruning is also possible for expressions involving more than one column value, but determining which of such expressions are suitable can be quite difficult and time-consuming. For this reason, the use of hashing expressions involving multiple columns is not particularly recommended.
 
-When using `PARTITIION BY HASH`, TiDB decides which partition the data should fall into based on the modulus of the result of the expression. In other words, if a partitioning expression is `expr` and the number of partitions is `num`, `MOD(expr, num)` decides the partition in which the data is stored. Assume that `t1` is defined as follows:
+When using `PARTITION BY HASH`, TiDB decides which partition the data should fall into based on the modulus of the result of the expression. In other words, if a partitioning expression is `expr` and the number of partitions is `num`, `MOD(expr, num)` decides the partition in which the data is stored. Assume that `t1` is defined as follows:
 
 {{< copyable "sql" >}}
 
@@ -386,7 +574,7 @@ You can see that the inserted record `(NULL, 'mothra')` falls into the same part
 
 > **Note:**
 > `NULL` values by Hash partitions in TiDB are handled in the same way as described in [How MySQL Partitioning Handles NULL](https://dev.mysql.com/doc/refman/8.0/en/partitioning-handling-nulls.html), which, however, is not consistent with the actual behavior of MySQL. In other words, MySQL's implementation in this case is not consistent with its documentation.
-> 
+>
 > In this case, the actual behavior of TiDB is in line with the description of this document.
 
 ## Partition management
@@ -830,7 +1018,22 @@ PARTITIONS 4;
 ERROR 1491 (HY000): A PRIMARY KEY must include all columns in the table's partitioning function
 ```
 
-The `CREATE TABLE` statement fails because both `col1` and `col3` are included in the proposed partitioning key, but neither of these columns is part of both of unique keys on the table.
+The `CREATE TABLE` statement fails because both `col1` and `col3` are included in the proposed partitioning key, but neither of these columns is part of both of unique keys on the table. After the following modifications, the `CREATE TABLE` statement becomes valid:
+
+{{< copyable "sql" >}}
+
+```sql
+CREATE TABLE t3 (
+    col1 INT NOT NULL,
+    col2 DATE NOT NULL,
+    col3 INT NOT NULL,
+    col4 INT NOT NULL,
+    UNIQUE KEY (col1, col2, col3),
+    UNIQUE KEY (col1, col3)
+)
+PARTITION BY HASH(col1 + col3)
+    PARTITIONS 4;
+```
 
 The following table cannot be partitioned at all, because there is no way to include in a partitioning key any columns that belong to both unique keys:
 
@@ -876,7 +1079,31 @@ PARTITION BY HASH( YEAR(col2) )
 PARTITIONS 4;
 ```
 
-In both cases, the primary key does not include all columns referenced in the partitioning expression.
+In the above examples, the primary key does not include all columns referenced in the partitioning expression. After adding the missing column in the primary key, the  `CREATE TABLE` statement becomes valid:
+
+{{< copyable "sql" >}}
+
+```sql
+CREATE TABLE t5 (
+    col1 INT NOT NULL,
+    col2 DATE NOT NULL,
+    col3 INT NOT NULL,
+    col4 INT NOT NULL,
+    PRIMARY KEY(col1, col2, col3)
+)
+PARTITION BY HASH(col3)
+PARTITIONS 4;
+CREATE TABLE t6 (
+    col1 INT NOT NULL,
+    col2 DATE NOT NULL,
+    col3 INT NOT NULL,
+    col4 INT NOT NULL,
+    PRIMARY KEY(col1, col2, col3),
+    UNIQUE KEY(col2)
+)
+PARTITION BY HASH( YEAR(col2) )
+PARTITIONS 4;
+```
 
 If a table has neither unique keys nor primary keys, then this restriction does not apply.
 
@@ -949,7 +1176,7 @@ YEARWEEK()
 
 ### Compatibility with MySQL
 
-Currently, TiDB only supports Range partitioning and Hash partitioning. Other partitioning types that are available in MySQL such as list partitioning and key partitioning are not supported yet in TiDB.
+Currently, TiDB supports Range partitioning, List partitioning, List COLUMNS partitioning, and Hash partitioning. Other partitioning types that are available in MySQL such as key partitioning are not supported yet in TiDB.
 
 For a table partitioned by `RANGE COLUMNS`, currently TiDB only supports using a single partitioning column.
 
@@ -1049,6 +1276,198 @@ select * from t;
 5 rows in set (0.00 sec)
 ```
 
-The `tidb_enable_table_partition` environment variable controls whether to enable the partitioned table feature. If this variable is set to `off`, the partition information will be ignored when a table is created, and this table will be created as a normal table.
+The `tidb_enable_list_partition` environment variable controls whether to enable the partitioned table feature. If this variable is set to `OFF`, the partition information will be ignored when a table is created, and this table will be created as a normal table.
 
-This variable is only used in table creation. After the table is created, modify this variable value takes no effect. For details, see [system variables](/system-variables.md#tidb_enable_table_partition).
+This variable is only used in table creation. After the table is created, modify this variable value takes no effect. For details, see [system variables](/system-variables.md#tidb_enable_list_partition-new-in-v50).
+
+### Dynamic mode
+
+> **Warning:**
+>
+> This is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
+
+TiDB accesses partitioned tables in one of the two modes: `dynamic` mode and `static` mode. Currently, `static` mode is used by default. If you want to enable `dynamic` mode, you need to manually set the `tidb_partition_prune_mode` variable to `dynamic`.
+
+{{< copyable "sql" >}}
+
+```sql
+set @@session.tidb_partition_prune_mode = 'dynamic'
+```
+
+In `static` mode, TiDB accesses each partition separately using multiple operators, and then merges the results using `Union`. The following example is a simple read operation where TiDB merges the results of two corresponding partitions using `Union`:
+
+{{< copyable "sql" >}}
+
+```sql
+mysql> create table t1(id int, age int, key(id)) partition by range(id) (
+    ->     partition p0 values less than (100),
+    ->     partition p1 values less than (200),
+    ->     partition p2 values less than (300),
+    ->     partition p3 values less than (400));
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> explain select * from t1 where id < 150;
++------------------------------+----------+-----------+------------------------+--------------------------------+
+| id                           | estRows  | task      | access object          | operator info                  |
++------------------------------+----------+-----------+------------------------+--------------------------------+
+| PartitionUnion_9             | 6646.67  | root      |                        |                                |
+| ├─TableReader_12             | 3323.33  | root      |                        | data:Selection_11              |
+| │ └─Selection_11             | 3323.33  | cop[tikv] |                        | lt(test.t1.id, 150)            |
+| │   └─TableFullScan_10       | 10000.00 | cop[tikv] | table:t1, partition:p0 | keep order:false, stats:pseudo |
+| └─TableReader_18             | 3323.33  | root      |                        | data:Selection_17              |
+|   └─Selection_17             | 3323.33  | cop[tikv] |                        | lt(test.t1.id, 150)            |
+|     └─TableFullScan_16       | 10000.00 | cop[tikv] | table:t1, partition:p1 | keep order:false, stats:pseudo |
++------------------------------+----------+-----------+------------------------+--------------------------------+
+7 rows in set (0.00 sec)
+```
+
+In `dynamic` mode, each operator supports direct access to multiple partitions, so TiDB no longer uses `Union`.
+
+{{< copyable "sql" >}}
+
+```sql
+mysql> set @@session.tidb_partition_prune_mode = 'dynamic';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> explain select * from t1 where id < 150;
++-------------------------+----------+-----------+-----------------+--------------------------------+
+| id                      | estRows  | task      | access object   | operator info                  |
++-------------------------+----------+-----------+-----------------+--------------------------------+
+| TableReader_7           | 3323.33  | root      | partition:p0,p1 | data:Selection_6               |
+| └─Selection_6           | 3323.33  | cop[tikv] |                 | lt(test.t1.id, 150)            |
+|   └─TableFullScan_5     | 10000.00 | cop[tikv] | table:t1        | keep order:false, stats:pseudo |
++-------------------------+----------+-----------+-----------------+--------------------------------+
+3 rows in set (0.00 sec)
+```
+
+From the above query results, you can see that the `Union` operator in the execution plan disappears while the partition pruning still takes effect and the execution plan only accesses `p0` and `p1`.
+
+`dynamic` mode makes execution plans simpler and clearer. Omitting the Union operation can improve the execution efficiency and avoid the problem of Union concurrent execution. In addition, `dynamic` mode also solves two problems that cannot be solved in `static` mode:
+
++ Plan Cache cannot be used. (See example 1 and 2)
++ Execution plans with IndexJoin cannot be used. (See example 3 and 4)
+
+**Example 1**：In the following example, the Plan Cache feature is enabled in the configuration file and the same query is executed twice in `static` mode:
+
+{{< copyable "sql" >}}
+
+```sql
+mysql> set @a=150;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> set @@tidb_partition_prune_mode = 'static';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> prepare stmt from 'select * from t1 where id < ?';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> execute stmt using @a;
+Empty set (0.00 sec)
+
+mysql> execute stmt using @a;
+Empty set (0.00 sec)
+
+-- In static mode, when the same query is executed twice, the cache cannot be hit at the second time.
+mysql> select @@last_plan_from_cache;
++------------------------+
+| @@last_plan_from_cache |
++------------------------+
+|                      0 |
++------------------------+
+1 row in set (0.00 sec)
+```
+
+The `last_plan_from_cache` variable can show whether the last query hits the Plan Cache or not. From example 1, you can see that in `static` mode, even if the same query is executed multiple times on the partitioned table, the Plan Cache is not hit.
+
+**Example 2**: In the following example, the same operations are performed in `dynamic` mode as done in example 1:
+
+{{< copyable "sql" >}}
+
+```sql
+mysql> set @@tidb_partition_prune_mode = 'dynamic';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> prepare stmt from 'select * from t1 where id < ?';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> execute stmt using @a;
+Empty set (0.00 sec)
+
+mysql> execute stmt using @a;
+Empty set (0.00 sec)
+
+-- In dynamic mode, the cache can be hit at the second time.
+mysql> select @@last_plan_from_cache;
++------------------------+
+| @@last_plan_from_cache |
++------------------------+
+|                      1 |
++------------------------+
+1 row in set (0.00 sec)
+```
+
+From example 2, you can see that in `dynamic` mode, querying the partitioned table hits the Plan Cache.
+
+**Example 3**: In the following example, a query is performed in `static` mode using the execution plan with IndexJoin:
+
+{{< copyable "sql" >}}
+
+```sql
+mysql> create table t2(id int, code int);
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> set @@tidb_partition_prune_mode = 'static';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> explain select /*+ TIDB_INLJ(t1, t2) */ t1.* from t1, t2 where t2.code = 0 and t2.id = t1.id;
++--------------------------------+----------+-----------+------------------------+------------------------------------------------+
+| id                             | estRows  | task      | access object          | operator info                                  |
++--------------------------------+----------+-----------+------------------------+------------------------------------------------+
+| HashJoin_13                    | 12.49    | root      |                        | inner join, equal:[eq(test.t1.id, test.t2.id)] |
+| ├─TableReader_42(Build)        | 9.99     | root      |                        | data:Selection_41                              |
+| │ └─Selection_41               | 9.99     | cop[tikv] |                        | eq(test.t2.code, 0), not(isnull(test.t2.id))   |
+| │   └─TableFullScan_40         | 10000.00 | cop[tikv] | table:t2               | keep order:false, stats:pseudo                 |
+| └─PartitionUnion_15(Probe)     | 39960.00 | root      |                        |                                                |
+|   ├─TableReader_18             | 9990.00  | root      |                        | data:Selection_17                              |
+|   │ └─Selection_17             | 9990.00  | cop[tikv] |                        | not(isnull(test.t1.id))                        |
+|   │   └─TableFullScan_16       | 10000.00 | cop[tikv] | table:t1, partition:p0 | keep order:false, stats:pseudo                 |
+|   ├─TableReader_24             | 9990.00  | root      |                        | data:Selection_23                              |
+|   │ └─Selection_23             | 9990.00  | cop[tikv] |                        | not(isnull(test.t1.id))                        |
+|   │   └─TableFullScan_22       | 10000.00 | cop[tikv] | table:t1, partition:p1 | keep order:false, stats:pseudo                 |
+|   ├─TableReader_30             | 9990.00  | root      |                        | data:Selection_29                              |
+|   │ └─Selection_29             | 9990.00  | cop[tikv] |                        | not(isnull(test.t1.id))                        |
+|   │   └─TableFullScan_28       | 10000.00 | cop[tikv] | table:t1, partition:p2 | keep order:false, stats:pseudo                 |
+|   └─TableReader_36             | 9990.00  | root      |                        | data:Selection_35                              |
+|     └─Selection_35             | 9990.00  | cop[tikv] |                        | not(isnull(test.t1.id))                        |
+|       └─TableFullScan_34       | 10000.00 | cop[tikv] | table:t1, partition:p3 | keep order:false, stats:pseudo                 |
++--------------------------------+----------+-----------+------------------------+------------------------------------------------+
+17 rows in set, 1 warning (0.00 sec)
+```
+
+From example 3, you can see that even if the `TIDB_INLJ` hint is used, the query on the partitioned table cannot select the execution plan with IndexJoin.
+
+**Example 4**: In the following example, the query is performed in `dynamic` mode using the execution plan with IndexJoin:
+
+{{< copyable "sql" >}}
+
+```sql
+mysql> set @@tidb_partition_prune_mode = 'dynamic';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> explain select /*+ TIDB_INLJ(t1, t2) */ t1.* from t1, t2 where t2.code = 0 and t2.id = t1.id;
++---------------------------------+----------+-----------+------------------------+---------------------------------------------------------------------------------------------------------------------+
+| id                              | estRows  | task      | access object          | operator info                                                                                                       |
++---------------------------------+----------+-----------+------------------------+---------------------------------------------------------------------------------------------------------------------+
+| IndexJoin_11                    | 12.49    | root      |                        | inner join, inner:IndexLookUp_10, outer key:test.t2.id, inner key:test.t1.id, equal cond:eq(test.t2.id, test.t1.id) |
+| ├─TableReader_16(Build)         | 9.99     | root      |                        | data:Selection_15                                                                                                   |
+| │ └─Selection_15                | 9.99     | cop[tikv] |                        | eq(test.t2.code, 0), not(isnull(test.t2.id))                                                                        |
+| │   └─TableFullScan_14          | 10000.00 | cop[tikv] | table:t2               | keep order:false, stats:pseudo                                                                                      |
+| └─IndexLookUp_10(Probe)         | 1.25     | root      | partition:all          |                                                                                                                     |
+|   ├─Selection_9(Build)          | 1.25     | cop[tikv] |                        | not(isnull(test.t1.id))                                                                                             |
+|   │ └─IndexRangeScan_7          | 1.25     | cop[tikv] | table:t1, index:id(id) | range: decided by [eq(test.t1.id, test.t2.id)], keep order:false, stats:pseudo                                      |
+|   └─TableRowIDScan_8(Probe)     | 1.25     | cop[tikv] | table:t1               | keep order:false, stats:pseudo                                                                                      |
++---------------------------------+----------+-----------+------------------------+---------------------------------------------------------------------------------------------------------------------+
+8 rows in set (0.00 sec)
+```
+
+From example 4, you can see that in `dynamic` mode, the execution plan with IndexJoin is selected when you execute the query.

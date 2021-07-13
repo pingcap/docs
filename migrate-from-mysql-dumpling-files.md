@@ -1,10 +1,10 @@
 ---
-title: Migrate Data from MySQL SQL Files
+title: Migrate from MySQL SQL Files Using TiDB Lightning
 summary: Learn how to migrate data from MySQL SQL files to TiDB using TiDB Lightning.
 aliases: ['/docs/dev/migrate-from-mysql-mydumper-files/','/tidb/dev/migrate-from-mysql-mydumper-files/']
 ---
 
-# Migrate Data from MySQL SQL Files
+# Migrate from MySQL SQL Files Using TiDB Lightning
 
 This document describes how to migrate data from MySQL SQL files to TiDB using TiDB Lightning. For details on how to generate MySQL SQL files, refer to [Dumpling](/dumpling-overview.md).
 
@@ -45,6 +45,23 @@ This document takes the TiDB-backend as an example. Create the `tidb-lightning.t
     port = 4000
     user = "root"
     password = ""
+    ```
+
+3. Add the necessary parameter for the backend. This document uses the TiDB-backend mode. Here, "backend" can also be set to "local" or "importer" according to your actual application scenario. For details, refer to [Backend Mode](/tidb-lightning/tidb-lightning-backends.md).
+
+    ```
+    [tikv-importer]
+    backend = "tidb"
+    ```
+
+4. Add necessary parameters for importing the TiDB cluster.
+
+    ```
+    [tidb]
+    host = "{{tidb-host}}"
+    port = {{tidb-port}}
+    user = "{{tidb-user}}"
+    password = "{{tidb-password}}"
     ```
 
 For other configurations, see [TiDB Lightning Configuration](/tidb-lightning/tidb-lightning-configuration.md).

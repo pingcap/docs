@@ -54,9 +54,13 @@ ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 0
     CREATE TABLE table_name like t
     ```
 
-* For the current version, if you create the TiFlash replica before using TiDB Lightning to import the data, the data import will fail. You must import data to the table before creating the TiFlash replica for the table.
+* For versions earlier than v4.0.6, if you create the TiFlash replica before using TiDB Lightning to import the data, the data import will fail. You must import data to the table before creating the TiFlash replica for the table.
+
+* If TiDB and TiDB Lightning are both v4.0.6 or later, no matter a table has TiFlash replica(s) or not, you can import data to that table using TiDB Lightning. Note that this might slow the TiDB Lightning procedure, which depends on the NIC bandwidth on the lightning host, the CPU and disk load of the TiFlash node, and the number of TiFlash replicas.
 
 * It is recommended that you do not replicate more than 1,000 tables because this lowers the PD scheduling performance. This limit will be removed in later versions.
+
+* In v5.1 and later versions, setting the replicas for the system tables is no longer supported. Before upgrading the cluster, you need to clear the replicas of the relevant system tables. Otherwise, you cannot modify the replica settings of the system tables after you upgrade the cluster to a later version.
 
 ## Check the replication progress
 
@@ -189,56 +193,202 @@ In the above three ways of reading TiFlash replicas, engine isolation specifies 
 
 > **Note:**
 >
-> Before v4.0.3, the behavior of reading from TiFlash replica in a non-read-only SQL statement (for example, `INSERT INTO ... SELECT`, `SELECT ... FOR UPDATE`, `UPDATE ...`, `DELETE ...`) is undefined. In v4.0.3 and later versions, internally TiDB ignores the TiFlash replica for a non-read-only SQL statement to guarantee the data correctness. That is, for [smart selection](#smart-selection), TiDB automatically chooses the non-TiFlash replica; for [engine isolation](#engine-isolation) that specifies TiFlash replica **only**, TiDB reports an error; and for [manual hint](#manual-hint), TiDB ignores the hint.
+> Before v4.0.3, the behavior of reading from TiFlash replica in a non-read-only SQL statement (for example, `INSERT INTO ... SELECT`, `SELECT ... FOR UPDATE`, `UPDATE ...`, `DELETE ...`) is undefined. In v4.0.3 and later versions, internally TiDB ignores the TiFlash replica for a non-read-only SQL statement to guarantee the data correctness. That is, for [smart selection](#smart-selection), TiDB automatically selects the non-TiFlash replica; for [engine isolation](#engine-isolation) that specifies TiFlash replica **only**, TiDB reports an error; and for [manual hint](#manual-hint), TiDB ignores the hint.
 
 ## Use TiSpark to read TiFlash replicas
 
-Currently, you can use TiSpark to read TiFlash replicas in a method similar to the engine isolation in TiDB. This method is to configure the `spark.tispark.use.tiflash` parameter to `true` (or `false`).
+Currently, you can use TiSpark to read TiFlash replicas in a method similar to the engine isolation in TiDB. This method is to configure the `spark.tispark.isolation_read_engines` parameter. The parameter value defaults to `tikv,tiflash`, which means that TiDB reads data from TiFlash or from TiKV according to CBO's selection. If you set the parameter value to `tiflash`, it means that TiDB forcibly reads data from TiFlash.
 
 > **Notes**
 >
 > When this parameter is set to `true`, only the TiFlash replicas of all tables involved in the query are read and these tables must have TiFlash replicas; for tables that do not have TiFlash replicas, an error is reported. When this parameter is set to `false`, only the TiKV replica is read.
 
-You can configure this parameter in either of the following ways:
+You can configure this parameter in one of the following ways:
 
 * Add the following item in the `spark-defaults.conf` file:
 
     ```
-    spark.tispark.use.tiflash true
+    spark.tispark.isolation_read_engines tiflash
     ```
 
-* Add `--conf spark.tispark.use.tiflash=true` in the initialization command when initializing Spark shell or Thrift server.
+* Add `--conf spark.tispark.isolation_read_engines=tiflash` in the initialization command when initializing Spark shell or Thrift server.
 
-* Set `spark.conf.set("spark.tispark.use.tiflash", true)` in Spark shell in a real-time manner.
+* Set `spark.conf.set("spark.tispark.isolation_read_engines", "tiflash")` in Spark shell in a real-time manner.
 
-* Set `set spark.tispark.use.tiflash=true` in Thrift server after the server is connected via beeline.
+* Set `set spark.tispark.isolation_read_engines=tiflash` in Thrift server after the server is connected via beeline.
 
 ## Supported push-down calculations
 
-> **Note:**
->
-> Before v4.0.2, TiDB does not support the new framework for collations, so in those previous versions, if you enable the [new framework for collations](/character-set-and-collation.md#new-framework-for-collations), none of the expressions can be pushed down. This restriction is removed in v4.0.2 and later versions.
+TiFlash supports the push-down of the following operators:
 
-TiFlash supports predicate, aggregate push-down calculations, and table joins. Push-down calculations can help TiDB perform distributed acceleration. Currently, `Full Outer Join` and `DISTINCT COUNT` are not the supported calculation types, which will be optimized in later versions.
+* TableScan: Reads data from tables.
+* Selection: Filters data.
+* HashAgg: Performs data aggregation based on the [Hash Aggregation](/explain-aggregation.md#hash-aggregation) algorithm.
+* StreamAgg: Performs data aggregation based on the [Stream Aggregation](/explain-aggregation.md#stream-aggregation) algorithm. SteamAgg only supports the aggregation without the `GROUP BY` condition.
+* TopN: Performs the TopN calculation.
+* Limit: Performs the limit calculation.
+* Project: Performs the projection calculation.
+* HashJoin (Equi Join): Performs the join calculation based on the [Hash Join](/explain-joins.md#hash-join) algorithm, but with the following conditions:
+    * The operator can be pushed down only in the [MPP mode](#use-the-mpp-mode).
+    * The push-down of `Full Outer Join` is not supported.
+* HashJoin (Non-Equi Join): Performs the Cartesian Join algorithm, but with the following conditions:
+    * The operator can be pushed down only in the [MPP mode](#use-the-mpp-mode).
+    * Cartesian Join is supported only in Broadcast Join.
 
-You can enable the push-down of `join` using the following session variable (`Full Outer Join` is currently not supported):
+In TiDB, operators are organized in a tree structure. For an operator to be pushed down to TiFlash, all of the following prerequisites must be met:
 
-```
-set @@session.tidb_opt_broadcast_join=1
-```
++ All of its child operators can be pushed down to TiFlash.
++ If an operator contains expressions (most of the operators contain expressions), all expressions of the operator can be pushed down to TiFlash.
 
-Currently, TiFlash supports pushing down a limited number of expressions, including:
+Currently, TiFlash supports the following push-down expressions:
 
-```
-+, -, /, *, >=, <=, =, !=, <, >, ifnull, isnull, bitor, in, mod, bitand, or, and, like, not,
-case when, month, substr, timestampdiff, date_format, from_unixtime, json_length, if, bitneg, bitxor, round without fraction, cast(int as decimal), date_add(datetime, int), date_add(datetime, string)
-```
+* Mathematical functions: `+, -, /, *, >=, <=, =, !=, <, >, round(int), round(double), abs, floor(int), ceil(int), ceiling(int)`
+* Logical functions: `and, or, not, case when, if, ifnull, isnull, in`
+* Bitwise operations: `bitand, bitor, bigneg, bitxor`
+* String functions: `substr, char_length, replace, concat, concat_ws, left, right`
+* Date functions: `date_format, timestampdiff, from_unixtime, unix_timestamp(int), unix_timestamp(decimal), str_to_date(date), str_to_date(datetime), date_add(string, int), date_add(datetime, int), date_sub(datetime, int), date_sub(string, int), datediff, year, month, day, extract(datetime)`
+* JSON function: `json_length`
+* Conversion functions: `cast(int as double), cast(int as decimal), cast(int as string), cast(int as time), cast(double as int), cast(double as decimal), cast(double as string), cast(double as time), cast(string as int), cast(string as double), cast(string as decimal), cast(string as time), cast(decimal as int), cast(decimal as string), cast(decimal as time), cast(time as int), cast(time as decimal), cast(time as string)`
+* Aggregate functions: `min, max, sum, count, avg, approx_count_distinct`
 
 Among them, the push-down of `cast` and `date_add` is not enabled by default. To enable it, refer to [Blocklist of Optimization Rules and Expression Pushdown](/blocklist-control-plan.md).
 
-TiFlash does not support push-down calculations in the following situations:
+In addition, expressions that contain the Time/Bit/Set/Enum/Geometry type cannot be pushed down to TiFlash.
 
-- Expressions that contain `Duration` cannot be pushed down.
-- If an aggregate function or a `WHERE` clause contains expressions that are not included in the list above, the aggregate or related predicate filtering cannot be pushed down.
+If a query encounters unsupported push-down calculations, TiDB needs to complete the remaining calculations, which might greatly affect the TiFlash acceleration effect. The currently unsupported operators and expressions might be supported in future versions.
 
-If a query encounters unsupported push-down calculations, TiDB needs to complete the remaining calculations, which might greatly affect the TiFlash acceleration effect.
+## Use the MPP mode
+
+TiFlash supports using the MPP mode to execute queries, which introduces cross-node data exchange (data shuffle process) into the computation. TiDB automatically determines whether to select the MPP mode using the optimizer's cost estimation. You can change the selection strategy by modifying the values of [`tidb_allow_mpp`](/system-variables.md#tidb_allow_mpp-new-in-v50) and [`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51).
+
+### Control whether to select the MPP mode
+
+The `tidb_allow_mpp` variable controls whether TiDB can select the MPP mode to execute queries. The `tidb_enforce_mpp` variable controls whether the optimizer's cost estimation is ignored and the MPP mode of TiFlash is forcibly used to execute queries.
+
+The results corresponding to all values of these two variables are as follows:
+
+|                        | tidb_allow_mpp=off | tidb_allow_mpp=on (by default)              |
+| ---------------------- | -------------------- | -------------------------------- |
+| tidb_enforce_mpp=off (by default) | The MPP mode is not used. | The optimizer selects the MPP mode based on cost estimation. (by default)|
+| tidb_enforce_mpp=on  | The MPP mode is not used.   | TiDB ignores the cost estimation and selects the MPP mode.      |
+
+For example, if you do not want to use the MPP mode, you can execute the following statements:
+
+{{< copyable "sql" >}}
+
+```sql
+set @@session.tidb_allow_mpp=1;
+set @@session.tidb_enforce_mpp=0;
+```
+
+If you want TiDB's cost-based optimizer to automatically decide whether to use the MPP mode (by default), you can execute the following statements:
+
+{{< copyable "sql" >}}
+
+```sql
+set @@session.tidb_allow_mpp=1;
+set @@session.tidb_enforce_mpp=0;
+```
+
+If you want TiDB to ignore the optimizer's cost estimation and to forcibly select the MPP mode, you can execute the following statements:
+
+{{< copyable "sql" >}}
+
+```sql
+set @@session.tidb_allow_mpp=1;
+set @@session.tidb_enforce_mpp=1;
+```
+
+The initial value of the `tidb_enforce_mpp` session variable is equal to the [`enforce-mpp`](/tidb-configuration-file.md#enforce-mpp) configuration value of this tidb-server instance (which is `false` by default). If multiple tidb-server instances in a TiDB cluster only perform analytical queries and you want to make sure that the MPP mode is used on these instances, you can change their [`enforce-mpp`](/tidb-configuration-file.md#enforce-mpp) configuration values to `true`.
+
+> **Note:**
+>
+> When `tidb_enforce_mpp=1` takes effect, the TiDB optimizer will ignore the cost estimation to choose the MPP mode. However, if other factors block the MPP mode, TiDB will not select the MPP mode. These factors include the absence of TiFlash replica, unfinished replication of TiFlash replicas, and statements containing operators or functions that are not supported by the MPP mode.
+> 
+> If TiDB optimizer cannot select the MPP mode due to reasons other than cost estimation, when you use the `EXPLAIN` statement to check out the execution plan, a warning is returned to explain the reason. For example:
+> 
+> {{< copyable "sql" >}}
+> 
+> ```sql
+> set @@session.tidb_enforce_mpp=1;
+> create table t(a int);
+> explain select count(*) from t; 
+> show warnings;
+> ```
+> 
+> ```
+> +---------+------+-----------------------------------------------------------------------------+
+> | Level   | Code | Message                                                                     |
+> +---------+------+-----------------------------------------------------------------------------+
+> | Warning | 1105 | MPP mode may be blocked because there aren't tiflash replicas of table `t`. |
+> +---------+------+-----------------------------------------------------------------------------+
+> ```
+
+### Algorithm support for the MPP mode
+
+The MPP mode supports these physical algorithms: Broadcast Hash Join, Shuffled Hash Join, Shuffled Hash Aggregation, Union All, TopN, and Limit. The optimizer automatically determines which algorithm to be used in a query. To check the specific query execution plan, you can execute the `EXPLAIN` statement. If the result of the `EXPLAIN` statement shows ExchangeSender and ExchangeReceiver operators, it indicates that the MPP mode has taken effect.
+
+The following statement takes the table structure in the TPC-H test set as an example:
+
+```sql
+explain select count(*) from customer c join nation n on c.c_nationkey=n.n_nationkey;
++------------------------------------------+------------+-------------------+---------------+----------------------------------------------------------------------------+
+| id                                       | estRows    | task              | access object | operator info                                                              |
++------------------------------------------+------------+-------------------+---------------+----------------------------------------------------------------------------+
+| HashAgg_23                               | 1.00       | root              |               | funcs:count(Column#16)->Column#15                                          |
+| └─TableReader_25                         | 1.00       | root              |               | data:ExchangeSender_24                                                     |
+|   └─ExchangeSender_24                    | 1.00       | batchCop[tiflash] |               | ExchangeType: PassThrough                                                  |
+|     └─HashAgg_12                         | 1.00       | batchCop[tiflash] |               | funcs:count(1)->Column#16                                                  |
+|       └─HashJoin_17                      | 3000000.00 | batchCop[tiflash] |               | inner join, equal:[eq(tpch.nation.n_nationkey, tpch.customer.c_nationkey)] |
+|         ├─ExchangeReceiver_21(Build)     | 25.00      | batchCop[tiflash] |               |                                                                            |
+|         │ └─ExchangeSender_20            | 25.00      | batchCop[tiflash] |               | ExchangeType: Broadcast                                                    |
+|         │   └─TableFullScan_18           | 25.00      | batchCop[tiflash] | table:n       | keep order:false                                                           |
+|         └─TableFullScan_22(Probe)        | 3000000.00 | batchCop[tiflash] | table:c       | keep order:false                                                           |
++------------------------------------------+------------+-------------------+---------------+----------------------------------------------------------------------------+
+9 rows in set (0.00 sec)
+```
+
+In the example execution plan, the `ExchangeReceiver` and `ExchangeSender` operators are included. The execution plan indicates that after the `nation` table is read, the `ExchangeSender` operator broadcasts the table to each node, the `HashJoin` and `HashAgg` operations are performed on the `nation` table and the `customer` table, and then the results are returned to TiDB.
+
+TiFlash provides the following two global/session variables to control whether to use Broadcast Hash Join:
+
+- [`tidb_broadcast_join_threshold_size`](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50): The unit of the value is bytes. If the table size (in the unit of bytes) is less than the value of the variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used.
+- [`tidb_broadcast_join_threshold_count`](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50): The unit of the value is rows. If the objects of the join operation belong to a subquery, the optimizer cannot estimate the size of the subquery result set, so the size is determined by the number of rows in the result set. If the estimated number of rows in the subquery is less than the value of this variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used.
+
+## Notes
+
+Currently, TiFlash does not support some features. These features might be incompatible with the native TiDB:
+
+* In the TiFlash computation layer:
+    * Checking overflowed numerical values is not supported. For example, adding two maximum values of the `BIGINT` type `9223372036854775807 + 9223372036854775807`. The expected behavior of this calculation in TiDB is to return the `ERROR 1690 (22003): BIGINT value is out of range` error. However, if this calculation is performed in TiFlash, an overflow value of `-2` is returned without any error.
+    * The window function is not supported.
+    * Reading data from TiKV is not supported.
+    * Currently, the `sum` function in TiFlash does not support the string-type argument. But TiDB cannot identify whether any string-type argument has been passed into the `sum` function during the compiling. Therefore, when you execute statements similar to `select sum(string_col) from t`, TiFlash returns the `[FLASH:Coprocessor:Unimplemented] CastStringAsReal is not supported.` error. To avoid such an error in this case, you need to modify this SQL statement to `select sum(cast(string_col as double)) from t`.
+    * Currently, TiFlash's decimal division calculation is incompatible with that of TiDB. For example, when dividing decimal, TiFlash performs the calculation always using the type inferred from the compiling. However, TiDB performs this calculation using a type that is more precise than that inferred from the compiling. Therefore, some SQL statements involving the decimal division return different execution results when executed in TiDB + TiKV and in TiDB + TiFlash. For example:
+
+        ```sql
+        mysql> create table t (a decimal(3,0), b decimal(10, 0));
+        Query OK, 0 rows affected (0.07 sec)
+        mysql> insert into t values (43, 1044774912);
+        Query OK, 1 row affected (0.03 sec)
+        mysql> alter table t set tiflash replica 1;
+        Query OK, 0 rows affected (0.07 sec)
+        mysql> set session tidb_isolation_read_engines='tikv';
+        Query OK, 0 rows affected (0.00 sec)
+        mysql> select a/b, a/b + 0.0000000000001 from t where a/b;
+        +--------+-----------------------+
+        | a/b    | a/b + 0.0000000000001 |
+        +--------+-----------------------+
+        | 0.0000 |       0.0000000410001 |
+        +--------+-----------------------+
+        1 row in set (0.00 sec)
+        mysql> set session tidb_isolation_read_engines='tiflash';
+        Query OK, 0 rows affected (0.00 sec)
+        mysql> select a/b, a/b + 0.0000000000001 from t where a/b;
+        Empty set (0.01 sec)
+        ```
+
+        In the example above, `a/b`'s inferred type from the compiling is `Decimal(7,4)` both in TiDB and in TiFlash. Constrained by `Decimal(7,4)`, `a/b`'s returned type should be `0.0000`. In TiDB, `a/b`'s runtime precision is higher than `Decimal(7,4)`, so the original table data is not filtered by the `where a/b` condition. However, in TiFlash, the calculation of `a/b` uses `Decimal(7,4)` as the result type, so the original table data is filtered by the `where a/b` condition.
+
+* The MPP mode in TiFlash does not support the following features:
+    * If the [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) configuration item's value is `true`, the MPP mode does not support the string-type join key or the string column type in the `group by` aggregation. For these two query types, the MPP mode is not selected by default.
