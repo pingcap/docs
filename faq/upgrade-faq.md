@@ -3,8 +3,11 @@ title: Upgrade and After Upgrade FAQs
 summary: Learn about some FAQs and the solutions during and after upgrading TiDB.
 aliases: ['/docs/dev/faq/upgrade-faq/','/docs/dev/faq/upgrade/']
 ---
+<!-- vale off -->
 
 # Upgrade and After Upgrade FAQs
+
+<!-- vale on -->
 
 This document introduces some FAQs and their solutions when or after you upgrade TiDB.
 

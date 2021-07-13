@@ -3,7 +3,7 @@ title: Distinct Optimization
 summary: Introduce the `distinct` optimization in the TiDB query optimizer.
 ---
 
-# Distinct optimization
+# Migrate from Azure to TiDB
 
 This document introduces the `distinct` optimization in the TiDB query optimizer, including `SELECT DISTINCT` and `DISTINCT` in the aggregate functions.
 

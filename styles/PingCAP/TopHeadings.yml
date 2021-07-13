@@ -3,3 +3,6 @@ message: "'%s' should be in title case."
 level: warning
 scope: heading.h1
 match: $title
+style: Chicago
+exceptions:
+  - FAQs

@@ -1,0 +1,2258 @@
+
+ .github/pull_request_template.md
+ 5:136  error  Avoid first-person pronouns     Google.FirstPerson
+               such as 'my'.
+
+
+ a-test.md
+ 19:47  error    Don't put a space before or     PingCAP.RangeHyphen
+                 after a hyphen when describing
+                 a range.
+ 19:57  warning  Did you really mean 'github'?   PingCAP.Spellingcheck
+ 19:57  warning  Prefer 'GitHub' over 'github'   PingCAP.Terminology
+
+
+ README.md
+ 7:124  warning  Try to avoid using              Google.We
+                 first-person plural like 'us'.
+ 22:12  warning  Try to avoid using              Google.We
+                 first-person plural like 'we'.
+
+
+ _index.md
+ 11:1  warning  Use the Oxford comma in         Google.OxfordComma
+                'Designed for the cloud, TiDB
+                provides flexible scalability,
+                reliability and'.
+
+
+ CONTRIBUTING.md
+ 3:67     warning  Try to avoid using              Google.We
+                   first-person plural like 'We'.
+ 28:46    warning  Try to avoid using              Google.We
+                   first-person plural like 'we'.
+ 32:12    warning  Try to avoid using              Google.We
+                   first-person plural like 'we'.
+ 44:15    warning  Try to avoid using              Google.We
+                   first-person plural like 'we'.
+ 46:87    warning  Try to avoid using              Google.We
+                   first-person plural like 'we'.
+ 52:56    error    Use 'do not' instead of         PingCAP.Contractions
+                   'don't'
+ 52:293   warning  Avoid using 'will'.             Google.Will
+ 54:46    warning  Avoid using 'will'.             Google.Will
+ 55:46    warning  Avoid using 'will'.             Google.Will
+ 56:46    warning  Avoid using 'will'.             Google.Will
+ 57:46    warning  Avoid using 'will'.             Google.Will
+ 58:49    warning  Avoid using 'will'.             Google.Will
+ 64:87    error    Use 'do not' instead of         PingCAP.Contractions
+                   'don't'
+ 83:15    warning  Prefer 'GitHub' over 'github'   PingCAP.Terminology
+ 138:142  warning  Prefer 'GitHub' over 'github'   PingCAP.Terminology
+ 140:70   warning  Avoid using 'will'.             Google.Will
+
+
+ adopters.md
+ 13:17  warning  Did you really mean 'Bestpay'?  PingCAP.Spellingcheck
+
+
+ analyze-slow-queries.md
+ 117:80  warning  Did you really mean             PingCAP.Spellingcheck
+                  'prefetched'?
+
+
+ auto-increment.md
+ 15:249   warning  Avoid using 'will'.  Google.Will
+ 88:210   warning  Avoid using 'will'.  Google.Will
+ 194:221  warning  Avoid using 'will'.  Google.Will
+ 233:231  warning  Avoid using 'will'.  Google.Will
+
+
+ auto-random.md
+ 49:91   warning  Avoid using 'will'.  Google.Will
+ 52:301  warning  Avoid using 'will'.  Google.Will
+
+
+ benchmark/benchmark-sysbench-v2.md
+ 6:1  warning  '``TiDB Sysbench Performance    PingCAP.TopHeadings
+               Test Report -- v2.0.0 vs.
+               v1.0.0' should be in title
+               case.
+
+
+ benchmark/benchmark-sysbench-v3.md
+ 6:1  warning  '``TiDB Sysbench Performance    PingCAP.TopHeadings
+               Test Report -- v2.1 vs. v2.0'
+               should be in title case.
+
+
+ basic-sql-operations.md
+ 13:1    warning  Use the Oxford comma in 'This   Google.OxfordComma
+                  page walks you through the
+                  basic TiDB SQL statements such
+                  as DDL, DML and'.
+ 179:44  error    Use 'do not' instead of         PingCAP.Contractions
+                  'don't'
+
+
+ benchmark/benchmark-tpch.md
+ 106:100  warning  Try to avoid using              Google.We
+                   first-person plural like 'We'.
+
+
+ benchmark/benchmark-sysbench-v4-vs-v3.md
+ 7:1  warning  '``TiDB Sysbench Performance    PingCAP.TopHeadings
+               Test Report -- v4.0 vs. v3.0'
+               should be in title case.
+
+
+ benchmark/benchmark-tidb-using-tpcc.md
+ 203:10  warning  Avoid using 'will'.  Google.Will
+
+
+ benchmark/v3.0-performance-benchmarking-with-tpcc.md
+ 6:1  warning  '``TiDB TPC-C Performance       PingCAP.TopHeadings
+               Test Report -- v3.0 vs. v2.1'
+               should be in title case.
+
+
+ benchmark/v4.0-performance-benchmarking-with-tpcc.md
+ 7:1  warning  '``TiDB TPC-C Performance       PingCAP.TopHeadings
+               Test Report -- v4.0 vs. v3.0'
+               should be in title case.
+
+
+ benchmark/benchmark-tidb-using-sysbench.md
+ 66:94    warning  Use 'to' instead of 'in order   Google.WordList
+                   to'.
+ 90:73    warning  Try to avoid using              Google.We
+                   first-person plural like 'We'.
+ 108:135  warning  Try to avoid using              Google.We
+                   first-person plural like 'we'.
+ 147:14   error    Spell out all ordinal numbers   Google.Ordinal
+                   ('235th') in text.
+ 147:29   warning  Prefer 'GitHub' over 'github'   PingCAP.Terminology
+ 147:104  error    Spell out all ordinal numbers   Google.Ordinal
+                   ('240th') in text.
+ 147:256  error    Spell out all ordinal numbers   Google.Ordinal
+                   ('198th') in text.
+ 163:15   warning  Try to avoid using              Google.We
+                   first-person plural like 'we'.
+ 268:101  warning  Avoid using 'will'.             Google.Will
+ 268:151  warning  Avoid using 'will'.             Google.Will
+ 268:209  warning  Avoid using 'will'.             Google.Will
+
+
+ benchmark/v3.0-performance-benchmarking-with-sysbench.md
+ 6:1  warning  '``TiDB Sysbench Performance    PingCAP.TopHeadings
+               Test Report -- v3.0 vs. v2.1'
+               should be in title case.
+
+
+ benchmark/v4.0-performance-benchmarking-with-tpch.md
+ 7:1  warning  '``TiDB TPC-H Performance       PingCAP.TopHeadings
+               Test Report -- v4.0 vs. v3.0'
+               should be in title case.
+
+
+ alert-rules.md
+ 11:1     warning  Use the Oxford comma in 'This   Google.OxfordComma
+                   document describes the alert
+                   rules for different components
+                   in a TiDB cluster, including
+                   the rule descriptions and
+                   solutions of the alert items
+                   in TiDB, TiKV, PD, TiDB
+                   Binlog, Node_exporter and'.
+ 92:133   warning  Avoid using 'will'.             Google.Will
+ 124:55   error    Spell out all ordinal numbers   Google.Ordinal
+                   ('99th') in text.
+ 225:142  warning  Avoid using 'will'.             Google.Will
+ 267:151  warning  Avoid using 'will'.             Google.Will
+ 282:82   warning  Avoid using 'will'.             Google.Will
+ 440:200  warning  Avoid using 'will'.             Google.Will
+ 444:115  warning  Use the Oxford comma in 'If     Google.OxfordComma
+                   GC does not run in a short
+                   term, it will not cause much
+                   trouble; but if GC keeps down,
+                   more and'.
+ 444:154  warning  Avoid using 'will'.             Google.Will
+ 627:200  warning  Avoid using 'will'.             Google.Will
+
+
+ benchmark/online-workloads-and-add-index-operations.md
+ 37:1  warning  Use the Oxford comma in 'TiDB,  Google.OxfordComma
+                TiKV and'.
+
+
+ best-practices/haproxy-best-practices.md
+ 115:132  warning  Avoid using 'will'.  Google.Will
+
+
+ best-practices/massive-regions-best-practices.md
+ 15:124  warning  Use the Oxford comma in 'These  Google.OxfordComma
+                  messages include processing
+                  read or write requests on
+                  Regions, persisting or'.
+ 69:1    warning  Use the Oxford comma in 'In     Google.OxfordComma
+                  the actual situation, read
+                  and'.
+ 69:449  warning  Avoid using 'will'.             Google.Will
+
+
+ best-practices/three-nodes-hybrid-deployment.md
+ 55:178   warning  Avoid using 'will'.  Google.Will
+ 130:181  warning  Avoid using 'will'.  Google.Will
+
+
+ best-practices/high-concurrency-best-practices.md
+ 21:1     warning  Use the Oxford comma in         Google.OxfordComma
+                   'The highly concurrent write
+                   scenario often occurs when
+                   you perform batch tasks
+                   in applications, such as
+                   clearing, settlement and'.
+ 105:226  warning  Avoid using 'will'.             Google.Will
+ 137:66   warning  Avoid using 'will'.             Google.Will
+ 137:227  warning  Avoid using 'will'.             Google.Will
+ 201:65   warning  Avoid using 'will'.             Google.Will
+ 202:46   warning  Avoid using 'will'.             Google.Will
+ 210:252  warning  Avoid using 'will'.             Google.Will
+ 210:411  warning  Avoid using 'will'.             Google.Will
+
+
+ br/backup-and-restore-faq.md
+ 11:15  error  Avoid first-person pronouns     Google.FirstPerson
+               such as 'I'.
+ 29:15  error  Avoid first-person pronouns     Google.FirstPerson
+               such as 'I'.
+ 29:69  error  Avoid first-person pronouns     Google.FirstPerson
+               such as 'I'.
+ 41:15  error  Avoid first-person pronouns     Google.FirstPerson
+               such as 'I'.
+ 47:15  error  Avoid first-person pronouns     Google.FirstPerson
+               such as 'I'.
+ 53:45  error  Avoid first-person pronouns     Google.FirstPerson
+               such as 'I'.
+ 63:15  error  Avoid first-person pronouns     Google.FirstPerson
+               such as 'I'.
+
+
+ br/backup-and-restore-storages.md
+ 66:46  warning  Avoid using 'will'.  Google.Will
+ 74:52  warning  Avoid using 'will'.  Google.Will
+
+
+ blocklist-control-plan.md
+ 18:48   warning  Avoid using 'will'.  Google.Will
+ 193:45  warning  Avoid using 'will'.  Google.Will
+ 234:45  warning  Avoid using 'will'.  Google.Will
+
+
+ best-practices/pd-scheduling-best-practices.md
+ 9:127    warning  Use the Oxford comma in 'This   Google.OxfordComma
+                   document assumes that you have
+                   a basic understanding of TiDB,
+                   TiKV and'.
+ 233:156  warning  Avoid using 'will'.             Google.Will
+
+
+ best-practices/java-app-best-practices.md
+ 57:208   warning  Avoid using 'will'.             Google.Will
+ 67:201   warning  Avoid using 'will'.             Google.Will
+ 82:118   warning  Avoid using 'will'.             Google.Will
+ 100:54   warning  Avoid using 'will'.             Google.Will
+ 106:57   warning  Avoid using 'will'.             Google.Will
+ 146:81   warning  Avoid using 'will'.             Google.Will
+ 174:71   warning  Avoid using 'will'.             Google.Will
+ 182:80   warning  Avoid using 'will'.             Google.Will
+ 225:176  warning  Avoid using 'will'.             Google.Will
+ 225:275  warning  Avoid using 'will'.             Google.Will
+ 257:42   warning  Avoid using 'will'.             Google.Will
+ 257:161  warning  Avoid using 'will'.             Google.Will
+ 258:42   warning  Avoid using 'will'.             Google.Will
+ 258:208  warning  Avoid using 'will'.             Google.Will
+ 282:73   warning  Avoid using 'will'.             Google.Will
+ 312:163  warning  Avoid using 'will'.             Google.Will
+ 314:61   warning  Avoid using 'will'.             Google.Will
+ 314:99   warning  Avoid using 'will'.             Google.Will
+ 314:241  warning  Avoid using 'will'.             Google.Will
+ 314:300  warning  Avoid using 'will'.             Google.Will
+ 324:68   warning  Avoid using 'will'.             Google.Will
+ 342:168  error    Avoid first-person pronouns     Google.FirstPerson
+                   such as 'I'.
+ 342:171  error    Use 'do not' instead of         PingCAP.Contractions
+                   'don't'
+ 367:6    warning  Try to avoid using              Google.We
+                   first-person plural like 'us'.
+
+
+ character-set-and-collation.md
+ 336:57  warning  Avoid using 'will'.  Google.Will
+
+
+ certificate-authentication.md
+ 207:37  warning  Avoid using 'will'.  Google.Will
+ 345:52  warning  Avoid using 'will'.  Google.Will
+
+
+ check-before-deployment.md
+ 119:75  warning  Avoid using 'will'.  Google.Will
+
+
+ command-line-flags-for-pd-configuration.md
+ 41:99   warning  Avoid using 'will'.  Google.Will
+ 75:33   warning  Avoid using 'will'.  Google.Will
+ 75:76   warning  Avoid using 'will'.  Google.Will
+ 75:113  warning  Avoid using 'will'.  Google.Will
+
+
+ community.md
+ 7:1   warning  '``Connect with us' should be   PingCAP.TopHeadings
+                in title case.
+ 7:16  warning  Try to avoid using              Google.We
+                first-person plural like 'us'.
+
+
+ command-line-flags-for-tikv-configuration.md
+ 45:92   warning  Avoid using 'will'.  Google.Will
+ 68:33   warning  Avoid using 'will'.  Google.Will
+ 68:76   warning  Avoid using 'will'.  Google.Will
+ 68:113  warning  Avoid using 'will'.  Google.Will
+
+
+ command-line-flags-for-tidb-configuration.md
+ 116:178  warning  Avoid using 'will'.  Google.Will
+
+
+ br/backup-and-restore-tool.md
+ 14:93    warning  Avoid using 'will'.             Google.Will
+ 22:72    warning  Avoid using 'will'.             Google.Will
+ 31:92    warning  Avoid using 'will'.             Google.Will
+ 163:50   warning  Use 'data is' instead of 'data  Google.WordList
+                   are'.
+ 418:63   warning  Try to avoid using              Google.We
+                   first-person plural like 'We'.
+ 418:66   error    Use 'do not' instead of         PingCAP.Contractions
+                   'don't'
+ 418:99   warning  Avoid using 'will'.             Google.Will
+ 575:220  warning  Use the Oxford comma in 'In     Google.OxfordComma
+                   this case, downloading and'.
+ 615:80   warning  Use the Oxford comma in 'You    Google.OxfordComma
+                   can estimate the performance
+                   of backup and restoration
+                   based on machine performance,
+                   configuration and'.
+ 670:87   warning  Avoid using 'will'.             Google.Will
+
+
+ configure-load-base-split.md
+ 28:37  warning  Avoid using 'will'.  Google.Will
+
+
+ configure-time-zone.md
+ 43:76  warning  Try to avoid using              Google.We
+                 first-person plural like 'US'.
+
+
+ contribute.md
+ 10:1    warning  Try to avoid using              Google.We
+                  first-person plural like 'We'.
+ 19:20   warning  Avoid using 'will'.             Google.Will
+ 27:1    warning  Try to avoid using              Google.We
+                  first-person plural like 'We'.
+ 29:170  warning  Try to avoid using              Google.We
+                  first-person plural like 'we'.
+
+
+ control-execution-plan.md
+ 7:135   warning  Use 'document, page, or         Google.WordList
+                  section' instead of 'chapter'.
+ 9:50    warning  Avoid using 'will'.             Google.Will
+ 10:158  warning  Avoid using 'will'.             Google.Will
+ 11:16   warning  Avoid using 'will'.             Google.Will
+
+
+ connectors-and-apis.md
+ 9:155   warning  Use the Oxford comma in 'Both   Google.OxfordComma
+                  Connectors and the APIs enable
+                  you to connect and execute
+                  MySQL statements from another
+                  language or environment,
+                  including ODBC, Java (JDBC),
+                  Perl, Python, PHP, Ruby and'.
+ 55:154  warning  Prefer 'MySQL' over 'mysql'     PingCAP.Terminology
+
+
+ dashboard/dashboard-diagnostics-access.md
+ 17:339  warning  Avoid using 'will'.  Google.Will
+
+
+ configure-placement-rules.md
+ 19:299   warning  Avoid using 'will'.  Google.Will
+ 52:548   warning  Avoid using 'will'.  Google.Will
+ 122:170  warning  Avoid using 'will'.  Google.Will
+ 122:295  warning  Avoid using 'will'.  Google.Will
+ 194:116  warning  Avoid using 'will'.  Google.Will
+
+
+ dashboard/dashboard-diagnostics-usage.md
+ 27:195  warning  Avoid using 'will'.  Google.Will
+
+
+ credits.md
+ 8:239  warning  Use the Oxford comma in 'If     Google.OxfordComma
+                 you also want to become a TiDB
+                 developer, come and'.
+ 16:3   warning  Use 'Kubernetes' instead of     Google.WordList
+                 'k8s'.
+ 34:3   warning  Use 'Kubernetes' instead of     Google.WordList
+                 'k8s'.
+ 35:3   warning  Use 'Kubernetes' instead of     Google.WordList
+                 'k8s'.
+ 36:3   warning  Use 'Kubernetes' instead of     Google.WordList
+                 'k8s'.
+ 37:3   warning  Use 'Kubernetes' instead of     Google.WordList
+                 'k8s'.
+ 38:3   warning  Use 'Kubernetes' instead of     Google.WordList
+                 'k8s'.
+ 39:3   warning  Use 'Kubernetes' instead of     Google.WordList
+                 'k8s'.
+ 40:3   warning  Use 'Kubernetes' instead of     Google.WordList
+                 'k8s'.
+ 41:3   warning  Use 'Kubernetes' instead of     Google.WordList
+                 'k8s'.
+ 42:3   warning  Use 'Kubernetes' instead of     Google.WordList
+                 'k8s'.
+ 43:3   warning  Use 'Kubernetes' instead of     Google.WordList
+                 'k8s'.
+ 44:3   warning  Use 'Kubernetes' instead of     Google.WordList
+                 'k8s'.
+ 45:3   warning  Use 'Kubernetes' instead of     Google.WordList
+                 'k8s'.
+ 128:3  warning  Use 'Kubernetes' instead of     Google.WordList
+                 'k8s'.
+ 129:3  warning  Use 'Kubernetes' instead of     Google.WordList
+                 'k8s'.
+ 130:3  warning  Use 'Kubernetes' instead of     Google.WordList
+                 'k8s'.
+ 131:3  warning  Use 'Kubernetes' instead of     Google.WordList
+                 'k8s'.
+ 132:3  warning  Use 'Kubernetes' instead of     Google.WordList
+                 'k8s'.
+
+
+ dashboard/dashboard-faq.md
+ 13:54  error  Avoid first-person pronouns     Google.FirstPerson
+               such as 'I'.
+
+
+ dashboard/dashboard-log-search.md
+ 56:139  warning  Avoid using 'will'.  Google.Will
+
+
+ dashboard/dashboard-metrics-relation.md
+ 16:115  warning  Avoid using 'will'.             Google.Will
+ 28:168  error    Spell out all ordinal numbers   Google.Ordinal
+                  ('99th') in text.
+
+
+ dashboard/dashboard-ops-deploy.md
+ 9:183    warning  Avoid using 'will'.  Google.Will
+ 25:163   warning  Avoid using 'will'.  Google.Will
+ 25:226   warning  Avoid using 'will'.  Google.Will
+ 25:360   warning  Avoid using 'will'.  Google.Will
+ 27:79    warning  Avoid using 'will'.  Google.Will
+ 92:115   warning  Avoid using 'will'.  Google.Will
+ 104:96   warning  Avoid using 'will'.  Google.Will
+ 110:72   warning  Avoid using 'will'.  Google.Will
+ 138:182  warning  Avoid using 'will'.  Google.Will
+
+
+ dashboard/dashboard-ops-security.md
+ 13:205  warning  Avoid using 'will'.  Google.Will
+ 27:200  warning  Avoid using 'will'.  Google.Will
+
+
+ dashboard/dashboard-key-visualizer.md
+ 151:1  warning  Use the Oxford comma in 'In     Google.OxfordComma
+                 the heatmap above, bright
+                 and'.
+
+
+ dashboard/dashboard-overview.md
+ 32:144  warning  Avoid using 'will'.  Google.Will
+ 42:144  warning  Avoid using 'will'.  Google.Will
+
+
+ dashboard/dashboard-ops-reverse-proxy.md
+ 101:170  warning  Avoid using 'will'.  Google.Will
+
+
+ dashboard/dashboard-slow-query.md
+ 15:51  warning  Avoid using 'will'.  Google.Will
+
+
+ data-type-json.md
+ 13:114  error  '. T' should have one space.  Google.Spacing
+
+
+ data-type-overview.md
+ 9:68  error  '. T' should have one space.  Google.Spacing
+
+
+ dashboard/dashboard-statement-list.md
+ 55:427  warning  Avoid using 'will'.  Google.Will
+ 56:139  warning  Avoid using 'will'.  Google.Will
+ 62:141  warning  Avoid using 'will'.  Google.Will
+
+
+ data-type-string.md
+ 15:168  error  '. T' should have one space.  Google.Spacing
+
+
+ data-type-date-and-time.md
+ 93:242   error    '. A' should have one space.    Google.Spacing
+ 107:163  error    '. A' should have one space.    Google.Spacing
+ 208:11   warning  Try to avoid using              Google.We
+                   first-person plural like 'we'.
+ 220:6    warning  Try to avoid using              Google.We
+                   first-person plural like 'we'.
+
+
+ deploy-tidb-from-binary.md
+ 13:31  warning  Avoid using 'will'.             Google.Will
+ 72:1   warning  Use the Oxford comma in         Google.OxfordComma
+                 'Follow the steps below to
+                 start PD, TiKV and'.
+
+
+ deploy-test-cluster-using-docker-compose.md
+ 101:5  warning  Use the Oxford comma in 'For    Google.OxfordComma
+                 PD, TiKV, TiDB and'.
+
+
+ dev-guide/requirements.md
+ 29:50   warning  Try to avoid using              Google.We
+                  first-person plural like 'us'.
+ 29:187  warning  Try to avoid using              Google.We
+                  first-person plural like 'we'.
+
+
+ enable-tls-between-components.md
+ 7:1  warning  '``Enable TLS Between TiDB      PingCAP.TopHeadings
+               Components' should be in title
+               case.
+
+
+ dumpling-overview.md
+ 25:32    warning  Did you really mean 'Github'?   PingCAP.Spellingcheck
+ 25:32    warning  Prefer 'GitHub' over 'Github'   PingCAP.Terminology
+ 59:1     warning  Use the Oxford comma in 'In     Google.OxfordComma
+                   the above command, `**`, `**`
+                   and `**` mean address, port
+                   and'.
+ 151:96   error    Avoid first-person pronouns     Google.FirstPerson
+                   such as 'I'.
+ 244:234  error    Use 'that is' instead of        Google.Latin
+                   'i.e.'.
+ 328:69   warning  Avoid using 'will'.             Google.Will
+
+
+ dynamic-config.md
+ 62:264   warning  Avoid using 'will'.  Google.Will
+ 120:108  warning  Avoid using 'will'.  Google.Will
+ 224:147  warning  Avoid using 'will'.  Google.Will
+
+
+ explain-aggregation.md
+ 8:42    warning  Avoid using 'will'.  Google.Will
+ 54:156  warning  Avoid using 'will'.  Google.Will
+
+
+ explain-index-merge.md
+ 39:295  warning  Avoid using 'will'.  Google.Will
+
+
+ encryption-at-rest.md
+ 11:679   error    Use 'that is' instead of        Google.Latin
+                   'i.e.'.
+ 17:64    warning  Try to avoid using              Google.We
+                   first-person plural like 'we'.
+ 19:101   warning  Avoid using 'will'.             Google.Will
+ 29:1     warning  Use the Oxford comma in 'TiKV   Google.OxfordComma
+                   currently supports encrypting
+                   data using AES128, AES192 or'.
+ 34:436   warning  Avoid using 'will'.             Google.Will
+ 38:78    error    Use 'that is' instead of        Google.Latin
+                   'i.e.'.
+ 38:274   warning  Use 'data is' instead of 'data  Google.WordList
+                   are'.
+ 54:62    error    Use 'that is' instead of        Google.Latin
+                   'i.e.'.
+ 82:477   warning  Avoid using 'will'.             Google.Will
+ 110:316  warning  Did you really mean 'md'?       PingCAP.Spellingcheck
+ 114:108  warning  Did you really mean 'aws'?      PingCAP.Spellingcheck
+ 114:121  warning  Avoid using 'will'.             Google.Will
+ 120:203  error    Use 'for example' instead of    Google.Latin
+                   'e.g.'.
+ 126:93   warning  Avoid using 'will'.             Google.Will
+ 126:264  warning  Avoid using 'will'.             Google.Will
+
+
+ explain-partitions.md
+ 8:75  warning  Use 'to' instead of 'in order   Google.WordList
+                to'.
+
+
+ explain-indexes.md
+ 35:119   warning  Avoid using 'will'.             Google.Will
+ 153:99   warning  Avoid using 'will'.             Google.Will
+ 276:49   warning  Did you really mean             PingCAP.Spellingcheck
+                   'unindexed'?
+ 276:65   warning  Avoid using 'will'.             Google.Will
+ 276:107  warning  Avoid using 'will'.             Google.Will
+ 298:26   warning  Avoid using 'will'.             Google.Will
+
+
+ error-codes.md
+ 110:277  warning  Avoid using 'will'.             Google.Will
+ 128:43   warning  Use the Oxford comma in 'only   Google.OxfordComma
+                   accepts 1, 2 or'.
+
+
+ explain-subqueries.md
+ 71:157  warning  Did you really mean             PingCAP.Spellingcheck
+                  'deduplicated'?
+ 71:244  warning  Did you really mean             PingCAP.Spellingcheck
+                  'deduplicated'?
+ 71:329  warning  Did you really mean             PingCAP.Spellingcheck
+                  'deduplication'?
+
+
+ explain-joins.md
+ 42:350   warning  Avoid using 'will'.  Google.Will
+ 70:326   warning  Avoid using 'will'.  Google.Will
+ 229:111  warning  Avoid using 'will'.  Google.Will
+ 267:144  warning  Avoid using 'will'.  Google.Will
+
+
+ faq/high-availability-faq.md
+ 18:356  warning  Try to avoid using              Google.We
+                  first-person plural like 'we'.
+
+
+ explain-walkthrough.md
+ 10:128   error    Spell out all ordinal numbers   Google.Ordinal
+                   ('1st') in text.
+ 36:223   warning  Avoid using 'will'.             Google.Will
+ 37:225   warning  Avoid using 'will'.             Google.Will
+ 146:64   warning  Use 'to' instead of 'in order   Google.WordList
+                   to'.
+ 206:274  warning  Avoid using 'will'.             Google.Will
+ 206:317  warning  Avoid using 'will'.             Google.Will
+
+
+ faq/migration-tidb-faq.md
+ 16:7     error    Avoid first-person pronouns     Google.FirstPerson
+                   such as 'I'.
+ 63:97    warning  Avoid using 'will'.             Google.Will
+ 101:172  warning  Avoid using 'will'.             Google.Will
+ 101:231  warning  Avoid using 'will'.             Google.Will
+ 103:113  error    Avoid first-person pronouns     Google.FirstPerson
+                   such as 'I'.
+ 112:114  warning  Avoid using 'will'.             Google.Will
+ 114:183  warning  Avoid using 'will'.             Google.Will
+ 114:236  warning  Avoid using 'will'.             Google.Will
+ 115:126  warning  Avoid using 'will'.             Google.Will
+ 115:183  warning  Avoid using 'will'.             Google.Will
+ 121:289  warning  Use 'to' instead of 'in order   Google.WordList
+                   to'.
+ 131:336  warning  Try to avoid using              Google.We
+                   first-person plural like 'we'.
+ 143:8    error    Avoid first-person pronouns     Google.FirstPerson
+                   such as 'I'.
+ 159:90   warning  Avoid using 'will'.             Google.Will
+ 159:251  warning  Avoid using 'will'.             Google.Will
+ 166:16   error    Avoid first-person pronouns     Google.FirstPerson
+                   such as 'I'.
+
+
+ explain-overview.md
+ 160:322  warning  Avoid using 'will'.  Google.Will
+ 183:233  warning  Avoid using 'will'.  Google.Will
+ 218:295  warning  Avoid using 'will'.  Google.Will
+
+
+ faq/tidb-faq.md
+ 49:35   error    Avoid first-person pronouns     Google.FirstPerson
+                  such as 'I'.
+ 53:9    error    Avoid first-person pronouns     Google.FirstPerson
+                  such as 'I'.
+ 59:145  warning  Try to avoid using              Google.We
+                  first-person plural like 'we'.
+ 69:252  warning  Avoid using 'will'.             Google.Will
+
+
+ faq/sql-faq.md
+ 80:110   warning  Try to avoid using              Google.We
+                   first-person plural like
+                   'our'.
+ 92:10    error    Avoid first-person pronouns     Google.FirstPerson
+                   such as 'I'.
+ 117:97   warning  Avoid using 'will'.             Google.Will
+ 135:15   error    Avoid first-person pronouns     Google.FirstPerson
+                   such as 'I'.
+ 154:1    warning  Use the Oxford comma in 'TiDB   Google.OxfordComma
+                   supports changing the priority
+                   on a per-session, global or'.
+ 180:439  warning  Avoid using 'will'.             Google.Will
+ 182:7    error    Avoid first-person pronouns     Google.FirstPerson
+                   such as 'I'.
+ 273:29   error    Avoid first-person pronouns     Google.FirstPerson
+                   such as 'I'.
+
+
+ faq/upgrade-faq.md
+ 7:1  warning  '``Upgrade and After Upgrade    PingCAP.TopHeadings
+               FAQs' should be in title case.
+
+
+ functions-and-operators/aggregate-group-by-functions.md
+ 41:54    error    Spell out all ordinal numbers   Google.Ordinal
+                   ('50th') in text.
+ 68:77    warning  Try to avoid using              Google.We
+                   first-person plural like 'We'.
+ 72:72    warning  Avoid using 'will'.             Google.Will
+ 100:117  warning  Try to avoid using              Google.We
+                   first-person plural like 'we'.
+ 109:90   warning  Try to avoid using              Google.We
+                   first-person plural like 'we'.
+ 154:84   warning  Try to avoid using              Google.We
+                   first-person plural like
+                   'our'.
+
+
+ functions-and-operators/functions-and-operators-overview.md
+ 13:1  warning  Use the Oxford comma in 'You    Google.OxfordComma
+                can write expressions using
+                literals, column names, NULL,
+                built-in functions, operators
+                and'.
+
+
+ functions-and-operators/type-conversion-in-expression-evaluation.md
+ 9:108  warning  Prefer 'MySQL' over 'mysql'  PingCAP.Terminology
+
+
+ functions-and-operators/precision-math.md
+ 101:29  error  Avoid first-person pronouns     Google.FirstPerson
+                such as 'i'.
+ 102:33  error  Avoid first-person pronouns     Google.FirstPerson
+                such as 'i'.
+ 103:52  error  Avoid first-person pronouns     Google.FirstPerson
+                such as 'i'.
+
+
+ garbage-collection-overview.md
+ 21:332   warning  Avoid using 'will'.  Google.Will
+ 27:1181  warning  Avoid using 'will'.  Google.Will
+
+
+ generate-self-signed-certificates.md
+ 7:1     warning  '``Generate Self-signed         PingCAP.TopHeadings
+                  Certificates' should be in
+                  title case.
+ 149:78  warning  Avoid using 'will'.             Google.Will
+
+
+ garbage-collection-configuration.md
+ 69:362  warning  Avoid using 'will'.  Google.Will
+
+
+ generated-columns.md
+ 143:162  warning  Avoid using 'will'.        Google.Will
+ 145:144  warning  Did you really mean 'md'?  PingCAP.Spellingcheck
+
+
+ get-started-with-tidb-lightning.md
+ 18:73  warning  Use the Oxford comma in 'You    Google.OxfordComma
+                 can use VMware, VirtualBox
+                 or'.
+
+
+ geo-distributed-deployment-topology.md
+ 7:1    warning  '``Geo-distributed Deployment   PingCAP.TopHeadings
+                 topology' should be in title
+                 case.
+ 17:33  warning  Did you really mean 'nvme'?     PingCAP.Spellingcheck
+ 88:79  warning  Avoid using 'will'.             Google.Will
+
+
+ glossary.md
+ 27:229  warning  Avoid using 'will'.  Google.Will
+
+
+ grafana-overview-dashboard.md
+ 28:20  warning  Did you really mean 'cmds'?     PingCAP.Spellingcheck
+ 28:48  error    Spell out all ordinal numbers   Google.Ordinal
+                 ('99th') in text.
+ 43:11  warning  Did you really mean 'Cmd'?      PingCAP.Spellingcheck
+ 44:11  warning  Did you really mean 'Cmd'?      PingCAP.Spellingcheck
+
+
+ faq/deploy-and-maintain-faq.md
+ 8:1      warning  Use the Oxford comma in 'This   Google.OxfordComma
+                   document summarizes the FAQs
+                   related to TiDB deployment,
+                   operations and'.
+ 28:110   warning  Use the Oxford comma in         Google.OxfordComma
+                   'The requirements and
+                   recommendations about server
+                   hardware configuration for
+                   development, testing and'.
+ 53:23    warning  Try to avoid using              Google.We
+                   first-person plural like 'we'.
+ 53:26    error    Use 'do not' instead of         PingCAP.Contractions
+                   'don't'
+ 60:130   warning  Avoid using 'will'.             Google.Will
+ 73:11    error    Avoid first-person pronouns     Google.FirstPerson
+                   such as 'I'.
+ 79:157   warning  Avoid using 'will'.             Google.Will
+ 94:61    warning  Did you really mean 'systemd'?  PingCAP.Spellingcheck
+ 125:180  warning  Avoid using 'will'.             Google.Will
+ 131:84   error    Avoid first-person pronouns     Google.FirstPerson
+                   such as 'I'.
+ 176:133  warning  Avoid using 'will'.             Google.Will
+ 176:178  warning  Avoid using 'will'.             Google.Will
+ 209:234  warning  Avoid using 'will'.             Google.Will
+ 218:538  warning  Avoid using 'will'.             Google.Will
+ 255:133  warning  Avoid using 'will'.             Google.Will
+ 261:80   warning  Avoid using 'will'.             Google.Will
+ 267:13   warning  Try to avoid using              Google.We
+                   first-person plural like 'We'.
+ 267:13   warning  Use the Oxford comma in 'We     Google.OxfordComma
+                   need some good features of
+                   gRPC, such as flow control,
+                   encryption and'.
+ 292:159  warning  Avoid using 'will'.             Google.Will
+ 350:9    error    Avoid first-person pronouns     Google.FirstPerson
+                   such as 'I'.
+ 364:545  warning  Avoid using 'will'.             Google.Will
+ 376:51   warning  Avoid using 'will'.             Google.Will
+ 386:375  error    Use 'do not' instead of         PingCAP.Contractions
+                   'don't'
+ 400:60   warning  Use the Oxford comma in         Google.OxfordComma
+                   'By default, the KV data is
+                   eventually stored in the 3 CFs
+                   (default, write and'.
+ 420:25   warning  Avoid using 'will'.             Google.Will
+ 426:1    warning  Use the Oxford comma in         Google.OxfordComma
+                   'Writing or reading a large
+                   volume of data in TiKV takes
+                   up high I/O, memory and'.
+ 446:48   warning  Try to avoid using              Google.We
+                   first-person plural like 'we'.
+ 460:238  warning  Avoid using 'will'.             Google.Will
+ 472:154  warning  Try to avoid using              Google.We
+                   first-person plural like 'we'.
+ 495:103  warning  Try to avoid using              Google.We
+                   first-person plural like 'We'.
+ 506:48   warning  Try to avoid using              Google.We
+                   first-person plural like
+                   'our'.
+ 525:465  warning  Try to avoid using              Google.We
+                   first-person plural like 'we'.
+ 527:78   error    Avoid first-person pronouns     Google.FirstPerson
+                   such as 'I'.
+
+
+ grafana-tidb-dashboard.md
+ 75:200  warning  Avoid using 'will'.  Google.Will
+
+
+ hybrid-deployment-topology.md
+ 13:76   warning  Use the Oxford comma in         Google.OxfordComma
+                  'To improve the utilization
+                  rate of the physical machine
+                  resources, multiple instances
+                  can be deployed on a single
+                  machine, that is, TiDB and'.
+ 106:79  warning  Avoid using 'will'.             Google.Will
+
+
+ hardware-and-software-requirements.md
+ 23:81   warning  Try to avoid using              Google.We
+                  first-person plural like
+                  'our'.
+ 63:106  warning  Use 'to' instead of 'in order   Google.WordList
+                  to'.
+ 124:94  warning  Use the Oxford comma in 'A      Google.OxfordComma
+                  recent version of Internet
+                  Explorer, Chrome or'.
+
+
+ information-schema/information-schema-engines.md
+ 8:89  warning  Avoid using 'will'.  Google.Will
+
+
+ identify-slow-queries.md
+ 9:1      warning  Use the Oxford comma in 'To     Google.OxfordComma
+                   help users identify slow
+                   queries, analyze and'.
+ 160:216  error    Use 'do not' instead of         PingCAP.Contractions
+                   'don't'
+ 162:10   error    Use 'do not' instead of         PingCAP.Contractions
+                   'don't'
+
+
+ information-schema/information-schema-tidb-servers-info.md
+ 8:92  error  Use 'that is' instead of        Google.Latin
+              'i.e.'.
+
+
+ information-schema/information-schema-sql-diagnostics.md
+ 20:7  warning  Avoid using 'will'.  Google.Will
+
+
+ information-schema/information-schema-tikv-region-status.md
+ 8:1     warning  Use the Oxford comma in 'The    Google.OxfordComma
+                  `******************` table
+                  shows some basic information
+                  of TiKV Regions via PD's API,
+                  like the Region ID, starting
+                  and'.
+ 50:189  warning  Avoid using 'will'.             Google.Will
+
+
+ information-schema/information-schema-tikv-store-status.md
+ 8:1  warning  Use the Oxford comma in 'The    Google.OxfordComma
+               `*****************` table
+               shows some basic information
+               of TiKV nodes via PD's API,
+               like the ID allocated in the
+               cluster, address and'.
+
+
+ maintain-tidb-using-ansible.md
+ 33:1   warning  Use the Oxford comma in 'This   Google.OxfordComma
+                 operation stops the TiDB,
+                 Pump, TiKV and PD services,
+                 and cleans up the data
+                 directory of Pump, TiKV and'.
+ 45:58  warning  Avoid using 'will'.             Google.Will
+
+
+ information-schema/information-schema.md
+ 79:126  error  Use 'that is' instead of        Google.Latin
+                'i.e.'.
+
+
+ loader-overview.md
+ 19:12    warning  Try to avoid using              Google.We
+                   first-person plural like 'we'.
+ 21:28    warning  Avoid using 'will'.             Google.Will
+ 21:38    warning  Try to avoid using              Google.We
+                   first-person plural like 'us'.
+ 21:82    warning  Try to avoid using              Google.We
+                   first-person plural like 'we'.
+ 21:217   warning  Try to avoid using              Google.We
+                   first-person plural like 'we'.
+ 21:342   warning  Try to avoid using              Google.We
+                   first-person plural like 'us'.
+ 21:364   warning  Try to avoid using              Google.We
+                   first-person plural like 'we'.
+ 174:346  warning  Avoid using 'will'.             Google.Will
+ 183:194  warning  Avoid using 'will'.             Google.Will
+
+
+ literal-values.md
+ 9:1      warning  Use the Oxford comma in         Google.OxfordComma
+                   'TiDB literal values include
+                   character literals, numeric
+                   literals, time and'.
+ 11:1     warning  Use the Oxford comma in 'This   Google.OxfordComma
+                   document describes String
+                   literals, Numeric literals,
+                   NULL values, Hexadecimal
+                   literals, Date and'.
+ 101:119  error    '. T' should have one space.    Google.Spacing
+
+
+ minimal-deployment-topology.md
+ 17:33  warning  Did you really mean 'nvme'?  PingCAP.Spellingcheck
+ 28:79  warning  Avoid using 'will'.          Google.Will
+
+
+ keywords.md
+ 541:3  error  Use 'secondary, follower,       PingCAP.Evilwords
+               agent, or consumer' instead of
+               'SLAVE'.
+
+
+ offline-deployment-using-ansible.md
+ 23:52  warning  Use 'to' instead of 'in order   Google.WordList
+                 to'.
+
+
+ multi-data-centers-in-one-city-deployment.md
+ 33:1    warning  Use the Oxford comma in 'TiDB,  Google.OxfordComma
+                  TiKV and'.
+ 40:11   warning  Avoid using 'will'.             Google.Will
+ 41:45   warning  Avoid using 'will'.             Google.Will
+ 50:24   warning  Avoid using 'will'.             Google.Will
+ 51:174  warning  Avoid using 'will'.             Google.Will
+ 55:283  warning  Avoid using 'will'.             Google.Will
+ 55:392  warning  Avoid using 'will'.             Google.Will
+ 95:360  warning  Avoid using 'will'.             Google.Will
+
+
+ mysql-compatibility.md
+ 95:83  warning  Avoid using 'will'.  Google.Will
+
+
+ mydumper-overview.md
+ 11:48    warning  Did you really mean             PingCAP.Spellingcheck
+                   'mydumper'?
+ 11:362   warning  Did you really mean             PingCAP.Spellingcheck
+                   'mydumper'?
+ 89:82    warning  Avoid using 'will'.             Google.Will
+ 91:37    error    Avoid first-person pronouns     Google.FirstPerson
+                   such as 'I'.
+ 107:33   warning  Did you really mean             PingCAP.Spellingcheck
+                   'mydumper'?
+ 183:7    error    Avoid first-person pronouns     Google.FirstPerson
+                   such as 'I'.
+ 193:161  warning  Did you really mean             PingCAP.Spellingcheck
+                   'mydumper'?
+ 201:6    warning  Try to avoid using              Google.We
+                   first-person plural like 'we'.
+ 201:24   warning  Try to avoid using              Google.We
+                   first-person plural like
+                   'our'.
+
+
+ optimistic-transaction.md
+ 118:18  warning  Avoid using 'will'.  Google.Will
+
+
+ overview.md
+ 27:5  warning  Use the Oxford comma in         Google.OxfordComma
+                'TiDB is a distributed
+                database designed for the
+                cloud, providing flexible
+                scalability, reliability and'.
+ 37:8  warning  Try to avoid using              Google.We
+                first-person plural like 'we'.
+
+
+ partition-pruning.md
+ 8:235    warning  Avoid using 'will'.             Google.Will
+ 71:341   warning  Avoid using 'will'.             Google.Will
+ 142:48   warning  Avoid using 'will'.             Google.Will
+ 239:261  warning  Use the Oxford comma in         Google.OxfordComma
+                   'Theoretically, all monotonous
+                   functions, strictly or'.
+ 303:48   warning  Avoid using 'will'.             Google.Will
+
+
+ optimizer-hints.md
+ 29:33   warning  Avoid using 'will'.             Google.Will
+ 29:186  warning  Avoid using 'will'.             Google.Will
+ 33:69   warning  Avoid using 'will'.             Google.Will
+ 72:191  warning  Try to avoid using              Google.We
+                  first-person plural like 'us'.
+ 247:34  warning  Avoid using 'will'.             Google.Will
+ 265:34  warning  Avoid using 'will'.             Google.Will
+ 331:84  warning  Avoid using 'will'.             Google.Will
+
+
+ pd-configuration-file.md
+ 213:125  warning  Avoid using 'will'.  Google.Will
+
+
+ online-deployment-using-ansible.md
+ 372:81  warning  Did you really mean 'nvme'?  PingCAP.Spellingcheck
+
+
+ pd-recover.md
+ 38:1  warning  Use the Oxford comma in 'The    Google.OxfordComma
+                cluster ID can be obtained
+                from the log of PD, TiKV or'.
+
+
+ predicate-push-down.md
+ 7:1     warning  '``Predicates Push Down (PPD)'  PingCAP.TopHeadings
+                  should be in title case.
+ 90:29   warning  Try to avoid using              Google.We
+                  first-person plural like 'we'.
+ 92:58   error    Use 'cannot' instead of         PingCAP.Contractions
+                  'can't'
+ 113:28  warning  Try to avoid using              Google.We
+                  first-person plural like 'we'.
+ 151:51  warning  Avoid using 'will'.             Google.Will
+
+
+ pessimistic-transaction.md
+ 49:9    warning  Avoid using 'will'.             Google.Will
+ 49:120  warning  Use 'data is' instead of 'data  Google.WordList
+                  are'.
+ 49:221  warning  Use 'data is' instead of 'data  Google.WordList
+                  are'.
+ 51:91   warning  Avoid using 'will'.             Google.Will
+ 51:163  warning  Avoid using 'will'.             Google.Will
+ 53:16   warning  Avoid using 'will'.             Google.Will
+
+
+ partitioned-table.md
+ 518:318   warning  Avoid using 'will'.  Google.Will
+ 1052:174  warning  Avoid using 'will'.  Google.Will
+ 1052:230  warning  Avoid using 'will'.  Google.Will
+
+
+ pd-control.md
+ 204:143  error    Use 'will not' instead of       PingCAP.Contractions
+                   'won't'
+ 223:61   warning  Avoid using 'will'.             Google.Will
+ 883:208  error    Use 'do not' instead of         PingCAP.Contractions
+                   'don't'
+
+
+ production-deployment-using-tiup.md
+ 149:35  warning  Avoid using 'will'.             Google.Will
+ 228:3   warning  Use the Oxford comma in 'By     Google.OxfordComma
+                  default, TiDB, TiUP and'.
+
+
+ production-offline-deployment-using-tiup.md
+ 266:3  warning  Use the Oxford comma in 'By     Google.OxfordComma
+                 default, TiDB and'.
+
+
+ read-historical-data.md
+ 26:185  warning  Avoid using 'will'.             Google.Will
+ 36:107  warning  Use 'data is' instead of 'data  Google.WordList
+                  are'.
+ 36:333  warning  Avoid using 'will'.             Google.Will
+
+
+ privilege-management.md
+ 31:32    warning  Avoid using 'will'.             Google.Will
+ 55:241   warning  Avoid using 'will'.             Google.Will
+ 113:100  warning  Avoid using 'will'.             Google.Will
+ 120:1    warning  Use the Oxford comma in 'About  Google.OxfordComma
+                   fuzzy matching, escape, string
+                   and'.
+ 358:184  warning  Avoid using 'will'.             Google.Will
+ 362:57   warning  Avoid using 'will'.             Google.Will
+ 366:139  warning  Avoid using 'will'.             Google.Will
+ 366:214  warning  Avoid using 'will'.             Google.Will
+ 384:226  warning  Avoid using 'will'.             Google.Will
+ 386:99   warning  Avoid using 'will'.             Google.Will
+
+
+ quick-start-with-tidb.md
+ 143:105  warning  Avoid using 'will'.             Google.Will
+ 342:3    warning  Use the Oxford comma in 'By     Google.OxfordComma
+                   default, TiDB, TiUP and'.
+
+
+ releases/release-1.0-ga.md
+ 56:3  warning  Prefer 'GitHub' over 'Github'  PingCAP.Terminology
+ 56:3  warning  Did you really mean 'Github'?  PingCAP.Spellingcheck
+
+
+ releases/release-2.1.18.md
+ 30:493  warning  Avoid using 'will'.  Google.Will
+
+
+ releases/release-3.0-beta.md
+ 29:80  warning  Avoid using 'will'.  Google.Will
+
+
+ releases/release-3.0.0-rc.2.md
+ 6:1    warning  '``TiDB 3.0.0-rc.2 Release      PingCAP.TopHeadings
+                 Notes' should be in title
+                 case.
+ 56:77  warning  Avoid using 'will'.             Google.Will
+
+
+ releases/release-3.0.0-rc.1.md
+ 6:1  warning  '``TiDB 3.0.0-rc.1 Release      PingCAP.TopHeadings
+               Notes' should be in title
+               case.
+
+
+ releases/release-3.0.0-rc.3.md
+ 6:1  warning  '``TiDB 3.0.0-rc.3 Release      PingCAP.TopHeadings
+               Notes' should be in title
+               case.
+
+
+ releases/release-3.0-ga.md
+ 31:64   error    Use 'allowlist' instead of      PingCAP.Evilwords
+                  'Whitelist'.
+ 84:119  warning  Avoid using 'will'.             Google.Will
+
+
+ releases/release-3.0.3.md
+ 25:134  error  Use 'for example' instead of    Google.Latin
+                'e.g.'.
+
+
+ releases/release-3.0.5.md
+ 29:493  warning  Avoid using 'will'.  Google.Will
+
+
+ releases/release-3.0.4.md
+ 37:5  warning  Try to avoid using              Google.We
+                first-person plural like
+                'Our'.
+
+
+ releases/release-3.0.8.md
+ 29:191  warning  Avoid using 'will'.  Google.Will
+
+
+ releases/release-3.0.2.md
+ 61:111  warning  Avoid using 'will'.  Google.Will
+ 63:127  warning  Avoid using 'will'.  Google.Will
+ 120:65  warning  Avoid using 'will'.  Google.Will
+ 126:65  warning  Avoid using 'will'.  Google.Will
+
+
+ releases/release-4.0.0-beta.md
+ 111:24  warning  Did you really mean 'systemd'?  PingCAP.Spellingcheck
+
+
+ report-issue.md
+ 9:1     warning  Try to avoid using              Google.We
+                  first-person plural like 'We'.
+ 11:175  warning  Try to avoid using              Google.We
+                  first-person plural like 'we'.
+
+
+ releases/release-4.0.6.md
+ 88:83   warning  Did you really mean             PingCAP.Spellingcheck
+                  'mydumper'?
+ 140:56  warning  Avoid using 'will'.             Google.Will
+ 141:75  warning  Avoid using 'will'.             Google.Will
+
+
+ resources/markdownlint-rules.md
+ 3:156   warning  Try to avoid using              Google.We
+                  first-person plural like 'We'.
+ 7:131   error    Use 'do not' instead of         PingCAP.Contractions
+                  'don't'
+ 15:130  warning  Try to avoid using              Google.We
+                  first-person plural like 'we'.
+ 15:282  warning  Try to avoid using              Google.We
+                  first-person plural like
+                  'our'.
+
+
+ schema-object-names.md
+ 23:44  warning  Avoid using 'will'.  Google.Will
+
+
+ shard-row-id-bits.md
+ 14:106  warning  Use 'data is' instead of 'data  Google.WordList
+                  are'.
+
+
+ sql-logical-optimization.md
+ 7:6    warning  Use 'document, page, or         Google.WordList
+                 section' instead of 'chapter'.
+ 7:232  warning  Avoid using 'will'.             Google.Will
+ 9:6    warning  Use 'document, page, or         Google.WordList
+                 section' instead of 'chapter'.
+
+
+ sql-physical-optimization.md
+ 9:106   warning  Use 'document, page, or         Google.WordList
+                  section' instead of 'chapter'.
+ 11:47   warning  Avoid using 'will'.             Google.Will
+ 12:56   warning  Avoid using 'will'.             Google.Will
+ 14:170  warning  Avoid using 'will'.             Google.Will
+
+
+ schedule-replicas-by-topology-labels.md
+ 94:211   warning  Avoid using 'will'.             Google.Will
+ 154:135  warning  Avoid using 'will'.             Google.Will
+ 180:101  warning  Use 'data is' instead of 'data  Google.WordList
+                   are'.
+ 186:221  warning  Avoid using 'will'.             Google.Will
+ 188:173  warning  Avoid using 'will'.             Google.Will
+ 188:565  warning  Avoid using 'will'.             Google.Will
+ 188:650  warning  Avoid using 'will'.             Google.Will
+ 190:501  warning  Avoid using 'will'.             Google.Will
+ 190:595  warning  Avoid using 'will'.             Google.Will
+
+
+ scale-tidb-using-tiup.md
+ 38:176  warning  Avoid using 'will'.  Google.Will
+ 39:56   warning  Avoid using 'will'.  Google.Will
+ 388:29  warning  Avoid using 'will'.  Google.Will
+
+
+ sql-mode.md
+ 3:23  warning  Don't put a period at the end   Google.HeadingPunctuation
+                of a heading.
+
+
+ sql-prepare-plan-cache.md
+ 40:38  error  Use 'for example' instead of    Google.Latin
+               'e.g.'.
+
+
+ sql-statements/sql-statement-alter-index.md
+ 9:160  warning  Avoid using 'will'.  Google.Will
+
+
+ sql-statements/sql-statement-admin-show-ddl.md
+ 79:120  warning  Avoid using 'will'.  Google.Will
+ 81:136  warning  Avoid using 'will'.  Google.Will
+ 83:93   warning  Avoid using 'will'.  Google.Will
+ 83:182  warning  Avoid using 'will'.  Google.Will
+
+
+ sql-statements/sql-statement-analyze-table.md
+ 11:6  warning  Avoid using 'will'.  Google.Will
+
+
+ sql-statements/sql-statement-alter-table.md
+ 86:54   warning  Avoid using 'will'.  Google.Will
+ 86:169  warning  Avoid using 'will'.  Google.Will
+
+
+ sql-statements/sql-statement-begin.md
+ 11:56  warning  Avoid using 'will'.  Google.Will
+
+
+ sql-plan-management.md
+ 67:156   warning  Avoid using 'will'.  Google.Will
+ 75:18    warning  Avoid using 'will'.  Google.Will
+ 208:134  warning  Avoid using 'will'.  Google.Will
+
+
+ sql-statements/sql-statement-admin.md
+ 204:274  warning  Avoid using 'will'.  Google.Will
+
+
+ sql-statements/sql-statement-commit.md
+ 11:116  warning  Avoid using 'will'.  Google.Will
+
+
+ sql-statements/sql-statement-backup.md
+ 17:224  warning  Avoid using 'will'.             Google.Will
+ 19:97   warning  Avoid using 'will'.             Google.Will
+ 96:92   warning  Avoid using 'will'.             Google.Will
+ 138:1   warning  Use the Oxford comma in         Google.OxfordComma
+                  'Specify a timestamp, TSO or'.
+
+
+ sql-statements/sql-statement-create-table-like.md
+ 52:193  warning  Avoid using 'will'.  Google.Will
+
+
+ sql-statements/sql-statement-create-index.md
+ 138:172  warning  Avoid using 'will'.  Google.Will
+
+
+ sql-statements/sql-statement-create-role.md
+ 55:67    warning  Use 'to' instead of 'in order   Google.WordList
+                   to'.
+ 104:92   warning  Avoid using 'will'.             Google.Will
+ 104:142  warning  Use 'to' instead of 'in order   Google.WordList
+                   to'.
+
+
+ sql-statements/sql-statement-create-user.md
+ 69:72  warning  Avoid using 'will'.  Google.Will
+
+
+ sql-statements/sql-statement-create-view.md
+ 9:178  warning  Avoid using 'will'.  Google.Will
+
+
+ sql-statements/sql-statement-drop-role.md
+ 51:67    warning  Use 'to' instead of 'in order   Google.WordList
+                   to'.
+ 100:93   warning  Avoid using 'will'.             Google.Will
+ 100:143  warning  Use 'to' instead of 'in order   Google.WordList
+                   to'.
+
+
+ sql-statements/sql-statement-drop-user.md
+ 66:56  warning  Avoid using 'will'.  Google.Will
+
+
+ sql-statements/sql-statement-create-sequence.md
+ 231:66  warning  Avoid using 'will'.  Google.Will
+
+
+ sql-statements/sql-statement-grant-privileges.md
+ 65:99  warning  Avoid using 'will'.  Google.Will
+
+
+ sql-statements/sql-statement-grant-role.md
+ 55:67    warning  Use 'to' instead of 'in order   Google.WordList
+                   to'.
+ 104:93   warning  Avoid using 'will'.             Google.Will
+ 104:143  warning  Use 'to' instead of 'in order   Google.WordList
+                   to'.
+
+
+ sql-statements/sql-statement-flashback-table.md
+ 43:253  warning  Avoid using 'will'.  Google.Will
+ 68:179  warning  Avoid using 'will'.  Google.Will
+
+
+ sql-statements/sql-statement-explain.md
+ 9:130   warning  Avoid using 'will'.  Google.Will
+ 176:86  warning  Avoid using 'will'.  Google.Will
+
+
+ sql-statements/sql-statement-rollback.md
+ 9:77  error  '. I' should have one space.  Google.Spacing
+
+
+ sql-statements/sql-statement-revoke-role.md
+ 55:67    warning  Use 'to' instead of 'in order   Google.WordList
+                   to'.
+ 104:93   warning  Avoid using 'will'.             Google.Will
+ 104:143  warning  Use 'to' instead of 'in order   Google.WordList
+                   to'.
+
+
+ sql-statements/sql-statement-restore.md
+ 19:42   warning  Avoid using 'will'.  Google.Will
+ 21:169  warning  Avoid using 'will'.  Google.Will
+ 23:99   warning  Avoid using 'will'.  Google.Will
+ 76:125  warning  Avoid using 'will'.  Google.Will
+ 130:65  warning  Avoid using 'will'.  Google.Will
+
+
+ sql-statements/sql-statement-set-default-role.md
+ 8:84     warning  Avoid using 'will'.             Google.Will
+ 59:67    warning  Use 'to' instead of 'in order   Google.WordList
+                   to'.
+ 108:93   warning  Avoid using 'will'.             Google.Will
+ 108:143  warning  Use 'to' instead of 'in order   Google.WordList
+                   to'.
+ 161:20   warning  Avoid using 'will'.             Google.Will
+
+
+ sql-statements/sql-statement-select.md
+ 84:65  warning  Avoid using 'will'.  Google.Will
+ 96:92  warning  Avoid using 'will'.  Google.Will
+
+
+ sql-statements/sql-statement-explain-analyze.md
+ 9:101    warning  Avoid using 'will'.             Google.Will
+ 9:255    error    '. I' should have one space.    Google.Spacing
+ 31:313   warning  Did you really mean             PingCAP.Spellingcheck
+                   'exeuction'?
+ 100:55   warning  Avoid using 'will'.             Google.Will
+ 104:132  warning  Avoid using 'will'.             Google.Will
+ 104:336  warning  Did you really mean             PingCAP.Spellingcheck
+                   'backoffs'?
+ 239:131  warning  Avoid using 'will'.             Google.Will
+
+
+ sql-statements/sql-statement-set-variable.md
+ 90:34  warning  Avoid using 'will'.  Google.Will
+ 92:34  warning  Avoid using 'will'.  Google.Will
+
+
+ sql-statements/sql-statement-show-create-user.md
+ 43:129  error    '. N' should have one space.  Google.Spacing
+ 43:158  warning  Avoid using 'will'.           Google.Will
+
+
+ sql-statements/sql-statement-show-databases.md
+ 9:140  warning  Avoid using 'will'.  Google.Will
+
+
+ sql-statements/sql-statement-show-engines.md
+ 35:18  warning  Avoid using 'will'.  Google.Will
+ 35:91  warning  Avoid using 'will'.  Google.Will
+
+
+ sql-statements/sql-statement-show-errors.md
+ 9:140  error    '. I' should have one space.  Google.Spacing
+ 9:172  warning  Avoid using 'will'.           Google.Will
+
+
+ sql-statements/sql-statement-show-indexes.md
+ 9:78  error  '. T' should have one space.  Google.Spacing
+
+
+ sql-statements/sql-statement-show-processlist.md
+ 9:127   warning  Avoid using 'will'.  Google.Will
+ 36:170  warning  Avoid using 'will'.  Google.Will
+
+
+ sql-statements/sql-statement-show-variables.md
+ 9:146  warning  Avoid using 'will'.  Google.Will
+
+
+ sql-statements/sql-statement-show-warnings.md
+ 9:177  warning  Avoid using 'will'.  Google.Will
+
+
+ sql-statements/sql-statement-start-transaction.md
+ 11:68  warning  Avoid using 'will'.  Google.Will
+
+
+ sql-tuning-overview.md
+ 7:161  warning  Avoid using 'will'.  Google.Will
+
+
+ storage-engine/titan-configuration.md
+ 23:39   warning  Avoid using 'will'.  Google.Will
+ 48:222  warning  Avoid using 'will'.  Google.Will
+
+
+ storage-engine/rocksdb-overview.md
+ 39:252  warning  Use 'less data' instead of      Google.WordList
+                  'fewer data'.
+
+
+ support.md
+ 17:60  warning  Prefer 'GitHub' over 'github'   PingCAP.Terminology
+ 19:17  warning  Try to avoid using              Google.We
+                 first-person plural like 'us'.
+
+
+ sql-statements/sql-statement-split-region.md
+ 55:153   warning  Avoid using 'will'.  Google.Will
+ 103:251  warning  Avoid using 'will'.  Google.Will
+ 401:337  warning  Avoid using 'will'.  Google.Will
+ 401:500  warning  Avoid using 'will'.  Google.Will
+
+
+ statement-summary-tables.md
+ 137:48  warning  Avoid using 'will'.  Google.Will
+
+
+ statistics.md
+ 40:284   warning  Avoid using 'will'.  Google.Will
+ 133:94   warning  Avoid using 'will'.  Google.Will
+ 133:118  warning  Avoid using 'will'.  Google.Will
+
+
+ synchronous-replication.md
+ 68:44  warning  Avoid using 'will'.  Google.Will
+
+
+ storage-engine/titan-overview.md
+ 10:293   warning  Avoid using 'will'.             Google.Will
+ 31:18    warning  Avoid using 'will'.             Google.Will
+ 102:659  warning  Try to avoid using              Google.We
+                   first-person plural like 'we'.
+ 102:694  warning  Avoid using 'will'.             Google.Will
+ 110:330  warning  Avoid using 'will'.             Google.Will
+
+
+ technical-writing-project-ideas.md
+ 13:1    warning  Try to avoid using              Google.We
+                  first-person plural like 'We'.
+ 13:125  warning  Try to avoid using              Google.We
+                  first-person plural like 'We'.
+ 15:23   warning  Try to avoid using              Google.We
+                  first-person plural like 'We'.
+ 15:107  warning  Try to avoid using              Google.We
+                  first-person plural like
+                  'our'.
+ 15:149  warning  Try to avoid using              Google.We
+                  first-person plural like
+                  'let's'.
+ 15:162  warning  Use 'tap' instead of 'touch'.   Google.WordList
+ 19:52   warning  Try to avoid using              Google.We
+                  first-person plural like
+                  'our'.
+ 34:40   warning  Prefer 'GitHub' over 'github'   PingCAP.Terminology
+ 58:42   warning  Prefer 'GitHub' over 'github'   PingCAP.Terminology
+
+
+ sync-diff-inspector/sync-diff-inspector-overview.md
+ 7:1    warning  '``sync-diff-inspector User     PingCAP.TopHeadings
+                 Guide' should be in title
+                 case.
+ 36:54  warning  Use 'data is' instead of 'data  Google.WordList
+                 are'.
+
+
+ syncer-overview.md
+ 417:40  warning  Avoid using 'will'.  Google.Will
+
+
+ table-filter.md
+ 135:1   warning  Use the Oxford comma in         Google.OxfordComma
+                  'Inside a filter file, leading
+                  and'.
+ 211:95  warning  Avoid using 'will'.             Google.Will
+
+
+ test-deployment-using-docker.md
+ 32:8  warning  Try to avoid using              Google.We
+                first-person plural like 'we'.
+
+
+ test-deployment-from-binary-tarball.md
+ 133:1  warning  Use the Oxford comma in         Google.OxfordComma
+                 'Follow the steps below to
+                 start PD, TiKV and'.
+
+
+ telemetry.md
+ 9:1      warning  Use the Oxford comma in 'By     Google.OxfordComma
+                   default, TiDB, TiUP and'.
+ 13:173   warning  Avoid using 'will'.             Google.Will
+ 17:58    warning  Avoid using 'will'.             Google.Will
+ 36:116   warning  Avoid using 'will'.             Google.Will
+ 46:85    warning  Avoid using 'will'.             Google.Will
+ 167:206  warning  Avoid using 'will'.             Google.Will
+ 303:122  warning  Try to avoid using              Google.We
+                   first-person plural like 'US'.
+
+
+ three-data-centers-in-two-cities-deployment.md
+ 41:498  warning  Avoid using 'will'.  Google.Will
+
+
+ ticdc-deployment-topology.md
+ 23:33  warning  Did you really mean 'nvme'?  PingCAP.Spellingcheck
+ 35:79  warning  Avoid using 'will'.          Google.Will
+
+
+ tidb-binlog/bidirectional-replication-between-tidb-clusters.md
+ 7:1     warning  '``Bidirectional Replication    PingCAP.TopHeadings
+                  Between TiDB Clusters' should
+                  be in title case.
+ 27:108  warning  Avoid using 'will'.             Google.Will
+ 27:169  warning  Avoid using 'will'.             Google.Will
+
+
+ ticdc/troubleshoot-ticdc.md
+ 11:10   error    Avoid first-person pronouns     Google.FirstPerson
+                  such as 'I'.
+ 20:8    error    Use 'cannot' instead of         PingCAP.Contractions
+                  'can't'
+ 20:44   error    Avoid first-person pronouns     Google.FirstPerson
+                  such as 'I'.
+ 24:10   error    Avoid first-person pronouns     Google.FirstPerson
+                  such as 'I'.
+ 41:10   error    Avoid first-person pronouns     Google.FirstPerson
+                  such as 'I'.
+ 67:10   error    Avoid first-person pronouns     Google.FirstPerson
+                  such as 'I'.
+ 116:83  warning  Avoid using 'will'.             Google.Will
+ 124:10  error    Avoid first-person pronouns     Google.FirstPerson
+                  such as 'I'.
+ 145:10  error    Avoid first-person pronouns     Google.FirstPerson
+                  such as 'I'.
+ 180:10  error    Avoid first-person pronouns     Google.FirstPerson
+                  such as 'I'.
+ 199:16  error    Avoid first-person pronouns     Google.FirstPerson
+                  such as 'I'.
+ 212:44  error    Avoid first-person pronouns     Google.FirstPerson
+                  such as 'I'.
+ 220:47  error    Avoid first-person pronouns     Google.FirstPerson
+                  such as 'I'.
+ 235:47  error    Avoid first-person pronouns     Google.FirstPerson
+                  such as 'I'.
+
+
+ tidb-binlog/binlog-consumer-client.md
+ 9:123  warning  Use the Oxford comma in         Google.OxfordComma
+                 'Currently, Drainer supports
+                 multiple kinds of down
+                 streaming, including MySQL,
+                 TiDB, file and'.
+ 9:224  warning  Use the Oxford comma in         Google.OxfordComma
+                 'But sometimes users have
+                 customized requirements
+                 for outputting data to
+                 other formats, for example,
+                 Elasticsearch and'.
+
+
+ ticdc/manage-ticdc.md
+ 248:228  warning  Avoid using 'will'.             Google.Will
+ 401:74   warning  Avoid using 'will'.             Google.Will
+ 403:160  warning  Avoid using 'will'.             Google.Will
+ 533:63   warning  Avoid using 'will'.             Google.Will
+ 555:63   warning  Avoid using 'will'.             Google.Will
+ 731:73   warning  Avoid using 'will'.             Google.Will
+ 752:205  warning  Avoid using 'will'.             Google.Will
+ 767:87   warning  Did you really mean             PingCAP.Spellingcheck
+                   'reentrant'?
+ 767:305  warning  Avoid using 'will'.             Google.Will
+
+
+ tidb-binlog/binlog-control.md
+ 7:1  warning  '``binlogctl' should be in      PingCAP.TopHeadings
+               title case.
+
+
+ system-variables.md
+ 14:1     warning  Use the Oxford comma in         Google.OxfordComma
+                   'Variables can be set with
+                   the `***` statement on a
+                   per-session, instance or'.
+ 263:147  warning  Avoid using 'will'.             Google.Will
+ 265:48   warning  Avoid using 'will'.             Google.Will
+ 283:45   warning  Avoid using 'will'.             Google.Will
+ 284:80   warning  Avoid using 'will'.             Google.Will
+ 368:388  warning  Avoid using 'will'.             Google.Will
+ 488:10   error    Don't put a space before or     PingCAP.RangeHyphen
+                   after a hyphen when describing
+                   a range.
+ 550:55   warning  Avoid using 'will'.             Google.Will
+ 551:55   warning  Avoid using 'will'.             Google.Will
+
+
+ tidb-best-practices.md
+ 78:350   error    Use 'for example' instead of    Google.Latin
+                   'e.g.'.
+ 80:60    error    Use 'for example' instead of    Google.Latin
+                   'e.g.'.
+ 90:178   warning  Avoid using 'will'.             Google.Will
+ 141:22   warning  Try to avoid using              Google.We
+                   first-person plural like 'we'.
+ 184:243  error    Use 'for example' instead of    Google.Latin
+                   'e.g.'.
+
+
+ tidb-binlog/deploy-tidb-binlog.md
+ 20:1     warning  Use the Oxford comma in 'In     Google.OxfordComma
+                   environments of development,
+                   testing and'.
+ 162:16   warning  Did you really mean             PingCAP.Spellingcheck
+                   'mydumper'?
+ 286:1    warning  Use the Oxford comma in         Google.OxfordComma
+                   'For TiDB v2.1.0 GA or later
+                   versions, Pump and'.
+ 644:19   warning  Avoid using 'will'.             Google.Will
+ 644:77   warning  Avoid using 'will'.             Google.Will
+ 644:165  warning  Avoid using 'will'.             Google.Will
+ 644:189  warning  Avoid using 'will'.             Google.Will
+
+
+ tidb-binlog/get-started-with-tidb-binlog.md
+ 17:297   error    Use 'do not' instead of         PingCAP.Contractions
+                   'don't'
+ 35:57    error    Use 'will not' instead of       PingCAP.Contractions
+                   'won't'
+ 39:1     warning  Try to avoid using              Google.We
+                   first-person plural like 'We'.
+ 39:150   warning  Try to avoid using              Google.We
+                   first-person plural like 'We'.
+ 39:209   warning  Try to avoid using              Google.We
+                   first-person plural like
+                   'Let's'.
+ 45:51    warning  Avoid using 'will'.             Google.Will
+ 45:107   warning  Try to avoid using              Google.We
+                   first-person plural like 'we'.
+ 45:110   warning  Avoid using 'will'.             Google.Will
+ 45:145   warning  Try to avoid using              Google.We
+                   first-person plural like 'We'.
+ 45:148   warning  Avoid using 'will'.             Google.Will
+ 65:5     warning  Try to avoid using              Google.We
+                   first-person plural like 'we'.
+ 129:5    warning  Try to avoid using              Google.We
+                   first-person plural like 'we'.
+ 169:37   warning  Try to avoid using              Google.We
+                   first-person plural like
+                   'our'.
+ 190:15   warning  Try to avoid using              Google.We
+                   first-person plural like 'we'.
+ 190:51   warning  Try to avoid using              Google.We
+                   first-person plural like 'we'.
+ 234:6    warning  Try to avoid using              Google.We
+                   first-person plural like 'we'.
+ 248:6    warning  Try to avoid using              Google.We
+                   first-person plural like
+                   'let's'.
+ 248:71   warning  Try to avoid using              Google.We
+                   first-person plural like 'we'.
+ 290:39   warning  Try to avoid using              Google.We
+                   first-person plural like 'we'.
+ 367:235  warning  Avoid using 'will'.             Google.Will
+ 420:19   warning  Try to avoid using              Google.We
+                   first-person plural like 'we'.
+ 420:169  warning  Try to avoid using              Google.We
+                   first-person plural like 'we'.
+
+
+ tidb-binlog/tidb-binlog-relay-log.md
+ 47:172  warning  Avoid using 'will'.  Google.Will
+ 51:473  warning  Avoid using 'will'.  Google.Will
+
+
+ tidb-binlog/tidb-binlog-reparo.md
+ 127:67  warning  Did you really mean 'mysql'?  PingCAP.Spellingcheck
+ 127:67  warning  Prefer 'MySQL' over 'mysql'   PingCAP.Terminology
+
+
+ tidb-binlog-deployment-topology.md
+ 47:79  warning  Avoid using 'will'.  Google.Will
+
+
+ tidb-binlog/tidb-binlog-configuration-file.md
+ 110:336  warning  Avoid using 'will'.           Google.Will
+ 171:91   warning  Avoid using 'will'.           Google.Will
+ 176:231  warning  Avoid using 'will'.           Google.Will
+ 177:32   warning  Avoid using 'will'.           Google.Will
+ 309:6    warning  Did you really mean 'mysql'?  PingCAP.Spellingcheck
+ 309:6    warning  Prefer 'MySQL' over 'mysql'   PingCAP.Terminology
+ 347:193  warning  Avoid using 'will'.           Google.Will
+
+
+ tidb-computing.md
+ 145:516  warning  Avoid using 'will'.             Google.Will
+ 153:68   error    Avoid first-person pronouns     Google.FirstPerson
+                   such as 'I'.
+ 157:99   warning  Avoid using 'will'.             Google.Will
+
+
+ tidb-lightning/deploy-tidb-lightning.md
+ 207:31  warning  Try to avoid using              Google.We
+                  first-person plural like 'we'.
+
+
+ tidb-binlog/tidb-binlog-faq.md
+ 35:12   error  Avoid first-person pronouns     Google.FirstPerson
+                such as 'I'.
+ 47:12   error  Avoid first-person pronouns     Google.FirstPerson
+                such as 'I'.
+ 59:12   error  Avoid first-person pronouns     Google.FirstPerson
+                such as 'I'.
+ 75:12   error  Avoid first-person pronouns     Google.FirstPerson
+                such as 'I'.
+ 145:12  error  Avoid first-person pronouns     Google.FirstPerson
+                such as 'I'.
+ 173:11  error  Avoid first-person pronouns     Google.FirstPerson
+                such as 'I'.
+ 184:7   error  Avoid first-person pronouns     Google.FirstPerson
+                such as 'I'.
+ 188:7   error  Avoid first-person pronouns     Google.FirstPerson
+                such as 'I'.
+ 195:12  error  Avoid first-person pronouns     Google.FirstPerson
+                such as 'I'.
+ 201:12  error  Avoid first-person pronouns     Google.FirstPerson
+                such as 'I'.
+ 207:11  error  Avoid first-person pronouns     Google.FirstPerson
+                such as 'I'.
+ 211:12  error  Avoid first-person pronouns     Google.FirstPerson
+                such as 'I'.
+ 224:7   error  Avoid first-person pronouns     Google.FirstPerson
+                such as 'I'.
+ 224:90  error  Avoid first-person pronouns     Google.FirstPerson
+                such as 'I'.
+ 228:12  error  Avoid first-person pronouns     Google.FirstPerson
+                such as 'I'.
+ 232:7   error  Avoid first-person pronouns     Google.FirstPerson
+                such as 'I'.
+ 238:12  error  Avoid first-person pronouns     Google.FirstPerson
+                such as 'I'.
+
+
+ tidb-lightning/migrate-from-csv-using-tidb-lightning.md
+ 14:87   warning  Avoid using 'will'.             Google.Will
+ 88:38   warning  Avoid using 'will'.             Google.Will
+ 95:28   warning  Avoid using 'will'.             Google.Will
+ 96:11   warning  Avoid using 'will'.             Google.Will
+ 126:11  warning  Avoid using 'will'.             Google.Will
+ 147:75  error    Use 'that is' instead of        Google.Latin
+                  'i.e.'.
+
+
+ tidb-lightning/tidb-lightning-checkpoints.md
+ 53:142  warning  Try to avoid using              Google.We
+                  first-person plural like 'we'.
+ 61:67   error    Use 'for example' instead of    Google.Latin
+                  'e.g.'.
+ 78:54   warning  Use the Oxford comma in 'This   Google.OxfordComma
+                  is the most convenient, safe
+                  and'.
+
+
+ tidb-lightning/tidb-lightning-configuration.md
+ 13:278   warning  Avoid using 'will'.             Google.Will
+ 386:131  warning  Avoid using 'will'.             Google.Will
+ 400:31   warning  Use 'table name' instead of     Google.WordList
+                   'tablename'.
+ 401:30   warning  Use 'table name' instead of     Google.WordList
+                   'tablename'.
+ 402:24   warning  Use 'table name' instead of     Google.WordList
+                   'tablename'.
+ 404:6    warning  Use 'table name' instead of     Google.WordList
+                   'tablename'.
+
+
+ tidb-lightning/tidb-lightning-faq.md
+ 40:66    warning  Avoid using 'Will'.             Google.Will
+ 40:95    warning  Avoid using 'Will'.             Google.Will
+ 42:54    warning  Avoid using 'will'.             Google.Will
+ 92:101   warning  Avoid using 'will'.             Google.Will
+ 135:8    error    Avoid first-person pronouns     Google.FirstPerson
+                   such as 'my'.
+ 174:110  warning  Avoid using 'will'.             Google.Will
+
+
+ tidb-lightning/monitor-tidb-lightning.md
+ 63:28    warning  Avoid using 'will'.             Google.Will
+ 92:221   warning  Avoid using 'will'.             Google.Will
+ 243:149  error    '. A' should have one space.    Google.Spacing
+ 291:23   warning  Use 'data is' instead of 'data  Google.WordList
+                   are'.
+
+
+ tidb-lightning/tidb-lightning-overview.md
+ 32:177  warning  Use 'data is' instead of 'data  Google.WordList
+                  are'.
+ 34:373  warning  Avoid using 'will'.             Google.Will
+
+
+ tidb-lightning/tidb-lightning-web-interface.md
+ 62:44  warning  Avoid using 'will'.  Google.Will
+
+
+ tidb-lightning/tidb-lightning-glossary.md
+ 17:87    error    Use 'that is' instead of        Google.Latin
+                   'i.e.'.
+ 185:150  warning  Use 'data is' instead of 'data  Google.WordList
+                   are'.
+
+
+ tidb-configuration-file.md
+ 159:386  warning  Avoid using 'will'.  Google.Will
+ 344:181  warning  Avoid using 'will'.  Google.Will
+ 467:201  warning  Avoid using 'will'.  Google.Will
+ 472:232  warning  Avoid using 'will'.  Google.Will
+
+
+ tidb-monitoring-framework.md
+ 13:249  warning  Use the Oxford comma in         Google.OxfordComma
+                  'PingCAP is one of the active
+                  developers and adopters of
+                  Prometheus for monitoring and
+                  alerting in TiDB, TiKV and'.
+
+
+ tiflash/tiflash-command-line-flags.md
+ 7:1  warning  '``TiFlash Command-line Flags'  PingCAP.TopHeadings
+               should be in title case.
+
+
+ tidb-storage.md
+ 6:1     warning  '``Storage of TiDB database'    PingCAP.TopHeadings
+                  should be in title case.
+ 39:61   warning  Avoid using 'will'.             Google.Will
+ 47:32   warning  Try to avoid using              Google.We
+                  first-person plural like
+                  'let's'.
+ 47:200  warning  Use 'to' instead of 'in order   Google.WordList
+                  to'.
+ 56:167  warning  Avoid using 'will'.             Google.Will
+ 61:40   warning  Avoid using 'will'.             Google.Will
+ 63:555  warning  Avoid using 'will'.             Google.Will
+ 65:23   warning  Use 'to' instead of 'in order   Google.WordList
+                  to'.
+ 67:93   warning  Avoid using 'will'.             Google.Will
+ 73:4    warning  Try to avoid using              Google.We
+                  first-person plural like 'we'.
+ 73:49   warning  Try to avoid using              Google.We
+                  first-person plural like 'we'.
+
+
+ tidb-scheduling.md
+ 21:26    error    Use 'for example' instead of    Google.Latin
+                   'e.g.'.
+ 22:25    error    Use 'for example' instead of    Google.Latin
+                   'e.g.'.
+ 25:60    error    Use 'for example' instead of    Google.Latin
+                   'e.g.'.
+ 50:63    warning  Avoid using 'will'.             Google.Will
+ 50:152   warning  Avoid using 'will'.             Google.Will
+ 50:201   warning  Avoid using 'will'.             Google.Will
+ 52:166   warning  Try to avoid using              Google.We
+                   first-person plural like 'we'.
+ 91:150   error    Use 'cannot' instead of         PingCAP.Contractions
+                   'can't'
+ 115:176  warning  Try to avoid using              Google.We
+                   first-person plural like 'we'.
+ 131:106  warning  Avoid using 'will'.             Google.Will
+ 135:1    warning  Use the Oxford comma in         Google.OxfordComma
+                   'Scheduling utilizes CPU,
+                   memory, network and'.
+ 135:89   warning  Avoid using 'will'.             Google.Will
+
+
+ tiflash/tiflash-configuration.md
+ 101:149  warning  Avoid using 'will'.             Google.Will
+ 109:86   warning  Use 'data is' instead of 'data  Google.WordList
+                   are'.
+ 109:296  warning  Use 'data is' instead of 'data  Google.WordList
+                   are'.
+
+
+ tiflash/troubleshoot-tiflash.md
+ 83:34  warning  Use 'data is' instead of 'data  Google.WordList
+                 are'.
+
+
+ tiflash-deployment-topology.md
+ 19:33  warning  Did you really mean 'nvme'?  PingCAP.Spellingcheck
+ 20:37  warning  Did you really mean 'nvme'?  PingCAP.Spellingcheck
+ 37:79  warning  Avoid using 'will'.          Google.Will
+
+
+ tikv-overview.md
+ 18:102  warning  Use 'data is' instead of 'data  Google.WordList
+                  are'.
+
+
+ tispark-deployment-topology.md
+ 24:33  warning  Did you really mean 'nvme'?  PingCAP.Spellingcheck
+ 36:79  warning  Avoid using 'will'.          Google.Will
+
+
+ tiflash/use-tiflash.md
+ 49:127   warning  Avoid using 'will'.  Google.Will
+ 57:126   warning  Avoid using 'will'.  Google.Will
+ 59:132   warning  Avoid using 'will'.  Google.Will
+ 63:188   warning  Avoid using 'will'.  Google.Will
+ 73:284   warning  Avoid using 'will'.  Google.Will
+ 117:36   warning  Avoid using 'will'.  Google.Will
+ 119:125  warning  Avoid using 'will'.  Google.Will
+ 222:248  warning  Avoid using 'will'.  Google.Will
+
+
+ tikv-control.md
+ 333:170  warning  Avoid using 'will'.  Google.Will
+ 398:238  warning  Avoid using 'will'.  Google.Will
+ 405:342  warning  Avoid using 'will'.  Google.Will
+ 405:387  warning  Avoid using 'will'.  Google.Will
+ 420:158  warning  Avoid using 'will'.  Google.Will
+ 422:29   warning  Avoid using 'will'.  Google.Will
+ 422:71   warning  Avoid using 'will'.  Google.Will
+ 441:15   warning  Avoid using 'will'.  Google.Will
+
+
+ tispark-overview.md
+ 23:181   warning  Use 'data is' instead of 'data  Google.WordList
+                   are'.
+ 91:37    warning  Try to avoid using              Google.We
+                   first-person plural like 'we'.
+ 91:394   warning  Try to avoid using              Google.We
+                   first-person plural like
+                   'our'.
+ 113:47   warning  Avoid using 'will'.             Google.Will
+ 131:161  warning  Try to avoid using              Google.We
+                   first-person plural like 'we'.
+ 260:119  warning  Avoid using 'will'.             Google.Will
+ 262:7    error    Avoid first-person pronouns     Google.FirstPerson
+                   such as 'I'.
+ 266:12   error    Avoid first-person pronouns     Google.FirstPerson
+                   such as 'I'.
+ 270:12   error    Avoid first-person pronouns     Google.FirstPerson
+                   such as 'I'.
+ 280:12   error    Avoid first-person pronouns     Google.FirstPerson
+                   such as 'I'.
+
+
+ tiup/tiup-component-management.md
+ 127:353  warning  Avoid using 'will'.  Google.Will
+ 129:224  warning  Avoid using 'will'.  Google.Will
+ 157:32   warning  Avoid using 'will'.  Google.Will
+
+
+ tiup/tiup-documentation-guide.md
+ 26:69  warning  Did you really mean 'Github'?  PingCAP.Spellingcheck
+ 26:69  warning  Prefer 'GitHub' over 'Github'  PingCAP.Terminology
+
+
+ tiup/tiup-faq.md
+ 18:10  error    Avoid first-person pronouns     Google.FirstPerson
+                 such as 'I'.
+ 18:17  error    Avoid first-person pronouns     Google.FirstPerson
+                 such as 'my'.
+ 26:10  error    Avoid first-person pronouns     Google.FirstPerson
+                 such as 'I'.
+ 38:1   warning  Use the Oxford comma in 'You    Google.OxfordComma
+                 can use the TiUP cluster
+                 component to deploy multiple
+                 instances on the same host,
+                 but with different ports
+                 and directories configured;
+                 otherwise, directory and'.
+
+
+ tiup/tiup-cluster.md
+ 188:126  error    Use 'do not' instead of         PingCAP.Contractions
+                   'don't'
+ 286:72   warning  Avoid using 'will'.             Google.Will
+ 434:596  warning  Avoid using 'will'.             Google.Will
+
+
+ tiup/tiup-overview.md
+ 120:40  warning  Avoid using 'will'.  Google.Will
+ 121:50  warning  Avoid using 'will'.  Google.Will
+
+
+ tikv-configuration-file.md
+ 1153:132  warning  Avoid using 'will'.  Google.Will
+ 1194:178  warning  Avoid using 'will'.  Google.Will
+
+
+ topn-limit-push-down.md
+ 12:1  warning  Use the Oxford comma in         Google.OxfordComma
+                'Similar to predicate
+                pushdown, TopN and'.
+
+
+ tiup/tiup-troubleshooting-guide.md
+ 9:222   warning  Did you really mean 'Github'?  PingCAP.Spellingcheck
+ 9:222   warning  Prefer 'GitHub' over 'Github'  PingCAP.Terminology
+ 57:259  warning  Avoid using 'will'.            Google.Will
+
+
+ tidb-troubleshooting-map.md
+ 15:382   warning  Avoid using 'will'.             Google.Will
+ 19:293   warning  Avoid using 'will'.             Google.Will
+ 166:285  error    Use 'for example' instead of    Google.Latin
+                   'e.g.'.
+ 220:245  warning  Avoid using 'will'.             Google.Will
+ 260:45   warning  Did you really mean 'systemd'?  PingCAP.Spellingcheck
+ 262:72   warning  Did you really mean 'systemd'?  PingCAP.Spellingcheck
+ 303:83   warning  Try to avoid using              Google.We
+                   first-person plural like 'we'.
+ 508:66   error    Use 'for example' instead of    Google.Latin
+                   'e.g.'.
+ 529:143  warning  Avoid using 'will'.             Google.Will
+ 546:182  error    Spell out all ordinal numbers   Google.Ordinal
+                   ('1st') in text.
+ 546:198  error    Spell out all ordinal numbers   Google.Ordinal
+                   ('19th') in text.
+ 609:160  warning  Avoid using 'will'.             Google.Will
+
+
+ troubleshoot-high-disk-io.md
+ 93:131  warning  Avoid using 'will'.  Google.Will
+
+
+ transaction-overview.md
+ 11:1     warning  Use the Oxford comma in 'This   Google.OxfordComma
+                   document introduces commonly
+                   used transaction-related
+                   statements, explicit and'.
+ 79:43    warning  Avoid using 'will'.             Google.Will
+ 121:12   warning  Avoid using 'will'.             Google.Will
+ 181:37   warning  Avoid using 'will'.             Google.Will
+ 233:122  warning  Avoid using 'will'.             Google.Will
+ 233:160  warning  Avoid using 'will'.             Google.Will
+
+
+ troubleshoot-cpu-issues.md
+ 115:369  warning  Avoid using 'will'.             Google.Will
+ 129:425  warning  Avoid using 'will'.             Google.Will
+ 135:192  warning  Use 'data is' instead of 'data  Google.WordList
+                   are'.
+
+
+ troubleshoot-tidb-cluster.md
+ 33:145  warning  Avoid using 'will'.  Google.Will
+
+
+ troubleshoot-hot-spot-issues.md
+ 12:1     warning  Use the Oxford comma in 'TiDB   Google.OxfordComma
+                   provides a complete solution
+                   to troubleshooting, resolving
+                   or'.
+ 50:291   warning  Avoid using 'will'.             Google.Will
+ 90:225   warning  Avoid using 'will'.             Google.Will
+ 173:175  warning  Avoid using 'will'.             Google.Will
+
+
+ troubleshoot-write-conflicts.md
+ 92:102  error  '. T' should have one space.  Google.Spacing
+
+
+ troubleshoot-tidb-lightning.md
+ 22:62    error    Use 'for example' instead of    Google.Latin
+                   'e.g.'.
+ 23:32    error    Use 'for example' instead of    Google.Latin
+                   'e.g.'.
+ 27:24    warning  Avoid using 'will'.             Google.Will
+ 73:193   warning  Avoid using 'will'.             Google.Will
+ 75:1     warning  Use the Oxford comma in 'The    Google.OxfordComma
+                   error code is an integer less
+                   than 25, with possible values
+                   of 0, 3, 6, 9, 12, 14, 15, 17,
+                   18, 20 and'.
+ 119:206  error    Spell out all ordinal numbers   Google.Ordinal
+                   ('1st') in text.
+ 119:222  error    Spell out all ordinal numbers   Google.Ordinal
+                   ('19th') in text.
+
+
+ upgrade-tidb-using-tiup-offline.md
+ 25:3  warning  Use the Oxford comma in 'By     Google.OxfordComma
+                default, TiUP and'.
+
+
+ troubleshoot-lock-conflicts.md
+ 146:143  warning  Avoid using 'will'.  Google.Will
+ 172:44   warning  Avoid using 'will'.  Google.Will
+ 172:110  warning  Avoid using 'will'.  Google.Will
+ 178:102  warning  Avoid using 'will'.  Google.Will
+ 178:163  warning  Avoid using 'will'.  Google.Will
+ 180:214  warning  Avoid using 'will'.  Google.Will
+ 180:269  warning  Avoid using 'will'.  Google.Will
+ 194:391  warning  Avoid using 'will'.  Google.Will
+ 194:422  warning  Avoid using 'will'.  Google.Will
+ 196:62   warning  Avoid using 'will'.  Google.Will
+ 208:246  warning  Avoid using 'will'.  Google.Will
+ 223:187  warning  Avoid using 'will'.  Google.Will
+ 225:126  warning  Avoid using 'will'.  Google.Will
+
+
+ tune-operating-system.md
+ 68:212  warning  Avoid using 'will'.  Google.Will
+ 68:312  warning  Avoid using 'will'.  Google.Will
+ 96:379  warning  Avoid using 'will'.  Google.Will
+
+
+ user-defined-variables.md
+ 91:97  warning  Avoid using 'will'.  Google.Will
+
+
+ user-account-management.md
+ 82:179   warning  Avoid using 'will'.  Google.Will
+ 201:63   warning  Avoid using 'will'.  Google.Will
+ 205:383  warning  Avoid using 'will'.  Google.Will
+ 205:433  warning  Avoid using 'will'.  Google.Will
+
+
+ upgrade-tidb-using-tiup.md
+ 146:186  warning  Avoid using 'will'.             Google.Will
+ 185:45   warning  Avoid using 'will'.             Google.Will
+ 209:3    warning  Use the Oxford comma in 'By     Google.OxfordComma
+                   default, TiUP and'.
+ 217:180  warning  Avoid using 'will'.             Google.Will
+
+
+ whats-new-in-tidb-4.0.md
+ 9:42   error    Spell out all ordinal numbers   Google.Ordinal
+                 ('28th') in text.
+ 9:71   warning  Try to avoid using              Google.We
+                 first-person plural like 'we'.
+ 9:367  warning  Try to avoid using              Google.We
+                 first-person plural like
+                 'our'.
+
+✖ 138 errors, 781 warnings and 0 suggestions in 585 files.
