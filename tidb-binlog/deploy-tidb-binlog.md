@@ -574,9 +574,9 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         [syncer.to]
         host = "192.168.0.13"
         user = "root"
+        # If you don’t want to set a cleartext `password` in the configuration file, you can create `encrypted_password` using `./binlogctl -cmd encrypt -text string`.
+        # When you create `encrypted_password` and it is not empty, the `password` above will be ignored, because `encrypted_password` and `password` can’t take effect at the same time.
         password = ""
-        # `encrypted_password` is encrypted using `./binlogctl -cmd encrypt -text string`.
-        # When `encrypted_password` is not empty, the `password` above will be ignored.
         encrypted_password = ""
         port = 3306
 
