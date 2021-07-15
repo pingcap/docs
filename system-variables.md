@@ -1105,7 +1105,7 @@ explain select * from t where age=5;
 
 > **Warning:**
 
-> Currently, the dynamic mode for partitioned tables is an experimental feature. It is not recommended that you use it in the production environment.
+> Currently, the dynamic pruning mode for partitioned tables is an experimental feature. It is not recommended that you use it in the production environment.
 
 - Scope: SESSION | GLOBAL
 - Default value: `static`
