@@ -172,8 +172,12 @@ This section introduces the configuration items of Drainer. For the example of a
 
 ### initial-commit-ts
 
-* Specifies from which commit timestamp the replication task starts. This configuration is only applicable to the Drainer node that starts replication for the first time. If a checkpoint already exists downstream, the replication will be performed according to the time recorded in the checkpoint.
-* Default value: `-1`. Drainer will get a new timestamp from PD as the starting time.
+* Specifies from which specific point in time for the transaction commit (transaction commit ts) the synchronization process starts. This configuration is only applicable to the Drainer node that starts synchronization for the first time. If a checkpoint already exists downstream, the synchronization will be performed according to the time recorded in the checkpoint.
+* commit ts (commit timestamp) is a specific point in time for TiDB [Transactions](https://docs.pingcap.com/tidb/stable/transaction-overview#transactions) commit. It is a globally unique and increasing timestamp from PD as the unique transaction ID of the current transaction. The followings are typical methods to get configured `initial-commit-ts`:
+    - backupTS from the metadata backed up using BR (backupmeta)
+    - Pos from the metadata backed up using Dumpling (metadata)
+    - The output of command `tso` in PD Control
+* Default value: `-1`. Drainer will get a new timestamp from PD as the starting time. That is, the synchronization process starts from the current time.
 
 ### synced-check-time
 
