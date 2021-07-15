@@ -84,12 +84,49 @@ mysql> SELECT * FROM t1;
 - Default value: `ON`
 - Controls whether statements should automatically commit when not in an explicit transaction. See [Transaction Overview](/transaction-overview.md#autocommit) for more information.
 
+### character_set_client
+
+- Scope: SESSION | GLOBAL
+- Default value: `utf8mb4`
+- The character set for data sent from the client. See [Character Set and Collation](/character-set-and-collation.md) for details on the use of character sets and collations in TiDB. It is recommended to use [`SET NAMES`](/sql-statements/sql-statement-set-names.md) to change the character set when needed.
+
+### character_set_connection
+
+- Scope: SESSION | GLOBAL
+- Default value: `utf8mb4`
+- The character set for string literals that do not have a specified character set.
+
+### character_set_database
+
+- Scope: SESSION | GLOBAL
+- Default value: `utf8mb4`
+- This variable indicates the character set of the default database in use. **It is NOT recommended to set this variable**. When a new default database is selected, the server changes the variable value.
+
+### character_set_results
+
+- Scope: SESSION | GLOBAL
+- Default value: `utf8mb4`
+- The character set that is used when data is sent to the client.
+
+### character_set_server
+
+- Scope: SESSION | GLOBAL
+- Default value: `utf8mb4`
+- The character set used for new schemas when no character set is specified in the `CREATE SCHEMA` statement.
+
 ### cte_max_recursion_depth
 
 - Scope: SESSION | GLOBAL
 - Default value: `1000`
 - Range: `[0, 4294967295]`
 - Controls the maximum recursion depth in Common Table Expressions.
+
+### datadir
+
+- Scope: NONE
+- Default value: /tmp/tidb
+- This variable indicates the location where data is stored. This location can be a local path or point to a PD server if the data is stored on TiKV.
+- A value in the format of `ip_address:port` indicates the PD server that TiDB connects to on startup.
 
 ### ddl_slow_threshold
 
@@ -141,6 +178,12 @@ mysql> SELECT * FROM t1;
 - Scope: SESSION
 - Default value: `OFF`
 - This variable is used to show whether the execution plan used in the previous `execute` statement is taken directly from the plan cache.
+
+### license
+
+- Scope: NONE
+- Default value: Apache License 2.0
+- This variable indicates the license of your TiDB server installation.
 
 ### max_execution_time
 
@@ -218,6 +261,14 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Scope: SESSION
 - Default value: `OFF`
 - This variable is used to set whether the `AUTO_INCREMENT` property of a column is allowed to be removed by executing `ALTER TABLE MODIFY` or `ALTER TABLE CHANGE` statements. It is not allowed by default.
+
+### tidb_analyze_version <span class="version-mark">New in v5.1.0</span>
+
+- Scope: SESSION | GLOBAL
+- Value options: `1` and `2`
+- Default value: `2`
+- Controls how TiDB collects statistics.
+- In versions before v5.1.0, the default value of this variable is `1`. In v5.1.0, the default value of this variable is `2`, which serves as an experimental feature. For detailed introduction, see [Introduction to Statistics](/statistics.md).
 
 ### tidb_auto_analyze_end_time
 
@@ -603,7 +654,7 @@ Query OK, 0 rows affected (0.09 sec)
 ### tidb_enforce_mpp <span class="version-mark">New in v5.1</span>
 
 - Scope: SESSION
-- Default value: `OFF`
+- Default value: `OFF`. To change this default value, modify the [`performance.enforce-mpp`](/tidb-configuration-file.md#enforce-mpp) configuration value.
 - Controls whether to ignore the optimizer's cost estimation and to forcibly use TiFlash's MPP mode for query execution. The value options are as follows:
     - `0` or `OFF`, which means that the MPP mode is not forcibly used (by default).
     - `1` or `ON`, which means that the cost estimation is ignored and the MPP mode is forcibly used. Note that this setting only takes effect when `tidb_allow_mpp=true`.

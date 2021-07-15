@@ -38,6 +38,7 @@ This document only describes the parameters that are not included in command-lin
 + The compression algorithm for gRPC messages
 + Optional values: `"none"`, `"deflate"`, `"gzip"`
 + Default value: `"none"`
++ Note: When the value is `gzip`, TiDB Dashboard will have a display error because it might not complete the corresponding compression algorithm in some cases. If you adjust the value back to the default `none`, TiDB Dashboard will display normally. 
 
 ### `grpc-concurrency`
 
@@ -526,8 +527,8 @@ Configuration items related to Raftstore
 ### `max-peer-down-duration`
 
 + The longest inactive duration allowed for a peer. A peer with timeout is marked as `down`, and PD tries to delete it later.
-+ Default value: `"5m"`
-+ Minimum value: `0`
++ Default value: `"10m"`
++ Minimum value: When Hibernate Region is enabled, the minimum value is `peer-stale-check-interval * 2`; when Hibernate Region is disabled, the minimum value is `0`.
 
 ### `max-leader-missing-duration`
 
@@ -856,21 +857,24 @@ Configuration items related to Titan
 + Default value: `4`
 + Minimum value: `1`
 
-## rocksdb.defaultcf
+## rocksdb.defaultcf | rocksdb.writecf | rocksdb.lockcf
 
-Configuration items related to `rocksdb.defaultcf`
+Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rocksdb.lockcf`.
 
 ### `block-size`
 
 + The default size of a RocksDB block
-+ Default value: `"64KB"`
++ Default value for `defaultcf` and `writecf`: `"64KB"`
++ Default value for `lockcf`: `"16KB"`
 + Minimum value: `"1KB"`
 + Unit: KB|MB|GB
 
 ### `block-cache-size`
 
 + The cache size of a RocksDB block
-+ Default value: `Total machine memory * 25%`
++ Default value for `defaultcf`: `Total machine memory * 25%`
++ Default value for `writecf`: `Total machine memory * 15%`
++ Default value for `lockcf`: `Total machine memory * 2%`
 + Minimum value: `0`
 + Unit: KB|MB|GB
 
@@ -897,12 +901,14 @@ Configuration items related to `rocksdb.defaultcf`
 ### `optimize-filters-for-hits`
 
 + Determines whether to optimize the hit ratio of filters
-+ Default value: `true`
++ Default value for `defaultcf`: `true`
++ Default value for `writecf` and `lockcf`: `false`
 
-### `whole_key_filtering`
+### `whole-key-filtering`
 
 + Determines whether to put the entire key to bloom filter
-+ Default value: `true`
++ Default value for `defaultcf` and `lockcf`: `true`
++ Default value for `writecf`: `false`
 
 ### `bloom-filter-bits-per-key`
 
@@ -926,7 +932,8 @@ Configuration items related to `rocksdb.defaultcf`
 
 + The default compression algorithm for each level
 + Optional values: ["no", "no", "lz4", "lz4", "lz4", "zstd", "zstd"]
-+ Default value: `No` for the first two levels, and `lz4` for the next five levels
++ Default value for `defaultcf` and `writecf`: ["no", "no", "lz4", "lz4", "lz4", "zstd", "zstd"]
++ Default value for `lockcf`: ["no", "no", "no", "no", "no", "no", "no"]
 
 ### `bottommost-level-compression`
 
@@ -938,7 +945,8 @@ Configuration items related to `rocksdb.defaultcf`
 ### `write-buffer-size`
 
 + Memtable size
-+ Default value: `"128MB"`
++ Default value for `defaultcf` and `writecf`: `"128MB"`
++ Default value for `lockcf`: `"32MB"`
 + Minimum value: `0`
 + Unit: KB|MB|GB
 
@@ -957,7 +965,8 @@ Configuration items related to `rocksdb.defaultcf`
 ### `max-bytes-for-level-base`
 
 + The maximum number of bytes at base level (L1). Generally, it is set to 4 times the size of a memtable.
-+ Default value: `"512MB"`
++ Default value for `defaultcf` and `writecf`: `"512MB"`
++ Default value for `lockcf`: `"128MB"`
 + Minimum value: `0`
 + Unit: KB|MB|GB
 
@@ -971,7 +980,8 @@ Configuration items related to `rocksdb.defaultcf`
 ### `level0-file-num-compaction-trigger`
 
 + The maximum number of files at L0 that trigger compaction
-+ Default value: `4`
++ Default value for `defaultcf` and `writecf`: `4`
++ Default value for `lockcf`: `1`
 + Minimum value: `0`
 
 ### `level0-slowdown-writes-trigger`
@@ -996,8 +1006,9 @@ Configuration items related to `rocksdb.defaultcf`
 ### `compaction-pri`
 
 + The priority type of compaction
-+ Optional values: `3` (`MinOverlappingRatio`), `0` (`ByCompensatedSize`), `1` (`OldestLargestSeqFirst`), `2` (`OldestSmallestSeqFirst`)
-+ Default value: `3`
++ Optional values: `0` (`ByCompensatedSize`), `1` (`OldestLargestSeqFirst`), `2` (`OldestSmallestSeqFirst`), `3` (`MinOverlappingRatio`)
++ Default value for `defaultcf` and `writecf`: `3`
++ Default value for `lockcf`: `0`
 
 ### `dynamic-level-bytes`
 
@@ -1014,7 +1025,7 @@ Configuration items related to `rocksdb.defaultcf`
 + The default amplification multiple for each layer
 + Default value: `10`
 
-### `rocksdb.defaultcf.compaction-style`
+### `compaction-style`
 
 + Compaction method
 + Optional values: `"level"`, `"universal"`
@@ -1040,7 +1051,8 @@ Configuration items related to `rocksdb.defaultcf`
 ### `enable-compaction-guard`
 
 + Enables or disables the compaction guard, which is an optimization to split SST files at TiKV Region boundaries. This optimization can help reduce compaction I/O and allows TiKV to use larger SST file size (thus less SST files overall) and at the time efficiently clean up stale data when migrating Regions.
-+ Default value: `true`
++ Default value for `defaultcf` and `writecf`: `true`
++ Default value for `lockcf`: `false`
 
 ### `compaction-guard-min-output-file-size`
 
@@ -1054,9 +1066,9 @@ Configuration items related to `rocksdb.defaultcf`
 + Default value: `"128MB"`
 + Unit: KB|MB|GB
 
-## `rocksdb.defaultcf.titan`
+## rocksdb.defaultcf.titan
 
-Configuration items related to `rocksdb.defaultcf.titan`
+Configuration items related to `rocksdb.defaultcf.titan`.
 
 ### `min-blob-size`
 
@@ -1132,64 +1144,7 @@ Configuration items related to `rocksdb.defaultcf.titan`
 + Determines whether to use the merge operator to write back blob indexes for Titan GC. When `gc-merge-rewrite` is enabled, it reduces the effect of Titan GC on the writes in the foreground.
 + Default value: `false`
 
-## rocksdb.writecf
-
-Configuration items related to `rocksdb.writecf`
-
-### `block-cache-size`
-
-+ Block cache size
-+ Default value: `Total machine memory * 15%`
-+ Unit: MB|GB
-
-### `optimize-filters-for-hits`
-
-+ Determines whether to optimize the hit ratio of the filter
-+ Default value: `false`
-
-### `whole-key-filtering`
-
-+ Determines whether to put the entire key to bloom filter
-+ Default value: `false`
-
-### `enable-compaction-guard`
-
-+ Enables or disables the compaction guard, which is an optimization to split SST files at TiKV Region boundaries. This optimization can help reduce compaction I/O and allows TiKV to use larger SST file size (thus less SST files overall) and at the time efficiently clean up stale data when migrating Regions.
-+ Default value: `true`
-
-### `compaction-guard-min-output-file-size`
-
-+ The minimum SST file size when the compaction guard is enabled. This configuration prevents SST files from being too small when the compaction guard is enabled.
-+ Default value: `"8MB"`
-+ Unit: KB|MB|GB
-
-### `compaction-guard-max-output-file-size`
-
-+ The maximum SST file size when the compaction guard is enabled. The configuration prevents SST files from being too large when the compaction guard is enabled. This configuration overrides `target-file-size-base` for the same column family.
-+ Default value: `"128MB"`
-+ Unit: KB|MB|GB
-
-## rocksdb.lockcf
-
-Configuration items related to `rocksdb.lockcf`
-
-### `block-cache-size`
-
-+ Block cache size
-+ Default value: `Total machine memory * 2%`
-+ Unit: MB|GB
-
-### `optimize-filters-for-hits`
-
-+ Determines whether to optimize the hit ratio of the filter
-+ Default value: `false`
-
-### `level0-file-num-compaction-trigger`
-
-+ The number of files at L0 required to trigger compaction
-+ Default value: `1`
-
-## `raftdb`
+## raftdb
 
 Configuration items related to `raftdb`
 
@@ -1341,7 +1296,7 @@ Configuration items related to maintaining the Resolved TS to serve Stale Read r
 + Determines whether to maintain the Resolved TS for all Regions.
 + Default value: `true`
 
-### `advanced-ts-interval`
+### `advance-ts-interval`
 
 + The interval at which Resolved TS is calculated and forwarded.
 + Default value: `"1s"`

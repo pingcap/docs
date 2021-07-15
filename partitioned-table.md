@@ -28,8 +28,8 @@ CREATE TABLE employees (
     fname VARCHAR(30),
     lname VARCHAR(30),
     hired DATE NOT NULL DEFAULT '1970-01-01',
-    separated DATE NOT NULL DEFAULT '9999-12-31',
-    job_code INT NOT NULL,
+    separated DATE DEFAULT '9999-12-31',
+    job_code INT,
     store_id INT NOT NULL
 );
 ```
@@ -44,8 +44,8 @@ CREATE TABLE employees (
     fname VARCHAR(30),
     lname VARCHAR(30),
     hired DATE NOT NULL DEFAULT '1970-01-01',
-    separated DATE NOT NULL DEFAULT '9999-12-31',
-    job_code INT NOT NULL,
+    separated DATE DEFAULT '9999-12-31',
+    job_code INT,
     store_id INT NOT NULL
 )
 
@@ -59,7 +59,7 @@ PARTITION BY RANGE (store_id) (
 
 In this partition scheme, all rows corresponding to employees whose `store_id` is 1 through 5 are stored in the `p0` partition while all employees whose `store_id` is 6 through 10 are stored in `p1`. Range partitioning requires the partitions to be ordered, from lowest to highest.
 
-If you insert a row of data `(72, 'Tom', 'John', '2015-06-25', NULL, 15)`, it falls in the `p2` partition. But if you insert a record whose `store_id` is larger than 20, an error is reported because TiDB can not know which partition this record should be inserted into. In this case, you can use `MAXVALUE` when creating a table:
+If you insert a row of data `(72, 'Tom', 'John', '2015-06-25', NULL, NULL, 15)`, it falls in the `p2` partition. But if you insert a record whose `store_id` is larger than 20, an error is reported because TiDB can not know which partition this record should be inserted into. In this case, you can use `MAXVALUE` when creating a table:
 
 {{< copyable "sql" >}}
 
@@ -69,8 +69,8 @@ CREATE TABLE employees (
     fname VARCHAR(30),
     lname VARCHAR(30),
     hired DATE NOT NULL DEFAULT '1970-01-01',
-    separated DATE NOT NULL DEFAULT '9999-12-31',
-    job_code INT NOT NULL,
+    separated DATE DEFAULT '9999-12-31',
+    job_code INT,
     store_id INT NOT NULL
 )
 
@@ -94,8 +94,8 @@ CREATE TABLE employees (
     fname VARCHAR(30),
     lname VARCHAR(30),
     hired DATE NOT NULL DEFAULT '1970-01-01',
-    separated DATE NOT NULL DEFAULT '9999-12-31',
-    job_code INT NOT NULL,
+    separated DATE DEFAULT '9999-12-31',
+    job_code INT,
     store_id INT NOT NULL
 )
 
@@ -118,7 +118,7 @@ CREATE TABLE employees (
     fname VARCHAR(30),
     lname VARCHAR(30),
     hired DATE NOT NULL DEFAULT '1970-01-01',
-    separated DATE NOT NULL DEFAULT '9999-12-31',
+    separated DATE DEFAULT '9999-12-31',
     job_code INT,
     store_id INT
 )
@@ -294,7 +294,7 @@ CREATE TABLE employees_1 (
     fname VARCHAR(30),
     lname VARCHAR(30),
     hired DATE NOT NULL DEFAULT '1970-01-01',
-    separated DATE NOT NULL DEFAULT '9999-12-31',
+    separated DATE DEFAULT '9999-12-31',
     job_code INT,
     store_id INT,
     city VARCHAR(15)
@@ -319,7 +319,7 @@ CREATE TABLE employees_2 (
     fname VARCHAR(30),
     lname VARCHAR(30),
     hired DATE NOT NULL DEFAULT '1970-01-01',
-    separated DATE NOT NULL DEFAULT '9999-12-31',
+    separated DATE DEFAULT '9999-12-31',
     job_code INT,
     store_id INT,
     city VARCHAR(15)
@@ -368,7 +368,7 @@ CREATE TABLE employees (
     fname VARCHAR(30),
     lname VARCHAR(30),
     hired DATE NOT NULL DEFAULT '1970-01-01',
-    separated DATE NOT NULL DEFAULT '9999-12-31',
+    separated DATE DEFAULT '9999-12-31',
     job_code INT,
     store_id INT
 )
@@ -389,7 +389,7 @@ CREATE TABLE employees (
     fname VARCHAR(30),
     lname VARCHAR(30),
     hired DATE NOT NULL DEFAULT '1970-01-01',
-    separated DATE NOT NULL DEFAULT '9999-12-31',
+    separated DATE DEFAULT '9999-12-31',
     job_code INT,
     store_id INT
 )
@@ -1018,7 +1018,22 @@ PARTITIONS 4;
 ERROR 1491 (HY000): A PRIMARY KEY must include all columns in the table's partitioning function
 ```
 
-The `CREATE TABLE` statement fails because both `col1` and `col3` are included in the proposed partitioning key, but neither of these columns is part of both of unique keys on the table.
+The `CREATE TABLE` statement fails because both `col1` and `col3` are included in the proposed partitioning key, but neither of these columns is part of both of unique keys on the table. After the following modifications, the `CREATE TABLE` statement becomes valid:
+
+{{< copyable "sql" >}}
+
+```sql
+CREATE TABLE t3 (
+    col1 INT NOT NULL,
+    col2 DATE NOT NULL,
+    col3 INT NOT NULL,
+    col4 INT NOT NULL,
+    UNIQUE KEY (col1, col2, col3),
+    UNIQUE KEY (col1, col3)
+)
+PARTITION BY HASH(col1 + col3)
+    PARTITIONS 4;
+```
 
 The following table cannot be partitioned at all, because there is no way to include in a partitioning key any columns that belong to both unique keys:
 
@@ -1064,7 +1079,31 @@ PARTITION BY HASH( YEAR(col2) )
 PARTITIONS 4;
 ```
 
-In both cases, the primary key does not include all columns referenced in the partitioning expression.
+In the above examples, the primary key does not include all columns referenced in the partitioning expression. After adding the missing column in the primary key, the  `CREATE TABLE` statement becomes valid:
+
+{{< copyable "sql" >}}
+
+```sql
+CREATE TABLE t5 (
+    col1 INT NOT NULL,
+    col2 DATE NOT NULL,
+    col3 INT NOT NULL,
+    col4 INT NOT NULL,
+    PRIMARY KEY(col1, col2, col3)
+)
+PARTITION BY HASH(col3)
+PARTITIONS 4;
+CREATE TABLE t6 (
+    col1 INT NOT NULL,
+    col2 DATE NOT NULL,
+    col3 INT NOT NULL,
+    col4 INT NOT NULL,
+    PRIMARY KEY(col1, col2, col3),
+    UNIQUE KEY(col2)
+)
+PARTITION BY HASH( YEAR(col2) )
+PARTITIONS 4;
+```
 
 If a table has neither unique keys nor primary keys, then this restriction does not apply.
 
