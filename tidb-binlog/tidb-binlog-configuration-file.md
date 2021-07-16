@@ -173,12 +173,12 @@ This section introduces the configuration items of Drainer. For the example of a
 
 ### initial-commit-ts
 
-* Specifies from which specific point in time for the transaction commit (transaction commit ts) the synchronization process starts. This configuration is only applicable to the Drainer node that starts synchronization for the first time. If a checkpoint already exists downstream, the synchronization will be performed according to the time recorded in the checkpoint.
-* commit ts (commit timestamp) is a specific point in time for TiDB [Transactions](https://docs.pingcap.com/tidb/stable/transaction-overview#transactions) commit. It is a globally unique and increasing timestamp from PD as the unique transaction ID of the current transaction. The followings are typical methods to get configured `initial-commit-ts`:
-    - backupTS from the metadata backed up using BR (backupmeta)
-    - Pos from the metadata backed up using Dumpling (metadata)
-    - The output of command `tso` in PD Control
-* Default value: `-1`. Drainer will get a new timestamp from PD as the starting time. That is, the synchronization process starts from the current time.
+* Specifies from which commit timestamp of the transaction the replication process starts. This configuration is applicable only to the Drainer node that is in the replication process for the first time. If a checkpoint already exists in the downstream, the replication will be performed according to the time recorded in the checkpoint.
+* commit ts (commit timestamp) is a specific point in time for [transaction](/transaction-overview#transactions) commits in TiDB. It is a globally unique and increasing timestamp from PD as the unique ID of the current transaction. You can get the `initial-commit-ts` configuration in the following typical ways:
+    - If BR is used, you can get `initial-commit-ts` from the backup TS recorded in the metadata backed up by BR (backupmeta).
+    - If Dumpling is used, you can get `initial-commit-ts` from the Pos recorded in the metadata backed up by Dumpling (metadata),
+    - If PD Control is used, `initial-commit-ts` is in the output of the `tso` command.
+* Default value: `-1`. Drainer will get a new timestamp from PD as the starting time, which means that the replication process starts from the current time.
 
 ### synced-check-time
 
