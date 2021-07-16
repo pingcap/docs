@@ -555,7 +555,6 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - TiDB triggers an alarm when the percentage of the memory it takes exceeds a certain threshold. For the detailed usage description of this feature, see [`memory-usage-alarm-ratio`](/tidb-configuration-file.md#memory-usage-alarm-ratio-new-in-v409).
 - You can set the initial value of this variable by configuring [`memory-usage-alarm-ratio`](/tidb-configuration-file.md#memory-usage-alarm-ratio-new-in-v409).
 
->>>>>>> 93009172f (Change tidb_memory_usage_alarm_ratio scope to instance (#5988))
 ### tidb_metric_query_range_duration <span class="version-mark">New in v4.0</span>
 
 - Scope: SESSION
