@@ -548,6 +548,16 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - This variable is used to set the threshold value of memory quota for a query.
 - If the memory quota of a query during execution exceeds the threshold value, TiDB performs the operation designated by the OOMAction option in the configuration file. The initial value of this variable is configured by [`mem-quota-query`](/tidb-configuration-file.md#mem-quota-query).
 
+<<<<<<< HEAD
+=======
+### tidb_memory_usage_alarm_ratio
+
+- Scope: INSTANCE
+- Default value: `0.8`
+- TiDB triggers an alarm when the percentage of the memory it takes exceeds a certain threshold. For the detailed usage description of this feature, see [`memory-usage-alarm-ratio`](/tidb-configuration-file.md#memory-usage-alarm-ratio-new-in-v409).
+- You can set the initial value of this variable by configuring [`memory-usage-alarm-ratio`](/tidb-configuration-file.md#memory-usage-alarm-ratio-new-in-v409).
+
+>>>>>>> 93009172f (Change tidb_memory_usage_alarm_ratio scope to instance (#5988))
 ### tidb_metric_query_range_duration <span class="version-mark">New in v4.0</span>
 
 - Scope: SESSION
