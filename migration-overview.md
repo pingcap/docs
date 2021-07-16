@@ -18,21 +18,25 @@ aliases: ['/docs/dev/migration-overview/']
 
 根据迁移数据所在数据库类型、部署位置、业务数据规模大小、业务需求等因素，会有不同数据迁移选择。下面展示一些常用的数据迁移场景，方便用户依据这些线索选择到最适合自己的数据迁移方案。
 
-## Migrate from Aurora/AWS RDS to TiDB
+## Migrate from Aurora/RDS to TiDB
 
-从 Aurora/AWS RDS 迁移数据到部署在 AWS 的 TiDB 集群， 数据迁移可以氛围全量迁移和增量迁移两个步骤进行，根据你的业务需求选择相应的步骤。考虑到 Aurora/AWS RDS 和 TiDB 部署在不同 region 的情况，方案也包含介绍从不同 region 之前进行数据迁移的最佳实践。
+从 Aurora/RDS 迁移数据到部署在相同 Cloud 的 TiDB 集群， 推荐数据迁移借助 Cloud storage 服务，分为全量迁移和增量迁移两个步骤进行。根据你的业务需求选择相应的步骤。
 
-- Aurora 全量数据迁移到 TiDB 教程
-- AWS RDS 全量数据迁移到 TiDB 教程
+考虑到 Aurora/RDS 和 TiDB 部署在相同 Cloud 的不同 region 的，方案也包含介绍从不同 region 之前进行数据迁移的最佳实践。
+
+- 全量数据迁移
+  - Aurora 全量数据迁移到 TiDB 教程
+  - RDS/self-host MySQL on AWS 全量数据迁移到 TiDB 教程
+  - RDS/self-host MySQL on GCP 全量数据迁移到 TiDB 教程
 - Aurora/AWS RDS 增量数据（Binlog）同步到 TiDB 教程
 
 ## Migrate from MySQL to TiDB
 
-没有 Cloud storage（S3）服务，网络联通和延迟情况良好， 从 MySQL 迁移数据到 TiDB 可以考虑参照下面的方案
+没有 Cloud storage（S3）服务，MySQL 和 TiDB 之间网络联通和延迟情况都良好， 从 MySQL 迁移数据到 TiDB 可以考虑参照下面的方案
 
 - 一键迁移 MySQL 数据到 TiDB 教程
 
-如果你对数据迁移速度有要求，或者数据规模特别大（例如 > 2T），并且允许 TiDB 集群在迁移期间禁止其他业务写入，那么你可以先使用 Lightning 进行快速导入，然后根据业务需要选择是否使用 DM 进行增量数据（Binlog）同步
+如果你对数据迁移速度有要求，或者数据规模特别大（例如 > 2T），并且允许 TiDB 集群在迁移期间禁止其他业务写入，那么你可以使用 Lightning 进行全量数据的快速导入，然后根据业务需要选择使用 DM 进行增量数据（Binlog）同步
 
 - 快速导入数据到 TiDB 教程
 
@@ -42,7 +46,7 @@ aliases: ['/docs/dev/migration-overview/']
 
 - 分表合并迁移到 TiDB 教程
 
-如果分表数据总规模特别大（例如大于 > 2T），并且允许 TiDB 集群在迁移期间禁止其他业务写入，那么你可以使用 Lightning 对分表数据进行快速合并导入，然后根据业务需要选择是否使用 DM 进行增量数据（Binlog）的分表同步
+如果分表数据总规模特别大（例如大于 > 2T），并且允许 TiDB 集群在迁移期间禁止其他业务写入，那么你可以使用 Lightning 对分表的全量数据进行快速合并导入，然后根据业务需要选择使用 DM 进行增量数据（Binlog）的分表合并同步
 
 - 快速合并导入分表数据到 TiDB 教程
 
@@ -51,11 +55,11 @@ aliases: ['/docs/dev/migration-overview/']
 如果你想使用 TiDB Cloud，将现在的业务迁移到 TiDB Cloud，那么可以参考下面的教程
 
 - 业务跨云迁移到 TiDB Cloud
-- IDC 业务迁移上云
+- 云下业务迁移到 TiDB Cloud
 
 ## Restore a new TiDB Cluster
 
 如果你需要构建灾备集群，或者想要将现有 TiDB 的数据快照复制到一套的新的 TiDB 集群进行测试，那么你可以使用 BR 对现有集群进行备份，然后恢复备份数据到一个新的集群
 
-- 构建灾备集群教程
-- 备份数据恢复到新的 TiDB 集群教程
+- 构建 TiDB 灾备集群教程
+- 复制 TiDB 快照到新的 TiDB 集群教程
