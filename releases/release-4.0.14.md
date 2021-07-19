@@ -1,14 +1,26 @@
 ---
-title: tidb v4.0.14 Release Notes
-category: Releases
-aliases: ['/docs/dev/releases/v4.0.14/']
+title: TiDB 4.0.14 Release Notes
 ---
 
-# tidb v4.0.14 Release Notes
+# TiDB 4.0.14 Release Notes
 
-Release date: July 19, 2021
+Release date: July 22, 2021
 
-TiDB version: v4.0.14
+TiDB version: 4.0.14
+
+## Compatibility Changes
+
++ TiDB
+
+    - For users upgrading from TiDB 4.0, the value of `tidb_multi_statement_mode` is now `OFF`. It is recommended to use the multi-statement feature of your client library instead, see the documentation on `tidb_multi_statement_mode` for additional details. [#25749](https://github.com/pingcap/tidb/pull/25749)
+
+## Improvements
+
++ Tools
+
+    + Backup & Restore (BR)
+
+        - Refactor storage.ExternalStorage interface to support compress [#1317](https://github.com/pingcap/br/pull/1317)
 
 ## Bug Fixes
 
@@ -42,21 +54,7 @@ TiDB version: v4.0.14
         * Fix the bug that lightning returns EOF error when CSV file without '\r\n' at the last line and `strict-format = true`. [#1188](https://github.com/pingcap/br/pull/1188)
         * Fix the bug that lightning rebase wrong auto_increment base when the auto_increment field type is float or double. [#1185](https://github.com/pingcap/br/pull/1185)
 
-## Compatibility Changes
-
-+ TiDB
-
-    - For users upgrading from TiDB 4.0, the value of `tidb_multi_statement_mode` is now `OFF`. It is recommended to use the multi-statement feature of your client library instead, see the documentation on `tidb_multi_statement_mode` for additional details. [#25749](https://github.com/pingcap/tidb/pull/25749)
-
-## Improvements
-
-+ Tools
-
-    - BR
-
-        * Refactor storage.ExternalStorage interface to support compress [#1317](https://github.com/pingcap/br/pull/1317)
-
-## Others
+## 以下 note 未分类。请将以下 note 进行分类 (New feature, Improvements, Bug fixes, Compatibility Changes 四类)，并移动到上面对应的标题下。如果某条 note 为多余的，请删除。如果漏抓取了 note，请手动补充
 
 + TiDB
 
