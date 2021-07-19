@@ -93,7 +93,6 @@ TiDB version: 4.0.14
 
     - TiDB Dashboard: Add OIDC based SSO support [#3882](https://github.com/pingcap/pd/pull/3882)
     - Reduce the conflict due to multiple scheduler running in same time [#3858](https://github.com/pingcap/pd/pull/3858)
-    - ```release-note None [#3854](https://github.com/pingcap/pd/pull/3854)
     - Fix the issue that the scheduler may appear again even if we have already executed the delete operation [#3825](https://github.com/pingcap/pd/pull/3825)
     - Update TiDB Dashboard to v2021.06.15.1 [#3797](https://github.com/pingcap/pd/pull/3797)
     - Fix the data race when the scheduler is started before loading TTL configurations [#3773](https://github.com/pingcap/pd/pull/3773)
