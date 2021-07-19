@@ -56,7 +56,7 @@ TiDB version: 4.0.14
     - Fix a bug that TiFlash fails to restart because of incomplete data
     - Fix the issue that old dm files are not removed automatically
     - Fix the panic issue that occurs while executing `SUBSTRING` function with specific arguments
-    - Fix the issue of incorrect results when casting the `TIME` type to the `INTEGER` type
+    - Fix the issue of incorrect results when casting the `INTEGER` type to the `TIME` type
 
 + Tools
 
