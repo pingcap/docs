@@ -13,6 +13,7 @@ TiDB version: 4.0.14
 + TiDB
 
     - For users upgrading from TiDB 4.0, the value of `tidb_multi_statement_mode` is now `OFF`. It is recommended to use the multi-statement feature of your client library instead, see the documentation on `tidb_multi_statement_mode` for additional details. [#25749](https://github.com/pingcap/tidb/pull/25749)
+    - Upgrade Grafana from version 6.1.16 to version 7.5.7 to solve two security vulnerabilities. See the [Grafana post](https://grafana.com/blog/2020/06/03/grafana-6.7.4-and-7.0.2-released-with-important-security-fix/) for details.
 
 ## Improvements
 
