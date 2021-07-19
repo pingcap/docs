@@ -48,15 +48,15 @@ TiDB version: 4.0.14
 
 + TiFlash
 
-    - Fix potential npe in executeTS during DAG compile [#2377](https://github.com/pingcap/tics/pull/2377)
-    - Fix the panic issue that occurs when the read load is heavy [#2280](https://github.com/pingcap/tics/pull/2280)
-    - Fix the issue that TiFlash nodes keep restart because of split failure. [#2218](https://github.com/pingcap/tics/pull/2218)
-    - Fix the bug that TiFlash can not GC delta data under rare case [#2183](https://github.com/pingcap/tics/pull/2183)
-    - Fix the potential concurrency problem when clone the shared delta index. [#2032](https://github.com/pingcap/tics/pull/2032)
-    - Fix the bug that incomplete data may make TiFlash fail to restart [#2002](https://github.com/pingcap/tics/pull/2002)
-    - Fix the problem that old dmfile is not removed atomically [#1924](https://github.com/pingcap/tics/pull/1924)
-    - Fix the problem that TiFlash will crash when executing SUBSTRING function with specific argument [#1914](https://github.com/pingcap/tics/pull/1914)
-    - Fix the issue that cast int as time function in TiFlash's coprocessor may produce wrong result [#1892](https://github.com/pingcap/tics/pull/1892)
+    - Fix the potential panic issue that occurs while compiling DAG requests
+    - Fix the panic issue that occurs when read load is heavy
+    - Fix the issue that TiFlash keeps restarting because of split failure in column storage
+    - Fix a potential bug that TiFlash can not GC delta data
+    - Fix the issue of incorrect results when cloning shared delta index concurrently
+    - Fix a bug that TiFlash fails to restart because of incomplete data
+    - Fix the issue that old dm files are not removed automatically
+    - Fix the panic issue that occurs while executing `SUBSTRING` function with specific arguments
+    - Fix the issue of incorrect results when casting the `TIME` type to the `INTEGER` type
 
 + Tools
 
@@ -67,13 +67,13 @@ TiDB version: 4.0.14
     + TiDB Lightning
 
         - Fix parquet parse when parse decimal type [#1276](https://github.com/pingcap/br/pull/1276)
-        - Fix the bug that Lightning returns EOF error when CSV file without `\r\n` at the last line and `strict-format = true`. [#1188](https://github.com/pingcap/br/pull/1188)
-        - Fix the bug that Lightning rebase wrong auto_increment base when the auto_increment field type is float or double. [#1185](https://github.com/pingcap/br/pull/1185)
-        - Fix the issue that Lightning panics due to batching KV larger than 4 GB. [#1128](https://github.com/pingcap/br/pull/1128)
+        - Fix the bug that Lightning returns EOF error when CSV file without `\r\n` at the last line and `strict-format = true` [#1188](https://github.com/pingcap/br/pull/1188)
+        - Fix the bug that Lightning rebase wrong auto_increment base when the auto_increment field type is float or double [#1185](https://github.com/pingcap/br/pull/1185)
+        - Fix the issue that Lightning panics due to batching KV larger than 4 GB [#1128](https://github.com/pingcap/br/pull/1128)
 
     + Dumpling
 
-        - When using Dumpling to export to S3, we no longer require s3:ListBucket permission on the entire bucket, only the data source prefix itself. [#287](https://github.com/pingcap/dumpling/pull/287)
+        - When using Dumpling to export to S3, we no longer require s3:ListBucket permission on the entire bucket, only the data source prefix itself [#287](https://github.com/pingcap/dumpling/pull/287)
 
     + TiCDC
 
