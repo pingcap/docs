@@ -12,8 +12,8 @@ TiDB version: 4.0.14
 
 + TiDB
 
-    - For users upgrading from TiDB 4.0, the value of `tidb_multi_statement_mode` is now `OFF`. It is recommended to use the multi-statement feature of your client library instead, see the documentation on `tidb_multi_statement_mode` for additional details. [#25749](https://github.com/pingcap/tidb/pull/25749)
-    - Upgrade Grafana from version 6.1.16 to version 7.5.7 to solve two security vulnerabilities. See the [Grafana post](https://grafana.com/blog/2020/06/03/grafana-6.7.4-and-7.0.2-released-with-important-security-fix/) for details.
+    - Change the default value of `tidb_multi_statement_mode` from `WARN` to `OFF` in v4.0. It is recommended to use the multi-statement feature of your client library instead. See [the documentation on `tidb_multi_statement_mode`](/system-variables.md#tidb_multi_statement_mode-new-in-v4011) for details. [#25749](https://github.com/pingcap/tidb/pull/25749)
+    - Upgrade Grafana dashboard from v6.1.16 to v7.5.7 to solve two security vulnerabilities. See the [Grafana post](https://grafana.com/blog/2020/06/03/grafana-6.7.4-and-7.0.2-released-with-important-security-fix/) for details.
 
 ## Improvements
 
@@ -51,9 +51,9 @@ TiDB version: 4.0.14
 
     - BR
 
-        * Fix parquet parse when parse decimal type [#1276](https://github.com/pingcap/br/pull/1276)
-        * Fix the bug that lightning returns EOF error when CSV file without '\r\n' at the last line and `strict-format = true`. [#1188](https://github.com/pingcap/br/pull/1188)
-        * Fix the bug that lightning rebase wrong auto_increment base when the auto_increment field type is float or double. [#1185](https://github.com/pingcap/br/pull/1185)
+        - Fix parquet parse when parse decimal type [#1276](https://github.com/pingcap/br/pull/1276)
+        - Fix the bug that lightning returns EOF error when CSV file without '\r\n' at the last line and `strict-format = true`. [#1188](https://github.com/pingcap/br/pull/1188)
+        - Fix the bug that lightning rebase wrong auto_increment base when the auto_increment field type is float or double. [#1185](https://github.com/pingcap/br/pull/1185)
 
 ## 以下 note 未分类。请将以下 note 进行分类 (New feature, Improvements, Bug fixes, Compatibility Changes 四类)，并移动到上面对应的标题下。如果某条 note 为多余的，请删除。如果漏抓取了 note，请手动补充
 
@@ -104,30 +104,29 @@ TiDB version: 4.0.14
 
 + Tools
 
-    - BR
+    + Backup & Restore (BR)
 
-        * Fix the issue that restore from `mysql` schema would failed. [#1142](https://github.com/pingcap/br/pull/1142)
-        * No realease note [#1131](https://github.com/pingcap/br/pull/1131)
-        * Fix the issue that lightning panic due to batch kv greater than 4.0g. [#1128](https://github.com/pingcap/br/pull/1128)
-        * Speed up restore by merging small backup files. [#655](https://github.com/pingcap/br/pull/655)
+        - Fix the issue that restore from `mysql` schema would failed. [#1142](https://github.com/pingcap/br/pull/1142)
+        - Fix the issue that lightning panic due to batch kv greater than 4.0g. [#1128](https://github.com/pingcap/br/pull/1128)
+        - Speed up restore by merging small backup files. [#655](https://github.com/pingcap/br/pull/655)
 
     - Dumpling
 
-        * Always split TiDB v3.* tables through tidb rowid to save TiDB's memory. [#306](https://github.com/pingcap/dumpling/pull/306)
-        * When using Dumpling to export to S3, we no longer require s3:ListBucket permission on the entire bucket, only the data source prefix itself. [#287](https://github.com/pingcap/dumpling/pull/287)
+        - Always split TiDB v3.* tables through tidb rowid to save TiDB's memory. [#306](https://github.com/pingcap/dumpling/pull/306)
+        - When using Dumpling to export to S3, we no longer require s3:ListBucket permission on the entire bucket, only the data source prefix itself. [#287](https://github.com/pingcap/dumpling/pull/287)
 
     - TiCDC
 
-        * Fix extra partition dispatching when adding new table partition. [#2205](https://github.com/pingcap/ticdc/pull/2205)
-        * Better err msg when PD endpoint missing certificate [#2184](https://github.com/pingcap/ticdc/pull/2184)
-        * Add `capture-session-ttl` in cdc server config [#2169](https://github.com/pingcap/ticdc/pull/2169)
-        * Fix panic when TiCDC fails to read `/proc/meminfo` [#2023](https://github.com/pingcap/ticdc/pull/2023)
-        * Reduce unnecessary memory consumption [#2011](https://github.com/pingcap/ticdc/pull/2011)
-        * Make sorter IO errors more user-friendly. [#1976](https://github.com/pingcap/ticdc/pull/1976)
-        * Fix Unified Sorter memory consumption when tables are many. [#1957](https://github.com/pingcap/ticdc/pull/1957)
-        * Fix a bug that some MySQL connection could leak after MySQL sink meets error and pauses. [#1945](https://github.com/pingcap/ticdc/pull/1945)
-        * Add concurrency limit to the region incremental scan in kv client. [#1926](https://github.com/pingcap/ticdc/pull/1926)
-        * Add metrics for table memory consumption [#1884](https://github.com/pingcap/ticdc/pull/1884)
-        * Owner:  When tikv_gc_life_time is greater than gcttl, use tikv_gc_life_time to calculate the lower bound of gcSafePoint. [#1871](https://github.com/pingcap/ticdc/pull/1871)
-        * Reduce memory malloc in sort heap to avoid too much CPU overhead. [#1862](https://github.com/pingcap/ticdc/pull/1862)
-        * Fix a bug about resolved ts stopped when move a table. [#1827](https://github.com/pingcap/ticdc/pull/1827)
+        - Fix extra partition dispatching when adding new table partition. [#2205](https://github.com/pingcap/ticdc/pull/2205)
+        - Better err msg when PD endpoint missing certificate [#2184](https://github.com/pingcap/ticdc/pull/2184)
+        - Add `capture-session-ttl` in cdc server config [#2169](https://github.com/pingcap/ticdc/pull/2169)
+        - Fix panic when TiCDC fails to read `/proc/meminfo` [#2023](https://github.com/pingcap/ticdc/pull/2023)
+        - Reduce unnecessary memory consumption [#2011](https://github.com/pingcap/ticdc/pull/2011)
+        - Make sorter IO errors more user-friendly. [#1976](https://github.com/pingcap/ticdc/pull/1976)
+        - Fix Unified Sorter memory consumption when tables are many. [#1957](https://github.com/pingcap/ticdc/pull/1957)
+        - Fix a bug that some MySQL connection could leak after MySQL sink meets error and pauses. [#1945](https://github.com/pingcap/ticdc/pull/1945)
+        - Add concurrency limit to the region incremental scan in kv client. [#1926](https://github.com/pingcap/ticdc/pull/1926)
+        - Add metrics for table memory consumption [#1884](https://github.com/pingcap/ticdc/pull/1884)
+        - Owner:  When tikv_gc_life_time is greater than gcttl, use tikv_gc_life_time to calculate the lower bound of gcSafePoint. [#1871](https://github.com/pingcap/ticdc/pull/1871)
+        - Reduce memory malloc in sort heap to avoid too much CPU overhead. [#1862](https://github.com/pingcap/ticdc/pull/1862)
+        - Fix a bug about resolved ts stopped when move a table. [#1827](https://github.com/pingcap/ticdc/pull/1827)
