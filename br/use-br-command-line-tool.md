@@ -361,6 +361,10 @@ br restore db \
 
 In the above command, `--db` specifies the name of the database to be restored. For descriptions of other options, see [Restore all backup data](#restore-all-the-backup-data)).
 
+> **Note**:
+>
+> When you are restoring the backup data, the name of the database specified by `--db` must be the same as the one specified by `-- db` when the backup is in progress, otherwise the process fails. The reason is that the metafile `backupmeta` of the backup data records the database name so you can only restore data to the database with the same name. You are recommended to restore the backup data to the database with the same name of another cluster.
+
 ### Restore a table
 
 To restore a single table to the cluster, execute the `br restore table` command. To get help on this command, execute `br restore table -h` or `br restore table --help`.
