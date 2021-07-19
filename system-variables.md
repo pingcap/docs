@@ -570,7 +570,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 ### tidb_multi_statement_mode <span class="version-mark">New in v4.0.11</span>
 
 - Scope: SESSION | GLOBAL
-- Default value: WARN
+- Default value: For v4.0.14 or a later v4.0 version, the default value is OFF. For v4.0 versions earlier than v4.0.14, the default value is WARN.
 - Permitted values: OFF, ON, WARN
 - This variable controls whether to allow multiple queries to be executed in the same `COM_QUERY` call.
 - To reduce the impact of SQL injection attacks, TiDB now prevents multiple queries from being executed in the same `COM_QUERY` call by default. This variable is intended to be used as part of an upgrade path from earlier versions of TiDB. The following behaviors apply:
