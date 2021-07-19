@@ -6,60 +6,61 @@ aliases: ['/docs/dev/migration-overview/']
 
 # Migration Overview
 
-这篇文章描述如何迁移数据到 TiDB。TiDB 提供了下面几种数据迁移功能
+This document describes how to migrate data to TiDB, which provides the following data migration features:
 
-- 全量数据迁移：使用 TiDB Lightning 将 CSV/Aurora Snapshot/mydumper sql file 数据导入到 TiDB 集群；为了更好的配合从 MySQL/MariaDB 数据库进行全量迁移，TiDB 也提供了数据导出工具 dumpling，支持将全量数据导出成 CSV/mydumper sql 文件。
+- Full data migration: use `TiDB Lightning` to import data(CSV/Aurora Snapshot/mydumper sql) to TiDB cluster; to better match with full migration from MySQL/MariaDB database, TiDB also provides a data export tool, `dumpling`, which supports exporting full data as CSV/mydumper sql format;
 
-  - 快速初始化 TiDB 集群：TiDB Lightning 还提供的快速导入功能，可以实现快速初始化 TiDB 集群的指定表的效果，使用该功能前需要了解，快速导入期间对 TiDB 集群影响极大， 集群不适合对外提供访问；
+  - Fast-initializing TiDB clusters: `TiDB Lightning` also provides the fast import feature, which can achieve the effect of fast initialization of specified tables of TiDB clusters. Before using this feature, you need to understand that the fast import period has a great impact on TiDB clusters, and the clusters are not available;
 
-- 增量数据迁移：使用 TiDB DM 从 MySQL/MariaDB/Aurora 同步 Binlog 到 TiDB，该功能可以极大降低业务迁移过程中停机窗口时间；此外 DM 提供了适合小规模数据量数据库（< 1T）的全量数据迁移功能；
+- Incremental data migration: use `DM` to replicate Binlog from MySQL/MariaDB/Aurora to TiDB, which can greatly reduce the downtime window during migration; in addition, `DM` provides full data migration for small data volume databases (< 1T);
 
-- TiDB 集群复制： TiDB 支持备份恢复功能，该功能可以实现将 TiDB 的某个快照初始化到另一个全新的 TiDB 集群。
+- TiDB Cluster Replication: TiDB supports backup recovery, which allows you to initialize a snapshot of TiDB to a new TiDB cluster.
 
-根据迁移数据所在数据库类型、部署位置、业务数据规模大小、业务需求等因素，会有不同数据迁移选择。下面展示一些常用的数据迁移场景，方便用户依据这些线索选择到最适合自己的数据迁移方案。
+Depending on the type of database where the migrated data is located, deployment location, data size, business requirements and other factors, there will be different data migration options. The following shows some common data migration scenarios to facilitate users to choose the most suitable data migration solution based on these clues.
 
 ## Migrate from Aurora/RDS to TiDB
 
-从 Aurora/RDS 迁移数据到部署在相同 Cloud 的 TiDB 集群， 推荐数据迁移借助 Cloud storage 服务，分为全量迁移和增量迁移两个步骤进行。根据你的业务需求选择相应的步骤。
+To migrate data from Aurora/RDS to a TiDB cluster deployed in the same Cloud, it is recommended that data migration be done in two steps, full migration and incremental migration, using the Cloud storage service. Choose the appropriate step based on your needs.
 
-考虑到 Aurora/RDS 和 TiDB 部署在相同 Cloud 的不同 region 的，方案也包含介绍从不同 region 之前进行数据迁移的最佳实践。
+In addition, given that Aurora/RDS and TiDB are deployed in different regions, even different Cloud Provider, the solution also includes a description of best practices for migrating data from different regions beforehand.
 
-- 全量数据迁移
-  - Aurora 全量数据迁移到 TiDB 教程
-  - RDS/self-host MySQL on AWS 全量数据迁移到 TiDB 教程
-  - RDS/self-host MySQL on GCP 全量数据迁移到 TiDB 教程
-- Aurora/AWS RDS 增量数据（Binlog）同步到 TiDB 教程
+- Full Data Migration
+  - Aurora Full Data Migration to TiDB Tutorial
+  - RDS/Self-host MySQL Full Data Migration to TiDB on AWS Tutorial
+  - RDS/self-host MySQL Full Data Migration to TiDB on GCP Tutorial
+
+- Aurora/AWS RDS Incremental Data (Binlog) replication to TiDB Tutorial
 
 ## Migrate from MySQL to TiDB
 
-没有 Cloud storage（S3）服务，MySQL 和 TiDB 之间网络联通和延迟情况都良好， 从 MySQL 迁移数据到 TiDB 可以考虑参照下面的方案
+Without Cloud storage (S3) service, the network connectivity and latency between MySQL and TiDB are good, you can consider the following solution to migrate data from MySQL to TiDB
 
-- 一键迁移 MySQL 数据到 TiDB 教程
+- One-Click Migration of MySQL Data to TiDB Tutorial
 
-如果你对数据迁移速度有要求，或者数据规模特别大（例如 > 2T），并且允许 TiDB 集群在迁移期间禁止其他业务写入，那么你可以使用 Lightning 进行全量数据的快速导入，然后根据业务需要选择使用 DM 进行增量数据（Binlog）同步
+If you want the import to be fast enough or if the data size is very large (e.g. > 2T), and you allow the TiDB cluster offline during the migration, then you can use `TiDB Lightning` for a fast import of the full amount of data, and then use `DM` for incremental data (Binlog) replication depending on your needs
 
-- 快速导入数据到 TiDB 教程
+- fast data import to TiDB tutorial
 
 ## Merge Shard Tables (on multiple MySQL) instance to TiDB
 
-如果你的业务使用了基于 MySQL 分库的方案来存储数据，业务数据从 MySQL 迁移到 TiDB 后合并这些分表数据到一张合并，你可以使用 DM 进行分表合并迁移
+If your uses MySQL shard scheme and you want to merge all shard data into TiDB, you can use `DM` for shard merge migration.
 
-- 分表合并迁移到 TiDB 教程
+- Shard merge migration to TiDB tutorial
 
-如果分表数据总规模特别大（例如大于 > 2T），并且允许 TiDB 集群在迁移期间禁止其他业务写入，那么你可以使用 Lightning 对分表的全量数据进行快速合并导入，然后根据业务需要选择使用 DM 进行增量数据（Binlog）的分表合并同步
+If the total size of the shard table is very large (e.g.  > 2T) and allows the TiDB cluster offline during the migration, then you can use Lightning to perform a fast merge import of the full amount of shard data, and then choose to use `DM` for incremental shard data (Binlog) merge replication  according to needs
 
-- 快速合并导入分表数据到 TiDB 教程
+- Fast merge import of shard data to TiDB tutorial
 
 ## Migrate to TiDB Cloud
 
-如果你想使用 TiDB Cloud，将现在的业务迁移到 TiDB Cloud，那么可以参考下面的教程
+If you want to use TiDB Cloud and migrate your current business to TiDB Cloud, then you can refer to the following tutorial
 
-- 业务跨云迁移到 TiDB Cloud
-- 云下业务迁移到 TiDB Cloud
+- Migrating across Clouds to TiDB Cloud
+- Migrating to TiDB Cloud from IDC
 
 ## Restore a new TiDB Cluster
 
-如果你需要构建灾备集群，或者想要将现有 TiDB 的数据快照复制到一套的新的 TiDB 集群进行测试，那么你可以使用 BR 对现有集群进行备份，然后恢复备份数据到一个新的集群
+If you need to build a disaster recovery cluster or want to replicate a snapshot of your existing TiDB data to a new TiDB clusters for testing, then you can use BR to backup your existing cluster and then restore the backup data to a new cluster
 
-- 构建 TiDB 灾备集群教程
-- 复制 TiDB 快照到新的 TiDB 集群教程
+- Building a TiDB Disaster Recovery Cluster Tutorial
+- Restore TiDB Snapshots to a New TiDB Cluster Tutorial
