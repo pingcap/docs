@@ -62,7 +62,7 @@ TiDB version: 4.0.14
 
     + Backup & Restore (BR)
 
-        - Support restoring tables in `mysql` schema when explicitly opt-in by including `'mysql.*'` into the `filter`. [#1142](https://github.com/pingcap/br/pull/1142)
+        - Fix the issue that data restore from the `mysql` schema might fail [#1142](https://github.com/pingcap/br/pull/1142)
 
     + TiDB Lightning
 
@@ -77,15 +77,15 @@ TiDB version: 4.0.14
 
     + TiCDC
 
-        - Fix extra partition dispatching when adding new table partition. [#2205](https://github.com/pingcap/ticdc/pull/2205)
+        - Fix extra partition dispatching when adding new table partition [#2205](https://github.com/pingcap/ticdc/pull/2205)
         - Add `capture-session-ttl` in CDC server config [#2169](https://github.com/pingcap/ticdc/pull/2169)
         - Fix panic when TiCDC fails to read `/proc/meminfo` [#2023](https://github.com/pingcap/ticdc/pull/2023)
         - Reduce unnecessary memory consumption [#2011](https://github.com/pingcap/ticdc/pull/2011)
-        - Fix Unified Sorter memory consumption when tables are many. [#1957](https://github.com/pingcap/ticdc/pull/1957)
-        - Fix a bug that some MySQL connection could leak after MySQL sink meets error and pauses. [#1945](https://github.com/pingcap/ticdc/pull/1945)
-        - Owner:  When `tikv_gc_life_time` is greater than gcttl, use `tikv_gc_life_time` to calculate the lower bound of gcSafePoint. [#1871](https://github.com/pingcap/ticdc/pull/1871)
-        - Reduce memory malloc in sort heap to avoid too much CPU overhead. [#1862](https://github.com/pingcap/ticdc/pull/1862)
-        - Fix a bug about resolved ts stopped when move a table. [#1827](https://github.com/pingcap/ticdc/pull/1827)
+        - Fix Unified Sorter memory consumption when tables are many [#1957](https://github.com/pingcap/ticdc/pull/1957)
+        - Fix a bug that some MySQL connection could leak after MySQL sink meets error and pauses [#1945](https://github.com/pingcap/ticdc/pull/1945)
+        - Fix the issue that TiCDC changefeed cannot be created when start ts is less than current ts - gcttl [#1871](https://github.com/pingcap/ticdc/pull/1871)
+        - Reduce memory malloc in sort heap to avoid too much CPU overhead [#1862](https://github.com/pingcap/ticdc/pull/1862)
+        - Fix a bug about resolved ts stopped when move a table [#1827](https://github.com/pingcap/ticdc/pull/1827)
 
 ## 以下 note 未分类。请将以下 note 进行分类 (New feature, Improvements, Bug fixes, Compatibility Changes 四类)，并移动到上面对应的标题下。如果某条 note 为多余的，请删除。如果漏抓取了 note，请手动补充
 
