@@ -15,7 +15,24 @@ TiDB version: 4.0.14
     - Change the default value of `tidb_multi_statement_mode` from `WARN` to `OFF` in v4.0. It is recommended to use the multi-statement feature of your client library instead. See [the documentation on `tidb_multi_statement_mode`](/system-variables.md#tidb_multi_statement_mode-new-in-v4011) for details. [#25749](https://github.com/pingcap/tidb/pull/25749)
     - Upgrade Grafana dashboard from v6.1.16 to v7.5.7 to solve two security vulnerabilities. See the [Grafana post](https://grafana.com/blog/2020/06/03/grafana-6.7.4-and-7.0.2-released-with-important-security-fix/) for details.
 
+## Feature Enhancements
+
++ TiDB Dashboard
+
+    - Add OIDC SSO support. Users can sign into TiDB Dashboard without entering the SQL password by using OIDC SSO services (like Okta, Auth0, etc). [#960](https://github.com/pingcap/tidb-dashboard/pull/960)
+    - Add Debug API UI, which can be used to invoke several common TiDB and PD internal APIs for advanced debugging. [#927](https://github.com/pingcap/tidb-dashboard/pull/927)
+
 ## Improvements
+
++ PD
+
+    - Update TiDB Dashboard to v2021.07.17.1 [#3882](https://github.com/pingcap/pd/pull/3882)
+    - Reduce the conflict due to multiple schedulers running at the same time [#3858](https://github.com/pingcap/pd/pull/3858) [#3854](https://github.com/tikv/pd/pull/3854)
+    - Fix the issue that leader re-election is slow when there are many stores [#3718](https://github.com/pingcap/pd/pull/3718)
+
++ TiDB Dashboard
+
+    - Support sharing session as read-only to avoid further modifications [#960](https://github.com/pingcap/tidb-dashboard/pull/960)
 
 + Tools
 
@@ -57,6 +74,20 @@ TiDB version: 4.0.14
     - Fix the issue that old dm files are not removed automatically
     - Fix the panic issue that occurs while executing `SUBSTRING` function with specific arguments
     - Fix the issue of incorrect results when casting the `INTEGER` type to the `TIME` type
+
++ PD
+
+    - Fix the bug that the scheduler may reappear after executing the delete operation [#3825](https://github.com/pingcap/pd/pull/3825)
+    - Fix the data race when the scheduler is started before loading TTL config [#3773](https://github.com/pingcap/pd/pull/3773)
+    - Fix the bug that PD may panic during the scattering region [#3761](https://github.com/pingcap/pd/pull/3761)
+    - Fix the issue that the priority of some operators is not set correctly [#3703](https://github.com/pingcap/pd/pull/3703)
+    - Fix the bug that PD may panic when deleting the evict leader scheduler from a non-existent store. [#3680](https://github.com/pingcap/pd/pull/3680)
+
++ TiDB Dashboard
+
+    - Fix profiling UI cannot profile all TiDB instances [#944](https://github.com/pingcap/tidb-dashboard/pull/944)
+    - Fix statement UI does not display "# Plans" [#939](https://github.com/pingcap/tidb-dashboard/pull/939)
+    - Fix slow query UI displays "unknown field" error after cluster upgrade [#930](https://github.com/pingcap/tidb-dashboard/pull/930)
 
 + Tools
 
@@ -121,15 +152,9 @@ TiDB version: 4.0.14
     - Add metrics to see pending pd heartbeats number [#10008](https://github.com/tikv/tikv/pull/10008)
     - Change the default merge-check-tick-interval to 2 to speed up the retry of merge process [#9676](https://github.com/tikv/tikv/pull/9676)
     - Fix an issue that split may panic and corrupt the metadata if the split process is too slow and region merge is open. [#9584](https://github.com/tikv/tikv/pull/9584)
-
-+ PD
-
-    - TiDB Dashboard: Add OIDC based SSO support [#3882](https://github.com/pingcap/pd/pull/3882)
-    - Reduce the conflict due to multiple scheduler running in same time [#3858](https://github.com/pingcap/pd/pull/3858)
-    - Fix the issue that the scheduler may appear again even if we have already executed the delete operation [#3825](https://github.com/pingcap/pd/pull/3825)
-    - Update TiDB Dashboard to v2021.06.15.1 [#3797](https://github.com/pingcap/pd/pull/3797)
-    - Fix the data race when the scheduler is started before loading TTL configurations [#3773](https://github.com/pingcap/pd/pull/3773)
-    - Fix pd may get panic during scattering region [#3761](https://github.com/pingcap/pd/pull/3761)
-    - Fix the issue that leader re-election be slow when there are many stores [#3718](https://github.com/pingcap/pd/pull/3718)
-    - Fix the priority problems for some kinds of operators [#3703](https://github.com/pingcap/pd/pull/3703)
-    - Fix the panic issue about remove evict leader scheduler from a nonexistent store [#3680](https://github.com/pingcap/pd/pull/3680)
+    - Fix region heartbeat preventing from TiKV splitting large regions [#10274](https://github.com/tikv/tikv/pull/10274)
+    - Fix wrong statistics due to format inconsistency of CM Sketch between TiKV and TiDB [#10433](https://github.com/tikv/tikv/pull/10433)
+    - Fix wrong apply wait duration metrics [#9966](https://github.com/tikv/tikv/pull/9966)
+    - Fix "Missing Blob" error after using delete_files_in_range with titan [#10232](https://github.com/tikv/tikv/pull/10232)
+    - Shutdown status server first to report correct liveness to health check [#10504](https://github.com/tikv/tikv/pull/10504)
+    - Always respond to stale peer to destroy it quicker [#10400](https://github.com/tikv/tikv/pull/10400)
