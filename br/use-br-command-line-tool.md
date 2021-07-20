@@ -442,6 +442,39 @@ In the above command, `--table` specifies the name of the table to be restored. 
 
 Restoring incremental data is similar to [restoring full data using BR](#restore-all-the-backup-data). Note that when restoring incremental data, make sure that all the data backed up before `last backup ts` has been restored to the target cluster.
 
+### Restore tables created in `mysql` database (experimental feature)
+
+BR backups tables created in `mysql` database by default.
+
+When you are restoring data using BR, the tables created in `mysql` database are not restored by default. If you need to restore them, explicitly contain them using [table filter](/table-filter.md#syntax). The following example restores `mysql.usertable` created in `mysql` database. The command restores `mysql.usertable` and other data at the same time.
+
+{{< copyable "shell-regular" >}}
+
+```shell
+br restore full -f '*.*' -f '!mysql.*' -f 'mysql.usertable' -s $external_storage_url
+```
+
+In the above command, `-f '*.*'` is used to cover the default rules and `-f '!mysql.*'` instructs BR not to restore tables in `mysql` unless otherwise stated. `-f 'mysql.usertable'` indicates that `mysql.usertable` is required to be restored. For details, refer to [table filter document](/table-filter.md#syntax).
+
+If you only need to restore `mysql.usertable`, use the following command:
+
+{{< copyable "shell-regular" >}}
+
+```shell
+br restore full -f 'mysql.usertable' -s $external_storage_url
+```
+
+> **Warning:**
+>
+> Although you can back up and restore system tables (such as `mysql.tidb`) using BR tools, some unexpected conditions might appear after the restore. The known exceptions are as follows:
+>
+> - statistics information table (`mysql.stat_*`) cannot be restored.
+> - system variable table (`mysql.tidb`，`mysql.global_variables`) cannot be restored.
+> - user information table (such as `mysql.user`，`mysql.columns_priv`) cannot be restored.
+> - GC data cannot be restored.
+> 
+> For restoring system tables, more compatibility issues might occur. To avoid something unexpected, do not restore system tables in the production enviroment.
+
 ### Restore Raw KV (experimental feature)
 
 > **Warning:**
