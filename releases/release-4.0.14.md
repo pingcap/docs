@@ -15,7 +15,16 @@ TiDB version: 4.0.14
     - Change the default value of `tidb_multi_statement_mode` from `WARN` to `OFF` in v4.0. It is recommended to use the multi-statement feature of your client library instead. See [the documentation on `tidb_multi_statement_mode`](/system-variables.md#tidb_multi_statement_mode-new-in-v4011) for details. [#25749](https://github.com/pingcap/tidb/pull/25749)
     - Upgrade Grafana dashboard from v6.1.16 to v7.5.7 to solve two security vulnerabilities. See the [Grafana post](https://grafana.com/blog/2020/06/03/grafana-6.7.4-and-7.0.2-released-with-important-security-fix/) for details.
 
++ TiKV
+
+    - Change the default merge-check-tick-interval to 2 to speed up the retry of merge process [#9676](https://github.com/tikv/tikv/pull/9676)
+
 ## Feature Enhancements
+
++ TiKV
+
+    - Add metrics to see pending pd heartbeats number [#10008](https://github.com/tikv/tikv/pull/10008)
+    - BR now supports S3-compatible storage using virtual-host addressing style. [#10242](https://github.com/tikv/tikv/pull/10242)
 
 + TiDB Dashboard
 
@@ -23,6 +32,13 @@ TiDB version: 4.0.14
     - Add Debug API UI, which can be used to invoke several common TiDB and PD internal APIs for advanced debugging. [#927](https://github.com/pingcap/tidb-dashboard/pull/927)
 
 ## Improvements
+
++ TiKV
+
+    - Always respond to stale peer to destroy it quicker [#10400](https://github.com/tikv/tikv/pull/10400)
+    - Shutdown status server first to report correct liveness to health check [#10504](https://github.com/tikv/tikv/pull/10504)
+    - Limit CDC sink memory consumption. [#10147](https://github.com/tikv/tikv/pull/10147)
+    - Approximate split range evenly [#10275](https://github.com/tikv/tikv/pull/10275)
 
 + PD
 
@@ -62,6 +78,21 @@ TiDB version: 4.0.14
     - Expression: fix IN expr critical bug [#25665](https://github.com/pingcap/tidb/pull/25665)
     - Fix panic when 'select ... for update' works on a join operation and the join uses partition table [#25501](https://github.com/pingcap/tidb/pull/25501)
     - Fix the issue point get cached plan of prepared statement is incorrectly used by in transaction point get statement. [#24764](https://github.com/pingcap/tidb/pull/24764)
+
++ TiKV
+
+    - Fix duration calculation panics on certain platforms [#10572](https://github.com/tikv/tikv/pull/10572)
+    - Fix wrong function cast double to double [#10532](https://github.com/tikv/tikv/pull/10532)
+    - Ensure panic output is flushed to the log [#10488](https://github.com/tikv/tikv/pull/10488)
+    - Avoid panic when building a snapshot twice if encryption enabled [#10462](https://github.com/tikv/tikv/pull/10462)
+    - Copr: fix the wrong arguments type of json_unquote [#10425](https://github.com/tikv/tikv/pull/10425)
+    - skip clearing callback during gracefully shutdown to avoid breaking ACID in some cases [#10395](https://github.com/tikv/tikv/pull/10395)
+    - Fix backup threads leak [#10360](https://github.com/tikv/tikv/pull/10360)
+    - Fix an issue that split may panic and corrupt the metadata if the split process is too slow and region merge is open. [#9584](https://github.com/tikv/tikv/pull/9584)
+    - Fix region heartbeat preventing from TiKV splitting large regions [#10274](https://github.com/tikv/tikv/pull/10274)
+    - Fix wrong statistics due to format inconsistency of CM Sketch between TiKV and TiDB [#10433](https://github.com/tikv/tikv/pull/10433)
+    - Fix wrong apply wait duration metrics [#9966](https://github.com/tikv/tikv/pull/9966)
+    - Fix "Missing Blob" error after using delete_files_in_range with titan [#10232](https://github.com/tikv/tikv/pull/10232)
 
 + TiFlash
 
@@ -136,25 +167,3 @@ TiDB version: 4.0.14
     - Don't let SPM be affected by charset [#23295](https://github.com/pingcap/tidb/pull/23295)
     - Time: parse datatime won't truncate the reluctant string. [#22260](https://github.com/pingcap/tidb/pull/22260)
     - Fix a bug that `select into outfile` has no data with year column type [#22185](https://github.com/pingcap/tidb/pull/22185)
-
-+ TiKV
-
-    - Fix duration calculation panics on certain platforms [#10572](https://github.com/tikv/tikv/pull/10572)
-    - Fix wrong function cast double to double [#10532](https://github.com/tikv/tikv/pull/10532)
-    - Ensure panic output is flushed to the log [#10488](https://github.com/tikv/tikv/pull/10488)
-    - Avoid panic when building a snapshot twice if encryption enabled [#10462](https://github.com/tikv/tikv/pull/10462)
-    - Copr: fix the wrong arguments type of json_unquote [#10425](https://github.com/tikv/tikv/pull/10425)
-    - skip clearing callback during gracefully shutdown to avoid breaking ACID in some cases [#10395](https://github.com/tikv/tikv/pull/10395)
-    - Fix backup threads leak [#10360](https://github.com/tikv/tikv/pull/10360)
-    - Approximate split range evenly [#10275](https://github.com/tikv/tikv/pull/10275)
-    - BR now supports S3-compatible storage using virtual-host addressing style. [#10242](https://github.com/tikv/tikv/pull/10242)
-    - Limit CDC sink memory consumption. [#10147](https://github.com/tikv/tikv/pull/10147)
-    - Add metrics to see pending pd heartbeats number [#10008](https://github.com/tikv/tikv/pull/10008)
-    - Change the default merge-check-tick-interval to 2 to speed up the retry of merge process [#9676](https://github.com/tikv/tikv/pull/9676)
-    - Fix an issue that split may panic and corrupt the metadata if the split process is too slow and region merge is open. [#9584](https://github.com/tikv/tikv/pull/9584)
-    - Fix region heartbeat preventing from TiKV splitting large regions [#10274](https://github.com/tikv/tikv/pull/10274)
-    - Fix wrong statistics due to format inconsistency of CM Sketch between TiKV and TiDB [#10433](https://github.com/tikv/tikv/pull/10433)
-    - Fix wrong apply wait duration metrics [#9966](https://github.com/tikv/tikv/pull/9966)
-    - Fix "Missing Blob" error after using delete_files_in_range with titan [#10232](https://github.com/tikv/tikv/pull/10232)
-    - Shutdown status server first to report correct liveness to health check [#10504](https://github.com/tikv/tikv/pull/10504)
-    - Always respond to stale peer to destroy it quicker [#10400](https://github.com/tikv/tikv/pull/10400)
