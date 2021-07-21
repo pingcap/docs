@@ -62,18 +62,19 @@ TiDB version: 4.0.14
 
     + Backup & Restore (BR)
 
-        - Speed up restore by merging small backup files. [#655](https://github.com/pingcap/br/pull/655)
+        - Speed up restore by merging small backup files [#655](https://github.com/pingcap/br/pull/655)
 
     + Dumpling
 
-        - Always split TiDB v3.* tables through `_tidb_rowid` to reduce TiDB's memory use. [#306](https://github.com/pingcap/dumpling/pull/306)
+        - Always split tables using `_tidb_rowid` when the upstream is a TiDB v3.x cluster, which helps reduce TiDB's memory usage [#306](https://github.com/pingcap/dumpling/pull/306)
 
     + TiCDC
 
-        - Better error message when PD endpoint missing certificate [#2184](https://github.com/pingcap/ticdc/pull/2184)
-        - Make sorter IO errors more user-friendly. [#1976](https://github.com/pingcap/ticdc/pull/1976)
-        - Add concurrency limit to the region incremental scan in kv client. [#1926](https://github.com/pingcap/ticdc/pull/1926)
-        - Add metrics for table memory consumption [#1884](https://github.com/pingcap/ticdc/pull/1884)
+        - Improve the error message returned when a PD endpoint misses the certificate [#2184](https://github.com/pingcap/ticdc/pull/2184)
+        - Make the sorter I/O errors more user-friendly [#1976](https://github.com/pingcap/ticdc/pull/1976)
+        - Add a concurrency limit on the Region incremental scan in the KV client to reduce the pressure of TiKV [#1926](https://github.com/pingcap/ticdc/pull/1926)
+        - Add metrics for the table memory consumption [#1884](https://github.com/pingcap/ticdc/pull/1884)
+        - Add `capture-session-ttl` to the TiCDC server configuration [#2169](https://github.com/pingcap/ticdc/pull/2169)
 
 ## Bug Fixes
 
@@ -143,23 +144,22 @@ TiDB version: 4.0.14
 
     + TiDB Lightning
 
-        - Fix parquet parse when parse decimal type [#1276](https://github.com/pingcap/br/pull/1276)
-        - Fix the bug that Lightning returns EOF error when CSV file without `\r\n` at the last line and `strict-format = true` [#1188](https://github.com/pingcap/br/pull/1188)
-        - Fix the bug that Lightning rebase wrong auto_increment base when the auto_increment field type is float or double [#1185](https://github.com/pingcap/br/pull/1185)
-        - Fix the issue that Lightning panics due to batching KV larger than 4 GB [#1128](https://github.com/pingcap/br/pull/1128)
+        - Fix the issue that TiDB fails to parse the `DECIMAL` type data in Parquet files [#1276](https://github.com/pingcap/br/pull/1276)
+        - Fix the EOF error reported when TiDB Lightning splits the imported large CSV files [#1133](https://github.com/pingcap/br/issues/1133)
+        - Fix a bug that an excessively large base value is generated when TiDB Lightning imports tables with the `auto_increment` column of the `FLOAT` or `DOUBLE` type [#1185](https://github.com/pingcap/br/pull/1185)
+        - Fix the issue of TiDB Lightning panic that occurs when generating KV data larger than 4 GB [#1128](https://github.com/pingcap/br/pull/1128)
 
     + Dumpling
 
-        - When using Dumpling to export to S3, we no longer require s3:ListBucket permission on the entire bucket, only the data source prefix itself [#287](https://github.com/pingcap/dumpling/pull/287)
+        - When using Dumpling to export to S3, the `s3:ListBucket` permission is no longer required on the entire bucket. Only the data source prefix itself is required. [#287](https://github.com/pingcap/dumpling/pull/287)
 
     + TiCDC
 
-        - Fix extra partition dispatching when adding new table partition [#2205](https://github.com/pingcap/ticdc/pull/2205)
-        - Add `capture-session-ttl` in CDC server config [#2169](https://github.com/pingcap/ticdc/pull/2169)
-        - Fix panic when TiCDC fails to read `/proc/meminfo` [#2023](https://github.com/pingcap/ticdc/pull/2023)
-        - Reduce unnecessary memory consumption [#2011](https://github.com/pingcap/ticdc/pull/2011)
-        - Fix Unified Sorter memory consumption when tables are many [#1957](https://github.com/pingcap/ticdc/pull/1957)
-        - Fix a bug that some MySQL connection could leak after MySQL sink meets error and pauses [#1945](https://github.com/pingcap/ticdc/pull/1945)
-        - Fix the issue that TiCDC changefeed cannot be created when start ts is less than current ts - gcttl [#1871](https://github.com/pingcap/ticdc/pull/1871)
-        - Reduce memory malloc in sort heap to avoid too much CPU overhead [#1862](https://github.com/pingcap/ticdc/pull/1862)
-        - Fix a bug about resolved ts stopped when move a table [#1827](https://github.com/pingcap/ticdc/pull/1827)
+        - Fix the issue of extra partition dispatching after adding new table partitions [#2205](https://github.com/pingcap/ticdc/pull/2205)
+
+        - Fix the panic issue that occurs when TiCDC fails to read `/proc/meminfo` [#2023](https://github.com/pingcap/ticdc/pull/2023)
+        - Reduce TiCDC's runtime memory consumption [#2011](https://github.com/pingcap/ticdc/pull/2011) [#1957](https://github.com/pingcap/ticdc/pull/1957)
+        - Fix a bug that some MySQL connection might leak after MySQL sink meets the error and pauses [#1945](https://github.com/pingcap/ticdc/pull/1945)
+        - Fix the issue that TiCDC changefeed cannot be created when start TS is less than current TS minus GC TTL [#1871](https://github.com/pingcap/ticdc/pull/1871)
+        - Reduce memory `malloc` in sort heap to avoid too much CPU overhead [#1862](https://github.com/pingcap/ticdc/pull/1862)
+        - Fix a bug that the replication task might stop when moving a table [#1827](https://github.com/pingcap/ticdc/pull/1827)
