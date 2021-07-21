@@ -6,19 +6,22 @@ aliases: ['/docs/dev/migration-overview/']
 
 # Migration Overview
 
-This document describes how to migrate data to TiDB, which provides the following data migration features:
+This document provides an overview of TiDB data migration solutions to help you understand the data migration features and choose the most suitable solution based on your scenarios.
+
+## Data migration features
+
 
 - Full data migration: use `TiDB Lightning` to import data(CSV/Aurora Snapshot/mydumper sql) to TiDB cluster; to better match with full migration from MySQL/MariaDB database, TiDB also provides a data export tool, `dumpling`, which supports exporting full data as CSV/mydumper sql format;
 
   - Fast-initializing TiDB clusters: `TiDB Lightning` also provides the fast import feature, which can achieve the effect of fast initialization of specified tables of TiDB clusters. Before using this feature, you need to understand that the fast import period has a great impact on TiDB clusters, and the clusters are not available;
 
-- Incremental data migration: use `DM` to replicate Binlog from MySQL/MariaDB/Aurora to TiDB, which can greatly reduce the downtime window during migration; in addition, `DM` provides full data migration for small data volume databases (< 1T);
+- Incremental data migration: To greatly reduce the downtime window during migration, it is recommended that you use DM to replicate Binlog from MySQL/MariaDB/Aurora to TiDB.
 
-- TiDB Cluster Replication: TiDB supports backup recovery, which allows you to initialize a snapshot of TiDB to a new TiDB cluster.
+- TiDB Cluster Replication: To initialize a snapshot of TiDB to a new TiDB cluster, you can use the TiDB Backup & Restore (BR) tool.
 
 Depending on the type of database where the migrated data is located, deployment location, data size, business requirements and other factors, there will be different data migration options. The following shows some common data migration scenarios to facilitate users to choose the most suitable data migration solution based on these clues.
 
-## Migrate from Aurora/RDS to TiDB
+### Migrate from Aurora/RDS to TiDB
 
 To migrate data from Aurora/RDS to a TiDB cluster deployed in the same Cloud, it is recommended that data migration be done in two steps, full migration and incremental migration, using the Cloud storage service. Choose the appropriate step based on your needs.
 
@@ -31,7 +34,7 @@ In addition, given that Aurora/RDS and TiDB are deployed in different regions, e
 
 - Aurora/AWS RDS Incremental Data (Binlog) replication to TiDB Tutorial
 
-## Migrate from MySQL to TiDB
+### Migrate from MySQL to TiDB
 
 Without Cloud storage (S3) service, the network connectivity and latency between MySQL and TiDB are good, you can consider the following solution to migrate data from MySQL to TiDB
 
@@ -41,7 +44,7 @@ If you want the import to be fast enough or if the data size is very large (e.g.
 
 - fast data import to TiDB tutorial
 
-## Merge Shard Tables (on multiple MySQL) instance to TiDB
+### Merge Shard Tables (on multiple MySQL) instance to TiDB
 
 If your uses MySQL shard scheme and you want to merge all shard data into TiDB, you can use `DM` for shard merge migration.
 
@@ -51,14 +54,14 @@ If the total size of the shard table is very large (e.g.  > 2T) and allows the T
 
 - Fast merge import of shard data to TiDB tutorial
 
-## Migrate to TiDB Cloud
+### Migrate to TiDB Cloud
 
 If you want to use TiDB Cloud and migrate your current business to TiDB Cloud, then you can refer to the following tutorial
 
 - Migrating across Clouds to TiDB Cloud
 - Migrating to TiDB Cloud from IDC
 
-## Restore a new TiDB Cluster
+### Restore a new TiDB Cluster
 
 If you need to build a disaster recovery cluster or want to replicate a snapshot of your existing TiDB data to a new TiDB clusters for testing, then you can use BR to backup your existing cluster and then restore the backup data to a new cluster
 
