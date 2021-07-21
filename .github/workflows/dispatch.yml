@@ -3,7 +3,7 @@ name: Repsitory dispatch workflow from docs
 on:
   push:
     branches:
-      - master
+      - refactor-migration-docs
 
 jobs:
   build:
