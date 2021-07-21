@@ -14,17 +14,18 @@ TiDB version: 4.0.14
 
     - Change the default value of `tidb_multi_statement_mode` from `WARN` to `OFF` in v4.0. It is recommended to use the multi-statement feature of your client library instead. See [the documentation on `tidb_multi_statement_mode`](/system-variables.md#tidb_multi_statement_mode-new-in-v4011) for details. [#25749](https://github.com/pingcap/tidb/pull/25749)
     - Upgrade Grafana dashboard from v6.1.16 to v7.5.7 to solve two security vulnerabilities. See the [Grafana post](https://grafana.com/blog/2020/06/03/grafana-6.7.4-and-7.0.2-released-with-important-security-fix/) for details.
+    - Enlarge the variable `tidb_stmt_summary_max_stmt_count` default value from 200 to 3000 [#25872](https://github.com/pingcap/tidb/pull/25872)
 
 + TiKV
 
-    - Change the default merge-check-tick-interval to 2 to speed up the retry of merge process [#9676](https://github.com/tikv/tikv/pull/9676)
+    - Change the default value of `merge-check-tick-interval` from `10` to `2` to speed up the Region merge process [#9676](https://github.com/tikv/tikv/pull/9676)
 
 ## Feature Enhancements
 
 + TiKV
 
-    - Add metrics to see pending pd heartbeats number [#10008](https://github.com/tikv/tikv/pull/10008)
-    - BR now supports S3-compatible storage using virtual-host addressing style. [#10242](https://github.com/tikv/tikv/pull/10242)
+    - Add a metric to monitor the number of pending PD heartbeats, which helps locate the issue of slow PD threads [#10008](https://github.com/tikv/tikv/pull/10008)
+    - Support using the virtual-host addressing mode to make BR support the S3-compatible storage [#10242](https://github.com/tikv/tikv/pull/10242)
 
 + TiDB Dashboard
 
@@ -33,12 +34,20 @@ TiDB version: 4.0.14
 
 ## Improvements
 
++ TiDB
+
+    - Change the lock record into put record for the index keys using point/batch point get for update read. [#26223](https://github.com/pingcap/tidb/pull/26223)
+    - Support the MySQL system variable `init_connect` and associated functionality. [#26031](https://github.com/pingcap/tidb/pull/26031)
+    - Support stable result mode [#26003](https://github.com/pingcap/tidb/pull/26003)
+    - Enable the pushdown of builtin function `json_unquote()` to TiKV. [#25721](https://github.com/pingcap/tidb/pull/25721)
+    - Make SPM not be affected by charset [#23295](https://github.com/pingcap/tidb/pull/23295)
+
 + TiKV
 
-    - Always respond to stale peer to destroy it quicker [#10400](https://github.com/tikv/tikv/pull/10400)
-    - Shutdown status server first to report correct liveness to health check [#10504](https://github.com/tikv/tikv/pull/10504)
-    - Limit CDC sink memory consumption. [#10147](https://github.com/tikv/tikv/pull/10147)
-    - Approximate split range evenly [#10275](https://github.com/tikv/tikv/pull/10275)
+    - Shutdown the status server first to make sure that the client can correctly check the shutdown status [#10504](https://github.com/tikv/tikv/pull/10504)
+    - Always respond to stale peers to make sure that these peers are cleared quicker [#10400](https://github.com/tikv/tikv/pull/10400)
+    - Limit the TiCDC sink's memory consumption [#10147](https://github.com/tikv/tikv/pull/10147)
+    - When a Region is too large, use the even split to speed up the split process [#10275](https://github.com/tikv/tikv/pull/10275)
 
 + PD
 
@@ -71,13 +80,19 @@ TiDB version: 4.0.14
 
 + TiDB
 
-    - Generate correct number of rows when all agg funcs are pruned [#26039](https://github.com/pingcap/tidb/pull/26039)
-    - Executor: fix ifnull bug when arg is enum/set [#26035](https://github.com/pingcap/tidb/pull/26035)
+    - Generate a correct number of rows when all agg funcs are pruned [#26039](https://github.com/pingcap/tidb/pull/26039)
+    - Fix ifnull bug when arg is enum/set [#26035](https://github.com/pingcap/tidb/pull/26035)
     - Fix wrong aggregate pruning for some cases [#26033](https://github.com/pingcap/tidb/pull/26033)
     - Fix incorrect result of set type for merge join [#26032](https://github.com/pingcap/tidb/pull/26032)
-    - Expression: fix IN expr critical bug [#25665](https://github.com/pingcap/tidb/pull/25665)
+    - Fix IN expr critical bug [#25665](https://github.com/pingcap/tidb/pull/25665)
     - Fix panic when 'select ... for update' works on a join operation and the join uses partition table [#25501](https://github.com/pingcap/tidb/pull/25501)
-    - Fix the issue point get cached plan of prepared statement is incorrectly used by in transaction point get statement. [#24764](https://github.com/pingcap/tidb/pull/24764)
+    - Fix the issue point get cached plan of a prepared statement is incorrectly used by in transaction point get statement. [#24764](https://github.com/pingcap/tidb/pull/24764)
+    - Fix load data with non-utf8 can succeed [#26142](https://github.com/pingcap/tidb/pull/26142)
+    - Fix a potential statistic object's memory leak when HTTP api is used [#24650](https://github.com/pingcap/tidb/pull/24650)
+    - Fix the security issue for handling ALTER USER statements [#25347](https://github.com/pingcap/tidb/pull/25347)
+    - Fix the bug that `TIKV_REGION_PEERS` table did not have the correct `DOWN` status. [#24918](https://github.com/pingcap/tidb/pull/24918)
+    - Fix parsing DateTime not truncate the reluctant string. [#22260](https://github.com/pingcap/tidb/pull/22260)
+    - Fix `select into outfile` have no data with year column type [#22185](https://github.com/pingcap/tidb/pull/22185)
 
 + TiKV
 
@@ -94,18 +109,6 @@ TiDB version: 4.0.14
     - Fix wrong apply wait duration metrics [#9966](https://github.com/tikv/tikv/pull/9966)
     - Fix "Missing Blob" error after using delete_files_in_range with titan [#10232](https://github.com/tikv/tikv/pull/10232)
 
-+ TiFlash
-
-    - Fix the potential panic issue that occurs while compiling DAG requests
-    - Fix the panic issue that occurs when read load is heavy
-    - Fix the issue that TiFlash keeps restarting because of split failure in column storage
-    - Fix a potential bug that TiFlash can not GC delta data
-    - Fix the issue of incorrect results when cloning shared delta index concurrently
-    - Fix a bug that TiFlash fails to restart because of incomplete data
-    - Fix the issue that old dm files are not removed automatically
-    - Fix the panic issue that occurs while executing `SUBSTRING` function with specific arguments
-    - Fix the issue of incorrect results when casting the `INTEGER` type to the `TIME` type
-
 + PD
 
     - Fix the bug that the scheduler may reappear after executing the delete operation [#3825](https://github.com/pingcap/pd/pull/3825)
@@ -119,6 +122,18 @@ TiDB version: 4.0.14
     - Fix profiling UI cannot profile all TiDB instances [#944](https://github.com/pingcap/tidb-dashboard/pull/944)
     - Fix statement UI does not display "# Plans" [#939](https://github.com/pingcap/tidb-dashboard/pull/939)
     - Fix slow query UI displays "unknown field" error after cluster upgrade [#930](https://github.com/pingcap/tidb-dashboard/pull/930)
+
++ TiFlash
+
+    - Fix the potential panic issue that occurs while compiling DAG requests
+    - Fix the panic issue that occurs when read load is heavy
+    - Fix the issue that TiFlash keeps restarting because of split failure in column storage
+    - Fix a potential bug that TiFlash can not GC delta data
+    - Fix the issue of incorrect results when cloning shared delta index concurrently
+    - Fix a bug that TiFlash fails to restart because of incomplete data
+    - Fix the issue that old dm files are not removed automatically
+    - Fix the panic issue that occurs while executing `SUBSTRING` function with specific arguments
+    - Fix the issue of incorrect results when casting the `INTEGER` type to the `TIME` type
 
 + Tools
 
@@ -148,22 +163,3 @@ TiDB version: 4.0.14
         - Fix the issue that TiCDC changefeed cannot be created when start ts is less than current ts - gcttl [#1871](https://github.com/pingcap/ticdc/pull/1871)
         - Reduce memory malloc in sort heap to avoid too much CPU overhead [#1862](https://github.com/pingcap/ticdc/pull/1862)
         - Fix a bug about resolved ts stopped when move a table [#1827](https://github.com/pingcap/ticdc/pull/1827)
-
-## 以下 note 未分类。请将以下 note 进行分类 (New feature, Improvements, Bug fixes, Compatibility Changes 四类)，并移动到上面对应的标题下。如果某条 note 为多余的，请删除。如果漏抓取了 note，请手动补充
-
-+ TiDB
-
-    - Fix a bug which is caused by prior bug fix PR [#26274](https://github.com/pingcap/tidb/pull/26274)
-    - Change the lock record into put record for the index keys using point/batch point get for update read. [#26223](https://github.com/pingcap/tidb/pull/26223)
-    - Load: fix load data with non-utf8 can succeed [#26142](https://github.com/pingcap/tidb/pull/26142)
-    - TiDB now supports the mysql system variable `init_connect` and associated functionality. [#26031](https://github.com/pingcap/tidb/pull/26031)
-    - Planner: support stable result mode [#26003](https://github.com/pingcap/tidb/pull/26003)
-    - Enlarge the variable tidb_stmt_summary_max_stmt_count default value from 200 to 3000 [#25872](https://github.com/pingcap/tidb/pull/25872)
-    - Enable the pushdown of builtin function `json_unquote()` to TiKV. [#25721](https://github.com/pingcap/tidb/pull/25721)
-    - Planner: select distinct should bypass batchget [#25532](https://github.com/pingcap/tidb/pull/25532)
-    - Important security issue for handling ALTER USER statements [#25347](https://github.com/pingcap/tidb/pull/25347)
-    - Fix the bug that `TIKV_REGION_PEERS` table did not have the correct `DOWN` status. [#24918](https://github.com/pingcap/tidb/pull/24918)
-    - Handle a potential statistic object's memory leak when HTTP api is used [#24650](https://github.com/pingcap/tidb/pull/24650)
-    - Don't let SPM be affected by charset [#23295](https://github.com/pingcap/tidb/pull/23295)
-    - Time: parse datatime won't truncate the reluctant string. [#22260](https://github.com/pingcap/tidb/pull/22260)
-    - Fix a bug that `select into outfile` has no data with year column type [#22185](https://github.com/pingcap/tidb/pull/22185)
