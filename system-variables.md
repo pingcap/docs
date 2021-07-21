@@ -114,10 +114,11 @@ mysql> SELECT * FROM t1;
 - Default value: `utf8mb4`
 - The character set used for new schemas when no character set is specified in the `CREATE SCHEMA` statement.
 
-### `cte_max_recursion_depth`
+### cte_max_recursion_depth
 
-- Scope：SESSION | GLOBAL
-- Default value：1000
+- Scope: SESSION | GLOBAL
+- Default value: `1000`
+- Range: `[0, 4294967295]`
 - Controls the maximum recursion depth in Common Table Expressions.
 
 ### datadir
@@ -555,16 +556,6 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Default value: `OFF`
 - This variable is used to set whether to enable the `LIST (COLUMNS) TABLE PARTITION` feature.
 
-### `tidb_partition_prune_mode` <span class="version-mark">New in v5.1</span>
-
-> **Warning:**
->
-> Currently, the dynamic mode for partitioned tables is an experimental feature. It is not recommended that you use it in the production environment.
-
-- Scope: SESSION | GLOBAL
-- Default value: `static`
-- Specifies whether to enable `dynamic` mode for partitioned tables. For details about the dynamic mode, see [Dynamic Mode for Partitioned Tables](/partitioned-table.md#dynamic-mode).
-
 ### tidb_enable_noop_functions <span class="version-mark">New in v4.0</span>
 
 - Scope: SESSION | GLOBAL
@@ -660,10 +651,10 @@ Query OK, 0 rows affected (0.09 sec)
 - Default value: `ON`
 - This variable is used to control whether to enable the support for window functions. Note that window functions may use reserved keywords. This might cause SQL statements that could be executed normally cannot be parsed after upgrading TiDB. In this case, you can set `tidb_enable_window_function` to `OFF`.
 
-### `tidb_enforce_mpp` <span class="version-mark">New in v5.1</span>
+### tidb_enforce_mpp <span class="version-mark">New in v5.1</span>
 
 - Scope: SESSION
-- Default value: `OFF`
+- Default value: `OFF`. To change this default value, modify the [`performance.enforce-mpp`](/tidb-configuration-file.md#enforce-mpp) configuration value.
 - Controls whether to ignore the optimizer's cost estimation and to forcibly use TiFlash's MPP mode for query execution. The value options are as follows:
     - `0` or `OFF`, which means that the MPP mode is not forcibly used (by default).
     - `1` or `ON`, which means that the cost estimation is ignored and the MPP mode is forcibly used. Note that this setting only takes effect when `tidb_allow_mpp=true`.
@@ -760,6 +751,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: GLOBAL
 - Default value: `10m0s`
+- Range: `[10m0s, 8760h0m0s]`
 - The time limit during which data is retained for each GC, in the format of Go Duration. When a GC happens, the current time minus this value is the safe point.
 
 > **Note:**
@@ -773,6 +765,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: GLOBAL
 - Default value: `10m0s`
+- Range: `[10m0s, 8760h0m0s]`
 - Specifies the GC interval, in the format of Go Duration, for example, `"1h30m"`, and `"15m"`
 
 ### tidb_gc_scan_lock_mode <span class="version-mark">New in v5.0</span>
@@ -945,7 +938,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 ### tidb_memory_usage_alarm_ratio
 
-- Scope: SESSION
+- Scope: INSTANCE
 - Default value: `0.8`
 - TiDB triggers an alarm when the percentage of the memory it takes exceeds a certain threshold. For the detailed usage description of this feature, see [`memory-usage-alarm-ratio`](/tidb-configuration-file.md#memory-usage-alarm-ratio-new-in-v409).
 - You can set the initial value of this variable by configuring [`memory-usage-alarm-ratio`](/tidb-configuration-file.md#memory-usage-alarm-ratio-new-in-v409).
@@ -1107,6 +1100,16 @@ explain select * from t where age=5;
 - Scope: SESSION
 - Default value: `OFF`
 - This variable is used to control whether to allow `INSERT`, `REPLACE`, and `UPDATE` statements to operate on the `_tidb_rowid` column. This variable can be used only when you import data using TiDB tools.
+
+### tidb_partition_prune_mode <span class="version-mark">New in v5.1</span>
+
+> **Warning:**
+
+> Currently, the dynamic pruning mode for partitioned tables is an experimental feature. It is not recommended that you use it in the production environment.
+
+- Scope: SESSION | GLOBAL
+- Default value: `static`
+- Specifies whether to enable `dynamic` mode for partitioned tables. For details about the dynamic pruning mode, see [Dynamic Pruning Mode for Partitioned Tables](/partitioned-table.md#dynamic-mode).
 
 ### tidb_pprof_sql_cpu <span class="version-mark">New in v4.0</span>
 
@@ -1368,7 +1371,7 @@ This variable is an alias for _transaction_isolation_.
 ### warning_count
 
 - Scope: SESSION
-- Default value: 0
+- Default value: `0`
 - This read-only variable indicates the number of warnings that occurred in the statement that was previously executed.
 
 ### windowing_use_high_precision
