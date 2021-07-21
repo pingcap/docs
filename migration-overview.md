@@ -19,7 +19,9 @@ This document provides an overview of TiDB data migration solutions to help you 
 
 - TiDB Cluster Replication: To initialize a snapshot of TiDB to a new TiDB cluster, you can use the TiDB Backup & Restore (BR) tool.
 
-Depending on the type of database where the migrated data is located, deployment location, data size, business requirements and other factors, there will be different data migration options. The following shows some common data migration scenarios to facilitate users to choose the most suitable data migration solution based on these clues.
+## Data migration scenarios 
+
+Depending on your source database, data size, and business requirements, the data migration solutions are different. This document provides the common data migration scenarios as follows to help you choose the most suitable solution.
 
 ### Migrate from Aurora/RDS to TiDB
 
