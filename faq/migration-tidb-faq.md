@@ -12,7 +12,7 @@ For the frequently asked questions about migration-related tools, click the corr
 - [Backup & Restore FAQ](/br/backup-and-restore-faq.md)
 - [TiDB Binlog FAQ](/tidb-binlog/tidb-binlog-faq.md)
 - [TiDB Lightning FAQs](/tidb-lightning/tidb-lightning-faq.md)
-- [Migration FAQs](https://docs.pingcap.com/tidb/stable/migration-tidb-faq)
+- [TiDB Data Migration (DM) FAQs](https://docs.pingcap.com/tidb-data-migration/stable/faq)
 - [Troubleshoot TiCDC](/ticdc/troubleshoot-ticdc.md)
 
 ## Full data export and import
