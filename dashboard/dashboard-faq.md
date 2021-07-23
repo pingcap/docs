@@ -61,7 +61,7 @@ The possible reason is that you have enabled the `prepared-plan-cache` feature o
 
 ### An `unknown field` error is shown in **Slow Queries** page
 
-If the `unknown field` error appears on the **Slow Queries** page after the cluster upgrade, the error is related to a compatibility issue caused by the difference between TiDB Dashboard server fields (which might be updated) and user preferences fields (which are in the browser cache). This issue has been fixed. If you are using v4.0.14/v5.0.3 or an earlier v4.0/v5.0 version, you can resolve this issue by clearing your browser cache.
+If the `unknown field` error appears on the **Slow Queries** page after the cluster upgrade, the error is related to a compatibility issue caused by the difference between TiDB Dashboard server fields (which might be updated) and user preferences fields (which are in the browser cache). This issue has been fixed.
 
 To clear your browser cache, take the following steps:
 
