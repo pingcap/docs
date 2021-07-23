@@ -30,7 +30,7 @@ TiDB version: 4.0.14
 + TiDB Dashboard
 
     - Support OIDC SSO. By setting the OIDC-compatible SSO services (such as Okta and Auth0), users can log into TiDB Dashboard without entering the SQL password. [#960](https://github.com/pingcap/tidb-dashboard/pull/960)
-    - Add the **Debug API** UI, which is an alternative method to the command line to call several common TiDB and PD internal APIs for advanced debugging. [#927](https://github.com/pingcap/tidb-dashboard/pull/927)
+    - Add the **Debug API** UI, which is an alternative method to the command line to call several common TiDB and PD internal APIs for advanced debugging [#927](https://github.com/pingcap/tidb-dashboard/pull/927)
 
 ## Improvements
 
@@ -82,47 +82,47 @@ TiDB version: 4.0.14
 
     - Fix the issue that the `SELECT` result is incompatible with MySQL when joining a subquery with a `WHERE` clause evaluated to `false` [#24865](https://github.com/pingcap/tidb/issues/24865)
     - Fix the calculation error of the `ifnull` function that occurs when the argument is the `ENUM` or `SET` type [#24944](https://github.com/pingcap/tidb/issues/24944)
-    - Fix the wrong aggregate pruning in some cases [#26033](https://github.com/pingcap/tidb/pull/26033)
-    - Fix the incorrect result of the merge join operation that might occur when the column is the `SET` type [#26032](https://github.com/pingcap/tidb/pull/26032)
-    - Fix the issue that TiDB returns wrong results for cartesian join [#25665](https://github.com/pingcap/tidb/pull/25665)
-    - Fix the panic issue that occurs when `SELECT ... FOR UPDATE` works on a join operation and the join uses a partitioned table [#25501](https://github.com/pingcap/tidb/pull/25501)
-    - Fix the issue that the cached `prepared` plan is incorrectly used for `point get` [#24764](https://github.com/pingcap/tidb/pull/24764)
-    - Fix the issue that the `LOAD DATA` statement can abnormally import non-utf8 data [#26142](https://github.com/pingcap/tidb/pull/26142)
+    - Fix the wrong aggregate pruning in some cases [#25202](https://github.com/pingcap/tidb/issues/25202)
+    - Fix the incorrect result of the merge join operation that might occur when the column is the `SET` type [#25669](https://github.com/pingcap/tidb/issues/25669)
+    - Fix the issue that TiDB returns wrong results for cartesian join [#25591](https://github.com/pingcap/tidb/issues/25591)
+    - Fix the panic issue that occurs when `SELECT ... FOR UPDATE` works on a join operation and the join uses a partitioned table [#20028](https://github.com/pingcap/tidb/issues/20028)
+    - Fix the issue that the cached `prepared` plan is incorrectly used for `point get` [#24741](https://github.com/pingcap/tidb/issues/24741)
+    - Fix the issue that the `LOAD DATA` statement can abnormally import non-utf8 data [#25979](https://github.com/pingcap/tidb/issues/25979)
     - Fix a potential memory leak issue that occurs when accessing the statistics via an HTTP API [#24650](https://github.com/pingcap/tidb/pull/24650)
-    - Fix a security issue that occurs when executing the `ALTER USER` statement [#25347](https://github.com/pingcap/tidb/pull/25347)
-    - Fix the bug that `TIKV_REGION_PEERS` table did not have the correct `DOWN` status. [#24918](https://github.com/pingcap/tidb/pull/24918)
-    - Fix the issue that invalid strings are not truncated when parsing `DateTime` [#22260](https://github.com/pingcap/tidb/pull/22260)
-    - Fix the issue that the `select into outfile` statement might have no result when the column type is `YEAR` [#22185](https://github.com/pingcap/tidb/pull/22185)
+    - Fix a security issue that occurs when executing the `ALTER USER` statement [#25225](https://github.com/pingcap/tidb/issues/25225)
+    - Fix the bug that `TIKV_REGION_PEERS` table did not have the correct `DOWN` status [#24879](https://github.com/pingcap/tidb/issues/24879)
+    - Fix the issue that invalid strings are not truncated when parsing `DateTime` [#22231](https://github.com/pingcap/tidb/issues/22231)
+    - Fix the issue that the `select into outfile` statement might have no result when the column type is `YEAR` [#22159](https://github.com/pingcap/tidb/issues/22159)
 
 + TiKV
 
-    - Fix the issue that the duration calculation might panic on certain platforms [#10572](https://github.com/tikv/tikv/pull/10572)
+    - Fix the issue that the duration calculation might panic on certain platforms [#related-issue](https://github.com/rust-lang/rust/issues/86470#issuecomment-877557654)
     - Fix the wrong function that casts `DOUBLE` to `DOUBLE` [#25200](https://github.com/pingcap/tidb/issues/25200)
     - Fix the issue that the panic log might be lost when using the async logger [#8998](https://github.com/tikv/tikv/issues/8998)
     - Fix the panic issue that occurs when building a snapshot twice if encryption is enabled [#10462](https://github.com/tikv/tikv/pull/10462)
     - Fix the wrong arguments type of the `json_unquote()` function in the coprocessor [#10176](https://github.com/tikv/tikv/issues/10176)
-    - Fix the issues of suspicious warnings during shutdown and the non-deterministic response from Raftstore [#10395](https://github.com/tikv/tikv/pull/10395)
-    - Fix the issue of backup threads leak [#10360](https://github.com/tikv/tikv/pull/10360)
-    - Fix the issue that Region split might panic and corrupt the metadata if the split process is too slow and Region merge is on-going [#9584](https://github.com/tikv/tikv/pull/9584)
-    - Fix the issue that the Region heartbeats prevent TiKV from splitting large Regions in some situation [#10274](https://github.com/tikv/tikv/pull/10274)
-    - Fix the wrong statistics caused by the format inconsistency of CM Sketch between TiKV and TiDB [#10433](https://github.com/tikv/tikv/pull/10433)
-    - Fix the wrong statistics of the `apply wait duration` metric [#9966](https://github.com/tikv/tikv/pull/9966)
+    - Fix the issues of suspicious warnings during shutdown and the non-deterministic response from Raftstore [#10353](https://github.com/tikv/tikv/issues/10353) [#10307](https://github.com/tikv/tikv/issues/10307)
+    - Fix the issue of backup threads leak [#10287](https://github.com/tikv/tikv/issues/10287)
+    - Fix the issue that Region split might panic and corrupt the metadata if the split process is too slow and Region merge is on-going [#8456](https://github.com/tikv/tikv/issues/8456) [#8783](https://github.com/tikv/tikv/issues/8783)
+    - Fix the issue that the Region heartbeats prevent TiKV from splitting large Regions in some situation [#10111](https://github.com/tikv/tikv/issues/10111)
+    - Fix the wrong statistics caused by the format inconsistency of CM Sketch between TiKV and TiDB [#25638](https://github.com/pingcap/tidb/issues/25638)
+    - Fix the wrong statistics of the `apply wait duration` metric [#9893](https://github.com/tikv/tikv/issues/9893)
     - Fix the "Missing Blob" error after using `delete_files_in_range` in Titan [#10232](https://github.com/tikv/tikv/pull/10232)
 
 + PD
 
-    - Fix a bug that the scheduler might reappear after executing the delete operation [#3825](https://github.com/pingcap/pd/pull/3825)
-    - Fix the data race issue that might occur when the scheduler is started before the temporary configuration is loaded [#3773](https://github.com/pingcap/pd/pull/3773)
+    - Fix a bug that the scheduler might reappear after executing the delete operation [#2572](https://github.com/tikv/pd/issues/2572)
+    - Fix the data race issue that might occur when the scheduler is started before the temporary configuration is loaded [#3771](https://github.com/tikv/pd/issues/3771)
     - Fix a PD panic issue that might occur during the Region scattering operation [#3761](https://github.com/pingcap/pd/pull/3761)
     - Fix the issue that the priority of some operators is not set correctly [#3703](https://github.com/pingcap/pd/pull/3703)
-    - Fix a PD panic issue that might occur when deleting the `evict-leader` scheduler from a non-existent store [#3680](https://github.com/pingcap/pd/pull/3680)
+    - Fix a PD panic issue that might occur when deleting the `evict-leader` scheduler from a non-existent store [#3660](https://github.com/tikv/pd/issues/3660)
     - Fix the issue that the PD Leader re-election is slow when there are many stores [#3697](https://github.com/tikv/pd/issues/3697)
 
 + TiDB Dashboard
 
     - Fix the issue that the **Profiling** UI cannot profile all TiDB instances [#944](https://github.com/pingcap/tidb-dashboard/pull/944)
     - Fix the issue that the **Statements** UI does not display "Plan Count" [#939](https://github.com/pingcap/tidb-dashboard/pull/939)
-    - Fix the issue that the **Slow Query** UI might display the "unknown field" error after cluster upgrade [#930](https://github.com/pingcap/tidb-dashboard/pull/930)
+    - Fix the issue that the **Slow Query** UI might display the "unknown field" error after cluster upgrade [#902](https://github.com/pingcap/tidb-dashboard/issues/902)
 
 + TiFlash
 
@@ -151,7 +151,7 @@ TiDB version: 4.0.14
 
     + Dumpling
 
-        - When using Dumpling to export to S3, the `s3:ListBucket` permission is no longer required on the entire bucket. Only the data source prefix itself is required. [#287](https://github.com/pingcap/dumpling/pull/287)
+        - When using Dumpling to export to S3, the `s3:ListBucket` permission is no longer required on the entire bucket. Only the data source prefix itself is required [#898](https://github.com/pingcap/br/issues/898)
 
     + TiCDC
 
@@ -160,6 +160,6 @@ TiDB version: 4.0.14
         - Fix the panic issue that occurs when TiCDC fails to read `/proc/meminfo` [#2023](https://github.com/pingcap/ticdc/pull/2023)
         - Reduce TiCDC's runtime memory consumption [#2011](https://github.com/pingcap/ticdc/pull/2011) [#1957](https://github.com/pingcap/ticdc/pull/1957)
         - Fix a bug that some MySQL connection might leak after MySQL sink meets the error and pauses [#1945](https://github.com/pingcap/ticdc/pull/1945)
-        - Fix the issue that TiCDC changefeed cannot be created when start TS is less than current TS minus GC TTL [#1871](https://github.com/pingcap/ticdc/pull/1871)
-        - Reduce memory `malloc` in sort heap to avoid too much CPU overhead [#1862](https://github.com/pingcap/ticdc/pull/1862)
+        - Fix the issue that TiCDC changefeed cannot be created when start TS is less than current TS minus GC TTL [#1839](https://github.com/pingcap/ticdc/issues/1839)
+        - Reduce memory `malloc` in sort heap to avoid too much CPU overhead [#1853](https://github.com/pingcap/ticdc/issues/1853)
         - Fix a bug that the replication task might stop when moving a table [#1827](https://github.com/pingcap/ticdc/pull/1827)
