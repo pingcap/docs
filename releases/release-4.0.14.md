@@ -36,7 +36,7 @@ TiDB version: 4.0.14
 
 + TiDB
 
-    ?- Change the lock records into put record for the index keys using `point get` or `batch point get` for `UPDATE` reads [#26223](https://github.com/pingcap/tidb/pull/26223)
+    - Change the `LOCK` records into the `PUT` record for the index keys using `point get` or `batch point get` for `UPDATE` reads [#26223](https://github.com/pingcap/tidb/pull/26223)
     - Support the MySQL system variable `init_connect` and its associated features [#26031](https://github.com/pingcap/tidb/pull/26031)
     - Support the stable result mode to make the query results more stable [#26003](https://github.com/pingcap/tidb/pull/26003)
     - Support pushing down the built-in function `json_unquote()` to TiKV [#25721](https://github.com/pingcap/tidb/pull/25721)
