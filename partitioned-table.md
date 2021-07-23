@@ -587,13 +587,13 @@ For `HASH` partitioned tables, `COALESCE PARTITION` and `ADD PARTITION` are not 
 
 `EXCHANGE PARTITION` works by swapping a partition and a non-partitioned table, similar to how renaming a table like `RENAME TABLE t1 TO t1_tmp, t2 TO t1, t1_tmp TO t2` works.
 
-- As an example: `ALTER TABLE partitioned_table EXCHANGE PARTITION p1 WITH TABLE non_partitioned_table`, swaps the table `non_partitioned_table` with the partition `p1` in the `partitioned_table` table.
+For example, `ALTER TABLE partitioned_table EXCHANGE PARTITION p1 WITH TABLE non_partitioned_table` swaps the `non_partitioned_table` table in the `p1` partition with the `partitioned_table` table.
 
-Please be sure that all rows you are exchanging into the partition are matching the partition definition, or else they will not be found and there may be other issues.
+Ensure that all rows that you are exchanging into the partition match the partition definition; otherwise, these rows will not be found and cause unexpected issues.
 
 > **Warning:**
 >
-> - `EXCHANGE PARTITION` is an experimental feature. It is not yet recommended to use it in a production environment. To enable it, set the `tidb_enable_exchange_partition` system variable to `ON`.
+> `EXCHANGE PARTITION` is an experimental feature. It is not recommended to use it in a production environment. To enable it, set the `tidb_enable_exchange_partition` system variable to `ON`.
 
 ### Range partition management
 
