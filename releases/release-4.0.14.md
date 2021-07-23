@@ -156,7 +156,6 @@ TiDB version: 4.0.14
     + TiCDC
 
         - Fix the issue of extra partition dispatching after adding new table partitions [#2205](https://github.com/pingcap/ticdc/pull/2205)
-
         - Fix the panic issue that occurs when TiCDC fails to read `/proc/meminfo` [#2023](https://github.com/pingcap/ticdc/pull/2023)
         - Reduce TiCDC's runtime memory consumption [#2011](https://github.com/pingcap/ticdc/pull/2011) [#1957](https://github.com/pingcap/ticdc/pull/1957)
         - Fix a bug that some MySQL connection might leak after MySQL sink meets the error and pauses [#1945](https://github.com/pingcap/ticdc/pull/1945)
