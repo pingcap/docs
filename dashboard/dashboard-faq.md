@@ -66,16 +66,16 @@ To clear your browser cache, take the following steps:
 
 1. Open TiDB Dashboard page.
 
-2. Open Developer Tools, click the **Menu Bar** and
-  - Firefox: Menu ➤ Web Developer ➤ Toggle Tools, or Tools ➤ Web Developer ➤ Toggle Tools
-  - Chrome: More tools ➤ Developer tools
+2. Open Developer Tools. Different browsers have different ways of opening Developer Tools. After clicking the **Menu Bar**:
+
+  - Firefox: Menu ➤ Web Developer ➤ Toggle Tools, or Tools ➤ Web Developer ➤ Toggle Tools.
+  - Chrome: More tools ➤ Developer tools.
   - Safari: Develop ➤ Show Web Inspector. If you can't see the Develop menu, go to Safari ➤ Preferences ➤ Advanced, and check the Show Develop menu in menu bar checkbox. 
-  - Opera: Developer ➤ Developer tools
 
-Example in chrome
+    In the following example, Chrome is used.
 
-![Opening DevTools from Chrome's main menu](/media/dashboard/dashboard-faq-devtools.png)
+    ![Opening DevTools from Chrome's main menu](/media/dashboard/dashboard-faq-devtools.png)
 
-3. Select the **Application** panel, expand the **Local Storage** menu and select the **TiDB Dashboard page domain**, click the **Clear All** button.
+3. Select the **Application** panel, expand the **Local Storage** menu and select the **TiDB Dashboard page domain**. Click the **Clear All** button.
 
-![Clear the Local Storage](/media/dashboard/dashboard-faq-devtools-application.png)
+    ![Clear the Local Storage](/media/dashboard/dashboard-faq-devtools-application.png)
