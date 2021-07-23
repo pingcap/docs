@@ -814,7 +814,7 @@ SET tidb_slow_log_threshold = 200;
 ### tidb_stmt_summary_max_stmt_count <span class="version-mark">New in v4.0</span>
 
 - Scope: SESSION | GLOBAL
-- Default value: 200 (the value of the default configuration file)
+- Default value: Before v4.0.14, the default value is 200. Since v4.0.14, the default value is 3000 (the value of the default configuration file).
 - This variable is used to set the maximum number of statements that the statement summary stores in memory.
 
 ### tidb_stmt_summary_refresh_interval <span class="version-mark">New in v4.0</span>
