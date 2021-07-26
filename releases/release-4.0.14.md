@@ -4,11 +4,11 @@ title: TiDB 4.0.14 Release Notes
 
 # TiDB 4.0.14 Release Notes
 
-Release date: July 22, 2021
+Release date: July 29, 2021
 
 TiDB version: 4.0.14
 
-## Compatibility Changes
+## Compatibility changes
 
 + TiDB
 
@@ -20,11 +20,11 @@ TiDB version: 4.0.14
 
     - Change the default value of `merge-check-tick-interval` from `10` to `2` to speed up the Region merge process [#9676](https://github.com/tikv/tikv/pull/9676)
 
-## Feature Enhancements
+## Feature enhancements
 
 + TiKV
 
-    - Add a metric to monitor the number of pending PD heartbeats, which helps locate the issue of slow PD threads [#10008](https://github.com/tikv/tikv/pull/10008)
+    - Add a metric `pending` to monitor the number of pending PD heartbeats, which helps locate the issue of slow PD threads [#10008](https://github.com/tikv/tikv/pull/10008)
     - Support using the virtual-host addressing mode to make BR support the S3-compatible storage [#10242](https://github.com/tikv/tikv/pull/10242)
 
 + TiDB Dashboard
@@ -36,7 +36,7 @@ TiDB version: 4.0.14
 
 + TiDB
 
-    - Change the `LOCK` records into the `PUT` record for the index keys using `point get` or `batch point get` for `UPDATE` reads [#26223](https://github.com/pingcap/tidb/pull/26223)
+    - Change the `LOCK` record into the `PUT` record for the index keys using `point get` or `batch point get` for `UPDATE` reads [#26223](https://github.com/pingcap/tidb/pull/26223)
     - Support the MySQL system variable `init_connect` and its associated features [#26031](https://github.com/pingcap/tidb/pull/26031)
     - Support the stable result mode to make the query results more stable [#26003](https://github.com/pingcap/tidb/pull/26003)
     - Support pushing down the built-in function `json_unquote()` to TiKV [#25721](https://github.com/pingcap/tidb/pull/25721)
@@ -76,7 +76,7 @@ TiDB version: 4.0.14
         - Add metrics for the table memory consumption [#1884](https://github.com/pingcap/ticdc/pull/1884)
         - Add `capture-session-ttl` to the TiCDC server configuration [#2169](https://github.com/pingcap/ticdc/pull/2169)
 
-## Bug Fixes
+## Bug fixes
 
 + TiDB
 
@@ -90,7 +90,7 @@ TiDB version: 4.0.14
     - Fix the issue that the `LOAD DATA` statement can abnormally import non-utf8 data [#25979](https://github.com/pingcap/tidb/issues/25979)
     - Fix a potential memory leak issue that occurs when accessing the statistics via an HTTP API [#24650](https://github.com/pingcap/tidb/pull/24650)
     - Fix a security issue that occurs when executing the `ALTER USER` statement [#25225](https://github.com/pingcap/tidb/issues/25225)
-    - Fix the bug that `TIKV_REGION_PEERS` table did not have the correct `DOWN` status [#24879](https://github.com/pingcap/tidb/issues/24879)
+    - Fix a bug that the `TIKV_REGION_PEERS` table cannot correctly handle the `DOWN` status [#24879](https://github.com/pingcap/tidb/issues/24879)
     - Fix the issue that invalid strings are not truncated when parsing `DateTime` [#22231](https://github.com/pingcap/tidb/issues/22231)
     - Fix the issue that the `select into outfile` statement might have no result when the column type is `YEAR` [#22159](https://github.com/pingcap/tidb/issues/22159)
 
@@ -104,7 +104,7 @@ TiDB version: 4.0.14
     - Fix the issues of suspicious warnings during shutdown and the non-deterministic response from Raftstore [#10353](https://github.com/tikv/tikv/issues/10353) [#10307](https://github.com/tikv/tikv/issues/10307)
     - Fix the issue of backup threads leak [#10287](https://github.com/tikv/tikv/issues/10287)
     - Fix the issue that Region split might panic and corrupt the metadata if the split process is too slow and Region merge is on-going [#8456](https://github.com/tikv/tikv/issues/8456) [#8783](https://github.com/tikv/tikv/issues/8783)
-    - Fix the issue that the Region heartbeats prevent TiKV from splitting large Regions in some situation [#10111](https://github.com/tikv/tikv/issues/10111)
+    - Fix the issue that the Region heartbeats prevent TiKV from splitting large Regions in some situations [#10111](https://github.com/tikv/tikv/issues/10111)
     - Fix the wrong statistics caused by the format inconsistency of CM Sketch between TiKV and TiDB [#25638](https://github.com/pingcap/tidb/issues/25638)
     - Fix the wrong statistics of the `apply wait duration` metric [#9893](https://github.com/tikv/tikv/issues/9893)
     - Fix the "Missing Blob" error after using `delete_files_in_range` in Titan [#10232](https://github.com/tikv/tikv/pull/10232)
@@ -140,7 +140,7 @@ TiDB version: 4.0.14
 
     + Backup & Restore (BR)
 
-        - Fix the issue that data restore from the `mysql` schema might fail [#1142](https://github.com/pingcap/br/pull/1142)
+        - Fix the issue that the data restore from the `mysql` schema might fail [#1142](https://github.com/pingcap/br/pull/1142)
 
     + TiDB Lightning
 
@@ -151,7 +151,7 @@ TiDB version: 4.0.14
 
     + Dumpling
 
-        - When using Dumpling to export to S3, the `s3:ListBucket` permission is no longer required on the entire bucket. Only the data source prefix itself is required [#898](https://github.com/pingcap/br/issues/898)
+        - When using Dumpling to export data to the S3 storage, the `s3:ListBucket` permission is no longer required on the entire bucket. The permission is required only on the data source prefix. [#898](https://github.com/pingcap/br/issues/898)
 
     + TiCDC
 
