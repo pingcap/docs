@@ -1,7 +1,7 @@
 ---
 title: Deploy TiDB Dashboard
 summary: Learn how to deploy TiDB Dashboard.
-category: how-to
+aliases: ['/docs/dev/dashboard/dashboard-ops-deploy/']
 ---
 
 # Deploy TiDB Dashboard
@@ -10,9 +10,9 @@ The TiDB Dashboard UI is built into the PD component for v4.0 or higher versions
 
 See the following documents to learn how to deploy a standard TiDB cluster:
 
-+ [Quick Start Guide for the TiDB Database Platform](/quick-start-with-tidb.md#deploy-a-local-test-environment-using-tiup-playground)
++ [Quick Start Guide for the TiDB Database Platform](/quick-start-with-tidb.md)
 + [Deploy TiDB in Production Environment](/production-deployment-using-tiup.md)
-+ [Kubernetes environment deployment](https://pingcap.com/docs/tidb-in-kubernetes/stable/access-dashboard/)
++ [Kubernetes environment deployment](https://docs.pingcap.com/tidb-in-kubernetes/stable/access-dashboard)
 
 > **Note:**
 >
@@ -50,7 +50,10 @@ http://192.168.0.123:2379/dashboard/
 
 > **Note:**
 >
-> This feature is available only in the later version of the `tiup cluster` deployment tool (v1.0.3 or later). You can upgrade `tiup cluster` with the following commands:
+> This feature is available only in the later version of the `tiup cluster` deployment tool (v1.0.3 or later).
+>
+> <details>
+> <summary>Upgrade TiUP Cluster</summary>
 >
 > {{< copyable "shell-regular" >}}
 >
@@ -58,6 +61,8 @@ http://192.168.0.123:2379/dashboard/
 > tiup update --self
 > tiup update cluster --force
 > ```
+>
+> </details>
 
 ### Switch to another PD instance to serve TiDB Dashboard
 

@@ -1,29 +1,26 @@
 ---
 title: DROP TABLE | TiDB SQL Statement Reference
 summary: An overview of the usage of DROP TABLE for the TiDB database.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/drop-table/']
+aliases: ['/docs/dev/sql-statements/sql-statement-drop-table/','/docs/dev/reference/sql/statements/drop-table/']
 ---
 
 # DROP TABLE
 
 This statement drops a table from the currently selected database. An error is returned if the table does not exist, unless the `IF EXISTS` modifier is used.
 
-By design `DROP TABLE` will also drop views, as they share the same namespace as tables.
-
 ## Synopsis
 
-**DropTableStmt:**
+```ebnf+diagram
+DropTableStmt ::=
+    'DROP' OptTemporary TableOrTables IfExists TableNameList RestrictOrCascadeOpt
 
-![DropTableStmt](/media/sqlgram/DropTableStmt.png)
+TableOrTables ::=
+    'TABLE'
+|   'TABLES'
 
-**TableOrTables:**
-
-![TableOrTables](/media/sqlgram/TableOrTables.png)
-
-**TableNameList:**
-
-![TableNameList](/media/sqlgram/TableNameList.png)
+TableNameList ::=
+    TableName ( ',' TableName )*
+```
 
 ## Examples
 
@@ -49,10 +46,10 @@ Query OK, 0 rows affected (0.23 sec)
 ## MySQL compatibility
 
 * Dropping a table with `IF EXISTS` does not return a warning when attempting to drop a table that does not exist. [Issue #7867](https://github.com/pingcap/tidb/issues/7867)
+* Currently `RESTRICT` and `CASCADE` are only supported syntactically.
 
 ## See also
 
-* [DROP VIEW](/sql-statements/sql-statement-drop-view.md)
 * [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
 * [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)
 * [SHOW TABLES](/sql-statements/sql-statement-show-tables.md)

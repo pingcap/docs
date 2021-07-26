@@ -1,8 +1,7 @@
 ---
 title: TiDB Binlog FAQ
 summary: Learn about the frequently asked questions (FAQs) and answers about TiDB Binlog.
-category: faq
-aliases: ['/docs/dev/reference/tidb-binlog/faq/']
+aliases: ['/docs/dev/tidb-binlog/tidb-binlog-faq/','/docs/dev/reference/tidb-binlog/faq/','/docs/dev/reference/tools/tidb-binlog/faq/']
 ---
 
 # TiDB Binlog FAQ
@@ -14,6 +13,10 @@ This document collects the frequently asked questions (FAQs) about TiDB Binlog.
 - There is no impact on the query.
 
 - There is a slight performance impact on `INSERT`, `DELETE` and `UPDATE` transactions. In latency, a p-binlog is written concurrently in the TiKV prewrite stage before the transactions are committed. Generally, writing binlog is faster than TiKV prewrite, so it does not increase latency. You can check the response time of writing binlog in Pump's monitoring panel.
+
+## How high is the replication latency of TiDB Binlog?
+
+The latency of TiDB Binlog replication is measured in seconds, which is generally about 3 seconds during off-peak hours.
 
 ## What privileges does Drainer need to replicate data to the downstream MySQL or TiDB cluster?
 
@@ -123,9 +126,9 @@ If the data in the downstream is not affected, you can redeploy Drainer on the n
 
 2. To restore the latest data of the backup file, use Reparo to set `start-tso` = {snapshot timestamp of the full backup + 1} and `end-ts` = 0 (or you can specify a point in time).
 
-## How to redeploy Drainer when enabling `ignore-error` in Master-Slave replication triggers a critical error?
+## How to redeploy Drainer when enabling `ignore-error` in Primary-Secondary replication triggers a critical error?
 
-If a critical error is trigged when TiDB fails to write binlog after enabling `ignore-error`, TiDB stops writing binlog and binlog data loss occurs. To resume replication, perform the following steps:
+If a critical error is triggered when TiDB fails to write binlog after enabling `ignore-error`, TiDB stops writing binlog and binlog data loss occurs. To resume replication, perform the following steps:
 
 1. Stop the Drainer instance.
 
@@ -238,5 +241,32 @@ To solve the problem, follow these steps:
 
 1. Check `drainer.log`. Search `exec failed` for the last failed DDL operation before the Drainer process is exited.
 2. Change the DDL version to the one compatible to the downstream. Perform this step manually in the downstream database.
-3. Check `drainer.log`. Search for the failed DDL operation and find the `commit-ts` of this operation.
+3. Check `drainer.log`. Search for the failed DDL operation and find the `commit-ts` of this operation. For example:
+
+    ```
+    [2020/05/21 09:51:58.019 +08:00] [INFO] [syncer.go:398] ["add ddl item to syncer, you can add this commit ts to `ignore-txn-commit-ts` to skip this ddl if needed"] [sql="ALTER TABLE `test` ADD INDEX (`index1`)"] ["commit ts"=416815754209656834].
+    ```
+
 4. Modify the `drainer.toml` configuration file. Add the `commit-ts` in the `ignore-txn-commit-ts` item and restart the Drainer node.
+
+## TiDB fails to write to binlog and gets stuck, and `listener stopped, waiting for manual stop` appears in the log
+
+In TiDB v3.0.12 and earlier versions, the binlog write failure causes TiDB to report the fatal error. TiDB does not automatically exit but only stops the service, which seems like getting stuck. You can see the `listener stopped, waiting for manual stop` error in the log.
+
+You need to determine the specific causes of the binlog write failure. If the failure occurs because binlog is slowly written into the downstream, you can consider scaling out Pump or increasing the timeout time for writing binlog.
+
+Since v3.0.13, the error-reporting logic is optimized. The binlog write failure causes transaction execution to fail and TiDB Binlog will return an error but will not get TiDB stuck.
+
+## TiDB writes duplicate binlogs to Pump
+
+This issue does not affect the downstream and replication logic.
+
+When the binlog write fails or becomes timeout, TiDB retries writing binlog to the next available Pump node until the write succeeds. Therefore, if the binlog write to a Pump node is slow and causes TiDB timeout (default 15s), then TiDB determines that the write fails and tries to write to the next Pump node. If binlog is actually successfully written to the timeout-causing Pump node, the same binlog is written to multiple Pump nodes. When Drainer processes the binlog, it automatically de-duplicates binlogs with the same TSO, so this duplicate write does not affect the downstream and replication logic.
+
+## Reparo is interrupted during the full and incremental restore process. Can I use the last TSO in the log to resume replication?
+
+Yes. Reparo does not automatically enable the safe-mode when you start it. You need to perform the following steps manually:
+
+1. After Reparo is interrupted, record the last TSO in the log as `checkpoint-tso`.
+2. Modify the Reparo configuration file, set the configuration item `start-tso` to `checkpoint-tso + 1`, set `stop-tso` to `checkpoint-tso + 80,000,000,000` (approximately five minutes after the `checkpoint-tso`), and set `safe-mode` to `true`. Start Reparo, and Reparo replicates data to `stop-tso` and then stops automatically.
+3. After Reparo stops automatically, set `start-tso` to `checkpoint tso + 80,000,000,001`, set `stop-tso` to `0`, and set `safe-mode` to `false`. Start Reparo to resume replication.

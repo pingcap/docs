@@ -1,7 +1,7 @@
 ---
 title: Statement Execution Details of TiDB Dashboard
 summary: View the execution details of a single SQL statement in TiDB Dashboard.
-category: how-to
+aliases: ['/docs/dev/dashboard/dashboard-statement-details/']
 ---
 
 # Statement Execution Details of TiDB Dashboard
@@ -10,7 +10,7 @@ Click any item in the list to enter the detail page of the SQL statement to view
 
 - The overview of SQL statements, which includes the SQL template, the SQL template ID, the current time range of displayed SQL executions, the number of execution plans and the database in which the SQL statement is executed (see area 1 in the image below).
 - The execution plan list: If the SQL statement has multiple execution plans, this list is displayed. You can select different execution plans, and the details of the selected plans are displayed below the list. If there is only one execution plan, the list is not displayed (see area 2 below).
-- Execution detail of plans, which displays the detailed information of the selected execution plans. See [Execution plan in details](#execution-plan-in-details) (area 3 in the image below).
+- Execution detail of plans, which displays the detailed information of the selected execution plans. See [Execution plan in details](#execution-details-of-plans) (area 3 in the image below).
 
 ![Details](/media/dashboard/dashboard-statement-detail.png)
 
@@ -19,7 +19,7 @@ Click any item in the list to enter the detail page of the SQL statement to view
 The execution detail of plans includes the following information:
 
 - SQL sample: The text of a certain SQL statement that is actually executed corresponding to the plan. Any SQL statement that has been executed within the time range might be used as a SQL sample.
-- Execution plan: For details of the execution plan, see [Understand the Query Execution Plan](/query-execution-plan.md). If multiple execution plans are selected, only (any) one of them is displayed.
+- Execution plan: For details of the execution plan, see [Understand the Query Execution Plan](/explain-overview.md). If multiple execution plans are selected, only (any) one of them is displayed.
 - For basic information, execution time, Coprocessor read, transaction, and slow query of the SQL statement, you can click the corresponding tab titles to switch among different information.
 
 ![Execution details of plans](/media/dashboard/dashboard-statement-plans-detail.png)

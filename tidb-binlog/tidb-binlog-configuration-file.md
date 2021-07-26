@@ -1,8 +1,7 @@
 ---
 title: TiDB Binlog Configuration File
 summary: Learn the configuration items of TiDB Binlog.
-category: reference
-aliases: ['/docs/dev/reference/tidb-binlog/config/']
+aliases: ['/docs/dev/tidb-binlog/tidb-binlog-configuration-file/','/docs/dev/reference/tidb-binlog/config/']
 ---
 
 # TiDB Binlog Configuration File
@@ -228,7 +227,7 @@ Default value: `mysql`
 
 #### ignore-txn-commit-ts
 
-* Specifies the commit timestamp at which the binlog is ignored.
+* Specifies the commit timestamp at which the binlog is ignored, such as `[416815754209656834, 421349811963822081]`.
 * Default value: `[]`
 
 #### ignore-schemas

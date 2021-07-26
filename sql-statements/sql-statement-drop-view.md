@@ -1,8 +1,7 @@
 ---
 title: DROP VIEW | TiDB SQL Statement Reference
 summary: An overview of the usage of DROP VIEW for the TiDB database.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/drop-view/']
+aliases: ['/docs/dev/sql-statements/sql-statement-drop-view/','/docs/dev/reference/sql/statements/drop-view/']
 ---
 
 # DROP VIEW
@@ -11,17 +10,16 @@ This statement drops an view object from the currently selected database. It doe
 
 ## Synopsis
 
-**DropViewStmt:**
+```ebnf+diagram
+DropViewStmt ::=
+    'DROP' 'VIEW' ( 'IF' 'EXISTS' )? TableNameList RestrictOrCascadeOpt
 
-![DropViewStmt](/media/sqlgram/DropViewStmt.png)
+TableNameList ::=
+    TableName ( ',' TableName )*
 
-**TableNameList:**
-
-![TableNameList](/media/sqlgram/TableNameList.png)
-
-**TableName:**
-
-![TableName](/media/sqlgram/TableName.png)
+TableName ::=
+    Identifier ('.' Identifier)?
+```
 
 ## Examples
 
@@ -76,9 +74,9 @@ mysql> SELECT * FROM t1;
 
 ## MySQL compatibility
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/report-issue.md) on GitHub.
+This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
 
 ## See also
 
-* [DROP TABLE](/sql-statements/sql-statement-drop-table.md)
 * [CREATE VIEW](/sql-statements/sql-statement-create-view.md)
+* [DROP TABLE](/sql-statements/sql-statement-drop-table.md)

@@ -1,7 +1,6 @@
 ---
 title: TiDB 2.1.2 Release Notes
-category: Releases
-aliases: ['/docs/dev/releases/2.1.2/']
+aliases: ['/docs/dev/releases/release-2.1.2/','/docs/dev/releases/2.1.2/']
 ---
 
 # TiDB 2.1.2 Release Notes
@@ -20,8 +19,7 @@ On December 22, 2018, TiDB 2.1.2 is released. The corresponding TiDB Ansible 2.1
 
 ## PD
 
-- Fix the Region information update issue about Region merge
-[#1377](https://github.com/pingcap/pd/pull/1377)
+- Fix the Region information update issue about Region merge [#1377](https://github.com/pingcap/pd/pull/1377)
 
 ## TiKV
 
@@ -37,4 +35,4 @@ On December 22, 2018, TiDB 2.1.2 is released. The corresponding TiDB Ansible 2.1
     - Fix the issue that `Too many open engines` occurs after the checkpoint is used to restart Lightning
 + TiDB Binlog
     - Eliminate some bottlenecks of Drainer writing data to Kafka
-    - Support the [Kafka version of TiDB Binlog](https://pingcap.com/docs/v2.1/reference/tidb-binlog/tidb-binlog-kafka/)
+    - Support the Kafka version of TiDB Binlog

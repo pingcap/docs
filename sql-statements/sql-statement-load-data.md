@@ -1,8 +1,7 @@
 ---
 title: LOAD DATA | TiDB SQL Statement Reference
 summary: An overview of the usage of LOAD DATA for the TiDB database.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/load-data/']
+aliases: ['/docs/dev/sql-statements/sql-statement-load-data/','/docs/dev/reference/sql/statements/load-data/']
 ---
 
 # LOAD DATA
@@ -11,9 +10,10 @@ The `LOAD DATA` statement batch loads data into a TiDB table.
 
 ## Synopsis
 
-**LoadDataStmt:**
-
-![LoadDataStmt](/media/sqlgram/LoadDataStmt.png)
+```ebnf+diagram
+LoadDataStmt ::=
+    'LOAD' 'DATA' LocalOpt 'INFILE' stringLit DuplicateOpt 'INTO' 'TABLE' TableName CharsetOpt Fields Lines IgnoreLines ColumnNameOrUserVarListOptWithBrackets LoadDataSetSpecOpt
+```
 
 ## Parameters
 
@@ -61,17 +61,17 @@ In addition, TiDB currently only supports parsing the syntax of the `DuplicateOp
 
 ```sql
 CREATE TABLE trips (
-    ->  trip_id bigint NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    ->  duration integer not null,
-    ->  start_date datetime,
-    ->  end_date datetime,
-    ->  start_station_number integer,
-    ->  start_station varchar(255),
-    ->  end_station_number integer,
-    ->  end_station varchar(255),
-    ->  bike_number varchar(255),
-    ->  member_type varchar(255)
-    -> );
+    trip_id bigint NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    duration integer not null,
+    start_date datetime,
+    end_date datetime,
+    start_station_number integer,
+    start_station varchar(255),
+    end_station_number integer,
+    end_station varchar(255),
+    bike_number varchar(255),
+    member_type varchar(255)
+    );
 ```
 
 ```
@@ -105,14 +105,16 @@ In the above example, `x'2c'` is the hexadecimal representation of the `,` chara
 
 ## MySQL compatibility
 
-* TiDB will by default commit every 20 000 rows. This behavior is similar to MySQL NDB Cluster, but not the default configuration with the InnoDB storage engine.
+This statement is understood to be fully compatible with MySQL except for the `LOAD DATA...REPLACE INTO` syntax [#24515](https://github.com/pingcap/tidb/issues/24515). Any other compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
 
 > **Note:**
 >
-> Committing through splitting a transaction is at the expense of breaking the atomicity and isolation of the transaction. When performing this operation, you must ensure that there are **no other** ongoing operations on the table. When an error occurs, **manual intervention is required to check the consistency and integrity of the data**. Therefore, it is not recommended to set this variable in a production environment.
+> In earlier releases of TiDB, `LOAD DATA` committed every 20000 rows. By default, TiDB now commits all rows in one transaction. This can result in the error `ERROR 8004 (HY000) at line 1: Transaction is too large, size: 100000058` after upgrading from TiDB 4.0 or earlier versions.
+>
+> The recommended way to resolve this error is to increase the `txn-total-size-limit` value in your `tidb.toml` file. If you are unable to increase this limit, you can also restore the previous behavior by setting [`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size) to `20000`.
 
 ## See also
 
 * [INSERT](/sql-statements/sql-statement-insert.md)
-* [Optimistic Transaction Model](/optimistic-transaction.md)
 * [Import Example Database](/import-example-data.md)
+* [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)

@@ -1,13 +1,12 @@
 ---
 title: START TRANSACTION | TiDB SQL Statement Reference
 summary: An overview of the usage of START TRANSACTION for the TiDB database.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/start-transaction/']
+aliases: ['/docs/dev/sql-statements/sql-statement-start-transaction/','/docs/dev/reference/sql/statements/start-transaction/']
 ---
 
 # START TRANSACTION
 
-This statement starts a new transaction inside of TiDB. It is similar to the statements `BEGIN` and `SET autocommit=0`.
+This statement starts a new transaction inside of TiDB. It is similar to the statement `BEGIN`.
 
 In the absence of a `START TRANSACTION` statement, every statement will by default autocommit in its own transaction. This behavior ensures MySQL compatibility.
 
@@ -15,7 +14,14 @@ In the absence of a `START TRANSACTION` statement, every statement will by defau
 
 **BeginTransactionStmt:**
 
-![BeginTransactionStmt](/media/sqlgram/BeginTransactionStmt.png)
+```ebnf+diagram
+BeginTransactionStmt ::=
+    'BEGIN' ( 'PESSIMISTIC' | 'OPTIMISTIC' )?
+|   'START' 'TRANSACTION' ( 'READ' ( 'WRITE' | 'ONLY' ( ( 'WITH' 'TIMESTAMP' 'BOUND' TimestampBound )? | AsOfClause ) ) | 'WITH' 'CONSISTENT' 'SNAPSHOT' | 'WITH' 'CAUSAL' 'CONSISTENCY' 'ONLY' )?
+
+AsOfClause ::=
+    ( 'AS' 'OF' 'TIMESTAMP' Expression)
+```
 
 ## Examples
 
@@ -35,10 +41,13 @@ Query OK, 0 rows affected (0.01 sec)
 
 ## MySQL compatibility
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/report-issue.md) on GitHub.
+* `START TRANSACTION` immediately starts a transaction inside TiDB. This differs from MySQL, where `START TRANSACTION` lazily creates a transaction. But `START TRANSACTION` in TiDB is equivalent to MySQL's `START TRANSACTION WITH CONSISTENT SNAPSHOT`.
+
+* The statement `START TRANSACTION READ ONLY` is parsed for compatibility with MySQL, but still allows write operations.
 
 ## See also
 
 * [COMMIT](/sql-statements/sql-statement-commit.md)
 * [ROLLBACK](/sql-statements/sql-statement-rollback.md)
 * [BEGIN](/sql-statements/sql-statement-begin.md)
+* [START TRANSACTION WITH CAUSAL CONSISTENCY ONLY](/transaction-overview.md#causal-consistency)

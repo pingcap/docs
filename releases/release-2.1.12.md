@@ -1,7 +1,6 @@
 ---
 title: TiDB 2.1.12 Release Notes
-category: Releases
-aliases: ['/docs/dev/releases/2.1.12/']
+aliases: ['/docs/dev/releases/release-2.1.12/','/docs/dev/releases/2.1.12/']
 ---
 
 # TiDB 2.1.12 Release Notes
@@ -36,8 +35,7 @@ TiDB Ansible version: 2.1.12
 
 ## PD
 
-- Fix the issue that etcd leader election is blocked in extreme conditions
-[#1576](https://github.com/pingcap/pd/pull/1576)
+- Fix the issue that etcd leader election is blocked in extreme conditions [#1576](https://github.com/pingcap/pd/pull/1576)
 
 ## TiKV
 

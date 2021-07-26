@@ -1,11 +1,10 @@
 ---
 title: Bidirectional Replication Between TiDB Clusters
 summary: Learn how to perform the bidirectional replication between TiDB clusters.
-category: reference
-aliases: ['/docs/dev/reference/tidb-binlog/bidirectional-replication/']
+aliases: ['/docs/dev/tidb-binlog/bidirectional-replication-between-tidb-clusters/','/docs/dev/reference/tidb-binlog/bidirectional-replication/']
 ---
 
-# Bidirectional Replication Between TiDB Clusters
+# Bidirectional Replication between TiDB Clusters
 
 This document describes the bidirectional replication between two TiDB clusters, how the replication works, how to enable it, and how to replicate DDL operations.
 

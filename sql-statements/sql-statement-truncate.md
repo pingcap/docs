@@ -1,8 +1,7 @@
 ---
 title: TRUNCATE | TiDB SQL Statement Reference
 summary: An overview of the usage of TRUNCATE for the TiDB database.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/truncate/']
+aliases: ['/docs/dev/sql-statements/sql-statement-truncate/','/docs/dev/reference/sql/statements/truncate/']
 ---
 
 # TRUNCATE
@@ -63,7 +62,7 @@ Query OK, 0 rows affected (0.11 sec)
 
 ## MySQL compatibility
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/report-issue.md) on GitHub.
+This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
 
 ## See also
 

@@ -1,8 +1,7 @@
 ---
 title: SHOW CREATE TABLE | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW CREATE TABLE for the TiDB database.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/show-create-table/']
+aliases: ['/docs/dev/sql-statements/sql-statement-show-create-table/','/docs/dev/reference/sql/statements/show-create-table/']
 ---
 
 # SHOW CREATE TABLE
@@ -11,9 +10,9 @@ This statement shows the exact statement to recreate an existing table using SQL
 
 ## Synopsis
 
-**ShowStmt:**
+**ShowCreateTableStmt:**
 
-![ShowStmt](/media/sqlgram/ShowStmt.png)
+![ShowCreateTableStmt](/media/sqlgram/ShowCreateTableStmt.png)
 
 **TableName:**
 
@@ -38,7 +37,7 @@ mysql> SHOW CREATE TABLE t1;
 
 ## MySQL compatibility
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/report-issue.md) on GitHub.
+This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
 
 ## See also
 

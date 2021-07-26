@@ -1,7 +1,7 @@
 ---
 title: Minimal Deployment Topology
 summary: Learn the minimal deployment topology of TiDB clusters.
-category: how-to
+aliases: ['/docs/dev/minimal-deployment-topology/']
 ---
 
 # Minimal Deployment Topology
@@ -21,6 +21,8 @@ This document describes the minimal deployment topology of TiDB clusters.
 
 - [The simple template for the minimal topology](https://github.com/pingcap/docs/blob/master/config-templates/simple-mini.yaml)
 - [The complex template for the minimal topology](https://github.com/pingcap/docs/blob/master/config-templates/complex-mini.yaml)
+
+For detailed descriptions of the configuration items in the above TiDB cluster topology file, see [Topology Configuration File for Deploying TiDB Using TiUP](/tiup/tiup-cluster-topology-reference.md).
 
 > **Note:**
 >

@@ -1,8 +1,7 @@
 ---
 title: TiDB Lightning Glossary
 summary: List of special terms used in TiDB Lightning.
-category: glossary
-aliases: ['/docs/dev/reference/tools/tidb-lightning/glossary/']
+aliases: ['/docs/dev/tidb-lightning/tidb-lightning-glossary/','/docs/dev/reference/tools/tidb-lightning/glossary/']
 ---
 
 # TiDB Lightning Glossary
@@ -15,7 +14,7 @@ This page explains the special terms used in TiDB Lightning's logs, monitoring, 
 
 ### Analyze
 
-An operation to rebuild the [statistics](/statistics.md) information of a TiDB table, i.e. running the [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) statement.
+An operation to rebuild the [statistics](/statistics.md) information of a TiDB table, which is running the [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) statement.
 
 Because TiDB Lightning imports data without going through TiDB, the statistics information is not automatically updated. Therefore, TiDB Lightning explicitly analyzes every table after importing. This step can be omitted by setting the `post-restore.analyze` configuration to `false`.
 
@@ -33,13 +32,7 @@ Because TiDB Lightning imports data without going through TiDB, the `AUTO_INCREM
 
 Back end is the destination where TiDB Lightning sends the parsed result. Also spelled as "backend".
 
-See [TiDB Lightning TiDB-backend](/tidb-lightning/tidb-lightning-tidb-backend.md) for details.
-
-### Black-white list
-
-A configuration list that specifies which tables to be imported and which should be excluded.
-
-See [TiDB Lightning Table Filter](/tidb-lightning/tidb-lightning-table-filter.md) for details.
+See [TiDB Lightning Backends](/tidb-lightning/tidb-lightning-backends.md) for details.
 
 <!-- C -->
 
@@ -59,11 +52,13 @@ In TiDB Lightning, the checksum of a table is a set of 3 numbers calculated from
 
 TiDB Lightning [validates the imported data](/tidb-lightning/tidb-lightning-faq.md#how-to-ensure-the-integrity-of-the-imported-data) by comparing the [local](/tidb-lightning/tidb-lightning-glossary.md#local-checksum) and [remote checksums](/tidb-lightning/tidb-lightning-glossary.md#remote-checksum) of every table. The program would stop if any pair does not match. You can skip this check by setting the `post-restore.checksum` configuration to `false`.
 
-See also the [Troubleshooting guide](/troubleshoot-tidb-lightning.md#checksum-failed-checksum-mismatched-remote-vs-local) for how to properly handle checksum mismatch.
+See also the [FAQs](/tidb-lightning/tidb-lightning-faq.md#checksum-failed-checksum-mismatched-remote-vs-local) for how to properly handle checksum mismatch.
 
 ### Chunk
 
-Equivalent to a single file in the data source.
+A continuous range of source data, normally equivalent to a single file in the data source.
+
+When a file is too large, TiDB Lightning might split a file into multiple chunks.
 
 ### Compaction
 
@@ -100,6 +95,16 @@ TiDB Lightning transfers data to TiKV Importer through engines. It first opens a
 Engines use TiKV Importer's `import-dir` as temporary storage, which are sometimes referred to as "engine files".
 
 See also [data engine](/tidb-lightning/tidb-lightning-glossary.md#data-engine) and [index engine](/tidb-lightning/tidb-lightning-glossary.md#index-engine).
+
+<!-- F -->
+
+## F
+
+### Filter
+
+A configuration list that specifies which tables to be imported or excluded.
+
+See [Table Filter](/table-filter.md) for details.
 
 <!-- I -->
 

@@ -1,8 +1,7 @@
 ---
 title: EXECUTE | TiDB SQL Statement Reference
 summary: An overview of the usage of EXECUTE for the TiDB database.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/execute/']
+aliases: ['/docs/dev/sql-statements/sql-statement-execute/','/docs/dev/reference/sql/statements/execute/']
 ---
 
 # EXECUTE
@@ -11,13 +10,10 @@ The `EXECUTE` statement provides an SQL interface to server-side prepared statem
 
 ## Synopsis
 
-**ExecuteStmt:**
-
-![ExecuteStmt](/media/sqlgram/ExecuteStmt.png)
-
-**Identifier:**
-
-![Identifier](/media/sqlgram/Identifier.png)
+```ebnf+diagram
+ExecuteStmt ::=
+    'EXECUTE' Identifier ( 'USING' UserVariable ( ',' UserVariable )* )?
+```
 
 ## Examples
 
@@ -42,7 +38,7 @@ Query OK, 0 rows affected (0.00 sec)
 
 ## MySQL compatibility
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/report-issue.md) on GitHub.
+This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
 
 ## See also
 

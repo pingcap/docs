@@ -1,8 +1,7 @@
 ---
 title: CREATE USER | TiDB SQL Statement Reference
 summary: An overview of the usage of CREATE USER for the TiDB database.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/create-user/']
+aliases: ['/docs/dev/sql-statements/sql-statement-create-user/','/docs/dev/reference/sql/statements/create-user/']
 ---
 
 # CREATE USER
@@ -11,43 +10,65 @@ This statement creates a new user, specified with a password. In the MySQL privi
 
 ## Synopsis
 
-**CreateUserStmt:**
+```ebnf+diagram
+CreateUserStmt ::=
+    'CREATE' 'USER' IfNotExists UserSpecList RequireClauseOpt ConnectionOptions PasswordOrLockOptions
 
-![CreateUserStmt](/media/sqlgram/CreateUserStmt.png)
+IfNotExists ::=
+    ('IF' 'NOT' 'EXISTS')?
 
-**IfNotExists:**
+UserSpecList ::=
+    UserSpec ( ',' UserSpec )*
 
-![IfNotExists](/media/sqlgram/IfNotExists.png)
+UserSpec ::=
+    Username AuthOption
 
-**UserSpecList:**
+AuthOption ::=
+    ( 'IDENTIFIED' ( 'BY' ( AuthString | 'PASSWORD' HashString ) | 'WITH' StringName ( 'BY' AuthString | 'AS' HashString )? ) )?
 
-![UserSpecList](/media/sqlgram/UserSpecList.png)
-
-**UserSpec:**
-
-![UserSpec](/media/sqlgram/UserSpec.png)
-
-**AuthOption:**
-
-![AuthOption](/media/sqlgram/AuthOption.png)
-
-**StringName:**
-
-![StringName](/media/sqlgram/StringName.png)
+StringName ::=
+    stringLit
+|   Identifier
+```
 
 ## Examples
+
+Create a user with the `newuserpassword` password.
 
 ```sql
 mysql> CREATE USER 'newuser' IDENTIFIED BY 'newuserpassword';
 Query OK, 1 row affected (0.04 sec)
+```
 
+Create a user who can only log in to `192.168.1.1`.
+
+```sql
 mysql> CREATE USER 'newuser2'@'192.168.1.1' IDENTIFIED BY 'newuserpassword';
+Query OK, 1 row affected (0.02 sec)
+```
+
+Create a user who is enforced to log in using TLS connection.
+
+```sql
+CREATE USER 'newuser3'@'%' REQUIRE SSL IDENTIFIED BY 'newuserpassword';
+Query OK, 1 row affected (0.02 sec)
+```
+
+Create a user who is required to use X.509 certificate at login.
+
+```sql
+CREATE USER 'newuser4'@'%' REQUIRE ISSUER '/C=US/ST=California/L=San Francisco/O=PingCAP' IDENTIFIED BY 'newuserpassword';
 Query OK, 1 row affected (0.02 sec)
 ```
 
 ## MySQL compatibility
 
-* Several of the `CREATE` options are not yet supported by TiDB, and will be parsed but ignored.
+The following `CREATE USER` options are not yet supported by TiDB, and will be parsed but ignored:
+
+* TiDB does not support `WITH MAX_QUERIES_PER_HOUR`, `WITH MAX_UPDATES_PER_HOUR`, and `WITH MAX_USER_CONNECTIONS` options.
+* TiDB does not support the `DEFAULT ROLE` option.
+* TiDB does not support `PASSWORD EXPIRE`, `PASSWORD HISTORY` or other options related to password.
+* TiDB does not support the `ACCOUNT LOCK` and `ACCOUNT UNLOCK` options.
 
 ## See also
 

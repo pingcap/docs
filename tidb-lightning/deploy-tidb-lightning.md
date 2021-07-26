@@ -1,25 +1,23 @@
 ---
 title: TiDB Lightning Deployment
 summary: Deploy TiDB Lightning to quickly import large amounts of new data.
-category: reference
-aliases: ['/docs/dev/reference/tools/tidb-lightning/deployment/']
+aliases: ['/docs/dev/tidb-lightning/deploy-tidb-lightning/','/docs/dev/reference/tools/tidb-lightning/deployment/']
 ---
 
 # TiDB Lightning Deployment
 
-This document describes the hardware requirements of TiDB Lightning using the default Importer-backend, and how to deploy it using TiDB Ansible or manually.
+This document describes the hardware requirements of TiDB Lightning using the Local-backend, and how to deploy it manually.
 
-If you wish to use the TiDB-backend, also read [TiDB Lightning TiDB-backend](/tidb-lightning/tidb-lightning-tidb-backend.md) for the changes to the deployment steps.
+If Local-backend is used for data import, during the import process, **the cluster cannot provide services**. If you do not want the TiDB services to be impacted, perform the data import according to [TiDB Lightning TiDB-backend](/tidb-lightning/tidb-lightning-backends.md#tidb-lightning-tidb-backend).
 
 ## Notes
 
 Before starting TiDB Lightning, note that:
 
-- During the import process, the cluster cannot provide normal services.
 - If `tidb-lightning` crashes, the cluster is left in "import mode". Forgetting to switch back to "normal mode" can lead to a high amount of uncompacted data on the TiKV cluster, and cause abnormally high CPU usage and stall. You can manually switch the cluster back to "normal mode" via the `tidb-lightning-ctl` tool:
 
     ```sh
-    bin/tidb-lightning-ctl -switch-mode=normal
+    bin/tidb-lightning-ctl --switch-mode=normal
     ```
 
 - TiDB Lightning is required to have the following privileges in the downstream TiDB:
@@ -38,202 +36,66 @@ Before starting TiDB Lightning, note that:
 
 ## Hardware requirements
 
-`tidb-lightning` and `tikv-importer` are both resource-intensive programs. It is recommended to deploy them into two separate machines.
+`tidb-lightning` is a resource-intensive program. It is recommended to deploy it as follows.
 
-To achieve the best performance, it is recommended to use the following hardware configuration:
-
-- `tidb-lightning`:
-
-    - 32+ logical cores CPU
-    - An SSD large enough to store the entire data source, preferring higher read speed
-    - 10 Gigabit network card (capable of transferring at ≥300 MB/s)
-    - `tidb-lightning` fully consumes all CPU cores when running,
-        and deploying on a dedicated machine is highly recommended.
-        If not possible, `tidb-lightning` could be deployed together with other components like
-        `tidb-server`, and the CPU usage could be limited via the `region-concurrency` setting.
-
-- `tikv-importer`:
-
-    - 32+ logical cores CPU
-    - 40 GB+ memory
-    - 1 TB+ SSD, preferring higher IOPS (≥ 8000 is recommended)
-        * The disk should be larger than the total size of the top N tables, where N = max(index-concurrency, table-concurrency).
-    - 10 Gigabit network card (capable of transferring at ≥300 MB/s)
-    - `tikv-importer` fully consumes all CPU, disk I/O and network bandwidth when running,
-        and deploying on a dedicated machine is strongly recommended.
-
-If you have sufficient machines, you can deploy multiple Lightning/Importer servers, with each working on a distinct set of tables, to import the data in parallel.
+- 32+ logical cores CPU
+- 20GB+ memory
+- An SSD large enough to store the entire data source, preferring higher read speed
+- 10 Gigabit network card (capable of transferring at ≥1 GB/s)
+- `tidb-lightning` fully consumes all CPU cores when running, and deploying on a dedicated machine is highly recommended. If not possible, `tidb-lightning` could be deployed together with other components like `tidb-server`, and the CPU usage could be limited via the `region-concurrency` setting.
 
 > **Note:**
 >
 > - `tidb-lightning` is a CPU intensive program. In an environment with mixed components, the resources allocated to `tidb-lightning` must be limited. Otherwise, other components might not be able to run. It is recommended to set the `region-concurrency` to 75% of CPU logical cores. For instance, if the CPU has 32 logical cores, you can set the `region-concurrency` to 24.
->
-> - `tikv-importer` stores intermediate data on the RAM to speed up the import process. The typical memory usage can be calculated by using **(`max-open-engines` × `write-buffer-size` × 2) + (`num-import-jobs` × `region-split-size` × 2)**. If the speed of writing to disk is slow, the memory usage could be even higher due to buffering.
 
-Additionally, the target TiKV cluster should have enough space to absorb the new data.
-Besides [the standard requirements](/hardware-and-software-requirements.md), the total free space of the target TiKV cluster should be larger than **Size of data source × [Number of replicas](/faq/tidb-faq.md#is-the-number-of-replicas-in-each-region-configurable-if-yes-how-to-configure-it) × 2**.
+Additionally, the target TiKV cluster should have enough space to absorb the new data. Besides [the standard requirements](/hardware-and-software-requirements.md), the total free space of the target TiKV cluster should be larger than **Size of data source × [Number of replicas](/faq/deploy-and-maintain-faq.md#is-the-number-of-replicas-in-each-region-configurable-if-yes-how-to-configure-it) × 2**.
 
 With the default replica count of 3, this means the total free space should be at least 6 times the size of data source.
 
 ## Export data
 
-Use the [`mydumper` tool](/mydumper-overview.md) to export data from MySQL by using the following command:
+Use the [`dumpling` tool](/dumpling-overview.md) to export data from MySQL by using the following command:
 
 ```sh
-./bin/mydumper -h 127.0.0.1 -P 3306 -u root -t 16 -F 256 -B test -T t1,t2 --skip-tz-utc -o /data/my_database/
+./bin/dumpling -h 127.0.0.1 -P 3306 -u root -t 16 -F 256MB -B test -f 'test.t[12]' -o /data/my_database/
 ```
 
 In this command,
 
 - `-B test`: means the data is exported from the `test` database.
-- `-T t1,t2`: means only the `t1` and `t2` tables are exported.
+- `-f test.t[12]`: means only the `test.t1` and `test.t2` tables are exported.
 - `-t 16`: means 16 threads are used to export the data.
-- `-F 256`: means a table is partitioned into chunks and one chunk is 256 MB.
-- `--skip-tz-utc`: the purpose of adding this parameter is to ignore the inconsistency of time zone setting between MySQL and the data exporting machine, and to disable automatic conversion.
+- `-F 256MB`: means a table is partitioned into chunks and one chunk is 256 MB.
 
 If the data source consists of CSV files, see [CSV support](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md) for configuration.
 
 ## Deploy TiDB Lightning
 
-This section describes two deployment methods of TiDB Lightning:
-
-- [Deploy TiDB Lightning using TiDB Ansible](#deploy-tidb-lightning-using-ansible)
-- [Deploy TiDB Lightning manually](#deploy-tidb-lightning-manually)
-
-### Deploy TiDB Lightning using TiDB Ansible
-
-You can deploy TiDB Lightning using TiDB Ansible together with the [deployment of the TiDB cluster itself using TiDB Ansible](/online-deployment-using-ansible.md).
-
-1. Edit `inventory.ini` to add the addresses of the `tidb-lightning` and `tikv-importer` servers.
-
-    ```ini
-    ...
-
-    [importer_server]
-    192.168.20.9
-
-    [lightning_server]
-    192.168.20.10
-
-    ...
-    ```
-
-2. Configure these tools by editing the settings under `group_vars/*.yml`.
-
-    * `group_vars/all.yml`
-
-        ```yaml
-        ...
-        # The listening port of tikv-importer. Should be open to the tidb-lightning server.
-        tikv_importer_port: 8287
-        ...
-        ```
-
-    * `group_vars/lightning_server.yml`
-
-        ```yaml
-        ---
-        dummy:
-
-        # The listening port for metrics gathering. Should be open to the monitoring servers.
-        tidb_lightning_pprof_port: 8289
-
-        # The file path that tidb-lightning reads the data source (Mydumper SQL dump or CSV) from.
-        data_source_dir: "{{ deploy_dir }}/mydumper"
-        ```
-
-    * `group_vars/importer_server.yml`
-
-        ```yaml
-        ---
-        dummy:
-
-        # The file path to store engine files. Should reside on a partition with a large capacity.
-        import_dir: "{{ deploy_dir }}/data.import"
-        ```
-
-3. Deploy the cluster.
-
-    ```sh
-    ansible-playbook bootstrap.yml
-    ansible-playbook deploy.yml
-    ```
-
-4. Mount the data source to the path specified in the `data_source_dir` setting.
-
-5. Log in to the `tikv-importer` server, and manually run the following command to start Importer.
-
-    ```sh
-    scripts/start_importer.sh
-    ```
-
-6. Log in to the `tidb-lightning` server, and manually run the following command to start Lightning and import the data into the TiDB cluster.
-
-    ```sh
-    scripts/start_lightning.sh
-    ```
-
-7. After completion, run `scripts/stop_importer.sh` on the `tikv-importer` server to stop Importer.
+This section describes how to [deploy TiDB Lightning manually](#deploy-tidb-lightning-manually).
 
 ### Deploy TiDB Lightning manually
 
 #### Step 1: Deploy a TiDB cluster
 
-Before importing data, you need to have a deployed TiDB cluster, with the cluster version 2.0.9 or above. It is highly recommended to use the latest version.
+Before importing data, you need to have a deployed TiDB cluster. It is highly recommended to use the latest stable version.
 
-You can find deployment instructions in [TiDB Quick Start Guide](https://pingcap.com/docs/QUICKSTART/).
+You can find deployment instructions in [TiDB Quick Start Guide](/quick-start-with-tidb.md).
 
 #### Step 2: Download the TiDB Lightning installation package
 
-Refer to the [TiDB enterprise tools download page](/download-ecosystem-tools.md#tidb-lightning) to download the TiDB Lightning package (choose the same version as that of the TiDB cluster).
+Refer to the [TiDB enterprise tools download page](/download-ecosystem-tools.md#tidb-lightning) to download the TiDB Lightning package. 
 
-#### Step 3: Start `tikv-importer`
+> **Note:**
+>
+> TiDB Lightning is compatible with TiDB clusters of earlier versions. It is recommended that you download the latest stable version of the TiDB Lightning installation package.
 
-1. Upload `bin/tikv-importer` from the installation package.
-
-2. Configure `tikv-importer.toml`.
-
-    ```toml
-    # TiKV Importer configuration file template
-
-    # Log file
-    log-file = "tikv-importer.log"
-    # Log level: trace, debug, info, warn, error, off.
-    log-level = "info"
-
-    [server]
-    # The listening address of tikv-importer. tidb-lightning needs to connect to
-    # this address to write data.
-    addr = "192.168.20.10:8287"
-
-    [metric]
-    # The Prometheus client push job name.
-    job = "tikv-importer"
-    # The Prometheus client push interval.
-    interval = "15s"
-    # The Prometheus Pushgateway address.
-    address = ""
-
-    [import]
-    # The directory to store engine files.
-    import-dir = "/mnt/ssd/data.import/"
-    ```
-
-    The above only shows the essential settings. See the [Configuration](/tidb-lightning/tidb-lightning-configuration.md#tikv-importer) section for the full list of settings.
-
-3. Run `tikv-importer`.
-
-    ```sh
-    nohup ./tikv-importer -C tikv-importer.toml > nohup.out &
-    ```
-
-#### Step 4: Start `tidb-lightning`
+#### Step 3: Start `tidb-lightning`
 
 1. Upload `bin/tidb-lightning` and `bin/tidb-lightning-ctl` from the tool set.
 
 2. Mount the data source onto the same machine.
 
-3. Configure `tidb-lightning.toml`. For configurations that do not appear in the template below, TiDB Lightning writes a configuration error to the log file and exits.
+3. Configure `tidb-lightning.toml`. For configurations that do not appear in the template below, TiDB Lightning writes a configuration error to the log file and exits. `sorted-kv-dir` must be an empty directory and the disk where the directory is located must have a lot of free space.
 
     ```toml
     [lightning]
@@ -247,11 +109,13 @@ Refer to the [TiDB enterprise tools download page](/download-ecosystem-tools.md#
     file = "tidb-lightning.log"
 
     [tikv-importer]
-    # The listening address of tikv-importer. Change it to the actual address.
-    addr = "172.16.31.10:8287"
+    # Sets the backend to the "local" mode.
+    backend = "local"
+    # Sets the directory of temporary local storage.
+    sorted-kv-dir = "/mnt/ssd/sorted-kv-dir"
 
     [mydumper]
-    # mydumper local source data directory
+    # Local source data directory
     data-source-dir = "/data/my_database"
 
     [tidb]
@@ -262,10 +126,11 @@ Refer to the [TiDB enterprise tools download page](/download-ecosystem-tools.md#
     password = ""
     # Table schema information is fetched from TiDB via this status-port.
     status-port = 10080
+    # An address of pd-server.
+    pd-addr = "172.16.31.4:2379"
     ```
 
-    The above only shows the essential settings.
-    See the [Configuration](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-global) section for the full list of settings.
+    The above only shows the essential settings. See the [Configuration](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-global) section for the full list of settings.
 
 4. Run `tidb-lightning`.
 

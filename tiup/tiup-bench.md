@@ -1,8 +1,7 @@
 ---
 title: Stress Test TiDB Using TiUP Bench Component
 summary: Learns how to stress test TiDB with TPC-C and TPC-H workloads using TiUP.
-category: tools
-aliases: ['/docs/dev/reference/tools/tiup/bench/']
+aliases: ['/docs/dev/tiup/tiup-bench/','/docs/dev/reference/tools/tiup/bench/']
 ---
 
 # Stress Test TiDB Using TiUP Bench Component
@@ -16,7 +15,7 @@ tiup bench
 ```
 
 ```
-Starting component `bench`: /Users/joshua/.tiup/components/bench/v0.0.1/bench 
+Starting component `bench`: /home/tidb/.tiup/components/bench/v1.5.0/bench
 Benchmark database with different workloads
 
 Usage:
@@ -36,8 +35,8 @@ Flags:
   -H, --host string         Database host (default "127.0.0.1")
       --ignore-error        Ignore error when running workload
       --interval duration   Output interval time (default 10s)
-      --isolation int       Isolation Level 0: Default, 1: ReadUncommitted, 
-                            2: ReadCommitted, 3: WriteCommitted, 4: RepeatableRead, 
+      --isolation int       Isolation Level 0: Default, 1: ReadUncommitted,
+                            2: ReadCommitted, 3: WriteCommitted, 4: RepeatableRead,
                             5: Snapshot, 6: Serializable, 7: Linerizable
       --max-procs int       runtime.GOMAXPROCS
   -p, --password string     Database password
@@ -75,6 +74,8 @@ Flags:
 ### Test procedures
 
 1. Create 4 warehouses using 4 partitions via hash:
+
+    {{< copyable "shell-regular" >}}
 
     ```shell
     tiup bench tpcc --warehouses 4 --parts 4 prepare
@@ -164,7 +165,7 @@ Flags:
         ```shell
         tiup bench tpch --sf=1 --check=true run
         ```
-    
+
     - If you do not check the result, run this command:
 
         {{< copyable "shell-regular" >}}
@@ -172,7 +173,7 @@ Flags:
         ```shell
         tiup bench tpch --sf=1 run
         ```
-    
+
 3. Clean up data:
 
     {{< copyable "shell-regular" >}}

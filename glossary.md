@@ -1,7 +1,7 @@
 ---
 title: Glossary
 summary: Glossaries about TiDB.
-category: glossary
+aliases: ['/docs/dev/glossary/']
 ---
 
 # Glossary
@@ -12,7 +12,7 @@ category: glossary
 
 ACID refers to the four key properties of a transaction: atomicity, consistency, isolation, and durability. Each of these properties is described below.
 
-- **Atomicity** means that either all the changes of an operation are performed, or none of them are. TiDB ensures the atomicity of the [Region](#region) that stores the Primary Key to achieve the atomicity of transactions.
+- **Atomicity** means that either all the changes of an operation are performed, or none of them are. TiDB ensures the atomicity of the [Region](#regionpeerraft-group) that stores the Primary Key to achieve the atomicity of transactions.
 
 - **Consistency** means that transactions always bring the database from one consistent state to another. In TiDB, data consistency is ensured before writing data to the memory.
 
@@ -27,6 +27,10 @@ ACID refers to the four key properties of a transaction: atomicity, consistency,
 Leader/Follower/Learner each corresponds to a role in a Raft group of [peers](#regionpeerraft-group). The leader services all client requests and replicates data to the followers. If the group leader fails, one of the followers will be elected as the new leader. Learners are non-voting followers that only serves in the process of replica addition.
 
 ## O
+
+### Old value
+
+The "original value" in the incremental change log output by TiCDC. You can specify whether the incremental change log output by TiCDC contains the "original value".
 
 ### Operator
 

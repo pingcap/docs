@@ -1,8 +1,7 @@
 ---
 title: CREATE DATABASE | TiDB SQL Statement Reference
 summary: An overview of the usage of CREATE DATABASE for the TiDB database.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/create-database/']
+aliases: ['/docs/dev/sql-statements/sql-statement-create-database/','/docs/dev/reference/sql/statements/create-database/']
 ---
 
 # CREATE DATABASE
@@ -11,25 +10,19 @@ This statement creates a new database in TiDB. The MySQL terminology for 'databa
 
 ## Synopsis
 
-**CreateDatabaseStmt:**
+```ebnf+diagram
+CreateDatabaseStmt ::=
+    'CREATE' 'DATABASE' IfNotExists DBName DatabaseOptionListOpt
 
-![CreateDatabaseStmt](/media/sqlgram/CreateDatabaseStmt.png)
+IfNotExists ::=
+    ( 'IF' 'NOT' 'EXISTS' )?
 
-**DatabaseSym:**
+DBName ::=
+    Identifier
 
-![DatabaseSym](/media/sqlgram/DatabaseSym.png)
-
-**IfNotExists:**
-
-![IfNotExists](/media/sqlgram/IfNotExists.png)
-
-**DBName:**
-
-![DBName](/media/sqlgram/DBName.png)
-
-**DatabaseOptionListOpt:**
-
-![DatabaseOptionListOpt](/media/sqlgram/DatabaseOptionListOpt.png)
+DatabaseOptionListOpt ::=
+    DatabaseOptionList?
+```
 
 ## Syntax
 
@@ -70,7 +63,7 @@ mysql> SHOW TABLES;
 
 ## MySQL compatibility
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/report-issue.md) on GitHub.
+This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
 
 ## See also
 

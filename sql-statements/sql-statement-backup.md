@@ -1,7 +1,7 @@
 ---
 title: BACKUP | TiDB SQL Statement Reference
 summary: An overview of the usage of BACKUP for the TiDB database.
-category: reference
+aliases: ['/docs/dev/sql-statements/sql-statement-backup/']
 ---
 
 # BACKUP
@@ -10,35 +10,38 @@ This statement is used to perform a distributed backup of the TiDB cluster.
 
 The `BACKUP` statement uses the same engine as the [BR tool](/br/backup-and-restore-use-cases.md) does, except that the backup process is driven by TiDB itself rather than a separate BR tool. All benefits and warnings of BR also apply in this statement.
 
-Executing `BACKUP` requires `SUPER` privilege. Additionally, both the TiDB node executing the backup and all TiKV nodes in the cluster must have read or write permission to the destination.
+Executing `BACKUP` requires either the `BACKUP_ADMIN` or `SUPER` privilege. Additionally, both the TiDB node executing the backup and all TiKV nodes in the cluster must have read or write permission to the destination.
 
 The `BACKUP` statement is blocked until the entire backup task is finished, failed, or canceled. A long-lasting connection should be prepared for executing `BACKUP`. The task can be canceled using the [`KILL TIDB QUERY`](/sql-statements/sql-statement-kill.md) statement.
 
 Only one `BACKUP` and [`RESTORE`](/sql-statements/sql-statement-restore.md) task can be executed at a time. If a `BACKUP` or `RESTORE` statement is already being executed on the same TiDB server, the new `BACKUP` execution will wait until all previous tasks are finished.
 
-`BACKUP` can only be used with "tikv" storage engine. Using `BACKUP` with the "mocktikv" engine will fail.
+`BACKUP` can only be used with "tikv" storage engine. Using `BACKUP` with the "unistore" engine will fail.
 
 ## Synopsis
 
-**BackupStmt:**
+```ebnf+diagram
+BackupStmt ::=
+    "BACKUP" BRIETables "TO" stringLit BackupOption*
 
-![BackupStmt](/media/sqlgram/BackupStmt.png)
+BRIETables ::=
+    "DATABASE" ( '*' | DBName (',' DBName)* )
+|   "TABLE" TableNameList
 
-**BRIETables:**
+BackupOption ::=
+    "RATE_LIMIT" '='? LengthNum "MB" '/' "SECOND"
+|   "CONCURRENCY" '='? LengthNum
+|   "CHECKSUM" '='? Boolean
+|   "SEND_CREDENTIALS_TO_TIKV" '='? Boolean
+|   "LAST_BACKUP" '='? BackupTSO
+|   "SNAPSHOT" '='? ( BackupTSO | LengthNum TimestampUnit "AGO" )
 
-![BRIETables](/media/sqlgram/BRIETables.png)
+Boolean ::=
+    NUM | "TRUE" | "FALSE"
 
-**BackupOption:**
-
-![BackupOption](/media/sqlgram/BackupOption.png)
-
-**Boolean:**
-
-![Boolean](/media/sqlgram/Boolean.png)
-
-**BackupTSO:**
-
-![BackupTSO](/media/sqlgram/BackupTSO.png)
+BackupTSO ::=
+    LengthNum | stringLit
+```
 
 ## Examples
 
@@ -95,17 +98,17 @@ BACKUP DATABASE * TO 'local:///mnt/backup/full/';
 
 Note that the system tables (`mysql.*`, `INFORMATION_SCHEMA.*`, `PERFORMANCE_SCHEMA.*`, …) will not be included into the backup.
 
-### Remote destinations
+### External storages
 
 BR supports backing up data to S3 or GCS:
 
 {{< copyable "sql" >}}
 
 ```sql
-BACKUP DATABASE `test` TO 's3://example-bucket-2020/backup-05/?region=us-west-2';
+BACKUP DATABASE `test` TO 's3://example-bucket-2020/backup-05/?region=us-west-2&access-key={YOUR_ACCESS_KEY}&secret-access-key={YOUR_SECRET_KEY}';
 ```
 
-The URL syntax is further explained in [BR storages](/br/backup-and-restore-storages.md).
+The URL syntax is further explained in [External Storages](/br/backup-and-restore-storages.md).
 
 When running on cloud environment where credentials should not be distributed, set the `SEND_CREDENTIALS_TO_TIKV` option to `FALSE`:
 

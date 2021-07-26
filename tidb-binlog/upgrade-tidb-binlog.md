@@ -1,32 +1,12 @@
 ---
 title: Upgrade TiDB Binlog
 summary: Learn how to upgrade TiDB Binlog to the latest cluster version.
-category: reference
-aliases: ['/docs/dev/reference/tidb-binlog/upgrade/','/docs/dev/how-to/upgrade/tidb-binlog/']
+aliases: ['/docs/dev/tidb-binlog/upgrade-tidb-binlog/','/docs/dev/reference/tidb-binlog/upgrade/','/docs/dev/how-to/upgrade/tidb-binlog/']
 ---
 
 # Upgrade TiDB Binlog
 
-This document introduces how to upgrade TiDB Binlog that is deployed with TiDB Ansible and deployed manually to the latest [cluster](/tidb-binlog/tidb-binlog-overview.md) version. There is also a section on how to upgrade TiDB Binlog from an earlier incompatible version (Kafka/Local version) to the latest version.
-
-## Upgrade TiDB Binlog deployed with TiDB Ansible
-
-Follow the steps in this section if you deploy TiDB Binlog with [TiDB Ansible Playbook](https://github.com/pingcap/tidb-ansible).
-
-### Upgrade Pump
-
-First, upgrade the Pump component:
-
-1. Copy the new version of the binary `pump` file into the`({ resources_dir })/bin` directory.
-2. Execute the `ansible-playbook rolling_update.yml --tags=pump` command to perform a rolling update for Pump.
-
-### Upgrade Drainer
-
-Second, upgrade the Drainer component:
-
-1. Copy the new version of the binary `drainer` file into the`({ resources_dir })/bin` directory.
-2. Execute the `ansible-playbook stop_drainer.yml --tags=drainer` command.
-3. Execute the `ansible-playbook start_drainer.yml --tags=drainer` command.
+This document introduces how to upgrade TiDB Binlog that is deployed manually to the latest [cluster](/tidb-binlog/tidb-binlog-overview.md) version. There is also a section on how to upgrade TiDB Binlog from an earlier incompatible version (Kafka/Local version) to the latest version.
 
 ## Upgrade TiDB Binlog deployed manually
 
@@ -48,7 +28,7 @@ Second, upgrade the Drainer component:
 
 ## Upgrade TiDB Binlog from Kafka/Local version to the cluster version
 
-The new TiDB versions (v2.0.8-binlog, v2.1.0-rc.5 or later) are not compatible with the [Kafka version](https://pingcap.com/docs/v2.1/reference/tidb-binlog/tidb-binlog-kafka/) or [Local version](https://pingcap.com/docs-cn/v2.1/reference/tidb-binlog/tidb-binlog-local/) of TiDB Binlog. If TiDB is upgraded to one of the new versions, it is required to use the cluster version of TiDB Binlog. If the Kafka or local version of TiDB Binlog is used before upgrading, you need to upgrade your TiDB Binlog to the cluster version.
+The new TiDB versions (v2.0.8-binlog, v2.1.0-rc.5 or later) are not compatible with the Kafka version or Local version of TiDB Binlog. If TiDB is upgraded to one of the new versions, it is required to use the cluster version of TiDB Binlog. If the Kafka or local version of TiDB Binlog is used before upgrading, you need to upgrade your TiDB Binlog to the cluster version.
 
 The corresponding relationship between TiDB Binlog versions and TiDB versions is shown in the following table:
 
@@ -87,4 +67,4 @@ If you want to resume replication from the original checkpoint, perform the foll
     If the return value of `Synced` is True, it means Drainer has replicated the data in the old version of Pump to the downstream completely.
 
 6. Start the new version of Drainer.
-7. Close the Pump and Drainer of the old versions and the dependent Kafka and Zookeeper.
+7. Close the Pump and Drainer of the old versions and the dependent Kafka and ZooKeeper.

@@ -1,8 +1,7 @@
 ---
 title: SET [NAMES|CHARACTER SET] |  TiDB SQL Statement Reference
 summary: An overview of the usage of SET [NAMES|CHARACTER SET] for the TiDB database.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/set-names/']
+aliases: ['/docs/dev/sql-statements/sql-statement-set-names/','/docs/dev/reference/sql/statements/set-names/']
 ---
 
 # SET [NAMES|CHARACTER SET]
@@ -11,9 +10,33 @@ The statements `SET NAMES`, `SET CHARACTER SET` and `SET CHARSET` modify the var
 
 ## Synopsis
 
-**SetStmt:**
+**SetNamesStmt:**
 
-![SetStmt](/media/sqlgram/SetStmt.png)
+![SetNamesStmt](/media/sqlgram/SetNamesStmt.png)
+
+**VariableAssignmentList:**
+
+![VariableAssignmentList](/media/sqlgram/VariableAssignmentList.png)
+
+**VariableAssignment:**
+
+![VariableAssignment](/media/sqlgram/VariableAssignment.png)
+
+**CharsetName:**
+
+![CharsetName](/media/sqlgram/CharsetName.png)
+
+**StringName:**
+
+![StringName](/media/sqlgram/StringName.png)
+
+**CharsetKw:**
+
+![CharsetKw](/media/sqlgram/CharsetKw.png)
+
+**CharsetNameOrDefault:**
+
+![CharsetNameOrDefault](/media/sqlgram/CharsetNameOrDefault.png)
 
 ## Examples
 
@@ -72,7 +95,7 @@ mysql> SHOW VARIABLES LIKE 'character_set%';
 
 ## MySQL compatibility
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/report-issue.md) on GitHub.
+This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
 
 ## See also
 

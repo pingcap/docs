@@ -1,68 +1,93 @@
 ---
 title: ADMIN | TiDB SQL Statement Reference
 summary: An overview of the usage of ADMIN for the TiDB database.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/admin/']
+aliases: ['/docs/dev/sql-statements/sql-statement-admin/','/docs/dev/reference/sql/statements/admin/']
 ---
 
 # ADMIN
 
 This statement is a TiDB extension syntax, used to view the status of TiDB and check the data of tables in TiDB.
 
-To view the currently running DDL jobs, use `ADMIN SHOW DDL`:
+## DDL related statement
+
+| Statement                                                                                | Description                 |
+|------------------------------------------------------------------------------------------|-----------------------------|
+| [`ADMIN CANCEL DDL JOBS`](/sql-statements/sql-statement-admin-cancel-ddl.md)             | Cancels a currently running DDL jobs. |
+| [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)          | Calculates the CRC64 of all rows + indexes of a table. |
+| [<code>ADMIN CHECK [TABLE\|INDEX]</code>](/sql-statements/sql-statement-admin-check-table-index.md) | Checks for consistency of a table or index. |
+| [<code>ADMIN SHOW DDL [JOBS\|QUERIES]</code>](/sql-statements/sql-statement-admin-show-ddl.md)      | Shows details about currently running or recently completed DDL jobs. |
+
+## `ADMIN RELOAD` statement
 
 {{< copyable "sql" >}}
 
 ```sql
-ADMIN SHOW DDL;
+ADMIN RELOAD expr_pushdown_blacklist;
 ```
 
-To view all the results in the current DDL job queue (including tasks that are running and waiting to be run) and the last ten results in the completed DDL job queue, use `ADMIN SHOW DDL JOBS`:
+The above statement is used to reload the blocklist pushed down by the expression.
 
 {{< copyable "sql" >}}
 
 ```sql
-ADMIN SHOW DDL JOBS [NUM] [WHERE where_condition];
+ADMIN RELOAD opt_rule_blacklist;
 ```
 
-* `NUM`: to view the last `NUM` results in the completed DDL job queue. If not specified, `NUM` is by default 10.
-* `WHERE`: to add filter conditions.
+The above statement is used to reload the blocklist of logic optimization rules.
 
-To view the original SQL statements of the DDL job corresponding to `job_id`, use `ADMIN SHOW DDL JOB QUERIES`:
+## `ADMIN PLUGINS` related statement
 
 {{< copyable "sql" >}}
 
 ```sql
-ADMIN SHOW DDL JOB QUERIES job_id [, job_id] ...;
+ADMIN PLUGINS ENABLE plugin_name [, plugin_name] ...;
 ```
 
-You can only searches the running DDL job corresponding to `job_id` and the last ten results in the DDL history job queue.
-
-To cancel the currently running DDL jobs and return whether the corresponding jobs are successfully cancelled, use `ADMIN CANCEL DDL JOBS`:
+The above statement is used to enable the `plugin_name` plugin.
 
 {{< copyable "sql" >}}
 
 ```sql
-ADMIN CANCEL DDL JOBS job_id [, job_id] ...;
+ADMIN PLUGINS DISABLE plugin_name [, plugin_name] ...;
 ```
 
-If the operation fails to cancel the jobs, specific reasons are displayed.
+The above statement is used to disable the `plugin_name` plugin.
 
-> **Note:**
->
-> - Only this operation can cancel DDL jobs. All other operations and environment changes (such as machine restart and cluster restart) cannot cancel these jobs.
-> - This operation can cancel multiple DDL jobs at the same time. You can get the ID of DDL jobs using the `ADMIN SHOW DDL JOBS` statement.
-> - If the jobs you want to cancel are finished, the cancellation operation fails.
-
-To check the consistency of all the data and corresponding indexes in the `tbl_name` table, use `ADMIN CHECK TABLE`:
+## `ADMIN BINDINGS` related statement
 
 {{< copyable "sql" >}}
 
 ```sql
-ADMIN CHECK TABLE tbl_name [, tbl_name] ...;
+ADMIN FLUSH bindings;
 ```
 
-If the consistency check is passed, an empty result is returned. Otherwise, an error message is returned indicating that the data is inconsistent.
+The above statement is used to persist SQL Plan binding information.
+
+{{< copyable "sql" >}}
+
+```sql
+ADMIN CAPTURE bindings;
+```
+
+The above statement can generate the binding of SQL Plan from the `SELECT` statement that occurs more than once.
+
+{{< copyable "sql" >}}
+
+```sql
+ADMIN EVOLVE bindings;
+```
+
+After the automatic binding feature is enabled, the evolution of SQL Plan binding information is triggered every `bind-info-leave` (the default value is `3s`). The above statement is used to proactively trigger this evolution.
+
+{{< copyable "sql" >}}
+
+```sql
+ADMIN RELOAD bindings;
+```
+
+The above statement is used to reload SQL Plan binding information.
+
+## `ADMIN REPAIR` statement
 
 To overwrite the metadata of the stored table in an untrusted way in extreme cases, use `ADMIN REPAIR TABLE`:
 
@@ -74,11 +99,28 @@ ADMIN REPAIR TABLE tbl_name CREATE TABLE STATEMENT;
 
 Here “untrusted” means that you need to manually ensure that the metadata of the original table can be covered by the `CREATE TABLE STATEMENT` operation. To use this `REPAIR` statement, enable the [`repair-mode`](/tidb-configuration-file.md#repair-mode) configuration item, and make sure that the tables to be repaired are listed in the [`repair-table-list`](/tidb-configuration-file.md#repair-table-list).
 
+## `ADMIN SHOW SLOW` statement
+
+{{< copyable "sql" >}}
+
+```sql
+ADMIN SHOW SLOW RECENT N;
+```
+
+{{< copyable "sql" >}}
+
+```sql
+ADMIN SHOW SLOW TOP [INTERNAL | ALL] N;
+```
+
+For details, refer to [admin show slow statement](/identify-slow-queries.md#admin-show-slow-command)
+
 ## Synopsis
 
-**AdminStmt:**
-
-![AdminStmt](/media/sqlgram/AdminStmt.png)
+```ebnf+diagram
+AdminStmt ::=
+    'ADMIN' ( 'SHOW' ( 'DDL' ( 'JOBS' Int64Num? WhereClauseOptional | 'JOB' 'QUERIES' NumList )? | TableName 'NEXT_ROW_ID' | 'SLOW' AdminShowSlow ) | 'CHECK' ( 'TABLE' TableNameList | 'INDEX' TableName Identifier ( HandleRange ( ',' HandleRange )* )? ) | 'RECOVER' 'INDEX' TableName Identifier | 'CLEANUP' ( 'INDEX' TableName Identifier | 'TABLE' 'LOCK' TableNameList ) | 'CHECKSUM' 'TABLE' TableNameList | 'CANCEL' 'DDL' 'JOBS' NumList | 'RELOAD' ( 'EXPR_PUSHDOWN_BLACKLIST' | 'OPT_RULE_BLACKLIST' | 'BINDINGS' ) | 'PLUGINS' ( 'ENABLE' | 'DISABLE' ) PluginNameList | 'REPAIR' 'TABLE' TableName CreateTableStmt | ( 'FLUSH' | 'CAPTURE' | 'EVOLVE' ) 'BINDINGS' )
+```
 
 ## Examples
 
@@ -152,7 +194,7 @@ admin show ddl jobs 5 where state!='synced' and db_name='test';
 * `JOB_TYPE`: the type of the DDL operations.
 * `SCHEMA_STATE`: the current state of the schema. If the `JOB_TYPE` is `add index`, it is the state of the index; if the `JOB_TYPE` is `add column`, it is the state of the column; if the `JOB_TYPE` is `create table`, it is the state of the table. The common states include:
     * `none`: it indicates not existing. When the `drop` or `create` operation fails and rolls back, it usually becomes the `none` state.
-    * `delete only`, `write only`, `delete reorganization`, `write reorganization`: these four states are intermediate states. For details, see the paper [Online, Asynchronous Schema Change in F1](http://static.googleusercontent.com/media/research.google.com/zh-CN//pubs/archive/41376.pdf). These states are not visible in common operations, because the conversion from the intermediate states is so quick. You can see the `write reorganization` state only in `add index` operations, which means that the index data is being added.
+    * `delete only`, `write only`, `delete reorganization`, `write reorganization`: these four states are intermediate states. These states are not visible in common operations, because the conversion from the intermediate states is so quick. You can see the `write reorganization` state only in `add index` operations, which means that the index data is being added.
     * `public`: it indicates existing and usable. When operations like `create table` and `add index/column` are finished, it usually becomes the `public` state, which means that the created table/column/index can be normally read and written now.
 * `SCHEMA_ID`: the ID of the database on which the DDL operations are performed.
 * `TABLE_ID`: the ID of the table on which the DDL operations are performed.

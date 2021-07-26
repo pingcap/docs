@@ -1,7 +1,7 @@
 ---
 title: Backup & Restore FAQ
 summary: Learn about Frequently Asked Questions (FAQ) and the solutions of BR.
-category: FAQ
+aliases: ['/docs/dev/br/backup-and-restore-faq/']
 ---
 
 # Backup & Restore FAQ
@@ -12,7 +12,7 @@ This document lists the frequently asked questions (FAQs) and the solutions abou
 
 When you restore data, each node must have access to **all** backup files (SST files). By default, if `local` storage is used, you cannot restore data because the backup files are scattered among different nodes. Therefore, you have to copy the backup file of each TiKV node to the other TiKV nodes.
 
-It is recommended to mount an NFS disk as a backup disk during backup. For details, see [Back up a single table to a network disk](/br/backup-and-restore-use-cases.md#back-up-a-single-table-to-a-network-disk-recommended).
+It is recommended to mount an NFS disk as a backup disk during backup. For details, see [Back up a single table to a network disk](/br/backup-and-restore-use-cases.md#back-up-a-single-table-to-a-network-disk-recommended-in-production-environment).
 
 ## How much does it affect the cluster during backup using BR?
 
@@ -22,13 +22,15 @@ To reduce the impact on the cluster, you can use the `--ratelimit` parameter to 
 
 ## Does BR back up system tables? During data restoration, do they raise conflict?
 
-The system libraries (`information_schema`, `performance_schema`, `mysql`) are filtered out during full backup. For more details, refer to the [Backup Principle](/br/backup-and-restore-tool.md#backup-principle).
+The system schemas (`information_schema`, `performance_schema`, `mysql`) are filtered out during full backup. For more details, refer to the [Backup Principle](/br/backup-and-restore-tool.md#implementation-principles).
 
-Because these system libraries do not exist in the backup files, no conflict occurs among system tables during data restoration.
+Because these system schemas do not exist in the backup files, no conflict occurs among system tables during data restoration.
 
-## What should I do to resolve the `Permission denied` error, even if I have tried to run BR using root in vain?
+## What should I do to handle the `Permission denied` or `No such file or directory` error, even if I have tried to run BR using root in vain?
 
 You need to confirm whether TiKV has access to the backup directory. To back up data, confirm whether TiKV has the write permission. To restore data, confirm whether it has the read permission.
+
+During the backup operation, if the storage medium is the local disk or a network file system (NFS), make sure that the user to start BR and the user to start TiKV are consistent (if BR and TiKV are on different machines, the users' UIDs must be consistent). Otherwise, the `Permission denied` issue might occur.
 
 Running BR with the root access might fail due to the disk permission, because the backup files (SST files) are saved by TiKV.
 
@@ -38,14 +40,20 @@ Running BR with the root access might fail due to the disk permission, because t
 >
 > Therefore, It is recommended to check the permission before data restoration.
 
-## What should I do to resolve the `Io(Os...)` error?
+## What should I do to handle the `Io(Os...)` error?
 
-Almost all of these problems are system call errors that occur when TiKV writes data to the disk. You can check the mounting method and the file system of the backup directory, and try to back up data to another folder or another hard disk.
- 
+Almost all of these problems are system call errors that occur when TiKV writes data to the disk. For example, if you encounter error messages such as `Io(Os {code: 13, kind: PermissionDenied...})` or `Io(Os {code: 2, kind: NotFound...})`, you can first check the mounting method and the file system of the backup directory, and try to back up data to another folder or another hard disk.
+
 For example, you might encounter the `Code: 22(invalid argument)` error when backing up data to the network disk built by `samba`.
 
+## What should I do to handle the `rpc error: code = Unavailable desc =...` error occurred in BR?
+
+This error might occur when the capacity of the cluster to restore (using BR) is insufficient. You can further confirm the cause by checking the monitoring metrics of this cluster or the TiKV log.
+
+To handle this issue, you can try to scale out the cluster resources, reduce the concurrency during restore, and enable the `RATE_LIMIT` option.
+
 ## Where are the backed up files stored when I use `local` storage?
- 
+
 When you use `local` storage, `backupmeta` is generated on the node where BR is running, and backup files are generated on the Leader nodes of each Region.
 
 ## How about the size of the backup data? Are there replicas of the backup?
@@ -53,3 +61,39 @@ When you use `local` storage, `backupmeta` is generated on the node where BR is 
 During data backup, backup files are generated on the Leader nodes of each Region. The size of the backup is equal to the data size, with no redundant replicas. Therefore, the total data size is approximately the total number of TiKV data divided by the number of replicas.
 
 However, if you want to restore data from local storage, the number of replicas is equal to that of the TiKV nodes, because each TiKV must have access to all backup files.
+
+## What should I do when BR restores data to the upstream cluster of TiCDC/Drainer?
+
++ **The data restored using BR cannot be replicated to the downstream**. This is because BR directly imports SST files but the downstream cluster currently cannot obtain these files from the upstream.
+
++ Before v4.0.3, DDL jobs generated during the BR restore might cause unexpected DDL executions in TiCDC/Drainer. Therefore, if you need to perform restore on the upstream cluster of TiCDC/Drainer, add all tables restored using BR to the TiCDC/Drainer block list.
+
+You can use [`filter.rules`](https://github.com/pingcap/ticdc/blob/7c3c2336f98153326912f3cf6ea2fbb7bcc4a20c/cmd/changefeed.toml#L16) to configure the block list for TiCDC and use [`syncer.ignore-table`](/tidb-binlog/tidb-binlog-configuration-file.md#ignore-table) to configure the block list for Drainer.
+
+## Does BR back up the `SHARD_ROW_ID_BITS` and `PRE_SPLIT_REGIONS` information of a table? Does the restored table have multiple Regions?
+
+Yes. BR backs up the [`SHARD_ROW_ID_BITS` and `PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions) information of a table. The data of the restored table is also split into multiple Regions.
+
+## Why is the `region is unavailable` error reported for a SQL query after I use BR to restore the backup data?
+
+If the cluster backed up using BR has TiFlash, `TableInfo` stores the TiFlash information when BR restores the backup data. If the cluster to be restored does not have TiFlash, the `region is unavailable` error is reported.
+
+## Does BR support in-place full recovery of some historical backup?
+
+No. BR does not support in-place full recovery of some historical backup.
+
+## How can I use BR for incremental backup in the Kubernetes environment?
+
+To get the `commitTs` field of the last BR backup, run the `kubectl -n ${namespace} get bk ${name}` command using kubectl. You can use the content of this field as `--lastbackupts`.
+
+## How can I convert BR backupTS to Unix time?
+
+BR `backupTS` defaults to the latest timestamp obtained from PD before the backup starts. You can use `pd-ctl tso timestamp` to parse the timestamp to obtain an accurate value, or use `backupTS >> 18` to quickly obtain an estimated value.
+
+## After BR restores the backup data, do I need to execute the `ANALYZE` statement on the table to update the statistics of TiDB on the tables and indexes?
+
+BR does not back up statistics (except in v4.0.9). Therefore, after restoring the backup data, you need to manually execute `ANALYZE TABLE` or wait for TiDB to automatically execute `ANALYZE`.
+
+In v4.0.9, BR backs up statistics by default, which consumes too much memory. To ensure that the backup process goes well, the backup for statistics is disabled by default starting from v4.0.10.
+
+If you do not execute `ANALYZE` on the table, TiDB will fail to select the optimized execution plan due to inaccurate statistics. If query performance is not a key concern, you can ignore `ANALYZE`.

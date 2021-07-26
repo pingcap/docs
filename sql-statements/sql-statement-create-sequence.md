@@ -1,8 +1,7 @@
 ---
 title: CREATE SEQUENCE
 summary: An overview of the usage of CREATE SEQUENCE for the TiDB database.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/create-sequence/']
+aliases: ['/docs/dev/sql-statements/sql-statement-create-sequence/','/docs/dev/reference/sql/statements/create-sequence/']
 ---
 
 # CREATE SEQUENCE
@@ -11,33 +10,31 @@ The `CREATE SEQUENCE` statement creates sequence objects in TiDB. The sequence i
 
 ## Synopsis
 
-**CreateSequenceStmt:**
+```ebnf+diagram
+CreateSequenceStmt ::=
+    'CREATE' 'SEQUENCE' IfNotExists TableName CreateSequenceOptionListOpt CreateTableOptionListOpt
 
-![CreateSequenceStmt](/media/sqlgram/CreateSequenceStmt.png)
+IfNotExists ::=
+    ('IF' 'NOT' 'EXISTS')?
 
-**OptTemporary:**
+TableName ::=
+    Identifier ('.' Identifier)?
 
-![OptTemporary](/media/sqlgram/OptTemporary.png)
+CreateSequenceOptionListOpt ::=
+    SequenceOption*
 
-**IfNotExists:**
+SequenceOptionList ::=
+    SequenceOption
 
-![IfNotExists](/media/sqlgram/IfNotExists.png)
-
-**TableName:**
-
-![TableName](/media/sqlgram/TableName.png)
-
-**CreateSequenceOptionListOpt:**
-
-![CreateSequenceOptionListOpt](/media/sqlgram/CreateSequenceOptionListOpt.png)
-
-**SequenceOption:**
-
-![SequenceOption](/media/sqlgram/SequenceOption.png)
-
-**CreateTableOptionListOpt:**
-
-![CreateTableOptionListOpt](/media/sqlgram/CreateTableOptionListOpt.png)
+SequenceOption ::=
+    ( 'INCREMENT' ( '='? | 'BY' ) | 'START' ( '='? | 'WITH' ) | ( 'MINVALUE' | 'MAXVALUE' | 'CACHE' ) '='? ) SignedNum
+|   'NOMINVALUE'
+|   'NO' ( 'MINVALUE' | 'MAXVALUE' | 'CACHE' | 'CYCLE' )
+|   'NOMAXVALUE'
+|   'NOCACHE'
+|   'CYCLE'
+|   'NOCYCLE'
+```
 
 ## Syntax
 
@@ -303,9 +300,9 @@ You can control a sequence through the following expression functions:
 
 ## MySQL compatibility
 
-Currently, MySQL does not have the sequence option. The TiDB sequence is borrowed from MariaDB. Except for the `SETVAL` function, all other functions have the same progressions with those functions of MariaDB.
+This statement is a TiDB extension. The implementation is modeled on sequences available in MariaDB.
 
-Here "progression" means that the numbers in a sequence follow a certain arithmetic progression rule defined by the sequence. Although you can use `SETVAL` to set the current value of a sequence, the subsequent values of the sequence still follow the original progression rule.
+Except for the `SETVAL` function, all other functions have the same _progressions_ as MariaDB. Here "progression" means that the numbers in a sequence follow a certain arithmetic progression rule defined by the sequence. Although you can use `SETVAL` to set the current value of a sequence, the subsequent values of the sequence still follow the original progression rule.
 
 For example:
 

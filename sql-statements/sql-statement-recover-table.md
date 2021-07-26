@@ -1,8 +1,7 @@
 ---
 title: RECOVER TABLE
 summary: An overview of the usage of RECOVER TABLE for the TiDB database.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/recover-table/']
+aliases: ['/docs/dev/sql-statements/sql-statement-recover-table/','/docs/dev/reference/sql/statements/recover-table/']
 ---
 
 # RECOVER TABLE
@@ -23,6 +22,20 @@ RECOVER TABLE table_name
 RECOVER TABLE BY JOB ddl_job_id
 ```
 
+## Synopsis
+
+```ebnf+diagram
+RecoverTableStmt ::=
+    'RECOVER' 'TABLE' ( 'BY' 'JOB' Int64Num | TableName Int64Num? )
+
+TableName ::=
+    Identifier ( '.' Identifier )?
+
+Int64Num ::= NUM
+
+NUM ::= intLit
+```
+
 > **Note:**
 >
 > + If a table is deleted and the GC lifetime is out, the table cannot be recovered with `RECOVER TABLE`. Execution of `RECOVER TABLE` in this scenario returns an error like: `snapshot is older than GC safe point 2019-07-10 13:45:57 +0800 CST`.
@@ -31,9 +44,9 @@ RECOVER TABLE BY JOB ddl_job_id
 >
 > + `RECOVER TABLE` is supported in the Binlog version 3.0.1, so you can use `RECOVER TABLE` in the following three situations:
 >
->     - Binglog version is 3.0.1 or later.
+>     - Binlog version is 3.0.1 or later.
 >     - TiDB 3.0 is used both in the upstream cluster and the downstream cluster.
->     - The GC life time of the slave cluster must be longer than that of the master cluster. However, as latency occurs during data replication between upstream and downstream databases, data recovery might fail in the downstream.
+>     - The GC life time of the secondary cluster must be longer than that of the primary cluster. However, as latency occurs during data replication between upstream and downstream databases, data recovery might fail in the downstream.
 
 ### Troubleshoot errors during TiDB Binlog replication
 
@@ -45,7 +58,7 @@ When you use `RECOVER TABLE` in the upstream TiDB during TiDB Binlog replication
 
 + Latency occurs during replication between upstream and downstream databases. An error instance: `snapshot is older than GC safe point 2019-07-10 13:45:57 +0800 CST`.
 
-For the above three situations, you can resume data replication from TiDB Binlog with a [full import of the deleted table](/ecosystem-tool-user-guide.md#full-backup-and-restore-of-tidb-cluster-data-1).
+For the above three situations, you can resume data replication from TiDB Binlog with a [full import of the deleted table](/ecosystem-tool-user-guide.md#backup-and-restore).
 
 ## Examples
 
@@ -106,3 +119,7 @@ When deleting a table, TiDB only deletes the table metadata, and writes the tabl
 Therefore, to recover a table, you only need to recover the table metadata and delete the corresponding row record in the `mysql.gc_delete_range` table before the GC Worker deletes the table data. You can use a snapshot read of TiDB to recover the table metadata. Refer to [Read Historical Data](/read-historical-data.md) for details.
 
 Table recovery is done by TiDB obtaining the table metadata through snapshot read, and then going through the process of table creation similar to `CREATE TABLE`. Therefore, `RECOVER TABLE` itself is, in essence, a kind of DDL operation.
+
+## MySQL compatibility
+
+This statement is a TiDB extension to MySQL syntax.

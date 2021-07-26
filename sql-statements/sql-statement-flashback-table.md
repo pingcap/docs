@@ -1,21 +1,22 @@
 ---
 title: FLASHBACK TABLE
 summary: Learn how to recover tables using the `FLASHBACK TABLE` statement.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/flashback-table/']
+aliases: ['/docs/dev/sql-statements/sql-statement-flashback-table/','/docs/dev/reference/sql/statements/flashback-table/']
 ---
 
 # FLASHBACK TABLE
 
 The `FLASHBACK TABLE` syntax is introduced since TiDB 4.0. You can use the `FLASHBACK TABLE` statement to restore the tables and data dropped by the `DROP` or `TRUNCATE` operation within the Garbage Collection (GC) lifetime.
 
-Use the following command to query the TiDB cluster's `tikv_gc_safe_point` and `tikv_gc_life_time`. As long as the table is dropped by `DROP` or `TRUNCATE` statements after the `tikv_gc_safe_point` time, you can restore the table using the `FLASHBACK TABLE` statement.
+The system variable [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) (default: `10m0s`) defines the retention time of earlier versions of rows. The current `safePoint` of where garabage collection has been performed up to can be obtained with the following query:
 
 {{< copyable "sql" >}}
 
 ```sql
-select * from mysql.tidb where variable_name in ('tikv_gc_safe_point','tikv_gc_life_time');
+SELECT * FROM mysql.tidb WHERE variable_name = 'tikv_gc_safe_point';
 ```
+
+As long as the table is dropped by `DROP` or `TRUNCATE` statements after the `tikv_gc_safe_point` time, you can restore the table using the `FLASHBACK TABLE` statement.
 
 ## Syntax
 
@@ -25,14 +26,27 @@ select * from mysql.tidb where variable_name in ('tikv_gc_safe_point','tikv_gc_l
 FLASHBACK TABLE table_name [TO other_table_name]
 ```
 
+## Synopsis
+
+```ebnf+diagram
+FlashbackTableStmt ::=
+    'FLASHBACK' 'TABLE' TableName FlashbackToNewName
+
+TableName ::=
+    Identifier ( '.' Identifier )?
+
+FlashbackToNewName ::=
+    ( 'TO' Identifier )?
+```
+
 ## Notes
 
 If a table is dropped and the GC lifetime has passed, you can no longer use the `FLASHBACK TABLE` statement to recover the dropped data. Otherwise, an error like `Can't find dropped / truncated table 't' in GC safe point 2020-03-16 16:34:52 +0800 CST` will be returned.
 
 Pay attention to the following conditions and requirements when you enable TiDB Binlog and use the `FLASHBACK TABLE` statement:
 
-* The downstream slave cluster must also support `FLASHBACK TABLE`.
-* The GC lifetime of the slave cluster must be longer than that of the master cluster.
+* The downstream secondary cluster must also support `FLASHBACK TABLE`.
+* The GC lifetime of the secondary cluster must be longer than that of the primary cluster.
 * The delay of replication between the upstream and downstream might also cause the failure to recover data to the downstream.
 * If an error occurs when TiDB Binlog is replicating a table, you need to filter that table in TiDB Binlog and manually import all data of that table.
 
@@ -87,3 +101,7 @@ From the above process, you can see that TiDB always operates on the metadata of
 > You cannot use `FLASHBACK` statements to restore the same deleted table multiple times, because the ID of the restored table is the same ID of the dropped table, and TiDB requires that all existing tables must have a globally unique table ID.
 
 The `FLASHBACK TABLE` operation is done by TiDB obtaining the table metadata through snapshot read, and then going through the process of table creation similar to `CREATE TABLE`. Therefore, `FLASHBACK TABLE` is, in essence, a kind of DDL operation.
+
+## MySQL compatibility
+
+This statement is a TiDB extension to MySQL syntax.

@@ -1,15 +1,92 @@
 ---
 title: TiKV Control User Guide
 summary: Use TiKV Control to manage a TiKV cluster.
-category: reference
-aliases: ['/docs/dev/reference/tools/tikv-control/']
+aliases: ['/docs/dev/tikv-control/','/docs/dev/reference/tools/tikv-control/']
 ---
 
 # TiKV Control User Guide
 
-TiKV Control (`tikv-ctl`) is a command line tool of TiKV, used to manage the cluster.
+TiKV Control (`tikv-ctl`) is a command line tool of TiKV, used to manage the cluster. Its installation directory is as follows:
 
-When you compile TiKV, the `tikv-ctl` command is also compiled at the same time. If the cluster is deployed using TiDB Ansible, the `tikv-ctl` binary file exists in the corresponding `tidb-ansible/resources/bin` directory. If the cluster is deployed using the binary, the `tikv-ctl` file is in the `bin` directory together with other files such as `tidb-server`, `pd-server`, `tikv-server`, etc.
+* If the cluster is deployed using TiUP, `tikv-ctl` directory is in the in `~/.tiup/components/ctl/{VERSION}/` directory.
+
+## Use TiKV Control in TiUP
+
+> **Note:**
+>
+> It is recommended that the version of the Control tool you use is consistent with the version of the cluster.
+
+`tikv-ctl` is also integrated in the `tiup` command. Execute the following command to call the `tikv-ctl` tool:
+
+{{< copyable "shell-regular" >}}
+
+```bash
+tiup ctl tikv
+```
+
+```
+Starting component `ctl`: /home/tidb/.tiup/components/ctl/v4.0.8/ctl tikv
+TiKV Control (tikv-ctl)
+Release Version:   4.0.8
+Edition:           Community
+Git Commit Hash:   83091173e960e5a0f5f417e921a0801d2f6635ae
+Git Commit Branch: heads/refs/tags/v4.0.8
+UTC Build Time:    2020-10-30 08:40:33
+Rust Version:      rustc 1.42.0-nightly (0de96d37f 2019-12-19)
+Enable Features:   jemalloc mem-profiling portable sse protobuf-codec
+Profile:           dist_release
+
+A tool for interacting with TiKV deployments.
+USAGE:
+    TiKV Control (tikv-ctl) [FLAGS] [OPTIONS] [SUBCOMMAND]
+FLAGS:
+    -h, --help                    Prints help information
+        --skip-paranoid-checks    Skip paranoid checks when open rocksdb
+    -V, --version                 Prints version information
+OPTIONS:
+        --ca-path <ca_path>              Set the CA certificate path
+        --cert-path <cert_path>          Set the certificate path
+        --config <config>                Set the config for rocksdb
+        --db <db>                        Set the rocksdb path
+        --decode <decode>                Decode a key in escaped format
+        --encode <encode>                Encode a key in escaped format
+        --to-hex <escaped-to-hex>        Convert an escaped key to hex key
+        --to-escaped <hex-to-escaped>    Convert a hex key to escaped key
+        --host <host>                    Set the remote host
+        --key-path <key_path>            Set the private key path
+        --pd <pd>                        Set the address of pd
+        --raftdb <raftdb>                Set the raft rocksdb path
+SUBCOMMANDS:
+    bad-regions           Get all regions with corrupt raft
+    cluster               Print the cluster id
+    compact               Compact a column family in a specified range
+    compact-cluster       Compact the whole cluster in a specified range in one or more column families
+    consistency-check     Force a consistency-check for a specified region
+    decrypt-file          Decrypt an encrypted file
+    diff                  Calculate difference of region keys from different dbs
+    dump-snap-meta        Dump snapshot meta file
+    encryption-meta       Dump encryption metadata
+    fail                  Inject failures to TiKV and recovery
+    help                  Prints this message or the help of the given subcommand(s)
+    metrics               Print the metrics
+    modify-tikv-config    Modify tikv config, eg. tikv-ctl --host ip:port modify-tikv-config -n
+                          rocksdb.defaultcf.disable-auto-compactions -v true
+    mvcc                  Print the mvcc value
+    print                 Print the raw value
+    raft                  Print a raft log entry
+    raw-scan              Print all raw keys in the range
+    recover-mvcc          Recover mvcc data on one node by deleting corrupted keys
+    recreate-region       Recreate a region with given metadata, but alloc new id for it
+    region-properties     Show region properties
+    scan                  Print the range db range
+    size                  Print region size
+    split-region          Split the region
+    store                 Print the store id
+    tombstone             Set some regions on the node to tombstone by manual
+    unsafe-recover        Unsafely recover the cluster when the majority replicas are failed
+```
+
+You can add corresponding parameters and subcommands after `tiup ctl tikv`.
 
 ## General options
 
@@ -20,7 +97,7 @@ When you compile TiKV, the `tikv-ctl` command is also compiled at the same time.
     For this mode, if SSL is enabled in TiKV, `tikv-ctl` also needs to specify the related certificate file. For example:
 
     ```
-    $ tikv-ctl --ca-path ca.pem --cert-path client.pem --key-path client-key.pem --host 127.0.0.1:21060 <subcommands>
+    $ tikv-ctl --ca-path ca.pem --cert-path client.pem --key-path client-key.pem --host 127.0.0.1:20160 <subcommands>
     ```
 
     However, sometimes `tikv-ctl` communicates with PD instead of TiKV. In this case, you need to use the `--pd` option instead of `--host`. Here is an example:
@@ -60,7 +137,7 @@ Use the `raft` subcommand to view the status of the Raft state machine at a spec
 Use the `region` and `log` subcommands to obtain the above information respectively. The two subcommands both support the remote mode and the local mode at the same time. Their usage and output are as follows:
 
 ```bash
-$ tikv-ctl --host 127.0.0.1:21060 raft region -r 2
+$ tikv-ctl --host 127.0.0.1:20160 raft region -r 2
 region id: 2
 region state key: \001\003\000\000\000\000\000\000\000\002\001
 region state: Some(region {id: 2 region_epoch {conf_ver: 3 version: 1} peers {id: 3 store_id: 1} peers {id: 5 store_id: 4} peers {id: 7 store_id: 6}})
@@ -112,8 +189,7 @@ In this command, the key is also the escaped form of raw key.
 
 The `raw-scan` command scans directly from the RocksDB. Note that to scan data keys you need to add a `'z'` prefix to keys.
 
-Use `--from` and `--to` options to specify the range to scan (unbounded by default). Use `--limit` to limit at most how
-many keys to print out (30 by default). Use `--cf` to specify which cf to scan (can be `default`, `write` or `lock`).
+Use `--from` and `--to` options to specify the range to scan (unbounded by default). Use `--limit` to limit at most how many keys to print out (30 by default). Use `--cf` to specify which cf to scan (can be `default`, `write` or `lock`).
 
 ```bash
 $ ./tikv-ctl --db /var/lib/tikv/db/ raw-scan --from 'zt' --limit 2 --cf default
@@ -149,7 +225,15 @@ The properties can be used to check whether the Region is healthy or not. If not
 
 ### Compact data of each TiKV manually
 
-Use the `compact` command to manually compact data of each TiKV. If you specify the `--from` and `--to` options, then their flags are also in the form of escaped raw key. You can use the `--db` option to specify the RocksDB that you need to compact. The optional values are `kv` and `raft`. Also, the `--threads` option allows you to specify the concurrency that you compact and its default value is 8. Generally, a higher concurrency comes with a faster compact speed, which might yet affect the service. You need to choose an appropriate concurrency based on the scenario.
+Use the `compact` command to manually compact data of each TiKV. If you specify the `--from` and `--to` options, then their flags are also in the form of escaped raw key.
+
+- Use the `--host` option to specify the TiKV that needs to perform compaction.
+- Use the `-d` option to specify the RocksDB that performs compaction. The optional values are `kv` and `raft`.
+- Use the `--threads` option allows you to specify the concurrency for the TiKV compaction and its default value is `8`. Generally, a higher concurrency comes with a faster compaction speed, which might yet affect the service. You need to choose an appropriate concurrency count based on your scenario.
+- Use the `--bottommost` option to include or exclude the bottommost files when TiKV performs compaction. The value options are `default`, `skip`, and `force`. The default value is `default`.
+    - `default` means that the bottommost files are included only when the Compaction Filter feature is enabled.
+    - `skip` means that the bottommost files are excluded when TiKV performs compaction.
+    - `force` means that the bottommost files are always included when TiKV performs compaction.
 
 ```bash
 $ tikv-ctl --db /path/to/tikv/db compact -d kv
@@ -164,29 +248,39 @@ Use the `compact-cluster` command to manually compact data of the whole TiKV clu
 
 The `tombstone` command is usually used in circumstances where the sync-log is not enabled, and some data written in the Raft state machine is lost caused by power down.
 
-In a TiKV instance, you can use this command to set the status of some Regions to Tombstone. Then when you restart the instance, those Regions are skipped. Those Regions need to have enough healthy replicas in other TiKV instances to be able to continue writing and reading through the Raft mechanism.
+In a TiKV instance, you can use this command to set the status of some Regions to tombstone. Then when you restart the instance, those Regions are skipped to avoid the restart failure caused by damaged Raft state machines of those Regions. Those Regions need to have enough healthy replicas in other TiKV instances to be able to continue the reads and writes through the Raft mechanism.
 
-Follow the two steps to set a Region to Tombstone:
+In general cases, you can remove the corresponding Peer of this Region using the `remove-peer` command:
 
-1. Remove the corresponding Peer of this Region on the machine in `pd-ctl`:
+{{< copyable "shell-regular" >}}
 
-    {{< copyable "shell-regular" >}}
+```shell
+pd-ctl operator add remove-peer <region_id> <store_id>
+```
 
-    ```shell
-    pd-ctl operator add remove-peer <region_id> <store_id>
-    ```
+Then use the `tikv-ctl` tool to set a Region to tombstone on the corresponding TiKV instance to skip the health check for this Region at startup:
 
-2. Use the `tombstone` command to set a Region to Tombstone:
+{{< copyable "shell-regular" >}}
 
-    {{< copyable "shell-regular" >}}
+```shell
+tikv-ctl --db /path/to/tikv/db tombstone -p 127.0.0.1:2379 -r <region_id>
+```
 
-    ```shell
-    tikv-ctl --db /path/to/tikv/db tombstone -p 127.0.0.1:2379 -r <region_id>
-    ```
+```
+success!
+```
 
-    ```
-    success!
-    ```
+However, in some cases, you cannot easily remove this Peer of this Region from PD, so you can specify the `--force` option in `tikv-ctl` to forcibly set the Peer to tombstone:
+
+{{< copyable "shell-regular" >}}
+
+```shell
+tikv-ctl --db /path/to/tikv/db tombstone -p 127.0.0.1:2379 -r <region_id>,<region_id> --force
+```
+
+```
+success!
+```
 
 > **Note:**
 >
@@ -198,9 +292,9 @@ Follow the two steps to set a Region to Tombstone:
 Use the `consistency-check` command to execute a consistency check among replicas in the corresponding Raft of a specific Region. If the check fails, TiKV itself panics. If the TiKV instance specified by `--host` is not the Region leader, an error is reported.
 
 ```bash
-$ tikv-ctl --host 127.0.0.1:21060 consistency-check -r 2
+$ tikv-ctl --host 127.0.0.1:20160 consistency-check -r 2
 success!
-$ tikv-ctl --host 127.0.0.1:21061 consistency-check -r 2
+$ tikv-ctl --host 127.0.0.1:20161 consistency-check -r 2
 DebugClient::check_region_consistency: RpcFailure(RpcStatus { status: Unknown, details: Some("StringError(\"Leader is on store 1\")") })
 ```
 
@@ -238,23 +332,77 @@ If the command is successfully executed, it prints the above information. If the
     $ tikv-ctl --host 127.0.0.1:20160 region-properties -r 2
     ```
 
-### Modify the RocksDB configuration of TiKV dynamically
+### Modify the TiKV configuration dynamically
 
-You can use the `modify-tikv-config` command to dynamically modify the configuration arguments. Currently, it only supports dynamically modifying RocksDB related arguments.
+You can use the `modify-tikv-config` command to dynamically modify the configuration arguments. Currently, the TiKV configuration items that can be dynamically modified and the detailed modification are consistent with modifying configuration using SQL statements. For details, see [Modify TiKV configuration online](/dynamic-config.md#modify-tikv-configuration-online).
 
-- `-m` is used to specify the target RocksDB. You can set it to `kvdb` or `raftdb`.
-- `-n` is used to specify the configuration name.
-    You can refer to the arguments of `[rocksdb]` and `[raftdb]` (corresponding to `kvdb` and `raftdb`) in the [TiKV configuration template](https://github.com/tikv/tikv/blob/master/etc/config-template.toml#L213-L500).
-    You can use `default|write|lock + . + argument name` to specify the configuration of different CFs. For `kvdb`, you can set it to `default`, `write`, or `lock`; for `raftdb`, you can only set it to `default`.
+- `-n` is used to specify the full name of the configuration item. For the list of configuration items that can be modified online, see [Modify TiKV configuration online](/dynamic-config.md#modify-tikv-configuration-online).
 - `-v` is used to specify the configuration value.
 
-```bash
-$ tikv-ctl modify-tikv-config -m kvdb -n max_background_jobs -v 8
-success！
-$ tikv-ctl modify-tikv-config -m kvdb -n write.block-cache-size -v 256MB
-success!
-$ tikv-ctl modify-tikv-config -m raftdb -n default.disable_auto_compactions -v true
-success!
+Set the size of `shared block cache`:
+
+{{< copyable "shell-regular" >}}
+
+```shell
+tikv-ctl --host ip:port modify-tikv-config -n storage.block-cache.capacity -v 10GB
+```
+
+```
+success
+```
+
+When `shared block cache` is disabled, set `block cache size` for the `write` CF:
+
+{{< copyable "shell-regular" >}}
+
+```shell
+tikv-ctl --host ip:port modify-tikv-config -n rocksdb.writecf.block-cache-size -v 256MB
+```
+
+```
+success
+```
+
+{{< copyable "shell-regular" >}}
+
+```shell
+tikv-ctl --host ip:port modify-tikv-config -n raftdb.defaultcf.disable-auto-compactions -v true
+```
+
+```
+success
+```
+
+{{< copyable "shell-regular" >}}
+
+```shell
+tikv-ctl --host ip:port modify-tikv-config -n raftstore.sync-log -v false
+```
+
+```
+success
+```
+
+When the compaction rate limit causes accumulated compaction pending bytes, disable the `rate-limiter-auto-tuned` mode or set a higher limit for the compaction flow:
+
+{{< copyable "shell-regular" >}}
+
+```shell
+tikv-ctl --host ip:port modify-tikv-config -n rocksdb.rate-limiter-auto-tuned -v false
+```
+
+```
+success
+```
+
+{{< copyable "shell-regular" >}}
+
+```shell
+tikv-ctl --host ip:port modify-tikv-config -n rocksdb.rate-bytes-per-sec -v "1GB"
+```
+
+```
+success
 ```
 
 ### Force Region to recover the service from failure of multiple replicas
@@ -271,13 +419,15 @@ success!
 > **Note:**
 >
 > - This command only supports the local mode. It prints `success!` when successfully run.
-> - You must run this command for all stores where specified Regions' peers are located. If `-r` is not set, all Regions are involved, and you need to run this command for all stores.
+> - You must run this command for all stores where specified Regions' peers are located.
+> - If the `--all-regions` option is used, usually you need to run this command on all the remaining healthy stores in the cluster. You need to ensure that the healthy stores stop providing services before recovering the damaged stores. Otherwise, the inconsistent peer lists in Region replicas will cause errors when you execute `split-region` or `remove-peer`. This further causes inconsistency between other metadata, and finally, the Regions will become unavailable.
 
 ### Recover from MVCC data corruption
 
 Use the `recover-mvcc` command in circumstances where TiKV cannot run normally caused by MVCC data corruption. It cross-checks 3 CFs ("default", "write", "lock") to recover from various kinds of inconsistency.
 
-Use the `-r` option to specify involved Regions by `region_id`. Use the `-p` option to specify PD endpoints.
+- Use the `-r` option to specify involved Regions by `region_id`.
+- Use the `-p` option to specify PD endpoints.
 
 ```bash
 $ tikv-ctl --db /path/to/tikv/db recover-mvcc -r 1001,1002 -p 127.0.0.1:2379
@@ -292,8 +442,7 @@ success!
 
 ### Ldb Command
 
-The ldb command line tool offers multiple data access and database administration commands. Some examples are listed below.
-For more information, refer to the help message displayed when running `tikv-ctl ldb` or check the documents from RocksDB.
+The `ldb` command line tool offers multiple data access and database administration commands. Some examples are listed below. For more information, refer to the help message displayed when running `tikv-ctl ldb` or check the documents from RocksDB.
 
 Examples of data access sequence:
 
@@ -312,3 +461,60 @@ $ tikv-ctl ldb --hex manifest_dump --path=/tmp/db/MANIFEST-000001
 You can specify the column family that your query is against using the `--column_family=<string>` command line.
 
 `--try_load_options` loads the database options file to open the database. It is recommended to always keep this option on when the database is running. If you open the database with default options, the LSM-tree might be messed up, which cannot be recovered automatically.
+
+### Dump encryption metadata
+
+Use the `encryption-meta` subcommand to dump encryption metadata. The subcommand can dump two types of metadata: encryption info for data files, and the list of data encryption keys used.
+
+To dump encryption info for data files, use the `encryption-meta dump-file` subcommand. You need to create a TiKV config file to specify `data-dir` for the TiKV deployment:
+
+```
+# conf.toml
+[storage]
+data-dir = "/path/to/tikv/data"
+```
+
+The `--path` option can be used to specify an absolute or relative path to the data file of interest. The command might give empty output if the data file is not encrypted. If `--path` is not provided, encryption info for all data files will be printed.
+
+```bash
+$ tikv-ctl --config=./conf.toml encryption-meta dump-file --path=/path/to/tikv/data/db/CURRENT
+/path/to/tikv/data/db/CURRENT: key_id: 9291156302549018620 iv: E3C2FDBF63FC03BFC28F265D7E78283F method: Aes128Ctr
+```
+
+To dump data encryption keys, use the `encryption-meta dump-key` subcommand. In additional to `data-dir`, you also need to specify the current master key used in the config file. For how to config master key, refer to [Encryption-At-Rest](/encryption-at-rest.md). Also with this command, the `security.encryption.previous-master-key` config will be ignored, and the master key rotation will not be triggered.
+
+```
+# conf.toml
+[storage]
+data-dir = "/path/to/tikv/data"
+
+[security.encryption.master-key]
+type = "kms"
+key-id = "0987dcba-09fe-87dc-65ba-ab0987654321"
+region = "us-west-2"
+```
+
+Note if the master key is a AWS KMS key, `tikv-ctl` needs to have access to the KMS key. Access to a AWS KMS key can be granted to `tikv-ctl` via environment variable, AWS default config file, or IAM role, whichever is suitable. Refer to AWS document for usage.
+
+The `--ids` option can be used to specified a list of comma-separated data encryption key ids to print. If `--ids` is not provided, all data encryption keys will be printed, along with current key id, which is the id of the latest active data encryption key.
+
+When using the command, you will see a prompt warning that the action will expose sensitive information. Type "I consent" to continue.
+
+```bash
+$ ./tikv-ctl --config=./conf.toml encryption-meta dump-key
+This action will expose encryption key(s) as plaintext. Do not output the result in file on disk.
+Type "I consent" to continue, anything else to exit: I consent
+current key id: 9291156302549018620
+9291156302549018620: key: 8B6B6B8F83D36BE2467ED55D72AE808B method: Aes128Ctr creation_time: 1592938357
+```
+
+```bash
+$ ./tikv-ctl --config=./conf.toml encryption-meta dump-key --ids=9291156302549018620
+This action will expose encryption key(s) as plaintext. Do not output the result in file on disk.
+Type "I consent" to continue, anything else to exit: I consent
+9291156302549018620: key: 8B6B6B8F83D36BE2467ED55D72AE808B method: Aes128Ctr creation_time: 1592938357
+```
+
+> **Note**
+>
+> The command will expose data encryption keys as plaintext. In production, DO NOT redirect the output to a file. Even deleting the output file afterward may not cleanly wipe out the content from disk.

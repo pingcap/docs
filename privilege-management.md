@@ -1,13 +1,15 @@
 ---
 title: Privilege Management
 summary: Learn how to manage the privilege.
-category: reference
-aliases: ['/docs/dev/reference/security/privilege-system/']
+aliases: ['/docs/dev/privilege-management/','/docs/dev/reference/security/privilege-system/']
 ---
 
 # Privilege Management
 
-TiDB supports MySQL 5.7's privilege management system, including the syntax and privilege types. Starting with TiDB 3.0, support for SQL Roles is also available.
+TiDB supports MySQL 5.7's privilege management system, including the syntax and privilege types. The following features from MySQL 8.0 are also supported:
+
+* SQL Roles, starting with TiDB 3.0.
+* Dynamic privileges, starting with TiDB 5.1.
 
 This document introduces privilege-related TiDB operations, privileges required for TiDB operations and implementation of the privilege system.
 
@@ -49,7 +51,7 @@ Empty set (0.00 sec)
 mysql> GRANT ALL PRIVILEGES ON test.* TO 'idontexist';
 ERROR 1105 (HY000): You are not allowed to create a user with GRANT
 
-mysql> SELECT user,host,password FROM mysql.user WHERE user='idontexist';
+mysql> SELECT user,host,authentication_string FROM mysql.user WHERE user='idontexist';
 Empty set (0.00 sec)
 ```
 
@@ -73,36 +75,16 @@ Empty set (0.00 sec)
 mysql> GRANT ALL PRIVILEGES ON test.* TO 'idontexist';
 Query OK, 1 row affected (0.05 sec)
 
-mysql> SELECT user,host,password FROM mysql.user WHERE user='idontexist';
-+------------+------+----------+
-| user       | host | password |
-+------------+------+----------+
-| idontexist | %    |          |
-+------------+------+----------+
-1 row in set (0.00 sec)
+mysql> SELECT user,host,authentication_string FROM mysql.user WHERE user='idontexist';
++------------+------+-----------------------+
+| user       | host | authentication_string |
++------------+------+-----------------------+
+| idontexist | %    |                       |
++------------+------+-----------------------+
+1 row in set (0.01 sec)
 ```
 
-> **Note:**
->
-> Granting privileges to a database or table does not check if the database or table exists.
-
-```sql
-mysql> SELECT * FROM test.xxxx;
-ERROR 1146 (42S02): Table 'test.xxxx' doesn't exist
-
-mysql> GRANT ALL PRIVILEGES ON test.xxxx TO xxxx;
-Query OK, 0 rows affected (0.00 sec)
-
-mysql> SELECT user,host FROM mysql.tables_priv WHERE user='xxxx';
-+------|------+
-| user | host |
-+------|------+
-| xxxx | %    |
-+------|------+
-1 row in set (0.00 sec)
-```
-
-You can use fuzzy matching to grant privileges to databases and tables.
+You can use fuzzy matching in `GRANT` to grant privileges to databases.
 
 ```sql
 mysql> GRANT ALL PRIVILEGES ON `te%`.* TO genius;
@@ -172,56 +154,93 @@ You can use the `SHOW GRANTS` statement to see what privileges are granted to a 
 
 ```sql
 SHOW GRANTS; -- show grants for the current user
+
++-------------------------------------------------------------+
+| Grants for User                                             |
++-------------------------------------------------------------+
+| GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION |
++-------------------------------------------------------------+
 SHOW GRANTS FOR 'root'@'%'; -- show grants for a specific user
 ```
 
-To be more precise, you can check the privilege information in the `Grant` table. For example, you can use the following steps to check if the `test@%` user has the `Insert` privilege on `db1.t`:
+For example, create a user `rw_user@192.168.%` and grant the user with write privilege on the `test.write_table` table and global read privilege.
 
-1. Check if `test@%` has global `Insert` privilege:
+```sql
+CREATE USER `rw_user`@`192.168.%`;
+GRANT SELECT ON *.* TO `rw_user`@`192.168.%`;
+GRANT INSERT, UPDATE ON `test`.`write_table` TO `rw_user`@`192.168.%`;
+```
 
-    ```sql
-    SELECT Insert_priv FROM mysql.user WHERE user='test' AND host='%';
-    ```
+Show granted privileges of the `rw_user@192.168.%` user:
 
-2. If not, check if `test@%` has database-level `Insert` privilege at `db1`:
+```sql
+SHOW GRANTS FOR `rw_user`@`192.168.%`;
 
-    ```sql
-    SELECT Insert_priv FROM mysql.db WHERE user='test' AND host='%';
-    ```
++------------------------------------------------------------------+
+| Grants for rw_user@192.168.%                                     |
++------------------------------------------------------------------+
+| GRANT Select ON *.* TO 'rw_user'@'192.168.%'                     |
+| GRANT Insert,Update ON test.write_table TO 'rw_user'@'192.168.%' |
++------------------------------------------------------------------+
+```
 
-3. If the result is still empty, check whether `test@%` has table-level `Insert` privilege at `db1.t`:
+### Dynamic privileges
 
-    ```sql
-    SELECT table_priv FROM mysql.tables_priv WHERE user='test' AND host='%' AND db='db1';
-    ```
+Since v5.1, TiDB features support dynamic privileges, a feature borrowed from MySQL 8.0. Dynamic privileges are intended to replace the `SUPER` privilege by implementing more fine-grained access to certain operations. For example, using dynamic privileges, system administrators can create a user account that can only perform `BACKUP` and `RESTORE` operations.
+
+Dynamic privileges include:
+
+* `BACKUP_ADMIN`
+* `RESTORE_ADMIN`
+* `ROLE_ADMIN`
+* `CONNECTION_ADMIN`
+* `SYSTEM_VARIABLES_ADMIN`
+
+To see the full set of dynamic privileges, execute the `SHOW PRIVILEGES` statement. Because plugins are permitted to add new privileges, the list of privileges that are assignable might differ based on your TiDB installation.
 
 ## Privileges required for TiDB operations
 
-You can check privileges of TiDB users in the `INFORMATION_SCHEMA.USER_PRIVILEGES` table.
+You can check privileges of TiDB users in the `INFORMATION_SCHEMA.USER_PRIVILEGES` table. For example:
 
-| Privilege type       |  Privilege variable    | Privilege description                 |
-| :------------ | :------------ | :---------------------- |
-| ALL            | `AllPriv`        | All the privileges                 |
-| Drop           | `DropPriv`      | Deletes a schema or table        |
-| Index          | `IndexPriv`      | Creates or deletes an index          |
-| Alter          | `AlterPriv`      | Executes the `ALTER` statement          |
-| Super          | `SuperPriv`      | All the privileges                 |
-| Grant          | `GrantPriv`      | Grants another user a privilege         |
-| Create         | `CreatePriv`     | Creates a schema or table        |
-| Select         | `SelectPriv`     | Reads the table data               |
-| Insert         | `InsertPriv`     | Inserts data to a table             |
-| Update         | `UpdatePriv`     | Updates the table data             |
-| Delete         | `DeletePriv`     | Deleted the table data             |
-| Trigger        | `TriggerPriv`    | /                 |
-| Process        | `ProcessPriv`    | Displays the running task       |
-| Execute        | `ExecutePriv`    | Executes the `EXECUTE` statement       |
-| Drop Role      | `DropRolePriv`   | Executes `DROP ROLE`           |
-| Show View      | `ShowViewPriv`   | Executes `SHOW CREATE VIEW`    |
-| References     | `ReferencesPriv` | /                |
-| Create View    | `CreateViewPriv` | Creates a View                 |
-| Create User    | `CreateUserPriv` | Creates a user                |
-| Create Role    | `CreateRolePriv` | Executes `CREATE ROLE`         |
-| Show Databases | `ShowDBPriv`     | Shows the table status in the database |
+```sql
+mysql> SELECT * FROM INFORMATION_SCHEMA.USER_PRIVILEGES WHERE grantee = "'root'@'%'";
++------------+---------------+-------------------------+--------------+
+| GRANTEE    | TABLE_CATALOG | PRIVILEGE_TYPE          | IS_GRANTABLE |
++------------+---------------+-------------------------+--------------+
+| 'root'@'%' | def           | Select                  | YES          |
+| 'root'@'%' | def           | Insert                  | YES          |
+| 'root'@'%' | def           | Update                  | YES          |
+| 'root'@'%' | def           | Delete                  | YES          |
+| 'root'@'%' | def           | Create                  | YES          |
+| 'root'@'%' | def           | Drop                    | YES          |
+| 'root'@'%' | def           | Process                 | YES          |
+| 'root'@'%' | def           | References              | YES          |
+| 'root'@'%' | def           | Alter                   | YES          |
+| 'root'@'%' | def           | Show Databases          | YES          |
+| 'root'@'%' | def           | Super                   | YES          |
+| 'root'@'%' | def           | Execute                 | YES          |
+| 'root'@'%' | def           | Index                   | YES          |
+| 'root'@'%' | def           | Create User             | YES          |
+| 'root'@'%' | def           | Create Tablespace       | YES          |
+| 'root'@'%' | def           | Trigger                 | YES          |
+| 'root'@'%' | def           | Create View             | YES          |
+| 'root'@'%' | def           | Show View               | YES          |
+| 'root'@'%' | def           | Create Role             | YES          |
+| 'root'@'%' | def           | Drop Role               | YES          |
+| 'root'@'%' | def           | CREATE TEMPORARY TABLES | YES          |
+| 'root'@'%' | def           | LOCK TABLES             | YES          |
+| 'root'@'%' | def           | CREATE ROUTINE          | YES          |
+| 'root'@'%' | def           | ALTER ROUTINE           | YES          |
+| 'root'@'%' | def           | EVENT                   | YES          |
+| 'root'@'%' | def           | SHUTDOWN                | YES          |
+| 'root'@'%' | def           | RELOAD                  | YES          |
+| 'root'@'%' | def           | FILE                    | YES          |
+| 'root'@'%' | def           | CONFIG                  | YES          |
+| 'root'@'%' | def           | REPLICATION CLIENT      | YES          |
+| 'root'@'%' | def           | REPLICATION SLAVE       | YES          |
++------------+---------------+-------------------------+--------------+
+31 rows in set (0.00 sec)
+```
 
 ### ALTER
 
@@ -233,6 +252,10 @@ You can check privileges of TiDB users in the `INFORMATION_SCHEMA.USER_PRIVILEGE
 > **Note:**
 >
 > In MySQL 5.7 documentation, users need `INSERT` and `CREATE` privileges to perform the `ALTER` operation on a table. But in reality for MySQL 5.7.25, only the `ALTER` privilege is required in this case. Currently, the `ALTER` privilege in TiDB is consistent with the actual behavior in MySQL.
+
+### BACKUP
+
+Requires the `SUPER` or `BACKUP_ADMIN` privilege.
 
 ### CREATE DATABASE
 
@@ -268,6 +291,10 @@ Requires the `INDEX` privilege for the table.
 
 Requires the `DROP` privilege for the table.
 
+### LOAD DATA
+
+Requires the `INSERT` privilege for the table.
+
 ### TRUNCATE TABLE
 
 Requires the `DROP` privilege for the table.
@@ -285,6 +312,10 @@ Requires the `INSERT` and `SELECT` privileges for the table.
 `SHOW CREATE TABLE` requires any single privilege to the table.
 
 `SHOW CREATE VIEW` requires the `SHOW VIEW` privilege.
+
+`SHOW GRANTS` requires the `SELECT` privilege to the `mysql` database. If the target user is current user, `SHOW GRANTS` does not require any privilege.
+
+`SHOW PROCESSLIST` requires `SUPER` to show connections belonging to other users.
 
 ### CREATE ROLE/USER
 
@@ -306,9 +337,31 @@ Requires the `CREATE USER` privilege.
 
 Requires the `GRANT` privilege with the privileges granted by `GRANT`.
 
+Requires additional `CREATE USER` privilege to create a user implicitly.
+
+`GRANT ROLE` requires `SUPER` or `ROLE_ADMIN` privilege.
+
 ### REVOKE
 
-Requires the `SUPER` privilege.
+Requires the `GRANT` privilege and those privileges targeted by the `REVOKE` statement.
+
+`REVOKE ROLE` requires `SUPER` or `ROLE_ADMIN` privilege.
+
+### SET GLOBAL
+
+Requires `SUPER` or `SYSTEM_VARIABLES_ADMIN` privilege to set global variables.
+
+### ADMIN
+
+Requires `SUPER` privilege.
+
+### SET DEFAULT ROLE
+
+Requires `SUPER` privilege.
+
+### KILL
+
+Requires `SUPER` or `CONNECTION_ADMIN` privilege to kill other user sessions.
 
 ## Implementation of the privilege system
 
@@ -339,11 +392,11 @@ In this record, `Host` and `User` determine that the connection request sent by 
 
 > **Note:**
 >
-> It is recommended to only update the privilege tables via the supplied syntax such as `GRANT`, `CREATE USER` and `DROP USER`. Making direct edits to the underlying privilege tables will not automatially update the privilege cache, leading to unpredictable behavior until `FLUSH PRIVILEGES` is executed.
+> It is recommended to only update the privilege tables via the supplied syntax such as `GRANT`, `CREATE USER` and `DROP USER`. Making direct edits to the underlying privilege tables will not automatically update the privilege cache, leading to unpredictable behavior until `FLUSH PRIVILEGES` is executed.
 
 ### Connection verification
 
-When the client sends a connection request, TiDB server will verify the login operation. TiDB server first checks the `mysql.user` table. If a record of `User` and `Host` matches the connection request, TiDB server then verifies the `Password`.
+When the client sends a connection request, TiDB server will verify the login operation. TiDB server first checks the `mysql.user` table. If a record of `User` and `Host` matches the connection request, TiDB server then verifies the `authentication_string`.
 
 User identity is based on two pieces of information: `Host`, the host that initiates the connection, and `User`, the user name. If the user name is not empty, the exact match of user named is a must.
 
@@ -372,19 +425,3 @@ Manually editing tables such as `mysql.user` with statements such as `INSERT`, `
 ```sql
 FLUSH PRIVILEGES;
 ```
-
-### Limitations and constraints
-
-Currently, the following privileges are not checked yet because they are less frequently used:
-
-- FILE
-- USAGE
-- SHUTDOWN
-- EXECUTE
-- PROCESS
-- INDEX
-- ...
-
-> **Note:**
->
-> Column-level privileges are not implemented at this stage.

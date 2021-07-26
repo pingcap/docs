@@ -1,7 +1,7 @@
 ---
 title: SQL Statements Page of TiDB Dashboard
 summary: View the execution status of all SQL statements in the TiDB cluster.
-category: how-to
+aliases: ['/docs/dev/dashboard/dashboard-statement-list/']
 ---
 
 # SQL Statements Page of TiDB Dashboard
@@ -55,7 +55,7 @@ On the setting page, you can disable or enable the SQL statements feature. When 
 - Collect interval: The length of period for each SQL statement analysis, which is 30 minutes by default. The SQL statements feature summarizes and counts all SQL statements within a period of time. If the period is too long, the granularity of the summary is coarse, which is not good for locating problems; if the period is too short, the granularity of the statistics is fine, which is good for locating problems, but this will result in more records and more memory usage within the same data retention duration. Therefore, you need to adjust this value based on the actual situation, and properly lower this value when locating problems.
 - Data retain duration: The retention duration of summary information, which is 1 day by default. Data retained longer than this duration will be deleted from system tables.
 
-See [Configurations of Statement Summary Tables](/statement-summary-tables.md#configurations) for details.
+See [Configurations of Statement Summary Tables](/statement-summary-tables.md#parameter-configuration) for details.
 
 > **Note:**
 >

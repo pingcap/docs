@@ -1,8 +1,7 @@
 ---
 title: TiDB Binlog Error Handling
 summary: Learn how to handle TiDB Binlog errors.
-category: reference
-aliases: ['/docs/dev/reference/tidb-binlog/troubleshoot/error-handling/']
+aliases: ['/docs/dev/tidb-binlog/handle-tidb-binlog-errors/','/docs/dev/reference/tidb-binlog/troubleshoot/error-handling/']
 ---
 
 # TiDB Binlog Error Handling
@@ -33,4 +32,17 @@ Solution: Clean up the disk space and then restart Pump.
 
 Cause: When Pump is started, it notifies all Drainer nodes that are in the `online` state. If it fails to notify Drainer, this error log is printed.
 
-Solution: Use the [binlogctl tool](/tidb-binlog/maintain-tidb-binlog-cluster.md#binlog-guide) to check whether each Drainer node is normal or not. This is to ensure that all Drainer nodes that are in the `online` state are working normally. If the state of a Drainer node is not consistent with its actual working status, use the binlogctl tool to change its state and then restart Pump.
+Solution: Use the [binlogctl tool](/tidb-binlog/binlog-control.md) to check whether each Drainer node is normal or not. This is to ensure that all Drainer nodes that are in the `online` state are working normally. If the state of a Drainer node is not consistent with its actual working status, use the binlogctl tool to change its state and then restart Pump.
+
+## Data loss occurs during the TiDB Binlog replication
+
+You need to confirm that TiDB Binlog is enabled on all TiDB instances and runs normally. If the cluster version is later than v3.0, use the `curl {TiDB_IP}:{STATUS_PORT}/info/all` command to confirm the TiDB Binlog status on all TiDB instances.
+
+## When the upstream transaction is large, Pump reports an error `rpc error: code = ResourceExhausted desc = trying to send message larger than max (2191430008 vs. 2147483647)`
+
+This error occurs because the gRPC message sent by TiDB to Pump exceeds the size limit. You can adjust the maximum size of a gRPC message that Pump allows by specifying `max-message-size` when starting Pump.
+
+## Is there any cleaning mechanism for the incremental data of the file format output by Drainer? Will the data be deleted?
+
+- In Drainer v3.0.x, there is no cleaning mechanism for incremental data of the file format.
+- In the v4.0.x version, there is a time-based data cleaning mechanism. For details, refer to [Drainer's `retention-time` configuration item](https://github.com/pingcap/tidb-binlog/blob/v4.0.9/cmd/drainer/drainer.toml#L153).

@@ -1,8 +1,7 @@
 ---
 title: SHOW TABLE STATUS | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW TABLE STATUS for the TiDB database.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/show-table-status/']
+aliases: ['/docs/dev/sql-statements/sql-statement-show-table-status/','/docs/dev/reference/sql/statements/show-table-status/']
 ---
 
 # SHOW TABLE STATUS
@@ -11,17 +10,17 @@ This statement shows various statistics about tables in TiDB. If the statistics 
 
 ## Synopsis
 
-**ShowStmt:**
+**ShowTableStatusStmt:**
 
-![ShowStmt](/media/sqlgram/ShowStmt.png)
+![ShowTableStatusStmt](/media/sqlgram/ShowTableStatusStmt.png)
 
-**ShowTargetFilterable:**
+**FromOrIn:**
 
-![ShowTargetFilterable](/media/sqlgram/ShowTargetFilterable.png)
+![FromOrIn](/media/sqlgram/FromOrIn.png)
 
-**ShowDatabaseNameOpt:**
+**StatusTableName:**
 
-![ShowDatabaseNameOpt](/media/sqlgram/ShowDatabaseNameOpt.png)
+![StatusTableName](/media/sqlgram/StatusTableName.png)
 
 ## Examples
 
@@ -83,7 +82,7 @@ Max_data_length: 0
 
 ## MySQL compatibility
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/report-issue.md) on GitHub.
+This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
 
 ## See also
 

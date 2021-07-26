@@ -1,7 +1,7 @@
 ---
 title: TiDB Dashboard Diagnostic Report
 summary: Learn the TiDB Dashboard diagnostic report.
-category: how-to
+aliases: ['/docs/dev/dashboard/dashboard-diagnostics-report/']
 ---
 
 # TiDB Dashboard Diagnostic Report
@@ -31,7 +31,7 @@ In this report, some small buttons are described as follows:
 * **expand**: Click **expand** to see details about this monitoring metric. For example, the detailed information of `tidb_get_token` in the image above includes the monitoring information of each TiDB instance's latency.
 * **collapse**: Contrary to **expand**, the button is used to fold detailed monitoring information.
 
-All monitoring metrics basically correspond to those on the TiDB Grafna monitoring dashboard. After a module is found to be abnormal, you can view more monitoring information on the TiDB Grafna.
+All monitoring metrics basically correspond to those on the TiDB Grafana monitoring dashboard. After a module is found to be abnormal, you can view more monitoring information on the TiDB Grafana.
 
 In addition, the `TOTAL_TIME` and `TOTAL_COUNT` metrics in this report are monitoring data read from Prometheus, so calculation inaccuracy might exits in their statistics.
 
@@ -62,7 +62,7 @@ The fields in the table above are described as follows:
 
 #### Cluster Topology Info
 
-The `Cluster Info` table shows the cluster topology information. The information in this table are from TiDB [information_schema.cluster_info](/system-tables/system-table-cluster-info.md) system table.
+The `Cluster Info` table shows the cluster topology information. The information in this table are from TiDB [information_schema.cluster_info](/information-schema/information-schema-cluster-info.md) system table.
 
 ![Cluster info](/media/dashboard/dashboard-diagnostics-cluster-info.png)
 
@@ -78,7 +78,7 @@ The fields in the table above are described as follows:
 
 ### Diagnostic information
 
-TiDB has built-in automatic diagnostic results. For the description of each field, see [information_schema.inspection-result](/system-tables/system-table-inspection-result.md) system table.
+TiDB has built-in automatic diagnostic results. For the description of each field, see [information_schema.inspection-result](/information-schema/information-schema-inspection-result.md) system table.
 
 ### Load Info
 

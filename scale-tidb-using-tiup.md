@@ -1,15 +1,14 @@
 ---
 title: Scale the TiDB Cluster Using TiUP
 summary: Learn how to scale the TiDB cluster using TiUP.
-category: how-to
-aliases: ['/docs/dev/how-to/scale/with-tiup/']
+aliases: ['/docs/dev/scale-tidb-using-tiup/','/docs/dev/how-to/scale/with-tiup/']
 ---
 
 # Scale the TiDB Cluster Using TiUP
 
 The capacity of a TiDB cluster can be increased or decreased without interrupting the online services.
 
-This document describes how to scale the TiDB, TiKV, PD, TiCDC, or TiFlash nodes using TiUP. If you have not installed TiUP, refer to the steps in [Install TiUP on the control machine](/upgrade-tidb-using-tiup.md#install-tiup-on-the-control-machine) and import the cluster into TiUP before you use TiUP to scale the TiDB cluster.
+This document describes how to scale the TiDB, TiKV, PD, TiCDC, or TiFlash cluster using TiUP. If you have not installed TiUP, refer to the steps in [Install TiUP on the control machine](/production-deployment-using-tiup.md#step-2-install-tiup-on-the-control-machine).
 
 To view the current cluster name list, run `tiup cluster list`.
 
@@ -23,7 +22,7 @@ For example, if the original topology of the cluster is as follows:
 | 10.0.1.1 | TiKV |
 | 10.0.1.2 | TiKV |
 
-## Scale out a TiDB/PD/TiKV node
+## Scale out a TiDB/PD/TiKV cluster
 
 If you want to add a TiDB node to the `10.0.1.5` host, take the following steps.
 
@@ -37,6 +36,7 @@ If you want to add a TiDB node to the `10.0.1.5` host, take the following steps.
     >
     > * The port and directory information is not required by default.
     > * If multiple instances are deployed on a single machine, you need to allocate different ports and directories for them. If the ports or directories have conflicts, you will receive a notification during deployment or scaling.
+    > * Since TiUP v1.0.0, the scale-out configuration will inherit the global configuration of the original cluster.
 
     Add the scale-out topology configuration in the `scale-out.yaml` file:
 
@@ -109,6 +109,10 @@ If you want to add a TiDB node to the `10.0.1.5` host, take the following steps.
     tiup cluster scale-out <cluster-name> scale-out.yaml
     ```
 
+    > **Note:**
+    >
+    > The command above is based on the assumption that the mutual trust has been configured for the user to execute the command and the new machine. If the mutual trust cannot be configured, use the `-p` option to enter the password of the new machine, or use the `-i` option to specify the private key file.
+
     If you see the `Scaled cluster <cluster-name> out successfully`, the scale-out operation is successfully completed.
 
 3. Check the cluster status:
@@ -131,7 +135,7 @@ After the scale-out, the cluster topology is as follows:
 | 10.0.1.1   | TiKV    |
 | 10.0.1.2   | TiKV    |
 
-## Scale out a TiFlash node
+## Scale out a TiFlash cluster
 
 If you want to add a TiFlash node to the `10.0.1.4` host, take the following steps.
 
@@ -139,8 +143,8 @@ If you want to add a TiFlash node to the `10.0.1.4` host, take the following ste
 >
 > When adding a TiFlash node to an existing TiDB cluster, you need to note the following things:
 >
-> 1. Confirm that the current TiDB version supports using TiFlash, otherwise upgrade your TiDB cluster to v4.0.0-rc or higher.
-> 2. Download [pd-ctl](https://download.pingcap.org/tidb-v4.0.0-rc.2-linux-amd64.tar.gz) and execute the `config set enable-placement-rules true` command to enable the PD's Placement Rules.
+> 1. Confirm that the current TiDB version supports using TiFlash. Otherwise, upgrade your TiDB cluster to v5.0 or later versions.
+> 2. Execute the `tiup ctl:<cluster-version> pd -u http://<pd_ip>:<pd_port> config set enable-placement-rules true` command to enable the Placement Rules feature. Or execute the corresponding command in [pd-ctl](/pd-control.md).
 
 1. Add the node information to the `scale-out.yaml` file:
 
@@ -163,6 +167,10 @@ If you want to add a TiFlash node to the `10.0.1.4` host, take the following ste
     tiup cluster scale-out <cluster-name> scale-out.yaml
     ```
 
+    > **Note:**
+    >
+    > The command above is based on the assumption that the mutual trust has been configured for the user to execute the command and the new machine. If the mutual trust cannot be configured, use the `-p` option to enter the password of the new machine, or use the `-i` option to specify the private key file.
+
 3. View the cluster status:
 
     {{< copyable "shell-regular" >}}
@@ -183,7 +191,7 @@ After the scale-out, the cluster topology is as follows:
 | 10.0.1.1   | TiKV    |
 | 10.0.1.2   | TiKV    |
 
-## Scale out a TiCDC node
+## Scale out a TiCDC cluster
 
 If you want to add two TiCDC nodes to the `10.0.1.3` and `10.0.1.4` hosts, take the following steps.
 
@@ -207,6 +215,10 @@ If you want to add two TiCDC nodes to the `10.0.1.3` and `10.0.1.4` hosts, take 
     tiup cluster scale-out <cluster-name> scale-out.yaml
     ```
 
+    > **Note:**
+    >
+    > The command above is based on the assumption that the mutual trust has been configured for the user to execute the command and the new machine. If the mutual trust cannot be configured, use the `-p` option to enter the password of the new machine, or use the `-i` option to specify the private key file.
+
 3. View the cluster status:
 
     {{< copyable "shell-regular" >}}
@@ -227,7 +239,7 @@ After the scale-out, the cluster topology is as follows:
 | 10.0.1.1   | TiKV    |
 | 10.0.1.2   | TiKV    |
 
-## Scale in a TiDB/PD/TiKV node
+## Scale in a TiDB/PD/TiKV cluster
 
 If you want to remove a TiKV node from the `10.0.1.5` host, take the following steps.
 
@@ -244,9 +256,9 @@ If you want to remove a TiKV node from the `10.0.1.5` host, take the following s
     ```
 
     ```
-    Starting /root/.tiup/components/cluster/v0.4.6/cluster display <cluster-name>
+    Starting /root/.tiup/components/cluster/v1.5.0/cluster display <cluster-name>
     TiDB Cluster: <cluster-name>
-    TiDB Version: v4.0.0-rc
+    TiDB Version: v5.1.0
     ID              Role         Host        Ports                            Status  Data Dir                Deploy Dir
     --              ----         ----        -----                            ------  --------                ----------
     10.0.1.3:8300   cdc          10.0.1.3    8300                             Up      -                       deploy/cdc-8300
@@ -301,7 +313,7 @@ The current topology is as follows:
 | 10.0.1.1   | TiKV    |
 | 10.0.1.2   | TiKV    |
 
-## Scale in a TiFlash node
+## Scale in a TiFlash cluster
 
 If you want to remove a TiFlash node from the `10.0.1.4` host, take the following steps.
 
@@ -319,11 +331,11 @@ Before the node goes down, make sure that the number of remaining nodes in the T
 
 2. Wait for the TiFlash replicas of the related tables to be deleted. [Check the table replication progress](/tiflash/use-tiflash.md#check-the-replication-progress) and the replicas are deleted if the replication information of the related tables is not found.
 
-### 2. Scale in the TiFlash node
+### 2. Perform the scale-in operation
 
 Next, perform the scale-in operation with one of the following solutions.
 
-#### Solution 1: Using TiUP to scale in the TiFlash node
+#### Solution 1: Use TiUP to remove a TiFlash node
 
 1. First, confirm the name of the node to be taken down:
 
@@ -333,7 +345,7 @@ Next, perform the scale-in operation with one of the following solutions.
     tiup cluster display <cluster-name>
     ```
 
-2. Scale in the TiFlash node (assume that the node name is `10.0.1.4:9000` from Step 1):
+2. Remove the TiFlash node (assume that the node name is `10.0.1.4:9000` from Step 1):
 
     {{< copyable "shell-regular" >}}
 
@@ -341,9 +353,9 @@ Next, perform the scale-in operation with one of the following solutions.
     tiup cluster scale-in <cluster-name> --node 10.0.1.4:9000
     ```
 
-#### Solution 2: Manually scale in the TiFlash node
+#### Solution 2: Manually remove a TiFlash node
 
-In special cases (such as when a node needs to be forcibly taken down), or if the TiUP scale-in operation fails, you can manually scale in a TiFlash node with the following steps.
+In special cases (such as when a node needs to be forcibly taken down), or if the TiUP scale-in operation fails, you can manually remove a TiFlash node with the following steps.
 
 1. Use the store command of pd-ctl to view the store ID corresponding to this TiFlash node.
 
@@ -354,10 +366,14 @@ In special cases (such as when a node needs to be forcibly taken down), or if th
         {{< copyable "shell-regular" >}}
 
         ```shell
-        tiup ctl pd -u <pd-address> store
+        tiup ctl:<cluster-version> pd -u http://<pd_ip>:<pd_port> store
         ```
 
-2. Scale in the TiFlash node in pd-ctl:
+        > **Note:**
+        >
+        > If multiple PD instances exist in the cluster, you only need to specify the IP address:port of an active PD instance in the above command.
+
+2. Remove the TiFlash node in pd-ctl:
 
     * Enter `store delete <store_id>` in pd-ctl (`<store_id>` is the store ID of the TiFlash node found in the previous step.
 
@@ -366,20 +382,14 @@ In special cases (such as when a node needs to be forcibly taken down), or if th
         {{< copyable "shell-regular" >}}
 
         ```shell
-        tiup ctl pd -u <pd-address> store delete <store_id>
+        tiup ctl:<cluster-version> pd -u http://<pd_ip>:<pd_port> store delete <store_id>
         ```
 
+        > **Note:**
+        >
+        > If multiple PD instances exist in the cluster, you only need to specify the IP address:port of an active PD instance in the above command.
+        
 3. Wait for the store of the TiFlash node to disappear or for the `state_name` to become `Tombstone` before you stop the TiFlash process.
-
-    If, after waiting for a long time, the node still fails to disappear or the `state_name` fails to become `Tombstone`, consider using the following command to force the node out of the cluster.
-
-    **Note that the command will directly discard the replicas on the TiFlash node, which might cause the query to fail.**
-
-    {{< copyable "shell-regular" >}}
-
-    ```shell
-    curl -X POST 'http://<pd-address>/pd/api/v1/store/<store_id>/state?state=Tombstone'
-    ```
 
 4. Manually delete TiFlash data files (whose location can be found in the `data_dir` directory under the TiFlash configuration of the cluster topology file).
 
@@ -436,9 +446,9 @@ The steps to manually clean up the replication rules in PD are below:
     curl -v -X DELETE http://<pd_ip>:<pd_port>/pd/api/v1/config/rule/tiflash/table-45-r
     ```
 
-## Scale in a TiCDC node
+## Scale in a TiCDC cluster
 
-If you want to remove the TiCDC node from the `10.0.1.4` host, take the following steps.
+If you want to remove the TiCDC node from the `10.0.1.4` host, take the following steps:
 
 1. Take the node offline:
 

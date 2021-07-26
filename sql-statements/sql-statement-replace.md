@@ -1,8 +1,7 @@
 ---
 title: REPLACE | TiDB SQL Statement Reference
 summary: An overview of the usage of REPLACE for the TiDB database.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/replace/']
+aliases: ['/docs/dev/sql-statements/sql-statement-replace/','/docs/dev/reference/sql/statements/replace/']
 ---
 
 # REPLACE
@@ -11,25 +10,28 @@ The `REPLACE` statement is semantically a combined `DELETE`+`INSERT` statement. 
 
 ## Synopsis
 
-**ReplaceIntoStmt:**
+```ebnf+diagram
+ReplaceIntoStmt ::=
+    'REPLACE' PriorityOpt IntoOpt TableName PartitionNameListOpt InsertValues
 
-![ReplaceIntoStmt](/media/sqlgram/ReplaceIntoStmt.png)
+PriorityOpt ::=
+    ( 'LOW_PRIORITY' | 'HIGH_PRIORITY' | 'DELAYED' )?
 
-**PriorityOpt:**
+IntoOpt ::= 'INTO'?
 
-![PriorityOpt](/media/sqlgram/PriorityOpt.png)
+TableName ::=
+    Identifier ( '.' Identifier )?
 
-**IntoOpt:**
+PartitionNameListOpt ::=
+    ( 'PARTITION' '(' Identifier ( ',' Identifier )* ')' )?
 
-![IntoOpt](/media/sqlgram/IntoOpt.png)
-
-**TableName:**
-
-![TableName](/media/sqlgram/TableName.png)
-
-**InsertValues:**
-
-![InsertValues](/media/sqlgram/InsertValues.png)
+InsertValues ::=
+    '(' ( ColumnNameListOpt ')' ( ValueSym ValuesList | SelectStmt | '(' SelectStmt ')' | UnionStmt ) | SelectStmt ')' )
+|   ValueSym ValuesList
+|   SelectStmt
+|   UnionStmt
+|   'SET' ColumnSetValue? ( ',' ColumnSetValue )*
+```
 
 ## Examples
 
@@ -67,7 +69,7 @@ mysql> SELECT * FROM t1;
 
 ## MySQL compatibility
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/report-issue.md) on GitHub.
+This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
 
 ## See also
 

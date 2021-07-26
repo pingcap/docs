@@ -1,23 +1,22 @@
 ---
 title: DROP USER | TiDB SQL Statement Reference
 summary: An overview of the usage of DROP USER for the TiDB database.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/drop-user/']
+aliases: ['/docs/dev/sql-statements/sql-statement-drop-user/','/docs/dev/reference/sql/statements/drop-user/']
 ---
 
 # DROP USER
 
-This statement removes a user from the TiDB system database. The optional keyword `IF EXISTS` can be used to silence an error if the user does not exist.
+This statement removes a user from the TiDB system database. The optional keyword `IF EXISTS` can be used to silence an error if the user does not exist. This statement requires the `CREATE USER` privilege.
 
 ## Synopsis
 
-**DropUserStmt:**
+```ebnf+diagram
+DropUserStmt ::=
+    'DROP' 'USER' ( 'IF' 'EXISTS' )? UsernameList
 
-![DropUserStmt](/media/sqlgram/DropUserStmt.png)
-
-**Username:**
-
-![Username](/media/sqlgram/Username.png)
+Username ::=
+    StringName ('@' StringName | singleAtIdentifier)? | 'CURRENT_USER' OptionalBraces
+```
 
 ## Examples
 
@@ -25,10 +24,10 @@ This statement removes a user from the TiDB system database. The optional keywor
 mysql> DROP USER idontexist;
 ERROR 1396 (HY000): Operation DROP USER failed for idontexist@%
 
-mysql> DROP USER IF EXISTS idontexist;
+mysql> DROP USER IF EXISTS 'idontexist';
 Query OK, 0 rows affected (0.01 sec)
 
-mysql> CREATE USER newuser IDENTIFIED BY 'mypassword';
+mysql> CREATE USER 'newuser' IDENTIFIED BY 'mypassword';
 Query OK, 1 row affected (0.02 sec)
 
 mysql> GRANT ALL ON test.* TO 'newuser';
@@ -54,10 +53,10 @@ mysql> SHOW GRANTS FOR 'newuser';
 +-------------------------------------+
 1 row in set (0.00 sec)
 
-mysql> DROP USER newuser;
+mysql> DROP USER 'newuser';
 Query OK, 0 rows affected (0.14 sec)
 
-mysql> SHOW GRANTS FOR newuser;
+mysql> SHOW GRANTS FOR 'newuser';
 ERROR 1141 (42000): There is no such grant defined for user 'newuser' on host '%'
 ```
 

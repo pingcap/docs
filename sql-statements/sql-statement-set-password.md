@@ -1,8 +1,7 @@
 ---
 title: SET PASSWORD | TiDB SQL Statement Reference
 summary: An overview of the usage of SET PASSWORD for the TiDB database.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/set-password/']
+aliases: ['/docs/dev/sql-statements/sql-statement-set-password/','/docs/dev/reference/sql/statements/set-password/']
 ---
 
 # SET PASSWORD
@@ -24,7 +23,7 @@ Query OK, 0 rows affected (0.01 sec)
 mysql> CREATE USER 'newuser' IDENTIFIED BY 'test';
 Query OK, 1 row affected (0.00 sec)
 
-mysql> SHOW CREATE USER newuser;
+mysql> SHOW CREATE USER 'newuser';
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | CREATE USER for newuser@%                                                                                                                                            |
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -35,7 +34,7 @@ mysql> SHOW CREATE USER newuser;
 mysql> SET PASSWORD FOR newuser = 'test';
 Query OK, 0 rows affected (0.01 sec)
 
-mysql> SHOW CREATE USER newuser;
+mysql> SHOW CREATE USER 'newuser';
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | CREATE USER for newuser@%                                                                                                                                            |
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -46,7 +45,7 @@ mysql> SHOW CREATE USER newuser;
 mysql> SET PASSWORD FOR newuser = PASSWORD('test'); -- deprecated syntax from earlier MySQL releases
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> SHOW CREATE USER newuser;
+mysql> SHOW CREATE USER 'newuser';
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | CREATE USER for newuser@%                                                                                                                                            |
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -57,7 +56,7 @@ mysql> SHOW CREATE USER newuser;
 
 ## MySQL compatibility
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/report-issue.md) on GitHub.
+This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
 
 ## See also
 

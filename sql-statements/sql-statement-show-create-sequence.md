@@ -1,8 +1,7 @@
 ---
 title: SHOW CREATE SEQUENCE
 summary: An overview of the usage of SHOW CREATE SEQUENCE for the TiDB database.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/show-create-sequence/']
+aliases: ['/docs/dev/sql-statements/sql-statement-show-create-sequence/','/docs/dev/reference/sql/statements/show-create-sequence/']
 ---
 
 # SHOW CREATE SEQUENCE
@@ -11,9 +10,9 @@ The `SHOW CREATE SEQUENCE` shows the detailed information of a sequence, which i
 
 ## Synopsis
 
-**ShowStmt:**
+**ShowCreateSequenceStmt:**
 
-![ShowStmt](/media/sqlgram/ShowStmt.png)
+![ShowCreateSequenceStmt](/media/sqlgram/ShowCreateSequenceStmt.png)
 
 **TableName:**
 
@@ -24,7 +23,7 @@ The `SHOW CREATE SEQUENCE` shows the detailed information of a sequence, which i
 {{< copyable "sql" >}}
 
 ```sql
-CREATE TABLE seq;
+CREATE SEQUENCE seq;
 ```
 
 ```
@@ -48,7 +47,7 @@ SHOW CREATE SEQUENCE seq;
 
 ## MySQL compatibility
 
-Currently, MySQL does not have the sequence option. The TiDB sequence is borrowed from MariaDB. Except for the `SETVAL` function, all other functions have the same progressions with those functions of MariaDB.
+This statement is a TiDB extension. The implementation is modeled on sequences available in MariaDB.
 
 ## See also
 

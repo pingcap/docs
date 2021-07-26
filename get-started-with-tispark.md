@@ -1,13 +1,12 @@
 ---
 title: TiSpark Quick Start Guide
 summary: Learn how to use TiSpark quickly.
-category: how-to
-aliases: ['/docs/dev/how-to/get-started/tispark/','/docs/dev/how-to/deploy/tispark/']
+aliases: ['/docs/dev/get-started-with-tispark/','/docs/dev/how-to/get-started/tispark/','/docs/dev/how-to/deploy/tispark/']
 ---
 
 # TiSpark Quick Start Guide
 
-To make it easy to [try TiSpark](/tispark-overview.md), the TiDB cluster installed using TiDB Ansible integrates Spark, TiSpark jar package and TiSpark sample data by default.
+To make it easy to [try TiSpark](/tispark-overview.md), the TiDB cluster installed using TiUP integrates Spark and TiSpark jar package by default.
 
 ## Deployment information
 
@@ -187,4 +186,4 @@ The result is:
 -----------------+---------+------------+--------+-----------+
 ```
 
-See [more examples](https://github.com/pingcap/tispark-test/tree/master/tpch/sparksql)).
+See [more examples](https://github.com/pingcap/tispark-test/tree/master/tpch/sparksql).

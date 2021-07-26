@@ -1,8 +1,7 @@
 ---
 title: RENAME INDEX | TiDB SQL Statement Reference
 summary: An overview of the usage of RENAME INDEX for the TiDB database.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/rename-index/']
+aliases: ['/docs/dev/sql-statements/sql-statement-rename-index/','/docs/dev/reference/sql/statements/rename-index/']
 ---
 
 # RENAME INDEX
@@ -11,13 +10,14 @@ The statement `ALTER TABLE .. RENAME INDEX` renames an existing index to a new n
 
 ## Synopsis
 
-**AlterTableStmt:**
+```ebnf+diagram
+AlterTableStmt ::=
+    'ALTER' IgnoreOptional 'TABLE' TableName ( AlterTableSpecListOpt AlterTablePartitionOpt | 'ANALYZE' 'PARTITION' PartitionNameList ( 'INDEX' IndexNameList )? AnalyzeOptionListOpt )
 
-![AlterTableStmt](/media/sqlgram/AlterTableStmt.png)
-
-**KeyOrIndex:**
-
-![KeyOrIndex](/media/sqlgram/KeyOrIndex.png)
+KeyOrIndex ::=
+    'KEY'
+|   'INDEX'
+```
 
 ## Examples
 
@@ -53,7 +53,7 @@ Create Table: CREATE TABLE `t1` (
 
 ## MySQL compatibility
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/report-issue.md) on GitHub.
+This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
 
 ## See also
 
@@ -61,3 +61,4 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 * [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
 * [DROP INDEX](/sql-statements/sql-statement-drop-index.md)
 * [SHOW INDEX](/sql-statements/sql-statement-show-index.md)
+* [ALTER INDEX](/sql-statements/sql-statement-alter-index.md)

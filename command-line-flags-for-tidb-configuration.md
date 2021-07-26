@@ -1,8 +1,7 @@
 ---
 title: Configuration Options
 summary: Learn the configuration options in TiDB.
-category: reference
-aliases: ['/docs/dev/reference/configuration/tidb-server/configuration/','/docs/dev/reference/configuration/tidb-server/server-command-option/']
+aliases: ['/docs/dev/command-line-flags-for-tidb-configuration/','/docs/dev/reference/configuration/tidb-server/configuration/','/docs/dev/reference/configuration/tidb-server/server-command-option/']
 ---
 
 # Configuration Options
@@ -27,6 +26,16 @@ When you start the TiDB cluster, you can use command-line options or environment
 - Default: ""
 - If you have specified the configuration file, TiDB reads the configuration file. If the corresponding configuration also exists in the command line options, TiDB uses the configuration in the command line options to overwrite that in the configuration file. For detailed configuration information, see [TiDB Configuration File Description](/tidb-configuration-file.md).
 
+## `--config-check`
+
+- Checks the validity of the configuration file and exits
+- Default: false
+
+## `--config-strict`
+
+- Enforces the validity of the configuration file
+- Default: false
+
 ## `--cors`
 
 - Specifies the `Access-Control-Allow-Origin` value for Cross-Origin Request Sharing (CORS) request of the TiDB HTTP status service
@@ -39,11 +48,21 @@ When you start the TiDB cluster, you can use command-line options or environment
 - The TiDB server monitors this address.
 - The "0.0.0.0" address monitors all network cards by default. If you have multiple network cards, specify the network card that provides service, such as `192.168.100.113`.
 
+## `--enable-binlog`
+
++ Enables or disables TiDB binlog generation
++ Default: false
+
 ## `-L`
 
 - The log level
 - Default: "info"
 - You can choose from "debug", "info", "warn", "error", or "fatal".
+
+## `--lease`
+
+- The duration of the schema lease. It is **dangerous** to change the value unless you know what you do.
+- Default: 45s
 
 ## `--log-file`
 
@@ -78,11 +97,11 @@ When you start the TiDB cluster, you can use command-line options or environment
 
 ## `--path`
 
-- The path to the data directory for local storage engine like "mocktikv"
-- For `--store = tikv`, you must specify the path; for `--store = mocktikv`, the default value is used if you do not specify the path.
+- The path to the data directory for local storage engine like "unistore"
+- For `--store = tikv`, you must specify the path; for `--store = unistore`, the default value is used if you do not specify the path.
 - For the distributed storage engine like TiKV, `--path` specifies the actual PD address. Assuming that you deploy the PD server on 192.168.100.113:2379, 192.168.100.114:2379 and 192.168.100.115:2379, the value of `--path` is "192.168.100.113:2379, 192.168.100.114:2379, 192.168.100.115:2379".
 - Default: "/tmp/tidb"
-- You can use `tidb-server --store=mocktikv --path=""` to enable a pure in-memory TiDB.
+- You can use `tidb-server --store=unistore --path=""` to enable a pure in-memory TiDB.
 
 ## `--tmp-storage-path`
 
@@ -91,9 +110,14 @@ When you start the TiDB cluster, you can use command-line options or environment
 
 ## `--proxy-protocol-networks`
 
-- The list of proxy server's IP addresses allowed by PROXY Protocol; if you need to configure multiple addresses, separate them using ",".
+- The list of proxy server's IP addresses allowed to connect to TiDB using the [PROXY protocol](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt).
 - Default: ""
-- Leaving it empty disables PROXY Protocol. The value can be the IP address (192.168.1.50) or CIDR (192.168.1.0/24). "\*" means any IP addresses.
+- In general cases, when you access TiDB behind a reverse proxy, TiDB takes the IP address of the reverse proxy server as the IP address of the client. By enabling the PROXY protocol, reverse proxies that support this protocol such as HAProxy can pass the real client IP address to TiDB.
+- After configuring this flag, TiDB allows the configured source IP address to connect to TiDB using the PROXY protocol; if a protocol other than PROXY is used, this connection will be denied. If this flag is left empty, no IP address can connect to TiDB using the PROXY protocol. The value can be the IP address (192.168.1.50) or CIDR (192.168.1.0/24) with `,` as the separator. `*` means any IP addresses.
+
+> **Warning:**
+>
+> Use `*` with caution because it might introduce security risks by allowing a client of any IP address to report its IP address. In addition, using `*` might also cause the internal component that directly connects to TiDB (such as TiDB Dashboard) to be unavailable.
 
 ## `--proxy-protocol-header-timeout`
 
@@ -138,8 +162,8 @@ When you start the TiDB cluster, you can use command-line options or environment
 ## `--store`
 
 - Specifies the storage engine used by TiDB in the bottom layer
-- Default: "mocktikv"
-- You can choose "mocktikv" or "tikv". ("mocktikv" is the local storage engine; "tikv" is a distributed storage engine)
+- Default: "unistore"
+- You can choose "unistore" or "tikv". ("unistore" is the local storage engine; "tikv" is a distributed storage engine)
 
 ## `--token-limit`
 
@@ -151,3 +175,33 @@ When you start the TiDB cluster, you can use command-line options or environment
 
 - Outputs the version of TiDB
 - Default: ""
+
+## `--plugin-dir`
+
++ The storage directory for plugins.
++ Default: "/data/deploy/plugin"
+
+## `--plugin-load`
+
++ The names of the plugins to be loaded, each separated by a comma.
++ Default: ""
+
+## `--affinity-cpus`
+
++ Sets the CPU affinity of TiDB servers, which is separated by commas. For example, "1,2,3".
++ Default: ""
+
+## `--repair-mode`
+
++ Determines whether to enable the repair mode, which is only used in the data repair scenario.
++ Default: false
+
+## `--repair-list`
+
++ The names of the tables to be repaired in the repair mode.
++ Default: ""
+
+## `--require-secure-transport`
+
++ Determines whether to require the client to use the secure mode for data transport.
++ Default: false

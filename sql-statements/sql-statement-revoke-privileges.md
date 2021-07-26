@@ -1,48 +1,66 @@
 ---
 title: REVOKE <privileges> | TiDB SQL Statement Reference
 summary: An overview of the usage of REVOKE <privileges> for the TiDB database.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/revoke-privileges/']
+aliases: ['/docs/dev/sql-statements/sql-statement-revoke-privileges/','/docs/dev/reference/sql/statements/revoke-privileges/']
 ---
 
 # `REVOKE <privileges>`
 
-This statement removes privileges from an existing user.
+This statement removes privileges from an existing user. Executing this statement requires the `GRANT OPTION` privilege and all privileges you revoke.
 
 ## Synopsis
 
-**GrantStmt:**
+```ebnf+diagram
+GrantStmt ::=
+    'GRANT' PrivElemList 'ON' ObjectType PrivLevel 'TO' UserSpecList RequireClauseOpt WithGrantOptionOpt
 
-![GrantStmt](/media/sqlgram/GrantStmt.png)
+PrivElemList ::=
+    PrivElem ( ',' PrivElem )*
 
-**PrivElemList:**
+PrivElem ::=
+    PrivType ( '(' ColumnNameList ')' )?
 
-![PrivElemList](/media/sqlgram/PrivElemList.png)
+PrivType ::=
+    'ALL' 'PRIVILEGES'?
+|   'ALTER' 'ROUTINE'?
+|   'CREATE' ( 'USER' | 'TEMPORARY' 'TABLES' | 'VIEW' | 'ROLE' | 'ROUTINE' )?
+|    'TRIGGER'
+|   'DELETE'
+|    'DROP' 'ROLE'?
+|    'PROCESS'
+|    'EXECUTE'
+|   'INDEX'
+|   'INSERT'
+|   'SELECT'
+|   'SUPER'
+|    'SHOW' ( 'DATABASES' | 'VIEW' )
+|   'UPDATE'
+|   'GRANT' 'OPTION'
+|   'REFERENCES'
+|   'REPLICATION' ( 'SLAVE' | 'CLIENT' )
+|   'USAGE'
+|    'RELOAD'
+|   'FILE'
+|   'CONFIG'
+|   'LOCK' 'TABLES'
+|    'EVENT'
+|   'SHUTDOWN'
 
-**PrivElem:**
+ObjectType ::=
+    'TABLE'?
 
-![PrivElem](/media/sqlgram/PrivElem.png)
+PrivLevel ::=
+    '*' ( '.' '*' )?
+|    Identifier ( '.' ( '*' | Identifier ) )?
 
-**PrivType:**
-
-![PrivType](/media/sqlgram/PrivType.png)
-
-**ObjectType:**
-
-![ObjectType](/media/sqlgram/ObjectType.png)
-
-**PrivLevel:**
-
-![PrivLevel](/media/sqlgram/PrivLevel.png)
-
-**UserSpecList:**
-
-![UserSpecList](/media/sqlgram/UserSpecList.png)
+UserSpecList ::=
+    UserSpec ( ',' UserSpec )*
+```
 
 ## Examples
 
 ```sql
-mysql> CREATE USER newuser IDENTIFIED BY 'mypassword';
+mysql> CREATE USER 'newuser' IDENTIFIED BY 'mypassword';
 Query OK, 1 row affected (0.02 sec)
 
 mysql> GRANT ALL ON test.* TO 'newuser';
@@ -68,16 +86,16 @@ mysql> SHOW GRANTS FOR 'newuser';
 +-------------------------------------+
 1 row in set (0.00 sec)
 
-mysql> DROP USER newuser;
+mysql> DROP USER 'newuser';
 Query OK, 0 rows affected (0.14 sec)
 
-mysql> SHOW GRANTS FOR newuser;
+mysql> SHOW GRANTS FOR 'newuser';
 ERROR 1141 (42000): There is no such grant defined for user 'newuser' on host '%'
 ```
 
 ## MySQL compatibility
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/report-issue.md) on GitHub.
+This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
 
 ## See also
 

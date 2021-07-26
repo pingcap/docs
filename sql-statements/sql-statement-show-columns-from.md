@@ -1,15 +1,18 @@
 ---
 title: SHOW [FULL] COLUMNS FROM | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW [FULL] COLUMNS FROM for the TiDB database.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/show-columns-from/']
+aliases: ['/docs/dev/sql-statements/sql-statement-show-columns-from/','/docs/dev/reference/sql/statements/show-columns-from/']
 ---
 
 # SHOW [FULL] COLUMNS FROM
 
-This statement describes the columns of a table or view in a useful tabular format. The optional keyword `FULL` displays the privileges the current user has to that column, and the `comment` from the table definition.
+The statement `SHOW [FULL] COLUMNS FROM <table_name>` describes the columns of a table or view in a useful tabular format. The optional keyword `FULL` displays the privileges the current user has to that column, and the `comment` from the table definition.
 
-The statements `SHOW [FULL] FIELDS FROM`, `DESC <table>`, `DESCRIBE <table>` and `EXPLAIN <table>` are aliases of this statement.
+The statements `SHOW [FULL] FIELDS FROM <table_name>`, `DESC <table_name>`, `DESCRIBE <table_name>`, and `EXPLAIN <table_name>` are aliases of this statement.
+
+> **Note:**
+>
+> `DESC TABLE <table_name>`, `DESCRIBE TABLE <table_name>`, and `EXPLAIN TABLE <table_name>` are not equivalent to the above statements. They are aliases of [`DESC SELECT * FROM <table_name>`](/sql-statements/sql-statement-explain.md).
 
 ## Synopsis
 
@@ -17,13 +20,41 @@ The statements `SHOW [FULL] FIELDS FROM`, `DESC <table>`, `DESCRIBE <table>` and
 
 ![ShowStmt](/media/sqlgram/ShowStmt.png)
 
-**ShowTargetFilterable:**
+**ShowColumnsFilterable:**
 
-![ShowTargetFilterable](/media/sqlgram/ShowTargetFilterable.png)
+![ShowColumnsFilterable](/media/sqlgram/ShowColumnsFilterable.png)
 
 **OptFull:**
 
 ![OptFull](/media/sqlgram/OptFull.png)
+
+**FieldsOrColumns:**
+
+![FieldsOrColumns](/media/sqlgram/FieldsOrColumns.png)
+
+**ShowTableAliasOpt:**
+
+![ShowTableAliasOpt](/media/sqlgram/ShowTableAliasOpt.png)
+
+**FromOrIn:**
+
+![FromOrIn](/media/sqlgram/FromOrIn.png)
+
+**TableName:**
+
+![TableName](/media/sqlgram/TableName.png)
+
+**ShowDatabaseNameOpt:**
+
+![ShowDatabaseNameOpt](/media/sqlgram/ShowDatabaseNameOpt.png)
+
+**DBName:**
+
+![DBName](/media/sqlgram/DBName.png)
+
+**ShowLikeOrWhereOpt:**
+
+![ShowLikeOrWhereOpt](/media/sqlgram/ShowLikeOrWhereOpt.png)
 
 ## Examples
 
@@ -85,7 +116,7 @@ mysql> show full columns from mysql.user;
 +-----------------------+---------------+-------------+------+------+---------+-------+---------------------------------+---------+
 | Host                  | char(64)      | utf8mb4_bin | NO   | PRI  | NULL    |       | select,insert,update,references |         |
 | User                  | char(32)      | utf8mb4_bin | NO   | PRI  | NULL    |       | select,insert,update,references |         |
-| Password              | char(41)      | utf8mb4_bin | YES  |      | NULL    |       | select,insert,update,references |         |
+| authentication_string | text          | utf8mb4_bin | YES  |      | NULL    |       | select,insert,update,references |         |
 | Select_priv           | enum('N','Y') | utf8mb4_bin | NO   |      | N       |       | select,insert,update,references |         |
 | Insert_priv           | enum('N','Y') | utf8mb4_bin | NO   |      | N       |       | select,insert,update,references |         |
 | Update_priv           | enum('N','Y') | utf8mb4_bin | NO   |      | N       |       | select,insert,update,references |         |
@@ -112,13 +143,17 @@ mysql> show full columns from mysql.user;
 | Create_role_priv      | enum('N','Y') | utf8mb4_bin | NO   |      | N       |       | select,insert,update,references |         |
 | Drop_role_priv        | enum('N','Y') | utf8mb4_bin | NO   |      | N       |       | select,insert,update,references |         |
 | Account_locked        | enum('N','Y') | utf8mb4_bin | NO   |      | N       |       | select,insert,update,references |         |
+| Shutdown_priv         | enum('N','Y') | utf8mb4_bin | NO   |      | N       |       | select,insert,update,references |         |
+| Reload_priv           | enum('N','Y') | utf8mb4_bin | NO   |      | N       |       | select,insert,update,references |         |
+| FILE_priv             | enum('N','Y') | utf8mb4_bin | NO   |      | N       |       | select,insert,update,references |         |
+| Config_priv           | enum('N','Y') | utf8mb4_bin | NO   |      | N       |       | select,insert,update,references |         |
 +-----------------------+---------------+-------------+------+------+---------+-------+---------------------------------+---------+
-29 rows in set (0.00 sec)
+33 rows in set (0.01 sec)
 ```
 
 ## MySQL compatibility
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/report-issue.md) on GitHub.
+This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
 
 ## See also
 

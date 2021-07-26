@@ -1,12 +1,12 @@
 ---
 title: TiFlash Deployment Topology
 summary: Learn the deployment topology of TiFlash based on the minimal TiDB topology.
-category: how-to
+aliases: ['/docs/dev/tiflash-deployment-topology/']
 ---
 
 # TiFlash Deployment Topology
 
-This document describes the deployment topology of TiFlash based on the minimal TiDB topology.
+This document describes the deployment topology of [TiFlash](/tiflash/tiflash-overview.md) based on the minimal TiDB topology.
 
 TiFlash is a columnar storage engine, and gradually becomes the standard cluster topology. It is suitable for real-time HTAP applications.
 
@@ -24,6 +24,8 @@ TiFlash is a columnar storage engine, and gradually becomes the standard cluster
 
 - [The simple template for the TiFlash topology](https://github.com/pingcap/docs/blob/master/config-templates/simple-tiflash.yaml)
 - [The complex template for the TiFlash topology](https://github.com/pingcap/docs/blob/master/config-templates/complex-tiflash.yaml)
+
+For detailed descriptions of the configuration items in the above TiDB cluster topology file, see [Topology Configuration File for Deploying TiDB Using TiUP](/tiup/tiup-cluster-topology-reference.md).
 
 ### Key parameters
 

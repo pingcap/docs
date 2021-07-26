@@ -1,11 +1,10 @@
 ---
 title: Enable TLS Between TiDB Clients and Servers
 summary: Use the encrypted connection to ensure data security.
-category: how-to
-aliases: ['/docs/dev/how-to/secure/enable-tls-clients/','/docs/dev/encrypted-connections-with-tls-protocols/']
+aliases: ['/docs/dev/enable-tls-between-clients-and-servers/','/docs/dev/how-to/secure/enable-tls-clients/','/docs/dev/encrypted-connections-with-tls-protocols/']
 ---
 
-# Enable TLS Between TiDB Clients and Servers
+# Enable TLS between TiDB Clients and Servers
 
 Non-encrypted connection between TiDB's server and client is used by default, which enables third parties that monitor channel traffic to know the data sent and received between the server and the client, including but not limited to query content, query results, and so on. If a channel is untrustworthy (such as if the client is connected to the TiDB server via a public network), then a non-encrypted connection is prone to information leakage. In this case, for security reasons, it is recommended to use an encrypted connection.
 
@@ -108,7 +107,7 @@ If the `ssl-ca` parameter is not specified in the TiDB server or MySQL client, t
 
 - To perform mutual authentication, meet both of the above requirements.
 
-By default, the server-to-client authentication is optional. Even if the client does not present its certificate of identification during the TLS handshake, the TLS connection can be still established. You can also require the client to be authenticated by specifying `require 509` when creating a user (`create user`), granting permissions (`grant`), or modifying an existing user (`alter user`). The following is an example of creating a user:
+By default, the server-to-client authentication is optional. Even if the client does not present its certificate of identification during the TLS handshake, the TLS connection can be still established. You can also require the client to be authenticated by specifying `require x509` when creating a user (`create user`), granting permissions (`grant`), or modifying an existing user (`alter user`). The following is an example of creating a user:
 
 {{< copyable "sql" >}}
 
@@ -184,4 +183,4 @@ The newly loaded certificate, key, and CA take effect on the connection that is 
 
 ### See also
 
-- [Enable TLS Between TiDB Components](/enable-tls-between-components.md)。
+- [Enable TLS Between TiDB Components](/enable-tls-between-components.md).

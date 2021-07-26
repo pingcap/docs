@@ -1,8 +1,7 @@
 ---
 title: SET TRANSACTION | TiDB SQL Statement Reference
 summary: An overview of the usage of SET TRANSACTION for the TiDB database.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/set-transaction/']
+aliases: ['/docs/dev/sql-statements/sql-statement-set-transaction/','/docs/dev/reference/sql/statements/set-transaction/']
 ---
 
 # SET TRANSACTION
@@ -11,22 +10,27 @@ The `SET TRANSACTION` statement can be used to change the current isolation leve
 
 ## Synopsis
 
-**SetStmt:**
+```ebnf+diagram
+SetStmt ::=
+    'SET' ( VariableAssignmentList |
+    'PASSWORD' ('FOR' Username)? '=' PasswordOpt |
+    ( 'GLOBAL'| 'SESSION' )? 'TRANSACTION' TransactionChars |
+    'CONFIG' ( Identifier | stringLit) ConfigItemName EqOrAssignmentEq SetExpr )
 
-![SetStmt](/media/sqlgram/SetStmt.png)
+TransactionChars ::=
+    ( 'ISOLATION' 'LEVEL' IsolationLevel | 'READ' 'WRITE' | 'READ' 'ONLY' AsOfClause? )
 
-**TransactionChar:**
+IsolationLevel ::=
+    ( 'REPEATABLE' 'READ' | 'READ' ( 'COMMITTED' | 'UNCOMMITTED' ) | 'SERIALIZABLE' )
 
-![TransactionChar](/media/sqlgram/TransactionChar.png)
-
-**IsolationLevel:**
-
-![IsolationLevel](/media/sqlgram/IsolationLevel.png)
+AsOfClause ::=
+    ( 'AS' 'OF' 'TIMESTAMP' Expression)
+```
 
 ## Examples
 
 ```sql
-mysql> SHOW SESSION VARIABLES like 'transaction_isolation';
+mysql> SHOW SESSION VARIABLES LIKE 'transaction_isolation';
 +-----------------------+-----------------+
 | Variable_name         | Value           |
 +-----------------------+-----------------+
@@ -37,7 +41,7 @@ mysql> SHOW SESSION VARIABLES like 'transaction_isolation';
 mysql> SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED;
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> SHOW SESSION VARIABLES like 'transaction_isolation';
+mysql> SHOW SESSION VARIABLES LIKE 'transaction_isolation';
 +-----------------------+----------------+
 | Variable_name         | Value          |
 +-----------------------+----------------+
@@ -48,7 +52,7 @@ mysql> SHOW SESSION VARIABLES like 'transaction_isolation';
 mysql> SET SESSION transaction_isolation = 'REPEATABLE-READ';
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> SHOW SESSION VARIABLES like 'transaction_isolation';
+mysql> SHOW SESSION VARIABLES LIKE 'transaction_isolation';
 +-----------------------+-----------------+
 | Variable_name         | Value           |
 +-----------------------+-----------------+
@@ -61,7 +65,8 @@ mysql> SHOW SESSION VARIABLES like 'transaction_isolation';
 
 * TiDB supports the ability to set a transaction as read-only in syntax only.
 * The isolation levels `READ-UNCOMMITTED` and `SERIALIZABLE` are not supported.
-* The isolation level `REPEATABLE-READ` is technically Snapshot Isolation. The name `REPEATABLE-READ` is used for compatibility with MySQL.
+* The `REPEATABLE-READ` isolation level is achieved through using the snapshot isolation technology, which is partly compatible with MySQL.
+* In pessimistic transactions, TiDB supports two isolation levels compatible with MySQL: `REPEATABLE-READ` and `READ-COMMITTED`. For a detailed description, see [Isolation Levels](/transaction-isolation-levels.md).
 
 ## See also
 

@@ -1,8 +1,7 @@
 ---
 title: PD Scheduling Best Practices
 summary: Learn best practice and strategy for PD scheduling.
-category: reference
-aliases: ['/docs/dev/reference/best-practices/pd-scheduling/']
+aliases: ['/docs/dev/best-practices/pd-scheduling-best-practices/','/docs/dev/reference/best-practices/pd-scheduling/']
 ---
 
 # PD Scheduling Best Practices
@@ -103,6 +102,12 @@ The processes of scale-down and failure recovery are basically the same. `replic
 
 Region merge refers to the process of merging adjacent small regions. It serves to avoid unnecessary resource consumption by a large number of small or even empty regions after data deletion. Region merge is performed by `mergeChecker`, which processes in a similar way to `replicaChecker`: PD continuously scans all regions in the background, and generates an operator when contiguous small regions are found.
 
+Specifically, when a newly split Region exists for more than the value of [`split-merge-interval`](/pd-configuration-file.md#split-merge-interval) (`1h` by default), if any of the following conditions occurs, this Region triggers the Region merge scheduling:
+
+- The size of this Region is smaller than the value of the [`max-merge-region-size`](/pd-configuration-file.md#max-merge-region-size) (20 MiB by default)
+
+- The number of keys in this Region is smaller than the value of [`max-merge-region-keys`](/pd-configuration-file.md#max-merge-region-keys) (200,000 by default).
+
 ## Query scheduling status
 
 You can check the status of scheduling system through metrics, pd-ctl and logs. This section briefly introduces the methods of metrics and pd-ctl. Refer to [PD Monitoring Metrics](/grafana-pd-dashboard.md) and [PD Control](/pd-control.md) for details.
@@ -166,7 +171,7 @@ PD supports dynamically adding and removing schedulers directly through pd-ctl. 
 
 - `scheduler show`: Shows currently running schedulers in the system
 - `scheduler remove balance-leader-scheduler`: Removes (disable) balance-leader-scheduler
-- `scheduler add evict-leader-scheduler-1`: Adds a scheduler to remove all leaders in Store 1
+- `scheduler add evict-leader-scheduler 1`: Adds a scheduler to remove all leaders in Store 1
 
 ### Add/delete Operators manually
 
@@ -257,10 +262,16 @@ Similar to slow scheduling, the speed of region merge is most likely limited by 
 
 - If it is known from metrics that there are a large number of empty regions in the system, you can adjust `max-merge-region-size` and `max-merge-region-keys` to smaller values to speed up the merge. This is because the merge process involves replica migration, so the smaller the region to be merged, the faster the merge is. If the merge operators are already generated rapidly, to further speed up the process, you can set `patrol-region-interval` to `10ms`. This makes region scanning faster at the cost of more CPU consumption.
 
-- A lot of tables have been created and then emptied (including truncated tables). These empty regions cannot be merged if the split table attribute is enabled. You can disable this attribute by adjusting the following parameters:
+- A lot of tables have been created and then emptied (including truncated tables). These empty Regions cannot be merged if the split table attribute is enabled. You can disable this attribute by adjusting the following parameters:
 
     - TiKV: Set `split-region-on-table` to `false`. You cannot modify the parameter dynamically.
-    - PD: Set `key-type` to `"txn"` or `"raw"`. You can modify the parameter dynamically.
+    - PD
+        - Set `key-type` to `"txn"` or `"raw"`. You can modify the parameter dynamically.
+        - Or keep `key-type` as `table` and set `enable-cross-table-merge` to `true`. You can modify the parameter dynamically.
+
+        > **Note:**
+        >
+        > After placement rules are enabled, properly switch the value of `key-type` between `txn` and `raw` to avoid the failure of decoding.
 
 For v3.0.4 and v2.1.16 or earlier, the `approximate_keys` of regions are inaccurate in specific circumstances (most of which occur after dropping tables), which makes the number of keys break the constraints of `max-merge-region-keys`. To avoid this problem, you can adjust `max-merge-region-keys` to a larger value.
 

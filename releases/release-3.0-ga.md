@@ -1,7 +1,6 @@
 ---
 title: TiDB 3.0 GA Release Notes
-category: Releases
-aliases: ['/docs/dev/releases/3.0-ga/']
+aliases: ['/docs/dev/releases/release-3.0-ga/','/docs/dev/releases/3.0-ga/']
 ---
 
 # TiDB 3.0 GA Release Notes
@@ -63,7 +62,7 @@ On June 28, 2019, TiDB 3.0 GA is released. The corresponding TiDB Ansible versio
     - Improve the performance of `admin show ddl jobs` by supporting scanning data in reverse order
     - Add the `split table region` statement to manually split the table Region to alleviate hotspot issues
     - Add the `split index region` statement to manually split the index Region to alleviate hotspot issues
-    - Add a blacklist to prohibit pushing down expressions to Coprocessor
+    - Add a blocklist to prohibit pushing down expressions to Coprocessor
     - Optimize the `Expensive Query` log to print the SQL query in the log when it exceeds the configured limit of execution time or memory
 + DDL
     - Support migrating from character set `utf8` to `utf8mb4`

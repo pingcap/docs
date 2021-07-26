@@ -1,8 +1,7 @@
 ---
 title: TiFlash Overview
 summary: Learn the architecture and key features of TiFlash.
-category: reference
-aliases: ['/docs/dev/reference/tiflash/overview/']
+aliases: ['/docs/dev/tiflash/tiflash-overview/','/docs/dev/reference/tiflash/overview/']
 ---
 
 # TiFlash Overview
@@ -69,3 +68,15 @@ TiFlash accelerates the computing of TiDB in two ways:
 - TiFlash shares part of the computing workload of TiDB.
 
 TiFlash shares the computing workload in the same way as the TiKV Coprocessor does: TiDB pushes down the computing that can be completed in the storage layer. Whether the computing can be pushed down depends on the support of TiFlash. For details, see [Supported pushdown calculations](/tiflash/use-tiflash.md#supported-push-down-calculations).
+
+## See also
+
+- To deploy a new cluster with TiFlash nodes, see [Deploy a TiDB cluster using TiUP](/production-deployment-using-tiup.md).
+- To add a TiFlash node in a deployed cluster, see [Scale out a TiFlash cluster](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster).
+- [Use TiFlash](/tiflash/use-tiflash.md).
+- [Maintain a TiFlash cluster](/tiflash/maintain-tiflash.md).
+- [Tune TiFlash performance](/tiflash/tune-tiflash-performance.md).
+- [Configure TiFlash](/tiflash/tiflash-configuration.md).
+- [Monitor the TiFlash cluster](/tiflash/monitor-tiflash.md).
+- Learn [TiFlash alert rules](/tiflash/tiflash-alert-rules.md).
+- [Troubleshoot a TiFlash cluster](/tiflash/troubleshoot-tiflash.md).

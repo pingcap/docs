@@ -1,15 +1,23 @@
 ---
 title: sync-diff-inspector User Guide
 summary: Use sync-diff-inspector to compare data and repair inconsistent data.
-category: tools
-aliases: ['/docs/dev/reference/tools/sync-diff-inspector/overview/']
+aliases: ['/docs/dev/sync-diff-inspector/sync-diff-inspector-overview/','/docs/dev/reference/tools/sync-diff-inspector/overview/']
 ---
 
 # sync-diff-inspector User Guide
 
 [sync-diff-inspector](https://github.com/pingcap/tidb-tools/tree/master/sync_diff_inspector) is a tool used to compare data stored in the databases with the MySQL protocol. For example, it can compare the data in MySQL with that in TiDB, the data in MySQL with that in MySQL, or the data in TiDB with that in TiDB. In addition, you can also use this tool to repair data in the scenario where a small amount of data is inconsistent.
 
-This guide introduces the key features of sync-diff-inspector and describes how to configure and use this tool. You can download it at [tidb-enterprise-tools-latest-linux-amd64](https://download.pingcap.org/tidb-enterprise-tools-latest-linux-amd64.tar.gz).
+This guide introduces the key features of sync-diff-inspector and describes how to configure and use this tool. To download sync-diff-inspector, use one of the following methods:
+
++ Binary package. Click [tidb-enterprise-tools-nightly-linux-amd64](https://download.pingcap.org/tidb-enterprise-tools-nightly-linux-amd64.tar.gz) to download.
++ Docker image. Execute the following command to download:
+
+    {{< copyable "shell-regular" >}}
+
+    ```shell
+    docker pull pingcap/tidb-enterprise-tools
+    ```
 
 ## Key features
 
@@ -23,7 +31,7 @@ This guide introduces the key features of sync-diff-inspector and describes how 
 
 ### Restrictions
 
-* At present, online check is not supported. Ensure that no data is written into the upstream-downstream checklist, and that data in a certain range is not changed. You can check data in this range by setting `range`.
+* Online check is not supported for data migration between MySQL and TiDB. Ensure that no data is written into the upstream-downstream checklist, and that data in a certain range is not changed. You can check data in this range by setting `range`.
 
 * `JSON`, `BIT`, `BINARY`, `BLOB` and other types of data are not supported. When you perform a data check, you need to set `ignore-columns` to skip checking these types of data.
 
@@ -100,7 +108,7 @@ fix-sql-file = "fix.sql"
 
 ######################### Tables config #########################
 
-# If you need to compare the data of a large number of tables with different schema names or table names, use the table-rule to configure the mapping relationship. You can configure the mapping rule only for the schema or table, or you can also configure the mapping rules for both the schema and table.
+# To compare the data of a large number of tables with different schema names or table names, or check the data of multiple upstream sharded tables and downstream table family, use the table-rule to configure the mapping relationship. You can configure the mapping rule only for the schema or table. Also, you can configure the mapping rules for both the schema and the table.
 #[[table-rules]]
     # schema-pattern and table-pattern support the wildcard *?
     # schema-pattern = "test_*"
@@ -213,6 +221,44 @@ Run the following command:
 ```
 
 This command outputs a check report to the log and describes the check result of each table. sync-diff-inspector generates the SQL statements to fix inconsistent data and stores these statements in a `fix.sql` file.
+
+#### Log
+
+The running sync-diff-inspector periodically (every 10 seconds) prints the progress in log in the following format:
+
+```log
+[2020/11/12 17:47:00.170 +08:00] [INFO] [checkpoint.go:276] ["summary info"] [instance_id=target] [schema=test] [table=test_table] ["chunk num"=1000] ["success num"=80] ["failed num"=1] ["ignore num"=0]
+```
+
+- `chunk num`: The total number of chunks to be checked.
+- `success num`: The number of chunks that have been checked as consistent.
+- `failed num`: The number of chunks that fail the check. Check failure might be caused by errors or data inconsistency.
+- `ignore num`: The number of chunks that are ignored for the check. If the value of `sample-percent` is smaller than `100`, sync-diff-inspector checks data by sampling, where some chunks are ignored.
+
+#### Result
+
+After the check is finished, sync-diff-inspector outputs a report.
+
++ If the data is consistent, a log example is as follows:
+
+    ```log
+    [2020/11/12 17:47:00.174 +08:00] [INFO] [report.go:80] ["check result summary"] ["check passed num"=1] ["check failed num"=0]
+    [2020/11/12 17:47:00.174 +08:00] [INFO] [report.go:87] ["table check result"] [schema=test] [table=test_table] ["struct equal"=true] ["data equal"=true]
+    [2020/11/12 17:47:00.174 +08:00] [INFO] [main.go:75] ["check data finished"] [cost=353.462744ms]
+    [2020/11/12 17:47:00.174 +08:00] [INFO] [main.go:69] ["check pass!!!"]
+    ```
+
++ If the data is inconsistent or some errors occur, a log example is as follows:
+
+    ```log
+    [2020/11/12 18:16:17.068 +08:00] [INFO] [checkpoint.go:276] ["summary info"] [instance_id=target] [schema=test] [table=test1] ["chunk num"=1] ["success num"=0] ["failed num"=1] ["ignore num"=0]
+    [2020/11/12 18:16:17.071 +08:00] [INFO] [report.go:80] ["check result summary"] ["check passed num"=0] ["check failed num"=1]
+    [2020/11/12 18:16:17.071 +08:00] [INFO] [report.go:87] ["table check result"] [schema=test] [table=test_table] ["struct equal"=true] ["data equal"=false]
+    [2020/11/12 18:16:17.071 +08:00] [INFO] [main.go:75] ["check data finished"] [cost=319.849706ms]
+    [2020/11/12 18:16:17.071 +08:00] [WARN] [main.go:66] ["check failed!!!"]
+    ```
+
+The number of tables that have passed and failed the check is printed in `check result summary`. The results of all tables are printed in `table check result`.
 
 ### Note
 

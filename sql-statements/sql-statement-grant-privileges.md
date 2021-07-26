@@ -1,48 +1,66 @@
 ---
 title: GRANT <privileges> | TiDB SQL Statement Reference
 summary: An overview of the usage of GRANT <privileges> for the TiDB database.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/grant-privileges/']
+aliases: ['/docs/dev/sql-statements/sql-statement-grant-privileges/','/docs/dev/reference/sql/statements/grant-privileges/']
 ---
 
 # `GRANT <privileges>`
 
-This statement allocates privileges to a pre-existing user in TiDB. The privilege system in TiDB follows MySQL, where credentials are assigned based on a database/table pattern.
+This statement allocates privileges to a pre-existing user in TiDB. The privilege system in TiDB follows MySQL, where credentials are assigned based on a database/table pattern. Executing this statement requires the `GRANT OPTION` privilege and all privileges you allocate.
 
 ## Synopsis
 
-**GrantStmt:**
+```ebnf+diagram
+GrantStmt ::=
+    'GRANT' PrivElemList 'ON' ObjectType PrivLevel 'TO' UserSpecList RequireClauseOpt WithGrantOptionOpt
 
-![GrantStmt](/media/sqlgram/GrantStmt.png)
+PrivElemList ::=
+    PrivElem ( ',' PrivElem )*
 
-**PrivElemList:**
+PrivElem ::=
+    PrivType ( '(' ColumnNameList ')' )?
 
-![PrivElemList](/media/sqlgram/PrivElemList.png)
+PrivType ::=
+    'ALL' 'PRIVILEGES'?
+|    'ALTER' 'ROUTINE'?
+|   'CREATE' ( 'USER' | 'TEMPORARY' 'TABLES' | 'VIEW' | 'ROLE' | 'ROUTINE' )?
+|   'TRIGGER'
+|   'DELETE'
+|   'DROP' 'ROLE'?
+|    'PROCESS'
+|   'EXECUTE'
+|   'INDEX'
+|   'INSERT'
+|   'SELECT'
+|   'SUPER'
+|   'SHOW' ( 'DATABASES' | 'VIEW' )
+|   'UPDATE'
+|    'GRANT' 'OPTION'
+|    'REFERENCES'
+|    'REPLICATION' ( 'SLAVE' | 'CLIENT' )
+|    'USAGE'
+|   'RELOAD'
+|   'FILE'
+|   'CONFIG'
+|   'LOCK' 'TABLES'
+|   'EVENT'
+|   'SHUTDOWN'
 
-**PrivElem:**
+ObjectType ::=
+    'TABLE'?
 
-![PrivElem](/media/sqlgram/PrivElem.png)
+PrivLevel ::=
+    '*' ( '.' '*' )?
+|    Identifier ( '.' ( '*' | Identifier ) )?
 
-**PrivType:**
-
-![PrivType](/media/sqlgram/PrivType.png)
-
-**ObjectType:**
-
-![ObjectType](/media/sqlgram/ObjectType.png)
-
-**PrivLevel:**
-
-![PrivLevel](/media/sqlgram/PrivLevel.png)
-
-**UserSpecList:**
-
-![UserSpecList](/media/sqlgram/UserSpecList.png)
+UserSpecList ::=
+    UserSpec ( ',' UserSpec )*
+```
 
 ## Examples
 
 ```sql
-mysql> CREATE USER newuser IDENTIFIED BY 'mypassword';
+mysql> CREATE USER 'newuser' IDENTIFIED BY 'mypassword';
 Query OK, 1 row affected (0.02 sec)
 
 mysql> GRANT ALL ON test.* TO 'newuser';
@@ -66,6 +84,7 @@ mysql> SHOW GRANTS FOR 'newuser';
 
 ## See also
 
+* [`GRANT <role>`](/sql-statements/sql-statement-grant-role.md)
 * [`REVOKE <privileges>`](/sql-statements/sql-statement-revoke-privileges.md)
 * [SHOW GRANTS](/sql-statements/sql-statement-show-grants.md)
 * [Privilege Management](/privilege-management.md)

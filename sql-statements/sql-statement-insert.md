@@ -1,8 +1,7 @@
 ---
 title: INSERT | TiDB SQL Statement Reference
 summary: An overview of the usage of INSERT for the TiDB database.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/insert/']
+aliases: ['/docs/dev/sql-statements/sql-statement-insert/','/docs/dev/reference/sql/statements/insert/']
 ---
 
 # INSERT
@@ -11,34 +10,42 @@ This statement inserts new rows into a table.
 
 ## Synopsis
 
-**InsertIntoStmt:**
+```ebnf+diagram
+InsertIntoStmt ::=
+    'INSERT' TableOptimizerHints PriorityOpt IgnoreOptional IntoOpt TableName PartitionNameListOpt InsertValues OnDuplicateKeyUpdate
 
-![InsertIntoStmt](/media/sqlgram/InsertIntoStmt.png)
+TableOptimizerHints ::=
+    hintComment?
 
-**PriorityOpt:**
+PriorityOpt ::=
+    ( 'LOW_PRIORITY' | 'HIGH_PRIORITY' | 'DELAYED' )?
 
-![PriorityOpt](/media/sqlgram/PriorityOpt.png)
+IgnoreOptional ::=
+    'IGNORE'?
 
-**IgnoreOptional:**
+IntoOpt  ::= 'INTO'?
 
-![IgnoreOptional](/media/sqlgram/IgnoreOptional.png)
+TableName ::=
+    Identifier ( '.' Identifier )?
 
-**IntoOpt:**
+PartitionNameListOpt ::=
+    ( 'PARTITION' '(' Identifier ( ',' Identifier )* ')' )?
 
-![IntoOpt](/media/sqlgram/IntoOpt.png)
+InsertValues ::=
+    '(' ( ColumnNameListOpt ')' ( ValueSym ValuesList | SelectStmt | '(' SelectStmt ')' | UnionStmt ) | SelectStmt ')' )
+|   ValueSym ValuesList
+|   SelectStmt
+|   UnionStmt
+|   'SET' ColumnSetValue? ( ',' ColumnSetValue )*
 
-**TableName:**
-
-![TableName](/media/sqlgram/TableName.png)
-
-**InsertValues:**
-
-![InsertValues](/media/sqlgram/InsertValues.png)
+OnDuplicateKeyUpdate ::=
+    ( 'ON' 'DUPLICATE' 'KEY' 'UPDATE' AssignmentList )?
+```
 
 ## Examples
 
 ```sql
-mysql> CREATE TABLE t1 (a int);
+mysql> CREATE TABLE t1 (a INT);
 Query OK, 0 rows affected (0.11 sec)
 
 mysql> CREATE TABLE t2 LIKE t1;
@@ -91,7 +98,7 @@ mysql> SELECT * FROM t2;
 
 ## MySQL compatibility
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/report-issue.md) on GitHub.
+This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
 
 ## See also
 

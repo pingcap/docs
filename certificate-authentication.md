@@ -1,13 +1,12 @@
 ---
 title: Certificate-Based Authentication for Login
 summary: Learn the certificate-based authentication used for login.
-category: reference
-aliases: ['/docs/dev/reference/security/cert-based-authentication/']
+aliases: ['/docs/dev/certificate-authentication/','/docs/dev/reference/security/cert-based-authentication/']
 ---
 
-# Certificate-Based Authentication for Login <span class="version-mark">New in v3.0.8</span>
+# Certificate-Based Authentication for Login
 
-Starting from v3.0.8, TiDB supports a certificate-based authentication method for users to log into TiDB. With this method, TiDB issues certificates to different users, uses encrypted connections to transfer data, and verifies certificates when users log in. This approach is more secure than the traditional password-based authentication method commonly used by MySQL users and is thus adopted by an increasing number of users.
+TiDB supports a certificate-based authentication method for users to log into TiDB. With this method, TiDB issues certificates to different users, uses encrypted connections to transfer data, and verifies certificates when users log in. This approach is more secure than the traditional password-based authentication method commonly used by MySQL users and is thus adopted by an increasing number of users.
 
 To use certificate-based authentication, you might need to perform the following operations:
 
@@ -20,15 +19,7 @@ The rest of the document introduces in detail how to perform these operations.
 
 ## Create security keys and certificates
 
-### Install OpenSSL
-
-It is recommended that you use [OpenSSL](https://www.openssl.org/) to create keys and certificates. Taking the Debian operation system as an example, execute the following command to install OpenSSL:
-
-{{< copyable "shell-regular" >}}
-
-```bash
-sudo apt-get install openssl
-```
+It is recommended that you use [OpenSSL](https://www.openssl.org/) to create keys and certificates. The certificate generation process is similar to the process described in [Enable TLS Between TiDB Clients and Servers](/enable-tls-between-clients-and-servers.md). The following paragraphs demonstrate on how to configure more attribute fields that need to be verified in the certificate.
 
 ### Generate CA key and certificate
 
@@ -64,9 +55,9 @@ sudo apt-get install openssl
     ```bash
     Country Name (2 letter code) [AU]:US
     State or Province Name (full name) [Some-State]:California
-    Locality Name (eg, city) []:San Francisco
-    Organization Name (eg, company) [Internet Widgits Pty Ltd]:PingCAP Inc.
-    Organizational Unit Name (eg, section) []:TiDB
+    Locality Name (e.g. city) []:San Francisco
+    Organization Name (e.g. company) [Internet Widgits Pty Ltd]:PingCAP Inc.
+    Organizational Unit Name (e.g. section) []:TiDB
     Common Name (e.g. server FQDN or YOUR name) []:TiDB admin
     Email Address []:s@pingcap.com
     ```
@@ -92,9 +83,9 @@ sudo apt-get install openssl
     ```bash
     Country Name (2 letter code) [AU]:US
     State or Province Name (full name) [Some-State]:California
-    Locality Name (eg, city) []:San Francisco
-    Organization Name (eg, company) [Internet Widgits Pty Ltd]:PingCAP Inc.
-    Organizational Unit Name (eg, section) []:TiKV
+    Locality Name (e.g. city) []:San Francisco
+    Organization Name (e.g. company) [Internet Widgits Pty Ltd]:PingCAP Inc.
+    Organizational Unit Name (e.g. section) []:TiKV
     Common Name (e.g. server FQDN or YOUR name) []:TiKV Test Server
     Email Address []:k@pingcap.com
 
@@ -157,9 +148,9 @@ After generating the server key and certificate, you need to generate the key an
     ```bash
     Country Name (2 letter code) [AU]:US
     State or Province Name (full name) [Some-State]:California
-    Locality Name (eg, city) []:San Francisco
-    Organization Name (eg, company) [Internet Widgits Pty Ltd]:PingCAP Inc.
-    Organizational Unit Name (eg, section) []:TiDB
+    Locality Name (e.g. city) []:San Francisco
+    Organization Name (e.g. company) [Internet Widgits Pty Ltd]:PingCAP Inc.
+    Organizational Unit Name (e.g. section) []:TiDB
     Common Name (e.g. server FQDN or YOUR name) []:tpch-user1
     Email Address []:zz@pingcap.com
 
@@ -265,9 +256,9 @@ First, connect TiDB using the client to configure the login verification. Then, 
 
 ### Get user certificate information
 
-The user certificate information can be specified by `require subject`, `require issuer`, and `require cipher`, which are used to check the X509 certificate attributes.
+The user certificate information can be specified by `require subject`, `require issuer`, `require san`, and `require cipher`, which are used to check the X509 certificate attributes.
 
-+ `require subject`: Specifies the `subject` information of the client certificate when you log in. With this option specified, you do not need to configure `require ssl` or x509. The information to be specified is consistent with the entered `subject` information in [Generate client keys and certificates](#generate-client-keys-and-certificates).
++ `require subject`: Specifies the `subject` information of the client certificate when you log in. With this option specified, you do not need to configure `require ssl` or x509. The information to be specified is consistent with the entered `subject` information in [Generate client keys and certificates](#generate-client-key-and-certificate).
 
     To get this option, execute the following command:
 
@@ -287,6 +278,32 @@ The user certificate information can be specified by `require subject`, `require
     openssl x509 -noout -subject -in ca-cert.pem | sed 's/.\{8\}//'  | sed 's/, /\//g' | sed 's/ = /=/g' | sed 's/^/\//'
     ```
 
++ `require san`: Specifies the `Subject Alternative Name` information of the CA certificate that issues the user certificate. The information to be specified is consistent with the [`alt_names` of the `openssl.cnf` configuration file](/generate-self-signed-certificates.md) used to generate the client certificate.
+
+    + Execute the following command to get the information of the `require san` item in the generated certificate:
+
+        {{< copyable "shell-regular" >}}
+
+        ```shell
+        openssl x509 -noout -ext subjectAltName -in client.crt
+        ```
+
+    + `require san` currently supports the following `Subject Alternative Name` check items:
+
+        - URI
+        - IP
+        - DNS
+
+    + Multiple check items can be configured after they are connected by commas. For example, configure `require san` as follows for the `u1` user:
+
+        {{< copyable "sql" >}}
+
+        ```sql
+        create user 'u1'@'%' require san 'DNS:d1,URI:spiffe://example.org/myservice1,URI:spiffe://example.org/myservice2'
+        ```
+
+        The above configuration only allows the `u1` user to log in to TiDB using the certificate with the URI item `spiffe://example.org/myservice1` or `spiffe://example.org/myservice2` and the DNS item `d1`.
+
 + `require cipher`: Checks the cipher method supported by the client. Use the following statement to check the list of supported cipher methods:
 
     {{< copyable "sql" >}}
@@ -297,7 +314,7 @@ The user certificate information can be specified by `require subject`, `require
 
 ### Configure user certificate information
 
-After getting the user certificate information (`require subject`, `require issuer`, `require cipher`), configure these information to be verified when creating a user, granting privileges, or altering a user. Replace `<replaceable>` with the corresponding information in the following statements.
+After getting the user certificate information (`require subject`, `require issuer`, `require san`, `require cipher`), configure these information to be verified when creating a user, granting privileges, or altering a user. Replace `<replaceable>` with the corresponding information in the following statements.
 
 You can configure one option or multiple options using the space or `and` as the separator.
 
@@ -306,7 +323,7 @@ You can configure one option or multiple options using the space or `and` as the
     {{< copyable "sql" >}}
 
     ```sql
-    create user 'u1'@'%' require issuer '<replaceable>' subject '<replaceable>' cipher '<replaceable>';
+    create user 'u1'@'%' require issuer '<replaceable>' subject '<replaceable>' san '<replaceable>' cipher '<replaceable>';
     ```
 
 + Configure user certificate when granting privileges:
@@ -314,7 +331,7 @@ You can configure one option or multiple options using the space or `and` as the
     {{< copyable "sql" >}}
 
     ```sql
-    grant all on *.* to 'u1'@'%' require issuer '<replaceable>' subject '<replaceable>' cipher '<replaceable>';
+    grant all on *.* to 'u1'@'%' require issuer '<replaceable>' subject '<replaceable>' san '<replaceable>' cipher '<replaceable>';
     ```
 
 + Configure user certificate when altering a user:
@@ -322,7 +339,7 @@ You can configure one option or multiple options using the space or `and` as the
     {{< copyable "sql" >}}
 
     ```sql
-    alter user 'u1'@'%' require issuer '<replaceable>' subject '<replaceable>' cipher '<replaceable>';
+    alter user 'u1'@'%' require issuer '<replaceable>' subject '<replaceable>' san '<replaceable>' cipher '<replaceable>';
     ```
 
 After the above configuration, the following items will be verified when you log in:
@@ -330,6 +347,7 @@ After the above configuration, the following items will be verified when you log
 + SSL is used; the CA that issues the client certificate is consistent with the CA configured in the server.
 + The `issuer` information of the client certificate matches the information specified in `require issuer`.
 + The `subject` information of the client certificate matches the information specified in `require cipher`.
++ The `Subject Alternative Name` information of the client certificate matches the information specified in `require san`.
 
 You can log into TiDB only after all the above items are verified. Otherwise, the `ERROR 1045 (28000): Access denied` error is returned. You can use the following command to check the TLS version, the cipher algorithm and whether the current connection uses the certificate for the login.
 
@@ -483,4 +501,4 @@ Also replace the old CA certificate with the combined certificate so that the cl
     sudo openssl x509 -req -in server-req.new.pem -days 365000 -CA ca-cert.pem -CAkey ca-key.pem -set_serial 01 -out server-cert.new.pem
     ```
 
-3. Configure the TiDB server to use the new server key and certificate. See [Configure TiDB server](#configure-tidb-server) for details.
+3. Configure the TiDB server to use the new server key and certificate. See [Configure TiDB server](#configure-tidb-and-the-client-to-use-certificates) for details.

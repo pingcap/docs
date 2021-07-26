@@ -1,7 +1,7 @@
 ---
 title: TiDB Dashboard FAQ
 summary: Learn about the frequently asked questions (FAQs) and answers about TiDB Dashboard.
-category: how-to
+aliases: ['/docs/dev/dashboard/dashboard-faq/']
 ---
 
 # TiDB Dashboard FAQ
@@ -14,7 +14,7 @@ This document summarizes the frequently asked questions (FAQs) and answers about
 
 When multiple Placement Driver (PD) instances are deployed in a cluster, only one of the PD instances actually runs the TiDB Dashboard service. If you access other PD instances instead of this one, your browser redirects you to another address. If the firewall or reverse proxy is not properly configured for accessing TiDB Dashboard, when you visit the Dashboard, you might be redirected to an internal address that is protected by the firewall or reverse proxy.
 
-- See [TiDB Dashboard Multi-PD Instance Deployment](/dashboard/dashboard-ops-deploy.md#) to learn the working principle of TiDB Dashboard with multiple PD instances.
+- See [TiDB Dashboard Multi-PD Instance Deployment](/dashboard/dashboard-ops-deploy.md) to learn the working principle of TiDB Dashboard with multiple PD instances.
 - See [Use TiDB Dashboard through a Reverse Proxy](/dashboard/dashboard-ops-reverse-proxy.md) to learn how to correctly configure a reverse proxy.
 - See [Secure TiDB Dashboard](/dashboard/dashboard-ops-security.md) to learn how to correctly configure the firewall.
 
@@ -30,7 +30,7 @@ If you have deployed TiDB using the `tiup cluster` or `tiup playground` command,
 
 The **QPS** and **Latency** sections on the **Overview** page require a cluster with Prometheus deployed. Otherwise, the error is shown. You can solve this problem by deploying a Prometheus instance in the cluster.
 
-If you still encounter this problem when the Prometheus instance has been deployed, the possible reason is that your deployment tool is out of date (TiUP, TiDB Operator, or TiDB Ansible), and your tool does not automatically report metrics addresses, which makes TiDB Dashboard unable to query metrics. You can upgrade you deployment tool to the latest version and try again.
+If you still encounter this problem when the Prometheus instance has been deployed, the possible reason is that your deployment tool is out of date (TiUP or TiDB Operator), and your tool does not automatically report metrics addresses, which makes TiDB Dashboard unable to query metrics. You can upgrade you deployment tool to the latest version and try again.
 
 If your deployment tool is TiUP, take the following steps to solve this problem. For other deployment tools, refer to the corresponding documents of those tools.
 
@@ -45,7 +45,7 @@ If your deployment tool is TiUP, take the following steps to solve this problem.
 
 2. After the upgrade, when a new cluster is deployed with Prometheus instances, the metrics can be displayed normally.
 
-3. For an existing cluster, you can restart this cluster to report the metrics addresses. Replace `CLUSTER_NAME` with the actual cluster name:
+3. After the upgrade, for an existing cluster, you can restart this cluster to report the metrics addresses. Replace `CLUSTER_NAME` with the actual cluster name:
 
     {{< copyable "shell-regular" >}}
 

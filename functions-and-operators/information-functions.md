@@ -1,8 +1,7 @@
 ---
 title: Information Functions
 summary: Learn about the information functions.
-category: reference
-aliases: ['/docs/dev/reference/sql/functions-and-operators/information-functions/']
+aliases: ['/docs/dev/functions-and-operators/information-functions/','/docs/dev/reference/sql/functions-and-operators/information-functions/']
 ---
 
 # Information Functions
@@ -25,7 +24,6 @@ TiDB supports most of the [information functions](https://dev.mysql.com/doc/refm
 | [`SYSTEM_USER()`](https://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_system-user) | Synonym for `USER()`   |
 | [`USER()`](https://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_user) | Return the user name and host name provided by the client    |
 | [`VERSION()`](https://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_version) | Return a string that indicates the MySQL server version   |
-| `TIDB_VERSION()` | Return a string that indicates the TiDB server version |
 
 ## Unsupported functions
 

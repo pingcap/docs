@@ -1,24 +1,24 @@
 ---
 title: PD Control User Guide
 summary: Use PD Control to obtain the state information of a cluster and tune a cluster.
-category: reference
-aliases: ['/docs/dev/reference/tools/pd-control/']
+aliases: ['/docs/dev/pd-control/','/docs/dev/reference/tools/pd-control/']
 ---
 
 # PD Control User Guide
 
 As a command line tool of PD, PD Control obtains the state information of the cluster and tunes the cluster.
 
-## Compile from source code
-
-1. [Go](https://golang.org/) Version 1.13 or later because the Go modules are used.
-2. In the root directory of the [PD project](https://github.com/pingcap/pd), use the `make` command to compile and generate `bin/pd-ctl`
+## Install PD Control
 
 > **Note:**
 >
-> Generally, you don't need to compile source code as the PD Control tool already exists in the released Binary or Docker. However, dev users can refer to the above instruction for compiling source code.
+> It is recommended that the version of the Control tool you use is consistent with the version of the cluster.
 
-## Download TiDB installation package
+### Use TiUP command
+
+To use PD Control, execute the `tiup ctl:<cluster-version> pd -u http://<pd_ip>:<pd_port> [-i]` command.
+
+### Download TiDB installation package
 
 If you want to download the latest version of `pd-ctl`, directly download the TiDB package, because `pd-ctl` is included in the TiDB package.
 
@@ -28,7 +28,12 @@ If you want to download the latest version of `pd-ctl`, directly download the Ti
 
 > **Note:**
 >
-> `{version}` indicates the version number of TiDB. For example, if `{version}` is `v3.0.7`, the package download link is `https://download.pingcap.org/tidb-v3.0.7-linux-amd64.tar.gz`. You can also download the latest unpublished version by replacing `{version}` with `latest`.
+> `{version}` indicates the version number of TiDB. For example, if `{version}` is `v5.1.0`, the package download link is `https://download.pingcap.org/tidb-v5.1.0-linux-amd64.tar.gz`.
+
+### Compile from source code
+
+1. [Go](https://golang.org/) Version 1.13 or later because the Go modules are used.
+2. In the root directory of the [PD project](https://github.com/pingcap/pd), use the `make` or `make pd-ctl` command to compile and generate `bin/pd-ctl`.
 
 ## Usage
 
@@ -59,43 +64,43 @@ Use TLS to encrypt:
 
 ## Command line flags
 
-### --cacert
+### `--cacert`
 
 + Specifies the path to the certificate file of the trusted CA in PEM format
 + Default: ""
 
-### --cert
+### `--cert`
 
 + Specifies the path to the certificate of SSL in PEM format
 + Default: ""
 
-### \-\-detach,-d
+### `--detach` / `-d`
 
 + Uses the single command line mode (not entering readline)
 + Default: true
 
-### \-\-help,-h
+### `--help` / `-h`
 
 + Outputs the help information
 + Default: false
 
-### \-\-interact,-i
+### `--interact` / `-i`
 
 + Uses the interactive mode (entering readline)
 + Default: false
 
-### --key
+### `--key`
 
 + Specifies the path to the certificate key file of SSL in PEM format, which is the private key of the certificate specified by `--cert`
 + Default: ""
 
-### \-\-pd,-u
+### `--pd` / `-u`
 
 + Specifies the PD address
 + Default address: `http://127.0.0.1:2379`
 + Environment variable: `PD_ADDR`
 
-### --version,-V
+### `--version` / `-V`
 
 + Prints the version information and exit
 + Default: false
@@ -116,75 +121,74 @@ Usage:
 }
 ```
 
-### `config [show | set <option> <value>]`
+### `config [show | set <option> <value> | placement-rules]`
 
 Use this command to view or modify the configuration information.
 
 Usage:
 
 ```bash
->> config show                                // Display the config information of the scheduler
+>> config show                                // Display the config information of the scheduling
 {
-  "max-snapshot-count": 3,
-  "max-pending-peer-count": 16,
-  "max-merge-region-size": 50,
-  "max-merge-region-keys": 200000,
-  "split-merge-interval": "1h",
-  "patrol-region-interval": "100ms",
-  "max-store-down-time": "1h0m0s",
-  "leader-schedule-limit": 4,
-  "region-schedule-limit": 4,
-  "replica-schedule-limit":8,
-  "merge-schedule-limit": 8,
-  "tolerant-size-ratio": 5,
-  "low-space-ratio": 0.8,
-  "high-space-ratio": 0.6,
-  "disable-raft-learner": "false",
-  "disable-remove-down-replica": "false",
-  "disable-replace-offline-replica": "false",
-  "disable-make-up-replica": "false",
-  "disable-remove-extra-replica": "false",
-  "disable-location-replacement": "false",
-  "disable-namespace-relocation": "false",
-  "schedulers-v2": [
-    {
-      "type": "balance-region",
-      "args": null
-    },
-    {
-      "type": "balance-leader",
-      "args": null
-    },
-    {
-      "type": "hot-region",
-      "args": null
-    }
-  ]
+  "replication": {
+    "enable-placement-rules": "false",
+    "isolation-level": "",
+    "location-labels": "",
+    "max-replicas": 3,
+    "strictly-match-label": "false"
+  },
+  "schedule": {
+    "enable-cross-table-merge": "true",
+    "enable-debug-metrics": "false",
+    "enable-location-replacement": "true",
+    "enable-make-up-replica": "true",
+    "enable-one-way-merge": "false",
+    "enable-remove-down-replica": "true",
+    "enable-remove-extra-replica": "true",
+    "enable-replace-offline-replica": "true",
+    "high-space-ratio": 0.7,
+    "hot-region-cache-hits-threshold": 3,
+    "hot-region-schedule-limit": 4,
+    "leader-schedule-limit": 4,
+    "leader-schedule-policy": "count",
+    "low-space-ratio": 0.8,
+    "max-merge-region-keys": 200000,
+    "max-merge-region-size": 20,
+    "max-pending-peer-count": 16,
+    "max-snapshot-count": 3,
+    "max-store-down-time": "30m0s",
+    "merge-schedule-limit": 8,
+    "patrol-region-interval": "100ms",
+    "region-schedule-limit": 2048,
+    "region-score-formula-version": "v2",
+    "replica-schedule-limit": 64,
+    "scheduler-max-waiting-operator": 5,
+    "split-merge-interval": "1h0m0s",
+    "store-limit-mode": "manual",
+    "tolerant-size-ratio": 0
+  }
 }
 >> config show all                            // Display all config information
->> config show namespace ts1                  // Display the config information of the namespace named ts1
-{
-  "leader-schedule-limit": 4,
-  "region-schedule-limit": 4,
-  "replica-schedule-limit": 8,
-  "max-replicas": 3,
-}
 >> config show replication                    // Display the config information of replication
 {
   "max-replicas": 3,
-  "location-labels": ""
+  "location-labels": "",
+  "isolation-level": "",
+  "strictly-match-label": "false",
+  "enable-placement-rules": "false"
 }
+
 >> config show cluster-version                // Display the current version of the cluster, which is the current minimum version of TiKV nodes in the cluster and does not correspond to the binary version.
-"2.0.0"
+"5.1.0"
 ```
 
-+ `max-snapshot-count` controls the maximum number of snapshots that a single store receives or sends out at the same time. The scheduler is restricted by this configuration to avoid taking up normal application resources. When you need to improve the speed of adding replicas or balancing, increase this value.
+- `max-snapshot-count` controls the maximum number of snapshots that a single store receives or sends out at the same time. The scheduler is restricted by this configuration to avoid taking up normal application resources. When you need to improve the speed of adding replicas or balancing, increase this value.
 
     ```bash
     >> config set max-snapshot-count 16  // Set the maximum number of snapshots to 16
     ```
 
-+ `max-pending-peer-count` controls the maximum number of pending peers in a single store. The scheduler is restricted by this configuration to avoid producing a large number of Regions without the latest log in some nodes. When you need to improve the speed of adding replicas or balancing, increase this value. Setting it to 0 indicates no limit.
+- `max-pending-peer-count` controls the maximum number of pending peers in a single store. The scheduler is restricted by this configuration to avoid producing a large number of Regions without the latest log in some nodes. When you need to improve the speed of adding replicas or balancing, increase this value. Setting it to 0 indicates no limit.
 
     ```bash
     >> config set max-pending-peer-count 64  // Set the maximum number of pending peers to 64
@@ -208,10 +212,38 @@ Usage:
     >> config set split-merge-interval 24h  // Set the interval between `split` and `merge` to one day
     ```
 
+- `enable-one-way-merge` controls whether PD only allows a Region to merge with the next Region. When you set it to `false`, PD allows a Region to merge with the adjacent two Regions.
+
+    ```bash
+    >> config set enable-one-way-merge true  // Enables one-way merging.
+    ```
+
+- `enable-cross-table-merge` is used to enable the merging of cross-table Regions. When you set it to `false`, PD does not merge the Regions from different tables. This option only works when key type is "table".
+
+    ```bash
+    >> config set enable-cross-table-merge true  // Enable cross table merge.
+    ```
+
+- `key-type` specifies the key encoding type used for the cluster. The supported options are ["table", "raw", "txn"], and the default value is "table".
+    - If no TiDB instance exists in the cluster, `key-type` will be "raw" or "txn", and PD is allowed to merge Regions across tables regardless of the `enable-cross-table-merge` setting.
+    - If any TiDB instance exists in the cluster, `key-type` should be "table". Whether PD can merge Regions across tables is determined by `enable-cross-table-merge`. If `key-type` is "raw", placement rules do not work.
+
+    ```bash
+    >> config set key-type raw  // Enable cross table merge.
+    ```
+
+- `region-score-formula-version` controls the version of the Region score formula. The value options are `v1` and `v2`. The version 2 of the formula helps to reduce redundant balance Region scheduling in some scenarios, such as taking TiKV nodes online or offline.
+
+    {{< copyable "" >}}
+
+    ```bash
+    >> config set region-score-formula-version v2
+    ```
+
 - `patrol-region-interval` controls the execution frequency that `replicaChecker` checks the health status of Regions. A shorter interval indicates a higher execution frequency. Generally, you do not need to adjust it.
 
     ```bash
-    >> config set patrol-region-interval 10ms // Set the execution frequency of replicaChecker to 10ms
+    >> config set patrol-region-interval 50ms // Set the execution frequency of replicaChecker to 50ms
     ```
 
 - `max-store-down-time` controls the time that PD decides the disconnected store cannot be restored if exceeded. If PD does not receive heartbeats from a store within the specified period of time, PD adds replicas in other nodes.
@@ -226,7 +258,7 @@ Usage:
     >> config set leader-schedule-limit 4         // 4 tasks of leader scheduling at the same time at most
     ```
 
-- `region-schedule-limit` controls the number of tasks scheduling the Region at the same time. This value affects the speed of Region balance. A larger value means a higher speed and setting the value to 0 closes the scheduling. Usually the Region scheduling has a large load, so do not set a too large value.
+- `region-schedule-limit` controls the number of tasks of scheduling Regions at the same time. This value avoids too many Region balance operators being created. The default value is `2048` which is enough for all sizes of clusters, and setting the value to `0` closes the scheduling. Usually, the Region scheduling speed is limited by `store-limit`, but it is recommended that you do not customize this value unless you know exactly what you are doing.
 
     ```bash
     >> config set region-schedule-limit 2         // 2 tasks of Region scheduling at the same time at most
@@ -244,21 +276,18 @@ Usage:
     >> config set merge-schedule-limit 16       // 16 tasks of Merge scheduling at the same time at most
     ```
 
-The configuration above is global. You can also tune the configuration by configuring different namespaces. The global configuration is used if the corresponding configuration of the namespace is not set.
+- `hot-region-schedule-limit` controls the hot Region scheduling tasks that are running at the same time. Setting its value to `0` means to disable the scheduling. It is not recommended to set a too large value, otherwise it might affect the system performance.
 
-> **Note:**
->
-> The configuration of the namespace only supports editing `leader-schedule-limit`, `region-schedule-limit`, `replica-schedule-limit` and `max-replicas`.
+    ```bash
+    >> config set hot-region-schedule-limit 4       // 4 tasks of hot Region scheduling at the same time at most
+    ```
 
-```bash
->> config set namespace ts1 leader-schedule-limit 4 // 4 tasks of leader scheduling at the same time at most for the namespace named ts1
->> config set namespace ts2 region-schedule-limit 2 // 2 tasks of region scheduling at the same time at most for the namespace named ts2
-```
+- `hot-region-cache-hits-threshold` is used to set the number of minutes required to identify a hot Region. PD can participate in the hotspot scheduling only after the Region is in the hotspot state for more than this number of minutes.
 
 - `tolerant-size-ratio` controls the size of the balance buffer area. When the score difference between the leader or Region of the two stores is less than specified multiple times of the Region size, it is considered in balance by PD.
 
     ```bash
-    >> config set tolerant-size-ratio 20        // Set the size of the buffer area to about 20 times of the average regionSize
+    >> config set tolerant-size-ratio 20        // Set the size of the buffer area to about 20 times of the average Region Size
     ```
 
 - `low-space-ratio` controls the threshold value that is considered as insufficient store space. When the ratio of the space occupied by the node exceeds the specified value, PD tries to avoid migrating data to the corresponding node as much as possible. At the same time, PD mainly schedules the remaining space to avoid using up the disk space of the corresponding node.
@@ -267,16 +296,10 @@ The configuration above is global. You can also tune the configuration by config
     config set low-space-ratio 0.9              // Set the threshold value of insufficient space to 0.9
     ```
 
-- `high-space-ratio` controls the threshold value that is considered as sufficient store space. When the ratio of the space occupied by the node is less than the specified value, PD ignores the remaining space and mainly schedules the actual data volume.
+- `high-space-ratio` controls the threshold value that is considered as sufficient store space. This configuration takes effect only when `region-score-formula-version` is set to `v1`. When the ratio of the space occupied by the node is less than the specified value, PD ignores the remaining space and mainly schedules the actual data volume.
 
     ```bash
     config set high-space-ratio 0.5             // Set the threshold value of sufficient space to 0.5
-    ```
-
-- `disable-raft-learner` is used to disable Raft learner. By default, PD uses Raft learner when adding replicas to reduce the risk of unavailability due to downtime or network failure.
-
-    ```bash
-    config set disable-raft-learner true        // Disable Raft learner
     ```
 
 - `cluster-version` is the version of the cluster, which is used to enable or disable some features and to deal with the compatibility issues. By default, it is the minimum version of all normally running TiKV nodes in the cluster. You can set it manually only when you need to roll it back to an earlier version.
@@ -285,35 +308,41 @@ The configuration above is global. You can also tune the configuration by config
     config set cluster-version 1.0.8              // Set the version of the cluster to 1.0.8
     ```
 
-- `disable-remove-down-replica` is used to disable the feature of automatically deleting DownReplica. When you set it to `true`, PD does not automatically clean up the downtime replicas.
+- `replication-mode` controls the replication mode of Regions in the dual data center scenario. See [Change replication mode manually](/synchronous-replication.md#change-the-replication-mode-manually) for details.
 
-- `disable-replace-offline-replica` is used to disable the feature of migrating OfflineReplica. When you set it to `true`, PD does not migrate the offline replicas.
+- `leader-schedule-policy` is used to select the scheduling strategy for the leader. You can schedule the leader according to `size` or `count`.
 
-- `disable-make-up-replica` is used to disable the feature of making up replicas. When you set it to `true`, PD does not adding replicas for Regions without sufficient replicas.
+- `scheduler-max-waiting-operator` is used to control the number of waiting operators in each scheduler.
 
-- `disable-remove-extra-replica` is used to disable the feature of removing extra replicas. When you set it to `true`, PD does not remove extra replicas for Regions with redundant replicas.
+- `enable-remove-down-replica` is used to enable the feature of automatically deleting DownReplica. When you set it to `false`, PD does not automatically clean up the downtime replicas.
 
-- `disable-location-replacement` is used to disable the isolation level check. When you set it to `true`, PD does not improve the isolation level of Region replicas by scheduling.
+- `enable-replace-offline-replica` is used to enable the feature of migrating OfflineReplica. When you set it to `false`, PD does not migrate the offline replicas.
 
-- `disable-namespace-relocation` is used to disable Region relocation to the store of its namespace. When you set it to `true`, PD does not move Regions to stores where they belong to.
+- `enable-make-up-replica` is used to enable the feature of making up replicas. When you set it to `false`, PD does not add replicas for Regions without sufficient replicas.
 
-### `config delete namespace <name> [<option>]`
+- `enable-remove-extra-replica` is used to enable the feature of removing extra replicas. When you set it to `false`, PD does not remove extra replicas for Regions with redundant replicas.
 
-Use this command to delete the configuration of namespace.
+- `enable-location-replacement` is used to enable the isolation level checking. When you set it to `false`, PD does not increase the isolation level of a Region replica through scheduling.
 
-Usage:
+- `enable-debug-metrics` is used to enable the metrics for debugging. When you set it to `true`, PD enables some metrics such as `balance-tolerant-size`.
 
-After you configure the namespace, if you want it to continue to use global configuration, delete the configuration information of the namespace using the following command:
+- `enable-placement-rules` is used to enable placement rules, which is enabled by default in v5.0 and later versions.
 
-```bash
->> config delete namespace ts1                      // Delete the configuration of the namespace named ts1
-```
+- `store-limit-mode` is used to control the mode of limiting the store speed. The optional modes are `auto` and `manual`. In `auto` mode, the stores are automatically balanced according to the load (experimental).
 
-If you want to use global configuration only for a certain configuration of the namespace, use the following command:
+- PD rounds the lowest digits of the flow number, which reduces the update of statistics caused by the changes of the Region flow information. This configuration item is used to specify the number of lowest digits to round for the Region flow information. For example, the flow `100512` will be rounded to `101000` because the default value is `3`. This configuration replaces `trace-region-flow`.
 
-```bash
->> config delete namespace region-schedule-limit ts2 // Delete the region-schedule-limit configuration of the namespace named ts2
-```
+- For example, set the value of `flow-round-by-digit` to `4`:
+
+    {{< copyable "" >}}
+
+    ```bash
+    config set flow-round-by-digit 4
+    ```
+
+#### `config placement-rules [disable | enable | load | save | show | rule-group]`
+
+For the usage of `config placement-rules [disable | enable | load | save | show | rule-group]`, see [Configure placement rules](/configure-placement-rules.md#configure-rules).
 
 ### `health`
 
@@ -369,6 +398,7 @@ Usage:
 ```bash
 >> member                               // Display the information of all members
 {
+  "header": {......},
   "members": [......],
   "leader": {......},
   "etcd_leader": {......},
@@ -380,8 +410,9 @@ Success!
 >> member leader show                   // Display the leader information
 {
   "name": "pd",
-  "addr": "http://192.168.199.229:2379",
-  "id": 9724873857558226554
+  "member_id": 13155432540099656863,
+  "peer_urls": [......],
+  "client_urls": [......]
 }
 >> member leader resign // Move leader away from the current member
 ......
@@ -389,9 +420,9 @@ Success!
 ......
 ```
 
-### `operator [show | add | remove]`
+### `operator [check | show | add | remove]`
 
-Use this command to view and control the scheduling operation, split a Region, or merge Regions.
+Use this command to view and control the scheduling operation.
 
 Usage:
 
@@ -401,6 +432,7 @@ Usage:
 >> operator show leader                                 // Display all leader operators
 >> operator show region                                 // Display all Region operators
 >> operator add add-peer 1 2                            // Add a replica of Region 1 on store 2
+>> operator add add-learner 1 2                         // Add a learner replica of Region 1 on store 2
 >> operator add remove-peer 1 2                         // Remove a replica of Region 1 on store 2
 >> operator add transfer-leader 1 2                     // Schedule the leader of Region 1 to store 2
 >> operator add transfer-region 1 2 3 4                 // Schedule Region 1 to stores 2,3,4
@@ -409,6 +441,7 @@ Usage:
 >> operator add split-region 1 --policy=approximate     // Split Region 1 into two Regions in halves, based on approximately estimated value
 >> operator add split-region 1 --policy=scan            // Split Region 1 into two Regions in halves, based on accurate scan value
 >> operator remove 1                                    // Remove the scheduling operation of Region 1
+>> operator check 1                                     // Check the status of the operators related to Region 1
 ```
 
 The splitting of Regions starts from the position as close as possible to the middle. You can locate this position using two strategies, namely "scan" and "approximate". The difference between them is that the former determines the middle key by scanning the Region, and the latter obtains the approximate position by checking the statistics recorded in the SST file. Generally, the former is more accurate, while the latter consumes less I/O and can be completed faster.
@@ -426,37 +459,65 @@ time: 43.12698ms
 
 ### `region <region_id> [--jq="<query string>"]`
 
-Use this command to view the region information. For a jq formatted output, see [jq-formatted-json-output-usage](#jq-formatted-json-output-usage).
+Use this command to view the Region information. For a jq formatted output, see [jq-formatted-json-output-usage](#jq-formatted-json-output-usage).
 
 Usage:
 
 ```bash
->> region                               //　Display the information of all regions
+>> region                               //　Display the information of all Regions
 {
   "count": 1,
   "regions": [......]
 }
 
->> region 2                             // Display the information of the region with the id of 2
+>> region 2                             // Display the information of the Region with the ID of 2
+{
+  "id": 2,
+  "start_key": "7480000000000000FF1D00000000000000F8",
+  "end_key": "7480000000000000FF1F00000000000000F8",
+  "epoch": {
+    "conf_ver": 1,
+    "version": 15
+  },
+  "peers": [
+    {
+      "id": 40,
+      "store_id": 3
+    }
+  ],
+  "leader": {
+    "id": 40,
+    "store_id": 3
+  },
+  "written_bytes": 0,
+  "read_bytes": 0,
+  "written_keys": 0,
+  "read_keys": 0,
+  "approximate_size": 1,
+  "approximate_keys": 0
+}
+```
+
+### `region key [--format=raw|encode|hex] <key>`
+
+Use this command to query the Region that a specific key resides in. It supports the raw, encoding, and hex formats. And you need to use single quotes around the key when it is in the encoding format.
+
+Hex format usage (default):
+
+```bash
+>> region key 7480000000000000FF1300000000000000F8
 {
   "region": {
-      "id": 2,
-      ......
-  }
-  "leader": {
-      ......
+    "id": 2,
+    ......
   }
 }
 ```
 
-### `region key [--format=raw|encode] <key>`
-
-Use this command to query the region that a specific key resides in. It supports the raw and encoding formats. And you need to use single quotes around the key when it is in the encoding format.
-
-Raw format usage (default):
+Raw format usage:
 
 ```bash
->> region key abc
+>> region key --format=raw abc
 {
   "region": {
     "id": 2,
@@ -477,6 +538,20 @@ Encoding format usage:
 }
 ```
 
+### `region scan`
+
+Use this command to get all Regions.
+
+Usage:
+
+```bash
+>> region scan
+{
+  "count": 20,
+  "regions": [......],
+}
+```
+
 ### `region sibling <region_id>`
 
 Use this command to check the adjacent Regions of a specific Region.
@@ -487,6 +562,22 @@ Usage:
 >> region sibling 2
 {
   "count": 2,
+  "regions": [......],
+}
+```
+
+### `region startkey [--format=raw|encode|hex] <key> <limit>`
+
+Use this command to query all Regions starting from a key.
+
+Usage:
+
+{{< copyable "" >}}
+
+```bash
+>> region startkey --format=raw abc
+{
+  "count": 16,
   "regions": [......],
 }
 ```
@@ -570,13 +661,13 @@ Usage:
 ```bash
 >> region topsize
 {
-   "count": 16,
-   "regions": [......],
+  "count": 16,
+  "regions": [......],
 }
 
 ```
 
-### `region check [miss-peer | extra-peer | down-peer | pending-peer | incorrect-ns]`
+### `region check [miss-peer | extra-peer | down-peer | pending-peer | offline-peer | empty-region | hist-size | hist-keys]`
 
 Use this command to check the Regions in abnormal conditions.
 
@@ -586,7 +677,6 @@ Description of various types:
 - extra-peer: the Region with extra replicas
 - down-peer: the Region in which some replicas are Down
 - pending-peer：the Region in which some replicas are Pending
-- incorrect-ns：the Region in which some replicas deviate from the namespace constraints
 
 Usage:
 
@@ -598,55 +688,136 @@ Usage:
 }
 ```
 
-### `scheduler [show | add | remove]`
+### `scheduler [show | add | remove | pause | resume | config]`
 
-Use this command to view and control the scheduling strategy.
+Use this command to view and control the scheduling policy.
 
 Usage:
 
 ```bash
->> scheduler show                             // Display all schedulers
->> scheduler add grant-leader-scheduler 1     // Schedule all the leaders of the regions on store 1 to store 1
->> scheduler add evict-leader-scheduler 1     // Move all the region leaders on store 1 out
->> scheduler add shuffle-leader-scheduler     // Randomly exchange the leader on different stores
->> scheduler add shuffle-region-scheduler     // Randomly scheduling the regions on different stores
->> scheduler remove grant-leader-scheduler-1  // Remove the corresponding scheduler
+>> scheduler show                                 // Display all schedulers
+>> scheduler add grant-leader-scheduler 1         // Schedule all the leaders of the Regions on store 1 to store 1
+>> scheduler add evict-leader-scheduler 1         // Move all the Region leaders on store 1 out
+>> scheduler config evict-leader-scheduler        // Display the stores in which the scheduler is located since v4.0.0
+>> scheduler add shuffle-leader-scheduler         // Randomly exchange the leader on different stores
+>> scheduler add shuffle-region-scheduler         // Randomly scheduling the regions on different stores
+>> scheduler remove grant-leader-scheduler-1      // Remove the corresponding scheduler, and `-1` corresponds to the store ID
+>> scheduler pause balance-region-scheduler 10    // Pause the balance-region scheduler for 10 seconds
+>> scheduler pause all 10                         // Pause all schedulers for 10 seconds
+>> scheduler resume balance-region-scheduler      // Continue to run the balance-region scheduler
+>> scheduler resume all                           // Continue to run all schedulers
+>> scheduler config balance-hot-region-scheduler  // Display the configuration of the balance-hot-region scheduler
 ```
 
-### `store [delete | label | weight] <store_id>  [--jq="<query string>"]`
+#### `scheduler config balance-hot-region-scheduler`
+
+Use this command to view and control the `balance-hot-region-scheduler` policy.
+
+Usage:
+
+```bash
+>> scheduler config balance-hot-region-scheduler  // Display all configuration of the balance-hot-region scheduler
+{
+  "min-hot-byte-rate": 100,
+  "min-hot-key-rate": 10,
+  "max-zombie-rounds": 3,
+  "max-peer-number": 1000,
+  "byte-rate-rank-step-ratio": 0.05,
+  "key-rate-rank-step-ratio": 0.05,
+  "count-rank-step-ratio": 0.01,
+  "great-dec-ratio": 0.95,
+  "minor-dec-ratio": 0.99,
+  "src-tolerance-ratio": 1.02,
+  "dst-tolerance-ratio": 1.02
+}
+```
+
+- `min-hot-byte-rate` means the smallest byte counted, which is usually 100.
+
+    ```bash
+    >> scheduler config balance-hot-region-scheduler set min-hot-byte-rate 100
+    ```
+
+- `min-hot-key-rate` means the smallest key counted, which is usually 10.
+
+    ```bash
+    >> scheduler config balance-hot-region-scheduler set min-hot-key-rate 10
+    ```
+
+- `max-zombie-rounds` means the maximum number of heartbeats with which an operator can be considered as the pending influence. If you set it to a larger value, more operators might be included in the pending influence. Usually, you do not need to adjust its value. Pending influence refers to the operator influence that is generated during scheduling but still has an effect.
+
+    ```bash
+    >> scheduler config balance-hot-region-scheduler set max-zombie-rounds 3
+    ```
+
+- `max-peer-number` means the maximum number of peers to be solved, which prevents the scheduler from being too slow.
+
+    ```bash
+    >> scheduler config balance-hot-region-scheduler set max-peer-number 1000
+    ```
+
+- `byte-rate-rank-step-ratio`, `key-rate-rank-step-ratio`, and `count-rank-step-ratio` respectively mean the step ranks of byte, key, and count. The rank step ratio decides the step when the rank is calculated. `great-dec-ratio` and `minor-dec-ratio` are used to determine the `dec` rank. Usually, you do not need to modify these items.
+
+    ```bash
+    >> scheduler config balance-hot-region-scheduler set byte-rate-rank-step-ratio 0.05
+    ```
+
+- `src-tolerance-ratio` and `dst-tolerance-ratio` are configuration items for the expectation scheduler. The smaller the `tolerance-ratio`, the easier it is for scheduling. When redundant scheduling occurs, you can appropriately increase this value.
+
+    ```bash
+    >> scheduler config balance-hot-region-scheduler set src-tolerance-ratio 1.05
+    ```
+
+### `store [delete | label | weight | remove-tombstone | limit | limit-scene] <store_id>  [--jq="<query string>"]`
 
 Use this command to view the store information or remove a specified store. For a jq formatted output, see [jq-formatted-json-output-usage](#jq-formatted-json-output-usage).
 
 Usage:
 
 ```bash
->> store                        // Display information of all stores
+>> store                               // Display information of all stores
 {
   "count": 3,
   "stores": [...]
 }
->> store 1                      // Get the store with the store id of 1
+>> store 1                             // Get the store with the store id of 1
   ......
->> store delete 1               // Delete the store with the store id of 1
+>> store delete 1                      // Delete the store with the store id of 1
   ......
->> store label 1 zone cn        // Set the value of the label with the "zone" key to "cn" for the store with the store id of 1
->> store weight 1 5 10          // Set the leader weight to 5 and region weight to 10 for the store with the store id of 1
+>> store label 1 zone cn               // Set the value of the label with the "zone" key to "cn" for the store with the store id of 1
+>> store weight 1 5 10                 // Set the leader weight to 5 and Region weight to 10 for the store with the store id of 1
+>> store remove-tombstone              // Remove stores that are in tombstone state
+>> store limit                         // Show the speed limit of adding-peer operations and the limit of removing-peer operations per minute in all stores
+>> store limit add-peer                // Show the speed limit of adding-peer operations per minute in all stores
+>> store limit remove-peer             // Show the limit of removing-peer operations per minute in all stores
+>> store limit all 5                   // Set the limit of adding-peer operations to 5 and the limit of removing-peer operations to 5 per minute for all stores
+>> store limit 1 5                     // Set the limit of adding-peer operations to 5 and the limit of removing-peer operations to 5 per minute for store 1
+>> store limit all 5 add-peer          // Set the limit of adding-peer operations to 5 per minute for all stores
+>> store limit 1 5 add-peer            // Set the limit of adding-peer operations to 5 per minute for store 1
+>> store limit 1 5 remove-peer         // Set the limit of removing-peer operations to 5 per minute for store 1
+>> store limit all 5 remove-peer       // Set the limit of removing-peer operations to 5 per minute for all stores
+>> store limit-scene                   // Show all limit scenarios (experimental)
+{
+  "Idle": 100,
+  "Low": 50,
+  "Normal": 32,
+  "High": 12
+}
+>> store limit-scene idle 100 // set rate to 100 in the idle scene (experimental)
 ```
 
-### `table_ns [create | add | remove | set_store | rm_store | set_meta | rm_meta]`
+> **Note:**
+>
+> When you use the `store limit` command, the original `region-add` and `region-remove` are deprecated. Use `add-peer` and `remove-peer` instead.
 
-Use this command to view the namespace information of the table.
+### `log [fatal | error | warn | info | debug]`
+
+Use this command to set the log level of the PD leader.
 
 Usage:
 
 ```bash
->> table_ns add ts1 1            // Add the table with the table id of 1 to the namespace named ts1
->> table_ns create ts1           // Add the namespace named ts1
->> table_ns remove ts1 1         // Remove the table with the table id of 1 from the namespace named ts1
->> table_ns rm_meta ts1          // Remove the metadata from the namespace named ts1
->> table_ns rm_store 1 ts1       // Remove the table with the store id of 1 from the namespace named ts1
->> table_ns set_meta ts1         // Add the metadata to namespace named ts1
->> table_ns set_store 1 ts1      // Add the table with the store id of 1 to the namespace named ts1
+>> log warn
 ```
 
 ### `tso`
@@ -678,6 +849,34 @@ logic:  120102
 » store --jq=".stores[] | {id: .store.id, available: .status.available}"
 {"id":1,"available":"10 GiB"}
 {"id":30,"available":"10 GiB"}
+...
+```
+
+### Query all nodes whose status is not `Up`
+
+{{< copyable "" >}}
+
+```bash
+» store --jq='.stores[].store | select(.state_name!="Up") | { id, address, state_name}'
+```
+
+```
+{"id":1,"address":"127.0.0.1:20161""state_name":"Offline"}
+{"id":5,"address":"127.0.0.1:20162""state_name":"Offline"}
+...
+```
+
+### Query all TiFlash nodes
+
+{{< copyable "" >}}
+
+```bash
+» store --jq='.stores[].store | select(.labels | length>0 and contains([{"key":"engine","value":"tiflash"}])) | { id, address, state_name}'
+```
+
+```
+{"id":1,"address":"127.0.0.1:20161""state_name":"Up"}
+{"id":5,"address":"127.0.0.1:20162""state_name":"Up"}
 ...
 ```
 

@@ -1,8 +1,7 @@
 ---
 title: DEALLOCATE | TiDB SQL Statement Reference
 summary: An overview of the usage of DEALLOCATE for the TiDB database.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/deallocate/']
+aliases: ['/docs/dev/sql-statements/sql-statement-deallocate/','/docs/dev/reference/sql/statements/deallocate/']
 ---
 
 # DEALLOCATE
@@ -11,17 +10,20 @@ The `DEALLOCATE` statement provides an SQL interface to server-side prepared sta
 
 ## Synopsis
 
-**DeallocateStmt:**
+```ebnf+diagram
+DeallocateStmt ::=
+    DeallocateSym 'PREPARE' Identifier
 
-![DeallocateStmt](/media/sqlgram/DeallocateStmt.png)
+DeallocateSym ::=
+    'DEALLOCATE'
+|   'DROP'
 
-**DeallocateSym:**
-
-![DeallocateSym](/media/sqlgram/DeallocateSym.png)
-
-**Identifier:**
-
-![Identifier](/media/sqlgram/Identifier.png)
+Identifier ::=
+    identifier
+|   UnReservedKeyword
+|   NotKeywordToken
+|   TiDBKeyword
+```
 
 ## Examples
 
@@ -46,7 +48,7 @@ Query OK, 0 rows affected (0.00 sec)
 
 ## MySQL compatibility
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](/report-issue.md) on GitHub.
+This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
 
 ## See also
 

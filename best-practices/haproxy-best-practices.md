@@ -1,8 +1,7 @@
 ---
 title: Best Practices for Using HAProxy in TiDB
 summary: This document describes best practices for configuration and usage of HAProxy in TiDB.
-category: reference
-aliases: ['/docs/dev/reference/best-practices/haproxy/']
+aliases: ['/docs/dev/best-practices/haproxy-best-practices/','/docs/dev/reference/best-practices/haproxy/']
 ---
 
 # Best Practices for Using HAProxy in TiDB
@@ -176,7 +175,7 @@ listen admin_stats                         # The name of the Stats page reportin
 listen tidb-cluster                        # Database load balancing.
    bind 0.0.0.0:3390                       # The Floating IP address and listening port.
    mode tcp                                # HAProxy uses layer 4, the transport layer.
-   balance leastconn                       # The server with the smallest number of connections receives the connection. `leastconn' is recommended where long sessions are expected, such as LDAP, SQL and TSE, rather than protocols using short sessions, such as HTTP. The algorithm is dynamic, which means that server weights might be adjusted on the fly for slow starts for instance.
+   balance leastconn                       # The server with the smallest number of connections receives the connection. "leastconn" is recommended where long sessions are expected, such as LDAP, SQL and TSE, rather than protocols using short sessions, such as HTTP. The algorithm is dynamic, which means that server weights might be adjusted on the fly for slow starts for instance.
    server tidb-1 10.9.18.229:4000 check inter 2000 rise 2 fall 3       # Detects port 4000 at a frequency of once every 2000 milliseconds. If it is detected as successful twice, the server is considered available; if it is detected as failed three times, the server is considered unavailable.
    server tidb-2 10.9.39.208:4000 check inter 2000 rise 2 fall 3
    server tidb-3 10.9.64.166:4000 check inter 2000 rise 2 fall 3

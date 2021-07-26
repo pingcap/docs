@@ -1,28 +1,28 @@
 ---
-title: Encryption-At-Rest for TiKV
-summary: Learn how to enable encryption-at-rest to protect sensitive data.
-category: reference
+title: Encryption at Rest
+summary: Learn how to enable encryption at rest to protect sensitive data.
+aliases: ['/docs/dev/encryption at rest/']
 ---
 
-# Encryption-At-Rest for TiKV <span class="version-mark">New in v4.0.0</span>
+# Encryption at Rest <span class="version-mark">New in v4.0.0</span>
 
-Encryption-at-rest means that data is encrypted when it is stored. For databases, this feature is also referred to as TDE (transparent data encryption). This is opposed to encryption in flight (TLS) or encryption in use (rarely used). Different things could be doing encryption-at-rest (SSD drive, file system, cloud vendor, etc), but by having TiKV do the encryption before storage this helps ensure that attackers must authenticate with the database to gain access to data. For example, when an attacker gains access to the physical machine, data cannot be accessed by copying files on disk.
+Encryption at rest means that data is encrypted when it is stored. For databases, this feature is also referred to as TDE (transparent data encryption). This is opposed to encryption in flight (TLS) or encryption in use (rarely used). Different things could be doing encryption at rest (SSD drive, file system, cloud vendor, etc), but by having TiKV do the encryption before storage this helps ensure that attackers must authenticate with the database to gain access to data. For example, when an attacker gains access to the physical machine, data cannot be accessed by copying files on disk.
 
-TiKV supports encryption-at-rest starting from v4.0.0. The feature allows TiKV to transparently encrypt data files using [AES](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard) in [CTR](https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation)  mode. To enable encryption-at-rest, an encryption key must be provided by user and this key is called master key. The master key can be provided via AWS KMS (recommended), or specifying a key stored as plaintext in a file. TiKV automatically rotates data keys that it used to encrypt actual data files. Manually rotating the master key can be done occassionally. Note that encryption-at-rest only encrypts data at rest (i.e. on disk) and not while data is transferred over network. It is advised to use TLS together with encryption-at-rest.
+TiKV supports encryption at rest starting from v4.0.0. The feature allows TiKV to transparently encrypt data files using [AES](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard) in [CTR](https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation)  mode. To enable encryption at rest, an encryption key must be provided by user and this key is called master key. The master key can be provided via AWS KMS (recommended), or specifying a key stored as plaintext in a file. TiKV automatically rotates data keys that it used to encrypt actual data files. Manually rotating the master key can be done occasionally. Note that encryption at rest only encrypts data at rest (namely, on disk) and not while data is transferred over network. It is advised to use TLS together with encryption at rest.
 
-Also from v4.0.0, BR supports S3 server-side encryption (SSE) when backing up to S3. A customer owned AWS KMS key can also be used together with S3 server-side encrytion.
+Also from v4.0.0, BR supports S3 server-side encryption (SSE) when backing up to S3. A customer owned AWS KMS key can also be used together with S3 server-side encryption.
 
-## Caveats
+## Warnings
 
-The current version of TiKV encryption has some drawbacks that we are working actively to address in the future versions.
+The current version of TiKV encryption has the following drawbacks. Be aware of these drawbacks before you get started:
 
-* When a TiDB cluster is deployed, the majority of user data is stored in TiKV nodes, and that data will be encrypted when encryption is enabled. However, a small amount of user data is stored in PD nodes as metadata (for example, secondary index keys used as TiKV region boundaries). As of v4.0.0, PD doesn't support encryption-at-rest. It is recommended to use storage-level encryption (for example, file system encryption) to help protect sensitive data stored in PD.
-* As of v4.0.0, TiFlash doesn't support encryption-at-rest. When deploying TiKV with TiFlash, data stored in TiFlash is not encrypted.
-* TiKV currently does not exclude encryption keys and user data from core dumps. It is advised to disable core dumps for the TiKV process when using encryption-at-rest. This is not currently handled by TiKV itself.
-* TiKV tracks encrypted data files using the absolute path of the files. As a result, once encryption is turned on for a TiKV node, the user should not change data file paths config such as `storage.data-dir`, `raftstore.raftdb-path`, `rocksdb.wal-dir` and `raftdb.wal-dir`.
+* When a TiDB cluster is deployed, the majority of user data is stored in TiKV nodes, and that data will be encrypted when encryption is enabled. However, a small amount of user data is stored in PD nodes as metadata (for example, secondary index keys used as TiKV region boundaries). As of v4.0.0, PD doesn't support encryption at rest. It is recommended to use storage-level encryption (for example, file system encryption) to help protect sensitive data stored in PD.
+* TiFlash supports encryption at rest since v4.0.5. For details, refer to [Encryption at Rest for TiFlash](#encryption-at-rest-for-tiflash-new-in-v405). When deploying TiKV with TiFlash earlier than v4.0.5, data stored in TiFlash is not encrypted.
+* TiKV currently does not exclude encryption keys and user data from core dumps. It is advised to disable core dumps for the TiKV process when using encryption at rest. This is not currently handled by TiKV itself.
+* TiKV tracks encrypted data files using the absolute path of the files. As a result, once encryption is turned on for a TiKV node, the user should not change data file paths configuration such as `storage.data-dir`, `raftstore.raftdb-path`, `rocksdb.wal-dir` and `raftdb.wal-dir`.
 * TiKV info log contains user data for debugging purposes. The info log and this data in it are not encrypted.
 
-## TiKV Encryption-At-Rest
+## TiKV encryption at rest
 
 ### Overview
 
@@ -31,17 +31,17 @@ TiKV currently supports encrypting data using AES128, AES192 or AES256, in CTR m
 * Master key. The master key is provided by user and is used to encrypt the data keys TiKV generates. Management of master key is external to TiKV.
 * Data key. The data key is generated by TiKV and is the key actually used to encrypt data. The data key is automatically rotated by TiKV.
 
-The same master key can be shared by multiple instances of TiKV. The recommended way to provide a master key in production is via AWS KMS. Create a customer master key (CMK) through AWS KMS, and then provide the CMK key ID to TiKV in the config file. The TiKV process needs access to the KMS CMK while it is running, which can be done by using an [IAM role](https://aws.amazon.com/iam/). If TiKV fails to get access to the KMS CMK, it will fail to start or restart. If TiKV loses access to the KMS CMK while it is running, data key rotation will be temporarily disabled. Refer to AWS documentation for [KMS](https://docs.aws.amazon.com/kms/index.html) and [IAM](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html) usage.
+The same master key can be shared by multiple instances of TiKV. The recommended way to provide a master key in production is via AWS KMS. Create a customer master key (CMK) through AWS KMS, and then provide the CMK key ID to TiKV in the configuration file. The TiKV process needs access to the KMS CMK while it is running, which can be done by using an [IAM role](https://aws.amazon.com/iam/). If TiKV fails to get access to the KMS CMK, it will fail to start or restart. Refer to AWS documentation for [KMS](https://docs.aws.amazon.com/kms/index.html) and [IAM](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html) usage.
 
-Alternatively, if using custom key is desired, supplying the master key via file is also supported. The file needs to contain a 256 bits (or 32 bytes) key encoded as hex string. The file should end with a newline (i.e. `\n`) and contain nothing else. Persisting the key on disk, however, leaks the key, so the key file is only suitable to be stored on tempfs in RAM.
+Alternatively, if using custom key is desired, supplying the master key via file is also supported. The file must contain a 256 bits (or 32 bytes) key encoded as hex string, end with a newline (namely, `\n`), and contain nothing else. Persisting the key on disk, however, leaks the key, so the key file is only suitable to be stored on the `tempfs` in RAM.
 
-Data keys are generated by TiKV and passed to the underlying storage engine (i.e. RocksDB). All files written by RocksDB, including SST files, WAL files, and the MANIFEST file, are encrypted by the current data key. Other temporary files used by TiKV that may include user data are also encrypted using the same data key. Data keys are automatically rotated by TiKV every week by default, but the period is configurable. On key rotation, TiKV does not rewrite all existing files to replace the key, but RocksDB compaction are expected to rewrite old data into new data files, with the most recent data key, if the cluster gets constant write workload. TiKV keeps track of the key and encryption method used to encrypt each of the files and use the information to decrypt the content on reads.
+Data keys are generated by TiKV and passed to the underlying storage engine (namely, RocksDB). All files written by RocksDB, including SST files, WAL files, and the MANIFEST file, are encrypted by the current data key. Other temporary files used by TiKV that may include user data are also encrypted using the same data key. Data keys are automatically rotated by TiKV every week by default, but the period is configurable. On key rotation, TiKV does not rewrite all existing files to replace the key, but RocksDB compaction are expected to rewrite old data into new data files, with the most recent data key, if the cluster gets constant write workload. TiKV keeps track of the key and encryption method used to encrypt each of the files and use the information to decrypt the content on reads.
 
 Regardless of data encryption method, data keys are encrypted using AES256 in GCM mode for additional authentication. This required the master key to be 256 bits (32 bytes), when passing from file instead of KMS.
 
-### Configuring Encryption
+### Configure encryption
 
-To enable encryption, you can add the encryption section in TiKV's config file:
+To enable encryption, you can add the encryption section in TiKV's configuration file:
 
 ```
 [security.encryption]
@@ -49,9 +49,9 @@ data-encryption-method = aes128-ctr
 data-key-rotation-period = 7d
 ```
 
-Possible values for `data-encryption-method` are "aes128-ctr", "aes192-ctr", "aes256-ctr" and "plaintext". The default value is "plaintext", which means encryption is not turned on. `data-key-rotation-period` defines how often TiKV rotates the data key. Encryption can be turned on for a fresh TiKV cluster, or an existing TiKV cluster, though only data written after encryption is enabled is guaranteed to be encrypted. To disable encryption, remove `data-encryption-method` in the config file, or reset it to "plaintext", and restart TiKV. To change encryption method, update `data-encryption-method` in the config file and restart TiKV.
+Possible values for `data-encryption-method` are "aes128-ctr", "aes192-ctr", "aes256-ctr" and "plaintext". The default value is "plaintext", which means encryption is not turned on. `data-key-rotation-period` defines how often TiKV rotates the data key. Encryption can be turned on for a fresh TiKV cluster, or an existing TiKV cluster, though only data written after encryption is enabled is guaranteed to be encrypted. To disable encryption, remove `data-encryption-method` in the configuration file, or reset it to "plaintext", and restart TiKV. To change encryption method, update `data-encryption-method` in the configuration file and restart TiKV.
 
-The master key has to be specified if encryption is enabled (i.e. `data-encryption-method` is not "plaintext"). To specify a AWS KMS CMK as master key, add the `encryption.master-key` section after the `encryption` section:
+The master key has to be specified if encryption is enabled (that is,`data-encryption-method` is not "plaintext"). To specify a AWS KMS CMK as master key, add the `encryption.master-key` section after the `encryption` section:
 
 ```
 [security.encryption.master-key]
@@ -63,7 +63,7 @@ endpoint = "https://kms.us-west-2.amazonaws.com"
 
 The `key-id` specifies the key id for the KMS CMK. The `region` is the AWS region name for the KMS CMK. The `endpoint` is optional and doesn't need to be specified normally, unless you are using a AWS KMS compatible service from a non-AWS vendor.
 
-To specify a master key that's stored in a file, the master key config would look like the following:
+To specify a master key that's stored in a file, the master key configuration would look like the following:
 
 ```
 [security.encryption.master-key]
@@ -77,13 +77,13 @@ Here `path` is the path to the key file. The file must contain a 256 bits (or 16
 3b5896b5be691006e0f71c3040a29495ddcad20b14aff61806940ebd780d3c62
 ```
 
-### Rotating the Master Key
+### Rotate the master key
 
-To rotate master key, you have to specify both of the new master key and old master key in the config, and restart TiKV. Use `security.encryption.master-key` to specify the new master key, and use `security.encryption.previous-master-key` to specify the old master key. The config format for `security.encryption.previous-master-key` is the same as `encryption.master-key`. On restart TiKV must access both of the old and new master key, but once TiKV is up and running, TiKV will only need access to the new key. It is okay to leave the `encryption.previous-master-key` config in the config file from that on. Even on restart, TiKV only tries to use the old key if it fails to decrypt existing data using the new master key.
+To rotate master key, you have to specify both of the new master key and old master key in the configuration, and restart TiKV. Use `security.encryption.master-key` to specify the new master key, and use `security.encryption.previous-master-key` to specify the old master key. The configuration format for `security.encryption.previous-master-key` is the same as `encryption.master-key`. On restart TiKV must access both of the old and new master key, but once TiKV is up and running, TiKV will only need access to the new key. It is okay to leave the `encryption.previous-master-key` configuration in the configuration file from that on. Even on restart, TiKV only tries to use the old key if it fails to decrypt existing data using the new master key.
 
 Currently online master key rotation is not supported, so you need to restart TiKV. It is advised to do a rolling restart to a running TiKV cluster serving online query.
 
-Here is an example config for rotating the KMS CMK:
+Here is an example configuration for rotating the KMS CMK:
 
 ```
 [security.encryption.master-key]
@@ -97,15 +97,30 @@ key-id = "0987dcba-09fe-87dc-65ba-ab0987654321"
 region = "us-west-2"
 ```
 
-### Monitoring
+### Monitoring and debugging
 
-To monitor encryption-at-rest, if you deploy TiKV with Grafana, you can look at the **Encryption** panel in the **TiKV-Details** dashboard. There are a few metrics to look for:
+To monitor encryption at rest, if you deploy TiKV with Grafana, you can look at the **Encryption** panel in the **TiKV-Details** dashboard. There are a few metrics to look for:
 
 * Encryption initialized: 1 if encryption is initialized during TiKV startup, 0 otherwise. In case of master key rotation, after encryption is initialized, TiKV do not need access to the previous master key.
-* Encryption data keys: number of existings data keys. The number is bumped by 1 after each time data key rotation happened. Use this metrics to monitor if data key rotation works as expected.
-* Encrypted files: number of encrypted data files currently exists. Compare this number to existings data files in the data directory to estimate portion of data being encrypted, when turning on encryption for a previously unencrypted cluster.
+* Encryption data keys: number of existing data keys. The number is bumped by 1 after each time data key rotation happened. Use this metrics to monitor if data key rotation works as expected.
+* Encrypted files: number of encrypted data files currently exists. Compare this number to existing data files in the data directory to estimate portion of data being encrypted, when turning on encryption for a previously unencrypted cluster.
 * Encryption meta file size: size of the encryption meta data files.
 * Read/Write encryption meta duration: the extra overhead to operate on metadata for encryption.
+
+For debugging, the `tikv-ctl` command can be used to dump encryption metadata such as encryption method and data key id used to encryption the file, as well as list of data keys. Since the operation can expose sensitive data, it is not recommended to use in production. Please refer to [TiKV Control](/tikv-control.md#dump-encryption-metadata] document.
+
+### Compatibility between TiKV versions
+
+To reduce the overhead caused by I/O and mutex contention when TiKV manages the encryption metadata, an optimization is introduced in TiKV v4.0.9 and controlled by `security.encryption.enable-file-dictionary-log` in the TiKV configuration file. This configuration parameter takes effect only on TiKV v4.0.9 or later versions.
+
+When it is enabled (by default), the data format of encryption metadata is unrecognizable by TiKV v4.0.8 or earlier versions. For example, assume that you use TiKV v4.0.9 or later with encryption at rest and the default `enable-file-dictionary-log` configuration. If you downgrade your cluster to TiKV v4.0.8 or earlier, TiKV will fail to start, with an error in the info log similar to the following one:
+
+```
+[2020/12/07 07:26:31.106 +08:00] [ERROR] [mod.rs:110] ["encryption: failed to load file dictionary."]
+[2020/12/07 07:26:33.598 +08:00] [FATAL] [lib.rs:483] ["called `Result::unwrap()` on an `Err` value: Other(\"[components/encryption/src/encrypted_file/header.rs:18]: unknown version 2\")"]
+```
+
+To avoid the error above, you can first set `security.encryption.enable-file-dictionary-log` to `false` and start TiKV with v4.0.9 or later. Once TiKV starts successfully, the data format of encryption metadata is downgraded to the version recognizable to earlier TiKV versions. At this point, you can then downgrade your TiKV cluster to an earlier version.
 
 ## BR S3 server-side encryption
 
@@ -115,7 +130,7 @@ To enable S3 server-side encryption when backup to S3 using BR, pass `--s3.sse` 
 ./br backup full --pd <pd-address> --storage "s3://<bucket>/<prefix>" --s3.sse aws:kms
 ```
 
-To use a custom AWS KMS CMK that you created and owned, pass `--s3.sse-kms-key-id` in addition. In this case, both the BR process and all the TiKV nodes in the cluster would need access to the KMS CMK (e.g. via AWS IAM), and the KMS CMK needs to be in the same AWS region as the S3 bucket used to store the backup. It is advised to grant access to the KMS CMK to BR process and TiKV nodes via AWS IAM. Refer to AWS documentation for usage of [IAM](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html). For example:
+To use a custom AWS KMS CMK that you created and owned, pass `--s3.sse-kms-key-id` in addition. In this case, both the BR process and all the TiKV nodes in the cluster would need access to the KMS CMK (for example, via AWS IAM), and the KMS CMK needs to be in the same AWS region as the S3 bucket used to store the backup. It is advised to grant access to the KMS CMK to BR process and TiKV nodes via AWS IAM. Refer to AWS documentation for usage of [IAM](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html). For example:
 
 ```
 ./br backup full --pd <pd-address> --storage "s3://<bucket>/<prefix>" --s3.region <region> --s3.sse aws:kms --s3.sse-kms-key-id 0987dcba-09fe-87dc-65ba-ab0987654321
@@ -126,3 +141,9 @@ When restoring the backup, both `--s3.sse` and `--s3.sse-kms-key-id` should NOT 
 ```
 ./br restore full --pd <pd-address> --storage "s3://<bucket>/<prefix> --s3.region <region>"
 ```
+
+## Encryption at rest for TiFlash <span class="version-mark">New in v4.0.5</span>
+
+TiFlash supports encryption at rest since v4.0.5. Data keys are generated by TiFlash. All files (including data files, schema files, and temporary files) written into TiFlash (including TiFlash Proxy) are encrypted using the current data key. The encryption algorithms, the encryption configuration (in the `tiflash-learner.toml` file) supported by TiFlash, and the meanings of monitoring metrics are consistent with those of TiKV.
+
+If you have deployed TiFlash with Grafana, you can check the **TiFlash-Proxy-Details** -> **Encryption** panel.

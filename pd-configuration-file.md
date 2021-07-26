@@ -1,8 +1,7 @@
 ---
 title: PD Configuration File
 summary: Learn the PD configuration file.
-category: reference
-aliases: ['/docs/dev/reference/configuration/pd-server/configuration-file/']
+aliases: ['/docs/dev/pd-configuration-file/','/docs/dev/reference/configuration/pd-server/configuration-file/']
 ---
 
 # PD Configuration File
@@ -13,31 +12,75 @@ The PD configuration file supports more options than command-line parameters. Yo
 
 This document only describes parameters that are not included in command-line parameters. Check [here](/command-line-flags-for-pd-configuration.md) for the command line parameters.
 
-### `lease`
+### `name`
 
-+ The timeout of the PD Leader Key lease. After the timeout, the system re-elects a Leader.
-+ Default value: `3`
-+ unit: second
+- The unique name of a PD node
+- Default value: `"pd"`
+- To start multiply PD nodes, use a unique name for each node.
 
-### `tso-save-interval`
+### `data-dir`
 
-+ The interval for PD to allocate TSOs for persistent storage in etcd
-+ Default value: `3` seconds
+- The directory in which PD stores data
+- Default value: `default.${name}"`
+
+### `client-urls`
+
+- The list of client URLs to be listened to by PD
+- Default value: `"http://127.0.0.1:2379"`
+- When you deploy a cluster, you must specify the IP address of the current host as `client-urls` (for example, `"http://192.168.100.113:2379"`). If the cluster runs on Docker, specify the IP address of Docker as `"http://0.0.0.0:2379"`.
+
+### `advertise-client-urls`
+
+- The list of advertise URLs for the client to access PD
+- Default value: `"${client-urls}"`
+- In some situations such as in the Docker or NAT network environment, if a client cannot access PD through the default client URLs listened to by PD, you must manually set the advertise client URLs.
+- For example, the internal IP address of Docker is `172.17.0.1`, while the IP address of the host is `192.168.100.113` and the port mapping is set to `-p 2380:2380`. In this case, you can set `advertise-client-urls` to `"http://192.168.100.113:2380"`. The client can find this service through `"http://192.168.100.113:2380"`.
+
+### `peer-urls`
+
+- The list of peer URLs to be listened to by a PD node
+- Default value: `"http://127.0.0.1:2380"`
+- When you deploy a cluster, you must specify `peer-urls` as the IP address of the current host, such as `"http://192.168.100.113:2380"`. If the cluster runs on Docker, specify the IP address of Docker as `"http://0.0.0.0:2380"`.
+
+### `advertise-peer-urls`
+
+- The list of advertise URLs for other PD nodes (peers) to access a PD node
+- Default: `"${peer-urls}"`
+- In some situations such as in the Docker or NAT network environment, if the other nodes (peers) cannot access the PD node through the default peer URLs listened to by this PD node, you must manually set the advertise peer URLs.
+- For example, the internal IP address of Docker is `172.17.0.1`, while the IP address of the host is `192.168.100.113` and the port mapping is set to `-p 2380:2380`. In this case, you can set `advertise-peer-urls` to `"http://192.168.100.113:2380"`. The other PD nodes can find this service through `"http://192.168.100.113:2380"`.
+
+### `initial-cluster`
+
+- The initial cluster configuration for bootstrapping
+- Default value: `"{name}=http://{advertise-peer-url}"`
+- For example, if `name` is "pd", and `advertise-peer-urls` is `"http://192.168.100.113:2380"`, the `initial-cluster` is `"pd=http://192.168.100.113:2380"`.
+- If you need to start three PD servers, the `initial-cluster` might be:
+
+    ```
+    pd1=http://192.168.100.113:2380, pd2=http://192.168.100.114:2380, pd3=192.168.100.115:2380
+    ```
 
 ### `initial-cluster-state`
 
 + The initial state of the cluster
-+ Default value: `new`
++ Default value: `"new"`
 
-### `enable-prevote`
+### `initial-cluster-token`
 
-+ Enables or disables `raft prevote`
-+ Default value: `true`
++ Identifies different clusters during the bootstrap phase.
++ Default value: `"pd-cluster"`
++ If multiple clusters that have nodes with same configurations are deployed successively, you must specify different tokens to isolate different cluster nodes.
+
+### `lease`
+
++ The timeout of the PD Leader Key lease. After the timeout, the system re-elects a Leader.
++ Default value: `3`
++ Unit: second
 
 ### `quota-backend-bytes`
 
-+ The storage size of the meta-information database, which is 2GB by default
-+ Default value: `2147483648`
++ The storage size of the meta-information database, which is 8GiB by default
++ Default value: `8589934592`
 
 ### `auto-compaction-mod`
 
@@ -53,21 +96,6 @@ This document only describes parameters that are not included in command-line pa
 ### `force-new-cluster`
 
 + Determines whether to force PD to start as a new cluster and modify the number of Raft members to `1`
-+ Default value: `false`
-
-### `tick-interval`
-
-+ The tick period of etcd Raft
-+ Default value: `100ms`
-
-### `election-interval`
-
-+ The timeout for the etcd leader election
-+ Default value: `3s`
-
-### `use-region-storage`
-
-+ Enables or disables independent Region storage
 + Default value: `false`
 
 ## security
@@ -88,6 +116,12 @@ Configuration items related to security
 
 + The path of the PEM file that contains the X509 key
 + Default value: ""
+
+### `redact-info-log` <span class="version-mark">New in v5.0</span>
+
++ Controls whether to enable log redaction in the PD log.
++ When you set the configuration value to `true`, user data is redacted in the PD log.
++ Default value: `false`
 
 ## `log`
 
@@ -132,7 +166,7 @@ Configuration items related to monitoring
 
 ### `interval`
 
-+ The interval at which monitoring metric data is pushed to Promethus
++ The interval at which monitoring metric data is pushed to Prometheus
 + Default value: `15s`
 
 ## `schedule`
@@ -161,7 +195,7 @@ Configuration items related to scheduling
 
 ### `max-snapshot-count`
 
-+ Control the maximum number of snapshots that a single store receives or sends at the same time. PD schedulers depend on this configuration to prevent the resources used for normal traffic from being preempted.
++ Controls the maximum number of snapshots that a single store receives or sends at the same time. PD schedulers depend on this configuration to prevent the resources used for normal traffic from being preempted.
 + Default value value: `3`
 
 ### `max-pending-peer-count`
@@ -182,12 +216,22 @@ Configuration items related to scheduling
 ### `region-schedule-limit`
 
 + The number of Region scheduling tasks performed at the same time
++ Default value: `2048`
+
+### `hot-region-schedule-limit`
+
++ Controls the hot Region scheduling tasks that are running at the same time. It is independent of the Region scheduling.
 + Default value: `4`
+
+### `hot-region-cache-hits-threshold`
+
++ The threshold used to set the number of minutes required to identify a hot Region. PD can participate in the hotspot scheduling only after the Region is in the hotspot state for more than this number of minutes.
++ Default value: `3`
 
 ### `replica-schedule-limit`
 
 + The number of Replica scheduling tasks performed at the same time
-+ Default value: `8`
++ Default value: `64`
 
 ### `merge-schedule-limit`
 
@@ -196,14 +240,14 @@ Configuration items related to scheduling
 
 ### `high-space-ratio`
 
-+ The threshold ratio below which the capacity of the store is sufficient
-+ Default value: `0.6`
++ The threshold ratio below which the capacity of the store is sufficient. If the space occupancy ratio of the store is smaller than this threshold value, PD ignores the remaining space of the store when performing scheduling, and balances load mainly based on the Region size. This configuration takes effect only when `region-score-formula-version` is set to `v1`.
++ Default value: `0.7`
 + Minimum value: greater than `0`
 + Maximum value: less than `1`
 
 ### `low-space-ratio`
 
-+ The threshold ratio above which the capacity of the store is insufficient
++ The threshold ratio above which the capacity of the store is insufficient. If the space occupancy ratio of a store exceeds this threshold value, PD avoids migrating data to this store as much as possible. Meanwhile, to avoid the disk space of the corresponding store being exhausted, PD performs scheduling mainly based on the remaining space of the store.
 + Default value: `0.8`
 + Minimum value: greater than `0`
 + Maximum value: less than `1`
@@ -211,38 +255,24 @@ Configuration items related to scheduling
 ### `tolerant-size-ratio`
 
 + Controls the `balance` buffer size
-+ Default value: `5`
++ Default value: `0` (automatically adjusts the buffer size)
 + Minimum value: `0`
 
-### `disable-remove-down-replica`
+### `enable-cross-table-merge`
 
-+ Determines whether to disable the feature that automatically removes `DownReplica`. When this parameter is set to `true`, PD does not automatically clean up the copy in the down state.
-+ Default value: `false`
++ Determines whether to enable the merging of cross-table Regions
++ Default value: `true`
 
-### `disable-replace-offline-replica`
+### `region-score-formula-version`
 
-+ Determines whether to disable the feature that migrates `OfflineReplica`. When this parameter is set to `true`, PD does not migrate the replicas in the offline state.
-+ Default value: `false`
++ Controls the version of the Region score formula
++ Default value: `v2`
++ Optional values: `v1` and `v2`
 
-### `disable-make-up-replica`
+### `enable-joint-consensus` <span class="version-mark">New in v5.0</span>
 
-+ Determines whether to disable the feature that automatically supplements replicas. When this parameter is set to `true`, PD does not supplement replicas for the Region with insufficient replicas.
-+ Default value: `false`
-
-### `disable-remove-extra-replica`
-
-+ Determines whether to disable the feature that removes extra replicas. When this parameter is set to `true`, PD does not remove the extra replicas from the Region with excessive replicas.
-+ Default value: `false`
-
-### `disable-location-replacement`
-
-+ Determines whether to disable isolation level check. When this parameter is set to `true`, PD does not increase the isolation level of the Region replicas through scheduling.
-+ Default value: `false`
-
-### `store-balance-rate`
-
-+ Determines the maximum number of operations related to adding peers within a minute
-+ Default value: `15`
++ Controls whether to use Joint Consensus for replica scheduling. If this configuration is disabled, PD schedules one replica at a time.
++ Default value: `true`
 
 ## `replication`
 
@@ -250,13 +280,37 @@ Configuration items related to replicas
 
 ### `max-replicas`
 
-+ The number of replicas
++ The number of replicas, that is, the sum of the number of leaders and followers. The default value `3` means 1 leader and 2 followers. When this configuration is modified online, PD will schedule Regions in the background so that the number of replicas matches this configuration.
 + Default value: `3`
 
 ### `location-labels`
 
 + The topology information of a TiKV cluster
 + Default value: `[]`
++ [Cluster topology configuration](/schedule-replicas-by-topology-labels.md)
+
+### `isolation-level`
+
++ The minimum topological isolation level of a TiKV cluster
++ Default value: `""`
++ [Cluster topology configuration](/schedule-replicas-by-topology-labels.md)
+
+### `strictly-match-label`
+
++ Enables the strict check for whether the TiKV label matches PD's `location-labels`.
++ Default value: `false`
+
+### `enable-placement-rules`
+
++ Enables `placement-rules`.
++ Default value: `false`
++ See [Placement Rules](/configure-placement-rules.md).
++ An experimental feature of TiDB 4.0.
+
+### `flow-round-by-digit` <span class="version-mark">New in TiDB 5.1</span>
+
++ Default value: 3
++ PD rounds the lowest digits of the flow number, which reduces the update of statistics caused by the changes of the Region flow information. This configuration item is used to specify the number of lowest digits to round for the Region flow information. For example, the flow `100512` will be rounded to `101000` because the default value is `3`. This configuration replaces `trace-region-flow`.
 
 ## `label-property`
 
@@ -271,3 +325,38 @@ Configuration items related to labels
 
 + The label value for the store that rejected the Leader
 + Default value: `""`
+
+## `dashboard`
+
+Configuration items related to the [TiDB Dashboard](/dashboard/dashboard-intro.md) built in PD.
+
+### `tidb-cacert-path`
+
++ The path of the root CA certificate file. You can configure this path when you connect to TiDB's SQL services using TLS.
++ Default value: `""`
+
+### `tidb-cert-path`
+
++ The path of the SSL certificate file. You can configure this path when you connect to TiDB's SQL services using TLS.
++ Default value: `""`
+
+### `tidb-key-path`
+
++ The path of the SSL private key file. You can configure this path when you connect to TiDB's SQL services using TLS.
++ Default value: `""`
+
+### `public-path-prefix`
+
++ When TiDB Dashboard is accessed behind a reverse proxy, this item sets the public URL path prefix for all web resources.
++ Default value: `/dashboard`
++ Do **not** modify this configuration item when TiDB Dashboard is accessed not behind a reverse proxy; otherwise, access issues might occur. See [Use TiDB Dashboard behind a Reverse Proxy](/dashboard/dashboard-ops-reverse-proxy.md) for details.
+
+### `enable-telemetry`
+
++ Determines whether to enable the telemetry collection feature in TiDB Dashboard.
++ Default value: `true`
++ See [Telemetry](/telemetry.md) for details.
+
+## `replication-mode`
+
+Configuration items related to the replication mode of all Regions. See [Enable synchronous replication in PD configuration file](/synchronous-replication.md#enable-synchronous-replication-in-the-pd-configuration-file) for details.

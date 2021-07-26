@@ -1,8 +1,7 @@
 ---
 title: FLUSH STATUS | TiDB SQL Statement Reference
 summary: An overview of the usage of FLUSH STATUS for the TiDB database.
-category: reference
-aliases: ['/docs/dev/reference/sql/statements/flush-status/']
+aliases: ['/docs/dev/sql-statements/sql-statement-flush-status/','/docs/dev/reference/sql/statements/flush-status/']
 ---
 
 # FLUSH STATUS
@@ -11,17 +10,21 @@ This statement is included for compatibility with MySQL. It has no effect on TiD
 
 ## Synopsis
 
-**FlushStmt:**
+```ebnf+diagram
+FlushStmt ::=
+    'FLUSH' NoWriteToBinLogAliasOpt FlushOption
 
-![FlushStmt](/media/sqlgram/FlushStmt.png)
+NoWriteToBinLogAliasOpt ::=
+    ( 'NO_WRITE_TO_BINLOG' | 'LOCAL' )?
 
-**NoWriteToBinLogAliasOpt:**
-
-![NoWriteToBinLogAliasOpt](/media/sqlgram/NoWriteToBinLogAliasOpt.png)
-
-**FlushOption:**
-
-![FlushOption](/media/sqlgram/FlushOption.png)
+FlushOption ::=
+    'PRIVILEGES'
+|   'STATUS'
+|    'TIDB' 'PLUGINS' PluginNameList
+|    'HOSTS'
+|   LogTypeOpt 'LOGS'
+|   TableOrTables TableNameListOpt WithReadLockOpt
+```
 
 ## Examples
 
