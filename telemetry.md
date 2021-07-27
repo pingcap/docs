@@ -24,7 +24,7 @@ When the telemetry collection feature is enabled in TiDB, the TiDB cluster colle
 - Deployment characteristics, such as the size of hardware (CPU, memory, disk), TiDB components versions, OS name.
 - The status of query requests in the system, such as the number of query requests and the duration.
 - Component usage, for example, whether the Async Commit feature is in use or not.
-- Builtin functions usage information, including the count of functions used in SQL queries.
+- Usage information of builtin functions, including per-function statistics on how often the functon gets called. The arguments to the functions are not included.
 
 To view the full content of the usage information shared to PingCAP, execute the following SQL statement:
 
