@@ -1197,7 +1197,6 @@ Configuration items related to TiCDC.
 + The interval at which Resolved TS is calculated and forwarded.
 + Default value: `"1s"`
 
-
 ### `sink-memory-quota`
 
 + The upper limit of memory usage by TiCDC data change events.
