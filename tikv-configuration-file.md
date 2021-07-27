@@ -1197,12 +1197,6 @@ Configuration items related to TiCDC.
 + The interval at which Resolved TS is calculated and forwarded.
 + Default value: `"1s"`
 
-<<<<<<< HEAD
-=======
-### `old-value-cache-memory-quota`
-
-+ The upper limit of memory usage by TiCDC old values.
-+ Default value: `512MB`
 
 ### `sink-memory-quota`
 
@@ -1225,7 +1219,6 @@ Configuration items related to TiCDC.
 + Default value: `6`, which means 6 tasks can be concurrent executed at most.
 + Note: The value of `incremental-scan-concurrency` must be greater than or equal to that of `incremental-scan-threads`; otherwise, TiKV will report an error at startup.
 
->>>>>>> 2b396e6c0 (tikv: update cdc config (#5780))
 ## pessimistic-txn
 
 ### `enabled`
