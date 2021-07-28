@@ -2,14 +2,14 @@
 
 TODO: quick instruction of lighting
 
-**Before starting the migration, complete the following tasks.**
+## Before starting the migration, complete the following tasks
 
-- [Export snapshots of Aurora to S3](/TODO)
-- [Deploy lighting using tiup](/TODO)
+- [Export snapshots of Aurora to S3](/data-migration/todo.md)
+- [Deploy lighting using tiup](/data-migration/todo.md)
 
 TODO: operations of migration 
 
 ## Helpful Topics 
 
-- [Incrementally synchronize data From  MySQL to TiDB](/TODO)
-- [Lighting Administration Guide](/TODO)
+- [Incrementally synchronize data From  MySQL to TiDB](/data-migration/todo.md)
+- [Lighting Administration Guide](/data-migration/todo.md)

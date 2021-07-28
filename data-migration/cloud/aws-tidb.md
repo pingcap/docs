@@ -2,12 +2,8 @@
 
 TODO: quick instruction
 
-**Before starting the migration, complete the following tasks.**
+## Before starting the migration, complete the following tasks
 
-- [Deploy TiDB using tiup](/TODO)
-
-TODO: migrate operations
-
-## Topics
+- [Deploy TiDB using tiup](/data-migration/todo.md)
 
 ## Helpful Topics  
