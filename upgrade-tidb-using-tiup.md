@@ -174,12 +174,12 @@ This section describes how to perform a rolling upgrade to the TiDB cluster and 
 tiup cluster upgrade <cluster-name> <version>
 ```
 
-For example, if you want to upgrade the cluster to v4.0.13:
+For example, if you want to upgrade the cluster to v4.0.14:
 
 {{< copyable "shell-regular" >}}
 
 ```shell
-tiup cluster upgrade <cluster-name> v4.0.13
+tiup cluster upgrade <cluster-name> v4.0.14
 ```
 
 Performing a rolling upgrade to the cluster will upgrade all components one by one. During the upgrade of TiKV, all leaders in a TiKV instance are evicted before stopping the instance. The default timeout time is 5 minutes. The instance is directly stopped after this timeout time.
@@ -201,7 +201,7 @@ tiup cluster display <cluster-name>
 ```
 Starting /home/tidblk/.tiup/components/cluster/v1.0.0/cluster display <cluster-name>
 TiDB Cluster: <cluster-name>
-TiDB Version: v4.0.13
+TiDB Version: v4.0.14
 ```
 
 > **Note:**
@@ -223,12 +223,12 @@ You can specify `--force`. Then the processes of transferring PD leader and evic
 {{< copyable "shell-regular" >}}
 
 ```shell
-tiup cluster upgrade <cluster-name> v4.0.13 --force
+tiup cluster upgrade <cluster-name> v4.0.14 --force
 ```
 
 ### How to update the version of tools such as pd-ctl after upgrading the TiDB cluster?
 
-Currently, TiUP does not update and manage the version of tools. If you need the tool package of the latest version, directly download the TiDB package and replace `{version}` with the corresponding version such as `v4.0.13`. Here is the download address:
+Currently, TiUP does not update and manage the version of tools. If you need the tool package of the latest version, directly download the TiDB package and replace `{version}` with the corresponding version such as `v4.0.14`. Here is the download address:
 
 {{< copyable "" >}}
 
