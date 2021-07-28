@@ -13,7 +13,6 @@ This document introduces how to migrate full data from Amazon Aurora MySQL to Ti
 
 Using Aurora's existing snapshot mechanism is the most convenient way, but beacuse [DM](https://github.com/pingcap/dm) does not yet support the parquet format, so we need to use Lighting for full data import first, and then use DM for incremental data synchronization.
 
-
 ***
 
 ## Topics
