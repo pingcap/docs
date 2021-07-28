@@ -24,9 +24,9 @@ Currently, TiDB Lightning supports:
 Because the snapshot data exported from Aurora to S3 does not contain the SQL statement file used to create database tables, you need to manually export and import the table creation statements corresponding to the database tables into TiDB. You can use Dumpling and TiDB Lightning to create all table schemas:
 
 - [Export snapshots of Aurora to S3](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_ExportSnapshot.html)
-- [Export table schema using dumpling](/TODO)
-- [Deploy Lighting using TiUP](/TODO)
-- [Deploy Dumping using TiUP](/TODO)
+- [Export table schema using dumpling](/data-migration/todo.md)
+- [Deploy Lighting using TiUP](/data-migration/todo.md)
+- [Deploy Dumping using TiUP](/data-migration/todo.md)
 
 ***
 

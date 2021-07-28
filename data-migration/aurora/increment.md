@@ -6,7 +6,7 @@ This article only introduces how to use DM for incremental synchronization
 
 ## Before starting the migration, complete the following tasks
 
-- [Deploy DM using tiup](/TODO)
+- [Deploy DM using tiup](/data-migration/todo.md)
 
 ***
 
@@ -187,8 +187,8 @@ You can query data in the downstream, modify data in Aurora, and validate the da
 
 ## Helpful Topics  
 
-- [DM Administration Guide](/TODO)
-- [How to filter binlog event](/TODO)
-- [How to work with GH-ost and PT-osc](/TODO)
-- [How to merge multiple tables with multiple databases](/TODO)
+- [DM Administration Guide](/data-migration/todo.md)
+- [How to filter binlog event](/data-migration/todo.md)
+- [How to work with GH-ost and PT-osc](/data-migration/todo.md)
+- [How to merge multiple tables with multiple databases](/data-migration/todo.md)
 - [How to deal with the situation where there are multiple tables downstream](https://docs.pingcap.com/tidb-data-migration/stable/usage-scenario-downstream-more-columns)
