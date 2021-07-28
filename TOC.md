@@ -45,7 +45,7 @@
   + [Migrate from MySQL](/data-migration/mysql/overview.md)
     + [Migrate from  MySQL ≥ 1TB](/data-migration/mysql/huge-data.md)
     + [Migrate from MySQL ＜ 1TB](/data-migration/mysql/small-data.md)
-    + [Incremental migrate from MySQL ](/data-migration/mysql/increment.md)
+    + [Incremental migrate from MySQL](/data-migration/mysql/increment.md)
   + [Migrate from Amazon Aurora](/data-migration/aurora/overview.md)
     + [Migrate from Aurora snapshot](/data-migration/aurora/from-snapshot.md)
     + [Incremental migrate from MySQL ](/data-migration/aurora/increment.md)
