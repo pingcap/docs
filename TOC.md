@@ -69,6 +69,7 @@
     + [Migrate from Aurora to TiDB](/data-migration/case/migrate-aurora-tidb.md)
     + [Merge multi tables and databases into one](/data-migration/case/migrate-multi-table.md)
 
+
 + Maintain
   + Upgrade
     + [Use TiUP (Recommended)](/upgrade-tidb-using-tiup.md)
