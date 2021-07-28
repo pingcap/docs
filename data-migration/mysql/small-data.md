@@ -2,12 +2,12 @@
 
 TODO: quick instruction of DM
 
-**Before starting the migration, complete the following tasks.**
+## Before starting the migration, complete the following tasks
 
-- [Deploy DM using tiup](/TODO)
+- [Deploy DM using tiup](/data-migration/todo.md)
 
 TODO: operations of migration
 
 ## Helpful Topics 
 
-- [DM Administration Guide](/TODO)
+- [DM Administration Guide](/data-migration/todo.md)
