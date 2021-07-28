@@ -30,7 +30,7 @@ Because the snapshot data exported from Aurora to S3 does not contain the SQL st
 
 ***
 
-## Step 1: Use Dumpling to export table schema files:
+## Step 1: Use Dumpling to export table schema files
 
     ```
     tiup dumpling --host 127.0.0.1 --port 4000 --user root --password password --no-data --output ./schema --filter "mydb.*"
@@ -130,7 +130,8 @@ When the import operation is started, view the progress by the following two way
 
 ***
 
-## Helpful Topics  
-- [Incrementally synchronize data From Aurora MySQL to TiDB]()
-- [Lighting Administration Guide](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview)
+## Helpful Topics
 
+- [Incrementally synchronize data From Aurora MySQL to TiDB]()
+
+- [Lighting Administration Guide](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview)

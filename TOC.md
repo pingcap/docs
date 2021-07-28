@@ -48,7 +48,7 @@
     + [Incremental migrate from MySQL](/data-migration/mysql/increment.md)
   + [Migrate from Amazon Aurora](/data-migration/aurora/overview.md)
     + [Migrate from Aurora snapshot](/data-migration/aurora/from-snapshot.md)
-    + [Incremental migrate from MySQL ](/data-migration/aurora/increment.md)
+    + [Incremental migrate from MySQL](/data-migration/aurora/increment.md)
   + [Migrate from  Files](/data-migration/file/overview.md)
     + [Migrate from CSV files](/data-migration/file/csv-tidb.md)
     + [Migrate from SQL files](/data-migration/file/sql-tidb.md)

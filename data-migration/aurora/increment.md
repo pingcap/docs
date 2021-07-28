@@ -4,7 +4,6 @@
 
 This article only introduces how to use DM for incremental synchronization
 
-
 ## Before starting the migration, complete the following tasks
 
 - [Deploy DM using tiup]()

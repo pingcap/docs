@@ -12,6 +12,6 @@ TODO: operations of migration
 
 
 
-### Helpful Topics 
+## Helpful Topics 
 - [Incrementally synchronize data From  MySQL to TiDB]()
 - [Lighting Administration Guide]()
