@@ -1,8 +1,8 @@
 # How to migrate from MySQL to TiDB
 
-This document introduces how to migrate full data from  MySQL to TiDB using  Dumpling  and Lightning.
+This document introduces how to migrate full data from  MySQL to TiDB using Dumpling and Lightning.
 
-[Dumpling](https://github.com/pingcap/dumpling). Dumpling exports data stored in TiDB/MySQL as SQL or CSV data files and can be used to make a logical full backup or export.
+[Dumpling](https://github.com/pingcap/dumpling) exports data stored in TiDB/MySQL as SQL or CSV data files and can be used to make a logical full backup or export.
 
 [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) is a tool used for fast full import of large amounts of data into a TiDB cluster. 
 
@@ -10,7 +10,7 @@ This document introduces how to migrate full data from  MySQL to TiDB using  Dum
 
 [DM](https://github.com/pingcap/dm) supports the full data migration and the incremental data replication, However, the data import speed of DM in the current version is not fast.
 
-Therefore, it is still recommended [Dumpling](https://github.com/pingcap/dumpling) and [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) in large data import scenarios, and recommended [DM](https://github.com/pingcap/dm) in small and incremental data synchronization scenarios.
+Therefore, it is recommended to use [Dumpling](https://github.com/pingcap/dumpling) and [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) in large data import scenarios, and [DM](https://github.com/pingcap/dm) in small and incremental data synchronization scenarios.
 
 ## Topics
 
