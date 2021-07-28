@@ -10,10 +10,9 @@ This document provides an overview of TiDB data migration solutions to help you 
 
 ## Data migration features
 
-
 - Full data migration: use `TiDB Lightning` to import data(CSV/Aurora Snapshot/mydumper sql) to TiDB cluster; to better match with full migration from MySQL/MariaDB database, TiDB also provides a data export tool, `dumpling`, which supports exporting full data as CSV/mydumper sql format;
 
-  - Fast-initializing TiDB clusters: `TiDB Lightning` also provides the fast import feature, which can achieve the effect of fast initialization of specified tables of TiDB clusters. Before using this feature, you need to understand that the fast import period has a great impact on TiDB clusters, and the clusters are not available;
+    - Fast-initializing TiDB clusters: `TiDB Lightning` also provides the fast import feature, which can achieve the effect of fast initialization of specified tables of TiDB clusters. Before using this feature, you need to understand that the fast import period has a great impact on TiDB clusters, and the clusters are not available;
 
 - Incremental data migration: To greatly reduce the downtime window during migration, it is recommended that you use DM to replicate Binlog from MySQL/MariaDB/Aurora to TiDB.
 
@@ -30,9 +29,10 @@ To migrate data from Aurora/RDS to a TiDB cluster deployed in the same Cloud, it
 In addition, given that Aurora/RDS and TiDB are deployed in different regions, even different Cloud Provider, the solution also includes a description of best practices for migrating data from different regions beforehand.
 
 - Full Data Migration
-  - Aurora Full Data Migration to TiDB Tutorial
-  - RDS/Self-host MySQL Full Data Migration to TiDB on AWS Tutorial
-  - RDS/self-host MySQL Full Data Migration to TiDB on GCP Tutorial
+
+    - Aurora Full Data Migration to TiDB Tutorial
+    - RDS/Self-host MySQL Full Data Migration to TiDB on AWS Tutorial
+    - RDS/self-host MySQL Full Data Migration to TiDB on GCP Tutorial
 
 - Aurora/AWS RDS Incremental Data (Binlog) replication to TiDB Tutorial
 
