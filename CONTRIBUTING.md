@@ -148,7 +148,7 @@ Now, your PR is successfully submitted! After this PR is merged, you will automa
 
 When you create a Pull Request, you need to choose the release version to which your document change applies in the description template on your Pull Request page.
 
-If your change fits one of the following situations, it is recommended to **choose the master branch only**. After the PR is merged, the change will be soon displayed on the [Dev page of the PingCAP documentation website](https://docs.pingcap.com/tidb/dev/). After the next major or minor version of TiDB is released, the change will also be displayed on the PingCAP documentation website for the new version.
+If your change fits one of the following situations, it is recommended to **CHOOSE THE MASTER BRANCH ONLY**. After the PR is merged, the change will be soon displayed on the [Dev page of the PingCAP documentation website](https://docs.pingcap.com/tidb/dev/). After the next major or minor version of TiDB is released, the change will also be displayed on the website page for the new version.
 
 - Relates to a documentation enhancement, such as supplementing missing or incomplete document contents.
 - Fixes inaccurate or incorrect document contents, including values, descriptions, examples, or typos.
