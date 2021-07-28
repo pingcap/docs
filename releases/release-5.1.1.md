@@ -79,6 +79,11 @@ TiDB version: 5.1.1
 
         - Add retry for restoring schemas [#1294](https://github.com/pingcap/br/pull/1294)
 
+    + Dumpling
+
+        - Always split tables using _tidb_rowid when the upstream is a TiDB v3.x cluster, which helps reduce TiDB's memory [#308](https://github.com/pingcap/dumpling/pull/308)
+        - Reduce dumpling accessing database and information_schema usage and improve dumpling's stability. [#315](https://github.com/pingcap/dumpling/pull/315)
+
 ## Bug fixes
 
 + TiDB
