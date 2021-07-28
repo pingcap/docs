@@ -37,6 +37,7 @@ TiDB version: 5.1.1
 
 + TiDB
 
+    - Announce the general availability (GA) of the Stale Read feature
     - avoid alloc for paramMarker in buildValuesListOfInsert [#26076](https://github.com/pingcap/tidb/pull/26076)
     - planner: support stable result mode [#25995](https://github.com/pingcap/tidb/pull/25995)
     - Enable the pushdown of builtin function json_unquote() to TiKV. [#26265](https://github.com/pingcap/tidb/pull/26265)
