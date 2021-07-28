@@ -60,6 +60,8 @@ Currently, we maintain seven versions of TiDB documentation, each with a separat
     - `needs-cherry-pick-2.1` label: ti-chi-bot will submit a PR to the `release-2.1` branch.
     - `needs-cherry-pick-master` label: ti-chi-bot will submit a PR to the `master` branch.
 
+    For how to choose the docs versions, refer to [Guideline for choosing the affected version(s)](#guideline-for-choosing-the-affected-versions).
+
 - If most of your changes apply to multiple docs versions but some differences exist among versions, you still can use cherry-pick labels to let ti-chi-bot create PRs to other versions. After the PR to another version is successfully submitted by ti-chi-bot, you can make changes to that PR.
 
 ## How to contribute
