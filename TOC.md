@@ -42,14 +42,25 @@
     + [Test TiDB Using TPC-C](/benchmark/benchmark-tidb-using-tpcc.md)
 + Migrate
   + [Overview](/migration-overview.md)
-  + Migrate from MySQL
-    + [Migrate from Amazon Aurora MySQL Using TiDB Lightning](/migrate-from-aurora-using-lightning.md)
-    + [Migrate from MySQL SQL Files Using TiDB Lightning](/migrate-from-mysql-dumpling-files.md)
-    + [Migrate from Amazon Aurora MySQL Using DM](/migrate-from-aurora-mysql-database.md)
-  + Migrate from CSV Files
-    + [Use TiDB Lightning](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)
-    + [Use `LOAD DATA` Statement](/sql-statements/sql-statement-load-data.md)
-  + [Migrate from SQL Files](/migrate-from-mysql-dumpling-files.md)
+  + [Migrate from MySQL](/data-migration/mysql/overview.md)
+    + [Migrate from  MySQL ≥ 1TB](/data-migration/mysql/huge-data.md)
+    + [Migrate from MySQL ＜ 1TB](/data-migration/mysql/small-data.md)
+    + [Incremental migrate from MySQL](/data-migration/mysql/increment.md)
+  + [Migrate from Amazon Aurora](/data-migration/aurora/overview.md)
+    + [Migrate from Aurora snapshot](/data-migration/aurora/from-snapshot.md)
+    + [Incremental migrate from MySQL](/data-migration/aurora/increment.md)
+  + [Migrate from  Files](/data-migration/file/overview.md)
+    + [Migrate from CSV files](/data-migration/file/csv-tidb.md)
+    + [Migrate from SQL files](/data-migration/file/sql-tidb.md)
+  + [Migrate from Cloud](/data-migration/cloud/overview.md)
+    + [Migrate from Amazon](/data-migration/cloud/aws-tidb.md)
+    + [Migrate from Google](/data-migration/cloud/google-tidb.md)
+  + [Advanced Migration](/data-migration/advanced-migration/overview.md)
+    + [Filter binlog event](/data-migration/advanced-migration/binlog-filter.md)
+    + [Work with GH-ost and PT-osc](/data-migration/advanced-migration/ghost-ptosc.md)
+    + [Merge multiple tables with multiple databases](/data-migration/advanced-migration/merge-db-table.md)
+    + [Multiple tables downstream](/data-migration/advanced-migration/more-column.md)
+
 + Maintain
   + Upgrade
     + [Use TiUP (Recommended)](/upgrade-tidb-using-tiup.md)
