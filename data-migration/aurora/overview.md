@@ -25,7 +25,7 @@ DM does not yet support the parquet format, so we need to use Lighting for full 
 
 ***
 
-# Topics
+## Topics
 
 - [Migrate from Aurora snapshot to TiDB](/data-migration/aurora/from-snapshot.md)
 - [Incrementally synchronize data to TiDB](/data-migration/aurora/increment.md)

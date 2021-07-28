@@ -32,14 +32,14 @@ Because the snapshot data exported from Aurora to S3 does not contain the SQL st
 
 ## Step 1: Use Dumpling to export table schema files
 
-    ```
+```
     tiup dumpling --host 127.0.0.1 --port 4000 --user root --password password --no-data --output ./schema --filter "mydb.*"
-    ```
+```
 
-    > **Note:**
-    >
-    > - Set the parameters of the data source address and the path of output files according to your actual situation.
-    > - If you need to export all database tables, you do not need to set the `--filter` parameter. If you only need to export some of the database tables, configure `--filter` according to [table-filter](https://github.com/pingcap/tidb-tools/blob/master/pkg/table-filter/README.md).
+> **Note:**
+>
+> - Set the parameters of the data source address and the path of output files according to your actual situation.
+> - If you need to export all database tables, you do not need to set the `--filter` parameter. If you only need to export some of the database tables, configure `--filter` according to [table-filter](https://github.com/pingcap/tidb-tools/blob/master/pkg/table-filter/README.md).
 
 ## Step 2: Configure the data source of TiDB Lightning
 
@@ -102,11 +102,11 @@ For other configurations, see [TiDB Lightning Configuration](/tidb-lightning/tid
 
 Use TiDB Lightning to create table schemas:
 
-    ```
-    tiup tidb-lightning -config tidb-lightning.toml -d ./schema -no-schema=false
-    ```
+```
+tiup tidb-lightning -config tidb-lightning.toml -d ./schema -no-schema=false
+```
 
-    In this example, TiDB Lightning is only used to create table schemas, so you need to execute the above command quickly. At a regular speed, ten table creation statements can be executed in one second.
+In this example, TiDB Lightning is only used to create table schemas, so you need to execute the above command quickly. At a regular speed, ten table creation statements can be executed in one second.
 
 > **Note:**
 >
@@ -132,9 +132,6 @@ When the import operation is started, view the progress by the following two way
 
 ## Helpful Topics
 
-- [Incrementally synchronize data From Aurora MySQL to TiDB]()
-
-
-
+- [Incrementally synchronize data From Aurora MySQL to TiDB](/data-migration/aurora/increment.md)
 
 - [Lighting Administration Guide](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview)

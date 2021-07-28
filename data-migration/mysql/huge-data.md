@@ -1,6 +1,5 @@
 # Migrating from ≥1TB MySQL to TiDB
 
-
 TODO: quick instruction of lighting
 
 **Before starting the migration, complete the following tasks.**
@@ -10,8 +9,7 @@ TODO: quick instruction of lighting
 
 TODO: operations of migration 
 
-
-
 ## Helpful Topics 
+
 - [Incrementally synchronize data From  MySQL to TiDB](/TODO)
 - [Lighting Administration Guide](/TODO)
