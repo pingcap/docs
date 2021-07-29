@@ -10,6 +10,7 @@ This document describes the usage scenarios of Stale Read. Stale Read is a mecha
 When you are using Steal Read, TiDB will randomly select a replica for data reading, which means that all replicas are available for data reading. If your application cannot tolerate reading non-real-time data, do not use Stale Read; otherwise, the data read from the replica might not be the latest data written into TiDB.
 
 > **Note:**
+>
 > Since v5.1.1, Stale Read is a feature for general availability (GA). 
 
 ## Scenario examples
