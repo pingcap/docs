@@ -12,16 +12,16 @@ TiDB version: 5.1.1
 
 + TiDB
 
-    - For users upgrading from TiDB 4.0, the value of tidb_multi_statement_mode is now OFF. It is recommended to use the multi-statement feature of your client library instead, see the documentation on tidb_multi_statement_mode for additional details. [#25751](https://github.com/pingcap/tidb/pull/25751)
-    - exec: access the table_storage_stats need super privilege [#26352](https://github.com/pingcap/tidb/pull/26352)
-    - Accessing information_schema.user_privileges will now requires the SELECT privilege on mysql.user in order to show other user's privileges. [#26311](https://github.com/pingcap/tidb/pull/26311)
-    - Reading from the table information_schema.cluster_hardware now requires the CONFIG privilege.
-    - Reading from the table information_schema.cluster_info now requires the Process privilege.
-    - Reading from the table information_schema.cluster_load now requires the Process privilege.
-    - Reading from the table information_schema.cluster_systeminfo now requires the Process privilege.
-    - Reading from the table information_schema.cluster_log now requires the Process privilege. [#26297](https://github.com/pingcap/tidb/pull/26297)
-    - Reading from the table information_schema.cluster_config now requires the CONFIG privilege. [#26150](https://github.com/pingcap/tidb/pull/26150)
-    - Improve the MySQL compatibility of str_to_date for %b/%M/%r/%T [#25768](https://github.com/pingcap/tidb/pull/25768)
+    - For TiDB clusters upgrade from v4.0 to v5.1, the default value of `tidb_multi_statement_mode` is `OFF`. It is recommended to use the multi-statement feature of your client library instead. See [the documentation on `tidb_multi_statement_mode`](/system-variables.md#tidb_multi_statement_mode-new-in-v4011) for details. [#25751](https://github.com/pingcap/tidb/pull/25751)
+    - Change the default value of the `tidb_stmt_summary_max_stmt_count` variable from `200` to `3000` [#25874](https://github.com/pingcap/tidb/pull/25874)
+    - Require the `SUPER` privilege to access the `table_storage_stats` table [#26352](https://github.com/pingcap/tidb/pull/26352)
+    - Require the `SELECT` privilege on `mysql.user` to access the `information_schema.user_privileges` table to show other user's privileges [#26311](https://github.com/pingcap/tidb/pull/26311)
+    - Require the `CONFIG` privilege to access the `information_schema.cluster_hardware` table [#26297](https://github.com/pingcap/tidb/pull/26297)
+    - Require the `PROCESS` privilege to access the `information_schema.cluster_info` table [#26297](https://github.com/pingcap/tidb/pull/26297)
+    - Require the `PROCESS` privilege to access the `information_schema.cluster_load` table [#26297](https://github.com/pingcap/tidb/pull/26297)
+    - Require the `PROCESS` privilege to access the `information_schema.cluster_systeminfo` table [#26297](https://github.com/pingcap/tidb/pull/26297)
+    - Require the `PROCESS` privilege to access the `information_schema.cluster_log` table [#26297](https://github.com/pingcap/tidb/pull/26297)
+    - Require the `CONFIG` privilege to access the `information_schema.cluster_config` table [#26150](https://github.com/pingcap/tidb/pull/26150)
 
 ## Feature enhancements
 
@@ -38,17 +38,18 @@ TiDB version: 5.1.1
 + TiDB
 
     - Announce the general availability (GA) of the Stale Read feature
-    - avoid alloc for paramMarker in buildValuesListOfInsert [#26076](https://github.com/pingcap/tidb/pull/26076)
-    - planner: support stable result mode [#25995](https://github.com/pingcap/tidb/pull/25995)
-    - Enable the pushdown of builtin function json_unquote() to TiKV. [#26265](https://github.com/pingcap/tidb/pull/26265)
-    - store/copr: support retry for mpp query [#26480](https://github.com/pingcap/tidb/pull/26480)
-    - Change the lock record into put record for the index keys using point/batch point get for update read. [#26225](https://github.com/pingcap/tidb/pull/26225)
-    - Forbid creating view from stale query [#26200](https://github.com/pingcap/tidb/pull/26200)
-    - planner/core: thoroughly push down count-distinct agg in the MPP mode. [#26194](https://github.com/pingcap/tidb/pull/26194)
-    - mpp: check the tiflash availabilities before launching mpp queries. [#26192](https://github.com/pingcap/tidb/pull/26192)
-    - Enlarge the variable tidb_stmt_summary_max_stmt_count default value from 200 to 3000 [#25874](https://github.com/pingcap/tidb/pull/25874)
-    - Do not allow setting read timestamp to a future time. [#25763](https://github.com/pingcap/tidb/pull/25763)
-    - Log warnings when agg function can not be pushdown in explain statement [#25737](https://github.com/pingcap/tidb/pull/25737)
+    - Avoid allocation for `paramMarker` to speed up data insertion [#26076](https://github.com/pingcap/tidb/pull/26076)
+    - Support the stable result mode to make the query results more stable [#25995](https://github.com/pingcap/tidb/pull/25995)
+    - Support pushing down the built-in function `json_unquote()` to TiKV [#26265](https://github.com/pingcap/tidb/pull/26265)
+    - Support retrying MPP queries [#26480](https://github.com/pingcap/tidb/pull/26480)
+    - Change the `LOCK` record into the `PUT` record for the index keys using `point get` or `batch point get` for `UPDATE` reads [#26225](https://github.com/pingcap/tidb/pull/26225)
+    - Forbid creating views from stale queries [#26200](https://github.com/pingcap/tidb/pull/26200)
+    - Thoroughly push down the `COUNT(DISTINCT)` aggregation function in the MPP mode [#26194](https://github.com/pingcap/tidb/pull/26194)
+    - Check the availability of TiFlash before launching MPP queries [#26192](https://github.com/pingcap/tidb/pull/26192)
+    - Do not allow setting the read timestamp to a future time [#25763](https://github.com/pingcap/tidb/pull/25763)
+    - Print log warnings when aggregation functions cannot be pushed down in `EXPLAIN` statements [#25737](https://github.com/pingcap/tidb/pull/25737)
+    - Add the `statements_summary_evicted` table to record the evicted count information of a cluster [#25587](https://github.com/pingcap/tidb/pull/25587)
+    - Improve the MySQL compatibility of the built-in function `str_to_date` for the format specifiers `%b/%M/%r/%T` [#25768](https://github.com/pingcap/tidb/pull/25768)
 
 + TiKV
 
@@ -79,28 +80,28 @@ TiDB version: 5.1.1
 
 + TiDB
 
-    - amend transactions correctly when "modify column" needs reorg data with tidb_enable_amend_pessimistic_txn=on. [#26273](https://github.com/pingcap/tidb/pull/26273)
-    - fix incompatible last_day func behavior in sql mode [#26001](https://github.com/pingcap/tidb/pull/26001)
-    - Make sure limit outputs no more columns than its child [#25980](https://github.com/pingcap/tidb/pull/25980)
-    - Fix the issue that committing pessimistic transactions may report write-conflict errors. [#25973](https://github.com/pingcap/tidb/pull/25973)
-    - planner: handle other-conditions from subqueries correctly when constructing IndexJoin [#25819](https://github.com/pingcap/tidb/pull/25819)
-    - Fix the bug that successful optimistic transactions may report commit errors. [#25803](https://github.com/pingcap/tidb/pull/25803)
-    - Fix incorrect result of set type for merge join [#25695](https://github.com/pingcap/tidb/pull/25695)
-    - Fix the bug that index keys in a pessimistic transaction may be repeatedly committed. [#26482](https://github.com/pingcap/tidb/pull/26482)
-    - planner: fix the risk of integer overflow when locating partitions [#26471](https://github.com/pingcap/tidb/pull/26471)
-    - ddl: fix cast date as timestamp will write invalid value [#26395](https://github.com/pingcap/tidb/pull/26395)
-    - Fix copt-cache metrics, it will display the number of hits/miss/evict on Grafana. [#26344](https://github.com/pingcap/tidb/pull/26344)
-    - fix the bug of annoying logs caused by telemetry [#26284](https://github.com/pingcap/tidb/pull/26284)
-    - fix a bug on the query range of prefix index [#26262](https://github.com/pingcap/tidb/pull/26262)
-    - Fix the issue that concurrently truncating the same partition hangs DDL. [#26239](https://github.com/pingcap/tidb/pull/26239)
-    - planner/core: fix duplicate enum items [#26202](https://github.com/pingcap/tidb/pull/26202)
-    - executor: fix a bug that cte.iterOutTbl did not close correctly [#26148](https://github.com/pingcap/tidb/pull/26148)
-    - load: fix load data with non-utf8 can succeed [#26144](https://github.com/pingcap/tidb/pull/26144)
-    - fix unsigned int window function error [#26027](https://github.com/pingcap/tidb/pull/26027)
-    - Fix the issue that TiDB may panic when resolving async-commit locks. [#25862](https://github.com/pingcap/tidb/pull/25862)
-    - Make Stale Read fully support prepare statement [#25800](https://github.com/pingcap/tidb/pull/25800)
-    - Fix the issue that ODBC-styled literal(like {d '2020-01-01'}...) cannot be used as the expression. [#25578](https://github.com/pingcap/tidb/pull/25578)
-    - fix the bug about unnecessary error when run tidb only [#25555](https://github.com/pingcap/tidb/pull/25555)
+    - Fix the data loss issue that might occur when changing the column type with `tidb_enable_amend_pessimistic_txn=on` [#26203](https://github.com/pingcap/tidb/issues/26203)
+    - Fix the issue that the behavior of the `last_day` function is incompatible in the SQL mode [#26001](https://github.com/pingcap/tidb/pull/26001)
+    ?- Fix the panic issue that might occur when `LIMIT` is on top of window functions [#25980](https://github.com/pingcap/tidb/pull/25980)
+    - Fix the issue that committing pessimistic transactions might cause write-conflict issues [#25973](https://github.com/pingcap/tidb/pull/25973)
+    - Fix the issue that the result of index join in correlated subqueries is wrong [#25819](https://github.com/pingcap/tidb/pull/25819)
+    - Fix a bug that the successfully committed optimistic transactions might report commit errors [#25803](https://github.com/pingcap/tidb/pull/25803)
+    - Fix the issue that an incorrect result is returned when using merge join on the `SET` type column [#25669](https://github.com/pingcap/tidb/issues/25669)
+    - Fix a bug that the index keys in a pessimistic transaction might be repeatedly committed [#26482](https://github.com/pingcap/tidb/pull/26482)
+    - Fix the risk of integer overflow when the optimizer is locating partitions [#26471](https://github.com/pingcap/tidb/pull/26471)
+    - Fix the issue that invalid values might be written when casting `DATE` to timestamp [#26395](https://github.com/pingcap/tidb/pull/26395)
+    - Fix the issue that the Coprocessor Cache metrics are not displayed on Grafana [#26344](https://github.com/pingcap/tidb/pull/26344)
+    - Fix the issue of annoying logs caused by telemetry [#26284](https://github.com/pingcap/tidb/pull/26284)
+    - Fix a bug on the query range of prefix index [#26262](https://github.com/pingcap/tidb/pull/26262)
+    - Fix the issue that concurrently truncating the same partition hangs DDL executions [#26239](https://github.com/pingcap/tidb/pull/26239)
+    - Fix the issue of duplicate `ENUM` items [#26202](https://github.com/pingcap/tidb/pull/26202)
+    - Fix a bug that the CTE iterator is not correctly closed [#26148](https://github.com/pingcap/tidb/pull/26148)
+    - Fix the issue that the `LOAD DATA` statement can abnormally import non-utf8 data [#25979](https://github.com/pingcap/tidb/issues/25979)
+    - Fix the panic issue that might occur when using the window function on the unsigned integer columns [#26027](https://github.com/pingcap/tidb/pull/26027)
+    - Fix the issue that TiDB might panic when resolving async commit locks [#25862](https://github.com/pingcap/tidb/pull/25862)
+    - Fix the issue that Stale Read is not fully compatible with the `PREPARE` statements [#25800](https://github.com/pingcap/tidb/pull/25800)
+    - Fix the issue that the ODBC-styled constant (for example, `{d '2020-01-01'}`) cannot be used as the expression [#25531](https://github.com/pingcap/tidb/issues/25531)
+    - Fix an error that occurs when running TiDB alone [#25555](https://github.com/pingcap/tidb/pull/25555)
 
 + TiKV
 
