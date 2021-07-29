@@ -44,8 +44,8 @@
   + [Overview](/migration-overview.md)
   + From MySQL To TiDB
     + [Overview](/data-migration/mysql/migrate-mysql-overview.md)
-    + [Origin MySQL ≥ 1TB](/data-migration/mysql/huge-data.md)
-    + [Origin MySQL ＜ 1TB](/data-migration/mysql/small-data.md)
+    + [MySQL ≥ 1TB](/data-migration/mysql/huge-data.md)
+    + [MySQL ＜ 1TB](/data-migration/mysql/small-data.md)
     + [Incremental migration](/data-migration/mysql/increment-mysql.md)
   + From Amazon Aurora To TiDB
     + [Overview](/data-migration/aurora/migrate-aurora-overview.md)
