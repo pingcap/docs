@@ -1,6 +1,6 @@
 ---
-title: 
-summary: 
+title: Incrementally synchronize data From Aurora MySQL to TiDB
+summary: Incrementally synchronize data From Aurora MySQL to TiDB
 ---
 
 # Incrementally synchronize data From Aurora MySQL to TiDB

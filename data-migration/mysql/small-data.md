@@ -1,6 +1,6 @@
 ---
-title: 
-summary: 
+title: Incrementally synchronize data from MySQL to TiDB
+summary: Incrementally synchronize data from MySQL to TiDB
 ---
 # Incrementally synchronize data from MySQL to TiDB
 

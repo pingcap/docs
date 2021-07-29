@@ -1,6 +1,6 @@
 ---
-title: 
-summary: 
+title: Migrate from AWS to TiDB
+summary: Migrate from AWS to TiDB
 ---
 # How to migrate from AWS to TiDB
 

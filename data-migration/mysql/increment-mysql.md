@@ -1,6 +1,6 @@
 ---
-title: 
-summary: 
+title: Migrating from ＜ 1TB MySQL to TiDB
+summary: Migrating from ＜ 1TB MySQL to TiDB
 ---
 
 # Migrating from ＜ 1TB MySQL to TiDB
