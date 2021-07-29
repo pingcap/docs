@@ -132,8 +132,8 @@ mysql> SELECT * FROM t1;
 
 - Scope: GLOBAL
 - Default value: `mysql_native_password`
-- This variable sets the authentication method that the server advertises when the server-client connection is being established. Possible values for this variable are documented in [Authentication plugin status](/security-compatibility-with-mysql.md#authentication-plugin-status)
-- Value options: `mysql_native_password` and `caching_sha2_password` (since v5.2.0). For more details, see [Authentication plugin status](/security-compatibility-with-mysql.md#authentication-plugin-status).
+- This variable sets the authentication method that the server advertises when the server-client connection is being established. Possible values for this variable are documented in [Authentication plugin status](/security-compatibility-with-mysql.md#authentication-plugin-status).
+- Value options: `mysql_native_password` and `caching_sha2_password`. For more details, see [Authentication plugin status](/security-compatibility-with-mysql.md#authentication-plugin-status).
 
 ### ddl_slow_threshold
 
