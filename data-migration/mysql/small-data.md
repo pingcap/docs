@@ -1,3 +1,7 @@
+---
+title: 
+summary: 
+---
 # Incrementally synchronize data from MySQL to TiDB
 
 TODO: quick instruction of DM
