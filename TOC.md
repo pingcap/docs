@@ -42,32 +42,29 @@
     + [Test TiDB Using TPC-C](/benchmark/benchmark-tidb-using-tpcc.md)
 + Migrate
   + [Overview](/migration-overview.md)
-  + Migrate from MySQL
-    + [Overview](/data-migration/mysql/overview.md)
+  + From MySQL To TiDB
+    + [Overview](/data-migration/mysql/migrate-mysql-overview.md)
     + [Origin MySQL ≥ 1TB](/data-migration/mysql/huge-data.md)
     + [Origin MySQL ＜ 1TB](/data-migration/mysql/small-data.md)
-    + [Incremental migration](/data-migration/mysql/increment.md)
-  + Migrate from Amazon Aurora
-    + [Overview](/data-migration/aurora/overview.md)
+    + [Incremental migration](/data-migration/mysql/increment-mysql.md)
+  + From Amazon Aurora To TiDB
+    + [Overview](/data-migration/aurora/migrate-aurora-overview.md)
     + [From Aurora snapshot](/data-migration/aurora/from-snapshot.md)
-    + [Incremental migration](/data-migration/aurora/increment.md)
-  + Migrate from  Files
-    + [Overview](/data-migration/file/overview.md)
+    + [Incremental migration](/data-migration/aurora/increment-aurora.md)
+  + From Files To TiDB
+    + [Overview](/data-migration/file/file-migration-overview.md)
     + [CSV files](/data-migration/file/csv-tidb.md)
     + [SQL files](/data-migration/file/sql-tidb.md)
-  + Migrate from Cloud
-    + [Overview](/data-migration/cloud/overview.md)
+  + From Cloud To TiDB
+    + [Overview](/data-migration/cloud/migrate-cloud-overview.md)
     + [Amazon](/data-migration/cloud/aws-tidb.md)
     + [Google](/data-migration/cloud/google-tidb.md)
-  + Advanced Migration
-    + [Overview](/data-migration/advanced-migration/overview.md)
+  + Advanced Migration To TiDB
+    + [Overview](/data-migration/advanced-migration/advanced-migration-overview.md)
     + [Filter binlog event](/data-migration/advanced-migration/binlog-filter.md)
     + [Work with GH-ost and PT-osc](/data-migration/advanced-migration/ghost-ptosc.md)
     + [Merge multiple tables and databases](/data-migration/advanced-migration/merge-db-table.md)
     + [Multiple tables downstream](/data-migration/advanced-migration/more-column.md)
-  + Case Example
-    + [Migrate from Aurora to TiDB](/data-migration/case/migrate-aurora-tidb.md)
-    + [Merge multi tables and databases into one](/data-migration/case/migrate-multi-table.md)
 
 + Maintain
   + Upgrade

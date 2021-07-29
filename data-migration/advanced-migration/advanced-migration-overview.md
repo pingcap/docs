@@ -14,8 +14,6 @@ These functions only applicable if the downstream is TiDB, and do not applicable
 - [Merge multi tables and databases](/data-migration/advanced-migration/merge-db-table.md)
 - [Multiple tables downstream](/data-migration/advanced-migration/more-column.md)
 
-To illustrate more vividly, we have prepared actual cases for your reference,please refer to the following topics.
-
 ***
 
 ## Topics
