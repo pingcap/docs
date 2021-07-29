@@ -59,6 +59,8 @@
     + [Overview](/data-migration/cloud/migrate-cloud-overview.md)
     + [Amazon](/data-migration/cloud/aws-tidb.md)
     + [Google](/data-migration/cloud/google-tidb.md)
+  + From TiDB To TiDB
+      + [Overview](/data-migration/tidb-tidb.md)
   + Advanced Migration To TiDB
     + [Overview](/data-migration/advanced-migration/advanced-migration-overview.md)
     + [Filter binlog event](/data-migration/advanced-migration/binlog-filter.md)
