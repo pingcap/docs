@@ -17,5 +17,3 @@ These functions only applicable if the downstream is TiDB, and do not applicable
 ***
 
 ## Topics
-
-- [Merge multi tables and databases into one](/data-migration/case/migrate-multi-table.md)

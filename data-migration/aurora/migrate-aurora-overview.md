@@ -20,4 +20,4 @@ Using Aurora's existing snapshot mechanism is the most convenient way, but beacu
 ## Topics
 
 - [Migrate from Aurora snapshot to TiDB](/data-migration/aurora/from-snapshot.md)
-- [Incrementally synchronize data to TiDB](/data-migration/aurora/increment.md)
+- [Incrementally synchronize data to TiDB](/data-migration/aurora/increment-aurora.md)

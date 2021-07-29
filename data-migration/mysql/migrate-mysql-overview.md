@@ -19,4 +19,4 @@ It is recommended to use [Dumpling](https://github.com/pingcap/dumpling) and [Li
 
 - [MySQL ≥ 1TB](/data-migration/mysql/huge-data.md)
 - [MySQL ＜ 1TB](/data-migration/mysql/small-data.md)
-- [Incrementally synchronize data to TiDB](/data-migration/mysql/increment.md)
+- [Incrementally synchronize data to TiDB](/data-migration/mysql/increment-mysql.md)
