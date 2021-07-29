@@ -31,7 +31,7 @@ TiDB version: 5.1.1
 
 + TiFlash
 
-    - Support the `HAVING()` function in DAG request
+    - Support the `HAVING()` function in DAG requests
 
 ## Improvements
 
@@ -62,18 +62,18 @@ TiDB version: 5.1.1
 
 + TiKV
 
-    - Make prewrite as idempotent as possible to reduce the chance of undetermined errors [#10586](https://github.com/tikv/tikv/pull/10586)
+    - Make the prewrite requests as idempotent as possible to reduce the chance of undetermined errors [#10586](https://github.com/tikv/tikv/pull/10586)
     - Prevent the risk of stack overflow when handling many expired commands [#10502](https://github.com/tikv/tikv/pull/10502)
-    - Avoid excessive commit request retrying by not updating `max_ts` with the stale read request's `start_ts` [#10451](https://github.com/tikv/tikv/pull/10451)
-    - Separate read write ready to reduce read latency [#10592](https://github.com/tikv/tikv/pull/10592)
-    - Reduce impact on data import speed with I/O rate limiting enabled [#10390](https://github.com/tikv/tikv/pull/10390)
-    - Improve load balance between Raft gRPC connections [#10495](https://github.com/tikv/tikv/pull/10495)
+    - Avoid excessive commit request retrying by not updating `max_ts` using the Stale Read request's `start_ts` [#10451](https://github.com/tikv/tikv/pull/10451)
+    - Handle read ready and write ready separately to reduce read latency [#10592](https://github.com/tikv/tikv/pull/10592)
+    - Reduce the impact on data import speed when the I/O rate limiting is enabled [#10390](https://github.com/tikv/tikv/pull/10390)
+    - Improve the load balance between Raft gRPC connections [#10495](https://github.com/tikv/tikv/pull/10495)
 
 + Tools
 
     + TiCDC
 
-        - Remove file sorter. [#2327](https://github.com/pingcap/ticdc/pull/2327)
+        - Remove `file sorter` [#2327](https://github.com/pingcap/ticdc/pull/2327)
         - Better err msg when PD endpoint missing certificate [#2186](https://github.com/pingcap/ticdc/pull/2186)
 
     + TiDB Lightning
