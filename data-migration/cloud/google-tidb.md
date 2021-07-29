@@ -1,6 +1,6 @@
 ---
-title: 
-summary: 
+title: Migrate from Google to TiDB
+summary: Migrate from Google to TiDB
 ---
 # How to migrate from Google to TiDB
 

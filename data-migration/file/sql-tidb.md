@@ -1,6 +1,6 @@
 ---
-title: 
-summary: 
+title: Migrate from SQL file to TiDB
+summary: Migrate from SQL file to TiDB
 ---
 # How to migrate from SQL file to TiDB
 

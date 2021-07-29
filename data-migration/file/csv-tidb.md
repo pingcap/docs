@@ -1,6 +1,6 @@
 ---
-title: 
-summary: 
+title: Migrate from CSV file to TiDB
+summary: Migrate from CSV file to TiDB
 ---
 # How to migrate from CSV file to TiDB
 
