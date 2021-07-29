@@ -141,6 +141,7 @@ TiDB version: 5.1.1
     - Fix the issue that TiDB Dashboard can not display disk information of TiFlash correctly
     - Fix the potential panic issue that occures when deconstructing `SharedQueryBlockInputStream`
     - Fix the potential panic issue that occures when deconstructing `MPPTask`
+    - Fix the potential data inconsistency after synchronizing data via snapshot
 
 + Tools
 
