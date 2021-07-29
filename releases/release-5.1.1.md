@@ -27,7 +27,7 @@ TiDB version: 5.1.1
 
 + TiDB Dashboard
 
-    - TiDB Dashboard: Add OIDC based SSO support [#3883](https://github.com/tikv/pd/pull/3883)
+    - Support OIDC SSO. By setting the OIDC-compatible SSO services (such as Okta and Auth0), users can log into TiDB Dashboard without entering the SQL password. [#3883](https://github.com/tikv/pd/pull/3883)
 
 + TiFlash
 
@@ -74,16 +74,16 @@ TiDB version: 5.1.1
     + TiCDC
 
         - Remove `file sorter` [#2327](https://github.com/pingcap/ticdc/pull/2327)
-        - Better err msg when PD endpoint missing certificate [#2186](https://github.com/pingcap/ticdc/pull/2186)
+        - Improve the error message returned when a PD endpoint misses the certificate [#1973](https://github.com/pingcap/ticdc/issues/1973)
 
     + TiDB Lightning
 
-        - Add retry for restoring schemas [#1294](https://github.com/pingcap/br/pull/1294)
+        - Add a retry mechanism for restoring schemas [#1294](https://github.com/pingcap/br/pull/1294)
 
     + Dumpling
 
-        - Always split tables using _tidb_rowid when the upstream is a TiDB v3.x cluster, which helps reduce TiDB's memory [#308](https://github.com/pingcap/dumpling/pull/308)
-        - Reduce dumpling accessing database and information_schema usage and improve dumpling's stability. [#315](https://github.com/pingcap/dumpling/pull/315)
+        - Always split tables using `_tidb_rowid` when the upstream is a TiDB v3.x cluster, which helps reduce TiDB's memory usage [#295](https://github.com/pingcap/dumpling/issues/295)
+        - Reduce the frequency of accessing the database metadata to improve Dumpling's performance and stability [#315](https://github.com/pingcap/dumpling/pull/315)
 
 ## Bug fixes
 
@@ -114,52 +114,52 @@ TiDB version: 5.1.1
 
 + TiKV
 
-    - Fix duration calculation panics on certain platforms [#10569](https://github.com/tikv/tikv/pull/10569)
-    - Fix unencoded keys of `batch_get_command` in load-base-split [#10565](https://github.com/tikv/tikv/pull/10565)
-    - Fix online changing `resolved-ts.advance-ts-interval` can't take effect immediately [#10494](https://github.com/tikv/tikv/pull/10494)
-    - Fix follower meta corruption in rare cases with more than 4 replicas [#10486](https://github.com/tikv/tikv/pull/10486)
-    - Fix panic when building a snapshot twice with encryption enabled [#10464](https://github.com/tikv/tikv/pull/10464)
-    - Fix wrong `tikv_raftstore_hibernated_peer_state` metric [#10432](https://github.com/tikv/tikv/pull/10432)
-    - Fix the wrong arguments type of `json_unquote` [#10428](https://github.com/tikv/tikv/pull/10428)
-    - Fix the bug that index keys in a pessimistic transaction may be repeatedly committed [#10586](https://github.com/tikv/tikv/pull/10586)
-    - Fix `ReadIndex` command returning stale result right after leader is transferred [#10474](https://github.com/tikv/tikv/pull/10474)
+    - Fix the issue that the duration calculation might panic on certain platforms [#10569](https://github.com/tikv/tikv/pull/10569)
+    - Fix the issue that Load Base Split mistakenly uses the unencoded keys of `batch_get_command` [#10565](https://github.com/tikv/tikv/pull/10565)
+    - Fix the issue that changing the `resolved-ts.advance-ts-interval` configuration online cannot take effect immediately [#10494](https://github.com/tikv/tikv/pull/10494)
+    - Fix the issue of follower metadata corruption in rare cases with more than 4 replicas [#10486](https://github.com/tikv/tikv/pull/10486)
+    - Fix the panic issue that occurs when building a snapshot twice if encryption is enabled [#9786](https://github.com/tikv/tikv/issues/9786) [#10407](https://github.com/tikv/tikv/issues/10407)
+    - Fix the wrong `tikv_raftstore_hibernated_peer_state` metric [#10432](https://github.com/tikv/tikv/pull/10432)
+    - Fix the wrong arguments type of the `json_unquote()` function in the coprocessor [#10176](https://github.com/tikv/tikv/issues/10176)
+    - Fix a bug that the index keys in a pessimistic transaction might be repeatedly committed [#10586](https://github.com/tikv/tikv/pull/10586)
+    - Fix the issue that the `ReadIndex` request returns stale result right after the leader is transferred [#10474](https://github.com/tikv/tikv/pull/10474)
 
 + PD
 
-    - Reduce the conflict due to multiple scheduler running in same time [#3857](https://github.com/tikv/pd/pull/3857)
-    - Fix the issue that the scheduler may appear again even if we have already executed the delete operation [#3824](https://github.com/tikv/pd/pull/3824)
+    - Fix the issue the expected scheduling cannot be generated when the conflict occurs due to multiple schedulers running at the same time [#3857](https://github.com/tikv/pd/pull/3857)
+    - Fix the issue that the scheduler might appear again even if the scheduler is already deleted [#3824](https://github.com/tikv/pd/pull/3824)
 
 + TiFlash
 
     - Fix the potential panic issue that occurs when running table scan tasks
-    - Fix a bug that TiFlash raises error about `duplicated region` when handling DAQ request
+    - Fix a bug that TiFlash raises the error about `duplicated region` when handling DAQ requests
     - Fix the panic issue that occurs when the read load is heavy
-    - Fix the potential panic issue that occures when executing `DateFormat` function
+    - Fix the potential panic issue that occurs when executing the `DateFormat` function
     - Fix the potential memory leak issue that occurs when executing MPP tasks
-    - Fix the issue of unexpected results when executing aggregation functions `COUNT` or `COUNT DISTINCT`
-    - Fix a potential bug that TiFlash can not restore data when deployed on multi disks
-    - Fix the issue that TiDB Dashboard can not display disk information of TiFlash correctly
-    - Fix the potential panic issue that occures when deconstructing `SharedQueryBlockInputStream`
-    - Fix the potential panic issue that occures when deconstructing `MPPTask`
-    - Fix the potential data inconsistency after synchronizing data via snapshot
+    - Fix the issue of unexpected results when executing the aggregation functions `COUNT` or `COUNT DISTINCT`
+    - Fix a potential bug that TiFlash cannot restore data when deployed on multiple disks
+    - Fix the issue that TiDB Dashboard cannot display the disk information of TiFlash correctly
+    - Fix the potential panic issue that occurs when deconstructing `SharedQueryBlockInputStream`
+    - Fix the potential panic issue that occurs when deconstructing `MPPTask`
+    - Fix the potential issue of data inconsistency after synchronizing data via snapshot
 
 + Tools
 
     + TiCDC
 
-        - Fix support for new collation [#2306](https://github.com/pingcap/ticdc/pull/2306)
-        - Fix minor runtime panic risk [#2300](https://github.com/pingcap/ticdc/pull/2300)
-        - Fix potential DDL loss when owner crashes while executing DDL [#2290](https://github.com/pingcap/ticdc/pull/2290)
-        - Fix trying to resolve locks prematurely [#2266](https://github.com/pingcap/ticdc/pull/2266)
-        - Fix a bug that could cause data losses if a TiCDC node is killed immediately after a table migration [#2033](https://github.com/pingcap/ticdc/pull/2033)
-        - Fix changefeed update to properly handle --sort-dir and --start-ts. [#1921](https://github.com/pingcap/ticdc/pull/1921)
+        - Fix the support for the new collation feature [#2301](https://github.com/pingcap/ticdc/issues/2301)
+        - Fix the issue that an unsynchronized access to a shared map at runtime might cause panic [#2300](https://github.com/pingcap/ticdc/pull/2300)
+        - Fix the potential DDL loss issue that occurs when the owner crashes while executing the DDL statement [#2290](https://github.com/pingcap/ticdc/pull/2290)
+        - Fix the issue of trying to resolve locks in TiDB prematurely [#2266](https://github.com/pingcap/ticdc/pull/2266)
+        - Fix a bug that might cause data loss if a TiCDC node is killed immediately after a table migration [#2033](https://github.com/pingcap/ticdc/pull/2033)
+        - Fix the handling logic of `changefeed update` to `--sort-dir` and `--start-ts` [#1921](https://github.com/pingcap/ticdc/pull/1921)
 
     + Backup & Restore
 
-        - Fix incorrectly calculating the size of data to restore [#1285](https://github.com/pingcap/br/pull/1285)
-        - Fix missed DDL events when restoring from cdclog [#1094](https://github.com/pingcap/br/pull/1094)
+        - Fix the issue that the size of the data to restore is incorrectly calculated [#1285](https://github.com/pingcap/br/pull/1285)
+        - Fix the issue of missed DDL events that occurs when restoring from cdclog [#1094](https://github.com/pingcap/br/pull/1094)
 
     + TiDB Lightning
 
         - Fix parquet parser for decimal type [#1272](https://github.com/pingcap/br/pull/1272)
-        - Fix integer overflows when calculating key intervals [#1294](https://github.com/pingcap/br/pull/1294)
+        - Fix the issue of integer overflow when calculating key intervals [#1294](https://github.com/pingcap/br/pull/1294)
