@@ -49,16 +49,6 @@ TiDB version: 5.1.1
     - Enlarge the variable tidb_stmt_summary_max_stmt_count default value from 200 to 3000 [#25874](https://github.com/pingcap/tidb/pull/25874)
     - Do not allow setting read timestamp to a future time. [#25763](https://github.com/pingcap/tidb/pull/25763)
     - Log warnings when agg function can not be pushdown in explain statement [#25737](https://github.com/pingcap/tidb/pull/25737)
-    - Add cluster information of evicted count. [#25587](https://github.com/pingcap/tidb/pull/25587)    - Enable the pushdown of builtin function json_unquote() to TiKV. [#26265](https://github.com/pingcap/tidb/pull/26265)
-    - store/copr: support retry for mpp query [#26480](https://github.com/pingcap/tidb/pull/26480)
-    - Change the lock record into put record for the index keys using point/batch point get for update read. [#26225](https://github.com/pingcap/tidb/pull/26225)
-    - Forbid creating view from stale query [#26200](https://github.com/pingcap/tidb/pull/26200)
-    - planner/core: thoroughly push down count-distinct agg in the MPP mode. [#26194](https://github.com/pingcap/tidb/pull/26194)
-    - mpp: check the tiflash availabilities before launching mpp queries. [#26192](https://github.com/pingcap/tidb/pull/26192)
-    - Enlarge the variable tidb_stmt_summary_max_stmt_count default value from 200 to 3000 [#25874](https://github.com/pingcap/tidb/pull/25874)
-    - Do not allow setting read timestamp to a future time. [#25763](https://github.com/pingcap/tidb/pull/25763)
-    - Log warnings when agg function can not be pushdown in explain statement [#25737](https://github.com/pingcap/tidb/pull/25737)
-    - Add cluster information of evicted count. [#25587](https://github.com/pingcap/tidb/pull/25587)
 
 + TiKV
 
