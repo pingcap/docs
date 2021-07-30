@@ -128,6 +128,13 @@ mysql> SELECT * FROM t1;
 - This variable indicates the location where data is stored. This location can be a local path or point to a PD server if the data is stored on TiKV.
 - A value in the format of `ip_address:port` indicates the PD server that TiDB connects to on startup.
 
+### default_authentication_plugin
+
+- Scope: GLOBAL
+- Default value: `mysql_native_password`
+- This variable sets the authentication method that the server advertises when the server-client connection is being established. Possible values for this variable are documented in [Authentication plugin status](/security-compatibility-with-mysql.md#authentication-plugin-status).
+- Value options: `mysql_native_password` and `caching_sha2_password`. For more details, see [Authentication plugin status](/security-compatibility-with-mysql.md#authentication-plugin-status).
+
 ### ddl_slow_threshold
 
 - Scope: INSTANCE
@@ -1109,7 +1116,7 @@ explain select * from t where age=5;
 
 - Scope: SESSION | GLOBAL
 - Default value: `static`
-- Specifies whether to enable `dynamic` mode for partitioned tables. For details about the dynamic pruning mode, see [Dynamic Pruning Mode for Partitioned Tables](/partitioned-table.md#dynamic-mode).
+- Specifies whether to enable `dynamic` mode for partitioned tables. For details about the dynamic pruning mode, see [Dynamic Pruning Mode for Partitioned Tables](/partitioned-table.md#dynamic-pruning-mode).
 
 ### tidb_pprof_sql_cpu <span class="version-mark">New in v4.0</span>
 
@@ -1269,7 +1276,7 @@ SET tidb_slow_log_threshold = 200;
 ### tidb_stmt_summary_max_stmt_count <span class="version-mark">New in v4.0</span>
 
 - Scope: SESSION | GLOBAL
-- Default value: `200`
+- Default value: `3000`
 - Range: `[1, 32767]`
 - This variable is used to set the maximum number of statements that the statement summary stores in memory.
 
