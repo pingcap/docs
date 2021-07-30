@@ -8,7 +8,7 @@ Release Date: July 30, 2021
 
 TiDB version: 5.1.1
 
-## Compatibility change
+## Compatibility changes
 
 + TiDB
 
@@ -145,7 +145,7 @@ TiDB version: 5.1.1
         - Fix a bug that might cause data loss if a TiCDC node is killed immediately after a table migration [#2033](https://github.com/pingcap/ticdc/pull/2033)
         - Fix the handling logic of `changefeed update` on `--sort-dir` and `--start-ts` [#1921](https://github.com/pingcap/ticdc/pull/1921)
 
-    + Backup & Restore
+    + Backup & Restore (BR)
 
         - Fix the issue that the size of the data to restore is incorrectly calculated [#1270](https://github.com/pingcap/br/issues/1270)
         - Fix the issue of missed DDL events that occurs when restoring from cdclog [#870](https://github.com/pingcap/br/issues/870)
