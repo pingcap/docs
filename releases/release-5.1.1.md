@@ -87,11 +87,11 @@ TiDB version: 5.1.1
     - Fix the issue that the result of index join in correlated subqueries is wrong [#25799](https://github.com/pingcap/tidb/issues/25799)
     - Fix a bug that the successfully committed optimistic transactions might report commit errors [#10468](https://github.com/tikv/tikv/issues/10468)
     - Fix the issue that an incorrect result is returned when using merge join on the `SET` type column [#25669](https://github.com/pingcap/tidb/issues/25669)
-    - Fix a bug that the index keys in a pessimistic transaction might be repeatedly committed [#26482](https://github.com/pingcap/tidb/pull/26482)
+    - Fix a bug that the index keys in a pessimistic transaction might be repeatedly committed [#26359](https://github.com/pingcap/tidb/issues/26359)
     - Fix the risk of integer overflow when the optimizer is locating partitions [#26227](https://github.com/pingcap/tidb/issues/26227)
     - Fix the issue that invalid values might be written when casting `DATE` to timestamp [#26292](https://github.com/pingcap/tidb/issues/26292)
     - Fix the issue that the Coprocessor Cache metrics are not displayed on Grafana [#26338](https://github.com/pingcap/tidb/issues/26338)
-    - Fix the issue of annoying logs caused by telemetry [#25760](https://github.com/pingcap/tidb/issues/25760)
+    - Fix the issue of annoying logs caused by telemetry [#25760](https://github.com/pingcap/tidb/issues/25760) [#25785](https://github.com/pingcap/tidb/issues/25785)
     - Fix a bug on the query range of prefix index [#26029](https://github.com/pingcap/tidb/issues/26029)
     - Fix the issue that concurrently truncating the same partition hangs DDL executions [#26229](https://github.com/pingcap/tidb/issues/26229)
     - Fix the issue of duplicate `ENUM` items [#25955](https://github.com/pingcap/tidb/issues/25955)
@@ -112,12 +112,12 @@ TiDB version: 5.1.1
     - Fix the panic issue that occurs when building a snapshot twice if encryption is enabled [#9786](https://github.com/tikv/tikv/issues/9786) [#10407](https://github.com/tikv/tikv/issues/10407)
     - Fix the wrong `tikv_raftstore_hibernated_peer_state` metric [#10330](https://github.com/tikv/tikv/issues/10330)
     - Fix the wrong arguments type of the `json_unquote()` function in the coprocessor [#10176](https://github.com/tikv/tikv/issues/10176)
-    - Fix a bug that the index keys in a pessimistic transaction might be repeatedly committed [#10586](https://github.com/tikv/tikv/pull/10586)
-    - Fix the issue that the `ReadIndex` request returns stale result right after the leader is transferred [#10474](https://github.com/tikv/tikv/pull/10474)
+    - Fix a bug that the index keys in a pessimistic transaction might be repeatedly committed [#10468](https://github.com/tikv/tikv/issues/10468#issuecomment-869491061)
+    - Fix the issue that the `ReadIndex` request returns stale result right after the leader is transferred [#9351](https://github.com/tikv/tikv/issues/9351)
 
 + PD
 
-    - Fix the issue the expected scheduling cannot be generated when the conflict occurs due to multiple schedulers running at the same time [#3807](https://github.com/tikv/pd/issues/3807)
+    - Fix the issue the expected scheduling cannot be generated when the conflict occurs due to multiple schedulers running at the same time [#3807](https://github.com/tikv/pd/issues/3807) [#3778](https://github.com/tikv/pd/issues/3778)
     - Fix the issue that the scheduler might appear again even if the scheduler is already deleted [#2572](https://github.com/tikv/pd/issues/2572)
 
 + TiFlash
