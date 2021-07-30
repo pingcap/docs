@@ -55,7 +55,7 @@ TiDB version: 5.1.1
 
     - Make the prewrite requests as idempotent as possible to reduce the chance of undetermined errors [#10586](https://github.com/tikv/tikv/pull/10586)
     - Prevent the risk of stack overflow when handling many expired commands [#10502](https://github.com/tikv/tikv/pull/10502)
-    - Avoid excessive commit request retrying by not updating `max_ts` using the Stale Read request's `start_ts` [#10451](https://github.com/tikv/tikv/pull/10451)
+    - Avoid excessive commit request retrying by not using the Stale Read request's `start_ts` to update `max_ts` [#10451](https://github.com/tikv/tikv/pull/10451)
     - Handle read ready and write ready separately to reduce read latency [#10592](https://github.com/tikv/tikv/pull/10592)
     - Reduce the impact on data import speed when the I/O rate limiting is enabled [#10390](https://github.com/tikv/tikv/pull/10390)
     - Improve the load balance between Raft gRPC connections [#10495](https://github.com/tikv/tikv/pull/10495)
@@ -83,7 +83,7 @@ TiDB version: 5.1.1
     - Fix the data loss issue that might occur when changing the column type with `tidb_enable_amend_pessimistic_txn=on` [#26203](https://github.com/pingcap/tidb/issues/26203)
     - Fix the issue that the behavior of the `last_day` function is incompatible in the SQL mode [#26001](https://github.com/pingcap/tidb/pull/26001)
     - Fix the panic issue that might occur when `LIMIT` is on top of window functions [#25344](https://github.com/pingcap/tidb/issues/25344)
-    - Fix the issue that committing pessimistic transactions might cause write-conflict issues [#25964](https://github.com/pingcap/tidb/issues/25964)
+    - Fix the issue that committing pessimistic transactions might cause write conflict [#25964](https://github.com/pingcap/tidb/issues/25964)
     - Fix the issue that the result of index join in correlated subqueries is wrong [#25799](https://github.com/pingcap/tidb/issues/25799)
     - Fix a bug that the successfully committed optimistic transactions might report commit errors [#10468](https://github.com/tikv/tikv/issues/10468)
     - Fix the issue that an incorrect result is returned when using merge join on the `SET` type column [#25669](https://github.com/pingcap/tidb/issues/25669)
@@ -96,7 +96,7 @@ TiDB version: 5.1.1
     - Fix the issue that concurrently truncating the same partition hangs DDL executions [#26229](https://github.com/pingcap/tidb/issues/26229)
     - Fix the issue of duplicate `ENUM` items [#25955](https://github.com/pingcap/tidb/issues/25955)
     - Fix a bug that the CTE iterator is not correctly closed [#26112](https://github.com/pingcap/tidb/issues/26112)
-    - Fix the issue that the `LOAD DATA` statement can abnormally import non-utf8 data [#25979](https://github.com/pingcap/tidb/issues/25979)
+    - Fix the issue that the `LOAD DATA` statement might abnormally import non-utf8 data [#25979](https://github.com/pingcap/tidb/issues/25979)
     - Fix the panic issue that might occur when using the window function on the unsigned integer columns [#25956](https://github.com/pingcap/tidb/issues/25956)
     - Fix the issue that TiDB might panic when resolving async commit locks [#25778](https://github.com/pingcap/tidb/issues/25778)
     - Fix the issue that Stale Read is not fully compatible with the `PREPARE` statements [#25800](https://github.com/pingcap/tidb/pull/25800)
@@ -143,14 +143,14 @@ TiDB version: 5.1.1
         - Fix the potential DDL loss issue that occurs when the owner crashes while executing the DDL statement [#2290](https://github.com/pingcap/ticdc/pull/2290)
         - Fix the issue of trying to resolve locks in TiDB prematurely [#2188](https://github.com/pingcap/ticdc/issues/2188)
         - Fix a bug that might cause data loss if a TiCDC node is killed immediately after a table migration [#2033](https://github.com/pingcap/ticdc/pull/2033)
-        - Fix the handling logic of `changefeed update` to `--sort-dir` and `--start-ts` [#1921](https://github.com/pingcap/ticdc/pull/1921)
+        - Fix the handling logic of `changefeed update` on `--sort-dir` and `--start-ts` [#1921](https://github.com/pingcap/ticdc/pull/1921)
 
     + Backup & Restore
 
-        - Fix the issue that the size of the data to restore is incorrectly calculated [#1285](https://github.com/pingcap/br/pull/1285)
-        - Fix the issue of missed DDL events that occurs when restoring from cdclog [#1094](https://github.com/pingcap/br/pull/1094)
+        - Fix the issue that the size of the data to restore is incorrectly calculated [#1270](https://github.com/pingcap/br/issues/1270)
+        - Fix the issue of missed DDL events that occurs when restoring from cdclog [#870](https://github.com/pingcap/br/issues/870)
 
     + TiDB Lightning
 
-        - Fix parquet parser for decimal type [#1272](https://github.com/pingcap/br/pull/1272)
-        - Fix the issue of integer overflow when calculating key intervals [#1294](https://github.com/pingcap/br/pull/1294)
+        - Fix the issue that TiDB fails to parse the `DECIMAL` type data in Parquet files [#1275](https://github.com/pingcap/br/pull/1275)
+        - Fix the issue of integer overflow when calculating key intervals [#1291](https://github.com/pingcap/br/issues/1291) [#1290](https://github.com/pingcap/br/issues/1290)
