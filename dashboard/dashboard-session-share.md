@@ -1,6 +1,6 @@
 ---
 title: Share TiDB Dashboard Sessions
-summary: Learn how to share current TiDB Dashboard sessions to others to access.
+summary: Learn how to share the current TiDB Dashboard session to other users.
 ---
 
 # Share TiDB Dashboard Sessions
@@ -11,37 +11,37 @@ You can share the current session of the TiDB Dashboard to other users so that t
 
 1. Sign into TiDB Dashboard.
 
-2. Click the username in the left sidebar to access the configure page.
+2. Click the username in the left sidebar to access the configuration page.
 
 3. Click **Share Current Session**.
 
-   ![Sample Step](/media/dashboard/dashboard-session-share-settings-1.png)
+    ![Sample Step](/media/dashboard/dashboard-session-share-settings-1.png)
 
    > **Note:**
    >
-   > For security, the shared session cannot be shared again.
+   > For security reasons, the shared session cannot be shared again.
 
 4. Adjust sharing settings in the popup dialog:
 
-   - Expire in: How long the shared session will last for. Signing out the current session will not sign out any shared sessions.
+   - Expire in: How long the shared session will be effective. Signing out of the current session does not affect the effective time of the shared session.
 
-   - Share as read-only privilege: The shared session can only perform read operations but not write operations (like modifying configurations).
+   - Share as read-only privilege: The shared session only permits read operations but not write operations (such as modifying configurations).
 
 5. Click **Generate Authorization Code**.
 
    ![Sample Step](/media/dashboard/dashboard-session-share-settings-2.png)
 
-6. Provide the generate **Authorization Code** to the user that you want to share session to.
+6. Provide the generated **Authorization Code** to the user to whom you want to share the session.
 
    ![Sample Step](/media/dashboard/dashboard-session-share-settings-3.png)
 
    > **Warning:**
    >
-   > Anyone can use the TiDB Dashboard with the authorization code. For this reason, please keep the authorization code secure and do not send it to someone that is untrusted to avoid unauthorized access.
+   > Keep your authorization code secure and do not send it to anyone who is untrusted. Otherwise, they will be able to access and operate TiDB Dashboard without your authorization.
 
 ## Steps for the Invitee
 
-1. In the sign in page in TiDB Dashboard, click **Use Alternative Authentication**.
+1. On the sign-in page of TiDB Dashboard, click **Use Alternative Authentication**.
 
    ![Sample Step](/media/dashboard/dashboard-session-share-signin-1.png)
 
@@ -49,7 +49,7 @@ You can share the current session of the TiDB Dashboard to other users so that t
 
    ![Sample Step](/media/dashboard/dashboard-session-share-signin-2.png)
 
-3. Enter the authorization code you receive from others.
+3. Enter the authorization code you have received from the inviter.
 
 4. Click **Sign In**.
 
