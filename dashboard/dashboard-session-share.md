@@ -29,7 +29,7 @@ You can share the current session of the TiDB Dashboard to other users so that t
 
    - Expire in: How long the shared session will be effective. Signing out of the current session does not affect the effective time of the shared session.
 
-   - Share as read-only privilege: The shared session only permits read operations but not write operations (such as modifying configurations). This feature is available only in clusters of v4.0.6 or later.
+   - Share as read-only privilege: The shared session only permits read operations but not write operations (such as modifying configurations). This feature is available only in clusters of v4.0.14 or later.
 
 5. Click **Generate Authorization Code**.
 
