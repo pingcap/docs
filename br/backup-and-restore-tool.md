@@ -152,17 +152,20 @@ Note that skipping the version check might introduce incompatibility. The versio
 | Use BR v4.0 to back up TiDB v4.0 | ✅ | ✅ | ✅ (If TiKV >= v4.0.0-rc.1, and if BR contains the [#233](https://github.com/pingcap/br/pull/233) bug fix and TiKV does not contain the [#7241](https://github.com/tikv/tikv/pull/7241) bug fix, BR will cause the TiKV node to restart.) |
 | Use BR nightly or v5.0 to back up TiDB v4.0 | ❌ (If the TiDB version is earlier than v4.0.9, the [#609](https://github.com/pingcap/br/issues/609) issue might occur.) | ❌ (If the TiDB version is earlier than v4.0.9, the [#609](https://github.com/pingcap/br/issues/609) issue might occur.) | ❌ (If the TiDB version is earlier than v4.0.9, the [#609](https://github.com/pingcap/br/issues/609) issue might occur.) |
 
-### Backup and restore system schemas
+### Backup and restore data under system schema `mysql` (experimental feature)
 
-Before v5.1.0, BR filtered out data from the system schemas during the backup.
+> **Warning:**
+>
+> This feature is experimental and not thoroughly tested. It is highly **not recommended** to use this feature in the production environment.
 
-Since v5.1.0, BR **backups** all data by default, including the system schema (`mysql.*`). But to be compatible with the earlier versions of BR, the tables in system schema are **not** restored by default during the **restore**. If you want the tables to be restored to the system schemas, you need to set the [`filter` parameter](/br/use-br-command-line-tool.md#back-up-with-table-filter). Then, the system tables are first restored to the temporary schemas and then to the system schemas (by renaming the temporary schemas).
+Before v5.1.0, BR filtered out data from the system schema `mysql` during the backup. Since v5.1.0, BR **backups** all data by default, including the system schema (`mysql.*`). But the technical implementation of restoring system table (`mysql.*`) is not complete yet, the tables in system schema `mysql` are **not** restored by default during the **restore**.
 
-In addition, TiDB performs special operations on the following system tables:
+If you want the tables to be restored to the system schema `mysql`, you can set the [`filter` parameter](/br/use-br-command-line-tool.md#back-up-with-table-filter) - restore the corresponding table by *filtering the table name (-f "mysql.usertable1")*. Then, the system table are first restored to the temporary schemas and then renamed to the system schema.
 
-- Tables related to statistical information are not restored, because the table ID of the statistical information has changed.
-- `tidb` and `global_variables` tables in the `mysql` schema are not restored, because these tables cannot be overwritten. For example, overwriting these tables by the GC safepoint will affect the cluster.
-- The restore of the `user` table in the `mysql` schema does not take effect until you manually execute the `FLUSH PRIVILEGE` command.
+It should be noted that the following system tables cannot be restored correctly due to technical reasons. Even if -f `mysql.*` is specified, the following tables will not be restored:
+
+- Tables related to statistics: "stats_buckets", "stats_extended", "stats_feedback", "stats_fm_sketch", "stats_histograms", "stats_meta", "stats_top_n"
+- Privileges or system-related tables: "tidb", "global_variables", "columns_priv", "db", "default_roles", "global_grants", "global_priv", "role_edges", "tables_priv", "user", "gc_delete_range", "Gc_delete_range_done", "schema_index_usage"
 
 ### Minimum machine configuration required for running BR
 
