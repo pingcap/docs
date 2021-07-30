@@ -552,12 +552,8 @@
   + [All Releases](/releases/release-notes.md)
   + [TiDB Roadmap](/roadmap.md)
   + v5.1
-<<<<<<< HEAD
-    + [5.1.0](/releases/release-5.1.0.md)  
-=======
     + [5.1.1](/releases/release-5.1.1.md)
     + [5.1.0](/releases/release-5.1.0.md)
->>>>>>> 233bd4d11 (releases: add TiDB 5.1.1 release notes (#6030))
   + v5.0
     + [5.0.3](/releases/release-5.0.3.md)
     + [5.0.2](/releases/release-5.0.2.md)
