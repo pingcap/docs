@@ -82,7 +82,7 @@ TiDB version: 5.1.1
 
     - Fix the data loss issue that might occur when changing the column type with `tidb_enable_amend_pessimistic_txn=on` [#26203](https://github.com/pingcap/tidb/issues/26203)
     - Fix the issue that the behavior of the `last_day` function is incompatible in the SQL mode [#26001](https://github.com/pingcap/tidb/pull/26001)
-    ?- Fix the panic issue that might occur when `LIMIT` is on top of window functions [#25980](https://github.com/pingcap/tidb/pull/25980)
+    - Fix the panic issue that might occur when `LIMIT` is on top of window functions [#25980](https://github.com/pingcap/tidb/pull/25980)
     - Fix the issue that committing pessimistic transactions might cause write-conflict issues [#25973](https://github.com/pingcap/tidb/pull/25973)
     - Fix the issue that the result of index join in correlated subqueries is wrong [#25819](https://github.com/pingcap/tidb/pull/25819)
     - Fix a bug that the successfully committed optimistic transactions might report commit errors [#25803](https://github.com/pingcap/tidb/pull/25803)
