@@ -491,6 +491,9 @@
         + [Use Diagnostics](/dashboard/dashboard-diagnostics-usage.md)
       + [Search Logs Page](/dashboard/dashboard-log-search.md)
       + [Profile Instances Page](/dashboard/dashboard-profiling.md)
+      + Session Management and Configuration
+        + [Share Session](/dashboard/dashboard-session-share.md)
+        + [Configure SSO](/dashboard/dashboard-session-sso.md)
       + [FAQ](/dashboard/dashboard-faq.md)
   + CLI
     + [tikv-ctl](/tikv-control.md)
@@ -549,6 +552,7 @@
   + [All Releases](/releases/release-notes.md)
   + [TiDB Roadmap](/roadmap.md)
   + v5.1
+    + [5.1.1](/releases/release-5.1.1.md)
     + [5.1.0](/releases/release-5.1.0.md)
   + v5.0
     + [5.0.3](/releases/release-5.0.3.md)
@@ -557,6 +561,7 @@
     + [5.0 GA](/releases/release-5.0.0.md)
     + [5.0.0-rc](/releases/release-5.0.0-rc.md)
   + v4.0
+    + [4.0.14](/releases/release-4.0.14.md)
     + [4.0.13](/releases/release-4.0.13.md)
     + [4.0.12](/releases/release-4.0.12.md)
     + [4.0.11](/releases/release-4.0.11.md)
