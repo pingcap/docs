@@ -399,9 +399,9 @@ cdc cli changefeed update -c test-cf --pd=http://10.0.10.25:2379 --start-ts 4152
 cdc cli changefeed resume -c test-cf --pd=http://10.0.10.25:2379
 ```
 
-## When the Sink of replicating data to the downstreams is TiDB or MySQL, what permissions do users of downstream databases need?
+## When the sink of the replication downstream is TiDB or MySQL, what permissions do users of the downstream database need?
 
-When Sink is TiDB or MySQL, the users of downstream databases need the following permissions:
+When the sink is TiDB or MySQL, the users of the downstream database need the following permissions:
 
 - `Select`
 - `Index`
@@ -413,4 +413,4 @@ When Sink is TiDB or MySQL, the users of downstream databases need the following
 - `Alter`
 - `Create View`
 
-If you need to replicate `recover table` to the downstream TiDB, `Super` permission is required.
+If you need to replicate `recover table` to the downstream TiDB, the `Super` permission is required.
