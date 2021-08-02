@@ -6,8 +6,7 @@ aliases: ['/docs/dev/functions-and-operators/string-functions/','/docs/dev/refer
 
 # String Functions
 
-TiDB supports most of the [string functions](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html) available in MySQL 5.7.
-TiDB also supports some of the [functions](https://docs.oracle.com/en/database/oracle/oracle-database/21/sqlqr/SQL-Functions.html#GUID-93EC62F8-415D-4A7E-B050-5D5B2C127009) available in Oracle 21.
+TiDB supports most of the [string functions](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html) available in MySQL 5.7 and some of the [functions](https://docs.oracle.com/en/database/oracle/oracle-database/21/sqlqr/SQL-Functions.html#GUID-93EC62F8-415D-4A7E-B050-5D5B2C127009) available in Oracle 21.
 
 ## Supported functions
 
@@ -61,7 +60,7 @@ TiDB also supports some of the [functions](https://docs.oracle.com/en/database/o
 | [`SUBSTRING()`](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_substring)                                             | Return the substring as specified                                                                                                         |
 | [`SUBSTRING_INDEX()`](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_substring-index)                                 | Return a substring from a string before the specified number of occurrences of the delimiter                                              |
 | [`TO_BASE64()`](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_to-base64)                                             | Return the argument converted to a base-64 string                                                                                         |
-| [`TRANSLATE()`](https://docs.oracle.com/en/database/oracle/oracle-database/21/sqlrf/TRANSLATE.html#GUID-80F85ACB-092C-4CC7-91F6-B3A585E3A690) | Replace all occurrences of characters by other characters in a string.                                                                    |
+| [`TRANSLATE()`](https://docs.oracle.com/en/database/oracle/oracle-database/21/sqlrf/TRANSLATE.html#GUID-80F85ACB-092C-4CC7-91F6-B3A585E3A690) | Replace all occurrences of characters by other characters in a string. It won't treat empty strings as null as Oracle does.               |
 | [`TRIM()`](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_trim)                                                       | Remove leading and trailing spaces                                                                                                        |
 | [`UCASE()`](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_ucase)                                                     | Synonym for `UPPER()`                                                                                                                     |
 | [`UNHEX()`](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_unhex)                                                     | Return a string containing hex representation of a number                                                                                 |
