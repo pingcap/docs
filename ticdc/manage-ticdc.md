@@ -5,7 +5,7 @@ summary: Learn how to manage a TiCDC cluster and replication tasks.
 
 # Manage TiCDC Cluster and Replication Tasks
 
-This document describes how to manage the TiCDC cluster and replication tasks using the command line tool `cdc cli` and the HTTP interface.
+This document describes how to upgrade TiCDC cluster and modify the configuration of TiCDC cluster using TiUP, and how to manage the TiCDC cluster and replication tasks using the command line tool `cdc cli` and the HTTP interface.
 
 ## Upgrade TiCDC using TiUP
 
@@ -23,6 +23,35 @@ tiup cluster upgrade <cluster-name> v5.1.0
 
 * The `changefeed` configuration has changed in TiCDC v4.0.2. See [Compatibility notes for the configuration file](/production-deployment-using-tiup.md#step-3-initialize-cluster-topology-file) for details.
 * If you encounter any issues, see [Upgrade TiDB using TiUP - FAQ](/upgrade-tidb-using-tiup.md#faq).
+
+## Modify TiCDC configuration using TiUP
+
+This section introduces how to modify the configuration of TiCDC cluster using the  [`tiup cluster edit-config`](/tiup/tiup-component-cluster-edit-config.md) command of TiUP. The following example aims to change the value of `gc-ttl` from the default value of `86400` to `3600`, namely, an hour.
+
+First, execute the following command. You need to replace `<cluster-name>` with your actual cluster name. 
+
+{{< copyable "shell-regular" >}}
+
+```shell
+tiup cluster edit-config <cluster-name> 
+```
+
+Then, enter the vi editor page and modify the `cdc` configuraion under [`server-configs`](/tiup/tiup-cluster-topology-reference.md#server_configs). The command is shown below:
+
+```shell
+ server_configs:
+  tidb: {}
+  tikv: {}
+  pd: {}
+  tiflash: {}
+  tiflash-learner: {}
+  pump: {}
+  drainer: {}
+  cdc:
+    gc-ttl: 3600
+```
+
+After the modification, you need to execute `tiup cluster relaod -R cdc` command to reload the configuration file.
 
 ## Use TLS
 
