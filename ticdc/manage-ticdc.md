@@ -5,7 +5,7 @@ summary: Learn how to manage a TiCDC cluster and replication tasks.
 
 # Manage TiCDC Cluster and Replication Tasks
 
-This document describes how to upgrade TiCDC cluster and modify the configuration of TiCDC cluster using TiUP, and how to manage the TiCDC cluster and replication tasks using the command line tool `cdc cli` and the HTTP interface.
+This document describes how to upgrade TiCDC cluster and modify the configuration of TiCDC cluster using TiUP, and how to manage the TiCDC cluster and replication tasks using the command-line tool `cdc cli` and the HTTP interface.
 
 ## Upgrade TiCDC using TiUP
 
@@ -26,7 +26,7 @@ tiup cluster upgrade <cluster-name> v5.0.3
 
 ## Modify TiCDC configuration using TiUP
 
-This section introduces how to modify the configuration of TiCDC cluster using the  [`tiup cluster edit-config`](/tiup/tiup-component-cluster-edit-config.md) command of TiUP. The following example aims to change the value of `gc-ttl` from the default value of `86400` to `3600`, namely, an hour.
+This section introduces how to modify the configuration of TiCDC cluster using the  [`tiup cluster edit-config`](/tiup/tiup-component-cluster-edit-config.md) command of TiUP. The following example changes the value of `gc-ttl` from the default `86400` to `3600`, namely, one hour.
 
 First, execute the following command. You need to replace `<cluster-name>` with your actual cluster name. 
 
@@ -36,7 +36,7 @@ First, execute the following command. You need to replace `<cluster-name>` with 
 tiup cluster edit-config <cluster-name> 
 ```
 
-Then, enter the vi editor page and modify the `cdc` configuraion under [`server-configs`](/tiup/tiup-cluster-topology-reference.md#server_configs). The command is shown below:
+Then, enter the vi editor page and modify the `cdc` configuraion under [`server-configs`](/tiup/tiup-cluster-topology-reference.md#server_configs). The configuration is shown below:
 
 ```shell
  server_configs:
@@ -51,7 +51,7 @@ Then, enter the vi editor page and modify the `cdc` configuraion under [`server-
     gc-ttl: 3600
 ```
 
-After the modification, you need to execute `tiup cluster relaod -R cdc` command to reload the configuration file.
+After the modification, execute the `tiup cluster relaod -R cdc` command to reload the configuration.
 
 ## Use TLS
 
