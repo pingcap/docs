@@ -20,7 +20,7 @@ In environments of development, testing and production, the requirements on serv
 
 ## Deploy TiDB Binlog using TiUP
 
-It is recommended to deploy TiDB Binlog using TiUP. This means before deploying TiDB using TiUP, you need to add the node information of `drainer` and `pump` of TiDB Binlog in [TiDB Binlog Deployment Topology](/tidb-binlog-deployment-topology.md). For detailed deployment information, refer to [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md).
+It is recommended to deploy TiDB Binlog using TiUP. To do that, when deploying TiDB using TiUP, you need to add the node information of `drainer` and `pump` of TiDB Binlog in [TiDB Binlog Deployment Topology](/tidb-binlog-deployment-topology.md). For detailed deployment information, refer to [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md).
 
 ## Deploy TiDB Binlog using a Binary package
 
