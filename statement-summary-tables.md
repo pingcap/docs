@@ -13,7 +13,7 @@ Therefore, starting from v4.0.0-rc.1, TiDB provides system tables in `informatio
 - [`statements_summary`](#statements_summary)
 - [`statements_summary_history`](#statements_summary_history)
 - [`cluster_statements_summary`](#cluster_statements_summary-and-cluster_statements_summary_history)
-- [`cluster_statements_summary_history`](#cluster_statements_summary-and-cluster_statements_summary_history)
+- [`statements_summary_evicted`](#statements_summary_evicted)
 
 This document details these tables and introduces how to use them to troubleshoot SQL performance issues.
 
