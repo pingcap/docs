@@ -91,7 +91,7 @@ The fields `SUMMARY_BEGIN_TIME` and `SUMMARY_END_TIME` represent the start time 
 
 ## `statements_summary_evicted`
 
-The `tidb_stmt_summary_max_stmt_count` variable controls the maximum number of statements that the `statement summary` table stores in memory. The `statement summary` table uses the LRU algorithm. Once the types of SQL statements exceed the `tidb_stmt_summary_max_stmt_count` value, the longest unused record is evicted from the table. The number of evicted SQL statements during each period are recorded in the `statements_summary_evicted` table.
+The `tidb_stmt_summary_max_stmt_count` variable controls the maximum number of statements that the `statement summary` table stores in memory. The `statement summary` table uses the LRU algorithm. Once the number of SQL statements exceed the `tidb_stmt_summary_max_stmt_count` value, the longest unused record is evicted from the table. The number of evicted SQL statements during each period are recorded in the `statements_summary_evicted` table.
 
 The `statements_summary_evicted` table is updated only when a SQL record is evicted from the `statement summary` table. The `statements_summary_evicted` only records the period during which the eviction occurs and the number of evicted SQL statements.
 
