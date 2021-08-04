@@ -15,7 +15,6 @@ Therefore, starting from v4.0.0-rc.1, TiDB provides system tables in `informatio
 - [`cluster_statements_summary`](#statements_summary_evicted)
 - [`cluster_statements_summary_history`](#statements_summary_evicted)
 - [`statements_summary_evicted`](#statements_summary_evicted)
-- [`statements_summary_evicted`](#statements_summary_evicted)
 
 This document details these tables and introduces how to use them to troubleshoot SQL performance issues.
 
