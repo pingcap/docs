@@ -5,15 +5,19 @@ summary: Learn how to migrate full data from Amazon Aurora MySQL to TiDB.
 
 # Overview of migration from Aurora to TiDB
 
-This document introduces how to migrate full data from Amazon Aurora MySQL to TiDB.
+This document introduces how to migrate full data from Amazon Aurora MySQL to TiDB. Here is a list of tools that may be used and the differences
 
-[Dumpling](https://github.com/pingcap/dumpling) exports data stored in TiDB/MySQL as SQL or CSV data files and can be used to make a logical full backup or export.
+|Tool|Data Export|Data Import|Increment Sync|Export Speed| Import Speed|
+|:-: |:-:|:-:|:-:|:-:|:-:|
+|[Dumpling](https://github.com/pingcap/dumpling)|Yes|No|No|Very Fast|-|
+|[Lightning](/tidb-lightning/tidb-lightning-overview.md)|No|Yes|No|-|Very Fast|
+|[Data Migration](https://github.com/pingcap/dm) (DM)|Yes|Yes|Yes|Very Fast | Normal|
 
-[Lightning](/tidb-lightning/tidb-lightning-overview.md) is a tool used for fast full import of large amounts of data into a TiDB cluster. 
+Using Aurora's existing snapshot is the most convenient way, but beacuse [DM](https://github.com/pingcap/dm) does not yet support the parquet format, so we need to 
 
-[Data Migration](https://github.com/pingcap/dm) (DM) is an  data migration task management platform, supports the full data migration and  incremental data replication into TiDB. 
-
-Using Aurora's existing snapshot mechanism is the most convenient way, but beacuse [DM](https://github.com/pingcap/dm) does not yet support the parquet format, so we need to use [Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview) for full data import first, and then use [DM](https://github.com/pingcap/dm) for incremental data synchronization.
+1. Use Dumpling for schema export.
+2. Use Lightning for full schema and data import. 
+3. Use DM for incremental data synchronization.
 
 ***
 

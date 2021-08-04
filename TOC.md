@@ -42,23 +42,24 @@
     + [Test TiDB Using TPC-C](/benchmark/benchmark-tidb-using-tpcc.md)
 + Migrate
   + [Overview](/migration-overview.md)
-  + From MySQL To TiDB
-    + [Overview](/data-migration/mysql/migrate-mysql-overview.md)
-    + [MySQL ≥ 1TB](/data-migration/mysql/huge-data.md)
-    + [MySQL ＜ 1TB](/data-migration/mysql/small-data.md)
-    + [Incremental migration](/data-migration/mysql/increment-mysql.md)
+  + [Quick installation](/data-migration/quick_install_tools.md)
   + From Amazon Aurora To TiDB
     + [Overview](/data-migration/aurora/migrate-aurora-overview.md)
-    + [From Aurora snapshot](/data-migration/aurora/from-snapshot.md)
-    + [Incremental migration](/data-migration/aurora/increment-aurora.md)
+    + [Full import of data from a snapshot](/data-migration/aurora/from-snapshot.md)
+    + [Continuous incremental migration of data](/data-migration/aurora/increment-aurora.md)
+  + Migrate From MySQL To TiDB
+    + [Overview](/data-migration/mysql/migrate-mysql-overview.md)
+    + [Migration of total data more than terabytes](/data-migration/mysql/huge-data.md)
+    + [Migration of total data less than terabytes](/data-migration/mysql/small-data.md)
+    + [Continuous incremental migration of data](/data-migration/mysql/increment-mysql.md)
   + From Files To TiDB
     + [Overview](/data-migration/file/file-migration-overview.md)
-    + [CSV files](/data-migration/file/csv-tidb.md)
-    + [SQL files](/data-migration/file/sql-tidb.md)
+    + [Importing data from CSV files](/data-migration/file/csv-tidb.md)
+    + [Importing data from SQL files](/data-migration/file/sql-tidb.md)
   + From Cloud To TiDB
     + [Overview](/data-migration/cloud/migrate-cloud-overview.md)
-    + [Amazon](/data-migration/cloud/aws-tidb.md)
-    + [Google](/data-migration/cloud/google-tidb.md)
+    + [Migrating data from Amazon](/data-migration/cloud/aws-tidb.md)
+    + [Migrating data from Google](/data-migration/cloud/google-tidb.md)
   + From TiDB To TiDB
       + [Overview](/data-migration/tidb-tidb.md)
   + Advanced Migration To TiDB
