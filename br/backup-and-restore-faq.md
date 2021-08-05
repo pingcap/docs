@@ -36,9 +36,9 @@ Running BR with the root access might fail due to the disk permission, because t
 >
 > You might encounter the same problem during data restoration. When the SST files are read for the first time, the read permission is verified. The execution duration of DDL suggests that there might be a long interval between checking the permission and running BR. You might receive the error message `Permission denied` after waiting for a long time.
 >
-> Therefore, It is recommended to check the permission before data restoration according to the following steps:
+> Therefore, it is recommended to check the permission before data restore according to the following steps:
 
-1. execute Linux native command for process query:
+1. Execute the Linux-native command for process query:
 
     {{< copyable "shell-regular" >}}
 
@@ -53,7 +53,7 @@ Running BR with the root access might fail due to the disk permission, because t
     tidb_ouo  9236  9.8  3.8 2048940 631136 ?      Ssl  08:28   1:05 bin/tikv-server --addr 0.0.0.0:20161 --advertise-addr 172.16.6.118:20161 --status-addr 0.0.0.0:20189 --advertise-status-addr 172.16.6.118:20189 --pd 172.16.6.118:2379 --data-dir /home/user1/tidb-data/tikv-20161 --config conf/tikv.toml --log-file /home/user1/tidb-deploy/tikv-20161/log/tikv.log
     ```
 
-    Or you can execute the following commands:
+    Or you can execute the following command:
 
     {{< copyable "shell-regular" >}}
 
@@ -68,7 +68,7 @@ Running BR with the root access might fail due to the disk permission, because t
     tidb_ouo
     ```
 
-2. query the startup information of the cluster using the TiUP command:
+2. Query the startup information of the cluster using the TiUP command:
 
     {{< copyable "shell-regular" >}}
 
@@ -86,7 +86,7 @@ Running BR with the root access might fail due to the disk permission, because t
     tidb_cluster  tidb_ouo  v5.0.2   /root/.tiup/storage/cluster/clusters/tidb_cluster  /root/.tiup/storage/cluster/clusters/tidb_cluster/ssh/id_rsa
     ```
 
-3. check permissions for backup directory, for example, `backup` directory is for data storage backup:
+3. Check the permission for the backup directory. For example, `backup` is for backup data storage:
 
     {{< copyable "shell-regular" >}}
 
@@ -103,7 +103,7 @@ Running BR with the root access might fail due to the disk permission, because t
     drwxr-xr-x 11 root root 310 Jul  4 10:35 ..
     ```
 
-    From the above output, you can find that `tikv-server` instance is started by user `tidb_ouo`. But because user `tidb_ouo` does not have the write permission for `backup`, backup fails.
+    From the above output, you can find that the `tikv-server` instance is started by the user `tidb_ouo`. But the user `tidb_ouo` does not have the write permission for `backup`, the backup fails.
 
 ## What should I do to handle the `Io(Os...)` error?
 
