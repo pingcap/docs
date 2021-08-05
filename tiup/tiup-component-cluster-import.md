@@ -17,6 +17,7 @@ Before TiDB v4.0, TiDB clusters were mainly deployed using TiDB Ansible. For TiD
 > + Clusters with TiDB Lightning/TiKV Importer enabled
 > + Clusters still using the old `push` mode to collect monitoring metrics (if you keep the default mode `pull` unchanged, using the `import` command is supported)
 > + Clusters in which the non-default ports (the ports configured in the `group_vars` directory are compatible) are separately configured in the `inventory.ini` configuration file using `node_exporter_port` / `blackbox_exporter_port`
+> + If some nodes in the cluster deployed with TiDB Ansible are not deployed with monitoring components, you should first use TiDB Ansible to add the corresponding node information in `monitored_servers`section of `inventory.ini` file, and then use `deploy.yaml` playbook to fully deployed monitoring components. Otherwise, after data is imported into TiUP, when you perform other maintenance operations, errors might occur due to the lack of monitoring components.
 
 ## Syntax
 
