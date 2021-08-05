@@ -9,7 +9,7 @@ aliases: ['/docs/dev/tidb-monitoring-api/']
 You can use the following two types of interfaces to monitor the TiDB cluster state:
 
 - [The state interface](#running-status): this interface uses the HTTP interface to get the component information.
-- [Storage information](#storage-information): it uses the HTTP interface to get the storage information from data tables.
+- [Storage information](#storage-information): this interface uses the HTTP interface to get the storage information of data tables.
 - [The metrics interface](#use-the-metrics-interface): this interface uses Prometheus to record the detailed information of the various operations in components and views these metrics using Grafana.
 
 ## Use the state interface
@@ -36,7 +36,7 @@ curl http://127.0.0.1:10080/status
 
 #### Storage information
 
-The following example uses `http://${host}:${port}/schema_storage/${db}/${table}` to get the storage information from the specific data tables. The result is returned in **JSON** format.
+The following example uses `http://${host}:${port}/schema_storage/${db}/${table}` to get the storage information of the specific data table. The result is returned in **JSON** format.
 
 {{< copyable "shell-regular" >}}
 
