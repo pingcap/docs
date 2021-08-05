@@ -349,11 +349,11 @@ This error occurs usually because the CSV data file does not contain a header (t
 header = false
 ```
 
-## How to get goroutine information when TiDB Lightning is running
+## How to get the runtime goroutine information of TiDB Lightning
 
-1. If the configuration file of TiDB Lightning has specified [`status-port`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-configuration), skip this step. Otherwise, you need to send USR1 signal to TiDB Lightning to enable `status-port`.
+1. If [`status-port`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-configuration) has been specified in the configuration file of TiDB Lightning, skip this step. Otherwise, you need to send the USR1 signal to TiDB Lightning to enable `status-port`.
 
-    Execute commands like `ps` to get the PID of TiDB Lightning, and then run the following command to check the log of TiDB Lightning：
+    Get the process ID (PID) of TiDB Lightning using commands like `ps`, and then run the following command:
 
     {{< copyable "shell-regular" >}}
 
@@ -361,6 +361,6 @@ header = false
     kill -USR1 <lightning-pid>
     ```
 
-    In the output of this command, the log of `starting HTTP server` / `start HTTP server` / `started HTTP server` shows new enabled `status-port`.
+    Check the log of TiDB Lightning. The log of `starting HTTP server` / `start HTTP server` / `started HTTP server` shows the newly enabled `status-port`.
 
-2. Access `http://<lightning-ip>:<status-port>/debug/pprof/goroutine?debug=2` to get goroutine information.
+2. Access `http://<lightning-ip>:<status-port>/debug/pprof/goroutine?debug=2` to get the goroutine information.
