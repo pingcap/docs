@@ -518,3 +518,29 @@ Type "I consent" to continue, anything else to exit: I consent
 > **Note**
 >
 > The command will expose data encryption keys as plaintext. In production, DO NOT redirect the output to a file. Even deleting the output file afterward may not cleanly wipe out the content from disk.
+
+### Print the bad sst files and related information
+
+Sometimes the TiKV process will panic because some sst files are damaged. You can use the `bad-ssts` command to print information about bad sst files. Before running this command, stop the running TiKV instance.
+
+```bash
+$ tikv-ctl bad-ssts --db </path/to/tikv/db> --pd <endpoint>
+--------------------------------------------------------
+corruption info:
+data/tikv-21107/db/000014.sst: Corruption: Bad table magic number: expected 9863518390377041911, found 759105309091689679 in data/tikv-21107/db/000014.sst
+
+sst meta:
+14:552997[1 .. 5520]['0101' seq:1, type:1 .. '7A7480000000000000FF0F5F728000000000FF0002160000000000FAFA13AB33020BFFFA' seq:2032, type:1] at level 0 for Column family "default"  (ID 0)
+it isn't easy to handle local data, start key:0101
+
+overlap region:
+RegionInfo { region: id: 4 end_key: 7480000000000000FF0500000000000000F8 region_epoch { conf_ver: 1 version: 2 } peers { id: 5 store_id: 1 }, leader: Some(id: 5 store_id: 1) }
+
+suggested operations:
+tikv-ctl ldb --db=data/tikv-21107/db unsafe_remove_sst_file "data/tikv-21107/db/000014.sst"
+tikv-ctl --db=data/tikv-21107/db tombstone -r 4 --pd <endpoint>
+--------------------------------------------------------
+corruption analysis has completed
+```
+
+The above output is an example. The command print corruption sst information first, and then print related meta information. Take the above output as an example: 14 means sst number, 552997 means file size, followed by the smallest and largest seqno and other meta information. This command will also try to get the region involved through PD server. Finally, you can clean up the bad ssts according to the suggested operations and restart the TiKV instance.
