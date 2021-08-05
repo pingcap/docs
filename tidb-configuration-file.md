@@ -326,6 +326,11 @@ Configuration items related to security.
 + Default value: `"plaintext"`, which disables encryption.
 + Optional values: `"plaintext"` and `"aes128-ctr"`
 
+### `auto-tls`
+
+- Automatic generation of TLS certificates on startup.
+- Default value: `true`
+
 ## Performance
 
 Configuration items related to performance.
