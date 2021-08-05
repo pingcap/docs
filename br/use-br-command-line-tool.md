@@ -438,11 +438,11 @@ In the above command, `--table` specifies the name of the table to be restored. 
 
 Restoring incremental data is similar to [restoring full data using BR](#restore-all-the-backup-data). Note that when restoring incremental data, make sure that all the data backed up before `last backup ts` has been restored to the target cluster.
 
-### Restore tables created in `mysql` database (experimental feature)
+### Restore tables created in the `mysql` schema (experimental feature)
 
-BR backups tables created in `mysql` database by default.
+BR backs up tables created in the `mysql` schema by default.
 
-When you are restoring data using BR, the tables created in `mysql` database are not restored by default. If you need to restore them, explicitly contain them using [table filter](/table-filter.md#syntax). The following example restores `mysql.usertable` created in `mysql` database. The command restores `mysql.usertable` and other data at the same time.
+When you restore data using BR, the tables created in the `mysql` schema are not restored by default. If you need to restore these tables, you can explicitly include them using the [table filter](/table-filter.md#syntax). The following example restores `mysql.usertable` created in `mysql` schema. The command restores `mysql.usertable` along with other data.
 
 {{< copyable "shell-regular" >}}
 
@@ -450,7 +450,7 @@ When you are restoring data using BR, the tables created in `mysql` database are
 br restore full -f '*.*' -f '!mysql.*' -f 'mysql.usertable' -s $external_storage_url
 ```
 
-In the above command, `-f '*.*'` is used to cover the default rules and `-f '!mysql.*'` instructs BR not to restore tables in `mysql` unless otherwise stated. `-f 'mysql.usertable'` indicates that `mysql.usertable` is required to be restored. For details, refer to [table filter document](/table-filter.md#syntax).
+In the above command, `-f '*.*'` is used to override the default rules and `-f '!mysql.*'` instructs BR not to restore tables in `mysql` unless otherwise stated. `-f 'mysql.usertable'` indicates that `mysql.usertable` is required for restore. For detailed implementation, refer to the [table filter document](/table-filter.md#syntax).
 
 If you only need to restore `mysql.usertable`, use the following command:
 
@@ -462,14 +462,14 @@ br restore full -f 'mysql.usertable' -s $external_storage_url
 
 > **Warning:**
 >
-> Although you can back up and restore system tables (such as `mysql.tidb`) using BR tools, some unexpected conditions might appear after the restore. The known exceptions are as follows:
+> Although you can back up and restore system tables (such as `mysql.tidb`) using the BR tool, some unexpected situations might occur after the restore, including:
 >
-> - statistics information table (`mysql.stat_*`) cannot be restored.
-> - system variable table (`mysql.tidb`，`mysql.global_variables`) cannot be restored.
-> - user information table (such as `mysql.user`，`mysql.columns_priv`) cannot be restored.
+> - the statistical information tables (`mysql.stat_*`) cannot be restored.
+> - the system variable tables (`mysql.tidb`，`mysql.global_variables`) cannot be restored.
+> - the user information tables (such as `mysql.user` and `mysql.columns_priv`) cannot be restored.
 > - GC data cannot be restored.
 > 
-> For restoring system tables, more compatibility issues might occur. To avoid something unexpected, do not restore system tables in the production enviroment.
+> Restoring system tables might cause more compatibility issues. To avoid unexpected issues, **DO NOT** restore system tables in the production environment.
 
 ### Restore Raw KV (experimental feature)
 
