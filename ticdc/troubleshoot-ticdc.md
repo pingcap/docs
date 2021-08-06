@@ -399,7 +399,7 @@ cdc cli changefeed update -c test-cf --pd=http://10.0.10.25:2379 --start-ts 4152
 cdc cli changefeed resume -c test-cf --pd=http://10.0.10.25:2379
 ```
 
-## The default value of the time type is inconsistent when replicating a DDL statement to the downstream MySQL 5.7. What can I do?
+## The default value of the time type field is inconsistent when replicating a DDL statement to the downstream MySQL 5.7. What can I do?
 
 Suppose that the `create table test (id int primary key, ts timestamp)` statement is executed in the upstream TiDB. When TiCDC replicates this statement to the downstream MySQL 5.7, MySQL uses the default configuration. The table schema after the replication is as follows. The default value of the `timestamp` field becomes `CURRENT_TIMESTAMP`:
 
