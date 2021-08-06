@@ -403,7 +403,6 @@ cdc cli changefeed resume -c test-cf --pd=http://10.0.10.25:2379
 > + The steps above only apply to TiCDC v5.0.0 or later (excluding v5.0.0-rc).
 > + In v5.0.0-rc, the changefeed's checkpoint-ts after the DDL execution failure is the DDL statement's finish-ts. After using `cdc cli changefeed resume` to resume the replication task, this DDL statement will be skipped.
 
-
 ## The default value of the time type field is inconsistent when replicating a DDL statement to the downstream MySQL 5.7. What can I do?
 
 Suppose that the `create table test (id int primary key, ts timestamp)` statement is executed in the upstream TiDB. When TiCDC replicates this statement to the downstream MySQL 5.7, MySQL uses the default configuration. The table schema after the replication is as follows. The default value of the `timestamp` field becomes `CURRENT_TIMESTAMP`:
