@@ -810,6 +810,11 @@ In the output of the above command, if the value of `sort-engine` is "unified", 
 > **Note:**
 >
 > + If your servers use mechanical hard drives or other storage devices that have high latency or limited bandwidth, use the unified sorter with caution.
+<<<<<<< HEAD
 > + The total free capacity of hard drives must be greater than or equal to 128G. If you need to replicate a large amount of historical data, make sure that the free capacity on each node is greater than or equal to the size of the incremental data that needs to be replicated.
 > + Since v4.0.13, Unified sorter is enabled by default. If your servers do not match the above requirements and you want to disable the unified sorter, you need to manually set `sort-engine` to `memory` for the changefeed.
+=======
+> + The total free capacity of hard drives must be greater than or equal to 500G. If you need to replicate a large amount of historical data, make sure that the free capacity on each node is greater than or equal to the size of the incremental data that needs to be replicated.
+> + Unified sorter is enabled by default. If your servers do not match the above requirements and you want to disable the unified sorter, you need to manually set `sort-engine` to `memory` for the changefeed.
+>>>>>>> 3c5352b03 (ticdc: add explicit_defaults_for_timestamp compatibility troubleshoot (#6115))
 > + To enable Unified Sorter on an existing changefeed, see the methods provided in [How do I handle the OOM that occurs after TiCDC is restarted after a task interruption?](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-the-oom-that-occurs-after-ticdc-is-restarted-after-a-task-interruption).
