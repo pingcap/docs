@@ -328,7 +328,7 @@ Configuration items related to security.
 
 ### `auto-tls`
 
-- Automatic generation of TLS certificates on startup.
+- Determines whether to automatically generate the TLS certificates on startup.
 - Default value: `true`
 
 ## Performance
