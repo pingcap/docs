@@ -525,6 +525,9 @@ Damaged SST files in TiKV might cause the TiKV process to panic. To clean up the
 
 ```bash
 $ tikv-ctl bad-ssts --db </path/to/tikv/db> --pd <endpoint>
+```
+
+```bash
 --------------------------------------------------------
 corruption info:
 data/tikv-21107/db/000014.sst: Corruption: Bad table magic number: expected 9863518390377041911, found 759105309091689679 in data/tikv-21107/db/000014.sst
