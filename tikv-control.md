@@ -519,9 +519,9 @@ Type "I consent" to continue, anything else to exit: I consent
 >
 > The command will expose data encryption keys as plaintext. In production, DO NOT redirect the output to a file. Even deleting the output file afterward may not cleanly wipe out the content from disk.
 
-### Print the bad sst files and related information
+### Print information related to damaged SST files
 
-Sometimes the TiKV process will panic because some sst files are damaged. You can use the `bad-ssts` command to print information about bad sst files. Before running this command, stop the running TiKV instance.
+Damaged SST files in TiKV might cause the TiKV process to panic. To clean up the damaged SST files, you will need the information of these files. To get the information, you can execute the `bad-ssts` command in TiKV Control. The needed information is shown in the output. The following is an example command and output.
 
 ```bash
 $ tikv-ctl bad-ssts --db </path/to/tikv/db> --pd <endpoint>
@@ -543,4 +543,7 @@ tikv-ctl --db=data/tikv-21107/db tombstone -r 4 --pd <endpoint>
 corruption analysis has completed
 ```
 
-The above output is an example. The command print corruption sst information first, and then print related meta information. Take the above output as an example: 14 means sst number, 552997 means file size, followed by the smallest and largest seqno and other meta information. This command will also try to get the region involved through PD server. Finally, you can clean up the bad ssts according to the suggested operations and restart the TiKV instance.
+From the output above, you can see that the information of the damaged SST file is printed first and then the meta-information is printed.
++ In the `sst meta` part, `14` means the SST file number; `552997` means the file size, followed by the smallest and largest sequence numbers and other meta-information.
++ The `overlap region` part shows the information of the Region involved. This information is obtained through the PD server.
++ The `suggested operations` part provides you suggestion to clean up the damaged SST file. You can take the suggestion to clean up files and restart the TiKV instance.
