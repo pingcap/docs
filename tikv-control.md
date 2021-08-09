@@ -544,6 +544,7 @@ corruption analysis has completed
 ```
 
 From the output above, you can see that the information of the damaged SST file is printed first and then the meta-information is printed.
+
 + In the `sst meta` part, `14` means the SST file number; `552997` means the file size, followed by the smallest and largest sequence numbers and other meta-information.
 + The `overlap region` part shows the information of the Region involved. This information is obtained through the PD server.
 + The `suggested operations` part provides you suggestion to clean up the damaged SST file. You can take the suggestion to clean up files and restart the TiKV instance.
