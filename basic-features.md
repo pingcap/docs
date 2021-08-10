@@ -59,9 +59,9 @@ The following table provides an overview of the feature development history of T
 | `SELECT INTO OUTFILE`                                                                                    | Y            | Y            | Y            | N            | N            | N            |
 | `INNER JOIN`, `LEFT\|RIGHT [OUTER] JOIN`                                                                 | Y            | Y            | Y            | Y            | Y            | Y            |
 | `UNION`, `UNION ALL`                                                                                     | Y            | Y            | Y            | Y            | Y            | Y            |
-| [`EXCEPT` and `INTERSECT` operators](/functions-and-operators/set-operators.md)                                                  | Y            | Y            | N            | N            | N            | N            |
+| [`EXCEPT` and `INTERSECT` operators](/functions-and-operators/set-operators.md)                          | Y            | Y            | N            | N            | N            | N            |
 | `GROUP BY`, `ORDER BY`                                                                                   | Y            | Y            | Y            | Y            | Y            | Y            |
-| [Window Functions](/functions-and-operators/window-functions.md)                                                                 | Y            | Y            | Y            | Y            | Y            | N            |
+| [Window Functions](/functions-and-operators/window-functions.md)                                         | Y            | Y            | Y            | Y            | Y            | N            |
 | [Common Table Expressions (CTE)](/sql-statements/sql-statement-with.md)                                  | Y            | N            | N            | N            | N            | N            |
 | `START TRANSACTION`, `COMMIT`, `ROLLBACK`                                                                | Y            | Y            | Y            | Y            | Y            | Y            |
 | [`EXPLAIN`](/sql-statements/sql-statement-explain.md)                                                    | Y            | Y            | Y            | Y            | Y            | Y            |
@@ -70,11 +70,11 @@ The following table provides an overview of the feature development history of T
 | [Prepared statement cache](/sql-prepare-plan-cache.md)                                                   | Experimental | Experimental | Experimental | N            | N            | N            |
 | [SQL plan management (SPM)](/sql-plan-management.md)                                                     | Y            | Y            | Y            | N            | N            | N            |
 | [Coprocessor cache](/coprocessor-cache.md)                                                               | Y            | Y            | Experimental | N            | N            | N            |
-| [Placement rules in SQL](/configure-placement-rules.md)                                                  | Experimental | Experimental | Experimental | N            | N            | N            |
+| [Stale Read](/stale-read.md)                                                                             | Y            | N            | N            | N            | N            | N            |
 | [Follower reads](/follower-read.md)                                                                      | Y            | Y            | Y            | Y            | N            | N            |
 | [Read historical data (tidb_snapshot)](/read-historical-data.md)                                         | Y            | Y            | Y            | Y            | Y            | Y            |
 | [Optimizer hints](/optimizer-hints.md)                                                                   | Y            | Y            | Y            | Y            | Y            | Y            |
-| [MPP Exection Engine](/explain-mpp.md)                                                                           | Y            | Y            | N            | N            | N            | N            |
+| [MPP Exection Engine](/explain-mpp.md)                                                                   | Y            | Y            | N            | N            | N            | N            |
 | **Data definition language (DDL)**                                                                       | **5.1**      | **5.0**      | **4.0**      | **3.1**      | **3.0**      | **2.1**      |
 | Basic `CREATE`, `DROP`, `ALTER`, `RENAME`, `TRUNCATE`                                                    | Y            | Y            | Y            | Y            | Y            | Y            |
 | [Generated columns](/generated-columns.md)                                                               | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
@@ -84,7 +84,7 @@ The following table provides an overview of the feature development history of T
 | [Auto random](/auto-random.md)                                                                           | Y            | Y            | Y            | N            | N            | N            |
 | [DDL algorithm assertions](/sql-statements/sql-statement-alter-table.md)                                 | Y            | Y            | Y            | N            | N            | N            |
 | Multi schema change: add column(s)                                                                       | Y            | Y            | N            | N            | N            | N            |
-| [Change column type](/sql-statements/sql-statement-modify-column.md)                                      | Y            | N            | N            | N            | N            | N            |
+| [Change column type](/sql-statements/sql-statement-modify-column.md)                                     | Y            | N            | N            | N            | N            | N            |
 | **Transactions**                                                                                         | **5.1**      | **5.0**      | **4.0**      | **3.1**      | **3.0**      | **2.1**      |
 | [Async commit](/system-variables.md#tidb_enable_async_commit-new-in-v50)                                 | Y            | Y            | N            | N            | N            | N            |
 | [1PC](/system-variables.md#tidb_enable_1pc-new-in-v50)                                                   | Y            | Y            | N            | N            | N            | N            |
