@@ -82,7 +82,9 @@ Perform the following steps in this section to deploy a TiDB cluster offline usi
 
 #### Step 1: Prepare the TiUP offline component package
 
-To prepare the TiUP offline component package, manually pack an offline component package using `tiup mirror clone`.
+Option 1: Select the corresponding version of the package of the TiDB server's offline mirrors (including the TiUP offline component package) on the [Download TiDB page](https://pingcap.com/download/).
+
+Option 2: To prepare the TiUP offline component package, manually pack an offline component package using `tiup mirror clone`.
 
 1. Install the TiUP package manager online.
 
@@ -131,6 +133,52 @@ To prepare the TiUP offline component package, manually pack an offline componen
         ```
 
         `tidb-community-server-${version}-linux-amd64.tar.gz` is an independent offline environment package.
+
+3. Customize the offline mirror, or adjust the contents of the existing offline  mirror.
+
+    If the package of the TiDB server's offline mirrors from the PingCAP website does not meet your specific needs, or if you want to make adjustments to the existing offline mirror (like adding a new version of a component), take the following process:
+
+    1. When pulling an offline mirror, you can get an incomplete offline mirror by specifying specific information, such as components and version. For example, you can pull an offline mirror that includes only the offline mirrors of TiUP v1.5.2 and TiUP Cluster by running the following command:
+
+        {{< copyable "shell-regular" >}}
+
+        ```bash
+        tiup mirror clone tiup-custom-mirror-v1.5.2 --tiup v1.5.2 --cluster v1.5.2
+        ```
+
+        If you only need the components for a particular platform, you can specify them through `--os`  and `--arch`.
+
+    2. Refer to step 2 mentioned above, "Install TiUP on the control machine",  send this incomplete offline mirror to the control machine in the isolated environment.
+
+    3. Check the path of the current offline mirror on the control machine in the isolated environment. If you installed TiUP in the newer versions, you can get the current mirror address by running the following command:
+
+        {{< copyable "shell-regular" >}}
+
+        ```bash
+        tiup mirror show
+        ```
+
+        If the above command indicates that the `show` command does not exist, you may now use an older version of TiUP. In this case, you can get the current mirror address from `$HOME/.tiup/tiup.toml`. Write down this mirror address, and then use `${base_mirror}` to refer to it.
+
+    4. Merge an incomplete offline mirror into an existing offline mirror:
+
+        First, copy the `keys` directory in the current offline mirror to the `$HOME/.tiup` directory:
+
+        {{< copyable "shell-regular" >}}
+
+        ```bash
+        cp -r ${base_mirror}/keys $HOME/.tiup/
+        ```
+
+        Then use the TiUP command to merge the incomplete offline mirror into the currently used mirror:
+
+        {{< copyable "shell-regular" >}}
+
+        ```bash
+        tiup mirror merge tiup-custom-mirror-v1.5.2
+        ```
+    
+    5. When the above steps are complete, check the results by running the `tiup list'command. In this document's example, you can find the `v1.5.2` version of the corresponding components in the outputs of `tiup list tiup` and `tiup list cluster`.
 
 #### Step 2: Deploy the offline TiUP component
 
