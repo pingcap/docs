@@ -1139,7 +1139,7 @@ DATA_PREVIEW: {
 
 ## MySQL compatibility
 
-This statement is a TiDB extension to MySQL syntax.
+The `ADMIN` statement is a TiDB extension to MySQL syntax.
 
 ## See also
 
