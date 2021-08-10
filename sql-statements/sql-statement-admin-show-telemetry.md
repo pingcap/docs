@@ -1137,7 +1137,6 @@ DATA_PREVIEW: {
 }
 ```
 
-
 ## MySQL compatibility
 
 This statement is a TiDB extension to MySQL syntax.
