@@ -23,7 +23,7 @@ The following table provides an overview of the feature development history of T
 | [Information functions](/functions-and-operators/information-functions.md)                               | Y            | Y            | Y            | Y            | Y            | Y            |
 | [JSON functions](/functions-and-operators/json-functions.md)                                             | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
 | [Aggregation functions](/functions-and-operators/aggregate-group-by-functions.md)                        | Y            | Y            | Y            | Y            | Y            | Y            |
-| [Window functions](/functions-and-operators/window-functions.md)                                         | Y            | Y            | Y            | Y            | Y            | Y            |
+| [Window functions](/functions-and-operators/window-functions.md)                                         | Y            | Y            | Y            | Y            | Y            | N            |
 | [Miscellaneous functions](/functions-and-operators/miscellaneous-functions.md)                           | Y            | Y            | Y            | Y            | Y            | Y            |
 | [Operators](/functions-and-operators/operators.md)                                                       | Y            | Y            | Y            | Y            | Y            | Y            |
 | [**Character sets**](/character-set-and-collation.md)                                                    | **5.1**      | **5.0**      | **4.0**      | **3.1**      | **3.0**      | **2.1**      |
