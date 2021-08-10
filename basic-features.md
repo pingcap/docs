@@ -35,11 +35,11 @@ The following table provides an overview of the feature development history of T
 | `binary`                                                                                                 | Y            | Y            | Y            | Y            | Y            | Y            |
 | [**Collations**](/character-set-and-collation.md)                                                        | **5.1**      | **5.0**      | **4.0**      | **3.1**      | **3.0**      | **2.1**      |
 | `utf8_bin`                                                                                               | Y            | Y            | Y            | Y            | Y            | Y            |
-| `utf8_general_ci`                                                                                        | Experimental | Experimental | Experimental | N            | N            | N            |
-| `utf8_unicode_ci`                                                                                        | Experimental | Experimental | Experimental | N            | N            | N            |
+| `utf8_general_ci`                                                                                        | Y            | Y            | Y            | N            | N            | N            |
+| `utf8_unicode_ci`                                                                                        | Y            | Y            | Y            | N            | N            | N            |
 | `utf8mb4_bin`                                                                                            | Y            | Y            | Y            | Y            | Y            | Y            |
-| `utf8mb4_general_ci`                                                                                     | Experimental | Experimental | Experimental | N            | N            | N            |
-| `utf8mb4_unicode_ci`                                                                                     | Experimental | Experimental | Experimental | N            | N            | N            |
+| `utf8mb4_general_ci`                                                                                     | Y            | Y            | Y            | N            | N            | N            |
+| `utf8mb4_unicode_ci`                                                                                     | Y            | Y            | Y            | N            | N            | N            |
 | `ascii_bin`                                                                                              | Y            | Y            | Y            | Y            | Y            | Y            |
 | `latin1_bin`                                                                                             | Y            | Y            | Y            | Y            | Y            | Y            |
 | `binary`                                                                                                 | Y            | Y            | Y            | Y            | Y            | Y            |
@@ -52,7 +52,7 @@ The following table provides an overview of the feature development history of T
 | [Composite `PRIMARY KEY`](/constraints.md)                                                               | Y            | Y            | Y            | Y            | Y            | Y            |
 | [Unique indexes](/constraints.md)                                                                        | Y            | Y            | Y            | Y            | Y            | Y            |
 | [Clustered index on integer `PRIMARY KEY`](/constraints.md)                                              | Y            | Y            | Y            | Y            | Y            | Y            |
-| [Clustered index on composite or non-integer key](/constraints.md)                                       | Experimental | Experimental | N            | N            | N            | N            |
+| [Clustered index on composite or non-integer key](/constraints.md)                                       | Y            | Y            | N            | N            | N            | N            |
 | **SQL statements** [^2]                                                                                  | **5.1**      | **5.0**      | **4.0**      | **3.1**      | **3.0**      | **2.1**      |
 | Basic `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `REPLACE`                                                  | Y            | Y            | Y            | Y            | Y            | Y            |
 | `INSERT ON DUPLICATE KEY UPDATE`                                                                         | Y            | Y            | Y            | Y            | Y            | Y            |
