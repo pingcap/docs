@@ -45,5 +45,5 @@ tiup install dumpling tidb-lightning dm dmctl
 ## Helpful Topics
 
 - [Deploy TiUP offline](/production-deployment-using-tiup#method-2-deploy-tiup-offline)
-- [Deploy TiDB Lightning manually](/deploy-tidb-lightning#deploy-tidb-lightning-manually)
+- [Deploy TiDB Lightning manually](/tidb-lightning/deploy-tidb-lightning.md#deploy-tidb-lightning-manually)
 - [Download Dumpling and DM](/download-ecosystem-tools#tidb-dm-data-migration)
