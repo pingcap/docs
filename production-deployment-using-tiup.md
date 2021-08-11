@@ -136,7 +136,7 @@ To prepare the TiUP offline component package, manually pack an offline componen
 
     If you want to adjust the existing offline mirror (such as adding a new version of a component), take the following steps:
 
-    1. When pulling an offline mirror, you can get an incomplete offline mirror by specifying specific information, such as components and version. For example, you can pull an offline mirror that includes only the offline mirrors of TiUP v1.5.2 and TiUP Cluster by running the following command:
+    1. When pulling an offline mirror, you can get an incomplete offline mirror by specifying specific information via parameters, such as the component and version information. For example, you can pull an offline mirror that includes only the offline mirror of TiUP v1.5.2 and TiUP Cluster v1.5.2 by running the following command:
 
         {{< copyable "shell-regular" >}}
 
@@ -144,11 +144,11 @@ To prepare the TiUP offline component package, manually pack an offline componen
         tiup mirror clone tiup-custom-mirror-v1.5.2 --tiup v1.5.2 --cluster v1.5.2
         ```
 
-        If you only need the components for a particular platform, you can specify them through `--os`  and `--arch`.
+        If you only need the components for a particular platform, you can specify them using the `--os`  or `--arch` parameter.
 
-    2. Refer to step 2 mentioned above, "Install TiUP on the control machine",  send this incomplete offline mirror to the control machine in the isolated environment.
+    2. Refer to the step 2 of "Pull the mirror using TiUP", and send this incomplete offline mirror to the control machine in the isolated environment.
 
-    3. Check the path of the current offline mirror on the control machine in the isolated environment. If you installed TiUP in the newer versions, you can get the current mirror address by running the following command:
+    3. Check the path of the current offline mirror on the control machine in the isolated environment. If your TiUP tool is of a newer version, you can get the current mirror address by running the following command:
 
         {{< copyable "shell-regular" >}}
 
@@ -156,7 +156,7 @@ To prepare the TiUP offline component package, manually pack an offline componen
         tiup mirror show
         ```
 
-        If the above command indicates that the `show` command does not exist, you may now use an older version of TiUP. In this case, you can get the current mirror address from `$HOME/.tiup/tiup.toml`. Write down this mirror address, and then use `${base_mirror}` to refer to it.
+        If the output of the above command indicates that the `show` command does not exist, you might be using an older version of TiUP. In this case, you can get the current mirror address from `$HOME/.tiup/tiup.toml`. Record this mirror address. In the following steps, `${base_mirror}` is used to refer to this address.
 
     4. Merge an incomplete offline mirror into an existing offline mirror:
 
@@ -168,7 +168,7 @@ To prepare the TiUP offline component package, manually pack an offline componen
         cp -r ${base_mirror}/keys $HOME/.tiup/
         ```
 
-        Then use the TiUP command to merge the incomplete offline mirror into the currently used mirror:
+        Then use the TiUP command to merge the incomplete offline mirror into the mirror in use:
 
         {{< copyable "shell-regular" >}}
 
@@ -176,7 +176,7 @@ To prepare the TiUP offline component package, manually pack an offline componen
         tiup mirror merge tiup-custom-mirror-v1.5.2
         ```
     
-    5. When the above steps are complete, check the results by running the `tiup list`command. In this document's example, you can find the `v1.5.2` version of the corresponding components in the outputs of `tiup list tiup` and `tiup list cluster`.
+    5. When the above steps are completed, check the result by running the `tiup list` command. In this document's example, the outputs of both `tiup list tiup` and `tiup list cluster` show that the version of the corresponding component is `v1.5.2`.
 
 #### Step 2: Deploy the offline TiUP component
 
