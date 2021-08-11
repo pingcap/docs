@@ -3,7 +3,6 @@ title: Quick install guide of TiDB data migration tools
 summary: Learn how to install TiDB data migration tools.
 ---
 
-
 # Migrate from Aurora snapshot to TiDB
 
 This document introduces how to install data migration related tools quickly.
