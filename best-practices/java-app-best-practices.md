@@ -207,9 +207,9 @@ After it is configured, you can check the monitoring to see a decreased number o
 
 #### Timeout-related parameters
 
-TiDB provides two timeout control parameters that are compatible with MySQL: `wait_timeout` and `max_execution_time`. These two parameters respectively control the connection idle timeout of the Java application and the timeout of the SQL execution in the connection; that is to say, the parameters control the longest idle time and the longest busy time for controlling the connection between TiDB and the Java application. The default value of both parameters is `0`, which by default allows the connection to be infinitely idle and infinitely busy (an infinite duration for one SQL statement to execute).
+TiDB provides two MySQL-compatible parameters that controls the timeout: `wait_timeout` and `max_execution_time`. These two parameters respectively control the connection idle timeout with the Java application and the timeout of the SQL execution in the connection; that is to say, these parameters control the longest idle time and the longest busy time for the connection between TiDB and the Java application. The default value of both parameters is `0`, which by default allows the connection to be infinitely idle and infinitely busy (an infinite duration for one SQL statement to execute).
 
-However, in an actual production environment, idle connections and SQL that executes indefinitely negatively impact databases and applications. To avoid idle connections and SQL statements that execute for too much time, you can configure these two parameters in your application's connection string. For example, set `sessionVariables=wait_timeout=3600` (1 hour) and `sessionVariables=max_execution_time=300000` (5 minutes).
+However, in an actual production environment, idle connections and SQL statements with excessively long execution time negatively affect databases and applications. To avoid idle connections and SQL statements that are executed for too long, you can configure these two parameters in your application's connection string. For example, set `sessionVariables=wait_timeout=3600` (1 hour) and `sessionVariables=max_execution_time=300000` (5 minutes).
 
 ## Connection pool
 
