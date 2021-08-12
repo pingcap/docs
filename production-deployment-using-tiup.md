@@ -113,13 +113,8 @@ The following topology documents provide a cluster configuration template for ea
 >
 > - For parameters that should be globally effective, configure these parameters of corresponding components in the `server_configs` section of the configuration file.
 > - For parameters that should be effective on a specific node, configure these parameters in the `config` of this node.
-<<<<<<< HEAD
-> - Use `.` to indicate the subcategory of the configuration, such as `log.slow-threshold`. For more formats, see [TiUP configuration template](https://github.com/pingcap/tiup/blob/master/embed/templates/examples/topology.example.yaml).
-> - For more parameter description, see [TiDB `config.toml.example`](https://github.com/pingcap/tidb/blob/release-4.0/config/config.toml.example), [TiKV `config.toml.example`](https://github.com/tikv/tikv/blob/release-4.0/etc/config-template.toml), [PD `config.toml.example`](https://github.com/tikv/pd/blob/release-4.0/conf/config.toml), and [TiFlash configuration](/tiflash/tiflash-configuration.md).
-=======
 > - Use `.` to indicate the subcategory of the configuration, such as `log.slow-threshold`. For more formats, see [TiUP configuration template](https://github.com/pingcap/tiup/blob/master/embed/examples/cluster/topology.example.yaml).
-> - For more parameter description, see [TiDB `config.toml.example`](https://github.com/pingcap/tidb/blob/master/config/config.toml.example), [TiKV `config.toml.example`](https://github.com/tikv/tikv/blob/master/etc/config-template.toml), [PD `config.toml.example`](https://github.com/pingcap/pd/blob/master/conf/config.toml), and [TiFlash configuration](/tiflash/tiflash-configuration.md).
->>>>>>> 21a8ec26d (tiup: fix dead links (#6153))
+> - For more parameter description, see [TiDB `config.toml.example`](https://github.com/pingcap/tidb/blob/release-4.0/config/config.toml.example), [TiKV `config.toml.example`](https://github.com/tikv/tikv/blob/release-4.0/etc/config-template.toml), [PD `config.toml.example`](https://github.com/tikv/pd/blob/release-4.0/conf/config.toml), and [TiFlash configuration](/tiflash/tiflash-configuration.md).
 
 ## Step 4: Execute the deployment command
 
