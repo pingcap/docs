@@ -720,28 +720,50 @@ Usage:
 {
   "min-hot-byte-rate": 100,
   "min-hot-key-rate": 10,
+  "min-hot-query-rate": 10,
   "max-zombie-rounds": 3,
   "max-peer-number": 1000,
   "byte-rate-rank-step-ratio": 0.05,
   "key-rate-rank-step-ratio": 0.05,
+  "query-rate-rank-step-ratio": 0.05,
   "count-rank-step-ratio": 0.01,
   "great-dec-ratio": 0.95,
   "minor-dec-ratio": 0.99,
-  "src-tolerance-ratio": 1.02,
-  "dst-tolerance-ratio": 1.02
+  "src-tolerance-ratio": 1.05,
+  "dst-tolerance-ratio": 1.05,
+  "read-priorities": [
+    "query",
+    "byte"
+  ],
+  "write-leader-priorities": [
+    "key",
+    "byte"
+  ],
+  "write-peer-priorities": [
+    "byte",
+    "key"
+  ],
+  "strict-picking-store": "true",
+  "enable-for-tiflash": "true"
 }
 ```
 
-- `min-hot-byte-rate` means the smallest byte counted, which is usually 100.
+- `min-hot-byte-rate` means the smallest number byte counted, which is usually 100.
 
     ```bash
     >> scheduler config balance-hot-region-scheduler set min-hot-byte-rate 100
     ```
 
-- `min-hot-key-rate` means the smallest key counted, which is usually 10.
+- `min-hot-key-rate` means the smallest number key counted, which is usually 10.
 
     ```bash
     >> scheduler config balance-hot-region-scheduler set min-hot-key-rate 10
+    ```
+
+- `min-hot-query-rate` means the smallest number query counted, which is usually 10.
+
+    ```bash
+    >> scheduler config balance-hot-region-scheduler set min-hot-query-rate 10
     ```
 
 - `max-zombie-rounds` means the maximum number of heartbeats with which an operator can be considered as the pending influence. If you set it to a larger value, more operators might be included in the pending influence. Usually, you do not need to adjust its value. Pending influence refers to the operator influence that is generated during scheduling but still has an effect.
@@ -756,7 +778,7 @@ Usage:
     >> scheduler config balance-hot-region-scheduler set max-peer-number 1000
     ```
 
-- `byte-rate-rank-step-ratio`, `key-rate-rank-step-ratio`, and `count-rank-step-ratio` respectively mean the step ranks of byte, key, and count. The rank step ratio decides the step when the rank is calculated. `great-dec-ratio` and `minor-dec-ratio` are used to determine the `dec` rank. Usually, you do not need to modify these items.
+- `byte-rate-rank-step-ratio`, `key-rate-rank-step-ratio`, `query-rate-rank-step-ratio`, and `count-rank-step-ratio` respectively mean the step ranks of byte, key, query, and count. The rank-step-ratio decides the step when the rank is calculated. `great-dec-ratio` and `minor-dec-ratio` are used to determine the `dec` rank. Usually, you do not need to modify these items.
 
     ```bash
     >> scheduler config balance-hot-region-scheduler set byte-rate-rank-step-ratio 0.05
@@ -765,7 +787,25 @@ Usage:
 - `src-tolerance-ratio` and `dst-tolerance-ratio` are configuration items for the expectation scheduler. The smaller the `tolerance-ratio`, the easier it is for scheduling. When redundant scheduling occurs, you can appropriately increase this value.
 
     ```bash
-    >> scheduler config balance-hot-region-scheduler set src-tolerance-ratio 1.05
+       >> scheduler config balance-hot-region-scheduler set src-tolerance-ratio 1.1
+    ```
+
+- `read-priorities`,`write-leader-priorities`, and `write-peer-priorities` control the first and second dimensions which have the first priority of balance when different types of hotspots are delt with. For hotspots of  `read` and `write-leader` types, the available dimensions are `query`, `byte`, and `key`. For hotspots of `write-peer`, the available dimensions are `byte` and `key`. If not all the cluster components are upgraded to v5.2 and later, these configurations will not take effect, and the compatible configurations will be used. Usually, you do not need to modify these configuration items.
+
+    ```bash
+    >> scheduler config balance-hot-region-scheduler set read-priorities query,byte
+    ```
+
+- `strict-picking-store` is a switch that controls the search space of hotspot scheduling. When it is enabled and if stability is ensured, hotspot scheduling will start. Usually it is enabled. When it is disabled, only the balance of dimensions of the first priority is enusred, which might reduce the balance of other dimensions. Usually, you do not need to modify this configuration item.
+
+    ```bash
+    >> scheduler config balance-hot-region-scheduler set strict-picking-store true
+    ```
+
+- `enable-for-tiflash` is a switch that controls whether hotspot scheduling takes effect for TiFlash. Usually it is enabled. When it is disabled, the hotspot scheduling between TiFlash instances will not start.
+
+    ```bash
+    >> scheduler config balance-hot-region-scheduler set enable-for-tiflash true
     ```
 
 ### `store [delete | label | weight | remove-tombstone | limit | limit-scene] <store_id>  [--jq="<query string>"]`
