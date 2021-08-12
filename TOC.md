@@ -43,23 +43,23 @@
 + Migrate
   + [Overview](/migration-overview.md)
   + [Quick installation](/data-migration/quick_install_tools.md)
-  + From Amazon Aurora To TiDB
+  + From Amazon Aurora to TiDB
     + [Overview](/data-migration/aurora/migrate-aurora-overview.md)
-    + [Full import of data from a snapshot](/data-migration/aurora/from-snapshot.md)
-    + [Continuous incremental migration of data](/data-migration/aurora/increment-aurora.md)
-  + Migrate From MySQL To TiDB
+    + [Full data migration from a snapshot](/data-migration/aurora/from-snapshot.md)
+    + [Continuous incremental data migration](/data-migration/aurora/increment-aurora.md)
+  + From MySQL to TiDB
     + [Overview](/data-migration/mysql/migrate-mysql-overview.md)
     + [Migration of total data more than terabytes](/data-migration/mysql/huge-data.md)
     + [Migration of total data less than terabytes](/data-migration/mysql/small-data.md)
-    + [Continuous incremental migration of data](/data-migration/mysql/increment-mysql.md)
+    + [Continuous incremental data migration](/data-migration/mysql/increment-mysql.md)
   + From Files To TiDB
     + [Overview](/data-migration/file/file-migration-overview.md)
-    + [Importing data from CSV files](/data-migration/file/csv-tidb.md)
-    + [Importing data from SQL files](/data-migration/file/sql-tidb.md)
+    + [Import data from CSV files](/data-migration/file/csv-tidb.md)
+    + [Import data from SQL files](/data-migration/file/sql-tidb.md)
   + From Cloud To TiDB
     + [Overview](/data-migration/cloud/migrate-cloud-overview.md)
-    + [Migrating data from Amazon](/data-migration/cloud/aws-tidb.md)
-    + [Migrating data from Google](/data-migration/cloud/google-tidb.md)
+    + [Migrate data from Amazon](/data-migration/cloud/aws-tidb.md)
+    + [Migrate data from Google](/data-migration/cloud/google-tidb.md)
   + From TiDB To TiDB
       + [Overview](/data-migration/tidb-tidb.md)
   + Advanced Migration To TiDB

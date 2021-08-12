@@ -5,20 +5,20 @@ summary: Learn how to migrate full data from Amazon Aurora MySQL to TiDB using T
 
 # Migrate from Aurora snapshot to TiDB
 
-This document introduces how to migrate full data from Amazon Aurora MySQL to TiDB using TiDB Lightning.Both Dumpling and Lighting  will be used in this article.
+This document introduces how to migrate full data from Amazon Aurora MySQL to TiDB using TiDB Lightning. Both Dumpling and Lighting are used in this document.
 
-## Complete the following tasks before start
+Before you start, make sure you have finished the following tasks:
 
 - [Deploy Lighting using TiUP](/data-migration/quick_install_tools.md)
 - [Deploy Dumping using TiUP](/data-migration/quick_install_tools.md)
 
 ***
 
-## Export snapshots of Aurora to S3
+## Step 1. Export snapshots of Aurora to S3
 
 Amazon's official documentation details how to generate a Snapshot to S3: [https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_ExportSnapshot.html](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_ExportSnapshot.html)
 
-## Use Dumpling to export table schema files
+## Step 2. Use Dumpling to export table schema files
 
 Because the snapshot data exported from Aurora to S3 does not contain the SQL statement file used to create database tables, you need to manually export and import the table creation statements corresponding to the database tables into TiDB. You can use Dumpling and TiDB Lightning to create all table schemas:
 
@@ -42,7 +42,7 @@ tiup dumpling --host ${host} --port 3306 --user root --password password --no-da
 >
 > For more parameters of Dumpling,see [Dumpling overview](/dumpling-overview.md)
 
-## Preparing the Lightning configuration file 
+## Step 3. Preparing the Lightning configuration file 
 
 Based on different deployment methods, edit the `tidb-lighting.toml` configuration file as follows:
 
@@ -90,7 +90,7 @@ type = '$3'
 > - If TLS is enabled in the target TiDB cluster, you also need to configure TLS.
 > - For more configurations, see [TiDB Lightning Configuration](/tidb-lightning/tidb-lightning-configuration.md).
 
-## Create table schema in TiDB
+## Step 4. Create table schema in TiDB
 
 Use TiDB Lightning to create table schemas:
 
@@ -106,7 +106,7 @@ In this example, TiDB Lightning is only used to create table schemas, so the abo
 >
 > If the number of database tables to create is relatively small, you can manually create the corresponding databases and tables in TiDB directly, or use other tools such as mysqldump to export the schema and then import it into TiDB.
 
-## Import data to TiDB
+## Step 5. Import data to TiDB
 
 Run TiDB Lightning to start the import operation. 
 

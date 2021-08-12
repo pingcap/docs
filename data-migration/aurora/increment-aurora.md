@@ -15,7 +15,7 @@ This article only introduces how to use DM for incremental synchronization
 
 ***
 
-## Precheck
+## Step 1. Precheck
 
 DM relies on the `ROW`-formatted binlog for incremental replication. See [Enable binary for an Aurora Cluster](https://aws.amazon.com/premiumsupport/knowledge-center/enable-binary-logging-aurora/?nc1=h_ls) for the configuration instruction.
 
@@ -25,7 +25,7 @@ If GTID is enabled in Aurora, you can migrate data based on GTID. For how to ena
 >
 > + GTID-based data migration requires MySQL 5.7 (Aurora 2.04) version or later.
 
-## Configure the data source
+## Step 2. Configure the data source
 
 > **Note:**
 >
@@ -72,7 +72,7 @@ When the data sources are successfully added, the return information of each dat
 }
 ```
 
-## Configure the task
+## Step 3. Configure the task
 
 > **Note:**
 >
@@ -120,7 +120,7 @@ mydumpers:
     extra-args: "--consistency none"  # Aurora does not support FTWRL, you need to configure this option to bypass FTWRL.
 ```
 
-## Start the task
+## Step 4. Start the task
 
 Start the task using `dmctl` through TiUP.
 
@@ -163,7 +163,7 @@ The returned information above shows that the `INVOKE LAMBDA` privilege causes a
 ignore-checking-items: ["replication_privilege","dump_privilege"]
 ```
 
-## Query the task and validate the data
+## Step 5: Query the task and validate the data
 
 Use `dmctl` through TiUP to query information of the on-going migration task and the task status.
 
