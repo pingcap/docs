@@ -118,7 +118,11 @@ tiup update cluster
 
     + If an error occurs when parsing the `Inventory` information, the import process is stopped, which does not have any impact on the original Ansible deployment method. Then you need to adjust and retry the process according to the error prompt.
 
+<<<<<<< HEAD
     + If the original cluster name in Ansible is the same with any existing cluster name in TiUP, a warning message is returned with a new cluster name. Therefore, **do not repeatedly import the same cluster**, which results in multiple names for the same cluster in TiUP.
+=======
+2. Refer to the format of [topology](https://github.com/pingcap/tiup/blob/master/embed/examples/cluster/topology.example.yaml) configuration template and fill the parameters you want to modify in the `server_configs` section of the topology file.
+>>>>>>> 21a8ec26d (tiup: fix dead links (#6153))
 
 After the import is complete, you can check the current cluster status by executing the `tiup cluster display <cluster-name>` command to verify the import result. Because the `display` command is used to query the real-time status of each node, it might take a little time to execute the command.
 
