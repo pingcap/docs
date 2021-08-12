@@ -421,10 +421,9 @@ DATA_PREVIEW: {
 1 row in set (0.0259 sec)
 ```
 
-
 ## MySQL compatibility
 
-This statement is a TiDB extension to MySQL syntax.
+The `ADMIN` statement is a TiDB extension to MySQL syntax.
 
 ## See also
 
