@@ -996,6 +996,20 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - This variable is used to set whether the optimizer executes the optimization operation of pushing down the aggregate function to the position before Join, Projection, and UnionAll.
 - When the aggregate operation is slow in query, you can set the variable value to ON.
 
+### `tidb_opt_limit_push_down_threshold`
+
+- Scope: SESSION | GLOBAL
+- Default value: `100`
+- Range: `[0, 2147483647]`
+- This variable is used to push down the Limit and TopN operators to the threshold in TiKV.
+- If the value of Limit or TopN is less than or equal to this threshold, then the Limit and TopN operators are forcibly pushed down to TiKV. This variable provides a solution when Limit or TopN cannot be pushed down due to estimation errors. 
+
+### `tidb_opt_enable_correlation_adjustment`
+
+- Scope: SESSION | GLOBAL
+- Default value:  `ON`
+- This variable is used for the optimizer whether to enable the method that estimates the number of rows based on column order correlation
+
 ### tidb_opt_correlation_exp_factor
 
 - Scope: SESSION | GLOBAL
