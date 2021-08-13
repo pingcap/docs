@@ -274,6 +274,11 @@ Configuration items related to log files.
 
 Configuration items related to security.
 
+### `require-secure-transport`
+
+- Determines whether to require the client to use the secure mode for data transport.
+- Default value: `false`
+
 ### `enable-sem`
 
 - Enables the Security Enhanced Mode (SEM).
@@ -320,6 +325,11 @@ Configuration items related to security.
 + Determines the encryption method used for saving the spilled files to disk.
 + Default value: `"plaintext"`, which disables encryption.
 + Optional values: `"plaintext"` and `"aes128-ctr"`
+
+### `auto-tls`
+
+- Determines whether to automatically generate the TLS certificates on startup.
+- Default value: `true`
 
 ## Performance
 
