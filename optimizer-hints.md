@@ -188,7 +188,7 @@ select /*+ AGG_TO_COP() */ sum(t1.a) from t t1;
 
 ### READ_FROM_STORAGE(TIFLASH[t1_name [, tl_name ...]], TIKV[t2_name [, tl_name ...]])
 
-The `READ_FROM_STORAGE(TIFLASH[t1_name [, tl_name ...]], TIKV[t2_name [, tl_name ...]])` hint tells the optimizer to read specific table(s) from specific storage engine(s). Currently, this hint supports two storage engine parameters - `TIKV` and `TIFLASH`. For example:
+The `READ_FROM_STORAGE(TIFLASH[t1_name [, tl_name ...]], TIKV[t2_name [, tl_name ...]])` hint tells the optimizer to read specific table(s) from specific storage engine(s). Currently, this hint supports two storage engine parameters - `TIKV` and `TIFLASH`. If the candidate table has an alias, you must use the alias as the parameter in `READ_FROM_STORAGE()`; if it does not has an alias, use the table's original name as the parameter. For example:
 
 {{< copyable "sql" >}}
 
