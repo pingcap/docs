@@ -29,7 +29,7 @@ Before you contribute, please take a quick look at some general information abou
 
 ### Learn about docs versions
 
-Currently, we maintain seven versions of TiDB documentation, each with a separate branch:
+Currently, we maintain the following versions of TiDB documentation, each with a separate branch:
 
 | Docs branch name | Version description |
 | :--- | :--- |
