@@ -637,6 +637,13 @@ Configuration items related to Raftstore
 + Default value: `1`
 + Minimum value: greater than `0`
 
+### `inspect-interval`
+
++ At a certain interval, TiKV inspects the latency status of the Raftstore thread. This parameter specifies the interval of inspection. If the latency exceeds this value, the Raftstore thread is marked as timeout. 
++ Judges whether the TiKV node is slow based on the ratio of inspected latency. 
++ Default value: 500ms
++ Minimum value: 1ms
+
 ## Coprocessor
 
 Configuration items related to Coprocessor
