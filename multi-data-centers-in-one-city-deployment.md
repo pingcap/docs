@@ -73,7 +73,7 @@ member leader_priority pdName3 3
 
 **Note**
 
-`label-property` is not supported in the TiDB v5.2 and later versions by default. To set the replica policy, use the [placement rules](/stable/configure-placement-rules.md).
+`label-property` is not supported in the TiDB v5.2 and later versions by default. To set the replica policy, use the [placement rules](/configure-placement-rules.md).
 
 **Disadvantages:**
 

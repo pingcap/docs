@@ -86,7 +86,7 @@ This section describes the key parameter configuration of the TiDB geo-distribut
 
    > **Note:**
    >
-   >`label-property` is not supported in the TiDB v5.2 and later versions by default. To set the replica policy, use the [placement rules](/stable/configure-placement-rules.md).
+   >`label-property` is not supported in the TiDB v5.2 and later versions by default. To set the replica policy, use the [placement rules](/configure-placement-rules.md).
 >
 > For the further information about labels and the number of Raft Group replicas, see [Schedule Replicas by Topology Labels](/schedule-replicas-by-topology-labels.md).
 >
