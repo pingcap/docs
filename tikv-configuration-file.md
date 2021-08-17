@@ -120,6 +120,11 @@ This document only describes the parameters that are not included in command-lin
 + Default value: `"1s"`
 + Minimum value: `0`
 
+### `raft-client-queue-size`
+
++ Specifies the queue size of the Raft messages. If too many messages not sent in time result in a full buffer, or messages discarded, you can specify a greater value to increase stability of the system. 
++ Default value: 8192
+
 ## readpool.unified
 
 Configuration items related to the single thread pool serving read requests. This thread pool supersedes the original storage thread pool and coprocessor thread pool since the 4.0 version.
@@ -636,6 +641,11 @@ Configuration items related to Raftstore
 + The allowable number of threads that drive `future`
 + Default value: `1`
 + Minimum value: greater than `0`
+
+### `cmd-batch`
+
++ Controls whether to enable batch processing of the requests. It can significantly improve the write performance. 
++ Default value: true
 
 ## Coprocessor
 
