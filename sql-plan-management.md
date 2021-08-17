@@ -293,14 +293,15 @@ Because the baseline evolution automatically creates a new binding, when the que
 SQL Plan Management (SPM) may fail in upgrade due to compatibility issues. You need to check the environment before upgrade to make sure it succeeds. 
 
 * When you upgrade from a version earlier than v5.2.0 (that is, v4.0, v5.0, and v5.1) to the current version, make sure `tidb_evolve_plan_baselines` is disabled. If not, you must disable it before upgrade. Perform the following steps. 
+
     {{< copyable "sql" >}}
 
     ```sql
--- Check whether `tidb_evolve_plan_baselines` is disabled in the earlier version. 
+    -- Check whether `tidb_evolve_plan_baselines` is disabled in the earlier version. 
   
     select @@global.tidb_evolve_plan_baselines;
   
--- If `tidb_evolve_plan_baselines` is still enabled, disable it. 
+    -- If `tidb_evolve_plan_baselines` is still enabled, disable it. 
   
     set global tidb_evolve_plan_baselines = off;
     ```
@@ -308,19 +309,19 @@ SQL Plan Management (SPM) may fail in upgrade due to compatibility issues. You n
 * Before you upgrade from v4.0 to the current version, you must check whether the grammar of all the SQL statements corresponding to available SQL bindings is correct in the new version. If any grammatical errors, delete the corresponding SQL bindings. 
 Perform the following steps.
 
-{{< copyable "sql" >}}
+    {{< copyable "sql" >}}
 
     ```sql
--- Check the SQL statements corresponding to available SQL bindings in the version to be upgraded.
+    -- Check the SQL statements corresponding to available SQL bindings in the version to be upgraded.
   
     select bind_sql from mysql.bind_info where source != 'builtin' and status = 'using';
   
--- Verify the result from the above SQL query in the test environment of the new version. 
+    -- Verify the result from the above SQL query in the test environment of the new version. 
   
     bind_sql_0;
     bind_sql_1;
     ...
   
--- In the case of a syntax error (ERROR 1064 (42000): You have an error in your SQL syntax), delete the corresponding binding. 
--- For any other errors (for example, tables are not found), it means the syntax is compatible. No intervention is needed. 
+    -- In the case of a syntax error (ERROR 1064 (42000): You have an error in your SQL syntax), delete the corresponding binding. 
+    -- For any other errors (for example, tables are not found), it means the syntax is compatible. No intervention is needed. 
     ```
