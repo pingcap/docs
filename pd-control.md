@@ -748,7 +748,7 @@ Usage:
 }
 ```
 
-- `min-hot-byte-rate` means the smallest number byte counted, which is usually 100.
+- `min-hot-byte-rate` means the smallest number of bytes to be counted, which is usually 100.
 
     ```bash
     >> scheduler config balance-hot-region-scheduler set min-hot-byte-rate 100
