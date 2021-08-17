@@ -282,7 +282,7 @@ Usage:
     >> config set hot-region-schedule-limit 4       // 4 tasks of hot Region scheduling at the same time at most
     ```
 
-- `hot-region-cache-hits-threshold` is used to set the number of minutes required to identify a hot Region. PD can participate in the hotspot scheduling only after the Region is in the hotspot state for more than this number of minutes.
+- `hot-region-cache-hits-threshold` is used to set the number of minutes required to identify a hot Region. PD can participate in the hot region scheduling only after the Region is in the hotspot state for more than this number of minutes.
 
 - `tolerant-size-ratio` controls the size of the balance buffer area. When the score difference between the leader or Region of the two stores is less than specified multiple times of the Region size, it is considered in balance by PD.
 
@@ -790,19 +790,19 @@ Usage:
        >> scheduler config balance-hot-region-scheduler set src-tolerance-ratio 1.1
     ```
 
-- `read-priorities`,`write-leader-priorities`, and `write-peer-priorities` control the first and second dimensions which have the first priority of balance when different types of hotspots are dealt with. For hotspots of `read` and `write-leader` types, the available dimensions are `query`, `byte`, and `key`. For hotspots of `write-peer`, the available dimensions are `byte` and `key`. If not all the cluster components are upgraded to v5.2 and later, these configurations do not take effect, and the compatible configurations are used. Usually, you do not need to modify these configuration items.
+- `read-priorities`,`write-leader-priorities`, and `write-peer-priorities` control the first and second dimensions which have the first priority of balance when different types of hot regions are dealt with. For hot regions of `read` and `write-leader` types, the available dimensions are `query`, `byte`, and `key`. For hot regions of `write-peer`, the available dimensions are `byte` and `key`. If not all the cluster components are upgraded to v5.2 and later, these configurations do not take effect, and the compatible configurations are used. Usually, you do not need to modify these configuration items.
 
     ```bash
     >> scheduler config balance-hot-region-scheduler set read-priorities query,byte
     ```
 
-- `strict-picking-store` is a switch that controls the search space of hotspot scheduling. When it is enabled and if stability is ensured, hotspot scheduling will start. Usually it is enabled. When it is disabled, only the balance of dimensions of the first priority is enusred, which might reduce the balance of other dimensions. Usually, you do not need to modify this configuration item.
+- `strict-picking-store` is a switch that controls the search space of hot region scheduling. When it is enabled and if stability is ensured, hot region scheduling will start. Usually it is enabled. When it is disabled, only the balance of dimensions of the first priority is enusred, which might reduce the balance of other dimensions. Usually, you do not need to modify this configuration item.
 
     ```bash
     >> scheduler config balance-hot-region-scheduler set strict-picking-store true
     ```
 
-- `enable-for-tiflash` is a switch that controls whether hotspot scheduling takes effect for TiFlash. Usually it is enabled. When it is disabled, the hotspot scheduling between TiFlash instances do not start.
+- `enable-for-tiflash` is a switch that controls whether hot region scheduling takes effect for TiFlash. Usually it is enabled. When it is disabled, the hot region scheduling between TiFlash instances do not start.
 
     ```bash
     >> scheduler config balance-hot-region-scheduler set enable-for-tiflash true
