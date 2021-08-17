@@ -192,6 +192,10 @@ In the deployment of three DCs in two cities, to optimize performance, you need 
     ```yaml
     config set label-property reject-leader dc 3
     ```
+   
+   > **Note:**
+   >
+   >`label-property` is not supported in the TiDB v5.2 and later versions by default. To set the replica policy, use the [placement rules](/stable/configure-placement-rules.md).
 
 - Configure the priority of PD. To avoid the situation where the PD leader is in another city (IDC3), you can increase the priority of local PD (in Seattle) and decrease the priority of PD in another city (San Francisco). The larger the number, the higher the priority.
 
