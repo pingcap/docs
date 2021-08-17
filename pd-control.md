@@ -754,13 +754,13 @@ Usage:
     >> scheduler config balance-hot-region-scheduler set min-hot-byte-rate 100
     ```
 
-- `min-hot-key-rate` means the smallest number key counted, which is usually 10.
+- `min-hot-key-rate` means the smallest number of keys to be counted, which is usually 10.
 
     ```bash
     >> scheduler config balance-hot-region-scheduler set min-hot-key-rate 10
     ```
 
-- `min-hot-query-rate` means the smallest number query counted, which is usually 10.
+- `min-hot-query-rate` means the smallest number of queries to be counted, which is usually 10.
 
     ```bash
     >> scheduler config balance-hot-region-scheduler set min-hot-query-rate 10
