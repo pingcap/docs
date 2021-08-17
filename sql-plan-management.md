@@ -164,7 +164,7 @@ In the example above, the dropped binding in the SESSION scope shields the corre
 
 > **Note:**
 >
-> Executing `DROP GLOBAL BINDING` drops the binding in the current tidb-server instance cache and changes the status of the corresponding row in the system table to 'deleted'. This statement will not directly delete the records in the system table, because other tidb-server instances need to read the 'deleted' status to drop the corresponding binding in their cache. For the records in these system tables with the status of 'deleted', at every 100 `bind-info-lease` (the default value is `3s`, `300s` in total) interval, the background thread triggers an operation of reclaiming and clearing to 10 bindings of `update_time` before `bind-info-lease` (to ensure that all tidb-server instances have read the 'deleted' status and updated the cache).
+> Executing `DROP GLOBAL BINDING` drops the binding in the current tidb-server instance cache and changes the status of the corresponding row in the system table to 'deleted'. This statement will not directly delete the records in the system table, because other tidb-server instances need to read the 'deleted' status to drop the corresponding binding in their cache. For the records in these system tables with the status of 'deleted', at every 100 `bind-info-lease` (the default value is `3s`, `300s` in total) interval, the background thread triggers an operation of reclaiming and clearing to bindings of `update_time` before 10 `bind-info-lease` (to ensure that all tidb-server instances have read the 'deleted' status and updated the cache).
 
 ### View binding
 
@@ -196,7 +196,7 @@ This statement outputs the execution plan bindings at the GLOBAL or SESSION leve
 SELECT [SESSION] @@last_plan_from_binding;
 ```
 
-This statement uses the system variable [`last_plan_from_binding`](/system-variables.md#last_plan_from_binding-new-in-v40) to show whether the execution plan used by the last executed statement is from the execution plan of binding.
+This statement uses the system variable [`last_plan_from_binding`](/system-variables.md#last_plan_from_binding-new-in-v40) to show whether the execution plan used by the last executed statement is from the binding.
 
 In addition, when you use the `explain format = 'verbose'` statement to view the query plan of an SQL statement, if the SQL statement uses binding, the `explain` statement will return a warning. Under this condition, you can check the warning message to learn which binding is used in the SQL statement.
 
@@ -256,7 +256,7 @@ The default value of `tidb_evolve_plan_baselines` is `off`.
 > **Warning:**
 >
 > The feature baseline evolution is an experimental feature. Unknown risks exist. It is **NOT** recommended that you use it in the production environment.
-> This variable switch is forced off until it automatically evolves to be generally available. If you try to enable the feature, an error will be returned. If you have already used this feature in a production environment, disable it as soon as possible. If you find that the binding status is not as expected, contact PingCAP's technical supporters for help.
+> This variable switch is forced off until the feature baseline evolution to be generally available. If you try to enable the feature, an error will be returned. If you have already used this feature in a production environment, disable it as soon as possible. If you find that the binding status is not as expected, contact PingCAP's technical supporters for help.
 
 After the automatic binding evolution feature is enabled, if the optimal execution plan selected by the optimizer is not among the binding execution plans, the optimizer marks the plan as an execution plan that waits for verification. At every `bind-info-lease` (the default value is `3s`) interval, an execution plan to be verified is selected and compared with the binding execution plan that has the least cost in terms of the actual execution time. If the plan to be verified has shorter execution time (the current criterion for the comparison is that the execution time of the plan to be verified is no longer than 2/3 that of the binding execution plan), this plan is marked as a usable binding. The following example describes the process above.
 
