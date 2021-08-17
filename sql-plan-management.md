@@ -306,8 +306,7 @@ SQL Plan Management (SPM) may fail in upgrade due to compatibility issues. You n
     set global tidb_evolve_plan_baselines = off;
     ```
 
-* Before you upgrade from v4.0 to the current version, you must check whether the grammar of all the SQL statements corresponding to available SQL bindings is correct in the new version. If any grammatical errors, delete the corresponding SQL bindings. 
-Perform the following steps.
+* Before you upgrade from v4.0 to the current version, you must check whether the grammar of all the SQL statements corresponding to available SQL bindings is correct in the new version. If any grammatical errors, delete the corresponding SQL bindings. Perform the following steps.
 
     {{< copyable "sql" >}}
 
