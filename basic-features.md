@@ -133,4 +133,6 @@ The following table provides an overview of the feature development history of T
 | [Kubernetes operator](https://docs.pingcap.com/tidb-in-kubernetes/)                                      | Y            | Y            | Y            | Y            | Y            | Y            |
 | [Built-in physical backup](/br/backup-and-restore-use-cases.md)                                          | Y            | Y            | Y            | N            | N            | N            |
 
-[^1]: TiDB incorrectly treats latin1 as a subset of utf8. See [TiDB #18955](https://github.com/pingcap/tidb/issues/18955) for more details. [^2]: See [Statement Reference](/sql-statements/sql-statement-select.md) for a full list of SQL statements supported.
+[^1]: TiDB incorrectly treats latin1 as a subset of utf8. See [TiDB #18955](https://github.com/pingcap/tidb/issues/18955) for more details.
+
+[^2]: See [Statement Reference](/sql-statements/sql-statement-select.md) for a full list of SQL statements supported.
