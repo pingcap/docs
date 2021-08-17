@@ -790,7 +790,7 @@ Usage:
        >> scheduler config balance-hot-region-scheduler set src-tolerance-ratio 1.1
     ```
 
-- `read-priorities`,`write-leader-priorities`, and `write-peer-priorities` control the first and second dimensions which have the first priority of balance when different types of hotspots are delt with. For hotspots of  `read` and `write-leader` types, the available dimensions are `query`, `byte`, and `key`. For hotspots of `write-peer`, the available dimensions are `byte` and `key`. If not all the cluster components are upgraded to v5.2 and later, these configurations will not take effect, and the compatible configurations will be used. Usually, you do not need to modify these configuration items.
+- `read-priorities`,`write-leader-priorities`, and `write-peer-priorities` control the first and second dimensions which have the first priority of balance when different types of hotspots are dealt with. For hotspots of `read` and `write-leader` types, the available dimensions are `query`, `byte`, and `key`. For hotspots of `write-peer`, the available dimensions are `byte` and `key`. If not all the cluster components are upgraded to v5.2 and later, these configurations do not take effect, and the compatible configurations are used. Usually, you do not need to modify these configuration items.
 
     ```bash
     >> scheduler config balance-hot-region-scheduler set read-priorities query,byte
@@ -802,7 +802,7 @@ Usage:
     >> scheduler config balance-hot-region-scheduler set strict-picking-store true
     ```
 
-- `enable-for-tiflash` is a switch that controls whether hotspot scheduling takes effect for TiFlash. Usually it is enabled. When it is disabled, the hotspot scheduling between TiFlash instances will not start.
+- `enable-for-tiflash` is a switch that controls whether hotspot scheduling takes effect for TiFlash. Usually it is enabled. When it is disabled, the hotspot scheduling between TiFlash instances do not start.
 
     ```bash
     >> scheduler config balance-hot-region-scheduler set enable-for-tiflash true
