@@ -333,12 +333,12 @@ Configuration items related to the flow control mechanism in TiKV. This mechanis
 
 ### `soft-pending-compaction-bytes-limit`
 
-+ When the pending compaction bytes in KvDB reaches this threshold, the flow control mechanism starts to reject some write requests and reports the `ServerIsBusy` error.
++ When the pending compaction bytes in KvDB reach this threshold, the flow control mechanism starts to reject some write requests and reports the `ServerIsBusy` error.
 + Default value: `"192GB"`
 
 ### `hard-pending-compaction-bytes-limit`
 
-+ When the pending compaction bytes in KvDB reaches this threshold, the flow control mechanism rejects all write requests and reports the `ServerIsBusy` error.
++ When the pending compaction bytes in KvDB reach this threshold, the flow control mechanism rejects all write requests and reports the `ServerIsBusy` error.
 + Default value: `"1024GB"`
 
 ## storage.io-rate-limit
