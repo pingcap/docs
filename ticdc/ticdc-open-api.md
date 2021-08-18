@@ -5,6 +5,8 @@ summary: Learn how to use the Open API interface to manage the cluster status an
 
 # TiCDC Open API
 
+<!-- markdownlint-disable MD024 -->
+
 > **Warning:**
 >
 > TiCDC Open API is still an experimental feature. It is not recommended to use it in a production environment.
@@ -13,22 +15,22 @@ TiCDC provides the Open API feature. Using the APIs, you can query and operate t
 
 You can use the Open APIs to perform the following maintenance operations on the TiCDC cluster:
 
--[Get the status information of a TiCDC node](#get-the-status-information-of-a-ticdc-node)
--[Check the health status of a TiCDC cluster](#check-the-health-status-of-a-ticdc-cluster)
--[Create a replication task](#create-a-replication-task)
--[Remove a replication task](#remove-a-replication-task)
--[Update the replication configuration](#update-the-replication-configuration)
--[Query the replication task list](#query-the-replication-task-list)
--[Query a specific replication task](#query-a-specific-replication-task)
--[Pause a replication task] (#pause-a-replication-task)
--[Resume a replication task](#resume-a-replication-task)
--[Query the replication subtask list](#query-the-replication-subtask-list)
--[Query a specific replication subtask](#query-a-specific-replication-subtask)
--[Query the TiCDC service process list](#query-the-ticdc-service-process-list)
--[Evict an owner node](#evict-an-owner-node)
--[Manually trigger the load balancing of a table] (#manually-trigger-the-load-balancing-of-a-table)
--[Manually schedule a table to another node] (#manually-schedule-a-table-to-another-node)
--[Dynamically adjust the log level of the TiCDC server](#dynamically-adjust-the-log-level-of-the-ticdc-server)
+- [Get the status information of a TiCDC node](#get-the-status-information-of-a-ticdc-node)
+- [Check the health status of a TiCDC cluster](#check-the-health-status-of-a-ticdc-cluster)
+- [Create a replication task](#create-a-replication-task)
+- [Remove a replication task](#remove-a-replication-task)
+- [Update the replication configuration](#update-the-replication-configuration)
+- [Query the replication task list](#query-the-replication-task-list)
+- [Query a specific replication task](#query-a-specific-replication-task)
+- [Pause a replication task] (#pause-a-replication-task)
+- [Resume a replication task](#resume-a-replication-task)
+- [Query the replication subtask list](#query-the-replication-subtask-list)
+- [Query a specific replication subtask](#query-a-specific-replication-subtask)
+- [Query the TiCDC service process list](#query-the-ticdc-service-process-list)
+- [Evict an owner node](#evict-an-owner-node)
+- [Manually trigger the load balancing of a table](#manually-trigger-the-load-balancing-of-a-table)
+- [Manually schedule a table to another node](#manually-schedule-a-table-to-another-node)
+- [Dynamically adjust the log level of the TiCDC server](#dynamically-adjust-the-log-level-of-the-ticdc-server)
 
 The request body and returned value of all APIs are in JSON format. The following sections describes the specific usage of the Open APIs.
 
@@ -179,7 +181,7 @@ This is an asynchronous interface. If the request is successful, `202 Accepted` 
 
 ### Request URI
 
-DELETE /api/v1/changefeeds/{changefeed_id}
+`DELETE /api/v1/changefeeds/{changefeed_id}`
 
 ### Parameter description
 
@@ -209,7 +211,7 @@ To modify the changefeed configuration, follow the steps of `pause the replicati
 
 ### Request URI
 
-PUT /api/v1/changefeeds/{changefeed_id}
+`PUT /api/v1/changefeeds/{changefeed_id}`
 
 ### Parameter description
 
