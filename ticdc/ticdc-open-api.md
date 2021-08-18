@@ -203,7 +203,7 @@ curl -X DELETE http://127.0.0.1:8300/api/v1/changefeeds/test1
 
 If the request is successful, `202 Accepted` is returned. If the request fails, an error message and error code are returned.
 
-Update the replication configuration
+## Update the replication configuration
 
 This is an asynchronous interface. If the request is successful, `202 Accepted` is returned. The returned result only means that the server agrees to run the command but does not guarantee that the command will be run successfully.
 
