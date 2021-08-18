@@ -1,6 +1,7 @@
 ---
 title: Two Data Centers in One City Deployment
 summary: Learn the deployment solution to two data centers in one city.
+aliases: ['/docs/dev/synchronous-replication-for-dual-data-centers/']
 ---
 
 # Two Data Centers in One City Deployment with DR Auto-Sync Mode
