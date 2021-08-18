@@ -11,7 +11,7 @@ summary: Learn how to use the Open API interface to manage the cluster status an
 >
 > TiCDC Open API is still an experimental feature. It is not recommended to use it in a production environment.
 
-TiCDC provides the Open API feature. Using the APIs, you can query and operate the TiCDC cluster. Overall, the Open API feature is similar to that of [`cdc cli` tool] (/ticdc/manage-ticdc.md#use-cdc-cli-to-manage-cluster-status-and-data-replication-task).
+TiCDC provides the Open API feature for querying and operating the TiCDC cluster, which is similar to that of [`cdc cli` tool] (/ticdc/manage-ticdc.md#use-cdc-cli-to-manage-cluster-status-and-data-replication-task).
 
 You can use the Open APIs to perform the following maintenance operations on the TiCDC cluster:
 
