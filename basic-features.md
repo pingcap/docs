@@ -98,6 +98,7 @@ The following table provides an overview of the feature development history of T
 | [Hash partitioning](/partitioned-table.md)                                                               | Y            | Y            | Y            | Y            | Y            | N            |
 | [List partitioning](/partitioned-table.md)                                                               | Experimental | Experimental | N            | N            | N            | N            |
 | [List COLUMNS partitioning](/partitioned-table.md)                                                       | Experimental | Experimental | N            | N            | N            | N            |
+| [`EXCHANGE PARTITION`](/partitioned-table.md)                                                            | Experimental | Experimental | N            | N            | N            | N            |
 | **Statistics**                                                                                           | **5.1**      | **5.0**      | **4.0**      | **3.1**      | **3.0**      | **2.1**      |
 | [CMSketch](/statistics.md)                                                                               | Deprecated   | Deprecated   | Y            | Y            | Y            | Y            |
 | [Histograms](/statistics.md)                                                                             | Y            | Y            | Y            | Y            | Y            | Y            |
