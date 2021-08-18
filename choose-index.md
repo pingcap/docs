@@ -45,7 +45,7 @@ TiDB uses the following heuristic pre rules to select indexes:
 
 + rule 4: If only one candidate index is selected based on rule 2 and 3, select this index. If two candidate indexes are separately selected based on rule 2 and 3, select the index with the smaller number of rows to be read (the number of rows with index + the number of rows to be retrieved from a table).
 
-The "unique indexes with full match" in rule 1 means each indexed column has the equivalent qualification. When executing the `EXPLAIN FORMAT = 'verbose' ...` statement, if the pre rules matches an index, TiDB will output a NOTE level warning indicating that the index matches the pre rule.
+The "index with full match" in the above rules means each indexed column has the equal condition. When executing the `EXPLAIN FORMAT = 'verbose' ...` statement, if the pre rules matches an index, TiDB will output a NOTE level warning indicating that the index matches the pre rule.
 
 In the following example, because the index `idx_b` meets the condition "unique index + need to retrieve rows from a table" in rule 2, TiDB selects the index `idx_b` as the access path, and `SHOW WARNING` returns a note indicating that the index  `idx_b` matches the pre rule.
 
