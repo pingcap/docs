@@ -117,6 +117,8 @@ all_sql_digests: ["e6f07d43b5c21db0fbb9a31feac2dc599787763393dd5acbfad80e247eb02
        all_sqls: ["begin","update `t` set `v` = `v` + ? where `id` = ?"]
 ```
 
+This query calls the [`TIDB_DECODE_SQL_DIGESTS`](/functions-and-operators/tidb-functions.md#tidb_decode_sql_digests) function on the `ALL_SQL_DIGESTS` column of the `TIDB_TRX` table, and converts the SQL digest array into an array of normalized SQL statement through the system's internal query. This helps you visually obtain the information of the statements that have been historically executed by the transaction. However, note that the above query scans the entire table of `TIDB_TRX` and calls the `TIDB_DECODE_SQL_DIGESTS` function for each row. Calling the `TIDB_DECODE_SQL_DIGESTS` function has a high overhead. Therefore, if many concurrent transactions exist in the cluster, try to avoid this type of query.
+
 ## CLUSTER_TIDB_TRX
 
 The `TIDB_TRX` table only provides information about the transactions that are being executed on a single TiDB node. If you want to view the information of the transactions that are being executed on all TiDB nodes in the entire cluster, you need to query the `CLUSTER_TIDB_TRX` table. Compared with the query result of the `TIDB_TRX` table, the query result of the `CLUSTER_TIDB_TRX` table contains an extra `INSTANCE` field. The `INSTANCE` field displays the IP address and port of each node in the cluster, which is used to distinguish the TiDB node where the transaction is located.
