@@ -243,7 +243,7 @@ Since v5.1, TiDB supports the Lock View feature. This feature has several system
 
 > **Note:**
 >
-> The SQL statements shown in the Lock View-related system tables are normalized SQL statements (that is, SQL statements without format and parameters), which are obtained by SQL digest internal query, so the tables cannot obtain the complete statements that include the format and parameters. For the detailed description of SQL digests and normalized SQL statement, see [Statement Summary Tables](/statement-summary-tables.md).
+> The SQL statements shown in the Lock View-related system tables are normalized SQL statements (that is, SQL statements without format and arguments), which are obtained by internal queries according to SQL digests, so the tables cannot obtain the complete statements that include the format and arguments. For the detailed description of SQL digests and normalized SQL statement, see [Statement Summary Tables](/statement-summary-tables.md).
 
 The following sections show the examples of troubleshooting some issues using these tables.
 
@@ -266,9 +266,9 @@ select * from information_schema.deadlocks;
 +-------------+----------------------------+-----------+--------------------+------------------------------------------------------------------+-----------------------------------------+----------------------------------------+----------------------------------------------------------------------------------------------------+--------------------+
 ```
 
-The query result above shows the waiting relationship among multiple transactions in the deadlock error, the normalized form of the SQL statements currently being executed in each transaction (statements without format and parameters), the key on which the conflict occurs, and the information of the key.
+The query result above shows the waiting relationship among multiple transactions in the deadlock error, the normalized form of the SQL statements currently being executed in each transaction (statements without format and arguments), the key on which the conflict occurs, and the information of the key.
 
-For example, in the above example, the first row means that the transaction with the ID of `426812829645406216` is executing a statement like ``update `t` set `v` =? Where `id` =? ;`` but is blocked by another transaction with the ID of `426812829645406217`. The transaction with the ID of `426812829645406217` is also executing a statement like ``update `t` set `v` =? Where `id` =? ;`` but is blocked by the transaction with the ID of `426812829645406216`. The two transactions thus form a deadlock.
+For example, in the above example, the first row means that the transaction with the ID of `426812829645406216` is executing a statement like ``update `t` set `v` =? Where `id` =? ;`` but is blocked by another transaction with the ID of `426812829645406217`. The transaction with the ID of `426812829645406217` is also executing a statement that is in the form of ``update `t` set `v` =? Where `id` =? ;`` but is blocked by the transaction with the ID of `426812829645406216`. The two transactions thus form a deadlock.
 
 #### A few hot keys cause queueing locks
 
@@ -361,6 +361,6 @@ CURRENT_SQL_DIGEST_TEXT: update `t` set `v` = `v` + ? where `id` = ? ;
 1 row in set (0.01 sec)
 ```
 
-In the above query, the [`TIDB_DECODE_SQL_DIGESTS`](/functions-and-operators/tidb-functions.md#tidb_decode_sql_digests) function is used on the `ALL_SQL_DIGESTS` column of the `CLUSTER_TIDB_TRX` table. This function tries to convert this column (the value is a set of SQL digests) to the normalized SQL statement, which improves readability.
+In the above query, the [`TIDB_DECODE_SQL_DIGESTS`](/functions-and-operators/tidb-functions.md#tidb_decode_sql_digests) function is used on the `ALL_SQL_DIGESTS` column of the `CLUSTER_TIDB_TRX` table. This function tries to convert this column (the value is a set of SQL digests) to the normalized SQL statements, which improves readability.
 
 If the `start_ts` of the current transaction is unknown, you can try to find it out from the information in the `TIDB_TRX` / `CLUSTER_TIDB_TRX` table or in the [`PROCESSLIST` / `CLUSTER_PROCESSLIST`](/information-schema/information-schema-processlist.md) table.

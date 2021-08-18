@@ -34,14 +34,14 @@ The meaning of each column field in the `DATA_LOCK_WAITS` table is as follows:
 * `TRX_ID`: The ID of the transaction that is waiting for the lock. This ID is also the `start_ts` of the transaction.
 * `CURRENT_HOLDING_TRX_ID`: The ID of the transaction that currently holds the lock. This ID is also the `start_ts` of the transaction.
 * `SQL_DIGEST`: The digest of the SQL statement that is currently blocked in the lock-waiting transaction.
-* `SQL_DIGEST_TEXT`: The normalized SQL statement (the SQL statement without parameters and format) that is currently blocked in the lock-waiting transaction. It corresponds to `SQL_DIGEST`.
+* `SQL_DIGEST_TEXT`: The normalized SQL statement (the SQL statement without arguments and format) that is currently blocked in the lock-waiting transaction. It corresponds to `SQL_DIGEST`.
 
 > **Warning:**
 >
-> * Only the users with the [PROCESS](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process) permission can query this table.
+> * Only the users with the [PROCESS](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process) privilege can query this table.
 > * The information in the `DATA_LOCK_WAITS` table is obtained in real time from all TiKV nodes during the query. Currently, even if a query has the `WHERE` condition, the information collection is still performed on all TiKV nodes. If your cluster is large and the load is high, querying this table might cause potential risk of performance jitter. Therefore, use it according to your actual situation.
-> * Information from different TiKV nodes is not necessarily in snapshots of the same point in time.
-> * The information (SQL digest) in the `SQL_DIGEST` column is the hash value calculated after the SQL statement is normalized. The information in the `SQL_DIGEST_TEXT` column is internally queried from the series of statements summary tables, so the corresponding statement might not be queried internally. For the detailed description of SQL digests and the statements summary table, see [Statement Summary Tables](/statement-summary-tables.md).
+> * Information from different TiKV nodes is NOT guaranteed to be in snapshots of the same point in time.
+> * The information (SQL digest) in the `SQL_DIGEST` column is the hash value calculated from the normalized SQL statement. The information in the `SQL_DIGEST_TEXT` column is internally queried from statements summary tables, so it is possible that the corresponding statement cannot be found internally. For the detailed description of SQL digests and the statements summary tables, see [Statement Summary Tables](/statement-summary-tables.md).
 
 ## `KEY_INFO`
 
@@ -62,7 +62,7 @@ The `KEY_INFO` column shows the detailed information of the key in the `KEY` col
 * `"index_name"`: The name of the index to which the index key belongs.
 * `"index_values"`: The index value in the index key.
 
-In the above fields, if the information is not applicable or currently unavailable, it is omitted. For example, the row key information does not contain `index_id`, `index_name`, and `index_values`; the index key does not contain `handle_type` and `handle_value`; non-partitioned tables do not display `partition_id` and `partition_name`; the key information in the deleted table cannot obtain schema information from `table_name`, `db_id`, `db_name`, and `index_name`, and it is unable to distinguish whether it is a partitioned table.
+In the above fields, if the information is not applicable or currently unavailable, it is omitted. For example, the row key information does not contain `index_id`, `index_name`, and `index_values`; the index key does not contain `handle_type` and `handle_value`; non-partitioned tables do not display `partition_id` and `partition_name`; the key information in the deleted table cannot obtain schema information such as `table_name`, `db_id`, `db_name`, and `index_name`, and it is unable to distinguish whether it is a partitioned table.
 
 > **Note:**
 >

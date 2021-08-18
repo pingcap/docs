@@ -15,9 +15,6 @@ DESC deadlocks;
 ```
 
 ```sql
-+--------------------+---------------------+------+------+---------+-------+
-| Field              | Type                | Null | Key  | Default | Extra |
-+--------------------+---------------------+------+------+---------+-------+
 +-------------------------+---------------------+------+------+---------+-------+
 | Field                   | Type                | Null | Key  | Default | Extra |
 +-------------------------+---------------------+------+------+---------+-------+
@@ -42,7 +39,7 @@ The meaning of each column field in the `DEADLOCKS` table is as follows:
 * `RETRYABLE`: Whether the deadlock error can be retried. For the description of retryable deadlock errors, see the [Retryable deadlock errors](#retryable-deadlock-errors) section.
 * `TRY_LOCK_TRX_ID`: The ID of the transaction that tries to acquire lock. This ID is also the `start_ts` of the transaction.
 * `CURRENT_SQL_DIGEST`: The digest of the SQL statement currently being executed in the lock-acquiring transaction.
-* `CURRENT_SQL_DIGEST_TEXT`: The normalized SQL statement currently being executed in the lock-adding transaction.
+* `CURRENT_SQL_DIGEST_TEXT`: The normalized SQL statement currently being executed in the lock-acquiring transaction.
 * `KEY`: The blocked key that the transaction tries to lock. The value of this field is displayed in the form of hexadecimal string.
 * `KEY_INFO`: The detailed information of `KEY`. See the [KEY_INFO](#key_info) section.
 * `TRX_HOLDING_LOCK`: The ID of the transaction that currently holds the lock on the key and causes blocking. This ID is also the `start_ts` of the transaction.
@@ -51,8 +48,8 @@ To adjust the maximum number of deadlock events that can be recorded in the `DEA
 
 > **Warning:**
 >
-> * Only users with the [PROCESS](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process) permission can query this table.
-> * The information (SQL digest) in the `CURRENT_SQL_DIGEST` column is the hash value calculated after the SQL statement is normalized. The information in the `CURRENT_SQL_DIGEST_TEXT` column is internally queried from the series of statements summary tables, so the corresponding statement might not be queried internally. For the detailed description of SQL digests and the statements summary table, see [Statement Summary Tables](/statement-summary-tables.md).
+> * Only users with the [PROCESS](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process) privilege can query this table.
+> * The information (SQL digest) in the `CURRENT_SQL_DIGEST` column is the hash value calculated from the normalized SQL statement. The information in the `CURRENT_SQL_DIGEST_TEXT` column is internally queried from statements summary tables, so it is possible that the corresponding statement cannot be found internally. For the detailed description of SQL digests and the statements summary tables, see [Statement Summary Tables](/statement-summary-tables.md).
 
 ## `KEY_INFO`
 
@@ -73,7 +70,7 @@ The `KEY_INFO` column shows the detailed information of the key in the `KEY` col
 * `"index_name"`: The name of the index to which the index key belongs.
 * `"index_values"`: The index value in the index key.
 
-In the above fields, if the information is not applicable or currently unavailable, it is omitted. For example, the row key information does not contain `index_id`, `index_name`, and `index_values`; the index key does not contain `handle_type` and `handle_value`; non-partitioned tables do not display `partition_id` and `partition_name`; the key information in the deleted table cannot obtain schema information from `table_name`, `db_id`, `db_name`, and `index_name`, and it is unable to distinguish whether it is a partitioned table.
+In the above fields, if the information is not applicable or currently unavailable, it is omitted. For example, the row key information does not contain `index_id`, `index_name`, and `index_values`; the index key does not contain `handle_type` and `handle_value`; non-partitioned tables do not display `partition_id` and `partition_name`; the key information in the deleted table cannot obtain schema information such as `table_name`, `db_id`, `db_name`, and `index_name`, and it is unable to distinguish whether it is a partitioned table.
 
 > **Note:**
 >
@@ -159,7 +156,7 @@ The expected output is as follows:
 +-------------+----------------------------+-----------+--------------------+------------------------------------------------------------------+-----------------------------------------+----------------------------------------+----------------------------------------------------------------------------------------------------+--------------------+
 ```
 
-Two rows of data are generated in the `DEADLOCKS` table. The `DEADLOCK_ID` field of both rows is `1`, which means that the information in both rows belongs to the same deadlock error. The first row shows that the transaction of the ID `425405959304904707` is blocked on the key of `"7480000000000000385F728000000000000002"` by the transaction of the ID `"425405959304904708"`. The second row shows that the transaction of the ID `"425405959304904708"` is blocked on the key of `"7480000000000000385F728000000000000001"` by the transaction of the ID `425405959304904707`, which constitutes mutual blocking and forms a deadlock.
+Two rows of data are generated in the `DEADLOCKS` table. The `DEADLOCK_ID` field of both rows is `1`, which means that the information in both rows belongs to the same deadlock error. The first row shows that the transaction of the ID `426812829645406216` is blocked on the key of `"7480000000000000355F728000000000000002"` by the transaction of the ID `"426812829645406217"`. The second row shows that the transaction of the ID `"426812829645406217"` is blocked on the key of `"7480000000000000355F728000000000000001"` by the transaction of the ID `426812829645406216`, which constitutes mutual blocking and forms a deadlock.
 
 ## Example 2
 

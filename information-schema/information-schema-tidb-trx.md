@@ -38,7 +38,7 @@ The meaning of each column field in the `TIDB_TRX` table is as follows:
 * `ID`: The transaction ID, which is the `start_ts` (start timestamp) of the transaction.
 * `START_TIME`: The start time of the transaction, which is the physical time corresponding to the `start_ts` of the transaction.
 * `CURRENT_SQL_DIGEST`: The digest of the SQL statement currently being executed in the transaction.
-* `CURRENT_SQL_DIGEST_TEXT`: The normalized SQL statement currently being executed by the transaction, that is, the SQL statement without parameters and format. It corresponds to `CURRENT_SQL_DIGEST`.
+* `CURRENT_SQL_DIGEST_TEXT`: The normalized SQL statement currently being executed by the transaction, that is, the SQL statement without arguments and format. It corresponds to `CURRENT_SQL_DIGEST`.
 * `STATE`: The current state of the transaction. The possible values ​​include:
     * `Idle`: The transaction is in an idle state, that is, it is waiting for the user to input a query.
     * `Running`: The transaction is executing a query.
@@ -55,10 +55,10 @@ The meaning of each column field in the `TIDB_TRX` table is as follows:
 
 > **Note:**
 >
-> * Only users with the [PROCESS](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process) permission can obtain the complete information in this table. Users without the PROCESS permission can only query information of the transactions performed by the current user.
-> * The information (SQL digest) in the `CURRENT_SQL_DIGEST` and `ALL_SQL_DIGESTS` columns is the hash value calculated after the SQL statement is normalized. The information in the `CURRENT_SQL_DIGEST_TEXT` column and the result returned from the `TIDB_DECODE_SQL_DIGESTS` function are internally queried from the series of statements summary tables, so the corresponding statement might not be queried internally. For the detailed description of SQL digests and the statements summary table, see [Statement Summary Tables](/statement-summary-tables.md).
+> * Only users with the [PROCESS](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process) privilege can obtain the complete information in this table. Users without the PROCESS privilege can only query information of the transactions performed by the current user.
+> * The information (SQL digest) in the `CURRENT_SQL_DIGEST` and `ALL_SQL_DIGESTS` columns is the hash value calculated from the normalized SQL statement. The information in the `CURRENT_SQL_DIGEST_TEXT` column and the result returned from the `TIDB_DECODE_SQL_DIGESTS` function are internally queried from the statements summary tables, so it is possible that the corresponding statement cannot be found internally. For the detailed description of SQL digests and the statements summary tables, see [Statement Summary Tables](/statement-summary-tables.md).
 > * The [`TIDB_DECODE_SQL_DIGESTS`](/functions-and-operators/tidb-functions.md#tidb_decode_sql_digests) function call has a high overhead. If the function is called to query historical SQL statements for a large number of transactions, the query might take a long time. If the cluster is large with many concurrent transactions, avoid directly using this function on the `ALL_SQL_DIGEST` column while querying the full table of `TIDB_TRX`. This means to avoid SQL statement like ``select *, tidb_decode_sql_digests(all_sql_digests) from tidb_trx``.
-> * Currently the `TIDB_TRX` table does not support showing information related to TiDB transactions.
+> * Currently the `TIDB_TRX` table does not support showing information of TiDB's internal transactions.
 
 ## Example
 
@@ -98,7 +98,7 @@ CURRENT_SQL_DIGEST_TEXT: update `t` set `v` = `v` + ? where `id` = ?
 2 rows in set (0.01 sec)
 ```
 
-From the query result of this example, you can see that: the current node has two on-going transactions. One transaction is in the idle state (`STATE` is `Idle` and `CURRENT_SQL_DIGEST` is `NULL`), and this transaction has executed 3 statements (there are three records in the `ALL_SQL_DIGESTS` list, which are the digests of the three SQL statements that have been executed). Another transaction is executing a statement and waiting for the lock (`STATE` is `LockWaiting` and `WAITING_START_TIME` shows the start time of the waiting lock). The transaction has executed 2 statements, and the statement currently being executed is similar to ``"update `t` set `v` = `v` +? where `id` = ?"``. where `id` = ?"``.
+From the query result of this example, you can see that: the current node has two on-going transactions. One transaction is in the idle state (`STATE` is `Idle` and `CURRENT_SQL_DIGEST` is `NULL`), and this transaction has executed 3 statements (there are three records in the `ALL_SQL_DIGESTS` list, which are the digests of the three SQL statements that have been executed). Another transaction is executing a statement and waiting for the lock (`STATE` is `LockWaiting` and `WAITING_START_TIME` shows the start time of the waiting lock). The transaction has executed 2 statements, and the statement currently being executed is in the form of ``"update `t` set `v` = `v` +? where `id` = ?"``. where `id` = ?"``.
 
 {{< copyable "sql" >}}
 
