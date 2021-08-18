@@ -174,7 +174,7 @@ In the example above, the dropped binding in the SESSION scope shields the corre
 SHOW [GLOBAL | SESSION] BINDINGS [ShowLikeOrWhere]
 ```
 
-This statement outputs the execution plan bindings at the GLOBAL or SESSION level according to the order of binding update time from late to early. The default scope is SESSION. Currently `SHOW BINDINGS` outputs eight columns, as shown below:
+This statement outputs the execution plan bindings at the GLOBAL or SESSION level according to the order of binding update time from the latest to earliest. The default scope is SESSION. Currently `SHOW BINDINGS` outputs eight columns, as shown below:
 
 | Column Name | Note |
 | :-------- | :------------- |
