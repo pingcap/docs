@@ -226,7 +226,7 @@ The global variables associated with the `CREATE INDEX` statement are `tidb_ddl_
 * `FULLTEXT`, `HASH` and `SPATIAL` indexes are not supported.
 * Descending indexes are not supported (similar to MySQL 5.7).
 * Adding the primary key of the `CLUSTERED` type to a table is not supported. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
-* Expression indexes are incompatible with the views. When you query contents via a view, the expression index can not be used at the same time.
+* Expression indexes are incompatible with views. When you query contents by using views, the expression index can not be used at the same time.
 * There are compatibility issues between expression indexes and bindings. When an expression in an expression index has constants, the binding created for the corresponding query expands its scope. For example, suppose the expression in the expression index is   `a+1`, and the corresponding query condition is  `a+1 > 2`. In this case, the binding is `a+? > ?`, which means that the queries such as  `a+2 > 2` are also forced to use the expression index. It results in a poor execution plan. Besides, this also affects the baseline capturing and baseline evolution belonging to SQL Plan Management.
 
 ## See also
