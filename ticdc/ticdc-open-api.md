@@ -300,7 +300,7 @@ curl -X GET http://127.0.0.1:8300/api/v1/changefeeds?state=normal
 The fields in the returned result above are described as follows:
 
 -id: The ID of the replication task.
--state: The current [state](/manage-ticdc.md#state-transfer-of-replication-tasks) of the replication task.
+-state: The current [state](/ticdc/manage-ticdc.md#state-transfer-of-replication-tasks) of the replication task.
 -checkpoint_tso: The TSO representation of the current checkpoint of the replication task.
 -checkpoint_tso: The formatted time representation of the current checkpoint of the replication task.
 -error: The error information of the replication task.
