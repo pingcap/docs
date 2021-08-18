@@ -132,9 +132,9 @@ To prepare the TiUP offline component package, manually pack an offline componen
 
         `tidb-community-server-${version}-linux-amd64.tar.gz` is an independent offline environment package.
 
-3. Customize the offline mirror, or adjust the contents of the existing offline  mirror.
+3. Customize the offline mirror, or adjust the contents of an existing offline  mirror.
 
-    If you want to adjust the existing offline mirror (such as adding a new version of a component), take the following steps:
+    If you want to adjust an existing offline mirror (such as adding a new version of a component), take the following steps:
 
     1. When pulling an offline mirror, you can get an incomplete offline mirror by specifying specific information via parameters, such as the component and version information. For example, you can pull an offline mirror that includes only the offline mirror of TiUP v1.5.2 and TiUP Cluster v1.5.2 by running the following command:
 
@@ -144,11 +144,11 @@ To prepare the TiUP offline component package, manually pack an offline componen
         tiup mirror clone tiup-custom-mirror-v1.5.2 --tiup v1.5.2 --cluster v1.5.2
         ```
 
-        If you only need the components for a particular platform, you can specify them using the `--os`  or `--arch` parameter.
+        If you only need the components for a particular platform, you can specify them using the `--os`  or `--arch` parameters.
 
     2. Refer to the step 2 of "Pull the mirror using TiUP", and send this incomplete offline mirror to the control machine in the isolated environment.
 
-    3. Check the path of the current offline mirror on the control machine in the isolated environment. If your TiUP tool is of a newer version, you can get the current mirror address by running the following command:
+    3. Check the path of the current offline mirror on the control machine in the isolated environment. If your TiUP tool is of a recent version, you can get the current mirror address by running the following command:
 
         {{< copyable "shell-regular" >}}
 
