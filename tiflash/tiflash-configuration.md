@@ -67,7 +67,7 @@ delta_index_cache_size = 0
 
 ## Storage paths settings take effect starting from v4.0.9
 [storage]
-    ## This configuration item is deprecated since v5.2.0. You can use `[storage.io_rate_limit]` settings below if needed.
+    ## This configuration item is deprecated since v5.2.0. You can use the `[storage.io_rate_limit]` settings below instead.
 
     # bg_task_io_rate_limit = 0
 
@@ -96,28 +96,28 @@ delta_index_cache_size = 0
     ## If it is not set, or is set to multiple 0, the actual disk (the disk where the directory is located) capacity is used.
     # capacity = [ 10737418240, 10737418240 ]
 
-    ## [storage.io_rate_limit] settings (New in v5.2.0)
+    ## [storage.io_rate_limit] settings are new in v5.2.0.
     [storage.io_rate_limit]
-    ## This configuration item determines whether to limit I/O traffic. By default, the I/O traffic is not limited. You can use the TiFlash I/O traffic limit for the cloud storage that has disk bandwidth in a small and specific size.
-    ## For the overall I/O bandwidth for disk reads and writes, the unit of it is bytes, and its default value is 0, which means the I/O traffic is not limited by default.
+    ## This configuration item determines whether to limit the I/O traffic, which is disabled by default. This traffic limit in TiFlash is suitable for cloud storage that has disk bandwidth of a small and specific size.
+    ## The total I/O bandwidth for disk reads and writes. The unit is bytes and the default value is 0, which means the I/O traffic is not limited by default.
     # max_bytes_per_sec = 0
-    ## `max_read_bytes_per_sec` and `max_write_bytes_per_sec` have similar meanings to `max_bytes_per_sec`. `max_read_bytes_per_sec` refers the overall I/O bandwidth for disk reads, while `max_write_bytes_per_sec` means the overall I/O bandwidth for disk writes.
-    ## These configuration items limit I/O bandwidth for disk reads and writes seperately. You can use them for cloud storages that calculate the limit of I/O bandwidth for disk reads and writes seperately, such as Persistent Disk provided by Google Cloud Platform.
-    ## When the value of `max_bytes_per_sec` is not `0`, prioritize the use of `max_bytes_per_sec`.
+    ## `max_read_bytes_per_sec` and `max_write_bytes_per_sec` have similar meanings to `max_bytes_per_sec`. `max_read_bytes_per_sec` refers the total I/O bandwidth for disk reads, and `max_write_bytes_per_sec` means the total I/O bandwidth for disk writes.
+    ## These configuration items limit I/O bandwidth for disk reads and writes separately. You can use them for cloud storage that calculates the limit of I/O bandwidth for disk reads and writes separately, such as the Persistent Disk provided by Google Cloud Platform.
+    ## When the value of `max_bytes_per_sec` is not `0`, `max_bytes_per_sec` is prioritized.
     # max_read_bytes_per_sec = 0
     # max_write_bytes_per_sec = 0
 
     ## The following parameters control the bandwidth weights assigned to different I/O traffic types. Generally, you do not need to adjust these parameters.
     ## TiFlash internally divides I/O requests into four types: foreground writes, background writes, foreground reads, background reads.
-    ## When I/O traffic limit is initialized, TiFlash allocates the bandwidth according to the following weight ratio.
+    ## When the I/O traffic limit is initialized, TiFlash assigns the bandwidth according to the following weight ratio.
     ## The following  default configurations indicate that each type of traffic gets a weight of 25% (25 / (25 + 25 + 25 + 25) = 25%).
     ## If the weight is configured to `0`, the corresponding I/O traffic is not limited.
     # foreground_write_weight = 25
     # background_write_weight = 25
     # foreground_read_weight = 25
     # background_read_weight = 25
-    ## TiFlash supports automatic adjustment of limiting different I/O traffic types according to the current I/O load. Sometimes, the actual bindwidth weight might exceed the weight ratio set above.
-    ## `auto_tune_sec` indicates the interval of automatic adjustment. The unit is seconds. If the value of `auto_tune_sec` is `0`, the automatic adjustment is disabled.
+    ## TiFlash supports automatically tuning the traffic limit for different I/O types according to the current I/O load. Sometimes, the tuned bandwidth might exceed the weight ratio set above.
+    ## `auto_tune_sec` indicates the interval of automatic tuning. The unit is seconds. If the value of `auto_tune_sec` is `0`, the automatic tuning is disabled.
     # auto_tune_sec = 5
 
 [flash]
