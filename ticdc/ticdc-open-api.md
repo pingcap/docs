@@ -22,7 +22,7 @@ You can use the Open APIs to perform the following maintenance operations on the
 - [Update the replication configuration](#update-the-replication-configuration)
 - [Query the replication task list](#query-the-replication-task-list)
 - [Query a specific replication task](#query-a-specific-replication-task)
-- [Pause a replication task] (#pause-a-replication-task)
+- [Pause a replication task](#pause-a-replication-task)
 - [Resume a replication task](#resume-a-replication-task)
 - [Query the replication subtask list](#query-the-replication-subtask-list)
 - [Query a specific replication subtask](#query-a-specific-replication-subtask)
@@ -32,7 +32,7 @@ You can use the Open APIs to perform the following maintenance operations on the
 - [Manually schedule a table to another node](#manually-schedule-a-table-to-another-node)
 - [Dynamically adjust the log level of the TiCDC server](#dynamically-adjust-the-log-level-of-the-ticdc-server)
 
-The request body and returned value of all APIs are in JSON format. The following sections describes the specific usage of the Open APIs.
+The request body and returned value of all APIs are in JSON format. The following sections describe the specific usage of the APIs.
 
 In the following examples, the listening IP address of the TiCDC server is `127.0.0.1` and the port is `8300`. You can bind a specified IP and port via `--addr=ip:port` when starting the TiCDC server.
 
@@ -79,11 +79,11 @@ curl -X GET http://127.0.0.1:8300/api/v1/status
 
 The fields of the above output are described as follows:
 
--version: The current TiCDC version number.
--git_hash: The Git hash value.
--id: The capture ID of the node.
--pid: The capture process PID of the node.
--is_owner: Indicates whether the node is an owner.
+- version: The current TiCDC version number.
+- git_hash: The Git hash value.
+- id: The capture ID of the node.
+- pid: The capture process PID of the node.
+- is_owner: Indicates whether the node is an owner.
 
 ## Check the health status of a TiCDC cluster
 
@@ -111,7 +111,7 @@ This is an asynchronous interface. If the request is successful, `202 Accepted` 
 
 ### Parameter description
 
-The optional parameters for creating a replication task using the API are not as complete as that of using the `cli` command. This API supports the following parameters.
+Compared to the optional parameters for creating a replication task using the `cli` command, the optional parameters for such task creation using the API are not as complete. This API supports the following parameters.
 
 #### Parameters for the request body
 
@@ -128,7 +128,7 @@ The optional parameters for creating a replication task using the API are not as
 | `mounter_worker_num` | `INT` type. The mounter thread number. (Optional) |
 | `sink_config` | The configuration parameters of sink. (Optional) |
 
-The meaning and format of `changefeed_id`, `start_ts`, `target_ts`, and `sink_uri` are the same as those described in the [Use `cdc cli` to create a replication task](/ticdc/manage-ticdc.md#create-a-replication-task) document. For the detailed description of these parameters, see this document. The following section describes some other parameters in the above table.
+The meaning and format of `changefeed_id`, `start_ts`, `target_ts`, and `sink_uri` are the same as those described in the [Use `cdc cli` to create a replication task](/ticdc/manage-ticdc.md#create-a-replication-task) document. For the detailed description of these parameters, see this document. Some other parameters in the above table are described as follows.
 
 `force_replicate`: This parameter defaults to `false`. When it is specified as `true`, TiCDC tries to forcibly replicate tables that do not have a unique index.
 
@@ -299,11 +299,11 @@ curl -X GET http://127.0.0.1:8300/api/v1/changefeeds?state=normal
 
 The fields in the returned result above are described as follows:
 
--id: The ID of the replication task.
--state: The current [state](/ticdc/manage-ticdc.md#state-transfer-of-replication-tasks) of the replication task.
--checkpoint_tso: The TSO representation of the current checkpoint of the replication task.
--checkpoint_tso: The formatted time representation of the current checkpoint of the replication task.
--error: The error information of the replication task.
+- id: The ID of the replication task.
+- state: The current [state](/ticdc/manage-ticdc.md#state-transfer-of-replication-tasks) of the replication task.
+- checkpoint_tso: The TSO representation of the current checkpoint of the replication task.
+- checkpoint_tso: The formatted time representation of the current checkpoint of the replication task.
+- error: The error information of the replication task.
 
 ## Query a specific replication task
 
