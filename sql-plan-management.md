@@ -203,6 +203,7 @@ In addition, when you use the `explain format = 'verbose'` statement to view the
 ```sql
 -- Create a global binding.
 
+
 create global binding for
     select * from t
 using
