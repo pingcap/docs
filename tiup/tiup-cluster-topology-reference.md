@@ -4,7 +4,7 @@ title: Topology Configuration File for TiDB Deployment Using TiUP
 
 # Topology Configuration File for TiDB Deployment Using TiUP
 
-To deploy or scale TiDB using TiUP, you need to provide a topology file ([sample](https://github.com/pingcap/tiup/blob/master/embed/templates/examples/topology.example.yaml)) to describe the cluster topology.
+To deploy or scale TiDB using TiUP, you need to provide a topology file ([sample](https://github.com/pingcap/tiup/blob/master/embed/examples/cluster/topology.example.yaml)) to describe the cluster topology.
 
 Similarly, to modify the cluster topology, you need to modify the topology file. The difference is that, after the cluster is deployed, you can only modify a part of the fields in the topology file. This document introduces each section of the topology file and each field in each section.
 
@@ -58,7 +58,7 @@ The `global` section corresponds to the cluster's global configuration and has t
 
     - If `data_dir` is a relative path, the component data is placed in `<deploy_dir>/<data_dir>`. For the calculation rules of `<deploy_dir>`, see the application rules of the `deploy_dir` field.
 
-- `log_dir`: The data directory. Default value: `"log"`. Its application rules are as follows:
+- `log_dir`: The log directory. Default value: `"log"`. Its application rules are as follows:
 
     - If the absolute path `log_dir` is configured at the instance level, the actual log directory is the `log_dir` configured for the instance.
 
