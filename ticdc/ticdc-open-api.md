@@ -11,7 +11,7 @@ summary: Learn how to use the Open API interface to manage the cluster status an
 >
 > TiCDC Open API is still an experimental feature. It is not recommended to use it in a production environment.
 
-TiCDC provides the Open API feature for querying and operating the TiCDC cluster, which is similar to that of [`cdc cli` tool] (/ticdc/manage-ticdc.md#use-cdc-cli-to-manage-cluster-status-and-data-replication-task).
+TiCDC provides the Open API feature for querying and operating the TiCDC cluster, which is similar to the feature of [`cdc cli` tool] (/ticdc/manage-ticdc.md#use-cdc-cli-to-manage-cluster-status-and-data-replication-task).
 
 You can use the Open APIs to perform the following maintenance operations on the TiCDC cluster:
 
@@ -28,7 +28,7 @@ You can use the Open APIs to perform the following maintenance operations on the
 - [Query a specific replication subtask](#query-a-specific-replication-subtask)
 - [Query the TiCDC service process list](#query-the-ticdc-service-process-list)
 - [Evict an owner node](#evict-an-owner-node)
-- [Manually trigger the load balancing of a table](#manually-trigger-the-load-balancing-of-a-table)
+- [Manually trigger the load balancing of all tables in a replication task](#manually-trigger-the-load-balancing-of-all-tables-in-a-replication-task)
 - [Manually schedule a table to another node](#manually-schedule-a-table-to-another-node)
 - [Dynamically adjust the log level of the TiCDC server](#dynamically-adjust-the-log-level-of-the-ticdc-server)
 
@@ -51,7 +51,7 @@ From the above JSON output, `error_msg` describes the error message and `error_c
 
 ## Get the status information of a TiCDC node
 
-This is a synchronous interface. If the request is successful, the status information of the corresponding node is returned.
+This API is a synchronous interface. If the request is successful, the status information of the corresponding node is returned.
 
 ### Request URI
 
@@ -87,7 +87,7 @@ The fields of the above output are described as follows:
 
 ## Check the health status of a TiCDC cluster
 
-This is a synchronous interface. If the cluster is healthy, `200 OK` is returned.
+This API is a synchronous interface. If the cluster is healthy, `200 OK` is returned.
 
 ### Request URI
 
@@ -103,7 +103,7 @@ curl -X GET http://127.0.0.1:8300/api/v1/health
 
 ## Create a replication task
 
-This is an asynchronous interface. If the request is successful, `202 Accepted` is returned. The returned result only means that the server agrees to run the command but does not guarantee that the command will be run successfully.
+This API is an asynchronous interface. If the request is successful, `202 Accepted` is returned. The returned result only means that the server agrees to run the command but does not guarantee that the command will be run successfully.
 
 ### Request URI
 
@@ -111,7 +111,7 @@ This is an asynchronous interface. If the request is successful, `202 Accepted` 
 
 ### Parameter description
 
-Compared to the optional parameters for creating a replication task using the `cli` command, the optional parameters for such task creation using the API are not as complete. This API supports the following parameters.
+Compared to the optional parameters for creating a replication task using the `cli` command, the optional parameters for creating such task using the API are not as complete. This API supports the following parameters.
 
 #### Parameters for the request body
 
@@ -128,7 +128,7 @@ Compared to the optional parameters for creating a replication task using the `c
 | `mounter_worker_num` | `INT` type. The mounter thread number. (Optional) |
 | `sink_config` | The configuration parameters of sink. (Optional) |
 
-The meaning and format of `changefeed_id`, `start_ts`, `target_ts`, and `sink_uri` are the same as those described in the [Use `cdc cli` to create a replication task](/ticdc/manage-ticdc.md#create-a-replication-task) document. For the detailed description of these parameters, see this document. Some other parameters in the above table are described as follows.
+The meaning and format of `changefeed_id`, `start_ts`, `target_ts`, and `sink_uri` are the same as those described in the [Use `cdc cli` to create a replication task](/ticdc/manage-ticdc.md#create-a-replication-task) document. For the detailed description of these parameters, see this document. Some other parameters in the above table are described further as follows.
 
 `force_replicate`: This parameter defaults to `false`. When it is specified as `true`, TiCDC tries to forcibly replicate tables that do not have a unique index.
 
@@ -138,7 +138,7 @@ The meaning and format of `changefeed_id`, `start_ts`, `target_ts`, and `sink_ur
 
 `ignore_txn_start_ts`: When this parameter is specified, the specified start_ts is ignored. For example, `ignore-txn-start-ts = [1, 2]`.
 
-`mounter_worker_num`: The thread number of mounter. mounter is used to decode the data output from TiKV. The default value is `16`.
+`mounter_worker_num`: The thread number of mounter. Mounter is used to decode the data output from TiKV. The default value is `16`.
 
 The configuration parameters of sink are as follows:
 
@@ -177,7 +177,7 @@ If the request is successful, `202 Accepted` is returned. If the request fails, 
 
 ## Remove a replication task
 
-This is an asynchronous interface. If the request is successful, `202 Accepted` is returned. The returned result only means that the server agrees to run the command but does not guarantee that the command will be run successfully.
+This API is an asynchronous interface. If the request is successful, `202 Accepted` is returned. The returned result only means that the server agrees to run the command but does not guarantee that the command will be run successfully.
 
 ### Request URI
 
@@ -189,7 +189,7 @@ This is an asynchronous interface. If the request is successful, `202 Accepted` 
 
 | Parameter name | Description |
 | :-------------- | :----------------------------------- |
-| `changefeed_id` | The ID of the replication task (changefeed) to be deleted. |
+| `changefeed_id` | The ID of the replication task (changefeed) to be removed. |
 
 ### Example
 
@@ -205,7 +205,7 @@ If the request is successful, `202 Accepted` is returned. If the request fails, 
 
 ## Update the replication configuration
 
-This is an asynchronous interface. If the request is successful, `202 Accepted` is returned. The returned result only means that the server agrees to run the command but does not guarantee that the command will be run successfully.
+This API is an asynchronous interface. If the request is successful, `202 Accepted` is returned. The returned result only means that the server agrees to run the command but does not guarantee that the command will be run successfully.
 
 To modify the changefeed configuration, follow the steps of `pause the replication task -> modify the configuration -> resume the replication task`.
 
@@ -219,11 +219,11 @@ To modify the changefeed configuration, follow the steps of `pause the replicati
 
 | Parameter name | Description |
 | :-------------- | :----------------------------------- |
-| `changefeed_id` | The ID of the replication task (changefeed) to be queried. |
+| `changefeed_id` | The ID of the replication task (changefeed) to be updated. |
 
 #### Parameters for the request body
 
-Currently, the following configuration can be modified only via the API.
+Currently, only the following configuration can be modified via the API.
 
 | Parameter name | Description |
 | :-------------------- | :-------------------------- --------------------------- |
@@ -250,7 +250,7 @@ If the request is successful, `202 Accepted` is returned. If the request fails, 
 
 ## Query the replication task list
 
-This is a synchronous interface. If the request is successful, the basic information of all nodes in the TiCDC cluster is returned.
+This API is a synchronous interface. If the request is successful, the basic information of all nodes in the TiCDC cluster is returned.
 
 ### Parameter description
 
@@ -258,11 +258,11 @@ This is a synchronous interface. If the request is successful, the basic informa
 
 | Parameter name | Description |
 | :------ | :---------------------------------------- ----- |
-| `state` | Optional. When this parameter is specified, the replication status information only of this state is returned. |
+| `state` | When this parameter is specified, the replication status information only of this state is returned.(Optional) |
 
 The value options for `state` are `all`, `normal`, `stopped`, `error`, `failed`, and `finished`.
 
-If this parameter is not specified, the basic information of replication tasks in normal, stopped, and failed states is returned by default.
+If this parameter is not specified, the basic information of replication tasks whose state is normal, stopped, or failed is returned by default.
 
 ### Request URI
 
@@ -307,7 +307,7 @@ The fields in the returned result above are described as follows:
 
 ## Query a specific replication task
 
-This is a synchronous interface. If the request is successful, the detailed information of the specified replication task is returned.
+This API is a synchronous interface. If the request is successful, the detailed information of the specified replication task is returned.
 
 ### Request URI
 
@@ -360,7 +360,7 @@ curl -X GET http://127.0.0.1:8300/api/v1/changefeeds/test1
 
 ## Pause a replication task
 
-This is an asynchronous interface. If the request is successful, `202 Accepted` is returned. The returned result only means that the server agrees to run the command but does not guarantee that the command will be run successfully.
+This API is an asynchronous interface. If the request is successful, `202 Accepted` is returned. The returned result only means that the server agrees to run the command but does not guarantee that the command will be run successfully.
 
 ### Request URI
 
@@ -388,7 +388,7 @@ If the request is successful, `202 Accepted` is returned. If the request fails, 
 
 ## Resume a replication task
 
-This is an asynchronous interface. If the request is successful, `202 Accepted` is returned. The returned result only means that the server agrees to run the command but does not guarantee that the command will be run successfully.
+This API is an asynchronous interface. If the request is successful, `202 Accepted` is returned. The returned result only means that the server agrees to run the command but does not guarantee that the command will be run successfully.
 
 ### Request URI
 
@@ -416,7 +416,7 @@ If the request is successful, `202 Accepted` is returned. If the request fails, 
 
 ## Query the replication subtask list
 
-This is a synchronous interface. If the request is successful, the basic information of all replication subtasks is returned.
+This API is a synchronous interface. If the request is successful, the basic information of all replication subtasks (`processor`) is returned.
 
 ### Request URI
 
@@ -441,7 +441,7 @@ curl -X GET http://127.0.0.1:8300/api/v1/processors
 
 ## Query a specific replication subtask
 
-This is a synchronous interface. If the request is successful, the detailed information of the specified replication subtask (`processor`) is returned.
+This API is a synchronous interface. If the request is successful, the detailed information of the specified replication subtask (`processor`) is returned.
 
 ### Request URI
 
@@ -479,7 +479,7 @@ curl -X GET http://127.0.0.1:8300/api/v1/processors/test1/561c3784-77f0-4863-ad5
 
 ## Query the TiCDC service process list
 
-This is a synchronous interface. If the request is successful, the basic information of all replication processes (`capture`) is returned.
+This API is a synchronous interface. If the request is successful, the basic information of all replication processes (`capture`) is returned.
 
 ### Request URI
 
@@ -505,7 +505,7 @@ curl -X GET http://127.0.0.1:8300/api/v1/captures
 
 ## Evict an owner node
 
-This is an asynchronous interface. If the request is successful, `202 Accepted` is returned. The returned result only means that the server agrees to run the command but does not guarantee that the command will be run successfully.
+This API is an asynchronous interface. If the request is successful, `202 Accepted` is returned. The returned result only means that the server agrees to run the command but does not guarantee that the command will be run successfully.
 
 ### Request URI
 
@@ -523,9 +523,9 @@ curl -X POST http://127.0.0.1:8300/api/v1/owner/resign
 
 If the request is successful, `202 Accepted` is returned. If the request fails, an error message and error code are returned.
 
-## Manually trigger the load balancing of a table
+## Manually trigger the load balancing of all tables in a replication task
 
-This is an asynchronous interface. If the request is successful, `202 Accepted` is returned. The returned result only means that the server agrees to run the command but does not guarantee that the command will be run successfully.
+This API is an asynchronous interface. If the request is successful, `202 Accepted` is returned. The returned result only means that the server agrees to run the command but does not guarantee that the command will be run successfully.
 
 ### Request URI
 
@@ -541,7 +541,7 @@ This is an asynchronous interface. If the request is successful, `202 Accepted` 
 
 ### Example
 
-The following request triggers the load balancing of the changefeed table with the ID `test1`.
+The following request triggers the load balancing of all tables in the changefeed with the ID `test1`.
 
 {{< copyable "shell-regular" >}}
 
@@ -553,7 +553,7 @@ If the request is successful, `202 Accepted` is returned. If the request fails, 
 
 ## Manually schedule a table to another node
 
-This is an asynchronous interface. If the request is successful, `202 Accepted` is returned. The returned result only means that the server agrees to run the command but does not guarantee that the command will be run successfully.
+This API is an asynchronous interface. If the request is successful, `202 Accepted` is returned. The returned result only means that the server agrees to run the command but does not guarantee that the command will be run successfully.
 
 ### Request URI
 
@@ -589,7 +589,7 @@ If the request is successful, `202 Accepted` is returned. If the request fails, 
 
 ## Dynamically adjust the log level of the TiCDC server
 
-This is a synchronous interface. If the request is successful, `202 OK` is returned.
+This API is a synchronous interface. If the request is successful, `202 OK` is returned.
 
 ### Request URI
 
@@ -603,7 +603,7 @@ This is a synchronous interface. If the request is successful, `202 OK` is retur
 | :---------- | :----------------- |
 | `log_level` | The log level you want to set. |
 
-`log_level` supports the [log levels provided by zap](https://godoc.org/go.uber.org/zap#UnmarshalText): "debug", "info", "warn", "error", "dpanic" , "Panic", "fatal".
+`log_level` supports the [log levels provided by zap](https://godoc.org/go.uber.org/zap#UnmarshalText): "debug", "info", "warn", "error", "dpanic" , "panic", and "fatal".
 
 ### Example
 
