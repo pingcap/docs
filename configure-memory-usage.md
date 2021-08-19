@@ -119,30 +119,31 @@ The following example constructs a memory-intensive SQL statement that triggers 
 
 5. You can see a set of files in the directory of status files (In the above example, the directory is `/tmp/1000_tidb/MC4wLjAuMDo0MDAwLzAuMC4wLjA6MTAwODA=/tmp-storage/record`), including `goroutinue`, `heap`, and `running_sql`. These three files are suffixed with the time when status files are logged. They respectively record goroutine stack information, the usage status of heap memory, and the running SQL information when the alarm is triggered. For the format of log content in `running_sql`, refer to [`expensive-queries`](/identify-expensive-queries.md).
 
-## Other tidb-server memory control behaviors
+## Other memory control behaviors of tidb-server
 
 ### Flow control
 
-- TiDB supports dynamic memory control feature for the operator that reads data. By default, this operator enables the maximum number of threads that [`tidb_disql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency) allows to read data. When the memory usage of a single SQL statement exceeds [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) each time, the operator that reads data stops one thread.
+- TiDB supports dynamic memory control for the operator that reads data. By default, this operator uses the maximum number of threads that [`tidb_disql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency) allows to read data. When the memory usage of a single SQL execution exceeds [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) each time, the operator that reads data stops one thread.
 
 - This flow control behavior is controlled by the system variable [`tidb_enable_rate_limit_action`](/system-variables.md#tidb_enable_rate_limit_action).
-- When the flow control behavior is triggered, TiDB outputs a log containing the key word `memory exceeds quota, destroy one token now`.
+- When the flow control behavior is triggered, TiDB outputs a log containing the key words `memory exceeds quota, destroy one token now`.
 
 ### Disk spill
 
-TiDB supports disk spill feature for execution operators. When the memory usage of a SQL statement exceeds the memory quota, tidb-server can spill the intermediate data of execution operators to the disk to relieve memory pressure. Operators supporting disk spill include Sort, MergeJoin, HashJoin, and HashAgg.
+TiDB supports disk spill for execution operators. When the memory usage of a SQL execution exceeds the memory quota, tidb-server can spill the intermediate data of execution operators to the disk to relieve memory pressure. Operators supporting disk spill include Sort, MergeJoin, HashJoin, and HashAgg.
 
-- The disk spill action is jointly controlled by parameters [`mem-quota-query`](/tidb-configuration-file.md#mem-quota-query), [`oom-use-tmp-storage`](/tidb-configuration-file.md#oom-use-tmp-storage), [`tmp-storage-path`](/tidb-configuration-file.md#tmp-storage-path), and [`tmp-storage-quota`](/tidb-configuration-file.md#tmp-storage-quota).
+- The disk spill behavior is jointly controlled by the [`mem-quota-query`](/tidb-configuration-file.md#mem-quota-query), [`oom-use-tmp-storage`](/tidb-configuration-file.md#oom-use-tmp-storage), [`tmp-storage-path`](/tidb-configuration-file.md#tmp-storage-path), and [`tmp-storage-quota`](/tidb-configuration-file.md#tmp-storage-quota) parameters.
 - When the disk spill is triggered, TiDB outputs a log containing the key word `memory exceeds quota, spill to disk now` or `memory exceeds quota, set aggregate mode to spill-mode`.
-- Disk spill for operators Sort, MergeJoin, and HashJoin is new in v4.0.0; disk spill for operator HashAgg is new in v5.2.0.
-- When SQL statements containing Sort, MergeJoin, or HashJoin cause OOM, TiDB triggers disk spill by default. When SQL statements containing HashAgg cause OOM, TiDB does not trigger disk spill by default. You can configure the system variable `tidb_executor_concurrency = 1` to trigger disk spill for HashAgg.
+- Disk spill for the Sort, MergeJoin, and HashJoin operator is introduced in v4.0.0; disk spill for the HashAgg operator is introduced in v5.2.0.
+- When the SQL executions containing Sort, MergeJoin, or HashJoin cause OOM, TiDB triggers disk spill by default. When SQL executions containing HashAgg cause OOM, TiDB does not trigger disk spill by default. You can configure the system variable `tidb_executor_concurrency = 1` to trigger disk spill for HashAgg.
 
 > **Note:**
 >
-> + Currently, it is not supported to use the aggregate functions with `DISTINCT` option to spill the disk for HashAgg. When you use the aggregate functions with `DISTINCT` option with too much memory, the disk spill fails.
-The following example creates a SQL statement occupying too much memory to display the disk spill feature for HashAgg:
+> The disk spill for HashAgg does not support SQL executions containing the `DISTINCT` aggregate function. When a SQL execution containing a `DISTINCT` aggregate function uses too much memory, the disk spill does not apply.
 
-1. Configure the memory quota of a SQL statement to 1GB (1 GB by default)：
+The following example uses a memory-consuming SQL statement to demonstrate the disk spill feature for HashAgg:
+
+1. Configure the memory quota of a SQL statement to 1GB (1 GB by default):
 
     {{< copyable "sql" >}}
 
@@ -160,7 +161,7 @@ The following example creates a SQL statement occupying too much memory to displ
     [tidb]> explain analyze select /*+ HASH_AGG() */ count(*) from t t1 join t t2 join t t3 group by t1.a, t2.a, t3.a;
     ```
 
-    Because this SQL statement occupies too much memory, the following error message "out of memory quota" is returned:
+    Because executing this SQL statement occupies too much memory, the following "Out of Memory Quota" error message is returned:
 
     ```sql
     ERROR 1105 (HY000): Out Of Memory Quota![conn_id=3]
@@ -174,7 +175,7 @@ The following example creates a SQL statement occupying too much memory to displ
     set tidb_executor_concurrency = 1;
     ```
 
-5. Execute the same SQL statement. You can find this time the statement can be successfully executed and no error message is returned. From the following detailed execution plan, you can see that HashAgg used 600MB of hard disk space.
+5. Execute the same SQL statement. You can find that this time, the statement is successfully executed and no error message is returned. From the following detailed execution plan, you can see that HashAgg has used 600 MB of hard disk space.
 
     {{< copyable "sql" >}}
 
