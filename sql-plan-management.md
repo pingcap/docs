@@ -202,11 +202,14 @@ In addition, when you use the `explain format = 'verbose'` statement to view the
 
 ```sql
 -- Create a global binding.
+
 create global binding for
     select * from t
 using
     select * from t;
--- Use explain format = 'verbose' statement to check the execution plan of SQL. Check the warning message to view the binding for query.
+
+-- Use the `explain format = 'verbose'` statement to check the SQL execution plan. Check the warning message to view the binding used in the query.
+
 explain format = 'verbose' select * from t;
 show warnings;
 ```
