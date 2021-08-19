@@ -457,7 +457,7 @@ This API is a synchronous interface. If the request is successful, the detailed 
 | `capture_id` | The capture ID of the replication subtask to be queried. |
 
 ### Example
-
+The following request queries the detailed information of a subtask whose `changefeed_id` is `test` and `capture_id` is `561c3784-77f0-4863-ad52-65a3436db6af`. A subtask can be indentifed by `changefeed_id` and `capture_id`.
 {{< copyable "shell-regular" >}}
 
 ```shell
