@@ -122,8 +122,8 @@ This document only describes the parameters that are not included in command-lin
 
 ### `raft-client-queue-size`
 
-+ Specifies the queue size of the Raft messages. If too many messages not sent in time result in a full buffer, or messages discarded, you can specify a greater value to increase stability of the system. 
-+ Default value: 8192
++ Specifies the queue size of the Raft messages in TiKV. If too many messages not sent in time result in a full buffer, or messages discarded, you can specify a greater value to improve system stability. 
++ Default value: `8192`
 
 ## readpool.unified
 
@@ -644,8 +644,8 @@ Configuration items related to Raftstore
 
 ### `cmd-batch`
 
-+ Controls whether to enable batch processing of the requests. It can significantly improve the write performance. 
-+ Default value: true
++ Controls whether to enable batch processing of the requests. When it is enabled, the write performance is significantly improved. 
++ Default value: `true`
 
 ## Coprocessor
 
