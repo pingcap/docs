@@ -75,9 +75,9 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
         ```
 
         > **Note:**
-        > TiDB v5.2.0 or a later version supports running `tiup playground` on the machine that uses the Apple M1 chip.
-        > For the playground operated in this way, after the test deployment is finished, TiUP will clean up the original cluster data. You will get a new cluster after re-running the command.
-        > If you want the data to be persisted on storage，run `tiup --tag <your-tag> playground ...`. For details, refer to [TiUP Reference Guide](/tiup/tiup-reference.md#-t---tag).
+        > + Since v5.2.0, TiDB supports running `tiup playground` on the machine that uses the Apple M1 chip.
+        > + For the playground operated in this way, after the test deployment is finished, TiUP will clean up the original cluster data. You will get a new cluster after re-running the command.
+        > + If you want the data to be persisted on storage，run `tiup --tag <your-tag> playground ...`. For details, refer to [TiUP Reference Guide](/tiup/tiup-reference.md#-t---tag).
 
 4. Start a new session to access TiDB:
 
