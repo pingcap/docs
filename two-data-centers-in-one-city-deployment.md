@@ -6,7 +6,7 @@ aliases: ['/tidb/dev/synchronous-replication']
 
 # Two Data Centers in One City Deployment with DR Auto-Sync Mode
 
-This document introduces the deployment mode, architecture, and configuration of the two data centers (DC) in one city, as well as how to enable this delpoyment mode and to use the replicas in this mode.
+This document introduces the deployment mode for two data centers (DC) in one city, including the architecture, configuration, methods to enable this delpoyment mode, and ways to use the replicas in this mode.
 
 In an on-premises environment, TiDB usually adopts the multi-data-center deployment mode to ensure high availability and disaster recovery capability. The multi-data-center deployment mode includes a variety of deployment modes, such as three data centers in two cities and three data centers in one city. This document introduces the deployment mode of two data centers in one city. With lower cost, TiDB can also meet the requirements of high availability and disaster recovery. The deployment mode adopts Data Replication Auto Synchronous mode, or DR Auto-Sync mode.
 
@@ -167,7 +167,7 @@ cat rule.json
 
 ### Enable the DR Auto-Sync mode
 
-The replication mode of the replica is controlled by the PD node. If you want to enable the DR Auto-Sync mode, you need to create the PD configuration file before deploying the cluster as follows:
+The replication mode is controlled by PD. You can configure it in the PD configuration file when deploying a cluster as follows:
 
 {{< copyable "" >}}
 
@@ -184,7 +184,7 @@ wait-store-timeout = "1m"
 wait-sync-timeout = "1m"
 ```
 
-In the above configuration file:
+In the configuration above:
 
 + `replication-mode` is the replication mode to be enabled. In the above example, it is set to `dr-auto-sync`. By default, majority protocol is followed.
 + `label-key` is used to distinguish different data centers and needs to be matched with placement rules. In this example, the primary data center is "east" and the DR data center is "west".
@@ -192,7 +192,7 @@ In the above configuration file:
 + `dr-replicas` is the number of Voter replicas in the DR data center.
 + `wait-store-timeout` is the waiting time for switching to asynchronous replication mode when network isolation or failure occurs. If the time of network failure exceeds the waiting time, asynchronous replication mode is enabled. The default waiting time is 60 seconds.
 
-If you need to check the replication status of the current cluster, the following API can help you:
+To check the current replication state of the cluster, use the following API:
 
 {{< copyable "shell-regular" >}}
 
