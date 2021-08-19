@@ -252,6 +252,10 @@ If the request is successful, `202 Accepted` is returned. If the request fails, 
 
 This API is a synchronous interface. If the request is successful, the basic information of all nodes in the TiCDC cluster is returned.
 
+### Request URI
+
+`GET /api/v1/changefeeds`
+
 ### Parameter description
 
 #### Query parameters
@@ -263,10 +267,6 @@ This API is a synchronous interface. If the request is successful, the basic inf
 The value options for `state` are `all`, `normal`, `stopped`, `error`, `failed`, and `finished`.
 
 If this parameter is not specified, the basic information of replication tasks whose state is normal, stopped, or failed is returned by default.
-
-### Request URI
-
-`GET /api/v1/changefeeds`
 
 ### Example
 
