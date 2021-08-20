@@ -18,8 +18,8 @@ This section takes the example of a city where two data centers IDC1 and IDC2 ar
 
 The architecture of the cluster deployment is as follows:
 
-- The TiDB cluster is deployed to two DCs in one city: the primary IDC1 in the east, and the DR IDC2 in the west.
-- The cluster has 4 replicas: 2 Voter replicas in IDC1, 1 Voter replicas and 1 Learner replicas in IDC2. For the TiKV component, each rack has a proper label.
+- The TiDB cluster is deployed to two DCs in one city: the primary IDC1 in the east, and the disaster recovery (DR) IDC2 in the west.
+- The cluster has 4 replicas: 2 Voter replicas in IDC1, 1 Voter replica and 1 Learner replica in IDC2. For the TiKV component, each rack has a proper label.
 - The Raft protocol is adopted to ensure consistency and high availability of data, which is transparent to users.
 
 ![2-DC-in-1-city architecture](/media/two-dc-replication-1.png)
@@ -91,7 +91,7 @@ alertmanager_servers:
 
 ### Placement Rules
 
-To deploy a cluster based on the planned topology, you need to use [placement rules](/configure-placement-rules.md) to determine the locations of the cluster replicas. If 4 replica and 2 Voter replica is at the primary center and 1 Voter replica and 1 Learner replica is at the DR center, you can use the placement rules to configure the replicas as follows:
+To deploy a cluster based on the planned topology, you need to use [placement rules](/configure-placement-rules.md) to determine the locations of the cluster replicas. If 4 replicas and 2 Voter replicas are at the primary center and 1 Voter replica and 1 Learner replica are at the DR center, you can use the placement rules to configure the replicas as follows:
 
 ```
 cat rule.json
@@ -188,7 +188,7 @@ In the configuration above:
 
 + `replication-mode` is the replication mode to be enabled. In the above example, it is set to `dr-auto-sync`. By default, the majority protocol is used.
 + `label-key` is used to distinguish different data centers and needs to match placement rules. In this example, the primary data center is "east" and the DR data center is "west".
-+ `primary-replicas` ia the number of Voter replicas in the primary data center.
++ `primary-replicas` is the number of Voter replicas in the primary data center.
 + `dr-replicas` is the number of Voter replicas in the DR data center.
 + `wait-store-timeout` is the waiting time for switching to asynchronous replication mode when network isolation or failure occurs. If the time of network failure exceeds the waiting time, asynchronous replication mode is enabled. The default waiting time is 60 seconds.
 
@@ -222,11 +222,11 @@ The replication mode of a cluster can automatically and adaptively switch betwee
 
 The details for the status switch are as follows:
 
-1. **Initialization**: At the initialization stage, the cluster is in the synchronous replication mode. PD sends information to TiKV, and all TiKV nodes strictly follow the synchronous replication mode to work.
+1. **Initialization**: At the initialization stage, the cluster is in the synchronous replication mode. PD sends the status information to TiKV, and all TiKV nodes strictly follow the synchronous replication mode to work.
 
 2. **Switch from sync to async**: PD regularly checks the heartbeat information of TiKV to judge whether the TiKV node fails or is disconnected. If the number of failed nodes exceeds the number of replicas of the primary data center (`primary-replicas`) and the DR data center (`dr-replicas`), the synchronous replication mode can no longer serve the data replication and it is necessary to switch the status. When the failure or disconnect time exceeds the time set by `wait-store-timeout`, PD switches the status of the cluster to the async mode. Then PD sends the status of async to all TiKV nodes, and the replication mode for TiKV switches from two-center replication to the native Raft majority.
 
-3. **Switch from async to sync**: PD regularly checks the heartbeat information of TiKV to judge whether TiKV nodes are reconnected. If the number of failed peers is less than the number of replicas of the primary data center (`primary-replicas`) and the DR data center (`dr-replicas`), the synchronous replication mode can be enabled again. PD first switches the status of the cluster to sync-recover and sends the status information to all TiKV nodes. All Regions of TiKV gradually switch to the two-data-center synchronous replication mode and then report the heartbeat information to PD. PD records the status of TiKV Regions and calculates the recovery progress. When all TiKV Regions finish the switching, PD switches the replication mode to sync.
+3. **Switch from async to sync**: PD regularly checks the heartbeat information of TiKV to judge whether TiKV nodes are reconnected. If the number of failed nodes is less than the number of replicas of the primary data center (`primary-replicas`) and the DR data center (`dr-replicas`), the synchronous replication mode can be enabled again. PD first switches the status of the cluster to sync-recover and sends the status information to all TiKV nodes. All Regions of TiKV gradually switch to the two-data-center synchronous replication mode and then report the heartbeat information to PD. PD records the status of TiKV Regions and calculates the recovery progress. When all TiKV Regions finish the switching, PD switches the replication mode to sync.
 
 ### Disaster recovery
 
@@ -234,10 +234,10 @@ This section introduces the disaster recovery solution of the two data centers i
 
 When a disaster occurs to a cluster in the synchronous replication mode, you can perform data recovery with `RPO = 0`:
 
-- If the primary data center fails and most of the Voter replicas are lost, but complete data exists in the DR data center, the lost data can be recovered from the DR data center. At this time, manual intervention is required with professional tools. You can contact the TiDB team for recovery.
+- If the primary data center fails and most of the Voter replicas are lost, but complete data exists in the DR data center, the lost data can be recovered from the DR data center. At this time, manual intervention is required with professional tools. You can contact the TiDB team for a recovery solution.
 
 - If the DR center fails and a few Voter replicas are lost, the cluster automatically switches to the asynchronous replication mode.
 
 When a disaster occurs to a cluster that is not in the synchronous replication mode and you cannot perform data recovery with `RPO = 0`:
 
-- If most of the Voter replicas are lost, manual intervention is required with professional tools. You can contact the TiDB team for recovery.
+- If most of the Voter replicas are lost, manual intervention is required with professional tools. You can contact the TiDB team for a recovery solution.
