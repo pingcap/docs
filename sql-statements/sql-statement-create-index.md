@@ -104,7 +104,7 @@ Query OK, 0 rows affected (0.31 sec)
 
 ## Expression index
 
-In some scenarios, query conditions run a filtering process based on a certain expression. In these scenarios, the query performance is relatively poor because ordinary indexes cannot take effect, the query can only be executed by scanning the entire table. The expression index is a type of special index that can be created on an expression. Once an expression index is created, TiDB can use the index for the expression-based query, which significantly improves the query performance.
+In some scenarios, the filtering condition of a query is based on a certain expression. In these scenarios, the query performance is relatively poor because ordinary indexes cannot take effect, the query can only be executed by scanning the entire table. The expression index is a type of special index that can be created on an expression. Once an expression index is created, TiDB can use the index for the expression-based query, which significantly improves the query performance.
 
 For example, if you want to create an index based on `col1+cols2`, execute the following SQL statement:
 
@@ -147,7 +147,7 @@ DROP INDEX idx1 ON t1;
 > - Volatile functions, such as `rand()` and `now()`.
 > - System variables and user variables.
 > - Subqueries.
-> - `AUTO_INCREMENT` column. There is an exception: you can remove this restriction by setting the value of `tidb_enable_auto_increment_in_generated` (system variable) to `true`.
+> - `AUTO_INCREMENT` column. You can remove this restriction by setting the value of `tidb_enable_auto_increment_in_generated` (system variable) to `true`.
 > - Window functions.
 > - ROW functions, such as `create table t (j json, key k (((j,j))));`.
 > - Aggregate functions.
