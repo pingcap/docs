@@ -104,9 +104,9 @@ Query OK, 0 rows affected (0.31 sec)
 
 ## Expression index
 
-In some scenarios, query conditions run a filtering process based on a certain expression. In these scenarios, the query performance is relatively poor because ordinary indexes cannot take effect, the query can only be executed by scanning the entire table. The expression index is a type of special index that can be built on an expression. Once an expression index is built, TiDB can use the index for the expression-based query, which significantly improves the query performance.
+In some scenarios, query conditions run a filtering process based on a certain expression. In these scenarios, the query performance is relatively poor because ordinary indexes cannot take effect, the query can only be executed by scanning the entire table. The expression index is a type of special index that can be created on an expression. Once an expression index is created, TiDB can use the index for the expression-based query, which significantly improves the query performance.
 
-For example, if you want to build an index based on `col1+cols2`, execute the following SQL statement:
+For example, if you want to create an index based on `col1+cols2`, execute the following SQL statement:
 
 {{< copyable "sql" >}}
 
@@ -122,7 +122,7 @@ Or you can execute the following equivalent statement:
 ALTER TABLE t1 ADD INDEX idx1((col1 + col2));
 ```
 
-You can also specify the expression index when you build the table:
+You can also specify the expression index when you create the table:
 
 {{< copyable "sql" >}}
 
@@ -144,13 +144,13 @@ DROP INDEX idx1 ON t1;
 >
 > The expression in an expression index cannot contain the following content:
 >
-> - Volatile functions, such as `rand()`, `now()`, and so on.
-> - system variables and user variables.
-> -Subqueries.
-> - `AUTO_INCREMENT` column. However, there is one exception: you can remove this restriction by setting the value of `tidb_enable_auto_increment_in_generated` (system variable) to `true`.
-> - window functions.
+> - Volatile functions, such as `rand()`, `now()`.
+> - System variables and user variables.
+> - Subqueries.
+> - `AUTO_INCREMENT` column. There is an exception: you can remove this restriction by setting the value of `tidb_enable_auto_increment_in_generated` (system variable) to `true`.
+> - Window functions.
 > - ROW functions, such as `create table t (j json, key k (((j,j))));`.
-> - aggregate functions.
+> - Aggregate functions.
 > 
 > An expression index implicitly takes up a name (for example, `_V$_{index_name}_{index_offset}`). If you try to create a new expression index with the name that a column has already had, an error occurs. In addition, if you add a new column with the same name, an error also occurs.
 >
@@ -158,7 +158,7 @@ DROP INDEX idx1 ON t1;
 
 When the expression in a query statement matches the expression in an expression index, the optimizer can choose the expression index for the query. In some cases, the optimizer might not choose an expression index depending on statistics. In this situation, you can force the optimizer to select an expression index by using optimizer hints.
 
-In the following examples, suppose that you build the expression index `idx` on the expression `lower(col1)`:
+In the following examples, suppose that you create the expression index `idx` on the expression `lower(col1)`:
 
 If the results of the query statement are the same expressions, the expression index applies. Take the following statement as an example:
 
@@ -189,7 +189,7 @@ When the queries are sorted by the same expression, the expression index applies
 SELECT * FROM t ORDER BY lower(col1);
 ```
 
-If the same expression is included in the aggregate (`GROUP BY`) functions, the expression index applies. Take the following statement as an example:
+If the same expression is included in the aggregate (`GROUP BY`) functions, the expression index applies. Take the following statements as an example:
 
 {{< copyable "sql" >}}
 
@@ -204,7 +204,7 @@ The cost of maintaining an expression index is higher than that of maintaining o
 
 Therefore, when the query performance outweighs the insert and update performance, you can consider indexing the expressions.
 
-Expression indexes have the same syntax and limitations as in MySQL. They are implemented by building indexes on generated virtual columns that are invisible, so the supported expressions inherit all [limitations of virtual generated columns](/generated-columns.md#limitations).
+Expression indexes have the same syntax and limitations as in MySQL. They are implemented by creating indexes on generated virtual columns that are invisible, so the supported expressions inherit all [limitations of virtual generated columns](/generated-columns.md#limitations).
 
 ## Invisible index
 
@@ -227,7 +227,7 @@ The global variables associated with the `CREATE INDEX` statement are `tidb_ddl_
 * Descending indexes are not supported (similar to MySQL 5.7).
 * Adding the primary key of the `CLUSTERED` type to a table is not supported. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
 * Expression indexes are incompatible with views. When a query is executed using a view, the expression index cannot be used at the same time.
-* Expression indexes have compatibility issues with bindings. When the expression of an expression index has a constant, the binding created for the corresponding query expands its scope. For example, suppose that the expression in the expression index is   `a+1`, and the corresponding query condition is  `a+1 > 2`. In this case, the created binding is `a+? > ?`, which means that the query with the condition such as  `a+2 > 2` is also forced to use the expression index and results in a poor execution plan. In addition, this also affects the baseline capturing and baseline evolution in SQL Plan Management (SPM).
+* Expression indexes have compatibility issues with bindings. When the expression of an expression index has a constant, the binding created for the corresponding query expands its scope. For example, suppose that the expression in the expression index is  `a+1`, and the corresponding query condition is  `a+1 > 2`. In this case, the created binding is `a+? > ?`, which means that the query with the condition such as `a+2 > 2` is also forced to use the expression index and results in a poor execution plan. In addition, this also affects the baseline capturing and baseline evolution in SQL Plan Management (SPM).
 
 ## See also
 

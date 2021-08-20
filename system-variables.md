@@ -505,7 +505,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 - Scope: SESSION | GLOBAL
 - Default value: `OFF`
-- This variable is used to determine whether can include the `AUTO_INCREMENT` columns when creating a generated column or an expression index.
+- This variable is used to determine whether to include the `AUTO_INCREMENT` columns when creating a generated column or an expression index.
 
 ### tidb_enable_cascades_planner
 
