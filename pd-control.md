@@ -790,19 +790,26 @@ Usage:
        >> scheduler config balance-hot-region-scheduler set src-tolerance-ratio 1.1
     ```
 
-- `read-priorities`,`write-leader-priorities`, and `write-peer-priorities` control the first and second dimensions which have the first priority of balance when different types of hot regions are dealt with. For hot regions of `read` and `write-leader` types, the available dimensions are `query`, `byte`, and `key`. For hot regions of `write-peer`, the available dimensions are `byte` and `key`. If not all the cluster components are upgraded to v5.2 and later, these configurations do not take effect, and the compatible configurations are used. Usually, you do not need to modify these configuration items.
+- `read-priorities`,`write-leader-priorities`, and `write-peer-priorities` control which dimensions have the priority for hot Region scheduling and support two dimensions.
+
+    - `read-priorities` and `write-leader-priorities` control the dimensions to be prioritized for read and write-leader hot Region scheduling. The available dimensions are `query`, `byte` and `key`.
+    - `write-peer-priorities` controls the dimension to be prioritized for write-peer hot Region scheduling. The available dimensions are `byte` and `key`.
+    
+    > **Note:**
+    >
+    > If not all the cluster components are upgraded to v5.2 and later, the configuration of `query` dimension does not take effect. If some components are upgraded, the `byte` and `key` dimensions still by default have the priority for hot Region scheduling. If all the components of the cluster are upgraded to v5.2 and later, such a compatible configuration still takes effect. You can view the real-time configuration using `pd-ctl` command. Usually, you do not need to modify these configurations.
 
     ```bash
     >> scheduler config balance-hot-region-scheduler set read-priorities query,byte
     ```
 
-- `strict-picking-store` is a switch that controls the search space of hot region scheduling. When it is enabled and if stability is ensured, hot region scheduling will start. Usually it is enabled. When it is disabled, only the balance of dimensions of the first priority is enusred, which might reduce the balance of other dimensions. Usually, you do not need to modify this configuration item.
+- `strict-picking-store` controls the search space of hot Region scheduling. Usually it is enabled. When it is enabled, hot Region scheduling ensures the balance between the two configured dimensions. When it is disabled, hot Region scheduling only ensures the balance of dimensions with the first priority, which might reduce the balance of other dimensions. Usually, you do not need to modify this configuration item.
 
     ```bash
     >> scheduler config balance-hot-region-scheduler set strict-picking-store true
     ```
 
-- `enable-for-tiflash` is a switch that controls whether hot region scheduling takes effect for TiFlash. Usually it is enabled. When it is disabled, the hot region scheduling between TiFlash instances do not start.
+- `enable-for-tiflash` controls whether hot Region scheduling takes effect for TiFlash. Usually it is enabled. When it is disabled, the hot Region scheduling between TiFlash instances do not start.
 
     ```bash
     >> scheduler config balance-hot-region-scheduler set enable-for-tiflash true
