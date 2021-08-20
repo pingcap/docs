@@ -144,7 +144,7 @@ DROP INDEX idx1 ON t1;
 >
 > The expression in an expression index cannot contain the following content:
 >
-> - Volatile functions, such as `rand()`, `now()`.
+> - Volatile functions, such as `rand()` and `now()`.
 > - System variables and user variables.
 > - Subqueries.
 > - `AUTO_INCREMENT` column. There is an exception: you can remove this restriction by setting the value of `tidb_enable_auto_increment_in_generated` (system variable) to `true`.
