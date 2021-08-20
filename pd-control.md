@@ -701,7 +701,7 @@ Usage:
 >> scheduler config evict-leader-scheduler        // Display the stores in which the scheduler is located since v4.0.0
 >> scheduler add shuffle-leader-scheduler         // Randomly exchange the leader on different stores
 >> scheduler add shuffle-region-scheduler         // Randomly scheduling the Regions on different stores
->> scheduler add evict-slow-store-scheduler       // When there is one and only one slow score, evict all Region leaders of that score
+>> scheduler add evict-slow-store-scheduler       // When there is one and only one slow store, evict all Region leaders of that store
 >> scheduler remove grant-leader-scheduler-1      // Remove the corresponding scheduler, and `-1` corresponds to the store ID
 >> scheduler pause balance-region-scheduler 10    // Pause the balance-region scheduler for 10 seconds
 >> scheduler pause all 10                         // Pause all schedulers for 10 seconds
