@@ -803,7 +803,7 @@ Usage:
     >> scheduler config balance-hot-region-scheduler set read-priorities query,byte
     ```
 
-- `strict-picking-store` controls the search space of hot Region scheduling. Usually it is enabled. When it is enabled, hot Region scheduling ensures the balance between the two configured dimensions. When it is disabled, hot Region scheduling only ensures the balance of dimensions with the first priority, which might reduce the balance of other dimensions. Usually, you do not need to modify this configuration item.
+- `strict-picking-store` controls the search space of hot Region scheduling. Usually it is enabled. When it is enabled, hot Region scheduling ensures the balance between the two configured dimensions. When it is disabled, hot Region scheduling only ensures the balance of dimensions with the first priority, which might reduce the balance of other dimensions. Usually, you do not need to modify this configuration.
 
     ```bash
     >> scheduler config balance-hot-region-scheduler set strict-picking-store true
