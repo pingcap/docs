@@ -195,7 +195,7 @@ In the deployment of three DCs in two cities, to optimize performance, you need 
    
    > **Note:**
    >
-   > Since TiDB 5.2, the `label-property` configuration is not supported by default. To set the replica policy, use the [Placement Rules](/configure-placement-rules.md).
+   > Since TiDB 5.2, the `label-property` configuration is not supported by default. To set the replica policy, use the [placement rules](/configure-placement-rules.md).
 
 - Configure the priority of PD. To avoid the situation where the PD leader is in another city (IDC3), you can increase the priority of local PD (in Seattle) and decrease the priority of PD in another city (San Francisco). The larger the number, the higher the priority.
 
