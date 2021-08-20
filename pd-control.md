@@ -797,7 +797,7 @@ Usage:
     
     > **Note:**
     >
-    > If not all the cluster components are upgraded to v5.2 and later, the configuration of `query` dimension does not take effect. If some components are upgraded, the `byte` and `key` dimensions still by default have the priority for hot Region scheduling. If all the components of the cluster are upgraded to v5.2 and later, such a compatible configuration still takes effect. You can view the real-time configuration using `pd-ctl` command. Usually, you do not need to modify these configurations.
+    > If not all the cluster components are upgraded to v5.2 and later, the configuration of `query` dimension does not take effect. If some components are upgraded, the `byte` and `key` dimensions still by default have the priority for hot Region scheduling. After all the components of the cluster are upgraded to v5.2 and later, such a compatible configuration still takes effect. You can view the real-time configuration using `pd-ctl` command. Usually, you do not need to modify these configurations.
 
     ```bash
     >> scheduler config balance-hot-region-scheduler set read-priorities query,byte
