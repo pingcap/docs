@@ -809,7 +809,7 @@ Usage:
     >> scheduler config balance-hot-region-scheduler set strict-picking-store true
     ```
 
-- `enable-for-tiflash` controls whether hot Region scheduling takes effect for TiFlash. Usually it is enabled. When it is disabled, the hot Region scheduling between TiFlash instances do not start.
+- `enable-for-tiflash` controls whether hot Region scheduling takes effect for TiFlash instances. Usually it is enabled. When it is disabled, the hot Region scheduling between TiFlash instances do not start.
 
     ```bash
     >> scheduler config balance-hot-region-scheduler set enable-for-tiflash true
