@@ -288,11 +288,11 @@ Because the baseline evolution automatically creates a new binding, when the que
 
 + `read_from_storage` is a special hint in that it specifies whether to read data from TiKV or from TiFlash when reading tables. Because TiDB provides isolation reads, when the isolation condition changes, this hint has a great influence on the evolved execution plan. Therefore, when this hint exists in the initially created binding, TiDB ignores all its evolved bindings.
 
-## Upgrade Checklist
+## Upgrade checklist
 
-SQL Plan Management (SPM) may fail in upgrade due to compatibility issues. You need to check the environment before upgrade to make sure it succeeds. 
+During cluster upgrade, SQL Plan Management (SPM) might cause compatibility issues and make the upgrade fail. To ensure a successful upgrade, you need to include the following list for upgrade precheck:
 
-* When you upgrade from a version earlier than v5.2.0 (that is, v4.0, v5.0, and v5.1) to the current version, make sure `tidb_evolve_plan_baselines` is disabled. If not, you must disable it before upgrade. Perform the following steps. 
+* When you upgrade from a version earlier than v5.2.0 (that is, v4.0, v5.0, and v5.1) to the current version, make sure that `tidb_evolve_plan_baselines` is disabled before the upgrade. To disable this variable, perform the following steps. 
 
     {{< copyable "sql" >}}
 
@@ -306,14 +306,14 @@ SQL Plan Management (SPM) may fail in upgrade due to compatibility issues. You n
     set global tidb_evolve_plan_baselines = off;
     ```
 
-* Before you upgrade from v4.0 to the current version, you must check whether the grammar of all the SQL statements corresponding to available SQL bindings is correct in the new version. If any grammatical errors, delete the corresponding SQL bindings. Perform the following steps.
+* Before you upgrade from v4.0 to the current version, you need to check whether the syntax of all queries corresponding to the available SQL bindings is correct in the new version. If any syntax errors exist, delete the corresponding SQL binding. To do that, perform the following steps.
 
     {{< copyable "sql" >}}
 
     ```sql
-    -- Check the SQL statements corresponding to available SQL bindings in the version to be upgraded.
+    -- Check the query corresponding to the available SQL binding in the version to be upgraded.
   
-    select bind_sql from mysql.bind_info where source != 'builtin' and status = 'using';
+    select bind_sql from mysql.bind_info where status = 'using';
   
     -- Verify the result from the above SQL query in the test environment of the new version. 
   
@@ -322,5 +322,5 @@ SQL Plan Management (SPM) may fail in upgrade due to compatibility issues. You n
     ...
   
     -- In the case of a syntax error (ERROR 1064 (42000): You have an error in your SQL syntax), delete the corresponding binding. 
-    -- For any other errors (for example, tables are not found), it means the syntax is compatible. No intervention is needed. 
+    -- For any other errors (for example, tables are not found), it means that the syntax is compatible. No other operation is needed. 
     ```
