@@ -39,7 +39,7 @@ The meaning of each column field in the `DEADLOCKS` table is as follows:
 * `RETRYABLE`: Whether the deadlock error can be retried. For the description of retryable deadlock errors, see the [Retryable deadlock errors](#retryable-deadlock-errors) section.
 * `TRY_LOCK_TRX_ID`: The ID of the transaction that tries to acquire lock. This ID is also the `start_ts` of the transaction.
 * `CURRENT_SQL_DIGEST`: The digest of the SQL statement currently being executed in the lock-acquiring transaction.
-* `CURRENT_SQL_DIGEST_TEXT`: The normalized SQL statement currently being executed in the lock-acquiring transaction.
+* `CURRENT_SQL_DIGEST_TEXT`: The normalized form of the SQL statement that is currently being executed in the lock-acquiring transaction.
 * `KEY`: The blocked key that the transaction tries to lock. The value of this field is displayed in the form of hexadecimal string.
 * `KEY_INFO`: The detailed information of `KEY`. See the [KEY_INFO](#key_info) section.
 * `TRX_HOLDING_LOCK`: The ID of the transaction that currently holds the lock on the key and causes blocking. This ID is also the `start_ts` of the transaction.
@@ -53,7 +53,7 @@ To adjust the maximum number of deadlock events that can be recorded in the `DEA
 
 ## `KEY_INFO`
 
-The `KEY_INFO` column shows the detailed information of the key in the `KEY` column. The information is shown in the JSON format. The contained fields are described as follows:
+The `KEY_INFO` column shows the detailed information of the `KEY` column. The information is shown in the JSON format. The description of each field is as follows:
 
 * `"db_id"`: The ID of the schema to which the key belongs.
 * `"db_name"`: The name of the schema to which the key belongs.
@@ -61,20 +61,20 @@ The `KEY_INFO` column shows the detailed information of the key in the `KEY` col
 * `"table_name"`: The name of the table to which the key belongs.
 * `"partition_id"`: The ID of the partition where the key is located.
 * `"partition_name"`: The name of the partition where the key is located.
-* `"handle_type"`: The handle type of the row key (that is, the key that stores a row of data). Its possible values ​​are as follows:
-    * `"int"`: The handle is of the int type, which means that the handle is the row ID.
-    * `"common"`: The handle of the non-int64 type. This type is shown in the non-int primary key when clustered index is enabled.
-    * `"unknown"`: The handle type that is currently not supported.
+* `"handle_type"`: The handle type of the row key (that is, the key that stores a row of data). The possible values ​​are as follows:
+    * `"int"`: The handle type is int, which means that the handle is the row ID.
+    * `"common"`: The handle type is not int64. This type is shown in the non-int primary key when clustered index is enabled.
+    * `"unknown"`: The handle type is currently not supported.
 * `"handle_value"`: The handle value.
 * `"index_id"`: The index ID to which the index key (the key that stores the index) belongs.
 * `"index_name"`: The name of the index to which the index key belongs.
 * `"index_values"`: The index value in the index key.
 
-In the above fields, if the information is not applicable or currently unavailable, it is omitted. For example, the row key information does not contain `index_id`, `index_name`, and `index_values`; the index key does not contain `handle_type` and `handle_value`; non-partitioned tables do not display `partition_id` and `partition_name`; the key information in the deleted table cannot obtain schema information such as `table_name`, `db_id`, `db_name`, and `index_name`, and it is unable to distinguish whether it is a partitioned table.
+In the above fields, if the information of a field is not applicable or currently unavailable, the field is omitted in the query result. For example, the row key information does not contain `index_id`, `index_name`, and `index_values`; the index key does not contain `handle_type` and `handle_value`; non-partitioned tables do not display `partition_id` and `partition_name`; the key information in the deleted table cannot obtain schema information such as `table_name`, `db_id`, `db_name`, and `index_name`, and it is unable to distinguish whether the table is a partitioned table.
 
 > **Note:**
 >
-> If a key comes from a table with partitioning enabled, and the information of the schema to which the key belongs cannot be queried due to some reasons (for example, the table to which the key belongs has been deleted) during the query, the ID of the partition to which the key belongs might be appear in the `table_id` field. This is because TiDB encodes the keys of different partitions in the same way as it encodes the keys of several independent tables. Therefore, when the schema information is missing, TiDB cannot confirm whether the key belongs to an unpartitioned table or to one of a table partition.
+> If a key comes from a table with partitioning enabled, and the information of the schema to which the key belongs cannot be queried due to some reasons (for example, the table to which the key belongs has been deleted) during the query, the ID of the partition to which the key belongs might be appear in the `table_id` field. This is because TiDB encodes the keys of different partitions in the same way as it encodes the keys of several independent tables. Therefore, when the schema information is missing, TiDB cannot confirm whether the key belongs to an unpartitioned table or to one partition of a table.
 
 ## Retryable deadlock errors
 
@@ -128,7 +128,7 @@ create table t (id int primary key, v int);
 insert into t values (1, 10), (2, 20);
 ```
 
-Execute the two transactions in the following order:
+Two transactions are executed in the following order:
 
 | Transaction 1                               | Transaction 2                               | Description                 |
 |--------------------------------------|--------------------------------------|----------------------|
@@ -156,7 +156,7 @@ The expected output is as follows:
 +-------------+----------------------------+-----------+--------------------+------------------------------------------------------------------+-----------------------------------------+----------------------------------------+----------------------------------------------------------------------------------------------------+--------------------+
 ```
 
-Two rows of data are generated in the `DEADLOCKS` table. The `DEADLOCK_ID` field of both rows is `1`, which means that the information in both rows belongs to the same deadlock error. The first row shows that the transaction of the ID `426812829645406216` is blocked on the key of `"7480000000000000355F728000000000000002"` by the transaction of the ID `"426812829645406217"`. The second row shows that the transaction of the ID `"426812829645406217"` is blocked on the key of `"7480000000000000355F728000000000000001"` by the transaction of the ID `426812829645406216`, which constitutes mutual blocking and forms a deadlock.
+Two rows of data are generated in the `DEADLOCKS` table. The `DEADLOCK_ID` field of both rows is `1`, which means that the information in both rows belongs to the same deadlock error. The first row shows that on the key of `"7480000000000000355F728000000000000002"`, the transaction of the ID `426812829645406216` is blocked by the transaction of the ID `"426812829645406217"`. The second row shows that on the key of `"7480000000000000355F728000000000000001"`, the transaction of the ID `"426812829645406217"` is blocked by the transaction of the ID `426812829645406216`, which constitutes mutual blocking and forms a deadlock.
 
 ## Example 2
 
@@ -174,11 +174,11 @@ Assume that you query the `DEADLOCKS` table and get the following result:
 +-------------+----------------------------+-----------+--------------------+------------------------------------------------------------------+-----------------------------------------+----------------------------------------+----------------------------------------------------------------------------------------------------+--------------------+
 ```
 
-The `DEADLOCK_ID` column in the above query result shows that the first two rows together represent the information of a deadlock error, and the two transactions that wait for each other form the deadlock. The next three rows together represent another deadlock information, and the three transactions that wait in a cycle form the deadlock.
+The `DEADLOCK_ID` column in the above query result shows that the first two rows together represent the information of a deadlock error, and the two transactions that wait for each other form the deadlock. The next three rows together represent the information of another deadlock error, and the three transactions that wait in a cycle form the deadlock.
 
 ## CLUSTER_DEADLOCKS
 
-The `CLUSTER_DEADLOCKS` table returns information about the recent deadlock errors on each TiDB node in the entire cluster, which is the information of the `DEADLOCKS` table on each node combined together. `CLUSTER_DEADLOCKS` also contains an additional `INSTANCE` column to display the IP address and port of the node to distinguish between different TiDB nodes.
+The `CLUSTER_DEADLOCKS` table returns information about the recent deadlock errors on each TiDB node in the entire cluster, which is the combined information of the `DEADLOCKS` table on each node. `CLUSTER_DEADLOCKS` also includes an additional `INSTANCE` column to display the IP address and port of the node to distinguish between different TiDB nodes.
 
 Note that, because `DEADLOCK_ID` does not guarantee global uniqueness, in the query result of the `CLUSTER_DEADLOCKS` table, you need to use the `INSTANCE` and `DEADLOCK_ID` together to distinguish the information of different deadlock errors in the result set.
 
