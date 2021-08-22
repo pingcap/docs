@@ -211,6 +211,6 @@ You can compare query results and query performance of these two methods.
 
 ## What's next
 
-- [Architecture of TiDB HTAP](stable/tiflash-overview.md#architecture)
+- [Architecture of TiDB HTAP](/tiflash-overview.md#architecture)
 - [Explore HTAP](/explore-htap.md)
 - [Use TiFlash](/use-tiflash.md#use-tiflash)
