@@ -205,7 +205,7 @@ limit 10;
 
 If the result of the `EXPLAIN` statement shows `ExchangeSender` and `ExchangeReceiver` operators, it indicates that the MPP mode has taken effect.
 
-In addition, you can specify that each part of the entire query is computed using only the TiFlash. For detailed inforamtion, see [Use TiDB to read TiFlash replicas](/tiflash/use-tiflash.md#use-TiDB-to-read-TiFlash-replicas).
+In addition, you can specify that each part of the entire query is computed using only the TiFlash. For detailed inforamtion, see [Use TiDB to read TiFlash replicas](/tiflash/use-tiflash.md#use-tidb-to-read-tiflash-replicas).
 
 You can compare query results and query performance of these two methods.
 
