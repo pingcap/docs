@@ -787,17 +787,17 @@ Usage:
 - `src-tolerance-ratio` and `dst-tolerance-ratio` are configuration items for the expectation scheduler. The smaller the `tolerance-ratio`, the easier it is for scheduling. When redundant scheduling occurs, you can appropriately increase this value.
 
     ```bash
-       >> scheduler config balance-hot-region-scheduler set src-tolerance-ratio 1.1
+    >> scheduler config balance-hot-region-scheduler set src-tolerance-ratio 1.1
     ```
 
-- `read-priorities`,`write-leader-priorities`, and `write-peer-priorities` control which dimensions have the priority for hot Region scheduling and support two dimensions.
+- `read-priorities`, `write-leader-priorities`, and `write-peer-priorities` control which dimension the scheduler prioritizes for hot Region scheduling. Two dimensions are supported for configuration.
 
-    - `read-priorities` and `write-leader-priorities` control the dimensions to be prioritized for read and write-leader hot Region scheduling. The available dimensions are `query`, `byte` and `key`.
-    - `write-peer-priorities` controls the dimension to be prioritized for write-peer hot Region scheduling. The available dimensions are `byte` and `key`.
+    - `read-priorities` and `write-leader-priorities` control which dimensions the scheduler prioritizes for scheduling hot Regions of the read and write-leader types. The dimension options are `query`, `byte`, and `key`.
+    - `write-peer-priorities` controls which dimensions the scheduler prioritizes for scheduling hot Regions of the write-peer type. The dimension options are `byte` and `key`.
     
     > **Note:**
     >
-    > If not all the cluster components are upgraded to v5.2 and later, the configuration of `query` dimension does not take effect. If some components are upgraded, the `byte` and `key` dimensions still by default have the priority for hot Region scheduling. After all the components of the cluster are upgraded to v5.2 and later, such a compatible configuration still takes effect. You can view the real-time configuration using `pd-ctl` command. Usually, you do not need to modify these configurations.
+    > If a cluster component is earlier than v5.2, the configuration of `query` dimension does not take effect. If some components are upgraded to v5.2 or later, the `byte` and `key` dimensions still by default have the priority for hot Region scheduling. After all components of the cluster are upgraded to v5.2 or later, such a configuration still takes effect for compatibility. You can view the real-time configuration using the `pd-ctl` command. Usually, you do not need to modify these configurations.
 
     ```bash
     >> scheduler config balance-hot-region-scheduler set read-priorities query,byte
@@ -809,7 +809,7 @@ Usage:
     >> scheduler config balance-hot-region-scheduler set strict-picking-store true
     ```
 
-- `enable-for-tiflash` controls whether hot Region scheduling takes effect for TiFlash instances. Usually it is enabled. When it is disabled, the hot Region scheduling between TiFlash instances do not start.
+- `enable-for-tiflash` controls whether hot Region scheduling takes effect for TiFlash instances. Usually, it is enabled. When it is disabled, the hot Region scheduling between TiFlash instances is not performed.
 
     ```bash
     >> scheduler config balance-hot-region-scheduler set enable-for-tiflash true
