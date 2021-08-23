@@ -9,7 +9,7 @@ Contributors play an important role in the robust development of TiDB. We sincer
 
 ## TiDB developers
 
-TiDB developers contribute to new feature development, performance optimization, and stability guarantee. The following is the list of contributors to TiDB related repo:
+TiDB developers contribute to new feature development, performance optimization, and bugfixes. The following is the list of contributors to TiDB related repo:
 
 - [pingcap/tidb](https://github.com/pingcap/tidb/graphs/contributors)
 - [tikv/tikv](https://github.com/tikv/tikv/graphs/contributors)
