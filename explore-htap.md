@@ -39,7 +39,7 @@ For more information about the architecture, see [architecture of TiDB HTAP](/ti
 
 ## Prerequisites for environment
 
-Before exploring the features of TiDB HTAP, you need to configure TiDB and the corresponding storage engine according to the data volume. If the data volume is huge (for example, 100 T), it is recommended to use TiFlash Massively Parallel Processing (MPP) as the primary solution and TiSpark as the supplementary solution.
+Before exploring the features of TiDB HTAP, you need to configure TiDB and the corresponding storage engine according to the data volume. If the data volume is large (for example, 100 T), it is recommended to use TiFlash Massively Parallel Processing (MPP) as the primary solution and TiSpark as the supplementary solution.
 
 - TiFlash
 
