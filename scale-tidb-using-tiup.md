@@ -249,8 +249,11 @@ If you want to remove a TiKV node from the `10.0.1.5` host, take the following s
 
 > **Note:**
 >
-> The PD Client in TiKV caches the list of PD nodes. The current version of TiKV has a mechanism to automatically and regularly update PD nodes, which can help mitigate the issue of an expired list of PD nodes cached by TiKV. However, after scaling out PD, you should try to avoid directly removing all PD nodes at once that exist before the scaling. If necessary, before making all the previously existing PD nodes offline, make sure to switch the PD leader to a newly added PD node.
-
+> The PD Client in TiKV caches the list of PD nodes. 
+>
+> + In versions before v4.0.3, TiKV cannot automatically and regularly update the cache of the PD node list regularly. Only after the PD leader switches or TiKV restarts to load the latest configuration, the cache can be updated. To avoid the issue of an expired list of PD nodes cached by TiKV, the PD cluster should contain at least one PD node that existed before removing and scaling PD nodes. If this condition is not met, you need to manually perform the PD transfer leader operation to update the PD cache list in TiKV.
+>
+> + In versions v4.0.3 and later, TiKV has a mechanism to automatically and regularly update PD nodes, which can help mitigate the issue of an expired list of PD nodes cached by TiKV. However, after scaling out PD, you should try to avoid directly removing all PD nodes at once that exist before the scaling. If necessary, before making all the previously existing PD nodes offline, make sure to switch the PD leader to a newly added PD node.
 1. View the node ID information:
 
     {{< copyable "shell-regular" >}}
