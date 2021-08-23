@@ -50,6 +50,8 @@ func formatDefaultValue(sv *variable.SysVar) string {
 		return "`pessimistic`"
 	case variable.TiDBMemQuotaApplyCache, variable.TiDBMemQuotaQuery, variable.TiDBQueryLogMaxLen, variable.TiDBBCJThresholdSize:
 		return fmt.Sprintf("`%s` (%s)", sv.Value, ByteCountIEC(sv.Value))
+	case variable.DataDir:
+		return "/tmp/tidb"
 	}
 	if sv.Value == "" {
 		return `""` // make it easier to read that it's an empty string default
@@ -64,11 +66,10 @@ func skipSv(sv *variable.SysVar) bool {
 	}
 	// These svs have no documentation yet.
 	switch sv.Name {
-	case variable.BlockEncryptionMode, variable.CharacterSetClient, variable.CharacterSetConnection, variable.CharsetDatabase,
-		variable.CharacterSetFilesystem, variable.CharacterSetResults, variable.CharacterSetServer, variable.CollationConnection, variable.CollationDatabase,
-		variable.CollationServer, variable.DataDir, variable.DefaultWeekFormat, variable.ErrorCount, variable.GroupConcatMaxLen,
+	case variable.BlockEncryptionMode, variable.CollationConnection, variable.CollationDatabase,
+		variable.CollationServer, variable.DefaultWeekFormat, variable.ErrorCount, variable.GroupConcatMaxLen,
 		"have_openssl", "have_ssl", "last_insert_id", variable.LowerCaseTableNames, variable.MaxAllowedPacket, variable.MaxConnections,
-		variable.MaxPreparedStmtCount, variable.PluginDir, variable.PluginLoad, variable.SQLLogBin, "ssl_ca", "ssl_cert", "ssl_key", variable.TiDBAnalyzeVersion,
+		variable.MaxPreparedStmtCount, variable.PluginDir, variable.PluginLoad, variable.SQLLogBin, "ssl_ca", "ssl_cert", "ssl_key",
 		variable.TiDBBatchCommit, variable.TiDBBatchDelete, variable.TiDBBatchInsert, variable.TiDBEnableChangeMultiSchema,
 		variable.TiDBEnableExchangePartition, variable.TiDBEnableExtendedStats, variable.TiDBEnablePointGetCache,
 		variable.TiDBEnableStreaming, variable.TiDBGuaranteeLinearizability, variable.TiDBTxnScope, variable.TiDBTxnReadTS,
@@ -80,10 +81,12 @@ func skipSv(sv *variable.SysVar) bool {
 		variable.TiDBMemQuotaSort, variable.TiDBMergeJoinConcurrency, variable.TiDBOptCPUFactor, variable.TiDBOptDescScanFactor,
 		variable.TiDBOptDiskFactor, variable.TiDBOptJoinReorderThreshold, variable.TiDBOptMemoryFactor, variable.TiDBOptNetworkFactor,
 		variable.TiDBOptScanFactor, variable.TiDBOptTiFlashConcurrencyFactor, variable.TiDBOptimizerSelectivityLevel,
-		variable.TiDBOptSeekFactor, variable.LogBin, "license", variable.TiDBEnableTopSQL, variable.TiDBTopSQLAgentAddress, variable.TiDBTopSQLPrecisionSeconds,
+		variable.TiDBOptSeekFactor, variable.LogBin, variable.TiDBEnableTopSQL, variable.TiDBTopSQLAgentAddress, variable.TiDBTopSQLPrecisionSeconds,
 		variable.TiDBTopSQLMaxStatementCount, variable.TiDBEnableGlobalTemporaryTable, variable.TiDBEnablePipelinedWindowFunction, variable.TiDBOptCartesianBCJ,
 		variable.TiDBEnableLocalTxn, variable.TiDBTopSQLMaxCollect, variable.TiDBTopSQLReportIntervalSeconds, variable.SkipNameResolve, variable.TMPTableSize,
-		variable.TiDBOptMPPOuterJoinFixedBuildSide:
+		variable.TiDBOptMPPOuterJoinFixedBuildSide, variable.TiDBRestrictedReadOnly, variable.TiDBMPPStoreFailTTL, variable.TiDBHashExchangeWithNewCollation,
+		variable.TiDBEnableOrderedResultMode:
+
 		return true
 	}
 	return false
@@ -100,7 +103,7 @@ func printWarning(sv *variable.SysVar) string {
 	case variable.TiDBGCScanLockMode:
 		return "> **Warning:**\n>\n> Currently, Green GC is an experimental feature. It is not recommended that you use it in the production environment.\n\n"
 	case variable.TiDBPartitionPruneMode:
-		return "> **Warning:**\n\n> Currently, the dynamic mode for partitioned tables is an experimental feature. It is not recommended that you use it in the production environment.\n\n"
+		return "> **Warning:**\n\n> Currently, the dynamic pruning mode for partitioned tables is an experimental feature. It is not recommended that you use it in the production environment.\n\n"
 	}
 	return ""
 }
@@ -121,7 +124,7 @@ func formatScope(sv *variable.SysVar) string {
 	// Manually cater for "INSTANCE" scope, which is not a native concept.
 	switch sv.Name {
 	case variable.TiDBDDLSlowOprThreshold, variable.TiDBCheckMb4ValueInUTF8, variable.TiDBEnableCollectExecutionInfo, variable.TiDBEnableSlowLog, variable.TiDBExpensiveQueryTimeThreshold,
-		variable.TiDBForcePriority, variable.TiDBGeneralLog, variable.TiDBSlowLogThreshold, variable.TiDBPProfSQLCPU, variable.TiDBQueryLogMaxLen, variable.TiDBRecordPlanInSlowLog:
+		variable.TiDBForcePriority, variable.TiDBGeneralLog, variable.TiDBSlowLogThreshold, variable.TiDBPProfSQLCPU, variable.TiDBQueryLogMaxLen, variable.TiDBRecordPlanInSlowLog, variable.TiDBMemoryUsageAlarmRatio:
 		return "INSTANCE"
 	case variable.TiDBStoreLimit:
 		return "INSTANCE | GLOBAL"
@@ -175,7 +178,7 @@ func formatSpecialVersionComment(sv *variable.SysVar) string {
 		return ` <span class="version-mark">New in v4.0.11</span>`
 	case variable.TiDBStoreLimit:
 		return ` <span class="version-mark">New in v3.0.4 and v4.0</span>`
-	case variable.TiDBPartitionPruneMode, variable.TiDBEnforceMPPExecution:
+	case variable.TiDBPartitionPruneMode, variable.TiDBEnforceMPPExecution, variable.TiDBAnalyzeVersion:
 		return ` <span class="version-mark">New in v5.1</span>`
 	default:
 		return ""
@@ -287,9 +290,9 @@ func getExtendedDescription(sv *variable.SysVar) string {
 			"\n" +
 			"    In the case of a poor network environment, appropriately increasing the value of this variable can effectively alleviate error reporting to the application end caused by timeout. If the application end wants to receive the error information more quickly, minimize the value of this variable."
 	case variable.TiDBBCJThresholdCount:
-		return "- The unit of the variable is rows. If the objects of the join operation belong to a subquery, the optimizer cannot estimate the size of the subquery result set. In this situation, the size is determined by the number of rows in the result set. If the estimated number of rows in the subquery is less than the value of this variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used."
+		return "- The unit of the variable is rows. If the objects of the join operation belong to a subquery, the optimizer cannot estimate the size of the subquery result set. In this situation, the size is determined by the number of rows in the result set. If the estimated number of rows in the subquery is less than the value of this variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used. When `tidb_broadcast_join_threshold_count = -1`, the threshold is infinitely high."
 	case variable.TiDBBCJThresholdSize:
-		return "- If the table size is less than the value of the variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used."
+		return "- If the table size is less than the value of the variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used. When `tidb_broadcast_join_threshold_size = -1`, the threshold is infinitely high."
 	case variable.TiDBBuildStatsConcurrency:
 		return "- This variable is used to set the concurrency of executing the `ANALYZE` statement.\n- When the variable is set to a larger value, the execution performance of other queries is affected."
 	case variable.TiDBCapturePlanBaseline:
@@ -778,12 +781,41 @@ func getExtendedDescription(sv *variable.SysVar) string {
 	case variable.InitConnect:
 		return "- The `init_connect` feature permits a SQL statement to be automatically executed when you first connect to a TiDB server. If you have the `CONNECTION_ADMIN` or `SUPER` privileges, this `init_connect` statement will not be executed. If the `init_connect` statement results in an error, your user connection will be terminated."
 	case variable.TiDBPartitionPruneMode:
-		return "- Specifies whether to enable `dynamic` mode for partitioned tables. For details about the dynamic mode, see [Dynamic Mode for Partitioned Tables](/partitioned-table.md#dynamic-mode)."
+		return "- Specifies whether to enable `dynamic` mode for partitioned tables. For details about the dynamic pruning mode, see [Dynamic Pruning Mode for Partitioned Tables](/partitioned-table.md#dynamic-pruning-mode)."
 	case variable.TiDBEnforceMPPExecution:
-		return "- Controls whether to ignore the optimizer's cost estimation and to forcibly use TiFlash's MPP mode for query execution. The value options are as follows:\n" +
+		return "- To change this default value, modify the [`performance.enforce-mpp`](/tidb-configuration-file.md#enforce-mpp) configuration value.\n" +
+			"- Controls whether to ignore the optimizer's cost estimation and to forcibly use TiFlash's MPP mode for query execution. The value options are as follows:\n" +
 			"    - `0` or `OFF`, which means that the MPP mode is not forcibly used (by default).\n" +
 			"    - `1` or `ON`, which means that the cost estimation is ignored and the MPP mode is forcibly used. Note that this setting only takes effect when `tidb_allow_mpp=true`.\n\n" +
 			"MPP is a distributed computing framework provided by the TiFlash engine, which allows data exchange between nodes and provides high-performance, high-throughput SQL algorithms. For details about the selection of the MPP mode, refer to [Control whether to select the MPP mode](/tiflash/use-tiflash.md#control-whether-to-select-the-mpp-mode)."
+	case variable.CharacterSetClient:
+		return "- The character set for data sent from the client. See [Character Set and Collation](/character-set-and-collation.md) for details on the use of character sets and collations in TiDB. It is recommended to use [`SET NAMES`](/sql-statements/sql-statement-set-names.md) to change the character set when needed."
+	case variable.CharacterSetConnection:
+		return "- The character set for string literals that do not have a specified character set."
+	case variable.CharsetDatabase:
+		return "- This variable indicates the character set of the default database in use. **It is NOT recommended to set this variable**. When a new default database is selected, the server changes the variable value."
+	case variable.CharacterSetResults:
+		return "- The character set that is used when data is sent to the client."
+	case variable.CharacterSetServer:
+		return "- The character set used for new schemas when no character set is specified in the `CREATE SCHEMA` statement."
+	case variable.DataDir:
+		return "- This variable indicates the location where data is stored. This location can be a local path or point to a PD server if the data is stored on TiKV.\n" +
+			"- A value in the format of `ip_address:port` indicates the PD server that TiDB connects to on startup."
+	case variable.DefaultAuthPlugin:
+		return "- This variable sets the authentication method that the server advertises when the server-client connection is being established. Possible values for this variable are documented in [Authentication plugin status](/security-compatibility-with-mysql.md#authentication-plugin-status).\n" +
+			"- Value options: `mysql_native_password` and `caching_sha2_password`. For more details, see [Authentication plugin status](/security-compatibility-with-mysql.md#authentication-plugin-status)."
+	case "license":
+		return "- This variable indicates the license of your TiDB server installation."
+	case variable.TiDBAnalyzeVersion:
+		return "- Controls how TiDB collects statistics.\n" +
+			"- In versions before v5.1.0, the default value of this variable is `1`. In v5.1.0, the default value of this variable is `2`, which serves as an experimental feature. For detailed introduction, see [Introduction to Statistics](/statistics.md)."
+	case variable.TiDBOptLimitPushDownThreshold:
+		return "- This variable is used to set the threshold that determines whether to push the Limit or TopN operator down to TiKV.\n" +
+			"- If the value of the Limit or TopN operator is smaller than or equal to this threshold, these operators are forcibly pushed down to TiKV. This variable resolves the issue that the Limit or TopN operator cannot be pushed down to TiKV partly due to wrong estimation."
+	case variable.TiDBOptEnableCorrelationAdjustment:
+		return "- This variable is used to control whether the optimizer estimates the number of rows based on column order correlation"
+	case variable.TiDBEnableAutoIncrementInGenerated:
+		return "- This variable is used to determine whether to include the `AUTO_INCREMENT` columns when creating a generated column or an expression index."
 	default:
 		return "- No documentation is currently available for this variable."
 	}
