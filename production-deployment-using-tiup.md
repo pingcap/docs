@@ -176,7 +176,7 @@ To prepare the TiUP offline component package, manually pack an offline componen
         tiup mirror merge tiup-custom-mirror-v1.5.2
         ```
     
-    5. When the above steps are completed, check the result by running the `tiup list` command. In this document's example, the outputs of both `tiup list tiup` and `tiup list cluster` show that the version of the corresponding component is `v1.5.2`.
+    5. When the above steps are completed, check the result by running the `tiup list` command. In this document's example, the outputs of both `tiup list tiup` and `tiup list cluster` show that the corresponding components of `v1.5.2` are available.
 
 #### Step 2: Deploy the offline TiUP component
 
