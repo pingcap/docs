@@ -128,18 +128,19 @@ mysql> SELECT * FROM t1;
 - This variable indicates the location where data is stored. This location can be a local path or point to a PD server if the data is stored on TiKV.
 - A value in the format of `ip_address:port` indicates the PD server that TiDB connects to on startup.
 
-### default_authentication_plugin
-
-- Scope: GLOBAL
-- Default value: `mysql_native_password`
-- This variable sets the authentication method that the server advertises when the server-client connection is being established. Possible values for this variable are documented in [Authentication plugin status](/security-compatibility-with-mysql.md#authentication-plugin-status).
-- Value options: `mysql_native_password` and `caching_sha2_password`. For more details, see [Authentication plugin status](/security-compatibility-with-mysql.md#authentication-plugin-status).
-
 ### ddl_slow_threshold
 
 - Scope: INSTANCE
 - Default value: `300`
 - DDL operations whose execution time exceeds the threshold value are output to the log. The unit is millisecond.
+
+### default_authentication_plugin
+
+- Scope: GLOBAL
+- Default value: `mysql_native_password`
+- Possible values: `mysql_native_password`, `caching_sha2_password`
+- This variable sets the authentication method that the server advertises when the server-client connection is being established. Possible values for this variable are documented in [Authentication plugin status](/security-compatibility-with-mysql.md#authentication-plugin-status).
+- Value options: `mysql_native_password` and `caching_sha2_password`. For more details, see [Authentication plugin status](/security-compatibility-with-mysql.md#authentication-plugin-status).
 
 ### foreign_key_checks
 
@@ -189,7 +190,7 @@ mysql> SELECT * FROM t1;
 ### license
 
 - Scope: NONE
-- Default value: Apache License 2.0
+- Default value: `Apache License 2.0`
 - This variable indicates the license of your TiDB server installation.
 
 ### max_execution_time
@@ -269,11 +270,11 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Default value: `OFF`
 - This variable is used to set whether the `AUTO_INCREMENT` property of a column is allowed to be removed by executing `ALTER TABLE MODIFY` or `ALTER TABLE CHANGE` statements. It is not allowed by default.
 
-### tidb_analyze_version <span class="version-mark">New in v5.1.0</span>
+### tidb_analyze_version <span class="version-mark">New in v5.1</span>
 
 - Scope: SESSION | GLOBAL
-- Value options: `1` and `2`
 - Default value: `2`
+- Range: `[1, 2]`
 - Controls how TiDB collects statistics.
 - In versions before v5.1.0, the default value of this variable is `1`. In v5.1.0, the default value of this variable is `2`, which serves as an experimental feature. For detailed introduction, see [Introduction to Statistics](/statistics.md).
 
@@ -321,14 +322,14 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 - Scope: SESSION | GLOBAL
 - Default value: `10240`
-- Range: `[-1, 9223372036854775807]`
+- Range: `[0, 9223372036854775807]`
 - The unit of the variable is rows. If the objects of the join operation belong to a subquery, the optimizer cannot estimate the size of the subquery result set. In this situation, the size is determined by the number of rows in the result set. If the estimated number of rows in the subquery is less than the value of this variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used. When `tidb_broadcast_join_threshold_count = -1`, the threshold is infinitely high.
 
 ### tidb_broadcast_join_threshold_size <span class="version-mark">New in v5.0</span>
 
 - Scope: SESSION | GLOBAL
 - Default value: `104857600` (100 MiB)
-- Range: `[-1, 9223372036854775807]`
+- Range: `[0, 9223372036854775807]`
 - Unit: Bytes
 - If the table size is less than the value of the variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used. When `tidb_broadcast_join_threshold_size = -1`, the threshold is infinitely high.
 
@@ -565,7 +566,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 >
 > Currently, List partition and List COLUMNS partition are experimental features. It is not recommended that you use it in the production environment.
 
-- Scope: SESSION
+- Scope: SESSION | GLOBAL
 - Default value: `OFF`
 - This variable is used to set whether to enable the `LIST (COLUMNS) TABLE PARTITION` feature.
 
@@ -667,7 +668,8 @@ Query OK, 0 rows affected (0.09 sec)
 ### tidb_enforce_mpp <span class="version-mark">New in v5.1</span>
 
 - Scope: SESSION
-- Default value: `OFF`. To change this default value, modify the [`performance.enforce-mpp`](/tidb-configuration-file.md#enforce-mpp) configuration value.
+- Default value: `OFF`
+- To change this default value, modify the [`performance.enforce-mpp`](/tidb-configuration-file.md#enforce-mpp) configuration value.
 - Controls whether to ignore the optimizer's cost estimation and to forcibly use TiFlash's MPP mode for query execution. The value options are as follows:
     - `0` or `OFF`, which means that the MPP mode is not forcibly used (by default).
     - `1` or `ON`, which means that the cost estimation is ignored and the MPP mode is forcibly used. Note that this setting only takes effect when `tidb_allow_mpp=true`.
@@ -1002,20 +1004,6 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - This variable is used to set whether the optimizer executes the optimization operation of pushing down the aggregate function to the position before Join, Projection, and UnionAll.
 - When the aggregate operation is slow in query, you can set the variable value to ON.
 
-### tidb_opt_limit_push_down_threshold
-
-- Scope: SESSION | GLOBAL
-- Default value: `100`
-- Range: `[0, 2147483647]`
-- This variable is used to set the threshold that determines whether to push the Limit or TopN operator down to TiKV.
-- If the value of the Limit or TopN operator is smaller than or equal to this threshold, these operators are forcibly pushed down to TiKV. This variable resolves the issue that the Limit or TopN operator cannot be pushed down to TiKV partly due to wrong estimation. 
-
-### tidb_opt_enable_correlation_adjustment
-
-- Scope: SESSION | GLOBAL
-- Default value:  `ON`
-- This variable is used to control whether the optimizer estimates the number of rows based on column order correlation
-
 ### tidb_opt_correlation_exp_factor
 
 - Scope: SESSION | GLOBAL
@@ -1068,6 +1056,12 @@ mysql> desc select count(distinct a) from test.t;
 4 rows in set (0.00 sec)
 ```
 
+### tidb_opt_enable_correlation_adjustment
+
+- Scope: SESSION | GLOBAL
+- Default value: `ON`
+- This variable is used to control whether the optimizer estimates the number of rows based on column order correlation
+
 ### tidb_opt_insubq_to_join_and_agg
 
 - Scope: SESSION | GLOBAL
@@ -1090,6 +1084,14 @@ mysql> desc select count(distinct a) from test.t;
     ```sql
     select * from t, t1 where t.a=t1.a
     ```
+
+### tidb_opt_limit_push_down_threshold
+
+- Scope: SESSION | GLOBAL
+- Default value: `100`
+- Range: `[0, 2147483647]`
+- This variable is used to set the threshold that determines whether to push the Limit or TopN operator down to TiKV.
+- If the value of the Limit or TopN operator is smaller than or equal to this threshold, these operators are forcibly pushed down to TiKV. This variable resolves the issue that the Limit or TopN operator cannot be pushed down to TiKV partly due to wrong estimation.
 
 ### tidb_opt_prefer_range_scan <span class="version-mark">New in v5.0</span>
 
