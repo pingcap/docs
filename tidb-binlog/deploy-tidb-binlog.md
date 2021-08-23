@@ -19,6 +19,10 @@ In environments of development, testing and production, the requirements on serv
 | Pump | 3 | 8 core+    | SSD, 200 GB+ | 16G |
 | Drainer | 1 | 8 core+ | SAS, 100 GB+ (If binlogs are output as local files, the disk size depends on how long these files are retained.) | 16G |
 
+## Deploy TiDB Binlog using TiUP
+
+It is recommended to deploy TiDB Binlog using TiUP. To do that, when deploying TiDB using TiUP, you need to add the node information of `drainer` and `pump` of TiDB Binlog in [TiDB Binlog Deployment Topology](/tidb-binlog-deployment-topology.md). For detailed deployment information, refer to [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md).
+
 ## Deploy TiDB Binlog using a Binary package
 
 ### Download the official Binary package
@@ -331,9 +335,9 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         [syncer.to]
         host = "192.168.0.13"
         user = "root"
+        # If you do not want to set a cleartext `password` in the configuration file, you can create `encrypted_password` using `./binlogctl -cmd encrypt -text string`.
+        # When you have created an `encrypted_password` that is not empty, the `password` above will be ignored, because `encrypted_password` and `password` cannot take effect at the same time.
         password = ""
-        # `encrypted_password` is encrypted using `./binlogctl -cmd encrypt -text string`.
-        # When `encrypted_password` is not empty, the `password` above will be ignored.
         encrypted_password = ""
         port = 3306
 

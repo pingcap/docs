@@ -579,7 +579,21 @@ You can see that the inserted record `(NULL, 'mothra')` falls into the same part
 
 ## Partition management
 
-You can add, drop, merge, split, redefine partitions by using `ALTER TABLE` statements.
+For `LIST` and `RANGE` partitioned tables, you can add and drop partitions using the `ALTER TABLE <table name> ADD PARTITION (<partition specification>)` or `ALTER TABLE <table name> DROP PARTITION <list of partitions>` statement.
+
+For `LIST` and `RANGE` partitioned tables, `REORGANIZE PARTITION` is not yet supported.
+
+For `HASH` partitioned tables, `COALESCE PARTITION` and `ADD PARTITION` are not yet supported.
+
+`EXCHANGE PARTITION` works by swapping a partition and a non-partitioned table, similar to how renaming a table like `RENAME TABLE t1 TO t1_tmp, t2 TO t1, t1_tmp TO t2` works.
+
+For example, `ALTER TABLE partitioned_table EXCHANGE PARTITION p1 WITH TABLE non_partitioned_table` swaps the `non_partitioned_table` table in the `p1` partition with the `partitioned_table` table.
+
+Ensure that all rows that you are exchanging into the partition match the partition definition; otherwise, these rows will not be found and cause unexpected issues.
+
+> **Warning:**
+>
+> `EXCHANGE PARTITION` is an experimental feature. It is not recommended to use it in a production environment. To enable it, set the `tidb_enable_exchange_partition` system variable to `ON`.
 
 ### Range partition management
 
@@ -1018,7 +1032,22 @@ PARTITIONS 4;
 ERROR 1491 (HY000): A PRIMARY KEY must include all columns in the table's partitioning function
 ```
 
-The `CREATE TABLE` statement fails because both `col1` and `col3` are included in the proposed partitioning key, but neither of these columns is part of both of unique keys on the table.
+The `CREATE TABLE` statement fails because both `col1` and `col3` are included in the proposed partitioning key, but neither of these columns is part of both of unique keys on the table. After the following modifications, the `CREATE TABLE` statement becomes valid:
+
+{{< copyable "sql" >}}
+
+```sql
+CREATE TABLE t3 (
+    col1 INT NOT NULL,
+    col2 DATE NOT NULL,
+    col3 INT NOT NULL,
+    col4 INT NOT NULL,
+    UNIQUE KEY (col1, col2, col3),
+    UNIQUE KEY (col1, col3)
+)
+PARTITION BY HASH(col1 + col3)
+    PARTITIONS 4;
+```
 
 The following table cannot be partitioned at all, because there is no way to include in a partitioning key any columns that belong to both unique keys:
 
@@ -1064,7 +1093,31 @@ PARTITION BY HASH( YEAR(col2) )
 PARTITIONS 4;
 ```
 
-In both cases, the primary key does not include all columns referenced in the partitioning expression.
+In the above examples, the primary key does not include all columns referenced in the partitioning expression. After adding the missing column in the primary key, the  `CREATE TABLE` statement becomes valid:
+
+{{< copyable "sql" >}}
+
+```sql
+CREATE TABLE t5 (
+    col1 INT NOT NULL,
+    col2 DATE NOT NULL,
+    col3 INT NOT NULL,
+    col4 INT NOT NULL,
+    PRIMARY KEY(col1, col2, col3)
+)
+PARTITION BY HASH(col3)
+PARTITIONS 4;
+CREATE TABLE t6 (
+    col1 INT NOT NULL,
+    col2 DATE NOT NULL,
+    col3 INT NOT NULL,
+    col4 INT NOT NULL,
+    PRIMARY KEY(col1, col2, col3),
+    UNIQUE KEY(col2)
+)
+PARTITION BY HASH( YEAR(col2) )
+PARTITIONS 4;
+```
 
 If a table has neither unique keys nor primary keys, then this restriction does not apply.
 
@@ -1241,7 +1294,7 @@ The `tidb_enable_list_partition` environment variable controls whether to enable
 
 This variable is only used in table creation. After the table is created, modify this variable value takes no effect. For details, see [system variables](/system-variables.md#tidb_enable_list_partition-new-in-v50).
 
-### Dynamic mode
+### Dynamic pruning mode
 
 > **Warning:**
 >

@@ -24,13 +24,12 @@ This document introduces the experimental features of TiDB in different versions
 
 + List Partition (Introduced in v5.0)
 + List COLUMNS Partition (Introduced in v5.0)
-+ [Dynamic Mode for Partitioned Tables](/partitioned-table.md#dynamic-mode). (Introduced in v5.1)
++ [Dynamic Pruning Mode for Partitioned Tables](/partitioned-table.md#dynamic-pruning-mode). (Introduced in v5.1)
 + The expression index feature. The expression index is also called the function-based index. When you create an index, the index fields do not have to be a specific column but can be an expression calculated from one or more columns. This feature is useful for quickly accessing the calculation-based tables. See [Expression index](/sql-statements/sql-statement-create-index.md) for details. (Introduced in v4.0)
 + [Generated Columns](/generated-columns.md).
 + [User-Defined Variables](/user-defined-variables.md).
 + [JSON data type](/data-type-json.md) and [JSON functions](/functions-and-operators/json-functions.md).
 + [View](/information-schema/information-schema-views.md).
-+ [Stale Read](/stale-read.md).
 
 ## Configuration management
 
@@ -41,7 +40,6 @@ This document introduces the experimental features of TiDB in different versions
 
 + [Integrate TiCDC with Kafka Connect (Confluent Platform)](/ticdc/integrate-confluent-using-ticdc.md) (Introduced in v5.0)
 + [The cyclic replication feature of TiCDC](/ticdc/manage-ticdc.md#cyclic-replication) (Introduced in v5.0)
-+ [Bit flags of columns](/ticdc/ticdc-open-protocol.md#bit-flags-of-columns) in [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md#row-changed-event).
 
 ## Storage
 
