@@ -120,6 +120,11 @@ This document only describes the parameters that are not included in command-lin
 + Default value: `"1s"`
 + Minimum value: `0`
 
+### `raft-client-queue-size`
+
++ Specifies the queue size of the Raft messages in TiKV. If too many messages not sent in time result in a full buffer, or messages discarded, you can specify a greater value to improve system stability. 
++ Default value: `8192`
+
 ## readpool.unified
 
 Configuration items related to the single thread pool serving read requests. This thread pool supersedes the original storage thread pool and coprocessor thread pool since the 4.0 version.
@@ -311,6 +316,35 @@ Configuration items related to the sharing of block cache among multiple RocksDB
 + The size of the shared block cache.
 + Default value: 45% of the size of total system memory
 + Unit: KB|MB|GB
+
+## storage.flow-control
+
+Configuration items related to the flow control mechanism in TiKV. This mechanism supersedes the write stall mechanism in RocksDB and controls flow at the scheduler layer, which avoids the issue of QPS drop caused by the stuck Raftstore or Apply threads when the write traffic is high.
+
+### `enable`
+
++ Determines whether to enable the flow control mechanism. After it is enabled, TiKV automatically disables the write stall mechanism of KvDB and the write stall mechanism of RaftDB (excluding memtable).
++ Default value: `true`
+
+### `memtables-threshold`
+
++ When the number of kvDB memtables reaches this threshold, the flow control mechanism starts to work.
++ Default value: `5`
+
+### `l0-files-threshold`
+
++ When the number of kvDB L0 files reaches this threshold, the flow control mechanism starts to work.
++ Default value: `9`
+
+### `soft-pending-compaction-bytes-limit`
+
++ When the pending compaction bytes in KvDB reach this threshold, the flow control mechanism starts to reject some write requests and reports the `ServerIsBusy` error.
++ Default value: `"192GB"`
+
+### `hard-pending-compaction-bytes-limit`
+
++ When the pending compaction bytes in KvDB reach this threshold, the flow control mechanism rejects all write requests and reports the `ServerIsBusy` error.
++ Default value: `"1024GB"`
 
 ## storage.io-rate-limit
 
@@ -636,6 +670,11 @@ Configuration items related to Raftstore
 + The allowable number of threads that drive `future`
 + Default value: `1`
 + Minimum value: greater than `0`
+
+### `cmd-batch`
+
++ Controls whether to enable batch processing of the requests. When it is enabled, the write performance is significantly improved. 
++ Default value: `true`
 
 ## Coprocessor
 

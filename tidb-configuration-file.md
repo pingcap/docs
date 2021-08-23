@@ -610,16 +610,16 @@ Configuration related to the status of TiDB service.
 
 ## stmt-summary <span class="version-mark">New in v3.0.4</span>
 
-Configurations related to the `events_statement_summary_by_digest` table.
+Configurations related to the `statements_summary` table.
 
 ### max-stmt-count
 
-- The maximum number of SQL categories allowed to be saved in the `events_statement_summary_by_digest` table.
-- Default value: `100`
+- The maximum number of SQL categories allowed to be saved in the `statements_summary` table.
+- Default value: `3000`
 
 ### max-sql-length
 
-- The longest display length for the `DIGEST_TEXT` and `QUERY_SAMPLE_TEXT` columns in the `events_statement_summary_by_digest` table.
+- The longest display length for the `DIGEST_TEXT` and `QUERY_SAMPLE_TEXT` columns in the `statements_summary` table.
 - Default value: `4096`
 
 ## pessimistic-txn
@@ -642,12 +642,3 @@ For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](
 
 + Controls whether the [`INFORMATION_SCHEMA.DEADLOCKS`](/information-schema/information-schema-deadlocks.md) table collects the information of retryable deadlock errors. For the description of retryable deadlock errors, see [Retryable deadlock errors](/information-schema/information-schema-deadlocks.md#retryable-deadlock-errors).
 + Default value: `false`
-
-## experimental
-
-The `experimental` section, introduced in v3.1.0, describes configurations related to the experimental features of TiDB.
-
-### `allow-expression-index` <span class="version-mark">New in v4.0.0</span>
-
-- Determines whether to create the expression index.
-- Default value: `false`
