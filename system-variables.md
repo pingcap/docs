@@ -321,16 +321,16 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 - Scope: SESSION | GLOBAL
 - Default value: `10240`
-- Range: `[0, 9223372036854775807]`
-- The unit of the variable is rows. If the objects of the join operation belong to a subquery, the optimizer cannot estimate the size of the subquery result set. In this situation, the size is determined by the number of rows in the result set. If the estimated number of rows in the subquery is less than the value of this variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used.
+- Range: `[-1, 9223372036854775807]`
+- The unit of the variable is rows. If the objects of the join operation belong to a subquery, the optimizer cannot estimate the size of the subquery result set. In this situation, the size is determined by the number of rows in the result set. If the estimated number of rows in the subquery is less than the value of this variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used. When `tidb_broadcast_join_threshold_count = -1`, the threshold is infinitely high.
 
 ### tidb_broadcast_join_threshold_size <span class="version-mark">New in v5.0</span>
 
 - Scope: SESSION | GLOBAL
 - Default value: `104857600` (100 MiB)
-- Range: `[0, 9223372036854775807]`
+- Range: `[-1, 9223372036854775807]`
 - Unit: Bytes
-- If the table size is less than the value of the variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used.
+- If the table size is less than the value of the variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used. When `tidb_broadcast_join_threshold_size = -1`, the threshold is infinitely high.
 
 ### tidb_build_stats_concurrency
 
@@ -500,6 +500,12 @@ Constraint checking is always performed in place for pessimistic transactions (d
 > - The default value of `ON` only applies to new clusters. if your cluster was upgraded from an earlier version of TiDB, the value `OFF` will be used instead.
 > - If you have enabled TiDB Binlog, enabling this variable cannot improve the performance. To improve the performance, it is recommended to use [TiCDC](/ticdc/ticdc-overview.md) instead.
 > - Enabling this parameter only means that Async Commit becomes an optional mode of transaction commit. In fact, the most suitable mode of transaction commit is determined by TiDB.
+
+### tidb_enable_auto_increment_in_generated
+
+- Scope: SESSION | GLOBAL
+- Default value: `OFF`
+- This variable is used to determine whether to include the `AUTO_INCREMENT` columns when creating a generated column or an expression index.
 
 ### tidb_enable_cascades_planner
 
@@ -995,6 +1001,20 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Default value: `OFF`
 - This variable is used to set whether the optimizer executes the optimization operation of pushing down the aggregate function to the position before Join, Projection, and UnionAll.
 - When the aggregate operation is slow in query, you can set the variable value to ON.
+
+### tidb_opt_limit_push_down_threshold
+
+- Scope: SESSION | GLOBAL
+- Default value: `100`
+- Range: `[0, 2147483647]`
+- This variable is used to set the threshold that determines whether to push the Limit or TopN operator down to TiKV.
+- If the value of the Limit or TopN operator is smaller than or equal to this threshold, these operators are forcibly pushed down to TiKV. This variable resolves the issue that the Limit or TopN operator cannot be pushed down to TiKV partly due to wrong estimation. 
+
+### tidb_opt_enable_correlation_adjustment
+
+- Scope: SESSION | GLOBAL
+- Default value:  `ON`
+- This variable is used to control whether the optimizer estimates the number of rows based on column order correlation
 
 ### tidb_opt_correlation_exp_factor
 
