@@ -81,24 +81,33 @@ By following these steps, you can create the [TPC-H](http://www.tpc.org/tpch/) d
     {{< copyable "sql" >}}
 
     ```sql
-    SELECT CONCAT(table_schema,'.',table_name) AS 'Table Name', table_rows AS 'Number of Rows', CONCAT(ROUND(data_length/(1024*1024*1024),4),'G') AS 'Data Size', CONCAT(ROUND(index_length/(1024*1024*1024),4),'G') AS 'Index Size', CONCAT(ROUND((data_length+index_length)/(1024*1024*1024),4),'G') AS'Total'FROM information_schema.TABLES WHERE table_schema LIKE 'test';
+    SELECT 
+      CONCAT(table_schema,'.',table_name) AS 'Table Name', 
+      table_rows AS 'Number of Rows', 
+      FORMAT_BYTES(data_length) AS 'Data Size', 
+      FORMAT_BYTES(index_length) AS 'Index Size', 
+      FORMAT_BYTES(data_length+index_length) AS'Total' 
+    FROM 
+      information_schema.TABLES 
+    WHERE 
+      table_schema='test';
     ```
 
-    As you can see from the output, eight tables are created in total, and the largest table has 6 million rows of data (the actual amount of the created data is in line with the value of the SQL query, because the data is randomly created by the tool).
+    As you can see from the output, eight tables are created in total, and the largest table has 6.5 million rows of data (the actual amount of the created data is in line with the value of the SQL query, because the data is randomly created by the tool).
 
     ```sql
-    +---------------+----------------+-----------+------------+---------+
-    | Table Name    | Number of Rows | Data Size | Index Size | Total   |
-    +---------------+----------------+-----------+------------+---------+
-    | test.nation   |             25 | 0.0000G   | 0.0000G    | 0.0000G |
-    | test.region   |              5 | 0.0000G   | 0.0000G    | 0.0000G |
-    | test.part     |         200000 | 0.0245G   | 0.0000G    | 0.0245G |
-    | test.supplier |          10000 | 0.0014G   | 0.0000G    | 0.0014G |
-    | test.partsupp |         800000 | 0.1174G   | 0.0119G    | 0.1293G |
-    | test.customer |         150000 | 0.0242G   | 0.0000G    | 0.0242G |
-    | test.orders   |        1514336 | 0.1673G   | 0.0000G    | 0.1673G |
-    | test.lineitem |        6001215 | 0.7756G   | 0.0894G    | 0.8651G |
-    +---------------+----------------+-----------+------------+---------+
+    +---------------+----------------+-----------+------------+-----------+
+    |  Table Name   | Number of Rows | Data Size | Index Size |   Total   |
+    +---------------+----------------+-----------+------------+-----------+
+    | test.nation   |             25 | 2.44 KiB  | 0 bytes    | 2.44 KiB  |
+    | test.region   |              5 | 416 bytes | 0 bytes    | 416 bytes |
+    | test.part     |         200000 | 25.07 MiB | 0 bytes    | 25.07 MiB |
+    | test.supplier |          10000 | 1.45 MiB  | 0 bytes    | 1.45 MiB  |
+    | test.partsupp |         800000 | 120.17 MiB| 12.21 MiB  | 132.38 MiB|
+    | test.customer |         150000 | 24.77 MiB | 0 bytes    | 24.77 MiB |
+    | test.orders   |        1527648 | 174.40 MiB| 0 bytes    | 174.40 MiB|
+    | test.lineitem |        6491711 | 849.07 MiB| 99.06 MiB  | 948.13 MiB|
+    +---------------+----------------+-----------+------------+-----------+
     8 rows in set (0.06 sec)
      ```
 
