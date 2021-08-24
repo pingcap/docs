@@ -270,7 +270,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Default value: `OFF`
 - This variable is used to set whether the `AUTO_INCREMENT` property of a column is allowed to be removed by executing `ALTER TABLE MODIFY` or `ALTER TABLE CHANGE` statements. It is not allowed by default.
 
-### tidb_analyze_version <span class="version-mark">New in v5.1</span>
+### tidb_analyze_version <span class="version-mark">New in v5.1.0</span>
 
 - Scope: SESSION | GLOBAL
 - Default value: `2`
