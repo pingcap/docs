@@ -124,21 +124,22 @@ In v5.2, the key new features and improvements are as follows:
 ### Stability
 
 - **Add TiFlash I/O traffic limit**
-This new feature is suitable for cloud storage with disk bandwidth of a small and specific size. It is disabled by default.
- 
-TiFlash IO Rate Limiter provides a new mechanism to avoid excessive race for I/O resources between read and write tasks. It balances the responses to read and write tasks, and limits the rate automatically according to read/write workload.
- 
-[User document](/tiflash/tiflash-configuration.md)
+
+    This new feature is suitable for cloud storage with disk bandwidth of a small and specific size. It is disabled by default.
+    
+    TiFlash IO Rate Limiter provides a new mechanism to avoid excessive race for I/O resources between read and write tasks. It balances the responses to read and write tasks, and limits the rate automatically according to read/write workload.
+    
+    [User document](/tiflash/tiflash-configuration.md)
 
 - **Improve stability of TiKV flow control**
  
-TiKV introduces a new flow control mechanism to replacesupersede the previous RocksDB write stall mechanism. This mechanism controls flow at the scheduler layer, which avoids the issue of QPS drop caused by the stuck Raftstore or Apply threads when the write traffic is high.
+    TiKV introduces a new flow control mechanism to replacesupersede the previous RocksDB write stall mechanism. This mechanism controls flow at the scheduler layer, which avoids the issue of QPS drop caused by the stuck Raftstore or Apply threads when the write traffic is high.
  
 [User document](/tikv-configuration-file.md#storageflow-control), [#10137](https://github.com/tikv/tikv/issues/10137)
 
 - **Detect and recover automatically from impact caused by a single slow TiKV node in a cluster**
  
-TiKV introduces the slow node detection mechanism. This mechanism calculates a score by inspecting the rate of TiKV Raftstore, and then reports the score to PD through store heartbeats. Meanwhile, it adds the `evict-slow-store-scheduler` scheduler on PD to automatically evict the leader on a single slow TiKV node. In this way, the impact on the whole cluster is mitigated. At the same time, more alert items about slow nodes are introduced to help you quickly pinpoint and solve problems.
+    TiKV introduces the slow node detection mechanism. This mechanism calculates a score by inspecting the rate of TiKV Raftstore, and then reports the score to PD through store heartbeats. Meanwhile, it adds the `evict-slow-store-scheduler` scheduler on PD to automatically evict the leader on a single slow TiKV node. In this way, the impact on the whole cluster is mitigated. At the same time, more alert items about slow nodes are introduced to help you quickly pinpoint and solve problems.
  
 [User document]( /tikv-configuration-file.md#inspect-interval), [#10539](https://github.com/tikv/tikv/issues/10539)
 
@@ -146,7 +147,7 @@ TiKV introduces the slow node detection mechanism. This mechanism calculates a s
  
 - **Simplify operations of Data Migration (DM)**
  
-DM v2.0.6 can automatically identify the change event (failover or plan change) of the data source using VIP, and can automatically connect to a new data source instance, to reduce data replication latency and simplify operation procedures.
+    DM v2.0.6 can automatically identify the change event (failover or plan change) of the data source using VIP, and can automatically connect to a new data source instance, to reduce data replication latency and simplify operation procedures.
  
 - TiDB Lightning supports customized line terminators in the CSV data, and is compatible with the MySQL LOAD DATA CSV data formats. You can then use TiDB Lightning directly in your data flow architecture.
 [#1297](https://github.com/pingcap/br/pull/1297)
