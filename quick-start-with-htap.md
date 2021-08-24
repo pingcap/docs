@@ -9,7 +9,7 @@ This guide walks you through the quickest way to get started with TiDB's one-sto
 
 > **Note:**
 >
-> The steps provided in this guide is ONLY for quick start, NOT for production. To explore more features of HTAP, see [explore HTAP](/explore-htap.md).
+> The steps provided in this guide are ONLY for quick start. For production environments, [explore HTAP](/explore-htap.md) is recommended. 
 
 ## Basic concepts
 
