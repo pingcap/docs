@@ -30,7 +30,7 @@ In v5.1, the key new features or improvements are as follows:
 |:----------|:-----------|:-----------|
 | [`cte_max_recursion_depth`](/system-variables.md#cte_max_recursion_depth)  | Newly added | Controls the maximum recursion depth in Common Table Expressions. |
 | [`init_connect`](/system-variables.md#init_connect)  | Newly added | Controls the initial connection to a TiDB server. |
-| [`tidb_analyze_version`](/system-variables.md#tidb_analyze_version-new-in-v51)  | Newly added | Controls how TiDB collects statistics. The default value of this variable is `2`. This is an experimental feature. |
+| [`tidb_analyze_version`](/system-variables.md#tidb_analyze_version-new-in-v510)  | Newly added | Controls how TiDB collects statistics. The default value of this variable is `2`. This is an experimental feature. |
 | [`tidb_enable_enhanced_security`](/system-variables.md#tidb_enable_enhanced_security) | Newly added | Indicates whether the TiDB server you are connected to has the Security Enhanced Mode (SEM) enabled. This variable setting cannot be changed without restarting the TiDB server. |
 | [`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51) | Newly added | Controls whether to ignore the optimizer's cost estimation and to forcibly use the MPP mode for query execution. The data type of this variable is `BOOL` and the default value is `false`. |
 | [`tidb_partition_prune_mode`](/system-variables.md#tidb_partition_prune_mode-new-in-v51) | Newly added | Specifies whether to enable dynamic pruning mode for partitioned tables. This feature is experimental. The default value of this variable is `static`, which means the dynamic pruning mode for partitioned tables is disabled by default.  |
