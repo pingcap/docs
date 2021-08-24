@@ -274,6 +274,11 @@ Configuration items related to log files.
 
 Configuration items related to security.
 
+### `require-secure-transport`
+
+- Determines whether to require the client to use the secure mode for data transport.
+- Default value: `false`
+
 ### `enable-sem`
 
 - Enables the Security Enhanced Mode (SEM).
@@ -320,6 +325,11 @@ Configuration items related to security.
 + Determines the encryption method used for saving the spilled files to disk.
 + Default value: `"plaintext"`, which disables encryption.
 + Optional values: `"plaintext"` and `"aes128-ctr"`
+
+### `auto-tls`
+
+- Determines whether to automatically generate the TLS certificates on startup.
+- Default value: `true`
 
 ## Performance
 
@@ -600,16 +610,16 @@ Configuration related to the status of TiDB service.
 
 ## stmt-summary <span class="version-mark">New in v3.0.4</span>
 
-Configurations related to the `events_statement_summary_by_digest` table.
+Configurations related to the `statements_summary` table.
 
 ### max-stmt-count
 
-- The maximum number of SQL categories allowed to be saved in the `events_statement_summary_by_digest` table.
-- Default value: `100`
+- The maximum number of SQL categories allowed to be saved in the `statements_summary` table.
+- Default value: `3000`
 
 ### max-sql-length
 
-- The longest display length for the `DIGEST_TEXT` and `QUERY_SAMPLE_TEXT` columns in the `events_statement_summary_by_digest` table.
+- The longest display length for the `DIGEST_TEXT` and `QUERY_SAMPLE_TEXT` columns in the `statements_summary` table.
 - Default value: `4096`
 
 ## pessimistic-txn
@@ -627,12 +637,3 @@ For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](
 + Default value: `10`
 + Minimum value: `0`
 + Maximum value: `10000`
-
-## experimental
-
-The `experimental` section, introduced in v3.1.0, describes configurations related to the experimental features of TiDB.
-
-### `allow-expression-index` <span class="version-mark">New in v4.0.0</span>
-
-- Determines whether to create the expression index.
-- Default value: `false`

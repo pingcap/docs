@@ -140,6 +140,7 @@
 + Tutorials
   + [Multiple Data Centers in One City Deployment](/multi-data-centers-in-one-city-deployment.md)
   + [Three Data Centers in Two Cities Deployment](/three-data-centers-in-two-cities-deployment.md)
+  + [Two Data Centers in One City Deployment](/two-data-centers-in-one-city-deployment.md)
   + Read Historical Data
     + Use Stale Read (Recommended)
       + [Usage Scenarios of Stale Read](/stale-read.md)
@@ -208,6 +209,7 @@
     + [Maintain](/ticdc/manage-ticdc.md)
     + [Troubleshoot](/ticdc/troubleshoot-ticdc.md)
     + [Monitor](/ticdc/monitor-ticdc.md)
+    + [TiCDC Open API](/ticdc/ticdc-open-api.md)
     + [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
     + [Integrate TiDB with Confluent Platform](/ticdc/integrate-confluent-using-ticdc.md)
     + [Glossary](/ticdc/ticdc-glossary.md)
@@ -450,6 +452,7 @@
         + [`METRICS_TABLES`](/information-schema/information-schema-metrics-tables.md)
         + [`PARTITIONS`](/information-schema/information-schema-partitions.md)
         + [`PROCESSLIST`](/information-schema/information-schema-processlist.md)
+        + [`REFERENTIAL_CONSTRAINTS`](/information-schema/information-schema-referential-constraints.md)
         + [`SCHEMATA`](/information-schema/information-schema-schemata.md)
         + [`SEQUENCES`](/information-schema/information-schema-sequences.md)
         + [`SESSION_VARIABLES`](/information-schema/information-schema-session-variables.md)
@@ -550,7 +553,6 @@
 + [Glossary](/glossary.md)
 + Release Notes
   + [All Releases](/releases/release-notes.md)
-  + [TiDB Roadmap](/roadmap.md)
   + v5.1
     + [5.1.1](/releases/release-5.1.1.md)
     + [5.1.0](/releases/release-5.1.0.md)
