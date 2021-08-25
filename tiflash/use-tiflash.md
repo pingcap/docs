@@ -242,14 +242,15 @@ In TiDB, operators are organized in a tree structure. For an operator to be push
 
 Currently, TiFlash supports the following push-down expressions:
 
-* Mathematical functions: `+, -, /, *, >=, <=, =, !=, <, >, round(int), round(double), abs, floor(int), ceil(int), ceiling(int)`
-* Logical functions: `and, or, not, case when, if, ifnull, isnull, in`
+* Mathematical functions: `+, -, /, *, %, >=, <=, =, !=, <, >, round(int), round(double), round(decimal), abs, floor(int), ceil(int), ceiling(int), sqrt, log, log2, log10, ln, exp, pow, sign, radians, degrees, conv, crc32`
+* Logical functions: `and, or, not, case when, if, ifnull, isnull, in, like, coalesce`
 * Bitwise operations: `bitand, bitor, bigneg, bitxor`
-* String functions: `substr, char_length, replace, concat, concat_ws, left, right`
-* Date functions: `date_format, timestampdiff, from_unixtime, unix_timestamp(int), unix_timestamp(decimal), str_to_date(date), str_to_date(datetime), date_add(string, int), date_add(datetime, int), date_sub(datetime, int), date_sub(string, int), datediff, year, month, day, extract(datetime)`
+* String functions: `substr, char_length, replace, concat, concat_ws, left, right, ascii, length, trim, position`
+* Date functions: `date_format, timestampdiff, from_unixtime, unix_timestamp(int), unix_timestamp(decimal), str_to_date(date), str_to_date(datetime), date_add(datetime, int), date_add(string, int), date_add(string, real), date_sub(datetime, int), date_sub(string, int), datediff, year, month, day, extract(datetime), date`
 * JSON function: `json_length`
 * Conversion functions: `cast(int as double), cast(int as decimal), cast(int as string), cast(int as time), cast(double as int), cast(double as decimal), cast(double as string), cast(double as time), cast(string as int), cast(string as double), cast(string as decimal), cast(string as time), cast(decimal as int), cast(decimal as string), cast(decimal as time), cast(time as int), cast(time as decimal), cast(time as string)`
 * Aggregate functions: `min, max, sum, count, avg, approx_count_distinct`
+* Miscellaneous functions: `inetntoa, inetaton, inet6ntoa, inet6aton`
 
 Among them, the push-down of `cast` and `date_add` is not enabled by default. To enable it, refer to [Blocklist of Optimization Rules and Expression Pushdown](/blocklist-control-plan.md).
 
@@ -389,6 +390,3 @@ Currently, TiFlash does not support some features. These features might be incom
         ```
 
         In the example above, `a/b`'s inferred type from the compiling is `Decimal(7,4)` both in TiDB and in TiFlash. Constrained by `Decimal(7,4)`, `a/b`'s returned type should be `0.0000`. In TiDB, `a/b`'s runtime precision is higher than `Decimal(7,4)`, so the original table data is not filtered by the `where a/b` condition. However, in TiFlash, the calculation of `a/b` uses `Decimal(7,4)` as the result type, so the original table data is filtered by the `where a/b` condition.
-
-* The MPP mode in TiFlash does not support the following features:
-    * If the [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) configuration item's value is `true`, the MPP mode does not support the string-type join key or the string column type in the `group by` aggregation. For these two query types, the MPP mode is not selected by default.

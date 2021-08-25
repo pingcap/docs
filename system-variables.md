@@ -501,6 +501,12 @@ Constraint checking is always performed in place for pessimistic transactions (d
 > - If you have enabled TiDB Binlog, enabling this variable cannot improve the performance. To improve the performance, it is recommended to use [TiCDC](/ticdc/ticdc-overview.md) instead.
 > - Enabling this parameter only means that Async Commit becomes an optional mode of transaction commit. In fact, the most suitable mode of transaction commit is determined by TiDB.
 
+### tidb_enable_auto_increment_in_generated
+
+- Scope: SESSION | GLOBAL
+- Default value: `OFF`
+- This variable is used to determine whether to include the `AUTO_INCREMENT` columns when creating a generated column or an expression index.
+
 ### tidb_enable_cascades_planner
 
 - Scope: SESSION | GLOBAL
@@ -995,6 +1001,20 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Default value: `OFF`
 - This variable is used to set whether the optimizer executes the optimization operation of pushing down the aggregate function to the position before Join, Projection, and UnionAll.
 - When the aggregate operation is slow in query, you can set the variable value to ON.
+
+### tidb_opt_limit_push_down_threshold
+
+- Scope: SESSION | GLOBAL
+- Default value: `100`
+- Range: `[0, 2147483647]`
+- This variable is used to set the threshold that determines whether to push the Limit or TopN operator down to TiKV.
+- If the value of the Limit or TopN operator is smaller than or equal to this threshold, these operators are forcibly pushed down to TiKV. This variable resolves the issue that the Limit or TopN operator cannot be pushed down to TiKV partly due to wrong estimation. 
+
+### tidb_opt_enable_correlation_adjustment
+
+- Scope: SESSION | GLOBAL
+- Default value:  `ON`
+- This variable is used to control whether the optimizer estimates the number of rows based on column order correlation
 
 ### tidb_opt_correlation_exp_factor
 
