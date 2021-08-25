@@ -4,6 +4,8 @@ title: TiDB 5.2 Release Notes
 
 # Release date: August 27, 2021
 
+Release date: August 27, 2021
+
 TiDB version: 5.2.0
 
 In v5.2, the key new features and improvements are as follows:
@@ -133,9 +135,9 @@ In v5.2, the key new features and improvements are as follows:
 
 - **Improve stability of TiKV flow control**
  
-    TiKV introduces a new flow control mechanism to replace the previous RocksDB write stall mechanism. Compared with the write stall mechanism, this new mechanism reduces the impact on the stability of foreground write by the following:
+    TiKV introduces a new flow control mechanism to replace the previous RocksDB write stall mechanism. Compared with the write stall mechanism, this new mechanism reduces the impact on the stability of foreground write.
 
-    When RocksDB compaction stacks, flow control is performed on the TiKV scheduler layer instead of the RocksDB layer, to avoid the following issues:
+    In specific, when the stress of RocksDB compaction accumulates, flow control is performed at the TiKV scheduler layer instead of the RocksDB layer, to avoid the following issues:
     
         - Raftstore is stuck, which is caused by RocksDB write stall.
         - Raft election times out, and the node leader is transferred as a result. 
@@ -205,7 +207,7 @@ For detailed information of the collected data and how to disable data collectio
     - Support balancing the MPP query workload among different TiFlash nodes based on Regions [#24724](https://github.com/pingcap/tidb/pull/24724)
     - Support invalidating stale Regions in the cache after the MPP query is executed [#24432](https://github.com/pingcap/tidb/pull/24432)
     - Improve the MySQL compatibility of the built-in function`str_to_date` for the format specifiers `%b/%M/%r/%T` [#25767](https://github.com/pingcap/tidb/pull/25767)
-    - Fix the issue that inconsistent binding caches might be created in multiple TiDB after recreating different bindings for the same query. [#26015](https://github.com/pingcap/tidb/pull/26015)
+    - Fix the issue that inconsistent binding caches might be created in multiple TiDB after recreating different bindings for the same query [#26015](https://github.com/pingcap/tidb/pull/26015)
     - Fix the issue that the existing bindings cannot be loaded into cache after upgrade [#23295](https://github.com/pingcap/tidb/pull/23295)
     - Support ordering the result of `SHOW BINDINGS` by (`original_sql`, `update_time`) [#26139](https://github.com/pingcap/tidb/pull/26139)
     - Improve the logic of query optimization when bindings exist, and reduce optimization times of a query [#26141](https://github.com/pingcap/tidb/pull/26141)
@@ -216,7 +218,7 @@ For detailed information of the collected data and how to disable data collectio
 
 + TiKV
 
-    - Limit memory consumption of the TiCDC sink[#10305](https://github.com/tikv/tikv/pull/10305)
+    - Limit memory consumption of the TiCDC sink [#10305](https://github.com/tikv/tikv/pull/10305)
     - Add the memory-bounded upper limit for the TiCDC old value cache [#10313](https://github.com/tikv/tikv/pull/10313)
 
 + PD
