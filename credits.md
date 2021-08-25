@@ -5,11 +5,11 @@ summary: Learn about the list and roles of contributors to the TiDB community.
 
 # Credits
 
-Contributors play an important role in the robust development of TiDB. We sincerely appreciate all contributors who submit code, write and translate documents for TiDB.
+Each contributor has played an important role in promoting the robust development of TiDB. We sincerely appreciate all contributors who have submitted code, written and translated documents for TiDB.
 
 ## TiDB developers
 
-TiDB developers contribute to new feature development, performance optimization, and bugfixes. The following is the list of contributors to TiDB related repo:
+TiDB developers contribute to new feature development, performance improvement, stability guarantee, and bug fixes. The following is the list of contributors in TiDB related repos:
 
 - [pingcap/tidb](https://github.com/pingcap/tidb/graphs/contributors)
 - [tikv/tikv](https://github.com/tikv/tikv/graphs/contributors)
@@ -32,9 +32,9 @@ TiDB developers contribute to new feature development, performance optimization,
 
 For the full list of contributors, see [SIG | TiDB DevGroup](https://contributor.tidb.io/sig).
 
-## Writers and translators of TiDB documentation
+## Writers and translators for TiDB documentation
 
-Writers and translators contribute to writing and translating documents for TiDB related projects. The following is the list of contributors to TiDB documentation related repo:
+Writers and translators write and translate documents for TiDB and the related projects. The following is the list of contributors in TiDB documentation related repos:
 
 - [pingcap/docs-cn](https://github.com/pingcap/docs-cn/graphs/contributors)
 - [pingcap/docs](https://github.com/pingcap/docs/graphs/contributors)
