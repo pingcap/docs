@@ -7,7 +7,7 @@ summary: Incrementally synchronize data From Aurora MySQL to TiDB
 
 [TiDB Data Migration](https://github.com/pingcap/dm) (DM) is an integrated data migration task management platform, which supports the full data migration and the incremental data replication from MySQL-compatible databases (such as MySQL, MariaDB, and Aurora MySQL) into TiDB. It can help to reduce the operation cost of data migration and simplify the troubleshooting process.
 
-This article only introduces how to use DM for incremental synchronization
+This article introduces how to use DM for incremental replication.
 
 ## Complete the following tasks before start
 

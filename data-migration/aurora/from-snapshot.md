@@ -5,11 +5,11 @@ summary: Learn how to migrate full data from Amazon Aurora MySQL to TiDB using T
 
 # Migrate from Aurora snapshot to TiDB
 
-This document introduces how to migrate full data from Amazon Aurora MySQL to TiDB using TiDB Lightning. Both Dumpling and Lighting are used in this document.
+This document introduces how to migrate full data from Amazon Aurora MySQL to TiDB using TiDB Lightning. Both Dumpling and TiDB Lighting are used in this document.
 
 Before you start, make sure you have finished the following tasks:
 
-- [Deploy Lighting using TiUP](/data-migration/quick_install_tools.md)
+- [Deploy TiDB Lighting using TiUP](/data-migration/quick_install_tools.md)
 - [Deploy Dumping using TiUP](/data-migration/quick_install_tools.md)
 
 ***
@@ -30,7 +30,7 @@ tiup dumpling --host ${host} --port 3306 --user root --password password --no-da
 
 |Parameter|Description|
 |-|-|
-| `-h` or `--host`             |The address of the connected database IP|
+| `-h` or `--host`             |The IP address of the connected database|
 | `-p` or `--password`         |The password of the connected database|
 | `-u` or `--user`             |The username of the connected database|
 | `-P` or `--port`             |The port of the connected database|
@@ -40,9 +40,9 @@ tiup dumpling --host ${host} --port 3306 --user root --password password --no-da
 
 > **Note:**
 >
-> For more parameters of Dumpling,see [Dumpling overview](/dumpling-overview.md)
+> For more parameters of Dumpling, see [Dumpling overview](/dumpling-overview.md).
 
-## Step 3. Preparing the Lightning configuration file 
+## Step 3. Prepare the TiDB Lightning configuration file 
 
 Based on different deployment methods, create the `tidb-lighting.toml` configuration file as follows:
 
@@ -90,7 +90,7 @@ type = '$3'
 > - If TLS is enabled in the target TiDB cluster, you also need to configure TLS.
 > - For more configurations, see [TiDB Lightning Configuration](/tidb-lightning/tidb-lightning-configuration.md).
 
-## Step 4. Create table schema in TiDB
+## Step 4. Create table schemas in TiDB
 
 Use TiDB Lightning to create table schemas:
 
@@ -100,7 +100,7 @@ Use TiDB Lightning to create table schemas:
 tiup tidb-lightning -config tidb-lightning.toml -d ./schema -no-schema=false
 ```
 
-In this example, TiDB Lightning is only used to create table schemas, so the above command runs very fast. At a regular speed, ten table creation statements can be executed in one second.
+In this example, TiDB Lightning is only used to create table schemas, so the above command runs very fast. In average, ten table creation statements can be executed in one second.
 
 > **Note:**
 >

@@ -3,9 +3,9 @@ title: Quick install guide of TiDB data migration tools
 summary: Learn how to install TiDB data migration tools.
 ---
 
-# Migrate from Aurora snapshot to TiDB
+# Migrate from Aurora snapshots to TiDB
 
-This document introduces how to install data migration related tools quickly.
+This document introduces how to install data migration tools quickly.
 
 ## Complete the following tasks before start
 
@@ -14,7 +14,7 @@ This document introduces how to install data migration related tools quickly.
 
 ## Install TiUP
 
-Starting with TiDB 4.0, TiUP, as the package manager, makes it far easier to manage different cluster components in the TiDB ecosystem. Now you can run any component with only a single line of TiUP commands.
+Starting with TiDB 4.0, TiUP, as the package manager, helps you easily manage different cluster components in the TiDB ecosystem. Now you can run any component with only a single TiUP command line.
 
 {{< copyable "shell-regular" >}}
 
@@ -30,7 +30,7 @@ Redeclare the global environment variables:
 source ~/.bash_profile
 ```
 
-## Install Component
+## Install Components
 
 {{< copyable "shell-regular" >}}
 
@@ -40,7 +40,7 @@ tiup install dumpling tidb-lightning dm dmctl
 
 > **Note:**
 >
-> You can install a component of specific version by: `tiup install <component>[:version]`
+> You can install a component of a specific version by: `tiup install <component>[:version]`
 
 ## Helpful Topics
 
