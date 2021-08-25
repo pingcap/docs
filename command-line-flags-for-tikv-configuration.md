@@ -1,7 +1,6 @@
 ---
 title: TiKV Configuration Flags
 summary: Learn some configuration flags of TiKV.
-aliases: ['/docs/dev/command-line-flags-for-tikv-configuration/','/docs/dev/reference/configuration/tikv-server/configuration/']
 ---
 
 # TiKV Configuration Flags
