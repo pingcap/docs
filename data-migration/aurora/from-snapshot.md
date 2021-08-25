@@ -44,7 +44,7 @@ tiup dumpling --host ${host} --port 3306 --user root --password password --no-da
 
 ## Step 3. Preparing the Lightning configuration file 
 
-Based on different deployment methods, edit the `tidb-lighting.toml` configuration file as follows:
+Based on different deployment methods, create the `tidb-lighting.toml` configuration file as follows:
 
 {{< copyable "shell-regular" >}}
 
