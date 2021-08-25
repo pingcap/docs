@@ -52,17 +52,17 @@
     + [Migration of total data more than terabytes](/data-migration/mysql/huge-data.md)
     + [Migration of total data less than terabytes](/data-migration/mysql/small-data.md)
     + [Continuous incremental data migration](/data-migration/mysql/increment-mysql.md)
-  + From Files To TiDB
+  + From Files to TiDB
     + [Overview](/data-migration/file/file-migration-overview.md)
     + [Import data from CSV files](/data-migration/file/csv-tidb.md)
     + [Import data from SQL files](/data-migration/file/sql-tidb.md)
-  + From Cloud To TiDB
+  + From Cloud to TiDB
     + [Overview](/data-migration/cloud/migrate-cloud-overview.md)
     + [Migrate data from Amazon](/data-migration/cloud/aws-tidb.md)
     + [Migrate data from Google](/data-migration/cloud/google-tidb.md)
-  + From TiDB To TiDB
+  + From TiDB to TiDB
       + [Overview](/data-migration/tidb-tidb.md)
-  + Advanced Migration To TiDB
+  + Advanced Migration to TiDB
     + [Overview](/data-migration/advanced-migration/advanced-migration-overview.md)
     + [Filter binlog event](/data-migration/advanced-migration/binlog-filter.md)
     + [Work with GH-ost and PT-osc](/data-migration/advanced-migration/ghost-ptosc.md)
