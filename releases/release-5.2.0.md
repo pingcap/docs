@@ -133,7 +133,14 @@ In v5.2, the key new features and improvements are as follows:
 
 - **Improve stability of TiKV flow control**
  
-    TiKV introduces a new flow control mechanism to replacesupersede the previous RocksDB write stall mechanism. This mechanism controls flow at the scheduler layer, which avoids the issue of QPS drop caused by the stuck Raftstore or Apply threads when the write traffic is high.
+    TiKV introduces a new flow control mechanism to replace the previous RocksDB write stall mechanism. Compared with the write stall mechanism, this new mechanism reduces the impact on the stability of foreground write by the following:
+
+    When RocksDB compaction stacks, flow control is performed on the TiKV scheduler layer instead of the RocksDB layer, to avoid the following issues:
+    
+        - Raftstore is stuck, which is caused by RocksDB write stall.
+        - Raft election times out, and the node leader is transferred as a result. 
+
+    This new mechanism improves the flow control algorithm to mitigate QPS decrease when the write traffic is high.
  
 [User document](/tikv-configuration-file.md#storageflow-control), [#10137](https://github.com/tikv/tikv/issues/10137)
 
