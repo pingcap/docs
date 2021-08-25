@@ -1,6 +1,5 @@
 ---
 title: TiDB Ecosystem Tools Overview
-aliases: ['/docs/dev/ecosystem-tool-user-guide/','/docs/dev/reference/tools/user-guide/','/docs/dev/how-to/migrate/from-mysql/','/docs/dev/how-to/migrate/incrementally-from-mysql/','/docs/dev/how-to/migrate/overview/']
 ---
 
 # TiDB Ecosystem Tools Overview
