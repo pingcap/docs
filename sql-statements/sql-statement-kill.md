@@ -35,7 +35,7 @@ Query OK, 0 rows affected (0.00 sec)
 ## MySQL compatibility
 
 * By design, `KILL` is not compatible with MySQL by default. This helps prevent against a case of a connection being terminated on the wrong TiDB server, because it is common to place multiple TiDB servers behind a load balancer.
-* You can use `KILL` statment If you are certain that the session you are attempting to kill is on the same TiDB server and set [`compatible-kill-query = true`](/tidb-configuration-file.md#compatible-kill-query) in your configuration file.
+* If you are certain that the session you are attempting to kill is on the same TiDB server, set [`compatible-kill-query = true`](/tidb-configuration-file.md#compatible-kill-query) in your configuration file.
 * The `KILL TIDB` statement is a TiDB extension. You can kill the session without limitation.
 
 ## See also
