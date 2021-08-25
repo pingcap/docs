@@ -142,7 +142,7 @@ In v5.2, the key new features and improvements are as follows:
 
     This new mechanism improves the flow control algorithm to mitigate QPS decrease when the write traffic is high.
  
-[User document](/tikv-configuration-file.md#storageflow-control), [#10137](https://github.com/tikv/tikv/issues/10137)
+    [User document](/tikv-configuration-file.md#storageflow-control), [#10137](https://github.com/tikv/tikv/issues/10137)
 
 - **Detect and recover automatically from impact caused by a single slow TiKV node in a cluster**
  
