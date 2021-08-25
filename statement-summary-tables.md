@@ -92,9 +92,9 @@ The fields `SUMMARY_BEGIN_TIME` and `SUMMARY_END_TIME` represent the start time 
 
 ## `statements_summary_evicted`
 
-The `tidb_stmt_summary_max_stmt_count` variable controls the maximum number of statements that the `statement summary` table stores in memory. The `statement summary` table uses the LRU algorithm. Once the number of SQL statements exceed the `tidb_stmt_summary_max_stmt_count` value, the longest unused record is evicted from the table. The number of evicted SQL statements during each period are recorded in the `statements_summary_evicted` table.
+The `tidb_stmt_summary_max_stmt_count` variable controls the maximum number of statements that the `statement_summary` table stores in memory. The `statement_summary` table uses the LRU algorithm. Once the number of SQL statements exceeds the `tidb_stmt_summary_max_stmt_count` value, the longest unused record is evicted from the table. The number of evicted SQL statements during each period is recorded in the `statements_summary_evicted` table.
 
-The `statements_summary_evicted` table is updated only when a SQL record is evicted from the `statement summary` table. The `statements_summary_evicted` only records the period during which the eviction occurs and the number of evicted SQL statements.
+The `statements_summary_evicted` table is updated only when a SQL record is evicted from the `statement_summary` table. The `statements_summary_evicted` only records the period during which the eviction occurs and the number of evicted SQL statements.
 
 ## The `cluster` tables for statement summary
 
@@ -115,7 +115,7 @@ The following system variables are used to control the statement summary:
 
 > **Note:**
 >
-> When a category of SQL statement needs to be removed because the `tidb_stmt_summary_max_stmt_count` limit is exceeded, TiDB removes the data of that SQL statement category of all time ranges from the `statement summary history` table. Therefore, even if the number of SQL statement categories in a certain time range does not reach the limit, the number of SQL statements stored in the `statement summary history` table is less than the actual number of SQL statements. If this situation occurs and affects performance, you are recommended to increase the value of `tidb_stmt_summary_max_stmt_count`.
+> When a category of SQL statement needs to be removed because the `tidb_stmt_summary_max_stmt_count` limit is exceeded, TiDB removes the data of that SQL statement category of all time ranges from the `statement_summary_history` table. Therefore, even if the number of SQL statement categories in a certain time range does not reach the limit, the number of SQL statements stored in the `statement_summary_history` table is less than the actual number of SQL statements. If this situation occurs and affects performance, you are recommended to increase the value of `tidb_stmt_summary_max_stmt_count`.
 
 An example of the statement summary configuration is shown as follows:
 
@@ -144,7 +144,7 @@ The system variables above have two scopes: global and session. These scopes wor
 
 ### Set a proper size for statement summary
 
-After the system has run for a period of time, you can check the `statement summary` table to see whether SQL eviction has occurred. For example:
+After the system has run for a period of time, you can check the `statement_summary` table to see whether SQL eviction has occurred. For example:
 
 ```sql
 select @@global.tidb_stmt_summary_max_stmt_count;
@@ -167,7 +167,7 @@ select count(*) from information_schema.statements_summary;
 1 row in set (0.001 sec)
 ```
 
-You can see that the `statement summary` table is full of records. Then check the evicted data from the `statements_summary_evicted` table:
+You can see that the `statements_summary` table is full of records. Then check the evicted data from the `statements_summary_evicted` table:
 
 ```sql
 select * from information_schema.statements_summary_evicted;
