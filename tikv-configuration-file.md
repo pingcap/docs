@@ -38,6 +38,7 @@ This document only describes the parameters that are not included in command-lin
 + The compression algorithm for gRPC messages
 + Optional values: `"none"`, `"deflate"`, `"gzip"`
 + Default value: `"none"`
++ Note: When the value is `gzip`, TiDB Dashboard will have a display error because it might not complete the corresponding compression algorithm in some cases. If you adjust the value back to the default `none`, TiDB Dashboard will display normally. 
 
 ### `grpc-concurrency`
 
@@ -118,6 +119,11 @@ This document only describes the parameters that are not included in command-lin
 + The time threshold for a TiDB's push down request to print slow log
 + Default value: `"1s"`
 + Minimum value: `0`
+
+### `raft-client-queue-size`
+
++ Specifies the queue size of the Raft messages in TiKV. If too many messages not sent in time result in a full buffer, or messages discarded, you can specify a greater value to improve system stability. 
++ Default value: `8192`
 
 ## readpool.unified
 
@@ -310,6 +316,35 @@ Configuration items related to the sharing of block cache among multiple RocksDB
 + The size of the shared block cache.
 + Default value: 45% of the size of total system memory
 + Unit: KB|MB|GB
+
+## storage.flow-control
+
+Configuration items related to the flow control mechanism in TiKV. This mechanism replaces the write stall mechanism in RocksDB and controls flow at the scheduler layer, which avoids the issue of QPS drop caused by the stuck Raftstore or Apply threads when the write traffic is high.
+
+### `enable`
+
++ Determines whether to enable the flow control mechanism. After it is enabled, TiKV automatically disables the write stall mechanism of KvDB and the write stall mechanism of RaftDB (excluding memtable).
++ Default value: `true`
+
+### `memtables-threshold`
+
++ When the number of kvDB memtables reaches this threshold, the flow control mechanism starts to work.
++ Default value: `5`
+
+### `l0-files-threshold`
+
++ When the number of kvDB L0 files reaches this threshold, the flow control mechanism starts to work.
++ Default value: `9`
+
+### `soft-pending-compaction-bytes-limit`
+
++ When the pending compaction bytes in KvDB reach this threshold, the flow control mechanism starts to reject some write requests and reports the `ServerIsBusy` error.
++ Default value: `"192GB"`
+
+### `hard-pending-compaction-bytes-limit`
+
++ When the pending compaction bytes in KvDB reach this threshold, the flow control mechanism rejects all write requests and reports the `ServerIsBusy` error.
++ Default value: `"1024GB"`
 
 ## storage.io-rate-limit
 
@@ -526,8 +561,8 @@ Configuration items related to Raftstore
 ### `max-peer-down-duration`
 
 + The longest inactive duration allowed for a peer. A peer with timeout is marked as `down`, and PD tries to delete it later.
-+ Default value: `"5m"`
-+ Minimum value: `0`
++ Default value: `"10m"`
++ Minimum value: When Hibernate Region is enabled, the minimum value is `peer-stale-check-interval * 2`; when Hibernate Region is disabled, the minimum value is `0`.
 
 ### `max-leader-missing-duration`
 
@@ -635,6 +670,18 @@ Configuration items related to Raftstore
 + The allowable number of threads that drive `future`
 + Default value: `1`
 + Minimum value: greater than `0`
+
+### `cmd-batch`
+
++ Controls whether to enable batch processing of the requests. When it is enabled, the write performance is significantly improved. 
++ Default value: `true`
+
+### `inspect-interval`
+
++ At a certain interval, TiKV inspects the latency of the Raftstore component. This parameter specifies the interval of the inspection. If the latency exceeds this value, this inspection is marked as timeout. 
++ Judges whether the TiKV node is slow based on the ratio of timeout inspection. 
++ Default value: `"500ms"`
++ Minimum value: `"1ms"`
 
 ## Coprocessor
 
@@ -889,7 +936,7 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 
 ### `pin-l0-filter-and-index-blocks`
 
-+ Determines whether to pin the index and filter at L0
++ Determines whether to pin the index and filter blocks of the level 0 SST files in memory.
 + Default value: `true`
 
 ### `use-bloom-filter`
@@ -906,8 +953,8 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 ### `whole-key-filtering`
 
 + Determines whether to put the entire key to bloom filter
-+ Default value for `defaultcf`: `true`
-+ Default value for `writecf` and `lockcf`: `false`
++ Default value for `defaultcf` and `lockcf`: `true`
++ Default value for `writecf`: `false`
 
 ### `bloom-filter-bits-per-key`
 
@@ -931,7 +978,8 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 
 + The default compression algorithm for each level
 + Optional values: ["no", "no", "lz4", "lz4", "lz4", "zstd", "zstd"]
-+ Default value: `No` for the first two levels, and `lz4` for the next five levels
++ Default value for `defaultcf` and `writecf`: ["no", "no", "lz4", "lz4", "lz4", "zstd", "zstd"]
++ Default value for `lockcf`: ["no", "no", "no", "no", "no", "no", "no"]
 
 ### `bottommost-level-compression`
 
@@ -1006,7 +1054,7 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 + The priority type of compaction
 + Optional values: `0` (`ByCompensatedSize`), `1` (`OldestLargestSeqFirst`), `2` (`OldestSmallestSeqFirst`), `3` (`MinOverlappingRatio`)
 + Default value for `defaultcf` and `writecf`: `3`
-+ Default value for `lockcf`: `1`
++ Default value for `lockcf`: `0`
 
 ### `dynamic-level-bytes`
 
@@ -1064,9 +1112,9 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 + Default value: `"128MB"`
 + Unit: KB|MB|GB
 
-## rocksdb.defaultcf.titan | rocksdb.writecf.titan | rocksdb.lockcf.titan
+## rocksdb.defaultcf.titan
 
-Configuration items related to `rocksdb.defaultcf.titan`, `rocksdb.writecf.titan`, and `rocksdb.lockcf.titan`.
+Configuration items related to `rocksdb.defaultcf.titan`.
 
 ### `min-blob-size`
 
@@ -1142,7 +1190,7 @@ Configuration items related to `rocksdb.defaultcf.titan`, `rocksdb.writecf.titan
 + Determines whether to use the merge operator to write back blob indexes for Titan GC. When `gc-merge-rewrite` is enabled, it reduces the effect of Titan GC on the writes in the foreground.
 + Default value: `false`
 
-## `raftdb`
+## raftdb
 
 Configuration items related to `raftdb`
 

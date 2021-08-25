@@ -84,10 +84,41 @@ mysql> SELECT * FROM t1;
 - Default value: `ON`
 - Controls whether statements should automatically commit when not in an explicit transaction. See [Transaction Overview](/transaction-overview.md#autocommit) for more information.
 
-### `cte_max_recursion_depth`
+### character_set_client
 
-- Scope：SESSION | GLOBAL
-- Default value：1000
+- Scope: SESSION | GLOBAL
+- Default value: `utf8mb4`
+- The character set for data sent from the client. See [Character Set and Collation](/character-set-and-collation.md) for details on the use of character sets and collations in TiDB. It is recommended to use [`SET NAMES`](/sql-statements/sql-statement-set-names.md) to change the character set when needed.
+
+### character_set_connection
+
+- Scope: SESSION | GLOBAL
+- Default value: `utf8mb4`
+- The character set for string literals that do not have a specified character set.
+
+### character_set_database
+
+- Scope: SESSION | GLOBAL
+- Default value: `utf8mb4`
+- This variable indicates the character set of the default database in use. **It is NOT recommended to set this variable**. When a new default database is selected, the server changes the variable value.
+
+### character_set_results
+
+- Scope: SESSION | GLOBAL
+- Default value: `utf8mb4`
+- The character set that is used when data is sent to the client.
+
+### character_set_server
+
+- Scope: SESSION | GLOBAL
+- Default value: `utf8mb4`
+- The character set used for new schemas when no character set is specified in the `CREATE SCHEMA` statement.
+
+### cte_max_recursion_depth
+
+- Scope: SESSION | GLOBAL
+- Default value: `1000`
+- Range: `[0, 4294967295]`
 - Controls the maximum recursion depth in Common Table Expressions.
 
 ### datadir
@@ -96,6 +127,13 @@ mysql> SELECT * FROM t1;
 - Default value: /tmp/tidb
 - This variable indicates the location where data is stored. This location can be a local path or point to a PD server if the data is stored on TiKV.
 - A value in the format of `ip_address:port` indicates the PD server that TiDB connects to on startup.
+
+### default_authentication_plugin
+
+- Scope: GLOBAL
+- Default value: `mysql_native_password`
+- This variable sets the authentication method that the server advertises when the server-client connection is being established. Possible values for this variable are documented in [Authentication plugin status](/security-compatibility-with-mysql.md#authentication-plugin-status).
+- Value options: `mysql_native_password` and `caching_sha2_password`. For more details, see [Authentication plugin status](/security-compatibility-with-mysql.md#authentication-plugin-status).
 
 ### ddl_slow_threshold
 
@@ -463,6 +501,12 @@ Constraint checking is always performed in place for pessimistic transactions (d
 > - If you have enabled TiDB Binlog, enabling this variable cannot improve the performance. To improve the performance, it is recommended to use [TiCDC](/ticdc/ticdc-overview.md) instead.
 > - Enabling this parameter only means that Async Commit becomes an optional mode of transaction commit. In fact, the most suitable mode of transaction commit is determined by TiDB.
 
+### tidb_enable_auto_increment_in_generated
+
+- Scope: SESSION | GLOBAL
+- Default value: `OFF`
+- This variable is used to determine whether to include the `AUTO_INCREMENT` columns when creating a generated column or an expression index.
+
 ### tidb_enable_cascades_planner
 
 - Scope: SESSION | GLOBAL
@@ -524,16 +568,6 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Scope: SESSION
 - Default value: `OFF`
 - This variable is used to set whether to enable the `LIST (COLUMNS) TABLE PARTITION` feature.
-
-### `tidb_partition_prune_mode` <span class="version-mark">New in v5.1</span>
-
-> **Warning:**
->
-> Currently, the dynamic mode for partitioned tables is an experimental feature. It is not recommended that you use it in the production environment.
-
-- Scope: SESSION | GLOBAL
-- Default value: `static`
-- Specifies whether to enable `dynamic` mode for partitioned tables. For details about the dynamic mode, see [Dynamic Mode for Partitioned Tables](/partitioned-table.md#dynamic-mode).
 
 ### tidb_enable_noop_functions <span class="version-mark">New in v4.0</span>
 
@@ -630,10 +664,10 @@ Query OK, 0 rows affected (0.09 sec)
 - Default value: `ON`
 - This variable is used to control whether to enable the support for window functions. Note that window functions may use reserved keywords. This might cause SQL statements that could be executed normally cannot be parsed after upgrading TiDB. In this case, you can set `tidb_enable_window_function` to `OFF`.
 
-### `tidb_enforce_mpp` <span class="version-mark">New in v5.1</span>
+### tidb_enforce_mpp <span class="version-mark">New in v5.1</span>
 
 - Scope: SESSION
-- Default value: `OFF`
+- Default value: `OFF`. To change this default value, modify the [`performance.enforce-mpp`](/tidb-configuration-file.md#enforce-mpp) configuration value.
 - Controls whether to ignore the optimizer's cost estimation and to forcibly use TiFlash's MPP mode for query execution. The value options are as follows:
     - `0` or `OFF`, which means that the MPP mode is not forcibly used (by default).
     - `1` or `ON`, which means that the cost estimation is ignored and the MPP mode is forcibly used. Note that this setting only takes effect when `tidb_allow_mpp=true`.
@@ -730,6 +764,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: GLOBAL
 - Default value: `10m0s`
+- Range: `[10m0s, 8760h0m0s]`
 - The time limit during which data is retained for each GC, in the format of Go Duration. When a GC happens, the current time minus this value is the safe point.
 
 > **Note:**
@@ -743,6 +778,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: GLOBAL
 - Default value: `10m0s`
+- Range: `[10m0s, 8760h0m0s]`
 - Specifies the GC interval, in the format of Go Duration, for example, `"1h30m"`, and `"15m"`
 
 ### tidb_gc_scan_lock_mode <span class="version-mark">New in v5.0</span>
@@ -915,7 +951,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 ### tidb_memory_usage_alarm_ratio
 
-- Scope: SESSION
+- Scope: INSTANCE
 - Default value: `0.8`
 - TiDB triggers an alarm when the percentage of the memory it takes exceeds a certain threshold. For the detailed usage description of this feature, see [`memory-usage-alarm-ratio`](/tidb-configuration-file.md#memory-usage-alarm-ratio-new-in-v409).
 - You can set the initial value of this variable by configuring [`memory-usage-alarm-ratio`](/tidb-configuration-file.md#memory-usage-alarm-ratio-new-in-v409).
@@ -965,6 +1001,20 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Default value: `OFF`
 - This variable is used to set whether the optimizer executes the optimization operation of pushing down the aggregate function to the position before Join, Projection, and UnionAll.
 - When the aggregate operation is slow in query, you can set the variable value to ON.
+
+### tidb_opt_limit_push_down_threshold
+
+- Scope: SESSION | GLOBAL
+- Default value: `100`
+- Range: `[0, 2147483647]`
+- This variable is used to set the threshold that determines whether to push the Limit or TopN operator down to TiKV.
+- If the value of the Limit or TopN operator is smaller than or equal to this threshold, these operators are forcibly pushed down to TiKV. This variable resolves the issue that the Limit or TopN operator cannot be pushed down to TiKV partly due to wrong estimation. 
+
+### tidb_opt_enable_correlation_adjustment
+
+- Scope: SESSION | GLOBAL
+- Default value:  `ON`
+- This variable is used to control whether the optimizer estimates the number of rows based on column order correlation
 
 ### tidb_opt_correlation_exp_factor
 
@@ -1077,6 +1127,16 @@ explain select * from t where age=5;
 - Scope: SESSION
 - Default value: `OFF`
 - This variable is used to control whether to allow `INSERT`, `REPLACE`, and `UPDATE` statements to operate on the `_tidb_rowid` column. This variable can be used only when you import data using TiDB tools.
+
+### tidb_partition_prune_mode <span class="version-mark">New in v5.1</span>
+
+> **Warning:**
+
+> Currently, the dynamic pruning mode for partitioned tables is an experimental feature. It is not recommended that you use it in the production environment.
+
+- Scope: SESSION | GLOBAL
+- Default value: `static`
+- Specifies whether to enable `dynamic` mode for partitioned tables. For details about the dynamic pruning mode, see [Dynamic Pruning Mode for Partitioned Tables](/partitioned-table.md#dynamic-pruning-mode).
 
 ### tidb_pprof_sql_cpu <span class="version-mark">New in v4.0</span>
 
@@ -1236,7 +1296,7 @@ SET tidb_slow_log_threshold = 200;
 ### tidb_stmt_summary_max_stmt_count <span class="version-mark">New in v4.0</span>
 
 - Scope: SESSION | GLOBAL
-- Default value: `200`
+- Default value: `3000`
 - Range: `[1, 32767]`
 - This variable is used to set the maximum number of statements that the statement summary stores in memory.
 
@@ -1338,7 +1398,7 @@ This variable is an alias for _transaction_isolation_.
 ### warning_count
 
 - Scope: SESSION
-- Default value: 0
+- Default value: `0`
 - This read-only variable indicates the number of warnings that occurred in the statement that was previously executed.
 
 ### windowing_use_high_precision

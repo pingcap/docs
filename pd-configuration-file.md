@@ -77,17 +77,6 @@ This document only describes parameters that are not included in command-line pa
 + Default value: `3`
 + Unit: second
 
-### `tso-save-interval`
-
-+ The interval for PD to allocate TSOs for persistent storage in etcd
-+ Default value: `3`
-+ Unit: second
-
-### `enable-prevote`
-
-+ Enables or disables `raft prevote`
-+ Default value: `true`
-
 ### `quota-backend-bytes`
 
 + The storage size of the meta-information database, which is 8GiB by default
@@ -107,21 +96,6 @@ This document only describes parameters that are not included in command-line pa
 ### `force-new-cluster`
 
 + Determines whether to force PD to start as a new cluster and modify the number of Raft members to `1`
-+ Default value: `false`
-
-### `tick-interval`
-
-+ The tick period of etcd Raft
-+ Default value: `100ms`
-
-### `election-interval`
-
-+ The timeout for the etcd leader election
-+ Default value: `3s`
-
-### `use-region-storage`
-
-+ Enables or disables independent Region storage
 + Default value: `false`
 
 ## security
@@ -295,39 +269,6 @@ Configuration items related to scheduling
 + Default value: `v2`
 + Optional values: `v1` and `v2`
 
-### `disable-remove-down-replica`
-
-+ Determines whether to disable the feature that automatically removes `DownReplica`. When this parameter is set to `true`, PD does not automatically clean up the copy in the down state.
-+ Default value: `false`
-
-### `disable-replace-offline-replica`
-
-+ Determines whether to disable the feature that migrates `OfflineReplica`. When this parameter is set to `true`, PD does not migrate the replicas in the offline state.
-+ Default value: `false`
-
-### `disable-make-up-replica`
-
-+ Determines whether to disable the feature that automatically supplements replicas. When this parameter is set to `true`, PD does not supplement replicas for the Region with insufficient replicas.
-+ Default value: `false`
-
-### `disable-remove-extra-replica`
-
-+ Determines whether to disable the feature that removes extra replicas. When this parameter is set to `true`, PD does not remove the extra replicas from the Region with excessive replicas.
-+ Default value: `false`
-
-### `disable-location-replacement`
-
-+ Determines whether to disable isolation level check. When this parameter is set to `true`, PD does not increase the isolation level of the Region replicas through scheduling.
-+ Default value: `false`
-
-### `store-balance-rate`
-
-+ Determines the maximum number of operations related to adding peers within a minute
-+ Type: Integer
-+ Default value: `15`
-+ Minimum value: `0`
-+ Maximum value: `200`
-
 ### `enable-joint-consensus` <span class="version-mark">New in v5.0</span>
 
 + Controls whether to use Joint Consensus for replica scheduling. If this configuration is disabled, PD schedules one replica at a time.
@@ -339,7 +280,7 @@ Configuration items related to replicas
 
 ### `max-replicas`
 
-+ The number of replicas
++ The number of replicas, that is, the sum of the number of leaders and followers. The default value `3` means 1 leader and 2 followers. When this configuration is modified online, PD will schedule Regions in the background so that the number of replicas matches this configuration.
 + Default value: `3`
 
 ### `location-labels`
@@ -418,4 +359,4 @@ Configuration items related to the [TiDB Dashboard](/dashboard/dashboard-intro.m
 
 ## `replication-mode`
 
-Configuration items related to the replication mode of all Regions. See [Enable synchronous replication in PD configuration file](/synchronous-replication.md#enable-synchronous-replication-in-the-pd-configuration-file) for details.
+Configuration items related to the replication mode of all Regions. See [Enable the DR Auto-Sync mode](/two-data-centers-in-one-city-deployment.md#enable-the-dr-auto-sync-mode) for details.

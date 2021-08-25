@@ -8,7 +8,13 @@ aliases: ['/docs/dev/quick-start-with-tidb/','/docs/dev/test-deployment-using-do
 
 This guide walks you through the quickest way to get started with TiDB. You will be using TiUP, a package manager in the TiDB ecosystem, to help you run any TiDB cluster component with only a single line of command.
 
-To deploy an on-premise production cluster instead, go to [production installation guide](/production-deployment-using-tiup.md). To deploy TiDB in Kubernetes, go to [Get Started with TiDB in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/get-started). To manage TiDB in the cloud, go to [TiDB Cloud Quick Start](https://docs.pingcap.com/tidbcloud/beta/tidb-cloud-quickstart).
+> **Note:**
+>
+> The deployment method provided in this guide is **ONLY FOR** quick start, **NOT FOR** production.
+>
+> - To deploy an on-premises production cluster, see [production installation guide](/production-deployment-using-tiup.md).
+> - To deploy TiDB in Kubernetes, see [Get Started with TiDB in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/get-started).
+> - To manage TiDB in the cloud, see [TiDB Cloud Quick Start](https://docs.pingcap.com/tidbcloud/beta/tidb-cloud-quickstart).
 
 <SimpleTab>
 <div label="Mac">
@@ -238,6 +244,10 @@ Prepare a target machine that meets the following requirements:
 - The Linux OS has access to the Internet, which is required to download TiDB and related software installation packages
 
 The smallest TiDB cluster topology is as follows:
+
+**Note:**
+>
+> The IP address of the following instances only serves as an example IP. In your actual deployment, you need to replace the IP with your actual IP.
 
 | Instance | Count | IP | Configuration |
 |:-- | :-- | :-- | :-- |

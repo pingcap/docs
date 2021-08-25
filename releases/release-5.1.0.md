@@ -33,7 +33,7 @@ In v5.1, the key new features or improvements are as follows:
 | [`tidb_analyze_version`](/system-variables.md#tidb_analyze_version-new-in-v510)  | Newly added | Controls how TiDB collects statistics. The default value of this variable is `2`. This is an experimental feature. |
 | [`tidb_enable_enhanced_security`](/system-variables.md#tidb_enable_enhanced_security) | Newly added | Indicates whether the TiDB server you are connected to has the Security Enhanced Mode (SEM) enabled. This variable setting cannot be changed without restarting the TiDB server. |
 | [`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51) | Newly added | Controls whether to ignore the optimizer's cost estimation and to forcibly use the MPP mode for query execution. The data type of this variable is `BOOL` and the default value is `false`. |
-| [`tidb_partition_prune_mode`](/system-variables.md#tidb_partition_prune_mode-new-in-v51) | Newly added | Specifies whether to enable dynamic prune mode for partitioned tables. This feature is experimental. The default value of this variable is `static`, which means the dynamic mode for partitioned tables is disabled by default.  |
+| [`tidb_partition_prune_mode`](/system-variables.md#tidb_partition_prune_mode-new-in-v51) | Newly added | Specifies whether to enable dynamic pruning mode for partitioned tables. This feature is experimental. The default value of this variable is `static`, which means the dynamic pruning mode for partitioned tables is disabled by default.  |
 
 ### Configuration file parameters
 
@@ -42,7 +42,7 @@ In v5.1, the key new features or improvements are as follows:
 | TiDB configuration file | [`security.enable-sem`](/tidb-configuration-file.md#enable-sem)  | Newly added  | Controls whether to enable the Security Enhanced Mode (SEM). The default value of this configuration item is `false`, which means the SEM is disabled. |
 | TiDB configuration file | [`performance.committer-concurrency`](/tidb-configuration-file.md#committer-concurrency)  | Modified  | Controls the concurrency number for requests related to commit operations in the commit phase of a single transaction. The default value is changed from `16` to `128`. |
 | TiDB configuration file | [`performance.tcp-no-delay`](/tidb-configuration-file.md#tcp-no-delay)  | Newly added  | Determines whether to enable TCP_NODELAY at the TCP layer. The default value is `true`, which means TCP_NODELAY is enabled. |
-| TiDB configuration file | [`performance.enforce-mpp`](/tidb-configuration-file.md#enforce-mpp)  | Newly added  | Controls whether TiDB ignores cost estimates of Optimizer at the instance level and enforces the MPP mode. The default value is `false`. |
+| TiDB configuration file | [`performance.enforce-mpp`](/tidb-configuration-file.md#enforce-mpp)  | Newly added  | Controls whether TiDB ignores cost estimates of Optimizer at the instance level and enforces the MPP mode. The default value is `false`. This configuration item controls the initial value of the system variable [`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51). |
 | TiDB configuration file | [`pessimistic-txn.deadlock-history-capacity`](/tidb-configuration-file.md#deadlock-history-capacity)  | Newly added  | Sets the maximum number of deadlock events that can be recorded in the [`INFORMATION_SCHEMA.DEADLOCKS`](/information-schema/information-schema-deadlocks.md) table of a single TiDB server. The default value is `10`. |
 | TiKV configuration file | [`abort-on-panic`](/tikv-configuration-file.md#abort-on-panic)  | Newly added  | Sets whether the `abort` process allows the system to generate core dump files when TiKV panics. The default value is `false`, which means it is not allowed to generate core dump files. |
 | TiKV configuration file | [`hibernate-regions`](/tikv-configuration-file.md#hibernate-regions)  | Modified  | The default value is changed from `false` to `true`. If a Region is idle for a long time, it is automatically set as hibernated. |
@@ -68,9 +68,9 @@ In v5.1, the key new features or improvements are as follows:
 
 ### SQL
 
-- Support the Common Table Expression (CTE) feature of MySQL 8.0, which empowers TiDB with the capability of querying hierarchical data recursively or non-recursively.
+- Support the Common Table Expression (CTE) feature of MySQL 8.0.
 
-    This feature meets the needs of using tree queries to implement application logics in multiple sectors such as human resources, manufacturing, financial markets, and education.
+    This feature empowers TiDB with the capability of querying hierarchical data recursively or non-recursively and meets the needs of using tree queries to implement application logics in multiple sectors such as human resources, manufacturing, financial markets, and education.
 
     In TiDB, you can apply the `WITH` statement to use Common Table Expressions. [User document](/sql-statements/sql-statement-with.md), [#17472](https://github.com/pingcap/tidb/issues/17472)
 
@@ -135,12 +135,14 @@ In v5.1, the key new features or improvements are as follows:
 + Stale read of data replicas (Experimental)
 
     Read local replicas data directly to reduce read latency and improve the query performance
+    
     [User document](/stale-read.md), [#21094](https://github.com/pingcap/tidb/issues/21094)
 
 + Enable the Hibernate Region feature by default.
 
     If a Region is in an inactive state for a long time, it is automatically set to a silent state, which reduces the system overhead of the heartbeat information between the Leader and the Follower.
-    [User document](/tikv-configuration-file.md#hibernate-regions)，[#10266](https://github.com/tikv/tikv/pull/10266)
+    
+    [User document](/tikv-configuration-file.md#hibernate-regions), [#10266](https://github.com/tikv/tikv/pull/10266)
 
 ### Stability
 
@@ -150,6 +152,7 @@ In v5.1, the key new features or improvements are as follows:
     - If large amounts of data is accumulated during the replication interruption, exceeding 1TB, the re-replication causes OOM problems.
     - Large amounts of data writes cause OOM problems in TiCDC.
     - Reduce the possibility of  TiCDC replication interruption in the following scenarios:
+        
         [project#11](https://github.com/pingcap/ticdc/projects/11)
 
         - Replication interruption when the network is unstable
@@ -162,6 +165,7 @@ In v5.1, the key new features or improvements are as follows:
 + Add a write rate limiter for TiKV background tasks (TiKV Write Rate Limiter)
 
     To ensure the duration stability of read and write requests, TiKV Write Rate Limiter smoothes the write traffic of TiKV background tasks such as GC and Compaction. The default value of TiKV background task write rate limiter is "0MB". It is recommended to set this value to the optimal I/O bandwidth of the disk, such as the maximum I/O bandwidth specified by the cloud disk manufacturer.
+    
     [User document](/tikv-configuration-file.md#storageio-rate-limit), [#9156](https://github.com/tikv/tikv/issues/9156)
 
 + Solve scheduling stability issues when multiple scaling tasks are performed at the same time
@@ -170,7 +174,7 @@ In v5.1, the key new features or improvements are as follows:
 
 TiDB adds the running status of TiDB cluster requests in telemetry, including execution status, failure status, etc.
 
-To learn more about the information and how to disable this behavior, refer to [Telemetry](https://docs.pingcap.com/zh/tidb/stable/telemetry).
+To learn more about the information and how to disable this behavior, refer to [Telemetry](/telemetry.md).
 
 ## Improvements
 
@@ -180,7 +184,7 @@ To learn more about the information and how to disable this behavior, refer to [
     - Support pushing down data of the enumerated type to TiKV to improve performance when using enumerated types in `WHERE` clauses [#23619](https://github.com/pingcap/tidb/issues/23619)
     - Optimize the calculation of Window Function to solve TiDB OOM problems when paging data with ROW_NUMBER() [#23807](https://github.com/pingcap/tidb/issues/23807)
     - Optimize the calculation of `UNION ALL` to solve the TiDB OOM problems when using `UNION ALL` to join a large number of `SELECT` statements [#21441](https://github.com/pingcap/tidb/issues/21441)
-    - Optimize the dynamic mode of partitioned tables to improve performance and stability [#24150](https://github.com/pingcap/tidb/issues/24150)
+    - Optimize the dynamic pruning mode of partitioned tables to improve performance and stability [#24150](https://github.com/pingcap/tidb/issues/24150)
     - Fix the `Region is Unavailable` issue that occurs in multiple scenarios [project#62](https://github.com/pingcap/tidb/projects/62)
     - Fix multiple `Region is Unavailable` issues that might occur in frequent scheduling situations
     - Fix `Region is Unavailable` issue that might occur in some high stress write situations
