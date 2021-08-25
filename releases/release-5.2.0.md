@@ -244,7 +244,7 @@ For detailed information of the collected data and how to disable data collectio
         - Support always splitting TiDB v3.x tables through `tidb_rowid` to save TiDB memory [#301](https://github.com/pingcap/dumpling/pull/301)
         - Reduce access of Dumpling to the `information_schema` to improve stability [#305](https://github.com/pingcap/dumpling/pull/305)
 
-## Bug 修复
+## Bug Fixes
 
 + TiDB
 
