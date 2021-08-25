@@ -183,17 +183,18 @@ For detailed information of the collected data and how to disable data collectio
 
     + TiCDC
 
-    - Add HTTP API. Support querying and modifying TiCDC clusters. [#2416](https://github.com/pingcap/ticdc/pull/2416)
-    - Add the binary MQ format designed for TiDB. It is more compact than the open protocols based on JSON [#1621](https://github.com/pingcap/ticdc/pull/1621)
-    - Remove support for file sorter [#2114](https://github.com/pingcap/ticdc/pull/2114)
-    - Support log rotation configurations [#2182](https://github.com/pingcap/ticdc/pull/2182)
+        - Add HTTP API. Support querying and modifying TiCDC clusters. [#2416](https://github.com/pingcap/ticdc/pull/2416)
+        - Add the binary MQ format designed for TiDB. It is more compact than the open protocols based on JSON [#1621](https://github.com/pingcap/ticdc/pull/1621)
+        - Remove support for file sorter [#2114](https://github.com/pingcap/ticdc/pull/2114)
+        - Support log rotation configurations [#2182](https://github.com/pingcap/ticdc/pull/2182)
 
     + TiDB Lightning
 
-    - Support customized line terminators (except `\r` and `\n`) [#1297](https://github.com/pingcap/br/pull/1297)
-    - Support expression index and the index that depends on virtual generated columns [#1407](https://github.com/pingcap/br/pull/1407)
+        - Support customized line terminators (except `\r` and `\n`) [#1297](https://github.com/pingcap/br/pull/1297)
+        - Support expression index and the index that depends on virtual generated columns [#1407](https://github.com/pingcap/br/pull/1407)
 
     + Dumpling
+
         - Support backing up MySQL compatible databases but does not support `START TRANSACTION ... WITH CONSISTENT SNAPSHOT` or`SHOW CREATE TABLE` [#311](https://github.com/pingcap/dumpling/pull/311)
 
 ## Improvements
@@ -242,6 +243,7 @@ For detailed information of the collected data and how to disable data collectio
 + Tools
 
     + TiCDC
+
         - Add the concurrency limit to the incremental scan of kv client [#1899](https://github.com/pingcap/ticdc/pull/1899)
         - TiCDC can always pull the old value internally [#2271](https://github.com/pingcap/ticdc/pull/2271)
         - TiCDC can fail and exit fast when unrecoverable DML errors occur [#1928](https://github.com/pingcap/ticdc/pull/1928)
@@ -249,6 +251,7 @@ For detailed information of the collected data and how to disable data collectio
         - Optimize workerpool to reduce the number of goroutines under high concurrency [#2201](https://github.com/pingcap/ticdc/pull/2201)
 
     + Dumpling
+
         - Support always splitting TiDB v3.x tables through `tidb_rowid` to save TiDB memory [#301](https://github.com/pingcap/dumpling/pull/301)
         - Reduce access of Dumpling to the `information_schema` to improve stability [#305](https://github.com/pingcap/dumpling/pull/305)
 
