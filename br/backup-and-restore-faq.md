@@ -37,7 +37,7 @@ Running BR with the root access might fail due to the disk permission, because t
 >
 > Therefore, it is recommended to check the permission before data restore according to the following steps:
 
-1. Execute the Linux-native command for process query:
+1. Run the Linux-native command for process query:
 
     {{< copyable "shell-regular" >}}
 
@@ -52,7 +52,7 @@ Running BR with the root access might fail due to the disk permission, because t
     tidb_ouo  9236  9.8  3.8 2048940 631136 ?      Ssl  08:28   1:05 bin/tikv-server --addr 0.0.0.0:20161 --advertise-addr 172.16.6.118:20161 --status-addr 0.0.0.0:20189 --advertise-status-addr 172.16.6.118:20189 --pd 172.16.6.118:2379 --data-dir /home/user1/tidb-data/tikv-20161 --config conf/tikv.toml --log-file /home/user1/tidb-deploy/tikv-20161/log/tikv.log
     ```
 
-    Or you can execute the following command:
+    Or you can run the following command:
 
     {{< copyable "shell-regular" >}}
 
