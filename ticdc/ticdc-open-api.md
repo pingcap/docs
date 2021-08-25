@@ -221,7 +221,7 @@ To modify the changefeed configuration, follow the steps of `pause the replicati
 
 | Parameter name | Description |
 | :-------------- | :----------------------------------- |
-| `changefeed_id` | The ID of the replication task (changefeed) to be paused. |
+| `changefeed_id` | The ID of the replication task (changefeed) to be updated. |
 
 #### Parameters for the request body
 
