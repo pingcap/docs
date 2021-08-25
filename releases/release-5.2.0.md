@@ -139,8 +139,8 @@ In v5.2, the key new features and improvements are as follows:
 
     In specific, when the stress of RocksDB compaction accumulates, flow control is performed at the TiKV scheduler layer instead of the RocksDB layer, to avoid the following issues:
 
-        - Raftstore is stuck, which is caused by RocksDB write stall.
-        - Raft election times out, and the node leader is transferred as a result.
+    - Raftstore is stuck, which is caused by RocksDB write stall.
+    - Raft election times out, and the node leader is transferred as a result.
 
     This new mechanism improves the flow control algorithm to mitigate QPS decrease when the write traffic is high.
 
