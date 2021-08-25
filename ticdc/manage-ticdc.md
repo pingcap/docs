@@ -25,6 +25,38 @@ tiup cluster upgrade <cluster-name> v4.0.14
 * The `changefeed` configuration has changed in TiCDC v4.0.2. See [Compatibility notes for the configuration file](/production-deployment-using-tiup.md#step-3-edit-the-initialization-configuration-file) for details.
 * If you encounter any issues, see [Upgrade TiDB using TiUP - FAQ](/upgrade-tidb-using-tiup.md#faq).
 
+<<<<<<< HEAD
+=======
+## Modify TiCDC configuration using TiUP
+
+This section introduces how to modify the configuration of TiCDC cluster using the  [`tiup cluster edit-config`](/tiup/tiup-component-cluster-edit-config.md) command of TiUP. The following example changes the value of `gc-ttl` from the default `86400` to `3600`, namely, one hour.
+
+First, execute the following command. You need to replace `<cluster-name>` with your actual cluster name.
+
+{{< copyable "shell-regular" >}}
+
+```shell
+tiup cluster edit-config <cluster-name>
+```
+
+Then, enter the vi editor page and modify the `cdc` configuraion under [`server-configs`](/tiup/tiup-cluster-topology-reference.md#server_configs). The configuration is shown below:
+
+```shell
+ server_configs:
+  tidb: {}
+  tikv: {}
+  pd: {}
+  tiflash: {}
+  tiflash-learner: {}
+  pump: {}
+  drainer: {}
+  cdc:
+    gc-ttl: 3600
+```
+
+After the modification, execute the `tiup cluster reload -R cdc` command to reload the configuration.
+
+>>>>>>> cdffc70a0 (fix typo: relaod -> reload (#6235))
 ## Use TLS
 
 For details about using encrypted data transmission (TLS), see [Enable TLS Between TiDB Components](/enable-tls-between-components.md).
