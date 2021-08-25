@@ -23,37 +23,37 @@ In v5.2, the key new features and improvements are as follows:
 
 > **Note:**
 >
-> When upgrading from an earlier TiDB version to v5.2, if you want to know the compatibility change notes of all intermediate versions, you can check the [Release Note](/releases/release-notes.md) for the corresponding version. 
+> When upgrading from an earlier TiDB version to v5.2, if you want to know the compatibility change notes of all intermediate versions, you can check the [Release Note](/releases/release-notes.md) for the corresponding version.
 
 ### System variables
 
-| Variable name    |  Change type    |  Description  | 
-| :---------- | :----------- | :----------- | 
-| [`default_authentication_plugin`](/system-variables.md#default_authentication_plugin) | Newly added | Sets the authentication method that the server advertises. The default value is `mysql_native_password`.  | 
-| [`tidb_enable_auto_increment_in_generated`](/system-variables.md#tidb_enable_auto_increment_in_generated) | Newly added | Determines whether to include the `AUTO_INCREMENT` columns when creating a generated column or an expression index. The default value is `OFF`.  | 
-| [`tidb_opt_enable_correlation_adjustment`](/system-variables.md#tidb_opt_enable_correlation_adjustment) | Newly added | Controls whether the optimizer estimates the number of rows based on column order correlation. The default value is `ON`.  | 
-| [`tidb_opt_limit_push_down_threshold`](/system-variables.md#tidb_opt_limit_push_down_threshold) | Newly added | Sets the threshold that determines whether to push the Limit or TopN operator down to TiKV. The default value is `100`.  | 
-| [`tidb_restricted_read_only`](/system-variables.md#tidb_restricted_read_only) | Newly added | Controls whether the whole cluster is read-only. The default value is `OFF`.  | 
-| [`tidb_stmt_summary_max_stmt_count`](/system-variables.md#tidb_stmt_summary_max_stmt_count-new-in-v40) | Modified | Sets the maximum number of statements that the statement summary tables store in memory. The default value is changed from `200` to `3000`.  | 
-| `tidb_enable_streaming` | Deprecated | The system variable `enable-streaming` is deprecated and it is not recommended to use it any more.  | 
+| Variable name    |  Change type    |  Description  |
+| :---------- | :----------- | :----------- |
+| [`default_authentication_plugin`](/system-variables.md#default_authentication_plugin) | Newly added | Sets the authentication method that the server advertises. The default value is `mysql_native_password`.  |
+| [`tidb_enable_auto_increment_in_generated`](/system-variables.md#tidb_enable_auto_increment_in_generated) | Newly added | Determines whether to include the `AUTO_INCREMENT` columns when creating a generated column or an expression index. The default value is `OFF`.  |
+| [`tidb_opt_enable_correlation_adjustment`](/system-variables.md#tidb_opt_enable_correlation_adjustment) | Newly added | Controls whether the optimizer estimates the number of rows based on column order correlation. The default value is `ON`.  |
+| [`tidb_opt_limit_push_down_threshold`](/system-variables.md#tidb_opt_limit_push_down_threshold) | Newly added | Sets the threshold that determines whether to push the Limit or TopN operator down to TiKV. The default value is `100`.  |
+| [`tidb_restricted_read_only`](/system-variables.md#tidb_restricted_read_only) | Newly added | Controls whether the whole cluster is read-only. The default value is `OFF`.  |
+| [`tidb_stmt_summary_max_stmt_count`](/system-variables.md#tidb_stmt_summary_max_stmt_count-new-in-v40) | Modified | Sets the maximum number of statements that the statement summary tables store in memory. The default value is changed from `200` to `3000`.  |
+| `tidb_enable_streaming` | Deprecated | The system variable `enable-streaming` is deprecated and it is not recommended to use it any more.  |
 
 ### Configuration file parameters
 
-| Configuration file    |  Configuration item    |  Change type    |  Description    | 
-| :---------- | :----------- | :----------- | :----------- | 
-| TiDB configuration file  | [`pessimistic-txn.deadlock-history-collect-retryable`](/tidb-configuration-file.md#deadlock-history-collect-retryable) |  Newly added  | Controls whether the [`INFORMATION\_SCHEMA.DEADLOCKS`](/information-schema/information-schema-deadlocks.md) table collects retryable deadlock error messages or not.  | 
-| TiDB configuration file  | [`security.auto-tls`](/tidb-configuration-file.md#auto-tls) |  Newly added  | Determines whether to automatically generate the TLS certificates on startup. The default value is `true`.  | 
-| TiDB configuration file  | [`stmt-summary.max-stmt-count`](/tidb-configuration-file.md#max-stmt-count) | Modified | Indicates the maximum number of SQL categories allowed to be saved in the statement summary tables. The default value is changed from `200` to `3000`.  | 
-| TiDB configuration file  | `experimental.allow-expression-index`  | Deprecated | The `allow-expression-index` configuration in the TiDB configuration file is deprecated.  | 
-| TiKV configuration file  | [`raftstore.cmd-batch`](/tikv-configuration-file.md#cmd-batch)  |  Newly added  | Controls whether to enable batch processing of the requests. When it is enabled, the write performance is significantly improved. The default value is `true`.  | 
-| TiKV configuration file  | [`raftstore.inspect-interval`](/tikv-configuration-file.md#inspect-interval)  |  Newly added  | At a certain interval, TiKV inspects the latency of the Raftstore component. This configuration item specifies the interval of the inspection. The default value is `500ms`.  | 
-| TiKV configuration file  | [`raftstore.max-peer-down-duration`](/tikv-configuration-file.md#max-peer-down-duration)  | Modified | Indicates the longest inactive duration allowed for a peer. A peer with timeout is marked as `down`, and PD tries to delete it later. The default value is changed from `5m` to `10m`.  | 
-| TiKV configuration file  | [`server.raft-client-queue-size`](/tikv-configuration-file.md#raft-client-queue-size)  |  Newly added  | Specifies the queue size of the Raft messages in TiKV. The default value is `8192`.  | 
-| TiKV configuration file  | [`storage.flow-control.enable`](/tikv-configuration-file.md#enable)  |  Newly added  | Determines whether to enable the flow control mechanism. The default value is `true`.  | 
-| TiKV configuration file  | [`storage.flow-control.memtables-threshold`](/tikv-configuration-file.md#memtables-threshold)  |  Newly added  | When the number of kvDB memtables reaches this threshold, the flow control mechanism starts to work. The default value is `5`.  | 
-| TiKV configuration file  | [`storage.flow-control.l0-files-threshold`](/tikv-configuration-file.md#l0-files-threshold)  |  Newly added  | When the number of kvDB L0 files reaches this threshold, the flow control mechanism starts to work. The default value is `9`.  | 
-| TiKV configuration file  | [`storage.flow-control.soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit)  |  Newly added  | When the pending compaction bytes in KvDB reach this threshold, the flow control mechanism starts to reject some write requests and reports the `ServerIsBusy` error. The default value is "192GB".  | 
-| TiKV configuration file  | [`storage.flow-control.hard-pending-compaction-bytes-limit`](/tikv-configuration-file.md#hard-pending-compaction-bytes-limit)  |  Newly added  | When the pending compaction bytes in KvDB reach this threshold, the flow control mechanism rejects all write requests and reports the `ServerIsBusy` error. The default value is "1024GB".  | 
+| Configuration file    |  Configuration item    |  Change type    |  Description    |
+| :---------- | :----------- | :----------- | :----------- |
+| TiDB configuration file  | [`pessimistic-txn.deadlock-history-collect-retryable`](/tidb-configuration-file.md#deadlock-history-collect-retryable) |  Newly added  | Controls whether the [`INFORMATION\_SCHEMA.DEADLOCKS`](/information-schema/information-schema-deadlocks.md) table collects retryable deadlock error messages or not.  |
+| TiDB configuration file  | [`security.auto-tls`](/tidb-configuration-file.md#auto-tls) |  Newly added  | Determines whether to automatically generate the TLS certificates on startup. The default value is `true`.  |
+| TiDB configuration file  | [`stmt-summary.max-stmt-count`](/tidb-configuration-file.md#max-stmt-count) | Modified | Indicates the maximum number of SQL categories allowed to be saved in the statement summary tables. The default value is changed from `200` to `3000`.  |
+| TiDB configuration file  | `experimental.allow-expression-index`  | Deprecated | The `allow-expression-index` configuration in the TiDB configuration file is deprecated.  |
+| TiKV configuration file  | [`raftstore.cmd-batch`](/tikv-configuration-file.md#cmd-batch)  |  Newly added  | Controls whether to enable batch processing of the requests. When it is enabled, the write performance is significantly improved. The default value is `true`.  |
+| TiKV configuration file  | [`raftstore.inspect-interval`](/tikv-configuration-file.md#inspect-interval)  |  Newly added  | At a certain interval, TiKV inspects the latency of the Raftstore component. This configuration item specifies the interval of the inspection. The default value is `500ms`.  |
+| TiKV configuration file  | [`raftstore.max-peer-down-duration`](/tikv-configuration-file.md#max-peer-down-duration)  | Modified | Indicates the longest inactive duration allowed for a peer. A peer with timeout is marked as `down`, and PD tries to delete it later. The default value is changed from `5m` to `10m`.  |
+| TiKV configuration file  | [`server.raft-client-queue-size`](/tikv-configuration-file.md#raft-client-queue-size)  |  Newly added  | Specifies the queue size of the Raft messages in TiKV. The default value is `8192`.  |
+| TiKV configuration file  | [`storage.flow-control.enable`](/tikv-configuration-file.md#enable)  |  Newly added  | Determines whether to enable the flow control mechanism. The default value is `true`.  |
+| TiKV configuration file  | [`storage.flow-control.memtables-threshold`](/tikv-configuration-file.md#memtables-threshold)  |  Newly added  | When the number of kvDB memtables reaches this threshold, the flow control mechanism starts to work. The default value is `5`.  |
+| TiKV configuration file  | [`storage.flow-control.l0-files-threshold`](/tikv-configuration-file.md#l0-files-threshold)  |  Newly added  | When the number of kvDB L0 files reaches this threshold, the flow control mechanism starts to work. The default value is `9`.  |
+| TiKV configuration file  | [`storage.flow-control.soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit)  |  Newly added  | When the pending compaction bytes in KvDB reach this threshold, the flow control mechanism starts to reject some write requests and reports the `ServerIsBusy` error. The default value is "192GB".  |
+| TiKV configuration file  | [`storage.flow-control.hard-pending-compaction-bytes-limit`](/tikv-configuration-file.md#hard-pending-compaction-bytes-limit)  |  Newly added  | When the pending compaction bytes in KvDB reach this threshold, the flow control mechanism rejects all write requests and reports the `ServerIsBusy` error. The default value is "1024GB".  |
 
 ### Others
 
@@ -100,7 +100,7 @@ In v5.2, the key new features and improvements are as follows:
     Add pruning rules for index selection. Before using the statistics for comparison, TiDB uses these rules to narrow down the scope of possible indexes to be selected, which reduces the possibility of selecting non-optimal indexes.
 
     [User document](/choose-index.md)
- 
+
 ### Transaction
 
 - **General availability (GA) for Lock View**
@@ -128,61 +128,61 @@ In v5.2, the key new features and improvements are as follows:
 - **Add TiFlash I/O traffic limit**
 
     This new feature is suitable for cloud storage with disk bandwidth of a small and specific size. It is disabled by default.
-    
+
     TiFlash IO Rate Limiter provides a new mechanism to avoid excessive race for I/O resources between read and write tasks. It balances the responses to read and write tasks, and limits the rate automatically according to read/write workload.
-    
+
     [User document](/tiflash/tiflash-configuration.md)
 
 - **Improve stability of TiKV flow control**
- 
+
     TiKV introduces a new flow control mechanism to replace the previous RocksDB write stall mechanism. Compared with the write stall mechanism, this new mechanism reduces the impact on the stability of foreground write.
 
     In specific, when the stress of RocksDB compaction accumulates, flow control is performed at the TiKV scheduler layer instead of the RocksDB layer, to avoid the following issues:
-    
+
         - Raftstore is stuck, which is caused by RocksDB write stall.
-        - Raft election times out, and the node leader is transferred as a result. 
+        - Raft election times out, and the node leader is transferred as a result.
 
     This new mechanism improves the flow control algorithm to mitigate QPS decrease when the write traffic is high.
- 
+
     [User document](/tikv-configuration-file.md#storageflow-control), [#10137](https://github.com/tikv/tikv/issues/10137)
 
 - **Detect and recover automatically from impact caused by a single slow TiKV node in a cluster**
- 
+
     TiKV introduces the slow node detection mechanism. This mechanism calculates a score by inspecting the rate of TiKV Raftstore, and then reports the score to PD through store heartbeats. Meanwhile, it adds the `evict-slow-store-scheduler` scheduler on PD to automatically evict the leader on a single slow TiKV node. In this way, the impact on the whole cluster is mitigated. At the same time, more alert items about slow nodes are introduced to help you quickly pinpoint and solve problems.
- 
+
 [User document]( /tikv-configuration-file.md#inspect-interval), [#10539](https://github.com/tikv/tikv/issues/10539)
 
 ### Data Migration
- 
+
 - **Simplify operations of Data Migration (DM)**
- 
+
     DM v2.0.6 can automatically identify the change event (failover or plan change) of the data source using VIP, and can automatically connect to a new data source instance, to reduce data replication latency and simplify operation procedures.
- 
+
 - TiDB Lightning supports customized line terminators in the CSV data, and is compatible with the MySQL LOAD DATA CSV data formats. You can then use TiDB Lightning directly in your data flow architecture.
 [#1297](https://github.com/pingcap/br/pull/1297)
 
 ### TiDB data share subscription
- 
+
 TiCDC supports using the HTTP protocol (OpenAPI) to manage TiCDC tasks, which is a more user-friendly operation method for both Kubernetes and on-premises environments. (Experimental feature)
- 
+
 [#2411](https://github.com/pingcap/ticdc/issues/2411)
- 
+
 ### Deployment and operations
- 
+
 Support running the `tiup playground` command on Mac computers with Apple M1 chips.
 
 ### Telemetry
- 
+
 Telemetry supports collecting usage data of specific features, such as the usage data of built-in functions.
- 
+
 For detailed information of the collected data and how to disable data collection, refer to [Telemetry](/telemetry.md).
 
 ## Feature Enhancements
- 
+
 + Tools
- 
+
     + TiCDC
- 
+
     - Add HTTP API. Support querying and modifying TiCDC clusters. [#2416](https://github.com/pingcap/ticdc/pull/2416)
     - Add the binary MQ format designed for TiDB. It is more compact than the open protocols based on JSON [#1621](https://github.com/pingcap/ticdc/pull/1621)
     - Remove support for file sorter [#2114](https://github.com/pingcap/ticdc/pull/2114)
@@ -235,7 +235,6 @@ For detailed information of the collected data and how to disable data collectio
     - Add other functions: `INET_NTOA()`, `INET_ATON()`, `INET6_ATON`, `INET6_NTOA()`
     - Support Shuffled Hash Join calculation and Shuffled Hash Aggregation calculation in the MPP mode when a new collation is enabled
     - Optimize basic code to improve MPP performance
-    - Add `-1` as the positive infinity value for `tidb_broadcast_join_threshold_count` and `tidb_broadcast_join_threshold_size`
     - Support casting the `STRING` type to the `DOUBLE` type
     - Optimize the non-joined data in right outer join using multiple threads
     - Support automatically invalidating stale Regions in MPP queries
@@ -305,15 +304,15 @@ For detailed information of the collected data and how to disable data collectio
 
     + TiCDC
 
-        - Fix a bug that TiCDC owner exits abnormally when refreshing the checkpoint [#1985](https://github.com/pingcap/ticdc/pull/1985)
-        - Fix a bug that changefeed fails immediately after its successful creation [#2115](https://github.com/pingcap/ticdc/pull/2115)
-        - Fix a bug that changefeed fails due to the invalid format of rules filter [#2117](https://github.com/pingcap/ticdc/pull/2117)
-        - Fix the potential DDL loss issue when the TiCDC owner panics [#2252](https://github.com/pingcap/ticdc/pull/2252)
+        - Fix a bug that TiCDC owner exits abnormally when refreshing the checkpoint [#1902](https://github.com/pingcap/ticdc/issues/1902)
+        - Fix a bug that changefeed fails immediately after its successful creation [#2113](https://github.com/pingcap/ticdc/issues/2113)
+        - Fix a bug that changefeed fails due to the invalid format of rules filter [#1625](https://github.com/pingcap/ticdc/issues/1625)
+        - Fix the potential DDL loss issue when the TiCDC owner panics [#1260](https://github.com/pingcap/ticdc/issues/1260)
         - Fix the CLI compatibility issue with 4.0.x clusters on the default sort-engine option [#2385](https://github.com/pingcap/ticdc/pull/2385)
-        - Fix a bug that changefeed might be reset unexpectedly when TiCDC gets the `ErrSchemaStorageTableMiss` error [#2423](https://github.com/pingcap/ticdc/pull/2423)
-        - Fix a bug that changefeed cannot be removed when TiCDC gets the `ErrGCTTLExceeded` error [#2429](https://github.com/pingcap/ticdc/pull/2429)
-        - Fix a bug that TiCDC fails to synchronize large tables to cdclog [#2431](https://github.com/pingcap/ticdc/pull/2431)
-        - Fix a bug that multiple processors might write data to the same table when TiCDC is rescheduling the table [#2417](https://github.com/pingcap/ticdc/pull/2417)
+        - Fix a bug that changefeed might be reset unexpectedly when TiCDC gets the `ErrSchemaStorageTableMiss` error [#2422](https://github.com/pingcap/ticdc/issues/2422)
+        - Fix a bug that changefeed cannot be removed when TiCDC gets the `ErrGCTTLExceeded` error [#2391](https://github.com/pingcap/ticdc/issues/2391)
+        - Fix a bug that TiCDC fails to synchronize large tables to cdclog [#1259](https://github.com/pingcap/ticdc/issues/1259) [#2424](https://github.com/pingcap/ticdc/issues/2424)
+        - Fix a bug that multiple processors might write data to the same table when TiCDC is rescheduling the table [#2230](https://github.com/pingcap/ticdc/issues/2230)
 
     + Backup & Restore (BR)
 
@@ -322,17 +321,13 @@ For detailed information of the collected data and how to disable data collectio
 
     + TiDB Lightning
 
-        - Fix a bug that Lightning fails to parse the `DECIMAL` data type in Parquet file [#1272](https://github.com/pingcap/br/pull/1272)
-        - Fix a bug that Lightning reports the "Error 9007: Write conflict" error when restoring table schemas [#1290](https://github.com/pingcap/br/issues/1290)
-        - Fix a bug that Lightning fails to import data due to the overflow of int handle [#1291](https://github.com/pingcap/br/issues/1291)
-        - Fix a bug that Lightning might get a checksum mismatching error due to data loss in the local backend mode [#1413](https://github.com/pingcap/br/pull/1413)
-        - Fix the Lighting incompatibility issue with clustered index when Lightning is restoring table schemas [#1364](https://github.com/pingcap/br/pull/1364)
-
+        - Fix a bug that TiDB Lightning fails to parse the `DECIMAL` data type in Parquet file [#1272](https://github.com/pingcap/br/pull/1272)
+        - Fix a bug that TiDB Lightning reports the "Error 9007: Write conflict" error when restoring table schemas [#1290](https://github.com/pingcap/br/issues/1290)
+        - Fix a bug that TiDB Lightning fails to import data due to the overflow of int handle [#1291](https://github.com/pingcap/br/issues/1291)
+        - Fix a bug that TiDB Lightning might get a checksum mismatching error due to data loss in the local backend mode [#1403](https://github.com/pingcap/br/issues/1403)
+        - Fix the Lighting incompatibility issue with clustered index when TiDB Lightning is restoring table schemas [#1362](https://github.com/pingcap/br/issues/1362)
 
     + Dumpling
 
         - Fix a bug that the data export fails because the Dumpling GC safepoint is set too late [#290](https://github.com/pingcap/dumpling/pull/290)
-        - Fix the Dumpling getting stuck issue when exporting table names from the upstream database in certain MySQL versions [#325](https://github.com/pingcap/dumpling/pull/325)
-
-
-
+        - Fix the Dumpling getting stuck issue when exporting table names from the upstream database in certain MySQL versions [#322](https://github.com/pingcap/dumpling/issues/322)
