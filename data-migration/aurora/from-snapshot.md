@@ -16,7 +16,7 @@ This document introduces how to migrate full data from Amazon Aurora MySQL to Ti
 
 ## Step 1. Export snapshots of Aurora to S3
 
-Amazon's official documentation details how to generate a Snapshot to S3: [https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_ExportSnapshot.html](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_ExportSnapshot.html)
+To generate a Snapshot to S3, refer to Amazon's official document [Exporting DB snapshot data to Amazon S3](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_ExportSnapshot.html).
 
 ## Step 2. Use Dumpling to export table schema files
 
