@@ -217,9 +217,63 @@ You can configure this parameter in one of the following ways:
 
 ## Supported push-down calculations
 
+<<<<<<< HEAD
 > **Note:**
 >
 > Before v4.0.2, TiDB does not support the new framework for collations, so in those previous versions, if you enable the [new framework for collations](/character-set-and-collation.md#new-framework-for-collations), none of the expressions can be pushed down. This restriction is removed in v4.0.2 and later versions.
+=======
+TiFlash supports the push-down of the following operators:
+
+* TableScan: Reads data from tables.
+* Selection: Filters data.
+* HashAgg: Performs data aggregation based on the [Hash Aggregation](/explain-aggregation.md#hash-aggregation) algorithm.
+* StreamAgg: Performs data aggregation based on the [Stream Aggregation](/explain-aggregation.md#stream-aggregation) algorithm. SteamAgg only supports the aggregation without the `GROUP BY` condition.
+* TopN: Performs the TopN calculation.
+* Limit: Performs the limit calculation.
+* Project: Performs the projection calculation.
+* HashJoin (Equi Join): Performs the join calculation based on the [Hash Join](/explain-joins.md#hash-join) algorithm, but with the following conditions:
+    * The operator can be pushed down only in the [MPP mode](#use-the-mpp-mode).
+    * The push-down of `Full Outer Join` is not supported.
+* HashJoin (Non-Equi Join): Performs the Cartesian Join algorithm, but with the following conditions:
+    * The operator can be pushed down only in the [MPP mode](#use-the-mpp-mode).
+    * Cartesian Join is supported only in Broadcast Join.
+
+In TiDB, operators are organized in a tree structure. For an operator to be pushed down to TiFlash, all of the following prerequisites must be met:
+
++ All of its child operators can be pushed down to TiFlash.
++ If an operator contains expressions (most of the operators contain expressions), all expressions of the operator can be pushed down to TiFlash.
+
+Currently, TiFlash supports the following push-down expressions:
+
+* Mathematical functions: `+, -, /, *, %, >=, <=, =, !=, <, >, round(int), round(double), round(decimal), abs, floor(int), ceil(int), ceiling(int), sqrt, log, log2, log10, ln, exp, pow, sign, radians, degrees, conv, crc32`
+* Logical functions: `and, or, not, case when, if, ifnull, isnull, in, like, coalesce`
+* Bitwise operations: `bitand, bitor, bigneg, bitxor`
+* String functions: `substr, char_length, replace, concat, concat_ws, left, right, ascii, length, trim, position`
+* Date functions: `date_format, timestampdiff, from_unixtime, unix_timestamp(int), unix_timestamp(decimal), str_to_date(date), str_to_date(datetime), datediff, year, month, day, extract(datetime), date`
+* JSON function: `json_length`
+* Conversion functions: `cast(int as double), cast(int as decimal), cast(int as string), cast(int as time), cast(double as int), cast(double as decimal), cast(double as string), cast(double as time), cast(string as int), cast(string as double), cast(string as decimal), cast(string as time), cast(decimal as int), cast(decimal as string), cast(decimal as time), cast(time as int), cast(time as decimal), cast(time as string)`
+* Aggregate functions: `min, max, sum, count, avg, approx_count_distinct`
+* Miscellaneous functions: `inetntoa, inetaton, inet6ntoa, inet6aton`
+
+In addition, expressions that contain the Time/Bit/Set/Enum/Geometry type cannot be pushed down to TiFlash.
+
+If a query encounters unsupported push-down calculations, TiDB needs to complete the remaining calculations, which might greatly affect the TiFlash acceleration effect. The currently unsupported operators and expressions might be supported in future versions.
+
+## Use the MPP mode
+
+TiFlash supports using the MPP mode to execute queries, which introduces cross-node data exchange (data shuffle process) into the computation. TiDB automatically determines whether to select the MPP mode using the optimizer's cost estimation. You can change the selection strategy by modifying the values of [`tidb_allow_mpp`](/system-variables.md#tidb_allow_mpp-new-in-v50) and [`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51).
+
+### Control whether to select the MPP mode
+
+The `tidb_allow_mpp` variable controls whether TiDB can select the MPP mode to execute queries. The `tidb_enforce_mpp` variable controls whether the optimizer's cost estimation is ignored and the MPP mode of TiFlash is forcibly used to execute queries.
+
+The results corresponding to all values of these two variables are as follows:
+
+|                        | tidb_allow_mpp=off | tidb_allow_mpp=on (by default)              |
+| ---------------------- | -------------------- | -------------------------------- |
+| tidb_enforce_mpp=off (by default) | The MPP mode is not used. | The optimizer selects the MPP mode based on cost estimation. (by default)|
+| tidb_enforce_mpp=on  | The MPP mode is not used.   | TiDB ignores the cost estimation and selects the MPP mode.      |
+>>>>>>> 36ef0f5a0 (tiflash: Remove the description about expr_blacklist in use_tiflash.md (#6188))
 
 TiFlash supports predicate, aggregate push-down calculations, and table joins. Push-down calculations can help TiDB perform distributed acceleration. Currently, `Full Outer Join` and `DISTINCT COUNT` are not the supported calculation types, which will be optimized in later versions.
 
