@@ -178,7 +178,7 @@ In the result of the above statements:
 
 ### Step 5. Analyze data faster using HTAP
 
-Execute the SQL statements in [Step 3](#step-3-query-with-the-row-based-storage-engine) again, and you can see the performance of TiDB HTAP.
+Execute the SQL statements in [Step 3](#step-3-query-data-with-the-row-based-storage-engine) again, and you can see the performance of TiDB HTAP.
 
 For tables with TiFlash replicas, the TiDB optimizer automatically determines whether to use TiFlash replicas based on the cost estimation. To check whether or not a TiFlash replica is selected, you can use the `desc` or `explain analyze` statement. For example:
 
