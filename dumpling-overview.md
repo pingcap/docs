@@ -46,6 +46,7 @@ Dumpling is also included in the tidb-toolkit installation package and can be [d
 - RELOAD
 - LOCK TABLES
 - REPLICATION CLIENT
+- PROCESS
 
 ### Export to SQL files
 
