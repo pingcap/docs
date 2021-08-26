@@ -213,6 +213,10 @@ For detailed information of the collected data and how to disable data collectio
     - Add a new status variation `last_plan_binding_update_time` to view the timestamp corresponding to the binding cache in the current TiDB instance [#26340](https://github.com/pingcap/tidb/pull/26340)
     - Support reporting an error when starting binding evolution or running `admin evolve bindings` to ban the baseline evolution (currently disabled in the on-premises TiDB version because it is an experimental feature) affecting other features [#26333](https://github.com/pingcap/tidb/pull/26333)
 
++ TiKV
+
+    - Limit memory consumption of the TiCDC sink [#10305](https://github.com/tikv/tikv/pull/10305)
+    - Add the memory-bounded upper limit for the TiCDC old value cache [#10313](https://github.com/tikv/tikv/pull/10313)
 
 + PD
 
@@ -228,6 +232,7 @@ For detailed information of the collected data and how to disable data collectio
     - Add other functions: `INET_NTOA()`, `INET_ATON()`, `INET6_ATON`, `INET6_NTOA()`
     - Support Shuffled Hash Join calculation and Shuffled Hash Aggregation calculation in the MPP mode when a new collation is enabled
     - Optimize basic code to improve MPP performance
+    - Add `-1` as the positive infinity value for `tidb_broadcast_join_threshold_count` and `tidb_broadcast_join_threshold_size`
     - Support casting the `STRING` type to the `DOUBLE` type
     - Optimize the non-joined data in right outer join using multiple threads
     - Support automatically invalidating stale Regions in MPP queries
