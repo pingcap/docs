@@ -375,7 +375,7 @@ Configuration items related to performance.
 
 - The maximum number of statements allowed in a single TiDB transaction.
 - Default value: `5000`
-- If a transaction does not roll back or commit after the number of statements exceeds `stmt-count-limit`, TiDB returns the `statement count 5001 exceeds the transaction limitation, autocommit = false` error. This configuration takes effect **only** in the retriable optimistic transaction. If you use the pessimistic transaction or have disabled the transaction retry, the number of statements in a transaction is not limited by this configuration.
+- If a transaction does not roll back or commit after the number of statements exceeds `stmt-count-limit`, TiDB returns the `statement count 5001 exceeds the transaction limitation, autocommit = false` error. This configuration takes effect **only** in the retryable optimistic transaction. If you use the pessimistic transaction or have disabled the transaction retry, the number of statements in a transaction is not limited by this configuration.
 
 ### `txn-entry-size-limit` <span class="version-mark">New in v5.0</span>
 
@@ -637,3 +637,8 @@ For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](
 + Default value: `10`
 + Minimum value: `0`
 + Maximum value: `10000`
+
+### deadlock-history-collect-retryable
+
++ Controls whether the [`INFORMATION_SCHEMA.DEADLOCKS`](/information-schema/information-schema-deadlocks.md) table collects the information of retryable deadlock errors. For the description of retryable deadlock errors, see [Retryable deadlock errors](/information-schema/information-schema-deadlocks.md#retryable-deadlock-errors).
++ Default value: `false`

@@ -319,7 +319,7 @@ Configuration items related to the sharing of block cache among multiple RocksDB
 
 ## storage.flow-control
 
-Configuration items related to the flow control mechanism in TiKV. This mechanism supersedes the write stall mechanism in RocksDB and controls flow at the scheduler layer, which avoids the issue of QPS drop caused by the stuck Raftstore or Apply threads when the write traffic is high.
+Configuration items related to the flow control mechanism in TiKV. This mechanism replaces the write stall mechanism in RocksDB and controls flow at the scheduler layer, which avoids the issue of QPS drop caused by the stuck Raftstore or Apply threads when the write traffic is high.
 
 ### `enable`
 
@@ -463,13 +463,8 @@ Configuration items related to Raftstore
 
 ### `hibernate-regions`
 
-+ Enables or disables Hibernate Region. When this option is enabled, a Region idle for a long time is automatically set as hibernated. This reduces the extra overhead caused by heartbeat messages between the Raft leader and the followers for idle Regions. You can use `raftstore.peer-stale-state-check-interval` to modify the heartbeat interval between the leader and the followers of hibernated Regions.
++ Enables or disables Hibernate Region. When this option is enabled, a Region idle for a long time is automatically set as hibernated. This reduces the extra overhead caused by heartbeat messages between the Raft leader and the followers for idle Regions. You can use `peer-stale-state-check-interval` to modify the heartbeat interval between the leader and the followers of hibernated Regions.
 + Default value: `true` in v5.0.2 and later versions; `false` in versions before v5.0.2
-
-### `raftstore.peer-stale-state-check-interval`
-
-+ Modifies the state check interval for Regions.
-+ Default value: 5 min
 
 ### `split-region-check-tick-interval`
 
