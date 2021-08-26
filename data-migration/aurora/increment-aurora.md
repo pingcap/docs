@@ -9,7 +9,7 @@ summary: Incrementally synchronize data From Aurora MySQL to TiDB
 
 This article introduces how to use DM for incremental replication.
 
-## Complete the following tasks before start
+## Prerequisites
 
 - [Deploy DM using TiUP](/data-migration/quick_install_tools.md)
 

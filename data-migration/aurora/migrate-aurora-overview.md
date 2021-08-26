@@ -5,7 +5,7 @@ summary: Learn how to migrate full data from Amazon Aurora MySQL to TiDB.
 
 # Overview of migration from Aurora to TiDB
 
-This document introduces how to migrate full data from Amazon Aurora MySQL to TiDB. Here is a list of tools that may be used and the differences
+This document introduces how to migrate full data from Amazon Aurora MySQL to TiDB. Here is a list of tools that you can use:
 
 |Tool|Data Export|Data Import|Increment Sync|Export Speed| Import Speed|
 |:-: |:-:|:-:|:-:|:-:|:-:|
