@@ -180,7 +180,6 @@ For detailed information of the collected data and how to disable data collectio
 
     + TiCDC
 
-        - Add HTTP API. Support querying and modifying TiCDC clusters. [#2416](https://github.com/pingcap/ticdc/pull/2416)
         - Add the binary MQ format designed for TiDB. It is more compact than the open protocols based on JSON [#1621](https://github.com/pingcap/ticdc/pull/1621)
         - Remove support for file sorter [#2114](https://github.com/pingcap/ticdc/pull/2114)
         - Support log rotation configurations [#2182](https://github.com/pingcap/ticdc/pull/2182)
@@ -214,10 +213,6 @@ For detailed information of the collected data and how to disable data collectio
     - Add a new status variation `last_plan_binding_update_time` to view the timestamp corresponding to the binding cache in the current TiDB instance [#26340](https://github.com/pingcap/tidb/pull/26340)
     - Support reporting an error when starting binding evolution or running `admin evolve bindings` to ban the baseline evolution (currently disabled in the on-premises TiDB version because it is an experimental feature) affecting other features [#26333](https://github.com/pingcap/tidb/pull/26333)
 
-+ TiKV
-
-    - Limit memory consumption of the TiCDC sink [#10305](https://github.com/tikv/tikv/pull/10305)
-    - Add the memory-bounded upper limit for the TiCDC old value cache [#10313](https://github.com/tikv/tikv/pull/10313)
 
 + PD
 
