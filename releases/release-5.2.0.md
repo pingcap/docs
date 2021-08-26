@@ -11,7 +11,7 @@ TiDB version: 5.2.0
 In v5.2, the key new features and improvements are as follows:
 
 - Support expression index to greatly improve query performance
-- Improve the accuracy of optimizer estimation (cardinality estimation) to select optimal execution plans
+- Improve the accuracy of optimizer cardinality estimation to help to select optimal execution plans
 - Announce the general availability (GA) for the Lock View feature to observe transaction locking events and troubleshoot deadlock problems
 - Add the TiFlash I/O traffic limit feature to improve the stability of read and write for TiFlash
 - Optimize TiKV reserving space management to improve the stability of storage
@@ -87,10 +87,10 @@ In v5.2, the key new features and improvements are as follows:
 
     [User document](/configure-memory-usage.md#other-memory-control-behaviors-of-tidb-server), [#25882](https://github.com/pingcap/tidb/issues/25882)
 
-- **Improve the accuracy of optimizer estimation (cardinality estimation)**
+- **Improve the accuracy of optimizer cardinality estimation**
 
     - Improve the accuracy of TiDB's estimation of TopN/Limit. For example, for pagination queries on a large table that contain the `order by col limit x` condition, TiDB can more easily select the right index and reduce query response time.
-    - Improve the accuracy of out-of-scope estimation. For example, even if the statistics for a day have not been updated, TiDB can accurately select the corresponding index for a query that contains `where date=Now()`.
+    - Improve the accuracy of out-of-range estimation. For example, even if the statistics for a day have not been updated, TiDB can accurately select the corresponding index for a query that contains `where date=Now()`.
     - Introduce the `tidb_opt_limit_push_down_threshold` variable to control the optimizer's behavior of pushing down Limit/TopN, which resolves the issue that Limit/TopN cannot be pushed down in some situations due to wrong estimation.
 
     [User document](/system-variables.md#tidb_opt_limit_push_down_threshold), [#26085](https://github.com/pingcap/tidb/issues/26085)
