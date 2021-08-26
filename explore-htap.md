@@ -23,7 +23,7 @@ The following are the typical use cases of HTAP:
 
 - Real-time stream processing
 
-    When using TiDB in real-time stream processing scenarios, TiDB ensures that the continuously flowed data is queried in real time. At the same time, TiDB also can handle highly concurrent workloads and Business Intelligence (BI) queries.
+    When using TiDB in real-time stream processing scenarios, TiDB ensures that all the data flowed in constantly can be queried in real time. At the same time, TiDB also can handle highly concurrent data workloads and Business Intelligence (BI) queries.
 
 - Data center
 
