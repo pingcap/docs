@@ -36,7 +36,7 @@ Query OK, 0 rows affected (0.00 sec)
 
 * By design, `KILL` is not compatible with MySQL by default. This helps prevent against a case of a connection being terminated on the wrong TiDB server, because it is common to place multiple TiDB servers behind a load balancer.
 * Only set [`compatible-kill-query = true`](/tidb-configuration-file.md#compatible-kill-query) in your configuration file if you are certain that clients always will be connected to the same TiDB node, since the default mysql client on ctrl-c will open a new connection to kill the currently running command, and if there are proxies in between, the new connection might be routed to a different TiDB node possibly killing a different session.
-* The `KILL TIDB` statement is a TiDB extension. This is different syntax than the mysql `KILL [CONNECTION|QUERY]` command and the mysql command line `ctrl-c` feature, but is safe to use in the same TiDB node.
+* The `KILL TIDB` statement is a TiDB extension, which is a different syntax from the MySQL `KILL [CONNECTION|QUERY]` command and the MySQL command-line <kbd>ctrl</kbd>+<kbd>c</kbd> feature. It is safe to use `KILL TIDB` on the same TiDB node.
 
 ## See also
 
