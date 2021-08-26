@@ -440,7 +440,7 @@ In the above command, `--table` specifies the name of the table to be restored. 
 
 ### Restore incremental data
 
-Restoring incremental data is similar to [restoring full data using BR](#restore-all-the-backup-data). Note that when restoring incremental data, make sure that all the data backed up before `last backup ts` has been restored to the target cluster.
+Restoring incremental data is similar to [restoring full data using BR](#restore-all-the-backup-data). Note that when restoring incremental data, make sure that all the data backed up before `last backup ts` has been restored to the target cluster. 
 
 ### Restore tables created in the `mysql` schema (experimental feature)
 
