@@ -49,7 +49,7 @@ Before exploring the features of TiDB HTAP, you need to deploy TiDB and the corr
 
         - If you mainly need OLTP that runs small-scale analytical processing, deploy one or several TiFlash nodes. They can dramatically increase the speed of analytic queries.
         - If the OLTP throughput does not cause significant pressure to I/O usage rate of the TiFlash nodes, each TiFlash node uses more resources for computation, and thus the TiFlash cluster can have near-linear scalability. The number of TiFlash nodes should be tuned based on expected performance and response time.
-        - If the OLTP throughput is relatively high (for example, the rate of write throughput or update throughput is higher than 10 million lines/hours), the hot write regions and hot read regions can be formed. This is because the I/O usage in TiKV and TiFlash becomes the bottleneck due to limited write capacity of network and physical disk in this case.
+        - If the OLTP throughput is relatively high (for example, the rate of write throughput or update throughput is higher than 10 million lines/hours), the hot write regions and hot read regions can be formed. This is because the I/O usage in TiKV and TiFlash becomes the bottleneck due to the limited write capacity of network and physical disk in this case. At this point, the number of TiFlash nodes has a complex non-linear relationship with the quantity of analytical processing, so you need to tune the number of TiFlash nodes based on the specific status of the system.
 
 - TiSpark
 
