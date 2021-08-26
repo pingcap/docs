@@ -163,7 +163,7 @@ The returned information above shows that the `INVOKE LAMBDA` privilege causes a
 ignore-checking-items: ["replication_privilege","dump_privilege"]
 ```
 
-## Step 5: Query the task and validate the data
+## Step 5. Query the task and validate the data
 
 Use `dmctl` through TiUP to query information of the on-going migration task and the task status.
 
