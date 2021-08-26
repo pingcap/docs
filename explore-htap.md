@@ -13,13 +13,13 @@ This guide describes how to explore and use the features of TiDB Hybrid Transact
 
 ## Use cases
 
-TiDB HTAP can meet the needs that have increment massive data, reduce the risk cost of operation, and be used for on-premises big data technology stacks without difficulty, thereby presenting the value of data assets in real time.
+TiDB HTAP can handle the massive data that increases rapidly, reduce the cost of dev-ops, and be deployed as either on-premises or cloud easily, which brings the value of data assets in real time.
 
-The following are the use cases of HTAP:
+The following are the typical use cases of HTAP:
 
-- Hybrid load
+- Hybrid workload
 
-    When using TiDB for real-time Online Analytical Processing (OLAP) that is in hybrid load scenarios, you only need to provide an entry point. Then TiDB automatically selects different processing engines based on the specific business.
+    When using TiDB for real-time Online Analytical Processing (OLAP) that is in hybrid load scenarios, you only need to provide an entry point. TiDB automatically selects different processing engines based on the specific business.
 
 - Real-time stream processing
 
@@ -37,14 +37,14 @@ In TiDB, a row-based storage engine [TiKV](/tikv-overview.md) for Online Transac
 
 For more information about the architecture, see [architecture of TiDB HTAP](/tiflash/tiflash-overview.md#architecture).
 
-## Prerequisites for environment
+## Environment preparation 
 
-Before exploring the features of TiDB HTAP, you need to configure TiDB and the corresponding storage engine according to the data volume. If the data volume is large (for example, 100 T), it is recommended to use TiFlash Massively Parallel Processing (MPP) as the primary solution and TiSpark as the supplementary solution.
+Before exploring the features of TiDB HTAP, you need to deploy TiDB and the corresponding storage engines according to the data volume. If the data volume is large (for example, 100 T), it is recommended to use TiFlash Massively Parallel Processing (MPP) as the primary solution and TiSpark as the supplementary solution.
 
 - TiFlash
 
-    - If you have deployed a TiDB cluster but not TiFlash nodes, add the TiFlash nodes in the on-premises TiDB cluster. For detailed information, see [Scale out a TiFlash cluster](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster).
-    - If you have not deployed a TiDB cluster, see [Deploy a TiDB Cluster using TiUP](/production-deployment-using-tiup.md). At the same time, you also need to deploy the minimal cluster topology along with [TiFlash](/tiflash-deployment-topology.md).
+    - If you have deployed a TiDB cluster with no TiFlash node, add the TiFlash nodes in the current TiDB cluster. For detailed information, see [Scale out a TiFlash cluster](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster).
+    - If you have not deployed a TiDB cluster, see [Deploy a TiDB Cluster using TiUP](/production-deployment-using-tiup.md).  Based on the minimal TiDB topology, you also need to deploy the [topology of TiFlash](/tiflash-deployment-topology.md).
     - When deciding how to choose the number of TiFlash nodes, consider the following scenarios:
 
         - If you mainly need OLTP that runs small-scale analytical processing, deploy one or several TiFlash nodes. They can dramatically increase the speed of analytic queries.
@@ -58,28 +58,28 @@ Before exploring the features of TiDB HTAP, you need to configure TiDB and the c
 <!--    - Real-time stream processing
   - If you want to build an efficient and easy-to-use real-time data warehouse with TiDB and Flink, you are welcome to participate in Apache Flink x TiDB meetups.-->
 
-## Prerequisites for data
+## Data preparation 
 
-After TiFlash is deployed, data replication does not automatically begin. You need to manually specify the tables to be replicated to TiFlash.
+After TiFlash is deployed, TiKV does not replicate data to TiFlash automatically. You need to manually specify which tables need to be replicated to TiFlash. After that, TiDB creates the corresponding TiFlash replicas.
 
 - If there is no data in the TiDB Cluster, migrate the data to TiDB first. For detailed information, see [data migration](/migration-overview.md).
 - If the TiDB cluster already has the replicated data from upstream, after TiFlash is deployed, data replication does not automatically begin. You need to manually specify the tables to be replicated to TiFlash. For detailed information, see [Use TiFlash](/tiflash/use-tiflash.md).
 
 ## Data processing
 
-With TiDB, you can simply enter SQL statements for queries or write requirements. For the tables to be replicated to TiFlash, TiDB chooses the best execution freely by the front-end optimizer.
+With TiDB, you can simply enter SQL statements for query or write requests. For the tables with TiFlash replicas, TiDB uses the front-end optimizer to automatically choose the optimal execution plan.
 
 > **Note:**
 > 
-> MPP mode of TiFlash is enabled by default. When an SQL statement is executed, TiDB automatically determines whether to run in MPP mode through the optimizer.
+> The MPP mode of TiFlash is enabled by default. When an SQL statement is executed, TiDB automatically determines whether to run in the MPP mode through the optimizer.
 >
-> - To disable MPP mode of TiFlash, set the value of [tidb_allow_mpp](/system-variables.md#tidb_allow_mpp-new-in-v50) system variable to `OFF`.
-> - To forcibly enable MPP mode of TiFlash for query execution, set the value of [tidb_allow_mpp](/system-variables.md#tidb_allow_mpp-new-in-v50) and [tidb_enforce_mpp](/system-variables.md#tidb_enforce_mpp-new-in-v51) to `ON`.
-> - To see whether to use MPP mode when TiDB execute queries, see [Explain Statements in the MPP Mode](/explain-mpp.md#explain-statements-in-the-mpp-mode). If the output of `EXPLAIN` statement includes `ExchangeSender` and `ExchangeReceiver` operator, MPP mode is activated.
+> - To disable the MPP mode of TiFlash, set the value of the [tidb_allow_mpp](/system-variables.md#tidb_allow_mpp-new-in-v50) system variable to `OFF`.
+> - To forcibly enable MPP mode of TiFlash for query execution, set the values of [tidb_allow_mpp](/system-variables.md#tidb_allow_mpp-new-in-v50) and [tidb_enforce_mpp](/system-variables.md#tidb_enforce_mpp-new-in-v51) to `ON`.
+> - To check whether TiDB chooses the MPP mode to execute a specific query, see [Explain Statements in the MPP Mode](/explain-mpp.md#explain-statements-in-the-mpp-mode). If the output of `EXPLAIN` statement includes the `ExchangeSender` and `ExchangeReceiver` operators, the MPP mode is in use.
 
 ## Performance monitoring
 
-When using TiDB, you can monitor the running status and check TiDB performance by the following methods:
+When using TiDB, you can monitor the TiDB cluster status and performance metrics in either of the following ways:
 
 - [TiDB Dashboard](/dashboard/dashboard-intro.md): you can see the overall running status of the TiDB cluster, analyse distribution and trends of read and write traffic, and learn the detailed execution information of slow queries.
 - [Monitoring system (Prometheus & Grafana)](/grafana-overview-dashboard.md): you can see the monitoring parameters of TiDB cluster-related componants including PD, TiDB, TiKV, TiFlash,TiCDC, and Node_exporter.
@@ -88,7 +88,7 @@ To see the alert rules of TiDB cluster and TiFlash cluster, see [TiDB cluster al
 
 ## Troubleshooting
 
-If you have issues while using TiDB, refer to the following documents:
+If any issue occurs during using TiDB, refer to the following documents:
 
 - [Analyze slow queries](/analyze-slow-queries.md)
 - [Identify expensive queries](/identify-expensive-queries.md)
@@ -100,5 +100,5 @@ You are also welcome to create [Github Issues](https://github.com/pingcap/tiflas
 
 ## What's next
 
-- To see TiFlash version, critical logs and system tables of TiFlash, see [Maintain a TiFlash cluster](/tiflash/maintain-tiflash.md).
+- To check the TiFlash version, critical logs and system tables, see [Maintain a TiFlash cluster](/tiflash/maintain-tiflash.md).
 - To remove a specific TiFlash node, see [Scale out a TiFlash cluster](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster).
