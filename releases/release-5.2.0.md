@@ -61,9 +61,6 @@ In v5.2, the key new features and improvements are as follows:
 - For TiDB clusters upgraded from v4.0 to v5.2, the default value of [`tidb_multi_statement_mode`](/system-variables.md#tidb_multi_statement_mode-new-in-v4011) changes from `WARN` to `OFF`.
 - Before the upgrade, check the value of the TiDB configuration [`feedback-probability`](/tidb-configuration-file.md#feedback-probability). If the value is not `0`, the "panic in the recoverable goroutine" error will occur after the upgrade, but this error does not affect the upgrade.
 - TiDB is now compatible with MySQL 5.7's noop variable `innodb_default_row_format`. Setting this variable has no effect. [#23541](https://github.com/pingcap/tidb/issues/23541)
-- When upgraded to v5.2, TiKV will calculate `memory-usage-limit` based on `block-cache.capacity`, and the result of `memory-usage-limit` defaults to the value of "`block-cache.capacity` / 0.45 * 0.75".
-
-    For example, when [storage.block-cache] capacity = "24GB", `memory-usage-limit` is 40GB (24GB/0.45*0.75 = 40GB).
 
 ## New features
 
