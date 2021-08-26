@@ -7,7 +7,7 @@ summary: Learn how to migrate full data from Amazon Aurora MySQL to TiDB using T
 
 This document introduces how to migrate full data from Amazon Aurora MySQL to TiDB using TiDB Lightning. Both Dumpling and TiDB Lighting are used in this document.
 
-Prerequisites
+## Prerequisites
 
 - [Deploy TiDB Lighting using TiUP](/data-migration/quick_install_tools.md)
 - [Deploy Dumping using TiUP](/data-migration/quick_install_tools.md)
