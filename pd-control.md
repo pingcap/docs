@@ -308,8 +308,6 @@ Usage:
     config set cluster-version 1.0.8              // Set the version of the cluster to 1.0.8
     ```
 
-- `replication-mode` controls the replication mode of Regions in the dual data center scenario.
-
 - `leader-schedule-policy` is used to select the scheduling strategy for the leader. You can schedule the leader according to `size` or `count`.
 
 - `scheduler-max-waiting-operator` is used to control the number of waiting operators in each scheduler.
