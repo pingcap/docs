@@ -290,13 +290,8 @@ Constraint checking is always performed in place for pessimistic transactions (d
 > Currently, cascades planner is an experimental feature. It is not recommended that you use it in the production environment.
 
 - Scope: SESSION | GLOBAL
-<<<<<<< HEAD
-- Default value: 0
-- This variable is used to control whether to enable the cascades planner, which is currently considered experimental.
-=======
 - Default value: `OFF`
 - This variable is used to control whether to enable the cascades planner.
->>>>>>> 810499e09 (system variables.md: add a warning message (#6298))
 
 ### tidb_enable_chunk_rpc <span class="version-mark">New in v4.0</span>
 
