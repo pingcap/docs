@@ -118,7 +118,7 @@ Starting from TiDB 5.2, to improve system security, it is recommended (but not m
     - View the deadlock errors recently occurred on a TiDB node: [`DEADLOCKS`](/information-schema/information-schema-deadlocks.md)
     - View the executing transaction on a TiDB node: [`TIDB_TRX`](/information-schema/information-schema-tidb-trx.md)
 
-    - Optimize the user scenarios of adding indexes on tables with the `AUTO_RANDOM` or `SHARD_ROW_ID_BITS` attribute.
+- Optimize the user scenarios of adding indexes on tables with the `AUTO_RANDOM` or `SHARD_ROW_ID_BITS` attribute.
 
 ### Stability
 
