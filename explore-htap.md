@@ -1,6 +1,6 @@
 ---
 title: Explore HTAP
-summary: Learn how to explore and use the features of TiDB HTAP.
+summary: Learn how to explore and use the features of TiDB HTAP. 
 ---
 
 # Explore HTAP
