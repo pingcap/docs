@@ -33,7 +33,6 @@ In v5.2, the key new features and improvements are as follows:
 | [`tidb_enable_auto_increment_in_generated`](/system-variables.md#tidb_enable_auto_increment_in_generated) | Newly added | Determines whether to include the `AUTO_INCREMENT` columns when creating a generated column or an expression index. The default value is `OFF`.  |
 | [`tidb_opt_enable_correlation_adjustment`](/system-variables.md#tidb_opt_enable_correlation_adjustment) | Newly added | Controls whether the optimizer estimates the number of rows based on column order correlation. The default value is `ON`.  |
 | [`tidb_opt_limit_push_down_threshold`](/system-variables.md#tidb_opt_limit_push_down_threshold) | Newly added | Sets the threshold that determines whether to push the Limit or TopN operator down to TiKV. The default value is `100`.  |
-| [`tidb_restricted_read_only`](/system-variables.md#tidb_restricted_read_only) | Newly added | Controls whether the whole cluster is read-only. The default value is `OFF`.  |
 | [`tidb_stmt_summary_max_stmt_count`](/system-variables.md#tidb_stmt_summary_max_stmt_count-new-in-v40) | Modified | Sets the maximum number of statements that the statement summary tables store in memory. The default value is changed from `200` to `3000`.  |
 | `tidb_enable_streaming` | Deprecated | The system variable `enable-streaming` is deprecated and it is not recommended to use it any more.  |
 
@@ -167,12 +166,6 @@ TiCDC supports using the HTTP protocol (OpenAPI) to manage TiCDC tasks, which is
 ### Deployment and operations
 
 Support running the `tiup playground` command on Mac computers with Apple M1 chips.
-
-### Telemetry
-
-Telemetry supports collecting usage data of specific features, such as the usage data of built-in functions.
-
-For detailed information of the collected data and how to disable data collection, refer to [Telemetry](/telemetry.md).
 
 ## Feature Enhancements
 
