@@ -141,7 +141,6 @@ DROP INDEX idx1 ON t1;
 > **Note:**
 > 
 > Expression index involves various kinds of expressions. To ensure correctness, only some fully tested functions are allowed for creating an expression index. This means that only these functions are allowed in expressions in a production environment. You can get these functions by querying `tidb_allow_function_for_expression_index` variable. In future versions, more functions might be added to the list.
-`tidb_allow_function_for_expression_index` variable. In later versions, these functions will be added more.
 > 
 > {{< copyable "sql" >}}
 >
