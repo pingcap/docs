@@ -301,7 +301,7 @@ Support running the `tiup playground` command on Mac computers with Apple M1 chi
         - Fix a bug that changefeed fails immediately after its successful creation [#2113](https://github.com/pingcap/ticdc/issues/2113)
         - Fix a bug that changefeed fails due to the invalid format of rules filter [#1625](https://github.com/pingcap/ticdc/issues/1625)
         - Fix the potential DDL loss issue when the TiCDC owner panics [#1260](https://github.com/pingcap/ticdc/issues/1260)
-        - Fix the CLI compatibility issue with 4.0.x clusters on the default sort-engine option [#2385](https://github.com/pingcap/ticdc/pull/2385)
+        - Fix the CLI compatibility issue with 4.0.x clusters on the default sort-engine option [#2373](https://github.com/pingcap/ticdc/issues/2373)
         - Fix a bug that changefeed might be reset unexpectedly when TiCDC gets the `ErrSchemaStorageTableMiss` error [#2422](https://github.com/pingcap/ticdc/issues/2422)
         - Fix a bug that changefeed cannot be removed when TiCDC gets the `ErrGCTTLExceeded` error [#2391](https://github.com/pingcap/ticdc/issues/2391)
         - Fix a bug that TiCDC fails to synchronize large tables to cdclog [#1259](https://github.com/pingcap/ticdc/issues/1259) [#2424](https://github.com/pingcap/ticdc/issues/2424)
