@@ -26,25 +26,13 @@ In this document, you can experience the convenience and high performance of TiD
 
 ### Step 1. Deploy a local test environment 
 
-Before using TiDB HTAP, follow the steps in the [Quick Start Guide for the TiDB Database Platform](/quick-start-with-tidb.md) to deploy a local test environment.
+Before using TiDB HTAP, follow the steps in the [Quick Start Guide for the TiDB Database Platform](/quick-start-with-tidb.md) to prepare a local test environment, and run the following command to deploy a TiDB cluster:
 
-In [Quick Start Guide for the TiDB Database Platform](/quick-start-with-tidb.md):
+{{< copyable "shell-regular" >}}
 
-- You are recommended to run `tiup playground` to deploy a TiDB cluster of the latest version. When you run the following command, 1 TiDB instance, 1 TiKV instance, 1 PD instance, and 1 TiFlash instance are deployed automatically:
-
-    {{< copyable "shell-regular" >}}
-
-    ```shell
-    tiup playground
-    ```
-
-- If you want to specify the TiDB version and the number of the instances of each component, you need to also specify the number of the TiFlash instances as in the following example command:
-
-    {{< copyable "shell-regular" >}}
-
-    ```shell
-    tiup playground v5.1.0 --db 2 --pd 3 --kv 3 --tiflash 1 --monitor
-    ```
+```shell
+tiup playground
+```
 
 > **Note:**
 >
