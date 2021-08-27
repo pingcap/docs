@@ -222,7 +222,6 @@ Support running the `tiup playground` command on Mac computers with Apple M1 chi
     - Add other functions: `INET_NTOA()`, `INET_ATON()`, `INET6_ATON`, `INET6_NTOA()`
     - Support Shuffled Hash Join calculation and Shuffled Hash Aggregation calculation in the MPP mode when a new collation is enabled
     - Optimize basic code to improve MPP performance
-    - Add `-1` as the positive infinity value for `tidb_broadcast_join_threshold_count` and `tidb_broadcast_join_threshold_size`
     - Support casting the `STRING` type to the `DOUBLE` type
     - Optimize the non-joined data in right outer join using multiple threads
     - Support automatically invalidating stale Regions in MPP queries
