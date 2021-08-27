@@ -154,7 +154,7 @@ DROP INDEX idx1 ON t1;
 > 1 row in set (0.00 sec)
 > ```
 > 
-> For the functions that are not included in the returned result above, those functions are not fully tested and not recommended for a production environment, which can be seen as experimental. Other expressions such as set operators, `cast`, and `case when` are also seen as experimental and not recommended for production. However, if you still want to use those functions, you can make the following configuration in the [TiDB configuration file](/tidb-configuration-file.md#allow-expression-index-new-in-v400):
+> For the functions that are not included in the returned result above, those functions are not fully tested and not recommended for a production environment, which can be seen as experimental. Other expressions such as operators, `cast`, and `case when` are also seen as experimental and not recommended for production. However, if you still want to use those expressions, you can make the following configuration in the [TiDB configuration file](/tidb-configuration-file.md#allow-expression-index-new-in-v400):
 > 
 > {{< copyable "sql" >}}
 > 
