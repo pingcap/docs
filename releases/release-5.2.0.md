@@ -155,7 +155,8 @@ In v5.2, the key new features and improvements are as follows:
     DM v2.0.6 can automatically identify the change event (failover or plan change) of the data source using VIP, and can automatically connect to a new data source instance, to reduce data replication latency and simplify operation procedures.
 
 - TiDB Lightning supports customized line terminators in the CSV data, and is compatible with the MySQL LOAD DATA CSV data formats. You can then use TiDB Lightning directly in your data flow architecture.
-[#1297](https://github.com/pingcap/br/pull/1297)
+
+    [#1297](https://github.com/pingcap/br/pull/1297)
 
 ### TiDB data share subscription
 
@@ -278,8 +279,7 @@ Support running the `tiup playground` command on Mac computers with Apple M1 chi
 
 + PD
 
-    - Fix the issue that the expected scheduling cannot be generated due to scheduling conflicts among multiple schedulers
- [#3807](https://github.com/tikv/pd/issues/3807) [#3778](https://github.com/tikv/pd/issues/3778)
+    - Fix the issue that the expected scheduling cannot be generated due to scheduling conflicts among multiple schedulers [#3807](https://github.com/tikv/pd/issues/3807) [#3778](https://github.com/tikv/pd/issues/3778)
 
 + TiFlash
 
