@@ -139,7 +139,7 @@ DROP INDEX idx1 ON t1;
 
 > **Note:**
 > 
-> Expression index involves various kinds of expressions. To ensure correctness, only the fully tested functions are allowed to be used to create an expression index currently. That is, only these functions are allowed to be included in expressions in a production environment. You can get these functions by querying 
+> Expression index involves various kinds of expressions. To ensure correctness, only some fully tested functions are allowed for creating an expression index. This means that only these functions are allowed in expressions in a production environment. You can get these functions by querying `tidb_allow_function_for_expression_index` variable. In future versions, more functions might be added to the list.
 `tidb_allow_function_for_expression_index` variable. In later versions, these functions will be added more.
 > 
 > {{< copyable "sql" >}}
@@ -154,7 +154,7 @@ DROP INDEX idx1 ON t1;
 > 1 row in set (0.00 sec)
 > ```
 > 
-> For the functions that are not included in the returned result of the above variable, you are not recommended to use those functions in a production environment because they are currently experimental features due to incomplete testing. However, if you still want to use those functions, you can set the configuration as following in the [TiDB configuration file](/tidb-configuration-file.md#allow-expression-index-new-in-v400):
+> For the functions that are not included in the returned result above, those functions are not fully tested and not recommended for a production environment, which can be seen as experimental. Other expressions such as set operators, `cast`, and `case when` are also seen as experimental and not recommended for production. However, if you still want to use those functions, you can make the following configuration in the [TiDB configuration file](/tidb-configuration-file.md#allow-expression-index-new-in-v400):
 > 
 > {{< copyable "sql" >}}
 > 

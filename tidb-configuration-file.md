@@ -648,5 +648,5 @@ The `experimental` section, introduced in v3.1.0, describes the configurations r
 
 ### `allow-expression-index` <span class="version-mark">New in v4.0.0</span>
 
-+ Control whether an expression index can be created. Since TiDB v5.2.0, if the functions in an expression are safe, you can create an expression index directly based on those functions without enabling this configuration. If you want to create an expression index based on other functions, you can enable this configuration, but correctness issues might exist. By querying the `tidb_allow_function_for_expression_index` variable, you get the functions that are safe to be used to create an expression directly.
++ Controls whether an expression index can be created. Since TiDB v5.2.0, if the function in an expression is safe, you can create an expression index directly based on this function without enabling this configuration. If you want to create an expression index based on other functions, you can enable this configuration, but correctness issues might exist. By querying the `tidb_allow_function_for_expression_index` variable, you can get the functions that are safe to be directly used for creating an expression.
 + Default value: `false`
