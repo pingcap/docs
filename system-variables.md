@@ -256,7 +256,7 @@ mysql> SELECT * FROM t1;
 ### tidb_allow_function_for_expression_index <span class="version-mark">New in v5.2.0</span>
 
 - Scope: NONE
-- This variable is used to show the functions that are allowed to be used to create expression indexes.
+- This variable is used to show the functions that are allowed to be used for creating expression indexes.
 
 ### tidb_allow_mpp <span class="version-mark">New in v5.0</span>
 
