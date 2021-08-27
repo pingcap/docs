@@ -41,7 +41,7 @@ In v5.2, the key new features and improvements are as follows:
 | Configuration file    |  Configuration item    |  Change type    |  Description    |
 | :---------- | :----------- | :----------- | :----------- |
 | TiDB configuration file  | [`pessimistic-txn.deadlock-history-collect-retryable`](/tidb-configuration-file.md#deadlock-history-collect-retryable) |  Newly added  | Controls whether the [`INFORMATION\_SCHEMA.DEADLOCKS`](/information-schema/information-schema-deadlocks.md) table collects retryable deadlock error messages or not.  |
-| TiDB configuration file  | [`security.auto-tls`](/tidb-configuration-file.md#auto-tls) |  Newly added  | Determines whether to automatically generate the TLS certificates on startup. The default value is `true`.  |
+| TiDB configuration file  | [`security.auto-tls`](/tidb-configuration-file.md#auto-tls) |  Newly added  | Determines whether to automatically generate the TLS certificates on startup. The default value is `false`.  |
 | TiDB configuration file  | [`stmt-summary.max-stmt-count`](/tidb-configuration-file.md#max-stmt-count) | Modified | Indicates the maximum number of SQL categories allowed to be saved in the statement summary tables. The default value is changed from `200` to `3000`.  |
 | TiDB configuration file  | `experimental.allow-expression-index`  | Deprecated | The `allow-expression-index` configuration in the TiDB configuration file is deprecated.  |
 | TiKV configuration file  | [`raftstore.cmd-batch`](/tikv-configuration-file.md#cmd-batch)  |  Newly added  | Controls whether to enable batch processing of the requests. When it is enabled, the write performance is significantly improved. The default value is `true`.  |
@@ -60,6 +60,7 @@ In v5.2, the key new features and improvements are as follows:
 - For TiDB clusters upgraded from v4.0 to v5.2, the default value of [`tidb_multi_statement_mode`](/system-variables.md#tidb_multi_statement_mode-new-in-v4011) changes from `WARN` to `OFF`.
 - Before the upgrade, check the value of the TiDB configuration [`feedback-probability`](/tidb-configuration-file.md#feedback-probability). If the value is not `0`, the "panic in the recoverable goroutine" error will occur after the upgrade, but this error does not affect the upgrade.
 - TiDB is now compatible with MySQL 5.7's noop variable `innodb_default_row_format`. Setting this variable has no effect. [#23541](https://github.com/pingcap/tidb/issues/23541)
+- Starting from TiDB 5.2, to improve system security, it is recommended (but not mandatory) to encrypt the transport layer for connections from clients. TiDB provides the Auto TLS feature to automatically configure and enable encryption in TiDB. To use the Auto TLS feature, before the TiDB upgrade, set [`security.auto-tls`](/tidb-configuration-file.md#auto-tls) in the TiDB configuration file to `true`.
 
 ## New features
 
@@ -117,7 +118,7 @@ In v5.2, the key new features and improvements are as follows:
     - View the deadlock errors recently occurred on a TiDB node: [`DEADLOCKS`](/information-schema/information-schema-deadlocks.md)
     - View the executing transaction on a TiDB node: [`TIDB_TRX`](/information-schema/information-schema-tidb-trx.md)
 
-    - Optimize the user scenarios of adding indexes on tables with the `AUTO_RANDOM` or `SHARD_ROW_ID_BITS` attribute.
+- Optimize the user scenarios of adding indexes on tables with the `AUTO_RANDOM` or `SHARD_ROW_ID_BITS` attribute.
 
 ### Stability
 
@@ -206,7 +207,6 @@ Support running the `tiup playground` command on Mac computers with Apple M1 chi
     - Support showing whether a binding is used for query optimization in the result of `EXPLAIN VERBOSE` [#26930](https://github.com/pingcap/tidb/pull/26930)
     - Add a new status variation `last_plan_binding_update_time` to view the timestamp corresponding to the binding cache in the current TiDB instance [#26340](https://github.com/pingcap/tidb/pull/26340)
     - Support reporting an error when starting binding evolution or running `admin evolve bindings` to ban the baseline evolution (currently disabled in the on-premises TiDB version because it is an experimental feature) affecting other features [#26333](https://github.com/pingcap/tidb/pull/26333)
-
 
 + PD
 
