@@ -147,7 +147,7 @@ ORDER BY
 limit 10;
 ```
 
-This is a shipping priority query that gives priority and potential revenue to the highest-revenue order that has not been shipped by a specified date. The potential income is defined as the sum of `l_extendedprice * (1-l_discount)`. The orders are listed in descending order of revenue. In this example, this query lists the unshipped orders with potential query revenue in the top 10.
+This is a shipping priority query, which provides the priority and potential revenue of the highest-revenue order that has not been shipped before a specified date. The potential revenue is defined as the sum of `l_extendedprice * (1-l_discount)`. The orders are listed in the descending order of revenue. In this example, this query lists the unshipped orders with potential query revenue in the top 10.
 
 ### Step 4. Replicate the test data to the columnar storage engine
 
