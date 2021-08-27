@@ -207,10 +207,6 @@ Support running the `tiup playground` command on Mac computers with Apple M1 chi
     - Add a new status variation `last_plan_binding_update_time` to view the timestamp corresponding to the binding cache in the current TiDB instance [#26340](https://github.com/pingcap/tidb/pull/26340)
     - Support reporting an error when starting binding evolution or running `admin evolve bindings` to ban the baseline evolution (currently disabled in the on-premises TiDB version because it is an experimental feature) affecting other features [#26333](https://github.com/pingcap/tidb/pull/26333)
 
-+ TiKV
-
-    - Limit memory consumption of the TiCDC sink [#10305](https://github.com/tikv/tikv/pull/10305)
-    - Add the memory-bounded upper limit for the TiCDC old value cache [#10313](https://github.com/tikv/tikv/pull/10313)
 
 + PD
 
