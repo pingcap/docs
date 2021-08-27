@@ -125,7 +125,7 @@ In v5.2, the key new features and improvements are as follows:
 
     This new feature is suitable for cloud storage with disk bandwidth of a small and specific size. It is disabled by default.
 
-    TiFlash IO Rate Limiter provides a new mechanism to avoid excessive race for I/O resources between read and write tasks. It balances the responses to read and write tasks, and limits the rate automatically according to read/write workload.
+    TiFlash I/O Rate Limiter provides a new mechanism to avoid excessive race for I/O resources between read and write tasks. It balances the responses to read and write tasks, and limits the rate automatically according to read/write workload.
 
     [User document](/tiflash/tiflash-configuration.md)
 
