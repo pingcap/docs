@@ -7,20 +7,22 @@
 
 + About TiDB
   + [TiDB Introduction](/overview.md)
-  + [TiDB 5.1 Release Notes](/releases/release-5.1.0.md)
+  + [TiDB 5.2 Release Notes](/releases/release-5.2.0.md)
   + [Basic Features](/basic-features.md)
   + [Experimental Features](/experimental-features.md)
   + Benchmarks
-    + [v5.1 Sysbench Performance Test Report](/benchmark/benchmark-sysbench-v5.1.0-vs-v5.0.2.md)
-    + [v5.1 TPC-C Performance Test Report](/benchmark/v5.1-performance-benchmarking-with-tpcc.md)
-    + [v5.1 MPP mode TPC-H 100GB Performance Test](/benchmark/v5.1-performance-benchmarking-with-tpch.md)
+    + [v5.2 Sysbench Performance Test Report](/benchmark/benchmark-sysbench-v5.2.0-vs-v5.1.1.md)
+    + [v5.2 TPC-C Performance Test Report](/benchmark/v5.2-performance-benchmarking-with-tpcc.md)
+    + [v5.2 MPP mode TPC-H 100GB Performance Test](/benchmark/v5.2-performance-benchmarking-with-tpch.md)
   + [MySQL Compatibility](/mysql-compatibility.md)
   + [TiDB Limitations](/tidb-limitations.md)
   + [TiDB Adopters](/adopters.md)
   + [Credits](/credits.md)
 + Quick Start
   + [Try Out TiDB](/quick-start-with-tidb.md)
+  + [Try Out HTAP](/quick-start-with-htap.md)
   + [Learn TiDB SQL](/basic-sql-operations.md)
+  + [Learn HTAP](/explore-htap.md)
   + [Import Example Database](/import-example-data.md)
 + Deploy
   + [Software and Hardware Requirements](/hardware-and-software-requirements.md)
@@ -140,7 +142,6 @@
 + Tutorials
   + [Multiple Data Centers in One City Deployment](/multi-data-centers-in-one-city-deployment.md)
   + [Three Data Centers in Two Cities Deployment](/three-data-centers-in-two-cities-deployment.md)
-  + [Two Data Centers in One City Deployment](/two-data-centers-in-one-city-deployment.md)
   + Read Historical Data
     + Use Stale Read (Recommended)
       + [Usage Scenarios of Stale Read](/stale-read.md)
@@ -268,6 +269,7 @@
       + [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)
       + [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md)
       + [`ADMIN SHOW DDL [JOBS|QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)
+      + [`ADMIN SHOW TELEMETRY]`](/sql-statements/sql-statement-admin-show-telemetry.md)
       + [`ALTER DATABASE`](/sql-statements/sql-statement-alter-database.md)
       + [`ALTER INDEX`](/sql-statements/sql-statement-alter-index.md)
       + [`ALTER INSTANCE`](/sql-statements/sql-statement-alter-instance.md)
@@ -553,6 +555,8 @@
 + [Glossary](/glossary.md)
 + Release Notes
   + [All Releases](/releases/release-notes.md)
+  + v5.2
+    + [5.2.0](/releases/release-5.2.0.md)  
   + v5.1
     + [5.1.1](/releases/release-5.1.1.md)
     + [5.1.0](/releases/release-5.1.0.md)
