@@ -67,7 +67,7 @@ In v5.2, the key new features and improvements are as follows:
 
 - **Support using several functions in expression indexes**
 
-    The expression index is a type of special index that can be created on an expression. After an expression index is created, TiDB supports expression-based queries for several functions, which greatly improves query performance.
+    The expression index is a type of special index that can be created on an expression. After an expression index is created, TiDB supports expression-based queries, which greatly improves query performance.
 
     [User document](/sql-statements/sql-statement-create-index.md), [#25150](https://github.com/pingcap/tidb/issues/25150)
 
