@@ -217,7 +217,6 @@ You can configure this parameter in one of the following ways:
 
 ## Supported push-down calculations
 
-<<<<<<< HEAD
 > **Note:**
 >
 > Before v4.0.2, TiDB does not support the new framework for collations, so in those previous versions, if you enable the [new framework for collations](/character-set-and-collation.md#new-framework-for-collations), none of the expressions can be pushed down. This restriction is removed in v4.0.2 and later versions.
