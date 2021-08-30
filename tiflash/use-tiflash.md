@@ -244,10 +244,6 @@ Currently, TiFlash supports the following push-down expressions:
 * Mathematical functions: `+, -, /, *, >=, <=, =, !=, <, >, round(int), round(double), abs, floor(int), ceil(int), ceiling(int)`
 * Logical functions: `and, or, not, case when, if, ifnull, isnull, in`
 * Bitwise operations: `bitand, bitor, bigneg, bitxor`
-<<<<<<< HEAD
-* String functions: `substr, char_length, replace, concat, concat_ws, left, right`
-* Date functions: `date_format, timestampdiff, from_unixtime, unix_timestamp(int), unix_timestamp(decimal), str_to_date(date), str_to_date(datetime), date_add(string, int), date_add(datetime, int), date_sub(datetime, int), date_sub(string, int), datediff, year, month, day, extract(datetime)`
-=======
 * String functions: `substr, char_length, replace, concat, concat_ws, left, right, ascii, length, trim, position`
 * Date functions: `date_format, timestampdiff, from_unixtime, unix_timestamp(int), unix_timestamp(decimal), str_to_date(date), str_to_date(datetime), datediff, year, month, day, extract(datetime), date`
 >>>>>>> 36ef0f5a0 (tiflash: Remove the description about expr_blacklist in use_tiflash.md (#6188))
