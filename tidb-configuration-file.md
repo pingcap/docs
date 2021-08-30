@@ -587,7 +587,7 @@ Configurations related to the `events_statement_summary_by_digest` table.
 ### max-stmt-count
 
 - The maximum number of SQL categories allowed to be saved in the `events_statement_summary_by_digest` table.
-- Default value: `100`
+- Default value: `200`
 
 ### max-sql-length
 
