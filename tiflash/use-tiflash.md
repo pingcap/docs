@@ -246,7 +246,6 @@ Currently, TiFlash supports the following push-down expressions:
 * Bitwise operations: `bitand, bitor, bigneg, bitxor`
 * String functions: `substr, char_length, replace, concat, concat_ws, left, right, ascii, length, trim, position`
 * Date functions: `date_format, timestampdiff, from_unixtime, unix_timestamp(int), unix_timestamp(decimal), str_to_date(date), str_to_date(datetime), datediff, year, month, day, extract(datetime), date`
->>>>>>> 36ef0f5a0 (tiflash: Remove the description about expr_blacklist in use_tiflash.md (#6188))
 * JSON function: `json_length`
 * Conversion functions: `cast(int as double), cast(int as decimal), cast(int as string), cast(int as time), cast(double as int), cast(double as decimal), cast(double as string), cast(double as time), cast(string as int), cast(string as double), cast(string as decimal), cast(string as time), cast(decimal as int), cast(decimal as string), cast(decimal as time), cast(time as int), cast(time as decimal), cast(time as string)`
 * Aggregate functions: `min, max, sum, count, avg, approx_count_distinct`
