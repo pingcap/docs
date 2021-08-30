@@ -718,10 +718,10 @@ Configuration items related to RocksDB
 
 + WAL recovery mode
 + Optional values: `0` (`TolerateCorruptedTailRecords`), `1` (`AbsoluteConsistency`), `2` (`PointInTimeRecovery`), `3` (`SkipAnyCorruptedRecords`)
-+ `0` (`TolerateCorruptedTailRecords`): tolerate incomplete record in trailing data on all logs
-+ `1` (`AbsoluteConsistency`): we don't expect to find any corruption in the WAL
-+ `2` (`PointInTimeRecovery`): recover to point-in-time consistency
-+ `3` (`SkipAnyCorruptedRecords`): recovery after a disaster
++ `0` (`TolerateCorruptedTailRecords`): tolerate and discard incomplete record in trailing data on all logs
++ `1` (`AbsoluteConsistency`): abandon the recovery when corrupted logs are found
++ `2` (`PointInTimeRecovery`): recover sequentially until the first corrupted log is encoutered
++ `3` (`SkipAnyCorruptedRecords`): recovery after a disaster. Corrupted records are skipped
 + Default value: `2`
 + Minimum value: `0`
 + Maximum value: `3`
@@ -771,8 +771,7 @@ Configuration items related to RocksDB
 
 ### `use-direct-io-for-flush-and-compaction`
 
-+ Determines whether to use `O_DIRECT` for both reads and writes in background flush and compactions. 
-+ In general enabling it can degrade performance.
++ Determines whether to use `O_DIRECT` for both reads and writes in background flush and compactions. The performance impact of this option: turning on O_DIRECT bypasses and prevents contamination of the OS buffer cache, but subsequent file reads require re-reading the contents to the buffer cache.
 + Default value: `false`
 
 ### `rate-bytes-per-sec`
