@@ -21,7 +21,7 @@ You can use one of the following two methods to access the SQL statement summary
 
 All the data shown on the SQL statement summary page are from the TiDB statement summary tables. For more details about the tables, see [TiDB Statement Summary Tables](/statement-summary-tables.md).
 
-> **Notes:**
+> **Note:**
 >
 > In the **Mean Latency** column of the SQL statement summary page, the blue bar indicates the average execution time. If there is a yellow line on the blue bar for an SQL statement, the left and right sides of the yellow line respectively represent the minimum and maximum execution time of the SQL statement during the recent data collection cycle. 
 
