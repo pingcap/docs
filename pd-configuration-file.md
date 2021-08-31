@@ -129,7 +129,7 @@ Configuration items related to log
 
 ### `level`
 
-+ The log level, which can be specified as "DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"
++ The log level. The value options are "DEBUG", "INFO", "WARNING", "ERROR", and "CRITICAL".
 + Default value: "INFO"
 
 ### `format`
