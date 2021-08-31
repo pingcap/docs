@@ -337,7 +337,7 @@ When the downstream is Kafka, the valid configuration items are as follows:
 
 * `type`: Specifies in what way the replication progress is saved. Currently, the available options are `mysql`, `tidb`, and `file`.
 
-    This configuration item is the same as the downstream type by default. For example, when the downstream is `file`, the progress of the checkpoint is saved in the local file `<data-dir>/savepoint`; when the downstream is `mysql`, the progress is saved in the downstream database. If you need to explicitly specify using `mysql` or `tidb` to store the progress, make the following configuration:
+    This configuration item is the same as the downstream type by default. For example, when the downstream is `file`, the checkpoint progress is saved in the local file `<data-dir>/savepoint`; when the downstream is `mysql`, the progress is saved in the downstream database. If you need to explicitly specify using `mysql` or `tidb` to store the progress, make the following configuration:
 
 * `schema`: `"tidb_binlog"` by default.
 
