@@ -720,7 +720,7 @@ Configuration items related to RocksDB
 + Value options: `0`, `1`, `2`, `3`
 + `0` (`TolerateCorruptedTailRecords`): tolerates and discards the records that have incomplete trailing data on all logs.
 + `1` (`AbsoluteConsistency`): abandons recovery when corrupted logs are found.
-+ `2` (`PointInTimeRecovery`): recover sequentially until the first corrupted log is encoutered
++ `2` (`PointInTimeRecovery`): recovers log sequentially until the first corrupted log is encountered.
 + `3` (`SkipAnyCorruptedRecords`): recovery after a disaster. Corrupted records are skipped
 + Default value: `2`
 + Minimum value: `0`
