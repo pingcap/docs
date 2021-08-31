@@ -717,7 +717,7 @@ Configuration items related to RocksDB
 ### `wal-recovery-mode`
 
 + WAL recovery mode
-+ Optional values: `0` (`TolerateCorruptedTailRecords`), `1` (`AbsoluteConsistency`), `2` (`PointInTimeRecovery`), `3` (`SkipAnyCorruptedRecords`)
++ Value options: `0`, `1`, `2`, `3`
 + `0` (`TolerateCorruptedTailRecords`): tolerate and discard incomplete record in trailing data on all logs
 + `1` (`AbsoluteConsistency`): abandon the recovery when corrupted logs are found
 + `2` (`PointInTimeRecovery`): recover sequentially until the first corrupted log is encoutered
