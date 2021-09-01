@@ -11,7 +11,9 @@ summary: Learn how to enable encryption at rest to protect sensitive data.
 
 Encryption at rest means that data is encrypted when it is stored. For databases, this feature is also referred to as TDE (transparent data encryption). This is opposed to encryption in flight (TLS) or encryption in use (rarely used). Different things could be doing encryption at rest (SSD drive, file system, cloud vendor, etc), but by having TiKV do the encryption before storage this helps ensure that attackers must authenticate with the database to gain access to data. For example, when an attacker gains access to the physical machine, data cannot be accessed by copying files on disk.
 
-## Per component encryption support
+## Encryption support in different TiDB components
+
+In a TiDB cluster, different components use different encryption methods. This section introduces the encryption supports in different TiDB components such as TiKV, TiFlash, PD, and Backup & Restore (BR).
 
 When a TiDB cluster is deployed, the majority of user data is stored in TiKV and TiFlash nodes. Some metadata is stored in PD nodes (for example, secondary index keys used as TiKV region boundaries). To get the full benefits of this feature encryption needs to be enabled for all components. Backups, log files and data transmitted over the network should also be considered when implementing this.
 
