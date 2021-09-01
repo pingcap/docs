@@ -8,7 +8,7 @@ aliases: ['/docs/dev/encryption at rest/']
 
 > **Note:**
 >
-> When deploying on AWS it is recommened to consider using [EBS encryption](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html) instead unless you are using non-EBS storage like local NVMe storage.
+> If your cluster is deployed on AWS and uses the EBS storage, it is recommended to use the EBS encryption. See [AWS documentation - EBS Encryption](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html). You are using the non-EBS storage on AWS such as the local NVMe storage, it is recommended to use encryption at rest introduced in this document.
 
 Encryption at rest means that data is encrypted when it is stored. For databases, this feature is also referred to as TDE (transparent data encryption). This is opposed to encryption in flight (TLS) or encryption in use (rarely used). Different things could be doing encryption at rest (SSD drive, file system, cloud vendor, etc), but by having TiKV do the encryption before storage this helps ensure that attackers must authenticate with the database to gain access to data. For example, when an attacker gains access to the physical machine, data cannot be accessed by copying files on disk.
 
