@@ -15,7 +15,7 @@ Encryption at rest means that data is encrypted when it is stored. For databases
 
 In a TiDB cluster, different components use different encryption methods. This section introduces the encryption supports in different TiDB components such as TiKV, TiFlash, PD, and Backup & Restore (BR).
 
-When a TiDB cluster is deployed, the majority of user data is stored in TiKV and TiFlash nodes. Some metadata is stored in PD nodes (for example, secondary index keys used as TiKV region boundaries). To get the full benefits of this feature encryption needs to be enabled for all components. Backups, log files and data transmitted over the network should also be considered when implementing this.
+When a TiDB cluster is deployed, the majority of user data is stored on TiKV and TiFlash nodes. Some metadata is stored on PD nodes (for example, secondary index keys used as TiKV Region boundaries). To get the full benefits of encryption at rest, you need to enable encryption for all components. Backups, log files, and data transmitted over the network should also be considered when you implement encryption.
 
 ### TiKV
 
