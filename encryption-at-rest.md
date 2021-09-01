@@ -68,7 +68,7 @@ Go to the [AWS KMS](https://console.aws.amazon.com/kms) on the AWS console. Make
 
 You can also perform the operations using the AWS CLI:
 
-```
+```shell
 aws --region us-west-2 kms create-key
 aws --region us-west-2 kms create-alias --alias-name "alias/tidb-tde" --target-key-id 0987dcba-09fe-87dc-65ba-ab0987654321
 ```
