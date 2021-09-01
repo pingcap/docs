@@ -1,12 +1,12 @@
 ---
-title: PD Configuration Flags
-summary: Learn some configuration flags of PD.
+title: PD Configuration Parameters
+summary: Learn some configuration parameters of PD.
 aliases: ['/docs/dev/command-line-flags-for-pd-configuration/','/docs/dev/reference/configuration/pd-server/configuration/']
 ---
 
-# PD Configuration Flags
+# PD Configuration Parameters
 
-PD is configurable using command-line flags and environment variables.
+PD is configurable using command-line parameters and environment variables.
 
 ## `--advertise-client-urls`
 
@@ -38,7 +38,7 @@ PD is configurable using command-line flags and environment variables.
 
 - The configuration file
 - Default: ""
-- If you set the configuration using the command line, the same setting in the configuration file will be overwritten.
+- If you set the configuration using the command-line, the same setting in the configuration file will be overwritten.
 
 ## `--data-dir`
 
@@ -72,7 +72,7 @@ PD is configurable using command-line flags and environment variables.
 
 - The log file
 - Default: ""
-- If this flag is not set, logs will be written to stderr. Otherwise, logs will be stored in the log file which will be automatically rotated every day.
+- If this parameter is not set, logs will be written to stderr. Otherwise, logs will be stored in the log file which will be automatically rotated every day.
 
 ## `--log-rotate`
 

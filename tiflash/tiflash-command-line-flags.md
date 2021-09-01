@@ -1,12 +1,12 @@
 ---
-title: TiFlash Command-line Flags
-summary: Learn the command-line startup flags of TiFlash.
+title: TiFlash Command-line parameters
+summary: Learn the command-line startup parameters of TiFlash.
 aliases: ['/docs/dev/tiflash/tiflash-command-line-flags/']
 ---
 
-# TiFlash Command-Line Flags
+# TiFlash Command-line Parameters
 
-This document introduces the command-line flags that you can use when you launch TiFlash.
+This document introduces the command-line parameters that you can use when you launch TiFlash.
 
 ## `server --config-file`
 

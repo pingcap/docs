@@ -1,12 +1,12 @@
 ---
-title: TiKV Configuration Flags
-summary: Learn some configuration flags of TiKV.
+title: TiKV Configuration Parameters
+summary: Learn some configuration parameters of TiKV.
 aliases: ['/docs/dev/command-line-flags-for-tikv-configuration/','/docs/dev/reference/configuration/tikv-server/configuration/']
 ---
 
-# TiKV Configuration Flags
+# TiKV Configuration Parameters
 
-TiKV supports some readable unit conversions for command line parameters.
+TiKV supports some readable unit conversions for command-line parameters.
 
 - File size (based on byte): KB, MB, GB, TB, PB (or lowercase)
 - Time (based on ms): ms, s, m, h
@@ -42,13 +42,13 @@ TiKV supports some readable unit conversions for command line parameters.
 
 - The config file
 - Default: ""
-- If you set the configuration using the command line, the same setting in the config file will be overwritten.
+- If you set the configuration using the command-line, the same setting in the config file will be overwritten.
 
 ## `--capacity`
 
 - The store capacity
 - Default: 0 (unlimited)
-- PD uses this flag to determine how to balance the TiKV servers. (Tip: you can use 10GB instead of 1073741824)
+- PD uses this parameter to determine how to balance the TiKV servers. (Tip: you can use 10GB instead of 1073741824)
 
 ## `--data-dir`
 
@@ -65,7 +65,7 @@ TiKV supports some readable unit conversions for command line parameters.
 
 - The log file
 - Default: ""
-- If this flag is not set, logs will be written to stderr. Otherwise, logs will be stored in the log file which will be automatically rotated every day.
+- If this parameter is not set, logs will be written to stderr. Otherwise, logs will be stored in the log file which will be automatically rotated every day.
 
 ## `--pd`
 

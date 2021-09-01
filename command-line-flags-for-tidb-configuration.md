@@ -1,12 +1,12 @@
 ---
-title: Configuration Options
-summary: Learn the configuration options in TiDB.
+title: TiDB Configuration Parameters
+summary: Learn the configuration parameters in TiDB.
 aliases: ['/docs/dev/command-line-flags-for-tidb-configuration/','/docs/dev/reference/configuration/tidb-server/configuration/','/docs/dev/reference/configuration/tidb-server/server-command-option/']
 ---
 
-# Configuration Options
+# TiDB Configuration Parameters
 
-When you start the TiDB cluster, you can use command-line options or environment variables to configure it. This document introduces TiDB's command options. The default TiDB ports are `4000` for client requests and `10080` for status report.
+When you start the TiDB cluster, you can use command-line parameters or environment variables to configure it. This document introduces TiDB's command parameters. The default TiDB ports are `4000` for client requests and `10080` for status report.
 
 ## `--advertise-address`
 
@@ -24,7 +24,7 @@ When you start the TiDB cluster, you can use command-line options or environment
 
 - The configuration file
 - Default: ""
-- If you have specified the configuration file, TiDB reads the configuration file. If the corresponding configuration also exists in the command line options, TiDB uses the configuration in the command line options to overwrite that in the configuration file. For detailed configuration information, see [TiDB Configuration File Description](/tidb-configuration-file.md).
+- If you have specified the configuration file, TiDB reads the configuration file. If the corresponding configuration also exists in the command-line parameters, TiDB uses the configuration in the command-line parameters to overwrite that in the configuration file. For detailed configuration information, see [TiDB Configuration File Description](/tidb-configuration-file.md).
 
 ## `--config-check`
 
@@ -68,13 +68,13 @@ When you start the TiDB cluster, you can use command-line options or environment
 
 - The log file
 - Default: ""
-- If this option is not set, logs are output to "stderr". If this option is set, logs are output to the corresponding file, which is automatically rotated in the early morning every day, and the previous file is renamed as a backup.
+- If this parameter is not set, logs are output to "stderr". If this parameter is set, logs are output to the corresponding file, which is automatically rotated in the early morning every day, and the previous file is renamed as a backup.
 
 ## `--log-slow-query`
 
 - The directory for the slow query log
 - Default: ""
-- If this option is not set, logs are output to the file specified by `--log-file` by default.
+- If this parameter is not set, logs are output to the file specified by `--log-file` by default.
 
 ## `--metrics-addr`
 
@@ -113,7 +113,7 @@ When you start the TiDB cluster, you can use command-line options or environment
 - The list of proxy server's IP addresses allowed to connect to TiDB using the [PROXY protocol](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt).
 - Default: ""
 - In general cases, when you access TiDB behind a reverse proxy, TiDB takes the IP address of the reverse proxy server as the IP address of the client. By enabling the PROXY protocol, reverse proxies that support this protocol such as HAProxy can pass the real client IP address to TiDB.
-- After configuring this flag, TiDB allows the configured source IP address to connect to TiDB using the PROXY protocol; if a protocol other than PROXY is used, this connection will be denied. If this flag is left empty, no IP address can connect to TiDB using the PROXY protocol. The value can be the IP address (192.168.1.50) or CIDR (192.168.1.0/24) with `,` as the separator. `*` means any IP addresses.
+- After configuring this parameter, TiDB allows the configured source IP address to connect to TiDB using the PROXY protocol; if a protocol other than PROXY is used, this connection will be denied. If this parameter is left empty, no IP address can connect to TiDB using the PROXY protocol. The value can be the IP address (192.168.1.50) or CIDR (192.168.1.0/24) with `,` as the separator. `*` means any IP addresses.
 
 > **Warning:**
 >

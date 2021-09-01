@@ -505,7 +505,7 @@
     + [pd-ctl](/pd-control.md)
     + [tidb-ctl](/tidb-control.md)
     + [pd-recover](/pd-recover.md)
-  + Command Line Flags
+  + Command-line Parameters
     + [tidb-server](/command-line-flags-for-tidb-configuration.md)
     + [tikv-server](/command-line-flags-for-tikv-configuration.md)
     + [tiflash-server](/tiflash/tiflash-command-line-flags.md)
