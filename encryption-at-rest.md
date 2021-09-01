@@ -74,7 +74,7 @@ aws --region us-west-2 kms create-key
 aws --region us-west-2 kms create-alias --alias-name "alias/tidb-tde" --target-key-id 0987dcba-09fe-87dc-65ba-ab0987654321
 ```
 
-The `key-id` for the second step is giving in the output of the first command.
+The `--target-key-id` to enter in the second command is in the output of the first command.
 
 ### Configure encryption
 
