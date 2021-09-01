@@ -99,7 +99,7 @@ endpoint = "https://kms.us-west-2.amazonaws.com"
 
 The `key-id` specifies the key ID for the KMS CMK. The `region` is the AWS region name for the KMS CMK. The `endpoint` is optional and you do not need to specify it normally unless you are using an AWS KMS-compatible service from a non-AWS vendor or need to use a [VPC endpoint for KMS](https://docs.aws.amazon.com/kms/latest/developerguide/kms-vpc-endpoint.html).
 
-It is possible to use [multi-Region keys](https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html). For this you need to setup a primary key in a specific region and add replica keys in the regions you require.
+You can also use [multi-Region keys](https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html) in AWS. For this, you need to set up a primary key in a specific region and add replica keys in the regions you require.
 
 To specify a master key that's stored in a file, the master key configuration would look like the following:
 
