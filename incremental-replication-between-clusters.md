@@ -1,19 +1,19 @@
 ---
-title: Incremental data replication between TiDB clusters in real time
+title: Replicate Incremental Data between TiDB Clusters in Real Time
 summary: Learns how to replicate incremental data from one TiDB cluster to another cluster in real time
 ---
 
-# Incremental data replication between TiDB clusters in real time
+# Replicate Incremental Data between TiDB Clusters in Real Time
 
-This document describes how to configure a TiDB cluster and its downstream MySQL or downstream TiDB, and then replicate the incremental data from an upstream cluster to a downstream cluster in real time .
+This document describes how to configure a TiDB cluster and its secondary MySQL or TiDB cluster, and how to replicate the incremental data from the primary cluster to the secondary cluster in real time.
 
 ## Usage scenarios
 
-If you need to configure a running TiDB cluster and its downstream cluster for the incremental data replication in real time, use the [Backup & Restore (BR)](/br/backup-and-restore-tool.md), [Dumpling](/dumpling-overview.md) or [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md).
+If you need to configure a running TiDB cluster and its secondary cluster for replicating incremental data in real time, use the [Backup & Restore (BR)](/br/backup-and-restore-tool.md), [Dumpling](/dumpling-overview.md) or [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md).
 
 ## Implementation principles
 
-Each transaction written to TiDB is specified with a unique commit timestamp (commit TS). The global consistency status of a TiDB cluster is provided by a TS.
+Each transaction written to TiDB is allocated a unique commit timestamp (commit TS). Through this TS, you can get the global consistency status of a TiDB cluster.
 
 You need to use BR or Dumpling to export the cluster data at a specific point in time when the cluster is in global consistency status. Then, you need to use TiDB Binlog to start incremental replication right after the global consistent time. That is, the replication process is divided into two processes: full replication and incremental replication.
 
@@ -26,23 +26,23 @@ You need to use BR or Dumpling to export the cluster data at a specific point in
 
 ## Replication process
 
-Suppose that the existing cluster A works properly. First, you need to create a new cluster B as the downstream cluster of cluster A and then replicate the incremental data in cluster A to cluster B in real time as the following steps:
+Suppose that the existing cluster A works properly. First, you need to create a new cluster B as the secondary cluster of cluster A and then replicate the incremental data in cluster A to cluster B in real time. See the following steps for instruction.
 
 ### Step 1: enable TiDB Binlog
 
-Make sure cluster A has deployed and enabled TiDB Binlog(/tidb-binlog/deploy-tidb-binlog.md).
+Make sure that TiDB Binlog(/tidb-binlog/deploy-tidb-binlog.md) has been deployed and enabled in cluster A.
 
 ### Step 2: full export the cluster data
 
-1. Export data in cluster A global consistently to the specified path by using any of the following tools:
+1. Export the data in cluster A (with global consistency ensured) to the specified path by using any of the following tools:
 
     - Use [BR for full backup](/br/use-br-command-line-tool.md#back-up-all-the-cluster-data)
 
     - Use [Dumpling to import full data](/dumpling-overview.md)
 
-2. Obtain a global consistant timestamp `COMMIT_TS`:
+2. Obtain a globally consistent timestamp `COMMIT_TS`:
 
-    - Use the BR `validate` command to obtain the backup timestamp as following:
+    - Use the BR `validate` command to obtain the backup timestamp. For example:
 
         {{< copyable "shell-regular" >}}
 
@@ -71,7 +71,7 @@ Make sure cluster A has deployed and enabled TiDB Binlog(/tidb-binlog/deploy-tid
 
 ### Step 3: replicate incremental data
 
-1. Modify the `drainer.toml` configuration file of TiDB Binlog and add the following configurations to specify the location that `COMMIT_TS` starts the replication to cluster B.
+Modify the `drainer.toml` configuration file of TiDB Binlog by adding the following configuration to specify the `COMMIT_TS` from which TiDB Binlog starts replicating data to cluster B.
 
 {{< copyable "" >}}
 
