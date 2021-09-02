@@ -308,7 +308,7 @@ To restore the cluster data, use the `br restore` command. You can add the `full
 >
 > These can be avoided using shared storage, for example mounting an NFS on the local path, or using S3. With network storage, every node can automatically read every SST file, so these caveats no longer apply.
 > 
-> Also, note that you can only run one restore operation for a single cluster at the same time. Otherwise, unexpected circumstances might occur. For details, see [FAQ](/br/backup-and-restore-faq.md#can-i-use-multiple-br-command-lines-at-a-single-time-to-restore-the-data-of-a-single-cluster).
+> Also, note that you can only run one restore operation for a single cluster at the same time. Otherwise, unexpected circumstances might occur. For details, see [FAQ](/br/backup-and-restore-faq.md#can-i-use-multiple-br-command-lines-at-the-same-time-to-restore-the-data-of-a-single-cluster).
 
 ### Restore all the backup data
 
