@@ -582,18 +582,6 @@ Configuration related to the status of TiDB service.
 
 ## stmt-summary <span class="version-mark">New in v3.0.4</span>
 
-<<<<<<< HEAD
-Configurations related to the `events_statement_summary_by_digest` table.
-
-### max-stmt-count
-
-- The maximum number of SQL categories allowed to be saved in the `events_statement_summary_by_digest` table.
-- Default value: `200`
-
-### max-sql-length
-
-- The longest display length for the `DIGEST_TEXT` and `QUERY_SAMPLE_TEXT` columns in the `events_statement_summary_by_digest` table.
-=======
 Configurations related to [statement summary tables](/statement-summary-tables.md).
 
 ### max-stmt-count
@@ -604,7 +592,6 @@ Configurations related to [statement summary tables](/statement-summary-tables.m
 ### max-sql-length
 
 - The longest display length for the `DIGEST_TEXT` and `QUERY_SAMPLE_TEXT` columns in [statement summary tables](/statement-summary-tables.md).
->>>>>>> 7f8909a47 (change expressions related to statement summary tables (#6299))
 - Default value: `4096`
 
 ## pessimistic-txn
