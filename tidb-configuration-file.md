@@ -604,7 +604,7 @@ Configurations related to [statement summary tables](/statement-summary-tables.m
 ### max-stmt-count
 
 - The maximum number of SQL categories allowed to be saved in [statement summary tables](/statement-summary-tables.md).
-- Default value: `3000`
+- Default value: Before v5.1.1, the default value is `200`. Since v5.1.1, the default value is `3000`.
 
 ### max-sql-length
 
