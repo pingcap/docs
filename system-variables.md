@@ -804,32 +804,61 @@ SET tidb_slow_log_threshold = 200;
 ### tidb_stmt_summary_history_size <span class="version-mark">New in v4.0</span>
 
 - Scope: SESSION | GLOBAL
+<<<<<<< HEAD
 - Default value: 24 (the value of the default configuration file)
 - This variable is used to set the history capacity of the statement summary.
+=======
+- Default value: `24`
+- Range: `[0, 255]`
+- This variable is used to set the history capacity of [statement summary tables](/statement-summary-tables.md).
+>>>>>>> 7f8909a47 (change expressions related to statement summary tables (#6299))
 
 ### tidb_stmt_summary_internal_query <span class="version-mark">New in v4.0</span>
 
 - Scope: SESSION | GLOBAL
+<<<<<<< HEAD
 - Default value: 0 (the value of the default configuration file)
 - This variable is used to control whether to include the SQL information of TiDB in the statement summary.
+=======
+- Default value: `OFF`
+- This variable is used to control whether to include the SQL information of TiDB in [statement summary tables](/statement-summary-tables.md).
+>>>>>>> 7f8909a47 (change expressions related to statement summary tables (#6299))
 
 ### tidb_stmt_summary_max_sql_length <span class="version-mark">New in v4.0</span>
 
 - Scope: SESSION | GLOBAL
+<<<<<<< HEAD
 - Default value: 4096 (the value of the default configuration file)
 - This variable is used to control the length of the SQL string in the statement summary.
+=======
+- Default value: `4096`
+- Range: `[0, 2147483647]`
+- This variable is used to control the length of the SQL string in [statement summary tables](/statement-summary-tables.md).
+>>>>>>> 7f8909a47 (change expressions related to statement summary tables (#6299))
 
 ### tidb_stmt_summary_max_stmt_count <span class="version-mark">New in v4.0</span>
 
 - Scope: SESSION | GLOBAL
+<<<<<<< HEAD
 - Default value: Before v4.0.14, the default value is 200. Since v4.0.14, the default value is 3000 (the value of the default configuration file).
 - This variable is used to set the maximum number of statements that the statement summary stores in memory.
+=======
+- Default value: `3000`
+- Range: `[1, 32767]`
+- This variable is used to set the maximum number of statements that [statement summary tables](/statement-summary-tables.md) store in memory.
+>>>>>>> 7f8909a47 (change expressions related to statement summary tables (#6299))
 
 ### tidb_stmt_summary_refresh_interval <span class="version-mark">New in v4.0</span>
 
 - Scope: SESSION | GLOBAL
+<<<<<<< HEAD
 - Default value: 1800 (the value of the default configuration file)
 - This variable is used to set the refresh time of the statement summary. The unit is second.
+=======
+- Default value: `1800`
+- Range: `[1, 2147483647]`
+- This variable is used to set the refresh time of [statement summary tables](/statement-summary-tables.md). The unit is second.
+>>>>>>> 7f8909a47 (change expressions related to statement summary tables (#6299))
 
 ### tidb_store_limit <span class="version-mark">New in v3.0.4 and v4.0</span>
 
