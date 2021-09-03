@@ -139,7 +139,7 @@ The following table provides an overview of the feature development history of T
 | [Built-in physical backup](/br/backup-and-restore-use-cases.md)                                          | Y            | Y            | Y            | Y            |
 | Top SQL                                                                                                  | Y            | N            | N            | N            |
 | [Global Kill](/sql-statements/sql-statement-kill.md)                                                     | Experimental | Experimental | Experimental | Experimental |
-| [Lock View](/information-schema/information-schema-data-lock-waits.md)                                   | Experimental | Experimental | Experimental | Experimental |
+| [Lock View](/information-schema/information-schema-data-lock-waits.md)                                   | Y            | Experimental | Experimental | Experimental |
 | [`SHOW CONFIG`](/sql-statements/sql-statement-show-config.md)                                            | Experimental | Experimental | Experimental | Experimental |
 | [`SET CONFIG`](/dynamic-config.md)                                                                       | Experimental | Experimental | Experimental | Experimental |
 
