@@ -29,7 +29,7 @@ If GTID is enabled in Aurora, you can migrate data based on GTID. For how to ena
 
 > **Note:**
 >
-> The configuration file used by DM supports database passwords in plaintext or ciphertext. It is recommended to use password encrypted using dmctl. To obtain the ciphertext password, see Encrypt the database password using dmctl.
+> In DM configuration files, it is recommended to use database passwords encrypted by `dmctl`. If a database password is empty, it is unnecessary to encrypt it. For how to encrypt the plaintext password, see [Encrypt the database password using dmctl](manage-source.md#encrypt-the-database-password).
 
 Save the following configuration files of data source according to the example, in which the value of `source-id` will be used in the task configuration in step 3.
 
