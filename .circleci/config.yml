@@ -21,13 +21,13 @@ jobs:
           command: |
             git remote add upstream https://github.com/pingcap/docs.git
             git fetch upstream
-            wget https://raw.githubusercontent.com/CharLotteiu/pingcap-docs-checks/main/check-file-encoding.py
+            wget https://raw.githubusercontent.com/pingcap/docs/master/scripts/check-file-encoding.py
             python3 check-file-encoding.py $(git diff-tree --name-only --no-commit-id -r upstream/release-5.0..HEAD -- '*.md' ':(exclude).github/*')
 
       - run:
           name: "Check git conflicts"
           command: |
-            wget https://raw.githubusercontent.com/CharLotteiu/pingcap-docs-checks/main/check-conflicts.py
+            wget https://raw.githubusercontent.com/pingcap/docs/master/scripts/check-conflicts.py
             python3 check-conflicts.py $(git diff-tree --name-only --no-commit-id -r upstream/release-5.0..HEAD -- '*.md' '*.yml' '*.yaml')
 
       - run:
@@ -53,19 +53,19 @@ jobs:
       - run:
           name: "Check control characters"
           command: |
-            wget https://raw.githubusercontent.com/CharLotteiu/pingcap-docs-checks/main/check-control-char.py
+            wget https://raw.githubusercontent.com/pingcap/docs/master/scripts/check-control-char.py
             python3 check-control-char.py $(git diff-tree --name-only --no-commit-id -r upstream/release-5.0..HEAD -- '*.md' ':(exclude).github/*')
 
       - run:
           name: "Check unclosed tags"
           command: |
-            wget https://raw.githubusercontent.com/CharLotteiu/pingcap-docs-checks/main/check-tags.py
+            wget https://raw.githubusercontent.com/pingcap/docs/master/scripts/check-tags.py
             python3 check-tags.py $(git diff-tree --name-only --no-commit-id -r upstream/release-5.0..HEAD -- '*.md' ':(exclude).github/*')
 
       - run:
           name: "Check manual line breaks"
           command: |
-            wget https://raw.githubusercontent.com/CharLotteiu/pingcap-docs-checks/main/check-manual-line-breaks.py
+            wget https://raw.githubusercontent.com/pingcap/docs/master/scripts/check-manual-line-breaks.py
             python3 check-manual-line-breaks.py $(git diff-tree --name-only --no-commit-id -r upstream/release-5.0..HEAD -- '*.md' ':(exclude).github/*')
 
   build:
