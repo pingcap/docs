@@ -103,7 +103,7 @@ This document provides a detailed description of these key metrics on the **TiKV
     - count: The number of handled ready operations per second
     - has_ready_region: The number of Regions that have ready per second
     - pending_region: The operations per second of the Regions being checked for whether it has ready. This metric is deprecated since v3.0.0
-    - message: The number of messages per second that each ready operation contains
+    - message: The number of messages that the ready operations per second contain
     - append: The number of Raft log entries that the ready operations per second contain
     - commit: The number of committed Raft log entries that the ready operations per second contain
     - snapshot: The number of snapshots that the ready operations per second contains
