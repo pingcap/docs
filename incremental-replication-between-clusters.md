@@ -30,7 +30,7 @@ Suppose that the existing cluster A works properly. First, you need to create a 
 
 Make sure that TiDB Binlog has been deployed and enabled in cluster A.
 
-### Step 2: full export the cluster data
+### Step 2. Export all cluster data
 
 1. Export the data in cluster A (with global consistency ensured) to the specified path by using any of the following tools:
 
