@@ -67,7 +67,7 @@ Make sure that TiDB Binlog has been deployed and enabled in cluster A.
 
 3. Export the data in cluster A to cluster B.
 
-### Step 3: replicate incremental data
+### Step 3. Replicate incremental data
 
 Modify the `drainer.toml` configuration file of TiDB Binlog by adding the following configuration to specify the `COMMIT_TS` from which TiDB Binlog starts replicating data to cluster B.
 
