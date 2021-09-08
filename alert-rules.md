@@ -759,7 +759,7 @@ This section gives the alert rules for the TiKV component.
 
 * Description:
 
-    The data volume of TiKV exceeds 80% of the node configuration capacity or the disk capacity of the machine.
+    The data volume of TiKV exceeds 80% of the configured node capacity or the disk capacity of the machine.
 
 * Solution:
 
