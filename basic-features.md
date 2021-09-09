@@ -6,7 +6,7 @@ aliases: ['/docs/dev/basic-features/']
 
 # TiDB Features
 
-The following table provides an overview of the feature development history of TiDB. Note that features under active development may change before final release.
+The following table provides an overview of the feature development history of TiDB. Note that features under active development might change before the final release.
 
 | Data types, functions, and operators                                                                     | 5.2          | 5.1          | 5.0          | 4.0          |
 |----------------------------------------------------------------------------------------------------------|:------------:|:------------:|:------------:|:------------:|
