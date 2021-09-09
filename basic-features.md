@@ -62,7 +62,7 @@ The following table provides an overview of the feature development history of T
 | [`EXCEPT` and `INTERSECT` operators](/functions-and-operators/set-operators.md)                          | Y            | Y            | Y            | N            |
 | `GROUP BY`, `ORDER BY`                                                                                   | Y            | Y            | Y            | Y            |
 | [Window Functions](/functions-and-operators/window-functions.md)                                         | Y            | Y            | Y            | Y            |
-| [Common Table Expressions (CTE)](/sql-statements/sql-statement-with.md)                                  | Y            | Y            | N            | N            |
+| [Common Table Expressions (CTE)](https://docs.pingcap.com/tidb/v5.2/sql-statement-with)                                  | Y            | Y            | N            | N            |
 | `START TRANSACTION`, `COMMIT`, `ROLLBACK`                                                                | Y            | Y            | Y            | Y            |
 | [`EXPLAIN`](/sql-statements/sql-statement-explain.md)                                                    | Y            | Y            | Y            | Y            |
 | [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)                                    | Y            | Y            | Y            | Y            |
@@ -71,7 +71,7 @@ The following table provides an overview of the feature development history of T
 | [Prepared statement cache](/sql-prepare-plan-cache.md)                                                   | Experimental | Experimental | Experimental | Experimental |
 | [SQL plan management (SPM)](/sql-plan-management.md)                                                     | Y            | Y            | Y            | Y            |
 | [Coprocessor cache](/coprocessor-cache.md)                                                               | Y            | Y            | Y            | Experimental |
-| [Stale Read](/stale-read.md)                                                                             | Y            | Y            | N            | N            |
+| [Stale Read](https://docs.pingcap.com/tidb/v5.1/stale-read)                                                                             | Y            | Y            | N            | N            |
 | [Follower reads](/follower-read.md)                                                                      | Y            | Y            | Y            | Y            |
 | [Read historical data (tidb_snapshot)](/read-historical-data.md)                                         | Y            | Y            | Y            | Y            |
 | [Optimizer hints](/optimizer-hints.md)                                                                   | Y            | Y            | Y            | Y            |
@@ -139,7 +139,7 @@ The following table provides an overview of the feature development history of T
 | [Built-in physical backup](/br/backup-and-restore-use-cases.md)                                          | Y            | Y            | Y            | Y            |
 | Top SQL                                                                                                  | Y            | N            | N            | N            |
 | [Global Kill](/sql-statements/sql-statement-kill.md)                                                     | Experimental | Experimental | Experimental | Experimental |
-| [Lock View](/information-schema/information-schema-data-lock-waits.md)                                   | Y            | Experimental | Experimental | Experimental |
+| [Lock View](https://docs.pingcap.com/tidb/v5.2/information-schema-data-lock-waits)                                   | Y            | Experimental | Experimental | Experimental |
 | [`SHOW CONFIG`](/sql-statements/sql-statement-show-config.md)                                            | Experimental | Experimental | Experimental | Experimental |
 | [`SET CONFIG`](/dynamic-config.md)                                                                       | Experimental | Experimental | Experimental | Experimental |
 
