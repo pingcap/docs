@@ -126,7 +126,6 @@ The following TiKV configuration items can be modified online:
 
 | Configuration item | Description |
 | :--- | :--- |
-| `raftstore.sync-log` | Determines whether to sync data and logs for persistent storage |
 | `raftstore.raft-entry-max-size` | The maximum size of a single log |
 | `raftstore.raft-log-gc-tick-interval` | The time interval at which the polling task of deleting Raft logs is scheduled |
 | `raftstore.raft-log-gc-threshold` | The soft limit on the maximum allowable number of residual Raft logs |
@@ -272,9 +271,11 @@ For detailed parameter description, refer to [PD Configuration File](/pd-configu
 
 ### Modify TiDB configuration online
 
-Currently, the method of changing TiDB configuration is different from that of changing TiKV and PD configurations. You can modify TiDB configuration by using [SQL variables](/system-variables.md).
+Currently, the method of changing TiDB configuration is different from that of changing TiKV and PD configurations. You can modify TiDB configuration by using [system variables](/system-variables.md).
 
-The following example shows how to modify `slow-threshold` online by using the `tidb_slow_log_threshold` variable. The default value of `slow-threshold` is 200 ms. You can set it to 200 ms by using `tidb_slow_log_threshold`.
+The following example shows how to modify `slow-threshold` online by using the `tidb_slow_log_threshold` variable. 
+
+The default value of `slow-threshold` is 300 ms. You can set it to 200 ms by using `tidb_slow_log_threshold`.
 
 {{< copyable "sql" >}}
 

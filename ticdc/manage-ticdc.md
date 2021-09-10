@@ -6,24 +6,55 @@ aliases: ['/docs/dev/ticdc/manage-ticdc/','/docs/dev/reference/tools/ticdc/manag
 
 # Manage TiCDC Cluster and Replication Tasks
 
-This document describes how to manage the TiCDC cluster and replication tasks using the command line tool `cdc cli` and the HTTP interface.
+This document describes how to upgrade TiCDC cluster and modify the configuration of TiCDC cluster using TiUP, and how to manage the TiCDC cluster and replication tasks using the command-line tool `cdc cli`.
+
+You can also use the HTTP interface (the TiCDC OpenAPI feature) to manage the TiCDC cluster and replication tasks. For details, see [TiCDC OpenAPI](/ticdc/ticdc-open-api.md).
 
 ## Upgrade TiCDC using TiUP
 
-This section introduces how to upgrade the TiCDC cluster using TiUP. In the following example, assume that you need to upgrade TiCDC and the entire TiDB cluster to v5.1.0.
+This section introduces how to upgrade the TiCDC cluster using TiUP. In the following example, assume that you need to upgrade TiCDC and the entire TiDB cluster to v5.2.1.
 
 {{< copyable "shell-regular" >}}
 
 ```shell
 tiup update --self && \
 tiup update --all && \
-tiup cluster upgrade <cluster-name> v5.1.0
+tiup cluster upgrade <cluster-name> v5.2.1
 ```
 
 ### Notes for upgrade
 
 * The `changefeed` configuration has changed in TiCDC v4.0.2. See [Compatibility notes for the configuration file](/production-deployment-using-tiup.md#step-3-initialize-cluster-topology-file) for details.
 * If you encounter any issues, see [Upgrade TiDB using TiUP - FAQ](/upgrade-tidb-using-tiup.md#faq).
+
+## Modify TiCDC configuration using TiUP
+
+This section introduces how to modify the configuration of TiCDC cluster using the  [`tiup cluster edit-config`](/tiup/tiup-component-cluster-edit-config.md) command of TiUP. The following example changes the value of `gc-ttl` from the default `86400` to `3600`, namely, one hour.
+
+First, execute the following command. You need to replace `<cluster-name>` with your actual cluster name.
+
+{{< copyable "shell-regular" >}}
+
+```shell
+tiup cluster edit-config <cluster-name>
+```
+
+Then, enter the vi editor page and modify the `cdc` configuraion under [`server-configs`](/tiup/tiup-cluster-topology-reference.md#server_configs). The configuration is shown below:
+
+```shell
+ server_configs:
+  tidb: {}
+  tikv: {}
+  pd: {}
+  tiflash: {}
+  tiflash-learner: {}
+  pump: {}
+  drainer: {}
+  cdc:
+    gc-ttl: 3600
+```
+
+After the modification, execute the `tiup cluster reload -R cdc` command to reload the configuration.
 
 ## Use TLS
 
@@ -536,95 +567,6 @@ Currently, you can modify the following configuration items:
     - `resolved-ts`: The largest TSO among the sorted data in the current processor.
     - `checkpoint-ts`: The largest TSO that has been successfully written to the downstream in the current processor.
 
-## Use HTTP interface to manage cluster status and data replication task
-
-Currently, the HTTP interface provides some basic features for query and maintenance.
-
-In the following examples, suppose that the TiCDC server listens on `127.0.0.1`, and the port is `8300` (you can specify the IP and port in `--addr=ip:port` when starting the TiCDC server).
-
-### Get the TiCDC server status
-
-Use the following command to get the TiCDC server status:
-
-{{< copyable "shell-regular" >}}
-
-```shell
-curl http://127.0.0.1:8300/status
-```
-
-```
-{
-"version": "0.0.1",
-"git_hash": "863f8ea889b144244ff53593a45c47ad22d37396",
-"id": "6d92386a-73fc-43f3-89de-4e337a42b766", # capture id
-"pid": 12102    # cdc server pid
-}
-```
-
-### Evict the owner node
-
-{{< copyable "shell-regular" >}}
-
-```shell
-curl -X POST http://127.0.0.1:8300/capture/owner/resign
-```
-
-The above command takes effect only for requesting on the **owner node**.
-
-```
-{
- "status": true,
- "message": ""
-}
-```
-
-{{< copyable "shell-regular" >}}
-
-```shell
-curl -X POST http://127.0.0.1:8301/capture/owner/resign
-```
-
-For nodes other than owner nodes, executing the above command will return the following error.
-
-```
-election: not leader
-```
-
-### Manually schedule a table to other node
-
-{{< copyable "shell-regular" >}}
-
-```shell
-curl -X POST http://127.0.0.1:8300/capture/owner/move_table -d 'cf-id=cf060953-036c-4f31-899f-5afa0ad0c2f9&target-cp-id=6f19a6d9-0f8c-4dc9-b299-3ba7c0f216f5&table-id=49'
-```
-
-Parameter description:
-
-| Parameter name        | Description |
-| :----------- | :--- |
-| `cf-id`        | The ID of the `changefeed` to be scheduled |
-| `target-cp-id` | The ID of the target `capture` |
-| `table-id`     | The ID of the table to be scheduled |
-
-For nodes other than owner nodes, executing the above command will return the following error.
-
-```
-{
- "status": true,
- "message": ""
-}
-```
-
-### Dynamically change the log level of TiCDC server
-
-{{< copyable "shell-regular" >}}
-
-```shell
-curl -X POST -d '"debug"' http://127.0.0.1:8301/admin/log
-```
-
-In the command above, the `POST` parameter indicates the new log level. The [zap-provided](https://godoc.org/go.uber.org/zap#UnmarshalText) log level options are supported: "debug", "info", "warn", "error", "dpanic", "panic", and "fatal". This interface parameter is JSON-encoded and you need to pay attention to the use of quotation marks. For example: `'"debug"'`.
-
 ## Task configuration file
 
 This section introduces the configuration of a replication task.
@@ -844,6 +786,6 @@ In the output of the above command, if the value of `sort-engine` is "unified", 
 > **Note:**
 >
 > + If your servers use mechanical hard drives or other storage devices that have high latency or limited bandwidth, use the unified sorter with caution.
-> + The total free capacity of hard drives must be greater than or equal to 128G. If you need to replicate a large amount of historical data, make sure that the free capacity on each node is greater than or equal to the size of the incremental data that needs to be replicated.
+> + The total free capacity of hard drives must be greater than or equal to 500G. If you need to replicate a large amount of historical data, make sure that the free capacity on each node is greater than or equal to the size of the incremental data that needs to be replicated.
 > + Unified sorter is enabled by default. If your servers do not match the above requirements and you want to disable the unified sorter, you need to manually set `sort-engine` to `memory` for the changefeed.
 > + To enable Unified Sorter on an existing changefeed, see the methods provided in [How do I handle the OOM that occurs after TiCDC is restarted after a task interruption?](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-the-oom-that-occurs-after-ticdc-is-restarted-after-a-task-interruption).

@@ -127,10 +127,15 @@ Configuration items related to security
 
 Configuration items related to log
 
+### `level`
+
++ The log level, which can be specified as "DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL".
++ Default value: "INFO"
+
 ### `format`
 
 + The log format, which can be specified as "text", "json", or "console"
-+ Default value: `text`
++ Default value: "text"
 
 ### `disable-timestamp`
 
@@ -356,7 +361,3 @@ Configuration items related to the [TiDB Dashboard](/dashboard/dashboard-intro.m
 + Determines whether to enable the telemetry collection feature in TiDB Dashboard.
 + Default value: `true`
 + See [Telemetry](/telemetry.md) for details.
-
-## `replication-mode`
-
-Configuration items related to the replication mode of all Regions. See [Enable synchronous replication in PD configuration file](/synchronous-replication.md#enable-synchronous-replication-in-the-pd-configuration-file) for details.

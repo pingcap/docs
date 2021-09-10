@@ -218,7 +218,7 @@ This section gives the alert rules for the PD component.
 
 * Description:
 
-    etcd writes data to disk at a lower speed than normal. It might lead to PD leader timeout or failure to store TSO on disk in time, which will shut down the service of the entire cluster.
+    If the latency of the fsync operation exceeds 1 second, it indicates that etcd writes data to disk at a lower speed than normal. It might lead to PD leader timeout or failure to store TSO on disk in time, which will shut down the service of the entire cluster.
 
 * Solution:
 
@@ -234,7 +234,7 @@ This section gives the alert rules for the PD component.
 
 * Description:
 
-    The number of Region replicas is smaller than the value of `max-replicas`. When a TiKV machine is down and its downtime exceeds `max-down-time`, it usually leads to missing replicas for some Regions during a period of time. When a TiKV node is made offline, it might result in a small number of Regions with missing replicas.
+    The number of Region replicas is smaller than the value of `max-replicas`. When a TiKV machine is down and its downtime exceeds `max-down-time`, it usually leads to missing replicas for some Regions during a period of time. 
 
 * Solution:
 
@@ -690,7 +690,7 @@ This section gives the alert rules for the TiKV component.
 
 * Alert rule:
 
-    `increase(tikv_coprocessor_request_error{reason!="lock"}[10m]) > 100`
+    `increase(tikv_coprocessor_request_error{reason=!"meet_lock"}[10m]) > 100`
 
 * Description:
 
@@ -704,7 +704,7 @@ This section gives the alert rules for the TiKV component.
 
 * Alert rule:
 
-    `increase(tikv_coprocessor_request_error{reason="lock"}[10m]) > 10000`
+    `increase(tikv_coprocessor_request_error{reason="meet_lock"}[10m]) > 10000`
 
 * Description:
 
@@ -752,11 +752,20 @@ This section gives the alert rules for the TiKV component.
 
     Check which kind of tasks has a higher value. You can normally find a solution to the Coprocessor and apply worker tasks from other metrics.
 
-#### `TiKV_low_space_and_add_region`
+#### `TiKV_low_space`
 
 * Alert rule:
 
-    `count((sum(tikv_store_size_bytes{type="available"}) by (instance) / sum(tikv_store_size_bytes{type="capacity"}) by (instance) < 0.2) and (sum(tikv_raftstore_snapshot_traffic_total{type="applying"}) by (instance) > 0)) > 0`
+    `sum(tikv_store_size_bytes{type="available"}) by (instance) / sum(tikv_store_size_bytes{type="capacity"}) by (instance) < 0.2`
+
+* Description:
+
+    The data volume of TiKV exceeds 80% of the configured node capacity or the disk capacity of the machine.
+
+* Solution:
+
+    * Check the balance condition of node space.
+    * Make a plan to increase the disk capacity or delete some data or increase cluster node depending on different situations.
 
 #### `TiKV_approximate_region_size`
 
