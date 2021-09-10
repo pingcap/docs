@@ -35,7 +35,7 @@ If you have deployed TiFlash with Grafana, you can check the **TiFlash-Proxy-Det
 
 ### PD
 
-Using encryption-at-rest for PD is an experimental feature. This is configured in the same way as TiKV.
+Encryption-at-rest for PD is an experimental feature, which is configured in the same way as in TiKV.
 
 ### Backups with BR
 
