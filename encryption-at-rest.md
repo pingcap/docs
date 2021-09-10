@@ -65,7 +65,13 @@ Regardless of data encryption method, data keys are encrypted using AES256 in GC
 
 ### Key creation
 
-Go to the [AWS KMS](https://console.aws.amazon.com/kms) on the AWS console. Make sure the correct region is selected on the top right corner of your console. Make  and click "Create a key". Select "Symmetric" as Key type. After this you can set an alias an description and set tags.
+
+To create a key on AWS, follow these steps:
+
+1. Go to the [AWS KMS](https://console.aws.amazon.com/kms) on the AWS console.
+2. Make sure that you have selected the correct region on the top right corner of your console.
+3. Click **Create a key** and select **Symmetric** as the key type.
+4. Set an alias for the key and set tags.
 
 You can also perform the operations using the AWS CLI:
 
