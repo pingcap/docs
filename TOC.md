@@ -7,20 +7,22 @@
 
 + About TiDB
   + [TiDB Introduction](/overview.md)
-  + [TiDB 5.1 Release Notes](/releases/release-5.1.0.md)
+  + [TiDB 5.2 Release Notes](/releases/release-5.2.0.md)
   + [Basic Features](/basic-features.md)
   + [Experimental Features](/experimental-features.md)
   + Benchmarks
-    + [v5.1 Sysbench Performance Test Report](/benchmark/benchmark-sysbench-v5.1.0-vs-v5.0.2.md)
-    + [v5.1 TPC-C Performance Test Report](/benchmark/v5.1-performance-benchmarking-with-tpcc.md)
-    + [v5.1 MPP mode TPC-H 100GB Performance Test](/benchmark/v5.1-performance-benchmarking-with-tpch.md)
+    + [v5.2 Sysbench Performance Test Report](/benchmark/benchmark-sysbench-v5.2.0-vs-v5.1.1.md)
+    + [v5.2 TPC-C Performance Test Report](/benchmark/v5.2-performance-benchmarking-with-tpcc.md)
+    + [v5.2 MPP mode TPC-H 100GB Performance Test](/benchmark/v5.2-performance-benchmarking-with-tpch.md)
   + [MySQL Compatibility](/mysql-compatibility.md)
   + [TiDB Limitations](/tidb-limitations.md)
   + [TiDB Adopters](/adopters.md)
   + [Credits](/credits.md)
 + Quick Start
   + [Try Out TiDB](/quick-start-with-tidb.md)
+  + [Try Out HTAP](/quick-start-with-htap.md)
   + [Learn TiDB SQL](/basic-sql-operations.md)
+  + [Learn HTAP](/explore-htap.md)
   + [Import Example Database](/import-example-data.md)
 + Deploy
   + [Software and Hardware Requirements](/hardware-and-software-requirements.md)
@@ -208,6 +210,7 @@
     + [Maintain](/ticdc/manage-ticdc.md)
     + [Troubleshoot](/ticdc/troubleshoot-ticdc.md)
     + [Monitor](/ticdc/monitor-ticdc.md)
+    + [TiCDC OpenAPI](/ticdc/ticdc-open-api.md)
     + [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
     + [Integrate TiDB with Confluent Platform](/ticdc/integrate-confluent-using-ticdc.md)
     + [Glossary](/ticdc/ticdc-glossary.md)
@@ -266,6 +269,7 @@
       + [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)
       + [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md)
       + [`ADMIN SHOW DDL [JOBS|QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)
+      + [`ADMIN SHOW TELEMETRY`](/sql-statements/sql-statement-admin-show-telemetry.md)
       + [`ALTER DATABASE`](/sql-statements/sql-statement-alter-database.md)
       + [`ALTER INDEX`](/sql-statements/sql-statement-alter-index.md)
       + [`ALTER INSTANCE`](/sql-statements/sql-statement-alter-instance.md)
@@ -450,6 +454,7 @@
         + [`METRICS_TABLES`](/information-schema/information-schema-metrics-tables.md)
         + [`PARTITIONS`](/information-schema/information-schema-partitions.md)
         + [`PROCESSLIST`](/information-schema/information-schema-processlist.md)
+        + [`REFERENTIAL_CONSTRAINTS`](/information-schema/information-schema-referential-constraints.md)
         + [`SCHEMATA`](/information-schema/information-schema-schemata.md)
         + [`SEQUENCES`](/information-schema/information-schema-sequences.md)
         + [`SESSION_VARIABLES`](/information-schema/information-schema-session-variables.md)
@@ -550,7 +555,9 @@
 + [Glossary](/glossary.md)
 + Release Notes
   + [All Releases](/releases/release-notes.md)
-  + [TiDB Roadmap](/roadmap.md)
+  + v5.2
+    + [5.2.1](/releases/release-5.2.1.md)
+    + [5.2.0](/releases/release-5.2.0.md)  
   + v5.1
     + [5.1.1](/releases/release-5.1.1.md)
     + [5.1.0](/releases/release-5.1.0.md)
