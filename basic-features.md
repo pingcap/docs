@@ -62,7 +62,7 @@ The following table provides an overview of the feature development history of T
 | [`EXCEPT` and `INTERSECT` operators](/functions-and-operators/set-operators.md)                          | Y            | Y            | Y            | N            |
 | `GROUP BY`, `ORDER BY`                                                                                   | Y            | Y            | Y            | Y            |
 | [Window Functions](/functions-and-operators/window-functions.md)                                         | Y            | Y            | Y            | Y            |
-| [Common Table Expressions (CTE)](https://docs.pingcap.com/tidb/v5.2/sql-statement-with)                                  | Y            | Y            | N            | N            |
+| [Common Table Expressions (CTE)](https://docs.pingcap.com/tidb/v5.1/sql-statement-with)                                  | Y            | Y            | N            | N            |
 | `START TRANSACTION`, `COMMIT`, `ROLLBACK`                                                                | Y            | Y            | Y            | Y            |
 | [`EXPLAIN`](/sql-statements/sql-statement-explain.md)                                                    | Y            | Y            | Y            | Y            |
 | [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)                                    | Y            | Y            | Y            | Y            |
@@ -101,7 +101,7 @@ The following table provides an overview of the feature development history of T
 | [List partitioning](/partitioned-table.md)                                                               | Experimental | Experimental | Experimental | N            |
 | [List COLUMNS partitioning](/partitioned-table.md)                                                       | Experimental | Experimental | Experimental | N            |
 | [`EXCHANGE PARTITION`](/partitioned-table.md)                                                            | Experimental | Experimental | Experimental | N            |
-| [Dynamic Pruning](/partitioned-table.md#dynamic-pruning-mode)                                            | Experimental | Experimental | N            | N            |
+| [Dynamic Pruning](https://docs.pingcap.com/tidb/v5.1/partitioned-table#dynamic-pruning-mode)                                            | Experimental | Experimental | N            | N            |
 | **Statistics**                                                                                           | **5.2**      | **5.1**      | **5.0**      | **4.0**      |
 | [CMSketch](/statistics.md)                                                                               | Deprecated   | Deprecated   | Deprecated   | Y            |
 | [Histograms](/statistics.md)                                                                             | Y            | Y            | Y            | Y            |
@@ -115,8 +115,8 @@ The following table provides an overview of the feature development history of T
 | [Certificate-based authentication](/certificate-authentication.md)                                       | Y            | Y            | Y            | Y            |
 | `caching_sha2_password` authentication                                                                   | Y            | N            | N            | N            |
 | [MySQL compatible `GRANT` system](/privilege-management.md)                                              | Y            | Y            | Y            | Y            |
-| [Dynamic Privileges](/privilege-management.md#dynamic-privileges)                                        | Y            | Y            | N            | N            |
-| [Security Enhanced Mode](/system-variables.md#tidb_enable_enhanced_security)                             | Y            | Y            | N            | N            |
+| [Dynamic Privileges](https://docs.pingcap.com/tidb/v5.1/privilege-management#dynamic-privileges)                                        | Y            | Y            | N            | N            |
+| [Security Enhanced Mode](https://docs.pingcap.com/tidb/v5.1/system-variables#tidb_enable_enhanced_security)                             | Y            | Y            | N            | N            |
 | [Redacted Log Files](/log-redaction.md)                                                                  | Y            | Y            | Y            | N            |
 | **Data import and export**                                                                               | **5.2**      | **5.1**      | **5.0**      | **4.0**      |
 | [Fast Importer (TiDB Lightning)](/tidb-lightning/tidb-lightning-overview.md)                             | Y            | Y            | Y            | Y            |
