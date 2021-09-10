@@ -40,7 +40,7 @@ Encryption-at-rest for PD is an experimental feature, which is configured in the
 
 ### Backups with BR
 
-BR supports S3 server-side encryption (SSE) when backing up to S3. A customer owned AWS KMS key can also be used together with S3 server-side encryption. See [BR S3 server-side encryption](/encryption-at-rest.md#br-s3-server-side-encryption) for details.
+BR supports S3 server-side encryption (SSE) when backing up data to S3. A customer-owned AWS KMS key can also be used together with S3 server-side encryption. See [BR S3 server-side encryption](/encryption-at-rest.md#br-s3-server-side-encryption) for details.
 
 ### Logging
 
