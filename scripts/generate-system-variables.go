@@ -104,6 +104,11 @@ func printWarning(sv *variable.SysVar) string {
 		return "> **Warning:**\n>\n> Currently, Green GC is an experimental feature. It is not recommended that you use it in the production environment.\n\n"
 	case variable.TiDBPartitionPruneMode:
 		return "> **Warning:**\n\n> Currently, the dynamic pruning mode for partitioned tables is an experimental feature. It is not recommended that you use it in the production environment.\n\n"
+	case variable.TiDBEnableCascadesPlanner:
+		return "> **Warning:**\n>\n> Currently, cascades planner is an experimental feature. It is not recommended that you use it in the production environment.\n\n"
+	case variable.TiDBEnableFastAnalyze:
+		return "> **Warning:**\n>\n> Currently, `Fast Analyze` is an experimental feature. It is not recommended that you use it in the production environment.\n\n"
+
 	}
 	return ""
 }
@@ -114,7 +119,7 @@ func printUnits(sv *variable.SysVar) string {
 		return "- Unit: Bytes\n"
 	case variable.TiDBSlowLogThreshold, variable.MaxExecutionTime:
 		return "- Unit: Milliseconds\n"
-	case variable.InteractiveTimeout, variable.WaitTimeout:
+	case variable.InteractiveTimeout, variable.WaitTimeout, variable.TiDBStmtSummaryRefreshInterval, variable.TiDBWaitSplitRegionTimeout:
 		return "- Unit: Seconds\n"
 	}
 	return ""
@@ -178,8 +183,10 @@ func formatSpecialVersionComment(sv *variable.SysVar) string {
 		return ` <span class="version-mark">New in v4.0.11</span>`
 	case variable.TiDBStoreLimit:
 		return ` <span class="version-mark">New in v3.0.4 and v4.0</span>`
-	case variable.TiDBPartitionPruneMode, variable.TiDBEnforceMPPExecution, variable.TiDBAnalyzeVersion:
+	case variable.TiDBPartitionPruneMode, variable.TiDBEnforceMPPExecution:
 		return ` <span class="version-mark">New in v5.1</span>`
+	case variable.TiDBAnalyzeVersion:
+		return ` <span class="version-mark">New in v5.1.0</span>`
 	default:
 		return ""
 	}
@@ -290,9 +297,9 @@ func getExtendedDescription(sv *variable.SysVar) string {
 			"\n" +
 			"    In the case of a poor network environment, appropriately increasing the value of this variable can effectively alleviate error reporting to the application end caused by timeout. If the application end wants to receive the error information more quickly, minimize the value of this variable."
 	case variable.TiDBBCJThresholdCount:
-		return "- The unit of the variable is rows. If the objects of the join operation belong to a subquery, the optimizer cannot estimate the size of the subquery result set. In this situation, the size is determined by the number of rows in the result set. If the estimated number of rows in the subquery is less than the value of this variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used. When `tidb_broadcast_join_threshold_count = -1`, the threshold is infinitely high."
+		return "- The unit of the variable is rows. If the objects of the join operation belong to a subquery, the optimizer cannot estimate the size of the subquery result set. In this situation, the size is determined by the number of rows in the result set. If the estimated number of rows in the subquery is less than the value of this variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used."
 	case variable.TiDBBCJThresholdSize:
-		return "- If the table size is less than the value of the variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used. When `tidb_broadcast_join_threshold_size = -1`, the threshold is infinitely high."
+		return "- If the table size is less than the value of the variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used."
 	case variable.TiDBBuildStatsConcurrency:
 		return "- This variable is used to set the concurrency of executing the `ANALYZE` statement.\n- When the variable is set to a larger value, the execution performance of other queries is affected."
 	case variable.TiDBCapturePlanBaseline:
@@ -385,7 +392,7 @@ func getExtendedDescription(sv *variable.SysVar) string {
 			"> - If you have enabled TiDB Binlog, enabling this variable cannot improve the performance. To improve the performance, it is recommended to use [TiCDC](/ticdc/ticdc-overview.md) instead.\n" +
 			"> - Enabling this parameter only means that one-phase commit becomes an optional mode of transaction commit. In fact, the most suitable mode of transaction commit is determined by TiDB."
 	case variable.TiDBEnableCascadesPlanner:
-		return "- This variable is used to control whether to enable the cascades planner, which is currently considered experimental."
+		return "- This variable is used to control whether to enable the cascades planner."
 	case variable.TiDBEnableChunkRPC:
 		return "- This variable is used to control whether to enable the `Chunk` data encoding format in Coprocessor."
 	case variable.TiDBEnableClusteredIndex:
@@ -413,9 +420,9 @@ func getExtendedDescription(sv *variable.SysVar) string {
 			"    * `START TRANSACTION READ ONLY` and `SET TRANSACTION READ ONLY` syntax\n" +
 			"    * The `tx_read_only`, `transaction_read_only`, `offline_mode`, `super_read_only` and `read_only` system variables\n" +
 			"\n" +
-			"> **Note:**\n" +
+			"> **Warning:**\n" +
 			">\n" +
-			"> Only the default value of `OFF` can be considered safe. Setting `tidb_enable_noop_functions=1` might lead to unexpected behaviors in your application, because it permits TiDB to ignore certain syntax without providing an error."
+			"> Only the default value of `OFF` can be considered safe. Setting `tidb_enable_noop_functions=1` might lead to unexpected behaviors in your application, because it permits TiDB to ignore certain syntax without providing an error. For example, the syntax `START TRANSACTION READ ONLY` is permitted, but the transaction remains in read-write mode."
 	case variable.TiDBEnableParallelApply:
 		return "- This variable controls whether to enable concurrency for the `Apply` operator. The number of concurrencies is controlled by the `tidb_executor_concurrency` variable. The `Apply` operator processes correlated subqueries and has no concurrency by default, so the execution speed is slow. Setting this variable value to `1` can increase concurrency and speed up execution. Currently, concurrency for `Apply` is disabled by default."
 	case variable.TiDBEnableRateLimitAction:
@@ -646,8 +653,8 @@ func getExtendedDescription(sv *variable.SysVar) string {
 			"    select * from t, t1 where t.a=t1.a\n" +
 			"    ```"
 	case variable.TiDBOptPreferRangeScan:
-		return "- After you set the value of this variable to `1`, the optimizer always prefers index scans over full table scans.\n" +
-			"- In the following example, before you enable `tidb_opt_prefer_range_scan`, the TiDB optimizer performs a full table scan. After you enable `tidb_opt_prefer_range_scan`, the optimizer selects an index scan.\n" +
+		return "- After you set the value of this variable to `ON`, the optimizer always prefers range scans over full table scans.\n" +
+			"- In the following example, before you enable `tidb_opt_prefer_range_scan`, the TiDB optimizer performs a full table scan. After you enable `tidb_opt_prefer_range_scan`, the optimizer selects an index range scan.\n" +
 			"\n" +
 			"```sql\n" +
 			"explain select * from t where age=5;\n" +
@@ -754,17 +761,17 @@ func getExtendedDescription(sv *variable.SysVar) string {
 	case variable.TiDBSnapshot:
 		return "- This variable is used to set the time point at which the data is read by the session. For example, when you set the variable to \"2017-11-11 20:20:20\" or a TSO number like \"400036290571534337\", the current session reads the data of this moment."
 	case variable.TiDBStmtSummaryHistorySize:
-		return "- This variable is used to set the history capacity of the statement summary."
+		return "- This variable is used to set the history capacity of [statement summary tables](/statement-summary-tables.md)."
 	case variable.TiDBStmtSummaryInternalQuery:
-		return "- This variable is used to control whether to include the SQL information of TiDB in the statement summary."
+		return "- This variable is used to control whether to include the SQL information of TiDB in [statement summary tables](/statement-summary-tables.md)."
 	case variable.TiDBStmtSummaryMaxStmtCount:
-		return "- This variable is used to set the maximum number of statements that the statement summary stores in memory."
+		return "- This variable is used to set the maximum number of statements that [statement summary tables](/statement-summary-tables.md) store in memory."
 	case variable.TiDBStmtSummaryRefreshInterval:
-		return "- This variable is used to set the refresh time of the statement summary. The unit is second."
+		return "- This variable is used to set the refresh time of [statement summary tables](/statement-summary-tables.md)."
 	case variable.TiDBStoreLimit:
 		return "- This variable is used to limit the maximum number of requests TiDB can send to TiKV at the same time. 0 means no limit."
 	case variable.TiDBStmtSummaryMaxSQLLength:
-		return "- This variable is used to control the length of the SQL string in the statement summary."
+		return "- This variable is used to control the length of the SQL string in [statement summary tables](/statement-summary-tables.md)."
 	case variable.TiDBUsePlanBaselines:
 		return "- This variable is used to control whether to enable the execution plan binding feature. It is enabled by default, and can be disabled by assigning the `OFF` value. For the use of the execution plan binding, see [Execution Plan Binding](/sql-plan-management.md#create-a-binding)."
 	case variable.TiDBWaitSplitRegionFinish:
@@ -773,7 +780,7 @@ func getExtendedDescription(sv *variable.SysVar) string {
 			"    - `OFF` permits the `SPLIT REGIONS` statement to return before finishing scattering all Regions.\n" +
 			"- Note that when scattering Regions, the write and read performances for the Region that is being scattered might be affected. In batch-write or data importing scenarios, it is recommended to import data after Regions scattering is finished."
 	case variable.TiDBWaitSplitRegionTimeout:
-		return "- This variable is used to set the timeout for executing the `SPLIT REGION` statement. The unit is second. If a statement is not executed completely within the specified time value, a timeout error is returned."
+		return "- This variable is used to set the timeout for executing the `SPLIT REGION` statement. If a statement is not executed completely within the specified time value, a timeout error is returned."
 	case variable.WarningCount:
 		return "- This read-only variable indicates the number of warnings that occurred in the statement that was previously executed."
 	case variable.CTEMaxRecursionDepth:
