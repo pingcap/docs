@@ -65,7 +65,6 @@ Regardless of data encryption method, data keys are encrypted using AES256 in GC
 
 ### Key creation
 
-
 To create a key on AWS, follow these steps:
 
 1. Go to the [AWS KMS](https://console.aws.amazon.com/kms) on the AWS console.
