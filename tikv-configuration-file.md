@@ -26,39 +26,39 @@ This document only describes the parameters that are not included in command-lin
 ### `log-level`
 
 + The log level
-+ Available values: "trace", "debug", "info", "warning", "error", "critical"
++ Value options: "trace", "debug", "info", "warning", "error", "critical"
 + Default value: "info"
 
 ### `log-file`
 
-+ The log file. If this parameter is not set, logs are written to "stderr" by default.
++ The log file. If this configuration is not set, logs are output to "stderr" by default.
 + Default value: ""
 
 ### `log-format`
 
 + The log format
-+ Available values: "json", "text"
++ Value options: "json", "text"
 + Default value: "text"
 
 ### `log-rotation-timespan`
 
-+ The timespan between log rotation. When this timespan passes, log files are rotated, that is, a timestamp is appended to the file name of the current log file, and a new file is created.
++ The timespan between log rotations. When this timespan passes, log files are rotated, that is, a timestamp is appended to the file name of the current log file, and a new file is created.
 + Default value: "24h"
 
 ### `log-rotation-size`
 
-+ The size of a log file that triggers log rotation. Once the size of a log file is bigger than the specified threshold value, log files are rotated. The old log file is placed into the new file, and the new filename is the old filename with a timestamp suffix.
++ The size of a log file that triggers log rotation. Once the size of a log file is bigger than the specified threshold value, log files are rotated. The old log file is placed into the new file, and the new file name is the old file name with a timestamp suffix.
 + Default value: "300MB"
 
 ### `slow-log-file`
 
 + The file to store slow logs
-+ If this parameter is not set but `log-file` is set, slow logs are written to the log file that specified in `log-file`. If both `slow-log-file` and `log-file` are not set, all logs are output to "stderr".
++ If this configuration is not set but `log-file` is set, slow logs are output to the log file specified by `log-file`. If neither `slow-log-file` nor `log-file` are set, all logs are output to "stderr".
 + Default value: ""
 
 ### `slow-log-threshold`
 
-+ The threshold to print slow logs. If the process time is longer than this threshold, the slow logs are printed.
++ The threshold for outputing slow logs. If the processing time is longer than this threshold, slow logs are output.
 + Default value: "1s"
 
 ## server
@@ -154,7 +154,7 @@ This document only describes the parameters that are not included in command-lin
 
 ### `end-point-slow-log-threshold`
 
-+ The time threshold for a TiDB's push down request to print slow log. If the process time is longer than this threshold, the slow logs are printed.
++ The time threshold for a TiDB's push-down request to output slow log. If the processing time is longer than this threshold, the slow logs are output.
 + Default value: `"1s"`
 + Minimum value: `0`
 
