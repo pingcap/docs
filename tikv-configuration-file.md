@@ -319,7 +319,7 @@ Configuration items related to the sharing of block cache among multiple RocksDB
 
 ## storage.flow-control
 
-Configuration items related to the flow control mechanism in TiKV. This mechanism supersedes the write stall mechanism in RocksDB and controls flow at the scheduler layer, which avoids the issue of QPS drop caused by the stuck Raftstore or Apply threads when the write traffic is high.
+Configuration items related to the flow control mechanism in TiKV. This mechanism replaces the write stall mechanism in RocksDB and controls flow at the scheduler layer, which avoids the issue of QPS drop caused by the stuck Raftstore or Apply threads when the write traffic is high.
 
 ### `enable`
 
@@ -463,13 +463,8 @@ Configuration items related to Raftstore
 
 ### `hibernate-regions`
 
-+ Enables or disables Hibernate Region. When this option is enabled, a Region idle for a long time is automatically set as hibernated. This reduces the extra overhead caused by heartbeat messages between the Raft leader and the followers for idle Regions. You can use `raftstore.peer-stale-state-check-interval` to modify the heartbeat interval between the leader and the followers of hibernated Regions.
++ Enables or disables Hibernate Region. When this option is enabled, a Region idle for a long time is automatically set as hibernated. This reduces the extra overhead caused by heartbeat messages between the Raft leader and the followers for idle Regions. You can use `peer-stale-state-check-interval` to modify the heartbeat interval between the leader and the followers of hibernated Regions.
 + Default value: `true` in v5.0.2 and later versions; `false` in versions before v5.0.2
-
-### `raftstore.peer-stale-state-check-interval`
-
-+ Modifies the state check interval for Regions.
-+ Default value: 5 min
 
 ### `split-region-check-tick-interval`
 
@@ -763,7 +758,11 @@ Configuration items related to RocksDB
 ### `wal-recovery-mode`
 
 + WAL recovery mode
-+ Optional values: `0` (`TolerateCorruptedTailRecords`), `1` (`AbsoluteConsistency`), `2` (`PointInTimeRecovery`), `3` (`SkipAnyCorruptedRecords`)
++ Value options: `0`, `1`, `2`, `3`
++ `0` (`TolerateCorruptedTailRecords`): tolerates and discards the records that have incomplete trailing data on all logs.
++ `1` (`AbsoluteConsistency`): abandons recovery when corrupted logs are found.
++ `2` (`PointInTimeRecovery`): recovers log sequentially until the first corrupted log is encountered.
++ `3` (`SkipAnyCorruptedRecords`): recovery after a disaster. Corrupted records are skipped
 + Default value: `2`
 + Minimum value: `0`
 + Maximum value: `3`
@@ -799,7 +798,7 @@ Configuration items related to RocksDB
 
 ### `compaction-readahead-size`
 
-+ The size of `readahead` when compaction is being performed
++ Enables the readahead feature during RocksDB compaction and specifies the size of readahead data. If you are using mechanical disks, it is recommended to set the value to 2MB at least.
 + Default value: `0`
 + Minimum value: `0`
 + Unit: B|KB|MB|GB
@@ -813,7 +812,7 @@ Configuration items related to RocksDB
 
 ### `use-direct-io-for-flush-and-compaction`
 
-+ Determines whether to use `O_DIRECT` for both reads and writes in background flush and compactions
++ Determines whether to use `O_DIRECT` for both reads and writes in the background flush and compactions. The performance impact of this option: enabling `O_DIRECT` bypasses and prevents contamination of the OS buffer cache, but the subsequent file reads require re-reading the contents to the buffer cache.
 + Default value: `false`
 
 ### `rate-bytes-per-sec`

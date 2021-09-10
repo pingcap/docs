@@ -28,7 +28,7 @@ If you want to download the latest version of `pd-ctl`, directly download the Ti
 
 > **Note:**
 >
-> `{version}` indicates the version number of TiDB. For example, if `{version}` is `v5.1.0`, the package download link is `https://download.pingcap.org/tidb-v5.1.0-linux-amd64.tar.gz`.
+> `{version}` indicates the version number of TiDB. For example, if `{version}` is `v5.2.1`, the package download link is `https://download.pingcap.org/tidb-v5.2.1-linux-amd64.tar.gz`.
 
 ### Compile from source code
 
@@ -179,7 +179,7 @@ Usage:
 }
 
 >> config show cluster-version                // Display the current version of the cluster, which is the current minimum version of TiKV nodes in the cluster and does not correspond to the binary version.
-"5.1.0"
+"5.2.1"
 ```
 
 - `max-snapshot-count` controls the maximum number of snapshots that a single store receives or sends out at the same time. The scheduler is restricted by this configuration to avoid taking up normal application resources. When you need to improve the speed of adding replicas or balancing, increase this value.
@@ -307,8 +307,6 @@ Usage:
     ```bash
     config set cluster-version 1.0.8              // Set the version of the cluster to 1.0.8
     ```
-
-- `replication-mode` controls the replication mode of Regions in the dual data center scenario. See [Enable the DR Auto-Sync mode](/two-data-centers-in-one-city-deployment.md#enable-the-dr-auto-sync-mode) for details.
 
 - `leader-schedule-policy` is used to select the scheduling strategy for the leader. You can schedule the leader according to `size` or `count`.
 

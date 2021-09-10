@@ -1,19 +1,19 @@
 ---
-title: TiCDC Open API
-summary: Learn how to use the Open API interface to manage the cluster status and data replication.
+title: TiCDC OpenAPI
+summary: Learn how to use the OpenAPI interface to manage the cluster status and data replication.
 ---
 
-# TiCDC Open API
+# TiCDC OpenAPI
 
 <!-- markdownlint-disable MD024 -->
 
 > **Warning:**
 >
-> TiCDC Open API is still an experimental feature. It is not recommended to use it in a production environment.
+> TiCDC OpenAPI is still an experimental feature. It is not recommended to use it in a production environment.
 
-TiCDC provides the Open API feature for querying and operating the TiCDC cluster, which is similar to the feature of [`cdc cli` tool] (/ticdc/manage-ticdc.md#use-cdc-cli-to-manage-cluster-status-and-data-replication-task).
+TiCDC provides the OpenAPI feature for querying and operating the TiCDC cluster, which is similar to the feature of [`cdc cli` tool](/ticdc/manage-ticdc.md#use-cdc-cli-to-manage-cluster-status-and-data-replication-task).
 
-You can use the Open APIs to perform the following maintenance operations on the TiCDC cluster:
+You can use the APIs to perform the following maintenance operations on the TiCDC cluster:
 
 - [Get the status information of a TiCDC node](#get-the-status-information-of-a-ticdc-node)
 - [Check the health status of a TiCDC cluster](#check-the-health-status-of-a-ticdc-cluster)
@@ -128,7 +128,9 @@ Compared to the optional parameters for creating a replication task using the `c
 | `mounter_worker_num` | `INT` type. The mounter thread number. (Optional) |
 | `sink_config` | The configuration parameters of sink. (Optional) |
 
-The meaning and format of `changefeed_id`, `start_ts`, `target_ts`, and `sink_uri` are the same as those described in the [Use `cdc cli` to create a replication task](/ticdc/manage-ticdc.md#create-a-replication-task) document. For the detailed description of these parameters, see this document. Some other parameters in the above table are described further as follows.
+The meaning and format of `changefeed_id`, `start_ts`, `target_ts`, and `sink_uri` are the same as those described in the [Use `cdc cli` to create a replication task](/ticdc/manage-ticdc.md#create-a-replication-task) document. For the detailed description of these parameters, see this document. Note that when you specify the certificate path in `sink_uri`, make sure you have uploaded the corresponding certificate to the corresponding TiCDC server.
+
+Some other parameters in the above table are described further as follows.
 
 `force_replicate`: This parameter defaults to `false`. When it is specified as `true`, TiCDC tries to forcibly replicate tables that do not have a unique index.
 
@@ -170,7 +172,7 @@ The following request creates a replication task with an ID of `test5` and a `si
 {{< copyable "shell-regular" >}}
 
 ```shell
-curl -X POST -H "'Content-type':'application/json'" http://127.0.0.1:8300/api/v1/changefeeds -d '{"changefeed_id":"test5","sink_uri":"blcakhole://"}'
+curl -X POST -H "'Content-type':'application/json'" http://127.0.0.1:8300/api/v1/changefeeds -d '{"changefeed_id":"test5","sink_uri":"blackhole://"}'
 ```
 
 If the request is successful, `202 Accepted` is returned. If the request fails, an error message and error code are returned.
@@ -243,7 +245,7 @@ The following request updates the `mounter_worker_num` of the replication task w
 {{< copyable "shell-regular" >}}
 
 ```shell
- curl -X POST -H "'Content-type':'application/json'" http://127.0.0.1:8300/api/v1/changefeeds/test1 -d '{"mounter_worker_num":32}'
+ curl -X PUT -H "'Content-type':'application/json'" http://127.0.0.1:8300/api/v1/changefeeds/test1 -d '{"mounter_worker_num":32}'
 ```
 
 If the request is successful, `202 Accepted` is returned. If the request fails, an error message and error code are returned.

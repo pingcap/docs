@@ -246,13 +246,11 @@ Currently, TiFlash supports the following push-down expressions:
 * Logical functions: `and, or, not, case when, if, ifnull, isnull, in, like, coalesce`
 * Bitwise operations: `bitand, bitor, bigneg, bitxor`
 * String functions: `substr, char_length, replace, concat, concat_ws, left, right, ascii, length, trim, position`
-* Date functions: `date_format, timestampdiff, from_unixtime, unix_timestamp(int), unix_timestamp(decimal), str_to_date(date), str_to_date(datetime), date_add(datetime, int), date_add(string, int), date_add(string, real), date_sub(datetime, int), date_sub(string, int), datediff, year, month, day, extract(datetime), date`
+* Date functions: `date_format, timestampdiff, from_unixtime, unix_timestamp(int), unix_timestamp(decimal), str_to_date(date), str_to_date(datetime), datediff, year, month, day, extract(datetime), date`
 * JSON function: `json_length`
 * Conversion functions: `cast(int as double), cast(int as decimal), cast(int as string), cast(int as time), cast(double as int), cast(double as decimal), cast(double as string), cast(double as time), cast(string as int), cast(string as double), cast(string as decimal), cast(string as time), cast(decimal as int), cast(decimal as string), cast(decimal as time), cast(time as int), cast(time as decimal), cast(time as string)`
 * Aggregate functions: `min, max, sum, count, avg, approx_count_distinct`
 * Miscellaneous functions: `inetntoa, inetaton, inet6ntoa, inet6aton`
-
-Among them, the push-down of `cast` and `date_add` is not enabled by default. To enable it, refer to [Blocklist of Optimization Rules and Expression Pushdown](/blocklist-control-plan.md).
 
 In addition, expressions that contain the Time/Bit/Set/Enum/Geometry type cannot be pushed down to TiFlash.
 
@@ -353,8 +351,8 @@ In the example execution plan, the `ExchangeReceiver` and `ExchangeSender` opera
 
 TiFlash provides the following two global/session variables to control whether to use Broadcast Hash Join:
 
-- [`tidb_broadcast_join_threshold_size`](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50): The unit of the value is bytes. If the table size (in the unit of bytes) is less than the value of the variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used. When `tidb_broadcast_join_threshold_size = -1`, the threshold is infinitely high.
-- [`tidb_broadcast_join_threshold_count`](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50): The unit of the value is rows. If the objects of the join operation belong to a subquery, the optimizer cannot estimate the size of the subquery result set, so the size is determined by the number of rows in the result set. If the estimated number of rows in the subquery is less than the value of this variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used. When `tidb_broadcast_join_threshold_count = -1`, the threshold is infinitely high.
+- [`tidb_broadcast_join_threshold_size`](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50): The unit of the value is bytes. If the table size (in the unit of bytes) is less than the value of the variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used.
+- [`tidb_broadcast_join_threshold_count`](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50): The unit of the value is rows. If the objects of the join operation belong to a subquery, the optimizer cannot estimate the size of the subquery result set, so the size is determined by the number of rows in the result set. If the estimated number of rows in the subquery is less than the value of this variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used.
 
 ## Notes
 

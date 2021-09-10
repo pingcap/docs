@@ -8,18 +8,18 @@ aliases: ['/docs/dev/ticdc/manage-ticdc/','/docs/dev/reference/tools/ticdc/manag
 
 This document describes how to upgrade TiCDC cluster and modify the configuration of TiCDC cluster using TiUP, and how to manage the TiCDC cluster and replication tasks using the command-line tool `cdc cli`.
 
-You can also use the HTTP interface (the TiCDC Open API feature) to manage the TiCDC cluster and replication tasks. For details, see [TiCDC Open API](/ticdc/ticdc-open-api.md).
+You can also use the HTTP interface (the TiCDC OpenAPI feature) to manage the TiCDC cluster and replication tasks. For details, see [TiCDC OpenAPI](/ticdc/ticdc-open-api.md).
 
 ## Upgrade TiCDC using TiUP
 
-This section introduces how to upgrade the TiCDC cluster using TiUP. In the following example, assume that you need to upgrade TiCDC and the entire TiDB cluster to v5.1.0.
+This section introduces how to upgrade the TiCDC cluster using TiUP. In the following example, assume that you need to upgrade TiCDC and the entire TiDB cluster to v5.2.1.
 
 {{< copyable "shell-regular" >}}
 
 ```shell
 tiup update --self && \
 tiup update --all && \
-tiup cluster upgrade <cluster-name> v5.1.0
+tiup cluster upgrade <cluster-name> v5.2.1
 ```
 
 ### Notes for upgrade
@@ -54,7 +54,7 @@ Then, enter the vi editor page and modify the `cdc` configuraion under [`server-
     gc-ttl: 3600
 ```
 
-After the modification, execute the `tiup cluster relaod -R cdc` command to reload the configuration.
+After the modification, execute the `tiup cluster reload -R cdc` command to reload the configuration.
 
 ## Use TLS
 
