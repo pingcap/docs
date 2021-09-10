@@ -70,8 +70,8 @@ To create a key on AWS, follow these steps:
 
 1. Go to the [AWS KMS](https://console.aws.amazon.com/kms) on the AWS console.
 2. Make sure that you have selected the correct region on the top right corner of your console.
-3. Click **Create a key** and select **Symmetric** as the key type.
-4. Set an alias for the key and set tags.
+3. Click **Create key** and select **Symmetric** as the key type.
+4. Set an alias for the key.
 
 You can also perform the operations using the AWS CLI:
 
