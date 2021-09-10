@@ -54,7 +54,7 @@ TiDB version: 5.0.4
     - Fix an issue where data is not stored when using max-replicas or location-labels to indirectly update default placement rule [#3914](https://github.com/tikv/pd/pull/3914)
     - Fix the bug that PD may panic during scaling out TiKV. [#3910](https://github.com/tikv/pd/pull/3910)
 
-## 以下 note 未分类。请将以下 note 进行分类 (New feature, Improvements, Bug fixes, Compatibility Changes 四类)，并移动到上面对应的标题下。如果某条 note 为多余的，请删除。如果漏抓取了 note，请手动补充
+## 以下 note 未分类。请将以下 note 进行分类 (Feature enhancements, Improvements, Bug fixes, Compatibility Changes 四类)，并移动到上面对应的标题下。如果某条 note 为多余的，请删除。如果漏抓取了 note，请手动补充
 
 + TiDB
 
