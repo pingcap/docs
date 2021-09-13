@@ -102,7 +102,7 @@ In this example, TiDB Lightning is only used to create table schemas, so the abo
 
 > **Note:**
 >
-> If the number of database tables to create is relatively small, you can manually create the corresponding databases and tables in TiDB directly, or use other tools such as mysqldump to export the schema and then import it into TiDB.
+> If the number of database tables to create is relatively small, you can directly and manually create the corresponding databases and tables in TiDB. Or you can use other tools such as mysqldump to export the schemas and then import them into TiDB.
 
 ## Step 5. Import data into TiDB using TiDB Lightning
 
