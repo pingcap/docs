@@ -20,7 +20,7 @@ To export a snapshot to Amazon S3, refer to Amazon's official document [Exportin
 
 ## Step 2. Export table schema files using Dumpling 
 
-Because the snapshot data exported to Amazon S3 does not contain the SQL statement file for creating database tables, you need to manually export and import the table creation statements corresponding to the database tables into TiDB. You can use Dumpling and TiDB Lightning to create all table schemas:
+Because the snapshot data exported to Amazon S3 does not contain the SQL statement file for creating database tables, you need to manually export and import the table creation statements into TiDB. You can use Dumpling and TiDB Lightning to create all table schemas:
 
 {{< copyable "shell-regular" >}}
 
