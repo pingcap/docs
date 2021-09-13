@@ -42,7 +42,7 @@ tiup install dumpling tidb-lightning dm dmctl
 >
 > You can install a component of a specific version by: `tiup install <component>[:version]`
 
-## Helpful Topics
+## Helpful topics
 
 - [Deploy TiUP offline](/production-deployment-using-tiup.md)
 - [Deploy TiDB Lightning manually](/tidb-lightning/deploy-tidb-lightning.md)
