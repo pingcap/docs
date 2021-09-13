@@ -123,7 +123,7 @@ When the import operation is started, view the progress by the following two way
 
 ***
 
-## Helpful Topics
+## Helpful topics
 
 - [Incrementally synchronize data From Aurora MySQL to TiDB](/data-migration/aurora/increment-aurora.md)
 - [Lightning Administration Guide](/tidb-lightning/tidb-lightning-overview.md)
