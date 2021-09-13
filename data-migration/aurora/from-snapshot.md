@@ -5,7 +5,7 @@ summary: Learn how to migrate full data from Amazon Aurora MySQL to TiDB using T
 
 # Migrate from Aurora snapshot to TiDB
 
-This document introduces how to migrate full data from Amazon Aurora MySQL to TiDB using TiDB Lightning. Both Dumpling and TiDB Lighting are used in this document.
+This document describes how to migrate full data from Amazon Aurora MySQL to TiDB using TiDB Lightning. Both Dumpling and TiDB Lighting are used for this migration.
 
 ## Prerequisites
 
@@ -14,11 +14,11 @@ This document introduces how to migrate full data from Amazon Aurora MySQL to Ti
 
 ***
 
-## Step 1. Export snapshots of Aurora to S3
+## Step 1. Export snapshot data of Aurora to Amazon S3
 
-To generate a Snapshot to S3, refer to Amazon's official document [Exporting DB snapshot data to Amazon S3](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_ExportSnapshot.html).
+To export a snapshot to Amazon S3, refer to Amazon's official document [Exporting DB snapshot data to Amazon S3](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_ExportSnapshot.html).
 
-## Step 2. Use Dumpling to export table schema files
+## Step 2. Export table schema files using Dumpling 
 
 Because the snapshot data exported from Aurora to S3 does not contain the SQL statement file used to create database tables, you need to manually export and import the table creation statements corresponding to the database tables into TiDB. You can use Dumpling and TiDB Lightning to create all table schemas:
 
@@ -27,7 +27,7 @@ Because the snapshot data exported from Aurora to S3 does not contain the SQL st
 ```shell
 tiup dumpling --host ${host} --port 3306 --user root --password password --no-data --output ./schema --filter "mydb.*"
 ```
-
+The parameters used in this step is as follows. For more parameters of Dumpling, refer to [Dumpling overview](/dumpling-overview.md).
 |Parameter|Description|
 |-|-|
 | `-h` or `--host`             |The IP address of the connected database|
@@ -38,11 +38,9 @@ tiup dumpling --host ${host} --port 3306 --user root --password password --no-da
 | `-o` or `--output`           |The path of exported local files or [the URL of the external storage](/br/backup-and-restore-storages.md)|
 | `-f` or `--filter`           |Export tables that match the filter pattern. For the filter syntax, see [table-filter](/table-filter.md)|
 
-> **Note:**
 >
-> For more parameters of Dumpling, see [Dumpling overview](/dumpling-overview.md).
 
-## Step 3. Prepare the TiDB Lightning configuration file 
+## Step 3. Create the TiDB Lightning configuration file 
 
 Based on different deployment methods, create the `tidb-lighting.toml` configuration file as follows:
 
@@ -100,13 +98,13 @@ Use TiDB Lightning to create table schemas:
 tiup tidb-lightning -config tidb-lightning.toml -d ./schema -no-schema=false
 ```
 
-In this example, TiDB Lightning is only used to create table schemas, so the above command runs very fast. In average, ten table creation statements can be executed in one second.
+In this example, TiDB Lightning is only used to create table schemas, so the above command runs very fast. In average, It only takes one second to execute ten table creation statements.
 
 > **Note:**
 >
 > If the number of database tables to create is relatively small, you can manually create the corresponding databases and tables in TiDB directly, or use other tools such as mysqldump to export the schema and then import it into TiDB.
 
-## Step 5. Import data to TiDB
+## Step 5. Import data into TiDB using TiDB Lightning
 
 Run TiDB Lightning to start the import operation. 
 
@@ -128,4 +126,4 @@ When the import operation is started, view the progress by the following two way
 ## Helpful Topics
 
 - [Incrementally synchronize data From Aurora MySQL to TiDB](/data-migration/aurora/increment-aurora.md)
-- [Lighting Administration Guide](/tidb-lightning/tidb-lightning-overview.md)
+- [Lightning Administration Guide](/tidb-lightning/tidb-lightning-overview.md)

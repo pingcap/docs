@@ -5,9 +5,9 @@ summary: Incrementally synchronize data From Aurora MySQL to TiDB
 
 # Incrementally synchronize data From Aurora MySQL to TiDB
 
-[TiDB Data Migration](https://github.com/pingcap/dm) (DM) is an integrated data migration task management platform, which supports the full data migration and the incremental data replication from MySQL-compatible databases (such as MySQL, MariaDB, and Aurora MySQL) into TiDB. It can help to reduce the operation cost of data migration and simplify the troubleshooting process.
+[TiDB Data Migration](https://github.com/pingcap/dm) (DM) is an integrated data migration task management platform, which supports the incremental data replication from MySQL-compatible databases (such as MySQL, MariaDB, and Aurora MySQL) into TiDB. DM helps to reduce the operation cost of data migration and to simplify the troubleshooting process.
 
-This article introduces how to use DM for incremental replication.
+This article describes how to use DM for incremental replication.
 
 ## Prerequisites
 
@@ -17,7 +17,7 @@ This article introduces how to use DM for incremental replication.
 
 ## Step 1. Precheck
 
-DM relies on the `ROW`-formatted binlog for incremental replication. See [Enable binary for an Aurora Cluster](https://aws.amazon.com/premiumsupport/knowledge-center/enable-binary-logging-aurora/?nc1=h_ls) for the configuration instruction.
+DM relies on the `ROW`-formatted binlog for incremental replication. For the configuration instructions, refer to Amazon's official document [Enable binary for an Aurora Cluster](https://aws.amazon.com/premiumsupport/knowledge-center/enable-binary-logging-aurora/?nc1=h_ls).
 
 If GTID is enabled in Aurora, you can migrate data based on GTID. For how to enable it, see [Configuring GTID-Based Replication for an Aurora MySQL Cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/mysql-replication-gtid.html#mysql-replication-gtid.configuring-aurora). To migrate data based on GTID, you need to set `enable-gtid` to `true` in the configuration file of data source in step 2 [Configure the data source](#step-2-configure-the-data-source).
 
