@@ -90,7 +90,7 @@ type = '$3'
 
 ## Step 4. Create table schemas in TiDB
 
-Use TiDB Lightning to create table schemas:
+Create table schemas using TiDB Lightning:
 
 {{< copyable "shell-regular" >}}
 
