@@ -132,7 +132,7 @@ cdc cli changefeed update -c <changefeed-id> --sort-engine="unified" --sort-dir=
 >
 > + Since v4.0.9, TiCDC supports the unified sorter engine.
 > + TiCDC (the 4.0 version) does not support dynamically modifying the sorting engine yet. Make sure that the changefeed has stopped before modifying the sorter settings.
-> + `sort-dir` has different behaviors in different versions, please refer to [Compatibility notes for`sort-dir` and `data-dir`](/ticdc/ticdc-overview.md#compatiblity-notes-for-sort-dir-and-data-dir), and configures it with caution. 
+> + `sort-dir` has different behaviors in different versions, please refer to [Compatibility notes for`sort-dir` and `data-dir`](/ticdc/ticdc-overview.md#compatibility-notes-for-sort-dir-and-data-dir), and configures it with caution. 
 > + Currently, the unified sorter is an experimental feature. When the number of tables is too large (>=100), the unified sorter might cause performance issues and affect replication throughput. Therefore, it is not recommended to use it in a production environment. Before you enable the unified sorter, make sure that the machine of each TiCDC node has enough disk capacity. If the total size of unprocessed data changes might exceed 1 TB, it is not recommend to use TiCDC for replication.
 
 ## What is `gc-ttl` in TiCDC?
@@ -249,7 +249,7 @@ For more information, refer to [Create a replication task](/ticdc/manage-ticdc.m
 
 ## Why does the latency from TiCDC to Kafka become higher and higher?
 
-* Check [how do I view the status of TiCDC replication tasks](#how-do-i-view-the-status-of-ticdc-replication-tasks).
+* Check [how do I view the state of TiCDC replication tasks](#how-do-i-view-the-state-of-ticdc-replication-tasks).
 * Adjust the following parameters of Kafka:
 
     * Increase the `message.max.bytes` value in `server.properties` to `1073741824` (1 GB).
