@@ -19,7 +19,7 @@ This document describes how to use DM for incremental replication.
 
 DM relies on the `ROW`-formatted binlog for incremental replication, so you need to enable the binary logging for an Aurora MySQL cluster. For the configuration instructions, refer to Amazon's document [Enable binary for an Aurora Cluster](https://aws.amazon.com/premiumsupport/knowledge-center/enable-binary-logging-aurora/?nc1=h_ls).
 
-If GTID is enabled in Aurora, you can migrate data based on GTID. For how to enable it, see [Configuring GTID-Based Replication for an Aurora MySQL Cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/mysql-replication-gtid.html#mysql-replication-gtid.configuring-aurora). To migrate data based on GTID, you need to set `enable-gtid` to `true` in the configuration file of data source in step 2 [Configure the data source](#step-2-configure-the-data-source).
+If global transaction identifiers (GTIDs) are enabled in Aurora, you can migrate data based on GTIDs. For how to enable it, refer to Amazon's document [Configuring GTID-Based Replication for an Aurora MySQL Cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/mysql-replication-gtid.html#mysql-replication-gtid.configuring-aurora).
 
 > **Note:**
 >
