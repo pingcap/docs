@@ -13,7 +13,7 @@ If you need to configure a running TiDB cluster and its secondary cluster for re
 
 Each transaction written to TiDB is allocated a unique commit timestamp (commit TS). Through this TS, you can get the global consistency status of a TiDB cluster.
 
-The cluster data is exported from a globally consistent point in time by using BR or Dumpling. Then, TiDB Binlog is used to connect to this globally consistent point in time to start replicating the incremental data. That is, the replication process is divided into two processes: full replication and incremental replication.
+The cluster data is exported using BR or Dumpling at a globally consistent point in time. Then starting from this point in time, TiDB Binlog is used to replicate incremental data. That is, the replication process is divided into two stages: full replication and incremental replication.
 
 1. Perform a full backup restoration and get a commit TS of the data backup.
 2. Perform incremental replication. Make sure that the start time of incremental replication is the commit TS of the data backup.
