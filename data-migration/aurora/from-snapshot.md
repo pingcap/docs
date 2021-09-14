@@ -1,5 +1,5 @@
 ---
-title: Migrate from Amazon Aurora MySQL Using TiDB Lightning
+title: Migrate from Aurora snapshot to TiDB
 summary: Learn how to migrate full data from Amazon Aurora MySQL to TiDB using TiDB Lightning.
 ---
 
