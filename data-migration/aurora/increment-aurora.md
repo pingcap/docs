@@ -27,10 +27,6 @@ If GTID is enabled in Aurora, you can migrate data based on GTID. For how to ena
 
 ## Step 2. Configure the data source
 
-> **Note:**
->
-> In DM configuration files, it is recommended to use database passwords encrypted by `dmctl`. If a database password is empty, it is unnecessary to encrypt it. For how to encrypt the plaintext password, see [Encrypt the database password using dmctl](manage-source.md#encrypt-the-database-password).
-
 Save the following configuration files of data source according to the example, in which the value of `source-id` will be used in the task configuration in step 3.
 
 The content of `source1.yaml`:
@@ -45,7 +41,7 @@ enable-gtid: false
 from:
   host: "test-dm-2-0.cluster-czrtqco96yc6.us-east-2.rds.amazonaws.com"
   user: "root"
-  password: "OiG90CGm3CEbXan6ZSd/SUAsofxJAZo="
+  password: "OiG90CGm3CEbXan6ZSd/SUAsofxJAZo="  # It is recommended to use database passwords encrypted by `dmctl encrypt`,see [Encrypt the database password using dmctl](manage-source.md#encrypt-the-database-password)
   port: 3306
 ```
 
