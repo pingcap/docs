@@ -26,7 +26,7 @@ When you execute `cdc cli changefeed create` to create a replication task, TiCDC
 
 ## How do I view the state of TiCDC replication tasks?
 
-You can use `cdc cli` to view the state of TiCDC replication tasks. For example:
+To view the status of TiCDC replication tasks, use `cdc cli`. For example:
 
 {{< copyable "shell-regular" >}}
 
