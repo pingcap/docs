@@ -42,7 +42,7 @@ The parameters used in this step is as follows. For more parameters of Dumpling,
 
 ## Step 3. Create the TiDB Lightning configuration file 
 
-Based on different deployment methods, create the `tidb-lighting.toml` configuration file as follows:
+Create the `tidb-lighting.toml` configuration file as follows:
 
 {{< copyable "shell-regular" >}}
 
