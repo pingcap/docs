@@ -70,7 +70,7 @@ The expected output is as follows:
 
 ### How do I know whether the replication task is stopped manually?
 
-You can know whether the replication task is stopped manually by using `cdc cli`. For example: 
+You can know whether the replication task is stopped manually by executing `cdc cli`. For example: 
 
 {{< copyable "shell-regular" >}}
 
