@@ -82,7 +82,7 @@ In the output of the above command, `admin-job-type` shows the state of this rep
 * `0`: In progress, which means that the task is not stopped manually.
 * `1`: Paused. When the task is paused, all replicated `processor`s exit. The configuration and the replication status of the task are retained, so you can resume the task from `checkpiont-ts`.
 * `2`: Resumed. The replication task resumes from `checkpoint-ts`.
-* `3`: Removed. When the task is removed, all replicated `processor`s are ended, and the configuration information of the replication task is cleared up. Only the replication status is retained for later queries.
+* `3`: Removed. When the task is removed, all replicated `processor`s are ended, and the configuration information of the replication task is cleared up. The replication status is retained only for later queries.
 
 ### How do I handle replication interruptions?
 
