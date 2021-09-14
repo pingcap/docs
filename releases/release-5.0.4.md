@@ -163,4 +163,3 @@ TiDB version: 5.0.4
         - Better err msg when PD endpoint missing certificate [#2185](https://github.com/pingcap/ticdc/pull/2185)
         - Cleanup changefeed metrics when changefeed is removed.
         - Cleanup processor metrics when processor exits. [#2177](https://github.com/pingcap/ticdc/pull/2177)
-        - Fix the bug that table is not replicated when it changes from ineligible to eligible by DDL [#1488](https://github.com/pingcap/ticdc/pull/1488)
