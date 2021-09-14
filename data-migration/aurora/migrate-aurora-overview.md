@@ -9,9 +9,9 @@ This document describes how to migrate full data from Amazon Aurora MySQL to TiD
 
 |Tool|Data Export|Data Import|Increment Sync|Export Speed| Import Speed|
 |:-: |:-:|:-:|:-:|:-:|:-:|
-|[Dumpling](https://github.com/pingcap/dumpling)|Yes|No|No|Very Fast|-|
-|[Lightning](/tidb-lightning/tidb-lightning-overview.md)|No|Yes|No|-|Very Fast|
-|[Data Migration](https://github.com/pingcap/dm) (DM)|Yes|Yes|Yes|Very Fast | Normal|
+|[Dumpling](https://github.com/pingcap/dumpling)|Yes|No|No|Fast|-|
+|[Lightning](/tidb-lightning/tidb-lightning-overview.md)|No|Yes|No|-|Fast|
+|[Data Migration](https://github.com/pingcap/dm) (DM)|Yes|Yes|Yes|Fast| Normal|
 
 Using existing snapshot in Aurora is the most convenient way. However, [DM](https://github.com/pingcap/dm) does not yet support the parquet format, so you need to do the following:
 

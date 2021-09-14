@@ -17,7 +17,7 @@ This document describes how to use DM for incremental replication.
 
 ## Step 1. Precheck
 
-DM relies on the `ROW`-formatted binlog for incremental replication. For the configuration instructions, refer to Amazon's official document [Enable binary for an Aurora Cluster](https://aws.amazon.com/premiumsupport/knowledge-center/enable-binary-logging-aurora/?nc1=h_ls).
+DM relies on the `ROW`-formatted binlog for incremental replication, so you need to enable the binary logging for an Aurora MySQL cluster. For the configuration instructions, refer to Amazon's document [Enable binary for an Aurora Cluster](https://aws.amazon.com/premiumsupport/knowledge-center/enable-binary-logging-aurora/?nc1=h_ls).
 
 If GTID is enabled in Aurora, you can migrate data based on GTID. For how to enable it, see [Configuring GTID-Based Replication for an Aurora MySQL Cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/mysql-replication-gtid.html#mysql-replication-gtid.configuring-aurora). To migrate data based on GTID, you need to set `enable-gtid` to `true` in the configuration file of data source in step 2 [Configure the data source](#step-2-configure-the-data-source).
 
@@ -27,7 +27,7 @@ If GTID is enabled in Aurora, you can migrate data based on GTID. For how to ena
 
 ## Step 2. Configure the data source
 
-Save the following configuration files of data source according to the example, in which the value of `source-id` will be used in the task configuration in step 3.
+Configure the data source as follows:
 
 The content of `source1.yaml`:
 
@@ -72,9 +72,9 @@ When the data sources are successfully added, the return information of each dat
 
 > **Note:**
 >
-> Because Aurora does not support flushing tables with read lock (FTWRL), write operations have to be paused when you only perform the full data migration to export data. See [AWS documentation](https://aws.amazon.com/premiumsupport/knowledge-center/mysqldump-error-rds-mysql-mariadb/?nc1=h_ls) for details. In this example, both full data migration and incremental replication are performed, and DM automatically enables the `safe mode`to solve this pause issue. To ensure data consistency in other combinations of task mode, see [AWS documentation](https://aws.amazon.com/premiumsupport/knowledge-center/mysqldump-error-rds-mysql-mariadb/?nc1=h_ls).
+> Because Aurora does not support flushing tables with read lock (FTWRL), when you only perform the full data migration to export data, write operations have to be paused. See [AWS document] (https://aws.amazon.com/premiumsupport/knowledge-center/mysqldump-error-rds-mysql-mariadb/?nc1=h_ls) for details. In the following example, both full data migration and incremental replication are performed, and DM automatically enables the `safe mode` to solve the pause issue. To ensure data consistency in other task modes, refer to [AWS document](https://aws.amazon.com/premiumsupport/knowledge-center/mysqldump-error-rds-mysql-mariadb/?nc1=h_ls).
 
-This example migrates the existing data in Aurora and replicates incremental data to TiDB in real time, which is the **full data migration plus incremental replication** mode. According to the TiDB cluster information above, the added `source-id`, and the table to be migrated, save the following task configuration file `task.yaml`:
+This following example migrates the data in Aurora and incrementally replicates the data to TiDB in real time, which is the **full data migration plus incremental replication** mode. According to the TiDB cluster information above, the added `source-id`, and the table to be migrated, you can save the following task configuration file `task.yaml`:
 
 ```yaml
 # The task name. You need to use a different name for each of the multiple tasks that run simultaneously.
@@ -161,7 +161,7 @@ ignore-checking-items: ["replication_privilege","dump_privilege"]
 
 ## Step 5. Query the task and validate the data
 
-Use `dmctl` through TiUP to query information of the on-going migration task and the task status.
+Check the information of the on-going migration task and the task status using `dmctl` through TiUP.
 
 {{< copyable "shell-regular" >}}
 

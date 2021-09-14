@@ -86,7 +86,8 @@ type = '$3'
 > **Note:**
 >
 > - If TLS is enabled in the target TiDB cluster, you also need to configure TLS.
-> - For more configurations, see [TiDB Lightning Configuration](/tidb-lightning/tidb-lightning-configuration.md).
+
+For more configurations, refer to [TiDB Lightning Configuration](/tidb-lightning/tidb-lightning-configuration.md).
 
 ## Step 4. Create table schemas in TiDB
 
@@ -106,7 +107,7 @@ In this example, TiDB Lightning is only used to create table schemas, so the abo
 
 ## Step 5. Import data into TiDB using TiDB Lightning
 
-Run TiDB Lightning to start the import operation. 
+Execute the following commands to start to import using TiDB Lightning:
 
 {{< copyable "shell-regular" >}}
 
