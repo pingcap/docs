@@ -13,11 +13,7 @@ This document only describes the parameters that are not included in command-lin
 
 ## Global configuration
 
-<<<<<<< HEAD
-### abort-on-panic <span class="version-mark">New in v5.0.2</span>
-=======
-### `abort-on-panic`
->>>>>>> f4df9ba2f (TiKV config: add 7 log-related congifurations (#6372))
+### `abort-on-panic` <span class="version-mark">New in v5.0.2</span>
 
 + Sets whether to call `abort()` to exit the process when TiKV panics. This option affects whether TiKV allows the system to generate core dump files.
 
