@@ -108,7 +108,7 @@ A replication task might be interrupted in the following known scenarios:
     - In this scenario, TiCDC saves the task information. Because TiCDC has set the service GC safepoint in PD, the data after the task checkpoint is not cleaned by TiKV GC within the valid period of `gc-ttl`.
     - Handling procedures:
         1. Pause the replication task by executing `cdc cli changefeed pause -c <changefeed-id>`. 
-        2. Wait for about one munite and then resume the replication task through `cdc cli changefeed resume -c <changefeed-id>`.
+        2. Wait for about one munite, and then resume the replication task by executing `cdc cli changefeed resume -c <changefeed-id>`.
 
 ### What should I do to handle the OOM that occurs after TiCDC is restarted after a task interruption?
 
