@@ -122,6 +122,7 @@ cdc cli changefeed update -c <changefeed-id> --sort-engine="unified" --pd=http:/
 ```
 
 If you fail to update your cluster to above new versions, the Unified Sorter can still be enabled in **previous versions**. You can pass `--sort-engine=unified` and `--sort-dir=/path/to/sort_dir` to the `cdc cli` command when creating a replication task. For example:
+
 {{< copyable "shell-regular" >}}
 
 ```shell
