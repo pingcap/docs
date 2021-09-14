@@ -111,7 +111,7 @@ A replication task might be interrupted in the following known scenarios:
 
 ### What should I do to handle the OOM that occurs after TiCDC is restarted after a task interruption?
 
-- Update TiDB cluster and TiCDC cluster to their latest versions. The OOM problem has already been resolved in **v4.0.14 and later v4.0 versions, v5.0.2 and later v5.0 versions, and the newest versions**. 
+- Update your TiDB cluster and TiCDC cluster to the latest versions. The OOM problem has already been resolved in **v4.0.14 and later v4.0 versions, v5.0.2 and later v5.0 versions, and the latest versions**. 
 
 - In the above updated versions, you can enable the Unified Sorter to help you sort data in the disk when the system memory is insufficient. To enable this function, you can pass `--sort-engine=unified` to the `cdc cli` command when creating a replication task. For example:
 
