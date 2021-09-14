@@ -26,7 +26,7 @@ You need to use BR or Dumpling to export the cluster data at a specific point in
 
 Suppose that the existing cluster A works properly. First, you need to create a new cluster B as the secondary cluster of cluster A and then replicate the incremental data in cluster A to cluster B in real time. See the following steps for instruction.
 
-### Step 1: enable TiDB Binlog
+### Step 1. Enable TiDB Binlog
 
 Make sure that TiDB Binlog has been deployed and enabled in cluster A.
 
