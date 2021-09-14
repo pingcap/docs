@@ -12,7 +12,60 @@ The TiKV configuration file supports more options than command-line parameters. 
 
 This document only describes the parameters that are not included in command-line parameters. For more details, see [command-line parameter](/command-line-flags-for-tikv-configuration.md).
 
+<<<<<<< HEAD
 ### server
+=======
+## Global configuration
+
+### `abort-on-panic`
+
++ Sets whether to call `abort()` to exit the process when TiKV panics. This option affects whether TiKV allows the system to generate core dump files.
+
+    + If the value of this configuration item is `false`, when TiKV panics, it calls `exit()` to exit the process.
+    + If the value of this configuration item is `true`, when TiKV panics, TiKV calls `abort()` to exit the process. At this time, TiKV allows the system to generate core dump files when exiting. To generate the core dump file, you also need to perform the system configuration related to core dump (for example, setting the size limit of the core dump file via `ulimit -c` command, and configure the core dump path. Different operating systems have different related configurations). To avoid the core dump files occupying too much disk space and causing insufficient TiKV disk space, it is recommended to set the core dump generation path to a disk partition different to that of TiKV data.
+
++ Default value: `false`
+
+### `log-level`
+
++ The log level
++ Value options: "trace", "debug", "info", "warning", "error", "critical"
++ Default value: "info"
+
+### `log-file`
+
++ The log file. If this configuration is not set, logs are output to "stderr" by default.
++ Default value: ""
+
+### `log-format`
+
++ The log format
++ Value options: "json", "text"
++ Default value: "text"
+
+### `log-rotation-timespan`
+
++ The timespan between log rotations. When this timespan passes, log files are rotated, that is, a timestamp is appended to the file name of the current log file, and a new file is created.
++ Default value: "24h"
+
+### `log-rotation-size`
+
++ The size of a log file that triggers log rotation. Once the size of a log file is bigger than the specified threshold value, log files are rotated. The old log file is placed into the new file, and the new file name is the old file name with a timestamp suffix.
++ Default value: "300MB"
+
+### `slow-log-file`
+
++ The file to store slow logs
++ If this configuration is not set but `log-file` is set, slow logs are output to the log file specified by `log-file`. If neither `slow-log-file` nor `log-file` are set, all logs are output to "stderr".
++ Default value: ""
+
+### `slow-log-threshold`
+
++ The threshold for outputing slow logs. If the processing time is longer than this threshold, slow logs are output.
++ Default value: "1s"
+
+## server
+>>>>>>> f4df9ba2f (TiKV config: add 7 log-related congifurations (#6372))
 
 + Configuration items related to the server
 
@@ -104,7 +157,7 @@ This document only describes the parameters that are not included in command-lin
 
 ### `end-point-slow-log-threshold`
 
-+ The time threshold for a TiDB's push down request to print slow log
++ The time threshold for a TiDB's push-down request to output slow log. If the processing time is longer than this threshold, the slow logs are output.
 + Default value: `"1s"`
 + Minimum value: `0`
 
