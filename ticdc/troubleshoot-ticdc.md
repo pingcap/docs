@@ -57,7 +57,7 @@ The expected output is as follows:
 
 > **Note:**
 >
-> This feature is introduced in TiCDC version 4.0.3.
+> This feature is introduced in TiCDC 4.0.3.
 
 ## TiCDC replication interruptions
 
