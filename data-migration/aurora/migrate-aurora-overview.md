@@ -13,7 +13,7 @@ This document describes how to migrate full data from Amazon Aurora MySQL to TiD
 |[Lightning](/tidb-lightning/tidb-lightning-overview.md)|No|Yes|No|-|Fast|
 |[Data Migration](https://github.com/pingcap/dm) (DM)|Yes|Yes|Yes|Fast| Normal|
 
-Using existing snapshot in Aurora is the most convenient way. However, [DM](https://github.com/pingcap/dm) does not yet support the parquet format, so you need to do the following:
+Using the existing snapshot in Aurora is the most convenient way. However, [DM](https://github.com/pingcap/dm) does not yet support the parquet format, so for different task mode, you need to use different tools as follows:
 
 1. Use Dumpling for schema export.
 2. Use TiDB Lightning for full schema and data import. 
