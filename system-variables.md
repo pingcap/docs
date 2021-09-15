@@ -84,6 +84,12 @@ mysql> SELECT * FROM t1;
 - Default value: `ON`
 - Controls whether statements should automatically commit when not in an explicit transaction. See [Transaction Overview](/transaction-overview.md#autocommit) for more information.
 
+### block_encryption_mode
+
+- Scope: SESSION | GLOBAL
+- Default value: `aes-128-ecb`
+- Defines the encryption mode for the `AES_ENCRYPT()` and `AES_DECRYPT()` functions.
+
 ### character_set_client
 
 - Scope: SESSION | GLOBAL
@@ -112,7 +118,25 @@ mysql> SELECT * FROM t1;
 
 - Scope: SESSION | GLOBAL
 - Default value: `utf8mb4`
-- The character set used for new schemas when no character set is specified in the `CREATE SCHEMA` statement.
+- The default character set for the server.
+
+### collation_connection
+
+- Scope: SESSION | GLOBAL
+- Default value: `utf8mb4_bin`
+- The collation for string literals that do not have a specified collation.
+
+### collation_database
+
+- Scope: SESSION | GLOBAL
+- Default value: `utf8mb4_bin`
+- This variable indicates the collation of the default database that is in use. **It is NOT recommended to set this variable**. When a new default database is selected, the server changes the variable value.
+
+### collation_server
+
+- Scope: SESSION | GLOBAL
+- Default value: `utf8mb4_bin`
+- The default collation for the server.
 
 ### cte_max_recursion_depth
 
@@ -142,11 +166,43 @@ mysql> SELECT * FROM t1;
 - This variable sets the authentication method that the server advertises when the server-client connection is being established. Possible values for this variable are documented in [Authentication plugin status](/security-compatibility-with-mysql.md#authentication-plugin-status).
 - Value options: `mysql_native_password` and `caching_sha2_password`. For more details, see [Authentication plugin status](/security-compatibility-with-mysql.md#authentication-plugin-status).
 
+### default_week-format
+
+- Scope: SESSION | GLOBAL
+- Default value: `0`
+- Range: `[0, 7]`
+- Set the week format used by the `WEEK()` function
+
+### error_count
+
+- Scope: SESSION
+- Default value: `0`
+- This variable exists only for MySQL compatibility and is always `0` in TiDB.
+
 ### foreign_key_checks
 
 - Scope: SESSION | GLOBAL
 - Default value: `OFF`
 - For compatibility, TiDB returns foreign key checks as `OFF`.
+
+### group_concat_max_len
+
+- Scope: SESSION | GLOBAL
+- Default value: `1024`
+- Range: `[4, 18446744073709551615]`
+- The maximum number of elements for the `GROUP_CONCAT()` function.
+
+### have_openssl
+
+- Scope: NONE
+- Default value: `DISABLED`
+- MySQL compatibiltiy read-only variable. Set to `YES` when the server has TLS enabled.
+
+### have_ssl
+
+- Scope: NONE
+- Default value: `DISABLED`
+- MySQL compatibiltiy read-only variable. Set to `YES` when the server has TLS enabled.
 
 ### hostname
 
@@ -174,6 +230,12 @@ mysql> SELECT * FROM t1;
 - Range: `[1, 31536000]`
 - Unit: Seconds
 - This variable represents the idle timeout of the interactive user session, which is measured in seconds. Interactive user session refers to the session established by calling [`mysql_real_connect()`](https://dev.mysql.com/doc/c-api/5.7/en/mysql-real-connect.html) API using the `CLIENT_INTERACTIVE` option (for example, MySQL shell client). This variable is fully compatible with MySQL.
+
+### last_insert_id
+
+- Scope: SESSION
+- Default value: ""
+- MySQL Compatibility variable. Not used in TiDB. Use the `LAST_INSERT_ID()` function instead.
 
 ### last_plan_from_binding <span class="version-mark">New in v4.0</span>
 
