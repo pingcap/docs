@@ -255,6 +255,20 @@ mysql> SELECT * FROM t1;
 - Default value: `Apache License 2.0`
 - This variable indicates the license of your TiDB server installation.
 
+### max_allowed_packet
+
+- Scope: GLOBAL | SESSION
+- Default value: `67108864`
+- Range: `[1024, 1073741824]`
+- Maximum size of a packet for the MySQL protocol
+
+### max_connections
+
+- Scope: GLOBAL
+- Default value: `151
+- Range: `[1, 100000]`
+- MySQL Compatibility variable. Not used in TiDB.
+
 ### max_execution_time
 
 - Scope: SESSION | GLOBAL
@@ -292,6 +306,24 @@ mysql> SELECT * FROM t1;
 - Default value: `18446744073709551615`
 - Range: `[0, 18446744073709551615]`
 - The maximum number of rows returned by the `SELECT` statements.
+
+### ssl_ca
+
+- Scope: NONE
+- Default value: ""
+- The location of the certificate authority file if specified on startup.
+
+### ssl_cert
+
+- Scope: NONE
+- Default value: ""
+- The location of the certificate file that is used for SSL/TLS connections if specified on startup.
+
+### ssl_key
+
+- Scope: NONE
+- Default value: ""
+- The location of the private key file that is used for SSL/TLS connections if specified on startup.
 
 ### system_time_zone
 
