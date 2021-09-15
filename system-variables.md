@@ -166,7 +166,7 @@ mysql> SELECT * FROM t1;
 - This variable sets the authentication method that the server advertises when the server-client connection is being established. Possible values for this variable are documented in [Authentication plugin status](/security-compatibility-with-mysql.md#authentication-plugin-status).
 - Value options: `mysql_native_password` and `caching_sha2_password`. For more details, see [Authentication plugin status](/security-compatibility-with-mysql.md#authentication-plugin-status).
 
-### default_week-format
+### default_week_format
 
 - Scope: SESSION | GLOBAL
 - Default value: `0`
