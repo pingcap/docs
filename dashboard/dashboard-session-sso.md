@@ -186,6 +186,8 @@ Similar with Okta, [Auth0](https://auth0.com/) also provides OIDC SSO identity s
 
    Similarly, substitute `DASHBOARD_IP:PORT` with the actual domain (or IP address) and port.
 
+   ![Settings](/media/dashboard/dashboard-session-sso-auth0-settings-2.png)
+
 7. Keep default value for other settings and click **Save Changes**.
 
 ### Step 2: Obtain OIDC information and fill in TiDB Dashboard
