@@ -166,7 +166,7 @@ mysql> SELECT * FROM t1;
 - This variable sets the authentication method that the server advertises when the server-client connection is being established. Possible values for this variable are documented in [Authentication plugin status](/security-compatibility-with-mysql.md#authentication-plugin-status).
 - Value options: `mysql_native_password` and `caching_sha2_password`. For more details, see [Authentication plugin status](/security-compatibility-with-mysql.md#authentication-plugin-status).
 
-### default_week-format
+### default_week_format
 
 - Scope: SESSION | GLOBAL
 - Default value: `0`
@@ -190,7 +190,7 @@ mysql> SELECT * FROM t1;
 - Scope: SESSION | GLOBAL
 - Default value: `1024`
 - Range: `[4, 18446744073709551615]`
-- The maximum number of elements for the `GROUP_CONCAT()` function.
+- The maximum buffer size for items in the `GROUP_CONCAT()` function.
 
 ### have_openssl
 
