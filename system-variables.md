@@ -190,7 +190,7 @@ mysql> SELECT * FROM t1;
 - Scope: SESSION | GLOBAL
 - Default value: `1024`
 - Range: `[4, 18446744073709551615]`
-- The maximum number of elements for the `GROUP_CONCAT()` function.
+- The maximum buffer size for items in the `GROUP_CONCAT()` function.
 
 ### have_openssl
 
