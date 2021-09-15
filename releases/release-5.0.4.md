@@ -35,6 +35,18 @@ TiDB version: 5.0.4
 + TiDB
 
     - Trigger auto-analyze based on histogram row count [#26707](https://github.com/pingcap/tidb/pull/26707)
+    - block the tiflash node for a period when it fails before. [#26757](https://github.com/pingcap/tidb/pull/26757)
+    - Increasing the split region limit makes the split table and pre split more stable [#26657](https://github.com/pingcap/tidb/pull/26657)
+    - support retry for mpp query [#26483](https://github.com/pingcap/tidb/pull/26483)
+    - check the tiflash availabilities before launching mpp queries. [#26356](https://github.com/pingcap/tidb/pull/26356)
+    - support stable result mode [#26084](https://github.com/pingcap/tidb/pull/26084)
+    - TiDB now supports the mysql system variable init_connect and associated functionality. [#26072](https://github.com/pingcap/tidb/pull/26072)
+    - thoroughly push down count-distinct agg in the MPP mode. [#25861](https://github.com/pingcap/tidb/pull/25861)
+    - Log warnings when agg function can not be pushdown in explain statement [#25736](https://github.com/pingcap/tidb/pull/25736)
+    - Add err label for TiFlashQueryTotalCounter [#25327](https://github.com/pingcap/tidb/pull/25327)
+    - add table name in log [#24802](https://github.com/pingcap/tidb/pull/24802)
+    - Support getting the MVCC key of the secondary index in a clustered index table by HTTP API. [#24470](https://github.com/pingcap/tidb/pull/24470)
+    - Optimize the parser object allocation in the prepared statement. [#24371](https://github.com/pingcap/tidb/pull/24371)
 
 + TiKV
 
@@ -51,24 +63,26 @@ TiDB version: 5.0.4
 + TiDB
 
     - tidb panic while query hash partition table with is null condition [#26963](https://github.com/pingcap/tidb/pull/26963)
-    - planner: fix the unstable test case TestAnalyzeIncremental [#26851](https://github.com/pingcap/tidb/pull/26851)
     - Keep the overflow check logic same with mysql [#26724](https://github.com/pingcap/tidb/pull/26724)
     - Fix wrong charset and collation for case when function [#26672](https://github.com/pingcap/tidb/pull/26672)
-    - Fix the case that TiDB would return the wrong result when the children of the UNION contain pure NULL values [#26571](https://github.com/pingcap/tidb/pull/26571)
-    - Fix the issue that greatest(datetime) union null returns empty string [#26565](https://github.com/pingcap/tidb/pull/26565)
-    - fix incompatible last_day func behavior in sql mode [#26000](https://github.com/pingcap/tidb/pull/26000)
     - Fix the issue that committing pessimistic transactions may report write-conflict errors. [#25974](https://github.com/pingcap/tidb/pull/25974)
-    - Fix the wrong result after "insert ignore on duplicate update" in the secondary index has the same column in primary key but has prefix length [#25905](https://github.com/pingcap/tidb/pull/25905)
-    - Fix the wrong result for "insert ignore duplicate up" on partition table when handle changed and duplicated on secondary index [#25859](https://github.com/pingcap/tidb/pull/25859)
-    - fix wrong enum key in point get [#24772](https://github.com/pingcap/tidb/pull/24772)
+    - Fix the issue that point get does not use lite version resolve lock [#26560](https://github.com/pingcap/tidb/pull/26560)
+    - Fix the bug that index keys in a pessimistic transaction may be repeatedly committed. [#26495](https://github.com/pingcap/tidb/pull/26495)
+    - Fix the issue that TiDB may panic when resolving async-commit locks. [#25863](https://github.com/pingcap/tidb/pull/25863)
+    - check filter condition in func convertToPartialTableScan [#25806](https://github.com/pingcap/tidb/pull/25806)
+    - Important security issue for handling ALTER USER statements [#25348](https://github.com/pingcap/tidb/pull/25348)
+    - Fix a bug that a new cluster's "tidb_gc_scan_lock_mode" global variable shows "PHYSICAL" instead of the actual default mode "LEGACY". [#25118](https://github.com/pingcap/tidb/pull/25118)
+    - Fix the bug that TIKV_REGION_PEERS table did not have the correct DOWN status. [#24919](https://github.com/pingcap/tidb/pull/24919)
+    - Handle a potential statistic object's memory leak when HTTP api is used [#24649](https://github.com/pingcap/tidb/pull/24649)
+    - SQL Views now consider the default roles associated with the SQL DEFINER correctrly. [#24532](https://github.com/pingcap/tidb/pull/24532)
+    - Set the return value to 0 if --help is passed to cli, for golang below version 1.15 [#24074](https://github.com/pingcap/tidb/pull/24074)
     - fix dml_batch_size doesn't load the global variable [#24731](https://github.com/pingcap/tidb/pull/24731)
-    - planner: filter conflict read_from_storage hints [#24374](https://github.com/pingcap/tidb/pull/24374)
+    - filter conflict read_from_storage hints [#24374](https://github.com/pingcap/tidb/pull/24374)
     - fix wrong type infer for agg function when type is null. [#24354](https://github.com/pingcap/tidb/pull/24354)
-    - fix wrong flen infer for bit constant [#24267](https://github.com/pingcap/tidb/pull/24267)
     - fix some potential panic in statistics [#24061](https://github.com/pingcap/tidb/pull/24061)
     - fix approx_percent panic on bit column [#23703](https://github.com/pingcap/tidb/pull/23703)
-    - fix get var expr when session var is hex literal [#23373](https://github.com/pingcap/tidb/pull/23373)
-    - fix unexpected constant fold when year compare string. [#23336](https://github.com/pingcap/tidb/pull/23336)
+    - Fix copt-cache metrics, it will display the number of hits/miss/evict on Grafana. [#26343](https://github.com/pingcap/tidb/pull/26343)
+    - Fix the issue that concurrently truncating the same partition hangs DDL. [#26238](https://github.com/pingcap/tidb/pull/26238)
 
 + TiKV
 
@@ -105,48 +119,6 @@ TiDB version: 5.0.4
     - Fix the bug that PD may panic during scaling out TiKV. [#3910](https://github.com/tikv/pd/pull/3910)
 
 ## 以下 note 未分类。请将以下 note 进行分类 (Feature enhancements, Improvements, Bug fixes, Compatibility Changes 四类)，并移动到上面对应的标题下。如果某条 note 为多余的，请删除。如果漏抓取了 note，请手动补充
-
-+ TiDB
-
-    - fix wrong selection push down when having above agg [#27742](https://github.com/pingcap/tidb/pull/27742)
-    - fix expression rewrite makes between expr infers wrong collation. [#27548](https://github.com/pingcap/tidb/pull/27548)
-    - make `group_concat` function consider the collation [#27528](https://github.com/pingcap/tidb/pull/27528)
-    - Fix bug that count disctinct on multi-columns return wrong result when new collation is on. [#27507](https://github.com/pingcap/tidb/pull/27507)
-    - Fix an issue that the `TABLESAMPLE` query result from partitioned tables is not sorted as expected. [#27412](https://github.com/pingcap/tidb/pull/27412)
-    - expression: fix extract bug when argument is a negative duration [#27368](https://github.com/pingcap/tidb/pull/27368)
-    - planner: add missing column for Apply convert to Join [#27283](https://github.com/pingcap/tidb/pull/27283)
-    - The undocumented `/debug/sub-optimal-plan`  HTTP API has been removed. [#27263](https://github.com/pingcap/tidb/pull/27263)
-    - executor: fix unexpected behavior when casting invalid string to date [#27110](https://github.com/pingcap/tidb/pull/27110)
-    - Fix an issue that NO_ZERO_IN_DATE does not work on the default values. [#26903](https://github.com/pingcap/tidb/pull/26903)
-    - store/copr: block the tiflash node for a period when it fails before. [#26757](https://github.com/pingcap/tidb/pull/26757)
-    - Increasing the split region limit makes the split table and pre split more stable [#26657](https://github.com/pingcap/tidb/pull/26657)
-    - Fix the issue that point get does not use lite version resolve lock [#26560](https://github.com/pingcap/tidb/pull/26560)
-    - Fix the bug that index keys in a pessimistic transaction may be repeatedly committed. [#26495](https://github.com/pingcap/tidb/pull/26495)
-    - store/copr: support retry for mpp query [#26483](https://github.com/pingcap/tidb/pull/26483)
-    - Support set tidb_enforce_mpp=1 to enforce use mpp mode. [#26382](https://github.com/pingcap/tidb/pull/26382)
-    - mpp: check the tiflash availabilities before launching mpp queries. [#26356](https://github.com/pingcap/tidb/pull/26356)
-    - Fix copt-cache metrics, it will display the number of  hits/miss/evict on Grafana. [#26343](https://github.com/pingcap/tidb/pull/26343)
-    - fix a bug on the query range of prefix index [#26261](https://github.com/pingcap/tidb/pull/26261)
-    - Fix the issue that concurrently truncating the same partition hangs DDL. [#26238](https://github.com/pingcap/tidb/pull/26238)
-    - Change the lock record into put record for the index keys using point/batch point get for update read. [#26224](https://github.com/pingcap/tidb/pull/26224)
-    - load: fix load data with non-utf8 can succeed [#26143](https://github.com/pingcap/tidb/pull/26143)
-    - planner: support stable result mode [#26084](https://github.com/pingcap/tidb/pull/26084)
-    - TiDB now supports the mysql system variable init_connect and associated functionality. [#26072](https://github.com/pingcap/tidb/pull/26072)
-    - Enlarge the variable tidb_stmt_summary_max_stmt_count default value from 200 to 3000 [#25873](https://github.com/pingcap/tidb/pull/25873)
-    - Fix the issue that TiDB may panic when resolving async-commit locks. [#25863](https://github.com/pingcap/tidb/pull/25863)
-    - planner/core: thoroughly push down count-distinct agg in the MPP mode. [#25861](https://github.com/pingcap/tidb/pull/25861)
-    - planner: check filter condition in func convertToPartialTableScan [#25806](https://github.com/pingcap/tidb/pull/25806)
-    - Log warnings when agg function can not be pushdown in explain statement [#25736](https://github.com/pingcap/tidb/pull/25736)
-    - Important security issue for handling ALTER USER statements [#25348](https://github.com/pingcap/tidb/pull/25348)
-    - metrics: Add err label for TiFlashQueryTotalCounter [#25327](https://github.com/pingcap/tidb/pull/25327)
-    - Fix a bug that a new cluster's "tidb_gc_scan_lock_mode" global variable shows "PHYSICAL" instead of the actual default mode "LEGACY". [#25118](https://github.com/pingcap/tidb/pull/25118)
-    - Fix the bug that TIKV_REGION_PEERS table did not have the correct DOWN status. [#24919](https://github.com/pingcap/tidb/pull/24919)
-    - add table name in log [#24802](https://github.com/pingcap/tidb/pull/24802)
-    - Handle a potential statistic object's memory leak when HTTP api is used [#24649](https://github.com/pingcap/tidb/pull/24649)
-    - SQL Views now consider the default roles associated with the SQL DEFINER correctrly. [#24532](https://github.com/pingcap/tidb/pull/24532)
-    - Support getting the MVCC key of the secondary index in a clustered index table by HTTP API. [#24470](https://github.com/pingcap/tidb/pull/24470)
-    - Optimize the parser object allocation in the prepared statement. [#24371](https://github.com/pingcap/tidb/pull/24371)
-    - Set the return value to 0 if --help is passed to cli, for golang below version 1.15 [#24074](https://github.com/pingcap/tidb/pull/24074)
 
 + PD
 
