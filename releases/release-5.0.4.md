@@ -14,6 +14,22 @@ TiDB version: 5.0.4
 
     - Revert #19341 to avoid #24326 [#26258](https://github.com/pingcap/tidb/pull/26258)
 
+## Feature enhancements
+
++ TiDB
+
+- Support set `tidb_enforce_mpp=1` to enforce use mpp mode [#26382](https://github.com/pingcap/tidb/pull/26382)
+
++ TiKV
+
+    - Support changing CDC configs dynamically [#10685](https://github.com/tikv/tikv/pull/10685)
+
++ TiFlash
+
+    - Support the `HAVING()` function in DAG requests
+    - Support the `DATE()` function
+    - Add Grafana panels for write throughput per instance
+
 ## Improvements
 
 + TiDB
@@ -22,7 +38,13 @@ TiDB version: 5.0.4
 
 + TiKV
 
-    - separate read write ready to reduce read latency [#10620](https://github.com/tikv/tikv/pull/10620)
+    - Reduce resolved ts message size to save network bandwidth. [#10678](https://github.com/tikv/tikv/pull/10678)
+    - Drop log instead of blocking threads when slogger thread is overloaded and queue is filled up. [#10864](https://github.com/tikv/tikv/pull/10864)
+    - TiKV coprocessor slow log will only consider time spent on processing the request. [#10864](https://github.com/tikv/tikv/pull/10864)
+    - Make prewrite as idempotent as possible to reduce the chance of undetermined errors. [#10587](https://github.com/tikv/tikv/pull/10587)
+    - Avoid false "GC can not work" alert under low write flow. [#10662](https://github.com/tikv/tikv/pull/10662)
+    - Database restored from BR or Lightning Local-backend is now smaller, should be matching the original cluster size when backed up. [#10643](https://github.com/tikv/tikv/pull/10643)
+    - Ensure panic output is flushed to the log [#10487](https://github.com/tikv/tikv/pull/10487)
 
 ## Bug Fixes
 
@@ -47,6 +69,34 @@ TiDB version: 5.0.4
     - fix approx_percent panic on bit column [#23703](https://github.com/pingcap/tidb/pull/23703)
     - fix get var expr when session var is hex literal [#23373](https://github.com/pingcap/tidb/pull/23373)
     - fix unexpected constant fold when year compare string. [#23336](https://github.com/pingcap/tidb/pull/23336)
+
++ TiKV
+
+    - RaftStore Snapshot GC fix: fix the issue that snapshot GC missed GC snapshot files when there's one snapshot file failed to be GC-ed. [#10872](https://github.com/tikv/tikv/pull/10872)
+    - Fix TiKV panic when enable Titan and upgrade from pre-5.0 version [#10843](https://github.com/tikv/tikv/pull/10843)
+    - Fix newer TiKV can't rollback to 5.0.x [#10843](https://github.com/tikv/tikv/pull/10843)
+    - Fix TiKV panic when Titan is enabled and upgrade from < 5.0 versions to >= 5.0 versions. A cluster may hit the issue if it was upgraded from TiKV 3.x and enabled Titan before the upgrade in the past. [#10778](https://github.com/tikv/tikv/pull/10778)
+    - Fix the resolve failures caused by the left pessimisic locks. [#10654](https://github.com/tikv/tikv/pull/10654)
+    - Fix duration calculation panics on certain platforms [#10571](https://github.com/tikv/tikv/pull/10571)
+    - Fix unencoded keys of `batch_get_command` in load-base-split [#10564](https://github.com/tikv/tikv/pull/10564)
+
++ TiFlash
+
+    - Fix the potential panic issue that occurs when running table scan tasks
+    - Fix the potential memory leak issue that occurs when executing `MPP` tasks
+    - Fix a bug that TiFlash raises the error about `duplicated region` when handling `DAQ` requests
+    - Fix the issue of unexpected results when executing the aggregation functions `COUNT` or `COUNT DISTINCT`
+    - Fix the potential panic issue that occurs when executing `MPP` tasks
+    - Fix a potential bug that TiFlash cannot restore data when deployed on multiple disks
+    - Fix the potential panic issue that occurs when deconstructing `SharedQueryBlockInputStream`
+    - Fix the potential panic issue that occurs when deconstructing `MPPTask`
+    - Fix the issue of unexpected results when TiFlash failed to establish `MPP` connections
+    - Fix the potential panic issue that occurs when resolving locks
+    - Fix the issue that store size in metrics is inaccurate under heavy writing
+    - Fix a bug of incorrect results that occurs when queries contain filters like `CONSTANT` `<` | `<=` | `>` | `>=` `COLUMN`
+    - Fix the potential issue that TiFlash cannot GC the delta data after running for a long time
+    - Fix a potential bug that metrics display wrong value
+    - Fix the potential issue of data inconsistency that occurs when deployed on multiple disks
 
 + PD
 
@@ -97,24 +147,6 @@ TiDB version: 5.0.4
     - Support getting the MVCC key of the secondary index in a clustered index table by HTTP API. [#24470](https://github.com/pingcap/tidb/pull/24470)
     - Optimize the parser object allocation in the prepared statement. [#24371](https://github.com/pingcap/tidb/pull/24371)
     - Set the return value to 0 if --help is passed to cli, for golang below version 1.15 [#24074](https://github.com/pingcap/tidb/pull/24074)
-
-+ TiKV
-
-    - RaftStore Snapshot GC fix: fix the issue that snapshot GC missed GC snapshot files when there's one snapshot file failed to be GC-ed. [#10872](https://github.com/tikv/tikv/pull/10872)
-    - TiKV coprocessor slow log will only consider time spent on processing the request. [#10864](https://github.com/tikv/tikv/pull/10864)
-    - Drop log instead of blocking threads when slogger thread is overloaded and queue is filled up. [#10864](https://github.com/tikv/tikv/pull/10864)
-    - Fix TiKV panic when enable Titan and upgrade from pre-5.0 version [#10843](https://github.com/tikv/tikv/pull/10843)
-    - Fix newer TiKV can't rollback to 5.0.x [#10843](https://github.com/tikv/tikv/pull/10843)
-    - Fix TiKV panic when Titan is enabled and upgrade from < 5.0 versions to >= 5.0 versions. A cluster may hit the issue if it was upgraded from TiKV 3.x and enabled Titan before the upgrade in the past. [#10778](https://github.com/tikv/tikv/pull/10778)
-    - Support changing CDC configs dynamically [#10685](https://github.com/tikv/tikv/pull/10685)
-    - Reduce resolved ts message size to save network bandwidth. [#10678](https://github.com/tikv/tikv/pull/10678)
-    - Avoid false "GC can not work" alert under low write flow. [#10662](https://github.com/tikv/tikv/pull/10662)
-    - Fix the resolve failures caused by the left pessimisic locks. [#10654](https://github.com/tikv/tikv/pull/10654)
-    - Database restored from BR or Lightning Local-backend is now smaller, should be matching the original cluster size when backed up. [#10643](https://github.com/tikv/tikv/pull/10643)
-    - Make prewrite as idempotent as possible to reduce the chance of undetermined errors. [#10587](https://github.com/tikv/tikv/pull/10587)
-    - Fix duration calculation panics on certain platforms [#10571](https://github.com/tikv/tikv/pull/10571)
-    - Fix unencoded keys of `batch_get_command` in load-base-split [#10564](https://github.com/tikv/tikv/pull/10564)
-    - Ensure panic output is flushed to the log [#10487](https://github.com/tikv/tikv/pull/10487)
 
 + PD
 
