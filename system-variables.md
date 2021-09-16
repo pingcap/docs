@@ -172,12 +172,6 @@ mysql> SELECT * FROM t1;
 - Range: `[0, 7]`
 - Set the week format used by the `WEEK()` function
 
-### error_count
-
-- Scope: SESSION
-- Default value: `0`
-- This variable exists only for MySQL compatibility and is always `0` in TiDB.
-
 ### foreign_key_checks
 
 - Scope: SESSION | GLOBAL
@@ -229,12 +223,6 @@ mysql> SELECT * FROM t1;
 - Range: `[1, 31536000]`
 - Unit: Seconds
 - This variable represents the idle timeout of the interactive user session, which is measured in seconds. Interactive user session refers to the session established by calling [`mysql_real_connect()`](https://dev.mysql.com/doc/c-api/5.7/en/mysql-real-connect.html) API using the `CLIENT_INTERACTIVE` option (for example, MySQL shell client). This variable is fully compatible with MySQL.
-
-### last_insert_id
-
-- Scope: SESSION
-- Default value: ""
-- MySQL Compatibility variable. Not used in TiDB. Use the `LAST_INSERT_ID()` function instead.
 
 ### last_plan_from_binding <span class="version-mark">New in v4.0</span>
 
