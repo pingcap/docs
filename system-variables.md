@@ -213,13 +213,13 @@ mysql> SELECT * FROM t1;
 
 ### plugin_dir
 
-- Scope: SESSION
+- Scope: INSTANCE
 - Default value: ""
 - The directory to load plugins from as set by the commandline flag.
 
 ### plugin_load
 
-- Scope: SESSION
+- Scope: INSTANCE
 - Default value: ""
 - Wait for loading of named plugins on startup. Plugins are separated by commas. This is set by a commandline flag.
 
