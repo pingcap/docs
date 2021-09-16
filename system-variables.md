@@ -193,6 +193,12 @@ mysql> SELECT * FROM t1;
 - Default value: `Apache License 2.0`
 - This variable indicates the license of your TiDB server installation.
 
+### log_bin
+
+- Scope: NONE
+- Default value: `OFF`
+- This variable indicates if [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) is used.
+
 ### max_execution_time
 
 - Scope: SESSION | GLOBAL
@@ -204,6 +210,18 @@ mysql> SELECT * FROM t1;
 > **Note:**
 >
 > Unlike in MySQL, the `max_execution_time` system variable currently works on all kinds of statements in TiDB, not only restricted to the `SELECT` statement. The precision of the timeout value is roughly 100ms. This means the statement might not be terminated in accurate milliseconds as you specify.
+
+### plugin_dir
+
+- Scope: SESSION
+- Default value: ""
+- The directory to load plugins from as set by the commandline flag.
+
+### plugin_load
+
+- Scope: SESSION
+- Default value: ""
+- Wait for loading of named plugins on startup. Plugins are separated by commas. This is set by a commandline flag.
 
 ### port
 
@@ -217,6 +235,16 @@ mysql> SELECT * FROM t1;
 - Scope: NONE
 - Default value: ""
 - The local unix socket file that the `tidb-server` is listening on when speaking the MySQL protocol.
+
+### sql_log_bin
+
+- Scope: SESSION | GLOBAL
+- Default value: `ON`
+- This indicates if changes should be written to the [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) or not.
+
+> **Note:**
+>
+> Setting `sql_log_bin` as a global variable is not recommended. Future versions may only allow setting this as a session variable.
 
 ### sql_mode
 
@@ -1380,6 +1408,18 @@ SET tidb_slow_log_threshold = 200;
 - Default value: `SYSTEM`
 - This variable returns the current time zone. Values can be specified as either an offset such as '-8:00' or a named zone 'America/Los_Angeles'.
 - The value `SYSTEM` means that the time zone should be the same as the system host, which is available via the [`system_time_zone`](#system_time_zone) variable.
+
+### timestamp
+
+- Scope: SESSION
+- Default value: ""
+- If set to a non-empty value this is the UNIX epoch that is used as timestamp for `CURRENT_TIMESTAMP()`, `NOW()` and other functions. This can be used when restoring or replicating data.
+
+### tmp_table_size
+
+- Scope: SESSION | GLOBAL
+- Default value: 16777216
+- The maximum size of a temporary table in bytes
 
 ### transaction_isolation
 
