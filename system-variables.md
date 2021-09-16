@@ -1433,7 +1433,8 @@ SET tidb_slow_log_threshold = 200;
 
 - Scope: SESSION | GLOBAL
 - Default value: 16777216
-- The maximum size of a temporary table in bytes
+- Unit: Bytes
+- The maximum size of a temporary table.
 
 ### transaction_isolation
 
