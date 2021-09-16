@@ -249,13 +249,6 @@ mysql> SELECT * FROM t1;
 - Range: `[1024, 1073741824]`
 - Maximum size of a packet for the MySQL protocol
 
-### max_connections
-
-- Scope: GLOBAL
-- Default value: `151
-- Range: `[1, 100000]`
-- MySQL Compatibility variable. Not used in TiDB.
-
 ### max_execution_time
 
 - Scope: SESSION | GLOBAL
