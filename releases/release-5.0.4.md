@@ -127,20 +127,19 @@ TiDB version: 5.0.4
     - Fix the issue that using the `approx_percentile` function might panic on a `BIT` column [#23703](https://github.com/pingcap/tidb/pull/23703)
     - Fix the issue that the metrics on the **Coprocessor Cache** panel are wrong in Grafana [#26343](https://github.com/pingcap/tidb/pull/26343)
     - Fix the issue that concurrently truncating the same partition causes DDL statements to stuck [#26238](https://github.com/pingcap/tidb/pull/26238)
-    - [planner, expression: avoid exprs with side effects in column pruning and agg pushdown (#27370) by ti-srebot · Pull Request #27637 · pingcap/tidb](https://github.com/pingcap/tidb/pull/27637)
-    - [executor: fix hash join between datetime and timestamp (#25915) by ti-srebot · Pull Request #25990 · pingcap/tidb](https://github.com/pingcap/tidb/pull/25990)
-    - [expression: do not derive filters containing null sensitive functions from outer join (#27067) by ti-srebot · Pull Request #27194 · pingcap/tidb](https://github.com/pingcap/tidb/pull/27194)
-    - [planner: add missing column for Apply convert to Join (#27246) by ti-srebot · Pull Request #27283 · pingcap/tidb](https://github.com/pingcap/tidb/pull/27283)
+    - Fix the issue of wrong query results that occurs when the session variable is used as the `GROUP BY` item [#27637](https://github.com/pingcap/tidb/pull/27637)
+    - Fix the wrong implicit conversion between `VARCHAR` and timestamp when joining tables [#25990](https://github.com/pingcap/tidb/pull/25990)
+    - Fix the wrong results in associated subquery statements [#27283](https://github.com/pingcap/tidb/pull/27283)
 
 + TiKV
 
-    - RaftStore Snapshot GC fix: fix the issue that snapshot GC missed GC snapshot files when there's one snapshot file failed to be GC-ed. [#10872](https://github.com/tikv/tikv/pull/10872)
-    - Fix TiKV panic when enable Titan and upgrade from pre-5.0 version [#10843](https://github.com/tikv/tikv/pull/10843)
-    - Fix newer TiKV can't rollback to 5.0.x [#10843](https://github.com/tikv/tikv/pull/10843)
-    - Fix TiKV panic when Titan is enabled and upgrade from < 5.0 versions to >= 5.0 versions. A cluster may hit the issue if it was upgraded from TiKV 3.x and enabled Titan before the upgrade in the past. [#10778](https://github.com/tikv/tikv/pull/10778)
-    - Fix the resolve failures caused by the left pessimisic locks. [#10654](https://github.com/tikv/tikv/pull/10654)
-    - Fix duration calculation panics on certain platforms [#10571](https://github.com/tikv/tikv/pull/10571)
-    - Fix unencoded keys of `batch_get_command` in load-base-split [#10564](https://github.com/tikv/tikv/pull/10564)
+    ?- Fix the issue that snapshot GC might miss GC snapshot files when there is a snapshot file failed to be garbage-collected [#10872](https://github.com/tikv/tikv/pull/10872)
+    - Fix the TiKV panic issue that occurs when upgrading from a pre-5.0 version with Titan enabled [#10843](https://github.com/tikv/tikv/pull/10843)
+    - Fix the issue that TiKV of a newer version cannot be rolled back to v5.0.x [#10843](https://github.com/tikv/tikv/pull/10843)
+    - Fix the TiKV panic issue that occurs when upgrading from a pre-5.0 versions to a 5.0 version or later. If a cluster was upgraded from TiKV v3.x with Titan enabled before the upgrade in the past, this cluster might encounter the issue. [#10778](https://github.com/tikv/tikv/pull/10778)
+    - Fix the parsing failure caused by the left pessimistic locks [#10654](https://github.com/tikv/tikv/pull/10654)
+    - Fix the panic that occurs when calculating duration on certain platforms [#10571](https://github.com/tikv/tikv/pull/10571)
+    - Fix the issue that the keys of `batch_get_command` in Load Base Split are unencoded [#10564](https://github.com/tikv/tikv/pull/10564)
 
 + PD
 
