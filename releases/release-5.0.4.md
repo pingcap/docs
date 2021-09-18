@@ -143,11 +143,11 @@ TiDB version: 5.0.4
 
 + PD
 
-    - Fix the bug that PD would not fix down-peer in time. [#4082](https://github.com/tikv/pd/pull/4082)
-    - Fix an issue where data is not stored when using max-replicas or location-labels to indirectly update default placement rule [#3914](https://github.com/tikv/pd/pull/3914)
-    - Fix the bug that PD may panic during scaling out TiKV. [#3910](https://github.com/tikv/pd/pull/3910)
-    - Reduce the conflict due to multiple scheduler running in same time [#3856](https://github.com/tikv/pd/pull/3856)
-    - Fix the issue that the scheduler may appear again even if we have already executed the delete operation [#3823](https://github.com/tikv/pd/pull/3823)
+    - Fix the issue that PD does not fix the down peers in time [#4082](https://github.com/tikv/pd/pull/4082)
+    - Fix the issue that the replica count of the default placement rules stays constant after `replication.max-replicas` is updated [#3914](https://github.com/tikv/pd/pull/3914)
+    - Fix a bug that PD might panic when scaling out TiKV [#3910](https://github.com/tikv/pd/pull/3910)
+    - Fix the scheduling conflict issue that occurs when multiple schedulers are running at same time [#3856](https://github.com/tikv/pd/pull/3856)
+    - Fix the issue that the scheduler might appear again even if it has been deleted [#3823](https://github.com/tikv/pd/pull/3823)
 
 + TiFlash
 
