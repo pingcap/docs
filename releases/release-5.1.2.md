@@ -61,7 +61,7 @@ TiDB version: 5.1.2
         - Fix the bug that in concurrency mode, pd schedulers may not be restored if one or more lightning failed. [#1422](https://github.com/pingcap/br/pull/1422)
         - Fix the bug that lightning local backend may met checksum mismatch error due to data loss. [#1416](https://github.com/pingcap/br/pull/1416)
 
-## __unsorted
+## ## 以下 note 未分类。请将以下 note 进行分类 (Feature enhancements, Improvements, Bug fixes, Compatibility Changes 四类)，并移动到上面对应的标题下。如果某条 note 为多余的，请删除。如果漏抓取了 note，请手动补充
 
 + TiDB
 
