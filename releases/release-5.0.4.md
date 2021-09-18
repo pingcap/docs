@@ -152,55 +152,46 @@ TiDB version: 5.0.4
 + TiFlash
 
     - Fix the potential panic issue that occurs when running table scan tasks
-    - Fix the potential memory leak issue that occurs when executing `MPP` tasks
-    - Fix a bug that TiFlash raises the error about `duplicated region` when handling `DAQ` requests
+    - Fix the potential memory leak issue that occurs when executing MPP tasks
+    - Fix a bug that TiFlash raises the `duplicated region` error when handling DAQ requests
     - Fix the issue of unexpected results when executing the aggregation functions `COUNT` or `COUNT DISTINCT`
-    - Fix the potential panic issue that occurs when executing `MPP` tasks
+    - Fix the potential panic issue that occurs when executing MPP tasks
     - Fix a potential bug that TiFlash cannot restore data when deployed on multiple disks
     - Fix the potential panic issue that occurs when deconstructing `SharedQueryBlockInputStream`
     - Fix the potential panic issue that occurs when deconstructing `MPPTask`
-    - Fix the issue of unexpected results when TiFlash failed to establish `MPP` connections
+    - Fix the issue of unexpected results when TiFlash fails to establish MPP connections
     - Fix the potential panic issue that occurs when resolving locks
-    - Fix the issue that store size in metrics is inaccurate under heavy writing
+    - Fix the issue that the store size in metrics is inaccurate under heavy writing
     - Fix a bug of incorrect results that occurs when queries contain filters like `CONSTANT` `<` | `<=` | `>` | `>=` `COLUMN`
-    - Fix the potential issue that TiFlash cannot GC the delta data after running for a long time
-    - Fix a potential bug that metrics display wrong value
-    - Fix the potential issue of data inconsistency that occurs when deployed on multiple disks
-
-+ PD
-
-    - Fix the bug that PD would not fix down-peer in time. [#4082](https://github.com/tikv/pd/pull/4082)
-    - Fix an issue where data is not stored when using max-replicas or location-labels to indirectly update default placement rule [#3914](https://github.com/tikv/pd/pull/3914)
-    - Fix the bug that PD may panic during scaling out TiKV. [#3910](https://github.com/tikv/pd/pull/3910)
+    - Fix the potential issue that TiFlash cannot garbage-collect the delta data after running for a long time
+    - Fix a potential bug that metrics display wrong values
+    - Fix the potential issue of data inconsistency that occurs when TiFlash is deployed on multiple disks
 
 + Tools
 
     + Dumpling
 
-        - fix pending on show table status in some mysql version [#342](https://github.com/pingcap/dumpling/pull/342)
-        - Support for backing up MySQL compatible databases that don't support START TRANSACTION  ... WITH CONSISTENT SNAPSHOT
-        - Support for backing up MySQL compatible databases that don't support SHOW CREATE TABLE [#327](https://github.com/pingcap/dumpling/pull/327)
+        - Fix the issue that the execution of `show table status` is stuck in MySQL 8.0.3 or a later version [#342](https://github.com/pingcap/dumpling/pull/342)
 
     + TiCDC
 
-        - Fix json encoding could panic when processing a string type value in some cases. [#2782](https://github.com/pingcap/ticdc/pull/2782)
-        - Fix a bug that multiple processors could write the same table when this table is re-scheduling [#2728](https://github.com/pingcap/ticdc/pull/2728)
-        - Fix OOM when TiCDC captures too many regions [#2724](https://github.com/pingcap/ticdc/pull/2724)
-        - Fix gRPC keepalive error when memory pressure is high. [#2719](https://github.com/pingcap/ticdc/pull/2719)
-        - Fix a bug that causes TiCDC to panic on an unsigned tinyint [#2655](https://github.com/pingcap/ticdc/pull/2655)
-        - Fix open protocol, don't output an empty value when there is no change in one transaction. [#2620](https://github.com/pingcap/ticdc/pull/2620)
-        - Fixed a bug in DDL handling when the owner restarts. [#2610](https://github.com/pingcap/ticdc/pull/2610)
-        - This PR make the old owner handle DDL in Async mode. [#2605](https://github.com/pingcap/ticdc/pull/2605)
+        - Fix the issue of process panic that occurs when encoding the data types such as `mysql.TypeString, mysql.TypeVarString, mysql.TypeVarchar` into JSON [#2782](https://github.com/pingcap/ticdc/pull/2782)
+        - Fix a data inconsistency issue that occurs because multiple processors might write data to the same table when this table is being re-scheduled [#2728](https://github.com/pingcap/ticdc/pull/2728)
+        - Decrease the gRPC window size to avoid the OOM that occurs when TiCDC captures too many Regions [#2724](https://github.com/pingcap/ticdc/pull/2724)
+        - Fix the error that the gRPC connection is frequently broken when the memory pressure is high [#2719](https://github.com/pingcap/ticdc/pull/2719)
+        - Fix a bug that causes TiCDC to panic on the unsigned `TINYINT` type [#2655](https://github.com/pingcap/ticdc/pull/2655)
+        - Fix the issue that TiCDC Open Protocol outputs an empty value when inserting a transaction and deleting data of the same row in the upstream [#2620](https://github.com/pingcap/ticdc/pull/2620)
+        - Fix a bug that DDL handling fails when a changefeed starts at the finish TS of a schema change [#2610](https://github.com/pingcap/ticdc/pull/2610)
+        - Fix the issue that irresponsive downstreams interrupt the replication task in old owner until the task times out [#2605](https://github.com/pingcap/ticdc/pull/2605)
         - Fix a bug in metadata management [#2558](https://github.com/pingcap/ticdc/pull/2558)
-        - Fix a bug that multiple processors could write the same table when this table is re-scheduling [#2492](https://github.com/pingcap/ticdc/pull/2492)
-        - fix outdated capture info may appear in capture list command [#2466](https://github.com/pingcap/ticdc/pull/2466)
-        - Fix a bug that owner could meet ErrSchemaStorageTableMiss error and reset a changefeed by accident. [#2458](https://github.com/pingcap/ticdc/pull/2458)
-        - fix the bug that changefeed cannot be removed if meet GcTTL Exceeded Error [#2456](https://github.com/pingcap/ticdc/pull/2456)
-        - fix a bug where synchronizing large tables to cdclog failed. [#2445](https://github.com/pingcap/ticdc/pull/2445)
-        - Fix CLI back-compatibility [#2413](https://github.com/pingcap/ticdc/pull/2413)
-        - Fix minor runtime panic risk [#2299](https://github.com/pingcap/ticdc/pull/2299)
-        - Fix potential DDL loss when owner crashes while executing DDL [#2292](https://github.com/pingcap/ticdc/pull/2292)
-        - Don't resolve lock immediately after a region is initialized. [#2265](https://github.com/pingcap/ticdc/pull/2265)
-        - Fix extra partition dispatching when adding new table partition. [#2263](https://github.com/pingcap/ticdc/pull/2263)
-        - Cleanup changefeed metrics when changefeed is removed.
-        - Cleanup processor metrics when processor exits. [#2177](https://github.com/pingcap/ticdc/pull/2177)
+        - Fix the issue of data inconsistency that occurs after the TiCDC owner switch [#2492](https://github.com/pingcap/ticdc/pull/2492)
+        - Fix the issue that outdated capture might appear in the output of the `capture list` command [#2466](https://github.com/pingcap/ticdc/pull/2466)
+        - Fix the `ErrSchemaStorageTableMiss` error that occurs when the DDL Job duplication is encountered in the integrated test [#2458](https://github.com/pingcap/ticdc/pull/2458)
+        - Fix the bug that a changefeed cannot be removed if the `ErrGCTTLExceeded` error occurs [#2456](https://github.com/pingcap/ticdc/pull/2456)
+        - Fix a bug that replicating large tables to cdclog fails [#2445](https://github.com/pingcap/ticdc/pull/2445)
+        - Fix the CLI backward compatibility issue [#2413](https://github.com/pingcap/ticdc/pull/2413)
+        - Fix the issue of insecure concurrent access to the map in `SinkManager` [#2299](https://github.com/pingcap/ticdc/pull/2299)
+        - Fix the issue of potential DDL loss when the owner crashes when executing DDL statements [#2292](https://github.com/pingcap/ticdc/pull/2292)
+        - Fix the issue that the lock is resolved immediately after a Region is initialized [#2265](https://github.com/pingcap/ticdc/pull/2265)
+        - Fix the issue of extra partition dispatching that occurs when adding a new partitioned table [#2263](https://github.com/pingcap/ticdc/pull/2263)
+        - Fix the issue that TiCDC keeps warning on removed changefeeds [#2177](https://github.com/pingcap/ticdc/pull/2177)
