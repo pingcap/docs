@@ -16,14 +16,13 @@ TiDB version: 5.1.2
 
 + TiFlash
 
-    - ```release-note [#2658](https://github.com/pingcap/tics/pull/2658)
     - Support pushing down ROUND(X) to TiFlash. [#2611](https://github.com/pingcap/tics/pull/2611)
     - support function DATE() pushed down to tiflash [#2602](https://github.com/pingcap/tics/pull/2602)
     - support functions of ADDDATE() and DATE_ADD() pushed down to tiflash [#2591](https://github.com/pingcap/tics/pull/2591)
     - retry when meeting stablish conn fails [#2570](https://github.com/pingcap/tics/pull/2570)
     - Support pushing down MOD(N, M) to TiFlash. [#2560](https://github.com/pingcap/tics/pull/2560)
     - Add Grafana panels for write throughput per instance [#2544](https://github.com/pingcap/tics/pull/2544)
-    -  [#2345](https://github.com/pingcap/tics/pull/2345)
+    -  Cherry-pick #2216 #2460 #2494 & Optimizr read-index retry to release-5.1 [#2345](https://github.com/pingcap/tics/pull/2345)
 
 ## Bug Fixes
 
@@ -39,10 +38,10 @@ TiDB version: 5.1.2
 + TiFlash
 
     - Fix the potential issue of data inconsistency after crashes when deployed on multi-disks [#2776](https://github.com/pingcap/tics/pull/2776)
-    - Please add a release note, or a 'None' if it is not needed. [#2762](https://github.com/pingcap/tics/pull/2762)
+    - fix bug that SharedQueryBlockInputStream may loss block randomly. [#2762](https://github.com/pingcap/tics/pull/2762)
     - Please add a release note, or a 'None' if it is not needed. [#2710](https://github.com/pingcap/tics/pull/2710)
     - Fix concurrency between init store and DDL. [#2693](https://github.com/pingcap/tics/pull/2693)
-    - ```release-note [#2673](https://github.com/pingcap/tics/pull/2673)
+    - Fix false alert of expected internal DDL error [#2673](https://github.com/pingcap/tics/pull/2673)
     - Fix the bug that filters unexpected data if the query contains "constant" "<"/"<="/">"/">=" "column" [#2635](https://github.com/pingcap/tics/pull/2635)
     - Fix an overflow bug in decimal MOD(N, M). [#2609](https://github.com/pingcap/tics/pull/2609)
     - Fix the potential panic when applying Snapshot with multiple DDL operations [#2606](https://github.com/pingcap/tics/pull/2606)
@@ -70,9 +69,7 @@ TiDB version: 5.1.2
     - Fix a bug that TiDB may crash when TiFlash is shutting down. [#28139](https://github.com/pingcap/tidb/pull/28139)
     - This reverts commit d4cd12fe422fb18b6012607ee18b6acca40d9225. [#28091](https://github.com/pingcap/tidb/pull/28091)
     - planner: fix the problem of using `enum like 'x%'` to build the wrong range [#28066](https://github.com/pingcap/tidb/pull/28066)
-    - None. [#27925](https://github.com/pingcap/tidb/pull/27925)
     - push down mod() to TiFlash. [#27865](https://github.com/pingcap/tidb/pull/27865)
-    - Please add a release note, or a 'None' if it is not needed. [#27631](https://github.com/pingcap/tidb/pull/27631)
     - fix expression rewrite makes between expr infers wrong collation. [#27549](https://github.com/pingcap/tidb/pull/27549)
     - execution: fix cte dead lock when used with IndexLookupJoin [#27536](https://github.com/pingcap/tidb/pull/27536)
     - Fix a bug that retryable deadlocks are incorrectly recorded into `INFORMATION_SCHEMA.DEADLOCKS` table. [#27535](https://github.com/pingcap/tidb/pull/27535)
@@ -85,7 +82,7 @@ TiDB version: 5.1.2
     - fix a bug that query on hash partition table return wrong reslut [#27164](https://github.com/pingcap/tidb/pull/27164)
     - executor: fix unexpected behavior when casting invalid string to date [#27112](https://github.com/pingcap/tidb/pull/27112)
     - fix a bug that creates partition fail if `NO_UNSIGNED_SUBTRACTION` is set. [#27053](https://github.com/pingcap/tidb/pull/27053)
-    - Please add a release note, or a 'None' if it is not needed. [#26969](https://github.com/pingcap/tidb/pull/26969)
+    - planner: add missing distinct flag for Apply convert to join. [#26969](https://github.com/pingcap/tidb/pull/26969)
     - Fix an issue that NO_ZERO_IN_DATE does not work on the default values. [#26904](https://github.com/pingcap/tidb/pull/26904)
     - store/copr: block the tiflash node for a period when it fails before. [#26897](https://github.com/pingcap/tidb/pull/26897)
     - Fix then bug if the CTE is referenced more than once. [#26661](https://github.com/pingcap/tidb/pull/26661)
@@ -107,15 +104,14 @@ TiDB version: 5.1.2
     - Support changing CDC configs dynamically [#10686](https://github.com/tikv/tikv/pull/10686)
     - Reduce resolved ts message size to save network bandwidth. [#10679](https://github.com/tikv/tikv/pull/10679)
     - Fix the resolve failures caused by the left pessimisic locks. [#10653](https://github.com/tikv/tikv/pull/10653)
-    - ```release-note [#10621](https://github.com/tikv/tikv/pull/10621)
+    - limit the hotspot report count. [#10621](https://github.com/tikv/tikv/pull/10621)
 
 + PingCAP/TiFlash
 
-    - Please add a release note, or a 'None' if it is not needed. [#2819](https://github.com/pingcap/tics/pull/2819)
+    - function result name should contain collator info [#2819](https://github.com/pingcap/tics/pull/2819)
     - Support INET6_ATON and INET6_NTOA in TiFlash. [#2624](https://github.com/pingcap/tics/pull/2624)
     - Support INET_ATON and INET_NTOA in TiFlash. [#2613](https://github.com/pingcap/tics/pull/2613)
     - update client to fix race bug [#2583](https://github.com/pingcap/tics/pull/2583)
-    - [#2552](https://github.com/pingcap/tics/pull/2552)
     - expand streams after aggregation [#2537](https://github.com/pingcap/tics/pull/2537)
     - Improve the mpp cancel process to cancel the mpp task ASAP [#2518](https://github.com/pingcap/tics/pull/2518)
     - Fix the bug may cause metrics to display error value. [#2469](https://github.com/pingcap/tics/pull/2469)
@@ -123,7 +119,6 @@ TiDB version: 5.1.2
 + PD
 
     - allow empty region to be scheduled and use a sperate tolerance config in scatter range scheduler [#4117](https://github.com/tikv/pd/pull/4117)
-    - None. [#3976](https://github.com/tikv/pd/pull/3976)
     - Improved the performance of synchronizing Region information between PDs. [#3933](https://github.com/tikv/pd/pull/3933)
 
 + Tools
@@ -131,7 +126,6 @@ TiDB version: 5.1.2
     + Backup & Restore (BR)
 
         - fix the bug that the average speed isn't accurate in backup and restore [#1412](https://github.com/pingcap/br/pull/1412)
-        -  [#1375](https://github.com/pingcap/br/pull/1375)
 
     + Dumpling
 
@@ -146,8 +140,6 @@ TiDB version: 5.1.2
         - Fix OOM when TiCDC captures too many regions [#2725](https://github.com/pingcap/ticdc/pull/2725)
         - Fix gRPC keepalive error when memory pressure is high. [#2720](https://github.com/pingcap/ticdc/pull/2720)
         - Optimize memory management when unified sorter is using memory to sort. [#2712](https://github.com/pingcap/ticdc/pull/2712)
-        - Please add a release note.
-        - If you don't think this PR needs a release note then fill it with `None`. [#2683](https://github.com/pingcap/ticdc/pull/2683)
         - Set compatible version from 5.1.0-alpha to 5.2.0-alpha [#2659](https://github.com/pingcap/ticdc/pull/2659)
         - Fix a bug that causes TiCDC to panic on an unsigned tinyint [#2656](https://github.com/pingcap/ticdc/pull/2656)
         - Fix open protocol, don't output an empty value when there is no change in one transaction. [#2621](https://github.com/pingcap/ticdc/pull/2621)
@@ -155,7 +147,6 @@ TiDB version: 5.1.2
         - Prohibit operating TiCDC clusters across major and minor versions [#2599](https://github.com/pingcap/ticdc/pull/2599)
         - Fix a bug in metadata management [#2559](https://github.com/pingcap/ticdc/pull/2559)
         - Add a global gRPC connection pool and share gRPC connections among kv clients. [#2534](https://github.com/pingcap/ticdc/pull/2534)
-        - `None`. [#2521](https://github.com/pingcap/ticdc/pull/2521)
         - Fix a bug that multiple processors could write the same table when this table is re-scheduling [#2493](https://github.com/pingcap/ticdc/pull/2493)
         - Optimize workerpool for fewer goroutines when concurrency is high. [#2488](https://github.com/pingcap/ticdc/pull/2488)
         - Fix a bug that owner could meet ErrSchemaStorageTableMiss error and reset a changefeed by accident. [#2459](https://github.com/pingcap/ticdc/pull/2459)
