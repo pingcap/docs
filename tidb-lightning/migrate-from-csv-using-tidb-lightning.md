@@ -163,7 +163,7 @@ See the [TOML v1.0.0 specification] for details.
 TiDB Lightning does not support every option supported by the `LOAD DATA` statement. Some examples:
 
 * There cannot be line prefixes (`LINES STARTING BY`).
-* The header cannot be simply skipped (`IGNORE n LINES`), it must be valid column names if present.
+* The header cannot be simply skipped (`IGNORE n LINES`). It must be valid column names if present.
 
 ## Strict format
 
