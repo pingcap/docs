@@ -42,35 +42,35 @@ TiDB version: 4.0.15
     + Backup & Restore (BR)
 
         - Split and scatter Regions concurrently to improve restore speed [#1429](https://github.com/pingcap/br/pull/1429)
-        - Retry on PD request error or TiKV IO timeout error [#1433](https://github.com/pingcap/br/pull/1433)
-        - Reduce empty regions when restoration of many small tables [#1374](https://github.com/pingcap/br/issues/1374) [#1432](https://github.com/pingcap/br/pull/1432)
-        - Rebase auto id operation while create table, Save the separate rebase ddl operations to speed up restore [#1424](https://github.com/pingcap/br/pull/1424)
+        - Retry BR tasks when encountering the PD request error or the TiKV I/O timeout error [#1433](https://github.com/pingcap/br/pull/1433)
+        - Reduce empty Regions when restoring many small tables to avoid affecting cluster operation after the restore [#1374](https://github.com/pingcap/br/issues/1374) [#1432](https://github.com/pingcap/br/pull/1432)
+        - Perform the `rebase auto id` operation while creating tables, which saves the separate `rebase auto id` DDL operations to speed up restore [#1424](https://github.com/pingcap/br/pull/1424)
 
     + Dumpling
 
-        - Filter skipped database before traversing the tables, save soma traverse operations [#337](https://github.com/pingcap/dumpling/pull/337)
-        - Use `show full tables` to traverse the tables because `show table status` can't work in some mysql version [#332](https://github.com/pingcap/dumpling/pull/332)
-        - Support export MySQL compatible databases that don't support `START TRANSACTION  ... WITH CONSISTENT SNAPSHOT` or `SHOW CREATE TABLE` [#329](https://github.com/pingcap/dumpling/pull/329)
-        - Refine dumpling warn log to avoid misunderstand that dump is failed [#340](https://github.com/pingcap/dumpling/pull/340)
+        - Filter the skipped databases before getting the table information to improve the filtering efficiency of `SHOW TABLE STATUS` [#337](https://github.com/pingcap/dumpling/pull/337)
+        - Use `SHOW FULL TABLES` to get table information for tables to be exported, because `SHOW TABLE STATUS` cannot work properly in some MySQL versions [#332](https://github.com/pingcap/dumpling/pull/332)
+        - Support backing up MySQL-compatible databases that do not support the `START TRANSACTION ... WITH CONSISTENT SNAPSHOT` or the `SHOW CREATE TABLE` syntax [#309](https://github.com/pingcap/dumpling/issues/309)
+        - Refine the Dumpling warning log to avoid the misleading information that a dump fails [#340](https://github.com/pingcap/dumpling/pull/340)
 
     + TiDB Lightning
 
-        - Support import into table that has expression index or index depending on virtual generated columns [#1418](https://github.com/pingcap/br/pull/1418)
+        - Support importing data into tables that have expression index or the index that depends on virtual generated columns [#1418](https://github.com/pingcap/br/pull/1418)
 
     + TiCDC
 
-        - Solve the new collation and TiCDC compatibility issue: TiCDC always pull the old value from TiKV internally [#2304](https://github.com/pingcap/ticdc/pull/2304)
-        - Reduce goroutine usage when a table's region transfer away from a TiKV node [#2376](https://github.com/pingcap/ticdc/pull/2376)
-        - Optimize workerpool for fewer goroutines when concurrency is high [#2486](https://github.com/pingcap/ticdc/pull/2486)
-        - Make DDL asynchronous execution to avoid affecting other changefeeds [#2471](https://github.com/pingcap/ticdc/pull/2471)
-        - Add a global gRPC connection pool and share gRPC connections among kv clients [#2531](https://github.com/pingcap/ticdc/pull/2531)
-        - Fail-fast for unrecoverable DML errors [2315](https://github.com/pingcap/ticdc/pull/2315)
-        - Optimize memory management when unified sorter is using memory to sort [#2710](https://github.com/pingcap/ticdc/pull/2710)
-        - add prometheus metrics for sink execution ddl [#2681](https://github.com/pingcap/ticdc/pull/2681)
-        - Prohibit operating TiCDC clusters across major and minor versions [#2601](https://github.com/pingcap/ticdc/pull/2601)
-        - Remove file sorter whichi is taked place by unify sorter [#2325](https://github.com/pingcap/ticdc/pull/2325)
-        - Cleanup changefeed metrics when changefeed is removed, and processor metrics when processor exits [#2313](https://github.com/pingcap/ticdc/pull/2313)
-        - Optimize the resolve lock algorithm after a region is initialized [#2264](https://github.com/pingcap/ticdc/pull/2264)
+        - TiCDC always pulls old values from TiKV internally [#2304](https://github.com/pingcap/ticdc/pull/2304)
+        - Reduce the goroutine usage when a table's Regions are all transferred away from a TiKV node [#2284](https://github.com/pingcap/ticdc/issues/2284)
+        - Optimize workerpool for fewer goroutines when concurrency is high [#2211](https://github.com/pingcap/ticdc/issues/2211)
+        - Execute DDL statements asynchronously to avoid affecting other changefeeds [#2471](https://github.com/pingcap/ticdc/pull/2471)
+        - Add a global gRPC connection pool and share gRPC connections among KV clients [#2531](https://github.com/pingcap/ticdc/pull/2531)
+        - Fail fast for unrecoverable DML errors [2315](https://github.com/pingcap/ticdc/pull/2315)
+        - Optimize memory management when unified sorter is using memory to sort [#2553](https://github.com/pingcap/ticdc/issues/2553)
+        - Add Prometheus metrics for DDL executions [#2681](https://github.com/pingcap/ticdc/pull/2681)
+        - Prohibit operating TiCDC clusters across major or minor versions [#2601](https://github.com/pingcap/ticdc/pull/2601)
+        - Remove `file sorter` [#2325](https://github.com/pingcap/ticdc/pull/2325)
+        - Clean up changefeed metrics when a changefeed is removed, and clean up processor metrics when a processor exits [#2313](https://github.com/pingcap/ticdc/pull/2313)
+        - Optimize the lock-resolving algorithm after a Region is initialized [#2264](https://github.com/pingcap/ticdc/pull/2264)
 
 ## Bug Fixes
 
