@@ -1,6 +1,5 @@
 ---
 title: TiDB 4.0.15 Release Notes
-category: Releases
 ---
 
 # TiDB 4.0.15 Release Notes
@@ -13,31 +12,36 @@ TiDB version: 4.0.15
 
 + TiDB
 
-    - Revert [#21045](https://github.com/pingcap/tidb/pull/21045) to avoid show session variables is very slow on first run. [#24326](https://github.com/pingcap/tidb/issues/24326).[26240]
+    - Fix the issue that executing `SHOW VARIABLES` in a new session is slow. This fix reverts some changes made in [#21045](https://github.com/pingcap/tidb/pull/21045) and might cause compatibility issues. [#24326](https://github.com/pingcap/tidb/issues/24326)
+
+## Feature enhancement
+
++ TiKV
+
+    - Support changing TiCDC configurations dynamically [#10645](https://github.com/tikv/tikv/issues/10645)
 
 ## Improvements
 
 + TiDB
 
-    - Trigger auto-analyze based on histogram row count [#26706](https://github.com/pingcap/tidb/pull/26706)
+    - Trigger auto-analyze based on the histogram row count [#26706](https://github.com/pingcap/tidb/pull/26706)
 
 + TiKV
 
-    - separate read write ready to reduce read latency [#10619](https://github.com/tikv/tikv/pull/10619)
-    - TiKV coprocessor slow log will only consider time spent on processing the request. [#10863](https://github.com/tikv/tikv/pull/10863)
-    - Drop log instead of blocking threads when slogger thread is overloaded and queue is filled up. [#10863](https://github.com/tikv/tikv/pull/10863)
-    - Support changing CDC configs dynamically [#10684](https://github.com/tikv/tikv/pull/10684)
-    - Reduce resolved ts message size to save network bandwidth. [#10677](https://github.com/tikv/tikv/pull/10677)
+    - Handle read ready and write ready separately to reduce read latency [#10475](https://github.com/tikv/tikv/issues/10475)
+    - The slow log of TiKV coprocessor only considers the time spent on processing requests. [#1084](https://github.com/tikv/tikv/issues/10841)
+    - Drop log instead of blocking threads when the slogger thread is overloaded and the queue is filled up [#10841](https://github.com/tikv/tikv/issues/10841)
+    - Reduce the size of Resolved TS messages to save network bandwidth [#2448](https://github.com/pingcap/ticdc/issues/2448)
 
 + PD
 
-    - Improved the performance of synchronizing Region information between PDs. [#3932](https://github.com/tikv/pd/pull/3932)
+    - Improve the performance of synchronizing Region information between PDs [#3932](https://github.com/tikv/pd/pull/3932)
 
 + Tools
 
     + Backup & Restore (BR)
 
-        - Make split and scatter regions exeuction concurrently, improve the restore speed from 2h to 30 min in our testing [#1429](https://github.com/pingcap/br/pull/1429)
+        - Split and scatter Regions concurrently to improve restore speed [#1429](https://github.com/pingcap/br/pull/1429)
         - Retry on PD request error or TiKV IO timeout error [#1433](https://github.com/pingcap/br/pull/1433)
         - Reduce empty regions when restoration of many small tables [#1374](https://github.com/pingcap/br/issues/1374) [#1432](https://github.com/pingcap/br/pull/1432)
         - Rebase auto id operation while create table, Save the separate rebase ddl operations to speed up restore [#1424](https://github.com/pingcap/br/pull/1424)
@@ -58,7 +62,7 @@ TiDB version: 4.0.15
         - Solve the new collation and TiCDC compatibility issue: TiCDC always pull the old value from TiKV internally [#2304](https://github.com/pingcap/ticdc/pull/2304)
         - Reduce goroutine usage when a table's region transfer away from a TiKV node [#2376](https://github.com/pingcap/ticdc/pull/2376)
         - Optimize workerpool for fewer goroutines when concurrency is high [#2486](https://github.com/pingcap/ticdc/pull/2486)
-            - Make DDL asynchronous execution to avoid affecting other changefeeds [#2471](https://github.com/pingcap/ticdc/pull/2471)
+        - Make DDL asynchronous execution to avoid affecting other changefeeds [#2471](https://github.com/pingcap/ticdc/pull/2471)
         - Add a global gRPC connection pool and share gRPC connections among kv clients [#2531](https://github.com/pingcap/ticdc/pull/2531)
         - Fail-fast for unrecoverable DML errors [2315](https://github.com/pingcap/ticdc/pull/2315)
         - Optimize memory management when unified sorter is using memory to sort [#2710](https://github.com/pingcap/ticdc/pull/2710)
