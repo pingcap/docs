@@ -267,11 +267,15 @@ Configuration items related to scheduling
 + Determines whether to enable the merging of cross-table Regions
 + Default value: `true`
 
-### `region-score-formula-version`
+### `region-score-formula-version` <span class="version-mark">New in v5.0</span> 
 
 + Controls the version of the Region score formula
 + Default value: `v2`
-+ Optional values: `v1` and `v2`
++ Optional values: `v1` and `v2`. Compared to v1, the changes in v2 are smoother, and the scheduling jitter caused by space recovery is improved.
+
+> **Note:**
+>
+> If you upgrade from TiDB 4.0 versions to the current versions, the new formula version is automatically disabled by default to ensure consistent PD behavior before and after upgrading. If you want to change the formula version, you need to manually switch through the `pd-ctl` setting. For details, refer to [PD Control](/pd-control.md#config-show--set-option-value--placement-rules).
 
 ### `enable-joint-consensus` <span class="version-mark">New in v5.0</span>
 
@@ -315,6 +319,10 @@ Configuration items related to replicas
 
 + Default value: 3
 + PD rounds the lowest digits of the flow number, which reduces the update of statistics caused by the changes of the Region flow information. This configuration item is used to specify the number of lowest digits to round for the Region flow information. For example, the flow `100512` will be rounded to `101000` because the default value is `3`. This configuration replaces `trace-region-flow`.
+
+> **Note:**
+>
+> If you upgrade from TiDB 4.0 versions to the current versions, the behavior of `flow-round-by-digit` after the upgrading and the behavior of `trace-region-flow` before upgrading are consistent by default. This means that if the value of  `trace-region-flow` is false before upgrading, then the value of `flow-round-by-digit` after upgrading is 127；if the value of `trace-region-flow` is true before upgrading, then the value of `flow-round-by-digit` after upgrading is 3.
 
 ## `label-property`
 
