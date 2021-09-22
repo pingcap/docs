@@ -176,7 +176,7 @@ This can be fixed by splitting the CSV into multiple files first. For the generi
 strict-format = true
 ```
 
-Currently, a strict CSV file means every field occupies only a single line. In the other words, one of the following must be true:
+Currently, a strict CSV file means every field occupies only a single line. In other words, one of the following must be true:
 
 * Delimiter is empty, or
 * Every field does not contain the terminator itself. In the default configuration, this means every field does not contain CR (`\r`) or LF (`\n`).
