@@ -11,7 +11,9 @@ TiDB version: 4.0.15
 
 ## Compatibility changes
 
-- Revert [#21045](https://github.com/pingcap/tidb/pull/21045) to avoid show session variables is very slow on first run. [#24326](https://github.com/pingcap/tidb/issues/24326).[26240]
++ TiDB
+
+    - Revert [#21045](https://github.com/pingcap/tidb/pull/21045) to avoid show session variables is very slow on first run. [#24326](https://github.com/pingcap/tidb/issues/24326).[26240]
 
 ## Improvements
 
