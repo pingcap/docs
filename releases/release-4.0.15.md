@@ -72,66 +72,66 @@ TiDB version: 4.0.15
         - Clean up changefeed metrics when a changefeed is removed, and clean up processor metrics when a processor exits [#2313](https://github.com/pingcap/ticdc/pull/2313)
         - Optimize the lock-resolving algorithm after a Region is initialized [#2264](https://github.com/pingcap/ticdc/pull/2264)
 
-## Bug Fixes
+## Bug fixes
 
 + TiDB
 
-    - Fix wrong charset and collation for case when function [#26671](https://github.com/pingcap/tidb/pull/26671)
-    - Fix the issue that greatest(datetime) union null returns empty string [#26564](https://github.com/pingcap/tidb/pull/26564)
-    - Fix the issue that sometimes fails to send requests if there are tombstone stores. [#25849](https://github.com/pingcap/tidb/pull/25849)
-    - Fix range building for binary literal.[26455](https://github.com/pingcap/tidb/pull/26455)
-    - Fix "index out of range" error when a SQL contains both group by and union.[26553](https://github.com/pingcap/tidb/pull/26553)
-    - executor: fix unexpected behavior when casting invalid string to date.[27935](https://github.com/pingcap/tidb/pull/27935)
-    - planner: add missing column for Apply convert to Join.[27282](https://github.com/pingcap/tidb/pull/27282)
-    - Fix bug that count disctinct on multi-columns return wrong result when new collation is on.[27830](https://github.com/pingcap/tidb/pull/27830)
-    - expression: fix extract bug when argument is a negative duration.[27369](https://github.com/pingcap/tidb/pull/27369)
-    - Make `group_concat` function consider the collation.[27835](https://github.com/pingcap/tidb/pull/27835)
-    - Fix expression rewrite makes between expr infers wrong collation.[27851](https://github.com/pingcap/tidb/pull/27851)
-    - Fix wrong selection push down when having above agg.[27741](https://github.com/pingcap/tidb/pull/27741)
-    - Remove the undocumented `/debug/sub-optimal-plan` HTTP API. [#27264](https://github.com/pingcap/tidb/pull/27264)
+    - Fix a bug that collation is incorrectly set for binary literals when building range [26455](https://github.com/pingcap/tidb/pull/26455)
+    - Fix the issue of wrong character set and collation for the `case when` expression [#26671](https://github.com/pingcap/tidb/pull/26671)
+    - Fix the "index out of range" error that occurs when a query includes both `GROUP BY` and `UNION` [26553](https://github.com/pingcap/tidb/pull/26553)
+    - Fix the issue that TiDB might fail to send requests if TiKV has tombstone stores [#25849](https://github.com/pingcap/tidb/pull/25849)
+    - Fix the issue of unexpected behavior when casting the invalid string to `DATE` [#27935](https://github.com/pingcap/tidb/pull/27935)
+    - Fix the issue that column information is missed when converting the `Apply` operator to `Join` [#27282](https://github.com/pingcap/tidb/pull/27282)
+    - Fix a bug that the `count distinct` result on multiple columns is wrong when the new collation is enabled [#27830](https://github.com/pingcap/tidb/pull/27830)
+    - Fix the result wrong that occurs when the argument of the `extract` function is a negative duration [#27236](https://github.com/pingcap/tidb/issues/27236)
+    - Fix the wrong execution results that occur when the column in the `group_concat` function has a non-bin collation [#27429](https://github.com/pingcap/tidb/issues/27429)
+    - Fix the wrong execution results that occur when the collations around the `between` expression are different [#27146](https://github.com/pingcap/tidb/issues/27146)
+    - Fix the issue that `greatest(datetime) union null` returns empty string [#26564](https://github.com/pingcap/tidb/pull/26564)
+    - Fix the issue that the `having` clause might not work correctly [#26496](https://github.com/pingcap/tidb/issues/26496)
+    - Remove the undocumented `/debug/sub-optimal-plan` HTTP API [#27264](https://github.com/pingcap/tidb/pull/27264)
 
 + TiKV
 
-    - Fix the issue that br reports file already exists error when TDE enabled during restoration. [#10917](https://github.com/tikv/tikv/pull/10917)
-    - RaftStore Snapshot GC fix: fix the issue that snapshot GC missed GC snapshot files when there's one snapshot file failed to be GC-ed. [#10871](https://github.com/tikv/tikv/pull/10871)
-    - Fix delete stale region too frequently. [#10781](https://github.com/tikv/tikv/pull/10781)
-    - fix frequently reconnecting pd client [#9818](https://github.com/tikv/tikv/pull/9818)
-    - Check stale file information from encryption file dict [#10598](https://github.com/tikv/tikv/pull/10598)
+    - Fix the issue that BR reports the "file already exists" error when TDE is enabled during data restore [#10917](https://github.com/tikv/tikv/pull/10917)
+    ?- Fix the issue that snapshot GC might miss GC snapshot files when there is a snapshot file failed to be garbage-collected [#10813](https://github.com/tikv/tikv/issues/10813)
+    - Fix the issue that TiKV deletes stale Regions too frequently [#10781](https://github.com/tikv/tikv/pull/10781)
+    - Fix the issue that TiKV frequently reconnects the PD client [#9818](https://github.com/tikv/tikv/pull/9818)
+    - Check stale file information from the encryption file dictionary [#10598](https://github.com/tikv/tikv/pull/10598)
 
 + PD
 
-    - Fix the bug that PD would not fix down-peer in time. [#4081](https://github.com/tikv/pd/pull/4081)
-    - Fix the bug that PD may panic during scaling out TiKV. [#3909](https://github.com/tikv/pd/pull/3909)
+    - Fix the issue that PD does not fix the down peers in time [#4077](https://github.com/tikv/pd/issues/4077)
+    - Fix a bug that PD might panic when scaling out TiKV [#3868](https://github.com/tikv/pd/issues/3868)
 
 + TiFlash
 
-    - Fix the potential issue of data inconsistency after crashes when deployed on multi-disks
+    - Fix the potential issue of data inconsistency that occurs when TiFlash is deployed on multiple disks
     - Fix a bug of incorrect results that occurs when queries contain filters like `CONSTANT` `<` | `<=` | `>` | `>=` `COLUMN`
-    - Fix the inaccurate store size on tiflash metric under heavy write scenario
-    - Fix a bug that TiFlash can not restore data under some situations when deployed on multi disks
-    - Fix the potential issue that TiFlash cannot GC the delta data after running for a long time
+    - Fix the issue that the store size in metrics is inaccurate under heavy writing
+    - Fix a potential bug that TiFlash cannot restore data when deployed on multiple disks
+    - Fix the potential issue that TiFlash cannot garbage-collect the delta data after running for a long time
 
 + Tools
 
     + Backup & Restore (BR)
 
-        - Fix the bug that the average speed isn't accurate in backup and restore [#1410](https://github.com/pingcap/br/pull/1410)
+        - Fix a bug that the average speed is inaccurate in backup and restore [#1410](https://github.com/pingcap/br/pull/1410)
 
     + TiCDC
 
-        - Fix a bug that owner could meet ErrSchemaStorageTableMiss error and reset a changefeed by accident [#2457](https://github.com/pingcap/ticdc/pull/2457)
-        - Fix the bug that changefeed cannot be removed if meet GcTTL Exceeded Error [#2455](https://github.com/pingcap/ticdc/pull/2455)
-        - Fix outdated capture info may appear in capture list command [#2447](https://github.com/pingcap/ticdc/pull/2447)
-        - Fix deadlock in cdc processor [#2017](https://github.com/pingcap/ticdc/pull/2017)
-        - Fix a bug that multiple processors could write the same table when this table is re-scheduling [#2495](https://github.com/pingcap/ticdc/pull/2495)[#2727](https://github.com/pingcap/ticdc/pull/2727)
-        - Fix a bug in metadata management: EtcdWorker snapshot isolation [#2557](https://github.com/pingcap/ticdc/pull/2557)
-        - Fix ddl sink error don't stop changefeed [#2556](https://github.com/pingcap/ticdc/pull/2556)
-        - Fix open protocol issue: output an empty value when there is no change in one transaction [#2619](https://github.com/pingcap/ticdc/pull/2619)
-        - Fix a bug that causes TiCDC to panic on an unsigned tinyint [#2654](https://github.com/pingcap/ticdc/pull/2654)
-        - Fix gRPC keepalive error when memory pressure is high [#2718](https://github.com/pingcap/ticdc/pull/2718)
-        - Fix OOM when TiCDC captures too many regions [#2723](https://github.com/pingcap/ticdc/pull/2723)
-        - Fix json encoding could panic when processing a string type value in some cases [#2781](https://github.com/pingcap/ticdc/pull/2781)
-        - fix memory leak which may happen in create new changefeed [#2623](https://github.com/pingcap/ticdc/pull/2623)
-        - Fixed a bug in DDL handling when the owner restarts [#2609](https://github.com/pingcap/ticdc/pull/2609)
-        - Fix potential DDL loss when owner crashes while executing DDL [#2291](https://github.com/pingcap/ticdc/pull/2291)
-        - Fix runtime panic bug [#2298](https://github.com/pingcap/ticdc/pull/2298)
+        - Fix the `ErrSchemaStorageTableMiss` error that occurs when the DDL Job duplication is encountered in the integrated test [#2422](https://github.com/pingcap/ticdc/issues/2422)
+        - Fix the bug that a changefeed cannot be removed if the `ErrGCTTLExceeded` error occurs [#2391](https://github.com/pingcap/ticdc/issues/2391)
+        - Fix the issue that outdated capture might appear in the output of the `capture list` command [#2388](https://github.com/pingcap/ticdc/issues/2388)
+        - Fix the deadlock issue in the TiCDC processor [#2017](https://github.com/pingcap/ticdc/pull/2017)
+        - Fix a data inconsistency issue that occurs because multiple processors might write data to the same table when this table is being re-scheduled [#2495](https://github.com/pingcap/ticdc/pull/2495)[#2727](https://github.com/pingcap/ticdc/pull/2727)
+        - Fix a bug that the `EtcdWorker` snapshot isolation is violated in metadata management [#2557](https://github.com/pingcap/ticdc/pull/2557)
+        - Fix the issue that the changefeed cannot be stopped due to the DDL sink error [#2556](https://github.com/pingcap/ticdc/pull/2556)
+        - Fix the issue of TiCDC Open Protocol: TiCDC outputs an empty value when there is no change in a transaction [#2619](https://github.com/pingcap/ticdc/pull/2619)
+        - Fix a bug that causes TiCDC to panic on the unsigned `TINYINT` type [#2648](https://github.com/pingcap/ticdc/issues/2648)
+        - Decrease the gRPC window size to avoid the OOM that occurs when TiCDC captures too many Regions [#2202](https://github.com/pingcap/ticdc/issues/2202)
+        - Fix the OOM issue that occurs when TiCDC captures too many Regions [#2723](https://github.com/pingcap/ticdc/pull/2723)
+        - Fix the issue of process panic that occurs when encoding the data types such as `mysql.TypeString, mysql.TypeVarString, mysql.TypeVarchar` into JSON [#2758](https://github.com/pingcap/ticdc/issues/2758)
+        - Fix the a memory leak issue that might occur when creating a new changefeed [#2623](https://github.com/pingcap/ticdc/pull/2623)
+        - Fix a bug that DDL handling fails when a changefeed starts at the finish TS of a schema change [#2603](https://github.com/pingcap/ticdc/issues/2603)
+        - Fix the issue of potential DDL loss when the owner crashes when executing DDL statements [#1260](https://github.com/pingcap/ticdc/issues/1260)
+        - Fix the issue of insecure concurrent access to the map in `SinkManager` [#2298](https://github.com/pingcap/ticdc/pull/2298)
