@@ -78,7 +78,7 @@ TiDB version: 4.0.15
 
     - Fix a bug that collation is incorrectly set for binary literals when building range [#23672](https://github.com/pingcap/tidb/issues/23672)
     - Fix the issue of wrong character set and collation for the `case when` expression [#26662](https://github.com/pingcap/tidb/issues/26662)
-    - Fix the "index out of range" error that occurs when a query includes both `GROUP BY` and `UNION` [26553](https://github.com/pingcap/tidb/pull/26553)
+    - Fix the "index out of range" error that occurs when a query includes both `GROUP BY` and `UNION` [#26553](https://github.com/pingcap/tidb/pull/26553)
     - Fix the issue that TiDB might fail to send requests if TiKV has tombstone stores [#23676](https://github.com/pingcap/tidb/issues/23676) [#24648](https://github.com/pingcap/tidb/issues/24648)
     - Fix the issue of unexpected behavior when casting the invalid string to `DATE` [#26762](https://github.com/pingcap/tidb/issues/26762)
     - Fix the issue that column information is missed when converting the `Apply` operator to `Join` [#27233](https://github.com/pingcap/tidb/issues/27233)
