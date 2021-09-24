@@ -12,7 +12,7 @@ TiDB version: 5.0.4
 
 + TiDB
 
-    - Fix the issue that executing `SHOW VARIABLES` in a new session is slow. This fix reverts some changes made in [#18517](https://github.com/pingcap/tidb/issues/18517) and might cause compatibility issues. [#18517](https://github.com/pingcap/tidb/issues/18517)
+    - Fix the issue that executing `SHOW VARIABLES` in a new session is slow. This fix reverts some changes made in [#19341](https://github.com/pingcap/tidb/pull/19341) and might cause compatibility issues. [#24326](https://github.com/pingcap/tidb/issues/24326)
     - Change the default value of the `tidb_stmt_summary_max_stmt_count` variable from `200` to `3000` [#25873](https://github.com/pingcap/tidb/pull/25873)
     + The following bug fixes change execution results, which might cause upgrade incompatibilities:
         - Fix the issue that TiDB returns wrong result when the children of `UNION` contain the `NULL` value [#26559](https://github.com/pingcap/tidb/issues/26559)
@@ -62,7 +62,7 @@ TiDB version: 5.0.4
     - Do not send requests to a TiFlash node for a period if it has failed and restarted before [#26757](https://github.com/pingcap/tidb/pull/26757)
     - Increase the `split region` limit to make `split table` and `presplit` more stable [#26657](https://github.com/pingcap/tidb/pull/26657)
     - Support retry for MPP queries [#26483](https://github.com/pingcap/tidb/pull/26483)
-    - Check the availability of TiFlash before launching MPP queries [#26356](https://github.com/pingcap/tidb/pull/26356)
+    - Check the availability of TiFlash before launching MPP queries [#1807](https://github.com/pingcap/tics/issues/1807)
     - Support the stable result mode to make the query result more stable [#26084](https://github.com/pingcap/tidb/pull/26084)
     - Support the MySQL system variable `init_connect` and its associated features [#18894](https://github.com/pingcap/tidb/issues/18894)
     - Thoroughly push down the `COUNT(DISTINCT)` aggregation function in the MPP mode [#25861](https://github.com/pingcap/tidb/pull/25861)
@@ -75,8 +75,8 @@ TiDB version: 5.0.4
 
     - Handle read ready and write ready separately to reduce read latency [#10475](https://github.com/tikv/tikv/issues/10475)
     - Reduce the size of Resolved TS messages to save network bandwidth [#2448](https://github.com/pingcap/ticdc/issues/2448)
-    - Drop log instead of blocking threads when the slogger thread is overloaded and the queue is filled up [#10864](https://github.com/tikv/tikv/pull/10864)
-    - The slow log of TiKV coprocessor only considers the time spent on processing requests [#10864](https://github.com/tikv/tikv/pull/10864)
+    - Drop log instead of blocking threads when the slogger thread is overloaded and the queue is filled up [#10841](https://github.com/tikv/tikv/issues/10841)
+    - The slow log of TiKV coprocessor only considers the time spent on processing requests [#10841](https://github.com/tikv/tikv/issues/10841)
     - Make prewrite as idempotent as possible to reduce the chance of undetermined errors [#10587](https://github.com/tikv/tikv/pull/10587)
     - Avoid the false "GC can not work" alert under low write flow [#10662](https://github.com/tikv/tikv/pull/10662)
     - The database to be restored always matches the original cluster size during backup. [#10643](https://github.com/tikv/tikv/pull/10643)
@@ -90,17 +90,17 @@ TiDB version: 5.0.4
 
     + Dumpling
 
-        - Support backing up MySQL-compatible databases that do not support the `START TRANSACTION ... WITH CONSISTENT SNAPSHOT` or the `SHOW CREATE DATABASE` syntax
+        - Support backing up MySQL-compatible databases that do not support the `START TRANSACTION ... WITH CONSISTENT SNAPSHOT` or the `SHOW CREATE TABLE` syntax [#309](https://github.com/pingcap/dumpling/issues/309)
 
     + TiCDC
 
-        - Optimize memory management when unified sorter is using memory to sort [#2711](https://github.com/pingcap/ticdc/pull/2711)
+        - Optimize memory management when unified sorter is using memory to sort [#2553](https://github.com/pingcap/ticdc/issues/2553)
         - Prohibit operating TiCDC clusters across major or minor versions [#2598](https://github.com/pingcap/ticdc/pull/2598)
         - Reduce the goroutine usage when a table's Regions are all transferred away from a TiKV node [#2284](https://github.com/pingcap/ticdc/issues/2284)
         - Remove `file sorter` [#2326](https://github.com/pingcap/ticdc/pull/2326)
-        - Always pull the old values from TiKV and the output is adjusted according to `enable-old-value` [#2305](https://github.com/pingcap/ticdc/pull/2305)
-        - Improve the error message returned when a PD endpoint misses the certificate [#2185](https://github.com/pingcap/ticdc/pull/2185)
-        - Optimize workerpool for fewer goroutines when concurrency is high [#2487](https://github.com/pingcap/ticdc/pull/2487)
+        - Always pull the old values from TiKV and the output is adjusted according to `enable-old-value` [#2301](https://github.com/pingcap/ticdc/issues/2301)
+        - Improve the error message returned when a PD endpoint misses the certificate [#1973](https://github.com/pingcap/ticdc/issues/1973)
+        - Optimize workerpool for fewer goroutines when concurrency is high [#2211](https://github.com/pingcap/ticdc/issues/2211)
         - Add a global gRPC connection pool and share gRPC connections among KV clients [#2533](https://github.com/pingcap/ticdc/pull/2533)
 
 ## Bug Fixes
@@ -111,7 +111,7 @@ TiDB version: 5.0.4
     - Fix the issue that the overflow check of the `FLOAT64` type is different with that of MySQL [#23897](https://github.com/pingcap/tidb/issues/23897)
     - Fix the wrong character set and collation for the `case when` function [#26662](https://github.com/pingcap/tidb/issues/26662)
     - Fix the issue that committing pessimistic transactions might cause write conflicts [#25964](https://github.com/pingcap/tidb/issues/25964)
-    - Fix a bug that the index keys in a pessimistic transaction might be repeatedly committed [#26495](https://github.com/pingcap/tidb/pull/26495)
+    - Fix a bug that the index keys in a pessimistic transaction might be repeatedly committed [#26359](https://github.com/pingcap/tidb/issues/26359) [#10600](https://github.com/tikv/tikv/pull/10600)
     - Fix the issue that TiDB might panic when resolving the async commit locks [#25778](https://github.com/pingcap/tidb/issues/25778)
     - Fix a bug that a column might not be found when using `INDEX MERGE` [#25045](https://github.com/pingcap/tidb/issues/25045)
     - Fix a bug that `ALTER USER REQUIRE SSL` clears users' `authentication_string` [#25225](https://github.com/pingcap/tidb/issues/25225)
@@ -145,7 +145,7 @@ TiDB version: 5.0.4
 
     - Fix the issue that PD does not fix the down peers in time [#4077](https://github.com/tikv/pd/issues/4077)
     - Fix the issue that the replica count of the default placement rules stays constant after `replication.max-replicas` is updated [#3886](https://github.com/tikv/pd/issues/3886)
-    - Fix a bug that PD might panic when scaling out TiKV [#3910](https://github.com/tikv/pd/pull/3910)
+    - Fix a bug that PD might panic when scaling out TiKV [#3868](https://github.com/tikv/pd/issues/3868)
     - Fix the scheduling conflict issue that occurs when multiple schedulers are running at same time [#3807](https://github.com/tikv/pd/issues/3807)
     - Fix the issue that the scheduler might appear again even if it has been deleted [#2572](https://github.com/tikv/pd/issues/2572)
 
@@ -171,27 +171,27 @@ TiDB version: 5.0.4
 
     + Dumpling
 
-        - Fix the issue that the execution of `show table status` is stuck in MySQL 8.0.3 or a later version [#342](https://github.com/pingcap/dumpling/pull/342)
+        - Fix the issue that the execution of `show table status` is stuck in MySQL 8.0.3 or a later version [#322](https://github.com/pingcap/dumpling/issues/322)
 
     + TiCDC
 
-        - Fix the issue of process panic that occurs when encoding the data types such as `mysql.TypeString, mysql.TypeVarString, mysql.TypeVarchar` into JSON [#2782](https://github.com/pingcap/ticdc/pull/2782)
+        - Fix the issue of process panic that occurs when encoding the data types such as `mysql.TypeString, mysql.TypeVarString, mysql.TypeVarchar` into JSON [#2758](https://github.com/pingcap/ticdc/issues/2758)
         - Fix a data inconsistency issue that occurs because multiple processors might write data to the same table when this table is being re-scheduled [#2417](https://github.com/pingcap/ticdc/pull/2417)
         - Decrease the gRPC window size to avoid the OOM that occurs when TiCDC captures too many Regions [#2724](https://github.com/pingcap/ticdc/pull/2724)
-        - Fix the error that the gRPC connection is frequently broken when the memory pressure is high [#2719](https://github.com/pingcap/ticdc/pull/2719)
-        - Fix a bug that causes TiCDC to panic on the unsigned `TINYINT` type [#2655](https://github.com/pingcap/ticdc/pull/2655)
+        - Fix the error that the gRPC connection is frequently broken when the memory pressure is high [#2202](https://github.com/pingcap/ticdc/issues/2202)
+        - Fix a bug that causes TiCDC to panic on the unsigned `TINYINT` type [#2648](https://github.com/pingcap/ticdc/issues/2648)
         - Fix the issue that TiCDC Open Protocol outputs an empty value when inserting a transaction and deleting data of the same row in the upstream [#2612](https://github.com/pingcap/ticdc/issues/2612)
-        - Fix a bug that DDL handling fails when a changefeed starts at the finish TS of a schema change [#2610](https://github.com/pingcap/ticdc/pull/2610)
-        - Fix the issue that irresponsive downstreams interrupt the replication task in old owner until the task times out [#2605](https://github.com/pingcap/ticdc/pull/2605)
+        - Fix a bug that DDL handling fails when a changefeed starts at the finish TS of a schema change [#2603](https://github.com/pingcap/ticdc/issues/2603)
+        - Fix the issue that irresponsive downstreams interrupt the replication task in old owner until the task times out [#2295](https://github.com/pingcap/ticdc/issues/2295)
         - Fix a bug in metadata management [#2558](https://github.com/pingcap/ticdc/pull/2558)
         - Fix the issue of data inconsistency that occurs after the TiCDC owner switch [#2230](https://github.com/pingcap/ticdc/issues/2230)
-        - Fix the issue that outdated capture might appear in the output of the `capture list` command [#2466](https://github.com/pingcap/ticdc/pull/2466)
+        - Fix the issue that outdated capture might appear in the output of the `capture list` command [#2388](https://github.com/pingcap/ticdc/issues/2388)
         - Fix the `ErrSchemaStorageTableMiss` error that occurs when the DDL Job duplication is encountered in the integrated test [#2422](https://github.com/pingcap/ticdc/issues/2422)
         - Fix the bug that a changefeed cannot be removed if the `ErrGCTTLExceeded` error occurs [#2391](https://github.com/pingcap/ticdc/issues/2391)
-        - Fix a bug that replicating large tables to cdclog fails [#2445](https://github.com/pingcap/ticdc/pull/2445)
-        - Fix the CLI backward compatibility issue [#2413](https://github.com/pingcap/ticdc/pull/2413)
+        - Fix a bug that replicating large tables to cdclog fails [#1259](https://github.com/pingcap/ticdc/issues/1259) [#2424](https://github.com/pingcap/ticdc/issues/2424)
+        - Fix the CLI backward compatibility issue [#2373](https://github.com/pingcap/ticdc/issues/2373)
         - Fix the issue of insecure concurrent access to the map in `SinkManager` [#2299](https://github.com/pingcap/ticdc/pull/2299)
-        - Fix the issue of potential DDL loss when the owner crashes when executing DDL statements [#2292](https://github.com/pingcap/ticdc/pull/2292)
+        - Fix the issue of potential DDL loss when the owner crashes when executing DDL statements [#1260](https://github.com/pingcap/ticdc/issues/1260)
         - Fix the issue that the lock is resolved immediately after a Region is initialized [#2188](https://github.com/pingcap/ticdc/issues/2188)
         - Fix the issue of extra partition dispatching that occurs when adding a new partitioned table [#2263](https://github.com/pingcap/ticdc/pull/2263)
         - Fix the issue that TiCDC keeps warning on removed changefeeds [#2156](https://github.com/pingcap/ticdc/issues/2156)
