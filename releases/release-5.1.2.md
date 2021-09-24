@@ -65,6 +65,12 @@ TiDB version: 5.1.2
 
 + TiDB
 
+    - Fix wrong index hash join when hash col is enum. [#28081](https://github.com/pingcap/tidb/pull/28081)
+    - Fix a batch client bug that recycle idle connection may block sending requests in some rare cases. [#27678](https://github.com/pingcap/tidb/pull/27678)
+    - Keep the overflow check logic same with mysql [#26725](https://github.com/pingcap/tidb/pull/26725)
+    - Fix #26147 that `tidb` returns an `unknow` error with no message while it should return the error that contains `pd is timeout`. [#26682](https://github.com/pingcap/tidb/pull/26682)
+    - Fix wrong charset and collation for case when function [#26673](https://github.com/pingcap/tidb/pull/26673)
+    - Fix the issue that greatest(datetime) union null returns empty string [#26566](https://github.com/pingcap/tidb/pull/26566)
     - Fix `can not found column in Schema column` error for mpp queries [#28148](https://github.com/pingcap/tidb/pull/28148)
     - Fix a bug that TiDB may crash when TiFlash is shutting down. [#28139](https://github.com/pingcap/tidb/pull/28139)
     - This reverts commit d4cd12fe422fb18b6012607ee18b6acca40d9225. [#28091](https://github.com/pingcap/tidb/pull/28091)
