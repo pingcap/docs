@@ -75,10 +75,17 @@ The following sections introduce the default monitoring information of **TiFlash
 
 ## Storage Write Stall
 
-- Write & Delta Management Throughput: The throughput of write and delta's background management for all instances. `throughput_write` means the throughput of data sync through Raft. `throughput_delta-management` means the throughput of data compaction. `total_write` means the total bytes written since last starts. `total_delta-management` means the total bytes of data compaction since last starts.
+- Write & Delta Management Throughput: The throughput of write and delta's background management for all instances.
+    - `throughput_write` means the throughput of data sync through Raft.
+    - `throughput_delta-management` means the throughput of data compaction.
+    - `total_write` means the total bytes written since last starts.
+    - `total_delta-management` means the total bytes of data compaction since last starts.
 - Write Stall Duration: The stall duration of write and removing Region data (delete range) by instance.
 - Write Throughput By Instance: The throughput of write by instance. It includes the throughput by applying the Raft write commands and Raft snapshots.
-- Write Command OPS By Instance: The total count of different kinds of commands received by instance. `write block` means the data logs synced through Raft. `delete_range` means some Regions are removed from or move to this instance. `ingest` means some Region snapshot are applied to this instance.
+- Write Command OPS By Instance: The total count of different kinds of commands received by instance.
+    - `write block` means the data logs synced through Raft.
+    - `delete_range` means some Regions are removed from or move to this instance.
+    - `ingest` means some Region snapshot are applied to this instance.
 
 ## Raft
 
