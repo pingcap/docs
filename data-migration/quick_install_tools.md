@@ -1,10 +1,9 @@
 ---
 title: Install TiDB data migration tools
-summary: Learn how to install TiDB data migration tools.
+summary: Learn how to install TiDB data migration tools, including Data Migration, Dumpling, and TiDB Lightning.
 ---
 
 # Install TiDB data migration tools
-
 This document describes how to install data migration tools.
 
 ## Prerequisites
