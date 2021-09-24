@@ -12,7 +12,7 @@ TiDB version: 4.0.15
 
 + TiDB
 
-    - Fix the issue that executing `SHOW VARIABLES` in a new session is slow. This fix reverts some changes made in [#21045](https://github.com/pingcap/tidb/pull/21045) and might cause compatibility issues. [#24326](https://github.com/pingcap/tidb/issues/24326)
+    - Fix the issue that executing `SHOW VARIABLES` in a new session is slow. This fix reverts some changes made in [#18517](https://github.com/pingcap/tidb/issues/18517) and might cause compatibility issues. [#18517](https://github.com/pingcap/tidb/issues/18517)
 
 ## Feature enhancement
 
@@ -24,7 +24,7 @@ TiDB version: 4.0.15
 
 + TiDB
 
-    - Trigger auto-analyze based on the histogram row count [#26706](https://github.com/pingcap/tidb/pull/26706)
+    - Trigger auto-analyze based on the histogram row count [#24237](https://github.com/pingcap/tidb/issues/24237)
 
 + TiKV
 
@@ -55,7 +55,7 @@ TiDB version: 4.0.15
 
     + TiDB Lightning
 
-        - Support importing data into tables that have expression index or the index that depends on virtual generated columns [#1418](https://github.com/pingcap/br/pull/1418)
+        - Support importing data into tables that have expression index or the index that depends on virtual generated columns [#1404](https://github.com/pingcap/br/issues/1404)
 
     + TiCDC
 
@@ -69,34 +69,34 @@ TiDB version: 4.0.15
         - Add Prometheus metrics for DDL executions [#2681](https://github.com/pingcap/ticdc/pull/2681)
         - Prohibit operating TiCDC clusters across major or minor versions [#2601](https://github.com/pingcap/ticdc/pull/2601)
         - Remove `file sorter` [#2325](https://github.com/pingcap/ticdc/pull/2325)
-        - Clean up changefeed metrics when a changefeed is removed, and clean up processor metrics when a processor exits [#2313](https://github.com/pingcap/ticdc/pull/2313)
-        - Optimize the lock-resolving algorithm after a Region is initialized [#2264](https://github.com/pingcap/ticdc/pull/2264)
+        - Clean up changefeed metrics when a changefeed is removed, and clean up processor metrics when a processor exits [#2156](https://github.com/pingcap/ticdc/issues/2156)
+        - Optimize the lock-resolving algorithm after a Region is initialized [#2188](https://github.com/pingcap/ticdc/issues/2188)
 
 ## Bug fixes
 
 + TiDB
 
     - Fix a bug that collation is incorrectly set for binary literals when building range [26455](https://github.com/pingcap/tidb/pull/26455)
-    - Fix the issue of wrong character set and collation for the `case when` expression [#26671](https://github.com/pingcap/tidb/pull/26671)
+    - Fix the issue of wrong character set and collation for the `case when` expression [#26662](https://github.com/pingcap/tidb/issues/26662)
     - Fix the "index out of range" error that occurs when a query includes both `GROUP BY` and `UNION` [26553](https://github.com/pingcap/tidb/pull/26553)
     - Fix the issue that TiDB might fail to send requests if TiKV has tombstone stores [#25849](https://github.com/pingcap/tidb/pull/25849)
-    - Fix the issue of unexpected behavior when casting the invalid string to `DATE` [#27935](https://github.com/pingcap/tidb/pull/27935)
-    - Fix the issue that column information is missed when converting the `Apply` operator to `Join` [#27282](https://github.com/pingcap/tidb/pull/27282)
-    - Fix a bug that the `count distinct` result on multiple columns is wrong when the new collation is enabled [#27830](https://github.com/pingcap/tidb/pull/27830)
+    - Fix the issue of unexpected behavior when casting the invalid string to `DATE` [#26762](https://github.com/pingcap/tidb/issues/26762)
+    - Fix the issue that column information is missed when converting the `Apply` operator to `Join` [#27233](https://github.com/pingcap/tidb/issues/27233)
+    - Fix a bug that the `count distinct` result on multiple columns is wrong when the new collation is enabled [#27091](https://github.com/pingcap/tidb/issues/27091)
     - Fix the result wrong that occurs when the argument of the `extract` function is a negative duration [#27236](https://github.com/pingcap/tidb/issues/27236)
     - Fix the wrong execution results that occur when the column in the `group_concat` function has a non-bin collation [#27429](https://github.com/pingcap/tidb/issues/27429)
     - Fix the wrong execution results that occur when the collations around the `between` expression are different [#27146](https://github.com/pingcap/tidb/issues/27146)
-    - Fix the issue that `greatest(datetime) union null` returns empty string [#26564](https://github.com/pingcap/tidb/pull/26564)
+    - Fix the issue that `greatest(datetime) union null` returns empty string [#26532](https://github.com/pingcap/tidb/issues/26532)
     - Fix the issue that the `having` clause might not work correctly [#26496](https://github.com/pingcap/tidb/issues/26496)
     - Remove the undocumented `/debug/sub-optimal-plan` HTTP API [#27264](https://github.com/pingcap/tidb/pull/27264)
 
 + TiKV
 
-    - Fix the issue that BR reports the "file already exists" error when TDE is enabled during data restore [#10917](https://github.com/tikv/tikv/pull/10917)
+    - Fix the issue that BR reports the "file already exists" error when TDE is enabled during data restore [#1179](https://github.com/pingcap/br/issues/1179)
     ?- Fix the issue that snapshot GC might miss GC snapshot files when there is a snapshot file failed to be garbage-collected [#10813](https://github.com/tikv/tikv/issues/10813)
-    - Fix the issue that TiKV deletes stale Regions too frequently [#10781](https://github.com/tikv/tikv/pull/10781)
-    - Fix the issue that TiKV frequently reconnects the PD client [#9818](https://github.com/tikv/tikv/pull/9818)
-    - Check stale file information from the encryption file dictionary [#10598](https://github.com/tikv/tikv/pull/10598)
+    - Fix the issue that TiKV deletes stale Regions too frequently [#10680](https://github.com/tikv/tikv/issues/10680)
+    - Fix the issue that TiKV frequently reconnects the PD client [#9690](https://github.com/tikv/tikv/issues/9690)
+    - Check stale file information from the encryption file dictionary [#9115](https://github.com/tikv/tikv/issues/9115)
 
 + PD
 
@@ -115,7 +115,7 @@ TiDB version: 4.0.15
 
     + Backup & Restore (BR)
 
-        - Fix a bug that the average speed is inaccurate in backup and restore [#1410](https://github.com/pingcap/br/pull/1410)
+        - Fix a bug that the average speed is inaccurate in backup and restore [#1405](https://github.com/pingcap/br/issues/1405)
 
     + TiCDC
 
@@ -126,12 +126,12 @@ TiDB version: 4.0.15
         - Fix a data inconsistency issue that occurs because multiple processors might write data to the same table when this table is being re-scheduled [#2495](https://github.com/pingcap/ticdc/pull/2495)[#2727](https://github.com/pingcap/ticdc/pull/2727)
         - Fix a bug that the `EtcdWorker` snapshot isolation is violated in metadata management [#2557](https://github.com/pingcap/ticdc/pull/2557)
         - Fix the issue that the changefeed cannot be stopped due to the DDL sink error [#2556](https://github.com/pingcap/ticdc/pull/2556)
-        - Fix the issue of TiCDC Open Protocol: TiCDC outputs an empty value when there is no change in a transaction [#2619](https://github.com/pingcap/ticdc/pull/2619)
+        - Fix the issue of TiCDC Open Protocol: TiCDC outputs an empty value when there is no change in a transaction [#2612](https://github.com/pingcap/ticdc/issues/2612)
         - Fix a bug that causes TiCDC to panic on the unsigned `TINYINT` type [#2648](https://github.com/pingcap/ticdc/issues/2648)
         - Decrease the gRPC window size to avoid the OOM that occurs when TiCDC captures too many Regions [#2202](https://github.com/pingcap/ticdc/issues/2202)
         - Fix the OOM issue that occurs when TiCDC captures too many Regions [#2723](https://github.com/pingcap/ticdc/pull/2723)
         - Fix the issue of process panic that occurs when encoding the data types such as `mysql.TypeString, mysql.TypeVarString, mysql.TypeVarchar` into JSON [#2758](https://github.com/pingcap/ticdc/issues/2758)
-        - Fix the a memory leak issue that might occur when creating a new changefeed [#2623](https://github.com/pingcap/ticdc/pull/2623)
+        - Fix the a memory leak issue that might occur when creating a new changefeed [#2389](https://github.com/pingcap/ticdc/issues/2389)
         - Fix a bug that DDL handling fails when a changefeed starts at the finish TS of a schema change [#2603](https://github.com/pingcap/ticdc/issues/2603)
         - Fix the issue of potential DDL loss when the owner crashes when executing DDL statements [#1260](https://github.com/pingcap/ticdc/issues/1260)
         - Fix the issue of insecure concurrent access to the map in `SinkManager` [#2298](https://github.com/pingcap/ticdc/pull/2298)
