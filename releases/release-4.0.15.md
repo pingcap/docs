@@ -123,7 +123,7 @@ TiDB version: 4.0.15
         - Fix the bug that a changefeed cannot be removed if the `ErrGCTTLExceeded` error occurs [#2391](https://github.com/pingcap/ticdc/issues/2391)
         - Fix the issue that outdated capture might appear in the output of the `capture list` command [#2388](https://github.com/pingcap/ticdc/issues/2388)
         - Fix the deadlock issue in the TiCDC processor [#2017](https://github.com/pingcap/ticdc/pull/2017)
-        - Fix a data inconsistency issue that occurs because multiple processors might write data to the same table when this table is being re-scheduled [#2495](https://github.com/pingcap/ticdc/pull/2495)[#2727](https://github.com/pingcap/ticdc/pull/2727)
+        - Fix a data inconsistency issue that occurs because multiple processors might write data to the same table when this table is being re-scheduled [#2230](https://github.com/pingcap/ticdc/issues/2230)
         - Fix a bug that the `EtcdWorker` snapshot isolation is violated in metadata management [#2557](https://github.com/pingcap/ticdc/pull/2557)
         - Fix the issue that the changefeed cannot be stopped due to the DDL sink error [#2552](https://github.com/pingcap/ticdc/issues/2552)
         - Fix the issue of TiCDC Open Protocol: TiCDC outputs an empty value when there is no change in a transaction [#2612](https://github.com/pingcap/ticdc/issues/2612)
