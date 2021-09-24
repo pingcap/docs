@@ -12,7 +12,7 @@ TiDB version: 4.0.15
 
 + TiDB
 
-    - Fix the issue that executing `SHOW VARIABLES` in a new session is slow. This fix reverts some changes made in [#18517](https://github.com/pingcap/tidb/issues/18517) and might cause compatibility issues. [#18517](https://github.com/pingcap/tidb/issues/18517)
+    - Fix the issue that executing `SHOW VARIABLES` in a new session is slow. This fix reverts some changes made in [#21045](https://github.com/pingcap/tidb/pull/21045) and might cause compatibility issues. [#24326](https://github.com/pingcap/tidb/issues/24326)
 
 ## Feature enhancement
 
@@ -41,15 +41,15 @@ TiDB version: 4.0.15
 
     + Backup & Restore (BR)
 
-        - Split and scatter Regions concurrently to improve restore speed [#1429](https://github.com/pingcap/br/pull/1429)
-        - Retry BR tasks when encountering the PD request error or the TiKV I/O timeout error [#1433](https://github.com/pingcap/br/pull/1433)
-        - Reduce empty Regions when restoring many small tables to avoid affecting cluster operation after the restore [#1374](https://github.com/pingcap/br/issues/1374) [#1432](https://github.com/pingcap/br/pull/1432)
+        - Split and scatter Regions concurrently to improve restore speed [#1363](https://github.com/pingcap/br/pull/1363)
+        - Retry BR tasks when encountering the PD request error or the TiKV I/O timeout error [#27787](https://github.com/pingcap/tidb/issues/27787)
+        - Reduce empty Regions when restoring many small tables to avoid affecting cluster operation after the restore [#1374](https://github.com/pingcap/br/issues/1374)
         - Perform the `rebase auto id` operation while creating tables, which saves the separate `rebase auto id` DDL operations to speed up restore [#1424](https://github.com/pingcap/br/pull/1424)
 
     + Dumpling
 
         - Filter the skipped databases before getting the table information to improve the filtering efficiency of `SHOW TABLE STATUS` [#337](https://github.com/pingcap/dumpling/pull/337)
-        - Use `SHOW FULL TABLES` to get table information for tables to be exported, because `SHOW TABLE STATUS` cannot work properly in some MySQL versions [#332](https://github.com/pingcap/dumpling/pull/332)
+        - Use `SHOW FULL TABLES` to get table information for tables to be exported, because `SHOW TABLE STATUS` cannot work properly in some MySQL versions [#322](https://github.com/pingcap/dumpling/issues/322)
         - Support backing up MySQL-compatible databases that do not support the `START TRANSACTION ... WITH CONSISTENT SNAPSHOT` or the `SHOW CREATE TABLE` syntax [#309](https://github.com/pingcap/dumpling/issues/309)
         - Refine the Dumpling warning log to avoid the misleading information that a dump fails [#340](https://github.com/pingcap/dumpling/pull/340)
 
@@ -59,14 +59,14 @@ TiDB version: 4.0.15
 
     + TiCDC
 
-        - TiCDC always pulls old values from TiKV internally [#2304](https://github.com/pingcap/ticdc/pull/2304)
+        - TiCDC always pulls old values from TiKV internally [#2397](https://github.com/pingcap/ticdc/pull/2397)
         - Reduce the goroutine usage when a table's Regions are all transferred away from a TiKV node [#2284](https://github.com/pingcap/ticdc/issues/2284)
         - Optimize workerpool for fewer goroutines when concurrency is high [#2211](https://github.com/pingcap/ticdc/issues/2211)
-        - Execute DDL statements asynchronously to avoid affecting other changefeeds [#2471](https://github.com/pingcap/ticdc/pull/2471)
+        - Execute DDL statements asynchronously to avoid affecting other changefeeds [#2295](https://github.com/pingcap/ticdc/issues/2295)
         - Add a global gRPC connection pool and share gRPC connections among KV clients [#2531](https://github.com/pingcap/ticdc/pull/2531)
-        - Fail fast for unrecoverable DML errors [2315](https://github.com/pingcap/ticdc/pull/2315)
+        - Fail fast for unrecoverable DML errors [#1724](https://github.com/pingcap/ticdc/issues/1724)
         - Optimize memory management when unified sorter is using memory to sort [#2553](https://github.com/pingcap/ticdc/issues/2553)
-        - Add Prometheus metrics for DDL executions [#2681](https://github.com/pingcap/ticdc/pull/2681)
+        - Add Prometheus metrics for DDL executions [#2595](https://github.com/pingcap/ticdc/issues/2595) [#2669](https://github.com/pingcap/ticdc/issues/2669)
         - Prohibit operating TiCDC clusters across major or minor versions [#2601](https://github.com/pingcap/ticdc/pull/2601)
         - Remove `file sorter` [#2325](https://github.com/pingcap/ticdc/pull/2325)
         - Clean up changefeed metrics when a changefeed is removed, and clean up processor metrics when a processor exits [#2156](https://github.com/pingcap/ticdc/issues/2156)
@@ -79,7 +79,7 @@ TiDB version: 4.0.15
     - Fix a bug that collation is incorrectly set for binary literals when building range [26455](https://github.com/pingcap/tidb/pull/26455)
     - Fix the issue of wrong character set and collation for the `case when` expression [#26662](https://github.com/pingcap/tidb/issues/26662)
     - Fix the "index out of range" error that occurs when a query includes both `GROUP BY` and `UNION` [26553](https://github.com/pingcap/tidb/pull/26553)
-    - Fix the issue that TiDB might fail to send requests if TiKV has tombstone stores [#25849](https://github.com/pingcap/tidb/pull/25849)
+    - Fix the issue that TiDB might fail to send requests if TiKV has tombstone stores [#23676](https://github.com/pingcap/tidb/issues/23676) [#24648](https://github.com/pingcap/tidb/issues/24648)
     - Fix the issue of unexpected behavior when casting the invalid string to `DATE` [#26762](https://github.com/pingcap/tidb/issues/26762)
     - Fix the issue that column information is missed when converting the `Apply` operator to `Join` [#27233](https://github.com/pingcap/tidb/issues/27233)
     - Fix a bug that the `count distinct` result on multiple columns is wrong when the new collation is enabled [#27091](https://github.com/pingcap/tidb/issues/27091)
@@ -125,11 +125,11 @@ TiDB version: 4.0.15
         - Fix the deadlock issue in the TiCDC processor [#2017](https://github.com/pingcap/ticdc/pull/2017)
         - Fix a data inconsistency issue that occurs because multiple processors might write data to the same table when this table is being re-scheduled [#2495](https://github.com/pingcap/ticdc/pull/2495)[#2727](https://github.com/pingcap/ticdc/pull/2727)
         - Fix a bug that the `EtcdWorker` snapshot isolation is violated in metadata management [#2557](https://github.com/pingcap/ticdc/pull/2557)
-        - Fix the issue that the changefeed cannot be stopped due to the DDL sink error [#2556](https://github.com/pingcap/ticdc/pull/2556)
+        - Fix the issue that the changefeed cannot be stopped due to the DDL sink error [#2552](https://github.com/pingcap/ticdc/issues/2552)
         - Fix the issue of TiCDC Open Protocol: TiCDC outputs an empty value when there is no change in a transaction [#2612](https://github.com/pingcap/ticdc/issues/2612)
         - Fix a bug that causes TiCDC to panic on the unsigned `TINYINT` type [#2648](https://github.com/pingcap/ticdc/issues/2648)
         - Decrease the gRPC window size to avoid the OOM that occurs when TiCDC captures too many Regions [#2202](https://github.com/pingcap/ticdc/issues/2202)
-        - Fix the OOM issue that occurs when TiCDC captures too many Regions [#2723](https://github.com/pingcap/ticdc/pull/2723)
+        - Fix the OOM issue that occurs when TiCDC captures too many Regions [#2673](https://github.com/pingcap/ticdc/issues/2673)
         - Fix the issue of process panic that occurs when encoding the data types such as `mysql.TypeString, mysql.TypeVarString, mysql.TypeVarchar` into JSON [#2758](https://github.com/pingcap/ticdc/issues/2758)
         - Fix the a memory leak issue that might occur when creating a new changefeed [#2389](https://github.com/pingcap/ticdc/issues/2389)
         - Fix a bug that DDL handling fails when a changefeed starts at the finish TS of a schema change [#2603](https://github.com/pingcap/ticdc/issues/2603)
