@@ -31,8 +31,8 @@ TiDB version: 5.1.2
 
 + TiDB
 
-    - Trigger auto-analyze based on histogram row count [#26708](https://github.com/pingcap/tidb/pull/26708)
-    - push down mod() to TiFlash. [#27865](https://github.com/pingcap/tidb/pull/27865)
+    - Trigger auto-analyze by histogram row count, increase the accuracy of this trigger action  [#26708](https://github.com/pingcap/tidb/pull/26708)
+    - Push down mod() to TiFlash, increase the query performance. [#27865](https://github.com/pingcap/tidb/pull/27865)
 + TiKV
 
     - Support dynamically modifying CDC (Change Data Capture) configurations [#10686](https://github.com/tikv/tikv/pull/10686)
