@@ -13,6 +13,16 @@ TiDB version: 4.0.15
 + TiDB
 
     - Fix the issue that executing `SHOW VARIABLES` in a new session is slow. This fix reverts some changes made in [#21045](https://github.com/pingcap/tidb/pull/21045) and might cause compatibility issues. [#24326](https://github.com/pingcap/tidb/issues/24326)
+    + The following bug fixes change execution results, which might cause upgrade incompatibilities:
+        - Fix the issue that `greatest(datetime) union null` returns empty string [#26532](https://github.com/pingcap/tidb/issues/26532)
+        - Fix the issue that the `having` clause might not work correctly [#26496](https://github.com/pingcap/tidb/issues/26496)
+        - Fix the wrong execution results that occur when the collations around the `between` expression are different [#27146](https://github.com/pingcap/tidb/issues/27146)
+        - Fix the result wrong that occurs when the argument of the `extract` function is a negative duration [#27236](https://github.com/pingcap/tidb/issues/27236)
+        - Fix the wrong execution results that occur when the column in the `group_concat` function has a non-bin collation [#27429](https://github.com/pingcap/tidb/issues/27429)
+        - Fix the issue of wrong character set and collation for the `case when` expression [#26662](https://github.com/pingcap/tidb/issues/26662)
+        - Fix the issue that column information is missed when converting the `Apply` operator to `Join` [#27233](https://github.com/pingcap/tidb/issues/27233)
+        - Fix the issue of unexpected behavior when casting the invalid string to `DATE` [#26762](https://github.com/pingcap/tidb/issues/26762)
+        - Fix a bug that the `count distinct` result on multiple columns is wrong when the new collation is enabled [#27091](https://github.com/pingcap/tidb/issues/27091)
 
 ## Feature enhancement
 
@@ -77,23 +87,15 @@ TiDB version: 4.0.15
 + TiDB
 
     - Fix a bug that collation is incorrectly set for binary literals when building ranges [#23672](https://github.com/pingcap/tidb/issues/23672)
-    - Fix the issue of wrong character set and collation for the `case when` expression [#26662](https://github.com/pingcap/tidb/issues/26662)
+
     - Fix the "index out of range" error that occurs when a query includes both `GROUP BY` and `UNION` [#26553](https://github.com/pingcap/tidb/pull/26553)
     - Fix the issue that TiDB might fail to send requests if TiKV has tombstone stores [#23676](https://github.com/pingcap/tidb/issues/23676) [#24648](https://github.com/pingcap/tidb/issues/24648)
-    - Fix the issue of unexpected behavior when casting the invalid string to `DATE` [#26762](https://github.com/pingcap/tidb/issues/26762)
-    - Fix the issue that column information is missed when converting the `Apply` operator to `Join` [#27233](https://github.com/pingcap/tidb/issues/27233)
-    - Fix a bug that the `count distinct` result on multiple columns is wrong when the new collation is enabled [#27091](https://github.com/pingcap/tidb/issues/27091)
-    - Fix the result wrong that occurs when the argument of the `extract` function is a negative duration [#27236](https://github.com/pingcap/tidb/issues/27236)
-    - Fix the wrong execution results that occur when the column in the `group_concat` function has a non-bin collation [#27429](https://github.com/pingcap/tidb/issues/27429)
-    - Fix the wrong execution results that occur when the collations around the `between` expression are different [#27146](https://github.com/pingcap/tidb/issues/27146)
-    - Fix the issue that `greatest(datetime) union null` returns empty string [#26532](https://github.com/pingcap/tidb/issues/26532)
-    - Fix the issue that the `having` clause might not work correctly [#26496](https://github.com/pingcap/tidb/issues/26496)
     - Remove the undocumented `/debug/sub-optimal-plan` HTTP API [#27264](https://github.com/pingcap/tidb/pull/27264)
 
 + TiKV
 
     - Fix the issue that BR reports the "file already exists" error when TDE is enabled during data restore [#1179](https://github.com/pingcap/br/issues/1179)
-    ?- Fix the issue that snapshot GC might miss GC snapshot files when there is a snapshot file failed to be garbage-collected [#10813](https://github.com/tikv/tikv/issues/10813)
+    - Fix the potential disk full issue caused by corrupted snapshot files [#10813](https://github.com/tikv/tikv/issues/10813)
     - Fix the issue that TiKV deletes stale Regions too frequently [#10680](https://github.com/tikv/tikv/issues/10680)
     - Fix the issue that TiKV frequently reconnects the PD client [#9690](https://github.com/tikv/tikv/issues/9690)
     - Check stale file information from the encryption file dictionary [#9115](https://github.com/tikv/tikv/issues/9115)
