@@ -180,7 +180,9 @@
 + TiDB Ecosystem Tools
   + [Overview](/ecosystem-tool-user-guide.md)
   + [Use Cases](/ecosystem-tool-user-case.md)
-  + [Download](/download-ecosystem-tools.md)
+  + Install Guide
+    + [Use TiUP (Recommended)](/quick_install_tools.md)
+    + [Download Binary](/download-ecosystem-tools.md)
   + Backup & Restore (BR)
     + [BR Tool Overview](/br/backup-and-restore-tool.md)
     + [Use BR Command-line for Backup and Restoration](/br/use-br-command-line-tool.md)

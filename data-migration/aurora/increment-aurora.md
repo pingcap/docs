@@ -11,7 +11,7 @@ This document describes how to use DM for incremental replication.
 
 ## Prerequisites
 
-- [Deploy DM using TiUP](/data-migration/quick_install_tools.md)
+- [Deploy DM using TiUP](https://docs.pingcap.com/tidb-data-migration/stable/deploy-a-dm-cluster-using-tiup)
 
 ***
 

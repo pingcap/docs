@@ -9,8 +9,8 @@ This document describes how to migrate full data from Amazon Aurora MySQL to TiD
 
 ## Prerequisites
 
-- [Deploy TiDB Lighting using TiUP](/data-migration/quick_install_tools.md)
-- [Deploy Dumping using TiUP](/data-migration/quick_install_tools.md)
+- [Deploy TiDB Lighting using TiUP](/quick_install_tools.md)
+- [Deploy Dumping using TiUP](/quick_install_tools.md)
 
 ***
 
