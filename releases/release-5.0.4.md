@@ -27,7 +27,7 @@ TiDB version: 5.0.4
         - Fix the issue that using an invalid default date does not report an error when the `SQL_MODE` is 'NO_ZERO_IN_DATE' [#26766](https://github.com/pingcap/tidb/issues/26766)
         - Fix a bug on the query range of prefix index [#26029](https://github.com/pingcap/tidb/issues/26029)
         - Fix the issue that the `LOAD DATA` statement might abnormally import non-utf8 data [#25979](https://github.com/pingcap/tidb/issues/25979)
-        - Fix the issue that `insert ignore on duplicate update` might insert wrong data when the secondary index has the same column as in the primary key [#25809](https://github.com/pingcap/tidb/issues/25809)
+        - Fix the issue that `insert ignore on duplicate update` might insert wrong data when the secondary index has the same column with the primary key [#25809](https://github.com/pingcap/tidb/issues/25809)
         - Fix the issue that `insert ignore duplicate update` might insert wrong data when a partitioned table has a clustered index [#25846](https://github.com/pingcap/tidb/issues/25846)
         - Fix the issue that the query result might be wrong when the key is the `ENUM` type in point get or batch point get [#24562](https://github.com/pingcap/tidb/issues/24562)
         - Fix the wrong result that occurs when dividing a `BIT`-type value [#23479](https://github.com/pingcap/tidb/issues/23479)
@@ -59,8 +59,8 @@ TiDB version: 5.0.4
 + TiDB
 
     - Trigger auto-analyze based on the histogram row count [#24237](https://github.com/pingcap/tidb/issues/24237)
-    - Do not send requests to a TiFlash node for a period if it has failed and restarted before [#26757](https://github.com/pingcap/tidb/pull/26757)
-    - Increase the `split region` limit to make `split table` and `presplit` more stable [#26657](https://github.com/pingcap/tidb/pull/26657)
+    - Stop sending requests to a TiFlash node for a period if the node has failed and restarted before [#26757](https://github.com/pingcap/tidb/pull/26757)
+    - Increase the `split region` upper limit to make `split table` and `presplit` more stable [#26657](https://github.com/pingcap/tidb/pull/26657)
     - Support retry for MPP queries [#26483](https://github.com/pingcap/tidb/pull/26483)
     - Check the availability of TiFlash before launching MPP queries [#1807](https://github.com/pingcap/tics/issues/1807)
     - Support the stable result mode to make the query result more stable [#26084](https://github.com/pingcap/tidb/pull/26084)
@@ -76,10 +76,10 @@ TiDB version: 5.0.4
     - Handle read ready and write ready separately to reduce read latency [#10475](https://github.com/tikv/tikv/issues/10475)
     - Reduce the size of Resolved TS messages to save network bandwidth [#2448](https://github.com/pingcap/ticdc/issues/2448)
     - Drop log instead of blocking threads when the slogger thread is overloaded and the queue is filled up [#10841](https://github.com/tikv/tikv/issues/10841)
-    - The slow log of TiKV coprocessor only considers the time spent on processing requests [#10841](https://github.com/tikv/tikv/issues/10841)
+    - Make the slow log of TiKV coprocessor only consider the time spent on processing requests [#10841](https://github.com/tikv/tikv/issues/10841)
     - Make prewrite as idempotent as possible to reduce the chance of undetermined errors [#10587](https://github.com/tikv/tikv/pull/10587)
     - Avoid the false "GC can not work" alert under low write flow [#10662](https://github.com/tikv/tikv/pull/10662)
-    - The database to be restored always matches the original cluster size during backup. [#10643](https://github.com/tikv/tikv/pull/10643)
+    - Make the database to be restored always match the original cluster size during backup. [#10643](https://github.com/tikv/tikv/pull/10643)
     - Ensure that the panic output is flushed to the log [#9955](https://github.com/tikv/tikv/pull/9955)
 
 + PD
@@ -94,7 +94,7 @@ TiDB version: 5.0.4
 
     + TiCDC
 
-        - Optimize memory management when unified sorter is using memory to sort [#2553](https://github.com/pingcap/ticdc/issues/2553)
+        - Optimize memory management when Unified Sorter is using memory to sort [#2553](https://github.com/pingcap/ticdc/issues/2553)
         - Prohibit operating TiCDC clusters across major or minor versions [#2598](https://github.com/pingcap/ticdc/pull/2598)
         - Reduce the goroutine usage when a table's Regions are all transferred away from a TiKV node [#2284](https://github.com/pingcap/ticdc/issues/2284)
         - Remove `file sorter` [#2326](https://github.com/pingcap/ticdc/pull/2326)
@@ -109,7 +109,7 @@ TiDB version: 5.0.4
 
     - Fix the issue that TiDB might panic when querying a partitioned table and the partition key has the `IS NULL` condition [#23802](https://github.com/pingcap/tidb/issues/23802)
     - Fix the issue that the overflow check of the `FLOAT64` type is different with that of MySQL [#23897](https://github.com/pingcap/tidb/issues/23897)
-    - Fix the wrong character set and collation for the `case when` function [#26662](https://github.com/pingcap/tidb/issues/26662)
+    - Fix the wrong character set and collation for the `case when` expression [#26662](https://github.com/pingcap/tidb/issues/26662)
     - Fix the issue that committing pessimistic transactions might cause write conflicts [#25964](https://github.com/pingcap/tidb/issues/25964)
     - Fix a bug that the index keys in a pessimistic transaction might be repeatedly committed [#26359](https://github.com/pingcap/tidb/issues/26359) [#10600](https://github.com/tikv/tikv/pull/10600)
     - Fix the issue that TiDB might panic when resolving the async commit locks [#25778](https://github.com/pingcap/tidb/issues/25778)
@@ -123,9 +123,9 @@ TiDB version: 5.0.4
     - Fix the issue that setting the global variable `dml_batch_size` does not take effect [#24709](https://github.com/pingcap/tidb/issues/24709)
     - Fix the issue that using `read_from_storage` and partitioned table at the same time causes an error [#20372](https://github.com/pingcap/tidb/issues/20372)
     - Fix the issue that TiDB panics when executing the projection operator [#24264](https://github.com/pingcap/tidb/issues/24264)
-    - Fix the issue that queries might panic due to statistics [#24061](https://github.com/pingcap/tidb/pull/24061)
-    - Fix the issue that using the `approx_percentile` function might panic on a `BIT` column [#23662](https://github.com/pingcap/tidb/issues/23662)
-    - Fix the issue that the metrics on the **Coprocessor Cache** panel are wrong in Grafana [#26338](https://github.com/pingcap/tidb/issues/26338)
+    - Fix the issue that statistics might cause queries to panic [#24061](https://github.com/pingcap/tidb/pull/24061)
+    - Fix the issue that using the `approx_percentile` function on a `BIT` column might panic [#23662](https://github.com/pingcap/tidb/issues/23662)
+    - Fix the issue that the metrics on the **Coprocessor Cache** panel in Grafana are wrong [#26338](https://github.com/pingcap/tidb/issues/26338)
     - Fix the issue that concurrently truncating the same partition causes DDL statements to stuck [#26229](https://github.com/pingcap/tidb/issues/26229)
     - Fix the issue of wrong query results that occurs when the session variable is used as the `GROUP BY` item [#27106](https://github.com/pingcap/tidb/issues/27106)
     - Fix the wrong implicit conversion between `VARCHAR` and timestamp when joining tables [#25902](https://github.com/pingcap/tidb/issues/25902)
@@ -136,7 +136,7 @@ TiDB version: 5.0.4
     ?- Fix the issue that snapshot GC might miss GC snapshot files when there is a snapshot file failed to be garbage-collected [#10813](https://github.com/tikv/tikv/issues/10813)
     - Fix the TiKV panic issue that occurs when upgrading from a pre-5.0 version with Titan enabled [#10843](https://github.com/tikv/tikv/pull/10843)
     - Fix the issue that TiKV of a newer version cannot be rolled back to v5.0.x [#10843](https://github.com/tikv/tikv/pull/10843)
-    - Fix the TiKV panic issue that occurs when upgrading from a pre-5.0 versions to a 5.0 version or later. If a cluster was upgraded from TiKV v3.x with Titan enabled before the upgrade in the past, this cluster might encounter the issue. [#10774](https://github.com/tikv/tikv/issues/10774)
+    - Fix the TiKV panic issue that occurs when upgrading from a pre-5.0 version to a 5.0 version or later. If a cluster was upgraded from TiKV v3.x with Titan enabled before the upgrade, this cluster might encounter the issue. [#10774](https://github.com/tikv/tikv/issues/10774)
     - Fix the parsing failure caused by the left pessimistic locks [#26404](https://github.com/pingcap/tidb/issues/26404)
     - Fix the panic that occurs when calculating duration on certain platforms [#10571](https://github.com/tikv/tikv/pull/10571)
     - Fix the issue that the keys of `batch_get_command` in Load Base Split are unencoded [#10542](https://github.com/tikv/tikv/issues/10542)
@@ -162,7 +162,7 @@ TiDB version: 5.0.4
     - Fix the issue of unexpected results when TiFlash fails to establish MPP connections
     - Fix the potential panic issue that occurs when resolving locks
     - Fix the issue that the store size in metrics is inaccurate under heavy writing
-    - Fix a bug of incorrect results that occurs when queries contain filters like `CONSTANT` `<` | `<=` | `>` | `>=` `COLUMN`
+    - Fix a bug of incorrect results that occurs when queries contain filters like `CONSTANT`, `<`, `<=`, `>`, `>=`, or `COLUMN`
     - Fix the potential issue that TiFlash cannot garbage-collect the delta data after running for a long time
     - Fix a potential bug that metrics display wrong values
     - Fix the potential issue of data inconsistency that occurs when TiFlash is deployed on multiple disks
