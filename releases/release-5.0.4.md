@@ -118,7 +118,7 @@ TiDB version: 5.0.4
     - Fix a bug that the value of the `tidb_gc_scan_lock_mode` global variable on a new cluster shows "PHYSICAL" instead of the actual default mode "LEGACY" [#25100](https://github.com/pingcap/tidb/issues/25100)
     - Fix the bug that the `TIKV_REGION_PEERS` system table does not show the correct `DOWN` status [#24879](https://github.com/pingcap/tidb/issues/24879)
     - Fix the issue of memory leaks that occurs when HTTP API is used [#24649](https://github.com/pingcap/tidb/pull/24649)
-    - Fix the issue that views does not support `DEFINER` [#24414](https://github.com/pingcap/tidb/issues/24414)
+    - Fix the issue that views do not support `DEFINER` [#24414](https://github.com/pingcap/tidb/issues/24414)
     - Fix the issue that `tidb-server --help` exits with the code `2` [#24046](https://github.com/pingcap/tidb/issues/24046)
     - Fix the issue that setting the global variable `dml_batch_size` does not take effect [#24709](https://github.com/pingcap/tidb/issues/24709)
     - Fix the issue that using `read_from_storage` and partitioned table at the same time causes an error [#20372](https://github.com/pingcap/tidb/issues/20372)
