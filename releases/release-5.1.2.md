@@ -16,7 +16,7 @@ TiDB version: 5.1.2
 
         - Set compatible version from 5.1.0-alpha to 5.2.0-alpha [#2659](https://github.com/pingcap/ticdc/pull/2659)
         - Prohibit operating TiCDC clusters across major and minor versions [#2599](https://github.com/pingcap/ticdc/pull/2599)
-        - Fix CLI back-compatibility [#2414](https://github.com/pingcap/ticdc/pull/2414)
+        - Fix the CLI compatibility issue with 4.0.x clusters on the default sort-engine option [#2414](https://github.com/pingcap/ticdc/pull/2414)
 
 ## Feature enhancements
 
@@ -35,15 +35,15 @@ TiDB version: 5.1.2
     - push down mod() to TiFlash. [#27865](https://github.com/pingcap/tidb/pull/27865)
 + TiKV
 
-    - Support changing CDC configs dynamically [#10686](https://github.com/tikv/tikv/pull/10686)
-    - Reduce resolved ts message size to save network bandwidth. [#10679](https://github.com/tikv/tikv/pull/10679)
-    - limit the hotspot report count. [#10621](https://github.com/tikv/tikv/pull/10621)
+    - Support dynamically modifying CDC (Change Data Capture) configurations [#10686](https://github.com/tikv/tikv/pull/10686)
+    - Reduce the size of Resolved TS message to save network bandwidth [#10679](https://github.com/tikv/tikv/pull/10679)
+    - Limit the counts of peer states (PeerStat) in the heartbeat message reported by a single store [#10621](https://github.com/tikv/tikv/pull/10621)
 
 + PD
 
-    - dynamically adjust the retry limit according to the operator [#4048](https://github.com/tikv/pd/pull/4048)
-    - allow empty region to be scheduled and use a sperate tolerance config in scatter range scheduler [#4117](https://github.com/tikv/pd/pull/4117)
-    - Improved the performance of synchronizing Region information between PDs. [#3933](https://github.com/tikv/pd/pull/3933)
+    - Allow empty regions to be scheduled and use a separate tolerance configuration in scatter range scheduler [#4117](https://github.com/tikv/pd/pull/4117)
+    - Improve the performance of synchronizing Region information between PDs [#3933](https://github.com/tikv/pd/pull/3933)
+    - Support dynamically adjusting the retry limit of a store based on generated Operator [#4048](https://github.com/tikv/pd/pull/4048)
 
 + TiFlash
 
@@ -56,7 +56,7 @@ TiDB version: 5.1.2
 
     + TiCDC
 
-        - Optimize memory management when unified sorter is using memory to sort. [#2712](https://github.com/pingcap/ticdc/pull/2712)
+        - Optimize memory management when the Unified Sorter is using memory to sort. [#2712](https://github.com/pingcap/ticdc/pull/2712)
         - Optimize workerpool for fewer goroutines when concurrency is high. [#2488](https://github.com/pingcap/ticdc/pull/2488)
         - Reduce goroutine usage when a table's region transfer away from a TiKV node [#2378](https://github.com/pingcap/ticdc/pull/2378)
 
@@ -131,20 +131,20 @@ TiDB version: 5.1.2
 
     + Backup & Restore (BR)
 
-        - fix the bug that the average speed isn't accurate in backup and restore [#1412](https://github.com/pingcap/br/pull/1412)
+        - Fix the bug that the average speed isn't accurate during data backup and restore [#1412](https://github.com/pingcap/br/pull/1412)
 
     + Dumpling
 
-        - fix pending on show table status in some mysql version [#333](https://github.com/pingcap/dumpling/pull/333)
+        - Fix pending on show table status in some MySQL versions (8.0.3, 8.0.23) [#333](https://github.com/pingcap/dumpling/pull/333)
 
     + TiCDC
 
-        - Fix json encoding may cause panic when processing a string type value in some cases. [#2783](https://github.com/pingcap/ticdc/pull/2783)
-        - Fix OOM when TiCDC captures too many regions [#2725](https://github.com/pingcap/ticdc/pull/2725)
-        - Fix gRPC keepalive error when memory pressure is high. [#2720](https://github.com/pingcap/ticdc/pull/2720)
-        - Fix a bug that causes TiCDC to panic on an unsigned tinyint [#2656](https://github.com/pingcap/ticdc/pull/2656)
-        - Fix open protocol, don't output an empty value when there is no change in one transaction. [#2621](https://github.com/pingcap/ticdc/pull/2621)
-        - Fixed a bug in DDL handling when the owner restarts. [#2607](https://github.com/pingcap/ticdc/pull/2607)
+        - Fix a bug that json encoding may cause panic when processing a string type value that is `string` or `[]byte`. [#2783](https://github.com/pingcap/ticdc/pull/2783)
+        - Reduce gRPC window size to avoid OOM [#2725](https://github.com/pingcap/ticdc/pull/2725)
+        - Fix gRPC keepalive error under high memory pressure. [#2720](https://github.com/pingcap/ticdc/pull/2720)
+        - Fix a bug that an unsigned tinyint causes TiCDC to panic. [#2656](https://github.com/pingcap/ticdc/pull/2656)
+        - Fix empty value issue in open protocol. An empty value is no longer output when there is no change in one transaction. [#2621](https://github.com/pingcap/ticdc/pull/2621)
+        - Fix a bug in DDL handling during manual restarts. [#2607](https://github.com/pingcap/ticdc/pull/2607)
         - Fix a bug in metadata management [#2559](https://github.com/pingcap/ticdc/pull/2559)
         - Fix a bug that multiple processors could write the same table when this table is re-scheduling [#2493](https://github.com/pingcap/ticdc/pull/2493)
         - Fix a bug that owner could meet ErrSchemaStorageTableMiss error and reset a changefeed by accident. [#2459](https://github.com/pingcap/ticdc/pull/2459)
