@@ -48,9 +48,9 @@ TiDB version: 5.1.2
 + TiFlash
 
     - Support the `DATE()` function
-    - Add Grafana panels for write throughput per instance
-    - Optimize the performance about `leader-read` process
-    - Optimize the process about canceling `MPP` tasks
+    - Add write throughput per instance to Grafana panels
+    - Optimize the performance of the `leader-read` process
+    - Accelerate the process of canceling `MPP` tasks
 
 + Tools
 
