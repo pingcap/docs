@@ -43,8 +43,8 @@ TiDB version: 4.0.15
 
         - Split and scatter Regions concurrently to improve restore speed [#1363](https://github.com/pingcap/br/pull/1363)
         - Retry BR tasks when encountering the PD request error or the TiKV I/O timeout error [#27787](https://github.com/pingcap/tidb/issues/27787)
-        - Reduce empty Regions when restoring many small tables to avoid affecting cluster operation after the restore [#1374](https://github.com/pingcap/br/issues/1374)
-        - Perform the `rebase auto id` operation while creating tables, which saves the separate `rebase auto id` DDL operations to speed up restore [#1424](https://github.com/pingcap/br/pull/1424)
+        - Reduce empty Regions when restoring many small tables to avoid affecting cluster operations after the restore [#1374](https://github.com/pingcap/br/issues/1374)
+        - Perform the `rebase auto id` operation while creating tables, which saves the separate `rebase auto id` DDL operation and speeds up restore [#1424](https://github.com/pingcap/br/pull/1424)
 
     + Dumpling
 
@@ -59,13 +59,13 @@ TiDB version: 4.0.15
 
     + TiCDC
 
-        - TiCDC always pulls old values from TiKV internally [#2397](https://github.com/pingcap/ticdc/pull/2397)
+        - Always pulls old values from TiKV internally to improve usability [#2397](https://github.com/pingcap/ticdc/pull/2397)
         - Reduce the goroutine usage when a table's Regions are all transferred away from a TiKV node [#2284](https://github.com/pingcap/ticdc/issues/2284)
         - Optimize workerpool for fewer goroutines when concurrency is high [#2211](https://github.com/pingcap/ticdc/issues/2211)
         - Execute DDL statements asynchronously to avoid affecting other changefeeds [#2295](https://github.com/pingcap/ticdc/issues/2295)
         - Add a global gRPC connection pool and share gRPC connections among KV clients [#2531](https://github.com/pingcap/ticdc/pull/2531)
         - Fail fast for unrecoverable DML errors [#1724](https://github.com/pingcap/ticdc/issues/1724)
-        - Optimize memory management when unified sorter is using memory to sort [#2553](https://github.com/pingcap/ticdc/issues/2553)
+        - Optimize memory management when the Unified Sorter is using memory to sort data [#2553](https://github.com/pingcap/ticdc/issues/2553)
         - Add Prometheus metrics for DDL executions [#2595](https://github.com/pingcap/ticdc/issues/2595) [#2669](https://github.com/pingcap/ticdc/issues/2669)
         - Prohibit operating TiCDC clusters across major or minor versions [#2601](https://github.com/pingcap/ticdc/pull/2601)
         - Remove `file sorter` [#2325](https://github.com/pingcap/ticdc/pull/2325)
@@ -76,7 +76,7 @@ TiDB version: 4.0.15
 
 + TiDB
 
-    - Fix a bug that collation is incorrectly set for binary literals when building range [#23672](https://github.com/pingcap/tidb/issues/23672)
+    - Fix a bug that collation is incorrectly set for binary literals when building ranges [#23672](https://github.com/pingcap/tidb/issues/23672)
     - Fix the issue of wrong character set and collation for the `case when` expression [#26662](https://github.com/pingcap/tidb/issues/26662)
     - Fix the "index out of range" error that occurs when a query includes both `GROUP BY` and `UNION` [#26553](https://github.com/pingcap/tidb/pull/26553)
     - Fix the issue that TiDB might fail to send requests if TiKV has tombstone stores [#23676](https://github.com/pingcap/tidb/issues/23676) [#24648](https://github.com/pingcap/tidb/issues/24648)
@@ -106,7 +106,7 @@ TiDB version: 4.0.15
 + TiFlash
 
     - Fix the potential issue of data inconsistency that occurs when TiFlash is deployed on multiple disks
-    - Fix a bug of incorrect results that occurs when queries contain filters like `CONSTANT` `<` | `<=` | `>` | `>=` `COLUMN`
+    - Fix a bug of incorrect results that occurs when queries contain filters like `CONSTANT`, `<`, `<=`, `>`, `>=`, or `COLUMN`
     - Fix the issue that the store size in metrics is inaccurate under heavy writing
     - Fix a potential bug that TiFlash cannot restore data when deployed on multiple disks
     - Fix the potential issue that TiFlash cannot garbage-collect the delta data after running for a long time
@@ -115,12 +115,12 @@ TiDB version: 4.0.15
 
     + Backup & Restore (BR)
 
-        - Fix a bug that the average speed is inaccurate in backup and restore [#1405](https://github.com/pingcap/br/issues/1405)
+        - Fix a bug that the average speed is inaccurately calculated for backup and restore [#1405](https://github.com/pingcap/br/issues/1405)
 
     + TiCDC
 
         - Fix the `ErrSchemaStorageTableMiss` error that occurs when the DDL Job duplication is encountered in the integrated test [#2422](https://github.com/pingcap/ticdc/issues/2422)
-        - Fix the bug that a changefeed cannot be removed if the `ErrGCTTLExceeded` error occurs [#2391](https://github.com/pingcap/ticdc/issues/2391)
+        - Fix a bug that a changefeed cannot be removed if the `ErrGCTTLExceeded` error occurs [#2391](https://github.com/pingcap/ticdc/issues/2391)
         - Fix the issue that outdated capture might appear in the output of the `capture list` command [#2388](https://github.com/pingcap/ticdc/issues/2388)
         - Fix the deadlock issue in the TiCDC processor [#2017](https://github.com/pingcap/ticdc/pull/2017)
         - Fix a data inconsistency issue that occurs because multiple processors might write data to the same table when this table is being re-scheduled [#2230](https://github.com/pingcap/ticdc/issues/2230)
