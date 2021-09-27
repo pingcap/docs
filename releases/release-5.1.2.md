@@ -21,7 +21,7 @@ TiDB version: 5.1.2
         - Fix an issue that using a `count(distinct)` expression on multiple columns returns wrong result when the new collation is enabled [#27091](https://github.com/pingcap/tidb/issues/27091)
         - Fix the result wrong that occurs when the argument of the `extract` function is a negative duration [#27236](https://github.com/pingcap/tidb/issues/27236)
         - Fix the issue that inserting an invalid date does not report an error when the `SQL_MODE` is 'STRICT_TRANS_TABLES' [#26762](https://github.com/pingcap/tidb/issues/26762)
-        - Fix the issue that using an invalid default date does not report an error when the `SQL_MODE` is 'NO_ZERO_IN_DATE' [#26766]
+        - Fix the issue that using an invalid default date does not report an error when the `SQL_MODE` is 'NO_ZERO_IN_DATE' [#26766] (https://github.com/pingcap/tidb/issues/26766)
         
 + Tools
 
@@ -79,9 +79,9 @@ TiDB version: 5.1.2
 
     - Fix the potential wrong results of index hash join when the hash column is the `ENUM` type [#27893](https://github.com/pingcap/tidb/issues/27893)
     - Fix a batch client bug that recycle idle connection might block sending requests in some rare cases [#27678](https://github.com/pingcap/tidb/pull/27678)
-    - Fix the compatibility issue of the overflow check by keeping the same logic as MySQL [#23897](https://github.com/pingcap/tidb/issues/23897)
+    - Fix the issue that the overflow check of the `FLOAT64` type is different with that of MySQL [#23897](https://github.com/pingcap/tidb/issues/23897)
     - Fix the issue that TiDB returns an `unknow` error while it should return the `pd is timeout` error [#26147](https://github.com/pingcap/tidb/issues/26147)
-    - Fix the error of the `case when` function caused by the wrong charset and collation [#26662](https://github.com/pingcap/tidb/issues/26662)
+    - Fix the wrong character set and collation for the `case when` expression [#26662](https://github.com/pingcap/tidb/issues/26662)
     - Fix the potential `can not found column in Schema column` error for MPP queries [#28148](https://github.com/pingcap/tidb/pull/28148)
     - Fix a bug that TiDB might panic when TiFlash is shutting down [#28096](https://github.com/pingcap/tidb/issues/28096)
     - Fix the issue of wrong range caused by using `enum like 'x%'` [#27130](https://github.com/pingcap/tidb/issues/27130)
