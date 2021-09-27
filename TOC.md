@@ -550,12 +550,6 @@
 + [Glossary](/glossary.md)
 + Release Notes
   + [All Releases](/releases/release-notes.md)
-<<<<<<< HEAD
-=======
-  + v5.2
-    + [5.2.1](/releases/release-5.2.1.md)
-    + [5.2.0](/releases/release-5.2.0.md)
->>>>>>> 0490cd195 (releases: add tidb 4.0.15 release notes (#6475))
   + v5.1
     + [5.1.1](/releases/release-5.1.1.md)
     + [5.1.0](/releases/release-5.1.0.md)
