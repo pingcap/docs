@@ -56,10 +56,7 @@
     + [Overview](/data-migration/file/file-migration-overview.md)
     + [Import data from CSV files](/data-migration/file/csv-tidb.md)
     + [Import data from SQL files](/data-migration/file/sql-tidb.md)
-  + From Cloud to TiDB
     + [Overview](/data-migration/cloud/migrate-cloud-overview.md)
-    + [Migrate data from Amazon](/data-migration/cloud/aws-tidb.md)
-    + [Migrate data from Google](/data-migration/cloud/google-tidb.md)
   + From TiDB to TiDB
       + [Overview](/data-migration/tidb-tidb.md)
   + Advanced Migration to TiDB
