@@ -10,6 +10,8 @@ This document introduces the data export tool - [Dumpling](https://github.com/pi
 
 For backups of SST files (key-value pairs) or backups of incremental data that are not sensitive to latency, refer to [BR](/br/backup-and-restore-tool.md). For real-time backups of incremental data, refer to [TiCDC](/ticdc/ticdc-overview.md).
 
+Added a video for test. 
+
 <video src="https://tidb-docs.s3.us-east-2.amazonaws.com/Lesson+18+%E8%AF%BE%E7%A8%8B.mp4" width="800px" height="600px" controls="controls"></video>
 
 > **Note:**
