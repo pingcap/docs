@@ -543,21 +543,6 @@
 + [Glossary](/glossary.md)
 + Release Notes
   + [All Releases](/releases/release-notes.md)
-<<<<<<< HEAD
-=======
-  + v5.2
-    + [5.2.1](/releases/release-5.2.1.md)
-    + [5.2.0](/releases/release-5.2.0.md)
-  + v5.1
-    + [5.1.1](/releases/release-5.1.1.md)
-    + [5.1.0](/releases/release-5.1.0.md)
-  + v5.0
-    + [5.0.3](/releases/release-5.0.3.md)
-    + [5.0.2](/releases/release-5.0.2.md)
-    + [5.0.1](/releases/release-5.0.1.md)
-    + [5.0 GA](/releases/release-5.0.0.md)
-    + [5.0.0-rc](/releases/release-5.0.0-rc.md)
->>>>>>> 0490cd195 (releases: add tidb 4.0.15 release notes (#6475))
   + v4.0
     + [4.0.15](/releases/release-4.0.15.md)
     + [4.0.14](/releases/release-4.0.14.md)
