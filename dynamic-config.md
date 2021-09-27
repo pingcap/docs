@@ -199,6 +199,10 @@ The following TiKV configuration items can be modified online:
 | `split.qps-threshold` | The threshold to execute `load-base-split` on a Region. If the read QPS is higher than this value for 10 consecutive seconds, this Region should be split. |
 | `split.split-balance-score` | The parameter of `load-base-split`, which ensures the load of the two split Regions is as balanced as possible |
 | `split.split-contained-score` | The parameter of `load-base-split`, which reduces the cross-Region visits after split as much as possible |
+| cdc.incremental-scan-concurrency | The maximum number of concurrent executions for the tasks of incrementally scanning historical data (supported since v4.0.15) |
+| cdc.incremental-scan-speed-limit| The maximum speed at which historical data is incrementally scanned (supported since v4.0.15) |
+| cdc.min-ts-interval | The interval at which Resolved TS is forwarded (supported since v4.0.15)  |
+| cdc.sink-memory-quota| The upper limit of memory usage by TiCDC data change events (supported since v4.0.15)  |
 
 In the table above, parameters with the `{db-name}` or `{db-name}.{cf-name}` prefix are configurations related to RocksDB. The optional values of `db-name` are `rocksdb` and `raftdb`.
 
