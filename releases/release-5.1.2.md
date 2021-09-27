@@ -32,7 +32,6 @@ TiDB version: 5.1.2
 + TiDB
 
     - Trigger auto-analyze by histogram row count and increase the accuracy of this trigger action  [#24237](https://github.com/pingcap/tidb/issues/24237)
-    - Push down `mod()` to TiFlash to increase the query performance [#2318](https://github.com/pingcap/tics/issues/2318)
 
 + TiKV
 
