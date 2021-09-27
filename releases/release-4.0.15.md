@@ -39,7 +39,7 @@ TiDB version: 4.0.15
 + TiKV
 
     - Handle read ready and write ready separately to reduce read latency [#10475](https://github.com/tikv/tikv/issues/10475)
-    - The slow log of TiKV coprocessor only considers the time spent on processing requests. [#1084](https://github.com/tikv/tikv/issues/10841)
+    - The slow log of TiKV coprocessor only considers the time spent on processing requests. [#10841](https://github.com/tikv/tikv/issues/10841)
     - Drop log instead of blocking threads when the slogger thread is overloaded and the queue is filled up [#10841](https://github.com/tikv/tikv/issues/10841)
     - Reduce the size of Resolved TS messages to save network bandwidth [#2448](https://github.com/pingcap/ticdc/issues/2448)
 
