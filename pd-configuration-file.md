@@ -127,10 +127,15 @@ Configuration items related to security
 
 Configuration items related to log
 
+### `level`
+
++ The log level, which can be specified as "DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL".
++ Default value: "INFO"
+
 ### `format`
 
 + The log format, which can be specified as "text", "json", or "console"
-+ Default value: `text`
++ Default value: "text"
 
 ### `disable-timestamp`
 
@@ -280,7 +285,7 @@ Configuration items related to replicas
 
 ### `max-replicas`
 
-+ The number of replicas
++ The number of replicas, that is, the sum of the number of leaders and followers. The default value `3` means 1 leader and 2 followers. When this configuration is modified online, PD will schedule Regions in the background so that the number of replicas matches this configuration.
 + Default value: `3`
 
 ### `location-labels`
@@ -356,7 +361,3 @@ Configuration items related to the [TiDB Dashboard](/dashboard/dashboard-intro.m
 + Determines whether to enable the telemetry collection feature in TiDB Dashboard.
 + Default value: `true`
 + See [Telemetry](/telemetry.md) for details.
-
-## `replication-mode`
-
-Configuration items related to the replication mode of all Regions. See [Enable synchronous replication in PD configuration file](/synchronous-replication.md#enable-synchronous-replication-in-the-pd-configuration-file) for details.

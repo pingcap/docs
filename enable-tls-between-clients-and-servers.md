@@ -38,7 +38,7 @@ Similar to MySQL, the encrypted connections in TiDB consist of single connection
 
 ## Configure TiDB to use encrypted connections
 
-See the following desrciptions about the related parameters to enable encrypted connections:
+See the following descriptions about the related parameters to enable encrypted connections:
 
 - [`ssl-cert`](/tidb-configuration-file.md#ssl-cert): specifies the file path of the SSL certificate
 - [`ssl-key`](/tidb-configuration-file.md#ssl-key): specifies the private key that matches the certificate
@@ -183,4 +183,4 @@ The newly loaded certificate, key, and CA take effect on the connection that is 
 
 ### See also
 
-- [Enable TLS Between TiDB Components](/enable-tls-between-components.md)。
+- [Enable TLS Between TiDB Components](/enable-tls-between-components.md).
