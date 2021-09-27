@@ -351,7 +351,7 @@ Configuration items related to performance.
 ### `committer-concurrency`
 
 + The number of goroutines for requests related to executing commit in the commit phase of the single transaction.
-+ Default value: `16`
++ Default value: `128`
 + If the transaction to commit is too large, the waiting time for the flow control queue when the transaction is committed might be too long. In this situation, you can increase the configuration value to speed up the commit.
 
 ### `stmt-count-limit`
@@ -582,16 +582,16 @@ Configuration related to the status of TiDB service.
 
 ## stmt-summary <span class="version-mark">New in v3.0.4</span>
 
-Configurations related to the `events_statement_summary_by_digest` table.
+Configurations related to [statement summary tables](/statement-summary-tables.md).
 
 ### max-stmt-count
 
-- The maximum number of SQL categories allowed to be saved in the `events_statement_summary_by_digest` table.
-- Default value: `100`
+- The maximum number of SQL categories allowed to be saved in [statement summary tables](/statement-summary-tables.md).
+- Default value: `3000`
 
 ### max-sql-length
 
-- The longest display length for the `DIGEST_TEXT` and `QUERY_SAMPLE_TEXT` columns in the `events_statement_summary_by_digest` table.
+- The longest display length for the `DIGEST_TEXT` and `QUERY_SAMPLE_TEXT` columns in [statement summary tables](/statement-summary-tables.md).
 - Default value: `4096`
 
 ## pessimistic-txn
