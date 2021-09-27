@@ -4,6 +4,7 @@ summary: Learn how to install TiDB data migration tools, including Data Migratio
 ---
 
 # Install TiDB data migration tools
+
 This document describes how to install data migration tools.
 
 ## Prerequisites
