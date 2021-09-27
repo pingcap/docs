@@ -100,7 +100,7 @@ TiDB version: 5.1.2
     - Fix the potential disk full issue caused by corrupted snapshot files [#10813](https://github.com/tikv/tikv/issues/10813)
     - Make the slow log of TiKV coprocessor only consider the time spent on processing requests [#10841](https://github.com/tikv/tikv/issues/10841)
     - Drop log instead of blocking threads when the slogger thread is overloaded and the queue is filled up [#10841](https://github.com/tikv/tikv/issues/10841)
-    - Fix a panic issue that occurs when TiKV processes Coprocessor requests times out [#10852](https://github.com/tikv/tikv/issues/10852)
+    - Fix a panic issue that occurs when processing Coprocessor requests times out [#10852](https://github.com/tikv/tikv/issues/10852)
     - Fix the TiKV panic issue that occurs when upgrading from a pre-5.0 version with Titan enabled [#10842](https://github.com/tikv/tikv/pull/10842)
     - Fix the issue that TiKV of a newer version cannot be rolled back to v5.0.x [#10842](https://github.com/tikv/tikv/pull/10842)
     - Fix the issue that TiKV might delete files before ingesting data to RocksDB [#10438](https://github.com/tikv/tikv/issues/10438)
