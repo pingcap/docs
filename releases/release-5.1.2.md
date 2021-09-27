@@ -13,7 +13,7 @@ TiDB version: 5.1.2
 + TiDB
 
     + The following bug fixes change execution results, which might cause upgrade incompatibilities:
-    
+
         - Fix the issue that `greatest(datetime) union null` returns empty string [#26532](https://github.com/pingcap/tidb/issues/26532)
         - Fix the issue that the `having` clause might not work correctly [#26496](https://github.com/pingcap/tidb/issues/26496)
         - Fix the wrong execution results that occur when the collations around the `between` expression are different [#27146](https://github.com/pingcap/tidb/issues/27146)
@@ -22,23 +22,12 @@ TiDB version: 5.1.2
         - Fix the result wrong that occurs when the argument of the `extract` function is a negative duration [#27236](https://github.com/pingcap/tidb/issues/27236)
         - Fix the issue that inserting an invalid date does not report an error when the `SQL_MODE` is 'STRICT_TRANS_TABLES' [#26762](https://github.com/pingcap/tidb/issues/26762)
         - Fix the issue that using an invalid default date does not report an error when the `SQL_MODE` is 'NO_ZERO_IN_DATE' [#26766](https://github.com/pingcap/tidb/issues/26766)
-        
+
 + Tools
 
     + TiCDC
 
         - Set the compatible version from `5.1.0-alpha` to `5.2.0-alpha` [#2659](https://github.com/pingcap/ticdc/pull/2659)
-        - Prohibit operating TiCDC clusters across major and minor versions [#2599](https://github.com/pingcap/ticdc/pull/2599)
-        - Fix the CLI compatibility issue with 4.0.x clusters on the default `sort-engine` option [#2373](https://github.com/pingcap/ticdc/issues/2373)
-
-## Feature enhancements
-
-+ Tools
-
-    + Dumpling
-
-        - Support backing up MySQL-compatible databases that do not support `START TRANSACTION ... WITH CONSISTENT SNAPSHOT` and `SHOW CREATE TABLE` [#309](https://github.com/pingcap/dumpling/issues/309)
-        - Add a global gRPC connection pool and share gRPC connections among KV clients [#2534](https://github.com/pingcap/ticdc/pull/2534)
 
 ## Improvements
 
@@ -72,6 +61,12 @@ TiDB version: 5.1.2
         - Optimize memory management when the Unified Sorter is using memory to sort data [#2553](https://github.com/pingcap/ticdc/issues/2553)
         - Optimize workerpool for fewer goroutines when concurrency is high  [#2211](https://github.com/pingcap/ticdc/issues/2211)
         - Reduce goroutine usage when a table's Region transfer away from a TiKV node [#2284](https://github.com/pingcap/ticdc/issues/2284)
+
+    + Dumpling
+
+        - Support backing up MySQL-compatible databases that do not support `START TRANSACTION ... WITH CONSISTENT SNAPSHOT` and `SHOW CREATE TABLE` [#309](https://github.com/pingcap/dumpling/issues/309)
+        - Add a global gRPC connection pool and share gRPC connections among KV clients [#2534](https://github.com/pingcap/ticdc/pull/2534)
+        - Prohibit operating TiCDC clusters across major and minor versions [#2599](https://github.com/pingcap/ticdc/pull/2599)
 
 ## Bug fixes
 
@@ -142,6 +137,7 @@ TiDB version: 5.1.2
     + Dumpling
 
         - Fix the issue that Dumpling is pending when `show table status` returns incorrect results in some MySQL versions (8.0.3 and 8.0.23) [#322](https://github.com/pingcap/dumpling/issues/322)
+        - Fix the CLI compatibility issue with 4.0.x clusters on the default `sort-engine` option [#2373](https://github.com/pingcap/ticdc/issues/2373)
 
     + TiCDC
 
