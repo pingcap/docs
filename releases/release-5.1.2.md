@@ -24,7 +24,7 @@ TiDB version: 5.1.2
 
     + Dumpling
 
-        - Support for backing up MySQL compatible databases that do not support `START TRANSACTION ... WITH CONSISTENT SNAPSHOT` and `SHOW CREATE TABLE`  [#328](https://github.com/pingcap/dumpling/pull/328)
+        - Support for backing up MySQL compatible databases that do not support `START TRANSACTION ... WITH CONSISTENT SNAPSHOT` and `SHOW CREATE TABLE`  [#309](https://github.com/pingcap/dumpling/issues/309)
         - Add a global `gRPC` connection pool and share `gRPC` connections among `kv` clients [#2534](https://github.com/pingcap/ticdc/pull/2534)
 
 ## Improvements
@@ -33,17 +33,18 @@ TiDB version: 5.1.2
 
     - Trigger auto-analyze by histogram row count, increase the accuracy of this trigger action  [#24237](https://github.com/pingcap/tidb/issues/24237)
     - Push down mod() to TiFlash, increase the query performance. [#2318](https://github.com/pingcap/tics/issues/2318)
+
 + TiKV
 
-    - Support dynamically modifying CDC (Change Data Capture) configurations [#10645](https://github.com/tikv/tikv/issues/10645)
+    - Support dynamically modifying TiCDC configurations [#10645] (https://github.com/tikv/tikv/issues/10645)
     - Reduce the size of Resolved TS message to save network bandwidth [#2448](https://github.com/pingcap/ticdc/issues/2448)
-    - Limit the counts of peer states (PeerStat) in the heartbeat message reported by a single store [#10621](https://github.com/tikv/tikv/pull/10621)
+    - Limit the counts of peer stats in the heartbeat message reported by a single store [#10621](https://github.com/tikv/tikv/pull/10621)
 
 + PD
 
     - Allow empty regions to be scheduled and use a separate tolerance configuration in scatter range scheduler [#4117](https://github.com/tikv/pd/pull/4117)
     - Improve the performance of synchronizing Region information between PDs [#3933](https://github.com/tikv/pd/pull/3933)
-    - Support dynamically adjusting the retry limit of a store based on generated Operator [#4048](https://github.com/tikv/pd/pull/4048)
+    - Support dynamically adjusting the retry limit of a store based on generated Operator [#3744](https://github.com/tikv/pd/issues/3744)
 
 + TiFlash
 
@@ -56,8 +57,8 @@ TiDB version: 5.1.2
 
     + TiCDC
 
-        - Optimize memory management when the Unified Sorter is using memory to sort [#2712](https://github.com/pingcap/ticdc/pull/2712)
-        - Optimize workerpool for fewer goroutines when concurrency is high [#2488](https://github.com/pingcap/ticdc/pull/2488)
+        - Optimize memory management when the Unified Sorter is using memory to sort [#2553](https://github.com/pingcap/ticdc/issues/2553)
+        - Optimize workerpool for fewer goroutines when concurrency is high  [#2211](https://github.com/pingcap/ticdc/issues/2211)
         - Reduce goroutine usage when a table's region transfer away from a TiKV node [#2284](https://github.com/pingcap/ticdc/issues/2284)
 
 ## Bug Fixes
@@ -96,13 +97,22 @@ TiDB version: 5.1.2
 
 + TiKV
 
-    - Fix bug when TiKV upgrade from 3.0 to 4.x and 5.x but there are still some files left by import. [#10902](https://github.com/tikv/tikv/issues/10902)
-    - RaftStore Snapshot GC fix: fix the issue that snapshot GC missed GC snapshot files when there's one snapshot file failed to be GC-ed. [#10813](https://github.com/tikv/tikv/issues/10813)
-    - TiKV coprocessor slow log will only consider time spent on processing the request. Drop log instead of blocking threads when slogger thread is overloaded and queue is filled up. [#10865](https://github.com/tikv/tikv/pull/10865)
-    - Bug fix: fix an unexpected panic when exceeds deadline on processing copr requests. [#10852](https://github.com/tikv/tikv/issues/10852)
-    - Fix TiKV panic when enable Titan and upgrade from pre-5.0 version. Fix newer TiKV can't rollback to 5.0.x [#10842](https://github.com/tikv/tikv/pull/10842)
-    - Fix TiKV delete files before it ingests to RocksDB. [#10438](https://github.com/tikv/tikv/issues/10438)
-    - Fix the resolve failures caused by the left pessimisic locks. [#26404](https://github.com/pingcap/tidb/issues/26404)
+    - Fix a bug that some files are missed to be imported during the process of importing snapshot files when upgrading TiKV from v3.x to v4.x or v5.x [#10902](https://github.com/tikv/tikv/issues/10902)
+    - Fix the issue that the GC (Garbage Collection) failure (such as file corrupted) of a single snapshot file stops the GC process of all other GC-able files [#10813](https://github.com/tikv/tikv/issues/10813)
+    - The slow log of TiKV coprocessor only considers the time spent on processing requests [#10841](https://github.com/tikv/tikv/issues/10841)
+    - Drop log instead of blocking threads when the slogger thread is overloaded and the queue is filled up [#10841](https://github.com/tikv/tikv/issues/10841)
+    - Fix a bug of the panic caused by timeout when processing Coprocessor requests [#10852](https://github.com/tikv/tikv/issues/10852)
+    - Fix the TiKV panic issue that occurs when upgrading from a pre-5.0 version with Titan enabled [#10842](https://github.com/tikv/tikv/pull/10842)
+    - Fix the issue that TiKV of a newer version cannot be rolled back to v5.0.x [#10842](https://github.com/tikv/tikv/pull/10842)
+    - Fix the issue that TiKV might delete files before it ingests to RocksDB [#10438](https://github.com/tikv/tikv/issues/10438)
+    - Fix the parsing failure caused by the left pessimistic locks [#26404](https://github.com/pingcap/tidb/issues/26404)
+    
++ PD
+
+    - Fix the issue that PD does not fix the down peers in time [#4077](https://github.com/tikv/pd/issues/4077)
+    - Fix the issue that the replica count of the default placement rules stays constant after `replication.max-replicas` is updated [#3886](https://github.com/tikv/pd/issues/3886)
+    - Fix a bug that PD might panic when scaling out TiKV [#3868](https://github.com/tikv/pd/issues/3868)
+    - Fix a bug that the hot region scheduler cannot work when the cluster has evict leader scheduler [#3697](https://github.com/tikv/pd/issues/3697)
 
 + TiFlash
 
@@ -119,13 +129,6 @@ TiDB version: 5.1.2
     - Fix the potential panic issue that occurs during lock resolving
     - Fix a bug that metrics display wrong value
 
-+ PD
-
-    - Fix the bug that PD would not fix down-peer in time. [#4077](https://github.com/tikv/pd/issues/4077)
-    - Fix an issue where data is not stored when using max-replicas or location-labels to indirectly update default placement rule [#3886](https://github.com/tikv/pd/issues/3886)
-    - Fix the bug that PD may panic during scaling out TiKV. [#3911](https://github.com/tikv/pd/pull/3911)
-    - Fix the bug that hot region scheduler can not work when the cluster has evict leader scheduler. [#3697](https://github.com/tikv/pd/pull/3697)
-
 + Tools
 
     + Backup & Restore (BR)
@@ -134,18 +137,19 @@ TiDB version: 5.1.2
 
     + Dumpling
 
-        - Fix the issue that Dumpling is pending when `show table status` returns incorrect results in some MySQL versions (8.0.3, 8.0.23) [#333](https://github.com/pingcap/dumpling/pull/333)
+        - Fix the issue that Dumpling is pending when `show table status` returns incorrect results in some MySQL versions (8.0.3, 8.0.23) [#322](https://github.com/pingcap/dumpling/issues/322)
 
     + TiCDC
 
-        - Fix a bug that json encoding may cause panic when processing a string type value that is `string` or `[]byte`. [#2783](https://github.com/pingcap/ticdc/pull/2783)
-        - Reduce gRPC window size to avoid OOM [#2725](https://github.com/pingcap/ticdc/pull/2725)
-        - Fix gRPC keepalive error under high memory pressure. [#2720](https://github.com/pingcap/ticdc/pull/2720)
-        - Fix a bug that an unsigned tinyint causes TiCDC to panic. [#2656](https://github.com/pingcap/ticdc/pull/2656)
+        - Fix a bug that json encoding may cause panic when processing a string type value that is `string` or `[]byte`. [#2758](https://github.com/pingcap/ticdc/issues/2758)
+        - Reduce gRPC window size to avoid OOM [#2202](https://github.com/pingcap/ticdc/issues/2202)
+        - Fix gRPC keepalive error under high memory pressure. [#2202](https://github.com/pingcap/ticdc/issues/2202)
+        - Fix a bug that an unsigned tinyint causes TiCDC to panic. [#2648](https://github.com/pingcap/ticdc/issues/2648)
         - Fix empty value issue in open protocol. An empty value is no longer output when there is no change in one transaction. [#2612](https://github.com/pingcap/ticdc/issues/2612)
-        - Fix a bug in DDL handling during manual restarts. [#2607](https://github.com/pingcap/ticdc/pull/2607)
+        - Fix a bug in DDL handling during manual restarts [#2603](https://github.com/pingcap/ticdc/issues/2603)
         - Fix the issue that EtcdWorker's snapshot isolation might be wrongly violated when managing the metadata [#2559](https://github.com/pingcap/ticdc/pull/2559)
         - Fix the issue that multiple processors could write in the same table when re-scheduling this table [#2230](https://github.com/pingcap/ticdc/issues/2230)
         - Fix the issue of the ErrSchemaStorageTableMiss error and that a changefeed is reset by accident. [#2422](https://github.com/pingcap/ticdc/issues/2422)
         - Fix the issue that changefeed cannot be removed when the GcTTL Exceeded Error occors [#2391](https://github.com/pingcap/ticdc/issues/2391)
-        - Fix the issue that replicating large tables to `cdclog` fails [#2446](https://github.com/pingcap/ticdc/pull/2446)
+        - Fix the issue that replicating large tables to `cdclog` fails [#1259](https://github.com/pingcap/ticdc/issues/1259)[#2424](https://github.com/pingcap/ticdc/issues/2424)
+
