@@ -13,6 +13,7 @@ TiDB version: 5.1.2
 + TiDB
 
     + The following bug fixes change execution results, which might cause upgrade incompatibilities:
+    
         - Fix the issue that `greatest(datetime) union null` returns empty string [#26532](https://github.com/pingcap/tidb/issues/26532)
         - Fix the issue that the `having` clause might not work correctly [#26496](https://github.com/pingcap/tidb/issues/26496)
         - Fix the wrong execution results that occur when the collations around the `between` expression are different [#27146](https://github.com/pingcap/tidb/issues/27146)
