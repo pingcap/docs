@@ -9,6 +9,10 @@ TiDB Dashboard supports [OIDC](https://openid.net/connect/)-based Single Sign-On
 
 ## Configure OIDC SSO
 
+> **Note:**
+>
+> This feature is available only in v5.0.4 or a later version.
+
 ### Enable SSO
 
 1. Sign into TiDB Dashboard.
