@@ -73,7 +73,7 @@ TiDB version: 5.1.2
         - Optimize workerpool for fewer goroutines when concurrency is high  [#2211](https://github.com/pingcap/ticdc/issues/2211)
         - Reduce goroutine usage when a table's Region transfer away from a TiKV node [#2284](https://github.com/pingcap/ticdc/issues/2284)
 
-## Bug Fixes
+## Bug fixes
 
 + TiDB
 
