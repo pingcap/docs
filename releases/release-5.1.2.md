@@ -124,14 +124,14 @@ TiDB version: 5.1.2
     - Fix the potential issue of data inconsistency that occurs when TiFlash is deployed on multiple disks
     - Fix a bug that MPP queries get wrong results when TiFlash server is under high load
     - Fix a potential bug that MPP queries hang forever
-    - Fix the issue of concurrency issue between store initialization and DDL
-    - Fix a bug of incorrect results that occurs when queries contain filters like `CONSTANT`, `<`, `<=`, `>`, `>=` or `COLUMN`
+    - Fix the panic issue when operating store initialization and DDL simultaneously
+    - Fix a bug of incorrect results that occurs when queries contain filters like `CONSTANT`, `<`, `<=`, `>`, `>=`, or `COLUMN`
     - Fix the potential panic issue when `Snapshot` is applied simultaneously with multiple DDL operations
     - Fix the issue that the store size in metrics is inaccurate under heavy writing
-    - Fix the potential issue that TiFlash cannot perform GC for the delta data after running for a long time
-    - Fix the issue of wrong results when new collation is enabled
-    - Fix the potential panic issue that occurs during lock resolving
-    - Fix a bug that metrics display wrong value
+    - Fix the potential issue that TiFlash cannot garbage-collect the delta data after running for a long time
+    - Fix the issue of wrong results when the new collation is enabled
+    - Fix the potential panic issue that occurs when resolving locks
+    - Fix a potential bug that metrics display wrong values
 
 + Tools
 
