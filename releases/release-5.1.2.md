@@ -16,7 +16,7 @@ TiDB version: 5.1.2
 
         - Set compatible version from 5.1.0-alpha to 5.2.0-alpha [#2659](https://github.com/pingcap/ticdc/pull/2659)
         - Prohibit operating TiCDC clusters across major and minor versions [#2599](https://github.com/pingcap/ticdc/pull/2599)
-        - Fix the CLI compatibility issue with 4.0.x clusters on the default sort-engine option [#2414](https://github.com/pingcap/ticdc/pull/2414)
+        - Fix the CLI compatibility issue with 4.0.x clusters on the default sort-engine option [#2373](https://github.com/pingcap/ticdc/issues/2373)
 
 ## Feature enhancements
 
