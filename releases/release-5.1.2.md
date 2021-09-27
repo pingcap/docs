@@ -142,7 +142,7 @@ TiDB version: 5.1.2
 
         - Fix a bug that the JSON encoding might cause panic when processing a string type value that is `string` or `[]byte` [#2758](https://github.com/pingcap/ticdc/issues/2758)
         - Reduce gRPC window size to avoid OOM [#2202](https://github.com/pingcap/ticdc/issues/2202)
-        - Fix a gRPC keepalive error under high memory pressure [#2202](https://github.com/pingcap/ticdc/issues/2202)
+        - Fix a gRPC `keepalive` error under high memory pressure [#2202](https://github.com/pingcap/ticdc/issues/2202)
         - Fix a bug that an unsigned `tinyint` causes TiCDC to panic [#2648](https://github.com/pingcap/ticdc/issues/2648)
         - Fix an empty value issue in TiCDC Open Protocol. An empty value is no longer output when there is no change in one transaction. [#2612](https://github.com/pingcap/ticdc/issues/2612)
         - Fix a bug in DDL handling during manual restarts [#2603](https://github.com/pingcap/ticdc/issues/2603)
