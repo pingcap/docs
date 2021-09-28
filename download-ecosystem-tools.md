@@ -53,7 +53,7 @@ Download [DM](https://docs.pingcap.com/tidb-data-migration/stable/overview) by u
 
 > **Note:**
 >
-> `{version}` in the above download link indicates the version number of DM. For example, the download link for `v5.1.2` is `https://download.pingcap.org/tidb-toolkit-v5.1.2-linux-amd64.tar.gz`. You can check the published DM versions in the [DM Release](https://github.com/pingcap/dm/releases) page.
+> `{version}` in the above download link indicates the version number of DM. For example, the download link for `v2.0.4` is `https://download.pingcap.org/dm-v2.0.4-linux-amd64.tar.gz`. You can check the published DM versions in the [DM Release](https://github.com/pingcap/dm/releases) page.
 
 ## Dumpling
 
