@@ -26,7 +26,7 @@ To download the latest version of PD Recover, directly download the TiDB package
 
 > **Note:**
 >
-> `{version}` indicates the version number of TiDB. For example, if `{version}` is `v5.0.3`, the package download link is `https://download.pingcap.org/tidb-v5.0.3-linux-amd64.tar.gz`.
+> `{version}` indicates the version number of TiDB. For example, if `{version}` is `v5.0.4`, the package download link is `https://download.pingcap.org/tidb-v5.0.4-linux-amd64.tar.gz`.
 
 ## Quick Start
 
