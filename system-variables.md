@@ -215,18 +215,18 @@ mysql> SELECT * FROM t1;
 
 - Scope: GLOBAL
 - Default value: `OFF`
-- This controls if the `tidb-server` should resolve hostnames as part of the connection handshake.
-- Enabling this option is useful as a performance optimization when DNS is unreliable.
+- This variable controls whether the `tidb-server` instance resolves hostnames as a part of the connection handshake.
+- When the DNS is unreliable, you can enable this option to improve network performance.
 
 > **Note:**
 >
-> When `skip_name_resolve=ON`, users with a hostname in their identity will no longer be able to log in. i.e.
+> When `skip_name_resolve=ON`, users with a hostname in their identity will no longer be able to log into the server. For example:
 >
 > ```sql
 > CREATE USER 'appuser'@'apphost' IDENTIFIED BY 'app-password';
 > ```
 >
-> In this example, it is recommended to replace _apphost_ with an IP address or wildcard (`%`).
+> In this example, it is recommended to replace `apphost` with an IP address or the wildcard (`%`).
 
 ### socket
 
