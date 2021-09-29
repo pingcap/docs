@@ -129,7 +129,7 @@ mysql> SELECT * FROM t1;
 
 - Scope: SESSION | GLOBAL
 - Default value: `utf8mb4_bin`
-- This variable indicates the collation of the default database that is in use. **It is NOT recommended to set this variable**. When a new default database is selected, the server changes the variable value.
+- This variable indicates the collation of the default database in use. **It is NOT recommended to set this variable**. When a new default database is selected, the server changes the variable value.
 
 ### collation_server
 
