@@ -247,7 +247,7 @@ mysql> SELECT * FROM t1;
 - Scope: GLOBAL | SESSION
 - Default value: `67108864`
 - Range: `[1024, 1073741824]`
-- Maximum size of a packet for the MySQL protocol
+- The maximum size of a packet for the MySQL protocol.
 
 ### max_execution_time
 
