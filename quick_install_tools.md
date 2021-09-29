@@ -35,7 +35,7 @@ You can start by looking at all the installable components
 {{< copyable "shell-regular" >}}
 
 ```shell
-tiup install dumpling tidb-lightning
+tiup list
 ```
 
 The following output can be seen
@@ -72,7 +72,7 @@ tiup install dumpling tidb-lightning
 >
 > To install a component of a specific version, you can use the `tiup install <component>[:version]` command.
 
-## Step 3. Update TiUP and components
+## Step 3. Update TiUP and components (Optional)
 
 {{< copyable "shell-regular" >}}
 
