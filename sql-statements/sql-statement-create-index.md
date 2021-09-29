@@ -110,7 +110,7 @@ For example, if you want to create an index based on `lower(col1)`, execute the 
 {{< copyable "sql" >}}
 
 ```sql
-CREATE INDEX idx1 ON t1 (lower(col1));
+CREATE INDEX idx1 ON t1 ((lower(col1)));
 ```
 
 Or you can execute the following equivalent statement:
@@ -118,7 +118,7 @@ Or you can execute the following equivalent statement:
 {{< copyable "sql" >}}
 
 ```sql
-ALTER TABLE t1 ADD INDEX idx1(lower(col1));
+ALTER TABLE t1 ADD INDEX idx1((lower(col1)));
 ```
 
 You can also specify the expression index when you create the table:
@@ -126,8 +126,12 @@ You can also specify the expression index when you create the table:
 {{< copyable "sql" >}}
 
 ```sql
-CREATE TABLE t1(col1 char(10), col2 char(10), key index(lower(col1)));
+CREATE TABLE t1(col1 char(10), col2 char(10), key index((lower(col1))));
 ```
+
+> **Note**
+>
+> The expression in an expression index must be surrounded by '(' and ')'. Otherwise, a syntax error is reported.
 
 You can drop an expression index in the same way as dropping an ordinary index:
 
