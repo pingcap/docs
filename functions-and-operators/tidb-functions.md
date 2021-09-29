@@ -7,7 +7,7 @@ summary: Learn about the usage of TiDB specific functions.
 
 The following functions are TiDB extensions, and are not present in MySQL:
 
-| Function name | Feature description |
+| Function name | Function description |
 | :-------------- | :------------------------------------- |
 | `TIDB_BOUNDED_STALENESS()` | The `TIDB_BOUNDED_STALENESS` function is an internal function of TiDB. |
 | [`TIDB_DECODE_KEY(str)`](#tidb_decode_key) | The `TIDB_DECODE_KEY` function can be used to decode a TiDB-encoded key entry into a JSON structure containing `_tidb_rowid` and `table_id`. These encoded keys can be found in some system tables and in logging outputs. |
