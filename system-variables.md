@@ -123,7 +123,7 @@ mysql> SELECT * FROM t1;
 
 - Scope: SESSION | GLOBAL
 - Default value: `utf8mb4_bin`
-- The collation for string literals that do not have a specified collation.
+- This variable indicates the collation for string literals that do not have a specified collation.
 
 ### collation_database
 
