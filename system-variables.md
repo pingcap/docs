@@ -304,7 +304,7 @@ mysql> SELECT * FROM t1;
 
 - Scope: NONE
 - Default value: ""
-- The location of the private key file that is used for SSL/TLS connections if specified on startup.
+- The location of the private key file (if there is one) that is used for SSL/TLS connections when TiDB is started.
 
 ### system_time_zone
 
