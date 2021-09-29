@@ -1,0 +1,9 @@
+extends: substitution
+message: Use '%s' instead of '%s'
+ignorecase: false
+level: error
+swap:
+  "(?:can\'t)": cannot
+  "(?:don\'t)": do not
+  "(?:shouldn\'t)": should not
+  "(?:won\'t)": will not

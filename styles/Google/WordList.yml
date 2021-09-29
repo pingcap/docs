@@ -1,0 +1,30 @@
+extends: substitution
+message: "Use '%s' instead of '%s'."
+link: 'https://developers.google.com/style/word-list'
+level: warning
+ignorecase: false
+action:
+  name: replace
+swap:
+  authN: authentication
+  authZ: authorization
+  autoupdate: automatically update
+  chapter: document|page|section
+  check box: checkbox
+  click on: click
+  data are: data is
+  fewer data: less data
+  firewalls: firewall rules
+  Google account: Google Account
+  HTTPs: HTTPS
+  in order to: to
+  k8s: Kubernetes
+  long press: touch & hold
+  regex: regular expression
+  synch: sync
+  tablename: table name
+  tablet: device
+  touch: tap
+  url: URL
+  vs\.: versus
+  World Wide Web: web

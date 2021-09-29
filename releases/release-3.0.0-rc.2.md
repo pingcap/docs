@@ -3,7 +3,11 @@ title: TiDB 3.0.0-rc.2 Release Notes
 aliases: ['/docs/dev/releases/release-3.0.0-rc.2/','/docs/dev/releases/3.0.0-rc.2/']
 ---
 
+<!-- vale PingCAP.TopHeadings = NO -->
+
 # TiDB 3.0.0-rc.2 Release Notes
+
+<!-- vale PingCAP.TopHeadings = YES -->
 
 Release date: May 28, 2019
 
