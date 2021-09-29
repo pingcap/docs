@@ -42,7 +42,6 @@
     + [Test TiDB Using TPC-C](/benchmark/benchmark-tidb-using-tpcc.md)
 + Migrate
   + [Overview](/migration-overview.md)
-  + [Quick installation](/data-migration/quick_install_tools.md)
   + From Amazon Aurora to TiDB
     + [Overview](/data-migration/aurora/migrate-aurora-overview.md)
     + [Full data migration from a snapshot](/data-migration/aurora/from-snapshot.md)
