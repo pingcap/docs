@@ -190,13 +190,13 @@ mysql> SELECT * FROM t1;
 
 - Scope: NONE
 - Default value: `DISABLED`
-- MySQL compatibiltiy read-only variable. Set to `YES` when the server has TLS enabled.
+- A read-only variable for MySQL compatibility. Set to `YES` by the server when the server has TLS enabled.
 
 ### have_ssl
 
 - Scope: NONE
 - Default value: `DISABLED`
-- MySQL compatibiltiy read-only variable. Set to `YES` when the server has TLS enabled.
+- A read-only variable for MySQL compatibility. Set to `YES` by the server when the server has TLS enabled.
 
 ### hostname
 
@@ -292,19 +292,19 @@ mysql> SELECT * FROM t1;
 
 - Scope: NONE
 - Default value: ""
-- The location of the certificate authority file (if there is one) when TiDB is started.
+- The location of the certificate authority file (if there is one).
 
 ### ssl_cert
 
 - Scope: NONE
 - Default value: ""
-- The location of the certificate file (if there is a file) that is used for SSL/TLS connections when TiDB is started.
+- The location of the certificate file (if there is a file) that is used for SSL/TLS connections.
 
 ### ssl_key
 
 - Scope: NONE
 - Default value: ""
-- The location of the private key file (if there is one) that is used for SSL/TLS connections when TiDB is started.
+- The location of the private key file (if there is one) that is used for SSL/TLS connections.
 
 ### system_time_zone
 
