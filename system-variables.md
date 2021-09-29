@@ -297,7 +297,7 @@ mysql> SELECT * FROM t1;
 
 - Scope: NONE
 - Default value: ""
-- The location of the certificate file that is used for SSL/TLS connections if specified on startup.
+- The location of the certificate file (if there is a file) that is used for SSL/TLS connections when TiDB is started.
 
 ### ssl_key
 
