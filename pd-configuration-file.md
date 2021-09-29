@@ -271,11 +271,11 @@ Configuration items related to scheduling
 
 + Controls the version of the Region score formula
 + Default value: `v2`
-+ Optional values: `v1` and `v2`. Compared to v1, the changes in v2 are smoother, and the scheduling jitter caused by space recovery is improved.
++ Optional values: `v1` and `v2`. Compared to v1, the changes in v2 are smoother, and the scheduling jitter caused by space reclaim is improved.
 
 > **Note:**
 >
-> If you upgrade from TiDB 4.0 versions to the current versions, the new formula version is automatically disabled by default to ensure consistent PD behavior before and after upgrading. If you want to change the formula version, you need to manually switch through the `pd-ctl` setting. For details, refer to [PD Control](/pd-control.md#config-show--set-option-value--placement-rules).
+> If you have upgraded your cluster from a TiDB 4.0 version to the current version, the new formula version is automatically disabled by default to ensure consistent PD behavior before and after the upgrading. If you want to change the formula version, you need to manually switch through the `pd-ctl` setting. For details, refer to [PD Control](/pd-control.md#config-show--set-option-value--placement-rules).
 
 ### `enable-joint-consensus` <span class="version-mark">New in v5.0</span>
 
@@ -322,7 +322,7 @@ Configuration items related to replicas
 
 > **Note:**
 >
-> If you upgrade from TiDB 4.0 versions to the current versions, the behavior of `flow-round-by-digit` after the upgrading and the behavior of `trace-region-flow` before upgrading are consistent by default. This means that if the value of  `trace-region-flow` is false before upgrading, then the value of `flow-round-by-digit` after upgrading is 127；if the value of `trace-region-flow` is true before upgrading, then the value of `flow-round-by-digit` after upgrading is 3.
+> If you have upgraded your cluster from a TiDB 4.0 version to the current version, the behavior of `flow-round-by-digit` after the upgrading and the behavior of `trace-region-flow` before the upgrading are consistent by default. This means that if the value of  `trace-region-flow` is false before the upgrading, the value of `flow-round-by-digit` after the upgrading is 127; if the value of `trace-region-flow` is `true` before the upgrading, the value of `flow-round-by-digit` after the upgrading is `3`.
 
 ## `label-property`
 
