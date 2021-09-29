@@ -292,7 +292,7 @@ mysql> SELECT * FROM t1;
 
 - Scope: NONE
 - Default value: ""
-- The location of the certificate authority file if specified on startup.
+- The location of the certificate authority file (if there is one) when TiDB is started.
 
 ### ssl_cert
 
