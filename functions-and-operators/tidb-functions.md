@@ -106,7 +106,7 @@ select tidb_decode_key('7480000000000000FF3E5F720400000000FF0000000601633430FF33
 
 You can find TiDB execution plans in encoded form in the slow query log. The `TIDB_DECODE_PLAN()` function is then used to decode the encoded plans into a human-readable form.
 
-This is useful because the plan is captured at the time the statement executes. Re-executing the statement in `EXPLAIN` might produce different results as data distribution and statistics will evolve over time.
+This function is useful because a plan is captured at the time the statement is executed. Re-executing the statement in `EXPLAIN` might produce different results as data distribution and statistics evolves over time.
 
 {{< copyable "sql" >}}
 
