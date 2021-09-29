@@ -196,7 +196,7 @@ mysql> SELECT * FROM t1;
 
 - Scope: NONE
 - Default value: `OFF`
-- This variable indicates if [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) is used.
+- This variable indicates whether [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) is used.
 
 ### max_execution_time
 
@@ -214,13 +214,13 @@ mysql> SELECT * FROM t1;
 
 - Scope: INSTANCE
 - Default value: ""
-- The directory to load plugins from as set by the commandline flag.
+- Indicates the directory to load plugins as specified by a command-line flag.
 
 ### plugin_load
 
 - Scope: INSTANCE
 - Default value: ""
-- Wait for loading of named plugins on startup. Plugins are separated by commas. This is set by a commandline flag.
+- Indicates the plugins to load when TiDB is started. These plugins are specified by a command-line flag and separated by commas.
 
 ### port
 
@@ -256,11 +256,11 @@ mysql> SELECT * FROM t1;
 
 - Scope: SESSION | GLOBAL
 - Default value: `ON`
-- This indicates if changes should be written to the [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) or not.
+- Indicates whether to write changes to [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) or not.
 
 > **Note:**
 >
-> Setting `sql_log_bin` as a global variable is not recommended. Future versions may only allow setting this as a session variable.
+> It is not recommended to set `sql_log_bin` as a global variable because the future versions of TiDB might only allow setting this as a session variable.
 
 ### sql_mode
 
@@ -1427,14 +1427,14 @@ SET tidb_slow_log_threshold = 200;
 
 - Scope: SESSION
 - Default value: ""
-- If set to a non-empty value this is the UNIX epoch that is used as timestamp for `CURRENT_TIMESTAMP()`, `NOW()` and other functions. This can be used when restoring or replicating data.
+- A non-empty value of this variable indicates the UNIX epoch that is used as the timestamp for `CURRENT_TIMESTAMP()`, `NOW()`, and other functions. This variable might be used in data restore or replication.
 
 ### tmp_table_size
 
 - Scope: SESSION | GLOBAL
-- Default value: 16777216
+- Default value: `16777216`
 - Unit: Bytes
-- The maximum size of a temporary table.
+- Indicates the maximum size of a temporary table.
 
 ### transaction_isolation
 
