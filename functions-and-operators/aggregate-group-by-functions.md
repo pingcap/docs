@@ -157,4 +157,4 @@ The following aggregate functions are currently unsupported in TiDB. You can tra
 
 ## Related system variables
 
-The `group_concat_max_len` sets the maximum numbre of items for the `GROUP_CONCAT()` function.
+The `group_concat_max_len` variable sets the maximum number of items for the `GROUP_CONCAT()` function.
