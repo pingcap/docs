@@ -73,6 +73,7 @@ tiup install dumpling tidb-lightning
 > To install a component of a specific version, you can use the `tiup install <component>[:version]` command.
 
 ## Step 3. Update TiUP and components (Optional)
+
 Please be sure to check the release note and pay attention to compatibility changes.
 
 {{< copyable "shell-regular" >}}
