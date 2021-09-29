@@ -170,7 +170,7 @@ mysql> SELECT * FROM t1;
 - Scope: SESSION | GLOBAL
 - Default value: `0`
 - Range: `[0, 7]`
-- Set the week format used by the `WEEK()` function
+- Sets the week format used by the `WEEK()` function.
 
 ### foreign_key_checks
 
