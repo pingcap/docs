@@ -30,7 +30,7 @@ source ~/.bash_profile
 
 ## Step 2. Install Components
 
-You can start by looking at all the installable components
+You can start by listing all the installable components
 
 {{< copyable "shell-regular" >}}
 
