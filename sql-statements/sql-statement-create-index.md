@@ -132,7 +132,7 @@ CREATE TABLE t1(col1 char(10), col2 char(10), key index((lower(col1))));
 
 > **Note**
 >
-> The expression in the expression index must be surrounded by '(' and ')'. Otherwise, a syntax error will be reported.
+> The expression in an expression index must be surrounded by '(' and ')'. Otherwise, a syntax error is reported.
 
 You can drop an expression index in the same way as dropping an ordinary index:
 
