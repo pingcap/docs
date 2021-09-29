@@ -246,6 +246,10 @@ In the above example, for the incremental backup data, BR records the data chang
 
 ### Point-in-time recovery (experimental feature)
 
+> **Warning:**
+>
+> This feature is experimental and not thoroughly tested. It is highly not recommended to use this feature in the production environment.
+
 Point-in-time recovery (PITR) allows you to restore data to a point in time of your choice.
 
 An example scenario would be to take a full backup every day and take incremental backups every 6 hours and then use TiCDC for PITR. Assume that on one day, the full backup was performed at 00:00 and the first incremental backup was performed at 06:00. If you want to restore the database to the state of 07:16, you can first restore the full backup (taken at 00:00) and the incremental backup (taken at 06:00), and then restore TiCDC logs that fill in the gap between 06:00 and 07:16.

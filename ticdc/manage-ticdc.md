@@ -274,6 +274,10 @@ For more parameters of Pulsar, see [pulsar-client-go ClientOptions](https://godo
 
 #### Configure sink URI with cdclog
 
+> **Warning:**
+>
+> This feature is experimental and not thoroughly tested. It is highly not recommended to use this feature in the production environment.
+
 The `cdclog` files (files written by TiCDC on the local filesystem or on the Amazon S3-compatible storage) can be used together with Backup & Restore (BR) to provide point-in-time (PITR) recovery. See [Point in Time recovery (experimental feature)](/br/use-br-command-line-tool.md#point-in-time-recovery-experimental-feature) for details.
 
 The following command creates a changefeed that will write cdclog files locally to the `/data/cdc/log` directory.
