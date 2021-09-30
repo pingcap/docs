@@ -242,6 +242,12 @@ mysql> SELECT * FROM t1;
 - Default value: `Apache License 2.0`
 - This variable indicates the license of your TiDB server installation.
 
+### log_bin
+
+- Scope: NONE
+- Default value: `OFF`
+- This variable indicates whether [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) is used.
+
 ### max_allowed_packet
 
 - Scope: GLOBAL | SESSION
@@ -261,6 +267,18 @@ mysql> SELECT * FROM t1;
 >
 > Unlike in MySQL, the `max_execution_time` system variable currently works on all kinds of statements in TiDB, not only restricted to the `SELECT` statement. The precision of the timeout value is roughly 100ms. This means the statement might not be terminated in accurate milliseconds as you specify.
 
+### plugin_dir
+
+- Scope: INSTANCE
+- Default value: ""
+- Indicates the directory to load plugins as specified by a command-line flag.
+
+### plugin_load
+
+- Scope: INSTANCE
+- Default value: ""
+- Indicates the plugins to load when TiDB is started. These plugins are specified by a command-line flag and separated by commas.
+
 ### port
 
 - Scope: NONE
@@ -268,11 +286,38 @@ mysql> SELECT * FROM t1;
 - Range: `[0, 65535]`
 - The port that the `tidb-server` is listening on when speaking the MySQL protocol.
 
+### skip_name_resolve <span class="version-mark">New in v5.2.0</span>
+
+- Scope: GLOBAL
+- Default value: `OFF`
+- This variable controls whether the `tidb-server` instance resolves hostnames as a part of the connection handshake.
+- When the DNS is unreliable, you can enable this option to improve network performance.
+
+> **Note:**
+>
+> When `skip_name_resolve=ON`, users with a hostname in their identity will no longer be able to log into the server. For example:
+>
+> ```sql
+> CREATE USER 'appuser'@'apphost' IDENTIFIED BY 'app-password';
+> ```
+>
+> In this example, it is recommended to replace `apphost` with an IP address or the wildcard (`%`).
+
 ### socket
 
 - Scope: NONE
 - Default value: ""
 - The local unix socket file that the `tidb-server` is listening on when speaking the MySQL protocol.
+
+### sql_log_bin
+
+- Scope: SESSION | GLOBAL
+- Default value: `ON`
+- Indicates whether to write changes to [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) or not.
+
+> **Note:**
+>
+> It is not recommended to set `sql_log_bin` as a global variable because the future versions of TiDB might only allow setting this as a session variable.
 
 ### sql_mode
 
@@ -1452,6 +1497,19 @@ SET tidb_slow_log_threshold = 200;
 - Default value: `SYSTEM`
 - This variable returns the current time zone. Values can be specified as either an offset such as '-8:00' or a named zone 'America/Los_Angeles'.
 - The value `SYSTEM` means that the time zone should be the same as the system host, which is available via the [`system_time_zone`](#system_time_zone) variable.
+
+### timestamp
+
+- Scope: SESSION
+- Default value: ""
+- A non-empty value of this variable indicates the UNIX epoch that is used as the timestamp for `CURRENT_TIMESTAMP()`, `NOW()`, and other functions. This variable might be used in data restore or replication.
+
+### tmp_table_size
+
+- Scope: SESSION | GLOBAL
+- Default value: `16777216`
+- Unit: Bytes
+- Indicates the maximum size of a temporary table.
 
 ### transaction_isolation
 
