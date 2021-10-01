@@ -52,6 +52,10 @@ func formatDefaultValue(sv *variable.SysVar) string {
 		return fmt.Sprintf("`%s` (%s)", sv.Value, ByteCountIEC(sv.Value))
 	case variable.DataDir:
 		return "/tmp/tidb"
+	case variable.LastInsertID:
+		return "`0`"
+	case variable.PluginDir:
+		return `""`
 	}
 	if sv.Value == "" {
 		return `""` // make it easier to read that it's an empty string default
@@ -66,14 +70,13 @@ func skipSv(sv *variable.SysVar) bool {
 	}
 	// These svs have no documentation yet.
 	switch sv.Name {
-	case variable.BlockEncryptionMode, variable.CollationConnection, variable.CollationDatabase,
-		variable.CollationServer, variable.DefaultWeekFormat, variable.ErrorCount, variable.GroupConcatMaxLen,
-		"have_openssl", "have_ssl", "last_insert_id", variable.LowerCaseTableNames, variable.MaxAllowedPacket, variable.MaxConnections,
-		variable.MaxPreparedStmtCount, variable.PluginDir, variable.PluginLoad, variable.SQLLogBin, "ssl_ca", "ssl_cert", "ssl_key",
+	case variable.ErrorCount,
+		variable.LowerCaseTableNames, variable.MaxConnections,
+		variable.MaxPreparedStmtCount,
 		variable.TiDBBatchCommit, variable.TiDBBatchDelete, variable.TiDBBatchInsert, variable.TiDBEnableChangeMultiSchema,
 		variable.TiDBEnableExchangePartition, variable.TiDBEnableExtendedStats, variable.TiDBEnablePointGetCache,
 		variable.TiDBEnableStreaming, variable.TiDBGuaranteeLinearizability, variable.TiDBTxnScope, variable.TiDBTxnReadTS,
-		variable.TxnIsolationOneShot, variable.Timestamp, variable.TiDBLastQueryInfo, variable.TiDBLastTxnInfo,
+		variable.TxnIsolationOneShot, variable.TiDBLastQueryInfo, variable.TiDBLastTxnInfo,
 		variable.TiDBMemQuotaHashJoin, variable.TiDBStreamAggConcurrency, variable.TiDBTrackAggregateMemoryUsage, variable.TiDBOptBCJ,
 		variable.TiDBOptConcurrencyFactor, variable.TiDBOptCopCPUFactor, variable.TiDBEnableIndexMergeJoin,
 		variable.TiDBMemQuotaIndexLookupJoin, variable.TiDBMemQuotaIndexLookupReader, variable.TiDBMemQuotaMergeJoin,
@@ -81,11 +84,11 @@ func skipSv(sv *variable.SysVar) bool {
 		variable.TiDBMemQuotaSort, variable.TiDBMergeJoinConcurrency, variable.TiDBOptCPUFactor, variable.TiDBOptDescScanFactor,
 		variable.TiDBOptDiskFactor, variable.TiDBOptJoinReorderThreshold, variable.TiDBOptMemoryFactor, variable.TiDBOptNetworkFactor,
 		variable.TiDBOptScanFactor, variable.TiDBOptTiFlashConcurrencyFactor, variable.TiDBOptimizerSelectivityLevel,
-		variable.TiDBOptSeekFactor, variable.LogBin, variable.TiDBEnableTopSQL, variable.TiDBTopSQLAgentAddress, variable.TiDBTopSQLPrecisionSeconds,
+		variable.TiDBOptSeekFactor, variable.TiDBEnableTopSQL, variable.TiDBTopSQLPrecisionSeconds,
 		variable.TiDBTopSQLMaxStatementCount, variable.TiDBEnableGlobalTemporaryTable, variable.TiDBEnablePipelinedWindowFunction, variable.TiDBOptCartesianBCJ,
-		variable.TiDBEnableLocalTxn, variable.TiDBTopSQLMaxCollect, variable.TiDBTopSQLReportIntervalSeconds, variable.SkipNameResolve, variable.TMPTableSize,
+		variable.TiDBEnableLocalTxn, variable.TiDBTopSQLMaxCollect, variable.TiDBTopSQLReportIntervalSeconds,
 		variable.TiDBOptMPPOuterJoinFixedBuildSide, variable.TiDBRestrictedReadOnly, variable.TiDBMPPStoreFailTTL, variable.TiDBHashExchangeWithNewCollation,
-		variable.TiDBEnableOrderedResultMode:
+		variable.TiDBEnableOrderedResultMode, variable.TiDBReadStaleness:
 
 		return true
 	}
@@ -115,7 +118,7 @@ func printWarning(sv *variable.SysVar) string {
 
 func printUnits(sv *variable.SysVar) string {
 	switch sv.Name {
-	case variable.TiDBMemQuotaApplyCache, variable.TiDBMemQuotaQuery, variable.TiDBQueryLogMaxLen, variable.TiDBBCJThresholdSize:
+	case variable.TiDBMemQuotaApplyCache, variable.TiDBMemQuotaQuery, variable.TiDBQueryLogMaxLen, variable.TiDBBCJThresholdSize, variable.TMPTableSize:
 		return "- Unit: Bytes\n"
 	case variable.TiDBSlowLogThreshold, variable.MaxExecutionTime:
 		return "- Unit: Milliseconds\n"
@@ -128,8 +131,10 @@ func printUnits(sv *variable.SysVar) string {
 func formatScope(sv *variable.SysVar) string {
 	// Manually cater for "INSTANCE" scope, which is not a native concept.
 	switch sv.Name {
-	case variable.TiDBDDLSlowOprThreshold, variable.TiDBCheckMb4ValueInUTF8, variable.TiDBEnableCollectExecutionInfo, variable.TiDBEnableSlowLog, variable.TiDBExpensiveQueryTimeThreshold,
-		variable.TiDBForcePriority, variable.TiDBGeneralLog, variable.TiDBSlowLogThreshold, variable.TiDBPProfSQLCPU, variable.TiDBQueryLogMaxLen, variable.TiDBRecordPlanInSlowLog, variable.TiDBMemoryUsageAlarmRatio:
+	case variable.TiDBDDLSlowOprThreshold, variable.TiDBCheckMb4ValueInUTF8, variable.TiDBEnableCollectExecutionInfo,
+		variable.TiDBEnableSlowLog, variable.TiDBExpensiveQueryTimeThreshold, variable.TiDBForcePriority, variable.TiDBGeneralLog,
+		variable.TiDBSlowLogThreshold, variable.TiDBPProfSQLCPU, variable.TiDBQueryLogMaxLen, variable.TiDBRecordPlanInSlowLog,
+		variable.TiDBMemoryUsageAlarmRatio, variable.PluginDir, variable.PluginLoad:
 		return "INSTANCE"
 	case variable.TiDBStoreLimit:
 		return "INSTANCE | GLOBAL"
@@ -187,6 +192,8 @@ func formatSpecialVersionComment(sv *variable.SysVar) string {
 		return ` <span class="version-mark">New in v5.1</span>`
 	case variable.TiDBAnalyzeVersion:
 		return ` <span class="version-mark">New in v5.1.0</span>`
+	case variable.SkipNameResolve:
+		return ` <span class="version-mark">New in v5.2.0</span>`
 	default:
 		return ""
 	}
@@ -418,7 +425,7 @@ func getExtendedDescription(sv *variable.SysVar) string {
 			"    * `CREATE TEMPORARY TABLE` syntax\n" +
 			"    * `DROP TEMPORARY TABLE` syntax\n" +
 			"    * `START TRANSACTION READ ONLY` and `SET TRANSACTION READ ONLY` syntax\n" +
-			"    * The `tx_read_only`, `transaction_read_only`, `offline_mode`, `super_read_only` and `read_only` system variables\n" +
+			"    * The `tx_read_only`, `transaction_read_only`, `offline_mode`, `super_read_only`, `read_only` and `sql_auto_is_null` system variables\n" +
 			"\n" +
 			"> **Warning:**\n" +
 			">\n" +
@@ -804,7 +811,7 @@ func getExtendedDescription(sv *variable.SysVar) string {
 	case variable.CharacterSetResults:
 		return "- The character set that is used when data is sent to the client."
 	case variable.CharacterSetServer:
-		return "- The character set used for new schemas when no character set is specified in the `CREATE SCHEMA` statement."
+		return "- The default character set for the server."
 	case variable.DataDir:
 		return "- This variable indicates the location where data is stored. This location can be a local path or point to a PD server if the data is stored on TiKV.\n" +
 			"- A value in the format of `ip_address:port` indicates the PD server that TiDB connects to on startup."
@@ -823,6 +830,62 @@ func getExtendedDescription(sv *variable.SysVar) string {
 		return "- This variable is used to control whether the optimizer estimates the number of rows based on column order correlation"
 	case variable.TiDBEnableAutoIncrementInGenerated:
 		return "- This variable is used to determine whether to include the `AUTO_INCREMENT` columns when creating a generated column or an expression index."
+	case variable.TMPTableSize:
+		return "- Indicates the maximum size of a temporary table."
+	case variable.Timestamp:
+		return "- A non-empty value of this variable indicates the UNIX epoch that is used as the timestamp for `CURRENT_TIMESTAMP()`, `NOW()`, and other functions. This variable might be used in data restore or replication."
+	case "ssl_key":
+		return "- The location of the private key file (if there is one) that is used for SSL/TLS connections."
+	case "ssl_cert":
+		return "- The location of the certificate file (if there is a file) that is used for SSL/TLS connections."
+	case variable.MaxAllowedPacket:
+		return "- The maximum size of a packet for the MySQL protocol."
+	case variable.BlockEncryptionMode:
+		return "- Defines the encryption mode for the `AES_ENCRYPT()` and `AES_DECRYPT()` functions."
+	case variable.CollationConnection:
+		return "- This variable indicates the collation for string literals that do not have a specified collation."
+	case variable.CollationDatabase:
+		return "- This variable indicates the collation of the default database in use. **It is NOT recommended to set this variable**. When a new default database is selected, the server changes the variable value."
+	case variable.CollationServer:
+		return "- The default collation for the server."
+	case variable.DefaultWeekFormat:
+		return "- Sets the week format used by the `WEEK()` function."
+	case variable.GroupConcatMaxLen:
+		return "- The maximum buffer size for items in the `GROUP_CONCAT()` function."
+	case "have_openssl":
+		return "- A read-only variable for MySQL compatibility. Set to `YES` by the server when the server has TLS enabled."
+	case "have_ssl":
+		return "- A read-only variable for MySQL compatibility. Set to `YES` by the server when the server has TLS enabled."
+	case variable.PluginDir:
+		return "- Indicates the directory to load plugins as specified by a command-line flag."
+	case variable.PluginLoad:
+		return "- Indicates the plugins to load when TiDB is started. These plugins are specified by a command-line flag and separated by commas."
+	case variable.SkipNameResolve:
+		return "- This variable controls whether the `tidb-server` instance resolves hostnames as a part of the connection handshake.\n" +
+			"- When the DNS is unreliable, you can enable this option to improve network performance.\n" +
+			"\n" +
+			"> **Note:**\n" +
+			">\n" +
+			"> When `skip_name_resolve=ON`, users with a hostname in their identity will no longer be able to log into the server. For example:\n" +
+			">\n" +
+			"> ```sql\n" +
+			"> CREATE USER 'appuser'@'apphost' IDENTIFIED BY 'app-password';\n" +
+			"> ```\n" +
+			">\n" +
+			"> In this example, it is recommended to replace `apphost` with an IP address or the wildcard (`%`)."
+	case variable.LogBin:
+		return "- This variable indicates whether [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) is used."
+	case variable.LastInsertID:
+		return "- This variable returns the last `AUTO_INCREMENT` or `AUTO_RANDOM` value generated by an insert statement.\n" +
+			"- The value of `last_insert_id` is the same as the value returned by the function `LAST_INSERT_ID()`."
+	case variable.SQLLogBin:
+		return "- Indicates whether to write changes to [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) or not.\n" +
+			"\n" +
+			"> **Note:**\n" +
+			">\n" +
+			"> It is not recommended to set `sql_log_bin` as a global variable because the future versions of TiDB might only allow setting this as a session variable."
+	case "ssl_ca":
+		return "- The location of the certificate authority file (if there is one)."
 	default:
 		return "- No documentation is currently available for this variable."
 	}
@@ -892,6 +955,11 @@ func main() {
 
 		if sv.Name == variable.TxnIsolation {
 			fmt.Println("This variable is an alias for _transaction_isolation_.")
+			fmt.Println("")
+			continue
+		}
+		if sv.Name == variable.Identity {
+			fmt.Println("This variable is an alias for _last_insert_id_.")
 			fmt.Println("")
 			continue
 		}
