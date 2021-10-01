@@ -368,7 +368,7 @@ Configuration items related to performance.
 ### `committer-concurrency`
 
 + The number of goroutines for requests related to executing commit in the commit phase of the single transaction.
-+ Default value: `16`
++ Default value: `128`
 + If the transaction to commit is too large, the waiting time for the flow control queue when the transaction is committed might be too long. In this situation, you can increase the configuration value to speed up the commit.
 
 ### `stmt-count-limit`
@@ -502,13 +502,13 @@ The Plan Cache configuration of the `PREPARE` statement.
 
 - The `keepalive` time interval of the RPC connection between TiDB and TiKV nodes. If there is no network packet within the specified time interval, the gRPC client executes `ping` command to TiKV to see if it is alive.
 - Default: `10`
-- unit: second
+- Unit: second
 
 ### `grpc-keepalive-timeout`
 
 - The timeout of the RPC `keepalive` check between TiDB and TiKV nodes.
 - Default value: `3`
-- unit: second
+- Unit: second
 
 ### `commit-timeout`
 
@@ -525,7 +525,7 @@ The Plan Cache configuration of the `PREPARE` statement.
 
 - Waits for `max-batch-wait-time` to encapsulate the data packets into a large packet in batch and send it to the TiKV node. It is valid only when the value of `tikv-client.max-batch-size` is greater than `0`. It is recommended not to modify this value.
 - Default value: `0`
-- unit: nanoseconds
+- Unit: nanoseconds
 
 ### `batch-wait-size`
 
