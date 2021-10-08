@@ -783,7 +783,7 @@ This section gives the alert rules for the TiKV component.
 
 ## TiFlash alert rules
 
-For the detailed descriptions of TiFlash alert rules, see [TiFlash Alert Rules](/tiflash/tiflash-alert-rules.md).
+For the detailed descriptions of TiFlash alert rules, see [TiFlash Alert Rules](\tiflash\tiflash-alert-rules.md).
 
 ## TiDB Binlog alert rules
 
@@ -965,6 +965,7 @@ This section gives the alert rules for the Blackbox_exporter TCP, ICMP, and HTTP
     `probe_success{group="tiflash"} == 0`
 
 * Description:
+
     Failure to probe the TiFlash service port.
 
 * Solution:
