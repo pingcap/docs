@@ -44,9 +44,9 @@
   + [Overview](/migration-overview.md)
   + From MySQL to TiDB
     + [Overview](/data-migration/mysql/migrate-mysql-overview.md)
-    + [Migration of total data more than terabytes](/data-migration/mysql/huge-data.md)
-    + [Migration of total data less than terabytes](/data-migration/mysql/small-data.md)
-    + [Continuous incremental data migration](/data-migration/mysql/increment-mysql.md)
+    + [Migrate data of less than 1 TB (Terabyte) to TiDB using TiDB Data Migration (DM)](/data-migration/mysql/huge-data.md)
+    + [Migrate data more than 1 TB to TiDB using Dumping and TiDB Lightning](/data-migration/mysql/small-data.md)
+    + [Incrementally replicate data using TiDB DM to TiDB](/data-migration/mysql/increment-mysql.md)
   + From Amazon Aurora to TiDB
     + [Overview](/data-migration/aurora/migrate-aurora-overview.md)
     + [Full data migration from a snapshot](/data-migration/aurora/from-snapshot.md)
