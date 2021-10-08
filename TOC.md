@@ -42,15 +42,15 @@
     + [Test TiDB Using TPC-C](/benchmark/benchmark-tidb-using-tpcc.md)
 + Migrate
   + [Overview](/migration-overview.md)
-  + From Amazon Aurora to TiDB
-    + [Overview](/data-migration/aurora/migrate-aurora-overview.md)
-    + [Full data migration from a snapshot](/data-migration/aurora/from-snapshot.md)
-    + [Continuous incremental data migration](/data-migration/aurora/increment-aurora.md)
   + From MySQL to TiDB
     + [Overview](/data-migration/mysql/migrate-mysql-overview.md)
     + [Migration of total data more than terabytes](/data-migration/mysql/huge-data.md)
     + [Migration of total data less than terabytes](/data-migration/mysql/small-data.md)
     + [Continuous incremental data migration](/data-migration/mysql/increment-mysql.md)
+  + From Amazon Aurora to TiDB
+    + [Overview](/data-migration/aurora/migrate-aurora-overview.md)
+    + [Full data migration from a snapshot](/data-migration/aurora/from-snapshot.md)
+    + [Continuous incremental data migration](/data-migration/aurora/increment-aurora.md)
   + From Files to TiDB
     + [Overview](/data-migration/file/file-migration-overview.md)
     + [Import data from CSV files](/data-migration/file/csv-tidb.md)
