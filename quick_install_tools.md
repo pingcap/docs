@@ -30,7 +30,7 @@ source ~/.bash_profile
 
 ## Step 2. Install Components
 
-You can start by listing all the installable components
+You can start by listing all the components:
 
 {{< copyable "shell-regular" >}}
 
@@ -38,7 +38,7 @@ You can start by listing all the installable components
 tiup list
 ```
 
-The following output can be seen
+You can see the following output:
 
 ```bash
 Available components:
@@ -60,7 +60,7 @@ tidb-lightning  pingcap  TiDB Lightning is a tool used for fast full import of l
 tiup            pingcap  TiUP is a command-line component management tool that can help to download and install TiDB platform components to the local system
 ```
 
-At this point, you can select one or more components to install
+Then, select necessary components to install:
 
 {{< copyable "shell-regular" >}}
 
