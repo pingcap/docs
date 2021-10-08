@@ -27,6 +27,7 @@ Because the snapshot data exported to Amazon S3 does not contain the SQL stateme
 ```shell
 tiup dumpling --host ${host} --port 3306 --user root --password password --no-data --output ./schema --filter "mydb.*"
 ```
+
 The parameters used in this step is as follows. For more parameters of Dumpling, refer to [Dumpling overview](/dumpling-overview.md).
 |Parameter|Description|
 |-|-|
