@@ -44,26 +44,23 @@
     + [Test TiDB Using TPC-C](/benchmark/benchmark-tidb-using-tpcc.md)
 + Migrate
   + [Overview](/migration-overview.md)
-  + From MySQL To TiDB
+  + From MySQL to TiDB
     + [Overview](/data-migration/mysql/migrate-mysql-overview.md)
-    + [MySQL ≥ 1TB](/data-migration/mysql/huge-data.md)
-    + [MySQL ＜ 1TB](/data-migration/mysql/small-data.md)
-    + [Incremental migration](/data-migration/mysql/increment-mysql.md)
-  + From Amazon Aurora To TiDB
+    + [Migrate data of less than 1 TB (Terabyte) to TiDB using TiDB Data Migration (DM)](/data-migration/mysql/huge-data.md)
+    + [Migrate data more than 1 TB to TiDB using Dumping and TiDB Lightning](/data-migration/mysql/small-data.md)
+    + [Incrementally replicate data using TiDB DM to TiDB](/data-migration/mysql/increment-mysql.md)
+  + From Amazon Aurora to TiDB
     + [Overview](/data-migration/aurora/migrate-aurora-overview.md)
-    + [From Aurora snapshot](/data-migration/aurora/from-snapshot.md)
-    + [Incremental migration](/data-migration/aurora/increment-aurora.md)
-  + From Files To TiDB
+    + [Full data migration from a snapshot](/data-migration/aurora/from-snapshot.md)
+    + [Continuous incremental data migration](/data-migration/aurora/increment-aurora.md)
+  + From Files to TiDB
     + [Overview](/data-migration/file/file-migration-overview.md)
-    + [CSV files](/data-migration/file/csv-tidb.md)
-    + [SQL files](/data-migration/file/sql-tidb.md)
-  + From Cloud To TiDB
+    + [Import data from CSV files](/data-migration/file/csv-tidb.md)
+    + [Import data from SQL files](/data-migration/file/sql-tidb.md)
     + [Overview](/data-migration/cloud/migrate-cloud-overview.md)
-    + [Amazon](/data-migration/cloud/aws-tidb.md)
-    + [Google](/data-migration/cloud/google-tidb.md)
-  + From TiDB To TiDB
+  + From TiDB to TiDB
       + [Overview](/data-migration/tidb-tidb.md)
-  + Advanced Migration To TiDB
+  + Advanced Migration to TiDB
     + [Overview](/data-migration/advanced-migration/advanced-migration-overview.md)
     + [Filter binlog event](/data-migration/advanced-migration/binlog-filter.md)
     + [Work with GH-ost and PT-osc](/data-migration/advanced-migration/ghost-ptosc.md)
@@ -182,7 +179,9 @@
 + TiDB Ecosystem Tools
   + [Overview](/ecosystem-tool-user-guide.md)
   + [Use Cases](/ecosystem-tool-user-case.md)
-  + [Download](/download-ecosystem-tools.md)
+  + Install Guide
+    + [Use TiUP (Recommended)](/quick_install_tools.md)
+    + [Download Binary](/download-ecosystem-tools.md)
   + Backup & Restore (BR)
     + [BR Tool Overview](/br/backup-and-restore-tool.md)
     + [Use BR Command-line for Backup and Restoration](/br/use-br-command-line-tool.md)
