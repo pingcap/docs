@@ -783,7 +783,7 @@ This section gives the alert rules for the TiKV component.
 
 ## TiFlash alert rules
 
-For the detailed descriptions of TiFlash alert rules, see [TiFlash Alert Rules](tiflash\tiflash-alert-rules.md).
+For the detailed descriptions of TiFlash alert rules, see [TiFlash Alert Rules](/tiflash/tiflash-alert-rules.md).
 
 ## TiDB Binlog alert rules
 
