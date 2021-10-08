@@ -37,7 +37,7 @@ Starting from TiKV v5.0, all read requests use the unified thread pool for queri
 
 * The gRPC thread pool.
 
-    The default size (configured by `server.grpc-concurrency`) of the gRPC thread pool is `4`. This thread pool has almost no computing overhead and is mainly responsible for network I/O and deserialization requests, so generally you do not need to adjust the default configuration.
+    The default size (configured by `server.grpc-concurrency`) of the gRPC thread pool is `5`. This thread pool has almost no computing overhead and is mainly responsible for network I/O and deserialization requests, so generally you do not need to adjust the default configuration.
 
     - If the machine deployed with TiKV has a small number (less than or equal to 8) of CPU cores, consider setting the `server.grpc-concurrency` configuration item to `2`.
     - If the machine deployed with TiKV has very high configuration, TiKV undertakes a large number of read and write requests, and the value of `gRPC poll CPU` that monitors Thread CPU on Grafana exceeds 80% of `server.grpc-concurrency`, then consider increasing the value of `server.grpc-concurrency` to keep the thread pool usage rate below 80% (that is, the metric on Grafana is lower than `80% * server.grpc-concurrency`).
@@ -55,7 +55,7 @@ Starting from TiKV v5.0, all read requests use the unified thread pool for queri
 
 * The Raftstore thread pool.
 
-    The Raftstore thread pool is the most complex thread pool in TiKV. The default size (configured by `raftstore.store-pool-size`) is `2`. All write requests are written into RocksDB in the way of `fsync` from the Raftstore thread, unless you manually set `raftstore.sync-log` to `false`. Setting `raftstore.sync-log` to `false` improves write performance to a certain degree, but increases the risk of data loss in the case of machine failure).
+    The Raftstore thread pool is the most complex thread pool in TiKV. The default size (configured by `raftstore.store-pool-size`) is `2`. All write requests are written into RocksDB in the way of `fsync` from the Raftstore thread.
 
     Due to I/O, Raftstore threads cannot reach 100% CPU usage theoretically. To reduce disk writes as much as possible, you can put together multiple write requests and write them to RocksDB. It is recommended to keep the overall CPU usage below 60% (If the default number of threads is `2`, it is recommended to keep `TiKV-Details.Thread CPU.Raft store CPU` on Grafana within 120%). Do not increase the size of the Raftstore thread pool to improve write performance without thinking, because this might increase the disk burden and degrade performance.
 

@@ -173,8 +173,12 @@ This section introduces the configuration items of Drainer. For the example of a
 
 ### initial-commit-ts
 
-* Specifies from which commit timestamp the replication task starts. This configuration is only applicable to the Drainer node that starts replication for the first time. If a checkpoint already exists downstream, the replication will be performed according to the time recorded in the checkpoint.
-* Default value: `-1`. Drainer will get a new timestamp from PD as the starting time.
+* Specifies from which commit timestamp of the transaction the replication process starts. This configuration is applicable only to the Drainer node that is in the replication process for the first time. If a checkpoint already exists in the downstream, the replication will be performed according to the time recorded in the checkpoint.
+* commit ts (commit timestamp) is a specific point in time for [transaction](/transaction-overview.md#transactions) commits in TiDB. It is a globally unique and increasing timestamp from PD as the unique ID of the current transaction. You can get the `initial-commit-ts` configuration in the following typical ways:
+    - If BR is used, you can get `initial-commit-ts` from the backup TS recorded in the metadata backed up by BR (backupmeta).
+    - If Dumpling is used, you can get `initial-commit-ts` from the Pos recorded in the metadata backed up by Dumpling (metadata),
+    - If PD Control is used, `initial-commit-ts` is in the output of the `tso` command.
+* Default value: `-1`. Drainer will get a new timestamp from PD as the starting time, which means that the replication process starts from the current time.
 
 ### synced-check-time
 
@@ -331,22 +335,17 @@ When the downstream is Kafka, the valid configuration items are as follows:
 
 ### syncer.to.checkpoint
 
-This section introduces a configuration item related to `syncer.to.checkpoint`.
+* `type`: Specifies in what way the replication progress is saved. Currently, the available options are `mysql`, `tidb`, and `file`.
 
-### type
+    This configuration item is the same as the downstream type by default. For example, when the downstream is `file`, the checkpoint progress is saved in the local file `<data-dir>/savepoint`; when the downstream is `mysql`, the progress is saved in the downstream database. If you need to explicitly specify using `mysql` or `tidb` to store the progress, make the following configuration:
 
-* Specifies in what way the replication progress is saved.
-* Available options: `mysql` and `tidb`.
+* `schema`: `"tidb_binlog"` by default.
 
-* Default value: The same as the downstream type. For example, when the downstream is `file`, the progress is saved in the local file system; when the downstream is `mysql`, the progress is saved in the downstream database. If you explicitly specify using `mysql` or `tidb` to store the progress, make the following configuration:
+    > **Note:**
+    >
+    > When deploying multiple Drainer nodes in the same TiDB cluster, you need to specify a different checkpoint schema for each node. Otherwise, the replication progress of two instances will overwrite each other.
 
-    * `schema`: `tidb_binlog` by default.
-
-        > **Note:**
-        >
-        > When deploying multiple Drainer nodes in the same TiDB cluster, you need to specify a different checkpoint schema for each node. Otherwise, the replication progress of two instances will overwrite each other.
-
-    * `host`
-    * `user`
-    * `password`
-    * `port`
+* `host`
+* `user`
+* `password`
+* `port`

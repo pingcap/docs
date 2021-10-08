@@ -274,6 +274,11 @@ Configuration items related to log files.
 
 Configuration items related to security.
 
+### `require-secure-transport`
+
+- Determines whether to require the client to use the secure mode for data transport.
+- Default value: `false`
+
 ### `enable-sem`
 
 - Enables the Security Enhanced Mode (SEM).
@@ -321,6 +326,11 @@ Configuration items related to security.
 + Default value: `"plaintext"`, which disables encryption.
 + Optional values: `"plaintext"` and `"aes128-ctr"`
 
+### `auto-tls`
+
+- Determines whether to automatically generate the TLS certificates on startup.
+- Default value: `false`
+
 ## Performance
 
 Configuration items related to performance.
@@ -358,14 +368,14 @@ Configuration items related to performance.
 ### `committer-concurrency`
 
 + The number of goroutines for requests related to executing commit in the commit phase of the single transaction.
-+ Default value: `16`
++ Default value: `128`
 + If the transaction to commit is too large, the waiting time for the flow control queue when the transaction is committed might be too long. In this situation, you can increase the configuration value to speed up the commit.
 
 ### `stmt-count-limit`
 
 - The maximum number of statements allowed in a single TiDB transaction.
 - Default value: `5000`
-- If a transaction does not roll back or commit after the number of statements exceeds `stmt-count-limit`, TiDB returns the `statement count 5001 exceeds the transaction limitation, autocommit = false` error. This configuration takes effect **only** in the retriable optimistic transaction. If you use the pessimistic transaction or have disabled the transaction retry, the number of statements in a transaction is not limited by this configuration.
+- If a transaction does not roll back or commit after the number of statements exceeds `stmt-count-limit`, TiDB returns the `statement count 5001 exceeds the transaction limitation, autocommit = false` error. This configuration takes effect **only** in the retryable optimistic transaction. If you use the pessimistic transaction or have disabled the transaction retry, the number of statements in a transaction is not limited by this configuration.
 
 ### `txn-entry-size-limit` <span class="version-mark">New in v5.0</span>
 
@@ -492,13 +502,13 @@ The Plan Cache configuration of the `PREPARE` statement.
 
 - The `keepalive` time interval of the RPC connection between TiDB and TiKV nodes. If there is no network packet within the specified time interval, the gRPC client executes `ping` command to TiKV to see if it is alive.
 - Default: `10`
-- unit: second
+- Unit: second
 
 ### `grpc-keepalive-timeout`
 
 - The timeout of the RPC `keepalive` check between TiDB and TiKV nodes.
 - Default value: `3`
-- unit: second
+- Unit: second
 
 ### `commit-timeout`
 
@@ -515,7 +525,7 @@ The Plan Cache configuration of the `PREPARE` statement.
 
 - Waits for `max-batch-wait-time` to encapsulate the data packets into a large packet in batch and send it to the TiKV node. It is valid only when the value of `tikv-client.max-batch-size` is greater than `0`. It is recommended not to modify this value.
 - Default value: `0`
-- unit: nanoseconds
+- Unit: nanoseconds
 
 ### `batch-wait-size`
 
@@ -600,16 +610,16 @@ Configuration related to the status of TiDB service.
 
 ## stmt-summary <span class="version-mark">New in v3.0.4</span>
 
-Configurations related to the `events_statement_summary_by_digest` table.
+Configurations related to [statement summary tables](/statement-summary-tables.md).
 
 ### max-stmt-count
 
-- The maximum number of SQL categories allowed to be saved in the `events_statement_summary_by_digest` table.
-- Default value: `100`
+- The maximum number of SQL categories allowed to be saved in [statement summary tables](/statement-summary-tables.md).
+- Default value: `3000`
 
 ### max-sql-length
 
-- The longest display length for the `DIGEST_TEXT` and `QUERY_SAMPLE_TEXT` columns in the `events_statement_summary_by_digest` table.
+- The longest display length for the `DIGEST_TEXT` and `QUERY_SAMPLE_TEXT` columns in [statement summary tables](/statement-summary-tables.md).
 - Default value: `4096`
 
 ## pessimistic-txn
@@ -628,11 +638,16 @@ For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](
 + Minimum value: `0`
 + Maximum value: `10000`
 
+### deadlock-history-collect-retryable
+
++ Controls whether the [`INFORMATION_SCHEMA.DEADLOCKS`](/information-schema/information-schema-deadlocks.md) table collects the information of retryable deadlock errors. For the description of retryable deadlock errors, see [Retryable deadlock errors](/information-schema/information-schema-deadlocks.md#retryable-deadlock-errors).
++ Default value: `false`
+
 ## experimental
 
-The `experimental` section, introduced in v3.1.0, describes configurations related to the experimental features of TiDB.
+The `experimental` section, introduced in v3.1.0, describes the configurations related to the experimental features of TiDB.
 
 ### `allow-expression-index` <span class="version-mark">New in v4.0.0</span>
 
-- Determines whether to create the expression index.
-- Default value: `false`
++ Controls whether an expression index can be created. Since TiDB v5.2.0, if the function in an expression is safe, you can create an expression index directly based on this function without enabling this configuration. If you want to create an expression index based on other functions, you can enable this configuration, but correctness issues might exist. By querying the `tidb_allow_function_for_expression_index` variable, you can get the functions that are safe to be directly used for creating an expression.
++ Default value: `false`
