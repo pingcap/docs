@@ -7,7 +7,7 @@ summary: Learns how to replicate incremental data from one TiDB cluster to anoth
 
 This document describes how to configure a TiDB cluster and its secondary MySQL or TiDB cluster, and how to replicate the incremental data from the primary cluster to the secondary cluster in real time.
 
-If you need to configure a running TiDB cluster and its secondary cluster for replicating incremental data in real time, use the [Backup & Restore (BR)](/br/backup-and-restore-tool.md), [Dumpling](/dumpling-overview.md) or [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md).
+If you need to configure a running TiDB cluster and its secondary cluster for replicating incremental data in real time, use the [Backup & Restore (BR)](/br/backup-and-restore-tool.md), [Dumpling](/dumpling-overview.md) and [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md).
 
 ## Implementation principles
 
@@ -15,8 +15,8 @@ Each transaction written to TiDB is allocated a unique commit timestamp (commit 
 
 The cluster data is exported using BR or Dumpling at a globally consistent point in time. Then starting from this point in time, TiDB Binlog is used to replicate incremental data. That is, the replication process is divided into two stages: full replication and incremental replication.
 
-1. Perform a full backup restoration and get a commit TS of the data backup.
-2. Perform incremental replication. Make sure that the start time of incremental replication is the commit TS of the data backup.
+1. Perform a full backup and get the commit TS of the backup data.
+2. Perform incremental replication. Make sure that the start time of incremental replication is the commit TS of the backup data.
 
 > **Note:**
 >
