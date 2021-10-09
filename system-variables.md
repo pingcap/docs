@@ -206,7 +206,7 @@ mysql> SELECT * FROM t1;
 
 ### identity
 
-This variable is an alias for _last_insert_id_.
+This variable is an alias for `last_insert_id`.
 
 ### init_connect
 
