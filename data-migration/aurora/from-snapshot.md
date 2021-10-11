@@ -29,17 +29,16 @@ tiup dumpling --host ${host} --port 3306 --user root --password password --no-da
 ```
 
 The parameters used in this step is as follows. For more parameters of Dumpling, refer to [Dumpling overview](/dumpling-overview.md).
-|Parameter|Description|
-|-|-|
-| `-h` or `--host`             |The IP address of the connected database|
-| `-p` or `--password`         |The password of the connected database|
-| `-u` or `--user`             |The username of the connected database|
-| `-P` or `--port`             |The port of the connected database|
-| `-d` or `--no-data`          |Do not export data (suitable for scenarios where only the schema is exported)  |
-| `-o` or `--output`           |The path of exported local files or [the URL of the external storage](/br/backup-and-restore-storages.md)|
-| `-f` or `--filter`           |Export tables that match the filter pattern. For the filter syntax, see [table-filter](/table-filter.md)|
 
->
+| Parameter | Description |
+| :--------| :------------|
+| `-h` or `--host`             | The IP address of the connected database |
+| `-p` or `--password`         | The password of the connected database |
+| `-u` or `--user`             | The username of the connected database |
+| `-P` or `--port`             | The port of the connected database |
+| `-d` or `--no-data`          | Do not export data (suitable for scenarios where only the schema is exported) |
+| `-o` or `--output`           | The path of exported local files or [the URL of the external storage](/br/backup-and-restore-storages.md) |
+| `-f` or `--filter`           | Export tables that match the filter pattern. For the filter syntax, refer to [table-filter](/table-filter.md) |
 
 ## Step 3. Create the TiDB Lightning configuration file 
 
