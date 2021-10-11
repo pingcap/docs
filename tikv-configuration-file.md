@@ -1237,11 +1237,6 @@ Configuration items related to TiCDC.
 + The upper limit of memory usage by TiCDC data change events.
 + Default value: `512MB`
 
-### `incremental-scan-speed-limit`
-
-+ The maximum speed at which historical data is incrementally scanned.
-+ Default value: `"128MB"`, which means 128 MB per second.
-
 ### `incremental-scan-threads`
 
 + The number of threads for the task of incrementally scanning historical data.
