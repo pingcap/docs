@@ -307,6 +307,8 @@ To restore the cluster data, use the `br restore` command. You can add the `full
 > - Where each peer is scattered to during restore is random. We don't know in advance which node will read which file.
 >
 > These can be avoided using shared storage, for example mounting an NFS on the local path, or using S3. With network storage, every node can automatically read every SST file, so these caveats no longer apply.
+> 
+> Also, note that you can only run one restore operation for a single cluster at the same time. Otherwise, unexpected behaviors might occur. For details, see [FAQ](/br/backup-and-restore-faq.md#can-i-use-multiple-br-processes-at-the-same-time-to-restore-the-data-of-a-single-cluster).
 
 ### Restore all the backup data
 
@@ -360,6 +362,10 @@ br restore db \
 ```
 
 In the above command, `--db` specifies the name of the database to be restored. For descriptions of other options, see [Restore all backup data](#restore-all-the-backup-data)).
+
+> **Note:**
+>
+> When you restore the backup data, the name of the database specified by `--db` must be the same as the one specified by `-- db` in the backup command. Otherwise, the restore fails. This is because the metafile of the backup data ( `backupmeta` file) records the database name, you can only restore data to the database with the same name. The recommended method is to restore the backup data to the database with the same name in another cluster.
 
 ### Restore a table
 
@@ -437,6 +443,39 @@ In the above command, `--table` specifies the name of the table to be restored. 
 ### Restore incremental data
 
 Restoring incremental data is similar to [restoring full data using BR](#restore-all-the-backup-data). Note that when restoring incremental data, make sure that all the data backed up before `last backup ts` has been restored to the target cluster.
+
+### Restore tables created in the `mysql` schema (experimental feature)
+
+BR backs up tables created in the `mysql` schema by default.
+
+When you restore data using BR, the tables created in the `mysql` schema are not restored by default. If you need to restore these tables, you can explicitly include them using the [table filter](/table-filter.md#syntax). The following example restores `mysql.usertable` created in `mysql` schema. The command restores `mysql.usertable` along with other data.
+
+{{< copyable "shell-regular" >}}
+
+```shell
+br restore full -f '*.*' -f '!mysql.*' -f 'mysql.usertable' -s $external_storage_url
+```
+
+In the above command, `-f '*.*'` is used to override the default rules and `-f '!mysql.*'` instructs BR not to restore tables in `mysql` unless otherwise stated. `-f 'mysql.usertable'` indicates that `mysql.usertable` is required for restore. For detailed implementation, refer to the [table filter document](/table-filter.md#syntax).
+
+If you only need to restore `mysql.usertable`, use the following command:
+
+{{< copyable "shell-regular" >}}
+
+```shell
+br restore full -f 'mysql.usertable' -s $external_storage_url
+```
+
+> **Warning:**
+>
+> Although you can back up and restore system tables (such as `mysql.tidb`) using the BR tool, some unexpected situations might occur after the restore, including:
+>
+> - the statistical information tables (`mysql.stat_*`) cannot be restored.
+> - the system variable tables (`mysql.tidb`，`mysql.global_variables`) cannot be restored.
+> - the user information tables (such as `mysql.user` and `mysql.columns_priv`) cannot be restored.
+> - GC data cannot be restored.
+> 
+> Restoring system tables might cause more compatibility issues. To avoid unexpected issues, **DO NOT** restore system tables in the production environment.
 
 ### Restore Raw KV (experimental feature)
 

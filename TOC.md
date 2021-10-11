@@ -7,20 +7,22 @@
 
 + About TiDB
   + [TiDB Introduction](/overview.md)
-  + [TiDB 5.1 Release Notes](/releases/release-5.1.0.md)
+  + [TiDB 5.2 Release Notes](/releases/release-5.2.0.md)
   + [Basic Features](/basic-features.md)
   + [Experimental Features](/experimental-features.md)
   + Benchmarks
-    + [v5.1 Sysbench Performance Test Report](/benchmark/benchmark-sysbench-v5.1.0-vs-v5.0.2.md)
-    + [v5.1 TPC-C Performance Test Report](/benchmark/v5.1-performance-benchmarking-with-tpcc.md)
-    + [v5.1 MPP mode TPC-H 100GB Performance Test](/benchmark/v5.1-performance-benchmarking-with-tpch.md)
+    + [v5.2 Sysbench Performance Test Report](/benchmark/benchmark-sysbench-v5.2.0-vs-v5.1.1.md)
+    + [v5.2 TPC-C Performance Test Report](/benchmark/v5.2-performance-benchmarking-with-tpcc.md)
+    + [v5.2 MPP mode TPC-H 100GB Performance Test](/benchmark/v5.2-performance-benchmarking-with-tpch.md)
   + [MySQL Compatibility](/mysql-compatibility.md)
   + [TiDB Limitations](/tidb-limitations.md)
   + [TiDB Adopters](/adopters.md)
   + [Credits](/credits.md)
 + Quick Start
   + [Try Out TiDB](/quick-start-with-tidb.md)
+  + [Try Out HTAP](/quick-start-with-htap.md)
   + [Learn TiDB SQL](/basic-sql-operations.md)
+  + [Learn HTAP](/explore-htap.md)
   + [Import Example Database](/import-example-data.md)
 + Deploy
   + [Software and Hardware Requirements](/hardware-and-software-requirements.md)
@@ -42,26 +44,23 @@
     + [Test TiDB Using TPC-C](/benchmark/benchmark-tidb-using-tpcc.md)
 + Migrate
   + [Overview](/migration-overview.md)
-  + From MySQL To TiDB
+  + From MySQL to TiDB
     + [Overview](/data-migration/mysql/migrate-mysql-overview.md)
-    + [MySQL ≥ 1TB](/data-migration/mysql/huge-data.md)
-    + [MySQL ＜ 1TB](/data-migration/mysql/small-data.md)
-    + [Incremental migration](/data-migration/mysql/increment-mysql.md)
-  + From Amazon Aurora To TiDB
+    + [Migrate data of less than 1 TB (Terabyte) to TiDB using TiDB Data Migration (DM)](/data-migration/mysql/huge-data.md)
+    + [Migrate data more than 1 TB to TiDB using Dumping and TiDB Lightning](/data-migration/mysql/small-data.md)
+    + [Incrementally replicate data using TiDB DM to TiDB](/data-migration/mysql/increment-mysql.md)
+  + From Amazon Aurora to TiDB
     + [Overview](/data-migration/aurora/migrate-aurora-overview.md)
-    + [From Aurora snapshot](/data-migration/aurora/from-snapshot.md)
-    + [Incremental migration](/data-migration/aurora/increment-aurora.md)
-  + From Files To TiDB
+    + [Full data migration from a snapshot](/data-migration/aurora/from-snapshot.md)
+    + [Continuous incremental data migration](/data-migration/aurora/increment-aurora.md)
+  + From Files to TiDB
     + [Overview](/data-migration/file/file-migration-overview.md)
-    + [CSV files](/data-migration/file/csv-tidb.md)
-    + [SQL files](/data-migration/file/sql-tidb.md)
-  + From Cloud To TiDB
+    + [Import data from CSV files](/data-migration/file/csv-tidb.md)
+    + [Import data from SQL files](/data-migration/file/sql-tidb.md)
     + [Overview](/data-migration/cloud/migrate-cloud-overview.md)
-    + [Amazon](/data-migration/cloud/aws-tidb.md)
-    + [Google](/data-migration/cloud/google-tidb.md)
-  + From TiDB To TiDB
+  + From TiDB to TiDB
       + [Overview](/data-migration/tidb-tidb.md)
-  + Advanced Migration To TiDB
+  + Advanced Migration to TiDB
     + [Overview](/data-migration/advanced-migration/advanced-migration-overview.md)
     + [Filter binlog event](/data-migration/advanced-migration/binlog-filter.md)
     + [Work with GH-ost and PT-osc](/data-migration/advanced-migration/ghost-ptosc.md)
@@ -158,6 +157,7 @@
 + Tutorials
   + [Multiple Data Centers in One City Deployment](/multi-data-centers-in-one-city-deployment.md)
   + [Three Data Centers in Two Cities Deployment](/three-data-centers-in-two-cities-deployment.md)
+  + [Two Data Centers in One City Deployment](/two-data-centers-in-one-city-deployment.md)
   + Read Historical Data
     + Use Stale Read (Recommended)
       + [Usage Scenarios of Stale Read](/stale-read.md)
@@ -179,7 +179,9 @@
 + TiDB Ecosystem Tools
   + [Overview](/ecosystem-tool-user-guide.md)
   + [Use Cases](/ecosystem-tool-user-case.md)
-  + [Download](/download-ecosystem-tools.md)
+  + Install Guide
+    + [Use TiUP (Recommended)](/quick_install_tools.md)
+    + [Download Binary](/download-ecosystem-tools.md)
   + Backup & Restore (BR)
     + [BR Tool Overview](/br/backup-and-restore-tool.md)
     + [Use BR Command-line for Backup and Restoration](/br/use-br-command-line-tool.md)
@@ -226,6 +228,7 @@
     + [Maintain](/ticdc/manage-ticdc.md)
     + [Troubleshoot](/ticdc/troubleshoot-ticdc.md)
     + [Monitor](/ticdc/monitor-ticdc.md)
+    + [TiCDC OpenAPI](/ticdc/ticdc-open-api.md)
     + [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
     + [Integrate TiDB with Confluent Platform](/ticdc/integrate-confluent-using-ticdc.md)
     + [Glossary](/ticdc/ticdc-glossary.md)
@@ -284,6 +287,7 @@
       + [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)
       + [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md)
       + [`ADMIN SHOW DDL [JOBS|QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)
+      + [`ADMIN SHOW TELEMETRY`](/sql-statements/sql-statement-admin-show-telemetry.md)
       + [`ALTER DATABASE`](/sql-statements/sql-statement-alter-database.md)
       + [`ALTER INDEX`](/sql-statements/sql-statement-alter-index.md)
       + [`ALTER INSTANCE`](/sql-statements/sql-statement-alter-instance.md)
@@ -468,6 +472,7 @@
         + [`METRICS_TABLES`](/information-schema/information-schema-metrics-tables.md)
         + [`PARTITIONS`](/information-schema/information-schema-partitions.md)
         + [`PROCESSLIST`](/information-schema/information-schema-processlist.md)
+        + [`REFERENTIAL_CONSTRAINTS`](/information-schema/information-schema-referential-constraints.md)
         + [`SCHEMATA`](/information-schema/information-schema-schemata.md)
         + [`SEQUENCES`](/information-schema/information-schema-sequences.md)
         + [`SESSION_VARIABLES`](/information-schema/information-schema-session-variables.md)
@@ -509,6 +514,9 @@
         + [Use Diagnostics](/dashboard/dashboard-diagnostics-usage.md)
       + [Search Logs Page](/dashboard/dashboard-log-search.md)
       + [Profile Instances Page](/dashboard/dashboard-profiling.md)
+      + Session Management and Configuration
+        + [Share Session](/dashboard/dashboard-session-share.md)
+        + [Configure SSO](/dashboard/dashboard-session-sso.md)
       + [FAQ](/dashboard/dashboard-faq.md)
   + CLI
     + [tikv-ctl](/tikv-control.md)
@@ -565,16 +573,23 @@
 + [Glossary](/glossary.md)
 + Release Notes
   + [All Releases](/releases/release-notes.md)
-  + [TiDB Roadmap](/roadmap.md)
+  + v5.2
+    + [5.2.1](/releases/release-5.2.1.md)
+    + [5.2.0](/releases/release-5.2.0.md)
   + v5.1
+    + [5.1.2](/releases/release-5.1.2.md)
+    + [5.1.1](/releases/release-5.1.1.md)
     + [5.1.0](/releases/release-5.1.0.md)
   + v5.0
+    + [5.0.4](/releases/release-5.0.4.md)
     + [5.0.3](/releases/release-5.0.3.md)
     + [5.0.2](/releases/release-5.0.2.md)
     + [5.0.1](/releases/release-5.0.1.md)
     + [5.0 GA](/releases/release-5.0.0.md)
     + [5.0.0-rc](/releases/release-5.0.0-rc.md)
   + v4.0
+    + [4.0.15](/releases/release-4.0.15.md)
+    + [4.0.14](/releases/release-4.0.14.md)
     + [4.0.13](/releases/release-4.0.13.md)
     + [4.0.12](/releases/release-4.0.12.md)
     + [4.0.11](/releases/release-4.0.11.md)

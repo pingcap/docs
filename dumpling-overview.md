@@ -10,7 +10,7 @@ This document introduces the data export tool - [Dumpling](https://github.com/pi
 
 For backups of SST files (key-value pairs) or backups of incremental data that are not sensitive to latency, refer to [BR](/br/backup-and-restore-tool.md). For real-time backups of incremental data, refer to [TiCDC](/ticdc/ticdc-overview.md).
 
-<video src="https://tidb-docs.s3.us-east-2.amazonaws.com/Lesson+18+%E8%AF%BE%E7%A8%8B.mp4" width="800px" height="600px" controls="controls"></video>
+<video src="https://tidb-docs.s3.us-east-2.amazonaws.com/Lesson+18+%E8%AF%BE%E7%A8%8B.mp4" width="600px" height="450px" controls="controls"></video>
 
 > **Note:**
 >
@@ -49,6 +49,7 @@ Dumpling is also included in the tidb-toolkit installation package and can be [d
 - RELOAD
 - LOCK TABLES
 - REPLICATION CLIENT
+- PROCESS
 
 ### Export to SQL files
 
@@ -262,9 +263,9 @@ With the above options specified, Dumpling can have a quicker speed of data expo
 
 > **Note:**
 >
-> In most scenarios, you do not need to adjust the default data consistency options of Dumpling.
+> In most scenarios, you do not need to adjust the default data consistency options of Dumpling (the default value is `auto`).
 
-Dumpling uses the `--consistency <consistency level>` option to control the way in which data is exported for "consistency assurance". For TiDB, data consistency is guaranteed by getting a snapshot of a certain timestamp by default (namely, `--consistency snapshot`). When using snapshot for consistency, you can use the `--snapshot` option to specify the timestamp to be backed up. You can also use the following levels of consistency:
+Dumpling uses the `--consistency <consistency level>` option to control the way in which data is exported for "consistency assurance". When using snapshot for consistency, you can use the `--snapshot` option to specify the timestamp to be backed up. You can also use the following levels of consistency:
 
 - `flush`: Use [`FLUSH TABLES WITH READ LOCK`](https://dev.mysql.com/doc/refman/8.0/en/flush.html#flush-tables-with-read-lock) to temporarily interrupt the DML and DDL operations of the replica database, to ensure the global consistency of the backup connection, and to record the binlog position (POS) information. The lock is released after all backup connections start transactions. It is recommended to perform full backups during off-peak hours or on the MySQL replica database.
 - `snapshot`: Get a consistent snapshot of the specified timestamp and export it.

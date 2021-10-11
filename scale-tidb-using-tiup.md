@@ -65,12 +65,12 @@ If you want to add a TiDB node to the `10.0.1.5` host, take the following steps.
     ```ini
     tikv_servers:
     - host: 10.0.1.5
-        ssh_port: 22
-        port: 20160
-        status_port: 20180
-        deploy_dir: /data/deploy/install/deploy/tikv-20160
-        data_dir: /data/deploy/install/data/tikv-20160
-        log_dir: /data/deploy/install/log/tikv-20160
+      ssh_port: 22
+      port: 20160
+      status_port: 20180
+      deploy_dir: /data/deploy/install/deploy/tikv-20160
+      data_dir: /data/deploy/install/data/tikv-20160
+      log_dir: /data/deploy/install/log/tikv-20160
     ```
 
     Here is a PD configuration file template:
@@ -80,13 +80,13 @@ If you want to add a TiDB node to the `10.0.1.5` host, take the following steps.
     ```ini
     pd_servers:
     - host: 10.0.1.5
-        ssh_port: 22
-        name: pd-1
-        client_port: 2379
-        peer_port: 2380
-        deploy_dir: /data/deploy/install/deploy/pd-2379
-        data_dir: /data/deploy/install/data/pd-2379
-        log_dir: /data/deploy/install/log/pd-2379
+      ssh_port: 22
+      name: pd-1
+      client_port: 2379
+      peer_port: 2380
+      deploy_dir: /data/deploy/install/deploy/pd-2379
+      data_dir: /data/deploy/install/data/pd-2379
+      log_dir: /data/deploy/install/log/pd-2379
     ```
 
     To view the configuration of the current cluster, run `tiup cluster edit-config <cluster-name>`. Because the parameter configuration of `global` and `server_configs` is inherited by `scale-out.yaml` and thus also takes effect in `scale-out.yaml`.
@@ -247,6 +247,10 @@ If you want to remove a TiKV node from the `10.0.1.5` host, take the following s
 >
 > You can take similar steps to remove the TiDB and PD node.
 
+> **Note:**
+>
+> The PD Client in TiKV caches the list of PD nodes. The current version of TiKV has a mechanism to automatically and regularly update PD nodes, which can help mitigate the issue of an expired list of PD nodes cached by TiKV. However, after scaling out PD, you should try to avoid directly removing all PD nodes at once that exist before the scaling. If necessary, before making all the previously existing PD nodes offline, make sure to switch the PD leader to a newly added PD node.
+
 1. View the node ID information:
 
     {{< copyable "shell-regular" >}}
@@ -258,7 +262,7 @@ If you want to remove a TiKV node from the `10.0.1.5` host, take the following s
     ```
     Starting /root/.tiup/components/cluster/v1.5.0/cluster display <cluster-name>
     TiDB Cluster: <cluster-name>
-    TiDB Version: v5.1.0
+    TiDB Version: v5.2.1
     ID              Role         Host        Ports                            Status  Data Dir                Deploy Dir
     --              ----         ----        -----                            ------  --------                ----------
     10.0.1.3:8300   cdc          10.0.1.3    8300                             Up      -                       deploy/cdc-8300
