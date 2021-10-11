@@ -152,19 +152,19 @@ Now TiDB Dashboard has been configured to use Okta SSO for sign-in.
 
 ## Example 2: Use Auth0 for TiDB Dashboard SSO sign-in
 
-Similar with Okta, [Auth0](https://auth0.com/) also provides OIDC SSO identity service. The steps below demonstrate how to configure Auth0 and TiDB Dashboard so that Auth0 can be used as the TiDB Dashboard SSO provider.
+Similar to Okta, [Auth0](https://auth0.com/) also provides OIDC SSO identity service. The following steps describe how to configure Auth0 and TiDB Dashboard so that Auth0 can be used as the TiDB Dashboard SSO provider.
 
 ### Step 1: Configure Auth0
 
 1. Access the Auth0 administration site.
 
-2. Navigate from the left sidebar **Applications** > **Applications**.
+2. Navigate on the left sidebar **Applications** > **Applications**.
 
 3. Click **Create App Integration**. 
 
    ![Create Application](/media/dashboard/dashboard-session-sso-auth0-create-app.png)
 
-    In the poped up dialog, fill **Name**, for example, **TiDB Dashboard**. Choose **Single Page Web Applications** in **Choose an application type**. Click **Create**.
+    In the popped-up dialog, fill **Name**, for example, "TiDB Dashboard". Choose **Single Page Web Applications** in **Choose an application type**. Click **Create**.
 
 4. Click **Settings**.
 
@@ -176,7 +176,7 @@ Similar with Okta, [Auth0](https://auth0.com/) also provides OIDC SSO identity s
    http://DASHBOARD_IP:PORT/dashboard/?sso_callback=1
    ```
 
-   Substitute `DASHBOARD_IP:PORT` with the actual domain (or IP address) and port that you use to access the TiDB Dashboard in the browser.
+   Replace `DASHBOARD_IP:PORT` with the actual domain (or IP address) and port that you use to access the TiDB Dashboard in your browser.
 
 6. Fill **Allowed Logout URLs** as follows:
 
@@ -184,17 +184,17 @@ Similar with Okta, [Auth0](https://auth0.com/) also provides OIDC SSO identity s
    http://DASHBOARD_IP:PORT/dashboard/
     ```
 
-   Similarly, substitute `DASHBOARD_IP:PORT` with the actual domain (or IP address) and port.
+   Similarly, replace `DASHBOARD_IP:PORT` with the actual domain (or IP address) and port.
 
    ![Settings](/media/dashboard/dashboard-session-sso-auth0-settings-2.png)
 
-7. Keep default value for other settings and click **Save Changes**.
+7. Keep the default values for other settings and click **Save Changes**.
 
 ### Step 2: Obtain OIDC information and fill in TiDB Dashboard
 
 1. Fill **OIDC Client ID** of TiDB Dashboard with **Client ID** in **Basic Information** under the **Settings** tab of Auth0.
 
-2. Fill **OIDC Discovery URL** with **Domain** prefixed with `https://` and suffixed with `/`, for example, `https://example.us.auth0.com/`. Complete authorization and save the configuration.
+2. Fill **OIDC Discovery URL** with the **Domain** field value prefixed with `https://` and suffixed with `/`, for example, `https://example.us.auth0.com/`. Complete authorization and save the configuration.
 
    ![Settings](/media/dashboard/dashboard-session-sso-auth0-settings-3.png)
 
