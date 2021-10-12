@@ -70,9 +70,7 @@ func skipSv(sv *variable.SysVar) bool {
 	}
 	// These svs have no documentation yet.
 	switch sv.Name {
-	case variable.ErrorCount,
-		variable.LowerCaseTableNames, variable.MaxConnections,
-		variable.MaxPreparedStmtCount,
+	case variable.ErrorCount, variable.LowerCaseTableNames, variable.MaxPreparedStmtCount,
 		variable.TiDBBatchCommit, variable.TiDBBatchDelete, variable.TiDBBatchInsert, variable.TiDBEnableChangeMultiSchema,
 		variable.TiDBEnableExchangePartition, variable.TiDBEnableExtendedStats, variable.TiDBEnablePointGetCache,
 		variable.TiDBEnableStreaming, variable.TiDBGuaranteeLinearizability, variable.TiDBTxnScope, variable.TiDBTxnReadTS,
@@ -954,12 +952,12 @@ func main() {
 		fmt.Print(printWarning(sv))
 
 		if sv.Name == variable.TxnIsolation {
-			fmt.Println("This variable is an alias for _transaction_isolation_.")
+			fmt.Println("This variable is an alias for `transaction_isolation`.")
 			fmt.Println("")
 			continue
 		}
 		if sv.Name == variable.Identity {
-			fmt.Println("This variable is an alias for _last_insert_id_.")
+			fmt.Println("This variable is an alias for `last_insert_id`.")
 			fmt.Println("")
 			continue
 		}

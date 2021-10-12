@@ -15,20 +15,21 @@ require (
 	github.com/grpc-ecosystem/go-grpc-middleware v1.3.0 // indirect
 	github.com/opentracing/opentracing-go v1.2.0 // indirect
 	github.com/pingcap/failpoint v0.0.0-20210918120811-547c13e3eb00 // indirect
-	github.com/pingcap/kvproto v0.0.0-20210927053809-df38c15b57b3 // indirect
-	github.com/pingcap/tidb v1.1.0-beta.0.20210930110847-5f797c3f241c // indirect
+	github.com/pingcap/kvproto v0.0.0-20211009031853-d6dd964d6b8c // indirect
+	github.com/pingcap/tidb v1.1.0-beta.0.20211009135324-6e70be97c2e5 // indirect
 	github.com/pingcap/tidb-tools v5.2.1+incompatible // indirect
-	github.com/pingcap/tipb v0.0.0-20210917081614-311f2369c5f7 // indirect
+	github.com/pingcap/tipb v0.0.0-20211008080435-3fd327dfce0e // indirect
 	github.com/prometheus/common v0.31.1 // indirect
 	github.com/prometheus/procfs v0.7.3 // indirect
-	github.com/shirou/gopsutil v3.21.8+incompatible // indirect
+	github.com/shirou/gopsutil v3.21.9+incompatible // indirect
 	github.com/twmb/murmur3 v1.1.6 // indirect
 	github.com/uber-go/atomic v1.4.0 // indirect
 	github.com/uber/jaeger-client-go v2.29.1+incompatible // indirect
+	go.etcd.io/etcd v3.3.26+incompatible // indirect
 	go.uber.org/atomic v1.9.0 // indirect
-	golang.org/x/net v0.0.0-20210929193557-e81a3d93ecf6 // indirect
-	golang.org/x/sys v0.0.0-20210930141918-969570ce7c6c // indirect
-	google.golang.org/genproto v0.0.0-20210930144712-2e2e1008e8a3 // indirect
+	golang.org/x/net v0.0.0-20211008194852-3b03d305991f // indirect
+	golang.org/x/sys v0.0.0-20211007075335-d3039528d8ac // indirect
+	google.golang.org/genproto v0.0.0-20211008145708-270636b82663 // indirect
 	google.golang.org/grpc v1.41.0 // indirect
 )
 

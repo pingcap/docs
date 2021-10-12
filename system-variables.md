@@ -385,11 +385,6 @@ This variable is an alias for `last_insert_id`.
 - Default value: ""
 - This variable is used to specify a list of storage engines that might fall back to TiKV. If the execution of a SQL statement fails due to a failure of the specified storage engine in the list, TiDB retries executing this SQL statement with TiKV. This variable can be set to "" or "tiflash". When this variable is set to "tiflash", if the execution of a SQL statement fails due to a failure of TiFlash, TiDB retries executing this SQL statement with TiKV.
 
-### tidb_allow_function_for_expression_index <span class="version-mark">New in v5.2.0</span>
-
-- Scope: NONE
-- This variable is used to show the functions that are allowed to be used for creating expression indexes.
-
 ### tidb_allow_mpp <span class="version-mark">New in v5.0</span>
 
 - Scope: SESSION | GLOBAL
@@ -1536,7 +1531,7 @@ SET tidb_slow_log_threshold = 200;
 
 ### tx_isolation
 
-This variable is an alias for _transaction_isolation_.
+This variable is an alias for `transaction_isolation`.
 
 ### version
 
