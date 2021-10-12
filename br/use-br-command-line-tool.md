@@ -104,7 +104,7 @@ Back up all the cluster data to the `/tmp/backup` path of each TiKV node and wri
 br backup full \
     --pd "${PDIP}:2379" \
     --storage "local:///tmp/backup" \
-    --ratelimit 120 \
+    --ratelimit 128 \
     --log-file backupfull.log
 ```
 
@@ -119,7 +119,7 @@ A progress bar is displayed in the terminal during the backup. When the progress
 br backup full \
     --pd "${PDIP}:2379" \
     --storage "local:///tmp/backup" \
-    --ratelimit 120 \
+    --ratelimit 128 \
     --log-file backupfull.log
 Full Backup <---------/................................................> 17.12%.
 ```
@@ -139,7 +139,7 @@ br backup db \
     --pd "${PDIP}:2379" \
     --db test \
     --storage "local:///tmp/backup" \
-    --ratelimit 120 \
+    --ratelimit 128 \
     --log-file backuptable.log
 ```
 
@@ -163,7 +163,7 @@ br backup table \
     --db test \
     --table usertable \
     --storage "local:///tmp/backup" \
-    --ratelimit 120 \
+    --ratelimit 128 \
     --log-file backuptable.log
 ```
 
@@ -191,7 +191,7 @@ br backup full \
     --pd "${PDIP}:2379" \
     --filter 'db*.tbl*' \
     --storage "local:///tmp/backup" \
-    --ratelimit 120 \
+    --ratelimit 128 \
     --log-file backupfull.log
 ```
 
@@ -224,6 +224,7 @@ br backup full \
     --storage "s3://${Bucket}/${Folder}" \
     --s3.region "${region}" \
     --send-credentials-to-tikv=true \
+    --ratelimit 128 \
     --log-file backuptable.log
 ```
 
@@ -243,6 +244,7 @@ To back up the incremental data between `(LAST_BACKUP_TS, current PD timestamp]`
 ```shell
 br backup full\
     --pd ${PDIP}:2379 \
+    --ratelimit 128 \
     -s local:///home/tidb/backupdata/incr \
     --lastbackupts ${LAST_BACKUP_TS}
 ```
@@ -273,6 +275,7 @@ For example, you can execute the following command to back up all keys between `
 br backup raw --pd $PD_ADDR \
     -s "local://$BACKUP_DIR" \
     --start 31 \
+    --ratelimit 128 \
     --end 3130303030303030 \
     --format hex \
     --cf default
@@ -328,6 +331,7 @@ A progress bar is displayed in the terminal during the restoration. When the pro
 br restore full \
     --pd "${PDIP}:2379" \
     --storage "local:///tmp/backup" \
+    --ratelimit 128 \
     --log-file restorefull.log
 Full Restore <---------/...............................................> 17.12%.
 ```
@@ -346,6 +350,7 @@ Restore a database backed up in the `/tmp/backup` path to the cluster.
 br restore db \
     --pd "${PDIP}:2379" \
     --db "test" \
+    --ratelimit 128 \
     --storage "local:///tmp/backup" \
     --log-file restorefull.log
 ```
@@ -371,6 +376,7 @@ br restore table \
     --pd "${PDIP}:2379" \
     --db "test" \
     --table "usertable" \
+    --ratelimit 128 \
     --storage "local:///tmp/backup" \
     --log-file restorefull.log
 ```
@@ -423,6 +429,7 @@ br restore full \
     --pd "${PDIP}:2379" \
     --storage "s3://${Bucket}/${Folder}" \
     --s3.region "${region}" \
+    --ratelimit 128 \
     --send-credentials-to-tikv=true \
     --log-file restorefull.log
 ```
@@ -442,7 +449,7 @@ When you restore data using BR, the tables created in the `mysql` schema are not
 {{< copyable "shell-regular" >}}
 
 ```shell
-br restore full -f '*.*' -f '!mysql.*' -f 'mysql.usertable' -s $external_storage_url
+br restore full -f '*.*' -f '!mysql.*' -f 'mysql.usertable' -s $external_storage_url --ratelimit 128
 ```
 
 In the above command, `-f '*.*'` is used to override the default rules and `-f '!mysql.*'` instructs BR not to restore tables in `mysql` unless otherwise stated. `-f 'mysql.usertable'` indicates that `mysql.usertable` is required for restore. For detailed implementation, refer to the [table filter document](/table-filter.md#syntax).
@@ -452,7 +459,7 @@ If you only need to restore `mysql.usertable`, use the following command:
 {{< copyable "shell-regular" >}}
 
 ```shell
-br restore full -f 'mysql.usertable' -s $external_storage_url
+br restore full -f 'mysql.usertable' -s $external_storage_url --ratelimit 128
 ```
 
 > **Warning:**
@@ -481,6 +488,7 @@ br restore raw --pd $PD_ADDR \
     -s "local://$BACKUP_DIR" \
     --start 31 \
     --end 3130303030303030 \
+    --ratelimit 128 \
     --format hex \
     --cf default
 ```
@@ -519,6 +527,7 @@ During data restoration, writing too much data affects the performance of the on
     ```
     br restore full \
         -s "local://$BACKUP_DIR" \
+        --ratelimit 128 \
         --pd $PD_ADDR \
         --online
     ```
