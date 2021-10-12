@@ -9,8 +9,8 @@ This document describes how to migrate full data from Amazon Aurora MySQL to TiD
 
 ## Prerequisites
 
-- [Deploy TiDB Lighting using TiUP](/quick_install_tools.md)
-- [Deploy Dumping using TiUP](/quick_install_tools.md)
+- [Deploy Lighting using TiUP](/quick-install-tools.md)
+- [Deploy Dumping using TiUP](/quick-install-tools.md)
 
 ***
 
@@ -52,19 +52,21 @@ vim tidb-lighting.toml
 
 {{< copyable "" >}}
 
-```ini
+```toml
 [tidb]
+
 # The target cluster information. Fill in one address of tidb-server.
 host = "${host}"
 port = ${port}
 user = "${user_name}"
 password = "${password}" 
-# The default PD address of the cluster.
-pd-addr = "127.0.0.1:2379"
+pd-addr = "127.0.0.1:2379"  # The default PD address of the cluster.
 
 [tikv-importer]
-# Uses Local-backend for best performance. You can also choose TiDB-backend or Importer-backend according to your need. For detailed introduction of the three backend modes, see [TiDB Lightning Backends](/tidb-lightning/tidb-lightning-backends.md).
+
+# Uses Local-backend for best performance. You can also choose TiDB-backend or Importer-backend according to your need.
 backend = "local"
+
 # The storage path of local temporary files. Ensure that the corresponding directory does not exist or is empty and that the disk capacity is large enough for storage.
 sorted-kv-dir = "${path}"
 
@@ -84,7 +86,9 @@ type = '$3'
 ```
 
 > **Note:**
->
+> 
+> For detailed introduction of the three backend modes, see [TiDB Lightning Backends](/tidb-lightning/tidb-lightning-backends.md).
+> 
 > - If TLS is enabled in the target TiDB cluster, you also need to configure TLS.
 
 For more configurations, refer to [TiDB Lightning Configuration](/tidb-lightning/tidb-lightning-configuration.md).
@@ -101,8 +105,16 @@ tiup tidb-lightning -config tidb-lightning.toml -d ./schema -no-schema=false
 
 In this example, TiDB Lightning is only used to create table schemas, so the above command runs very fast. In average, It only takes one second to execute ten table creation statements.
 
+| Parameter | Description |
+| :--------| :------------|
+| `-config`                     | Reads global configuration from file. If not specified, the default configuration would be used. |
+| `-d`                          | Directory or [external storage URL](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages) of the data dump to read from |
+| `-no-schema`                  | Ignore schema files, get schema directly from TiDB |
+
 > **Note:**
 >
+> - More parameter could be found in [TiDB Lightning Configuration](https://docs.pingcap.com/tidb/stable/tidb-lightning-configuration) 
+> 
 > If the number of database tables to create is relatively small, you can directly and manually create the corresponding databases and tables in TiDB. Or you can use other tools such as mysqldump to export the schemas and then import them into TiDB.
 
 ## Step 5. Import data into TiDB using TiDB Lightning
