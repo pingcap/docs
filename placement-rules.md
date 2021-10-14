@@ -104,12 +104,12 @@ Default placement options can be directly attached to a database schema. This wo
 
 ```sql
 use test;
-CREATE TABLE t1 (a INT); // the table is created with no placement options
-ALTER DATABASE test FOLLOWERS=4; // this changes the default, and does not apply to the existing table t1;
-CREATE TABLE t2 (a INT); // the placement of FOLLOWERS=4 will be used
-CREATE TABLE t3 (a INT) PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-east-2"; // FOLLOWERS=4 does not apply as placement is specified.
-ALTER DATABASE test FOLLOWERS=2; // this does not apply to existing tables
-CREATE TABLE t4 (a INT); // the table is created with FOLLOWERS=2;
+CREATE TABLE t1 (a INT); -- the table is created with no placement options
+ALTER DATABASE test FOLLOWERS=4; -- this changes the default, and does not apply to the existing table t1;
+CREATE TABLE t2 (a INT); -- the placement of FOLLOWERS=4 will be used
+CREATE TABLE t3 (a INT) PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-east-2"; -- FOLLOWERS=4 does not apply as placement is specified.
+ALTER DATABASE test FOLLOWERS=2; -- this does not apply to existing tables
+CREATE TABLE t4 (a INT); -- the table is created with FOLLOWERS=2;
 ```
 
 Because placement options are only inherited from the database schema default when a table is created, it is recommended to set the default to a `PLACEMENT POLICY`. This ensures that future changes to the policy will propagate to existing tables.
@@ -123,16 +123,17 @@ For example, to set constraints that data must reside on a TiKV store where the 
 ```sql
 CREATE PLACEMENT POLICY storeonfastssd CONSTRAINTS="[+disk=ssd]";
 CREATE PLACEMENT POLICY storeonhdd CONSTRAINTS="[+disk=hdd]";
+CREATE PLACEMENT POLICY companystandardpolicy CONSTRAINTS="";
 
 CREATE TABLE t1 (id INT, name VARCHAR(50), purchased DATE)
  PARTITION BY RANGE( YEAR(purchased) ) (
-  PARTITION p0 VALUES LESS THAN (2000) PLACEMENT POLICY='storeonhdd',
+  PARTITION p0 VALUES LESS THAN (2000) PLACEMENT POLICY=storeonhdd,
   PARTITION p1 VALUES LESS THAN (2005),
   PARTITION p2 VALUES LESS THAN (2010),
   PARTITION p3 VALUES LESS THAN (2015),
-  PARTITION p4 VALUES LESS THAN MAXVALUE PLACEMENT POLICY='storeonfastssd'
+  PARTITION p4 VALUES LESS THAN MAXVALUE PLACEMENT POLICY=storeonfastssd
  )
-PLACEMENT POLICY='companystandardpolicy';
+PLACEMENT POLICY=companystandardpolicy;
 ```
 
 Constraints can either be specified in list format (`[+disk=ssd]`) or dictionary format (`{+disk=ssd:1,+disk=hdd:2}`).
