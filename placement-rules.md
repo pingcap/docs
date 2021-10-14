@@ -1,0 +1,142 @@
+---
+title: Placement Rules
+summary: Learn how to schedule placement of tables and partitions.
+---
+
+# Placement Rules
+
+> **Warning:**
+>
+> Placement Rules in SQL is an experimental feature. Syntax may change before its final release, and there may be bugs.
+
+Placement Rules allow you to configure where data will be stored in a TiKV cluster. This is useful for scenarios including optimizing a high availability strategy, ensuring that local copies of data will be available for local stale reads, and adhering to compliance requirements.
+
+## Specifying placement options
+
+Placement options can be specified using either _direct placement_ or using a _placement policy_. In the following example, both tables `t1` and `t2` have the same rules:
+
+```sql
+CREATE TABLE t1 (a INT) PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1";
+CREATE PLACEMENT POLICY eastandwest PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1";
+CREATE TABLE t2 (a INT) PLACEMENT POLICY=eastandwest;
+```
+
+Using placement policies is recommended for complex scenarios because it simplifies management. If any changes are required, they can be updated using the [`ALTER PLACEMENT POLICY`](/sql-statements/sql-statement-alter-placement-policy.md) statement. There are no differences in the placement options available between direct placement and placement policies.
+
+A `PLACEMENT POLICY` is not associated with any database schema and has global scope. Assigning a placement policy does not require any additional privileges over `CREATE TABLE` privilege.
+
+## Option reference
+
+> **Note:**
+>
+> Placement options depend on labels correctly specified in the configuration of each TiKV node. For example, `PRIMARY_REGION` depends on the label `region` in TiKV. To see a summary of all labels available in your TiKV cluster, use the statement [`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md):
+>
+> ```sql
+> mysql> show placement labels;
+> +--------+----------------+
+> | Key    | Values         |
+> +--------+----------------+
+> | region | ["us-east-1"]  |
+> | zone   | ["us-east-1a"] |
+> +--------+----------------+
+> 2 rows in set (0.00 sec)
+> ```
+
+| Option Name                | Description                                                                                    |
+|----------------------------|------------------------------------------------------------------------------------------------|
+| `PRIMARY_REGION`           | Raft leaders will be placed in stores which have the `region` label that match this value.     |
+| `REGIONS`                  | Raft followers will be placed in stores which have the `region` label that matches this value. |
+| `SCHEDULE`                 | The strategy used to schedule the placement of followers. Either `EVEN` or `MAJORITY_IN_PRIMARY`. |
+| `FOLLOWERS`                | The number of followers. For example, `FOLLOWERS=2` means that there will be 3 copies of the data (2 followers and 1 leader). |
+| `LEARNERS`                 | The number of learners, such as TiFlash nodes.                                                 |
+| **Advanced configuration**                                                                                                  |
+| `CONSTRAINTS`              | A list of constraints that apply to all roles. For example, `CONSTRAINTS="[+disk=ssd]`.        |
+| `FOLLOWER_CONSTRAINTS`     | A list of constraints that only apply to followers.                                            |
+| `LEARNER_CONSTRAINTS`      | A list of constraints that only apply to learners.                                             |
+
+## Examples
+
+### Increasing the number of replicas
+
+The default configuration of [`max-replicas`](/pd-configuration-file.md#max-replicas) is `3`. To increase this for a specific set of tables, you can use a placement policy as follows:
+
+```sql
+CREATE PLACEMENT POLICY fivereplicas FOLLOWERS=4;
+CREATE TABLE t1 (a INT) PLACEMENT POLICY=fivereplicas;
+```
+
+Note that the PD configuration includes the leader and follower count, thus 4 followers + 1 leader equals five replicas in total.
+
+To expand on this example, the placement for the followers can also be described using the `PRIMARY_REGION` and `REGIONS` placement options:
+
+```sql
+CREATE PLACEMENT POLICY eastandwest PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1" SCHEDULE="MAJORITY_IN_PRIMARY" FOLLOWERS=4;
+CREATE TABLE t1 (a INT) PLACEMENT POLICY=eastandwest;
+```
+
+The `SCHEDULE` instructs TiDB how to balance the followers. `MAJORITY_IN_PRIMARY` means that enough followers should be placed in the primary region (`us-east-1`) that quorum can be achieved. This helps performance at the expense of availability should the primary region completely fail. If this is not desired, the schedule of `EVEN` can be used to ensure a balance of followers in all regions.
+
+### Assigning placement to a partitioned table
+
+> **Note:**
+>
+> This example makes use of list partitioning, which is currently an experimental feature. Partitioned tables also require the `PRIMARY KEY` to be included in all columns in the table's partitioning function.
+
+As well as assigning to tables, placement options can also be assigned to table partitions. For example:
+
+```sql
+CREATE PLACEMENT POLICY europe PRIMARY_REGION="us-east-1" REGIONS="us-east-1";
+CREATE PLACEMENT POLICY northamerica PRIMARY_REGION="us-east-1" REGIONS="us-east-1";
+
+SET tidb_enable_list_partition = 1;
+CREATE TABLE t1 (
+	country VARCHAR(10) NOT NULL,
+    userdata VARCHAR(100) NOT NULL
+) PARTITION BY LIST COLUMNS (country) (
+	PARTITION pEurope VALUES IN ('DE', 'FR', 'GB') PLACEMENT POLICY=europe,
+	PARTITION pNorthAmerica VALUES IN ('US', 'CA', 'MX') PLACEMENT POLICY=northamerica
+);
+```
+
+### Setting the default placement for a schema
+
+Default placement options can be directly attached to a database schema. This works similar to setting the default character set or collation for a schema, in that it will be used when no other placement options are specified. For example:
+
+```sql
+use test;
+CREATE TABLE t1 (a INT); // the table is created with no placement options
+ALTER DATABASE test FOLLOWERS=4; // this changes the default, and does not apply to the existing table t1;
+CREATE TABLE t2 (a INT); // the placement of FOLLOWERS=4 will be used
+CREATE TABLE t3 (a INT) PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-east-2"; // FOLLOWERS=4 does not apply as placement is specified.
+ALTER DATABASE test FOLLOWERS=2; // this does not apply to existing tables
+CREATE TABLE t4 (a INT); // the table is created with FOLLOWERS=2;
+```
+
+Because placement options are only inherited from the database schema default when a table is created, it is recommended to set the default to a `PLACEMENT POLICY`. This ensures that future changes to the policy will propagate to existing tables.
+
+### Advanced placement
+
+The placement options `PRIMARY_REGION`, `REGIONS` and `SCHEDULE` are designed to support the primary use cases of data placement at the loss of some flexibility. For more complex scenarios it is possible to also use the advanced placement options of `CONSTRAINTS`, `FOLLOWER_CONSTRAINTS` and `LEARNER_CONSTRAINTS`. Use of these optons is mutually exclusive, and an error will be returned if both are specified.
+
+For example, to set constraints that data must reside on a TiKV store where the label `disk` must match a value:
+
+```sql
+CREATE PLACEMENT POLICY storeonfastssd CONSTRAINTS="[+disk=ssd]";
+CREATE PLACEMENT POLICY storeonhdd CONSTRAINTS="[+disk=hdd]";
+
+CREATE TABLE t1 (id INT, name VARCHAR(50), purchased DATE)
+ PARTITION BY RANGE( YEAR(purchased) ) (
+  PARTITION p0 VALUES LESS THAN (2000) PLACEMENT POLICY='storeonhdd',
+  PARTITION p1 VALUES LESS THAN (2005),
+  PARTITION p2 VALUES LESS THAN (2010),
+  PARTITION p3 VALUES LESS THAN (2015),
+  PARTITION p4 VALUES LESS THAN MAXVALUE PLACEMENT POLICY='storeonfastssd'
+ )
+PLACEMENT POLICY='companystandardpolicy';
+```
+
+Constraints can either be specified in list format (`[+disk=ssd]`) or dictionary format (`{+disk=ssd:1,+disk=hdd:2}`).
+
+In list format, constraints are specified as a list of key-value pairs. The key starts with either a `+` or a `-` with `+disk=ssd` indicating that the label `disk` must be set to `ssd`, and `-disk=hdd` indicating that the label `disk` must not be `hdd`.
+
+In dictionary format, the constraint also indicates a number of instances that apply to that rule. For example `FOLLOWER_CONSTRAINTS="{+region=us-east-1:1,+region=us-east-2:1,+region=us-west-1:1,+any:1}";` indicates that 1 follower is in us-east-1, 1 follower is in us-east-2, 1 follower is in us-west-1, and 1 follower can be in any region.
