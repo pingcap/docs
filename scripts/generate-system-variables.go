@@ -116,12 +116,23 @@ func printWarning(sv *variable.SysVar) string {
 
 func printUnits(sv *variable.SysVar) string {
 	switch sv.Name {
-	case variable.TiDBMemQuotaApplyCache, variable.TiDBMemQuotaQuery, variable.TiDBQueryLogMaxLen, variable.TiDBBCJThresholdSize, variable.TMPTableSize:
+	case variable.TiDBMemQuotaApplyCache, variable.TiDBMemQuotaQuery, variable.TiDBQueryLogMaxLen, variable.TiDBBCJThresholdSize, variable.TMPTableSize, variable.MaxAllowedPacket:
 		return "- Unit: Bytes\n"
-	case variable.TiDBSlowLogThreshold, variable.MaxExecutionTime:
+	case variable.TiDBSlowLogThreshold, variable.MaxExecutionTime, variable.TiDBDDLSlowOprThreshold:
 		return "- Unit: Milliseconds\n"
-	case variable.InteractiveTimeout, variable.WaitTimeout, variable.TiDBStmtSummaryRefreshInterval, variable.TiDBWaitSplitRegionTimeout:
+	case variable.InteractiveTimeout, variable.WaitTimeout, variable.TiDBStmtSummaryRefreshInterval, variable.TiDBWaitSplitRegionTimeout, variable.InnodbLockWaitTimeout,
+		variable.TiDBMetricSchemaRangeDuration, variable.TiDBMetricSchemaStep, variable.TiDBEvolvePlanTaskMaxTime,
+		variable.TiDBExpensiveQueryTimeThreshold:
 		return "- Unit: Seconds\n"
+	case variable.SQLSelectLimit, variable.TiDBBCJThresholdCount, variable.TiDBDDLReorgBatchSize,
+		variable.TiDBDMLBatchSize, variable.TiDBIndexJoinBatchSize, variable.TiDBIndexLookupSize,
+		variable.TiDBInitChunkSize, variable.TiDBMaxChunkSize:
+		return "- Unit: Rows\n"
+	case variable.TiDBBuildStatsConcurrency, variable.TiDBChecksumTableConcurrency, variable.TiDBDDLReorgWorkerCount,
+		variable.TiDBDistSQLScanConcurrency, variable.TiDBExecutorConcurrency, variable.TiDBGCConcurrency, variable.TiDBHashJoinConcurrency,
+		variable.TiDBHashAggFinalConcurrency, variable.TiDBHashAggPartialConcurrency, variable.TiDBIndexLookupConcurrency, variable.TiDBIndexLookupJoinConcurrency,
+		variable.TiDBIndexSerialScanConcurrency, variable.TiDBProjectionConcurrency, variable.TiDBWindowConcurrency:
+		return "- Unit: Threads\n"
 	}
 	return ""
 }
@@ -235,21 +246,21 @@ func getExtendedDescription(sv *variable.SysVar) string {
 	case variable.AutoCommit:
 		return "- Controls whether statements should automatically commit when not in an explicit transaction. See [Transaction Overview](/transaction-overview.md#autocommit) for more information."
 	case "ddl_slow_threshold":
-		return "- DDL operations whose execution time exceeds the threshold value are output to the log. The unit is millisecond."
+		return "- DDL operations whose execution time exceeds the threshold value are output to the log."
 	case variable.ForeignKeyChecks:
 		return "- For compatibility, TiDB returns foreign key checks as `OFF`."
 	case variable.Hostname:
 		return "- The hostname of the TiDB server as a read-only variable."
 	case variable.InnodbLockWaitTimeout:
-		return "- The lock wait timeout for pessimistic transactions (default) in seconds."
+		return "- The lock wait timeout for pessimistic transactions (default)."
 	case variable.InteractiveTimeout:
-		return "- This variable represents the idle timeout of the interactive user session, which is measured in seconds. Interactive user session refers to the session established by calling [`mysql_real_connect()`](https://dev.mysql.com/doc/c-api/5.7/en/mysql-real-connect.html) API using the `CLIENT_INTERACTIVE` option (for example, MySQL shell client). This variable is fully compatible with MySQL."
+		return "- This variable represents the idle timeout of the interactive user session. Interactive user session refers to the session established by calling [`mysql_real_connect()`](https://dev.mysql.com/doc/c-api/5.7/en/mysql-real-connect.html) API using the `CLIENT_INTERACTIVE` option (for example, MySQL shell client). This variable is fully compatible with MySQL."
 	case variable.TiDBFoundInBinding:
 		return "- This variable is used to show whether the execution plan used in the previous statement was influenced by a [plan binding](/sql-plan-management.md)"
 	case variable.TiDBFoundInPlanCache:
 		return "- This variable is used to show whether the execution plan used in the previous `execute` statement is taken directly from the plan cache."
 	case variable.MaxExecutionTime:
-		return "- The maximum execution time of a statement in milliseconds. The default value is unlimited (zero).\n" +
+		return "- The maximum execution time of a statemen. The default value is unlimited (zero).\n" +
 			"\n" +
 			"> **Note:**\n" +
 			">\n" +
@@ -302,7 +313,7 @@ func getExtendedDescription(sv *variable.SysVar) string {
 			"\n" +
 			"    In the case of a poor network environment, appropriately increasing the value of this variable can effectively alleviate error reporting to the application end caused by timeout. If the application end wants to receive the error information more quickly, minimize the value of this variable."
 	case variable.TiDBBCJThresholdCount:
-		return "- The unit of the variable is rows. If the objects of the join operation belong to a subquery, the optimizer cannot estimate the size of the subquery result set. In this situation, the size is determined by the number of rows in the result set. If the estimated number of rows in the subquery is less than the value of this variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used."
+		return "- If the objects of the join operation belong to a subquery, the optimizer cannot estimate the size of the subquery result set. In this situation, the size is determined by the number of rows in the result set. If the estimated number of rows in the subquery is less than the value of this variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used."
 	case variable.TiDBBCJThresholdSize:
 		return "- If the table size is less than the value of the variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used."
 	case variable.TiDBBuildStatsConcurrency:
@@ -420,8 +431,6 @@ func getExtendedDescription(sv *variable.SysVar) string {
 			"    * `get_lock` and `release_lock` functions\n" +
 			"    * `LOCK IN SHARE MODE` syntax\n" +
 			"    * `SQL_CALC_FOUND_ROWS` syntax\n" +
-			"    * `CREATE TEMPORARY TABLE` syntax\n" +
-			"    * `DROP TEMPORARY TABLE` syntax\n" +
 			"    * `START TRANSACTION READ ONLY` and `SET TRANSACTION READ ONLY` syntax\n" +
 			"    * The `tx_read_only`, `transaction_read_only`, `offline_mode`, `super_read_only`, `read_only` and `sql_auto_is_null` system variables\n" +
 			"\n" +
@@ -489,7 +498,7 @@ func getExtendedDescription(sv *variable.SysVar) string {
 	case variable.TiDBEvolvePlanTaskEndTime:
 		return "- This variable is used to set the end time of baseline evolution in a day."
 	case variable.TiDBEvolvePlanTaskMaxTime:
-		return "- This variable is used to limit the maximum execution time of each execution plan in the baseline evolution feature. The unit is second."
+		return "- This variable is used to limit the maximum execution time of each execution plan in the baseline evolution feature."
 	case variable.TiDBEvolvePlanTaskStartTime:
 		return "- This variable is used to set the start time of baseline evolution in a day."
 	case variable.TiDBExecutorConcurrency:
@@ -516,7 +525,7 @@ func getExtendedDescription(sv *variable.SysVar) string {
 			"\n" +
 			"For a system upgraded to v5.0 from an earlier version, if you have not modified any value of the variables listed above (which means that the `tidb_hash_join_concurrency` value is `5` and the values of the rest are `4`), the operator concurrency previously managed by these variables will automatically be managed by `tidb_executor_concurrency`. If you have modified any of these variables, the concurrency of the corresponding operators will still be controlled by the modified variables."
 	case variable.TiDBExpensiveQueryTimeThreshold:
-		return "- This variable is used to set the threshold value that determines whether to print expensive query logs. The unit is second. The difference between expensive query logs and slow query logs is:\n" +
+		return "- This variable is used to set the threshold value that determines whether to print expensive query logs. The difference between expensive query logs and slow query logs is:\n" +
 			"    - Slow logs are printed after the statement is executed.\n" +
 			"    - Expensive query logs print the statements that are being executed, with execution time exceeding the threshold value, and their related information."
 	case variable.TiDBForcePriority:
@@ -723,9 +732,9 @@ func getExtendedDescription(sv *variable.SysVar) string {
 	case variable.TiDBIndexJoinBatchSize:
 		return "- This variable is used to set the batch size of the `index lookup join` operation.\n- Use a bigger value in OLAP scenarios, and a smaller value in OLTP scenarios."
 	case variable.TiDBMetricSchemaRangeDuration:
-		return "- This variable is used to set the range duration of the Prometheus statement generated when querying METRIC_SCHEMA. The unit is second."
+		return "- This variable is used to set the range duration of the Prometheus statement generated when querying METRIC_SCHEMA."
 	case variable.TiDBMetricSchemaStep:
-		return "- This variable is used to set the step of the Prometheus statement generated when querying `METRIC_SCHEMA`. The unit is second."
+		return "- This variable is used to set the step of the Prometheus statement generated when querying `METRIC_SCHEMA`."
 	case variable.TiDBOptCorrelationExpFactor:
 		return "- When the method that estimates the number of rows based on column order correlation is not available, the heuristic estimation method is used. This variable is used to control the behavior of the heuristic method.\n" +
 			"    - When the value is 0, the heuristic method is not used.\n" +

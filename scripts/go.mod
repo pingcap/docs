@@ -9,15 +9,18 @@ require (
 	github.com/coreos/go-systemd v0.0.0-20191104093116-d3cd4ed1dbcf // indirect
 	github.com/danjacques/gofslock v0.0.0-20200623023034-5d0bd0fa6ef0 // indirect
 	github.com/dgryski/go-farm v0.0.0-20200201041132-a6ae2369ad13 // indirect
+	github.com/go-ole/go-ole v1.2.6 // indirect
 	github.com/golang/snappy v0.0.4 // indirect
 	github.com/google/btree v1.0.1 // indirect
 	github.com/google/uuid v1.3.0 // indirect
 	github.com/grpc-ecosystem/go-grpc-middleware v1.3.0 // indirect
 	github.com/opentracing/opentracing-go v1.2.0 // indirect
 	github.com/pingcap/failpoint v0.0.0-20210918120811-547c13e3eb00 // indirect
-	github.com/pingcap/kvproto v0.0.0-20211009031853-d6dd964d6b8c // indirect
-	github.com/pingcap/tidb v1.1.0-beta.0.20211009135324-6e70be97c2e5 // indirect
+	github.com/pingcap/kvproto v0.0.0-20211014081746-465fa4c7b42e // indirect
+	github.com/pingcap/parser v0.0.0-20211004012448-687005894c4e // indirect
+	github.com/pingcap/tidb v1.1.0-beta.0.20211015100241-42001503cbe6 // indirect
 	github.com/pingcap/tidb-tools v5.2.1+incompatible // indirect
+	github.com/pingcap/tidb/parser v0.0.0-20211015100241-42001503cbe6 // indirect
 	github.com/pingcap/tipb v0.0.0-20211008080435-3fd327dfce0e // indirect
 	github.com/prometheus/common v0.31.1 // indirect
 	github.com/prometheus/procfs v0.7.3 // indirect
@@ -25,11 +28,11 @@ require (
 	github.com/twmb/murmur3 v1.1.6 // indirect
 	github.com/uber-go/atomic v1.4.0 // indirect
 	github.com/uber/jaeger-client-go v2.29.1+incompatible // indirect
-	go.etcd.io/etcd v3.3.26+incompatible // indirect
+	go.etcd.io/etcd v3.3.27+incompatible // indirect
 	go.uber.org/atomic v1.9.0 // indirect
-	golang.org/x/net v0.0.0-20211008194852-3b03d305991f // indirect
-	golang.org/x/sys v0.0.0-20211007075335-d3039528d8ac // indirect
-	google.golang.org/genproto v0.0.0-20211008145708-270636b82663 // indirect
+	golang.org/x/net v0.0.0-20211014222326-fd004c51d1d6 // indirect
+	golang.org/x/sys v0.0.0-20211013075003-97ac67df715c // indirect
+	google.golang.org/genproto v0.0.0-20211015135405-485ec31e706e // indirect
 	google.golang.org/grpc v1.41.0 // indirect
 )
 
