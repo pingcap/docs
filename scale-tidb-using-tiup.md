@@ -204,7 +204,11 @@ If you want to add two TiCDC nodes to the `10.0.1.3` and `10.0.1.4` hosts, take 
     ```ini
     cdc_servers:
       - host: 10.0.1.3
+        gc-ttl: 86400
+        data_dir: /data/deploy/install/data/cdc-8300
       - host: 10.0.1.4
+        gc-ttl: 86400
+        data_dir: /data/deploy/install/data/cdc-8300
     ```
 
 2. Run the scale-out command:
