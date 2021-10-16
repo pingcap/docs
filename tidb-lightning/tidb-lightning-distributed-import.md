@@ -4,7 +4,7 @@ title: Use TiDB Lightning to Migrate Data in Parallel
 
 # Use TiDB Lightning to Migrate Data in Parallel
 
-From v5.1.0, the [Local-backend mode](/tidb-lightning/tidb-lightning-backends.md#tidb-lightning-local-backend) of TiDB Lightning supports the parallel migration of a single table or multiple tables. By running multiple TiDB Lightning instances simultaneously, you can migrate data in parallel from different single tables or multiple tables. In this way, TiDB Lightning proivdes the ability to scale horizontally, which can greatly reduce the time required to migrate large amounts of data.
+From v5.1.0, the [Local-backend mode](/tidb-lightning/tidb-lightning-backends.md#tidb-lightning-local-backend) of TiDB Lightning supports the parallel migration of a single table or multiple tables. By running multiple TiDB Lightning instances simultaneously, you can migrate data in parallel from different single tables or multiple tables. In this way, TiDB Lightning provides the ability to scale horizontally, which can greatly reduce the time required to migrate large amounts of data.
 
 In technical implementation, TiDB Lightning records the meta data of each instance and the data of each migrated table in the target TiDB, and coordinates the Row ID allocation range of different instances, the record of global Checksum, and the configuration changes and recovery of TiKV and PD.
 
@@ -28,7 +28,7 @@ But when migrating data in parallel, you need to take the following into conside
 
 ### Handle conflicts between primary keys or unique indexes
 
-When using [Local-backend mode](/tidb-lightning/tidb-lightning-backends.md#tidb-lightning-local-backend) to import in parallel, you need to ensure that there are no primary key or unique index conflicts beteween data sources, and between the tables in the target TiDB cluster. Ensure that there are no data writes in the target table during migration. Otherwise, TiDB Lightning will not be able to guarantee the correctness of the migrated data, and the target table will contain inconsistent indexes after the migration is completed.
+When using [Local-backend mode](/tidb-lightning/tidb-lightning-backends.md#tidb-lightning-local-backend) to import in parallel, you need to ensure that there are no primary key or unique index conflicts between data sources, and between the tables in the target TiDB cluster. Ensure that there are no data writes in the target table during migration. Otherwise, TiDB Lightning will not be able to guarantee the correctness of the migrated data, and the target table will contain inconsistent indexes after the migration is completed.
 
 ### Optimize migration performance
 
@@ -127,7 +127,7 @@ TiDB Lightning also supports parallel migration of single tables. For example, m
 
 > **Note**
 >
->In the local environment, you can use Dumpling's --where parameter to divide the data of a single table into different parts and export it to the local disks of multiple servers in advance. This way, you can still use perform parallel importion. The configuration is the same as Example 1.
+>In the local environment, you can use Dumpling's --where parameter to divide the data of a single table into different parts and export it to the local disks of multiple servers in advance. This way, you can still perform parallel migration. The configuration is the same as Example 1.
 
 Assuming that the source files are stored in Amazon S3, the table files are `my_db.my_table.00001.sql` ~ `my_db.my_table.10000.sql`, a total of 10,000 SQL files. If you want to use 2 TiDB Lightning instances to speed up the migration, you need to add the following settings in the configuration file:
 
