@@ -1,89 +1,97 @@
 ---
-title: Use TiDB Lightning to Import Data in Parallel
+title: Use TiDB Lightning to Migrate Data in Parallel
 ---
 
-# Use TiDB Lightning to Import Data in Parallel
+# Use TiDB Lightning to Migrate Data in Parallel
 
-From v5.1.0, the [Local-backend mode](/tidb-lightning/tidb-lightning-backends.md#tidb-lightning-local-backend) of TiDB Lightning supports the parallel import of a single table or multiple tables. By running multiple TiDB Lightning instances simultaneously, you can import data parallelly in different single tables or multiple tables. In this way, TiDB Lightning has the ability to scale horizontally, which can greatly reduce the time required to import large amounts of data.
+From v5.1.0, the [Local-backend mode](/tidb-lightning/tidb-lightning-backends.md#tidb-lightning-local-backend) of TiDB Lightning supports the parallel migration of a single table or multiple tables. By running multiple TiDB Lightning instances simultaneously, you can migrate data in parallel from different single tables or multiple tables. In this way, TiDB Lightning proivdes the ability to scale horizontally, which can greatly reduce the time required to migrate large amounts of data.
 
-在技术实现上，TiDB Lightning 通过在目标 TiDB 中记录各个实例以及每个导入表导入数据的元信息，协调不同实例的 Row ID 分配范围、全局 Checksum 的记录和 TiKV 及 PD 的配置变更与恢复。
+In technical implementation, TiDB Lightning records the meta data of each instance and the data of each migrated table in the target TiDB, and coordinates the Row ID allocation range of different instances, the record of global Checksum, and the configuration changes and recovery of TiKV and PD.
 
-In technical implementation, TiDB Lightning records the meta data of each instance and the data of each imported table in the target TiDB, and coordinates the Row ID allocation range of different instances, the record of global Checksum, and the configuration change and recovery of TiKV and PD.
+You can use TiDB Lightning to migrate data in parallel in the following scenarios:
 
-TiDB Lightning 并行导入可以用于以下场景：
+- Migrate sharded schemas and sharded tables. In this scenario, multiple tables from multiple upstream database instances are imported into the downstream TiDB database by different TiDB Lightning instances in parallel.
+- Migrate single tables in parallel. In this scenario, single tables stored in a certain directory or cloud storage (such as Amazon S3) are migrated into the downstream TiDB cluster by different TiDB Lightning instances in parallel. It is a new feature introduced from v5.3.0.
 
-- 使用 Dumpling + Lightning 并行导入分库分表数据至 TiDB
-- 从 Amazon S3 等分布式存储中并行导入单表数据
+> **Note**
+>
+>Parallel migration only supports the initialized empty tables in TiDB. It does not support migrating data to tables with data written by existing services. Otherwise, data inconsistencies may occur.
 
-## 使用说明
+## Considerations 
 
-使用 TiDB Lightning 并行导入无须额外配置。TiDB Lightning 在启动时，会在下游 TiDB 中注册元信息，并自动检测是否有其他实例向目标集群导入数据。如果有，则自动进入并行导入模式。
+No additional configuration is required for parallel migration using TiDB Lightning. When TiDB Lightning is started, it registers meta data in the downstream TiDB cluster and automatically detects whether there are other instances migrating data to the target cluster at the same time. If there is, it automatically enters the parallel migration mode.
 
-但是在并行导入时，需要注意以下情况：
+But when migrating data in parallel, you need to take the following into consideration:
 
-- 解决主键或者唯一索引的冲突
-- 优化配置项`tikv-import.region-split-size`
+- Handle conflicts between primary keys or unique indexes across multiple sharded tables
+- Optimize migration performance
 
-### 解决主键或者唯一索引的冲突
+### Handle conflicts between primary keys or unique indexes
 
-在使用 [Local 后端模式](/tidb-lightning/tidb-lightning-backends.md#tidb-lightning-local-backend)模式并行导入时，需要确保多个 TiDB Lightning 的数据源之间，以及它们和 TiDB 的目标表中的数据没有主键或者唯一索引的冲突，并且导入的目标表不能有其他应用进行数据写入。否则，TiDB Lightning 将无法保证导入结果的正确性，并且导入完成后相关的数据表将处于数据索引不一致的状态。
+When using [Local-backend mode](/tidb-lightning/tidb-lightning-backends.md#tidb-lightning-local-backend) to import in parallel, you need to ensure that there are no primary key or unique index conflicts beteween data sources, and between the tables in the target TiDB cluster. Ensure that there are no data writes in the target table during migration. Otherwise, TiDB Lightning will not be able to guarantee the correctness of the migrated data, and the target table will contain inconsistent indexes after the migration is completed.
 
-### 导入性能优化
+### Optimize migration performance
 
-由于 TiDB Lightning 需要将生成的 Key-Value 数据上传到对应 Region 的每一个副本所在的 TiKV 节点，其导入速度受目标集群规模的限制。在通常情况下，建议确保目标 TiDB 集群中的 TiKV 实例数量与 TiDB Lightning 的实例数量大于 n:1 (n 为 Region 的副本数量)，以达到最佳的导入性能。
+Because TiDB Lightning needs to upload the generated Key-Value data to the TiKV node where each copy of the corresponding Region is located, the import speed is limited by the size of the target cluster. It is recommended to ensure that the number of TiKV instances in the target TiDB cluster and the number of TiDB Lightning instances are greater than n:1 (n is the number of copies of the Region) to achieve the optimal migration performance.
 
-TiDB Lightning 会按照配置项`tikv-import.region-split-size`（默认为 96MiB）划分 Region 的大小，但是在并行导入的时候，由于不同的 TiDB Lightning 实例划分的 Region 范围不同，会导致产生大量小于 96 MiB 的 Region，严重影响导入的性能。
+TiDB Lightning divides the size of the Region according to the configuration item `tikv-import.region-split-size` (96 MiB by default). However, during parallel migration, different TiDB Lightning instances divide the regions into different sizes. A large number of regions smaller than 96 MiB are generated and seriously affect the migration performance.
 
-为了缓解此问题，建议在并行导入的时候，将每一个 TiDB Lightning 实例的此配置项调整为 `n * 96 MiB`（n 为最大并行导入单表的 lightning 实例数量）。下面是一个配置示例：
+To alleviate this problem, it is recommended to adjust this configuration item of each TiDB Lightning instance to `n * 96 MiB` (n is the maximum number of TiDB Lightning instances that perform parallel migration of single tables) when importing in parallel. The following is a configuration example:
 
 ```
 [tikv-importer]
-#  Region 分裂的大小，默认为 96 MiB，如果有 5 个 TiDB-Lightning 实例并行导入，则建议调整为 5 * 96MiB = 480MiB
+# The size of the region split, 96 MiB by default. For example, assume that there are 5 TiDB Lightning instances performing parallel migration, it is recommended to adjust it to 5 * 96MiB = 480MiB
 region-split-size = '480MiB'
 ```
-接下来，本文档将以两个并行导入的示例，详细介绍了不同场景下并行导入的操作步骤：
 
-- 示例 1：使用 Dumpling + Lightning 并行导入分库分表数据至 TiDB
-- 示例 2：从 Amazon S3 中并行导入单表数据
+Next, this document will use two examples to detail the operation steps of parallel migration in different scenarios:
 
-## 示例 1：使用 Dumpling + Lightning 并行导入分库分表数据至 TiDB
+- Example 1: Use Dumpling + TiDB Lightning to migrate sharded databases and tables into TiDB in parallel
+- Example 2: Migrate single tables in parallel
 
-假设上游为包含 10 个分表的 MySQL 集群，总共大小为 10 TiB。使用 5 个 TiDB Lightning 实例并行导入，每个实例导入 2 TiB 数据，预计可以将总导入时间（不包含 Dumpling 导出的耗时）由约 40 小时降至约 10 小时。
+## Example 1: Use Dumpling + TiDB Lightning to Migrate Sharded Databases and Tables into TiDB in Parallel
 
-假设上游的库名为 `my_db`，每个分表的名字为 `my_table_01` ~ `my_table_10`，需要合并导入至下游的 `my_db.my_table` 表中。 下文介绍具体的操作步骤。
+When using TiDB Lightning to migrate shared databases and tables in parallel, choose an appropriate number of TiDB Lightning instances according to the amount of data.
 
-### 第 1 步：使用 Dumpling 导出数据
+- If the MySQL data volume is less than 1 TiB, you can use one TiDB Lightning instance for parallel migration.
+- If the MySQL data volume exceeds 1 TiB, it is recommended that you use one TiDB Lightning instance for each MySQL instance, and the number of parallel TiDB Lightning instances should not exceed 10.
 
-在部署 TiDB Lightning 的 5 个节点上面分别导出两个分表的数据：
+In this example, assume that the upstream is a MySQL cluster with 10  shard tables, with a total size of 10 TiB. You can Use 5 TiDB Lightning instances to perform parallel migration, and each instance migrates 2 TiB. It is estimated that the total migration time (excluding the time required for Dumpling export) can be reduced from about 40 hours to about 10 hours.
 
-- 如果两个分表位于同一个 MySQL 实例中，可以直接使用 Dumpling 的 `-f` 参数一次性导出。此时在使用 Lightning 导入时，`data-source-dir` 指定为 Dumpling 数据导出的目录即可；
-- 如果两个分表的数据分布在不同的 MySQL 节点上，则需要使用 Dumpling 分别导出，两次导出数据需要放置在同一父目录下<b>不同子目录里</b>，然后在使用 TiDB Lightning 导入时，`data-source-dir` 指定为此父级目录。
+Assume that the upstream library is named `my_db`, and the name of each  shard table is `my_table_01` ~ `my_table_10`. You want to merge and migrate them into the downstream `my_db.my_table` table. The specific steps are described in the following sections.
 
-使用 Dumpling 导出数据的步骤，请参考 [Dumpling](/dumpling-overview.md)。
+### Step 1: Use Dumpling to export data
 
-### 第 2 步：配置 TiDB Lightning 的数据源
+Export two shard tables on the 5 nodes where TiDB Lightning is deployed:
 
-创建 `tidb-lightning.toml` 配置文件，并加入如下内容：
+- If the two shard tables are in the same MySQL instance, you can directly use the `-f` parameter of Dumpling to export them directly. When using TiDB Lightning to import, you can specify `data-source-dir` as the directory where Dumpling exports data to;
+- If the data of the two shard tables are distributed on different MySQL nodes, you need to use Dumpling to export separately. The exported data needs to be placed in the same parent directory <b>but in different sub-directories</b>. When using TiDB Lightning to perform parallel migration, you need to specify `data-source-dir` as the parent directory.
+
+For more information on how to use Dumpling to export data, see [Dumpling](/dumpling-overview.md).
+
+### Step 2: Configure TiDB Lightning data sources
+
+Create a configuration file `tidb-lightning.toml`, and then add the following content:
 
 ```
 [lightning]
 status-addr = ":8289"
 
 [mydumper]
-# 设置为 Dumpling 导出数据的路径，如果 Dumpling 执行了多次并分属不同的目录，请将多次导出的数据置放在相同的父目录下并指定此父目录即可。
+# Specify the path for Dumpling to export data. If Dumpling performs several times and the data belongs to different directories, you can place all the exported data in the same parent directory and specify this parent directory here.
 data-source-dir = "/path/to/source-dir"
 
 [tikv-importer]
-# 使用 Local 后端
+# Use the Local backend mode.
 backend = "local"
 
-# 设置本地排序数据的路径
+# Specify the path for local sorting data.
 sorted-kv-dir = "/path/to/sorted-dir"
 
-# 调整 Region 的大小
+# Adjust the size of the region.
 region-split-size = '480MiB'
 
-# 设置分库分表合并规则
+# Specify the routes for shard schemas and tables.
 [[routes]]
 schema-pattern = "my_db"
 table-pattern = "my_table_*"
@@ -91,60 +99,60 @@ target-schema = "my_db"
 target-table = "my_table"
 ``` 
 
-如果数据源存放在 S3 或 GCS 等分布式存储缓存，请参考 [外部存储 URL](/br/backup-and-restore-storages.md)。
+If the data source is stored in a distributed storage cache such as Amazon S3 or GCS, see [External Storages](/br/backup-and-restore-storages.md).
 
-### 第 3 步：开启 TiDB Lightning 进行数据导入
+### Step 3: Start TiDB Lightning to migrate data
 
-在使用 TiDB Lightning 并行导入时，对每个 TiDB Lightning 节点机器配置的需求与非并行导入模式相同，每个 TiDB Lightning 节点需要消耗相同的资源，建议部署在不同的机器上。详细的部署步骤，请参考 [TiDB Lightning 部署与执行](/tidb-lightning/deploy-tidb-lightning.md)
+During parallel migration, the server configuration requirements for each TiDB Lightning node are the same as the non-parallel migration mode. Each TiDB Lightning node needs to consume the same resources. It is recommended to deploy them on different servers. For detailed deployment steps, see [Deploy TiDB Lightning](/tidb-lightning/deploy-tidb-lightning.md).
 
-依次在每台机器上面运行 TiDB Lightning。如果直接在命令行中用 `nohup` 启动程序，可能会因为 SIGHUP 信号而退出，建议把 `nohup` 放到脚本里面，如：
+Start TiDB Lightning on each server in turn. If you use `nohup` to start it directly from the command line, it may exit due to the SIGHUP signal. So it is recommended to put `nohup` in the script, for example:
 
 ```shell
 # !/bin/bash
 nohup ./tidb-lightning -config tidb-lightning.toml > nohup.out &
 ```
 
-### 第 4 步：查看进度
+### Step 4: Check the migration progress
 
-开始导入后，可以通过以下任意方式查看进度：
+After starting the migration, you can check the progress in either of the following ways:
 
-- 通过 `grep` 日志关键字 `progress` 查看进度，默认 5 分钟更新一次。
-- 通过监控面板查看进度。详情请参见 [TiDB Lightning 监控](/tidb-lightning/monitor-tidb-lightning.md)。
+- Check the progress through the `grep` log keyword `progress`. It is updated every 5 minutes by default.
+- Check the progress through the monitoring console. For details, see [TiDB Lightning Monitoring](/tidb-lightning/monitor-tidb-lightning.md).
 
-等待所有的 TiDB Lightning 运行结束，则整个导入完成。
+Wait for all TiDB Lightning instances to finish, then the entire migration is completed.
 
-## 示例 2：从 Amazon S3 中并行导入单表数据
+## Example 2: Migrate single tables in parallel
 
-如果源数据存放于 Amazon S3 等分布式存储中（请参考 [TiDB Lightning 支持的远端存储](/br/backup-and-restore-storages.md)），也可以使用多个 TiDB Lighting 导入不同的文件以加快整体导入速度。
+TiDB Lightning also supports parallel migration of single tables. For example, migrate multiple single tables stored in Amazon S3 by different TiDB Lightning instances into the downstream TiDB cluster in parallel. This method can speed up the overall migration speed. For more information on external storages, see [External Storages](/br/backup-and-restore-storages.md)).
 
-> **说明**
+> **Note**
 >
-> 在本地环境下，可以使用 Dumpling 的 --where 参数，预先将单表的数据划分成不同的部分导出至多台机器的本地磁盘，此时依然可以使用并行导入功能，其配置与示例 1 中的相同。
+>In the local environment, you can use Dumpling's --where parameter to divide the data of a single table into different parts and export it to the local disks of multiple servers in advance. This way, you can still use perform parallel importion. The configuration is the same as Example 1.
 
-假设通过 Dumpling 导出的源文件存放在 Amazon S3 云存储中，数据文件为 `my_db.my_table.00001.sql` ~ `my_db.my_table.10000.sql` 共计 10000 个 SQL 文件。如果希望使用 2 个 TiDB Lightning 实例加速导入，则需要在配置文件中增加如下设置：
+Assuming that the source files are stored in Amazon S3, the table files are `my_db.my_table.00001.sql` ~ `my_db.my_table.10000.sql`, a total of 10,000 SQL files. If you want to use 2 TiDB Lightning instances to speed up the migration, you need to add the following settings in the configuration file:
 
 ```
 [[mydumper.files]]
-# db schema 文件
+# the db schema file
 pattern = '(?i)^(?:[^/]*/)my_db-schema-create\.sql'
 schema = "my_db"
 type = "schema-schema"
 
 [[mydumper.files]]
-# table schema 文件
+# the table schema file
 pattern = '(?i)^(?:[^/]*/)my_db\.my_table-schema\.sql'
 schema = "my_db"
 table = "my_table"
 type = "table-schema"
 
 [[mydumper.files]]
-# 只导入 00001~05000 这些数据文件并忽略其他文件
+# Only migrate 00001~05000 and ignore other files
 pattern = '(?i)^(?:[^/]*/)my_db\.my_table\.(0[0-4][0-9][0-9][0-9]|05000)\.sql'
 schema = "my_db"
 table = "my_table"
 type = "sql"
 ```
 
-另外一个实例的配置修改为只导入 `05001 ~ 10000` 这些数据文件即可。
+You can modify the configuration of the other instance to only migrate the `05001 ~ 10000` data files.
 
-其他步骤请参考示例 1 中的相关步骤。
+For other steps, see the relevant steps in Example 1.
