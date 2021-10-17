@@ -1,0 +1,116 @@
+---
+title: TIDB_HOT_REGIONS_HISTORY
+summary: Learn the `TIDB_HOT_REGIONS_HISTORY` information_schema tabel.
+---
+
+# TIDB_HOT_REGIONS_HISTORY
+
+The `TIDB_HOT_REGIONS_HISTORY` table provides information about historical hot regions that are periodically recorded locally by PD, the recorded interval is the value of [' hot-regions-write-interval '](/pd-configuration-file. dm #hot-regions-write-interval) (the default value is 10minutes), the period for reserving historical hotspot information is the value of [' hot-regions-reserve-days'](/pd-configuration-file.m #hot-regions-write-interval) (the default value is 7days). See [PD configuration file description](/pd-configuration-file.md#hot-regions-write-interval) for details.
+
+{{< copyable "sql" >}}
+
+```sql
+USE information_schema;
+DESC tidb_hot_regions_history;
+```
+
+```sql
++-------------+--------------+------+------+---------+-------+
+| Field       | Type         | Null | Key  | Default | Extra |
++-------------+--------------+------+------+---------+-------+
+| UPDATE_TIME | timestamp(6) | YES  |      | NULL    |       |
+| DB_NAME     | varchar(64)  | YES  |      | NULL    |       |
+| TABLE_NAME  | varchar(64)  | YES  |      | NULL    |       |
+| TABLE_ID    | bigint(21)   | YES  |      | NULL    |       |
+| INDEX_NAME  | varchar(64)  | YES  |      | NULL    |       |
+| INDEX_ID    | bigint(21)   | YES  |      | NULL    |       |
+| REGION_ID   | bigint(21)   | YES  |      | NULL    |       |
+| STORE_ID    | bigint(21)   | YES  |      | NULL    |       |
+| PEER_ID     | bigint(21)   | YES  |      | NULL    |       |
+| IS_LEARNER  | tinyint(1)   | NO   |      | 0       |       |
+| IS_LEADER   | tinyint(1)   | NO   |      | 0       |       |
+| TYPE        | varchar(64)  | YES  |      | NULL    |       |
+| HOT_DEGREE  | bigint(21)   | YES  |      | NULL    |       |
+| FLOW_BYTES  | double       | YES  |      | NULL    |       |
+| KEY_RATE    | double       | YES  |      | NULL    |       |
+| QUERY_RATE  | double       | YES  |      | NULL    |       |
++-------------+--------------+------+------+---------+-------+
+16 rows in set (0.00 sec)
+```
+
+The description of columns in the `TIDB_HOT_REGIONS_HISTORY` table is as follows:
+
+* UPDATE_TIME: Update time of the hot Region.
+* DB_NAME: The database name of the object in which the hot Region is located.
+* TABLE_ID: ID of located.
+* TABLE_NAME: The name of the table in which the hot Region is located.
+* INDEX_NAME: The name of the index in which the hot Region is located.
+* INDEX_ID: ID of the table in which the hot Region is the index in which the hot Region is located.
+* REGION_ID: ID of the hot Region.
+* STORE_ID: ID of the store in which the hot Region is located.
+* PEER_ID: ID of the Peer corresponding to the hot Region.
+* IS_LEARNER: Whether the PEER is the LEARNER.
+* IS_LEADER: Whether the PEER is the LEADER.
+* TYPE: The type of the hot Region.
+* HOT_DEGREE: The hot degree of the Region.
+* FLOW_BYTES: The number of bytes written and read in the Region.
+* KEY_RATE: The number of keys written and read in the Region.
+* QUERY_RATE: The number of queries written and read in the Region.
+
+> **Note:**
+>
+> + `UPDATE_TIME`, `REGION_ID`, `STORE_ID`, `PEER_ID`, `IS_LEARNER`, `IS_LEADER` and `TYPE` fields are pushed down to the PD servers for execution. To reduce the overhead of using the table, you must specify the time range for the search, , and as many conditions as possible. For example,  `select * from tidb_hot_regions_history where store_id = 11 and update_time > '2020-05-18 20:40:00' and update_time < '2020-05-18 21:40:00' and type='write'`.
+
+Here are some common use cases:
+
+* Query hotspot regions within a specified period of time:
+
+  {{< copyable "sql" >}}
+
+  ```sql
+  SELECT * FROM INFORMATION_SCHEMA.TIDB_HOT_REGIONS_HISTORY WHERE update_time >'2021-08-18 21:40:00' and update_time <'2021-09-19 00:00:00';
+  ```
+
+  > **Note:**
+  >
+  > + `UPDATE_TIME` also supports unix timestamps. For example, `update_time >TIMESTAMP('2021-08-18 21:40:00')` or `update_time > FROM_UNIXTIME(1629294000.000)` .
+
+* Query hotspot regions of a table within a specified period of time:
+
+  {{< copyable "sql" >}}
+
+  ```SQL
+  SELECT * FROM INFORMATION_SCHEMA.TIDB_HOT_REGIONS_HISTORY WHERE update_time >'2021-08-18 21:40:00' and update_time <'2021-09-19 00:00:00' and TABLE_NAME = 'table_name';
+  ```
+
+* Query the distribution of hotspot regions within a specified period of time:
+
+  {{< copyable "sql" >}}
+
+  ```sql
+  SELECT count(region_id) cnt, store_id FROM INFORMATION_SCHEMA.TIDB_HOT_REGIONS_HISTORY WHERE update_time >'2021-08-18 21:40:00' and update_time <'2021-09-19 00:00:00'  and table_name = 'table_name' GROUP BY STORE_ID ORDER BY cnt DESC;
+  ```
+
+* Query the distribution of hotspot leader regions within a specified period of time:
+
+  {{< copyable "sql" >}}
+
+  ```sql
+  SELECT count(region_id) cnt, store_id FROM INFORMATION_SCHEMA.TIDB_HOT_REGIONS_HISTORY WHERE update_time >'2021-08-18 21:40:00' and update_time <'2021-09-19 00:00:00'  and table_name = 'table_name' and is_leader=1 GROUP BY STORE_ID ORDER BY cnt DESC;
+  ```
+
+* Query the distribution of hotspot index regions within a specified period of time:
+
+  {{< copyable "sql" >}}
+
+  ```sql
+  SELECT count(region_id) cnt, index_name, store_id FROM INFORMATION_SCHEMA.TIDB_HOT_REGIONS_HISTORY WHERE update_time >'2021-08-18 21:40:00' and update_time <'2021-09-19 00:00:00' and table_name = 'table_name' group by index_name, store_id order by index_name,cnt desc;
+  ```
+
+* Query the distribution of hotspot index leader regions within a specified period of time:
+
+  {{< copyable "sql" >}}
+
+  ```sql
+  SELECT count(region_id) cnt, index_name, store_id FROM INFORMATION_SCHEMA.TIDB_HOT_REGIONS_HISTORY WHERE update_time >'2021-08-18 21:40:00' and update_time <'2022-09-19 00:00:00' and table_name = 'table_name' and is_leader=1 group by index_name, store_id order by index_name,cnt desc;
+  ```
