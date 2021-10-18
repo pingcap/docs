@@ -157,7 +157,7 @@ mysql> SELECT * FROM t1;
 - Scope: INSTANCE
 - Default value: `300`
 - Unit: Milliseconds
-- DDL operations whose execution time exceeds the threshold value are output to the log.
+- Log DDL operations whose execution time exceeds the threshold value.
 
 ### default_authentication_plugin
 
