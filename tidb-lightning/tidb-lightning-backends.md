@@ -31,6 +31,10 @@ The **TiDB-backend**: `tidb-lightning` first encodes these data into SQL `INSERT
 | TiDB versions supported | >= v4.0.0 | All | All |
 | TiDB services impacted | Yes | Yes | No |
 
+> **Note:**
+>
+> Since TiDB 5.3.0, TiDB Lightning Local-backend supports importing data to a non-empty target table. When using Local-backend, you need to ensure that no conflict exists between the newly imported data and the existing data in the table. TiDB-backend does not have this requirement.
+
 ## How to choose the backend modes
 
 - If the target cluster of data import is v4.0 or later versions, consider using the Local-backend mode first, which is easier to use and has higher performance than that of the other two modes.
