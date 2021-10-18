@@ -1140,7 +1140,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Default value: `60`
 - Range: `[10, 216000]`
 - Unit: Seconds
-- This variable is used to set the step of the Prometheus statement generated when querying `METRIC_SCHEMA`.
+- This variable is used to set the step of the Prometheus statement generated when querying `METRICS_SCHEMA`.
 
 ### tidb_multi_statement_mode <span class="version-mark">New in v4.0.11</span>
 
