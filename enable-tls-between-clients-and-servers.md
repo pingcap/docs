@@ -16,7 +16,7 @@ When an encrypted connection is used, the connection has the following security 
 - Integrity: the traffic plaintext cannot be tampered
 - Authentication: (optional) the client can verify the identity of the server and the server can verify the identity of the client to avoid man-in-the-middle attacks
 
-To use connections secured with TLS you must first configure the TiDB server to enable TLS, then you need to configure the client application to use TLS. Most client libraries enable TLS automatically when the server has TLS support configured correctly.
+To use connections secured with TLS, you first need to configure the TiDB server to enable TLS. Then you need to configure the client application to use TLS. Most client libraries enable TLS automatically when the server has TLS support configured correctly.
 
 Similar to MySQL, TiDB allows TLS and non-TLS connections on the same TCP port. For a TiDB server with TLS enabled, you can choose to securely connect to the TiDB server through an encrypted connection, or to use an unencrypted connection. You can use the following ways to require the use of secure connections:
 
@@ -33,11 +33,11 @@ Similar to MySQL, TiDB allows TLS and non-TLS connections on the same TCP port. 
 >
 > If the login user has configured using the [TiDB Certificate-Based Authentication for Login](/certificate-authentication.md#configure-the-user-certificate-information-for-login-verification), the user is implicitly required to enable the encrypted connection to TiDB.
 
-## Configure TiDB Server to use secure connections
+## Configure TiDB server to use secure connections
 
 See the following desrciptions about the related parameters to enable secure connections:
 
-- [`auto-tls`](/tidb-configuration-file.md#auto-tls): Enable automatic certificate generation
+- [`auto-tls`](/tidb-configuration-file.md#auto-tls): enables automatic certificate generation
 - [`ssl-cert`](/tidb-configuration-file.md#ssl-cert): specifies the file path of the SSL certificate
 - [`ssl-key`](/tidb-configuration-file.md#ssl-key): specifies the private key that matches the certificate
 - [`ssl-ca`](/tidb-configuration-file.md#ssl-ca): (optional) specifies the file path of the trusted CA certificate
@@ -60,10 +60,10 @@ You can change the connection behavior of the client using the following `--ssl-
 - In the absence of the `--ssl-mode` parameter: The client attempts to use an encrypted connection, but the encrypted connection cannot be established if the server side does not support encrypted connections. Then the client uses an unencrypted connection.
 - `--ssl-mode=DISABLED`: The client uses an unencrypted connection.
 
-MySQL 8.0 clients have two SSL modes in addtion to this:
+MySQL 8.0 clients have two SSL modes in addition to this parameter:
 
-- `--ssl-mode=VERIFY_CA`: Validate the certificate from the server against the CA (requires `--ssl-ca`)
-- `--ssl-mode=VERIFY_IDENTITY`: The same as `VERIFY_CA`, but also validating the hostname you are connecting to matches the certificate.
+- `--ssl-mode=VERIFY_CA`: Validates the certificate from the server against the CA that requires `--ssl-ca`.
+- `--ssl-mode=VERIFY_IDENTITY`: The same as `VERIFY_CA`, but also validating whether the hostname you are connecting to matches the certificate.
 
 For more information, see [Client-Side Configuration for Encrypted Connections](https://dev.mysql.com/doc/refman/5.7/en/using-encrypted-connections.html#using-encrypted-connections-client-side-configuration) in MySQL.
 
@@ -124,7 +124,7 @@ SSL: Cipher in use is ECDHE-RSA-AES128-GCM-SHA256
 
 The TLS versions, key exchange protocols and encryption algorithms supported by TiDB are determined by the official Golang libraries.
 
-The crypto policy for your operating system and the client library you are using may also impact the list of supported protocols and ciphersuites.
+The crypto policy for your operating system and the client library you are using might also impact the list of supported protocols and cipher suites.
 
 ### Supported TLS versions
 
@@ -164,7 +164,7 @@ The newly loaded certificate, key, and CA take effect on the connection that is 
 
 ## Montoring
 
-Since TiDB v5.2.0 the `Ssl_server_not_after` and `Ssl_server_not_before` status variables can be used to monitor the start and end dates of the validity of the certificate.
+Since TiDB v5.2.0, you can use the `Ssl_server_not_after` and `Ssl_server_not_before` status variables to monitor the start and end dates of the validity of the certificate.
 
 ```sql
 SHOW GLOBAL STATUS LIKE 'Ssl\_server\_not\_%';
