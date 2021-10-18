@@ -70,7 +70,7 @@ Assume that the upstream library is named `my_db`, and the name of each sharded 
 
 ### Step 1: Use Dumpling to export data
 
-Export two shard tables on the 5 nodes where TiDB Lightning is deployed:
+Export two sharded tables on the 5 nodes where TiDB Lightning is deployed:
 
 - If the two shard tables are in the same MySQL instance, you can directly use the `-f` parameter of Dumpling to export them directly. When using TiDB Lightning to import, you can specify `data-source-dir` as the directory where Dumpling exports data to;
 - If the data of the two shard tables are distributed on different MySQL nodes, you need to use Dumpling to export separately. The exported data needs to be placed in the same parent directory <b>but in different sub-directories</b>. When using TiDB Lightning to perform parallel import, you need to specify `data-source-dir` as the parent directory.
