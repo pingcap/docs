@@ -6,7 +6,8 @@ aliases: ['/docs/dev/generate-self-signed-certificates/','/docs/dev/how-to/secur
 
 # Generate Self-Signed Certificates
 
-> **Note**
+> **Note:**
+>
 > To enable TLS between Clients and Servers setting `auto-tls` is sufficient.
 
 This document provides an example of using `openssl` to generate a self-signed certificate. You can also generate certificates and keys that meet requirements according to your demands.
