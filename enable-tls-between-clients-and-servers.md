@@ -9,15 +9,15 @@ Non-encrypted connection between TiDB's server and clients is allowed by default
 
 The TiDB server supports the encrypted connection based on the TLS (Transport Layer Security). The protocol is consistent with MySQL encrypted connections and is directly supported by existing MySQL clients such as MySQL Client, MySQL Shell and MySQL drivers. TLS is sometimes referred to as SSL (Secure Sockets Layer). Because the SSL protocol has [known security vulnerabilities](https://en.wikipedia.org/wiki/Transport_Layer_Security), TiDB does not support SSL. TiDB supports the following protocols: TLS 1.0, TLS 1.1, TLS 1.2 and TLS 1.3.
 
-When using an encrypted connection, the connection has the following security properties:
+When an encrypted connection is used, the connection has the following security properties:
 
 - Confidentiality: the traffic plaintext is encrypted to avoid eavesdropping
 - Integrity: the traffic plaintext cannot be tampered
-- Authentication: (optional) the client can verify the identity of the server and the server can verify the identity of the client avoid man-in-the-middle attacks
+- Authentication: (optional) the client can verify the identity of the server and the server can verify the identity of the client to avoid man-in-the-middle attacks
 
-To use connectecions secured with TLS you must first configure the TiDB server to enable TLS, then you need to configure the client application to use TLS. Most client applications enable TLS automatically when the server supports this.
+To use connections secured with TLS you must first configure the TiDB server to enable TLS, then you need to configure the client application to use TLS. Most client libraries enable TLS automatically when the server has TLS support configured correctly.
 
-Similar to MySQL with TiDB allows TLS and non-TLS connections on the same TCP port. For a TiDB server with TLS enabled, you can choose to securely connect to the TiDB server through an encrypted connection, or to use a unencrypted connection. There are two ways to require the use of secure connections:
+Similar to MySQL, TiDB allows TLS and non-TLS connections on the same TCP port. For a TiDB server with TLS enabled, you can choose to securely connect to the TiDB server through an encrypted connection, or to use an unencrypted connection. You can use the following ways to require the use of secure connections:
 
 + Configure the launch parameter `--require-secure-transport` to require secure connections to the TiDB server for all users.
 + Specify `REQUIRE SSL` when you create a user (`create user`), or modify an existing user (`alter user`), which is to specify that specified users must use the encrypted connection to access TiDB. The following is an example of creating a user:
