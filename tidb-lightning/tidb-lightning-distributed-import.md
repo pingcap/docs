@@ -17,6 +17,14 @@ You can use TiDB Lightning to import data in parallel in the following scenarios
 >
 >Parallel import only supports the initialized empty tables in TiDB. It does not support migrating data to tables with data written by existing services. Otherwise, data inconsistencies may occur.
 
+The following diagram shows how importing sharded schemas and sharded tables works.
+
+![Import sharded schemas and sharded tables](/media/parallel-import-shard-tables-en.png)
+
+The following diagram shows how importing single tables works.
+
+![Import single tables](/media/parallel-import-single-tables-en.png)
+
 ## Considerations 
 
 No additional configuration is required for parallel import using TiDB Lightning. When TiDB Lightning is started, it registers meta data in the downstream TiDB cluster and automatically detects whether there are other instances migrating data to the target cluster at the same time. If there is, it automatically enters the parallel import mode.
