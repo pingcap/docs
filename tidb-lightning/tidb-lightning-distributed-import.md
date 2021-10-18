@@ -52,7 +52,7 @@ To alleviate this problem, it is recommended to adjust this configuration item o
 region-split-size = '480MiB'
 ```
 
-Next, this document will use two examples to detail the operation steps of parallel import in different scenarios:
+Next, this document uses two examples to detail the operation steps of parallel import in different scenarios:
 
 - Example 1: Use Dumpling + TiDB Lightning to import sharded databases and tables into TiDB in parallel
 - Example 2: Import single tables in parallel
