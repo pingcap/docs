@@ -202,7 +202,7 @@
       + [Table Filter](/table-filter.md)
       + [CSV Support](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)
       + [Backends](/tidb-lightning/tidb-lightning-backends.md)
-      + [Parallel Migration](/tidb-lightning/tidb-lightning-distributed-import.md)
+      + [Parallel Import](/tidb-lightning/tidb-lightning-distributed-import.md)
       + [Web Interface](/tidb-lightning/tidb-lightning-web-interface.md)
     + [Monitor](/tidb-lightning/monitor-tidb-lightning.md)
     + [FAQ](/tidb-lightning/tidb-lightning-faq.md)
