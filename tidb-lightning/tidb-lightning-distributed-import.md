@@ -133,7 +133,7 @@ Wait for all TiDB Lightning instances to finish, then the entire import is compl
 
 TiDB Lightning also supports parallel import of single tables. For example, import multiple single tables stored in Amazon S3 by different TiDB Lightning instances into the downstream TiDB cluster in parallel. This method can speed up the overall import speed. For more information on external storages, see [External Storages](/br/backup-and-restore-storages.md)).
 
-> **Note**
+> **Note:**
 >
 >In the local environment, you can use Dumpling's --where parameter to divide the data of a single table into different parts and export it to the local disks of multiple servers in advance. This way, you can still perform parallel import. The configuration is the same as Example 1.
 
