@@ -4,7 +4,7 @@ title: Use TiDB Lightning to Import Data in Parallel
 
 # Use TiDB Lightning to Import Data in Parallel
 
-From v5.1.0, the [Local-backend mode](/tidb-lightning/tidb-lightning-backends.md#tidb-lightning-local-backend) of TiDB Lightning supports the parallel import of a single table or multiple tables. By running multiple TiDB Lightning instances simultaneously, you can import data in parallel from different single tables or multiple tables. In this way, TiDB Lightning provides the ability to scale horizontally, which can greatly reduce the time required to import large amounts of data.
+Since TiDB 5.1.0, the [Local-backend mode](/tidb-lightning/tidb-lightning-backends.md#tidb-lightning-local-backend) of TiDB Lightning supports the parallel import of a single table or multiple tables. By simultaneously running multiple TiDB Lightning instances, you can import data in parallel from different single tables or multiple tables. In this way, TiDB Lightning provides the ability to scale horizontally, which can greatly reduce the time required to import large amounts of data.
 
 In technical implementation, TiDB Lightning records the meta data of each instance and the data of each imported table in the target TiDB, and coordinates the Row ID allocation range of different instances, the record of global Checksum, and the configuration changes and recovery of TiKV and PD.
 
