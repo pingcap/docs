@@ -113,7 +113,7 @@ If the data source is stored in a distributed storage cache such as Amazon S3 or
 
 During parallel import, the server configuration requirements for each TiDB Lightning node are the same as the non-parallel import mode. Each TiDB Lightning node needs to consume the same resources. It is recommended to deploy them on different servers. For detailed deployment steps, see [Deploy TiDB Lightning](/tidb-lightning/deploy-tidb-lightning.md).
 
-Start TiDB Lightning on each server in turn. If you use `nohup` to start it directly from the command line, it may exit due to the SIGHUP signal. So it is recommended to put `nohup` in the script, for example:
+Start TiDB Lightning on each server in turn. If you use `nohup` to directly start it from the command line, it might exit due to the SIGHUP signal. So it is recommended to put `nohup` in the script, for example:
 
 ```shell
 # !/bin/bash
