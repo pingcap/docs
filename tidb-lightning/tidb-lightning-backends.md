@@ -26,14 +26,10 @@ The **TiDB-backend**: `tidb-lightning` first encodes these data into SQL `INSERT
 | Resource usage | High | High | Low |
 | Network bandwidth usage| High | Medium | Low |
 | ACID respected while importing | No | No | Yes |
-| Target tables | Can be populated | Must be empty | Can be populated |
+| Target tables | Must be empty | Must be empty | Can be populated |
 | Additional component required | No | `tikv-importer` | No |
 | TiDB versions supported | >= v4.0.0 | All | All |
 | TiDB services impacted | Yes | Yes | No |
-
-> **Note:**
->
-> Since TiDB 5.3.0, TiDB Lightning Local-backend supports importing data to a non-empty target table. When using Local-backend, you need to ensure that no conflict exists between the newly imported data and the existing data in the table. TiDB-backend does not have this requirement.
 
 ## How to choose the backend modes
 
