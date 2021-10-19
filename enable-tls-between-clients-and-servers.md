@@ -36,7 +36,7 @@ Similar to MySQL, TiDB allows TLS and non-TLS connections on the same TCP port. 
 
 See the following desrciptions about the related parameters to enable secure connections:
 
-- [`auto-tls`](/tidb-configuration-file.md#auto-tls): enables automatic certificate generation
+- [`auto-tls`](/tidb-configuration-file.md#auto-tls): enables automatic certificate generation (Since v5.2.0)
 - [`ssl-cert`](/tidb-configuration-file.md#ssl-cert): specifies the file path of the SSL certificate
 - [`ssl-key`](/tidb-configuration-file.md#ssl-key): specifies the private key that matches the certificate
 - [`ssl-ca`](/tidb-configuration-file.md#ssl-ca): (optional) specifies the file path of the trusted CA certificate
@@ -48,6 +48,8 @@ To enable secure connections with your own certificates in the TiDB server, you 
 All the files specified by the parameters are in PEM (Privacy Enhanced Mail) format. Currently, TiDB does not support the import of a password-protected private key, so it is required to provide a private key file without a password. If the certificate or private key is invalid, the TiDB server starts as usual, but the client cannot connect to the TiDB server through an encrypted connection.
 
 If the certificate parameters are correct, TiDB outputs `secure connection is enabled` when started; otherwise, it outputs `secure connection is NOT ENABLED`.
+
+For TiDB versions older than v5.2.0 you can use `mysql_ssl_rsa_setup --datadir=./certs` to generate certficates. The `mysql_ssal_rsa_setup` tool is part of MySQL Server.
 
 ## Configure the MySQL client to use encrypted connections
 
