@@ -45,12 +45,12 @@ Because TiDB Lightning needs to upload the generated Key-Value data to the TiKV 
 
 - The total size of source files for each TiDB Lightning instances performing parallel import should be smaller than 5 TiB
 - The total number of TiDB Ligntning instances should be smaller than 10
-- The number of the TiDB Ligntning instances that perform parallel import of single tables should be smaller than 5
 
 When using TiDB Lightning to import shared databases and tables in parallel, choose an appropriate number of TiDB Lightning instances according to the amount of data.
 
-- If the MySQL data volume is less than 1 TiB, you can use one TiDB Lightning instance for parallel import.
-- If the MySQL data volume exceeds 1 TiB, it is recommended that you use one TiDB Lightning instance for each MySQL instance, and the number of parallel TiDB Lightning instances should not exceed 10.
+- If the MySQL data volume is less than 2 TiB, you can use one TiDB Lightning instance for parallel import.
+- If the MySQL data volume exceeds 2 TiB and the total number of MySQL instance is smaller than 10, it is recommended that you use one TiDB Lightning instance for each MySQL instance, and the number of parallel TiDB Lightning instances should not exceed 10.
+- If the MySQL data volume exceeds 2 TiB and the total number of MySQL instance exceeds 10, it is recommended that you allocate 5 to 10 TiDB Lightning instances for importing the data exported by these MySQL instances.
 
 Next, this document uses two examples to detail the operation steps of parallel import in different scenarios:
 
