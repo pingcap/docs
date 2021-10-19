@@ -91,7 +91,7 @@ The auto-increment ID feature in TiDB is only guaranteed to be automatically inc
 
 ## How do I modify the `sql_mode` in TiDB?
 
-TiDB supports modifying the [`sql_mode`](/sql-mode.md) [system variable](/system-variables.md#sql_mode) on a SESSION or GLOBAL basis. Changes to [`GLOBAL`](/sql-statements/sql-statement-set-variable.md) scoped variables propagate to the rest of the cluster and persist restarts. This means that you do not need to change the `sql_mode` value on each TiDB server.
+TiDB supports modifying the [`sql_mode`](/system-variables.md#sql_mode) system variables on a SESSION or GLOBAL basis. Changes to [`GLOBAL`](/sql-statements/sql-statement-set-variable.md) scoped variables propagate to the rest servers of the cluster and persist across restarts. This means that you do not need to change the `sql_mode` value on each TiDB server.
 
 ## Error: `java.sql.BatchUpdateExecption:statement count 5001 exceeds the transaction limitation` while using Sqoop to write data into TiDB in batches
 
