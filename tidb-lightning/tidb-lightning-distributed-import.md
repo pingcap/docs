@@ -40,17 +40,16 @@ When using [Local-backend mode](/tidb-lightning/tidb-lightning-backends.md#tidb-
 
 ### Optimize import performance
 
-Because TiDB Lightning needs to upload the generated Key-Value data to the TiKV node where each copy of the corresponding Region is located, the import speed is limited by the size of the target cluster. It is recommended to ensure that the number of TiKV instances in the target TiDB cluster and the number of TiDB Lightning instances are greater than n:1 (n is the number of copies of the Region) to achieve the optimal import performance.
+Because TiDB Lightning needs to upload the generated Key-Value data to the TiKV node where each copy of the corresponding Region is located, the import speed is limited by the size of the target cluster. It is recommended to ensure that the number of TiKV instances in the target TiDB cluster and the number of TiDB Lightning instances are greater than n:1 (n is the number of copies of the Region). At the same time, you need to meet the following requirements to achieve the optimal import performance:
 
-TiDB Lightning divides the size of the Region according to the configuration item `tikv-import.region-split-size` (96 MiB by default). However, during parallel import, different TiDB Lightning instances divide the regions into different sizes. A large number of regions smaller than 96 MiB are generated and seriously affect the import performance.
+- The total size of source files for each TiDB Lightning instances performing parallel import should be smaller than 5 TiB
+- The total number of TiDB Ligntning instances should be smaller than 10
+- The number of the TiDB Ligntning instances that perform parallel import of single tables should be smaller than 5
 
-To alleviate this problem, it is recommended to adjust this configuration item of each TiDB Lightning instance to `n * 96 MiB` (n is the maximum number of TiDB Lightning instances that perform parallel import of single tables) when importing in parallel. The following is a configuration example:
+When using TiDB Lightning to import shared databases and tables in parallel, choose an appropriate number of TiDB Lightning instances according to the amount of data.
 
-```
-[tikv-importer]
-# The size of the region split, 96 MiB by default. For example, assume that there are 5 TiDB Lightning instances performing parallel import, it is recommended to adjust it to 5 * 96MiB = 480MiB
-region-split-size = '480MiB'
-```
+- If the MySQL data volume is less than 1 TiB, you can use one TiDB Lightning instance for parallel import.
+- If the MySQL data volume exceeds 1 TiB, it is recommended that you use one TiDB Lightning instance for each MySQL instance, and the number of parallel TiDB Lightning instances should not exceed 10.
 
 Next, this document uses two examples to detail the operation steps of parallel import in different scenarios:
 
@@ -58,11 +57,6 @@ Next, this document uses two examples to detail the operation steps of parallel 
 - Example 2: Import single tables in parallel
 
 ## Example 1: Use Dumpling + TiDB Lightning to Import Sharded Databases and Tables into TiDB in Parallel
-
-When using TiDB Lightning to import shared databases and tables in parallel, choose an appropriate number of TiDB Lightning instances according to the amount of data.
-
-- If the MySQL data volume is less than 1 TiB, you can use one TiDB Lightning instance for parallel import.
-- If the MySQL data volume exceeds 1 TiB, it is recommended that you use one TiDB Lightning instance for each MySQL instance, and the number of parallel TiDB Lightning instances should not exceed 10.
 
 In this example, assume that the upstream is a MySQL cluster with 10 sharded tables, with a total size of 10 TiB. You can Use 5 TiDB Lightning instances to perform parallel import, and each instance imports 2 TiB. It is estimated that the total import time (excluding the time required for Dumpling export) can be reduced from about 40 hours to about 10 hours.
 
@@ -95,9 +89,6 @@ backend = "local"
 
 # Specify the path for local sorting data.
 sorted-kv-dir = "/path/to/sorted-dir"
-
-# Adjust the size of the region.
-region-split-size = '480MiB'
 
 # Specify the routes for shard schemas and tables.
 [[routes]]
