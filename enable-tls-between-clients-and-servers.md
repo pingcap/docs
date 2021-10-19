@@ -50,7 +50,7 @@ All the files specified by the parameters are in PEM (Privacy Enhanced Mail) for
 
 If the certificate parameters are correct, TiDB outputs `secure connection is enabled` when started; otherwise, it outputs `secure connection is NOT ENABLED`.
 
-For TiDB versions older than v5.2.0 you can use `mysql_ssl_rsa_setup --datadir=./certs` to generate certficates. The `mysql_ssal_rsa_setup` tool is part of MySQL Server.
+For TiDB versions earlier than v5.2.0, you can use `mysql_ssl_rsa_setup --datadir=./certs` to generate certficates. The `mysql_ssal_rsa_setup` tool is a part of MySQL Server.
 
 ## Configure the MySQL client to use encrypted connections
 
