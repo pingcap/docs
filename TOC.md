@@ -52,6 +52,7 @@
     + [Use TiDB Lightning](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)
     + [Use `LOAD DATA` Statement](/sql-statements/sql-statement-load-data.md)
   + [Migrate from SQL Files](/migrate-from-mysql-dumpling-files.md)
+  + [Replicate Incremental Data between TiDB Clusters in Real Time](/incremental-replication-between-clusters.md)
 + Maintain
   + Upgrade
     + [Use TiUP (Recommended)](/upgrade-tidb-using-tiup.md)
@@ -142,6 +143,7 @@
 + Tutorials
   + [Multiple Data Centers in One City Deployment](/multi-data-centers-in-one-city-deployment.md)
   + [Three Data Centers in Two Cities Deployment](/three-data-centers-in-two-cities-deployment.md)
+  + [Two Data Centers in One City Deployment](/two-data-centers-in-one-city-deployment.md)
   + Read Historical Data
     + Use Stale Read (Recommended)
       + [Usage Scenarios of Stale Read](/stale-read.md)
@@ -559,6 +561,7 @@
     + [5.2.1](/releases/release-5.2.1.md)
     + [5.2.0](/releases/release-5.2.0.md)
   + v5.1
+    + [5.1.2](/releases/release-5.1.2.md)
     + [5.1.1](/releases/release-5.1.1.md)
     + [5.1.0](/releases/release-5.1.0.md)
   + v5.0
