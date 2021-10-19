@@ -37,7 +37,7 @@ Similar to MySQL, TiDB allows TLS and non-TLS connections on the same TCP port. 
 
 See the following desrciptions about the related parameters to enable secure connections:
 
-- [`auto-tls`](/tidb-configuration-file.md#auto-tls): enables automatic certificate generation (Since v5.2.0)
+- [`auto-tls`](/tidb-configuration-file.md#auto-tls): enables automatic certificate generation (since v5.2.0)
 - [`ssl-cert`](/tidb-configuration-file.md#ssl-cert): specifies the file path of the SSL certificate
 - [`ssl-key`](/tidb-configuration-file.md#ssl-key): specifies the private key that matches the certificate
 - [`ssl-ca`](/tidb-configuration-file.md#ssl-ca): (optional) specifies the file path of the trusted CA certificate
