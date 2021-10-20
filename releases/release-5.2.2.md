@@ -95,7 +95,7 @@ TiDB version: 5.2.2
 
 + Tools
 
-    + PingCAP/TiCDC
+    + TiCDC
 
         - change Kafka sink default `MaxMessageBytes` to 1MB. [#3104](https://github.com/pingcap/ticdc/pull/3104)
         - fix the bug that fallback resolvedTs event  will block the progress of resolve lock when occur region merging [#3102](https://github.com/pingcap/ticdc/pull/3102)
