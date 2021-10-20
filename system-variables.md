@@ -1548,6 +1548,18 @@ This variable is an alias for _transaction_isolation_.
 - Default value: (string)
 - This variable returns additional details about the TiDB version. For example, 'TiDB Server (Apache License 2.0) Community Edition, MySQL 5.7 compatible'.
 
+### version_compile_os
+
+- Scope: NONE
+- Default value: (string)
+- This variable returns the OS that TiDB is running on.
+
+### version_compile_machine
+
+- Scope: NONE
+- Default value: (string)
+- This variable returns the CPU architecture that TiDB is running on.
+
 ### wait_timeout
 
 - Scope: SESSION | GLOBAL
