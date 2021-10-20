@@ -1,19 +1,46 @@
 ---
 title: TiDB 5.2.2 Release Notes
-category: Releases
 ---
 
 
 
 # TiDB 5.2.2 Release Notes
 
-Release Date: October 20, 2021
+Release Date: October 27, 2021
 
 TiDB version: 5.2.2
 
+## Compatibility change(s)
+
+## Feature enhancement(s)
+
+## Improvements
+
+## Bug Fixes
+
++ TiDB
+
+    - planner: fix the issue that plan-cache cannot be aware of changes of unsigned flags [#28837](https://github.com/pingcap/tidb/pull/28837)
+    - 'None' [#28820](https://github.com/pingcap/tidb/pull/28820)
+    - planner: fix the issue that planner may cache invalid plans for joins in some cases [#28447](https://github.com/pingcap/tidb/pull/28447)
+    - Fix wrong index hash join when hash col is enum. [#28082](https://github.com/pingcap/tidb/pull/28082)
+    - Fix a batch client bug that recycle idle connection may block sending requests in some rare cases. [#27688](https://github.com/pingcap/tidb/pull/27688)
+    - Fixed Lightning panic when it failed to perform checksum on target cluster. [#27686](https://github.com/pingcap/tidb/pull/27686)
+    - Fix the wrong result for date_add and date_sub in some cases. [#27454](https://github.com/pingcap/tidb/pull/27454)
+
++ TiFlash
+
+    - Fix the issue that TiFlash fails to start up under platform without library `nsl` [#3207](https://github.com/pingcap/tics/pull/3207)
+
++ PD
+
+    - Fix the issue that PD may not elect leader as soon as leader step down [#4220](https://github.com/tikv/pd/pull/4220)
+    - `evict-leader-scheduler` supports schedule the regions with unhealthy peers. [#4132](https://github.com/tikv/pd/pull/4132)
+    - Fix the bug that PD would not fix down-peer in time. [#4084](https://github.com/tikv/pd/pull/4084)
+
 ## __unsorted
 
-+ PingCAP/TiDB
++ TiDB
 
     - Fix wrong result of hour function in vectorized expression [#28874](https://github.com/pingcap/tidb/pull/28874)
     - Fixed a bug where MySQL 5.1 and older clients had issues authenticating [#28734](https://github.com/pingcap/tidb/pull/28734)
@@ -38,8 +65,7 @@ TiDB version: 5.2.2
     - expression: fix extract bug when argument is a negative duration [#27366](https://github.com/pingcap/tidb/pull/27366)
     - fix a bug that creates partition fail if `NO_UNSIGNED_SUBTRACTION` is set. [#27100](https://github.com/pingcap/tidb/pull/27100)
 
-
-+ TiKV/TiKV
++ TiKV
 
     - Fix frequent CDC incremental scan retry due to `Congest` error. [#11092](https://github.com/tikv/tikv/pull/11092)
     - Simplify the algorithm of L0 flow control [#11081](https://github.com/tikv/tikv/pull/11081)
@@ -49,18 +75,16 @@ TiDB version: 5.2.2
     - resolved_ts: fix coroutine leaking [#11020](https://github.com/tikv/tikv/pull/11020)
     - Hide untouched storage commands' metrics in grafana dashboard [#11003](https://github.com/tikv/tikv/pull/11003)
     - Fix panic in coprocessor when response size exceeds 4GiB [#10993](https://github.com/tikv/tikv/pull/10993)
-    - - improve raft client error log report [#10983](https://github.com/tikv/tikv/pull/10983)
+    - improve raft client error log report [#10983](https://github.com/tikv/tikv/pull/10983)
     - RaftStore Snapshot GC fix: fix the issue that snapshot GC missed GC snapshot files when there's one snapshot file failed to be GC-ed. [#10874](https://github.com/tikv/tikv/pull/10874)
-    - - TiKV coprocessor slow log will only consider time spent on processing the request. 
-- Drop log instead of blocking threads when slogger thread is overloaded and queue is filled up. [#10866](https://github.com/tikv/tikv/pull/10866)
+    - TiKV coprocessor slow log will only consider time spent on processing the request. 
+    - Drop log instead of blocking threads when slogger thread is overloaded and queue is filled up. [#10866](https://github.com/tikv/tikv/pull/10866)
     - Bug fix: fix an unexpected panic when exceeds deadline on processing copr requests. [#10857](https://github.com/tikv/tikv/pull/10857)
     - None. [#10809](https://github.com/tikv/tikv/pull/10809)
 
-
-+ PingCAP/TiFlash
++ TiFlash
 
     - Please add a release note, or a 'None' if it is not needed. [#2820](https://github.com/pingcap/tics/pull/2820)
-
 
 + PD
 
@@ -68,7 +92,6 @@ TiDB version: 5.2.2
     - Fix the data race problem of hot region config [#4170](https://github.com/tikv/pd/pull/4170)
     - allow empty region to be scheduled and use a sperate tolerance config in scatter range scheduler [#4118](https://github.com/tikv/pd/pull/4118)
     - None. [#4028](https://github.com/tikv/pd/pull/4028)
-
 
 + Tools
 
@@ -82,36 +105,8 @@ TiDB version: 5.2.2
         - Nond [#3045](https://github.com/pingcap/ticdc/pull/3045)
         - Add metrics to observe incremental scan remaining time [#3035](https://github.com/pingcap/ticdc/pull/3035)
         - Fix possible deadlocking when Kafka producer reports an error. [#3018](https://github.com/pingcap/ticdc/pull/3018)
-        - Please add a release note.
-If you don't think this PR needs a release note then fill it with `None`. [#2944](https://github.com/pingcap/ticdc/pull/2944)
+        - Please add a release note. If you don't think this PR needs a release note then fill it with `None`. [#2944](https://github.com/pingcap/ticdc/pull/2944)
         - Fix dml is not replicated after adding partition in partition table without valid index [#2866](https://github.com/pingcap/ticdc/pull/2866)
         - `None` [#2861](https://github.com/pingcap/ticdc/pull/2861)
         - Extend creating service gc safepoint ttl to 1 hr to support creating changefeeds that needs long initialization time. [#2854](https://github.com/pingcap/ticdc/pull/2854)
         - Fix json encoding could panic when processing a string type value in some cases. [#2784](https://github.com/pingcap/ticdc/pull/2784)
-
-
-## Bug Fixes
-
-+ PingCAP/TiDB
-
-    - planner: fix the issue that plan-cache cannot be aware of changes of unsigned flags [#28837](https://github.com/pingcap/tidb/pull/28837)
-    - 'None' [#28820](https://github.com/pingcap/tidb/pull/28820)
-    - planner: fix the issue that planner may cache invalid plans for joins in some cases [#28447](https://github.com/pingcap/tidb/pull/28447)
-    - Fix wrong index hash join when hash col is enum. [#28082](https://github.com/pingcap/tidb/pull/28082)
-    - Fix a batch client bug that recycle idle connection may block sending requests in some rare cases. [#27688](https://github.com/pingcap/tidb/pull/27688)
-    - Fixed Lightning panic when it failed to perform checksum on target cluster. [#27686](https://github.com/pingcap/tidb/pull/27686)
-    - Fix the wrong result for date_add and date_sub in some cases. [#27454](https://github.com/pingcap/tidb/pull/27454)
-
-
-+ PingCAP/TiFlash
-
-    - Fix the issue that TiFlash fails to start up under platform without library `nsl` [#3207](https://github.com/pingcap/tics/pull/3207)
-
-
-+ PD
-
-    - Fix the issue that PD may not elect leader as soon as leader step down [#4220](https://github.com/tikv/pd/pull/4220)
-    - `evict-leader-scheduler` supports schedule the regions with unhealthy peers. [#4132](https://github.com/tikv/pd/pull/4132)
-    - Fix the bug that PD would not fix down-peer in time. [#4084](https://github.com/tikv/pd/pull/4084)
-
-
