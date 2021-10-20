@@ -14,7 +14,6 @@ This is a list of TiDB adopters in various industries.
 |[VNG](https://en.wikipedia.org/wiki/VNG_Corporation)|Mobile Payment|English [#1](https://pingcap.com/case-studies/tidb-at-zalopay-infrastructure-lesson-learned/), [#2](https://pingcap.com/case-studies/zalopay-using-a-scale-out-mysql-alternative-to-serve-millions-of-users)|
 |[Ping++](https://www.crunchbase.com/organization/ping-5)|Mobile Payment||
 |[LianLian Tech](https://www.crunchbase.com/organization/lianlian-pay)|Mobile Payment||
-|[Pinterest](https://en.wikipedia.org/wiki/Pinterest)|Media and Entertainment|[English](https://pingcap.com/case-studies/how-pinterest-reduced-costs-and-improved-data-consistency-with-newsql-database)|
 |[U-Next](https://www.crunchbase.com/organization/u-next)|Media and Entertainment|[English](https://pingcap.com/case-studies/running-a-scale-out-database-on-arm-as-mysql-alternative/)|
 |[Dailymotion](https://en.wikipedia.org/wiki/Dailymotion)|Media and Entertainment||
 |[iQiyi](https://en.wikipedia.org/wiki/IQiyi)|Media and Entertainment|[English](https://pingcap.com/case-studies/tidb-in-iqiyi/)|
@@ -66,6 +65,7 @@ This is a list of TiDB adopters in various industries.
 |[SEA group](https://sea-group.org/?lang=en)|Gaming||
 |[Zhaopin.com](https://www.crunchbase.com/organization/zhaopin)|Recruiting||
 |[BIGO](https://www.crunchbase.com/organization/bigo-technology)|Live Streaming|[English](https://pingcap.com/case-studies/why-we-chose-an-htap-database-over-mysql-for-horizontal-scaling-and-complex-queries/); [Chinese](https://pingcap.com/cases-cn/user-case-bigo/)|
+|[Huya Live](https://en.wikipedia.org/wiki/Huya_Live)|Live Streaming|[English](https://pingcap.com/case-studies/how-we-scale-out-databases-and-get-big-data-queries-6x-faster-with-a-mysql-alternative); [Chinese](https://pingcap.com/zh/case/user-case-huya)|
 |[Panda.tv](https://www.crunchbase.com/organization/panda-tv)|Live Streaming||
 |[Phoenix New Media](https://www.crunchbase.com/organization/phoenix-new-media)|Media||
 |[Tencent OMG](https://en.wikipedia.org/wiki/Tencent)|Media||
