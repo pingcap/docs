@@ -61,12 +61,12 @@ TiDB version: 5.1.2
         - Optimize memory management when the Unified Sorter is using memory to sort data [#2553](https://github.com/pingcap/ticdc/issues/2553)
         - Optimize workerpool for fewer goroutines when concurrency is high  [#2211](https://github.com/pingcap/ticdc/issues/2211)
         - Reduce goroutine usage when a table's Region transfer away from a TiKV node [#2284](https://github.com/pingcap/ticdc/issues/2284)
+        - Add a global gRPC connection pool and share gRPC connections among KV clients [#2534](https://github.com/pingcap/ticdc/pull/2534)
+        - Prohibit operating TiCDC clusters across major and minor versions [#2599](https://github.com/pingcap/ticdc/pull/2599)
 
     + Dumpling
 
         - Support backing up MySQL-compatible databases that do not support `START TRANSACTION ... WITH CONSISTENT SNAPSHOT` and `SHOW CREATE TABLE` [#309](https://github.com/pingcap/dumpling/issues/309)
-        - Add a global gRPC connection pool and share gRPC connections among KV clients [#2534](https://github.com/pingcap/ticdc/pull/2534)
-        - Prohibit operating TiCDC clusters across major and minor versions [#2599](https://github.com/pingcap/ticdc/pull/2599)
 
 ## Bug fixes
 
