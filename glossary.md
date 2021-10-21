@@ -87,3 +87,9 @@ Schedulers are components in PD that generate scheduling tasks. Each scheduler i
 ### Store
 
 A store refers to the storage node in the TiKV cluster (an instance of `tikv-server`). Each store has a corresponding TiKV instance.
+
+## T
+
+### TSO
+
+Because TiKV is a distributed storage system, it requires a global timing service, TSO (Timestamp Oracle), to assign a monotonically increasing timestamp. In TiKV, such a function is provided by PD, and in Google [Spanner](http://static.googleusercontent.com/media/research.google.com/en//archive/spanner-osdi2012.pdf), the function is provided by multiple atomic clocks and GPS.
