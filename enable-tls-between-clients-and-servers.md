@@ -42,7 +42,7 @@ See the following desrciptions about the related parameters to enable secure con
 - [`ssl-key`](/tidb-configuration-file.md#ssl-key): specifies the private key that matches the certificate
 - [`ssl-ca`](/tidb-configuration-file.md#ssl-ca): (optional) specifies the file path of the trusted CA certificate
 
-`auto-tls` allows secure connections but does not provide client certificate validation. For certificate validation, and to control how certificates are generated, see the advice on configuring the `ssl-cert`, `ssl-key` and `ssl-ca` variables  below.
+`auto-tls` allows secure connections but does not provide client certificate validation. For certificate validation, and to control how certificates are generated, see the advice on configuring the `ssl-cert`, `ssl-key` and `ssl-ca` variables below.
 
 To enable secure connections with your own certificates in the TiDB server, you must specify both of the `ssl-cert` and `ssl-key` parameters in the configuration file when you start the TiDB server. You can also specify the `ssl-ca` parameter for client authentication (see [Enable authentication](#enable-authentication)).
 
@@ -164,7 +164,7 @@ To replace the certificate, the key or CA, first replace the corresponding files
 
 The newly loaded certificate, key, and CA take effect on the connection that is established after the statement is successfully executed. The connection established before the statement execution is not affected.
 
-## Montoring
+## Monitoring
 
 Since TiDB v5.2.0, you can use the `Ssl_server_not_after` and `Ssl_server_not_before` status variables to monitor the start and end dates of the validity of the certificate.
 
