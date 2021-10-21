@@ -34,7 +34,7 @@ Similar to MySQL, TiDB allows TLS and non-TLS connections on the same TCP port. 
 
 ## Configure TiDB server to use secure connections
 
-See the following desrciptions about the related parameters to enable secure connections:
+See the following descriptions about the related parameters to enable secure connections:
 
 - [`auto-tls`](/tidb-configuration-file.md#auto-tls): enables automatic certificate generation (since v5.2.0)
 - [`ssl-cert`](/tidb-configuration-file.md#ssl-cert): specifies the file path of the SSL certificate
