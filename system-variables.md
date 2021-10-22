@@ -39,6 +39,7 @@ SET  GLOBAL tidb_distsql_scan_concurrency = 10;
 > * For bytes, safe values are typically less than the amount of system memory.
 > * For time, pay attention that the unit could be Seconds or Milliseconds.
 
+Variables using the same unit are likely to compete for the same set of resources.
 ## Variable Reference
 
 ### allow_auto_random_explicit_insert <span class="version-mark">New in v4.0.3</span>
