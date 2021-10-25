@@ -111,6 +111,8 @@ Solutions: Use the `cdc` executable file corresponding to the TiCDC cluster vers
 >
 > The above issue exists only when `cdc cli` is v5.0.0-rc. Other v5.0.x `cdc cli` tool can be compatible with v4.0.x clusters.
 
+### Cyclic replication is removed since v5.3.0
+
 ## Install and deploy TiCDC
 
 You can either deploy TiCDC along with a new TiDB cluster or add the TiCDC component to an existing TiDB cluster. For details, see [Deploy TiCDC](/ticdc/deploy-ticdc.md).
