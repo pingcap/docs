@@ -86,7 +86,9 @@ func skipSv(sv *variable.SysVar) bool {
 		variable.TiDBTopSQLMaxStatementCount, variable.TiDBEnableGlobalTemporaryTable, variable.TiDBEnablePipelinedWindowFunction, variable.TiDBOptCartesianBCJ,
 		variable.TiDBEnableLocalTxn, variable.TiDBTopSQLMaxCollect, variable.TiDBTopSQLReportIntervalSeconds,
 		variable.TiDBOptMPPOuterJoinFixedBuildSide, variable.TiDBRestrictedReadOnly, variable.TiDBMPPStoreFailTTL, variable.TiDBHashExchangeWithNewCollation,
-		variable.TiDBEnableOrderedResultMode, variable.TiDBReadStaleness:
+		variable.TiDBEnableOrderedResultMode, variable.TiDBReadStaleness,
+		variable.TiDBEnableMPPBalanceWithContinuousRegion, variable.TiDBEnableMPPBalanceWithContinuousRegionCount,
+		"version_compile_os", "version_compile_machine":
 
 		return true
 	}
@@ -246,7 +248,7 @@ func getExtendedDescription(sv *variable.SysVar) string {
 	case variable.AutoCommit:
 		return "- Controls whether statements should automatically commit when not in an explicit transaction. See [Transaction Overview](/transaction-overview.md#autocommit) for more information."
 	case "ddl_slow_threshold":
-		return "- DDL operations whose execution time exceeds the threshold value are output to the log."
+		return "- Log DDL operations whose execution time exceeds the threshold value."
 	case variable.ForeignKeyChecks:
 		return "- For compatibility, TiDB returns foreign key checks as `OFF`."
 	case variable.Hostname:
@@ -254,13 +256,13 @@ func getExtendedDescription(sv *variable.SysVar) string {
 	case variable.InnodbLockWaitTimeout:
 		return "- The lock wait timeout for pessimistic transactions (default)."
 	case variable.InteractiveTimeout:
-		return "- This variable represents the idle timeout of the interactive user session. Interactive user session refers to the session established by calling [`mysql_real_connect()`](https://dev.mysql.com/doc/c-api/5.7/en/mysql-real-connect.html) API using the `CLIENT_INTERACTIVE` option (for example, MySQL shell client). This variable is fully compatible with MySQL."
+		return "- This variable represents the idle timeout of the interactive user session. Interactive user session refers to the session established by calling [`mysql_real_connect()`](https://dev.mysql.com/doc/c-api/5.7/en/mysql-real-connect.html) API using the `CLIENT_INTERACTIVE` option (for example, MySQL Shell and MySQL Client). This variable is fully compatible with MySQL."
 	case variable.TiDBFoundInBinding:
 		return "- This variable is used to show whether the execution plan used in the previous statement was influenced by a [plan binding](/sql-plan-management.md)"
 	case variable.TiDBFoundInPlanCache:
 		return "- This variable is used to show whether the execution plan used in the previous `execute` statement is taken directly from the plan cache."
 	case variable.MaxExecutionTime:
-		return "- The maximum execution time of a statemen. The default value is unlimited (zero).\n" +
+		return "- The maximum execution time of a statement. The default value is unlimited (zero).\n" +
 			"\n" +
 			"> **Note:**\n" +
 			">\n" +
@@ -358,7 +360,7 @@ func getExtendedDescription(sv *variable.SysVar) string {
 	case variable.TiDBDDLReorgBatchSize:
 		return "- This variable is used to set the batch size during the `re-organize` phase of the DDL operation. For example, when TiDB executes the `ADD INDEX` operation, the index data needs to backfilled by `tidb_ddl_reorg_worker_cnt` (the number) concurrent workers. Each worker backfills the index data in batches.\n" +
 			"    - If many updating operations such as `UPDATE` and `REPLACE` exist during the `ADD INDEX` operation, a larger batch size indicates a larger probability of transaction conflicts. In this case, you need to adjust the batch size to a smaller value. The minimum value is 32.\n" +
-			"    - If the transaction conflict does not exist, you can set the batch size to a large value. The maximum value is 10240. This can increase the speed of the backfilling data, but the write pressure on TiKV also becomes higher."
+			"    - If the transaction conflict does not exist, you can set the batch size to a large value. This can increase the speed of the backfilling data, but the write pressure on TiKV also becomes higher."
 	case variable.TiDBDDLReorgPriority:
 		return "- This variable is used to set the priority of executing the `ADD INDEX` operation in the `re-organize` phase.\n- You can set the value of this variable to `PRIORITY_LOW`, `PRIORITY_NORMAL` or `PRIORITY_HIGH`."
 	case variable.TiDBDDLReorgWorkerCount:
@@ -376,7 +378,7 @@ func getExtendedDescription(sv *variable.SysVar) string {
 	case variable.TiDBDistSQLScanConcurrency:
 		return "- This variable is used to set the concurrency of the `scan` operation.\n" +
 			"- Use a bigger value in OLAP scenarios, and a smaller value in OLTP scenarios.\n" +
-			"- For OLAP scenarios, the maximum value cannot exceed the number of CPU cores of all the TiKV nodes.\n" +
+			"- For OLAP scenarios, the maximum value should not exceed the number of CPU cores of all the TiKV nodes.\n" +
 			"- If a table has a lot of partitions, you can reduce the variable value appropriately to avoid TiKV becoming out of memory (OOM)."
 	case variable.TiDBDMLBatchSize:
 		return "- When this value is greater than `0`, TiDB will batch commit statements such as `INSERT` or `LOAD DATA` into smaller transactions. This reduces memory usage and helps ensure that the `txn-total-size-limit` is not reached by bulk modifications.\n" +
@@ -732,9 +734,9 @@ func getExtendedDescription(sv *variable.SysVar) string {
 	case variable.TiDBIndexJoinBatchSize:
 		return "- This variable is used to set the batch size of the `index lookup join` operation.\n- Use a bigger value in OLAP scenarios, and a smaller value in OLTP scenarios."
 	case variable.TiDBMetricSchemaRangeDuration:
-		return "- This variable is used to set the range duration of the Prometheus statement generated when querying METRIC_SCHEMA."
+		return "- This variable is used to set the range duration of the Prometheus statement generated when querying `METRICS_SCHEMA`."
 	case variable.TiDBMetricSchemaStep:
-		return "- This variable is used to set the step of the Prometheus statement generated when querying `METRIC_SCHEMA`."
+		return "- This variable is used to set the step of the Prometheus statement generated when querying `METRICS_SCHEMA`."
 	case variable.TiDBOptCorrelationExpFactor:
 		return "- When the method that estimates the number of rows based on column order correlation is not available, the heuristic estimation method is used. This variable is used to control the behavior of the heuristic method.\n" +
 			"    - When the value is 0, the heuristic method is not used.\n" +
