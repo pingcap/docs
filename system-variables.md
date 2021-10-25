@@ -157,7 +157,7 @@ mysql> SELECT * FROM t1;
 - Scope: INSTANCE
 - Default value: `300`
 - Unit: Milliseconds
-- DDL operations whose execution time exceeds the threshold value are output to the log.
+- Log DDL operations whose execution time exceeds the threshold value.
 
 ### default_authentication_plugin
 
@@ -229,7 +229,7 @@ This variable is an alias for `last_insert_id`.
 - Default value: `28800`
 - Range: `[1, 31536000]`
 - Unit: Seconds
-- This variable represents the idle timeout of the interactive user session. Interactive user session refers to the session established by calling [`mysql_real_connect()`](https://dev.mysql.com/doc/c-api/5.7/en/mysql-real-connect.html) API using the `CLIENT_INTERACTIVE` option (for example, MySQL shell client). This variable is fully compatible with MySQL.
+- This variable represents the idle timeout of the interactive user session. Interactive user session refers to the session established by calling [`mysql_real_connect()`](https://dev.mysql.com/doc/c-api/5.7/en/mysql-real-connect.html) API using the `CLIENT_INTERACTIVE` option (for example, MySQL Shell and MySQL Client). This variable is fully compatible with MySQL.
 
 ### last_insert_id
 
@@ -276,7 +276,7 @@ This variable is an alias for `last_insert_id`.
 - Default value: `0`
 - Range: `[0, 2147483647]`
 - Unit: Milliseconds
-- The maximum execution time of a statemen. The default value is unlimited (zero).
+- The maximum execution time of a statement. The default value is unlimited (zero).
 
 > **Note:**
 >
@@ -388,6 +388,11 @@ This variable is an alias for `last_insert_id`.
 - Scope: SESSION | GLOBAL
 - Default value: ""
 - This variable is used to specify a list of storage engines that might fall back to TiKV. If the execution of a SQL statement fails due to a failure of the specified storage engine in the list, TiDB retries executing this SQL statement with TiKV. This variable can be set to "" or "tiflash". When this variable is set to "tiflash", if the execution of a SQL statement fails due to a failure of TiFlash, TiDB retries executing this SQL statement with TiKV.
+
+### tidb_allow_function_for_expression_index <span class="version-mark">New in v5.2.0</span>
+
+- Scope: NONE
+- This variable is used to show the functions that are allowed to be used for creating expression indexes.
 
 ### tidb_allow_mpp <span class="version-mark">New in v5.0</span>
 
@@ -555,7 +560,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Unit: Rows
 - This variable is used to set the batch size during the `re-organize` phase of the DDL operation. For example, when TiDB executes the `ADD INDEX` operation, the index data needs to backfilled by `tidb_ddl_reorg_worker_cnt` (the number) concurrent workers. Each worker backfills the index data in batches.
     - If many updating operations such as `UPDATE` and `REPLACE` exist during the `ADD INDEX` operation, a larger batch size indicates a larger probability of transaction conflicts. In this case, you need to adjust the batch size to a smaller value. The minimum value is 32.
-    - If the transaction conflict does not exist, you can set the batch size to a large value. The maximum value is 10240. This can increase the speed of the backfilling data, but the write pressure on TiKV also becomes higher.
+    - If the transaction conflict does not exist, you can set the batch size to a large value. This can increase the speed of the backfilling data, but the write pressure on TiKV also becomes higher.
 
 ### tidb_ddl_reorg_priority
 
@@ -594,7 +599,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Unit: Threads
 - This variable is used to set the concurrency of the `scan` operation.
 - Use a bigger value in OLAP scenarios, and a smaller value in OLTP scenarios.
-- For OLAP scenarios, the maximum value cannot exceed the number of CPU cores of all the TiKV nodes.
+- For OLAP scenarios, the maximum value should not exceed the number of CPU cores of all the TiKV nodes.
 - If a table has a lot of partitions, you can reduce the variable value appropriately to avoid TiKV becoming out of memory (OOM).
 
 ### tidb_dml_batch_size
@@ -1127,7 +1132,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Default value: `60`
 - Range: `[10, 216000]`
 - Unit: Seconds
-- This variable is used to set the range duration of the Prometheus statement generated when querying METRIC_SCHEMA.
+- This variable is used to set the range duration of the Prometheus statement generated when querying `METRICS_SCHEMA`.
 
 ### tidb_metric_query_step <span class="version-mark">New in v4.0</span>
 
@@ -1135,7 +1140,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Default value: `60`
 - Range: `[10, 216000]`
 - Unit: Seconds
-- This variable is used to set the step of the Prometheus statement generated when querying `METRIC_SCHEMA`.
+- This variable is used to set the step of the Prometheus statement generated when querying `METRICS_SCHEMA`.
 
 ### tidb_multi_statement_mode <span class="version-mark">New in v4.0.11</span>
 
