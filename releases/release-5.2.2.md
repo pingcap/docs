@@ -34,6 +34,14 @@ TiDB version: 5.2.2
 
 + PD
 
+    - Fix the issue that PD would not fix down peers in time [#4084](https://github.com/tikv/pd/pull/4084)
+    - Fix the data race issue when setting hot region configuration [#4170](https://github.com/tikv/pd/pull/4170)
+    - Fix the issue that key manager cost too much CPU [#4153](https://github.com/tikv/pd/pull/4153)
+    - Fix the issue that PD may remove the wrong pending peer if the peer count exceeds the limit [#4075](https://github.com/tikv/pd/pull/4075)
+    - Fix the issue that scatter range scheduler cannot schedule the empty region [#4118](https://github.com/tikv/pd/pull/4118)
+    - Fix the issue that PD may not elect a new leader as soon as the leader steps down [#4220](https://github.com/tikv/pd/pull/4220)
+
+
     - Fix the issue that PD may not elect leader as soon as leader step down [#4220](https://github.com/tikv/pd/pull/4220)
     - `evict-leader-scheduler` supports schedule the regions with unhealthy peers. [#4132](https://github.com/tikv/pd/pull/4132)
     - Fix the bug that PD would not fix down-peer in time. [#4084](https://github.com/tikv/pd/pull/4084)
