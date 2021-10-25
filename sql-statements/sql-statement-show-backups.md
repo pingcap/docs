@@ -73,7 +73,6 @@ The possible states are:
 | Wait | Waiting for execution |
 | Checksum | Running a checksum operation |
 
-
 The connection ID can be used to cancel a backup/restore task via the [`KILL TIDB QUERY`](/sql-statements/sql-statement-kill.md) statement.
 
 {{< copyable "sql" >}}
