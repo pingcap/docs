@@ -101,13 +101,6 @@ TiDB version: 5.2.2
 
     - Please add a release note, or a 'None' if it is not needed. [#2820](https://github.com/pingcap/tics/pull/2820)
 
-+ PD
-
-    - speed scheduler exit [#4199](https://github.com/tikv/pd/pull/4199)
-    - Fix the data race problem of hot region config [#4170](https://github.com/tikv/pd/pull/4170)
-    - allow empty region to be scheduled and use a sperate tolerance config in scatter range scheduler [#4118](https://github.com/tikv/pd/pull/4118)
-    - None. [#4028](https://github.com/tikv/pd/pull/4028)
-
 + Tools
 
     + TiCDC
