@@ -69,6 +69,7 @@
     + [Work with GH-ost and PT-osc](/data-migration/advanced-migration/ghost-ptosc.md)
     + [Merge multiple tables and databases](/data-migration/advanced-migration/merge-db-table.md)
     + [Multiple tables downstream](/data-migration/advanced-migration/more-column.md)
+    + [Use DM to Migrate Sharded Tables (within 1 TB)](/data-migration/advanced-migration/migrate-shard-tables-within-1tb.md)
 
 + Maintain
   + Upgrade
