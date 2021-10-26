@@ -92,4 +92,4 @@ A store refers to the storage node in the TiKV cluster (an instance of `tikv-ser
 
 ### TSO
 
-Because TiKV is a distributed storage system, it requires a global timing service, TSO (Timestamp Oracle), to assign a monotonically increasing timestamp. In TiKV, such a function is provided by PD, and in Google [Spanner](http://static.googleusercontent.com/media/research.google.com/en//archive/spanner-osdi2012.pdf), the function is provided by multiple atomic clocks and GPS.
+Because TiKV is a distributed storage system, it requires a global timing service, Timestamp Oracle (TSO), to assign a monotonically increasing timestamp. In TiKV, such a function is provided by PD, and in Google [Spanner](http://static.googleusercontent.com/media/research.google.com/en//archive/spanner-osdi2012.pdf), the function is provided by multiple atomic clocks and GPS.
