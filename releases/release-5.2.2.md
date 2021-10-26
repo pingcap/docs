@@ -27,9 +27,12 @@ TiDB version: 5.2.2
 
 + TiDB
 
-    - planner: fix the issue that plan-cache cannot be aware of changes of unsigned flags [#28837](https://github.com/pingcap/tidb/pull/28837)
-    - 'None' [#28820](https://github.com/pingcap/tidb/pull/28820)
-    - planner: fix the issue that planner may cache invalid plans for joins in some cases [#28447](https://github.com/pingcap/tidb/pull/28447)
+    - Fix the issue that plan-cache cannot be aware of changes of unsigned flags [#28837](https://github.com/pingcap/tidb/pull/28837)
+
+    - Fix the wrong partition pruning when some conditions are out of range  [#28820](https://github.com/pingcap/tidb/pull/28820)
+
+    - Fix the issue that planner may cache invalid plans for joins in some cases [#28447](https://github.com/pingcap/tidb/pull/28447)
+
     - Fix wrong index hash join when hash col is enum. [#28082](https://github.com/pingcap/tidb/pull/28082)
     - Fix a batch client bug that recycle idle connection may block sending requests in some rare cases. [#27688](https://github.com/pingcap/tidb/pull/27688)
     - Fixed Lightning panic when it failed to perform checksum on target cluster. [#27686](https://github.com/pingcap/tidb/pull/27686)
@@ -65,20 +68,22 @@ TiDB version: 5.2.2
     - Fix unexpected error like `tidb_cast to Int32 is not supported` when unsupported cast is pushed down to TiFlash [#28654](https://github.com/pingcap/tidb/pull/28654)
     - Fix error message for DECIMAL overflow is just "ERROR 1690 (22003): %s value is out of range in '%s'" [#28439](https://github.com/pingcap/tidb/pull/28439)
     - Fix bug that mpp node availability detect does not work in some corner cases [#28289](https://github.com/pingcap/tidb/pull/28289)
-    - sessionctx: fix data-race bug when alloc task id [#28283](https://github.com/pingcap/tidb/pull/28283)
+    - Fix data-race bug when alloc MPP task ID [#28283](https://github.com/pingcap/tidb/pull/28283)
+
     - Fix index out of bound bug when empty dual table is remove for mpp query [#28280](https://github.com/pingcap/tidb/pull/28280)
     - Avoid false positive error log about `invalid cop task execution summaries length` when running MPP query. [#28264](https://github.com/pingcap/tidb/pull/28264)
     - Fix `can not found column in Schema column` error for mpp queries [#28149](https://github.com/pingcap/tidb/pull/28149)
     - Fix a bug that TiDB may crash when TiFlash is shutting down. [#28140](https://github.com/pingcap/tidb/pull/28140)
-    - None. [#27924](https://github.com/pingcap/tidb/pull/27924)
+    - Show information about SQL statement in the debug log about coprocessor encountering lock  [#27924](https://github.com/pingcap/tidb/pull/27924)
     - Support for 3DES based TLS ciphersuites was removed [#27859](https://github.com/pingcap/tidb/pull/27859)
     - Do not check multi-ingest when store is offline. [#27826](https://github.com/pingcap/tidb/pull/27826)
-    - Please add a release note, or a 'None' if it is not needed. [#27727](https://github.com/pingcap/tidb/pull/27727)
+    - Add backup and restore size for TiDB SQL brie task . [#27727](https://github.com/pingcap/tidb/pull/27727)
     - Fix the issue that pre-check cost too much time when import too many files for tables. [#27623](https://github.com/pingcap/tidb/pull/27623)
-    - fix expression rewrite makes between expr infers wrong collation. [#27550](https://github.com/pingcap/tidb/pull/27550)
-    - make `group_concat` function consider the collation [#27530](https://github.com/pingcap/tidb/pull/27530)
-    - expression: fix extract bug when argument is a negative duration [#27366](https://github.com/pingcap/tidb/pull/27366)
-    - fix a bug that creates partition fail if `NO_UNSIGNED_SUBTRACTION` is set. [#27100](https://github.com/pingcap/tidb/pull/27100)
+    - Fix expression rewrite makes `between` infers wrong collation. [#27550](https://github.com/pingcap/tidb/pull/27550)
+
+    - Make `group_concat` function consider the collation [#27530](https://github.com/pingcap/tidb/pull/27530)
+    - Fix extract bug when argument is a negative duration [#27366](https://github.com/pingcap/tidb/pull/27366)
+    - Fix a bug that creates partition fail if `NO_UNSIGNED_SUBTRACTION` is set. [#27100](https://github.com/pingcap/tidb/pull/27100)
 
 + TiKV
 
