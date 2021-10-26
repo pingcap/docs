@@ -102,10 +102,6 @@ TiDB version: 5.2.2
     - Bug fix: fix an unexpected panic when exceeds deadline on processing copr requests. [#10857](https://github.com/tikv/tikv/pull/10857)
     - None. [#10809](https://github.com/tikv/tikv/pull/10809)
 
-+ TiFlash
-
-    - Please add a release note, or a 'None' if it is not needed. [#2820](https://github.com/pingcap/tics/pull/2820)
-
 + Tools
 
     + TiCDC
