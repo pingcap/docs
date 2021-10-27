@@ -60,7 +60,7 @@ The first row of the result above is described as follows:
 | `Progress` | Estimated progress in the current state as a percentage |
 | `Queue_time` | When the task was queued |
 | `Execution_time` | When the task was started; the value is `0000-00-00 00:00:00` for queueing tasks |
-| `Finish_time` | The timestamp when the task finished, `0000-00-00 00:00:00` for unfisished tasks |
+| `Finish_time` | The timestamp when the task finished, `0000-00-00 00:00:00` for queueing and running tasks |
 | `Connection` | Connection ID running this task |
 | `Message` | Message with details |
 
