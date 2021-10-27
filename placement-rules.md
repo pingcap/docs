@@ -21,7 +21,7 @@ CREATE PLACEMENT POLICY eastandwest PRIMARY_REGION="us-east-1" REGIONS="us-east-
 CREATE TABLE t2 (a INT) PLACEMENT POLICY=eastandwest;
 ```
 
-Using placement policies is recommended for complex scenarios because it simplifies management. If any changes are required, they can be updated using the [`ALTER PLACEMENT POLICY`](/sql-statements/sql-statement-alter-placement-policy.md) statement. There are no differences in the placement options available between direct placement and placement policies.
+Using placement policies is recommended to simplify rule management. Changes made to a placement policy (via [`ALTER PLACEMENT POLICY`](/sql-statements/sql-statement-alter-placement-policy.md)) automatically propagate to all database objects. This differs from direct placement options, which the rules must be altered for each object (tables, partitions).
 
 A `PLACEMENT POLICY` is not associated with any database schema and has global scope. Assigning a placement policy does not require any additional privileges over `CREATE TABLE` privilege.
 
@@ -36,10 +36,11 @@ A `PLACEMENT POLICY` is not associated with any database schema and has global s
 > +--------+----------------+
 > | Key    | Values         |
 > +--------+----------------+
+> | disk   | ["ssd"]        |
 > | region | ["us-east-1"]  |
 > | zone   | ["us-east-1a"] |
 > +--------+----------------+
-> 2 rows in set (0.00 sec)
+> 3 rows in set (0.00 sec)
 > ```
 
 | Option Name                | Description                                                                                    |
@@ -70,7 +71,7 @@ Note that the PD configuration includes the leader and follower count, thus 4 fo
 To expand on this example, the placement for the followers can also be described using the `PRIMARY_REGION` and `REGIONS` placement options:
 
 ```sql
-CREATE PLACEMENT POLICY eastandwest PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1" SCHEDULE="MAJORITY_IN_PRIMARY" FOLLOWERS=4;
+CREATE PLACEMENT POLICY eastandwest PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-east-2,us-west-1" SCHEDULE="MAJORITY_IN_PRIMARY" FOLLOWERS=4;
 CREATE TABLE t1 (a INT) PLACEMENT POLICY=eastandwest;
 ```
 
@@ -85,7 +86,7 @@ The `SCHEDULE` instructs TiDB how to balance the followers. `MAJORITY_IN_PRIMARY
 As well as assigning to tables, placement options can also be assigned to table partitions. For example:
 
 ```sql
-CREATE PLACEMENT POLICY europe PRIMARY_REGION="us-east-1" REGIONS="us-east-1";
+CREATE PLACEMENT POLICY europe PRIMARY_REGION="eu-central-1" REGIONS="eu-central-1,eu-west-1";
 CREATE PLACEMENT POLICY northamerica PRIMARY_REGION="us-east-1" REGIONS="us-east-1";
 
 SET tidb_enable_list_partition = 1;
@@ -103,7 +104,6 @@ CREATE TABLE t1 (
 Default placement options can be directly attached to a database schema. This works similar to setting the default character set or collation for a schema, in that it will be used when no other placement options are specified. For example:
 
 ```sql
-use test;
 CREATE TABLE t1 (a INT); -- the table is created with no placement options
 ALTER DATABASE test FOLLOWERS=4; -- this changes the default, and does not apply to the existing table t1;
 CREATE TABLE t2 (a INT); -- the placement of FOLLOWERS=4 will be used
@@ -126,14 +126,14 @@ CREATE PLACEMENT POLICY storeonhdd CONSTRAINTS="[+disk=hdd]";
 CREATE PLACEMENT POLICY companystandardpolicy CONSTRAINTS="";
 
 CREATE TABLE t1 (id INT, name VARCHAR(50), purchased DATE)
- PARTITION BY RANGE( YEAR(purchased) ) (
+PLACEMENT POLICY=companystandardpolicy
+PARTITION BY RANGE( YEAR(purchased) ) (
   PARTITION p0 VALUES LESS THAN (2000) PLACEMENT POLICY=storeonhdd,
   PARTITION p1 VALUES LESS THAN (2005),
   PARTITION p2 VALUES LESS THAN (2010),
   PARTITION p3 VALUES LESS THAN (2015),
   PARTITION p4 VALUES LESS THAN MAXVALUE PLACEMENT POLICY=storeonfastssd
- )
-PLACEMENT POLICY=companystandardpolicy;
+);
 ```
 
 Constraints can either be specified in list format (`[+disk=ssd]`) or dictionary format (`{+disk=ssd:1,+disk=hdd:2}`).

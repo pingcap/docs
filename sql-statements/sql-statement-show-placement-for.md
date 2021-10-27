@@ -33,6 +33,8 @@ SHOW PLACEMENT FOR DATABASE test;
 SHOW PLACEMENT FOR TABLE t1;
 SHOW CREATE TABLE t1\G
 SHOW PLACEMENT FOR TABLE t2;
+CREATE TABLE t3 (a INT) PARTITION BY RANGE (a) (PARTITION p1 VALUES LESS THAN (10), PARTITION p2 VALUES LESS THAN (20) FOLLOWERS=4);
+SHOW TABLE FOR TABLE t3 PARTITION p1;
 ```
 
 ```
@@ -72,6 +74,14 @@ Create Table: CREATE TABLE `t1` (
 +---------------+----------------------------------------------------------------------+
 1 row in set (0.00 sec)
 
+Query OK, 0 rows affected (0.14 sec)
+
++----------------------------+-------------+
+| Target                     | Placement   |
++----------------------------+-------------+
+| TABLE test.t3 PARTITION p2 | FOLLOWERS=4 |
++----------------------------+-------------+
+1 row in set (0.00 sec)
 ```
 
 ## MySQL compatibility

@@ -47,12 +47,20 @@ DirectPlacementOption ::=
 ```sql
 CREATE PLACEMENT POLICY p1 PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1" FOLLOWERS=4;
 CREATE TABLE t1 (a INT) PLACEMENT POLICY=p1;
+SHOW CREATE PLACEMENT POLICY p1;
 ```
 
 ```
 Query OK, 0 rows affected (0.08 sec)
 
 Query OK, 0 rows affected (0.10 sec)
+
++--------+---------------------------------------------------------------------------------------------------+
+| Policy | Create Policy                                                                                     |
++--------+---------------------------------------------------------------------------------------------------+
+| p1     | CREATE PLACEMENT POLICY `p1` PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1" FOLLOWERS=4 |
++--------+---------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
 ```
 
 ## MySQL compatibility

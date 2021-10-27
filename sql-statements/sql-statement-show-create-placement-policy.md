@@ -10,8 +10,10 @@ summary: The usage of SHOW CREATE PLACEMENT POLICY in TiDB.
 ## Synopsis
 
 ```ebnf+diagram
-ShowStmt ::=
-    "CREATE" "PLACEMENT" "POLICY"
+"SHOW" "CREATE" "PLACEMENT" "POLICY" PolicyName
+
+PolicyName ::= 
+	Identifier
 ```
 
 ## Examples

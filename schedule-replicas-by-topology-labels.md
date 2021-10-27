@@ -8,7 +8,7 @@ aliases: ['/docs/dev/location-awareness/','/docs/dev/how-to/deploy/geographic-re
 
 > **Note:**
 >
-> TiDB 5.3 introduces experimental support for [Placement Rules in SQL](/placement-rules.md). This offers a more convenient way to configure the placement of tables and partitions.
+> TiDB 5.3 introduces experimental support for [Placement Rules in SQL](/placement-rules.md). This offers a more convenient way to configure the placement of tables and partitions. Placement Rules in SQL is expected to replace placement configuration with PD in the future.
 
 To improve the high availability and disaster recovery capability of TiDB clusters, it is recommended that TiKV nodes are physically scattered as much as possible. For example, TiKV nodes can be distributed on different racks or even in different data centers. According to the topology information of TiKV, the PD scheduler automatically performs scheduling at the background to isolate each replica of a Region as much as possible, which maximizes the capability of disaster recovery.
 
