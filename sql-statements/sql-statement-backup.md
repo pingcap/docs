@@ -187,8 +187,6 @@ BACKUP DATABASE `test` TO 'local:///mnt/backup/hist03'
 
 This statement is a TiDB extension to MySQL syntax.
 
-<!-- MySQL 6.0 (never released as GA) did have an almost identical statement -->
-
 ## See also
 
 * [RESTORE](/sql-statements/sql-statement-restore.md)
