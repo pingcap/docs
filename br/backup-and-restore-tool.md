@@ -9,6 +9,8 @@ summary: Learn what is BR and how to use the tool.
 
 Compared with [`dumpling`](/backup-and-restore-using-dumpling-lightning.md), BR is more suitable for scenarios of huge data volume.
 
+In addition to regular backup and restoration, BR can also be used for large-scale data migration if compatibility is ensured.
+
 This document describes BR's implementation principles, recommended deployment configuration, usage restrictions and several methods to use BR.
 
 ## Implementation principles
@@ -186,6 +188,7 @@ The following are some recommended operations for using BR for backup and restor
 - It is recommended that you execute multiple restore operations serially. Running different restore operations in parallel increases Region conflicts and also reduces restore performance.
 - It is recommended that you mount a shared storage (for example, NFS) on the backup path specified by `-s`, to make it easier to collect and manage backup files.
 - It is recommended that you use a storage hardware with high throughput, because the throughput of a storage hardware limits the backup and restoration speed.
+- It is recommended that you disable the checksum feature (`--checksum = false`) during backup operation and only enable it during the restore operation to reduce the time cost when migrating data. This is because BR by default separately performs a checksum calculation when you finish backup and restore operation to compare the stored data with the corresponding cluster data to ensure accuracy.
 
 ### How to use BR
 
