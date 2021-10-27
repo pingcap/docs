@@ -52,7 +52,7 @@ tiup dmctl --master-addr 127.0.0.1:8261 operate-source create dm-test/source1.ya
 
 > Note:
 > 
-> - Usage of `dmctl encrypt`: [Encrypt the database password using dmctl](manage-source.md#encrypt-the-database-password)
+> - Usage of `dmctl encrypt`: [Encrypt the database password using dmctl](/manage-source.md#encrypt-the-database-password)
 > 
 > - All avaiable command of `dmctl` could be found in [Maintain DM Clusters Using dmctl](https://docs.pingcap.com/tidb-data-migration/stable/dmctl-introduction)
 
