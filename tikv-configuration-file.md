@@ -1267,6 +1267,11 @@ Configuration items related to security
 + The path of the PEM file that contains the X509 key
 + Default value: ""
 
+### `cert-allowed-cn`
+
++ A list of acceptable X509 Common Names in certificates presented by clients. Requests are permitted only when the presented Common Name is an exact match with one of the entries in the list.
++ Default value: `[]` (client certificate CN check disabled)
+
 ### `redact-info-log` <span class="version-mark">New in v4.0.8</span>
 
 + This configuration item enables or disables log redaction. If the configuration value is set to `true`, all user data in the log will be replaced by `?`.
