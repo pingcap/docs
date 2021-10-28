@@ -30,9 +30,9 @@ TiDB version: 5.2.2
 + PD
 
     - Add more types of write queries to QPS dimensions in the hotspot scheduler [#3869](https://github.com/tikv/pd/issues/3869)
-    - Support dynamically adjusting the retry limit of the balance region scheduler to improve the performance of the scheduler [#3744] (https://github.com/tikv/pd/issues/3744)
+    - Support dynamically adjusting the retry limit of the balance region scheduler to improve the performance of the scheduler [#3744](https://github.com/tikv/pd/issues/3744)
     - Update TiDB Dashboard to v2021.10.08.1 [#4070](https://github.com/tikv/pd/pull/4070)
-    - Support that the evict leader scheduler can schedule regions with unhealthy peers [#4093] (https://github.com/tikv/pd/issues/4093) 
+    - Support that the evict leader scheduler can schedule regions with unhealthy peers [#4093](https://github.com/tikv/pd/issues/4093) 
     - Speed up the exit process of a scheduler after receiving an end-of-process signal [#4146](https://github.com/tikv/pd/issues/4146)
 
 + Tools
