@@ -64,7 +64,8 @@ pd-addr = "127.0.0.1:2379"  # The default PD address of the cluster.
 
 [tikv-importer]
 
-# Uses Local-backend for best performance. You can also choose TiDB-backend or Importer-backend according to your need.
+# The "local" backend mode is used by default for best performance, which is suitable for large data volumes above TB level, but downstream TiDB cannot provide services during the import period.
+# The data volume below TB level can also adopt the "tidb" backend mode, and downstream TiDB can provide services normally. For more information about the backend mode, please refer to: https://docs.pingcap.com/tidb/stable/tidb-lightning-backends
 backend = "local"
 
 # The storage path of local temporary files. Ensure that the corresponding directory does not exist or is empty and that the disk capacity is large enough for storage.
@@ -85,13 +86,7 @@ table = '$2'
 type = '$3'
 ```
 
-> **Note:**
-> 
-> For detailed introduction of the three backend modes, see [TiDB Lightning Backends](/tidb-lightning/tidb-lightning-backends.md).
-> 
-> - If TLS is enabled in the target TiDB cluster, you also need to configure TLS.
-
-For more configurations, refer to [TiDB Lightning Configuration](/tidb-lightning/tidb-lightning-configuration.md).
+Refer to the [TiDB Lightning Configuration](/tidb-lightning/tidb-lightning-configuration.md) if you want to configure TLS in the target TiDB cluster, or for more configurations.
 
 ## Step 4. Create table schemas in TiDB
 
@@ -107,14 +102,14 @@ In this example, TiDB Lightning is only used to create table schemas, so the abo
 
 | Parameter | Description |
 | :--------| :------------|
-| `-config`                     | Reads global configuration from file. If not specified, the default configuration would be used. |
+| `-config`                     | Reads global configuration from file. If not specified, the default value would be used. |
 | `-d`                          | Directory or [external storage URL](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages) of the data dump to read from |
 | `-no-schema`                  | Ignore schema files, get schema directly from TiDB |
 
+More parameter could be found in [TiDB Lightning Configuration](https://docs.pingcap.com/tidb/stable/tidb-lightning-configuration) 
+
 > **Note:**
 >
-> - More parameter could be found in [TiDB Lightning Configuration](https://docs.pingcap.com/tidb/stable/tidb-lightning-configuration) 
-> 
 > If the number of database tables to create is relatively small, you can directly and manually create the corresponding databases and tables in TiDB. Or you can use other tools such as mysqldump to export the schemas and then import them into TiDB.
 
 ## Step 5. Import data into TiDB using TiDB Lightning

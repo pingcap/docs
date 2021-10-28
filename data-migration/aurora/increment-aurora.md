@@ -19,7 +19,7 @@ This document describes how to use DM for incremental replication.
 
 DM relies on the `ROW`-formatted binlog for incremental replication, so you need to enable the binary logging for an Aurora MySQL cluster. For the configuration instructions, refer to Amazon's document [Enable binary for an Aurora Cluster](https://aws.amazon.com/premiumsupport/knowledge-center/enable-binary-logging-aurora/?nc1=h_ls).
 
-It is recommmend to  migrate data based on GTIDs(global transaction identifiers). For how to enable it, refer to Amazon's document [Configuring GTID-Based Replication for an Aurora MySQL Cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/mysql-replication-gtid.html#mysql-replication-gtid.configuring-aurora).
+It is recommmend to  migrate data based on GTIDs (global transaction identifiers). For how to enable it, refer to Amazon's document [Configuring GTID-Based Replication for an Aurora MySQL Cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/mysql-replication-gtid.html#mysql-replication-gtid.configuring-aurora).
 
 ## Step 2. Configure the data source
 
@@ -50,11 +50,9 @@ tiup dmctl --master-addr 127.0.0.1:8261 operate-source create dm-test/source1.ya
 | `--master-addr`                     | Master API server addr. |
 | `operate-source`                    | `create`/`update`/`stop`/`show` upstream MySQL/MariaDB source. |
 
-> Note:
-> 
-> - Usage of `dmctl encrypt`: [Encrypt the database password using dmctl](https://docs.pingcap.com/tidb-data-migration/stable/manage-source#encrypt-the-database-password)
-> 
-> - All avaiable command of `dmctl` could be found in [Maintain DM Clusters Using dmctl](https://docs.pingcap.com/tidb-data-migration/stable/dmctl-introduction)
+Usage of `dmctl encrypt`: [Encrypt the database password using dmctl](https://docs.pingcap.com/tidb-data-migration/stable/manage-source#encrypt-the-database-password)
+
+All avaiable command of `dmctl` could be found in [Maintain DM Clusters Using dmctl](https://docs.pingcap.com/tidb-data-migration/stable/dmctl-introduction)
 
 When the data sources are successfully added, the return information of each data source includes a DM-worker bound to it.
 
