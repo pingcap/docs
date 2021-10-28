@@ -59,7 +59,7 @@ TiDB version: 5.2.2
     - Fix error message for DECIMAL overflow is just "ERROR 1690 (22003): %s value is out of range in '%s'" [#27964](https://github.com/pingcap/tidb/issues/27964)
     - Fix bug that mpp node availability detect does not work in some corner cases [#3118](https://github.com/pingcap/tics/issues/3118)
     - Fix data-race bug when alloc MPP task ID [#27952](https://github.com/pingcap/tidb/issues/27952)
-    - Fix index out of bound bug when empty dual table is remove for mpp query [#28250](https://github.com/pingcap/tidb/issues/28250)
+    - Fix index out of bound bug when empty dual table is remove for MPP query [#28250](https://github.com/pingcap/tidb/issues/28250)
     - Avoid false positive error log about `invalid cop task execution summaries length` when running MPP query. [#28264](https://github.com/pingcap/tidb/pull/28264)
     - Fix `can not found column in Schema column` error for mpp queries [#28149](https://github.com/pingcap/tidb/pull/28149)
     - Fix a bug that TiDB may crash when TiFlash is shutting down. [#28096](https://github.com/pingcap/tidb/issues/28096)
