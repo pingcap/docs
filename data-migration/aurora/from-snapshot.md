@@ -56,11 +56,11 @@ vim tidb-lighting.toml
 [tidb]
 
 # The target cluster information. Fill in one address of tidb-server.
-host = "${host}"
-port = ${port}
-user = "${user_name}"
-password = "${password}" 
-pd-addr = "127.0.0.1:2379"  # The default PD address of the cluster.
+host = "${host}" # target database address ,eg: 172.16.128.1
+port = ${port}   # target database port, eg: 4000
+user = "${user_name}"  # target database username, eg: root
+password = "${password}"  # target database password
+pd-addr = "${pd_address}"  # The default PD address of the cluster. eg: 127.0.0.1:2379
 
 [tikv-importer]
 

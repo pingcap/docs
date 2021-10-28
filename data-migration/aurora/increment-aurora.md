@@ -33,8 +33,8 @@ source-id: "aurora-replica-01"
 enable-gtid: false
 
 from:
-  host: "${host}" # eg: test-dm-2-0.cluster-czrtqco96yc6.us-east-2.rds.amazonaws.com
-  user: "root"
+  host: "${host}" # address of database, eg: test-dm-2-0.cluster-czrtqco96yc6.us-east-2.rds.amazonaws.com
+  user: "${user_name}"    # username of database, eg: root
   password: "${password}"  # It is recommended to use database passwords encrypted by `dmctl encrypt`.
   port: 3306
 ```
@@ -89,19 +89,19 @@ name: "test"
 task-mode: "incremental"
 # The downstream TiDB configuration information.
 target-database:
-  host: "${host}"
-  port: ${port}
-  user: "${user_name}"
-  password: "${password}"
+  host: "${host}"  # target database address ,eg: 172.16.128.1
+  port: ${port}    # target database port, eg: 4000
+  user: "${user_name}" # target database username, eg: root
+  password: "${password}" # target database password
 
 # Configuration of all the upstream MySQL instances required by the current data migration task.
 mysql-instances:
 - source-id: "aurora-replica-01"
      # The position where the binlog replication starts when `task-mode` is `incremental` and the downstream database checkpoint does not exist. If the checkpoint exists, the checkpoint is used.
   meta:
-    binlog-name: binlog.000001
-    binlog-pos: 4
-    binlog-gtid: "03fc0263-28c7-11e7-a653-6c0b84d59f30:1-7041423,05474d3c-28c7-11e7-8352-203db246dd3d:1-170"  # You need to set this argument if you specify `enable-gtid: true` for the source of the incremental task.
+    binlog-name: ${binlog}   # binlog file name ,eg: binlog.000001
+    binlog-pos: ${position}  # binlog file position ,eg: 4
+    # binlog-gtid: "${gtid}"  # You need to set this argument if you specify `enable-gtid: true` for the source of the incremental task. eg: 03fc0263-28c7-11e7-a653-6c0b84d59f30:1-7041423,05474d3c-28c7-11e7-8352-203db246dd3d:1-170
 
   # The configuration items of the block and allow lists of the schema or table to be migrated, used to quote the global block and allow lists configuration. For global configuration, see the `block-allow-list` below.
   block-allow-list: "listA"
