@@ -57,7 +57,7 @@ TiDB version: 5.2.2
     - Fixed a bug that caused BR get stuck when many missing-peer regions in cluster. [#27534](https://github.com/pingcap/tidb/issues/27534)
     - Fix unexpected error like `tidb_cast to Int32 is not supported` when unsupported cast is pushed down to TiFlash [#23907](https://github.com/pingcap/tidb/issues/23907)
     - Fix error message for DECIMAL overflow is just "ERROR 1690 (22003): %s value is out of range in '%s'" [#27964](https://github.com/pingcap/tidb/issues/27964)
-    - Fix bug that mpp node availability detect does not work in some corner cases [#3118](https://github.com/pingcap/tics/issues/3118)
+    - Fix bug that MPP node availability detect does not work in some corner cases [#3118](https://github.com/pingcap/tics/issues/3118)
     - Fix data-race bug when alloc MPP task ID [#27952](https://github.com/pingcap/tidb/issues/27952)
     - Fix index out of bound bug when empty dual table is remove for MPP query [#28250](https://github.com/pingcap/tidb/issues/28250)
     - Avoid false positive error log about `invalid cop task execution summaries length` when running MPP query. [#28264](https://github.com/pingcap/tidb/pull/28264)
