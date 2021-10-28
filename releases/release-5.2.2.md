@@ -21,11 +21,11 @@ TiDB version: 5.2.2
 
 + TiKV
 
-    - Simplify the algorithm of L0 flow control [#11081](https://github.com/tikv/tikv/pull/11081)
+    - Simplify the algorithm of L0 flow control [#10879](https://github.com/tikv/tikv/issues/10879)
     - Improve raft client error log report [#10983](https://github.com/tikv/tikv/pull/10983)
     - TiKV coprocessor slow log will only consider time spent on processing the request. [#10866](https://github.com/tikv/tikv/pull/10866)
     - Drop log instead of blocking threads when slogger thread is overloaded and queue is filled up. [#10866](https://github.com/tikv/tikv/pull/10866)
-    - Add more write query kind. [#10809](https://github.com/tikv/tikv/pull/10809)
+    - Add more write query kind. [#10507](https://github.com/tikv/tikv/issues/10507)
 
 + PD
 
@@ -79,13 +79,13 @@ TiDB version: 5.2.2
 
 + TiKV
 
-    - Fix frequent CDC incremental scan retry due to `Congest` error. [#11092](https://github.com/tikv/tikv/pull/11092)
-    - Fix channel full could break the raft connection [#11073](https://github.com/tikv/tikv/pull/11073)
-    - Fix the issue that batch messages can be too large in raft client implementation [#11066](https://github.com/tikv/tikv/pull/11066)
-    - Fix coroutine leaking in `resolved_ts`. [#11020](https://github.com/tikv/tikv/pull/11020)
-    - Fix panic in coprocessor when response size exceeds 4GiB [#10993](https://github.com/tikv/tikv/pull/10993)
-    - Fix the issue that snapshot GC missed GC snapshot files when there's one snapshot file failed to be GC-ed. [#10874](https://github.com/tikv/tikv/pull/10874)
-    - Fix an unexpected panic when exceeds deadline on processing copr requests. [#10857](https://github.com/tikv/tikv/pull/10857)
+    - Fix frequent CDC incremental scan retry due to `Congest` error. [#11082](https://github.com/tikv/tikv/issues/11082)
+    - Fix channel full could break the raft connection [#11047](https://github.com/tikv/tikv/issues/11047)
+    - Fix the issue that batch messages can be too large in raft client implementation [#9714](https://github.com/tikv/tikv/issues/9714)
+    - Fix coroutine leaking in `resolved_ts`. [#10965](https://github.com/tikv/tikv/issues/10965)
+    - Fix panic in coprocessor when response size exceeds 4GiB [#9012](https://github.com/tikv/tikv/issues/9012)
+    - Fix the issue that snapshot GC missed GC snapshot files when there's one snapshot file failed to be GC-ed. [#10813](https://github.com/tikv/tikv/issues/10813)
+    - Fix an unexpected panic when exceeds deadline on processing copr requests. [#10852](https://github.com/tikv/tikv/issues/10852)
 
 + PD
 
