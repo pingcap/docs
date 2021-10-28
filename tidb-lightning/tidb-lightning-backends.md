@@ -162,7 +162,7 @@ backend = "tidb"
 data-source-dir = "/data/my_database"
 
 # the input data in a "strict" format speeds up processing.
-# strict-format = true requires that:
+# "strict-format = true" requires that:
 # in CSV, every value cannot contain literal new lines (U+000A and U+000D, or \r and \n) even
 # when quoted, which means new lines are strictly used to separate rows.
 # "Strict" format allows TiDB Lightning to quickly locate split positions of a large file for parallel processing.
