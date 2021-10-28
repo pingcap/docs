@@ -84,7 +84,7 @@ TiDB version: 5.2.2
 
 + TiFlash
 
-    - Fix the issue that TiFlash fails to start up under platform without library `nsl` [#3207](https://github.com/pingcap/tics/pull/3207)
+    - Fix the issue that TiFlash fails to start up under platform without library `nsl`
 
 + Tools
 
