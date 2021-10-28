@@ -92,10 +92,10 @@ check-requirements = true
 # Each table is split into one "index engine" to store indices, and multiple
 # "data engines" to store row data. These settings control the maximum
 # concurrent number for each type of engines.
-# Controls the maximum number of tables that can be imported at the same time. For TiDB-backend, the default value is the number of CPU cores.
+# Controls the maximum number of tables that can be imported in parallel. For TiDB-backend, the default value is the number of CPU cores.
 index-concurrency = 40
 
-# Controls the maximum number of "data engines" allowed to be imported at the same time. The default value is the number of CPU cores. The value should be no less than the value of index-concurrency.
+# Controls the maximum number of "data engines" allowed to be imported in parallel. The default value is the number of CPU cores. The value should be no less than the value of index-concurrency.
 table-concurrency = 40
 
 # The number of concurrent SQL statements executed. It is set to the number of logical CPU cores by default. The bottleneck of TiDB-backend is usually not the CPU. You can increase this value based on the actual load of the downstream cluster to optimize the write speed. At the same time, when adjusting this configuration, it is recommended to adjust the index-concurrency and table-concurrency to the same value.
@@ -103,18 +103,18 @@ region-concurrency = 40
 
 # Logging
 level = "info"
-# The directory to which the log is output. If it is empty (default), the file is saved to /tmp/lightning.log.{timestamp}; if you hope the file is saved to the system standard output, set it to "-".
+# The directory to which the log is output. If it is empty (default), the file is saved to /tmp/lightning.log.{timestamp}. If you want the file to be saved to the system standard output, set it to "-".
 file = "tidb-lightning.log"
 
 [checkpoint]
 # Whether to enable checkpoints.
 # While importing data, TiDB Lightning records which tables have been imported, so
 # even if TiDB Lightning or some other component crashes, you can start from a known
-# good state instead of redoing everything.
+# good state instead of restarting from scratch.
 enable = true
 
 # Where to store the checkpoints.
-#  - file (default):  store as a local file (requires v2.1.1 or later)
+#  - file (default): store as a local file (requires v2.1.1 or later)
 #  - mysql: store into a remote MySQL-compatible database
 driver = "file"
 
@@ -143,9 +143,9 @@ driver = "file"
 backend = "tidb"
 
 # Action to do when trying to insert a duplicated entry in the "tidb" backend.
-#  - replace: new entry replaces existing entry
-#  - ignore:  keep existing entry, ignore new entry
-#  - error:   report error and quit the program
+#  - replace: use new entry to replace the existing entry
+#  - ignore: keep the existing entry, and ignore the new entry
+#  - error: report error and quit the program
 # on-duplicate = "replace"
 
 [mydumper]
