@@ -25,14 +25,14 @@ TiDB version: 5.2.2
     - Improve the error log report in raft client module [#10983](https://github.com/tikv/tikv/pull/10983)
     - Make the slow log of TiKV coprocessor only consider the time spent on processing requests [#10841](https://github.com/tikv/tikv/issues/10841)
     - Drop log instead of blocking threads when the slogger thread is overloaded and the queue is filled up [#10841](https://github.com/tikv/tikv/issues/10841)
-    - Add more statistics types of write queries (https://github.com/tikv/tikv/issues/10507)
+    - Add more statistics types of write queries [#10507](https://github.com/tikv/tikv/issues/10507)
 
 + PD
 
     - Add more types of write queries to QPS dimensions in the hotspot scheduler [#3869](https://github.com/tikv/pd/issues/3869)
-    - Support dynamically adjusting the retry limit of the balance region scheduler to improve the performance of the scheduler [#3744 (https://github.com/tikv/pd/issues/3744)
+    - Support dynamically adjusting the retry limit of the balance region scheduler to improve the performance of the scheduler [#3744] (https://github.com/tikv/pd/issues/3744)
     - Update TiDB Dashboard to v2021.10.08.1 [#4070](https://github.com/tikv/pd/pull/4070)
-    - Support that the evict leader scheduler can schedule regions with unhealthy peers [#4093 (https://github.com/tikv/pd/issues/4093) 
+    - Support that the evict leader scheduler can schedule regions with unhealthy peers [#4093] (https://github.com/tikv/pd/issues/4093) 
     - Speed up the exit process of a scheduler after receiving an end-of-process signal [#4146](https://github.com/tikv/pd/issues/4146)
 
 + Tools
@@ -93,7 +93,7 @@ TiDB version: 5.2.2
     - Fix the issue that PD does not fix down peers in time [#4077](https://github.com/tikv/pd/issues/4077)
     - Fix the issue that the scatter range scheduler cannot schedule empty regions [#4118](https://github.com/tikv/pd/pull/4118)
     - Fix the issue that the key manager cost too much CPU [#4071](https://github.com/tikv/pd/issues/4071)
-    - Fix the data race issue that might occur when setting configurations of hot region scheduler [#4170](https://github.com/tikv/pd/pull/4170)
+    - Fix the data race issue that might occur when setting configurations of hot region scheduler [#4159](https://github.com/tikv/pd/issues/4159)
    - Fix slow leader election caused by stucked region syncer[#3936](https://github.com/tikv/pd/issues/3936)
 
 + TiFlash
