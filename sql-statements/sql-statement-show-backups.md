@@ -5,7 +5,7 @@ summary: An overview of the usage of SHOW [BACKUPS|RESTORES] for the TiDB databa
 
 # SHOW [BACKUPS|RESTORES]
 
-These statements shows a list of all queued, running and recently finished [`BACKUP`](/sql-statements/sql-statement-backup.md) and [`RESTORE`](/sql-statements/sql-statement-restore.md) tasks that were executed on a TiDB instance.
+These statements show a list of all queued, running and recently finished [`BACKUP`](/sql-statements/sql-statement-backup.md) and [`RESTORE`](/sql-statements/sql-statement-restore.md) tasks that were executed on a TiDB instance.
 
 Both statements require `SUPER` privilege to run.
 
