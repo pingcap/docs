@@ -19,6 +19,14 @@ TiDB version: 5.2.2
     - Show information about SQL statement in the debug log about coprocessor encountering lock [#27718](https://github.com/pingcap/tidb/issues/27718)
     - Add backup and restore size for TiDB SQL brie task . [#27247](https://github.com/pingcap/tidb/issues/27247)
 
++ TiKV
+
+    - Simplify the algorithm of L0 flow control [#11081](https://github.com/tikv/tikv/pull/11081)
+    - Improve raft client error log report [#10983](https://github.com/tikv/tikv/pull/10983)
+    - TiKV coprocessor slow log will only consider time spent on processing the request. [#10866](https://github.com/tikv/tikv/pull/10866)
+    - Drop log instead of blocking threads when slogger thread is overloaded and queue is filled up. [#10866](https://github.com/tikv/tikv/pull/10866)
+    - Add more write query kind. [#10809](https://github.com/tikv/tikv/pull/10809)
+
 + PD
 
     - Add more write query kind in QPS dimension for hot region scheduler [#4028](https://github.com/tikv/pd/pull/4028)
@@ -71,6 +79,14 @@ TiDB version: 5.2.2
 
 + TiKV
 
+    - Fix frequent CDC incremental scan retry due to `Congest` error. [#11092](https://github.com/tikv/tikv/pull/11092)
+    - Fix channel full could break the raft connection [#11073](https://github.com/tikv/tikv/pull/11073)
+    - Fix the issue that batch messages can be too large in raft client implementation [#11066](https://github.com/tikv/tikv/pull/11066)
+    - Fix coroutine leaking in `resolved_ts`. [#11020](https://github.com/tikv/tikv/pull/11020)
+    - Fix panic in coprocessor when response size exceeds 4GiB [#10993](https://github.com/tikv/tikv/pull/10993)
+    - Fix the issue that snapshot GC missed GC snapshot files when there's one snapshot file failed to be GC-ed. [#10874](https://github.com/tikv/tikv/pull/10874)
+    - Fix an unexpected panic when exceeds deadline on processing copr requests. [#10857](https://github.com/tikv/tikv/pull/10857)
+
 + PD
 
     - Fix the issue that PD would not fix down peers in time [#4077](https://github.com/tikv/pd/issues/4077)
@@ -91,21 +107,3 @@ TiDB version: 5.2.2
 
     + TiCDC
 
-## __unsorted
-
-+ TiKV
-
-    - Fix frequent CDC incremental scan retry due to `Congest` error. [#11082](https://github.com/tikv/tikv/issues/11082)
-    - Simplify the algorithm of L0 flow control [#10879](https://github.com/tikv/tikv/issues/10879)
-    - fix channel full could break the raft connection [#11047](https://github.com/tikv/tikv/issues/11047)
-    - Fix the issue #9714. Now RaftClient will check the size of RaftMessage.extra_ctx and RaftMessage.message.context size as part of its message size estimate. [#9714](https://github.com/tikv/tikv/issues/9714)
-    - rename config resource-metering.agent_address to resource-metering.receiver_address [#11023](https://github.com/tikv/tikv/pull/11023)
-    - resolved_ts: fix coroutine leaking [#10965](https://github.com/tikv/tikv/issues/10965)
-    - Hide untouched storage commands' metrics in grafana dashboard [#11003](https://github.com/tikv/tikv/pull/11003)
-    - Fix panic in coprocessor when response size exceeds 4GiB [#9012](https://github.com/tikv/tikv/issues/9012)
-    - improve raft client error log report [#10983](https://github.com/tikv/tikv/pull/10983)
-    - RaftStore Snapshot GC fix: fix the issue that snapshot GC missed GC snapshot files when there's one snapshot file failed to be GC-ed. [#10813](https://github.com/tikv/tikv/issues/10813)
-    - TiKV coprocessor slow log will only consider time spent on processing the request. 
-    - Drop log instead of blocking threads when slogger thread is overloaded and queue is filled up. [#10866](https://github.com/tikv/tikv/pull/10866)
-    - Bug fix: fix an unexpected panic when exceeds deadline on processing copr requests. [#10852](https://github.com/tikv/tikv/issues/10852)
-    - None. [#10507](https://github.com/tikv/tikv/issues/10507)
