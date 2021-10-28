@@ -17,7 +17,7 @@ TiDB version: 5.2.2
 + TiDB
 
     - Show information about SQL statement in the debug log about coprocessor encountering lock [#27718](https://github.com/pingcap/tidb/issues/27718)
-    - Add backup and restore size for TiDB SQL brie task . [#27247](https://github.com/pingcap/tidb/issues/27247)
+    - Add backup and restore size for TiDB SQL backup/restore task . [#27247](https://github.com/pingcap/tidb/issues/27247)
 
 + TiKV
 
