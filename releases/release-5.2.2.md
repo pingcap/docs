@@ -8,10 +8,6 @@ Release Date: October 27, 2021
 
 TiDB version: 5.2.2
 
-## Compatibility change(s)
-
-## Feature enhancement(s)
-
 ## Improvements
 
 + TiDB
