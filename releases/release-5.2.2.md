@@ -23,8 +23,7 @@ TiDB version: 5.2.2
 
     - Simplify the algorithm of L0 flow control [#10879](https://github.com/tikv/tikv/issues/10879)
     - Improve the error log report in the raft client module [#10983](https://github.com/tikv/tikv/pull/10983)
-    - Make the slow log of TiKV coprocessor only consider the time spent on processing requests [#10841](https://github.com/tikv/tikv/issues/10841)
-    - Drop log instead of blocking threads when the slogger thread is overloaded and the queue is filled up [#10841](https://github.com/tikv/tikv/issues/10841)
+    - Improve logging threads to avoid them becoming a performance bottleneck [#10841](https://github.com/tikv/tikv/issues/10841)
     - Add more statistics types of write queries [#10507](https://github.com/tikv/tikv/issues/10507)
 
 + PD
@@ -33,7 +32,7 @@ TiDB version: 5.2.2
     - Support dynamically adjusting the retry limit of the balance region scheduler to improve the performance of the scheduler [#3744](https://github.com/tikv/pd/issues/3744)
     - Update TiDB Dashboard to v2021.10.08.1 [#4070](https://github.com/tikv/pd/pull/4070)
     - Support that the evict leader scheduler can schedule regions with unhealthy peers [#4093](https://github.com/tikv/pd/issues/4093) 
-    - Speed up the exit process of a scheduler after receiving an end-of-process signal [#4146](https://github.com/tikv/pd/issues/4146)
+    - Speed up the exit process of schedulers [#4146](https://github.com/tikv/pd/issues/4146)
 
 + Tools
 
