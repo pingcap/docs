@@ -38,7 +38,11 @@ TiDB version: 5.2.2
 + Tools
 
     + TiCDC
-
+    - Reduce the default value of the Kafka sink configuration item `MaxMessageBytes` from 64 MB to 1 MB to fix the issue that large messages are rejected by the Kafka Broker [#3104](https://github.com/pingcap/ticdc/pull/3104)
+    - Reduce memory usage in the synchronization link [#2553](https://github.com/pingcap/ticdc/issues/2553)[#3037](https://github.com/pingcap/ticdc/pull/3037) [#2726](https://github.com/pingcap/ticdc/pull/2726) 
+    - Optimize monitoring items and alert rules to improve observability of synchronous links, memory GC, and stock data scanning processes [#2735](https://github.com/pingcap/ticdc/pull/2735) [#1606](https://github.com/pingcap/ticdc/issues/1606) [#3000](https://github.com/pingcap/ticdc/pull/3000 [#2985](https://github.com/pingcap/ticdc/issues/2985) [#2156](https://github.com/pingcap/ticdc/issues/2156)
+    - When the sync task status is normal, no more historical error messages are displayed to avoid misleading users [#2242](https://github.com/pingcap/ticdc/issues/2242)
+    
 ## Bug Fixes
 
 + TiDB
@@ -61,21 +65,21 @@ TiDB version: 5.2.2
     - Fix the`DATA RACE` issue when assigning`MPP task ID` [#27952](https://github.com/pingcap/tidb/issues/27952)
     - Fix the `INDEX OUT OF RANGE` error for a MPP query after deleting an empty `dual table`. [#28250](https://github.com/pingcap/tidb/issues/28250)
     - Fix the issue of false positive error log `invalid cop task execution summaries length` for MPP queries [#1791](https://github.com/pingcap/tics/issues/1791)
-    - Fix the issue of error log `can not found column in Schema column` for MPP queries [#28149](https://github.com/pingcap/tidb/pull/28149)
-    - Fix the issue that TiDB might crash when TiFlash shuts down [#28096](https://github.com/pingcap/tidb/issues/28096)
-    - Remove the support for insecure 3DES (Triple Data Encryption Algorithm) based TLS ciphersuites [#27859](https://github.com/pingcap/tidb/pull/27859)
-    - Fix the issue that Lightning connects to  offline TiKV nodes during pre-check and causes import failures [#27826](https://github.com/pingcap/tidb/pull/27826)
+    - Fix the issue of error log `cannot found column in Schema column` for MPP queries [#28149](https://github.com/pingcap/tidb/pull/28149)
+    - Fix the issue that TiDB might panic when TiFlash is shuting down [#28096](https://github.com/pingcap/tidb/issues/28096)
+    - Remove the support for insecure 3DES (Triple Data Encryption Algorithm) based TLS cipher suites [#27859](https://github.com/pingcap/tidb/pull/27859)
+    - Fix the issue that Lightning connects to offline TiKV nodes during pre-check and causes import failures [#27826](https://github.com/pingcap/tidb/pull/27826)
     - Fix the issue that pre-check cost too much time when importing many files to tables [#27605](https://github.com/pingcap/tidb/issues/27605)
     - Fix the issue that rewriting expressions makes `between` infer wrong collation [#27146](https://github.com/pingcap/tidb/issues/27146)
     - Fix the issue that `group_concat` function did not consider the collation [#27429](https://github.com/pingcap/tidb/issues/27429)
-    - Fix the issue that `extract` function gives wrong results when argument is a negative duration [#27236](https://github.com/pingcap/tidb/issues/27236)
+    - Fix the result wrong that occurs when the argument of the `extract` function is a negative duration [#27236](https://github.com/pingcap/tidb/issues/27236)
     - Fix the issue that creating partition fails if `NO_UNSIGNED_SUBTRACTION` is set [#26765](https://github.com/pingcap/tidb/issues/26765)
     - Avoid expressions with side effects in column pruning and aggregation pushdown [#27106](https://github.com/pingcap/tidb/issues/27106)
-    - Remove useless GRPC log in production [#24190](https://github.com/pingcap/tidb/issues/24190)
+    - Remove useless gRPC logs [#24190](https://github.com/pingcap/tidb/issues/24190)
     - Limit the valid decimal length to fix precision-related issues [#3091](https://github.com/pingcap/tics/issues/3091)
     - Fix the issue of a wrong way to check for overflow in `plus` expression [#26977](https://github.com/pingcap/tidb/issues/26977)
-    - Fix the issue of `data too long` error when dumping statistics from the table with new collation data [#27024](https://github.com/pingcap/tidb/issues/27024)
-    - Fix the issue that the retried transactions' statements are not included in TIDB_TRX [#28670](https://github.com/pingcap/tidb/pull/28670)
+    - Fix the issue of `data too long` error when dumping statistics from the table with `new collation` data [#27024](https://github.com/pingcap/tidb/issues/27024)
+    - Fix the issue that the retried transactions' statements are not included in `TIDB_TRX` [#28670](https://github.com/pingcap/tidb/pull/28670)
 
 + TiKV
 
@@ -103,4 +107,13 @@ TiDB version: 5.2.2
 + Tools
 
     + TiCDC
+        - Fix the issue that TiCDC sync task may pause when the upstream TiDB instance unexpectedly exits [#3061](https://github.com/pingcap/ticdc/issues/3061)
+        - Fix when TiKV sends duplicate requests to the same Region, TiCDC process PANIC `tikv reported duplicated request to the same region, which is not expected` [#2386](https://github.com/pingcap/ticdc/issues/2386)
+        - Fix useless CPU consumption when verifying downstream TiDB/MySQL availability [#3073](https://github.com/pingcap/ticdc/issues/3073)
+        - Fix the issue that the volume of Kafka messages generated by TiCDC is not constrained by `max-message-size` [#2962](https://github.com/pingcap/ticdc/issues/2962)
+        - Fix the issue that TiCDC sync task may pause when an error occurs during writing a Kafka message [#2978](https://github.com/pingcap/ticdc/issues/2978)
+        - Fix the issue that some partitioned tables without valid indexes may be ignored when `force-replicate` is enabled [#2834](https://github.com/pingcap/ticdc/issues/2834)
+        - Fix the issue that scanning stock data may fail due to TiKV performing GC when scanning stock data takes too long [#2470](https://github.com/pingcap/ticdc/issues/2470)
+        - Fix a possible PANIC `interface conversion: interface {} is string, not []uint8` when encoding some types of columns into Open Protocol format [#2758](https://github.com/pingcap/ticdc/issues/2758)
+        - Fix a possible PANIC `interface conversion: interface {} is uint64, not int64` when encoding some types of columns into Avro format [#2648](https://github.com/pingcap/ticdc/issues/2648)
 
