@@ -22,7 +22,7 @@ TiDB version: 5.2.2
 + TiKV
 
     - Simplify the algorithm of L0 flow control [#10879](https://github.com/tikv/tikv/issues/10879)
-    - Improve the error log report in raft client module [#10983](https://github.com/tikv/tikv/pull/10983)
+    - Improve the error log report in the raft client module [#10983](https://github.com/tikv/tikv/pull/10983)
     - Make the slow log of TiKV coprocessor only consider the time spent on processing requests [#10841](https://github.com/tikv/tikv/issues/10841)
     - Drop log instead of blocking threads when the slogger thread is overloaded and the queue is filled up [#10841](https://github.com/tikv/tikv/issues/10841)
     - Add more statistics types of write queries [#10507](https://github.com/tikv/tikv/issues/10507)
@@ -83,13 +83,13 @@ TiDB version: 5.2.2
 
 + TiKV
 
-    - Fix the issue that CDC add scan retries frequently due to Congest error [#11082](https://github.com/tikv/tikv/issues/11082)
-    - Fix that the raft connection is broken when the channel is full [#11047](https://github.com/tikv/tikv/issues/11047)
+    - Fix the issue that CDC adds scan retries frequently due to the Congest error [#11082](https://github.com/tikv/tikv/issues/11082)
+    - Fix the issue that the raft connection is broken when the channel is full [#11047](https://github.com/tikv/tikv/issues/11047)
     - Fix the issue that batch messages are too large in Raft client implementation [#9714](https://github.com/tikv/tikv/issues/9714)
-    - Fix the issue that concurrent leaks in `resolved_ts` [#10965](https://github.com/tikv/tikv/issues/10965)
-    - Fix a panic issue that occurs to coprocessor when response size exceeds 4 GiB [#9012](https://github.com/tikv/tikv/issues/9012)
+    - Fix the issue that some coroutines leak in `resolved_ts` [#10965](https://github.com/tikv/tikv/issues/10965)
+    - Fix a panic issue that occurs to the coprocessor when the size of response exceeds 4 GiB [#9012](https://github.com/tikv/tikv/issues/9012)
      - Fix the issue that snapshot Garbage Collection (GC) misses GC snapshot files when snapshot files cannot be garbage collected [#10813](https://github.com/tikv/tikv/issues/10813)
-     - Fix a panic issue that occurs when processing coprocessor requests times out [#10852](https://github.com/tikv/tikv/issues/10852)
+     - Fix a panic issue caused by timeout when processing Coprocessor requests [#10852](https://github.com/tikv/tikv/issues/10852)
 
 + PD
 
