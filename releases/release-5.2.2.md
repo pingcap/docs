@@ -16,8 +16,8 @@ TiDB version: 5.2.2
 
 + TiDB
 
-    - Show information about SQL statement in the debug log about coprocessor encountering lock [#27718](https://github.com/pingcap/tidb/issues/27718)
-    - Add backup and restore size for TiDB SQL backup/restore task . [#27247](https://github.com/pingcap/tidb/issues/27247)
+    - Show the affected SQL statements in the debug log when the coprocessor encounters a lock, which is helpful in diagnosing problems [#27718](https://github.com/pingcap/tidb/issues/27718)
+    - Support showing the size of the backup and restore data when backing up and restoring data in the SQL logical layer [#27247](https://github.com/pingcap/tidb/issues/27247)
 
 + TiKV
 
@@ -43,23 +43,23 @@ TiDB version: 5.2.2
 
 + TiDB
 
-    - Fix the issue that plan-cache cannot be aware of changes of unsigned flags [#28254](https://github.com/pingcap/tidb/issues/28254)
-    - Fix the wrong partition pruning when some conditions are out of range  [#28233](https://github.com/pingcap/tidb/issues/28233)
-    - Fix the issue that planner may cache invalid plans for joins in some cases [#28087](https://github.com/pingcap/tidb/issues/28087)
-    - Fix wrong index hash join when hash col is enum. [#27893](https://github.com/pingcap/tidb/issues/27893)
-    - Fix a batch client bug that recycle idle connection may block sending requests in some rare cases. [#27688](https://github.com/pingcap/tidb/pull/27688)
-    - Fixed Lightning panic when it failed to perform checksum on target cluster. [#27686](https://github.com/pingcap/tidb/pull/27686)
-    - Fix the wrong result for date_add and date_sub in some cases. [#27232](https://github.com/pingcap/tidb/issues/27232)
-    - Fix wrong result of hour function in vectorized expression [#28643](https://github.com/pingcap/tidb/issues/28643)
-    - Fixed a bug where MySQL 5.1 and older clients had issues authenticating [#27855](https://github.com/pingcap/tidb/issues/27855)
-    - fix auto analyze may get triggered out of specified time. [#28698](https://github.com/pingcap/tidb/issues/28698)
-    - Fix the bug that setting any session variable will make `tidb_snapshot` unwork. [#28683](https://github.com/pingcap/tidb/pull/28683)
-    - Fixed a bug that caused BR get stuck when many missing-peer regions in cluster. [#27534](https://github.com/pingcap/tidb/issues/27534)
-    - Fix unexpected error like `tidb_cast to Int32 is not supported` when unsupported cast is pushed down to TiFlash [#23907](https://github.com/pingcap/tidb/issues/23907)
-    - Fix error message for DECIMAL overflow is just "ERROR 1690 (22003): %s value is out of range in '%s'" [#27964](https://github.com/pingcap/tidb/issues/27964)
-    - Fix bug that MPP node availability detect does not work in some corner cases [#3118](https://github.com/pingcap/tics/issues/3118)
-    - Fix data-race bug when alloc MPP task ID [#27952](https://github.com/pingcap/tidb/issues/27952)
-    - Fix index out of bound bug when empty dual table is remove for MPP query [#28250](https://github.com/pingcap/tidb/issues/28250)
+    - Fix the issue that plan-cache cannot detect changes of unsigned flags [#28254](https://github.com/pingcap/tidb/issues/28254)
+    - Fix the wrong partition pruning when the partition function is out of range  [#28233](https://github.com/pingcap/tidb/issues/28233)
+    - Fix the issue that planner may cache invalid plans for `join` in some cases [#28087](https://github.com/pingcap/tidb/issues/28087)
+    - Fix wrong index hash join when hash column type is enum [#27893](https://github.com/pingcap/tidb/issues/27893)
+    - Fix a batch client bug that recycling idle connection may block sending requests in some rare cases [#27688](https://github.com/pingcap/tidb/pull/27688)
+    - Fixed the TiDB Lightning panic issue when it fails to perform checksum on a target cluster [#27686](https://github.com/pingcap/tidb/pull/27686)
+    - Fix wrong results of the `date_add` and `date_sub` functions in some cases [#27232](https://github.com/pingcap/tidb/issues/27232)
+    - Fix wrong results of the `hour` function in vectorized expression [#28643](https://github.com/pingcap/tidb/issues/28643)
+    - Fix the authenticating issue when connecting to MySQL 5.1 or an older client version  [#27855](https://github.com/pingcap/tidb/issues/27855)
+    - Fix the issue that auto analyze might be triggered out of the specified time when a new index is added [#28698](https://github.com/pingcap/tidb/issues/28698)
+    - Fix a bug that setting any session variable can make `tidb_snapshot` unwork [#28683](https://github.com/pingcap/tidb/pull/28683)
+    - Fix a bug that BR is not working for clusters with many missing-peer regions [#27534](https://github.com/pingcap/tidb/issues/27534)
+    - Fix  the unexpected error like `tidb_cast to Int32 is not supported` when the unsupported `cast` is pushed down to TiFlash [#23907](https://github.com/pingcap/tidb/issues/23907)
+    - Fix the issue that `DECIMAL overflow` is missing in the `%s value is out of range in '%s'`error message  [#27964](https://github.com/pingcap/tidb/issues/27964)
+    - Fix a bug that the availability detection of MPP node does not work in some corner cases [#3118](https://github.com/pingcap/tics/issues/3118)
+    - Fix the`DATA RACE` issue when assigning`MPP task ID` [#27952](https://github.com/pingcap/tidb/issues/27952)
+    - Fix the `INDEX OUT OF RANGE` error for a MPP query after deleting an empty `dual table`. [#28250](https://github.com/pingcap/tidb/issues/28250)
     - Fix the issue of false positive error log `invalid cop task execution summaries length` for MPP queries [#1791](https://github.com/pingcap/tics/issues/1791)
     - Fix the issue of error log `can not found column in Schema column` for MPP queries [#28149](https://github.com/pingcap/tidb/pull/28149)
     - Fix the issue that TiDB might crash when TiFlash shuts down [#28096](https://github.com/pingcap/tidb/issues/28096)
