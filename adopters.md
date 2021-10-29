@@ -34,7 +34,7 @@ This is a list of TiDB adopters in various industries.
 |[Mobike](https://en.wikipedia.org/wiki/Mobike)|Ridesharing|[English](https://pingcap.com/case-studies/tidb-in-mobike)|
 |[Autohome](https://www.crunchbase.com/organization/autohome)|Automobile|[English](https://pingcap.com/case-studies/reduce-real-time-query-latency-from-0.5s-to-0.01s-with-scale-out-htap-database); [Chinese](https://pingcap.com/cases-cn/user-case-qichezhijia/)|
 |[Chehaoduo](https://www.crunchbase.com/organization/guazi-com)|Automobile|[English](https://pingcap.com/case-studies/top-car-trading-platform-chooses-scale-out-database-as-mysql-alternative)|
-|[Xiaomi](https://en.wikipedia.org/wiki/Xiaomi)|Consumer Electronics|[English](https://pingcap.com/case-studies/tidb-in-xiaomi)|
+|[Xiaomi](https://en.wikipedia.org/wiki/Xiaomi)|Consumer Electronics|English [#1](https://pingcap.com/case-studies/tidb-in-xiaomi), [#2](https://pingcap.com/case-studies/a-mysql-alternative-scale-out-database-helps-xiaomi-hyper-growth)|
 |[LY.com](https://www.crunchbase.com/organization/ly-com)|Travel||
 |[Qunar.com](https://www.crunchbase.com/organization/qunar-com)|Travel||
 |[Hulu](https://www.hulu.com)|Entertainment||
@@ -53,6 +53,7 @@ This is a list of TiDB adopters in various industries.
 |[Mobikok](https://www.linkedin.com/company/shenzhen-keke-network-technology-co.-ltd./)|AdTech||
 |[Ninja Van](https://www.crunchbase.com/organization/ninja-van-2)| Logistics|[English](https://pingcap.com/case-studies/choose-a-mysql-alternative-over-vitess-and-crdb-to-scale-out-our-databases-on-k8s)|
 |[ZTO Express](https://www.crunchbase.com/organization/zto-express)| Logistics|[English](https://pingcap.com/case-studies/why-we-migrated-from-exadata-to-a-scale-out-htap-database-for-near-real-time-analytics); [Chinese](https://pingcap.com/cases-cn/user-case-zto-express/)|
+|[JD.com](https://en.wikipedia.org/wiki/JD.com)|Logistics|[English](https://pingcap.com/case-studies/8x-system-performance-boost-why-we-migrated-from-mysql-to-newsql-database); [Chinese](https://pingcap.com/zh/case/user-case-jdl)|
 |[G7 Networks](https://www.crunchbase.com/organization/g7)| Logistics||
 |[Hive-Box](http://www.fcbox.com/en/pc/index.html#/)|Logistics||
 |[NetEase Games](https://www.linkedin.com/company/netease-games)|Gaming|[English](https://pingcap.com/case-studies/why-we-chose-tidb-over-other-mysql-based-and-newsql-storage-solutions); [Chinese](https://pingcap.com/cases-cn/user-case-wangyihuyu/)|
@@ -65,6 +66,7 @@ This is a list of TiDB adopters in various industries.
 |[SEA group](https://sea-group.org/?lang=en)|Gaming||
 |[Zhaopin.com](https://www.crunchbase.com/organization/zhaopin)|Recruiting||
 |[BIGO](https://www.crunchbase.com/organization/bigo-technology)|Live Streaming|[English](https://pingcap.com/case-studies/why-we-chose-an-htap-database-over-mysql-for-horizontal-scaling-and-complex-queries/); [Chinese](https://pingcap.com/cases-cn/user-case-bigo/)|
+|[Huya Live](https://en.wikipedia.org/wiki/Huya_Live)|Live Streaming|[English](https://pingcap.com/case-studies/how-we-scale-out-databases-and-get-big-data-queries-6x-faster-with-a-mysql-alternative); [Chinese](https://pingcap.com/zh/case/user-case-huya)|
 |[Panda.tv](https://www.crunchbase.com/organization/panda-tv)|Live Streaming||
 |[Phoenix New Media](https://www.crunchbase.com/organization/phoenix-new-media)|Media||
 |[Tencent OMG](https://en.wikipedia.org/wiki/Tencent)|Media||
