@@ -35,7 +35,7 @@ TiDB version: 5.2.2
     + TiCDC
     - Reduce the default value of the Kafka sink configuration item `MaxMessageBytes` from 64 MB to 1 MB to fix the issue that large messages are rejected by the Kafka Broker [#3104](https://github.com/pingcap/ticdc/pull/3104)
     - Reduce memory usage in the relpication pipeline [#2553](https://github.com/pingcap/ticdc/issues/2553)[#3037](https://github.com/pingcap/ticdc/pull/3037) [#2726](https://github.com/pingcap/ticdc/pull/2726) 
-    - Optimize monitoring items and alert rules to improve observability of synchronous links, memory GC, and stock data scanning processes [#2735](https://github.com/pingcap/ticdc/pull/2735) [#1606](https://github.com/pingcap/ticdc/issues/1606) [#3000](https://github.com/pingcap/ticdc/pull/3000 [#2985](https://github.com/pingcap/ticdc/issues/2985) [#2156](https://github.com/pingcap/ticdc/issues/2156)
+    - Optimize monitoring items and alert rules to improve observability of synchronous links, memory GC, and stock data scanning processes [#2735](https://github.com/pingcap/ticdc/pull/2735) [#1606](https://github.com/pingcap/ticdc/issues/1606) [#3000](https://github.com/pingcap/ticdc/pull/3000) [#2985](https://github.com/pingcap/ticdc/issues/2985) [#2156](https://github.com/pingcap/ticdc/issues/2156)
     - When the sync task status is normal, no more historical error messages are displayed to avoid misleading users [#2242](https://github.com/pingcap/ticdc/issues/2242)
     
 ## Bug Fixes
@@ -114,4 +114,4 @@ TiDB version: 5.2.2
 
     + TiDB Binlog
 
-       - Fix the issue that when most tables are filtered out, checkpoint can not be updated under some special load [#1075](https://github.com/pingcap/tidb-binlog/pull/1075)
+        - Fix the issue that when most tables are filtered out, checkpoint can not be updated under some special load [#1075](https://github.com/pingcap/tidb-binlog/pull/1075)
