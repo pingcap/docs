@@ -1,15 +1,15 @@
 ---
-title: Use DM to Migrate Sharded Tables (within 1 TB)
-summary: Introduces how to use DM to migrate sharded tables (within 1 TB).
+title: Consolidate MySQL Shards into TiDB (up to 1 TiB) 
+summary: Introduces how to consolidate MySQL shards into TiDB (up to 1 TiB).
 ---
 
 # Consolidate MySQL Shards into TiDB (up to 1 TiB)
 
-If you want to merge and migrate multiple MySQL database instances upstream to one TiDB database downstream, and the amount of data is not too large (for example, the sum of all sharded tables is less than 1 TB), you can use DM to migrate sharded tables. Through examples in this article, you can learn the operation steps, precautions, and troubleshooting of the migration.
+If you want to merge and migrate multiple MySQL database instances upstream to one TiDB database downstream, and the amount of data is not too large (for example, the sum of all sharded tables is less than 1 TiB), you can use DM to migrate sharded tables. Through examples in this article, you can learn the operation steps, precautions, and troubleshooting of the migration.
 
-This document applies to migration of sharded tables within 1 TB in total.
+This document applies to migration of sharded tables within 1 TiB in total.
 
-If you want to migrate sharded tables with a total of more than 1 TB of data, it will take a long time by using DM. It is recommended that you follow the operation introduced in [Using Dumpling and TiDB Lightning to migrate sharded table data](/migrate-from-mysql-shard-merge-using-lightning.md) to migrate data larger than 1 TB.
+If you want to migrate sharded tables with a total of more than 1 TiB of data, it will take a long time by using DM. It is recommended that you follow the operation introduced in [Using Dumpling and TiDB Lightning to migrate sharded table data](/migrate-from-mysql-shard-merge-using-lightning.md) to migrate data larger than 1 TiB.
 
 ## Migration Scenarios
 
@@ -334,7 +334,6 @@ block-allow-list:
 
 ## Step 3: Start the task
 
-
 In order to spot configuration errors in the data migration task in advance, DM provides the [Pre-check](https://docs.pingcap.com/tidb-data-migration/stable/precheck) function. When data migration starts, DM will automatically check related permissions and configurations. You can also use the `check-task` command to manually check whether the configurations of the upstream MySQL instance meet the requirements.
 
 Use the `dmctl` command to start the migration task: 
@@ -387,9 +386,8 @@ You can also check the DM running status and related errors through the log file
 
 ## See also
 
-- [Use Dumpling and TiDB Lightning to Migrate Sharded Tables (Larger than 1 TB)](/migrate-from-mysql-shard-merge-using-lightning.md)。
+- [Use Dumpling and TiDB Lightning to Migrate Sharded Tables (Larger than 1 TiB)](/migrate-from-mysql-shard-merge-using-lightning.md)。
 - [Merge and Migrate Data from Sharded Tables](https://docs.pingcap.com/tidb-data-migration/stable/feature-shard-merge)
 - [Best Practices of Data Migration in the Shard Merge Scenario](https://docs.pingcap.com/tidb-data-migration/stable/shard-merge-best-practices)
 - [Handle Errors](https://docs.pingcap.com/tidb-data-migration/stable/error-handling)
 - [FAQ](https://docs.pingcap.com/tidb-data-migration/stable/faq)
-
