@@ -336,7 +336,6 @@ block-allow-list:
 
 ## Step 3: Start the task
 
-为了提前发现数据迁移任务的一些配置错误，DM 中增加了[前置检查](https://docs.pingcap.com/zh/tidb-data-migration/stable/precheck)功能，在开始数据迁移的时候，DM 会自动检查相关权限和配置。你也可以使用 `check-task` 命令手动检查上游 MySQL 实例的配置是否满足要求。
 
 In order to spot configuration errors in the data migration task in advance, DM provides the [Pre-check](https://docs.pingcap.com/tidb-data-migration/stable/precheck) function. When data migration starts, DM will automatically check related permissions and configurations. You can also use the `check-task` command to manually check whether the configurations of the upstream MySQL instance meet the requirements.
 
