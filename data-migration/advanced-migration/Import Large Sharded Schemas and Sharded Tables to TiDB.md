@@ -1,15 +1,15 @@
 ---
-title: Import Large Sharded Schemas and Sharded Tables to TiDB (>1 TB)
-summary: Use Dumpling and TiDB Lightning to merge and import sharded schemas and sharded tables into TiDB. The method described in this article is suitable for scenarios where the total amount of imported data is greater than 1 TB.
+title: Import Large Sharded Schemas and Sharded Tables to TiDB (>1 TiB)
+summary: Use Dumpling and TiDB Lightning to merge and import sharded schemas and sharded tables into TiDB. The method described in this article is suitable for scenarios where the total amount of imported data is greater than 1 TiB.
 ---
 
-# Import Large Sharded Schemas and Sharded Tables to TiDB (>1 TB)
+# Import Large Sharded Schemas and Sharded Tables to TiDB (>1 TiB)
 
-If the total size of the sharded tables is large (for example, greater than 1 TB) and allows the TiDB cluster to suspend other business writes during the migration, then you can use TiDB Lightning to quickly merge and import the sharded table data. After import, you can also choose whether to use TiDB DM for incremental data synchronization based on your business needs. 
+If the total size of the sharded tables is large (for example, greater than 1 TiB) and allows the TiDB cluster to suspend other business writes during the migration, then you can use TiDB Lightning to quickly merge and import the sharded table data. After import, you can also choose whether to use TiDB DM for incremental data synchronization based on your business needs. 
 
 This document walks you through the procedure of how to import large sharded schemas and sharded tables.
 
-If the data size of the sharded tables is under 1 TB, you can follow the procedure described in [Migrate Sharded Schemas and Tables to TiDB]( https://docs.pingcap.com/tidb-data-migration/stable/usage-scenario-shard-merge), which supports both full and incremental import.
+If the data size of the sharded tables is under 1 TiB, you can follow the procedure described in [Migrate Sharded Schemas and Tables to TiDB]( https://docs.pingcap.com/tidb-data-migration/stable/usage-scenario-shard-merge), which supports both full and incremental import.
 
 The following diagram shows how to import sharded schemas and sharded tables into TiDB using Dumpling and TiDB Lightning.
 
