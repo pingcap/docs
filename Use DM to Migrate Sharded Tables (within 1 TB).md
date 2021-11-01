@@ -3,7 +3,7 @@ title: Use DM to Migrate Sharded Tables (within 1 TB)
 summary: Introduces how to use DM to migrate sharded tables (within 1 TB).
 ---
 
-# Use DM to Migrate Sharded Tables (within 1 TB)
+# Consolidate MySQL Shards into TiDB (up to 1 TiB)
 
 If you want to merge and migrate multiple MySQL database instances upstream to one TiDB database downstream, and the amount of data is not too large (for example, the sum of all sharded tables is less than 1 TB), you can use DM to migrate sharded tables. Through examples in this article, you can learn the operation steps, precautions, and troubleshooting of the migration.
 
@@ -46,14 +46,10 @@ Target schemas and tables：
 
 Before starting the migration, complete the following tasks:
 
-- Deploy a DM cluster
+- [Deploy a DM cluster](https://docs.pingcap.com/tidb-data-migration/stable/deploy-a-dm-cluster-using-tiup)
 - Get upstream and downstream database permissions
 - Check conflicts in the sharded tables
 - Understand the basic functions of DM
-
-### Deploy a DM cluster
-
-You can deploy a DM cluster in a variety of ways. Currently, it is recommended to use TiUP to deploy DM clusters. For the deployment method, see [Deploy DM cluster using TiUP](https://docs.pingcap.com/tidb-data-migration/stable/deploy-a-dm-cluster-using-tiup).
 
 ### Get upstream and downstream database permissions
 
@@ -212,7 +208,9 @@ For security concerns, it is recommended to use an encrypted MySQL access passwo
 
 Take the password "123456" as an example:
 
-```
+{{< copyable "shell-regular" >}}
+
+```shell
 tiup dmctl --encrypt "123456"
 ```
 
