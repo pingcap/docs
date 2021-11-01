@@ -103,7 +103,7 @@ region-concurrency = 40
 
 # Logging
 level = "info"
-# The directory to which the log is output. If it is empty (default), the file is saved to /tmp/lightning.log.{timestamp}. If you want the file to be saved to the system standard output, set it to "-".
+# The directory to which the log is output. If it is empty (default), the file is saved to /tmp/lightning.log.{timestamp}. If you want the logs to be written to the system standard output, set it to "-".
 file = "tidb-lightning.log"
 
 [checkpoint]
