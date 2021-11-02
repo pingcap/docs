@@ -275,7 +275,7 @@ compact = false
 # - "optional": Perform `ANALYZE TABLE <table>`, but will ignore any error if checksum fails.
 # - "required": Perform `ANALYZE TABLE <table>`. If it fails, TiDB Lightning will exit with failure.
 # The default value is "optional". Note that since v4.0.8, the default value has changed from "true" to "optional". 
-# For backward compatibility, bool values "true" and "false" is also allowed for this field. 
+# For backward compatibility, bool values "true" and "false" are also allowed for this field. 
 # "true" is equivalent to "required" and "false" is equivalent to "off".
 analyze = optional
 
