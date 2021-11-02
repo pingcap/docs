@@ -31,7 +31,7 @@ SET  GLOBAL tidb_distsql_scan_concurrency = 10;
 >
 > Larger values do not always yield better performance. It is also important to consider the number of concurrent connections that are executing statements, because most settings apply to each connection.
 >
-> The 'unit' can be useful in determining safe values:
+> Consider the 'unit' of a variable when you determine safe values:
 >
 > * For threads, safe values are typically up to the number of CPU cores.
 > * For bytes, safe values are typically less than the amount of system memory.
