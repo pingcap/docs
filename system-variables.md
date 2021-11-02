@@ -29,7 +29,7 @@ SET  GLOBAL tidb_distsql_scan_concurrency = 10;
 >
 > TiDB differs from MySQL in that `GLOBAL` scoped variables **persist** through TiDB server restarts. Additionally, TiDB presents several MySQL variables as both readable and settable. This is required for compatibility, because it is common for both applications and connectors to read MySQL variables. For example, JDBC connectors both read and set query cache settings, despite not relying on the behavior.
 
-> **Tip:**
+> **Note:**
 >
 > Larger values will not always yield better performance. It is also important to consider the number of concurrent connections that are executing statements, as most settings apply per connection.
 >
