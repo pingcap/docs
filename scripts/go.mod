@@ -14,14 +14,16 @@ require (
 	github.com/google/btree v1.0.1 // indirect
 	github.com/google/uuid v1.3.0 // indirect
 	github.com/grpc-ecosystem/go-grpc-middleware v1.3.0 // indirect
+	github.com/hypnoglow/gormzap v0.3.0 // indirect
+	github.com/jinzhu/gorm v1.9.12 // indirect
 	github.com/opentracing/opentracing-go v1.2.0 // indirect
 	github.com/pingcap/failpoint v0.0.0-20210918120811-547c13e3eb00 // indirect
-	github.com/pingcap/kvproto v0.0.0-20211021064456-d62ddcee4ccd // indirect
+	github.com/pingcap/kvproto v0.0.0-20211029081837-3c7bd947cf9b // indirect
 	github.com/pingcap/parser v0.0.0-20211004012448-687005894c4e // indirect
-	github.com/pingcap/tidb v1.1.0-beta.0.20211023132847-efa94595c071 // indirect
-	github.com/pingcap/tidb-tools v5.2.1+incompatible // indirect
-	github.com/pingcap/tidb/parser v0.0.0-20211023132847-efa94595c071 // indirect
-	github.com/pingcap/tipb v0.0.0-20211008080435-3fd327dfce0e // indirect
+	github.com/pingcap/tidb v1.1.0-beta.0.20211101012250-a9c249feb1d1 // indirect
+	github.com/pingcap/tidb-tools v5.2.2+incompatible // indirect
+	github.com/pingcap/tidb/parser v0.0.0-20211101012250-a9c249feb1d1 // indirect
+	github.com/pingcap/tipb v0.0.0-20211028032111-4de152204fb8 // indirect
 	github.com/prometheus/common v0.32.1 // indirect
 	github.com/prometheus/procfs v0.7.3 // indirect
 	github.com/shirou/gopsutil v3.21.9+incompatible // indirect
@@ -30,9 +32,9 @@ require (
 	github.com/uber/jaeger-client-go v2.29.1+incompatible // indirect
 	go.etcd.io/etcd v3.3.27+incompatible // indirect
 	go.uber.org/atomic v1.9.0 // indirect
-	golang.org/x/net v0.0.0-20211020060615-d418f374d309 // indirect
-	golang.org/x/sys v0.0.0-20211023085530-d6a326fbbf70 // indirect
-	google.golang.org/genproto v0.0.0-20211021150943-2b146023228c // indirect
+	golang.org/x/net v0.0.0-20211029224645-99673261e6eb // indirect
+	golang.org/x/sys v0.0.0-20211031064116-611d5d643895 // indirect
+	google.golang.org/genproto v0.0.0-20211029142109-e255c875f7c7 // indirect
 	google.golang.org/grpc v1.41.0 // indirect
 )
 

@@ -118,7 +118,7 @@ func printWarning(sv *variable.SysVar) string {
 
 func printUnits(sv *variable.SysVar) string {
 	switch sv.Name {
-	case variable.TiDBMemQuotaApplyCache, variable.TiDBMemQuotaQuery, variable.TiDBQueryLogMaxLen, variable.TiDBBCJThresholdSize, variable.TMPTableSize, variable.MaxAllowedPacket:
+	case variable.TiDBMemQuotaApplyCache, variable.TiDBMemQuotaQuery, variable.TiDBQueryLogMaxLen, variable.TiDBBCJThresholdSize, variable.MaxAllowedPacket:
 		return "- Unit: Bytes\n"
 	case variable.TiDBSlowLogThreshold, variable.MaxExecutionTime, variable.TiDBDDLSlowOprThreshold:
 		return "- Unit: Milliseconds\n"
@@ -839,8 +839,6 @@ func getExtendedDescription(sv *variable.SysVar) string {
 		return "- This variable is used to control whether the optimizer estimates the number of rows based on column order correlation"
 	case variable.TiDBEnableAutoIncrementInGenerated:
 		return "- This variable is used to determine whether to include the `AUTO_INCREMENT` columns when creating a generated column or an expression index."
-	case variable.TMPTableSize:
-		return "- Indicates the maximum size of a temporary table."
 	case variable.Timestamp:
 		return "- A non-empty value of this variable indicates the UNIX epoch that is used as the timestamp for `CURRENT_TIMESTAMP()`, `NOW()`, and other functions. This variable might be used in data restore or replication."
 	case "ssl_key":
