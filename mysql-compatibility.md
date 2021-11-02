@@ -26,7 +26,8 @@ However, some features of MySQL are not supported. This could be because there i
 + User-defined functions
 + `FOREIGN KEY` constraints [#18209](https://github.com/pingcap/tidb/issues/18209)
 + Temporary tables [#1248](https://github.com/pingcap/tidb/issues/1248)
-+ `FULLTEXT`/`SPATIAL` functions and indexes [#1793](https://github.com/pingcap/tidb/issues/1793)
++ `FULLTEXT` syntax and indexes [#1793](https://github.com/pingcap/tidb/issues/1793)
++ `SPATIAL` functions, data types and indexes [#6347](https://github.com/pingcap/tidb/issues/6347)
 + Character sets other than `utf8`, `utf8mb4`, `ascii`, `latin1` and `binary`
 + SYS schema
 + Optimizer trace
