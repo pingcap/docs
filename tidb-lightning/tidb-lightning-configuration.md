@@ -157,8 +157,6 @@ no-schema = false
 #  - auto:    (default) automatically detects whether the schema is UTF-8 or
 #             GB-18030. An error is reported if the encoding is neither.
 #  - binary:  do not try to decode the schema files
-# Note that the *data* files are always parsed as binary regardless of
-# schema encoding.
 character-set = "auto"
 
 # Specifies the character set of the source data file. Lightning converts the source file from the specified character set to UTF-8 encoding when importing.
