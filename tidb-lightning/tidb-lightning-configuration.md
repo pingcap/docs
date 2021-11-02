@@ -252,7 +252,7 @@ max-allowed-packet = 67_108_864
 # The following options are available:
 # - "off": Do not perform checksum.
 # - "optional": Perform admin checksum, but will ignore any error if checksum fails.
-# - "required". Perform admin checksum. If checksum fails, TiDB Lightning will exit with failure.
+# - "required": Perform admin checksum. If checksum fails, TiDB Lightning will exit with failure.
 # The default value is "required". Note: From v4.0.8, the default value has changed from "true" to "required". 
 # For backward compatibility, bool values `true` and `false` is also allowed for this field. 
 # `true` is equivalent to "required" and `false` is equivalent to "off".
@@ -272,7 +272,7 @@ compact = false
 # The following options are available:
 # - "off": Do not perform `ANALYZE TABLE <table>`.
 # - "optional": Perform `ANALYZE TABLE <table>`, but will ignore any error if checksum fails.
-# - "required". Perform `ANALYZE TABLE <table>`. If it fails, TiDB Lightning will exit with failure.
+# - "required": Perform `ANALYZE TABLE <table>`. If it fails, TiDB Lightning will exit with failure.
 # The default value is "optional". Note: From v4.0.8, the default value has changed from "true" to "optional". 
 # For backward compatibility, bool values `true` and `false` is also allowed for this field. 
 # `true` is equivalent to "required" and `false` is equivalent to "off".
