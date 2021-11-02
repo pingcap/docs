@@ -253,7 +253,7 @@ max-allowed-packet = 67_108_864
 # - "off": Do not perform checksum.
 # - "optional": Perform admin checksum, but will ignore any error if checksum fails.
 # - "required": Perform admin checksum. If checksum fails, TiDB Lightning will exit with failure.
-# The default value is "required". Note: From v4.0.8, the default value has changed from "true" to "required". 
+# The default value is "required". Note that since v4.0.8, the default value has changed from "true" to "required". 
 # For backward compatibility, bool values `true` and `false` is also allowed for this field. 
 # `true` is equivalent to "required" and `false` is equivalent to "off".
 checksum = required
