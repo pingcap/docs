@@ -63,6 +63,15 @@ table-concurrency = 6
 # medium, this value might need to be adjusted for optimal performance.
 io-concurrency = 5
 
+# maximum number of non-fatal errors to tolerate before stopping Lightning.
+# Non-fatal errors are those that are localized to a few rows, and ignoring those rows allow the import process to continue.
+# Setting this to N means Lightning will stop as soon as possible when the (N+1)-th error is encountered.
+# The skipped rows will be inserted to tables inside the "task info" schema on the target TiDB, which can be configured below.
+max-error = 0
+# task-info-schema-name is the name of the schema/database storing human-readable Lightning execution result.
+# set this to empty string to disable error recording.
+#task-info-schema-name = 'lightning_task_info'
+
 [security]
 # Specifies certificates and keys for TLS connections within the cluster.
 # Public certificate of the CA. Leave empty to disable TLS.
@@ -106,7 +115,16 @@ addr = "172.16.31.10:8287"
 #  - replace: use new entry to replace the existing entry
 #  - ignore: keep the existing entry, and ignore the new entry
 #  - error: report error and quit the program
-# on-duplicate = "replace"
+#on-duplicate = "replace"
+# Whether to detect and resolve duplicate records (unique key conflict) when the backend is 'local'.
+# Current supports three resolution algorithms:
+#  - record: only records duplicate records to `lightning_task_info.conflict_error_v1` table on the target TiDB. Note that this
+#    required the version of target TiKV version is no less than v5.2.0, otherwise it will fallback to 'none'.
+#  - none: doesn't detect duplicate records, which has the best performance of the three algorithms, but probably leads to
+#    inconsistent data in the target TiDB.
+#  - remove: records all duplicate records like the 'record' algorithm and remove all duplicate records to ensure a consistent
+#    state in the target TiDB.
+#duplicate-resolution = 'record'
 # The size limit of generated SST files in the "local" backend. It is better
 # to be the same as the Region size of TiKV (96 MB by default).
 # region-split-size = 100_663_296
