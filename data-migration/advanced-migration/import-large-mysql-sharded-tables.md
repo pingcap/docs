@@ -7,7 +7,7 @@ summary: Use Dumpling and TiDB Lightning to merge and import sharded schemas and
 
 If the total size of the sharded tables is large (for example, greater than 1 TiB) and allows the TiDB cluster to suspend other business writes during the migration, then you can use TiDB Lightning to quickly merge and import the sharded table data. After import, you can also choose whether to use TiDB DM for incremental data synchronization based on your business needs. 
 
-This document walks you through the procedure of how to import large sharded schemas and sharded tables.
+This document walks you through the procedure of how to import large sharded schemas and sharded tables into TiDB.
 
 If the data size of the sharded tables is under 1 TiB, you can follow the procedure described in [Migrate Sharded Schemas and Tables to TiDB]( https://docs.pingcap.com/tidb-data-migration/stable/usage-scenario-shard-merge), which supports both full and incremental import.
 
@@ -44,7 +44,7 @@ select table_schema,sum(data_length)/1024/1024 as data_length,sum(index_length)/
 
 ### Disk space requirements for the target TiKV cluster
 
-**Disk Space**: The target TiKV cluster must have enough space to store the upcoming imported data. In addition to the [standard hardware configuration](https://docs.pingcap.com/tidb/stable/hardware-and-software-requirements), the total storage space of the target TiKV cluster must be larger than **data source size × [number of replicas]( https://docs.pingcap.com/tidb/stable/deploy-and-maintain-faq#is-the-number-of-replicas-in-each-region-configurable-if-yes-how-to-configure-it) × 2**. For example, if the cluster uses 3 copies by default, then the total storage space needs to be more than 6 times the size of the data source. 
+**Disk Space**: The target TiKV cluster must have enough space to store the upcoming imported data. In addition to the [standard hardware configuration](https://docs.pingcap.com/tidb/stable/hardware-and-software-requirements), the total storage space of the target TiKV cluster must be larger than **data source size × [number of replicas](/faq/deploy-and-maintain-faq.md#is-the-number-of-replicas-in-each-region-configurable-if-yes-how-to-configure-it.) × 2**. For example, if the cluster uses 3 copies by default, then the total storage space needs to be more than 6 times the size of the data source. 
 
 At first glance, it may look confusing why there is a “x2” in the formula. In fact, it is based on the following estimated space:
 
