@@ -38,7 +38,6 @@ SET  GLOBAL tidb_distsql_scan_concurrency = 10;
 > * For threads, safe values are typically up to the number of CPU cores.
 > * For bytes, safe values are typically less than the amount of system memory.
 > * For time, pay attention that the unit might be seconds or milliseconds.
-
 >
 > Variables using the same unit might compete for the same set of resources.
 
