@@ -1552,13 +1552,13 @@ This variable is an alias for _transaction_isolation_.
 
 - Scope: NONE
 - Default value: (string)
-- This variable returns the OS that TiDB is running on.
+- This variable returns the name of the OS on which TiDB is running.
 
 ### version_compile_machine
 
 - Scope: NONE
 - Default value: (string)
-- This variable returns the CPU architecture that TiDB is running on.
+- This variable returns the name of the CPU architecture on which TiDB is running.
 
 ### wait_timeout
 
