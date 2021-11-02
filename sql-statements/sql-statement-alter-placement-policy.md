@@ -5,6 +5,12 @@ summary: The usage of ALTER PLACEMENT POLICY in TiDB.
 
 # ALTER PLACEMENT POLICY
 
+> **Warning:**
+>
+> Placement Rules in SQL is an experimental feature. Syntax may change before its final release, and there may be bugs.
+> If you understand the risks, run `SET GLOBAL tidb_enable_alter_placement = 1;` to enable this experiment.
+
+
 `ALTER PLACEMENT POLICY` is used to modify existing placement policies that have previously been created. All the tables and partitions which use the placement policy will automatically be updated.
 
 ## Synopsis

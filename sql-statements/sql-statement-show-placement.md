@@ -5,6 +5,11 @@ summary: The usage of SHOW PLACEMENT in TiDB.
 
 # SHOW PLACEMENT
 
+> **Warning:**
+>
+> Placement Rules in SQL is an experimental feature. Syntax may change before its final release, and there may be bugs.
+> If you understand the risks, run `SET GLOBAL tidb_enable_alter_placement = 1;` to enable this experiment.
+
 `SHOW PLACEMENT` summarizes all placement options from direct placement and placement policies, and presents them in canonical form.
 
 ## Synopsis

@@ -5,6 +5,11 @@ summary: The usage of CREATE PLACEMENT POLICY in TiDB.
 
 # CREATE PLACEMENT POLICY
 
+> **Warning:**
+>
+> Placement Rules in SQL is an experimental feature. Syntax may change before its final release, and there may be bugs.
+> If you understand the risks, run `SET GLOBAL tidb_enable_alter_placement = 1;` to enable this experiment.
+
 `CREATE PLACEMENT POLICY` is used to create a named placement policy that can later be assigned to tables, partitions or database schemas.
 
 ## Synopsis

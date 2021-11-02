@@ -1,13 +1,14 @@
 ---
-title: Placement Rules
+title: Placement Rules in SQL
 summary: Learn how to schedule placement of tables and partitions.
 ---
 
-# Placement Rules
+# Placement Rules in SQL
 
 > **Warning:**
 >
 > Placement Rules in SQL is an experimental feature. Syntax may change before its final release, and there may be bugs.
+> If you understand the risks, run `SET GLOBAL tidb_enable_alter_placement = 1;` to enable this experiment.
 
 Placement Rules allow you to configure where data will be stored in a TiKV cluster. This is useful for scenarios including optimizing a high availability strategy, ensuring that local copies of data will be available for local stale reads, and adhering to compliance requirements.
 
@@ -47,13 +48,11 @@ A `PLACEMENT POLICY` is not associated with any database schema and has global s
 |----------------------------|------------------------------------------------------------------------------------------------|
 | `PRIMARY_REGION`           | Raft leaders will be placed in stores which have the `region` label that match this value.     |
 | `REGIONS`                  | Raft followers will be placed in stores which have the `region` label that matches this value. |
-| `SCHEDULE`                 | The strategy used to schedule the placement of followers. Either `EVEN` or `MAJORITY_IN_PRIMARY`. |
+| `SCHEDULE`                 | The strategy used to schedule the placement of followers. Either `EVEN` (default) or `MAJORITY_IN_PRIMARY`. |
 | `FOLLOWERS`                | The number of followers. For example, `FOLLOWERS=2` means that there will be 3 copies of the data (2 followers and 1 leader). |
-| `LEARNERS`                 | The number of learners, such as TiFlash nodes.                                                 |
 | **Advanced configuration**                                                                                                  |
 | `CONSTRAINTS`              | A list of constraints that apply to all roles. For example, `CONSTRAINTS="[+disk=ssd]`.        |
 | `FOLLOWER_CONSTRAINTS`     | A list of constraints that only apply to followers.                                            |
-| `LEARNER_CONSTRAINTS`      | A list of constraints that only apply to learners.                                             |
 
 ## Examples
 
@@ -75,7 +74,7 @@ CREATE PLACEMENT POLICY eastandwest PRIMARY_REGION="us-east-1" REGIONS="us-east-
 CREATE TABLE t1 (a INT) PLACEMENT POLICY=eastandwest;
 ```
 
-The `SCHEDULE` instructs TiDB how to balance the followers. `MAJORITY_IN_PRIMARY` means that enough followers should be placed in the primary region (`us-east-1`) that quorum can be achieved. This helps performance at the expense of availability should the primary region completely fail. If this is not desired, the schedule of `EVEN` can be used to ensure a balance of followers in all regions.
+The `SCHEDULE` instructs TiDB how to balance the followers. The default schedule of `EVEN` ensures a balance of followers in all regions. The schedule `MAJORITY_IN_PRIMARY` can be used to ensure that enough followers are placed in the primary region (`us-east-1`) that quorum can be achieved. This helps provide lower latency transactions at the expense of availability should the primary region completely fail.
 
 ### Assigning placement to a partitioned table
 
