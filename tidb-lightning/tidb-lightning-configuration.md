@@ -144,10 +144,6 @@ addr = "172.16.31.10:8287"
 # the data source.
 read-block-size = 65536 # Byte (default = 64 KB)
 
-# Minimum size (in terms of source data file) of each batch of import.
-# TiDB Lightning splits a large table into multiple data engine files according to this size.
-# batch-size = 107_374_182_400 # Byte (default = 100 GB)
-
 # The engine file needs to be imported sequentially. Due to parallel processing,
 # multiple data engines will be imported at nearly the same time, and this
 # creates a queue and wastes resources. Therefore, TiDB Lightning slightly
