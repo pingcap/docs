@@ -19,25 +19,25 @@ CreatePolicyStmt ::=
     "CREATE" "PLACEMENT" "POLICY" IfNotExists PolicyName PlacementOptionList
 
 PolicyName ::=
-	Identifier
+    Identifier
 
 PlacementOptionList ::=
-	DirectPlacementOption
-|	PlacementOptionList DirectPlacementOption
-|	PlacementOptionList ',' DirectPlacementOption
+    DirectPlacementOption
+|   PlacementOptionList DirectPlacementOption
+|   PlacementOptionList ',' DirectPlacementOption
 
 DirectPlacementOption ::=
-	"PRIMARY_REGION" EqOpt stringLit
-|	"REGIONS" EqOpt stringLit
-|	"FOLLOWERS" EqOpt LengthNum
-|	"VOTERS" EqOpt LengthNum
-|	"LEARNERS" EqOpt LengthNum
-|	"SCHEDULE" EqOpt stringLit
-|	"CONSTRAINTS" EqOpt stringLit
-|	"LEADER_CONSTRAINTS" EqOpt stringLit
-|	"FOLLOWER_CONSTRAINTS" EqOpt stringLit
-|	"VOTER_CONSTRAINTS" EqOpt stringLit
-|	"LEARNER_CONSTRAINTS" EqOpt stringLit
+    "PRIMARY_REGION" EqOpt stringLit
+|   "REGIONS" EqOpt stringLit
+|   "FOLLOWERS" EqOpt LengthNum
+|   "VOTERS" EqOpt LengthNum
+|   "LEARNERS" EqOpt LengthNum
+|   "SCHEDULE" EqOpt stringLit
+|   "CONSTRAINTS" EqOpt stringLit
+|   "LEADER_CONSTRAINTS" EqOpt stringLit
+|   "FOLLOWER_CONSTRAINTS" EqOpt stringLit
+|   "VOTER_CONSTRAINTS" EqOpt stringLit
+|   "LEARNER_CONSTRAINTS" EqOpt stringLit
 ```
 
 ## Examples

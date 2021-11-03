@@ -10,7 +10,6 @@ summary: The usage of ALTER PLACEMENT POLICY in TiDB.
 > Placement Rules in SQL is an experimental feature. Syntax may change before its final release, and there may be bugs.
 > If you understand the risks, run `SET GLOBAL tidb_enable_alter_placement = 1;` to enable this experiment.
 
-
 `ALTER PLACEMENT POLICY` is used to modify existing placement policies that have previously been created. All the tables and partitions which use the placement policy will automatically be updated.
 
 ## Synopsis
@@ -20,25 +19,25 @@ AlterPolicyStmt ::=
     "ALTER" "PLACEMENT" "POLICY" IfExists PolicyName PlacementOptionList
 
 PolicyName ::=
-	Identifier
+    Identifier
 
 PlacementOptionList ::=
-	DirectPlacementOption
-|	PlacementOptionList DirectPlacementOption
-|	PlacementOptionList ',' DirectPlacementOption
+    DirectPlacementOption
+|   PlacementOptionList DirectPlacementOption
+|   PlacementOptionList ',' DirectPlacementOption
 
 DirectPlacementOption ::=
-	"PRIMARY_REGION" EqOpt stringLit
-|	"REGIONS" EqOpt stringLit
-|	"FOLLOWERS" EqOpt LengthNum
-|	"VOTERS" EqOpt LengthNum
-|	"LEARNERS" EqOpt LengthNum
-|	"SCHEDULE" EqOpt stringLit
-|	"CONSTRAINTS" EqOpt stringLit
-|	"LEADER_CONSTRAINTS" EqOpt stringLit
-|	"FOLLOWER_CONSTRAINTS" EqOpt stringLit
-|	"VOTER_CONSTRAINTS" EqOpt stringLit
-|	"LEARNER_CONSTRAINTS" EqOpt stringLit
+    "PRIMARY_REGION" EqOpt stringLit
+|   "REGIONS" EqOpt stringLit
+|   "FOLLOWERS" EqOpt LengthNum
+|   "VOTERS" EqOpt LengthNum
+|   "LEARNERS" EqOpt LengthNum
+|   "SCHEDULE" EqOpt stringLit
+|   "CONSTRAINTS" EqOpt stringLit
+|   "LEADER_CONSTRAINTS" EqOpt stringLit
+|   "FOLLOWER_CONSTRAINTS" EqOpt stringLit
+|   "VOTER_CONSTRAINTS" EqOpt stringLit
+|   "LEARNER_CONSTRAINTS" EqOpt stringLit
 ```
 
 ## Examples

@@ -18,7 +18,7 @@ summary: The usage of SHOW CREATE PLACEMENT POLICY in TiDB.
 "SHOW" "CREATE" "PLACEMENT" "POLICY" PolicyName
 
 PolicyName ::= 
-	Identifier
+    Identifier
 ```
 
 ## Examples

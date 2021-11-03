@@ -90,11 +90,11 @@ CREATE PLACEMENT POLICY northamerica PRIMARY_REGION="us-east-1" REGIONS="us-east
 
 SET tidb_enable_list_partition = 1;
 CREATE TABLE t1 (
-	country VARCHAR(10) NOT NULL,
-    userdata VARCHAR(100) NOT NULL
+  country VARCHAR(10) NOT NULL,
+  userdata VARCHAR(100) NOT NULL
 ) PARTITION BY LIST COLUMNS (country) (
-	PARTITION pEurope VALUES IN ('DE', 'FR', 'GB') PLACEMENT POLICY=europe,
-	PARTITION pNorthAmerica VALUES IN ('US', 'CA', 'MX') PLACEMENT POLICY=northamerica
+  PARTITION pEurope VALUES IN ('DE', 'FR', 'GB') PLACEMENT POLICY=europe,
+  PARTITION pNorthAmerica VALUES IN ('US', 'CA', 'MX') PLACEMENT POLICY=northamerica
 );
 ```
 

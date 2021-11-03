@@ -19,9 +19,9 @@ ShowStmt ::=
     "PLACEMENT" "FOR" ShowPlacementTarget
 
 ShowPlacementTarget ::=
-	DatabaseSym DBName
-|	"TABLE" TableName
-|	"TABLE" TableName "PARTITION" Identifier
+    DatabaseSym DBName
+|   "TABLE" TableName
+|   "TABLE" TableName "PARTITION" Identifier
 ```
 
 ## Examples
