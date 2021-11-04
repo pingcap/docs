@@ -8,7 +8,8 @@ summary: Learn how to schedule placement of tables and partitions.
 > **Warning:**
 >
 > Placement Rules in SQL is an experimental feature. The syntax might change before its GA, and there might also be bugs.
-> If you understand the risks, run `SET GLOBAL tidb_enable_alter_placement = 1;` to enable this experiment.
+>
+> If you understand the risks, you can enable this experiment feature by executing `SET GLOBAL tidb_enable_alter_placement = 1;`.
 
 Placement Rules allow you to configure where data will be stored in a TiKV cluster. This is useful for scenarios including optimizing a high availability strategy, ensuring that local copies of data will be available for local stale reads, and adhering to compliance requirements.
 
