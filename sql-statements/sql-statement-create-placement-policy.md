@@ -74,7 +74,7 @@ This statement is a TiDB extension to MySQL syntax.
 
 ## See also
 
-* [Placement Rules](/placement-rules.md)
+* [Placement Rules in SQL](/placement-rules-in-sql.md)
 * [SHOW PLACEMENT](/sql-statements/sql-statement-show-placement.md)
 * [ALTER PLACEMENT POLICY](/sql-statements/sql-statement-alter-placement-policy.md)
 * [DROP PLACEMENT POLICY](/sql-statements/sql-statement-drop-placement-policy.md)

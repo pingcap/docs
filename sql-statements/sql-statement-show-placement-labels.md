@@ -10,7 +10,7 @@ summary: The usage of SHOW PLACEMENT LABELS in TiDB.
 > Placement Rules in SQL is an experimental feature. Syntax may change before its final release, and there may be bugs.
 > If you understand the risks, run `SET GLOBAL tidb_enable_alter_placement = 1;` to enable this experiment.
 
-`SHOW PLACEMENT LABELS` is used to summarize the labels and values that are available for [placement rules](/placement-rules.md).
+`SHOW PLACEMENT LABELS` is used to summarize the labels and values that are available for Placement Rules.
 
 ## Synopsis
 
@@ -43,6 +43,6 @@ This statement is a TiDB extension to MySQL syntax.
 
 ## See also
 
-* [Placement Rules](/placement-rules.md)
+* [Placement Rules in SQL](/placement-rules-in-sql.md)
 * [SHOW PLACEMENT](/sql-statements/sql-statement-show-placement.md)
 * [CREATE PLACEMENT POLICY](/sql-statements/sql-statement-create-placement-policy.md)

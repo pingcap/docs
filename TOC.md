@@ -431,7 +431,7 @@
     + [Views](/views.md)
     + [Partitioning](/partitioned-table.md)
     + [Character Set and Collation](/character-set-and-collation.md)
-    + [Placement Rules](/placement-rules.md)
+    + [Placement Rules in SQL](/placement-rules-in-sql.md)
     + System Tables
       + [`mysql`](/mysql-schema.md)
       + INFORMATION_SCHEMA
