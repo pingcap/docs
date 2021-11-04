@@ -100,11 +100,11 @@ driver = "file"
 # If the URL is not specified, the TiDB server from the [tidb] section is used to
 # store the checkpoints. You should specify a different MySQL-compatible
 # database server to reduce the load of the target TiDB cluster.
-#dsn = "/tmp/tidb_lightning_checkpoint.pb"
+# dsn = "/tmp/tidb_lightning_checkpoint.pb"
 # Whether to keep the checkpoints after all data are imported. If false, the
 # checkpoints will be deleted. Keeping the checkpoints can aid debugging but
 # will leak metadata about the data source.
-#keep-after-success = false
+# keep-after-success = false
 
 [tikv-importer]
 # Delivery backend, can be "local", "importer" or "tidb".

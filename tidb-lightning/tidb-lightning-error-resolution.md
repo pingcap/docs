@@ -170,7 +170,7 @@ In this example we prepare a data source with some known errors.
     {{ < copyable "shell-regular" > }}
 
     ```sh
-    cat <<EOF > example.t.1.sql
+    cat << EOF >> example.t.1.sql
 
         INSERT INTO t (a, b) VALUES
         (0, NULL),              -- column is NOT NULL
@@ -191,7 +191,7 @@ In this example we prepare a data source with some known errors.
     {{ < copyable "shell-regular" > }}
 
     ```sh
-    cat <<EOF > config.toml
+    cat << EOF >> config.toml
 
         [lightning]
         max-error = 10
