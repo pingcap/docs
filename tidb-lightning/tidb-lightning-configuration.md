@@ -165,7 +165,7 @@ character-set = "auto"
 # - GB18030: Indicates that the source data file uses the GB-18030 encoding.
 # - GBK: The source data file uses GBK encoding (GBK encoding is an extension of the GB-2312 character set, also known as Code Page 936).
 # - binary: Indicates that Lightning does not convert the encoding (by default).
-# Leaving this configuration blank means the default value "binary", that is to say, Lightning does not convert the encoding.
+# If left blank, the default value "binary" is used, that is to say, Lightning does not convert the encoding.
 # Note that Lightning does not predict about the character set of the source data file and only converts the source file and import the data based on this configuration.
 # If the value of this configuration is not the same as the actual encoding of the source data file, a failed import, data loss or data disorder might appear.
 data-character-set = "binary"
