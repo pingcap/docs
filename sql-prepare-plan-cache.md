@@ -14,16 +14,20 @@ The TiDB optimizer handles these two types of queries in the same way: when prep
 
 When the execution plan cache is enabled, in the first execution every `Prepare` statement checks whether the current query can use the execution plan cache, and if the query can use it, then put the generated execution plan into a cache implemented by LRU (Least Recently Used) linked list. In the subsequent `Execute` queries, the execution plan is obtained from the cache and checked for availability. If the check succeeds, the step of generating an execution plan is skipped. Otherwise, the execution plan is regenerated and saved in the cache.
 
-In the current version of TiDB, when the `Prepare` statement meets any of the following conditions, the query cannot use the execution plan cache:
+In the current version of TiDB, if the `Prepare` statement meets any of the following conditions, the query or the plan is not cached:
 
-- The query contains variables other than `?` (including system variables or user-defined variables);
-- The query contains sub-queries;
-- The query contains functions that cannot be cached, such as `current_user()`, `database()`, and `last_insert_id()`;
-- The `Order By` statement of the query contains `?`;
-- The `Group By` statement of the query contains `?`;
-- The `Limit [Offset]` statement of the query contains `?`;
-- The window frame definition of the `Window` function contains `?`;
-- Partition tables are involved in the query.
+- The query contains SQL statements other than `SELECT`, `UPDATE`, `INSERT`, `DELETE`, `Union`, `Intersect`, and `Except`;
+- The query is executed to access partitioned tables or temporary tables, or a table that contains generated columns;
+- The query contains sub-queries, such as `select * from t where a > (select ...)`;
+- The query contains the hint query `ignore_plan_cache`, such as `select /*+ ignore_plan_cache() */ * from t`;
+- The query contains variables other than `?` (including system variables or user-defined variables), such as `select * from t where a>? and b>@x`;
+- The query contains the following functions that cannot be cached: `database()`, `current_user`, `current_role`, `user`, `connection_id`, `last_insert_id`, `row_count`, `version`, and `like`;
+- The `Limit` statement of the query is followed by `?` , such as `Limit ?` and `Limit 10, ?`. Such queries are not cached because the value of `?` has great impact on the queries;
+- The `Order By` statement of the query is followed by `?`, such as `Order By ?`. Such queries are not cached because they sort data based on the specified column and has great impact on the queries. However, if the query is a common one, such as `Order By a+?`, it is cached;
+- The `Group By` statement of the query is followed by `?`, such as `Group By?`. Such queries are not cached because they group data based on the specified column and has great impact on the queries. However, if the query is a common one, such as `Group By a+?`, it is cached;
+- The window frame definition of the `Window` function contains `?`, such as `(partition by year order by sale rows ? preceding)`. Such queries are cached if `?` appears in other positions of the window function;
+- The query contains parameters for comparing `int` and `string`, such as `c_int >= ?` or `c_int in (?, ?)`, in which `?` indicates the type of the string, such as `set @x='123'`. Parameters of the queries are adjusted in each query. To ensure that the query result is compatible with MySQL, such queries are not cached;
+- The plan attempts to access `TiFlash`.
 
 The LRU linked list is designed as a session-level cache because `Prepare` / `Execute` cannot be executed across sessions. Each element of the LRU list is a key-value pair. The value is the execution plan, and the key is composed of the following parts:
 
@@ -39,8 +43,10 @@ After the execution plan cache is obtained from the cache, TiDB first checks whe
 
 After the validation test is passed, the scan range of the execution plan is adjusted according to the current parameter values, and then used to perform data querying.
 
-There are two points worth noting about execution plan caching and query performance:
+There are several points worth noting about execution plan caching and query performance:
 
+- The first `Execute` (no cache plan yet) is affected by existing SQL Bindings. Cached plans are not affected by new SQL Bindings. Similarly, cached plans are not affected by changes in statistics, optimization rules, and blacklist pushdown by expressions.
+- When restarting a TiDB instance (for example, online rolling upgrade of a TiDB cluster), the `Prepare` statement gets lost. `Prepared Statement not found` is returned if executing `execute stmt...`. To address the error, execute `prepare stmt ...` again.
 - Considering that the parameters of `Execute` are different, the execution plan cache prohibits some aggressive query optimization methods that are closely related to specific parameter values to ensure adaptability. This causes that the query plan may not be optimal for certain parameter values. For example, the filter condition of the query is `where a > ? And a < ?`, the parameters of the first `Execute` statement are `2` and `1` respectively. Considering that these two parameters maybe be `1` and `2` in the next execution time, the optimizer does not generate the optimal `TableDual` execution plan that is specific to current parameter values;
 - If cache invalidation and elimination are not considered, an execution plan cache is applied to various parameter values, which in theory also result in non-optimal execution plans for certain values. For example, if the filter condition is `where a < ?` and the parameter value used for the first execution is `1`, then the optimizer generates the optimal `IndexScan` execution plan and puts it into the cache. In the subsequent executions, if the value becomes `10000`, the `TableScan` plan might be the better one. But due to the execution plan cache, the previously generated `IndexScan` is used for execution. Therefore, the execution plan cache is more suitable for application scenarios where the query is simple (the ratio of compilation is high) and the execution plan is relatively fixed.
 
