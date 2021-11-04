@@ -10,7 +10,7 @@ summary: The usage of SHOW PLACEMENT FOR in TiDB.
 > Placement Rules in SQL is an experimental feature. Syntax may change before its final release, and there may be bugs.
 > If you understand the risks, run `SET GLOBAL tidb_enable_alter_placement = 1;` to enable this experiment.
 
-`SHOW PLACEMENT FOR` summarizes all placement options from direct placement and placement policies, and presents them in canonical form for a specific table, database schema or partition.
+`SHOW PLACEMENT FOR` summarizes all placement options from direct placement and placement policies, and presents them in the canonical form for a specific table, database schema, or partition.
 
 ## Synopsis
 
