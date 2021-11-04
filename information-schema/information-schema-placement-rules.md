@@ -48,8 +48,8 @@ CREATE TABLE t1 (a INT);
 CREATE TABLE t2 (a INT) primary_region="us-east-1" regions="us-east-1";
 CREATE PLACEMENT POLICY p1 primary_region="us-east-1" regions="us-east-1";
 CREATE TABLE t3 (a INT) PLACEMENT POLICY=p1;
-SHOW PLACEMENT; -- includes t3
-select * from information_schema.placement_rules; -- does not include t3
+SHOW PLACEMENT; -- Includes t3.
+SELECT * FROM information_schema.placement_rules; -- Does not include t3.
 ```
 
 ```sql
