@@ -129,7 +129,7 @@ select tidb_decode_key('7480000000000000FF3E5F720400000000FF0000000601633430FF33
 1 row in set (0.001 sec)
 ```
 
-Tables have a special "infimum" start key and a special "supremum" end key. These can be recognized as they are only 36 characters long and end in 'F8'. `TIDB_DECODE_KEY` doesn't work on these special values. A small table only have a single region and only have these special keys as `START_KEY` and `END_KEY`.
+Tables have a special "infimum" start key and a special "supremum" end key. These are only 18 bytes (36 characters) long and end in 'F8'. `TIDB_DECODE_KEY` doesn't work on these special values. A small table may only have a single region and only have these special keys as `START_KEY` and `END_KEY`.
 
 {{< copyable "sql" >}}
 
