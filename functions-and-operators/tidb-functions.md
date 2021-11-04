@@ -129,6 +129,29 @@ select tidb_decode_key('7480000000000000FF3E5F720400000000FF0000000601633430FF33
 1 row in set (0.001 sec)
 ```
 
+Tables have a special "infimum" start key and a special "supremum" end key. These can be recognized as they are only 36 characters long and end in 'F8'. `TIDB_DECODE_KEY` doesn't work on these special values. A small table only have a single region and only have these special keys as `START_KEY` and `END_KEY`.
+
+{{< copyable "sql" >}}
+
+```sql
+SELECT TABLE_NAME, START_KEY, END_KEY FROM information_schema.TIKV_REGION_STATUS WHERE TABLE_NAME='stock' AND IS_INDEX=0;
+```
+
+```sql
++------------+--------------------------------------------------------+--------------------------------------------------------+
+| TABLE_NAME | START_KEY                                              | END_KEY                                                |
++------------+--------------------------------------------------------+--------------------------------------------------------+
+| stock      | 7480000000000000FF4700000000000000F8                   | 7480000000000000FF475F728000000000FF029DF00000000000FA |
+| stock      | 7480000000000000FF475F728000000000FF0D7ECA0000000000FA | 7480000000000000FF4900000000000000F8                   |
+| stock      | 7480000000000000FF475F728000000000FF063E890000000000FA | 7480000000000000FF475F728000000000FF09E0350000000000FA |
+| stock      | 7480000000000000FF475F728000000000FF029DF00000000000FA | 7480000000000000FF475F728000000000FF063E890000000000FA |
+| stock      | 7480000000000000FF475F728000000000FF09E0350000000000FA | 7480000000000000FF475F728000000000FF0D7ECA0000000000FA |
++------------+--------------------------------------------------------+--------------------------------------------------------+
+5 rows in set (0.013 sec)
+```
+
+`TIDB_DECODE_KEY` returns valid JSON on success and retuns the argument value if it fails to decode.
+
 ### TIDB_DECODE_PLAN
 
 You can find TiDB execution plans in encoded form in the slow query log. The `TIDB_DECODE_PLAN()` function is then used to decode the encoded plans into a human-readable form.
