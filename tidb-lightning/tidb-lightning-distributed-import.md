@@ -18,11 +18,11 @@ You can use TiDB Lightning to import data in parallel in the following scenarios
 >
 > Parallel import only supports the initialized empty tables in TiDB. It does not support migrating data to tables with data written by existing services. Otherwise, data inconsistencies may occur.
 
-The following diagram shows how importing sharded schemas and sharded tables works.
+The following diagram shows how importing sharded schemas and sharded tables works. In this scenario, you can use multiple TiDB Lightning instances to import MySQL sharded tables to a downstream TiDB cluster. 
 
 ![Import sharded schemas and sharded tables](/media/parallel-import-shard-tables-en.png)
 
-The following diagram shows how importing single tables works.
+The following diagram shows how importing single tables works. In this scenario, you can use multiple TiDB Lightning instances to split data from a single table and import it in parallel to a downstream TiDB cluster.
 
 ![Import single tables](/media/parallel-import-single-tables-en.png)
 
@@ -111,6 +111,14 @@ Start TiDB Lightning on each server in turn. If you use `nohup` to directly star
 # !/bin/bash
 nohup ./tidb-lightning -config tidb-lightning.toml > nohup.out &
 ```
+
+During parallel import, TiDB Lightning automatically performs the following checks after starting the task.
+
+- Check whether there is enough space on the local disk and on the TiKV cluster for importing data. TiDB Lightning samples the data sources and estimates the percentage of the index size from the sample result. Because indexes are included in the estimation, there may be cases where the size of the source data is less than the available space on the local disk, but still the check fails.
+- Check whether the distribution of regions in TiKV cluster is even and whether there are too many empty regions. If the number of empty regions exceeds max(1000, number of tables * 3), i.e. greater than the bigger one of "1000" or "3 times the number of tables ", then the import cannot be executed.
+- Check whether the data is imported in order from the data sources. The size of `mydumper.batch-size` is automatically adjusted based on the result of the check. Therefore, the `mydumper.batch-size` configuration is no longer available.
+
+You can also turn off the check and perform a forced import with the `lightning.check-requirements` configuration. For more detailed checks, see [TiDB Lightning prechecks](/tidb-lightning/tidb-lightning-prechecks.md)
 
 ### Step 4: Check the import progress
 
