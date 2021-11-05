@@ -15,7 +15,9 @@ Placement Rules allow you to configure where data will be stored in a TiKV clust
 
 ## Specifying placement options
 
-Placement options can be specified using either _direct placement_ or using a _placement policy_. In the following example, both tables `t1` and `t2` have the same rules:
+To use Placement Rules in SQL, you need to specify one or more placement options in a SQL statement. To specify the Placement options, you can either use _direct placement_ or use a _placement policy_.
+
+In the following example, both tables `t1` and `t2` have the same rules. `t1` is specified rules using a direct placement while `t2` is specified rules using a placement policy.
 
 ```sql
 CREATE TABLE t1 (a INT) PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1";
