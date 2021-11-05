@@ -55,7 +55,10 @@ If you use direct placement options, you have to alter rules for each object (fo
 | `REGIONS`                  | Raft followers will be placed in stores which have the `region` label that matches this value. |
 | `SCHEDULE`                 | The strategy used to schedule the placement of followers. The value options are `EVEN` (default) or `MAJORITY_IN_PRIMARY`. |
 | `FOLLOWERS`                | The number of followers. For example, `FOLLOWERS=2` means that there will be 3 replicas of the data (2 followers and 1 leader). |
-| **Advanced configuration**                                                                                                  |
+In addition to the placement options above, you can also use the advance configurations. For details, see [Advance placement](#advanced-placement).
+
+| Option Name                | Description                                                                                    |
+|----------------------------|------------------------------------------------------------------------------------------------|                                                                                       
 | `CONSTRAINTS`              | A list of constraints that apply to all roles. For example, `CONSTRAINTS="[+disk=ssd]`.        |
 | `FOLLOWER_CONSTRAINTS`     | A list of constraints that only apply to followers.                                            |
 
