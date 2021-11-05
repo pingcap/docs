@@ -86,7 +86,7 @@ The `SCHEDULE` option instructs TiDB on how to balance the followers.
 
 The default schedule of `EVEN` ensures a balance of followers in all regions. You can use the `MAJORITY_IN_PRIMARY` schedule to ensure that enough followers are placed in the primary region (`us-east-1`) so that quorum can be achieved. If the primary region completely fails, you can the `MAJORITY_IN_PRIMARY` schedule for lower latency transactions at the expense of availability.
 
-### Assigning placement to a partitioned table
+### Assign placement to a partitioned table
 
 > **Note:**
 >
