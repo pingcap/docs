@@ -73,7 +73,7 @@ CREATE PLACEMENT POLICY fivereplicas FOLLOWERS=4;
 CREATE TABLE t1 (a INT) PLACEMENT POLICY=fivereplicas;
 ```
 
-Note that the PD configuration includes the leader and follower count, thus 4 followers + 1 leader equals five replicas in total.
+Note that the PD configuration includes the leader and follower count, thus 4 followers + 1 leader equals 5 replicas in total.
 
 To expand on this example, the placement for the followers can also be described using the `PRIMARY_REGION` and `REGIONS` placement options:
 
