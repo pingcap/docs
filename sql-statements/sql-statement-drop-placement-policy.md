@@ -32,9 +32,9 @@ Placement policies can only be dropped when they are not referenced by any table
 ```sql
 CREATE PLACEMENT POLICY p1 FOLLOWERS=4;
 CREATE TABLE t1 (a INT PRIMARY KEY) PLACEMENT POLICY=p1;
-DROP PLACEMENT POLICY p1; -- fails
+DROP PLACEMENT POLICY p1;  -- This statement fails because the placement policy p1 is referenced.
 
--- Find which tables and partitions reference the placement policy
+-- Finds which tables and partitions reference the placement policy.
 SELECT table_schema, table_name FROM information_schema.tables WHERE tidb_placement_policy_name='p1';
 SELECT table_schema, table_name FROM information_schema.partitions WHERE tidb_placement_policy_name='p1';
 

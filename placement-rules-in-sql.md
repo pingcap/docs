@@ -13,7 +13,7 @@ summary: Learn how to schedule placement of tables and partitions.
 
 Placement Rules allow you to configure where data will be stored in a TiKV cluster. This is useful for scenarios including optimizing a high availability strategy, ensuring that local copies of data will be available for local stale reads, and adhering to compliance requirements.
 
-## Specifying placement options
+## Specify placement options
 
 To use Placement Rules in SQL, you need to specify one or more placement options in a SQL statement. To specify the Placement options, you can either use _direct placement_ or use a _placement policy_.
 
@@ -53,15 +53,18 @@ If you use direct placement options, you have to alter rules for each object (fo
 |----------------------------|------------------------------------------------------------------------------------------------|
 | `PRIMARY_REGION`           | Raft leaders are placed in stores which have the `region` label that matches this value.     |
 | `REGIONS`                  | Raft followers will be placed in stores which have the `region` label that matches this value. |
-| `SCHEDULE`                 | The strategy used to schedule the placement of followers. Either `EVEN` (default) or `MAJORITY_IN_PRIMARY`. |
-| `FOLLOWERS`                | The number of followers. For example, `FOLLOWERS=2` means that there will be 3 copies of the data (2 followers and 1 leader). |
-| **Advanced configuration**                                                                                                  |
+| `SCHEDULE`                 | The strategy used to schedule the placement of followers. The value options are `EVEN` (default) or `MAJORITY_IN_PRIMARY`. |
+| `FOLLOWERS`                | The number of followers. For example, `FOLLOWERS=2` means that there will be 3 replicas of the data (2 followers and 1 leader). |
+In addition to the placement options above, you can also use the advance configurations. For details, see [Advance placement](#advanced-placement).
+
+| Option Name                | Description                                                                                    |
+|----------------------------|------------------------------------------------------------------------------------------------|                                                                                       
 | `CONSTRAINTS`              | A list of constraints that apply to all roles. For example, `CONSTRAINTS="[+disk=ssd]`.        |
 | `FOLLOWER_CONSTRAINTS`     | A list of constraints that only apply to followers.                                            |
 
 ## Examples
 
-### Increasing the number of replicas
+### Increase the number of replicas
 
 The default configuration of [`max-replicas`](/pd-configuration-file.md#max-replicas) is `3`. To increase this for a specific set of tables, you can use a placement policy as follows:
 
@@ -70,24 +73,26 @@ CREATE PLACEMENT POLICY fivereplicas FOLLOWERS=4;
 CREATE TABLE t1 (a INT) PLACEMENT POLICY=fivereplicas;
 ```
 
-Note that the PD configuration includes the leader and follower count, thus 4 followers + 1 leader equals five replicas in total.
+Note that the PD configuration includes the leader and follower count, thus 4 followers + 1 leader equals 5 replicas in total.
 
-To expand on this example, the placement for the followers can also be described using the `PRIMARY_REGION` and `REGIONS` placement options:
+To expand on this example, you can also use `PRIMARY_REGION` and `REGIONS` placement options to describe the placement for the followers:
 
 ```sql
 CREATE PLACEMENT POLICY eastandwest PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-east-2,us-west-1" SCHEDULE="MAJORITY_IN_PRIMARY" FOLLOWERS=4;
 CREATE TABLE t1 (a INT) PLACEMENT POLICY=eastandwest;
 ```
 
-The `SCHEDULE` instructs TiDB how to balance the followers. The default schedule of `EVEN` ensures a balance of followers in all regions. The schedule `MAJORITY_IN_PRIMARY` can be used to ensure that enough followers are placed in the primary region (`us-east-1`) that quorum can be achieved. This helps provide lower latency transactions at the expense of availability should the primary region completely fail.
+The `SCHEDULE` option instructs TiDB on how to balance the followers.
 
-### Assigning placement to a partitioned table
+The default schedule of `EVEN` ensures a balance of followers in all regions. You can use the `MAJORITY_IN_PRIMARY` schedule to ensure that enough followers are placed in the primary region (`us-east-1`) so that quorum can be achieved. If the primary region completely fails, you can the `MAJORITY_IN_PRIMARY` schedule for lower latency transactions at the expense of availability.
+
+### Assign placement to a partitioned table
 
 > **Note:**
 >
-> This example makes use of list partitioning, which is currently an experimental feature. Partitioned tables also require the `PRIMARY KEY` to be included in all columns in the table's partitioning function.
+> The following example uses list partitioning, which is currently an experimental feature of TiDB. Partitioned tables also require the `PRIMARY KEY` to be included in all columns in the table's partitioning function.
 
-As well as assigning to tables, placement options can also be assigned to table partitions. For example:
+In addition to assigning placement options to tables, you can also assign the options to table partitions. For example:
 
 ```sql
 CREATE PLACEMENT POLICY europe PRIMARY_REGION="eu-central-1" REGIONS="eu-central-1,eu-west-1";
@@ -103,20 +108,25 @@ CREATE TABLE t1 (
 );
 ```
 
-### Setting the default placement for a schema
+### Set the default placement for a schema
 
-Default placement options can be directly attached to a database schema. This works similar to setting the default character set or collation for a schema, in that it will be used when no other placement options are specified. For example:
+You can directly attach the default placement options to a database schema. This works similar to setting the default character set or collation for a schema. Your specified placement options apply when no other options are specified. For example:
 
 ```sql
-CREATE TABLE t1 (a INT); -- the table is created with no placement options
-ALTER DATABASE test FOLLOWERS=4; -- this changes the default, and does not apply to the existing table t1;
-CREATE TABLE t2 (a INT); -- the placement of FOLLOWERS=4 will be used
-CREATE TABLE t3 (a INT) PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-east-2"; -- FOLLOWERS=4 does not apply as placement is specified.
-ALTER DATABASE test FOLLOWERS=2; -- this does not apply to existing tables
-CREATE TABLE t4 (a INT); -- the table is created with FOLLOWERS=2;
+CREATE TABLE t1 (a INT);  -- Creates a table t1 with no placement options.
+
+ALTER DATABASE test FOLLOWERS=4;  -- Changes the default placement option, and does not apply to the existing table t1.
+
+CREATE TABLE t2 (a INT);  -- Creates a table t2 with the default placement of FOLLOWERS=4.
+
+CREATE TABLE t3 (a INT) PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-east-2";  -- Creates a table t3 without the default FOLLOWERS=4 placement, because this statement has specified another placement.
+
+ALTER DATABASE test FOLLOWERS=2;  -- Changes the default placement, and does not apply to existing tables.
+
+CREATE TABLE t4 (a INT);  -- Creates a table t4 with the default FOLLOWERS=2 option.
 ```
 
-Because placement options are only inherited from the database schema default when a table is created, it is recommended to set the default to a `PLACEMENT POLICY`. This ensures that future changes to the policy will propagate to existing tables.
+Because placement options are only inherited from the database schema when a table is created, it is recommended to set the default placement option using a `PLACEMENT POLICY`. This ensures that future changes to the policy propagate to existing tables.
 
 ### Advanced placement
 
@@ -155,4 +165,4 @@ The following known limitations exist in the experimental release of Placement R
 * Temporary tables do not support placement options (either via direct placement or placement policies).
 * Syntactic sugar rules exist for setting `PRIMARY_REGION` and `REGIONS`, but in future we plan to add varieties for `PRIMARY_RACK`, `PRIMARY_ZONE` and `PRIMARY_HOST`. See [issue #18030](https://github.com/pingcap/tidb/issues/18030)
 * TiFlash learners are not configurable through Placement Rules syntax.
-* Placement rules only ensure that data at rest resides on the correct TiKV store. It does not guarantee that data in transit (via either user-queries or internal operations) will only occur in a specific region. We plan to offer additional features in future to better support compliance use-cases.
+* Placement rules only ensure that data at rest resides on the correct TiKV store. The rules do not guarantee that data in transit (via either user-queries or internal operations) only occurs in a specific region.
