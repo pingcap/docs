@@ -25,7 +25,7 @@ CREATE TABLE t2 (a INT) PLACEMENT POLICY=eastandwest;
 
 Using placement policies is recommended to simplify rule management. Changes made to a placement policy (via [`ALTER PLACEMENT POLICY`](/sql-statements/sql-statement-alter-placement-policy.md)) automatically propagate to all database objects. This differs from direct placement options, which the rules must be altered for each object (tables, partitions).
 
-A `PLACEMENT POLICY` is not associated with any database schema and has global scope. Assigning a placement policy does not require any additional privileges over `CREATE TABLE` privilege.
+`PLACEMENT POLICY` is not associated with any database schema and has the global scope. Therefore, assigning a placement policy does not require any additional privileges over the `CREATE TABLE` privilege.
 
 ## Option reference
 
