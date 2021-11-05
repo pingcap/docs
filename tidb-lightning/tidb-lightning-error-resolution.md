@@ -24,7 +24,7 @@ You can use the configuration `lightning.max-error` to increase the tolerance of
 
 The following errors are governed by this configuration:
 
-* Illegal value (example: set `'Text'` to an INT column).
+* Invalid value (example: set `'Text'` to an INT column).
 * Numeric overflow (example: set 500 to a TINYINT column)
 * String overflow (example: set `'Very Long Text'` to a VARCHAR(5) column).
 * Zero date time (namely `'0000-00-00'` and `'2021-12-00'`).
