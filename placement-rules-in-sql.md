@@ -136,7 +136,7 @@ PARTITION BY RANGE( YEAR(purchased) ) (
 );
 ```
 
-Constraints can either be specified in list format (`[+disk=ssd]`) or dictionary format (`{+disk=ssd:1,+disk=hdd:2}`).
+You can either specify constraints in list format (`[+disk=ssd]`) or in dictionary format (`{+disk=ssd:1,+disk=hdd:2}`).
 
 In list format, constraints are specified as a list of key-value pairs. The key starts with either a `+` or a `-` with `+disk=ssd` indicating that the label `disk` must be set to `ssd`, and `-disk=hdd` indicating that the label `disk` must not be `hdd`.
 
