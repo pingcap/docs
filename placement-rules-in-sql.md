@@ -64,7 +64,7 @@ In addition to the placement options above, you can also use the advance configu
 
 ## Examples
 
-### Increasing the number of replicas
+### Increase the number of replicas
 
 The default configuration of [`max-replicas`](/pd-configuration-file.md#max-replicas) is `3`. To increase this for a specific set of tables, you can use a placement policy as follows:
 
