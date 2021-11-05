@@ -90,7 +90,7 @@ The default schedule of `EVEN` ensures a balance of followers in all regions. Yo
 
 > **Note:**
 >
-> This example makes use of list partitioning, which is currently an experimental feature. Partitioned tables also require the `PRIMARY KEY` to be included in all columns in the table's partitioning function.
+> The following example uses list partitioning, which is currently an experimental feature of TiDB. Partitioned tables also require the `PRIMARY KEY` to be included in all columns in the table's partitioning function.
 
 As well as assigning to tables, placement options can also be assigned to table partitions. For example:
 
