@@ -1,7 +1,6 @@
 ---
 title: TiDB Lightning Error Resolution
 summary: Learn how to get and resolve type conversion and duplication errors
-aliases: []
 ---
 
 # TiDB Lightning Error Resolution

@@ -70,7 +70,7 @@ io-concurrency = 5
 max-error = 0
 # task-info-schema-name is the name of the schema/database storing human-readable Lightning execution result.
 # set this to empty string to disable error recording.
-#task-info-schema-name = 'lightning_task_info'
+# task-info-schema-name = 'lightning_task_info'
 
 [security]
 # Specifies certificates and keys for TLS connections within the cluster.
@@ -115,7 +115,7 @@ addr = "172.16.31.10:8287"
 #  - replace: use new entry to replace the existing entry
 #  - ignore: keep the existing entry, and ignore the new entry
 #  - error: report error and quit the program
-#on-duplicate = "replace"
+# on-duplicate = "replace"
 # Whether to detect and resolve duplicate records (unique key conflict) when the backend is 'local'.
 # Current supports three resolution algorithms:
 #  - record: only records duplicate records to `lightning_task_info.conflict_error_v1` table on the target TiDB. Note that this
@@ -124,7 +124,7 @@ addr = "172.16.31.10:8287"
 #    inconsistent data in the target TiDB.
 #  - remove: records all duplicate records like the 'record' algorithm and remove all duplicate records to ensure a consistent
 #    state in the target TiDB.
-#duplicate-resolution = 'record'
+# duplicate-resolution = 'record'
 # The size limit of generated SST files in the "local" backend. It is better
 # to be the same as the Region size of TiKV (96 MB by default).
 # region-split-size = 100_663_296
