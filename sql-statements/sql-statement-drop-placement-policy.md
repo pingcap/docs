@@ -37,8 +37,8 @@ DROP PLACEMENT POLICY p1; -- fails
 SELECT table_schema, table_name FROM information_schema.tables WHERE tidb_placement_policy_name='p1';
 SELECT table_schema, table_name FROM information_schema.partitions WHERE tidb_placement_policy_name='p1';
 
-ALTER TABLE t1 PLACEMENT POLICY=default; -- Remove the placement policy from t1
-DROP PLACEMENT POLICY p1; -- succeeds
+ALTER TABLE t1 PLACEMENT POLICY=default;  -- Removes the placement policy from t1.
+DROP PLACEMENT POLICY p1;  -- Succeeds.
 ```
 
 ```sql
