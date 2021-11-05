@@ -113,12 +113,17 @@ CREATE TABLE t1 (
 You can directly attach the default placement options to a database schema. This works similar to setting the default character set or collation for a schema. Your specified placement options apply when no other options are specified. For example:
 
 ```sql
-CREATE TABLE t1 (a INT); -- the table is created with no placement options
-ALTER DATABASE test FOLLOWERS=4; -- this changes the default, and does not apply to the existing table t1;
-CREATE TABLE t2 (a INT); -- the placement of FOLLOWERS=4 will be used
-CREATE TABLE t3 (a INT) PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-east-2"; -- FOLLOWERS=4 does not apply as placement is specified.
-ALTER DATABASE test FOLLOWERS=2; -- this does not apply to existing tables
-CREATE TABLE t4 (a INT); -- the table is created with FOLLOWERS=2;
+CREATE TABLE t1 (a INT);  -- Creates a table t1 with no placement options.
+
+ALTER DATABASE test FOLLOWERS=4;  -- Changes the default placement option, and does not apply to the existing table t1.
+
+CREATE TABLE t2 (a INT);  -- Creates a table t2 with the default placement of FOLLOWERS=4.
+
+CREATE TABLE t3 (a INT) PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-east-2";  -- Creates a table t3 without the default FOLLOWERS=4 placement, because this statement has specified another placement.
+
+ALTER DATABASE test FOLLOWERS=2;  -- Changes the default placement, and does not apply to existing tables.
+
+CREATE TABLE t4 (a INT);  -- Creates a table t4 with the default FOLLOWERS=2 option.
 ```
 
 Because placement options are only inherited from the database schema default when a table is created, it is recommended to set the default to a `PLACEMENT POLICY`. This ensures that future changes to the policy will propagate to existing tables.
