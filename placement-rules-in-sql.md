@@ -116,7 +116,7 @@ Because placement options are only inherited from the database schema default wh
 
 ### Advanced placement
 
-The placement options `PRIMARY_REGION`, `REGIONS` and `SCHEDULE` are designed to support the primary use cases of data placement at the loss of some flexibility. For more complex scenarios it is possible to also use the advanced placement options of `CONSTRAINTS` and `FOLLOWER_CONSTRAINTS`. Use of these optons is mutually exclusive, and an error will be returned if both are specified.
+The placement options `PRIMARY_REGION`, `REGIONS`, and `SCHEDULE` meet the basic needs of data placement at the loss of some flexibility. For more complex scenarios with the need for higher flexibility, you can also use the advanced placement options of `CONSTRAINTS` and `FOLLOWER_CONSTRAINTS`. These two options are mutually exclusive. If you specify both at the same time, an error will be returned.
 
 For example, to set constraints that data must reside on a TiKV store where the label `disk` must match a value:
 
