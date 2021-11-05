@@ -126,7 +126,7 @@ ALTER DATABASE test FOLLOWERS=2;  -- Changes the default placement, and does not
 CREATE TABLE t4 (a INT);  -- Creates a table t4 with the default FOLLOWERS=2 option.
 ```
 
-Because placement options are only inherited from the database schema default when a table is created, it is recommended to set the default to a `PLACEMENT POLICY`. This ensures that future changes to the policy will propagate to existing tables.
+Because placement options are only inherited from the database schema when a table is created, it is recommended to set the default placement option using a `PLACEMENT POLICY`. This ensures that future changes to the policy propagate to existing tables.
 
 ### Advanced placement
 
