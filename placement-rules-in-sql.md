@@ -75,7 +75,7 @@ CREATE TABLE t1 (a INT) PLACEMENT POLICY=fivereplicas;
 
 Note that the PD configuration includes the leader and follower count, thus 4 followers + 1 leader equals 5 replicas in total.
 
-To expand on this example, the placement for the followers can also be described using the `PRIMARY_REGION` and `REGIONS` placement options:
+To expand on this example, you can also use `PRIMARY_REGION` and `REGIONS` placement options to describe the placement for the followers:
 
 ```sql
 CREATE PLACEMENT POLICY eastandwest PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-east-2,us-west-1" SCHEDULE="MAJORITY_IN_PRIMARY" FOLLOWERS=4;
