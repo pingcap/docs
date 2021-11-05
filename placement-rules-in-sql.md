@@ -31,7 +31,7 @@ A `PLACEMENT POLICY` is not associated with any database schema and has global s
 
 > **Note:**
 >
-> Placement options depend on labels correctly specified in the configuration of each TiKV node. For example, `PRIMARY_REGION` depends on the label `region` in TiKV. To see a summary of all labels available in your TiKV cluster, use the statement [`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md):
+> Placement options depend on labels correctly specified in the configuration of each TiKV node. For example, the `PRIMARY_REGION` option depends on the `region` label in TiKV. To see a summary of all labels available in your TiKV cluster, use the statement [`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md):
 >
 > ```sql
 > mysql> show placement labels;
