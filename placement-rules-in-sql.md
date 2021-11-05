@@ -13,7 +13,7 @@ summary: Learn how to schedule placement of tables and partitions.
 
 Placement Rules allow you to configure where data will be stored in a TiKV cluster. This is useful for scenarios including optimizing a high availability strategy, ensuring that local copies of data will be available for local stale reads, and adhering to compliance requirements.
 
-## Specifying placement options
+## Specify placement options
 
 To use Placement Rules in SQL, you need to specify one or more placement options in a SQL statement. To specify the Placement options, you can either use _direct placement_ or use a _placement policy_.
 
