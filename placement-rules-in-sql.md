@@ -82,7 +82,9 @@ CREATE PLACEMENT POLICY eastandwest PRIMARY_REGION="us-east-1" REGIONS="us-east-
 CREATE TABLE t1 (a INT) PLACEMENT POLICY=eastandwest;
 ```
 
-The `SCHEDULE` instructs TiDB how to balance the followers. The default schedule of `EVEN` ensures a balance of followers in all regions. The schedule `MAJORITY_IN_PRIMARY` can be used to ensure that enough followers are placed in the primary region (`us-east-1`) that quorum can be achieved. This helps provide lower latency transactions at the expense of availability should the primary region completely fail.
+The `SCHEDULE` option instructs TiDB on how to balance the followers.
+
+The default schedule of `EVEN` ensures a balance of followers in all regions. You can use the `MAJORITY_IN_PRIMARY` schedule to ensure that enough followers are placed in the primary region (`us-east-1`) so that quorum can be achieved. If the primary region completely fails, you can the `MAJORITY_IN_PRIMARY` schedule for lower latency transactions at the expense of availability.
 
 ### Assigning placement to a partitioned table
 
