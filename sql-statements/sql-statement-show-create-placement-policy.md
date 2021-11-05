@@ -8,6 +8,7 @@ summary: The usage of SHOW CREATE PLACEMENT POLICY in TiDB.
 > **Warning:**
 >
 > Placement Rules in SQL is an experimental feature. Syntax may change before its final release, and there may be bugs.
+>
 > If you understand the risks, run `SET GLOBAL tidb_enable_alter_placement = 1;` to enable this experiment.
 
 `SHOW CREATE PLACEMENT POLICY` is used to show the definition of a placement policy. This can be used to see the current definition of a placement policy and recreate it in another TiDB cluster.
