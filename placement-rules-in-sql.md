@@ -138,9 +138,9 @@ PARTITION BY RANGE( YEAR(purchased) ) (
 
 You can either specify constraints in list format (`[+disk=ssd]`) or in dictionary format (`{+disk=ssd:1,+disk=hdd:2}`).
 
-In list format, constraints are specified as a list of key-value pairs. The key starts with either a `+` or a `-` with `+disk=ssd` indicating that the label `disk` must be set to `ssd`, and `-disk=hdd` indicating that the label `disk` must not be `hdd`.
+In list format, constraints are specified as a list of key-value pairs. The key starts with either a `+` or a `-` with `+disk=ssd` indicating that the label `disk` must be set to `ssd`, and `-disk=hdd`, indicating that the label `disk` must not be `hdd`.
 
-In dictionary format, the constraint also indicates a number of instances that apply to that rule. For example `FOLLOWER_CONSTRAINTS="{+region=us-east-1:1,+region=us-east-2:1,+region=us-west-1:1,+any:1}";` indicates that 1 follower is in us-east-1, 1 follower is in us-east-2, 1 follower is in us-west-1, and 1 follower can be in any region.
+In dictionary format, constraints also indicate a number of instances that apply to that rule. For example `FOLLOWER_CONSTRAINTS="{+region=us-east-1:1,+region=us-east-2:1,+region=us-west-1:1,+any:1}";` indicates that 1 follower is in us-east-1, 1 follower is in us-east-2, 1 follower is in us-west-1, and 1 follower can be in any region.
 
 ## Known limitations
 
