@@ -23,7 +23,9 @@ CREATE PLACEMENT POLICY eastandwest PRIMARY_REGION="us-east-1" REGIONS="us-east-
 CREATE TABLE t2 (a INT) PLACEMENT POLICY=eastandwest;
 ```
 
-Using placement policies is recommended to simplify rule management. Changes made to a placement policy (via [`ALTER PLACEMENT POLICY`](/sql-statements/sql-statement-alter-placement-policy.md)) automatically propagate to all database objects. This differs from direct placement options, which the rules must be altered for each object (tables, partitions).
+It is recommended to use placement policies for simpler rule management. When you change a placement policy (via [`ALTER PLACEMENT POLICY`](/sql-statements/sql-statement-alter-placement-policy.md)), the change automatically propagates to all database objects.
+
+If you use direct placement options, you have to alter rules for each object (for example, tables and partitions).
 
 `PLACEMENT POLICY` is not associated with any database schema and has the global scope. Therefore, assigning a placement policy does not require any additional privileges over the `CREATE TABLE` privilege.
 
