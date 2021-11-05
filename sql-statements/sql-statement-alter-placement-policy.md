@@ -45,6 +45,7 @@ DirectPlacementOption ::=
 > **Note:**
 >
 > To know which regions are available in your cluster, see [`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md).
+>
 > If you do not see any available regions, your TiKV installation might not have labels set correctly.
 
 {{< copyable "sql" >}}
