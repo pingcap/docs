@@ -792,20 +792,20 @@ In the output of the above command, if the value of `sort-engine` is "unified", 
 
 ## Ultimate consistent replication in disaster scenarios
 
-Starting from v5.3.0, TiCDC provides the ultimate consistent replication capability in disaster scenarios. When a disaster occurs in the production cluster (i.e. TiCDC's upstream cluster) and the service cannot be resumed in a short period of time, TiCDC needs to provide the ability to ensure the consistency of data in the downstream cluster. Meanwhile, TiCDC needs to allow the business to quickly switch the traffic to the downstream cluster to avoid the database being unavailable for a long time and affecting the business.
+Starting from v5.3.0, TiCDC provides the ultimate consistent replication capability in disaster scenarios. When a disaster occurs in the production cluster (i.e. TiCDC's primary cluster) and the service cannot be resumed in a short period of time, TiCDC needs to provide the ability to ensure the consistency of data in the secondary cluster. Meanwhile, TiCDC needs to allow the business to quickly switch the traffic to the secondary cluster to avoid the database being unavailable for a long time and affecting the business.
 
-This feature supports TiCDC to replicate incremental data from TiDB clusters to the secondary relational database TiDB/Aurora/MySQL/MariaDB. In case the upstream cluster crashes, TiCDC can recover the downstream cluster to a certain snapshot in upstream within 30 minutes without any delay in synchronization. It allows data loss of less than 5 minutes, that is, RPO <= 30min, and RTO <= 5min.
+This feature supports TiCDC to replicate incremental data from TiDB clusters to the secondary relational database TiDB/Aurora/MySQL/MariaDB. In case the primary cluster crashes, TiCDC can recover the secondary cluster to a certain snapshot in the primary cluster within 30 minutes without any delay in synchronization. It allows data loss of less than 5 minutes, that is, RPO <= 30min, and RTO <= 5min.
 
 ### Prerequisites 
 
-- Prepare a highly available Amazon S3 storage or NFS system for storing TiCDC's real-time incremental data backup files. These files can be accessed in case of an upstream disaster.
+- Prepare a highly available Amazon S3 storage or NFS system for storing TiCDC's real-time incremental data backup files. These files can be accessed in case of an primary cluster disaster.
 - Enable this feature for changefeeds that need to have ultimate consistency in disaster scenarios. To enable it, you can add the following configuration to the changefeed configuration file.
 
 ```toml
 [consistent]
 # Consistency level. Options include.
 # - none: the default value. In a non-disaster scenario, ultimate consistency is only guaranteed if only finished-ts is specified. 
-# - eventual: Use redo log to guarantee ultimate consistency in case of upstream disasters. 
+# - eventual: Use redo log to guarantee ultimate consistency in case of the primary cluster disasters. 
 level = "eventual"
 # Individual redo log file size, in MiB. By default, it's 64. It is recommended to be no more than 128.
 max-log-size = 64
@@ -817,9 +817,9 @@ storage = "s3://logbucket/test-changefeed?endpoint=http://$S3_ENDPOINT/"
 
 ### Disaster recovery
 
-When a disaster happens in upstream, you need to recover manually in downstream by running the `cdc redo` command. The recovery process is as follows.
+When a disaster happens in the primary cluster, you need to recover manually in the secondary cluster by running the `cdc redo` command. The recovery process is as follows.
 
-1. Ensure that the TiCDC process has exited. This is to prevent the upstream from resuming service during data recovery and prevent TiCDC from restarting data synchronization.
+1. Ensure that the TiCDC process has exited. This is to prevent the primary cluster from resuming service during data recovery and prevent TiCDC from restarting data synchronization.
 2. Use cdc binary for data recovery. Run the following command.
 
 ```shell
@@ -832,4 +832,4 @@ In this command:
 
 - `tmp-dir`: Specify the temporary directory for downloading TiCDC incremental data backup files.
 - `storage`: Specify the address for storing the TiCDC incremental data backup files, either an Amazon S3 storage or an NFS directory.
-- `sink-uri`: Specify the downstream address to restore the data to. Scheme can only be `mysql`.
+- `sink-uri`: Specify the secondary cluster address to restore the data to. Scheme can only be `mysql`.
