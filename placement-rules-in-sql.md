@@ -92,7 +92,7 @@ The default schedule of `EVEN` ensures a balance of followers in all regions. Yo
 >
 > The following example uses list partitioning, which is currently an experimental feature of TiDB. Partitioned tables also require the `PRIMARY KEY` to be included in all columns in the table's partitioning function.
 
-As well as assigning to tables, placement options can also be assigned to table partitions. For example:
+In addition to assigning placement options to tables, you can also assign the options to table partitions. For example:
 
 ```sql
 CREATE PLACEMENT POLICY europe PRIMARY_REGION="eu-central-1" REGIONS="eu-central-1,eu-west-1";
