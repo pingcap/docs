@@ -47,7 +47,7 @@ A `PLACEMENT POLICY` is not associated with any database schema and has global s
 
 | Option Name                | Description                                                                                    |
 |----------------------------|------------------------------------------------------------------------------------------------|
-| `PRIMARY_REGION`           | Raft leaders will be placed in stores which have the `region` label that match this value.     |
+| `PRIMARY_REGION`           | Raft leaders are placed in stores which have the `region` label that matches this value.     |
 | `REGIONS`                  | Raft followers will be placed in stores which have the `region` label that matches this value. |
 | `SCHEDULE`                 | The strategy used to schedule the placement of followers. Either `EVEN` (default) or `MAJORITY_IN_PRIMARY`. |
 | `FOLLOWERS`                | The number of followers. For example, `FOLLOWERS=2` means that there will be 3 copies of the data (2 followers and 1 leader). |
