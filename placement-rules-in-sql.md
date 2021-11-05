@@ -108,7 +108,7 @@ CREATE TABLE t1 (
 );
 ```
 
-### Setting the default placement for a schema
+### Set the default placement for a schema
 
 Default placement options can be directly attached to a database schema. This works similar to setting the default character set or collation for a schema, in that it will be used when no other placement options are specified. For example:
 
