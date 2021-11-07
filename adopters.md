@@ -100,3 +100,4 @@ This is a list of TiDB adopters in various industries.
 |[Acewill](https://www.crunchbase.com/organization/acewill)|FoodTech||
 |[Ausnutria Dairy](https://www.crunchbase.com/organization/ausnutria-dairy)|FoodTech||
 |[Qingdao Telaidian](https://www.teld.cn/)|Electric Car Charger||
+|[SHAREit Group](https://www.ushareit.com/)|Internet|[English](https://pingcap.com/case-studies/why-shareit-selects-tikv-for-data-storage-for-its-2.4-billion-user-business); [Chinese](https://pingcap.com/zh/blog/devcon-2021-shareit)|
