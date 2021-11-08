@@ -12,55 +12,55 @@ For details about how to control and manage TiDB SQL users, see [TiDB User Accou
 
 ## Description to required privileges
 
-To access TiDB Dashboard when [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security) is not enabled on the connected TiDB server, the SQL user should have **all** the following privileges:
+- To access TiDB Dashboard when [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security) is not enabled on the connected TiDB server, the SQL user should have **all** the following privileges:
 
-- PROCESS
-- SHOW DATABASES
-- CONFIG
-- DASHBOARD_CLIENT
+    - PROCESS
+    - SHOW DATABASES
+    - CONFIG
+    - DASHBOARD_CLIENT
 
-To access TiDB Dashboard when [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security) is enabled on the connected TiDB server, the SQL user should have **all** the following privileges:
+- To access TiDB Dashboard when [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security) is enabled on the connected TiDB server, the SQL user should have **all** the following privileges:
 
-- PROCESS
-- SHOW DATABASES
-- CONFIG
-- DASHBOARD_CLIENT
-- RESTRICTED_TABLES_ADMIN
-- RESTRICTED_STATUS_ADMIN
-- RESTRICTED_VARIABLES_ADMIN
+    - PROCESS
+    - SHOW DATABASES
+    - CONFIG
+    - DASHBOARD_CLIENT
+    - RESTRICTED_TABLES_ADMIN
+    - RESTRICTED_STATUS_ADMIN
+    - RESTRICTED_VARIABLES_ADMIN
 
-To modify the configuration items on the interface after signing in with TiDB Dashboard, the SQL user must also have the following privilege:
+- To modify the configuration items on the interface after signing in with TiDB Dashboard, the SQL user must also have the following privilege:
 
-- SYSTEM_VARIABLES_ADMIN
+    - SYSTEM_VARIABLES_ADMIN
 
 > **Note:**
 >
 > Users with high privileges such as `ALL PRIVILEGES` or `SUPER` can still sign in with TiDB Dashboard. Therefore, to comply with the least privilege principle, it is highly recommended that you create users with the preceding specific privileges to prevent unintended operations. See [Privilege Management](/privilege-management.md) for more information on these privileges.
 
-When the SQL user does not meet the preceding privilege requirements, it fails to sign in with TiDB Dashboard, as shown below.
+If the SQL user does not meet the preceding privilege requirements, it fails to sign in with TiDB Dashboard, as shown below.
 
 ![insufficient-privileges](/media/dashboard/dashboard-user-insufficient-privileges.png)
 
 ## Example: Create a least-privileged SQL user to access TiDB Dashboard
 
-When [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security) is not enabled on the connected TiDB server, you can create a SQL user `dashboardAdmin` that can sign in with TiDB Dashboard by executing the following SQL statement:
+- When [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security) is not enabled on the connected TiDB server, you can create a SQL user `dashboardAdmin` that can sign in with TiDB Dashboard by executing the following SQL statement:
 
-```sql
+    ```sql
     CREATE USER 'dashboardAdmin'@'%' IDENTIFIED BY '<YOUR_PASSWORD>';
     GRANT PROCESS, CONFIG ON *.* TO 'dashboardAdmin'@'%';
     GRANT SHOW DATABASES ON *.* TO 'dashboardAdmin'@'%';
     GRANT DASHBOARD_CLIENT ON *.* TO 'dashboardAdmin'@'%';
-```
+    ```
 
-To modify the configuration items on the interface after signing in with TiDB Dashboard, the user-defined SQL user must be granted with the following privilege:
+    -- To modify the configuration items on the interface after signing in with TiDB Dashboard, the user-defined SQL user must be granted with the following privilege:
 
-```
+    ```
     GRANT SYSTEM_VARIABLES_ADMIN ON *.* TO 'dashboardAdmin'@'%';
-```
+    ```
 
-When [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security) is enabled on the connected TiDB server, you can create a SQL user `dashboardAdmin` that can sign in with TiDB Dashboard by executing the following SQL statement:
+- When [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security) is enabled on the connected TiDB server, you can create a SQL user `dashboardAdmin` that can sign in with TiDB Dashboard by executing the following SQL statement:
 
-```sql
+    ```sql
     CREATE USER 'dashboardAdmin'@'%' IDENTIFIED BY '<YOUR_PASSWORD>';
     GRANT PROCESS, CONFIG ON *.* TO 'dashboardAdmin'@'%';
     GRANT SHOW DATABASES ON *.* TO 'dashboardAdmin'@'%';
@@ -68,14 +68,14 @@ When [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_se
     GRANT RESTRICTED_STATUS_ADMIN ON *.* TO 'dashboardAdmin'@'%';
     GRANT RESTRICTED_TABLES_ADMIN ON *.* TO 'dashboardAdmin'@'%';
     GRANT RESTRICTED_VARIABLES_ADMIN ON *.* TO 'dashboardAdmin'@'%';
-```
+    ```
 
-To modify the configuration items on the interface after signing in with TiDB Dashboard, the user-defined SQL user must be granted with the following privilege:
+    -- To modify the configuration items on the interface after signing in with TiDB Dashboard, the user-defined SQL user must be granted with the following privilege:
 
-```
-GRANT SYSTEM_VARIABLES_ADMIN ON *.* TO 'dashboardAdmin'@'%';
-```
+    ```
+    GRANT SYSTEM_VARIABLES_ADMIN ON *.* TO 'dashboardAdmin'@'%';
+    ```
 
-Sign in with TiDB Dashboard
+## Sign in with TiDB Dashboard
 
 After creating a SQL user that meets the privilege requirements of TiDB Dashboard, you can [Sign in](/dashboard/dashboard-access.md#login) with TiDB Dashboard by using this user.
