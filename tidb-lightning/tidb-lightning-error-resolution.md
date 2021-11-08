@@ -136,18 +136,19 @@ CREATE TABLE conflict_error_v1 (
 >
 > The error report records the file offset, not line/column number which is inefficient to obtain. You can quickly jump near a byte position (using 183 as example) with
 >
->   * shell, printing several lines before —
+> * shell, printing several lines before —
 >
->       ```sh
->       head -c 183 file.csv | tail
->       ```
->   * shell, printing several lines after —
+>     ```sh
+>     head -c 183 file.csv | tail
+>     ```
 >
->       ```sh
->       tail -c +183 file.csv | head
->       ```
+> * shell, printing several lines after —
 >
->   * vim — `:goto 183` or `183go`
+>     ```sh
+>     tail -c +183 file.csv | head
+>     ```
+>
+> * vim — `:goto 183` or `183go`
 
 ## Example
 
@@ -169,7 +170,7 @@ In this example we prepare a data source with some known errors.
     {{< copyable "shell-regular" >}}
 
     ```sh
-    cat << EOF >> example.t.1.sql
+    cat <<EOF > example.t.1.sql
 
         INSERT INTO t (a, b) VALUES
         (0, NULL),              -- column is NOT NULL
@@ -190,7 +191,7 @@ In this example we prepare a data source with some known errors.
     {{< copyable "shell-regular" >}}
 
     ```sh
-    cat << EOF >> config.toml
+    cat <<EOF > config.toml
 
         [lightning]
         max-error = 10
