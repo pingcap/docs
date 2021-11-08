@@ -51,10 +51,11 @@ If you use direct placement options, you have to alter rules for each object (fo
 
 | Option Name                | Description                                                                                    |
 |----------------------------|------------------------------------------------------------------------------------------------|
-| `PRIMARY_REGION`           | Raft leaders are placed in stores which have the `region` label that matches this value.     |
-| `REGIONS`                  | Raft followers will be placed in stores which have the `region` label that matches this value. |
+| `PRIMARY_REGION`           | Raft leaders are placed in stores that have the `region` label that matches the value of this option.     |
+| `REGIONS`                  | Raft followers are placed in stores that have the `region` label that matches the value of this option. |
 | `SCHEDULE`                 | The strategy used to schedule the placement of followers. The value options are `EVEN` (default) or `MAJORITY_IN_PRIMARY`. |
 | `FOLLOWERS`                | The number of followers. For example, `FOLLOWERS=2` means that there will be 3 replicas of the data (2 followers and 1 leader). |
+
 In addition to the placement options above, you can also use the advance configurations. For details, see [Advance placement](#advanced-placement).
 
 | Option Name                | Description                                                                                    |
