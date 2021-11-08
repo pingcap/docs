@@ -125,9 +125,6 @@ addr = "172.16.31.10:8287"
 #  - remove: records all duplicate records like the 'record' algorithm and remove all duplicate records to ensure a consistent
 #    state in the target TiDB.
 # duplicate-resolution = 'record'
-# The size limit of generated SST files in the "local" backend. It is better
-# to be the same as the Region size of TiKV (96 MB by default).
-# region-split-size = 100_663_296
 # The number of KV pairs sent in one request in the "local" backend.
 # send-kv-pairs = 32768
 # The directory of local KV sorting in the "local" backend. If the disk
