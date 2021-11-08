@@ -324,7 +324,9 @@ Configuration items related to storage
 
 ### `reserve-space`
 
-+ The size of the temporary file that preoccupies the extra space when TiKV is started. The name of temporary file is `space_placeholder_file`, located in the `storage.data-dir` directory. When TiKV runs out of disk space and cannot be started normally, you can delete this file as an emergency intervention and set `reserve-space` to `"0MB"`.
++ When TiKV starts, a space is reserved to protect its disk space. When the remaining disk space is less than the reserved space, TiKV restricts some write operations. The reserved space is divided into two parts in form: 80% of the reserved space is used as extra disk space required for operations when the disk space is insufficient, and the remaining 20% is used to save a temporary file. In the process of reclaiming space, if the storage is exhausted by using too much extra disk space, this temporary file plays the role of the last defense for restoring services.
++ The name of temporary file is `space_placeholder_file`, located in the `storage.data-dir` directory. When TiKV goes offline because its disk space ran out, you can restart TiKV to make it automatically delete the temporary file and attempt to reclaim space.
++ When the remaining space is insufficient, TiKV does not create the temporary file. The effectiveness of the defense is related to the size of the reserved space. The size of the reserved space is calculated as the maximum value between 5% of the disk capacity and this configuration item. When the value of this configuration item is `"0MB"`, TiKV disables this feature that protects the disk space.
 + Default value: `"5GB"`
 + Unite: MB|GB
 
