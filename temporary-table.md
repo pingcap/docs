@@ -278,7 +278,7 @@ Empty set (0.00 sec)
 
 No matter which storage engine is declared as `ENGINE` when you define a table, the data of local temporary tables and global temporary tables is only stored in the memory of TiDB instances. This data is not persisted.
 
-To avoid memory overflow, you can limit the size of each temporary table using the [`tidb_tmp_table_max_size`](/system-variables.md#tidb_tmp_table_max_size-new-in-v53) system variable. Once a temporary table is larger than the `tidb_tmp_table_max_size` threshold value, TiDB reports an error. The default value of `tidb_tmp_table_max_size` is `64MB`.
+To avoid memory overflow, you can limit the size of each temporary table using the [`tidb_tmp_table_max_size`](/system-variables.md#tidb_tmp_table_max_size-new-in-v530) system variable. Once a temporary table is larger than the `tidb_tmp_table_max_size` threshold value, TiDB reports an error. The default value of `tidb_tmp_table_max_size` is `64MB`.
 
 For example, set the maximum size of a temporary table to `256MB`:
 

@@ -113,7 +113,7 @@ Solutions: Use the `cdc` executable file corresponding to the TiCDC cluster vers
 
 ### Compatibility with temporary tables
 
-Since v5.3.0, TiCDC supports [global temporary tables](/temporary-table.md#global-temporary). Replicating global temporary tables using TiCDC of a version earlier than v5.3.0 causes table definition error.
+Since v5.3.0, TiCDC supports [global temporary tables](/temporary-table.md#global-temporary-tables). Replicating global temporary tables using TiCDC of a version earlier than v5.3.0 causes table definition error.
 
 If the upstream cluster contains a global temporary table, the downstream TiDB cluster is expected to be v5.3.0 or later. Otherwise, an error occurs in the replication.
 
