@@ -425,6 +425,7 @@
       + [Configuration](/garbage-collection-configuration.md)
     + [Views](/views.md)
     + [Partitioning](/partitioned-table.md)
+    + [Temporary Table](/temporary-table.md)
     + [Character Set and Collation](/character-set-and-collation.md)
     + System Tables
       + [`mysql`](/mysql-schema.md)

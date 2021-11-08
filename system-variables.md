@@ -1500,6 +1500,14 @@ SET tidb_slow_log_threshold = 200;
 - Range: `[0, 9223372036854775807]`
 - This variable is used to limit the maximum number of requests TiDB can send to TiKV at the same time. 0 means no limit.
 
+### tidb_tmp_table_max_size <span class="version-mark">New in v5.3.0</span>
+
+- Scope: SESSION | GLOBAL
+- Default value: `67108864`
+- Range: `[1048576, 137438953472]`
+- Unit: Bytes
+- This variable is used to set the maximum size of a single temporary table. Any temporary table with a size larger than this variable value causes error.
+
 ### tidb_txn_mode
 
 - Scope: SESSION | GLOBAL
