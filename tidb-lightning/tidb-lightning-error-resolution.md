@@ -155,7 +155,7 @@ In this example we prepare a data source with some known errors.
 
 1. Prepare the database and table schemas.
 
-    {{ < copyable "shell-regular" > }}
+    {{< copyable "shell-regular" >}}
 
     ```sh
     mkdir example && cd example
@@ -166,7 +166,7 @@ In this example we prepare a data source with some known errors.
 
 2. Prepare the data.
 
-    {{ < copyable "shell-regular" > }}
+    {{< copyable "shell-regular" >}}
 
     ```sh
     cat << EOF >> example.t.1.sql
@@ -187,7 +187,7 @@ In this example we prepare a data source with some known errors.
 
 3. Configure TiDB Lightning enable strict SQL mode, use the local backend to import, resolve duplicates by deleting, and skip up to 10 errors.
 
-    {{ < copyable "shell-regular" > }}
+    {{< copyable "shell-regular" >}}
 
     ```sh
     cat << EOF >> config.toml
@@ -215,7 +215,7 @@ In this example we prepare a data source with some known errors.
 
 4. Run TiDB Lightning. This command will exit successfully because all errors are skipped.
 
-    {{ < copyable "shell-regular" > }}
+    {{< copyable "shell-regular" >}}
 
     ```sh
     tiup tidb-lightning -c config.toml
