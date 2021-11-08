@@ -78,4 +78,4 @@ If the SQL user does not meet the preceding privilege requirements, it fails to 
 
 ## Sign in with TiDB Dashboard
 
-After creating a SQL user that meets the privilege requirements of TiDB Dashboard, you can [Sign in](/dashboard/dashboard-access.md#login) with TiDB Dashboard by using this user.
+After creating a SQL user that meets the privilege requirements of TiDB Dashboard, you can [Sign in](/dashboard/dashboard-access.md#Sign in) with TiDB Dashboard by using this user.
