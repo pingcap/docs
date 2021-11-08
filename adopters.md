@@ -9,6 +9,7 @@ This is a list of TiDB adopters in various industries.
 
 | Company | Industry | Case studies |
 | :--- | :--- | :--- |
+|[SHAREit Group](https://www.ushareit.com/)|Internet|[English](https://pingcap.com/case-studies/why-shareit-selects-tikv-for-data-storage-for-its-2.4-billion-user-business); [Chinese](https://pingcap.com/zh/blog/devcon-2021-shareit)|
 |[China Telecom Bestpay](https://www.crunchbase.com/organization/orange-finance)|Mobile Payment|[English](https://pingcap.com/case-studies/how-we-process-data-five-times-more-efficiently-using-a-scale-out-mysql-alternative/); [Chinese](https://pingcap.com/cases-cn/user-case-bestpay/)|
 |[VNG](https://en.wikipedia.org/wiki/VNG_Corporation)|Mobile Payment|English [#1](https://pingcap.com/case-studies/tidb-at-zalopay-infrastructure-lesson-learned/), [#2](https://pingcap.com/case-studies/zalopay-using-a-scale-out-mysql-alternative-to-serve-millions-of-users)|
 |[Ping++](https://www.crunchbase.com/organization/ping-5)|Mobile Payment||
@@ -100,4 +101,3 @@ This is a list of TiDB adopters in various industries.
 |[Acewill](https://www.crunchbase.com/organization/acewill)|FoodTech||
 |[Ausnutria Dairy](https://www.crunchbase.com/organization/ausnutria-dairy)|FoodTech||
 |[Qingdao Telaidian](https://www.teld.cn/)|Electric Car Charger||
-|[SHAREit Group](https://www.ushareit.com/)|Internet|[English](https://pingcap.com/case-studies/why-shareit-selects-tikv-for-data-storage-for-its-2.4-billion-user-business); [Chinese](https://pingcap.com/zh/blog/devcon-2021-shareit)|
