@@ -43,7 +43,7 @@ When the SQL user does not meet the preceding privilege requirements, it fails t
 
 ## Example: Create a least-privileged SQL user to access TiDB Dashboard
 
-Wen [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security) is not enabled on the connected TiDB server, you can create a SQL user `dashboardAdmin` that can sign in with TiDB Dashboard by executing the following SQL statement:
+When [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security) is not enabled on the connected TiDB server, you can create a SQL user `dashboardAdmin` that can sign in with TiDB Dashboard by executing the following SQL statement:
 
 ```sql
     CREATE USER 'dashboardAdmin'@'%' IDENTIFIED BY '<YOUR_PASSWORD>';
