@@ -7,7 +7,7 @@ summary: Learn how to schedule placement of tables and partitions using SQL stat
 
 > **Warning:**
 >
-> Placement Rules in SQL is an experimental feature. The syntax might change before its GA, and there might also be bugs.
+> Placement Rules in SQL is an experimental feature introduced in v5.3.0. The syntax might change before its GA, and there might also be bugs.
 >
 > If you understand the risks, you can enable this experiment feature by executing `SET GLOBAL tidb_enable_alter_placement = 1;`.
 
