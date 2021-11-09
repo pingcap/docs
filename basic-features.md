@@ -112,14 +112,10 @@ This document lists the features supported in each TiDB version. Note that suppo
 | [List partitioning](/partitioned-table.md)                                                               | Experimental | Experimental | Experimental | N            |
 | [List COLUMNS partitioning](/partitioned-table.md)                                                       | Experimental | Experimental | Experimental | N            |
 | [`EXCHANGE PARTITION`](/partitioned-table.md)                                                            | Experimental | Experimental | Experimental | N            |
-<<<<<<< HEAD
 | [Dynamic Pruning](https://docs.pingcap.com/tidb/v5.1/partitioned-table#dynamic-pruning-mode)                                            | Experimental | Experimental | N            | N            |
-=======
-| [Dynamic Pruning](/partitioned-table.md#dynamic-pruning-mode)                                            | Experimental | Experimental | N            | N            |
 
 ## Statistics
 
->>>>>>> 9cd842cde (Refine the layout of basic-features.md (#6740))
 | **Statistics**                                                                                           | **5.2**      | **5.1**      | **5.0**      | **4.0**      |
 |----------------------------------------------------------------------------------------------------------|:------------:|:------------:|:------------:|:------------:|
 | [CMSketch](/statistics.md)                                                                               | Deprecated   | Deprecated   | Deprecated   | Y            |
