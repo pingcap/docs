@@ -1,6 +1,6 @@
 ---
 title: Placement Rules in SQL
-summary: Learn how to schedule placement of tables and partitions.
+summary: Learn how to schedule placement of tables and partitions using SQL statements.
 ---
 
 # Placement Rules in SQL
