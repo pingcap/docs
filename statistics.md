@@ -371,7 +371,19 @@ The interface to export statistics is as follows:
     http://${tidb-server-ip}:${tidb-server-status-port}/stats/dump/${db_name}/${table_name}/${yyyyMMddHHmmss}
     ```
 
++ Example
+
+    {{< copyable "" >}}
+
+    ```
+    curl -s http://127.0.0.1:10080/stats/dump/test/t1 -o /tmp/t1.json
+    ```
+
 ### Import statistics
+
+> **Note:**
+>
+> When you start the MySQL client, use the `--local-infile=1` option.
 
 Generally, the imported statistics refer to the JSON file obtained using the export interface.
 
@@ -387,4 +399,5 @@ LOAD STATS 'file_name'
 
 ## See also
 
+* [LOAD STATS](/sql-statements/sql-statement-load-stats.md)
 * [DROP STATS](/sql-statements/sql-statement-drop-stats.md)
