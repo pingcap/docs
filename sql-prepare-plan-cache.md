@@ -19,7 +19,7 @@ In the current version of TiDB, if the `Prepare` statement meets any of the foll
 - The query contains SQL statements other than `SELECT`, `UPDATE`, `INSERT`, `DELETE`, `Union`, `Intersect`, and `Except`;
 - The query is executed to access partitioned tables or temporary tables, or a table that contains generated columns;
 - The query contains sub-queries, such as `select * from t where a > (select ...)`;
-- The query contains the hint query `ignore_plan_cache`, such as `select /*+ ignore_plan_cache() */ * from t`;
+- The query contains the hint `ignore_plan_cache`, such as `select /*+ ignore_plan_cache() */ * from t`;
 - The query contains variables other than `?` (including system variables or user-defined variables), such as `select * from t where a>? and b>@x`;
 - The query contains the following functions that cannot be cached: `database()`, `current_user`, `current_role`, `user`, `connection_id`, `last_insert_id`, `row_count`, `version`, and `like`;
 - The `Limit` statement of the query is followed by `?` , such as `Limit ?` and `Limit 10, ?`. Such queries are not cached because the value of `?` has great impact on the queries;
