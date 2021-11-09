@@ -7,11 +7,9 @@ summary: Learn how to schedule placement of tables and partitions using SQL stat
 
 > **Warning:**
 >
-> Placement Rules in SQL is an experimental feature introduced in v5.3.0. The syntax might change before its GA, and there might also be bugs.
->
-> If you understand the risks, you can enable this experiment feature by executing `SET GLOBAL tidb_enable_alter_placement = 1;`.
+> Placement Rules in SQL is an experimental feature introduced in v5.3.0. The syntax might change before its GA, and there might also be bugs. If you understand the risks, you can enable this experiment feature by executing `SET GLOBAL tidb_enable_alter_placement = 1;`.
 
-Placement Rules allow you to configure where data will be stored in a TiKV cluster. This is useful for scenarios including optimizing a high availability strategy, ensuring that local copies of data will be available for local stale reads, and adhering to compliance requirements.
+Placement Rules in SQL allow you to configure where data will be stored in a TiKV cluster. This is useful for scenarios including optimizing a high availability strategy, ensuring that local copies of data will be available for local stale reads, and adhering to compliance requirements.
 
 ## Specify placement options
 
@@ -83,9 +81,9 @@ CREATE PLACEMENT POLICY eastandwest PRIMARY_REGION="us-east-1" REGIONS="us-east-
 CREATE TABLE t1 (a INT) PLACEMENT POLICY=eastandwest;
 ```
 
-The `SCHEDULE` option instructs TiDB on how to balance the followers.
+The `SCHEDULE` option instructs TiDB on how to balance the followers. The default schedule of `EVEN` ensures a balance of followers in all regions.
 
-The default schedule of `EVEN` ensures a balance of followers in all regions. You can use the `MAJORITY_IN_PRIMARY` schedule to ensure that enough followers are placed in the primary region (`us-east-1`) so that quorum can be achieved. If the primary region completely fails, you can the `MAJORITY_IN_PRIMARY` schedule for lower latency transactions at the expense of availability.
+To ensure that enough followers are placed in the primary region (`us-east-1`) so that quorum can be achieved, you can use the `MAJORITY_IN_PRIMARY` schedule  If the primary region completely fails, you can the `MAJORITY_IN_PRIMARY` schedule for lower latency transactions at the expense of availability.
 
 ### Assign placement to a partitioned table
 
@@ -153,7 +151,7 @@ PARTITION BY RANGE( YEAR(purchased) ) (
 
 You can either specify constraints in list format (`[+disk=ssd]`) or in dictionary format (`{+disk=ssd:1,+disk=hdd:2}`).
 
-In list format, constraints are specified as a list of key-value pairs. The key starts with either a `+` or a `-` with `+disk=ssd` indicating that the label `disk` must be set to `ssd`, and `-disk=hdd`, indicating that the label `disk` must not be `hdd`.
+In list format, constraints are specified as a list of key-value pairs. The key starts with either a `+` or a `-`. `+disk=ssd` indicates that the label `disk` must be set to `ssd`, and `-disk=hdd` indicates that the label `disk` must not be `hdd`.
 
 In dictionary format, constraints also indicate a number of instances that apply to that rule. For example `FOLLOWER_CONSTRAINTS="{+region=us-east-1:1,+region=us-east-2:1,+region=us-west-1:1,+any:1}";` indicates that 1 follower is in us-east-1, 1 follower is in us-east-2, 1 follower is in us-west-1, and 1 follower can be in any region.
 
@@ -166,4 +164,4 @@ The following known limitations exist in the experimental release of Placement R
 * Temporary tables do not support placement options (either via direct placement or placement policies).
 * Syntactic sugar rules are permitted for setting `PRIMARY_REGION` and `REGIONS`. but in the future, we plan to add varieties for `PRIMARY_RACK`, `PRIMARY_ZONE`, and `PRIMARY_HOST`. See [issue #18030](https://github.com/pingcap/tidb/issues/18030).
 * TiFlash learners are not configurable through Placement Rules syntax.
-* Placement rules only ensure that data at rest resides on the correct TiKV store. The rules do not guarantee that data in transit (via either user-queries or internal operations) only occurs in a specific region.
+* Placement rules only ensure that data at rest resides on the correct TiKV store. The rules do not guarantee that data in transit (via either user queries or internal operations) only occurs in a specific region.
