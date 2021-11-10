@@ -43,7 +43,8 @@ Different from MySQL, the local temporary tables in TiDB are all external tables
 
 > **Note:**
 >
-> Before you use the temporary table in TiDB, pay attention to the [compatibility restrictions with other TiDB features](#compatibility-restrictions-with-other-tidb-features) and the [compatibility with MySQL temporary tables](#compatibility-with-mysql-temporary-tables).
+> - Before you use the temporary table in TiDB, pay attention to the [compatibility restrictions with other TiDB features](#compatibility-restrictions-with-other-tidb-features) and the [compatibility with MySQL temporary tables](#compatibility-with-mysql-temporary-tables).
+> - If you have created temporary tables on a cluster earlier than v5.3.0, these tables are ordinary tables, and treated as ordinary tables after the cluster is upgraded to v5.3.0 or later.
 
 Assume that there is an ordinary table `users`:
 
@@ -180,7 +181,8 @@ You can create a global temporary table using the `CREATE GLOBAL TEMPORARY TABLE
 
 > **Note:**
 >
-> Before you use the temporary table in TiDB, pay attention to the [compatibility restrictions with other TiDB features](#compatibility-restrictions-with-other-tidb-features) and the [compatibility with MySQL temporary tables](#compatibility-with-mysql-temporary-tables).
+> - Before you use the temporary table in TiDB, pay attention to the [compatibility restrictions with other TiDB features](#compatibility-restrictions-with-other-tidb-features) and the [compatibility with MySQL temporary tables](#compatibility-with-mysql-temporary-tables).
+> - When a cluster of v5.3.0 or later is downgraded to a version earlier than v5.3.0,global temporary tables created on the cluster are handled as ordinary tables and cause data error.
 
 Create a global temporary table `users` in session A:
 
