@@ -297,7 +297,7 @@ This variable is an alias for `last_insert_id`.
 ### placement_checks
 
 - Scope: SESSION | GLOBAL
-- Default value: ON
+- Default value: `ON`
 - This variable controls whether DDL statements validate [Placement Rules in SQL](/placement-rules-in-sql.md).
 - It is intended to be used by logical dump/restore tools to ensure that tables can always be created even if placement rules are violated. This is similar to how mysqldump writes `SET FOREIGN_KEY_CHECKS=0;` to the start of every dump file.
 
@@ -411,6 +411,7 @@ This variable is an alias for `last_insert_id`.
 ### tidb_allow_function_for_expression_index <span class="version-mark">New in v5.2.0</span>
 
 - Scope: NONE
+- Default value: `lower, md5, reverse, upper, vitess_hash`
 - This variable is used to show the functions that are allowed to be used for creating expression indexes.
 
 ### tidb_allow_mpp <span class="version-mark">New in v5.0</span>
@@ -767,6 +768,12 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Default value: `OFF`
 - This variable controls whether to enable concurrency for the `Apply` operator. The number of concurrencies is controlled by the `tidb_executor_concurrency` variable. The `Apply` operator processes correlated subqueries and has no concurrency by default, so the execution speed is slow. Setting this variable value to `1` can increase concurrency and speed up execution. Currently, concurrency for `Apply` is disabled by default.
 
+### tidb_enable_pseudo_for_outdated_stats
+
+- Scope: SESSION | GLOBAL
+- Default value: `ON`
+- No documentation is currently available for this variable.
+
 ### tidb_enable_rate_limit_action
 
 - Scope: SESSION | GLOBAL
@@ -825,6 +832,12 @@ Query OK, 0 rows affected (0.09 sec)
 - Scope: GLOBAL
 - Default value: `ON`
 - This variable is used to dynamically control whether the telemetry collection in TiDB is enabled. By setting the value to `OFF`, the telemetry collection is disabled. If the [`enable-telemetry`](/tidb-configuration-file.md#enable-telemetry-new-in-v402) TiDB configuration item is set to `false` on all TiDB instances, the telemetry collection is always disabled and this system variable will not take effect. See [Telemetry](/telemetry.md) for details.
+
+### tidb_enable_tso_follower_proxy
+
+- Scope: GLOBAL
+- Default value: `OFF`
+- No documentation is currently available for this variable.
 
 ### tidb_enable_vectorized_expression <span class="version-mark">New in v4.0</span>
 
@@ -1097,6 +1110,13 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Scope: SESSION
 - Default value: `tikv,tiflash,tidb`
 - This variable is used to set the storage engine list that TiDB can use when reading data.
+
+### tidb_log_file_max_days
+
+- Scope: SESSION
+- Default value: `0`
+- Range: `[0, 2147483647]`
+- No documentation is currently available for this variable.
 
 ### tidb_low_resolution_tso
 
@@ -1507,6 +1527,20 @@ SET tidb_slow_log_threshold = 200;
 - Range: `[0, 9223372036854775807]`
 - This variable is used to limit the maximum number of requests TiDB can send to TiKV at the same time. 0 means no limit.
 
+### tidb_tmp_table_max_size
+
+- Scope: SESSION | GLOBAL
+- Default value: `67108864`
+- Range: `[1048576, 137438953472]`
+- No documentation is currently available for this variable.
+
+### tidb_tso_client_batch_max_wait_time
+
+- Scope: GLOBAL
+- Default value: `0`
+- Range: `[0, 10]`
+- No documentation is currently available for this variable.
+
 ### tidb_txn_mode
 
 - Scope: SESSION | GLOBAL
@@ -1562,7 +1596,7 @@ SET tidb_slow_log_threshold = 200;
 ### timestamp
 
 - Scope: SESSION
-- Default value: ""
+- Default value: `0`
 - A non-empty value of this variable indicates the UNIX epoch that is used as the timestamp for `CURRENT_TIMESTAMP()`, `NOW()`, and other functions. This variable might be used in data restore or replication.
 
 ### transaction_isolation
@@ -1588,17 +1622,17 @@ This variable is an alias for `transaction_isolation`.
 - Default value: (string)
 - This variable returns additional details about the TiDB version. For example, 'TiDB Server (Apache License 2.0) Community Edition, MySQL 5.7 compatible'.
 
-### version_compile_os
-
-- Scope: NONE
-- Default value: (string)
-- This variable returns the name of the OS on which TiDB is running.
-
 ### version_compile_machine
 
 - Scope: NONE
 - Default value: (string)
 - This variable returns the name of the CPU architecture on which TiDB is running.
+
+### version_compile_os
+
+- Scope: NONE
+- Default value: (string)
+- This variable returns the name of the OS on which TiDB is running.
 
 ### wait_timeout
 

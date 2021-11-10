@@ -38,7 +38,7 @@ func formatDefaultValue(sv *variable.SysVar) string {
 		return "(system hostname)"
 	case variable.Version:
 		return "`5.7.25-TiDB-`(tidb version)"
-	case variable.VersionComment:
+	case variable.VersionComment, "version_compile_machine", "version_compile_os":
 		return "(string)"
 	case variable.Socket:
 		return `""` // TODO: need to fix this in the code.
@@ -86,9 +86,7 @@ func skipSv(sv *variable.SysVar) bool {
 		variable.TiDBTopSQLMaxStatementCount, variable.TiDBEnableGlobalTemporaryTable, variable.TiDBEnablePipelinedWindowFunction, variable.TiDBOptCartesianBCJ,
 		variable.TiDBEnableLocalTxn, variable.TiDBTopSQLMaxCollect, variable.TiDBTopSQLReportIntervalSeconds,
 		variable.TiDBOptMPPOuterJoinFixedBuildSide, variable.TiDBRestrictedReadOnly, variable.TiDBMPPStoreFailTTL, variable.TiDBHashExchangeWithNewCollation,
-		variable.TiDBEnableOrderedResultMode, variable.TiDBReadStaleness,
-		variable.TiDBEnableMPPBalanceWithContinuousRegion, variable.TiDBEnableMPPBalanceWithContinuousRegionCount,
-		"version_compile_os", "version_compile_machine":
+		variable.TiDBEnableOrderedResultMode, variable.TiDBReadStaleness:
 
 		return true
 	}
@@ -203,7 +201,7 @@ func formatSpecialVersionComment(sv *variable.SysVar) string {
 		return ` <span class="version-mark">New in v5.1</span>`
 	case variable.TiDBAnalyzeVersion:
 		return ` <span class="version-mark">New in v5.1.0</span>`
-	case variable.SkipNameResolve:
+	case variable.SkipNameResolve, variable.TiDBAllowFunctionForExpressionIndex:
 		return ` <span class="version-mark">New in v5.2.0</span>`
 	default:
 		return ""
@@ -893,6 +891,15 @@ func getExtendedDescription(sv *variable.SysVar) string {
 			"> It is not recommended to set `sql_log_bin` as a global variable because the future versions of TiDB might only allow setting this as a session variable."
 	case "ssl_ca":
 		return "- The location of the certificate authority file (if there is one)."
+	case "version_compile_machine":
+		return "- This variable returns the name of the CPU architecture on which TiDB is running."
+	case "version_compile_os":
+		return "- This variable returns the name of the OS on which TiDB is running."
+	case variable.PlacementChecks:
+		return "- This variable controls whether DDL statements validate [Placement Rules in SQL](/placement-rules-in-sql.md).\n" +
+			"- It is intended to be used by logical dump/restore tools to ensure that tables can always be created even if placement rules are violated. This is similar to how mysqldump writes `SET FOREIGN_KEY_CHECKS=0;` to the start of every dump file."
+	case variable.TiDBAllowFunctionForExpressionIndex:
+		return "- This variable is used to show the functions that are allowed to be used for creating expression indexes."
 	default:
 		return "- No documentation is currently available for this variable."
 	}
@@ -941,6 +948,17 @@ func main() {
 		">\n" +
 		"> TiDB differs from MySQL in that `GLOBAL` scoped variables **persist** through TiDB server restarts. Additionally, TiDB presents several MySQL variables as both readable and settable. This is required for compatibility, because it is common for both applications and connectors to read MySQL variables. For example, JDBC connectors both read and set query cache settings, despite not relying on the behavior.\n" +
 		"\n" +
+		"> **Note:**\n" +
+		">\n" +
+		"> Larger values do not always yield better performance. It is also important to consider the number of concurrent connections that are executing statements, because most settings apply to each connection.\n" +
+		">\n" +
+		"> Consider the unit of a variable when you determine safe values:\n" +
+		">\n" +
+		"> * For threads, safe values are typically up to the number of CPU cores.\n" +
+		"> * For bytes, safe values are typically less than the amount of system memory.\n" +
+		"> * For time, pay attention that the unit might be seconds or milliseconds.\n" +
+		">\n" +
+		"> Variables using the same unit might compete for the same set of resources.\n\n" +
 		"## Variable Reference\n\n")
 
 	for _, name := range getSysVarsByOrder() {
