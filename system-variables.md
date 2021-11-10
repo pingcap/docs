@@ -1516,13 +1516,6 @@ SET tidb_slow_log_threshold = 200;
 - Default value: ""
 - A non-empty value of this variable indicates the UNIX epoch that is used as the timestamp for `CURRENT_TIMESTAMP()`, `NOW()`, and other functions. This variable might be used in data restore or replication.
 
-### tmp_table_size
-
-- Scope: SESSION | GLOBAL
-- Default value: `16777216`
-- Unit: Bytes
-- Indicates the maximum size of a temporary table.
-
 ### transaction_isolation
 
 - Scope: SESSION | GLOBAL
