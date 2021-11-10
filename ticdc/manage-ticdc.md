@@ -803,14 +803,17 @@ This feature supports TiCDC to replicate incremental data from a TiDB cluster to
 
 ```toml
 [consistent]
-# Consistency level. Options include.
+# Consistency level. Options include:
 # - none: the default value. In a non-disaster scenario, eventual consistency is only guaranteed if and only if finished-ts is specified. 
-# - eventual: Use redo log to guarantee eventual consistency in case of the primary cluster disasters. 
+# - eventual: Uses redo log to guarantee eventual consistency in case of the primary cluster disasters. 
 level = "eventual"
+
 # Individual redo log file size, in MiB. By default, it's 64. It is recommended to be no more than 128.
 max-log-size = 64
+
 # The interval for flushing or uploading redo logs to S3, in milliseconds. By default, it's 1000. The recommended range is 500-2000.
 flush-interval = 1000
+
 # Form of storing redo log, including nfs (NFS directory) and S3 (uploading to S3).
 storage = "s3://logbucket/test-changefeed?endpoint=http://$S3_ENDPOINT/"
 ```
@@ -820,7 +823,7 @@ storage = "s3://logbucket/test-changefeed?endpoint=http://$S3_ENDPOINT/"
 When a disaster happens in the primary cluster, you need to recover manually in the secondary cluster by running the `cdc redo` command. The recovery process is as follows.
 
 1. Ensure that all the TiCDC processes have exited. This is to prevent the primary cluster from resuming service during data recovery and prevent TiCDC from restarting data synchronization.
-2. Use cdc binary for data recovery. Run the following command.
+2. Use cdc binary for data recovery. Run the following command:
 
 ```shell
 cdc redo apply --tmp-dir="/tmp/cdc/redo/apply" \
@@ -830,6 +833,6 @@ cdc redo apply --tmp-dir="/tmp/cdc/redo/apply" \
 
 In this command:
 
-- `tmp-dir`: Specify the temporary directory for downloading TiCDC incremental data backup files.
-- `storage`: Specify the address for storing the TiCDC incremental data backup files, either an Amazon S3 storage or an NFS directory.
-- `sink-uri`: Specify the secondary cluster address to restore the data to. Scheme can only be `mysql`.
+- `tmp-dir`: Specifies the temporary directory for downloading TiCDC incremental data backup files.
+- `storage`: Specifies the address for storing the TiCDC incremental data backup files, either an Amazon S3 storage or an NFS directory.
+- `sink-uri`: Specifies the secondary cluster address to restore the data to. Scheme can only be `mysql`.
