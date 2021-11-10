@@ -910,7 +910,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Default value: `tikv,tiflash,tidb`
 - This variable is used to set the storage engine list that TiDB can use when reading data.
 
-### tidb_log_file_max_days
+### tidb_log_file_max_days <span class="version-mark">New in v5.3</span>
 
 - Scope: SESSION
 - Default value: `0`
