@@ -910,6 +910,12 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Default value: `tikv,tiflash,tidb`
 - This variable is used to set the storage engine list that TiDB can use when reading data.
 
+### tidb_log_file_max_days
+
+- Scope: SESSION
+- Default value: `7`
+- This variable is used to adjust max days of logger on the current TiDB instance. It defaults to the value specified in the config file. Changing the variable will only replace the logger of the current TiDB instance. Neither the config file nor the global config will be affected.
+
 ### tidb_low_resolution_tso
 
 - Scope: SESSION
