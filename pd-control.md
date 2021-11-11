@@ -131,29 +131,13 @@ Usage:
 >> config show                                // Display the config information of the scheduling
 {
   "replication": {
-<<<<<<< HEAD
     "enable-placement-rules": "false",
-=======
-    "enable-placement-rules": "true",
-    "isolation-level": "",
->>>>>>> 9357c0f4c (PD control: remove store limit scene (#6777))
     "location-labels": "",
     "max-replicas": 3,
     "strictly-match-label": "false"
   },
   "schedule": {
-<<<<<<< HEAD
-    "enable-cross-table-merge": "false",
-    "enable-debug-metrics": "false",
-    "enable-location-replacement": "true",
-    "enable-make-up-replica": "true",
-    "enable-one-way-merge": "false",
-    "enable-remove-down-replica": "true",
-    "enable-remove-extra-replica": "true",
-    "enable-replace-offline-replica": "true",
-=======
     "enable-cross-table-merge": "true",
->>>>>>> 9357c0f4c (PD control: remove store limit scene (#6777))
     "high-space-ratio": 0.7,
     "hot-region-cache-hits-threshold": 3,
     "hot-region-schedule-limit": 4,
@@ -750,37 +734,7 @@ Usage:
 - `src-tolerance-ratio` and `dst-tolerance-ratio` are configuration items for the expectation scheduler. The smaller the `tolerance-ratio`, the easier it is for scheduling. When redundant scheduling occurs, you can appropriately increase this value.
 
     ```bash
-<<<<<<< HEAD
     >> scheduler config balance-hot-region-scheduler set src-tolerance-ratio 1.05
-=======
-    >> scheduler config balance-hot-region-scheduler set src-tolerance-ratio 1.1
-    ```
-
-- `read-priorities`, `write-leader-priorities`, and `write-peer-priorities` control which dimension the scheduler prioritizes for hot Region scheduling. Two dimensions are supported for configuration.
-
-    - `read-priorities` and `write-leader-priorities` control which dimensions the scheduler prioritizes for scheduling hot Regions of the read and write-leader types. The dimension options are `query`, `byte`, and `key`.
-    - `write-peer-priorities` controls which dimensions the scheduler prioritizes for scheduling hot Regions of the write-peer type. The dimension options are `byte` and `key`.
-
-    > **Note:**
-    >
-    > If a cluster component is earlier than v5.2, the configuration of `query` dimension does not take effect. If some components are upgraded to v5.2 or later, the `byte` and `key` dimensions still by default have the priority for hot Region scheduling. After all components of the cluster are upgraded to v5.2 or later, such a configuration still takes effect for compatibility. You can view the real-time configuration using the `pd-ctl` command. Usually, you do not need to modify these configurations.
-
-    ```bash
-    >> scheduler config balance-hot-region-scheduler set read-priorities query,byte
-    ```
-
-- `strict-picking-store` controls the search space of hot Region scheduling. Usually, it is enabled. When it is enabled, hot Region scheduling ensures hotspot balance on the two configured dimensions. When it is disabled, hot Region scheduling only ensures the balance on the dimension with the first priority, which might reduce balance on other dimensions. Usually, you do not need to modify this configuration.
-
-    ```bash
-    >> scheduler config balance-hot-region-scheduler set strict-picking-store true
-    ```
-
-- `enable-for-tiflash` controls whether hot Region scheduling takes effect for TiFlash instances. Usually, it is enabled. When it is disabled, the hot Region scheduling between TiFlash instances is not performed.
-
-    ```bash
-    >> scheduler config balance-hot-region-scheduler set enable-for-tiflash true
->>>>>>> 9357c0f4c (PD control: remove store limit scene (#6777))
-    ```
 
 ### `store [delete | label | weight | remove-tombstone | limit ] <store_id>  [--jq="<query string>"]`
 
@@ -801,7 +755,6 @@ Usage:
 >> store label 1 zone cn               // Set the value of the label with the "zone" key to "cn" for the store with the store id of 1
 >> store weight 1 5 10                 // Set the leader weight to 5 and Region weight to 10 for the store with the store id of 1
 >> store remove-tombstone              // Remove stores that are in tombstone state
-<<<<<<< HEAD
 >> store limit-scene                   // Show all limit scenarios (experimental)
 {
   "Idle": 100,
@@ -810,17 +763,6 @@ Usage:
   "High": 12
 }
 >> store limit-scene idle 100 // set rate to 100 in the idle scene (experimental)
-=======
->> store limit                         // Show the speed limit of adding-peer operations and the limit of removing-peer operations per minute in all stores
->> store limit add-peer                // Show the speed limit of adding-peer operations per minute in all stores
->> store limit remove-peer             // Show the limit of removing-peer operations per minute in all stores
->> store limit all 5                   // Set the limit of adding-peer operations to 5 and the limit of removing-peer operations to 5 per minute for all stores
->> store limit 1 5                     // Set the limit of adding-peer operations to 5 and the limit of removing-peer operations to 5 per minute for store 1
->> store limit all 5 add-peer          // Set the limit of adding-peer operations to 5 per minute for all stores
->> store limit 1 5 add-peer            // Set the limit of adding-peer operations to 5 per minute for store 1
->> store limit 1 5 remove-peer         // Set the limit of removing-peer operations to 5 per minute for store 1
->> store limit all 5 remove-peer       // Set the limit of removing-peer operations to 5 per minute for all stores
->>>>>>> 9357c0f4c (PD control: remove store limit scene (#6777))
 ```
 
 For the usage of `store limit`, see [Store Limit](/configure-store-limit.md).
