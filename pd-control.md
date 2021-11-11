@@ -137,7 +137,14 @@ Usage:
     "strictly-match-label": "false"
   },
   "schedule": {
-    "enable-cross-table-merge": "true",
+    "enable-cross-table-merge": "false",
+    "enable-debug-metrics": "false",
+    "enable-location-replacement": "true",
+    "enable-make-up-replica": "true",
+    "enable-one-way-merge": "false",
+    "enable-remove-down-replica": "true",
+    "enable-remove-extra-replica": "true",
+    "enable-replace-offline-replica": "true",
     "high-space-ratio": 0.7,
     "hot-region-cache-hits-threshold": 3,
     "hot-region-schedule-limit": 4,
@@ -164,7 +171,7 @@ Usage:
   "max-replicas": 3,
   "location-labels": "",
   "strictly-match-label": "false",
-  "enable-placement-rules": "true"
+  "enable-placement-rules": "false"
 }
 
 >> config show cluster-version                // Display the current version of the cluster, which is the current minimum version of TiKV nodes in the cluster and does not correspond to the binary version.
@@ -735,6 +742,7 @@ Usage:
 
     ```bash
     >> scheduler config balance-hot-region-scheduler set src-tolerance-ratio 1.05
+    ```
 
 ### `store [delete | label | weight | remove-tombstone | limit ] <store_id>  [--jq="<query string>"]`
 
