@@ -1523,7 +1523,7 @@ SET tidb_slow_log_threshold = 200;
 - When obtaining TSO requests from PD each time, PD Client, used by TiDB, collects as many TSO requests received at the same time as possible. Then, PD Client merges the collected requests in batch into one RPC request and sends the request to PD. This helps reduce the pressure on PD.
 - After setting this variable to a value greater than `0`, TiDB waits for the maximum duration of this value before the end of each batch merge. This is to collect more TSO requests and improve the effect of batch operations.
 - Scenarios for increasing the value of this variable:
-    * Due to the high pressure of TSO requests, the CPU of PD leaders reaches a bottleneck, which causes high latency of TSO RPC requests.
+    * Due to the high pressure of TSO requests, the CPU of the PD leader reaches a bottleneck, which causes high latency of TSO RPC requests.
     * There are not many TiDB instances in the cluster, but every TiDB instance is in high concurrency.
 - It is recommended to set this variable to a value as small as possible.
 
