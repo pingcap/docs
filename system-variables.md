@@ -30,6 +30,18 @@ SET  GLOBAL tidb_distsql_scan_concurrency = 10;
 >
 > TiDB differs from MySQL in that `GLOBAL` scoped variables **persist** through TiDB server restarts. Additionally, TiDB presents several MySQL variables as both readable and settable. This is required for compatibility, because it is common for both applications and connectors to read MySQL variables. For example, JDBC connectors both read and set query cache settings, despite not relying on the behavior.
 
+> **Note:**
+>
+> Larger values do not always yield better performance. It is also important to consider the number of concurrent connections that are executing statements, because most settings apply to each connection.
+>
+> Consider the unit of a variable when you determine safe values:
+>
+> * For threads, safe values are typically up to the number of CPU cores.
+> * For bytes, safe values are typically less than the amount of system memory.
+> * For time, pay attention that the unit might be seconds or milliseconds.
+>
+> Variables using the same unit might compete for the same set of resources.
+
 ## Variable Reference
 
 ### allow_auto_random_explicit_insert <span class="version-mark">New in v4.0.3</span>
@@ -281,6 +293,13 @@ This variable is an alias for `last_insert_id`.
 > **Note:**
 >
 > Unlike in MySQL, the `max_execution_time` system variable currently works on all kinds of statements in TiDB, not only restricted to the `SELECT` statement. The precision of the timeout value is roughly 100ms. This means the statement might not be terminated in accurate milliseconds as you specify.
+
+### placement_checks
+
+- Scope: SESSION | GLOBAL
+- Default value: ON
+- This variable controls whether DDL statements validate [Placement Rules in SQL](/placement-rules-in-sql.md).
+- It is intended to be used by logical dump/restore tools to ensure that tables can always be created even if placement rules are violated. This is similar to how mysqldump writes `SET FOREIGN_KEY_CHECKS=0;` to the start of every dump file.
 
 ### plugin_dir
 
@@ -573,7 +592,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 - Scope: GLOBAL
 - Default value: `4`
-- Range: `[1, 128]`
+- Range: `[1, 256]`
 - Unit: Threads
 - This variable is used to set the concurrency of the DDL operation in the `re-organize` phase.
 
@@ -595,7 +614,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 - Scope: SESSION | GLOBAL
 - Default value: `15`
-- Range: `[1, 2147483647]`
+- Range: `[1, 256]`
 - Unit: Threads
 - This variable is used to set the concurrency of the `scan` operation.
 - Use a bigger value in OLAP scenarios, and a smaller value in OLTP scenarios.
@@ -863,7 +882,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 - Scope: SESSION | GLOBAL
 - Default value: `5`
-- Range: `[1, 2147483647]`
+- Range: `[1, 256]`
 - Unit: Threads
 
 This variable is used to set the concurrency of the following SQL operators (to one value):
@@ -910,7 +929,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: GLOBAL
 - Default value: `-1`
-- Range: `[1, 128]`
+- Range: `[1, 256]`
 - Unit: Threads
 - Specifies the number of threads in the [Resolve Locks](/garbage-collection-overview.md#resolve-locks) step of GC. A value of `-1` means that TiDB will automatically decide the number of garbage collection threads to use.
 
@@ -978,7 +997,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: SESSION | GLOBAL
 - Default value: `-1`
-- Range: `[1, 2147483647]`
+- Range: `[1, 256]`
 - Unit: Threads
 - This variable is used to set the concurrency of the `hash join` algorithm.
 - A value of `-1` means that the value of `tidb_executor_concurrency` will be used instead.
@@ -991,7 +1010,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: SESSION | GLOBAL
 - Default value: `-1`
-- Range: `[1, 2147483647]`
+- Range: `[1, 256]`
 - Unit: Threads
 - This variable is used to set the concurrency of executing the concurrent `hash aggregation` algorithm in the `final` phase.
 - When the parameter of the aggregate function is not distinct, `HashAgg` is run concurrently and respectively in two phases - the `partial` phase and the `final` phase.
@@ -1005,7 +1024,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: SESSION | GLOBAL
 - Default value: `-1`
-- Range: `[1, 2147483647]`
+- Range: `[1, 256]`
 - Unit: Threads
 - This variable is used to set the concurrency of executing the concurrent `hash aggregation` algorithm in the `partial` phase.
 - When the parameter of the aggregate function is not distinct, `HashAgg` is run concurrently and respectively in two phases - the `partial` phase and the `final` phase.
@@ -1028,7 +1047,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: SESSION | GLOBAL
 - Default value: `-1`
-- Range: `[1, 2147483647]`
+- Range: `[1, 256]`
 - Unit: Threads
 - This variable is used to set the concurrency of the `index lookup` operation.
 - Use a bigger value in OLAP scenarios, and a smaller value in OLTP scenarios.
@@ -1042,7 +1061,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: SESSION | GLOBAL
 - Default value: `-1`
-- Range: `[1, 2147483647]`
+- Range: `[1, 256]`
 - Unit: Threads
 - This variable is used to set the concurrency of the `index lookup join` algorithm.
 - A value of `-1` means that the value of `tidb_executor_concurrency` will be used instead.
@@ -1060,7 +1079,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: SESSION | GLOBAL
 - Default value: `1`
-- Range: `[1, 2147483647]`
+- Range: `[1, 256]`
 - Unit: Threads
 - This variable is used to set the concurrency of the `serial scan` operation.
 - Use a bigger value in OLAP scenarios, and a smaller value in OLTP scenarios.
@@ -1325,7 +1344,7 @@ explain select * from t where age=5;
 
 - Scope: SESSION | GLOBAL
 - Default value: `-1`
-- Range: `[-1, 2147483647]`
+- Range: `[-1, 256]`
 - Unit: Threads
 - This variable is used to set the concurrency of the `Projection` operator.
 - A value of `-1` means that the value of `tidb_executor_concurrency` will be used instead.
@@ -1528,7 +1547,7 @@ SET tidb_slow_log_threshold = 200;
 
 - Scope: SESSION | GLOBAL
 - Default value: `-1`
-- Range: `[1, 2147483647]`
+- Range: `[1, 256]`
 - Unit: Threads
 - This variable is used to set the concurrency degree of the window operator.
 - A value of `-1` means that the value of `tidb_executor_concurrency` will be used instead.
@@ -1545,14 +1564,6 @@ SET tidb_slow_log_threshold = 200;
 - Scope: SESSION
 - Default value: ""
 - A non-empty value of this variable indicates the UNIX epoch that is used as the timestamp for `CURRENT_TIMESTAMP()`, `NOW()`, and other functions. This variable might be used in data restore or replication.
-
-### tmp_table_size
-
-- Scope: SESSION | GLOBAL
-- Default value: `16777216`
-- Range: `[1024, 9223372036854775807]`
-- Unit: Bytes
-- Indicates the maximum size of a temporary table.
 
 ### transaction_isolation
 
@@ -1576,6 +1587,18 @@ This variable is an alias for `transaction_isolation`.
 - Scope: NONE
 - Default value: (string)
 - This variable returns additional details about the TiDB version. For example, 'TiDB Server (Apache License 2.0) Community Edition, MySQL 5.7 compatible'.
+
+### version_compile_os
+
+- Scope: NONE
+- Default value: (string)
+- This variable returns the name of the OS on which TiDB is running.
+
+### version_compile_machine
+
+- Scope: NONE
+- Default value: (string)
+- This variable returns the name of the CPU architecture on which TiDB is running.
 
 ### wait_timeout
 
