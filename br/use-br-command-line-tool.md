@@ -256,7 +256,8 @@ Since TiDB v5.3.0, TiDB supports backup encryption. You can configure the follow
 
 > **Warning:**
 >
-> If the key is lost, the backup data cannot be restored to the cluster.
+> - If the key is lost, the backup data cannot be restored to the cluster.
+> - The encryption feature needs to be used on BR tools and tidb clusters not eailer than v5.3.0, and the encrypted backup data cannot be restored on clusters ealier than v5.3.0.
 
 The configuration example for backup encryption is as follows:
 
