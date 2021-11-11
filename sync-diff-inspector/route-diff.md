@@ -52,7 +52,7 @@ To check a large number of tables with different schema names or table names, yo
     password = ""
 ########################### Routes ###########################
 [routes.rule1]
-schema-pattern = "test_1"      # # Matches the schema name of the data source. Supports the wildcards "*" and "?"
+schema-pattern = "test_1"      # Matches the schema name of the data source. Supports the wildcards "*" and "?"
 table-pattern = "*"            # Matches the table name of the data source. Supports the wildcards "*" and "?"
 target-schema = "test_2"       # The name of the schema in the target database
 target-table = "t_2"           # The name of the target table

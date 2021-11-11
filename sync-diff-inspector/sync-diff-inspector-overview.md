@@ -119,15 +119,15 @@ collation = ""
 # To compare the data of a large number of tables with different schema names or table names, or check the data of multiple upstream sharded tables and downstream table family, use the table-rule to configure the mapping relationship. You can configure the mapping rule only for the schema or table. Also, you can configure the mapping rules for both the schema and the table.
 [routes]
 [routes.rule1]
-schema-pattern = "test_*"      # 匹配数据源的库名，支持通配符 "*" 和 "?"
-table-pattern = "t_*"          # 匹配数据源的表名，支持通配符 "*" 和 "?"
-target-schema = "test"         # 目标库名
-target-table = "t" # 目标表名
+schema-pattern = "test_*"      # Matches the schema name of the data source. Supports the wildcards "*" and "?"
+table-pattern = "t_*"          # Matches the table name of the data source. Supports the wildcards "*" and "?"
+target-schema = "test"         # The name of the schema in the target database
+target-table = "t"             # The name of the target table
 [routes.rule2]
-schema-pattern = "test2_*"      # 匹配数据源的库名，支持通配符 "*" 和 "?"
-table-pattern = "t2_*"          # 匹配数据源的表名，支持通配符 "*" 和 "?"
-target-schema = "test2"         # 目标库名
-target-table = "t2" # 目标表名
+schema-pattern = "test2_*"      # Matches the schema name of the data source. Supports the wildcards "*" and "?"
+table-pattern = "t2_*"          # Matches the table name of the data source. Supports the wildcards "*" and "?"
+target-schema = "test2"         # The name of the schema in the target database
+target-table = "t2"             # The name of the target table
 
 ######################### task config #########################
 # Configures the tables of the target database that need to be compared.
@@ -162,7 +162,7 @@ Run the following command:
 
 This command outputs a check report `summary.txt` in the `output-dir` of `config.toml` and the log `sync_diff.log`. In the `output-dir`, a folder named by the hash value of the `config. toml` file are also generated. This folder includes the checkpoint node information of breakpoint and the SQL file generated when the data is inconsistent.
 
-### 前台输出
+### Progress information
 
 sync-diff-inspector sends progress information to `stdout` when running. Progress information includes the comparison results of table structures, comparison results of table data and the progress bar.
 
@@ -219,15 +219,15 @@ output/
 └-- sync_diff.log # Saves the output log informatiion when sync-diff-inspector is running
 ```
 
-#### Log
+### Log
 
 The log of sync-diff-inspector is saved in `${output}/sync_diff.log`, among which `${output}` is the value of `output-dir` in the `config.toml` file.
 
-#### Progress
+### Progress
 
 The running sync-diff-inspector periodically (every 10 seconds) prints the progress in checkpoint, which is located at `${output}/checkpoint/sync_diff_checkpoints.pb`, among which `${output}` is the value of `output-dir` in the `config.toml` file.
 
-#### Result
+### Result
 
 After the check is finished, sync-diff-inspector outputs a report, which is located at `${output}/summary.txt`, among which `${output}` is the value of `output-dir` in the `config.toml` file.
 
@@ -248,7 +248,7 @@ Average Speed: 113.277149MB/s
 
 - DATA DIFF ROWS: `rowAdd` / `rowDelete`. Indicates the number of rows that need to be added/deleted to fix the table
 
-#### SQL statements to fix inconsistent data
+### SQL statements to fix inconsistent data
 
 If different rows exist during the data checking process, the SQL statements to fix them will generate. If the data inconsistency exists in a chunk, a SQL file named by `chunk.Index` will generate. The SQL file is located at `${output}/fix-on-${instance}`, among which `${instance}` is the value of `task.target-instance` in the `config.toml` file.
 
@@ -274,17 +274,8 @@ REPLACE INTO `sbtest`.`sbtest99`(`id`,`k`,`c`,`pad`) VALUES (3700000,2501808,'he
 
 ## Note
 
-* sync-diff-inspector 在校验数据时会消耗一定的服务器资源，需要避免在业务高峰期间校验。
-* TiDB 使用的 collation 为 `utf8_bin`。如果对 MySQL 和 TiDB 的数据进行对比，需要注意 MySQL 中表的 collation 设置。如果表的主键／唯一键为 varchar 类型，且 MySQL 中 collation 设置与 TiDB 不同，可能会因为排序问题导致最终校验结果不正确，需要在 sync-diff-inspector 的配置文件中增加 collation 设置。
-* sync-diff-inspector 会优先使用 TiDB 的统计信息来划分 chunk，需要尽量保证统计信息精确，可以在**业务空闲期**手动执行 `analyze table {table_name}`。
-* table-rule 的规则需要特殊注意，例如设置了 `schema-pattern="test1"`，table-pattern = "t_1"，`target-schema="test2"`，target-table = "t_2"，会对比 source 中的表 `test1`.`t_1` 和 target 中的表 `test2`.`t_2`。sync-diff-inspector 默认开启 sharding，如果 source 中还有表 `test2`.`t_2`，则会把 source 端的表 `test1`.`t_1` 和表 `test2`.`t_2` 作为 sharding 与 target 中的表 `test2`.`t_2` 进行一致性校验。
-* 生成的 SQL 文件仅作为修复数据的参考，需要确认后再执行这些 SQL 修复数据。
-
-### Note
-
 - sync-diff-inspector consumes a certain amount of server resources when checking data. Avoid using sync-diff-inspector to check data during peak business hours.
 - TiDB uses the `utf8_bin` collation. If you need to compare the data in MySQL with that in TiDB, pay attention to the collation configuration of MySQL tables. If the primary key or unique key is the `varchar` type and the collation configuration in MySQL differs from that in TiDB, then the final check result might be incorrect because of the collation issue. You need to add collation to the sync-diff-inspector configuration file.
 - sync-diff-inspector divides data into chunks first according to TiDB statistics and you need to guarantee the accuracy of the statistics. You can manually run the `analyze table {table_name}` command when the TiDB server's *workload is light*.
-
 - Pay special attention to `table-rules`. If you configure `schema-pattern="test1"`, `table-pattern = "t_1"`, `target-schema="test2"` and `target-table = "t_2"`, the `test1`.`t_1` schema in the source database and the `test2`.`t_2` schema in the target database are compared. Sharding is enabled by default in sync-diff-inspector, so if the source database has a `test2`.`t_2` table,  the `test1`.`t_1` table and `test2`.`t_2` table in the source database serving as sharding are compared with the `test2`.`t_2` table in the target database.
 - The generated SQL file is only used as a reference for repairing data, and you need to confirm it before executing these SQL statements to repair data.
