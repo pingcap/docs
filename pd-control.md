@@ -763,14 +763,6 @@ Usage:
 >> store label 1 zone cn               // Set the value of the label with the "zone" key to "cn" for the store with the store id of 1
 >> store weight 1 5 10                 // Set the leader weight to 5 and Region weight to 10 for the store with the store id of 1
 >> store remove-tombstone              // Remove stores that are in tombstone state
->> store limit-scene                   // Show all limit scenarios (experimental)
-{
-  "Idle": 100,
-  "Low": 50,
-  "Normal": 32,
-  "High": 12
-}
->> store limit-scene idle 100 // set rate to 100 in the idle scene (experimental)
 ```
 
 For the usage of `store limit`, see [Store Limit](/configure-store-limit.md).
