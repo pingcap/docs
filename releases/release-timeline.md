@@ -87,8 +87,8 @@ This document shows all the released TiDB versions in reverse chronological orde
 | [2.1.9](/releases/release-2.1.9.md) | 2019-05-06 |
 | [2.1.8](/releases/release-2.1.8.md) | 2019-04-12 |
 | [2.1.7](/releases/release-2.1.7.md) | 2019-03-28 |
-| [2.1.6](/releases/release-2.1.6.md) | 2019-03-15 |
 | [3.0.0-beta.1](/releases/release-3.0.0-beta.1.md) | 2019-03-26 |
+| [2.1.6](/releases/release-2.1.6.md) | 2019-03-15 |
 | [2.1.5](/releases/release-2.1.5.md) | 2019-02-28 |
 | [2.1.4](/releases/release-2.1.4.md) | 2019-02-15 |
 | [2.1.3](/releases/release-2.1.3.md) | 2019-01-28 |
