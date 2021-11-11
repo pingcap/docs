@@ -8,7 +8,7 @@ aliases: ['/docs/dev/alert-rules/','/docs/dev/reference/alert-rules/']
 
 # TiDB Cluster Alert Rules
 
-This document describes the alert rules for different components in a TiDB cluster, including the rule descriptions and solutions of the alert items in TiDB, TiKV, PD, TiDB Binlog, Node_exporter and Blackbox_exporter.
+This document describes the alert rules for different components in a TiDB cluster, including the rule descriptions and solutions of the alert items in TiDB, TiKV, PD, TiFlash, TiDB Binlog, Node_exporter and Blackbox_exporter.
 
 According to the severity level, alert rules are divided into three categories (from high to low): emergency-level, critical-level, and warning-level. This division of severity levels applies to all alert items of each component below.
 
@@ -218,7 +218,7 @@ This section gives the alert rules for the PD component.
 
 * Description:
 
-    etcd writes data to disk at a lower speed than normal. It might lead to PD leader timeout or failure to store TSO on disk in time, which will shut down the service of the entire cluster.
+    If the latency of the fsync operation exceeds 1 second, it indicates that etcd writes data to disk at a lower speed than normal. It might lead to PD leader timeout or failure to store TSO on disk in time, which will shut down the service of the entire cluster.
 
 * Solution:
 
@@ -234,7 +234,7 @@ This section gives the alert rules for the PD component.
 
 * Description:
 
-    The number of Region replicas is smaller than the value of `max-replicas`. When a TiKV machine is down and its downtime exceeds `max-down-time`, it usually leads to missing replicas for some Regions during a period of time. When a TiKV node is made offline, it might result in a small number of Regions with missing replicas.
+    The number of Region replicas is smaller than the value of `max-replicas`. When a TiKV machine is down and its downtime exceeds `max-down-time`, it usually leads to missing replicas for some Regions during a period of time. 
 
 * Solution:
 
@@ -690,7 +690,7 @@ This section gives the alert rules for the TiKV component.
 
 * Alert rule:
 
-    `increase(tikv_coprocessor_request_error{reason!="lock"}[10m]) > 100`
+    `increase(tikv_coprocessor_request_error{reason=!"meet_lock"}[10m]) > 100`
 
 * Description:
 
@@ -704,7 +704,7 @@ This section gives the alert rules for the TiKV component.
 
 * Alert rule:
 
-    `increase(tikv_coprocessor_request_error{reason="lock"}[10m]) > 10000`
+    `increase(tikv_coprocessor_request_error{reason="meet_lock"}[10m]) > 10000`
 
 * Description:
 
@@ -752,11 +752,20 @@ This section gives the alert rules for the TiKV component.
 
     Check which kind of tasks has a higher value. You can normally find a solution to the Coprocessor and apply worker tasks from other metrics.
 
-#### `TiKV_low_space_and_add_region`
+#### `TiKV_low_space`
 
 * Alert rule:
 
-    `count((sum(tikv_store_size_bytes{type="available"}) by (instance) / sum(tikv_store_size_bytes{type="capacity"}) by (instance) < 0.2) and (sum(tikv_raftstore_snapshot_traffic_total{type="applying"}) by (instance) > 0)) > 0`
+    `sum(tikv_store_size_bytes{type="available"}) by (instance) / sum(tikv_store_size_bytes{type="capacity"}) by (instance) < 0.2`
+
+* Description:
+
+    The data volume of TiKV exceeds 80% of the configured node capacity or the disk capacity of the machine.
+
+* Solution:
+
+    * Check the balance condition of node space.
+    * Make a plan to increase the disk capacity or delete some data or increase cluster node depending on different situations.
 
 #### `TiKV_approximate_region_size`
 
@@ -771,6 +780,10 @@ This section gives the alert rules for the TiKV component.
 * Solution:
 
     The speed of splitting Regions is slower than the write speed. To alleviate this issue, you’d better update TiDB to a version that supports batch-split (>= 2.1.0-rc1). If it is not possible to update temporarily, you can use `pd-ctl operator add split-region <region_id> --policy=approximate` to manually split Regions.
+
+## TiFlash alert rules
+
+For the detailed descriptions of TiFlash alert rules, see [TiFlash Alert Rules](/tiflash/tiflash-alert-rules.md).
 
 ## TiDB Binlog alert rules
 
@@ -944,6 +957,22 @@ This section gives the alert rules for the Blackbox_exporter TCP, ICMP, and HTTP
     * Check whether the machine that provides the TiDB service is down.
     * Check whether the TiDB process exists.
     * Check whether the network between the monitoring machine and the TiDB machine is normal.
+
+#### `TiFlash_server_is_down`
+
+* Alert rule:
+
+    `probe_success{group="tiflash"} == 0`
+
+* Description:
+
+    Failure to probe the TiFlash service port.
+
+* Solution:
+
+    * Check whether the machine that provides the TiFlash service is down.
+    * Check whether the TiFlash process exists.
+    * Check whether the network between the monitoring machine and the TiFlash machine is normal.
 
 #### `Pump_server_is_down`
 

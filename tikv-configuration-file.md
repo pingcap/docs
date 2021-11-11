@@ -14,7 +14,7 @@ This document only describes the parameters that are not included in command-lin
 
 ## Global configuration
 
-### abort-on-panic
+### `abort-on-panic`
 
 + Sets whether to call `abort()` to exit the process when TiKV panics. This option affects whether TiKV allows the system to generate core dump files.
 
@@ -23,7 +23,45 @@ This document only describes the parameters that are not included in command-lin
 
 + Default value: `false`
 
-### server
+### `log-level`
+
++ The log level
++ Value options: "trace", "debug", "info", "warning", "error", "critical"
++ Default value: "info"
+
+### `log-file`
+
++ The log file. If this configuration is not set, logs are output to "stderr" by default.
++ Default value: ""
+
+### `log-format`
+
++ The log format
++ Value options: "json", "text"
++ Default value: "text"
+
+### `log-rotation-timespan`
+
++ The timespan between log rotations. When this timespan passes, log files are rotated, that is, a timestamp is appended to the file name of the current log file, and a new file is created.
++ Default value: "24h"
+
+### `log-rotation-size`
+
++ The size of a log file that triggers log rotation. Once the size of a log file is bigger than the specified threshold value, log files are rotated. The old log file is placed into the new file, and the new file name is the old file name with a timestamp suffix.
++ Default value: "300MB"
+
+### `slow-log-file`
+
++ The file to store slow logs
++ If this configuration is not set but `log-file` is set, slow logs are output to the log file specified by `log-file`. If neither `slow-log-file` nor `log-file` are set, all logs are output to "stderr".
++ Default value: ""
+
+### `slow-log-threshold`
+
++ The threshold for outputing slow logs. If the processing time is longer than this threshold, slow logs are output.
++ Default value: "1s"
+
+## server
 
 + Configuration items related to the server
 
@@ -116,7 +154,7 @@ This document only describes the parameters that are not included in command-lin
 
 ### `end-point-slow-log-threshold`
 
-+ The time threshold for a TiDB's push down request to print slow log
++ The time threshold for a TiDB's push-down request to output slow log. If the processing time is longer than this threshold, the slow logs are output.
 + Default value: `"1s"`
 + Minimum value: `0`
 
@@ -319,7 +357,7 @@ Configuration items related to the sharing of block cache among multiple RocksDB
 
 ## storage.flow-control
 
-Configuration items related to the flow control mechanism in TiKV. This mechanism supersedes the write stall mechanism in RocksDB and controls flow at the scheduler layer, which avoids the issue of QPS drop caused by the stuck Raftstore or Apply threads when the write traffic is high.
+Configuration items related to the flow control mechanism in TiKV. This mechanism replaces the write stall mechanism in RocksDB and controls flow at the scheduler layer, which avoids the issue of QPS drop caused by the stuck Raftstore or Apply threads when the write traffic is high.
 
 ### `enable`
 
@@ -334,7 +372,7 @@ Configuration items related to the flow control mechanism in TiKV. This mechanis
 ### `l0-files-threshold`
 
 + When the number of kvDB L0 files reaches this threshold, the flow control mechanism starts to work.
-+ Default value: `9`
++ Default value: `20`
 
 ### `soft-pending-compaction-bytes-limit`
 
@@ -463,13 +501,8 @@ Configuration items related to Raftstore
 
 ### `hibernate-regions`
 
-+ Enables or disables Hibernate Region. When this option is enabled, a Region idle for a long time is automatically set as hibernated. This reduces the extra overhead caused by heartbeat messages between the Raft leader and the followers for idle Regions. You can use `raftstore.peer-stale-state-check-interval` to modify the heartbeat interval between the leader and the followers of hibernated Regions.
++ Enables or disables Hibernate Region. When this option is enabled, a Region idle for a long time is automatically set as hibernated. This reduces the extra overhead caused by heartbeat messages between the Raft leader and the followers for idle Regions. You can use `peer-stale-state-check-interval` to modify the heartbeat interval between the leader and the followers of hibernated Regions.
 + Default value: `true` in v5.0.2 and later versions; `false` in versions before v5.0.2
-
-### `raftstore.peer-stale-state-check-interval`
-
-+ Modifies the state check interval for Regions.
-+ Default value: 5 min
 
 ### `split-region-check-tick-interval`
 
@@ -676,6 +709,13 @@ Configuration items related to Raftstore
 + Controls whether to enable batch processing of the requests. When it is enabled, the write performance is significantly improved. 
 + Default value: `true`
 
+### `inspect-interval`
+
++ At a certain interval, TiKV inspects the latency of the Raftstore component. This parameter specifies the interval of the inspection. If the latency exceeds this value, this inspection is marked as timeout. 
++ Judges whether the TiKV node is slow based on the ratio of timeout inspection. 
++ Default value: `"500ms"`
++ Minimum value: `"1ms"`
+
 ## Coprocessor
 
 Configuration items related to Coprocessor
@@ -756,7 +796,11 @@ Configuration items related to RocksDB
 ### `wal-recovery-mode`
 
 + WAL recovery mode
-+ Optional values: `0` (`TolerateCorruptedTailRecords`), `1` (`AbsoluteConsistency`), `2` (`PointInTimeRecovery`), `3` (`SkipAnyCorruptedRecords`)
++ Value options: `0`, `1`, `2`, `3`
++ `0` (`TolerateCorruptedTailRecords`): tolerates and discards the records that have incomplete trailing data on all logs.
++ `1` (`AbsoluteConsistency`): abandons recovery when corrupted logs are found.
++ `2` (`PointInTimeRecovery`): recovers log sequentially until the first corrupted log is encountered.
++ `3` (`SkipAnyCorruptedRecords`): recovery after a disaster. Corrupted records are skipped
 + Default value: `2`
 + Minimum value: `0`
 + Maximum value: `3`
@@ -792,7 +836,7 @@ Configuration items related to RocksDB
 
 ### `compaction-readahead-size`
 
-+ The size of `readahead` when compaction is being performed
++ Enables the readahead feature during RocksDB compaction and specifies the size of readahead data. If you are using mechanical disks, it is recommended to set the value to 2MB at least.
 + Default value: `0`
 + Minimum value: `0`
 + Unit: B|KB|MB|GB
@@ -806,7 +850,7 @@ Configuration items related to RocksDB
 
 ### `use-direct-io-for-flush-and-compaction`
 
-+ Determines whether to use `O_DIRECT` for both reads and writes in background flush and compactions
++ Determines whether to use `O_DIRECT` for both reads and writes in the background flush and compactions. The performance impact of this option: enabling `O_DIRECT` bypasses and prevents contamination of the OS buffer cache, but the subsequent file reads require re-reading the contents to the buffer cache.
 + Default value: `false`
 
 ### `rate-bytes-per-sec`
@@ -1279,7 +1323,7 @@ Configuration items related to TiDB Lightning import and BR restore.
 ### `enable-compaction-filter` <span class="version-mark">New in v5.0</span>
 
 + Controls whether to enable the GC in Compaction Filter feature
-+ Default value: `false`
++ Default value: `true`
 
 ## backup
 
