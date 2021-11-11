@@ -102,6 +102,7 @@ Designed for the cloud, TiDB provides flexible scalability, reliability and secu
 - [Privilege Management](/privilege-management.md)
 - [Role-Based Access Control](/role-based-access-control.md)
 - [Certificate-Based Authentication](/certificate-authentication.md)
+- [Release Timeline](/releases/release-timeline.md)
 
 </NavColumn>
 
