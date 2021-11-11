@@ -756,10 +756,7 @@ Usage:
 - `src-tolerance-ratio` and `dst-tolerance-ratio` are configuration items for the expectation scheduler. The smaller the `tolerance-ratio`, the easier it is for scheduling. When redundant scheduling occurs, you can appropriately increase this value.
 
     ```bash
-<<<<<<< HEAD
     >> scheduler config balance-hot-region-scheduler set src-tolerance-ratio 1.05
-=======
-    >> scheduler config balance-hot-region-scheduler set src-tolerance-ratio 1.1
     ```
 
 - `read-priorities`, `write-leader-priorities`, and `write-peer-priorities` control which dimension the scheduler prioritizes for hot Region scheduling. Two dimensions are supported for configuration.
