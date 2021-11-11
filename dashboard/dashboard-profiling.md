@@ -12,7 +12,7 @@ On the manual instance profiling page, you can collect continuous performance da
 
 You can access the instance profiling page using either of the following methods:
 
-- After logging into TiDB Dashboard, click **Advanced Debugging** > **Profile Instances** > **Manual Profiling** on the left navigation bar.
+- After logging into TiDB Dashboard, click **Advanced Debugging** > **Profile Instances** > **Manually Profile** on the left navigation bar.
 
   ![Access instance profiling page](/media/dashboard/dashboard-profiling-access.png)
 
