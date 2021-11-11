@@ -749,32 +749,6 @@ Usage:
     >> scheduler config balance-hot-region-scheduler set src-tolerance-ratio 1.05
     ```
 
-- `read-priorities`, `write-leader-priorities`, and `write-peer-priorities` control which dimension the scheduler prioritizes for hot Region scheduling. Two dimensions are supported for configuration.
-
-    - `read-priorities` and `write-leader-priorities` control which dimensions the scheduler prioritizes for scheduling hot Regions of the read and write-leader types. The dimension options are `query`, `byte`, and `key`.
-    - `write-peer-priorities` controls which dimensions the scheduler prioritizes for scheduling hot Regions of the write-peer type. The dimension options are `byte` and `key`.
-
-    > **Note:**
-    >
-    > If a cluster component is earlier than v5.2, the configuration of `query` dimension does not take effect. If some components are upgraded to v5.2 or later, the `byte` and `key` dimensions still by default have the priority for hot Region scheduling. After all components of the cluster are upgraded to v5.2 or later, such a configuration still takes effect for compatibility. You can view the real-time configuration using the `pd-ctl` command. Usually, you do not need to modify these configurations.
-
-    ```bash
-    >> scheduler config balance-hot-region-scheduler set read-priorities query,byte
-    ```
-
-- `strict-picking-store` controls the search space of hot Region scheduling. Usually, it is enabled. When it is enabled, hot Region scheduling ensures hotspot balance on the two configured dimensions. When it is disabled, hot Region scheduling only ensures the balance on the dimension with the first priority, which might reduce balance on other dimensions. Usually, you do not need to modify this configuration.
-
-    ```bash
-    >> scheduler config balance-hot-region-scheduler set strict-picking-store true
-    ```
-
-- `enable-for-tiflash` controls whether hot Region scheduling takes effect for TiFlash instances. Usually, it is enabled. When it is disabled, the hot Region scheduling between TiFlash instances is not performed.
-
-    ```bash
-    >> scheduler config balance-hot-region-scheduler set enable-for-tiflash true
->>>>>>> 9357c0f4c (PD control: remove store limit scene (#6777))
-    ```
-
 ### `store [delete | label | weight | remove-tombstone | limit ] <store_id>  [--jq="<query string>"]`
 
 Use this command to view the store information or remove a specified store. For a jq formatted output, see [jq-formatted-json-output-usage](#jq-formatted-json-output-usage).
