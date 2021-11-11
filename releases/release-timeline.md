@@ -25,7 +25,7 @@ This document shows all the released TiDB versions in reverse chronological orde
 | [5.0.0](/releases/release-5.0.0.md) | 2021-04-07 |
 | [4.0.12](/releases/release-4.0.12.md) | 2021-04-02 |
 | [4.0.11](/releases/release-4.0.11.md) | 2021-02-26 |
-| [4.0.10](/releases/release-4.0.10.md) | 2012-01-15 |
+| [4.0.10](/releases/release-4.0.10.md) | 2021-01-15 |
 | [5.0.0-rc](/releases/release-5.0.0-rc.md) | 2021-01-12 |
 | [3.0.20](/releases/release-3.0.20.md) | 2020-12-25 |
 | [4.0.9](/releases/release-4.0.9.md) | 2020-12-21 |
