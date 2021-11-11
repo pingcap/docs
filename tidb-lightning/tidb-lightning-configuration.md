@@ -64,8 +64,8 @@ table-concurrency = 6
 io-concurrency = 5
 
 # maximum number of non-fatal errors to tolerate before stopping Lightning.
-# Non-fatal errors are those that are localized to a few rows, and ignoring those rows allow the import process to continue.
-# Setting this to N means Lightning will stop as soon as possible when the (N+1)-th error is encountered.
+# Non-fatal errors are those that are localized to a few rows, and ignoring those rows allows the import process to continue.
+# Setting this to N means that Lightning will stop as soon as possible when the (N+1)-th error is encountered.
 # The skipped rows will be inserted to tables inside the "task info" schema on the target TiDB, which can be configured below.
 max-error = 0
 # task-info-schema-name is the name of the schema/database storing human-readable Lightning execution result.
