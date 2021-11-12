@@ -93,7 +93,7 @@ To get allocated ID from the monitor, you need to make sure that the metrics you
 
 To get the allocated ID from the PD log, you need to make sure that the log you are viewing is the log of **the last PD leader**, and you can get the maximum allocated ID by running the following command:
 
-{{< copyable "shell-regular" >}}
+{{< copyable "shell-regular" >}} 
 
 ```bash
 cat {{/path/to}}/pd*.log | grep "idAllocator allocates a new id" |  awk -F'=' '{print $2}' | awk -F']' '{print $1}' | sort -r -n | head -n 1
