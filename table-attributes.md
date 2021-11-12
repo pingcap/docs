@@ -91,7 +91,7 @@ Suppose that in a read-only scenario, you try to reduce the periodic read hotspo
     alter table t attributes[=]default；
     ```
 
-+ Block to merge Regions belonging to a partition:
++ Prevent the Regions of a partition from merging:
 
     ```sql
     alter table t partition p attributes[=]'merge_option=deny';
