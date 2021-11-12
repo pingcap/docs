@@ -4,14 +4,14 @@ title: TiDB RC3 Release Notes
 
 # TiDB RC3 Release Notes
 
-On June 20, 2017, TiDB RC4 is released!This release is focused on MySQL compatibility, SQL optimization, stability, and performance.
+On June 16, 2017, TiDB RC3 is released! This release is focused on MySQL compatibility, SQL optimization, stability, and performance.
 
 ## Highlight
 
 - The privilege management is refined to enable users to manage the data access privileges using the same way as in MySQL.
 - DDL is accelerated.
 - The load balancing policy and process are optimized for performance.
-- TiDB Ansible is open sourced. By using TiDB-Ansilbe, you can deploy, upgrade, start and shutdown a TiDB cluster with one click.
+- TiDB Ansible is open sourced. By using TiDB-Ansible, you can deploy, upgrade, start and shutdown a TiDB cluster with one click.
 
 ## Detailed updates
 
