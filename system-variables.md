@@ -830,7 +830,7 @@ Query OK, 0 rows affected (0.09 sec)
 
 > **Note:**
 >
-> Suppose that the CPU of the PD leader does not reach a bottleneck but the TSO RPC latency increases for other reasons (such as network issues). In this case, enabling the TSO Follower Proxy might increase the execution latency in TiDB and affect the QPS performance of the cluster.
+> Suppose that the TSO RPC latency increases for reasons other than a CPU usage bottleneck of the PD leader (such as network issues). In this case, enabling the TSO Follower Proxy might increase the execution latency in TiDB and affect the QPS performance of the cluster.
 
 ### tidb_enable_vectorized_expression <span class="version-mark">New in v4.0</span>
 
