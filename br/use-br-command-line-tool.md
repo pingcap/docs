@@ -250,14 +250,14 @@ In the above example, for the incremental backup data, BR records the data chang
 
 Since TiDB v5.3.0, TiDB supports backup encryption. You can configure the following parameters to encrypt data during backup:
 
-* `--crypter.method`: Encryption algorithm. Support three algorithms `aes128-ctr/aes192-ctr/aes256-ctr`. The default value is `plaintext` and indicates no encryption.
-* `--crypter.key`: Encryption key  in hexadecimal string format. `aes128-ctr` means 128 bit (16 bytes) key length, `aes192-ctr` means 24 bytes and `aes256-ctr` means 32 bytes.
+* `--crypter.method`: Encryption algorithm. Supports three algorithms `aes128-ctr/aes192-ctr/aes256-ctr`. The default value is `plaintext` and indicates no encryption.
+* `--crypter.key`: Encryption key in hexadecimal string format. `aes128-ctr` means 128 bit (16 bytes) key length, `aes192-ctr` means 24 bytes and `aes256-ctr` means 32 bytes.
 * `--crypter.key-file`: The key file. You can directly pass in the file path where the key is stored as a parameter without passing in "crypter.key"
 
 > **Warning:**
 >
 > - If the key is lost, the backup data cannot be restored to the cluster.
-> - The encryption feature needs to be used on BR tools and tidb clusters not eailer than v5.3.0, and the encrypted backup data cannot be restored on clusters ealier than v5.3.0.
+> - The encryption feature needs to be used on BR tools and TiDB clusters v5.3.0 or later versions, and the encrypted backup data cannot be restored on clusters ealier than v5.3.0.
 
 The configuration example for backup encryption is as follows:
 
@@ -511,7 +511,9 @@ br restore full -f 'mysql.usertable' -s $external_storage_url --ratelimit 128
 
 ### Decrypt backup data
 
-After the encrypted backup of the data, you need to pass in the corresponding decryption parameters to restore the data. If the decryption algorithm or key is incorrect, the data cannot be restored. You need to ensure that the decryption parameters and encryption parameters are consistent. An example of decrypting the backup data is as follows:
+After encrypting the backup data, you need to pass in the corresponding decryption parameters to restore the data. You need to ensure that the decryption parameters and encryption parameters are consistent. If the decryption algorithm or key is incorrect, the data cannot be restored. 
+
+The following is an example of decrypting the backup data:
 
 {{< copyable "shell-regular" >}}
 
