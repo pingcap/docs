@@ -9,16 +9,16 @@ This document shows all the released TiDB versions in reverse chronological orde
 
 | Version | Release Date |
 | :--- | :--- |
-| [5.2.2](/releases/release-5.2.2.md) | 2021-10-29 |
-| [5.1.2](/releases/release-5.1.2.md) | 2021-09-27 |
+| [5.2.2](https://docs.pingcap.com/tidb/dev/release-5.2.2) | 2021-10-29 |
+| [5.1.2](https://docs.pingcap.com/tidb/dev/release-5.1.2) | 2021-09-27 |
 | [5.0.4](/releases/release-5.0.4.md) | 2021-09-27 |
 | [4.0.15](/releases/release-4.0.15.md) | 2021-09-27 |
-| [5.2.1](/releases/release-5.2.1.md) | 2021-09-09 |
-| [5.2.0](/releases/release-5.2.0.md) | 2021-08-27 |
-| [5.1.1](/releases/release-5.1.1.md) | 2021-07-30 |
+| [5.2.1](https://docs.pingcap.com/tidb/dev/release-5.2.1) | 2021-09-09 |
+| [5.2.0](https://docs.pingcap.com/tidb/dev/release-5.2.0) | 2021-08-27 |
+| [5.1.1](https://docs.pingcap.com/tidb/dev/release-5.1.1) | 2021-07-30 |
 | [4.0.14](/releases/release-4.0.14.md) | 2021-07-27 |
 | [5.0.3](/releases/release-5.0.3.md) | 2021-07-02 |
-| [5.1.0](/releases/release-5.1.0.md) | 2021-06-24 |
+| [5.1.0](https://docs.pingcap.com/tidb/dev/release-5.1.0) | 2021-06-24 |
 | [5.0.2](/releases/release-5.0.2.md) | 2021-06-10 |
 | [4.0.13](/releases/release-4.0.13.md) | 2021-05-28 |
 | [5.0.1](/releases/release-5.0.1.md) | 2021-04-24 |
