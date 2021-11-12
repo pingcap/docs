@@ -33,7 +33,7 @@ dm-task = "test"
 [task]
     output-dir = "./output"
 
-    # The tables of downstream databases to be compared. Each table needs to contain schema name and table name, separated by '.'
+    # The tables of downstream databases to be compared. Each table needs to contain the schema name and the table name, separated by '.'
     target-check-tables = ["hb_test.*"]
 ```
 

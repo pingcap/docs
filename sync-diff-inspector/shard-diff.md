@@ -8,9 +8,7 @@ aliases: ['/docs/dev/sync-diff-inspector/shard-diff/','/docs/dev/reference/tools
 
 sync-diff-inspector supports data check in the sharding scenario. Assume that you use the [TiDB Data Migration](https://docs.pingcap.com/tidb-data-migration/stable/overview) tool to replicate data from multiple MySQL instances into TiDB, you can use sync-diff-inspector to check upstream and downstream data.
 
-## Use `datasource config` for configuration
-
-You can use `Datasource config` to configure `table-0`, set corresponding `rules` and configure the tables that have the mapping relationship between the upstream and downstream databases. This configuration method requires setting all sharded tables, which is suitable for scenarios where the number of upstream sharded tables is small and the naming rules of sharded tables do not have a pattern as shown below.
+For scenarios where the number of upstream sharded tables is small and the naming rules of sharded tables do not have a pattern as shown below, you can use `Datasource config` to configure `table-0`, set corresponding `rules` and configure the tables that have the mapping relationship between the upstream and downstream databases. This configuration method requires setting all sharded tables.
 
 ![shard-table-replica-1](/media/shard-table-replica-1.png)
 
@@ -74,7 +72,7 @@ target-table = "table-0"     # The name of the target table
 
     target-instance = ["tidb0"]
 
-    # The tables of downstream databases to be compared. Each table needs to contain schema name and table name, separated by '.'
+    # The tables of downstream databases to be compared. Each table needs to contain the schema name and the table name, separated by '.'
     target-check-tables = ["test.table-0"]
 ```
 
@@ -130,7 +128,7 @@ target-table = "table-0"     # The name of the target table
 
     target-instance = ["tidb0"]
 
-    # The tables of downstream databases to be compared. Each table needs to contain schema name and table name, separated by '.'
+    # The tables of downstream databases to be compared. Each table needs to contain the schema name and the table name, separated by '.'
     target-check-tables = ["test.table-0"]
 ```
 
