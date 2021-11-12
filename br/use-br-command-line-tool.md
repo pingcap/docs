@@ -246,7 +246,7 @@ LAST_BACKUP_TS=`br validate decode --field="end-version" -s local:///home/tidb/b
 
 In the above example, for the incremental backup data, BR records the data changes and the DDL operations during `(LAST_BACKUP_TS, current PD timestamp]`. When restoring data, BR first restores DDL operations and then the data.
 
-### Encrypt the backup data
+### Encrypt data during backup
 
 Since TiDB v5.3.0, TiDB supports backup encryption. You can configure the following parameters to encrypt data during backup:
 
@@ -509,7 +509,7 @@ br restore full -f 'mysql.usertable' -s $external_storage_url --ratelimit 128
 >
 > Restoring system tables might cause more compatibility issues. To avoid unexpected issues, **DO NOT** restore system tables in the production environment.
 
-### Decrypt backup data
+### Decrypt data during restore
 
 After encrypting the backup data, you need to pass in the corresponding decryption parameters to restore the data. You need to ensure that the decryption parameters and encryption parameters are consistent. If the decryption algorithm or key is incorrect, the data cannot be restored. 
 
