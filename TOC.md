@@ -421,7 +421,7 @@
     + [Constraints](/constraints.md)
     + [Generated Columns](/generated-columns.md)
     + [SQL Mode](/sql-mode.md)
-    + [Table Attribute](/table-attributes.md)
+    + [Table Attributes](/table-attributes.md)
     + Transactions
       + [Overview](/transaction-overview.md)
       + [Isolation Levels](/transaction-isolation-levels.md)

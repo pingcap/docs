@@ -1,16 +1,16 @@
 ---
-title: Table Attribute
+title: Table Attributes
 summary: Introduce how to use TiDB `ATTRIBUTES`.
 ---
 
-# Table Attribute
+# Table Attributes
 
-Table attribute is a feature introduced in TiDB v5.3.0. Using this feature, you can add specific attributes to a table or partition to perform the operations corresponding to the attributes. For example, you can use table attributes to control the Region merge bahavior.
+Table attributes feature is introduced in TiDB v5.3.0. Using this feature, you can add specific attributes to a table or partition to perform the operations corresponding to the attributes. For example, you can use table attributes to control the Region merge behavior.
 
 > **Note:**
 >
-> - Currently, TiDB only supports adding the `merge_option` attribute to a table or partition to take control of merging regions.
-> - When you use TiDB Binlog or TiCDC to perform replication or use BR to perform incremental backup, the replication or backup operations skip the DDL statement that sets the table attribute. To use the table attribute in the downstream or in the backup cluster, you need to manually execute the DDL statement in the downstream or in the backup cluster.
+> - Currently, TiDB only supports adding the `merge_option` attribute to a table or partition to control the Region merge behavior.
+> - When you use TiDB Binlog or TiCDC to perform replication or use BR to perform incremental backup, the replication or backup operations skip the DDL statement that sets table attributes. To use table attributes in the downstream or in the backup cluster, you need to manually execute the DDL statement in the downstream or in the backup cluster.
 
 ## Usage
 
@@ -61,7 +61,7 @@ In this case, `key=value1` is the attribute that actually takes effect on the `p
 
 ### User scenarios
 
-If there is a write hotspot or read hotspot, you can use the table attribute to control the Region merge bahavior. You can first add the `merge_option` attribute to a table or partition and then set its value to `deny`. The two scenarios are as follows.
+If there is a write hotspot or read hotspot, you can use table attributes to control the Region merge behavior. You can first add the `merge_option` attribute to a table or partition and then set its value to `deny`. The two scenarios are as follows.
 
 #### Write hotspot on a newly created table or partition
 
@@ -69,7 +69,7 @@ If a hotspot problem occurs when writing data to a newly created table or partit
 
 #### Periodic read hotspot in read-only scenarios
 
-Suppose that in a read-only scenario, you try to reduce the periodic read hotspot that occurs on a table or partition by manually splitting regions, and you do not want the manually split regions to be merged after the hotspot issue is resolved. In this case, you can add the `merge_option` attribute to the table or partition and set its value to `deny`.
+Suppose that in a read-only scenario, you try to reduce the periodic read hotspot that occurs on a table or partition by manually splitting Regions, and you do not want the manually split Regions to be merged after the hotspot issue is resolved. In this case, you can add the `merge_option` attribute to the table or partition and set its value to `deny`.
 
 ### Usage
 
@@ -79,7 +79,7 @@ Suppose that in a read-only scenario, you try to reduce the periodic read hotspo
     alter table t attributes[=]'merge_option=deny';
     ```
 
-+ Allow merging regions belonging to a table:
++ Allow merging Regions belonging to a table:
 
     ```sql
     alter table t attributes[=]'merge_option=allow';
@@ -91,13 +91,13 @@ Suppose that in a read-only scenario, you try to reduce the periodic read hotspo
     alter table t attributes[=]default；
     ```
 
-+ Block to merge regions belonging to a partition:
++ Block to merge Regions belonging to a partition:
 
     ```sql
     alter table t partition p attributes[=]'merge_option=deny';
     ```
 
-+ Allow merging regions belonging to a partition:
++ Allow merging Regions belonging to a partition:
 
     ```sql
     alter table t partition p attributes[=]'merge_option=allow';
@@ -116,9 +116,9 @@ alter table t attributes[=]'merge_option=deny';
 alter table t partition p attributes[=]'merge_option=allow';
 ```
 
-When the above two attributes are configured at the same time, the regions belonging to the partition `p` can actually be merged. When the attribute of the partition is reset, the partition `p` inherits the attribute from the table `t`, and the regions cannot be merged.
+When the above two attributes are configured at the same time, the Regions belonging to the partition `p` can actually be merged. When the attribute of the partition is reset, the partition `p` inherits the attribute from the table `t`, and the Regions cannot be merged.
 
 > **Note:**
 >
 > - If only the attribute of a table exists at present, even though the `merge_option=allow` attribute is configured, a partition still split multiple regions according to the actual number of partitions by default. To merge all regions, you need to [reset attributes of the table](#usage).
-> - When using the `merge_option` attribute, you need to pay attention to the PD configuration parameter [`split-merge-interval`](/pd-configuration-file.md#split-merge-interval). Suppose that the `merge_option` attribute is not configured. In this case, if regions meet conditions, regions can be merged after the time specified by `split-merge-interval`. If the `merge_option` attribute is configured, its configuration decides whether to merge regions after the specified time.
+> - When using the `merge_option` attribute, you need to pay attention to the PD configuration parameter [`split-merge-interval`](/pd-configuration-file.md#split-merge-interval). Suppose that the `merge_option` attribute is not configured. In this case, if regions meet conditions, regions can be merged after the interval specified by `split-merge-interval`. If the `merge_option` attribute is configured, TiKV decides whether to merge regions after the specified interval according to the `merge_option` configuration.
