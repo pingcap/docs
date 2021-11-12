@@ -40,7 +40,7 @@ This guide introduces the key features of sync-diff-inspector and describes how 
 
 ## Database privileges for sync-diff-inspector
 
-sync-diff-inspector needs to obtain the information of table schema and to query data. The required database privileges are as follows:
+sync-diff-inspector needs to obtain the information of table schema to query data. The required database privileges are as follows:
 
 * Upstream database
     - `SELECT` (checks data for comparison)
@@ -53,7 +53,7 @@ sync-diff-inspector needs to obtain the information of table schema and to query
 
 ## Configuration file description
 
-The configuration of sync-diff-inspector consists of five parts:
+The configuration of sync-diff-inspector consists of the following parts:
 
 - `Global config`: General configurations, including number of threads to check, whether to export SQL statement to fix inconsistent tables, whether to campare the data and so on.
 - `Databases config`: Configures the instances of the upstream and downstream databases.
@@ -142,7 +142,7 @@ target-table = "t2"             # The name of the target table
     source-instances = ["mysql1"]
     # The downstream database. The value is the unique ID declared by data-sources.
     target-instance = "tidb0"
-    # The tables of downstream databases to be compared. Each table needs to contain schema name and table name, separated by '.'
+    # The tables of downstream databases to be compared. Each table needs to contain the schema name and the table name, separated by '.'
     # Use "?" to match any character and “*” to match characters of any length.
     # For detailed match rules, refer to golang regexp pkg: https://github.com/google/re2/wiki/Syntax.
     target-check-tables = ["schema*.table*", "!c.*", "test2.t2"]
@@ -160,7 +160,7 @@ Run the following command:
 ./bin/sync_diff_inspector --config=./config.toml
 ```
 
-This command outputs a check report `summary.txt` in the `output-dir` of `config.toml` and the log `sync_diff.log`. In the `output-dir`, a folder named by the hash value of the `config. toml` file are also generated. This folder includes the checkpoint node information of breakpoint and the SQL file generated when the data is inconsistent.
+This command outputs a check report `summary.txt` in the `output-dir` of `config.toml` and the log `sync_diff.log`. In the `output-dir`, a folder named by the hash value of the `config. toml` file is also generated. This folder includes the checkpoint node information of breakpoints and the SQL file generated when the data is inconsistent.
 
 ### Progress information
 
@@ -201,7 +201,7 @@ You can view the comparision details through 'output/sync_diff.log'
 
 ### Output file
 
-The output file directory structure is as follows:
+The directory structure of the output file is as follows:
 
 ```
 output/
@@ -229,7 +229,7 @@ The running sync-diff-inspector periodically (every 10 seconds) prints the progr
 
 ### Result
 
-After the check is finished, sync-diff-inspector outputs a report, which is located at `${output}/summary.txt`, among which `${output}` is the value of `output-dir` in the `config.toml` file.
+After the check is finished, sync-diff-inspector outputs a report. It is located at `${output}/summary.txt`, and `${output}` is the value of `output-dir` in the `config.toml` file.
 
 ```summary
 +---------------------+--------------------+----------------+
@@ -250,13 +250,13 @@ Average Speed: 113.277149MB/s
 
 ### SQL statements to fix inconsistent data
 
-If different rows exist during the data checking process, the SQL statements to fix them will generate. If the data inconsistency exists in a chunk, a SQL file named by `chunk.Index` will generate. The SQL file is located at `${output}/fix-on-${instance}`, among which `${instance}` is the value of `task.target-instance` in the `config.toml` file.
+If different rows exist during the data checking process, the SQL statements will be generated to fix them. If the data inconsistency exists in a chunk, a SQL file named by `chunk.Index` will be generated. The SQL file is located at `${output}/fix-on-${instance}`, and `${instance}` is the value of `task.target-instance` in the `config.toml` file.
 
 A SQL file contains the tale to which the chunk belong and the range information. For the SQL files, you should consider the following three situations:
 
 - If the rows in the downstream database are missing, REPLACE statements will be applied
 - If the rows in the downstream database are redundant, DELETE statements will be applied
-- If some data of the rows in the downstream database is inconsistent, REPLACE statements will be applied and different columns will be marked with annotation in the SQL file
+- If some data of the rows in the downstream database is inconsistent, REPLACE statements will be applied and inconsistent columns will be marked with annotation in the SQL file
 
 ```SQL
 -- table: sbtest.sbtest99
