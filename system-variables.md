@@ -1529,7 +1529,7 @@ SET tidb_slow_log_threshold = 200;
 
 > **Notes:**
 >
-> Suppose that the CPU of the PD leader does not reach a bottleneck but the TSO RPC latency increases for other reasons (such as network issues). In this case, increasing the value of `tidb_tso_client_batch_max_wait_time` might increase the execution latency in TiDB and affect the QPS performance of the cluster.
+> Suppose that the TSO RPC latency increases for reasons other than a CPU usage bottleneck of the PD leader (such as network issues). In this case, increasing the value of `tidb_tso_client_batch_max_wait_time` might increase the execution latency in TiDB and affect the QPS performance of the cluster.
 
 ### tidb_txn_mode
 
