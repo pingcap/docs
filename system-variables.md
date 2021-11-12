@@ -830,7 +830,7 @@ Query OK, 0 rows affected (0.09 sec)
 
 > **Note:**
 >
-> Suppose the TSO RPC latency increases, but the CPU bottleneck of PD leaders does not cause this issue. In this case, enabling the TSO Follower Proxy might increase the latency of TiDB statement execution, thereby affecting the QPS performance of the cluster.
+> Suppose that the CPU of the PD leader does not reach a bottleneck but the TSO RPC latency increases for other reasons (such as network issues). In this case, enabling the TSO Follower Proxy might increase the execution latency in TiDB and affect the QPS performance of the cluster.
 
 ### tidb_enable_vectorized_expression <span class="version-mark">New in v4.0</span>
 
@@ -1529,7 +1529,7 @@ SET tidb_slow_log_threshold = 200;
 
 > **Notes:**
 >
-> Suppose the TSO RPC latency increases, but the CPU bottleneck of PD leaders does not cause this issue. In this case, increasing the value of `tidb_tso_client_batch_max_wait_time` might increase the latency of TiDB statement execution, thereby affecting the QPS performance of the cluster.
+> Suppose that the CPU of the PD leader does not reach a bottleneck but the TSO RPC latency increases for other reasons (such as network issues). In this case, increasing the value of `tidb_tso_client_batch_max_wait_time` might increase the execution latency in TiDB and affect the QPS performance of the cluster.
 
 ### tidb_txn_mode
 
