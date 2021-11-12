@@ -73,8 +73,8 @@ This document shows all the released TiDB versions in reverse chronological orde
 | [3.0.3](/releases/release-3.0.3.md) | 2019-08-29 |
 | [2.1.16](/releases/release-2.1.16.md) | 2019-08-15 |
 | [3.0.2](/releases/release-3.0.2.md) | 2019-08-07 |
+| [2.1.15](/releases/release-2.1.15.md) | 2019-07-18 |
 | [3.0.1](/releases/release-3.0.1.md) | 2019-07-16 |
-| [2.1.15](/releases/release-2.1.15.md) | 2019-07-16 |
 | [2.1.14](/releases/release-2.1.14.md) | 2019-07-04 |
 | [3.0.0](/releases/release-3.0-ga.md) | 2019-06-28 |
 | [3.0.0-rc.3](/releases/release-3.0.0-rc.3.md) | 2019-06-21 |
@@ -131,6 +131,6 @@ This document shows all the released TiDB versions in reverse chronological orde
 | [1.0.0](/releases/release-1.0-ga.md) | 2017-10-16 |
 | [Pre-GA](/releases/release-pre-ga.md) | 2017-08-30 |
 | [rc4](/releases/release-rc.4.md) | 2017-08-04 |
-| [rc3](/releases/release-rc.3.md) | 2017-06-20 |
+| [rc3](/releases/release-rc.3.md) | 2017-06-16 |
 | [rc2](/releases/release-rc.2.md) | 2017-03-01 |
 | [rc1](/releases/release-rc.1.md) | 2016-12-23 |
