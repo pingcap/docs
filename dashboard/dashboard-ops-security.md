@@ -10,7 +10,7 @@ Although you need to sign into TiDB Dashboard before accessing it, TiDB Dashboar
 
 ## Enhance security of TiDB users
 
-### Set a strong password for TiDB `root` user
+### Set a strong password for the TiDB `root` user
 
 The account system of TiDB Dashboard is consistent with that of TiDB SQL users. By default, TiDB's `root` user has no password, so accessing TiDB Dashboard does not require password authentication, which will give the malicious visitor high privileges, including executing privileged SQL statements.
 
