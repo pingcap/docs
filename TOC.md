@@ -196,10 +196,6 @@
     + [Overview](/tidb-lightning/tidb-lightning-overview.md)
     + [Tutorial](/get-started-with-tidb-lightning.md)
     + [Deploy](/tidb-lightning/deploy-tidb-lightning.md)
-<<<<<<< HEAD
-=======
-    + [Precheck](/tidb-lightning/tidb-lightning-prechecks.md)
->>>>>>> 8d79130b9 (releases: add TiDB release timeline (#6792))
     + [Configure](/tidb-lightning/tidb-lightning-configuration.md)
     + Key Features
       + [Checkpoints](/tidb-lightning/tidb-lightning-checkpoints.md)
