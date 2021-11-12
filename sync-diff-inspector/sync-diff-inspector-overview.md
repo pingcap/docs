@@ -40,7 +40,7 @@ This guide introduces the key features of sync-diff-inspector and describes how 
 
 ## Database privileges for sync-diff-inspector
 
-sync-diff-inspector needs to obtain the information of table schema to query data. The required database privileges are as follows:
+sync-diff-inspector needs to obtain the information of table schema and to query data. The required database privileges are as follows:
 
 * Upstream database
     - `SELECT` (checks data for comparison)
