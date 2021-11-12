@@ -54,7 +54,7 @@ If an SQL user does not meet the preceding privilege requirements, the user fail
 
     -- To modify the configuration items on the interface after signing in with TiDB Dashboard, the user-defined SQL user must be granted with the following privilege:
 
-    ```
+    ```sql
     GRANT SYSTEM_VARIABLES_ADMIN ON *.* TO 'dashboardAdmin'@'%';
     ```
 
@@ -72,7 +72,7 @@ If an SQL user does not meet the preceding privilege requirements, the user fail
 
     -- To modify the configuration items on the interface after signing in with TiDB Dashboard, the user-defined SQL user must be granted with the following privilege:
 
-    ```
+    ```sql
     GRANT SYSTEM_VARIABLES_ADMIN ON *.* TO 'dashboardAdmin'@'%';
     ```
 
