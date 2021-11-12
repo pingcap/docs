@@ -5,42 +5,42 @@ summary: Introduce how to use TiDB `ATTRIBUTES`.
 
 # Table Attribute
 
-Table attribute is a new feature introduced from TiDB 5.3.0 version. This feature is used to add specific attributes to a table or partition to perform the operations corresponding to the attributes. For example, you can take control of merging regions by using the table attribute.
+Table attribute is a feature introduced in TiDB v5.3.0. Using this feature, you can add specific attributes to a table or partition to perform the operations corresponding to the attributes. For example, you can use table attributes to control the Region merge bahavior.
 
 > **Note:**
 >
 > - Currently, TiDB only supports adding the `merge_option` attribute to a table or partition to take control of merging regions.
-> - When performing data replication through TiDB Binlog or TiCDC or incremental backup through BR, the replication and backup skip the DDL statement that sets the table attribute. To use the table attribute in the downstream or backup cluster, you need to manually run the DDL statement in the downstream or backup cluster.
+> - When you use TiDB Binlog or TiCDC to perform replication or use BR to perform incremental backup, the replication or backup operations skip the DDL statement that sets the table attribute. To use the table attribute in the downstream or in the backup cluster, you need to manually execute the DDL statement in the downstream or in the backup cluster.
 
 ## Usage
 
-The table attribute is in `key=value` form. If there are multiple attributes, you need to use commas to separate them. The examples are as follows, where `t` is the name of the table to be modified, `p` is the name of the partition to be modified. For the items in `[]`, it is optional to fill them in.
+The table attribute is in the form of `key=value`. Multiple attributes are separated by commas. In the following examples, `t` is the name of the table to be modified, `p` is the name of the partition to be modified. Items in `[]` are optional.
 
-+ Set attributes of a table or partition:
++ Set attributes for a table or partition:
 
     ```sql
     alter table t [partition p ]attributes[=]'key=value[, key1=value1...]';
     ```
 
-+ Reset attributes of a table or partition:
++ Reset attributes for a table or partition:
 
     ```sql
     alter table t [partition p ]attributes[=]default;
     ```
 
-+ See all attributes of tables and partitions:
++ See the attributes of all tables and partitions:
 
     ```sql
     select * from information_schema.attributes;
     ```
 
-+ See the attributes configured to a table or partition:
++ See the attribute configured to a table or partition:
 
     ```sql
     select * from information_schema.attributes where id='schema/t[/p]';
     ```
 
-+ See all tables and partitions that have specific attributes:
++ See all tables and partitions that have a specific attribute:
 
     ```sql
     select * from information_schema.attributes where attributes like '%key%';
@@ -48,32 +48,32 @@ The table attribute is in `key=value` form. If there are multiple attributes, yo
 
 ## Attribute override rules
 
-The attribute configured for a table takes effect on all partitions of the table. However, there is one exception: If the table and partition are configured with the same attribute but different attribute values, the partition attribute overrides the table attribute. For example, suppose that the table `t` is configured with the `key=value` attribute, and the partition `p` is configured with `key=value1`.
+The attribute configured to a table takes effect on all partitions of the table. However, there is one exception: If the table and partition are configured with the same attribute but different attribute values, the partition attribute overrides the table attribute. For example, suppose that the table `t` is configured with the `key=value` attribute, and the partition `p` is configured with `key=value1`.
 
 ```sql
 alter table t attributes[=]'key=value';
 alter table t partition p attributes[=]'key=value1';
 ```
 
-In this case, the attribute taking actual effect on the partition `p` is `key=value1`.
+In this case, `key=value1` is the attribute that actually takes effect on the `p1` partition.
 
 ## Region merging control through the table attribute
 
-### Usage scenario
+### User scenarios
 
-If there is write hotspot or read hotspot, you can use the table attribute to take control of merging regions by adding the `merge_option` attribute to a table or partition and setting its value to `deny`. The followings are two usage scenarios.
+If there is a write hotspot or read hotspot, you can use the table attribute to control the Region merge bahavior. You can first add the `merge_option` attribute to a table or partition and then set its value to `deny`. The two scenarios are as follows.
 
 #### Write hotspot on a newly created table or partition
 
 If a hotspot problem occurs when writing data to a newly created table or partition, it is necessary to avoid the problem by splitting and scattering regions. However, if there is a certain time interval between the split and scatter operation and writes, it is impossible to truly avoid the write hotspot. This is because the split operation regarding the new table or partition produces empty regions, so if the time interval occurs, the regions might be merged. In this case, you can solve this merging issue by adding the `merge_option` attribute to the table or partition and setting its value to `deny`.
 
-#### Periodic read hotspot in a read-only scenario
+#### Periodic read hotspot in read-only scenarios
 
-Suppose that you reduce the periodic read hotspot that occurred to a table or partition by manually splitting regions in a read-only scenario, and you do not want the manually splitted regions to be merged after the hotspot problem is solved. In this case, you can add the `merge_option` attribute to the table or partition and set its value to `deny`.
+Suppose that in a read-only scenario, you try to reduce the periodic read hotspot that occurs on a table or partition by manually splitting regions, and you do not want the manually split regions to be merged after the hotspot issue is resolved. In this case, you can add the `merge_option` attribute to the table or partition and set its value to `deny`.
 
 ### Usage
 
-+ Block to merge regions belonging to a table:
++ Prevent the Regions of a table from merging:
 
     ```sql
     alter table t attributes[=]'merge_option=deny';
@@ -116,7 +116,7 @@ alter table t attributes[=]'merge_option=deny';
 alter table t partition p attributes[=]'merge_option=allow';
 ```
 
-When the above two attributes are configured at the same time, the regions belonging to the actual partition `p` can be merged. When the attribute of a partition is reset, the partition `p` inherits the attribute from the table `t`, and the regions cannot be merged.
+When the above two attributes are configured at the same time, the regions belonging to the partition `p` can actually be merged. When the attribute of the partition is reset, the partition `p` inherits the attribute from the table `t`, and the regions cannot be merged.
 
 > **Note:**
 >
