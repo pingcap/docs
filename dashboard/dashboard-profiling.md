@@ -6,7 +6,7 @@ aliases: ['/docs/dev/dashboard/dashboard-profiling/']
 
 # Manual Instance Profiling Page
 
-On the manual instance profiling page, you can collect continuous performance data of TiDB, TiKV, PD, and TiFlash instances without restarting any of them.The data collected can be displayed on a flame graph or a directed acyclic graph, which visually shows the internal operations and proportions performed on the instances during the performance summary period. With this graph, you can quickly learn the CPU resource consumption of these instances.
+On the manual instance profiling page, you can collect continuous performance data of TiDB, TiKV, PD, and TiFlash instances without restarting any of them. The data collected can be displayed on a flame graph or a directed acyclic graph. The graph visually shows what internal operations are performed on the instances during the performance summary period and the corresponding proportions. With this graph, you can quickly learn the CPU resource consumption of these instances.
 
 ## Access the page
 
