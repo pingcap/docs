@@ -15,7 +15,7 @@ When permanently damaged replicas cause part of data to be unreadable and unwrit
 
 ## Feature description
 
-In TiDB, data might be stored in many stores at the same time according to multiple replica rules defined by users. This guarantees that data can still be readable and writable even if a single or a few stores are temporarily offline or damaged. However, when most or all replicas of a Region go offline in a short time, the Region becomes temporarily unavailable for ensuring data integrity.
+In TiDB, data might be replicated in many stores at the same time according to the Placements Rules defined by users. This guarantees that data is still readable and writable even if a single or a few stores are temporarily offline or damaged. However, when most or all replicas of a Region are offline at the same time, the Region becomes temporarily unavailable, by design, to ensure data integrity.
 
 Suppose that multiple replicas of data encounter problems like permanent damage (such as disk damage), and this issue causes stores to fail to go online. In this case, this data is temporarily unavailable. Provided that you can accept data rewind or data loss, if you want the cluster back in use under this circumstance, TiDB can theoretically re-form the majority of replicas by manually overwriting the meta information of data shards. This allows application layer services to read and write (might be stale or empty) this data.
 
@@ -36,7 +36,7 @@ Online unsafe recovery feature is suitable for the following scenarios:
 Before using online unsafe recovery, make sure the following things:
 
 * Part of data is indeed unavailable.
-* The offlined stores cannot be automatically recovered or restarted.
+* The offline stores cannot be automatically recovered or restarted.
 
 ### Step 1. disable all types of scheduling
 
