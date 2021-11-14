@@ -32,7 +32,7 @@ To enable Continuous Profiling, you need to first check the version information 
 
 ### Check versions
 
-Before enabling this feature, check the version of the TiUP cluster and ensure that it is 1.7.0 or above. If it is earlier than 1.7.0, upgrade it first and then reload Prometheus.
+Before enabling this feature, check the version of the TiUP cluster and ensure that it is 1.7.0 or above. If it is earlier than 1.7.0, upgrade it first.
 
 1. Check the TiUP version:
 
