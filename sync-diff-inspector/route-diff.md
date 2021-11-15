@@ -60,4 +60,4 @@ target-table = "t_2"           # The name of the target table
 
 ## Note
 
-If `t_2` exists in the upstream database, the downstream databse also compares this table.
+If `test_2`.`t_2` exists in the upstream database, the downstream databse also compares this table.

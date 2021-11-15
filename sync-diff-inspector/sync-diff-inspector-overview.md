@@ -58,7 +58,7 @@ The configuration of sync-diff-inspector consists of the following parts:
 - `Global config`: General configurations, including number of threads to check, whether to export SQL statement to fix inconsistent tables, whether to campare the data and so on.
 - `Databases config`: Configures the instances of the upstream and downstream databases.
 - `Tables config`: Special configurations for specific tables, including specified ranges, columns to be ignored and so on (optional).
-- `Routes`: Rules for upstream multiple schema names to regularly match downstream single schema names (optional).
+- `Routes`: Rules for upstream multiple schema names to match downstream single schema names (optional).
 - `Task config`: Configures the tables for checking. If some tables have a certain mapping relationship between the upstream and downstream databases or have some special requirements, you must configure these tables.
 
 Below is the description of a complete configuration file:
@@ -67,7 +67,7 @@ Below is the description of a complete configuration file:
 # Diff Configuration.
 
 ######################### Global config #########################
-# The number of goroutines created to check data. The number of connections between upstream and downstream databases are slightly greater than this value.
+# The number of goroutines created to check data. The number of connections between sync-diff-inspector and upstream/downstream databases is slightly greater than this value.
 check-thread-count = 4
 
 # If enabled, SQL statements is exported to fix inconsistent tables.
@@ -78,7 +78,7 @@ check-struct-only = false
 
 ######################### Datasource config #########################
 [data-sources]
-[data-sources.mysql1] # mysql1 is the only ID for the database instance. It is used in the following `task.source-instances/task.target-instance` files.
+[data-sources.mysql1] # mysql1 is the only ID for the database instance. It is used for following `task.source-instances/task.target-instance` configuration.
     host = "127.0.0.1"
     port = 3306
     user = "root"
@@ -94,7 +94,7 @@ check-struct-only = false
 
 ######################### Table config #########################
 # Special configurations for specific tables. The tables to be configured must be in `task.target-check-tables`.
-[table-configs.config1] # config1  is the only ID for this configuration. It is used in the following `task.target-configs`.
+[table-configs.config1] # config1  is the only ID for this configuration. It is used for the following `task.target-configs` configuration.
 # The name of the schema in the target database
 schema = "schama1"
 # The name of the target table
