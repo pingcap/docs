@@ -122,7 +122,7 @@ Two solutions:
 
 ## Does TiDB release space immediately after deleting data?
 
-None of the `DELETE`, `TRUNCATE` and `DROP` operations release data immediately. For the `TRUNCATE` and `DROP` operations, after the TiDB GC (Garbage Collection) time (10 minutes by default), the data is deleted and the space is released. For the `DELETE` operation, the data is deleted but the space is released only after compaction operations.
+None of the `DELETE`, `TRUNCATE` and `DROP` operations release data immediately. For the `TRUNCATE` and `DROP` operations, after the TiDB GC (Garbage Collection) time (10 minutes by default), the data is deleted and the space is released. For the `DELETE` operations, the data is deleted but the space is released later when the compaction is performed.
 
 ## Does TiDB support the `REPLACE INTO` syntax?
 
