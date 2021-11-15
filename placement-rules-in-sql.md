@@ -9,7 +9,7 @@ summary: Learn how to schedule placement of tables and partitions using SQL stat
 >
 > Placement Rules in SQL is an experimental feature introduced in v5.3.0. The syntax might change before its GA, and there might also be bugs. If you understand the risks, you can enable this experiment feature by executing `SET GLOBAL tidb_enable_alter_placement = 1;`.
 
-Placement Rules in SQL is a feature that enables you to specify where data is store in a TiKV cluster using SQL interfaces. Using this feature, consecutive data is scheduled to a specific regions, data centers, racks, or hosts, with a specified replica count. This is useful for scenarios including optimizing a high availability strategy with lower cost, ensuring that local replicas of data are available for local stale reads, and adhering to compliance requirements.
+Placement Rules in SQL is a feature that enables you to specify where data is store in a TiKV cluster using SQL interfaces. Using this feature, tables and partitions are scheduled to a specific regions, data centers, racks, or hosts. This is useful for scenarios including optimizing a high availability strategy with lower cost, ensuring that local replicas of data are available for local stale reads, and adhering to compliance requirements.
 
 The detailed user scenarios are as follows:
 
@@ -18,7 +18,7 @@ The detailed user scenarios are as follows:
 - Increase replica count for important data to improve the application availability and data reliability
 - Store new data into SSDs and store old data into HHDs to lower the cost on data archiving and storage
 - Schedule the leaders of hotspot data to high-performance TiKV instances
-- Separate irrelevant data to different storages to improve availability
+- Separate cold data to lower-cost storage mediums to improve cost efficiency
 
 ## Specify placement options
 
