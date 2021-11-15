@@ -57,7 +57,7 @@ alter table t partition p attributes[=]'key=value1';
 
 In this case, `key=value1` is the attribute that actually takes effect on the `p1` partition.
 
-## Region merging control through the table attribute
+## Control the Region merge bahavior using table attributes
 
 ### User scenarios
 
@@ -65,7 +65,7 @@ If there is a write hotspot or read hotspot, you can use table attributes to con
 
 #### Write hotspot on a newly created table or partition
 
-If a hotspot problem occurs when writing data to a newly created table or partition, it is necessary to avoid the problem by splitting and scattering regions. However, if there is a certain time interval between the split and scatter operation and writes, it is impossible to truly avoid the write hotspot. This is because the split operation regarding the new table or partition produces empty regions, so if the time interval occurs, the regions might be merged. In this case, you can solve this merging issue by adding the `merge_option` attribute to the table or partition and setting its value to `deny`.
+If a hotspot issue occurs when data is written to a newly created table or partition, you usually need to split and scatter Regions. However, if there is a certain time interval between the split/scatter operation and writes, these operations do not truly avoid the write hotspot. This is because the split operation performed when the table or partition is created produces empty Regions, so if the time interval exists, the split Regions might be merged. To handle this case, you can add the `merge_option` attribute to the table or partition and set the attribute value to `deny`.
 
 #### Periodic read hotspot in read-only scenarios
 
@@ -120,5 +120,5 @@ When the above two attributes are configured at the same time, the Regions belon
 
 > **Note:**
 >
-> - If only the attribute of a table exists at present, even though the `merge_option=allow` attribute is configured, a partition still split multiple regions according to the actual number of partitions by default. To merge all regions, you need to [reset attributes of the table](#usage).
-> - When using the `merge_option` attribute, you need to pay attention to the PD configuration parameter [`split-merge-interval`](/pd-configuration-file.md#split-merge-interval). Suppose that the `merge_option` attribute is not configured. In this case, if Regions meet conditions, Regions can be merged after the interval specified by `split-merge-interval`. If the `merge_option` attribute is configured, TiKV decides whether to merge Regions after the specified interval according to the `merge_option` configuration.
+> - When there is now only an attribute of a partition, even if the `merge_option=allow` attribute is configured, the partition is still split into multiple Regions by default according to the actual number of partitions. To merge all regions, you need to [reset the attribute of the table](#usage).
+> - When using the `merge_option` attribute, you need to pay attention to the PD configuration parameter [`split-merge-interval`](/pd-configuration-file.md#split-merge-interval). Suppose that the `merge_option` attribute is not configured. In this case, if Regions meet conditions, Regions can be merged after the interval specified by `split-merge-interval`. If the `merge_option` attribute is configured, PD decides whether to merge Regions after the specified interval according to the `merge_option` configuration.
