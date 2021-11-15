@@ -14,19 +14,19 @@ The TiDB optimizer handles these two types of queries in the same way: when prep
 
 When the execution plan cache is enabled, in the first execution every `Prepare` statement checks whether the current query can use the execution plan cache, and if the query can use it, then put the generated execution plan into a cache implemented by LRU (Least Recently Used) linked list. In the subsequent `Execute` queries, the execution plan is obtained from the cache and checked for availability. If the check succeeds, the step of generating an execution plan is skipped. Otherwise, the execution plan is regenerated and saved in the cache.
 
-In the current version of TiDB, if the `Prepare` statement meets any of the following conditions, the query or the plan is not cached:
+In the current version of TiDB, if a `Prepare` statement meets any of the following conditions, the query or the plan is not cached:
 
 - The query contains SQL statements other than `SELECT`, `UPDATE`, `INSERT`, `DELETE`, `Union`, `Intersect`, and `Except`;
-- The query is executed to access partitioned tables or temporary tables, or a table that contains generated columns;
+- The query accesses partitioned tables or temporary tables, or a table that contains generated columns;
 - The query contains sub-queries, such as `select * from t where a > (select ...)`;
-- The query contains the hint `ignore_plan_cache`, such as `select /*+ ignore_plan_cache() */ * from t`;
+- The query contains the `ignore_plan_cache` hint, such as `select /*+ ignore_plan_cache() */ * from t`;
 - The query contains variables other than `?` (including system variables or user-defined variables), such as `select * from t where a>? and b>@x`;
-- The query contains the following functions that cannot be cached: `database()`, `current_user`, `current_role`, `user`, `connection_id`, `last_insert_id`, `row_count`, `version`, and `like`;
-- The `Limit` statement of the query is followed by `?` , such as `Limit ?` and `Limit 10, ?`. Such queries are not cached because the value of `?` has great impact on the queries;
+- The query contains the functions that cannot be cached: `database()`, `current_user`, `current_role`, `user`, `connection_id`, `last_insert_id`, `row_count`, `version`, and `like`;
+- The query contains `?` after `Limit`, such as `Limit ?` and `Limit 10, ?`. Such queries are not cached because the specific value of `?` has a great impact on the queries;
 - The `Order By` statement of the query is followed by `?`, such as `Order By ?`. Such queries are not cached because they sort data based on the specified column and has great impact on the queries. However, if the query is a common one, such as `Order By a+?`, it is cached;
-- The `Group By` statement of the query is followed by `?`, such as `Group By?`. Such queries are not cached because they group data based on the specified column and has great impact on the queries. However, if the query is a common one, such as `Group By a+?`, it is cached;
-- The window frame definition of the `Window` function contains `?`, such as `(partition by year order by sale rows ? preceding)`. Such queries are cached if `?` appears in other positions of the window function;
-- The query contains parameters for comparing `int` and `string`, such as `c_int >= ?` or `c_int in (?, ?)`, in which `?` indicates the type of the string, such as `set @x='123'`. Parameters of the queries are adjusted in each query. To ensure that the query result is compatible with MySQL, such queries are not cached;
+- The query contains `?` after `Group By`, such as `Group By?`. Such queries are not cached because they group data based on the column specified by `?` and have a great impact on the queries. However, if the query is a common one, such as `Group By a+?`, it is cached;
+- The query contains `?` in the definition of the `Window Frame` window function, such as `(partition by year order by sale rows ? preceding)`. If `?` appears elsewhere in the window function, the query is cached.
+- The query contains parameters for comparing `int` and `string`, such as `c_int >= ?` or `c_int in (?, ?)`, in which `?` indicates the string type, such as `set @x='123'`. To ensure that the query result is compatible with MySQL, parameters need to be adjusted in each query, so such queries are not cached.
 - The plan attempts to access `TiFlash`.
 
 The LRU linked list is designed as a session-level cache because `Prepare` / `Execute` cannot be executed across sessions. Each element of the LRU list is a key-value pair. The value is the execution plan, and the key is composed of the following parts:
