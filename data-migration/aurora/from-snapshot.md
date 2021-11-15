@@ -64,7 +64,7 @@ pd-addr = "${pd_address}"  # The default PD address of the cluster. eg: 127.0.0.
 
 [tikv-importer]
 
-# The "local" backend mode is used by default for best performance, which is suitable for large data volumes above TB level, but downstream TiDB cannot provide services during the import period.
+# The "Local" backend mode is used by default for best performance, which is suitable for large data volumes above TB level. But in this mode, the downstream TiDB cannot provide services during the import period.
 # The data volume below TB level can also adopt the "tidb" backend mode, and downstream TiDB can provide services normally. For more information about the backend mode, please refer to: https://docs.pingcap.com/tidb/stable/tidb-lightning-backends
 backend = "local"
 
@@ -102,11 +102,11 @@ In this example, TiDB Lightning is only used to create table schemas, so the abo
 
 | Parameter | Description |
 | :--------| :------------|
-| `-config`                     | Reads global configuration from file. If not specified, the default value would be used. |
+| `-config`                     | Reads global configuration from file. If not specified, the default value is used. |
 | `-d`                          | Directory or [external storage URL](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages) of the data dump to read from |
-| `-no-schema`                  | Ignore schema files, get schema directly from TiDB |
+| `-no-schema`                  | Ignore schema files, and get schema directly from TiDB |
 
-More parameter could be found in [TiDB Lightning Configuration](https://docs.pingcap.com/tidb/stable/tidb-lightning-configuration) 
+You can find more parameters in [TiDB Lightning Configuration](https://docs.pingcap.com/tidb/stable/tidb-lightning-configuration) 
 
 > **Note:**
 >
