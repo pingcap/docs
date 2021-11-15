@@ -1,6 +1,6 @@
 ---
 title: Table Attributes
-summary: Introduce how to use TiDB `ATTRIBUTES`.
+summary: Learn how to use the table attribute feature of TiDB.
 ---
 
 # Table Attributes
