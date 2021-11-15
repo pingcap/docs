@@ -102,7 +102,7 @@ SELECT * FROM users;
 1 row in set (0.00 sec)
 ```
 
-In session B, creating a local temporary table `users` does not conflict with the ordinary table `users`. When session B accesses the `users` table, it accesses the local temporary table `users`.
+In session B, creating a local temporary table `users` does not conflict with the ordinary table `users` or the local temporary table `users` in session A. When session B accesses the `users` table, it accesses the local temporary table `users`.
 
 {{< copyable "sql" >}}
 
