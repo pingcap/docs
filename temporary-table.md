@@ -1,6 +1,6 @@
 ---
 title: Temporary Table
-summary: Learn the temporary table feature in TiDB, and learn how use temporary tables to store intermediate data of an application, which helps reduce table management overhead and improve performance.
+summary: Learn the temporary table feature in TiDB, and learn how to use temporary tables to store intermediate data of an application, which helps reduce table management overhead and improve performance.
 ---
 
 # Temporary Table
@@ -32,12 +32,12 @@ The semantics of the local temporary table in TiDB is consistent with that of th
 - The table definition of a local temporary table is not persistent. A local temporary table is visible only to the session in which the table is created, and other sessions cannot access the table.
 - You can create local temporary tables with the same name in different sessions, and each session reads only from and write only to the local temporary table created in the session.
 - The data of a local temporary table is visible to all transactions in the session.
-- After a session ends, the local temporary table created in the session is automatically deleted.
-- A local temporary table can have the same name with an ordinary table. At this time, in the DDL and DML statements, the ordinary table is hidden until the local temporary table is deleted.
+- After a session ends, the local temporary table created in the session is automatically dropped.
+- A local temporary table can have the same name with an ordinary table. At this time, in the DDL and DML statements, the ordinary table is hidden until the local temporary table is dropped.
 
 You can create a local temporary table using the `CREATE TEMPORARY TABLE` statement, and delete a local temporary table using the `DROP TABLE` or `DROP TEMPORARY TABLE` statement.
 
-Different from MySQL, the local temporary tables in TiDB are all external tables, and you cannot using SQL statements to create internal temporary tables.
+Different from MySQL, the local temporary tables in TiDB are all external tables, and no internal temporary tables will be created automatically when SQL statements are executed.
 
 ### Usage examples of local temporary tables
 
@@ -150,8 +150,8 @@ SELECT * FROM users;
 
 The following features and limitations of TiDB local temporary tables are the same with those of MySQL temporary tables:
 
-- When you create or delete local temporary tables, the current transaction is not automatically committed.
-- After deleting the schema where a local temporary table is located, the temporary table is not deleted and is still readable and writable.
+- When you create or drop local temporary tables, the current transaction is not automatically committed.
+- After dropping the schema where a local temporary table is located, the temporary table is not dropped and is still readable and writable.
 - Creating a local temporary table requires the `CREATE TEMPORARY TABLES` permission. All subsequent operations on the table do not require any permission.
 - Local temporary tables do not support foreign keys and partitioned tables.
 - Does not support creating views based on local temporary tables.
@@ -175,14 +175,14 @@ The global temporary table is an extension of TiDB. It has the following feature
 - The data of a global temporary table is visible only in the current transaction. When the transaction ends, the data is automatically cleared.
 - A global temporary table cannot have the same name with an ordinary table.
 
-You can create a global temporary table using the `CREATE GLOBAL TEMPORARY TABLE` statement ended with `ON COMMIT DELETE ROWS`. You can delete the global temporary table using the `DROP TABLE` or `DROP GLOBAL TEMPORARY TABLE` statement.
+You can create a global temporary table using the `CREATE GLOBAL TEMPORARY TABLE` statement ended with `ON COMMIT DELETE ROWS`. You can drop the global temporary table using the `DROP TABLE` or `DROP GLOBAL TEMPORARY TABLE` statement.
 
 ### Usage examples of global temporary tables
 
 > **Note:**
 >
-> - Before you use the temporary table in TiDB, pay attention to the [compatibility restrictions with other TiDB features](#compatibility-restrictions-with-other-tidb-features) and the [compatibility with MySQL temporary tables](#compatibility-with-mysql-temporary-tables).
-> - When a cluster of v5.3.0 or later is downgraded to a version earlier than v5.3.0,global temporary tables created on the cluster are handled as ordinary tables and cause data error.
+> - Before you use the temporary table in TiDB, pay attention to the [compatibility restrictions with other TiDB features](#compatibility-restrictions-with-other-tidb-features).
+> - When a cluster of v5.3.0 or later is downgraded to a version earlier than v5.3.0, global temporary tables created on the cluster are handled as ordinary tables and cause data error.
 
 Create a global temporary table `users` in session A:
 
@@ -201,7 +201,7 @@ CREATE GLOBAL TEMPORARY TABLE users (
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-The data written to `users` is visible to the current session:
+The data written to `users` is visible to the current transaction:
 
 {{< copyable "sql" >}}
 
@@ -309,7 +309,7 @@ Local temporary tables and global temporary tables in TiDB are NOT compatible wi
 - Placement Rules
 - Execution plans involving a temporary table are not cached by `prepare plan cache`.
 
-Local temporary tables in TiDB does not support the following feature:
+Local temporary tables in TiDB do not support the following feature:
 
 - Reading historical data using the `tidb_snapshot` system variable.
 
