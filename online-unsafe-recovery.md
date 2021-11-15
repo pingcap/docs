@@ -79,6 +79,6 @@ select count(*) from table_that_suffered_from_group_majority_failure;
 
 ### Step 5. Restart the scheduling
 
-To restart the scheduling, you need to adjust the value of `config set region-schedule-limit 0`, `config set replica-schedule-limit 0`, `config set merge-schedule-limit 0` modified in step 1 to the initial values.
+To restart the scheduling, you need to adjust the `0` value of `config set region-schedule-limit 0`, `config set replica-schedule-limit 0`, and `config set merge-schedule-limit 0` modified in step 1 to the initial values.
 
 Then, the whole process is finished.
