@@ -184,8 +184,6 @@ filter = ['*.*', '!mysql.*', '!sys.*', '!INFORMATION_SCHEMA.*', '!PERFORMANCE_SC
 separator = ','
 # Quoting delimiter. Empty value means no quoting.
 delimiter = '"'
-# Line terminator. Empty value means both "\n" (LF) and "\r\n" (CRLF) are line terminators.
-terminator = ''
 # Whether the CSV files contain a header.
 # If `header` is true, the first line will be skipped.
 header = true
