@@ -52,6 +52,7 @@
     + [Use TiDB Lightning](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)
     + [Use `LOAD DATA` Statement](/sql-statements/sql-statement-load-data.md)
   + [Migrate from SQL Files](/migrate-from-mysql-dumpling-files.md)
+  + [Replicate Incremental Data between TiDB Clusters in Real Time](/incremental-replication-between-clusters.md)
 + Maintain
   + Upgrade
     + [Use TiUP (Recommended)](/upgrade-tidb-using-tiup.md)
@@ -142,6 +143,7 @@
 + Tutorials
   + [Multiple Data Centers in One City Deployment](/multi-data-centers-in-one-city-deployment.md)
   + [Three Data Centers in Two Cities Deployment](/three-data-centers-in-two-cities-deployment.md)
+  + [Two Data Centers in One City Deployment](/two-data-centers-in-one-city-deployment.md)
   + Read Historical Data
     + Use Stale Read (Recommended)
       + [Usage Scenarios of Stale Read](/stale-read.md)
@@ -194,12 +196,14 @@
     + [Overview](/tidb-lightning/tidb-lightning-overview.md)
     + [Tutorial](/get-started-with-tidb-lightning.md)
     + [Deploy](/tidb-lightning/deploy-tidb-lightning.md)
+    + [Precheck](/tidb-lightning/tidb-lightning-prechecks.md)
     + [Configure](/tidb-lightning/tidb-lightning-configuration.md)
     + Key Features
       + [Checkpoints](/tidb-lightning/tidb-lightning-checkpoints.md)
       + [Table Filter](/table-filter.md)
       + [CSV Support](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)
       + [Backends](/tidb-lightning/tidb-lightning-backends.md)
+      + [Error Resolution](/tidb-lightning/tidb-lightning-error-resolution.md)
       + [Web Interface](/tidb-lightning/tidb-lightning-web-interface.md)
     + [Monitor](/tidb-lightning/monitor-tidb-lightning.md)
     + [FAQ](/tidb-lightning/tidb-lightning-faq.md)
@@ -273,6 +277,7 @@
       + [`ALTER DATABASE`](/sql-statements/sql-statement-alter-database.md)
       + [`ALTER INDEX`](/sql-statements/sql-statement-alter-index.md)
       + [`ALTER INSTANCE`](/sql-statements/sql-statement-alter-instance.md)
+      + [`ALTER PLACEMENT POLICY`](/sql-statements/sql-statement-alter-placement-policy.md)
       + [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md)
       + [`ALTER USER`](/sql-statements/sql-statement-alter-user.md)
       + [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)
@@ -285,6 +290,7 @@
       + [`CREATE [GLOBAL|SESSION] BINDING`](/sql-statements/sql-statement-create-binding.md)
       + [`CREATE DATABASE`](/sql-statements/sql-statement-create-database.md)
       + [`CREATE INDEX`](/sql-statements/sql-statement-create-index.md)
+      + [`CREATE PLACEMENT POLICY`](/sql-statements/sql-statement-create-placement-policy.md)
       + [`CREATE ROLE`](/sql-statements/sql-statement-create-role.md)
       + [`CREATE SEQUENCE`](/sql-statements/sql-statement-create-sequence.md)
       + [`CREATE TABLE LIKE`](/sql-statements/sql-statement-create-table-like.md)
@@ -344,6 +350,7 @@
       + [`SHOW COLLATION`](/sql-statements/sql-statement-show-collation.md)
       + [`SHOW [FULL] COLUMNS FROM`](/sql-statements/sql-statement-show-columns-from.md)
       + [`SHOW CONFIG`](/sql-statements/sql-statement-show-config.md)
+      + [`SHOW CREATE PLACEMENT POLICY`](/sql-statements/sql-statement-show-create-placement-policy.md)
       + [`SHOW CREATE SEQUENCE`](/sql-statements/sql-statement-show-create-sequence.md)
       + [`SHOW CREATE TABLE`](/sql-statements/sql-statement-show-create-table.md)
       + [`SHOW CREATE USER`](/sql-statements/sql-statement-show-create-user.md)
@@ -357,6 +364,8 @@
       + [`SHOW INDEXES [FROM|IN]`](/sql-statements/sql-statement-show-indexes.md)
       + [`SHOW KEYS [FROM|IN]`](/sql-statements/sql-statement-show-keys.md)
       + [`SHOW MASTER STATUS`](/sql-statements/sql-statement-show-master-status.md)
+      + [`SHOW PLACEMENT`](/sql-statements/sql-statement-show-placement.md)
+      + [`SHOW PLACEMENT FOR`](/sql-statements/sql-statement-show-placement-for.md)
       + [`SHOW PLUGINS`](/sql-statements/sql-statement-show-plugins.md)
       + [`SHOW PRIVILEGES`](/sql-statements/sql-statement-show-privileges.md)
       + [`SHOW [FULL] PROCESSSLIST`](/sql-statements/sql-statement-show-processlist.md)
@@ -424,6 +433,7 @@
     + [Views](/views.md)
     + [Partitioning](/partitioned-table.md)
     + [Character Set and Collation](/character-set-and-collation.md)
+    + [Placement Rules in SQL](/placement-rules-in-sql.md)
     + System Tables
       + [`mysql`](/mysql-schema.md)
       + INFORMATION_SCHEMA
@@ -555,18 +565,24 @@
 + [Glossary](/glossary.md)
 + Release Notes
   + [All Releases](/releases/release-notes.md)
+  + [Release Timeline](/releases/release-timeline.md)
   + v5.2
-    + [5.2.0](/releases/release-5.2.0.md)  
+    + [5.2.2](/releases/release-5.2.2.md)
+    + [5.2.1](/releases/release-5.2.1.md)
+    + [5.2.0](/releases/release-5.2.0.md)
   + v5.1
+    + [5.1.2](/releases/release-5.1.2.md)
     + [5.1.1](/releases/release-5.1.1.md)
     + [5.1.0](/releases/release-5.1.0.md)
   + v5.0
+    + [5.0.4](/releases/release-5.0.4.md)
     + [5.0.3](/releases/release-5.0.3.md)
     + [5.0.2](/releases/release-5.0.2.md)
     + [5.0.1](/releases/release-5.0.1.md)
     + [5.0 GA](/releases/release-5.0.0.md)
     + [5.0.0-rc](/releases/release-5.0.0-rc.md)
   + v4.0
+    + [4.0.15](/releases/release-4.0.15.md)
     + [4.0.14](/releases/release-4.0.14.md)
     + [4.0.13](/releases/release-4.0.13.md)
     + [4.0.12](/releases/release-4.0.12.md)

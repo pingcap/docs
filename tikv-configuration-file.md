@@ -14,7 +14,7 @@ This document only describes the parameters that are not included in command-lin
 
 ## Global configuration
 
-### abort-on-panic
+### `abort-on-panic`
 
 + Sets whether to call `abort()` to exit the process when TiKV panics. This option affects whether TiKV allows the system to generate core dump files.
 
@@ -23,7 +23,45 @@ This document only describes the parameters that are not included in command-lin
 
 + Default value: `false`
 
-### server
+### `log-level`
+
++ The log level
++ Value options: "trace", "debug", "info", "warning", "error", "critical"
++ Default value: "info"
+
+### `log-file`
+
++ The log file. If this configuration is not set, logs are output to "stderr" by default.
++ Default value: ""
+
+### `log-format`
+
++ The log format
++ Value options: "json", "text"
++ Default value: "text"
+
+### `log-rotation-timespan`
+
++ The timespan between log rotations. When this timespan passes, log files are rotated, that is, a timestamp is appended to the file name of the current log file, and a new file is created.
++ Default value: "24h"
+
+### `log-rotation-size`
+
++ The size of a log file that triggers log rotation. Once the size of a log file is bigger than the specified threshold value, log files are rotated. The old log file is placed into the new file, and the new file name is the old file name with a timestamp suffix.
++ Default value: "300MB"
+
+### `slow-log-file`
+
++ The file to store slow logs
++ If this configuration is not set but `log-file` is set, slow logs are output to the log file specified by `log-file`. If neither `slow-log-file` nor `log-file` are set, all logs are output to "stderr".
++ Default value: ""
+
+### `slow-log-threshold`
+
++ The threshold for outputing slow logs. If the processing time is longer than this threshold, slow logs are output.
++ Default value: "1s"
+
+## server
 
 + Configuration items related to the server
 
@@ -116,7 +154,7 @@ This document only describes the parameters that are not included in command-lin
 
 ### `end-point-slow-log-threshold`
 
-+ The time threshold for a TiDB's push down request to print slow log
++ The time threshold for a TiDB's push-down request to output slow log. If the processing time is longer than this threshold, the slow logs are output.
 + Default value: `"1s"`
 + Minimum value: `0`
 
@@ -286,7 +324,9 @@ Configuration items related to storage
 
 ### `reserve-space`
 
-+ The size of the temporary file that preoccupies the extra space when TiKV is started. The name of temporary file is `space_placeholder_file`, located in the `storage.data-dir` directory. When TiKV runs out of disk space and cannot be started normally, you can delete this file as an emergency intervention and set `reserve-space` to `"0MB"`.
++ When TiKV is started, some space is reserved on the disk as disk protection. When the remaining disk space is less than the reserved space, TiKV restricts some write operations. The reserved space is divided into two parts: 80% of the reserved space is used as the extra disk space required for operations when the disk space is insufficient, and the other 20% is used to store the temporary file. In the process of reclaiming space, if the storage is exhausted by using too much extra disk space, this temporary file serves as the last protection for restoring services.
++ The name of the temporary file is `space_placeholder_file`, located in the `storage.data-dir` directory. When TiKV goes offline because its disk space ran out, if you restart TiKV, the temporary file is automatically deleted and TiKV tries to reclaim the space.
++ When the remaining space is insufficient, TiKV does not create the temporary file. The effectiveness of the protection is related to the size of the reserved space. The size of the reserved space is the larger value between 5% of the disk capacity and this configuration value. When the value of this configuration item is `"0MB"`, TiKV disables this disk protection feature.
 + Default value: `"5GB"`
 + Unite: MB|GB
 
@@ -334,7 +374,7 @@ Configuration items related to the flow control mechanism in TiKV. This mechanis
 ### `l0-files-threshold`
 
 + When the number of kvDB L0 files reaches this threshold, the flow control mechanism starts to work.
-+ Default value: `9`
++ Default value: `20`
 
 ### `soft-pending-compaction-bytes-limit`
 
@@ -798,7 +838,7 @@ Configuration items related to RocksDB
 
 ### `compaction-readahead-size`
 
-+ The size of `readahead` when compaction is being performed
++ Enables the readahead feature during RocksDB compaction and specifies the size of readahead data. If you are using mechanical disks, it is recommended to set the value to 2MB at least.
 + Default value: `0`
 + Minimum value: `0`
 + Unit: B|KB|MB|GB
@@ -1285,7 +1325,7 @@ Configuration items related to TiDB Lightning import and BR restore.
 ### `enable-compaction-filter` <span class="version-mark">New in v5.0</span>
 
 + Controls whether to enable the GC in Compaction Filter feature
-+ Default value: `false`
++ Default value: `true`
 
 ## backup
 

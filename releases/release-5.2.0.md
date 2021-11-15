@@ -8,6 +8,10 @@ Release date: August 27, 2021
 
 TiDB version: 5.2.0
 
+> **Warning:**
+>
+> Some known issues are found in this version, and these issues are fixed in new versions. It is recommended that you use the latest 5.2.x version.
+
 In v5.2, the key new features and improvements are as follows:
 
 - Support using several functions in expression indexes to greatly improve query performance
@@ -44,7 +48,7 @@ In v5.2, the key new features and improvements are as follows:
 | TiDB configuration file  | [`stmt-summary.max-stmt-count`](/tidb-configuration-file.md#max-stmt-count) | Modified | Indicates the maximum number of SQL categories allowed to be saved in the statement summary tables. The default value is changed from `200` to `3000`.  |
 | TiDB configuration file  | `experimental.allow-expression-index`  | Deprecated | The `allow-expression-index` configuration in the TiDB configuration file is deprecated.  |
 | TiKV configuration file  | [`raftstore.cmd-batch`](/tikv-configuration-file.md#cmd-batch)  |  Newly added  | Controls whether to enable batch processing of the requests. When it is enabled, the write performance is significantly improved. The default value is `true`.  |
-| TiKV configuration file  | [`raftstore.inspect-interval`](/tikv-configuration-file.md#inspect-interval)  |  Newly added  | At a certain interval, TiKV inspects the latency of the Raftstore component. This configuration item specifies the interval of the inspection. The default value is `500ms`.  |
+| TiKV configuration file  | [`raftstore.inspect-interval`](/tikv-configuration-file.md#inspect-interval)  |  Newly added  | At a certain interval, TiKV inspects the latency of the Raftstore component. This configuration item specifies the interval of the inspection. If the latency exceeds this value, this inspection is marked as timeout. The default value is `500ms`.  |
 | TiKV configuration file  | [`raftstore.max-peer-down-duration`](/tikv-configuration-file.md#max-peer-down-duration)  | Modified | Indicates the longest inactive duration allowed for a peer. A peer with timeout is marked as `down`, and PD tries to delete it later. The default value is changed from `5m` to `10m`.  |
 | TiKV configuration file  | [`server.raft-client-queue-size`](/tikv-configuration-file.md#raft-client-queue-size)  |  Newly added  | Specifies the queue size of the Raft messages in TiKV. The default value is `8192`.  |
 | TiKV configuration file  | [`storage.flow-control.enable`](/tikv-configuration-file.md#enable)  |  Newly added  | Determines whether to enable the flow control mechanism. The default value is `true`.  |
@@ -60,6 +64,7 @@ In v5.2, the key new features and improvements are as follows:
 - Before the upgrade, check the value of the TiDB configuration [`feedback-probability`](/tidb-configuration-file.md#feedback-probability). If the value is not `0`, the "panic in the recoverable goroutine" error will occur after the upgrade, but this error does not affect the upgrade.
 - TiDB is now compatible with MySQL 5.7's noop variable `innodb_default_row_format`. Setting this variable has no effect. [#23541](https://github.com/pingcap/tidb/issues/23541)
 - Starting from TiDB 5.2, to improve system security, it is recommended (but not mandatory) to encrypt the transport layer for connections from clients. TiDB provides the Auto TLS feature to automatically configure and enable encryption in TiDB. To use the Auto TLS feature, before the TiDB upgrade, set [`security.auto-tls`](/tidb-configuration-file.md#auto-tls) in the TiDB configuration file to `true`.
+- Support the `caching_sha2_password` authentication method to make migration from MySQL 8.0 easier and to improve security.
 
 ## New features
 

@@ -30,6 +30,18 @@ SET  GLOBAL tidb_distsql_scan_concurrency = 10;
 >
 > TiDB differs from MySQL in that `GLOBAL` scoped variables **persist** through TiDB server restarts. Additionally, TiDB presents several MySQL variables as both readable and settable. This is required for compatibility, because it is common for both applications and connectors to read MySQL variables. For example, JDBC connectors both read and set query cache settings, despite not relying on the behavior.
 
+> **Note:**
+>
+> Larger values do not always yield better performance. It is also important to consider the number of concurrent connections that are executing statements, because most settings apply to each connection.
+>
+> Consider the unit of a variable when you determine safe values:
+>
+> * For threads, safe values are typically up to the number of CPU cores.
+> * For bytes, safe values are typically less than the amount of system memory.
+> * For time, pay attention that the unit might be seconds or milliseconds.
+>
+> Variables using the same unit might compete for the same set of resources.
+
 ## Variable Reference
 
 ### allow_auto_random_explicit_insert <span class="version-mark">New in v4.0.3</span>
@@ -84,6 +96,12 @@ mysql> SELECT * FROM t1;
 - Default value: `ON`
 - Controls whether statements should automatically commit when not in an explicit transaction. See [Transaction Overview](/transaction-overview.md#autocommit) for more information.
 
+### block_encryption_mode
+
+- Scope: SESSION | GLOBAL
+- Default value: `aes-128-ecb`
+- Defines the encryption mode for the `AES_ENCRYPT()` and `AES_DECRYPT()` functions.
+
 ### character_set_client
 
 - Scope: SESSION | GLOBAL
@@ -112,7 +130,25 @@ mysql> SELECT * FROM t1;
 
 - Scope: SESSION | GLOBAL
 - Default value: `utf8mb4`
-- The character set used for new schemas when no character set is specified in the `CREATE SCHEMA` statement.
+- The default character set for the server.
+
+### collation_connection
+
+- Scope: SESSION | GLOBAL
+- Default value: `utf8mb4_bin`
+- This variable indicates the collation for string literals that do not have a specified collation.
+
+### collation_database
+
+- Scope: SESSION | GLOBAL
+- Default value: `utf8mb4_bin`
+- This variable indicates the collation of the default database in use. **It is NOT recommended to set this variable**. When a new default database is selected, the server changes the variable value.
+
+### collation_server
+
+- Scope: SESSION | GLOBAL
+- Default value: `utf8mb4_bin`
+- The default collation for the server.
 
 ### cte_max_recursion_depth
 
@@ -128,18 +164,27 @@ mysql> SELECT * FROM t1;
 - This variable indicates the location where data is stored. This location can be a local path or point to a PD server if the data is stored on TiKV.
 - A value in the format of `ip_address:port` indicates the PD server that TiDB connects to on startup.
 
-### default_authentication_plugin
-
-- Scope: GLOBAL
-- Default value: `mysql_native_password`
-- This variable sets the authentication method that the server advertises when the server-client connection is being established. Possible values for this variable are documented in [Authentication plugin status](/security-compatibility-with-mysql.md#authentication-plugin-status).
-- Value options: `mysql_native_password` and `caching_sha2_password`. For more details, see [Authentication plugin status](/security-compatibility-with-mysql.md#authentication-plugin-status).
-
 ### ddl_slow_threshold
 
 - Scope: INSTANCE
 - Default value: `300`
-- DDL operations whose execution time exceeds the threshold value are output to the log. The unit is millisecond.
+- Unit: Milliseconds
+- Log DDL operations whose execution time exceeds the threshold value.
+
+### default_authentication_plugin
+
+- Scope: GLOBAL
+- Default value: `mysql_native_password`
+- Possible values: `mysql_native_password`, `caching_sha2_password`
+- This variable sets the authentication method that the server advertises when the server-client connection is being established. Possible values for this variable are documented in [Authentication plugin status](/security-compatibility-with-mysql.md#authentication-plugin-status).
+- Value options: `mysql_native_password` and `caching_sha2_password`. For more details, see [Authentication plugin status](/security-compatibility-with-mysql.md#authentication-plugin-status).
+
+### default_week_format
+
+- Scope: SESSION | GLOBAL
+- Default value: `0`
+- Range: `[0, 7]`
+- Sets the week format used by the `WEEK()` function.
 
 ### foreign_key_checks
 
@@ -147,11 +192,34 @@ mysql> SELECT * FROM t1;
 - Default value: `OFF`
 - For compatibility, TiDB returns foreign key checks as `OFF`.
 
+### group_concat_max_len
+
+- Scope: SESSION | GLOBAL
+- Default value: `1024`
+- Range: `[4, 18446744073709551615]`
+- The maximum buffer size for items in the `GROUP_CONCAT()` function.
+
+### have_openssl
+
+- Scope: NONE
+- Default value: `DISABLED`
+- A read-only variable for MySQL compatibility. Set to `YES` by the server when the server has TLS enabled.
+
+### have_ssl
+
+- Scope: NONE
+- Default value: `DISABLED`
+- A read-only variable for MySQL compatibility. Set to `YES` by the server when the server has TLS enabled.
+
 ### hostname
 
 - Scope: NONE
 - Default value: (system hostname)
 - The hostname of the TiDB server as a read-only variable.
+
+### identity
+
+This variable is an alias for `last_insert_id`.
 
 ### init_connect
 
@@ -164,7 +232,8 @@ mysql> SELECT * FROM t1;
 - Scope: SESSION | GLOBAL
 - Default value: `50`
 - Range: `[1, 1073741824]`
-- The lock wait timeout for pessimistic transactions (default) in seconds.
+- Unit: Seconds
+- The lock wait timeout for pessimistic transactions (default).
 
 ### interactive_timeout
 
@@ -172,7 +241,14 @@ mysql> SELECT * FROM t1;
 - Default value: `28800`
 - Range: `[1, 31536000]`
 - Unit: Seconds
-- This variable represents the idle timeout of the interactive user session, which is measured in seconds. Interactive user session refers to the session established by calling [`mysql_real_connect()`](https://dev.mysql.com/doc/c-api/5.7/en/mysql-real-connect.html) API using the `CLIENT_INTERACTIVE` option (for example, MySQL shell client). This variable is fully compatible with MySQL.
+- This variable represents the idle timeout of the interactive user session. Interactive user session refers to the session established by calling [`mysql_real_connect()`](https://dev.mysql.com/doc/c-api/5.7/en/mysql-real-connect.html) API using the `CLIENT_INTERACTIVE` option (for example, MySQL Shell and MySQL Client). This variable is fully compatible with MySQL.
+
+### last_insert_id
+
+- Scope: SESSION
+- Default value: `0`
+- This variable returns the last `AUTO_INCREMENT` or `AUTO_RANDOM` value generated by an insert statement.
+- The value of `last_insert_id` is the same as the value returned by the function `LAST_INSERT_ID()`.
 
 ### last_plan_from_binding <span class="version-mark">New in v4.0</span>
 
@@ -189,8 +265,22 @@ mysql> SELECT * FROM t1;
 ### license
 
 - Scope: NONE
-- Default value: Apache License 2.0
+- Default value: `Apache License 2.0`
 - This variable indicates the license of your TiDB server installation.
+
+### log_bin
+
+- Scope: NONE
+- Default value: `OFF`
+- This variable indicates whether [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) is used.
+
+### max_allowed_packet
+
+- Scope: SESSION | GLOBAL
+- Default value: `67108864`
+- Range: `[1024, 1073741824]`
+- Unit: Bytes
+- The maximum size of a packet for the MySQL protocol.
 
 ### max_execution_time
 
@@ -198,11 +288,30 @@ mysql> SELECT * FROM t1;
 - Default value: `0`
 - Range: `[0, 2147483647]`
 - Unit: Milliseconds
-- The maximum execution time of a statement in milliseconds. The default value is unlimited (zero).
+- The maximum execution time of a statement. The default value is unlimited (zero).
 
 > **Note:**
 >
 > Unlike in MySQL, the `max_execution_time` system variable currently works on all kinds of statements in TiDB, not only restricted to the `SELECT` statement. The precision of the timeout value is roughly 100ms. This means the statement might not be terminated in accurate milliseconds as you specify.
+
+### placement_checks
+
+- Scope: SESSION | GLOBAL
+- Default value: ON
+- This variable controls whether DDL statements validate [Placement Rules in SQL](/placement-rules-in-sql.md).
+- It is intended to be used by logical dump/restore tools to ensure that tables can always be created even if placement rules are violated. This is similar to how mysqldump writes `SET FOREIGN_KEY_CHECKS=0;` to the start of every dump file.
+
+### plugin_dir
+
+- Scope: INSTANCE
+- Default value: ""
+- Indicates the directory to load plugins as specified by a command-line flag.
+
+### plugin_load
+
+- Scope: INSTANCE
+- Default value: ""
+- Indicates the plugins to load when TiDB is started. These plugins are specified by a command-line flag and separated by commas.
 
 ### port
 
@@ -211,11 +320,38 @@ mysql> SELECT * FROM t1;
 - Range: `[0, 65535]`
 - The port that the `tidb-server` is listening on when speaking the MySQL protocol.
 
+### skip_name_resolve <span class="version-mark">New in v5.2.0</span>
+
+- Scope: GLOBAL
+- Default value: `OFF`
+- This variable controls whether the `tidb-server` instance resolves hostnames as a part of the connection handshake.
+- When the DNS is unreliable, you can enable this option to improve network performance.
+
+> **Note:**
+>
+> When `skip_name_resolve=ON`, users with a hostname in their identity will no longer be able to log into the server. For example:
+>
+> ```sql
+> CREATE USER 'appuser'@'apphost' IDENTIFIED BY 'app-password';
+> ```
+>
+> In this example, it is recommended to replace `apphost` with an IP address or the wildcard (`%`).
+
 ### socket
 
 - Scope: NONE
 - Default value: ""
 - The local unix socket file that the `tidb-server` is listening on when speaking the MySQL protocol.
+
+### sql_log_bin
+
+- Scope: SESSION | GLOBAL
+- Default value: `ON`
+- Indicates whether to write changes to [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) or not.
+
+> **Note:**
+>
+> It is not recommended to set `sql_log_bin` as a global variable because the future versions of TiDB might only allow setting this as a session variable.
 
 ### sql_mode
 
@@ -228,7 +364,26 @@ mysql> SELECT * FROM t1;
 - Scope: SESSION | GLOBAL
 - Default value: `18446744073709551615`
 - Range: `[0, 18446744073709551615]`
+- Unit: Rows
 - The maximum number of rows returned by the `SELECT` statements.
+
+### ssl_ca
+
+- Scope: NONE
+- Default value: ""
+- The location of the certificate authority file (if there is one).
+
+### ssl_cert
+
+- Scope: NONE
+- Default value: ""
+- The location of the certificate file (if there is a file) that is used for SSL/TLS connections.
+
+### ssl_key
+
+- Scope: NONE
+- Default value: ""
+- The location of the private key file (if there is one) that is used for SSL/TLS connections.
 
 ### system_time_zone
 
@@ -277,8 +432,8 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 ### tidb_analyze_version <span class="version-mark">New in v5.1.0</span>
 
 - Scope: SESSION | GLOBAL
-- Value options: `1` and `2`
 - Default value: `2`
+- Range: `[1, 2]`
 - Controls how TiDB collects statistics.
 - In versions before v5.1.0, the default value of this variable is `1`. In v5.1.0, the default value of this variable is `2`, which serves as an experimental feature. For detailed introduction, see [Introduction to Statistics](/statistics.md).
 
@@ -327,7 +482,8 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Scope: SESSION | GLOBAL
 - Default value: `10240`
 - Range: `[0, 9223372036854775807]`
-- The unit of the variable is rows. If the objects of the join operation belong to a subquery, the optimizer cannot estimate the size of the subquery result set. In this situation, the size is determined by the number of rows in the result set. If the estimated number of rows in the subquery is less than the value of this variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used.
+- Unit: Rows
+- If the objects of the join operation belong to a subquery, the optimizer cannot estimate the size of the subquery result set. In this situation, the size is determined by the number of rows in the result set. If the estimated number of rows in the subquery is less than the value of this variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used.
 
 ### tidb_broadcast_join_threshold_size <span class="version-mark">New in v5.0</span>
 
@@ -341,6 +497,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 - Scope: SESSION | GLOBAL
 - Default value: `4`
+- Unit: Threads
 - This variable is used to set the concurrency of executing the `ANALYZE` statement.
 - When the variable is set to a larger value, the execution performance of other queries is affected.
 
@@ -362,6 +519,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 - Scope: SESSION
 - Default value: `4`
+- Unit: Threads
 - This variable is used to set the scan index concurrency of executing the `ADMIN CHECKSUM TABLE` statement.
 - When the variable is set to a larger value, the execution performance of other queries is affected.
 
@@ -418,9 +576,10 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Scope: GLOBAL
 - Default value: `256`
 - Range: `[32, 10240]`
+- Unit: Rows
 - This variable is used to set the batch size during the `re-organize` phase of the DDL operation. For example, when TiDB executes the `ADD INDEX` operation, the index data needs to backfilled by `tidb_ddl_reorg_worker_cnt` (the number) concurrent workers. Each worker backfills the index data in batches.
     - If many updating operations such as `UPDATE` and `REPLACE` exist during the `ADD INDEX` operation, a larger batch size indicates a larger probability of transaction conflicts. In this case, you need to adjust the batch size to a smaller value. The minimum value is 32.
-    - If the transaction conflict does not exist, you can set the batch size to a large value. The maximum value is 10240. This can increase the speed of the backfilling data, but the write pressure on TiKV also becomes higher.
+    - If the transaction conflict does not exist, you can set the batch size to a large value. This can increase the speed of the backfilling data, but the write pressure on TiKV also becomes higher.
 
 ### tidb_ddl_reorg_priority
 
@@ -433,7 +592,8 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 - Scope: GLOBAL
 - Default value: `4`
-- Range: `[1, 128]`
+- Range: `[1, 256]`
+- Unit: Threads
 - This variable is used to set the concurrency of the DDL operation in the `re-organize` phase.
 
 ### tidb_disable_txn_auto_retry
@@ -454,10 +614,11 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 - Scope: SESSION | GLOBAL
 - Default value: `15`
-- Range: `[1, 2147483647]`
+- Range: `[1, 256]`
+- Unit: Threads
 - This variable is used to set the concurrency of the `scan` operation.
 - Use a bigger value in OLAP scenarios, and a smaller value in OLTP scenarios.
-- For OLAP scenarios, the maximum value cannot exceed the number of CPU cores of all the TiKV nodes.
+- For OLAP scenarios, the maximum value should not exceed the number of CPU cores of all the TiKV nodes.
 - If a table has a lot of partitions, you can reduce the variable value appropriately to avoid TiKV becoming out of memory (OOM).
 
 ### tidb_dml_batch_size
@@ -465,6 +626,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Scope: SESSION | GLOBAL
 - Default value: `0`
 - Range: `[0, 2147483647]`
+- Unit: Rows
 - When this value is greater than `0`, TiDB will batch commit statements such as `INSERT` or `LOAD DATA` into smaller transactions. This reduces memory usage and helps ensure that the `txn-total-size-limit` is not reached by bulk modifications.
 - Only the value `0` provides ACID compliance. Setting this to any other value will break the atomicity and isolation guarantees of TiDB.
 
@@ -578,7 +740,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 >
 > Currently, List partition and List COLUMNS partition are experimental features. It is not recommended that you use it in the production environment.
 
-- Scope: SESSION
+- Scope: SESSION | GLOBAL
 - Default value: `OFF`
 - This variable is used to set whether to enable the `LIST (COLUMNS) TABLE PARTITION` feature.
 
@@ -586,19 +748,18 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 - Scope: SESSION | GLOBAL
 - Default value: `OFF`
+- Possible values: `OFF`, `ON`, `WARN`
 - By default, TiDB returns an error when you attempt to use the syntax for functionality that is not yet implemented. When the variable value is set to `ON`, TiDB silently ignores such cases of unavailable functionality, which is helpful if you cannot make changes to the SQL code.
 - Enabling `noop` functions controls the following behaviors:
     * `get_lock` and `release_lock` functions
     * `LOCK IN SHARE MODE` syntax
     * `SQL_CALC_FOUND_ROWS` syntax
-    * `CREATE TEMPORARY TABLE` syntax
-    * `DROP TEMPORARY TABLE` syntax
     * `START TRANSACTION READ ONLY` and `SET TRANSACTION READ ONLY` syntax
-    * The `tx_read_only`, `transaction_read_only`, `offline_mode`, `super_read_only` and `read_only` system variables
+    * The `tx_read_only`, `transaction_read_only`, `offline_mode`, `super_read_only`, `read_only` and `sql_auto_is_null` system variables
 
-> **Note:**
+> **Warning:**
 >
-> Only the default value of `OFF` can be considered safe. Setting `tidb_enable_noop_functions=1` might lead to unexpected behaviors in your application, because it permits TiDB to ignore certain syntax without providing an error.
+> Only the default value of `OFF` can be considered safe. Setting `tidb_enable_noop_functions=1` might lead to unexpected behaviors in your application, because it permits TiDB to ignore certain syntax without providing an error. For example, the syntax `START TRANSACTION READ ONLY` is permitted, but the transaction remains in read-write mode.
 
 ### tidb_enable_parallel_apply <span class="version-mark">New in v5.0</span>
 
@@ -665,6 +826,19 @@ Query OK, 0 rows affected (0.09 sec)
 - Default value: `ON`
 - This variable is used to dynamically control whether the telemetry collection in TiDB is enabled. By setting the value to `OFF`, the telemetry collection is disabled. If the [`enable-telemetry`](/tidb-configuration-file.md#enable-telemetry-new-in-v402) TiDB configuration item is set to `false` on all TiDB instances, the telemetry collection is always disabled and this system variable will not take effect. See [Telemetry](/telemetry.md) for details.
 
+### tidb_enable_tso_follower_proxy <span class="version-mark">New in v5.3</span>
+
+- Scope: GLOBAL
+- Default value: `OFF`
+- This variable is used to enable the TSO Follower Proxy feature. When the value is `OFF`, TiDB only gets TSO from the PD leader. After this feature is enabled, TiDB gets TSO by evenly sending requests to all PD nodes and forwarding TSO requests through PD followers. This helps reduce the CPU pressure of PD leader.
+- Scenarios for enabling TSO Follower Proxy:
+    * Due to the high pressure of TSO requests, the CPU of the PD leader reaches a bottleneck, which causes high latency of TSO RPC requests.
+    * The TiDB cluster has many TiDB instances, and increasing the value of [`tidb_tso_client_batch_max_wait_time`](#tidb_tso_client_batch_max_wait_time-new-in-v53) cannot alleviate the high latency issue of TSO RPC requests.
+
+> **Note:**
+>
+> Suppose that the TSO RPC latency increases for reasons other than a CPU usage bottleneck of the PD leader (such as network issues). In this case, enabling the TSO Follower Proxy might increase the execution latency in TiDB and affect the QPS performance of the cluster.
+
 ### tidb_enable_vectorized_expression <span class="version-mark">New in v4.0</span>
 
 - Scope: SESSION | GLOBAL
@@ -680,7 +854,8 @@ Query OK, 0 rows affected (0.09 sec)
 ### tidb_enforce_mpp <span class="version-mark">New in v5.1</span>
 
 - Scope: SESSION
-- Default value: `OFF`. To change this default value, modify the [`performance.enforce-mpp`](/tidb-configuration-file.md#enforce-mpp) configuration value.
+- Default value: `OFF`
+- To change this default value, modify the [`performance.enforce-mpp`](/tidb-configuration-file.md#enforce-mpp) configuration value.
 - Controls whether to ignore the optimizer's cost estimation and to forcibly use TiFlash's MPP mode for query execution. The value options are as follows:
     - `0` or `OFF`, which means that the MPP mode is not forcibly used (by default).
     - `1` or `ON`, which means that the cost estimation is ignored and the MPP mode is forcibly used. Note that this setting only takes effect when `tidb_allow_mpp=true`.
@@ -707,7 +882,8 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Scope: GLOBAL
 - Default value: `600`
 - Range: `[-1, 9223372036854775807]`
-- This variable is used to limit the maximum execution time of each execution plan in the baseline evolution feature. The unit is second.
+- Unit: Seconds
+- This variable is used to limit the maximum execution time of each execution plan in the baseline evolution feature.
 
 ### tidb_evolve_plan_task_start_time <span class="version-mark">New in v4.0</span>
 
@@ -719,7 +895,8 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 - Scope: SESSION | GLOBAL
 - Default value: `5`
-- Range: `[1, 2147483647]`
+- Range: `[1, 256]`
+- Unit: Threads
 
 This variable is used to set the concurrency of the following SQL operators (to one value):
 
@@ -749,7 +926,8 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Scope: INSTANCE
 - Default value: `60`
 - Range: `[10, 2147483647]`
-- This variable is used to set the threshold value that determines whether to print expensive query logs. The unit is second. The difference between expensive query logs and slow query logs is:
+- Unit: Seconds
+- This variable is used to set the threshold value that determines whether to print expensive query logs. The difference between expensive query logs and slow query logs is:
     - Slow logs are printed after the statement is executed.
     - Expensive query logs print the statements that are being executed, with execution time exceeding the threshold value, and their related information.
 
@@ -764,7 +942,8 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: GLOBAL
 - Default value: `-1`
-- Range: `[1, 128]`
+- Range: `[1, 256]`
+- Unit: Threads
 - Specifies the number of threads in the [Resolve Locks](/garbage-collection-overview.md#resolve-locks) step of GC. A value of `-1` means that TiDB will automatically decide the number of garbage collection threads to use.
 
 ### tidb_gc_enable <span class="version-mark">New in v5.0</span>
@@ -831,7 +1010,8 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: SESSION | GLOBAL
 - Default value: `-1`
-- Range: `[1, 2147483647]`
+- Range: `[1, 256]`
+- Unit: Threads
 - This variable is used to set the concurrency of the `hash join` algorithm.
 - A value of `-1` means that the value of `tidb_executor_concurrency` will be used instead.
 
@@ -843,7 +1023,8 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: SESSION | GLOBAL
 - Default value: `-1`
-- Range: `[1, 2147483647]`
+- Range: `[1, 256]`
+- Unit: Threads
 - This variable is used to set the concurrency of executing the concurrent `hash aggregation` algorithm in the `final` phase.
 - When the parameter of the aggregate function is not distinct, `HashAgg` is run concurrently and respectively in two phases - the `partial` phase and the `final` phase.
 - A value of `-1` means that the value of `tidb_executor_concurrency` will be used instead.
@@ -856,7 +1037,8 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: SESSION | GLOBAL
 - Default value: `-1`
-- Range: `[1, 2147483647]`
+- Range: `[1, 256]`
+- Unit: Threads
 - This variable is used to set the concurrency of executing the concurrent `hash aggregation` algorithm in the `partial` phase.
 - When the parameter of the aggregate function is not distinct, `HashAgg` is run concurrently and respectively in two phases - the `partial` phase and the `final` phase.
 - A value of `-1` means that the value of `tidb_executor_concurrency` will be used instead.
@@ -866,6 +1048,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Scope: SESSION | GLOBAL
 - Default value: `25000`
 - Range: `[1, 2147483647]`
+- Unit: Rows
 - This variable is used to set the batch size of the `index lookup join` operation.
 - Use a bigger value in OLAP scenarios, and a smaller value in OLTP scenarios.
 
@@ -877,7 +1060,8 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: SESSION | GLOBAL
 - Default value: `-1`
-- Range: `[1, 2147483647]`
+- Range: `[1, 256]`
+- Unit: Threads
 - This variable is used to set the concurrency of the `index lookup` operation.
 - Use a bigger value in OLAP scenarios, and a smaller value in OLTP scenarios.
 - A value of `-1` means that the value of `tidb_executor_concurrency` will be used instead.
@@ -890,7 +1074,8 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: SESSION | GLOBAL
 - Default value: `-1`
-- Range: `[1, 2147483647]`
+- Range: `[1, 256]`
+- Unit: Threads
 - This variable is used to set the concurrency of the `index lookup join` algorithm.
 - A value of `-1` means that the value of `tidb_executor_concurrency` will be used instead.
 
@@ -899,6 +1084,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Scope: SESSION | GLOBAL
 - Default value: `20000`
 - Range: `[1, 2147483647]`
+- Unit: Rows
 - This variable is used to set the batch size of the `index lookup` operation.
 - Use a bigger value in OLAP scenarios, and a smaller value in OLTP scenarios.
 
@@ -906,7 +1092,8 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: SESSION | GLOBAL
 - Default value: `1`
-- Range: `[1, 2147483647]`
+- Range: `[1, 256]`
+- Unit: Threads
 - This variable is used to set the concurrency of the `serial scan` operation.
 - Use a bigger value in OLAP scenarios, and a smaller value in OLTP scenarios.
 
@@ -915,6 +1102,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Scope: SESSION | GLOBAL
 - Default value: `32`
 - Range: `[1, 32]`
+- Unit: Rows
 - This variable is used to set the number of rows for the initial chunk during the execution process.
 
 ### tidb_isolation_read_engines <span class="version-mark">New in v4.0</span>
@@ -935,6 +1123,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Scope: SESSION | GLOBAL
 - Default value: `1024`
 - Range: `[32, 2147483647]`
+- Unit: Rows
 - This variable is used to set the maximum number of rows in a chunk during the execution process. Setting to too large of a value may cause cache locality issues.
 
 ### tidb_max_delta_schema_count <span class="version-mark">New in v2.1.18 and v3.0.5</span>
@@ -974,14 +1163,16 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Scope: SESSION
 - Default value: `60`
 - Range: `[10, 216000]`
-- This variable is used to set the range duration of the Prometheus statement generated when querying METRIC_SCHEMA. The unit is second.
+- Unit: Seconds
+- This variable is used to set the range duration of the Prometheus statement generated when querying `METRICS_SCHEMA`.
 
 ### tidb_metric_query_step <span class="version-mark">New in v4.0</span>
 
 - Scope: SESSION
 - Default value: `60`
 - Range: `[10, 216000]`
-- This variable is used to set the step of the Prometheus statement generated when querying `METRIC_SCHEMA`. The unit is second.
+- Unit: Seconds
+- This variable is used to set the step of the Prometheus statement generated when querying `METRICS_SCHEMA`.
 
 ### tidb_multi_statement_mode <span class="version-mark">New in v4.0.11</span>
 
@@ -1014,20 +1205,6 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Default value: `OFF`
 - This variable is used to set whether the optimizer executes the optimization operation of pushing down the aggregate function to the position before Join, Projection, and UnionAll.
 - When the aggregate operation is slow in query, you can set the variable value to ON.
-
-### tidb_opt_limit_push_down_threshold
-
-- Scope: SESSION | GLOBAL
-- Default value: `100`
-- Range: `[0, 2147483647]`
-- This variable is used to set the threshold that determines whether to push the Limit or TopN operator down to TiKV.
-- If the value of the Limit or TopN operator is smaller than or equal to this threshold, these operators are forcibly pushed down to TiKV. This variable resolves the issue that the Limit or TopN operator cannot be pushed down to TiKV partly due to wrong estimation. 
-
-### tidb_opt_enable_correlation_adjustment
-
-- Scope: SESSION | GLOBAL
-- Default value:  `ON`
-- This variable is used to control whether the optimizer estimates the number of rows based on column order correlation
 
 ### tidb_opt_correlation_exp_factor
 
@@ -1081,6 +1258,12 @@ mysql> desc select count(distinct a) from test.t;
 4 rows in set (0.00 sec)
 ```
 
+### tidb_opt_enable_correlation_adjustment
+
+- Scope: SESSION | GLOBAL
+- Default value: `ON`
+- This variable is used to control whether the optimizer estimates the number of rows based on column order correlation
+
 ### tidb_opt_insubq_to_join_and_agg
 
 - Scope: SESSION | GLOBAL
@@ -1104,12 +1287,20 @@ mysql> desc select count(distinct a) from test.t;
     select * from t, t1 where t.a=t1.a
     ```
 
+### tidb_opt_limit_push_down_threshold
+
+- Scope: SESSION | GLOBAL
+- Default value: `100`
+- Range: `[0, 2147483647]`
+- This variable is used to set the threshold that determines whether to push the Limit or TopN operator down to TiKV.
+- If the value of the Limit or TopN operator is smaller than or equal to this threshold, these operators are forcibly pushed down to TiKV. This variable resolves the issue that the Limit or TopN operator cannot be pushed down to TiKV partly due to wrong estimation.
+
 ### tidb_opt_prefer_range_scan <span class="version-mark">New in v5.0</span>
 
-- Scope: SESSION
+- Scope: SESSION | GLOBAL
 - Default value: `OFF`
-- After you set the value of this variable to `1`, the optimizer always prefers index scans over full table scans.
-- In the following example, before you enable `tidb_opt_prefer_range_scan`, the TiDB optimizer performs a full table scan. After you enable `tidb_opt_prefer_range_scan`, the optimizer selects an index scan.
+- After you set the value of this variable to `ON`, the optimizer always prefers range scans over full table scans.
+- In the following example, before you enable `tidb_opt_prefer_range_scan`, the TiDB optimizer performs a full table scan. After you enable `tidb_opt_prefer_range_scan`, the optimizer selects an index range scan.
 
 ```sql
 explain select * from t where age=5;
@@ -1166,7 +1357,8 @@ explain select * from t where age=5;
 
 - Scope: SESSION | GLOBAL
 - Default value: `-1`
-- Range: `[-1, 2147483647]`
+- Range: `[-1, 256]`
+- Unit: Threads
 - This variable is used to set the concurrency of the `Projection` operator.
 - A value of `-1` means that the value of `tidb_executor_concurrency` will be used instead.
 
@@ -1199,9 +1391,9 @@ SET tidb_query_log_max_len = 20
 
 ### tidb_replica_read <span class="version-mark">New in v4.0</span>
 
-- Scope: SESSION
+- Scope: SESSION | GLOBAL
 - Default value: `leader`
-- Possible values: `leader`, `follower`, `leader-and-follower`
+- Possible values: `leader`, `follower`, `leader-and-follower`, `closest-replicas`
 - This variable is used to control where TiDB reads data. Here are three options:
     - leader: Read only from leader node
     - follower: Read only from follower node
@@ -1318,7 +1510,8 @@ SET tidb_slow_log_threshold = 200;
 - Scope: SESSION | GLOBAL
 - Default value: `1800`
 - Range: `[1, 2147483647]`
-- This variable is used to set the refresh time of [statement summary tables](/statement-summary-tables.md). The unit is second.
+- Unit: Seconds
+- This variable is used to set the refresh time of [statement summary tables](/statement-summary-tables.md).
 
 ### tidb_store_limit <span class="version-mark">New in v3.0.4 and v4.0</span>
 
@@ -1326,6 +1519,24 @@ SET tidb_slow_log_threshold = 200;
 - Default value: `0`
 - Range: `[0, 9223372036854775807]`
 - This variable is used to limit the maximum number of requests TiDB can send to TiKV at the same time. 0 means no limit.
+
+### tidb_tso_client_batch_max_wait_time <span class="version-mark">New in v5.3</span>
+
+- Scope: GLOBAL
+- Default value: `0`
+- Range: `[0, 10]`
+- Unit: Milliseconds
+- This variable is used to set the maximum waiting time for a batch operation when TiDB requests TSO from PD. The default value is `0`, which means no extra waiting time.
+- When obtaining TSO requests from PD each time, PD Client, used by TiDB, collects as many TSO requests received at the same time as possible. Then, PD Client merges the collected requests in batch into one RPC request and sends the request to PD. This helps reduce the pressure on PD.
+- After setting this variable to a value greater than `0`, TiDB waits for the maximum duration of this value before the end of each batch merge. This is to collect more TSO requests and improve the effect of batch operations.
+- Scenarios for increasing the value of this variable:
+    * Due to the high pressure of TSO requests, the CPU of the PD leader reaches a bottleneck, which causes high latency of TSO RPC requests.
+    * There are not many TiDB instances in the cluster, but every TiDB instance is in high concurrency.
+- It is recommended to set this variable to a value as small as possible.
+
+> **Notes:**
+>
+> Suppose that the TSO RPC latency increases for reasons other than a CPU usage bottleneck of the PD leader (such as network issues). In this case, increasing the value of `tidb_tso_client_batch_max_wait_time` might increase the execution latency in TiDB and affect the QPS performance of the cluster.
 
 ### tidb_txn_mode
 
@@ -1356,7 +1567,8 @@ SET tidb_slow_log_threshold = 200;
 - Scope: SESSION
 - Default value: `300`
 - Range: `[1, 2147483647]`
-- This variable is used to set the timeout for executing the `SPLIT REGION` statement. The unit is second. If a statement is not executed completely within the specified time value, a timeout error is returned.
+- Unit: Seconds
+- This variable is used to set the timeout for executing the `SPLIT REGION` statement. If a statement is not executed completely within the specified time value, a timeout error is returned.
 
 ### tidb_window_concurrency <span class="version-mark">New in v4.0</span>
 
@@ -1366,7 +1578,8 @@ SET tidb_slow_log_threshold = 200;
 
 - Scope: SESSION | GLOBAL
 - Default value: `-1`
-- Range: `[1, 2147483647]`
+- Range: `[1, 256]`
+- Unit: Threads
 - This variable is used to set the concurrency degree of the window operator.
 - A value of `-1` means that the value of `tidb_executor_concurrency` will be used instead.
 
@@ -1377,6 +1590,12 @@ SET tidb_slow_log_threshold = 200;
 - This variable returns the current time zone. Values can be specified as either an offset such as '-8:00' or a named zone 'America/Los_Angeles'.
 - The value `SYSTEM` means that the time zone should be the same as the system host, which is available via the [`system_time_zone`](#system_time_zone) variable.
 
+### timestamp
+
+- Scope: SESSION
+- Default value: ""
+- A non-empty value of this variable indicates the UNIX epoch that is used as the timestamp for `CURRENT_TIMESTAMP()`, `NOW()`, and other functions. This variable might be used in data restore or replication.
+
 ### transaction_isolation
 
 - Scope: SESSION | GLOBAL
@@ -1386,7 +1605,7 @@ SET tidb_slow_log_threshold = 200;
 
 ### tx_isolation
 
-This variable is an alias for _transaction_isolation_.
+This variable is an alias for `transaction_isolation`.
 
 ### version
 
@@ -1399,6 +1618,18 @@ This variable is an alias for _transaction_isolation_.
 - Scope: NONE
 - Default value: (string)
 - This variable returns additional details about the TiDB version. For example, 'TiDB Server (Apache License 2.0) Community Edition, MySQL 5.7 compatible'.
+
+### version_compile_os
+
+- Scope: NONE
+- Default value: (string)
+- This variable returns the name of the OS on which TiDB is running.
+
+### version_compile_machine
+
+- Scope: NONE
+- Default value: (string)
+- This variable returns the name of the CPU architecture on which TiDB is running.
 
 ### wait_timeout
 
