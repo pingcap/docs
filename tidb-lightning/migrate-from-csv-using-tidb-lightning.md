@@ -221,7 +221,7 @@ delimiter = ''
 header = false
 not-null = true
 backslash-escape = false
-trim-last-separator = false
+trim-last-separator = true
 ```
 
 Example content:
