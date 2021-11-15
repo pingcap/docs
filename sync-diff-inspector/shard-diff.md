@@ -134,4 +134,4 @@ target-table = "table-0"     # The name of the target table
 
 ## Note
 
-If `table_0` exists in the upstream database, the downstream databse also compares this table.
+If `test.table-0` exists in the upstream database, the downstream database also compares this table.
