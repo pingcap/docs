@@ -46,8 +46,8 @@ You need to temporarily disable all types of internal scheduling, such as load b
 >
 > After the scheduling is disabled, the system cannot resolve data hotspot issues. Therefore, you need to enable the scheduling as soon as possible after the recovery is completed.
 
-1. Use pd-ctl to view the current configuration by running the [`config show`](/pd-control.md#config-show--set-option-value--placement-rules) command.
-2. Use pd-ctl to disable all types of scheduling, for example:
+1. Use PD Control to get the current configuration by running the [`config show`](/pd-control.md#config-show--set-option-value--placement-rules) command.
+2. Use PD Control to disable all types of scheduling. For example:
 
     * [`config set region-schedule-limit 0`](/pd-control.md#config-show--set-option-value--placement-rules)
     * [`config set replica-schedule-limit 0`](/pd-control.md#config-show--set-option-value--placement-rules)
@@ -55,15 +55,15 @@ You need to temporarily disable all types of internal scheduling, such as load b
 
 ### Step 2. Remove the stores that cannot be automatically recovered
 
-Use pd-ctl to remove the stores that cannot be automatically recovered by running the [`unsafe remove-failed-stores <store_id>[,<store_id>,...]`](/pd-control.md#unsafe-remove-failed-stores-store-ids--show--history) command.
+Use PD Control to remove the stores that cannot be automatically recovered by running the [`unsafe remove-failed-stores <store_id>[,<store_id>,...]`](/pd-control.md#unsafe-remove-failed-stores-store-ids--show--history) command.
 
 > **Note:**
 >
-> The successful return of this command only indicates that the request is accepted, not that the recovery is completed successfully. The stores are actually recovered in the background.
+> The returned result of this command only indicates that the request is accepted, not that the recovery is completed successfully. The stores are actually recovered in the background.
 
 ### Step 3. Check the progress
 
-When the above store removal command runs successfully, you need to use pd-ctl to check the removal progress by running the [`unsafe remove-failed-stores show`](/pd-control.md#config-show--set-option-value--placement-rules) command. When the command result shows "Last recovery has finished", the system recovery is completed.
+When the above store removal command runs successfully, you can use PD Control to check the removal progress by running the [`unsafe remove-failed-stores show`](/pd-control.md#config-show--set-option-value--placement-rules) command. When the command result shows "Last recovery has finished", the system recovery is completed.
 
 ### Step 4. Test read and write tasks
 
