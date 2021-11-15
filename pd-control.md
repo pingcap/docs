@@ -870,7 +870,7 @@ logic:  120102
 >
 > - This feature is a lossy recovery, so TiKV cannot guarantee data integrity and data indexes integrity after using the feature.
 > - Online unsafe recovery is an experimental feature, and it is **not** recommended to use it in the production environment. The interface, strategy, and internal implementation of the feature might be changed when it is finally released. Also, although the feature is tested in some scenarios, it is not thoroughly validated, so the feature might cause system unavailability.
-> - It is recommended to perform the feature-related operations with the support of the TiDB team. If some incorrect operations are performed, it might be hard to recover the cluster.
+> - It is recommended to perform the feature-related operations with the support from the TiDB team. If any misoperation is performed, it might be hard to recover the cluster.
 
 Use this command to perform lossy recovery operations when permanently damaged replicas cause data to be unavailable. For example:
 
@@ -884,7 +884,7 @@ Execute Online Unsafe Recovery to remove permanently damaged stores:
 Success!
 ```
 
-Show the current or historical state of online unsafe recovery:
+Show the current or historical state of Online Unsafe Recovery:
 
 ```bash
 >> unsafe remove-failed-stores show

@@ -1,13 +1,13 @@
 ---
 title: Online Unsafe Recovery
-summary: Learn how to use online unsafe recovery.
+summary: Learn how to use Online Unsafe Recovery.
 ---
 
 # Online Unsafe Recovery
 
 > **Warning:**
 >
-> - This feature is a lossy recovery, so TiKV cannot guarantee data integrity and data indexes integrity after using the feature.
+> - Online Unsafe Recovery is a type of lossy recovery. If you use this feature, the integrity of data and data indexes cannot be guaranteed.
 > - Online Unsafe Recovery is an experimental feature, and it is **NOT** recommended to use it in the production environment. The interface, strategy, and internal implementation of this feature might change when it becomes generally available (GA). Although this feature has been tested in some scenarios, it is not thoroughly validated and might cause system unavailability.
 > - It is recommended to perform the feature-related operations with the support from the TiDB team. If any misoperation is performed, it might be hard to recover the cluster.
 
