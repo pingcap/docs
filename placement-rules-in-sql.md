@@ -171,6 +171,6 @@ The following known limitations exist in the experimental release of Placement R
 * Dumpling does not support dumping placement policies. See [issue #29371](https://github.com/pingcap/tidb/issues/29371).
 * TiDB tools, including Backup & Restore (BR), TiCDC, TiDB Lightning, and TiDB Data Migration (DM), do not yet support placement rules.
 * Temporary tables do not support placement options (either via direct placement or placement policies).
-* Syntactic sugar rules are permitted for setting `PRIMARY_REGION` and `REGIONS`. but in the future, we plan to add varieties for `PRIMARY_RACK`, `PRIMARY_ZONE`, and `PRIMARY_HOST`. See [issue #18030](https://github.com/pingcap/tidb/issues/18030).
+* Syntactic sugar rules are permitted for setting `PRIMARY_REGION` and `REGIONS`. In the future, we plan to add varieties for `PRIMARY_RACK`, `PRIMARY_ZONE`, and `PRIMARY_HOST`. See [issue #18030](https://github.com/pingcap/tidb/issues/18030).
 * TiFlash learners are not configurable through Placement Rules syntax.
 * Placement rules only ensure that data at rest resides on the correct TiKV store. The rules do not guarantee that data in transit (via either user queries or internal operations) only occurs in a specific region.
