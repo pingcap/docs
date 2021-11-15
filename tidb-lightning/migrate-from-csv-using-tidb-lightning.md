@@ -140,6 +140,7 @@ See the [TOML v1.0.0 specification] for details.
 
 TiDB Lightning does not support every option supported by the `LOAD DATA` statement. Some examples:
 
+* The line terminator must only be CR (`\r`), LF (`\n`) or CRLF (`\r\n`), which means `LINES TERMINATED BY` is not customizable.
 * There cannot be line prefixes (`LINES STARTING BY`).
 * The header cannot be simply skipped (`IGNORE n LINES`). It must be valid column names if present.
 
@@ -175,6 +176,7 @@ header = true
 not-null = false
 null = '\N'
 backslash-escape = true
+trim-last-separator = false
 ```
 
 Example content:
@@ -197,6 +199,7 @@ header = true
 not-null = false
 null = 'NULL'
 backslash-escape = false
+trim-last-separator = false
 ```
 
 Example content:
@@ -218,6 +221,7 @@ delimiter = ''
 header = false
 not-null = true
 backslash-escape = false
+trim-last-separator = false
 ```
 
 Example content:
