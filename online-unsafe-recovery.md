@@ -15,11 +15,11 @@ When permanently damaged replicas cause part of data on TiKV to be unreadable an
 
 ## Feature description
 
-In TiDB, data might be replicated in many stores at the same time according to the Placements Rules defined by users. This guarantees that data is still readable and writable even if a single or a few stores are temporarily offline or damaged. However, when most or all replicas of a Region are offline at the same time, the Region becomes temporarily unavailable, by design, to ensure data integrity.
+In TiDB, the same data might be stored in multiple stores at the same time according to the replica rules defined by users. This guarantees that data is still readable and writable even if a single or a few stores are temporarily offline or damaged. However, when most or all replicas of a Region go offline during a short period of time, the Region becomes temporarily unavailable, by design, to ensure data integrity.
 
-Suppose that multiple replicas of data encounter problems like permanent damage (such as disk damage), and this issue causes stores to fail to go online. In this case, this data is temporarily unavailable. Provided that you can accept data rewind or data loss, if you want the cluster back in use under this circumstance, TiDB can theoretically re-form the majority of replicas by manually overwriting the meta information of data shards. This allows application layer services to read and write (might be stale or empty) this data.
+Suppose that multiple replicas of a data range encounter issues like permanent damage (such as disk damage), and these issues cause the stores to stay offline. In this case, this data range is temporarily unavailable. If you want the cluster back in use and also accept data rewind or data loss, in theory, you can re-form the majority of replicas by manually removing the failed replicas from the group. This allows application-layer services to read and write this data range (might be stale or empty) again.
 
-In this case, if some stores with loss-tolerating data are permanently damaged, you can easily perform a lossy recovery operation by using online unsafe recovery. Using this feature, PD, under its global perspective, collects the meta information of data shards in all stores and generates a more real-time and more complete recovery plan. Then, PD distributes the plan to each surviving store to make the stores perform data recovery tasks. Also, after the data recovery plan is distributed, PD periodically checks the recovery progress to ensure that the current state of the cluster matches its expected state.
+In this case, if some stores with loss-tolerant data are permanently damaged, you can perform a lossy recovery operation by using Online Unsafe Recovery. Using this feature, PD, under its global perspective, collects the metadata of data shards from all stores and generates a real-time and complete recovery plan. Then, PD distributes the plan to all surviving stores to make them perform data recovery tasks. In addition, once the data recovery plan is distributed, PD periodically monitors the recovery progress and re-send the plan when necessary.
 
 ## User scenarios
 
@@ -35,7 +35,7 @@ The Online Unsafe Recovery feature is suitable for the following scenarios:
 
 Before using Online Unsafe Recovery, make sure that the following requirements are met:
 
-* Part of data is indeed unavailable.
+* The offline stores indeed cause some pieces of data to be unavailable.
 * The offline stores cannot be automatically recovered or restarted.
 
 ### Step 1. Disable all types of scheduling
