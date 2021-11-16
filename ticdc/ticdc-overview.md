@@ -106,6 +106,10 @@ Currently, the following scenarios are not supported:
 
 TiCDC only provides partial support for scenarios of large transactions in the upstream. For details, refer to [FAQ: Does TiCDC support replicating large transactions? Is there any risk?](/ticdc/troubleshoot-ticdc.md#does-ticdc-support-replicating-large-transactions-is-there-any-risk).
 
+> **Note:**
+>
+> Since v5.3.0, TiCDC no longer supports the cyclic replication feature.
+
 ## Compatibility notes
 
 ### Incompatibility issue caused by using the TiCDC v5.0.0-rc `cdc cli` tool to operate a v4.0.x cluster
@@ -126,7 +130,6 @@ Solutions: Use the `cdc` executable file corresponding to the TiCDC cluster vers
 >
 > The above issue exists only when `cdc cli` is v5.0.0-rc. Other v5.0.x `cdc cli` tool can be compatible with v4.0.x clusters.
 
-### Cyclic replication is removed since v5.3.0
 
 ### Compatibility notes for `sort-dir` and `data-dir`
 
