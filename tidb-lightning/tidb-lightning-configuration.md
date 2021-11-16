@@ -107,9 +107,6 @@ addr = "172.16.31.10:8287"
 #  - ignore: keep the existing entry, and ignore the new entry
 #  - error: report error and quit the program
 # on-duplicate = "replace"
-# The size limit of generated SST files in the "local" backend. It is better
-# to be the same as the Region size of TiKV (96 MB by default).
-# region-split-size = 100_663_296
 #    state in the target TiDB.
 # duplicate-resolution = 'none'
 # The number of KV pairs sent in one request in the "local" backend.
@@ -127,10 +124,6 @@ addr = "172.16.31.10:8287"
 # Block size for file reading. Keep it longer than the longest string of
 # the data source.
 read-block-size = 65536 # Byte (default = 64 KB)
-
-# Minimum size (in terms of source data file) of each batch of import.
-# TiDB Lightning splits a large table into multiple data engine files according to this size.
-# batch-size = 107_374_182_400 # Byte (default = 100 GB)
 
 # The engine file needs to be imported sequentially. Due to parallel processing,
 # multiple data engines will be imported at nearly the same time, and this
