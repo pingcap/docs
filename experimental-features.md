@@ -60,3 +60,4 @@ This document introduces the experimental features of TiDB in different versions
 + [SQL diagnostics](/information-schema/information-schema-sql-diagnostics.md).
 + [Cluster diagnostics](/dashboard/dashboard-diagnostics-access.md).
 + [Continuous profiling](/dashboard/continuous-profiling.md)
++ [Online Unsafe Recovery](/online-unsafe-recovery.md) (Introduced in v5.3)
