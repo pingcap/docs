@@ -11,15 +11,13 @@ aliases: ['/docs/dev/dashboard/continuous profiling/']
 > Continuous Profiling is currently an experimental feature and is not recommended for use in production environments.
 >
 
-Continuous Profiling is a way to observe resource overhead at the system call level. With the support of Continuous Profiling, TiDB provides performance insight as clear as directly looking into the database source code, and helps R&D and operation and maintenance personnel to locate the root cause of performance problems using a flame graph.
+Introduced in TiDB 5.3.0, Continuous Profiling is a way to observe resource overhead at the system call level. With the support of Continuous Profiling, TiDB provides performance insight as clear as directly looking into the database source code, and helps R&D and operation and maintenance personnel to locate the root cause of performance problems using a flame graph.
 
 With less than 0.5% performance loss, this feature takes continuous snapshots (similar to CT scan) of the database internal operations, turning the database from a "black box" into a "white box" that is more observable. This feature runs automatically after being enabled by one click and keeps storage results generated within the retention period. Storage results beyond the retention period are recycled to release the storage space.
 
 ## Application restrictions
 
 When applying the Continuous Profiling feature, pay attention to the following restrictions:
-
-- Introduced in TiDB 5.3.0, Continuous Profiling is only applicable to TiDB 5.3.0 or above.
 
 - Under the x86 architecture, this feature supports TiDB, TiKV, and PD, but does not support TiFlash. This feature is not fully compatible with the ARM architecture and cannot be enabled under this architecture.
 
@@ -154,6 +152,8 @@ You can also click an individual instance to view its profiling result:
 1. On TiDB Dashboard, click **Advanced Debugging** > **Profile Instances** > **Continuous Profile** on the left navigation bar. Click **Settings**.
 
 2. In the popped-up window, switch off the button under **Enable Feature**.
+
+3. In the dialog box of **Disable Continuous Profiling Feature**, click **Disable**.
 
 3. Click **Save**.
 
