@@ -1,6 +1,6 @@
 ---
 title: Use PLAN REPLAYER to Save and Restore the On-Site Information of a Cluster
-summary: Learn how to use PLAN REPLAYER to save and restore the on-site information of a cluster
+summary: Learn how to use PLAN REPLAYER to save and restore the on-site information of a cluster.
 ---
 
 # Use PLAN REPLAYER to Save and Restore the On-Site Information of a Cluster
