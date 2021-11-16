@@ -82,9 +82,9 @@ You can perform full collection using the following syntax.
 + `WITH NUM CMSKETCH DEPTH` specifies the depth of the CM Sketch.
 + `WITH NUM CMSKETCH WIDTH` specifies the width of the CM Sketch.
 + `WITH NUM SAMPLES` specifies the number of samples.
-+ `WITH FLOAT_NUM SAMPLERATE` specifies the rate of samples.
++ `WITH FLOAT_NUM SAMPLERATE` specifies the sampling rate.
 
-`WITH NUM SAMPLES` and `WITH FLOAT_NUM SAMPLERATE` corresponds to two different algorithms of sampling.
+`WITH NUM SAMPLES` and `WITH FLOAT_NUM SAMPLERATE` correspond to two different algorithms of collecting samples.
 
 - `WITH NUM SAMPLES` specifies the size of the sampling set, which is implemented in the reservoir sampling method in TiDB. When a table is large, it is not recommended to use this method to collect statistics. Because the intermediate result set of the reservoir sampling contains redundant results, it causes additional pressure on resources such as memory.
 - `WITH FLOAT_NUM SAMPLERATE` is a sampling method introduced in v5.3.0. It is the parameter with the value range `(0, 1]` that specifies the sampling rate. It is implemented in the way of Bernoulli sampling in TiDB, which is more suitable for sampling larger tables and performs better in collection efficiency and resource usage.
@@ -93,9 +93,9 @@ Before v5.3.0, TiDB uses the reservoir sampling method to collect statistics. Si
 
 > **Note:**
 >
-> The current sampling rate is calculated based on an adaptive algorithm. When you can observe the number of rows in a table using [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md), you can use this number of rows to calculate the sampling rate corresponding to 100,000 rows. If you cannot observe this number, you can use the `TABLE_KEYS` column of the [`TABLE_STORAGE_STATS`](/information-schema/information-schema-table-storage-stats.md) table as another reference to calculate the sampling rate.
+> The current sampling rate is calculated based on an adaptive algorithm. When you can observe the number of rows in a table using [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md), you can use this number of rows to calculate the sampling rate corresponding to 100,000 rows. If you cannot observe this number, you can use the `TABLE_KEYS` column in the [`TABLE_STORAGE_STATS`](/information-schema/information-schema-table-storage-stats.md) table as another reference to calculate the sampling rate.
 >
-> Normally, `STATS_META` is more credible than `TABLE_KEYS`. But after importing data through [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md), the result of `STATS_META` is `0`. To handle this situation, you can use `TABLE_KEYS` to calculate the sampling rate when the result of `STATS_META` is much smaller than the result of `TABLE_KEYS`.
+> Normally, `STATS_META` is more credible than `TABLE_KEYS`. However, after importing data through the methods like [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md), the result of `STATS_META` is `0`. To handle this situation, you can use `TABLE_KEYS` to calculate the sampling rate when the result of `STATS_META` is much smaller than the result of `TABLE_KEYS`.
 
 The following syntax collects statistics for some columns in the `TableName` table:
 
@@ -194,7 +194,7 @@ When the ratio of the number of modified rows to the total number of rows of `tb
 
 > **Note:**
 >
-> Currently, the automatic update does not record the configuration items input at manual `ANALYZE`. Therefore, when you use the `WITH` syntax to control the collecting behavior of `ANALYZE`, you need to manually to set scheduled tasks to collect statistics.
+> Currently, the automatic update does not record the configuration items input at manual `ANALYZE`. Therefore, when you use the `WITH` syntax to control the collecting behavior of `ANALYZE`, you need to manually set scheduled tasks to collect statistics.
 
 Before v5.0, when the query is executed, TiDB collects feedback with the probability of `feedback-probability` and uses it to update the histogram and Count-Min Sketch. **In v5.0, this feature is disabled by default, and it is not recommended to enable this feature.**
 
