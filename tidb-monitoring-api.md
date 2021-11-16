@@ -5,7 +5,7 @@ summary: Learn the API of TiDB monitoring services.
 
 # TiDB Monitoring API
 
-You can use the following two types of interfaces to monitor the TiDB cluster state:
+You can use the following types of interfaces to monitor the TiDB cluster state:
 
 - [The state interface](#running-status): this interface uses the HTTP interface to get the component information.
 - [Storage information](#storage-information): this interface uses the HTTP interface to get the storage information of data tables.
