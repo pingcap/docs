@@ -1102,7 +1102,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: SESSION
 - Default value: `0`
-- This variable is used to adjust max days of logger on the current TiDB instance. It defaults to the value specified in the config file. Changing the variable will only replace the logger of the current TiDB instance. The variable will be reset after an restart and the config file will not be affected.
+- This variable is used to adjust max days of logger on the current TiDB instance. It defaults to the value specified in the config file, refer [`max-days`](/tidb-configuration-file.md#max-days). Changing the variable will only replace the logger of the current TiDB instance. The variable will be reset after an restart and the config file will not be affected.
 
 ### tidb_low_resolution_tso
 
