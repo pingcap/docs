@@ -771,7 +771,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 - Scope: SESSION | GLOBAL
 - Default value: `ON`
-- This variable controls the behavior of the optimizer on using statistics of a table.
+- This variable controls the behavior of the optimizer on using statistics of a table when the statistics are outdated.
 - The optimizer determines the outdated statistics of a table in this way: since the last time `ANALYZE` is executed on a table to get the statistics, if 80% of the table rows are modified (the modified row count divided by the total row count), the optimizer determines that the statistics of this table is outdated. You can change this ratio using the [`pseudo-estimate-ratio`](/tidb-configuration-file.md#pseudo-estimate-ratio) configuration.
 - By default (with the variable value `ON`), when the statistics of a table are outdated, the optimizer determines that the statistics of the table is no longer reliable except for the total row count. Then, the optimizer uses the pseudo statistics. If you set the variable value to `OFF`, even if the statistics are outdated, the optimizer keeps using the statistics.
 - If the data on a table is frequently modified without executing `ANALYZE` on this table in time, to keep the execution plan stable, you can set the variable value to `OFF`.
