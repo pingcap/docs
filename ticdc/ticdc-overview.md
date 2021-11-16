@@ -67,21 +67,6 @@ Currently, the TiCDC sink component supports replicating data to the following d
     - For different distribution strategies, the different consumer implementations can achieve different levels of consistency, including row-level consistency, eventual consistency, or cross-table transactional consistency.
     - TiCDC does not have an implementation of Kafka consumers, but only provides [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md). You can implement the Kafka consumer according to this protocol.
 
-## Install and deploy TiCDC
-
-You can either deploy TiCDC along with a new TiDB cluster or add the TiCDC component to an existing TiDB cluster. For details, see [Deploy TiCDC](/ticdc/deploy-ticdc.md).
-
-## Manage TiCDC Cluster and Replication Tasks
-
-Currently, you can use the `cdc cli` tool to manage the status of a TiCDC cluster and data replication tasks. For details, see:
-
-- [Use `cdc cli` to manage cluster status and data replication task](/ticdc/manage-ticdc.md#use-cdc-cli-to-manage-cluster-status-and-data-replication-task)
-- [Use OpenAPI to manage cluster status and data replication task](/ticdc/ticdc-open-api.md)
-
-## TiCDC Open Protocol
-
-TiCDC Open Protocol is a row-level data change notification protocol that provides data sources for monitoring, caching, full-text indexing, analysis engines, and primary-secondary replication between different databases. TiCDC complies with TiCDC Open Protocol and replicates data changes of TiDB to third-party data medium such as MQ (Message Queue). For more information, see [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md).
-
 ## Restrictions
 
 There are some restrictions when using TiCDC.
@@ -106,6 +91,25 @@ Currently, the following scenarios are not supported:
 
 TiCDC only provides partial support for scenarios of large transactions in the upstream. For details, refer to [FAQ: Does TiCDC support replicating large transactions? Is there any risk?](/ticdc/troubleshoot-ticdc.md#does-ticdc-support-replicating-large-transactions-is-there-any-risk).
 
+> **Note:**
+>
+> Since v5.3.0, TiCDC no longer supports the cyclic replication feature.
+
+## Install and deploy TiCDC
+
+You can either deploy TiCDC along with a new TiDB cluster or add the TiCDC component to an existing TiDB cluster. For details, see [Deploy TiCDC](/ticdc/deploy-ticdc.md).
+
+## Manage TiCDC Cluster and Replication Tasks
+
+Currently, you can use the `cdc cli` tool to manage the status of a TiCDC cluster and data replication tasks. For details, see:
+
+- [Use `cdc cli` to manage cluster status and data replication task](/ticdc/manage-ticdc.md#use-cdc-cli-to-manage-cluster-status-and-data-replication-task)
+- [Use OpenAPI to manage cluster status and data replication task](/ticdc/ticdc-open-api.md)
+
+## TiCDC Open Protocol
+
+TiCDC Open Protocol is a row-level data change notification protocol that provides data sources for monitoring, caching, full-text indexing, analysis engines, and primary-secondary replication between different databases. TiCDC complies with TiCDC Open Protocol and replicates data changes of TiDB to third-party data medium such as MQ (Message Queue). For more information, see [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md).
+
 ## Compatibility notes
 
 ### Incompatibility issue caused by using the TiCDC v5.0.0-rc `cdc cli` tool to operate a v4.0.x cluster
@@ -125,8 +129,6 @@ Solutions: Use the `cdc` executable file corresponding to the TiCDC cluster vers
 > **Note:**
 >
 > The above issue exists only when `cdc cli` is v5.0.0-rc. Other v5.0.x `cdc cli` tool can be compatible with v4.0.x clusters.
-
-### Cyclic replication is removed since v5.3.0
 
 ### Compatibility notes for `sort-dir` and `data-dir`
 
