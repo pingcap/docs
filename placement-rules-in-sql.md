@@ -13,7 +13,6 @@ Placement Rules in SQL is a feature that enables you to specify where data is st
 
 The detailed user scenarios are as follows:
 
-- Place data across regions to improve the access performance in a specific region
 - Merge multiple databases of different applications to reduce the cost on database maintenance
 - Increase replica count for important data to improve the application availability and data reliability
 - Store new data into SSDs and store old data into HHDs to lower the cost on data archiving and storage
