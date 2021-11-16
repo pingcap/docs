@@ -63,6 +63,8 @@ The configuration of sync-diff-inspector consists of the following parts:
 
 Below is the description of a complete configuration file:
 
+- Note: configurations with `s` after their name can have multiple values, so you need to use square brackets `[]` to contain the configuration values.
+
 ``` toml
 # Diff Configuration.
 
@@ -91,29 +93,6 @@ check-struct-only = false
     password = ""
     # Uses the snapshot feature. If enabled, historical data is used for comparison
     # snapshot = "386902609362944000"
-
-######################### Table config #########################
-# Special configurations for specific tables. The tables to be configured must be in `task.target-check-tables`.
-[table-configs.config1] # config1  is the only ID for this configuration. It is used for the following `task.target-configs` configuration.
-# The name of the schema in the target database
-schema = "schama1"
-# The name of the target table
-table = "table"
-# Specifies the range of the data to be checked
-# It needs to comply with the syntax of the WHERE clause in SQL.
-range = "age > 10 AND age < 20"
-# Specifies the column used to divide data into chunks, separated by ",". If you do not configure it,
-# sync-diff-inspector chooses an appropriate column (primary key, unique key, or a field with index).
-index-fields = "col1,col2"
-# Ignores checking some columns such as some types (json, bit, blob, etc.)
-# that sync-diff-inspector does not currently support.
-# The floating-point data type behaves differently in TiDB and MySQL. You can use
-# `ignore-columns` to skip checking these columns.
-ignore-columns = ["",""]
-# Specifies the size of the chunk for dividing the table. If not specified, this configuration can be deleted or be set as 0.
-chunk-size = 0
-# Specifies the "collation" for the table. If not specified, this configuration can be deleted or be set as an empty string.
-collation = ""
 
 ########################### Routes ##############################
 # To compare the data of a large number of tables with different schema names or table names, or check the data of multiple upstream sharded tables and downstream table family, use the table-rule to configure the mapping relationship. You can configure the mapping rule only for the schema or table. Also, you can configure the mapping rules for both the schema and the table.
@@ -146,8 +125,29 @@ target-table = "t2"             # The name of the target table
     # Use "?" to match any character and “*” to match characters of any length.
     # For detailed match rules, refer to golang regexp pkg: https://github.com/google/re2/wiki/Syntax.
     target-check-tables = ["schema*.table*", "!c.*", "test2.t2"]
-    # Extra configurations for some tables.
+    # Extra configurations for some tables, Config1 is defined in the following table config example.
     target-configs= ["config1"]
+
+######################### Table config #########################
+# Special configurations for specific tables. The tables to be configured must be in `task.target-check-tables`.
+[table-configs.config1] # config1  is the only ID for this configuration. It is used for the above `task.target-configs` configuration.
+# The name of the target table, you can use regular expressions to match multiple tables, but one table is not allowed to be matched by multiple special configurations at the same time.
+target-tables = ["schema*.test*", "test2.t2"]
+# Specifies the range of the data to be checked
+# It needs to comply with the syntax of the WHERE clause in SQL.
+range = "age > 10 AND age < 20"
+# Specifies the column used to divide data into chunks. If you do not configure it,
+# sync-diff-inspector chooses an appropriate column (primary key, unique key, or a field with index).
+index-fields = ["col1","col2"]
+# Ignores checking some columns such as some types (json, bit, blob, etc.)
+# that sync-diff-inspector does not currently support.
+# The floating-point data type behaves differently in TiDB and MySQL. You can use
+# `ignore-columns` to skip checking these columns.
+ignore-columns = ["",""]
+# Specifies the size of the chunk for dividing the table. If not specified, this configuration can be deleted or be set as 0.
+chunk-size = 0
+# Specifies the "collation" for the table. If not specified, this configuration can be deleted or be set as an empty string.
+collation = ""
 ```
 
 ## Run sync-diff-inspector
