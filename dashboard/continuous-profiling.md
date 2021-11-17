@@ -155,6 +155,6 @@ You can also click an individual instance to view its profiling result:
 
 3. In the dialog box of **Disable Continuous Profiling Feature**, click **Disable**.
 
-3. Click **Save**.
+4. Click **Save**.
 
     ![Disable the feature](/media/dashboard/dashboard-conprof-stop.png)
