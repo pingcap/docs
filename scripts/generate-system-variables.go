@@ -116,7 +116,7 @@ func printWarning(sv *variable.SysVar) string {
 
 func printUnits(sv *variable.SysVar) string {
 	switch sv.Name {
-	case variable.TiDBMemQuotaApplyCache, variable.TiDBMemQuotaQuery, variable.TiDBQueryLogMaxLen, variable.TiDBBCJThresholdSize, variable.MaxAllowedPacket:
+	case variable.TiDBMemQuotaApplyCache, variable.TiDBMemQuotaQuery, variable.TiDBQueryLogMaxLen, variable.TiDBBCJThresholdSize, variable.MaxAllowedPacket, variable.TiDBTmpTableMaxSize:
 		return "- Unit: Bytes\n"
 	case variable.TiDBSlowLogThreshold, variable.MaxExecutionTime, variable.TiDBDDLSlowOprThreshold:
 		return "- Unit: Milliseconds\n"
@@ -203,6 +203,9 @@ func formatSpecialVersionComment(sv *variable.SysVar) string {
 		return ` <span class="version-mark">New in v5.1.0</span>`
 	case variable.SkipNameResolve, variable.TiDBAllowFunctionForExpressionIndex:
 		return ` <span class="version-mark">New in v5.2.0</span>`
+	case variable.TiDBEnablePseudoForOutdatedStats, variable.TiDBEnableTSOFollowerProxy, variable.TiDBLogFileMaxDays,
+		variable.TiDBTmpTableMaxSize, variable.TiDBTSOClientBatchMaxWaitTime, variable.PlacementChecks:
+		return ` <span class="version-mark">New in v5.3.0</span>`
 	default:
 		return ""
 	}
@@ -900,6 +903,38 @@ func getExtendedDescription(sv *variable.SysVar) string {
 			"- It is intended to be used by logical dump/restore tools to ensure that tables can always be created even if placement rules are violated. This is similar to how mysqldump writes `SET FOREIGN_KEY_CHECKS=0;` to the start of every dump file."
 	case variable.TiDBAllowFunctionForExpressionIndex:
 		return "- This variable is used to show the functions that are allowed to be used for creating expression indexes."
+	case variable.TiDBEnableTSOFollowerProxy:
+		return "- This variable is used to enable the TSO Follower Proxy feature. When the value is `OFF`, TiDB only gets TSO from the PD leader. After this feature is enabled, TiDB gets TSO by evenly sending requests to all PD nodes and forwarding TSO requests through PD followers. This helps reduce the CPU pressure of PD leader.\n" +
+			"- Scenarios for enabling TSO Follower Proxy:\n" +
+			"    * Due to the high pressure of TSO requests, the CPU of the PD leader reaches a bottleneck, which causes high latency of TSO RPC requests.\n" +
+			"    * The TiDB cluster has many TiDB instances, and increasing the value of [`tidb_tso_client_batch_max_wait_time`](#tidb_tso_client_batch_max_wait_time-new-in-v53) cannot alleviate the high latency issue of TSO RPC requests.\n" +
+			"\n" +
+			"> **Note:**\n" +
+			">\n" +
+			"> Suppose that the TSO RPC latency increases for reasons other than a CPU usage bottleneck of the PD leader (such as network issues). In this case, enabling the TSO Follower Proxy might increase the execution latency in TiDB and affect the QPS performance of the cluster."
+	case variable.TiDBLogFileMaxDays:
+		return "- This variable is used to adjust the maximum days of logger on the current TiDB instance. Its value defaults to the value of the [`max-days`](/tidb-configuration-file.md#max-days) configuration in the configuration file. Changing the variable value only affects the current TiDB instance. After TiDB is restarted, the variable value is reset and the configuration value is not affected."
+	case variable.TiDBTSOClientBatchMaxWaitTime:
+		return "- Range: `[0, 10]`\n" +
+			"- Unit: Milliseconds\n" +
+			"- This variable is used to set the maximum waiting time for a batch operation when TiDB requests TSO from PD. The default value is `0`, which means no extra waiting time.\n" +
+			"- When obtaining TSO requests from PD each time, PD Client, used by TiDB, collects as many TSO requests received at the same time as possible. Then, PD Client merges the collected requests in batch into one RPC request and sends the request to PD. This helps reduce the pressure on PD.\n" +
+			"- After setting this variable to a value greater than `0`, TiDB waits for the maximum duration of this value before the end of each batch merge. This is to collect more TSO requests and improve the effect of batch operations.\n" +
+			"- Scenarios for increasing the value of this variable:\n" +
+			"    * Due to the high pressure of TSO requests, the CPU of the PD leader reaches a bottleneck, which causes high latency of TSO RPC requests.\n" +
+			"    * There are not many TiDB instances in the cluster, but every TiDB instance is in high concurrency.\n" +
+			"- It is recommended to set this variable to a value as small as possible.\n" +
+			"\n" +
+			"> **Notes:**\n" +
+			">\n" +
+			"> Suppose that the TSO RPC latency increases for reasons other than a CPU usage bottleneck of the PD leader (such as network issues). In this case, increasing the value of `tidb_tso_client_batch_max_wait_time` might increase the execution latency in TiDB and affect the QPS performance of the cluster."
+	case variable.TiDBEnablePseudoForOutdatedStats:
+		return "- This variable controls the behavior of the optimizer on using statistics of a table when the statistics are outdated.\n" +
+			"- The optimizer determines whether the statistics of a table is outdated in this way: since the last time `ANALYZE` is executed on a table to get the statistics, if 80% of the table rows are modified (the modified row count divided by the total row count), the optimizer determines that the statistics of this table is outdated. You can change this ratio using the [`pseudo-estimate-ratio`](/tidb-configuration-file.md#pseudo-estimate-ratio) configuration.\n" +
+			"- By default (with the variable value `ON`), when the statistics of a table is outdated, the optimizer determines that the statistics of the table is no longer reliable except for the total row count. Then, the optimizer uses the pseudo statistics. If you set the variable value to `OFF`, even if the statistics of a table are outdated, the optimizer still keeps using the statistics.\n" +
+			"- If the data on a table is frequently modified without executing `ANALYZE` on this table in time, to keep the execution plan stable, you can set the variable value to `OFF`."
+	case variable.TiDBTmpTableMaxSize:
+		return "- This variable is used to set the maximum size of a single [temporary table](/temporary-tables.md). Any temporary table with a size larger than this variable value causes error."
 	default:
 		return "- No documentation is currently available for this variable."
 	}
