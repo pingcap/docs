@@ -92,7 +92,7 @@ Warning alerts are a reminder for an issue or error.
 
 - Description:
 
-    It takes a replication task more than 10 seconds to  write data to the downstream database.
+    It takes a replication task more than 10 seconds to write data to the downstream database.
 
 - Solution:
 
