@@ -33,7 +33,7 @@ For critical alerts, you need to pay close attention to abnormal monitoring metr
 
 - Description:
 
-    resolved ts of a replication task is delayed more than 10 minutes.
+     The Resolved TS of a replication task is delayed more than 10 minutes.
 
 - Solution:
     See [TiCDC Handle Replication Interruption](/ticdc/troubleshoot-ticdc.md#ticdc-how-do-i-handle-replication-interruption).
