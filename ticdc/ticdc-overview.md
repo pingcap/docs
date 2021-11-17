@@ -140,13 +140,11 @@ The `sort-dir` configuration is used to specify the temporary file directory for
 | v4.0.12, v4.0.13, v5.0.0, and v5.0.1 |  It is a configuration item of changefeed or of `cdc server`. | By default, the `sort-dir` configuration of a changefeed does not take effect, and the `sort-dir` configuration of `cdc server` defaults to `/tmp/cdc_sort`. It is recommended to only configure `cdc server` in the production environment.<br /><br /> If you use TiUP to deploy TiCDC, it is recommended to use the latest TiUP version and set `sorter.sort-dir` in the TiCDC server configuration.<br /><br /> The `unified` sorter is enabled by default in v4.0.13, v5.0.0, and v5.0.1. If you want to upgrade your cluster to these versions, make sure that you have correctly configured `sorter.sort-dir` in the TiCDC server configuration. | You need to configure `sort-dir` using the `cdc server` command-line parameter (or TiUP). |
 |  v4.0.14 and later v4.0 versions, v5.0.2 and later v5.0 versions, later TiDB versions | `sort-dir` is deprecated. It is recommended to configure `data-dir`.  |  You can configure `data-dir` using the latest version of TiUP. In these TiDB versions, `unified` sorter is enabled by default. Make sure that `data-dir` has been configured correctly when you upgrade your cluster. Otherwise, `/tmp/cdc_data` will be used by default as the temporary file directory. <br /><br /> If the storage capacity of the device where the directory is located is insufficient, the problem of insufficient hard disk space might occur. In this situation, the previous `sort-dir` configuration of changefeed will become invalid.| You need to configure `data-dir` using the `cdc server` command-line parameter (or TiUP).  |
 
-### Compatibility notes for global temporary tables
+### Compatibility with temporary tables
 
-Starting from v5.3.0, TiCDC supports [global temporary tables](/temporary-table.md#global-temporary-tables).
+Since v5.3.0, TiCDC supports [global temporary tables](/temporary-table.md#global-temporary-tables). Replicating global temporary tables to the downstream using TiCDC of a version earlier than v5.3.0 causes table definition error.
 
-Note that using TiCDC earlier than v5.3.0 to replicate global temporary tables to the downstream causes table definition errors.
-
-If the upstream cluster of TiCDC contains global temporary tables, the downstream cluster must be TiDB v5.3.0 or later versions; otherwise, replication errors occur.
+If the upstream cluster contains a global temporary table, the downstream TiDB cluster is expected to be v5.3.0 or a later version. Otherwise, an error occurs during the replication process.
 
 ## Troubleshoot TiCDC
 

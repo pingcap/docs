@@ -91,11 +91,11 @@ driver = "file"
 # If the URL is not specified, the TiDB server from the [tidb] section is used to
 # store the checkpoints. You should specify a different MySQL-compatible
 # database server to reduce the load of the target TiDB cluster.
-#dsn = "/tmp/tidb_lightning_checkpoint.pb"
+# dsn = "/tmp/tidb_lightning_checkpoint.pb"
 # Whether to keep the checkpoints after all data are imported. If false, the
 # checkpoints will be deleted. Keeping the checkpoints can aid debugging but
 # will leak metadata about the data source.
-#keep-after-success = false
+# keep-after-success = false
 
 [tikv-importer]
 # Delivery backend, can be "local", "importer" or "tidb".
@@ -107,9 +107,8 @@ addr = "172.16.31.10:8287"
 #  - ignore: keep the existing entry, and ignore the new entry
 #  - error: report error and quit the program
 # on-duplicate = "replace"
-# The size limit of generated SST files in the "local" backend. It is better
-# to be the same as the Region size of TiKV (96 MB by default).
-# region-split-size = 100_663_296
+#    state in the target TiDB.
+# duplicate-resolution = 'none'
 # The number of KV pairs sent in one request in the "local" backend.
 # send-kv-pairs = 32768
 # The directory of local KV sorting in the "local" backend. If the disk
@@ -125,10 +124,6 @@ addr = "172.16.31.10:8287"
 # Block size for file reading. Keep it longer than the longest string of
 # the data source.
 read-block-size = 65536 # Byte (default = 64 KB)
-
-# Minimum size (in terms of source data file) of each batch of import.
-# TiDB Lightning splits a large table into multiple data engine files according to this size.
-# batch-size = 107_374_182_400 # Byte (default = 100 GB)
 
 # The engine file needs to be imported sequentially. Due to parallel processing,
 # multiple data engines will be imported at nearly the same time, and this
@@ -190,14 +185,16 @@ strict-format = false
 # max-region-size = 268_435_456 # Byte (default = 256 MB)
 
 # Only import tables if these wildcard rules are matched. See the corresponding section for details.
-filter = ['*.*']
+filter = ['*.*', '!mysql.*', '!sys.*', '!INFORMATION_SCHEMA.*', '!PERFORMANCE_SCHEMA.*', '!METRICS_SCHEMA.*', '!INSPECTION_SCHEMA.*']
 
 # Configures how CSV files are parsed.
 [mydumper.csv]
-# Separator between fields, should be an ASCII character.
+# Separator between fields. Must not be empty.
 separator = ','
-# Quoting delimiter, can either be an ASCII character or empty string.
+# Quoting delimiter. Empty value means no quoting.
 delimiter = '"'
+# Line terminator. Empty value means both "\n" (LF) and "\r\n" (CRLF) are line terminators.
+terminator = ''
 # Whether the CSV files contain a header.
 # If `header` is true, the first line will be skipped.
 header = true
