@@ -182,6 +182,27 @@ This section introduces the formats of Row Changed Event, DDL Event, and Resolve
     | Flag (**experimental**) | numeric | The bit flags of columns. For details, see [Bit flags of columns](#bit-flags-of-columns). |
     | Value | any | The Column value. For details, see [Binary encoding for different column types](#column-type-code). |
 
++ **Example:**
+    01 81 80 f0 81 81 b5 de  f1 05 01 01 00 02 01 08  |................|
+    04 02 02 02 02 02 02 02  0f fe 01 0a 07 0c 04 03  |................|
+    06 00 00 00 00 00 00 00  00 10 0e 14 26 26 10 04  |............&&..|
+    01 76 61 72 63 68 61 72  31 73 74 72 69 6e 67 31  |.varchar1string1|
+    32 30 32 31 2f 30 31 2f  30 32 32 30 32 31 2f 30  |2021/01/022021/0|
+    31 2f 30 32 20 30 30 3a  30 30 3a 30 30 32 30 32  |1/02 00:00:00202|
+    31 2f 30 31 2f 30 32 20  30 30 3a 30 30 3a 30 30  |1/01/02 00:00:00|
+    00 00 00 00 00 00 00 40  a0 1f 02 08 04 02 02 02  |.......@........|
+    02 02 02 02 0f fe 01 0a  07 0c 04 03 06 00 00 00  |................|
+    00 00 00 00 00 10 0e 14  26 26 10 04 01 76 61 72  |........&&...var|
+    63 68 61 72 30 73 74 72  69 6e 67 30 32 30 32 31  |char0string02021|
+    2f 30 31 2f 30 31 32 30  32 31 2f 30 31 2f 30 31  |/01/012021/01/01|
+    20 30 30 3a 30 30 3a 30  30 32 30 32 31 2f 30 31  | 00:00:002021/01|
+    2f 30 31 20 30 30 3a 30  30 3a 30 30 00 00 00 00  |/01 00:00:00....|
+    00 00 f0 3f d0 0f 0a 01  01 07 06 04 09 08 05 04  |...?............|
+    04 61 62 76 61 72 63 68  61 72 73 74 72 69 6e 67  |.abvarcharstring|
+    64 61 74 65 74 69 6d 65  73 74 61 6d 70 64 61 74  |datetimestampdat|
+    65 74 69 6d 65 66 6c 6f  61 74 6c 6f 6e 67 6e 75  |etimefloatlongnu|
+    6c 6c 02 1a 5e 01 b0 03  02 d8 01 00 0a           |ll..^........|
+
 ### DDL Event
 
 + **Header:**
@@ -199,6 +220,11 @@ This section introduces the formats of Row Changed Event, DDL Event, and Resolve
     | Type | uint64 | The DDL type. For details, see [DDL Type Code](#ddl-type-code).    |
     | Query | string | DDL Query SQL |
 
++ **Example:**
+    01 81 80 c0 dc f5 b5 de  f1 05 02 01 00 02 01 0e  |................|
+    63 72 65 61 74 65 20 74  61 62 6c 65 20 61 02 01  |create table a..|
+    01 61 62 02 1a 0f 01 20  05                       |.ab.... .|
+
 ### Resolved Event
 
 + **Header:**
@@ -208,6 +234,10 @@ This section introduces the formats of Row Changed Event, DDL Event, and Resolve
     | TS | uint64 | The Resolved timestamp. Any TS earlier than this Event has been sent. |
 
 + **Event:** None
+
++ **Example:**
+    01 81 80 e0 bb 9b b6 de  f1 05 03 01 01 01 02 1a  |................|
+    19 01 00 05                                       |....|
 
 ## Examples of the Event stream output
 
