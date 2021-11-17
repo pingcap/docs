@@ -4,7 +4,7 @@ summary: Learn about TiCDC alert rules and how to handle the alerts.
 ---
 # TiCDC Alert Rules
 
-This article describes the TiCDC alert rules and the corresponding solutions. In descending order, the severity levels are: **Critical**, **Warning**.
+This document describes the TiCDC alert rules and the corresponding solutions. In descending order, the severity levels are: **Critical**, **Warning**.
 
 ## Critical alerts
 
