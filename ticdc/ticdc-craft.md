@@ -13,6 +13,10 @@ TiCDC Craft uses Event as the basic unit to replicate data change events to the 
 * [DDL Event](#ddl-event): Represents the DDL change. This Event is sent after a DDL statement is successfully executed in the upstream. The DDL Event is broadcasted to every MQ Partition.
 * [Resolved Event](#resolved-event): Represents a special time point before which the Event received is complete.
 
+> **Note:**
+>
+> + This feature is still experimental. Do **NOT** use it in the production environment.
+
 ## Restrictions
 
 * In most cases, the Row Changed Event of a version is sent only once, but in special situations such as node failure and network partition, the Row Changed Event of the same version might be sent multiple times.
@@ -47,18 +51,41 @@ Decoding speed:
 
 ## Message format
 
+Primitive types:
+
+| type | encoding |
+| :--- | :------- |
+| uvarint | Each byte in a uvarint, except the last byte, has the most significant bit (msb) set – this indicates that there are further bytes to come. The lower 7 bits of each byte are used to store the two's complement representation of the number in groups of 7 bits, least significant group first |
+| little endian uvarint | Each byte in a uvarint, except the last byte, has the most significant bit (msb) set – this indicates that there are further bytes to come. The lower 7 bits of each byte are used to store the two's complement representation of the number in groups of 7 bits, most significant group first |
+| varint | Use ZigZag encoding to map signed integers to unsigned integers so that the numbers with a small absolute encoded value too. |
+| float64 | Fixed 64 bits lump of data stored in little-endian byte order |
+| string/bytes | Uvarint encoded length followed by a specific number of bytes of data |
+| nullable string/bytes | Varint encoded length followed by a specific number of bytes of data. Length of -1 is used to indicate null string/bytes |
+
+Chunk of primitive types:
+
+| chunk type | encoding |
+| :--------- | :------- |
+| uvarint chunk | Consecutive elements encoded in uvarint format |
+| varint chunk | Consecutive elements encoded in varint format |
+| delta uvarint chunk | Base number encoded in uvarint format followed by delta of each element to last element encoded in uvarint format |
+| delta varint chunk | Base number encoded in varint format followed by delta of each element to last element encoded in varint format |
+| float64 chunk | Consecutive elements encoded in float64 format |
+| string/bytes chunk | Consecutive length of all string/bytes encoded in uvarint format followed by bytes of each elements |
+| nullable string/bytes chunk | Consecutive length of all string/bytes encoded in uvarint format followed by bytes of each elements. Length of -1 is used to indicate null string/bytes |
+
 A Message contains one or more Events, arranged in the following format:
 
 Message:
 
 | uvarint | header | body | term dictionary | size tables |
-| :------ | :------ | :------ | :------ |
+| :------ | :------ | :------ | :------ | :------ |
 | version | events header | events body | term dictionary | size tables |
 
 Header:
 
 | delta uvarint chunk | uvarint chunk | delta varint chunk | delta varint chunk | delta varint chunk |
-| :------ | :------ | :------ | :------ | :------ | :------ |
+| :------ | :------ | :------ | :------ | :------ |
 | commit ts | event type | partition id (-1 for no partition) | schema | table |
 
 Body for [Row Changed Event](#row-changed-event):
@@ -108,29 +135,6 @@ Meta data size table:
 | :------ | :------ |
 | header size | term dictionary size |
 
-Primitive types:
-
-| type | encoding |
-| :--- | :------- |
-| uvarint | Each byte in a uvarint, except the last byte, has the most significant bit (msb) set – this indicates that there are further bytes to come. The lower 7 bits of each byte are used to store the two's complement representation of the number in groups of 7 bits, least significant group first |
-| little endian uvarint | Each byte in a uvarint, except the last byte, has the most significant bit (msb) set – this indicates that there are further bytes to come. The lower 7 bits of each byte are used to store the two's complement representation of the number in groups of 7 bits, most significant group first |
-| varint | Use ZigZag encoding to map signed integers to unsigned integers so that the numbers with a small absolute encoded value too. |
-| float64 | Fixed 64 bits lump of data stored in little-endian byte order |
-| string/bytes | Uvarint encoded length followed by a specific number of bytes of data |
-| nullable string/bytes | Varint encoded length followed by a specific number of bytes of data. Length of -1 is used to indicate null string/bytes |
-
-Chunk of primitive types:
-
-| chunk type | encoding |
-| :--------- | :------- |
-| uvarint chunk | Consecutive elements encoded in uvarint format |
-| varint chunk | Consecutive elements encoded in varint format |
-| delta uvarint chunk | Base number encoded in uvarint format followed by delta of each element to last element encoded in uvarint format |
-| delta varint chunk | Base number encoded in varint format followed by delta of each element to last element encoded in varint format |
-| float64 chunk | Consecutive elements encoded in float64 format |
-| string/bytes chunk | Consecutive length of all string/bytes encoded in uvarint format followed by bytes of each elements |
-| nullable string/bytes chunk | Consecutive length of all string/bytes encoded in uvarint format followed by bytes of each elements. Length of -1 is used to indicate null string/bytes |
-
 * The version of the current protocol is `1`.
 
 ## Event format
@@ -157,7 +161,7 @@ This section introduces the formats of Row Changed Event, DDL Event, and Resolve
     | :-------------- |
     | New values |
 
-    `Update` event. The newly added row data and the row data before the update are output. Old values are only available when the old value feature is enabled.
+    `Update` event. The newly added row data and the row data before the update is output. Old values are only available when the old value feature is enabled.
 
     | Column group(s) |
     | :-------------- |
@@ -186,7 +190,7 @@ This section introduces the formats of Row Changed Event, DDL Event, and Resolve
     | :--- | :----- | :---------------------------------- |
     | Commit TS | uint64 | The timestamp of the transaction that performs the DDL change. |
     | Schema | string | The schema name of the DDL change, which might be an empty string. |
-    | Table | string | The table name of the DDL change, which might be am empty string. |
+    | Table | string | The table name of the DDL change, which might be an empty string. |
 
 + **Event:**
 
