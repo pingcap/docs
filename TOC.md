@@ -72,6 +72,7 @@
   + [Maintain TiFlash](/tiflash/maintain-tiflash.md)
   + [Maintain TiDB Using TiUP](/maintain-tidb-using-tiup.md)
   + [Modify Configuration Online](/dynamic-config.md)
+  + [Online Unsafe Recovery](/online-unsafe-recovery.md)
 + Monitor and Alert
   + [Monitoring Framework Overview](/tidb-monitoring-framework.md)
   + [Monitoring API](/tidb-monitoring-api.md)
@@ -88,6 +89,7 @@
   + [Statement Summary Tables](/statement-summary-tables.md)
   + [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md)
   + [Troubleshoot Increased Read and Write Latency](/troubleshoot-cpu-issues.md)
+  + [Save and Restore the On-Site Information of a Cluster](/sql-plan-replayer.md)
   + [Troubleshoot Cluster Setup](/troubleshoot-tidb-cluster.md)
   + [Troubleshoot High Disk I/O Usage](/troubleshoot-high-disk-io.md)
   + [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md)
@@ -203,7 +205,6 @@
       + [Table Filter](/table-filter.md)
       + [CSV Support](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)
       + [Backends](/tidb-lightning/tidb-lightning-backends.md)
-      + [Error Resolution](/tidb-lightning/tidb-lightning-error-resolution.md)
       + [Web Interface](/tidb-lightning/tidb-lightning-web-interface.md)
     + [Monitor](/tidb-lightning/monitor-tidb-lightning.md)
     + [FAQ](/tidb-lightning/tidb-lightning-faq.md)
@@ -222,8 +223,9 @@
   + sync-diff-inspector
     + [Overview](/sync-diff-inspector/sync-diff-inspector-overview.md)
     + [Data Check for Tables with Different Schema/Table Names](/sync-diff-inspector/route-diff.md)
-    + [Data Check in Sharding Scenarios](/sync-diff-inspector/shard-diff.md)
+    + [Data Check in the Sharding Scenario](/sync-diff-inspector/shard-diff.md)
     + [Data Check for TiDB Upstream/Downstream Clusters](/sync-diff-inspector/upstream-downstream-diff.md)
+    + [Data Check in the DM Replication Scenario](/sync-diff-inspector/dm-diff.md)
   + TiSpark
     + [Quick Start](/get-started-with-tispark.md)
     + [User Guide](/tispark-overview.md)
@@ -494,6 +496,7 @@
       + Maintain
         + [Deploy](/dashboard/dashboard-ops-deploy.md)
         + [Reverse Proxy](/dashboard/dashboard-ops-reverse-proxy.md)
+        + [User Management](/dashboard/dashboard-user.md)
         + [Secure](/dashboard/dashboard-ops-security.md)
       + [Access](/dashboard/dashboard-access.md)
       + [Overview Page](/dashboard/dashboard-overview.md)
