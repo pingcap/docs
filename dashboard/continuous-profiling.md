@@ -15,9 +15,9 @@ Introduced in TiDB 5.3.0, Continuous Profiling is a way to observe resource over
 
 With less than 0.5% performance loss, this feature takes continuous snapshots (similar to CT scan) of the database internal operations, turning the database from a "black box" into a "white box" that is more observable. This feature runs automatically after being enabled by one click and keeps storage results generated within the retention period. Storage results beyond the retention period are recycled to release the storage space.
 
-## Application restrictions
+## Restrictions
 
-When applying the Continuous Profiling feature, pay attention to the following restrictions:
+Before enabling the Continuous Profiling feature, pay attention to the following restrictions:
 
 - Under the x86 architecture, this feature supports TiDB, TiKV, and PD, but does not support TiFlash. This feature is not fully compatible with the ARM architecture and cannot be enabled under this architecture.
 
