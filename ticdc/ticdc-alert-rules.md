@@ -148,7 +148,7 @@ Warning alerts are a reminder for an issue or error.
 
 - Description:
 
-    The minimum resolved ts 1 of TiKV CDC has not advanced for 1 minute.
+    The minimum Resolved TS 1 of TiKV CDC has not advanced for 1 minute.
 
 - Solution:
 
