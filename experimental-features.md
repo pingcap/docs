@@ -39,7 +39,6 @@ This document introduces the experimental features of TiDB in different versions
 ## Data sharing and subscription
 
 + [Integrate TiCDC with Kafka Connect (Confluent Platform)](/ticdc/integrate-confluent-using-ticdc.md) (Introduced in v5.0)
-+ [The cyclic replication feature of TiCDC](/ticdc/manage-ticdc.md#cyclic-replication) (Introduced in v5.0)
 
 ## Storage
 
@@ -59,3 +58,4 @@ This document introduces the experimental features of TiDB in different versions
 
 + [SQL diagnostics](/information-schema/information-schema-sql-diagnostics.md).
 + [Cluster diagnostics](/dashboard/dashboard-diagnostics-access.md).
++ [Online Unsafe Recovery](/online-unsafe-recovery.md) (Introduced in v5.3)

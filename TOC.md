@@ -72,6 +72,7 @@
   + [Maintain TiFlash](/tiflash/maintain-tiflash.md)
   + [Maintain TiDB Using TiUP](/maintain-tidb-using-tiup.md)
   + [Modify Configuration Online](/dynamic-config.md)
+  + [Online Unsafe Recovery](/online-unsafe-recovery.md)
 + Monitor and Alert
   + [Monitoring Framework Overview](/tidb-monitoring-framework.md)
   + [Monitoring API](/tidb-monitoring-api.md)
@@ -88,6 +89,7 @@
   + [Statement Summary Tables](/statement-summary-tables.md)
   + [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md)
   + [Troubleshoot Increased Read and Write Latency](/troubleshoot-cpu-issues.md)
+  + [Save and Restore the On-Site Information of a Cluster](/sql-plan-replayer.md)
   + [Troubleshoot Cluster Setup](/troubleshoot-tidb-cluster.md)
   + [Troubleshoot High Disk I/O Usage](/troubleshoot-high-disk-io.md)
   + [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md)
@@ -196,7 +198,7 @@
     + [Overview](/tidb-lightning/tidb-lightning-overview.md)
     + [Tutorial](/get-started-with-tidb-lightning.md)
     + [Deploy](/tidb-lightning/deploy-tidb-lightning.md)
-    + [Precheck](/tidb-lightning/tidb-lightning-prechecks.md)   
+    + [Precheck](/tidb-lightning/tidb-lightning-prechecks.md)
     + [Configure](/tidb-lightning/tidb-lightning-configuration.md)
     + Key Features
       + [Checkpoints](/tidb-lightning/tidb-lightning-checkpoints.md)
@@ -221,8 +223,9 @@
   + sync-diff-inspector
     + [Overview](/sync-diff-inspector/sync-diff-inspector-overview.md)
     + [Data Check for Tables with Different Schema/Table Names](/sync-diff-inspector/route-diff.md)
-    + [Data Check in Sharding Scenarios](/sync-diff-inspector/shard-diff.md)
+    + [Data Check in the Sharding Scenario](/sync-diff-inspector/shard-diff.md)
     + [Data Check for TiDB Upstream/Downstream Clusters](/sync-diff-inspector/upstream-downstream-diff.md)
+    + [Data Check in the DM Replication Scenario](/sync-diff-inspector/dm-diff.md)
   + TiSpark
     + [Quick Start](/get-started-with-tispark.md)
     + [User Guide](/tispark-overview.md)
@@ -305,6 +308,7 @@
       + [`DROP COLUMN`](/sql-statements/sql-statement-drop-column.md)
       + [`DROP DATABASE`](/sql-statements/sql-statement-drop-database.md)
       + [`DROP INDEX`](/sql-statements/sql-statement-drop-index.md)
+      + [`DROP PLACEMENT POLICY`](/sql-statements/sql-statement-drop-placement-policy.md)
       + [`DROP ROLE`](/sql-statements/sql-statement-drop-role.md)
       + [`DROP SEQUENCE`](/sql-statements/sql-statement-drop-sequence.md)
       + [`DROP STATS`](/sql-statements/sql-statement-drop-stats.md)
@@ -365,6 +369,7 @@
       + [`SHOW MASTER STATUS`](/sql-statements/sql-statement-show-master-status.md)
       + [`SHOW PLACEMENT`](/sql-statements/sql-statement-show-placement.md)
       + [`SHOW PLACEMENT FOR`](/sql-statements/sql-statement-show-placement-for.md)
+      + [`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md)
       + [`SHOW PLUGINS`](/sql-statements/sql-statement-show-plugins.md)
       + [`SHOW PRIVILEGES`](/sql-statements/sql-statement-show-privileges.md)
       + [`SHOW [FULL] PROCESSSLIST`](/sql-statements/sql-statement-show-processlist.md)
@@ -421,6 +426,7 @@
     + [Constraints](/constraints.md)
     + [Generated Columns](/generated-columns.md)
     + [SQL Mode](/sql-mode.md)
+    + [Table Attributes](/table-attributes.md)
     + Transactions
       + [Overview](/transaction-overview.md)
       + [Isolation Levels](/transaction-isolation-levels.md)
@@ -431,6 +437,7 @@
       + [Configuration](/garbage-collection-configuration.md)
     + [Views](/views.md)
     + [Partitioning](/partitioned-table.md)
+    + [Temporary Tables](/temporary-tables.md)
     + [Character Set and Collation](/character-set-and-collation.md)
     + [Placement Rules in SQL](/placement-rules-in-sql.md)
     + System Tables
@@ -462,6 +469,7 @@
         + [`METRICS_SUMMARY`](/information-schema/information-schema-metrics-summary.md)
         + [`METRICS_TABLES`](/information-schema/information-schema-metrics-tables.md)
         + [`PARTITIONS`](/information-schema/information-schema-partitions.md)
+        + [`PLACEMENT_RULES`](/information-schema/information-schema-placement-rules.md)
         + [`PROCESSLIST`](/information-schema/information-schema-processlist.md)
         + [`REFERENTIAL_CONSTRAINTS`](/information-schema/information-schema-referential-constraints.md)
         + [`SCHEMATA`](/information-schema/information-schema-schemata.md)
@@ -489,6 +497,7 @@
       + Maintain
         + [Deploy](/dashboard/dashboard-ops-deploy.md)
         + [Reverse Proxy](/dashboard/dashboard-ops-reverse-proxy.md)
+        + [User Management](/dashboard/dashboard-user.md)
         + [Secure](/dashboard/dashboard-ops-security.md)
       + [Access](/dashboard/dashboard-access.md)
       + [Overview Page](/dashboard/dashboard-overview.md)
@@ -564,8 +573,9 @@
 + [Glossary](/glossary.md)
 + Release Notes
   + [All Releases](/releases/release-notes.md)
+  + [Release Timeline](/releases/release-timeline.md)
   + v5.2
-    + [5.2.2](/releases/release-5.2.2.md)  
+    + [5.2.2](/releases/release-5.2.2.md)
     + [5.2.1](/releases/release-5.2.1.md)
     + [5.2.0](/releases/release-5.2.0.md)
   + v5.1
