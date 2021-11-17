@@ -28,7 +28,7 @@ TiCDC Craft uses Event as the basic unit to replicate data change events to the 
 ## Benchmark
 
 * Binary protocol encodes the same events with far less amount of bytes.
-* Protobuf is a popular binary format that can be used instead of craft format. Since craft format can apply sophisticated optimizations, it can be more compact and faster than protobuf.
+* Protobuf is a popular binary format that can be used instead of craft format. Since craft format can apply sophisticated optimizations, it can be more compact than protobuf.
 
 Serialized size:
 
