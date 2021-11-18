@@ -8,8 +8,7 @@ aliases: ['/docs/dev/tidb-monitoring-api/']
 
 You can use the following types of interfaces to monitor the TiDB cluster status:
 
-- [The status interface](#running-status): this interface uses the HTTP interface to get the component information.
-- [Storage information](#storage-information): this interface uses the HTTP interface to get the storage information of data tables.
+- [The status interface](#use-the-status-interface): this interface uses the HTTP interface to get the component information. Using this interface, you can get the [running status](#running-status) of the current TiDB server and the [storage information](#storage-information) of a table.
 - [The metrics interface](#use-the-metrics-interface): this interface uses Prometheus to record the detailed information of the various operations in components and views these metrics using Grafana.
 
 ## Use the status interface
