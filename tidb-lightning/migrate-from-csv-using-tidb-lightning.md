@@ -28,7 +28,11 @@ The CSV format can be configured in `tidb-lightning.toml` under the `[mydumper.c
 
 ```toml
 [mydumper.csv]
+<<<<<<< HEAD
 # Separator between fields, should be an ASCII character.
+=======
+# Separator between fields. Must be ASCII characters. It is not recommended to use the default ','. It is recommended to use '\|+\|' or other uncommon character combinations.
+>>>>>>> 4b52db5e8 (Improve csv separator notes (#6819))
 separator = ','
 # Quoting delimiter, can either be an ASCII character or empty string.
 delimiter = '"'
@@ -161,7 +165,7 @@ The default setting is already tuned for CSV following RFC 4180.
 
 ```toml
 [mydumper.csv]
-separator = ','
+separator = ',' # It is not recommended to use the default ‘,’. It is recommended to use ‘\|+\|‘ or other uncommon character combinations.
 delimiter = '"'
 header = true
 not-null = false
