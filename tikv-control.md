@@ -384,22 +384,40 @@ tikv-ctl --host ip:port modify-tikv-config -n raftstore.sync-log -v false
 success
 ```
 
-### Force Region to recover the service from failure of multiple replicas
+### Force Regions to recover services from failure of multiple replicas (use with caution)
 
-Use the `unsafe-recover remove-fail-stores` command to remove the failed machines from the peer list of Regions. Then after you restart TiKV, these Regions can continue to provide services using the other healthy replicas. This command is usually used in circumstances where multiple TiKV stores are damaged or deleted.
+You can use the `unsafe-recover remove-fail-stores` command to remove the failed machines from the peer list of Regions. Before running this command, you need to stop the service of the target TiKV to release file locks.
 
-The `-s` option accepts multiple `store_id` separated by comma and uses the `-r` flag to specify involved Regions. Otherwise, all Regions' peers located on these stores will be removed by default.
+The `-s` option accepts multiple `store_id` separated by comma and uses the `-r` flag to specify involved Regions. If you need to perform this operation on all Regions in a certain store, you can simply specify `--all-regions`.
 
-```bash
-$ tikv-ctl --db /path/to/tikv/db unsafe-recover remove-fail-stores -s 3 -r 1001,1002
+> **Warning:**
+>
+> - If any misoperation is performed, it might be hard to recover the cluster. Since the feature-related operations have risks, you need to be aware of the potential risks and try to avoid using this feature in a production environment.
+> - If the `--all-regions` option is used, you must run this command on all the remaining stores connected to the cluster. You need to ensure that these healthy stores stop providing services before recovering the damaged stores. Otherwise, the inconsistent peer lists in Region replicas will cause errors when you execute `split-region` or `remove-peer`. This further causes inconsistency between other metadata, and finally, the Regions will become unavailable.
+> Once the `remove-fail-stores` is executed, you cannot restart the removed nodes or add these nodes to the cluster. Otherwise, the metadata will be inconsistent, and finally, the Regions will be unavailable.
+
+{{< copyable "shell-regular" >}}
+
+```shell
+tikv-ctl --db /path/to/tikv/db unsafe-recover remove-fail-stores -s 3 -r 1001,1002
+```
+
+```
 success!
 ```
 
+{{< copyable "shell-regular" >}}
+
+```shell
+tikv-ctl --db /path/to/tikv/db unsafe-recover remove-fail-stores -s 4,5 --all-regions
+```
+
+Then, if you restart TiKV, the Regions can continue to provide services with the remaining healthy replicas. This command is commonly used when multiple TiKV stores are damaged or deleted.
+
 > **Note:**
 >
+> - You should run this command for all stores where the specified Regions' peers are located.
 > - This command only supports the local mode. It prints `success!` when successfully run.
-> - You must run this command for all stores where specified Regions' peers are located.
-> - If the `--all-regions` option is used, usually you need to run this command on all the remaining healthy stores in the cluster. You need to ensure that the healthy stores stop providing services before recovering the damaged stores. Otherwise, the inconsistent peer lists in Region replicas will cause errors when you execute `split-region` or `remove-peer`. This further causes inconsistency between other metadata, and finally, the Regions will become unavailable.
 
 ### Recover from MVCC data corruption
 
