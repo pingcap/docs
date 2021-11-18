@@ -399,9 +399,13 @@ In special cases (such as when a node needs to be forcibly taken down), or if th
         
 3. Wait for the store of the TiFlash node to disappear or for the `state_name` to become `Tombstone` before you stop the TiFlash process.
 
-    If, after waiting for a long time, the node still fails to disappear or the `state_name` fails to become `Tombstone`, consider using the following command to force the node out of the cluster.
+    If, after waiting for a long time, the node still fails to disappear or the `state_name` fails to become `Tombstone`, consider using the following command to force the node out of the cluster (use with caution).
 
-    **Note that the command will directly discard the replicas on the TiFlash node, which might cause the query to fail.**
+    > **Warning:**
+    > 
+    > - The following command directly discards the replicas on the TiFlash node, which might cause the query to fail.
+    > - You can only use the following command to the TiFlash node. Do not use this command to force any TiKV node out of the cluster. Otherwise, it will cause data loss.
+    > - After using this command, since the information of the replicas on the forced-out nodes still exists in the member information of other replicas, PD triggers scheduling to repair and clear these replicas' information of the forced-out nodes. Therefore, before using this command, you need to consider whether there are enough replicas to elect a leader after losing these nodes. Otherwise, PD cannot trigger scheduling to repair and clear the information, which will cause the service to be unavailable.
 
     {{< copyable "shell-regular" >}}
 
