@@ -284,7 +284,7 @@ Starting from TiCDC v5.3.0, the cyclic replication feature between TiDB clusters
         - Aggregation functions: GROUP_CONCAT(), SUM(enum)
 
     - Support 512-bit SIMD
-    - Enhance the cleanup algorithm for outdated data versions to reduce disk usage and improve read file performance
+    - Enhance the cleanup algorithm for outdated data to reduce disk usage and read files more efficiently
     - Fix the issue that dashboard does not display memory or CPU information in some non-Linux systems
     - Unify the naming style of TiFlash log files (keep the naming style consistent with that of TiKV) and support dynamic modification of logger.count and logger.size
     - Improve the data validation capability of column-based files (checksums, experimental feature)
