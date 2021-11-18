@@ -274,18 +274,18 @@ Starting from TiCDC v5.3.0, the cyclic replication feature between TiDB clusters
     - Improve the execution efficiency of the TableScan operator greatly
     - Improve the execution efficiency of the Exchange operator
     - Reduce write amplification and memory usage during GC of the storage engine (experimental feature)
-    - Improve the stability and availability of TiFlash when TiFlash restarts, which reduces the possibility of query failures during a short period of time after the restart
+    - Improve the stability and availability of TiFlash when TiFlash restarts, which reduces possible query failures following the restart
     - Support pushing down multiple new String and Time functions to the MPP engine
 
         - String functions: LIKE pattern, FORMAT(), LOWER(), LTRIM(), RTRIM(), SUBSTRING_INDEX(), TRIM(), UCASE(), UPPER()
         - Mathematical functions: ROUND (decimal, int)
-        - Date and time functions: HOUR (), MICROSECOND (), MINUTE (), SECOND (), SYSDATE ()
+        - Date and time functions: HOUR(), MICROSECOND(), MINUTE(), SECOND(), SYSDATE()
         - Type conversion function: CAST(time, real)
         - Aggregation functions: GROUP_CONCAT(), SUM(enum)
 
     - Support 512-bit SIMD
     - Enhance the cleanup algorithm for outdated data versions to reduce disk usage and improve read file performance
-    - Fix the issue that users cannot get memory or CPU information when viewing the dashboard on some non-Linux systems
+    - Fix the issue that dashboard does not display memory or CPU information in some non-Linux systems
     - Unify the naming style of TiFlash log files (keep the naming style consistent with that of TiKV) and support dynamic modification of logger.count and logger.size
     - Improve the data validation capability of column-based files (checksums, experimental feature)
 
@@ -362,15 +362,15 @@ Starting from TiCDC v5.3.0, the cyclic replication feature between TiDB clusters
 
 + TiFlash
 
-    - Fix the inaccurate issue of the TiFlash Store Size statistics
+    - Fix the issue of inaccurate TiFlash Store Size statistics
     - Fix the issue that TiFlash fails to start up on some platforms due to the absence of library `nsl`
     - Block the infinite wait of `wait index` when writing pressure is heavy (a default timeout of 5 minutes is added), which prevents TiFlash from waiting too long for data synchronization to provide services
     - Fix the slow and no result issues of the log search when the log volume is large
     - Fix the issue that only the most recent logs can be searched when searching old historical logs
-    - Fix the wrong result that might occur when a new collation is enabled
+    - Fix the possible wrong result when a new collation is enabled
     - Fix the possible parsing errors when an SQL statement contains extremely long nested expressions
-    - Fix the `Block schema mismatch` error of the Exchange operator
-    - Fix the `Can't compare` error when comparing Decimal types
+    - Fix the possible `Block schema mismatch` error of the Exchange operator
+    - Fix the possible `Can't compare` error when comparing Decimal types
     - Fix the `3rd arguments of function substringUTF8 must be constants` error of the `left/substring` function
 
 + Tools
