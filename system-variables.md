@@ -641,6 +641,16 @@ Constraint checking is always performed in place for pessimistic transactions (d
 > - If you have enabled TiDB Binlog, enabling this variable cannot improve the performance. To improve the performance, it is recommended to use [TiCDC](/ticdc/ticdc-overview.md) instead.
 > - Enabling this parameter only means that one-phase commit becomes an optional mode of transaction commit. In fact, the most suitable mode of transaction commit is determined by TiDB.
 
+### tidb_enable_alter_placement
+
+> **Warning:**
+>
+> Currently, Placement Rules in SQL is an experimental feature. It is not recommended that you use it in production environments.
+
+- Scope: GLOBAL
+- Default value: `OFF`
+- This variable enables [Placement Rules in SQL](/placement-rules-in-sql.md).
+
 ### tidb_enable_amend_pessimistic_txn <span class="version-mark">New in v4.0.7</span>
 
 - Scope: SESSION | GLOBAL
@@ -677,7 +687,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 > **Warning:**
 >
-> Currently, cascades planner is an experimental feature. It is not recommended that you use it in the production environment.
+> Currently, cascades planner is an experimental feature. It is not recommended that you use it in production environments.
 
 - Scope: SESSION | GLOBAL
 - Default value: `OFF`
@@ -720,7 +730,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 > **Warning:**
 >
-> Currently, `Fast Analyze` is an experimental feature. It is not recommended that you use it in the production environment.
+> Currently, `Fast Analyze` is an experimental feature. It is not recommended that you use it in production environments.
 
 - Scope: SESSION | GLOBAL
 - Default value: `OFF`
@@ -737,7 +747,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 > **Warning:**
 >
-> Currently, List partition and List COLUMNS partition are experimental features. It is not recommended that you use it in the production environment.
+> Currently, List partition and List COLUMNS partition are experimental features. It is not recommended that you use it in production environments.
 
 - Scope: SESSION | GLOBAL
 - Default value: `OFF`
@@ -985,7 +995,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 > **Warning:**
 >
-> Currently, Green GC is an experimental feature. It is not recommended that you use it in the production environment.
+> Currently, Green GC is an experimental feature. It is not recommended that you use it in production environments.
 
 - Scope: GLOBAL
 - Default value: `LEGACY`
@@ -1350,7 +1360,7 @@ explain select * from t where age=5;
 
 > **Warning:**
 
-> Currently, the dynamic pruning mode for partitioned tables is an experimental feature. It is not recommended that you use it in the production environment.
+> Currently, the dynamic pruning mode for partitioned tables is an experimental feature. It is not recommended that you use it in production environments.
 
 - Scope: SESSION | GLOBAL
 - Default value: `static`
