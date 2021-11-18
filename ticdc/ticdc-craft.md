@@ -184,6 +184,7 @@ This section introduces the formats of Row Changed Event, DDL Event, and Resolve
 
 + **Example:**
 
+```
     01 81 80 f0 81 81 b5 de  f1 05 01 01 00 02 01 08  |................|
     04 02 02 02 02 02 02 02  0f fe 01 0a 07 0c 04 03  |................|
     06 00 00 00 00 00 00 00  00 10 0e 14 26 26 10 04  |............&&..|
@@ -203,6 +204,7 @@ This section introduces the formats of Row Changed Event, DDL Event, and Resolve
     64 61 74 65 74 69 6d 65  73 74 61 6d 70 64 61 74  |datetimestampdat|
     65 74 69 6d 65 66 6c 6f  61 74 6c 6f 6e 67 6e 75  |etimefloatlongnu|
     6c 6c 02 1a 5e 01 b0 03  02 d8 01 00 0a           |ll..^........|
+```
 
 ### DDL Event
 
@@ -223,9 +225,11 @@ This section introduces the formats of Row Changed Event, DDL Event, and Resolve
 
 + **Example:**
 
+```
     01 81 80 c0 dc f5 b5 de  f1 05 02 01 00 02 01 0e  |................|
     63 72 65 61 74 65 20 74  61 62 6c 65 20 61 02 01  |create table a..|
     01 61 62 02 1a 0f 01 20  05                       |.ab.... .|
+```
 
 ### Resolved Event
 
@@ -239,8 +243,10 @@ This section introduces the formats of Row Changed Event, DDL Event, and Resolve
 
 + **Example:**
 
+```
     01 81 80 e0 bb 9b b6 de  f1 05 03 01 01 01 02 1a  |................|
     19 01 00 05                                       |....|
+```
 
 ## Examples of the Event stream output
 
