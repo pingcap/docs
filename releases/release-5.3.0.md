@@ -147,13 +147,9 @@ It is recommended that you create a least-privileged SQL user to access and sign
 
 - **Support Online Unsafe Recovery after some stores are permanently damaged (experimental feature)**
 
-    Support the `unsafe remove-failed-stores` command that allows data unsafe recovery. Suppose that multiple replicas of data encounter problems like permanent damage (such as disk damage), and this issue causes the data in an application to be not readable or writable. In this case, Online Unsafe Recovery using PD can recover the data to be readable or writable again.
+    Support the `unsafe remove-failed-stores` command that performs online data unsafe recovery. Suppose that the majority of data replicas encounter issues like permanent damage (such as disk damage), and these issues cause the data ranges in an application to be unreadable or unwritable. In this case, you can use the Online Unsafe Recovery feature implemented in PD to recover the data, so that the data is readable or writable again.
 
-> **Warning:**
->
-> - This feature is a lossy recovery, so TiKV cannot guarantee data integrity and data indexes integrity after using the feature.
-> - Online unsafe recovery is an experimental feature, and it is **not** recommended to use it in the production environment. The interface, strategy, and internal implementation of the feature might be changed when it is finally released. Also, although the feature is tested in some scenarios, it is not thoroughly validated, so the feature might cause system unavailability.
-> - It is recommended to perform the feature-related operations with the support of the TiDB team. If some incorrect operations are performed, it might be hard to recover the cluster.
+    It is recommended to perform the feature-related operations with the support of the TiDB team.
 
 [User document](/online-unsafe-recovery.md), [#10483](https://github.com/tikv/tikv/issues/10483)
 
