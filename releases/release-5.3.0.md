@@ -247,8 +247,8 @@ Starting from TiCDC v5.3.0, the cyclic replication feature between TiDB clusters
 
     - Show the affected SQL statements in the debug log when the coprocessor encounters a lock, which is helpful in diagnosing problems [#27718](https://github.com/pingcap/tidb/issues/27718)
     - Support showing the size of the backup and restore data when backing up and restoring data in the SQL logical layer [#27247](https://github.com/pingcap/tidb/issues/27247)
-    - Improve the default collection logic of ANALYZE when `tidb_analyze_version=2`, which improves the collection speed and reduces resource overhead
-    - Introduce the `ANALYZE TABLE table_name COLUMNS col_1, col_2, ... , col_n` syntax. The syntax provides a solution for wide tables to collect statistics only on a portion of the columns, which improves the speed of collecting statistics for wide tables.
+    - Improve the default collection logic of ANALYZE when `tidb_analyze_version` is `2`, which accelerates collection and reduces resource overhead
+    - Introduce the `ANALYZE TABLE table_name COLUMNS col_1, col_2, ... , col_n` syntax. The syntax allows collecting statistics only on a portion of the columns in wide tables, which improves the speed of statistics collection
 
 + TiKV
 
