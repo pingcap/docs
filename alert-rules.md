@@ -7,11 +7,7 @@ summary: Learn the alert rules in a TiDB cluster.
 
 # TiDB Cluster Alert Rules
 
-<<<<<<< HEAD
-This document describes the alert rules for different components in a TiDB cluster, including the rule descriptions and solutions of the alert items in TiDB, TiKV, PD, TiDB Binlog, Node_exporter and Blackbox_exporter.
-=======
 This document describes the alert rules for different components in a TiDB cluster, including the rule descriptions and solutions of the alert items in TiDB, TiKV, PD, TiFlash, TiDB Binlog, TiCDC, Node_exporter and Blackbox_exporter.
->>>>>>> dfdc5ebc6 (Added TiCDC Alert Rules (#6793))
 
 According to the severity level, alert rules are divided into three categories (from high to low): emergency-level, critical-level, and warning-level. This division of severity levels applies to all alert items of each component below.
 
