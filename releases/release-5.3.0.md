@@ -254,7 +254,7 @@ Starting from TiCDC v5.3.0, the cyclic replication feature between TiDB clusters
 
     - Enhance disk space protection to improve storage stability
 
-        To solve the issue that TiKV might panic when getting the disk fully written error, TiKV introduces a two-level threshold defense mechanism for the disk remaining space to prevent excess traffic from exhausting disk space. Additionally, the mechanism provides the ability to reclaim space when the threshold is triggered. When the remaining space threshold is triggered, some write operations will fail and return a disk full error and a list of disk full nodes. In this case, to recover the space and restore the service, you can execute `Drop/Truncate Table` or scale out the nodes.
+        To solve the issue that TiKV might panic in case of a disk fully-written error, TiKV introduces a two-level threshold defense mechanism to protect the disk remaining space from being exhausted by excess traffic. Additionally, the mechanism provides the ability to reclaim space when the threshold is triggered. When the remaining space threshold is triggered, some write operations will fail and TiKV will return a disk full error as well as a list of disk full nodes. In this case, to recover the space and restore the service, you can execute `Drop/Truncate Table` or scale out the nodes.
 
     - Simplify the algorithm of L0 flow control [#10879](https://github.com/tikv/tikv/issues/10879)
     - Improve the error log report in the raft client module [#10944](https://github.com/tikv/tikv/pull/10944)
