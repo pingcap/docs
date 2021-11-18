@@ -1,3 +1,6 @@
+<!-- markdownlint-disable MD007 -->
+<!-- markdownlint-disable MD041 -->
+
 - About TiDB
   - [TiDB Introduction](/overview.md)
   - [TiDB 5.2 Release Notes](/releases/release-5.2.0.md)
