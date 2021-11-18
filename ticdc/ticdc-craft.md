@@ -315,8 +315,8 @@ COMMIT;
 
 Currently, TiCDC does not provide the standard parsing library for TiCDC Craft, but the Golang version and Java version of parsers are provided. You can refer to the data format provided in this document and the following decoders to implement the protocol parsers for other languages.
 
-- [Golang demo](https://github.com/pingcap/ticdc/tree/master/kafka_consumer)
-- [Java demo](https://github.com/pingcap/ticdc/tree/master/demo/java)
+- [Golang](https://github.com/pingcap/ticdc/blob/master/cdc/sink/codec/craft.go)
+- [Java](https://github.com/tidb-incubator/TiBigData/tree/master/ticdc)
 
 ## Column type code
 
@@ -428,4 +428,4 @@ If the value of a column is `46`, the column is a composite index column, a prim
 >
 > + `BinaryFlag` is meaningful only when the column type is BLOB/TEXT (including TINYBLOB/TINYTEXT and BINARY/CHAR). When the upstream column is the BLOB type, the `BinaryFlag` value is set to `1`. When the upstream column is the TEXT type, the `BinaryFlag` value is set to `0`.
 > + To replicate a table from the upstream, TiCDC selects a [valid index](/ticdc/ticdc-overview.md#restrictions) as the Handle index. The `HandleKeyFlag` value of the Handle index column is set to `1`.
-> + [Protobuf definition for benchmark](https://github.com/sunxiaoguang/ticdc/blob/craft/proto/CraftBenchmark.proto)
+> + [Protobuf definition for benchmark](https://github.com/pingcap/ticdc/blob/master/proto/CraftBenchmark.proto)
