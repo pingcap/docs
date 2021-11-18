@@ -362,6 +362,14 @@ The interface to export statistics is as follows:
     ```
     http://${tidb-server-ip}:${tidb-server-status-port}/stats/dump/${db_name}/${table_name}
     ```
+    
+    For example:
+
+    {{< copyable "" >}}
+
+    ```
+    curl -s http://127.0.0.1:10080/stats/dump/test/t1 -o /tmp/t1.json
+    ```
 
 + To obtain the JSON format statistics of the `${table_name}` table in the `${db_name}` database at specific time:
 
@@ -369,14 +377,6 @@ The interface to export statistics is as follows:
 
     ```
     http://${tidb-server-ip}:${tidb-server-status-port}/stats/dump/${db_name}/${table_name}/${yyyyMMddHHmmss}
-    ```
-
-+ Example
-
-    {{< copyable "" >}}
-
-    ```
-    curl -s http://127.0.0.1:10080/stats/dump/test/t1 -o /tmp/t1.json
     ```
 
 ### Import statistics
