@@ -53,17 +53,21 @@ In v5.3, the key new features or improvements are as follows:
 
 - Temporary tables:
 
-    - Regarding local temporary tables, if you have created local temporary tables on a cluster earlier than TiDB v5.3.0, these tables are actually ordinary tables, and handled as ordinary tables after the cluster is upgraded to TiDB v5.3.0 or later versions. Regarding global temporary tables, if you have created global temporary tables on a cluster in TiDB v5.3.0 or later versions, when the cluster is downgraded to a version earlier than v5.3.0, these tables are handled as ordinary tables and a data error occures.
-    - TiCDC and BR support [global temporary tables](/temporary-tables.md#global-temporary-tables) since v5.3.0. If you use TiCDC and BR in a version earlier than v5.3.0 to replicate global temporary tables to the downstream, a table definition error occurs.
-    - The following clusters should be in TiDB v5.3.0 or later versions: the cluster to be exported using TiDB ecosystem tools, the cluster after data is restored using the tools, and the downstream cluster that has replications using the tools. Otherwise, an error is reported when creating a global temporary table.
-    - For the compatibility of temporary tables, refer to [Compatibility with MySQL temporary tables](/temporary-tables.md#compatibility-with-mysql-temporary-tables) and [Compatibility restrictions with other TiDB features](/temporary-tables.md#compatibility-restrictions-with-other-tidb-features)
+    - If you have created local temporary tables in a TiDB cluster earlier than v5.3.0, these tables are actually ordinary tables, and handled as ordinary tables after the cluster is upgraded to v5.3.0 or a later version. If you have created global temporary tables in a TiDB cluster of v5.3.0 or a later version, when the cluster is downgraded to a version earlier than v5.3.0, these tables are handled as ordinary tables and cause a data error.
+    - Since v5.3.0, TiCDC and BR support [global temporary tables](/temporary-tables.md#global-temporary-tables). If you use TiCDC and BR of a version earlier than v5.3.0 to replicate global temporary tables to the downstream, a table definition error occurs.
+    - The following clusters are expected to be v5.3.0 or later; otherwise, data error is reported when you create a global temporary table: 
+    
+        - the cluster to be imported using TiDB ecosystem tools
+        - the cluster restored using TiDB ecosystem tools
+        - the downstream cluster in a replication task using TiDB ecosystem tools
+    - For the compatibility information of temporary tables, refer to [Compatibility with MySQL temporary tables](/temporary-tables.md#compatibility-with-mysql-temporary-tables) and [Compatibility restrictions with other TiDB features](/temporary-tables.md#compatibility-restrictions-with-other-tidb-features).
 
-- Fix an issue that `SHOW CREATE VIEW` does not require the `SHOW VIEW` permission. Now you must have `SHOW VIEW` permission to execute the `SHOW CREATE VIEW` statement.
-- The system variable `sql_auto_is_null` is added to the Noop Function. When `tidb_enable_noop_functions = 0/OFF`, an error is reported after modified this variable.
-- TiDB no longer allows to execute the `GRANT ALL ON performance_schema.*` syntax. When you execute the statement in TiDB, an error is reported.
-- Fix an issue that auto-analyze is triggered outside the specified time period when new indexes are added in earlier versions of v5.3.0. In v5.3.0, after you set the time period with `tidb_auto_analyze_start_time` and `tidb_auto_analyze_end_time`, auto-analyze is only triggered during this time period.
+- Fix the issue that the `SHOW VIEW` permission is not required to execute `SHOW CREATE VIEW`. Now you are expected to have the `SHOW VIEW` permission to execute the `SHOW CREATE VIEW` statement.
+- The system variable `sql_auto_is_null` is added to the noop functions. When `tidb_enable_noop_functions = 0/OFF`, modifying this variable value causes an error.
+- The `GRANT ALL ON performance_schema.*` syntax is no longer permitted. If you execute this statement in TiDB, an error occurs.
+- Fix the issue that auto-analyze is unexpectedly triggered outside the specified time period when new indexes are added before v5.3.0. In v5.3.0, after you set the time period through the `tidb_auto_analyze_start_time` and `tidb_auto_analyze_end_time` variables, auto-analyze is triggered only during this time period.
 - The default storage directory for plugins is changed from "" to /data/deploy/plugin.
-- The DM code is migrated to [the folder "dm" in TiCDC code repository](https://github.com/pingcap/ticdc/tree/master/dm). The version numbers of DM are changed from v2.0.x to v5.3.0, and you can upgrade from v2.0.x to v5.3.0 without any risk.
+- The DM code is migrated to [the folder "dm" in TiCDC code repository](https://github.com/pingcap/ticdc/tree/master/dm). Now DM follows TiDB in version numbers. Next to v2.0.x, the new DM version is v5.3.0, and you can upgrade from v2.0.x to v5.3.0 without any risk.
 
 ## New features
 
@@ -101,13 +105,13 @@ In v5.3, the key new features or improvements are as follows:
 
     [User document](/sql-statements/sql-statement-select.md), [#28689](https://github.com/pingcap/tidb/issues/28689)
 
-- **Set table attributes**
+- **Table attributes**
 
-    Support the `ALTER TABLE [PARTITION] ATTRIBUTES` statement that allows you to set attributes to a table or partition. Currently, TiDB only supports setting the `merge_option` attribute. By adding this attribute, you can directly control the Region merge behavior.
+    Support the `ALTER TABLE [PARTITION] ATTRIBUTES` statement that allows you to set attributes for a table or partition. Currently, TiDB only supports setting the `merge_option` attribute. By adding this attribute, you can explicitly control the Region merge behavior.
 
-    User scenarios: When you perform the `SPLIT TABLE` operation, if no data is inserted after a certain period of time, the empty Region is automatically merged by default. In this case, you can set the table attribute to `merge_option=deny` to avoid the automatic merging of the Region.
+    User scenarios: When you perform the `SPLIT TABLE` operation, if no data is inserted after a certain period of time, the empty Regions are automatically merged by default. In this case, you can set the table attribute to `merge_option=deny` to avoid the automatic merging of Regions.
 
-    [User document](/table-attributes.md),[#3839](https://github.com/tikv/pd/issues/3839)
+    [User document](/table-attributes.md), [#3839](https://github.com/tikv/pd/issues/3839)
 
 ### Security
 
@@ -121,27 +125,27 @@ It is recommended that you create a least-privileged SQL user to access and sign
 
 ### Performance
 
-- **Optimize the PD timestamp processing flow**
+- **Optimize the timestamp processing flow of PD**
 
-    TiDB optimizes its timestamp processing flow and reduces the timestamp processing load of PD by enabling PD Follower Proxy and modifying the batch waiting time when the PD client requests TSO in batches. This helps improve the overall scalability of the system.
+    TiDB optimizes its timestamp processing flow and reduces the timestamp processing load of PD by enabling PD Follower Proxy and modifying the batch waiting time required when the PD client requests TSO in batches. This helps improve the overall scalability of the system.
 
-    - Support enabling or disabling PD Follower Proxy through the system variable [`tidb_enable_tso_follower_proxy`](/system-variables.md#tidb_enable_tso_follower_proxy-new-in-v53). Suppose that the TSO requests load of PD is too high. In this case, enabling PD follower proxy can batch forward the TSO requests collected during the request cycle on followers to leader nodes. This solution can effectively reduce the number of direct interactions between clients and leaders, reduce the pressure of the leaders' load, and improve the overall performance of TiDB. 
+    - Support enabling or disabling PD Follower Proxy through the system variable [`tidb_enable_tso_follower_proxy`](/system-variables.md#tidb_enable_tso_follower_proxy-new-in-v53). Suppose that the TSO requests load of PD is too high. In this case, enabling PD follower proxy can batch forward the TSO requests collected during the request cycle on followers to the leader nodes. This solution can effectively reduce the number of direct interactions between clients and leaders, reduce the pressure of the load on leaders, and improve the overall performance of TiDB. 
 
     > **Note:**
     >
     > When the number of clients is small and the PD leader CPU is not full, it is NOT recommended to enable PD Follower Proxy.
 
-    - Support setting the maximum waiting time through the system variable [`tidb_tso_client_batch_max_wait_time`](/system-variables.md#tidb_tso_client_batch_max_wait_time-new-in-v53). This time is the waiting time for batching TSO requests when PD client requests TSO in batches. The unit of this time is milliseconds. In case that PD has a high TSO requests load, you can reduce the load and improve the throughput by increasing the waiting time to get a larger batch size.
+    - Support using the system variable [`tidb_tso_client_batch_max_wait_time`](/system-variables.md#tidb_tso_client_batch_max_wait_time-new-in-v53) to set the maximum waiting time needed for the PD client to batch request TSO. The unit of this time is milliseconds. In case that PD has a high TSO requests load, you can reduce the load and improve the throughput by increasing the waiting time to get a larger batch size.
 
     > **Note:**
     >
-    > When the TSO request load is not high, it is NOT recommended to modify this variable.
+    > When the TSO request load is not high, it is NOT recommended to modify this variable value.
 
-    [User document](/system-variables.md#tidb_tso_client_batch_max_wait_time-new-in-v53),[#3149](https://github.com/tikv/pd/issues/3149)
+    [User document](/system-variables.md#tidb_tso_client_batch_max_wait_time-new-in-v53), [#3149](https://github.com/tikv/pd/issues/3149)
 
 ### Stability
 
-- **Support Online Unsafe Recovery after stores permanently damaged (experimental feature)**
+- **Support Online Unsafe Recovery after some stores are permanently damaged (experimental feature)**
 
     Support the `unsafe remove-failed-stores` command that allows data unsafe recovery. Suppose that multiple replicas of data encounter problems like permanent damage (such as disk damage), and this issue causes the data in an application to be not readable or writable. In this case, Online Unsafe Recovery using PD can recover the data to be readable or writable again.
 
