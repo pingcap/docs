@@ -41,9 +41,9 @@ In v5.3, the key new features or improvements are as follows:
 |  Configuration file    |  Configuration item  | Change type |  Description  |
 | :---------- | :----------- | :----------- | :----------- |
 | TiDB | [`prepared-plan-cache.capacity`](/tidb-configuration-file.md#capacity)  | Modified | Controls the number of cached statements. The default value is changed from `100` to `1000`.|
-| TiKV | [`storage.reserve-space`](/tikv-configuration-file.md#reserve-space) | Modified | Controls space reserved for disk protection when TiKV is started. Starting from v5.3.0, 80% of the reserved space is spared for operations and maintenance when disk space is insufficient, and the remaining 20% space stores temporary disk files. |
+| TiKV | [`storage.reserve-space`](/tikv-configuration-file.md#reserve-space) | Modified | Controls space reserved for disk protection when TiKV is started. Starting from v5.3.0, 80% of the reserved space is used as the extra disk space required for operations and maintenance when the disk space is insufficient, and the other 20% is used to store temporary files. |
 | TiKV | memory-usage-limit | Modified  | This configuration item is new in TiDB v5.3.0 and its value is calculated based on storage.block-cache.capacity. |
-| PD | [`log.file.max-days`](/pd-configuration-file.md#max-days) | Modified | Controls the maximum number of days that logs are retained. The default value is changed from `1` to `0`. |
+| PD | [`log.file.max-days`](/pd-configuration-file.md#max-days) | Modified | Controls the maximum number of days that logs are retained for. The default value is changed from `1` to `0`. |
 | PD | [`log.file.max-backups`](/pd-configuration-file.md#max-backups) | Modified | Controls the maximum number of logs that are retained. The default value is changed from `7` to `0`.  |
 | PD | [`patrol-region-interval`](/pd-configuration-file.md#patrol-region-interval) | Modified | Controls the running frequency at which replicaChecker checks the health state of a Region. The smaller this value is, the faster replicaChecker runs. Normally, you do not need to adjust this parameter. The default value is changed from `100ms` to `10ms`. |
 | PD | [`max-snapshot-count`](/pd-configuration-file.md#max-snapshot-count) | Modified | Controls the maximum number of snapshots that a single store receives or sends at the same time. PD schedulers depend on this configuration to prevent the resources used for normal traffic from being preempted. The default value is changed from `3` to `64`. |
@@ -115,9 +115,9 @@ In v5.3, the key new features or improvements are as follows:
 
 ### Security
 
-- **Support creating a least-privileged user for TiDB Dashboard**
+- **Support creating users with the least privileges on TiDB Dashboard**
 
-The account system of TiDB Dashboard is consistent with that of TiDB SQL. Users accessing TiDB Dashboard are authenticated and authorized based on TiDB SQL user's privileges. Therefore, TiDB Dashboard requires limited privileges, or merely the read-only privilege. You can configure users to access TiDB Dashboard based on the principle of least privilege, thus avoiding access of high-privileged users.
+The account system of TiDB Dashboard is consistent with that of TiDB SQL. Users accessing TiDB Dashboard are authenticated and authorized based on TiDB SQL users' privileges. Therefore, TiDB Dashboard requires limited privileges, or merely the read-only privilege. You can configure users to access TiDB Dashboard based on the principle of least privilege, thus avoiding access of high-privileged users.
 
 It is recommended that you create a least-privileged SQL user to access and sign in with TiDB Dashboard. This avoids access of high-privileged users and improves security.
 
@@ -225,11 +225,11 @@ It is recommended that you create a least-privileged SQL user to access and sign
 
     [User Document](/ticdc/manage-ticdc.md)
 
-### Deployment and O&M
+### Deployment and maintenance
 
 - **Continuous Profiling (experimental feature)**
 
-    Introduced in TiDB Dashboard, Continuous Profiling allows storing instance performance analysis results automatically in real time without interrupting TiDB clusters. The performance analysis result is displayed using a flame graph, which is observable and shortens troubleshooting time.
+    TiDB Dashboard supports the Continuous Profiling feature, which stores instance performance analysis results automatically in real time when TiDB clusters are running. You can check the performance analysis result in a flame graph, which is more observable and shortens troubleshooting time.
 
     This feature is disabled by default and needs to be enabled on the **Continuous Profile** page of TiDB Dashboard.
 
