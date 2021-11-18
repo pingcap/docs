@@ -182,7 +182,7 @@ It is recommended that you create a least-privileged SQL user to access and sign
 
     TiDB Lightning provides the ability to check the configuration before running a migration task. It is enabled by default. This feature automatically performs some routine checks for disk space and execution configuration. The main purpose is to ensure that the whole subsequent import process goes smoothly.
 
-    [User Document](tidb-lightning/tidb-lightning-prechecks.md)
+    [User Document](/tidb-lightning/tidb-lightning-prechecks.md)
 
 - **TiDB Lightning supports importing files of GBK character set**
 
