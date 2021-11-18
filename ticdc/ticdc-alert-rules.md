@@ -23,7 +23,7 @@ For critical alerts, you need to pay close attention to abnormal monitoring metr
     A replication task is delayed more than 10 minutes.
 
 - Solution:
-    See [TiCDC Handle Replication Interruption](/ticdc/troubleshoot-ticdc.md#ticdc-how-do-i-handle-replication-interruption).
+    See [TiCDC Handle Replication Interruption](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions).
 
 ## `cdc_resolvedts_high_delay`
 
@@ -36,7 +36,7 @@ For critical alerts, you need to pay close attention to abnormal monitoring metr
      The Resolved TS of a replication task is delayed more than 10 minutes.
 
 - Solution:
-    See [TiCDC Handle Replication Interruption](/ticdc/troubleshoot-ticdc.md#ticdc-how-do-i-handle-replication-interruption).
+    See [TiCDC Handle Replication Interruption](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions).
 
 ### `ticdc_processor_exit_with_error_count`
 
@@ -50,7 +50,7 @@ For critical alerts, you need to pay close attention to abnormal monitoring metr
 
 - Solution:
 
-    See [TiCDC Handle Replication Interruption](/ticdc/troubleshoot-ticdc.md#ticdc-how-do-i-handle-replication-interruption).
+    See [TiCDC Handle Replication Interruption](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions).
 
 ## Warning alerts
 
@@ -110,7 +110,7 @@ Warning alerts are a reminder for an issue or error.
 
 - Solution:
 
-    See [TiCDC Handle Replication Interruption](/ticdc/troubleshoot-ticdc.md#ticdc-how-do-i-handle-replication-interruption).
+    See [TiCDC Handle Replication Interruption](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions).
 
 ### `ticdc_puller_entry_sorter_sort_bucket`
 
