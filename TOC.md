@@ -208,6 +208,11 @@
     + [Maintain](/ticdc/manage-ticdc.md)
     + [Troubleshoot](/ticdc/troubleshoot-ticdc.md)
     + [Monitor](/ticdc/monitor-ticdc.md)
+<<<<<<< HEAD
+=======
+    + [Alert Rules](/ticdc/ticdc-alert-rules.md)
+    + [TiCDC OpenAPI](/ticdc/ticdc-open-api.md)
+>>>>>>> dfdc5ebc6 (Added TiCDC Alert Rules (#6793))
     + [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
     + [Integrate TiDB with Confluent Platform](/ticdc/integrate-confluent-using-ticdc.md)
     + [Glossary](/ticdc/ticdc-glossary.md)
