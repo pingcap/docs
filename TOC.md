@@ -1,21 +1,17 @@
-# TiDB Documentation
-
 <!-- markdownlint-disable MD007 -->
-<!-- markdownlint-disable MD032 -->
+<!-- markdownlint-disable MD041 -->
 
-## Documentation List
-
-+ Introduction
+- Introduction
   - [TiDB Introduction](/overview.md)
-  + Benchmarks
+  - Benchmarks
     - [How to Test TiDB Using Sysbench](/benchmark/benchmark-tidb-using-sysbench.md)
     - [How to Run TPC-C Test on TiDB](/benchmark/benchmark-tidb-using-tpcc.md)
     - [Sysbench Performance Test - v3.0 vs. v2.1](/benchmark/v3.0-performance-benchmarking-with-sysbench.md)
     - [TPC-C Performance Test - v3.0 vs. v2.1](/benchmark/v3.0-performance-benchmarking-with-tpcc.md)
     - [Interaction Test on Online Workloads and `ADD INDEX` Operations](/benchmark/online-workloads-and-add-index-operations.md)
-+ Concepts
+- Concepts
   - [Architecture](/architecture.md)
-  + Key Features
+  - Key Features
     - [Horizontal Scalability](/key-features.md#horizontal-scalability)
     - [MySQL Compatible Syntax](/key-features.md#mysql-compatible-syntax)
     - [Replicate from and to MySQL](/key-features.md#replicate-from-and-to-mysql)
@@ -33,9 +29,9 @@
     - [SQL Plan Management](/key-features.md#sql-plan-management)
     - [Open Source](/key-features.md#open-source)
     - [Online Schema Changes](/key-features.md#online-schema-changes)
-+ How-to
-  + Get Started
-    + Start a Cluster
+- How-to
+  - Get Started
+    - Start a Cluster
       - [From Binary](/deploy-tidb-from-binary.md)
       - [From Homebrew](/deploy-tidb-from-homebrew.md)
       - [From DBdeployer](/deploy-tidb-from-dbdeployer.md)
@@ -47,69 +43,70 @@
     - [TiDB Data Migration Tutorial](https://pingcap.com/docs/tidb-data-migration/stable/get-started/)
     - [TiDB Lightning Tutorial](/get-started-with-tidb-lightning.md)
     - [TiSpark Quick Start Guide](/get-started-with-tispark.md)
-  + Deploy
+  - Deploy
     - [Hardware Recommendations](/hardware-and-software-requirements.md)
-    + From Binary Tarball
+    - From Binary Tarball
       - [For Testing Environments](/test-deployment-from-binary-tarball.md)
       - [For Production Environments](/production-deployment-from-binary-tarball.md)
-    + Orchestrated Deployment
+    - Orchestrated Deployment
       - [Ansible Deployment (Recommended)](/online-deployment-using-ansible.md)
       - [Ansible Offline Deployment](/offline-deployment-using-ansible.md)
       - [Docker Deployment](/test-deployment-using-docker.md)
-    + Geographic Redundancy
+    - Geographic Redundancy
       - [Overview](/geo-redundancy-deployment.md)
       - [Schedule Replicas by Topology Labels](/schedule-replicas-by-topology-labels.md)
     - [Data Migration with Ansible](https://pingcap.com/docs/tidb-data-migration/stable/deploy-a-dm-cluster-using-ansible/)
-  + Configure
+  - Configure
     - [Time Zone](/configure-time-zone.md)
     - [Memory Control](/configure-memory-usage.md)
     - [Store Limit](/configure-store-limit.md)
-  + Secure
-    + Transport Layer Security (TLS)
+  - Secure
+    - Transport Layer Security (TLS)
       - [Enable TLS For MySQL Clients](/encrypted-connections-with-tls-protocols.md)
       - [Enable TLS Between TiDB Components](/enable-tls-between-components.md)
     - [Generate Self-signed Certificates](/generate-self-signed-certificates.md)
-  + Monitor
+  - Monitor
     - [Overview](/tidb-monitoring-framework.md)
     - [Monitor a TiDB Cluster](/monitor-a-tidb-cluster.md)
     - [Export Grafana Snapshots](/exporting-grafana-snapshots.md)
-  + Migrate
+  - Migrate
     - [Migration Tools User Guide](/ecosystem-tool-user-guide.md)
-    + Migrate from MySQL
+    - Migrate from MySQL
       - [Migrate from Mydumper Files](/migrate-from-mysql-mydumper-files.md)
       - [Migrate from Amazon Aurora MySQL Using DM](/migrate-from-aurora-mysql-database.md)
     - [Migrate from CSV Files](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)
     - [Migrate from SQL Files](/migrate-from-mysql-mydumper-files.md)
-  + Maintain
+  - Maintain
     - [Common Ansible Operations](/maintain-tidb-using-ansible.md)
-    + Backup and Restore
+    - Backup and Restore
       - [Use Mydumper and TiDB Lightning](/backup-and-restore-using-mydumper-lightning.md)
       - [Use Dumpling for Export or Backup](/export-or-backup-using-dumpling.md)
-    + Identify Abnormal Queries
+    - Identify Abnormal Queries
       - [Identify Slow Queries](/identify-slow-queries.md)
       - [Identify Expensive Queries](/identify-expensive-queries.md)
-  + Scale
+  - Scale
     - [Scale using Ansible](/scale-tidb-using-ansible.md)
     - [Scale a TiDB Cluster](/horizontal-scale.md)
-  + Upgrade
+  - Upgrade
     - [Upgrade to TiDB 3.0](/upgrade-tidb-using-ansible.md)
-  + Troubleshoot
+  - Troubleshoot
     - [TiDB Troubleshooting Map](/tidb-troubleshooting-map.md)
     - [Troubleshoot Cluster Setup](/troubleshoot-tidb-cluster.md)
-+ Reference
-  + SQL
+- Reference
+
+  - SQL
     - [MySQL Compatibility](/mysql-compatibility.md)
-    + SQL Language Structure
+    - SQL Language Structure
       - [Literal Values](/literal-values.md)
       - [Schema Object Names](/schema-object-names.md)
       - [Keywords and Reserved Words](/keywords-and-reserved-words.md)
       - [User-Defined Variables](/user-defined-variables.md)
       - [Expression Syntax](/expression-syntax.md)
       - [Comment Syntax](/comment-syntax.md)
-    + Data Types
+    - Data Types
       - [Overview](/data-type-overview.md)
       - [Default Values](/data-type-default-values.md)
-      + Numeric Types
+      - Numeric Types
         - [`BIT`](/data-type-numeric.md#bit-type)
         - [`BOOL|BOOLEAN`](/data-type-numeric.md#boolean-type)
         - [`TINYINT`](/data-type-numeric.md#tinyint-type)
@@ -120,13 +117,13 @@
         - [`FLOAT`](/data-type-numeric.md#float-type)
         - [`DOUBLE`](/data-type-numeric.md#double-type)
         - [`DECIMAL`](/data-type-numeric.md#decimal-type)
-      + Date and Time Types
+      - Date and Time Types
         - [`DATE`](/data-type-date-and-time.md#date-type)
         - [`TIME`](/data-type-date-and-time.md#time-type)
         - [`DATETIME`](/data-type-date-and-time.md#datetime-type)
         - [`TIMESTAMP`](/data-type-date-and-time.md#timestamp-type)
         - [`YEAR`](/data-type-date-and-time.md#year-type)
-      + String Types
+      - String Types
         - [`CHAR`](/data-type-string.md#char-type)
         - [`VARCHAR`](/data-type-string.md#varchar-type)
         - [`TEXT`](/data-type-string.md#text-type)
@@ -142,7 +139,7 @@
         - [`ENUM`](/data-type-string.md#enum-type)
         - [`SET`](/data-type-string.md#set-type)
       - [JSON Type](/data-type-json.md)
-    + Functions and Operators
+    - Functions and Operators
       - [Function and Operator Reference](/functions-and-operators/functions-and-operators-overview.md)
       - [Type Conversion in Expression Evaluation](/functions-and-operators/type-conversion-in-expression-evaluation.md)
       - [Operators](/functions-and-operators/operators.md)
@@ -160,7 +157,7 @@
       - [Miscellaneous Functions](/functions-and-operators/miscellaneous-functions.md)
       - [Precision Math](/functions-and-operators/precision-math.md)
       - [List of Expressions for Pushdown](/functions-and-operators/expressions-pushed-down.md)
-    + SQL Statements
+    - SQL Statements
       - [`ADD COLUMN`](/sql-statements/sql-statement-add-column.md)
       - [`ADD INDEX`](/sql-statements/sql-statement-add-index.md)
       - [`ADMIN`](/sql-statements/sql-statement-admin.md)
@@ -257,38 +254,38 @@
     - [Character Set](/character-set-and-collation.md)
     - [SQL Mode](/sql-mode.md)
     - [Views](/views.md)
-  + Configuration
-    + tidb-server
+  - Configuration
+    - tidb-server
       - [MySQL System Variables](/system-variables.md)
       - [TiDB Specific System Variables](/tidb-specific-system-variables.md)
       - [Configuration Flags](/command-line-flags-for-tidb-configuration.md)
       - [Configuration File](/tidb-configuration-file.md)
-    + pd-server
+    - pd-server
       - [Configuration Flags](/command-line-flags-for-pd-configuration.md)
       - [Configuration File](/pd-configuration-file.md)
-    + tikv-server
+    - tikv-server
       - [Configuration Flags](/command-line-flags-for-tikv-configuration.md)
       - [Configuration File](/tikv-configuration-file.md)
-  + Security
+  - Security
     - [Security Compatibility with MySQL](/security-compatibility-with-mysql.md)
     - [The TiDB Access Privilege System](/privilege-management.md)
     - [TiDB User Account Management](/user-account-management.md)
     - [Role-Based Access Control](/role-based-access-control.md)
     - [Certificate-Based Authentication](/certificate-authentication.md)
-  + Transactions
+  - Transactions
     - [Overview](/transaction-overview.md)
     - [Isolation Levels](/transaction-isolation-levels.md)
     - [Optimistic Transactions](/optimistic-transaction.md)
     - [Pessimistic Transactions](/pessimistic-transaction.md)
-  + System Databases
+  - System Databases
     - [`mysql`](/system-tables/system-table-overview.md)
     - [`information_schema`](/system-tables/system-table-information-schema.md)
   - [Errors Codes](/error-codes.md)
   - [Supported Client Drivers](/connectors-and-apis.md)
-  + Garbage Collection (GC)
+  - Garbage Collection (GC)
     - [GC Overview](/garbage-collection-overview.md)
     - [GC Configuration](/garbage-collection-configuration.md)
-  + Performance
+  - Performance
     - [Overview](/sql-optimization-concepts.md)
     - [Understanding the Query Execution Plan](/query-execution-plan.md)
     - [The Blocklist of Optimization Rules and Expression Pushdown](/blocklist-control-plan.md)
@@ -301,13 +298,13 @@
     - [Tune TiKV](/tune-tikv-performance.md)
     - [Operating System Tuning](/tune-operating-system.md)
     - [Column Pruning](/column-pruning.md)
-  + Key Monitoring Metrics
+  - Key Monitoring Metrics
     - [Overview](/grafana-overview-dashboard.md)
     - [TiDB](/grafana-tidb-dashboard.md)
     - [PD](/grafana-pd-dashboard.md)
     - [TiKV](/grafana-tikv-dashboard.md)
   - [Alert Rules](/alert-rules.md)
-  + Best Practices
+  - Best Practices
     - [Highly Concurrent Write Best Practices](/best-practices/high-concurrency-best-practices.md)
     - [HAProxy Best Practices](/best-practices/haproxy-best-practices.md)
     - [Java Application Development Best Practices](/best-practices/java-app-best-practices.md)
@@ -316,12 +313,12 @@
     - [TiKV Performance Tuning with Massive Regions](/best-practices/massive-regions-best-practices.md)
   - [TiSpark](/tispark-overview.md)
   - [TiKV](/tikv-overview.md)
-  + TiDB Binlog
+  - TiDB Binlog
     - [Overview](/tidb-binlog/tidb-binlog-overview.md)
     - [Deploy](/tidb-binlog/deploy-tidb-binlog.md)
     - [Maintain](/tidb-binlog/maintain-tidb-binlog-cluster.md)
     - [Monitor](/tidb-binlog/monitor-tidb-binlog-cluster.md)
-    + [Configure](/tidb-binlog/tidb-binlog-configuration-file.md)
+    - [Configure](/tidb-binlog/tidb-binlog-configuration-file.md)
       - [Pump](/tidb-binlog/tidb-binlog-configuration-file.md#pump)
       - [Drainer](/tidb-binlog/tidb-binlog-configuration-file.md#drainer)
     - [Upgrade](/tidb-binlog/upgrade-tidb-binlog.md)
@@ -330,11 +327,11 @@
     - [TiDB Binlog Relay Log](/tidb-binlog/tidb-binlog-relay-log.md)
     - [Bidirectional Replication Between TiDB Clusters](/tidb-binlog/bidirectional-replication-between-tidb-clusters.md)
     - [Glossary](/tidb-binlog/tidb-binlog-glossary.md)
-    + Troubleshoot
+    - Troubleshoot
       - [Troubleshooting](/tidb-binlog/troubleshoot-tidb-binlog.md)
       - [Error Handling](/tidb-binlog/handle-tidb-binlog-errors.md)
     - [FAQ](/tidb-binlog/tidb-binlog-faq.md)
-  + Tools
+  - Tools
     - [Overview](/ecosystem-tool-user-guide.md)
     - [Use Cases](/ecosystem-tool-user-case.md)
     - [Download](/download-ecosystem-tools.md)
@@ -343,7 +340,7 @@
     - [Syncer](/syncer-overview.md)
     - [Loader](/loader-overview.md)
     - [Data Migration](https://pingcap.com/docs/tidb-data-migration/stable/)
-    + TiDB Lightning
+    - TiDB Lightning
       - [Overview](/tidb-lightning/tidb-lightning-overview.md)
       - [Deployment](/tidb-lightning/deploy-tidb-lightning.md)
       - [Configuration](/tidb-lightning/tidb-lightning-configuration.md)
@@ -355,7 +352,7 @@
       - [Monitor](/tidb-lightning/monitor-tidb-lightning.md)
       - [FAQ](/tidb-lightning/tidb-lightning-faq.md)
       - [Glossary](/tidb-lightning/tidb-lightning-glossary.md)
-    + sync-diff-inspector
+    - sync-diff-inspector
       - [Overview](/sync-diff-inspector/sync-diff-inspector-overview.md)
       - [Data Check for Tables with Different Schema or Table Names](/sync-diff-inspector/route-diff.md)
       - [Data Check in the Sharding Scenario](/sync-diff-inspector/shard-diff.md)
@@ -364,21 +361,26 @@
     - [PD Recover](/pd-recover.md)
     - [TiKV Control](/tikv-control.md)
     - [TiDB Control](/tidb-control.md)
+
 - [TiDB in Kubernetes](https://pingcap.com/docs/tidb-in-kubernetes/stable/)
-+ FAQs
+
+- FAQs
   - [TiDB FAQs](/faq/tidb-faq.md)
   - [TiDB Lightning FAQs](/tidb-lightning/tidb-lightning-faq.md)
   - [Upgrade FAQs](/faq/upgrade-faq.md)
-+ Support
+- Support
   - [Support Resources](/support.md)
   - [Report an Issue](/report-issue.md)
-+ Contribute
+- Contribute
+
   - [Contribute to TiDB](/contribute.md#contribute-to-tidb)
   - [Improve the Docs](/contribute.md#improve-the-docs)
+
 - [Adopters](/adopters.md)
-+ Releases
-  + [All Releases](/releases/release-notes.md)
-  + v3.0
+
+- Releases
+  - [All Releases](/releases/release-notes.md)
+  - v3.0
     - [3.0.20](/releases/release-3.0.20.md)
     - [3.0.19](/releases/release-3.0.19.md)
     - [3.0.18](/releases/release-3.0.18.md)
@@ -405,7 +407,7 @@
     - [3.0.0-rc.1](/releases/release-3.0.0-rc.1.md)
     - [3.0.0-beta.1](/releases/release-3.0.0-beta.1.md)
     - [3.0.0-beta](/releases/release-3.0-beta.md)
-  + v2.1
+  - v2.1
     - [2.1.19](/releases/release-2.1.19.md)
     - [2.1.18](/releases/release-2.1.18.md)
     - [2.1.17](/releases/release-2.1.17.md)
@@ -432,7 +434,7 @@
     - [2.1 RC2](/releases/release-2.1-rc.2.md)
     - [2.1 RC1](/releases/release-2.1-rc.1.md)
     - [2.1 Beta](/releases/release-2.1-beta.md)
-  + v2.0
+  - v2.0
     - [2.0.11](/releases/release-2.0.11.md)
     - [2.0.10](/releases/release-2.0.10.md)
     - [2.0.9](/releases/release-2.0.9.md)
@@ -451,7 +453,7 @@
     - [2.0 RC1](/releases/release-2.0-rc.1.md)
     - [1.1 Beta](/releases/release-1.1-beta.md)
     - [1.1 Alpha](/releases/release-1.1-alpha.md)
-  + v1.0
+  - v1.0
     - [1.0.8](/releases/release-1.0.8.md)
     - [1.0.7](/releases/release-1.0.7.md)
     - [1.0.6](/releases/release-1.0.6.md)
@@ -466,4 +468,4 @@
     - [RC3](/releases/release-rc.3.md)
     - [RC2](/releases/release-rc.2.md)
     - [RC1](/releases/release-rc.1.md)
-+ [Glossary](/glossary.md)
+- [Glossary](/glossary.md)
