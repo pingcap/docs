@@ -1,9 +1,5 @@
-# TiDB Documentation
-
 <!-- markdownlint-disable MD007 -->
-<!-- markdownlint-disable MD032 -->
-
-## Documentation List
+<!-- markdownlint-disable MD041 -->
 
 + About TiDB
   + [TiDB Introduction](/overview.md)
