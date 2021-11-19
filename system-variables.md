@@ -650,7 +650,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 - Scope: GLOBAL
 - Default value: `OFF`
-- This variable enables [Placement Rules in SQL](/placement-rules-in-sql.md).
+- This variable enables or disables [Placement Rules in SQL](/placement-rules-in-sql.md).
 
 ### tidb_enable_amend_pessimistic_txn <span class="version-mark">New in v4.0.7</span>
 
