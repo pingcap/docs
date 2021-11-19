@@ -230,7 +230,7 @@ The lines that contain `checksum mismatched` provides the information `total_kvs
     - It is possible that this table is not empty before the import and therefore affects the data checksum. It is also possible that TiDB Lightning has previously failed and shut down, but did not restart correctly.
 - If `y` is greater, it means that there are more KV pairs in the local data source.
     - If the checksum of the target database is all 0, it means that no import has occurred. It is possible that the cluster is too busy to receive any data.
-    - It is possible that the exported data contains duplicate data, such as unique and primary keys (UNIQUE and PRIMARY KEYs) with duplicate values, or that the downstream table structure is case-insensitive while the data is case-sensitive.
+    - It is possible that the exported data contains duplicate data, such as UNIQUE and PRIMARY KEYs with duplicate values, or that the downstream table structure is case-insensitive while the data is case-sensitive.
 - Other possible reasons
     - If the data source is machine-generated and not backed up by Dumpling, make sure the data conforms to the table limits, e.g., the AUTO_INCREMENT column needs to be positive and not 0.
 
