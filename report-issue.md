@@ -1,7 +1,6 @@
 ---
 title: Report an Issue
 summary: Report an issue with your TiDB installation.
-aliases: ['/docs/dev/report-issue/']
 ---
 
 # Report an Issue
