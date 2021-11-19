@@ -27,7 +27,7 @@ To download the latest version of PD Recover, directly download the TiDB package
 
 > **Note:**
 >
-> `{version}` indicates the version number of TiDB. For example, if `{version}` is `v5.2.1`, the package download link is `https://download.pingcap.org/tidb-v5.2.1-linux-amd64.tar.gz`.
+> `{version}` indicates the version number of TiDB. For example, if `{version}` is `v5.2.2`, the package download link is `https://download.pingcap.org/tidb-v5.2.2-linux-amd64.tar.gz`.
 
 ## Quick Start
 
@@ -97,7 +97,7 @@ To get the allocated ID from the PD log, you need to make sure that the log you 
 {{< copyable "shell-regular" >}}
 
 ```bash
-cat {{/path/to}}/pd*.log | grep "idAllocator allocates a new id" |  awk -F'=' '{print $2}' | awk -F']' '{print $1}' | sort -r | head -n 1
+cat {{/path/to}}/pd*.log | grep "idAllocator allocates a new id" |  awk -F'=' '{print $2}' | awk -F']' '{print $1}' | sort -r -n | head -n 1
 ```
 
 ```bash
