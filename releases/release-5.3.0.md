@@ -12,11 +12,11 @@ In v5.3, the key new features or improvements are as follows:
 
 + Introduce temporary tables to simplify your application logic and improve performance
 + Support setting attributes for tables and partitions
-+ Support creating users with minimum privilege on TiDB Dashboard to enhance system security
-+ Optimize the process of handling timestamps in TiDB to improve the overall performance
++ Support creating users with the least privileges on TiDB Dashboard to enhance system security
++ Optimize the timestamp processing flow in TiDB to improve the overall performance
 + Enhance the performance of TiDB Data Migration (DM) so that data is migrated from MySQL to TiDB with lower latency
 + Support parallel import in TiDB Lightning to improve the efficiency of full data migration
-+ Support saving and restoring the on-site information of a cluster with a single SQL statement, which helps improve the efficiency of troubleshooting execution plan issues
++ Support saving and restoring the on-site information of a cluster with a single SQL statement, which helps improve the efficiency of troubleshooting issues relating to execution plans
 + Support the continuous profiling experimental feature to improve the observability of database performance
 + Continue optimizing the storage and computing engines to improve the system performance and stability
 
@@ -83,11 +83,11 @@ In v5.3, the key new features or improvements are as follows:
     - Schedule the leaders of hotspot data to high-performance TiKV instances
     - Separate cold data to lower-cost storage mediums to improve cost efficiency
 
-    [User document](/information-schema/information-schema-placement-rules.md), [#18030](https://github.com/pingcap/tidb/issues/18030)
+    [User document](/placement-rules-in-sql.md), [#18030](https://github.com/pingcap/tidb/issues/18030)
 
 - **Temporary tables**
 
-    Support the `CREATE [GLOBAL] TEMPORARY TABLE` syntax to create temporary tables. Using this feature, you can easily manage the temporary data generated in the calculation process of an application. Temporary data is stored in memory and you can use the `tidb_tmp_table_max_size` variable to limit the size of a temporary table. TiDB supports the following types of temporary tables:
+    Support the `CREATE [GLOBAL] TEMPORARY TABLE` statement to create temporary tables. Using this feature, you can easily manage the temporary data generated in the calculation process of an application. Temporary data is stored in memory and you can use the `tidb_tmp_table_max_size` variable to limit the size of a temporary table. TiDB supports the following types of temporary tables:
 
     - Global temporary tables
         - Visible to all sessions in the cluster, and table schemas are persistent.
@@ -202,7 +202,7 @@ It is recommended that you create a least-privileged SQL user to access and sign
 
 - **Save and restore the on-site information of a cluster**
 
-    When you locate and troubleshoot the issues of a TiDB cluster, you often need to provide information on the system and the execution plan. To help you get the information and troubleshoot cluster issues in a more convenient and efficient way, the `PLAN REPLAY` command is introduced in TiDB v5.3.0. This command enables you to easily save and restore the on-site information of a cluster, improves the efficiency of troubleshooting, and helps you more easily archive the issue for management.
+    When you locate and troubleshoot the issues of a TiDB cluster, you often need to provide information on the system and the query plan. To help you get the information and troubleshoot cluster issues in a more convenient and efficient way, the `PLAN REPLAY` command is introduced in TiDB v5.3.0. This command enables you to easily save and restore the on-site information of a cluster, improves the efficiency of troubleshooting, and helps you more easily archive the issues for management.
 
     The features of `PLAN REPLAYER` are as follows:
 
@@ -290,7 +290,7 @@ Starting from TiCDC v5.3.0, the cyclic replication feature between TiDB clusters
     + TiCDC
 
         - Reduce the default value of the Kafka sink configuration item `MaxMessageBytes` from 64 MB to 1 MB to fix the issue that large messages are rejected by the Kafka Broker [#3104](https://github.com/pingcap/ticdc/pull/3104)
-        - Reduce memory usage in the relpication pipeline [#2553](https://github.com/pingcap/ticdc/issues/2553)[#3037](https://github.com/pingcap/ticdc/pull/3037) [#2726](https://github.com/pingcap/ticdc/pull/2726)
+        - Reduce memory usage in the replication pipeline [#2553](https://github.com/pingcap/ticdc/issues/2553)[#3037](https://github.com/pingcap/ticdc/pull/3037) [#2726](https://github.com/pingcap/ticdc/pull/2726)
         - Optimize monitoring items and alert rules to improve observability of synchronous links, memory GC, and stock data scanning processes [#2735](https://github.com/pingcap/ticdc/pull/2735) [#1606](https://github.com/pingcap/ticdc/issues/1606) [#3000](https://github.com/pingcap/ticdc/pull/3000) [#2985](https://github.com/pingcap/ticdc/issues/2985) [#2156](https://github.com/pingcap/ticdc/issues/2156)
         - When the sync task status is normal, no more historical error messages are displayed to avoid misleading users [#2242](https://github.com/pingcap/ticdc/issues/2242)
 
