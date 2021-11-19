@@ -1,6 +1,5 @@
 ---
 title: TiDB 1.1 Beta Release Notes
-aliases: ['/docs/dev/releases/release-1.1-beta/','/docs/dev/releases/11beta/']
 ---
 
 # TiDB 1.1 Beta Release Notes
