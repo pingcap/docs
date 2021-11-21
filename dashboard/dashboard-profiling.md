@@ -1,6 +1,6 @@
 ---
-title: Instance Profiling Page
-summary: Learn the instance profiling page of TiDB Dashboard.
+title: Manual Profiling
+summary: Learn the manual instance profiling of TiDB Dashboard.
 aliases: ['/docs/dev/dashboard/dashboard-profiling/']
 ---
 
