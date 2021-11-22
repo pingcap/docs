@@ -164,7 +164,7 @@ It is recommended that you create a least-privileged SQL user to access and sign
 
 - **Add DM OpenAPI to better maintain DM clusters (experimental feature)**
 
-    DM provides the OpenAPI feature for querying and operating the DM cluster. It is similar to the feature of [dmctl tools](./dmctl-introduction.md).
+    DM provides the OpenAPI feature for querying and operating the DM cluster. It is similar to the feature of [dmctl tools](https://docs.pingcap.com/zh/tidb-data-migration/stable/dmctl-introduction).
 
     Currently, DM OpenAPI is an experimental feature and disabled by default. It is not recommended to use it in a production environment.
 
