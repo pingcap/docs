@@ -1,5 +1,5 @@
 ---
-title: TiDB Lightning CSV Support
+title: TiDB Lightning CSV Support and Restrictions
 summary: Learn how to import CSV files via TiDB Lightning.
 ---
 
