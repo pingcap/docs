@@ -1,5 +1,5 @@
 ---
-title: TiDB Lightning CSV Support
+title: TiDB Lightning CSV Support and Restrictions
 summary: Learn how to import CSV files via TiDB Lightning.
 aliases: ['/docs/stable/tidb-lightning/migrate-from-csv-using-tidb-lightning/','/docs/v4.0/tidb-lightning/migrate-from-csv-using-tidb-lightning/','/docs/stable/reference/tools/tidb-lightning/csv/']
 ---
