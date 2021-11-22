@@ -360,7 +360,7 @@ Starting from TiCDC v5.3.0, the cyclic replication feature between TiDB clusters
 
     - Fix the issue of inaccurate TiFlash Store Size statistics
     - Fix the issue that TiFlash fails to start up on some platforms due to the absence of library `nsl`
-    - Block the infinite wait of `wait index` when writing pressure is heavy (a default timeout of 5 minutes is added), which prevents TiFlash from waiting too long for data synchronization to provide services
+    - Block the infinite wait of `wait index` when writing pressure is heavy (a default timeout of 5 minutes is added), which prevents TiFlash from waiting too long for data replication to provide services
     - Fix the slow and no result issues of the log search when the log volume is large
     - Fix the issue that only the most recent logs can be searched when searching old historical logs
     - Fix the possible wrong result when a new collation is enabled
