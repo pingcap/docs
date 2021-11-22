@@ -74,11 +74,11 @@ In v5.3, the key new features or improvements are as follows:
 
 ### SQL
 
-- **Use SQL interface to set placement rules for data (experimental)**
+- **Use SQL interface to set placement rules for data (experimental feature)**
 
-    Support the `[CREATE | ALTER] PLACEMENT POLICY` syntax that provides a SQL interface to set placement rules for data. Using this feature, you can specify tables and partitions to be scheduled to specific regions, data centers, racks, or hosts. This meets your application demands for lower cost and higher flexibility. The typical user scenarios are as follows:
+    Support the `[CREATE | ALTER] PLACEMENT POLICY` syntax that provides a SQL interface to set placement rules for data. Using this feature, you can specify tables and partitions to be scheduled to specific regions, data centers, racks, hosts, or replica count rules. This meets your application demands for lower cost and higher flexibility. The typical user scenarios are as follows:
 
-    - Merge multiple databases of different applications to reduce the cost on database maintenance
+    - Merge multiple databases of different applications to reduce the cost on database maintenance, and achieve application resource isolation through the rule configuration
     - Increase replica count for important data to improve the application availability and data reliability
     - Store new data into SSDs and store old data into HHDs to lower the cost on data archiving and storage
     - Schedule the leaders of hotspot data to high-performance TiKV instances
