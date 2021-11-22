@@ -316,7 +316,7 @@ When Dumpling is exporting a large single table from TiDB, Out of Memory (OOM) m
 
 ### TiDB GC settings when exporting a large volume of data
 
-When exporting data from TiDB, if the TiDB version is greater than or equal to v4.0.0 and Dumpling can access the PD address of the TiDB cluster, Dumpling automatically extends the GC time without affecting the original cluster.
+When exporting data from TiDB, if the TiDB version is later than or equal to v4.0.0 and Dumpling can access the PD address of the TiDB cluster, Dumpling automatically extends the GC time without affecting the original cluster.
 
 In other scenarios, if the data size is very large, to avoid export failure due to GC during the export process, you can extend the GC time in advance:
 
