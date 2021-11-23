@@ -108,7 +108,7 @@ select * from test . t where a > ?
 > select * from test . t where a in ( ... )
 > ```
 >
-> When bindings are creating, TiDB treats SQL statements that contains a single constant and SQL statements that contains multiple constants joined by commas differently. Therefore, you need to create bindings for the two SQL types separately.
+> When bindings are created, TiDB treats SQL statements that contain a single constant and SQL statements that contain multiple constants joined by commas differently. Therefore, you need to create bindings for the two SQL types separately.
 
 When a SQL statement has bound execution plans in both GLOBAL and SESSION scopes, because the optimizer ignores the bound execution plan in the GLOBAL scope when it encounters the SESSION binding, the bound execution plan of this statement in the SESSION scope shields the execution plan in the GLOBAL scope.
 
