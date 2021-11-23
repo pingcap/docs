@@ -126,7 +126,7 @@ The numbers in the above state transfer diagram are described as follows.
 - ④ Execute the `changefeed resume` command to resume the replication task
 - ⑤ Recoverable errors occur during the `changefeed` operation
 - ⑥ `changefeed` has reached the preset `TargetTs`, and the replication is automatically stopped.
-- ⑦ `changefeed` Suspended longer than the duration specified by `gc-ttl`, and cannot be resumed.
+- ⑦ `changefeed` suspended longer than the duration specified by `gc-ttl`, and cannot be resumed.
 - ⑧ `changefeed` experienced an unrecoverable error when trying to execute automatic recovery.
 
 #### Create a replication task
