@@ -104,7 +104,7 @@ This document only describes the parameters that are not included in command-lin
 
 ### `max-grpc-send-msg-len`
 
-+ Sets the maximum length of a gRPC message that can be sent
++ Sets the maximum length of a gRPC message that can be sent 
 + Default: `10485760`
 + Unit: Bytes
 + Maximum value: `2147483647`
