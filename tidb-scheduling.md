@@ -77,6 +77,16 @@ Scheduling is based on information collection. In short, the PD scheduling compo
     * Whether the store is overloaded
     * Labels (See [Perception of Topology](/schedule-replicas-by-topology-labels.md))
 
+You can use PD control to check the status information of a TiKV store, which is divided into Up, Disconnect, Offline, Down, and Tombstone. The relationship between each status is as follows:
+
++ **Up**: The current TiKV store is providing service.
++ **Disconnect**: When the heartbeat information of PD and the TiKV store is lost for more than 20 seconds, the store status changes to Disconnect. When the lost time exceeds the time specified by `max-store-down-time`, the store status changes to Down.
++ **Down**: When the time that the TiKV store lost connection with the cluster has exceeded the time specified by `max-store-down-time` (30 minutes by default), the store changes to this status. This status indicates that the corresponding store status changes to Down and starts replenishing peers of each Region on the surviving store.
++ **Offline**: When a TiKV Store is manually taken offline through PD Control, the store status becomes Offline. This is only an intermediate status when the store is taking offline. The store in this status performs leader transfer operation and Region balance operation. When the `leader_count/region_count` (get by PD Control) both show that the transfer or balance operation is completed, the store status changes from Offline to Tombstone. In the Offline status, TiKV shuts down the store service and the physical server where the store is located.
++ **Tombstone**: This status indicates that the TiKV store is completely offline. You can use `remove-tombstone` interface to safely clean up TiKV in this status.
+
+![TiKV store status relationship](/media/tikv-store-status-relationship.png)
+
 - Information reported by Region leaders:
 
     Each Region leader sends heartbeats to PD periodically to report [`RegionState`](https://github.com/pingcap/kvproto/blob/master/proto/pdpb.proto#L312), including:
