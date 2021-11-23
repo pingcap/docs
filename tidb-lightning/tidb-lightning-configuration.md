@@ -91,11 +91,11 @@ driver = "file"
 # If the URL is not specified, the TiDB server from the [tidb] section is used to
 # store the checkpoints. You should specify a different MySQL-compatible
 # database server to reduce the load of the target TiDB cluster.
-#dsn = "/tmp/tidb_lightning_checkpoint.pb"
+# dsn = "/tmp/tidb_lightning_checkpoint.pb"
 # Whether to keep the checkpoints after all data are imported. If false, the
 # checkpoints will be deleted. Keeping the checkpoints can aid debugging but
 # will leak metadata about the data source.
-#keep-after-success = false
+# keep-after-success = false
 
 [tikv-importer]
 # Delivery backend, can be "local", "importer" or "tidb".
@@ -107,9 +107,8 @@ addr = "172.16.31.10:8287"
 #  - ignore: keep the existing entry, and ignore the new entry
 #  - error: report error and quit the program
 # on-duplicate = "replace"
-# The size limit of generated SST files in the "local" backend. It is better
-# to be the same as the Region size of TiKV (96 MB by default).
-# region-split-size = 100_663_296
+#    state in the target TiDB.
+# duplicate-resolution = 'none'
 # The number of KV pairs sent in one request in the "local" backend.
 # send-kv-pairs = 32768
 # The directory of local KV sorting in the "local" backend. If the disk
@@ -125,10 +124,6 @@ addr = "172.16.31.10:8287"
 # Block size for file reading. Keep it longer than the longest string of
 # the data source.
 read-block-size = 65536 # Byte (default = 64 KB)
-
-# Minimum size (in terms of source data file) of each batch of import.
-# TiDB Lightning splits a large table into multiple data engine files according to this size.
-# batch-size = 107_374_182_400 # Byte (default = 100 GB)
 
 # The engine file needs to be imported sequentially. Due to parallel processing,
 # multiple data engines will be imported at nearly the same time, and this
@@ -157,9 +152,23 @@ no-schema = false
 #  - auto:    (default) automatically detects whether the schema is UTF-8 or
 #             GB-18030. An error is reported if the encoding is neither.
 #  - binary:  do not try to decode the schema files
-# Note that the *data* files are always parsed as binary regardless of
-# schema encoding.
 character-set = "auto"
+
+# Specifies the character set of the source data file. Lightning converts the source file from the specified character set to UTF-8 encoding when importing.
+# Currently, this configuration only specifies the character set of the CSV files with the following options supported:
+# - utf8mb4: Indicates that the source data file uses UTF-8 encoding.
+# - GB18030: Indicates that the source data file uses the GB-18030 encoding.
+# - GBK: The source data file uses GBK encoding (GBK encoding is an extension of the GB-2312 character set, also known as Code Page 936).
+# - binary: Indicates that Lightning does not convert the encoding (by default).
+# If left blank, the default value "binary" is used, that is to say, Lightning does not convert the encoding.
+# Note that Lightning does not predict about the character set of the source data file and only converts the source file and import the data based on this configuration.
+# If the value of this configuration is not the same as the actual encoding of the source data file, a failed import, data loss or data disorder might appear.
+data-character-set = "binary"
+# Specifies the replacement character in case of incompatible characters during the character set conversion of the source data file.
+# This configuration must not be duplicated with field separators, quote definers, and line breaks.
+# The default value is "\uFFFD", which is the "error" Rune or Unicode replacement character in UTF-8 encoding.
+# Changing the default value might result in potential degradation of parsing performance for the source data file.
+data-invalid-char-replace = "\uFFFD"
 
 # the input data in a "strict" format speeds up processing.
 # "strict-format = true" requires that:
@@ -176,14 +185,16 @@ strict-format = false
 # max-region-size = 268_435_456 # Byte (default = 256 MB)
 
 # Only import tables if these wildcard rules are matched. See the corresponding section for details.
-filter = ['*.*']
+filter = ['*.*', '!mysql.*', '!sys.*', '!INFORMATION_SCHEMA.*', '!PERFORMANCE_SCHEMA.*', '!METRICS_SCHEMA.*', '!INSPECTION_SCHEMA.*']
 
 # Configures how CSV files are parsed.
 [mydumper.csv]
-# Separator between fields, should be an ASCII character.
+# Separator between fields. Must not be empty.
 separator = ','
-# Quoting delimiter, can either be an ASCII character or empty string.
+# Quoting delimiter. Empty value means no quoting.
 delimiter = '"'
+# Line terminator. Empty value means both "\n" (LF) and "\r\n" (CRLF) are line terminators.
+terminator = ''
 # Whether the CSV files contain a header.
 # If `header` is true, the first line will be skipped.
 header = true
@@ -249,18 +260,35 @@ max-allowed-packet = 67_108_864
 # these as true in the production environment.
 # The execution order: Checksum -> Analyze
 [post-restore]
-# Performs `ADMIN CHECKSUM TABLE <table>` for each table to verify data integrity.
-checksum = true
+# Specifies the behavior of `ADMIN CHECKSUM TABLE <table>` for each table to verify data integrity. 
+# The following options are available:
+# - "off": Do not perform checksum.
+# - "optional": Perform admin checksum, but will ignore any error if checksum fails.
+# - "required": Perform admin checksum. If checksum fails, TiDB Lightning will exit with failure.
+# The default value is "required". Note that since v4.0.8, the default value has changed from "true" to "required". 
+# For backward compatibility, bool values "true" and "false" are also allowed for this field. 
+# "true" is equivalent to "required" and "false" is equivalent to "off".
+checksum = required
+
 # If the value is set to `true`, a level-1 compaction is performed
 # every time a table is imported.
 # The default value is `false`.
 level-1-compact = false
+
 # If the value is set to `true`, a full compaction on the whole
 # TiKV cluster is performed at the end of the import.
 # The default value is `false`.
 compact = false
-# Performs `ANALYZE TABLE <table>` for each table.
-analyze = true
+
+# Specifies the behavior of `ANALYZE TABLE <table>` for each table.
+# The following options are available:
+# - "off": Do not perform `ANALYZE TABLE <table>`.
+# - "optional": Perform `ANALYZE TABLE <table>`, but will ignore any error if checksum fails.
+# - "required": Perform `ANALYZE TABLE <table>`. If it fails, TiDB Lightning will exit with failure.
+# The default value is "optional". Note that since v4.0.8, the default value has changed from "true" to "optional". 
+# For backward compatibility, bool values "true" and "false" are also allowed for this field. 
+# "true" is equivalent to "required" and "false" is equivalent to "off".
+analyze = optional
 
 # Configures the background periodic actions.
 # Supported units: h (hour), m (minute), s (second).
@@ -363,7 +391,7 @@ min-available-ratio = 0.05
 | -L *level* | Log level: debug, info, warn, error, fatal (default = info) | `lightning.log-level` |
 | -f *rule* | [Table filter rules](/table-filter.md) (can be specified multiple times) | `mydumper.filter` |
 | --backend *backend* | [Delivery backend](/tidb-lightning/tidb-lightning-backends.md) (`local`, `importer`, or `tidb`) | `tikv-importer.backend` |
-| --log-file *file* | Log file path (default = a temporary file in `/tmp`) | `lightning.log-file` |
+| --log-file *file* | Log file path. By default, it is `/tmp/lightning.log.{timestamp}`. If set to '-', it means that the log files will be output to stdout. | `lightning.log-file` |
 | --status-addr *ip:port* | Listening address of the TiDB Lightning server | `lightning.status-port` |
 | --importer *host:port* | Address of TiKV Importer | `tikv-importer.addr` |
 | --pd-urls *host:port* | PD endpoint address | `tidb.pd-addr` |
@@ -374,8 +402,8 @@ min-available-ratio = 0.05
 | --tidb-password *password* | Password to connect to TiDB | `tidb.password` |
 | --no-schema | Ignore schema files, get schema directly from TiDB | `mydumper.no-schema` |
 | --enable-checkpoint *bool* | Whether to enable checkpoints (default = true) | `checkpoint.enable` |
-| --analyze *bool* | Analyze tables after importing (default = true) | `post-restore.analyze` |
-| --checksum *bool* | Compare checksum after importing (default = true) | `post-restore.checksum` |
+| --analyze *bool* | Analyze tables after importing (default = optional) | `post-restore.analyze` |
+| --checksum *bool* | Compare checksum after importing (default = required) | `post-restore.checksum` |
 | --check-requirements *bool* | Check cluster version compatibility before starting (default = true) | `lightning.check-requirements` |
 | --ca *file* | CA certificate path for TLS connection | `security.ca-path` |
 | --cert *file* | Certificate path for TLS connection | `security.cert-path` |

@@ -294,6 +294,13 @@ This variable is an alias for `last_insert_id`.
 >
 > Unlike in MySQL, the `max_execution_time` system variable currently works on all kinds of statements in TiDB, not only restricted to the `SELECT` statement. The precision of the timeout value is roughly 100ms. This means the statement might not be terminated in accurate milliseconds as you specify.
 
+### placement_checks
+
+- Scope: SESSION | GLOBAL
+- Default value: ON
+- This variable controls whether DDL statements validate [Placement Rules in SQL](/placement-rules-in-sql.md).
+- It is intended to be used by logical dump/restore tools to ensure that tables can always be created even if placement rules are violated. This is similar to how mysqldump writes `SET FOREIGN_KEY_CHECKS=0;` to the start of every dump file.
+
 ### plugin_dir
 
 - Scope: INSTANCE
@@ -635,6 +642,16 @@ Constraint checking is always performed in place for pessimistic transactions (d
 > - If you have enabled TiDB Binlog, enabling this variable cannot improve the performance. To improve the performance, it is recommended to use [TiCDC](/ticdc/ticdc-overview.md) instead.
 > - Enabling this parameter only means that one-phase commit becomes an optional mode of transaction commit. In fact, the most suitable mode of transaction commit is determined by TiDB.
 
+### tidb_enable_alter_placement
+
+> **Warning:**
+>
+> Currently, Placement Rules in SQL is an experimental feature. It is not recommended that you use it in production environments.
+
+- Scope: GLOBAL
+- Default value: `OFF`
+- This variable enables or disables [Placement Rules in SQL](/placement-rules-in-sql.md).
+
 ### tidb_enable_amend_pessimistic_txn <span class="version-mark">New in v4.0.7</span>
 
 - Scope: SESSION | GLOBAL
@@ -671,7 +688,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 > **Warning:**
 >
-> Currently, cascades planner is an experimental feature. It is not recommended that you use it in the production environment.
+> Currently, cascades planner is an experimental feature. It is not recommended that you use it in production environments.
 
 - Scope: SESSION | GLOBAL
 - Default value: `OFF`
@@ -714,7 +731,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 > **Warning:**
 >
-> Currently, `Fast Analyze` is an experimental feature. It is not recommended that you use it in the production environment.
+> Currently, `Fast Analyze` is an experimental feature. It is not recommended that you use it in production environments.
 
 - Scope: SESSION | GLOBAL
 - Default value: `OFF`
@@ -731,7 +748,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 > **Warning:**
 >
-> Currently, List partition and List COLUMNS partition are experimental features. It is not recommended that you use it in the production environment.
+> Currently, List partition and List COLUMNS partition are experimental features. It is not recommended that you use it in production environments.
 
 - Scope: SESSION | GLOBAL
 - Default value: `OFF`
@@ -759,6 +776,15 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Scope: SESSION | GLOBAL
 - Default value: `OFF`
 - This variable controls whether to enable concurrency for the `Apply` operator. The number of concurrencies is controlled by the `tidb_executor_concurrency` variable. The `Apply` operator processes correlated subqueries and has no concurrency by default, so the execution speed is slow. Setting this variable value to `1` can increase concurrency and speed up execution. Currently, concurrency for `Apply` is disabled by default.
+
+### tidb_enable_pseudo_for_outdated_stats <span class="version-mark">New in v5.3.0</span>
+
+- Scope: SESSION | GLOBAL
+- Default value: `ON`
+- This variable controls the behavior of the optimizer on using statistics of a table when the statistics are outdated.
+- The optimizer determines whether the statistics of a table is outdated in this way: since the last time `ANALYZE` is executed on a table to get the statistics, if 80% of the table rows are modified (the modified row count divided by the total row count), the optimizer determines that the statistics of this table is outdated. You can change this ratio using the [`pseudo-estimate-ratio`](/tidb-configuration-file.md#pseudo-estimate-ratio) configuration.
+- By default (with the variable value `ON`), when the statistics of a table is outdated, the optimizer determines that the statistics of the table is no longer reliable except for the total row count. Then, the optimizer uses the pseudo statistics. If you set the variable value to `OFF`, even if the statistics of a table are outdated, the optimizer still keeps using the statistics.
+- If the data on a table is frequently modified without executing `ANALYZE` on this table in time, to keep the execution plan stable, you can set the variable value to `OFF`.
 
 ### tidb_enable_rate_limit_action
 
@@ -818,6 +844,19 @@ Query OK, 0 rows affected (0.09 sec)
 - Scope: GLOBAL
 - Default value: `ON`
 - This variable is used to dynamically control whether the telemetry collection in TiDB is enabled. By setting the value to `OFF`, the telemetry collection is disabled. If the [`enable-telemetry`](/tidb-configuration-file.md#enable-telemetry-new-in-v402) TiDB configuration item is set to `false` on all TiDB instances, the telemetry collection is always disabled and this system variable will not take effect. See [Telemetry](/telemetry.md) for details.
+
+### tidb_enable_tso_follower_proxy <span class="version-mark">New in v5.3</span>
+
+- Scope: GLOBAL
+- Default value: `OFF`
+- This variable is used to enable the TSO Follower Proxy feature. When the value is `OFF`, TiDB only gets TSO from the PD leader. After this feature is enabled, TiDB gets TSO by evenly sending requests to all PD nodes and forwarding TSO requests through PD followers. This helps reduce the CPU pressure of PD leader.
+- Scenarios for enabling TSO Follower Proxy:
+    * Due to the high pressure of TSO requests, the CPU of the PD leader reaches a bottleneck, which causes high latency of TSO RPC requests.
+    * The TiDB cluster has many TiDB instances, and increasing the value of [`tidb_tso_client_batch_max_wait_time`](#tidb_tso_client_batch_max_wait_time-new-in-v53) cannot alleviate the high latency issue of TSO RPC requests.
+
+> **Note:**
+>
+> Suppose that the TSO RPC latency increases for reasons other than a CPU usage bottleneck of the PD leader (such as network issues). In this case, enabling the TSO Follower Proxy might increase the execution latency in TiDB and affect the QPS performance of the cluster.
 
 ### tidb_enable_vectorized_expression <span class="version-mark">New in v4.0</span>
 
@@ -957,7 +996,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 > **Warning:**
 >
-> Currently, Green GC is an experimental feature. It is not recommended that you use it in the production environment.
+> Currently, Green GC is an experimental feature. It is not recommended that you use it in production environments.
 
 - Scope: GLOBAL
 - Default value: `LEGACY`
@@ -1090,6 +1129,12 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Scope: SESSION
 - Default value: `tikv,tiflash,tidb`
 - This variable is used to set the storage engine list that TiDB can use when reading data.
+
+### tidb_log_file_max_days <span class="version-mark">New in v5.3</span>
+
+- Scope: SESSION
+- Default value: `0`
+- This variable is used to adjust the maximum days of logger on the current TiDB instance. Its value defaults to the value of the [`max-days`](/tidb-configuration-file.md#max-days) configuration in the configuration file. Changing the variable value only affects the current TiDB instance. After TiDB is restarted, the variable value is reset and the configuration value is not affected.
 
 ### tidb_low_resolution_tso
 
@@ -1316,7 +1361,7 @@ explain select * from t where age=5;
 
 > **Warning:**
 
-> Currently, the dynamic pruning mode for partitioned tables is an experimental feature. It is not recommended that you use it in the production environment.
+> Currently, the dynamic pruning mode for partitioned tables is an experimental feature. It is not recommended that you use it in production environments.
 
 - Scope: SESSION | GLOBAL
 - Default value: `static`
@@ -1500,6 +1545,32 @@ SET tidb_slow_log_threshold = 200;
 - Range: `[0, 9223372036854775807]`
 - This variable is used to limit the maximum number of requests TiDB can send to TiKV at the same time. 0 means no limit.
 
+### tidb_tmp_table_max_size <span class="version-mark">New in v5.3.0</span>
+
+- Scope: SESSION | GLOBAL
+- Default value: `67108864`
+- Range: `[1048576, 137438953472]`
+- Unit: Bytes
+- This variable is used to set the maximum size of a single [temporary table](/temporary-tables.md). Any temporary table with a size larger than this variable value causes error.
+
+### tidb_tso_client_batch_max_wait_time <span class="version-mark">New in v5.3</span>
+
+- Scope: GLOBAL
+- Default value: `0`
+- Range: `[0, 10]`
+- Unit: Milliseconds
+- This variable is used to set the maximum waiting time for a batch operation when TiDB requests TSO from PD. The default value is `0`, which means no extra waiting time.
+- When obtaining TSO requests from PD each time, PD Client, used by TiDB, collects as many TSO requests received at the same time as possible. Then, PD Client merges the collected requests in batch into one RPC request and sends the request to PD. This helps reduce the pressure on PD.
+- After setting this variable to a value greater than `0`, TiDB waits for the maximum duration of this value before the end of each batch merge. This is to collect more TSO requests and improve the effect of batch operations.
+- Scenarios for increasing the value of this variable:
+    * Due to the high pressure of TSO requests, the CPU of the PD leader reaches a bottleneck, which causes high latency of TSO RPC requests.
+    * There are not many TiDB instances in the cluster, but every TiDB instance is in high concurrency.
+- It is recommended to set this variable to a value as small as possible.
+
+> **Notes:**
+>
+> Suppose that the TSO RPC latency increases for reasons other than a CPU usage bottleneck of the PD leader (such as network issues). In this case, increasing the value of `tidb_tso_client_batch_max_wait_time` might increase the execution latency in TiDB and affect the QPS performance of the cluster.
+
 ### tidb_txn_mode
 
 - Scope: SESSION | GLOBAL
@@ -1557,14 +1628,6 @@ SET tidb_slow_log_threshold = 200;
 - Scope: SESSION
 - Default value: ""
 - A non-empty value of this variable indicates the UNIX epoch that is used as the timestamp for `CURRENT_TIMESTAMP()`, `NOW()`, and other functions. This variable might be used in data restore or replication.
-
-### tmp_table_size
-
-- Scope: SESSION | GLOBAL
-- Default value: `16777216`
-- Range: `[1024, 9223372036854775807]`
-- Unit: Bytes
-- Indicates the maximum size of a temporary table.
 
 ### transaction_isolation
 

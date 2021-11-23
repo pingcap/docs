@@ -10,6 +10,7 @@ This is a list of TiDB adopters in various industries.
 
 | Company | Industry | Case studies |
 | :--- | :--- | :--- |
+|[SHAREit Group](https://www.crunchbase.com/organization/shareit-2)|Internet|[English](https://pingcap.com/case-studies/why-shareit-selects-tikv-for-data-storage-for-its-2.4-billion-user-business); [Chinese](https://pingcap.com/zh/blog/devcon-2021-shareit)|
 |[China Telecom Bestpay](https://www.crunchbase.com/organization/orange-finance)|Mobile Payment|[English](https://pingcap.com/case-studies/how-we-process-data-five-times-more-efficiently-using-a-scale-out-mysql-alternative/); [Chinese](https://pingcap.com/cases-cn/user-case-bestpay/)|
 |[VNG](https://en.wikipedia.org/wiki/VNG_Corporation)|Mobile Payment|English [#1](https://pingcap.com/case-studies/tidb-at-zalopay-infrastructure-lesson-learned/), [#2](https://pingcap.com/case-studies/zalopay-using-a-scale-out-mysql-alternative-to-serve-millions-of-users)|
 |[Ping++](https://www.crunchbase.com/organization/ping-5)|Mobile Payment||
@@ -25,7 +26,6 @@ This is a list of TiDB adopters in various industries.
 |[Meituan](https://www.crunchbase.com/organization/meituan)|E-commerce|English [#1](https://pingcap.com/case-studies/migrating-from-mysql-to-a-scale-out-database-to-serve-our-290-million-monthly-users), [#2](https://pingcap.com/case-studies/how-we-use-a-mysql-alternative-to-avoid-sharding-and-provide-strong-consistency); [Chinese](https://pingcap.com/zh/case/user-case-meituandianping)|
 |[Happigo.com](https://www.crunchbase.com/organization/happigo-com)|E-commerce||
 |[Yimutian](https://www.crunchbase.com/organization/yimutian)|E-commerce||
-|[Youju Tech](https://nn.yjyz.com/)|E-commerce||
 |[Maizuo](https://www.crunchbase.com/organization/maizhuo)|E-commerce||
 |[Mogujie](https://www.crunchbase.com/organization/mogujie)|E-commerce||
 |[Zhihu](https://en.wikipedia.org/wiki/Zhihu)|Knowledge Sharing|English [#1](https://pingcap.com/case-studies/lesson-learned-from-queries-over-1.3-trillion-rows-of-data-within-milliseconds-of-response-time-at-zhihu/), [#2](https://pingcap.com/case-studies/horizontally-scaling-hive-metastore-database-by-migrating-from-mysql-to-tidb), [#3](https://pingcap.com/case-studies/boosting-big-data-performance-by-combining-tidb-with-hive-and-hdfs)|
