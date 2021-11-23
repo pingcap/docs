@@ -5,7 +5,7 @@ summary: Learn how to use the table attribute feature of TiDB.
 
 # Table Attributes
 
-Table attributes feature is introduced in TiDB v5.3.0. Using this feature, you can add specific attributes to a table or partition to perform the operations corresponding to the attributes. For example, you can use table attributes to control the Region merge behavior.
+The Table Attributes feature is introduced in TiDB v5.3.0. Using this feature, you can add specific attributes to a table or partition to perform the operations corresponding to the attributes. For example, you can use table attributes to control the Region merge behavior.
 
 > **Note:**
 >
@@ -57,11 +57,13 @@ alter table t partition p attributes[=]'key=value1';
 
 In this case, `key=value1` is the attribute that actually takes effect on the `p1` partition.
 
-## Control the Region merge bahavior using table attributes
+## Control the Region merge behavior using table attributes
 
 ### User scenarios
 
 If there is a write hotspot or read hotspot, you can use table attributes to control the Region merge behavior. You can first add the `merge_option` attribute to a table or partition and then set its value to `deny`. The two scenarios are as follows.
+
+This is only part of how to deal with hotspots, see [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md) for more information.
 
 #### Write hotspot on a newly created table or partition
 
