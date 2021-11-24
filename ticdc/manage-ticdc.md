@@ -101,9 +101,9 @@ If you deploy TiCDC using TiUP, replace `cdc cli` in the following commands with
 
 ### Manage replication tasks (`changefeed`)
 
-<<<<<<< HEAD
-=======
 #### State transfer of replication tasks
+
+This feature is available in TiDB v5.1.2 and later versions.
 
 The state of a replication task represents the running status of the replication task. During the running of TiCDC, replication tasks might fail with errors, be manually paused, resumed, or reach the specified `TargetTs`. These behaviors can lead to the change of the replication task state. This section describes the states of TiCDC replication tasks and the transfer relationships between states.
 
@@ -128,7 +128,6 @@ The numbers in the above state transfer diagram are described as follows.
 - ⑦ `changefeed` suspended longer than the duration specified by `gc-ttl`, and cannot be resumed.
 - ⑧ `changefeed` experienced an unrecoverable error when trying to execute automatic recovery.
 
->>>>>>> 7a4df682b (ticdc: add description about gc-ttl (#6835))
 #### Create a replication task
 
 Execute the following commands to create a replication task:
