@@ -88,7 +88,7 @@ Suppose that in a read-only scenario, you try to reduce the periodic read hotspo
 + Reset attributes of a table:
 
     ```sql
-    ALTER TABLE t ATTRIBUTES[=]default；
+    ALTER TABLE t ATTRIBUTES[=]DEFAULT；
     ```
 
 + Prevent the Regions of a partition from merging:
