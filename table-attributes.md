@@ -19,31 +19,31 @@ The table attribute is in the form of `key=value`. Multiple attributes are separ
 + Set attributes for a table or partition:
 
     ```sql
-    alter table t [partition p ]attributes[=]'key=value[, key1=value1...]';
+    ALTER TABLE t [PARTITION p ]ATTRIBUTES[=]'key=value[, key1=value1...]';
     ```
 
 + Reset attributes for a table or partition:
 
     ```sql
-    alter table t [partition p ]attributes[=]default;
+    ALTER TABLE t [PARTITION p ]ATTRIBUTES[=]default;
     ```
 
 + See the attributes of all tables and partitions:
 
     ```sql
-    select * from information_schema.attributes;
+    SELECT * FROM information_schema.attributes;
     ```
 
 + See the attribute configured to a table or partition:
 
     ```sql
-    select * from information_schema.attributes where id='schema/t[/p]';
+    SELECT * FROM information_schema.attributes WHERE id='schema/t[/p]';
     ```
 
 + See all tables and partitions that have a specific attribute:
 
     ```sql
-    select * from information_schema.attributes where attributes like '%key%';
+    SELECT * FROM information_schema.attributes WHERE attributes LIKE '%key%';
     ```
 
 ## Attribute override rules
@@ -51,8 +51,8 @@ The table attribute is in the form of `key=value`. Multiple attributes are separ
 The attribute configured to a table takes effect on all partitions of the table. However, there is one exception: If the table and partition are configured with the same attribute but different attribute values, the partition attribute overrides the table attribute. For example, suppose that the table `t` is configured with the `key=value` attribute, and the partition `p` is configured with `key=value1`.
 
 ```sql
-alter table t attributes[=]'key=value';
-alter table t partition p attributes[=]'key=value1';
+ALTER TABLE t ATTRIBUTES[=]'key=value';
+ALTER TABLE t PARTITION p ATTRIBUTES[=]'key=value1';
 ```
 
 In this case, `key=value1` is the attribute that actually takes effect on the `p1` partition.
@@ -78,44 +78,44 @@ Suppose that in a read-only scenario, you try to reduce the periodic read hotspo
 + Prevent the Regions of a table from merging:
 
     ```sql
-    alter table t attributes[=]'merge_option=deny';
+    ALTER TABLE t ATTRIBUTES[=]'merge_option=deny';
     ```
 
 + Allow merging Regions belonging to a table:
 
     ```sql
-    alter table t attributes[=]'merge_option=allow';
+    ALTER TABLE t ATTRIBUTES[=]'merge_option=allow';
     ```
 
 + Reset attributes of a table:
 
     ```sql
-    alter table t attributes[=]default；
+    ALTER TABLE t ATTRIBUTES[=]default；
     ```
 
 + Prevent the Regions of a partition from merging:
 
     ```sql
-    alter table t partition p attributes[=]'merge_option=deny';
+    ALTER TABLE t PARTITION p attributes[=]'merge_option=deny';
     ```
 
 + Allow merging Regions belonging to a partition:
 
     ```sql
-    alter table t partition p attributes[=]'merge_option=allow';
+    ALTER TABLE t PARTITION p attributes[=]'merge_option=allow';
     ```
 
 + See all tables or partitions configured the `merge_option` attribution:
 
     ```sql
-    select * from information_schema.attributes where attributes like '%merge_option%';
+    SELECT * FROM information_schema.attributes WHERE attributes LIKE '%merge_option%';
     ```
 
 ### Attribute override rules
 
 ```sql
-alter table t attributes[=]'merge_option=deny';
-alter table t partition p attributes[=]'merge_option=allow';
+ALTER TABLE t ATTRIBUTES[=]'merge_option=deny';
+ALTER TABLE t PARTITION p ATTRIBUTES[=]'merge_option=allow';
 ```
 
 When the above two attributes are configured at the same time, the Regions belonging to the partition `p` can actually be merged. When the attribute of the partition is reset, the partition `p` inherits the attribute from the table `t`, and the Regions cannot be merged.
