@@ -73,7 +73,6 @@ If you deploy TiCDC using TiUP, replace `cdc cli` in the following commands with
 
 ### Manage replication tasks (`changefeed`)
 
-
 #### State transfer of replication tasks
 
 This feature is available in TiDB v4.0.16 and later versions.
