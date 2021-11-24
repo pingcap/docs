@@ -65,7 +65,7 @@ Download [Dumpling](/dumpling-overview.md) from the links below:
 
 > **Note:**
 >
-> The `{version}` in the download link is the version number of Dumpling. For example, the link for downloading the `v5.3.0` version of Dumpling is `https://download.pingcap.org/tidb-toolkit-v5.3.0-linux-amd64.tar.gz`. You can view the currently released versions in [Dumpling Releases](https://github.com/pingcap/dumpling/releases).
+> The `{version}` in the download link is the version number of Dumpling. For example, the link for downloading the `v5.3.0` version of Dumpling is `https://download.pingcap.org/tidb-toolkit-v5.3.0-linux-amd64.tar.gz`. You can view the currently released versions in [TiDB Releases](https://github.com/pingcap/tidb/releases).
 >
 > Dumpling supports arm64 linux. You can replace `amd64` in the download link with `arm64`, which means the `arm64` version of Dumpling.
 
