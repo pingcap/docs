@@ -817,4 +817,3 @@ In this command:
 - `tmp-dir`: Specifies the temporary directory for downloading TiCDC incremental data backup files.
 - `storage`: Specifies the address for storing the TiCDC incremental data backup files, either an Amazon S3 storage or an NFS directory.
 - `sink-uri`: Specifies the secondary cluster address to restore the data to. Scheme can only be `mysql`.
->>>>>>> bcbbcc562 (cdc:modify descriptions related to Unified Sorter and data_dir (#6834))
