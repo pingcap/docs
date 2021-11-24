@@ -406,7 +406,7 @@ This variable is an alias for `last_insert_id`.
 
 - Scope: SESSION | GLOBAL
 - Default value: ""
-- This variable is used to specify a list of storage engines that might fall back to TiKV. If the execution of a SQL statement fails due to a failure of the specified storage engine in the list, TiDB retries executing this SQL statement with TiKV. This variable can be set to "" or "tiflash". When this variable is set to "tiflash", if the execution of a SQL statement fails due to a failure of TiFlash, TiDB retries executing this SQL statement with TiKV.
+- This variable is used to specify a list of storage engines that might fall back to TiKV. If the execution of a SQL statement fails due to a failure of the specified storage engine in the list, TiDB retries executing this SQL statement with TiKV. This variable can be set to "" or "tiflash". When this variable is set to "tiflash", if TiFlash returns a timeout error (error code: ErrTiFlashServerTimeout), TiDB retries executing this SQL statement with TiKV.
 
 ### tidb_allow_function_for_expression_index <span class="version-mark">New in v5.2.0</span>
 
@@ -1297,19 +1297,19 @@ mysql> desc select count(distinct a) from test.t;
 - For example, after you enable this optimization rule, the subquery is converted as follows:
 
     ```sql
-    select * from t where t.a in (select aa from t1)
+    select * from t where t.a in (select aa from t1);
     ```
 
     The subquery is converted to join as follows:
 
     ```sql
-    select * from t, (select aa from t1 group by aa) tmp_t where t.a = tmp_t.aa
+    select t.* from t, (select aa from t1 group by aa) tmp_t where t.a = tmp_t.aa;
     ```
 
     If `t1` is limited to be `unique` and `not null` in the `aa` column. You can use the following statement, without aggregation.
 
     ```sql
-    select * from t, t1 where t.a=t1.a
+    select t.* from t, t1 where t.a=t1.aa;
     ```
 
 ### tidb_opt_limit_push_down_threshold

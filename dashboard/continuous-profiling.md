@@ -1,7 +1,6 @@
 ---
 title: TiDB Dashboard Continuous Profiling
 summary: Learn how to enable Continuous Profiling and observe system conditions by using this feature.
-aliases: ['/docs/dev/dashboard/continuous profiling/']
 ---
 
 # TiDB Dashboard Instance Profiling - Continuous Profiling
