@@ -55,7 +55,7 @@ sync-diff-inspector needs to obtain the information of table schema and to query
 
 The configuration of sync-diff-inspector consists of the following parts:
 
-- `Global config`: General configurations, including number of threads to check, whether to export SQL statement to fix inconsistent tables, whether to campare the data and so on.
+- `Global config`: General configurations, such as number of threads to check, whether to export SQL statement to fix inconsistent tables, and whether to campare the data.
 - `Databases config`: Configures the instances of the upstream and downstream databases.
 - `Routes`: Rules for upstream multiple schema names to match downstream single schema names **(optional)**.
 - `Task config`: Configures the tables for checking. If some tables have a certain mapping relationship between the upstream and downstream databases or have some special requirements, you must configure these tables.
