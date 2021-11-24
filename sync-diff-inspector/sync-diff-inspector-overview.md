@@ -59,7 +59,7 @@ The configuration of sync-diff-inspector consists of the following parts:
 - `Databases config`: Configures the instances of the upstream and downstream databases.
 - `Routes`: Rules for upstream multiple schema names to match downstream single schema names **(optional)**.
 - `Task config`: Configures the tables for checking. If some tables have a certain mapping relationship between the upstream and downstream databases or have some special requirements, you must configure these tables.
-- `Table config`: Special configurations for specific tables, including specified ranges, columns to be ignored and so on **(optional)**.
+- `Table config`: Special configurations for specific tables, such as specified ranges and columns to be ignored **(optional)**.
 
 Below is the description of a complete configuration file:
 
@@ -80,7 +80,7 @@ check-struct-only = false
 
 ######################### Datasource config #########################
 [data-sources]
-[data-sources.mysql1] # mysql1 is the only custom ID for the database instance. It is used for following `task.source-instances/task.target-instance` configuration.
+[data-sources.mysql1] # mysql1 is the only custom ID for the database instance. It is used for the following `task.source-instances/task.target-instance` configuration.
     host = "127.0.0.1"
     port = 3306
     user = "root"
