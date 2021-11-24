@@ -73,6 +73,34 @@ If you deploy TiCDC using TiUP, replace `cdc cli` in the following commands with
 
 ### Manage replication tasks (`changefeed`)
 
+<<<<<<< HEAD
+=======
+#### State transfer of replication tasks
+
+The state of a replication task represents the running status of the replication task. During the running of TiCDC, replication tasks might fail with errors, be manually paused, resumed, or reach the specified `TargetTs`. These behaviors can lead to the change of the replication task state. This section describes the states of TiCDC replication tasks and the transfer relationships between states.
+
+![TiCDC state transfer](/media/ticdc-state-transfer.png)
+
+The states in the above state transfer diagram are described as follows:
+
+- `Normal`: The replication task runs normally and the checkpoint-ts proceeds normally.
+- `Stopped`: The replication task is stopped, because the user manually pauses the changefeed. The changefeed in this state blocks GC operations.
+- `Error`: The replication task returns an error. The replication cannot continue due to some recoverable errors. The changefeed in this state keeps trying to resume until the state transfers to `Normal`. The changefeed in this state blocks GC operations.
+- `Finished`: The replication task is finished and has reached the preset `TargetTs`. The changefeed in this state does not block GC operations.
+- `Failed`: The replication task fails. Due to some unrecoverable errors, the replication task cannot resume and cannot be recovered. The changefeed in this state does not block GC operations.
+
+The numbers in the above state transfer diagram are described as follows.
+
+- ① Execute the `changefeed pause` command
+- ② Execute the `changefeed resume` command to resume the replication task
+- ③ Recoverable errors occur during the `changefeed` operation, and the operation is resumed automatically.
+- ④ Execute the `changefeed resume` command to resume the replication task
+- ⑤ Recoverable errors occur during the `changefeed` operation
+- ⑥ `changefeed` has reached the preset `TargetTs`, and the replication is automatically stopped.
+- ⑦ `changefeed` suspended longer than the duration specified by `gc-ttl`, and cannot be resumed.
+- ⑧ `changefeed` experienced an unrecoverable error when trying to execute automatic recovery.
+
+>>>>>>> 7a4df682b (ticdc: add description about gc-ttl (#6835))
 #### Create a replication task
 
 Execute the following commands to create a replication task:
