@@ -112,13 +112,7 @@ Take the `/dev/nvme0n1` data disk as an example:
 
 ## Check and disable system swap
 
-This section describes how to disable swap.
-
-TiDB requires sufficient memory space for operation. It is not recommended to use swap as a buffer for insufficient memory, which might reduce performance. Therefore, it is recommended to disable the system swap permanently.
-
-Do not disable the system swap by executing `swapoff -a`, or this setting will be invalid after the machine is restarted.
-
-To disable the system swap, execute the following command:
+TiDB requires sufficient memory space for operation. Using swap as a buffer when memory is insufficient might deteriorate performance. Therefore, it is recommended to disable the system swap permanently by executing the following command:
 
 {{< copyable "shell-regular" >}}
 
@@ -127,6 +121,12 @@ echo "vm.swappiness = 0">> /etc/sysctl.conf
 swapoff -a && swapon -a
 sysctl -p
 ```
+
+**Note:**
+
+> - Executing `swapoff -a` and then `swapon -a` is to refresh swap by dumping data to memory and cleaning up swap. If you drop `swapon -a` and execute only `swapoff -a`, swap will be enabled again after you restart the system.
+>
+> - `sysctl -p` is executed to validate the configuration without restarting the system.
 
 ## Check and stop the firewall service of target machines
 
