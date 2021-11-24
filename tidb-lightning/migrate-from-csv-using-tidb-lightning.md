@@ -52,6 +52,7 @@ trim-last-separator = false
 In all string fields such as `separator` and `delimiter`, if the input involves special characters, you can use backslash escape sequence to represent them in a *double-quoted* string (`"…"`). For example, `separator = "\u001f"` means using the ASCII character 0x1F as separator.
 
 Additionally, you can use *single-quoted* strings (`'…'`) to suppress backslash escaping. For example, `separator = '\t'` means using the two-character string: a backslash followed by the letter "t", as the separator.
+
 See the [TOML v1.0.0 specification] for details.
 
 [`LOAD DATA`]: https://dev.mysql.com/doc/refman/8.0/en/load-data.html
