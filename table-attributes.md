@@ -11,6 +11,7 @@ The Table Attributes feature is introduced in TiDB v5.3.0. Using this feature, y
 >
 > - Currently, TiDB only supports adding the `merge_option` attribute to a table or partition to control the Region merge behavior.
 > - When you use TiDB Binlog or TiCDC to perform replication or use BR to perform incremental backup, the replication or backup operations skip the DDL statement that sets table attributes. To use table attributes in the downstream or in the backup cluster, you need to manually execute the DDL statement in the downstream or in the backup cluster.
+> - The `merge_option` attribute is only part of how to deal with hotspots. For more information, refer to [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md).
 
 ## Usage
 
@@ -62,8 +63,6 @@ In this case, `key=value1` is the attribute that actually takes effect on the `p
 ### User scenarios
 
 If there is a write hotspot or read hotspot, you can use table attributes to control the Region merge behavior. You can first add the `merge_option` attribute to a table or partition and then set its value to `deny`. The two scenarios are as follows.
-
-This is only part of how to deal with hotspots. For more information, refer to [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md). 
 
 #### Write hotspot on a newly created table or partition
 
