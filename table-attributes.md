@@ -106,7 +106,7 @@ Suppose that in a read-only scenario, you try to reduce the periodic read hotspo
 + See all tables or partitions configured the `merge_option` attribution:
 
     ```sql
-    SELECT * FROM information_schema.attributes WHERE attributes LIKE '%merge_option%';
+    SELECT * FROM information_schema.attributes WHERE ATTRIBUTES LIKE '%merge_option%';
     ```
 
 ### Attribute override rules
