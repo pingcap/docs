@@ -119,10 +119,12 @@ The numbers in the above state transfer diagram are described as follows.
 
 - ① Execute the `changefeed pause` command
 - ② Execute the `changefeed resume` command to resume the replication task
-- ③ Recoverable errors occur during the `changefeed` operation
+- ③ Recoverable errors occur during the `changefeed` operation, and the operation is resumed automatically.
 - ④ Execute the `changefeed resume` command to resume the replication task
 - ⑤ Recoverable errors occur during the `changefeed` operation
-- ⑥ The replication task has reached the preset `TargetTs`, and the replication is automatically stopped.
+- ⑥ `changefeed` has reached the preset `TargetTs`, and the replication is automatically stopped.
+- ⑦ `changefeed` suspended longer than the duration specified by `gc-ttl`, and cannot be resumed.
+- ⑧ `changefeed` experienced an unrecoverable error when trying to execute automatic recovery.
 
 #### Create a replication task
 
@@ -195,7 +197,7 @@ Sample configuration:
 {{< copyable "shell-regular" >}}
 
 ```shell
---sink-uri="kafka://127.0.0.1:9092/cdc-test?kafka-version=2.4.0&partition-num=6&max-message-bytes=67108864&replication-factor=1"
+--sink-uri="kafka://127.0.0.1:9092/topic-name?kafka-version=2.4.0&partition-num=6&max-message-bytes=67108864&replication-factor=1"
 ```
 
 The following are descriptions of parameters and parameter values that can be configured for the sink URI with `kafka`:
@@ -204,14 +206,14 @@ The following are descriptions of parameters and parameter values that can be co
 | :------------------ | :------------------------------------------------------------ |
 | `127.0.0.1`          | The IP address of the downstream Kafka services                                 |
 | `9092`               | The port for the downstream Kafka                                          |
-| `cdc-test`           | The name of the Kafka topic                                      |
-| `kafka-version`      | The version of the downstream Kafka (optional, `2.4.0` by default. Currently, the earliest supported Kafka version is `0.11.0.2` and the latest one is `2.7.0`. This value needs to be consistent with the actual version of the downstream Kafka.)                      |
-| `kafka-client-id`    | Specifies the Kafka client ID of the replication task (optional, `TiCDC_sarama_producer_replication ID` by default) |
-| `partition-num`      | The number of the downstream Kafka partitions (Optional. The value must be **no greater than** the actual number of partitions. If you do not configure this parameter, the partition number is obtained automatically.) |
+| `topic-name`         | Variable. The name of the Kafka topic                                      |
+| `kafka-version`      | The version of the downstream Kafka. Optional, `2.4.0` by default. Currently, the earliest supported Kafka version is `0.11.0.2` and the latest one is `2.7.0`. This value needs to be consistent with the actual version of the downstream Kafka.                      |
+| `kafka-client-id`    | Specifies the Kafka client ID of the replication task. Optional. `TiCDC_sarama_producer_replication ID` by default. |
+| `partition-num`      | The number of the downstream Kafka partitions. Optional. The value must be **no greater than** the actual number of partitions. If you do not configure this parameter, the partition number is obtained automatically. |
 | `max-message-bytes`  | The maximum size of data that is sent to Kafka broker each time (optional, `64MB` by default) |
 | `replication-factor` | The number of Kafka message replicas that can be saved (optional, `1` by default)                       |
 | `protocol` | The protocol with which messages are output to Kafka. The value options are `default`, `canal`, `avro`, and `maxwell` (`default` by default)    |
-| `max-batch-size` | New in v4.0.9. If the message protocol supports outputting multiple data changes to one Kafka message, this parameter specifies the maximum number of data changes in one Kafka message. It currently takes effect only when Kafka's `protocol` is `default`. (optional, `4096` by default) |
+| `max-batch-size` | New in v4.0.9. If the message protocol supports outputting multiple data changes to one Kafka message, this parameter specifies the maximum number of data changes in one Kafka message. It currently takes effect only when Kafka's `protocol` is `default`. It's optional and `16` by default. |
 | `ca` | The path of the CA certificate file needed to connect to the downstream Kafka instance (optional)  |
 | `cert` | The path of the certificate file needed to connect to the downstream Kafka instance (optional) |
 | `key` | The path of the certificate key file needed to connect to the downstream Kafka instance (optional) |
@@ -234,7 +236,7 @@ Sample configuration:
 {{< copyable "shell-regular" >}}
 
 ```shell
---sink-uri="kafka://127.0.0.1:9092/cdc-test?kafka-version=2.4.0&protocol=avro&partition-num=6&max-message-bytes=67108864&replication-factor=1"
+--sink-uri="kafka://127.0.0.1:9092/topic-name?kafka-version=2.4.0&protocol=avro&partition-num=6&max-message-bytes=67108864&replication-factor=1"
 --opts registry="http://127.0.0.1:8081"
 ```
 
@@ -249,7 +251,7 @@ Sample configuration:
 {{< copyable "shell-regular" >}}
 
 ```shell
---sink-uri="pulsar://127.0.0.1:6650/cdc-test?connectionTimeout=2s"
+--sink-uri="pulsar://127.0.0.1:6650/topic-name?connectionTimeout=2s"
 ```
 
 The following are descriptions of parameters that can be configured for the sink URI with `pulsar`:
@@ -273,26 +275,6 @@ The following are descriptions of parameters that can be configured for the sink
 | `properties.*` | The customized properties added to the Pulsar producer in TiCDC (optional). For example, `properties.location=Hangzhou`. |
 
 For more parameters of Pulsar, see [pulsar-client-go ClientOptions](https://godoc.org/github.com/apache/pulsar-client-go/pulsar#ClientOptions) and [pulsar-client-go ProducerOptions](https://godoc.org/github.com/apache/pulsar-client-go/pulsar#ProducerOptions).
-
-#### Configure sink URI with cdclog
-
-The `cdclog` files (files written by TiCDC on the local filesystem or on the Amazon S3-compatible storage) can be used together with Backup & Restore (BR) to provide point-in-time (PITR) recovery. See [Point in Time recovery (experimental feature)](/br/use-br-command-line-tool.md#point-in-time-recovery-experimental-feature) for details.
-
-The following command creates a changefeed that will write cdclog files locally to the `/data/cdc/log` directory.
-
-{{< copyable "shell-regular" >}}
-
-```shell
-cdc cli changefeed create --pd=http://10.0.10.25:2379 --sink-uri="local:///data/cdclog" --config changefeed.toml
-```
-
-The following command creates a changefeed that will write cdclog files to an external S3 storage in the `logbucket` bucket with a subdirectory of `test`. The endpoint is set in the URI, which is needed if you are using an S3-compatible storage other than Amazon S3.
-
-{{< copyable "shell-regular" >}}
-
-```shell
-cdc cli changefeed create --pd=http://10.0.10.25:2379 --sink-uri="s3://logbucket/test?endpoint=http://$S3_ENDPOINT/" --config changefeed.toml
-```
 
 #### Use the task configuration file
 

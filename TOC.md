@@ -1,9 +1,5 @@
-# TiDB Documentation
-
 <!-- markdownlint-disable MD007 -->
-<!-- markdownlint-disable MD032 -->
-
-## Documentation List
+<!-- markdownlint-disable MD041 -->
 
 + About TiDB
   + [TiDB Introduction](/overview.md)
@@ -208,6 +204,7 @@
     + [Maintain](/ticdc/manage-ticdc.md)
     + [Troubleshoot](/ticdc/troubleshoot-ticdc.md)
     + [Monitor](/ticdc/monitor-ticdc.md)
+    + [Alert Rules](/ticdc/ticdc-alert-rules.md)
     + [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
     + [Integrate TiDB with Confluent Platform](/ticdc/integrate-confluent-using-ticdc.md)
     + [Glossary](/ticdc/ticdc-glossary.md)

@@ -1,9 +1,11 @@
 ---
-title: TiDB Lightning CSV Support
+title: TiDB Lightning CSV Support and Restrictions
 summary: Learn how to import CSV files via TiDB Lightning.
 ---
 
-# TiDB Lightning CSV Support
+# TiDB Lightning CSV Support and Restrictions
+
+This document describes how to migrate data from CSV files to TiDB using TiDB Lightning. For information about how to generate CSV files from MySQL, see [Export to CSV files using Dumpling](/dumpling-overview.md#export-to-csv-files).
 
 TiDB Lightning supports reading CSV (comma-separated values) data source, as well as other delimited format such as TSV (tab-separated values).
 
@@ -28,7 +30,7 @@ The CSV format can be configured in `tidb-lightning.toml` under the `[mydumper.c
 
 ```toml
 [mydumper.csv]
-# Separator between fields. Must not be empty.
+# Separator between fields. Must not be empty. It is not recommended to use the default ','. It is recommended to use '\|+\|' or other uncommon character combinations.
 separator = ','
 # Quoting delimiter. Empty value means no quoting.
 delimiter = '"'
@@ -168,7 +170,7 @@ The default setting is already tuned for CSV following RFC 4180.
 
 ```toml
 [mydumper.csv]
-separator = ','
+separator = ',' # It is not recommended to use the default ‘,’. It is recommended to use ‘\|+\|‘ or other uncommon character combinations.
 delimiter = '"'
 header = true
 not-null = false
