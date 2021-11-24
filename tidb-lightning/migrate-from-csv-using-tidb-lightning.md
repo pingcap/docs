@@ -30,9 +30,9 @@ The CSV format can be configured in `tidb-lightning.toml` under the `[mydumper.c
 
 ```toml
 [mydumper.csv]
-# Separator between fields. Must be ASCII characters. It is not recommended to use the default ','. It is recommended to use '\|+\|' or other uncommon character combinations.
+# Separator between fields. Must not be empty. It is not recommended to use the default ','. It is recommended to use '\|+\|' or other uncommon character combinations.
 separator = ','
-# Quoting delimiter, can either be an ASCII character or empty string.
+# Quoting delimiter. Empty value means no quoting.
 delimiter = '"'
 # Whether the CSV files contain a header.
 # If `header` is true, the first line will be skipped.
@@ -49,16 +49,25 @@ backslash-escape = true
 trim-last-separator = false
 ```
 
+In all string fields such as `separator`and `delimiter`, if the input involves special characters, you can use backslash escape sequence to represent them in a *double-quoted* string (`"…"`). For example, `separator = "\u001f"` means using the ASCII character 0x1F as separator.
+
+Additionally, you can use *single-quoted* strings (`'…'`) to suppress backslash escaping. For example, `separator = '\t'` means using the two-character string: a backslash followed by the letter "t", as the separator.
+
+See the [TOML v1.0.0 specification] for details.
+
 [`LOAD DATA`]: https://dev.mysql.com/doc/refman/8.0/en/load-data.html
+
+[TOML v1.0.0 specification]: https://toml.io/en/v1.0.0#string
 
 ### `separator`
 
 - Defines the field separator.
-- Must be a single ASCII character.
+- Can be multiple characters, but must not be empty.
 - Common values:
 
-    * `','` for CSV
-    * `"\t"` for TSV
+    * `','` for CSV (comma-separated values)
+    * `"\t"` for TSV (tab-separated values)
+    * `"\u0001"` to use the ASCII character 0x01 as separator
 
 - Corresponds to the `FIELDS TERMINATED BY` option in the LOAD DATA statement.
 
@@ -134,8 +143,7 @@ TiDB Lightning does not support every option supported by the `LOAD DATA` statem
 
 * The line terminator must only be CR (`\r`), LF (`\n`) or CRLF (`\r\n`), which means `LINES TERMINATED BY` is not customizable.
 * There cannot be line prefixes (`LINES STARTING BY`).
-* The header cannot be simply skipped (`IGNORE n LINES`), it must be valid column names if present.
-* Delimiters and separators can only be a single ASCII character.
+* The header cannot be simply skipped (`IGNORE n LINES`). It must be valid column names if present.
 
 ## Strict format
 
@@ -148,7 +156,7 @@ This can be fixed by splitting the CSV into multiple files first. For the generi
 strict-format = true
 ```
 
-Currently, a strict CSV file means every field occupies only a single line. In the other words, one of the following must be true:
+Currently, a strict CSV file means every field occupies only a single line. In other words, one of the following must be true:
 
 * Delimiter is empty, or
 * Every field does not contain CR (`\r`) or LF (`\n`).

@@ -175,13 +175,13 @@ strict-format = false
 # max-region-size = 268_435_456 # Byte (default = 256 MB)
 
 # Only import tables if these wildcard rules are matched. See the corresponding section for details.
-filter = ['*.*']
+filter = ['*.*', '!mysql.*', '!sys.*', '!INFORMATION_SCHEMA.*', '!PERFORMANCE_SCHEMA.*', '!METRICS_SCHEMA.*', '!INSPECTION_SCHEMA.*']
 
 # Configures how CSV files are parsed.
 [mydumper.csv]
-# Separator between fields, should be an ASCII character.
+# Separator between fields. Must not be empty.
 separator = ','
-# Quoting delimiter, can either be an ASCII character or empty string.
+# Quoting delimiter. Empty value means no quoting.
 delimiter = '"'
 # Whether the CSV files contain a header.
 # If `header` is true, the first line will be skipped.
