@@ -43,7 +43,7 @@ The table attribute is in the form of `key=value`. Multiple attributes are separ
 + See all tables and partitions that have a specific attribute:
 
     ```sql
-    SELECT * FROM information_schema.attributes WHERE attributes LIKE '%key%';
+    SELECT * FROM information_schema.attributes WHERE ATTRIBUTES LIKE '%key%';
     ```
 
 ## Attribute override rules
