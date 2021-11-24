@@ -94,7 +94,7 @@ Suppose that in a read-only scenario, you try to reduce the periodic read hotspo
 + Prevent the Regions of a partition from merging:
 
     ```sql
-    ALTER TABLE t PARTITION p attributes[=]'merge_option=deny';
+    ALTER TABLE t PARTITION p ATTRIBUTES[=]'merge_option=deny';
     ```
 
 + Allow merging Regions belonging to a partition:
