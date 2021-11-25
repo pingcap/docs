@@ -143,7 +143,7 @@ Since v4.0.0-rc.1, PD supports external services in setting the service-level GC
 
 When the replication task is unavailable or interrupted, this feature ensures that the data to be consumed by TiCDC is retained in TiKV without being cleaned by GC.
 
-When starting the TiCDC server, you can specify the Time To Live (TTL) duration of GC safepoint by configuring `gc-ttl`. You can also [use TiUP to modify](/ticdc/manage-ticdc.md#modify-ticdc-configuration-using-tiup) `gc-ttl`. The default value is 24 hours. In TiCDC, this value means:
+When starting the TiCDC server, you can specify the Time To Live (TTL) duration of GC safepoint by configuring `gc-ttl`. The default value is 24 hours. In TiCDC, this value means:
 
 - The maximum time the GC safepoint is retained at the PD after the TiCDC service is stopped.
 - The maximum time a replication task can be suspended after the task is interrupted or manually stopped. If the time for a suspended replication task is longer than the value set by `gc-ttl`, the replication task enters the `failed` status, cannot be resumed, and cannot continue to affect the progress of the GC safepoint.
