@@ -51,7 +51,7 @@ plan replayer dump explain select * from t;
 
 `PLAN REPLAYER DUMP` packages the table information above into a `ZIP` file and returns the file identifier as the execution result. This file is a one-time file. After the file is downloaded, TiDB will delete it.
 
-> **note:**
+> **Note:**
 >
 > The `ZIP` file is stored in a TiDB cluster for at most one hour. After one hour, TiDB will delete it.
 
