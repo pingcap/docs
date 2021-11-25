@@ -4,7 +4,7 @@ title: TiDB 5.3 Release Notes
 
 # TiDB 5.3 Release Notes
 
-Release date: November 23, 2021
+Release date: November 30, 2021
 
 TiDB version: 5.3.0
 
@@ -15,7 +15,7 @@ In v5.3, the key new features or improvements are as follows:
 + Support creating users with the least privileges on TiDB Dashboard to enhance system security
 + Optimize the timestamp processing flow in TiDB to improve the overall performance
 + Enhance the performance of TiDB Data Migration (DM) so that data is migrated from MySQL to TiDB with lower latency
-+ Support parallel import in TiDB Lightning to improve the efficiency of full data migration
++ Support parallel import using multiple TiDB Lightning instances to improve the efficiency of full data migration
 + Support saving and restoring the on-site information of a cluster with a single SQL statement, which helps improve the efficiency of troubleshooting issues relating to execution plans
 + Support the continuous profiling experimental feature to improve the observability of database performance
 + Continue optimizing the storage and computing engines to improve the system performance and stability
@@ -173,7 +173,7 @@ It is recommended that you create a least-privileged SQL user to access and sign
 
 - **TiDB Lightning Parallel Import**
 
-    TiDB Lightning provides parallel import capability to extend the original feature. It allows you to deploy multiple Lightning instances at the same time, and import single tables or multiple tables to downstream TiDB in parallel. Without changing the way customers use it, it greatly improves the data migration ability, allowing you to obtain data in a more real-time way to further process, integrate and analyze them. It improves the efficiency of enterprise data management.
+    TiDB Lightning provides parallel import capability to extend the original feature. It allows you to deploy multiple Lightning instances at the same time to import single tables or multiple tables to downstream TiDB in parallel. Without changing the way customers use it, it greatly improves the data migration ability, allowing you to migrate data in a more real-time way to further process, integrate and analyze them. It improves the efficiency of enterprise data management.
 
     In our test, using 10 TiDB Lightning instances, a total of 20 TiB MySQL data can be imported to TiDB within 8 hours. The performance of multiple table import is also improved. A single TiDB Lightning instance can support importing at 250 GB/s,  8 times the original performance.
 
