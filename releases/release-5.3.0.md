@@ -134,7 +134,7 @@ It is recommended that you create a least-privileged SQL user to access and sign
 
     > **Note:**
     >
-    > When the number of clients is small and the PD leader CPU is not full, it is NOT recommended to enable PD Follower Proxy.
+    > When the number of clients is small and the PD leader CPU load is not full, it is NOT recommended to enable PD Follower Proxy.
 
     - Support using the system variable [`tidb_tso_client_batch_max_wait_time`](/system-variables.md#tidb_tso_client_batch_max_wait_time-new-in-v53) to set the maximum waiting time needed for the PD client to batch request TSO. The unit of this time is milliseconds. In case that PD has a high TSO requests load, you can reduce the load and improve the throughput by increasing the waiting time to get a larger batch size.
 
