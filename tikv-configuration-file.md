@@ -102,6 +102,13 @@ This document only describes the parameters that are not included in command-lin
 + Default: `1`
 + Minimum value: `1`
 
+### `max-grpc-send-msg-len`
+
++ Sets the maximum length of a gRPC message that can be sent 
++ Default: `10485760`
++ Unit: Bytes
++ Maximum value: `2147483647`
+
 ### `grpc-stream-initial-window-size`
 
 + The window size of the gRPC stream
@@ -493,12 +500,6 @@ Configuration items related to Raftstore
 
 + The maximum remaining time allowed for the log cache in memory.
 + Default value: `"30s"`
-+ Minimum value: `0`
-
-### `raft-reject-transfer-leader-duration`
-
-+ The protection time for new nodes, which is used to control the shortest interval to migrate a leader to the newly added node. Setting this value too small might cause the failure of leader transfer.
-+ Default value: `"3s"`
 + Minimum value: `0`
 
 ### `hibernate-regions`
