@@ -19,13 +19,13 @@ The table attribute is in the form of `key=value`. Multiple attributes are separ
 + Set attributes for a table or partition:
 
     ```sql
-    ALTER TABLE t [PARTITION p ]ATTRIBUTES[=]'key=value[, key1=value1...]';
+    ALTER TABLE t [PARTITION p] ATTRIBUTES [=] 'key=value[, key1=value1...]';
     ```
 
 + Reset attributes for a table or partition:
 
     ```sql
-    ALTER TABLE t [PARTITION p ]ATTRIBUTES[=]default;
+    ALTER TABLE t [PARTITION p] ATTRIBUTES [=] DEFAULT;
     ```
 
 + See the attributes of all tables and partitions:
@@ -43,7 +43,7 @@ The table attribute is in the form of `key=value`. Multiple attributes are separ
 + See all tables and partitions that have a specific attribute:
 
     ```sql
-    SELECT * FROM information_schema.attributes WHERE ATTRIBUTES LIKE '%key%';
+    SELECT * FROM information_schema.attributes WHERE attributes LIKE '%key%';
     ```
 
 ## Attribute override rules
@@ -76,44 +76,44 @@ Suppose that in a read-only scenario, you try to reduce the periodic read hotspo
 + Prevent the Regions of a table from merging:
 
     ```sql
-    ALTER TABLE t ATTRIBUTES[=]'merge_option=deny';
+    ALTER TABLE t ATTRIBUTES 'merge_option=deny';
     ```
 
 + Allow merging Regions belonging to a table:
 
     ```sql
-    ALTER TABLE t ATTRIBUTES[=]'merge_option=allow';
+    ALTER TABLE t ATTRIBUTES 'merge_option=allow';
     ```
 
 + Reset attributes of a table:
 
     ```sql
-    ALTER TABLE t ATTRIBUTES[=]DEFAULT；
+    ALTER TABLE t ATTRIBUTES DEFAULT;
     ```
 
 + Prevent the Regions of a partition from merging:
 
     ```sql
-    ALTER TABLE t PARTITION p ATTRIBUTES[=]'merge_option=deny';
+    ALTER TABLE t PARTITION p ATTRIBUTES 'merge_option=deny';
     ```
 
 + Allow merging Regions belonging to a partition:
 
     ```sql
-    ALTER TABLE t PARTITION p attributes[=]'merge_option=allow';
+    ALTER TABLE t PARTITION p ATTRIBUTES 'merge_option=allow';
     ```
 
 + See all tables or partitions configured the `merge_option` attribution:
 
     ```sql
-    SELECT * FROM information_schema.attributes WHERE ATTRIBUTES LIKE '%merge_option%';
+    SELECT * FROM information_schema.attributes WHERE attributes LIKE '%merge_option%';
     ```
 
 ### Attribute override rules
 
 ```sql
-ALTER TABLE t ATTRIBUTES[=]'merge_option=deny';
-ALTER TABLE t PARTITION p ATTRIBUTES[=]'merge_option=allow';
+ALTER TABLE t ATTRIBUTES 'merge_option=deny';
+ALTER TABLE t PARTITION p ATTRIBUTES 'merge_option=allow';
 ```
 
 When the above two attributes are configured at the same time, the Regions belonging to the partition `p` can actually be merged. When the attribute of the partition is reset, the partition `p` inherits the attribute from the table `t`, and the Regions cannot be merged.
