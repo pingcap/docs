@@ -157,11 +157,15 @@ PARTITION BY RANGE( YEAR(purchased) ) (
 );
 ```
 
-You can either specify constraints in list format (`[+disk=ssd]`) or in dictionary format (`{+disk=ssd:1,+disk=hdd:2}`).
+You can either specify constraints in list format (`[+disk=ssd]`) or in dictionary format (`{+disk=ssd: 1,+disk=hdd: 2}`).
 
 In list format, constraints are specified as a list of key-value pairs. The key starts with either a `+` or a `-`. `+disk=ssd` indicates that the label `disk` must be set to `ssd`, and `-disk=hdd` indicates that the label `disk` must not be `hdd`.
 
-In dictionary format, constraints also indicate a number of instances that apply to that rule. For example `FOLLOWER_CONSTRAINTS="{+region=us-east-1:1,+region=us-east-2:1,+region=us-west-1:1,+any:1}";` indicates that 1 follower is in us-east-1, 1 follower is in us-east-2, 1 follower is in us-west-1, and 1 follower can be in any region.
+In dictionary format, constraints also indicate a number of instances that apply to that rule. For example `FOLLOWER_CONSTRAINTS="{+region=us-east-1: 1,+region=us-east-2: 1,+region=us-west-1: 1,+any: 1}";` indicates that 1 follower is in us-east-1, 1 follower is in us-east-2, 1 follower is in us-west-1, and 1 follower can be in any region. Another example，`FOLLOWER_CONSTRAINTS='{"+region=us-east-1,+disk=hdd":1,"+region=us-west-1":1}';` indicates that 1 follower is in us-east-1 with an hdd disk，1 follower is in us-west-1。
+
+> **Note:**
+>
+> Dict and list formats are based on the YAML parser, but YAML syntax is strange sometimes. For example, "{+disk=ssd:1,+disk=hdd:2}" will be parsed as '{"+disk=ssd:1": null, "+disk=hdd:1": null}', which is incorrect. But "{+disk=ssd: 1,+disk=hdd: 1}" will be parsed correctly as '{"+disk=ssd": 1, "+disk=hdd": 1}'.
 
 ## Known limitations
 
