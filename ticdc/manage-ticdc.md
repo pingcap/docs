@@ -108,7 +108,7 @@ Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":
     - `memory`: Sorts data changes in memory. It is **NOT recommended** to use it, because memory overflow might occur when a large amount of data is replicated.
     - `file`: Entirely uses the disk to store the temporary data. This feature is **deprecated**. It is **NOT recommended** to use it in **any** situation.
 - `--config`: Specifies the configuration file of the `changefeed`.
-- `sort-dir`: Specifies the temporary file directory used by the sorting engine. **Note that this option is not supported since TiDB v4.0.13, v5.0.3 and v5.1.0. Do not use it any more**.
+- `sort-dir`: Specifies the temporary file directory used by the sorting engine. **Note that this option is not supported since TiDB v4.0.13, v5.0.3, and v5.1.0. Do not use it any more**.
 
 #### Configure sink URI with `mysql`/`tidb`
 
