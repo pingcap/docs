@@ -203,6 +203,8 @@ The following TiKV configuration items can be modified online:
 | `cdc.incremental-scan-speed-limit` | The upper limit on the speed of incremental scanning for historical data |
 | `cdc.incremental-scan-concurrency` | The maximum number of concurrent incremental scanning tasks for historical data |
 
+In the table above, the five `cdc.*` parameters are supported since v5.1.2.
+
 In the table above, parameters with the `{db-name}` or `{db-name}.{cf-name}` prefix are configurations related to RocksDB. The optional values of `db-name` are `rocksdb` and `raftdb`.
 
 - When `db-name` is `rocksdb`, the optional values of `cf-name` are `defaultcf`, `writecf`, `lockcf`, and `raftcf`.
