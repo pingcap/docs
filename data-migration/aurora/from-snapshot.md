@@ -9,7 +9,7 @@ This document describes how to migrate full data from Amazon Aurora MySQL to TiD
 
 ## Prerequisites
 
-- [Deploy Lighting using TiUP](/quick-install-tools.md)
+- [Deploy Lightning using TiUP](/quick-install-tools.md)
 - [Deploy Dumping using TiUP](/quick-install-tools.md)
 
 ***
@@ -56,16 +56,16 @@ vim tidb-lighting.toml
 [tidb]
 
 # The target cluster information. Fill in one address of tidb-server.
-host = "${host}" # target database address ,eg: 172.16.128.1
-port = ${port}   # target database port, eg: 4000
-user = "${user_name}"  # target database username, eg: root
-password = "${password}"  # target database password
-pd-addr = "${pd_address}"  # The default PD address of the cluster. eg: 127.0.0.1:2379
+host = "${host}" # the target database address, for example: 172.16.128.1
+port = ${port}   # the target database port, for example: 4000
+user = "${user_name}"  # the target database username, for example: root
+password = "${password}"  # the target database password
+pd-addr = "${pd_address}"  # The default PD address of the cluster, for example: 127.0.0.1:2379
 
 [tikv-importer]
 
-# The "Local" backend mode is used by default for best performance, which is suitable for large data volumes above TB level. But in this mode, the downstream TiDB cannot provide services during the import period.
-# The data volume below TB level can also adopt the "tidb" backend mode, and downstream TiDB can provide services normally. For more information about the backend mode, please refer to: https://docs.pingcap.com/tidb/stable/tidb-lightning-backends
+# The "Local" backend mode is used by default for the best performance, which is suitable for large data volumes larger than 1 TiB. But in this mode, the downstream TiDB cannot provide services during the import process.
+# The data volume less than 1 TiB can also adopt the "tidb" backend mode, and downstream TiDB can provide services normally. For more information about the backend mode, refer to [TiDB Lightning](/tidb-lightning/tidb-lightning-backends.md).
 backend = "local"
 
 # The storage path of local temporary files. Ensure that the corresponding directory does not exist or is empty and that the disk capacity is large enough for storage.
@@ -86,7 +86,7 @@ table = '$2'
 type = '$3'
 ```
 
-Refer to the [TiDB Lightning Configuration](/tidb-lightning/tidb-lightning-configuration.md) if you want to configure TLS in the target TiDB cluster, or for more configurations.
+If you want to configure TLS in the target TiDB cluster, or know about more configurations, refer to the [TiDB Lightning Configuration](/tidb-lightning/tidb-lightning-configuration.md).
 
 ## Step 4. Create table schemas in TiDB
 
@@ -106,7 +106,7 @@ In this example, TiDB Lightning is only used to create table schemas, so the abo
 | `-d`                          | Directory or [external storage URL](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages) of the data dump to read from |
 | `-no-schema`                  | Ignore schema files, and get schema directly from TiDB |
 
-You can find more parameters in [TiDB Lightning Configuration](https://docs.pingcap.com/tidb/stable/tidb-lightning-configuration) 
+For more parameters, refer to [TiDB Lightning Configuration](https://docs.pingcap.com/tidb/stable/tidb-lightning-configuration).
 
 > **Note:**
 >

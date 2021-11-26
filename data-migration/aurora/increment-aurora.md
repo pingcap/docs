@@ -19,7 +19,7 @@ This document describes how to use DM for incremental replication.
 
 DM relies on the `ROW`-formatted binlog for incremental replication, so you need to enable the binary logging for an Aurora MySQL cluster. For the configuration instructions, refer to Amazon's document [Enable binary for an Aurora Cluster](https://aws.amazon.com/premiumsupport/knowledge-center/enable-binary-logging-aurora/?nc1=h_ls).
 
-It is recommmend to  migrate data based on GTIDs (global transaction identifiers). For more information about how to enable it, refer to Amazon's document [Configuring GTID-Based Replication for an Aurora MySQL Cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/mysql-replication-gtid.html#mysql-replication-gtid.configuring-aurora).
+It is recommended to migrate data based on GTIDs (global transaction identifiers). For more information about how to enable it, refer to Amazon's document [Configuring GTID-Based Replication for an Aurora MySQL Cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/mysql-replication-gtid.html#mysql-replication-gtid.configuring-aurora).
 
 ## Step 2. Configure the data source
 
@@ -34,8 +34,8 @@ enable-gtid: false
 
 from:
   host: "${host}" # address of database, eg: test-dm-2-0.cluster-czrtqco96yc6.us-east-2.rds.amazonaws.com
-  user: "${user_name}"    # username of database, eg: root
-  password: "${password}"  # It is recommended to use database passwords encrypted by `dmctl encrypt`.
+  user: "${user_name}"    # username of database, for example: root
+  password: "${password}"  # It is recommended to use database passwords encrypted by `dmctl encrypt`
   port: 3306
 ```
 
@@ -47,12 +47,12 @@ tiup dmctl --master-addr 127.0.0.1:8261 operate-source create dm-test/source1.ya
 
 | Parameter | Description |
 | :--------| :------------|
-| `--master-addr`                     | Master API server addr. |
+| `--master-addr`                     | Master API server address. |
 | `operate-source`                    | `create`/`update`/`stop`/`show` upstream MySQL/MariaDB source. |
 
 Usage of `dmctl encrypt`: [Encrypt the database password using dmctl](https://docs.pingcap.com/tidb-data-migration/stable/manage-source#encrypt-the-database-password)
 
-You can find all available `dmctl` commands in [Maintain DM Clusters Using dmctl](https://docs.pingcap.com/tidb-data-migration/stable/dmctl-introduction)
+You can find all the available `dmctl` commands in [Maintain DM Clusters Using dmctl](https://docs.pingcap.com/tidb-data-migration/stable/dmctl-introduction).
 
 When the data sources are successfully added, each data source returns information that includes a DM-worker bound to it.
 
