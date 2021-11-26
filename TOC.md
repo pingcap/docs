@@ -180,7 +180,7 @@
   + [Overview](/ecosystem-tool-user-guide.md)
   + [Use Cases](/ecosystem-tool-user-case.md)
   + Install Guide
-    + [Use TiUP (Recommended)](/quick_install_tools.md)
+    + [Use TiUP (Recommended)](/quick-install-tools.md)
     + [Download Binary](/download-ecosystem-tools.md)
   + Backup & Restore (BR)
     + [BR Tool Overview](/br/backup-and-restore-tool.md)

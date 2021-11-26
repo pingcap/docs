@@ -19,29 +19,23 @@ This document describes how to use DM for incremental replication.
 
 DM relies on the `ROW`-formatted binlog for incremental replication, so you need to enable the binary logging for an Aurora MySQL cluster. For the configuration instructions, refer to Amazon's document [Enable binary for an Aurora Cluster](https://aws.amazon.com/premiumsupport/knowledge-center/enable-binary-logging-aurora/?nc1=h_ls).
 
-If global transaction identifiers (GTIDs) are enabled in Aurora, you can migrate data based on GTIDs. For how to enable it, refer to Amazon's document [Configuring GTID-Based Replication for an Aurora MySQL Cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/mysql-replication-gtid.html#mysql-replication-gtid.configuring-aurora).
-
-> **Note:**
->
-> + GTID-based data migration requires MySQL 5.7 (Aurora 2.04) version or later.
+It is recommended to migrate data based on GTIDs (global transaction identifiers). For more information about how to enable it, refer to Amazon's document [Configuring GTID-Based Replication for an Aurora MySQL Cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/mysql-replication-gtid.html#mysql-replication-gtid.configuring-aurora).
 
 ## Step 2. Configure the data source
 
-Configure the data source as follows:
-
-The content of `source1.yaml`:
+Create a configuration file describing the upstream library information `source1.yaml`:
 
 ```yaml
-# Aurora-1
+# Unique name for database
 source-id: "aurora-replica-01"
 
 # To migrate data based on GTID, you need to set this item to true.
 enable-gtid: false
 
 from:
-  host: "test-dm-2-0.cluster-czrtqco96yc6.us-east-2.rds.amazonaws.com"
-  user: "root"
-  password: "OiG90CGm3CEbXan6ZSd/SUAsofxJAZo="  # It is recommended to use database passwords encrypted by `dmctl encrypt`,see [Encrypt the database password using dmctl](manage-source.md#encrypt-the-database-password)
+  host: "${host}" # address of database, eg: test-dm-2-0.cluster-czrtqco96yc6.us-east-2.rds.amazonaws.com
+  user: "${user_name}"    # username of database, for example: root
+  password: "${password}"  # It is recommended to use database passwords encrypted by `dmctl encrypt`
   port: 3306
 ```
 
@@ -51,7 +45,16 @@ from:
 tiup dmctl --master-addr 127.0.0.1:8261 operate-source create dm-test/source1.yaml
 ```
 
-When the data sources are successfully added, the return information of each data source includes a DM-worker bound to it.
+| Parameter | Description |
+| :--------| :------------|
+| `--master-addr`                     | Master API server address. |
+| `operate-source`                    | `create`/`update`/`stop`/`show` upstream MySQL/MariaDB source. |
+
+Usage of `dmctl encrypt`: [Encrypt the database password using dmctl](https://docs.pingcap.com/tidb-data-migration/stable/manage-source#encrypt-the-database-password)
+
+You can find all the available `dmctl` commands in [Maintain DM Clusters Using dmctl](https://docs.pingcap.com/tidb-data-migration/stable/dmctl-introduction).
+
+When the data sources are successfully added, each data source returns information that includes a DM-worker bound to it.
 
 ```bash
 {
@@ -86,19 +89,19 @@ name: "test"
 task-mode: "incremental"
 # The downstream TiDB configuration information.
 target-database:
-  host: "${host}"
-  port: 4000
-  user: "root"
-  password: "${password}"
+  host: "${host}"  # target database address ,eg: 172.16.128.1
+  port: ${port}    # target database port, eg: 4000
+  user: "${user_name}" # target database username, eg: root
+  password: "${password}" # target database password
 
 # Configuration of all the upstream MySQL instances required by the current data migration task.
 mysql-instances:
 - source-id: "aurora-replica-01"
      # The position where the binlog replication starts when `task-mode` is `incremental` and the downstream database checkpoint does not exist. If the checkpoint exists, the checkpoint is used.
   meta:
-    binlog-name: binlog.000001
-    binlog-pos: 4
-    binlog-gtid: "03fc0263-28c7-11e7-a653-6c0b84d59f30:1-7041423,05474d3c-28c7-11e7-8352-203db246dd3d:1-170"  # You need to set this argument if you specify `enable-gtid: true` for the source of the incremental task.
+    binlog-name: ${binlog}   # binlog file name ,eg: binlog.000001
+    binlog-pos: ${position}  # binlog file position ,eg: 4
+    # binlog-gtid: "${gtid}"  # You need to set this argument if you specify `enable-gtid: true` for the source of the incremental task. eg: 03fc0263-28c7-11e7-a653-6c0b84d59f30:1-7041423,05474d3c-28c7-11e7-8352-203db246dd3d:1-170
 
   # The configuration items of the block and allow lists of the schema or table to be migrated, used to quote the global block and allow lists configuration. For global configuration, see the `block-allow-list` below.
   block-allow-list: "listA"
@@ -153,7 +156,7 @@ If `source db replication privilege checker` and `source db dump privilege check
 line 1 column 287 near \"INVOKE LAMBDA ON *.* TO...
 ```
 
-The returned information above shows that the `INVOKE LAMBDA` privilege causes an error. If the privilege is Aurora-specific, add the following content to the configuration file to skip the check. DM will improve the automatic handling of Aurora privileges in later versions.
+The returned information above shows that the `INVOKE LAMBDA` privilege causes an error. If the privilege is Aurora-specific, add the following content to the configuration file to skip the check. 
 
 ```
 ignore-checking-items: ["replication_privilege","dump_privilege"]
