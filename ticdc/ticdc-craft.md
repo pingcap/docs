@@ -47,7 +47,7 @@ Decoding speed:
 
 | craft | json | protobuf 1 | protobuf 2 |
 | :---- | :--- | :--------- | :--------- |
-| 7944 ns/op | 75822 ns/op (854%)+ | 8020 ns/op (1%)+ | 8462 ns/op (6%) |
+| 7944 ns/op | 75822 ns/op (854%)+ | 8020 ns/op (1%)+ | 8462 ns/op (6%)+ |
 
 ## Message format
 
