@@ -697,7 +697,14 @@ Configuration items related to Raftstore
 
 ### `store-pool-size`
 
++ The allowable number of threads that process Raft. When the value of the configuration item [`store-io-pool-size`](#store-io-pool-size) is `0`, the Raftstore thread processes Raft I/O. In this case, if you need to modify the value of `store-pool-size`, refer to [Tune TiKV Thread Pool Performance](/tune-tikv-thread-performance).
++ Default value: `2`
++ Minimum value: greater than `0`
+
+### `store-io-pool-size`<span class="version-mark">New in v5.3.0</span>
+
 + The allowable number of threads that process Raft
++ + The allowable number of threads process Raft I/O, that is, the size of the StoreWriter thread pool. If the value of this configuration item is `0`, it means that the Raft I/O is processed by the Raftstore thread, but not the StoreWriter thread. The size of the Raftstore thread pool is configured by `store-pool-size`. When modifying its size, refer to [Tune TiKV Thread Pool Performance](/tune-tikv-thread-performance).
 + Default value: `2`
 + Minimum value: greater than `0`
 
@@ -718,6 +725,18 @@ Configuration items related to Raftstore
 + Judges whether the TiKV node is slow based on the ratio of timeout inspection. 
 + Default value: `"500ms"`
 + Minimum value: `"1ms"`
+
+### `raft-write-size-limit`<span class="version-mark">New in v5.3.0</span>
+	
++ The threshold value triggers data writing through Raft. When the data size is larger than the value of this configuration item, the data is written to the disk. When the value of `store-io-pool-size` is `0`, this configuration item does not take effect.
++ Default value: `1MB`
++ Minimum value: `0`
+	
+### `raft-msg-flush-interval`<span class="version-mark">New in v5.3.0</span>
+	
++ The interval between Raft messages are sent in batch. Raft messages are sent in batch every interval specified by this configuration item. When the value of `store-io-pool-size` is `0`, this configuration item does not take effect.
++ Default value: `250us`
++ Minimum value: `0`
 
 ## Coprocessor
 
