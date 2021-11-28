@@ -705,7 +705,7 @@ Configuration items related to Raftstore
 
 + The allowable number of threads process Raft I/O, that is, the size of the StoreWriter thread pool. If the value of this configuration item is `0`, it means that the Raft I/O is processed by the Raftstore thread, but not the StoreWriter thread. The size of the Raftstore thread pool is configured by `store-pool-size`. When modifying its size, refer to [Tune TiKV Thread Pool Performance](/tune-tikv-thread-performance).
 + Default value: `2`
-+ Minimum value: greater than `0`
++ Minimum value: `0`
 
 ### `future-poll-size`
 
