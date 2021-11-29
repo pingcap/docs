@@ -30,11 +30,11 @@ In v5.3, the key new features or improvements are as follows:
 
 |  Variable name    |  Change type    |  Description    |
 | :---------- | :----------- | :----------- |
-| [tidb_enable_noop_functions](/system-variables.md#tidb_enable_noop_functions-new-in-v40) | Modified |  Temporary tables are now supported by TiDB so `CREATE TEMPORARY TABLE` and `DROP TEMPORARY TABLE` no longer require enabling `tidb_enable_noop_functions`. |
+| [`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40) | Modified |  Temporary tables are now supported by TiDB so `CREATE TEMPORARY TABLE` and `DROP TEMPORARY TABLE` no longer require enabling `tidb_enable_noop_functions`. |
 | [`tidb_enable_pseudo_for_outdated_stats`](/system-variables.md#tidb_enable_pseudo_for_outdated_stats-new-in-v530) | Newly added | Controls the behavior of the optimizer when the statistics on a table expire. The default value is `ON`. When the number of modified rows in the table is greater than 80% of the total rows (This ratio can be adjusted by the configuration [`pseudo-estimate-ratio`](/tidb-configuration-file.md#pseudo-estimate-ratio)), the optimizer considers that the statistics other than the total number of rows are no longer reliable and use pseudo statistics instead. When you set the value as `OFF`, even if the statistics expire, the optimizer still uses them. |
 |[`tidb_enable_tso_follower_proxy`](/system-variables.md#tidb_enable_tso_follower_proxy-new-in-v53) | Newly added  | Determines whether to enable or disable the TSO Follower Proxy feature. The default value is `OFF`, which means the TSO Follower Proxy feature is disabled. At this time, TiDB only gets TSO from PD leader. When this feature is enabled, TiDB evenly sends the requests to all PD nodes when acquiring TSO. The PD follower then forwards the TSO requests to reduce the CPU pressure of PD leader. |
 |[`tidb_tso_client_batch_max_wait_time`](/system-variables.md#tidb_tso_client_batch_max_wait_time-new-in-v53) | Newly added |  Sets the maximum waiting time for a batch saving operation when TiDB requests TSO from PD. The default value is `0`, which means no additional waiting. |
-| [tidb_tmp_table_max_size](/system-variables.md#tidb_tmp_table_max_size-new-in-v53) | Newly added  | Limits the maximum size of a single [temporary table](/temporary-tables.md). If the temporary table exceeds this size, an error will occur. |
+| [`tidb_tmp_table_max_size`](/system-variables.md#tidb_tmp_table_max_size-new-in-v53) | Newly added  | Limits the maximum size of a single [temporary table](/temporary-tables.md). If the temporary table exceeds this size, an error will occur. |
 
 ### Configuration file parameters
 
@@ -222,6 +222,9 @@ It is recommended that you create a least-privileged SQL user to access and sign
 
     [User Document](/ticdc/manage-ticdc.md)
 
+- **TiCDC supports the HTTP protocol OpenAPI for managing TiCDC tasks**
+    Since TiDB v5.3.0, TiCDC OpenAPI becomes an General Availability (GA) feature. You can query and operate TiCDC clusters using OpenAPI in the production environment.
+    
 ### Deployment and maintenance
 
 - **Continuous Profiling (experimental feature)**
@@ -240,7 +243,7 @@ Starting from TiCDC v5.3.0, the cyclic replication feature between TiDB clusters
 
 ### Telemetry
 
-TiDB adds the information about whether the TEMPORARY TABLE is enabled in telemetry.
+TiDB adds the information to the telemetry report about whether or not the TEMPORARY TABLE feature is used. This does not include table names or table data.
 
 To learn more about telemetry and how to disable this behavior, refer to [Telemetry](/telemetry.md).
 
@@ -345,7 +348,7 @@ To learn more about telemetry and how to disable this behavior, refer to [Teleme
 
     - Fix the issue of unavailable TiKV caused by Raftstore deadlock when migrating Regions. The workaround is to disable the scheduling and restart the unavailable TiKV. [#10909](https://github.com/tikv/tikv/issues/10909)
     - Fix the issue that CDC adds scan retries frequently due to the Congest error [#11082](https://github.com/tikv/tikv/issues/11082)
-    - Fix the issue that the raft connection is broken when the channel is full [#11047](https://github.com/tikv/tikv/issues/11047)
+    - Fix the issue that the Raft connection is broken when the channel is full [#11047](https://github.com/tikv/tikv/issues/11047)
     - Fix the issue that batch messages are too large in Raft client implementation [#9714](https://github.com/tikv/tikv/issues/9714)
     - Fix the issue that some coroutines leak in `resolved_ts` [#10965](https://github.com/tikv/tikv/issues/10965)
     - Fix a panic issue that occurs to the coprocessor when the size of response exceeds 4 GiB [#9012](https://github.com/tikv/tikv/issues/9012)
