@@ -567,7 +567,7 @@ Usage:
 {{< copyable "" >}}
 
 ```bash
->> region keys --format=raw a             // Display all Regions start from a with default limit count 16
+>> region keys --format=raw a         // Display all Regions start from a with default limit count 16
 {
   "count": 16,
   "regions": [......],
@@ -579,13 +579,13 @@ Usage:
   "regions": [......],
 }
 
->> region keys --format=raw a z          // Display all Regions in range [a, z) without limit count
+>> region keys --format=raw a z      // Display all Regions in range [a, z) without limit count
 {
   "count": 16,
   "regions": [......],
 }
 
->> region keys --format=raw a z 20    // Display all Regions in range [a, z) with limit count 20
+>> region keys --format=raw a z 20   // Display all Regions in range [a, z) with limit count 20
 {
   "count": 20,
   "regions": [......],
