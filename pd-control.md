@@ -564,8 +564,6 @@ Use this command to query all Regions in a given range [startkey, endkey). It su
 
 Usage:
 
-{{< copyable "" >}}
-
 ```bash
 >> region keys --format=raw a         // Display all Regions start from a with default limit count 16
 {
