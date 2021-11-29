@@ -41,6 +41,7 @@ log.level: "error"
 performance.max-procs: 20
 prepared-plan-cache.enabled: true
 tikv-client.max-batch-wait-time: 2000000
+```
 
 #### TiKV parameter configuration
 
