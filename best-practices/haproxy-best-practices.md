@@ -71,19 +71,35 @@ yum -y install epel-release gcc systemd-devel
 
 ## Deploy HAProxy
 
-You can easily use HAProxy to configure and set up a load-balanced database environment. This section shows general deployment operations. You can customize the [configuration file](http://cbonte.github.io/haproxy-dconv/1.9/configuration.html) based on your actual scenario.
+You can easily use HAProxy to configure and set up a load-balanced database environment. This section shows general deployment operations. You can customize the [configuration file](http://cbonte.github.io/haproxy-dconv/2.5/configuration.html) based on your actual scenario.
 
 ### Install HAProxy
 
-1. Use yum to install HAProxy：
+1. Download HAProxy 2.5.0：
+   wget https://github.com/haproxy/haproxy/archive/refs/tags/v2.5.0.zip
+2. unzip haproxy
 
     {{< copyable "shell-regular" >}}
 
     ```bash
-    yum -y install haproxy
+    unzip v2.5.0.zip
     ```
 
-2. Check whether the installation is successful：
+3. make & make install
+     {{< copyable "shell-regular" >}}
+    ```bash
+    cd haproxy-2.5.0
+    make clean
+    make -j 8 TARGET=linux-glibc  USE_THREAD=1
+    make PREFIX=${/app/haproxy} SBINDIR=${/app/haproxy/bin} install
+    ```
+4. reconfig profile
+     {{< copyable "shell-regular" >}}
+    ```bash
+    echo 'export PATH=/app/haproxy/bin:$PATH' >> /etc/profile
+    ```
+
+5. Check whether the installation is successful：
 
     {{< copyable "shell-regular" >}}
 
@@ -91,9 +107,6 @@ You can easily use HAProxy to configure and set up a load-balanced database envi
     which haproxy
     ```
 
-    ```
-    /usr/sbin/haproxy
-    ```
 
 #### HAProxy commands
 
@@ -145,10 +158,9 @@ global                                     # Global configuration.
    log         127.0.0.1 local2            # Global syslog servers (up to two).
    chroot      /var/lib/haproxy            # Changes the current directory and sets superuser privileges for the startup process to improve security.
    pidfile     /var/run/haproxy.pid        # Writes the PIDs of HAProxy processes into this file.
-   maxconn     4000                        # The maximum number of concurrent connections for a single HAProxy process.
+   maxconn     256                         # The maximum number of concurrent connections per HAProxy thread.
    user        haproxy                     # Same with the UID parameter.
    group       haproxy                     # Same with the GID parameter. A dedicated user group is recommended.
-   nbproc      40                          # The number of processes created when going daemon. When starting multiple processes to forward requests, make sure the value is large enough so that HAProxy does not block processes.
    daemon                                  # Makes the process fork into background. It is equivalent to the command line "-D" argument. It can be disabled by the command line "-db" argument.
    stats socket /var/lib/haproxy/stats     # The directory where statistics output is saved.
 
@@ -182,9 +194,7 @@ listen tidb-cluster                        # Database load balancing.
 
 ### Start HAProxy
 
-There are two methods to start HAProxy.
-
-Method 1: Execute `haproxy`. `/etc/haproxy/haproxy.cfg` is read by default (recommended).
+Execute `haproxy`. `/etc/haproxy/haproxy.cfg` is read by default (recommended).
 
 {{< copyable "shell-regular" >}}
 
@@ -192,19 +202,10 @@ Method 1: Execute `haproxy`. `/etc/haproxy/haproxy.cfg` is read by default (reco
 haproxy -f /etc/haproxy/haproxy.cfg
 ```
 
-Method 2: Use `systemd` to start HAProxy.
-
-{{< copyable "shell-regular" >}}
-
-```bash
-systemctl start haproxy.service
-```
 
 ### Stop HAProxy
 
-There are two methods to stop HAProxy.
-
-Method 1: Use `kill -9`.
+Use `kill -9`.
 
 1. Run the following command:
 
@@ -221,11 +222,3 @@ Method 1: Use `kill -9`.
     ```bash
     kill -9 ${haproxy.pid}
     ```
-
-Method 2: Use `systemd`.
-
-{{< copyable "shell-regular" >}}
-
-```bash
-systemctl stop haproxy.service
-```
