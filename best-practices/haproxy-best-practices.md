@@ -76,9 +76,15 @@ You can easily use HAProxy to configure and set up a load-balanced database envi
 
 ### Install HAProxy
 
-1. Download HAProxy 2.5.0：
-   wget https://github.com/haproxy/haproxy/archive/refs/tags/v2.5.0.zip
-2. unzip haproxy
+1. Download the package of the HAProxy 2.5.0 source code:
+
+    {{< copyable "shell-regular" >}}
+
+    ```bash
+    wget https://github.com/haproxy/haproxy/archive/refs/tags/v2.5.0.zip
+    ```
+
+2. Unzip the package:
 
     {{< copyable "shell-regular" >}}
 
@@ -86,16 +92,20 @@ You can easily use HAProxy to configure and set up a load-balanced database envi
     unzip v2.5.0.zip
     ```
 
-3. make & make install
-     {{< copyable "shell-regular" >}}
+3. Compile the application from the source code:
+
+    {{< copyable "shell-regular" >}}
+
     ```bash
     cd haproxy-2.5.0
     make clean
     make -j 8 TARGET=linux-glibc  USE_THREAD=1
     make PREFIX=${/app/haproxy} SBINDIR=${/app/haproxy/bin} install
     ```
-4. reconfig profile
-     {{< copyable "shell-regular" >}}
+
+4. Reconfigure the profile:
+    {{< copyable "shell-regular" >}}
+
     ```bash
     echo 'export PATH=/app/haproxy/bin:$PATH' >> /etc/profile
     ```
@@ -195,7 +205,7 @@ listen tidb-cluster                        # Database load balancing.
 
 ### Start HAProxy
 
-Execute `haproxy`. `/etc/haproxy/haproxy.cfg` is read by default (recommended).
+To start HAProxy, run `haproxy`. `/etc/haproxy/haproxy.cfg` is read by default (recommended).
 
 {{< copyable "shell-regular" >}}
 
@@ -206,7 +216,7 @@ haproxy -f /etc/haproxy/haproxy.cfg
 
 ### Stop HAProxy
 
-Use `kill -9`.
+To stop HAProxy, use the `kill -9` command.
 
 1. Run the following command:
 
