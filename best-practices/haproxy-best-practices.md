@@ -14,7 +14,7 @@ This document describes best practices for configuration and usage of [HAProxy](
 
 HAProxy is free, open-source software written in C language that provides a high availability load balancer and proxy server for TCP and HTTP-based applications. Because of its fast and efficient use of CPU and memory, HAProxy is now widely used by many well-known websites such as GitHub, Bitbucket, Stack Overflow, Reddit, Tumblr, Twitter, Tuenti, and AWS (Amazon Web Services).
 
-HAProxy is written in the year 2000 by Willy Tarreau, the core contributor to the Linux kernel, who is still responsible for the maintenance of the project and provides free software updates in the open-source community. The latest stable version 2.0.0 was released on August 16, 2019, bringing more [excellent features](https://www.haproxy.com/blog/haproxy-2-0-and-beyond/).
+HAProxy is written in the year 2000 by Willy Tarreau, the core contributor to the Linux kernel, who is still responsible for the maintenance of the project and provides free software updates in the open-source community. The latest stable version 2.5.0 was released on November 23, 2021, bringing more [excellent features](https://www.haproxy.com/blog/announcing-haproxy-2-5/).
 
 ## Basic features
 
