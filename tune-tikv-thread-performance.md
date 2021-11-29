@@ -18,8 +18,8 @@ The TiKV thread pool is mainly composed of gRPC, Scheduler, UnifyReadPool, Rafts
 
 * The Raftstore thread pool: When the logs in the majority of replicas are consistent, this thread pool sends the log to the Apply thread.
 
-    - It processes all Raft messages and the proposal to add a new log
-    - It writes Raft logs to a disk. If the value of the configuration item [`store-io-pool-size`](/tikv-configuration-file.md#store-io-pool-size) is `0`, the Raftstore thread writes the logs to disk; if the value is not `0`, the Raftstore thread sends the log to the StoreWriter thread.
+    - It processes all Raft messages and the proposal to add a new log.
+    - It writes Raft logs to a disk. If the value of the configuration item [`store-io-pool-size`](/tikv-configuration-file.md#store-io-pool-size-new-in-530) is `0`, the Raftstore thread writes the logs to disk; if the value is not `0`, the Raftstore thread sends the logs to the StoreWriter thread.
     - When Raft logs in the majority of replicas are consistent, it sends the logs to the Apply thread.
 
 * The StoreWriter thread pool: it writes all Raft logs to the disk and returns the result to the Raftstore thread.
@@ -61,22 +61,22 @@ Starting from TiKV v5.0, all read requests use the unified thread pool for queri
 
 * The Raftstore thread pool.
 
-    The Raftstore thread pool is the most complex thread pool in TiKV. The default size (configured by `raftstore.store-pool-size`) is `2`. For the StoreWriter thread pool, the default size (configured by `raftstore.store-io-pool-size`) is `0`.
+    The Raftstore thread pool is the most complex thread pool in TiKV. The default size (configured by `raftstore.store-pool-size`) of this thread pool is `2`. For the StoreWriter thread pool, the default size (configured by `raftstore.store-io-pool-size`) of it is `0`.
 
-    - When the size of the StoreWriter thread pool is 0, All write requests are written into RocksDB in the way of `fsync` from the Raftstore thread. In this case, it is recommended to tune the performance as follows:
+    - When the size of the StoreWriter thread pool is 0, all write requests are written into RocksDB in the way of `fsync` from the Raftstore thread. In this case, it is recommended to tune the performance as follows:
 
-        - It is recommended to keep the overall CPU usage of the Raftstore thread below 60%. When the number of Raftstore thread is 2, the **TiKV-Details**、**Thread CPU**、**Raft store CPU** on Grafana are needed to keep within 120%. Due to I/O, Raftstore threads cannot reach 100% CPU usage theoretically.
-        - Do not increase the size of the Raftstore thread pool to improve write performance without other reasons, because this might increase the disk burden and degrade performance.
+        - Keep the overall CPU usage of the Raftstore thread below 60%. When the number of Raftstore thread is 2, the **TiKV-Details**、**Thread CPU**、**Raft store CPU** on Grafana are needed to keep within 120%. Due to I/O requests, Raftstore threads cannot reach 100% CPU usage theoretically.
+        - Do not increase the size of the Raftstore thread pool to improve write performance without consideration, because this might increase the disk burden and degrade performance.
 
-    - When the size of the StoreWriter thread pool is not 0, All write requests are written into RocksDB in the way of `fsync` from the StoreWriter thread. In this case, it is recommended to tune the performance as follows:
+    - When the size of the StoreWriter thread pool is not 0, all write requests are written into RocksDB in the way of `fsync` from the StoreWriter thread. In this case, it is recommended to tune the performance as follows:
 
-        - It is recommended to only enable the StoreWriter thread pool when overall CPU resources are sufficient. When the StoreWriter thread pool is enabled, the CPU usage of the StoreWriter thread and the Raftstore thread should keep below 80%.
+        - Only enable the StoreWriter thread pool when overall CPU resources are sufficient. When the StoreWriter thread pool is enabled, keep the CPU usage of the StoreWriter thread and the Raftstore thread below 80%.
 
-          Compared with the case when the write requests are completed from the Raftstore thread, in theory, the write request processed from the StoreWriter thread can significantly reduce the write latency and the tail latency of data read. However, when the write speed grew faster, the number of Raft logs increased accordingly, which causes the CPU overhead to increase for Raftstore threads, Apply threads, and gRPC threads. In this case, insufficient CPU resources might offset the optimization effect. As a result, the write speed might become slower than before. Hence, if the CPU resources are not sufficient, it is not recommended to enable the StoreWriter thread. Since the Raftstore thread sends most of the I/O requests to the StoreWriter, the CPU usage of the Raftstore thread can keep below 80%.
+          Compared with the case that the write requests are completed from the Raftstore thread, in theory, the write requests processed from the StoreWriter thread can significantly reduce write latency and tail latency of data read. However, when the write speed grows faster, the number of Raft logs increases accordingly. This can cause the CPU overhead to increase for the Raftstore threads, the Apply threads, and the gRPC threads. In this case, insufficient CPU resources might offset the optimization effect, and as a result, the write speed might become slower than before. Hence, if the CPU resources are not sufficient, it is not recommended to enable the StoreWriter thread. Since the Raftstore thread sends most of the I/O requests to the StoreWriter thread, the CPU usage of the Raftstore thread need to keep below 80%.
 
     - In most cases, the size of the StoreWriter thread pool can be set to 1 or 2. This is because the size of the StoreWriter thread pool affects the number of Raft logs, so the value of it should not be too large. If the CPU usage is higher than 80%, you can consider increasing its size.
 
-    - You need to pay attention to the impact of increasing Raft logs on the CPU overhead of other thread pools. If necessary, you need to increase the number of Raftstore threads, Apply threads, and gRPC threads accordingly.
+    - You need to pay attention to the impact of increasing Raft logs on the CPU overhead of other thread pools. If necessary, you need to increase the number of the Raftstore threads, the Apply threads, and the gRPC threads accordingly.
 
 * The UnifyReadPool thread pool.
 
