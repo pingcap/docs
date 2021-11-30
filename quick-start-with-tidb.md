@@ -442,7 +442,6 @@ Other requirements for the target machine:
         tiup cluster display <cluster-name>
         ```
 
-
 ## What's next
 
 - If you have just deployed a TiDB cluster for the local test environment:
