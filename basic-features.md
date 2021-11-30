@@ -68,7 +68,7 @@ This document lists the features supported in each TiDB version. Note that suppo
 
 | **Advanced SQL features**                                                                                | **5.3**      | **5.2**      | **5.1**      | **5.0**      | **4.0**      |
 |----------------------------------------------------------------------------------------------------------|:------------:|:------------:|:------------:|:------------:|:------------:|
-| [Prepared statement cache](/sql-prepare-plan-cache.md)                                                   | Experimental | Experimental | Experimental | Experimental | Experimental |
+| [Prepared statement cache](/sql-prepare-plan-cache.md)                                                   | Y            | Experimental | Experimental | Experimental | Experimental |
 | [SQL plan management (SPM)](/sql-plan-management.md)                                                     | Y            | Y            | Y            | Y            | Y            |
 | [Coprocessor cache](/coprocessor-cache.md)                                                               | Y            | Y            | Y            | Y            | Experimental |
 | [Stale Read](/stale-read.md)                                                                             | Y            | Y            | Y            | N            | N            |
@@ -77,6 +77,7 @@ This document lists the features supported in each TiDB version. Note that suppo
 | [Optimizer hints](/optimizer-hints.md)                                                                   | Y            | Y            | Y            | Y            | Y            |
 | [MPP Exection Engine](/explain-mpp.md)                                                                   | Y            | Y            | Y            | Y            | N            |
 | [Index Merge Join](/explain-index-merge.md)                                                              | Experimental | Experimental | Experimental | Experimental | Experimental |
+| [Placement Rules in SQL](/placement-rules-in-sql.md)                                                     | Experimental | N            | N            | N            | N            |
 
 ## Data definition language (DDL)
 
@@ -91,6 +92,7 @@ This document lists the features supported in each TiDB version. Note that suppo
 | [DDL algorithm assertions](/sql-statements/sql-statement-alter-table.md)                                 | Y            | Y            | Y            | Y            | Y            |
 | Multi schema change: add column(s)                                                                       | Experimental | Experimental | Experimental | Experimental | Experimental |
 | [Change column type](/sql-statements/sql-statement-modify-column.md)                                     | Y            | Y            | Y            | N            | N            |
+| [Temporary tables](/temporary-tables.md)                                                                 | Y            | N            | N            | N            | N            |
 
 ## Transactions
 
@@ -146,7 +148,7 @@ This document lists the features supported in each TiDB version. Note that suppo
 | [Fast Importer (TiDB Lightning)](/tidb-lightning/tidb-lightning-overview.md)                             | Y            | Y            | Y            | Y            | Y            |
 | mydumper logical dumper                                                                                  | Deprecated   | Deprecated   | Deprecated   | Deprecated   | Deprecated   |
 | [Dumpling logical dumper](/dumpling-overview.md)                                                         | Y            | Y            | Y            | Y            | Y            |
-| [Transactional `LOAD DATA`](/sql-statements/sql-statement-load-data.md)                                  | Y            | Y            | Y            | Y            | N            |
+| [Transactional `LOAD DATA`](/sql-statements/sql-statement-load-data.md)                                  | Y            | Y            | Y            | Y            | N [^3]       |
 | [Database migration toolkit (DM)](/migration-overview.md)                                                | Y            | Y            | Y            | Y            | Y            |
 | [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md)                                                      | Y    | Y    | Y    | Y    | Y    |
 | [Change data capture (CDC)](/ticdc/ticdc-overview.md)                                                    | Y            | Y            | Y            | Y            | Y            |
@@ -170,7 +172,10 @@ This document lists the features supported in each TiDB version. Note that suppo
 | [Lock View](/information-schema/information-schema-data-lock-waits.md)                                   | Y            | Y            | Experimental | Experimental | Experimental |
 | [`SHOW CONFIG`](/sql-statements/sql-statement-show-config.md)                                            | Experimental | Experimental | Experimental | Experimental | Experimental |
 | [`SET CONFIG`](/dynamic-config.md)                                                                       | Experimental | Experimental | Experimental | Experimental | Experimental |
+| [Continuous Profiling](/dashboard/continuous-profiling.md)                                               | Experimental | N            | N            | N            | N            |
 
 [^1]: TiDB incorrectly treats latin1 as a subset of utf8. See [TiDB #18955](https://github.com/pingcap/tidb/issues/18955) for more details.
 
 [^2]: See [Statement Reference](/sql-statements/sql-statement-select.md) for a full list of SQL statements supported.
+
+[^3]: For TiDB v4.0, the `LOAD DATA` transaction does not guarantee atomicity.
