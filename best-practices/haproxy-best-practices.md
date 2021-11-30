@@ -117,6 +117,7 @@ You can easily use HAProxy to configure and set up a load-balanced database envi
     ```bash
     which haproxy
     ```
+
 #### HAProxy commands
 
 Execute the following command to print a list of keywords and their basic usage:
