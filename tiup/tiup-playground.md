@@ -61,7 +61,7 @@ Flags:
       --tiflash.config string    Specify the TiFlash instance configuration file (optional, for debugging)
       --tiflash.timeout int      Specify TiFlash maximum wait time in seconds for starting. 0 means no limit
       -v, --version              Specify the version of playground
-      --without-monitor          Disable the monitoring function of Prometheus and Grafana. To enable the monitoring function by default, do not add this flag
+      --without-monitor          Disable the monitoring function of Prometheus and Grafana. If you do not add this flag, the monitoring function is enabled by default.
 ```
 
 ## Examples
