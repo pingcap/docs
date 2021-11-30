@@ -255,7 +255,8 @@ Configuration items related to log files.
 #### `max-size`
 
 - The size limit of the log file.
-- Default value: 300MB
+- Default value: 300
+- Unit: MB
 - The maximum size is 4GB.
 
 #### `max-days`
@@ -482,7 +483,7 @@ The Plan Cache configuration of the `PREPARE` statement.
 ### `capacity`
 
 - The number of cached statements.
-- Default value: `100`
+- Default value: `1000`
 - The type is `UINT`. Values less than `0` are converted to large integers.
 
 ### `memory-guard-ratio`
@@ -553,7 +554,7 @@ This section introduces configuration items related to the Coprocessor Cache fea
 
 Configuration related to the transaction latch. It is recommended to enable it when many local transaction conflicts occur.
 
-### `enable`
+### `enabled`
 
 - Determines whether to enable the memory lock of transactions.
 - Default value: `false`
