@@ -169,6 +169,7 @@ global                                     # Global configuration.
    chroot      /var/lib/haproxy            # Changes the current directory and sets superuser privileges for the startup process to improve security.
    pidfile     /var/run/haproxy.pid        # Writes the PIDs of HAProxy processes into this file.
    maxconn     256                         # The maximum number of concurrent connections per HAProxy thread.
+   nbthread    48                          # The maximum number of threads. （The upper limit is equal to the number of cpus)
    user        haproxy                     # Same with the UID parameter.
    group       haproxy                     # Same with the GID parameter. A dedicated user group is recommended.
    daemon                                  # Makes the process fork into background. It is equivalent to the command line "-D" argument. It can be disabled by the command line "-db" argument.
