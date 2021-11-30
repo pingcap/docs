@@ -19,7 +19,7 @@ The TiKV thread pool is mainly composed of gRPC, Scheduler, UnifyReadPool, Rafts
 * The Raftstore thread pool:
 
     - It processes all Raft messages and the proposal to add a new log.
-    - It writes Raft logs to the disk. If the value of  [`store-io-pool-size`](/tikv-configuration-file.md#store-io-pool-size-new-in-530) is `0`, the Raftstore thread writes the logs to the disk; if the value is not `0`, the Raftstore thread sends the logs to the StoreWriter thread.
+    - It writes Raft logs to the disk. If the value of  [`store-io-pool-size`](/tikv-configuration-file.md#store-io-pool-size-new-in-v530) is `0`, the Raftstore thread writes the logs to the disk; if the value is not `0`, the Raftstore thread sends the logs to the StoreWriter thread.
     - When Raft logs in the majority of replicas are consistent, the Raftstore thread sends the logs to the Apply thread.
 
 * The StoreWriter thread pool: it writes all Raft logs to the disk and returns the result to the Raftstore thread.
