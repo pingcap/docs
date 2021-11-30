@@ -68,7 +68,7 @@ Starting from TiKV v5.0, all read requests use the unified thread pool for queri
         - Keep the overall CPU usage of the Raftstore thread below 60%. When the number of Raftstore threads is 2, keep the **TiKV-Details**, **Thread CPU**, **Raft store CPU** on Grafana below 120%. Due to I/O requests, the CPU usage of Raftstore threads in theory is always lower than 100%.
         - Do not increase the size of the Raftstore thread pool to improve write performance without careful consideration, because this might increase the disk burden and degrade performance.
 
-    - When the size of the StoreWriter thread pool is not 0, all write requests are written into RocksDB in the way of `fsync` from the StoreWriter thread. In this case, it is recommended to tune the performance as follows:
+    - When the size of the StoreWriter thread pool is not 0, all write requests are written into RocksDB in the way of `fsync` by the StoreWriter thread. In this case, it is recommended to tune the performance as follows:
 
         - Enable the StoreWriter thread pool ONLY when the overall CPU resources are sufficient. When the StoreWriter thread pool is enabled, keep the CPU usage of the StoreWriter thread and the Raftstore thread below 80%.
 
