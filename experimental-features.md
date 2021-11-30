@@ -49,8 +49,7 @@ This document introduces the experimental features of TiDB in different versions
 
 <!--## Data migration 
 
-+ [DM OpenAPI](https://docs.pingcap.com/tidb-data-migration/stable/open-api) (Introduced in v5.3)
--->
++ [DM OpenAPI](https://docs.pingcap.com/tidb-data-migration/stable/open-api) (Introduced in v5.3) -->
 ## Backup and restoration
 
 + [Back up Raw KV](/br/use-br-command-line-tool.md#back-up-raw-kv-experimental-feature) (Introduced in v3.1)
