@@ -357,6 +357,7 @@ To learn more about telemetry and how to disable this behavior, refer to [Teleme
     - Fix a panic issue caused by timeout when processing Coprocessor requests [#10852](https://github.com/tikv/tikv/issues/10852)
     - Fix a memory leak caused by monitoring data of statistics threads [#11195](https://github.com/tikv/tikv/issues/11195)
     - Fix a panic issue caused by getting the cgroup information from some platforms [#10980](https://github.com/tikv/tikv/pull/10980)
+    - Fix the issue of poor scan performance because MVCC Deletion versions are not dropped by compaction filter GC [#11248](https://github.com/tikv/tikv/pull/11248)
 
 + PD
 
