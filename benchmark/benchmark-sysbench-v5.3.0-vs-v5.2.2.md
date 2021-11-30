@@ -110,7 +110,7 @@ listen tidb-cluster                        # Database load balancing.
 2. Use Sysbench to import 16 tables, each table with 10 million rows of data.
 3. Execute the `analyze table` statement on each table.
 4. Back up the data used for restore before different concurrency tests, which ensures data consistency for each test.
-5. Start the Sysbench client to perform the `point_select`, `read_write`, `update_index`, and `update_non_index` tests. Perform stress tests on TiDB via HAProxy. For each concurrency under each load, the test takes 20 minutes.
+5. Start the Sysbench client to perform the `point_select`, `read_write`, `update_index`, and `update_non_index` tests. Perform stress tests on TiDB via HAProxy. For each concurrency under each workload, the test takes 20 minutes.
 6. After each type of test is completed, stop the cluster, overwrite the cluster with the backup data in step 4, and restart the cluster.
 
 ### Prepare test data
