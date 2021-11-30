@@ -14,7 +14,7 @@ This document describes best practices for configuration and usage of [HAProxy](
 
 HAProxy is free, open-source software written in C language that provides a high availability load balancer and proxy server for TCP and HTTP-based applications. Because of its fast and efficient use of CPU and memory, HAProxy is now widely used by many well-known websites such as GitHub, Bitbucket, Stack Overflow, Reddit, Tumblr, Twitter, Tuenti, and AWS (Amazon Web Services).
 
-HAProxy is written in the year 2000 by Willy Tarreau, the core contributor to the Linux kernel, who is still responsible for the maintenance of the project and provides free software updates in the open-source community. The latest stable version 2.5.0 was released on November 23, 2021, bringing more [excellent features](https://www.haproxy.com/blog/announcing-haproxy-2-5/).
+HAProxy is written in the year 2000 by Willy Tarreau, the core contributor to the Linux kernel, who is still responsible for the maintenance of the project and provides free software updates in the open-source community. In this guide, HAProxy [2.5.0](https://www.haproxy.com/blog/announcing-haproxy-2-5/) is used. It is recommended to use the latest stable version. See [the released version of HAProxy](http://www.haproxy.org/) for details.
 
 ## Basic features
 
@@ -104,21 +104,20 @@ You can easily use HAProxy to configure and set up a load-balanced database envi
     ```
 
 4. Reconfigure the profile:
+
     {{< copyable "shell-regular" >}}
 
     ```bash
     echo 'export PATH=/app/haproxy/bin:$PATH' >> /etc/profile
     ```
 
-5. Check whether the installation is successful：
+5. Check whether the installation is successful:
 
     {{< copyable "shell-regular" >}}
 
     ```bash
     which haproxy
     ```
-
-
 #### HAProxy commands
 
 Execute the following command to print a list of keywords and their basic usage:
@@ -170,7 +169,7 @@ global                                     # Global configuration.
    chroot      /var/lib/haproxy            # Changes the current directory and sets superuser privileges for the startup process to improve security.
    pidfile     /var/run/haproxy.pid        # Writes the PIDs of HAProxy processes into this file.
    maxconn     256                         # The maximum number of concurrent connections per HAProxy thread.
-   nbthread    48                          # The maximum number of threads. （The upper limit is equal to the number of cpus)
+   nbthread    48                          # The maximum number of threads. (The upper limit is equal to the number of CPUs)
    user        haproxy                     # Same with the UID parameter.
    group       haproxy                     # Same with the GID parameter. A dedicated user group is recommended.
    daemon                                  # Makes the process fork into background. It is equivalent to the command line "-D" argument. It can be disabled by the command line "-db" argument.
