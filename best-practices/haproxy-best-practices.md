@@ -214,7 +214,6 @@ To start HAProxy, run `haproxy`. `/etc/haproxy/haproxy.cfg` is read by default (
 haproxy -f /etc/haproxy/haproxy.cfg
 ```
 
-
 ### Stop HAProxy
 
 To stop HAProxy, use the `kill -9` command.
