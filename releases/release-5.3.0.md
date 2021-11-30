@@ -224,6 +224,7 @@ It is recommended that you create a least-privileged SQL user to access and sign
     [User Document](/ticdc/manage-ticdc.md)
 
 - **TiCDC supports the HTTP protocol OpenAPI for managing TiCDC tasks**
+
     Since TiDB v5.3.0, TiCDC OpenAPI becomes an General Availability (GA) feature. You can query and operate TiCDC clusters using OpenAPI in the production environment.
 
 ### Deployment and maintenance
