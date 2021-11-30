@@ -113,7 +113,7 @@ By default, only one instance is started for each TiDB, TiKV, and PD component. 
 {{< copyable "shell-regular" >}}
 
 ```shell
-tiup playground v3.0.10 --db 3 --pd 3 --kv 3
+tiup playground v5.3.0 --db 3 --pd 3 --kv 3
 ```
 
 ## Quickly connect to the TiDB cluster started by playground
