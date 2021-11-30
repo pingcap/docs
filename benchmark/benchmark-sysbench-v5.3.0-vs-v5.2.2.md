@@ -115,7 +115,7 @@ listen tidb-cluster                        # Database load balancing.
 
 ### Prepare test data
 
-Execute the following command to prepare the test data:
+Run the following command to prepare the test data:
 
 {{< copyable "shell-regular" >}}
 
@@ -134,7 +134,7 @@ sysbench oltp_common \
 
 ### Perform the test
 
-Execute the following command to perform the test:
+Run the following command to perform the test:
 
 {{< copyable "shell-regular" >}}
 
