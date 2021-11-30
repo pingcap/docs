@@ -16,10 +16,10 @@ This guide walks you through the quickest way to get started with TiDB. You will
 > - To deploy TiDB in Kubernetes, see [Get Started with TiDB in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/get-started).
 > - To manage TiDB in the cloud, see [TiDB Cloud Quick Start](https://docs.pingcap.com/tidbcloud/beta/tidb-cloud-quickstart).
 
+## Deploy a local test environment
+
 <SimpleTab>
 <div label="Mac">
-
-## Deploy a local test environment on Mac OS
 
 As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB instances, 3 TiKV instances, 3 PD instances, and optional TiFlash instances. With TiUP Playground, you can quickly build the test cluster by taking the following steps:
 
@@ -125,8 +125,6 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
 
 <div label="Linux">
 
-## Deploy a local test environment on Linux OS
-
 As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB instances, 3 TiKV instances, 3 PD instances, and optional TiFlash instances. With TiUP Playground, you can quickly build the test cluster by taking the following steps:
 
 1. Download and install TiUP:
@@ -226,6 +224,10 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
 > **Note:**
 >
 > TiUP Playground listens on `127.0.0.1` by default, and the service is only locally accessible. If you want the service to be externally accessible, specify the listening address using the `--host` parameter to bind the network interface card (NIC) to an externally accessible IP address.
+
+</div>
+
+</SimpleTab>
 
 ## Set up a test environment on a single machine using TiUP cluster
 
@@ -440,9 +442,6 @@ Other requirements for the target machine:
         tiup cluster display <cluster-name>
         ```
 
-</div>
-
-</SimpleTab>
 
 ## What's next
 
