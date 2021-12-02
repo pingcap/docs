@@ -3,12 +3,12 @@
 
 - About TiDB
   - [TiDB Introduction](/overview.md)
-  - [TiDB 5.2 Release Notes](/releases/release-5.2.0.md)
+  - [TiDB 5.3 Release Notes](/releases/release-5.3.0.md)
   - [Basic Features](/basic-features.md)
   - [Experimental Features](/experimental-features.md)
   - Benchmarks
-    - [v5.2 Sysbench Performance Test Report](/benchmark/benchmark-sysbench-v5.2.0-vs-v5.1.1.md)
-    - [v5.2 TPC-C Performance Test Report](/benchmark/v5.2-performance-benchmarking-with-tpcc.md)
+    - [v5.3 Sysbench Performance Test Report](/benchmark/benchmark-sysbench-v5.3.0-vs-v5.2.2.md)
+    - [v5.3 TPC-C Performance Test Report](/benchmark/v5.3-performance-benchmarking-with-tpcc.md)
     - [v5.3 MPP mode TPC-H 100GB Performance Test](/benchmark/v5.3-performance-benchmarking-with-tpch.md)
   - [MySQL Compatibility](/mysql-compatibility.md)
   - [TiDB Limitations](/tidb-limitations.md)
@@ -201,7 +201,7 @@
       - [Table Filter](/table-filter.md)
       - [CSV Support](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)
       - [Backends](/tidb-lightning/tidb-lightning-backends.md)
-      + [Import Data in Parallel](/tidb-lightning/tidb-lightning-distributed-import.md)
+      - [Import Data in Parallel](/tidb-lightning/tidb-lightning-distributed-import.md)
       - [Web Interface](/tidb-lightning/tidb-lightning-web-interface.md)
     - [Monitor](/tidb-lightning/monitor-tidb-lightning.md)
     - [FAQ](/tidb-lightning/tidb-lightning-faq.md)
@@ -574,6 +574,8 @@
 - Release Notes
   - [All Releases](/releases/release-notes.md)
   - [Release Timeline](/releases/release-timeline.md)
+  - v5.3
+    - [5.3.0](/releases/release-5.3.0.md)
   - v5.2
     - [5.2.2](/releases/release-5.2.2.md)
     - [5.2.1](/releases/release-5.2.1.md)
