@@ -124,6 +124,41 @@ These differences are documented further in [`ANALYZE TABLE`](/sql-statements/sq
 
 For details, see the [`SELECT`](/sql-statements/sql-statement-select.md) statement reference.
 
+### Update statement
+
+```sql
+CREATE TABLE companies (id bigint primary key, ida bigint);
+INSERT INTO companies VALUES (14, 14);
+UPDATE companies SET id = id + 1, ida = id * 2;
+```
+
+In MySQL the result is
+
+```sql
+mysql> select * from companies;
++----+------+
+| id | ida  |
++----+------+
+| 15 |   30 |
++----+------+
+1 row in set (0.00 sec)
+```
+
+In TiDB the result is
+
+
+```sql
+mysql> select * from companies;
++----+------+
+| id | ida  |
++----+------+
+| 15 |   28 |
++----+------+
+1 row in set (0.00 sec)
+```
+
+In TiDB, `id` is always the original value of the `id` column, while in MySQL, the value of the later `id` is result of the `id` after the evaluation of the previous expression.
+
 ### Views
 
 Views in TiDB are not updatable. They do not support write operations such as `UPDATE`, `INSERT`, and `DELETE`.
