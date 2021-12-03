@@ -102,7 +102,7 @@ In v5.3, the key new features or improvements are as follows:
         - Supports duplicated table names. You do not need to design complicated naming rules for your application.
         - Provides session-level data isolation, which enables you to design a simpler application logic. After the transaction finishes, the temporary tables are dropped.
 
-    [User document](/temporary-tables.md), [#24169](https://github.com/pingcap/tidb/issues/24169)
+        [User document](/temporary-tables.md), [#24169](https://github.com/pingcap/tidb/issues/24169)
 
 - **Support the `FOR UPDATE OF TABLES` syntax**
 
@@ -222,7 +222,7 @@ It is recommended that you create a least-privileged SQL user to access and sign
 
     TiCDC provides the eventually consistent replication capability in disaster scenarios. When a disaster occurs in the primary TiDB cluster and the service cannot be resumed in a short period of time, TiCDC needs to provide the ability to ensure the consistency of data in the secondary cluster. Meanwhile, TiCDC needs to allow the business to quickly switch the traffic to the secondary cluster to avoid the database being unavailable for a long time and affecting the business.
 
-    This feature supports TiCDC to replicate incremental data from a TiDB cluster to the secondary relational database TiDB/Aurora/MySQL/MariaDB. In case the primary cluster crashes, TiCDC can recover the secondary cluster to a certain snapshot in the primary cluster within 30 minutes, given the condition that before disaster the replication status of TiCDC is normal and replication lag is small. It allows data loss of less than 5 minutes, that is, RPO <= 30min, and RTO <= 5min.
+    This feature supports TiCDC to replicate incremental data from a TiDB cluster to the secondary relational database TiDB/Aurora/MySQL/MariaDB. In case the primary cluster crashes, TiCDC can recover the secondary cluster to a certain snapshot in the primary cluster within 5 minutes, given the condition that before disaster the replication status of TiCDC is normal and replication lag is small. It allows data loss of less than 30 minutes, that is, RTO <= 5min, and RPO <= 30min.
 
     [User Document](/ticdc/manage-ticdc.md)
 
@@ -242,15 +242,15 @@ It is recommended that you create a least-privileged SQL user to access and sign
 
     [User document](/dashboard/continuous-profiling.md)
 
-## Removed feature
-
-Starting from TiCDC v5.3.0, the cyclic replication feature between TiDB clusters (an experimental feature in v5.0.0) has been removed. If you have already used this feature to replicate data before upgrading TiCDC, the related data is not affected after the upgrade.
-
-### Telemetry
+## Telemetry
 
 TiDB adds the information to the telemetry report about whether or not the TEMPORARY TABLE feature is used. This does not include table names or table data.
 
 To learn more about telemetry and how to disable this behavior, refer to [Telemetry](/telemetry.md).
+
+## Removed feature
+
+Starting from TiCDC v5.3.0, the cyclic replication feature between TiDB clusters (an experimental feature in v5.0.0) has been removed. If you have already used this feature to replicate data before upgrading TiCDC, the related data is not affected after the upgrade.
 
 ## Improvements
 
