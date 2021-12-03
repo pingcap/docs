@@ -17,6 +17,7 @@ title: Release Notes
 
 ## 5.1
 
+- [5.1.3](/releases/release-5.1.3.md)
 - [5.1.2](/releases/release-5.1.2.md)
 - [5.1.1](/releases/release-5.1.1.md)
 - [5.1.0](/releases/release-5.1.0.md)
