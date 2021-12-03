@@ -8,7 +8,9 @@ aliases: ['/docs/dev/br/backup-and-restore-tool/','/docs/dev/reference/tools/br/
 
 [BR](http://github.com/pingcap/br) (Backup & Restore) is a command-line tool for distributed backup and restoration of the TiDB cluster data.
 
-Compared with [`dumpling`](/backup-and-restore-using-dumpling-lightning.md), BR is more suitable for scenarios of huge data volume.
+Compared with [`dumpling`](/backup-and-restore-using-dumpling-lightning.md), BR is more suitable for scenarios involved huge data volumes.
+
+In addition to regular backup and restoration, you can also use BR for large-scale data migration as long as compatibility is ensured.
 
 This document describes BR's implementation principles, recommended deployment configuration, usage restrictions and several methods to use BR.
 
@@ -136,6 +138,7 @@ These features are as follows:
 | Clustered index | [#565](https://github.com/pingcap/br/issues/565)       | Make sure that the value of the `tidb_enable_clustered_index` global variable during restore is consistent with that during backup. Otherwise, data inconsistency might occur, such as `default not found` and inconsistent data index. |
 | New collation  | [#352](https://github.com/pingcap/br/issues/352)       |  Make sure that the value of the `new_collations_enabled_on_first_bootstrap` variable is consistent with that during backup. Otherwise, inconsistent data index might occur and checksum might fail to pass. |
 | TiCDC enabled on the restore cluster | [#364](https://github.com/pingcap/br/issues/364#issuecomment-646813965) | Currently, TiKV cannot push down the BR-ingested SST files to TiCDC. Therefore, you need to disable TiCDC when using BR to restore data. |
+| Global temporary tables |  | Make sure that you are using BR v5.3.0 or a later version to back up and restore data. Otherwise, an error occurs in the definition of the backed global temporary tables.  |
 
 However, even after you have ensured that the above features are consistently enabled or disabled during backup and restore, compatibility issues might still occur due to the inconsistent internal versions or inconsistent interfaces between BR and TiKV/TiDB/PD. To avoid such cases, BR has the built-in version check.
 
@@ -187,6 +190,7 @@ The following are some recommended operations for using BR for backup and restor
 - It is recommended that you execute multiple restore operations serially. Running different restore operations in parallel increases Region conflicts and also reduces restore performance.
 - It is recommended that you mount a shared storage (for example, NFS) on the backup path specified by `-s`, to make it easier to collect and manage backup files.
 - It is recommended that you use a storage hardware with high throughput, because the throughput of a storage hardware limits the backup and restoration speed.
+- It is recommended that you disable the checksum feature (`--checksum = false`) during backup operation and only enable it during the restore operation to reduce migration time. This is because BR by default respectively performs checksum calculation after backup and restore operations to compare the stored data with the corresponding cluster data to ensure accuracy.
 
 ### How to use BR
 

@@ -132,7 +132,6 @@ The following TiKV configuration items can be modified online:
 | `raftstore.raft-log-gc-count-limit` | The hard limit on the allowable number of residual Raft logs |
 | `raftstore.raft-log-gc-size-limit` | The hard limit on the allowable size of residual Raft logs |
 | `raftstore.raft-entry-cache-life-time` | The maximum remaining time allowed for the log cache in memory |
-| `raftstore.raft-reject-transfer-leader-duration` | Determines the smallest duration that a Leader is transferred to a newly added node |
 | `raftstore.split-region-check-tick-interval` | The time interval at which to check whether the Region split is needed |
 | `raftstore.region-split-check-diff` | The maximum value by which the Region data is allowed to exceed before Region split |
 | `raftstore.region-compact-check-interval` | The time interval at which to check whether it is necessary to manually trigger RocksDB compaction |
@@ -198,6 +197,11 @@ The following TiKV configuration items can be modified online:
 | `split.byte-threshold` | The threshold to execute `load-base-split` on a Region. If the traffic of read requests for a Region exceeds the `byte-threshold` for a consecutive period of time, this Region should be split. |
 | `split.split-balance-score` | The parameter of `load-base-split`, which ensures the load of the two split Regions is as balanced as possible. The smaller the value is, the more balanced the load is. But setting it too small might cause split failure. |
 | `split.split-contained-score` | The parameter of `load-base-split`. The smaller the value, the fewer cross-Region visits after Region split. |
+| `cdc.min-ts-interval` | The time interval at which Resolved TS is forwarded  |
+| `cdc.old-value-cache-memory-quota` | The upper limit of memory occupied by the TiCDC Old Value entries |
+| `cdc.sink-memory-quota` | The upper limit of memory occupied by TiCDC data change events |
+| `cdc.incremental-scan-speed-limit` | The upper limit on the speed of incremental scanning for historical data |
+| `cdc.incremental-scan-concurrency` | The maximum number of concurrent incremental scanning tasks for historical data |
 
 In the table above, parameters with the `{db-name}` or `{db-name}.{cf-name}` prefix are configurations related to RocksDB. The optional values of `db-name` are `rocksdb` and `raftdb`.
 

@@ -8,7 +8,7 @@ aliases: ['/docs/dev/alert-rules/','/docs/dev/reference/alert-rules/']
 
 # TiDB Cluster Alert Rules
 
-This document describes the alert rules for different components in a TiDB cluster, including the rule descriptions and solutions of the alert items in TiDB, TiKV, PD, TiFlash, TiDB Binlog, Node_exporter and Blackbox_exporter.
+This document describes the alert rules for different components in a TiDB cluster, including the rule descriptions and solutions of the alert items in TiDB, TiKV, PD, TiFlash, TiDB Binlog, TiCDC, Node_exporter and Blackbox_exporter.
 
 According to the severity level, alert rules are divided into three categories (from high to low): emergency-level, critical-level, and warning-level. This division of severity levels applies to all alert items of each component below.
 
@@ -345,7 +345,7 @@ This section gives the alert rules for the PD component.
 
 * Alert rule:
 
-    `count(changes(pd_server_tso{type="save"}[10m]) > 0) >= 2`
+    `count(changes(pd_tso_events{type="save"}[10m]) > 0) >= 2`
 
 * Description:
 
@@ -376,7 +376,7 @@ This section gives the alert rules for the PD component.
 
 * Alert rule:
 
-    `changes(pd_server_tso{type="system_time_slow"}[10m]) >= 1`
+    `changes(pd_tso_events{type="system_time_slow"}[10m]) >= 1`
 
 * Description:
 
@@ -789,6 +789,10 @@ For the detailed descriptions of TiFlash alert rules, see [TiFlash Alert Rules](
 
 For the detailed descriptions of TiDB Binlog alert rules, see [TiDB Binlog monitoring document](/tidb-binlog/monitor-tidb-binlog-cluster.md#alert-rules).
 
+## TiCDC Alert rules
+
+For the detailed descriptions of TiCDC alert rules, see [TiCDC Alert Rules](/ticdc/ticdc-alert-rules.md).
+
 ## Node_exporter host alert rules
 
 This section gives the alert rules for the Node_exporter host.
@@ -924,7 +928,7 @@ This section gives the alert rules for the Node_exporter host.
 
 * Alert rule:
 
-    `((rate(node_disk_write_time_seconds_total{device=~".+"}[5m]) / rate(node_disk_writes_completed_total{device=~".+"}[5m])) or (irate(node_disk_write_time_seconds_total{device=~".+"}[5m]) / irate(node_disk_writes_completed_total{device=~".+"}[5m]))) * 1000 > 16`
+    `((rate(node_disk_write_time_seconds_total{device=~".+"}[5m]) / rate(node_disk_writes_completed_total{device=~".+"}[5m])) or (irate(node_disk_write_time_seconds_total{device=~".+"}[5m]) / irate(node_disk_writes_completed_total{device=~".+"}[5m])))> 16`
 
 * Description:
 

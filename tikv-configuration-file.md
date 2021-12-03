@@ -76,11 +76,11 @@ This document only describes the parameters that are not included in command-lin
 + The compression algorithm for gRPC messages
 + Optional values: `"none"`, `"deflate"`, `"gzip"`
 + Default value: `"none"`
-+ Note: When the value is `gzip`, TiDB Dashboard will have a display error because it might not complete the corresponding compression algorithm in some cases. If you adjust the value back to the default `none`, TiDB Dashboard will display normally. 
++ Note: When the value is `gzip`, TiDB Dashboard will have a display error because it might not complete the corresponding compression algorithm in some cases. If you adjust the value back to the default `none`, TiDB Dashboard will display normally.
 
 ### `grpc-concurrency`
 
-+ The number of gRPC worker threads
++ The number of gRPC worker threads. When you modify the size of the gRPC thread pool, refer to [Performance tuning for TiKV thread pools](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools).
 + Default value: `5`
 + Minimum value: `1`
 
@@ -101,6 +101,13 @@ This document only describes the parameters that are not included in command-lin
 + The maximum number of links among TiKV nodes for Raft communication
 + Default: `1`
 + Minimum value: `1`
+
+### `max-grpc-send-msg-len`
+
++ Sets the maximum length of a gRPC message that can be sent 
++ Default: `10485760`
++ Unit: Bytes
++ Maximum value: `2147483647`
 
 ### `grpc-stream-initial-window-size`
 
@@ -160,7 +167,7 @@ This document only describes the parameters that are not included in command-lin
 
 ### `raft-client-queue-size`
 
-+ Specifies the queue size of the Raft messages in TiKV. If too many messages not sent in time result in a full buffer, or messages discarded, you can specify a greater value to improve system stability. 
++ Specifies the queue size of the Raft messages in TiKV. If too many messages not sent in time result in a full buffer, or messages discarded, you can specify a greater value to improve system stability.
 + Default value: `8192`
 
 ## readpool.unified
@@ -174,7 +181,7 @@ Configuration items related to the single thread pool serving read requests. Thi
 
 ### `max-thread-count`
 
-+ The maximum working thread count of the unified read pool
++ The maximum working thread count of the unified read pool or the UnifyReadPool thread pool. When you modify the size of this thread pool, refer to [Performance tuning for TiKV thread pools](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools).
 + Default value: `MAX(4, CPU * 0.8)`
 
 ### `stack-size`
@@ -312,7 +319,7 @@ Configuration items related to storage
 
 ### `scheduler-worker-pool-size`
 
-+ The number of `scheduler` threads, mainly used for checking transaction consistency before data writing. If the number of CPU cores is greater than or equal to `16`, the default value is `8`; otherwise, the default value is `4`.
++ The number of `scheduler` threads, mainly used for checking transaction consistency before data writing. If the number of CPU cores is greater than or equal to `16`, the default value is `8`; otherwise, the default value is `4`. When you modify the size of the Scheduler thread pool, refer to [Performance tuning for TiKV thread pools](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools).
 + Default value: `4`
 + Minimum value: `1`
 
@@ -324,7 +331,9 @@ Configuration items related to storage
 
 ### `reserve-space`
 
-+ The size of the temporary file that preoccupies the extra space when TiKV is started. The name of temporary file is `space_placeholder_file`, located in the `storage.data-dir` directory. When TiKV runs out of disk space and cannot be started normally, you can delete this file as an emergency intervention and set `reserve-space` to `"0MB"`.
++ When TiKV is started, some space is reserved on the disk as disk protection. When the remaining disk space is less than the reserved space, TiKV restricts some write operations. The reserved space is divided into two parts: 80% of the reserved space is used as the extra disk space required for operations when the disk space is insufficient, and the other 20% is used to store the temporary file. In the process of reclaiming space, if the storage is exhausted by using too much extra disk space, this temporary file serves as the last protection for restoring services.
++ The name of the temporary file is `space_placeholder_file`, located in the `storage.data-dir` directory. When TiKV goes offline because its disk space ran out, if you restart TiKV, the temporary file is automatically deleted and TiKV tries to reclaim the space.
++ When the remaining space is insufficient, TiKV does not create the temporary file. The effectiveness of the protection is related to the size of the reserved space. The size of the reserved space is the larger value between 5% of the disk capacity and this configuration value. When the value of this configuration item is `"0MB"`, TiKV disables this disk protection feature.
 + Default value: `"5GB"`
 + Unite: MB|GB
 
@@ -491,12 +500,6 @@ Configuration items related to Raftstore
 
 + The maximum remaining time allowed for the log cache in memory.
 + Default value: `"30s"`
-+ Minimum value: `0`
-
-### `raft-reject-transfer-leader-duration`
-
-+ The protection time for new nodes, which is used to control the shortest interval to migrate a leader to the newly added node. Setting this value too small might cause the failure of leader transfer.
-+ Default value: `"3s"`
 + Minimum value: `0`
 
 ### `hibernate-regions`
@@ -682,7 +685,7 @@ Configuration items related to Raftstore
 
 ### `apply-pool-size`
 
-+ The allowable number of threads in the pool that flushes data to storage
++ The allowable number of threads in the pool that flushes data to storage. When you modify the size of this thread pool, refer to [Performance tuning for TiKV thread pools](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools).
 + Default value: `2`
 + Minimum value: greater than `0`
 
@@ -694,9 +697,15 @@ Configuration items related to Raftstore
 
 ### `store-pool-size`
 
-+ The allowable number of threads that process Raft
++ The allowable number of threads that process Raft, which is the size of the Raftstore thread pool. When you modify the size of this thread pool, refer to [Performance tuning for TiKV thread pools](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools).
 + Default value: `2`
 + Minimum value: greater than `0`
+
+### `store-io-pool-size` <span class="version-mark">New in v5.3.0</span>
+
++ The allowable number of threads that process Raft I/O tasks, which is the size of the StoreWriter thread pool. When you modify the size of this thread pool, refer to [Performance tuning for TiKV thread pools](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools).
++ Default value: `0`
++ Minimum value: `0`
 
 ### `future-poll-size`
 
@@ -706,15 +715,27 @@ Configuration items related to Raftstore
 
 ### `cmd-batch`
 
-+ Controls whether to enable batch processing of the requests. When it is enabled, the write performance is significantly improved. 
++ Controls whether to enable batch processing of the requests. When it is enabled, the write performance is significantly improved.
 + Default value: `true`
 
 ### `inspect-interval`
 
-+ At a certain interval, TiKV inspects the latency of the Raftstore component. This parameter specifies the interval of the inspection. If the latency exceeds this value, this inspection is marked as timeout. 
-+ Judges whether the TiKV node is slow based on the ratio of timeout inspection. 
++ At a certain interval, TiKV inspects the latency of the Raftstore component. This parameter specifies the interval of the inspection. If the latency exceeds this value, this inspection is marked as timeout.
++ Judges whether the TiKV node is slow based on the ratio of timeout inspection.
 + Default value: `"500ms"`
 + Minimum value: `"1ms"`
+
+### `raft-write-size-limit` <span class="version-mark">New in v5.3.0</span>
+
++ Determines the threshold at which Raft data is written into the disk. If the data size is larger than the value of this configuration item, the data is written to the disk. When the value of `store-io-pool-size` is `0`, this configuration item does not take effect.
++ Default value: `1MB`
++ Minimum value: `0`
+
+### `raft-msg-flush-interval` <span class="version-mark">New in v5.3.0</span>
+
++ Determines the interval at which Raft messages are sent in batches. The Raft messages in batches are sent at every interval specified by this configuration item. When the value of `store-io-pool-size` is `0`, this configuration item does not take effect.
++ Default value: `250us`
++ Minimum value: `0`
 
 ## Coprocessor
 
@@ -759,7 +780,7 @@ Configuration items related to RocksDB
 
 ### `max-background-jobs`
 
-+ The number of background threads in RocksDB
++ The number of background threads in RocksDB. When you modify the size of the RocksDB thread pool, refer to [Performance tuning for TiKV thread pools](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools).
 + Default value: `8`
 + Minimum value: `2`
 
@@ -1233,7 +1254,7 @@ Configuration items related to `raftdb`
 
 ### `max-background-jobs`
 
-+ The number of background threads in RocksDB
++ The number of background threads in RocksDB. When you modify the size of the RocksDB thread pool, refer to [Performance tuning for TiKV thread pools](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools).
 + Default value: `4`
 + Minimum value: `2`
 
@@ -1259,13 +1280,18 @@ Configuration items related to security
 
 ### `cert-path`
 
-+ The path of the Privacy Enhanced Mail (PEM) file that contains the X509 certificate
++ The path of the Privacy Enhanced Mail (PEM) file that contains the X.509 certificate
 + Default value: ""
 
 ### `key-path`
 
-+ The path of the PEM file that contains the X509 key
++ The path of the PEM file that contains the X.509 key
 + Default value: ""
+
+### `cert-allowed-cn`
+
++ A list of acceptable X.509 Common Names in certificates presented by clients. Requests are permitted only when the presented Common Name is an exact match with one of the entries in the list.
++ Default value: `[]`. This means that the client certificate CN check is disabled by default.
 
 ### `redact-info-log` <span class="version-mark">New in v4.0.8</span>
 
