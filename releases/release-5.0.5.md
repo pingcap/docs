@@ -10,7 +10,7 @@ TiDB version: 5.0.5
 
 ## Improvement
 
-+ TiDB
++ TiDB 
 
     - Upgrade the Grafana version from 7.5.7 to 7.5.11
 
