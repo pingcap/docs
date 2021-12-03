@@ -61,7 +61,7 @@ This is a list of TiDB adopters in various industries.
 |[Kunlun](https://www.crunchbase.com/organization/kunlun)|Gaming|[English](https://pingcap.com/case-studies/empowering-your-gaming-application-with-a-scale-out-newsql-database)|
 |[YOOZOO Games](https://www.crunchbase.com/organization/yoozoo-games)|Gaming||
 |[Seasun Games](https://www.crunchbase.com/organization/seasun)|Gaming||
-|[FUNYOURS JAPAN](http://company.funyours.co.jp/)|Gaming||
+|[FUNYOURS JAPAN](https://www.funyours.co.jp/#/top/pic1)|Gaming||
 |[Hoodinn](https://www.crunchbase.com/organization/hoodinn)|Gaming||
 |[SEA group](https://sea-group.org/?lang=en)|Gaming||
 |[Zhaopin.com](https://www.crunchbase.com/organization/zhaopin)|Recruiting||
