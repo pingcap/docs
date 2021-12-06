@@ -58,7 +58,7 @@ TiDB version: 4.0.16
         - Add metrics to observe incremental scan remaining time [#3032](https://github.com/pingcap/ticdc/pull/3032)
         - Fix possible deadlocking when Kafka producer reports an error. [#3015](https://github.com/pingcap/ticdc/pull/3015)
         - Release new owner and processor implementation to release-5.0.
-Highly available model and core modules refactoring.(ref: https://github.com/pingcap/ticdc/pull/1927) [#3014](https://github.com/pingcap/ticdc/pull/3014)
+        - Highly available model and core modules refactoring.(ref: https://github.com/pingcap/ticdc/pull/1927) [#3014](https://github.com/pingcap/ticdc/pull/3014)
         - `None`. [#2945](https://github.com/pingcap/ticdc/pull/2945)
         - Fix dml is not replicated after adding partition in partition table without valid index [#2863](https://github.com/pingcap/ticdc/pull/2863)
         - Extend creating service gc safepoint ttl to 1 hr to support creating changefeeds that needs long initialization time. [#2851](https://github.com/pingcap/ticdc/pull/2851)
