@@ -34,7 +34,7 @@ TiDB version: 4.0.16
     - fix channel full could break the raft connection [#11069](https://github.com/tikv/tikv/pull/11069)
     - Database restored from BR or Lightning Local-backend is now smaller, should be matching the original cluster size when backed up. [#10642](https://github.com/tikv/tikv/pull/10642)
     - [#10616](https://github.com/tikv/tikv/pull/10616)
-    - ```release-note [#9870](https://github.com/tikv/tikv/pull/9870)
+    - [#9870](https://github.com/tikv/tikv/pull/9870)
 
 + PD
 
