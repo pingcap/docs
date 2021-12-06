@@ -8,6 +8,28 @@ Release Date: December 10, 2021
 
 TiDB version: 4.0.16
 
+## Bug Fixes
+
++ TiDB
+
+    - Check step overflow when converting a range to points for estimation [#30017](https://github.com/pingcap/tidb/pull/30017)
+    - Fix wrong result for control function with enum type. [#30011](https://github.com/pingcap/tidb/pull/30011)
+    - expression: fix different results for greatest when vectorized is off. [#29916](https://github.com/pingcap/tidb/pull/29916)
+    - Fix index join panic on prefix index on some cases [#29217](https://github.com/pingcap/tidb/pull/29217)
+    - Planner: fix the issue that planner may cache invalid plans for joins in some cases [#28444](https://github.com/pingcap/tidb/pull/28444)
+    - fix a bug that can not insert null into a not null column in the empty SQL mode [#27832](https://github.com/pingcap/tidb/pull/27832)
+
++ TiFlash
+
+    - Fix the issue that comparison between Decimal may cause overflow and report `Can't compare`. [#3365](https://github.com/pingcap/tics/pull/3365)
+    - Fix the issue that TiFlash fails to start up under platform without library `nsl` [#3209](https://github.com/pingcap/tics/pull/3209)
+
++ PD
+
+    - Fix panic issue after TiKV node scales in [#4378](https://github.com/tikv/pd/pull/4378)
+    - Fix the issue that PD may not elect leader as soon as leader step down [#4219](https://github.com/tikv/pd/pull/4219)
+    - `evict-leader-scheduler` supports schedule the regions with unhealthy peers. [#4133](https://github.com/tikv/pd/pull/4133)
+
 ## __unsorted
 
 + TiDB
@@ -73,25 +95,4 @@ TiDB version: 4.0.16
         - Extend creating service gc safepoint ttl to 1 hr to support creating changefeeds that needs long initialization time. [#2851](https://github.com/pingcap/ticdc/pull/2851)
         - Fix memory leak which may happen in create new changefeed. [#2623](https://github.com/pingcap/ticdc/pull/2623)
         - Prohibit operating TiCDC clusters across major and minor versions [#2601](https://github.com/pingcap/ticdc/pull/2601)
-
-## Bug Fixes
-
-+ TiDB
-
-    - Check step overflow when converting a range to points for estimation [#30017](https://github.com/pingcap/tidb/pull/30017)
-    - Fix wrong result for control function with enum type. [#30011](https://github.com/pingcap/tidb/pull/30011)
-    - expression: fix different results for greatest when vectorized is off. [#29916](https://github.com/pingcap/tidb/pull/29916)
-    - Fix index join panic on prefix index on some cases [#29217](https://github.com/pingcap/tidb/pull/29217)
-    - Planner: fix the issue that planner may cache invalid plans for joins in some cases [#28444](https://github.com/pingcap/tidb/pull/28444)
-    - fix a bug that can not insert null into a not null column in the empty SQL mode [#27832](https://github.com/pingcap/tidb/pull/27832)
-
-+ TiFlash
-
-    - Fix the issue that comparison between Decimal may cause overflow and report `Can't compare`. [#3365](https://github.com/pingcap/tics/pull/3365)
-    - Fix the issue that TiFlash fails to start up under platform without library `nsl` [#3209](https://github.com/pingcap/tics/pull/3209)
-
-+ PD
-
-    - Fix panic issue after TiKV node scales in [#4378](https://github.com/tikv/pd/pull/4378)
-    - Fix the issue that PD may not elect leader as soon as leader step down [#4219](https://github.com/tikv/pd/pull/4219)
-    - `evict-leader-scheduler` supports schedule the regions with unhealthy peers. [#4133](https://github.com/tikv/pd/pull/4133)
+  
