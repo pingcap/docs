@@ -89,7 +89,7 @@ TiDB version: 4.0.16
         + Extend creating service gc safepoint ttl to 1 hr to support creating changefeeds that needs long initialization time. [#2851](https://github.com/pingcap/ticdc/pull/2851)
         + Prohibit operating TiCDC clusters across major and minor versions [#2601](https://github.com/pingcap/ticdc/pull/2601)
 
-   + Dumpling
+    + Dumpling
 
         + note 1
 
