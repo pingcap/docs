@@ -19,7 +19,6 @@ TiDB version: 4.0.16
     - Fix wrong result of microsecond function in vectorized [#29384](https://github.com/pingcap/tidb/pull/29384)
     - Fix incomplete log information about auto analyze. [#29227](https://github.com/pingcap/tidb/pull/29227)
     - Fix wrong result of hour function in vectorized expression [#28870](https://github.com/pingcap/tidb/pull/28870)
-    - None. [#27926](https://github.com/pingcap/tidb/pull/27926)
     - Fix an issue that NO_ZERO_IN_DATE does not work on the default values. [#26902](https://github.com/pingcap/tidb/pull/26902)
     - Fix copt-cache metrics, it will display the number of  hits/miss/evict on Grafana. [#26342](https://github.com/pingcap/tidb/pull/26342)
     - Fix the issue that concurrently truncating the same partition hangs DDL. [#26237](https://github.com/pingcap/tidb/pull/26237)
