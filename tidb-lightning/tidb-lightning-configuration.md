@@ -261,7 +261,7 @@ max-allowed-packet = 67_108_864
 # Specifies whether to perform `ADMIN CHECKSUM TABLE <table>` for each table to verify data integrity after importing.
 # The following options are available:
 # - "required" (default value): Perform admin checksum. If checksum fails, TiDB Lightning will exit with failure.
-# - "optional": Perform admin checksum. If checksum fails, TiDB Lightning will report a warn log but ignore any error.
+# - "optional": Perform admin checksum. If checksum fails, TiDB Lightning will report a WARN log but ignore any error.
 # - "off": Do not perform checksum.
 # Note that since v4.0.8, the default value has changed from "true" to "required".
 # For backward compatibility, bool values "true" and "false" are also allowed for this field.
