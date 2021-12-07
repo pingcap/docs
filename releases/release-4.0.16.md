@@ -89,10 +89,9 @@ TiDB version: 4.0.16
         - Fix tikv_cdc_min_resolved_ts_no_change_for_1m keep firing when there is no changefeed. [#3023](https://github.com/pingcap/ticdc/pull/3023)
         - Fix possible deadlocking when Kafka producer reports an error. [#3015](https://github.com/pingcap/ticdc/pull/3015)
         - Release new owner and processor implementation to release-5.0.
-        - Highly available model and core modules refactoring.(ref: https://github.com/pingcap/ticdc/pull/1927) [#3014](https://github.com/pingcap/ticdc/pull/3014)
+        - Highly available model and core modules refactoring.[#1927](https://github.com/pingcap/ticdc/pull/1927) [#3014](https://github.com/pingcap/ticdc/pull/3014)
         - Ignore the global flag for changefeed update command. [#2875](https://github.com/pingcap/ticdc/pull/2875)
         - Fix dml is not replicated after adding partition in partition table without valid index [#2863](https://github.com/pingcap/ticdc/pull/2863)
         - Extend creating service gc safepoint ttl to 1 hr to support creating changefeeds that needs long initialization time. [#2851](https://github.com/pingcap/ticdc/pull/2851)
         - Fix memory leak which may happen in create new changefeed. [#2623](https://github.com/pingcap/ticdc/pull/2623)
         - Prohibit operating TiCDC clusters across major and minor versions [#2601](https://github.com/pingcap/ticdc/pull/2601)
-  
