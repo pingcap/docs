@@ -5,9 +5,9 @@ summary: Learn how to migrate data from CSV files to TiDB.
 
 # Migrate Data from CSV Files to TiDB
 
-TiDB Lightning supports importing data from CSV files and other delimiter formats, such as tab-separated values (TSV). Other flat file formats are also supported.
-
 This document describes how to migrate data from CSV files to TiDB.
+
+TiDB Lightning supports importing data from CSV files and other delimiter formats, such as tab-separated values (TSV). For other flat file data sources, you can also refer to this document and migrate data to TiDB.
 
 ## Prerequisites
 
