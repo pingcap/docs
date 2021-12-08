@@ -121,7 +121,7 @@ These differences are documented further in [`ANALYZE TABLE`](/sql-statements/sq
 - The syntax `SELECT ... GROUP BY ... WITH ROLLUP` is not supported.
 - The syntax `SELECT .. GROUP BY expr` does not imply `GROUP BY expr ORDER BY expr` as it does in MySQL 5.7.
 
-For details, see [`SELECT`](/sql-statements/sql-statement-select.md) statement reference.
+For details, see the [`SELECT`](/sql-statements/sql-statement-select.md) statement reference.
 
 ### Views
 
