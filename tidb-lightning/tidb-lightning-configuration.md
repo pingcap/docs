@@ -251,7 +251,7 @@ max-allowed-packet = 67_108_864
 <<<<<<< HEAD
 # Performs `ADMIN CHECKSUM TABLE <table>` for each table to verify data integrity.
 checksum = true
-=======
+
 # Specifies whether to perform `ADMIN CHECKSUM TABLE <table>` for each table to verify data integrity after importing.
 # The following options are available:
 # - "required" (default value): Perform admin checksum. If checksum fails, TiDB Lightning will exit with failure.
@@ -265,7 +265,6 @@ checksum = "required"
 # Options available for this field are the same as `post-restore`. However, the default value for this field is "optional".
 analyze = "optional"
 
->>>>>>> 73f962dd7 (lightning: update config description of checksum and analyze (#7129))
 # If the value is set to `true`, a level-1 compaction is performed
 # every time a table is imported.
 # The default value is `false`.
