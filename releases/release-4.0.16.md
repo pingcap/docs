@@ -101,3 +101,15 @@ TiDB version: 4.0.16
         - Fix dml is not replicated after adding partition in partition table without valid index. [#2863](https://github.com/pingcap/ticdc/pull/2863)
         - Fix memory leak which may happen in create new changefeed. [#2623](https://github.com/pingcap/ticdc/pull/2623)
         - Set config.Metadata.Timeout correctly to prevent stuck data synchronization. [#3669](https://github.com/pingcap/ticdc/pull/3669)
+
+## Critical bug not obtained through tools
+
++ TiDB
+
++ TiKV
+
++ Tools
+
++ PD
+
++ TiFlash
