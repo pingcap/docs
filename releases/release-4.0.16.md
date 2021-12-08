@@ -13,13 +13,13 @@ TiDB version: 4.0.16
 + TiKV
 
     - When casting invalid utf8 string to real, try to truncate the utf8 prefix instead of returning error [#9870](https://github.com/tikv/tikv/pull/9870)
-    - [cdc: reduce events batch to solve congest error (#11086) by ti-srebot · Pull Request #11089 · tikv/tikv](https://github.com/tikv/tikv/pull/11089)
+    - cdc: reduce events batch to solve congest error [#11089](https://github.com/tikv/tikv/pull/11089)
 
 + Tools
 
     + TiDB Binlog
 
-        - [drainer: fix kafka message limit problem (#1039) by ti-chi-bot · Pull Request #1078 · pingcap/tidb-binlog](https://github.com/pingcap/tidb-binlog/pull/1078)
+        - drainer: fix kafka message limit problem [#1078](https://github.com/pingcap/tidb-binlog/pull/1078)
 
 ## Improvements
 
