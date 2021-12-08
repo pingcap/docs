@@ -71,7 +71,7 @@ TiDB version: 4.0.16
     - Fix CDC panic due to missing downstream. [#11135](https://github.com/tikv/tikv/pull/11135)
     - Fix channel full could break the raft connection [#11069](https://github.com/tikv/tikv/pull/11069)
     - Fix Max/Min bug when comparing signed and unsigned int64 [#10616](https://github.com/tikv/tikv/pull/10616)
-    -  Fix frequent CDC incremental scan retry due to `Congest` error. [#11089](https://github.com/tikv/tikv/pull/11089)
+    - Fix frequent CDC incremental scan retry due to `Congest` error. [#11089](https://github.com/tikv/tikv/pull/11089)
 
 + PD
 
