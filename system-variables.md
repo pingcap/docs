@@ -406,7 +406,7 @@ This variable is an alias for `last_insert_id`.
 
 - Scope: SESSION | GLOBAL
 - Default value: ""
-- This variable is used to specify a list of storage engines that might fall back to TiKV. If the execution of a SQL statement fails due to a failure of the specified storage engine in the list, TiDB retries executing this SQL statement with TiKV. This variable can be set to "" or "tiflash". When this variable is set to "tiflash", if the execution of a SQL statement fails due to a failure of TiFlash, TiDB retries executing this SQL statement with TiKV.
+- This variable is used to specify a list of storage engines that might fall back to TiKV. If the execution of a SQL statement fails due to a failure of the specified storage engine in the list, TiDB retries executing this SQL statement with TiKV. This variable can be set to "" or "tiflash". When this variable is set to "tiflash", if TiFlash returns a timeout error (error code: ErrTiFlashServerTimeout), TiDB retries executing this SQL statement with TiKV.
 
 ### tidb_allow_function_for_expression_index <span class="version-mark">New in v5.2.0</span>
 
@@ -791,7 +791,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Scope: SESSION | GLOBAL
 - Default value: `ON`
 - This variable controls whether to enable the dynamic memory control feature for the operator that reads data. By default, this operator enables the maximum number of threads that [`tidb_disql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency) allows to read data. When the memory usage of a single SQL statement exceeds [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) each time, the operator that reads data stops one thread.
-- When the operator that reads data has only one thread left and the memory usage of a single SQL statement continues to exceed [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query), this SQL statement triggers other memory control behaviors, such as [spilling data to disk](/tidb-configuration-file.md#spilled-file-encryption-method).
+- When the operator that reads data has only one thread left and the memory usage of a single SQL statement continues to exceed [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query), this SQL statement triggers other memory control behaviors, such as [spilling data to disk](/tidb-configuration-file.md#oom-use-tmp-storage).
 
 ### tidb_enable_slow_log
 
@@ -1015,7 +1015,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
     - `user`: The current session user.
     - `schemaVersion`: The current schema version.
     - `txnStartTS`: The timestamp at which the current transaction starts.
-    - `forUpdateTS`: In the pessimistic transactional model, `forUpdateTS` is the current timestamp of the SQL statement. When a write conflict occurs in the pessimistic transaction, TiDB retries the SQL statement currently being executed and updates this timestamp. You can configure the number of retries via [`max-retry-count`](/tidb-configuration-file.md#max-retry-count). In the optimistic transactional model, `forUpdateTS` is equivalent to `txnStartTS`.
+    - `forUpdateTS`: In the pessimistic transactional mode, `forUpdateTS` is the current timestamp of the SQL statement. When a write conflict occurs in the pessimistic transaction, TiDB retries the SQL statement currently being executed and updates this timestamp. You can configure the number of retries via [`max-retry-count`](/tidb-configuration-file.md#max-retry-count). In the optimistic transactional model, `forUpdateTS` is equivalent to `txnStartTS`.
     - `isReadConsistency`: Indicates whether the current transactional isolation level is Read Committed (RC).
     - `current_db`: The name of the current database.
     - `txn_mode`: The transactional mode. Value options are `OPTIMISTIC` and `PESSIMISTIC`.
@@ -1297,19 +1297,19 @@ mysql> desc select count(distinct a) from test.t;
 - For example, after you enable this optimization rule, the subquery is converted as follows:
 
     ```sql
-    select * from t where t.a in (select aa from t1)
+    select * from t where t.a in (select aa from t1);
     ```
 
     The subquery is converted to join as follows:
 
     ```sql
-    select * from t, (select aa from t1 group by aa) tmp_t where t.a = tmp_t.aa
+    select t.* from t, (select aa from t1 group by aa) tmp_t where t.a = tmp_t.aa;
     ```
 
     If `t1` is limited to be `unique` and `not null` in the `aa` column. You can use the following statement, without aggregation.
 
     ```sql
-    select * from t, t1 where t.a=t1.a
+    select t.* from t, t1 where t.a=t1.aa;
     ```
 
 ### tidb_opt_limit_push_down_threshold
