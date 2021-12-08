@@ -248,10 +248,6 @@ max-allowed-packet = 67_108_864
 # these as true in the production environment.
 # The execution order: Checksum -> Analyze
 [post-restore]
-<<<<<<< HEAD
-# Performs `ADMIN CHECKSUM TABLE <table>` for each table to verify data integrity.
-checksum = true
-
 # Specifies whether to perform `ADMIN CHECKSUM TABLE <table>` for each table to verify data integrity after importing.
 # The following options are available:
 # - "required" (default value): Perform admin checksum. If checksum fails, TiDB Lightning will exit with failure.
@@ -273,11 +269,6 @@ level-1-compact = false
 # TiKV cluster is performed at the end of the import.
 # The default value is `false`.
 compact = false
-<<<<<<< HEAD
-# Performs `ANALYZE TABLE <table>` for each table.
-analyze = true
-=======
->>>>>>> 73f962dd7 (lightning: update config description of checksum and analyze (#7129))
 
 # Configures the background periodic actions.
 # Supported units: h (hour), m (minute), s (second).
