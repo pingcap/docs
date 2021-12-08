@@ -392,13 +392,8 @@ min-available-ratio = 0.05
 | --tidb-password *password* | Password to connect to TiDB | `tidb.password` |
 | --no-schema | Ignore schema files, get schema directly from TiDB | `mydumper.no-schema` |
 | --enable-checkpoint *bool* | Whether to enable checkpoints (default = true) | `checkpoint.enable` |
-<<<<<<< HEAD
-| --analyze *bool* | Analyze tables after importing (default = true) | `post-restore.analyze` |
-| --checksum *bool* | Compare checksum after importing (default = true) | `post-restore.checksum` |
-=======
 | --analyze *level* | Analyze tables after importing. Available values are "required", "optional" (default value), and "off" | `post-restore.analyze` |
 | --checksum *level* | Compare checksum after importing. Available values are "required" (default value), "optional", and "off" | `post-restore.checksum` |
->>>>>>> 73f962dd7 (lightning: update config description of checksum and analyze (#7129))
 | --check-requirements *bool* | Check cluster version compatibility before starting (default = true) | `lightning.check-requirements` |
 | --ca *file* | CA certificate path for TLS connection | `security.ca-path` |
 | --cert *file* | Certificate path for TLS connection | `security.cert-path` |
