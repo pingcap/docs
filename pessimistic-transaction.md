@@ -1,12 +1,6 @@
 ---
-<<<<<<< HEAD
-title: TiDB Pessimistic Transaction Model
-summary: Learn the pessimistic transaction model in TiDB.
-=======
 title: TiDB Pessimistic Transaction Mode
 summary: Learn the pessimistic transaction mode in TiDB.
-aliases: ['/docs/dev/pessimistic-transaction/','/docs/dev/reference/transactions/transaction-pessimistic/']
->>>>>>> 1118c2f4c (Update the description of pessimistic transaction #7247 (#6980))
 ---
 
 # TiDB Pessimistic Transaction Mode
