@@ -21,6 +21,10 @@ TiDB version: 4.0.16
 
         - drainer: fix kafka message limit problem [#1078](https://github.com/pingcap/tidb-binlog/pull/1078)
 
++ Tools
+       + TiCDC
+              - Change Kafka Sink default `max-message-bytes` to 1MB [#3002](https://github.com/pingcap/ticdc/pull/3002)
+              - Change Kafka Sink default `partition-num` to 3. [#3565](https://github.com/pingcap/ticdc/pull/3565)
 ## Improvements
 
 + TiKV
@@ -37,7 +41,6 @@ TiDB version: 4.0.16
 
         - Add rate limiter to limit EtcdWorker tick frequency [#3267](https://github.com/pingcap/ticdc/pull/3267)
         - Optimize the rate limit control when TiKV reloads and fix the congestion in gPRC, which may cause slow initialization phase [#3110](https://github.com/pingcap/ticdc/issues/3110)
-        - Change Kafka sink default `MaxMessageBytes` to 1MB [#3002](https://github.com/pingcap/ticdc/pull/3002)
         - Ignore the global flag for changefeed update command [#2875](https://github.com/pingcap/ticdc/pull/2875)
         - Extend creating service gc safepoint ttl to 1 hr to support creating changefeeds that needs long initialization time [#2851](https://github.com/pingcap/ticdc/pull/2851)
         - Prohibit operating TiCDC clusters across major and minor versions [#2601](https://github.com/pingcap/ticdc/pull/2601)
