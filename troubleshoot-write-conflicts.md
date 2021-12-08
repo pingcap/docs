@@ -70,7 +70,7 @@ You can use the `pd-ctl` tool to convert the timestamp to readable time:
 {{< copyable "" >}}
 
 ```shell
-./pd-ctl -u https://127.0.0.1:2379 tso {TIMESTAMP}
+tiup ctl pd -u https://127.0.0.1:2379 tso {TIMESTAMP}
 ```
 
 You can use `tableID` to find the name of the related table:
@@ -89,4 +89,4 @@ You can use `indexID` and the table name to find the name of the related index:
 SELECT * FROM INFORMATION_SCHEMA.TIDB_INDEXES WHERE TABLE_SCHEMA='{db_name}' AND TABLE_NAME='{table_name}' AND INDEX_ID={indexID};
 ```
 
-In addition, in TiDB v3.0.8 and later versions, the pessimistic transaction becomes the default model.  The pessimistic transaction model can avoid write conflicts during the transaction prewrite stage, so you do not need to modify the application any more. In the pessimistic transaction mode, each DML statement writes a pessimistic lock to the related keys during execution. This pessimistic lock can prevent other transactions from modifying the same keys, thus ensuring no write conflicts exist in the `prewrite` stage of the transaction 2PC.
+In addition, in TiDB v3.0.8 and later versions, the pessimistic transaction becomes the default mode.  The pessimistic transaction mode can avoid write conflicts during the transaction prewrite stage, so you do not need to modify the application any more. In the pessimistic transaction mode, each DML statement writes a pessimistic lock to the related keys during execution. This pessimistic lock can prevent other transactions from modifying the same keys, thus ensuring no write conflicts exist in the `prewrite` stage of the transaction 2PC.
