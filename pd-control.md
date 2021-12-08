@@ -28,7 +28,7 @@ If you want to download the latest version of `pd-ctl`, directly download the Ti
 
 > **Note:**
 >
-> `{version}` indicates the version number of TiDB. For example, if `{version}` is `v5.2.2`, the package download link is `https://download.pingcap.org/tidb-v5.2.2-linux-amd64.tar.gz`.
+> `{version}` indicates the version number of TiDB. For example, if `{version}` is `v5.3.0`, the package download link is `https://download.pingcap.org/tidb-v5.3.0-linux-amd64.tar.gz`.
 
 ### Compile from source code
 
@@ -40,26 +40,26 @@ If you want to download the latest version of `pd-ctl`, directly download the Ti
 Single-command mode:
 
 ```bash
-./pd-ctl store -u http://127.0.0.1:2379
+tiup ctl pd store -u http://127.0.0.1:2379
 ```
 
 Interactive mode:
 
 ```bash
-./pd-ctl -i -u http://127.0.0.1:2379
+tiup ctl pd -i -u http://127.0.0.1:2379
 ```
 
 Use environment variables:
 
 ```bash
 export PD_ADDR=http://127.0.0.1:2379
-./pd-ctl
+tiup ctl pd
 ```
 
 Use TLS to encrypt:
 
 ```bash
-./pd-ctl -u https://127.0.0.1:2379 --cacert="path/to/ca" --cert="path/to/cert" --key="path/to/key"
+tiup ctl pd -u https://127.0.0.1:2379 --cacert="path/to/ca" --cert="path/to/cert" --key="path/to/key"
 ```
 
 ## Command line flags
@@ -862,6 +862,61 @@ Usage:
 >> tso 395181938313123110        // Parse TSO
 system:  2017-10-09 05:50:59 +0800 CST
 logic:  120102
+```
+
+### `unsafe remove-failed-stores [store-ids | show | history]`
+
+> **Warning:**
+>
+> - This feature is a lossy recovery, so TiKV cannot guarantee data integrity and data indexes integrity after using the feature.
+> - Online Unsafe Recovery is an experimental feature, and it is **NOT** recommended to use it in the production environment. The interface, strategy, and internal implementation of this feature might change when it becomes generally available (GA). Although this feature has been tested in some scenarios, it is not thoroughly validated and might cause system unavailability.
+> - It is recommended to perform the feature-related operations with the support from the TiDB team. If any misoperation is performed, it might be hard to recover the cluster.
+
+Use this command to perform lossy recovery operations when permanently damaged replicas cause data to be unavailable. For example:
+
+Execute Online Unsafe Recovery to remove permanently damaged stores:
+
+```bash
+>> unsafe remove-failed-stores 101,102,103
+```
+
+```bash
+Success!
+```
+
+Show the current or historical state of Online Unsafe Recovery:
+
+```bash
+>> unsafe remove-failed-stores show
+```
+
+```bash
+[
+  "Collecting cluster info from all alive stores, 10/12.",
+  "Stores that have reports to PD: 1, 2, 3, ...",
+  "Stores that have not reported to PD: 11, 12",
+]
+```
+
+```bash
+>> unsafe remove-failed-stores history
+```
+
+```bash
+[
+  "Store reports collection:",
+  "Store 7: region 3 [start_key, end_key), {peer1, peer2, peer3} region 4 ...",
+  "Store 8: region ...",
+  "...",
+  "Recovery Plan:",
+  "Store 7, creates: region 11, region 12, ...; updates: region 21, region 22, ... deletes: ... ",
+  "Store 8, ..."
+  "...",
+  "Execution Progress:",
+  "Store 10 finished,",
+  "Store 7 not yet finished",
+  "...",
+]
 ```
 
 ## Jq formatted JSON output usage

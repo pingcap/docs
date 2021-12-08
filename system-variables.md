@@ -406,7 +406,7 @@ This variable is an alias for `last_insert_id`.
 
 - Scope: SESSION | GLOBAL
 - Default value: ""
-- This variable is used to specify a list of storage engines that might fall back to TiKV. If the execution of a SQL statement fails due to a failure of the specified storage engine in the list, TiDB retries executing this SQL statement with TiKV. This variable can be set to "" or "tiflash". When this variable is set to "tiflash", if the execution of a SQL statement fails due to a failure of TiFlash, TiDB retries executing this SQL statement with TiKV.
+- This variable is used to specify a list of storage engines that might fall back to TiKV. If the execution of a SQL statement fails due to a failure of the specified storage engine in the list, TiDB retries executing this SQL statement with TiKV. This variable can be set to "" or "tiflash". When this variable is set to "tiflash", if TiFlash returns a timeout error (error code: ErrTiFlashServerTimeout), TiDB retries executing this SQL statement with TiKV.
 
 ### tidb_allow_function_for_expression_index <span class="version-mark">New in v5.2.0</span>
 
@@ -642,6 +642,16 @@ Constraint checking is always performed in place for pessimistic transactions (d
 > - If you have enabled TiDB Binlog, enabling this variable cannot improve the performance. To improve the performance, it is recommended to use [TiCDC](/ticdc/ticdc-overview.md) instead.
 > - Enabling this parameter only means that one-phase commit becomes an optional mode of transaction commit. In fact, the most suitable mode of transaction commit is determined by TiDB.
 
+### tidb_enable_alter_placement
+
+> **Warning:**
+>
+> Currently, Placement Rules in SQL is an experimental feature. It is not recommended that you use it in production environments.
+
+- Scope: GLOBAL
+- Default value: `OFF`
+- This variable enables or disables [Placement Rules in SQL](/placement-rules-in-sql.md).
+
 ### tidb_enable_amend_pessimistic_txn <span class="version-mark">New in v4.0.7</span>
 
 - Scope: SESSION | GLOBAL
@@ -678,7 +688,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 > **Warning:**
 >
-> Currently, cascades planner is an experimental feature. It is not recommended that you use it in the production environment.
+> Currently, cascades planner is an experimental feature. It is not recommended that you use it in production environments.
 
 - Scope: SESSION | GLOBAL
 - Default value: `OFF`
@@ -721,7 +731,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 > **Warning:**
 >
-> Currently, `Fast Analyze` is an experimental feature. It is not recommended that you use it in the production environment.
+> Currently, `Fast Analyze` is an experimental feature. It is not recommended that you use it in production environments.
 
 - Scope: SESSION | GLOBAL
 - Default value: `OFF`
@@ -738,7 +748,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 > **Warning:**
 >
-> Currently, List partition and List COLUMNS partition are experimental features. It is not recommended that you use it in the production environment.
+> Currently, List partition and List COLUMNS partition are experimental features. It is not recommended that you use it in production environments.
 
 - Scope: SESSION | GLOBAL
 - Default value: `OFF`
@@ -767,12 +777,21 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Default value: `OFF`
 - This variable controls whether to enable concurrency for the `Apply` operator. The number of concurrencies is controlled by the `tidb_executor_concurrency` variable. The `Apply` operator processes correlated subqueries and has no concurrency by default, so the execution speed is slow. Setting this variable value to `1` can increase concurrency and speed up execution. Currently, concurrency for `Apply` is disabled by default.
 
+### tidb_enable_pseudo_for_outdated_stats <span class="version-mark">New in v5.3.0</span>
+
+- Scope: SESSION | GLOBAL
+- Default value: `ON`
+- This variable controls the behavior of the optimizer on using statistics of a table when the statistics are outdated.
+- The optimizer determines whether the statistics of a table is outdated in this way: since the last time `ANALYZE` is executed on a table to get the statistics, if 80% of the table rows are modified (the modified row count divided by the total row count), the optimizer determines that the statistics of this table is outdated. You can change this ratio using the [`pseudo-estimate-ratio`](/tidb-configuration-file.md#pseudo-estimate-ratio) configuration.
+- By default (with the variable value `ON`), when the statistics of a table is outdated, the optimizer determines that the statistics of the table is no longer reliable except for the total row count. Then, the optimizer uses the pseudo statistics. If you set the variable value to `OFF`, even if the statistics of a table are outdated, the optimizer still keeps using the statistics.
+- If the data on a table is frequently modified without executing `ANALYZE` on this table in time, to keep the execution plan stable, you can set the variable value to `OFF`.
+
 ### tidb_enable_rate_limit_action
 
 - Scope: SESSION | GLOBAL
 - Default value: `ON`
 - This variable controls whether to enable the dynamic memory control feature for the operator that reads data. By default, this operator enables the maximum number of threads that [`tidb_disql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency) allows to read data. When the memory usage of a single SQL statement exceeds [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) each time, the operator that reads data stops one thread.
-- When the operator that reads data has only one thread left and the memory usage of a single SQL statement continues to exceed [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query), this SQL statement triggers other memory control behaviors, such as [spilling data to disk](/tidb-configuration-file.md#spilled-file-encryption-method).
+- When the operator that reads data has only one thread left and the memory usage of a single SQL statement continues to exceed [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query), this SQL statement triggers other memory control behaviors, such as [spilling data to disk](/tidb-configuration-file.md#oom-use-tmp-storage).
 
 ### tidb_enable_slow_log
 
@@ -977,7 +996,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 > **Warning:**
 >
-> Currently, Green GC is an experimental feature. It is not recommended that you use it in the production environment.
+> Currently, Green GC is an experimental feature. It is not recommended that you use it in production environments.
 
 - Scope: GLOBAL
 - Default value: `LEGACY`
@@ -996,7 +1015,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
     - `user`: The current session user.
     - `schemaVersion`: The current schema version.
     - `txnStartTS`: The timestamp at which the current transaction starts.
-    - `forUpdateTS`: In the pessimistic transactional model, `forUpdateTS` is the current timestamp of the SQL statement. When a write conflict occurs in the pessimistic transaction, TiDB retries the SQL statement currently being executed and updates this timestamp. You can configure the number of retries via [`max-retry-count`](/tidb-configuration-file.md#max-retry-count). In the optimistic transactional model, `forUpdateTS` is equivalent to `txnStartTS`.
+    - `forUpdateTS`: In the pessimistic transactional mode, `forUpdateTS` is the current timestamp of the SQL statement. When a write conflict occurs in the pessimistic transaction, TiDB retries the SQL statement currently being executed and updates this timestamp. You can configure the number of retries via [`max-retry-count`](/tidb-configuration-file.md#max-retry-count). In the optimistic transactional model, `forUpdateTS` is equivalent to `txnStartTS`.
     - `isReadConsistency`: Indicates whether the current transactional isolation level is Read Committed (RC).
     - `current_db`: The name of the current database.
     - `txn_mode`: The transactional mode. Value options are `OPTIMISTIC` and `PESSIMISTIC`.
@@ -1110,6 +1129,12 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Scope: SESSION
 - Default value: `tikv,tiflash,tidb`
 - This variable is used to set the storage engine list that TiDB can use when reading data.
+
+### tidb_log_file_max_days <span class="version-mark">New in v5.3</span>
+
+- Scope: SESSION
+- Default value: `0`
+- This variable is used to adjust the maximum days of logger on the current TiDB instance. Its value defaults to the value of the [`max-days`](/tidb-configuration-file.md#max-days) configuration in the configuration file. Changing the variable value only affects the current TiDB instance. After TiDB is restarted, the variable value is reset and the configuration value is not affected.
 
 ### tidb_low_resolution_tso
 
@@ -1272,19 +1297,19 @@ mysql> desc select count(distinct a) from test.t;
 - For example, after you enable this optimization rule, the subquery is converted as follows:
 
     ```sql
-    select * from t where t.a in (select aa from t1)
+    select * from t where t.a in (select aa from t1);
     ```
 
     The subquery is converted to join as follows:
 
     ```sql
-    select * from t, (select aa from t1 group by aa) tmp_t where t.a = tmp_t.aa
+    select t.* from t, (select aa from t1 group by aa) tmp_t where t.a = tmp_t.aa;
     ```
 
     If `t1` is limited to be `unique` and `not null` in the `aa` column. You can use the following statement, without aggregation.
 
     ```sql
-    select * from t, t1 where t.a=t1.a
+    select t.* from t, t1 where t.a=t1.aa;
     ```
 
 ### tidb_opt_limit_push_down_threshold
@@ -1336,7 +1361,7 @@ explain select * from t where age=5;
 
 > **Warning:**
 
-> Currently, the dynamic pruning mode for partitioned tables is an experimental feature. It is not recommended that you use it in the production environment.
+> Currently, the dynamic pruning mode for partitioned tables is an experimental feature. It is not recommended that you use it in production environments.
 
 - Scope: SESSION | GLOBAL
 - Default value: `static`
@@ -1519,6 +1544,14 @@ SET tidb_slow_log_threshold = 200;
 - Default value: `0`
 - Range: `[0, 9223372036854775807]`
 - This variable is used to limit the maximum number of requests TiDB can send to TiKV at the same time. 0 means no limit.
+
+### tidb_tmp_table_max_size <span class="version-mark">New in v5.3.0</span>
+
+- Scope: SESSION | GLOBAL
+- Default value: `67108864`
+- Range: `[1048576, 137438953472]`
+- Unit: Bytes
+- This variable is used to set the maximum size of a single [temporary table](/temporary-tables.md). Any temporary table with a size larger than this variable value causes error.
 
 ### tidb_tso_client_batch_max_wait_time <span class="version-mark">New in v5.3</span>
 
