@@ -62,6 +62,10 @@ TiDB version: 4.0.16
     - Fix an issue that `NO_ZERO_IN_DATE` does not work on the default values [#26766](https://github.com/pingcap/tidb/issues/26766)
     - Fix copt-cache metrics, it will display the number of hits/miss/evict on Grafana now [#26338](https://github.com/pingcap/tidb/issues/26338)
     - Fix the issue that concurrently truncating the same partition hangs DDL [#26229](https://github.com/pingcap/tidb/issues/26229)
+    - expression: fix wrong flen when cast decimal to string. [#30012](https://github.com/pingcap/tidb/pull/30012)
+    - planner: change redundantSchema to fullSchema to correctly handle natural and "using" joins. [#30037](https://github.com/pingcap/tidb/pull/30037)
+    - planner: fix topn wrongly pushed to index scan side when it's a prefix index [#29796](https://github.com/pingcap/tidb/pull/29796)
+    - insert: fix the auto id retry won't cast the datum to origin type. [#30019](https://github.com/pingcap/tidb/pull/30019)
 
 + TiKV
 
@@ -101,15 +105,4 @@ TiDB version: 4.0.16
         - Fix dml is not replicated after adding partition in partition table without valid index [#2863](https://github.com/pingcap/ticdc/pull/2863)
         - Fix memory leak which may happen in create new changefeed [#2389](https://github.com/pingcap/ticdc/issues/2389)
         - Set config.Metadata.Timeout correctly to prevent stuck data synchronization [#3669](https://github.com/pingcap/ticdc/pull/3669)
-
-## Critical bug not obtained through tools
-
-+ TiDB
-
-+ TiKV
-
-+ Tools
-
-+ PD
-
-+ TiFlash
+        - processor,sink(cdc): let sink report resolved ts and do not skip buffer sink flush [#3561](https://github.com/pingcap/ticdc/pull/3561)
