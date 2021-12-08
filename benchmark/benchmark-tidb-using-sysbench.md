@@ -129,13 +129,17 @@ db-driver=mysql
 
 ### Data import
 
+> **Note:**
+>
+> If you enable the optimistic transaction mode (TiDB uses the pessimistic transaction mode by default), TiDB rolls back transactions when a concurrency conflict is found. Setting `tidb_disable_txn_auto_retry` to `off` enables the automatic retry mechanism after meeting a transaction conflict, which can prevent Sysbench from quitting because of the transaction conflict error.
+
 Before importing the data, it is necessary to make some settings to TiDB. Execute the following command in MySQL client:
 
 ```sql
 set global tidb_disable_txn_auto_retry = off;
 ```
 
-Then exit the client. TiDB uses an optimistic transaction model that rolls back transactions when a concurrency conflict is found. Setting `tidb_disable_txn_auto_retry` to `off` turns on the automatic retry mechanism after meeting a transaction conflict, which can prevent Sysbench from quitting because of the transaction conflict error.
+Then exit the client.
 
 Restart MySQL client and execute the following SQL statement to create a database `sbtest`:
 
