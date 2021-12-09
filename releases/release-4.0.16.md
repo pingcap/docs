@@ -42,7 +42,7 @@ TiDB version: 4.0.16
         - Add rate limiter to limit EtcdWorker tick frequency [#3112](https://github.com/pingcap/ticdc/issues/3112)
         - Optimize the rate limit control when TiKV reloads and fix the congestion in gPRC, which may cause slow initialization phase [#3110](https://github.com/pingcap/ticdc/issues/3110)
         - Ignore the global flag for changefeed update command [#2803](https://github.com/pingcap/ticdc/issues/2803)
-        - Prohibit operating TiCDC clusters across major and minor versions [#2601](https://github.com/pingcap/ticdc/pull/2601)
+        - Prohibit operating TiCDC clusters across major and minor versions [#3352](https://github.com/pingcap/ticdc/issues/3352)
 
 ## Bug fixes
 
@@ -106,6 +106,5 @@ TiDB version: 4.0.16
         - (dup) Fix the issue that TiCDC sync task might pause when an error occurs during writing a Kafka message [#2978](https://github.com/pingcap/ticdc/issues/2978)
         - (dup) Fix the issue that some partitioned tables without valid indexes might be ignored when `force-replicate` is enabled [#2834](https://github.com/pingcap/ticdc/issues/2834)
         - Fix memory leak which may happen in create new changefeed [#2389](https://github.com/pingcap/ticdc/issues/2389)
-        - Set config.Metadata.Timeout correctly to prevent stuck data synchronization [#3539](https://github.com/pingcap/ticdc/pull/3539)
         - processor,sink(cdc): let sink report resolved ts and do not skip buffer sink flush [#3503](https://github.com/pingcap/ticdc/issues/3503)
         - (dup) Fix the issue that scanning stock data might fail due to TiKV performing GC when scanning stock data takes too long [#2470](https://github.com/pingcap/ticdc/issues/2470)
