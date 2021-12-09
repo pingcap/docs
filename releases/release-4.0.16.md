@@ -18,8 +18,8 @@ TiDB version: 4.0.16
 
     + TiCDC
 
-        - Change the default value of Kafka Sink `max-message-bytes` to 1 MB [#2962](https://github.com/pingcap/ticdc/issues/2962)
-        - Change the default value of Kafka Sink `partition-num` to 3 [#3337](https://github.com/pingcap/ticdc/issues/3337)
+        - Change the default value of Kafka Sink `max-message-bytes` to 1 MB to prevent TiCDC from sending too large messages to Kafka clusters [#2962](https://github.com/pingcap/ticdc/issues/2962)
+        - Change the default value of Kafka Sink `partition-num` to 3 so that TiCDC distributes messages across Kafka partitions more evenly [#3337](https://github.com/pingcap/ticdc/issues/3337)
 
 ## Improvements
 
@@ -35,9 +35,8 @@ TiDB version: 4.0.16
 
     + TiCDC
 
-        - Add a rate limiter to limit the EtcdWorker tick frequency [#3112](https://github.com/pingcap/ticdc/issues/3112)
-        - Optimize rate limit control when TiKV reloads. Fix congestion in gPRC, which may cause slow initialization [#3110](https://github.com/pingcap/ticdc/issues/3110)
-        - Ignore the global flag of the changefeed update command [#2803](https://github.com/pingcap/ticdc/issues/2803)
+        - Add a Tick frequency limit to EtcdWorker to prevent frequent Etcd writes from affecting PD services [#3112](https://github.com/pingcap/ticdc/issues/3112)
+        - Optimize rate limiting control on TiKV reloads to reduce gPRC congestion during changefeed initialization [#3110](https://github.com/pingcap/ticdc/issues/3110)
         - Prohibit operating TiCDC clusters across major and minor versions [#3352](https://github.com/pingcap/ticdc/issues/3352)
 
 ## Bug fixes
@@ -105,5 +104,6 @@ TiDB version: 4.0.16
         - (dup) Fix the issue that TiCDC sync task might pause when an error occurs during writing a Kafka message [#2978](https://github.com/pingcap/ticdc/issues/2978)
         - (dup) Fix the issue that some partitioned tables without valid indexes might be ignored when `force-replicate` is enabled [#2834](https://github.com/pingcap/ticdc/issues/2834)
         - Fix the memory leak issue when creating a new changefeed [#2389](https://github.com/pingcap/ticdc/issues/2389)
-        - Fix the issue that Sink skips the flush operation when reporting resolved ts [#3503](https://github.com/pingcap/ticdc/issues/3503)
+        - Fix the issue that might cause inconsistent data due to Sink components advancing resolved ts early [#3503](https://github.com/pingcap/ticdc/issues/3503)
         - (dup) Fix the issue that scanning stock data might fail due to TiKV performing GC when scanning stock data takes too long [#2470](https://github.com/pingcap/ticdc/issues/2470)
+        - Fix the issue that the changefeed update command does not recognize global command line parameters [#2803](https://github.com/pingcap/ticdc/issues/2803)
