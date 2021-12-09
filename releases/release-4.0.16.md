@@ -16,9 +16,6 @@ TiDB version: 4.0.16
 
 + Tools
 
-    + TiDB Binlog
-
-        - Drainer: Fix the Kafka message limit problem [#1078](https://github.com/pingcap/tidb-binlog/pull/1078)
 
     + TiCDC
 
