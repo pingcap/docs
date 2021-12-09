@@ -16,7 +16,6 @@ TiDB version: 4.0.16
 
 + Tools
 
-
     + TiCDC
 
         - Change the default value of Kafka Sink `max-message-bytes` to 1 MB [#2962](https://github.com/pingcap/ticdc/issues/2962)
