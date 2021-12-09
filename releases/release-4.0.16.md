@@ -21,10 +21,12 @@ TiDB version: 4.0.16
 
         - drainer: fix kafka message limit problem [#1078](https://github.com/pingcap/tidb-binlog/pull/1078)
 
-+ Tools
-       + TiCDC
-              - Change Kafka Sink default `max-message-bytes` to 1MB [#2962](https://github.com/pingcap/ticdc/issues/2962)
-              - Change Kafka Sink default `partition-num` to 3. [#3337](https://github.com/pingcap/ticdc/issues/3337)
+    + TiCDC
+
+        - Change Kafka Sink default `max-message-bytes` to 1MB [#2962](https://github.com/pingcap/ticdc/issues/2962)
+
+        - Change Kafka Sink default `partition-num` to 3. [#3337](https://github.com/pingcap/ticdc/issues/3337)
+
 ## Improvements
 
 + TiKV
@@ -35,11 +37,11 @@ TiDB version: 4.0.16
 
     + Backup & Restore (BR)
 
-        - Increase the robustness for restoring [#1445](https://github.com/pingcap/br/pull/1445)
+        - Increase the robustness for restoring [#27421](https://github.com/pingcap/tidb/issues/27421)
 
     + TiCDC
 
-        - Add rate limiter to limit EtcdWorker tick frequency [#3267](https://github.com/pingcap/ticdc/pull/3267)
+        - Add rate limiter to limit EtcdWorker tick frequency [#3112](https://github.com/pingcap/ticdc/issues/3112)
         - Optimize the rate limit control when TiKV reloads and fix the congestion in gPRC, which may cause slow initialization phase [#3110](https://github.com/pingcap/ticdc/issues/3110)
         - Ignore the global flag for changefeed update command [#2803](https://github.com/pingcap/ticdc/issues/2803)
         - Extend creating service gc safepoint ttl to 1 hr to support creating changefeeds that needs long initialization time [#2470](https://github.com/pingcap/ticdc/issues/2470)
@@ -96,16 +98,16 @@ TiDB version: 4.0.16
     + TiCDC
 
         - Fix changefeed checkpoint lag negative value error [#3010](https://github.com/pingcap/ticdc/issues/3010)
-        - Fix OOM in container environments [#3440](https://github.com/pingcap/ticdc/pull/3440)
+        - Fix OOM in container environments [#1798](https://github.com/pingcap/ticdc/issues/1798)
         - Fix TiCDC could meet replication interruption when multiple TiKVs crash or forcing restart [#3288](https://github.com/pingcap/ticdc/issues/3288)
-        - Fix memory leak after processing DDLs [#3274](https://github.com/pingcap/ticdc/pull/3274)
+        - Fix memory leak after processing DDLs [#3174](https://github.com/pingcap/ticdc/issues/3174)
         - Fix changefeed does not fast fail when occur ErrGCTTLExceeded error [#3111](https://github.com/pingcap/ticdc/issues/3111)
         - Fix fallback resolvedTs event will block the progress of resolve lock when occur region merging [#3061](https://github.com/pingcap/ticdc/issues/3061)
         - Close gPRC stream and re-create it when meeting `ErrPrewriteNotMatch` to avoid duplicated request error [#2386](https://github.com/pingcap/ticdc/issues/2386)
         - Fix kafka sink can not send message due to constraint by `max-message-size` option [#2962](https://github.com/pingcap/ticdc/issues/2962)
         - Fix tikv_cdc_min_resolved_ts_no_change_for_1m keep firing when there is no changefeed [#11017](https://github.com/tikv/tikv/issues/11017)
-        - Fix possible deadlocking when Kafka producer reports an error [#3015](https://github.com/pingcap/ticdc/pull/3015)
-        - Fix dml is not replicated after adding partition in partition table without valid index [#2863](https://github.com/pingcap/ticdc/pull/2863)
+        - Fix possible deadlocking when Kafka producer reports an error [#2978](https://github.com/pingcap/ticdc/issues/2978)
+        - Fix dml is not replicated after adding partition in partition table without valid index [#2834](https://github.com/pingcap/ticdc/issues/2834)
         - Fix memory leak which may happen in create new changefeed [#2389](https://github.com/pingcap/ticdc/issues/2389)
         - Set config.Metadata.Timeout correctly to prevent stuck data synchronization [#3539](https://github.com/pingcap/ticdc/pull/3539)
-        - processor,sink(cdc): let sink report resolved ts and do not skip buffer sink flush [#3561](https://github.com/pingcap/ticdc/pull/3561)
+        - processor,sink(cdc): let sink report resolved ts and do not skip buffer sink flush [#3503](https://github.com/pingcap/ticdc/issues/3503)
