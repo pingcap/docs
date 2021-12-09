@@ -65,6 +65,7 @@ TiDB version: 4.0.16
     - Fix the issue of an extra column in the query result when `NATURAL JOIN` is used to join multiple tables [#29481](https://github.com/pingcap/tidb/issues/29481)
     - Fix the issue that `TopN` is wrongly pushed down to `indexPlan` when `IndexScan` is using a prefix index [#29711](https://github.com/pingcap/tidb/issues/29711)
     - Fix the issue that retrying transactions with `DOUBLE` type auto-increment columns causes data error [#29892](https://github.com/pingcap/tidb/issues/29892)
+
 + TiKV
 
     - Fix panic in rare conditions when merge, conf change and snapshot happen at the same time [#11475](https://github.com/tikv/tikv/issues/11475)
