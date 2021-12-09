@@ -97,10 +97,11 @@ In TiDB, all supported DDL changes are performed online. Compared with DDL opera
 * The `ALGORITHM={INSTANT,INPLACE,COPY}` syntax functions only as an assertion in TiDB, and does not modify the `ALTER` algorithm. See [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md) for further details.
 * Adding/Dropping the primary key of the `CLUSTERED` type is unsupported. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
 * Different types of indexes (`HASH|BTREE|RTREE|FULLTEXT`) are not supported, and will be parsed and ignored when specified.
-* Table Partitioning supports Hash, Range, List, and `Add`/`Drop`/`Truncate`/`Coalesce`. The other partition operations are ignored. The `Warning: Unsupported partition type %s, treat as normal table` error might be output, where `%s` is a specific partition type. The following Table Partition syntaxes are not supported:
+* Table Partitioning supports `HASH`, `RANGE`, and `LIST` partitioning types, and `ADD`, `DROP`, and `TRUNCATE` operations. The other partition operations are ignored. The `Warning: Unsupported partition type %s, treat as normal table` error might be output, where `%s` is a specific partition type. The following Table Partition syntaxes are not supported:
     - `PARTITION BY KEY`
     - `SUBPARTITION`
     - `{CHECK|EXCHANGE|TRUNCATE|OPTIMIZE|REPAIR|IMPORT|DISCARD|REBUILD|REORGANIZE} PARTITION`
+    - `COALESCE`
 
     For more details, see [Partitioning](/partitioned-table.md).
 
