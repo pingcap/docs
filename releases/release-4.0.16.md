@@ -12,7 +12,7 @@ TiDB version: 4.0.16
 
 + TiKV
 
-    - When casting invalid utf8 string to real, try to truncate the utf8 prefix instead of returning error [#11466](https://github.com/tikv/tikv/issues/11466)
+    - When casting an invalid utf8 string to real, try to truncate the utf8 prefix instead of returning an error [#11466](https://github.com/tikv/tikv/issues/11466)
 
 + Tools
 
