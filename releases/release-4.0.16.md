@@ -25,7 +25,7 @@ TiDB version: 4.0.16
 
 + TiKV
 
-    - sst_importer: Reduce the space usage when using BR-Restore or Lightning-Local-backend by using zstd compression in SSTs  [#11469](https://github.com/tikv/tikv/issues/11469)
+    - Reduce the disk space usage by using the zstd algorithm to compress SST files when using Backup & Restore to restore data or using TiDB Lightning's Local-backend [#11469](https://github.com/tikv/tikv/issues/11469)
 
 + Tools
 
@@ -65,19 +65,19 @@ TiDB version: 4.0.16
 
 + TiKV
 
-    - Fix panic in rare conditions when merge, conf change and snapshot happen at the same time [#11475](https://github.com/tikv/tikv/issues/11475)
-    - Make negative sign as false when decimal divide result is zero [#29586](https://github.com/pingcap/tidb/issues/29586)
-    - Fix incorrect by-instance gRPC average duration [#11299](https://github.com/tikv/tikv/issues/11299)
-    - Fix CDC panic due to missing downstream [#11123](https://github.com/tikv/tikv/issues/11123)
+    - Fix a panic issue that occurs when Region merge, ConfChange, and Snapshot happen at the same time in extreme conditions [#11475](https://github.com/tikv/tikv/issues/11475)
+    - Fix the issue of negative sign when the decimal divide result is zero [#29586](https://github.com/pingcap/tidb/issues/29586)
+    - Fix the issue that the average latency of the by-instance gRPC requests is inaccurate in TiKV metrics [#11299](https://github.com/tikv/tikv/issues/11299)
+    - Fix the issue of TiCDC panic that occurs when the downstream database is missing [#11123](https://github.com/tikv/tikv/issues/11123)
     - (dup) Fix the issue that the Raft connection is broken when the channel is full [#11047](https://github.com/tikv/tikv/issues/11047)
-    - Fix Max/Min bug when comparing signed and unsigned int64 [#10158](https://github.com/tikv/tikv/issues/10158)
+    - Fix the issue that TiDB cannot correctly identify whether the `Int64` types in `Max`/`Min` functions are a signed integer or not, which causes the wrong calculation result of `Max`/`Min` [#10158](https://github.com/tikv/tikv/issues/10158)
     - (dup) Fix the issue that CDC adds scan retries frequently due to the Congest error [#11082](https://github.com/tikv/tikv/issues/11082)
 
 + PD
 
-    - Fix panic issue after TiKV node scales in [#4344](https://github.com/tikv/pd/issues/4344)
+    - Fix a panic issue that occurs after the TiKV node is removed [#4344](https://github.com/tikv/pd/issues/4344)
     - (dup) Fix slow leader election caused by stucked region syncer [#3936](https://github.com/tikv/pd/issues/3936)
-    - (dup) Fix the issue that evict-leader might leave leaders when the cluster has down peers [#4093](https://github.com/tikv/pd/issues/4093)
+    - (dup) Support that the evict leader scheduler can schedule regions with unhealthy peers [#4093](https://github.com/tikv/pd/issues/4093)
 
 + TiFlash
 
