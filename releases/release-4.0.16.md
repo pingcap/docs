@@ -87,9 +87,11 @@ TiDB version: 4.0.16
     - Fix the issue that TiFlash fails to start up under platform without library `nsl`
 
 + Tools
+    
     + TiDB Binlog
         
         - Fix the bug that Drainer exits when transporting a transaction greater than 1 GB [#1078](https://github.com/pingcap/tidb-binlog/pull/1078)
+    
     + TiCDC
 
         - Fix the negative value error in the changefeed checkpoint lag [#3010](https://github.com/pingcap/ticdc/issues/3010)
