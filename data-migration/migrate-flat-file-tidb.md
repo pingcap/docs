@@ -64,7 +64,7 @@ file = "tidb-lightning.log"
 # "local": Default. The local backend is used to import large volumes of data (1 TB or above). During the import, the target TiDB cluster cannot provide any service.
 # "tidb": The "tidb" backend is used to import small volumes of data (below 1 TB). During the import, the target TiDB cluster can provide service normally.
 backend = "local"
-# Set the temporary storage directory for the sorted KV files. The directory must be empty, and the storage space must be enough to hold the largest single table from the data source.
+# Set the temporary storage directory for the sorted KV files. The directory must be empty, and the storage space must be enough to hold the largest single table from the data source. For better import performance, it is recommended to use a directory different from `data-source-dir` and use flash storage and exclusive I/O for the directory.
 sorted-kv-dir = "/mnt/ssd/sorted-kv-dir"
 
 [mydumper]
