@@ -100,8 +100,7 @@ In TiDB, all supported DDL changes are performed online. Compared with DDL opera
 * Table Partitioning supports `HASH`, `RANGE`, and `LIST` partitioning types, and `ADD`, `DROP`, and `TRUNCATE` operations. The other partition operations are ignored. The `Warning: Unsupported partition type %s, treat as normal table` error might be output, where `%s` is a specific partition type. The following Table Partition syntaxes are not supported:
     - `PARTITION BY KEY`
     - `SUBPARTITION`
-    - `{CHECK|EXCHANGE|TRUNCATE|OPTIMIZE|REPAIR|IMPORT|DISCARD|REBUILD|REORGANIZE} PARTITION`
-    - `COALESCE`
+    - `{CHECK|EXCHANGE|TRUNCATE|OPTIMIZE|REPAIR|IMPORT|DISCARD|REBUILD|REORGANIZE|COALESCE} PARTITION`
 
     For more details, see [Partitioning](/partitioned-table.md).
 
