@@ -12,7 +12,7 @@ TiDB version: 4.0.16
 
 + TiKV
 
-    - When casting an invalid utf8 string to real, try to truncate the utf8 prefix instead of returning an error [#11466](https://github.com/tikv/tikv/issues/11466)
+    - Before v4.0.16, when TiDB converts an illegal UTF-8 string to a Real type, an error is reported directly. Starting from v4.0.16, TiDB processes the conversion according to the legal UTF-8 prefix in the string [#11466](https://github.com/tikv/tikv/issues/11466)
 
 + Tools
 
