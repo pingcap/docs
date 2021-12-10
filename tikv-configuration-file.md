@@ -52,7 +52,7 @@ This document only describes the parameters that are not included in command-lin
 
 ### `memory-usage-limit`
 
-+ Memory usage limit for the TiKV instance. Generally it's unnecessary to configure it explicitly, in which case it will be set to 75% of total available system memory. Considering the behavior of `block-cache.capacity`, it means 25% memory is reserved for OS page cache.
++ Memory usage limit for the TiKV instance. Generally it's not necessary to configure it explicitly, in which case it will be set to 75% of total available system memory. Considering the behavior of `block-cache.capacity`, it means 25% memory is reserved for the OS page cache.
 + It's still unnecessary to configure it for deploying multiple TiKV nodes on a single physical machine. It will be calculated as `5/3 * block-cache.capacity`.
 + For different system memory capacity, the default memory quota will be:
 + system=8G    block-cache=3.6G    memory-usage-limit=6G   page-cache=2G.
@@ -77,9 +77,8 @@ This document only describes the parameters that are not included in command-lin
 
 ### `addr`
 
-+ Listening address.
++ Listening IP address and port.
 + Default value: `"127.0.0.1:20160"`
-
 
 ### `advertise-addr`
 
@@ -466,7 +465,7 @@ Configuration items related to the I/O rate limiter.
 
 ### `endpoints`
 
-+ PD endpoints.
++ PD endpoints. Specify endpoints separated by commas.
 + Default value: `["127.0.0.1:2379"]`
 
 ### `retry-interval`
@@ -484,7 +483,7 @@ Configuration items related to the I/O rate limiter.
 
 + The maximum number of times to retry a PD connection initialization.
 + Set to 0 to disable retry. Set to -1 for unlimited retry.
-+ Default value: -1
++ Default value: `-1`
 
 ## raftstore
 
@@ -954,7 +953,7 @@ Configuration items related to RocksDB
 
 ### `max-total-wal-size`
 
-+ Max RocksDB WAL size in total
++ Max RocksDB WAL size in total. This is the size of `*.log` files in the `data-dir`
 + Default value: `"4GB"`
 
 ### `enable-statistics`
@@ -1380,7 +1379,6 @@ Configuration items related to `raftdb`
 + Default value: `4`
 + Minimum value: `2`
 
-
 ### `max-sub-compactions`
 
 + The number of concurrent sub-compaction operations performed in RocksDB
@@ -1631,10 +1629,12 @@ Configuration items related to BR backup.
 + Default value: `8`
 
 ### `sst-max-size`
+
 + When Backup region [a,e) size exceeds `sst-max-size`, it will be backuped into several Files [a,b), [b,c), [c,d), [d,e) and the size of [a,b), [b,c), [c,d) will be `sst-max-size` (or a little larger).
 + Default value: `"144MB"`
 
 ### `enable-auto-tune`
+
 + Automatically reduce the number of backup threads when the current workload is high, in order to reduce impact on the cluster's performance during back up.
 + Default value: `false`
 
@@ -1642,7 +1642,7 @@ Configuration items related to BR backup.
 
 ### `home`
 
-+ let TiKV know how to find the hdfs shell command. Equivalent to the $HADOOP_HOME enviroment variable.
++ let TiKV know how to find the HDFS shell command. Equivalent to the `$HADOOP_HOME` environment variable.
 + Default value: `""`
 
 ### `linux-user`
