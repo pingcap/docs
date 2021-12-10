@@ -50,6 +50,16 @@ This document only describes the parameters that are not included in command-lin
 + The size of a log file that triggers log rotation. Once the size of a log file is bigger than the specified threshold value, log files are rotated. The old log file is placed into the new file, and the new file name is the old file name with a timestamp suffix.
 + Default value: "300MB"
 
+### `memory-usage-limit`
+
++ Memory usage limit for the TiKV instance. Generally it's unnecessary to configure it explicitly, in which case it will be set to 75% of total available system memory. Considering the behavior of `block-cache.capacity`, it means 25% memory is reserved for OS page cache.
++ It's still unnecessary to configure it for deploying multiple TiKV nodes on a single physical machine. It will be calculated as `5/3 * block-cache.capacity`.
++ For different system memory capacity, the default memory quota will be:
++ system=8G    block-cache=3.6G    memory-usage-limit=6G   page-cache=2G.
++ system=16G   block-cache=7.2G    memory-usage-limit=12G  page-cache=4G
++ system=32G   block-cache=14.4G   memory-usage-limit=24G  page-cache=8G
++ So how can `memory-usage-limit` influence TiKV? When a TiKV's memory usage almost reaches this threshold, it can squeeze some internal components (e.g. evicting cached Raft entries) to release memory.
+
 ### `slow-log-file`
 
 + The file to store slow logs
@@ -65,7 +75,26 @@ This document only describes the parameters that are not included in command-lin
 
 + Configuration items related to the server
 
-## `status-thread-pool-size`
+### `addr`
+
++ Listening address.
++ Default value: `"127.0.0.1:20160"`
+
+
+### `advertise-addr`
+
++ Advertise listening address for client communication.
++ If not set, `addr` will be used.
++ Default value: `""`
+
+### `status-addr`
+
++ Status address.
++ This is used for reporting the status of TiKV directly through the HTTP address. Notice that there is a risk of leaking status information if this port is exposed to the public.
++ Empty string means disabling it.
++ Default value: `"127.0.0.1:20180"`
+
+### `status-thread-pool-size`
 
 + The number of worker threads for the `HTTP` API service
 + Default value: `1`
@@ -158,6 +187,21 @@ This document only describes the parameters that are not included in command-lin
 + Default value: `"100MB"`
 + Unit: KB|MB|GB
 + Minimum value: `"1KB"`
+
+### `enable-request-batch`
+
++ Whether to enable request batch.
++ Default value: `true`
+
+### `labels`
+
++ Attributes about this server, e.g. `{ zone = "us-west-1", disk = "ssd" }`.
++ Default value: `{}`
+
+### `background-thread-count`
+
++ The working thread count of the background pool, which include the endpoint of and br, split-check, region thread and other thread of delay-insensitive tasks.
++ The default value is 2 if the number of CPU cores is less than 16, otherwise 3.
 
 ### `end-point-slow-log-threshold`
 
@@ -311,6 +355,11 @@ Configuration items related to the Coprocessor thread pool.
 
 Configuration items related to storage
 
+### `data-dir`
+
++ The path to RocksDB directory.
++ Default value: `"./"`
+
 ### `scheduler-concurrency`
 
 + A built-in memory lock mechanism to prevent simultaneous operations on a key. Each key has a hash in a different slot.
@@ -328,6 +377,11 @@ Configuration items related to storage
 + The maximum size of the write queue. A `Server Is Busy` error is returned for a new write to TiKV when this value is exceeded.
 + Default value: `"100MB"`
 + Unit: MB|GB
+
+### `enable-async-apply-prewrite`
+
++ For async commit transactions, it's possible to response to the client before applying prewrite requests. Enabling this can ease reduce latency when apply duration is significant, or reduce latency jittering when apply duration is not stable.
++ Default value: `false`
 
 ### `reserve-space`
 
@@ -408,6 +462,30 @@ Configuration items related to the I/O rate limiter.
 + Optional value: `"write-only"`
 + Default value: `"write-only"`
 
+## pd
+
+### `endpoints`
+
++ PD endpoints.
++ Default value: `["127.0.0.1:2379"]`
+
+### `retry-interval`
+
++ The interval at which to retry a PD connection initialization.
++ Default value: `"300ms"`
+
+### `retry-log-every`
+
++ If the client observes an error, it can can skip reporting it except every `n` times.
++ Set to 1 to disable this feature.
++ Default value: `10`
+
+### `retry-max-count`
+
++ The maximum number of times to retry a PD connection initialization.
++ Set to 0 to disable retry. Set to -1 for unlimited retry.
++ Default value: -1
+
 ## raftstore
 
 Configuration items related to Raftstore
@@ -471,6 +549,21 @@ Configuration items related to Raftstore
 + Default value: `"8MB"`
 + Minimum value: `0`
 + Unit: MB|GB
+
+### `raft-log-compact-sync-interval`
+
++ Interval to compact unnecessary Raft log.
++ Default value: `"2s"`
+
+### `raft-log-reserve-max-ticks`
+
++ The tick limit to GC Raft log even they are below `raft-log-gc-threshold`.
++ Default value: `6`
+
+### `raft-engine-purge-interval`
+
++ Raft engine is a replaceable component. For some implementations, it's necessary to purge old log files to recycle disk space ASAP.
++ Default value: `"10s"`
 
 ### `raft-log-gc-tick-interval`
 
@@ -774,6 +867,20 @@ Configuration items related to Coprocessor
 + The number of keys in the newly split Region. This value is an estimate.
 + Default value: `960000`
 
+### `consistency-check-method`
+
++ Set to "mvcc" to do consistency check for MVCC data, or "raw" for raw data.
++ Default value: `"mvcc"`
+
+## coprocessor-v2
+
+### `coprocessor-plugin-directory`
+
++ Path to the directory where compiled coprocessor plugins are located.
++ Plugins in this directory will be automatically loaded by TiKV.
++ If the config value is not set, the coprocessor plugin will be disabled.
++ Default value: `"./coprocessors"`
+
 ## RocksDB
 
 Configuration items related to RocksDB
@@ -845,6 +952,11 @@ Configuration items related to RocksDB
 + Minimum value: `0`
 + Unit: B|KB|MB|GB
 
+### `max-total-wal-size`
+
++ Max RocksDB WAL size in total
++ Default value: `"4GB"`
+
 ### `enable-statistics`
 
 + Determines whether to enable the statistics of RocksDB
@@ -881,6 +993,11 @@ Configuration items related to RocksDB
 + Minimum value: `0`
 + Unit: B|KB|MB|GB
 
+### `rate-limiter-refill-period`
+
++ Controls how often IO tokens are refilled. Smaller value will flatten IO bursts while introducing more CPU overhead.
++ Default value: `"100ms"`
+
 ### `rate-limiter-mode`
 
 + RocksDB's compaction rate limiter mode
@@ -896,7 +1013,7 @@ Configuration items related to RocksDB
 
 ### `enable-pipelined-write`
 
-+ Enables or disables Pipelined Write
++ Enables or disables Pipelined Write.
 + Default value: `true`
 
 ### `bytes-per-sync`
@@ -934,7 +1051,12 @@ Configuration items related to RocksDB
 ### `info-log-dir`
 
 + The directory in which logs are stored
-+ Default value: ""
++ Default value: `""`
+
+### `info-log-level`
+
++ RocksDB log levels.
++ Default value: `"info"`
 
 ## rocksdb.titan
 
@@ -1258,16 +1380,139 @@ Configuration items related to `raftdb`
 + Default value: `4`
 + Minimum value: `2`
 
+
 ### `max-sub-compactions`
 
 + The number of concurrent sub-compaction operations performed in RocksDB
 + Default value: `2`
 + Minimum value: `1`
 
+### `max-open-files`
+
++ The total number of files that RocksDB can open
++ Default value: `40960`
++ Minimum value: `-1`
+
+### `max-manifest-file-size`
+
++ The maximum size of a RocksDB Manifest file
++ Default value: `"20MB"`
++ Minimum value: `0`
++ Unit: B|KB|MB|GB
+
+### `create-if-missing`
+
++ Determines whether to automatically create a DB switch
++ Default value: `true`
+
+### `enable-statistics`
+
++ Determines whether to enable the statistics of RocksDB
++ Default value: `true`
+
+### `stats-dump-period`
+
++ The interval at which statistics are output to the log.
++ Default value: `10m`
+
 ### `wal-dir`
 
-+ The directory in which WAL files are stored
-+ Default value: `"/tmp/tikv/store"`
++ Raft RocksDB WAL directory.
++ This config specifies the absolute directory path for WAL.
++ If it is not set, the log files will be in the same directory as data.
++ If there are two disks on the machine, storing RocksDB data and WAL logs on different disks can improve performance.
++ Do not set this config the same as `rocksdb.wal-dir`.
++ Default value: `""`
+
+### `wal-ttl-seconds`
+
++ The living time of the archived WAL files. When the value is exceeded, the system deletes these files.
++ Default value: `0`
++ Minimum value: `0`
++ unit: second
+
+### `wal-size-limit`
+
++ The size limit of the archived WAL files. When the value is exceeded, the system deletes these files.
++ Default value: `0`
++ Minimum value: `0`
++ Unit: B|KB|MB|GB
+
+### `max-total-wal-size`
+
++ Max RocksDB WAL size in total
++ Default value: `"4GB"`
+
+### `compaction-readahead-size`
+
++ Enables the readahead feature during RocksDB compaction and specifies the size of readahead data. If you are using mechanical disks, it is recommended to set the value to 2MB at least.
++ Default value: `0`
++ Minimum value: `0`
++ Unit: B|KB|MB|GB
+
+### `writable-file-max-buffer-size`
+
++ The maximum buffer size used in WritableFileWrite
++ Default value: `"1MB"`
++ Minimum value: `0`
++ Unit: B|KB|MB|GB
+
+### `use-direct-io-for-flush-and-compaction`
+
++ Determines whether to use `O_DIRECT` for both reads and writes in the background flush and compactions. The performance impact of this option: enabling `O_DIRECT` bypasses and prevents contamination of the OS buffer cache, but the subsequent file reads require re-reading the contents to the buffer cache.
++ Default value: `false`
+
+### `enable-pipelined-write`
+
++ Enables or disables Pipelined Write.
++ Default value: `true`
+
+### `allow-concurrent-memtable-write`
+
++ Enable or disable concurrent memtable write.
++ Default value: `true`
+
+### `bytes-per-sync`
+
++ The rate at which OS incrementally synchronizes files to disk while these files are being written asynchronously
++ Default value: `"1MB"`
++ Minimum value: `0`
++ Unit: B|KB|MB|GB
+
+### `wal-bytes-per-sync`
+
++ The rate at which OS incrementally synchronizes WAL files to disk while the WAL files are being written
++ Default value: `"512KB"`
++ Minimum value: `0`
++ Unit: B|KB|MB|GB
+
+### `info-log-max-size`
+
++ The maximum size of Info log
++ Default value: `"1GB"`
++ Minimum value: `0`
++ Unit: B|KB|MB|GB
+
+### `info-log-roll-time`
+
++ The time interval at which Info logs are truncated. If the value is `0s`, logs are not truncated.
++ Default value: `"0s"`
+
+### `info-log-keep-log-file-num`
+
++ The maximum number of kept log files
++ Default value: `10`
++ Minimum value: `0`
+
+### `info-log-dir`
+
++ The directory in which logs are stored
++ Default value: `""`
+
+### `info-log-level`
+
++ RocksDB log levels.
++ Default value: `"info"`
 
 ## security
 
@@ -1314,6 +1559,11 @@ Configuration items related to [encryption at rest](/encryption-at-rest.md) (TDE
 + Specifies how often TiKV rotates the data encryption key.
 + Default value: `7d`
 
+### `enable-file-dictionary-log`
+
++ Enable an optimization to reduce IO and mutex contention for encryption metadata management. Once the option is turned on (which is the default after 4.0.9), the data format is not compatible with TiKV <= 4.0.8. In order to downgrade to TiKV <= 4.0.8, one can turn off this option and restart TiKV, after which TiKV will convert the data format to be compatible with previous versions.
++ Default value: `true`
+
 ### enable-file-dictionary-log
 
 + Enables the optimization to reduce I/O and mutex contention when TiKV manages the encryption metadata.
@@ -1338,18 +1588,32 @@ Configuration items related to TiDB Lightning import and BR restore.
 + Default value: `8`
 + Minimum value: `1`
 
-### `num-import-jobs`
+### `stream-channel-window`
 
-+ The number of jobs imported concurrently
-+ Default value: `8`
-+ Minimum value: `1`
++ Stream channel window size, stream will be blocked on channel full.
++ Default value: 128
 
 ## gc
+
+### `batch-keys`
+
++ The number of keys to GC in one batch.
++ Default value: `512`
+
+### `max-write-bytes-per-sec`
+
++ Max bytes that GC worker can write to rocksdb in one second. If it is set to 0, there is no limit.
++ Default value: `"0"`
 
 ### `enable-compaction-filter` <span class="version-mark">New in v5.0</span>
 
 + Controls whether to enable the GC in Compaction Filter feature
 + Default value: `true`
+
+### `ratio-threshold`
+
++ Garbage ratio threshold to trigger a GC.
++ Default value: `1.1`
 
 ## backup
 
@@ -1360,6 +1624,31 @@ Configuration items related to BR backup.
 + The number of worker threads to process backup
 + Default value: `MIN(CPU * 0.75, 32)`.
 + Minimum value: `1`
+
+### `batch-size`
+
++ Number of ranges to backup in one batch.
++ Default value: `8`
+
+### `sst-max-size`
++ When Backup region [a,e) size exceeds `sst-max-size`, it will be backuped into several Files [a,b), [b,c), [c,d), [d,e) and the size of [a,b), [b,c), [c,d) will be `sst-max-size` (or a little larger).
++ Default value: `"144MB"`
+
+### `enable-auto-tune`
++ Automatically reduce the number of backup threads when the current workload is high, in order to reduce impact on the cluster's performance during back up.
++ Default value: `false`
+
+## backup.hadoop
+
+### `home`
+
++ let TiKV know how to find the hdfs shell command. Equivalent to the $HADOOP_HOME enviroment variable.
++ Default value: `""`
+
+### `linux-user`
+
++ TiKV will run the hdfs shell command under this linux user. TiKV will use the current linux user if not provided.
++ Default value: `""`
 
 ## cdc
 
@@ -1425,9 +1714,9 @@ For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](
 - Default value: `"1s"`
 - Minimum value: `"1ms"`
 
-### `wait-up-delay-duration`
+### `wake-up-delay-duration`
 
-- When pessimistic transactions release the lock, among all the transactions waiting for lock, only the transaction with the smallest `start_ts` is woken up. Other transactions will be woken up after `wait-up-delay-duration`.
+- When pessimistic transactions release the lock, among all the transactions waiting for lock, only the transaction with the smallest `start_ts` is woken up. Other transactions will be woken up after `wake-up-delay-duration`.
 - Default value: `"20ms"`
 
 ### `pipelined`
