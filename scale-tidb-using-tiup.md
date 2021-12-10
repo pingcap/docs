@@ -250,7 +250,7 @@ If you want to remove a TiKV node from the `10.0.1.5` host, take the following s
 > **Note:**
 >
 > - You can take similar steps to remove the TiDB and PD node.
-> - Because the TiKV, TiFlash, and TiDB Binlog components are taken offline asynchronously and the stopping process takes a long time, TiUP takes them offline in different methods. For details, see [Offline special handling](/tiup/tiup-component-cluster-scale-in.md#offline-special-handling).
+> - Because the TiKV, TiFlash, and TiDB Binlog components are taken offline asynchronously and the stopping process takes a long time, TiUP takes them offline in different methods. For details, see [Particular handling of components' offline process](/tiup/tiup-component-cluster-scale-in.md#Particular-handling-of-components'-offline-process).
 
 > **Note:**
 >
