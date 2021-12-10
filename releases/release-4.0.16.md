@@ -65,7 +65,7 @@ TiDB version: 4.0.16
     - Fix the issue that when the `CONCAT` function has a negative float type argument, the last digit of the argument number is chopped in the result  [#29417](https://github.com/pingcap/tidb/issues/29417)
     - Fix the issue of an extra column in the query result when `NATURAL JOIN` is used to join multiple tables [#29481](https://github.com/pingcap/tidb/issues/29481)
     - Fix the issue that `TopN` is wrongly pushed down to `indexPlan` when `IndexScan` uses a prefix index [#29711](https://github.com/pingcap/tidb/issues/29711)
-    - Fix the issue that retrying transactions with the auto-increment columns of  `DOUBLE` type causes data error [#29892](https://github.com/pingcap/tidb/issues/29892)
+    - Fix the issue that retrying transactions with the auto-increment columns of `DOUBLE` type causes data error [#29892](https://github.com/pingcap/tidb/issues/29892)
 
 + TiKV
 
