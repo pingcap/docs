@@ -87,7 +87,7 @@ TiDB version: 4.0.16
     
     + TiDB Binlog
         
-        - Fix the bug that Drainer exits when transporting a transaction greater than 1 GB [#1078](https://github.com/pingcap/tidb-binlog/pull/1078)
+        - Fix the bug that Drainer exits when transporting a transaction greater than 1 GB [#28659](https://github.com/pingcap/tidb/issues/28659)
     
     + TiCDC
 
