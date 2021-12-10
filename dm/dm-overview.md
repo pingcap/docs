@@ -72,7 +72,7 @@ Before using the DM tool, note the following restrictions:
 
     > **Warning:**
     >
-    > Support for MySQL 8.0 is an experimental feature of TiDB Data Migration v2.0. It is **NOT** recommended that you use it in a production environment.
+    > Migrating data from MySQL 8.0 to TiDB using DM is an experimental feature (introduced since DM v2.0). It is **NOT** recommended that you use it in a production environment.
 
 + DDL syntax compatibility
 
