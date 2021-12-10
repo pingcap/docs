@@ -112,7 +112,7 @@ Take the `/dev/nvme0n1` data disk as an example:
 
 ## Check and disable system swap
 
-TiDB requires sufficient memory space for operation. Using swap as a buffer when memory is insufficient might deteriorate performance. Therefore, it is recommended to disable the system swap permanently by executing the following command:
+TiDB requires sufficient memory space for operation. Using swap as a buffer when memory is insufficient might degrade performance. Therefore, it is recommended to disable the system swap permanently by executing the following command:
 
 {{< copyable "shell-regular" >}}
 
