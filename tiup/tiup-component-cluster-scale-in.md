@@ -45,9 +45,9 @@ tiup cluster scale-in <cluster-name> [flags]
 - Data type: `BOOLEAN`
 - This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
 
-> **Note:**
+> **Warning:**
 >
-> Because the forced removal of a TiKV node does not wait for data to be scheduled, removing more than one serving TiKV node is at the risk of data loss.
+> When using this option to forcibly remove TiKV or TiFlash nodes that are in service or are going offline, these nodes will be deleted directly without waiting for data to be scheduled. This imposes high risk of data loass. Therefore, you are advised to use this option on nodes that are down only.
 
 ### --transfer-timeout
 
