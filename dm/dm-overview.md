@@ -9,7 +9,7 @@ summary: Learn about the TiDB Data Migration tool
 
 ## DM versions
 
-The stable versions of DM include v1.0, v2.0, and v5.3. It is recommended to use v5.3, which is the latest stable version of DM.
+The stable versions of DM include v1.0, v2.0, and v5.3. It is recommended to use DM v5.3 (the latest stable version of DM) and not recommended to use v1.0 (the oldest version of DM).
 
 Currently, the DM documentation is independent of the TiDB documentation. To access the DM documentation, click one of the following links:
 
