@@ -347,7 +347,7 @@ Starting from TiCDC v5.3.0, the cyclic replication feature between TiDB clusters
     - Fix the issue of a wrong way to check for overflow in `plus` expression [#26977](https://github.com/pingcap/tidb/issues/26977)
     - Fix the issue of `data too long` error when dumping statistics from the table with `new collation` data [#27024](https://github.com/pingcap/tidb/issues/27024)
     - Fix the issue that the retried transactions' statements are not included in `TIDB_TRX` [#28670](https://github.com/pingcap/tidb/pull/28670)
-    - Fix the wrong default value of the `plugin_dir` configuration [28084](https://github.com/pingcap/tidb/issues/28084)
+    - Fix the wrong default value of the `plugin_dir` configuration [#28084](https://github.com/pingcap/tidb/issues/28084)
 
 + TiKV
 
