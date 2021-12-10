@@ -840,8 +840,8 @@ Usage:
 
 > **Note:**
 >
-> When you use the `store limit` command, the original `region-add` and `region-remove` are deprecated. Use `add-peer` and `remove-peer` instead.
-> You can use PD Control to check the status information (Up, Disconnect, Offline, Down, or Tombstone) of a TiKV store. To see the relationship between each status, refer to [Relationship between each status of a TiKV store](/tidb-scheduling.md#information-collection).
+> - When you use the `store limit` command, the original `region-add` and `region-remove` are deprecated. Use `add-peer` and `remove-peer` instead.
+> - You can use PD Control to check the status information (Up, Disconnect, Offline, Down, or Tombstone) of a TiKV store. To see the relationship between each status, refer to [Relationship between each status of a TiKV store](/tidb-scheduling.md#information-collection).
 
 ### `log [fatal | error | warn | info | debug]`
 
