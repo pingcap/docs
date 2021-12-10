@@ -31,12 +31,13 @@ TiDB version: 4.0.16
 
     + Backup & Restore (BR)
 
-        - Improve the robustness for restoring [#27421](https://github.com/pingcap/tidb/issues/27421)
+        - Improve the robustness of restoring [#27421](https://github.com/pingcap/tidb/issues/27421)
 
     + TiCDC
 
         - Add a tick frequency limit to EtcdWorker to prevent frequent etcd writes from affecting PD services [#3112](https://github.com/pingcap/ticdc/issues/3112)
         - Optimize rate limiting control on TiKV reloads to reduce gPRC congestion during changefeed initialization [#3110](https://github.com/pingcap/ticdc/issues/3110)
+
 + Grafana
 
     - Upgrade to v7.5.11 to avoid security vulnerabilities of earlier versions
