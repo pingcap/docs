@@ -9,7 +9,7 @@ TiDB uses statistics to decide [which index to choose](/choose-index.md). The `t
 
 > **Note:**
 >
-> When `tidb_analyze_version = 2`, if memory overflow occurs after you execute `ANALYZE`, you need to set `tidb_analyze_version = 1` and perform one of the following operations:
+> When `tidb_analyze_version = 2`, if memory overflow occurs after `ANALYZE` is executed, you need to set `tidb_analyze_version = 1` and perform one of the following operations:
 >
 > - If the `ANALYZE` statement is executed manually, manually analyze every table to be analyzed.
 >
