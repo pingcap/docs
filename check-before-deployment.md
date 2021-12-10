@@ -126,7 +126,7 @@ sysctl -p
 
 > - Executing `swapoff -a` and then `swapon -a` is to refresh swap by dumping data to memory and cleaning up swap. If you drop the swappiness change and execute only `swapoff -a`, swap will be enabled again after you restart the system.
 >
-> - `sysctl -p` is executed to validate the configuration without restarting the system.
+> - `sysctl -p` is executed to apply the configuration without restarting the system.
 
 ## Check and stop the firewall service of target machines
 
