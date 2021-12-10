@@ -53,15 +53,15 @@ TiDB version: 4.0.16
     - Fix the panic when using the `CASE WHEN` function on the `ENUM` data type [#29357](https://github.com/pingcap/tidb/issues/29357)
     - Fix wrong results of the `microsecond` function in vectorized expressions [#29244](https://github.com/pingcap/tidb/issues/29244)
     - (dup) Fix wrong results of the `hour` function in vectorized expression [#28643](https://github.com/pingcap/tidb/issues/28643)
-    - Fix the issue that optimistic transaction conflicts might cause transactions blocking each other [#11148](https://github.com/tikv/tikv/issues/11148)
+    - Fix the issue that optimistic transaction conflicts might cause transactions to block each other [#11148](https://github.com/tikv/tikv/issues/11148)
     - Fix the issue of incomplete log information from the `auto analyz` result [#29188](https://github.com/pingcap/tidb/issues/29188)
-    - Fix an issue that `NO_ZERO_IN_DATE` does not work on the default values [#26766](https://github.com/pingcap/tidb/issues/26766)
-    - Fix the issue that the Coprocessor Cache panel in Grafana does not display metrics. Now, Grafana displays the number of `hits`/`miss`/`evict`. [#26338](https://github.com/pingcap/tidb/issues/26338)
-    - Fix the issue that concurrently truncating the same partition hangs DDL [#26229](https://github.com/pingcap/tidb/issues/26229)
+    - Fix the issue that using an invalid default date does not report an error when the `SQL_MODE` is 'NO_ZERO_IN_DATE' [#26766](https://github.com/pingcap/tidb/issues/26766)
+    - Fix the issue that the Coprocessor Cache panel in Grafana does not display metrics. Now, Grafana displays the number of `hits`/`miss`/`evict` [#26338](https://github.com/pingcap/tidb/issues/26338)
+    - Fix the issue that concurrently truncating the same partition causes DDL statements to stuck [#26229](https://github.com/pingcap/tidb/issues/26229)
     - Fix the issue that when the `CONCAT` function has a negative float type argument, the last digit of the argument number is chopped in the result  [#29417](https://github.com/pingcap/tidb/issues/29417)
     - Fix the issue of an extra column in the query result when `NATURAL JOIN` is used to join multiple tables [#29481](https://github.com/pingcap/tidb/issues/29481)
-    - Fix the issue that `TopN` is wrongly pushed down to `indexPlan` when `IndexScan` is using a prefix index [#29711](https://github.com/pingcap/tidb/issues/29711)
-    - Fix the issue that retrying transactions with `DOUBLE` type auto-increment columns causes data error [#29892](https://github.com/pingcap/tidb/issues/29892)
+    - Fix the issue that `TopN` is wrongly pushed down to `indexPlan` when `IndexScan` uses a prefix index [#29711](https://github.com/pingcap/tidb/issues/29711)
+    - Fix the issue that retrying transactions with the auto-increment columns of  `DOUBLE` type causes data error [#29892](https://github.com/pingcap/tidb/issues/29892)
 
 + TiKV
 
