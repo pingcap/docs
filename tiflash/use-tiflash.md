@@ -2,6 +2,8 @@
 title: Use TiFlash
 ---
 
+To experience the whole process from importing to querying in a TPC-H dataset, refer to [Quick Start Guide for TiDB HTAP](/quick-start-with-htap.md).
+
 # Use TiFlash
 
 After TiFlash is deployed, data replication does not automatically begin. You need to manually specify the tables to be replicated.
