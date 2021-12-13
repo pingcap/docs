@@ -1,0 +1,17 @@
+name: bot
+
+on: [pull_request]
+  workflow_dispatch:
+  schedule:
+    - cron: "30 1 * * 1-5"
+
+jobs:
+  pr_reminder:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run pr_reminder.py
+        run:
+          wget https://raw.githubusercontent.com/ran-huang/test-github-action/master/scripts/pr_reminder.py;
+          pip3 install lxml;
+          python3 pr_reminder.py ${{secrets.BOT_WEBHOOK_URL}}
