@@ -9,7 +9,6 @@ jobs:
   pr_reminder:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
       - name: Run pr_reminder.py
         run:
           wget https://raw.githubusercontent.com/ran-huang/test-github-action/master/scripts/pr_reminder.py;
