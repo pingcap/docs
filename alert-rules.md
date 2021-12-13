@@ -148,7 +148,7 @@ This section gives the alert rules for the TiDB component.
 
 * Alert rule:
 
-    `increase(TiDB_tikvclient_backoff_seconds_count[10m]) > 10`
+    `increase(tidb_tikvclient_backoff_seconds_count[10m]) > 10`
 
 * Description:
 
