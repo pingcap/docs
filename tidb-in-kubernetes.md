@@ -10,4 +10,4 @@ You can use [TiDB Operator](https://github.com/pingcap/tidb-operator) to deploy 
 
 For the current TiDB release, the compatible version of TiDB Operator is v1.2.
 
-Currently, the TiDB in Kubernetes documentation is independent of the TiDB documentation. For detailed steps on how to deploy TiDB clusters in Kubernetes using TiDB Operator, see [TiDB in Kubernetes documentation](https://docs.pingcap.com/zh/tidb-in-kubernetes/v1.2/).
+Currently, the TiDB in Kubernetes documentation is independent of the TiDB documentation. For detailed steps on how to deploy TiDB clusters in Kubernetes using TiDB Operator, see [TiDB in Kubernetes documentation](https://docs.pingcap.com/tidb-in-kubernetes/v1.2/).
