@@ -76,7 +76,7 @@ Before using the DM tool, note the following restrictions:
 
 + DDL syntax compatibility
 
-    - Currently, TiDB is not compatible with all the DDL statements that MySQL supports. Because DM uses the TiDB parser to process DDL statements, it only supports the DDL syntax supported by the TiDB parser. For details, see [MySQL Compatibility](mysql-compatibility/#ddl).
+    - Currently, TiDB is not compatible with all the DDL statements that MySQL supports. Because DM uses the TiDB parser to process DDL statements, it only supports the DDL syntax supported by the TiDB parser. For details, see [MySQL Compatibility](/mysql-compatibility/#ddl).
 
     - DM reports an error when it encounters an incompatible DDL statement. To solve this error, you need to manually handle it using dmctl, either skipping this DDL statement or replacing it with a specified DDL statement(s). For details, see [Skip or replace abnormal SQL statements](https://docs.pingcap.com/tidb-data-migration/stable/faq#how-to-handle-incompatible-ddl-statements).
 
