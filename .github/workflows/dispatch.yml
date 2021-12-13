@@ -3,27 +3,16 @@ name: Trigger docs site update
 on:
   push:
     branches:
-<<<<<<< HEAD
-      - release-5.0
-=======
       - master
       - release-*
->>>>>>> 8e6ae6082 (chore: update dispatch for latest docs site (#7118))
 
 jobs:
   trigger:
     runs-on: ubuntu-latest
 
     steps:
-<<<<<<< HEAD
-    - uses: actions/checkout@v2
-
-
-    - name: Extract branch, repo and sha
-=======
     - name: Extract sha
       id: extract
->>>>>>> 8e6ae6082 (chore: update dispatch for latest docs site (#7118))
       shell: bash
       run: |
         echo "::set-output name=sha::$(sha=${{ github.sha }}; echo ${sha:0:6})"
