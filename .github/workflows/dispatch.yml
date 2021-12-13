@@ -1,18 +1,10 @@
-<<<<<<< HEAD
-name: Repsitory dispatch workflow from docs-release-3.1
-=======
 name: Trigger docs site update
->>>>>>> 8e6ae6082 (chore: update dispatch for latest docs site (#7118))
 
 on:
   push:
     branches:
-<<<<<<< HEAD
-      - release-3.1
-=======
       - master
       - release-*
->>>>>>> 8e6ae6082 (chore: update dispatch for latest docs site (#7118))
 
 jobs:
   trigger:
