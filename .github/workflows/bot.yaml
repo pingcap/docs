@@ -1,9 +1,9 @@
 name: bot
 
-on: [pull_request]
-  #workflow_dispatch:
-  #schedule:
-  #  - cron: "30 1 * * 1-5"
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "30 1 * * 1-5"
 
 jobs:
   pr_reminder:
@@ -11,7 +11,6 @@ jobs:
     steps:
       - name: Run PR reminder
         run: |
-          wget https://raw.githubusercontent.com/ran-huang/test-github-action/master/scripts/pr_reminder.py;
-          #wget https://raw.githubusercontent.com/pingcap/docs/master/scripts/pr_reminder.py;
+          wget https://raw.githubusercontent.com/pingcap/docs/master/scripts/pr_reminder.py;
           pip3 install lxml;
           python3 pr_reminder.py ${{secrets.BOT_WEBHOOK_URL}}
