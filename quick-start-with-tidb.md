@@ -6,7 +6,10 @@ aliases: ['/docs/dev/quick-start-with-tidb/','/docs/dev/test-deployment-using-do
 
 # Quick Start Guide for the TiDB Database Platform
 
-This guide walks you through the quickest way to get started with TiDB. You will be using TiUP, a package manager in the TiDB ecosystem, to help you run any TiDB cluster component with only a single line of command.
+This guide walks you through the quickest way to get started with TiDB. For non-production environments, you can deploy your TiDB database by either of the following methods:
+
+- [Deploy a local test cluster](#deploy-a-local-test-cluster) (for Mac and Linux)
+- [Simulate production deployment on a single machine](#simulate-production-deployment-on-a-single-machine) (for Linux only)
 
 > **Note:**
 >
@@ -16,7 +19,9 @@ This guide walks you through the quickest way to get started with TiDB. You will
 > - To deploy TiDB in Kubernetes, see [Get Started with TiDB in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/get-started).
 > - To manage TiDB in the cloud, see [TiDB Cloud Quick Start](https://docs.pingcap.com/tidbcloud/beta/tidb-cloud-quickstart).
 
-## Deploy a local test environment
+## Deploy a local test cluster
+
+- Scenario: Quickly deploy a local TiDB cluster for testing using a single Mac or Linux server. By deploying such a cluster, you can learn the basic architecture of TiDB and the operation of its components, such as TiDB, TiKV, PD, and the monitoring components.
 
 <SimpleTab>
 <div label="Mac">
@@ -122,7 +127,6 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
 > TiUP Playground listens on `127.0.0.1` by default, and the service is only locally accessible. If you want the service to be externally accessible, specify the listening address using the `--host` parameter to bind the network interface card (NIC) to an externally accessible IP address.
 
 </div>
-
 <div label="Linux">
 
 As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB instances, 3 TiKV instances, 3 PD instances, and optional TiFlash instances. With TiUP Playground, you can quickly build the test cluster by taking the following steps:
@@ -226,13 +230,11 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
 > TiUP Playground listens on `127.0.0.1` by default, and the service is only locally accessible. If you want the service to be externally accessible, specify the listening address using the `--host` parameter to bind the network interface card (NIC) to an externally accessible IP address.
 
 </div>
-
 </SimpleTab>
 
-## Set up a test environment on a single machine using TiUP cluster
+## Simulate production deployment on a single machine
 
-- Scenario: Experience a smallest TiDB cluster with the complete topology and simulate the production deployment steps on a single Linux server.
-- Time required: 10 minutes
+- Scenario: Experience the smallest TiDB cluster with the complete topology and simulate the production deployment steps on a single Linux server.
 
 This section describes how to deploy a TiDB cluster using a YAML file of the smallest topology in TiUP.
 
