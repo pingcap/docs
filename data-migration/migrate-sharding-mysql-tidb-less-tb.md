@@ -37,7 +37,7 @@ Before starting the migration, make sure you have completed the following tasks:
 
 ### Check conflicts in the sharding tables
 
-Because the sharding tables are involved in the migration, data from multiple sharding tables may cause data conflicts in the primary key or unique index. Therefore, before the migration, you need to check the sharding table. For details, see [Cross table data conflict handling in primary key or unique index](https://docs.pingcap.com/tidb-data-migration/stable/shard-merge-best-practices#handle-conflicts-between-primary-keys-or-unique-indexes-across-multiple-sharded-tables)
+Because the sharding tables are involved in the migration, data from multiple sharding tables may cause data conflicts in the primary key or unique index. Therefore, before the migration, you need to check the sharding table. For details, see [Cross table data conflict handling in primary key or unique index](https://docs.pingcap.com/tidb-data-migration/stable/shard-merge-best-practices#handle-conflicts-between-primary-keys-or-unique-indexes-across-multiple-sharded-tables).
 
 In this example, the user.information table structure is as follows:
 
@@ -117,15 +117,15 @@ Create a new file named `task1.yaml`. The migration task is as follows.
 name: "shard_merge"
 # Task mode. You can set it to the following:
 # - full: Performs full data migration
-# - incremental: binlog real-time replication
+# - incremental: Performs binlog real-time replication
 # - all: Performs both full data and binlog replication
 task-mode: all
 # Required for the sharding schemas and tables. By default, the "pessimistic" mode is used.
 # If you have a deeper understanding of the principles and usage limitations of the optimistic mode, you can also use the "optimistic" mode.
 # For more information, see [Merge and Migrate Data from Sharded Tables](https://docs.pingcap.com/tidb-data-migration/stable/feature-shard-merge)
 shard-mode: "pessimistic"
-meta-schema: "dm_meta"                       # A schema will be created in the downstream database to store the metadata
-ignore-checking-items: ["auto_increment_ID"] # In this example, there are auto-incremental primary keys upstream, so you do not need to check this item.
+meta-schema: "dm_meta"                        # A schema will be created in the downstream database to store the metadata
+ignore-checking-items: ["auto_increment_ID"]  # In this example, there are auto-incremental primary keys upstream, so you do not need to check this item.
 
 target-database:
   host: "${host}"                             # For example: 192.168.0.1
@@ -171,7 +171,7 @@ block-allow-list:
     do-dbs: ["store_*"]
 ```
 
-The above is the minimum task configuration to perform the migration. For more information, see [DM Advanced Task Configuration File](https://docs.pingcap.com/tidb-data-migration/stable/task-configuration-file-full/).
+The above example is the minimum task configuration to perform the migration. For more information, see [DM Advanced Task Configuration File](https://docs.pingcap.com/tidb-data-migration/stable/task-configuration-file-full/).
 
 For more information on `routes`, `filters` and other configurations in the task file, see the following documents:
 
@@ -221,7 +221,7 @@ If you encounter errors, you can use `query-status <taskName of the error task>`
 
 ## Step 5: Monitor tasks and check logs (optional)
 
-If Prometheus and Grafana are correctly deployed when using TiUP to deploy the DM cluster, for example, assume that the address of Grafana is 172.16.10.71, you can [open the page to enter Grafana](http://172.16.10.71:3000) in the browser and select the Dashboard of DM, and then you can view related monitoring items. For specific monitoring indicators, see [Monitor and Alarm Settings](https://docs.pingcap.com/tidb-data-migration/stable/monitor-a-dm-cluster).
+If Prometheus and Grafana are correctly deployed when using TiUP to deploy the DM cluster. For example, assume that the address of Grafana is 172.16.10.71, you can [open the page to enter Grafana](http://172.16.10.71:3000) in the browser and select the Dashboard of DM, and then you can view related monitoring items. For specific monitoring indicators, see [Monitor and Alarm Settings](https://docs.pingcap.com/tidb-data-migration/stable/monitor-a-dm-cluster).
 
 You can also check the DM running status and related errors through the log file.
 
