@@ -1,9 +1,9 @@
 ---
-title: Import and Merge Small MySQL Sharding Schemas and Tables to TiDB (Less Than 1 TiB)
+title: Import and Merge Small MySQL Sharding Schemas and Sharding Tables to TiDB (Less Than 1 TiB)
 summary: Introduces how to consolidate MySQL sharding shcemas and tables into TiDB (Less Than 1 TiB).
 ---
 
-# Import and Merge Small MySQL Sharding Schemas and Tables to TiDB (Less Than 1 TiB)
+# Import and Merge Small MySQL Sharding Schemas and Sharding Tables to TiDB (Less Than 1 TiB)
 
 If you want to merge and migrate multiple MySQL database instances upstream to one TiDB database downstream, and the amount of data is not too large (for example, the sum of all sharding tables is less than 1 TiB), you can use DM to migrate sharding tables. Through examples in this article, you can learn the operation steps, precautions, and troubleshooting of the migration.
 
@@ -11,9 +11,7 @@ This document applies to migration of sharding tables within 1 TiB in total.
 
 If you want to migrate sharding tables with a total of more than 1 TiB of data, it will take a long time by using DM. It is recommended that you follow the operation introduced in [Import and Merge Large MySQL Sharding Schemas and Sharding Tables to TiDB (Greater Than 1 TiB)](/migrate-sharding-mysql-tidb-above-tb.md) to migrate data greater than 1 TiB.
 
-## Migration Scenarios
-
-This article takes a simple scenario as an example. The sharding tables of the two data source MySQL instances in the example are migrated to the downstream TiDB cluster. The diagram is shown as follows.
+This document takes a simple scenario as an example. The sharding tables of the two data source MySQL instances in the example are migrated to the downstream TiDB cluster. The diagram is shown as follows.
 
 ![Use DM to Migrate sharding Tables](/media/migrate-shard-tables-within-1tb-en.png)
 
@@ -111,7 +109,7 @@ Repeat the above steps until all MySQL instances are added to the DM.
 
 ## Step 2: Configure the task
 
-Create a new file named task1.yaml. The migration task is as follows.
+Create a new file named `task1.yaml`. The migration task is as follows.
 
 {{< copyable "shell-regular" >}}
 
@@ -147,7 +145,7 @@ mysql-instances:
     filter-rules: ["store-filter-rule", "sale-filter-rule"]
     block-allow-list:  "log-bak-ignored"
 
-# Other common configurations shared by all instances
+# Configurations for merging sharding schemas and tables
 routes:
   sale-route-rule:
     schema-pattern: "store_*"
@@ -184,7 +182,7 @@ For more information on `routes`, `filters` and other configurations in the task
 
 ## Step 3: Start the task
 
-In order to spot configuration errors in the data migration task in advance, DM provides the [Pre-check](https://docs.pingcap.com/tidb-data-migration/stable/precheck) function. When data migration starts, DM will automatically check related permissions and configurations. 
+In order to spot configuration errors in the data migration task in advance, DM provides the [Pre-check](https://docs.pingcap.com/tidb-data-migration/stable/precheck) function. When data migration starts, DM will automatically check related permissions and configurations.
 
 You can also use the `check-task` command to manually check whether the configurations of the upstream MySQL instance meet the requirements.
 
@@ -194,7 +192,7 @@ You can also use the `check-task` command to manually check whether the configur
 tiup dmctl --master-addr ${advertise-addr} check-task task.yaml
 ```
 
-Use the `dmctl` command to start the migration task: 
+Use the `dmctl` command to start the migration task:
 
 {{< copyable "shell-regular" >}}
 
@@ -227,8 +225,8 @@ If Prometheus and Grafana are correctly deployed when using TiUP to deploy the D
 
 You can also check the DM running status and related errors through the log file.
 
-- DM-master log directory: set by the DM-master process parameter `--log-file`. If you use TiUP to deploy DM, the log directory is located at /dm-deploy/dm-master-8261/log/.
-- DM-worker log directory: set by the DM-worker process parameter `--log-file`. If you use TiUP to deploy DM, the log directory is located at /dm-deploy/dm-worker-8262/log/.
+- DM-master log directory: set by the DM-master process parameter `--log-file`. If you use TiUP to deploy DM, the log directory is located at `/dm-deploy/dm-master-8261/log/`.
+- DM-worker log directory: set by the DM-worker process parameter `--log-file`. If you use TiUP to deploy DM, the log directory is located at `/dm-deploy/dm-worker-8262/log/`.
 
 ## See also
 
