@@ -135,12 +135,13 @@ In the command above:
 > **Note:**
 >
 > If the size of a single exported table exceeds 10 GB, it is strongly recommended to use the `-r` and `-F` options.
+
 Then, run the following command to use Dumpling to export table3 and table4 from my_db2:
 
 {{< copyable "shell-regular" >}}
 
 ```shell
-tiup dumpling -h ${ip} -P 3306 -u root -t 16 -r 200000 -F 256MB -B my_db2 -f 'my_db1.table[32]' -o ${data-path}/my_db2
+tiup dumpling -h ${ip} -P 3306 -u root -t 16 -r 200000 -F 256MB -B my_db2 -f 'my_db2.table[34]' -o ${data-path}/my_db2
 ```
 
 The reason for storing all source data tables in one directory is to facilitate subsequent import by TiDB Lightning.
@@ -382,7 +383,7 @@ The parameters in this command are described as follows.
 |--master-addr| {advertise-addr} of any DM-master node in the cluster that dmctl connects to. For example: 172.16.10.71:8261 |
 |start-task   | Starts the data migration task. |
 
-If the task fails to start, first make configuration changes according to the returned result, and then run the start-task task.yaml command to restart the task. If you encounter problems, refer to [Handle Errors](https://docs.pingcap.com/tidb-data-migration/stable/error-handling) and [TiDB Data Migration FAQ](https://docs.pingcap.com/tidb-data-migration/stable/faq)
+If the task fails to start, first make configuration changes according to the returned result, and then run the `start-task task.yaml` command to restart the task. If you encounter problems, refer to [Handle Errors](https://docs.pingcap.com/tidb-data-migration/stable/error-handling) and [TiDB Data Migration FAQ](https://docs.pingcap.com/tidb-data-migration/stable/faq)
 
 ### Check the import result
 
@@ -404,8 +405,8 @@ If Prometheus, Alertmanager and Grafana are correctly deployed when you deploy t
 
 When DM is running, DM-worker, DM-master and dmctl output logs. The log directory of each component is as follows.
 
-- DM-master log directory: It is specified by the --log-file DM-master process parameter. If DM is deployed using TiUP, the log directory is {log_dir} in the DM-master node.
-- DM-worker log directory: It is specified by the --log-file DM-worker process parameter. If DM is deployed using TiUP, the log directory is {log_dir} in the DM-worker node.
+- DM-master log directory: It is specified by the --log-file DM-master process parameter. If DM is deployed using TiUP, the log directory is `/dm-deploy/dm-master-8261/log/` in the DM-master node.
+- DM-worker log directory: It is specified by the --log-file DM-worker process parameter. If DM is deployed using TiUP, the log directory is `/dm-deploy/dm-worker-8262/log/` in the DM-worker node.
 
 ## See also
 
