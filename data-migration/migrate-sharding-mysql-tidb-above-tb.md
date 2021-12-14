@@ -121,16 +121,16 @@ tiup dumpling -h ${ip} -P 3306 -u root -t 16 -r 200000 -F 256MB -B my_db1 -f 'my
 
 In the command above:
 
-- `-u` specifies the user name to be used. If a password is required for authentication, you can use `-p $YOUR_SECRET_PASSWORD` to pass the password to Dumpling.
-- `-p` specifies the password to be used.
-- `-p` specifies the port to be used.
-- `-h` specifies the IP address of the data source.
-- `t` specifies the number of threads for the export. Increasing the number of threads improves the concurrency of Dumpling and the export speed, and increases the database's memory consumption. Therefore, it is not recommended to set the number too large.
-- `-o` specifies the export directory of the storage, which supports a local file path or a [URL of an external storage](/br/backup-and-restore-storages.md).
-- `-r` specifies the maximum number of rows in a single file. If you use this parameter, Dumpling enables the in-table concurrency to speed up the export and reduce the memory usage.
+- `-u` or `--user` specifies the user name to be used. If a password is required for authentication, you can use `-p $YOUR_SECRET_PASSWORD` to pass the password to Dumpling.
+- `-p` or `--password` specifies the password to be used.
+- `-p` or `--port` specifies the port to be used.
+- `-h` or `--host` specifies the IP address of the data source.
+- `-t` or `--thread` specifies the number of threads for the export. Increasing the number of threads improves the concurrency of Dumpling and the export speed, and increases the database's memory consumption. Therefore, it is not recommended to set the number too large.
+- `-o` or `--output` specifies the export directory of the storage, which supports a local file path or a [URL of an external storage](/br/backup-and-restore-storages.md).
+- `-r` or `--row` specifies the maximum number of rows in a single file. If you use this parameter, Dumpling enables the in-table concurrency to speed up the export and reduce the memory usage.
 - `-F` specifies the maximum size of a single file. The unit is `MiB`. Inputs such as `5GiB` or `8KB` are also acceptable. It is recommended to keep the value to 256 MiB or less, if you use TiDB Lightning to load this file into a TiDB instance.
-- `-B` specifies databases to be exported.
-- `-f` export tables that match the filter pattern. For the filter syntax, see [table-filter](/table-filter.md).
+- `-B` or `--database` specifies databases to be exported.
+- `-f` or `--filter` export tables that match the filter pattern. For the filter syntax, see [table-filter](/table-filter.md).
 
 > **Note:**
 >
