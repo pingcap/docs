@@ -3,7 +3,7 @@ title: Import and Merge Large MySQL Sharding Schemas and Sharding Tables to TiDB
 summary: Use Dumpling and TiDB Lightning to merge and import MySQL sharding schemas and sharding tables into TiDB. The method described in this article is suitable for scenarios where the total amount of imported data is greater than 1 TiB.
 ---
 
-# Import and Merge Large MySQL Sharding Schemas and Sharding Tables to TiDB (>1 TiB)
+# Import and Merge Large MySQL Sharding Schemas and Sharding Tables to TiDB (greater than 1 TiB)
 
 If the total size of the sharding tables is large (for example, greater than 1 TiB) and allows the TiDB cluster to suspend business writes during the migration, then you can use TiDB Lightning to quickly merge and import the sharding table data. After import, you can also use TiDB DM for incremental data replication according to your business needs.
 
@@ -268,7 +268,7 @@ Create a new `source1.yaml` file, and add the following content:
 # Configuration.
 source-id: "mysql-01" # Must be unique.
 
-# Specify whether DM-worker pulls binlogs with GTID (global transaction identifier). The prerequisite is that you have already enabled GTID in the upstream MySQL. If the automatic switch of primary and standby exists in the upstream database, you need to use the GTID mode.
+# Specify whether DM-worker pulls binlogs with GTID (Global Transaction Identifier). The prerequisite is that you have already enabled GTID in the upstream MySQL. If the automatic switch of primary and standby exists in the upstream database, you need to use the GTID mode.
 enable-gtid: false
 
 from:
@@ -278,7 +278,7 @@ from:
   port: ${port}   # For example: 3306
 ```
 
-Run the following command in a terminal. Use `tiup dmctl` to load the data source configuration into the DM cluster :
+Run the following command in a terminal. Use `tiup dmctl` to load the data source configuration into the DM cluster:
 
 {{< copyable "shell-regular" >}}
 
@@ -291,7 +291,7 @@ The parameters are described as follows.
 |Parameter      | Description |
 |-              |-            |
 |--master-addr         | {advertise-addr} of any DM-master node in the cluster that dmctl connects to.|
-|operate-source create | Load, list, and remove data sources to DM clusters. |
+|operate-source create | Load data sources to DM clusters. |
 
 Repeat the above steps until all MySQL instances are added to the DM.
 
