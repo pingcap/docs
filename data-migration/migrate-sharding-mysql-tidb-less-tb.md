@@ -1,9 +1,9 @@
 ---
-title: # Import and Merge Small MySQL Sharding Schemas and Sharding Tables to TiDB (less than 1 TiB)
-summary: Introduces how to consolidate MySQL shards into TiDB (less than 1 TiB).
+title: Import and Merge Small MySQL Sharding Schemas and Tables to TiDB (Less Than 1 TiB)
+summary: Introduces how to consolidate MySQL sharding shcemas and tables into TiDB (Less Than 1 TiB).
 ---
 
-# Import and Merge Small MySQL Sharding Schemas and Sharding Tables to TiDB (less than 1 TiB)
+# Import and Merge Small MySQL Sharding Schemas and Tables to TiDB (Less Than 1 TiB)
 
 If you want to merge and migrate multiple MySQL database instances upstream to one TiDB database downstream, and the amount of data is not too large (for example, the sum of all sharding tables is less than 1 TiB), you can use DM to migrate sharding tables. Through examples in this article, you can learn the operation steps, precautions, and troubleshooting of the migration.
 
