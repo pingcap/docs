@@ -49,7 +49,7 @@ tiup cluster scale-in <cluster-name> [flags]
 
 > **Warning:**
 >
-> When using this option to forcibly remove TiKV or TiFlash nodes that are in service or are going offline, these nodes will be deleted directly without waiting for data to be scheduled. This imposes high risk of data loass. Therefore, you are advised to use this option on nodes that are down only.
+> When you use this option to forcibly remove TiKV or TiFlash nodes that are in service or are going offline, these nodes will be deleted directly without waiting for data to be scheduled. This imposes a high risk of data loss. Therefore, it is recommended to use this option only on down nodes.
 
 ### --transfer-timeout
 
