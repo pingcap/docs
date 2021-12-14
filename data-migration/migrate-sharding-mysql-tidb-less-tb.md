@@ -11,13 +11,11 @@ This document applies to importing sharding tables less than 1 TiB in total.
 
 If you want to import sharding tables with a total of more than 1 TiB of data, it will take a long time by using DM. It is recommended that you follow the operation introduced in [Import and Merge Large MySQL Sharding Schemas and Sharding Tables to TiDB (Greater Than 1 TiB)](/migrate-sharding-mysql-tidb-above-tb.md) to import data greater than 1 TiB.
 
-This document takes a simple scenario as an example. The sharding tables of the two data source MySQL instances in the example are imported to the downstream TiDB cluster. The diagram is shown as follows.
+This document takes a simple example to illustrate the import procedure. The sharding tables of the two data source MySQL instances in the example are imported to the downstream TiDB cluster. The diagram is shown as follows.
 
 ![Use DM to Migrate sharding Tables](/media/migrate-shard-tables-within-1tb-en.png)
 
-Assume that the schema and table structures of the two data source instances are as follows:
-
-Data source MySQL Instance 1 and MySQL Instance 2 use the same table structure as follows:
+Assume that data source MySQL Instance 1 and MySQL Instance 2 use the same table structure as follows:
 
   | Schema | Tables |
   |:------|:------|
@@ -32,14 +30,14 @@ Target schemas and tables：
 
 ## Prerequisites
 
-Before starting the migration, complete the following tasks:
+Before starting the migration, make sure you have completed the following tasks:
 
 - [Use TiUP to Deploy a DM cluster](https://docs.pingcap.com/tidb-data-migration/stable/deploy-a-dm-cluster-using-tiup)
 - [Get upstream and downstream database permissions](https://docs.pingcap.com/tidb-data-migration/stable/dm-worker-intro)
 
 ### Check conflicts in the sharding tables
 
-If sharding tables are involved in the migration, data from multiple sharding tables may cause data conflicts in the primary key or unique index. Therefore, before the migration, you need to check the business characteristics of each sharding table. For details, see [Cross table data conflict handling in primary key or unique index](https://docs.pingcap.com/tidb-data-migration/stable/shard-merge-best-practices#handle-conflicts-between-primary-keys-or-unique-indexes-across-multiple-sharded-tables)
+Because the sharding tables are involved in the migration, data from multiple sharding tables may cause data conflicts in the primary key or unique index. Therefore, before the migration, you need to check the sharding table. For details, see [Cross table data conflict handling in primary key or unique index](https://docs.pingcap.com/tidb-data-migration/stable/shard-merge-best-practices#handle-conflicts-between-primary-keys-or-unique-indexes-across-multiple-sharded-tables)
 
 In this example, the user.information table structure is as follows:
 
@@ -56,7 +54,7 @@ CREATE TABLE `sale_01` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
 ```
 
-The `id` column is the primary key, and the `sid` column is the sharding key. The `id` column is auto-incremental, and duplicate of multiple sharding table ranges will cause data conflicts. The `sid` can ensure that the index is globally unique, so you can follow the article [Remove the primary key attribute of the self-incrementing primary key](https://docs.pingcap.com/tidb-data-migration/stable/shard-merge-best-practices#remove-the-primary-key-attribute-from-the-column) to bypasses the `id` column.
+The `id` column is the primary key, and the `sid` column is the sharding key. The `id` column is auto-incremental, and duplicated multiple sharding table ranges will cause data conflicts. The `sid` can ensure that the index is globally unique, so you can follow the steps in [Remove the primary key attribute of the self-incrementing primary key](https://docs.pingcap.com/tidb-data-migration/stable/shard-merge-best-practices#remove-the-primary-key-attribute-from-the-column) to bypasses the `id` column.
 
 {{< copyable "sql" >}}
 
@@ -73,7 +71,7 @@ CREATE TABLE `sale` (
 
 ## Step 1: Load the data sources
 
-Create a new file named source1.yaml. The configuration file is as follows:
+Create a new file named `source1.yaml`. The configuration file is as follows:
 
 {{< copyable "shell-regular" >}}
 
@@ -81,7 +79,9 @@ Create a new file named source1.yaml. The configuration file is as follows:
 # Configuration.
 source-id: "mysql-01" # Must be unique.
 
-# Specify whether DM-worker pulls binlogs with GTID (Global Transaction Identifier). The prerequisite is that you have already enabled GTID in the upstream MySQL. If the automatic switch of primary and standby exists in the upstream database, you need to use the GTID mode.
+# Specify whether DM-worker pulls binlogs with GTID (Global Transaction Identifier).
+# The prerequisite is that you have already enabled GTID in the upstream MySQL.
+# If the automatic switch of primary and standby exists in the upstream database, you need to use the GTID mode.
 enable-gtid: false
 from:
   host: "${host}" # For example: 172.16.10.81
@@ -115,10 +115,10 @@ Create a new file named `task1.yaml`. The migration task is as follows.
 
 ```yaml
 name: "shard_merge"
-# Task mode. You can set it to
-# full: Performs full data migration
-# incremental: binlog real-time replication
-# all: Performs both full data and binlog replication
+# Task mode. You can set it to the following:
+# - full: Performs full data migration
+# - incremental: binlog real-time replication
+# - all: Performs both full data and binlog replication
 task-mode: all
 # Required for the sharding schemas and tables. By default, the "pessimistic" mode is used.
 # If you have a deeper understanding of the principles and usage limitations of the optimistic mode, you can also use the "optimistic" mode.
