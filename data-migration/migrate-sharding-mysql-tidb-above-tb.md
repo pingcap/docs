@@ -5,7 +5,7 @@ summary: Use Dumpling and TiDB Lightning to merge and import MySQL sharding sche
 
 # Import and Merge Large MySQL Sharding Schemas and Sharding Tables to TiDB (Greater Than 1 TiB)
 
-If the total size of the sharding tables is large (for example, greater than 1 TiB) and allows the TiDB cluster to suspend business writes during the migration, then you can use TiDB Lightning to quickly merge and import the sharding table data. After import, you can also use TiDB DM for incremental data replication according to your business needs.
+If the total size of the sharding tables is large (for example, greater than 1 TiB) and allows the TiDB cluster to suspend business writes during the migration, then you can use TiDB Lightning to quickly import and merge the sharding table data. After import, you can also use TiDB DM to perform incremental replication according to your business needs.
 
 This document walks you through the procedure of how to import large sharding schemas and sharding tables into TiDB.
 
