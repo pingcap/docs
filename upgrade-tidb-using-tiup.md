@@ -9,7 +9,7 @@ This document is targeted for the following upgrade paths:
 
 - Upgrade from TiDB 4.0 versions to TiDB 5.2 versions.
 - Upgrade from TiDB 5.0 versions to TiDB 5.2 versions.
-- Upgrade from TiDB 5.2 versions to TiDB 5.2 versions.
+- Upgrade from TiDB 5.1 versions to TiDB 5.2 versions.
 
 > **Note:**
 >
