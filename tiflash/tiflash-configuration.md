@@ -208,10 +208,16 @@ delta_index_cache_size = 0
 [server]
     engine-addr = The external access address of the TiFlash coprocessor service.
 [raftstore]
+    ## The allowable number of threads in the pool that flushes Raft data to storage.
+    apply-pool-size = 4
+
+    ## The allowable number of threads that process Raft, which is the size of the Raftstore thread pool.
+    store-pool-size = 4
+
     ## Specifies the number of threads that handle snapshots.
-    ## The default number is 2.
+    ## The default number is 4.
     ## If you set it to 0, the multi-thread optimization is disabled.
-    snap-handle-pool-size = 2
+    snap-handle-pool-size = 4
 
     ## Specifies the shortest interval at which Raft store persists WAL.
     ## You can properly increase the latency to reduce IOPS usage.
