@@ -34,7 +34,7 @@
     - Linux OS
       - [Use TiUP (Recommended)](/production-deployment-using-tiup.md)
       - [Use TiUP Offline (Recommended)](/production-offline-deployment-using-tiup.md)
-      - [Deploy in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable)
+      - [Deploy in Kubernetes](/tidb-in-kubernetes.md)
       - [Use TiDB Ansible](/online-deployment-using-ansible.md)
       - [Use TiDB Ansible Offline](/offline-deployment-using-ansible.md)
   - [Verify Cluster Status](/post-installation-check.md)
@@ -192,6 +192,7 @@
     - [Tutorial](/get-started-with-tidb-lightning.md)
     - [Deploy](/tidb-lightning/deploy-tidb-lightning.md)
     - [Configure](/tidb-lightning/tidb-lightning-configuration.md)
+  - [TiDB Data Migration](/dm/dm-overview.md)
     - Key Features
       - [Checkpoints](/tidb-lightning/tidb-lightning-checkpoints.md)
       - [Table Filter](/table-filter.md)
