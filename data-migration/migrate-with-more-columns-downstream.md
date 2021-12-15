@@ -1,18 +1,18 @@
 ---
-title: Migrate Data when the Downstream TiDB Table Has More Columns
-summary: Learn how to migrate data when the downstream TiDB table has more columns than the upstream MySQL table.
+title: Migrate Data to a Downstream TiDB Table with More Columns
+summary: Learn how to migrate data to a downstream TiDB table with more columns than the corresponding upstream table.
 ---
 
-# Migrate Data when the Downstream TiDB Table Has More Columns
+# Migrate Data to a Downstream TiDB Table with More Columns
 
-This document provides the additional steps to be taken when you migrate data from a downstream TiDB table that has more columns than the upstream. For detailed migration instructions, see the following migration scenarios:
+This document provides the additional steps to be taken when you migrate data to a downstream TiDB table with more columns than the corresponding upstream table. For detailed migration instructions, see the following migration scenarios:
 
 - [Migrating data from MySQL below TiB level to TiDB](/data-migration/migrate-mysql-tidb-less-tb.md)
 - Migrate data from MySQL above TiB level to TiDB](/data-migration/migrate-mysql-tidb-above-tb.md)
 - [MySQL merge migration to TiDB with sub-base and sub-table under TB level](/data-migration/migrate-shared-mysql-tidb-less-tb.md)
 - [MySQL merge migration to TiDB with database and table separation above TB level](/data-migration/migrate-shared-mysql-tidb-above-tb.md)
 
-## Using DM to migrate data to the downstream TiDB table with more columns
+## Using DM to migrate data to a downstream TiDB table with more columns
 
 When replicating the upstream binlog, DM tries to use the current table schema of the downstream to parse the binlog and generate the corresponding DML statements. If the column number of the table in the upstream binlog does not match the column number in the downstream table schema, DM reports the following error:
 
