@@ -282,7 +282,19 @@ Other requirements for the target machine:
     curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
     ```
 
-2. Install the cluster component of TiUP:
+2. Declare the global environment variable.
+
+    > **Note:**
+    >
+    > After the installation, TiUP displays the absolute path of the corresponding `profile` file. You need to modify the following `source` command according to the path.
+
+    {{< copyable "shell-regular" >}}
+
+    ```shell
+    source .bash_profile
+    ```
+
+3. Install the cluster component of TiUP:
 
     {{< copyable "shell-regular" >}}
 
@@ -290,7 +302,7 @@ Other requirements for the target machine:
     tiup cluster
     ```
 
-3. If the TiUP cluster is already installed on the machine, update the software version:
+4. If the TiUP cluster is already installed on the machine, update the software version:
 
     {{< copyable "shell-regular" >}}
 
@@ -298,7 +310,7 @@ Other requirements for the target machine:
     tiup update --self && tiup update cluster
     ```
 
-4. Use the `root` user privilege to increase the connection limit of the `sshd` service. This is because TiUP needs to simulate deployment on multiple machines.
+5. Use the `root` user privilege to increase the connection limit of the `sshd` service. This is because TiUP needs to simulate deployment on multiple machines.
 
     1. Modify `/etc/ssh/sshd_config`, and set `MaxSessions` to `20`.
     2. Restart the `sshd` service:
@@ -309,7 +321,7 @@ Other requirements for the target machine:
         service sshd restart
         ```
 
-5. Create and start the cluster:
+6. Create and start the cluster:
 
     Edit the configuration file according to the following template, and name it as `topo.yaml`:
 
@@ -380,7 +392,7 @@ Other requirements for the target machine:
     - `replication.enable-placement-rules`: This PD parameter is set to ensure that TiFlash runs normally.
     - `host`: The IP of the target machine.
 
-6. Execute the cluster deployment command:
+7. Execute the cluster deployment command:
 
     {{< copyable "shell-regular" >}}
 
@@ -398,7 +410,7 @@ Other requirements for the target machine:
     Input SSH password:
     ```
 
-7. Start the cluster:
+8. Start the cluster:
 
     {{< copyable "shell-regular" >}}
 
@@ -406,7 +418,7 @@ Other requirements for the target machine:
     tiup cluster start <cluster-name>
     ```
 
-8. Access the cluster:
+9. Access the cluster:
 
     - Install the MySQL client. If it is already installed, skip this step.
 
@@ -463,4 +475,4 @@ Other requirements for the target machine:
 
 > **Note:**
 >
-> By default, TiDB, TiUP and TiDB Dashboard share usage details with PingCAP to help understand how to improve the product. For details about what is shared and how to disable the sharing, see [Telemetry](/telemetry.md).
+> By default, TiDB, TiUP, and TiDB Dashboard share usage details with PingCAP to help understand how to improve the product. For details about what is shared and how to disable the sharing, see [Telemetry](/telemetry.md).
