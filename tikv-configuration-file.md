@@ -1559,20 +1559,15 @@ Configuration items related to [encryption at rest](/encryption-at-rest.md) (TDE
 
 ### `enable-file-dictionary-log`
 
-+ Enable an optimization to reduce IO and mutex contention for encryption metadata management. Once the option is turned on (which is the default after 4.0.9), the data format is not compatible with TiKV <= 4.0.8. In order to downgrade to TiKV <= 4.0.8, one can turn off this option and restart TiKV, after which TiKV will convert the data format to be compatible with previous versions.
-+ Default value: `true`
-
-### enable-file-dictionary-log
-
 + Enables the optimization to reduce I/O and mutex contention when TiKV manages the encryption metadata.
 + To avoid possible compatibility issues when this configuration parameter is enabled (by default), see [Encryption at Rest - Compatibility between TiKV versions](/encryption-at-rest.md#compatibility-between-tikv-versions) for details.
 + Default value: `true`
 
-### master-key
+### `master-key`
 
 + Specifies the master key if encryption is enabled. To learn how to configure a master key, see [Encryption at Rest - Configure encryption](/encryption-at-rest.md#configure-encryption).
 
-### previous-master-key
+### `previous-master-key`
 
 + Specifies the old master key when rotating the new master key. The configuration format is the same as that of `master-key`. To learn how to configure a master key, see [Encryption at Rest - Configure encryption](/encryption-at-rest.md#configure-encryption).
 
