@@ -1,6 +1,6 @@
 ---
 title: TiDB Data Migration
-summary: Learn about the TiDB Data Migration tool
+summary: Learn about the TiDB Data Migration tool.
 ---
 
 # TiDB Data Migration
