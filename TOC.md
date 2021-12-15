@@ -362,7 +362,7 @@
     - [Mydumper](/mydumper-overview.md)
     - [Syncer](/syncer-overview.md)
     - [Loader](/loader-overview.md)
-    - [Data Migration](https://pingcap.com/docs/tidb-data-migration/stable/)
+    - [Data Migration](/dm/dm-overview.md)
     - TiDB Lightning
       - [Overview](/tidb-lightning/tidb-lightning-overview.md)
       - [Deployment](/tidb-lightning/deploy-tidb-lightning.md)
@@ -385,7 +385,7 @@
     - [PD Recover](/pd-recover.md)
     - [TiKV Control](/tikv-control.md)
     - [TiDB Control](/tidb-control.md)
-- [TiDB in Kubernetes](https://pingcap.com/docs/tidb-in-kubernetes/stable/)
+- [TiDB in Kubernetes](/tidb-in-kubernetes.md)
 - FAQs
   - [TiDB FAQs](/faq/tidb-faq.md)
   - [TiDB Lightning FAQs](/tidb-lightning/tidb-lightning-faq.md)
