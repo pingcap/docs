@@ -48,7 +48,7 @@ DM supports merging and migrating the original sharded instances and tables from
 
 ### Optimization for third-party online-schema-change tools in the migration process
 
-In the MySQL ecosystem, tools such as gh-ost and pt-osc are widely used. DM provides support for these tools to avoid migrating unnecessary intermediate data. For details, see [Online DDL Tools](https://docs.pingcap.com/tidb-data-migration/stable/key-features#online-ddl-tools)
+In the MySQL ecosystem, tools such as `gh-ost` and `pt-osc` are widely used. DM provides support for these tools to avoid migrating unnecessary intermediate data. For details, see [Online DDL Tools](https://docs.pingcap.com/tidb-data-migration/stable/key-features#online-ddl-tools)
 
 ### Filter certain row changes using SQL expressions
 
