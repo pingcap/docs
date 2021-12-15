@@ -31,12 +31,17 @@
     - [Cross-DC Topology](/geo-distributed-deployment-topology.md)
     - [Hybrid Topology](/hybrid-deployment-topology.md)
   - Install and Start
+<<<<<<< HEAD
     - Linux OS
       - [Use TiUP (Recommended)](/production-deployment-using-tiup.md)
       - [Use TiUP Offline (Recommended)](/production-offline-deployment-using-tiup.md)
       - [Deploy in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable)
       - [Use TiDB Ansible](/online-deployment-using-ansible.md)
       - [Use TiDB Ansible Offline](/offline-deployment-using-ansible.md)
+=======
+    - [Use TiUP (Recommended)](/production-deployment-using-tiup.md)
+    - [Deploy in Kubernetes](/tidb-in-kubernetes.md)
+>>>>>>> 164d243d8 (New docs: add new entry for TiDB DM and TiDB in Kubernetes (#7166))
   - [Verify Cluster Status](/post-installation-check.md)
   - Benchmarks Methods
     - [Test TiDB Using Sysbench](/benchmark/benchmark-tidb-using-sysbench.md)
@@ -192,6 +197,7 @@
     - [Tutorial](/get-started-with-tidb-lightning.md)
     - [Deploy](/tidb-lightning/deploy-tidb-lightning.md)
     - [Configure](/tidb-lightning/tidb-lightning-configuration.md)
+  - [TiDB Data Migration](/dm/dm-overview.md)
     - Key Features
       - [Checkpoints](/tidb-lightning/tidb-lightning-checkpoints.md)
       - [Table Filter](/table-filter.md)
