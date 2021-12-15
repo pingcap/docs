@@ -13,7 +13,7 @@ The stable versions of DM include v1.0, v2.0, and v5.3. It is recommended to use
 
 Currently, the DM documentation is independent of the TiDB documentation. To access the DM documentation, click one of the following links:
 
-- [DM v5.3 documentation](https://docs.pingcap.com/tidb-data-migration/v5.3)
+- [DM v5.3 documentation](https://docs.pingcap.com/tidb-data-migration/v5.3/)
 - [DM v2.0 documentation](https://docs.pingcap.com/tidb-data-migration/v2.0/)
 - [DM v1.0 documentation](https://docs.pingcap.com/tidb-data-migration/v1.0/)
 
