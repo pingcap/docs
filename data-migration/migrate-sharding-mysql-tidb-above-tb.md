@@ -285,7 +285,7 @@ from:
   host: "${host}"           # For example: 172.16.10.81
   user: "root"
   password: "${password}"   # Plaintext passwords is supported but not recommended. It is recommended that you use dmctl encrypt to encrypt plaintext passwords.
-  port: ${port}   # For example: 3306
+  port: ${port}             # For example: 3306
 ```
 
 Run the following command in a terminal. Use `tiup dmctl` to load the data source configuration into the DM cluster:
