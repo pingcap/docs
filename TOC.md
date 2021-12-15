@@ -36,7 +36,7 @@
     - [Import Example Database](/import-example-data.md)
     - [Read Historical Data](/read-historical-data.md)
     - [TiDB Binlog Tutorial](/get-started-with-tidb-binlog.md)
-    - [TiDB Data Migration Tutorial](/dm/dm-overview.md)
+    - [TiDB Data Migration Tutorial](https://pingcap.com/docs/tidb-data-migration/stable/get-started/)
     - [TiDB Lightning Tutorial](/get-started-with-tidb-lightning.md)
     - [TiSpark Quick Start Guide](/get-started-with-tispark.md)
   - Deploy
