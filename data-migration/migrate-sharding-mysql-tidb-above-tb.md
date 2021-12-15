@@ -320,14 +320,14 @@ task-mode: incremental        # The mode of the task. "incremental" means only i
 
 shard-mode: "pessimistic"
 
-## Configure the access information of TiDB database instance:
+# Configure the access information of TiDB database instance:
 target-database:              # Downstream database instance configuration.
   host: "${host}"             # For example: 127.0.0.1
   port: 4000
   user: "root"
   password: "${password}"     # If password is not empty, it is recommended to use dmctl encrypted password.
 
-## Use block-allow-list to configure tables that require sync:
+# Use block-allow-list to configure tables that require sync:
 block-allow-list:             # The filter rule set of the matched table of the data source database instance. Use black-white-list if the DM version is earlier than or equal to v2.0.0-beta.2.
   bw-rule-1:                  # # The ID of the block and allow list rule.
     do-dbs: ["my_db1"]        # The databases to be migrated. Here, my_db1 of instance 1 and my_db2 of instance 2 are configured as two separate rules to demonstrate how to avoid my_db2 of instance 1 from being replicated.
@@ -345,7 +345,7 @@ routes:                               # Table routing rules between upstream and
     target-schema: "my_db"
     target-table: "table5"
 
-## Configure data sources, using two data sources as examples
+# Configure data sources, using two data sources as examples
 mysql-instances:
   - source-id: "mysql-01"             # Data source ID. It is the source-id in source1.yaml
     block-allow-list: "bw-rule-1"     # Use the block and allow list configuration above. Replicate `my_db1` in the instance 1.
@@ -363,8 +363,8 @@ mysql-instances:
       binlog-name: "${binlog-name}"   # The log location recorded in ${data-path}/my_db2/metadata in Step 1. It must use gtid when there is a primary-standby switch upstream.
       binlog-pos: ${binlog-position}
       # binlog-gtid: "09bec856-ba95-11ea-850a-58f2b4af5188:1-9"
-## (Optional) If you need to migrate full data that has already been migrated during a full-data migration, you need to enable the safe mode to data migration errors during incremental replication.
-## This scenario is common when the fully migrated data is not part of a consistent snapshot of the data source, and then the incremental data is replicated from a location earlier than the fully migrated data.
+# (Optional) If you need to migrate full data that has already been migrated during a full-data migration, you need to enable the safe mode to data migration errors during incremental replication.
+# This scenario is common when the fully migrated data is not part of a consistent snapshot of the data source, and then the incremental data is replicated from a location earlier than the fully migrated data.
 # syncers:           # The running parameters of the sync processing unit.
 #  global:           # Configuration name.
 # If set to true, it changes INSERT from the data source to REPLACE, and UPDATE from the data source to DELETE and REPLACE.
