@@ -299,7 +299,7 @@
     - [Mydumper](/mydumper-overview.md)
     - [Syncer](/syncer-overview.md)
     - [Loader](/loader-overview.md)
-    - [Data Migration](https://pingcap.com/docs/tidb-data-migration/stable/)
+    - [TiDB Data Migration](/dm/dm-overview.md)
     - TiDB Lightning
       - [Overview](/tidb-lightning/tidb-lightning-overview.md)
       - [Deployment](/tidb-lightning/deploy-tidb-lightning.md)
