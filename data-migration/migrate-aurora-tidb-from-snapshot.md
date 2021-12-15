@@ -14,10 +14,10 @@ The whole migration has two processes:
 
 ## Prerequisites
 
-- [Install Dumpling and TiDB Lightning using TiUP](/migration-tools.md)
+- [Install Dumpling and TiDB Lightning](/migration-tools.md)
 - [Get the target database privileges required for TiDB Lightning](/tidb-lightning/tidb-lightning-faq.md#what-are-the-privilege-requirements-for-the-target-database).
 
-## Import full data to TiDB using TiDB Lightning
+## Import full data to TiDB
 
 ### Step 1. Export an Aurora snapshot to Amazon S3
 
@@ -47,7 +47,7 @@ Make sure you have the following information ready:
 - The Aurora binlog name and position at the time of the snapshot creation.
 - The S3 path where the snapshot is stored, and the SecretKey and AccessKey with access to the S3 path.
 
-### Step 2. Export schema using Dumpling
+### Step 2. Export schema
 
 Because the snapshot file does not contain the DDL statements, you need to export the schema using Dumpling and create the schema in the target database using TiDB Lightning. If you want to manually create the schema, you can skip this step.
 
@@ -59,7 +59,7 @@ Export the schema using Dumpling:
 tiup dumpling --host ${host} --port 3306 --user root --password ${password} --no-data --output ./schema --filter "mydb.*"
 ```
 
-The options used in the command above are as follows:
+The options used in the command above are as follows. For more options, refer to [Dumpling overview](/dumpling-overview.md).
 
 |Parameter              |Description    |
 |-                      |-              |
@@ -73,8 +73,6 @@ The options used in the command above are as follows:
 |`-F`                   |The maximum size of a single file, in MiB|
 |`-B` or `--database`   |Specifies a database to be exported|
 |`-d` or `--no-data`    |Do not export data. Only export schema.|
-
-For more options, refer to [Dumpling overview](/dumpling-overview.md).
 
 ### Step 3. Create the TiDB Lightning configuration file
 
@@ -131,7 +129,7 @@ If you need to enable TLS in the TiDB cluster, refer to [TiDB Lightning Configur
     tiup tidb-lightning -config tidb-lightning.toml -d ./schema -no-schema=false
     ```
 
-2. Start the import by running `tidb-lightning`. If you launch the program directly in command line, the program might exit because of the `SIGHUP` signal. In this case, it is recommended to run the program with a `nohup` or `screen` tool. For example:
+2. Start the import by running `tidb-lightning`. If you launch the program directly in the command line, the program might exit because of the `SIGHUP` signal. In this case, it is recommended to run the program with a `nohup` or `screen` tool. For example:
 
     Pass the SecretKey and AccessKey that have access to the S3 storage path as environment variables to the Dumpling node. You can also read the credentials from `~/.aws/credentials`.
 
@@ -147,8 +145,8 @@ If you need to enable TLS in the TiDB cluster, refer to [TiDB Lightning Configur
 
 3. After the import starts, you can check the progress of the import by either of the following methods:
 
-    - `grep` the keyword `progress` in the log. The progress is updated every 5 seconds.
-    - Check progress in the monitoring dashboard. See [TiDB Lightning Monitoring](/tidb-lightning/monitor-tidb-lightning.md).
+    - `grep` the keyword `progress` in the log. The progress is updated every 5 minutes.
+    - Check progress in [the monitoring dashboard](/tidb-lightning/monitor-tidb-lightning.md).
 
 4. After TiDB Lightning completes the import, it exits automatically. If you find the last 5 lines of its log prints `the whole procedure completed`, the import is successful.
 
@@ -162,7 +160,7 @@ If you encounter any problem during the import, refer to [TiDB Lightning FAQ](/t
 
 ### Prerequisites
 
-- [Install DM using TiUP](https://docs.pingcap.com/tidb-data-migration/stable/deploy-a-dm-cluster-using-tiup).
+- [Install DM](https://docs.pingcap.com/tidb-data-migration/stable/deploy-a-dm-cluster-using-tiup).
 - [Get the source database and target database privileges required for DM](https://docs.pingcap.com/tidb-data-migration/stable/dm-worker-intro).
 
 ### Step 1. Create the data source
@@ -177,6 +175,7 @@ If you encounter any problem during the import, refer to [TiDB Lightning FAQ](/t
 
     # Configure whether DM-worker uses the global transaction identifier (GTID) to pull binlogs. To enable this mode, the upstream MySQL must also enable GTID. If the upstream MySQL has automatic source-replica switching, then GTID mode is required.
     enable-gtid: false
+
     from:
       host: "${host}"         # e.g.: 172.16.10.81
       user: "root"
@@ -227,7 +226,7 @@ block-allow-list:                     # If DM version is v2.0.0-beta.2 or earlie
     - db-name: "test_db"              # Name of databases to be migrated.
       tbl-name: "test_table"          # Name of tables to be migrated.
 
-## Configure the data source.
+# Configure the data source.
 mysql-instances:
   - source-id: "mysql-01"               # Data source ID，i.e., source-id in source1.yaml
     block-allow-list: "listA"           # Reference the block-allow-list configuration above.
@@ -237,7 +236,7 @@ mysql-instances:
       binlog-pos: 109227
       # binlog-gtid: "09bec856-ba95-11ea-850a-58f2b4af5188:1-9"
 
-   ## (Optional) If you need to incrementally replicate data that has already been migrated in the full data migration, you need to enable safe mode to avoid the incremental data replication error.
+   # (Optional) If you need to incrementally replicate data that has already been migrated in the full data migration, you need to enable safe mode to avoid the incremental data replication error.
    ## This scenario is common in the following case: the full migration data does not belong to the data source's consistency snapshot, and after that, DM starts to replicate incremental data from a position earlier than the full migration.
    # syncers:            # The running configurations of the sync processing unit.
    #  global:            # Configuration name.

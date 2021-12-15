@@ -11,7 +11,7 @@ TiDB Lightning supports importing data from CSV files and other delimiter format
 
 ## Prerequisites
 
-- [Install TiDB Lightning using TiUP](/migration-tools.md).
+- [Install TiDB Lightning](/migration-tools.md).
 - [Get the target database privileges required for TiDB Lightning](/tidb-lightning/tidb-lightning-faq.md#what-are-the-privilege-requirements-for-the-target-database).
 
 ## Step 1. Prepare the CSV files
@@ -107,6 +107,8 @@ status-port = ${port} # e.g.: 10080
 pd-addr = "${ip}:${port}" # e.g.: 172.16.31.3:2379. When backend = "local", you must specify status-port and pd-addr. Otherwise, the import will be abnormal.
 ```
 
+For more information on the configuration file, refer to [TiDB Lightning Configuration](/tidb-lightning/tidb-lightning-configuration.md).
+
 ## Step 4. Speed up the import (optional)
 
 When you import data from CSV files with a uniform size of about 256 MiB, TiDB Lightning works in the best performance. However, if you import data from a single large CSV file, TiDB Lightning can only use one thread to process the import by default, which might slow down the import speed.
@@ -131,7 +133,7 @@ strict-format = true
 
 ## Step 5. Import the data
 
-To start the import, run `tidb-lightning`. If you launch the program in command line, the program might exit because of `SIGHUP` signal. In this case, it is recommended to run the program with a `nohup` or `screen` tool. For example:
+To start the import, run `tidb-lightning`. If you launch the program in the command line, the program might exit because of the `SIGHUP` signal. In this case, it is recommended to run the program with a `nohup` or `screen` tool. For example:
 
 {{< copyable "shell-regular" >}}
 
@@ -147,7 +149,7 @@ If the import fails, refer to [TiDB Lightning FAQ](/tidb-lightning/tidb-lightnin
 
 If your data source is in other formats, you must end the file name with `.csv` and make corresponding changes in the `[mydumper.csv]` section of the `tidb-lightning.toml` configuration file. Here are some examples for common formats:
 
-**TSV**
+**TSV:**
 
 ```toml
 # Format example
@@ -168,7 +170,7 @@ backslash-escape = false
 trim-last-separator = false
 ```
 
-**TPC-H DBGEN**
+**TPC-H DBGEN:**
 
 ```toml
 # Format example
