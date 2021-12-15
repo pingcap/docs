@@ -7,10 +7,10 @@ summary: Learn how to migrate data to a downstream TiDB table with more columns 
 
 This document provides the additional steps to be taken when you migrate data to a downstream TiDB table with more columns than the corresponding upstream table. For regular migration steps, see the following migration scenarios:
 
-- [Migrating data from MySQL below TiB level to TiDB](/data-migration/migrate-mysql-tidb-less-tb.md)
-- Migrate data from MySQL above TiB level to TiDB](/data-migration/migrate-mysql-tidb-above-tb.md)
-- [MySQL merge migration to TiDB with sub-base and sub-table under TB level](/data-migration/migrate-shared-mysql-tidb-less-tb.md)
-- [MySQL merge migration to TiDB with database and table separation above TB level](/data-migration/migrate-shared-mysql-tidb-above-tb.md)
+- [Migrate Data below Terabytes from MySQL to TiDB](/data-migration/migrate-mysql-tidb-less-tb.md)
+- [Migrate Data above Terabytes from MySQL to TiDB](/data-migration/migrate-mysql-tidb-above-tb.md)
+- [Import and Merge Small MySQL Sharding Schemas and Sharding Tables to TiDB (Less Than 1 TiB)](/data-migration/migrate-shared-mysql-tidb-less-tb.md)
+- [Import and Merge Large MySQL Sharding Schemas and Sharding Tables to TiDB (Greater Than 1 TiB)](/data-migration/migrate-shared-mysql-tidb-above-tb.md)
 
 ## Using DM to migrate data to a downstream TiDB table with more columns
 
@@ -73,9 +73,9 @@ In such cases, you can use the `operate-schema` command to set a table schema fo
     tiup dmctl --master-addr ${advertise-addr} operate-schema set -s ${mysql-id} ${task-name} -d ${database-name} -t ${table-name} ${schema-file}
     ```
 
-    The descriptions of parameters in this command are as follows.
+    The descriptions of parameters in this command are as follows:
 
-    |parameters |description|
+    |Parameter |Description|
     |- |-|
     |-master-addr |-Specifies the {advertise-addr} of any DM-master node of the cluster to which dmctl is to connect. `{advertise-addr}` indicates the address that DM-master advertises to the outside world.|
     |-operate-schema set| Manually set the schema information.|
