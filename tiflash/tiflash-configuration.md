@@ -146,18 +146,22 @@ delta_index_cache_size = 0
     advertise-status-addr = The external access address of status-addr. If it is left empty, status-addr is used by default.
 
 [logger]
-    level = log level (available options: trace, debug, information, warning, error).
+    ## log level (available options: trace, debug, information, warning, error), debug is used by default.
+    level = debug
     log = The TiFlash log path.
     errorlog = The TiFlash error log path.
-    size = The size of a single log file.
-    count = The maximum number of log files to save.
+    ## The size of a single log file, "100M" is used by default.
+    size = "100M"
+    ## The maximum number of log files to save, 10 is used by default.
+    count = 10
 
 [raft]
     ## PD service address. Multiple addresses are separated with commas.
     pd_addr = "10.0.1.11:2379,10.0.1.12:2379,10.0.1.13:2379"
 
 [status]
-    metrics_port = The port through which Prometheus pulls metrics information.
+    ## The port through which Prometheus pulls metrics information, 8234 is used by default.
+    metrics_port = 8234
 
 [profiles]
 
