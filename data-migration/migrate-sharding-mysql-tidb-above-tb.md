@@ -11,7 +11,7 @@ This document walks you through the procedure of how to migrate large sharding s
 
 If the data size of the sharding tables is less than 1 TiB, you can follow the procedure described in [Migrate sharding Schemas and Tables to TiDB]( https://docs.pingcap.com/tidb-data-migration/stable/usage-scenario-shard-merge), which supports both full and incremental migration.
 
-The following diagram shows how to migrate sharding schemas and sharding tables into TiDB using Dumpling and TiDB Lightning.
+The following diagram shows how to migrate sharding schemas and sharding tables to TiDB using Dumpling and TiDB Lightning.
 
 ![Use Dumpling and TiDB Lightning to migrate and merge sharding schemas and sharding tables into TiDB](/media/shard-merge-using-lightning-en.png)
 
