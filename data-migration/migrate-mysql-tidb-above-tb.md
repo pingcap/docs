@@ -259,7 +259,7 @@ To view the history status of the migration task and other internal metrics, tak
 
 If you have deployed Prometheus, Alertmanager, and Grafana when you deployed DM using TiUP, you can access Grafana using the IP address and port specified during the deployment. You can then select DM dashboard to view DM-related monitoring metrics.
 
-When DM is running, DM-worker, DM-master, and dmctl output the related information in logs. The log directory of these components are as follows:
+When DM is running, DM-worker, DM-master, and dmctl output the related information in logs. The log directories of these components are as follows:
 
 - DM-master: specified by the DM-master process parameter `--log-file`. If you deploy DM using TiUP, the log directory is `/dm-deploy/dm-master-8261/log/` by default.
 - DM-worker: specified by the DM-worker process parameter `--log-file`. If you deploy DM using TiUP, the log directory is `/dm-deploy/dm-worker-8262/log/` by default.
