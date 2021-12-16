@@ -190,7 +190,7 @@ Configuration items related to log.
 ### `format`
 
 - Specifies the log output format.
-- Value options: `json`, `text` and `console`.
+- Value options: `json` and `text`.
 - Default value: `text`
 
 ### `enable-timestamp`
@@ -255,8 +255,9 @@ Configuration items related to log files.
 #### `max-size`
 
 - The size limit of the log file.
-- Default value: 300MB
-- The maximum size is 4GB.
+- Default value: 300
+- Unit: MB
+- The maximum value is 4096.
 
 #### `max-days`
 
@@ -470,10 +471,6 @@ Configuration items related to performance.
 
 The Plan Cache configuration of the `PREPARE` statement.
 
-> **Warning:**
->
-> This is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
-
 ### `enabled`
 
 - Determines whether to enable Plan Cache of the `PREPARE` statement.
@@ -553,7 +550,7 @@ This section introduces configuration items related to the Coprocessor Cache fea
 
 Configuration related to the transaction latch. It is recommended to enable it when many local transaction conflicts occur.
 
-### `enable`
+### `enabled`
 
 - Determines whether to enable the memory lock of transactions.
 - Default value: `false`

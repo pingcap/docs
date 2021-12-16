@@ -3,13 +3,13 @@
 
 - About TiDB
   - [TiDB Introduction](/overview.md)
-  - [TiDB 5.2 Release Notes](/releases/release-5.2.0.md)
+  - [TiDB 5.3 Release Notes](/releases/release-5.3.0.md)
   - [Basic Features](/basic-features.md)
   - [Experimental Features](/experimental-features.md)
   - Benchmarks
-    - [v5.2 Sysbench Performance Test Report](/benchmark/benchmark-sysbench-v5.2.0-vs-v5.1.1.md)
-    - [v5.2 TPC-C Performance Test Report](/benchmark/v5.2-performance-benchmarking-with-tpcc.md)
-    - [v5.2 MPP mode TPC-H 100GB Performance Test](/benchmark/v5.2-performance-benchmarking-with-tpch.md)
+    - [v5.3 Sysbench Performance Test Report](/benchmark/benchmark-sysbench-v5.3.0-vs-v5.2.2.md)
+    - [v5.3 TPC-C Performance Test Report](/benchmark/v5.3-performance-benchmarking-with-tpcc.md)
+    - [v5.3 MPP mode TPC-H 100GB Performance Test](/benchmark/v5.3-performance-benchmarking-with-tpch.md)
   - [MySQL Compatibility](/mysql-compatibility.md)
   - [TiDB Limitations](/tidb-limitations.md)
   - [TiDB Adopters](/adopters.md)
@@ -33,7 +33,7 @@
     - [Hybrid Topology](/hybrid-deployment-topology.md)
   - Install and Start
     - [Use TiUP (Recommended)](/production-deployment-using-tiup.md)
-    - [Deploy in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable)
+    - [Deploy in Kubernetes](/tidb-in-kubernetes.md)
   - [Verify Cluster Status](/post-installation-check.md)
   - Test Cluster Performance
     - [Test TiDB Using Sysbench](/benchmark/benchmark-tidb-using-sysbench.md)
@@ -196,11 +196,13 @@
     - [Deploy](/tidb-lightning/deploy-tidb-lightning.md)
     - [Precheck](/tidb-lightning/tidb-lightning-prechecks.md)
     - [Configure](/tidb-lightning/tidb-lightning-configuration.md)
+  - [TiDB Data Migration](/dm/dm-overview.md)
     - Key Features
       - [Checkpoints](/tidb-lightning/tidb-lightning-checkpoints.md)
       - [Table Filter](/table-filter.md)
       - [CSV Support](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)
       - [Backends](/tidb-lightning/tidb-lightning-backends.md)
+      - [Import Data in Parallel](/tidb-lightning/tidb-lightning-distributed-import.md)
       - [Web Interface](/tidb-lightning/tidb-lightning-web-interface.md)
     - [Monitor](/tidb-lightning/monitor-tidb-lightning.md)
     - [FAQ](/tidb-lightning/tidb-lightning-faq.md)
@@ -510,7 +512,9 @@
         - [View Diagnostics Report](/dashboard/dashboard-diagnostics-report.md)
         - [Use Diagnostics](/dashboard/dashboard-diagnostics-usage.md)
       - [Search Logs Page](/dashboard/dashboard-log-search.md)
-      - [Profile Instances Page](/dashboard/dashboard-profiling.md)
+      - [Instance Profiling]
+        - [Manual Profiling](/dashboard/dashboard-profiling.md)
+        - [Continuous Profiling](/dashboard/continuous-profiling.md)
       - Session Management and Configuration
         - [Share Session](/dashboard/dashboard-session-share.md)
         - [Configure SSO](/dashboard/dashboard-session-sso.md)
@@ -571,15 +575,20 @@
 - Release Notes
   - [All Releases](/releases/release-notes.md)
   - [Release Timeline](/releases/release-timeline.md)
+  - v5.3
+    - [5.3.0](/releases/release-5.3.0.md)
   - v5.2
+    - [5.2.3](/releases/release-5.2.3.md)
     - [5.2.2](/releases/release-5.2.2.md)
     - [5.2.1](/releases/release-5.2.1.md)
     - [5.2.0](/releases/release-5.2.0.md)
   - v5.1
+    - [5.1.3](/releases/release-5.1.3.md)
     - [5.1.2](/releases/release-5.1.2.md)
     - [5.1.1](/releases/release-5.1.1.md)
     - [5.1.0](/releases/release-5.1.0.md)
   - v5.0
+    - [5.0.5](/releases/release-5.0.5.md)
     - [5.0.4](/releases/release-5.0.4.md)
     - [5.0.3](/releases/release-5.0.3.md)
     - [5.0.2](/releases/release-5.0.2.md)

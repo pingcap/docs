@@ -28,7 +28,7 @@ If you want to download the latest version of `pd-ctl`, directly download the Ti
 
 > **Note:**
 >
-> `{version}` indicates the version number of TiDB. For example, if `{version}` is `v5.2.2`, the package download link is `https://download.pingcap.org/tidb-v5.2.2-linux-amd64.tar.gz`.
+> `{version}` indicates the version number of TiDB. For example, if `{version}` is `v5.3.0`, the package download link is `https://download.pingcap.org/tidb-v5.3.0-linux-amd64.tar.gz`.
 
 ### Compile from source code
 
@@ -40,26 +40,26 @@ If you want to download the latest version of `pd-ctl`, directly download the Ti
 Single-command mode:
 
 ```bash
-./pd-ctl store -u http://127.0.0.1:2379
+tiup ctl pd store -u http://127.0.0.1:2379
 ```
 
 Interactive mode:
 
 ```bash
-./pd-ctl -i -u http://127.0.0.1:2379
+tiup ctl pd -i -u http://127.0.0.1:2379
 ```
 
 Use environment variables:
 
 ```bash
 export PD_ADDR=http://127.0.0.1:2379
-./pd-ctl
+tiup ctl pd
 ```
 
 Use TLS to encrypt:
 
 ```bash
-./pd-ctl -u https://127.0.0.1:2379 --cacert="path/to/ca" --cert="path/to/cert" --key="path/to/key"
+tiup ctl pd -u https://127.0.0.1:2379 --cacert="path/to/ca" --cert="path/to/cert" --key="path/to/key"
 ```
 
 ## Command line flags
