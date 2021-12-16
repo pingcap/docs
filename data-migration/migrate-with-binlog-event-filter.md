@@ -7,10 +7,10 @@ summary: Learn how to filter binlog events when migrating data
 
 This document describes how to filter binlog events when you use DM to perform continuous incremental data replication. For the detailed replication instruction, refer to the following documents:
 
-- [Migrate MySQL data of less than 1 TB to TiDB](/data-migration/migrate-mysql-tidb-less-tb.md)
-- [Migrate MySQL data of more than 1 TB to TiDB](/data-migration/migrate-mysql-tidb-above-tb.md)
-- [Merge and migrate MySQL shards of less than 1 TB to TiDB](/data-migration/migrate-shared-mysql-tidb-less-tb.md)
-- [Merge and migrate MySQL shards of more than 1 TB to TiDB](/data-migration/migrate-shared-mysql-tidb-above-tb.md)
+- [Migrate MySQL Data of Less Than 1 TiB to TiDB](/data-migration/migrate-mysql-tidb-less-tb.md)
+- [Migrate MySQL Data of More Than 1 TiB to TiDB](/data-migration/migrate-mysql-tidb-above-tb.md)
+- [Migrate and Merge MySQL Shards of Less Than 1 TiB to TiDB](/data-migration/migrate-shared-mysql-tidb-less-tb.md)
+- [Migrate and Merge MySQL Shards of More Than 1 TiB to TiDB](/data-migration/migrate-shared-mysql-tidb-above-tb.md)
 
 ## Configuration
 
