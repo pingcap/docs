@@ -1,15 +1,15 @@
 ---
-title: Migrate and Merge Small MySQL Sharding Schemas and Sharding Tables to TiDB (Less Than 1 TiB)
+title: Migrate and Merge MySQL Shards of Less Than 1 TiB to TiDB
 summary: Introduces how to consolidate MySQL sharding shcemas and tables into TiDB (Less Than 1 TiB).
 ---
 
-# Migrate and Merge Small MySQL Sharding Schemas and Sharding Tables to TiDB (Less Than 1 TiB)
+# Migrate and Merge MySQL Shards of Less Than 1 TiB to TiDB
 
 If you want to migrate and merge multiple MySQL database instances upstream to one TiDB database downstream, and the amount of data is not too large (for example, the sum of all sharding tables is less than 1 TiB), you can use DM to migrate sharding tables. Through examples in this article, you can learn the operation steps, precautions, and troubleshooting of the migration.
 
 This document applies to migrating sharding tables less than 1 TiB in total.
 
-If you want to migrate sharding tables with a total of more than 1 TiB of data, it will take a long time by using DM. It is recommended that you follow the operation introduced in [Migrate and Merge Large MySQL Sharding Schemas and Sharding Tables to TiDB (Greater Than 1 TiB)](/migrate-sharding-mysql-tidb-above-tb.md) to migrate data greater than 1 TiB.
+If you want to migrate sharding tables with a total of more than 1 TiB of data, it will take a long time by using DM. It is recommended that you follow the operation introduced in [Migrate and Merge MySQL Shards of More Than 1 TiB to TiDB](/migrate-sharding-mysql-tidb-above-tb.md) to migrate data greater than 1 TiB.
 
 This document takes a simple example to illustrate the migration procedure. The sharding tables of the two data source MySQL instances in the example are migrated to the downstream TiDB cluster. The diagram is shown as follows.
 
@@ -230,7 +230,7 @@ You can also check the DM running status and related errors through the log file
 
 ## See also
 
-- [Migrate and Merge Large MySQL Sharding Schemas and Sharding Tables to TiDB (Greater Than 1 TiB)](/migrate-sharding-mysql-tidb-above-tb.md)。
+- [Migrate and Merge MySQL Shards of More Than 1 TiB to TiDB](/migrate-sharding-mysql-tidb-above-tb.md)。
 - [Merge and Migrate Data from Sharding Tables](https://docs.pingcap.com/tidb-data-migration/stable/feature-shard-merge)
 - [Best Practices of Data Migration in the Shard Merge Scenario](https://docs.pingcap.com/tidb-data-migration/stable/shard-merge-best-practices)
 - [Handle Errors](https://docs.pingcap.com/tidb-data-migration/stable/error-handling)
