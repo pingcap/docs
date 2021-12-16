@@ -5,15 +5,15 @@ summary: Use Dumpling and TiDB Lightning to migrate and merge MySQL shards to Ti
 
 # Migrate and Merge MySQL Shards of More Than 1 TiB to TiDB
 
-If the total size of the sharding tables is large (for example, greater than 1 TiB) and allows the TiDB cluster to suspend business writes during the migration, then you can use TiDB Lightning to quickly migrate and merge the sharding table data. After migration, you can also use TiDB DM to perform incremental replication according to your business needs.
+If the total size of the MySQL shards is large (for example, greater than 1 TiB) and allows the TiDB cluster to suspend business writes during the migration, then you can use TiDB Lightning to quickly migrate and merge the MySQL shards. After migration, you can also use TiDB DM to perform incremental replication according to your business needs.
 
-This document walks you through the procedure of how to migrate large sharding schemas and sharding tables into TiDB.
+This document walks you through the procedure of how to migrate large MySQL shards to TiDB.
 
-If the data size of the sharding tables is less than 1 TiB, you can follow the procedure described in [Migrate and Merge MySQL Shards of Less Than 1 TiB to TiDB](/data-migration/migrate-sharding-mysql-tidb-less-tb.md), which supports both full and incremental migration.
+If the data size of the MySQL shards is less than 1 TiB, you can follow the procedure described in [Migrate and Merge MySQL Shards of Less Than 1 TiB to TiDB](/data-migration/migrate-sharding-mysql-tidb-less-tb.md), which supports both full and incremental migration.
 
-The following diagram shows how to migrate sharding schemas and sharding tables to TiDB using Dumpling and TiDB Lightning.
+The following diagram shows how to migrate MySQL shards to TiDB using Dumpling and TiDB Lightning.
 
-![Use Dumpling and TiDB Lightning to migrate and merge sharding schemas and sharding tables into TiDB](/media/shard-merge-using-lightning-en.png)
+![Use Dumpling and TiDB Lightning to migrate and merge MySQL shards to TiDB](/media/shard-merge-using-lightning-en.png)
 
 This example assumes that you have two databases, `my_db1` and `my_db2`. You use Dumpling to export two tables `table1` and `table2` from `my_db1`, and two tables `table3` and `table4` from `my_db2`, respectively. After that, you use TiDB Lighting to migrate and merge the four exported tables into the same `table5` in the downstream TiDB.
 
@@ -73,9 +73,9 @@ At first glance, it may look confusing why there is a **“x2”** in the formul
 * Indexes can consume extra space.
 * There is a space amplification effect of RocksDB.
 
-### Check conflicts for sharding tables
+### Check conflicts for Sharded Tables
 
-If the migration involves sharding schemas and tables, data from multiple sharding tables may cause conflicts for primary keys or unique indexes. Therefore, before migration, you need to check the business characteristics of each sharding table. For more details, see [Cross-Sub-table Data in Primary Key or Unique Index Conflict Handling](https://docs.pingcap.com/tidb-data-migration/stable/shard-merge-best-practices#handle-conflicts-between-primary-keys-or-unique-indexes-across-multiple-sharded-tables). The following is a brief description.
+If the migration involves sharded tables, data from multiple sharded tables may cause conflicts for primary keys or unique indexes. Therefore, before migration, you need to check the business characteristics of each sharded table. For more details, see [Cross-Sub-table Data in Primary Key or Unique Index Conflict Handling](https://docs.pingcap.com/tidb-data-migration/stable/shard-merge-best-practices#handle-conflicts-between-primary-keys-or-unique-indexes-across-multiple-sharded-tables). The following is a brief description.
 
 Assume that tables1~4 have the same table structure as follows.
 
@@ -90,7 +90,7 @@ CREATE TABLE `table1` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
 ```
 
-Where the `id` column contains the primary key. It is auto-incremental, and duplicate ranges of multiple sharding tables will cause data conflicts. The `sid` column contains the sharding key, which ensures that the index is unique globally. So you can remove the unique key attribute of the `id` column in the downstream `table5`.
+Where the `id` column contains the primary key. It is auto-incremental, and duplicate ranges of multiple sharded tables will cause data conflicts. The `sid` column contains the sharding key, which ensures that the index is unique globally. So you can remove the unique key attribute of the `id` column in the downstream `table5`.
 
 ```sql
 CREATE TABLE `table5` (
@@ -107,9 +107,9 @@ The following sections introduce the complete migration procedure.
 
 ## Step1. Use Dumpling to export full data
 
-If you need to export multiple sharding tables belonging to the same upstream MySQL instance, you can directly use the `-f` parameter of Dumpling to export them in a single operation.
+If you need to export multiple sharded tables belonging to the same upstream MySQL instance, you can directly use the `-f` parameter of Dumpling to export them in a single operation.
 
-If the sharding tables are stored across different MySQL instances, you can use Dumpling to export them respectively and place the results of both exports in the same parent directory.
+If the sharded tables are stored across different MySQL instances, you can use Dumpling to export them respectively and place the results of both exports in the same parent directory.
 
 In the following example, both methods are used, and then the exported data is stored in the same parent directory.
 
@@ -170,7 +170,7 @@ For more information, see [TiDB Lightning Checkpoints](https://docs.pingcap.com/
 
 ### Create the target schema
 
-After you make changes in the aforementioned [Check conflicts for sharding tables](data-migration\migrate-sharding-mysql-tidb-above-tb.md#check-conflicts-for-sharding-tables), you can now manually create the `my_db` schema and `table5` in downstream TiDB. After that, you need to configure `tidb-lightning.toml`.
+After you make changes in the aforementioned [Check conflicts for sharded tables](data-migration\migrate-sharding-mysql-tidb-above-tb.md#check-conflicts-for-sharding-tables), you can now manually create the `my_db` schema and `table5` in downstream TiDB. After that, you need to configure `tidb-lightning.toml`.
 
 ```toml
 [mydumper]
@@ -314,7 +314,7 @@ Create a task `task.yaml` to configure the incremental replication mode and repl
 ```yaml
 name: task-test               # The name of the task. Should be globally unique.
 task-mode: incremental        # The mode of the task. "incremental" means only incremental data is migrated.
-# Required for the sharding schemas and tables. By default, the "pessimistic" mode is used.
+# Required for the sharded tables. By default, the "pessimistic" mode is used.
 # If you have a deeper understanding of the principles and usage limitations of the optimistic mode, you can also use the "optimistic" mode.
 # For more information, see [Merge and Migrate Data from Sharded Tables](https://docs.pingcap.com/zh/tidb-data-migration/stable/feature-shard-merge).
 

@@ -1,6 +1,6 @@
 ---
 title: Migrate and Merge MySQL Shards of Less Than 1 TiB to TiDB
-summary: Introduces how to consolidate MySQL sharding shcemas and tables into TiDB (Less Than 1 TiB).
+summary: Introduces how to consolidate MySQL sharded shcemas and tables into TiDB (Less Than 1 TiB).
 ---
 
 # Migrate and Merge MySQL Shards of Less Than 1 TiB to TiDB
@@ -13,7 +13,7 @@ If you want to migrate MySQL shards with a total of more than 1 TiB of data, it 
 
 This document takes a simple example to illustrate the migration procedure. The MySQL shards of the two data source MySQL instances in the example are migrated to the downstream TiDB cluster. The diagram is shown as follows.
 
-![Use DM to Migrate sharding Tables](/media/migrate-shard-tables-within-1tb-en.png)
+![Use DM to Migrate Sharded Tables](/media/migrate-shard-tables-within-1tb-en.png)
 
 Assume that data source MySQL Instance 1 and MySQL Instance 2 use the same table structure as follows:
 
@@ -35,9 +35,9 @@ Before starting the migration, make sure you have completed the following tasks:
 - [Use TiUP to Deploy a DM cluster](https://docs.pingcap.com/tidb-data-migration/stable/deploy-a-dm-cluster-using-tiup)
 - [Get upstream and downstream database permissions](https://docs.pingcap.com/tidb-data-migration/stable/dm-worker-intro)
 
-### Check conflicts in the sharding tables
+### Check conflicts in the sharded tables
 
-Because the sharding tables are involved in the migration, data from multiple sharding tables may cause data conflicts in the primary key or unique index. Therefore, before the migration, you need to check the sharding table. For details, see [Cross table data conflict handling in primary key or unique index](https://docs.pingcap.com/tidb-data-migration/stable/shard-merge-best-practices#handle-conflicts-between-primary-keys-or-unique-indexes-across-multiple-sharded-tables).
+Because the sharded tables are involved in the migration, data from multiple sharded tables may cause data conflicts in the primary key or unique index. Therefore, before the migration, you need to check the sharded table. For details, see [Cross table data conflict handling in primary key or unique index](https://docs.pingcap.com/tidb-data-migration/stable/shard-merge-best-practices#handle-conflicts-between-primary-keys-or-unique-indexes-across-multiple-sharded-tables).
 
 In this example, the user.information table structure is as follows:
 
@@ -54,7 +54,7 @@ CREATE TABLE `sale_01` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
 ```
 
-The `id` column is the primary key, and the `sid` column is the sharding key. The `id` column is auto-incremental, and duplicated multiple sharding table ranges will cause data conflicts. The `sid` can ensure that the index is globally unique, so you can follow the steps in [Remove the primary key attribute of the self-incrementing primary key](https://docs.pingcap.com/tidb-data-migration/stable/shard-merge-best-practices#remove-the-primary-key-attribute-from-the-column) to bypasses the `id` column.
+The `id` column is the primary key, and the `sid` column is the sharding key. The `id` column is auto-incremental, and duplicated multiple sharded table ranges will cause data conflicts. The `sid` can ensure that the index is globally unique, so you can follow the steps in [Remove the primary key attribute of the self-incrementing primary key](https://docs.pingcap.com/tidb-data-migration/stable/shard-merge-best-practices#remove-the-primary-key-attribute-from-the-column) to bypasses the `id` column.
 
 {{< copyable "sql" >}}
 
@@ -231,7 +231,7 @@ You can also check the DM running status and related errors through the log file
 ## See also
 
 - [Migrate and Merge MySQL Shards of More Than 1 TiB to TiDB](/migrate-sharding-mysql-tidb-above-tb.md)。
-- [Merge and Migrate Data from Sharding Tables](https://docs.pingcap.com/tidb-data-migration/stable/feature-shard-merge)
+- [Merge and Migrate Data from Sharded Tables](https://docs.pingcap.com/tidb-data-migration/stable/feature-shard-merge)
 - [Best Practices of Data Migration in the Shard Merge Scenario](https://docs.pingcap.com/tidb-data-migration/stable/shard-merge-best-practices)
 - [Handle Errors](https://docs.pingcap.com/tidb-data-migration/stable/error-handling)
 - [Handle Performance Issues](https://docs.pingcap.com/zh/tidb-data-migration/stable/handle-performance-issues)
