@@ -4,6 +4,25 @@ from lxml import etree
 from datetime import datetime
 from string import Template
 
+docs_cn_url = 'https://github.com/pingcap/docs-cn/pulls?q='
+docs_url = 'https://github.com/pingcap/docs/pulls?q='
+open_url = '+is%3Aopen+is%3Apr'
+close_url = '+is%3Aclosed+label%3Atranslation%2Fdoing'
+sig_sql_infra = '+label%3Asig%2Fsql-infra'
+sig_planner = '+label%3Asig%2Fplanner'
+sig_engine = '+label%3Asig%2Fengine'
+sig_scheduling = '+label%3Asig%2Fscheduling'
+sig_migrate = '+label%3Asig%2Fmigrate'
+sig_tiup = '+label%3Asig%2Ftiup'
+sig_bigdata = '+label%3Asig%2Fbigdata'
+sig_diagnosis = '+label%3Asig%2Fdiagnosis'
+sig_transaction = '+label%3Asig%2Ftransaction'
+area_security = '+label%3Aarea%2Fsecurity'
+v54 = '+label%3Av5.4'
+type_compatibility_change = '+label%3Atype%2Fcompatibility-or-feature-change'
+type_oncall = '+label%3AONCALL'
+type_bugfix = '+label%3Atype%2Fbug-fix'
+type_enhancement = '+label%3Atype%2Fenhancement'
 # docs-cn PR URL lists
 compat_open_url_zh = 'https://github.com/pingcap/docs-cn/pulls?q=is%3Aopen+is%3Apr+label%3Atype%2Fcompatibility-or-feature-change'
 compat_close_url_zh = 'https://github.com/pingcap/docs-cn/pulls?q=is%3Aclosed+is%3Apr+label%3Atype%2Fcompatibility-or-feature-change+label%3Atranslation%2Fdoing'
@@ -44,10 +63,41 @@ TEMPLATE = '''
 待处理 PR 数目如下，按优先级排序
 *************************************************
 
+v5.4 发版文档，中文文档截止日期 2021-01-07，英文文档截止日期 2021-01-18
+
+- sig/sql-infra 和 sig/planner
+
+    - docs-cn 仓库中有 {v54_zh_open_sqlinfra_planner} PR 未合并，有 {v54_zh_close_sqlinfra_planner} PR 待翻译
+    - docs 仓库中有 {v54_en_open_sqlinfra_planner} PR 未合并，有 {v54_en_close_sqlinfra_planner} PR 待翻译
+
+- sig/engine 和 sig/scheduling
+
+    - docs-cn 仓库中有 {v54_zh_open_engine_scheduling} PR 未合并，有 {v54_zh_close_engine_scheduling} PR 待翻译
+    - docs 仓库中有 {v54_en_open_engine_scheduling} PR 未合并，有 {v54_en_close_engine_scheduling} PR 待翻译
+
+- sig/migrate
+
+    - docs-cn 仓库中有 {v54_zh_open_migrate} PR 未合并，有 {v54_zh_close_migrate} PR 待翻译
+    - docs 仓库中有 v54_en_open_migrate PR 未合并，有 {v54_en_close_migrate} PR 待翻译
+
+- sig/bigdata、sig/tiup 和 sig/diagnosis
+
+    - docs-cn 仓库中有 {v54_zh_open_bigdata_tiup_diagnosis} PR 未合并，有 {v54_zh_close_bigdata_tiup_diagnosis} PR 待翻译
+    - docs 仓库中有 {v54_en_open_bigdata_tiup_diagnosis} PR 未合并，有 {v54_en_close_bigdata_tiup_diagnosis} PR 待翻译
+
+- sig/transaction 和 area/security
+
+    - docs-cn 仓库中有 {v54_zh_open_transaction_security} PR 未合并，有 {v54_zh_close_transaction_security} PR 待翻译
+    - docs 仓库中有 {v54_en_open_transaction_security} PR 未合并，有 {v54_en_close_transaction_security} PR 待翻译
+
+*************************************************
+
 type/compatibility-or-feature-change 标签
 兼容性变更类文档，刻不容缓，请尽快处理：
 
-- docs-cn 仓库中有 {compat_open_zh} PR 未合并，有 {compat_close_zh} PR 待翻译
+- docs-cn 仓库中共有 {compat_open_zh} PR 未合并，有 {compat_close_zh} PR 待翻译
+
+其中：sig/sql-infra
 - docs 仓库中有 {compat_open_en} PR 未合并，有 {compat_close_en} PR 待翻译
 
 *************************************************
@@ -72,6 +122,26 @@ if __name__ == "__main__":
 
     data = {
         'date': datetime.utcnow().strftime('%Y-%m-%d'),
+        'v54_zh_open_sqlinfra_planner': get_pr_no(docs_cn_url + open_url+ sig_sql_infra + v54) + get_pr_no(docs_cn_url + open_url+ sig_planner + v54),
+        'v54_zh_close_sqlinfra_planner': get_pr_no(docs_cn_url + close_url+ sig_sql_infra + v54) + get_pr_no(docs_cn_url + close_url+ sig_planner + v54),
+        'v54_en_open_sqlinfra_planner': get_pr_no(docs_url + open_url+ sig_sql_infra + v54) + get_pr_no(docs_url + open_url+ sig_planner + v54),
+        'v54_en_close_sqlinfra_planner': get_pr_no(docs_url + close_url+ sig_sql_infra + v54) + get_pr_no(docs_url + close_url+ sig_planner + v54),
+        'v54_zh_open_engine_scheduling': get_pr_no(docs_cn_url + open_url+ sig_engine + v54) + get_pr_no(docs_cn_url + open_url+ sig_scheduling + v54),
+        'v54_zh_close_engine_scheduling': get_pr_no(docs_cn_url + close_url+ sig_engine + v54) + get_pr_no(docs_cn_url + close_url+ sig_scheduling + v54),
+        'v54_en_open_engine_scheduling': get_pr_no(docs_url + open_url+ sig_engine + v54) + get_pr_no(docs_url + open_url+ sig_scheduling + v54),
+        'v54_en_close_engine_scheduling': get_pr_no(docs_url + close_url+ sig_engine + v54) + get_pr_no(docs_url + close_url+ sig_scheduling + v54),
+        'v54_zh_open_migrate': get_pr_no(docs_cn_url + open_url + sig_migrate + v54),
+        'v54_zh_close_migrate': get_pr_no(docs_cn_url + close_url + sig_migrate + v54),
+        'v54_en_open_migrate': get_pr_no(docs_url + open_url + sig_migrate + v54),
+        'v54_en_close_migrate': get_pr_no(docs_url + close_url + sig_migrate + v54),
+        'v54_zh_open_bigdata_tiup_diagnosis': get_pr_no(docs_cn_url + open_url + sig_bigdata + v54) + get_pr_no(docs_cn_url + open_url + sig_tiup + v54) + get_pr_no(docs_cn_url + open_url + sig_diagnosis + v54),
+        'v54_zh_close_bigdata_tiup_diagnosis': get_pr_no(docs_cn_url + close_url + sig_bigdata + v54) + get_pr_no(docs_cn_url + close_url + sig_tiup + v54) + get_pr_no(docs_cn_url + close_url + sig_diagnosis + v54),
+        'v54_en_open_bigdata_tiup_diagnosis': get_pr_no(docs_url + open_url + sig_bigdata + v54) + get_pr_no(docs_url + open_url + sig_tiup + v54) + get_pr_no(docs_url + open_url + sig_diagnosis + v54),
+        'v54_en_close_bigdata_tiup_diagnosis': get_pr_no(docs_url + close_url + sig_bigdata + v54) + get_pr_no(docs_url + close_url + sig_tiup + v54) + get_pr_no(docs_url + close_url + sig_diagnosis + v54),
+        'v54_zh_open_transaction_security': get_pr_no(docs_cn_url + open_url + sig_transaction + v54) + get_pr_no(docs_cn_url + open_url + area_security + v54),
+        'v54_zh_close_transaction_security': get_pr_no(docs_cn_url + close_url + sig_transaction + v54) + get_pr_no(docs_cn_url + close_url + area_security + v54),
+        'v54_en_open_transaction_security': get_pr_no(docs_url + open_url + sig_transaction + v54) + get_pr_no(docs_url + open_url + area_security + v54),
+        'v54_en_close_transaction_security': get_pr_no(docs_url + close_url + sig_transaction + v54) + get_pr_no(docs_url + close_url + area_security + v54),
         'compat_open_zh': get_pr_no(compat_open_url_zh),
         'compat_close_zh': get_pr_no(compat_close_url_zh),
         'compat_open_en': get_pr_no(compat_open_url_en),
@@ -84,6 +154,26 @@ if __name__ == "__main__":
         'bugfix_close_zh': get_pr_no(bugfix_close_url_zh),
         'bugfix_open_en': get_pr_no(bugfix_open_url_en),
         'bugfix_close_en': get_pr_no(bugfix_close_url_en),
+        'v54_zh_open_sqlinfra_planner_url': 'https://github.com/pingcap/docs-cn/pulls?q=is%3Apr+label%3Asig%2Fsql-infra%2Csig%2Fplanner+label%3Av5.4+is%3Aopen',
+        'v54_zh_close_sqlinfra_planner_url': 'https://github.com/pingcap/docs-cn/pulls?q=is%3Apr+label%3Asig%2Fsql-infra%2Csig%2Fplanner+label%3Av5.4+is%3Aclosed',
+        'v54_en_open_sqlinfra_planner_url': 'https://github.com/pingcap/docs/pulls?q=is%3Apr+label%3Asig%2Fsql-infra%2Csig%2Fplanner+label%3Av5.4+is%3Aopen',
+        'v54_en_close_sqlinfra_planner_url': 'https://github.com/pingcap/docs/pulls?q=is%3Apr+label%3Asig%2Fsql-infra%2Csig%2Fplanner+label%3Av5.4+is%3Aclosed',
+        'v54_zh_open_engine_scheduling_url': 'https://github.com/pingcap/docs-cn/pulls?q=is%3Apr+label%3Asig%2Fengine%2Csig%2Fscheduling+label%3Av5.4+is%3Aopen+',
+        'v54_zh_close_engine_scheduling_url': 'https://github.com/pingcap/docs-cn/pulls?q=is%3Apr+label%3Asig%2Fengine%2Csig%2Fscheduling+label%3Av5.4+is%3Aclosed',
+        'v54_en_open_engine_scheduling_url': 'https://github.com/pingcap/docs/pulls?q=is%3Apr+label%3Asig%2Fengine%2Csig%2Fscheduling+label%3Av5.4+is%3Aopen+',
+        'v54_en_close_engine_scheduling_url': 'https://github.com/pingcap/docs/pulls?q=is%3Apr+label%3Asig%2Fengine%2Csig%2Fscheduling+label%3Av5.4+is%3Aclosed',
+        'v54_zh_open_migrate_url': 'https://github.com/pingcap/docs-cn/pulls?q=is%3Apr+label%3Asig%2Fmigrate+label%3Av5.4+is%3Aopen',
+        'v54_zh_close_migrate_url': 'https://github.com/pingcap/docs-cn/pulls?q=is%3Apr+label%3Asig%2Fmigrate+label%3Av5.4+is%3Aclosed',
+        'v54_en_open_migrate_url': 'https://github.com/pingcap/docs/pulls?q=is%3Apr+label%3Asig%2Fmigrate+label%3Av5.4+is%3Aopen',
+        'v54_en_close_migrate_url': 'https://github.com/pingcap/docs/pulls?q=is%3Apr+label%3Asig%2Fmigrate+label%3Av5.4+is%3Aclosed',
+        'v54_zh_open_bigdata_tiup_diagnosis_url': 'https://github.com/pingcap/docs-cn/pulls?q=is%3Apr+label%3Asig%2Fbigdata%2Csig%2Ftiup%2Csig%2Fdiagnosis+label%3Av5.4+is%3Aopen',
+        'v54_zh_close_bigdata_tiup_diagnosis_url': 'https://github.com/pingcap/docs-cn/pulls?q=is%3Apr+label%3Asig%2Fbigdata%2Csig%2Ftiup%2Csig%2Fdiagnosis+label%3Av5.4+is%3Aclosed',
+        'v54_en_open_bigdata_tiup_diagnosis_url': 'https://github.com/pingcap/docs/pulls?q=is%3Apr+label%3Asig%2Fbigdata%2Csig%2Ftiup%2Csig%2Fdiagnosis+label%3Av5.4+is%3Aopen',
+        'v54_en_close_bigdata_tiup_diagnosis_url': 'https://github.com/pingcap/docs/pulls?q=is%3Apr+label%3Asig%2Fbigdata%2Csig%2Ftiup%2Csig%2Fdiagnosis+label%3Av5.4+is%3Aclosed',
+        'v54_zh_open_transaction_security_url': 'https://github.com/pingcap/docs-cn/pulls?q=is%3Apr+label%3Asig%2Ftransaction%2Carea%2Fsecurity+label%3Av5.4+is%3Aopen',
+        'v54_zh_close_transaction_security_url': 'https://github.com/pingcap/docs/pulls?q=is%3Apr+label%3Asig%2Ftransaction%2Carea%2Fsecurity+label%3Av5.4+is%3Aclosed',
+        'v54_en_open_transaction_security_url': 'https://github.com/pingcap/docs/pulls?q=is%3Apr+label%3Asig%2Ftransaction%2Carea%2Fsecurity+label%3Av5.4+is%3Aopen',
+        'v54_en_close_transaction_security_url': 'https://github.com/pingcap/docs/pulls?q=is%3Apr+label%3Asig%2Ftransaction%2Carea%2Fsecurity+label%3Av5.4+is%3Aclosed',
         'compat_open_url_zh': compat_open_url_zh,
         'compat_close_url_zh': compat_close_url_zh,
         'compat_open_url_en': compat_open_url_en,
@@ -133,6 +223,29 @@ if __name__ == "__main__":
                                 "tag": "text",
                                 "text": "*************************************************"
                             }
+                        ],
+                        [
+                            {
+                                "tag": "text",
+                                "text": "v5.4 发版文档，中文文档截止日期 2021-01-07，英文文档截止日期 2021-01-18"
+                            }
+                        ],
+                        [
+                            {
+                                "tag": "text",
+                                "text": "- sig/sql-infra 和 sig/planner"
+                            }
+                        ],
+                        [
+                            {
+                                "tag": "text",
+                                "text": "    - docs-cn 仓库中有 ${v54_zh_open_sqlinfra_planner} PR 未合并，有 ${v54_zh_close_sqlinfra_planner} PR 待翻译"
+                            },
+                            {
+                                "tag": "a",
+                                "text": "未合并",
+                                "href": "${compat_open_url_zh}"
+                            },
                         ],
                         [
                             {
