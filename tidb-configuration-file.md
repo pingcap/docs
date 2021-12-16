@@ -190,7 +190,7 @@ Configuration items related to log.
 ### `format`
 
 - Specifies the log output format.
-- Value options: `json` and `text`.
+- Value options: `json`, `text` and `console`.
 - Default value: `text`
 
 ### `enable-timestamp`
@@ -470,6 +470,10 @@ Configuration items related to performance.
 ## prepared-plan-cache
 
 The Plan Cache configuration of the `PREPARE` statement.
+
+> **Warning:**
+>
+> This is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
 
 ### `enabled`
 
