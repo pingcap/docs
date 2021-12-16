@@ -1,9 +1,9 @@
 ---
-title: Migrate Data above Terabytes from MySQL to TiDB
+title: Migrate MySQL Data of More than 1 TiB to TiDB
 summary: Learn how to migrate data above Terabytes from MySQL to TiDB.
 ---
 
-# Migrate Data above Terabytes from MySQL to TiDB
+# Migrate MySQL Data of More than 1 TiB to TiDB
 
 When the data volume to be migrated is small, you can easily [use DM to migrate data](/data-migration/migrate-mysql-tidb-less-tb.md), both for full migration and incremental replication. However, because DM imports data at a slow speed (30~50 GiB/h), when the data volume is large, the migration might take a long time.
 
@@ -47,7 +47,7 @@ The target TiKV cluster must have enough disk space to store the imported data. 
 - Index might take extra space.
 - RocksDB has a space amplification effect.
 
-## Step 1. Export all data from MySQL
+## Step 1: Export all data from MySQL
 
 1. Export all data from MySQL by running the following command:
 
@@ -85,7 +85,7 @@ The target TiKV cluster must have enough disk space to store the imported data. 
     GTID:
     ```
 
-## Step 2. Import full data to TiDB
+## Step 2: Import full data to TiDB
 
 1. Create the `tidb-lightning.toml` configuration file:
 
@@ -98,8 +98,8 @@ The target TiKV cluster must have enough disk space to store the imported data. 
     file = "tidb-lightning.log"
 
     [tikv-importer]
-    # "local": Default. The local backend is used to import large volumes of data (1 TB or above). During the import, the target TiDB cluster cannot provide any service.
-    # "tidb": The "tidb" backend is used to import small volumes of data (below 1 TB). During the import, the target TiDB cluster can provide service normally. For more information on the backends, refer to https://docs.pingcap.com/tidb/stable/tidb-lightning-backends.
+    # "local": Default. The local backend is used to import large volumes of data (1 TiB or above). During the import, the target TiDB cluster cannot provide any service.
+    # "tidb": The "tidb" backend is used to import small volumes of data (below 1 TiB). During the import, the target TiDB cluster can provide service normally. For more information on the backends, refer to https://docs.pingcap.com/tidb/stable/tidb-lightning-backends.
     backend = "local"
     # For better import performance, it is recommended to use a directory different from `data-source-dir` and use flash storage and exclusive I/O for the directory.
     sorted-kv-dir = "${sorted-kv-dir}"
@@ -136,7 +136,7 @@ The target TiKV cluster must have enough disk space to store the imported data. 
 
 If the import fails, refer to [TiDB Lightning FAQ](/tidb-lightning/tidb-lightning-faq.md) for troubleshooting.
 
-## Step 3. Replicate incremental data to TiDB
+## Step 3: Replicate incremental data to TiDB
 
 ### Add the data source
 
