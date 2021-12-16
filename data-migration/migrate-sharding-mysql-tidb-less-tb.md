@@ -1,15 +1,13 @@
 ---
 title: Migrate and Merge MySQL Shards of Less Than 1 TiB to TiDB
-summary: Introduces how to consolidate MySQL sharded shcemas and tables into TiDB (Less Than 1 TiB).
+summary: Introduces how to consolidate MySQL shards of Less Than 1 TiB to TiDB.
 ---
 
 # Migrate and Merge MySQL Shards of Less Than 1 TiB to TiDB
 
-If you want to migrate and merge multiple MySQL database instances upstream to one TiDB database downstream, and the amount of data is not too large (for example, the sum of all MySQL shards is less than 1 TiB), you can use DM to migrate MySQL shards. Through examples in this article, you can learn the operation steps, precautions, and troubleshooting of the migration.
+If you want to migrate and merge multiple MySQL database instances upstream to one TiDB database downstream, and the amount of data is not too large (for example, the sum of all MySQL shards is less than 1 TiB), you can use DM to migrate MySQL shards. Through examples in this document, you can learn the operation steps, precautions, and troubleshooting of the migration.
 
-This document applies to migrating MySQL shards less than 1 TiB in total.
-
-If you want to migrate MySQL shards with a total of more than 1 TiB of data, it will take a long time by using DM. It is recommended that you follow the operation introduced in [Migrate and Merge MySQL Shards of More Than 1 TiB to TiDB](/migrate-sharding-mysql-tidb-above-tb.md) to migrate data greater than 1 TiB.
+This document applies to migrating MySQL shards less than 1 TiB in total. If you want to migrate MySQL shards with a total of more than 1 TiB of data, it will take a long time by using DM. In this case, it is recommended that you follow the operation introduced in [Migrate and Merge MySQL Shards of More Than 1 TiB to TiDB](/migrate-sharding-mysql-tidb-above-tb.md) to perform migration.
 
 This document takes a simple example to illustrate the migration procedure. The MySQL shards of the two data source MySQL instances in the example are migrated to the downstream TiDB cluster. The diagram is shown as follows.
 
@@ -35,11 +33,11 @@ Before starting the migration, make sure you have completed the following tasks:
 - [Use TiUP to Deploy a DM cluster](https://docs.pingcap.com/tidb-data-migration/stable/deploy-a-dm-cluster-using-tiup)
 - [Get upstream and downstream database permissions](https://docs.pingcap.com/tidb-data-migration/stable/dm-worker-intro)
 
-### Check conflicts in the sharded tables
+### Check conflicts for the sharded tables
 
 Because the sharded tables are involved in the migration, data from multiple sharded tables may cause data conflicts in the primary key or unique index. Therefore, before the migration, you need to check the sharded table. For details, see [Cross table data conflict handling in primary key or unique index](https://docs.pingcap.com/tidb-data-migration/stable/shard-merge-best-practices#handle-conflicts-between-primary-keys-or-unique-indexes-across-multiple-sharded-tables).
 
-In this example, the user.information table structure is as follows:
+In this example, the structure of the `user.information` table is as follows:
 
 {{< copyable "sql" >}}
 
@@ -79,9 +77,9 @@ Create a new file named `source1.yaml`. The configuration file is as follows:
 # Configuration.
 source-id: "mysql-01" # Must be unique.
 
-# Specify whether DM-worker pulls binlogs with GTID (Global Transaction Identifier).
+# Specifies whether DM-worker pulls binlogs with GTID (Global Transaction Identifier).
 # The prerequisite is that you have already enabled GTID in the upstream MySQL.
-# If the automatic switch of primary and standby exists in the upstream database, you need to use the GTID mode.
+# If the automatic switch of primary and standby is enabled in the upstream database, you need to use the GTID mode.
 enable-gtid: false
 from:
   host: "${host}" # For example: 172.16.10.81
@@ -135,7 +133,7 @@ target-database:
 
 mysql-instances:
   -
-    source-id: "mysql-01"                                    # ID of the data source. It can be obtained from the data source configurations.
+    source-id: "mysql-01"                                    # ID of the data source. You can obtain it from the data source configurations.
     route-rules: ["sale-route-rule"]                         # The table route rules applied to the data source
     filter-rules: ["store-filter-rule", "sale-filter-rule"]  # Binlog event filter rules applied to the data source
     block-allow-list:  "log-bak-ignored"                     # Block & Allow Lists rules applied to the data source
@@ -205,7 +203,7 @@ tiup dmctl --master-addr ${advertise-addr} start-task task.yaml
 |--master-addr| {advertise-addr} of any DM-master node in the cluster that dmctl connects to. For example: 172.16.10.71:8261 |
 |start-task   | Starts the data migration task. |
 
-If the migration task fails to start, modify the configuration information according to the error information, and then run `start-task task.yaml` again to start the migration task. If you encounter problems, see [Handle Errors](https://docs.pingcap.com/tidb-data-migration/stable/error-handling), and [FAQ](https://docs.pingcap.com/tidb-data-migration/stable/faq).
+If the migration task fails to start, modify the configuration information according to the error information, and then run `start-task task.yaml` again to start the migration task. If you encounter problems, see [Handle Errors](https://docs.pingcap.com/tidb-data-migration/stable/error-handling) and [FAQ](https://docs.pingcap.com/tidb-data-migration/stable/faq).
 
 ## Step 4: Check the task
 
@@ -217,11 +215,13 @@ After starting the migration task, you can use `dmtcl tiup` to run `query-status
 tiup dmctl --master-addr ${advertise-addr} query-status ${task-name}
 ```
 
-If you encounter errors, you can use `query-status <taskName of the error task>` to view more detailed information. For details about the query results, task status and sub task status of the `query-status` command, see [TiDB Data Migration Query Status](https://docs.pingcap.com/tidb-data-migration/stable/query-status).
+If you encounter errors, you can use `query-status <name of the error task>` to view more detailed information. For details about the query results, task status and sub task status of the `query-status` command, see [TiDB Data Migration Query Status](https://docs.pingcap.com/tidb-data-migration/stable/query-status).
 
 ## Step 5: Monitor tasks and check logs (optional)
 
-If Prometheus and Grafana are correctly deployed when using TiUP to deploy the DM cluster. For example, assume that the address of Grafana is 172.16.10.71, you can [open the page to enter Grafana](http://172.16.10.71:3000) in the browser and select the Dashboard of DM, and then you can view related monitoring items. For specific monitoring indicators, see [Monitor and Alarm Settings](https://docs.pingcap.com/tidb-data-migration/stable/monitor-a-dm-cluster).
+To view the history status of the migration task and more internal operational metrics, you can use Grafana or check logs.
+
+If Prometheus, Alertmanager and Grafana are correctly deployed when you use TiUP to deploy the DM cluster, you can use Grafana to check the status. For example, assume that the address of Grafana is 172.16.10.71, you can [open the page to enter Grafana](http://172.16.10.71:3000) in the browser and select the Dashboard of DM, and then you can view related monitoring items. For specific monitoring indicators, see [Monitor and Alarm Settings](https://docs.pingcap.com/tidb-data-migration/stable/monitor-a-dm-cluster).
 
 You can also check the DM running status and related errors through the log file.
 
