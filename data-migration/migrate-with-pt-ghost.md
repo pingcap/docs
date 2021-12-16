@@ -1,9 +1,9 @@
 ---
-title: Migrate from Databases that Use GH-ost/PT-osc
+title: Continuous Replication from Databases that Use gh-ost or pt-osc
 summary: Learn how to use DM to replicate incremental data from databases that use online DDL tools gh-ost or pt-osc
 ---
 
-# Continuous replication from databases that use gh-ost or pt-osc
+# Continuous Replication from Databases that Use gh-ost or pt-osc
 
 In production scenarios, table locking during DDL execution can block the reads or writes to and from the database to a certain extent. Therefore, online DDL tools are often used to execute DDLs to minimize the impact on reads and writes. Common DDL tools are [gh-ost](https://github.com/github/gh-ost) and [pt-osc](https://www.percona.com/doc/percona-toolkit/3.0/pt-online-schema-change.html).
 
@@ -51,6 +51,8 @@ The workflow of DM:
 - Replicate data only from the ghost table.
 
 - Apply DDLs downstream.
+
+![dm-online-ddl](/media/dm/dm-online-ddl.png)
 
 The change in the workflow brings the following advantages:
 
