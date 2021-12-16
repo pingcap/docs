@@ -60,8 +60,6 @@ The change in the workflow brings the following advantages:
 
 - When you migrate and merge data from sharded tables, the RENAME operation is ignored for each sharded ghost tables to ensure the correctness of the replication.
 
-For more details about the principle of online-ddl, refer to the following two blogs:
-
 ## See also
 
 [Working details for DM with online DDL tools](https://docs.pingcap.com/tidb-data-migration/stable/feature-online-ddl/#working-details-for-dm-with-online-ddl-tools)
