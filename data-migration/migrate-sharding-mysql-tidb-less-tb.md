@@ -5,13 +5,13 @@ summary: Introduces how to consolidate MySQL sharding shcemas and tables into Ti
 
 # Migrate and Merge MySQL Shards of Less Than 1 TiB to TiDB
 
-If you want to migrate and merge multiple MySQL database instances upstream to one TiDB database downstream, and the amount of data is not too large (for example, the sum of all sharding tables is less than 1 TiB), you can use DM to migrate sharding tables. Through examples in this article, you can learn the operation steps, precautions, and troubleshooting of the migration.
+If you want to migrate and merge multiple MySQL database instances upstream to one TiDB database downstream, and the amount of data is not too large (for example, the sum of all MySQL shards is less than 1 TiB), you can use DM to migrate MySQL shards. Through examples in this article, you can learn the operation steps, precautions, and troubleshooting of the migration.
 
-This document applies to migrating sharding tables less than 1 TiB in total.
+This document applies to migrating MySQL shards less than 1 TiB in total.
 
-If you want to migrate sharding tables with a total of more than 1 TiB of data, it will take a long time by using DM. It is recommended that you follow the operation introduced in [Migrate and Merge MySQL Shards of More Than 1 TiB to TiDB](/migrate-sharding-mysql-tidb-above-tb.md) to migrate data greater than 1 TiB.
+If you want to migrate MySQL shards with a total of more than 1 TiB of data, it will take a long time by using DM. It is recommended that you follow the operation introduced in [Migrate and Merge MySQL Shards of More Than 1 TiB to TiDB](/migrate-sharding-mysql-tidb-above-tb.md) to migrate data greater than 1 TiB.
 
-This document takes a simple example to illustrate the migration procedure. The sharding tables of the two data source MySQL instances in the example are migrated to the downstream TiDB cluster. The diagram is shown as follows.
+This document takes a simple example to illustrate the migration procedure. The MySQL shards of the two data source MySQL instances in the example are migrated to the downstream TiDB cluster. The diagram is shown as follows.
 
 ![Use DM to Migrate sharding Tables](/media/migrate-shard-tables-within-1tb-en.png)
 
@@ -120,7 +120,7 @@ name: "shard_merge"
 # - incremental: Performs binlog real-time replication
 # - all: Performs both full data and binlog replication
 task-mode: all
-# Required for the sharding schemas and tables. By default, the "pessimistic" mode is used.
+# Required for the MySQL shards. By default, the "pessimistic" mode is used.
 # If you have a deeper understanding of the principles and usage limitations of the optimistic mode, you can also use the "optimistic" mode.
 # For more information, see [Merge and Migrate Data from Sharded Tables](https://docs.pingcap.com/tidb-data-migration/stable/feature-shard-merge)
 shard-mode: "pessimistic"
@@ -145,7 +145,7 @@ mysql-instances:
     filter-rules: ["store-filter-rule", "sale-filter-rule"]
     block-allow-list:  "log-bak-ignored"
 
-# Configurations for merging sharding schemas and tables
+# Configurations for merging MySQL shards
 routes:
   sale-route-rule:
     schema-pattern: "store_*"
