@@ -23,6 +23,10 @@ TiDB version: 4.0.16
 
 ## Improvements
 
++ TiDB
+
+    - Upgrade the Grafana version from 7.5.7 to 7.5.11
+
 + TiKV
 
     - Reduce disk space consumption by adopting the zstd algorithm to compress SST files when restoring data using Backup & Restore or importing data using Local-backend of TiDB Lightning [#11469](https://github.com/tikv/tikv/issues/11469)
@@ -38,10 +42,6 @@ TiDB version: 4.0.16
         - Add a tick frequency limit to EtcdWorker to prevent frequent etcd writes from affecting PD services [#3112](https://github.com/pingcap/ticdc/issues/3112)
         - Optimize rate limiting control on TiKV reloads to reduce gPRC congestion during changefeed initialization [#3110](https://github.com/pingcap/ticdc/issues/3110)
 
-+ Grafana
-
-    - Upgrade to v7.5.11 to avoid security vulnerabilities of earlier versions
-
 ## Bug fixes
 
 + TiDB
@@ -52,13 +52,13 @@ TiDB version: 4.0.16
     - Fix the panic when applying index join on prefix indexes in some cases [#24547](https://github.com/pingcap/tidb/issues/24547)
     - Fix the issue that planner might cache invalid plans for `join` in some cases [#28087](https://github.com/pingcap/tidb/issues/28087)
     - Fix a bug that TiDB cannot insert `null` into a non-null column when `sql_mode` is empty [#11648](https://github.com/pingcap/tidb/issues/11648)
-    - Fix the wrong result type of the `GREATEST` and`LEAST` functions [#29019](https://github.com/pingcap/tidb/issues/29019)
+    - Fix the wrong result type of the `GREATEST` and `LEAST` functions [#29019](https://github.com/pingcap/tidb/issues/29019)
     - Fix the `privilege check fail` error when performing the `grant` and `revoke` operations to grant and revoke global level privileges [#29675](https://github.com/pingcap/tidb/issues/29675)
     - Fix the panic when using the `CASE WHEN` function on the `ENUM` data type [#29357](https://github.com/pingcap/tidb/issues/29357)
     - Fix wrong results of the `microsecond` function in vectorized expressions [#29244](https://github.com/pingcap/tidb/issues/29244)
     - Fix wrong results of the `hour` function in vectorized expression [#28643](https://github.com/pingcap/tidb/issues/28643)
     - Fix the issue that optimistic transaction conflicts might cause transactions to block each other [#11148](https://github.com/tikv/tikv/issues/11148)
-    - Fix the issue of incomplete log information from the `auto analyz` result [#29188](https://github.com/pingcap/tidb/issues/29188)
+    - Fix the issue of incomplete log information from the `auto analyze` result [#29188](https://github.com/pingcap/tidb/issues/29188)
     - Fix the issue that using an invalid default date does not report an error when the `SQL_MODE` is 'NO_ZERO_IN_DATE' [#26766](https://github.com/pingcap/tidb/issues/26766)
     - Fix the issue that the Coprocessor Cache panel in Grafana does not display metrics. Now, Grafana displays the number of `hits`/`miss`/`evict` [#26338](https://github.com/pingcap/tidb/issues/26338)
     - Fix the issue that concurrently truncating the same partition causes DDL statements to stuck [#26229](https://github.com/pingcap/tidb/issues/26229)
