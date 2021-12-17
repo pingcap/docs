@@ -1,25 +1,12 @@
 ---
-<<<<<<< HEAD
-title: Download Tools
-summary: Download the most officially maintained versions of TiDB enterprise tools.
+title: Download TiDB Tools
+summary: Download the most officially maintained versions of TiDB tools.
 aliases: ['/docs/v3.1/download-ecosystem-tools/','/docs/v3.1/reference/tools/download/']
 ---
 
 # Download Tools
-=======
-title: Download TiDB Tools
-summary: Download the most officially maintained versions of TiDB tools.
-aliases: ['/docs/dev/download-ecosystem-tools/','/docs/dev/reference/tools/download/']
----
-
-# Download TiDB Tools
->>>>>>> a76bf6b02 (Move TiUP docs to TiDB Tools and add entry for TiDB Operator (#7259))
 
 This document collects the available downloads for most officially maintained versions of TiDB tools.
-
-## TiUP
-
-You can install TiUP with a single command in both Darwin and Linux operating systems. For more information, see [Install TiUP](/tiup/tiup-overview.md#install-tiup).
 
 ## TiDB Operator
 
