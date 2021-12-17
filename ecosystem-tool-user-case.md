@@ -1,22 +1,12 @@
 ---
-<<<<<<< HEAD
-title: TiDB Ecosystem Tools Use Cases
-summary: Learn the common use cases of TiDB ecosystem tools and how to choose the tools.
-aliases: ['/docs/v3.0/ecosystem-tool-user-case/']
-=======
 title: TiDB Tools Use Cases
 summary: Learn the common use cases of TiDB tools and how to choose the tools.
-aliases: ['/docs/dev/ecosystem-tool-user-case/']
->>>>>>> a76bf6b02 (Move TiUP docs to TiDB Tools and add entry for TiDB Operator (#7259))
+aliases: ['/docs/v3.0/ecosystem-tool-user-case/']
 ---
 
 # TiDB Tools Use Cases
 
 This document introduces the common use cases of TiDB tools and how to choose the right tool for your scenario.
-
-## Deploy and operate TiDB on physical or virtual machines
-
-If you need to deploy and operate TiDB on physical or virtual machines, you can install [TiUP](/tiup/tiup-overview.md), and then use TiUP to manage TiDB components such as TiDB, PD, and TiKV.
 
 ## Deploy and operate TiDB in Kubernetes
 
