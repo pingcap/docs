@@ -7,13 +7,13 @@ summary: Learn how to migrate data above Terabytes from MySQL to TiDB.
 
 When the data volume to be migrated is small, you can easily [use DM to migrate data](/data-migration/migrate-mysql-tidb-less-tb.md), both for full migration and incremental replication. However, because DM imports data at a slow speed (30~50 GiB/h), when the data volume is large, the migration might take a long time.
 
-This document describes how to migrate large volumes of data from MySQL to TiDB using Dumpling and TiDB Lightning. TiDB Lightning's local backend mode imports data at 500 GiB/h. After the full migration is completed, you can replicate the incremental data using DM.
+This document describes how to migrate large volumes of data from MySQL to TiDB using Dumpling and TiDB Lightning. TiDB Lightning's local backend mode can import data at a speed of up to 500 GiB/h. After the full migration is completed, you can replicate the incremental data using DM.
 
 ## Prerequisites
 
 - [Install DM](https://docs.pingcap.com/zh/tidb-data-migration/stable/deploy-a-dm-cluster-using-tiup).
 - [Install Dumpling and TiDB Lightning](/migration-tools.md).
-- [Get the source database and target database privileges required for DM](https://docs.pingcap.com/tidb-data-migration/stable/dm-worker-intro).
+- [Grant the source database and target database privileges required for DM](https://docs.pingcap.com/tidb-data-migration/stable/dm-worker-intro).
 - [Get the target database privileges required for TiDB Lightning](/tidb-lightning/tidb-lightning-faq.md#what-are-the-privilege-requirements-for-the-target-database).
 - [Get the source database privileges required for Dumpling](/dumpling-overview.md#export-data-from-tidbmysql).
 
