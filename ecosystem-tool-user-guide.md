@@ -5,7 +5,7 @@ aliases: ['/docs/v3.1/ecosystem-tool-user-guide/','/docs/v3.1/reference/tools/us
 
 # TiDB Tools Overview
 
-This document introduces the functionalities of TiDB ecosystem tools and their relationship.
+This document introduces the functionalities of TiDB tools and their relationship.
 
 ## Deploy and operate TiDB in Kubernetes
 
