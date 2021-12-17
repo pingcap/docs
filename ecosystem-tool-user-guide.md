@@ -49,7 +49,7 @@ The following are the basics of TiDB Lightning:
 >
 > The Loader tool is no longer maintained. For scenarios related to Loader, it is recommended that you use the [`tidb` mode of TiDB Lighting](/tidb-lightning/tidb-lightning-tidb-backend.md#migrating-from-loader-to-tidb-lightning-tidb-backend) instead.
 
-### Backup and restore
+## Backup and restore
 
 [Backup & Restore](/br/backup-and-restore-tool.md) (BR) is a command-line tool for distributed backup and restore of the TiDB cluster data. BR can effectively back up and restore TiDB clusters of huge data volume.
 
@@ -59,7 +59,7 @@ The following are the basics of BR:
 - Supported TiDB versions: v3.1 and v4.0
 - Kubernetes support: Yes. See [Back up Data to S3-Compatible Storage Using BR](https://pingcap.com/docs/tidb-in-kubernetes/stable/backup-to-aws-s3-using-br/) and [Restore Data from S3-Compatible Storage Using BR](https://pingcap.com/docs/tidb-in-kubernetes/stable/restore-from-aws-s3-using-br/) for details.
 
-### Incremental data replication
+## Incremental data replication
 
 [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) is a tool that collects binlog for TiDB clusters and provides near real-time sync and backup. It can be used for incremental data replication between TiDB clusters, such as making a TiDB cluster the secondary cluster of the primary TiDB cluster.
 
