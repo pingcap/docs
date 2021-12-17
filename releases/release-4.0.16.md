@@ -4,7 +4,7 @@ title: TiDB 4.0.16 Release Notes
 
 # TiDB 4.0.16 Release Notes
 
-Release Date: December 10, 2021
+Release date: December 17, 2021
 
 TiDB version: 4.0.16
 
@@ -48,7 +48,7 @@ TiDB version: 4.0.16
 
     - Fix the query panic caused by overflow in the statistics module when converting a range to points for cost estimation [#23625](https://github.com/pingcap/tidb/issues/23625)
     - Fix wrong results of the control functions (such as `IF` and `CASE WHEN`) when using the `ENUM` type data as parameters of such functions [#23114](https://github.com/pingcap/tidb/issues/23114)
-    - Fix the issue that the `GREATEST` function returns inconsistent results due to different values of `tidb_enable_vectorized_expression` (`on` or `off`)
+    - Fix the issue that the `GREATEST` function returns inconsistent results due to different values of `tidb_enable_vectorized_expression` (`on` or `off`) [#29434](https://github.com/pingcap/tidb/issues/29434)
     - Fix the panic when applying index join on prefix indexes in some cases [#24547](https://github.com/pingcap/tidb/issues/24547)
     - Fix the issue that planner might cache invalid plans for `join` in some cases [#28087](https://github.com/pingcap/tidb/issues/28087)
     - Fix a bug that TiDB cannot insert `null` into a non-null column when `sql_mode` is empty [#11648](https://github.com/pingcap/tidb/issues/11648)
@@ -62,7 +62,7 @@ TiDB version: 4.0.16
     - Fix the issue that using an invalid default date does not report an error when the `SQL_MODE` is 'NO_ZERO_IN_DATE' [#26766](https://github.com/pingcap/tidb/issues/26766)
     - Fix the issue that the Coprocessor Cache panel in Grafana does not display metrics. Now, Grafana displays the number of `hits`/`miss`/`evict` [#26338](https://github.com/pingcap/tidb/issues/26338)
     - Fix the issue that concurrently truncating the same partition causes DDL statements to stuck [#26229](https://github.com/pingcap/tidb/issues/26229)
-    - Fix the issue that when the `CONCAT` function has a negative float type argument, the last digit of the argument number is chopped in the result  [#29417](https://github.com/pingcap/tidb/issues/29417)
+    - Fix the issue that when the `CONCAT` function has a negative float type argument, the last digit of the argument number is chopped in the result [#29417](https://github.com/pingcap/tidb/issues/29417)
     - Fix the issue of an extra column in the query result when `NATURAL JOIN` is used to join multiple tables [#29481](https://github.com/pingcap/tidb/issues/29481)
     - Fix the issue that `TopN` is wrongly pushed down to `indexPlan` when `IndexScan` uses a prefix index [#29711](https://github.com/pingcap/tidb/issues/29711)
     - Fix the issue that retrying transactions with the auto-increment columns of `DOUBLE` type causes data error [#29892](https://github.com/pingcap/tidb/issues/29892)
