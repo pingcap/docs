@@ -119,7 +119,7 @@ If the data volume is at the TB level, take the following steps:
 >
 > The Syncer tool is no longer maintained. For scenarios related to Syncer, it is recommended that you use DM's incremental task mode instead.
 
-## OLAP Query tool
+## OLAP query tool
 
 TiDB provides the OLAP query tool TiSpark, which allows you to query TiDB tables as if you were using native Spark.
 
