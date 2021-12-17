@@ -1,11 +1,19 @@
 ---
-title: Download
-summary: Download the most officially maintained versions of TiDB enterprise tools.
+title: Download TiDB Tools
+summary: Download the most officially maintained versions of TiDB tools.
 ---
 
-# Download
+# Download TiDB Tools
 
-This document collects the available downloads for most officially maintained versions of TiDB enterprise tools.
+This document collects the available downloads for most officially maintained versions of TiDB tools.
+
+## TiUP
+
+You can install TiUP with a single command in both Darwin and Linux operating systems. For more information, see [Install TiUP](/tiup/tiup-overview.md#install-tiup).
+
+## TiDB Operator
+
+TiDB Operator runs in Kubernetes. After deploying the Kubernetes cluster, you can choose to deploy TiDB Operator either online or offline. For more information, see [Deploying TiDB Operator in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-tidb-operator/).
 
 ## TiDB Binlog
 
