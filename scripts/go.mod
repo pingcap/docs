@@ -21,7 +21,7 @@ require (
 	github.com/opentracing/opentracing-go v1.2.0 // indirect
 	github.com/pingcap/failpoint v0.0.0-20210918120811-547c13e3eb00 // indirect
 	github.com/pingcap/parser v0.0.0-20211004012448-687005894c4e // indirect
-	github.com/pingcap/tidb v1.1.0-beta.0.20211216143636-a6fc5c6ed4c4 // indirect
+	github.com/pingcap/tidb v1.1.0-beta.0.20211217164636-778e188fa7af // indirect
 	github.com/pingcap/tidb-tools v5.2.2+incompatible // indirect
 	github.com/pingcap/tidb/parser v0.0.0-20211117165147-5f340b88c98f // indirect
 	github.com/prometheus/common v0.32.1 // indirect

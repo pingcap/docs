@@ -70,24 +70,64 @@ func skipSv(sv *variable.SysVar) bool {
 	}
 	// These svs have no documentation yet.
 	switch sv.Name {
-	case variable.ErrorCount, variable.LowerCaseTableNames, variable.MaxPreparedStmtCount,
-		variable.TiDBBatchCommit, variable.TiDBBatchDelete, variable.TiDBBatchInsert, variable.TiDBEnableChangeMultiSchema,
-		variable.TiDBEnableExchangePartition, variable.TiDBEnableExtendedStats, variable.TiDBEnablePointGetCache,
-		variable.TiDBEnableStreaming, variable.TiDBGuaranteeLinearizability, variable.TiDBTxnScope, variable.TiDBTxnReadTS,
-		variable.TxnIsolationOneShot, variable.TiDBLastQueryInfo, variable.TiDBLastTxnInfo,
-		variable.TiDBMemQuotaHashJoin, variable.TiDBStreamAggConcurrency, variable.TiDBTrackAggregateMemoryUsage, variable.TiDBOptBCJ,
-		variable.TiDBOptConcurrencyFactor, variable.TiDBOptCopCPUFactor, variable.TiDBEnableIndexMergeJoin,
-		variable.TiDBMemQuotaIndexLookupJoin, variable.TiDBMemQuotaIndexLookupReader, variable.TiDBMemQuotaMergeJoin,
-		variable.TiDBSlowLogMasking, variable.TiDBShardAllocateStep, variable.TiDBMemQuotaTopn,
-		variable.TiDBMemQuotaSort, variable.TiDBMergeJoinConcurrency, variable.TiDBOptCPUFactor, variable.TiDBOptDescScanFactor,
-		variable.TiDBOptDiskFactor, variable.TiDBOptJoinReorderThreshold, variable.TiDBOptMemoryFactor, variable.TiDBOptNetworkFactor,
-		variable.TiDBOptScanFactor, variable.TiDBOptTiFlashConcurrencyFactor, variable.TiDBOptimizerSelectivityLevel,
-		variable.TiDBOptSeekFactor, variable.TiDBEnableTopSQL, variable.TiDBTopSQLPrecisionSeconds,
-		variable.TiDBTopSQLMaxStatementCount, variable.TiDBEnableGlobalTemporaryTable, variable.TiDBEnablePipelinedWindowFunction, variable.TiDBOptCartesianBCJ,
-		variable.TiDBEnableLocalTxn, variable.TiDBTopSQLMaxCollect, variable.TiDBTopSQLReportIntervalSeconds,
-		variable.TiDBOptMPPOuterJoinFixedBuildSide, variable.TiDBRestrictedReadOnly, variable.TiDBMPPStoreFailTTL, variable.TiDBHashExchangeWithNewCollation,
-		variable.TiDBEnableOrderedResultMode, variable.TiDBReadStaleness, variable.TiDBEnablePaging,
-		variable.TiDBRegardNULLAsPoint, variable.TiDBEnableHistoricalStats:
+	case variable.ErrorCount, // doesn't work correctly
+		variable.LowerCaseTableNames, // does not support changing well.
+		variable.MaxPreparedStmtCount,
+		variable.TiDBBatchCommit,
+		variable.TiDBBatchDelete,
+		variable.TiDBBatchInsert,
+		variable.TiDBEnableChangeMultiSchema,
+		variable.TiDBEnableExchangePartition,
+		variable.TiDBEnableExtendedStats,
+		variable.TiDBEnableHistoricalStats,
+		variable.TiDBEnableIndexMergeJoin,
+		variable.TiDBEnableLocalTxn,
+		variable.TiDBEnableOrderedResultMode, // no current plans to document
+		variable.TiDBEnablePaging,
+		variable.TiDBEnablePipelinedWindowFunction,
+		variable.TiDBEnablePointGetCache,
+		variable.TiDBEnableStreaming,
+		variable.TiDBEnableTopSQL,
+		variable.TiDBGuaranteeLinearizability,
+		variable.TiDBHashExchangeWithNewCollation,
+		variable.TiDBLastQueryInfo,
+		variable.TiDBLastTxnInfo,
+		variable.TiDBMemQuotaHashJoin,
+		variable.TiDBMemQuotaIndexLookupJoin,
+		variable.TiDBMemQuotaIndexLookupReader,
+		variable.TiDBMemQuotaMergeJoin,
+		variable.TiDBMemQuotaSort,
+		variable.TiDBMemQuotaTopn,
+		variable.TiDBMergeJoinConcurrency,
+		variable.TiDBMPPStoreFailTTL,
+		variable.TiDBOptBCJ,
+		variable.TiDBOptCartesianBCJ,
+		variable.TiDBOptConcurrencyFactor,
+		variable.TiDBOptCopCPUFactor,
+		variable.TiDBOptCPUFactor,
+		variable.TiDBOptDescScanFactor,
+		variable.TiDBOptDiskFactor,
+		variable.TiDBOptimizerSelectivityLevel,
+		variable.TiDBOptJoinReorderThreshold,
+		variable.TiDBOptMemoryFactor,
+		variable.TiDBOptMPPOuterJoinFixedBuildSide,
+		variable.TiDBOptNetworkFactor,
+		variable.TiDBOptScanFactor,
+		variable.TiDBOptSeekFactor,
+		variable.TiDBOptTiFlashConcurrencyFactor,
+		variable.TiDBReadStaleness,
+		variable.TiDBRegardNULLAsPoint,
+		variable.TiDBRestrictedReadOnly,
+		variable.TiDBShardAllocateStep,
+		variable.TiDBStreamAggConcurrency,
+		variable.TiDBTopSQLMaxCollect,
+		variable.TiDBTopSQLMaxStatementCount,
+		variable.TiDBTopSQLPrecisionSeconds,
+		variable.TiDBTopSQLReportIntervalSeconds,
+		variable.TiDBTrackAggregateMemoryUsage,
+		variable.TiDBTxnReadTS,
+		variable.TiDBTxnScope,
+		variable.TxnIsolationOneShot:
 
 		return true
 	}
@@ -148,8 +188,6 @@ func formatScope(sv *variable.SysVar) string {
 		variable.TiDBSlowLogThreshold, variable.TiDBPProfSQLCPU, variable.TiDBQueryLogMaxLen, variable.TiDBRecordPlanInSlowLog,
 		variable.TiDBMemoryUsageAlarmRatio, variable.PluginDir, variable.PluginLoad:
 		return "INSTANCE"
-	case variable.TiDBStoreLimit:
-		return "INSTANCE | GLOBAL"
 	}
 
 	if sv.HasNoneScope() {
@@ -942,7 +980,7 @@ func getExtendedDescription(sv *variable.SysVar) string {
 		return "- This variable enables or disables [Placement Rules in SQL](/placement-rules-in-sql.md)."
 	case variable.RandSeed1, variable.RandSeed2:
 		return "- This variable is used to seed the random value generator used in the `RAND()` SQL function.\n" +
-			"- The behavior of this variable is MySQL compatible.\n"
+			"- The behavior of this variable is MySQL compatible."
 	default:
 		return "- No documentation is currently available for this variable."
 	}
