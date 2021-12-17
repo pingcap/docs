@@ -18,7 +18,7 @@ Put all the SQL files in the same directory, like `/data/my_datasource/`. TiDB L
 
 ## Step 2. Define the target table schema
 
-Because CSV files do not contain schema information, before importing data into TiDB, you need to create the target table schema. You can create the target table schema by either of the following two methods:
+Because SQL files do not contain schema information, before importing data into TiDB, you need to create the target table schema. You can create the target table schema by either of the following two methods:
 
 * **Method 1**: create the target table schema using TiDB Lightning.
 
