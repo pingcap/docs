@@ -14,14 +14,14 @@ TiDB Lightning can read data from CSV files and other delimiter formats, such as
 - [Install TiDB Lightning](/migration-tools.md).
 - [Get the target database privileges required for TiDB Lightning](/tidb-lightning/tidb-lightning-faq.md#what-are-the-privilege-requirements-for-the-target-database).
 
-## Step 1: Prepare the CSV files
+## Step 1. Prepare the CSV files
 
 Put all the CSV files in the same directory. If you need TiDB Lightning to recognize all CSV files, the file name should satisfy the following requirements:
 
 - If a CSV file contains the data for an entire table, name the file `${db_name}.${table_name}.csv`.
 - If the data of one table is separated into multiple CSV files, append a numeric suffix to these CSV files. For example, `${db_name}.${table_name}.003.csv`. The numeric suffixes may not be consecutive, but must be in ascending order. You might need to add extra zeros before the number to ensure all the suffixes are in the same length.
 
-## Step 2: Create the target table schema
+## Step 2. Create the target table schema
 
 Because CSV files do not contain schema information, before importing data into TiDB, you need to create the target table schema. You can create the target table schema by either of the following two methods:
 
@@ -48,7 +48,7 @@ Because CSV files do not contain schema information, before importing data into 
     no-schema = true # If you have already created the target table schema, set the value to true, which means skipping the schema creation.
     ```
 
-## Step 3: Create the configuration file
+## Step 3. Create the configuration file
 
 Create a `tidb-lightning.toml` file with the following content:
 
@@ -61,10 +61,10 @@ level = "info"
 file = "tidb-lightning.log"
 
 [tikv-importer]
-# "local": Default. The local backend is used to import large volumes of data (1 TiB or above). During the import, the target TiDB cluster cannot provide any service.
-# "tidb": The "tidb" backend is used to import small volumes of data (below 1 TiB). During the import, the target TiDB cluster can provide service normally.
+# "local": Default backend. The local backend is used to import large volumes of data (1 TiB or more). During the import, the target TiDB cluster cannot provide any service.
+# "tidb": The "tidb" backend is used to import data less than 1 TiB. During the import, the target TiDB cluster can provide service normally.
 backend = "local"
-# Set the temporary storage directory for the sorted KV files. The directory must be empty, and the storage space must be enough to hold the largest single table from the data source. For better import performance, it is recommended to use a directory different from `data-source-dir` and use flash storage and exclusive I/O for the directory.
+# Set the temporary storage directory for the sorted Key-Value files. The directory must be empty, and the storage space must be enough to hold the largest single table from the data source. For better import performance, it is recommended to use a directory different from `data-source-dir` and use flash storage and exclusive I/O for the directory.
 sorted-kv-dir = "/mnt/ssd/sorted-kv-dir"
 
 [mydumper]
@@ -109,7 +109,7 @@ pd-addr = "${ip}:${port}" # e.g.: 172.16.31.3:2379. When backend = "local", you 
 
 For more information on the configuration file, refer to [TiDB Lightning Configuration](/tidb-lightning/tidb-lightning-configuration.md).
 
-## Step 4: Speed up the import (optional)
+## Step 4. Speed up the import (optional)
 
 When you import data from CSV files with a uniform size of about 256 MiB, TiDB Lightning works in the best performance. However, if you import data from a single large CSV file, TiDB Lightning can only use one thread to process the import by default, which might slow down the import speed.
 
@@ -131,9 +131,9 @@ If your CSV file meets the above requirements, you can speed up the import by en
 strict-format = true
 ```
 
-## Step 5: Import the data
+## Step 5. Import the data
 
-To start the import, run `tidb-lightning`. If you launch the program in the command line, the program might exit because of the `SIGHUP` signal. In this case, it is recommended to run the program with a `nohup` or `screen` tool. For example:
+To start the import, run `tidb-lightning`. If you launch the program in the command line, the program might exit because of the `SIGHUP` signal. In this case, it is recommended to run the program using a `nohup` or `screen` tool. For example:
 
 {{< copyable "shell-regular" >}}
 

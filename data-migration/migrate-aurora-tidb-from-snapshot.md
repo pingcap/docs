@@ -59,7 +59,7 @@ Export the schema using Dumpling:
 tiup dumpling --host ${host} --port 3306 --user root --password ${password} --no-data --output ./schema --filter "mydb.*"
 ```
 
-The options used in the command above are as follows. For more options, refer to [Dumpling overview](/dumpling-overview.md).
+The parameters used in the command above are as follows. For more parameters, refer to [Dumpling overview](/dumpling-overview.md).
 
 |Parameter              |Description    |
 |-                      |-              |
@@ -191,12 +191,12 @@ If you encounter any problem during the import, refer to [TiDB Lightning FAQ](/t
     tiup dmctl --master-addr ${advertise-addr} operate-source create source1.yaml
     ```
 
-    The options used in the command above are described as follows:
+    The parameters used in the command above are described as follows:
 
     |Parameter              |Description    |
     |-                      |-              |
     |`--master-addr`        |The {advertise-addr} of any DM-master in the cluster where `dmctl` is to be connected, e.g.: 172.16.10.71:8261|
-    |`operate-source create`|Load the data source to the DM cluster.|
+    |`operate-source create`|Loads the data source to the DM cluster.|
 
 ### Step 2: Create the migration task
 
@@ -263,12 +263,12 @@ After that, start the migration task by running `tiup dmctl`:
 tiup dmctl --master-addr ${advertise-addr} start-task task.yaml
 ```
 
-The options used in the command above are described as follows:
+The parameters used in the command above are described as follows:
 
 |Parameter              |Description    |
 |-                      |-              |
 |`--master-addr`        |The {advertise-addr} of any DM-master in the cluster where `dmctl` is to be connected, e.g.: 172.16.10.71:8261|
-|`start-task`           |Start the migration task.|
+|`start-task`           |Starts the migration task.|
 
 If the task fails to start, check the prompt message and fix the configuration. After that, you can re-run the command above to start the task.
 
