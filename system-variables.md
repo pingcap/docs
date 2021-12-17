@@ -320,6 +320,24 @@ This variable is an alias for `last_insert_id`.
 - Range: `[0, 65535]`
 - The port that the `tidb-server` is listening on when speaking the MySQL protocol.
 
+### rand_seed1
+
+- Scope: SESSION
+- Default value: `0`
+- Range: `[0, 2147483647]`
+- This variable is used to seed the random value generator used in the `RAND()` SQL function.
+- The behavior of this variable is MySQL compatible.
+
+
+### rand_seed2
+
+- Scope: SESSION
+- Default value: `0`
+- Range: `[0, 2147483647]`
+- This variable is used to seed the random value generator used in the `RAND()` SQL function.
+- The behavior of this variable is MySQL compatible.
+
+
 ### skip_name_resolve <span class="version-mark">New in v5.2.0</span>
 
 - Scope: GLOBAL
@@ -463,7 +481,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 ### tidb_backoff_lock_fast
 
 - Scope: SESSION | GLOBAL
-- Default value: `100`
+- Default value: `10`
 - Range: `[1, 2147483647]`
 - This variable is used to set the `backoff` time when the read request meets a lock.
 
