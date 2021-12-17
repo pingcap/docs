@@ -1,13 +1,7 @@
 ---
-<<<<<<< HEAD
-title: Download
-summary: Download the most officially maintained versions of TiDB enterprise tools.
-aliases: ['/docs/stable/download-ecosystem-tools/','/docs/v4.0/download-ecosystem-tools/','/docs/stable/reference/tools/download/','/docs/v4.0/reference/tools/download/']
-=======
 title: Download TiDB Tools
 summary: Download the most officially maintained versions of TiDB tools.
-aliases: ['/docs/dev/download-ecosystem-tools/','/docs/dev/reference/tools/download/']
->>>>>>> a76bf6b02 (Move TiUP docs to TiDB Tools and add entry for TiDB Operator (#7259))
+aliases: ['/docs/stable/download-ecosystem-tools/','/docs/v4.0/download-ecosystem-tools/','/docs/stable/reference/tools/download/','/docs/v4.0/reference/tools/download/']
 ---
 
 # Download TiDB Tools

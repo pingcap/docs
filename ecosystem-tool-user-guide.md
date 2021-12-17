@@ -1,11 +1,6 @@
 ---
-<<<<<<< HEAD
-title: TiDB Ecosystem Tools Overview
-aliases: ['/docs/stable/ecosystem-tool-user-guide/','/docs/v4.0/ecosystem-tool-user-guide/','/docs/stable/reference/tools/user-guide/','/docs/stable/how-to/migrate/incrementally-from-mysql/','/docs/stable/how-to/migrate/overview/']
-=======
 title: TiDB Tools Overview
-aliases: ['/docs/dev/ecosystem-tool-user-guide/','/docs/dev/reference/tools/user-guide/','/docs/dev/how-to/migrate/from-mysql/','/docs/dev/how-to/migrate/incrementally-from-mysql/','/docs/dev/how-to/migrate/overview/']
->>>>>>> a76bf6b02 (Move TiUP docs to TiDB Tools and add entry for TiDB Operator (#7259))
+aliases: ['/docs/stable/ecosystem-tool-user-guide/','/docs/v4.0/ecosystem-tool-user-guide/','/docs/stable/reference/tools/user-guide/','/docs/stable/how-to/migrate/incrementally-from-mysql/','/docs/stable/how-to/migrate/overview/']
 ---
 
 # TiDB Tools Overview
