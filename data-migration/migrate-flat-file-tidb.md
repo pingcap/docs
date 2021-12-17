@@ -36,7 +36,7 @@ Because CSV files do not contain schema information, before importing data into 
 
         ```toml
         [mydumper]
-        no-schema = false # To create database and table using Lightning, set the value to false
+        no-schema = false # To create a target table schema using Lightning, set the value to false
         ```
 
 * **Method 2**: create the target table schema manually.
