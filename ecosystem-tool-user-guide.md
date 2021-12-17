@@ -1,5 +1,4 @@
 ---
-<<<<<<< HEAD
 title: TiDB Tools Overview
 ---
 
