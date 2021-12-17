@@ -1,13 +1,23 @@
 ---
-title: TiDB Ecosystem Tools Overview
+title: TiDB Tools Overview
 aliases: ['/docs/v3.0/ecosystem-tool-user-guide/','/docs/v3.0/reference/tools/user-guide/','/docs/v3.0/how-to/migrate/from-mysql/','/docs/v3.0/how-to/migrate/incrementally-from-mysql/','/docs/v3.0/how-to/migrate/overview/']
 ---
 
-# TiDB Ecosystem Tools Overview
+# TiDB Tools Overview
 
-This document introduces the functionalities of TiDB ecosystem tools and their relationship.
+This document introduces the functionalities of TiDB tools and their relationship.
 
-## Full data export 
+## Deploy and operate TiDB in Kubernetes
+
+[TiDB Operator](https://github.com/pingcap/tidb-operator) is an automatic operation system for TiDB clusters in Kubernetes. It provides full life-cycle management for TiDB including deployment, upgrades, scaling, backup, fail-over, and configuration changes. With TiDB Operator, TiDB can run seamlessly in the Kubernetes clusters deployed on a public or private cloud.
+
+The following are the basics of TiDB Operator:
+
+- [TiDB Operator Architecture](https://docs.pingcap.com/tidb-in-kubernetes/stable/architecture)
+- [Get Started with TiDB Operator in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/get-started/)
+- Applicable TiDB versions: v2.1 and above
+
+## Full data export
 
 [Dumpling](/export-or-backup-using-dumpling.md) is a tool for the logical full data export from MySQL or TiDB.
 

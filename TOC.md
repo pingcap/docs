@@ -334,6 +334,7 @@
     - [Overview](/ecosystem-tool-user-guide.md)
     - [Use Cases](/ecosystem-tool-user-case.md)
     - [Download](/download-ecosystem-tools.md)
+    - [TiDB Operator](/tidb-operator-overview.md)
     - [Table Filter](/table-filter.md)
     - [Mydumper](/mydumper-overview.md)
     - [Syncer](/syncer-overview.md)
