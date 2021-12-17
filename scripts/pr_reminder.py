@@ -4,8 +4,8 @@ from lxml import etree
 from datetime import datetime
 from string import Template
 
-docs_cn_url = 'https://github.com/pingcap/docs-cn/pulls?q='
-docs_url = 'https://github.com/pingcap/docs/pulls?q='
+docs_cn_url = 'https://github.com/pingcap/docs-cn/pulls?q=is%3Apr'
+docs_url = 'https://github.com/pingcap/docs/pulls?q=is%3Apr'
 open_url = '+is%3Aopen+is%3Apr'
 close_url = '+is%3Aclosed+label%3Atranslation%2Fdoing'
 sig_sql_infra = '+label%3Asig%2Fsql-infra'
@@ -239,13 +239,232 @@ if __name__ == "__main__":
                         [
                             {
                                 "tag": "text",
-                                "text": "    - docs-cn 仓库中有 ${v54_zh_open_sqlinfra_planner} PR 未合并，有 ${v54_zh_close_sqlinfra_planner} PR 待翻译"
+                                "text": "    - docs-cn 仓库中有 ${v54_zh_open_sqlinfra_planner} PR 未合并
                             },
                             {
                                 "tag": "a",
                                 "text": "未合并",
-                                "href": "${compat_open_url_zh}"
+                                "href": "${v54_zh_open_sqlinfra_planner_url}"
                             },
+                            {
+                                "tag": "text",
+                                "text": "，有 ${v54_zh_close_sqlinfra_planner} PR 待翻译
+                            },
+                            {
+                                "tag": "a",
+                                "text": "待翻译",
+                                "href": "${v54_zh_close_sqlinfra_planner_url}"
+                            },
+                        ],
+                        [
+                            {
+                                "tag": "text",
+                                "text": "    - docs 仓库中有 ${v54_en_open_sqlinfra_planner} PR 未合并
+                            },
+                            {
+                                "tag": "a",
+                                "text": "未合并",
+                                "href": "${v54_en_open_sqlinfra_planner_url}"
+                            },
+                            {
+                                "tag": "text",
+                                "text": "，有 ${v54_en_close_sqlinfra_planner} PR 待翻译
+                            },
+                            {
+                                "tag": "a",
+                                "text": "待翻译",
+                                "href": "${v54_en_close_sqlinfra_planner_url}"
+                            },
+                        ],
+                        [
+                            {
+                                "tag": "text",
+                                "text": "- sig/engine 和 sig/scheduling"
+                            }
+                        ],
+                        [
+                            {
+                                "tag": "text",
+                                "text": "    - docs-cn 仓库中有 ${v54_zh_open_engine_scheduling} PR 未合并
+                            },
+                            {
+                                "tag": "a",
+                                "text": "未合并",
+                                "href": "${v54_zh_open_engine_scheduling_url}"
+                            },
+                            {
+                                "tag": "text",
+                                "text": "，有 ${v54_zh_close_engine_scheduling} PR 待翻译
+                            },
+                            {
+                                "tag": "a",
+                                "text": "待翻译",
+                                "href": "${v54_zh_close_engine_scheduling_url}"
+                            },
+                        ],
+                        [
+                            {
+                                "tag": "text",
+                                "text": "    - docs 仓库中有 ${v54_en_open_engine_scheduling} PR 未合并
+                            },
+                            {
+                                "tag": "a",
+                                "text": "未合并",
+                                "href": "${v54_en_open_engine_scheduling_url}"
+                            },
+                            {
+                                "tag": "text",
+                                "text": "，有 ${v54_en_close_engine_scheduling} PR 待翻译
+                            },
+                            {
+                                "tag": "a",
+                                "text": "待翻译",
+                                "href": "${v54_en_close_engine_scheduling_url}"
+                            },
+                        ],
+                        [
+                            {
+                                "tag": "text",
+                                "text": "- sig/migrate"
+                            }
+                        ],
+                        [
+                            {
+                                "tag": "text",
+                                "text": "    - docs-cn 仓库中有 ${v54_zh_open_migrate} PR 未合并
+                            },
+                            {
+                                "tag": "a",
+                                "text": "未合并",
+                                "href": "${v54_zh_open_migrate_url}"
+                            },
+                            {
+                                "tag": "text",
+                                "text": "，有 ${v54_zh_close_migrate} PR 待翻译
+                            },
+                            {
+                                "tag": "a",
+                                "text": "待翻译",
+                                "href": "${v54_zh_close_migrate_url}"
+                            },
+                        ],
+                        [
+                            {
+                                "tag": "text",
+                                "text": "    - docs 仓库中有 ${v54_en_open_migrate} PR 未合并
+                            },
+                            {
+                                "tag": "a",
+                                "text": "未合并",
+                                "href": "${v54_en_open_migrate_url}"
+                            },
+                            {
+                                "tag": "text",
+                                "text": "，有 ${v54_en_close_migrate} PR 待翻译
+                            },
+                            {
+                                "tag": "a",
+                                "text": "待翻译",
+                                "href": "${v54_en_close_migrate_url}"
+                            },
+                        ],
+                        [
+                            {
+                                "tag": "text",
+                                "text": "sig/bigdata、sig/tiup 和 sig/diagnosis"
+                            }
+                        ],
+                        [
+                            {
+                                "tag": "text",
+                                "text": "    - docs-cn 仓库中有 ${v54_zh_open_bigdata_tiup_diagnosis} PR 未合并
+                            },
+                            {
+                                "tag": "a",
+                                "text": "未合并",
+                                "href": "${v54_zh_open_bigdata_tiup_diagnosis_url}"
+                            },
+                            {
+                                "tag": "text",
+                                "text": "，有 ${v54_zh_close_bigdata_tiup_diagnosis} PR 待翻译
+                            },
+                            {
+                                "tag": "a",
+                                "text": "未合并",
+                                "href": "${v54_zh_close_bigdata_tiup_diagnosis_url}"
+                            },
+                        ],
+                        [
+                            {
+                                "tag": "text",
+                                "text": "    - docs 仓库中有 ${v54_en_open_bigdata_tiup_diagnosis} PR 未合并
+                            },
+                            {
+                                "tag": "a",
+                                "text": "未合并",
+                                "href": "${v54_en_open_bigdata_tiup_diagnosis_url}"
+                            },
+                            {
+                                "tag": "text",
+                                "text": "，有 ${v54_en_close_bigdata_tiup_diagnosis} PR 待翻译
+                            },
+                            {
+                                "tag": "a",
+                                "text": "未合并",
+                                "href": "${v54_en_close_bigdata_tiup_diagnosis_url}"
+                            },
+                        ],
+                        [
+                            {
+                                "tag": "text",
+                                "text": "- sig/transaction 和 area/security"
+                            }
+                        ],
+                        [
+                            {
+                                "tag": "text",
+                                "text": "    - docs-cn 仓库中有 ${v54_zh_open_transaction_security} PR 未合并
+                            },
+                            {
+                                "tag": "a",
+                                "text": "未合并",
+                                "href": "${v54_zh_open_transaction_security_url}"
+                            },
+                            {
+                                "tag": "text",
+                                "text": "，有 ${v54_zh_close_transaction_security} PR 待翻译
+                            },
+                            {
+                                "tag": "a",
+                                "text": "未合并",
+                                "href": "${v54_zh_close_transaction_security_url}"
+                            },
+                        ],
+                        [
+                            {
+                                "tag": "text",
+                                "text": "    - docs 仓库中有 ${v54_en_open_transaction_security} PR 未合并
+                            },
+                            {
+                                "tag": "a",
+                                "text": "未合并",
+                                "href": "${v54_en_open_transaction_security_url}"
+                            },
+                            {
+                                "tag": "text",
+                                "text": "，有 ${v54_en_close_transaction_security} PR 待翻译
+                            },
+                            {
+                                "tag": "a",
+                                "text": "未合并",
+                                "href": "${v54_en_close_transaction_security_url}"
+                            },
+                        ],
+                        [
+                            {
+                                "tag": "text",
+                                "text": "*************************************************"
+                            }
                         ],
                         [
                             {
