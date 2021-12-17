@@ -47,7 +47,7 @@ The target TiKV cluster must have enough disk space to store the imported data. 
 - Index might take extra space.
 - RocksDB has a space amplification effect.
 
-## Step 1: Export all data from MySQL
+## Step 1. Export all data from MySQL
 
 1. Export all data from MySQL by running the following command:
 
@@ -59,9 +59,9 @@ The target TiKV cluster must have enough disk space to store the imported data. 
 
     Dumpling exports data in SQL files by default. You can specify the file format by adding the `--filetype` option.
 
-    The options used above are as follows. For more Dumpling options, refer to [Dumpling Overview](/dumpling-overview.md).
+    The parameters used above are as follows. For more Dumpling parameters, refer to [Dumpling Overview](/dumpling-overview.md).
 
-    |Options                |Description|
+    |parameters             |Description|
     |-                      |-|
     |`-u` or `--user`       |MySQL user|
     |`-p` or `--password`   |MySQL user password|
@@ -85,7 +85,7 @@ The target TiKV cluster must have enough disk space to store the imported data. 
     GTID:
     ```
 
-## Step 2: Import full data to TiDB
+## Step 2. Import full data to TiDB
 
 1. Create the `tidb-lightning.toml` configuration file:
 
@@ -98,8 +98,8 @@ The target TiKV cluster must have enough disk space to store the imported data. 
     file = "tidb-lightning.log"
 
     [tikv-importer]
-    # "local": Default. The local backend is used to import large volumes of data (1 TiB or above). During the import, the target TiDB cluster cannot provide any service.
-    # "tidb": The "tidb" backend is used to import small volumes of data (below 1 TiB). During the import, the target TiDB cluster can provide service normally. For more information on the backends, refer to https://docs.pingcap.com/tidb/stable/tidb-lightning-backends.
+    # "local": Default backend. The local backend is used to import large volumes of data (1 TiB or more). During the import, the target TiDB cluster cannot provide any service.
+    # "tidb": The "tidb" backend is used to import data less than 1 TiB. During the import, the target TiDB cluster can provide service normally. For more information on the backends, refer to https://docs.pingcap.com/tidb/stable/tidb-lightning-backends.
     backend = "local"
     # For better import performance, it is recommended to use a directory different from `data-source-dir` and use flash storage and exclusive I/O for the directory.
     sorted-kv-dir = "${sorted-kv-dir}"
@@ -108,7 +108,7 @@ The target TiKV cluster must have enough disk space to store the imported data. 
     # The data source directory. The same directory where Dumpling exports data in Step 1.
     data-source-dir = "${data-path}"
 
-    # Configure the wildcard rule. The default rule filters out all tables in these system databases: mysql, sys, INFORMATION_SCHEMA, PERFORMANCE_SCHEMA, METRICS_SCHEMA, INSPECTION_SCHEMA.
+    # Configures the wildcard rule. The default rule filters out all tables in these system databases: mysql, sys, INFORMATION_SCHEMA, PERFORMANCE_SCHEMA, METRICS_SCHEMA, INSPECTION_SCHEMA.
     # If you do not configure this item, TiDB Lightning reports a `cannot find schema` exception when it imports system tables.
     filter = ['*.*', '!mysql.*', '!sys.*', '!INFORMATION_SCHEMA.*', '!PERFORMANCE_SCHEMA.*', '!METRICS_SCHEMA.*', '!INSPECTION_SCHEMA.*']
 
@@ -124,7 +124,7 @@ The target TiKV cluster must have enough disk space to store the imported data. 
 
     For more information on TiDB Lightning configuration, refer to [TiDB Lightning Configuration](/tidb-lightning/tidb-lightning-configuration.md).
 
-2. Start the import by running `tidb-lightning`. If you launch the program directly in the command line, the program might exit because of the `SIGHUP` signal. In this case, it is recommended to run the program with a `nohup` or `screen` tool. For example:
+2. Start the import by running `tidb-lightning`. If you launch the program directly in the command line, the program might exit because of the `SIGHUP` signal. In this case, it is recommended to run the program using a `nohup` or `screen` tool. For example:
 
     {{< copyable "shell-regular" >}}
 
@@ -136,7 +136,7 @@ The target TiKV cluster must have enough disk space to store the imported data. 
 
 If the import fails, refer to [TiDB Lightning FAQ](/tidb-lightning/tidb-lightning-faq.md) for troubleshooting.
 
-## Step 3: Replicate incremental data to TiDB
+## Step 3. Replicate incremental data to TiDB
 
 ### Add the data source
 
@@ -148,13 +148,13 @@ If the import fails, refer to [TiDB Lightning FAQ](/tidb-lightning/tidb-lightnin
     # Configuration.
     source-id: "mysql-01" # Must be unique.
 
-    # Configures whether DM-worker uses the global transaction identifier (GTID) to pull binlogs. To enable this mode, the upstream MySQL must also enable GTID. If the upstream MySQL has automatic source-replica switching, then GTID mode is required.
+    # Configures whether DM-worker uses the global transaction identifier (GTID) to pull binlogs. To enable this mode, the upstream MySQL must also enable GTID. If the upstream MySQL has automatic source-replica switching, GTID mode is required.
     enable-gtid: false
 
     from:
       host: "${host}"           # e.g.: 172.16.10.81
       user: "root"
-      password: "${password}"   # Supports but not recommended to use plaintext password. It is recommended to use `dmctl encrypt` to encrypt the plaintext password before using it.
+      password: "${password}"   # Supported but not recommended to use plaintext password. It is recommended to use `dmctl encrypt` to encrypt the plaintext password before using it.
       port: 3306
     ```
 
@@ -166,12 +166,12 @@ If the import fails, refer to [TiDB Lightning FAQ](/tidb-lightning/tidb-lightnin
     tiup dmctl --master-addr ${advertise-addr} operate-source create source1.yaml
     ```
 
-    The options used in the command above are described as follows:
+    The parameters used in the command above are described as follows:
 
     |Parameter              |Description    |
     |-                      |-              |
-    |`--master-addr`        |The {advertise-addr} of any DM-master in the cluster that `dmctl` is connecting to, e.g.: 172.16.10.71:8261|
-    |`operate-source create`|Load the data source to the DM cluster.|
+    |`--master-addr`        |The {advertise-addr} of any DM-master in the cluster where `dmctl` is to be connected, e.g.: 172.16.10.71:8261|
+    |`operate-source create`|Loads the data source to the DM cluster.|
 
 ### Add a replication task
 
@@ -181,7 +181,7 @@ If the import fails, refer to [TiDB Lightning FAQ](/tidb-lightning/tidb-lightnin
 
     ```yaml
     name: task-test                      # Task name. Must be globally unique.
-    task-mode: incremental               # Task mode. The "incremental" mode nly performs incremental data replication.
+    task-mode: incremental               # Task mode. The "incremental" mode only performs incremental data replication.
 
     # Configures the target TiDB database.
     target-database:                     # The target database instance.
@@ -200,7 +200,7 @@ If the import fails, refer to [TiDB Lightning FAQ](/tidb-lightning/tidb-lightnin
       - source-id: "mysql-01"            # Data source ID，i.e., source-id in source1.yaml
         block-allow-list: "bw-rule-1"    # References the block-allow-list configuration above.
         # syncer-config-name: "global"    # References the syncers incremental data configuration below.
-        meta:                            # When task-mode is "incremental" and the downstream database does not have a checkpoint, the binlog position is used as the starting point. If the downstream database has a checkpoint, use the checkpoint as the starting point.
+        meta:                            # When task-mode is "incremental" and the downstream database does not have a checkpoint, DM uses the binlog position as the starting point. If the downstream database has a checkpoint, DM uses the checkpoint as the starting point.
           binlog-name: "mysql-bin.000004"  # The binlog position recorded in Step 1. When the upstream database has source-replica switching, GTID mode is required.
           binlog-pos: 109227
           # binlog-gtid: "09bec856-ba95-11ea-850a-58f2b4af5188:1-9"
@@ -209,7 +209,7 @@ If the import fails, refer to [TiDB Lightning FAQ](/tidb-lightning/tidb-lightnin
     # This scenario is common in the following case: the full migration data does not belong to the data source's consistency snapshot, and after that, DM starts to replicate incremental data from a position earlier than the full migration.
     # syncers:            # The running configurations of the sync processing unit.
     #   global:           # Configuration name.
-    #     safe-mode: true # If this field is set to true, DM changes INSERT to REPLACE, and changes UPDATE to DELETE and REPLACE. This is to ensure that when the table schema contains primary key or unique index, DML statements can be imported repeatedly. In the first minute of starting or resuming an incremental replication task, DM automatically enables the safe mode.
+    #     safe-mode: true # If this field is set to true, DM changes INSERT of the data source to REPLACE for the target database, and changes UPDATE of the data source to DELETE and REPLACE for the target database. This is to ensure that when the table schema contains a primary key or unique index, DML statements can be imported repeatedly. In the first minute of starting or resuming an incremental replication task, DM automatically enables the safe mode.
     ```
 
     The YAML above is the minimum configuration required for the migration task. For more configuration items, refer to [DM Advanced Task Configuration File](https://docs.pingcap.com/tidb-data-migration/stable/task-configuration-file-full).
@@ -230,12 +230,12 @@ If the import fails, refer to [TiDB Lightning FAQ](/tidb-lightning/tidb-lightnin
     tiup dmctl --master-addr ${advertise-addr} start-task task.yaml
     ```
 
-    The options used in the command above are described as follows:
+    The parameters used in the command above are described as follows:
 
     |Parameter              |Description    |
     |-                      |-              |
-    |`--master-addr`        |The {advertise-addr} of any DM-master in the cluster that `dmctl` is connecting to, e.g.: 172.16.10.71:8261|
-    |`start-task`           |Start the migration task.|
+    |`--master-addr`        |The {advertise-addr} of any DM-master in the cluster where `dmctl` is to be connected, e.g.: 172.16.10.71:8261|
+    |`start-task`           |Starts the migration task.|
 
     If the task fails to start, check the prompt message and fix the configuration. After that, you can re-run the command above to start the task.
 
@@ -259,7 +259,7 @@ To view the history status of the migration task and other internal metrics, tak
 
 If you have deployed Prometheus, Alertmanager, and Grafana when you deployed DM using TiUP, you can access Grafana using the IP address and port specified during the deployment. You can then select DM dashboard to view DM-related monitoring metrics.
 
-When DM is running, DM-worker, DM-master, and dmctl output the related information in logs. The log directory of these components are as follows:
+When DM is running, DM-worker, DM-master, and dmctl print the related information in logs. The log directory of these components are as follows:
 
 - DM-master: specified by the DM-master process parameter `--log-file`. If you deploy DM using TiUP, the log directory is `/dm-deploy/dm-master-8261/log/` by default.
 - DM-worker: specified by the DM-worker process parameter `--log-file`. If you deploy DM using TiUP, the log directory is `/dm-deploy/dm-worker-8262/log/` by default.
