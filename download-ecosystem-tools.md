@@ -10,7 +10,7 @@ This document collects the available downloads for most officially maintained ve
 
 ## TiUP
 
-You can install TiUP with a single command in both Darwin and Linux operating systems. For more information, see [Install TiUP](/tiup-overview.md#install-tiup).
+You can install TiUP with a single command in both Darwin and Linux operating systems. For more information, see [Install TiUP](/tiup/tiup-overview.md#install-tiup).
 
 ## TiDB Operator
 
