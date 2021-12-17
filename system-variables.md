@@ -1558,7 +1558,7 @@ SET tidb_slow_log_threshold = 200;
 
 ### tidb_store_limit <span class="version-mark">New in v3.0.4 and v4.0</span>
 
-- Scope: INSTANCE | GLOBAL
+- Scope: GLOBAL
 - Default value: `0`
 - Range: `[0, 9223372036854775807]`
 - This variable is used to limit the maximum number of requests TiDB can send to TiKV at the same time. 0 means no limit.
