@@ -78,7 +78,7 @@ func skipSv(sv *variable.SysVar) bool {
 		variable.TiDBMemQuotaHashJoin, variable.TiDBStreamAggConcurrency, variable.TiDBTrackAggregateMemoryUsage, variable.TiDBOptBCJ,
 		variable.TiDBOptConcurrencyFactor, variable.TiDBOptCopCPUFactor, variable.TiDBEnableIndexMergeJoin,
 		variable.TiDBMemQuotaIndexLookupJoin, variable.TiDBMemQuotaIndexLookupReader, variable.TiDBMemQuotaMergeJoin,
-		variable.TiDBEnableAlterPlacement, variable.TiDBSlowLogMasking, variable.TiDBShardAllocateStep, variable.TiDBMemQuotaTopn,
+		variable.TiDBSlowLogMasking, variable.TiDBShardAllocateStep, variable.TiDBMemQuotaTopn,
 		variable.TiDBMemQuotaSort, variable.TiDBMergeJoinConcurrency, variable.TiDBOptCPUFactor, variable.TiDBOptDescScanFactor,
 		variable.TiDBOptDiskFactor, variable.TiDBOptJoinReorderThreshold, variable.TiDBOptMemoryFactor, variable.TiDBOptNetworkFactor,
 		variable.TiDBOptScanFactor, variable.TiDBOptTiFlashConcurrencyFactor, variable.TiDBOptimizerSelectivityLevel,
@@ -86,7 +86,8 @@ func skipSv(sv *variable.SysVar) bool {
 		variable.TiDBTopSQLMaxStatementCount, variable.TiDBEnableGlobalTemporaryTable, variable.TiDBEnablePipelinedWindowFunction, variable.TiDBOptCartesianBCJ,
 		variable.TiDBEnableLocalTxn, variable.TiDBTopSQLMaxCollect, variable.TiDBTopSQLReportIntervalSeconds,
 		variable.TiDBOptMPPOuterJoinFixedBuildSide, variable.TiDBRestrictedReadOnly, variable.TiDBMPPStoreFailTTL, variable.TiDBHashExchangeWithNewCollation,
-		variable.TiDBEnableOrderedResultMode, variable.TiDBReadStaleness:
+		variable.TiDBEnableOrderedResultMode, variable.TiDBReadStaleness, variable.TiDBEnablePaging,
+		variable.TiDBRegardNULLAsPoint, variable.TiDBEnableHistoricalStats:
 
 		return true
 	}
@@ -100,15 +101,17 @@ func printWarning(sv *variable.SysVar) string {
 		variable.TiDBIndexLookupConcurrency, variable.TiDBIndexLookupJoinConcurrency, variable.TiDBWindowConcurrency, variable.TiDBProjectionConcurrency:
 		return "> **Warning:**\n>\n> Since v5.0, this variable is deprecated. Instead, use [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v50) for setting.\n\n"
 	case variable.TiDBEnableListTablePartition:
-		return "> **Warning:**\n>\n> Currently, List partition and List COLUMNS partition are experimental features. It is not recommended that you use it in the production environment.\n\n"
+		return "> **Warning:**\n>\n> Currently, List partition and List COLUMNS partition are experimental features. It is not recommended that you use it in production environments.\n\n"
 	case variable.TiDBGCScanLockMode:
-		return "> **Warning:**\n>\n> Currently, Green GC is an experimental feature. It is not recommended that you use it in the production environment.\n\n"
+		return "> **Warning:**\n>\n> Currently, Green GC is an experimental feature. It is not recommended that you use it in production environments.\n\n"
 	case variable.TiDBPartitionPruneMode:
-		return "> **Warning:**\n\n> Currently, the dynamic pruning mode for partitioned tables is an experimental feature. It is not recommended that you use it in the production environment.\n\n"
+		return "> **Warning:**\n\n> Currently, the dynamic pruning mode for partitioned tables is an experimental feature. It is not recommended that you use it in production environments.\n\n"
 	case variable.TiDBEnableCascadesPlanner:
-		return "> **Warning:**\n>\n> Currently, cascades planner is an experimental feature. It is not recommended that you use it in the production environment.\n\n"
+		return "> **Warning:**\n>\n> Currently, cascades planner is an experimental feature. It is not recommended that you use it in production environments.\n\n"
 	case variable.TiDBEnableFastAnalyze:
-		return "> **Warning:**\n>\n> Currently, `Fast Analyze` is an experimental feature. It is not recommended that you use it in the production environment.\n\n"
+		return "> **Warning:**\n>\n> Currently, `Fast Analyze` is an experimental feature. It is not recommended that you use it in production environments.\n\n"
+	case variable.TiDBEnableAlterPlacement:
+		return "> **Warning:**\n>\n> Currently, Placement Rules in SQL is an experimental feature. It is not recommended that you use it in production environments.\n\n"
 
 	}
 	return ""
@@ -289,7 +292,7 @@ func getExtendedDescription(sv *variable.SysVar) string {
 			"    * `1`: Aggregation and join requests are sent in batches\n" +
 			"    * `2`: All coprocessor requests are sent in batches"
 	case "tidb_allow_fallback_to_tikv":
-		return `- This variable is used to specify a list of storage engines that might fall back to TiKV. If the execution of a SQL statement fails due to a failure of the specified storage engine in the list, TiDB retries executing this SQL statement with TiKV. This variable can be set to "" or "tiflash". When this variable is set to "tiflash", if the execution of a SQL statement fails due to a failure of TiFlash, TiDB retries executing this SQL statement with TiKV.`
+		return `- This variable is used to specify a list of storage engines that might fall back to TiKV. If the execution of a SQL statement fails due to a failure of the specified storage engine in the list, TiDB retries executing this SQL statement with TiKV. This variable can be set to "" or "tiflash". When this variable is set to "tiflash", if TiFlash returns a timeout error (error code: ErrTiFlashServerTimeout), TiDB retries executing this SQL statement with TiKV.`
 	case "tidb_allow_mpp":
 		return "- Controls whether to use the MPP mode of TiFlash to execute queries. The value options are as follows:\n" +
 			"    - `0` or `OFF`, which means that the MPP mode will not be used.\n" +
@@ -444,7 +447,7 @@ func getExtendedDescription(sv *variable.SysVar) string {
 		return "- This variable controls whether to enable concurrency for the `Apply` operator. The number of concurrencies is controlled by the `tidb_executor_concurrency` variable. The `Apply` operator processes correlated subqueries and has no concurrency by default, so the execution speed is slow. Setting this variable value to `1` can increase concurrency and speed up execution. Currently, concurrency for `Apply` is disabled by default."
 	case variable.TiDBEnableRateLimitAction:
 		return "- This variable controls whether to enable the dynamic memory control feature for the operator that reads data. By default, this operator enables the maximum number of threads that [`tidb_disql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency) allows to read data. When the memory usage of a single SQL statement exceeds [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) each time, the operator that reads data stops one thread.\n" +
-			"- When the operator that reads data has only one thread left and the memory usage of a single SQL statement continues to exceed [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query), this SQL statement triggers other memory control behaviors, such as [spilling data to disk](/tidb-configuration-file.md#spilled-file-encryption-method)."
+			"- When the operator that reads data has only one thread left and the memory usage of a single SQL statement continues to exceed [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query), this SQL statement triggers other memory control behaviors, such as [spilling data to disk](/tidb-configuration-file.md#oom-use-tmp-storage)."
 	case variable.TiDBEnableSlowLog:
 		return "- This variable is used to control whether to enable the slow log feature."
 	case variable.TiDBEnableStmtSummary:
@@ -558,7 +561,7 @@ func getExtendedDescription(sv *variable.SysVar) string {
 			"    - `user`: The current session user.\n" +
 			"    - `schemaVersion`: The current schema version.\n" +
 			"    - `txnStartTS`: The timestamp at which the current transaction starts.\n" +
-			"    - `forUpdateTS`: In the pessimistic transactional model, `forUpdateTS` is the current timestamp of the SQL statement. When a write conflict occurs in the pessimistic transaction, TiDB retries the SQL statement currently being executed and updates this timestamp. You can configure the number of retries via [`max-retry-count`](/tidb-configuration-file.md#max-retry-count). In the optimistic transactional model, `forUpdateTS` is equivalent to `txnStartTS`.\n" +
+			"    - `forUpdateTS`: In the pessimistic transactional mode, `forUpdateTS` is the current timestamp of the SQL statement. When a write conflict occurs in the pessimistic transaction, TiDB retries the SQL statement currently being executed and updates this timestamp. You can configure the number of retries via [`max-retry-count`](/tidb-configuration-file.md#max-retry-count). In the optimistic transactional model, `forUpdateTS` is equivalent to `txnStartTS`.\n" +
 			"    - `isReadConsistency`: Indicates whether the current transactional isolation level is Read Committed (RC).\n" +
 			"    - `current_db`: The name of the current database.\n" +
 			"    - `txn_mode`: The transactional mode. Value options are `OPTIMISTIC` and `PESSIMISTIC`.\n" +
@@ -655,19 +658,19 @@ func getExtendedDescription(sv *variable.SysVar) string {
 			"- For example, after you enable this optimization rule, the subquery is converted as follows:\n" +
 			"\n" +
 			"    ```sql\n" +
-			"    select * from t where t.a in (select aa from t1)\n" +
+			"    select * from t where t.a in (select aa from t1);\n" +
 			"    ```\n" +
 			"\n" +
 			"    The subquery is converted to join as follows:\n" +
 			"\n" +
 			"    ```sql\n" +
-			"    select * from t, (select aa from t1 group by aa) tmp_t where t.a = tmp_t.aa\n" +
+			"    select t.* from t, (select aa from t1 group by aa) tmp_t where t.a = tmp_t.aa;\n" +
 			"    ```\n" +
 			"\n" +
 			"    If `t1` is limited to be `unique` and `not null` in the `aa` column. You can use the following statement, without aggregation.\n" +
 			"\n" +
 			"    ```sql\n" +
-			"    select * from t, t1 where t.a=t1.a\n" +
+			"    select t.* from t, t1 where t.a=t1.aa;\n" +
 			"    ```"
 	case variable.TiDBOptPreferRangeScan:
 		return "- After you set the value of this variable to `ON`, the optimizer always prefers range scans over full table scans.\n" +
@@ -907,7 +910,7 @@ func getExtendedDescription(sv *variable.SysVar) string {
 		return "- This variable is used to enable the TSO Follower Proxy feature. When the value is `OFF`, TiDB only gets TSO from the PD leader. After this feature is enabled, TiDB gets TSO by evenly sending requests to all PD nodes and forwarding TSO requests through PD followers. This helps reduce the CPU pressure of PD leader.\n" +
 			"- Scenarios for enabling TSO Follower Proxy:\n" +
 			"    * Due to the high pressure of TSO requests, the CPU of the PD leader reaches a bottleneck, which causes high latency of TSO RPC requests.\n" +
-			"    * The TiDB cluster has many TiDB instances, and increasing the value of [`tidb_tso_client_batch_max_wait_time`](#tidb_tso_client_batch_max_wait_time-new-in-v53) cannot alleviate the high latency issue of TSO RPC requests.\n" +
+			"    * The TiDB cluster has many TiDB instances, and increasing the value of [`tidb_tso_client_batch_max_wait_time`](#tidb_tso_client_batch_max_wait_time-new-in-v530) cannot alleviate the high latency issue of TSO RPC requests.\n" +
 			"\n" +
 			"> **Note:**\n" +
 			">\n" +
@@ -935,6 +938,11 @@ func getExtendedDescription(sv *variable.SysVar) string {
 			"- If the data on a table is frequently modified without executing `ANALYZE` on this table in time, to keep the execution plan stable, you can set the variable value to `OFF`."
 	case variable.TiDBTmpTableMaxSize:
 		return "- This variable is used to set the maximum size of a single [temporary table](/temporary-tables.md). Any temporary table with a size larger than this variable value causes error."
+	case variable.TiDBEnableAlterPlacement:
+		return "- This variable enables or disables [Placement Rules in SQL](/placement-rules-in-sql.md)."
+	case variable.RandSeed1, variable.RandSeed2:
+		return "- This variable is used to seed the random value generator used in the `RAND()` SQL function.\n" +
+			"- The behavior of this variable is MySQL compatible.\n"
 	default:
 		return "- No documentation is currently available for this variable."
 	}

@@ -294,10 +294,10 @@ This variable is an alias for `last_insert_id`.
 >
 > Unlike in MySQL, the `max_execution_time` system variable currently works on all kinds of statements in TiDB, not only restricted to the `SELECT` statement. The precision of the timeout value is roughly 100ms. This means the statement might not be terminated in accurate milliseconds as you specify.
 
-### placement_checks
+### placement_checks <span class="version-mark">New in v5.3.0</span>
 
 - Scope: SESSION | GLOBAL
-- Default value: ON
+- Default value: `ON`
 - This variable controls whether DDL statements validate [Placement Rules in SQL](/placement-rules-in-sql.md).
 - It is intended to be used by logical dump/restore tools to ensure that tables can always be created even if placement rules are violated. This is similar to how mysqldump writes `SET FOREIGN_KEY_CHECKS=0;` to the start of every dump file.
 
@@ -406,11 +406,12 @@ This variable is an alias for `last_insert_id`.
 
 - Scope: SESSION | GLOBAL
 - Default value: ""
-- This variable is used to specify a list of storage engines that might fall back to TiKV. If the execution of a SQL statement fails due to a failure of the specified storage engine in the list, TiDB retries executing this SQL statement with TiKV. This variable can be set to "" or "tiflash". When this variable is set to "tiflash", if the execution of a SQL statement fails due to a failure of TiFlash, TiDB retries executing this SQL statement with TiKV.
+- This variable is used to specify a list of storage engines that might fall back to TiKV. If the execution of a SQL statement fails due to a failure of the specified storage engine in the list, TiDB retries executing this SQL statement with TiKV. This variable can be set to "" or "tiflash". When this variable is set to "tiflash", if TiFlash returns a timeout error (error code: ErrTiFlashServerTimeout), TiDB retries executing this SQL statement with TiKV.
 
 ### tidb_allow_function_for_expression_index <span class="version-mark">New in v5.2.0</span>
 
 - Scope: NONE
+- Default value: `lower, md5, reverse, upper, vitess_hash`
 - This variable is used to show the functions that are allowed to be used for creating expression indexes.
 
 ### tidb_allow_mpp <span class="version-mark">New in v5.0</span>
@@ -642,6 +643,16 @@ Constraint checking is always performed in place for pessimistic transactions (d
 > - If you have enabled TiDB Binlog, enabling this variable cannot improve the performance. To improve the performance, it is recommended to use [TiCDC](/ticdc/ticdc-overview.md) instead.
 > - Enabling this parameter only means that one-phase commit becomes an optional mode of transaction commit. In fact, the most suitable mode of transaction commit is determined by TiDB.
 
+### tidb_enable_alter_placement
+
+> **Warning:**
+>
+> Currently, Placement Rules in SQL is an experimental feature. It is not recommended that you use it in production environments.
+
+- Scope: GLOBAL
+- Default value: `OFF`
+- This variable enables or disables [Placement Rules in SQL](/placement-rules-in-sql.md).
+
 ### tidb_enable_amend_pessimistic_txn <span class="version-mark">New in v4.0.7</span>
 
 - Scope: SESSION | GLOBAL
@@ -678,7 +689,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 > **Warning:**
 >
-> Currently, cascades planner is an experimental feature. It is not recommended that you use it in the production environment.
+> Currently, cascades planner is an experimental feature. It is not recommended that you use it in production environments.
 
 - Scope: SESSION | GLOBAL
 - Default value: `OFF`
@@ -721,7 +732,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 > **Warning:**
 >
-> Currently, `Fast Analyze` is an experimental feature. It is not recommended that you use it in the production environment.
+> Currently, `Fast Analyze` is an experimental feature. It is not recommended that you use it in production environments.
 
 - Scope: SESSION | GLOBAL
 - Default value: `OFF`
@@ -738,7 +749,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 > **Warning:**
 >
-> Currently, List partition and List COLUMNS partition are experimental features. It is not recommended that you use it in the production environment.
+> Currently, List partition and List COLUMNS partition are experimental features. It is not recommended that you use it in production environments.
 
 - Scope: SESSION | GLOBAL
 - Default value: `OFF`
@@ -781,7 +792,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Scope: SESSION | GLOBAL
 - Default value: `ON`
 - This variable controls whether to enable the dynamic memory control feature for the operator that reads data. By default, this operator enables the maximum number of threads that [`tidb_disql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency) allows to read data. When the memory usage of a single SQL statement exceeds [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) each time, the operator that reads data stops one thread.
-- When the operator that reads data has only one thread left and the memory usage of a single SQL statement continues to exceed [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query), this SQL statement triggers other memory control behaviors, such as [spilling data to disk](/tidb-configuration-file.md#spilled-file-encryption-method).
+- When the operator that reads data has only one thread left and the memory usage of a single SQL statement continues to exceed [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query), this SQL statement triggers other memory control behaviors, such as [spilling data to disk](/tidb-configuration-file.md#oom-use-tmp-storage).
 
 ### tidb_enable_slow_log
 
@@ -835,14 +846,14 @@ Query OK, 0 rows affected (0.09 sec)
 - Default value: `ON`
 - This variable is used to dynamically control whether the telemetry collection in TiDB is enabled. By setting the value to `OFF`, the telemetry collection is disabled. If the [`enable-telemetry`](/tidb-configuration-file.md#enable-telemetry-new-in-v402) TiDB configuration item is set to `false` on all TiDB instances, the telemetry collection is always disabled and this system variable will not take effect. See [Telemetry](/telemetry.md) for details.
 
-### tidb_enable_tso_follower_proxy <span class="version-mark">New in v5.3</span>
+### tidb_enable_tso_follower_proxy <span class="version-mark">New in v5.3.0</span>
 
 - Scope: GLOBAL
 - Default value: `OFF`
 - This variable is used to enable the TSO Follower Proxy feature. When the value is `OFF`, TiDB only gets TSO from the PD leader. After this feature is enabled, TiDB gets TSO by evenly sending requests to all PD nodes and forwarding TSO requests through PD followers. This helps reduce the CPU pressure of PD leader.
 - Scenarios for enabling TSO Follower Proxy:
     * Due to the high pressure of TSO requests, the CPU of the PD leader reaches a bottleneck, which causes high latency of TSO RPC requests.
-    * The TiDB cluster has many TiDB instances, and increasing the value of [`tidb_tso_client_batch_max_wait_time`](#tidb_tso_client_batch_max_wait_time-new-in-v53) cannot alleviate the high latency issue of TSO RPC requests.
+    * The TiDB cluster has many TiDB instances, and increasing the value of [`tidb_tso_client_batch_max_wait_time`](#tidb_tso_client_batch_max_wait_time-new-in-v530) cannot alleviate the high latency issue of TSO RPC requests.
 
 > **Note:**
 >
@@ -986,7 +997,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 > **Warning:**
 >
-> Currently, Green GC is an experimental feature. It is not recommended that you use it in the production environment.
+> Currently, Green GC is an experimental feature. It is not recommended that you use it in production environments.
 
 - Scope: GLOBAL
 - Default value: `LEGACY`
@@ -1005,7 +1016,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
     - `user`: The current session user.
     - `schemaVersion`: The current schema version.
     - `txnStartTS`: The timestamp at which the current transaction starts.
-    - `forUpdateTS`: In the pessimistic transactional model, `forUpdateTS` is the current timestamp of the SQL statement. When a write conflict occurs in the pessimistic transaction, TiDB retries the SQL statement currently being executed and updates this timestamp. You can configure the number of retries via [`max-retry-count`](/tidb-configuration-file.md#max-retry-count). In the optimistic transactional model, `forUpdateTS` is equivalent to `txnStartTS`.
+    - `forUpdateTS`: In the pessimistic transactional mode, `forUpdateTS` is the current timestamp of the SQL statement. When a write conflict occurs in the pessimistic transaction, TiDB retries the SQL statement currently being executed and updates this timestamp. You can configure the number of retries via [`max-retry-count`](/tidb-configuration-file.md#max-retry-count). In the optimistic transactional model, `forUpdateTS` is equivalent to `txnStartTS`.
     - `isReadConsistency`: Indicates whether the current transactional isolation level is Read Committed (RC).
     - `current_db`: The name of the current database.
     - `txn_mode`: The transactional mode. Value options are `OPTIMISTIC` and `PESSIMISTIC`.
@@ -1120,10 +1131,11 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Default value: `tikv,tiflash,tidb`
 - This variable is used to set the storage engine list that TiDB can use when reading data.
 
-### tidb_log_file_max_days <span class="version-mark">New in v5.3</span>
+### tidb_log_file_max_days <span class="version-mark">New in v5.3.0</span>
 
 - Scope: SESSION
 - Default value: `0`
+- Range: `[0, 2147483647]`
 - This variable is used to adjust the maximum days of logger on the current TiDB instance. Its value defaults to the value of the [`max-days`](/tidb-configuration-file.md#max-days) configuration in the configuration file. Changing the variable value only affects the current TiDB instance. After TiDB is restarted, the variable value is reset and the configuration value is not affected.
 
 ### tidb_low_resolution_tso
@@ -1287,19 +1299,19 @@ mysql> desc select count(distinct a) from test.t;
 - For example, after you enable this optimization rule, the subquery is converted as follows:
 
     ```sql
-    select * from t where t.a in (select aa from t1)
+    select * from t where t.a in (select aa from t1);
     ```
 
     The subquery is converted to join as follows:
 
     ```sql
-    select * from t, (select aa from t1 group by aa) tmp_t where t.a = tmp_t.aa
+    select t.* from t, (select aa from t1 group by aa) tmp_t where t.a = tmp_t.aa;
     ```
 
     If `t1` is limited to be `unique` and `not null` in the `aa` column. You can use the following statement, without aggregation.
 
     ```sql
-    select * from t, t1 where t.a=t1.a
+    select t.* from t, t1 where t.a=t1.aa;
     ```
 
 ### tidb_opt_limit_push_down_threshold
@@ -1351,7 +1363,7 @@ explain select * from t where age=5;
 
 > **Warning:**
 
-> Currently, the dynamic pruning mode for partitioned tables is an experimental feature. It is not recommended that you use it in the production environment.
+> Currently, the dynamic pruning mode for partitioned tables is an experimental feature. It is not recommended that you use it in production environments.
 
 - Scope: SESSION | GLOBAL
 - Default value: `static`
@@ -1543,7 +1555,7 @@ SET tidb_slow_log_threshold = 200;
 - Unit: Bytes
 - This variable is used to set the maximum size of a single [temporary table](/temporary-tables.md). Any temporary table with a size larger than this variable value causes error.
 
-### tidb_tso_client_batch_max_wait_time <span class="version-mark">New in v5.3</span>
+### tidb_tso_client_batch_max_wait_time <span class="version-mark">New in v5.3.0</span>
 
 - Scope: GLOBAL
 - Default value: `0`
@@ -1616,7 +1628,7 @@ SET tidb_slow_log_threshold = 200;
 ### timestamp
 
 - Scope: SESSION
-- Default value: ""
+- Default value: `0`
 - A non-empty value of this variable indicates the UNIX epoch that is used as the timestamp for `CURRENT_TIMESTAMP()`, `NOW()`, and other functions. This variable might be used in data restore or replication.
 
 ### transaction_isolation
@@ -1642,22 +1654,22 @@ This variable is an alias for `transaction_isolation`.
 - Default value: (string)
 - This variable returns additional details about the TiDB version. For example, 'TiDB Server (Apache License 2.0) Community Edition, MySQL 5.7 compatible'.
 
-### version_compile_os
-
-- Scope: NONE
-- Default value: (string)
-- This variable returns the name of the OS on which TiDB is running.
-
 ### version_compile_machine
 
 - Scope: NONE
 - Default value: (string)
 - This variable returns the name of the CPU architecture on which TiDB is running.
 
+### version_compile_os
+
+- Scope: NONE
+- Default value: (string)
+- This variable returns the name of the OS on which TiDB is running.
+
 ### wait_timeout
 
 - Scope: SESSION | GLOBAL
-- Default value: `0`
+- Default value: `28800`
 - Range: `[0, 31536000]`
 - Unit: Seconds
 - This variable controls the idle timeout of user sessions. A zero-value means unlimited.
