@@ -233,7 +233,19 @@ if __name__ == "__main__":
                         [
                             {
                                 "tag": "text",
+                                "text": ""
+                            }
+                        ],
+                        [
+                            {
+                                "tag": "text",
                                 "text": "- sig/sql-infra 和 sig/planner"
+                            }
+                        ],
+                        [
+                            {
+                                "tag": "text",
+                                "text": ""
                             }
                         ],
                         [
@@ -274,6 +286,12 @@ if __name__ == "__main__":
                                 "tag": "a",
                                 "text": "待翻译",
                                 "href": "${v54_en_close_sqlinfra_planner_url}"
+                            }
+                        ],
+                        [
+                            {
+                                "tag": "text",
+                                "text": ""
                             }
                         ],
                         [
