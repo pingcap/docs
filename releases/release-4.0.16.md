@@ -25,7 +25,7 @@ TiDB version: 4.0.16
 
 + TiKV
 
-    - Reduce the disk space usage by using the zstd algorithm to compress SST files when using Backup & Restore to restore data or using TiDB Lightning's Local-backend [#11469](https://github.com/tikv/tikv/issues/11469)
+    - Reduce disk space consumption by adopting the zstd algorithm to compress SST files when restoring data using Backup & Restore or importing data using Local-backend of TiDB Lightning [#11469](https://github.com/tikv/tikv/issues/11469)
 
 + Tools
 
