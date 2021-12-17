@@ -354,6 +354,7 @@
     - [Overview](/ecosystem-tool-user-guide.md)
     - [Use Cases](/ecosystem-tool-user-case.md)
     - [Download](/download-ecosystem-tools.md)
+    - [TiDB Operator](/tidb-operator-overview.md)
     - [Table Filter](/table-filter.md)
     - Backup & Restore (BR)
       - [Use BR](/br/backup-and-restore-tool.md)
