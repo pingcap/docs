@@ -36,15 +36,15 @@ If you have a high demand on migration speed, or if the data size is large (for 
 
 - [Migrate MySQL data of more than 1 TB to TiDB](/data-migration/migrate-mysql-tidb-above-tb.md)
 
-## Merge and migrate MySQL shards into TiDB
+## Migrate and merge MySQL shards into TiDB
 
 If your application uses MySQL shards for data storage and you need to migrate these shards into TiDB as one table, you can use DM to perform the shard merge and migration.
 
-- [Merge and migrate MySQL shards of less than 1 TB to TiDB](/data-migration/migrate-shared-mysql-tidb-less-tb.md)
+- [Migrate and merge MySQL shards of less than 1 TB to TiDB](/data-migration/migrate-shared-mysql-tidb-less-tb.md)
 
 If the data size of the sharded tables is large (for example, larger than 1 TiB), and you do not allow other applications to write to TiDB during the migration period, you can use TiDB Lightning to quickly merge and import the sharded tables. Then, you can use DM to replicate incremental sharding data (binlog) based on your application needs.
 
-- [Merge and migrate MySQL shards of more than 1 TB to TiDB](/data-migration/migrate-shared-mysql-tidb-above-tb.md)
+- [Migrate and merge MySQL shards of more than 1 TB to TiDB](/data-migration/migrate-shared-mysql-tidb-above-tb.md)
 
 ## Migrate data from files to TiDB
 
