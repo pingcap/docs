@@ -168,7 +168,7 @@ Records: 2  Duplicates: 1  Warnings: 0
 3 rows in set (0.00 sec)
 ```
 
-In this example, the `AUTO_INCREMENT` value of `3` was allocated for the `INSERT` of the key `A` but never used because a duplicate key was found. This leads to a gap where the sequence is non-consecutive. This behavior is considered legal, even though it differs from MySQL. MySQL will appear to have gaps in the sequence in other scenarios such as transactions being aborted and rolling back.
+In this example, the `AUTO_INCREMENT` value of `3` is allocated for the `INSERT` of the key `A` in `INSERT INTO t (a) VALUES ('A'), ('C') ON DUPLICATE KEY UPDATE cnt = cnt + 1;` but never used because this `INSERT` statement contains a duplicate key `A`. This leads to a gap where the sequence is non-consecutive. This behavior is considered legal, even though it differs from MySQL. MySQL will also have gaps in the sequence in other scenarios such as transactions being aborted and rolled back.
 
 ## AUTO_ID_CACHE
 
