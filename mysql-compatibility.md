@@ -84,7 +84,7 @@ TiDB uses a combination of [Prometheus and Grafana](/tidb-monitoring-api.md) to 
 
 The output format, output content, and the privilege setting of Query Execution Plan (`EXPLAIN`/`EXPLAIN FOR`) in TiDB is greatly different from those in MySQL.
 
-The `optimizer_switch` system variable is read-only in TiDB and has no effect on query plans. [Optimizer Hints](/optimizer-hints.md) are supported using similar syntax to MySQL, but the available hints and implementation might differ.
+The MySQL system variable `optimizer_switch` is read-only in TiDB and has no effect on query plans. You can also use [optimizer hints](/optimizer-hints.md) in similar syntax to MySQL, but the available hints and implementation might differ.
 
 See [Understand the Query Execution Plan](/explain-overview.md) for more details.
 
