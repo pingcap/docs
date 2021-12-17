@@ -328,7 +328,6 @@ This variable is an alias for `last_insert_id`.
 - This variable is used to seed the random value generator used in the `RAND()` SQL function.
 - The behavior of this variable is MySQL compatible.
 
-
 ### rand_seed2
 
 - Scope: SESSION
@@ -336,7 +335,6 @@ This variable is an alias for `last_insert_id`.
 - Range: `[0, 2147483647]`
 - This variable is used to seed the random value generator used in the `RAND()` SQL function.
 - The behavior of this variable is MySQL compatible.
-
 
 ### skip_name_resolve <span class="version-mark">New in v5.2.0</span>
 
