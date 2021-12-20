@@ -50,7 +50,7 @@ def get_pr_no(url):
     pr_no = tree.xpath('//div[@class="table-list-header-toggle states flex-auto pl-0"]/a[@class="btn-link selected"]/text()')[1].strip()
     if pr_no:
     #    print("PR 数目已找到 %s" % pr_no)
-        return pr_no
+        return int(pr_no)
     else:
     #    print("未抓取到 PR 数目")
         return 0
@@ -251,7 +251,7 @@ if __name__ == "__main__":
                         [
                             {
                                 "tag": "text",
-                                "text": "    - docs-cn 仓库中有 ${v54_zh_open_sqlinfra_planner} PR 未合并"
+                                "text": "    - docs-cn 仓库中有 ${v54_zh_open_sqlinfra_planner} PR"
                             },
                             {
                                 "tag": "a",
@@ -260,7 +260,7 @@ if __name__ == "__main__":
                             },
                             {
                                 "tag": "text",
-                                "text": "，有 ${v54_zh_close_sqlinfra_planner} PR 待翻译"
+                                "text": "，有 ${v54_zh_close_sqlinfra_planner} PR"
                             },
                             {
                                 "tag": "a",
@@ -271,7 +271,7 @@ if __name__ == "__main__":
                         [
                             {
                                 "tag": "text",
-                                "text": "    - docs 仓库中有 ${v54_en_open_sqlinfra_planner} PR 未合并"
+                                "text": "    - docs 仓库中有 ${v54_en_open_sqlinfra_planner} PR"
                             },
                             {
                                 "tag": "a",
@@ -280,7 +280,7 @@ if __name__ == "__main__":
                             },
                             {
                                 "tag": "text",
-                                "text": "，有 ${v54_en_close_sqlinfra_planner} PR 待翻译"
+                                "text": "，有 ${v54_en_close_sqlinfra_planner} PR"
                             },
                             {
                                 "tag": "a",
@@ -303,7 +303,7 @@ if __name__ == "__main__":
                         [
                             {
                                 "tag": "text",
-                                "text": "    - docs-cn 仓库中有 ${v54_zh_open_engine_scheduling} PR 未合并"
+                                "text": "    - docs-cn 仓库中有 ${v54_zh_open_engine_scheduling} PR"
                             },
                             {
                                 "tag": "a",
@@ -312,7 +312,7 @@ if __name__ == "__main__":
                             },
                             {
                                 "tag": "text",
-                                "text": "，有 ${v54_zh_close_engine_scheduling} PR 待翻译"
+                                "text": "，有 ${v54_zh_close_engine_scheduling} PR"
                             },
                             {
                                 "tag": "a",
@@ -323,7 +323,7 @@ if __name__ == "__main__":
                         [
                             {
                                 "tag": "text",
-                                "text": "    - docs 仓库中有 ${v54_en_open_engine_scheduling} PR 未合并"
+                                "text": "    - docs 仓库中有 ${v54_en_open_engine_scheduling} PR"
                             },
                             {
                                 "tag": "a",
@@ -332,7 +332,7 @@ if __name__ == "__main__":
                             },
                             {
                                 "tag": "text",
-                                "text": "，有 ${v54_en_close_engine_scheduling} PR 待翻译"
+                                "text": "，有 ${v54_en_close_engine_scheduling} PR"
                             },
                             {
                                 "tag": "a",
@@ -349,7 +349,7 @@ if __name__ == "__main__":
                         [
                             {
                                 "tag": "text",
-                                "text": "    - docs-cn 仓库中有 ${v54_zh_open_migrate} PR 未合并"
+                                "text": "    - docs-cn 仓库中有 ${v54_zh_open_migrate} PR"
                             },
                             {
                                 "tag": "a",
@@ -358,7 +358,7 @@ if __name__ == "__main__":
                             },
                             {
                                 "tag": "text",
-                                "text": "，有 ${v54_zh_close_migrate} PR 待翻译"
+                                "text": "，有 ${v54_zh_close_migrate} PR"
                             },
                             {
                                 "tag": "a",
@@ -369,7 +369,7 @@ if __name__ == "__main__":
                         [
                             {
                                 "tag": "text",
-                                "text": "    - docs 仓库中有 ${v54_en_open_migrate} PR 未合并"
+                                "text": "    - docs 仓库中有 ${v54_en_open_migrate} PR"
                             },
                             {
                                 "tag": "a",
@@ -378,7 +378,7 @@ if __name__ == "__main__":
                             },
                             {
                                 "tag": "text",
-                                "text": "，有 ${v54_en_close_migrate} PR 待翻译"
+                                "text": "，有 ${v54_en_close_migrate} PR"
                             },
                             {
                                 "tag": "a",
@@ -395,7 +395,7 @@ if __name__ == "__main__":
                         [
                             {
                                 "tag": "text",
-                                "text": "    - docs-cn 仓库中有 ${v54_zh_open_bigdata_tiup_diagnosis} PR 未合并"
+                                "text": "    - docs-cn 仓库中有 ${v54_zh_open_bigdata_tiup_diagnosis} PR"
                             },
                             {
                                 "tag": "a",
@@ -404,7 +404,7 @@ if __name__ == "__main__":
                             },
                             {
                                 "tag": "text",
-                                "text": "，有 ${v54_zh_close_bigdata_tiup_diagnosis} PR 待翻译"
+                                "text": "，有 ${v54_zh_close_bigdata_tiup_diagnosis} PR"
                             },
                             {
                                 "tag": "a",
@@ -415,7 +415,7 @@ if __name__ == "__main__":
                         [
                             {
                                 "tag": "text",
-                                "text": "    - docs 仓库中有 ${v54_en_open_bigdata_tiup_diagnosis} PR 未合并"
+                                "text": "    - docs 仓库中有 ${v54_en_open_bigdata_tiup_diagnosis} PR"
                             },
                             {
                                 "tag": "a",
@@ -424,7 +424,7 @@ if __name__ == "__main__":
                             },
                             {
                                 "tag": "text",
-                                "text": "，有 ${v54_en_close_bigdata_tiup_diagnosis} PR 待翻译"
+                                "text": "，有 ${v54_en_close_bigdata_tiup_diagnosis} PR"
                             },
                             {
                                 "tag": "a",
@@ -441,7 +441,7 @@ if __name__ == "__main__":
                         [
                             {
                                 "tag": "text",
-                                "text": "    - docs-cn 仓库中有 ${v54_zh_open_transaction_security} PR 未合并"
+                                "text": "    - docs-cn 仓库中有 ${v54_zh_open_transaction_security} PR"
                             },
                             {
                                 "tag": "a",
@@ -450,7 +450,7 @@ if __name__ == "__main__":
                             },
                             {
                                 "tag": "text",
-                                "text": "，有 ${v54_zh_close_transaction_security} PR 待翻译"
+                                "text": "，有 ${v54_zh_close_transaction_security} PR"
                             },
                             {
                                 "tag": "a",
@@ -461,7 +461,7 @@ if __name__ == "__main__":
                         [
                             {
                                 "tag": "text",
-                                "text": "    - docs 仓库中有 ${v54_en_open_transaction_security} PR 未合并"
+                                "text": "    - docs 仓库中有 ${v54_en_open_transaction_security} PR"
                             },
                             {
                                 "tag": "a",
@@ -470,7 +470,7 @@ if __name__ == "__main__":
                             },
                             {
                                 "tag": "text",
-                                "text": "，有 ${v54_en_close_transaction_security} PR 待翻译"
+                                "text": "，有 ${v54_en_close_transaction_security} PR"
                             },
                             {
                                 "tag": "a",
