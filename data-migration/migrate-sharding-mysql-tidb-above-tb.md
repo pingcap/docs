@@ -1,11 +1,11 @@
 ---
 title: Migrate and Merge MySQL Shards of More Than 1 TiB to TiDB
-summary: Use Dumpling and TiDB Lightning to migrate and merge MySQL shards to TiDB. The procedure described in this document is suitable for scenarios where the total amount of migrated data is greater than 1 TiB.
+summary: Learn how to migrate and merge MySQL shards of more than 1 TiB to TiDB using Dumpling and TiDB Lightning.
 ---
 
 # Migrate and Merge MySQL Shards of More Than 1 TiB to TiDB
 
-If the total size of the MySQL shards is large (for example, more than 1 TiB) and allows the TiDB cluster to suspend business writes during the migration, then you can use TiDB Lightning to quickly migrate and merge the MySQL shards. After migration, you can also use TiDB DM to perform incremental replication according to your business needs.
+If the total size of the MySQL shards is large (for example, more than 1 TiB) and the TiDB cluster can suspend business writes during data migration, you can use TiDB Lightning to quickly migrate and merge the MySQL shards. After migration, you can also use TiDB DM to perform incremental replication according to your business needs.
 
 This document walks you through the procedure of how to migrate large MySQL shards to TiDB.
 
@@ -42,42 +42,41 @@ Before getting started, see the following documents to prepare for the migration
 
 ### Hardware requirements of TiDB Lightning
 
-**Operating System**: The example in this document uses a few fresh CentOS 7 instances. You can deploy a small virtual machine either locally virtualized or on cloud. Because TiDB Lightning consumes 100% CPU by default, it is recommended that you deploy it on a dedicated server. If this is not possible due to a tight budget, you can deploy it on a single server together with other TiDB components (for example, `tikv-server`) and then configure `region-concurrency` to limit the CPU usage. Usually you can configure the size to 75% of the logical CPU.
+**Operating System**: The example in this document uses fresh CentOS 7 instances. You can deploy a small virtual machine either locally virtualized or on cloud. Because TiDB Lightning consumes 100% CPU by default, it is recommended that you deploy it on a dedicated server. If this is not possible, you can deploy it on a single server together with other TiDB components (for example, `tikv-server`) and then configure `region-concurrency` to limit the CPU usage. Usually, you can configure the size to 75% of the logical CPU.
 
-**Memory and CPU**: Since TiDB Lightning is resource-intensive, it is recommended to allocate more than 64 GiB of memory and more than 32 CPU cores. Meanwhile, to achieve optimal performance, make sure the CPU core to memory (GiB) ratio is greater than 1:2.
+**Memory and CPU**: Since TiDB Lightning is resource-intensive, it is recommended to allocate more than 64 GiB of memory and more than 32 CPU cores. Meanwhile, to achieve optimal performance, make sure that the CPU core to memory (GiB) ratio is greater than 1:2.
 
 **Disk Space**:
 
 - Dumpling requires a hard drive sufficient to store the entire data source. It is recommended to use SSD. The faster the read speed, the better.
-- Lightning requires sufficient temporary storage space to store sorted key-value pairs during migration. You need to prepare at least as much space as the largest single table of the data source.
+- TiDB Lightning requires sufficient temporary storage space to store sorted key-value pairs during migration. You need to prepare at least as much space as the largest single table of the data source.
 
 **Note**: It is difficult to calculate the exact size of the data exported by Dumpling from MySQL. But you can estimate the amount of data using the `data_length` field with the following SQL statement.
 
 {{< copyable "sql" >}}
 
 ```sql
-# Calculate all schema sizes in MiB. You need to change ${schema_name} to your actual schema name.
+# Calculate the size of all schemas in MiB. You need to change ${schema_name} to the actual schema name.
 select table_schema,sum(data_length)/1024/1024 as data_length,sum(index_length)/1024/1024 as index_length,sum(data_length+index_length)/1024/1024 as sum from information_schema.tables group by table_schema;
 
-# Calculate the maximum single table in MiB. You need to change ${schema_name} to your actual schema name.
+# Calculate the size of the largest single table in MiB. You need to change ${schema_name} to the actual schema name.
 
 select table_name,table_schema,sum(data_length)/1024/1024 as data_length,sum(index_length)/1024/1024 as index_length,sum(data_length+index_length)/1024/1024 as sum from information_schema.tables where table_schema = "${schema_name}" group by table_name,table_schema order by sum  desc limit 5;
-```
 
 ### Disk space requirements for the target TiKV cluster
 
-The target TiKV cluster must have enough space to store the upcoming migrated data. In addition to the [standard hardware configuration](https://docs.pingcap.com/tidb/stable/hardware-and-software-requirements), the total storage space of the target TiKV cluster must be larger than **(data source size) × ([number of replicas](https://docs.pingcap.com/tidb/stable/deploy-and-maintain-faq#is-the-number-of-replicas-in-each-region-configurable-if-yes-how-to-configure-it.)) × 2**. For example, if the cluster uses 3 copies by default, then the total storage space needs to be more than 6 times the size of the data source.
+The target TiKV cluster must have enough space to store upcoming migrated data. In addition to the [Server recommendations](https://docs.pingcap.com/tidb/stable/hardware-and-software-requirements#server-recommendations), the total storage space of the target TiKV cluster must be larger than **(data source size) × ([number of replicas](https://docs.pingcap.com/tidb/stable/deploy-and-maintain-faq#is-the-number-of-replicas-in-each-region-configurable-if-yes-how-to-configure-it) × 2**. For example, if the cluster uses 3 replicas by default, the total storage space needs to be more than 6 times the size of the data source.
 
 At first glance, it may look confusing why there is a **“x2”** in the formula. In fact, it is based on the following estimated space:
 
-* Indexes can consume extra space.
-* There is a space amplification effect of RocksDB.
+* Extra space consumed by indexes
+* Space amplified by RocksDB
 
 ### Check conflicts for Sharded Tables
 
-If the migration involves sharded tables, data from multiple sharded tables may cause conflicts for primary keys or unique indexes. Therefore, before migration, you need to check the business characteristics of each sharded table. For more details, see [Cross-Sub-table Data in Primary Key or Unique Index Conflict Handling](https://docs.pingcap.com/tidb-data-migration/stable/shard-merge-best-practices#handle-conflicts-between-primary-keys-or-unique-indexes-across-multiple-sharded-tables). The following is a brief description.
+If the migration involves sharded tables, data from multiple sharded tables may cause conflicts for primary keys or unique indexes. Therefore, before migration, you need to check the business characteristics of each sharded table. For more details, see [Handle conflicts between primary keys or unique indexes across multiple sharded tables](https://docs.pingcap.com/tidb-data-migration/stable/shard-merge-best-practices#handle-conflicts-between-primary-keys-or-unique-indexes-across-multiple-sharded-tables). The following is a brief description.
 
-Assume that tables1~4 have the same table structure as follows.
+Assume that tables 1~4 have the same table structure as follows.
 
 ```sql
 CREATE TABLE `table1` (
@@ -146,11 +145,9 @@ Then, run the following command to use Dumpling to export `table3` and `table4` 
 tiup dumpling -h ${ip} -P 3306 -u root -t 16 -r 200000 -F 256MB -B my_db2 -f 'my_db2.table[34]' -o ${data-path}/my_db2
 ```
 
-The reason for storing all source data tables in one directory is to facilitate subsequent migration by TiDB Lightning.
+After the preceding procedures, all source data tables are now exported to the `${data-path}` directory. The reason for this practice is to facilitate subsequent import by TiDB Lightning.
 
 The starting point information needed for incremental replication is in the `${data-path}` directory, and in the `metadata` files of `my_db1` and `my_db2`. They are meta-information files automatically generated by Dumpling. To perform incremental replication, you need to note down the binlog location information.
-
-Congratulations! Now you have exported all the required full data.
 
 ## Step 2. Start TiDB Lightning to migrate data
 
@@ -158,11 +155,11 @@ Before starting TiDB Lightning for migration, it is recommended that you underst
 
 ### Checkpoints
 
-Migrating a large volume of data usually takes hours or even days. If such a long running processes unfortunately crashes, it can be very frustrating to redo everything from scratch.
+Migrating a large volume of data usually takes hours or even days. There is a certain chance that the long-running process is interrupted. It can be very frustrating to redo everything from scratch.
 
-Fortunately, TiDB Lightning provides a `checkpoints` feature to let you store the migration progress, so that migration task can resume from the breakpoint upon restart.
+Fortunately, TiDB Lightning provides a `checkpoints` feature to let you store the migration progress, so that an interrupted migration task can resume from the breakpoint upon restart.
 
-If the TiDB Lightning task crashes due to unrecoverable errors (for example, data corruption), it will not pick up from the breakpoint, but will report an error and quit the task. You need to solve the problem by using the `tidb-lightning-ctl` command. The options include:
+If the TiDB Lightning task crashes due to unrecoverable errors (for example, data corruption), it will not pick up from the breakpoint, but will report an error and quit the task. To ensure the safety of the imported data, you must resolve these errors by using the `tidb-lightning-ctl` command before proceeding with other steps. The options include:
 
 * --checkpoint-error-destroy: This option allows you to restart migrating from scratch.
 * --checkpoint-error-ignore: If migration has failed, this option clears the error status as if no errors ever happened.
