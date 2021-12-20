@@ -264,9 +264,24 @@ Similar to slow scheduling, the speed of region merge is most likely limited by 
 - A lot of tables have been created and then emptied (including truncated tables). These empty Regions cannot be merged if the split table attribute is enabled. You can disable this attribute by adjusting the following parameters:
 
     - TiKV: Set `split-region-on-table` to `false`. You cannot modify the parameter dynamically.
-    - PD
-        - Set `key-type` to `"txn"` or `"raw"`. You can modify the parameter dynamically.
-        - Or keep `key-type` as `table` and set `enable-cross-table-merge` to `true`. You can modify the parameter dynamically.
+    - PD: You can use PD Control to selectively set the following parameters according to the cluster situation.
+        - If no TiDB instance exists in the cluster, and the value of [`key-type`](/pd-control.md#config-show--set-option-value--placement-rules) is set to `raw` or `txn`, PD is allowed to merge Regions across tables regardless of the `enable-cross-table-merge setting`. You can modify the parameter dynamically.
+
+        {{< copyable "shell-regular" >}}
+
+        ```bash
+        config set key-type txn
+        ```
+
+        - If any TiDB instance exists in the cluster, and the value of `key-type` is set to "table", PD is allowed to merge Regions across tables when you set `enable-cross-table-merge` to `true`. You can modify the parameter dynamically.
+
+        {{< copyable "shell-regular" >}}
+
+        ```bash
+        config set enable-cross-table-merge true
+        ```
+
+        If the modification does not take effect, refer to [FAQ - Why the modified `toml` configuration for TiKV/PD does not take effect?](/faq/deploy-and-maintain-faq.md#why-the-modified-toml-configuration-for-tikvpd-does-not-take-effect).
 
         > **Note:**
         >
