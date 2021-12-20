@@ -49,10 +49,12 @@ def get_pr_no(url):
     tree = etree.HTML(page_text)
     pr_no = tree.xpath('//div[@class="table-list-header-toggle states flex-auto pl-0"]/a[@class="btn-link selected"]/text()')[1].strip()
     if pr_no:
-    #    print("PR 数目已找到 %s" % pr_no)
-        return int(pr_no)
-    else:
+        if pr_no.endswith('d'):
+            return int(pr_no[:-7])
+        if pr_no.endswith('n'):
+            return int(pr_no[:-5])
     #    print("未抓取到 PR 数目")
+    else:
         return 0
 
 
@@ -122,38 +124,38 @@ if __name__ == "__main__":
 
     data = {
         'date': datetime.utcnow().strftime('%Y-%m-%d'),
-        'v54_zh_open_sqlinfra_planner': get_pr_no(docs_cn_url + open_url+ sig_sql_infra + v54) + get_pr_no(docs_cn_url + open_url+ sig_planner + v54),
-        'v54_zh_close_sqlinfra_planner': get_pr_no(docs_cn_url + close_url+ sig_sql_infra + v54) + get_pr_no(docs_cn_url + close_url+ sig_planner + v54),
-        'v54_en_open_sqlinfra_planner': get_pr_no(docs_url + open_url+ sig_sql_infra + v54) + get_pr_no(docs_url + open_url+ sig_planner + v54),
-        'v54_en_close_sqlinfra_planner': get_pr_no(docs_url + close_url+ sig_sql_infra + v54) + get_pr_no(docs_url + close_url+ sig_planner + v54),
-        'v54_zh_open_engine_scheduling': get_pr_no(docs_cn_url + open_url+ sig_engine + v54) + get_pr_no(docs_cn_url + open_url+ sig_scheduling + v54),
-        'v54_zh_close_engine_scheduling': get_pr_no(docs_cn_url + close_url+ sig_engine + v54) + get_pr_no(docs_cn_url + close_url+ sig_scheduling + v54),
-        'v54_en_open_engine_scheduling': get_pr_no(docs_url + open_url+ sig_engine + v54) + get_pr_no(docs_url + open_url+ sig_scheduling + v54),
-        'v54_en_close_engine_scheduling': get_pr_no(docs_url + close_url+ sig_engine + v54) + get_pr_no(docs_url + close_url+ sig_scheduling + v54),
-        'v54_zh_open_migrate': get_pr_no(docs_cn_url + open_url + sig_migrate + v54),
-        'v54_zh_close_migrate': get_pr_no(docs_cn_url + close_url + sig_migrate + v54),
-        'v54_en_open_migrate': get_pr_no(docs_url + open_url + sig_migrate + v54),
-        'v54_en_close_migrate': get_pr_no(docs_url + close_url + sig_migrate + v54),
-        'v54_zh_open_bigdata_tiup_diagnosis': get_pr_no(docs_cn_url + open_url + sig_bigdata + v54) + get_pr_no(docs_cn_url + open_url + sig_tiup + v54) + get_pr_no(docs_cn_url + open_url + sig_diagnosis + v54),
-        'v54_zh_close_bigdata_tiup_diagnosis': get_pr_no(docs_cn_url + close_url + sig_bigdata + v54) + get_pr_no(docs_cn_url + close_url + sig_tiup + v54) + get_pr_no(docs_cn_url + close_url + sig_diagnosis + v54),
-        'v54_en_open_bigdata_tiup_diagnosis': get_pr_no(docs_url + open_url + sig_bigdata + v54) + get_pr_no(docs_url + open_url + sig_tiup + v54) + get_pr_no(docs_url + open_url + sig_diagnosis + v54),
-        'v54_en_close_bigdata_tiup_diagnosis': get_pr_no(docs_url + close_url + sig_bigdata + v54) + get_pr_no(docs_url + close_url + sig_tiup + v54) + get_pr_no(docs_url + close_url + sig_diagnosis + v54),
-        'v54_zh_open_transaction_security': get_pr_no(docs_cn_url + open_url + sig_transaction + v54) + get_pr_no(docs_cn_url + open_url + area_security + v54),
-        'v54_zh_close_transaction_security': get_pr_no(docs_cn_url + close_url + sig_transaction + v54) + get_pr_no(docs_cn_url + close_url + area_security + v54),
-        'v54_en_open_transaction_security': get_pr_no(docs_url + open_url + sig_transaction + v54) + get_pr_no(docs_url + open_url + area_security + v54),
-        'v54_en_close_transaction_security': get_pr_no(docs_url + close_url + sig_transaction + v54) + get_pr_no(docs_url + close_url + area_security + v54),
-        'compat_open_zh': get_pr_no(compat_open_url_zh),
-        'compat_close_zh': get_pr_no(compat_close_url_zh),
-        'compat_open_en': get_pr_no(compat_open_url_en),
-        'compat_close_en': get_pr_no(compat_close_url_en),
-        'oncall_open_zh': get_pr_no(oncall_open_url_zh),
-        'oncall_close_zh': get_pr_no(oncall_close_url_zh),
-        'oncall_open_en': get_pr_no(oncall_open_url_en),
-        'oncall_close_en': get_pr_no(oncall_close_url_en),
-        'bugfix_open_zh': get_pr_no(bugfix_open_url_zh),
-        'bugfix_close_zh': get_pr_no(bugfix_close_url_zh),
-        'bugfix_open_en': get_pr_no(bugfix_open_url_en),
-        'bugfix_close_en': get_pr_no(bugfix_close_url_en),
+        'v54_zh_open_sqlinfra_planner': str(get_pr_no(docs_cn_url + open_url+ sig_sql_infra + v54) + get_pr_no(docs_cn_url + open_url+ sig_planner + v54)),
+        'v54_zh_close_sqlinfra_planner': str(get_pr_no(docs_cn_url + close_url+ sig_sql_infra + v54) + get_pr_no(docs_cn_url + close_url+ sig_planner + v54)),
+        'v54_en_open_sqlinfra_planner': str(get_pr_no(docs_url + open_url+ sig_sql_infra + v54) + get_pr_no(docs_url + open_url+ sig_planner + v54)),
+        'v54_en_close_sqlinfra_planner': str(get_pr_no(docs_url + close_url+ sig_sql_infra + v54) + get_pr_no(docs_url + close_url+ sig_planner + v54)),
+        'v54_zh_open_engine_scheduling': str(get_pr_no(docs_cn_url + open_url+ sig_engine + v54) + get_pr_no(docs_cn_url + open_url+ sig_scheduling + v54)),
+        'v54_zh_close_engine_scheduling': str(get_pr_no(docs_cn_url + close_url+ sig_engine + v54) + get_pr_no(docs_cn_url + close_url+ sig_scheduling + v54)),
+        'v54_en_open_engine_scheduling': str(get_pr_no(docs_url + open_url+ sig_engine + v54) + get_pr_no(docs_url + open_url+ sig_scheduling + v54)),
+        'v54_en_close_engine_scheduling': str(get_pr_no(docs_url + close_url+ sig_engine + v54) + get_pr_no(docs_url + close_url+ sig_scheduling + v54)),
+        'v54_zh_open_migrate': str(get_pr_no(docs_cn_url + open_url + sig_migrate + v54)),
+        'v54_zh_close_migrate': str(get_pr_no(docs_cn_url + close_url + sig_migrate + v54)),
+        'v54_en_open_migrate': str(get_pr_no(docs_url + open_url + sig_migrate + v54)),
+        'v54_en_close_migrate': str(get_pr_no(docs_url + close_url + sig_migrate + v54)),
+        'v54_zh_open_bigdata_tiup_diagnosis': str(get_pr_no(docs_cn_url + open_url + sig_bigdata + v54) + get_pr_no(docs_cn_url + open_url + sig_tiup + v54) + get_pr_no(docs_cn_url + open_url + sig_diagnosis + v54)),
+        'v54_zh_close_bigdata_tiup_diagnosis': str(get_pr_no(docs_cn_url + close_url + sig_bigdata + v54) + get_pr_no(docs_cn_url + close_url + sig_tiup + v54) + get_pr_no(docs_cn_url + close_url + sig_diagnosis + v54)),
+        'v54_en_open_bigdata_tiup_diagnosis': str(get_pr_no(docs_url + open_url + sig_bigdata + v54) + get_pr_no(docs_url + open_url + sig_tiup + v54) + get_pr_no(docs_url + open_url + sig_diagnosis + v54)),
+        'v54_en_close_bigdata_tiup_diagnosis': str(get_pr_no(docs_url + close_url + sig_bigdata + v54) + get_pr_no(docs_url + close_url + sig_tiup + v54) + get_pr_no(docs_url + close_url + sig_diagnosis + v54)),
+        'v54_zh_open_transaction_security': str(get_pr_no(docs_cn_url + open_url + sig_transaction + v54) + get_pr_no(docs_cn_url + open_url + area_security + v54)),
+        'v54_zh_close_transaction_security': str(get_pr_no(docs_cn_url + close_url + sig_transaction + v54) + get_pr_no(docs_cn_url + close_url + area_security + v54)),
+        'v54_en_open_transaction_security': str(get_pr_no(docs_url + open_url + sig_transaction + v54) + get_pr_no(docs_url + open_url + area_security + v54)),
+        'v54_en_close_transaction_security': str(get_pr_no(docs_url + close_url + sig_transaction + v54) + get_pr_no(docs_url + close_url + area_security + v54)),
+        'compat_open_zh': str(get_pr_no(compat_open_url_zh)),
+        'compat_close_zh': str(get_pr_no(compat_close_url_zh)),
+        'compat_open_en': str(get_pr_no(compat_open_url_en)),
+        'compat_close_en': str(get_pr_no(compat_close_url_en)),
+        'oncall_open_zh': str(get_pr_no(oncall_open_url_zh)),
+        'oncall_close_zh': str(get_pr_no(oncall_close_url_zh)),
+        'oncall_open_en': str(get_pr_no(oncall_open_url_en)),
+        'oncall_close_en': str(get_pr_no(oncall_close_url_en)),
+        'bugfix_open_zh': str(get_pr_no(bugfix_open_url_zh)),
+        'bugfix_close_zh': str(get_pr_no(bugfix_close_url_zh)),
+        'bugfix_open_en': str(get_pr_no(bugfix_open_url_en)),
+        'bugfix_close_en': str(get_pr_no(bugfix_close_url_en)),
         'v54_zh_open_sqlinfra_planner_url': 'https://github.com/pingcap/docs-cn/pulls?q=is%3Apr+label%3Asig%2Fsql-infra%2Csig%2Fplanner+label%3Av5.4+is%3Aopen',
         'v54_zh_close_sqlinfra_planner_url': 'https://github.com/pingcap/docs-cn/pulls?q=is%3Apr+label%3Asig%2Fsql-infra%2Csig%2Fplanner+label%3Av5.4+is%3Aclosed',
         'v54_en_open_sqlinfra_planner_url': 'https://github.com/pingcap/docs/pulls?q=is%3Apr+label%3Asig%2Fsql-infra%2Csig%2Fplanner+label%3Av5.4+is%3Aopen',
@@ -303,6 +305,12 @@ if __name__ == "__main__":
                         [
                             {
                                 "tag": "text",
+                                "text": ""
+                            }
+                        ],
+                        [
+                            {
+                                "tag": "text",
                                 "text": "    - docs-cn 仓库中有 ${v54_zh_open_engine_scheduling} PR"
                             },
                             {
@@ -343,7 +351,19 @@ if __name__ == "__main__":
                         [
                             {
                                 "tag": "text",
+                                "text": ""
+                            }
+                        ],
+                        [
+                            {
+                                "tag": "text",
                                 "text": "- sig/migrate"
+                            }
+                        ],
+                        [
+                            {
+                                "tag": "text",
+                                "text": ""
                             }
                         ],
                         [
@@ -389,7 +409,19 @@ if __name__ == "__main__":
                         [
                             {
                                 "tag": "text",
+                                "text": ""
+                            }
+                        ],
+                        [
+                            {
+                                "tag": "text",
                                 "text": "sig/bigdata、sig/tiup 和 sig/diagnosis"
+                            }
+                        ],
+                        [
+                            {
+                                "tag": "text",
+                                "text": ""
                             }
                         ],
                         [
@@ -435,7 +467,19 @@ if __name__ == "__main__":
                         [
                             {
                                 "tag": "text",
+                                "text": ""
+                            }
+                        ],
+                        [
+                            {
+                                "tag": "text",
                                 "text": "- sig/transaction 和 area/security"
+                            }
+                        ],
+                        [
+                            {
+                                "tag": "text",
+                                "text": ""
                             }
                         ],
                         [
@@ -476,6 +520,12 @@ if __name__ == "__main__":
                                 "tag": "a",
                                 "text": "未合并",
                                 "href": "${v54_en_close_transaction_security_url}"
+                            }
+                        ],
+                        [
+                            {
+                                "tag": "text",
+                                "text": ""
                             }
                         ],
                         [
