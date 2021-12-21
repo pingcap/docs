@@ -1,6 +1,6 @@
 ---
 title: Data Migration Overview
-summary: Learn the overview of data migration from databases or data formats (CSV/SQL).
+summary: Learn the overview of data migration from databases or CSV/SQL files.
 ---
 
 # Data Migration Overview
