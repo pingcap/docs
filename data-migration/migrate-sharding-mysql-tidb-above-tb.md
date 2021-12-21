@@ -228,19 +228,19 @@ Follow these steps to start `tidb-lightning`:
     [tidb]
     # Information of the target TiDB cluster.
     # Values here are only for illustration purpose. Replace them with your own values.
-    host = ${host}           # For example: "172.16.31.2"
+    host = ${host}           # For example: "172.16.31.1"
     port = ${port}           # For example: 4000
     user = "${user_name}"    # For example: "root"
     password = "${password}" # For example: "rootroot"
     # The table information is read from the status port.
     status-port = ${status-port} # For example: 10080
-    # the IP address of the cluster PD. Values here are only for illustration purpose. Replace them with your own values.
+    # the IP address of the PD cluster. TiDB Lightning gets some information through the PD cluster.
     # For example: "172.16.31.3:2379".
     # When backend = "local", make sure that the values of status-port and pd-addr are correct. Otherwise an error will occur.
     pd-addr = "${ip}:${port}"
     ```
 
-3. Configure appropriate parameters to run `tidb-lightning`. If you start the task directly on the command line with `nohup`, it may quit due to the SIGHUP signal. So it is recommended to put `nohup` inside the script. For example:
+3. Configure appropriate parameters to run `tidb-lightning`. If you start the task directly in a command-line interface, it may quit due to the SIGHUP signal. It is recommended that you introduce such tools as `nohup` and `screen`. For example:
 
    {{< copyable "shell-regular" >}}
 
