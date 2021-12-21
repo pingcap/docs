@@ -108,7 +108,7 @@ The following sections introduce the complete migration procedure.
 
 If you need to export multiple sharded tables belonging to the same upstream MySQL instance, you can directly use the `-f` parameter of Dumpling to export them in a single operation.
 
-If the sharded tables are stored across different MySQL instances, you can use Dumpling to export them respectively and place the results of both exports in the same parent directory.
+If the sharded tables are stored across different MySQL instances, you can use Dumpling to export them respectively and place the exported results in the same parent directory.
 
 In the following example, both methods are used, and then the exported data is stored in the same parent directory.
 
@@ -137,7 +137,7 @@ In the command above:
 >
 > If the size of a single exported table exceeds 10 GiB, it is strongly recommended to use the `-r` and `-F` options.
 
-Then, run the following command to use Dumpling to export `table3` and `table4` from `my_db2`:
+Then, run the following command to use Dumpling to export `table3` and `table4` from `my_db2`. Note that the path is `${data-path}/my_db2` instead of `${data-path}/my_db1`.
 
 {{< copyable "shell-regular" >}}
 
@@ -191,8 +191,8 @@ Follow these steps to start `tidb-lightning`:
 
     [tikv-importer]
     # Choose a local backend.
-    # "local": The default mode. It is used for large data volumes greater than 1 TiB. But during migration, downstream TiDB is not available to provide service.
-    # "tidb": Used for data volumes less than 1 TiB. During migration, downstream TiDB can provide service normally.
+    # "local": The default mode. It is used for large data volumes greater than 1 TiB. During migration, downstream TiDB cannot provide services.
+    # "tidb": Used for data volumes less than 1 TiB. During migration, downstream TiDB can provide services normally.
     # For more information, see [TiDB Lightning Backends](https://docs.pingcap.com/tidb/stable/tidb-lightning-backends)
     backend = "local"
     # Set the temporary directory for the sorted key value pairs. It must be empty.
@@ -218,10 +218,10 @@ Follow these steps to start `tidb-lightning`:
     # If Dumpling is executed multiple times and in different directories, you need to place all the exported data in the same parent directory.
     # You can specify this parent directory here.
     data-source-dir = "${data-path}"
-    # Because table1~4 are merged into table5, you do not need to create a schema.
-    # This parameter can prevent creating table1~4 downstream based on Dumpling's exported files.
+    # Because tables1~4 are merged into table5, you do not need to create a schema.
+    # This parameter can prevent creating tables1~4 downstream based on files exported by Dumpling.
     no-schema = true
-    # Configure the wildcard rules. By default, all tables in the following will be filtered: mysql, sys, INFORMATION_SCHEMA, PERFORMANCE_SCHEMA, METRICS_SCHEMA, INSPECTION_SCHEMA
+    # Configure the wildcard rules. By default, all the following tables will be filtered: mysql, sys, INFORMATION_SCHEMA, PERFORMANCE_SCHEMA, METRICS_SCHEMA, INSPECTION_SCHEMA
     # If not configured, an error “schema not found” will occur when migrating system tables.
     filter = ['*.*', '!mysql.*', '!sys.*', '!INFORMATION_SCHEMA.*', '!PERFORMANCE_SCHEMA.*', '!METRICS_SCHEMA.*', '!INSPECTION_SCHEMA.*']
 
@@ -248,20 +248,18 @@ Follow these steps to start `tidb-lightning`:
    tiup tidb-lightning -config tidb-lightning.toml > nohup.out &
    ```
 
-4. After the migration task gets started, you can check the progress by using either of the following:
+4. After starting the migration task, you can check the progress by using either of the following methods:
 
    - View progress via the keyword `progress` in the `grep` log. By default, the data refreshes every 5 minutes.
    - View progress via the monitoring dashboard. For more information, see [TiDB Lightning Monitoring]( /tidb-lightning/monitor-tidb-lightning.md).
 
-Now, you only need to wait for the migration task to finish.
-
-After the migration is finished, TiDB Lightning will quit automatically. To make sure the data is migrated successfully, you need to check that the log shows `the whole procedure completed` among the last 5 lines.
+After the migration finishes, TiDB Lightning will exit automatically. To make sure that the data is migrated successfully, check for `the whole procedure completed` among the last 5 lines.
 
 > **Note:**
 >
 > Whether the migration is successful or not, the last line will always show `tidb lightning exit`. It just means that TiDB Lightning quits normally, and does not guarantee that the task is completed successfully.
 
-If you encounter any problems during migration, see [TiDB Lightning FAQ](https://docs.pingcap.com/tidb/stable/tidb-lightning-faq).
+If you encounter any problems during migration, see [TiDB Lightning FAQs](/tidb-lightning/tidb-lightning-faq.md).
 
 ## Step 3. (Optional) Use DM to perform incremental replication
 
@@ -279,13 +277,13 @@ source-id: "mysql-01" # Must be unique.
 
 # Specifies whether DM-worker pulls binlogs with GTID (Global Transaction Identifier).
 # The prerequisite is that you have already enabled GTID in the upstream MySQL.
-# If the automatic switch of primary and standby exists in the upstream database, you need to use the GTID mode.
+# If the upstream database has enabled automatic switch of primary and standby, you must use the GTID mode.
 enable-gtid: false
 
 from:
   host: "${host}"           # For example: 172.16.10.81
   user: "root"
-  password: "${password}"   # Plaintext passwords is supported but not recommended. It is recommended that you use dmctl encrypt to encrypt plaintext passwords.
+  password: "${password}"   # Plaintext passwords are supported but not recommended. It is recommended that you use dmctl encrypt to encrypt plaintext passwords.
   port: ${port}             # For example: 3306
 ```
 
@@ -308,7 +306,7 @@ Repeat the above steps until all MySQL instances are added to the DM.
 
 ### Create a replication task
 
-Create a task `task.yaml` to configure the incremental replication mode and replication starting point for each data source. The complete task configuration example is as follows:
+Edit the `task.yaml` file to configure the incremental replication mode and replication starting point for each data source.
 
 {{< copyable "" >}}
 
@@ -316,17 +314,17 @@ Create a task `task.yaml` to configure the incremental replication mode and repl
 name: task-test               # The name of the task. Should be globally unique.
 task-mode: incremental        # The mode of the task. "incremental" means only incremental data is migrated.
 # Required for the sharded tables. By default, the "pessimistic" mode is used.
-# If you have a deeper understanding of the principles and usage limitations of the optimistic mode, you can also use the "optimistic" mode.
+# If you have a deep understanding of the principles and usage limitations of the optimistic mode, you can also use the "optimistic" mode.
 # For more information, see [Merge and Migrate Data from Sharded Tables](https://docs.pingcap.com/zh/tidb-data-migration/stable/feature-shard-merge).
 
 shard-mode: "pessimistic"
 
-# Configure the access information of TiDB database instance:
-target-database:              # Downstream database instance configuration.
+# Configure the access information of the TiDB database instance:
+target-database:              # Downstream database instance
   host: "${host}"             # For example: 127.0.0.1
   port: 4000
   user: "root"
-  password: "${password}"     # If password is not empty, it is recommended to use a dmctl encrypted password.
+  password: "${password}"     # It is recommended to use a dmctl encrypted password.
 
 # Use block-allow-list to configure tables that require sync:
 block-allow-list:             # The filter rule set of the matched table of the data source database instance. Use the block and allow list if the DM version is earlier than or equal to v2.0.0-beta.2.
@@ -346,29 +344,29 @@ routes:                               # Table routing rules between upstream and
     target-schema: "my_db"
     target-table: "table5"
 
-# Configure data sources. Use two data sources as examples.
+# Configure data sources. The following uses two data sources as an example.
 mysql-instances:
   - source-id: "mysql-01"             # Data source ID. It is the source-id in source1.yaml.
-    block-allow-list: "bw-rule-1"     # Use the block and allow list configuration above. Replicate `my_db1` in the instance 1.
+    block-allow-list: "bw-rule-1"     # Use the block and allow list configuration above. Replicate `my_db1` in instance 1.
     route-rules: ["route-rule-1"]     # Use the configured routing rule above.
 #       syncer-config-name: "global"  # Use the syncers configuration below.
-    meta:                             # The task-mode is incremental and there is no binlog starting point in the checkpoint in the downstream database. If the checkpoint exists, then use the checkpoint.
-      binlog-name: "${binlog-name}"   # The log location recorded in ${data-path}/my_db1/metadata in Step 1. It must be the GTID when there is a primary-standby switch upstream.
+    meta:                             # The migration starting point of binlog when task-mode is incremental and there is no checkpoint in the downstream database. A checkpoint prevails if any.
+      binlog-name: "${binlog-name}"   # The log location recorded in ${data-path}/my_db1/metadata in Step 1. It must be the GTID when the upstream has enabled primary-standby switch.
       binlog-pos: ${binlog-position}
       # binlog-gtid:                  " For example: 09bec856-ba95-11ea-850a-58f2b4af5188:1-9"
   - source-id: "mysql-02"             # Data source ID. It is the source-id in source1.yaml.
-    block-allow-list: "bw-rule-2"     # Use the block and allow list configuration above. Replicate `my_db2` in the instance2.
-    route-rules: ["route-rule-2"]     # Use the configured routing rule above.
+    block-allow-list: "bw-rule-2"     # Use the block and allow list configuration above. Replicate `my_db2` in instance2.
+    route-rules: ["route-rule-2"]     # Use the routing rule configured above.
 #       syncer-config-name: "global"  # Use the syncers configuration below.
-    meta:                             # The task-mode is incremental and there is no binlog starting point in the checkpoint in the downstream database. If the checkpoint exists, then use the checkpoint.
-      binlog-name: "${binlog-name}"   # The log location recorded in ${data-path}/my_db2/metadata in Step 1. It must be the GTID when there is a primary-standby switch upstream.
+    meta:                             # The migration starting point of binlog when task-mode is incremental and there is no checkpoint in the downstream database. A checkpoint prevails if any.
+      binlog-name: "${binlog-name}"   # The log location recorded in ${data-path}/my_db2/metadata in Step 1. It must be the GTID when the upstream has enabled primary-standby switch.
       binlog-pos: ${binlog-position}
       # binlog-gtid: "09bec856-ba95-11ea-850a-58f2b4af5188:1-9"
-# (Optional) If you need to migrate full data that has already been migrated during a full-data migration, you need to enable the safe mode to avoid data migration errors during incremental replication.
-# This scenario is common when the fully migrated data is not part of a consistent snapshot of the data source, and then the incremental data is replicated from a location earlier than the fully migrated data.
+# (Optional) If you need to incrementally migrate data that has been fully migrated, you need to enable the safe mode to avoid data migration errors during incremental replication.
+# This scenario is common when the fully migrated data is not part of a consistent snapshot of the data source, and the incremental data is replicated from a location earlier than the fully migrated data.
 # syncers:           # The running parameters of the sync processing unit.
 #  global:           # Configuration name.
-# If set to true, it changes INSERT from the data source to REPLACE, and changes UPDATE from the data source to DELETE and REPLACE.
+# If set to true, it changes INSERT to REPLACE, and UPDATE to DELETE and REPLACE for the data source.
 # Thus, it can migrate DML repeatedly during migration when primary keys or unique indexes exist in the table structure.
 # TiDB DM automatically starts safe mode within 1 minute before starting or resuming an incremental replication task.
 #    safe-mode: true
@@ -401,9 +399,9 @@ The parameters in this command are described as follows.
 
 If the task fails to start, first make configuration changes according to the returned result, and then run the `start-task task.yaml` command to restart the task. If you encounter problems, see [Handle Errors](https://docs.pingcap.com/tidb-data-migration/stable/error-handling) and [TiDB Data Migration FAQ](https://docs.pingcap.com/tidb-data-migration/stable/faq).
 
-### Check the migration result
+### Check the migration status
 
-You can check if there are running migration tasks in the DM cluster and their status. Use `tiup dmctl` to run the `query-status` command to query.
+You can check if there are running migration tasks in the DM cluster and their status by running the `query-status` command in `tiup dmctl`.
 
 {{< copyable "shell-regular" >}}
 
@@ -415,14 +413,17 @@ For more information, see [Query Status](https://docs.pingcap.com/zh/tidb-data-m
 
 ### Monitor tasks and view logs
 
-To view the history status of the migration task and more internal operational metrics, you can use Grafana or check logs.
+You can view the history of a migration task and internal operational metrics through Grafana or logs.
 
-If Prometheus, Alertmanager and Grafana are correctly deployed when you deploy the DM cluster using TiUP, you can view DM monitoring metrics in Grafana.
+- Via Grafana
+    If Prometheus, Alertmanager, and Grafana are correctly deployed when you deploy the DM cluster using TiUP, you can view DM monitoring metrics in Grafana. Specifically, enter the IP address and port specified during deployment in Grafana and select the DM dashboard.
 
-When DM is running, DM-master, DM-worker and dmctl output logs. The log directory of each component is as follows.
+- Via logs
 
-- DM-master log directory: It is specified by the --log-file DM-master process parameter. If DM is deployed using TiUP, the log directory is `/dm-deploy/dm-master-8261/log/` in the DM-master node.
-- DM-worker log directory: It is specified by the --log-file DM-worker process parameter. If DM is deployed using TiUP, the log directory is `/dm-deploy/dm-worker-8262/log/` in the DM-worker node.
+    When DM is running, DM-master, DM-worker, and dmctl output logs, which includes information about migration tasks. The log directory of each component is as follows.
+
+    - DM-master log directory: It is specified by the DM-master process parameter `--log-file`. If DM is deployed using TiUP, the log directory is `/dm-deploy/dm-master-8261/log/`.
+    - DM-worker log directory: It is specified by the DM-worker process parameter `--log-file`. If DM is deployed using TiUP, the log directory is `/dm-deploy/dm-worker-8262/log/`.
 
 ## See also
 
