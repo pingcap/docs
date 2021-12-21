@@ -3,13 +3,15 @@ title: TiDB 5.0.6 Release Notes
 category: Releases
 ---
 
-
-
 # TiDB 5.0.6 Release Notes
 
-Release Date: December 21, 2021
+Release date: December 28, 2021
 
 TiDB version: 5.0.6
+
+## Compatibility Changes
+
+## Improvements
 
 ## __unsorted
 
@@ -34,7 +36,6 @@ TiDB version: 5.0.6
     - Fix a bug that TiDB may crash when TiFlash is shutting down. [#28138](https://github.com/pingcap/tidb/pull/28138)
     - None. [#27927](https://github.com/pingcap/tidb/pull/27927)
 
-
 + TiKV/TiKV
 
     - Fix resolved ts lag increased after stoping a tikv [#11538](https://github.com/tikv/tikv/pull/11538)
@@ -57,7 +58,6 @@ TiDB version: 5.0.6
     - ```release-note [#10361](https://github.com/tikv/tikv/pull/10361)
     - copr cast invalid utf8 string to real bug fix [#9871](https://github.com/tikv/tikv/pull/9871)
 
-
 + PingCAP/TiFlash
 
     - Fix potential data inconsistency when widen pk column type if pk is handle [#3572](https://github.com/pingcap/tics/pull/3572)
@@ -66,14 +66,12 @@ TiDB version: 5.0.6
     - Fix the issue of unexpected error that `Unexpected type of column: Nullable(Nothing)` [#3376](https://github.com/pingcap/tics/pull/3376)
     -  [#2349](https://github.com/pingcap/tics/pull/2349)
 
-
 + PD
 
     - fix the problem that the hot cache cannot be emptied when the interval is less than 60 [#4432](https://github.com/tikv/pd/pull/4432)
     - None. [#4288](https://github.com/tikv/pd/pull/4288)
     - speed scheduler exit [#4201](https://github.com/tikv/pd/pull/4201)
     - allow empty region to be scheduled and use a sperate tolerance config in scatter range scheduler [#4116](https://github.com/tikv/pd/pull/4116)
-
 
 + Tools
 
@@ -84,11 +82,9 @@ TiDB version: 5.0.6
         - Expression index and index depending on virtual generated columns are now valid. Previously these indices are broken when importing through Lightning local or importer backend. [#1419](https://github.com/pingcap/br/pull/1419)
         - fix the bug that the average speed isn't accurate in backup and restore [#1411](https://github.com/pingcap/br/pull/1411)
 
-
     + PingCAP/Dumpling
 
         - fix the bug that dumpling gets very slow when dumping composite primary/unique key tables. [#399](https://github.com/pingcap/dumpling/pull/399)
-
 
     + PingCAP/TiCDC
 
@@ -134,7 +130,6 @@ Highly available model and core modules refactoring.(ref: https://github.com/pin
         - Fixed a bug in DDL handling when the owner restarts. [#2610](https://github.com/pingcap/tiflow/pull/2610)
         - Fix the bug that table is not replicated when it changes from ineligible to eligible by DDL [#1488](https://github.com/pingcap/tiflow/pull/1488)
 
-
 ## Bug Fixes
 
 + PingCAP/TiDB
@@ -153,7 +148,6 @@ Highly available model and core modules refactoring.(ref: https://github.com/pin
     - planner: fix the issue that planner may cache invalid plans for joins in some cases [#28445](https://github.com/pingcap/tidb/pull/28445)
     - Keep the original join schema in predicate pushdown [#28295](https://github.com/pingcap/tidb/pull/28295)
 
-
 + PingCAP/TiFlash
 
     - Align unix_timestamp behavior with TiDB and mysql when input is earlier than 1970-01-01 00:00:01 UTC [#3622](https://github.com/pingcap/tics/pull/3622)
@@ -163,12 +157,9 @@ Highly available model and core modules refactoring.(ref: https://github.com/pin
     - ```release-note [#2701](https://github.com/pingcap/tics/pull/2701)
     - Fix problem that TiDB Dashboard can not display disk information of TiFlash correctly in some situations. [#2397](https://github.com/pingcap/tics/pull/2397)
 
-
 + PD
 
     - Fix panic issue after TiKV node scales in [#4379](https://github.com/tikv/pd/pull/4379)
     - Fix the issue that operator can get blocked due to down store [#4367](https://github.com/tikv/pd/pull/4367)
     - Fix the issue that PD may not elect leader as soon as leader step down [#4218](https://github.com/tikv/pd/pull/4218)
     - `evict-leader-scheduler` supports schedule the regions with unhealthy peers. [#4130](https://github.com/tikv/pd/pull/4130)
-
-
