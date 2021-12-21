@@ -19,7 +19,15 @@ The data migration task includes two stages: full data migration and incremental
 - Full data migration: Migrate the table structure of the corresponding table from the data source to TiDB, and then read the data stored in the data source and write it to the TiDB cluster.
 - Incremental data replication: After the full data migration is completed, the corresponding table changes from the data source are read and then written to the TiDB cluster.
 
-The following describes the features of DM.
+## DM versions
+
+The stable versions of DM include v1.0, v2.0, and v5.3. It is recommended to use DM v5.3 (the latest stable version of DM) and not recommended to use v1.0 (the earliest stable version of DM).
+
+For v5.3 and earlier releases, the DM documentation is independent of the TiDB documentation. To access the DM documentation, click one of the following links:
+
+- [DM v5.3 documentation](https://docs.pingcap.com/tidb-data-migration/v5.3)
+- [DM v2.0 documentation](https://docs.pingcap.com/tidb-data-migration/v2.0/)
+- [DM v1.0 documentation](https://docs.pingcap.com/tidb-data-migration/v1.0/)
 
 ## Basic features
 
@@ -71,7 +79,7 @@ Before using the DM tool, note the following restrictions:
 
     > **Warning:**
     >
-    > Support for MySQL 8.0 is an experimental feature of TiDB Data Migration v2.0. It is **NOT** recommended that you use it in a production environment.
+    > Migrating data from MySQL 8.0 to TiDB using DM is an experimental feature (introduced since DM v2.0). It is **NOT** recommended that you use it in a production environment.
 
 + DDL syntax compatibility
 
