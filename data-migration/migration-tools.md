@@ -91,7 +91,7 @@ tiup install dumpling tidb-lightning
 
 ### Step 3. Update TiUP and its components (optional)
 
-It is recommended to see the update log and compatibility notes of the new version.
+It is recommended to see the release log and compatibility notes of the new version.
 
 {{< copyable "shell-regular" >}}
 
