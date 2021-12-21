@@ -21,7 +21,7 @@ Generally, these tools work by the following steps:
 3. Replicate the data of the DDL real table to the ghost table;
 4. After the data are consistent between the two tables, use the `rename` statement to replace the real table with the ghost table.
 
-![DM online-ddl](/media/dm-online-ddl-2.png)
+![DM online-ddl](/media/dm/dm-online-ddl-2.png)
 
 When you migrate data from MySQL to TiDB using DM, online DDL tools can identify the DDLs in the above step 2 and apply them downstream in step 4, which can reduce the replication workload for the ghost table.
 
@@ -29,7 +29,7 @@ When you migrate data from MySQL to TiDB using DM, online DDL tools can identify
 
 Generally, it is recommended to enbale the `online-ddl` configuration and you can see the following effects:
 
-![DM online-ddl](/media/dm-online-ddl.png)
+![DM online-ddl](/media/dm/dm-online-ddl.png)
 
 - The downstream TiDB does not need to create and replicate the ghost table, saving the storage space and network transmission overhead;
 - When you merge and migrate data from sharded tables, the RENAME operation is ignored for each sharded ghost tables to ensure the correctness of the replication;

@@ -25,7 +25,7 @@ The following describes the features of DM.
 
 This section describes the basic data migration features provided by DM.
 
-![DM Core Features](/media/dm-core-features.png)
+![DM Core Features](/media/dm/dm-core-features.png)
 
 ### Block and allow lists migration at the schema and table levels
 

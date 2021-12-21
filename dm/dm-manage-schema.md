@@ -16,7 +16,7 @@ When you migrate tables using DM, DM performs the following operations on the ta
 
 - For incremental replication, the whole data link contains the following table schemas, which might be the same or different:
 
-    ![schema](/media/operate-schema.png)
+    ![schema](/media/dm/operate-schema.png)
 
     * The upstream table schema at the current time, identified as `schema-U`.
     * The table schema of the binlog event currently being consumed by DM, identified as `schema-B`. This schema corresponds to the upstream table schema at a historical time.

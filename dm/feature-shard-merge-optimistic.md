@@ -73,7 +73,7 @@ When you use the optimistic mode for a migration task, a DDL statement is migrat
 
 Merge and migrate the following three sharded tables to TiDB:
 
-![optimistic-ddl-fail-example-1](/media/optimistic-ddl-fail-example-1.png)
+![optimistic-ddl-fail-example-1](/media/dm/optimistic-ddl-fail-example-1.png)
 
 Add a new column `Age` in `tbl01` and set the default value of the column to `0`:
 
@@ -81,7 +81,7 @@ Add a new column `Age` in `tbl01` and set the default value of the column to `0`
 ALTER TABLE `tbl01` ADD COLUMN `Age` INT DEFAULT 0;
 ```
 
-![optimistic-ddl-fail-example-2](/media/optimistic-ddl-fail-example-2.png)
+![optimistic-ddl-fail-example-2](/media/dm/optimistic-ddl-fail-example-2.png)
 
 Add a new column `Age` in `tbl00` and set the default value of the column to `-1`:
 
@@ -89,7 +89,7 @@ Add a new column `Age` in `tbl00` and set the default value of the column to `-1
 ALTER TABLE `tbl00` ADD COLUMN `Age` INT DEFAULT -1;
 ```
 
-![optimistic-ddl-fail-example-3](/media/optimistic-ddl-fail-example-3.png)
+![optimistic-ddl-fail-example-3](/media/dm/optimistic-ddl-fail-example-3.png)
 
 By then, the `Age` column of `tbl00` is inconsistent because `DEFAULT 0` and `DEFAULT -1` are incompatible with each other. In this situation, DM will report the error, but you have to manually fix the data inconsistency.
 
@@ -97,13 +97,13 @@ By then, the `Age` column of `tbl00` is inconsistent because `DEFAULT 0` and `DE
 
 In the optimistic mode, after DM-worker receives the DDL statement from the upstream, it forwards the updated table schema to DM-master. DM-worker tracks the current schema of each sharded table, and DM-master merges these schemas into a composite schema that is compatible with DML statements of every sharded table. Then DM-master migrates the corresponding DDL statement to the downstream. DML statements are directly migrated to the downstream.
 
-![optimistic-ddl-flow](/media/optimistic-ddl-flow.png)
+![optimistic-ddl-flow](/media/dm/optimistic-ddl-flow.png)
 
 ### Examples
 
 Assume the upstream MySQL has three sharded tables (`tbl00`, `tbl01`, and `tbl02`). Merge and migrate these sharded tables to the `tbl` table in the downstream TiDB. See the following image:
 
-![optimistic-ddl-example-1](/media/optimistic-ddl-example-1.png)
+![optimistic-ddl-example-1](/media/dm/optimistic-ddl-example-1.png)
 
 Add a `Level` column in the upstream:
 
@@ -111,11 +111,11 @@ Add a `Level` column in the upstream:
 ALTER TABLE `tbl00` ADD COLUMN `Level` INT;
 ```
 
-![optimistic-ddl-example-2](/media/optimistic-ddl-example-2.png)
+![optimistic-ddl-example-2](/media/dm/optimistic-ddl-example-2.png)
 
 Then TiDB will receive the DML statement from `tbl00` (with the `Level` column) and the DML statement from the `tbl01` and `tbl02` tables (without the `Level` column).
 
-![optimistic-ddl-example-3](/media/optimistic-ddl-example-3.png)
+![optimistic-ddl-example-3](/media/dm/optimistic-ddl-example-3.png)
 
 The following DML statements can be migrated to the downstream without any modification:
 
@@ -124,7 +124,7 @@ UPDATE `tbl00` SET `Level` = 9 WHERE `ID` = 1;
 INSERT INTO `tbl02` (`ID`, `Name`) VALUES (27, 'Tony');
 ```
 
-![optimistic-ddl-example-4](/media/optimistic-ddl-example-4.png)
+![optimistic-ddl-example-4](/media/dm/optimistic-ddl-example-4.png)
 
 Also add a `Level` column in `tbl01`:
 
@@ -132,7 +132,7 @@ Also add a `Level` column in `tbl01`:
 ALTER TABLE `tbl01` ADD COLUMN `Level` INT;
 ```
 
-![optimistic-ddl-example-5](/media/optimistic-ddl-example-5.png)
+![optimistic-ddl-example-5](/media/dm/optimistic-ddl-example-5.png)
 
 At this time, the downstream already have had the same `Level` column, so DM-master performs no operation after comparing the table schemas.
 
@@ -142,7 +142,7 @@ Drop a `Name` column in `tbl01`:
 ALTER TABLE `tbl01` DROP COLUMN `Name`;
 ```
 
-![optimistic-ddl-example-6](/media/optimistic-ddl-example-6.png)
+![optimistic-ddl-example-6](/media/dm/optimistic-ddl-example-6.png)
 
 Then the downstream will receive the DML statements from `tbl00` and `tbl02` with the `Name` column, so this column is not immediately dropped.
 
@@ -153,7 +153,7 @@ INSERT INTO `tbl01` (`ID`, `Level`) VALUES (15, 7);
 UPDATE `tbl00` SET `Level` = 5 WHERE `ID` = 5;
 ```
 
-![optimistic-ddl-example-7](/media/optimistic-ddl-example-7.png)
+![optimistic-ddl-example-7](/media/dm/optimistic-ddl-example-7.png)
 
 Add a `Level` column in `tbl02`:
 
@@ -161,7 +161,7 @@ Add a `Level` column in `tbl02`:
 ALTER TABLE `tbl02` ADD COLUMN `Level` INT;
 ```
 
-![optimistic-ddl-example-8](/media/optimistic-ddl-example-8.png)
+![optimistic-ddl-example-8](/media/dm/optimistic-ddl-example-8.png)
 
 By then, all sharded tables have the `Level` column.
 
@@ -172,7 +172,7 @@ ALTER TABLE `tbl00` DROP COLUMN `Name`;
 ALTER TABLE `tbl02` DROP COLUMN `Name`;
 ```
 
-![optimistic-ddl-example-9](/media/optimistic-ddl-example-9.png)
+![optimistic-ddl-example-9](/media/dm/optimistic-ddl-example-9.png)
 
 By then, the `Name` columns are dropped from all sharded tables and can be safely dropped in the downstream:
 
@@ -180,4 +180,4 @@ By then, the `Name` columns are dropped from all sharded tables and can be safel
 ALTER TABLE `tbl` DROP COLUMN `Name`;
 ```
 
-![optimistic-ddl-example-10](/media/optimistic-ddl-example-10.png)
+![optimistic-ddl-example-10](/media/dm/optimistic-ddl-example-10.png)
