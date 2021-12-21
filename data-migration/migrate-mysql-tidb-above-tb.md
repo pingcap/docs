@@ -149,7 +149,7 @@ If the import fails, refer to [TiDB Lightning FAQ](/tidb-lightning/tidb-lightnin
     source-id: "mysql-01" # Must be unique.
 
     # Configures whether DM-worker uses the global transaction identifier (GTID) to pull binlogs. To enable this mode, the upstream MySQL must also enable GTID. If the upstream MySQL has automatic source-replica switching, GTID mode is required.
-    enable-gtid: false
+    enable-gtid: true
 
     from:
       host: "${host}"           # e.g.: 172.16.10.81
