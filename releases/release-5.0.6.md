@@ -9,9 +9,13 @@ Release date: December 28, 2021
 
 TiDB version: 5.0.6
 
-## Compatibility Changes
+## Compatibility changes
+
+## Feature enhancements
 
 ## Improvements
+
+## Bug fixes
 
 ## __unsorted
 
