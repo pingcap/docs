@@ -58,4 +58,4 @@ The following features can improve the migration process and might meet more nee
 - [Migrate with pt/gh-host](/data-migration/migrate-with-pt-ghost.md)
 - [Migrate with Binlog Event Filter](/data-migration/migrate-with-binlog-event-filter.md)
 - [Migrate with Filter Binlog Events Using SQL Expressions](/data-migration/migrate-with-binlog-sql-expression-filter.md)
-- [Migrate with More Columns in Downstream](//data-migration/migrate-with-more-columns-downstream.md)
+- [Migrate with More Columns in Downstream](/data-migration/migrate-with-more-columns-downstream.md)
