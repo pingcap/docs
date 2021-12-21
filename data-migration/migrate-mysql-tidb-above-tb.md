@@ -191,7 +191,7 @@ If the import fails, refer to [TiDB Lightning FAQ](/tidb-lightning/tidb-lightnin
       password: "${password}"            # It is recommended to use `dmctl encrypt` to encrypt the plaintext password before using it.
 
     # Use block and allow lists to specify the tables to be replicated.
-    block-allow-list:                    # The collection of filtering rules that matches the tables in the source database instance. If the DM version is v2.0.0-beta.2 or earlier, use black-white-list instead.
+    block-allow-list:                    # The collection of filtering rules that matches the tables in the source database instance.
       bw-rule-1:                         # The block-allow-list configuration item ID.
         do-dbs: ["${db-name}"]           # Name of databases to be replicated.
 
@@ -201,9 +201,9 @@ If the import fails, refer to [TiDB Lightning FAQ](/tidb-lightning/tidb-lightnin
         block-allow-list: "bw-rule-1"    # References the block-allow-list configuration above.
         # syncer-config-name: "global"    # References the syncers incremental data configuration below.
         meta:                            # When task-mode is "incremental" and the downstream database does not have a checkpoint, DM uses the binlog position as the starting point. If the downstream database has a checkpoint, DM uses the checkpoint as the starting point.
-          binlog-name: "mysql-bin.000004"  # The binlog position recorded in Step 1. When the upstream database has source-replica switching, GTID mode is required.
-          binlog-pos: 109227
-          # binlog-gtid: "09bec856-ba95-11ea-850a-58f2b4af5188:1-9"
+          # binlog-name: "mysql-bin.000004"  # The binlog position recorded in Step 1. When the upstream database has source-replica switching, GTID mode is required.
+          # binlog-pos: 109227
+          binlog-gtid: "09bec856-ba95-11ea-850a-58f2b4af5188:1-9"
 
     # (Optional) If you need to incrementally replicate data that has already been migrated in the full data migration, you need to enable the safe mode to avoid the incremental data replication error.
     # This scenario is common in the following case: the full migration data does not belong to the data source's consistency snapshot, and after that, DM starts to replicate incremental data from a position earlier than the full migration.
