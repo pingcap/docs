@@ -37,7 +37,7 @@ Before starting the migration, make sure you have completed the following tasks:
 
 Because the sharded tables are involved in the migration, data from multiple sharded tables may cause data conflicts in the primary key or unique index. Therefore, before the migration, you need to check the sharded table. For details, see [Cross table data conflict handling in primary key or unique index](https://docs.pingcap.com/tidb-data-migration/stable/shard-merge-best-practices#handle-conflicts-between-primary-keys-or-unique-indexes-across-multiple-sharded-tables).
 
-In this example, the structure of the `user.information` table is as follows:
+In this example, the structures of the `sale_01` and `sale_02` are the same. The following is the structure of `sale_01`.
 
 {{< copyable "sql" >}}
 
@@ -129,7 +129,7 @@ target-database:
   host: "${host}"                             # For example: 192.168.0.1
   port: 4000
   user: "root"
-  password: "${password}"                     # Plaintext passwords is supported but not recommended. It is recommended that you use dmctl encrypt to encrypt plaintext passwords.
+  password: "${password}"                     # Plaintext passwords are supported but not recommended. It is recommended that you use dmctl encrypt to encrypt plaintext passwords.
 
 mysql-instances:
   -
@@ -169,7 +169,7 @@ block-allow-list:
     do-dbs: ["store_*"]
 ```
 
-The above example is the minimum task configuration to perform the migration. For more information, see [DM Advanced Task Configuration File](https://docs.pingcap.com/tidb-data-migration/stable/task-configuration-file-full/).
+The above example is the minimum configuration to perform the migration task. For more information, see [DM Advanced Task Configuration File](https://docs.pingcap.com/tidb-data-migration/stable/task-configuration-file-full/).
 
 For more information on `routes`, `filters` and other configurations in the task file, see the following documents:
 
@@ -180,7 +180,7 @@ For more information on `routes`, `filters` and other configurations in the task
 
 ## Step 3: Start the task
 
-In order to spot configuration errors in the data migration task in advance, DM provides the [Pre-check](https://docs.pingcap.com/tidb-data-migration/stable/precheck) function. When data migration starts, DM will automatically check related permissions and configurations.
+You can use the [Pre-check](https://docs.pingcap.com/tidb-data-migration/stable/precheck) feature to spot configuration errors in the data migration task in advance. When data migration starts, DM will automatically check related permissions and configurations.
 
 You can also use the `check-task` command to manually check whether the configurations of the upstream MySQL instance meet the requirements.
 
@@ -215,18 +215,21 @@ After starting the migration task, you can use `dmtcl tiup` to run `query-status
 tiup dmctl --master-addr ${advertise-addr} query-status ${task-name}
 ```
 
-If you encounter errors, you can use `query-status <name of the error task>` to view more detailed information. For details about the query results, task status and sub task status of the `query-status` command, see [TiDB Data Migration Query Status](https://docs.pingcap.com/tidb-data-migration/stable/query-status).
+If you encounter errors, use `query-status <name of the error task>` to view more detailed information. For details about the query results, task status and sub task status of the `query-status` command, see [TiDB Data Migration Query Status](https://docs.pingcap.com/tidb-data-migration/stable/query-status).
 
 ## Step 5: Monitor tasks and check logs (optional)
 
-To view the history status of the migration task and more internal operational metrics, you can use Grafana or check logs.
+You can view the history of a migration task and internal operational metrics through Grafana or logs.
 
-If Prometheus, Alertmanager and Grafana are correctly deployed when you use TiUP to deploy the DM cluster, you can use Grafana to check the status. For example, assume that the address of Grafana is 172.16.10.71, you can [open the page to enter Grafana](http://172.16.10.71:3000) in the browser and select the Dashboard of DM, and then you can view related monitoring items. For specific monitoring indicators, see [Monitor and Alarm Settings](https://docs.pingcap.com/tidb-data-migration/stable/monitor-a-dm-cluster).
+- Via Grafana
+    If Prometheus, Alertmanager, and Grafana are correctly deployed when you deploy the DM cluster using TiUP, you can view DM monitoring metrics in Grafana. Specifically, enter the IP address and port specified during deployment in Grafana and select the DM dashboard.
 
-You can also check the DM running status and related errors through the log file.
+- Via logs
 
-- DM-master log directory: set by the DM-master process parameter `--log-file`. If you use TiUP to deploy DM, the log directory is located at `/dm-deploy/dm-master-8261/log/`.
-- DM-worker log directory: set by the DM-worker process parameter `--log-file`. If you use TiUP to deploy DM, the log directory is located at `/dm-deploy/dm-worker-8262/log/`.
+    When DM is running, DM-master, DM-worker, and dmctl output logs, which includes information about migration tasks. The log directory of each component is as follows.
+
+    - DM-master log directory: It is specified by the DM-master process parameter `--log-file`. If DM is deployed using TiUP, the log directory is `/dm-deploy/dm-master-8261/log/`.
+    - DM-worker log directory: It is specified by the DM-worker process parameter `--log-file`. If DM is deployed using TiUP, the log directory is `/dm-deploy/dm-worker-8262/log/`.
 
 ## See also
 
