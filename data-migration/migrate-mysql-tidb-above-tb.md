@@ -7,19 +7,22 @@ summary: Learn how to migrate data above Terabytes from MySQL to TiDB.
 
 When the data volume to be migrated is small, you can easily [use DM to migrate data](/data-migration/migrate-mysql-tidb-less-tb.md), both for full migration and incremental replication. However, because DM imports data at a slow speed (30~50 GiB/h), when the data volume is large, the migration might take a long time.
 
-This document describes how to migrate large volumes of data from MySQL to TiDB using Dumpling and TiDB Lightning. TiDB Lightning's local backend mode can import data at a speed of up to 500 GiB/h. After the full migration is completed, you can replicate the incremental data using DM.
+This document describes how to migrate large volumes of data from MySQL to TiDB. This whole migration is divided into two processes:
+
+1. *Full migration*. Dumpling and TiDB Lightning perform the full migraiton. TiDB Lightning's **local backend** mode can import data at a speed of up to 500 GiB/h.
+2. *Incremental replication*. After the full migration is completed, you can replicate the incremental data using DM.
 
 ## Prerequisites
 
 - [Install DM](https://docs.pingcap.com/zh/tidb-data-migration/stable/deploy-a-dm-cluster-using-tiup).
 - [Install Dumpling and TiDB Lightning](/migration-tools.md).
 - [Grant the source database and target database privileges required for DM](https://docs.pingcap.com/tidb-data-migration/stable/dm-worker-intro).
-- [Get the target database privileges required for TiDB Lightning](/tidb-lightning/tidb-lightning-faq.md#what-are-the-privilege-requirements-for-the-target-database).
-- [Get the source database privileges required for Dumpling](/dumpling-overview.md#export-data-from-tidbmysql).
+- [Grant the target database privileges required for TiDB Lightning](/tidb-lightning/tidb-lightning-faq.md#what-are-the-privilege-requirements-for-the-target-database).
+- [Grant the source database privileges required for Dumpling](/dumpling-overview.md#export-data-from-tidbmysql).
 
 ## Resource requirements
 
-**OS**: Examples in this document use new, clean CentOS 7 instances. You can virtualize a host locally or deploy a cloud virtual machine on a vendor-provided platform. TiDB Lightning runs on a full CPU by default, so it is recommended to deploy TiDB Lightning on a dedicated machine. If you cannot use a dedicated machine, you may deploy TiDB Lightning on a shared machine with other components (such as `tikv-server`) and limit TiDB Lightning's CPU usage by configuring `region-concurrency`. In the case of hybrid deployment, you can limit the CPU usage of TiDB Lightning to 75% of the number of logical CPUs.
+**OS**: Examples in this document use new, clean CentOS 7 instances. You can deploy a virtual machine on your own host locally, or on a vendor-provided cloud platform. TiDB Lightning consumes as much CPU resources as needed by default, so it is recommended to deploy TiDB Lightning on a dedicated machine. If you cannot use a dedicated machine, you may deploy TiDB Lightning on a shared machine with other components (such as `tikv-server`) and limit TiDB Lightning's CPU usage by configuring `region-concurrency`. In the case of hybrid deployment, you can limit the CPU usage of TiDB Lightning to 75% of the number of logical CPUs.
 
 **Memory and CPU**: TiDB Lightning consumes high resources, so it is recommended to allocate more than 64 GB of memory and 32-core CPU for TiDB Lightning. To get the best performance, make sure the CPU core to memory (GB) ratio is more than 1:2.
 
@@ -72,9 +75,9 @@ The target TiKV cluster must have enough disk space to store the imported data. 
     |`-r` or `--row`        |The maximum number of rows in a single file|
     |`-F`                   |The maximum size of a single file, in MiB|
     |-`B` or `--database`   |Specifies a database to be exported|
-    |`-f` or `--filter`     |Exports tables that match the pattern. The syntax is the same as [table-filter](/table-filter.md). `[\*.\*,!/^(mysql&#124;sys&#124;INFORMATION_SCHEMA&#124;PERFORMANCE_SCHEMA&#124;METRICS_SCHEMA&#124;INSPECTION_SCHEMA)$/.\*]` exports all tables except the system schema. |
+    |`-f` or `--filter`     |Exports tables that match the pattern. The syntax is the same as [table-filter](/table-filter.md). For example, `[\*.\*,!/^(mysql&#124;sys&#124;INFORMATION_SCHEMA&#124;PERFORMANCE_SCHEMA&#124;METRICS_SCHEMA&#124;INSPECTION_SCHEMA)$/.\*]` exports all tables except the system schema. |
 
-    Make sure `${data-path}` has enough space to store the exported data. To prevent the import from being interrupted by a large table, it is strongly recommended to use the `-F` option to limit the size of a single file.
+    Make sure `${data-path}` has enough space to store the exported data. To prevent the import from being interrupted by a large table consuming all the spaces, it is strongly recommended to use the `-F` option to limit the size of a single file.
 
 2. View the `metadata` file in the `${data-path}` directory. This is a Dumpling-generated metadata file. Record the binlog position information, which is required for the incremental replication in Step 3.
 
@@ -101,7 +104,7 @@ The target TiKV cluster must have enough disk space to store the imported data. 
     # "local": Default backend. The local backend is used to import large volumes of data (1 TiB or more). During the import, the target TiDB cluster cannot provide any service.
     # "tidb": The "tidb" backend is used to import data less than 1 TiB. During the import, the target TiDB cluster can provide service normally. For more information on the backends, refer to https://docs.pingcap.com/tidb/stable/tidb-lightning-backends.
     backend = "local"
-    # For better import performance, it is recommended to use a directory different from `data-source-dir` and use flash storage and exclusive I/O for the directory.
+    # Sets the temporary storage directory for the sorted Key-Value files. The directory must be empty, and the storage space must be enough to hold the largest single table in the data source. For better import performance, it is recommended to use a directory different from `data-source-dir` for the directory and use flash storage, which can use I/O exclusively.
     sorted-kv-dir = "${sorted-kv-dir}"
 
     [mydumper]
@@ -124,7 +127,7 @@ The target TiKV cluster must have enough disk space to store the imported data. 
 
     For more information on TiDB Lightning configuration, refer to [TiDB Lightning Configuration](/tidb-lightning/tidb-lightning-configuration.md).
 
-2. Start the import by running `tidb-lightning`. If you launch the program directly in the command line, the program might exit because of the `SIGHUP` signal. In this case, it is recommended to run the program using a `nohup` or `screen` tool. For example:
+2. Start the import by running `tidb-lightning`. If you launch the program directly in the command line, the process might exit unexpectedly after receiving a SIGHUP signal. In this case, it is recommended to run the program using a `nohup` or `screen` tool. For example:
 
     {{< copyable "shell-regular" >}}
 
@@ -148,7 +151,7 @@ If the import fails, refer to [TiDB Lightning FAQ](/tidb-lightning/tidb-lightnin
     # Configuration.
     source-id: "mysql-01" # Must be unique.
 
-    # Configures whether DM-worker uses the global transaction identifier (GTID) to pull binlogs. To enable this mode, the upstream MySQL must also enable GTID. If the upstream MySQL has automatic source-replica switching, GTID mode is required.
+    # Configures whether DM-worker uses the global transaction identifier (GTID) to pull binlogs. To enable this mode, the upstream MySQL must also enable GTID. If the upstream MySQL service is configured to switch master between different nodes automatically, GTID mode is required.
     enable-gtid: true
 
     from:
@@ -200,8 +203,8 @@ If the import fails, refer to [TiDB Lightning FAQ](/tidb-lightning/tidb-lightnin
       - source-id: "mysql-01"            # Data source ID，i.e., source-id in source1.yaml
         block-allow-list: "bw-rule-1"    # References the block-allow-list configuration above.
         # syncer-config-name: "global"    # References the syncers incremental data configuration below.
-        meta:                            # When task-mode is "incremental" and the downstream database does not have a checkpoint, DM uses the binlog position as the starting point. If the downstream database has a checkpoint, DM uses the checkpoint as the starting point.
-          # binlog-name: "mysql-bin.000004"  # The binlog position recorded in Step 1. When the upstream database has source-replica switching, GTID mode is required.
+        meta:                            # When task-mode is "incremental" and the target database does not have a checkpoint, DM uses the binlog position as the starting point. If the target database has a checkpoint, DM uses the checkpoint as the starting point.
+          # binlog-name: "mysql-bin.000004"  # The binlog position recorded in Step 1. If the upstream database service is configured to switch master between different nodes automatically, GTID mode is required.
           # binlog-pos: 109227
           binlog-gtid: "09bec856-ba95-11ea-850a-58f2b4af5188:1-9"
 
