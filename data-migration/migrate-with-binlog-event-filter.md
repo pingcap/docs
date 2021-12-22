@@ -5,7 +5,7 @@ summary: Learn how to filter binlog events when migrating data
 
 # Filter Binlog Events
 
-This document describes how to filter binlog events when you use DM to perform continuous incremental data replication. For the detailed replication instruction, refer to the following documents:
+This document describes how to filter binlog events when you use DM to perform continuous incremental data replication. For the detailed replication instructions, refer to the following documents by scenarios:
 
 - [Migrate MySQL Data of Less Than 1 TiB to TiDB](/data-migration/migrate-mysql-tidb-less-tb.md)
 - [Migrate MySQL Data of More Than 1 TiB to TiDB](/data-migration/migrate-mysql-tidb-above-tb.md)
