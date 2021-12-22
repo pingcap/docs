@@ -33,7 +33,7 @@ When you encounter a DDL statement unsupported by TiDB, you need to manually han
 
 > **Note:**
 >
-> Currently, TiDB is not compatible with all the DDL statements that MySQL supports. See [MySQL Compatibility](/mysql-compatibility/#ddl).
+> Currently, TiDB is not compatible with all the DDL statements that MySQL supports. See [MySQL Compatibility](/mysql-compatibility.md#ddl).
 
 ## How to reset the data migration task?
 
