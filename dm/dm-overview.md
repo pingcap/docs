@@ -37,11 +37,11 @@ This section describes the basic data migration features provided by DM.
 
 ### Block and allow lists migration at the schema and table levels
 
-The [block and allow lists filtering rule]\dm\dm-key-features.md#block-and-allow-table-lists) is similar to the `replication-rules-db`/`replication-rules-table` feature of MySQL, which can be used to filter or replicate all operations of some databases only or some tables only.
+The [block and allow lists filtering rule](/dm/dm-key-features.md#block-and-allow-table-lists) is similar to the `replication-rules-db`/`replication-rules-table` feature of MySQL, which can be used to filter or replicate all operations of some databases only or some tables only.
 
 ### Binlog event filtering
 
-The [binlog event filtering]\dm\dm-key-features.md#binlog-event-filter) feature means that DM can filter certain types of SQL statements from certain tables in the source database. For example, you can filter all `INSERT` statements in the table `test`.`sbtest` or filter all `TRUNCATE TABLE` statements in the schema `test`.
+The [binlog event filtering](/dm/dm-key-features.md#binlog-event-filter) feature means that DM can filter certain types of SQL statements from certain tables in the source database. For example, you can filter all `INSERT` statements in the table `test`.`sbtest` or filter all `TRUNCATE TABLE` statements in the schema `test`.
 
 ### Schema and table routing
 
@@ -83,7 +83,7 @@ Before using the DM tool, note the following restrictions:
 
 + DDL syntax compatibility
 
-    - Currently, TiDB is not compatible with all the DDL statements that MySQL supports. Because DM uses the TiDB parser to process DDL statements, it only supports the DDL syntax supported by the TiDB parser. For details, see [MySQL Compatibility](https://pingcap.com/docs/stable/reference/mysql-compatibility/#ddl).
+    - Currently, TiDB is not compatible with all the DDL statements that MySQL supports. Because DM uses the TiDB parser to process DDL statements, it only supports the DDL syntax supported by the TiDB parser. For details, see [MySQL Compatibility](/mysql-compatibility.md#ddl).
 
     - DM reports an error when it encounters an incompatible DDL statement. To solve this error, you need to manually handle it using dmctl, either skipping this DDL statement or replacing it with a specified DDL statement(s). For details, see [Skip or replace abnormal SQL statements]\dm\dm-faq.md#how-to-handle-incompatible-ddl-statements).
 

@@ -222,7 +222,7 @@
     - [Monitor](/tidb-lightning/monitor-tidb-lightning.md)
     - [FAQ](/tidb-lightning/tidb-lightning-faq.md)
     - [Glossary](/tidb-lightning/tidb-lightning-glossary.md)
-  - [TiDB Data Migration]
+  - TiDB Data Migration
     - About TiDB Data Migration
       - [DM Overview](/dm/dm-overview.md)
       - Basic Features
@@ -251,7 +251,7 @@
     - Deploy
       - [Software and Hardware Requirements](/dm/dm-hardware-and-software-requirements.md)
       - Deploy a DM Cluster
-        - [Use TiUP (/dm/Recommended)](/dm/deploy-a-dm-cluster-using-tiup.md)
+        - [Use TiUP (Recommended)](/dm/deploy-a-dm-cluster-using-tiup.md)
         - [Use TiUP Offline](/dm/deploy-a-dm-cluster-using-tiup-offline.md)
         - [Use Binary](/dm/deploy-a-dm-cluster-using-binary.md)
         - [Use Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/dev/deploy-tidb-dm)
@@ -259,7 +259,7 @@
       - [Test DM Performance](/dm/dm-performance-test.md)
     - Maintain
       - Tools
-        - [Maintain DM Clusters Using TiUP (/dm/Recommended)](/dm/maintain-dm-using-tiup.md)
+        - [Maintain DM Clusters Using TiUP (Recommended)](/dm/maintain-dm-using-tiup.md)
         - [Maintain DM Clusters Using dmctl](/dm/dmctl-introduction.md)
         - [Maintain DM Clusters Using OpenAPI](/dm/dm-open-api.md)
       - Cluster Upgrade
@@ -307,7 +307,7 @@
       - [Error Codes](/dm/dm-error-handling.md#handle-common-errors)
     - [FAQ](/dm/dm-faq.md)
     - [Glossary](/dm/dm-glossary.md)
-    - [Release Notes] (/dm/dm-release-notes.md)
+    - [Release Notes](/dm/dm-release-notes.md)
   - TiCDC
     - [Overview](/ticdc/ticdc-overview.md)
     - [Deploy](/ticdc/deploy-ticdc.md)
