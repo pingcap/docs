@@ -226,4 +226,4 @@ Now, you have successfully created a task to migrate the sharded tables from the
 
 ## Verify data
 
-You can modify data in the upstream MySQL sharded tables. Then use [sync-diff-inspector](https://docs.pingcap.com/tidb/v4.0/shard-diff) to check whether the upstream and downstream data are consistent. Consistent data means that the migration task works well, which also indicates that the cluster works well.
+You can modify data in the upstream MySQL sharded tables. Then use [sync-diff-inspector](/sync-diff-inspector/shard-diff.md) to check whether the upstream and downstream data are consistent. Consistent data means that the migration task works well, which also indicates that the cluster works well.

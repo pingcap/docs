@@ -110,7 +110,7 @@ This section introduces how to enable encrypted data transmission between DM com
 
 ### Enable encrypted data transmission for downstream TiDB
 
-1. Configure the downstream TiDB to use encrypted connections. For detailed operatons,  refer to [Configure TiDB to use encrypted connections](https://docs.pingcap.com/tidb/stable/enable-tls-between-clients-and-servers#configure-tidb-to-use-encrypted-connections).
+1. Configure the downstream TiDB to use encrypted connections. For detailed operatons,  refer to [Configure TiDB server to use secure connections](/enable-tls-between-clients-and-servers.md#configure-tidb-server-to-use-secure-connections).
 
 2. Set the TiDB client certificate in the task configuration file:
 

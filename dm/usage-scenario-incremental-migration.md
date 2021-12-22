@@ -30,7 +30,7 @@ First you need to determine the replication position of the binlog where you sta
 
 By following the steps below, you can obtain the position of binlog where you start migrating data in the source data:
 
-- Use Dumpling/Mydumper for full data export. Then use other tools, such as TiDB Lightning, for full data import. After that, you can obtain the replication position by inspecting the [metadata files](https://docs.pingcap.com/zh/tidb/stable/dumpling-overview#%E8%BE%93%E5%87%BA%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F).
+- Use Dumpling/Mydumper for full data export. Then use other tools, such as TiDB Lightning, for full data import. After that, you can obtain the replication position by inspecting the [metadata files](/dumpling-overview.md#format-of-exported-files).
 
   ```file
   Started dump at: 2020-11-10 10:40:19
