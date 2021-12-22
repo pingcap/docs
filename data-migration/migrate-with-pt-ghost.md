@@ -5,7 +5,7 @@ summary: Learn how to use DM to replicate incremental data from databases that u
 
 # Continuous Replication from Databases that Use gh-ost or pt-osc
 
-In production scenarios, table locking during DDL execution can block the reads or writes to and from the database to a certain extent. Therefore, online DDL tools are often used to execute DDLs to minimize the impact on reads and writes. Common DDL tools are [gh-ost](https://github.com/github/gh-ost) and [pt-osc](https://www.percona.com/doc/percona-toolkit/3.0/pt-online-schema-change.html).
+In production scenarios, table locking during DDL execution can block the reads from or writes to the database to a certain extent. Therefore, online DDL tools are often used to execute DDLs to minimize the impact on reads and writes. Common DDL tools are [gh-ost](https://github.com/github/gh-ost) and [pt-osc](https://www.percona.com/doc/percona-toolkit/3.0/pt-online-schema-change.html).
 
 After migrating data from MySQL to TiDB by using DM, you can enbale `online-ddl` to allow collaboration of DM and gh-ost or pt-osc.
 
