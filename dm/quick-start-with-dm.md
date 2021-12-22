@@ -10,9 +10,9 @@ This document describes how to migrate data from MySQL to TiDB using [TiDB Data 
 
 If you need to deploy DM in the production environment, refer to the following documents:
 
-- [Deploy a DM cluster Using TiUP]\dm\deploy-a-dm-cluster-using-tiup.md)
-- [Create a Data Source]\dm\quick-start-create-source.md)
-- [Create a Data Migration Task]\dm\quick-create-migration-task.md)
+- [Deploy a DM cluster Using TiUP](/dm/deploy-a-dm-cluster-using-tiup.md)
+- [Create a Data Source](/dm/quick-start-create-source.md)
+- [Create a Data Migration Task](/dm/quick-create-migration-task.md)
 
 ## Sample scenario
 

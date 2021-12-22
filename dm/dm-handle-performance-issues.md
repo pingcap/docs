@@ -8,19 +8,19 @@ aliases: ['/tidb-data-migration/dev/handle-performance-issues/']
 
 This document introduces common performance issues that might exist in DM and how to deal with them.
 
-Before diagnosing an issue, you can refer to the [DM 2.0-GA Benchmark Report]\dm\benchmark-v2.0-ga.md).
+Before diagnosing an issue, you can refer to the [DM 2.0-GA Benchmark Report](/dm/benchmark-v2.0-ga.md).
 
 When diagnosing and handling performance issues, make sure that:
 
 - The DM monitoring component is correctly configured and installed.
-- You can view [monitoring metrics]\dm\monitor-a-dm-cluster.md#task) on the Grafana monitoring dashboard.
+- You can view [monitoring metrics](/dm/monitor-a-dm-cluster.md#task) on the Grafana monitoring dashboard.
 - The component you diagnose works well; otherwise, possible monitoring metrics exceptions might interfere with the diagnosis of performance issues.
 
 In the case of a large latency in the data migration, to quickly figure out whether the bottleneck is inside the DM component or in the TiDB cluster, you can first check `DML queue remain length` in [Write SQL Statements to Downstream](#write-sql-statements-to-downstream).
 
 ## relay log unit
 
-To diagnose performance issues in the relay log unit, you can check the `binlog file gap between master and relay` monitoring metric. For more information about this metric, refer to [monitoring metrics of the relay log]\dm\monitor-a-dm-cluster.md#relay-log). If this metric is greater than 1 for a long time, it usually indicates that there is a performance issue; if this metric is 0, it usually indicates that there is no performance issue.
+To diagnose performance issues in the relay log unit, you can check the `binlog file gap between master and relay` monitoring metric. For more information about this metric, refer to [monitoring metrics of the relay log](/dm/monitor-a-dm-cluster.md#relay-log). If this metric is greater than 1 for a long time, it usually indicates that there is a performance issue; if this metric is 0, it usually indicates that there is no performance issue.
 
 If the value of `binlog file gap between master and relay` is 0, but you suspect that there is a performance issue, you can check `binlog pos`. If `master` in this metric is much larger than `relay`, a performance issue might exist. In this case, diagnose and handle this issue accordingly.
 
@@ -56,7 +56,7 @@ The main operations of the Load unit are to read the SQL file data from the loca
 
 ## Binlog replication unit
 
-To diagnose performance issues in the Binlog replication unit, you can check the `binlog file gap between master and syncer` monitoring metric. For more information about this metric, refer to [monitoring metrics of the Binlog replication]\dm\monitor-a-dm-cluster.md#binlog-replication).
+To diagnose performance issues in the Binlog replication unit, you can check the `binlog file gap between master and syncer` monitoring metric. For more information about this metric, refer to [monitoring metrics of the Binlog replication](/dm/monitor-a-dm-cluster.md#binlog-replication).
 
 - If this metric is greater than 1 for a long time, it usually indicates that there is a performance issue.
 - If this metric is 0, it usually indicates that there is no performance issue.
@@ -73,7 +73,7 @@ The Binlog replication unit decides whether to read the binlog event from the up
 
 ### binlog event conversion
 
-The Binlog replication unit constructs DML, parses DDL, and performs [table router]\dm\dm-key-features.md#table-routing) conversion from binlog event data. The related metric is `transform binlog event duration`.
+The Binlog replication unit constructs DML, parses DDL, and performs [table router](/dm/dm-key-features.md#table-routing) conversion from binlog event data. The related metric is `transform binlog event duration`.
 
 The duration is mainly affected by the write operations upstream. Take the `INSERT INTO` statement as an example, the time consumed to convert a single `VALUES` greatly differs from that to convert a lot of `VALUES`. The time consumed might range from tens of microseconds to hundreds of microseconds. However, usually this is not a bottleneck of the system.
 

@@ -49,7 +49,7 @@ After migration, the ``` `migrate_me`.`t1` ``` and ``` `migrate_me`.`t2` ``` tab
 
 > **Note:**
 >
-> This migration does not involve the DM Shard Merge feature. To use this feature, see [DM Shard Merge Scenario]\dm\scenarios.md#shard-merge-scenario).
+> This migration does not involve the DM Shard Merge feature. To use this feature, see [DM Shard Merge Scenario](/dm/scenarios.md#shard-merge-scenario).
 
 ## Step 1: Precheck
 
@@ -57,7 +57,7 @@ To ensure a successful migration, you need to do prechecks before starting the m
 
 ### DM nodes deployment
 
-As the hub of data migration, DM needs to connect to the upstream Aurora cluster and the downstream TiDB cluster. Therefore, you need to use the MySQL client to check whether the nodes in which DM is to be deployed can connect to the upstream and downstream. In addition, for details of DM requirements on hardware, software, and the node number, see [DM Cluster Software and Hardware Recommendations]\dm\dm-hardware-and-software-requirements.md).
+As the hub of data migration, DM needs to connect to the upstream Aurora cluster and the downstream TiDB cluster. Therefore, you need to use the MySQL client to check whether the nodes in which DM is to be deployed can connect to the upstream and downstream. In addition, for details of DM requirements on hardware, software, and the node number, see [DM Cluster Software and Hardware Recommendations](/dm/dm-hardware-and-software-requirements.md).
 
 ### Aurora
 
@@ -68,17 +68,17 @@ If GTID is enabled in Aurora, you can migrate data based on GTID. For how to ena
 > **Note:**
 >
 > + GTID-based data migration requires MySQL 5.7 (Aurora 2.04) version or later.
-> + In addition to the Aurora-specific configuration above, the upstream database must meet other requirements for migrating from MySQL, such as table schemas, character sets, and privileges. See [Checking Items]\dm\dm-precheck.md#checking-items) for details.
+> + In addition to the Aurora-specific configuration above, the upstream database must meet other requirements for migrating from MySQL, such as table schemas, character sets, and privileges. See [Checking Items](/dm/dm-precheck.md#checking-items) for details.
 
 ## Step 2: Deploy the DM cluster
 
-DM can be deployed in multiple ways. Currently, it is recommended to use TiUP to deploy a DM cluster. For the specific deployment method, see [Deploy DM cluster using TiUP]\dm\deploy-a-dm-cluster-using-tiup.md). This example has two data sources, so at least two DM-worker nodes need to be deployed.
+DM can be deployed in multiple ways. Currently, it is recommended to use TiUP to deploy a DM cluster. For the specific deployment method, see [Deploy DM cluster using TiUP](/dm/deploy-a-dm-cluster-using-tiup.md). This example has two data sources, so at least two DM-worker nodes need to be deployed.
 
 After deployment, you need to record the IP and service port of any DM-master node (`8261` by default) for `dmctl` to connect. This example uses `127.0.0.1:8261`. Check the DM status through TiUP using `dmctl`:
 
 > **Note:**
 >
-> When using other methods to deploy DM, you can call `dmctl` in a similar way. See [Introduction to dmctl]\dm\dmctl-introduction.md).
+> When using other methods to deploy DM, you can call `dmctl` in a similar way. See [Introduction to dmctl](/dm/dmctl-introduction.md).
 
 {{< copyable "shell-regular" >}}
 
@@ -122,7 +122,7 @@ The number of `master`s and `worker`s in the returned result is consistent with 
 
 > **Note:**
 >
-> The configuration file used by DM supports database passwords in plaintext or ciphertext. It is recommended to use password encrypted using dmctl. To obtain the ciphertext password, see [Encrypt the database password using dmctl]\dm\dm-manage-source.md#encrypt-the-database-password).
+> The configuration file used by DM supports database passwords in plaintext or ciphertext. It is recommended to use password encrypted using dmctl. To obtain the ciphertext password, see [Encrypt the database password using dmctl](/dm/dm-manage-source.md#encrypt-the-database-password).
 
 Save the following configuration files of data source according to the example, in which the value of `source-id` will be used in the task configuration in [step 4](#step-4-configure-the-task).
 
@@ -157,7 +157,7 @@ from:
   port: 3306
 ```
 
-See [Migrate Data Using Data Migration - Create Data Source]\dm\migrate-data-using-dm.md#step-3-create-data-source), and use `dmctl` to add two data sources through TiUP.
+See [Migrate Data Using Data Migration - Create Data Source](/dm/migrate-data-using-dm.md#step-3-create-data-source), and use `dmctl` to add two data sources through TiUP.
 
 {{< copyable "shell-regular" >}}
 
@@ -187,7 +187,7 @@ When the data sources are successfully added, the return information of each dat
 
 > **Note:**
 >
-> Because Aurora does not support FTWRL, write operations have to be paused when you only perform the full data migration to export data. See [AWS documentation](https://aws.amazon.com/premiumsupport/knowledge-center/mysqldump-error-rds-mysql-mariadb/?nc1=h_ls) for details. In this example, both full data migration and incremental replication are performed, and DM automatically enables the [`safe mode`]\dm\dm-glossary.md#safe-mode) to solve this pause issue. To ensure data consistency in other combinations of task mode, see [AWS documentation](https://aws.amazon.com/premiumsupport/knowledge-center/mysqldump-error-rds-mysql-mariadb/?nc1=h_ls).
+> Because Aurora does not support FTWRL, write operations have to be paused when you only perform the full data migration to export data. See [AWS documentation](https://aws.amazon.com/premiumsupport/knowledge-center/mysqldump-error-rds-mysql-mariadb/?nc1=h_ls) for details. In this example, both full data migration and incremental replication are performed, and DM automatically enables the [`safe mode`](/dm/dm-glossary.md#safe-mode) to solve this pause issue. To ensure data consistency in other combinations of task mode, see [AWS documentation](https://aws.amazon.com/premiumsupport/knowledge-center/mysqldump-error-rds-mysql-mariadb/?nc1=h_ls).
 
 This example migrates the existing data in Aurora and replicates incremental data to TiDB in real time, which is the **full data migration plus incremental replication** mode. According to the TiDB cluster information above, the added `source-id`, and the table to be migrated, save the following task configuration file `task.yaml`:
 

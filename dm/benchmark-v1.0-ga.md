@@ -60,11 +60,11 @@ Others:
 
 ## Test scenario
 
-You can use a simple data migration flow, that is, MySQL1 (172.16.4.40) -> DM-worker -> TiDB (172.16.4.41), to do the test. For detailed test scenario description, see [performance test]\dm\dm-performance-test.md).
+You can use a simple data migration flow, that is, MySQL1 (172.16.4.40) -> DM-worker -> TiDB (172.16.4.41), to do the test. For detailed test scenario description, see [performance test](/dm/dm-performance-test.md).
 
 ### Full import benchmark case
 
-For details, see [Full Import Benchmark Case]\dm\dm-performance-test.md#full-import-benchmark-case).
+For details, see [Full Import Benchmark Case](/dm/dm-performance-test.md#full-import-benchmark-case).
 
 #### Full import benchmark result
 
@@ -105,7 +105,7 @@ Full import data size in this benchmark case is 3.78 GB, load unit pool size use
 
 ### Incremental replication benchmark case
 
-For details about the test method, see [Incremental Replication Benchmark Case]\dm\dm-performance-test.md#incremental-replication-benchmark-case).
+For details about the test method, see [Incremental Replication Benchmark Case](/dm/dm-performance-test.md#incremental-replication-benchmark-case).
 
 #### Benchmark result for incremental replication
 

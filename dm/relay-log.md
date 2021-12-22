@@ -90,7 +90,7 @@ The starting position of the relay log migration is determined by the following 
 
 > **Note:**
 > 
-> Since DM v2.0.2, the configuration item `enable-relay` in the source configuration file is no longer valid. If DM finds that `enable-relay` is set to `true` when [loading the data source configuration]\dm\dm-manage-source.md#operate-data-source), it outputs the following message:
+> Since DM v2.0.2, the configuration item `enable-relay` in the source configuration file is no longer valid. If DM finds that `enable-relay` is set to `true` when [loading the data source configuration](/dm/dm-manage-source.md#operate-data-source), it outputs the following message:
 > 
 > ```
 > Please use `start-relay` to specify which workers should pull relay log of relay-enabled sources.
@@ -132,7 +132,7 @@ In the command `start-relay`, you can configure one or more DM-workers to migrat
 
 In DM versions earlier than v2.0.2 (not including v2.0.2), DM checks the configuration item `enable-relay` in the source configuration file when binding a DM-worker to an upstream data source. If `enable-relay` is set to `true`, DM enables the relay log feature for the data source.
 
-See [Upstream Database Configuration File]\dm\dm-source-configuration-file.md) for how to set the configuration item `enable-relay`.
+See [Upstream Database Configuration File](/dm/dm-source-configuration-file.md) for how to set the configuration item `enable-relay`.
 
 </div>
 </SimpleTab>

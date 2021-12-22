@@ -6,7 +6,7 @@ aliases: ['/docs/tidb-data-migration/dev/monitor-a-dm-cluster/']
 
 # Data Migration Monitoring Metrics
 
-If your DM cluster is deployed using TiUP, the [monitoring system]\dm\migrate-data-using-dm.md#step-8-monitor-the-task-and-check-logs) is also deployed at the same time. This document describes the monitoring metrics provided by DM-worker.
+If your DM cluster is deployed using TiUP, the [monitoring system](/dm/migrate-data-using-dm.md#step-8-monitor-the-task-and-check-logs) is also deployed at the same time. This document describes the monitoring metrics provided by DM-worker.
 
 ## Task
 

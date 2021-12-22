@@ -12,9 +12,9 @@ This document introduces how to configure a data migration task in Data Migratio
 
 Before configuring the data sources to be migrated for the task, you need to first make sure that DM has loaded the configuration files of the corresponding data sources. The following are some operation references:
 
-- To view the data source, you can refer to [Check the data source configuration]\dm\dm-manage-source.md#check-data-source-configurations).
-- To create a data source, you can refer to [Create data source]\dm\migrate-data-using-dm.md#step-3-create-data-source).
-- To generate a data source configuration file, you can refer to [Source configuration file introduction]\dm\dm-source-configuration-file.md).
+- To view the data source, you can refer to [Check the data source configuration](/dm/dm-manage-source.md#check-data-source-configurations).
+- To create a data source, you can refer to [Create data source](/dm/migrate-data-using-dm.md#step-3-create-data-source).
+- To generate a data source configuration file, you can refer to [Source configuration file introduction](/dm/dm-source-configuration-file.md).
 
 The following example of `mysql-instances` shows how to configure data sources that need to be migrated for the data migration task:
 
@@ -79,7 +79,7 @@ To configure the block and allow list of data source tables for the data migrati
           tbl-name: "log"
     ```
 
-    For detailed configuration rules, see [Block and allow table lists]\dm\dm-key-features.md#block-and-allow-table-lists).
+    For detailed configuration rules, see [Block and allow table lists](/dm/dm-key-features.md#block-and-allow-table-lists).
 
 2. Reference the block and allow list rules in the data source configuration to filter tables to be migrated.
 
@@ -114,7 +114,7 @@ To configure the filters of binlog events for the data migration task, perform t
         action: Do
     ```
 
-    For detailed configuration rules, see [Binlog event filter]\dm\dm-key-features.md#binlog-event-filter).
+    For detailed configuration rules, see [Binlog event filter](/dm/dm-key-features.md#binlog-event-filter).
 
 2. Reference the binlog event filtering rules in the data source configuration to filter specified binlog events of specified tables or schemas in the data source.
 
@@ -152,7 +152,7 @@ To configure the routing mapping rules for migrating data source tables to speci
         target-schema: "test"
     ```
 
-    For detailed configuration rules, see [Table Routing]\dm\dm-key-features.md#table-routing).
+    For detailed configuration rules, see [Table Routing](/dm/dm-key-features.md#table-routing).
 
 2. Reference the routing mapping rules in the data source configuration to filter tables to be migrated.
 
@@ -187,7 +187,7 @@ shard-mode: "pessimistic"       # The shard merge mode. Optional modes are ""/"p
 
 ## Other configurations
 
-The following is an overall task configuration example of this document. The complete task configuration template can be found in [DM task configuration file full introduction]\dm\task-configuration-file-full.md). For the usage and configuration of other configuration items, refer to [Features of Data Migration]\dm\dm-key-features.md).
+The following is an overall task configuration example of this document. The complete task configuration template can be found in [DM task configuration file full introduction](/dm/task-configuration-file-full.md). For the usage and configuration of other configuration items, refer to [Features of Data Migration](/dm/dm-key-features.md).
 
 ```yaml
 ---

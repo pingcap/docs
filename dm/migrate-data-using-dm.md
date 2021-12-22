@@ -10,11 +10,11 @@ This guide shows how to migrate data using the Data Migration (DM) tool.
 
 ## Step 1: Deploy the DM cluster
 
-It is recommended to [deploy the DM cluster using TiUP]\dm\deploy-a-dm-cluster-using-tiup.md). You can also [deploy the DM cluster using binary]\dm\deploy-a-dm-cluster-using-binary.md) for trial or test.
+It is recommended to [deploy the DM cluster using TiUP](/dm/deploy-a-dm-cluster-using-tiup.md). You can also [deploy the DM cluster using binary](/dm/deploy-a-dm-cluster-using-binary.md) for trial or test.
 
 > **Note:**
 >
-> - For database passwords in all the DM configuration files, it is recommended to use the passwords encrypted by `dmctl`. If a database password is empty, it is unnecessary to encrypt it. See [Encrypt the database password using dmctl]\dm\dm-manage-source.md#encrypt-the-database-password).
+> - For database passwords in all the DM configuration files, it is recommended to use the passwords encrypted by `dmctl`. If a database password is empty, it is unnecessary to encrypt it. See [Encrypt the database password using dmctl](/dm/dm-manage-source.md#encrypt-the-database-password).
 > - The user of the upstream and downstream databases must have the corresponding read and write privileges.
 
 ## Step 2: Check the cluster information
@@ -37,7 +37,7 @@ After the DM cluster is deployed using TiUP, the configuration information is li
     | Upstream MySQL-2 | 172.16.10.82 | 3306 | root | VjX8cEeTX+qcvZ3bPaO4h0C80pe/1aU= |
     | Downstream TiDB | 172.16.10.83 | 4000 | root | |
 
-The list of privileges needed on the MySQL host can be found in the [precheck]\dm\dm-precheck.md) documentation.
+The list of privileges needed on the MySQL host can be found in the [precheck](/dm/dm-precheck.md) documentation.
 
 ## Step 3: Create data source
 
@@ -124,7 +124,7 @@ To detect possible errors of data migration configuration in advance, DM provide
 - DM automatically checks the corresponding privileges and configuration while starting the data migration task.
 - You can also use the `check-task` command to manually precheck whether the upstream MySQL instance configuration satisfies the DM requirements.
 
-For details about the precheck feature, see [Precheck the upstream MySQL instance configuration]\dm\dm-precheck.md).
+For details about the precheck feature, see [Precheck the upstream MySQL instance configuration](/dm/dm-precheck.md).
 
 > **Note:**
 >

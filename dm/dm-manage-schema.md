@@ -6,7 +6,7 @@ aliases: ['/tidb-data-migration/dev/manage-schema/']
 
 # Manage Table Schemas of Tables to be Migrated
 
-This document describes how to manage the schema of the table in DM during migration using [dmctl]\dm\dmctl-introduction.md).
+This document describes how to manage the schema of the table in DM during migration using [dmctl](/dm/dmctl-introduction.md).
 
 ## Implementation principles
 
@@ -27,7 +27,7 @@ When you migrate tables using DM, DM performs the following operations on the ta
 
 When the upstream database performs a DDL operation to change the table schema, `schema-U` is changed. By applying the DDL operation to the internal schema tracker component and the downstream TiDB cluster, DM updates `schema-I` and `schema-D` in an orderly manner to keep them consistent with `schema-U`. Therefore, DM can then normally consume the binlog event corresponding to the `schema-B` table schema. That is, after the DDL operation is successfully migrated, `schema-U`, `schema-B`, `schema-I`, and `schema-D` are still consistent.
 
-However, during the migration with [optimistic mode sharding DDL support]\dm\feature-shard-merge-optimistic.md) enabled, the `schema-D` of the downstream table might be inconsistent with the `schema-B` and `schema-I` of some upstream sharded tables. In such cases, DM still keeps `schema-I` and `schema-B` consistent to ensure that the binlog event corresponding to DML can be parsed normally.
+However, during the migration with [optimistic mode sharding DDL support](/dm/feature-shard-merge-optimistic.md) enabled, the `schema-D` of the downstream table might be inconsistent with the `schema-B` and `schema-I` of some upstream sharded tables. In such cases, DM still keeps `schema-I` and `schema-B` consistent to ensure that the binlog event corresponding to DML can be parsed normally.
 
 In addition, in some scenarios (such as when the downstream table has more columns than the upstream table), `schema-D` might be inconsistent with `schema-B` and `schema-I`.
 

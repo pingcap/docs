@@ -45,21 +45,21 @@ The [binlog event filtering](/dm/dm-key-features.md#binlog-event-filter) feature
 
 ### Schema and table routing
 
-The [schema and table routing]\dm\dm-key-features.md#table-routing) feature means that DM can migrate a certain table of the source database to the specified table in the downstream. For example, you can migrate the table structure and data from the table `test`.`sbtest1` in the source database to the table `test`.`sbtest2` in TiDB. This is also a core feature for merging and migrating sharded databases and tables.
+The [schema and table routing](/dm/dm-key-features.md#table-routing) feature means that DM can migrate a certain table of the source database to the specified table in the downstream. For example, you can migrate the table structure and data from the table `test`.`sbtest1` in the source database to the table `test`.`sbtest2` in TiDB. This is also a core feature for merging and migrating sharded databases and tables.
 
 ## Advanced features
 
 ### Shard merge and migration
 
-DM supports merging and migrating the original sharded instances and tables from the source databases into TiDB, but with some restrictions. For details, see [Sharding DDL usage restrictions in the pessimistic mode]\dm\feature-shard-merge-pessimistic.md#restrictions) and [Sharding DDL usage restrictions in the optimistic mode]\dm\feature-shard-merge-optimistic.md#restrictions).
+DM supports merging and migrating the original sharded instances and tables from the source databases into TiDB, but with some restrictions. For details, see [Sharding DDL usage restrictions in the pessimistic mode](/dm/feature-shard-merge-pessimistic.md#restrictions) and [Sharding DDL usage restrictions in the optimistic mode](/dm/feature-shard-merge-optimistic.md#restrictions).
 
 ### Optimization for third-party online-schema-change tools in the migration process
 
-In the MySQL ecosystem, tools such as gh-ost and pt-osc are widely used. DM provides support for these tools to avoid migrating unnecessary intermediate data. For details, see [Online DDL Tools]\dm\dm-key-features.md#online-ddl-tools)
+In the MySQL ecosystem, tools such as gh-ost and pt-osc are widely used. DM provides support for these tools to avoid migrating unnecessary intermediate data. For details, see [Online DDL Tools](/dm/dm-key-features.md#online-ddl-tools)
 
 ### Filter certain row changes using SQL expressions
 
-In the phase of incremental replication, DM supports the configuration of SQL expressions to filter out certain row changes, which lets you replicate the data with a greater granularity. For more information, refer to [Filter Certain Row Changes Using SQL Expressions]\dm\feature-expression-filter.md).
+In the phase of incremental replication, DM supports the configuration of SQL expressions to filter out certain row changes, which lets you replicate the data with a greater granularity. For more information, refer to [Filter Certain Row Changes Using SQL Expressions](/dm/feature-expression-filter.md).
 
 ## Usage restrictions
 
@@ -85,14 +85,14 @@ Before using the DM tool, note the following restrictions:
 
     - Currently, TiDB is not compatible with all the DDL statements that MySQL supports. Because DM uses the TiDB parser to process DDL statements, it only supports the DDL syntax supported by the TiDB parser. For details, see [MySQL Compatibility](/mysql-compatibility.md#ddl).
 
-    - DM reports an error when it encounters an incompatible DDL statement. To solve this error, you need to manually handle it using dmctl, either skipping this DDL statement or replacing it with a specified DDL statement(s). For details, see [Skip or replace abnormal SQL statements]\dm\dm-faq.md#how-to-handle-incompatible-ddl-statements).
+    - DM reports an error when it encounters an incompatible DDL statement. To solve this error, you need to manually handle it using dmctl, either skipping this DDL statement or replacing it with a specified DDL statement(s). For details, see [Skip or replace abnormal SQL statements](/dm/dm-faq.md#how-to-handle-incompatible-ddl-statements).
 
 + Sharding merge with conflicts
 
-    - If conflict exists between sharded tables, solve the conflict by referring to [handling conflicts of auto-increment primary key]\dm\shard-merge-best-practices.md#handle-conflicts-of-auto-increment-primary-key). Otherwise, data migration is not supported. Conflicting data can cover each other and cause data loss.
+    - If conflict exists between sharded tables, solve the conflict by referring to [handling conflicts of auto-increment primary key](/dm/shard-merge-best-practices.md#handle-conflicts-of-auto-increment-primary-key). Otherwise, data migration is not supported. Conflicting data can cover each other and cause data loss.
 
-    - For other sharding DDL migration restrictions, see [Sharding DDL usage restrictions in the pessimistic mode]\dm\feature-shard-merge-pessimistic.md#restrictions) and [Sharding DDL usage restrictions in the optimistic mode]\dm\feature-shard-merge-optimistic.md#restrictions).
+    - For other sharding DDL migration restrictions, see [Sharding DDL usage restrictions in the pessimistic mode](/dm/feature-shard-merge-pessimistic.md#restrictions) and [Sharding DDL usage restrictions in the optimistic mode](/dm/feature-shard-merge-optimistic.md#restrictions).
 
 + Switch of MySQL instances for data sources
 
-    When DM-worker connects the upstream MySQL instance via a virtual IP (VIP), if you switch the VIP connection to another MySQL instance, DM might connect to the new and old MySQL instances at the same time in different connections. In this situation, the binlog migrated to DM is not consistent with other upstream status that DM receives, causing unpredictable anomalies and even data damage. To make necessary changes to DM manually, see [Switch DM-worker connection via virtual IP]\dm\usage-scenario-master-slave-switch.md#switch-dm-worker-connection-via-virtual-ip).
+    When DM-worker connects the upstream MySQL instance via a virtual IP (VIP), if you switch the VIP connection to another MySQL instance, DM might connect to the new and old MySQL instances at the same time in different connections. In this situation, the binlog migrated to DM is not consistent with other upstream status that DM receives, causing unpredictable anomalies and even data damage. To make necessary changes to DM manually, see [Switch DM-worker connection via virtual IP](/dm/usage-scenario-master-slave-switch.md#switch-dm-worker-connection-via-virtual-ip).

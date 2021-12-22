@@ -10,7 +10,7 @@ This document introduces how to quickly deploy the Data Migration (DM) cluster u
 
 > **Note:**
 >
-> In the production environment, it is recommended to [use TiUP to deploy a DM cluster]\dm\deploy-a-dm-cluster-using-tiup.md).
+> In the production environment, it is recommended to [use TiUP to deploy a DM cluster](/dm/deploy-a-dm-cluster-using-tiup.md).
 
 ## Preparations
 

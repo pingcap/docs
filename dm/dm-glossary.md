@@ -20,7 +20,7 @@ Binlog events are information about data modification made to a MySQL or MariaDB
 
 ### Binlog event filter
 
-[Binlog event filter]\dm\dm-key-features.md#binlog-event-filter) is a more fine-grained filtering feature than the block and allow lists filtering rule. Refer to [binlog event filter]\dm\dm-overview.md#binlog-event-filtering) for details.
+[Binlog event filter](/dm/dm-key-features.md#binlog-event-filter) is a more fine-grained filtering feature than the block and allow lists filtering rule. Refer to [binlog event filter](/dm/dm-overview.md#binlog-event-filtering) for details.
 
 ### Binlog position
 
@@ -32,7 +32,7 @@ Binlog replication processing unit is the processing unit used in DM-worker to r
 
 ### Block & allow table list
 
-Block & allow table list is the feature that filters or only migrates all operations of some databases or some tables. Refer to [block & allow table lists]\dm\dm-overview.md#block-and-allow-lists-migration-at-the-schema-and-table-levels) for details. This feature is similar to [MySQL Replication Filtering](https://dev.mysql.com/doc/refman/5.6/en/replication-rules.html) and [MariaDB Replication Filters](https://mariadb.com/kb/en/replication-filters/).
+Block & allow table list is the feature that filters or only migrates all operations of some databases or some tables. Refer to [block & allow table lists](/dm/dm-overview.md#block-and-allow-lists-migration-at-the-schema-and-table-levels) for details. This feature is similar to [MySQL Replication Filtering](https://dev.mysql.com/doc/refman/5.6/en/replication-rules.html) and [MariaDB Replication Filters](https://mariadb.com/kb/en/replication-filters/).
 
 ## C
 
@@ -77,7 +77,7 @@ In the case of clearly mentioning "full", not explicitly mentioning "full or inc
 
 The relay log refers to the binlog files that DM-worker pulls from the upstream MySQL or MariaDB, and stores in the local disk. The format of the relay log is the standard binlog file, which can be parsed by tools such as [mysqlbinlog](https://dev.mysql.com/doc/refman/8.0/en/mysqlbinlog.html) of a compatible version. Its role is similar to [MySQL Relay Log](https://dev.mysql.com/doc/refman/5.7/en/replica-logs-relaylog.html) and [MariaDB Relay Log](https://mariadb.com/kb/en/library/relay-log/).
 
-For more details such as the relay log's directory structure, initial migration rules, and data purge in TiDB DM, see [TiDB DM relay log]\dm\relay-log.md).
+For more details such as the relay log's directory structure, initial migration rules, and data purge in TiDB DM, see [TiDB DM relay log](/dm/relay-log.md).
 
 ### Relay processing unit
 
@@ -108,11 +108,11 @@ The shard DDL is the DDL statement that is executed on the upstream sharded tabl
 
 ### Shard DDL lock
 
-The shard DDL lock is the lock mechanism that coordinates the migration of shard DDL. Refer to [the implementation principles of merging and migrating data from sharded tables in the pessimistic mode]\dm\feature-shard-merge-pessimistic.md#principles) for details. In the current documentation, the shard DDL lock is also referred to as the sharding DDL lock.
+The shard DDL lock is the lock mechanism that coordinates the migration of shard DDL. Refer to [the implementation principles of merging and migrating data from sharded tables in the pessimistic mode](/dm/feature-shard-merge-pessimistic.md#principles) for details. In the current documentation, the shard DDL lock is also referred to as the sharding DDL lock.
 
 ### Shard group
 
-A shard group is all the upstream sharded tables to be merged and migrated to the same table in the downstream. Two-level shard groups are used for implementation of TiDB DM. Refer to [the implementation principles of merging and migrating data from sharded tables in the pessimistic mode]\dm\feature-shard-merge-pessimistic.md#principles) for details. In the current documentation, the shard group is also referred to as the sharding group.
+A shard group is all the upstream sharded tables to be merged and migrated to the same table in the downstream. Two-level shard groups are used for implementation of TiDB DM. Refer to [the implementation principles of merging and migrating data from sharded tables in the pessimistic mode](/dm/feature-shard-merge-pessimistic.md#principles) for details. In the current documentation, the shard group is also referred to as the sharding group.
 
 ### Subtask
 
@@ -120,13 +120,13 @@ The subtask is a part of a data migration task that is running on each DM-worker
 
 ### Subtask status
 
-The subtask status is the status of a data migration subtask. The current status options include `New`, `Running`, `Paused`, `Stopped`, and `Finished`. Refer to [subtask status]\dm\dm-query-status.md#subtask-status) for more details about the status of a data migration task or subtask.
+The subtask status is the status of a data migration subtask. The current status options include `New`, `Running`, `Paused`, `Stopped`, and `Finished`. Refer to [subtask status](/dm/dm-query-status.md#subtask-status) for more details about the status of a data migration task or subtask.
 
 ## T
 
 ### Table routing
 
-The table routing feature enables DM to migrate a certain table of the upstream MySQL or MariaDB instance to the specified table in the downstream, which can be used to merge and migrate sharded tables. Refer to [table routing]\dm\dm-key-features.md#table-routing) for details.
+The table routing feature enables DM to migrate a certain table of the upstream MySQL or MariaDB instance to the specified table in the downstream, which can be used to merge and migrate sharded tables. Refer to [table routing](/dm/dm-key-features.md#table-routing) for details.
 
 ### Task
 
@@ -134,4 +134,4 @@ The data migration task, which is started after you successfully execute a `star
 
 ### Task status
 
-The task status refers to the status of a data migration task. The task status depends on the statuses of all its subtasks. Refer to [subtask status]\dm\dm-query-status.md#subtask-status) for details.
+The task status refers to the status of a data migration task. The task status depends on the statuses of all its subtasks. Refer to [subtask status](/dm/dm-query-status.md#subtask-status) for details.

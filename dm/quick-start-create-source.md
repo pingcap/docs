@@ -7,11 +7,11 @@ summary: Learn how to create a data source for Data Migration (DM).
 
 > **Note:**
 >
-> Before creating a data source, you need to [Deploy a DM Cluster Using TiUP]\dm\deploy-a-dm-cluster-using-tiup.md)。
+> Before creating a data source, you need to [Deploy a DM Cluster Using TiUP](/dm/deploy-a-dm-cluster-using-tiup.md)。
 
 The document describes how to create a data source for the data migration task of TiDB Data Migration (DM).
 
-A data source contains the information for accessing the upstream migration task. Because a data migration task requires referring its corresponding data source to obtain the configuration information of access, you need to create the data source of a task before creating a data migration task. For specific data source management commands, refer to [Manage Data Source Configurations]\dm\dm-manage-source.md).
+A data source contains the information for accessing the upstream migration task. Because a data migration task requires referring its corresponding data source to obtain the configuration information of access, you need to create the data source of a task before creating a data migration task. For specific data source management commands, refer to [Manage Data Source Configurations](/dm/dm-manage-source.md).
 
 ## Step 1: Configure the data source
 
@@ -57,7 +57,7 @@ You can use the following command to create a data source:
 tiup dmctl --master-addr <master-addr> operate-source create ./source-mysql-01.yaml
 ```
 
-For other configuration parameters, refer to [Upstream Database Configuration File]\dm\dm-source-configuration-file.md).
+For other configuration parameters, refer to [Upstream Database Configuration File](/dm/dm-source-configuration-file.md).
 
 The returned results are as follows:
 

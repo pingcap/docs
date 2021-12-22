@@ -10,7 +10,7 @@ aliases: ['/tidb-data-migration/dev/open-api/']
 >
 > DM OpenAPI is still an experimental feature and disabled by default. It is not recommended to use it in a production environment.
 
-DM provides the OpenAPI feature for querying and operating the DM cluster, which is similar to the feature of [dmctl tools]\dm\dmctl-introduction.md). If you need to enable this feature, add the following configuration in the DM-master configuration file:
+DM provides the OpenAPI feature for querying and operating the DM cluster, which is similar to the feature of [dmctl tools](/dm/dmctl-introduction.md). If you need to enable this feature, add the following configuration in the DM-master configuration file:
 
 ```toml
 [experimental]

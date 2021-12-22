@@ -163,7 +163,7 @@ In the above command:
 - The initialization configuration file is `topology.yaml`.
 - `--user root`: Log in to the target machine through the `root` key to complete the cluster deployment, or you can use other users with `ssh` and `sudo` privileges to complete the deployment.
 - `[-i]` and `[-p]`: optional. If you have configured login to the target machine without password, these parameters are not required. If not, choose one of the two parameters. `[-i]` is the private key of the `root` user (or other users specified by `--user`) that has access to the target machine. `[-p]` is used to input the user password interactively.
-- TiUP DM uses the embedded SSH client. If you want to use the SSH client native to the control machine system, edit the configuration according to [using the system's native SSH client to connect to the cluster]\dm\maintain-dm-using-tiup.md#use-the-systems-native-ssh-client-to-connect-to-cluster).
+- TiUP DM uses the embedded SSH client. If you want to use the SSH client native to the control machine system, edit the configuration according to [using the system's native SSH client to connect to the cluster](/dm/maintain-dm-using-tiup.md#use-the-systems-native-ssh-client-to-connect-to-cluster).
 
 At the end of the output log, you will see ```Deployed cluster `dm-test` successfully```. This indicates that the deployment is successful.
 

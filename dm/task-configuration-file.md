@@ -8,13 +8,13 @@ aliases: ['/docs/tidb-data-migration/dev/task-configuration-file/']
 
 This document introduces the basic task configuration file of Data Migration (DM), including [global configuration](#global-configuration) and [instance configuration](#instance-configuration).
 
-DM also implements [an advanced task configuration file]\dm\task-configuration-file-full.md) which provides greater flexibility and more control over DM.
+DM also implements [an advanced task configuration file](/dm/task-configuration-file-full.md) which provides greater flexibility and more control over DM.
 
-For the feature and configuration of each configuration item, see [Data migration features]\dm\dm-key-features.md).
+For the feature and configuration of each configuration item, see [Data migration features](/dm/dm-key-features.md).
 
 ## Important concepts
 
-For description of important concepts including `source-id` and the DM-worker ID, see [Important concepts]\dm\dm-config-overview.md#important-concepts).
+For description of important concepts including `source-id` and the DM-worker ID, see [Important concepts](/dm/dm-config-overview.md#important-concepts).
 
 ## Task configuration file template (basic)
 
@@ -80,7 +80,7 @@ Refer to the comments in the [template](#task-configuration-file-template-basic)
 
 ### Feature configuration set
 
-For basic applications, you only need to modify the block and allow lists filtering rule. Refer to the comments about `block-allow-list` in the [template](#task-configuration-file-template-basic) or [Block & allow table lists]\dm\dm-key-features.md#block-and-allow-table-lists) to see more details.
+For basic applications, you only need to modify the block and allow lists filtering rule. Refer to the comments about `block-allow-list` in the [template](#task-configuration-file-template-basic) or [Block & allow table lists](/dm/dm-key-features.md#block-and-allow-table-lists) to see more details.
 
 ## Instance configuration
 

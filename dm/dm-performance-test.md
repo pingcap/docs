@@ -51,7 +51,7 @@ sysbench --test=oltp_insert --tables=4 --mysql-host=172.16.4.40 --mysql-port=330
 
 #### Create a data migration task
 
-1. Create an upstream MySQL source and set `source-id` to `source-1`. For details, see [Load the Data Source Configurations]\dm\dm-manage-source.md#operate-data-source).
+1. Create an upstream MySQL source and set `source-id` to `source-1`. For details, see [Load the Data Source Configurations](/dm/dm-manage-source.md#operate-data-source).
 
 2. Create a migration task (in `full` mode). The following is a task configuration template:
 
@@ -85,7 +85,7 @@ sysbench --test=oltp_insert --tables=4 --mysql-host=172.16.4.40 --mysql-port=330
       threads: 32
   ```
 
-For details about how to create a migration task, see [Create a Data Migration Task]\dm\dm-create-task.md).
+For details about how to create a migration task, see [Create a Data Migration Task](/dm/dm-create-task.md).
 
 > **Note:**
 >
@@ -110,7 +110,7 @@ Use `sysbench` to create test tables in the upstream.
 
 #### Create a data migration task
 
-1. Create the source of the upstream MySQL. Set `source-id` to `source-1` (if the source has been created in the [full import benchmark case](#full-import-benchmark-case), you do not need to create it again). For details, see [Load the Data Source Configurations]\dm\dm-manage-source.md#operate-data-source).
+1. Create the source of the upstream MySQL. Set `source-id` to `source-1` (if the source has been created in the [full import benchmark case](#full-import-benchmark-case), you do not need to create it again). For details, see [Load the Data Source Configurations](/dm/dm-manage-source.md#operate-data-source).
 
 2. Create a DM migration task (in `all` mode). The following is an example of the task configuration file:
 
@@ -143,7 +143,7 @@ Use `sysbench` to create test tables in the upstream.
       batch: 100
   ```
 
-For details about how to create a data migration task, see [Create a Data Migration Task]\dm\dm-create-task.md).
+For details about how to create a data migration task, see [Create a Data Migration Task](/dm/dm-create-task.md).
 
 > **Note:**
 >
@@ -165,4 +165,4 @@ sysbench --test=oltp_insert --tables=4 --num-threads=32 --mysql-host=172.17.4.40
 
 #### Get test results
 
-To observe the migration status of DM, you can run the `query-status` command. To observe the monitoring metrics of DM, you can use Grafana. Here the monitoring metrics refer to `finished sqls jobs` (the number of jobs finished per unit time), etc. For more information, see [Binlog Migration Monitoring Metrics]\dm\monitor-a-dm-cluster.md#binlog-replication).
+To observe the migration status of DM, you can run the `query-status` command. To observe the monitoring metrics of DM, you can use Grafana. Here the monitoring metrics refer to `finished sqls jobs` (the number of jobs finished per unit time), etc. For more information, see [Binlog Migration Monitoring Metrics](/dm/monitor-a-dm-cluster.md#binlog-replication).

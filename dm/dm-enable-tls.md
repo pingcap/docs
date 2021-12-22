@@ -20,7 +20,7 @@ This section introduces how to enable encrypted data transmission between DM-mas
 
     To generate self-signed certificates, you can use `openssl`, `cfssl` and other tools based on `openssl`, such as `easy-rsa`.
 
-    If you choose `openssl`, you can refer to [generating self-signed certificates]\dm\dm-generate-self-signed-certificates.md).
+    If you choose `openssl`, you can refer to [generating self-signed certificates](/dm/dm-generate-self-signed-certificates.md).
 
 2. Configure certificates.
 

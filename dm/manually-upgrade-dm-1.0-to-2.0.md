@@ -7,7 +7,7 @@ summary: Learn how to manually upgrade TiDB data migration from v1.0.x to v2.0+.
 
 This document introduces how to manually upgrade the TiDB DM tool from v1.0.x to v2.0+. The main idea is to use the global checkpoint information in v1.0.x to start a new data migration task in the v2.0+ cluster.
 
-For how to automatically upgrade the TiDB DM tool from v1.0.x to v2.0+, refer to [Using TiUP to automatically import the 1.0 cluster deployed by DM-Ansible]\dm\maintain-dm-using-tiup.md#import-and-upgrade-a-dm-10-cluster-deployed-using-dm-ansible).
+For how to automatically upgrade the TiDB DM tool from v1.0.x to v2.0+, refer to [Using TiUP to automatically import the 1.0 cluster deployed by DM-Ansible](/dm/maintain-dm-using-tiup.md#import-and-upgrade-a-dm-10-cluster-deployed-using-dm-ansible).
 
 > **Note:**
 >
@@ -25,7 +25,7 @@ The prepared configuration files of v2.0+ include the configuration files of the
 
 ### Upstream database configuration file
 
-In v2.0+, the [upstream database configuration file]\dm\dm-source-configuration-file.md) is separated from the process configuration of the DM-worker, so you need to obtain the source configuration based on the [v1.0.x DM-worker configuration](/dm/dm-worker-configuration-file.md).
+In v2.0+, the [upstream database configuration file](/dm/dm-source-configuration-file.md) is separated from the process configuration of the DM-worker, so you need to obtain the source configuration based on the [v1.0.x DM-worker configuration](/dm/dm-worker-configuration-file.md).
 
 > **Note:**
 >
@@ -98,7 +98,7 @@ from:
 
 ### Data migration task configuration file
 
-For [data migration task configuration guide]\dm\dm-task-configuration-guide.md), v2.0+ is basically compatible with v1.0.x. You can directly copy the configuration of v1.0.x.
+For [data migration task configuration guide](/dm/dm-task-configuration-guide.md), v2.0+ is basically compatible with v1.0.x. You can directly copy the configuration of v1.0.x.
 
 ## Step 2: Deploy the v2.0+ cluster
 
@@ -106,7 +106,7 @@ For [data migration task configuration guide]\dm\dm-task-configuration-guide.md)
 >
 > Skip this step if you have other v2.0+ clusters available.
 
-[Use TiUP]\dm\deploy-a-dm-cluster-using-tiup.md) to deploy a new v2.0+ cluster according to the required number of nodes.
+[Use TiUP](/dm/deploy-a-dm-cluster-using-tiup.md) to deploy a new v2.0+ cluster according to the required number of nodes.
 
 ## Step 3：Stop the v1.0.x cluster
 
@@ -116,7 +116,7 @@ If the original v1.0.x cluster is deployed by binary, you can stop the DM-worker
 
 ## Step 4: Upgrade data migration task
 
-1. Use the [`operate-source`]\dm\dm-manage-source.md#operate-data-source) command to load the upstream database source configuration from [step 1](#step-1-prepare-v20-configuration-file) into the v2.0+ cluster.
+1. Use the [`operate-source`](/dm/dm-manage-source.md#operate-data-source) command to load the upstream database source configuration from [step 1](#step-1-prepare-v20-configuration-file) into the v2.0+ cluster.
 
 2. In the downstream TiDB cluster, obtain the corresponding global checkpoint information from the incremental checkpoint table of the v1.0.x data migration task.
 
@@ -158,8 +158,8 @@ If the original v1.0.x cluster is deployed by binary, you can stop the DM-worker
             >
             > If `enable-gtid` is enabled in the source configuration, currently you need to parse the binlog or relay log file to obtain the GTID sets corresponding to the binlog position, and set it to `binlog-gtid` in the `meta`.
 
-4. Use the [`start-task`]\dm\dm-create-task.md) command to start the upgraded data migration task through the v2.0+ data migration task configuration file.
+4. Use the [`start-task`](/dm/dm-create-task.md) command to start the upgraded data migration task through the v2.0+ data migration task configuration file.
 
-5. Use the [`query-status`]\dm\dm-query-status.md) command to confirm whether the data migration task is running normally.
+5. Use the [`query-status`](/dm/dm-query-status.md) command to confirm whether the data migration task is running normally.
 
 If the data migration task runs normally, it indicates that the DM upgrade to v2.0+ is successful.

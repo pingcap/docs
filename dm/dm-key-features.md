@@ -40,7 +40,7 @@ routes:
 
 ### Parameter explanation
 
-DM migrates the upstream MySQL or MariaDB instance table that matches the [`schema-pattern`/`table-pattern` rule provided by Table selector]\dm\table-selector.md) to the downstream `target-schema`/`target-table`.
+DM migrates the upstream MySQL or MariaDB instance table that matches the [`schema-pattern`/`table-pattern` rule provided by Table selector](/dm/table-selector.md) to the downstream `target-schema`/`target-table`.
 
 ### Usage examples
 
@@ -236,7 +236,7 @@ Binlog event filter is a more fine-grained filtering rule than the block and all
 > **Note:**
 >
 > - If the same table matches multiple rules, these rules are applied in order and the block list has priority over the allow list. This means if both the `Ignore` and `Do` rules are applied to a table, the `Ignore` rule takes effect.
-> - Starting from DM v2.0.2, you can configure binlog event filters in the source configuration file. For details, see [Upstream Database Configuration File]\dm\dm-source-configuration-file.md).
+> - Starting from DM v2.0.2, you can configure binlog event filters in the source configuration file. For details, see [Upstream Database Configuration File](/dm/dm-source-configuration-file.md).
 
 ### Parameter configuration
 
@@ -252,7 +252,7 @@ filters:
 
 ### Parameter explanation
 
-- [`schema-pattern`/`table-pattern`]\dm\table-selector.md): the binlog events or DDL SQL statements of upstream MySQL or MariaDB instance tables that match `schema-pattern`/`table-pattern` are filtered by the rules below.
+- [`schema-pattern`/`table-pattern`](/dm/table-selector.md): the binlog events or DDL SQL statements of upstream MySQL or MariaDB instance tables that match `schema-pattern`/`table-pattern` are filtered by the rules below.
 
 - `events`: the binlog event array. You can only select one or more `Event`s from the following table:
 
@@ -376,7 +376,7 @@ In the MySQL ecosystem, tools such as gh-ost and pt-osc are widely used. DM prov
 ### Restrictions
 
 - DM only supports gh-ost and pt-osc.
-- When `online-ddl` is enabled, the checkpoint corresponding to incremental replication should not be in the process of online DDL execution. For example, if an upstream online DDL operation starts at `position-A` and ends at `position-B` of the binlog, the starting point of incremental replication should be earlier than `position-A` or later than `position-B`; otherwise, an error occurs. For details, refer to [FAQ]\dm\dm-faq.md#how-to-handle-the-error-returned-by-the-ddl-operation-related-to-the-gh-ost-table-after-online-ddl-scheme-gh-ost-is-set).
+- When `online-ddl` is enabled, the checkpoint corresponding to incremental replication should not be in the process of online DDL execution. For example, if an upstream online DDL operation starts at `position-A` and ends at `position-B` of the binlog, the starting point of incremental replication should be earlier than `position-A` or later than `position-B`; otherwise, an error occurs. For details, refer to [FAQ](/dm/dm-faq.md#how-to-handle-the-error-returned-by-the-ddl-operation-related-to-the-gh-ost-table-after-online-ddl-scheme-gh-ost-is-set).
 
 ### Parameter configuration
 
@@ -422,7 +422,7 @@ DM supports merging the DML and DDL data in the upstream MySQL/MariaDB sharded t
 
 ### Restrictions
 
-Currently, the shard merge feature is supported only in limited scenarios. For details, refer to [Sharding DDL usage Restrictions in the pessimistic mode]\dm\feature-shard-merge-pessimistic.md#restrictions) and [Sharding DDL usage Restrictions in the optimistic mode]\dm\feature-shard-merge-optimistic.md#restrictions).
+Currently, the shard merge feature is supported only in limited scenarios. For details, refer to [Sharding DDL usage Restrictions in the pessimistic mode](/dm/feature-shard-merge-pessimistic.md#restrictions) and [Sharding DDL usage Restrictions in the optimistic mode](/dm/feature-shard-merge-optimistic.md#restrictions).
 
 ### Parameter configuration
 
@@ -434,4 +434,4 @@ shard-mode: "pessimistic" # The shard merge mode. Optional modes are ""/"pessimi
 
 ### Handle sharding DDL locks manually
 
-In some abnormal scenarios, you need to [handle sharding DDL Locks manually]\dm\manually-handling-sharding-ddl-locks.md).
+In some abnormal scenarios, you need to [handle sharding DDL Locks manually](/dm/manually-handling-sharding-ddl-locks.md).

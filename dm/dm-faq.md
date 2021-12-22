@@ -29,7 +29,7 @@ DM will attempt to split a single statement containing multiple DDL change opera
 
 ## How to handle incompatible DDL statements?
 
-When you encounter a DDL statement unsupported by TiDB, you need to manually handle it using dmctl (skipping the DDL statement or replacing the DDL statement with a specified DDL statement). For details, see [Handle failed DDL statements]\dm\handle-failed-ddl-statements.md).
+When you encounter a DDL statement unsupported by TiDB, you need to manually handle it using dmctl (skipping the DDL statement or replacing the DDL statement with a specified DDL statement). For details, see [Handle failed DDL statements](/dm/handle-failed-ddl-statements.md).
 
 > **Note:**
 >
@@ -60,7 +60,7 @@ In the last `rename ghost_table to origin table` step, DM reads the DDL informat
 
 However, the DDL information in memory is obtained in either of the two ways:
 
-- DM [processes the gh-ost table during the `alter ghost_table` operation]\dm\feature-online-ddl.md#online-schema-change-gh-ost) and records the DDL information of `ghost_table`;
+- DM [processes the gh-ost table during the `alter ghost_table` operation](/dm/feature-online-ddl.md#online-schema-change-gh-ost) and records the DDL information of `ghost_table`;
 - When DM-worker is restarted to start the task, DM reads the DDL from `dm_meta.{task_name}_onlineddl`.
 
 Therefore, in the process of incremental replication, if the specified Pos has skipped the `alter ghost_table` DDL but the Pos is still in the online-ddl process of gh-ost, the ghost_table is not written into memory or `dm_meta.{task_name}_onlineddl` correctly. In such cases, the above error is returned.
@@ -122,7 +122,7 @@ Record the position information in the global checkpoint (`is_global=1`) corresp
 Set the parameters below to a value larger than the default 67108864 (64M).
 
 - The global variable of the TiDB server: `max_allowed_packet`.
-- The configuration item in the task configuration file: `target-database.max-allowed-packet`. For details, refer to [DM Advanced Task Configuration File]\dm\task-configuration-file-full.md).
+- The configuration item in the task configuration file: `target-database.max-allowed-packet`. For details, refer to [DM Advanced Task Configuration File](/dm/task-configuration-file-full.md).
 
 For details, see [Loader solution](https://docs.pingcap.com/tidb/stable/loader-overview#solution).
 
@@ -130,7 +130,7 @@ For details, see [Loader solution](https://docs.pingcap.com/tidb/stable/loader-o
 
 Since DM v2.0, if you directly run the `start-task` command with the task configuration file of the DM 1.0 cluster to continue the incremental data replication, the error `Error 1054: Unknown column 'binlog_gtid' in 'field list'` occurs.
 
-This error can be handled by [manually importing DM migration tasks of a DM 1.0 cluster to a DM 2.0 cluster]\dm\manually-upgrade-dm-1.0-to-2.0.md).
+This error can be handled by [manually importing DM migration tasks of a DM 1.0 cluster to a DM 2.0 cluster](/dm/manually-upgrade-dm-1.0-to-2.0.md).
 
 ## Why does TiUP fail to deploy some versions of DM (for example, v2.0.0-hotfix)？
 
@@ -176,7 +176,7 @@ When the `duplicate entry` error occurs, you need to check the log files for the
 
 ## Why do some monitoring panels show `No data point`?
 
-It is normal for some panels to have no data. For example, when there is no error reported, no DDL lock, or the relay log feature is not enabled, the corresponding panels show `No data point`. For detailed description of each panel, see [DM Monitoring Metrics]\dm\monitor-a-dm-cluster.md).
+It is normal for some panels to have no data. For example, when there is no error reported, no DDL lock, or the relay log feature is not enabled, the corresponding panels show `No data point`. For detailed description of each panel, see [DM Monitoring Metrics](/dm/monitor-a-dm-cluster.md).
 
 ## In DM v1.0, why does the command `sql-skip` fail to skip some statements when the task is in error?
 
@@ -188,13 +188,13 @@ Sometimes, the error message contains the `parse statement` information, for exa
 if the DDL is not needed, you can use a filter rule with \"*\" schema-pattern to ignore it.\n\t : parse statement: line 1 column 11 near \"EVENT `event_del_big_table` \r\nDISABLE\" %!!(MISSING)(EXTRA string=ALTER EVENT `event_del_big_table` \r\nDISABLE
 ```
 
-The reason for this type of error is that the TiDB parser cannot parse DDL statements sent by the upstream, such as `ALTER EVENT`, so `sql-skip` does not take effect as expected. You can add [binlog event filters]\dm\dm-key-features.md#binlog-event-filter) in the configuration file to filter those statements and set `schema-pattern: "*"`. Starting from DM v2.0.1, DM pre-filters statements related to `EVENT`.
+The reason for this type of error is that the TiDB parser cannot parse DDL statements sent by the upstream, such as `ALTER EVENT`, so `sql-skip` does not take effect as expected. You can add [binlog event filters](/dm/dm-key-features.md#binlog-event-filter) in the configuration file to filter those statements and set `schema-pattern: "*"`. Starting from DM v2.0.1, DM pre-filters statements related to `EVENT`.
 
 Since DM v2.0, `handle-error` replaces `sql-skip`. You can use `handle-error` instead to avoid this issue.
 
 ## Why do `REPLACE` statements keep appearing in the downstream when DM is replicating?
 
-You need to check whether the [safe mode]\dm\dm-glossary.md#safe-mode) is automatically enabled for the task. If the task is automatically resumed after an error, or if there is high availability scheduling, then the safe mode is enabled because it is within 1 minutes after the task is started or resumed.
+You need to check whether the [safe mode](/dm/dm-glossary.md#safe-mode) is automatically enabled for the task. If the task is automatically resumed after an error, or if there is high availability scheduling, then the safe mode is enabled because it is within 1 minutes after the task is started or resumed.
 
 You can check the DM-worker log file and search for a line containing `change count`. If the `new count` in the line is not zero, the safe mode is enabled. To find out why it is enabled, check when it happens and if any errors are reported before.
 

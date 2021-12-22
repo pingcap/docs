@@ -28,7 +28,7 @@ Create a customized table `log.messages` in TiDB. Its schema contains not only a
 
 ## Only migrate incremental data to TiDB and the downstream TiDB table has more columns
 
-If your migration task contains full data migration, the task can operate normally. If you have already used other tools to do full data migration and this migration task only uses DM to replicate incremental data, refer to [Migrate Incremental Data to TiDB]\dm\usage-scenario-incremental-migration.md#create-a-replication-task) to create a data migration task. At the same time, you need to manually configure the table schema in DM for MySQL binlog parsing.
+If your migration task contains full data migration, the task can operate normally. If you have already used other tools to do full data migration and this migration task only uses DM to replicate incremental data, refer to [Migrate Incremental Data to TiDB](/dm/usage-scenario-incremental-migration.md#create-a-replication-task) to create a data migration task. At the same time, you need to manually configure the table schema in DM for MySQL binlog parsing.
 
 Otherwise, after creating the task, the following data migration errors occur when you execute the query-status` command:
 
@@ -48,7 +48,7 @@ Otherwise, after creating the task, the following data migration errors occur wh
 
 The reason for the above errors is that when DM migrates the binlog event, if DM has not maintained internally the table schema corresponding to that table, DM tries to use the current table schema in the downstream to parse the binlog event and generate the corresponding DML statement. If the number of columns in the binlog event is inconsistent with the number of columns in the downstream table schema, the above error might occur.
 
-In such cases, you can execute the [`operate-schema`]\dm\dm-manage-schema.md) command to specify for the table a table schema that matches the binlog event. If you are migrating sharded tables, you need to configure the table schema in DM for parsing MySQL binlog for each sharded tables according to the following steps:
+In such cases, you can execute the [`operate-schema`](/dm/dm-manage-schema.md) command to specify for the table a table schema that matches the binlog event. If you are migrating sharded tables, you need to configure the table schema in DM for parsing MySQL binlog for each sharded tables according to the following steps:
 
 1. Specify the table schema for the table `log.messages` to be migrated in the data source. The table schema needs to correspond to the data of the binlog event to be replicated by DM. Then save the `CREATE TABLE` table schema statement in a file. For example, save the following table schema in the `log.messages.sql` file:
 
@@ -60,7 +60,7 @@ In such cases, you can execute the [`operate-schema`]\dm\dm-manage-schema.md) co
     )
     ```
 
-2. Execute the [`operate-schema`]\dm\dm-manage-schema.md) command to set the table schema. At this time, the task should be in the `Paused` state because of the above error.
+2. Execute the [`operate-schema`](/dm/dm-manage-schema.md) command to set the table schema. At this time, the task should be in the `Paused` state because of the above error.
 
     {{< copyable "shell-regular" >}}
 
@@ -68,6 +68,6 @@ In such cases, you can execute the [`operate-schema`]\dm\dm-manage-schema.md) co
     tiup dmctl --master-addr <master-addr> operate-schema set -s mysql-01 task-test -d log -t message log.message.sql
     ```    
 
-3. Execute the [`resume-task`]\dm\dm-resume-task.md) command to resume the `Paused` task.
+3. Execute the [`resume-task`](/dm/dm-resume-task.md) command to resume the `Paused` task.
 
-4. Execute the [`query-status`]\dm\dm-query-status.md) command to check whether the data migration task is running normally.
+4. Execute the [`query-status`](/dm/dm-query-status.md) command to check whether the data migration task is running normally.

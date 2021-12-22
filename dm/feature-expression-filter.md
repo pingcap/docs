@@ -6,7 +6,7 @@ title: Filter Certain Row Changes Using SQL Expressions
 
 ## Overview
 
-In the process of data migration, DM provides the [Binlog Event Filter]\dm\dm-key-features.md#binlog-event-filter) feature to filter certain types of binlog events. For example, for archiving or auditing purposes, `DELETE` event might be filtered when data is migrated to the downstream. However, Binlog Event Filter cannot judge with a greater granularity whether the `DELETE` event of a certain row should be filtered.
+In the process of data migration, DM provides the [Binlog Event Filter](/dm/dm-key-features.md#binlog-event-filter) feature to filter certain types of binlog events. For example, for archiving or auditing purposes, `DELETE` event might be filtered when data is migrated to the downstream. However, Binlog Event Filter cannot judge with a greater granularity whether the `DELETE` event of a certain row should be filtered.
 
 To solve the above issue, DM supports filtering certain row changes using SQL expressions. The binlog in the `ROW` format supported by DM has the values of all columns in binlog events. You can configure SQL expressions according to these values. If the SQL expressions evaluate a row change as `TRUE`, DM will not migrate the row change downstream.
 
@@ -16,7 +16,7 @@ To solve the above issue, DM supports filtering certain row changes using SQL ex
 
 ## Configuration example
 
-Similar to [Binlog Event Filter]\dm\dm-key-features.md#binlog-event-filter), you also need to configure the expression-filter feature in the configuration file of the data migration task, as shown below. For complete configuration and its descriptions, refer to [DM Advanced Task Configuration File]\dm\task-configuration-file-full.md#task-configuration-file-template-advanced)：
+Similar to [Binlog Event Filter](/dm/dm-key-features.md#binlog-event-filter), you also need to configure the expression-filter feature in the configuration file of the data migration task, as shown below. For complete configuration and its descriptions, refer to [DM Advanced Task Configuration File](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)：
 
 ```yml
 name: test

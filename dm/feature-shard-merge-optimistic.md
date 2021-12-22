@@ -21,7 +21,7 @@ Therefore, an "optimistic mode" is needed. In this mode, a DDL statement execute
 
 ## Configuration of the optimistic mode
 
-To use the optimistic mode, specify the `shard-mode` item in the task configuration file as `optimistic`. For the detailed sample configuration file, see [DM Advanced Task Configuration File]\dm\task-configuration-file-full.md).
+To use the optimistic mode, specify the `shard-mode` item in the task configuration file as `optimistic`. For the detailed sample configuration file, see [DM Advanced Task Configuration File](/dm/task-configuration-file-full.md).
 
 ## Restrictions
 

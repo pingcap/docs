@@ -10,9 +10,9 @@ This document gives an overview of configuration files of DM (Data Migration).
 
 ## DM process configuration files
 
-- `dm-master.toml`: The configuration file of running the DM-master process, including the topology information and the logs of the DM-master. For more details, refer to [DM-master Configuration File]\dm\dm-master-configuration-file.md).
-- `dm-worker.toml`: The configuration file of running the DM-worker process, including the topology information and the logs of the DM-worker. For more details, refer to [DM-worker Configuration File]\dm\dm-worker-configuration-file.md).
-- `source.yaml`: The configuration of the upstream database such as MySQL and MariaDB. For more details, refer to [Upstream Database Configuration File]\dm\dm-source-configuration-file.md).
+- `dm-master.toml`: The configuration file of running the DM-master process, including the topology information and the logs of the DM-master. For more details, refer to [DM-master Configuration File](/dm/dm-master-configuration-file.md).
+- `dm-worker.toml`: The configuration file of running the DM-worker process, including the topology information and the logs of the DM-worker. For more details, refer to [DM-worker Configuration File](/dm/dm-worker-configuration-file.md).
+- `source.yaml`: The configuration of the upstream database such as MySQL and MariaDB. For more details, refer to [Upstream Database Configuration File](/dm/dm-source-configuration-file.md).
 
 ## DM migration task configuration
 
@@ -20,9 +20,9 @@ This document gives an overview of configuration files of DM (Data Migration).
 
 You can take the following steps to create a data migration task:
 
-1. [Load the data source configuration into the DM cluster using dmctl]\dm\dm-manage-source.md#operate-data-source).
-2. Refer to the description in the [Task Configuration Guide]\dm\dm-task-configuration-guide.md) and create the configuration file `your_task.yaml`.
-3. [Create the data migration task using dmctl]\dm\dm-create-task.md).
+1. [Load the data source configuration into the DM cluster using dmctl](/dm/dm-manage-source.md#operate-data-source).
+2. Refer to the description in the [Task Configuration Guide](/dm/dm-task-configuration-guide.md) and create the configuration file `your_task.yaml`.
+3. [Create the data migration task using dmctl](/dm/dm-create-task.md).
 
 ### Important concepts
 

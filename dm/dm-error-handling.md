@@ -90,7 +90,7 @@ If you encounter an error while running DM, take the following steps to troubles
     resume-task ${task name}
     ```
 
-However, you need to reset the data migration task in some cases. For details, refer to [Reset the Data Migration Task]\dm\dm-faq.md#how-to-reset-the-data-migration-task).
+However, you need to reset the data migration task in some cases. For details, refer to [Reset the Data Migration Task](/dm/dm-faq.md#how-to-reset-the-data-migration-task).
 
 ## Handle common errors
 
@@ -102,8 +102,8 @@ However, you need to reset the data migration task in some cases. For details, r
 | `code=10005` |  Occurs when performing the `QUERY` type SQL statements.                                         |                                                              |
 | `code=10006` |  Occurs when performing the `EXECUTE` type SQL statements, including DDL statements and DML statements of the `INSERT`, `UPDATE`or `DELETE` type. For more detailed error information, check the error message which usually includes the error code and error information returned for database operations.
 |                                                              |
-| `code=11006` |  Occurs when the built-in parser of DM parses the incompatible DDL statements.          |  Refer to [Data Migration - incompatible DDL statements]\dm\dm-faq.md#how-to-handle-incompatible-ddl-statements) for solution. |
-| `code=20010` |   Occurs when decrypting the database password that is provided in task configuration.                   |  Check whether the downstream database password provided in the configuration task is [correctly encrypted using dmctl]\dm\dm-manage-source.md#encrypt-the-database-password). |
+| `code=11006` |  Occurs when the built-in parser of DM parses the incompatible DDL statements.          |  Refer to [Data Migration - incompatible DDL statements](/dm/dm-faq.md#how-to-handle-incompatible-ddl-statements) for solution. |
+| `code=20010` |   Occurs when decrypting the database password that is provided in task configuration.                   |  Check whether the downstream database password provided in the configuration task is [correctly encrypted using dmctl](/dm/dm-manage-source.md#encrypt-the-database-password). |
 | `code=26002` |  The task check fails to establish database connection. For more detailed error information, check the error message which usually includes the error code and error information returned for database operations. |  Check whether the machine where DM-master is located has permission to access the upstream. |
 | `code=32001` |   Abnormal dump processing unit                                            |  If the error message contains `mydumper: argument list too long.`, configure the table to be exported by manually adding the `--regex` regular expression in the Mydumper argument `extra-args` in the `task.yaml` file according to the block-allow list. For example, to export all tables named `hello`, add `--regex '.*\\.hello$'`; to export all tables, add `--regex '.*'`. |
 | `code=38008` |  An error occurs in the gRPC communication among DM components.                                     |   Check `class`. Find out the error occurs in the interaction of which components. Determine the type of communication error. If the error occurs when establishing gRPC connection, check whether the communication server is working normally. |
@@ -179,9 +179,9 @@ For binlog replication processing units, manually recover migration using the fo
 
 ### `Access denied for user 'root'@'172.31.43.27' (using password: YES)` shows when you query the task or check the log
 
-For database related passwords in all the DM configuration files, it is recommended to use the passwords encrypted by `dmctl`. If a database password is empty, it is unnecessary to encrypt it. For how to encrypt the plaintext password, see [Encrypt the database password using dmctl]\dm\dm-manage-source.md#encrypt-the-database-password).
+For database related passwords in all the DM configuration files, it is recommended to use the passwords encrypted by `dmctl`. If a database password is empty, it is unnecessary to encrypt it. For how to encrypt the plaintext password, see [Encrypt the database password using dmctl](/dm/dm-manage-source.md#encrypt-the-database-password).
 
-In addition, the user of the upstream and downstream databases must have the corresponding read and write privileges. Data Migration also [prechecks the corresponding privileges automatically]\dm\dm-precheck.md) while starting the data migration task.
+In addition, the user of the upstream and downstream databases must have the corresponding read and write privileges. Data Migration also [prechecks the corresponding privileges automatically](/dm/dm-precheck.md) while starting the data migration task.
 
 ### The `load` processing unit reports the error `packet for query is too large. Try adjusting the 'max_allowed_packet' variable`
 

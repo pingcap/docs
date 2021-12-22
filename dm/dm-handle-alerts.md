@@ -45,7 +45,7 @@ This document introduces how to deal with the alert information in DM.
 
 - Solution:
 
-    Refer to [Troubleshoot DM]\dm\dm-error-handling.md#troubleshooting).
+    Refer to [Troubleshoot DM](/dm/dm-error-handling.md#troubleshooting).
 
 ### `DM_pending_DDL`
 
@@ -55,7 +55,7 @@ This document introduces how to deal with the alert information in DM.
 
 - Solution:
 
-    In some scenarios, the pending sharding DDL operation might be what users expect. Otherwise, refer to [Handle Sharding DDL Locks Manually in DM]\dm\manually-handling-sharding-ddl-locks.md) for solution.
+    In some scenarios, the pending sharding DDL operation might be what users expect. Otherwise, refer to [Handle Sharding DDL Locks Manually in DM](/dm/manually-handling-sharding-ddl-locks.md) for solution.
 
 ## Alert rules related to task status
 
@@ -67,7 +67,7 @@ This document introduces how to deal with the alert information in DM.
 
 - Solution:
 
-    Refer to [Troubleshoot DM]\dm\dm-error-handling.md#troubleshooting).
+    Refer to [Troubleshoot DM](/dm/dm-error-handling.md#troubleshooting).
 
 ## Alert rules related to relay log
 
@@ -79,7 +79,7 @@ This document introduces how to deal with the alert information in DM.
 
 - Solution:
 
-    Refer to [Troubleshoot DM]\dm\dm-error-handling.md#troubleshooting).
+    Refer to [Troubleshoot DM](/dm/dm-error-handling.md#troubleshooting).
 
 ### `DM_remain_storage_of_relay_log`
 
@@ -92,7 +92,7 @@ This document introduces how to deal with the alert information in DM.
     You can take the following methods to handle the alert:
 
     - Delete unwanted data manually to increase free disk space.
-    - Reconfigure the [automatic data purge strategy of the relay log]\dm\relay-log.md#automatic-data-purge) or [purge data manually]\dm\relay-log.md#manual-data-purge).
+    - Reconfigure the [automatic data purge strategy of the relay log](/dm/relay-log.md#automatic-data-purge) or [purge data manually](/dm/relay-log.md#manual-data-purge).
     - Execute the command `pause-relay` to pause the relay log pulling process. After there is enough free disk space, resume the process by running the command `resume-relay`. Note that you must not purge upstream binlog files that have not been pulled after the relay log pulling process is paused.
 
 ### `DM_relay_log_data_corruption`
@@ -103,7 +103,7 @@ This document introduces how to deal with the alert information in DM.
 
 - Solution:
 
-    Refer to [Troubleshoot DM]\dm\dm-error-handling.md#troubleshooting).
+    Refer to [Troubleshoot DM](/dm/dm-error-handling.md#troubleshooting).
 
 ### `DM_fail_to_read_binlog_from_master`
 
@@ -113,7 +113,7 @@ This document introduces how to deal with the alert information in DM.
 
 - Solution:
 
-    Refer to [Troubleshoot DM]\dm\dm-error-handling.md#troubleshooting).
+    Refer to [Troubleshoot DM](/dm/dm-error-handling.md#troubleshooting).
 
 ### `DM_fail_to_write_relay_log`
 
@@ -123,7 +123,7 @@ This document introduces how to deal with the alert information in DM.
 
 - Solution:
 
-    Refer to [Troubleshoot DM]\dm\dm-error-handling.md#troubleshooting).
+    Refer to [Troubleshoot DM](/dm/dm-error-handling.md#troubleshooting).
 
 ### `DM_binlog_file_gap_between_master_relay`
 
@@ -133,7 +133,7 @@ This document introduces how to deal with the alert information in DM.
 
 - Solution:
 
-    Refer to [Troubleshoot DM]\dm\dm-error-handling.md#troubleshooting).
+    Refer to [Troubleshoot DM](/dm/dm-error-handling.md#troubleshooting).
 
 ## Alert rules related to Dump/Load
 
@@ -145,7 +145,7 @@ This document introduces how to deal with the alert information in DM.
 
 - Solution:
 
-    Refer to [Troubleshoot DM]\dm\dm-error-handling.md#troubleshooting).
+    Refer to [Troubleshoot DM](/dm/dm-error-handling.md#troubleshooting).
 
 ### `DM_load_process_exists_with_error`
 
@@ -155,7 +155,7 @@ This document introduces how to deal with the alert information in DM.
 
 - Solution:
 
-    Refer to [Troubleshoot DM]\dm\dm-error-handling.md#troubleshooting).
+    Refer to [Troubleshoot DM](/dm/dm-error-handling.md#troubleshooting).
 
 ## Alert rules related to binlog replication
 
@@ -167,7 +167,7 @@ This document introduces how to deal with the alert information in DM.
 
 - Solution:
 
-    Refer to [Troubleshoot DM]\dm\dm-error-handling.md#troubleshooting).
+    Refer to [Troubleshoot DM](/dm/dm-error-handling.md#troubleshooting).
 
 ### `DM_binlog_file_gap_between_master_syncer`
 
@@ -177,7 +177,7 @@ This document introduces how to deal with the alert information in DM.
 
 - Solution:
 
-    Refer to [Handle Performance Issues]\dm\dm-handle-performance-issues.md).
+    Refer to [Handle Performance Issues](/dm/dm-handle-performance-issues.md).
 
 ### `DM_binlog_file_gap_between_relay_syncer`
 
@@ -187,4 +187,4 @@ This document introduces how to deal with the alert information in DM.
 
 - Solution:
 
-    Refer to [Handle Performance Issues]\dm\dm-handle-performance-issues.md).
+    Refer to [Handle Performance Issues](/dm/dm-handle-performance-issues.md).

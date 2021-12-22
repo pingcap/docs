@@ -6,7 +6,7 @@ aliases: ['/tidb-data-migration/dev/manage-source/']
 
 # Manage Data Source Configurations
 
-This document introduces how to manage data source configurations, including encrypting the MySQL password, operating the data source, and changing the bindings between upstream MySQL instances and DM-workers using [dmctl]\dm\dmctl-introduction.md).
+This document introduces how to manage data source configurations, including encrypting the MySQL password, operating the data source, and changing the bindings between upstream MySQL instances and DM-workers using [dmctl](/dm/dmctl-introduction.md).
 
 ## Encrypt the database password
 
@@ -70,7 +70,7 @@ Use the following `operate-source` command to create a source configuration file
 operate-source create ./source.yaml
 ```
 
-For the configuration of `source.yaml`, refer to [Upstream Database Configuration File Introduction]\dm\dm-source-configuration-file.md).
+For the configuration of `source.yaml`, refer to [Upstream Database Configuration File Introduction](/dm/dm-source-configuration-file.md).
 
 The following is an example of the returned result:
 
@@ -169,7 +169,7 @@ Global Flags:
   -s, --source strings   MySQL Source ID.
 ```
 
-Before transferring, DM checks whether the worker to be unbound still has running tasks. If the worker has any running tasks, you need to [pause the tasks]\dm\dm-pause-task.md) first, change the binding, and then [resume the tasks]\dm\dm-resume-task.md).
+Before transferring, DM checks whether the worker to be unbound still has running tasks. If the worker has any running tasks, you need to [pause the tasks](/dm/dm-pause-task.md) first, change the binding, and then [resume the tasks](/dm/dm-resume-task.md).
 
 ### Usage example
 

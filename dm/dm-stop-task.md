@@ -6,7 +6,7 @@ aliases: ['/tidb-data-migration/dev/stop-task/']
 
 # Stop a Data Migration Task
 
-You can use the `stop-task` command to stop a data migration task. For differences between `stop-task` and `pause-task`, refer to [Pause a Data Migration Task]\dm\dm-pause-task.md).
+You can use the `stop-task` command to stop a data migration task. For differences between `stop-task` and `pause-task`, refer to [Pause a Data Migration Task](/dm/dm-pause-task.md).
 
 {{< copyable "" >}}
 

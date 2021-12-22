@@ -61,7 +61,7 @@ Assume that the schemas migrated to the downstream are as follows:
 
 ## Migration solution
 
-- To satisfy migration Requirements #1-i, #1-ii and #1-iii, configure the [table routing rules]\dm\dm-key-features.md#table-routing) as follows:
+- To satisfy migration Requirements #1-i, #1-ii and #1-iii, configure the [table routing rules](/dm/dm-key-features.md#table-routing) as follows:
 
     ```yaml
     routes:
@@ -77,7 +77,7 @@ Assume that the schemas migrated to the downstream are as follows:
         target-schema: "user_south"
     ```
 
-- To satisfy the migration Requirement #2-i, configure the [table routing rules]\dm\dm-key-features.md#table-routing) as follows:
+- To satisfy the migration Requirement #2-i, configure the [table routing rules](/dm/dm-key-features.md#table-routing) as follows:
 
     ```yaml
     routes:
@@ -94,7 +94,7 @@ Assume that the schemas migrated to the downstream are as follows:
         target-table:  "store_shenzhen"
     ```
 
-- To satisfy the migration Requirement #1-iv, configure the [binlog filtering rules]\dm\dm-key-features.md#binlog-event-filter) as follows:
+- To satisfy the migration Requirement #1-iv, configure the [binlog filtering rules](/dm/dm-key-features.md#binlog-event-filter) as follows:
 
     ```yaml
     filters:
@@ -110,7 +110,7 @@ Assume that the schemas migrated to the downstream are as follows:
         action: Ignore
     ```
 
-- To satisfy the migration Requirement #2-ii, configure the [binlog filtering rule]\dm\dm-key-features.md#binlog-event-filter) as follows:
+- To satisfy the migration Requirement #2-ii, configure the [binlog filtering rule](/dm/dm-key-features.md#binlog-event-filter) as follows:
 
     ```yaml
     filters:
@@ -125,7 +125,7 @@ Assume that the schemas migrated to the downstream are as follows:
     >
     > `store-filter-rule` is different from `log-filter-rule & user-filter-rule`. `store-filter-rule` is a rule for the whole `store` schema, while `log-filter-rule` and `user-filter-rule` are rules for the `log` table in the `user` schema.
 
-- To satisfy the migration Requirement #3, configure the [block and allow lists]\dm\dm-key-features.md#block-and-allow-table-lists) as follows:
+- To satisfy the migration Requirement #3, configure the [block and allow lists](/dm/dm-key-features.md#block-and-allow-table-lists) as follows:
 
     ```yaml
     block-allow-list:  # Use black-white-list if the DM version is earlier than or equal to v2.0.0-beta.2.
@@ -135,7 +135,7 @@ Assume that the schemas migrated to the downstream are as follows:
 
 ## Migration task configuration
 
-The complete migration task configuration is shown below. For more details, see [data migration task configuration guide]\dm\dm-task-configuration-guide.md).
+The complete migration task configuration is shown below. For more details, see [data migration task configuration guide](/dm/dm-task-configuration-guide.md).
 
 ```yaml
 name: "one-tidb-secondary"

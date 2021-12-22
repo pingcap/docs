@@ -31,7 +31,7 @@ DM-worker executes specific data migration tasks.
 - Orchestrating the operation of the data migration subtasks
 - Monitoring the running state of the data migration subtasks
 
-For more details of DM-worker, see [DM-worker Introduction]\dm\dm-worker-intro.md).
+For more details of DM-worker, see [DM-worker Introduction](/dm/dm-worker-intro.md).
 
 ### dmctl
 

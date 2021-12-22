@@ -29,7 +29,7 @@ When you use dmctl to manually handle the failed DDL statements, the commonly us
 
 ### query-status
 
-The `query-status` command is used to query the current status of items such as the subtask and the relay unit in each MySQL instance. For details, see [query status]\dm\dm-query-status.md).
+The `query-status` command is used to query the current status of items such as the subtask and the relay unit in each MySQL instance. For details, see [query status](/dm/dm-query-status.md).
 
 ### handle-error
 

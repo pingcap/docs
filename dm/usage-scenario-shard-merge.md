@@ -10,7 +10,7 @@ This document shows how to use Data Migration (DM) to migrate data to the downst
 
 The example used in this document is a simple scenario where sharded schemas and sharded tables of two data source MySQL instances need to be migrated to a downstream TiDB cluster.
 
-For other scenarios, you can refer to [Best Practices of Data Migration in the Shard Merge Scenario]\dm\shard-merge-best-practices.md).
+For other scenarios, you can refer to [Best Practices of Data Migration in the Shard Merge Scenario](/dm/shard-merge-best-practices.md).
 
 ## Data source instances
 
@@ -48,7 +48,7 @@ The expected downstream schema after migration is as follows:
 
 ## Conflict check across sharded tables
 
-Because migration requirements #1 and #2 involve the DM Shard Merge feature, data from multiple tables might cause conflicts between the primary keys or the unique keys. You need to check these sharded tables. For details, refer to [Handle conflicts between primary keys or unique indexes across multiple sharded tables]\dm\shard-merge-best-practices.md#handle-conflicts-between-primary-keys-or-unique-indexes-across-multiple-sharded-tables). In this example:
+Because migration requirements #1 and #2 involve the DM Shard Merge feature, data from multiple tables might cause conflicts between the primary keys or the unique keys. You need to check these sharded tables. For details, refer to [Handle conflicts between primary keys or unique indexes across multiple sharded tables](/dm/shard-merge-best-practices.md#handle-conflicts-between-primary-keys-or-unique-indexes-across-multiple-sharded-tables). In this example:
 
 The table schema of `user`.`information` is
 
@@ -63,7 +63,7 @@ CREATE TABLE `information` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
 ```
 
-In the above structure, column `id` is the primary key and column `uid` is the unique index. Column `id` has auto-increment attribute and if the ranges of tables overlap, data conflicts might occur. Column `uid` can ensure only a unique index exists globally. So, you can avoid column `id` by following the steps in the section [Remove the `PRIMARY KEY` attribute from the column]\dm\shard-merge-best-practices.md#remove-the-primary-key-attribute-from-the-column).
+In the above structure, column `id` is the primary key and column `uid` is the unique index. Column `id` has auto-increment attribute and if the ranges of tables overlap, data conflicts might occur. Column `uid` can ensure only a unique index exists globally. So, you can avoid column `id` by following the steps in the section [Remove the `PRIMARY KEY` attribute from the column](/dm/shard-merge-best-practices.md#remove-the-primary-key-attribute-from-the-column).
 
 The table schema of `store_{01|02}`.`sale_{01|02}` is
 
@@ -81,7 +81,7 @@ In the above structure, `sid` is the shard key, which can ensure that the same `
 
 ## Migration solution
 
-- To satisfy the migration requirements #1, you do not need to configure the [table routing rule]\dm\dm-key-features.md#table-routing). You need to manually create a table based on the requirements in the section [Remove the `PRIMARY KEY` attribute from the column]\dm\shard-merge-best-practices.md#remove-the-primary-key-attribute-from-the-column):
+- To satisfy the migration requirements #1, you do not need to configure the [table routing rule](/dm/dm-key-features.md#table-routing). You need to manually create a table based on the requirements in the section [Remove the `PRIMARY KEY` attribute from the column](/dm/shard-merge-best-practices.md#remove-the-primary-key-attribute-from-the-column):
 
     {{< copyable "sql" >}}
 
@@ -104,7 +104,7 @@ In the above structure, `sid` is the shard key, which can ensure that the same `
     ignore-checking-items: ["auto_increment_ID"]
     ```
 
-- To satisfy the migration requirement #2, configure the [table routing rule]\dm\dm-key-features.md#table-routing) as follows:
+- To satisfy the migration requirement #2, configure the [table routing rule](/dm/dm-key-features.md#table-routing) as follows:
 
     {{< copyable "" >}}
 
@@ -121,7 +121,7 @@ In the above structure, `sid` is the shard key, which can ensure that the same `
         target-table:  "sale"
     ```
 
-- To satisfy the migration requirements #3, configure the [Block and allow table lists]\dm\dm-key-features.md#block-and-allow-table-lists) as follows:
+- To satisfy the migration requirements #3, configure the [Block and allow table lists](/dm/dm-key-features.md#block-and-allow-table-lists) as follows:
 
     {{< copyable "" >}}
 
@@ -134,7 +134,7 @@ In the above structure, `sid` is the shard key, which can ensure that the same `
           tbl-name: "log_bak"
     ```
 
-- To satisfy the migration requirement #4, configure the [binlog event filter rule]\dm\dm-key-features.md#binlog-event-filter) as follows:
+- To satisfy the migration requirement #4, configure the [binlog event filter rule](/dm/dm-key-features.md#binlog-event-filter) as follows:
 
     {{< copyable "" >}}
 
@@ -154,7 +154,7 @@ In the above structure, `sid` is the shard key, which can ensure that the same `
 
 ## Migration task configuration
 
-The complete configuration of the migration task is shown as follows. For more details, see [Data Migration Task Configuration Guide]\dm\dm-task-configuration-guide.md).
+The complete configuration of the migration task is shown as follows. For more details, see [Data Migration Task Configuration Guide](/dm/dm-task-configuration-guide.md).
 
 {{< copyable "" >}}
 

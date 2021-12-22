@@ -8,7 +8,7 @@ aliases: ['/docs/tidb-data-migration/dev/manage-replication-tasks/','/tidb-data-
 
 > **Note:**
 >
-> For DM clusters deployed using TiUP, you are recommended to directly use [`tiup dmctl`]\dm\maintain-dm-using-tiup.md#dmctl) to maintain the clusters.
+> For DM clusters deployed using TiUP, you are recommended to directly use [`tiup dmctl`](/dm/maintain-dm-using-tiup.md#dmctl) to maintain the clusters.
 
 dmctl is a command line tool used to maintain DM clusters. It supports both the interactive mode and the command mode.
 

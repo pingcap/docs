@@ -6,7 +6,7 @@ aliases: ['/tidb-data-migration/dev/create-task/']
 
 # Create a Data Migration Task
 
-You can use the `start-task` command to create a data migration task. When the data migration task is started, DM [prechecks privileges and configurations]\dm\dm-precheck.md).
+You can use the `start-task` command to create a data migration task. When the data migration task is started, DM [prechecks privileges and configurations](/dm/dm-precheck.md).
 
 {{< copyable "" >}}
 

@@ -63,7 +63,7 @@ target-database:                # Configuration of the downstream database insta
   password: ""                  # It is recommended to use password encrypted with dmctl if the password is not empty.
 ```
 
-For the advanced configuration and the description of each configuration parameter, refer to [DM advanced task configuration file template]\dm\task-configuration-file-full.md#task-configuration-file-template-advanced).
+For the advanced configuration and the description of each configuration parameter, refer to [DM advanced task configuration file template](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced).
 
 When you merge and migrate data from sharded tables, you need to coordinate the DDL of each sharded table, and the DML before and after the DDL. DM supports two different modes: pessimistic mode and optimistic mode. For the differences and scenarios between the two modes, refer to [Merge and Migrate Data from Sharded Tables](/dm/feature-shard-merge.md).
 

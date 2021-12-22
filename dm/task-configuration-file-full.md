@@ -7,11 +7,11 @@ aliases: ['/docs/tidb-data-migration/dev/task-configuration-file-full/','/docs/t
 
 This document introduces the advanced task configuration file of Data Migration (DM), including [global configuration](#global-configuration) and [instance configuration](#instance-configuration).
 
-For the feature and configuration of each configuration item, see [Data migration features]\dm\dm-overview.md#basic-features).
+For the feature and configuration of each configuration item, see [Data migration features](/dm/dm-overview.md#basic-features).
 
 ## Important concepts
 
-For description of important concepts including `source-id` and the DM-worker ID, see [Important concepts]\dm\dm-config-overview.md#important-concepts).
+For description of important concepts including `source-id` and the DM-worker ID, see [Important concepts](/dm/dm-config-overview.md#important-concepts).
 
 ## Task configuration file template (advanced)
 
@@ -178,9 +178,9 @@ Arguments in each feature configuration set are explained in the comments in the
 
 | Parameter        | Description                                    |
 | :------------ | :--------------------------------------- |
-| `routes` | The routing mapping rule set between the upstream and downstream tables. If the names of the upstream and downstream schemas and tables are the same, this item does not need to be configured. See [Table Routing]\dm\dm-key-features.md#table-routing) for usage scenarios and sample configurations. |
-| `filters` | The binlog event filter rule set of the matched table of the upstream database instance. If binlog filtering is not required, this item does not need to be configured. See [Binlog Event Filter]\dm\dm-key-features.md#binlog-event-filter) for usage scenarios and sample configurations. |
-| `block-allow-list` | The filter rule set of the block allow list of the matched table of the upstream database instance. It is recommended to specify the schemas and tables that need to be migrated through this item, otherwise all schemas and tables are migrated. See [Binlog Event Filter]\dm\dm-key-features.md#binlog-event-filter) and [Block & Allow Lists]\dm\dm-key-features.md#block-and-allow-table-lists) for usage scenarios and sample configurations. |
+| `routes` | The routing mapping rule set between the upstream and downstream tables. If the names of the upstream and downstream schemas and tables are the same, this item does not need to be configured. See [Table Routing](/dm/dm-key-features.md#table-routing) for usage scenarios and sample configurations. |
+| `filters` | The binlog event filter rule set of the matched table of the upstream database instance. If binlog filtering is not required, this item does not need to be configured. See [Binlog Event Filter](/dm/dm-key-features.md#binlog-event-filter) for usage scenarios and sample configurations. |
+| `block-allow-list` | The filter rule set of the block allow list of the matched table of the upstream database instance. It is recommended to specify the schemas and tables that need to be migrated through this item, otherwise all schemas and tables are migrated. See [Binlog Event Filter](/dm/dm-key-features.md#binlog-event-filter) and [Block & Allow Lists](/dm/dm-key-features.md#block-and-allow-table-lists) for usage scenarios and sample configurations. |
 | `mydumpers` | Configuration arguments of dump processing unit. If the default configuration is sufficient for your needs, this item does not need to be configured. Or you can configure `thread` only using `mydumper-thread`. |
 | `loaders` | Configuration arguments of load processing unit. If the default configuration is sufficient for your needs, this item does not need to be configured. Or you can configure `pool-size` only using `loader-thread`. |
 | `syncers` | Configuration arguments of sync processing unit. If the default configuration is sufficient for your needs, this item does not need to be configured. Or you can configure `worker-count` only using `syncer-thread`. |

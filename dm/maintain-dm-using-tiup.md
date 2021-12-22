@@ -8,7 +8,7 @@ aliases: ['/docs/tidb-data-migration/dev/cluster-operations/','/tidb-data-migrat
 
 This document introduces how to maintain a DM cluster using the TiUP DM component.
 
-If you have not deployed a DM cluster yet, you can refer to [Deploy a DM Cluster Using TiUP]\dm\deploy-a-dm-cluster-using-tiup.md) for instructions.
+If you have not deployed a DM cluster yet, you can refer to [Deploy a DM Cluster Using TiUP](/dm/deploy-a-dm-cluster-using-tiup.md) for instructions.
 
 > **Note:**
 >
@@ -179,13 +179,13 @@ For example, to scale out a DM-worker node in the `prod-cluster` cluster, take t
 
 > **Note:**
 >
-> Since v2.0.5, dmctl support [Export and Import Data Sources and Task Configuration of Clusters]\dm\dm-export-import-config.md)。
+> Since v2.0.5, dmctl support [Export and Import Data Sources and Task Configuration of Clusters](/dm/dm-export-import-config.md)。
 >
 > Before upgrading, you can use `config export` to export the configuration files of clusters. After upgrading, if you need to downgrade to an earlier version, you can first redeploy the earlier cluster and then use `config import` to import the previous configuration files.
 >
 > For clusters earlier than v2.0.5, you can use dmctl v2.0.5 or later to export and import the data source and task configuration files.
 >
-> For clusters later than v2.0.2, currently, it is not supported to automatically import the configuration related to relay worker. You can use `start-relay` command to manually [start relay log]\dm\relay-log.md#start-and-stop-the-relay-log-feature).
+> For clusters later than v2.0.2, currently, it is not supported to automatically import the configuration related to relay worker. You can use `start-relay` command to manually [start relay log](/dm/relay-log.md#start-and-stop-the-relay-log-feature).
 
 The rolling upgrade process is made as transparent as possible to the application, and does not affect the business. The operations vary with different nodes.
 
@@ -273,7 +273,7 @@ tiup dm patch prod-cluster /tmp/dm--hotfix.tar.gz -N 172.16.4.5:8261
 > - You need to stop the original cluster before importing.
 > - Don't run `stop-task` for tasks that need to be upgraded to 2.0.
 > - TiUP only supports importing to a DM cluster of v2.0.0-rc.2 or a later version.
-> - The `import` command is used to import data from a DM 1.0 cluster to a new DM 2.0 cluster. If you need to import DM migration tasks to an existing DM 2.0 cluster, refer to [Manually Upgrade TiDB Data Migration from v1.0.x to v2.0+]\dm\manually-upgrade-dm-1.0-to-2.0.md).
+> - The `import` command is used to import data from a DM 1.0 cluster to a new DM 2.0 cluster. If you need to import DM migration tasks to an existing DM 2.0 cluster, refer to [Manually Upgrade TiDB Data Migration from v1.0.x to v2.0+](/dm/manually-upgrade-dm-1.0-to-2.0.md).
 > - The deployment directories of some components are different from those of the original cluster. You can execute the `display` command to view the details.
 > - Run `tiup update --self && tiup update dm` before importing to make sure that the TiUP DM component is the latest version.
 > - Only one DM-master node exists in the cluster after importing. Refer to [Scale out a cluster](#scale-out-a-cluster) to scale out the DM-master.

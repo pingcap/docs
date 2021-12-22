@@ -6,7 +6,7 @@ aliases: ['/docs/tidb-data-migration/dev/deploy-a-dm-cluster-using-ansible/','/d
 
 # Deploy a DM Cluster Using TiUP
 
-[TiUP](https://github.com/pingcap/tiup) is a cluster operation and maintenance tool introduced in TiDB 4.0. TiUP provides [TiUP DM]\dm\maintain-dm-using-tiup.md), a cluster management component written in Golang. By using TiUP DM, you can easily perform daily TiDB Data Migration (DM) operations, including deploying, starting, stopping, destroying, scaling, and upgrading a DM cluster, and manage DM cluster parameters.
+[TiUP](https://github.com/pingcap/tiup) is a cluster operation and maintenance tool introduced in TiDB 4.0. TiUP provides [TiUP DM](/dm/maintain-dm-using-tiup.md), a cluster management component written in Golang. By using TiUP DM, you can easily perform daily TiDB Data Migration (DM) operations, including deploying, starting, stopping, destroying, scaling, and upgrading a DM cluster, and manage DM cluster parameters.
 
 TiUP supports deploying DM v2.0 or later DM versions. This document introduces how to deploy DM clusters of different topologies.
 
@@ -18,7 +18,7 @@ TiUP supports deploying DM v2.0 or later DM versions. This document introduces h
 
 When DM performs a full data replication task, the DM-worker is bound with only one upstream database. The DM-worker first exports the full amount of data locally, and then imports the data into the downstream database. Therefore, the worker's host needs sufficient storage space (The storage path is specified later when you create the task).
 
-In addition, you need to meet the [hardware and software requirements]\dm\dm-hardware-and-software-requirements.md) when deploying a DM cluster.
+In addition, you need to meet the [hardware and software requirements](/dm/dm-hardware-and-software-requirements.md) when deploying a DM cluster.
 
 ## Step 1: Install TiUP on the control machine
 
@@ -227,6 +227,6 @@ If the `Status` is `Up` in the output, the cluster status is normal.
 
 ## Step 8: Managing migration tasks using dmctl
 
-dmctl is a command-line tool used to control DM clusters. You are recommended to [use dmctl via TiUP]\dm\maintain-dm-using-tiup.md#dmctl).
+dmctl is a command-line tool used to control DM clusters. You are recommended to [use dmctl via TiUP](/dm/maintain-dm-using-tiup.md#dmctl).
 
-dmctl supports both the command mode and the interactive mode. For details, see [Maintain DM Clusters Using dmctl]\dm\dmctl-introduction.md#maintain-dm-clusters-using-dmctl).
+dmctl supports both the command mode and the interactive mode. For details, see [Maintain DM Clusters Using dmctl](/dm/dmctl-introduction.md#maintain-dm-clusters-using-dmctl).
