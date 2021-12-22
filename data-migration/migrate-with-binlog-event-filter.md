@@ -55,13 +55,13 @@ filters:
 
     - `Do`: the allow list. A binlog event is replicated if meeting either of the following two conditions:
 
-        - The event is in the event list of the rule.
-        - sql-pattern has been specified and the SQL statement of the event matches any of sql-pattern options.
+        - The event matches the rule setting.
+        - sql-pattern has been specified and the SQL statement of the event matches any of the sql-pattern options.
 
     - `Ignore`: the block list. A binlog event is filtered out if meeting either of the following two conditions:
 
-        - The event is in the event list of the rule.
-        - sql-pattern has been specified and the SQL statement of the event matches any of sql-pattern options.
+        - The event matches the rule setting.
+        - sql-pattern has been specified and the SQL statement of the event matches any of the sql-pattern options.
 
     If both `Do` and `Ignore` are configured, `Ignore` has higher priority over `Do`. That is, an event satisfying both `Ignore` and `Do` conditions will be filtered out.
 

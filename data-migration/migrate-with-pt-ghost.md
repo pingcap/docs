@@ -9,7 +9,7 @@ In production scenarios, table locking during DDL execution can block the reads 
 
 After migrating data from MySQL to TiDB by using DM, you can enbale `online-ddl` to allow collaboration of DM and gh-ost or pt-osc.
 
-For the detailed replication instruction, refer to the following documents:
+For the detailed replication instruction, refer to the following documents by scenarios:
 
 - [Migrate MySQL Data of Less Than 1 TiB to TiDB](/data-migration/migrate-mysql-tidb-less-tb.md)
 - [Migrate MySQL Data of More Than 1 TiB to TiDB](/data-migration/migrate-mysql-tidb-above-tb.md)
@@ -60,7 +60,7 @@ The change in the workflow brings the following advantages:
 
 - The downstream TiDB does not need to create and replicate the ghost table, saving the storage space and network transmission overhead.
 
-- When you migrate and merge data from sharded tables, the RENAME operation is ignored for each sharded ghost tables to ensure the correctness of the replication.
+- When you migrate and merge data from sharded tables, the RENAME operation is ignored for each sharded ghost table to ensure the correctness of the replication.
 
 ## See also
 
