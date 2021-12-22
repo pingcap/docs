@@ -53,21 +53,23 @@ filters:
 - `sql-pattern`：Filter specified DDL SQL statements. The matching rule supports using a regular expression.
 - `action`: `Do` or `Ignore`
 
-    - `Do`: the allow list. A binlog event is filtered if meeting either of the following two conditions:
+    - `Do`: the allow list. A binlog event is replicated if meeting either of the following two conditions:
 
-        - The event is not in the event list of the rule.
-        - sql-pattern has been specified but the SQL statement of the event does not match sql-pattern.
+        - The event is in the event list of the rule.
+        - sql-pattern has been specified and the SQL statement of the event matches any of sql-pattern options.
 
     - `Ignore`: the block list. A binlog event is filtered out if meeting either of the following two conditions:
 
         - The event is in the event list of the rule.
-        - sql-pattern has been specified and the SQL statement of the event matches sql-pattern.
+        - sql-pattern has been specified and the SQL statement of the event matches any of sql-pattern options.
+
+    If both `Do` and `Ignore` are configured, `Ignore` has higher priority over `Do`. That is, an event satisfying both `Ignore` and `Do` conditions will be filtered out.
 
 ## Application scenarios
 
 This section describes the application scenarios of binlog event filter.
 
-### Drop all sharding deletion operations
+### Filter out all sharding deletion operations
 
 To filter out all deletion operations, configure a `filter-table-rule` and a `filter-schema-rule`, as shown below:
 
@@ -84,9 +86,9 @@ filters:
     action: Ignore
 ```
 
-### Migrate sharding DML statements only
+### Migrate sharding DML operations only
 
-To filter only DML statements, configure two `Binlog event filter rule`, as shown below:
+To replicate only DML statements, configure two `Binlog event filter rule`, as shown below:
 
 ```
 filters:
@@ -101,7 +103,7 @@ filters:
     action: Do
 ```
 
-### Drop SQL statements not supported by TiDB
+### Filter out SQL statements not supported by TiDB
 
 To filter out SQL statements not supported by TiDB, configure a `filter-procedure-rule`, as shown below:
 
