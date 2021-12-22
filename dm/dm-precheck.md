@@ -49,7 +49,7 @@ Upstream and downstream database users must have the corresponding read and writ
     TiDB differs from MySQL in compatibility in the following aspects:
 
     - TiDB does not support the foreign key.
-    - [Character set compatibility differs](https://pingcap.com/docs/stable/reference/sql/character-set/).
+    - [Character set compatibility differs](/character-set-and-collation.md).
 
     DM will also check whether the primary key or unique key restriction exists in all upstream tables. This check is introduced in v1.0.7.
 
