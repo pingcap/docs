@@ -49,7 +49,7 @@ After the two steps above, make sure you have the following information ready:
 
 ### Step 2. Export schema
 
-Because the snapshot file does not contain the DDL statements, you need to export the schema using Dumpling and create the schema in the target database using TiDB Lightning. If you want to manually create the schema, you can skip this step.
+Because the snapshot file from Aurora does not contain the DDL statements, you need to export the schema using Dumpling and create the schema in the target database using TiDB Lightning. If you want to manually create the schema, you can skip this step.
 
 Export the schema using Dumpling:
 
@@ -145,7 +145,7 @@ If you need to enable TLS in the TiDB cluster, refer to [TiDB Lightning Configur
 
 3. After the import starts, you can check the progress of the import by either of the following methods:
 
-    - `grep` the keyword `progress` in the log. The progress is updated every 5 minutes.
+    - `grep` the keyword `progress` in the log. The progress is updated every 5 minutes by default.
     - Check progress in [the monitoring dashboard](/tidb-lightning/monitor-tidb-lightning.md).
 
 4. After TiDB Lightning completes the import, it exits automatically. If you find the last 5 lines of its log print `the whole procedure completed`, the import is successful.
