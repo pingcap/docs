@@ -8,7 +8,7 @@ aliases: ['/tidb-data-migration/dev/handle-performance-issues/']
 
 This document introduces common performance issues that might exist in DM and how to deal with them.
 
-Before diagnosing an issue, you can refer to the [DM 2.0-GA Benchmark Report](/dm/benchmark-v2.0-ga.md).
+Before diagnosing an issue, you can refer to the [DM 2.0-GA Benchmark Report](/dm/dm-benchmark-v5.3.0.md).
 
 When diagnosing and handling performance issues, make sure that:
 
