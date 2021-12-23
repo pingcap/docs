@@ -17,7 +17,7 @@ TiDB version: 5.0.6
 
         - Output the cdc server cmd error from stdout to stderr. [#3875](https://github.com/pingcap/tiflow/pull/3875)
 
-## Feature enhancements
+## Improvements
 
 + TiDB
 
@@ -30,8 +30,6 @@ TiDB version: 5.0.6
     - Move verify_checksum to import-thread from apply-thread. [#11257](https://github.com/tikv/tikv/pull/11257)
     - Add metrics for raft log garbage-collect to locate performance problem. [#11381](https://github.com/tikv/tikv/pull/11381)
     - Hide untouched storage commands' metrics in grafana dashboard [#11001](https://github.com/tikv/tikv/pull/11001)
-
-## Improvements
 
 + PD
 
