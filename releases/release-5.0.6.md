@@ -15,21 +15,21 @@ TiDB version: 5.0.6
 
     + TiCDC
 
-        - Output the cdc server cmd error from stdout to stderr. [#3875](https://github.com/pingcap/tiflow/pull/3875)
+        - Output the cdc server cmd error from stdout to stderr. [#3133](https://github.com/pingcap/tiflow/issues/3133)
 
 ## Improvements
 
 + TiDB
 
     - Prevent conflicted optimistic transactions from locking each other [#11148](https://github.com/tikv/tikv/issues/11148)
-    - Avoid confusing error log like `invalid cop task execution summaries length` when running MPP query [#28262](https://github.com/pingcap/tidb/pull/28262)
+    - Avoid confusing error log like `invalid cop task execution summaries length` when running MPP query [#1791](https://github.com/pingcap/tics/issues/1791)
     - The debug log on coprocessor doesn't print out the statement when encountering a lock, which makes it difficult to know what statement was affected by the lock. This fix tries to add the statement.[#27718](https://github.com/pingcap/tidb/issues/27718)
 
 + TiKV
 
     - Move verify_checksum to import-thread from apply-thread. [#11239](https://github.com/tikv/tikv/issues/11239)
     - Add metrics for raft log garbage-collect to locate performance problem. [#11374](https://github.com/tikv/tikv/issues/11374)
-    - Hide untouched storage commands' metrics in grafana dashboard [#11001](https://github.com/tikv/tikv/pull/11001)
+    - Hide untouched storage commands' metrics in grafana dashboard [#11681](https://github.com/tikv/tikv/issues/11681)
 
 + PD
 
@@ -43,16 +43,16 @@ TiDB version: 5.0.6
         - Reduce lock competition in sink module. [#2760](https://github.com/pingcap/tiflow/pull/2760)
         - Extend creating service gc safepoint ttl to 1 hour to support creating changefeeds that needs long initialization time. [#2470](https://github.com/pingcap/tiflow/issues/2470)
         - Changefeed supports fast fail when occur ErrGCTTLExceeded error. [#3111](https://github.com/pingcap/tiflow/issues/3111)
-        - Add rate limiter to limit EtcdWorker tick frequency. [#3268](https://github.com/pingcap/tiflow/pull/3268)
-        - Support batch messages to reduce EtcdWorker tick. [#3848](https://github.com/pingcap/tiflow/pull/3848)
-        - Support unified sorter cgroup aware. [#3441](https://github.com/pingcap/tiflow/pull/3441)
-        - Add Kafka sink default configuration config.Metadata.Timeout. [#3539](https://github.com/pingcap/tiflow/pull/3539)
+        - Add rate limiter to limit EtcdWorker tick frequency. [#3112](https://github.com/pingcap/tiflow/issues/3112)
+        - Support batch messages to reduce EtcdWorker tick. [#3391](https://github.com/pingcap/tiflow/pull/3391)
+        - Support unified sorter cgroup aware. [#1798](https://github.com/pingcap/tiflow/issues/1798)
+        - Add Kafka sink default configuration config.Metadata.Timeout. [#3352](https://github.com/pingcap/tiflow/issues/3352)
         - Change Kafka sink default `MaxMessageBytes` to 1MB. [#3081](https://github.com/pingcap/tiflow/issues/3081)
         - Add more monitor metric and alert, including "no owner alert" [#3834](https://github.com/pingcap/tiflow/pull/3834), "mounter row" [#2830](https://github.com/pingcap/tiflow/pull/2830), "table sink total row" [#2830](https://github.com/pingcap/tiflow/pull/2830), "buffer sink total row" [#2830](https://github.com/pingcap/tiflow/pull/2830), "go gc" [#2998](https://github.com/pingcap/tiflow/pull/2998), "go_max_procs" [#2998](https://github.com/pingcap/tiflow/pull/2998), "cached region" [#2733](https://github.com/pingcap/tiflow/pull/2733).
 
     + (Backup & Restore) BR
 
-        - Retry pd request and TiKV IO timeout error [#1436](https://github.com/pingcap/br/pull/1436)
+        - Retry pd request and TiKV IO timeout error [#27787](https://github.com/pingcap/tidb/issues/27787)
 
 ## Bug fixes
 
@@ -135,10 +135,10 @@ TiDB version: 5.0.6
 
     + TiCDC
 
-        - Fix table is not replicated when adding partition about partition table without valid index. [#2864](https://github.com/pingcap/tiflow/pull/2864)
-        - Fix cdc cli silently truncated user parameters when receiving unexpected parameters, causing the user input parameters to be lost. [#2888](https://github.com/pingcap/tiflow/pull/2888)
+        - Fix table is not replicated when adding partition about partition table without valid index. [#2834](https://github.com/pingcap/tiflow/issues/2834)
+        - Fix cdc cli silently truncated user parameters when receiving unexpected parameters, causing the user input parameters to be lost. [#2303](https://github.com/pingcap/tiflow/issues/2303)
         - Fix cdc scheduling tables too early. [#2625](https://github.com/pingcap/tiflow/issues/2625)
-        - Fix Kafka_producer deadlock when an error occurs in asyncClient. [#3016](https://github.com/pingcap/tiflow/pull/3016)
+        - Fix Kafka_producer deadlock when an error occurs in asyncClient. [#2978](https://github.com/pingcap/tiflow/issues/2978)
         - Fix MQ sink don't support non binary json string encoding. [#2758](https://github.com/pingcap/tiflow/issues/2758)
         - Fix Kafka sink can not send message due to constraint by `max-message-size` option. [#2962](https://github.com/pingcap/tiflow/issues/2962)
         - Fix  fallback resolvedTs event  block the progress of resolve lock when meet region merging. [#3061](https://github.com/pingcap/tiflow/issues/3061)
@@ -148,10 +148,10 @@ TiDB version: 5.0.6
         - Fix MySQL sink deadlock warning too frequently. [#2706](https://github.com/pingcap/tiflow/issues/2706)
         - Fix Avro sink don't support json type column. [#3624](https://github.com/pingcap/tiflow/issues/3624)
         - Fix read error schema snapshot from TiKV when owner restart. [#2603](https://github.com/pingcap/tiflow/issues/2603)
-        - Fix schema GC not work correctly and OOM issue when processing too many DDL. [#3275](https://github.com/pingcap/tiflow/pull/3275)
+        - Fix schema GC not work correctly and OOM issue when processing too many DDL. [#3174](https://github.com/pingcap/tiflow/issues/3174)
         - Fix old value enabled is not forced on Canal and Maxwell protocols automatically. [#3676](https://github.com/pingcap/tiflow/issues/3676)
         - Fix timezone related error that cause cdc server can't run in some RHEL release version (6.8, 6.9 etc).  [#3584](https://github.com/pingcap/tiflow/issues/3584)
-        - Fix txn_batch_size metric inaccurate issue for Kafka sink. [#3820](https://github.com/pingcap/tiflow/pull/3820)
+        - Fix txn_batch_size metric inaccurate issue for Kafka sink. [#3431](https://github.com/pingcap/tiflow/issues/3431)
         - Fix Kafka partition count not check when auto-create-topic is disabled by the user. [#3337](https://github.com/pingcap/tiflow/issues/3337)
         - Fix Kafka message too large for broker. [#3337](https://github.com/pingcap/tiflow/issues/3337)
         - Fix EtcdWorker row metric error. [#4000](https://github.com/pingcap/tiflow/pull/4000)
@@ -160,7 +160,7 @@ TiDB version: 5.0.6
 
     + (Backup & Restore) BR
 
-        - Fix failed to retry grpc errors. [#1438](https://github.com/pingcap/br/pull/1438)
+        - Fix failed to retry grpc errors. [#27421](https://github.com/pingcap/tidb/issues/27421)
         - Fix failed after importing table with expression index using local backend. [#1404](https://github.com/pingcap/br/issues/1404)
         - Fix the average speed isn't accurate in backup and restore [#1405](https://github.com/pingcap/br/issues/1405)
 
