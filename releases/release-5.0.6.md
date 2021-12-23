@@ -21,7 +21,7 @@ TiDB version: 5.0.6
 
 + TiDB
 
-    - Prevent conflicted optimistic transactions from locking each other [#11148](https://github.com/tikv/tikv/issues/11148)
+    (dup) - Fix the issue that optimistic transaction conflicts might cause transactions to block each other [#11148](https://github.com/tikv/tikv/issues/11148)
     - Avoid confusing error log like `invalid cop task execution summaries length` when running MPP query [#1791](https://github.com/pingcap/tics/issues/1791)
     - The debug log on coprocessor doesn't print out the statement when encountering a lock, which makes it difficult to know what statement was affected by the lock. This fix tries to add the statement.[#27718](https://github.com/pingcap/tidb/issues/27718)
 
@@ -39,13 +39,13 @@ TiDB version: 5.0.6
 + Tools
 
     + TiCDC
-        - Optimize the rate limit control when TiKV reloads. [#3110](https://github.com/pingcap/tiflow/issues/3110)
+        (dup) - Optimize rate limiting control on TiKV reloads to reduce gPRC congestion during changefeed initialization [#3110](https://github.com/pingcap/ticdc/issues/3110)
         - Reduce lock competition in sink module. [#2760](https://github.com/pingcap/tiflow/pull/2760)
-        - Extend creating service gc safepoint ttl to 1 hour to support creating changefeeds that needs long initialization time. [#2470](https://github.com/pingcap/tiflow/issues/2470)
-        - Changefeed supports fast fail when occur ErrGCTTLExceeded error. [#3111](https://github.com/pingcap/tiflow/issues/3111)
-        - Add rate limiter to limit EtcdWorker tick frequency. [#3112](https://github.com/pingcap/tiflow/issues/3112)
+        (dup) - Fix the issue that scanning stock data might fail due to TiKV performing GC when scanning stock data takes too long [#2470](https://github.com/pingcap/ticdc/issues/2470)
+        (dup) - Fix the issue that changefeed does not fail fast enough when the ErrGCTTLExceeded error occurs [#3111](https://github.com/pingcap/ticdc/issues/3111)
+        (dup) - Add a tick frequency limit to EtcdWorker to prevent frequent etcd writes from affecting PD services [#3112](https://github.com/pingcap/ticdc/issues/3112)
         - Support batch messages to reduce EtcdWorker tick. [3112](https://github.com/pingcap/tiflow/issues/3112)
-        - Support unified sorter cgroup aware. [#1798](https://github.com/pingcap/tiflow/issues/1798)
+        (dup) - Fix OOM in container environments [#1798](https://github.com/pingcap/ticdc/issues/1798)
         - Add Kafka sink default configuration config.Metadata.Timeout. [#3352](https://github.com/pingcap/tiflow/issues/3352)
         - Change Kafka sink default `MaxMessageBytes` to 1MB. [#3081](https://github.com/pingcap/tiflow/issues/3081)
         - Add more monitor metric and alert, including "no owner alert" [#3834](https://github.com/pingcap/tiflow/pull/3834), "mounter row" , "table sink total row" , "buffer sink total row" [#1606](https://github.com/pingcap/tiflow/issues/1606), "go gc" , "go_max_procs" [#2998](https://github.com/pingcap/tiflow/pull/2998), "cached region" [#2733](https://github.com/pingcap/tiflow/pull/2733).
@@ -58,13 +58,13 @@ TiDB version: 5.0.6
 
 + TiDB
 
-    - Fix the problem that error is raised when a grant/revoke SQL contains global level identifier [#29675](https://github.com/pingcap/tidb/issues/29675)
+    (dup) - Fix the `privilege check fail` error when performing the `grant` and `revoke` operations to grant and revoke global level privileges [#29675](https://github.com/pingcap/tidb/issues/29675)
     - Fix the problem that adding index panics by chance [#27687](https://github.com/pingcap/tidb/issues/27687)
     - Fix the problem that the `enforce-mpp` config item is useless in v5.0.4 [#29252](https://github.com/pingcap/tidb/issues/29252)
-    - Fix the panic when the `case-when` function meets enum type input argument [#29357](https://github.com/pingcap/tidb/issues/29357)
-    - Fix the problem that result of the `microsecond` function is wrong in vectorized evaluation [#29244](https://github.com/pingcap/tidb/issues/29244)
-    - Fix the problem that the log lose the SQL text when auto analyze fails [#29188](https://github.com/pingcap/tidb/issues/29188)
-    - Fix the problem that result of the `hour` function is wrong in vectorized evaluation [#28643](https://github.com/pingcap/tidb/issues/28643)
+    (dup) - Fix the panic when using the `CASE WHEN` function on the `ENUM` data type [#29357](https://github.com/pingcap/tidb/issues/29357)
+    (dup) - Fix wrong results of the `microsecond` function in vectorized expressions [#29244](https://github.com/pingcap/tidb/issues/29244)
+    (dup) - Fix the issue of incomplete log information from the `auto analyze` result [#29188](https://github.com/pingcap/tidb/issues/29188)
+    (dup) - Fix wrong results of the `hour` function in vectorized expression [#28643](https://github.com/pingcap/tidb/issues/28643)
     - Fix the problem that unexpected error like `tidb_cast to Int32 is not supported` is raised when executing a MPP query [#23907](https://github.com/pingcap/tidb/issues/23907)
     - Fix the problem that MPP node availability detection does not work in some corner cases [#3118](https://github.com/pingcap/tics/issues/3118)
     - Fix the problem that data-race may happen when alloc MPP task id [#27952](https://github.com/pingcap/tidb/issues/27952)
@@ -73,24 +73,24 @@ TiDB version: 5.0.6
     - Fix the problem that the error like `can not found column in Schema column` is raised unexpectedly for mpp queries [#28147](https://github.com/pingcap/tidb/pull/28147)
     - Fix the problem that TiDB may crash when TiFlash shut down [#28096](https://github.com/pingcap/tidb/issues/28096)
     - Fix the problem that the `index out of range` error is raised unexpectly when the planner doing join reorder [#24095](https://github.com/pingcap/tidb/issues/24095).
-    - Fix the problem that the results of `if`,`case-when`,`elt` functions are wrong when the input arguments if of type enum [#23114](https://github.com/pingcap/tidb/issues/23114)
+    (dup) - Fix wrong results of the control functions (such as `IF` and `CASE WHEN`) when using the `ENUM` type data as parameters of such functions [#23114](https://github.com/pingcap/tidb/issues/23114)
     - Fix the problem the `concat(ifnull(time(3))` returns wrong result [#29498](https://github.com/pingcap/tidb/issues/29498)
     - Fix the problem that `greatest/least(unsigned)` returns wrong result [#30101](https://github.com/pingcap/tidb/issues/30101)
     - Fix the problem that SQL is cancelled when including json column joins char column [#29401](https://github.com/pingcap/tidb/issues/29401)
     - Fix the data inconsistency caused by incorrect usage of lazy existence check and untouch key optimization [#30410](https://github.com/pingcap/tidb/issues/30410)
     - Fix the problem that window function may return different results when using transaction or not [#29947](https://github.com/pingcap/tidb/issues/29947)
     - Fix the problem that `cast(integer as char) union string` returns wrong result[#29513](https://github.com/pingcap/tidb/issues/29513)
-    - Fix the problem that `concat(decimal_col)` returns wrong result [#29417](https://github.com/pingcap/tidb/issues/29417)
+    (dup) - Fix the issue that the length information is wrong when converting `Decimal` to `String` [#29417](https://github.com/pingcap/tidb/issues/29417)
     - Fix the problem that the error `Column 'col_name' in field list is ambiguous` is raised unexpectedly when a SQL contains natural join [#25041](https://github.com/pingcap/tidb/issues/25041)
-    - Fix the problem that `greatest` returns different results when `tidb_enable_vectorized_expression` is on or not [#29434](https://github.com/pingcap/tidb/issues/29434)
-    - Fix the problem that planner may cache invalid plans for joins in some cases [#28087](https://github.com/pingcap/tidb/issues/28087)
+    (dup) - Fix the issue that the `GREATEST` function returns inconsistent results due to different values of `tidb_enable_vectorized_expression` (`on` or `off`) [#29434](https://github.com/pingcap/tidb/issues/29434)
+    (dup) - Fix the issue that planner might cache invalid plans for `join` in some cases [#28087](https://github.com/pingcap/tidb/issues/28087)
     - Fix the problem that the error `index out of range [1] with length 1` is raised when a SQL tries to evaluates an aggregation result on the result of join in some cases [#1978](https://github.com/pingcap/tics/issues/1978)
 
 + TiKV
 
     - Fix resolved timestamp lag increased after stoping a tikv [#11351](https://github.com/tikv/tikv/issues/11351)
     - Fix connection abort when too many small logs are batched into one messages [#9714](https://github.com/tikv/tikv/issues/9714)
-    - Fix panic in rare conditions when merge, conf change and snapshot happen at the same time [#11475](https://github.com/tikv/tikv/issues/11475)
+    (dup) - Fix a panic issue that occurs when Region merge, ConfChange, and Snapshot happen at the same time in extreme conditions [#11475](https://github.com/tikv/tikv/issues/11475)
     - Fix the issue that reverse scan can't detect memory locks and may read stale data. [#11440](https://github.com/tikv/tikv/issues/11440)
     - Fix negative sign when decimal divide to zero [#29586](https://github.com/pingcap/tidb/issues/29586)
     - Avoid possible OOM due to the accumulation of GC tasks [#11410](https://github.com/tikv/tikv/issues/11410)
