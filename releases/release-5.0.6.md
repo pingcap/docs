@@ -116,20 +116,20 @@ TiDB version: 5.0.6
 
 + TiFlash
 
-    - Fix potential data inconsistency when widen pk column type if pk is handle [#3572](https://github.com/pingcap/tics/pull/3572)
-    - Fix Tiflash arm build when include `libnsl.so`. Try copy `libnsl.so` to `INSTALL_DIR` [#3205](https://github.com/pingcap/tics/pull/3205)
-    - Fix store size on `tiflash metrics` is not consistent.Decrease the size of checkpoint file when removing it  [#3187](https://github.com/pingcap/tics/pull/3187)
-    - Fix exception: `GC` removed normal file which just created [#3226](https://github.com/pingcap/tics/pull/3226)
-    - Fix sync schema exception when user upgrade the TiFlash version. [#2701](https://github.com/pingcap/tics/pull/2701)
-    - Fix tiflash randomly crash when a mpp query is killed. [#3448](https://github.com/pingcap/tics/pull/3448)
-    - Fix throw not constants exception in `substringUTF8` [#3266](https://github.com/pingcap/tics/pull/3266)
-    - Fix decode DAG request failed.Add retry when decode DAG request failed. [#3678](https://github.com/pingcap/tics/pull/3678)
-    - Fix the bug that results of `where <string>` is wrong because it will be converted to int type. [#3477](https://github.com/pingcap/tics/pull/3477)
-    - Fix `main_capacity_quota_` check  [#3425](https://github.com/pingcap/tics/pull/3425)
-    - Fix the inconsistent behavior of `CastStringAsDecimal` between tiflash and tidb/tikv. [#3674](https://github.com/pingcap/tics/pull/3674)
-    - Fix exception: `expected Nullable(Int64), got Int64`. Sending schemas in exchangeSender to avoid schema mismatch. [#3369](https://github.com/pingcap/tics/pull/3369)
-    - Fix the issue of unexpected error that `Unexpected type of column: Nullable(Nothing)` [#3376](https://github.com/pingcap/tics/pull/3376)
-    - Fix the issue that comparison between Decimal may cause overflow and report Can't compare. [#3097](https://github.com/pingcap/tics/pull/3097)
+    - Fix potential data inconsistency when widen pk column type if pk is handle
+    - Fix Tiflash arm build when include `libnsl.so`. Try copy `libnsl.so` to `INSTALL_DIR`
+    - Fix store size on `tiflash metrics` is not consistent.Decrease the size of checkpoint file when removing it
+    - Fix exception: `GC` removed normal file which just created
+    - Fix sync schema exception when user upgrade the TiFlash version
+    - Fix tiflash randomly crash when a mpp query is killed
+    - Fix throw not constants exception in `substringUTF8`
+    - Fix decode DAG request failed.Add retry when decode DAG request failed
+    - Fix the bug that results of `where <string>` is wrong because it will be converted to int type
+    - Fix `main_capacity_quota_` check
+    - Fix the inconsistent behavior of `CastStringAsDecimal` between tiflash and tidb/tikv
+    - Fix exception: `expected Nullable(Int64), got Int64`. Sending schemas in exchangeSender to avoid schema mismatch
+    - Fix the issue of unexpected error that `Unexpected type of column: Nullable(Nothing)`
+    - Fix the issue that comparison between Decimal may cause overflow and report Can't compare
 
 + Tools
 
