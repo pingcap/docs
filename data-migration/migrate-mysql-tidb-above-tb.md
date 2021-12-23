@@ -1,6 +1,6 @@
 ---
 title: Migrate MySQL Data of More than 1 TiB to TiDB
-summary: Learn how to migrate data above Terabytes from MySQL to TiDB.
+summary: Learn how to migrate data above terabytes from MySQL to TiDB.
 ---
 
 # Migrate MySQL Data of More than 1 TiB to TiDB
@@ -9,12 +9,12 @@ When the data volume to be migrated is small, you can easily [use DM to migrate 
 
 This document describes how to migrate large volumes of data from MySQL to TiDB. This whole migration is divided into two processes:
 
-1. *Full migration*. Dumpling and TiDB Lightning perform the full migraiton. TiDB Lightning's **local backend** mode can import data at a speed of up to 500 GiB/h.
+1. *Full migration*. Use Dumpling and TiDB Lightning to perform the full migration. TiDB Lightning's **local backend** mode can import data at a speed of up to 500 GiB/h.
 2. *Incremental replication*. After the full migration is completed, you can replicate the incremental data using DM.
 
 ## Prerequisites
 
-- [Install DM](https://docs.pingcap.com/zh/tidb-data-migration/stable/deploy-a-dm-cluster-using-tiup).
+- [Install DM](https://docs.pingcap.com/tidb-data-migration/stable/deploy-a-dm-cluster-using-tiup).
 - [Install Dumpling and TiDB Lightning](/migration-tools.md).
 - [Grant the source database and target database privileges required for DM](https://docs.pingcap.com/tidb-data-migration/stable/dm-worker-intro).
 - [Grant the target database privileges required for TiDB Lightning](/tidb-lightning/tidb-lightning-faq.md#what-are-the-privilege-requirements-for-the-target-database).
@@ -22,7 +22,7 @@ This document describes how to migrate large volumes of data from MySQL to TiDB.
 
 ## Resource requirements
 
-**OS**: Examples in this document use new, clean CentOS 7 instances. You can deploy a virtual machine on your own host locally, or on a vendor-provided cloud platform. TiDB Lightning consumes as much CPU resources as needed by default, so it is recommended to deploy TiDB Lightning on a dedicated machine. If you cannot use a dedicated machine, you may deploy TiDB Lightning on a shared machine with other components (such as `tikv-server`) and limit TiDB Lightning's CPU usage by configuring `region-concurrency`. In the case of hybrid deployment, you can limit the CPU usage of TiDB Lightning to 75% of the number of logical CPUs.
+**Operating system**: Examples in this document use new, clean CentOS 7 instances. You can deploy a virtual machine on your own host locally, or on a vendor-provided cloud platform. TiDB Lightning consumes as much CPU resources as needed by default, so it is recommended to deploy TiDB Lightning on a dedicated machine. If you do not have a dedicated machine for TiDB Lightning, you can deploy TiDB Lightning on a shared machine with other components (such as `tikv-server`) and limit TiDB Lightning's CPU usage by configuring `region-concurrency` to 75% of the number of logical CPUs.
 
 **Memory and CPU**: TiDB Lightning consumes high resources, so it is recommended to allocate more than 64 GB of memory and 32-core CPU for TiDB Lightning. To get the best performance, make sure the CPU core to memory (GB) ratio is more than 1:2.
 
@@ -45,7 +45,7 @@ SELECT table_name,table_schema,SUM(data_length)/1024/1024 AS data_length,SUM(ind
 
 ### Disk space for the target TiKV cluster
 
-The target TiKV cluster must have enough disk space to store the imported data. In addition to [the standard hardware requirements](/hardware-and-software-requirements.md), the storage space of the target TiKV cluster must be larger than **the size of the data source x [the number of replicas](/faq/deploy-and-maintain-faq.md#is-the-number-of-replicas-in-each-region-configurable-if-yes-how-to-configure-it) x 2**. For example, if the cluster uses 3 replicas by default, the target TiKV cluster must have a storage space 6 times the size of the data source. The formula has `x 2` because:
+The target TiKV cluster must have enough disk space to store the imported data. In addition to [the standard hardware requirements](/hardware-and-software-requirements.md), the storage space of the target TiKV cluster must be larger than **the size of the data source x [the number of replicas](/faq/deploy-and-maintain-faq.md#is-the-number-of-replicas-in-each-region-configurable-if-yes-how-to-configure-it) x 2**. For example, if the cluster uses 3 replicas by default, the target TiKV cluster must have a storage space larger than 6 times the size of the data source. The formula has `x 2` because:
 
 - Index might take extra space.
 - RocksDB has a space amplification effect.
@@ -60,7 +60,7 @@ The target TiKV cluster must have enough disk space to store the imported data. 
     tiup dumpling -h ${ip} -P 3306 -u root -t 16 -r 200000 -F 256MB -B my_db1 -f 'my_db1.table[12]' -o ${data-dir}
     ```
 
-    Dumpling exports data in SQL files by default. You can specify the file format by adding the `--filetype` option.
+    Dumpling exports data in SQL files by default. You can specify a different file format by adding the `--filetype` option.
 
     The parameters used above are as follows. For more Dumpling parameters, refer to [Dumpling Overview](/dumpling-overview.md).
 
@@ -71,7 +71,7 @@ The target TiKV cluster must have enough disk space to store the imported data. 
     |`-P` or `--port`       |MySQL port|
     |`-h` or `--host`       |MySQL IP address|
     |`-t` or `--thread`     |The number of threads used for export|
-    |`-o` or `--output`     |The directory that stores the exported file. Supports local path or [external storage URL](/br/backup-and-restore-storages.md)|
+    |`-o` or `--output`     |The directory that stores the exported file. Supports a local path or an [external storage URL](/br/backup-and-restore-storages.md)|
     |`-r` or `--row`        |The maximum number of rows in a single file|
     |`-F`                   |The maximum size of a single file, in MiB|
     |-`B` or `--database`   |Specifies a database to be exported|
@@ -104,7 +104,7 @@ The target TiKV cluster must have enough disk space to store the imported data. 
     # "local": Default backend. The local backend is used to import large volumes of data (1 TiB or more). During the import, the target TiDB cluster cannot provide any service.
     # "tidb": The "tidb" backend is used to import data less than 1 TiB. During the import, the target TiDB cluster can provide service normally. For more information on the backends, refer to https://docs.pingcap.com/tidb/stable/tidb-lightning-backends.
     backend = "local"
-    # Sets the temporary storage directory for the sorted Key-Value files. The directory must be empty, and the storage space must be enough to hold the largest single table in the data source. For better import performance, it is recommended to use a directory different from `data-source-dir` for the directory and use flash storage, which can use I/O exclusively.
+    # Sets the temporary storage directory for the sorted Key-Value files. The directory must be empty, and the storage space must be enough to hold the largest single table in the data source. For better import performance, it is recommended to use a directory different from `data-source-dir` and use flash storage, which can use I/O exclusively.
     sorted-kv-dir = "${sorted-kv-dir}"
 
     [mydumper]
@@ -122,7 +122,7 @@ The target TiKV cluster must have enough disk space to store the imported data. 
     user = "${user_name}"         # e.g.: "root"
     password = "${password}"      # e.g.: "rootroot"
     status-port = ${status-port}  # Obtains the table schema information from TiDB status port, e.g.: 10080
-    pd-addr = "${ip}:${port}"     # The cluster PD address, e.g.: 172.16.31.3:2379. TiDB Lightning obtains some information from PD. When backend = "local", you must specify status-port and pd-addr correctly. Otherwise, the import will be abnormal.
+    pd-addr = "${ip}:${port}"     # The address of the PD cluster, e.g.: 172.16.31.3:2379. TiDB Lightning obtains some information from PD. When backend = "local", you must specify status-port and pd-addr correctly. Otherwise, the import will be abnormal.
     ```
 
     For more information on TiDB Lightning configuration, refer to [TiDB Lightning Configuration](/tidb-lightning/tidb-lightning-configuration.md).
@@ -201,8 +201,8 @@ If the import fails, refer to [TiDB Lightning FAQ](/tidb-lightning/tidb-lightnin
     # Configures the data source.
     mysql-instances:
       - source-id: "mysql-01"            # Data source ID，i.e., source-id in source1.yaml
-        block-allow-list: "bw-rule-1"    # References the block-allow-list configuration above.
-        # syncer-config-name: "global"    # References the syncers incremental data configuration below.
+        block-allow-list: "bw-rule-1"    # You can use the block-allow-list configuration above.
+        # syncer-config-name: "global"    # You can use the syncers incremental data configuration below.
         meta:                            # When task-mode is "incremental" and the target database does not have a checkpoint, DM uses the binlog position as the starting point. If the target database has a checkpoint, DM uses the checkpoint as the starting point.
           # binlog-name: "mysql-bin.000004"  # The binlog position recorded in Step 1. If the upstream database service is configured to switch master between different nodes automatically, GTID mode is required.
           # binlog-pos: 109227
@@ -242,7 +242,7 @@ If the import fails, refer to [TiDB Lightning FAQ](/tidb-lightning/tidb-lightnin
 
     If the task fails to start, check the prompt message and fix the configuration. After that, you can re-run the command above to start the task.
 
-    If you encounter any problem, refer to [DM error handling](https://docs.pingcap.com/tidb-data-migration/stable/error-handling) and [DM FAQ](https://docs.pingcap.com/zh/tidb-data-migration/stable/faq).
+    If you encounter any problem, refer to [DM error handling](https://docs.pingcap.com/tidb-data-migration/stable/error-handling) and [DM FAQ](https://docs.pingcap.com/tidb-data-migration/stable/faq).
 
 ### Check the migration task status
 
