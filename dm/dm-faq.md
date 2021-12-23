@@ -124,8 +124,6 @@ Set the parameters below to a value larger than the default 67108864 (64M).
 - The global variable of the TiDB server: `max_allowed_packet`.
 - The configuration item in the task configuration file: `target-database.max-allowed-packet`. For details, refer to [DM Advanced Task Configuration File](/dm/task-configuration-file-full.md).
 
-For details, see [Loader solution](https://docs.pingcap.com/tidb/stable/loader-overview#solution).
-
 ## How to handle the error `Error 1054: Unknown column 'binlog_gtid' in 'field list'` that occurs when existing DM migration tasks of an DM 1.0 cluster are running on a DM 2.0 or newer cluster?
 
 Since DM v2.0, if you directly run the `start-task` command with the task configuration file of the DM 1.0 cluster to continue the incremental data replication, the error `Error 1054: Unknown column 'binlog_gtid' in 'field list'` occurs.
