@@ -44,11 +44,11 @@ TiDB version: 5.0.6
         - Extend creating service gc safepoint ttl to 1 hour to support creating changefeeds that needs long initialization time. [#2470](https://github.com/pingcap/tiflow/issues/2470)
         - Changefeed supports fast fail when occur ErrGCTTLExceeded error. [#3111](https://github.com/pingcap/tiflow/issues/3111)
         - Add rate limiter to limit EtcdWorker tick frequency. [#3112](https://github.com/pingcap/tiflow/issues/3112)
-        - Support batch messages to reduce EtcdWorker tick. [#3391](https://github.com/pingcap/tiflow/pull/3391)
+        - Support batch messages to reduce EtcdWorker tick. [3112](https://github.com/pingcap/tiflow/issues/3112)
         - Support unified sorter cgroup aware. [#1798](https://github.com/pingcap/tiflow/issues/1798)
         - Add Kafka sink default configuration config.Metadata.Timeout. [#3352](https://github.com/pingcap/tiflow/issues/3352)
         - Change Kafka sink default `MaxMessageBytes` to 1MB. [#3081](https://github.com/pingcap/tiflow/issues/3081)
-        - Add more monitor metric and alert, including "no owner alert" [#3834](https://github.com/pingcap/tiflow/pull/3834), "mounter row" [#2830](https://github.com/pingcap/tiflow/pull/2830), "table sink total row" [#2830](https://github.com/pingcap/tiflow/pull/2830), "buffer sink total row" [#2830](https://github.com/pingcap/tiflow/pull/2830), "go gc" [#2998](https://github.com/pingcap/tiflow/pull/2998), "go_max_procs" [#2998](https://github.com/pingcap/tiflow/pull/2998), "cached region" [#2733](https://github.com/pingcap/tiflow/pull/2733).
+        - Add more monitor metric and alert, including "no owner alert" [#3834](https://github.com/pingcap/tiflow/pull/3834), "mounter row" , "table sink total row" , "buffer sink total row" [#1606](https://github.com/pingcap/tiflow/issues/1606), "go gc" , "go_max_procs" [#2998](https://github.com/pingcap/tiflow/pull/2998), "cached region" [#2733](https://github.com/pingcap/tiflow/pull/2733).
 
     + (Backup & Restore) BR
 
