@@ -22,8 +22,8 @@ TiDB version: 5.0.6
 + TiDB
 
     (dup) - Fix the issue that optimistic transaction conflicts might cause transactions to block each other [#11148](https://github.com/tikv/tikv/issues/11148)
-    - Avoid confusing error log like `invalid cop task execution summaries length` when running MPP query [#1791](https://github.com/pingcap/tics/issues/1791)
-    - The debug log on coprocessor doesn't print out the statement when encountering a lock, which makes it difficult to know what statement was affected by the lock. This fix tries to add the statement.[#27718](https://github.com/pingcap/tidb/issues/27718)
+    (dup) - Fix the issue of false positive error log `invalid cop task execution summaries length` for MPP queries [#1791](https://github.com/pingcap/tics/issues/1791)
+    (dup) - Show the affected SQL statements in the debug log when the coprocessor encounters a lock, which is helpful in diagnosing problems [#27718](https://github.com/pingcap/tidb/issues/27718)
 
 + TiKV
 
@@ -33,7 +33,7 @@ TiDB version: 5.0.6
 
 + PD
 
-    - Speed scheduler exit after transfer PD leader [#4146](https://github.com/tikv/pd/issues/4146)
+    (dup) - Speed up the exit process of schedulers [#4146](https://github.com/tikv/pd/issues/4146)
     - Make scatter range scheduler work better by allowing empty region schedule and fix config [#4116](https://github.com/tikv/pd/pull/4116)
 
 + Tools
@@ -41,7 +41,7 @@ TiDB version: 5.0.6
     + TiCDC
         (dup) - Optimize rate limiting control on TiKV reloads to reduce gPRC congestion during changefeed initialization [#3110](https://github.com/pingcap/ticdc/issues/3110)
         - Reduce lock competition in sink module. [#2760](https://github.com/pingcap/tiflow/pull/2760)
-        (dup) - Fix the issue that scanning stock data might fail due to TiKV performing GC when scanning stock data takes too long [#2470](https://github.com/pingcap/ticdc/issues/2470)
+        (dup) - Fix the issue that scanning stock data might fail due to TiKV performing GC when scanning stock data takes too long [#2470](https://github.com/pingcap/tiflow/issues/2470)
         (dup) - Fix the issue that changefeed does not fail fast enough when the ErrGCTTLExceeded error occurs [#3111](https://github.com/pingcap/ticdc/issues/3111)
         (dup) - Add a tick frequency limit to EtcdWorker to prevent frequent etcd writes from affecting PD services [#3112](https://github.com/pingcap/ticdc/issues/3112)
         - Support batch messages to reduce EtcdWorker tick. [3112](https://github.com/pingcap/tiflow/issues/3112)
@@ -65,13 +65,13 @@ TiDB version: 5.0.6
     (dup) - Fix wrong results of the `microsecond` function in vectorized expressions [#29244](https://github.com/pingcap/tidb/issues/29244)
     (dup) - Fix the issue of incomplete log information from the `auto analyze` result [#29188](https://github.com/pingcap/tidb/issues/29188)
     (dup) - Fix wrong results of the `hour` function in vectorized expression [#28643](https://github.com/pingcap/tidb/issues/28643)
-    - Fix the problem that unexpected error like `tidb_cast to Int32 is not supported` is raised when executing a MPP query [#23907](https://github.com/pingcap/tidb/issues/23907)
-    - Fix the problem that MPP node availability detection does not work in some corner cases [#3118](https://github.com/pingcap/tics/issues/3118)
-    - Fix the problem that data-race may happen when alloc MPP task id [#27952](https://github.com/pingcap/tidb/issues/27952)
-    - Fix the problem that `index out of range [-1]` error is raised when a SQL contains `Union` and is running in MPP mode [#28250](https://github.com/pingcap/tidb/issues/28250)
+    (dup) - Fix  the unexpected error like `tidb_cast to Int32 is not supported` when the unsupported `cast` is pushed down to TiFlash [#23907](https://github.com/pingcap/tidb/issues/23907)
+    (dup) - Fix a bug that the availability detection of MPP node does not work in some corner cases [#3118](https://github.com/pingcap/tics/issues/3118)
+    (dup) - Fix the `DATA RACE` issue when assigning `MPP task ID` [#27952](https://github.com/pingcap/tidb/issues/27952)
+    (dup) - Fix the `INDEX OUT OF RANGE` error for a MPP query after deleting an empty `dual table` [#28250](https://github.com/pingcap/tidb/issues/28250)
     - Fix the problem that TiDB panicks when inserting invalid date values concurrently [#25393](https://github.com/pingcap/tidb/issues/25393)
     - Fix the problem that the error like `can not found column in Schema column` is raised unexpectedly for mpp queries [#28147](https://github.com/pingcap/tidb/pull/28147)
-    - Fix the problem that TiDB may crash when TiFlash shut down [#28096](https://github.com/pingcap/tidb/issues/28096)
+    (dup) - Fix the issue that TiDB might panic when TiFlash is shuting down [#28096](https://github.com/pingcap/tidb/issues/28096)
     - Fix the problem that the `index out of range` error is raised unexpectly when the planner doing join reorder [#24095](https://github.com/pingcap/tidb/issues/24095).
     (dup) - Fix wrong results of the control functions (such as `IF` and `CASE WHEN`) when using the `ENUM` type data as parameters of such functions [#23114](https://github.com/pingcap/tidb/issues/23114)
     - Fix the problem the `concat(ifnull(time(3))` returns wrong result [#29498](https://github.com/pingcap/tidb/issues/29498)
@@ -83,13 +83,15 @@ TiDB version: 5.0.6
     (dup) - Fix the issue that the length information is wrong when converting `Decimal` to `String` [#29417](https://github.com/pingcap/tidb/issues/29417)
     - Fix the problem that the error `Column 'col_name' in field list is ambiguous` is raised unexpectedly when a SQL contains natural join [#25041](https://github.com/pingcap/tidb/issues/25041)
     (dup) - Fix the issue that the `GREATEST` function returns inconsistent results due to different values of `tidb_enable_vectorized_expression` (`on` or `off`) [#29434](https://github.com/pingcap/tidb/issues/29434)
-    (dup) - Fix the issue that planner might cache invalid plans for `join` in some cases [#28087](https://github.com/pingcap/tidb/issues/28087)
+    (dup) (dup) - Fix the issue that planner might cache invalid plans for `join` in some cases [#28087](https://github.com/pingcap/tidb/issues/28087)
     - Fix the problem that the error `index out of range [1] with length 1` is raised when a SQL tries to evaluates an aggregation result on the result of join in some cases [#1978](https://github.com/pingcap/tics/issues/1978)
 
 + TiKV
 
     - Fix resolved timestamp lag increased after stoping a tikv [#11351](https://github.com/tikv/tikv/issues/11351)
-    - Fix connection abort when too many small logs are batched into one messages [#9714](https://github.com/tikv/tikv/issues/9714)
+    (dup) - Fix the issue that batch messages are too large in Raft client implementation [#9714](https://github.com/tikv/tikv/issues/9714)
+    (dup) - Fix a panic issue that occurs when Region merge, ConfChange, and Snapshot happen at the same time in extreme conditions [#11475](https://github.com/tikv/tikv/issues/11475)
+    - Fix the issue that reverse scan can't detect memory locks and may read stale data. [#11440](https://github.com/tikv/tikv/issues/11440)
     (dup) - Fix a panic issue that occurs when Region merge, ConfChange, and Snapshot happen at the same time in extreme conditions [#11475](https://github.com/tikv/tikv/issues/11475)
     - Fix the issue that reverse scan can't detect memory locks and may read stale data. [#11440](https://github.com/tikv/tikv/issues/11440)
     (dup) - Fix the issue of negative sign when the decimal divide result is zero [#29586](https://github.com/pingcap/tidb/issues/29586)
