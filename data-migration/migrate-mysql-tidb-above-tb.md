@@ -7,7 +7,7 @@ summary: Learn how to migrate data above terabytes from MySQL to TiDB.
 
 When the data volume to be migrated is small, you can easily [use DM to migrate data](/data-migration/migrate-mysql-tidb-less-tb.md), both for full migration and incremental replication. However, because DM imports data at a slow speed (30~50 GiB/h), when the data volume is large, the migration might take a long time.
 
-This document describes how to migrate large volumes of data from MySQL to TiDB. This whole migration is divided into two processes:
+This document describes how to migrate large volumes of data from MySQL to TiDB. The whole migration has two processes:
 
 1. *Full migration*. Use Dumpling and TiDB Lightning to perform the full migration. TiDB Lightning's **local backend** mode can import data at a speed of up to 500 GiB/h.
 2. *Incremental replication*. After the full migration is completed, you can replicate the incremental data using DM.
@@ -77,7 +77,7 @@ The target TiKV cluster must have enough disk space to store the imported data. 
     |-`B` or `--database`   |Specifies a database to be exported|
     |`-f` or `--filter`     |Exports tables that match the pattern. The syntax is the same as [table-filter](/table-filter.md). For example, `[\*.\*,!/^(mysql&#124;sys&#124;INFORMATION_SCHEMA&#124;PERFORMANCE_SCHEMA&#124;METRICS_SCHEMA&#124;INSPECTION_SCHEMA)$/.\*]` exports all tables except the system schema. |
 
-    Make sure `${data-path}` has enough space to store the exported data. To prevent the import from being interrupted by a large table consuming all the spaces, it is strongly recommended to use the `-F` option to limit the size of a single file.
+    Make sure `${data-path}` has enough space to store the exported data. To prevent the export from being interrupted by a large table consuming all the spaces, it is strongly recommended to use the `-F` option to limit the size of a single file.
 
 2. View the `metadata` file in the `${data-path}` directory. This is a Dumpling-generated metadata file. Record the binlog position information, which is required for the incremental replication in Step 3.
 
