@@ -83,7 +83,7 @@ TiDB version: 5.0.6
     (dup) - Fix the issue that the length information is wrong when converting `Decimal` to `String` [#29417](https://github.com/pingcap/tidb/issues/29417)
     - Fix the problem that the error `Column 'col_name' in field list is ambiguous` is raised unexpectedly when a SQL contains natural join [#25041](https://github.com/pingcap/tidb/issues/25041)
     (dup) - Fix the issue that the `GREATEST` function returns inconsistent results due to different values of `tidb_enable_vectorized_expression` (`on` or `off`) [#29434](https://github.com/pingcap/tidb/issues/29434)
-    (dup) (dup) - Fix the issue that planner might cache invalid plans for `join` in some cases [#28087](https://github.com/pingcap/tidb/issues/28087)
+    (dup) - Fix the issue that planner might cache invalid plans for `join` in some cases [#28087](https://github.com/pingcap/tidb/issues/28087)
     - Fix the problem that the error `index out of range [1] with length 1` is raised when a SQL tries to evaluates an aggregation result on the result of join in some cases [#1978](https://github.com/pingcap/tics/issues/1978)
 
 + TiKV
