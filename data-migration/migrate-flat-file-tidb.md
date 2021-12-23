@@ -16,10 +16,10 @@ TiDB Lightning can read data from CSV files and other delimiter formats, such as
 
 ## Step 1. Prepare the CSV files
 
-Put all the CSV files in the same directory. If you need TiDB Lightning to recognize all CSV files, the file name should satisfy the following requirements:
+Put all the CSV files in the same directory. If you need TiDB Lightning to recognize all CSV files, the file names should meet the following requirements:
 
 - If a CSV file contains the data for an entire table, name the file `${db_name}.${table_name}.csv`.
-- If the data of one table is separated into multiple CSV files, append a numeric suffix to these CSV files. For example, `${db_name}.${table_name}.003.csv`. The numeric suffixes may not be consecutive, but must be in ascending order. You might need to add extra zeros before the number to ensure all the suffixes are in the same length.
+- If the data of one table is separated into multiple CSV files, append a numeric suffix to these CSV files. For example, `${db_name}.${table_name}.003.csv`. The numeric suffixes can be inconsecutive but must be in ascending order. You also need to add extra zeros before the number to ensure all the suffixes are in the same length.
 
 ## Step 2. Create the target table schema
 
@@ -29,14 +29,14 @@ Because CSV files do not contain schema information, before importing data into 
 
     1. Write SQL files that contain the required DDL statements.
 
-        - Put `CREATE DATABASE` statements in the `${db_name}-schema-create.sql` files.
-        - Put `CREATE TABLE` statements in the `${db_name}.${table_name}-schema.sql` files.
+        - Add `CREATE DATABASE` statements in the `${db_name}-schema-create.sql` files.
+        - Add `CREATE TABLE` statements in the `${db_name}.${table_name}-schema.sql` files.
 
     2. During the migration, add the following configuration in `tidb-lightning.toml`:
 
         ```toml
         [mydumper]
-        no-schema = false # To create a target table schema using Lightning, set the value to false
+        no-schema = false # To create a target table schema using Lightning, set the value to false.
         ```
 
 * **Method 2**: create the target table schema manually.
@@ -78,7 +78,7 @@ no-schema = true
 
 # Defines CSV format.
 [mydumper.csv]
-# Field separator of the CSV file. Must be ASCII character. Simple delimiters like "," are not recommended. It is recommended to use an uncommon character combination like "|+|".
+# Field separator of the CSV file. Must be ASCII character. Simple delimiters such as "," are not recommended. It is recommended to use an uncommon character combination like "|+|".
 separator = ','
 # Delimiter. Can be ASCII character or empty.
 delimiter = '"'
@@ -113,11 +113,11 @@ For more information on the configuration file, refer to [TiDB Lightning Configu
 
 When you import data from CSV files with a uniform size of about 256 MiB, TiDB Lightning works in the best performance. However, if you import data from a single large CSV file, TiDB Lightning can only use one thread to process the import by default, which might slow down the import speed.
 
-To speed up the import, you can split a large CSV file into smaller ones. For CSV files in common formats, it is hard to quickly locate the beginning and ending positions of each line. Therefore,  TiDB Lightning does not automatically split CSV files by default. But if your CSV files to be imported meet certain format requirements, you can enable the `strict-format` mode. In this mode, TiDB Lightning automatically splits CSV files into multiple files, each in about 256 MiB, and processes them in parallel.
+To speed up the import, you can split a large CSV file into smaller ones. For a CSV file in a common format, before TiDB Lightning reads the entire file, it is hard to quickly locate the beginning and ending positions of each line. Therefore,  TiDB Lightning does not automatically split CSV files by default. But if your CSV files to be imported meet certain format requirements, you can enable the `strict-format` mode. In this mode, TiDB Lightning automatically splits a single large CSV file into multiple files, each in about 256 MiB, and processes them in parallel.
 
 > **Note:**
 >
-> If the CSV file is not in strict format but the `strict-format` mode is set to `true` by mistake, a field that spans multiple lines will be split into two fields. This causes the parsing to fail, and TiDB Lightning might import the corrupted data without reporting an error.
+> If a CSV file is not in a strict format but the `strict-format` mode is set to `true` by mistake, a field that spans multiple lines will be split into two fields. This causes the parsing to fail, and TiDB Lightning might import the corrupted data without reporting any error.
 
 In a strict-format CSV file, each field only takes up one line. It must meet the following requirements:
 

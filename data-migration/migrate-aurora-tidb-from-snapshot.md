@@ -99,7 +99,7 @@ pd-addr = "${ip}:${port}"     # The cluster PD address, e.g.: 172.16.31.3:2379. 
 
 [tikv-importer]
 # "local": Default backend. The local backend is used to import large volumes of data (1 TiB or more). During the import, the target TiDB cluster cannot provide any service.
-# "tidb": The "tidb" backend is used to import data less than 1 TiB. During the import, the target TiDB cluster can provide service normally.
+# "tidb": The "tidb" backend is recommended to import data less than 1 TiB. During the import, the target TiDB cluster can provide service normally.
 backend = "local"
 
 # Set the temporary storage directory for the sorted Key-Value files. The directory must be empty, and the storage space must be enough to hold the largest single table in the data source. For better import performance, it is recommended to use a directory different from `data-source-dir` and use flash storage and exclusive I/O for the directory.
@@ -220,7 +220,7 @@ target-database:
   password: "${password}"           # Supported but not recommended to use plaintext password. It is recommended to use `dmctl encrypt` to encrypt the plaintext password before using it.
 
 # Global configuration for block and allow lists. Each instance can reference the configuration by name.
-block-allow-list:                     # If the DM version is v2.0.0-beta.2 or earlier, use black-white-list.
+block-allow-list:                     # If the DM version is earlier than v2.0.0-beta.2, use black-white-list.
   listA:                              # Name.
     do-tables:                        # Allow list for the upstream tables to be migrated.
     - db-name: "test_db"              # Name of databases to be migrated.
@@ -232,7 +232,7 @@ mysql-instances:
     block-allow-list: "listA"           # References the block-allow-list configuration above.
 #       syncer-config-name: "global"    # References the syncers incremental data configuration.
     meta:                               # When task-mode is "incremental" and the downstream database does not have a checkpoint, DM uses the binlog position as the starting point. If the downstream database has a checkpoint, DM uses the checkpoint as the starting point.
-      binlog-name: "mysql-bin.000004"   # The binlog position recorded in "Step 1. Export an Aurora snapshot to Amazon S3." When the upstream database has source-replica switching, GTID mode is required.
+      binlog-name: "mysql-bin.000004"   # The binlog position recorded in "Step 1. Export an Aurora snapshot to Amazon S3". When the upstream database has source-replica switching, GTID mode is required.
       binlog-pos: 109227
       # binlog-gtid: "09bec856-ba95-11ea-850a-58f2b4af5188:1-9"
 
@@ -272,7 +272,7 @@ The parameters used in the command above are described as follows:
 
 If the task fails to start, check the prompt message and fix the configuration. After that, you can re-run the command above to start the task.
 
-If you encounter any problem, refer to [DM error handling](https://docs.pingcap.com/tidb-data-migration/stable/error-handling) and [DM FAQ](https://docs.pingcap.com/zh/tidb-data-migration/stable/faq).
+If you encounter any problem, refer to [DM error handling](https://docs.pingcap.com/tidb-data-migration/stable/error-handling) and [DM FAQ](https://docs.pingcap.com/tidb-data-migration/stable/faq).
 
 ### Step 4. Check the migration task status
 
