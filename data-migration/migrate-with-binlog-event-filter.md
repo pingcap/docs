@@ -26,8 +26,8 @@ filters:
     action: Ignore
 ```
 
-- `schema-pattern`/`table-pattern`: Filter matching schemas or tables
-- `events`: Filter binlog events. Supported events are listed in the table below:
+- `schema-pattern`/`table-pattern`: Filters matching schemas or tables
+- `events`: Filters binlog events. Supported events are listed in the table below:
 
   | Event           | Category | Description                       |
   | --------------- | ---- | --------------------------|
@@ -50,7 +50,7 @@ filters:
   | drop index      | DDL  | Drop index event      |
   | alter table     | DDL  | Alter table event     |
 
-- `sql-pattern`：Filter specified DDL SQL statements. The matching rule supports using a regular expression.
+- `sql-pattern`：Filters specified DDL SQL statements. The matching rule supports using a regular expression.
 - `action`: `Do` or `Ignore`
 
     - `Do`: the allow list. A binlog event is replicated if meeting either of the following two conditions:
@@ -86,7 +86,7 @@ filters:
     action: Ignore
 ```
 
-### Migrate sharding DML operations only
+### Migrate only DML operations of sharded schemas and tables
 
 To replicate only DML statements, configure two `Binlog event filter rule`, as shown below:
 
