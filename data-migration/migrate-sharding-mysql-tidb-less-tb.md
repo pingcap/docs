@@ -35,7 +35,7 @@ Before starting the migration, make sure you have completed the following tasks:
 
 ### Check conflicts for the sharded tables
 
-Because the sharded tables are involved in the migration, data from multiple sharded tables may cause data conflicts in the primary key or unique index. Therefore, before the migration, you need to check the sharded table. For details, see [Cross table data conflict handling in primary key or unique index](https://docs.pingcap.com/tidb-data-migration/stable/shard-merge-best-practices#handle-conflicts-between-primary-keys-or-unique-indexes-across-multiple-sharded-tables).
+If the migration involves sharded tables, data from multiple sharded tables may cause conflicts for primary keys or unique indexes. Therefore, before migration, you need to check the business characteristics of each sharded table. For more details, see [Handle conflicts between primary keys or unique indexes across multiple sharded tables](https://docs.pingcap.com/tidb-data-migration/stable/shard-merge-best-practices#handle-conflicts-between-primary-keys-or-unique-indexes-across-multiple-sharded-tables).
 
 In this example, `sale_01` and `sale_02` have the same table structure as follows
 
