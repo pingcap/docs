@@ -31,7 +31,7 @@ expression-filter:
     insert-value-expr: "c % 2 = 0"
 ```
 
-In the above configuration example, the `even_c` rule is configured and referenced by the data source with an ID of `mysql-replica-01`. According to this rule, for the `tb1` table in the `expr_filter` schema, when an odd number is inserted into the `c` column (`c % 2 = 0`), this `insert` statement is not replicated to the downstream. The following example shows the effect of the this rule.
+In the above configuration example, the `even_c` rule is configured and referenced by the data source `mysql-replica-01`. According to this rule, for the `tb1` table in the `expr_filter` schema, when an even number is inserted into the `c` column (`c % 2 = 0`), this `insert` statement is not replicated to the downstream. The following example shows the effect of the this rule.
 
 Incrementally insert the following data in the upstream data source:
 
@@ -39,7 +39,7 @@ Incrementally insert the following data in the upstream data source:
 INSERT INTO tbl(id, c) VALUES (1, 1), (2, 2), (3, 3), (4, 4);
 ```
 
-Then query the `tb1` table. From the result, you can see that only the rows with even numbers on `c` are replicated to the downstream.
+Then query the `tb1` table on downstream. You can see that only the rows with odd numbers on `c` are replicated.
 
 ```sql
 MySQL [test]> select * from tbl;
