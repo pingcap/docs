@@ -118,7 +118,7 @@ TiDB version: 5.0.6
 
 + TiFlash
 
-    - Fix potential data inconsistency when widen pk column type if pk is handle
+    - Fix potential data inconsistency after widening the integer primary key of a table
     - Fix Tiflash arm build when include `libnsl.so`. Try copy `libnsl.so` to `INSTALL_DIR`
     - Fix store size on `tiflash metrics` is not consistent.Decrease the size of checkpoint file when removing it
     - Fix exception: `GC` removed normal file which just created
