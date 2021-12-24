@@ -125,7 +125,7 @@ TiDB version: 5.0.6
     - Fix sync schema exception when user upgrade the TiFlash version
     - Fix tiflash randomly crash when a mpp query is killed
     - Fix the issue of unexpected error that "3rd arguments of function substringUTF8 must be constants"
-    - Fix decode DAG request failed.Add retry when decode DAG request failed
+    - Increase the max supported depth of expression/plan tree in dag request from 100 to 200.
     - Fix the bug that results of `where <string>` is wrong
     - Fix the inconsistent behavior of `CastStringAsDecimal` between tiflash and tidb/tikv
     - Fix the error "different types: expected Nullable(Int64), got Int64" which causes query failure
