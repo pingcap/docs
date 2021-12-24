@@ -119,7 +119,7 @@ TiDB version: 5.0.6
 + TiFlash
 
     - Fix potential data inconsistency after widening the integer primary key of a table
-    - Fix Tiflash arm build when include `libnsl.so`. Try copy `libnsl.so` to `INSTALL_DIR`
+    - Fix the issue that a TiFlash fails to start up on platforms without library "libnsl.so", like on ARM
     - Fix the issue that "Store size" metric does not match the actual data size on disk
     - Fix an issue that causes TiFlash crashing by "Cannot open file".
     - Fix tiflash randomly crash when a mpp query is killed
