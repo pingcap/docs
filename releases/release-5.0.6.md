@@ -126,7 +126,7 @@ TiDB version: 5.0.6
     - Fix tiflash randomly crash when a mpp query is killed
     - Fix the issue of unexpected error that "3rd arguments of function substringUTF8 must be constants"
     - Fix decode DAG request failed.Add retry when decode DAG request failed
-    - Fix the bug that results of `where <string>` is wrong because it will be converted to int type
+    - Fix the bug that results of `where <string>` is wrong
     - Fix the inconsistent behavior of `CastStringAsDecimal` between tiflash and tidb/tikv
     - Fix the error "different types: expected Nullable(Int64), got Int64" which causes query failure
     - Fix the error "Unexpected type of column: Nullable(Nothing)" which cases query failure
