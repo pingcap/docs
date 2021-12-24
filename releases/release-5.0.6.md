@@ -131,7 +131,7 @@ TiDB version: 5.0.6
     - Fix the inconsistent behavior of `CastStringAsDecimal` between tiflash and tidb/tikv
     - Fix the error "different types: expected Nullable(Int64), got Int64" which causes query failure
     - Fix the error "Unexpected type of column: Nullable(Nothing)" which cases query failure
-    - Fix the issue that comparison between Decimal may cause overflow and report Can't compare
+    - Fix the issue that comparison between Decimal may cause overflow, which result in query failure
 
 + Tools
 
