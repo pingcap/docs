@@ -129,7 +129,7 @@ TiDB version: 5.0.6
     - Fix the bug that results of `where <string>` is wrong because it will be converted to int type
     - Fix `main_capacity_quota_` check
     - Fix the inconsistent behavior of `CastStringAsDecimal` between tiflash and tidb/tikv
-    - Fix exception: `expected Nullable(Int64), got Int64`. Sending schemas in exchangeSender to avoid schema mismatch
+    - Fix the error "different types: expected Nullable(Int64), got Int64" which causes query failure
     - Fix the error "Unexpected type of column: Nullable(Nothing)" which cases query failure
     - Fix the issue that comparison between Decimal may cause overflow and report Can't compare
 
