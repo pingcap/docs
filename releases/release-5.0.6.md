@@ -120,7 +120,7 @@ TiDB version: 5.0.6
 
     - Fix potential data inconsistency after widening the integer primary key of a table
     - Fix Tiflash arm build when include `libnsl.so`. Try copy `libnsl.so` to `INSTALL_DIR`
-    - Fix store size on `tiflash metrics` is not consistent.Decrease the size of checkpoint file when removing it
+    - Fix the issue that "Store size" metric does not match the actual data size on disk
     - Fix an issue that causes TiFlash crashing by "Cannot open file".
     - Fix tiflash randomly crash when a mpp query is killed
     - Fix the issue of unexpected error that "3rd arguments of function substringUTF8 must be constants"
