@@ -124,7 +124,7 @@ TiDB version: 5.0.6
     - Fix exception: `GC` removed normal file which just created
     - Fix sync schema exception when user upgrade the TiFlash version
     - Fix tiflash randomly crash when a mpp query is killed
-    - Fix throw not constants exception in `substringUTF8`
+    - Fix the issue of unexpected error that "3rd arguments of function substringUTF8 must be constants"
     - Fix decode DAG request failed.Add retry when decode DAG request failed
     - Fix the bug that results of `where <string>` is wrong because it will be converted to int type
     - Fix `main_capacity_quota_` check
