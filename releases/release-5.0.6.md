@@ -122,7 +122,6 @@ TiDB version: 5.0.6
     - Fix Tiflash arm build when include `libnsl.so`. Try copy `libnsl.so` to `INSTALL_DIR`
     - Fix store size on `tiflash metrics` is not consistent.Decrease the size of checkpoint file when removing it
     - Fix exception: `GC` removed normal file which just created
-    - Fix sync schema exception when user upgrade the TiFlash version
     - Fix tiflash randomly crash when a mpp query is killed
     - Fix the issue of unexpected error that "3rd arguments of function substringUTF8 must be constants"
     - Increase the max supported depth of expression/plan tree in dag request from 100 to 200.
