@@ -34,7 +34,7 @@ TiDB version: 5.0.6
 + PD
 
     (dup) - Speed up the exit process of schedulers [#4146](https://github.com/tikv/pd/issues/4146)
-    - Make scatter range scheduler work better by allowing empty region schedule and fix config [#4116](https://github.com/tikv/pd/pull/4116)
+    - Make scatter range scheduler work better by allowing empty region schedule and fix config [#4497](https://github.com/tikv/pd/issues/4497)
 
 + Tools
 
@@ -48,7 +48,7 @@ TiDB version: 5.0.6
         (dup) - Fix OOM in container environments [#1798](https://github.com/pingcap/ticdc/issues/1798)
         - Add Kafka sink default configuration config.Metadata.Timeout. [#3352](https://github.com/pingcap/tiflow/issues/3352)
         - Change Kafka sink default `MaxMessageBytes` to 1MB. [#3081](https://github.com/pingcap/tiflow/issues/3081)
-        - Add more monitor metric and alert, including "no owner alert" [#3834](https://github.com/pingcap/tiflow/pull/3834), "mounter row" , "table sink total row" , "buffer sink total row" [#1606](https://github.com/pingcap/tiflow/issues/1606), "go gc" , "go_max_procs" [#2998](https://github.com/pingcap/tiflow/pull/2998), "cached region" [#2733](https://github.com/pingcap/tiflow/pull/2733).
+        - Add more monitor metric and alert, including "no owner alert" [#4054](https://github.com/pingcap/tiflow/issues/4054), "mounter row" , "table sink total row" , "buffer sink total row" [#1606](https://github.com/pingcap/tiflow/issues/1606)
 
     + (Backup & Restore) BR
 
@@ -70,7 +70,7 @@ TiDB version: 5.0.6
     (dup) - Fix the `DATA RACE` issue when assigning `MPP task ID` [#27952](https://github.com/pingcap/tidb/issues/27952)
     (dup) - Fix the `INDEX OUT OF RANGE` error for a MPP query after deleting an empty `dual table` [#28250](https://github.com/pingcap/tidb/issues/28250)
     - Fix the TiDB panic when inserting invalid date values concurrently [#25393](https://github.com/pingcap/tidb/issues/25393)
-    - Fix the unexpected `can not found column in Schema column` error for queries in the MPP mode [#28147](https://github.com/pingcap/tidb/pull/28147)
+    - Fix the unexpected `can not found column in Schema column` error for queries in the MPP mode [#30980](https://github.com/pingcap/tidb/issues/30980)
     (dup) - Fix the issue that TiDB might panic when TiFlash is shuting down [#28096](https://github.com/pingcap/tidb/issues/28096)
     - Fix the unexpected `index out of range` error when the planner is doing join reorder [#24095](https://github.com/pingcap/tidb/issues/24095)
     (dup) - Fix wrong results of the control functions (such as `IF` and `CASE WHEN`) when using the `ENUM` type data as parameters of such functions [#23114](https://github.com/pingcap/tidb/issues/23114)
