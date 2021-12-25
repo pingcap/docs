@@ -154,7 +154,6 @@ TiDB version: 5.0.6
         - Fix txn_batch_size metric inaccurate issue for Kafka sink. [#3431](https://github.com/pingcap/tiflow/issues/3431)
         (dup) - Change the default value of Kafka Sink `partition-num` to 3 so that TiCDC distributes messages across Kafka partitions more evenly [#3337](https://github.com/pingcap/ticdc/issues/3337)
         (dup) - Change the default value of Kafka Sink `partition-num` to 3 so that TiCDC distributes messages across Kafka partitions more evenly [#3337](https://github.com/pingcap/ticdc/issues/3337)
-        - Fix EtcdWorker row metric error. [#4000](https://github.com/pingcap/tiflow/pull/4000)
         (dup) - Fix the issue that `tikv_cdc_min_resolved_ts_no_change_for_1m` keeps alerting when there is no changefeed [#11017](https://github.com/tikv/tikv/issues/11017)
         (dup) - Optimize rate limiting control on TiKV reloads to reduce gPRC congestion during changefeed initialization [#3110](https://github.com/pingcap/ticdc/issues/3110)
 
