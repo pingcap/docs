@@ -51,28 +51,30 @@ After the two steps above, make sure you have the following information ready:
 
 Because the snapshot file from Aurora does not contain the DDL statements, you need to export the schema using Dumpling and create the schema in the target database using TiDB Lightning. If you want to manually create the schema, you can skip this step.
 
-Export the schema using Dumpling:
+Export the schema using Dumpling by running the following command. The command include the `--filter` parameter to only export the desired table schema:
 
 {{< copyable "shell-regular" >}}
 
 ```shell
-tiup dumpling --host ${host} --port 3306 --user root --password ${password} --no-data --output ./schema --filter "mydb.*"
+tiup dumpling --host ${host} --port 3306 --user root --password ${password} --filter 'my_db1.table[12]' --no-data --output 's3://my-bucket/schema-backup?region=us-west-2' --filter "mydb.*"
 ```
 
 The parameters used in the command above are as follows. For more parameters, refer to [Dumpling overview](/dumpling-overview.md).
 
 |Parameter              |Description    |
 |-                      |-              |
-|`-u` or `--user`       |MySQL user|
+|`-u` or `--user`       |Aurora MySQL user|
 |`-p` or `--password`   |MySQL user password|
 |`-P` or `--port`       |MySQL port|
 |`-h` or `--host`       |MySQL IP address|
 |`-t` or `--thread`     |The number of threads used for export|
 |`-o` or `--output`     |The directory that stores the exported file. Supports local path or [external storage URL](/br/backup-and-restore-storages.md)|
 |`-r` or `--row`        |The maximum number of rows in a single file|
-|`-F`                   |The maximum size of a single file, in MiB|
+|`-F`                   |The maximum size of a single file, in MiB. Recommended value: 256 MiB.|
 |`-B` or `--database`   |Specifies a database to be exported|
+|`-T` or `--tables-list`|Exports the specified tables|
 |`-d` or `--no-data`    |Does not export data. Only exports schema.|
+|`-f` or `--filter` |Exports tables that match the pattern. Do not use `-f` and `-T` at the same time. Refer to [table-filter](/table-filter.md) for the syntax.|
 
 ### Step 3. Create the TiDB Lightning configuration file
 
@@ -81,7 +83,7 @@ Create the `tidb-lightning.toml` configuration file as follows:
 {{< copyable "shell-regular" >}}
 
 ```shell
-vim tidb-lighting.toml
+vim tidb-lightning.toml
 ```
 
 {{< copyable "" >}}
@@ -102,12 +104,12 @@ pd-addr = "${ip}:${port}"     # The cluster PD address, e.g.: 172.16.31.3:2379. 
 # "tidb": The "tidb" backend is recommended to import data less than 1 TiB. During the import, the target TiDB cluster can provide service normally.
 backend = "local"
 
-# Set the temporary storage directory for the sorted Key-Value files. The directory must be empty, and the storage space must be enough to hold the largest single table in the data source. For better import performance, it is recommended to use a directory different from `data-source-dir` and use flash storage and exclusive I/O for the directory.
+# Set the temporary storage directory for the sorted Key-Value files. The directory must be empty, and the storage space must be enough to hold the largest single table in the data source. For better import performance, it is recommended to use a directory different from `data-source-dir` and use flash storage, which can use I/O exclusively.
 sorted-kv-dir = "/mnt/ssd/sorted-kv-dir"
 
 [mydumper]
 # The path that stores the snapshot file.
-data-source-dir = "${s3_path}"  # e.g.: s3://bucket-name/data-path
+data-source-dir = "${s3_path}"  # e.g.: s3://my-bucket/sql-backup?region=us-west-2
 
 [[mydumper.files]]
 # The expression that parses the parquet file.
@@ -129,24 +131,23 @@ If you need to enable TLS in the TiDB cluster, refer to [TiDB Lightning Configur
     tiup tidb-lightning -config tidb-lightning.toml -d ./schema -no-schema=false
     ```
 
-2. Start the import by running `tidb-lightning`. If you launch the program directly in the command line, the program might exit because of the `SIGHUP` signal. In this case, it is recommended to run the program using a `nohup` or `screen` tool. For example:
+2. Start the import by running `tidb-lightning`. If you launch the program directly in the command line, the process might exit unexpectedly after receiving a SIGHUP signal. In this case, it is recommended to run the program using a `nohup` or `screen` tool. For example:
 
     Pass the SecretKey and AccessKey that have access to the S3 storage path as environment variables to the Dumpling node. You can also read the credentials from `~/.aws/credentials`.
-
-    You can add the `--s3.region` arguments, such as `ap-northeast-1`, to specify the region of the S3 storage. For more configurations, see [external storage](/br/backup-and-restore-storages.md#s3-command-line-parameters).
 
     {{< copyable "shell-regular" >}}
 
     ```shell
     export AWS_ACCESS_KEY_ID=${access_key}
     export AWS_SECRET_ACCESS_KEY=${secret_key}
-    nohup tiup tidb-lightning -config tidb-lightning.toml -no-schema=true > nohup.out &
+    nohup tiup tidb-lightning -config tidb-lightning.toml -no-schema=true > nohup.out 2>&1 &
     ```
 
 3. After the import starts, you can check the progress of the import by either of the following methods:
 
     - `grep` the keyword `progress` in the log. The progress is updated every 5 minutes by default.
     - Check progress in [the monitoring dashboard](/tidb-lightning/monitor-tidb-lightning.md).
+    - Check progress in [the TiDB Lightning web interface](/tidb-lightning/tidb-lightning-web-interface.md).
 
 4. After TiDB Lightning completes the import, it exits automatically. If you find the last 5 lines of its log print `the whole procedure completed`, the import is successful.
 
@@ -170,10 +171,9 @@ If you encounter any problem during the import, refer to [TiDB Lightning FAQ](/t
     {{< copyable "" >}}
 
     ```yaml
-    # Configuration.
-    source-id: "mysql-01"     # Must be unique.
-
-    # Configures whether DM-worker uses the global transaction identifier (GTID) to pull binlogs. To enable this mode, the upstream MySQL must also enable GTID. If the upstream MySQL has automatic source-replica switching, GTID mode is required.
+    # Must be unique.
+    source-id: "mysql-01"
+    # Configures whether DM-worker uses the global transaction identifier (GTID) to pull binlogs. To enable this mode, the upstream MySQL must also enable GTID. If the upstream MySQL service is configured to switch master between different nodes automatically, GTID mode is required.
     enable-gtid: false
 
     from:

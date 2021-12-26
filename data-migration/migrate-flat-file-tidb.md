@@ -23,7 +23,7 @@ Put all the CSV files in the same directory. If you need TiDB Lightning to recog
 
 ## Step 2. Create the target table schema
 
-Because CSV files do not contain schema information, before importing data into TiDB, you need to create the target table schema. You can create the target table schema by either of the following two methods:
+Because CSV files do not contain schema information, before importing data from CSV files into TiDB, you need to create the target table schema. You can create the target table schema by either of the following two methods:
 
 * **Method 1**: create the target table schema using TiDB Lightning.
 
@@ -64,12 +64,12 @@ file = "tidb-lightning.log"
 # "local": Default backend. The local backend is used to import large volumes of data (1 TiB or more). During the import, the target TiDB cluster cannot provide any service.
 # "tidb": The "tidb" backend is used to import data less than 1 TiB. During the import, the target TiDB cluster can provide service normally.
 backend = "local"
-# Set the temporary storage directory for the sorted Key-Value files. The directory must be empty, and the storage space must be enough to hold the largest single table from the data source. For better import performance, it is recommended to use a directory different from `data-source-dir` and use flash storage and exclusive I/O for the directory.
+# Set the temporary storage directory for the sorted Key-Value files. The directory must be empty, and the storage space must be enough to hold the largest single table from the data source. For better import performance, it is recommended to use a directory different from `data-source-dir` and use flash storage, which can use I/O exclusively.
 sorted-kv-dir = "/mnt/ssd/sorted-kv-dir"
 
 [mydumper]
 # Directory of the data source.
-data-source-dir = "/data/my_datasource/"
+data-source-dir = "${data-path}" # A local path or S3 path. For example, 's3://my-bucket/sql-backup?region=us-west-2'.
 
 # Configures whether to create the target database and table.
 # If you need TiDB Lightning to create the target database and table, set the value to false.
@@ -78,12 +78,12 @@ no-schema = true
 
 # Defines CSV format.
 [mydumper.csv]
-# Field separator of the CSV file. Must be ASCII character. Simple delimiters such as "," are not recommended. It is recommended to use an uncommon character combination like "|+|".
+# Field separator of the CSV file. Must not be empty. If the source file contains fields that are not string or numeric, such as binary, blob, or bit, it is recommended not to usesimple delimiters such as ",", and use an uncommon character combination like "|+|" instead.
 separator = ','
-# Delimiter. Can be ASCII character or empty.
+# Delimiter. Can be zero or multiple characters.
 delimiter = '"'
 # Configures whether the CSV file has a table header.
-# If this item is set to true, the first line of the CSV file is treated as the header and skipped.
+# If this item is set to true, TiDB Lightning uses the first line of the CSV file to parse the corresponding relationship of fields.
 header = true
 # Configures whether the CSV file contains NULL.
 # If this item is set to true, any column of the CSV file cannot be parsed as NULL.
@@ -91,25 +91,24 @@ not-null = false
 # If `not-null` is set to false (CSV contains NULL),
 # The following value is parsed as NULL.
 null = '\N'
-# Whether to parse the backslash as an escape character.
+# Whether to treat the backslash ('\') in the string as an escape character.
 backslash-escape = true
-# Whether to trim the line that ends with a separator.
+# Whether to trim the last separator at the end of each line.
 trim-last-separator = false
 
+[tidb]
 # The target cluster.
-host = "${ip}"
-port = ${port}
-user = "${user_name}"
-password = "${password}"
-# The table schema is obtained from the TiDB status port.
-status-port = ${port} # e.g.: 10080
-# Address of the PD cluster
-pd-addr = "${ip}:${port}" # e.g.: 172.16.31.3:2379. When backend = "local", you must specify status-port and pd-addr. Otherwise, the import will be abnormal.
+host = ${host}            # e.g.: 172.16.32.1
+port = ${port}            # e.g.: 4000
+user = "${user_name}"     # e.g.: "root"
+password = "${password}"  # e.g.: "rootroot"
+status-port = ${status-port} # During the import, TiCb Lightning needs to obtain the table schema information from the TiDB status port. e.g.: 10080
+pd-addr = "${ip}:${port}" # The address of the PD cluster, e.g.: 172.16.31.3:2379. TiDB Lightning obtains some information from PD. When backend = "local", you must specify status-port and pd-addr correctly. Otherwise, the import will be abnormal.
 ```
 
 For more information on the configuration file, refer to [TiDB Lightning Configuration](/tidb-lightning/tidb-lightning-configuration.md).
 
-## Step 4. Speed up the import (optional)
+## Step 4. Tune the import performance (optional)
 
 When you import data from CSV files with a uniform size of about 256 MiB, TiDB Lightning works in the best performance. However, if you import data from a single large CSV file, TiDB Lightning can only use one thread to process the import by default, which might slow down the import speed.
 
@@ -133,15 +132,25 @@ strict-format = true
 
 ## Step 5. Import the data
 
-To start the import, run `tidb-lightning`. If you launch the program in the command line, the program might exit because of the `SIGHUP` signal. In this case, it is recommended to run the program using a `nohup` or `screen` tool. For example:
+To start the import, run `tidb-lightning`. If you launch the program in the command line, the process might exit unexpectedly after receiving a SIGHUP signal. In this case, it is recommended to run the program using a `nohup` or `screen` tool. For example:
 
 {{< copyable "shell-regular" >}}
 
 ```shell
-nohup tiup tidb-lightning -config tidb-lightning.toml > nohup.out &
+nohup tiup tidb-lightning -config tidb-lightning.toml > nohup.out 2>&1 &
 ```
 
-After TiDB Lightning completes the import, it exits automatically. If the import is successful, the last line of `tidb-lightning.log` prints `tidb lightning exit`.
+After the import starts, you can check the progress of the import by either of the following methods:
+
+- `grep` the keyword `progress` in the log. The progress is updated every 5 minutes by default.
+- Check progress in [the monitoring dashboard](/tidb-lightning/monitor-tidb-lightning.md).
+- Check progress in [the TiDB Lightning web interface](/tidb-lightning/tidb-lightning-web-interface.md).
+
+After TiDB Lightning completes the import, it exits automatically. If you find the last 5 lines of its log print `the whole procedure completed`, the import is successful.
+
+> **Note:**
+>
+> Whether the import is successful or not, the last line of the log shows `tidb lightning exit`. It means that TiDB Lightning exits normally, but does not necessarily mean that the import is successful.
 
 If the import fails, refer to [TiDB Lightning FAQ](/tidb-lightning/tidb-lightning-faq.md) for troubleshooting.
 
@@ -191,4 +200,4 @@ trim-last-separator = true
 
 ## What's next
 
-- [`mydumper.csv` field definitions](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md).
+- [CSV Support and Restrictions](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md).
