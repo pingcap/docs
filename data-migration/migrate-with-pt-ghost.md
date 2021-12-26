@@ -9,12 +9,12 @@ In production scenarios, table locking during DDL execution can block the reads 
 
 When using DM to migrate data from MySQL to TiDB, you can enbale `online-ddl` to allow collaboration of DM and gh-ost or pt-osc.
 
-For the detailed replication instruction, refer to the following documents by scenarios:
+For the detailed replication instructions, refer to the following documents by scenarios:
 
 - [Migrate MySQL Data of Less Than 1 TiB to TiDB](/data-migration/migrate-mysql-tidb-less-tb.md)
 - [Migrate MySQL Data of More Than 1 TiB to TiDB](/data-migration/migrate-mysql-tidb-above-tb.md)
-- [Migrate and Merge MySQL Shards of Less Than 1 TiB to TiDB](/data-migration/migrate-shared-mysql-tidb-less-tb.md)
-- [Migrate and Merge MySQL Shards of More Than 1 TiB to TiDB](/data-migration/migrate-shared-mysql-tidb-above-tb.md)
+- [Migrate and Merge MySQL Shards of Less Than 1 TiB to TiDB](/data-migration/migrate-sharding-mysql-tidb-less-tb.md)
+- [Migrate and Merge MySQL Shards of More Than 1 TiB to TiDB](/data-migration/migrate-sharding-mysql-tidb-above-tb.md)
 
 ## Enable online-ddl on DM
 
@@ -27,7 +27,7 @@ name: test                      # The name of the task. Should be globally uniqu
 task-mode: all                  # The task mode. Can be set to `full`, `incremental`, or `all`.
 shard-mode: "pessimistic"       # The shard merge mode. Optional modes are `pessimistic` and `optimistic`. The `pessimistic` mode is used by default. After understanding the principles and restrictions of the "optimistic" mode, you can set it to the "optimistic" mode.
 meta-schema: "dm_meta"          # The downstream database that stores the `meta` information.
-online-ddl: true                # Enable online-ddl support on DM to support automatic processing of "gh-ost" and "pt" for the upstream database.
+online-ddl: true                # Enable online-ddl support on DM to support automatic processing of "gh-ost" and "pt-osc" for the upstream database.
 ```
 
 ## Workflow after enabling online-ddl
