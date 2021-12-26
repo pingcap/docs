@@ -29,7 +29,8 @@ This document describes how to migrate large volumes of data from MySQL to TiDB.
 **Disk space**:
 
 - Dumpling requires enough disk space to store the whole data source. SSD is recommended.
-- TiDB Lightning needs space to temporarily store the sorted key-value pairs. The disk space should be enough to hold the largest single table from the data source.
+- During the import, TiDB Lightning needs temporary space to store the sorted key-value pairs. The disk space should be enough to hold the largest single table from the data source.
+- If the full data volume is large, you can increase the binlog storage time in the upstream. This is to ensure that the binlogs are not lost during the incremental replication.
 
 **Note**: You cannot calculate the exact data volume exported by Dumpling from MySQL, but you can estimate the data volume by using the following SQL statement to summarize the `data-length` field in the `information_schema.tables` table:
 
@@ -57,7 +58,7 @@ The target TiKV cluster must have enough disk space to store the imported data. 
     {{< copyable "shell-regular" >}}
 
     ```shell
-    tiup dumpling -h ${ip} -P 3306 -u root -t 16 -r 200000 -F 256MB -B my_db1 -f 'my_db1.table[12]' -o ${data-dir}
+    tiup dumpling -h ${ip} -P 3306 -u root -t 16 -r 200000 -F 256MiB -B my_db1 -f 'my_db1.table[12]' -o 's3://my-bucket/sql-backup?region=us-west-2'
     ```
 
     Dumpling exports data in SQL files by default. You can specify a different file format by adding the `--filetype` option.
@@ -73,9 +74,9 @@ The target TiKV cluster must have enough disk space to store the imported data. 
     |`-t` or `--thread`     |The number of threads used for export|
     |`-o` or `--output`     |The directory that stores the exported file. Supports a local path or an [external storage URL](/br/backup-and-restore-storages.md)|
     |`-r` or `--row`        |The maximum number of rows in a single file|
-    |`-F`                   |The maximum size of a single file, in MiB|
+    |`-F`                   |The maximum size of a single file, in MiB. Recommended value: 256 MiB.|
     |-`B` or `--database`   |Specifies a database to be exported|
-    |`-f` or `--filter`     |Exports tables that match the pattern. The syntax is the same as [table-filter](/table-filter.md). For example, `[\*.\*,!/^(mysql&#124;sys&#124;INFORMATION_SCHEMA&#124;PERFORMANCE_SCHEMA&#124;METRICS_SCHEMA&#124;INSPECTION_SCHEMA)$/.\*]` exports all tables except the system schema. |
+    |`-f` or `--filter`     |Exports tables that match the pattern. Refer to [table-filter](/table-filter.md) for the syntax.|
 
     Make sure `${data-path}` has enough space to store the exported data. To prevent the export from being interrupted by a large table consuming all the spaces, it is strongly recommended to use the `-F` option to limit the size of a single file.
 
@@ -109,11 +110,7 @@ The target TiKV cluster must have enough disk space to store the imported data. 
 
     [mydumper]
     # The data source directory. The same directory where Dumpling exports data in Step 1.
-    data-source-dir = "${data-path}"
-
-    # Configures the wildcard rule. The default rule filters out all tables in these system databases: mysql, sys, INFORMATION_SCHEMA, PERFORMANCE_SCHEMA, METRICS_SCHEMA, INSPECTION_SCHEMA.
-    # If you do not configure this item, TiDB Lightning reports a `cannot find schema` exception when it imports system tables.
-    filter = ['*.*', '!mysql.*', '!sys.*', '!INFORMATION_SCHEMA.*', '!PERFORMANCE_SCHEMA.*', '!METRICS_SCHEMA.*', '!INSPECTION_SCHEMA.*']
+    data-source-dir = "${data-path}" # A local path or S3 path. For example, 's3://my-bucket/sql-backup?region=us-west-2'.
 
     [tidb]
     # The target TiDB cluster information.
@@ -121,7 +118,7 @@ The target TiKV cluster must have enough disk space to store the imported data. 
     port = ${port}                # e.g.: 4000
     user = "${user_name}"         # e.g.: "root"
     password = "${password}"      # e.g.: "rootroot"
-    status-port = ${status-port}  # Obtains the table schema information from TiDB status port, e.g.: 10080
+    status-port = ${status-port}  # During the import, TiCb Lightning needs to obtain the table schema information from the TiDB status port. e.g.: 10080
     pd-addr = "${ip}:${port}"     # The address of the PD cluster, e.g.: 172.16.31.3:2379. TiDB Lightning obtains some information from PD. When backend = "local", you must specify status-port and pd-addr correctly. Otherwise, the import will be abnormal.
     ```
 
@@ -129,13 +126,27 @@ The target TiKV cluster must have enough disk space to store the imported data. 
 
 2. Start the import by running `tidb-lightning`. If you launch the program directly in the command line, the process might exit unexpectedly after receiving a SIGHUP signal. In this case, it is recommended to run the program using a `nohup` or `screen` tool. For example:
 
+    If you import data from S3, pass the SecretKey and AccessKey that have access to the S3 storage path as environment variables to the TiDB Lightning node. You can also read the credentials from `~/.aws/credentials`.
+
     {{< copyable "shell-regular" >}}
 
     ```shell
-    nohup tiup tidb-lightning -config tidb-lightning.toml > nohup.out &
+    export AWS_ACCESS_KEY_ID=${access_key}
+    export AWS_SECRET_ACCESS_KEY=${secret_key}
+    nohup tiup tidb-lightning -config tidb-lightning.toml -no-schema=true > nohup.out 2>&1 &
     ```
 
-3. After TiDB Lightning completes the import, it exits automatically. If the import is successful, the last line of `tidb-lightning.log` prints `tidb lightning exit`.
+3. After the import starts, you can check the progress of the import by one of the following methods:
+
+    - `grep` the keyword `progress` in the log. The progress is updated every 5 minutes by default.
+    - Check progress in [the monitoring dashboard](/tidb-lightning/monitor-tidb-lightning.md).
+    - Check progress in [the TiDB Lightning web interface](/tidb-lightning/tidb-lightning-web-interface.md).
+
+4. After TiDB Lightning completes the import, it exits automatically. If you find the last 5 lines of its log print `the whole procedure completed`, the import is successful.
+
+> **Note:**
+>
+> Whether the import is successful or not, the last line of the log shows `tidb lightning exit`. It means that TiDB Lightning exits normally, but does not necessarily mean that the import is successful.
 
 If the import fails, refer to [TiDB Lightning FAQ](/tidb-lightning/tidb-lightning-faq.md) for troubleshooting.
 
@@ -148,8 +159,8 @@ If the import fails, refer to [TiDB Lightning FAQ](/tidb-lightning/tidb-lightnin
     {{< copyable "" >}}
 
     ```yaml
-    # Configuration.
-    source-id: "mysql-01" # Must be unique.
+    # Must be unique.
+    source-id: "mysql-01"
 
     # Configures whether DM-worker uses the global transaction identifier (GTID) to pull binlogs. To enable this mode, the upstream MySQL must also enable GTID. If the upstream MySQL service is configured to switch master between different nodes automatically, GTID mode is required.
     enable-gtid: true
@@ -194,7 +205,7 @@ If the import fails, refer to [TiDB Lightning FAQ](/tidb-lightning/tidb-lightnin
       password: "${password}"            # It is recommended to use `dmctl encrypt` to encrypt the plaintext password before using it.
 
     # Use block and allow lists to specify the tables to be replicated.
-    block-allow-list:                    # The collection of filtering rules that matches the tables in the source database instance.
+    block-allow-list:                    # The collection of filtering rules that matches the tables in the source database instance. If the DM version is earlier than v2.0.0-beta.2, use black-white-list.
       bw-rule-1:                         # The block-allow-list configuration item ID.
         do-dbs: ["${db-name}"]           # Name of databases to be replicated.
 
