@@ -14,11 +14,12 @@ This document describes how to migrate data from MySQL SQL files to TiDB using T
 
 ## Step 1. Prepare SQL files
 
-Put all the SQL files in the same directory, like `/data/my_datasource/`. TiDB Lighting recursively searches for all `.sql` files in this directory and its subdirectories.
+Put all the SQL files in the same directory, like `/data/my_datasource/` or `s3://my-bucket/sql-backup?region=us-west-2`. TiDB Lighting recursively searches for all `.sql` files in this directory and its subdirectories.
 
 ## Step 2. Define the target table schema
 
-Because SQL files do not contain schema information, before importing data into TiDB, you need to create the target table schema. You can create the target table schema by either of the following two methods:
+To import data to TiDB, you need to create the target table schema for SQL files.
+If you use Dumpling to export data, the table schema file is automatically exported. For the data exported in other ways, you  can create the table schema in one of the following methods:
 
 * **Method 1**: create the target table schema using TiDB Lightning.
 
@@ -56,35 +57,35 @@ level = "info"
 file = "tidb-lightning.log"
 
 [tikv-importer]
-# "local"：Default. The local backend is used to import large volumes of data (1 TiB or above). During the import, the target TiDB cluster cannot provide any service.
-# "tidb"：The "tidb" backend can also be used to import small volumes of data (below 1 TiB). During the import, the target TiDB cluster can provide service normally. For the information about backend mode, refer to [TiDB Lightning Backends](https://docs.pingcap.com/tidb/stable/tidb-lightning-backends)
-backend = "local"
+# "local"：Default. The local backend is used to import large volumes of data (1 TB or above). During the import, the target TiDB cluster cannot provide any service.
+# "tidb"：The "tidb" backend can also be used to import small volumes of data (below 1 TB). During the import, the target TiDB cluster can provide service normally. For the information about backend mode, refer to [TiDB Lightning Backends](https://docs.pingcap.com/tidb/stable/tidb-lightning-backends)
 # Set the temporary storage directory for the sorted Key value files. The directory must be empty, and the storage space must be enough to hold the largest single table from the data source. For better import performance, it is recommended to use a directory different from `data-source-dir` and use flash storage and exclusive I/O for the directory.
 sorted-kv-dir = "${sorted-kv-dir}"
 
 [mydumper]
-# Directory of the data source, supports local path (like `/data/my_datasource/`) or S3 path (like `s3://bucket-name/data-path`).
-data-source-dir = "${my_datasource}"
+# Directory of the data source
+data-source-dir = "${data-path}" # local or S3 path, such as 's3://my-bucket/sql-backup?region=us-west-2'
 
-# Do not create a table schema. If you have manually created the target table schema in #Step 2, set it to true; otherwise, it is false.
-no-schema = true
+# If you have manually created the target table schema in #Step 2, set it to true; otherwise, it is false.
+# no-schema = true
 
-# The information of target cluster.
-host = "${ip}"
-port = 4000
-user = "${user_name}"
-password = "${password}"
-# The table schema is obtained from the TiDB "status port".
-status-port = ${port}       # For example, 10080
-# Address of the PD cluster
-pd-addr = "${ip}:${port}"   # For example: 172.16.31.3:2379. When backend = "local", you must specify status-port and pd-addr. Otherwise, the import will be abnormal.
+[tidb]
+# The information of target cluster
+host = ${host}                # For example, 172.16.32.1
+port = ${port}                # For example, 4000
+user = "${user_name}"         # For example, "root"
+password = "${password}"      # For example, "rootroot"
+status-port = ${status-port}  # During the import process, lightning needs to obtain table schema information from the "Status Port" of TiDB, such as 10080
+pd-addr = "${ip}:${port}"     # The address of the cluster PD. Lightning obtains some information through PD, such as 172.16.31.3:2379. When backend = "local", you must specify status-port and pd-addr. Otherwise, the import will be abnormal.
 ```
 
 For more information on the configuration file, refer to [TiDB Lightning Configuration](/tidb-lightning/tidb-lightning-configuration.md).
 
 ## Step 4: Import the data
 
-To start the import, run `tidb-lightning`. If you launch the program in the command line, the program might exit because of the `SIGHUP` signal. In this case, it is recommended to run the program with a `nohup` or `screen` tool. For example:
+To start the import, run `tidb-lightning`. If you launch the program in the command line, the program might exit because of the `SIGHUP` signal. In this case, it is recommended to run the program with a `nohup` or `screen` tool.
+
+If you import the data from S3, you need to pass `SecretKey` and `AccessKey` of the account with the permission to access the S3 backend storage to the Dumpling node as environment variables.
 
 {{< copyable "shell-regular" >}}
 
@@ -92,4 +93,17 @@ To start the import, run `tidb-lightning`. If you launch the program in the comm
 nohup tiup tidb-lightning -config tidb-lightning.toml > nohup.out &
 ```
 
-If the import fails, refer to [TiDB Lightning FAQ](/tidb-lightning/tidb-lightning-faq.md) for troubleshooting.
+Dumpling also supports reading credential files from ~/.aws/credentials. 
+
+When starting the import, you can check the progress in one of the following ways:
+
+- Use the `progress` of the `grep` log keyword, which is updated every 5 minutes by default.
+- Use the Grafana dashboard. For details, see [TiDB Lightning Monitoring](/tidb-lightning/monitor-tidb-lightning.md).
+- Use web interface. For details, see [TiDB Lightning Web Interface](/tidb-lightning/tidb-lightning-web-interface.md)。
+
+After the import is complete, TiDB Lightning automatically exits. If the line `the whole procedure completed` is in the last 5 lines of the log, it means that the import is successfully completed.
+
+> **Note:**
+>
+> Whether the import is successful or not, the last line displays `tidb lightning exit`. It only means that TiDB Lightning exited normally, not the completion of the task.
+If you encounter problems during the import process, refer to [TiDB Lightning FAQ](/tidb-lightning/tidb-lightning-faq.md) for troubleshooting.

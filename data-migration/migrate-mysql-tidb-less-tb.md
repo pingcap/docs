@@ -1,11 +1,11 @@
 ---
-title: Migrate MySQL Data of Less Than 1 TiB to TiDB
-summary: Learn how to migrate data less than 1 TiB from MySQL to TiDB.
+title: Migrate MySQL Data of Less Than 1 TB to TiDB
+summary: Learn how to migrate data less than 1 TB from MySQL to TiDB.
 ---
 
-# Migrate MySQL Data of Less Than 1 TiB to TiDB
+# Migrate MySQL Data of Less Than 1 TB to TiDB
 
-This document describes how to use TiDB Data Migration (hereinafter referred to as DM) to migrate data that is less than 1 TiB to TiDB in the full migration mode and incremental replication mode. Generally speaking, affected by the information such as the number of table structure indexes, hardwares, and network environment, the migration rate varies from 30 to 50 GB/h. The migration process using DM is shown in the figure below.
+This document describes how to use TiDB Data Migration (hereinafter referred to as DM) to migrate data that is less than 1 TB to TiDB in the full migration mode and incremental replication mode. Generally speaking, affected by the information such as the number of table structure indexes, hardwares, and network environment, the migration rate varies from 30 to 50 GB/h. The migration process using DM is shown in the figure below.
 
 ![dm](/media/dm/migrate-with-dm.png)
 
@@ -21,8 +21,8 @@ First, create the `source1.yaml` file as follows:
 {{< copyable "" >}}
 
 ```yaml
-# Configuration.
-source-id: "mysql-01"     # Must be unique.
+# # Must be unique.
+source-id: "mysql-01"
 
 # Configures whether DM-worker uses the global transaction identifier (GTID) to pull binlogs. To enable this mode, the upstream MySQL must have enabled GTID. If the upstream MySQL has automatic source-replica switching, GTID mode is required.
 enable-gtid: false
@@ -76,10 +76,10 @@ mysql-instances:
   # The ID of an upstream instance or a replication group
   source-id: "mysql-01"
   # The names of the block and allowlist configuration of the schema name or table name that is to be migrated. These names are used reference the global configuration of the block and allowlist. For the global configuration, refer to the `block-allow-list` configuration below.
-  block-allow-list: "listA"          # If the DM version is v2.0.0-beta.2 or earlier, use black-white-list instead.
+  block-allow-list: "listA"
 
 # The global configuration of block and allow list. Each instance is referenced by a configuration item name.
-block-allow-list:                     # If the DM version is v2.0.0-beta.2 or earlier, use black-white-list instead.
+block-allow-list:
   listA:                              # name
     do-tables:                        # The allowlist of upstream tables that need to be migrated.
     - db-name: "test_db"              # The schema name of the table to be migrated.
