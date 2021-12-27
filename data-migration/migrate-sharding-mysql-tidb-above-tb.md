@@ -9,7 +9,7 @@ If the total size of the MySQL shards is large (for example, more than 1 TiB) an
 
 This document walks you through the procedure of how to migrate large MySQL shards to TiDB.
 
-If the data size of the MySQL shards is less than 1 TiB, you can follow the procedure described in [Migrate and Merge MySQL Shards of Less Than 1 TiB to TiDB](/data-migration/migrate-sharding-mysql-tidb-less-tb.md), which supports both full and incremental migration.
+If the data size of the MySQL shards is less than 1 TiB, you can follow the procedure described in [Migrate and Merge MySQL Shards of Less Than 1 TB to TiDB](/data-migration/migrate-sharding-mysql-tidb-less-tb.md), which supports both full and incremental migration.
 
 The following diagram shows how to migrate MySQL shards to TiDB using Dumpling and TiDB Lightning.
 
@@ -199,7 +199,7 @@ Follow these steps to start `tidb-lightning`:
     # Set the temporary directory for the sorted key value pairs. It must be empty.
     # The free space must be greater than the largest single table of the data source.
     # It is recommended that you have a different disk directory from `data-source-dir` to get better migration performance with exclusive IO.
-    sorted-kv-dir = "/mnt/ssd/sorted-kv-dir"
+    sorted-kv-dir = "${sorted-kv-dir}"
 
     # Set routes. Migrate table1 and table2 in my_db1, and table3 and table4 in my_db2, to the target table5 in downstream my_db.
     [[routes]]
@@ -279,7 +279,7 @@ source-id: "mysql-01" # Must be unique.
 # Specifies whether DM-worker pulls binlogs with GTID (Global Transaction Identifier).
 # The prerequisite is that you have already enabled GTID in the upstream MySQL.
 # If the upstream database has enabled automatic switch of primary and standby, you must use the GTID mode.
-enable-gtid: false
+enable-gtid: true
 
 from:
   host: "${host}"           # For example: 172.16.10.81
@@ -293,14 +293,14 @@ Run the following command in a terminal. Use `tiup dmctl` to load the data sourc
 {{< copyable "shell-regular" >}}
 
 ```shell
-tiup dmctl --master-addr 172.16.10.71:8261 operate-source create source1.yaml
+tiup dmctl --master-addr ${advertise-addr} operate-source create source1.yaml
 ```
 
 The parameters are described as follows.
 
 |Parameter      | Description |
 |-              |-            |
-|--master-addr         | {advertise-addr} of any DM-master node in the cluster that dmctl connects to.|
+|--master-addr         | {advertise-addr} of any DM-master node in the cluster that dmctl connects to. For example: 172.16.10.71:8261|
 | operate-source create | Load data sources to DM clusters. |
 
 Repeat the above steps until all MySQL instances are added to the DM.
@@ -360,9 +360,9 @@ mysql-instances:
     route-rules: ["route-rule-2"]     # Use the routing rule configured above.
 #       syncer-config-name: "global"  # Use the syncers configuration below.
     meta:                             # The migration starting point of binlog when task-mode is incremental and there is no checkpoint in the downstream database. A checkpoint prevails if any.
-      binlog-name: "${binlog-name}"   # The log location recorded in ${data-path}/my_db2/metadata in Step 1. It must be the GTID when the upstream has enabled primary-standby switch.
-      binlog-pos: ${binlog-position}
-      # binlog-gtid: "09bec856-ba95-11ea-850a-58f2b4af5188:1-9"
+      # binlog-name: "${binlog-name}"   # The log location recorded in ${data-path}/my_db2/metadata in Step 1. It must be the GTID when the upstream has enabled primary-standby switch.
+      # binlog-pos: ${binlog-position}
+      binlog-gtid: "09bec856-ba95-11ea-850a-58f2b4af5188:1-9"
 # (Optional) If you need to incrementally migrate data that has been fully migrated, you need to enable the safe mode to avoid data migration errors during incremental replication.
 # This scenario is common when the fully migrated data is not part of a consistent snapshot of the data source, and the incremental data is replicated from a location earlier than the fully migrated data.
 # syncers:           # The running parameters of the sync processing unit.
