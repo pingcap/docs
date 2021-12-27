@@ -254,7 +254,7 @@ If you want to remove a TiKV node from the `10.0.1.5` host, take the following s
 
 > **Note:**
 >
-> The PD Client in TiKV caches the list of PD nodes. 
+> The PD Client in TiKV caches the list of PD nodes.
 >
 > + In versions earlier than v4.0.3, TiKV does not automatically and regularly update the cache of the PD node list. The cache is updated only after the PD leader switches or TiKV restarts to load the latest configuration. To avoid the issue of an expired list of PD nodes cached by TiKV, the PD cluster should contain at least one PD node that existed before the scaling-in or scaling-out. If this condition is not met, you need to manually perform the PD leader transfer to update the PD cache list in TiKV.
 >
@@ -271,7 +271,7 @@ If you want to remove a TiKV node from the `10.0.1.5` host, take the following s
     ```
     Starting /root/.tiup/components/cluster/v0.4.6/cluster display <cluster-name>
     TiDB Cluster: <cluster-name>
-    TiDB Version: v4.0.15
+    TiDB Version: v4.0.16
     ID              Role         Host        Ports                            Status  Data Dir                Deploy Dir
     --              ----         ----        -----                            ------  --------                ----------
     10.0.1.3:8300   cdc          10.0.1.3    8300                             Up      data/cdc-8300           deploy/cdc-8300
