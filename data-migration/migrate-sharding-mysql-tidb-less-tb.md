@@ -7,13 +7,13 @@ summary: Learn how to consolidate MySQL shards of less than 1 TiB to TiDB.
 
 If you want to migrate and merge multiple MySQL database instances upstream to one TiDB database downstream, and the amount of data is not too large (for example, the sum of all MySQL shards is less than 1 TiB), you can use DM to migrate MySQL shards. Through examples in this document, you can learn the operation steps, precautions, and troubleshooting of the migration.
 
-This document applies to migrating MySQL shards less than 1 TiB in total. If you want to migrate MySQL shards with a total of more than 1 TiB of data, it will take a long time by using DM. In this case, it is recommended that you follow the operation introduced in [Migrate and Merge MySQL Shards of More Than 1 TB to TiDB](/migrate-sharding-mysql-tidb-above-tb.md) to perform migration.
+This document applies to migrating MySQL shards less than 1 TiB in total. If you want to migrate MySQL shards with a total of more than 1 TiB of data, it will take a long time to migrate only using DM. In this case, it is recommended that you follow the operation introduced in [Migrate and Merge MySQL Shards of More Than 1 TB to TiDB](/migrate-sharding-mysql-tidb-above-tb.md) to perform migration.
 
 This document takes a simple example to illustrate the migration procedure. The MySQL shards of the two data source MySQL instances in the example are migrated to the downstream TiDB cluster. The diagram is shown as follows.
 
 ![Use DM to Migrate Sharded Tables](/media/migrate-shard-tables-within-1tb-en.png)
 
-Assume that data sources MySQL Instance 1 and MySQL Instance 2 use the same table structure as follows:
+Both MySQL Instance 1 and MySQL Instance 2 contain the following schemas and tables. In this example, you migrate and merge tables from `store_01` and `store_02` schemas with a `sale` prefix in both instances, into the downstream `sale` table in the `store` schema.
 
   | Schema | Table |
   |:------|:------|
@@ -69,7 +69,7 @@ CREATE TABLE `sale` (
 
 ## Step 1: Load data sources
 
-Create a file named `source1.yaml`. The configuration file is as follows:
+Create a data source configuration file named `source1.yaml`. The configuration file is as follows:
 
 {{< copyable "shell-regular" >}}
 
@@ -79,7 +79,7 @@ source-id: "mysql-01" # Must be unique.
 
 # Specifies whether DM-worker pulls binlogs with GTID (Global Transaction Identifier).
 # The prerequisite is that you have already enabled GTID in the upstream MySQL.
-# If the upstream database has enabled automatic switch of primary and standby, you must use the GTID mode.
+# If the upstream database has configured automatic primary switch-over between different nodes, you must enable the GTID mode.
 enable-gtid: false
 from:
   host: "${host}" # For example: 172.16.10.81
@@ -107,16 +107,16 @@ Repeat the above steps until all data sources are added to the DM cluster.
 
 ## Step 2: Configure the migration task
 
-Create a file named `task1.yaml` and writes the following content to it:
+Create a task configuration file named `task1.yaml` and writes the following content to it:
 
 {{< copyable "shell-regular" >}}
 
 ```yaml
 name: "shard_merge"
 # Task mode. You can set it to the following:
-# - full: Performs full data migration
-# - incremental: Performs binlog real-time replication
-# - all: Performs both full data and binlog replication
+# - full: Performs only full data migration (incremental replication is skipped)
+# - incremental: Only performs real-time incremental replication using binlog. (full data migration is skipped)
+# - all: Performs both full data migration and incremental replication. For migrating small to medium amount of data here, use this option.  
 task-mode: all
 # Required for the MySQL shards. By default, the "pessimistic" mode is used.
 # If you have a deep understanding of the principles and usage limitations of the optimistic mode, you can also use the "optimistic" mode.
@@ -180,7 +180,7 @@ For more information on `routes`, `filters` and other configurations in the task
 
 ## Step 3: Start the task
 
-Before starting a migration task, run the `check-task` command to check whether the configuration meets the requirements of DM so as to avoid possible errors.
+Before starting a migration task, run the `check-task` subcommand in `tiup dmctl` to check whether the configuration meets the requirements of DM so as to avoid possible errors.
 
 {{< copyable "shell-regular" >}}
 
