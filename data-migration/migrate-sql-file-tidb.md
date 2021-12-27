@@ -87,11 +87,14 @@ To start the import, run `tidb-lightning`. If you launch the program in the comm
 
 If you import the data from S3, you need to pass `SecretKey` and `AccessKey` of the account with the permission to access the S3 backend storage to the Dumpling node as environment variables.
 
+If you import the data from S3, you need to pass `SecretKey` and `AccessKey` of the account with the permission to access the S3 backend storage to the Dumpling node as environment variables.
+
 {{< copyable "shell-regular" >}}
 
 ```shell
-nohup tiup tidb-lightning -config tidb-lightning.toml > nohup.out &
-```
+export AWS_ACCESS_KEY_ID=${access_key}
+export AWS_SECRET_ACCESS_KEY=${secret_key}
+nohup tiup tidb-lightning -config tidb-lightning.toml -no-schema=true > nohup.out 2>&1 &
 
 Dumpling also supports reading credential files from ~/.aws/credentials. 
 

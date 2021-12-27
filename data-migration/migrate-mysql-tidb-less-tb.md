@@ -25,7 +25,7 @@ First, create the `source1.yaml` file as follows:
 source-id: "mysql-01"
 
 # Configures whether DM-worker uses the global transaction identifier (GTID) to pull binlogs. To enable this mode, the upstream MySQL must have enabled GTID. If the upstream MySQL has automatic source-replica switching, GTID mode is required.
-enable-gtid: false
+enable-gtid: true
 
 from:
   host: "${host}"         # For example: 172.16.10.81
