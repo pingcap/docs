@@ -5,14 +5,14 @@ summary: Learn how to migrate data less than 1 TiB from MySQL to TiDB.
 
 # Migrate MySQL Data of Less Than 1 TiB to TiDB
 
-This document describes how to use TiDB DM (hereinafter referred to as DM) to migrate data that is less than 1 TiB to TiDB in the full migration mode and incremental replication mode. Generally speaking, affected by the information such as the number of table structure indexes, hardwares, and network environment, the migration rate varies from 30 to 50 GB/h. The migration process using TiDB DM is shown in the figure below.
+This document describes how to use TiDB Data Migration (hereinafter referred to as DM) to migrate data that is less than 1 TiB to TiDB in the full migration mode and incremental replication mode. Generally speaking, affected by the information such as the number of table structure indexes, hardwares, and network environment, the migration rate varies from 30 to 50 GB/h. The migration process using DM is shown in the figure below.
 
 ![dm](/media/dm/migrate-with-dm.png)
 
 ## Prerequisites
 
 - [Deploy a DM Cluster Using TiUP](https://docs.pingcap.com/tidb-data-migration/stable/deploy-a-dm-cluster-using-tiup)
-- [Get the source database and target database privileges required for DM](https://docs.pingcap.com/tidb-data-migration/stable/dm-worker-intro)
+- [Grant the source database and target database privileges required for DM](https://docs.pingcap.com/tidb-data-migration/stable/dm-worker-intro)
 
 ## Step 1. Create the data source
 

@@ -10,7 +10,7 @@ This document describes how to migrate data from MySQL SQL files to TiDB using T
 ## Prerequisites
 
 - [Install TiDB Lightning using TiUP](/migration-tools.md)
-- [Get the target database privileges required for TiDB Lightning](/tidb-lightning/tidb-lightning-faq.md#what-are-the-privilege-requirements-for-the-target-database)
+- [Grant the target database privileges required for TiDB Lightning](/tidb-lightning/tidb-lightning-faq.md#what-are-the-privilege-requirements-for-the-target-database)
 
 ## Step 1. Prepare SQL files
 
