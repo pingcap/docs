@@ -218,7 +218,6 @@ Follow these steps to start `tidb-lightning`:
     # If there are several Dumpling-exported data directories, you need to place all these directories in the same parent directory, and use the parent directory here.
     data-source-dir = "${data-path}"
     # Because table1~table4 from source are merged into another table5 in the target, you should tell TiDB Lightning no need to create schemas, so that table1 ~ table4 won't be created automatically according to the exported schema information
-    # This parameter can prevent creating tables1~4 downstream based on files exported by Dumpling.
     no-schema = true
     # Configure the wildcard rules. By default, all the following tables will be filtered: mysql, sys, INFORMATION_SCHEMA, PERFORMANCE_SCHEMA, METRICS_SCHEMA, INSPECTION_SCHEMA
     # If not configured, an error “schema not found” will occur when migrating system tables.
