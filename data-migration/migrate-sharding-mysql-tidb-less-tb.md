@@ -1,6 +1,6 @@
 ---
 title: Migrate and Merge MySQL Shards of Less Than 1 TiB to TiDB
-summary: Learn how to consolidate MySQL shards of less than 1 TiB to TiDB.
+summary: Learn how to migrate and merge less than 1 TiB of shards from MySQL to TiDB.
 ---
 
 # Migrate and Merge MySQL Shards of Less Than 1 TiB to TiDB
@@ -35,7 +35,7 @@ Before starting the migration, make sure you have completed the following tasks:
 
 ### Check conflicts for the sharded tables
 
-If the migration involves sharded tables, data from multiple sharded tables may cause conflicts for primary keys or unique indexes. Therefore, before migration, you need to check the business characteristics of each sharded table. For more details, see [Handle conflicts between primary keys or unique indexes across multiple sharded tables](https://docs.pingcap.com/tidb-data-migration/stable/shard-merge-best-practices#handle-conflicts-between-primary-keys-or-unique-indexes-across-multiple-sharded-tables).
+If the migration involves merging data from different sharded tables, primary key or unique index conflicts may occur during the merge. Therefore, before migration, you need to take a deep look at the current sharding scheme from the business point of view, and find a way to avoid the conflicts. For more details, see [Handle conflicts between primary keys or unique indexes across multiple sharded tables](https://docs.pingcap.com/tidb-data-migration/stable/shard-merge-best-practices#handle-conflicts-between-primary-keys-or-unique-indexes-across-multiple-sharded-tables). The following is a brief description.
 
 In this example, `sale_01` and `sale_02` have the same table structure as follows
 
@@ -144,7 +144,7 @@ mysql-instances:
     block-allow-list:  "log-bak-ignored"
 
 # Configurations for merging MySQL shards
-routes:
+routes:    # Table renaming rules ('routes') from upstream to downstream tables, in order to support merging different sharded tables into a single target table. 
   sale-route-rule:
     schema-pattern: "store_*"
     table-pattern: "sale_*"

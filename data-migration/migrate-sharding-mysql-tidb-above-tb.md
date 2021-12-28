@@ -1,6 +1,7 @@
 ---
 title: Migrate and Merge MySQL Shards of More Than 1 TiB to TiDB
-summary: Learn how to migrate and merge MySQL shards of more than 1 TiB to TiDB using Dumpling and TiDB Lightning.
+summary: Learn how to migrate and merge more than 1 TiB of data from MySQL into TiDB using Dumpling and TiDB Lightning, as well as how to configure the DM task to replicate incremental data changes from different MySQL shards into TiDB.
+aliases: ['/tidb-data-migration/stable/usage-scenario-shard-merge']
 ---
 
 # Migrate and Merge MySQL Shards of More Than 1 TiB to TiDB
@@ -11,7 +12,7 @@ This document uses an example to walk through the whole procedure of such kind o
 
 If the data size of the MySQL shards is less than 1 TiB, you can follow the procedure described in [Migrate and Merge MySQL Shards of Less Than 1 TB to TiDB](/data-migration/migrate-sharding-mysql-tidb-less-tb.md), which supports both full and incremental migration and the steps are easier.
 
-The following diagram shows how to migrate MySQL shards to TiDB using Dumpling and TiDB Lightning.
+The following diagram shows how to migrate and merge MySQL sharded tables to TiDB using Dumpling and TiDB Lightning.
 
 ![Use Dumpling and TiDB Lightning to migrate and merge MySQL shards to TiDB](/media/shard-merge-using-lightning-en.png)
 
@@ -74,7 +75,7 @@ At first glance, it may look confusing why there is a **“x2”** in the formul
 
 ### Check conflicts for Sharded Tables
 
-If the migration involves sharded tables, data from multiple sharded tables may cause conflicts for primary keys or unique indexes. Therefore, before migration, you need to check the business characteristics of each sharded table. For more details, see [Handle conflicts between primary keys or unique indexes across multiple sharded tables](https://docs.pingcap.com/tidb-data-migration/stable/shard-merge-best-practices#handle-conflicts-between-primary-keys-or-unique-indexes-across-multiple-sharded-tables). The following is a brief description.
+If the migration involves merging data from different sharded tables, primary key or unique index conflicts may occur during the merge. Therefore, before migration, you need to take a deep look at the current sharding scheme from the business point of view, and find a way to avoid the conflicts. For more details, see [Handle conflicts between primary keys or unique indexes across multiple sharded tables](https://docs.pingcap.com/tidb-data-migration/stable/shard-merge-best-practices#handle-conflicts-between-primary-keys-or-unique-indexes-across-multiple-sharded-tables). The following is a brief description.
 
 Assume that tables 1~4 have the same table structure as follows.
 
@@ -106,9 +107,9 @@ The following sections introduce the complete migration procedure.
 
 ## Step1. Use Dumpling to export full data
 
-If you need to export multiple sharded tables belonging to the same upstream MySQL instance, you can directly use the `-f` parameter of Dumpling to export them in a single operation.
+If those multiple sharded tables to be exported are in the same upstream MySQL instance, you can directly use the `-f` parameter of Dumpling to export them in a single operation.
 
-If the sharded tables are stored across different MySQL instances, you can use Dumpling to export them respectively and place the exported results in the same parent directory.
+If the sharded tables are stored in different MySQL instances, you can use Dumpling to export them respectively and place the exported results in the same parent directory.
 
 In the following example, both methods are used, and then the exported data is stored in the same parent directory.
 
@@ -120,24 +121,21 @@ First, run the following command to use Dumpling to export `table1` and `table2`
 tiup dumpling -h ${ip} -P 3306 -u root -t 16 -r 200000 -F 256MB -B my_db1 -f 'my_db1.table[12]' -o ${data-path}/my_db1
 ```
 
-In the command above:
+The following table describes parameters in the command above. For more information about Dumpling parameters, see [Dumpling Overview](/dumpling-overview.md).
 | Parameter       |   Description |
 |-                |-              |
-| `-u` or `--user`       |   Specifies the user name to be used. If a password is required for authentication, you can use `-p $YOUR_SECRET_PASSWORD` to pass the password to Dumpling. |
+| `-u` or `--user`       |   Specifies the user name to be used.  |
 | `-p` or `--password`   |   Specifies the password to be used. |
 | `-p` or `--port`       |   Specifies the port to be used.|
 | `-h` or `--host`       |   Specifies the IP address of the data source.  |
-| `-t` or `--thread`     |   Specifies the number of threads for the export. Increasing the number of threads improves the concurrency of Dumpling and the export speed, and increases the database's memory consumption. Therefore, it is not recommended to set the number too large.|
+| `-t` or `--thread`     |   Specifies the number of threads for the export. Increasing the number of threads improves the concurrency of Dumpling and the export speed, and increases the database's memory consumption. Therefore, it is not recommended to set the number too large. Usually, it's less than 64.|
 | `-o` or `--output`     |  Specifies the export directory of the storage, which supports a local file path or a [URL of an external storage](/br/backup-and-restore-storages.md).|
 | `-r` or `--row`        | Specifies the maximum number of rows in a single file. If you use this parameter, Dumpling enables the in-table concurrency to speed up the export and reduce the memory usage.|
-| `-F` |  Specifies the maximum size of a single file. The unit is `MiB`. Inputs such as `5GiB` or `8KB` are also acceptable. It is recommended to keep the value to 256 MiB or less, if you use TiDB Lightning to load this file into a TiDB instance. |
+| `-F` |  Specifies the maximum size of a single file. The unit is `MiB`. It is recommended to keep the value to 256 MiB. |
 | `-B` or `--database`   | Specifies databases to be exported. |
 | `-f` or `--filter`     |  Sexport tables that match the filter pattern. For the filter syntax, see [table-filter](/table-filter.md) |
 
-> **Note:**
->
-> If the size of a single exported table exceeds 10 GiB, it is strongly recommended to use the `-r` and `-F` options.
-
+Ensure that there is enough free space in `${data-path}`. It is strongly recommended to use the `-F` option to avoid interruptions in the backup process due to oversized single tables.
 Then, run the following command to use Dumpling to export `table3` and `table4` from `my_db2`. Note that the path is `${data-path}/my_db2` instead of `${data-path}/my_db1`.
 
 {{< copyable "shell-regular" >}}
@@ -158,7 +156,7 @@ Before starting TiDB Lightning for migration, it is recommended that you underst
 
 Migrating a large volume of data usually takes hours or even days. There is a certain chance that the long-running process is interrupted unexpectedly. It can be very frustrating to redo everything from scratch, even if some part of data has already been imported.
 
-Fortunately, TiDB Lightning provides a `checkpoints` feature to let you store the migration progress, so that an interrupted migration task can resume from the breakpoint upon restart.
+Fortunately, TiDB Lightning provides a feature called `checkpoints`, which makes TiDB Lightning save the import progress as `checkpoints` from time to time, so that an interrupted import task can be resumed from the latest checkpoint upon restart.
 
 If the TiDB Lightning task crashes due to unrecoverable errors (for example, data corruption), it will not pick up from the checkpoint, but will report an error and quit the task. To ensure the safety of the imported data, you must resolve these errors by using the `tidb-lightning-ctl` command before proceeding with other steps. The options include:
 
@@ -240,7 +238,7 @@ Follow these steps to start `tidb-lightning`:
     pd-addr = "${ip}:${port}"
     ```
 
-3. Configure appropriate parameters to run `tidb-lightning`. If you start the task directly in a command-line interface, it may quit due to the SIGHUP signal. It is recommended that you introduce such tools as `nohup` and `screen`. For example:
+3. Run `tidb-lightning`. If you run the program by directly invoking the program name in a shell, the process may quit unexpectedly after receiving a SIGHUP signal. It is recommended that you run the program using tools such as `nohup` or `screen` or `tiup`, and put the process to the shell background. For example:
 
    {{< copyable "shell-regular" >}}
 
@@ -277,7 +275,7 @@ source-id: "mysql-01" # Must be unique.
 
 # Specifies whether DM-worker pulls binlogs with GTID (Global Transaction Identifier).
 # The prerequisite is that you have already enabled GTID in the upstream MySQL.
-# If the upstream database has enabled automatic switch of primary and standby, you must use the GTID mode.
+# If you have configured the upstream database service to switch master between different nodes automatically, you must enable GTID.
 enable-gtid: true
 
 from:
@@ -313,7 +311,7 @@ Edit a task configuration file called `task.yaml`, to configure the incremental 
 ```yaml
 name: task-test               # The name of the task. Should be globally unique.
 task-mode: incremental        # The mode of the task. "incremental" means full data migration is skipped and only incremental replication is performed.
-# Required for the sharded tables. By default, the "pessimistic" mode is used.
+# Required for incremental replication from sharded tables. By default, the "pessimistic" mode is used.
 # If you have a deep understanding of the principles and usage limitations of the optimistic mode, you can also use the "optimistic" mode.
 # For more information, see [Merge and Migrate Data from Sharded Tables](https://docs.pingcap.com/zh/tidb-data-migration/stable/feature-shard-merge).
 
@@ -350,7 +348,7 @@ mysql-instances:
     block-allow-list: "bw-rule-1"     # Use the block and allow list configuration above. Replicate `my_db1` in instance 1.
     route-rules: ["route-rule-1"]     # Use the configured routing rule above to merge upstream tables.
 #       syncer-config-name: "global"  # Use the syncers configuration below.
-    meta:                             # The migration starting point of binlog when task-mode is incremental and there is no checkpoint in the downstream database. A checkpoint prevails if any.
+    meta:                             # The migration starting point of binlog when task-mode is incremental and there is no checkpoint in the downstream database. If there is a checkpoint, the checkpoint will be used.
       binlog-name: "${binlog-name}"   # The log location recorded in ${data-path}/my_db1/metadata in Step 1. You can either specify binlog-name + binlog-pos or binlog-gtid. When the upstream database service is configured to switch master between different nodes automatically, use binlog GTID here. 
       binlog-pos: ${binlog-position}
       # binlog-gtid:                  " For example: 09bec856-ba95-11ea-850a-58f2b4af5188:1-9"
@@ -358,7 +356,7 @@ mysql-instances:
     block-allow-list: "bw-rule-2"     # Use the block and allow list configuration above. Replicate `my_db2` in instance2.
     route-rules: ["route-rule-2"]     # Use the routing rule configured above.
 #       syncer-config-name: "global"  # Use the syncers configuration below.
-    meta:                             # The migration starting point of binlog when task-mode is incremental and there is no checkpoint in the downstream database. A checkpoint prevails if any.
+    meta:                             # The migration starting point of binlog when task-mode is incremental and there is no checkpoint in the downstream database. If there is a checkpoint, the checkpoint will be used.
       # binlog-name: "${binlog-name}"   # The log location recorded in ${data-path}/my_db2/metadata in Step 1. You can either specify binlog-name + binlog-pos or binlog-gtid. When the upstream database service is configured to switch master between different nodes automatically, use binlog GTID here. 
       # binlog-pos: ${binlog-position}
       binlog-gtid: "09bec856-ba95-11ea-850a-58f2b4af5188:1-9"
