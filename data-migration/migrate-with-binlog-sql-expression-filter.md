@@ -31,6 +31,7 @@ expression-filter:
     schema: "expr_filter"
     table: "tbl"
     insert-value-expr: "c % 2 = 0"
+```
 
 In the above configuration example, the `even_c` rule is configured and referenced by the data source `mysql-replica-01`. According to this rule, for the `tb1` table in the `expr_filter` schema, when an even number is inserted into the `c` column (`c % 2 = 0`), this `insert` statement is not replicated to the downstream. The following example shows the effect of this rule.
 
