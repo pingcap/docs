@@ -244,7 +244,7 @@ Follow these steps to start `tidb-lightning`:
    {{< copyable "shell-regular" >}}
 
    ```shell
-   tiup tidb-lightning -config tidb-lightning.toml > nohup.out &
+   nohup tiup tidb-lightning -config tidb-lightning.toml -no-schema=true > nohup.out 2>&1 &
    ```
 
 4. After starting the migration task, you can check the progress by using either of the following methods:
