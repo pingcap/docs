@@ -27,14 +27,14 @@ TiDB version: 5.0.6
 
 + TiKV
 
-    - Move verify_checksum to import-thread from apply-thread. [#11239](https://github.com/tikv/tikv/issues/11239)
-    - Add metrics for raft log garbage-collect to locate performance problem. [#11374](https://github.com/tikv/tikv/issues/11374)
-    - Hide untouched storage commands' metrics in grafana dashboard [#11681](https://github.com/tikv/tikv/issues/11681)
+    - Increase the speed of inserting SST files by moving the verification process to import thread pool from apply thread pool [#11239](https://github.com/tikv/tikv/issues/11239)
+    - Add metrics for the garbage collection module of Raft logs to locate performance problems in this module [#11374](https://github.com/tikv/tikv/issues/11374)
+    - Collapse some uncommon metrics related to storage in Grafana dashboard [#11681](https://github.com/tikv/tikv/issues/11681)
 
 + PD
 
     (dup) - Speed up the exit process of schedulers [#4146](https://github.com/tikv/pd/issues/4146)
-    - Make scatter range scheduler work better by allowing empty region schedule and fix config [#4497](https://github.com/tikv/pd/issues/4497)
+    - Make the `scatter-range-scheduler` scheduler work better by allowing to schedule empty regions and fix configurations [#4497](https://github.com/tikv/pd/issues/4497)
 
 + Tools
 
@@ -113,8 +113,8 @@ TiDB version: 5.0.6
     - Fix the issue that operator can get blocked due to down store [#3353](https://github.com/tikv/pd/issues/3353)
     (dup) - Fix slow leader election caused by stucked Region syncer [#3936](https://github.com/tikv/pd/issues/3936)
     (dup) - Support that the evict leader scheduler can schedule Regions with unhealthy peers [#4093](https://github.com/tikv/pd/issues/4093)
-    - Fix the issue that there is the store limit of remove peer of the down store [#4090](https://github.com/tikv/pd/issues/4090)
-    - Fix the issue that the hot cache cannot be cleared when the heartbeat interval is less than 60 [#4390](https://github.com/tikv/pd/issues/4390)
+    - Fix the issue that the speed of removing peers is limited when repairing the down nodes [#4090](https://github.com/tikv/pd/issues/4090)
+    - Fix the issue that the hotspot Cache cannot be cleared when the Region heartbeat is less than 60 seconds [#4390](https://github.com/tikv/pd/issues/4390)
 
 + TiFlash
 
