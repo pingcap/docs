@@ -18,14 +18,12 @@ The following diagram shows how to migrate and merge MySQL sharded tables to TiD
 
 This example assumes that you have two databases, `my_db1` and `my_db2`. You use Dumpling to export two tables `table1` and `table2` from `my_db1`, and two tables `table3` and `table4` from `my_db2`, respectively. After that, you use TiDB Lighting to import and merge the four exported tables into the same `table5` from `mydb` in the target TiDB.
 
-Note that although Dumpling can export all databases from a MySQL instance, this document only exports some of the data as an example.
-
 In this document, you can migrate data following this procedure:
 
 1. Use Dumpling to export full data. In this example, you export 2 tables respectively from 2 upstream databases:
 
-   - Export `table1` and `table2` from my_db1
-   - Export `table3` and `table4` from my_db2
+   - Export `table1` and `table2` from `my_db1`
+   - Export `table3` and `table4` from `my_db2`
 
 2. Start TiDB Lightning to migrate data to `mydb.table5` in TiDB.
 
@@ -49,7 +47,7 @@ Before getting started, see the following documents to prepare for the migration
 
 **Disk Space**:
 
-- Dumpling requires a hard drive sufficient to store the entire data source. It is recommended to use SSD. The faster the read speed, the better.
+- Dumpling requires a hard drive sufficient to store the entire data source.
 - TiDB Lightning requires sufficient temporary storage space to store sorted key-value pairs during migration. You need to prepare at least as much space as the largest single table of the data source.
 
 **Note**: It is difficult to calculate the exact size of the data exported by Dumpling from MySQL. But you can estimate the amount of data using the `data_length` field with the following SQL statement.
@@ -90,7 +88,7 @@ CREATE TABLE `table1` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
 ```
 
-For those four tables, the `id` column is the primary key. It is auto-incremental, which will cause different sharded tables to generate duplicated `id` ranges and cause the primary key conflict on the target table during the migration. On the other hand, the `sid` column is the sharding key, which ensures that the index is unique globally. So you can remove the unique constraint of the `id` column in the target `table5` to avoid the data merge conflicts
+For those four tables, the `id` column is the primary key. It is auto-incremental, which will cause different sharded tables to generate duplicated `id` ranges and cause the primary key conflict on the target table during the migration. On the other hand, the `sid` column is the sharding key, which ensures that the index is unique globally. So you can remove the unique constraint of the `id` column in the target `table5` to avoid the data merge conflicts.
 
 ```sql
 CREATE TABLE `table5` (
@@ -102,8 +100,6 @@ CREATE TABLE `table5` (
   UNIQUE KEY `sid` (`sid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
 ```
-
-The following sections introduce the complete migration procedure.
 
 ## Step1. Use Dumpling to export full data
 
@@ -122,6 +118,7 @@ tiup dumpling -h ${ip} -P 3306 -u root -t 16 -r 200000 -F 256MB -B my_db1 -f 'my
 ```
 
 The following table describes parameters in the command above. For more information about Dumpling parameters, see [Dumpling Overview](/dumpling-overview.md).
+
 | Parameter       |   Description |
 |-                |-              |
 | `-u` or `--user`       |   Specifies the user name to be used.  |
@@ -180,8 +177,7 @@ no-schema = true # If you have created the downstream schema and tables, setting
 
 Follow these steps to start `tidb-lightning`:
 
-1. Upload the exported full data to the server where TiDB Lightning is deployed.
-2. Edit the toml file. `tidb-lightning.toml` is used in the following example:
+1. Edit the toml file. `tidb-lightning.toml` is used in the following example:
 
     ```toml
     [lightning]
@@ -197,7 +193,7 @@ Follow these steps to start `tidb-lightning`:
     backend = "local"
     # Set the temporary directory for the sorted key value pairs. It must be empty.
     # The free space must be greater than the largest single table of the data source.
-    # It is recommended that you use a directory different from `data-source-dir` to get better migration performance by consuming IO resources exclusively.
+    # It is recommended that you use a directory different from `data-source-dir` to get better migration performance by consuming I/O resources exclusively.
     sorted-kv-dir = "${sorted-kv-dir}"
 
     # Set the renaming rules ('routes') from source to target tables, in order to support merging different table shards into a single target table. Here you migrate `table1` and `table2` in `my_db1`, and `table3` and `table4` in `my_db2`, to the target `table5` in downstream `my_db`.
@@ -216,13 +212,11 @@ Follow these steps to start `tidb-lightning`:
     [mydumper]
     # The source data directory. Set this to the path of the Dumpling exported data.
     # If there are several Dumpling-exported data directories, you need to place all these directories in the same parent directory, and use the parent directory here.
-    data-source-dir = "${data-path}"
+    data-source-dir = "${data-path}"        # The local or S3 path, for example, 's3://my-bucket/sql-backup?region=us-west-2'
     # Because table1~table4 from source are merged into another table5 in the target, you should tell TiDB Lightning no need to create schemas, so that table1 ~ table4 won't be created automatically according to the exported schema information
     no-schema = true
-    # Configure the wildcard rules. By default, all the following tables will be filtered: mysql, sys, INFORMATION_SCHEMA, PERFORMANCE_SCHEMA, METRICS_SCHEMA, INSPECTION_SCHEMA
-    # If not configured, an error “schema not found” will occur when migrating system tables.
-    filter = ['*.*', '!mysql.*', '!sys.*', '!INFORMATION_SCHEMA.*', '!PERFORMANCE_SCHEMA.*', '!METRICS_SCHEMA.*', '!INSPECTION_SCHEMA.*']
 
+    # Information of the target TiDB cluster. For example purposes only. Replace the IP address with your IP address.
     [tidb]
     # Information of the target TiDB cluster.
     # Values here are only for illustration purpose. Replace them with your own values.
@@ -230,26 +224,28 @@ Follow these steps to start `tidb-lightning`:
     port = ${port}           # For example: 4000
     user = "${user_name}"    # For example: "root"
     password = "${password}" # For example: "rootroot"
-    # The table information is read from the status port.
-    status-port = ${status-port} # For example: 10080
+    status-port = ${status-port} # The table information is read from the status port. For example: 10080
     # the IP address of the PD cluster. TiDB Lightning gets some information through the PD cluster.
     # For example: "172.16.31.3:2379".
     # When backend = "local", make sure that the values of status-port and pd-addr are correct. Otherwise an error will occur.
     pd-addr = "${ip}:${port}"
     ```
 
-3. Run `tidb-lightning`. If you run the program by directly invoking the program name in a shell, the process may quit unexpectedly after receiving a SIGHUP signal. It is recommended that you run the program using tools such as `nohup` or `screen` or `tiup`, and put the process to the shell background. For example:
+2. Run `tidb-lightning`. If you run the program by directly invoking the program name in a shell, the process may quit unexpectedly after receiving a SIGHUP signal. It is recommended that you run the program using tools such as `nohup` or `screen` or `tiup`, and put the process to the shell background. If you migrate from S3, the SecretKey and AccessKey of the account that has access to the Amazon S3 backend store needs to be passed into the Lightning node as environment variables. Reading credential files from `~/.aws/credentials` is also supported. For example:
 
-   {{< copyable "shell-regular" >}}
+    {{< copyable "shell-regular" >}}
 
-   ```shell
-   nohup tiup tidb-lightning -config tidb-lightning.toml -no-schema=true > nohup.out 2>&1 &
-   ```
+    ```shell
+    export AWS_ACCESS_KEY_ID=${access_key}
+    export AWS_SECRET_ACCESS_KEY=${secret_key}
+    nohup tiup tidb-lightning -config tidb-lightning.toml -no-schema=true > nohup.out 2>&1 &
+    ```
 
-4. After starting the migration task, you can check the progress by using either of the following methods:
+3. After starting the migration task, you can check the progress by using either of the following methods:
 
    - Use `grep` tool to search the keyword `progress` in the log. By default, a message reporting the progress is flushed into the log file every 5 minutes.
    - View progress via the monitoring dashboard. For more information, see [TiDB Lightning Monitoring]( /tidb-lightning/monitor-tidb-lightning.md).
+   - View the progress via the Web page. See [Web Interface](/tidb-lightning/tidb-lightning-web-interface.md).
 
 After the importing finishes, TiDB Lightning will exit automatically. To make sure that the data is imported successfully, check for `the whole procedure completed` among the last 5 lines in the log.
 
@@ -317,8 +313,8 @@ task-mode: incremental        # The mode of the task. "incremental" means full d
 
 shard-mode: "pessimistic"
 
-# Configure the access information of the TiDB database instance:
-target-database:              # Downstream database instance
+# Configure the access information of the target TiDB database instance:
+target-database:              # The target database instance
   host: "${host}"             # For example: 127.0.0.1
   port: 4000
   user: "root"
@@ -330,7 +326,7 @@ block-allow-list:             # The set of filter rules on matching tables in th
     do-dbs: ["my_db1"]        # The databases to be migrated. Here, my_db1 of instance 1 and my_db2 of instance 2 are configured as two separate rules to demonstrate how to prevent my_db2 of instance 1 from being replicated.
   bw-rule-2:
     do-dbs: ["my_db2"]
-routes:                               # Table renaming rules ('routes') from upstream to downstream tables, in order to support merging different sharded table into a single target table. 
+routes:                               # Table renaming rules ('routes') from upstream to downstream tables, in order to support merging different sharded table into a single target table.
   route-rule-1:                       # Rule name. Migrate and merge table1 and table2 from my_db1 to the downstream my_db.table5.
     schema-pattern: "my_db1"          # Rule for matching upstream schema names. It supports the wildcards "*" and "?".
     table-pattern: "table[1-2]"       # Rule for matching upstream table names. It supports the wildcards "*" and "?".
@@ -349,15 +345,16 @@ mysql-instances:
     route-rules: ["route-rule-1"]     # Use the configured routing rule above to merge upstream tables.
 #       syncer-config-name: "global"  # Use the syncers configuration below.
     meta:                             # The migration starting point of binlog when task-mode is incremental and there is no checkpoint in the downstream database. If there is a checkpoint, the checkpoint will be used.
-      binlog-name: "${binlog-name}"   # The log location recorded in ${data-path}/my_db1/metadata in Step 1. You can either specify binlog-name + binlog-pos or binlog-gtid. When the upstream database service is configured to switch master between different nodes automatically, use binlog GTID here. 
+      binlog-name: "${binlog-name}"   # The log location recorded in ${data-path}/my_db1/metadata in Step 1. You can either specify binlog-name + binlog-pos or binlog-gtid. When the upstream database service is configured to switch master between different nodes automatically, use binlog GTID here.
       binlog-pos: ${binlog-position}
       # binlog-gtid:                  " For example: 09bec856-ba95-11ea-850a-58f2b4af5188:1-9"
   - source-id: "mysql-02"             # Data source ID. It is the source-id in source1.yaml.
     block-allow-list: "bw-rule-2"     # Use the block and allow list configuration above. Replicate `my_db2` in instance2.
     route-rules: ["route-rule-2"]     # Use the routing rule configured above.
+
 #       syncer-config-name: "global"  # Use the syncers configuration below.
     meta:                             # The migration starting point of binlog when task-mode is incremental and there is no checkpoint in the downstream database. If there is a checkpoint, the checkpoint will be used.
-      # binlog-name: "${binlog-name}"   # The log location recorded in ${data-path}/my_db2/metadata in Step 1. You can either specify binlog-name + binlog-pos or binlog-gtid. When the upstream database service is configured to switch master between different nodes automatically, use binlog GTID here. 
+      # binlog-name: "${binlog-name}"   # The log location recorded in ${data-path}/my_db2/metadata in Step 1. You can either specify binlog-name + binlog-pos or binlog-gtid. When the upstream database service is configured to switch master between different nodes automatically, use binlog GTID here.
       # binlog-pos: ${binlog-position}
       binlog-gtid: "09bec856-ba95-11ea-850a-58f2b4af5188:1-9"
 # (Optional) If you need to incrementally replicate some data changes that have been covered in the full migration, you need to enable the safe mode to avoid data migration errors during incremental replication.

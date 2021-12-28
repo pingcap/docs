@@ -1,6 +1,7 @@
 ---
 title: Migrate and Merge MySQL Shards of Less Than 1 TiB to TiDB
 summary: Learn how to migrate and merge less than 1 TiB of shards from MySQL to TiDB.
+aliases: ['/tidb-data-migration/stable/usage-scenario-shard-merge']
 ---
 
 # Migrate and Merge MySQL Shards of Less Than 1 TiB to TiDB
@@ -15,10 +16,10 @@ This document takes a simple example to illustrate the migration procedure. The 
 
 Both MySQL Instance 1 and MySQL Instance 2 contain the following schemas and tables. In this example, you migrate and merge tables from `store_01` and `store_02` schemas with a `sale` prefix in both instances, into the downstream `sale` table in the `store` schema.
 
-  | Schema | Table |
-  |:------|:------|
-  | store_01 | sale_01, sale_02 |
-  | store_02 | sale_01, sale_02 |
+| Schema | Table |
+|:------|:------|
+| store_01 | sale_01, sale_02 |
+| store_02 | sale_01, sale_02 |
 
 Target schemas and tables：
 
@@ -67,7 +68,7 @@ CREATE TABLE `sale` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
 ```
 
-## Step 1: Load data sources
+## Step 1. Load data sources
 
 Create a new data source file called `source1.yaml`, which configures an upstream data source into DM, and add the following content:
 
@@ -104,7 +105,7 @@ The parameters are described as follows.
 
 Repeat the above steps until all data sources are added to the DM cluster.
 
-## Step 2: Configure the migration task
+## Step 2. Configure the migration task
 
 Create a task configuration file named `task1.yaml` and writes the following content to it:
 
@@ -115,7 +116,7 @@ name: "shard_merge"               # The name of the task. Should be globally uni
 # Task mode. You can set it to the following:
 # - full: Performs only full data migration (incremental replication is skipped)
 # - incremental: Only performs real-time incremental replication using binlog. (full data migration is skipped)
-# - all: Performs both full data migration and incremental replication. For migrating small to medium amount of data here, use this option.  
+# - all: Performs both full data migration and incremental replication. For migrating small to medium amount of data here, use this option.
 task-mode: all
 # Required for the MySQL shards. By default, the "pessimistic" mode is used.
 # If you have a deep understanding of the principles and usage limitations of the optimistic mode, you can also use the "optimistic" mode.
@@ -143,29 +144,29 @@ mysql-instances:
     block-allow-list:  "log-bak-ignored"
 
 # Configurations for merging MySQL shards
-routes:    # Table renaming rules ('routes') from upstream to downstream tables, in order to support merging different sharded tables into a single target table. 
-  sale-route-rule:                        # Rule name. Migrate and merge tables from upstream to the downstream.
-    schema-pattern: "store_*"     # Rule for matching upstream schema names. It supports the wildcards "*" and "?".
-    table-pattern: "sale_*"           # Rule for matching upstream table names. It supports the wildcards "*" and "?".
-    target-schema: "store"          # Name of the target schema.
-    target-table:  "sale"               # Name of the target table.
+routes:                       # Table renaming rules ('routes') from upstream to downstream tables, in order to support merging different sharded tables into a single target table.
+  sale-route-rule:            # Rule name. Migrate and merge tables from upstream to the downstream.
+    schema-pattern: "store_*" # Rule for matching upstream schema names. It supports the wildcards "*" and "?".
+    table-pattern: "sale_*"   # Rule for matching upstream table names. It supports the wildcards "*" and "?".
+    target-schema: "store"    # Name of the target schema.
+    target-table:  "sale"     # Name of the target table.
 
 # Filters out some DDL events.
 filters:
-  sale-filter-rule:                                                          # Filter name.
-    schema-pattern: "store_*"                                      # The binlog events or DDL SQL statements of upstream MySQL  instance schemas that match schema-pattern are filtered by the rules below.
-    table-pattern: "sale_*"                                            # The binlog events or DDL SQL statements of upstream MySQL  instance tables that match table-pattern are filtered by the rules below.
+  sale-filter-rule:           # Filter name.
+    schema-pattern: "store_*" # The binlog events or DDL SQL statements of upstream MySQL  instance schemas that match schema-pattern are filtered by the rules below.
+    table-pattern: "sale_*"   # The binlog events or DDL SQL statements of upstream MySQL  instance tables that match table-pattern are filtered by the rules below.
     events: ["truncate table", "drop table", "delete"]   # The binlog event array.
-    action: Ignore                                                         # The string (`Do`/`Ignore`). `Do` is the allow list. `Ignore` is the block list.
+    action: Ignore                                       # The string (`Do`/`Ignore`). `Do` is the allow list. `Ignore` is the block list.
   store-filter-rule:
     schema-pattern: "store_*"
     events: ["drop database"]
     action: Ignore
 
 # Block and allow list
-block-allow-list:          # filter or only migrate all operations of some databases or some tables.
+block-allow-list:           # filter or only migrate all operations of some databases or some tables.
   log-bak-ignored:          # Rule name.
-    do-dbs: ["store_*"]      # The allow list of the schemas to be migrated, similar to replicate-do-db in MySQL.
+    do-dbs: ["store_*"]     # The allow list of the schemas to be migrated, similar to replicate-do-db in MySQL.
 ```
 
 The above example is the minimum configuration to perform the migration task. For more information, see [DM Advanced Task Configuration File](https://docs.pingcap.com/tidb-data-migration/stable/task-configuration-file-full).
@@ -177,7 +178,7 @@ For more information on `routes`, `filters` and other configurations in the task
 - [Binlog event filter](https://docs.pingcap.com/tidb-data-migration/stable/key-features#binlog-event-filter)
 - [Filter Certain Row Changes Using SQL Expressions](https://docs.pingcap.com/tidb-data-migration/stable/feature-expression-filter)
 
-## Step 3: Start the task
+## Step 3. Start the task
 
 Before starting a migration task, run the `check-task` subcommand in `tiup dmctl` to check whether the configuration meets the requirements of DM so as to avoid possible errors.
 
@@ -202,7 +203,7 @@ tiup dmctl --master-addr ${advertise-addr} start-task task.yaml
 
 If the migration task fails to start, modify the configuration information according to the error information, and then run `start-task task.yaml` again to start the migration task. If you encounter problems, see [Handle Errors](https://docs.pingcap.com/tidb-data-migration/stable/error-handling) and [FAQ](https://docs.pingcap.com/tidb-data-migration/stable/faq).
 
-## Step 4: Check the task
+## Step 4. Check the task
 
 After starting the migration task, you can use `dmtcl tiup` to run `query-status` to view the status of the task.
 
@@ -214,7 +215,7 @@ tiup dmctl --master-addr ${advertise-addr} query-status ${task-name}
 
 If you encounter errors, use `query-status <name of the error task>` to view more detailed information. For details about the query results, task status and sub task status of the `query-status` command, see [TiDB Data Migration Query Status](https://docs.pingcap.com/tidb-data-migration/stable/query-status).
 
-## Step 5: Monitor tasks and check logs (optional)
+## Step 5. Monitor tasks and check logs (optional)
 
 You can view the history of a migration task and internal operational metrics through Grafana or logs.
 
