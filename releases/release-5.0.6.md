@@ -29,12 +29,12 @@ TiDB version: 5.0.6
 
     - Increase the speed of inserting SST files by moving the verification process to import thread pool from apply thread pool [#11239](https://github.com/tikv/tikv/issues/11239)
     - Add metrics for the garbage collection module of Raft logs to locate performance problems in this module [#11374](https://github.com/tikv/tikv/issues/11374)
-    - Collapse some uncommon metrics related to storage in Grafana dashboard [#11681](https://github.com/tikv/tikv/issues/11681)
+    - Collapse some uncommon metrics related to the storage module in Grafana dashboard [#11681](https://github.com/tikv/tikv/issues/11681)
 
 + PD
 
     (dup) - Speed up the exit process of schedulers [#4146](https://github.com/tikv/pd/issues/4146)
-    - Make the `scatter-range-scheduler` scheduler work better by allowing to schedule empty regions and fix configurations [#4497](https://github.com/tikv/pd/issues/4497)
+    - Make the scheduling results of `scatter-range-scheduler` scheduler are more even by allowing the scheduler to schedule empty Regions and fix the configurations of the scheduler [#4497](https://github.com/tikv/pd/issues/4497)
 
 + Tools
 
