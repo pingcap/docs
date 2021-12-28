@@ -118,18 +118,18 @@ TiDB version: 5.0.6
 
 + TiFlash
 
-    - Fix potential data inconsistency after widening the integer primary key of a table
-    - Fix the issue that a TiFlash fails to start up on platforms without library "libnsl.so", like on ARM
-    - Fix the issue that "Store size" metric does not match the actual data size on disk
-    - Fix an issue that causes TiFlash crashing by "Cannot open file".
-    - Fix tiflash randomly crash when a mpp query is killed
-    - Fix the issue of unexpected error that "3rd arguments of function substringUTF8 must be constants"
-    - Increase the max supported depth of expression/plan tree in dag request from 100 to 200.
+    - Fix potential data inconsistency after widening the column type of an integer primary key
+    - Fix the issue that TiFlash fails to start up on some platforms, such as ARM, due to the absence of library "libnsl.so"
+    - Fix the issue that the "Store size" metric does not match the actual data size on a disk
+    - Fix the issue that TiFlash crashes due to a "Cannot open file" error
+    - Fix occasional crashes of TiFlash when an MPP query is killed
+    - Fix the unexpected error "3rd arguments of function substringUTF8 must be constants"
+    - Fix query failures caused by excessive `OR` conditions
     - Fix the bug that results of `where <string>` is wrong
-    - Fix the inconsistent behavior of `CastStringAsDecimal` between tiflash and tidb/tikv
-    - Fix the error "different types: expected Nullable(Int64), got Int64" which causes query failure
-    - Fix the error "Unexpected type of column: Nullable(Nothing)" which cases query failure
-    - Fix the issue that comparison between Decimal may cause overflow, which result in query failure
+    - Fix inconsistent behaviors of `CastStringAsDecimal` between TiFlash and TiDB/TiKV
+    - Fix query failures caused by the error "different types: expected Nullable(Int64), got Int64"
+    - Fix query failures caused by the error "Unexpected type of column: Nullable(Nothing)"
+    - Fix query failures caused by overflow following Decimal comparison
 
 + Tools
 
