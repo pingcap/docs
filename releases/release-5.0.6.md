@@ -145,24 +145,25 @@ TiDB version: 5.0.6
         (dup) - Fix the issue that TiCDC process might panic when TiKV sends duplicate requests to the same Region [#2386](https://github.com/pingcap/tiflow/issues/2386)
         (dup) - Fix the TiCDC replication interruption issue when multiple TiKVs crash or during a forced restart [#3288](https://github.com/pingcap/ticdc/issues/3288)
         (dup) - Fix the negative value error in the changefeed checkpoint lag [#3010](https://github.com/pingcap/ticdc/issues/3010)
-        - Fix MySQL sink deadlock warning too frequently. [#2706](https://github.com/pingcap/tiflow/issues/2706)
-        - Fix Avro sink don't support json type column. [#3624](https://github.com/pingcap/tiflow/issues/3624)
-        - Fix read error schema snapshot from TiKV when owner restart. [#2603](https://github.com/pingcap/tiflow/issues/2603)
+        - Fix the issue of overly frequent warnings caused by MySQL sink deadlock [#2706](https://github.com/pingcap/tiflow/issues/2706)
+        - Fix the issue that Avro sink does not support parsing JSON type columns [#3624](https://github.com/pingcap/tiflow/issues/3624)
+        - Fix the bug that TiCDC reads the incorrect schema snapshot from TiKV when the TiKV owner restarts [#2603](https://github.com/pingcap/tiflow/issues/2603)
         (dup) - Fix the memory leak issue after processing DDLs [#3174](https://github.com/pingcap/ticdc/issues/3174)
-        - Fix old value enabled is not forced on Canal and Maxwell protocols automatically. [#3676](https://github.com/pingcap/tiflow/issues/3676)
-        - Fix timezone related error that cause cdc server can't run in some RHEL release version (6.8, 6.9 etc). [#3584](https://github.com/pingcap/tiflow/issues/3584)
-        - Fix txn_batch_size metric inaccurate issue for Kafka sink. [#3431](https://github.com/pingcap/tiflow/issues/3431)
+        - Fix the bug that the `enable-old-value` configuration item is not automatically set to `true` on Canal and Maxwell protocols [#3676](https://github.com/pingcap/tiflow/issues/3676)
+        - Fix the timezone error that occurs when the `cdc server` command runs on some Red Hat Enterprise Linux releases (such as 6.8 and 6.9) [#3584](https://github.com/pingcap/tiflow/issues/3584)
+        - Fix the issue of the inaccurate `txn_batch_size` monitoring metric for Kafka sink [#3431](https://github.com/pingcap/tiflow/issues/3431)
         (dup) - Change the default value of Kafka Sink `partition-num` to 3 so that TiCDC distributes messages across Kafka partitions more evenly [#3337](https://github.com/pingcap/ticdc/issues/3337)
         (dup) - Change the default value of Kafka Sink `partition-num` to 3 so that TiCDC distributes messages across Kafka partitions more evenly [#3337](https://github.com/pingcap/ticdc/issues/3337)
         (dup) - Fix the issue that `tikv_cdc_min_resolved_ts_no_change_for_1m` keeps alerting when there is no changefeed [#11017](https://github.com/tikv/tikv/issues/11017)
         (dup) - Optimize rate limiting control on TiKV reloads to reduce gPRC congestion during changefeed initialization [#3110](https://github.com/pingcap/ticdc/issues/3110)
+        - Fix the TiCDC panic issue that occurs when manually cleaning the task status in etcd [#2980](https://github.com/pingcap/tiflow/issues/2980)
 
-    + (Backup & Restore) BR
+    + Backup & Restore (BR)
 
         (dup) - Improve the robustness of restoring [#27421](https://github.com/pingcap/tidb/issues/27421)
-        - Fix failed after importing table with expression index using local backend. [#1404](https://github.com/pingcap/br/issues/1404)
-        - Fix the average speed isn't accurate in backup and restore [#1405](https://github.com/pingcap/br/issues/1405)
+        - Fix the error that occurs when TiDB Lightning imports a table with expression index in the Local-backend mode [#1404](https://github.com/pingcap/br/issues/1404)
+        - Fix the issue of inaccurate average speed in BR [#1405](https://github.com/pingcap/br/issues/1405)
 
     + Dumpling
 
-        - Fix the bug that dumpling gets very slow when dumping composite primary/unique key tables. [#29386](https://github.com/pingcap/tidb/issues/29386)
+        - Fix the bug that Dumpling becomes very slow when dumping tables with the composite primary key or unique key [#29386](https://github.com/pingcap/tidb/issues/29386)
