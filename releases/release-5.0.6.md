@@ -76,15 +76,15 @@ TiDB version: 5.0.6
     (dup) - Fix wrong results of the control functions (such as `IF` and `CASE WHEN`) when using the `ENUM` type data as parameters of such functions [#23114](https://github.com/pingcap/tidb/issues/23114)
     - Fix the wrong result of `CONCAT(IFNULL(TIME(3))` [#29498](https://github.com/pingcap/tidb/issues/29498)
     - Fix the wrong results of `GREATEST` and `LEAST` when passing in unsigned `BIGINT` arguments  [#30101](https://github.com/pingcap/tidb/issues/30101)
-    - Fix the problem that SQL is cancelled when including json column joins char column [#29401](https://github.com/pingcap/tidb/issues/29401)
-    - Fix the data inconsistency caused by incorrect usage of lazy existence check and untouch key optimization [#30410](https://github.com/pingcap/tidb/issues/30410)
-    - Fix the problem that window function may return different results when using transaction or not [#29947](https://github.com/pingcap/tidb/issues/29947)
-    - Fix the problem that `cast(integer as char) union string` returns wrong result[#29513](https://github.com/pingcap/tidb/issues/29513)
+    - Fix the issue that a SQL operation is canceled when its JSON type column joins its `CHAR` type column [#29401](https://github.com/pingcap/tidb/issues/29401)
+    - Fix the data inconsistency issue caused by incorrect usage of lazy existence check and untouched key optimization [#30410](https://github.com/pingcap/tidb/issues/30410)
+    - Fix the issue that window functions might return different results when using a transaction or not [#29947](https://github.com/pingcap/tidb/issues/29947)
+    - Fix the issue that SQL statements that contain `cast(integer as char) union string` return wrong result [#29513](https://github.com/pingcap/tidb/issues/29513)
     (dup) - Fix the issue that the length information is wrong when converting `Decimal` to `String` [#29417](https://github.com/pingcap/tidb/issues/29417)
-    - Fix the problem that the error `Column 'col_name' in field list is ambiguous` is raised unexpectedly when a SQL contains natural join [#25041](https://github.com/pingcap/tidb/issues/25041)
+    - Fix the issue that the `Column 'col_name' in field list is ambiguous` error is raised unexpectedly when a SQL statement contains natural join [#25041](https://github.com/pingcap/tidb/issues/25041)
     (dup) - Fix the issue that the `GREATEST` function returns inconsistent results due to different values of `tidb_enable_vectorized_expression` (`on` or `off`) [#29434](https://github.com/pingcap/tidb/issues/29434)
     (dup) - Fix the issue that planner might cache invalid plans for `join` in some cases [#28087](https://github.com/pingcap/tidb/issues/28087)
-    - Fix the problem that the error `index out of range [1] with length 1` is raised when a SQL tries to evaluates an aggregation result on the result of join in some cases [#1978](https://github.com/pingcap/tics/issues/1978)
+    - Fix the issue that the `index out of range [1] with length 1` error is raised when a SQL statement tries to evaluate an aggregation result on the result of join in some cases [#1978](https://github.com/pingcap/tics/issues/1978)
 
 + TiKV
 
