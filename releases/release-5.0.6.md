@@ -28,8 +28,8 @@ TiDB version: 5.0.6
 + TiKV
 
     - Increase the speed of inserting SST files by moving the verification process to import thread pool from apply thread pool [#11239](https://github.com/tikv/tikv/issues/11239)
-    - Add metrics for the garbage collection module of Raft logs to locate performance problems in this module [#11374](https://github.com/tikv/tikv/issues/11374)
-    - Collapse some uncommon metrics related to the storage module in Grafana dashboard [#11681](https://github.com/tikv/tikv/issues/11681)
+    - Add metrics for the garbage collection module of Raft logs to locate performance problems in the module [#11374](https://github.com/tikv/tikv/issues/11374)
+    - Collapse some uncommon storage-related metrics in Grafana dashboard [#11681](https://github.com/tikv/tikv/issues/11681)
 
 + PD
 
@@ -88,24 +88,22 @@ TiDB version: 5.0.6
 
 + TiKV
 
-    - Fix resolved timestamp lag increased after stoping a tikv [#11351](https://github.com/tikv/tikv/issues/11351)
+    - Fix the issue that a downed TiKV node causes the resolved timestamp to lag behind [#11351](https://github.com/tikv/tikv/issues/11351)
     (dup) - Fix the issue that batch messages are too large in Raft client implementation [#9714](https://github.com/tikv/tikv/issues/9714)
     (dup) - Fix a panic issue that occurs when Region merge, ConfChange, and Snapshot happen at the same time in extreme conditions [#11475](https://github.com/tikv/tikv/issues/11475)
-    - Fix the issue that reverse scan can't detect memory locks and may read stale data. [#11440](https://github.com/tikv/tikv/issues/11440)
-    (dup) - Fix a panic issue that occurs when Region merge, ConfChange, and Snapshot happen at the same time in extreme conditions [#11475](https://github.com/tikv/tikv/issues/11475)
-    - Fix the issue that reverse scan can't detect memory locks and may read stale data. [#11440](https://github.com/tikv/tikv/issues/11440)
+    - Fix the issue that TiKV cannot detect the memory lock when `TableScan` is in descending order [#11440](https://github.com/tikv/tikv/issues/11440)
     (dup) - Fix the issue of negative sign when the decimal divide result is zero [#29586](https://github.com/pingcap/tidb/issues/29586)
-    - Avoid possible OOM due to the accumulation of GC tasks [#11410](https://github.com/tikv/tikv/issues/11410)
+    - Fix the issue that the accumulation of GC tasks might cause TiKV to be OOM (out of memory) [#11410](https://github.com/tikv/tikv/issues/11410)
     (dup) - Fix the issue that the average latency of the by-instance gRPC requests is inaccurate in TiKV metrics [#11299](https://github.com/tikv/tikv/issues/11299)
     (dup) - Fix a memory leak caused by monitoring data of statistics threads [#11195](https://github.com/tikv/tikv/issues/11195)
     (dup) - Fix the issue of TiCDC panic that occurs when the downstream database is missing [#11123](https://github.com/tikv/tikv/issues/11123)
     (dup) - Fix the issue that CDC adds scan retries frequently due to the Congest error [#11082](https://github.com/tikv/tikv/issues/11082)
     (dup) - Fix the issue that the Raft connection is broken when the channel is full [#11047](https://github.com/tikv/tikv/issues/11047)
-    - Fix panic caused by SST NotFound, which is ingested by  Lightning import. [#10438](https://github.com/tikv/tikv/issues/10438)
+    - Fix the issue of TiKV panic that occurs when the files do not exist when Lightning importing data [#10438](https://github.com/tikv/tikv/issues/10438)
     (dup) - Fix the issue that TiDB cannot correctly identify whether the `Int64` types in `Max`/`Min` functions are a signed integer or not, which causes the wrong calculation result of `Max`/`Min` [#10158](https://github.com/tikv/tikv/issues/10158)
-    - Fix follower meta corruption in rare cases with more than 4 replicas [#10225](https://github.com/tikv/tikv/issues/10225)
-    - Fix backup threads leak [#10287](https://github.com/tikv/tikv/issues/10287)
-    - copr cast invalid utf8 string to real bug fix [#23322](https://github.com/pingcap/tidb/issues/23322)
+    - Fix the issue that the nodes of a TiKV replica are down after the nodes get snapshots because TiKV cannot modify the meta information accurately [#10225](https://github.com/tikv/tikv/issues/10225)
+    - Fix the issue that the backup thread pool leaks [#10287](https://github.com/tikv/tikv/issues/10287)
+    - Fix the issue of converting illegal strings into floating-point arithmetic [#23322](https://github.com/pingcap/tidb/issues/23322)
 
 + PD
 
@@ -114,7 +112,7 @@ TiDB version: 5.0.6
     (dup) - Fix slow leader election caused by stucked Region syncer [#3936](https://github.com/tikv/pd/issues/3936)
     (dup) - Support that the evict leader scheduler can schedule Regions with unhealthy peers [#4093](https://github.com/tikv/pd/issues/4093)
     - Fix the issue that the speed of removing peers is limited when repairing the down nodes [#4090](https://github.com/tikv/pd/issues/4090)
-    - Fix the issue that the hotspot Cache cannot be cleared when the Region heartbeat is less than 60 seconds [#4390](https://github.com/tikv/pd/issues/4390)
+    - Fix the issue that the hotspot cache cannot be cleared when the Region heartbeat is less than 60 seconds [#4390](https://github.com/tikv/pd/issues/4390)
 
 + TiFlash
 
