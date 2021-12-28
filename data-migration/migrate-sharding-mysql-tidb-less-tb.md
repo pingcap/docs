@@ -69,23 +69,22 @@ CREATE TABLE `sale` (
 
 ## Step 1: Load data sources
 
-Create a data source configuration file named `source1.yaml`. The configuration file is as follows:
+Create a new data source file called `source1.yaml`, which configures an upstream data source into DM, and add the following content:
 
 {{< copyable "shell-regular" >}}
 
 ```yaml
 # Configuration.
 source-id: "mysql-01" # Must be unique.
-
 # Specifies whether DM-worker pulls binlogs with GTID (Global Transaction Identifier).
 # The prerequisite is that you have already enabled GTID in the upstream MySQL.
-# If the upstream database has configured automatic primary switch-over between different nodes, you must enable the GTID mode.
-enable-gtid: false
+# If you have configured the upstream database service to switch master between different nodes automatically, you must enable GTID.
+enable-gtid: true
 from:
-  host: "${host}" # For example: 172.16.10.81
+  host: "${host}"           # For example: 172.16.10.81
   user: "root"
-  password: "${password}" # Plaintext passwords are supported but not recommended. It is recommended that you use dmctl encrypt to encrypt plaintext passwords.
-  port: 3306
+  password: "${password}"   # Plaintext passwords are supported but not recommended. It is recommended that you use dmctl encrypt to encrypt plaintext passwords.
+  port: ${port}             # For example: 3306
 ```
 
 Run the following command in a terminal. Use `tiup dmctl` to load the data source configuration into the DM cluster:
@@ -101,7 +100,7 @@ The parameters are described as follows.
 |Parameter      | Description |
 |-              |-            |
 |--master-addr         | {advertise-addr} of any DM-master node in the cluster that dmctl connects to. For example: 172.16.10.71:8261|
-|operate-source create | Load data sources to the DM cluster. |
+|operate-source create | Load data sources to the DM clusters. |
 
 Repeat the above steps until all data sources are added to the DM cluster.
 
@@ -112,7 +111,7 @@ Create a task configuration file named `task1.yaml` and writes the following con
 {{< copyable "shell-regular" >}}
 
 ```yaml
-name: "shard_merge"
+name: "shard_merge"               # The name of the task. Should be globally unique.
 # Task mode. You can set it to the following:
 # - full: Performs only full data migration (incremental replication is skipped)
 # - incremental: Only performs real-time incremental replication using binlog. (full data migration is skipped)
@@ -145,28 +144,28 @@ mysql-instances:
 
 # Configurations for merging MySQL shards
 routes:    # Table renaming rules ('routes') from upstream to downstream tables, in order to support merging different sharded tables into a single target table. 
-  sale-route-rule:
-    schema-pattern: "store_*"
-    table-pattern: "sale_*"
-    target-schema: "store"
-    target-table:  "sale"
+  sale-route-rule:                        # Rule name. Migrate and merge tables from upstream to the downstream.
+    schema-pattern: "store_*"     # Rule for matching upstream schema names. It supports the wildcards "*" and "?".
+    table-pattern: "sale_*"           # Rule for matching upstream table names. It supports the wildcards "*" and "?".
+    target-schema: "store"          # Name of the target schema.
+    target-table:  "sale"               # Name of the target table.
 
 # Filters out some DDL events.
 filters:
-  sale-filter-rule:
-    schema-pattern: "store_*"
-    table-pattern: "sale_*"
-    events: ["truncate table", "drop table", "delete"]
-    action: Ignore
+  sale-filter-rule:                                                          # Filter name.
+    schema-pattern: "store_*"                                      # The binlog events or DDL SQL statements of upstream MySQL  instance schemas that match schema-pattern are filtered by the rules below.
+    table-pattern: "sale_*"                                            # The binlog events or DDL SQL statements of upstream MySQL  instance tables that match table-pattern are filtered by the rules below.
+    events: ["truncate table", "drop table", "delete"]   # The binlog event array.
+    action: Ignore                                                         # The string (`Do`/`Ignore`). `Do` is the allow list. `Ignore` is the block list.
   store-filter-rule:
     schema-pattern: "store_*"
     events: ["drop database"]
     action: Ignore
 
 # Block and allow list
-block-allow-list:
-  log-bak-ignored:
-    do-dbs: ["store_*"]
+block-allow-list:          # filter or only migrate all operations of some databases or some tables.
+  log-bak-ignored:          # Rule name.
+    do-dbs: ["store_*"]      # The allow list of the schemas to be migrated, similar to replicate-do-db in MySQL.
 ```
 
 The above example is the minimum configuration to perform the migration task. For more information, see [DM Advanced Task Configuration File](https://docs.pingcap.com/tidb-data-migration/stable/task-configuration-file-full).
