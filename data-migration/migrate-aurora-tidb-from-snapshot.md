@@ -52,7 +52,7 @@ After the two steps above, make sure you have the following information ready:
 
 Because the snapshot file from Aurora does not contain the DDL statements, you need to export the schema using Dumpling and create the schema in the target database using TiDB Lightning. If you want to manually create the schema, you can skip this step.
 
-Export the schema using Dumpling by running the following command. The command include the `--filter` parameter to only export the desired table schema:
+Export the schema using Dumpling by running the following command. The command includes the `--filter` parameter to only export the desired table schema:
 
 {{< copyable "shell-regular" >}}
 
@@ -101,7 +101,7 @@ status-port = ${status-port}  # Obtains the table schema information from TiDB s
 pd-addr = "${ip}:${port}"     # The cluster PD address, e.g.: 172.16.31.3:2379. TiDB Lightning obtains some information from PD. When backend = "local", you must specify status-port and pd-addr correctly. Otherwise, the import will be abnormal.
 
 [tikv-importer]
-# "local": Default backend. The local backend is used to import large volumes of data (1 TiB or more). During the import, the target TiDB cluster cannot provide any service.
+# "local": Default backend. The local backend is recommended to import large volumes of data (1 TiB or more). During the import, the target TiDB cluster cannot provide any service.
 # "tidb": The "tidb" backend is recommended to import data less than 1 TiB. During the import, the target TiDB cluster can provide service normally.
 backend = "local"
 
@@ -196,7 +196,7 @@ If you encounter any problem during the import, refer to [TiDB Lightning FAQ](/t
 
     |Parameter              |Description    |
     |-                      |-              |
-    |`--master-addr`        |The {advertise-addr} of any DM-master in the cluster where `dmctl` is to be connected, e.g.: 172.16.10.71:8261|
+    |`--master-addr`        |The `{advertise-addr}` of any DM-master in the cluster where `dmctl` is to be connected, e.g.: 172.16.10.71:8261|
     |`operate-source create`|Loads the data source to the DM cluster.|
 
 ### Step 2: Create the migration task
@@ -218,7 +218,7 @@ target-database:
   host: "${host}"                   # e.g.: 172.16.10.83
   port: 4000
   user: "root"
-  password: "${password}"           # Supported but not recommended to use plaintext password. It is recommended to use `dmctl encrypt` to encrypt the plaintext password before using it.
+  password: "${password}"           # Supported but not recommended to use a plaintext password. It is recommended to use `dmctl encrypt` to encrypt the plaintext password before using it.
 
 # Global configuration for block and allow lists. Each instance can reference the configuration by name.
 block-allow-list:                     # If the DM version is earlier than v2.0.0-beta.2, use black-white-list.
@@ -268,7 +268,7 @@ The parameters used in the command above are described as follows:
 
 |Parameter              |Description    |
 |-                      |-              |
-|`--master-addr`        |The {advertise-addr} of any DM-master in the cluster where `dmctl` is to be connected, e.g.: 172.16.10.71:8261|
+|`--master-addr`        |The `{advertise-addr}` of any DM-master in the cluster where `dmctl` is to be connected, e.g.: 172.16.10.71:8261|
 |`start-task`           |Starts the migration task.|
 
 If the task fails to start, check the prompt message and fix the configuration. After that, you can re-run the command above to start the task.
