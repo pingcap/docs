@@ -1,12 +1,12 @@
 ---
-title: Migrate and Merge MySQL Shards of Less Than 1 TiB to TiDB
-summary: Learn how to migrate and merge less than 1 TiB of shards from MySQL to TiDB.
+title: Migrate and Merge MySQL Shards of Small Datasets to TiDB
+summary: Learn how to migrate and merge small datasets of shards from MySQL to TiDB.
 aliases: ['/tidb-data-migration/stable/usage-scenario-shard-merge']
 ---
 
-# Migrate and Merge MySQL Shards of Less Than 1 TiB to TiDB
+# Migrate and Merge MySQL Shards of Small Datasets to TiDB
 
-If you want to migrate and merge multiple MySQL database instances upstream to one TiDB database downstream, and the amount of data is not too large (for example, the sum of all MySQL shards is less than 1 TiB), you can use DM to migrate MySQL shards. Through examples in this document, you can learn the operation steps, precautions, and troubleshooting of the migration.
+If you want to migrate and merge multiple MySQL database instances upstream to one TiDB database downstream, and the amount of data is not too large, you can use DM to migrate MySQL shards. "Small datasets" in this document usually mean data around or less than one TiB. Through examples in this document, you can learn the operation steps, precautions, and troubleshooting of the migration.
 
 This document applies to migrating MySQL shards less than 1 TiB in total. If you want to migrate MySQL shards with a total of more than 1 TiB of data, it will take a long time to migrate only using DM. In this case, it is recommended that you follow the operation introduced in [Migrate and Merge MySQL Shards of More Than 1 TB to TiDB](/migrate-sharding-mysql-tidb-above-tb.md) to perform migration.
 
