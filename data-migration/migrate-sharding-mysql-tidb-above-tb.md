@@ -38,37 +38,36 @@ Before getting started, see the following documents to prepare for the migration
 - [Upstream Permissions for Lightning](/tidb-lightning/tidb-lightning-faq#what-is-the-privilege-requirements-for-the-target-database)
 - [Downstream Permissions for Dumpling](/dumpling-overview.md##export-data-from-tidbmysql)
 
-### Hardware requirements of TiDB Lightning
+### Resource requirements
 
-**Operating System**: The example in this document uses fresh CentOS 7 instances. You can deploy a small virtual machine either on your host locally or in the cloud. Because TiDB Lightning consumes as much CPU resources as needed by default, it is recommended that you deploy it on a dedicated server. If this is not possible, you can deploy it on a single server together with other TiDB components (for example, `tikv-server`) and then configure `region-concurrency` to limit the CPU usage from TiDB Lightning. Usually, you can configure the size to 75% of the logical CPU.
+**Operating system**: Examples in this document use new, clean CentOS 7 instances. You can deploy a virtual machine on your own host locally, or on a vendor-provided cloud platform. TiDB Lightning consumes as much CPU resources as needed by default, so it is recommended to deploy TiDB Lightning on a dedicated machine. If you do not have a dedicated machine for TiDB Lightning, you can deploy TiDB Lightning on a shared machine with other components (such as `tikv-server`) and limit TiDB Lightning's CPU usage by configuring `region-concurrency` to 75% of the number of logical CPUs.
 
-**Memory and CPU**: Since TiDB Lightning is resource-intensive, it is recommended to allocate more than 64 GiB of memory and more than 32 CPU cores. Meanwhile, to achieve optimal performance, make sure that the CPU core to memory (GiB) ratio is greater than 1:2.
+**Memory and CPU**: TiDB Lightning consumes high resources, so it is recommended to allocate more than 64 GB of memory and 32-core CPU for TiDB Lightning. To get the best performance, make sure the CPU core to memory (GB) ratio is more than 1:2.
 
-**Disk Space**:
+**Disk space**:
 
-- Dumpling requires a hard drive sufficient to store the entire data source.
-- TiDB Lightning requires sufficient temporary storage space to store sorted key-value pairs during migration. You need to prepare at least as much space as the largest single table of the data source.
+- Dumpling requires enough disk space to store the whole data source. SSD is recommended.
+- During the import, TiDB Lightning needs temporary space to store the sorted key-value pairs. The disk space should be enough to hold the largest single table from the data source.
+- If the full data volume is large, you can increase the binlog storage time in the upstream. This is to ensure that the binlogs are not lost during the incremental replication.
 
-**Note**: It is difficult to calculate the exact size of the data exported by Dumpling from MySQL. But you can estimate the amount of data using the `data_length` field with the following SQL statement.
+**Note**: You cannot calculate the exact data volume exported by Dumpling from MySQL, but you can estimate the data volume by using the following SQL statement to summarize the `data-length` field in the `information_schema.tables` table:
 
 {{< copyable "sql" >}}
 
 ```sql
-# Calculate the size of all schemas in MiB. You need to change ${schema_name} to the actual schema name.
-select table_schema,sum(data_length)/1024/1024 as data_length,sum(index_length)/1024/1024 as index_length,sum(data_length+index_length)/1024/1024 as sum from information_schema.tables group by table_schema;
+/* Calculate the size of all schemas, in MiB. Replace ${schema_name} with your schema name. */
+SELECT table_schema,SUM(data_length)/1024/1024 AS data_length,SUM(index_length)/1024/1024 AS index_length,SUM(data_length+index_length)/1024/1024 AS SUM FROM information_schema.tables WHERE table_schema = "${schema_name}" GROUP BY table_schema;
 
-# Calculate the size of the largest single table in MiB. You need to change ${schema_name} to the actual schema name.
+/* Calculate the size of the largest table, in MiB. Replace ${schema_name} with your schema name. */
+SELECT table_name,table_schema,SUM(data_length)/1024/1024 AS data_length,SUM(index_length)/1024/1024 AS index_length,SUM(data_length+index_length)/1024/1024 AS SUM from information_schema.tables WHERE table_schema = "${schema_name}" GROUP BY table_name,table_schema ORDER BY SUM DESC LIMIT 5;
+```
 
-select table_name,table_schema,sum(data_length)/1024/1024 as data_length,sum(index_length)/1024/1024 as index_length,sum(data_length+index_length)/1024/1024 as sum from information_schema.tables where table_schema = "${schema_name}" group by table_name,table_schema order by sum  desc limit 5;
+### Disk space for the target TiKV cluster
 
-### Disk space requirements for the target TiKV cluster
+The target TiKV cluster must have enough disk space to store the imported data. In addition to [the standard hardware requirements](/hardware-and-software-requirements.md), the storage space of the target TiKV cluster must be larger than **the size of the data source x [the number of replicas](/faq/deploy-and-maintain-faq.md#is-the-number-of-replicas-in-each-region-configurable-if-yes-how-to-configure-it) x 2**. For example, if the cluster uses 3 replicas by default, the target TiKV cluster must have a storage space larger than 6 times the size of the data source. The formula has `x 2` because:
 
-The target TiKV cluster must have enough space to store upcoming migrated data. In addition to the [Server recommendations](https://docs.pingcap.com/tidb/stable/hardware-and-software-requirements#server-recommendations), the total storage space of the target TiKV cluster must be larger than **(data source size) × ([number of replicas](https://docs.pingcap.com/tidb/stable/deploy-and-maintain-faq#is-the-number-of-replicas-in-each-region-configurable-if-yes-how-to-configure-it) × 2**. For example, if the cluster uses 3 replicas by default, the total storage space needs to be more than 6 times the size of the data source.
-
-At first glance, it may look confusing why there is a **“x2”** in the formula. In fact, it is based on the following estimated space:
-
-* Extra space consumed by indexes
-* Space amplified by RocksDB
+- Index might take extra space.
+- RocksDB has a space amplification effect.
 
 ### Check conflicts for Sharded Tables
 
