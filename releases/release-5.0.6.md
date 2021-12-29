@@ -15,6 +15,7 @@ TiDB version: 5.0.6
 
     + TiCDC
 
+        - Change the output of the `cdc server` command error from stdout to stderr [#3133](https://github.com/pingcap/tiflow/issues/3133)
         - Set the default value of Kafka sink `max-message-bytes` to `10M` [#3081](https://github.com/pingcap/tiflow/issues/3081)
 
 ## Improvements
