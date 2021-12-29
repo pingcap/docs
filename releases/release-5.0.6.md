@@ -15,7 +15,7 @@ TiDB version: 5.0.6
 
     + TiCDC
 
-        - Output the cdc server cmd error from stdout to stderr. [#3133](https://github.com/pingcap/tiflow/issues/3133)
+        - Set the default value of Kafka sink `max-message-bytes` to `10M` [#3081](https://github.com/pingcap/tiflow/issues/3081)
 
 ## Improvements
 
@@ -43,10 +43,11 @@ TiDB version: 5.0.6
         (dup) - Fix the issue that scanning stock data might fail due to TiKV performing GC when scanning stock data takes too long [#2470](https://github.com/pingcap/tiflow/issues/2470)
         (dup) - Fix the issue that changefeed does not fail fast enough when the ErrGCTTLExceeded error occurs [#3111](https://github.com/pingcap/ticdc/issues/3111)
         (dup) - Add a tick frequency limit to EtcdWorker to prevent frequent etcd writes from affecting PD services [#3112](https://github.com/pingcap/ticdc/issues/3112)
-        - Support batch messages to reduce EtcdWorker tick. [3112](https://github.com/pingcap/tiflow/issues/3112)
+        - Add a tick frequency limit to EtcdWorker to prevent frequent etcd writes from affecting PD services
+          [3112](https://github.com/pingcap/tiflow/issues/3112)
         (dup) - Fix OOM in container environments [#1798](https://github.com/pingcap/ticdc/issues/1798)
         - Add Kafka sink default configuration config.Metadata.Timeout. [#3352](https://github.com/pingcap/tiflow/issues/3352)
-        - Change Kafka sink default `MaxMessageBytes` to 1MB. [#3081](https://github.com/pingcap/tiflow/issues/3081)
+        - Set the default value of `max-message-bytes` to `10M`, to reduce the probability that Kafka messages cannot be sent [#3081](https://github.com/pingcap/tiflow/issues/3081)
         - Add more monitor metric and alert, including "no owner alert" [#4054](https://github.com/pingcap/tiflow/issues/4054), "mounter row" , "table sink total row" , "buffer sink total row" [#1606](https://github.com/pingcap/tiflow/issues/1606)
 
     + (Backup & Restore) BR
@@ -116,18 +117,18 @@ TiDB version: 5.0.6
 
 + TiFlash
 
-    - Fix potential data inconsistency after widening the column type of an integer primary key
-    - Fix the issue that TiFlash fails to start up on some platforms, such as ARM, due to the absence of library "libnsl.so"
-    - Fix the issue that the "Store size" metric does not match the actual data size on a disk
-    - Fix the issue that TiFlash crashes due to a "Cannot open file" error
+    - Fix potential data inconsistency after altering a primary key column to a larger int data type
+    - Fix the issue that TiFlash fails to start up on some platforms, such as ARM, due to the absence of the `libnsl.so` library 
+    - Fix the issue that the `Store size` metric does not match the actual data size on a disk
+    - Fix the issue that TiFlash crashes due to a `Cannot open file` error
     - Fix occasional crashes of TiFlash when an MPP query is killed
-    - Fix the unexpected error "3rd arguments of function substringUTF8 must be constants"
+    - Fix the unexpected error `3rd arguments of function substringUTF8 must be constants`
     - Fix query failures caused by excessive `OR` conditions
-    - Fix the bug that results of `where <string>` is wrong
+    - Fix the bug that results of `where <string>` are wrong
     - Fix inconsistent behaviors of `CastStringAsDecimal` between TiFlash and TiDB/TiKV
-    - Fix query failures caused by the error "different types: expected Nullable(Int64), got Int64"
-    - Fix query failures caused by the error "Unexpected type of column: Nullable(Nothing)"
-    - Fix query failures caused by overflow following Decimal comparison
+    - Fix query failures caused by the error `different types: expected Nullable(Int64), got Int64`
+    - Fix query failures caused by the error `Unexpected type of column: Nullable(Nothing)`
+    - Fix query failures caused by overflow when comparing data in the `DECIMAL` data type
 
 + Tools
 
