@@ -36,7 +36,7 @@ For the scan operation that is performed on a specific range of data, such as `I
 
 > **Note:**
 >
-> At present, the `IndexMerge` feature is disabled by default in TiDB 4.0.0-rc.1. In addition, the currently supported scenarios of `IndexMerge` in TiDB 4.0 are limited to the disjunctive normal form (expressions connected by `or`). The conjunctive normal form (expressions connected by `and`) will be supported in later versions. Enable the `IndexMerge` in one of two ways:
+> At present, the `IndexMerge` feature is disabled by default after v5.4, the currently supported scenarios of `IndexMerge` in TiDB 4.0 are limited to the disjunctive normal form (expressions connected by `or`). The conjunctive normal form (expressions connected by `and`) will be supported in later versions. Enable the `IndexMerge` in one of two ways:
 >
 > - Set `tidb_enable_index_merge=1`;
 >

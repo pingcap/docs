@@ -570,7 +570,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 ### tidb_enable_index_merge <span class="version-mark">New in v4.0</span>
 
 - Scope: SESSION | GLOBAL
-- Default value: `OFF`
+- Default value: `ON`
 - This variable is used to control whether to enable the index merge feature.
 
 ### tidb_enable_list_partition <span class="version-mark">New in v5.0</span>
