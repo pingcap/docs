@@ -8,7 +8,7 @@ aliases: ['/tidb-data-migration/stable/usage-scenario-shard-merge']
 
 If you want to migrate and merge multiple MySQL database instances upstream to one TiDB database downstream, and the amount of data is not too large, you can use DM to migrate MySQL shards. "Small datasets" in this document usually mean data around or less than one TiB. Through examples in this document, you can learn the operation steps, precautions, and troubleshooting of the migration.
 
-This document applies to migrating MySQL shards less than 1 TiB in total. If you want to migrate MySQL shards with a total of more than 1 TiB of data, it will take a long time to migrate only using DM. In this case, it is recommended that you follow the operation introduced in [Migrate and Merge MySQL Shards of More Than 1 TB to TiDB](/migrate-sharding-mysql-tidb-above-tb.md) to perform migration.
+This document applies to migrating MySQL shards less than 1 TiB in total. If you want to migrate MySQL shards with a total of more than 1 TiB of data, it will take a long time to migrate only using DM. In this case, it is recommended that you follow the operation introduced in [Migrate and Merge MySQL Shards of Large Datasets to TiDB](/migrate-sharding-mysql-tidb-above-tb.md) to perform migration.
 
 This document takes a simple example to illustrate the migration procedure. The MySQL shards of the two data source MySQL instances in the example are migrated to the downstream TiDB cluster. The diagram is shown as follows.
 
@@ -231,7 +231,7 @@ You can view the history of a migration task and internal operational metrics th
 
 ## See also
 
-- [Migrate and Merge MySQL Shards of More Than 1 TiB to TiDB](/migrate-sharding-mysql-tidb-above-tb.md)。
+- [Migrate and Merge MySQL Shards of Large Datasets to TiDB](/migrate-sharding-mysql-tidb-above-tb.md)。
 - [Merge and Migrate Data from Sharded Tables](https://docs.pingcap.com/tidb-data-migration/stable/feature-shard-merge)
 - [Best Practices of Data Migration in the Shard Merge Scenario](https://docs.pingcap.com/tidb-data-migration/stable/shard-merge-best-practices)
 - [Handle Errors](https://docs.pingcap.com/tidb-data-migration/stable/error-handling)
