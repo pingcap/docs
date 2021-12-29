@@ -30,21 +30,21 @@ When you migrate data from Aurora to a TiDB cluster deployed on AWS, your data m
 
 If cloud storage (S3) service is not used, the network connectivity is good, and the network latency is low, you can use the following method to migrate data from MySQL to TiDB.
 
-- [Migrate MySQL data of less than 1 TB to TiDB](/data-migration/migrate-mysql-tidb-less-tb.md)
+- [Migrate MySQL of Small Datasets to TiDB](/data-migration/migrate-mysql-tidb-less-tb.md)
 
 If you have a high demand on migration speed, or if the data size is large (for example, larger than 1 TiB), and you do not allow other applications to write to TiDB during the migration period, you can use TiDB Lightning to quickly import data. Then, you can use DM to replicate incremental data (binlog) based on your application needs.
 
-- [Migrate MySQL data of more than 1 TB to TiDB](/data-migration/migrate-mysql-tidb-above-tb.md)
+- [Migrate MySQL of Large Datasets to TiDB](/data-migration/migrate-mysql-tidb-above-tb.md)
 
 ## Migrate and merge MySQL shards into TiDB
 
 Suppose that your application uses MySQL shards for data storage, and you need to migrate these shards into TiDB as one table. In this case, you can use DM to perform the shard merge and migration.
 
-- [Migrate and merge MySQL shards of less than 1 TB to TiDB](/data-migration/migrate-sharding-mysql-tidb-less-tb.md)
+- [Migrate and Merge MySQL Shards of Small Datasets to TiDB](/data-migration/migrate-sharding-mysql-tidb-less-tb.md)
 
 If the data size of the sharded tables is large (for example, larger than 1 TiB), and you do not allow other applications to write to TiDB during the migration period, you can use TiDB Lightning to quickly merge and import the sharded tables. Then, you can use DM to replicate incremental sharding data (binlog) based on your application needs.
 
-- [Migrate and merge MySQL shards of more than 1 TB to TiDB](/data-migration/migrate-sharding-mysql-tidb-above-tb.md)
+- [Migrate and Merge MySQL Shards of Large Datasets to TiDB](/data-migration/migrate-sharding-mysql-tidb-above-tb.md)
 
 ## Migrate data from files to TiDB
 
