@@ -1,7 +1,6 @@
 ---
 title: Migrate and Merge MySQL Shards of More Than 1 TiB to TiDB
 summary: Learn how to migrate and merge more than 1 TiB of data from MySQL into TiDB using Dumpling and TiDB Lightning, as well as how to configure the DM task to replicate incremental data changes from different MySQL shards into TiDB.
-aliases: ['/tidb-data-migration/stable/usage-scenario-shard-merge']
 ---
 
 # Migrate and Merge MySQL Shards of More Than 1 TiB to TiDB
