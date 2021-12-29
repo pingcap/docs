@@ -600,7 +600,7 @@ This section gives the alert rules for the TiKV component.
 
 * Description:
 
-    The pressure on the apply Raft log thread is too high. It is often caused by a burst of writes.
+    The pressure on the apply Raft log thread is too high, and has approached or exceeded the limit of the `apply` thread. It is often caused by a burst of writes.
 
 ### Warning-level alerts
 
