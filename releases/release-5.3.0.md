@@ -32,8 +32,8 @@ In v5.3, the key new features or improvements are as follows:
 | :---------- | :----------- | :----------- |
 | [`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40) | Modified |  Temporary tables are now supported by TiDB so `CREATE TEMPORARY TABLE` and `DROP TEMPORARY TABLE` no longer require enabling `tidb_enable_noop_functions`. |
 | [`tidb_enable_pseudo_for_outdated_stats`](/system-variables.md#tidb_enable_pseudo_for_outdated_stats-new-in-v530) | Newly added | Controls the behavior of the optimizer when the statistics on a table expire. The default value is `ON`. When the number of modified rows in the table is greater than 80% of the total rows (This ratio can be adjusted by the configuration [`pseudo-estimate-ratio`](/tidb-configuration-file.md#pseudo-estimate-ratio)), the optimizer considers that the statistics other than the total number of rows are no longer reliable and use pseudo statistics instead. When you set the value as `OFF`, even if the statistics expire, the optimizer still uses them. |
-|[`tidb_enable_tso_follower_proxy`](/system-variables.md#tidb_enable_tso_follower_proxy-new-in-v53) | Newly added  | Determines whether to enable or disable the TSO Follower Proxy feature. The default value is `OFF`, which means the TSO Follower Proxy feature is disabled. At this time, TiDB only gets TSO from PD leader. When this feature is enabled, TiDB evenly sends the requests to all PD nodes when acquiring TSO. The PD follower then forwards the TSO requests to reduce the CPU pressure of PD leader. |
-|[`tidb_tso_client_batch_max_wait_time`](/system-variables.md#tidb_tso_client_batch_max_wait_time-new-in-v53) | Newly added |  Sets the maximum waiting time for a batch saving operation when TiDB requests TSO from PD. The default value is `0`, which means no additional waiting. |
+|[`tidb_enable_tso_follower_proxy`](/system-variables.md#tidb_enable_tso_follower_proxy-new-in-v530) | Newly added  | Determines whether to enable or disable the TSO Follower Proxy feature. The default value is `OFF`, which means the TSO Follower Proxy feature is disabled. At this time, TiDB only gets TSO from PD leader. When this feature is enabled, TiDB evenly sends the requests to all PD nodes when acquiring TSO. The PD follower then forwards the TSO requests to reduce the CPU pressure of PD leader. |
+|[`tidb_tso_client_batch_max_wait_time`](/system-variables.md#tidb_tso_client_batch_max_wait_time-new-in-v530) | Newly added |  Sets the maximum waiting time for a batch saving operation when TiDB requests TSO from PD. The default value is `0`, which means no additional waiting. |
 | [`tidb_tmp_table_max_size`](/system-variables.md#tidb_tmp_table_max_size-new-in-v530) | Newly added  | Limits the maximum size of a single [temporary table](/temporary-tables.md). If the temporary table exceeds this size, an error will occur. |
 
 ### Configuration file parameters
@@ -72,7 +72,7 @@ In v5.3, the key new features or improvements are as follows:
 - The `GRANT ALL ON performance_schema.*` syntax is no longer permitted. If you execute this statement in TiDB, an error occurs.
 - Fix the issue that auto-analyze is unexpectedly triggered outside the specified time period when new indexes are added before v5.3.0. In v5.3.0, after you set the time period through the `tidb_auto_analyze_start_time` and `tidb_auto_analyze_end_time` variables, auto-analyze is triggered only during this time period.
 - The default storage directory for plugins is changed from "" to /data/deploy/plugin.
-- The DM code is migrated to [the folder "dm" in TiCDC code repository](https://github.com/pingcap/ticdc/tree/master/dm). Now DM follows TiDB in version numbers. Next to v2.0.x, the new DM version is v5.3.0, and you can upgrade from v2.0.x to v5.3.0 without any risk.
+- The DM code is migrated to [the folder "dm" in TiCDC code repository](https://github.com/pingcap/tiflow/tree/master/dm). Now DM follows TiDB in version numbers. Next to v2.0.x, the new DM version is v5.3.0, and you can upgrade from v2.0.x to v5.3.0 without any risk.
 
 ## New features
 
@@ -102,7 +102,7 @@ In v5.3, the key new features or improvements are as follows:
         - Supports duplicated table names. You do not need to design complicated naming rules for your application.
         - Provides session-level data isolation, which enables you to design a simpler application logic. After the transaction finishes, the temporary tables are dropped.
 
-    [User document](/temporary-tables.md), [#24169](https://github.com/pingcap/tidb/issues/24169)
+        [User document](/temporary-tables.md), [#24169](https://github.com/pingcap/tidb/issues/24169)
 
 - **Support the `FOR UPDATE OF TABLES` syntax**
 
@@ -122,11 +122,11 @@ In v5.3, the key new features or improvements are as follows:
 
 - **Support creating users with the least privileges on TiDB Dashboard**
 
-The account system of TiDB Dashboard is consistent with that of TiDB SQL. Users accessing TiDB Dashboard are authenticated and authorized based on TiDB SQL users' privileges. Therefore, TiDB Dashboard requires limited privileges, or merely the read-only privilege. You can configure users to access TiDB Dashboard based on the principle of least privilege, thus avoiding access of high-privileged users.
+    The account system of TiDB Dashboard is consistent with that of TiDB SQL. Users accessing TiDB Dashboard are authenticated and authorized based on TiDB SQL users' privileges. Therefore, TiDB Dashboard requires limited privileges, or merely the read-only privilege. You can configure users to access TiDB Dashboard based on the principle of least privilege, thus avoiding access of high-privileged users.
 
-It is recommended that you create a least-privileged SQL user to access and sign in with TiDB Dashboard. This avoids access of high-privileged users and improves security.
+    It is recommended that you create a least-privileged SQL user to access and sign in with TiDB Dashboard. This avoids access of high-privileged users and improves security.
 
-[User document](/dashboard/dashboard-user.md)
+    [User document](/dashboard/dashboard-user.md)
 
 ### Performance
 
@@ -134,19 +134,19 @@ It is recommended that you create a least-privileged SQL user to access and sign
 
     TiDB optimizes its timestamp processing flow and reduces the timestamp processing load of PD by enabling PD Follower Proxy and modifying the batch waiting time required when the PD client requests TSO in batches. This helps improve the overall scalability of the system.
 
-    - Support enabling or disabling PD Follower Proxy through the system variable [`tidb_enable_tso_follower_proxy`](/system-variables.md#tidb_enable_tso_follower_proxy-new-in-v53). Suppose that the TSO requests load of PD is too high. In this case, enabling PD follower proxy can batch forward the TSO requests collected during the request cycle on followers to the leader nodes. This solution can effectively reduce the number of direct interactions between clients and leaders, reduce the pressure of the load on leaders, and improve the overall performance of TiDB. 
+    - Support enabling or disabling PD Follower Proxy through the system variable [`tidb_enable_tso_follower_proxy`](/system-variables.md#tidb_enable_tso_follower_proxy-new-in-v530). Suppose that the TSO requests load of PD is too high. In this case, enabling PD follower proxy can batch forward the TSO requests collected during the request cycle on followers to the leader nodes. This solution can effectively reduce the number of direct interactions between clients and leaders, reduce the pressure of the load on leaders, and improve the overall performance of TiDB. 
 
     > **Note:**
     >
     > When the number of clients is small and the PD leader CPU load is not full, it is NOT recommended to enable PD Follower Proxy.
 
-    - Support using the system variable [`tidb_tso_client_batch_max_wait_time`](/system-variables.md#tidb_tso_client_batch_max_wait_time-new-in-v53) to set the maximum waiting time needed for the PD client to batch request TSO. The unit of this time is milliseconds. In case that PD has a high TSO requests load, you can reduce the load and improve the throughput by increasing the waiting time to get a larger batch size.
+    - Support using the system variable [`tidb_tso_client_batch_max_wait_time`](/system-variables.md#tidb_tso_client_batch_max_wait_time-new-in-v530) to set the maximum waiting time needed for the PD client to batch request TSO. The unit of this time is milliseconds. In case that PD has a high TSO requests load, you can reduce the load and improve the throughput by increasing the waiting time to get a larger batch size.
 
     > **Note:**
     >
     > When the TSO request load is not high, it is NOT recommended to modify this variable value.
 
-    [User document](/system-variables.md#tidb_tso_client_batch_max_wait_time-new-in-v53), [#3149](https://github.com/tikv/pd/issues/3149)
+    [User document](/system-variables.md#tidb_tso_client_batch_max_wait_time-new-in-v530), [#3149](https://github.com/tikv/pd/issues/3149)
 
 ### Stability
 
@@ -156,7 +156,7 @@ It is recommended that you create a least-privileged SQL user to access and sign
 
     It is recommended to perform the feature-related operations with the support of the TiDB team.
 
-[User document](/online-unsafe-recovery.md), [#10483](https://github.com/tikv/tikv/issues/10483)
+    [User document](/online-unsafe-recovery.md), [#10483](https://github.com/tikv/tikv/issues/10483)
 
 ### Data migration
 
@@ -169,31 +169,31 @@ It is recommended that you create a least-privileged SQL user to access and sign
 
 - **Add DM OpenAPI to better maintain DM clusters (experimental feature)**
 
-    DM provides the OpenAPI feature for querying and operating the DM cluster. It is similar to the feature of [dmctl tools](https://docs.pingcap.com/zh/tidb-data-migration/stable/dmctl-introduction).
+    DM provides the OpenAPI feature for querying and operating the DM cluster. It is similar to the feature of [dmctl tools](/dm/dmctl-introduction.md).
 
     Currently, DM OpenAPI is an experimental feature and disabled by default. It is not recommended to use it in a production environment.
 
-    [User Document](https://docs.pingcap.com/zh/tidb-data-migration/stable/open-api)
+    [User document](/dm/dm-open-api.md)
 
 - **TiDB Lightning Parallel Import**
 
     TiDB Lightning provides parallel import capability to extend the original feature. It allows you to deploy multiple Lightning instances at the same time to import single tables or multiple tables to downstream TiDB in parallel. Without changing the way customers use it, it greatly improves the data migration ability, allowing you to migrate data in a more real-time way to further process, integrate and analyze them. It improves the efficiency of enterprise data management.
 
-    In our test, using 10 TiDB Lightning instances, a total of 20 TiB MySQL data can be imported to TiDB within 8 hours. The performance of multiple table import is also improved. A single TiDB Lightning instance can support importing at 250 GB/s, and the overall migration is 8 times faster than the original performance.
+    In our test, using 10 TiDB Lightning instances, a total of 20 TiB MySQL data can be imported to TiDB within 8 hours. The performance of multiple table import is also improved. A single TiDB Lightning instance can support importing at 250 GiB/h, and the overall migration is 8 times faster than the original performance.
 
-    [User Document](/tidb-lightning/tidb-lightning-distributed-import.md)
+    [User document](/tidb-lightning/tidb-lightning-distributed-import.md)
 
 - **TiDB Lightning Prechecks**
 
     TiDB Lightning provides the ability to check the configuration before running a migration task. It is enabled by default. This feature automatically performs some routine checks for disk space and execution configuration. The main purpose is to ensure that the whole subsequent import process goes smoothly.
 
-    [User Document](/tidb-lightning/tidb-lightning-prechecks.md)
+    [User document](/tidb-lightning/tidb-lightning-prechecks.md)
 
 - **TiDB Lightning supports importing files of GBK character set**
 
     You can specify the character set of the source data file. TiDB Lightning will convert the source file from the specified character set to UTF-8 encoding during the import process.
 
-    [User Document](/tidb-lightning/tidb-lightning-configuration.md)
+    [User document](/tidb-lightning/tidb-lightning-configuration.md)
 
 - **Sync-diff-inspector improvement**
 
@@ -201,7 +201,7 @@ It is recommended that you create a least-privileged SQL user to access and sign
     - Reduce the memory consumption of TiDB nodes by nearly half during comparison
     - Optimize the user interface and display the progress bar during comparison
 
-    [User Document](/sync-diff-inspector/sync-diff-inspector-overview.md)
+    [User document](/sync-diff-inspector/sync-diff-inspector-overview.md)
 
 ### Diagnostic efficiency
 
@@ -222,9 +222,9 @@ It is recommended that you create a least-privileged SQL user to access and sign
 
     TiCDC provides the eventually consistent replication capability in disaster scenarios. When a disaster occurs in the primary TiDB cluster and the service cannot be resumed in a short period of time, TiCDC needs to provide the ability to ensure the consistency of data in the secondary cluster. Meanwhile, TiCDC needs to allow the business to quickly switch the traffic to the secondary cluster to avoid the database being unavailable for a long time and affecting the business.
 
-    This feature supports TiCDC to replicate incremental data from a TiDB cluster to the secondary relational database TiDB/Aurora/MySQL/MariaDB. In case the primary cluster crashes, TiCDC can recover the secondary cluster to a certain snapshot in the primary cluster within 30 minutes, given the condition that before disaster the replication status of TiCDC is normal and replication lag is small. It allows data loss of less than 5 minutes, that is, RPO <= 30min, and RTO <= 5min.
+    This feature supports TiCDC to replicate incremental data from a TiDB cluster to the secondary relational database TiDB/Aurora/MySQL/MariaDB. In case the primary cluster crashes, TiCDC can recover the secondary cluster to a certain snapshot in the primary cluster within 5 minutes, given the condition that before disaster the replication status of TiCDC is normal and replication lag is small. It allows data loss of less than 30 minutes, that is, RTO <= 5min, and RPO <= 30min.
 
-    [User Document](/ticdc/manage-ticdc.md)
+    [User document](/ticdc/manage-ticdc.md)
 
 - **TiCDC supports the HTTP protocol OpenAPI for managing TiCDC tasks**
 
@@ -242,15 +242,15 @@ It is recommended that you create a least-privileged SQL user to access and sign
 
     [User document](/dashboard/continuous-profiling.md)
 
-## Removed feature
-
-Starting from TiCDC v5.3.0, the cyclic replication feature between TiDB clusters (an experimental feature in v5.0.0) has been removed. If you have already used this feature to replicate data before upgrading TiCDC, the related data is not affected after the upgrade.
-
-### Telemetry
+## Telemetry
 
 TiDB adds the information to the telemetry report about whether or not the TEMPORARY TABLE feature is used. This does not include table names or table data.
 
 To learn more about telemetry and how to disable this behavior, refer to [Telemetry](/telemetry.md).
+
+## Removed feature
+
+Starting from TiCDC v5.3.0, the cyclic replication feature between TiDB clusters (an experimental feature in v5.0.0) has been removed. If you have already used this feature to replicate data before upgrading TiCDC, the related data is not affected after the upgrade.
 
 ## Improvements
 
@@ -275,9 +275,9 @@ To learn more about telemetry and how to disable this behavior, refer to [Teleme
 + PD
 
     - Add more types of write queries to QPS dimensions in the hotspot scheduler [#3869](https://github.com/tikv/pd/issues/3869)
-    - Support dynamically adjusting the retry limit of the balance region scheduler to improve the performance of the scheduler [#3744](https://github.com/tikv/pd/issues/3744)
+    - Support dynamically adjusting the retry limit of the balance Region scheduler to improve the performance of the scheduler [#3744](https://github.com/tikv/pd/issues/3744)
     - Update TiDB Dashboard to v2021.10.08.1 [#4070](https://github.com/tikv/pd/pull/4070)
-    - Support that the evict leader scheduler can schedule regions with unhealthy peers [#4093](https://github.com/tikv/pd/issues/4093)
+    - Support that the evict leader scheduler can schedule Regions with unhealthy peers [#4093](https://github.com/tikv/pd/issues/4093)
     - Speed up the exit process of schedulers [#4146](https://github.com/tikv/pd/issues/4146)
 
 + TiFlash
@@ -304,16 +304,16 @@ To learn more about telemetry and how to disable this behavior, refer to [Teleme
 
     + TiCDC
 
-        - Reduce the default value of the Kafka sink configuration item `MaxMessageBytes` from 64 MB to 1 MB to fix the issue that large messages are rejected by the Kafka Broker [#3104](https://github.com/pingcap/ticdc/pull/3104)
-        - Reduce memory usage in the replication pipeline [#2553](https://github.com/pingcap/ticdc/issues/2553)[#3037](https://github.com/pingcap/ticdc/pull/3037) [#2726](https://github.com/pingcap/ticdc/pull/2726)
-        - Optimize monitoring items and alert rules to improve observability of synchronous links, memory GC, and stock data scanning processes [#2735](https://github.com/pingcap/ticdc/pull/2735) [#1606](https://github.com/pingcap/ticdc/issues/1606) [#3000](https://github.com/pingcap/ticdc/pull/3000) [#2985](https://github.com/pingcap/ticdc/issues/2985) [#2156](https://github.com/pingcap/ticdc/issues/2156)
-        - When the sync task status is normal, no more historical error messages are displayed to avoid misleading users [#2242](https://github.com/pingcap/ticdc/issues/2242)
+        - Reduce the default value of the Kafka sink configuration item `MaxMessageBytes` from 64 MB to 1 MB to fix the issue that large messages are rejected by the Kafka Broker [#3104](https://github.com/pingcap/tiflow/pull/3104)
+        - Reduce memory usage in the replication pipeline [#2553](https://github.com/pingcap/tiflow/issues/2553)[#3037](https://github.com/pingcap/tiflow/pull/3037) [#2726](https://github.com/pingcap/tiflow/pull/2726)
+        - Optimize monitoring items and alert rules to improve observability of synchronous links, memory GC, and stock data scanning processes [#2735](https://github.com/pingcap/tiflow/pull/2735) [#1606](https://github.com/pingcap/tiflow/issues/1606) [#3000](https://github.com/pingcap/tiflow/pull/3000) [#2985](https://github.com/pingcap/tiflow/issues/2985) [#2156](https://github.com/pingcap/tiflow/issues/2156)
+        - When the sync task status is normal, no more historical error messages are displayed to avoid misleading users [#2242](https://github.com/pingcap/tiflow/issues/2242)
 
 ## Bug Fixes
 
 + TiDB
 
-    - Fix an error that occurs during execution caused by the wrong execution plan. The wrong execution plan is caused by the shallow copy of schema columns when pushing down the aggregation operators on partitioned tables. [#27797](https://github.com/pingcap/tidb/issues/27797) [#26554](https://github.com/pingcap/tidb/issues/26554)
+    - Fix an error that occurs during execution caused by the wrong execution plan. The wrong execution plan is caused by the shallow copy of schema columns when pushing down the aggregation operators on partitioned tables [#27797](https://github.com/pingcap/tidb/issues/27797) [#26554](https://github.com/pingcap/tidb/issues/26554)
     - Fix the issue that plan-cache cannot detect changes of unsigned flags [#28254](https://github.com/pingcap/tidb/issues/28254)
     - Fix the wrong partition pruning when the partition function is out of range [#28233](https://github.com/pingcap/tidb/issues/28233)
     - Fix the issue that planner might cache invalid plans for `join` in some cases [#28087](https://github.com/pingcap/tidb/issues/28087)
@@ -325,12 +325,12 @@ To learn more about telemetry and how to disable this behavior, refer to [Teleme
     - Fix the authenticating issue when connecting to MySQL 5.1 or an older client version  [#27855](https://github.com/pingcap/tidb/issues/27855)
     - Fix the issue that auto analyze might be triggered out of the specified time when a new index is added [#28698](https://github.com/pingcap/tidb/issues/28698)
     - Fix a bug that setting any session variable invalidates `tidb_snapshot` [#28683](https://github.com/pingcap/tidb/pull/28683)
-    - Fix a bug that BR is not working for clusters with many missing-peer regions [#27534](https://github.com/pingcap/tidb/issues/27534)
+    - Fix a bug that BR is not working for clusters with many missing-peer Regions [#27534](https://github.com/pingcap/tidb/issues/27534)
     - Fix  the unexpected error like `tidb_cast to Int32 is not supported` when the unsupported `cast` is pushed down to TiFlash [#23907](https://github.com/pingcap/tidb/issues/23907)
     - Fix the issue that `DECIMAL overflow` is missing in the `%s value is out of range in '%s'`error message  [#27964](https://github.com/pingcap/tidb/issues/27964)
     - Fix a bug that the availability detection of MPP node does not work in some corner cases [#3118](https://github.com/pingcap/tics/issues/3118)
     - Fix the `DATA RACE` issue when assigning `MPP task ID` [#27952](https://github.com/pingcap/tidb/issues/27952)
-    - Fix the `INDEX OUT OF RANGE` error for a MPP query after deleting an empty `dual table`. [#28250](https://github.com/pingcap/tidb/issues/28250)
+    - Fix the `INDEX OUT OF RANGE` error for a MPP query after deleting an empty `dual table` [#28250](https://github.com/pingcap/tidb/issues/28250)
     - Fix the issue of false positive error log `invalid cop task execution summaries length` for MPP queries [#1791](https://github.com/pingcap/tics/issues/1791)
     - Fix the issue of error log `cannot found column in Schema column` for MPP queries [#28149](https://github.com/pingcap/tidb/pull/28149)
     - Fix the issue that TiDB might panic when TiFlash is shuting down [#28096](https://github.com/pingcap/tidb/issues/28096)
@@ -347,11 +347,11 @@ To learn more about telemetry and how to disable this behavior, refer to [Teleme
     - Fix the issue of a wrong way to check for overflow in `plus` expression [#26977](https://github.com/pingcap/tidb/issues/26977)
     - Fix the issue of `data too long` error when dumping statistics from the table with `new collation` data [#27024](https://github.com/pingcap/tidb/issues/27024)
     - Fix the issue that the retried transactions' statements are not included in `TIDB_TRX` [#28670](https://github.com/pingcap/tidb/pull/28670)
-    - Fix the wrong default value of the `plugin_dir` configuration [28084](https://github.com/pingcap/tidb/issues/28084)
+    - Fix the wrong default value of the `plugin_dir` configuration [#28084](https://github.com/pingcap/tidb/issues/28084)
 
 + TiKV
 
-    - Fix the issue of unavailable TiKV caused by Raftstore deadlock when migrating Regions. The workaround is to disable the scheduling and restart the unavailable TiKV. [#10909](https://github.com/tikv/tikv/issues/10909)
+    - Fix the issue of unavailable TiKV caused by Raftstore deadlock when migrating Regions. The workaround is to disable the scheduling and restart the unavailable TiKV [#10909](https://github.com/tikv/tikv/issues/10909)
     - Fix the issue that CDC adds scan retries frequently due to the Congest error [#11082](https://github.com/tikv/tikv/issues/11082)
     - Fix the issue that the Raft connection is broken when the channel is full [#11047](https://github.com/tikv/tikv/issues/11047)
     - Fix the issue that batch messages are too large in Raft client implementation [#9714](https://github.com/tikv/tikv/issues/9714)
@@ -367,10 +367,10 @@ To learn more about telemetry and how to disable this behavior, refer to [Teleme
 
     - Fix the issue that PD incorrectly delete the peers with data and in pending status because the number of peers exceeds the number of configured peers [#4045](https://github.com/tikv/pd/issues/4045)
     - Fix the issue that PD does not fix down peers in time [#4077](https://github.com/tikv/pd/issues/4077)
-    - Fix the issue that the scatter range scheduler cannot schedule empty regions [#4118](https://github.com/tikv/pd/pull/4118)
+    - Fix the issue that the scatter range scheduler cannot schedule empty Regions [#4118](https://github.com/tikv/pd/pull/4118)
     - Fix the issue that the key manager cost too much CPU [#4071](https://github.com/tikv/pd/issues/4071)
-    - Fix the data race issue that might occur when setting configurations of hot region scheduler [#4159](https://github.com/tikv/pd/issues/4159)
-    - Fix slow leader election caused by stucked region syncer[#3936](https://github.com/tikv/pd/issues/3936)
+    - Fix the data race issue that might occur when setting configurations of hot Region scheduler [#4159](https://github.com/tikv/pd/issues/4159)
+    - Fix slow leader election caused by stucked Region syncer [#3936](https://github.com/tikv/pd/issues/3936)
 
 + TiFlash
 
@@ -389,15 +389,15 @@ To learn more about telemetry and how to disable this behavior, refer to [Teleme
 
     + TiCDC
 
-        - Fix the issue that TiCDC replication task might terminate when the upstream TiDB instance unexpectedly exits [#3061](https://github.com/pingcap/ticdc/issues/3061)
-        - Fix the issue that TiCDC process might panic when TiKV sends duplicate requests to the same Region [#2386](https://github.com/pingcap/ticdc/issues/2386)
-        - Fix unnecessary CPU consumption when verifying downstream TiDB/MySQL availability [#3073](https://github.com/pingcap/ticdc/issues/3073)
-        - Fix the issue that the volume of Kafka messages generated by TiCDC is not constrained by `max-message-size` [#2962](https://github.com/pingcap/ticdc/issues/2962)
-        - Fix the issue that TiCDC sync task might pause when an error occurs during writing a Kafka message [#2978](https://github.com/pingcap/ticdc/issues/2978)
-        - Fix the issue that some partitioned tables without valid indexes might be ignored when `force-replicate` is enabled [#2834](https://github.com/pingcap/ticdc/issues/2834)
-        - Fix the issue that scanning stock data might fail due to TiKV performing GC when scanning stock data takes too long [#2470](https://github.com/pingcap/ticdc/issues/2470)
-        - Fix a possible panic issue when encoding some types of columns into Open Protocol format [#2758](https://github.com/pingcap/ticdc/issues/2758)
-        - Fix a possible panic issue when encoding some types of columns into Avro format [#2648](https://github.com/pingcap/ticdc/issues/2648)
+        - Fix the issue that TiCDC replication task might terminate when the upstream TiDB instance unexpectedly exits [#3061](https://github.com/pingcap/tiflow/issues/3061)
+        - Fix the issue that TiCDC process might panic when TiKV sends duplicate requests to the same Region [#2386](https://github.com/pingcap/tiflow/issues/2386)
+        - Fix unnecessary CPU consumption when verifying downstream TiDB/MySQL availability [#3073](https://github.com/pingcap/tiflow/issues/3073)
+        - Fix the issue that the volume of Kafka messages generated by TiCDC is not constrained by `max-message-size` [#2962](https://github.com/pingcap/tiflow/issues/2962)
+        - Fix the issue that TiCDC sync task might pause when an error occurs during writing a Kafka message [#2978](https://github.com/pingcap/tiflow/issues/2978)
+        - Fix the issue that some partitioned tables without valid indexes might be ignored when `force-replicate` is enabled [#2834](https://github.com/pingcap/tiflow/issues/2834)
+        - Fix the issue that scanning stock data might fail due to TiKV performing GC when scanning stock data takes too long [#2470](https://github.com/pingcap/tiflow/issues/2470)
+        - Fix a possible panic issue when encoding some types of columns into Open Protocol format [#2758](https://github.com/pingcap/tiflow/issues/2758)
+        - Fix a possible panic issue when encoding some types of columns into Avro format [#2648](https://github.com/pingcap/tiflow/issues/2648)
 
     + TiDB Binlog
 
