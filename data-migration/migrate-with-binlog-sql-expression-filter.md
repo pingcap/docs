@@ -7,10 +7,10 @@ summary: Learn how to filter binlog events using SQL expressions.
 
 This document introduces how to filter binlog events using SQL expressions when you use DM to perform continuous incremental data replication. For the detailed replication instruction, refer to the following documents:
 
-- [Migrate MySQL data of less than 1 TB to TiDB](/data-migration/migrate-mysql-tidb-less-tb.md)
-- [Migrate MySQL data of more than 1 TB to TiDB](/data-migration/migrate-mysql-tidb-above-tb.md)
-- [Merge and migrate MySQL shards of less than 1 TB to TiDB](/data-migration/migrate-sharding-mysql-tidb-less-tb.md)
-- [Merge and migrate MySQL shards of more than 1 TB to TiDB](/data-migration/migrate-sharding-mysql-tidb-above-tb.md)
+- [Migrate MySQL of Small Datasets to TiDB](/data-migration/migrate-mysql-tidb-less-tb.md)
+- [Migrate MySQL of Large Datasets to TiDB](/data-migration/migrate-mysql-tidb-above-tb.md)
+- [Migrate and Merge MySQL Shards of Small Datasets to TiDB](/data-migration/migrate-sharding-mysql-tidb-less-tb.md)
+- [Migrate and Merge MySQL Shards of Large Datasets to TiDB](/data-migration/migrate-sharding-mysql-tidb-above-tb.md)
 
 When performing incremental data replication, you can use the [Binlog Event Filter](/data-migration/migrate-with-binlog-event-filter.md) to filter certain types of binlog events. For example, you can choose not to replicate `DELETE` events to the downstream for the purposes like archiving and auditing. However, the Binlog Event Filter cannot determine whether to filter the `DELETE` event of a row that requires finer granularity.
 
@@ -67,7 +67,7 @@ MySQL [test]> select * from tbl;
 >
 > - You can configure `update-old-value-expr` and `update-new-value-expr` together.
 > - When `update-old-value-expr` and `update-new-value-expr` are configured together, the rows whose "update + old values" meet `update-old-value-expr` and whose "update + new values" meet `update-new-value-expr` are filtered.
-> - When one of `update-old-value-expr` and `update-new-value-expr` is configured, the configured expression determines whether to filter the **entire row change**, which means that the deletion of old values and the insertion of new values are filtered as a whole. 
+> - When one of `update-old-value-expr` and `update-new-value-expr` is configured, the configured expression determines whether to filter the **entire row change**, which means that the deletion of old values and the insertion of new values are filtered as a whole.
 
 You can use the SQL expression on one column or on multiple columns. You can also use the SQL functions supported by TiDB, such as `c % 2 = 0`, `a*a + b*b = c*c`, and `ts > NOW()`.
 
