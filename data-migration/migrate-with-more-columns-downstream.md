@@ -7,10 +7,10 @@ summary: Learn how to migrate data to a downstream TiDB table with more columns 
 
 This document provides the additional steps to be taken when you migrate data to a downstream TiDB table with more columns than the corresponding upstream table. For regular migration steps, see the following migration scenarios:
 
-- [Migrate Data below Terabytes from MySQL to TiDB](/data-migration/migrate-mysql-tidb-less-tb.md)
-- [Migrate Data above Terabytes from MySQL to TiDB](/data-migration/migrate-mysql-tidb-above-tb.md)
-- [Import and Merge Small MySQL Sharding Schemas and Sharding Tables to TiDB (Less Than 1 TiB)](/data-migration/migrate-shared-mysql-tidb-less-tb.md)
-- [Import and Merge Large MySQL Sharding Schemas and Sharding Tables to TiDB (Greater Than 1 TiB)](/data-migration/migrate-shared-mysql-tidb-above-tb.md)
+- [Migrate MySQL of Small Datasets to TiDB](/data-migration/migrate-mysql-tidb-less-tb.md)
+- [Migrate MySQL of Large Datasets to TiDB](/data-migration/migrate-mysql-tidb-above-tb.md)
+- [Migrate and Merge MySQL Shards of Small Datasets to TiDB](/data-migration/migrate-shared-mysql-tidb-less-tb.md)
+- [Migrate and Merge MySQL Shards of Large Datasets to TiDB](/data-migration/migrate-shared-mysql-tidb-above-tb.md)
 
 ## Using DM to migrate data to a downstream TiDB table with more columns
 
