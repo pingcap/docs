@@ -59,7 +59,7 @@ file = "tidb-lightning.log"
 
 [tikv-importer]
 # "local"：Default. The local backend is used to import large volumes of data (1 TB or above). During the import, the target TiDB cluster cannot provide any service.
-# "tidb"：The "tidb" backend can also be used to import small volumes of data (below 1 TB). During the import, the target TiDB cluster can provide service normally. For the information about backend mode, refer to [TiDB Lightning Backends](https://docs.pingcap.com/tidb/stable/tidb-lightning-backends)
+# "tidb"：The "tidb" backend can also be used to import small volumes of data (below 1 TB). During the import, the target TiDB cluster can provide service normally. For the information about backend mode, refer to https://docs.pingcap.com/tidb/stable/tidb-lightning-backends.
 # Sets the temporary storage directory for the sorted key-value files. The directory must be empty, and the storage space must be enough to store the largest single table from the data source. For better import performance, it is recommended to use a directory different from `data-source-dir` and use flash storage and exclusive I/O for the directory.
 sorted-kv-dir = "${sorted-kv-dir}"
 
