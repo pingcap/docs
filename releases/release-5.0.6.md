@@ -35,7 +35,7 @@ TiDB version: 5.0.6
 + PD
 
     (dup) - Speed up the exit process of schedulers [#4146](https://github.com/tikv/pd/issues/4146)
-    - Make the scheduling results of `scatter-range-scheduler` scheduler are more even by allowing the scheduler to schedule empty Regions and fix the configurations of the scheduler [#4497](https://github.com/tikv/pd/issues/4497)
+    - Make the scheduling results of the `scatter-range-scheduler` scheduler more even by allowing the scheduler to schedule empty Regions and fix the configurations of the scheduler [#4497](https://github.com/tikv/pd/issues/4497)
 
 + Tools
 
