@@ -14,7 +14,7 @@ Generally speaking, affected by the information such as the number of table stru
 ## Prerequisites
 
 - [Deploy a DM Cluster Using TiUP](https://docs.pingcap.com/tidb-data-migration/stable/deploy-a-dm-cluster-using-tiup)
-- [Grant the source database and target database privileges required for DM](https://docs.pingcap.com/tidb-data-migration/stable/dm-worker-intro)
+- [Required privileges for the source database and the target database of DM](https://docs.pingcap.com/tidb-data-migration/stable/dm-worker-intro)
 
 ## Step 1. Create the data source
 
