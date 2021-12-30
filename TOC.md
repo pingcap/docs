@@ -47,8 +47,8 @@
     - [Migrate MySQL of Large Datasets](/data-migration/migrate-mysql-tidb-above-tb.md)
     - [Migrate and Merge MySQL Shards of Small Datasets](/data-migration/migrate-sharding-mysql-tidb-less-tb.md)
     - [Migrate and Merge MySQL Shards of Large Datasets](/data-migration/migrate-sharding-mysql-tidb-above-tb.md)
-    - [Migrate CSV Files](/data-migration/migrate-flat-file-tidb.md)
-    - [Migrate SQL Files](/data-migration/migrate-sql-file-tidb.md)
+    - [Migrate from CSV Files](/data-migration/migrate-flat-file-tidb.md)
+    - [Migrate from SQL Files](/data-migration/migrate-sql-file-tidb.md)
     - [Replicate Incremental Data between TiDB Clusters](/incremental-replication-between-clusters.md)
   - Advanced Migration
     - [Continuous Replication with gh-ost or pt-osc](/data-migration/migrate-with-pt-ghost.md)
