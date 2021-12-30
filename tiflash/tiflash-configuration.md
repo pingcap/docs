@@ -223,7 +223,7 @@ delta_index_cache_size = 0
     ## If you set it to `0`, the multi-thread optimization is disabled.
     snap-handle-pool-size = 4
 
-    ## Specifies the shortest interval at which Raft store persists WAL.
+    ## The shortest interval at which Raft store persists WAL.
     ## You can properly increase the latency to reduce IOPS usage.
     ## The default value is "4ms".
     ## If you set it to 0ms, the optimization is disabled.
