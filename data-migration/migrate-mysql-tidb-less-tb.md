@@ -5,7 +5,7 @@ summary: Learn how to migrate MySQL of small datasets to TiDB.
 
 # Migrate MySQL of Small Datasets to TiDB
 
-This document describes how to use TiDB Data Migration (hereinafter referred to as DM) to migrate MySQL of small datasets to TiDB in the full migration mode and incremental replication mode. "Small datasets" in this document usually mean data around or less than one TiB.
+This document describes how to use TiDB Data Migration (hereinafter referred to as DM) to migrate MySQL of small datasets to TiDB in the full migration mode and incremental replication mode. "Small datasets" in this document usually mean data around or less than 1 TiB.
 
 Generally speaking, affected by the information such as the number of table structure indexes, hardwares, and network environment, the migration rate varies from 30 to 50 GB/h. The migration process using DM is shown in the figure below.
 
@@ -23,16 +23,16 @@ First, create the `source1.yaml` file as follows:
 {{< copyable "" >}}
 
 ```yaml
-# # Must be unique.
+# The ID must be unique.
 source-id: "mysql-01"
 
-# Configures whether DM-worker uses the global transaction identifier (GTID) to pull binlogs. To enable this mode, the upstream MySQL must have enabled GTID. If the upstream MySQL has automatic source-replica switching, GTID mode is required.
+# Configures whether DM-worker uses the global transaction identifier (GTID) to pull binlogs. To enable GTID, the upstream MySQL must have enabled GTID. If the upstream MySQL has automatic source-replica switching, the GTID mode is required.
 enable-gtid: true
 
 from:
   host: "${host}"         # For example: 172.16.10.81
   user: "root"
-  password: "${password}" # Supported but not recommended to use plaintext password. It is recommended to use dmctl encrypt to encrypt the plaintext password before using it.
+  password: "${password}" # Plaintext password is supported but not recommended. It is recommended to use dmctl encrypt to encrypt the plaintext password before using the password.
   port: 3306
 ```
 
@@ -48,7 +48,7 @@ The parameters used in the command above are described as follows:
 
 |Parameter           |Description|
 |-              |-|
-|`--master-addr`  |The {advertise-addr} of any DM-master in the cluster where `dmctl` is to be connected. For example: 172.16.10.71:8261.
+|`--master-addr`  |The {advertise-addr} of any DM-master node in the cluster where `dmctl` is to connect. For example, 172.16.10.71:8261.
 |`operate-source create`|Load the data source to the DM cluster.|
 
 ## Step 2. Create the migration task
@@ -58,7 +58,7 @@ Create the `task1.yaml` file as follows:
 {{< copyable "" >}}
 
 ```yaml
-# Task name. Multiple tasks that are running at the same time must each have a unique name.
+# Task name. Each of the multiple tasks running at the same time must have a unique name.
 name: "test"
 # Task mode. Options are:
 # full: only performs full data migration.
@@ -70,17 +70,17 @@ target-database:
   host: "${host}"                   # For example: 172.16.10.83
   port: 4000
   user: "root"
-  password: "${password}"           # Supported but not recommended to use plaintext password. It is recommended to use `dmctl encrypt` to encrypt the plaintext password before using it.
+  password: "${password}"           # Plaintext password is supported but not recommended. It is recommended to use dmctl encrypt to encrypt the plaintext password before using the password.
 
 # The configuration of all MySQL instances of source database required for the current migration task.
 mysql-instances:
 -
   # The ID of an upstream instance or a replication group
   source-id: "mysql-01"
-  # The names of the block and allowlist configuration of the schema name or table name that is to be migrated. These names are used reference the global configuration of the block and allowlist. For the global configuration, refer to the `block-allow-list` configuration below.
+  # The names of the block and allowlist configuration of the schema name or table name that is to be migrated. These names are used to reference the global configuration of the block and allowlist. For the global configuration, refer to the `block-allow-list` configuration below.
   block-allow-list: "listA"
 
-# The global configuration of block and allow list. Each instance is referenced by a configuration item name.
+# The global configuration of blocklist and allowlist. Each instance is referenced by a configuration item name.
 block-allow-list:
   listA:                              # name
     do-tables:                        # The allowlist of upstream tables that need to be migrated.
@@ -91,9 +91,9 @@ block-allow-list:
 
 The above is the minimum task configuration to perform the migration. For more configuration items regarding the task, refer to [DM task complete configuration file introduction](https://docs.pingcap.com/zh/tidb-data-migration/stable/task-configuration-file-full/).
 
-## Step 3. Run the migration task
+## Step 3. Start the migration task
 
-To reduce the probability of subsequent errors, before starting the migration task, it is recommended to use the `check-task` command to check whether the configuration meets the requirements of DM configuration.
+To avoid errors, before starting the migration task, it is recommended to use the `check-task` command to check whether the configuration meets the requirements of DM configuration.
 
 {{< copyable "shell-regular" >}}
 
@@ -113,7 +113,7 @@ The parameters used in the command above are described as follows:
 
 |Parameter|Description|
 |-|-|
-|`--master-addr`|The {advertise-addr} of any DM-master in the cluster where `dmctl` is to be connected. For example: 172.16.10.71:8261.
+|`--master-addr`|The {advertise-addr} of any DM-master node in the cluster where `dmctl` is to connect. For example: 172.16.10.71:8261.
 |`start-task`|Start the migration task|
 
 If the task fails to start, after changing the configuration according to the returned result, you can run the `start-task task.yaml` command to restart the task. If you encounter problems, refer to [Handle Errors](https://docs.pingcap.com/tidb-data-migration/stable/error-handling/) and [FAQ](https://docs.pingcap.com/tidb-data-migration/stable/faq).
@@ -132,9 +132,9 @@ For a detailed interpretation of the results, refer to [Query Status](https://do
 
 ## Step 5. Monitor the task and view logs （optional)
 
-To view the history status of the migration task and other internal metrics, take the following steps.
+To view the historical status of the migration task and other internal metrics, take the following steps.
 
-If you have deployed Prometheus, Alertmanager, and Grafana when you deployed DM using TiUP, you can access Grafana using the IP address and port specified during the deployment. You can then select DM dashboard to view DM-related monitoring metrics.
+If you have deployed Prometheus, Alertmanager, and Grafana when deploying DM using TiUP, you can access Grafana using the IP address and port specified during the deployment. You can then select the DM dashboard to view DM-related monitoring metrics.
 
 - The log directory of DM-master: specified by the DM-master process parameter `--log-file`. If you deploy DM using TiUP, the log directory is `/dm-deploy/dm-master-8261/log/` by default.
 - The log directory of DM-worker: specified by the DM-worker process parameter `--log-file`. If you deploy DM using TiUP, the log directory is `/dm-deploy/dm-worker-8262/log/` by default.
