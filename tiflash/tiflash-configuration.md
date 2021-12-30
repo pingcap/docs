@@ -150,9 +150,9 @@ delta_index_cache_size = 0
     level = debug
     log = TiFlash log path
     errorlog = TiFlash error log path
-    ## The size of a single log file, "100M" is used by default.
+    ## Size of a single log file. The default value is `100M`.
     size = "100M"
-    ## The maximum number of log files to save, 10 is used by default.
+    ## Maximum number of log files to save. The default value is `10`.
     count = 10
 
 [raft]
