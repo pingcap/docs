@@ -40,15 +40,21 @@
     - [Test TiDB Using TPC-C](/benchmark/benchmark-tidb-using-tpcc.md)
 - Migrate
   - [Overview](/migration-overview.md)
-  - Migrate from MySQL
-    - [Migrate from Amazon Aurora MySQL Using TiDB Lightning](/migrate-from-aurora-using-lightning.md)
-    - [Migrate from MySQL SQL Files Using TiDB Lightning](/migrate-from-mysql-dumpling-files.md)
-    - [Migrate from Amazon Aurora MySQL Using DM](/migrate-from-aurora-mysql-database.md)
-  - Migrate from CSV Files
-    - [Use TiDB Lightning](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)
-    - [Use `LOAD DATA` Statement](/sql-statements/sql-statement-load-data.md)
-  - [Migrate from SQL Files](/migrate-from-mysql-dumpling-files.md)
-  - [Replicate Incremental Data between TiDB Clusters in Real Time](/incremental-replication-between-clusters.md)
+  - [Migration Tools](/migration-tools.md)
+  - Migration Scenarios
+    - [Migrate from Aurora](/data-migration/migrate-aurora-tidb-from-snapshot.md)
+    - [Migrate MySQL of Small Datasets](/data-migration/migrate-mysql-tidb-less-tb.md)
+    - [Migrate MySQL of Large Datasets](/data-migration/migrate-mysql-tidb-above-tb.md)
+    - [Migrate and Merge MySQL Shards of Small Datasets](/data-migration/migrate-sharding-mysql-tidb-less-tb.md)
+    - [Migrate and Merge MySQL Shards of Large Datasets](/data-migration/migrate-sharding-mysql-tidb-above-tb.md)
+    - [Migrate CSV Files](/data-migration/migrate-flat-file-tidb.md)
+    - [Migrate SQL Files](/data-migration/migrate-sql-file-tidb.md)
+    - [Replicate Incremental Data between TiDB Clusters](/incremental-replication-between-clusters.md)
+  - Advanced Migration
+    - [Continuous Replication with gh-ost or pt-osc](/data-migration/migrate-with-pt-ghost.md)
+    - [Filter Binlog Events](/data-migration/migrate-with-binlog-event-filter.md)
+    - [Filter Binlog Events Using SQL Expressions](/data-migration/migrate-with-binlog-sql-expression-filter.md)
+    - [Migrate to a Downstream Table with More Columns](/data-migration/migrate-with-more-columns-downstream.md)
 - Maintain
   - Upgrade
     - [Use TiUP (Recommended)](/upgrade-tidb-using-tiup.md)

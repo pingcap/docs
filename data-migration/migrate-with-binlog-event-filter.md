@@ -1,6 +1,6 @@
 ---
 title: Filter Binlog Events
-summary: Learn how to filter binlog events when migrating data
+summary: Learn how to filter binlog events when migrating data.
 ---
 
 # Filter Binlog Events
