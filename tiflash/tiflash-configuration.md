@@ -146,7 +146,7 @@ delta_index_cache_size = 0
     advertise-status-addr = The external access address of status-addr. If it is left empty, status-addr is used by default.
 
 [logger]
-    ## log level (available options: trace, debug, information, warning, error), debug is used by default.
+    ## log level (available options: trace, debug, information, warning, error). The default value is `debug`.
     level = debug
     log = The TiFlash log path.
     errorlog = The TiFlash error log path.
