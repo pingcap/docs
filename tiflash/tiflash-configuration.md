@@ -220,7 +220,7 @@ delta_index_cache_size = 0
 
     ## The number of threads that handle snapshots.
     ## The default number is `4`.
-    ## If you set it to 0, the multi-thread optimization is disabled.
+    ## If you set it to `0`, the multi-thread optimization is disabled.
     snap-handle-pool-size = 4
 
     ## Specifies the shortest interval at which Raft store persists WAL.
