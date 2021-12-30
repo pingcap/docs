@@ -70,18 +70,18 @@ In such cases, you can use the `operate-schema` command to set a table schema fo
     {{< copyable "shell-regular" >}}
 
     ```
-    tiup dmctl --master-addr ${advertise-addr} operate-schema set -s ${mysql-id} ${task-name} -d ${database-name} -t ${table-name} ${schema-file}
+    tiup dmctl --master-addr ${advertise-addr} operate-schema set -s ${source-id} ${task-name} -d ${database-name} -t ${table-name} ${schema-file}
     ```
 
     The descriptions of parameters in this command are as follows:
 
     |Parameter |Description|
     |- |-|
-    |-master-addr |Specifies the `{advertise-addr}` of any DM-master node of the cluster to which dmctl is to connect. `{advertise-addr}` indicates the address that DM-master advertises to the outside world.|
+    |-master-addr |Specifies the `${advertise-addr}` of any DM-master node in the cluster where dmctl is to be connected. `${advertise-addr}` indicates the address that DM-master advertises to the outside world.|
     |operate-schema set| Manually set the schema information.|
-    |-s | Specifies the source. `{mysql-id}` indicates the source ID of MySQL data. `{task-name}` indicates the name of the synchronization task defined in the `task.yaml` configuration file of the data migration task.|
-    |-d | Specifies the database. `{database-name}` indicates the name of the upstream database. |
-    |-t |Specifies table. `{table-name}` indicates the name of the upstream data table. `{schema-file}` indicates the table schema file to be set.|
+    |-s | Specifies the source. `${source-id}` indicates the source ID of MySQL data. `${task-name}` indicates the name of the synchronization task defined in the `task.yaml` configuration file of the data migration task.|
+    |-d | Specifies the database. `${database-name}` indicates the name of the upstream database. |
+    |-t |Specifies table. `${table-name}` indicates the name of the upstream data table. `${schema-file}` indicates the table schema file to be set.|
 
     For example:
 
