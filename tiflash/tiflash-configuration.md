@@ -218,7 +218,7 @@ delta_index_cache_size = 0
     ## The allowable number of threads that process Raft, which is the size of the Raftstore thread pool.
     store-pool-size = 4
 
-    ## Specifies the number of threads that handle snapshots.
+    ## The number of threads that handle snapshots.
     ## The default number is 4.
     ## If you set it to 0, the multi-thread optimization is disabled.
     snap-handle-pool-size = 4
