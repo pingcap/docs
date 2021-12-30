@@ -66,7 +66,7 @@ MySQL [test]> select * from tbl;
 > **Note:**
 >
 > - You can configure `update-old-value-expr` and `update-new-value-expr` together.
-> - When `update-old-value-expr` and `update-new-value-expr` are configured together, the rows whose "update + old values" meet `update-old-value-expr` and whose "update + new values" meet `update-new-value-expr` are filtered.
+> - When `update-old-value-expr` and `update-new-value-expr` are configured together, the rows whose "update + old values" meet `update-old-value-expr` **and** whose "update + new values" meet `update-new-value-expr` are filtered.
 > - When one of `update-old-value-expr` and `update-new-value-expr` is configured, the configured expression determines whether to filter the **entire row change**, which means that the deletion of old values and the insertion of new values are filtered as a whole.
 
 You can use the SQL expression on one column or on multiple columns. You can also use the SQL functions supported by TiDB, such as `c % 2 = 0`, `a*a + b*b = c*c`, and `ts > NOW()`.
