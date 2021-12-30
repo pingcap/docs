@@ -33,21 +33,28 @@
     - [Hybrid Topology](/hybrid-deployment-topology.md)
   - Install and Start
     - [Use TiUP (Recommended)](/production-deployment-using-tiup.md)
-    - [Deploy in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable)
+    - [Deploy in Kubernetes](/tidb-in-kubernetes.md)
   - [Verify Cluster Status](/post-installation-check.md)
   - Test Cluster Performance
     - [Test TiDB Using Sysbench](/benchmark/benchmark-tidb-using-sysbench.md)
     - [Test TiDB Using TPC-C](/benchmark/benchmark-tidb-using-tpcc.md)
 - Migrate
   - [Overview](/migration-overview.md)
-  - Migrate from MySQL
-    - [Migrate from Amazon Aurora MySQL Using TiDB Lightning](/migrate-from-aurora-using-lightning.md)
-    - [Migrate from Amazon Aurora MySQL Using DM](/migrate-from-aurora-mysql-database.md)
-  - Migrate from CSV Files
-    - [Use TiDB Lightning](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)
-    - [Use `LOAD DATA` Statement](/sql-statements/sql-statement-load-data.md)
-  - [Migrate Data from SQL Files to TiDB](data-migration/migrate-sql-file-tidb.md)
-  - [Replicate Incremental Data between TiDB Clusters in Real Time](/incremental-replication-between-clusters.md)
+  - [Migration Tools](/migration-tools.md)
+  - Migration Scenarios
+    - [Migrate from Aurora](/data-migration/migrate-aurora-tidb-from-snapshot.md)
+    - [Migrate MySQL of Small Datasets](/data-migration/migrate-mysql-tidb-less-tb.md)
+    - [Migrate MySQL of Large Datasets](/data-migration/migrate-mysql-tidb-above-tb.md)
+    - [Migrate and Merge MySQL Shards of Small Datasets](/data-migration/migrate-sharding-mysql-tidb-less-tb.md)
+    - [Migrate and Merge MySQL Shards of Large Datasets](/data-migration/migrate-sharding-mysql-tidb-above-tb.md)
+    - [Migrate from CSV Files](/data-migration/migrate-flat-file-tidb.md)
+    - [Migrate from SQL Files](/data-migration/migrate-sql-file-tidb.md)
+    - [Replicate Incremental Data between TiDB Clusters](/incremental-replication-between-clusters.md)
+  - Advanced Migration
+    - [Continuous Replication with gh-ost or pt-osc](/data-migration/migrate-with-pt-ghost.md)
+    - [Filter Binlog Events](/data-migration/migrate-with-binlog-event-filter.md)
+    - [Filter DML Events Using SQL Expressions](/data-migration/migrate-with-binlog-sql-expression-filter.md)
+    - [Migrate to a Downstream Table with More Columns](/data-migration/migrate-with-more-columns-downstream.md)
 - Maintain
   - Upgrade
     - [Use TiUP (Recommended)](/upgrade-tidb-using-tiup.md)
@@ -159,10 +166,26 @@
   - [Use Placement Rules](/configure-placement-rules.md)
   - [Use Load Base Split](/configure-load-base-split.md)
   - [Use Store Limit](/configure-store-limit.md)
-- TiDB Ecosystem Tools
+- TiDB Tools
   - [Overview](/ecosystem-tool-user-guide.md)
   - [Use Cases](/ecosystem-tool-user-case.md)
   - [Download](/download-ecosystem-tools.md)
+  - TiUP
+    - [Documentation Map](/tiup/tiup-documentation-guide.md)
+    - [Overview](/tiup/tiup-overview.md)
+    - [Terminology and Concepts](/tiup/tiup-terminology-and-concepts.md)
+    - [Manage TiUP Components](/tiup/tiup-component-management.md)
+    - [FAQ](/tiup/tiup-faq.md)
+    - [Troubleshooting Guide](/tiup/tiup-troubleshooting-guide.md)
+    - [Reference Guide](/tiup/tiup-reference.md)
+    - [Cluster Topology Reference](/tiup/tiup-cluster-topology-reference.md)
+    - [Mirror Reference Guide](/tiup/tiup-mirror-reference.md)
+    - TiUP Components
+      - [tiup-playground](/tiup/tiup-playground.md)
+      - [tiup-cluster](/tiup/tiup-cluster.md)
+      - [tiup-mirror](/tiup/tiup-mirror.md)
+      - [tiup-bench](/tiup/tiup-bench.md)
+  - [TiDB Operator](/tidb-operator-overview.md)
   - Backup & Restore (BR)
     - [BR Tool Overview](/br/backup-and-restore-tool.md)
     - [Use BR Command-line for Backup and Restoration](/br/use-br-command-line-tool.md)
@@ -205,6 +228,92 @@
     - [Monitor](/tidb-lightning/monitor-tidb-lightning.md)
     - [FAQ](/tidb-lightning/tidb-lightning-faq.md)
     - [Glossary](/tidb-lightning/tidb-lightning-glossary.md)
+  - TiDB Data Migration
+    - About TiDB Data Migration
+      - [DM Overview](/dm/dm-overview.md)
+      - Basic Features
+        - [Table Routing](/dm/dm-key-features.md#table-routing)
+        - [Block and Allow Lists](/dm/dm-key-features.md#block-and-allow-table-lists)
+        - [Binlog Event Filter](/dm/dm-key-features.md#binlog-event-filter)
+      - Advanced Features
+        - Merge and Migrate Data from Sharded Tables
+          - [Overview](/dm/feature-shard-merge.md)
+          - [Pessimistic Mode](/dm/feature-shard-merge-pessimistic.md)
+          - [Optimistic Mode](/dm/feature-shard-merge-optimistic.md)
+        - [Migrate from MySQL Databases that Use GH-ost/PT-osc](/dm/feature-online-ddl.md)
+        - [Filter Certain Row Changes Using SQL Expressions](/dm/feature-expression-filter.md)
+      - [DM Architecture](/dm/dm-arch.md)
+      - [Benchmarks](/dm/dm-benchmark-v5.3.0.md)
+    - Quick Start
+      - [Quick Start](/dm/quick-start-with-dm.md)
+      - [Deploy a DM cluster Using TiUP](/dm/deploy-a-dm-cluster-using-tiup.md)
+      - [Create a Data Source](/dm/quick-start-create-source.md)
+      - Data Migration Scenarios
+        - [Data Migration Scenario Overview](/dm/quick-create-migration-task.md)
+        - [Migrate Data from Multiple Data Sources to TiDB](/dm/usage-scenario-simple-migration.md)
+        - [Migrate Sharded Schemas and Tables to TiDB](/dm/usage-scenario-shard-merge.md)
+        - [Migrate Incremental Data to TiDB](/dm/usage-scenario-incremental-migration.md)
+        - [Migrate Tables when There Are More Columns Downstream](/dm/usage-scenario-downstream-more-columns.md)
+    - Deploy
+      - [Software and Hardware Requirements](/dm/dm-hardware-and-software-requirements.md)
+      - Deploy a DM Cluster
+        - [Use TiUP (Recommended)](/dm/deploy-a-dm-cluster-using-tiup.md)
+        - [Use TiUP Offline](/dm/deploy-a-dm-cluster-using-tiup-offline.md)
+        - [Use Binary](/dm/deploy-a-dm-cluster-using-binary.md)
+        - [Use Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/dev/deploy-tidb-dm)
+      - [Migrate Data Using DM](/dm/migrate-data-using-dm.md)
+      - [Test DM Performance](/dm/dm-performance-test.md)
+    - Maintain
+      - Tools
+        - [Maintain DM Clusters Using TiUP (Recommended)](/dm/maintain-dm-using-tiup.md)
+        - [Maintain DM Clusters Using dmctl](/dm/dmctl-introduction.md)
+        - [Maintain DM Clusters Using OpenAPI](/dm/dm-open-api.md)
+      - Cluster Upgrade
+        - [Manually Upgrade from v1.0.x to v2.0+](/dm/manually-upgrade-dm-1.0-to-2.0.md)
+      - [Manage Data Source](/dm/dm-manage-source.md)
+      - Manage a Data Migration Task
+        - [Task Configuration Guide](/dm/dm-task-configuration-guide.md)
+        - [Precheck a Task](/dm/dm-precheck.md)
+        - [Create a Task](/dm/dm-create-task.md)
+        - [Query Status](/dm/dm-query-status.md)
+        - [Pause a Task](/dm/dm-pause-task.md)
+        - [Resume a Task](/dm/dm-resume-task.md)
+        - [Stop a Task](/dm/dm-stop-task.md)
+        - [Export and Import Data Sources and Task Configuration of Clusters](/dm/dm-export-import-config.md)
+        - [Handle Failed DDL Statements](/dm/handle-failed-ddl-statements.md)
+      - [Manually Handle Sharding DDL Lock](/dm/manually-handling-sharding-ddl-locks.md)
+      - [Manage Schemas of Tables to be Migrated](/dm/dm-manage-schema.md)
+      - [Handle Alerts](/dm/dm-handle-alerts.md)
+      - [Daily Check](/dm/dm-daily-check.md)
+    - Usage Scenarios
+      - [Migrate from Aurora to TiDB](/dm/migrate-from-mysql-aurora.md)
+      - [Migrate when TiDB Tables Have More Columns](/dm/usage-scenario-downstream-more-columns.md)
+      - [Switch the MySQL Instance to Be Migrated](/dm/usage-scenario-master-slave-switch.md)
+    - Troubleshoot
+      - [Handle Errors](/dm/dm-error-handling.md)
+      - [Handle Performance Issues](/dm/dm-handle-performance-issues.md)
+    - Performance Tuning
+      - [Optimize Configuration](/dm/dm-tune-configuration.md)
+    - Reference
+      - Architecture
+        - [DM Architecture Overview](/dm/dm-overview.md)
+        - [DM-worker](/dm/dm-worker-intro.md)
+      - [Command-line Flags](/dm/dm-command-line-flags.md)
+      - Configuration
+        - [Overview](/dm/dm-config-overview.md)
+        - [DM-master Configuration](/dm/dm-master-configuration-file.md)
+        - [DM-worker Configuration](/dm/dm-worker-configuration-file.md)
+        - [Upstream Database Configuration](/dm/dm-source-configuration-file.md)
+        - [Data Migration Task Configuration](/dm/dm-task-configuration-guide.md)
+    - Secure
+      - [Enable TLS for DM Connections](/dm/dm-enable-tls.md)
+      - [Generate Self-signed Certificates](/dm/dm-generate-self-signed-certificates.md)
+      - [Monitoring Metrics](/dm/monitor-a-dm-cluster.md)
+      - [Alert Rules](/dm/dm-alert-rules.md)
+      - [Error Codes](/dm/dm-error-handling.md#handle-common-errors)
+    - [FAQ](/dm/dm-faq.md)
+    - [Glossary](/dm/dm-glossary.md)
+    - [Release Notes](/dm/dm-release-notes.md)
   - TiCDC
     - [Overview](/ticdc/ticdc-overview.md)
     - [Deploy](/ticdc/deploy-ticdc.md)
@@ -542,21 +651,6 @@
     - TiFlash
       - [Overview](/tiflash/tiflash-overview.md)
       - [Use TiFlash](/tiflash/use-tiflash.md)
-  - TiUP
-    - [Documentation Map](/tiup/tiup-documentation-guide.md)
-    - [Overview](/tiup/tiup-overview.md)
-    - [Terminology and Concepts](/tiup/tiup-terminology-and-concepts.md)
-    - [Manage TiUP Components](/tiup/tiup-component-management.md)
-    - [FAQ](/tiup/tiup-faq.md)
-    - [Troubleshooting Guide](/tiup/tiup-troubleshooting-guide.md)
-    - [Reference Guide](/tiup/tiup-reference.md)
-    - [Cluster Topology Reference](/tiup/tiup-cluster-topology-reference.md)
-    - [Mirror Reference Guide](/tiup/tiup-mirror-reference.md)
-    - TiUP Components
-      - [tiup-playground](/tiup/tiup-playground.md)
-      - [tiup-cluster](/tiup/tiup-cluster.md)
-      - [tiup-mirror](/tiup/tiup-mirror.md)
-      - [tiup-bench](/tiup/tiup-bench.md)
   - [Telemetry](/telemetry.md)
   - [Errors Codes](/error-codes.md)
   - [Table Filter](/table-filter.md)
@@ -594,6 +688,7 @@
     - [5.0 GA](/releases/release-5.0.0.md)
     - [5.0.0-rc](/releases/release-5.0.0-rc.md)
   - v4.0
+    - [4.0.16](/releases/release-4.0.16.md)
     - [4.0.15](/releases/release-4.0.15.md)
     - [4.0.14](/releases/release-4.0.14.md)
     - [4.0.13](/releases/release-4.0.13.md)
