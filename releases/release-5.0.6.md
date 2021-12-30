@@ -5,7 +5,7 @@ category: Releases
 
 # TiDB 5.0.6 Release Notes
 
-Release date: December 28, 2021
+Release date: December 31, 2021
 
 TiDB version: 5.0.6
 
@@ -40,21 +40,23 @@ TiDB version: 5.0.6
 + Tools
 
     + TiCDC
+
         (dup) - Optimize rate limiting control on TiKV reloads to reduce gPRC congestion during changefeed initialization [#3110](https://github.com/pingcap/ticdc/issues/3110)
         (dup) - Fix the issue that scanning stock data might fail due to TiKV performing GC when scanning stock data takes too long [#2470](https://github.com/pingcap/tiflow/issues/2470)
         (dup) - Fix the issue that changefeed does not fail fast enough when the ErrGCTTLExceeded error occurs [#3111](https://github.com/pingcap/ticdc/issues/3111)
         (dup) - Add a tick frequency limit to EtcdWorker to prevent frequent etcd writes from affecting PD services [#3112](https://github.com/pingcap/ticdc/issues/3112)
-        - Add a tick frequency limit to EtcdWorker to prevent frequent etcd writes from affecting PD services
-          [3112](https://github.com/pingcap/tiflow/issues/3112)
         (dup) - Fix OOM in container environments [#1798](https://github.com/pingcap/ticdc/issues/1798)
         - Add the default configuration for `config.Metadata.Timeout` in Kafka sink [#3352](https://github.com/pingcap/tiflow/issues/3352)
         - Set the default value of `max-message-bytes` to `10M`, to reduce the probability that Kafka messages cannot be sent [#3081](https://github.com/pingcap/tiflow/issues/3081)
-        - Add more monitoring metrics and alerts, including "no owner alert", "mounter row" , "table sink total row", and "buffer sink total row" [#4054](https://github.com/pingcap/tiflow/issues/4054) [#1606](https://github.com/pingcap/tiflow/issues/1606)
+        - Add more Promethous and Grafana monitoring metrics and alerts, including `no owner alert`, `mounter row`, `table sink total row`, and `buffer sink total row` [#4054](https://github.com/pingcap/tiflow/issues/4054) [#1606](https://github.com/pingcap/tiflow/issues/1606)
 
-    + (Backup & Restore) BR
+    + Backup & Restore (BR)
 
-        - Support retry after the PD request error and the TiKV I/O timeout error occur [#27787](https://github.com/pingcap/tidb/issues/27787)
+        - Retry BR tasks when encountering the PD request error or the TiKV I/O timeout error [#27787](https://github.com/pingcap/tidb/issues/27787)
 
+    + TiDB Lightning
+
+        - Support importing data into tables that have expression index or the index that depends on virtual generated columns [#1404](https://github.com/pingcap/br/issues/1404)
 ## Bug fixes
 
 + TiDB
@@ -152,7 +154,6 @@ TiDB version: 5.0.6
         - Fix the timezone error that occurs when the `cdc server` command runs on some Red Hat Enterprise Linux releases (such as 6.8 and 6.9) [#3584](https://github.com/pingcap/tiflow/issues/3584)
         - Fix the issue of the inaccurate `txn_batch_size` monitoring metric for Kafka sink [#3431](https://github.com/pingcap/tiflow/issues/3431)
         (dup) - Change the default value of Kafka Sink `partition-num` to 3 so that TiCDC distributes messages across Kafka partitions more evenly [#3337](https://github.com/pingcap/ticdc/issues/3337)
-        (dup) - Change the default value of Kafka Sink `partition-num` to 3 so that TiCDC distributes messages across Kafka partitions more evenly [#3337](https://github.com/pingcap/ticdc/issues/3337)
         (dup) - Fix the issue that `tikv_cdc_min_resolved_ts_no_change_for_1m` keeps alerting when there is no changefeed [#11017](https://github.com/tikv/tikv/issues/11017)
         (dup) - Optimize rate limiting control on TiKV reloads to reduce gPRC congestion during changefeed initialization [#3110](https://github.com/pingcap/ticdc/issues/3110)
         - Fix the TiCDC panic issue that occurs when manually cleaning the task status in etcd [#2980](https://github.com/pingcap/tiflow/issues/2980)
@@ -160,8 +161,7 @@ TiDB version: 5.0.6
     + Backup & Restore (BR)
 
         (dup) - Improve the robustness of restoring [#27421](https://github.com/pingcap/tidb/issues/27421)
-        - Fix the error that occurs when TiDB Lightning imports a table with expression index in the Local-backend mode [#1404](https://github.com/pingcap/br/issues/1404)
-        - Fix the issue of inaccurate average speed in BR [#1405](https://github.com/pingcap/br/issues/1405)
+        - Fix a bug that the average speed is inaccurately calculated for backup and restore [#1405](https://github.com/pingcap/br/issues/1405)
 
     + Dumpling
 
