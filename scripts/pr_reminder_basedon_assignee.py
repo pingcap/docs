@@ -24,8 +24,8 @@ ran_huang_assignee = '+assignee%3Aran-huang'
 ran_huang_author = '+author%3Aran-huang'
 qiancai_assignee = '+assignee%3Aqiancai'
 qiancai_author = '+author%3Aqiancai'
-TomShawn_assignee = '+assignee%3ATomShawn'
-TomShawn_author = '+author%3ATomShawn'
+tomshawn_assignee = '+assignee%3ATomShawn'
+tomshawn_author = '+author%3ATomShawn'
 
 
 
@@ -80,8 +80,8 @@ v5.4 发版文档，中文文档截止日期 2021-01-07，英文文档截止日�
 
 - TomShawn
 
-    - docs-cn：有 {TomShawn-zh-assignee-open} 个未合源语 PR 待处理，有 {TomShawn-zh-assignee-close} 个已合源语 PR 待翻译，已翻译了 {TomShawn-zh-author-open} 个 PR 未合并
-    - docs：有 {TomShawn-en-assignee-open} 个未合源语 PR 待处理，有 {TomShawn-en-assignee-close} 个已合源语 PR 待翻译，已翻译了 {TomShawn-en-author-open} 个 PR 未合并
+    - docs-cn：有 {tomshawn-zh-assignee-open} 个未合源语 PR 待处理，有 {tomshawn-zh-assignee-close} 个已合源语 PR 待翻译，已翻译了 {tomshawn-zh-author-open} 个 PR 未合并
+    - docs：有 {tomshawn-en-assignee-open} 个未合源语 PR 待处理，有 {tomshawn-en-assignee-close} 个已合源语 PR 待翻译，已翻译了 {tomshawn-en-author-open} 个 PR 未合并
 *************************************************
 '''
 
@@ -119,12 +119,12 @@ if __name__ == "__main__":
         'qiancai-en-assignee-open': get_pr_no(docs_url + open_url + qiancai_assignee + v54),
         'qiancai-en-assignee-close': get_pr_no(docs_url + close_url + qiancai_assignee + v54),
         'qiancai-en-author-open': get_pr_no(docs_url + open_url + qiancai_author +v54),
-        'TomShawn-zh-assignee-open': get_pr_no(docs_cn_url + open_url + TomShawn_assignee + v54),
-        'TomShawn-zh-assignee-close': get_pr_no(docs_cn_url + close_url + TomShawn_assignee + v54),
-        'TomShawn-zh-author-open': get_pr_no(docs_cn_url + open_url + TomShawn_author + v54),
-        'TomShawn-en-assignee-open': get_pr_no(docs_url + open_url + TomShawn_assignee + v54),
-        'TomShawn-en-assignee-close': get_pr_no(docs_url + close_url + TomShawn_assignee + v54),
-        'TomShawn-en-author-open': get_pr_no(docs_url + open_url + TomShawn_author + v54),
+        'tomshawn-zh-assignee-open': get_pr_no(docs_cn_url + open_url + tomshawn_assignee + v54),
+        'tomshawn-zh-assignee-close': get_pr_no(docs_cn_url + close_url + tomshawn_assignee + v54),
+        'tomshawn-zh-author-open': get_pr_no(docs_cn_url + open_url + tomshawn_author + v54),
+        'tomshawn-en-assignee-open': get_pr_no(docs_url + open_url + tomshawn_assignee + v54),
+        'tomshawn-en-assignee-close': get_pr_no(docs_url + close_url + tomshawn_assignee + v54),
+        'tomshawn-en-author-open': get_pr_no(docs_url + open_url + tomshawn_author + v54),
         'shichun-0415-zh-assignee-open_url': docs_cn_url + open_url + shichun_0415_assignee + v54,
         'shichun-0415-zh-assignee-close_url': docs_cn_url + close_url + shichun_0415_assignee + v54,
         'shichun-0415-zh-author-open_url': docs_cn_url + open_url + shichun_0415_author + v54,
@@ -155,12 +155,12 @@ if __name__ == "__main__":
         'qiancai-en-assignee-open_url': docs_url + open_url + qiancai_assignee + v54,
         'qiancai-en-assignee-close_url': docs_url + close_url + qiancai_assignee + v54,
         'qiancai-en-author-open_url': docs_url + open_url + qiancai_author + v54,
-        'TomShawn-zh-assignee-open_url': docs_cn_url + open_url + TomShawn_assignee + v54,
-        'TomShawn-zh-assignee-close_url': docs_cn_url + close_url + TomShawn_assignee + v54,
-        'TomShawn-zh-author-open_url': docs_cn_url + open_url + TomShawn_author + v54,
-        'TomShawn-en-assignee-open_url': docs_url + open_url + TomShawn_assignee + v54,
-        'TomShawn-en-assignee-close_url': docs_url + close_url + TomShawn_assignee + v54,
-        'TomShawn-en-author-open_url': docs_url + open_url + TomShawn_author + v54,
+        'tomshawn-zh-assignee-open_url': docs_cn_url + open_url + tomshawn_assignee + v54,
+        'tomshawn-zh-assignee-close_url': docs_cn_url + close_url + tomshawn_assignee + v54,
+        'tomshawn-zh-author-open_url': docs_cn_url + open_url + tomshawn_author + v54,
+        'tomshawn-en-assignee-open_url': docs_url + open_url + tomshawn_assignee + v54,
+        'tomshawn-en-assignee-close_url': docs_url + close_url + tomshawn_assignee + v54,
+        'tomshawn-en-author-open_url': docs_url + open_url + tomshawn_author + v54,
     }
 
     URL = 'https://open.feishu.cn/open-apis/bot/v2/hook/201ab84d-cb0c-4583-87c4-61450a7eefcc'
@@ -226,7 +226,7 @@ if __name__ == "__main__":
                             },
                             {
                                 "tag": "text",
-                                "text": "有 ${en-jin19-zh-assignee-close} 个已合源语 PR"
+                                "text": "，有 ${en-jin19-zh-assignee-close} 个已合源语 PR"
                             },
                             {
                                 "tag": "a",
@@ -270,6 +270,12 @@ if __name__ == "__main__":
                                 "tag": "a",
                                 "text": "未合并",
                                 "href": "${en-jin19-en-author-open_url}"
+                            }
+                        ],
+                        [
+                            {
+                                "tag": "text",
+                                "text": ""
                             }
                         ],
                         [
@@ -345,6 +351,12 @@ if __name__ == "__main__":
                         [
                             {
                                 "tag": "text",
+                                "text": ""
+                            }
+                        ],
+                        [
+                            {
+                                "tag": "text",
                                 "text": "- hfxsd"
                             }
                         ],
@@ -410,6 +422,12 @@ if __name__ == "__main__":
                                 "tag": "a",
                                 "text": "未合并",
                                 "href": "${hfxsd-en-author-open_url}"
+                            }
+                        ],
+                        [
+                            {
+                                "tag": "text",
+                                "text": ""
                             }
                         ],
                         [
@@ -485,6 +503,12 @@ if __name__ == "__main__":
                         [
                             {
                                 "tag": "text",
+                                "text": ""
+                            }
+                        ],
+                        [
+                            {
+                                "tag": "text",
                                 "text": "- qiancai"
                             }
                         ],
@@ -555,6 +579,12 @@ if __name__ == "__main__":
                         [
                             {
                                 "tag": "text",
+                                "text": ""
+                            }
+                        ],
+                        [
+                            {
+                                "tag": "text",
                                 "text": "- TomShawn"
                             }
                         ],
@@ -567,59 +597,59 @@ if __name__ == "__main__":
                         [
                             {
                                 "tag": "text",
-                                "text": "    - docs-cn：有 ${TomShawn-zh-assignee-open} 个未合源语 PR"
+                                "text": "    - docs-cn：有 ${tomshawn-zh-assignee-open} 个未合源语 PR"
                             },
                             {
                                 "tag": "a",
                                 "text": "待处理",
-                                "href": "${TomShawn-zh-assignee-open_url}"
+                                "href": "${tomshawn-zh-assignee-open_url}"
                             },
                             {
                                 "tag": "text",
-                                "text": "有 ${TomShawn-zh-assignee-close} 个已合源语 PR"
+                                "text": "有 ${tomshawn-zh-assignee-close} 个已合源语 PR"
                             },
                             {
                                 "tag": "a",
                                 "text": "待翻译",
-                                "href": "${TomShawn-zh-assignee-close_url}"
+                                "href": "${tomshawn-zh-assignee-close_url}"
                             },
                             {
                                 "tag": "text",
-                                "text": "，已翻译了 ${TomShawn-zh-author-open} 个 PR"
+                                "text": "，已翻译了 ${tomshawn-zh-author-open} 个 PR"
                             },
                             {
                                 "tag": "a",
                                 "text": "未合并",
-                                "href": "${TomShawn-zh-author-open_url}"
+                                "href": "${tomshawn-zh-author-open_url}"
                             }
                         ],
                         [
                             {
                                 "tag": "text",
-                                "text": "    - docs：有 ${TomShawn-en-assignee-open} 个未合源语 PR"
+                                "text": "    - docs：有 ${tomshawn-en-assignee-open} 个未合源语 PR"
                             },
                             {
                                 "tag": "a",
                                 "text": "待处理",
-                                "href": "${TomShawn-en-assignee-open_url}"
+                                "href": "${tomshawn-en-assignee-open_url}"
                             },
                             {
                                 "tag": "text",
-                                "text": "有 ${TomShawn-en-assignee-close} 个已合源语 PR"
+                                "text": "有 ${tomshawn-en-assignee-close} 个已合源语 PR"
                             },
                             {
                                 "tag": "a",
                                 "text": "待翻译",
-                                "href": "${TomShawn-en-assignee-close_url}"
+                                "href": "${tomshawn-en-assignee-close_url}"
                             },
                             {
                                 "tag": "text",
-                                "text": "，已翻译了 ${TomShawn-en-author-open} 个 PR"
+                                "text": "，已翻译了 ${tomshawn-en-author-open} 个 PR"
                             },
                             {
                                 "tag": "a",
                                 "text": "未合并",
-                                "href": "${TomShawn-en-author-open_url}"
+                                "href": "${tomshawn-en-author-open_url}"
                             }
                         ]
                     ]
