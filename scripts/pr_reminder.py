@@ -200,7 +200,7 @@ if __name__ == "__main__":
     # print(report)
 
     # Get bot webhook from the environment variables
-    URL = sys.argv[1]
+    URL = 'https://open.feishu.cn/open-apis/bot/v2/hook/201ab84d-cb0c-4583-87c4-61450a7eefcc'
 
     d = Template("""{
         "msg_type": "post",
