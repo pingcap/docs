@@ -28,7 +28,6 @@ tomshawn_assignee = '+assignee%3ATomShawn'
 tomshawn_author = '+author%3ATomShawn'
 
 
-
 def get_pr_no(url):
 
     page_text = requests.get(url=url).text
@@ -89,78 +88,78 @@ if __name__ == "__main__":
 
     data = {
         'date': datetime.utcnow().strftime('%Y-%m-%d'),
-        'shichun-0415-zh-assignee-open': get_pr_no(docs_cn_url + open_url + shichun_0415_assignee + v54),
-        'shichun-0415-zh-assignee-close': get_pr_no(docs_cn_url + close_url + shichun_0415_assignee + v54),
-        'shichun-0415-zh-author-open': get_pr_no(docs_cn_url + open_url + shichun_0415_author + v54),
-        'shichun-0415-en-assignee-open': get_pr_no(docs_url + open_url + shichun_0415_assignee + v54),
-        'shichun-0415-en-assignee-close': get_pr_no(docs_url + close_url + shichun_0415_assignee + v54),
-        'shichun-0415-en-author-open': get_pr_no(docs_url + open_url + shichun_0415_author + v54),
-        'en-jin19-zh-assignee-open': get_pr_no(docs_cn_url + open_url + en_jin19_assignee + v54),
-        'en-jin19-zh-assignee-close': get_pr_no(docs_cn_url + close_url + en_jin19_assignee + v54),
-        'en-jin19-zh-author-open': get_pr_no(docs_cn_url + open_url + en_jin19_author + v54),
-        'en-jin19-en-assignee-open': get_pr_no(docs_url + open_url + en_jin19_assignee + v54),
-        'en-jin19-en-assignee-close': get_pr_no(docs_url + close_url + en_jin19_assignee + v54),
-        'en-jin19-en-author-open': get_pr_no(docs_url + open_url + en_jin19_author + v54),
-        'hfxsd-zh-assignee-open': get_pr_no(docs_cn_url + open_url + hfxsd_assignee + v54),
-        'hfxsd-zh-assignee-close': get_pr_no(docs_cn_url + close_url + hfxsd_assignee + v54),
-        'hfxsd-zh-author-open': get_pr_no(docs_cn_url + open_url + hfxsd_author + v54),
-        'hfxsd-en-assignee-open': get_pr_no(docs_url + open_url + hfxsd_assignee + v54),
-        'hfxsd-en-assignee-close': get_pr_no(docs_url + close_url + hfxsd_assignee + v54),
-        'hfxsd-en-author-open': get_pr_no(docs_url + open_url + hfxsd_author + v54),
-        'ran-huang-zh-assignee-open': get_pr_no(docs_cn_url + open_url + ran_huang_assignee + v54),
-        'ran-huang-zh-assignee-close': get_pr_no(docs_cn_url + close_url + ran_huang_assignee + v54),
-        'ran-huang-zh-author-open': get_pr_no(docs_cn_url + open_url + ran_huang_author + v54),
-        'ran-huang-en-assignee-open': get_pr_no(docs_url + open_url + ran_huang_assignee + v54),
-        'ran-huang-en-assignee-close': get_pr_no(docs_url + close_url + ran_huang_assignee + v54),
-        'ran-huang-en-author-open': get_pr_no(docs_url + open_url + ran_huang_author + v54),
-        'qiancai-zh-assignee-open': get_pr_no(docs_cn_url + open_url + qiancai_assignee + v54),
-        'qiancai-zh-assignee-close': get_pr_no(docs_cn_url + close_url + qiancai_assignee + v54),
-        'qiancai-zh-author-open': get_pr_no(docs_cn_url + open_url + qiancai_author +v54),
-        'qiancai-en-assignee-open': get_pr_no(docs_url + open_url + qiancai_assignee + v54),
-        'qiancai-en-assignee-close': get_pr_no(docs_url + close_url + qiancai_assignee + v54),
-        'qiancai-en-author-open': get_pr_no(docs_url + open_url + qiancai_author +v54),
-        'tomshawn-zh-assignee-open': get_pr_no(docs_cn_url + open_url + tomshawn_assignee + v54),
-        'tomshawn-zh-assignee-close': get_pr_no(docs_cn_url + close_url + tomshawn_assignee + v54),
-        'tomshawn-zh-author-open': get_pr_no(docs_cn_url + open_url + tomshawn_author + v54),
-        'tomshawn-en-assignee-open': get_pr_no(docs_url + open_url + tomshawn_assignee + v54),
-        'tomshawn-en-assignee-close': get_pr_no(docs_url + close_url + tomshawn_assignee + v54),
-        'tomshawn-en-author-open': get_pr_no(docs_url + open_url + tomshawn_author + v54),
-        'shichun-0415-zh-assignee-open_url': docs_cn_url + open_url + shichun_0415_assignee + v54,
-        'shichun-0415-zh-assignee-close_url': docs_cn_url + close_url + shichun_0415_assignee + v54,
-        'shichun-0415-zh-author-open_url': docs_cn_url + open_url + shichun_0415_author + v54,
-        'shichun-0415-en-assignee-open_url': docs_url + open_url + shichun_0415_assignee + v54,
-        'shichun-0415-en-assignee-close_url': docs_url + close_url + shichun_0415_assignee + v54,
-        'shichun-0415-en-author-open_url': docs_url + open_url + shichun_0415_author + v54,
-        'en-jin19-zh-assignee-open_url': docs_cn_url + open_url + en_jin19_assignee + v54,
-        'en-jin19-zh-assignee-close_url': docs_cn_url + close_url + en_jin19_assignee + v54,
-        'en-jin19-zh-author-open_url': docs_cn_url + open_url + en_jin19_author + v54,
-        'en-jin19-en-assignee-open_url': docs_url + open_url + en_jin19_assignee + v54,
-        'en-jin19-en-assignee-close_url': docs_url + close_url + en_jin19_assignee + v54,
-        'en-jin19-en-author-open_url': docs_url + open_url + en_jin19_author + v54,
-        'hfxsd-zh-assignee-open_url': docs_cn_url + open_url + hfxsd_assignee + v54,
-        'hfxsd-zh-assignee-close_url': docs_cn_url + close_url + hfxsd_assignee + v54,
-        'hfxsd-zh-author-open_url': docs_cn_url + open_url + hfxsd_author + v54,
-        'hfxsd-en-assignee-open_url': docs_url + open_url + hfxsd_assignee + v54,
-        'hfxsd-en-assignee-close_url': docs_url + close_url + hfxsd_assignee + v54,
-        'hfxsd-en-author-open_url': docs_url + open_url + hfxsd_author + v54,
-        'ran-huang-zh-assignee-open_url': docs_cn_url + open_url + ran_huang_assignee + v54,
-        'ran-huang-zh-assignee-close_url': docs_cn_url + close_url + ran_huang_assignee + v54,
-        'ran-huang-zh-author-open_url': docs_cn_url + open_url + ran_huang_author + v54,
-        'ran-huang-en-assignee-open_url': docs_url + open_url + ran_huang_assignee + v54,
-        'ran-huang-en-assignee-close_url': docs_url + close_url + ran_huang_assignee + v54,
-        'ran-huang-en-author-open_url': docs_url + open_url + ran_huang_author + v54,
-        'qiancai-zh-assignee-open_url': docs_cn_url + open_url + qiancai_assignee + v54,
-        'qiancai-zh-assignee-close_url': docs_cn_url + close_url + qiancai_assignee + v54,
-        'qiancai-zh-author-open_url': docs_cn_url + open_url + qiancai_author + v54,
-        'qiancai-en-assignee-open_url': docs_url + open_url + qiancai_assignee + v54,
-        'qiancai-en-assignee-close_url': docs_url + close_url + qiancai_assignee + v54,
-        'qiancai-en-author-open_url': docs_url + open_url + qiancai_author + v54,
-        'tomshawn-zh-assignee-open_url': docs_cn_url + open_url + tomshawn_assignee + v54,
-        'tomshawn-zh-assignee-close_url': docs_cn_url + close_url + tomshawn_assignee + v54,
-        'tomshawn-zh-author-open_url': docs_cn_url + open_url + tomshawn_author + v54,
-        'tomshawn-en-assignee-open_url': docs_url + open_url + tomshawn_assignee + v54,
-        'tomshawn-en-assignee-close_url': docs_url + close_url + tomshawn_assignee + v54,
-        'tomshawn-en-author-open_url': docs_url + open_url + tomshawn_author + v54,
+        'shichun_0415_zh_assignee_open': get_pr_no(docs_cn_url + open_url + shichun_0415_assignee + v54),
+        'shichun_0415_zh_assignee_close': get_pr_no(docs_cn_url + close_url + shichun_0415_assignee + v54),
+        'shichun_0415_zh_author_open': get_pr_no(docs_cn_url + open_url + shichun_0415_author + v54),
+        'shichun_0415_en_assignee_open': get_pr_no(docs_url + open_url + shichun_0415_assignee + v54),
+        'shichun_0415_en_assignee_close': get_pr_no(docs_url + close_url + shichun_0415_assignee + v54),
+        'shichun_0415_en_author_open': get_pr_no(docs_url + open_url + shichun_0415_author + v54),
+        'en_jin19_zh_assignee_open': get_pr_no(docs_cn_url + open_url + en_jin19_assignee + v54),
+        'en_jin19_zh_assignee_close': get_pr_no(docs_cn_url + close_url + en_jin19_assignee + v54),
+        'en_jin19_zh_author_open': get_pr_no(docs_cn_url + open_url + en_jin19_author + v54),
+        'en_jin19_en_assignee_open': get_pr_no(docs_url + open_url + en_jin19_assignee + v54),
+        'en_jin19_en_assignee_close': get_pr_no(docs_url + close_url + en_jin19_assignee + v54),
+        'en_jin19_en_author_open': get_pr_no(docs_url + open_url + en_jin19_author + v54),
+        'hfxsd_zh_assignee_open': get_pr_no(docs_cn_url + open_url + hfxsd_assignee + v54),
+        'hfxsd_zh_assignee_close': get_pr_no(docs_cn_url + close_url + hfxsd_assignee + v54),
+        'hfxsd_zh_author_open': get_pr_no(docs_cn_url + open_url + hfxsd_author + v54),
+        'hfxsd_en_assignee_open': get_pr_no(docs_url + open_url + hfxsd_assignee + v54),
+        'hfxsd_en_assignee_close': get_pr_no(docs_url + close_url + hfxsd_assignee + v54),
+        'hfxsd_en_author_open': get_pr_no(docs_url + open_url + hfxsd_author + v54),
+        'ran_huang_zh_assignee_open': get_pr_no(docs_cn_url + open_url + ran_huang_assignee + v54),
+        'ran_huang_zh_assignee_close': get_pr_no(docs_cn_url + close_url + ran_huang_assignee + v54),
+        'ran_huang_zh_author_open': get_pr_no(docs_cn_url + open_url + ran_huang_author + v54),
+        'ran_huang_en_assignee_open': get_pr_no(docs_url + open_url + ran_huang_assignee + v54),
+        'ran_huang_en_assignee_close': get_pr_no(docs_url + close_url + ran_huang_assignee + v54),
+        'ran_huang_en_author_open': get_pr_no(docs_url + open_url + ran_huang_author + v54),
+        'qiancai_zh_assignee_open': get_pr_no(docs_cn_url + open_url + qiancai_assignee + v54),
+        'qiancai_zh_assignee_close': get_pr_no(docs_cn_url + close_url + qiancai_assignee + v54),
+        'qiancai_zh_author_open': get_pr_no(docs_cn_url + open_url + qiancai_author +v54),
+        'qiancai_en_assignee_open': get_pr_no(docs_url + open_url + qiancai_assignee + v54),
+        'qiancai_en_assignee_close': get_pr_no(docs_url + close_url + qiancai_assignee + v54),
+        'qiancai_en_author_open': get_pr_no(docs_url + open_url + qiancai_author +v54),
+        'tomshawn_zh_assignee_open': get_pr_no(docs_cn_url + open_url + tomshawn_assignee + v54),
+        'tomshawn_zh_assignee_close': get_pr_no(docs_cn_url + close_url + tomshawn_assignee + v54),
+        'tomshawn_zh_author_open': get_pr_no(docs_cn_url + open_url + tomshawn_author + v54),
+        'tomshawn_en_assignee_open': get_pr_no(docs_url + open_url + tomshawn_assignee + v54),
+        'tomshawn_en_assignee_close': get_pr_no(docs_url + close_url + tomshawn_assignee + v54),
+        'tomshawn_en_author_open': get_pr_no(docs_url + open_url + tomshawn_author + v54),
+        'shichun_0415_zh_assignee_open_url': docs_cn_url + open_url + shichun_0415_assignee + v54,
+        'shichun_0415_zh_assignee_close_url': docs_cn_url + close_url + shichun_0415_assignee + v54,
+        'shichun_0415_zh_author_open_url': docs_cn_url + open_url + shichun_0415_author + v54,
+        'shichun_0415_en_assignee_open_url': docs_url + open_url + shichun_0415_assignee + v54,
+        'shichun_0415_en_assignee_close_url': docs_url + close_url + shichun_0415_assignee + v54,
+        'shichun_0415_en_author_open_url': docs_url + open_url + shichun_0415_author + v54,
+        'en_jin19_zh_assignee_open_url': docs_cn_url + open_url + en_jin19_assignee + v54,
+        'en_jin19_zh_assignee_close_url': docs_cn_url + close_url + en_jin19_assignee + v54,
+        'en_jin19_zh_author_open_url': docs_cn_url + open_url + en_jin19_author + v54,
+        'en_jin19_en_assignee_open_url': docs_url + open_url + en_jin19_assignee + v54,
+        'en_jin19_en_assignee_close_url': docs_url + close_url + en_jin19_assignee + v54,
+        'en_jin19_en_author_open_url': docs_url + open_url + en_jin19_author + v54,
+        'hfxsd_zh_assignee_open_url': docs_cn_url + open_url + hfxsd_assignee + v54,
+        'hfxsd_zh_assignee_close_url': docs_cn_url + close_url + hfxsd_assignee + v54,
+        'hfxsd_zh_author_open_url': docs_cn_url + open_url + hfxsd_author + v54,
+        'hfxsd_en_assignee_open_url': docs_url + open_url + hfxsd_assignee + v54,
+        'hfxsd_en_assignee_close_url': docs_url + close_url + hfxsd_assignee + v54,
+        'hfxsd_en_author_open_url': docs_url + open_url + hfxsd_author + v54,
+        'ran_huang_zh_assignee_open_url': docs_cn_url + open_url + ran_huang_assignee + v54,
+        'ran_huang_zh_assignee_close_url': docs_cn_url + close_url + ran_huang_assignee + v54,
+        'ran_huang_zh_author_open_url': docs_cn_url + open_url + ran_huang_author + v54,
+        'ran_huang_en_assignee_open_url': docs_url + open_url + ran_huang_assignee + v54,
+        'ran_huang_en_assignee_close_url': docs_url + close_url + ran_huang_assignee + v54,
+        'ran_huang_en_author_open_url': docs_url + open_url + ran_huang_author + v54,
+        'qiancai_zh_assignee_open_url': docs_cn_url + open_url + qiancai_assignee + v54,
+        'qiancai_zh_assignee_close_url': docs_cn_url + close_url + qiancai_assignee + v54,
+        'qiancai_zh_author_open_url': docs_cn_url + open_url + qiancai_author + v54,
+        'qiancai_en_assignee_open_url': docs_url + open_url + qiancai_assignee + v54,
+        'qiancai_en_assignee_close_url': docs_url + close_url + qiancai_assignee + v54,
+        'qiancai_en_author_open_url': docs_url + open_url + qiancai_author + v54,
+        'tomshawn_zh_assignee_open_url': docs_cn_url + open_url + tomshawn_assignee + v54,
+        'tomshawn_zh_assignee_close_url': docs_cn_url + close_url + tomshawn_assignee + v54,
+        'tomshawn_zh_author_open_url': docs_cn_url + open_url + tomshawn_author + v54,
+        'tomshawn_en_assignee_open_url': docs_url + open_url + tomshawn_assignee + v54,
+        'tomshawn_en_assignee_close_url': docs_url + close_url + tomshawn_assignee + v54,
+        'tomshawn_en_author_open_url': docs_url + open_url + tomshawn_author + v54,
     }
 
     URL = 'https://open.feishu.cn/open-apis/bot/v2/hook/201ab84d-cb0c-4583-87c4-61450a7eefcc'
@@ -217,59 +216,59 @@ if __name__ == "__main__":
                         [
                             {
                                 "tag": "text",
-                                "text": "    - docs-cn：有 ${en-jin19-zh-assignee-open} 个未合源语 PR"
+                                "text": "    - docs-cn：有 ${en_jin19_zh_assignee_open} 个未合源语 PR"
                             },
                             {
                                 "tag": "a",
                                 "text": "待处理",
-                                "href": "${en-jin19-zh-assignee-open_url}"
+                                "href": "${en_jin19_zh_assignee_open_url}"
                             },
                             {
                                 "tag": "text",
-                                "text": "，有 ${en-jin19-zh-assignee-close} 个已合源语 PR"
+                                "text": "，有 ${en_jin19_zh_assignee_close} 个已合源语 PR"
                             },
                             {
                                 "tag": "a",
                                 "text": "待翻译",
-                                "href": "${en-jin19-zh-assignee-close_url}"
+                                "href": "${en_jin19_zh_assignee_close_url}"
                             },
                             {
                                 "tag": "text",
-                                "text": "，已翻译了 ${en-jin19-zh-author-open} 个 PR"
+                                "text": "，已翻译了 ${en_jin19_zh_author_open} 个 PR"
                             },
                             {
                                 "tag": "a",
                                 "text": "未合并",
-                                "href": "${en-jin19-zh-author-open_url}"
+                                "href": "${en_jin19_zh_author_open_url}"
                             }
                         ],
                         [
                             {
                                 "tag": "text",
-                                "text": "    - docs：有 ${en-jin19-en-assignee-open} 个未合源语 PR"
+                                "text": "    - docs：有 ${en_jin19_en_assignee_open} 个未合源语 PR"
                             },
                             {
                                 "tag": "a",
                                 "text": "待处理",
-                                "href": "${en-jin19-en-assignee-open_url}"
+                                "href": "${en_jin19_en_assignee_open_url}"
                             },
                             {
                                 "tag": "text",
-                                "text": "有 ${en-jin19-en-assignee-close} 个已合源语 PR"
+                                "text": "有 ${en_jin19_en_assignee_close} 个已合源语 PR"
                             },
                             {
                                 "tag": "a",
                                 "text": "待翻译",
-                                "href": "${en-jin19-en-assignee-close_url}"
+                                "href": "${en_jin19_en_assignee_close_url}"
                             },
                             {
                                 "tag": "text",
-                                "text": "，已翻译了 ${en-jin19-en-author-open} 个 PR"
+                                "text": "，已翻译了 ${en_jin19_en_author_open} 个 PR"
                             },
                             {
                                 "tag": "a",
                                 "text": "未合并",
-                                "href": "${en-jin19-en-author-open_url}"
+                                "href": "${en_jin19_en_author_open_url}"
                             }
                         ],
                         [
@@ -293,59 +292,59 @@ if __name__ == "__main__":
                         [
                             {
                                 "tag": "text",
-                                "text": "    - docs-cn：有 ${shichun-0415-zh-assignee-open} 个未合源语 PR"
+                                "text": "    - docs-cn：有 ${shichun_0415_zh_assignee_open} 个未合源语 PR"
                             },
                             {
                                 "tag": "a",
                                 "text": "待处理",
-                                "href": "${shichun-0415-zh-assignee-open_url}"
+                                "href": "${shichun_0415_zh_assignee_open_url}"
                             },
                             {
                                 "tag": "text",
-                                "text": "有 ${shichun-0415-zh-assignee-close} 个已合源语 PR"
+                                "text": "有 ${shichun_0415_zh_assignee_close} 个已合源语 PR"
                             },
                             {
                                 "tag": "a",
                                 "text": "待翻译",
-                                "href": "${shichun-0415-zh-assignee-close_url}"
+                                "href": "${shichun_0415_zh_assignee_close_url}"
                             },
                             {
                                 "tag": "text",
-                                "text": "，已翻译了 ${shichun-0415-zh-author-open} 个 PR"
+                                "text": "，已翻译了 ${shichun_0415_zh_author_open} 个 PR"
                             },
                             {
                                 "tag": "a",
                                 "text": "未合并",
-                                "href": "${shichun-0415-zh-author-open_url}"
+                                "href": "${shichun_0415_zh_author_open_url}"
                             }
                         ],
                         [
                             {
                                 "tag": "text",
-                                "text": "    - docs：有 ${shichun-0415-en-assignee-open} 个未合源语 PR"
+                                "text": "    - docs：有 ${shichun_0415_en_assignee_open} 个未合源语 PR"
                             },
                             {
                                 "tag": "a",
                                 "text": "待处理",
-                                "href": "${shichun-0415-en-assignee-open_url}"
+                                "href": "${shichun_0415_en_assignee_open_url}"
                             },
                             {
                                 "tag": "text",
-                                "text": "有 ${shichun-0415-en-assignee-close} 个已合源语 PR"
+                                "text": "有 ${shichun_0415_en_assignee_close} 个已合源语 PR"
                             },
                             {
                                 "tag": "a",
                                 "text": "待翻译",
-                                "href": "${shichun-0415-en-assignee-close_url}"
+                                "href": "${shichun_0415_en_assignee_close_url}"
                             },
                             {
                                 "tag": "text",
-                                "text": "，已翻译了 ${shichun-0415-en-author-open} 个 PR"
+                                "text": "，已翻译了 ${shichun_0415_en_author_open} 个 PR"
                             },
                             {
                                 "tag": "a",
                                 "text": "未合并",
-                                "href": "${shichun-0415-en-author-open_url}"
+                                "href": "${shichun_0415_en_author_open_url}"
                             }
                         ],
                         [
@@ -369,59 +368,59 @@ if __name__ == "__main__":
                         [
                             {
                                 "tag": "text",
-                                "text": "    - docs-cn：有 ${hfxsd-zh-assignee-open} 个未合源语 PR"
+                                "text": "    - docs-cn：有 ${hfxsd_zh_assignee_open} 个未合源语 PR"
                             },
                             {
                                 "tag": "a",
                                 "text": "待处理",
-                                "href": "${hfxsd-zh-assignee-open_url}"
+                                "href": "${hfxsd_zh_assignee_open_url}"
                             },
                             {
                                 "tag": "text",
-                                "text": "有 ${hfxsd-zh-assignee-close} 个已合源语 PR"
+                                "text": "有 ${hfxsd_zh_assignee_close} 个已合源语 PR"
                             },
                             {
                                 "tag": "a",
                                 "text": "待翻译",
-                                "href": "${hfxsd-zh-assignee-close_url}"
+                                "href": "${hfxsd_zh_assignee_close_url}"
                             },
                             {
                                 "tag": "text",
-                                "text": "，已翻译了 ${hfxsd-zh-author-open} 个 PR"
+                                "text": "，已翻译了 ${hfxsd_zh_author_open} 个 PR"
                             },
                             {
                                 "tag": "a",
                                 "text": "未合并",
-                                "href": "${hfxsd-zh-author-open_url}"
+                                "href": "${hfxsd_zh_author_open_url}"
                             }
                         ],
                         [
                             {
                                 "tag": "text",
-                                "text": "    - docs：有 ${hfxsd-en-assignee-open} 个未合源语 PR"
+                                "text": "    - docs：有 ${hfxsd_en_assignee_open} 个未合源语 PR"
                             },
                             {
                                 "tag": "a",
                                 "text": "待处理",
-                                "href": "${hfxsd-en-assignee-open_url}"
+                                "href": "${hfxsd_en_assignee_open_url}"
                             },
                             {
                                 "tag": "text",
-                                "text": "有 ${hfxsd-en-assignee-close} 个已合源语 PR"
+                                "text": "有 ${hfxsd_en_assignee_close} 个已合源语 PR"
                             },
                             {
                                 "tag": "a",
                                 "text": "待翻译",
-                                "href": "${hfxsd-en-assignee-close_url}"
+                                "href": "${hfxsd_en_assignee_close_url}"
                             },
                             {
                                 "tag": "text",
-                                "text": "，已翻译了 ${hfxsd-en-author-open} 个 PR"
+                                "text": "，已翻译了 ${hfxsd_en_author_open} 个 PR"
                             },
                             {
                                 "tag": "a",
                                 "text": "未合并",
-                                "href": "${hfxsd-en-author-open_url}"
+                                "href": "${hfxsd_en_author_open_url}"
                             }
                         ],
                         [
@@ -445,59 +444,59 @@ if __name__ == "__main__":
                         [
                             {
                                 "tag": "text",
-                                "text": "    - docs-cn：有 ${ran-huang-zh-assignee-open} 个未合源语 PR"
+                                "text": "    - docs-cn：有 ${ran_huang_zh_assignee_open} 个未合源语 PR"
                             },
                             {
                                 "tag": "a",
                                 "text": "待处理",
-                                "href": "${ran-huang-zh-assignee-open_url}"
+                                "href": "${ran_huang_zh_assignee_open_url}"
                             },
                             {
                                 "tag": "text",
-                                "text": "有 ${ran-huang-zh-assignee-close} 个已合源语 PR"
+                                "text": "有 ${ran_huang_zh_assignee_close} 个已合源语 PR"
                             },
                             {
                                 "tag": "a",
                                 "text": "待翻译",
-                                "href": "${ran-huang-zh-assignee-close_url}"
+                                "href": "${ran_huang_zh_assignee_close_url}"
                             },
                             {
                                 "tag": "text",
-                                "text": "，已翻译了 ${ran-huang-zh-author-open} 个 PR"
+                                "text": "，已翻译了 ${ran_huang_zh_author_open} 个 PR"
                             },
                             {
                                 "tag": "a",
                                 "text": "未合并",
-                                "href": "${ran-huang-zh-author-open_url}"
+                                "href": "${ran_huang_zh_author_open_url}"
                             }
                         ],
                         [
                             {
                                 "tag": "text",
-                                "text": "    - docs：有 ${ran-huang-en-assignee-open} 个未合源语 PR"
+                                "text": "    - docs：有 ${ran_huang_en_assignee_open} 个未合源语 PR"
                             },
                             {
                                 "tag": "a",
                                 "text": "待处理",
-                                "href": "${ran-huang-en-assignee-open_url}"
+                                "href": "${ran_huang_en_assignee_open_url}"
                             },
                             {
                                 "tag": "text",
-                                "text": "有 ${ran-huang-en-assignee-close} 个已合源语 PR"
+                                "text": "有 ${ran_huang_en_assignee_close} 个已合源语 PR"
                             },
                             {
                                 "tag": "a",
                                 "text": "待翻译",
-                                "href": "${ran-huang-en-assignee-close_url}"
+                                "href": "${ran_huang_en_assignee_close_url}"
                             },
                             {
                                 "tag": "text",
-                                "text": "，已翻译了 ${ran-huang-en-author-open} 个 PR"
+                                "text": "，已翻译了 ${ran_huang_en_author_open} 个 PR"
                             },
                             {
                                 "tag": "a",
                                 "text": "未合并",
-                                "href": "${ran-huang-en-author-open_url}"
+                                "href": "${ran_huang_en_author_open_url}"
                             }
                         ],
                         [
@@ -521,59 +520,59 @@ if __name__ == "__main__":
                         [
                             {
                                 "tag": "text",
-                                "text": "    - docs-cn：有 ${qiancai-zh-assignee-open} 个未合源语 PR"
+                                "text": "    - docs-cn：有 ${qiancai_zh_assignee_open} 个未合源语 PR"
                             },
                             {
                                 "tag": "a",
                                 "text": "待处理",
-                                "href": "${qiancai-zh-assignee-open_url}"
+                                "href": "${qiancai_zh_assignee_open_url}"
                             },
                             {
                                 "tag": "text",
-                                "text": "有 ${qiancai-zh-assignee-close} 个已合源语 PR"
+                                "text": "有 ${qiancai_zh_assignee_close} 个已合源语 PR"
                             },
                             {
                                 "tag": "a",
                                 "text": "待翻译",
-                                "href": "${qiancai-zh-assignee-close_url}"
+                                "href": "${qiancai_zh_assignee_close_url}"
                             },
                             {
                                 "tag": "text",
-                                "text": "，已翻译了 ${qiancai-zh-author-open} 个 PR"
+                                "text": "，已翻译了 ${qiancai_zh_author_open} 个 PR"
                             },
                             {
                                 "tag": "a",
                                 "text": "未合并",
-                                "href": "${qiancai-zh-author-open_url}"
+                                "href": "${qiancai_zh_author_open_url}"
                             }
                         ],
                         [
                             {
                                 "tag": "text",
-                                "text": "    - docs：有 ${qiancai-en-assignee-open} 个未合源语 PR"
+                                "text": "    - docs：有 ${qiancai_en_assignee_open} 个未合源语 PR"
                             },
                             {
                                 "tag": "a",
                                 "text": "待处理",
-                                "href": "${qiancai-en-assignee-open_url}"
+                                "href": "${qiancai_en_assignee_open_url}"
                             },
                             {
                                 "tag": "text",
-                                "text": "有 ${qiancai-en-assignee-close} 个已合源语 PR"
+                                "text": "有 ${qiancai_en_assignee_close} 个已合源语 PR"
                             },
                             {
                                 "tag": "a",
                                 "text": "待翻译",
-                                "href": "${qiancai-en-assignee-close_url}"
+                                "href": "${qiancai_en_assignee_close_url}"
                             },
                             {
                                 "tag": "text",
-                                "text": "，已翻译了 ${qiancai-en-author-open} 个 PR"
+                                "text": "，已翻译了 ${qiancai_en_author_open} 个 PR"
                             },
                             {
                                 "tag": "a",
                                 "text": "未合并",
-                                "href": "${qiancai-en-author-open_url}"
+                                "href": "${qiancai_en_author_open_url}"
                             }
                         ],
                         [
@@ -597,54 +596,54 @@ if __name__ == "__main__":
                         [
                             {
                                 "tag": "text",
-                                "text": "    - docs-cn：有 ${tomshawn-zh-assignee-open} 个未合源语 PR"
+                                "text": "    - docs-cn：有 ${tomshawn_zh_assignee_open} 个未合源语 PR"
                             },
                             {
                                 "tag": "a",
                                 "text": "待处理",
-                                "href": "${tomshawn-zh-assignee-open_url}"
+                                "href": "${tomshawn_zh_assignee_open_url}"
                             },
                             {
                                 "tag": "text",
-                                "text": "有 ${tomshawn-zh-assignee-close} 个已合源语 PR"
+                                "text": "有 ${tomshawn_zh_assignee_close} 个已合源语 PR"
                             },
                             {
                                 "tag": "a",
                                 "text": "待翻译",
-                                "href": "${tomshawn-zh-assignee-close_url}"
+                                "href": "${tomshawn_zh_assignee_close_url}"
                             },
                             {
                                 "tag": "text",
-                                "text": "，已翻译了 ${tomshawn-zh-author-open} 个 PR"
+                                "text": "，已翻译了 ${tomshawn_zh_author_open} 个 PR"
                             },
                             {
                                 "tag": "a",
                                 "text": "未合并",
-                                "href": "${tomshawn-zh-author-open_url}"
+                                "href": "${tomshawn_zh_author_open_url}"
                             }
                         ],
                         [
                             {
                                 "tag": "text",
-                                "text": "    - docs：有 ${tomshawn-en-assignee-open} 个未合源语 PR"
+                                "text": "    - docs：有 ${tomshawn_en_assignee_open} 个未合源语 PR"
                             },
                             {
                                 "tag": "a",
                                 "text": "待处理",
-                                "href": "${tomshawn-en-assignee-open_url}"
+                                "href": "${tomshawn_en_assignee_open_url}"
                             },
                             {
                                 "tag": "text",
-                                "text": "有 ${tomshawn-en-assignee-close} 个已合源语 PR"
+                                "text": "有 ${tomshawn_en_assignee_close} 个已合源语 PR"
                             },
                             {
                                 "tag": "a",
                                 "text": "待翻译",
-                                "href": "${tomshawn-en-assignee-close_url}"
+                                "href": "${tomshawn_en_assignee_close_url}"
                             },
                             {
                                 "tag": "text",
-                                "text": "，已翻译了 ${tomshawn-en-author-open} 个 PR"
+                                "text": "，已翻译了 ${tomshawn_en_author_open} 个 PR"
                             },
                             {
                                 "tag": "a",
