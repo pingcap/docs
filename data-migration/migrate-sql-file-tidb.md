@@ -60,6 +60,7 @@ file = "tidb-lightning.log"
 [tikv-importer]
 # "local"：Default. The local backend is used to import large volumes of data (around or more than 1 TiB). During the import, the target TiDB cluster cannot provide any service.
 # "tidb"：The "tidb" backend can also be used to import small volumes of data (less than 1 TiB). During the import, the target TiDB cluster can provide service normally. For the information about backend mode, refer to https://docs.pingcap.com/tidb/stable/tidb-lightning-backends.
+backend = "local"
 # Sets the temporary storage directory for the sorted key-value files. The directory must be empty, and the storage space must be enough to store the largest single table from the data source. For better import performance, it is recommended to use a directory different from `data-source-dir` and use flash storage and exclusive I/O for the directory.
 sorted-kv-dir = "${sorted-kv-dir}"
 
@@ -98,7 +99,7 @@ export AWS_SECRET_ACCESS_KEY=${secret_key}
 nohup tiup tidb-lightning -config tidb-lightning.toml -no-schema=true > nohup.out 2>&1 &
 ```
 
-Dumpling also supports reading credential files from `~/.aws/credentials`. 
+TiDB Lightning also supports reading credential files from `~/.aws/credentials`. 
 
 After the import is started, you can check the progress in one of the following ways:
 
