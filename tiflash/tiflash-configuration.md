@@ -160,7 +160,7 @@ delta_index_cache_size = 0
     pd_addr = "10.0.1.11:2379,10.0.1.12:2379,10.0.1.13:2379"
 
 [status]
-    ## The port through which Prometheus pulls metrics information, 8234 is used by default.
+    ## The port through which Prometheus pulls metrics information. The default value is `8234`.
     metrics_port = 8234
 
 [profiles]
