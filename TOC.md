@@ -53,7 +53,7 @@
   - Advanced Migration
     - [Continuous Replication with gh-ost or pt-osc](/data-migration/migrate-with-pt-ghost.md)
     - [Filter Binlog Events](/data-migration/migrate-with-binlog-event-filter.md)
-    - [Filter Binlog Events Using SQL Expressions](/data-migration/migrate-with-binlog-sql-expression-filter.md)
+    - [Filter DML Events Using SQL Expressions](/data-migration/migrate-with-binlog-sql-expression-filter.md)
     - [Migrate to a Downstream Table with More Columns](/data-migration/migrate-with-more-columns-downstream.md)
 - Maintain
   - Upgrade
