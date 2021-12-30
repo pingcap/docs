@@ -1,9 +1,9 @@
 ---
-title: Filter Binlog Events Using SQL Expressions
-summary: Learn how to filter binlog events using SQL expressions.
+title: Filter DML Events Using SQL Expressions
+summary: Learn how to filter DML events using SQL expressions.
 ---
 
-# Filter Binlog Events Using SQL Expressions
+# Filter DML Events Using SQL Expressions
 
 This document introduces how to filter binlog events using SQL expressions when you use DM to perform continuous incremental data replication. For the detailed replication instruction, refer to the following documents:
 
