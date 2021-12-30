@@ -57,6 +57,7 @@ TiDB version: 5.0.6
     + TiDB Lightning
 
         - Support importing data into tables that have expression index or the index that depends on virtual generated columns [#1404](https://github.com/pingcap/br/issues/1404)
+
 ## Bug fixes
 
 + TiDB
