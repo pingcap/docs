@@ -28,8 +28,8 @@ TiDB version: 5.0.6
 
 + TiKV
 
-    - Increase the speed of inserting SST files by moving the verification process to import thread pool from apply thread pool [#11239](https://github.com/tikv/tikv/issues/11239)
-    - Add metrics for the garbage collection module of Raft logs to locate performance problems in the module [#11374](https://github.com/tikv/tikv/issues/11374)
+    - Increase the speed of inserting SST files by moving the verification process to the `Import` thread pool from the `Apply` thread pool [#11239](https://github.com/tikv/tikv/issues/11239)
+    - Add more metrics for the garbage collection module of Raft logs to locate performance problems in the module [#11374](https://github.com/tikv/tikv/issues/11374)
     - Collapse some uncommon storage-related metrics in Grafana dashboard [#11681](https://github.com/tikv/tikv/issues/11681)
 
 + PD
@@ -95,19 +95,19 @@ TiDB version: 5.0.6
     - Fix the issue that a downed TiKV node causes the resolved timestamp to lag behind [#11351](https://github.com/tikv/tikv/issues/11351)
     (dup) - Fix the issue that batch messages are too large in Raft client implementation [#9714](https://github.com/tikv/tikv/issues/9714)
     (dup) - Fix a panic issue that occurs when Region merge, ConfChange, and Snapshot happen at the same time in extreme conditions [#11475](https://github.com/tikv/tikv/issues/11475)
-    - Fix the issue that TiKV cannot detect the memory lock when `TableScan` is in descending order [#11440](https://github.com/tikv/tikv/issues/11440)
+    - Fix the issue that TiKV cannot detect the memory lock when TiKV perform a reverse table scan [#11440](https://github.com/tikv/tikv/issues/11440)
     (dup) - Fix the issue of negative sign when the decimal divide result is zero [#29586](https://github.com/pingcap/tidb/issues/29586)
     - Fix the issue that the accumulation of GC tasks might cause TiKV to be OOM (out of memory) [#11410](https://github.com/tikv/tikv/issues/11410)
     (dup) - Fix the issue that the average latency of the by-instance gRPC requests is inaccurate in TiKV metrics [#11299](https://github.com/tikv/tikv/issues/11299)
     (dup) - Fix a memory leak caused by monitoring data of statistics threads [#11195](https://github.com/tikv/tikv/issues/11195)
     (dup) - Fix the issue of TiCDC panic that occurs when the downstream database is missing [#11123](https://github.com/tikv/tikv/issues/11123)
-    (dup) - Fix the issue that CDC adds scan retries frequently due to the Congest error [#11082](https://github.com/tikv/tikv/issues/11082)
+    (dup) - Fix the issue that TiCDC adds scan retries frequently due to the Congest error [#11082](https://github.com/tikv/tikv/issues/11082)
     (dup) - Fix the issue that the Raft connection is broken when the channel is full [#11047](https://github.com/tikv/tikv/issues/11047)
-    - Fix the issue of TiKV panic that occurs when the files do not exist when Lightning importing data [#10438](https://github.com/tikv/tikv/issues/10438)
+    - Fix the issue of TiKV panic that occurs when the files do not exist when TiDB Lightning imports data [#10438](https://github.com/tikv/tikv/issues/10438)
     (dup) - Fix the issue that TiDB cannot correctly identify whether the `Int64` types in `Max`/`Min` functions are a signed integer or not, which causes the wrong calculation result of `Max`/`Min` [#10158](https://github.com/tikv/tikv/issues/10158)
-    - Fix the issue that the nodes of a TiKV replica are down after the nodes get snapshots because TiKV cannot modify the meta information accurately [#10225](https://github.com/tikv/tikv/issues/10225)
-    - Fix the issue that the backup thread pool leaks [#10287](https://github.com/tikv/tikv/issues/10287)
-    - Fix the issue of converting illegal strings into floating-point arithmetic [#23322](https://github.com/pingcap/tidb/issues/23322)
+    - Fix the issue that the node of a TiKV replica is down after the node gets snapshots because TiKV cannot modify the metadata accurately [#10225](https://github.com/tikv/tikv/issues/10225)
+    - Fix the leak issue of the backup thread pool [#10287](https://github.com/tikv/tikv/issues/10287)
+    - Fix the issue of casting illegal strings into floating-point numbers [#23322](https://github.com/pingcap/tidb/issues/23322)
 
 + PD
 
