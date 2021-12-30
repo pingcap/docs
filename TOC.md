@@ -42,12 +42,11 @@
   - [Overview](/migration-overview.md)
   - Migrate from MySQL
     - [Migrate from Amazon Aurora MySQL Using TiDB Lightning](/migrate-from-aurora-using-lightning.md)
-    - [Migrate from MySQL SQL Files Using TiDB Lightning](/migrate-from-mysql-dumpling-files.md)
     - [Migrate from Amazon Aurora MySQL Using DM](/migrate-from-aurora-mysql-database.md)
   - Migrate from CSV Files
     - [Use TiDB Lightning](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)
     - [Use `LOAD DATA` Statement](/sql-statements/sql-statement-load-data.md)
-  - [Migrate from SQL Files](/migrate-from-mysql-dumpling-files.md)
+  - [Migrate Data from SQL Files to TiDB](data-migration/migrate-sql-file-tidb.md)
   - [Replicate Incremental Data between TiDB Clusters in Real Time](/incremental-replication-between-clusters.md)
 - Maintain
   - Upgrade
