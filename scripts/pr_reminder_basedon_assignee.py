@@ -162,7 +162,7 @@ if __name__ == "__main__":
         'tomshawn_en_author_open_url': docs_url + open_url + tomshawn_author + v54,
     }
 
-    URL = 'https://open.feishu.cn/open-apis/bot/v2/hook/201ab84d-cb0c-4583-87c4-61450a7eefcc'
+    URL = sys.argv[1]
 
     d = Template("""{
         "msg_type": "post",
