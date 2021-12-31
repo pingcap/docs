@@ -9,7 +9,7 @@ This document describes how to use TiDB Data Migration (DM) to migrate MySQL of 
 
 The migration speed varies from 30 GB/h to 50 GB/h, depending on multiple factors such as the number of indexes in the table schema, hardware, and network environment. <!--The migration process using DM is shown in the figure below.-->
 
-<!--![dm](/media/dm/migrate-with-dm.png)-->
+<!--/media/dm/migrate-with-dm.png-->
 
 ## Prerequisites
 
