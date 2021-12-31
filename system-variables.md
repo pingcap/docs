@@ -1691,3 +1691,5 @@ This variable is an alias for `transaction_isolation`.
 - Scope: SESSION | GLOBAL
 - Default value: `OFF`
 - This variable controls whether to use the paging coprocessor requests in `IndexLookUp` operator.
+- For the workload which uses `IndexLookUp` operator, if it requires only a few rows however the `IndexScan` operator needs to scan a large range. It'll increase the latency and CPU usage of unified read pool due to scanning the entire range.
+- With `tidb_enable_paging` turned on, `IndexScan` operator will return data in batch, which shifts `TableScan` to earlier stage, optimizes the latency, and decreases the count of scanned keys in `IndexScan` and `TableScan`.
