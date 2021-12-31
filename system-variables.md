@@ -1685,3 +1685,9 @@ This variable is an alias for `transaction_isolation`.
 - Scope: SESSION | GLOBAL
 - Default value: `ON`
 - This variable controls whether to use the high precision mode when computing the window functions.
+
+### tidb_enable_paging
+
+- Scope: SESSION | GLOBAL
+- Default value: `OFF`
+- This variable controls whether to use the paging coprocessor requests in `IndexLookUp` operator.
