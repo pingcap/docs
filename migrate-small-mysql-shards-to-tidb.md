@@ -219,6 +219,7 @@ If you encounter errors, use `query-status <name of the error task>` to view mor
 You can view the history of a migration task and internal operational metrics through Grafana or logs.
 
 - Via Grafana
+
     If Prometheus, Alertmanager, and Grafana are correctly deployed when you deploy the DM cluster using TiUP, you can view DM monitoring metrics in Grafana. Specifically, enter the IP address and port specified during deployment in Grafana and select the DM dashboard.
 
 - Via logs
