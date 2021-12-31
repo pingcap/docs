@@ -1,6 +1,7 @@
 ---
 title: Migrate Data from SQL Files to TiDB
 summary: Learn how to migrate data from SQL files to TiDB.
+aliases: ['/docs/dev/migrate-from-mysql-mydumper-files/','/tidb/dev/migrate-from-mysql-mydumper-files/','/tidb/dev/migrate-from-mysql-dumpling-files']
 ---
 
 # Migrate Data from SQL Files to TiDB
