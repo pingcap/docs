@@ -20,9 +20,9 @@ Put all the SQL files in the same directory, like `/data/my_datasource/` or `s3:
 
 To import data to TiDB, you need to create the table schema for the target database.
 
-If you use Dumpling to export data, the table schema file is automatically exported. For the data exported in other ways, you  can create the table schema in one of the following methods:
+If you use Dumpling to export data, the table schema file is automatically exported. For the data exported in other ways, you can create the table schema in one of the following methods:
 
-* **Method 1**: create the target table schema using TiDB Lightning.
++ **Method 1**: Create the target table schema using TiDB Lightning.
 
     1. Write SQL files that contain the required DDL statements.
 
@@ -36,7 +36,7 @@ If you use Dumpling to export data, the table schema file is automatically expor
         no-schema = false # To create the table schema in the target database using TiDB Lightning, set the value to false
         ```
 
-* **Method 2**: create the target table schema manually.
++ **Method 2**: Create the target table schema manually.
 
     Before the migration, add the following configuration in `tidb-lightning.toml`:
 
@@ -60,6 +60,7 @@ file = "tidb-lightning.log"
 [tikv-importer]
 # "local"：Default. The local backend is used to import large volumes of data (around or more than 1 TiB). During the import, the target TiDB cluster cannot provide any service.
 # "tidb"：The "tidb" backend can also be used to import small volumes of data (less than 1 TiB). During the import, the target TiDB cluster can provide service normally. For the information about backend mode, refer to https://docs.pingcap.com/tidb/stable/tidb-lightning-backends.
+
 backend = "local"
 # Sets the temporary storage directory for the sorted key-value files. The directory must be empty, and the storage space must be enough to store the largest single table from the data source. For better import performance, it is recommended to use a directory different from `data-source-dir` and use flash storage and exclusive I/O for the directory.
 sorted-kv-dir = "${sorted-kv-dir}"
@@ -89,8 +90,6 @@ To start the import, run `tidb-lightning`. If you launch the program in the comm
 
 If you import the data from S3, you need to pass in `SecretKey` and `AccessKey` of the account as environment variables. The account has the permission to access the S3 backend storage.
 
-If you import the data from S3, you need to pass `SecretKey` and `AccessKey` of the account with the permission to access the S3 backend storage to the Dumpling node as environment variables.
-
 {{< copyable "shell-regular" >}}
 
 ```shell
@@ -99,7 +98,7 @@ export AWS_SECRET_ACCESS_KEY=${secret_key}
 nohup tiup tidb-lightning -config tidb-lightning.toml -no-schema=true > nohup.out 2>&1 &
 ```
 
-TiDB Lightning also supports reading credential files from `~/.aws/credentials`. 
+TiDB Lightning also supports reading credential files from `~/.aws/credentials`.
 
 After the import is started, you can check the progress in one of the following ways:
 

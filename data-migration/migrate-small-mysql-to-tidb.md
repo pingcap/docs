@@ -5,16 +5,16 @@ summary: Learn how to migrate MySQL of small datasets to TiDB.
 
 # Migrate MySQL of Small Datasets to TiDB
 
-This document describes how to use TiDB Data Migration (hereinafter referred to as DM) to migrate MySQL of small datasets to TiDB in the full migration mode and incremental replication mode. "Small datasets" in this document usually mean data around or less than 1 TiB.
+This document describes how to use TiDB Data Migration (DM) to migrate MySQL of small datasets to TiDB in the full migration mode and incremental replication mode. "Small datasets" in this document mean data size less than 1 TiB.
 
-Generally speaking, affected by the information such as the number of table structure indexes, hardwares, and network environment, the migration rate varies from 30 to 50 GB/h. The migration process using DM is shown in the figure below.
+The migration speed varies from 30 GB/h to 50 GB/h, depending on multiple factors such as the number of indexes in the table schema, hardware, and network environment. The migration process using DM is shown in the figure below.
 
 ![dm](/media/dm/migrate-with-dm.png)
 
 ## Prerequisites
 
 - [Deploy a DM Cluster Using TiUP](https://docs.pingcap.com/tidb-data-migration/stable/deploy-a-dm-cluster-using-tiup)
-- [Required privileges for the source database and the target database of DM](https://docs.pingcap.com/tidb-data-migration/stable/dm-worker-intro)
+- [Grant the required privileges for the source database and the target database of DM](https://docs.pingcap.com/tidb-data-migration/stable/dm-worker-intro)
 
 ## Step 1. Create the data source
 
@@ -46,8 +46,8 @@ tiup dmctl --master-addr ${advertise-addr} operate-source create source1.yaml
 
 The parameters used in the command above are described as follows:
 
-|Parameter           |Description|
-|-              |-|
+|Parameter      |Description|
+|  :-        |    :-           |
 |`--master-addr`  |The {advertise-addr} of any DM-master node in the cluster where `dmctl` is to connect. For example, 172.16.10.71:8261.
 |`operate-source create`|Load the data source to the DM cluster.|
 
@@ -77,7 +77,7 @@ mysql-instances:
 -
   # The ID of an upstream instance or a replication group
   source-id: "mysql-01"
-  # The names of the block and allowlist configuration of the schema name or table name that is to be migrated. These names are used to reference the global configuration of the block and allowlist. For the global configuration, refer to the `block-allow-list` configuration below.
+  # The names of the block list and allow list configuration of the schema name or table name that is to be migrated. These names are used to reference the global configuration of the block and allowlist. For the global configuration, refer to the `block-allow-list` configuration below.
   block-allow-list: "listA"
 
 # The global configuration of blocklist and allowlist. Each instance is referenced by a configuration item name.
@@ -112,9 +112,9 @@ tiup dmctl --master-addr ${advertise-addr} start-task task.yaml
 The parameters used in the command above are described as follows:
 
 |Parameter|Description|
-|-|-|
-|`--master-addr`|The {advertise-addr} of any DM-master node in the cluster where `dmctl` is to connect. For example: 172.16.10.71:8261.
-|`start-task`|Start the migration task|
+|     -    |     -     |
+|`--master-addr`| The {advertise-addr} of any DM-master node in the cluster where `dmctl` is to connect. For example: 172.16.10.71:8261. |
+|`start-task`| Start the migration task |
 
 If the task fails to start, after changing the configuration according to the returned result, you can run the `start-task task.yaml` command to restart the task. If you encounter problems, refer to [Handle Errors](https://docs.pingcap.com/tidb-data-migration/stable/error-handling/) and [FAQ](https://docs.pingcap.com/tidb-data-migration/stable/faq).
 
@@ -136,8 +136,8 @@ To view the historical status of the migration task and other internal metrics, 
 
 If you have deployed Prometheus, Alertmanager, and Grafana when deploying DM using TiUP, you can access Grafana using the IP address and port specified during the deployment. You can then select the DM dashboard to view DM-related monitoring metrics.
 
-- The log directory of DM-master: specified by the DM-master process parameter `--log-file`. If you deploy DM using TiUP, the log directory is `/dm-deploy/dm-master-8261/log/` by default.
-- The log directory of DM-worker: specified by the DM-worker process parameter `--log-file`. If you deploy DM using TiUP, the log directory is `/dm-deploy/dm-worker-8262/log/` by default.
+- The log directory of DM-master: specified by the DM-master process parameter `--log-file`. If you have deployd DM using TiUP, the log directory is `/dm-deploy/dm-master-8261/log/` by default.
+- The log directory of DM-worker: specified by the DM-worker process parameter `--log-file`. If you have deployd DM using TiUP, the log directory is `/dm-deploy/dm-worker-8262/log/` by default.
 
 ## What's next
 
