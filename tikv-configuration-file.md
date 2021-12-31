@@ -1269,6 +1269,61 @@ Configuration items related to `raftdb`
 + The directory in which WAL files are stored
 + Default value: `"/tmp/tikv/store"`
 
+## raft-engine
+
+Configuration items related to Raft Engine.
+
+### `enable`
+
++ Whether to use Raft Engine as the raft log storage. When enabled, configurations of `raftdb` will be ignored.
++ Default value: `"false"`
+
+### `dir`
+
++ The directory to store log files. Will be created on startup if not exists.
++ When not set, it will be `{data-dir}/raft-engine`.
++ If there are multiple disks on the machine, storing the data of Raft Engine on a different disk can improve TiKV performance.
++ Default value: `""`
+
+### `batch-compression-threshold`
+
++ Compress a log batch if its size exceeds this value. Compression is disabled when set to zero.
++ Default value: `"8KB"`
+
+### `bytes-per-sync`
+
++ Flush buffered writes to disk when their accumulative size exceeds this threshold.
++ Setting it to zero disabled incremental sync.
++ Default value: `"4MB"`
+
+### `target-file-size`
+
++ Target file size for rotating log files.
++ Default value: `"128MB"`
+
+### `purge-threshold`
+
++ Purge main log queue if its file size exceeds this value.
++ Default value: `"10GB"`
+
+### `recovery-mode`
+
++ How to deal with file corruption during recovery.
++ Value options: `"absolute-consistency"`, `tolerate-tail-corruption`, `tolerate-any-corruption`
++ Default value: `"tolerate-tail-corruption"`
+
+### `recovery-read-block-size`
+
++ Minimum I/O size for reading log files during recovery.
++ Default value: `"16KB"`
++ Minimum value: `"512B"`
+
+### `recovery-threads`
+
++ The number of threads used to scan and recover log files.
++ Default value: `4`
++ Minimum value: `1`
+
 ## security
 
 Configuration items related to security
