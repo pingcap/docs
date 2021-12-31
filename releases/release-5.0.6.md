@@ -17,6 +17,7 @@ TiDB version: 5.0.6
 
         - Change the output of the `cdc server` command error from stdout to stderr [#3133](https://github.com/pingcap/tiflow/issues/3133)
         - Set the default value of Kafka sink `max-message-bytes` to `10M` [#3081](https://github.com/pingcap/tiflow/issues/3081)
+        - Change the default value of Kafka Sink `partition-num` to 3 so that TiCDC distributes messages across Kafka partitions more evenly [#3337](https://github.com/pingcap/ticdc/issues/3337)
 
 ## Improvements
 
@@ -34,16 +35,14 @@ TiDB version: 5.0.6
 
     - Speed up the exit process of schedulers [#4146](https://github.com/tikv/pd/issues/4146)
     - Make the scheduling results of the `scatter-range-scheduler` scheduler more even by allowing the scheduler to schedule empty Regions and fix the configurations of the scheduler [#4497](https://github.com/tikv/pd/issues/4497)
+    - Support that the evict leader scheduler can schedule Regions with unhealthy peers [#4093](https://github.com/tikv/pd/issues/4093)
 
 + Tools
 
     + TiCDC
 
         - Optimize rate limiting control on TiKV reloads to reduce gPRC congestion during changefeed initialization [#3110](https://github.com/pingcap/ticdc/issues/3110)
-        - Fix the issue that scanning stock data might fail due to TiKV performing GC when scanning stock data takes too long [#2470](https://github.com/pingcap/tiflow/issues/2470)
-        - Fix the issue that changefeed does not fail fast enough when the ErrGCTTLExceeded error occurs [#3111](https://github.com/pingcap/ticdc/issues/3111)
         - Add a tick frequency limit to EtcdWorker to prevent frequent etcd writes from affecting PD services [#3112](https://github.com/pingcap/ticdc/issues/3112)
-        - Fix OOM in container environments [#1798](https://github.com/pingcap/ticdc/issues/1798)
         - Add the default configuration for `config.Metadata.Timeout` in Kafka sink [#3352](https://github.com/pingcap/tiflow/issues/3352)
         - Set the default value of `max-message-bytes` to `10M`, to reduce the probability that Kafka messages cannot be sent [#3081](https://github.com/pingcap/tiflow/issues/3081)
         - Add more Promethous and Grafana monitoring metrics and alerts, including `no owner alert`, `mounter row`, `table sink total row`, and `buffer sink total row` [#4054](https://github.com/pingcap/tiflow/issues/4054) [#1606](https://github.com/pingcap/tiflow/issues/1606)
@@ -51,6 +50,7 @@ TiDB version: 5.0.6
     + Backup & Restore (BR)
 
         - Retry BR tasks when encountering the PD request error or the TiKV I/O timeout error [#27787](https://github.com/pingcap/tidb/issues/27787)
+        - Improve the robustness of restoring [#27421](https://github.com/pingcap/tidb/issues/27421)
 
     + TiDB Lightning
 
@@ -115,7 +115,6 @@ TiDB version: 5.0.6
     - Fix a panic issue that occurs after the TiKV node is removed [#4344](https://github.com/tikv/pd/issues/4344)
     - Fix the issue that operator can get blocked due to down store [#3353](https://github.com/tikv/pd/issues/3353)
     - Fix slow leader election caused by stucked Region syncer [#3936](https://github.com/tikv/pd/issues/3936)
-    - Support that the evict leader scheduler can schedule Regions with unhealthy peers [#4093](https://github.com/tikv/pd/issues/4093)
     - Fix the issue that the speed of removing peers is limited when repairing the down nodes [#4090](https://github.com/tikv/pd/issues/4090)
     - Fix the issue that the hotspot cache cannot be cleared when the Region heartbeat is less than 60 seconds [#4390](https://github.com/tikv/pd/issues/4390)
 
@@ -154,13 +153,14 @@ TiDB version: 5.0.6
         - Fix the bug that the `enable-old-value` configuration item is not automatically set to `true` on Canal and Maxwell protocols [#3676](https://github.com/pingcap/tiflow/issues/3676)
         - Fix the timezone error that occurs when the `cdc server` command runs on some Red Hat Enterprise Linux releases (such as 6.8 and 6.9) [#3584](https://github.com/pingcap/tiflow/issues/3584)
         - Fix the issue of the inaccurate `txn_batch_size` monitoring metric for Kafka sink [#3431](https://github.com/pingcap/tiflow/issues/3431)
-        - Change the default value of Kafka Sink `partition-num` to 3 so that TiCDC distributes messages across Kafka partitions more evenly [#3337](https://github.com/pingcap/ticdc/issues/3337)
         - Fix the issue that `tikv_cdc_min_resolved_ts_no_change_for_1m` keeps alerting when there is no changefeed [#11017](https://github.com/tikv/tikv/issues/11017)
         - Fix the TiCDC panic issue that occurs when manually cleaning the task status in etcd [#2980](https://github.com/pingcap/tiflow/issues/2980)
+        - Fix the issue that changefeed does not fail fast enough when the ErrGCTTLExceeded error occurs [#3111](https://github.com/pingcap/ticdc/issues/3111)
+        - Fix the issue that scanning stock data might fail due to TiKV performing GC when scanning stock data takes too long [#2470](https://github.com/pingcap/tiflow/issues/2470)
+        - Fix OOM in container environments [#1798](https://github.com/pingcap/ticdc/issues/1798)
 
     + Backup & Restore (BR)
 
-        - Improve the robustness of restoring [#27421](https://github.com/pingcap/tidb/issues/27421)
         - Fix a bug that the average speed is inaccurately calculated for backup and restore [#1405](https://github.com/pingcap/br/issues/1405)
 
     + Dumpling
