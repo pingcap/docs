@@ -33,6 +33,7 @@ case-sensitive: false           # Determines whether the schema/table is case-se
 online-ddl: true                # Supports automatic processing of upstream "gh-ost" and "pt".
 online-ddl-scheme: "gh-ost"     # `online-ddl-scheme` has been deprecated in v2.0.6, so it is recommended to use `online-ddl`.
 clean-dump-file: true           # Whether to clean up the files generated during data dump. Note that these include `metadata` files.
+collation_compatible: "loose"   # The way to sync default collation in create sql, it can be "loose" or "strict" and "loose" is default. DM will sync default collation from upstream when it is "strict", but not when it is "loose". Note that when it is "strict" and the default collation in upstream doesn't be supportted by downstream, it may occur error. 
 
 target-database:                # Configuration of the downstream database instance.
   host: "192.168.0.1"
