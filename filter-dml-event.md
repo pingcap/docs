@@ -7,16 +7,16 @@ summary: Learn how to filter DML events using SQL expressions.
 
 This document introduces how to filter binlog events using SQL expressions when you use DM to perform continuous incremental data replication. For the detailed replication instruction, refer to the following documents:
 
-- [Migrate MySQL of Small Datasets to TiDB](/data-migration/migrate-mysql-tidb-less-tb.md)
-- [Migrate MySQL of Large Datasets to TiDB](/data-migration/migrate-mysql-tidb-above-tb.md)
-- [Migrate and Merge MySQL Shards of Small Datasets to TiDB](/data-migration/migrate-sharding-mysql-tidb-less-tb.md)
-- [Migrate and Merge MySQL Shards of Large Datasets to TiDB](/data-migration/migrate-sharding-mysql-tidb-above-tb.md)
+- [Migrate MySQL of Small Datasets to TiDB](/migrate-small-mysql-to-tidb.md)
+- [Migrate MySQL of Large Datasets to TiDB](/migrate-large-mysql-to-tidb.md)
+- [Migrate and Merge MySQL Shards of Small Datasets to TiDB](/migrate-small-mysql-shards-to-tidb.md)
+- [Migrate and Merge MySQL Shards of Large Datasets to TiDB](/migrate-large-mysql-shards-to-tidb.md)
 
-When performing incremental data replication, you can use the [Binlog Event Filter](/data-migration/migrate-with-binlog-event-filter.md) to filter certain types of binlog events. For example, you can choose not to replicate `DELETE` events to the downstream for the purposes like archiving and auditing. However, the Binlog Event Filter cannot determine whether to filter the `DELETE` event of a row that requires finer granularity.
+When performing incremental data replication, you can use the [Binlog Event Filter](/filter-binlog-event.md) to filter certain types of binlog events. For example, you can choose not to replicate `DELETE` events to the downstream for the purposes like archiving and auditing. However, the Binlog Event Filter cannot determine whether to filter the `DELETE` event of a row that requires finer granularity.
 
 To address the issue, since v2.0.5, DM supports using `binlog value filter` in incremental data replication to filter data. Among the DM-supported and `ROW`-formatted binlog, the binlog events carry values of all columns, and you can configure SQL expressions based on these values. If the expression calculates a row change as `TRUE`, DM does not replicate this row change to the downstream.
 
-Similar to [Binlog Event Filter](/data-migration/migrate-with-binlog-event-filter.md), you need to configure `binlog value filter` in the task configuration file. For details, see the following configuration example. For the advanced task configuration and the description, refer to [DM advanced task configuration file](https://docs.pingcap.com/tidb-data-migration/stable/task-configuration-file-full#task-configuration-file-template-advanced).
+Similar to [Binlog Event Filter](/filter-binlog-event.md), you need to configure `binlog value filter` in the task configuration file. For details, see the following configuration example. For the advanced task configuration and the description, refer to [DM advanced task configuration file](https://docs.pingcap.com/tidb-data-migration/stable/task-configuration-file-full#task-configuration-file-template-advanced).
 
 ```yaml
 name: test

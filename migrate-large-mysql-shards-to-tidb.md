@@ -9,7 +9,7 @@ If you want to migrate a large MySQL dataset (for example, more than 1 TiB) from
 
 This document uses an example to walk through the whole procedure of such kind of migration.
 
-If the data size of the MySQL shards is less than 1 TiB, you can follow the procedure described in [Migrate and Merge MySQL Shards of Small Datasets to TiDB](/data-migration/migrate-sharding-mysql-tidb-less-tb.md), which supports both full and incremental migration and the steps are easier.
+If the data size of the MySQL shards is less than 1 TiB, you can follow the procedure described in [Migrate and Merge MySQL Shards of Small Datasets to TiDB](/migrate-small-mysql-shards-to-tidb.md), which supports both full and incremental migration and the steps are easier.
 
 The following diagram shows how to migrate and merge MySQL sharded tables to TiDB using Dumpling and TiDB Lightning.
 
@@ -164,7 +164,7 @@ For more information, see [TiDB Lightning Checkpoints](https://docs.pingcap.com/
 
 ### Create the target schema
 
-After you make changes in the aforementioned [Check conflicts for sharded tables](data-migration\migrate-sharding-mysql-tidb-above-tb.md#check-conflicts-for-sharding-tables), you can now manually create the `my_db` schema and `table5` in downstream TiDB. After that, you need to configure `tidb-lightning.toml`.
+After you make changes in the aforementioned [Check conflicts for sharded tables](/migrate-large-mysql-shards-to-tidb.md#check-conflicts-for-sharded-tables), you can now manually create the `my_db` schema and `table5` in downstream TiDB. After that, you need to configure `tidb-lightning.toml`.
 
 ```toml
 [mydumper]
