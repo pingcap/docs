@@ -541,6 +541,7 @@
 - Release Notes
   - [All Releases](/releases/release-notes.md)
   - v5.0
+    - [5.0.6](/releases/release-5.0.6.md)
     - [5.0.5](/releases/release-5.0.5.md)
     - [5.0.4](/releases/release-5.0.4.md)
     - [5.0.3](/releases/release-5.0.3.md)
