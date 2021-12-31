@@ -22,4 +22,4 @@ jobs:
         run: |
           wget https://raw.githubusercontent.com/pingcap/docs/master/scripts/pr_reminder_basedon_assignee.py;
           pip3 install lxml;
-          python3 pr_reminder.py "$WEBHOOK"
+          python3 pr_reminder_basedon_assignee.py "$WEBHOOK"
