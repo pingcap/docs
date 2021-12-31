@@ -9,9 +9,9 @@ TiDB provides multiple data migration tools for different scenarios such as full
 
 This document introduces the user scenarios, advantages, and limitations of these tools. You can choose the right tool according to your needs.
 
-The following diagram shows the user scenario of each migration tool.
+<!--The following diagram shows the user scenario of each migration tool.
 
-![TiDB Migration Tools](/media/migration-tools.png)
+!TiDB Migration Tools media/migration-tools.png-->
 
 The following table introduces the user scenarios, the supported upstreams and downstreams of migration tools.
 

@@ -35,7 +35,7 @@ Before getting started, see the following documents to prepare for the migration
 - [Deploy a DM Cluster Using TiUP](https://docs.pingcap.com/tidb-data-migration/stable/deploy-a-dm-cluster-using-tiup)
 - [Use TiUP to Deploy Dumpling and Lightning](/migration-tools.md)
 - [Privileges required by DM-worker](https://docs.pingcap.com/tidb-data-migration/stable/dm-worker-intro#privileges-required-by-dm-worker)
-- [Upstream Permissions for Lightning](/tidb-lightning/tidb-lightning-faq#what-is-the-privilege-requirements-for-the-target-database)
+- [Upstream Permissions for Lightning](/tidb-lightning/tidb-lightning-faq.md#what-is-the-privilege-requirements-for-the-target-database)
 - [Downstream Permissions for Dumpling](/dumpling-overview.md##export-data-from-tidbmysql)
 
 ### Resource requirements
@@ -52,7 +52,7 @@ Before getting started, see the following documents to prepare for the migration
 
 **Note**: You cannot calculate the exact data volume exported by Dumpling from MySQL, but you can estimate the data volume by using the following SQL statement to summarize the `data-length` field in the `information_schema.tables` table:
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 /* Calculate the size of all schemas, in MiB. Replace ${schema_name} with your schema name. */
