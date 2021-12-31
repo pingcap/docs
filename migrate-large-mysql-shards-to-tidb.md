@@ -35,8 +35,8 @@ Before getting started, see the following documents to prepare for the migration
 - [Deploy a DM Cluster Using TiUP](https://docs.pingcap.com/tidb-data-migration/stable/deploy-a-dm-cluster-using-tiup)
 - [Use TiUP to Deploy Dumpling and Lightning](/migration-tools.md)
 - [Privileges required by DM-worker](https://docs.pingcap.com/tidb-data-migration/stable/dm-worker-intro#privileges-required-by-dm-worker)
-- [Upstream Permissions for Lightning](/tidb-lightning/tidb-lightning-faq.md#what-is-the-privilege-requirements-for-the-target-database)
-- [Downstream Permissions for Dumpling](/dumpling-overview.md##export-data-from-tidbmysql)
+- [Upstream Permissions for Lightning](/tidb-lightning/tidb-lightning-faq.md#what-are-the-privilege-requirements-for-the-target-database)
+- [Downstream Permissions for Dumpling](/dumpling-overview.md#export-data-from-tidbmysql)
 
 ### Resource requirements
 
