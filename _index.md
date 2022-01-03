@@ -16,7 +16,8 @@ Designed for the cloud, TiDB provides flexible scalability, reliability and secu
 
 - [TiDB Introduction](/overview.md)
 - [Basic Features](/basic-features.md)
-- [TiDB 5.2 Release Notes](/releases/release-5.2.0.md)
+- [TiDB 5.3 Release Notes](/releases/release-5.3.0.md)
+- [TiDB Release Timeline](/releases/release-timeline.md)
 - [Compatibility with MySQL](/mysql-compatibility.md)
 - [Usage Limitations](/tidb-limitations.md)
 - [TiDB Adopters](/adopters.md)
@@ -48,10 +49,9 @@ Designed for the cloud, TiDB provides flexible scalability, reliability and secu
 <ColumnTitle>Migrate Data</ColumnTitle>
 
 - [Migration Overview](/migration-overview.md)
-- [Migrate full data from Aurora](/migrate-from-aurora-using-lightning.md)
-- [Migrate continuously from Aurora/MySQL Database](/migrate-from-aurora-mysql-database.md)
-- [Migrate from CSV Files](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)
-- [Migrate from MySQL SQL Files](/migrate-from-mysql-dumpling-files.md)
+- [Migrate Data from CSV Files to TiDB](/migrate-from-csv-files-to-tidb.md)
+- [Migrate Data from SQL Files to TiDB](/migrate-from-sql-files-to-tidb.md)
+- [Migrate Data from Amazon Aurora to TiDB](/migrate-aurora-to-tidb.md)
 
 </NavColumn>
 

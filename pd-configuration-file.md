@@ -156,14 +156,12 @@ Configuration items related to the log file
 ### `max-days`
 
 + The maximum number of days in which a log is kept
-+ Default value: `28`
-+ Minimum value: `1`
++ Default value: `0`
 
 ### `max-backups`
 
 + The maximum number of log files to keep
-+ Default value: `7`
-+ Minimum value: `1`
++ Default value: `0`
 
 ## `metric`
 
@@ -191,7 +189,7 @@ Configuration items related to scheduling
 ### `patrol-region-interval`
 
 + Controls the running frequency at which `replicaChecker` checks the health state of a Region. The smaller this value is, the faster `replicaChecker` runs. Normally, you do not need to adjust this parameter.
-+ Default value: `100ms`
++ Default value: `10ms`
 
 ### `split-merge-interval`
 
@@ -201,12 +199,12 @@ Configuration items related to scheduling
 ### `max-snapshot-count`
 
 + Controls the maximum number of snapshots that a single store receives or sends at the same time. PD schedulers depend on this configuration to prevent the resources used for normal traffic from being preempted.
-+ Default value value: `3`
++ Default value value: `64`
 
 ### `max-pending-peer-count`
 
 + Controls the maximum number of pending peers in a single store. PD schedulers depend on this configuration to prevent too many Regions with outdated logs from being generated on some nodes.
-+ Default value: `16`
++ Default value: `64`
 
 ### `max-store-down-time`
 
@@ -268,11 +266,15 @@ Configuration items related to scheduling
 + Determines whether to enable the merging of cross-table Regions
 + Default value: `true`
 
-### `region-score-formula-version`
+### `region-score-formula-version` <span class="version-mark">New in v5.0</span> 
 
 + Controls the version of the Region score formula
 + Default value: `v2`
-+ Optional values: `v1` and `v2`
++ Optional values: `v1` and `v2`. Compared to v1, the changes in v2 are smoother, and the scheduling jitter caused by space reclaim is improved.
+
+> **Note:**
+>
+> If you have upgraded your cluster from a TiDB 4.0 version to the current version, the new formula version is automatically disabled by default to ensure consistent PD behavior before and after the upgrading. If you want to change the formula version, you need to manually switch through the `pd-ctl` setting. For details, refer to [PD Control](/pd-control.md#config-show--set-option-value--placement-rules).
 
 ### `enable-joint-consensus` <span class="version-mark">New in v5.0</span>
 
@@ -316,6 +318,10 @@ Configuration items related to replicas
 
 + Default value: 3
 + PD rounds the lowest digits of the flow number, which reduces the update of statistics caused by the changes of the Region flow information. This configuration item is used to specify the number of lowest digits to round for the Region flow information. For example, the flow `100512` will be rounded to `101000` because the default value is `3`. This configuration replaces `trace-region-flow`.
+
+> **Note:**
+>
+> If you have upgraded your cluster from a TiDB 4.0 version to the current version, the behavior of `flow-round-by-digit` after the upgrading and the behavior of `trace-region-flow` before the upgrading are consistent by default. This means that if the value of  `trace-region-flow` is false before the upgrading, the value of `flow-round-by-digit` after the upgrading is 127; if the value of `trace-region-flow` is `true` before the upgrading, the value of `flow-round-by-digit` after the upgrading is `3`.
 
 ## `label-property`
 
@@ -361,3 +367,7 @@ Configuration items related to the [TiDB Dashboard](/dashboard/dashboard-intro.m
 + Determines whether to enable the telemetry collection feature in TiDB Dashboard.
 + Default value: `true`
 + See [Telemetry](/telemetry.md) for details.
+
+## `replication-mode`
+
+Configuration items related to the replication mode of all Regions. See [Enable the DR Auto-Sync mode](/two-data-centers-in-one-city-deployment.md#enable-the-dr-auto-sync-mode) for details.

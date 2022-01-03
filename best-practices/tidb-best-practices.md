@@ -42,9 +42,9 @@ TiDB provides complete distributed transactions and the model has some optimizat
 
     Assume that the database is used as a counter. High access concurrency might lead to severe conflicts, resulting in multiple retries or even timeouts. Therefore, in the scenario of severe conflicts, it is recommended to use the pessimistic transaction mode or to solve problems at the system architecture level, such as placing counter in Redis. Nonetheless, the optimistic transaction model is efficient if the access conflict is not very severe.
 
-* Pessimistic transaction model
+* Pessimistic transaction mode
 
-    In TiDB, the pessimistic transaction model has almost the same behavior as in MySQL. The transaction applies a lock during the execution phase, which avoids retries in conflict situations and ensures a higher success rate. By applying the pessimistic locking, you can also lock data in advance using `SELECT FOR UPDATE`.
+    In TiDB, the pessimistic transaction mode has almost the same behavior as in MySQL. The transaction applies a lock during the execution phase, which avoids retries in conflict situations and ensures a higher success rate. By applying the pessimistic locking, you can also lock data in advance using `SELECT FOR UPDATE`.
 
     However, if the application scenario has fewer conflicts, the optimistic transaction model has better performance.
 
@@ -160,14 +160,14 @@ As mentioned before, TiDB limits the size of a single transaction in the Key-Val
 
 It is recommended to split statements into batches or add a limit to the statements, whether they are `INSERT`, `UPDATE` or `DELETE` statements.
 
-When deleting a large amount of data, it is recommended to use `Delete * from t where xx limit 5000;`. It deletes through the loop and use `Affected Rows == 0` as a condition to end the loop.
+When deleting a large amount of data, it is recommended to use `Delete from t where xx limit 5000;`. It deletes through the loop and use `Affected Rows == 0` as a condition to end the loop.
 
 If the amount of data that needs to be deleted at a time is large, this loop method gets slower and slower because each deletion traverses backward. After deleting the previous data, lots of deleted flags remain for a short period (then all is cleared by Garbage Collection) and affect the following `DELETE` statement. If possible, it is recommended to refine the `WHERE` condition. Assume that you need to delete all data on `2017-05-26`, you can use the following statements:
 
 ```sql
 for i from 0 to 23:
     while affected_rows > 0:
-        delete * from t where insert_time >= i:00:00 and insert_time < (i+1):00:00 limit 5000;
+        delete from t where insert_time >= i:00:00 and insert_time < (i+1):00:00 limit 5000;
         affected_rows = select affected_rows()
 ```
 

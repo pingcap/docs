@@ -10,14 +10,14 @@ This is a list of TiDB adopters in various industries.
 
 | Company | Industry | Case studies |
 | :--- | :--- | :--- |
+|[SHAREit Group](https://www.crunchbase.com/organization/shareit-2)|Internet|[English](https://pingcap.com/case-studies/why-shareit-selects-tikv-for-data-storage-for-its-2.4-billion-user-business); [Chinese](https://pingcap.com/zh/blog/devcon-2021-shareit)|
 |[China Telecom Bestpay](https://www.crunchbase.com/organization/orange-finance)|Mobile Payment|[English](https://pingcap.com/case-studies/how-we-process-data-five-times-more-efficiently-using-a-scale-out-mysql-alternative/); [Chinese](https://pingcap.com/cases-cn/user-case-bestpay/)|
 |[VNG](https://en.wikipedia.org/wiki/VNG_Corporation)|Mobile Payment|English [#1](https://pingcap.com/case-studies/tidb-at-zalopay-infrastructure-lesson-learned/), [#2](https://pingcap.com/case-studies/zalopay-using-a-scale-out-mysql-alternative-to-serve-millions-of-users)|
 |[Ping++](https://www.crunchbase.com/organization/ping-5)|Mobile Payment||
 |[LianLian Tech](https://www.crunchbase.com/organization/lianlian-pay)|Mobile Payment||
-|[Pinterest](https://en.wikipedia.org/wiki/Pinterest)|Media and Entertainment|[English](https://pingcap.com/case-studies/how-pinterest-reduced-costs-and-improved-data-consistency-with-newsql-database)|
 |[U-Next](https://www.crunchbase.com/organization/u-next)|Media and Entertainment|[English](https://pingcap.com/case-studies/running-a-scale-out-database-on-arm-as-mysql-alternative/)|
 |[Dailymotion](https://en.wikipedia.org/wiki/Dailymotion)|Media and Entertainment||
-|[iQiyi](https://en.wikipedia.org/wiki/IQiyi)|Media and Entertainment|[English](https://pingcap.com/case-studies/tidb-in-iqiyi/)|
+|[iQIYI](https://en.wikipedia.org/wiki/IQiyi)|Media and Entertainment|English [#1](https://pingcap.com/case-studies/tidb-in-iqiyi/), [#2](https://pingcap.com/case-studies/how-tidb-powers-real-time-analytics-for-a-streaming-media-giant); [Chinese](https://pingcap.com/zh/case/user-case-iq)|
 |[BookMyShow](https://www.crunchbase.com/organization/bookmyshow)|Media and Entertainment|[English](https://pingcap.com/case-studies/tidb-in-bookmyshow/)|
 |[Yiguo.com](https://www.crunchbase.com/organization/shanghai-yiguo-electron-business)|E-commerce|[English](https://www.datanami.com/2018/02/22/hybrid-database-capturing-perishable-insights-yiguo/)|
 |[Shopee](https://en.wikipedia.org/wiki/Shopee)|E-commerce|English [#1](https://pingcap.com/case-studies/tidb-in-shopee/), [#2](https://pingcap.com/case-studies/choosing-right-database-for-your-applications)|
@@ -26,7 +26,6 @@ This is a list of TiDB adopters in various industries.
 |[Meituan](https://www.crunchbase.com/organization/meituan)|E-commerce|English [#1](https://pingcap.com/case-studies/migrating-from-mysql-to-a-scale-out-database-to-serve-our-290-million-monthly-users), [#2](https://pingcap.com/case-studies/how-we-use-a-mysql-alternative-to-avoid-sharding-and-provide-strong-consistency); [Chinese](https://pingcap.com/zh/case/user-case-meituandianping)|
 |[Happigo.com](https://www.crunchbase.com/organization/happigo-com)|E-commerce||
 |[Yimutian](https://www.crunchbase.com/organization/yimutian)|E-commerce||
-|[Youju Tech](https://nn.yjyz.com/)|E-commerce||
 |[Maizuo](https://www.crunchbase.com/organization/maizhuo)|E-commerce||
 |[Mogujie](https://www.crunchbase.com/organization/mogujie)|E-commerce||
 |[Zhihu](https://en.wikipedia.org/wiki/Zhihu)|Knowledge Sharing|English [#1](https://pingcap.com/case-studies/lesson-learned-from-queries-over-1.3-trillion-rows-of-data-within-milliseconds-of-response-time-at-zhihu/), [#2](https://pingcap.com/case-studies/horizontally-scaling-hive-metastore-database-by-migrating-from-mysql-to-tidb), [#3](https://pingcap.com/case-studies/boosting-big-data-performance-by-combining-tidb-with-hive-and-hdfs)|
@@ -54,6 +53,7 @@ This is a list of TiDB adopters in various industries.
 |[Mobikok](https://www.linkedin.com/company/shenzhen-keke-network-technology-co.-ltd./)|AdTech||
 |[Ninja Van](https://www.crunchbase.com/organization/ninja-van-2)| Logistics|[English](https://pingcap.com/case-studies/choose-a-mysql-alternative-over-vitess-and-crdb-to-scale-out-our-databases-on-k8s)|
 |[ZTO Express](https://www.crunchbase.com/organization/zto-express)| Logistics|[English](https://pingcap.com/case-studies/why-we-migrated-from-exadata-to-a-scale-out-htap-database-for-near-real-time-analytics); [Chinese](https://pingcap.com/cases-cn/user-case-zto-express/)|
+|[JD.com](https://en.wikipedia.org/wiki/JD.com)|Logistics|[English](https://pingcap.com/case-studies/8x-system-performance-boost-why-we-migrated-from-mysql-to-newsql-database); [Chinese](https://pingcap.com/zh/case/user-case-jdl)|
 |[G7 Networks](https://www.crunchbase.com/organization/g7)| Logistics||
 |[Hive-Box](http://www.fcbox.com/en/pc/index.html#/)|Logistics||
 |[NetEase Games](https://www.linkedin.com/company/netease-games)|Gaming|[English](https://pingcap.com/case-studies/why-we-chose-tidb-over-other-mysql-based-and-newsql-storage-solutions); [Chinese](https://pingcap.com/cases-cn/user-case-wangyihuyu/)|
@@ -61,11 +61,12 @@ This is a list of TiDB adopters in various industries.
 |[Kunlun](https://www.crunchbase.com/organization/kunlun)|Gaming|[English](https://pingcap.com/case-studies/empowering-your-gaming-application-with-a-scale-out-newsql-database)|
 |[YOOZOO Games](https://www.crunchbase.com/organization/yoozoo-games)|Gaming||
 |[Seasun Games](https://www.crunchbase.com/organization/seasun)|Gaming||
-|[FUNYOURS JAPAN](http://company.funyours.co.jp/)|Gaming||
+|[FUNYOURS JAPAN](https://www.funyours.co.jp/#/company)|Gaming||
 |[Hoodinn](https://www.crunchbase.com/organization/hoodinn)|Gaming||
 |[SEA group](https://sea-group.org/?lang=en)|Gaming||
 |[Zhaopin.com](https://www.crunchbase.com/organization/zhaopin)|Recruiting||
 |[BIGO](https://www.crunchbase.com/organization/bigo-technology)|Live Streaming|[English](https://pingcap.com/case-studies/why-we-chose-an-htap-database-over-mysql-for-horizontal-scaling-and-complex-queries/); [Chinese](https://pingcap.com/cases-cn/user-case-bigo/)|
+|[Huya Live](https://en.wikipedia.org/wiki/Huya_Live)|Live Streaming|[English](https://pingcap.com/case-studies/how-we-scale-out-databases-and-get-big-data-queries-6x-faster-with-a-mysql-alternative); [Chinese](https://pingcap.com/zh/case/user-case-huya)|
 |[Panda.tv](https://www.crunchbase.com/organization/panda-tv)|Live Streaming||
 |[Phoenix New Media](https://www.crunchbase.com/organization/phoenix-new-media)|Media||
 |[Tencent OMG](https://en.wikipedia.org/wiki/Tencent)|Media||

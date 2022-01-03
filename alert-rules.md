@@ -8,7 +8,7 @@ aliases: ['/docs/dev/alert-rules/','/docs/dev/reference/alert-rules/']
 
 # TiDB Cluster Alert Rules
 
-This document describes the alert rules for different components in a TiDB cluster, including the rule descriptions and solutions of the alert items in TiDB, TiKV, PD, TiDB Binlog, Node_exporter and Blackbox_exporter.
+This document describes the alert rules for different components in a TiDB cluster, including the rule descriptions and solutions of the alert items in TiDB, TiKV, PD, TiFlash, TiDB Binlog, TiCDC, Node_exporter and Blackbox_exporter.
 
 According to the severity level, alert rules are divided into three categories (from high to low): emergency-level, critical-level, and warning-level. This division of severity levels applies to all alert items of each component below.
 
@@ -145,11 +145,11 @@ This section gives the alert rules for the TiDB component.
     * Restart TiDB to recover the service.
     * Check whether the TiDB Binlog service is normal.
 
-#### `TiDB_tikvclient_backoff_total`
+#### `TiDB_tikvclient_backoff_seconds_count`
 
 * Alert rule:
 
-    `increase(tidb_tikvclient_backoff_total[10m]) > 10`
+    `increase(tidb_tikvclient_backoff_seconds_count[10m]) > 10`
 
 * Description:
 
@@ -345,7 +345,7 @@ This section gives the alert rules for the PD component.
 
 * Alert rule:
 
-    `count(changes(pd_server_tso{type="save"}[10m]) > 0) >= 2`
+    `count(changes(pd_tso_events{type="save"}[10m]) > 0) >= 2`
 
 * Description:
 
@@ -376,7 +376,7 @@ This section gives the alert rules for the PD component.
 
 * Alert rule:
 
-    `changes(pd_server_tso{type="system_time_slow"}[10m]) >= 1`
+    `changes(pd_tso_events{type="system_time_slow"}[10m]) >= 1`
 
 * Description:
 
@@ -596,11 +596,11 @@ This section gives the alert rules for the TiKV component.
 
 * Alert rule:
 
-    `sum(rate(tikv_thread_cpu_seconds_total{name="apply_worker"}[1m])) by (instance) > 1.8`
+    `max(rate(tikv_thread_cpu_seconds_total{name=~"apply_.*"}[1m])) by (instance) > 0.9`
 
 * Description:
 
-    The pressure on the apply Raft log thread is too high. It is often caused by a burst of writes.
+    The apply Raft log thread is under great pressure and is approaching or has exceeded its limit. This is often caused by a burst of writes.
 
 ### Warning-level alerts
 
@@ -781,9 +781,17 @@ This section gives the alert rules for the TiKV component.
 
     The speed of splitting Regions is slower than the write speed. To alleviate this issue, you’d better update TiDB to a version that supports batch-split (>= 2.1.0-rc1). If it is not possible to update temporarily, you can use `pd-ctl operator add split-region <region_id> --policy=approximate` to manually split Regions.
 
+## TiFlash alert rules
+
+For the detailed descriptions of TiFlash alert rules, see [TiFlash Alert Rules](/tiflash/tiflash-alert-rules.md).
+
 ## TiDB Binlog alert rules
 
 For the detailed descriptions of TiDB Binlog alert rules, see [TiDB Binlog monitoring document](/tidb-binlog/monitor-tidb-binlog-cluster.md#alert-rules).
+
+## TiCDC Alert rules
+
+For the detailed descriptions of TiCDC alert rules, see [TiCDC Alert Rules](/ticdc/ticdc-alert-rules.md).
 
 ## Node_exporter host alert rules
 
@@ -920,7 +928,7 @@ This section gives the alert rules for the Node_exporter host.
 
 * Alert rule:
 
-    `((rate(node_disk_write_time_seconds_total{device=~".+"}[5m]) / rate(node_disk_writes_completed_total{device=~".+"}[5m])) or (irate(node_disk_write_time_seconds_total{device=~".+"}[5m]) / irate(node_disk_writes_completed_total{device=~".+"}[5m]))) * 1000 > 16`
+    `((rate(node_disk_write_time_seconds_total{device=~".+"}[5m]) / rate(node_disk_writes_completed_total{device=~".+"}[5m])) or (irate(node_disk_write_time_seconds_total{device=~".+"}[5m]) / irate(node_disk_writes_completed_total{device=~".+"}[5m])))> 16`
 
 * Description:
 
@@ -953,6 +961,22 @@ This section gives the alert rules for the Blackbox_exporter TCP, ICMP, and HTTP
     * Check whether the machine that provides the TiDB service is down.
     * Check whether the TiDB process exists.
     * Check whether the network between the monitoring machine and the TiDB machine is normal.
+
+#### `TiFlash_server_is_down`
+
+* Alert rule:
+
+    `probe_success{group="tiflash"} == 0`
+
+* Description:
+
+    Failure to probe the TiFlash service port.
+
+* Solution:
+
+    * Check whether the machine that provides the TiFlash service is down.
+    * Check whether the TiFlash process exists.
+    * Check whether the network between the monitoring machine and the TiFlash machine is normal.
 
 #### `Pump_server_is_down`
 

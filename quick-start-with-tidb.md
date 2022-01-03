@@ -10,6 +10,10 @@ This guide walks you through the quickest way to get started with TiDB. You will
 
 > **Note:**
 >
+> TiDB, TiUP and TiDB Dashboard share usage details with PingCAP to help understand how to improve the product. For details about what is shared and how to disable the sharing, see [Telemetry](/telemetry.md).
+
+> **Note:**
+>
 > The deployment method provided in this guide is **ONLY FOR** quick start, **NOT FOR** production.
 >
 > - To deploy an on-premises production cluster, see [production installation guide](/production-deployment-using-tiup.md).
@@ -58,26 +62,26 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
         {{< copyable "shell-regular" >}}
 
         ```shell
-        tiup playground v5.2.1 --db 2 --pd 3 --kv 3 --monitor
+        tiup playground v5.3.0 --db 2 --pd 3 --kv 3
         ```
 
-        The command downloads a version cluster to the local machine and starts it, such as v5.2.1. `--monitor` means that the monitoring component is also deployed.
-
-        To view the latest version, run `tiup list tidb`.
+        The command downloads a version cluster to the local machine and starts it, such as v5.3.0. To view the latest version, run `tiup list tidb`.
 
         This command returns the access methods of the cluster:
 
         ```log
         CLUSTER START SUCCESSFULLY, Enjoy it ^-^
-        To connect TiDB: mysql --host 127.0.0.1 --port 4000 -u root
-        To connect TiDB: mysql --host 127.0.0.1 --port 4001 -u root
+        To connect TiDB: mysql --comments --host 127.0.0.1 --port 4001 -u root -p (no password)
+        To connect TiDB: mysql --comments --host 127.0.0.1 --port 4000 -u root -p (no password)
         To view the dashboard: http://127.0.0.1:2379/dashboard
-        To view the monitor: http://127.0.0.1:9090
+        PD client endpoints: [127.0.0.1:2379 127.0.0.1:2382 127.0.0.1:2384]
+        To view Prometheus: http://127.0.0.1:9090
+        To view Grafana: http://127.0.0.1:3000
         ```
 
         > **Note:**
         >
-        > + Since v5.2.1, TiDB supports running `tiup playground` on the machine that uses the Apple M1 chip.
+        > + Since v5.2.0, TiDB supports running `tiup playground` on the machine that uses the Apple M1 chip.
         > + For the playground operated in this way, after the test deployment is finished, TiUP will clean up the original cluster data. You will get a new cluster after re-running the command.
         > + If you want the data to be persisted on storage，run `tiup --tag <your-tag> playground ...`. For details, refer to [TiUP Reference Guide](/tiup/tiup-reference.md#-t---tag).
 
@@ -164,12 +168,10 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
         {{< copyable "shell-regular" >}}
 
         ```shell
-        tiup playground v5.2.1 --db 2 --pd 3 --kv 3 --monitor
+        tiup playground v5.3.0 --db 2 --pd 3 --kv 3
         ```
 
-        The command downloads a version cluster to the local machine and starts it, such as v5.2.1. `--monitor` means that the monitoring component is also deployed.
-
-        To view the latest version, run `tiup list tidb`.
+        The command downloads a version cluster to the local machine and starts it, such as v5.3.0. To view the latest version, run `tiup list tidb`.
 
         This command returns the access methods of the cluster:
 
@@ -462,7 +464,3 @@ Other requirements for the target machine:
 
     - [Use TiFlash](/tiflash/use-tiflash.md)
     - [TiFlash Overview](/tiflash/tiflash-overview.md)
-
-> **Note:**
->
-> By default, TiDB, TiUP and TiDB Dashboard share usage details with PingCAP to help understand how to improve the product. For details about what is shared and how to disable the sharing, see [Telemetry](/telemetry.md).
