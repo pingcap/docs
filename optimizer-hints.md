@@ -236,7 +236,6 @@ When multiple `USE_INDEX_MERGE` hints are made to the same table, the optimizer 
 This hint takes effect on strict conditions, including:
 
 - If the query can select a single index scan in addition to full table scan, the optimizer does not select index merge.
-- If the query is in an explicit transaction, and if the statements before this query has already written data, the optimizer does not select index merge.
 
 ## Hints that take effect in the whole query
 

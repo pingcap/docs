@@ -35,11 +35,8 @@ In the above query, the filter condition is a `WHERE` clause that uses `OR` as t
 For the scan operation that is performed on a specific range of data, such as `IndexRangeScan`/`TableRangeScan`, the `operator info` column in the result has additional information about the scan range compared with other scan operations like `IndexFullScan`/`TableFullScan`. In the above example, the `range:(1,+inf]` in the `IndexRangeScan_13` operator indicates that the operator scans the data from 1 to positive infinity.
 
 > **Note:**
->
-> At present, the `IndexMerge` feature is enabled by default after v5.4.0, the currently supported scenarios of `IndexMerge` in TiDB 4.0 are limited to the disjunctive normal form (expressions connected by `or`). The conjunctive normal form (expressions connected by `and`) will be supported in later versions. Enable the `IndexMerge` in one of two ways:
->
-> - Set `tidb_enable_index_merge=1`;
->
-> - Use the SQL Hint [`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-) in the query.
->
-> SQL Hint has a higher priority than system variables.
+> The `IndexMerge` feature is enabled by default after v5.4.0.
+> You can use SQL Hint [`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-) to force the optimizer choose `IndexMerge`. And SQL Hint has a higher priority than system variables.
+> The currently supported scenarios of `IndexMerge` in TiDB are limited to the disjunctive normal form (expressions connected by `or`). The conjunctive normal form (expressions connected by `and`) will be supported in later versions.
+> `IndexMerge` is not supported in [tempoaray tables](/temporary-tables.md) for now.
+> When there are expressions that cannot be pushed down, SQL Hint [`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-) is required if you want to use `IndexMerge`
