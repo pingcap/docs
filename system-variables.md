@@ -772,6 +772,13 @@ Constraint checking is always performed in place for pessimistic transactions (d
 >
 > Only the default value of `OFF` can be considered safe. Setting `tidb_enable_noop_functions=1` might lead to unexpected behaviors in your application, because it permits TiDB to ignore certain syntax without providing an error. For example, the syntax `START TRANSACTION READ ONLY` is permitted, but the transaction remains in read-write mode.
 
+### tidb_enable_paging <span class="version-mark">New in v5.4.0</span>
+
+- Scope: SESSION | GLOBAL
+- Default value: `OFF`
+- This variable controls whether to use the paging coprocessor requests in `IndexLookUp` operator.
+- User scenarios: For read queries that use `IndexLookup` and `Limit` and that `Limit` cannot be pushed down to `IndexScan`, when TiDB retrieve rows from a table after reading indexes, there might be high latency or high CPU usage for TiKV's unified read pool. In such cases, because the `Limit` operator only requires a small set of data, if you set `tidb_enable_paging` to `ON`, TiDB processes less data, which reduces query latency and resource consumption.
+
 ### tidb_enable_parallel_apply <span class="version-mark">New in v5.0</span>
 
 - Scope: SESSION | GLOBAL
@@ -1685,12 +1692,3 @@ This variable is an alias for `transaction_isolation`.
 - Scope: SESSION | GLOBAL
 - Default value: `ON`
 - This variable controls whether to use the high precision mode when computing the window functions.
-
-### tidb_enable_paging
-
-- Scope: SESSION | GLOBAL
-- Default value: `OFF`
-- This variable controls whether to use the paging coprocessor requests in `IndexLookUp` operator.
-- Turn on `tidb_enable_paging` can optimize read queries which use `IndexLookUp` and `Limit` and the `Limit` can not be pushed down to `IndexScan`.
-- For the workload which uses `IndexLookUp` operator, if it requires only a few rows however the `IndexScan` operator needs to scan a large range. It'll increase the latency and CPU usage of unified read pool due to scanning the entire range.
-- With `tidb_enable_paging` turned on, `IndexScan` operator will return data in batch, which shifts `TableScan` to earlier stage, optimizes the latency, and decreases the count of scanned keys in `IndexScan` and `TableScan`.
