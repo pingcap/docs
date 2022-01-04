@@ -117,6 +117,8 @@ export TIUP_MIRRORS=/shared_data/tiup
 tiup list
 ```
 
+Using `TIUP_MIRRORS` can permanently change the mirror configuration, just like `tiup mirror set`. For details see [tiup issue #651](https://github.com/pingcap/tiup/issues/651).
+
 ### Updating a private repo
 
 When running `tiup mirror clone` a second time with the same `target-dir` it will create new manifests and download newly available versions of components if applicable. It will skip downloading existing component versions.
