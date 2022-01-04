@@ -145,11 +145,11 @@ This section gives the alert rules for the TiDB component.
     * Restart TiDB to recover the service.
     * Check whether the TiDB Binlog service is normal.
 
-#### `TiDB_tikvclient_backoff_total`
+#### `TiDB_tikvclient_backoff_seconds_count`
 
 * Alert rule:
 
-    `increase(tidb_tikvclient_backoff_total[10m]) > 10`
+    `increase(tidb_tikvclient_backoff_seconds_count[10m]) > 10`
 
 * Description:
 
@@ -596,11 +596,11 @@ This section gives the alert rules for the TiKV component.
 
 * Alert rule:
 
-    `sum(rate(tikv_thread_cpu_seconds_total{name="apply_worker"}[1m])) by (instance) > 1.8`
+    `max(rate(tikv_thread_cpu_seconds_total{name=~"apply_.*"}[1m])) by (instance) > 0.9`
 
 * Description:
 
-    The pressure on the apply Raft log thread is too high. It is often caused by a burst of writes.
+    The apply Raft log thread is under great pressure and is approaching or has exceeded its limit. This is often caused by a burst of writes.
 
 ### Warning-level alerts
 
