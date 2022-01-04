@@ -9,14 +9,14 @@ This document describes how to upgrade TiCDC cluster and modify the configuratio
 
 ## Upgrade TiCDC using TiUP
 
-This section introduces how to upgrade the TiCDC cluster using TiUP. In the following example, assume that you need to upgrade TiCDC and the entire TiDB cluster to v5.0.4.
+This section introduces how to upgrade the TiCDC cluster using TiUP. In the following example, assume that you need to upgrade TiCDC and the entire TiDB cluster to v5.0.6.
 
 {{< copyable "shell-regular" >}}
 
 ```shell
 tiup update --self && \
 tiup update --all && \
-tiup cluster upgrade <cluster-name> v5.0.4
+tiup cluster upgrade <cluster-name> v5.0.6
 ```
 
 ### Notes for upgrade
@@ -28,12 +28,12 @@ tiup cluster upgrade <cluster-name> v5.0.4
 
 This section introduces how to modify the configuration of TiCDC cluster using the  [`tiup cluster edit-config`](/tiup/tiup-component-cluster-edit-config.md) command of TiUP. The following example changes the value of `gc-ttl` from the default `86400` to `3600`, namely, one hour.
 
-First, execute the following command. You need to replace `<cluster-name>` with your actual cluster name. 
+First, execute the following command. You need to replace `<cluster-name>` with your actual cluster name.
 
 {{< copyable "shell-regular" >}}
 
 ```shell
-tiup cluster edit-config <cluster-name> 
+tiup cluster edit-config <cluster-name>
 ```
 
 Then, enter the vi editor page and modify the `cdc` configuraion under [`server-configs`](/tiup/tiup-cluster-topology-reference.md#server_configs). The configuration is shown below:
