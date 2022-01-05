@@ -76,18 +76,18 @@ func skipSv(sv *variable.SysVar) bool {
 		variable.TiDBBatchCommit,
 		variable.TiDBBatchDelete,
 		variable.TiDBBatchInsert,
-		variable.TiDBEnableChangeMultiSchema,
-		variable.TiDBEnableExchangePartition,
-		variable.TiDBEnableExtendedStats,
-		variable.TiDBEnableHistoricalStats,
+		variable.TiDBEnableChangeMultiSchema, // feature flag
+		variable.TiDBEnableExchangePartition, // feature flag
+		variable.TiDBEnableExtendedStats,     // feature flag
+		variable.TiDBEnableHistoricalStats,   // feature flag
 		variable.TiDBEnableIndexMergeJoin,
-		variable.TiDBEnableLocalTxn,
+		variable.TiDBEnableLocalTxn,          // feature flag
 		variable.TiDBEnableOrderedResultMode, // no current plans to document
-		variable.TiDBEnablePaging,
+		variable.TiDBEnablePaging,            // will be documented soon
 		variable.TiDBEnablePipelinedWindowFunction,
 		variable.TiDBEnablePointGetCache,
 		variable.TiDBEnableStreaming,
-		variable.TiDBEnableTopSQL,
+		variable.TiDBEnableTopSQL, // will be documented soon
 		variable.TiDBGuaranteeLinearizability,
 		variable.TiDBHashExchangeWithNewCollation,
 		variable.TiDBLastQueryInfo,
@@ -100,7 +100,7 @@ func skipSv(sv *variable.SysVar) bool {
 		variable.TiDBMemQuotaTopn,
 		variable.TiDBMergeJoinConcurrency,
 		variable.TiDBMPPStoreFailTTL,
-		variable.TiDBOptBCJ,
+		variable.TiDBOptBCJ, // will be removed soon
 		variable.TiDBOptCartesianBCJ,
 		variable.TiDBOptConcurrencyFactor,
 		variable.TiDBOptCopCPUFactor,
@@ -120,10 +120,10 @@ func skipSv(sv *variable.SysVar) bool {
 		variable.TiDBRestrictedReadOnly,
 		variable.TiDBShardAllocateStep,
 		variable.TiDBStreamAggConcurrency,
-		variable.TiDBTopSQLMaxCollect,
-		variable.TiDBTopSQLMaxStatementCount,
-		variable.TiDBTopSQLPrecisionSeconds,
-		variable.TiDBTopSQLReportIntervalSeconds,
+		variable.TiDBTopSQLMaxCollect,            // will be documented soon
+		variable.TiDBTopSQLMaxStatementCount,     // will be documented soon
+		variable.TiDBTopSQLPrecisionSeconds,      // will be documented soon
+		variable.TiDBTopSQLReportIntervalSeconds, // will be documented soon
 		variable.TiDBTrackAggregateMemoryUsage,
 		variable.TiDBTxnReadTS,
 		variable.TiDBTxnScope,
