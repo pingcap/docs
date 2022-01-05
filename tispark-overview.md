@@ -95,6 +95,10 @@ cd spark
 
 Download TiSpark's jar package [here](https://github.com/pingcap/tispark/releases) and place it in the `$SPARKPATH/jars` folder.
 
+> **Note:**
+> 
+> TiSpark v2.1.x and older versions have file names that look like `tispark-core-2.1.9-spark_2.4-jar-with-dependencies.jar`. Please check the [releases page on GitHub](https://github.com/pingcap/tispark/releases) for the exact file name for the version you want.
+
 ```
 wget https://github.com/pingcap/tispark/releases/download/v2.4.1/tispark-assembly-2.4.1.jar
 mv tispark-assembly-2.4.1.jar $SPARKPATH/jars/
