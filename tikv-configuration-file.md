@@ -1287,12 +1287,12 @@ Configuration items related to Raft Engine.
 
 ### `batch-compression-threshold`
 
-+ Compress a log batch if its size exceeds this value. Compression is disabled when set to zero.
++ Compress a log batch if its size exceeds this value. Compression is disabled when it is set to zero.
 + Default value: `"8KB"`
 
 ### `bytes-per-sync`
 
-+ Flush buffered writes to disk when their accumulative size exceeds this threshold.
++ Flush buffered writes to disk when their accumulative size exceeds this value.
 + Setting it to zero disabled incremental sync.
 + Default value: `"4MB"`
 
@@ -1303,13 +1303,13 @@ Configuration items related to Raft Engine.
 
 ### `purge-threshold`
 
-+ Purge main log queue if its file size exceeds this value.
++ Purge main log queue if its size exceeds this value.
 + Default value: `"10GB"`
 
 ### `recovery-mode`
 
 + How to deal with file corruption during recovery.
-+ Value options: `"absolute-consistency"`, `tolerate-tail-corruption`, `tolerate-any-corruption`
++ Value options: `"absolute-consistency"`, `"tolerate-tail-corruption"`, `"tolerate-any-corruption"`
 + Default value: `"tolerate-tail-corruption"`
 
 ### `recovery-read-block-size`
