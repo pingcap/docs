@@ -107,7 +107,7 @@ The following are some scenarios:
   SELECT count(region_id) cnt, index_name, store_id FROM INFORMATION_SCHEMA.TIDB_HOT_REGIONS_HISTORY WHERE update_time >'2021-08-18 21:40:00' and update_time <'2021-09-19 00:00:00' and table_name = 'table_name' group by index_name, store_id order by index_name,cnt desc;
   ```
 
-* Query the distribution of hotspot index leader regions within a specified period of time:
+* Query the distribution of hot Index Leader Regions within a specified period of time. Replace update_time and table_name with your actual values. 
 
   {{< copyable "sql" >}}
 
