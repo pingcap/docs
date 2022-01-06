@@ -373,10 +373,10 @@ Use this command to view the hot spot information of the cluster.
 Usage:
 
 ```bash
->> hot read                             // Display hot spot for the read operation
->> hot write                            // Display hot spot for the write operation
->> hot store                            // Display hot spot for all the read and write operations
->> hot history 1634478065 1634650865    // Display history hot spot 
+>> hot read                                // Display hot spot for the read operation
+>> hot write                               // Display hot spot for the write operation
+>> hot store                               // Display hot spot for all the read and write operations
+>> hot history 1629294000000 1631980800000 // Display history hot spot 
 [
   {
     UpdateTime    ...
@@ -395,7 +395,7 @@ Usage:
     EncryptionMeta ...
   }
 ]
->>hot history 1634478065 1634650865 hot_region_type read region_id [1,2,3] store_id [1,2,3] peer_id [1,2,3] is_leader true is_learner true
+>>hot history 1629294000000 1631980800000 hot_region_type read region_id [1,2,3] store_id [1,2,3] peer_id [1,2,3] is_leader true is_learner true
 [
   {
     UpdateTime    ...
