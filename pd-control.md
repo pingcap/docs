@@ -376,7 +376,7 @@ Usage:
 >> hot read                                // Display hot spot for the read operation
 >> hot write                               // Display hot spot for the write operation
 >> hot store                               // Display hot spot for all the read and write operations
->> hot history 1629294000000 1631980800000 // Display history hot spot 
+>> hot history 1629294000000 1631980800000 // Display history hot spot for the specified period (milliseconds)
 [
   {
     UpdateTime    ...
@@ -395,7 +395,7 @@ Usage:
     EncryptionMeta ...
   }
 ]
->>hot history 1629294000000 1631980800000 hot_region_type read region_id [1,2,3] store_id [1,2,3] peer_id [1,2,3] is_leader true is_learner true
+>> hot history 1629294000000 1631980800000 hot_region_type read region_id [1,2,3] store_id [1,2,3] peer_id [1,2,3] is_leader true is_learner true // Display history hot spot for the specified period with more conditions
 [
   {
     UpdateTime    ...
