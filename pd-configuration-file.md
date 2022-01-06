@@ -285,7 +285,7 @@ Configuration items related to scheduling
 
 ### `hot-regions-write-interval`
 
-+ Set the time interval for PD to store Hot Region information.
++ The time interval for PD to store hot Region information.
 + Default value: `10m`
 
 > **Note:**
