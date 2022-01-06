@@ -1275,46 +1275,46 @@ Configuration items related to Raft Engine.
 
 ### `enable`
 
-+ Whether to use Raft Engine as the raft log storage. When enabled, configurations of `raftdb` will be ignored.
++ Determines whether to use Raft Engine to store raft logs. When it is enabled, configurations of `raftdb` are ignored.
 + Default value: `"false"`
 
 ### `dir`
 
-+ The directory to store log files. Will be created on startup if not exists.
-+ When not set, it will be `{data-dir}/raft-engine`.
-+ If there are multiple disks on the machine, storing the data of Raft Engine on a different disk can improve TiKV performance.
++ The directory at which raft log files are stored. If the directory does not exist, it will be created when TiKV is started.
++ When this configuration is not set, `{data-dir}/raft-engine` is used.
++ If there are multiple disks on your machine, it is recommended to store the data of Raft Engine on a different disk to improve TiKV performance.
 + Default value: `""`
 
 ### `batch-compression-threshold`
 
-+ Compress a log batch if its size exceeds this value. Compression is disabled when it is set to zero.
++ Specifies the threshold size of a log batch. A log batch larger than this configuration is compressed. If you set this configuration item to `0`, compression is disabled.
 + Default value: `"8KB"`
 
 ### `bytes-per-sync`
 
-+ Flush buffered writes to disk when their accumulative size exceeds this value.
-+ Setting it to zero disabled incremental sync.
++ Specifies the maximum accumulative size of buffered writes. When this configuration value is exceeded, buffered writes are flushed to the disk.
++ If you set this configuration item to `0`, incremental sync is disabled.
 + Default value: `"4MB"`
 
 ### `target-file-size`
 
-+ Target file size for rotating log files.
++ Specifies the maximum size of log files. When a log file is larger than this value, it is rotated. 
 + Default value: `"128MB"`
 
 ### `purge-threshold`
 
-+ Purge main log queue if its size exceeds this value.
++ Specifies the threshold size of the main log queue. When this configuration value is exceeded, the main log queue is purged.
 + Default value: `"10GB"`
 
 ### `recovery-mode`
 
-+ How to deal with file corruption during recovery.
++ Determines how to deal with file corruption during recovery.
 + Value options: `"absolute-consistency"`, `"tolerate-tail-corruption"`, `"tolerate-any-corruption"`
 + Default value: `"tolerate-tail-corruption"`
 
 ### `recovery-read-block-size`
 
-+ Minimum I/O size for reading log files during recovery.
++ The minimum I/O size for reading log files during recovery.
 + Default value: `"16KB"`
 + Minimum value: `"512B"`
 
