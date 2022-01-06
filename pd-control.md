@@ -397,7 +397,7 @@ Usage:
     ...
   ]
 }
->> hot history 1629294000000 1631980800000 hot_region_type read region_id [1,2,3] store_id [1,2,3] peer_id [1,2,3] is_leader true is_learner true // Display history hot spot for the specified period with more conditions
+>> hot history 1629294000000 1631980800000 hot_region_type read region_id 1,2,3 store_id 1,2,3 peer_id 1,2,3 is_leader true is_learner true // Display history hot spot for the specified period with more conditions
 {
   "history_hot_region": [
     {
