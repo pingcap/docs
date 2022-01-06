@@ -5,7 +5,7 @@ summary: Learn the `TIDB_HOT_REGIONS` information_schema table.
 
 # TIDB_HOT_REGIONS
 
-The `TIDB_HOT_REGIONS` table provides information about current hotspot Regions, history hotspot is available in `[TIDB_HOT_REGIONS_HISTORY](/information-schema/information-schema-tidb-hot-regions-history.md)`.
+The `TIDB_HOT_REGIONS` table provides information about the current hot Regions. For information about history hot regions, see `[TIDB_HOT_REGIONS_HISTORY](/information-schema/information-schema-tidb-hot-regions-history.md)`.
 
 {{< copyable "sql" >}}
 
