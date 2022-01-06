@@ -378,43 +378,43 @@ Usage:
 >> hot store                               // Display hot spot for all the read and write operations
 >> hot history 1629294000000 1631980800000 // Display history hot spot for the specified period (milliseconds)
 {
-	"history_hot_region": [
-		{
-			"update_time": 1630864801948,
-			"region_id": 103,
-			"peer_id": 1369002,
-			"store_id": 3,
-			"is_leader": true,
-			"is_learner": false,
-			"hot_region_type": "read",
-			"hot_degree": 152,
-			"flow_bytes": 0,
-			"key_rate": 0,
-			"query_rate": 305,
-			"start_key": "7480000000000000FF5300000000000000F8",
-			"end_key": "7480000000000000FF5600000000000000F8"
-		},
+  "history_hot_region": [
+    {
+      "update_time": 1630864801948,
+      "region_id": 103,
+      "peer_id": 1369002,
+      "store_id": 3,
+      "is_leader": true,
+      "is_learner": false,
+      "hot_region_type": "read",
+      "hot_degree": 152,
+      "flow_bytes": 0,
+      "key_rate": 0,
+      "query_rate": 305,
+      "start_key": "7480000000000000FF5300000000000000F8",
+      "end_key": "7480000000000000FF5600000000000000F8"
+    },
     ...
   ]
 }
 >> hot history 1629294000000 1631980800000 hot_region_type read region_id [1,2,3] store_id [1,2,3] peer_id [1,2,3] is_leader true is_learner true // Display history hot spot for the specified period with more conditions
 {
-	"history_hot_region": [
-		{
-			"update_time": 1630864801948,
-			"region_id": 103,
-			"peer_id": 1369002,
-			"store_id": 3,
-			"is_leader": true,
-			"is_learner": false,
-			"hot_region_type": "read",
-			"hot_degree": 152,
-			"flow_bytes": 0,
-			"key_rate": 0,
-			"query_rate": 305,
-			"start_key": "7480000000000000FF5300000000000000F8",
-			"end_key": "7480000000000000FF5600000000000000F8"
-		},
+  "history_hot_region": [
+    {
+      "update_time": 1630864801948,
+      "region_id": 103,
+      "peer_id": 1369002,
+      "store_id": 3,
+      "is_leader": true,
+      "is_learner": false,
+      "hot_region_type": "read",
+      "hot_degree": 152,
+      "flow_bytes": 0,
+      "key_rate": 0,
+      "query_rate": 305,
+      "start_key": "7480000000000000FF5300000000000000F8",
+      "end_key": "7480000000000000FF5600000000000000F8"
+    },
     ...
   ]
 }
