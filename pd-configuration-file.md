@@ -294,7 +294,7 @@ Configuration items related to scheduling
 
 ### `hot-regions-reserved-days`
 
-+ Set PD how many days hot region information is kept
++ How many days the hot Region information is retained.
 + Default value: `7`
 
 ## `replication`
