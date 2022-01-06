@@ -38,21 +38,21 @@ DESC tidb_hot_regions_history;
 16 rows in set (0.00 sec)
 ```
 
-The description of columns in the `TIDB_HOT_REGIONS_HISTORY` table is as follows:
+The fields in the `TIDB_HOT_REGIONS_HISTORY` table are described as follows:
 
 * UPDATE_TIME: Update time of the hot Region.
 * DB_NAME: The database name of the object in which the hot Region is located.
-* TABLE_ID: ID of located.
+* TABLE_ID: The ID of the table in which the hot Region is located.
 * TABLE_NAME: The name of the table in which the hot Region is located.
 * INDEX_NAME: The name of the index in which the hot Region is located.
-* INDEX_ID: ID of the table in which the hot Region is the index in which the hot Region is located.
-* REGION_ID: ID of the hot Region.
-* STORE_ID: ID of the store in which the hot Region is located.
-* PEER_ID: ID of the Peer corresponding to the hot Region.
+* INDEX_ID: The ID of the index in which the hot Region is located.
+* REGION_ID: The ID of the hot Region.
+* STORE_ID: The ID of the store in which the hot Region is located.
+* PEER_ID: The ID of the Peer corresponding to the hot Region.
 * IS_LEARNER: Whether the PEER is the LEARNER.
 * IS_LEADER: Whether the PEER is the LEADER.
 * TYPE: The type of the hot Region.
-* HOT_DEGREE: The hot degree of the Region.
+* HOT_DEGREE: The hot degree of the hot Region.
 * FLOW_BYTES: The number of bytes written and read in the Region.
 * KEY_RATE: The number of keys written and read in the Region.
 * QUERY_RATE: The number of queries written and read in the Region.
