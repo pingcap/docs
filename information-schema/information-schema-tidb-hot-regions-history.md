@@ -61,7 +61,7 @@ The fields in the `TIDB_HOT_REGIONS_HISTORY` table are described as follows:
 >
 > + `UPDATE_TIME`, `REGION_ID`, `STORE_ID`, `PEER_ID`, `IS_LEARNER`, `IS_LEADER` and `TYPE` fields are pushed down to the PD servers for execution. To reduce the overhead of using the table, you must specify the time range for the search, , and as many conditions as possible. For example,  `select * from tidb_hot_regions_history where store_id = 11 and update_time > '2020-05-18 20:40:00' and update_time < '2020-05-18 21:40:00' and type='write'`.
 
-Here are some common use cases:
+The following are some scenarios:
 
 * Query hotspot regions within a specified period of time:
 
