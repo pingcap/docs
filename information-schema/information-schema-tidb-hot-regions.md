@@ -34,12 +34,12 @@ DESC tidb_hot_regions;
 
 The description of columns in the `TIDB_HOT_REGIONS` table is as follows:
 
-* `TABLE_ID`: ID of located.
-* `INDEX_ID`: ID of the table in which the hot Region is the index in which the hot Region is located.
+* `TABLE_ID`: The ID of the table in which the hot Region is located.
+* `INDEX_ID`: The ID of the index in which the hot Region is located.
 * `DB_NAME`: The database name of the object in which the hot Region is located.
 * `TABLE_NAME`: The name of the table in which the hot Region is located.
 * `INDEX_NAME`: The name of the index in which the hot Region is located.
-* `REGION_ID`: ID of the hot Region.
+* `REGION_ID`: The ID of the hot Region.
 * `TYPE`: The type of the hot Region.
 * `MAX_HOT_DEGREE`: The maximum hot degree of the Region.
 * `REGION_COUNT`: The number of hot Regions in the instance. 
