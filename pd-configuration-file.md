@@ -290,7 +290,7 @@ Configuration items related to scheduling
 
 > **Note:**
 > 
->Information about the Hot Region is updated every three minutes. If the interval is set to less than three minutes, updates in the middle part may be meaningless
+>Information about the hot Region is updated every three minutes. If the interval is set to less than three minutes, updates during the interval might be meaningless.
 
 ### `hot-regions-reserved-days`
 
