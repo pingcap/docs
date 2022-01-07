@@ -746,6 +746,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - This variable is used to control whether to enable the index merge feature.
 
 > **Note:**
+>
 > 1. When upgrade from cluster of version less than v4.0.0 to cluster of version greater equal to v5.4.0, the default value of `tidb_enable_index_merge` is `OFF`. In case of the performance regression because of the changes of execution plan.
 > 2. When upgrade from cluster of version greater equal to v4.0.0 to cluster of version greater equal v5.4.0, the default value of `tidb_enable_index_merge` is kept as before upgrade.
 > 3. In a new cluster of version greater equal to v5.4.0, the default value of `tidb_enable_index_merge` is `ON`.
