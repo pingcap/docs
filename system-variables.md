@@ -632,6 +632,13 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - To use in `INSERT` statements, the system variable `tidb_batch_insert` must also be set to `ON`.
 - Only the value `0` provides ACID compliance. Setting this to any other value will break the atomicity and isolation guarantees of TiDB.
 
+### tidb_batch_insert
+
+- Scope: SESSION
+- Default value: `OFF`
+- This variable permits `tidb_dml_batch_size` to be used in `INSERT` statements.
+- Only the value `OFF` provides ACID compliance. Setting this to any other value will break the atomicity and isolation guarantees of TiDB, as an indivudual `INSERT` statements will be split into smaller transactions.
+
 ### tidb_enable_1pc <span class="version-mark">New in v5.0</span>
 
 - Scope: SESSION | GLOBAL
