@@ -214,6 +214,7 @@ In this example we prepare a data source with some known errors.
     ```
 
 4. Run TiDB Lightning. This command will exit successfully because all errors are skipped.
+
     {{< copyable "shell-regular" >}}
 
     ```sh
