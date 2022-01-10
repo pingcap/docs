@@ -40,7 +40,7 @@ DESC tidb_hot_regions_history;
 
 The fields in the `TIDB_HOT_REGIONS_HISTORY` table are described as follows:
 
-* UPDATE_TIME: Update time of the hot Region.
+* UPDATE_TIME: The update time of the hot Region.
 * DB_NAME: The database name of the object in which the hot Region is located.
 * TABLE_ID: The ID of the table in which the hot Region is located.
 * TABLE_NAME: The name of the table in which the hot Region is located.
