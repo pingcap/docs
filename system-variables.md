@@ -742,8 +742,16 @@ Constraint checking is always performed in place for pessimistic transactions (d
 ### tidb_enable_index_merge <span class="version-mark">New in v4.0</span>
 
 - Scope: SESSION | GLOBAL
-- Default value: `OFF`
-- This variable is used to control whether to enable the index merge feature.
+- Default value: `ON`
+- This variable is used to control whether to enable the Index Merge feature.
+
+> **Note:**
+>
+> - When upgrading a TiDB cluster from versions earlier than v4.0.0 to v5.4.0 or later, this variable is disabled by default to prevent rollback due to any plan change.
+>
+> - When upgrading a TiDB cluster from v4.0.0 or later to v5.4.0 or later, this variable remains the setting before the upgrade.
+>
+> - For TiDB clusters of v5.4.0 and later versions, this variable is enabled by default.
 
 ### tidb_enable_list_partition <span class="version-mark">New in v5.0</span>
 
