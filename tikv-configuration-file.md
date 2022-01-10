@@ -472,11 +472,17 @@ Configuration items related to Raftstore
 + Minimum value: `0`
 + Unit: MB|GB
 
+### `raft-log-compact-sync-interval`
+
++ The time interval to compact unnecessary Raft logs.
++ Default value: `"2s"`
++ Minimum value: `"0s"`
+
 ### `raft-log-gc-tick-interval`
 
 + The time interval at which the polling task of deleting Raft logs is scheduled. `0` means that this feature is disabled.
-+ Default value: `"10s"`
-+ Minimum value: `0`
++ Default value: `"3s"`
++ Minimum value: `"0s"`
 
 ### `raft-log-gc-threshold`
 
@@ -494,6 +500,12 @@ Configuration items related to Raftstore
 
 + The hard limit on the allowable size of residual Raft logs
 + Default value: 3/4 of the Region size
++ Minimum value: greater than `0`
+
+### `raft-log-reserve-max-ticks`
+
++ Old Raft logs could be reserved if `raft-log-gc-threshold` is not reached. GC them after `raft-log-reserve-max-ticks` ticks.
++ Default value: `6`
 + Minimum value: greater than `0`
 
 ### `raft-entry-cache-life-time`
