@@ -5,13 +5,13 @@ summary: Learn how to get and resolve type conversion and duplication errors
 
 # TiDB Lightning Error Resolution
 
-> **Warning:**
->
-> TiDB Lightning error report and resolution are still experimental features. It is **NOT** recommended to only rely on them in the production environment.
-
-Starting from v5.3.0, TiDB Lightning can be configured to skip errors like invalid type conversion and unique key conflicts, and continue processing as if those bad rows do not exist. A report will be generated for you to read and manually fix them afterward. This is ideal for importing from slightly dirty data source, where locating the errors manually are difficult and restarting TiDB Lightning on every encounter are costly.
+Starting from v5.4.0, TiDB Lightning can be configured to skip errors like invalid type conversion and unique key conflicts, and continue processing as if those bad rows do not exist. A report will be generated for you to read and manually fix them afterward. This is ideal for importing from slightly dirty data source, where locating the errors manually are difficult and restarting TiDB Lightning on every encounter are costly.
 
 ## Type error
+
+> **Warning:**
+>
+> The TiDB Lightning type error (`lightning.max-error`) is an experimental feature. It is **NOT** recommended to only rely on it in the production environment.
 
 {{< copyable "" >}}
 
@@ -138,13 +138,13 @@ CREATE TABLE conflict_error_v1 (
 >
 > * shell, printing several lines before —
 >
->     ```sh
+>     ```shell
 >     head -c 183 file.csv | tail
 >     ```
 >
 > * shell, printing several lines after —
 >
->     ```sh
+>     ```shell
 >     tail -c +183 file.csv | head
 >     ```
 >
@@ -158,7 +158,7 @@ In this example we prepare a data source with some known errors.
 
     {{< copyable "shell-regular" >}}
 
-    ```sh
+    ```shell
     mkdir example && cd example
 
     echo 'CREATE SCHEMA example;' > example-schema-create.sql
@@ -169,7 +169,7 @@ In this example we prepare a data source with some known errors.
 
     {{< copyable "shell-regular" >}}
 
-    ```sh
+    ```shell
     cat <<EOF > example.t.1.sql
 
         INSERT INTO t (a, b) VALUES
@@ -190,7 +190,7 @@ In this example we prepare a data source with some known errors.
 
     {{< copyable "shell-regular" >}}
 
-    ```sh
+    ```shell
     cat <<EOF > config.toml
 
         [lightning]
@@ -217,13 +217,13 @@ In this example we prepare a data source with some known errors.
 
     {{< copyable "shell-regular" >}}
 
-    ```sh
+    ```shell
     tiup tidb-lightning -c config.toml
     ```
 
 5. Verify that the imported table contains just the two normal rows:
 
-    ```console
+    ```sql
     $ mysql -u root -h 127.0.0.1 -P 4000 -e 'select * from example.t'
     +---+-----+
     | a | b   |
@@ -235,7 +235,7 @@ In this example we prepare a data source with some known errors.
 
 6. Check that `type_error_v1` table caught the three rows involving type conversion:
 
-    ```console
+    ```sql
     $ mysql -u root -h 127.0.0.1 -P 4000 -e 'select * from lightning_task_info.type_error_v1;' -E
 
     *************************** 1. row ***************************
@@ -268,7 +268,7 @@ In this example we prepare a data source with some known errors.
 
 7. Check that `conflict_error_v1` table caught the four rows having unique/primary key conflicts:
 
-    ```console
+    ```sql
     $ mysql -u root -h 127.0.0.1 -P 4000 -e 'select * from lightning_task_info.conflict_error_v1;' --binary-as-hex -E
 
     *************************** 1. row ***************************
