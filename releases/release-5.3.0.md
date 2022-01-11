@@ -348,7 +348,7 @@ Starting from TiCDC v5.3.0, the cyclic replication feature between TiDB clusters
     - Fix the issue of `data too long` error when dumping statistics from the table with `new collation` data [#27024](https://github.com/pingcap/tidb/issues/27024)
     - Fix the issue that the retried transactions' statements are not included in `TIDB_TRX` [#28670](https://github.com/pingcap/tidb/pull/28670)
     - Fix the wrong default value of the `plugin_dir` configuration [#28084](https://github.com/pingcap/tidb/issues/28084)
-    - Fix support for mixed named timezones and UTC offsets for `CONVERT_TZ()` [28528](https://github.com/pingcap/tidb/pull/28528)
+    - Fix the issue that the `CONVERT_TZ` function returns `NULL` when it is given a named timezone and a UTC offset [#8311](https://github.com/pingcap/tidb/issues/8311)
     - Fix `CREATE SCHEMA` not using the character set specied by `character_set_server` and `collation_server` for new schemas if none are provided as part of the statement [27216](https://github.com/pingcap/tidb/pull/27216)
 
 + TiKV
