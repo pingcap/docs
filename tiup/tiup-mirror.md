@@ -35,7 +35,7 @@ Available Commands:
   clone       Clone a local mirror from remote mirror and download all selected components
   merge       Merge two or more offline mirrors
   publish     Publish a component
-  show        Show mirror address
+  show        Show the mirror address
   set         Set mirror address
   modify      Modify published component
   renew       Renew the manifest of a published component.
