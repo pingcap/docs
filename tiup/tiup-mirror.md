@@ -33,7 +33,7 @@ Available Commands:
   sign        Add signatures to a manifest file
   genkey      Generate a new key pair
   clone       Clone a local mirror from remote mirror and download all selected components
-  merge       Merge two or more offline mirror
+  merge       Merge two or more offline mirrors
   publish     Publish a component
   show        Show mirror address
   set         Set mirror address
