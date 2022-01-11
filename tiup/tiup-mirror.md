@@ -125,7 +125,7 @@ When running `tiup mirror clone` a second time with the same `target-dir` it wil
 
 > **Note:**
 > 
-> As the manifest will be re-created make sure to include all components an all versions (including older ones that were previously downloaded) as otherwise they will be excluded from the manifest.
+> As the manifest will be re-created make sure to include all components and all versions (including older ones that were previously downloaded) as otherwise they will be excluded from the manifest.
 
 ## Custom repository
 
