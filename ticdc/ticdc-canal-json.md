@@ -42,7 +42,7 @@ cdc cli changefeed create --pd=http://127.0.0.1:2379 --changefeed-id="kafka-cana
 
 By default, the value of `enable-tidb-extension` is `false`. It only takes effect when you use Canal-JSON.
 
-## Definitions of message format
+## Definitions of message formats
 
 This section describes the format definitions of DDL Event, DML Event and WATERMARK Event, and how the data is resolved on the consumer side.
 
@@ -195,7 +195,7 @@ The following is an example of the WATERMARK Event.
 As you can see from the example above, Canal-JSON has a uniform data format, with different field filling rules for different Event types. You can use a uniform method to resolve this JSON format data, and then determine the Event type through the field values.
 
 * When `isDdl` is `true`, the message contains a DDL Event.
-* When `isDdl` is `false`, you need to further check the `type` field. If `type` is `TIDB_WATERMARK`, it is a WATERMARK Event; otherwise it is a DML Event.
+* When `isDdl` is `false`, you need to further check the `type` field. If `type` is `TIDB_WATERMARK`, it is a WATERMARK Event; otherwise, it is a DML Event.
 
 ## Field descriptions
 
@@ -207,7 +207,7 @@ In the `mysqlType` field, the Canal-JSON format records the string of MySQL Type
 
 ### SQL Type field
 
-In the `sqlType` field, the Canal-JSON format records the Java SQL Type of each column, which is the data type corresponding to the data in JDBC. Its value can be calculated by MySQL Type and the specific data value. The mapping is as follows:
+In the `sqlType` field, the Canal-JSON format records Java SQL Type of each column, which is the data type corresponding to the data in JDBC. Its value can be calculated by MySQL Type and the specific data value. The mapping is as follows:
 
 | MySQL Type | Java SQL Type Code |
 | :----------| :----------------- |
@@ -239,7 +239,7 @@ In the `sqlType` field, the Canal-JSON format records the Java SQL Type of each 
 
 ## Integer types
 
-You need to consider whether [integer types](/data-type-numeric.md#integer-types) has the `Unsigned` constraint and the value size, which corresponds to different Java SQL Type Codes respectively, as shown in the following table.
+You need to consider whether [integer types](/data-type-numeric.md#integer-types) have the `Unsigned` constraint and the value size, which corresponds to different Java SQL Type Codes respectively, as shown in the following table.
 
 | MySQL Type String  | Value Range                                 | Java SQL Type Code |
 | :------------------| :------------------------------------------ | :----------------- |
@@ -259,7 +259,7 @@ You need to consider whether [integer types](/data-type-numeric.md#integer-types
 | bigint unsigned    | [0, 9223372036854775807]                    | -5                 |
 | bigint unsigned    | [9223372036854775808, 18446744073709551615] | 3                  |
 
-The following table shows the mapping relationships between the Java SQL Types in TiCDC and their codes.
+The following table shows the mapping relationships between Java SQL Types in TiCDC and their codes.
 
 | Java SQL Type | Java SQL Type Code |
 | :-------------| :------------------|
@@ -279,7 +279,7 @@ The following table shows the mapping relationships between the Java SQL Types i
 | TINYINT       | -6                 |
 | Bit           | -7                 |
 
-For more information about Java SQL Type, see [Java SQL Class Types](https://docs.oracle.com/javase/8/docs/api/java/sql/Types.html).
+For more information about Java SQL Types, see [Java SQL Class Types](https://docs.oracle.com/javase/8/docs/api/java/sql/Types.html).
 
 ## Comparison of TiCDC Canal-JSON and official Canal
 
@@ -287,12 +287,12 @@ The way that TiCDC implements the Canal-JSON data format, including the `Update`
 
 | Item            | TiCDC                  | Canal                                |
 |:----------------|:-------------------------|:-------------------------------------|
-| `Update` Type Event | The `Old` field contains all column data | The `Old` field contains only the modified column data    |
+| Event of `Update` Type  | The `Old` field contains all column data | The `Old` field contains only the modified column data    |
 | `mysqlType` field  | For types with parameters, it does not contain the information about the type parameter      | For types with parameters, it contain the full information about the type parameter    |
 
-### Events of `Update` Type
+### Event of `Update` Type
 
-For Events of `Update` Type, the `Old` field in the official Canal contains only the modified column data, while it contains all the column data in TiCDC.
+For an Event of `Update` Type, the `Old` field in the official Canal contains only the modified column data, while it contains all the column data in TiCDC.
 
 Assume that the following SQL statements are executed sequentially in the upstream TiDB:
 
@@ -356,7 +356,7 @@ For the `update` statement, TiCDC outputs an Event message with `type` as `UPDAT
 
 For the `mysqlType` field, if a type contains parameters, the official Canal contains the full information about the type parameter. TiCDC does not contain such information.
 
-In the following example, all the table definition SQL statements (such as decimal, char, varchar and enum) contain parameters. By comparing the Canal-JSON formats generated by TiCDC and the official Canal, you can see that TiCDC only contains the basic MySQL information in the `mysqlType` field. If you need the full information of the type parameter, you need to implement it by other means.
+In the following example, all the table definition SQL statements (such as `decimal`, `char`, `varchar` and `enum`) contain parameters. By comparing the Canal-JSON formats generated by TiCDC and the official Canal, you can see that TiCDC only contains the basic MySQL information in the `mysqlType` field. If you need the full information of the type parameter, you need to implement it by other means.
 
 Assume that the following SQL statements are executed sequentially in the upstream TiDB:
 
