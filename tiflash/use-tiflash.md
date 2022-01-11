@@ -383,7 +383,7 @@ TiFlash supports both automatic and manual data validation:
 * Automatic data validation:
     * TiFlash enables the V2 validation mechanism by default.
     * To enable V3 validation mechanism, refer to [TiFlash configuration file](/tiflash/tiflash-configuration.md#configure-the-tiflash.toml-file)。
-* Manual data validation. Refer to [`DTTool inspect`]((/tiflash/tiflash-command-line-flags.md#dttool-inspect).
+* Manual data validation. Refer to [`DTTool inspect`](/tiflash/tiflash-command-line-flags.md#dttool-inspect).
 
 > **Warning:**
 >
