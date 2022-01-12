@@ -62,6 +62,14 @@ table-concurrency = 6
 # medium, this value might need to be adjusted for optimal performance.
 io-concurrency = 5
 
+# In parallel import mode, the schema name that stores the meta information for each TiDB Lightning instance in the target cluster. By default, the value is "lightning_metadata".
+# Do not configure this parameter if parallel import is not enabled.
+# **Note:**
+# - The value set for this parameter must be the same for each TiDB Lightning instance that participates in the same parallel import; otherwise, the correctness of the imported data can not be ensured.
+# - If parallel import mode is enabled, make sure that the user used for import (for the tidb.user configuration) has permissions to create and access the databases corresponding to this configuration.
+# - TiDB Lightning removes this schema after the import is complete. So do not use any existing schema name to configure this parameter.
+meta-schema-name = "lightning_metadata"
+
 [security]
 # Specifies certificates and keys for TLS connections within the cluster.
 # Public certificate of the CA. Leave empty to disable TLS.
@@ -97,8 +105,13 @@ driver = "file"
 # keep-after-success = false
 
 [tikv-importer]
-# Delivery backend, can be "local", "importer" or "tidb".
+# "local": The default mode. It applies to large dataset import, for example, greater than 1 TiB. However, during the import, downstream TiDB is not available to provide services.
+# "tidb": You can use this mode for small dataset import. During the import, downstream TiDB is available to provide services.
 # backend = "local"
+# Whether to allow importing data to tables with data. The default value is `false`.
+# When you use parallel import mode, you must set it to `true`, because multiple TiDB Lightning instances are importing the same table at the same time.
+# incremental-import = false
+
 # The listening address of tikv-importer when backend is "importer". Change it to the actual address.
 addr = "172.16.31.10:8287"
 # Action to do when trying to insert a duplicated entry in the "tidb" backend.
