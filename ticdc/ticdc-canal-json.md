@@ -5,7 +5,7 @@ summary: Learn the concept of TiCDC Canal-JSON Protocol and how to use it.
 
 # TiCDC Canal-JSON Protocol
 
-Canal-JSON is a data exchange format protocol defined by [Alibaba Canal](https://github.com/alibaba/canal). This document introduces how Canal-JSON data format is implemented in TiCDC, including the TiDB extension field, the definitions of the Canal-JSON data format, and comparison with the official implementation. In this document, you can learn the basic format definition and usage of Canal-JSON, and how to specify Canal-JSON as the data format in TiCDC.
+Canal-JSON is a data exchange format protocol defined by [Alibaba Canal](https://github.com/alibaba/canal). In this document, you can learn how Canal-JSON data format is implemented in TiCDC, including the TiDB extension field, the definitions of the Canal-JSON data format, and comparison with the official implementation.
 
 ## Use Canal-JSON
 
