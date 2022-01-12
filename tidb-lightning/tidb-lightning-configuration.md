@@ -64,7 +64,7 @@ table-concurrency = 6
 io-concurrency = 5
 
 # In parallel import mode, the schema name that stores the meta information for each TiDB Lightning instance in the target cluster. By default, the value is "lightning_metadata".
-# Do not configure this parameter if parallel import is not enabled.
+# Configure this parameter only if parallel import is enabled.
 # **Note:**
 # - The value set for this parameter must be the same for each TiDB Lightning instance that participates in the same parallel import; otherwise, the correctness of the imported data can not be ensured.
 # - If parallel import mode is enabled, make sure that the user used for import (for the tidb.user configuration) has permissions to create and access the databases corresponding to this configuration.
