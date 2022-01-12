@@ -172,7 +172,8 @@ In dictionary format, constraints also indicate a number of instances that apply
 The following known limitations exist in the experimental release of Placement Rules in SQL:
 
 * Dumpling does not support dumping placement policies. See [issue #29371](https://github.com/pingcap/tidb/issues/29371).
-* TiDB tools, including Backup & Restore (BR), TiCDC, TiDB Lightning, and TiDB Data Migration (DM), do not yet support placement rules.
+* TiDB tools, including Backup & Restore (BR), TiCDC, TiDB Lightning, and TiDB Data Migration (DM), do not yet support placement rules. 
+* Using BR to restore a database or table with placement options will fail. See: [issue #31455](https://github.com/pingcap/tidb/issues/31455).
 * Temporary tables do not support placement options (either via direct placement or placement policies).
 * Syntactic sugar rules are permitted for setting `PRIMARY_REGION` and `REGIONS`. In the future, we plan to add varieties for `PRIMARY_RACK`, `PRIMARY_ZONE`, and `PRIMARY_HOST`. See [issue #18030](https://github.com/pingcap/tidb/issues/18030).
 * TiFlash learners are not configurable through Placement Rules syntax.
