@@ -45,7 +45,7 @@ This document introduces the command-line flags that you can use when you launch
 >
 > For security reasons, DTTool attempts to add a lock to the working directory in the migration mode. Therefore, in the same directory, only one DTTool can perform the migration task at the same time. If you forcibly stop DTTool where the lock is not released, then when you try to rerun DTTool later, it might refuse to perform the migration task.
 >
-> If you encounter this situation, while ensuring data security, you can manually delete the LOCK file in the working directory to release the lock.
+> If you encounter this situation, and if you are aware that removing the LOCK file does not cause any data corruption, you can manually delete the LOCK file in the working directory to release the lock.
 
 ## `dttool bench`
 
