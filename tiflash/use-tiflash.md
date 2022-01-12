@@ -358,9 +358,9 @@ TiFlash provides the following two global/session variables to control whether t
 
 ### User scenarios
 
-Data corruption usually means a serious hardware failure. In such cases, even if you attempt to manually recover data, your data become less reliable.
+Data corruptions are usually caused by serious hardware failures. In such cases, even if you attempt to manually recover data, your data become less reliable.
 
-To ensure data integrity, by default, TiFlash performs basic data validation on data files, using the `City128` algorithm. In the event of any data validation failure, TiFlash immediately reports an error and exit, avoiding secondary disasters caused by incorrect data. At this time, you need to manually intervene and replicate the data again before you can restore the TiFlash node.
+To ensure data integrity, by default, TiFlash performs basic data validation on data files, using the `City128` algorithm. In the event of any data validation failure, TiFlash immediately reports an error and exits, avoiding secondary disasters caused by inconsistent data. At this time, you need to manually intervene and replicate the data again before you can restore the TiFlash node.
 
 Starting from v5.4.0, TiFlash introduces more advanced data validation features. TiFlash uses the `XXH3` algorithm by default and allows you to customize the validation frame and algorithm.
 
@@ -387,7 +387,7 @@ TiFlash supports both automatic and manual data validation:
 
 > **Warning:**
 >
-> After you enable the V3 validation mechanism, the newly generated DTFile cannot be directly read by TiFlash earlier than v5.4.0. Since v5.4.0, TiFlash supports both V2 and V3 and does not actively upgrade or downgrade versions. If you need to upgrade or downgrade versions, you need to manually [switch versions](/tiflash/tiflash-command-line-flags.md#dttool-migrate).
+> After you enable the V3 validation mechanism, the newly generated DTFile cannot be directly read by TiFlash earlier than v5.4.0. Since v5.4.0, TiFlash supports both V2 and V3 and does not actively upgrade or downgrade versions. If you need to upgrade or downgrade versions for existing files, you need to manually [switch versions](/tiflash/tiflash-command-line-flags.md#dttool-migrate).
 
 #### Validation tool
 

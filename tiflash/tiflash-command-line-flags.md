@@ -39,11 +39,11 @@ This document introduces the command-line flags that you can use when you launch
 
 > **Warning:**
 >
-> TiFlash can read DTFile that uses custom compression algorithms and compression levels. However, only the `lz4` algorithm of the default compression level is officially supported. Custom compression parameters have not been thoroughly tested and are only experimental.
+> TiFlash can read DTFile that uses custom compression algorithms and compression levels. However, only the `lz4` algorithm with the default compression level is officially supported. Custom compression parameters have not been thoroughly tested and are only experimental.
 
 > **Note:**
 >
-> For security reasons, DTTool attempts to add lock to the working directory in the migration mode. Therefore, in the same directory at the same time, only one DTTool can perform a migration task. If you forcibly stop DTTool where the lock is not released, when you try to rerun DTTool later, DTTool might refuse to perform the migration task.
+> For security reasons, DTTool attempts to add a lock to the working directory in the migration mode. Therefore, in the same directory, only one DTTool can perform the migration task at the same time. If you forcibly stop DTTool where the lock is not released, then when you try to rerun DTTool later, it might refuse to perform the migration task.
 >
 > If you encounter this situation, while ensuring data security, you can manually delete the LOCK file in the working directory to release the lock.
 
@@ -59,7 +59,7 @@ This document introduces the command-line flags that you can use when you launch
     - `--size`: The rows of the table to be tested. The default value is `1000`.
     - `--field`: The field length limit of the table to be tested. The default value is `1024`.
     - `--random`: The random seed. If you do not specify this parameter, the random seed is drawn from the system entropy pool.
-    - `encryption`: Enables the encryption feature.
+    - `--encryption`: Enables the encryption feature.
     - `--repeat`: The number of times to repeat the test. The default value is `5`.
     - `--workdir`: The temporary data directory, which points to a path in the file system to be tested. The default value is `/tmp/test`.
 
