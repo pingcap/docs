@@ -383,7 +383,6 @@ For the official Canal, the `Old` field in the output event message contains onl
         {
             "c_int": "2147483647",        // Modified column
             "c_tinyint": "127",           // Modified column
-            "id": "2"
         }
     ]
 }
