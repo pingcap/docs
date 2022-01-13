@@ -44,32 +44,11 @@ By default, the value of `enable-tidb-extension` is `false`. It only takes effec
 
 ## Definitions of message formats
 
-This section describes the format definitions of DDL Event, DML Event and WATERMARK Event, and how the data is resolved on the consumer side.
+This section describes the formats of DDL Event, DML Event and WATERMARK Event, and how the data is resolved on the consumer side.
 
 ### DDL Event
 
 TiCDC encodes a DDL Event into the following Canal-JSON format.
-
-```json
-{
-    "id": 0,
-    "database": "test",
-    "table": "",
-    "pkNames": null,
-    "isDdl": true,
-    "type": "QUERY",
-    "es": 1639633094670,
-    "ts": 1639633095489,
-    "sql": "drop database if exists test",
-    "sqlType": null,
-    "mysqlType": null,
-    "data": null,
-    "old": null,
-    "_tidb": {     // TiDB extension field
-        "commitTs": 163963309467037594
-    }
-}
-```
 
 ```json
 {
@@ -287,15 +266,15 @@ The way that TiCDC implements the Canal-JSON data format, including the `Update`
 
 | Item            | TiCDC Canal-JSON                  | Canal                                |
 |:----------------|:-------------------------|:-------------------------------------|
-| Event of `Update` Type  | The `Old` field contains all the column data | The `Old` field contains only the modified column data    |
+| Event of `Update` Type  | The `old` field contains all the column data | The `old` field contains only the modified column data    |
 | `mysqlType` field  | For types with parameters, it does not contain the information about the type parameter      | For types with parameters, it contains the full information about the type parameter    |
 
 ### Event of `Update` Type
 
 For an Event of `Update` Type:
 
-- In TiCDC, the `Old` field contains all the column data
-- In the official Canal, the `Old` field contains only the modified column data
+- In TiCDC, the `old` field contains all the column data
+- In the official Canal, the `old` field contains only the modified column data
 
 Assume that the following SQL statements are executed sequentially in the upstream TiDB:
 
@@ -318,7 +297,7 @@ values (127, 32767, 8388607, 2147483647, 9223372036854775807);
 update tp_int set c_int = 0, c_tinyint = 0 where c_smallint = 32767;
 ```
 
-For the `update` statement, TiCDC outputs an Event message with `type` as `UPDATE` as shown below. The `update` statement only modifies the `c_int` and `c_tinyint` columns. The `Old` field in the output event message contains all the column data.
+For the `update` statement, TiCDC outputs an Event message with `type` as `UPDATE`, as shown below. The `update` statement only modifies the `c_int` and `c_tinyint` columns. The `old` field in the output event message contains all the column data.
 
 ```json
 {
@@ -355,7 +334,7 @@ For the `update` statement, TiCDC outputs an Event message with `type` as `UPDAT
 }
 ```
 
-For the official Canal, the `Old` field in the output event message contains only the modified column data, as shown below.
+For the official Canal, the `old` field in the output event message contains only the modified column data, as shown below.
 
 ```json
 {
@@ -379,7 +358,7 @@ For the official Canal, the `Old` field in the output event message contains onl
             "id": "2"
         }
     ],
-    "old": [                              // In Canal, this field only contains the modified column data.
+    "old": [                              // In Canal, this field contains only the modified column data.
         {
             "c_int": "2147483647",        // Modified column
             "c_tinyint": "127",           // Modified column
