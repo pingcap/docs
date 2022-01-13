@@ -5,11 +5,11 @@ summary: Learn the concept of TiCDC Canal-JSON Protocol and how to use it.
 
 # TiCDC Canal-JSON Protocol
 
-Canal-JSON is a data exchange format protocol defined by [Alibaba Canal](https://github.com/alibaba/canal). In this document, you can learn how Canal-JSON data format is implemented in TiCDC, including the TiDB extension field, the definitions of the Canal-JSON data format, and comparison with the official implementation.
+Canal-JSON is a data exchange format protocol defined by [Alibaba Canal](https://github.com/alibaba/canal). In this document, you can learn how Canal-JSON data formats are implemented in TiCDC, including the TiDB extension field, the definitions of the Canal-JSON data formats, and comparison with the official Canal.
 
 ## Use Canal-JSON
 
-When using Message Queue (MQ) as the downstream Sink, you can specify Canal-JSON in `sink-uri`. TiCDC wraps and constructs Canal-JSON Messages with Event as the basic unit, and sends TiDB data change Events downstream.
+When using Message Queue (MQ) as the downstream Sink, you can specify Canal-JSON in `sink-uri`. TiCDC wraps and constructs Canal-JSON messages with Event as the basic unit, and sends TiDB data change Events downstream.
 
 There are three types of Events:
 
@@ -348,6 +348,40 @@ For the `update` statement, TiCDC outputs an Event message with `type` as `UPDAT
             "c_int": "2147483647",        // Modified column
             "c_mediumint": "8388607",
             "c_smallint": "32767",
+            "c_tinyint": "127",           // Modified column
+            "id": "2"
+        }
+    ]
+}
+```
+
+For the official Canal, the `Old` field in the output event message contains only the modified column data, as shown below.
+
+```json
+{
+    "id": 0,
+    ...
+    "type": "UPDATE",
+    ...
+    "sqlType": {
+        ...
+    },
+    "mysqlType": {
+        ...
+    },
+    "data": [
+        {
+            "c_bigint": "9223372036854775807",
+            "c_int": "0",
+            "c_mediumint": "8388607",
+            "c_smallint": "32767",
+            "c_tinyint": "0",
+            "id": "2"
+        }
+    ],
+    "old": [                              // In Canal, this field only contains the modified column data.
+        {
+            "c_int": "2147483647",        // Modified column
             "c_tinyint": "127",           // Modified column
             "id": "2"
         }
