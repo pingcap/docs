@@ -191,14 +191,14 @@ SHOW COLUMN_STATS_USAGE [ShowLikeOrWhere];
 
 The `SHOW COLUMN_STATS_USAGE` statement returns the following 6 columns:
 
-| Syntax Element | Description            |
+| Column name | Description            |
 | -------- | ------------- |
-| Db_name  |  The database name    |
-| Table_name | The table name |
-| Partition_name | The partition name |
-| Column_name | The column name |
-| Last_used_at | The last time when the column statistics were used by the query optimization  |
-| Last_analyzed_at | The last time when the column statistics were collected |
+| `Db_name`  |  The database name    |
+| `Table_name` | The table name |
+| `Partition_name` | The partition name |
+| `Column_name` | The column name |
+| `Last_used_at` | The last time when the column statistics were used by the query optimization  |
+| `Last_analyzed_at` | The last time when the column statistics were collected |
 
 In the following example, after executing `ANALYZE TABLE t PREDICATE COLUMNS;`, TiDB collects statistics for columns `b`, `c`, and `d`, where column `b` is a `PREDICATE COLUMN` and columns `c` and `d` are index columns.
 
@@ -559,20 +559,20 @@ The statement deletes statistics of all the tables in `TableName`.
 
 ## Load statistics
 
-By default, for column statistics that consume different size of space, TiDB loads statistics differently.
+By default, depending on the size of the space that column statistics consume, TiDB loads statistics in the following two ways:
 
-- For the statistics that consume less space, such as count, distinctCount, nullCount, TiDB automatically loads the corresponding statistics into memory for use in the SQL optimization stage as long as the corresponding column data is updated.
-- For statistics that consume more space, such as histogram, TopN, CMSketch, TiDB loads them asynchronously on demand to ensure the performance of SQL execution. For example, for histogram, TiDB will load the histogram information of a column into memory only when it is used in the optimization phase of a SQL statement. The advantage of on-demand asynchronous loading is that statistics loading does not affect the performance of SQL execution, but it is possible to use incomplete statistics during SQL optimization.
+- For the statistics that consume a small space, such as count, distinctCount, nullCount, as long as the column data is updated, TiDB automatically loads the corresponding statistics into memory for use in the SQL optimization stage.
+- For the statistics that consume a large space, such as histogram, TopN, Count-Min Sketch, to ensure the performance of SQL execution, TiDB loads the statistics asynchronously on demand. Take the histogram as an example. Only when the optimization of a SQL statement uses the histogram statistics of a column, TiDB loads the histogram statistics of that column into memory. The advantage of on-demand asynchronous loading is that loading statistics does not affect the performance of SQL execution, but it is possible to use incomplete statistics during SQL optimization.
 
-Starting from v5.4.0, TiDB introduces the feature of synchronous loading of statistics information, which supports synchronous loading of statistics information with large space consumption such as histogram, TopN, CMSketch into memory when executing the current SQL statement, to improve the integrity of statistics information when optimizing this SQL statement.
+Since v5.4.0, TiDB introduces the synchronously loading statistics feature. With the feature, TiDB can synchronously loading statistics with a large space consumption (such as histogram, TopN, and Count-Min Sketch) into memory when you execute a SQL statement, which improves the completeness of statistics when optimizing this SQL statement.
 
 > **Warning:**
 >
-> Synchronous loading of statistics is currently an experimental feature and is not recommended for use in production environments.
+> Currently, synchronously loading statistics is an experimental feature. It is not recommended to use this feature in production environments.
 
-The statistics synchronous loading feature is turned off by default. To enable this feature, set the value of the system variable `tidb_stats_load_sync_wait` to the timeout (in milliseconds) for SQL Optimization to wait for the complete statistics of the loaded column. The default value of this variable is 0, which means it is not turned on.
+The synchronously loading statistics feature is disabled by default. To enable this feature, set the value of the `tidb_stats_load_sync_wait` system variable to a timeout (in milliseconds) that you expect the SQL optimization to wait for TiDB to load complete column statistics. The default value of this variable is `0`, indicating that the feature is disabled.
 
-With this feature turned on, you can control the behavior of SQL Optimize wait after timeout by modifying the value of the system variable `tidb_stats_load_pseudo_timeout`. The default value of this variable is `OFF`, which means the SQL execution fails after the timeout. When this variable is set to `ON`, the entire SQL optimization process does not use any histograms, TopNs or CMSketch on any columns, but returns the statistics from pseudo.
+After enabling this feature, you can modify the value of the `tidb_stats_load_pseudo_timeout` system variable to control how TiDB behaves when the waiting time of SQL optimization reaches the timeout. The default value of this variable is `OFF`, indicating that the SQL execution fails after the timeout. If this variable is set to `ON`, the entire SQL optimization process does not use any histogram, TopN, or CMSketch statistics on any columns, but gets back to use pseudo statistics.
 
 ## Import and export statistics
 
@@ -587,7 +587,7 @@ The interface to export statistics is as follows:
     ```
     http://${tidb-server-ip}:${tidb-server-status-port}/stats/dump/${db_name}/${table_name}
     ```
-    
+
     For example:
 
     {{< copyable "" >}}
