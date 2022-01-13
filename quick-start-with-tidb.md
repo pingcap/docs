@@ -26,15 +26,10 @@ This guide walks you through the quickest way to get started with TiDB. For non-
 <SimpleTab>
 <div label="Mac">
 
-<<<<<<< HEAD
-## Deploy a local test environment on Mac OS
-
 > **Note:**
 >
 > Currently, some TiDB components do not have a released version that supports the Apple M1 chip. Therefore, the `tiup playground` command currently cannot be executed on the local Mac machine that uses the Apple M1 chip.
 
-=======
->>>>>>> da6dc5796 (Optimize structure for quick start with tidb (#7075))
 As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB instances, 3 TiKV instances, 3 PD instances, and optional TiFlash instances. With TiUP Playground, you can quickly build the test cluster by taking the following steps:
 
 1. Download and install TiUP:
@@ -480,10 +475,7 @@ Other requirements for the target machine:
 
     - [Use TiFlash](/tiflash/use-tiflash.md)
     - [TiFlash Overview](/tiflash/tiflash-overview.md)
-<<<<<<< HEAD
 
 > **Note:**
 >
 > By default, TiDB, TiUP and TiDB Dashboard share usage details with PingCAP to help understand how to improve the product. For details about what is shared and how to disable the sharing, see [Telemetry](/telemetry.md).
-=======
->>>>>>> da6dc5796 (Optimize structure for quick start with tidb (#7075))
