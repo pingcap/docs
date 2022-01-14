@@ -49,7 +49,7 @@ Global Flags:
 Use "tiup mirror [command] --help" for more information about a command.
 ```
 
-## Cloning
+## Clone a mirror
 
 The `tiup mirror clone` command is used to build a local mirror. The basic usage is as follows:
 
