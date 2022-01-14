@@ -92,11 +92,11 @@ The `tiup mirror clone` command provides many optional flags (might provide more
     - Execute the `tiup mirror clone <target-dir> --tidb v5.3.0 --tikv all` command to clone the v5.3.0 version of the TiDB component and all versions of the TiKV component.
     - Execute the `tiup mirror clone <target-dir> v5.3.0` command to clone the v5.3.0 version of all components in a cluster.
 
-The cloning sets up signing keys as part of the cloning. It is not needed to do this manually.
+After cloning, signing keys are set up automatically.
 
-### Using the private repo
+### Manage the private repository
 
-The repository that is cloned using `tiup mirror clone` can be shared among hosts either by sharing the files via SCP, NFS or by making the repository available over the HTTP or HTTPS protocol. Use `tiup mirror set <location>` to specify the location of the repository.
+You can share the repository cloned using `tiup mirror clone` among hosts either by sharing files via SCP, NFS, or by making the repository available over the HTTP or HTTPS protocol. Use `tiup mirror set <location>` to specify the location of the repository.
 
 ```bash
 tiup mirror set /shared_data/tiup
@@ -119,21 +119,21 @@ tiup list
 
 Using `TIUP_MIRRORS` can permanently change the mirror configuration, just like `tiup mirror set`. For details see [tiup issue #651](https://github.com/pingcap/tiup/issues/651).
 
-### Updating a private repo
+### Update the private repository
 
-When running `tiup mirror clone` a second time with the same `target-dir` it will create new manifests and download newly available versions of components if applicable. It will skip downloading existing component versions.
+If you run the `tiup mirror clone` command again with the same `target-dir`, the machine will create new manifests and download the latest versions of components available.
 
 > **Note:**
 > 
-> As the manifest will be re-created make sure to include all components and all versions (including older ones that were previously downloaded) as otherwise they will be excluded from the manifest.
+> Before recreating the manifest, ensure that all components and versions (including earlier ones downloaded previously) are included.
 
 ## Custom repository
 
-A custom repository can be used with TiDB components like TiDB, TiKV or PD that you build yourself. It is also possible to create your own tiup components.
+You can create a custom repository to work with TiDB components like TiDB, TiKV, or PD that you build yourself. It is also possible to create your own tiup components.
 
-Creating your own components can be done with the `tiup package` command. The instructions for how to do this can be found [here](https://github.com/pingcap/tiup/blob/master/doc/user/package.md).
+To create your own components, run the `tiup package` command and perform as instructed in [Component packaging](https://github.com/pingcap/tiup/blob/master/doc/user/package.md).
 
-### Creating a custom repository
+### Create a custom repository
 
 To create an empty repository in `/data/mirror`:
 
@@ -141,7 +141,7 @@ To create an empty repository in `/data/mirror`:
 tiup mirror init /data/mirror
 ```
 
-As part of creating the repository keys will be written to `/data/mirror/keys`.
+As part of creating the repository, keys will be written to `/data/mirror/keys`.
 
 To create a new private key in `~/.tiup/keys/private.json`:
 
@@ -149,60 +149,60 @@ To create a new private key in `~/.tiup/keys/private.json`:
 tiup mirror genkey
 ```
 
-Grant `jdoe` with private key `~/.tiup/keys/private.json` ownership of `/data/mirror`
+Grant `jdoe` with private key `~/.tiup/keys/private.json` ownership of `/data/mirror`:
 
 ```bash
 tiup mirror set /data/mirror
 tiup mirror grant jdoe
 ```
 
-### Working with custom components
+### Work with custom components
 
-First we create a custom component called hello.
+1. Create a custom component called hello.
 
-```bash
-$ cat > hello.c << END
-> #include <stdio.h>
-int main() {
-  printf("hello\n");
-  return (0);
-}
-END
-$ gcc hello.c -o hello
-$ tiup package hello --entry hello --name hello --release v0.0.1
-```
+    ```bash
+    $ cat > hello.c << END
+    > #include <stdio.h>
+    int main() {
+      printf("hello\n");
+      return (0);
+    }
+    END
+    $ gcc hello.c -o hello
+    $ tiup package hello --entry hello --name hello --release v0.0.1
+    ```
 
-This creates `package/hello-v0.0.1-linux-amd64.tar.gz`.
+    `package/hello-v0.0.1-linux-amd64.tar.gz` is created.
 
-Then we create a new repository, a private key and then grant ownership to the repository.
+2. Create a new repository and a private key, and grant ownership to the repository.
 
-```bash
-$ tiup mirror init /tmp/m
-$ tiup mirror genkey
-$ tiup mirror set /tmp/m
-$ tiup mirror grant $USER
-```
+    ```bash
+    $ tiup mirror init /tmp/m
+    $ tiup mirror genkey
+    $ tiup mirror set /tmp/m
+    $ tiup mirror grant $USER
+    ```
 
-```bash
-tiup mirror publish hello v0.0.1 package/hello-v0.0.1-linux-amd64.tar.gz hello
-```
+    ```bash
+    tiup mirror publish hello v0.0.1 package/hello-v0.0.1-linux-amd64.tar.gz hello
+    ```
 
-And finally we run the component, if it wasn't installed yet it will be downloaded.
+3. Run the component. If it is not installed yet, it will be downloaded first.
 
-```bash
-$ tiup hello
-```
-
-```
-The component `hello` version  is not installed; downloading from repository.
-Starting component `hello`: /home/dvaneeden/.tiup/components/hello/v0.0.1/hello
-hello
-```
-
-With `tiup mirror merge` you can merge a repository with custom components into another one. This assumes that all components in `/data/my_custom_components` are signed by the current `$USER`.
-
-```bash
-$ tiup mirror set /data/my_mirror
-$ tiup mirror grant $USER
-$ tiup mirror merge /data/my_custom_components
-```
+    ```bash
+    $ tiup hello
+    ```
+    
+    ```
+    The component `hello` version  is not installed; downloading from repository.
+    Starting component `hello`: /home/dvaneeden/.tiup/components/hello/v0.0.1/hello
+    hello
+    ```
+    
+    With `tiup mirror merge`, you can merge a repository with custom components into another one. This assumes that all components in `/data/my_custom_components` are signed by the current `$USER`.
+    
+    ```bash
+    $ tiup mirror set /data/my_mirror
+    $ tiup mirror grant $USER
+    $ tiup mirror merge /data/my_custom_components
+    ```
