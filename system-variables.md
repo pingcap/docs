@@ -747,9 +747,11 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 > **Note:**
 >
-> 1. When upgrade from cluster of version less than v4.0.0 to cluster of version greater equal to v5.4.0, the default value of `tidb_enable_index_merge` is `OFF`. In case of the performance regression because of the changes of execution plan.
-> 2. When upgrade from cluster of version greater equal to v4.0.0 to cluster of version greater equal v5.4.0, the default value of `tidb_enable_index_merge` is kept as before upgrade.
-> 3. In a new cluster of version greater equal to v5.4.0, the default value of `tidb_enable_index_merge` is `ON`.
+> - When upgrading a TiDB cluster from versions earlier than v4.0.0 to v5.4.0 or later, this variable is disabled by default to prevent performance regression due to the changes of an execution plan.
+>
+> - When upgrading a TiDB cluster from v4.0.0 or later to v5.4.0 or later, this variable remains the setting before the upgrade.
+>
+> - In TiDB clusters of v5.4.0 and later, this variable is enabled by default.
 
 ### tidb_enable_list_partition <span class="version-mark">New in v5.0</span>
 

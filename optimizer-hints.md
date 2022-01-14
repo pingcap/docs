@@ -261,7 +261,9 @@ In addition to this hint, setting the `tidb_enable_index_merge` system variable 
 
 > **Note:**
 >
-> `NO_INDEX_MERGE` has a higher priority over `USE_INDEX_MERGE`. When both hints are used, `USE_INDEX_MERGE` does not take effect. And `NO_INDEX_MERGE` only takes effect in the outermost sub-query block.
+> - `NO_INDEX_MERGE` has a higher priority over `USE_INDEX_MERGE`. When both hints are used, `USE_INDEX_MERGE` does not take effect. 
+>
+> - `NO_INDEX_MERGE` only takes effect in the outermost sub-query block.
 
 ### USE_TOJA(boolean_value)
 
