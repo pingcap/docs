@@ -32,7 +32,7 @@ Available Commands:
   init        Initialize an empty repository
   sign        Add signatures to a manifest file
   genkey      Generate a new key pair
-  clone       Clone a local mirror from remote mirror and download all selected components
+  clone       Clone a local mirror from a remote mirror and download all selected components
   merge       Merge two or more offline mirrors
   publish     Publish a component
   show        Show the mirror address
