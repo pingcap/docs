@@ -7,7 +7,7 @@ summary: Learn how to get and resolve type conversion and duplication errors
 
 Starting from v5.4.0, TiDB Lightning can be configured to skip errors like invalid type conversion and unique key conflicts, and continue processing as if those bad rows do not exist. A report will be generated for you to read and manually fix them afterward. This is ideal for importing from slightly dirty data source, where locating the errors manually are difficult and restarting TiDB Lightning on every encounter are costly.
 
-This article describes how to use use the type error feature (`lightning.max-error`) and the duplicate resolution feature (`tikv-importer.duplicate-resolution`). It also introduces the database where these errors are stored (`lightning.task-info-schema-name`). At then end of this article, it provides an example.
+This article describes how to use use the type error feature (`lightning.max-error`) and the duplicate resolution feature (`tikv-importer.duplicate-resolution`). It also introduces the database where these errors are stored (`lightning.task-info-schema-name`). At the end of this article, it provides an example.
 
 ## Type error
 
@@ -17,7 +17,7 @@ This article describes how to use use the type error feature (`lightning.max-err
 
 You can use the configuration `lightning.max-error` to increase the tolerance of errors related to data types. If this is set to *N*, TiDB Lightning will allow and skip up to *N* errors from the data source before aborting. The default value 0 means any single error is fatal.
 
-These errors are recorded in a database. After the import is completed, you can view the data in the database and process it manually. For more information, see [Error Report](#Error-report).
+These errors are recorded in a database. After the import is completed, you can view the errors in the database and process them manually. For more information, see [Error Report](#Error-report).
 
 {{< copyable "" >}}
 
@@ -66,7 +66,7 @@ TiDB Lightning duplicate resolution can only detect duplicates within the data s
 
 ## Error report
 
-All errors are written to tables in the `lightning_task_info` database in the downstream TiDB cluster. After the import is completed, you can process the errors manually according to the records in the database.
+All errors are written to tables in the `lightning_task_info` database in the downstream TiDB cluster. After the import is completed, you can view the errors in the database and process them manually.
 
 You can change the database name by configuring `lightning.task-info-schema-name`.
 
