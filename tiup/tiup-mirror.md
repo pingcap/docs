@@ -22,7 +22,7 @@ tiup mirror --help
 The 'mirror' command is used to manage a component repository for TiUP, you can use
 it to create a private repository, or to add new component to an existing repository.
 The repository can be used either online or offline.
-It also provides some useful utilities to help managing keys, users and versions
+It also provides some useful utilities to help manage keys, users, and versions
 of components or the repository itself.
 
 Usage:
