@@ -1391,7 +1391,7 @@ explain select * from t where age=5;
 
 - Scope: GLOBAL
 - Default value: `ON`
-- This variable controls whether to enable the [ANALYZE configuration persistence](/statistics.md#analyze-configuration-persistence) feature.
+- This variable controls whether to enable the [ANALYZE configuration persistence](/statistics.md#persist-analyze-configurations) feature.
 
 ### tidb_pprof_sql_cpu <span class="version-mark">New in v4.0</span>
 
@@ -1539,7 +1539,7 @@ SET tidb_slow_log_threshold = 200;
 - Default: `0`
 - Unit: milliseconds
 - Range: `[0, 4294967295]`
-- This variable controls whether to enable the synchronously loading statistics feature. The default value `0` means that the feature is disabled. To enable the feature, you can set this variable to a timeout (in milliseconds) that SQL optimization can wait for at most to synchronously load complete column statistics. For details, see [Loading Statistics](/statistics.md#).
+- This variable controls whether to enable the synchronously loading statistics feature. The default value `0` means that the feature is disabled. To enable the feature, you can set this variable to a timeout (in milliseconds) that SQL optimization can wait for at most to synchronously load complete column statistics. For details, see [Load statistics](/statistics.md#load-statistics).
 
 ### `tidb_stats_load_pseudo_timeout` <span class="version-mark">New in v5.4.0</span>
 
@@ -1549,7 +1549,7 @@ SET tidb_slow_log_threshold = 200;
 
 - Scope: GLOBAL
 - Default: `OFF`
-- This variable controls how TiDB behaves when the waiting time of SQL optimization reaches the timeout. The default value `OFF` means that SQL execution fails after the timeout. If this variable is set to `ON`, after the timeout, the SQL optimization gets back to use pseudo statistics.
+- This variable controls how TiDB behaves when the waiting time of SQL optimization reaches the timeout to synchronously load complete column statistics. The default value `OFF` means that SQL execution fails after the timeout. If this variable is set to `ON`, the SQL optimization gets back to using pseudo statistics after the timeout.
 
 ### tidb_stmt_summary_history_size <span class="version-mark">New in v4.0</span>
 
