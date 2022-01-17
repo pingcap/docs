@@ -429,3 +429,4 @@ You can view the history of a migration task and internal operational metrics th
 - [Stop a Data Migration Task](/dm/dm-stop-task.md)
 - [Export and Import Data Sources and Task Configuration of Clusters](/dm/dm-export-import-config.md)
 - [Handle Failed DDL Statements](/dm/handle-failed-ddl-statements.md)
+- [Handle Errors](/dm/dm-error-handling.md)
