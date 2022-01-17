@@ -725,7 +725,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 - Scope: GLOBAL
 - Default value: `OFF`
-- This variable controls whether to enable TiDB to collect `PREDICATE COLUMNS`. After enabling the collection, if you disable this feature, the information of previously collected `PREDICATE COLUMNS` is cleared. For details, see [Collect statistics for some columns](/statistics.md#).
+- This variable controls whether to enable TiDB to collect `PREDICATE COLUMNS`. After enabling the collection, if you disable it, the information of previously collected `PREDICATE COLUMNS` is cleared. For details, see [Collect statistics for some columns](/statistics.md#).
 
 ### tidb_enable_enhanced_security
 
@@ -1536,7 +1536,7 @@ SET tidb_slow_log_threshold = 200;
 > Currently, synchronously loading statistics is an experimental feature. It is not recommended that you use it in production environments.
 
 - Scope: SESSION | GLOBAL
-- Default: `0`
+- Default value: `0`
 - Unit: milliseconds
 - Range: `[0, 4294967295]`
 - This variable controls whether to enable the synchronously loading statistics feature. The default value `0` means that the feature is disabled. To enable the feature, you can set this variable to a timeout (in milliseconds) that SQL optimization can wait for at most to synchronously load complete column statistics. For details, see [Load statistics](/statistics.md#load-statistics).
@@ -1548,8 +1548,8 @@ SET tidb_slow_log_threshold = 200;
 > Currently, synchronously loading statistics is an experimental feature. It is not recommended that you use it in production environments.
 
 - Scope: GLOBAL
-- Default: `OFF`
-- This variable controls how TiDB behaves when the waiting time of SQL optimization reaches the timeout to synchronously load complete column statistics. The default value `OFF` means that SQL execution fails after the timeout. If this variable is set to `ON`, the SQL optimization gets back to using pseudo statistics after the timeout.
+- Default value: `OFF`
+- This variable controls how TiDB behaves when the waiting time of SQL optimization reaches the timeout to synchronously load complete column statistics. The default value `OFF` means that SQL execution fails after the timeout. If you set this variable to `ON`, the SQL optimization gets back to using pseudo statistics after the timeout.
 
 ### tidb_stmt_summary_history_size <span class="version-mark">New in v4.0</span>
 

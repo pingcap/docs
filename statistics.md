@@ -121,9 +121,9 @@ Before v5.3.0, TiDB uses the reservoir sampling method to collect statistics. Si
 
 ##### Collect statistics for some columns
 
-In most cases, when executing SQL statements, the optimizer only uses statistics for some columns (such as columns in the `WHERE`, `JOIN`, `ORDER BY`, and `GROUP BY` statements). These used columns are `PREDICATE COLUMNS`.
+In most cases, when executing SQL statements, the optimizer only uses statistics of some columns (such as columns in the `WHERE`, `JOIN`, `ORDER BY`, and `GROUP BY` statements). These used columns are called `PREDICATE COLUMNS`.
 
-If a table has many columns, collecting statistics on all the columns can cause a large overhead. To reduce the overhead, you can collect statistics for only specified columns or `PREDICATE COLUMNS` to be used by the optimizer.
+If a table has many columns, collecting statistics for all the columns can cause a large overhead. To reduce the overhead, you can collect statistics for only specified columns or `PREDICATE COLUMNS` to be used by the optimizer.
 
 > **Note:**
 >
@@ -137,11 +137,11 @@ If a table has many columns, collecting statistics on all the columns can cause 
     ANALYZE TABLE TableName COLUMNS ColumnNameList [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
     ```
 
-    In the syntax, `ColumnNameList` is used to specify the name list of the needed columns. If you need to specify more than one column, use comma `,` to separate the column names. For example, `ANALYZE table t columns a, b`. Besides collecting statistics for the specified columns in a specified table, this syntax can collect statistics for the indexed columns and all indexes in that table at the same time.
+    In the syntax, `ColumnNameList` is used to specify the name list of the needed columns. If you need to specify more than one column, use comma `,` to separate the column names. For example, `ANALYZE table t columns a, b`. Besides collecting statistics for the specified columns in a specified table, this syntax collects statistics for the indexed columns and all indexes in that table at the same time.
 
     > **Note:**
     >
-    > The syntax above is a full collection. For example, after using this syntax to collect statistics for columns a and b, if you want to collect statistics for column c as well, you need to specify all three columns in the `ANALYZE table t columns a, b, c` statement rather than specifying only the additional column c like `ANALYZE TABLE t COLUMNS c`.
+    > The syntax above is a full collection. For example, after using this syntax to collect statistics for columns `a` and `b`, if you want to collect statistics for column `c` as well, you need to specify all three columns using `ANALYZE table t columns a, b, c`, rather than only specifying the additional column `c` using `ANALYZE TABLE t COLUMNS c`.
 
 - To collect statistics for `PREDICATE COLUMNS`, do the following:
 
@@ -153,7 +153,7 @@ If a table has many columns, collecting statistics on all the columns can cause 
 
         After the setting, TiDB writes the `PREDICATE COLUMNS` information to the `mysql.column_stats_usage` system table every 100 * [`stats-lease`](/tidb-configuration-file.md#stats-lease).
 
-    2. After the query pattern of your business is stabilized, collect the statistics of `PREDICATE COLUMNS` by using the following syntax:
+    2. After the query pattern of your business is stable, collect the statistics of `PREDICATE COLUMNS` by using the following syntax:
 
         {{< copyable "sql" >}}
 
@@ -161,12 +161,12 @@ If a table has many columns, collecting statistics on all the columns can cause 
         ANALYZE TABLE TableName PREDICATE COLUMNS [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
         ```
 
-        Besides collecting statistics for the `PREDICATE COLUMNS` in a specified table, this syntax can collect statistics for the indexed columns and all indexes in that table at the same time.
+        Besides collecting statistics for the `PREDICATE COLUMNS` in a specified table, this syntax collects statistics for the indexed columns and all indexes in that table at the same time.
 
         > **Note:**
         >
         > - If the `mysql.column_stats_usage` system table does not contain any `PREDICATE COLUMNS` record for that table, executing the above statement collects statistics for all columns and all indexes in that table.
-        > - After using this syntax to collect statistics, when executing a new type of SQL query, the optimizer might temporarily use the old or pseudo column statistics, and will collect the new column statistics from the next time.
+        > - After using this syntax to collect statistics, when executing a new type of SQL query, the optimizer might temporarily use the old or pseudo column statistics and will collect the new column statistics from the next time.
 
 - To collect statistics for all columns and all indexes, use the following syntax:
 
@@ -178,7 +178,7 @@ If a table has many columns, collecting statistics on all the columns can cause 
 
 If you want to persist the column configuration in the `ANALYZE` statement (including `COLUMNS ColumnNameList`, `PREDICATE COLUMNS`, and `ALL COLUMNS`), set the value of the `tidb_persist_analyze_options` system variable to `ON` to enable the [ANALYZE configuration persistence](/statistics.md#analyze-configuration-persistence) feature. After enabling the ANALYZE configuration persistence feature:
 
-- When TiDB collects statistics automatically or when you manually collect statistics by executing the `ANALYZE` statement without specifying the column configuration, TiDB continues with the previously persisted configuration for statistics collection.
+- When TiDB collects statistics automatically or when you manually collect statistics by executing the `ANALYZE` statement without specifying the column configuration, TiDB continues using the previously persisted configuration for statistics collection.
 - When you manually execute the `ANALYZE` statement multiple times and specify the column configuration each time, TiDB overwrites the previously recorded persistent configuration using the new configuration specified by the latest `ANALYZE` statement.
 
 If you want to see which columns in a table are `PREDICATE COLUMNS` and the statistics for which columns have been collected, you can use the following syntax.
@@ -197,7 +197,7 @@ The `SHOW COLUMN_STATS_USAGE` statement returns the following 6 columns:
 | `Table_name` | The table name |
 | `Partition_name` | The partition name |
 | `Column_name` | The column name |
-| `Last_used_at` | The last time when the column statistics were used by the query optimization  |
+| `Last_used_at` | The last time when the column statistics were used by the query optimization |
 | `Last_analyzed_at` | The last time when the column statistics were collected |
 
 In the following example, after executing `ANALYZE TABLE t PREDICATE COLUMNS;`, TiDB collects statistics for columns `b`, `c`, and `d`, where column `b` is a `PREDICATE COLUMN` and columns `c` and `d` are index columns.
@@ -254,7 +254,7 @@ When `IndexNameList` is empty, this syntax collects statistics of all indexes in
 
 > **Note:**
 >
-> To ensure that the statistical information before and after the collection is consistent, when `tidb_analyze_version=2` is set, this syntax collects statistics for the entire table (including all columns and all indexes) instead of for specified indexes only.
+> To ensure that the statistical information before and after the collection is consistent, when `tidb_analyze_version=2` is set, this syntax collects statistics for the entire table (including all columns and all indexes) instead of only for indexes.
 
 ##### Collect statistics for partitions
 
@@ -274,7 +274,7 @@ When `IndexNameList` is empty, this syntax collects statistics of all indexes in
     ANALYZE TABLE TableName PARTITION PartitionNameList INDEX [IndexNameList] [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
     ```
 
-- When collecting statistics for partitions, use the following syntax if you only need to [collect statistics for some columns](/statistics.md# collect statistics for some columns).
+- When collecting statistics for partitions, if you only need to [collect statistics for some columns](/statistics.md# collect statistics for some columns), use the following syntax:
 
     > **Warning:**
     >
@@ -361,8 +361,8 @@ The following are the `ANALYZE` configurations that support persistence:
 | The number of Top-N  | WITH NUM TOPN |
 | The number of samples | WITH NUM SAMPLES |
 | The sampling rate | WITH FLOATNUM SAMPLERATE |
-| ANALYZE column type | AnalyzeColumnOption ::= ( 'ALL COLUMNS' \| 'PREDICATE COLUMNS' \| 'COLUMNS' ColumnNameList ) |
-| ANALYZE column | ColumnNameList ::= Identifier ( ',' Identifier )* |
+| The `ANALYZE` column type | AnalyzeColumnOption ::= ( 'ALL COLUMNS' \| 'PREDICATE COLUMNS' \| 'COLUMNS' ColumnNameList ) |
+| The `ANALYZE` column | ColumnNameList ::= Identifier ( ',' Identifier )* |
 
 #### Enable ANALYZE configuration persistence
 
@@ -372,7 +372,7 @@ When you manually execute the `ANALYZE` statement multiple times and specify any
 
 #### Disable ANALYZE configuration persistence
 
-To disable the `ANALYZE` configuration persistence feature, set the `tidb_persist_analyze_options` system variable to `OFF`. Because the `ANALYZE` configuration persistence feature is not applicable to `tidb_analyze_version = 1`, setting `tidb_analyze_version = 1` can also turn off the feature.
+To disable the `ANALYZE` configuration persistence feature, set the `tidb_persist_analyze_options` system variable to `OFF`. Because the `ANALYZE` configuration persistence feature is not applicable to `tidb_analyze_version = 1`, setting `tidb_analyze_version = 1` can turn off the feature too.
 
 After disabling the `ANALYZE` configuration persistence feature, TiDB does not clear the persisted configuration records. Therefore, if you enable this feature again, TiDB continues to collect statistics using the previously recorded persistent configurations.
 
@@ -559,20 +559,24 @@ The statement deletes statistics of all the tables in `TableName`.
 
 ## Load statistics
 
-By default, depending on the different size of the space that column statistics consume, TiDB loads statistics in the following two ways:
+By default, depending on the different size of the space that column statistics consume, TiDB loads statistics differently as follows:
 
 - For the statistics that consume a small space (such as count, distinctCount, and nullCount), as long as the column data is updated, TiDB automatically loads the corresponding statistics into memory for use in the SQL optimization stage.
-- For the statistics that consume a large space (such as histogram, TopN, and Count-Min Sketch), to ensure the performance of SQL execution, TiDB loads the statistics asynchronously on demand. Take the histogram as an example. Only when the optimization of a SQL statement uses the histogram statistics of a column, TiDB loads the histogram statistics of that column into memory. The advantage of on-demand asynchronous loading is that loading statistics does not affect the performance of SQL execution, but it is possible that TiDB uses incomplete statistics for SQL optimization.
+- For the statistics that consume a large space (such as histogram, TopN, and Count-Min Sketch), to ensure the performance of SQL execution, TiDB loads the statistics asynchronously on demand. Take the histogram as an example. Only when the optimization of a SQL statement uses the histogram statistics of a column, TiDB loads the histogram statistics of that column into memory. The advantage of on-demand asynchronous loading is that loading statistics does not affect the performance of SQL execution, but the disadvantage is that TiDB might use incomplete statistics for SQL optimization.
 
-Since v5.4.0, TiDB introduces the synchronously loading statistics feature. With the feature, TiDB can synchronously loading statistics with a large space consumption (such as histogram, TopN, and Count-Min Sketch statistics) into memory when you execute SQL statements, which improves the completeness of statistics for SQL optimization.
+Since v5.4.0, TiDB introduces the synchronously loading statistics feature. With the feature, TiDB can synchronously load statistics with a large space consumption (such as histogram, TopN, and Count-Min Sketch statistics) into memory when you execute SQL statements, which improves the completeness of statistics for SQL optimization.
 
 > **Warning:**
 >
 > Currently, synchronously loading statistics is an experimental feature. It is not recommended that you use it in production environments.
 
-The synchronously loading statistics feature is disabled by default. To enable this feature, set the value of the `tidb_stats_load_sync_wait` system variable to a timeout (in milliseconds) that SQL optimization can wait for at most to synchronously load complete column statistics. The default value of this variable is `0`, indicating that the feature is disabled.
+The synchronously loading statistics feature is disabled by default. To enable this feature, set the value of the [`tidb_stats_load_sync_wait`](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540) system variable to a timeout (in milliseconds) that SQL optimization can wait for at most to synchronously load complete column statistics. The default value of this variable is `0`, indicating that the feature is disabled.
 
-After enabling this feature, you can modify the value of the `tidb_stats_load_pseudo_timeout` system variable to control how TiDB behaves when the waiting time of SQL optimization reaches the timeout. The default value of this variable is `OFF`, indicating that the SQL execution fails after the timeout. If this variable is set to `ON`, after the timeout, the entire SQL optimization process does not use any histogram, TopN, or CMSketch statistics of any columns, but gets back to use pseudo statistics.
+After enabling the synchronously loading statistics feature, you can further configure the feature as follows:
+
+- To control how TiDB behaves when the waiting time of SQL optimization reaches the timeout, modify the value of the [`tidb_stats_load_pseudo_timeout`](/system-variables.md#tidb_stats_load_pseudo_timeout-new-in-v540) system variable. The default value of this variable is `OFF`, indicating that the SQL execution fails after the timeout. If you set this variable to `ON`, after the timeout, the entire SQL optimization process does not use any histogram, TopN, or CMSketch statistics of any columns, but gets back to using pseudo statistics.
+- To specify the maximum column number that the synchronously loading statistics feature can process concurrently, modify the value of the [`stats-load-concurrency`](/tidb-configuration-file.md#stats-load-concurrency-new-in-v540) option in the TiDB configuration file. The default value is `5`.
+- To specify the maximum column number of requests that the synchronously loading statistics feature can cache, modify the value of the [`stats-load-queue-size`](/tidb-configuration-file.md#stats-load-queue-size-new-in-v540) option in the TiDB configuration file. The default value is `1000`.
 
 ## Import and export statistics
 
