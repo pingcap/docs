@@ -108,7 +108,7 @@ tiup mirror set https://tiup-mirror.example.com/
 
 > **Note:**
 >
-> On the machine on which you use `tiup mirror clone` setting the mirror will also change the mirror you are cloning from, so you need to reset this by running `tiup mirror set --reset` before updating the private mirror.
+> If you use `tiup mirror set...` on the machine where you use `tiup mirror clone`, the next time you use `tiup mirror clone...`, the machine clones from the local mirror, not the remote one. Therefore, you need to reset the mirror by running `tiup mirror set --reset` before updating the private mirror.
 
 Another way of using a mirror is to use the `TIUP_MIRRORS` environment variable. Here is an example for running `tiup list` with a private repository.
 
