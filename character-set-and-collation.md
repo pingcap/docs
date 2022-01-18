@@ -84,7 +84,7 @@ mysql> show collation;
 | utf8_bin    | utf8    |   83 | Yes     | Yes      |       1 |
 | gbk_bin     | gbk     |   87 | Yes     | Yes      |       1 |
 +-------------+---------+------+---------+----------+---------+
-5 rows in set (0.01 sec)
+6 rows in set (0.01 sec)
 ```
 
 > **Warning:**
