@@ -81,9 +81,9 @@ To clear your browser cache, take the following steps:
 
     ![Clear the Local Storage](/media/dashboard/dashboard-faq-devtools-application.png)
 
-### NgMonitoring does not start as expected
+### A `required component NgMonitoring is not started` error notification is shown
 
-If the **Continuous Profiling** page shows that NgMonitoring does not start, perform the following steps to address the problem.
+If the **Continuous Profiling** page shows that NgMonitoring component is not started, perform the following steps to address the problem.
 
 #### Step 1. Check versions
 
