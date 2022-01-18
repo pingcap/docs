@@ -51,7 +51,7 @@ When you start the TiDB cluster, you can use command-line options or environment
 
 - The log level
 - Default: `"info"`
-- Optional: `"debug"`, `"info"`, `"warn"`, `"error"`, `"fatal"`
+- Optional values: `"debug"`, `"info"`, `"warn"`, `"error"`, `"fatal"`
 
 ## `--lease`
 
@@ -62,7 +62,7 @@ When you start the TiDB cluster, you can use command-line options or environment
 
 - The log file
 - Default: `""`
-- If this option is not set, logs are output to "stderr".
+- If this option is not set, logs are output to "stderr". If this option is set, logs are output to the corresponding file.
 
 ## `--log-slow-query`
 

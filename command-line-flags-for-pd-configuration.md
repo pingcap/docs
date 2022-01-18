@@ -66,13 +66,13 @@ PD is configurable using command-line flags and environment variables.
 
 - The log level
 - Default: `"info"`
-- Optional: `"debug"`, `"info"`, `"warn"`, `"error"`, `"fatal"`
+- Optional values: `"debug"`, `"info"`, `"warn"`, `"error"`, `"fatal"`
 
 ## `--log-file`
 
 - The log file
 - Default: `""`
-- If this flag is not set, logs will be written to "stderr".
+- If this flag is not set, logs will be written to "stderr". If this flag is set, logs are output to the corresponding file.
 
 ## `--log-rotate`
 
