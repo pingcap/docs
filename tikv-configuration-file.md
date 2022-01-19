@@ -40,7 +40,7 @@ This document only describes the parameters that are not included in command-lin
 
 + Configuration items related to the log.
 
-+ From v5.4.0, to make the log configuration items of TiKV and TiDB consistent, TiKV deprecates the former configuration item `log-rotation-timespan` and changes `log-level`, `log-format`, `log-file`, `log-rotation-size` to the following ones. If you only set the former configuration item, and their values are set to non-default values, the former items remain compatible with the new items. If both former and new configuration items are set, the new items are used.
++ From v5.4.0, to make the log configuration items of TiKV and TiDB consistent, TiKV deprecates the former configuration item `log-rotation-timespan` and changes `log-level`, `log-format`, `log-file`, `log-rotation-size` to the following ones. If you only set the old configuration items, and their values are set to non-default values, the old items remain compatible with the new items. If both old and new configuration items are set, the new items take effect.
 
 ### `level` <span class="version-mark">New in v5.4.0</span>
 
