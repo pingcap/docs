@@ -117,7 +117,7 @@ export TIUP_MIRRORS=/shared_data/tiup
 tiup list
 ```
 
-Using `TIUP_MIRRORS` can permanently change the mirror configuration, just like `tiup mirror set`. For details see [tiup issue #651](https://github.com/pingcap/tiup/issues/651).
+`TIUP_MIRRORS` setting can permanently change the mirror configuration, for example, `tiup mirror set`. For details, see [tiup issue #651](https://github.com/pingcap/tiup/issues/651).
 
 ### Update the private repository
 
