@@ -504,7 +504,7 @@ Configuration items related to Raftstore
 
 ### `raft-log-reserve-max-ticks` <span class="version-mark">New in v5.3</span>
 
-+ After the number of ticks set by this configuration item passed, even if the number of residual Raft logs does not reach the value set by `raft-log-gc-threshold`, TiKV still performs garbage collection (GC) to them.
++ After the number of ticks set by this configuration item passes, even if the number of residual Raft logs does not reach the value set by `raft-log-gc-threshold`, TiKV still performs garbage collection (GC) to these logs.
 + Default value: `6`
 + Minimum value: greater than `0`
 
