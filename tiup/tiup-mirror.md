@@ -19,7 +19,7 @@ tiup mirror --help
 ```
 
 ```bash
-The 'mirror' command is used to manage a component repository for TiUP, you can use
+The `mirror` command is used to manage a component repository for TiUP, you can use
 it to create a private repository, or to add new component to an existing repository.
 The repository can be used either online or offline.
 It also provides some useful utilities to help manage keys, users, and versions
@@ -51,7 +51,7 @@ Use "tiup mirror [command] --help" for more information about a command.
 
 ## Clone a mirror
 
-The `tiup mirror clone` command is used to build a local mirror. The basic usage is as follows:
+You can run the `tiup mirror clone` command to build a local mirror:
 
 {{< copyable "shell-regular" >}}
 
@@ -89,8 +89,8 @@ The `tiup mirror clone` command provides many optional flags (might provide more
     If you want to clone only one version (not all versions) of a component, use `--<component>=<version>` to specify this version. For example:
 
     - Execute the `tiup mirror clone <target-dir> --tidb v5.3.0` command to clone the v5.3.0 version of the TiDB component.
-    - Execute the `tiup mirror clone <target-dir> --tidb v5.3.0 --tikv all` command to clone the v5.3.0 version of the TiDB component and all versions of the TiKV component.
-    - Execute the `tiup mirror clone <target-dir> v5.3.0` command to clone the v5.3.0 version of all components in a cluster.
+    - Run the `tiup mirror clone <target-dir> --tidb v5.3.0 --tikv all` command to clone the v5.3.0 version of the TiDB component and all versions of the TiKV component.
+    - Run the `tiup mirror clone <target-dir> v5.3.0` command to clone the v5.3.0 version of all components in a cluster.
 
 After cloning, signing keys are set up automatically.
 
@@ -108,7 +108,7 @@ tiup mirror set https://tiup-mirror.example.com/
 
 > **Note:**
 >
-> If you use `tiup mirror set...` on the machine where you use `tiup mirror clone`, the next time you use `tiup mirror clone...`, the machine clones from the local mirror, not the remote one. Therefore, you need to reset the mirror by running `tiup mirror set --reset` before updating the private mirror.
+> If you run `tiup mirror set...` on the machine where you run `tiup mirror clone`, the next time you run `tiup mirror clone...`, the machine clones from the local mirror, not the remote one. Therefore, you need to reset the mirror by running `tiup mirror set --reset` before updating the private mirror.
 
 Another way of using a mirror is to use the `TIUP_MIRRORS` environment variable. Here is an example for running `tiup list` with a private repository.
 
@@ -129,7 +129,7 @@ If you run the `tiup mirror clone` command again with the same `target-dir`, the
 
 ## Custom repository
 
-You can create a custom repository to work with TiDB components like TiDB, TiKV, or PD that you build yourself. It is also possible to create your own tiup components.
+You can create a custom repository to work with TiDB components like TiDB, TiKV, or PD that you build by yourself. It is also possible to create your own tiup components.
 
 To create your own components, run the `tiup package` command and perform as instructed in [Component packaging](https://github.com/pingcap/tiup/blob/master/doc/user/package.md).
 
@@ -174,7 +174,7 @@ tiup mirror grant jdoe
 
     `package/hello-v0.0.1-linux-amd64.tar.gz` is created.
 
-2. Create a new repository and a private key, and grant ownership to the repository.
+2. Create a repository and a private key, and grant ownership to the repository.
 
     ```bash
     $ tiup mirror init /tmp/m
