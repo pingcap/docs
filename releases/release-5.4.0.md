@@ -138,13 +138,13 @@ In v5.4, the key new features or improvements are as follows:
 
 - **GA for Index Merge**
 
-    _Index Merge_ is introduced in TiDB v4.0 an experimental feature to access tables. This method greatly accelerates condition filtering when a query requires scanning of multiple columns of data. Take the following query as an example. In the `WHERE` statement, the filtering conditions connected by `OR` have their respective indexes in columns _key1_ and _key2_. Based on the indexes in the two columns, the Index Merge feature filters and merges the query results, and returns the merged result.
+    _Index Merge_ is introduced in TiDB v4.0 as an experimental feature to access tables. This method greatly accelerates condition filtering when a query requires scanning of multiple columns of data. Take the following query as an example. In the `WHERE` statement, the filtering conditions connected by `OR` have their respective indexes in columns _key1_ and _key2_. Based on the indexes in the two columns, the Index Merge feature filters and merges the query results, and returns the merged result.
 
     ```sql
     SELECT * FROM table WHERE key1 <= 100 OR key2 = 200;
     ```
 
-   Before TiDB v4.0, a query in a table uses only one index and cannot use multiple indexes for filtering. If you want to query multiple columns of data, you can enable _Inex Merge_ to get the exact query result in short time by using the indexes in individual columns. _Inex Merge_ avoids unnecessary full table scans and does not require establishing large number of composite indexes.
+   Before TiDB v4.0, a query in a table uses only one not multiple indexes for filtering. If you want to query multiple columns of data, you can enable _Inex Merge_ to get the exact query result in short time by using the indexes in individual columns. _Inex Merge_ avoids unnecessary full table scans and does not require establishing large number of composite indexes.
 
     In v5.4.0, _Inex Merge_ is a GA feature. However, you still need to pay attention to the following restrictions:
 
@@ -269,12 +269,12 @@ In v5.4, the key new features or improvements are as follows:
 - **Enhance Continuous Profiling (experimental feature)**
 
     - More components supported: Besides TiDB, PD, and TiKV, TiDB v5.4.0 also supports CPU profiling of TiFlash.
-    - More forms of profiling display: Supports display of CPU Profiling and Goroutine results on flame charts.
-    - More deployment environments supported: You can enable Continuous Profiling on clusters deployed using TiDB Operator.
+    - More forms of profiling display: Supports display of CPU profiling and Goroutine results on flame charts.
+    - More deployment environments supported: Continuous Profiling is applicable to clusters deployed using TiDB Operator.
 
     Continuous Profiling is disabled by default and can be enabled on TiDB Dashboard. 
 
-    Continuous Profiling is available for clusters deployed or upgraded using TiUP of v1.9.0 or later or TiDB Operator of v1.3.0 or later.
+    Continuous Profiling is available to clusters deployed or upgraded using TiUP of v1.9.0 or later or TiDB Operator of v1.3.0 or later.
 
     [User document](/dashboard/continuous-profiling.md)
 
