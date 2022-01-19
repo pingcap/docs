@@ -8,6 +8,23 @@ aliases: ['/docs/dev/br/backup-and-restore-faq/']
 
 This document lists the frequently asked questions (FAQs) and the solutions about Backup & Restore (BR).
 
+If you encountered problems that are not listed in this document and cannot be resolved, you are welcome to ask your questions to [AskTUG](https://asktug.com/) community.
+
+## In TiDB v5.4.0 and later versions, when backup tasks perform on the cluster under high workload, why does the speed of backup tasks become slow?
+
+Starting from TiDB v5.4.0, TiKV introduces the auto-tune feature for backup tasks. For clusters in v5.4.0 or later versions, this feature is enabled by default. When the cluster workload is high, the feature limits the resources used by backup tasks to reduce the impact on the online cluster. For more information, refer to [BR Auto-Tune](/br/br-auto-tune.md).
+
+TiKV supports [dynamically configuring](tikv-control.md#modify-the-tikv-configuration-dynamically) the auto-tune feature. You can enable or disable the feature by the following mothods without restarting your cluster:
+
+- Disanable auto-tune: Set the TiKV configuration item [`backup.enable-auto-tune`](/tikv-configuration-file.md#enable-auto-tune-new-in-v540) to `false`.
+- Enable auto-tune: Set `backup.enable-auto-tune` to `true`. For clusters that upgrade from versions earlier than v5.4.0 to v5.4.0 or later versions, the auto-tune feature is disabled by default. You need to manually enable it.
+
+For the information on modifying command lines of auto-tune online, refer to [Use auto-tune](/br/br-auto-tune.md#use-auto-tune).
+
+In addition, this feature also reduces the default number of threads used by backup tasks when performing backup tasks. For details, see `backup.num-threads`](/tikv-configuration-file.md#num-threads-1). Therefore, the speed, CPU usage, and I/O resource utilization used by backup tasks which you can see on the Grafana Dashboard are lower than those of versions earlier than v5.4. Before v5.4, the default value of `backup.num-threads` was CPU * 0.75, that is, the number of threads used by backup tasks makes up 75% of the logical CPU cores. The maximum value of it was `32`. Starting from v5.4, the default value of this configuration item is CPU * 0.5, and its maximum value is `8`.
+
+When you perform backup tasks on an offline cluster, to speed up the backup, you can modify the value of `backup.num-threads` to a larger number using `tikv-ctl`.
+
 ## What should I do if the error message `could not read local://...:download sst failed` is returned during data restoration?
 
 When you restore data, each node must have access to **all** backup files (SST files). By default, if `local` storage is used, you cannot restore data because the backup files are scattered among different nodes. Therefore, you have to copy the backup file of each TiKV node to the other TiKV nodes.
@@ -16,9 +33,37 @@ It is recommended to mount an NFS disk as a backup disk during backup. For detai
 
 ## How much does it affect the cluster during backup using BR?
 
-When you use the `oltp_read_only` scenario of `sysbench` to back up to a disk (make sure the backup disk and the service disk are different) at full rate, the cluster QPS is decreased by 15%-25%. The impact on the cluster depends on the table schema.
+- For TiDB v5.4.0 or later versions:
 
-To reduce the impact on the cluster, you can use the `--ratelimit` parameter to limit the backup rate.
+    BR not only reduces the default CPU utilization used by backup tasks but also introduces auto-tune feature. After this feature is enabled, BR can automatically limit the resources used by backup tasks when performing backups in the cluster with high workloads, thereby limiting the speed of BR backups. Therefore, when using the default configuration for backup tasks in the cluster in v5.4.0 with high workloads, the impact of the tasks on the cluster performance is significantly less than the impact for the clusters earlier than v5.4.0. For details on the auto-tune feature, see [BR Auto-tune](/br/br-auto-tune.md).
+
+    The following is an internal test on a single node. The test result shows that when using the default configuration of v5.4.0 and its earlier versions in the **full-speed backup** scenario, the impact of backup using BR on cluster performance is quite different. The detailed test results are as follows:
+
+    - When using the default configuration of v5.3.0, the QPS of pure write load is reduced by 75%.
+    - When using the default configuration of v5.4.0, the QPS for the same load is reduced by 25%. However, when this configuration is used, the speed of backup tasks using BR becomes correspondingly slower. The time required is 1.7 times that of the v5.3.0 configuration.
+
+- For TiDB v5.3.0 or earlier versions:
+
+    In these versions, the default configuration parameters of BR only serve to **offline backup** tasks. In the default configuration, the backup tasks using BR might use a large amount of CPU and I/O resources of the cluster, which caused the cluster latency to increase.
+
+    The results of internal tests show that under the default configuration, the backup tasks using BR have a great impact on the cluster performance. The detailed test information is as follows:
+
+    - Test environment: Use a TiKV cluster with 6 nodes and a single-table dataset to perform the following hybrid operations, whose ratio of the read and write tasks is about `10:1`.
+    - Test mothods:
+        - Insert to a single node
+        - Update a single
+        - Queries for small ranges
+    - Benchmark: Total QPS is around 20K, P95 latency is around 28ms, P99 is around 50ms.
+    - Test result: When the total CPU utilization of the cluster is controlled at 91% by limiting speed, the results are as follows:
+        - The QPS of **write load** reduced by 50%, and the P99 latency increased several times.
+        - In contrast, **read load** is less affected, and its QPS even increased slightly.
+        - The overall P99 latency only rose by around 50%, and QPS reduced by around 4%.
+
+
+If you need to manually control the impact of backup tasks on cluster performance, you can use the following solutions. These two methods can not only reduce the impact of backup tasks on the cluster but also reduce the speed of backup tasks.
+
+- Use the `--ratelimit` parameter to limit the speed of backup tasks. Note that this parameter limits the speed of **saving backup files to external storage**. When calculating the total size of backup files, use the `backup data size(after compressed)` in the backup log as a benchmark.
+- Adjust the TiKV configuration item [`backup.num-threads`](/tikv-configuration-file.md#num-threads-1) to limit the resources used by backup tasks. This configuration item determines the number of threads used by backup tasks. The test data shows that when the number of threads used by backup tasks using BR does not exceed `8`, and the total CPU utilization of the cluster does not exceed 60%, the backup tasks have little impact on the cluster, regardless of the read and write load.
 
 ## Does BR back up system tables? During data restoration, do they raise conflict?
 
