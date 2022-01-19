@@ -256,7 +256,8 @@ Currently, TiFlash supports the following push-down expressions:
 
 * Expressions that contain the Bit, Set, and Geometry types cannot be pushed down to TiFlash.
 
-* date_add, date_sub, adddate, and subdate support the following interval types only. If other interval types are used, TiFlash reports errors.
+* The `date_add`, `date_sub`, `adddate`, and `subdate` functions support the following interval types only. If other interval types are used, TiFlash reports errors.
+
     * DAY
     * WEEK
     * MONTH
