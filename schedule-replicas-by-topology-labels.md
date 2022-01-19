@@ -16,6 +16,12 @@ To make this mechanism effective, you need to properly configure TiKV and PD so 
 
 ## Configure `labels` based on the cluster topology
 
+> **Note:**
+>
+> Location labels are defined as Strings in PD with no restricted default or pre-configured values. This offers customizable label configuration in label names other than `zone`, `rack` or `host` which are used as demonstration in below sections.
+
+To further customize it, there is no restriction in number of label levels (not mandatory for 3 levels) as long as they match with TiKV server labels.
+
 ### Configure `labels` for TiKV
 
 You can use the command-line flag or set the TiKV configuration file to bind some attributes in the form of key-value pairs. These attributes are called `labels`. After TiKV is started, it reports its `labels` to PD so users can identify the location of TiKV nodes.
