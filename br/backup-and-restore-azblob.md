@@ -9,7 +9,7 @@ The Backup & Restore (BR) tool supports using Azure Blob Storage as the external
 
 For detailed information on other external storages supported by BR, refer to [External Storages](/br/backup-and-restore-storages.md).
 
-## Use cases
+## User scenario
 
 Azure virtual machines can quickly store large-scale data on Azure Blob Storage. If you are using Azure virtual machines to deploy your cluster, you can back up your data on Azure Blob Storage.
 
