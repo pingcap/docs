@@ -25,7 +25,7 @@ This document only describes the parameters that are not included in command-lin
 
 ### `slow-log-file`
 
-+ The file stores slow logs
++ The file that stores slow logs
 + If this configuration item is not set, but `log.file.filename` is set, slow logs are output to the log file specified by `log.file.filename`.
 + If neither `slow-log-file` nor `log.file.filename` are set, all logs are output to "stderr" by default.
 + If both configuration items are set, ordinary logs are output to the log file specified by `log.file.filename`, and slow logs are output to the log file set by `slow-log-file`.
@@ -56,7 +56,7 @@ This document only describes the parameters that are not included in command-lin
 
 ### `enable-timestamp` <span class="version-mark">New in v5.4.0</span>
 
-+ Determines enable or disable the timestamp in the log
++ Determines whether to enable or disable the timestamp in the log
 + Optional values: `"true"`, `"false"`
 + Default value: `"true"`
 
@@ -71,7 +71,7 @@ This document only describes the parameters that are not included in command-lin
 
 ### `max-size` <span class="version-mark">New in v5.4.0</span>
 
-+ The maximum size of a single log file. When the file size is bigger than the value set by this configuration item, the system automatically divides the single file into multiple files.
++ The maximum size of a single log file. When the file size is larger than the value set by this configuration item, the system automatically splits the single file into multiple files.
 + Default value: `300`
 + Maximum value: `4096`
 + Unit: MiB
