@@ -24,8 +24,8 @@ In common cases, to avoid exposing the key information (such as `account-key`) i
 
 The following is an example of backup and restore operations on Azure Blob Storage using the above two methods. The purpose of the operations are as follows:
 
-- Back up: Back up the `test` library to a place with container name `container=test` and path prefix `t1` in Azure Blob Storage.
-- Restore: Restore the place with the container name `container=test` and the path prefix `t1` in Azure Blob Storage to the `test` library.
+- Back up: Back up the database named `test` to a place with container name `container=test` and path prefix `t1` in Azure Blob Storage.
+- Restore: Restore the place with the container name `container=test` and the path prefix `t1` in Azure Blob Storage to the database named `test`.
 
 ### Method 1: Back up and restore using Azure AD (recommended)
 
@@ -41,7 +41,7 @@ When backing up data using Azure AD, you need to specify `account-name` and `acc
 >
 > When using Azure Blob Storage as the external storage, you must set `send-credentials-to-tikv = true` (which is set by default). Otherwise, the backup task will fail.
 
-This section shows baking up data to `cool tier`, that is, the storage class of the uploaded object is `Cool`. You can specify `account-name` and `access-tier` in two ways:
+This section shows backing up data to `cool tier`, that is, the access tier of the uploaded object is `Cool`. You can specify `account-name` and `access-tier` in two ways:
 
 - Write the parameters information in URL parameters:
 
@@ -75,13 +75,13 @@ When restoring data using Azure AD, you need to specify `account-name`. You can 
 
 #### Back up
 
-When backing up data using an access key, you need to specify `account-name` and `access-tier`. If `access-tier` is not set (the value is empty), the value is `Hot` by default.
+When backing up data using an access key, you need to specify `account-name`, `account-key`, and `access-tier`. If `access-tier` is not set (the value is empty), the value is `Hot` by default.
 
 > **Note:**
 >
 > When using Azure Blob Storage as the external storage, you must set `send-credentials-to-tikv = true` (which is set by default). Otherwise, the backup task will fail.
 
-This section shows baking up data to `cool tier`, that is, the storage class of the uploaded object is `Cool`. You can specify `account-name` and `access-tier` in two ways:
+This section shows backing up data to `cool tier`, that is, the access tier of the uploaded object is `Cool`. You can specify `account-name`, `account-key`, and `access-tier` in two ways:
 
 - Write the parameters information in URL parameters:
 
@@ -97,7 +97,7 @@ This section shows baking up data to `cool tier`, that is, the storage class of 
 
 #### Restore
 
-When restoring data using an access key, you need to specify `account-name` and `access-tier`. You can specify the parameters in two ways:
+When restoring data using an access key, you need to specify `account-name` and `account-key`. You can specify the parameters in two ways:
 
 - Write the parameters information in URL parameters:
 
@@ -120,7 +120,7 @@ During the backup and restore process, you need to use parameters `account-name`
 
 ### Configure environment variables as parameters
 
-When baking up and restoring data using Azure AD, the environment variables `$AZURE_CLIENT_ID`, `$AZURE_TENANT_ID`, and `$AZURE_CLIENT_SECRET` should be configured in the operating environment of BR and TiKV.
+When backing up and restoring data using Azure AD, the environment variables `$AZURE_CLIENT_ID`, `$AZURE_TENANT_ID`, and `$AZURE_CLIENT_SECRET` should be configured in the operating environment of BR and TiKV.
 
 - When using a cluster started with TiUP, TiKV uses the "systemd" service. The following example provides how to configure the above three environment variables as parameters for TiKV:
 

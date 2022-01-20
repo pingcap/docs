@@ -115,7 +115,7 @@ When `credentials-file` is not specified, the migration tool will try to infer t
 |:----------|:-----|
 | `account-name` | The account name of the storage |
 | `account-key` | The access key|
-| `access-tier` | Storage class of the uploaded objects (for example, `Hot`, `Cool`, `Archive`). If `access-tier` is not set (the value is empty), the value is `Hot` by default. |
+| `access-tier` | Access tier of the uploaded objects (for example, `Hot`, `Cool`, `Archive`). If `access-tier` is not set (the value is empty), the value is `Hot` by default. |
 
 To ensure that TiKV and the migration tool use the same storage account, the migration tool determines the value of `account-name`. That is, `send-credentials-to-tikv = true` is set by default. The migration tool infers these keys from the environment in the following order:
 
@@ -169,7 +169,7 @@ If you have specified URL parameters and command-line parameters at the same tim
 | Command-line parameter | Description |
 | `--azblob.account-name` | The account name of the storage |
 | `--azblob.account-key` | The access key |
-| `--azblob.access-tier` | Storage class of the uploaded objects (for example, `Hot`, `Cool`, `Archive`). If `access-tier` is not set (the value is empty), the value is `Hot` by default. |
+| `--azblob.access-tier` | Access tier of the uploaded objects (for example, `Hot`, `Cool`, `Archive`). If `access-tier` is not set (the value is empty), the value is `Hot` by default. |
 
 ## BR sending credentials to TiKV
 
