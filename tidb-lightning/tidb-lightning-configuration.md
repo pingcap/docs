@@ -68,7 +68,7 @@ io-concurrency = 5
 # Setting this to N means that Lightning will stop as soon as possible when the (N+1)-th error is encountered.
 # The skipped rows will be inserted to tables inside the "task info" schema on the target TiDB, which can be configured below.
 max-error = 0
-# task-info-schema-name is the name of the schema/database storing human-readable Lightning execution result.
+# task-info-schema-name is the name of the schema/database storing Lightning execution results.
 # set this to empty string to disable error recording.
 # task-info-schema-name = 'lightning_task_info'
 
