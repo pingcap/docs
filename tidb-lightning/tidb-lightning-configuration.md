@@ -65,9 +65,9 @@ io-concurrency = 5
 # In parallel import mode, the schema name that stores the meta information for each TiDB Lightning instance in the target cluster. By default, the value is "lightning_metadata".
 # Configure this parameter only if parallel import is enabled.
 # **Note:**
-# - The value set for this parameter must be the same for each TiDB Lightning instance that participates in the same parallel import; otherwise, the correctness of the imported data can not be ensured.
+# - The value set for this parameter must be the same for each TiDB Lightning instance that participates in the same parallel import; otherwise, the correctness of the imported data cannot be ensured.
 # - If parallel import mode is enabled, make sure that the user used for import (for the tidb.user configuration) has permissions to create and access the databases corresponding to this configuration.
-# - TiDB Lightning removes this schema after the import is complete. So do not use any existing schema name to configure this parameter.
+# - TiDB Lightning removes this schema after the import is completed. So do not use any existing schema name to configure this parameter.
 meta-schema-name = "lightning_metadata"
 
 [security]
@@ -106,7 +106,7 @@ driver = "file"
 
 [tikv-importer]
 # "local": The default mode. It applies to large dataset import, for example, greater than 1 TiB. However, during the import, downstream TiDB is not available to provide services.
-# "tidb": You can use this mode for small dataset import. During the import, downstream TiDB is available to provide services.
+# "tidb": You can use this mode for small dataset import, for example, smaller than 1 TiB. During the import, downstream TiDB is available to provide services.
 # backend = "local"
 # Whether to allow importing data to tables with data. The default value is `false`.
 # When you use parallel import mode, you must set it to `true`, because multiple TiDB Lightning instances are importing the same table at the same time.
