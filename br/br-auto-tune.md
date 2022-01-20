@@ -1,6 +1,6 @@
 ---
 title: BR Auto-Tune
-summary:
+summary: Learn about the auto-feature of BR, which automatically limits the resources used by backups to reduce the impact on the cluster in case of high cluster resource usage.
 ---
 
 # BR Auto-Tune <span class="version-mark">New in v5.4.0</span>
