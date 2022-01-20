@@ -122,7 +122,7 @@ addr = "172.16.31.10:8287"
 #    required version of the target TiKV is no earlier than v5.2.0; otherwise it falls back to 'none'.
 #  - none: does not detect duplicate records, which has the best performance of the three algorithms, but might lead to
 #    inconsistent data in the target TiDB.
-#  - remove: records all duplicate records like the 'record' algorithm and remove all duplicate records to ensure a consistent
+#  - remove: records all duplicate records to the lightning_task_info database, like the 'record' algorithm. But it removes all duplicate records from the target table to ensure a consistent.
 #    state in the target TiDB.
 # duplicate-resolution = 'none'
 # The number of KV pairs sent in one request in the "local" backend.
