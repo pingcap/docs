@@ -117,10 +117,10 @@ addr = "172.16.31.10:8287"
 #  - error: report error and quit the program
 # on-duplicate = "replace"
 # Whether to detect and resolve duplicate records (unique key conflict) when the backend is 'local'.
-# Current supports three resolution algorithms:
-#  - record: only records duplicate records to `lightning_task_info.conflict_error_v1` table on the target TiDB. Note that this
-#    required the version of target TiKV version is no less than v5.2.0, otherwise it will fallback to 'none'.
-#  - none: doesn't detect duplicate records, which has the best performance of the three algorithms, but probably leads to
+# The following resolution algorithms are supported:
+#  - record: only records duplicate records to the `lightning_task_info.conflict_error_v1` table on the target TiDB. Note that the
+#    required version of the target TiKV is no earlier than v5.2.0; otherwise it falls back to 'none'.
+#  - none: does not detect duplicate records, which has the best performance of the three algorithms, but might lead to
 #    inconsistent data in the target TiDB.
 #  - remove: records all duplicate records like the 'record' algorithm and remove all duplicate records to ensure a consistent
 #    state in the target TiDB.
