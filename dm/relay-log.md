@@ -89,7 +89,7 @@ The starting position of the relay log migration is determined by the following 
 
 <SimpleTab>
 
-<div label="v5.4.0 and later">
+<div label="v5.4.0 and later versions">
 
 In v5.4.0 and later versions, you can enable relay log by setting `enable-relay` to `true`. Since v5.4.0, when binding the upstream data source, DM-worker checks the `enable-relay` item in the configuration of the data source. If `enable-relay` is `true`, the relay log feature is enabled for this data source.
 
