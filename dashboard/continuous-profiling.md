@@ -20,11 +20,11 @@ Before enabling the Continuous Profiling feature, pay attention to the following
 
 - Under the x86 architecture, this feature supports TiDB, PD, TiKV, and TiFlash. This feature is not fully compatible with the ARM architecture and cannot be enabled under this architecture.
 
-- This feature is available for clusters deployed or upgraded using TiUP of 1.9.0 or later or TiDB Operator of 1.3.0 or later. This feature is unavailable for clusters deployed or upgraded by using binary packages.
+- This feature is available for clusters deployed or upgraded using TiUP of v1.9.0 or later or TiDB Operator of v1.3.0 or later. This feature is unavailable for clusters deployed or upgraded by using binary packages.
 
 ## Profiling content
 
-With Continuous Profiling, you can collect continuous performance data of TiDB, PD, TiKV, and TiFlash instances, and have the nodes monitored day and night without restarting any of them. The data collected can be displayed in various forms, for example, on a flame graph or a directed acyclic graph. The data displayed visually shows what internal operations are performed on the instances during the performance profiling period and the corresponding proportions. With such data, you can quickly learn the CPU resource consumption of these instances.
+With Continuous Profiling, you can collect continuous performance data of TiDB, PD, TiKV, and TiFlash instances, and have the nodes monitored day and night without restarting any of them. The data collected can be displayed in forms such as a flame graph or a directed acyclic graph. The data displayed visually shows what internal operations are performed on the instances during the performance profiling period and the corresponding proportions. With such data, you can quickly learn the CPU resource consumption of these instances.
 
 Currently, Continuous Profiling can display the following performance data:
 
@@ -41,7 +41,7 @@ To enable Continuous Profiling on clusters deployed using TiUP, perform the foll
 
 1. On TiDB Dashboard, click **Advanced Debugging** > **Profiling Instances** > **Continuous Profiling**.
 
-2. In the displayed window, click **Open Settings**. Switch on the button under **Enable Feature** on the right. Modify the value of **Retention Duration** as required or retain the default value.
+2. In the displayed window, click **Open Settings**.  In the **Settings** area on the right, switch **Enable Feature** on, and modify the default value of **Retention Duration** if necessary.
 
 3. Click **Save** to enable this feature.
 
@@ -49,7 +49,7 @@ To enable Continuous Profiling on clusters deployed using TiUP, perform the foll
 
 ### Clusters deployed using TiDB Operator
 
-See [Enable continuous profiling](https://docs.pingcap.com/zh/tidb-in-kubernetes/dev/access-dashboard#enable-continuous-profiling).
+See [Enable continuous profiling](https://docs.pingcap.com/tidb-in-kubernetes/dev/access-dashboard#enable-continuous-profiling).
 
 ## Access the page
 

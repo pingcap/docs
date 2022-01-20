@@ -10,7 +10,7 @@ On the manual instance profiling page, you can collect continuous performance da
 
 ## Profiling content
 
-With Manual Profiling, you can collect continuous performance data of TiDB, PD, TiKV, and TiFlash instances. The data collected can be displayed in various forms, for example, on a flame graph or a directed acyclic graph. The data displayed visually shows what internal operations are performed on the instances during the performance profiling period and the corresponding proportions. With such data, you can quickly learn the CPU resource consumption of these instances.
+With Manual Profiling, you can collect continuous performance data of TiDB, PD, TiKV, and TiFlash instances. The data collected can be displayed in forms such as a flame graph or a directed acyclic graph. The data displayed visually shows what internal operations are performed on the instances during the performance profiling period and the corresponding proportions. With such data, you can quickly learn the CPU resource consumption of these instances.
 
 ## Access the page
 

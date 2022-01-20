@@ -6,7 +6,7 @@ aliases: ['/docs/dev/dashboard/dashboard-faq/']
 
 # TiDB Dashboard FAQ
 
-This document summarizes the frequently asked questions (FAQs) and answers about TiDB Dashboard. If the problem cannot be located or persists after you perform as instructed, contact PingCAP technical support for help.
+This document summarizes the frequently asked questions (FAQs) and answers about TiDB Dashboard. If a problem cannot be located or persists after you perform as instructed, contact PingCAP technical support for help.
 
 ## Access-related FAQ
 
@@ -81,7 +81,7 @@ To clear your browser cache, take the following steps:
 
     ![Clear the Local Storage](/media/dashboard/dashboard-faq-devtools-application.png)
 
-### A `required component NgMonitoring is not started` error notification is shown
+### A `required component NgMonitoring is not started` error is shown
 
 If the **Continuous Profiling** page shows that NgMonitoring component is not started, perform the following steps to address the problem.
 
@@ -97,7 +97,7 @@ You need to deploy NgMonitoring on TiUP 1.9.0 or later. Therefore, check the ver
     tiup cluster --version
     ```
 
-   The command output shows the TiUP version, as shown below:
+   The command output shows the TiUP version. For example:
 
     ```
     tiup version 1.9.0 tiup
@@ -105,9 +105,7 @@ You need to deploy NgMonitoring on TiUP 1.9.0 or later. Therefore, check the ver
     Git Ref: v1.9.0
     ```
 
-    If it is earlier than 1.9.0, upgrade it first.
-
-2. Upgrade TiUP and TiUP cluster to the latest version:
+2. If the TiUP cluster version is earlier than 1.9.0, upgrade TiUP and TiUP cluster to the latest version:
 
     {{< copyable "shell-regular" >}}
 
@@ -129,10 +127,10 @@ tiup cluster reload ${cluster-name} --role prometheus
 
 1. On TiDB Dashboard, click **Advanced Debugging** > **Profiling Instances** > **Continuous Profiling**.
 
-2. In the displayed window, click **Open Settings**. Switch on the button under **Enable Feature** on the right. Modify the value of **Retention Duration** as required or retain the default value.
+2. In the displayed window, click **Open Settings**. In the **Settings** area on the right, switch **Enable Feature** on, and modify the default value of **Retention Duration** if necessary.
 
 3. Click **Save** to enable this feature.
 
 ![Enable the feature](/media/dashboard/dashboard-conprof-start.png)
 
-If NgMonitoring still fails to start after the preceding steps, contact PingCAP technical support for help.
+If NgMonitoring still fails to start after these steps, contact PingCAP technical support for help.
