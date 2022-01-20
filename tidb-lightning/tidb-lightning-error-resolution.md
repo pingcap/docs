@@ -53,14 +53,14 @@ In the Local-backend mode, TiDB Lightning imports data by first converting them 
 
 ```toml
 [tikv-importer]
-duplicate-resolution = 'record'
+duplicate-resolution = 'none'
 ```
 
 The value options of `duplicate-resolution` are as follows:
 
-* **'none'** — Do not detect duplicates. If a unique/primary key conflict does exist, the imported table will have inconsistent data and index, and will fail checksum check.
-* **'record'** — Detect duplicates, but do not attempt to fix it. If a unique/primary key conflict does exist, the imported table will have inconsistent data and index, and will fail checksum check.
-* **'remove'** — Detect duplicates, and remove *all* duplicated rows. The imported table will be consistent, but the involved rows are ignored and have to be added back manually.
+* **'none'**: Does not detect duplicate data. If a unique/primary key conflict does exist, the imported table will have inconsistent data and index, and will fail checksum check.
+* **'record'**: Detects duplicate data, but does not attempt to fix it. If a unique/primary key conflict does exist, the imported table will have inconsistent data and index, and will skip checksum and report the count of the conflict errors.
+* **'remove'**: Detects duplicate data, and removes *all* duplicated rows. The imported table will be consistent, but the involved rows are ignored and have to be added back manually.
 
 TiDB Lightning duplicate resolution can detect duplicate data only within the data source. This feature cannot handle conflict with existing data before running TiDB Lightning.
 
@@ -114,8 +114,9 @@ CREATE TABLE conflict_error_v1 (
     KEY (task_id, table_name)
 );
 ```
-
+/**
 **syntax_error_v1** is intended to record syntax error from files. It is not implemented yet.
+**/
 
 **type_error_v1** records all [type errors](#type-error) managed by the `max-error` configuration. There is one row per error.
 

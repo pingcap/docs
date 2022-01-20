@@ -68,7 +68,7 @@ io-concurrency = 5
 # Setting this to N means that Lightning will stop as soon as possible when the (N+1)-th error is encountered.
 # The skipped rows will be inserted to tables inside the "task info" schema on the target TiDB, which can be configured below.
 max-error = 0
-# task-info-schema-name is the name of the schema/database storing human-readable Lightning execution result.
+# task-info-schema-name is the name of the schema/database storing Lightning execution results.
 # set this to empty string to disable error recording.
 # task-info-schema-name = 'lightning_task_info'
 
@@ -122,7 +122,7 @@ addr = "172.16.31.10:8287"
 #    required version of the target TiKV is no earlier than v5.2.0; otherwise it falls back to 'none'.
 #  - none: does not detect duplicate records, which has the best performance of the three algorithms, but might lead to
 #    inconsistent data in the target TiDB.
-#  - remove: records all duplicate records like the 'record' algorithm and remove all duplicate records to ensure a consistent
+#  - remove: records all duplicate records to the lightning_task_info database, like the 'record' algorithm. But it removes all duplicate records from the target table to ensure a consistent.
 #    state in the target TiDB.
 # duplicate-resolution = 'none'
 # The number of KV pairs sent in one request in the "local" backend.
