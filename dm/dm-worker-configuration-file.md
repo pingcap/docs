@@ -27,7 +27,7 @@ join = "http://127.0.0.1:8261,http://127.0.0.1:8361,http://127.0.0.1:8461"
 
 keepalive-ttl = 60
 relay-keepalive-ttl = 1800 # New in DM v2.0.2.
-# relay-dir = "relay_log" # New in 5.4.0. When you use a relative path, determine the path according to the deployment and start method.
+# relay-dir = "relay_log" # New in 5.4.0. When you use a relative path, check the deployment and start method of DM-worker to determine the full path.
 
 ssl-ca = "/path/to/ca.pem"
 ssl-cert = "/path/to/cert.pem"
