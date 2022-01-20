@@ -5,7 +5,7 @@ summary: Learn the `TIDB_HOT_REGIONS_HISTORY` information_schema table.
 
 # TIDB_HOT_REGIONS_HISTORY
 
-The `TIDB_HOT_REGIONS_HISTORY` table provides information about history hot regions that are periodically recorded locally by PD. You can specify the recorded interval by configuring ['hot-regions-write-interval'](/pd-configuration-file.md#hot-regions-write-interval). The default value is 10 minutes. You can specify the period for reserving history information about hot regions by configuring ['hot-regions-reserved-days'](/pd-configuration-file.md#hot-regions-reserved-days). The default value is 7 days. See [PD configuration file description](/pd-configuration-file.md#hot-regions-write-interval) for details.
+The `TIDB_HOT_REGIONS_HISTORY` table provides information about history hot Regions that are periodically recorded locally by PD. You can specify the record interval by configuring [`hot-regions-write-interval`](/pd-configuration-file.md#hot-regions-write-interval). The default value is 10 minutes. You can specify the period for reserving history information about hot Regions by configuring [`hot-regions-reserved-days`](/pd-configuration-file.md#hot-regions-reserved-days). The default value is 7 days. See [PD configuration file description](/pd-configuration-file.md#hot-regions-write-interval) for details.
 
 {{< copyable "sql" >}}
 
@@ -59,11 +59,11 @@ The fields in the `TIDB_HOT_REGIONS_HISTORY` table are described as follows:
 
 > **Note:**
 >
-> + `UPDATE_TIME`, `REGION_ID`, `STORE_ID`, `PEER_ID`, `IS_LEARNER`, `IS_LEADER` and `TYPE` fields are pushed down to the PD servers for execution. To reduce the overhead of using the table, you must specify the time range for the search, and specify as many conditions as possible. For example, `select * from tidb_hot_regions_history where store_id = 11 and update_time > '2020-05-18 20:40:00' and update_time < '2020-05-18 21:40:00' and type='write'`.
+> `UPDATE_TIME`, `REGION_ID`, `STORE_ID`, `PEER_ID`, `IS_LEARNER`, `IS_LEADER` and `TYPE` fields are pushed down to the PD servers for execution. To reduce the overhead of using the table, you must specify the time range for the search, and specify as many conditions as possible. For example, `select * from tidb_hot_regions_history where store_id = 11 and update_time > '2020-05-18 20:40:00' and update_time < '2020-05-18 21:40:00' and type='write'`.
 
-The following are some scenarios:
+Common user scenarios
 
-* Query hot Regions within a specific period of time. Replace update_time with your actual time.
+* Query hot Regions within a specific period of time. Replace `update_time` with your actual time.
 
   {{< copyable "sql" >}}
 
@@ -73,9 +73,9 @@ The following are some scenarios:
 
   > **Note:**
   >
-  > + `UPDATE_TIME` also supports Unix timestamps. For example, `update_time >TIMESTAMP('2021-08-18 21:40:00')` or `update_time > FROM_UNIXTIME(1629294000.000)` .
+  > `UPDATE_TIME` also supports Unix timestamps. For example, `update_time >TIMESTAMP('2021-08-18 21:40:00')` or `update_time > FROM_UNIXTIME(1629294000.000)` .
 
-* Query hot Regions in a table within a specific period of time. Replace update_time and table_name with your actual values.
+* Query hot Regions in a table within a specific period of time. Replace `update_time` and `table_name` with your actual values.
 
   {{< copyable "sql" >}}
 
@@ -83,7 +83,7 @@ The following are some scenarios:
   SELECT * FROM INFORMATION_SCHEMA.TIDB_HOT_REGIONS_HISTORY WHERE update_time >'2021-08-18 21:40:00' and update_time <'2021-09-19 00:00:00' and TABLE_NAME = 'table_name';
   ```
 
-* Query the distribution of hot Regions within a specific period of time. Replace update_time and table_name with your actual values.
+* Query the distribution of hot Regions within a specific period of time. Replace `update_time` and `table_name` with your actual values.
 
   {{< copyable "sql" >}}
 
@@ -91,7 +91,7 @@ The following are some scenarios:
   SELECT count(region_id) cnt, store_id FROM INFORMATION_SCHEMA.TIDB_HOT_REGIONS_HISTORY WHERE update_time >'2021-08-18 21:40:00' and update_time <'2021-09-19 00:00:00' and table_name = 'table_name' GROUP BY STORE_ID ORDER BY cnt DESC;
   ```
 
-* Query the distribution of hot Leader Regions within a specific period of time. Replace update_time and table_name with your actual values.
+* Query the distribution of hot Leader Regions within a specific period of time. Replace `update_time` and `table_name` with your actual values.
 
   {{< copyable "sql" >}}
 
@@ -99,7 +99,7 @@ The following are some scenarios:
   SELECT count(region_id) cnt, store_id FROM INFORMATION_SCHEMA.TIDB_HOT_REGIONS_HISTORY WHERE update_time >'2021-08-18 21:40:00' and update_time <'2021-09-19 00:00:00' and table_name = 'table_name' and is_leader=1 GROUP BY STORE_ID ORDER BY cnt DESC;
   ```
 
-* Query the distribution of hot Index Regions within a specific period of time. Replace update_time and table_name with your actual values.
+* Query the distribution of hot Index Regions within a specific period of time. Replace `update_time` and `table_name` with your actual values.
 
   {{< copyable "sql" >}}
 
@@ -107,7 +107,7 @@ The following are some scenarios:
   SELECT count(region_id) cnt, index_name, store_id FROM INFORMATION_SCHEMA.TIDB_HOT_REGIONS_HISTORY WHERE update_time >'2021-08-18 21:40:00' and update_time <'2021-09-19 00:00:00' and table_name = 'table_name' group by index_name, store_id order by index_name,cnt desc;
   ```
 
-* Query the distribution of hot Index Leader Regions within a specific period of time. Replace update_time and table_name with your actual values.
+* Query the distribution of hot Index Leader Regions within a specific period of time. Replace `update_time` and `table_name` with your actual values.
 
   {{< copyable "sql" >}}
 
