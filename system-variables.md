@@ -747,11 +747,11 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 > **Note:**
 >
-> - When upgrading a TiDB cluster from versions earlier than v4.0.0 to v5.4.0 or later, this variable is disabled by default to prevent performance regression due to the changes of an execution plan.
+> - After upgrading a TiDB cluster from versions earlier than v4.0.0 to v5.4.0 or later, this variable is disabled by default to prevent performance regression due to changes of execution plans.
 >
-> - When upgrading a TiDB cluster from v4.0.0 or later to v5.4.0 or later, this variable remains the setting before the upgrade.
+> - After upgrading a TiDB cluster from v4.0.0 or later to v5.4.0 or later, this variable remains the setting before the upgrade.
 >
-> - In TiDB clusters of v5.4.0 and later, this variable is enabled by default.
+> - Since v5.4.0, for a newly created TiDB cluster, this variable is enabled by default.
 
 ### tidb_enable_list_partition <span class="version-mark">New in v5.0</span>
 
