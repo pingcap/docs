@@ -21,7 +21,7 @@ The auto-tune feature is enabled by default, without additional configuration.
 
 > **Note:**
 >
-> For clusters that upgrade from versions earlier than v5.4.0 to v5.4.0 or later versions, the auto-tune feature is disabled by default. You need to manually enable it.
+> For clusters that upgrade from v5.3.x to v5.4.0 or later versions, the auto-tune feature is disabled by default. You need to manually enable it.
 
 To manually enable the auto-tune feature, you need to set the TiKV configuration item [`backup.enable-auto-tune`](/tikv-configuration-file.md#enable-auto-tune-new-in-v540) to `true`.
 
