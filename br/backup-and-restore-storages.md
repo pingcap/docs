@@ -117,12 +117,12 @@ When `credentials-file` is not specified, the migration tool will try to infer t
 | `account-key` | The access key|
 | `access-tier` | Access tier of the uploaded objects (for example, `Hot`, `Cool`, `Archive`). If `access-tier` is not set (the value is empty), the value is `Hot` by default. |
 
-To ensure that TiKV and the migration tool use the same storage account, the migration tool determines the value of `account-name`. That is, `send-credentials-to-tikv = true` is set by default. The migration tool infers these keys from the environment in the following order:
+To ensure that TiKV and BR use the same storage account, BR determines the value of `account-name`. That is, `send-credentials-to-tikv = true` is set by default. BR infers these keys from the environment in the following order:
 
 1. If both `account-name` **and** `account-key` are specified, the key specified by this parameter is used.
-2. If `account-key` is not specified, then the tool tries to read the related credentials from environment variables on the node of the tool.
+2. If `account-key` is not specified, then BR tries to read the related credentials from environment variables on the node of BR.
     - The migration tool reads `$AZURE_CLIENT_ID`, `$AZURE_TENANT_ID`, and `$AZURE_CLIENT_SECRET` first. At the same time, the tool allows TiKV to read the above three environment variables from the respective nodes and access using Azure AD (Azure Active Directory).
-        - `$AZURE_CLIENT_ID`, `$AZURE_TENANT_ID`, and `$AZURE_CLIENT_SECRET` respectively refer the application ID `client_id`, the tenant ID `tenant_id`, and the client password `client_secret` of Azure application.
+        - `$AZURE_CLIENT_ID`, `$AZURE_TENANT_ID`, and `$AZURE_CLIENT_SECRET` respectively refer to the application ID `client_id`, the tenant ID `tenant_id`, and the client password `client_secret` of Azure application.
         - To learn how to check whether the operating system have configured `$AZURE_CLIENT_ID`, `$AZURE_TENANT_ID`, and `$AZURE_CLIENT_SECRET`, or you need to configure these variables as parameters, refer to [Configure environment variables as parameters](/br/backup-and-restore-azblob.md#configure-environment-variables-as-parameters).
 3. If the above three environment variables are not configured in the node of the tool, then the tool tries to read `$AZURE_STORAGE_KEY` and access using a key.
 
