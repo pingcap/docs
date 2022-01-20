@@ -472,11 +472,17 @@ Configuration items related to Raftstore
 + Minimum value: `0`
 + Unit: MB|GB
 
+### `raft-log-compact-sync-interval` <span class="version-mark">New in v5.3</span>
+
++ The time interval to compact unnecessary Raft logs
++ Default value: `"2s"`
++ Minimum value: `"0s"`
+
 ### `raft-log-gc-tick-interval`
 
 + The time interval at which the polling task of deleting Raft logs is scheduled. `0` means that this feature is disabled.
-+ Default value: `"10s"`
-+ Minimum value: `0`
++ Default value: `"3s"`
++ Minimum value: `"0s"`
 
 ### `raft-log-gc-threshold`
 
@@ -495,6 +501,12 @@ Configuration items related to Raftstore
 + The hard limit on the allowable size of residual Raft logs
 + Default value: 3/4 of the Region size
 + Minimum value: greater than `0`
+
+### `raft-log-reserve-max-ticks` <span class="version-mark">New in v5.3</span>
+
++ After the number of ticks set by this configuration item passes, even if the number of residual Raft logs does not reach the value set by `raft-log-gc-threshold`, TiKV still performs garbage collection (GC) to these logs.
++ Default value: `6`
++ Minimum value: greater than `0` 
 
 ### `raft-entry-cache-life-time`
 
@@ -643,11 +655,6 @@ Configuration items related to Raftstore
 + Default value: `"9s"`
 + Minimum value: `0`
 
-### `allow-remove-leader`
-
-+ Determines whether to allow deleting the main switch
-+ Default value: `false`
-
 ### `merge-max-log-gap`
 
 + The maximum number of missing logs allowed when `merge` is performed
@@ -729,12 +736,6 @@ Configuration items related to Raftstore
 
 + Determines the threshold at which Raft data is written into the disk. If the data size is larger than the value of this configuration item, the data is written to the disk. When the value of `store-io-pool-size` is `0`, this configuration item does not take effect.
 + Default value: `1MB`
-+ Minimum value: `0`
-
-### `raft-msg-flush-interval` <span class="version-mark">New in v5.3.0</span>
-
-+ Determines the interval at which Raft messages are sent in batches. The Raft messages in batches are sent at every interval specified by this configuration item. When the value of `store-io-pool-size` is `0`, this configuration item does not take effect.
-+ Default value: `250us`
 + Minimum value: `0`
 
 ## Coprocessor
@@ -1304,6 +1305,7 @@ Configuration items related to Raft Engine.
 ### `purge-threshold`
 
 + Specifies the threshold size of the main log queue. When this configuration value is exceeded, the main log queue is purged.
++ This configuration can be used to adjust the disk space usage of Raft Engine.
 + Default value: `"10GB"`
 
 ### `recovery-mode`

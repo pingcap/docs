@@ -320,6 +320,22 @@ This variable is an alias for `last_insert_id`.
 - Range: `[0, 65535]`
 - The port that the `tidb-server` is listening on when speaking the MySQL protocol.
 
+### rand_seed1
+
+- Scope: SESSION
+- Default value: `0`
+- Range: `[0, 2147483647]`
+- This variable is used to seed the random value generator used in the `RAND()` SQL function.
+- The behavior of this variable is MySQL compatible.
+
+### rand_seed2
+
+- Scope: SESSION
+- Default value: `0`
+- Range: `[0, 2147483647]`
+- This variable is used to seed the random value generator used in the `RAND()` SQL function.
+- The behavior of this variable is MySQL compatible.
+
 ### skip_name_resolve <span class="version-mark">New in v5.2.0</span>
 
 - Scope: GLOBAL
@@ -463,7 +479,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 ### tidb_backoff_lock_fast
 
 - Scope: SESSION | GLOBAL
-- Default value: `100`
+- Default value: `10`
 - Range: `[1, 2147483647]`
 - This variable is used to set the `backoff` time when the read request meets a lock.
 
@@ -771,6 +787,14 @@ Constraint checking is always performed in place for pessimistic transactions (d
 > **Warning:**
 >
 > Only the default value of `OFF` can be considered safe. Setting `tidb_enable_noop_functions=1` might lead to unexpected behaviors in your application, because it permits TiDB to ignore certain syntax without providing an error. For example, the syntax `START TRANSACTION READ ONLY` is permitted, but the transaction remains in read-write mode.
+
+### tidb_enable_paging <span class="version-mark">New in v5.4.0</span>
+
+- Scope: SESSION | GLOBAL
+- Default value: `OFF`
+- This variable controls whether to use the method of paging to send coprocessor requests in `IndexLookUp` operator.
+- User scenarios: For read queries that use `IndexLookup` and `Limit` and that `Limit` cannot be pushed down to `IndexScan`, there might be high latency for the read queries and high CPU usage for TiKV's `unified read pool`. In such cases, because the `Limit` operator only requires a small set of data, if you set `tidb_enable_paging` to `ON`, TiDB processes less data, which reduces query latency and resource consumption.
+- When `tidb_enable_paging` is enabled, for the `IndexLookUp` requests with `Limit` that cannot be pushed down and are fewer than `960`, TiDB uses the method of paging to send coprocessor requests. The fewer `Limit`, the more obvious the optimization.
 
 ### tidb_enable_parallel_apply <span class="version-mark">New in v5.0</span>
 
@@ -1542,7 +1566,7 @@ SET tidb_slow_log_threshold = 200;
 
 ### tidb_store_limit <span class="version-mark">New in v3.0.4 and v4.0</span>
 
-- Scope: INSTANCE | GLOBAL
+- Scope: GLOBAL
 - Default value: `0`
 - Range: `[0, 9223372036854775807]`
 - This variable is used to limit the maximum number of requests TiDB can send to TiKV at the same time. 0 means no limit.
