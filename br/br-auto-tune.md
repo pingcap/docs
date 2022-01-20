@@ -5,13 +5,13 @@ summary: Learn about the auto-feature of BR, which automatically limits the reso
 
 # BR Auto-Tune <span class="version-mark">New in v5.4.0</span>
 
-Before TiDB v5.4.0, when you back up data using BR, the number of threads used for backup makes up 75% of the logical CPU cores. Without a speed limit, the backup process can consume a lot of cluster resources, which has a considerable impact on the cluster performance. Although you can reduce the impact of backup by adjusting the size of the thread pool, it is a tedious task to observe the CPU load and manually adjust the thread pool size.
+Before TiDB v5.4.0, when you back up data using BR, the number of threads used for backup makes up 75% of the logical CPU cores. Without a speed limit, the backup process can consume a lot of cluster resources, which has a considerable impact on the performance of the online cluster. Although you can reduce the impact of backup by adjusting the size of the thread pool, it is a tedious task to observe the CPU load and manually adjust the thread pool size.
 
-To reduce the impact of backup tasks on the cluster, starting from TiDB v5.4.0, BR introduces the auto-tune feature. When the cluster resource utilization is high, BR automatically limits the resources used by backup tasks and thereby reduces the impact on the cluster. The auto-tune feature is enabled by default.
+To reduce the impact of backup tasks on the cluster, starting from TiDB v5.4.0, BR introduces the auto-tune feature. When the cluster resource utilization is high, BR automatically limits the resources used by backup tasks and thereby reduces their impact on the cluster. The auto-tune feature is enabled by default.
 
 ## User scenario
 
-If you hope to reduce the impact of backup tasks on the cluster, you can enable the auto-tune feature. With this feature enabled, BR performs backup tasks as fast as possible without excessively affecting the cluster.
+If you want to reduce the impact of backup tasks on the cluster, you can enable the auto-tune feature. With this feature enabled, BR performs backup tasks as fast as possible without excessively affecting the cluster.
 
 Alternatively, you can limit the backup speed by using the TiKV configuration item [`backup.num-threads`](/tikv-configuration-file.md#num-threads-1) or using the parameter `--ratelimit`.
 
@@ -53,25 +53,25 @@ The auto-tune feature has the following issues and corresponding solutions:
 
 - Issue 3: For scenarios with **high traffic jitter**, because auto-tune adjusts the speed limit on a fixed interval (1 minute by default), it might not be able to handle high traffic jitter. For details, see [`auto-tune-refresh-interval`](#implementation).
 
-    - Solution: Diable auto-tune.
+    - Solution: Disable auto-tune.
 
 ## Implementation
 
-Auto-tune adjusts the size of the thread pool used by BR backup tasks to ensure that the overall CPU utilization of the cluster does not exceed a specific threshold.
+Auto-tune adjusts the size of the thread pool used by backup tasks using BR to ensure that the overall CPU utilization of the cluster does not exceed a specific threshold.
 
-This feature has two related configuration items not listed in the TiKV configuration file. These two configuration items are only for internal tuning. You do not need to configure these two configuration items when you perform backup tasks.
+This feature has two related configuration items not listed in the TiKV configuration file. These two configuration items are only for internal tuning. You do **not** need to configure these two configuration items when you perform backup tasks.
 
 - `backup.auto-tune-remain-threads`:
 
     - Auto-tune controls the resources used by the backup tasks and ensures that at least `backup.auto-tune-remain-threads` cores are available for other tasks on the same node.
-    - The default value: `round(0.2 * vCPU)`.
-    - Unit: core.
+    - Default value: `round(0.2 * vCPU)`
+    - Unit: core
 
 - `backup.auto-tune-refresh-interval`:
 
     - Every `backup.auto-tune-refresh-interval` minute(s), auto-tune refreshes the statistics and recalculates the maximum number of CPU cores that backup tasks can use.
-    - The default value: `1`.
-    - Unit: minute.
+    - Default value: `1`
+    - Unit: minute
 
 The following is an example of how auto-tune works. `*` denotes a CPU core used by backup tasks. `^` denotes a CPU core used by other tasks. `-` denotes an idle CPU core.
 
