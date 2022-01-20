@@ -130,7 +130,7 @@ The compatibility issues of BR and the TiDB cluster are divided into the followi
 
 + Some versions of BR are not compatible with the interface of the TiDB cluster.
 
-    + BR versions earlier than v5.4.0 do not support the feature of recovering `charset=GBK` tables. Any version of BR does not support recovering `charset=GBK` tables to TiDB clusters earlier than v5.4.0.
+    + BR versions earlier than v5.4.0 do not support recovering `charset=GBK` tables. No version of BR supports recovering `charset=GBK` tables to TiDB clusters earlier than v5.4.0.
 
 + The KV format might change when some features are enabled or disabled. If these features are not consistently enabled or disabled during backup and restore, compatibility issues might occur.
 

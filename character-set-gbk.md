@@ -31,7 +31,7 @@ SHOW COLLATION WHERE CHARSET = 'gbk';
 
 The default collation of the GBK character set in MySQL is `gbk_chinese_ci`. Unlike MySQL, the default collation of the GBK character set in TiDB is `gbk_bin`. Additionally, because TiDB converts GBK to UTF8MB4 and then uses a binary collation, the `gbk_bin` collation in TiDB is not the same as the `gbk_bin` collation in MySQL.
 
-To make TiDB compatible with the collations of MySQL GBK character set, when you first initialize the TiDB cluster, you need to set the TiDB option [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap`) to `true` to enable the [new framework for collations](/character-set-and-collation.md#new-framework-for-collations).
+To make TiDB compatible with the collations of MySQL GBK character set, when you first initialize the TiDB cluster, you need to set the TiDB option [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) to `true` to enable the [new framework for collations](/character-set-and-collation.md#new-framework-for-collations).
 
 After enabling the new framework for collations, if you check the collations corresponding to the GBK character set, you can see that the TiDB GBK default collation is changed to `gbk_chinese_ci`.
 
@@ -56,11 +56,11 @@ SHOW COLLATION WHERE CHARSET = 'gbk';
 
 ### Illegal character compatibility
 
-* If the system variables [`character_set_client`](/system-variables.md#character_set_client) and [`character_set_connection`](/system-variables.md) are not both set to `gbk`, TiDB handles illegal characters in the same way as MySQL.
+* If the system variables [`character_set_client`](/system-variables.md#character_set_client) and [`character_set_connection`](/system-variables.md#character_set_connection) are not set to `gbk` at the same time, TiDB handles illegal characters in the same way as MySQL.
 * If `character_set_client` and `character_set_connection` are both set to `gbk`, TiDB handles illegal characters differently than MySQL.
 
-    - For reading and writing operations, MySQL handles illegal GBK character sets differently.
-    - For reading and writing operations, TiDB handles illegal GBK characters in the same way. In the SQL strict mode, TiDB reports an error when either reading or writing illegal GBK characters. In the non-strict mode, TiDB replaces illegal GBK characters with `?` when either reading or writing illegal GBK characters.
+    - MySQL handles illegal GBK character sets in reading and writing operations differently.
+    - TiDB handles illegal GBK character sets in reading and writing operations in the same way. In the SQL strict mode, TiDB reports an error when either reading or writing illegal GBK characters. In the non-strict mode, TiDB replaces illegal GBK characters with `?` when either reading or writing illegal GBK characters.
 
 For example, when `SET NAMES gbk`, if you create a table using the `CREATE TABLE gbk_table(a VARCHAR(32) CHARACTER SET gbk)` statement in MySQL and TiDB respectively and then execute the SQL statements in the following table, you can see the detailed differences.
 
@@ -73,7 +73,7 @@ In the above table, the result of `SELECT HEX('a');` in the `utf8mb4` byte set i
 
 ### Other MySQL compatibility
 
-* Currently, TiDB does not currently support using the `ALTER TABLE` statement to convert other character set types to `gbk` or from `gbk` to other character set types.
+* Currently, TiDB does not support using the `ALTER TABLE` statement to convert other character set types to `gbk` or from `gbk` to other character set types.
 
 * TiDB does not support the use of `_gbk`. For example:
 
@@ -94,4 +94,4 @@ In the above table, the result of `SELECT HEX('a');` in the `utf8mb4` byte set i
 
 * TiDB Lightning does not support importing `charset=GBK` tables to TiDB clusters earlier than v5.4.0.
 
-* Backup & Restore (BR) versions earlier than v5.4.0 do not support the feature of recovering `charset=GBK` tables. Any version of BR does not support recovering `charset=GBK` tables to TiDB clusters earlier than v5.4.0.
+* Backup & Restore (BR) versions earlier than v5.4.0 do not support recovering `charset=GBK` tables. No version of BR supports recovering `charset=GBK` tables to TiDB clusters earlier than v5.4.0.
