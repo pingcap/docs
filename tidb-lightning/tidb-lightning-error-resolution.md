@@ -114,7 +114,6 @@ CREATE TABLE conflict_error_v1 (
     KEY (task_id, table_name)
 );
 ```
-
 /**
 **syntax_error_v1** is intended to record syntax error from files. It is not implemented yet.
 **/
