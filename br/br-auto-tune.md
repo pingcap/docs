@@ -65,13 +65,11 @@ This feature has two related configuration items not listed in the TiKV configur
 
     - Auto-tune controls the resources used by the backup tasks and ensures that at least `backup.auto-tune-remain-threads` cores are available for other tasks on the same node.
     - Default value: `round(0.2 * vCPU)`
-    - Unit: core
 
 - `backup.auto-tune-refresh-interval`:
 
     - Every `backup.auto-tune-refresh-interval` minute(s), auto-tune refreshes the statistics and recalculates the maximum number of CPU cores that backup tasks can use.
-    - Default value: `1`
-    - Unit: minute
+    - Default value: `1m`
 
 The following is an example of how auto-tune works. `*` denotes a CPU core used by backup tasks. `^` denotes a CPU core used by other tasks. `-` denotes an idle CPU core.
 
