@@ -35,9 +35,12 @@ Also, TiSpark supports distributed writes to TiKV. Compared with writes to TiDB 
 
 ## Environment setup
 
-+ The TiSpark 2.x supports Spark 2.3.x and Spark 2.4.x. If you want to use Spark 2.1.x, use TiSpark 1.x instead. Spark 3.x is not yet supported.
-+ TiSpark requires JDK 1.8+ and Scala 2.11 (Spark2.0 + default Scala version).
-+ TiSpark runs in any Spark mode such as YARN, Mesos, and Standalone.
+The following table lists the compatibility information of the TiSpark versions. You can choose an appropriate TiSpark version according to your need.
+
+| TiSpark version | TiDB, TiKV, and PD versions | Spark version | Scala version |
+| --------------- | -------------------- | ------------- | ------------- |
+| 2.4.x           | 5.x，4.x             | 2.3.x，2.4.x  | 2.11          |
+| 2.5.x           | 5.x，4.x             | 3.0.x，3.1.x  | 2.12          |
 
 This section describes the configuration of:
 
@@ -351,6 +354,25 @@ Currently, you can adjust these configurations in your `spark-defaults.conf` fil
 | Property name | Default | Description |
 | :--------   | :-----  | :---- |
 | spark.tispark.statistics.auto_load | true | Whether to load statistics information automatically during database mapping. |
+
+## Security
+
+Starting from TiSpark v2.5.0, you can authenticate and authorize TiSpark using TiDB. This feature is disabled by default.
+
+To enable authentication and authorization, add the following configurations to the Spark configuration file `spark-defaults.conf`.
+
+```
+// Enable authentication and authorization
+spark.sql.auth.enable true
+
+// Configure TiDB information
+spark.sql.tidb.addr $your_tidb_server_address
+spark.sql.tidb.port $your_tidb_server_port
+spark.sql.tidb.user $your_tidb_server_user
+spark.sql.tidb.password $your_tidb_server_password
+```
+
+For more details, see [TiSpark Authentication and Authorization Documentation](https://github.com/pingcap/tispark/blob/master/docs/authorization_userguide.md).
 
 ## FAQ
 
