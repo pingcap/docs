@@ -83,7 +83,7 @@ To clear your browser cache, take the following steps:
 
 ### A `required component NgMonitoring is not started` error is shown
 
-If the **Continuous Profiling** page shows that NgMonitoring component is not started, perform the following steps to address the problem.
+When you deploy a TiDB cluster, NgMonitoring is deployed in the TiDB cluster automatically. If the **Continuous Profiling** page shows that NgMonitoring component is not started, perform the following steps to address the problem.
 
 #### Step 1. Check versions
 
