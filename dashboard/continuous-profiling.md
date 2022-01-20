@@ -53,7 +53,7 @@ See [Enable continuous profiling](https://docs.pingcap.com/tidb-in-kubernetes/de
 
 ## Access the page
 
-You can access the instance profiling page using either of the following methods:
+You can access the continuous profiling page using either of the following methods:
 
 - After logging into TiDB Dashboard, click **Advanced Debugging** > **Profiling Instances** > **Continuous Profiling** on the left navigation bar.
 
