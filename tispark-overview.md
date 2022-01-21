@@ -35,7 +35,7 @@ Also, TiSpark supports distributed writes to TiKV. Compared with writes to TiDB 
 
 ## Environment setup
 
-The following table lists the compatibility information of the TiSpark versions. You can choose an appropriate TiSpark version according to your need.
+The following table lists the compatibility information of the supported TiSpark versions. You can choose an appropriate TiSpark version according to your need.
 
 | TiSpark version | TiDB, TiKV, and PD versions | Spark version | Scala version |
 | --------------- | -------------------- | ------------- | ------------- |
@@ -357,9 +357,9 @@ Currently, you can adjust these configurations in your `spark-defaults.conf` fil
 
 ## Security
 
-Starting from TiSpark v2.5.0, you can authenticate and authorize TiSpark using TiDB. This feature is disabled by default.
+If you are using TiSpark v2.5.0 or a later version, you can authenticate and authorize TiSpark using TiDB.
 
-To enable authentication and authorization, add the following configurations to the Spark configuration file `spark-defaults.conf`.
+The authentication and authorization feature is disabled by default. To enable it, add the following configurations to the Spark configuration file `spark-defaults.conf`.
 
 ```
 // Enable authentication and authorization
@@ -372,7 +372,7 @@ spark.sql.tidb.user $your_tidb_server_user
 spark.sql.tidb.password $your_tidb_server_password
 ```
 
-For more details, see [TiSpark Authentication and Authorization Documentation](https://github.com/pingcap/tispark/blob/master/docs/authorization_userguide.md).
+For more information, see [Authorization and authentication through TiDB server](https://github.com/pingcap/tispark/blob/master/docs/authorization_userguide.md).
 
 ## FAQ
 
