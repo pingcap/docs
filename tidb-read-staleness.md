@@ -16,7 +16,7 @@ After enabling `tidb_read_staleness`, you still can perform the following operat
 - Insert, modify, delete data or perform DML operations in the current session. These statements are not affected by `tidb_read_staleness`.
 - Start an interactive transaction in the current session. Queries within this transaction still read the latest version data.
 
-After reading the historical version data, you can read the latest version data in the following two ways:
+After reading the historical data, you can read the latest data in the following two ways:
 
 - End the current session.
 - Set the value of the `tidb_read_staleness` variable to `""` using the `SET` statement.
@@ -25,7 +25,7 @@ After reading the historical version data, you can read the latest version data 
 
 This section describes how to use `tidb_read_staleness` with examples.
 
-1. Initialization stage. After creating a table, insert a few rows of data into the table:
+1. Create a table, and insert a few rows of data into the table:
 
     {{< copyable "sql" >}}
 
@@ -97,7 +97,7 @@ This section describes how to use `tidb_read_staleness` with examples.
     3 rows in set (0.00 sec)
     ```
 
-5. Set `tidb_read_staleness`, which is a special environment variable.
+5. Set the `tidb_read_staleness` system variable.
 
     The scope of this variable is `SESSION`. After setting its value, TiDB reads the latest version data before the time set by the value.
 
@@ -115,7 +115,7 @@ This section describes how to use `tidb_read_staleness` with examples.
 
     > **Note:**
     >
-    > Before `tidb_read_staleness`, `@@` must be used instead of `@`. Because `@@` means system variables, while `@` means user variables.
+    > Use `@@` instead of `@` before `tidb_read_staleness`. `@@` means system variables, and `@` means user variables.
     > You need to set the historical time range (the value of `tidb_read_staleness`) according to the total time that you spent in step 3 and step 4. Otherwise, the latest data will be displayed in the query results, not the historical data. Therefore, you need to adjust this time range according to the time you spent on operations. For example, in this example, since the set time range is 5 seconds, you need to complete step 3 and step 4 within 5 seconds.
 
     The data read here is the data before the update, that is, the historical data:
@@ -137,7 +137,7 @@ This section describes how to use `tidb_read_staleness` with examples.
     3 rows in set (0.00 sec)
     ```
 
-6. After un-setting this variable as follows, the latest version data can be read:
+6. After un-setting this variable as follows, TiDB can read the latest data:
 
     {{< copyable "sql" >}}
 
