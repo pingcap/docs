@@ -11,7 +11,7 @@ This document lists the frequently asked questions (FAQs) and the solutions abou
 
 ## In TiDB v5.4.0 and later versions, when backup tasks are performed on the cluster under high workload, why does the speed of backup tasks become slow?
 
-Starting from TiDB v5.4.0, TiKV introduces the auto-tune feature for backup tasks. For clusters in v5.4.0 or later versions, this feature is enabled by default. When the cluster workload is heavy, the feature limits the resources used by backup tasks to reduce the impact on the online cluster. For more information, refer to [BR Auto-Tune](/br/br-auto-tune.md).
+Starting from TiDB v5.4.0, BR introduces the auto-tune feature for backup tasks. For clusters in v5.4.0 or later versions, this feature is enabled by default. When the cluster workload is heavy, the feature limits the resources used by backup tasks to reduce the impact on the online cluster. For more information, refer to [BR Auto-Tune](/br/br-auto-tune.md).
 
 TiKV supports [dynamically configuring](/tikv-control.md#modify-the-tikv-configuration-dynamically) the auto-tune feature. You can enable or disable the feature by the following methods without restarting your cluster:
 
@@ -32,7 +32,7 @@ It is recommended to mount an NFS disk as a backup disk during backup. For detai
 
 ## How much does it affect the cluster during backup using BR?
 
-For TiDB v5.4.0 or later versions, BR not only reduces the default CPU utilization used by backup tasks but also introduces the auto-tune feature. When this feature is enabled, BR automatically limits the resources used by backup tasks when performing backups in the cluster with high workloads, thereby limiting the speed of BR backups. Therefore, when using the default configuration for backup tasks in the cluster in v5.4.0 with high workloads, the impact of the tasks on the cluster performance is significantly less than the impact for the clusters earlier than v5.4.0. For details on the auto-tune feature, see [BR Auto-tune](/br/br-auto-tune.md).
+For TiDB v5.4.0 or later versions, BR not only reduces the default CPU utilization used by backup tasks but also limits the resources used by backup tasks in the cluster with heavy workloads. Therefore, when you use the default configuration for backup tasks in the v5.4.0 cluster with heavy workloads, the impact of the tasks on the cluster performance is significantly less than the impact for the clusters earlier than v5.4.0. For details, see [BR Auto-tune](/br/br-auto-tune.md).
 
 The following is an internal test on a single node. The test results show that when using the default configuration of v5.4.0 and its earlier versions in the **full-speed backup** scenario, the impact of backup using BR on cluster performance is quite different. The detailed test results are as follows:
 
@@ -42,7 +42,7 @@ The following is an internal test on a single node. The test results show that w
 If you need to manually control the impact of backup tasks on cluster performance, you can use the following solutions. These two methods can reduce the impact of backup tasks on the cluster, but they also reduce the speed of backup tasks.
 
 - Use the `--ratelimit` parameter to limit the speed of backup tasks. Note that this parameter limits the speed of **saving backup files to external storage**. When calculating the total size of backup files, use the `backup data size(after compressed)` in the backup log as a benchmark.
-- Adjust the TiKV configuration item [`backup.num-threads`](/tikv-configuration-file.md#num-threads-1) to limit the resources used by backup tasks. This configuration item determines the number of threads used by backup tasks. The test data shows that when the number of threads used by backup tasks using BR does not exceed `8`, and the total CPU utilization of the cluster does not exceed 60%, the backup tasks have little impact on the cluster, regardless of the read and write load.
+- Adjust the TiKV configuration item [`backup.num-threads`](/tikv-configuration-file.md#num-threads-1) to limit the resources used by backup tasks. This configuration item determines the number of threads used by backup tasks. When BR uses no more than `8` threads for backup tasks, and the total CPU utilization of the cluster does not exceed 60%, the backup tasks have little impact on the cluster, regardless of the read and write workload.
 
 ## Does BR back up system tables? During data restoration, do they raise conflict?
 
