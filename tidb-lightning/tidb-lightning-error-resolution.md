@@ -17,7 +17,7 @@ This document introduces how to use the type error feature (`lightning.max-error
 
 You can use the `lightning.max-error` configuration to increase the tolerance of errors related to data types. If this configuration is set to *N*, TiDB Lightning allows and skips up to *N* errors from the data source before it exists. The default value `0` means that no error is allowed.
 
-These errors are recorded in a database. After the import is completed, you can view the errors in the database and process them manually. For more information, see [Error Report](#Error-report).
+These errors are recorded in a database. After the import is completed, you can view the errors in the database and process them manually. For more information, see [Error Report](#error-report).
 
 {{< copyable "" >}}
 
@@ -114,13 +114,16 @@ CREATE TABLE conflict_error_v1 (
     KEY (task_id, table_name)
 );
 ```
+
 /**
+
 **syntax_error_v1** is intended to record syntax error from files. It is not implemented yet.
+
 **/
 
 **type_error_v1** records all [type errors](#type-error) managed by the `max-error` configuration. There is one row per error.
 
-**conflict_error_v1** records all [unique/primary key conflict in the Local-backend](#duplicate-resolution). There are 2 rows per pair of conflicts.
+**conflict_error_v1** records all [unique/primary key conflict in the Local-backend](#duplicate-resolution-in-local-backend-mode). There are 2 rows per pair of conflicts.
 
 | Column       | Syntax | Type | Conflict | Description                                                                                                                         |
 | ------------ | ------ | ---- | -------- | ----------------------------------------------------------------------------------------------------------------------------------- |
