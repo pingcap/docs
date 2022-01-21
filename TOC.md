@@ -9,7 +9,7 @@
   - Benchmarks
     - [v5.3 Sysbench Performance Test Report](/benchmark/benchmark-sysbench-v5.3.0-vs-v5.2.2.md)
     - [v5.3 TPC-C Performance Test Report](/benchmark/v5.3-performance-benchmarking-with-tpcc.md)
-    - [v5.3 MPP mode TPC-H 100GB Performance Test](/benchmark/v5.3-performance-benchmarking-with-tpch.md)
+    - [v5.4 MPP mode TPC-H 100GB Performance Test](/benchmark/v5.4-performance-benchmarking-with-tpch.md)
   - [MySQL Compatibility](/mysql-compatibility.md)
   - [TiDB Limitations](/tidb-limitations.md)
   - [TiDB Adopters](/adopters.md)
@@ -68,6 +68,8 @@
       - [Use BR Command-line for Backup and Restoration](/br/use-br-command-line-tool.md)
       - [BR Use Cases](/br/backup-and-restore-use-cases.md)
       - [External Storages](/br/backup-and-restore-storages.md)
+      - BR Features
+        - [Auto Tune](/br/br-auto-tune.md)
       - [BR FAQ](/br/backup-and-restore-faq.md)
   - [Configure Time Zone](/configure-time-zone.md)
   - [Daily Checklist](/daily-check.md)
@@ -191,6 +193,8 @@
     - [Use BR Command-line for Backup and Restoration](/br/use-br-command-line-tool.md)
     - [BR Use Cases](/br/backup-and-restore-use-cases.md)
     - [External Storages](/br/backup-and-restore-storages.md)
+    - BR Features
+      - [Auto Tune](/br/br-auto-tune.md)
     - [BR FAQ](/br/backup-and-restore-faq.md)
   - TiDB Binlog
     - [Overview](/tidb-binlog/tidb-binlog-overview.md)
@@ -323,6 +327,7 @@
     - [Alert Rules](/ticdc/ticdc-alert-rules.md)
     - [TiCDC OpenAPI](/ticdc/ticdc-open-api.md)
     - [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
+    - [TiCDC Canal-JSON Protocol](/ticdc/ticdc-canal-json.md)
     - [Integrate TiDB with Confluent Platform](/ticdc/integrate-confluent-using-ticdc.md)
     - [Glossary](/ticdc/ticdc-glossary.md)
   - [Dumpling](/dumpling-overview.md)
