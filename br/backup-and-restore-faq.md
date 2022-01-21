@@ -34,7 +34,7 @@ It is recommended to mount an NFS disk as a backup disk during backup. For detai
 
 For TiDB v5.4.0 or later versions, BR not only reduces the default CPU utilization used by backup tasks but also limits the resources used by backup tasks in the cluster with heavy workloads. Therefore, when you use the default configuration for backup tasks in the v5.4.0 cluster with heavy workloads, the impact of the tasks on the cluster performance is significantly less than the impact for the clusters earlier than v5.4.0. For details, see [BR Auto-tune](/br/br-auto-tune.md).
 
-The following is an internal test on a single node. The test results show that when using the default configuration of v5.4.0 and its earlier versions in the **full-speed backup** scenario, the impact of backup using BR on cluster performance is quite different. The detailed test results are as follows:
+The following is an internal test on a single node. The test results show that when you use the default configuration of v5.4.0 and v5.3.0 in the **full-speed backup** scenario, the impact of backup using BR on cluster performance is quite different. The detailed test results are as follows:
 
 - When BR uses the default configuration of v5.3.0, the QPS of write-only workload is reduced by 75%.
 - When BR uses the default configuration of v5.4.0, the QPS for the same workload is reduced by 25%. However, when this configuration is used, the speed of backup tasks using BR becomes correspondingly slower. The time required is 1.7 times that of the v5.3.0 configuration.
