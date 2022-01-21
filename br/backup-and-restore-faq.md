@@ -8,7 +8,6 @@ aliases: ['/docs/dev/br/backup-and-restore-faq/']
 
 This document lists the frequently asked questions (FAQs) and the solutions about Backup & Restore (BR).
 
-
 ## In TiDB v5.4.0 and later versions, when backup tasks are performed on the cluster under high workload, why does the speed of backup tasks become slow?
 
 Starting from TiDB v5.4.0, BR introduces the auto-tune feature for backup tasks. For clusters in v5.4.0 or later versions, this feature is enabled by default. When the cluster workload is heavy, the feature limits the resources used by backup tasks to reduce the impact on the online cluster. For more information, refer to [BR Auto-Tune](/br/br-auto-tune.md).
