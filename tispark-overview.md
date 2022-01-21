@@ -42,6 +42,8 @@ The following table lists the compatibility information of the supported TiSpark
 | 2.4.x           | 5.x，4.x             | 2.3.x，2.4.x  | 2.11          |
 | 2.5.x           | 5.x，4.x             | 3.0.x，3.1.x  | 2.12          |
 
+TiSpark runs in any Spark mode such as YARN, Mesos, and Standalone.
+
 This section describes the configuration of:
 
 - independently deployed TiKV and TiSpark
