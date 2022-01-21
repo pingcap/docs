@@ -9,7 +9,7 @@ To support reading the historical versions data, in v5.4, TiDB introduces a new 
 
 ## Feature description
 
-The `tidb_read_staleness` system variable is used to set the time range of historical data that is allowed to be read in the current session. The data type of this variable is int type, and the scope of it is `SESSION`. After setting the value, TiDB selects a timestamp as new as possible from the range allowed by this variable, and this timestamp affects all subsequent read operations. For example, if the value of this variable is set to `-5`, TiDB selects a timestamp as new as possible within a 5-second time range, while ensuring that TiKV has the corresponding historical version's data.
+The `tidb_read_staleness` system variable is used to set the time range of historical data that TiDB can read in the current session. The data type of this variable is int type, and the scope of it is `SESSION`. After setting the value, TiDB selects a timestamp as new as possible from the range allowed by this variable, and all subsequent read operations are performed against this timestamp. For example, if the value of this variable is set to `-5`, on the condition that TiKV has the corresponding historical version's data, TiDB selects a timestamp as new as possible within a 5-second time range.
 
 After enabling `tidb_read_staleness`, you still can perform the following operations:
 
