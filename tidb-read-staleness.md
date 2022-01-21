@@ -14,7 +14,7 @@ The `tidb_read_staleness` system variable is used to set the time range of histo
 After enabling `tidb_read_staleness`, you still can perform the following operations:
 
 - Insert, modify, delete data or perform DML operations in the current session. These statements are not affected by `tidb_read_staleness`.
-- Start an interactive transaction in the current session. Queries within this transaction still read the latest version data.
+- Start an interactive transaction in the current session. Queries within this transaction still read the latest data.
 
 After reading the historical data, you can read the latest data in the following two ways:
 
