@@ -189,7 +189,7 @@ See also [How to properly restart TiDB Lightning?](#how-to-properly-restart-tidb
 4. Clean up the residual metadata. You need to clean up the metadata schema manually if either of the following conditions exist.
 
     - For TiDB Lightning v5.1.x and v5.2.x versions, the `tidb-lightning-ctl` command does not clean up the metadata schema in the target cluster. You need to clean it up manually.
-    - If you have deleted the checkpoint files manually, you need to clean up the downstream metadata schema manually; otherwise, the correctness of subsequent imports may be affected.
+    - If you have deleted the checkpoint files manually, you need to clean up the downstream metadata schema manually; otherwise, the correctness of subsequent imports might be affected.
 
     Use the following command to clean up the metadata:
 
