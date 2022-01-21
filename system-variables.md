@@ -1440,6 +1440,13 @@ SET tidb_query_log_max_len = 20
 - This variable controls whether to hide user information in the SQL statement being recorded into the TiDB log and slow log.
 - When you set the variable to `1`, user information is hidden. For example, if the executed SQL statement is `insert into t values (1,2)`, the statement is recorded as `insert into t values (?,?)` in the log.
 
+### tidb_regard_null_as_point <span class="version-mark">New in v5.4.0</span>
+
+- Scope: SESSION | GLOBAL
+- Default value: `ON`
+- This variable controls whether the optimizer can use a null equivalence condition as a prefix condition for index access.
+- This variable is enabled by default. When it is enabled, the optimizer can reduce the volume of index data to be accessed, which increases the speed of query execution. For example, in the case of multiple-column indexes `index(a, b)` and a query condition `a<=>null and b=1`, the optimizer can use both `a<=>null` and `b=1` in the query condition for index access. If the variable is disabled, because `a<=>null and b=1` contains the null equivalence condition, the optimizer does not use `b=1` for index access.
+
 ### tidb_replica_read <span class="version-mark">New in v4.0</span>
 
 - Scope: SESSION | GLOBAL
