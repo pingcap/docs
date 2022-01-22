@@ -23,32 +23,18 @@ This document only describes the parameters that are not included in command-lin
 
 + Default value: `false`
 
-### `log-level`
+### `slow-log-file`
 
-+ The log level
-+ Value options: "trace", "debug", "info", "warning", "error", "critical"
-+ Default value: "info"
++ The file that stores slow logs
++ If this configuration item is not set, but `log.file.filename` is set, slow logs are output to the log file specified by `log.file.filename`.
++ If neither `slow-log-file` nor `log.file.filename` are set, all logs are output to "stderr" by default.
++ If both configuration items are set, ordinary logs are output to the log file specified by `log.file.filename`, and slow logs are output to the log file set by `slow-log-file`.
++ Default value: `""`
 
-### `log-file`
+### `slow-log-threshold`
 
-+ The log file. If this configuration is not set, logs are output to "stderr" by default.
-+ Default value: ""
-
-### `log-format`
-
-+ The log format
-+ Value options: "json", "text"
-+ Default value: "text"
-
-### `log-rotation-timespan`
-
-+ The timespan between log rotations. When this timespan passes, log files are rotated, that is, a timestamp is appended to the file name of the current log file, and a new file is created.
-+ Default value: "24h"
-
-### `log-rotation-size`
-
-+ The size of a log file that triggers log rotation. Once the size of a log file is bigger than the specified threshold value, log files are rotated. The old log file is placed into the new file, and the new file name is the old file name with a timestamp suffix.
-+ Default value: "300MB"
++ The threshold for outputing slow logs. If the processing time is longer than this threshold, slow logs are output.
++ Default value: `"1s"`
 
 ### `memory-usage-limit`
 
@@ -60,20 +46,63 @@ This document only describes the parameters that are not included in command-lin
 + system=32G   block-cache=14.4G   memory-usage-limit=24G  page-cache=8G
 + So how can `memory-usage-limit` influence TiKV? When a TiKV's memory usage almost reaches this threshold, it can squeeze some internal components (e.g. evicting cached Raft entries) to release memory.
 
-### `slow-log-file`
+## log <span class="version-mark">New in v5.4.0</span>
 
-+ The file to store slow logs
-+ If this configuration is not set but `log-file` is set, slow logs are output to the log file specified by `log-file`. If neither `slow-log-file` nor `log-file` are set, all logs are output to "stderr".
-+ Default value: ""
++ Configuration items related to the log.
 
-### `slow-log-threshold`
++ From v5.4.0, to make the log configuration items of TiKV and TiDB consistent, TiKV deprecates the former configuration item `log-rotation-timespan` and changes `log-level`, `log-format`, `log-file`, `log-rotation-size` to the following ones. If you only set the old configuration items, and their values are set to non-default values, the old items remain compatible with the new items. If both old and new configuration items are set, the new items take effect.
 
-+ The threshold for outputing slow logs. If the processing time is longer than this threshold, slow logs are output.
-+ Default value: "1s"
+### `level` <span class="version-mark">New in v5.4.0</span>
+
++ The log level
++ Optional values: `"debug"`, `"info"`, `"warn"`, `"error"`, `"fatal"`
++ Default value: `"info"`
+
+### `format` <span class="version-mark">New in v5.4.0</span>
+
++ The log format
++ Optional values: `"json"`, `"text"`
++ Default value: `"text"`
+
+### `enable-timestamp` <span class="version-mark">New in v5.4.0</span>
+
++ Determines whether to enable or disable the timestamp in the log
++ Optional values: `"true"`, `"false"`
++ Default value: `"true"`
+
+## log.file <span class="version-mark">New in v5.4.0</span>
+
++ Configuration items related to the log file.
+
+### `filename` <span class="version-mark">New in v5.4.0</span>
+
++ The log file. If this configuration item is not set, logs are output to "stderr" by default. If this configuration item is set, logs are output to the corresponding file.
++ Default value: `""`
+
+### `max-size` <span class="version-mark">New in v5.4.0</span>
+
++ The maximum size of a single log file. When the file size is larger than the value set by this configuration item, the system automatically splits the single file into multiple files.
++ Default value: `300`
++ Maximum value: `4096`
++ Unit: MiB
+
+### `max-days` <span class="version-mark">New in v5.4.0</span>
+
++ The maximum number of days that TiKV keeps log files.
+    + If the configuration item is not set, or the value of it is set to the default value `0`, TiKV does not clean log files.
+    + If the parameter is set to a value other than `0`, TiKV cleans up the expired log files after `max-days`.
++ Default value: `0`
+
+### `max-backups` <span class="version-mark">New in v5.4.0</span>
+
++ The maximum number of log files that TiKV keeps.
+    + If the configuration item is not set, or the value of it is set to the default value `0`, TiKV keeps all log files.
+    + If the configuration item is set to a value other than `0`, TiKV keeps at most the number of old log files specified by `max-backups`. For example, if the value is set to `7`, TiKV keeps up to 7 old log files.
++ Default value: `0`
 
 ## server
 
-+ Configuration items related to the server
++ Configuration items related to the server.
 
 ### `addr`
 
@@ -121,39 +150,39 @@ This document only describes the parameters that are not included in command-lin
 ### `grpc-memory-pool-quota`
 
 + Limits the memory size that can be used by gRPC
-+ Default: No limit
++ Default value: No limit
 + Limit the memory in case OOM is observed. Note that limit the usage can lead to potential stall
 
 ### `grpc-raft-conn-num`
 
 + The maximum number of links among TiKV nodes for Raft communication
-+ Default: `1`
++ Default value: `1`
 + Minimum value: `1`
 
 ### `max-grpc-send-msg-len`
 
-+ Sets the maximum length of a gRPC message that can be sent 
-+ Default: `10485760`
++ Sets the maximum length of a gRPC message that can be sent
++ Default value: `10485760`
 + Unit: Bytes
 + Maximum value: `2147483647`
 
 ### `grpc-stream-initial-window-size`
 
 + The window size of the gRPC stream
-+ Default: 2MB
++ Default value: `2MB`
 + Unit: KB|MB|GB
 + Minimum value: `"1KB"`
 
 ### `grpc-keepalive-time`
 
 + The time interval at which that gRPC sends `keepalive` Ping messages
-+ Default: `"10s"`
++ Default value: `"10s"`
 + Minimum value: `"1s"`
 
 ### `grpc-keepalive-timeout`
 
 + Disables the timeout for gRPC streams
-+ Default: `"3s"`
++ Default value: `"3s"`
 + Minimum value: `"1s"`
 
 ### `concurrent-send-snap-limit`
@@ -352,7 +381,7 @@ Configuration items related to the Coprocessor thread pool.
 
 ## storage
 
-Configuration items related to storage
+Configuration items related to storage.
 
 ### `data-dir`
 
@@ -487,7 +516,7 @@ Configuration items related to the I/O rate limiter.
 
 ## raftstore
 
-Configuration items related to Raftstore
+Configuration items related to Raftstore.
 
 ### `prevote`
 
@@ -497,7 +526,7 @@ Configuration items related to Raftstore
 ### `raftdb-path`
 
 + The path to the Raft library, which is `storage.data-dir/raft` by default
-+ Default value: ""
++ Default value: `""`
 
 ### `raft-base-tick-interval`
 
@@ -549,26 +578,17 @@ Configuration items related to Raftstore
 + Minimum value: `0`
 + Unit: MB|GB
 
-### `raft-log-compact-sync-interval`
+### `raft-log-compact-sync-interval` <span class="version-mark">New in v5.3</span>
 
-+ Interval to compact unnecessary Raft log.
++ The time interval to compact unnecessary Raft logs
 + Default value: `"2s"`
-
-### `raft-log-reserve-max-ticks`
-
-+ The tick limit to GC Raft log even they are below `raft-log-gc-threshold`.
-+ Default value: `6`
-
-### `raft-engine-purge-interval`
-
-+ Raft engine is a replaceable component. For some implementations, it's necessary to purge old log files to recycle disk space ASAP.
-+ Default value: `"10s"`
++ Minimum value: `"0s"`
 
 ### `raft-log-gc-tick-interval`
 
 + The time interval at which the polling task of deleting Raft logs is scheduled. `0` means that this feature is disabled.
-+ Default value: `"10s"`
-+ Minimum value: `0`
++ Default value: `"3s"`
++ Minimum value: `"0s"`
 
 ### `raft-log-gc-threshold`
 
@@ -587,6 +607,17 @@ Configuration items related to Raftstore
 + The hard limit on the allowable size of residual Raft logs
 + Default value: 3/4 of the Region size
 + Minimum value: greater than `0`
+
+### `raft-log-reserve-max-ticks` <span class="version-mark">New in v5.3</span>
+
++ After the number of ticks set by this configuration item passes, even if the number of residual Raft logs does not reach the value set by `raft-log-gc-threshold`, TiKV still performs garbage collection (GC) to these logs.
++ Default value: `6`
++ Minimum value: greater than `0` 
+
+### `raft-engine-purge-interval`
+
++ Raft engine is a replaceable component. For some implementations, it's necessary to purge old log files to recycle disk space ASAP.
++ Default value: `"10s"`
 
 ### `raft-entry-cache-life-time`
 
@@ -735,11 +766,6 @@ Configuration items related to Raftstore
 + Default value: `"9s"`
 + Minimum value: `0`
 
-### `allow-remove-leader`
-
-+ Determines whether to allow deleting the main switch
-+ Default value: `false`
-
 ### `merge-max-log-gap`
 
 + The maximum number of missing logs allowed when `merge` is performed
@@ -823,15 +849,9 @@ Configuration items related to Raftstore
 + Default value: `1MB`
 + Minimum value: `0`
 
-### `raft-msg-flush-interval` <span class="version-mark">New in v5.3.0</span>
-
-+ Determines the interval at which Raft messages are sent in batches. The Raft messages in batches are sent at every interval specified by this configuration item. When the value of `store-io-pool-size` is `0`, this configuration item does not take effect.
-+ Default value: `250us`
-+ Minimum value: `0`
-
 ## Coprocessor
 
-Configuration items related to Coprocessor
+Configuration items related to Coprocessor.
 
 ### `split-region-on-table`
 
@@ -1059,7 +1079,7 @@ Configuration items related to RocksDB
 
 ## rocksdb.titan
 
-Configuration items related to Titan
+Configuration items related to Titan.
 
 ### `enabled`
 
@@ -1139,7 +1159,7 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 
 + The length that bloom filter reserves for each key
 + Default value: `10`
-+ unit: byte
++ Unit: byte
 
 ### `block-based-bloom-filter`
 
@@ -1165,7 +1185,7 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 + Sets the compression algorithm of the bottommost layer. This configuration item overrides the `compression-per-level` setting.
 + Ever since data is written to LSM-tree, RocksDB does not directly adopt the last compression algorithm specified in the `compression-per-level` array for the bottommost layer. `bottommost-level-compression` enables the bottommost layer to use the compression algorithm of the best compression effect from the beginning.
 + If you do not want to set the compression algorithm for the bottommost layer, set the value of this configuration item to `disable`.
-+ Default value: "zstd"
++ Default value: `"zstd"`
 
 ### `write-buffer-size`
 
@@ -1198,7 +1218,7 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 ### `target-file-size-base`
 
 + The size of the target file at base level. This value is overridden by `compaction-guard-max-output-file-size` when the `enable-compaction-guard` value is `true`.
-+ Default: `"8MB"`
++ Default value: `"8MB"`
 + Minimum value: `0`
 + Unit: KB|MB|GB
 
@@ -1512,24 +1532,84 @@ Configuration items related to `raftdb`
 + RocksDB log levels.
 + Default value: `"info"`
 
+## raft-engine
+
+Configuration items related to Raft Engine.
+
+> **Warning:**
+>
+> Raft Engine is an experimental feature. It is not recommended to use it in the production environment.
+
+### `enable`
+
++ Determines whether to use Raft Engine to store raft logs. When it is enabled, configurations of `raftdb` are ignored.
++ Default value: `"false"`
+
+### `dir`
+
++ The directory at which raft log files are stored. If the directory does not exist, it will be created when TiKV is started.
++ When this configuration is not set, `{data-dir}/raft-engine` is used.
++ If there are multiple disks on your machine, it is recommended to store the data of Raft Engine on a different disk to improve TiKV performance.
++ Default value: `""`
+
+### `batch-compression-threshold`
+
++ Specifies the threshold size of a log batch. A log batch larger than this configuration is compressed. If you set this configuration item to `0`, compression is disabled.
++ Default value: `"8KB"`
+
+### `bytes-per-sync`
+
++ Specifies the maximum accumulative size of buffered writes. When this configuration value is exceeded, buffered writes are flushed to the disk.
++ If you set this configuration item to `0`, incremental sync is disabled.
++ Default value: `"4MB"`
+
+### `target-file-size`
+
++ Specifies the maximum size of log files. When a log file is larger than this value, it is rotated.
++ Default value: `"128MB"`
+
+### `purge-threshold`
+
++ Specifies the threshold size of the main log queue. When this configuration value is exceeded, the main log queue is purged.
++ This configuration can be used to adjust the disk space usage of Raft Engine.
++ Default value: `"10GB"`
+
+### `recovery-mode`
+
++ Determines how to deal with file corruption during recovery.
++ Value options: `"absolute-consistency"`, `"tolerate-tail-corruption"`, `"tolerate-any-corruption"`
++ Default value: `"tolerate-tail-corruption"`
+
+### `recovery-read-block-size`
+
++ The minimum I/O size for reading log files during recovery.
++ Default value: `"16KB"`
++ Minimum value: `"512B"`
+
+### `recovery-threads`
+
++ The number of threads used to scan and recover log files.
++ Default value: `4`
++ Minimum value: `1`
+
 ## security
 
-Configuration items related to security
+Configuration items related to security.
 
 ### `ca-path`
 
 + The path of the CA file
-+ Default value: ""
++ Default value: `""`
 
 ### `cert-path`
 
 + The path of the Privacy Enhanced Mail (PEM) file that contains the X.509 certificate
-+ Default value: ""
++ Default value: `""`
 
 ### `key-path`
 
 + The path of the PEM file that contains the X.509 key
-+ Default value: ""
++ Default value: `""`
 
 ### `cert-allowed-cn`
 
@@ -1615,7 +1695,7 @@ Configuration items related to BR backup.
 ### `num-threads`
 
 + The number of worker threads to process backup
-+ Default value: `MIN(CPU * 0.75, 32)`.
++ Default value: `MIN(CPU * 0.5, 8)`.
 + Minimum value: `1`
 
 ### `batch-size`
@@ -1628,10 +1708,10 @@ Configuration items related to BR backup.
 + When Backup region [a,e) size exceeds `sst-max-size`, it will be backuped into several Files [a,b), [b,c), [c,d), [d,e) and the size of [a,b), [b,c), [c,d) will be `sst-max-size` (or a little larger).
 + Default value: `"144MB"`
 
-### `enable-auto-tune`
+### `enable-auto-tune` <span class="version-mark">New in v5.4.0</span>
 
-+ Automatically reduce the number of backup threads when the current workload is high, in order to reduce impact on the cluster's performance during back up.
-+ Default value: `false`
++ Controls whether to limit the resources used by backup tasks to reduce the impact on the cluster when the cluster resource utilization is high. For more information, refer to [BR Auto-Tune](/br/br-auto-tune.md).
++ Default value: `true`
 
 ## backup.hadoop
 

@@ -11,7 +11,7 @@ TiDB is highly compatible with the MySQL 5.7 protocol and the common features an
 However, some features of MySQL are not supported. This could be because there is now a better way to solve the problem (such as XML functions superseded by JSON), or a lack of current demand versus effort required (such as stored procedures and functions). Some features might also be difficult to implement as a distributed system.
 
 - In addition, TiDB does not support the MySQL replication protocol, but provides specific tools to replicate data with MySQL.
-    - Replicate data from MySQL: [TiDB Data Migration (DM)](https://docs.pingcap.com/tidb-data-migration/stable/overview) is a tool that supports the full data migration and the incremental data replication from MySQL/MariaDB into TiDB.
+    - Replicate data from MySQL: [TiDB Data Migration (DM)](/dm/dm-overview.md) is a tool that supports the full data migration and the incremental data replication from MySQL/MariaDB into TiDB.
     - Replicate data to MySQL: [TiCDC](/ticdc/ticdc-overview.md) is a tool for replicating the incremental data of TiDB by pulling TiKV change logs. TiCDC uses the [MySQL sink](/ticdc/ticdc-overview.md#sink-support) to replicate the incremental data of TiDB to MySQL.
 
 > **Note:**
@@ -25,7 +25,8 @@ However, some features of MySQL are not supported. This could be because there i
 + Events
 + User-defined functions
 + `FOREIGN KEY` constraints [#18209](https://github.com/pingcap/tidb/issues/18209)
-+ `FULLTEXT`/`SPATIAL` functions and indexes [#1793](https://github.com/pingcap/tidb/issues/1793)
++ `FULLTEXT` syntax and indexes [#1793](https://github.com/pingcap/tidb/issues/1793)
++ `SPATIAL` (also known as `GIS`/`GEOMETRY`) functions, data types and indexes [#6347](https://github.com/pingcap/tidb/issues/6347)
 + Character sets other than `utf8`, `utf8mb4`, `ascii`, `latin1` and `binary`
 + SYS schema
 + Optimizer trace
@@ -81,7 +82,11 @@ TiDB uses a combination of [Prometheus and Grafana](/tidb-monitoring-api.md) to 
 
 ### Query Execution Plan
 
-The output format, output content, and the privilege setting of Query Execution Plan (`EXPLAIN`/`EXPLAIN FOR`) in TiDB is greatly different from those in MySQL. See [Understand the Query Execution Plan](/explain-overview.md) for more details.
+The output format, output content, and the privilege setting of Query Execution Plan (`EXPLAIN`/`EXPLAIN FOR`) in TiDB is greatly different from those in MySQL.
+
+The MySQL system variable `optimizer_switch` is read-only in TiDB and has no effect on query plans. You can also use [optimizer hints](/optimizer-hints.md) in similar syntax to MySQL, but the available hints and implementation might differ.
+
+See [Understand the Query Execution Plan](/explain-overview.md) for more details.
 
 ### Built-in functions
 
@@ -98,11 +103,12 @@ In TiDB, all supported DDL changes are performed online. Compared with DDL opera
 * The `ALGORITHM={INSTANT,INPLACE,COPY}` syntax functions only as an assertion in TiDB, and does not modify the `ALTER` algorithm. See [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md) for further details.
 * Adding/Dropping the primary key of the `CLUSTERED` type is unsupported. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
 * Different types of indexes (`HASH|BTREE|RTREE|FULLTEXT`) are not supported, and will be parsed and ignored when specified.
-* Table Partitioning supports Hash, Range, and `Add`/`Drop`/`Truncate`/`Coalesce`. The other partition operations are ignored. The `Warning: Unsupported partition type, treat as normal table` error might be output. The following Table Partition syntaxes are not supported:
-    - `PARTITION BY LIST`
+* Table Partitioning supports `HASH`, `RANGE`, and `LIST` partitioning types. Table Partitioning also supports `ADD`, `DROP`, and `TRUNCATE` operations. The other partition operations are ignored. The `Warning: Unsupported partition type %s, treat as normal table` error might be output, where `%s` is a specific partition type. The following Table Partition syntaxes are not supported:
     - `PARTITION BY KEY`
     - `SUBPARTITION`
-    - `{CHECK|EXCHANGE|TRUNCATE|OPTIMIZE|REPAIR|IMPORT|DISCARD|REBUILD|REORGANIZE} PARTITION`
+    - `{CHECK|TRUNCATE|OPTIMIZE|REPAIR|IMPORT|DISCARD|REBUILD|REORGANIZE|COALESCE} PARTITION`
+
+    For more details, see [Partitioning](/partitioned-table.md).
 
 ### Analyze table
 

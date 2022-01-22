@@ -294,10 +294,10 @@ This variable is an alias for `last_insert_id`.
 >
 > Unlike in MySQL, the `max_execution_time` system variable currently works on all kinds of statements in TiDB, not only restricted to the `SELECT` statement. The precision of the timeout value is roughly 100ms. This means the statement might not be terminated in accurate milliseconds as you specify.
 
-### placement_checks
+### placement_checks <span class="version-mark">New in v5.3.0</span>
 
 - Scope: SESSION | GLOBAL
-- Default value: ON
+- Default value: `ON`
 - This variable controls whether DDL statements validate [Placement Rules in SQL](/placement-rules-in-sql.md).
 - It is intended to be used by logical dump/restore tools to ensure that tables can always be created even if placement rules are violated. This is similar to how mysqldump writes `SET FOREIGN_KEY_CHECKS=0;` to the start of every dump file.
 
@@ -319,6 +319,22 @@ This variable is an alias for `last_insert_id`.
 - Default value: `4000`
 - Range: `[0, 65535]`
 - The port that the `tidb-server` is listening on when speaking the MySQL protocol.
+
+### rand_seed1
+
+- Scope: SESSION
+- Default value: `0`
+- Range: `[0, 2147483647]`
+- This variable is used to seed the random value generator used in the `RAND()` SQL function.
+- The behavior of this variable is MySQL compatible.
+
+### rand_seed2
+
+- Scope: SESSION
+- Default value: `0`
+- Range: `[0, 2147483647]`
+- This variable is used to seed the random value generator used in the `RAND()` SQL function.
+- The behavior of this variable is MySQL compatible.
 
 ### skip_name_resolve <span class="version-mark">New in v5.2.0</span>
 
@@ -411,6 +427,7 @@ This variable is an alias for `last_insert_id`.
 ### tidb_allow_function_for_expression_index <span class="version-mark">New in v5.2.0</span>
 
 - Scope: NONE
+- Default value: `lower, md5, reverse, upper, vitess_hash`
 - This variable is used to show the functions that are allowed to be used for creating expression indexes.
 
 ### tidb_allow_mpp <span class="version-mark">New in v5.0</span>
@@ -462,7 +479,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 ### tidb_backoff_lock_fast
 
 - Scope: SESSION | GLOBAL
-- Default value: `100`
+- Default value: `10`
 - Range: `[1, 2147483647]`
 - This variable is used to set the `backoff` time when the read request meets a lock.
 
@@ -771,6 +788,14 @@ Constraint checking is always performed in place for pessimistic transactions (d
 >
 > Only the default value of `OFF` can be considered safe. Setting `tidb_enable_noop_functions=1` might lead to unexpected behaviors in your application, because it permits TiDB to ignore certain syntax without providing an error. For example, the syntax `START TRANSACTION READ ONLY` is permitted, but the transaction remains in read-write mode.
 
+### tidb_enable_paging <span class="version-mark">New in v5.4.0</span>
+
+- Scope: SESSION | GLOBAL
+- Default value: `OFF`
+- This variable controls whether to use the method of paging to send coprocessor requests in `IndexLookUp` operator.
+- User scenarios: For read queries that use `IndexLookup` and `Limit` and that `Limit` cannot be pushed down to `IndexScan`, there might be high latency for the read queries and high CPU usage for TiKV's `unified read pool`. In such cases, because the `Limit` operator only requires a small set of data, if you set `tidb_enable_paging` to `ON`, TiDB processes less data, which reduces query latency and resource consumption.
+- When `tidb_enable_paging` is enabled, for the `IndexLookUp` requests with `Limit` that cannot be pushed down and are fewer than `960`, TiDB uses the method of paging to send coprocessor requests. The fewer `Limit`, the more obvious the optimization.
+
 ### tidb_enable_parallel_apply <span class="version-mark">New in v5.0</span>
 
 - Scope: SESSION | GLOBAL
@@ -845,14 +870,14 @@ Query OK, 0 rows affected (0.09 sec)
 - Default value: `ON`
 - This variable is used to dynamically control whether the telemetry collection in TiDB is enabled. By setting the value to `OFF`, the telemetry collection is disabled. If the [`enable-telemetry`](/tidb-configuration-file.md#enable-telemetry-new-in-v402) TiDB configuration item is set to `false` on all TiDB instances, the telemetry collection is always disabled and this system variable will not take effect. See [Telemetry](/telemetry.md) for details.
 
-### tidb_enable_tso_follower_proxy <span class="version-mark">New in v5.3</span>
+### tidb_enable_tso_follower_proxy <span class="version-mark">New in v5.3.0</span>
 
 - Scope: GLOBAL
 - Default value: `OFF`
 - This variable is used to enable the TSO Follower Proxy feature. When the value is `OFF`, TiDB only gets TSO from the PD leader. After this feature is enabled, TiDB gets TSO by evenly sending requests to all PD nodes and forwarding TSO requests through PD followers. This helps reduce the CPU pressure of PD leader.
 - Scenarios for enabling TSO Follower Proxy:
     * Due to the high pressure of TSO requests, the CPU of the PD leader reaches a bottleneck, which causes high latency of TSO RPC requests.
-    * The TiDB cluster has many TiDB instances, and increasing the value of [`tidb_tso_client_batch_max_wait_time`](#tidb_tso_client_batch_max_wait_time-new-in-v53) cannot alleviate the high latency issue of TSO RPC requests.
+    * The TiDB cluster has many TiDB instances, and increasing the value of [`tidb_tso_client_batch_max_wait_time`](#tidb_tso_client_batch_max_wait_time-new-in-v530) cannot alleviate the high latency issue of TSO RPC requests.
 
 > **Note:**
 >
@@ -1130,10 +1155,11 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Default value: `tikv,tiflash,tidb`
 - This variable is used to set the storage engine list that TiDB can use when reading data.
 
-### tidb_log_file_max_days <span class="version-mark">New in v5.3</span>
+### tidb_log_file_max_days <span class="version-mark">New in v5.3.0</span>
 
 - Scope: SESSION
 - Default value: `0`
+- Range: `[0, 2147483647]`
 - This variable is used to adjust the maximum days of logger on the current TiDB instance. Its value defaults to the value of the [`max-days`](/tidb-configuration-file.md#max-days) configuration in the configuration file. Changing the variable value only affects the current TiDB instance. After TiDB is restarted, the variable value is reset and the configuration value is not affected.
 
 ### tidb_low_resolution_tso
@@ -1414,6 +1440,13 @@ SET tidb_query_log_max_len = 20
 - This variable controls whether to hide user information in the SQL statement being recorded into the TiDB log and slow log.
 - When you set the variable to `1`, user information is hidden. For example, if the executed SQL statement is `insert into t values (1,2)`, the statement is recorded as `insert into t values (?,?)` in the log.
 
+### tidb_regard_null_as_point <span class="version-mark">New in v5.4.0</span>
+
+- Scope: SESSION | GLOBAL
+- Default value: `ON`
+- This variable controls whether the optimizer can use a query condition including null equivalence as a prefix condition for index access.
+- This variable is enabled by default. When it is enabled, the optimizer can reduce the volume of index data to be accessed, which accelerates query execution. For example, if a query involves multiple-column indexes `index(a, b)` and the query condition contains `a<=>null and b=1`, the optimizer can use both `a<=>null` and `b=1` in the query condition for index access. If the variable is disabled, because `a<=>null and b=1` includes the null equivalence condition, the optimizer does not use `b=1` for index access.
+
 ### tidb_replica_read <span class="version-mark">New in v4.0</span>
 
 - Scope: SESSION | GLOBAL
@@ -1540,7 +1573,7 @@ SET tidb_slow_log_threshold = 200;
 
 ### tidb_store_limit <span class="version-mark">New in v3.0.4 and v4.0</span>
 
-- Scope: INSTANCE | GLOBAL
+- Scope: GLOBAL
 - Default value: `0`
 - Range: `[0, 9223372036854775807]`
 - This variable is used to limit the maximum number of requests TiDB can send to TiKV at the same time. 0 means no limit.
@@ -1553,7 +1586,7 @@ SET tidb_slow_log_threshold = 200;
 - Unit: Bytes
 - This variable is used to set the maximum size of a single [temporary table](/temporary-tables.md). Any temporary table with a size larger than this variable value causes error.
 
-### tidb_tso_client_batch_max_wait_time <span class="version-mark">New in v5.3</span>
+### tidb_tso_client_batch_max_wait_time <span class="version-mark">New in v5.3.0</span>
 
 - Scope: GLOBAL
 - Default value: `0`
@@ -1626,7 +1659,7 @@ SET tidb_slow_log_threshold = 200;
 ### timestamp
 
 - Scope: SESSION
-- Default value: ""
+- Default value: `0`
 - A non-empty value of this variable indicates the UNIX epoch that is used as the timestamp for `CURRENT_TIMESTAMP()`, `NOW()`, and other functions. This variable might be used in data restore or replication.
 
 ### transaction_isolation
@@ -1652,22 +1685,22 @@ This variable is an alias for `transaction_isolation`.
 - Default value: (string)
 - This variable returns additional details about the TiDB version. For example, 'TiDB Server (Apache License 2.0) Community Edition, MySQL 5.7 compatible'.
 
-### version_compile_os
-
-- Scope: NONE
-- Default value: (string)
-- This variable returns the name of the OS on which TiDB is running.
-
 ### version_compile_machine
 
 - Scope: NONE
 - Default value: (string)
 - This variable returns the name of the CPU architecture on which TiDB is running.
 
+### version_compile_os
+
+- Scope: NONE
+- Default value: (string)
+- This variable returns the name of the OS on which TiDB is running.
+
 ### wait_timeout
 
 - Scope: SESSION | GLOBAL
-- Default value: `0`
+- Default value: `28800`
 - Range: `[0, 31536000]`
 - Unit: Seconds
 - This variable controls the idle timeout of user sessions. A zero-value means unlimited.

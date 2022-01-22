@@ -341,7 +341,7 @@ Add a system variable [`tidb_allow_fallback_to_tikv`](/system-variables.md#tidb_
 
 ### Improve TiCDC stability and alleviate the OOM issue caused by replicating too much incremental data
 
-[User document](/ticdc/manage-ticdc.md#unified-sorter), [#1150](https://github.com/pingcap/ticdc/issues/1150)
+[User document](/ticdc/manage-ticdc.md#unified-sorter), [#1150](https://github.com/pingcap/tiflow/issues/1150)
 
 In TiCDC v4.0.9 or earlier versions, replicating too much data change might cause OOM. In v5.0, the Unified Sorter feature is enabled by default to mitigate OOM issues caused by the following scenarios:
 
@@ -381,7 +381,7 @@ TiDB data migration tools support using Amazon S3 (and other S3-compatible stora
 To use this feature, refer to the following documents:
 
 - [Export data to Amazon S3 cloud storage](/dumpling-overview.md#export-data-to-amazon-s3-cloud-storage), [#8](https://github.com/pingcap/dumpling/issues/8)
-- [Migrate from Amazon Aurora MySQL Using TiDB Lightning](/migrate-from-aurora-using-lightning.md), [#266](https://github.com/pingcap/tidb-lightning/issues/266)
+- [Migrate from Amazon Aurora MySQL Using TiDB Lightning](/migrate-aurora-to-tidb.md), [#266](https://github.com/pingcap/tidb-lightning/issues/266)
 
 ### Optimize the data import performance of TiDB Cloud
 
@@ -391,7 +391,7 @@ TiDB Lightning optimizes its data import performance specifically for AWS T1.sta
 
 ### Integrate TiDB to Kafka Connect (Confluent Platform) using TiCDC (**experimental feature**)
 
-[User document](/ticdc/integrate-confluent-using-ticdc.md), [#660](https://github.com/pingcap/ticdc/issues/660)
+[User document](/ticdc/integrate-confluent-using-ticdc.md), [#660](https://github.com/pingcap/tiflow/issues/660)
 
 To support the business requirements of streaming TiDB data to other systems, this feature enables you to stream TiDB data to the systems such as Kafka, Hadoop, and Oracle.
 

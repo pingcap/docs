@@ -14,7 +14,7 @@ The version of TiDB Lightning should be the same as the cluster. If you use the 
 
 Yes.
 
-## What is the privilege requirements for the target database?
+## What are the privilege requirements for the target database?
 
 TiDB Lightning requires the following privileges:
 
@@ -107,13 +107,13 @@ Yes, as long as every `tidb-lightning` instance operates on different tables.
 
 To stop the `tikv-importer` process, you can choose the corresponding operation according to your deployment method.
 
-- For manual deployment: if `tikv-importer` is running in foreground, press <kbd>Ctrl</kbd>+<kbd>C</kbd> to exit. Otherwise, obtain the process ID using the `ps aux | grep tikv-importer` command and then terminate the process using the `kill «pid»` command.
+- For manual deployment: if `tikv-importer` is running in foreground, press <kbd>Ctrl</kbd>+<kbd>C</kbd> to exit. Otherwise, obtain the process ID using the `ps aux | grep tikv-importer` command and then terminate the process using the `kill ${PID}` command.
 
 ## How to stop the `tidb-lightning` process?
 
 To stop the `tidb-lightning` process, you can choose the corresponding operation according to your deployment method.
 
-- For manual deployment: if `tidb-lightning` is running in foreground, press <kbd>Ctrl</kbd>+<kbd>C</kbd> to exit. Otherwise, obtain the process ID using the `ps aux | grep tidb-lighting` command and then terminate the process using the `kill -2 «pid»` command.
+- For manual deployment: if `tidb-lightning` is running in foreground, press <kbd>Ctrl</kbd>+<kbd>C</kbd> to exit. Otherwise, obtain the process ID using the `ps aux | grep tidb-lighting` command and then terminate the process using the `kill -2 ${PID}` command.
 
 ## Why the `tidb-lightning` process suddenly quits while running in background?
 
@@ -185,6 +185,19 @@ See also [How to properly restart TiDB Lightning?](#how-to-properly-restart-tidb
 2. If you are using Local-backend, delete the `sorted-kv-dir` directory in the configuration. If you are using Importer-backend, delete the entire `import` directory on the machine hosting `tikv-importer`.
 
 3. Delete all tables and databases created on the TiDB cluster, if needed.
+
+4. Clean up the residual metadata. You need to clean up the metadata schema manually if either of the following conditions exist.
+
+    - For TiDB Lightning v5.1.x and v5.2.x versions, the `tidb-lightning-ctl` command does not clean up the metadata schema in the target cluster. You need to clean it up manually.
+    - If you have deleted the checkpoint files manually, you need to clean up the downstream metadata schema manually; otherwise, the correctness of subsequent imports might be affected.
+
+    Use the following command to clean up the metadata:
+
+    {{< copyable "sql" >}}
+
+    ```sql
+    DROP DATABASE IF EXISTS `lightning_metadata`;
+    ```
 
 ## Why does TiDB Lightning report the `could not find first pair, this shouldn't happen` error?
 

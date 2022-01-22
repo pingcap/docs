@@ -51,7 +51,7 @@ You can filter the result by fields. For example:
 show config where type='tidb'
 show config where instance in (...)
 show config where name like '%log%'
-show config where type='tikv' and name='log-level'
+show config where type='tikv' and name='log.level'
 ```
 
 ### Modify TiKV configuration online
@@ -151,11 +151,12 @@ The following TiKV configuration items can be modified online:
 | `raftstore.peer-stale-state-check-interval` | The time interval to check whether a peer is without a leader |
 | `raftstore.consistency-check-interval` | The time interval to check consistency |
 | `raftstore.raft-store-max-leader-lease` | The longest trusted period of a Raft leader |
-| `raftstore.allow-remove-leader` | Determines whether to allow deleting the main switch |
 | `raftstore.merge-check-tick-interval` | The time interval for merge check |
 | `raftstore.cleanup-import-sst-interval` | The time interval to check expired SST files |
 | `raftstore.local-read-batch-size` | The maximum number of read requests processed in one batch |
 | `raftstore.hibernate-timeout` | The shortest wait duration before entering hibernation upon start. Within this duration, TiKV does not hibernate (not released). |
+| `raftstore.apply-pool-size` | The number of apply thread pool size |
+| `raftstore.store-pool-size` | The number of store thread pool size |
 | `coprocessor.split-region-on-table` | Enables to split Region by table |
 | `coprocessor.batch-split-limit` | The threshold of Region split in batches |
 | `coprocessor.region-max-size` | The maximum size of a Region |
@@ -172,6 +173,7 @@ The following TiKV configuration items can be modified online:
 | `gc.compaction-filter-skip-version-check` | Whether to skip the cluster version check of compaction filter (not released) |
 | `{db-name}.max-total-wal-size` | The maximum size of total WAL |
 | `{db-name}.max-background-jobs` | The number of background threads in RocksDB |
+| `{db-name}.max-background-flushes` | The maximum number of flush threads in RocksDB |
 | `{db-name}.max-open-files` | The total number of files that RocksDB can open |
 | `{db-name}.compaction-readahead-size` | The size of `readahead` during compaction |
 | `{db-name}.bytes-per-sync` | The rate at which OS incrementally synchronizes files to disk while these files are being written asynchronously |
