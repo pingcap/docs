@@ -221,7 +221,7 @@ In v5.4, the key new features or improvements are as follows:
 
     - Recover the `enable-relay` switch in the `source` configuration.
 
-    - Support dynamically enabling or disabling relay log in the `start-relay` or `stop-relay` command.
+    - Support dynamically enabling and disabling relay log using the `start-relay` and `stop-relay` commands.
 
     - Bind the status of relay log to `source`. `source` keeps its original status of being enabled or disabled after it is migrated to any DM-worker.
 
