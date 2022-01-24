@@ -665,6 +665,6 @@ The `experimental` section, introduced in v3.1.0, describes the configurations r
 >
 > Currently, synchronously loading statistics is an experimental feature. It is not recommended that you use it in production environments.
 
-+ The maximum column number of requests that the TiDB synchronously loading statistics feature can cache.
++ The maximum number of column requests that the TiDB synchronously loading statistics feature can cache.
 + Default value: `1000`
 + Currently, the valid value range is `[1, 100000]`.
