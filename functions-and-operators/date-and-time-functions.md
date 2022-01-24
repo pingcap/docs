@@ -81,7 +81,7 @@ For details, see [Date and Time Functions](https://dev.mysql.com/doc/refman/5.7/
 
 ## MySQL compatibility
 
-The function `str_to_date()` is supported by TiDB, but is unable to parse all date and time values. In addition, the following date and time formatting options are **not supported**:
+The function `str_to_date()` is supported by TiDB, but is unable to parse all date and time values. In addition, the following date and time formatting options are **not implemented**:
 
 | Format | Description                                                                           |
 |--------|---------------------------------------------------------------------------------------|
