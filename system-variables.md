@@ -751,7 +751,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 >
 > - After upgrading a TiDB cluster from v4.0.0 or later to v5.4.0 or later, this variable remains the setting before the upgrade.
 >
-> - Since v5.4.0, for a newly created TiDB cluster, this variable is enabled by default.
+> - Since v5.4.0, for a newly deployed TiDB cluster, this variable is enabled by default.
 
 ### tidb_enable_list_partition <span class="version-mark">New in v5.0</span>
 
