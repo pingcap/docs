@@ -14,6 +14,7 @@ In v5.4, the key new features or improvements are as follows:
 - Support using Index Merge to access data, which merges the filtering results of indexes on multiple columns
 - Support reading stale data using a session variable
 - Support persisting the configuration for collecting statistics
+- Support using Raft Engine as the log storage engine of TiKV (experimental)
 - Optimize the impact of backup on the cluster
 - Support using Azure Blob storage as the backup storage
 - Continuously improve the stability and performance of TiFlash and the MPP engine
@@ -51,6 +52,7 @@ In v5.4, the key new features or improvements are as follows:
 | TiDB | [`stats-load-queue-size`](/tidb-configuration-file.md#stats-load-queue-size-new-in-v540)   | Newly added |  Controls the maximum number of column requests that the TiDB synchronously loading statistics feature can cache. The default value is`1000`.  |
 | TiKV | [`snap-generator-pool-size`](/tidb-configuration-file.md#snap-generator-pool-size) | Newly added | The size of `snap-generator` thread pool. The default value is `2`. |
 | TiKV | `log.file.max-size`, `log.file.max-days`, `log.file.max-backups` | Newly added  | For details, see [TiKV Configuration File - `log.file`](/tikv-configuration-file.md#logfile-new-in-v540). |
+| TiKV | `raft-engine` | Newly added | Includes `enable`, `dir`, `batch-compression-threshold`, `bytes-per-sync`, `target-file-size`, `purge-threshold`, `recovery-mode`, `recovery-read-block-size`, `recovery-read-block-size`, and `recovery-threads`. For details, see [TiKV Configuration File - `raft-engine`](/tikv-configuration-file.md#raft-engine).|
 | TiKV | [`backup.enable-auto-tune`](/tikv-configuration-file.md#enable-auto-tune-new-in-v540) | Newly added | In v5.3.0, the default value is `false`. Since v5.4.0, the default value is changed to `true`. This parameter controls whether to limit the resources used by backup tasks to reduce the impact on the cluster when the cluster resource utilization is high. In the default configuration, the speed of backup tasks might slow down. |
 | TiKV | `log-level`, `log-format`, `log-file`, `log-rotation-size` | Modified | The names of TiKV log parameters are replaced with the names that are consistent with TiDB log parameters, which are `log.level`, `log.format`, `log.file.filename`, and `log.enable-timestamp`. If you only set the old parameters, and their values are set to non-default values, the old parameters remain compatible with the new parameters. If both old and new parameters are set, the new parameters take effect. For details, see [TiKV Configuration File - log](/tikv-configuration-file.md#log-new-in-v540). |
 | TiKV  |  `log-rotation-timespan`  | Deleted |  The timespan between log rotations. After this timespan passes, a log file is rotated, which means a timestamp is appended to the file name of the current log file, and a new log file is created. |
@@ -154,6 +156,14 @@ In v5.4, the key new features or improvements are as follows:
     - For newly deployed TiDB clusters of v5.4.0 or later,  this feature is enabled by default. For v5.4.0 or later TiDB clusters upgraded from earlier versions, this feature inherits the setting before the upgrade and you can change the setting as required (for TiDB clusters earlier than v4.0, this feature does not exist and is disabled by default).
 
     [User document](/explain-index-merge.md)
+
+- **Add Raft Engine (experimental)**
+
+    Support using [Raft Engine](https://github.com/tikv/raft-engine) as the log storage engine in TiKV. Compared with RocksDB, Raft Engine can reduce TiKV I/O write traffic by up to 40% and CPU usage by 10%, while improving foreground throughput by about 5% and reducing tail latency by 20% under certain loads. In addition, Raft Engine improves the efficiency of log recycling and fixes the issue of log accumulation in extreme conditions.
+
+    Raft Engine is still an experimental feature and is disabled by default. Note that the data format of Raft Engine in v5.4.0 is not compatible with previous versions. Before upgrading or downgrading the cluster, you need to make sure that Raft Engine on all TiKV nodes is disabled. It is recommended to use Raft Engine only in v5.4.0 or a later version.
+
+    [User document](/tikv-configuration-file.md#raft-engine)
 
 - **Support collecting statistics on `PREDICATE COLUMNS` (experimental)**
 

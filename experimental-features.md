@@ -11,8 +11,9 @@ This document introduces the experimental features of TiDB in different versions
 ## Performance
 
 + [Automatically scale TiFlash thread pool](/tiflash/tiflash-configuration.md). (Introduced in v5.4)
-+ [Support synchronously loading statistics](/statistics.md#load-statistics). (Introduced in v5.4)
++ [Raft Engine](/tikv-configuration-file.md#raft-engine). (Introduced in v5.4)
 + [Support collecting statistics for `PREDICATE COLUMNS`](/statistics.md#collect-statistics-for-some-columns) (Introduced in v5.4)
++ [Support synchronously loading statistics](/statistics.md#load-statistics). (Introduced in v5.4)
 
 ## Stability
 
