@@ -62,7 +62,7 @@ SHOW COLLATION WHERE CHARSET = 'gbk';
     - MySQL handles illegal GBK character sets in reading and writing operations differently.
     - TiDB handles illegal GBK character sets in reading and writing operations in the same way. In the SQL strict mode, TiDB reports an error when either reading or writing illegal GBK characters. In the non-strict mode, TiDB replaces illegal GBK characters with `?` when either reading or writing illegal GBK characters.
 
-For example, when `SET NAMES gbk`, if you create a table using the `CREATE TABLE gbk_table(a VARCHAR(32) CHARACTER SET gbk)` statement in MySQL and TiDB respectively and then execute the SQL statements in the following table, you can see the detailed differences.
+For example, after `SET NAMES gbk`, if you create a table using the `CREATE TABLE gbk_table(a VARCHAR(32) CHARACTER SET gbk)` statement in MySQL and TiDB respectively and then execute the SQL statements in the following table, you can see the detailed differences.
 
 | Database    |    If the configured SQL mode contains either `STRICT_ALL_TABLES` or `STRICT_TRANS_TABLES`                                               | If the configured SQL mode contains neither `STRICT_ALL_TABLES` nor  `STRICT_TRANS_TABLES`                                                                     |
 |-------|-------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------|
