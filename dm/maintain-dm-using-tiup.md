@@ -367,7 +367,7 @@ Run the following command to use dmctl:
 tiup dmctl [args]
 ```
 
-Specify the version of dmctl:
+Specify the version of dmctl. Modify `${version}` to your needed version before running this command:
 
 ```
 tiup dmctl:${version} [args]
