@@ -196,7 +196,6 @@ You can run the `tiup dm upgrade` command to upgrade a DM cluster. For example, 
 {{< copyable "shell-regular" >}}
 
 ```bash
-
 tiup dm upgrade prod-cluster ${version}
 ```
 
