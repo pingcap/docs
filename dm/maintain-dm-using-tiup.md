@@ -191,7 +191,7 @@ The rolling upgrade process is made as transparent as possible to the applicatio
 
 ### Upgrade command
 
-You can run the `tiup dm upgrade` command to upgrade a DM cluster. For example, the following command upgrades the cluster to ${version}:
+You can run the `tiup dm upgrade` command to upgrade a DM cluster. For example, the following command upgrades the cluster to `${version}`. Modify `${version}` to your needed version before running this command:
 
 {{< copyable "shell-regular" >}}
 
