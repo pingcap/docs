@@ -153,7 +153,7 @@ If a table has many columns, collecting statistics on all the columns can cause 
 
         After the setting, TiDB writes the `PREDICATE COLUMNS` information to the `mysql.column_stats_usage` system table every 100 * [`stats-lease`](/tidb-configuration-file.md#stats-lease).
 
-    2. After the query pattern of your business is stable, collect the statistics of `PREDICATE COLUMNS` by using the following syntax:
+    2. After the query pattern of your business is relatively stable, collect statistics of `PREDICATE COLUMNS` by using the following syntax:
 
         {{< copyable "sql" >}}
 
