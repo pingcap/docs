@@ -123,13 +123,13 @@ Before v5.3.0, TiDB uses the reservoir sampling method to collect statistics. Si
 
 In most cases, when executing SQL statements, the optimizer only uses statistics on some columns (such as columns in the `WHERE`, `JOIN`, `ORDER BY`, and `GROUP BY` statements). These columns are called `PREDICATE COLUMNS`.
 
-If a table has many columns, collecting statistics on all the columns can cause a large overhead. To reduce the overhead, you can collect statistics on only specified columns or `PREDICATE COLUMNS` to be used by the optimizer.
+If a table has many columns, collecting statistics on all the columns can cause a large overhead. To reduce the overhead, you can collect statistics on only specific columns or `PREDICATE COLUMNS` to be used by the optimizer.
 
 > **Note:**
 >
 > Collecting statistics on some columns is only applicable for `tidb_analyze_version = 2`.
 
-- To collect statistics on specified columns, use the following syntax:
+- To collect statistics on specific columns, use the following syntax:
 
     {{< copyable "sql" >}}
 
@@ -137,7 +137,7 @@ If a table has many columns, collecting statistics on all the columns can cause 
     ANALYZE TABLE TableName COLUMNS ColumnNameList [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
     ```
 
-    In the syntax, `ColumnNameList` specifies the name list of the target columns. If you need to specify more than one column, use comma `,` to separate the column names. For example, `ANALYZE table t columns a, b`. Besides collecting statistics on the specified columns in a specified table, this syntax collects statistics on the indexed columns and all indexes in that table at the same time.
+    In the syntax, `ColumnNameList` specifies the name list of the target columns. If you need to specify more than one column, use comma `,` to separate the column names. For example, `ANALYZE table t columns a, b`. Besides collecting statistics on the specific columns in a specific table, this syntax collects statistics on the indexed columns and all indexes in that table at the same time.
 
     > **Note:**
     >
@@ -161,7 +161,7 @@ If a table has many columns, collecting statistics on all the columns can cause 
         ANALYZE TABLE TableName PREDICATE COLUMNS [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
         ```
 
-        Besides collecting statistics on `PREDICATE COLUMNS` in a specified table, this syntax collects statistics on indexed columns and all indexes in that table at the same time.
+        Besides collecting statistics on `PREDICATE COLUMNS` in a specific table, this syntax collects statistics on indexed columns and all indexes in that table at the same time.
 
         > **Note:**
         >
