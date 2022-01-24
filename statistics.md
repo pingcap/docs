@@ -119,17 +119,17 @@ Before v5.3.0, TiDB uses the reservoir sampling method to collect statistics. Si
 >
 > Normally, `STATS_META` is more credible than `TABLE_KEYS`. However, after importing data through the methods like [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md), the result of `STATS_META` is `0`. To handle this situation, you can use `TABLE_KEYS` to calculate the sampling rate when the result of `STATS_META` is much smaller than the result of `TABLE_KEYS`.
 
-##### Collect statistics for some columns
+##### Collect statistics on some columns
 
 In most cases, when executing SQL statements, the optimizer only uses statistics of some columns (such as columns in the `WHERE`, `JOIN`, `ORDER BY`, and `GROUP BY` statements). These columns are called `PREDICATE COLUMNS`.
 
-If a table has many columns, collecting statistics for all the columns can cause a large overhead. To reduce the overhead, you can collect statistics for only specified columns or `PREDICATE COLUMNS` to be used by the optimizer.
+If a table has many columns, collecting statistics on all the columns can cause a large overhead. To reduce the overhead, you can collect statistics on only specified columns or `PREDICATE COLUMNS` to be used by the optimizer.
 
 > **Note:**
 >
-> Collecting statistics for some columns is only applicable for `tidb_analyze_version = 2`.
+> Collecting statistics on some columns is only applicable for `tidb_analyze_version = 2`.
 
-- To collect statistics for specified columns, use the following syntax:
+- To collect statistics on specified columns, use the following syntax:
 
     {{< copyable "sql" >}}
 
@@ -143,11 +143,11 @@ If a table has many columns, collecting statistics for all the columns can cause
     >
     > The syntax above is a full collection. For example, after collecting statistics on columns `a` and `b` using this syntax, if you also want to collect statistics on column `c`, you need to specify all three columns using `ANALYZE table t columns a, b, c`, rather than only specifying the additional column `c` using `ANALYZE TABLE t COLUMNS c`.
 
-- To collect statistics for `PREDICATE COLUMNS`, do the following:
+- To collect statistics on `PREDICATE COLUMNS`, do the following:
 
     > **Warning:**
     >
-    > Currently, collecting statistics for `PREDICATE COLUMNS` is an experimental feature. It is not recommended that you use it in production environments.
+    > Currently, collecting statistics on `PREDICATE COLUMNS` is an experimental feature. It is not recommended that you use it in production environments.
 
     1. Set the value of the [`tidb_enable_column_tracking`](/system-variables.md#tidb_enable_column_tracking-introduced-from-v540-version) system variable to `ON` to enable TiDB to collect `PREDICATE COLUMNS`.
 
@@ -200,7 +200,7 @@ The `SHOW COLUMN_STATS_USAGE` statement returns the following 6 columns:
 | `Last_used_at` | The last time when the column statistics were used by the query optimization |
 | `Last_analyzed_at` | The last time when the column statistics were collected |
 
-In the following example, after executing `ANALYZE TABLE t PREDICATE COLUMNS;`, TiDB collects statistics for columns `b`, `c`, and `d`, where column `b` is a `PREDICATE COLUMN` and columns `c` and `d` are index columns.
+In the following example, after executing `ANALYZE TABLE t PREDICATE COLUMNS;`, TiDB collects statistics on columns `b`, `c`, and `d`, where column `b` is a `PREDICATE COLUMN` and columns `c` and `d` are index columns.
 
 {{< copyable "sql" >}}
 
@@ -242,7 +242,7 @@ SHOW COLUMN_STATS_USAGE WHERE db_name = 'test' AND table_name = 't' AND last_ana
 
 ##### Collect statistics on indexes
 
-To collect statistics for all indexes in `IndexNameList` in `TableName`, use the following syntax:
+To collect statistics on all indexes in `IndexNameList` in `TableName`, use the following syntax:
 
 {{< copyable "sql" >}}
 
@@ -256,7 +256,7 @@ When `IndexNameList` is empty, this syntax collects statistics of all indexes in
 >
 > To ensure that the statistical information before and after the collection is consistent, when `tidb_analyze_version` is `2`, this syntax collects statistics on the entire table (including all columns and indexes), instead of only on indexes.
 
-##### Collect statistics for partitions
+##### Collect statistics on partitions
 
 - To collect statistics on all partitions in `PartitionNameList` in `TableName`, use the following syntax:
 
@@ -278,7 +278,7 @@ When `IndexNameList` is empty, this syntax collects statistics of all indexes in
 
     > **Warning:**
     >
-    > Currently, collecting statistics for `PREDICATE COLUMNS` is an experimental feature. It is not recommended that you use it in production environments.
+    > Currently, collecting statistics on `PREDICATE COLUMNS` is an experimental feature. It is not recommended that you use it in production environments.
 
     {{< copyable "sql" >}}
 
@@ -297,7 +297,7 @@ To improve the speed of analysis after full collection, incremental collection c
 
 You can perform incremental collection using the following syntax.
 
-+ To incrementally collect statistics for index columns in all `IndexNameLists` in `TableName`:
++ To incrementally collect statistics on index columns in all `IndexNameLists` in `TableName`:
 
     {{< copyable "sql" >}}
 
