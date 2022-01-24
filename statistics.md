@@ -197,7 +197,7 @@ The `SHOW COLUMN_STATS_USAGE` statement returns the following 6 columns:
 | `Table_name` | The table name |
 | `Partition_name` | The partition name |
 | `Column_name` | The column name |
-| `Last_used_at` | The last time when the column statistics were used by the query optimization |
+| `Last_used_at` | The last time when the column statistics were used in the query optimization |
 | `Last_analyzed_at` | The last time when the column statistics were collected |
 
 In the following example, after executing `ANALYZE TABLE t PREDICATE COLUMNS;`, TiDB collects statistics on columns `b`, `c`, and `d`, where column `b` is a `PREDICATE COLUMN` and columns `c` and `d` are index columns.
