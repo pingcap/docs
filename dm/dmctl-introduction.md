@@ -30,7 +30,7 @@ Enter the interactive mode to interact with DM-master:
 Welcome to dmctl
 Release Version: ${version}
 Git Commit Hash: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-Git Branch: release-x.0
+Git Branch: release-x.x
 UTC Build Time: yyyy-mm-dd hh:mm:ss
 Go Version: go version gox.xx linux/amd64
 
