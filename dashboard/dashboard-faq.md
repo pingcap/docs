@@ -83,13 +83,15 @@ To clear your browser cache, take the following steps:
 
 ### A `required component NgMonitoring is not started` error is shown
 
-When you deploy a TiDB cluster, NgMonitoring is deployed in the TiDB cluster automatically. If the **Continuous Profiling** page shows that NgMonitoring component is not started, perform the following steps to address the problem.
+NgMonitoring is an advanced monitoring component built in TiDB clusters of v5.4.0 and later versions. It supports such features as **Continuous Profiling** and **Top SQL**. In a TiDB cluster deployed using TiUP, NgMonitoring is deployed automatically. In a TiDB cluster deployed using TiDB Operator, you need to deploy NgMonitoring manually by referring to [Enable Continuous Profiling](https://docs.pingcap.com/tidb-in-kubernetes/dev/access-dashboard/#enable-continuous-profiling).
 
-#### Step 1. Check versions
+#### Clusters deployed using TiUP
+
+Step 1. Check versions
 
 You need to deploy NgMonitoring on TiUP 1.9.0 or later. Therefore, check the version of the TiUP cluster. If it is earlier than 1.9.0, upgrade it first.
 
-1. Check the TiUP cluster version:
+1. Check the TiUP cluster version. NgMonitoring is available only when TiUP is v1.9.0 or later.
 
     {{< copyable "shell-regular" >}}
 
@@ -97,7 +99,7 @@ You need to deploy NgMonitoring on TiUP 1.9.0 or later. Therefore, check the ver
     tiup cluster --version
     ```
 
-   The command output shows the TiUP version. For example:
+    The command output shows the TiUP version. For example:
 
     ```
     tiup version 1.9.0 tiup
@@ -113,7 +115,7 @@ You need to deploy NgMonitoring on TiUP 1.9.0 or later. Therefore, check the ver
     tiup update --all
     ```
 
-#### Step 2. Reload Prometheus
+Step 2. Reload Prometheus
 
 On the control machine, reload Prometheus by using TiUP:
 
@@ -123,7 +125,7 @@ On the control machine, reload Prometheus by using TiUP:
 tiup cluster reload ${cluster-name} --role prometheus
 ```
 
-#### Step 3. Configure TiDB Dashboard
+Step 3. Configure TiDB Dashboard
 
 1. On TiDB Dashboard, click **Advanced Debugging** > **Profiling Instances** > **Continuous Profiling**.
 
@@ -133,4 +135,6 @@ tiup cluster reload ${cluster-name} --role prometheus
 
 ![Enable the feature](/media/dashboard/dashboard-conprof-start.png)
 
-If NgMonitoring still fails to start after these steps, contact PingCAP technical support for help.
+#### Clusters deployed using TiDB Operator
+
+Deploy NgMonitoring by referring to [Enable Continuous Profiling](https://docs.pingcap.com/tidb-in-kubernetes/dev/access-dashboard/#enable-continuous-profiling).
