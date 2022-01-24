@@ -15,7 +15,7 @@ In v5.4, the key new features or improvements are as follows:
 - Support reading stale data using a session variable
 - Support persisting the configuration for collecting statistics
 - Optimize the impact of backup on the cluster
-- Support using Azure Blob storage as the target storage for backup
+- Support using Azure Blob storage as the backup storage
 - Continuously improve the stability and performance of TiFlash and the MPP engine
 - Add a switch in TiDB Lightning to determine whether to allow importing to an existing table with data
 - Optimize the Continuous Profiling feature (experimental)
@@ -187,13 +187,13 @@ In v5.4, the key new features or improvements are as follows:
 
 - **Reduce the impact of backup tasks on the cluster**
 
-    Backup & Restore (BR) introduces the auto-tune feature (enabled by default). This feature can reduce the impact of backup tasks on the cluster by monitoring the cluster resource usage and adjusting the number of threads used by the backup tasks. In some cases, if you increase the cluster resource usage for backup and enable the auto-tune feature, it is possible to limit the impact of backup tasks on the cluster to 10% or less.
+    Backup & Restore (BR) introduces the auto-tune feature (enabled by default). This feature can reduce the impact of backup tasks on the cluster by monitoring the cluster resource usage and adjusting the number of threads used by the backup tasks. In some cases, if you increase the cluster hardware resource for backup and enable the auto-tune feature, it can limit the impact of backup tasks on the cluster to 10% or less.
 
    [User document](/br/br-auto-tune.md)
 
 - **Support Azure Blob Storage as a target storage for backup**
 
-   Backup & Restore (BR) supports Azure Blob Storage as a remote target storage for backup tasks. If you deploy TiDB in Azure Cloud, you can back up the cluster data to the Azure Blob Storage service.
+   Backup & Restore (BR) supports Azure Blob Storage as a remote backup storage. If you deploy TiDB in Azure Cloud, now you can back up the cluster data to the Azure Blob Storage service.
 
     [User document](/br/backup-and-restore-azblob.md)
 
