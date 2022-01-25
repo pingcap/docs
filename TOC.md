@@ -67,7 +67,9 @@
       - [BR Tool Overview](/br/backup-and-restore-tool.md)
       - [Use BR Command-line for Backup and Restoration](/br/use-br-command-line-tool.md)
       - [BR Use Cases](/br/backup-and-restore-use-cases.md)
-      - [External Storages](/br/backup-and-restore-storages.md)
+      - External Storages
+        - [External Storages Overview](/br/backup-and-restore-storages.md)
+        - [Back up and Restore Data on Azure Blob Storage](/br/backup-and-restore-azblob.md)
       - BR Features
         - [Auto Tune](/br/br-auto-tune.md)
       - [BR FAQ](/br/backup-and-restore-faq.md)
@@ -89,7 +91,8 @@
   - [Identify Slow Queries](/identify-slow-queries.md)
   - [Analyze Slow Queries](/analyze-slow-queries.md)
   - [SQL Diagnostics](/information-schema/information-schema-sql-diagnostics.md)
-  - [Identify Expensive Queries](/identify-expensive-queries.md)
+  - [Identify Expensive Queries Using Top SQL](/dashboard/top-sql.md)
+  - [Identify Expensive Queries Using Logs](/identify-expensive-queries.md)
   - [Statement Summary Tables](/statement-summary-tables.md)
   - [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md)
   - [Troubleshoot Increased Read and Write Latency](/troubleshoot-cpu-issues.md)
@@ -154,6 +157,7 @@
     - Use Stale Read (Recommended)
       - [Usage Scenarios of Stale Read](/stale-read.md)
       - [Perform Stale Read Using `As OF TIMESTAMP`](/as-of-timestamp.md)
+      - [Perform Stale Read Using `tidb_read_staleness`](/tidb-read-staleness.md)
     - [Use the `tidb_snapshot` System Variable](/read-historical-data.md)
   - Best Practices
     - [Use TiDB](/best-practices/tidb-best-practices.md)
@@ -228,6 +232,7 @@
       - [CSV Support](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)
       - [Backends](/tidb-lightning/tidb-lightning-backends.md)
       - [Import Data in Parallel](/tidb-lightning/tidb-lightning-distributed-import.md)
+      - [Error Resolution](/tidb-lightning/tidb-lightning-error-resolution.md)
       - [Web Interface](/tidb-lightning/tidb-lightning-web-interface.md)
     - [Monitor](/tidb-lightning/monitor-tidb-lightning.md)
     - [FAQ](/tidb-lightning/tidb-lightning-faq.md)
@@ -548,7 +553,9 @@
     - [Views](/views.md)
     - [Partitioning](/partitioned-table.md)
     - [Temporary Tables](/temporary-tables.md)
-    - [Character Set and Collation](/character-set-and-collation.md)
+    - [Character Set and Collation]
+      - [Overview](/character-set-and-collation.md)
+      - [GBK](/character-set-gbk.md)
     - [Placement Rules in SQL](/placement-rules-in-sql.md)
     - System Tables
       - [`mysql`](/mysql-schema.md)
@@ -613,6 +620,7 @@
       - [Access](/dashboard/dashboard-access.md)
       - [Overview Page](/dashboard/dashboard-overview.md)
       - [Cluster Info Page](/dashboard/dashboard-cluster-info.md)
+      - [Top SQL](/dashboard/top-sql.md)
       - [Key Visualizer Page](/dashboard/dashboard-key-visualizer.md)
       - [Metrics Relation Graph](/dashboard/dashboard-metrics-relation.md)
       - SQL Statements Analysis
