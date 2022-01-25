@@ -5,7 +5,7 @@ summary: Learn how to read historical data using the `tidb_read_staleness` syste
 
 # Read Historical Data Using the `tidb_read_staleness` System Variable
 
-To support reading the historical versions data, in v5.4, TiDB introduces a new system variable `tidb_read_staleness`. This document describes how to read historical data through this system variable, including detailed operating procedures.
+To support reading the historical data, in v5.4, TiDB introduces a new system variable `tidb_read_staleness`. This document describes how to read historical data through this system variable, including detailed operating procedures.
 
 ## Feature description
 
@@ -115,8 +115,8 @@ This section describes how to use `tidb_read_staleness` with examples.
 
     > **Note:**
     >
-    > Use `@@` instead of `@` before `tidb_read_staleness`. `@@` means system variables, and `@` means user variables.
-    > You need to set the historical time range (the value of `tidb_read_staleness`) according to the total time that you spent in step 3 and step 4. Otherwise, the latest data will be displayed in the query results, not the historical data. Therefore, you need to adjust this time range according to the time you spent on operations. For example, in this example, since the set time range is 5 seconds, you need to complete step 3 and step 4 within 5 seconds.
+    >  - Use `@@` instead of `@` before `tidb_read_staleness`. `@@` means system variables, and `@` means user variables.
+    >  - You need to set the historical time range (the value of `tidb_read_staleness`) according to the total time that you spent in step 3 and step 4. Otherwise, the latest data will be displayed in the query results, not the historical data. Therefore, you need to adjust this time range according to the time you spent on operations. For example, in this example, since the set time range is 5 seconds, you need to complete step 3 and step 4 within 5 seconds.
 
     The data read here is the data before the update, that is, the historical data:
 
