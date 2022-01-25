@@ -35,7 +35,7 @@ Once Top SQL is enabled, you can log into TiDB Dashboard, and then click **Top S
 
 Usage tips：
 
-* You can select the target node and time range in the drop-down list at the top of the page, or you can select the time range in the chart.
+* You can select the target node and time range in the drop-down lists at the top of the page, or you can select the time range in the chart.
 * If the data in the chart is out of date, you can click **Refresh**, or select auto-refresh and specify the auto-refresh interval in the **Refresh** drop-down list.
 * The chart shows the top 5 types of queries that contribute the most to the load of the selected node in the selected time range.
 * You can select a query type in the list to view query details, including the execution plan for that query, and the Call/sec, Scan Rows/sec, Scan Indexes/sec, and Latency/call for each execution plan on this node.
