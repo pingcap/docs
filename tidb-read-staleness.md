@@ -18,7 +18,7 @@ After enabling `tidb_read_staleness`, you still can perform the following operat
 
 After reading the historical data, you can read the latest data in the following two ways:
 
-- End the current session.
+- Start a new session.
 - Set the value of the `tidb_read_staleness` variable to `""` using the `SET` statement.
 
 ## Usage examples
