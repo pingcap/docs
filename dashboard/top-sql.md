@@ -21,7 +21,7 @@ For a specified TiDB or TiKV node, Top SQL provides the following features:
 The Top SQL feature is disabled by default. You can enable the feature for the entire cluster using either of the following methods:
 
 - Method 1: Log in to TiDB Dashboard, click **Top SQL** in the left pane, click the gear button in the upper-right corner of the page, and then enable the Top SQL feature.
-- Method 2: Set the value of the TiDB system variable [`tidb_enable_top_sql`](/system-variables.md#tidb_enable_top_sql-introduced-from-v540-version) to `ON`.
+- Method 2: Set the value of the TiDB system variable [`tidb_enable_top_sql`](/system-variables.md#tidb_enable_top_sql-new-in-v540) to `ON`.
 
 > **Note:**
 >
