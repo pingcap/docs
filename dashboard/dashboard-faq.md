@@ -85,11 +85,11 @@ To clear your browser cache, take the following steps:
 
 NgMonitoring is an advanced monitoring component built in TiDB clusters of v5.4.0 and later versions. It supports such features as **Continuous Profiling** and **Top SQL**. In a TiDB cluster deployed using TiUP, NgMonitoring is deployed automatically. In a TiDB cluster deployed using TiDB Operator, you need to deploy NgMonitoring manually by referring to [Enable Continuous Profiling](https://docs.pingcap.com/tidb-in-kubernetes/dev/access-dashboard/#enable-continuous-profiling).
 
+If the **Continuous Profiling** page shows `required component NgMonitoring is not started`, address the problem based on the deployment method of the TiDB cluster.
+
 #### Clusters deployed using TiUP
 
 Step 1. Check versions
-
-You need to deploy NgMonitoring on TiUP 1.9.0 or later. Therefore, check the version of the TiUP cluster. If it is earlier than 1.9.0, upgrade it first.
 
 1. Check the TiUP cluster version. NgMonitoring is available only when TiUP is v1.9.0 or later.
 
@@ -107,7 +107,7 @@ You need to deploy NgMonitoring on TiUP 1.9.0 or later. Therefore, check the ver
     Git Ref: v1.9.0
     ```
 
-2. If the TiUP cluster version is earlier than 1.9.0, upgrade TiUP and TiUP cluster to the latest version:
+2. If the TiUP cluster version is earlier than v1.9.0, upgrade TiUP and TiUP cluster to the latest version:
 
     {{< copyable "shell-regular" >}}
 
@@ -125,15 +125,7 @@ On the control machine, reload Prometheus by using TiUP:
 tiup cluster reload ${cluster-name} --role prometheus
 ```
 
-Step 3. Configure TiDB Dashboard
-
-1. On TiDB Dashboard, click **Advanced Debugging** > **Profiling Instances** > **Continuous Profiling**.
-
-2. In the displayed window, click **Open Settings**. In the **Settings** area on the right, switch **Enable Feature** on, and modify the default value of **Retention Duration** if necessary.
-
-3. Click **Save** to enable this feature.
-
-![Enable the feature](/media/dashboard/dashboard-conprof-start.png)
+After performing the preceding steps, enable Continuous Profiling on TiDB Dashboard. If NgMonitoring still fails to be started, contact PingCAP technical support for help.
 
 #### Clusters deployed using TiDB Operator
 
