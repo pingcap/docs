@@ -1,6 +1,6 @@
 ---
 title: DM 5.4.0 Benchmark Report
-summary: Learn about the performance of 5.3.0.
+summary: Learn about the performance of 5.4.0.
 ---
 
 # DM 5.4.0 Benchmark Report
