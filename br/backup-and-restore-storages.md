@@ -121,10 +121,10 @@ To ensure that TiKV and BR use the same storage account, BR determines the value
 
 1. If both `account-name` **and** `account-key` are specified, the key specified by this parameter is used.
 2. If `account-key` is not specified, then BR tries to read the related credentials from environment variables on the node of BR.
-    - The migration tool reads `$AZURE_CLIENT_ID`, `$AZURE_TENANT_ID`, and `$AZURE_CLIENT_SECRET` first. At the same time, the tool allows TiKV to read the above three environment variables from the respective nodes and access using Azure AD (Azure Active Directory).
+    - BR reads `$AZURE_CLIENT_ID`, `$AZURE_TENANT_ID`, and `$AZURE_CLIENT_SECRET` first. At the same time, BR allows TiKV to read the above three environment variables from the respective nodes and access using Azure AD (Azure Active Directory).
         - `$AZURE_CLIENT_ID`, `$AZURE_TENANT_ID`, and `$AZURE_CLIENT_SECRET` respectively refer to the application ID `client_id`, the tenant ID `tenant_id`, and the client password `client_secret` of Azure application.
-        - To learn how to check whether the operating system have configured `$AZURE_CLIENT_ID`, `$AZURE_TENANT_ID`, and `$AZURE_CLIENT_SECRET`, or you need to configure these variables as parameters, refer to [Configure environment variables as parameters](/br/backup-and-restore-azblob.md#configure-environment-variables-as-parameters).
-3. If the above three environment variables are not configured in the node of the tool, then the tool tries to read `$AZURE_STORAGE_KEY` and access using a key.
+        - To learn how to check whether the operating system have configured `$AZURE_CLIENT_ID`, `$AZURE_TENANT_ID`, and `$AZURE_CLIENT_SECRET`, or if you need to configure these variables as parameters, refer to [Configure environment variables as parameters](/br/backup-and-restore-azblob.md#configure-environment-variables-as-parameters).
+3. If the above three environment variables are not configured in the BR node, BR tries to read `$AZURE_STORAGE_KEY` using an access key.
 
 > **Note:**
 >
@@ -173,7 +173,7 @@ If you have specified URL parameters and command-line parameters at the same tim
 
 ## BR sending credentials to TiKV
 
-By default, when using S3 and GCS destinations, BR will send the credentials to every TiKV nodes to reduce setup complexity.
+By default, when using S3, GCS, or Azblob destinations, BR will send the credentials to every TiKV node to reduce setup complexity.
 
 However, this is unsuitable on cloud environment, where every node has their own role and permission. In such cases, you need to disable credentials sending with `--send-credentials-to-tikv=false` (or the short form `-c=0`):
 

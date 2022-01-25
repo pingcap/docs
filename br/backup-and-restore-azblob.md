@@ -15,7 +15,7 @@ Azure virtual machines can quickly store large-scale data on Azure Blob Storage.
 
 ## Usage
 
-With BR, you can back up and restore data on Azure Blob Storage in the following two methods:
+With BR, you can back up and restore data on Azure Blob Storage by the following two methods:
 
 - Back up and restore data using Azure AD
 - Back up and restore data using an access key
@@ -31,7 +31,7 @@ The following is an example of backup and restore operations on Azure Blob Stora
 
 In the operating environment of BR and TiKV, the environment variables `$AZURE_CLIENT_ID`, `$AZURE_TENANT_ID`, and `$AZURE_CLIENT_SECRET` must be configured. When these variables are configured, BR can use Azure AD to access Azure Blob Storage without configuring `account-key`. This method is safer and therefore recommended. `$AZURE_CLIENT_ID`, `$AZURE_TENANT_ID`, and `$AZURE_CLIENT_SECRET` refer to the application ID `client_id`, the tenant ID `tenant_id`, and the client password `client_secret` of Azure application.
 
-To learn how to check `$AZURE_CLIENT_ID`, `$AZURE_TENANT_ID`, and `$AZURE_CLIENT_SECRET` are in your operating environment, or you want to configure these environment variables as parameters, refer to [Configure environment variables as parameters](#configure-environment-variables-as-parameters).
+To learn how to check `$AZURE_CLIENT_ID`, `$AZURE_TENANT_ID`, and `$AZURE_CLIENT_SECRET` are in your operating environment, or if you want to configure these environment variables as parameters, refer to [Configure environment variables as parameters](#configure-environment-variables-as-parameters).
 
 #### Back up
 
