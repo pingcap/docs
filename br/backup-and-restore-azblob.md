@@ -126,7 +126,7 @@ When backing up and restoring data using Azure AD, the environment variables `$A
 
     > **Note:**
     >
-    > You need to restart TiKV in Step 3. If your TiKV cannot be restarted, you can back up and restore data using the [Method 2](#method2back-up-and-restore-using-an-access-key-easy).
+    > You need to restart TiKV in Step 3. If your TiKV cannot be restarted, you can back up and restore data using the [Method 2](#method-2-back-up-and-restore-using-an-access-key-easy).
 
     1. Suppose that the TiKV port on this node is 24000, that is, the name of the "systemd" service is "tikv-24000":
 
