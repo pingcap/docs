@@ -725,7 +725,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 - Scope: GLOBAL
 - Default value: `OFF`
-- This variable controls whether to enable TiDB to collect `PREDICATE COLUMNS`. After enabling the collection, if you disable it, the information of previously collected `PREDICATE COLUMNS` is cleared. For details, see [Collect statistics on some columns](/statistics.md#).
+- This variable controls whether to enable TiDB to collect `PREDICATE COLUMNS`. After enabling the collection, if you disable it, the information of previously collected `PREDICATE COLUMNS` is cleared. For details, see [Collect statistics on some columns](/statistics.md#collect-statistics-on-some-columns).
 
 ### tidb_enable_enhanced_security
 
