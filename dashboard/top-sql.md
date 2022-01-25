@@ -9,7 +9,7 @@ summary: This document describes how to use Top SQL to locate SQL queries that c
 >
 > Currently, Top SQL is an experimental feature. It is not recommended that you use it for production environments.
 
-This document describes how to use Top SQL to locate SQL queries that contribute to a high load of a TiDB or TiKV node in a specified time range. For example, you can use Top SQL to locate an analytic query that contributes to 99% of the load for a low-load database.
+This document describes how to use Top SQL to locate SQL queries that contribute to a high load of a TiDB or TiKV node in a specified time range. For example, you can use Top SQL to locate an analytic query that consumes 99% of the load for a low-load database.
 
 For a specified TiDB or TiKV node, Top SQL provides the following features:
 
@@ -25,7 +25,7 @@ The Top SQL feature is disabled by default. You can enable the feature for the e
 
 > **Note:**
 >
-> Enabling Top SQL has a slight impact on cluster performance.
+> Enabling Top SQL has a slight impact on the performance of your cluster.
 
 ## Use Top SQL
 
@@ -38,6 +38,6 @@ Usage tips：
 * You can select the target node and time range in the drop-down list at the top of the page, or you can select the time range in the chart.
 * If the data in the chart is out of date, you can click **Refresh**, or select auto-refresh and specify the auto-refresh interval in the **Refresh** drop-down list.
 * The chart shows the top 5 types of queries that contribute the most to the load of the selected node in the selected time range.
-* You can click a query type in the list to view query details, including the execution plan for that query, and the Call/sec, Scan Rows/sec, Scan Indexes/sec, and Latency/call for each execution plan on this node.
+* You can select a query type in the list to view query details, including the execution plan for that query, and the Call/sec, Scan Rows/sec, Scan Indexes/sec, and Latency/call for each execution plan on this node.
 
 ![Top SQL Details](/media/dashboard/top-sql-details.png)
