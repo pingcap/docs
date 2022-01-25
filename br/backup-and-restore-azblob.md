@@ -17,7 +17,7 @@ Azure virtual machines can quickly store large-scale data on Azure Blob Storage.
 
 With BR, you can back up and restore data on Azure Blob Storage by the following two methods:
 
-- Back up and restore data using Azure AD
+- Back up and restore data using Azure AD (Azure Active Directory)
 - Back up and restore data using an access key
 
 In common cases, to avoid exposing the key information (such as `account-key`) in command lines, it is recommended to use Azure AD.
@@ -122,13 +122,13 @@ During the backup and restore process, you need to use `account-name`, `account-
 
 When backing up and restoring data using Azure AD, the environment variables `$AZURE_CLIENT_ID`, `$AZURE_TENANT_ID`, and `$AZURE_CLIENT_SECRET` must be configured in the operating environment of BR and TiKV.
 
-- When you start a cluster using TiUP, TiKV uses the systemd service. The following example provides how to configure the above three environment variables as parameters for TiKV:
+- When you start a cluster using TiUP, TiKV uses the "systemd" service. The following example provides how to configure the above three environment variables as parameters for TiKV:
 
     > **Note:**
     >
     > You need to restart TiKV in Step 3. If your TiKV cannot be restarted, you can back up and restore data using the [Method 2](#method-2-back-up-and-restore-using-an-access-key-easy).
 
-    1. Suppose that the TiKV port on this node is 24000, that is, the name of the "systemd" service is "tikv-24000":
+    1. Suppose that the TiKV port on this node is `24000`, that is, the name of the "systemd" service is "tikv-24000":
 
         ```
         systemctl edit tikv-24000
