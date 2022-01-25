@@ -105,6 +105,12 @@ In v5.4, the key new features or improvements are as follows:
 
     [User document](/tispark-overview.md#security)
 
+- **TiUP support for generating an initial password for the root user**
+
+    An `--init` parameter is introduced to the command for starting a cluster. With this parameter, in a TiDB cluster deployed using TiUP, an initial password is generated for the database root user. This avoids security risks in using a root user with an empty password and ensures the security of databases.
+
+    [User document](/production-deployment-using-tiup.md##step-7-start-the-tidb-cluster)
+
 ### Performance
 
 - **Continue improving the stability and performance of  the columnar storage engine TiFlash and the computing engine MPP**
