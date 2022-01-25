@@ -394,7 +394,7 @@ This statement returns the state of `ANALYZE`. You can use `ShowLikeOrWhere` to 
 
 Currently, the `SHOW ANALYZE STATUS` statement returns the following 7 columns:
 
-| Syntax Element | Description            |
+| Column name | Description            |
 | :-------- | :------------- |
 | table_schema  |  The database name    |
 | table_name | The table name |
@@ -422,7 +422,7 @@ SHOW STATS_META [ShowLikeOrWhere]
 
 Currently, the `SHOW STATS_META` statement returns the following 6 columns:
 
-| Syntax Element | Description  |
+| Column name | Description  |
 | :-------- | :------------- |
 | `db_name`  |  The database name    |
 | `table_name` | The table name |
@@ -449,7 +449,7 @@ and the synopsis of the `ShowLikeOrWhereOpt` part is:
 
 Currently, the `SHOW STATS_HEALTHY` statement returns the following 4 columns:
 
-| Syntax Element | Description  |
+| Column name | Description  |
 | :-------- | :------------- |
 | `db_name`  | The database name    |
 | `table_name` | The table name |
@@ -472,7 +472,7 @@ This statement returns the number of different values and the number of `NULL` i
 
 Currently, the `SHOW STATS_HISTOGRAMS` statement returns the following 10 columns:
 
-| Syntax Element | Description    |
+| Column name | Description    |
 | :-------- | :------------- |
 | `db_name`  |  The database name    |
 | `table_name` | The table name |
@@ -505,7 +505,7 @@ This statement returns information about all the buckets. You can use `ShowLikeO
 
 Currently, the `SHOW STATS_BUCKETS` statement returns the following 11 columns:
 
-| Syntax Element | Description   |
+| Column name | Description   |
 | :-------- | :------------- |
 | `db_name`  |  The database name    |
 | `table_name` | The table name |
@@ -533,7 +533,7 @@ SHOW STATS_TOPN [ShowLikeOrWhere];
 
 Currently, the `SHOW STATS_TOPN` statement returns the following 7 columns:
 
-| Syntax Element | Description |
+| Column name | Description |
 | ---- | ----|
 | `db_name` | The database name |
 | `table_name` | The table name |
