@@ -355,13 +355,13 @@ Expected output includes the instance ID, role, host, listening port, and status
 
 ## Step 7: Start a TiDB cluster
 
-Safe start is newly introduced to TiUP cluster v1.9.0 and later versions. Logging into a database in this mode improves the security of the database. It is recommended that you start a TiDB cluster in this mode.
+Since TiUP cluster v1.9.0, safe start is introduced as a new start method. Logging into a database using this method improves the security of the database. It is recommended that you start a TiDB cluster using this method.
 
 After safe start, TiUP automatically generates a password for the TiDB root user and returns the password in the command-line interface.
 
 > **Note:**
 >
-> - After starting a TiDB cluster in safe mode, you cannot log in to a database using a root user without a password. Therefore, you need to record the password returned in the command output for future logins.
+> - After safe start of a TiDB cluster, you cannot log in to TiDB using a root user without a password. Therefore, you need to record the password returned in the command output for future logins.
 >
 > - The password is generated only once. If you do not record it or you forgot it, refer to [Forget the `root` password](/user-account-management.md#forget-the-root-password) to change the password.
 
@@ -385,7 +385,7 @@ Copy and record it to somewhere safe, it is only displayed once, and will not be
 The generated password can NOT be got again in future.
 ```
 
-Method 2: Standard start:
+Method 2: Standard start
 
 {{< copyable "shell-regular" >}}
 
@@ -393,7 +393,7 @@ Method 2: Standard start:
 tiup cluster start tidb-test
 ```
 
-If the output log includes ```Started cluster `tidb-test` successfully```, the start is successful. After starting a TiDB cluster in this mode, you can log in to a database using a root user without a password.
+If the output log includes ```Started cluster `tidb-test` successfully```, the start is successful. After standard start, you can log in to a database using a root user without a password.
 
 ## Step 8: Verify the running status of the TiDB cluster
 
