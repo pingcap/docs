@@ -42,7 +42,7 @@ In v5.4, the key new features or improvements are as follows:
 | [`tidb_stats_load_pseudo_timeout`](/system-variables.md#tidb_stats_load_pseudo_timeout-new-in-v540) | Newly added | Controls when synchronously loading statistics reaches timeout, whether SQL fails (`OFF`) or falls back to using pseudo statistics (`ON`). The default value is `ON`. |
 |  [`tidb_backoff_lock_fast`](/system-variables.md#tidb_backoff_lock_fast) | Modified | The default value is changed from `100` to `10`. |
 | [`tidb_enable_index_merge`](/system-variables.md#tidb_enable_index_merge-new-in-v40) | Modified | The default value is changed from `OFF` to `ON`. <br/><ul><li>If you upgrade a TiDB cluster from versions earlier than v4.0.0 to v5.4.0 or later, this variable is `OFF` by default. </li><li>If you upgrade a TiDB cluster from v4.0.0 or later to v5.4.0 or later, this variable remains the same as before the upgrade. </li><li>For the newly created TiDB clusters of v5.4.0 and later, this variable is `ON` by default.</li></ul> |
-| [`tidb_store_limit`](/system-variables.md#tidb_store_limit-new-i-v304-and-v40) | Modified | Before v5.4.0, this variable can be configured at instance level and globally. Starting from v5.4.0, this variable only supports global configuration. |
+| [`tidb_store_limit`](/system-variables.md#tidb_store_limit-new-in-v304-and-v40) | Modified | Before v5.4.0, this variable can be configured at instance level and globally. Starting from v5.4.0, this variable only supports global configuration. |
 
 ### Configuration file parameters
 
@@ -175,11 +175,11 @@ In v5.4, the key new features or improvements are as follows:
 
     In most cases, when executing SQL statements, the optimizer only uses statistics of some columns (such as columns in the `WHERE`, `JOIN`, `ORDER BY`, and `GROUP BY` statements). These used columns are called `PREDICATE COLUMNS`.
 
-    Since v5.4.0, you can set the value of the [`tidb_enable_column_tracking`](/system-variables.md#tidb_enable_column_tracking-introduced-from-v540-version) system variable to `ON` to enable TiDB to collect `PREDICATE COLUMNS`.
+    Since v5.4.0, you can set the value of the [`tidb_enable_column_tracking`](/system-variables.md#tidb_enable_column_tracking-new-in-v540) system variable to `ON` to enable TiDB to collect `PREDICATE COLUMNS`.
 
     After the setting, TiDB writes the `PREDICATE COLUMNS` information to the `mysql.column_stats_usage` system table every 100 * [`stats-lease`](/tidb-configuration-file.md#stats-lease). When the query pattern of your business is stable, you can use the `ANALYZE TABLE TableName PREDICATE COLUMNS` syntax to collect statistics on the `PREDICATE COLUMNS` columns only, which can greatly reduce the overhead of collecting statistics.
 
-    [User document](/statistics.md#collect-statistics-for-some-columns)
+    [User document](/statistics.md#collect-statistics-on-some-columns)
 
 - **Support synchronously loading statistics (experimental)**
 
