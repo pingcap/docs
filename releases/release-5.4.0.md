@@ -107,9 +107,9 @@ In v5.4, the key new features or improvements are as follows:
 
 - **TiUP supports generating an initial password for the root user**
 
-    An `--init` parameter is introduced to the command for starting a cluster. With this parameter, in a TiDB cluster deployed using TiUP, TiUP generates an initial password for the database root user. This avoids security risks in using a root user with an empty password and ensures the security of databases.
+    An `--init` parameter is introduced to the command for starting a cluster. With this parameter, in a TiDB cluster deployed using TiUP, TiUP generates an initial strong password for the database root user. This avoids security risks in using a root user with an empty password and ensures the security of databases.
 
-    [User document](/production-deployment-using-tiup.md##step-7-start-the-tidb-cluster)
+    [User document](/production-deployment-using-tiup.md#step-7-start-the-tidb-cluster)
 
 ### Performance
 
