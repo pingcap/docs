@@ -355,11 +355,13 @@ Expected output includes the instance ID, role, host, listening port, and status
 
 ## Step 7: Start a TiDB cluster
 
-Safe start is newly introduced to TiUP cluster v1.9.0 and later versions. It is recommended that you start a TiDB cluster in this mode. After safe start, TiUP automatically generates a password for the TiDB root user and returns the password in the command-line interface.
+Safe start is newly introduced to TiUP cluster v1.9.0 and later versions. Logging into a database in this mode improves the security of the database. It is recommended that you start a TiDB cluster in this mode.
+
+After safe start, TiUP automatically generates a password for the TiDB root user and returns the password in the command-line interface.
 
 > **Note:**
 >
-> - After starting a TiDB cluster in safe mode, you cannot log in to the database using a root user without a password. Therefore, you need to record the password returned in the command output for future logins.
+> - After starting a TiDB cluster in safe mode, you cannot log in to a database using a root user without a password. Therefore, you need to record the password returned in the command output for future logins.
 >
 > - The password is generated only once. If you do not record it or you forgot it, refer to [Forget the `root` password](/user-account-management.md#forget-the-root-password) to change the password.
 
@@ -391,7 +393,7 @@ Method 2: Standard start:
 tiup cluster start tidb-test
 ```
 
-If the output log includes ```Started cluster `tidb-test` successfully```, the start is successful. After starting a TiDB cluster in this mode, you can log in to the database using a root user without a password.
+If the output log includes ```Started cluster `tidb-test` successfully```, the start is successful. After starting a TiDB cluster in this mode, you can log in to a database using a root user without a password.
 
 ## Step 8: Verify the running status of the TiDB cluster
 
