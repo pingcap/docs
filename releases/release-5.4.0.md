@@ -231,7 +231,7 @@ In v5.4, the key new features or improvements are as follows:
 
     In Local-backend mode, TiDB Lightning outputs duplicated data before the data import is completed, and then removes that duplicated data from the database. You can resolve the duplicated data after the import is completed and select suitable data to insert according to application rules. It is recommended to clean upstream data sources based on duplicated data to avoid data inconsistency caused by duplicated data encountered in the subsequent incremental data migration phase.
 
-    [User document](tidb-lightning/tidb-lightning-error-resolution.md)
+    [User document](/tidb-lightning/tidb-lightning-error-resolution.md)
 
 - **Optimize the usage of relay log in TiDB Data Migration (DM)**
 
