@@ -197,6 +197,6 @@ Compared with v5.3.0, the Update Index performance of v5.4.0 is improved by 4.85
 |600|4514.28|4684.64|193.38|186.54|3.77|
 |900|4842.49|4988.49|282.25|277.21|3.01|
 
-Compared with v5.3.0, the Read Write performance of v5.4.0 is reduced by 3.30%.
+Compared with v5.3.0, the Read Write performance of v5.4.0 is improved by 3.30%.
 
 ![Read Write](/media/sysbench_v530vsv540_read_write.png)
