@@ -91,7 +91,8 @@
   - [Identify Slow Queries](/identify-slow-queries.md)
   - [Analyze Slow Queries](/analyze-slow-queries.md)
   - [SQL Diagnostics](/information-schema/information-schema-sql-diagnostics.md)
-  - [Identify Expensive Queries](/identify-expensive-queries.md)
+  - [Identify Expensive Queries Using Top SQL](/dashboard/top-sql.md)
+  - [Identify Expensive Queries Using Logs](/identify-expensive-queries.md)
   - [Statement Summary Tables](/statement-summary-tables.md)
   - [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md)
   - [Troubleshoot Increased Read and Write Latency](/troubleshoot-cpu-issues.md)
@@ -156,6 +157,7 @@
     - Use Stale Read (Recommended)
       - [Usage Scenarios of Stale Read](/stale-read.md)
       - [Perform Stale Read Using `As OF TIMESTAMP`](/as-of-timestamp.md)
+      - [Perform Stale Read Using `tidb_read_staleness`](/tidb-read-staleness.md)
     - [Use the `tidb_snapshot` System Variable](/read-historical-data.md)
   - Best Practices
     - [Use TiDB](/best-practices/tidb-best-practices.md)
@@ -618,6 +620,7 @@
       - [Access](/dashboard/dashboard-access.md)
       - [Overview Page](/dashboard/dashboard-overview.md)
       - [Cluster Info Page](/dashboard/dashboard-cluster-info.md)
+      - [Top SQL](/dashboard/top-sql.md)
       - [Key Visualizer Page](/dashboard/dashboard-key-visualizer.md)
       - [Metrics Relation Graph](/dashboard/dashboard-metrics-relation.md)
       - SQL Statements Analysis
