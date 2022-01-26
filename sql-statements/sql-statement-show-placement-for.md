@@ -17,7 +17,7 @@ The `Scheduling_State` indicates the current progress the Placement Driver (PD) 
 
 * `PENDING`: The PD has not yet started scheduling the placement. This might indicate that that the placement rules are semantically correct, but can not currently be satisfied by the cluster. For example, if `FOLLOWERS=4` but there are only 3 TiKV stores which are candidates for followers.
 * `INPROGRESS`: The PD is currently scheduling the placement.
-* `COMPLETE`: The PD has successfully scheduled the placement.
+* `SCHEDULED`: The PD has successfully scheduled the placement.
 
 ## Synopsis
 
