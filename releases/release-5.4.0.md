@@ -37,7 +37,7 @@ In v5.4, the key new features or improvements are as follows:
 | [`tidb_enable_top_sql`](/system-variables.md#tidb_enable_top_sql-new-in-v540) | Newly added | Controls whether to enable the Top SQL feature. The default value is `OFF`. |
 | [`tidb_persist_analyze_options`](/system-variables.md#tidb_persist_analyze_options-new-in-v540) | Newly added | Controls whether to enable the [ANALYZE configuration persistence](/statistics.md#persist-analyze-configurations) feature. The default value is `OFF`. |
 | [`tidb_read_staleness`](/system-variables.md#tidb_read_staleness-new-in-v540) | Newly added | Controls the range of historical data that can be read in the current session. The default value is `0`.|
-| [`tidb_regard_null_as_point `](/system-variables.md#tidb_regard_null_as_point-new-in-v540) | Newly added | Controls whether the optimizer can use a query condition including null equivalence as a prefix condition for index access. |
+| [`tidb_regard_null_as_point`](/system-variables.md#tidb_regard_null_as_point-new-in-v540) | Newly added | Controls whether the optimizer can use a query condition including null equivalence as a prefix condition for index access. |
 | [`tidb_stats_load_sync_wait`](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540) | Newly added | Controls whether to enable the synchronously loading statistics feature. The default value `0` means that the feature is disabled and that the statistics is asynchronously loaded. When the feature is enabled, this variable controls the maximum time that SQL optimization can wait for synchronously loading statistics before timeout. |
 | [`tidb_stats_load_pseudo_timeout`](/system-variables.md#tidb_stats_load_pseudo_timeout-new-in-v540) | Newly added | Controls when synchronously loading statistics reaches timeout, whether SQL fails (`OFF`) or falls back to using pseudo statistics (`ON`). The default value is `ON`. |
 |  [`tidb_backoff_lock_fast`](/system-variables.md#tidb_backoff_lock_fast) | Modified | The default value is changed from `100` to `10`. |
@@ -329,7 +329,7 @@ In v5.4, the key new features or improvements are as follows:
 
     + Backup & Restore (BR)
 
-       - Add a validity check for the key when BR performs encrypted backup [#29794](https://github.com/pingcap/tidb/issues/29794)
+        - Add a validity check for the key when BR performs encrypted backup [#29794](https://github.com/pingcap/tidb/issues/29794)
 
     + TiCDC
 
