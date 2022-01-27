@@ -39,7 +39,7 @@ TiDB splits data into Regions, each representing a range of data with a size lim
 
 ![TiDB Data Overview](/media/best-practices/tidb-data-overview.png)
 
-In theory, by the virtue of its architecture, TiDB can not only linearly scale its read and write capacities but also make full use of the distributed resources as long as there is no write hotspot on applications. From this point of view, TiDB is especially suitable for the high-concurrent and write-intensive scenario.
+In theory, by the virtue of its architecture, TiDB can not only linearly scale its read and write capacities but also make full use of the distributed resources as long as there is no write hotspot in the application. From this point of view, TiDB is especially suitable for the high-concurrent and write-intensive scenario.
 
 However, the actual situation often differs from the theoretical assumption.
 
