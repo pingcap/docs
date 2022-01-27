@@ -733,6 +733,16 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Default value: `ON`
 - This variable controls whether to record the execution information of each operator in the slow query log.
 
+### tidb_enable_column_tracking <span class="version-mark">New in v5.4.0</span>
+
+> **Warning:**
+>
+> Currently, collecting statistics on `PREDICATE COLUMNS` is an experimental feature. It is not recommended that you use it in production environments.
+
+- Scope: GLOBAL
+- Default value: `OFF`
+- This variable controls whether to enable TiDB to collect `PREDICATE COLUMNS`. After enabling the collection, if you disable it, the information of previously collected `PREDICATE COLUMNS` is cleared. For details, see [Collect statistics on some columns](/statistics.md#collect-statistics-on-some-columns).
+
 ### tidb_enable_enhanced_security
 
 - Scope: NONE
@@ -758,8 +768,16 @@ Constraint checking is always performed in place for pessimistic transactions (d
 ### tidb_enable_index_merge <span class="version-mark">New in v4.0</span>
 
 - Scope: SESSION | GLOBAL
-- Default value: `OFF`
+- Default value: `ON`
 - This variable is used to control whether to enable the index merge feature.
+
+> **Note:**
+>
+> - After upgrading a TiDB cluster from versions earlier than v4.0.0 to v5.4.0 or later, this variable is disabled by default to prevent performance regression due to changes of execution plans.
+>
+> - After upgrading a TiDB cluster from v4.0.0 or later to v5.4.0 or later, this variable remains the setting before the upgrade.
+>
+> - Since v5.4.0, for a newly deployed TiDB cluster, this variable is enabled by default.
 
 ### tidb_enable_list_partition <span class="version-mark">New in v5.0</span>
 
@@ -1393,6 +1411,12 @@ explain select * from t where age=5;
 - Default value: `static`
 - Specifies whether to enable `dynamic` mode for partitioned tables. For details about the dynamic pruning mode, see [Dynamic Pruning Mode for Partitioned Tables](/partitioned-table.md#dynamic-pruning-mode).
 
+### tidb_persist_analyze_options <span class="version-mark">New in v5.4.0</span>
+
+- Scope: GLOBAL
+- Default value: `ON`
+- This variable controls whether to enable the [ANALYZE configuration persistence](/statistics.md#persist-analyze-configurations) feature.
+
 ### tidb_pprof_sql_cpu <span class="version-mark">New in v4.0</span>
 
 - Scope: INSTANCE
@@ -1427,6 +1451,12 @@ Usage example:
 SET tidb_query_log_max_len = 20
 ```
 
+### `tidb_read_staleness` <span class="version-mark">New in v5.4.0</span>
+
+- Scope: SESSION
+- Default value: `0`
+- This variable is used to set the time range of historical data that TiDB can read in the current session. After setting the value, TiDB selects a timestamp as new as possible from the range allowed by this variable, and all subsequent read operations are performed against this timestamp. For example, if the value of this variable is set to `-5`, on the condition that TiKV has the corresponding historical version's data, TiDB selects a timestamp as new as possible within a 5-second time range.
+
 ### tidb_record_plan_in_slow_log
 
 - Scope: INSTANCE
@@ -1439,6 +1469,13 @@ SET tidb_query_log_max_len = 20
 - Default value: `OFF`
 - This variable controls whether to hide user information in the SQL statement being recorded into the TiDB log and slow log.
 - When you set the variable to `1`, user information is hidden. For example, if the executed SQL statement is `insert into t values (1,2)`, the statement is recorded as `insert into t values (?,?)` in the log.
+
+### tidb_regard_null_as_point <span class="version-mark">New in v5.4.0</span>
+
+- Scope: SESSION | GLOBAL
+- Default value: `ON`
+- This variable controls whether the optimizer can use a query condition including null equivalence as a prefix condition for index access.
+- This variable is enabled by default. When it is enabled, the optimizer can reduce the volume of index data to be accessed, which accelerates query execution. For example, if a query involves multiple-column indexes `index(a, b)` and the query condition contains `a<=>null and b=1`, the optimizer can use both `a<=>null` and `b=1` in the query condition for index access. If the variable is disabled, because `a<=>null and b=1` includes the null equivalence condition, the optimizer does not use `b=1` for index access.
 
 ### tidb_replica_read <span class="version-mark">New in v4.0</span>
 
@@ -1529,6 +1566,28 @@ SET tidb_slow_log_threshold = 200;
 - Default value: ""
 - This variable is used to set the time point at which the data is read by the session. For example, when you set the variable to "2017-11-11 20:20:20" or a TSO number like "400036290571534337", the current session reads the data of this moment.
 
+### tidb_stats_load_sync_wait <span class="version-mark">New in v5.4.0</span>
+
+> **WARNING:**
+>
+> Currently, synchronously loading statistics is an experimental feature. It is not recommended that you use it in production environments.
+
+- Scope: SESSION | GLOBAL
+- Default value: `0`
+- Unit: milliseconds
+- Range: `[0, 4294967295]`
+- This variable controls whether to enable the synchronously loading statistics feature. The default value `0` means that the feature is disabled. To enable the feature, you can set this variable to a timeout (in milliseconds) that SQL optimization can wait for at most to synchronously load complete column statistics. For details, see [Load statistics](/statistics.md#load-statistics).
+
+### `tidb_stats_load_pseudo_timeout` <span class="version-mark">New in v5.4.0</span>
+
+> **WARNING:**
+>
+> Currently, synchronously loading statistics is an experimental feature. It is not recommended that you use it in production environments.
+
+- Scope: GLOBAL
+- Default value: `OFF`
+- This variable controls how TiDB behaves when the waiting time of SQL optimization reaches the timeout to synchronously load complete column statistics. The default value `OFF` means that SQL execution fails after the timeout. If you set this variable to `ON`, the SQL optimization gets back to using pseudo statistics after the timeout.
+
 ### tidb_stmt_summary_history_size <span class="version-mark">New in v4.0</span>
 
 - Scope: SESSION | GLOBAL
@@ -1563,6 +1622,16 @@ SET tidb_slow_log_threshold = 200;
 - Range: `[1, 2147483647]`
 - Unit: Seconds
 - This variable is used to set the refresh time of [statement summary tables](/statement-summary-tables.md).
+
+### `tidb_enable_top_sql` <span class="version-mark">New in v5.4.0</span>
+
+- Scope: GLOBAL
+- Default value: `OFF`
+- This variable is used to control whether to enable the [Top SQL](/dashboard/top-sql.md) feature.
+
+> **Warning:**
+>
+> Currently, Top SQL is an experimental feature. It is not recommended that you use it for production environments.
 
 ### tidb_store_limit <span class="version-mark">New in v3.0.4 and v4.0</span>
 

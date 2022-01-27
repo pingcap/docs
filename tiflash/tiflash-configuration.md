@@ -73,6 +73,12 @@ delta_index_cache_size = 0
 
     # bg_task_io_rate_limit = 0
 
+    ## DTFile format
+    ## * format_version = 1, the old format, deprecated.
+    ## * format_version = 2, the default format.
+    ## * format_version = 3, the new format, which provides more data validation features.
+    # format_version = 2
+
     [storage.main]
     ## The list of directories to store the main data. More than 90% of the total data is stored in
     ## the directory list.
@@ -136,28 +142,32 @@ delta_index_cache_size = 0
     log = The pd buddy log path.
 
 [flash.proxy]
-    addr = The listening address of proxy.
-    advertise-addr = The external access address of addr. If it is left empty, addr is used by default.
+    addr = The listening address of proxy. If it is left empty, 127.0.0.1:20170 is used by default.
+    advertise-addr = The external access address of addr. If it is left empty, "addr" is used by default.
     data-dir = The data storage path of proxy.
-    config = The proxy configuration file path.
-    log-file = The proxy log path.
-    log-level = The proxy log level. "info" is used by default.
-    status-addr = The listening address from which the proxy metrics | status information is pulled.
-    advertise-status-addr = The external access address of status-addr. If it is left empty, status-addr is used by default.
+    config = The configuration file path of proxy.
+    log-file = The log path of proxy.
+    log-level = The log level of proxy. "info" is used by default.
+    status-addr = The listening address from which the proxy pulls metrics | status information. If it is left empty, 127.0.0.1:20292 is used by default.
+    advertise-status-addr = The external access address of status-addr. If it is left empty, "status-addr" is used by default.
 
 [logger]
-    level = log level (available options: trace, debug, information, warning, error).
-    log = The TiFlash log path.
-    errorlog = The TiFlash error log path.
-    size = The size of a single log file.
-    count = The maximum number of log files to save.
+    ## log level (available options: trace, debug, information, warning, error). The default value is `debug`.
+    level = debug
+    log = TiFlash log path
+    errorlog = TiFlash error log path
+    ## Size of a single log file. The default value is "100M".
+    size = "100M"
+    ## Maximum number of log files to save. The default value is 10.
+    count = 10
 
 [raft]
     ## PD service address. Multiple addresses are separated with commas.
     pd_addr = "10.0.1.11:2379,10.0.1.12:2379,10.0.1.13:2379"
 
 [status]
-    metrics_port = The port through which Prometheus pulls metrics information.
+    ## The port through which Prometheus pulls metrics information. The default value is 8234.
+    metrics_port = 8234
 
 [profiles]
 
@@ -180,6 +190,8 @@ delta_index_cache_size = 0
     cop_pool_size = 0
     ## New in v5.0. This item specifies the maximum number of batch requests that TiFlash Coprocessor executes at the same time. If the number of requests exceeds the specified value, the exceeded requests will queue. If the configuration value is set to 0 or not set, the default value is used, which is twice the number of physical cores.
     batch_cop_pool_size = 0
+    ## New in v5.4.0. This item enables or disables the elastic thread pool feature, which significantly improves CPU utilization in high concurrency scenarios of TiFlash. The default value is false. The elastic thread pool feature is experimental and not recommended for production environments.
+    enable_elastic_threadpool = false
 
 ## Security settings take effect starting from v4.0.5.
 [security]
@@ -203,12 +215,18 @@ delta_index_cache_size = 0
 [server]
     engine-addr = The external access address of the TiFlash coprocessor service.
 [raftstore]
-    ## Specifies the number of threads that handle snapshots.
+    ## The allowable number of threads in the pool that flushes Raft data to storage.
+    apply-pool-size = 4
+
+    ## The allowable number of threads that process Raft, which is the size of the Raftstore thread pool.
+    store-pool-size = 4
+
+    ## The number of threads that handle snapshots.
     ## The default number is 2.
     ## If you set it to 0, the multi-thread optimization is disabled.
     snap-handle-pool-size = 2
 
-    ## Specifies the shortest interval at which Raft store persists WAL.
+    ## The shortest interval at which Raft store persists WAL.
     ## You can properly increase the latency to reduce IOPS usage.
     ## The default value is "4ms".
     ## If you set it to 0ms, the optimization is disabled.
