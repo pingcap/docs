@@ -355,7 +355,7 @@ Expected output includes the instance ID, role, host, listening port, and status
 
 ## Step 7: Start a TiDB cluster
 
-Since TiUP cluster v1.9.0, safe start is introduced as a new start method. Logging into a database using this method improves the security of the database. It is recommended that you start a TiDB cluster using this method.
+Since TiUP cluster v1.9.0, safe start is introduced as a new start method. Starting a database using this method improves the security of the database. It is recommended that you use this method.
 
 After safe start, TiUP automatically generates a password for the TiDB root user and returns the password in the command-line interface.
 
