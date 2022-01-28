@@ -74,10 +74,6 @@ In v5.4, the key new features or improvements are as follows:
 
 ### Others
 
-- TiDB Dashboard, by default, does not permit using `root` and empty password for login.
-
-   Since v5.4.0, it is recommended to use `start --initial` when you use TiUP to start a TiDB cluster. Then, a random password is generated for the `root` account to log into TiDB Dashboard.
-
 - An interface is added between TiDB and PD. When you use the `information_schema.TIDB_HOT_REGIONS_HISTORY` system table, TiDB needs to use PD in the corresponding version.
 - TiDB Server, PD Server, and TiKV Server start using a unified naming method for the log-related parameters to manage log names, output formats, and the rules for rotation and expiration. For details, see [TiKV configuration file - log](/tikv-configuration-file.md#log-new-in-v540).
 - Since v5.4.0, if you create a SQL binding for an execution plan that has been cached via Plan Cache, the binding invalidates the plan already cached for the corresponding query. The new binding does not affect execution plans cached before v5.4.0.
