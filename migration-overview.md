@@ -56,6 +56,6 @@ If the data size of the sharded tables is large (for example, larger than 1 TiB)
 The following features can improve the migration process and might meet more needs in your application.
 
 - [Migrate with pt/gh-host](/migrate-with-pt-ghost.md)
+- [Migrate with More Columns in Downstream](/migrate-with-more-columns-downstream.md)
 - [Migrate with Binlog Event Filter](/filter-binlog-event.md)
 - [Migrate with Filter Binlog Events Using SQL Expressions](/filter-dml-event.md)
-- [Migrate with More Columns in Downstream](/migrate-with-more-columns-downstream.md)
