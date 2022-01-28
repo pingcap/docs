@@ -7,8 +7,8 @@
   - [Basic Features](/basic-features.md)
   - [Experimental Features](/experimental-features.md)
   - Benchmarks
-    - [v5.3 Sysbench Performance Test Report](/benchmark/benchmark-sysbench-v5.3.0-vs-v5.2.2.md)
-    - [v5.3 TPC-C Performance Test Report](/benchmark/v5.3-performance-benchmarking-with-tpcc.md)
+    - [v5.4 Sysbench Performance Test Report](/benchmark/benchmark-sysbench-v5.4.0-vs-v5.3.0.md)
+    - [v5.4 TPC-C Performance Test Report](/benchmark/v5.4-performance-benchmarking-with-tpcc.md)
     - [v5.4 MPP mode TPC-H 100GB Performance Test](/benchmark/v5.4-performance-benchmarking-with-tpch.md)
   - [MySQL Compatibility](/mysql-compatibility.md)
   - [TiDB Limitations](/tidb-limitations.md)
@@ -252,7 +252,7 @@
         - [Migrate from MySQL Databases that Use GH-ost/PT-osc](/dm/feature-online-ddl.md)
         - [Filter Certain Row Changes Using SQL Expressions](/dm/feature-expression-filter.md)
       - [DM Architecture](/dm/dm-arch.md)
-      - [Benchmarks](/dm/dm-benchmark-v5.3.0.md)
+      - [Benchmarks](/dm/dm-benchmark-v5.4.0.md)
     - Quick Start
       - [Quick Start](/dm/quick-start-with-dm.md)
       - [Deploy a DM cluster Using TiUP](/dm/deploy-a-dm-cluster-using-tiup.md)
