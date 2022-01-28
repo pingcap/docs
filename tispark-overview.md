@@ -38,9 +38,10 @@ Also, TiSpark supports distributed writes to TiKV. Compared with writes to TiDB 
 The following table lists the compatibility information of the supported TiSpark versions. You can choose a TiSpark version according to your need.
 
 | TiSpark version | TiDB, TiKV, and PD versions | Spark version | Scala version |
-| --------------- | -------------------- | ------------- | ------------- |
-| 2.4.x           | 5.x，4.x             | 2.3.x，2.4.x  | 2.11          |
-| 2.5.x           | 5.x，4.x             | 3.0.x，3.1.x  | 2.12          |
+| ---------------  | -------------------- | -------------  | ------------- |
+| 2.4.x-scala_2.11 | 5.x，4.x             | 2.3.x，2.4.x    | 2.11          |
+| 2.4.x-scala_2.12 | 5.x，4.x             | 2.4.x           | 2.12          |
+| 2.5.x            | 5.x，4.x             | 3.0.x，3.1.x    | 2.12           |
 
 TiSpark runs in any Spark mode such as YARN, Mesos, and Standalone.
 
@@ -375,6 +376,10 @@ spark.sql.tidb.password $your_tidb_server_password
 ```
 
 For more information, see [Authorization and authentication through TiDB server](https://github.com/pingcap/tispark/blob/master/docs/authorization_userguide.md).
+
+> **Note:**
+>
+> After enabling the authentication and authorization feature, TiSpark Spark SQL can only use TiDB as the data source, so switching to other data sources (such as Hive) makes tables invisible.
 
 ## FAQ
 
