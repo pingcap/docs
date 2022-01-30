@@ -27,7 +27,7 @@ To specify placement rules, first create a placement policy:
 CREATE PLACEMENT POLICY myplacementpolicy PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1";
 ```
 
-This policy can then be attached to a table or partition using either `CREATE TABLE` or `ALTER TABLE`:
+Then attach the policy to a table or partition using either `CREATE TABLE` or `ALTER TABLE`:
 
 ```sql
 CREATE TABLE t1 (a INT) PLACEMENT POLICY myplacementpolicy;
