@@ -37,7 +37,7 @@ ALTER TABLE t2 PLACEMENT POLICY myplacementpolicy;
 
 A placement policy is not associated with any database schema and has the global scope. Therefore, assigning a placement policy does not require any additional privileges over the `CREATE TABLE` privilege.
 
-## Observing current placement rules
+## View current placement rules
 
 If a table has placement rules attached, they can be observed in the output of `SHOW CREATE TABLE`, with the definition of the policy available in `SHOW CREATE PLACEMENT POLICY`:
 
