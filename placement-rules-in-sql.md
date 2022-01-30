@@ -35,7 +35,7 @@ CREATE TABLE t2 (a INT);
 ALTER TABLE t2 PLACEMENT POLICY myplacementpolicy;
 ```
 
-A `PLACEMENT POLICY` is not associated with any database schema and has the global scope. Therefore, assigning a placement policy does not require any additional privileges over the `CREATE TABLE` privilege.
+A placement policy is not associated with any database schema and has the global scope. Therefore, assigning a placement policy does not require any additional privileges over the `CREATE TABLE` privilege.
 
 ## Observing current placement rules
 
