@@ -13,7 +13,7 @@ summary: The usage of ALTER PLACEMENT POLICY in TiDB.
 
 `ALTER PLACEMENT POLICY` is used to modify existing placement policies that have previously been created. All the tables and partitions which use the placement policy will automatically be updated.
 
-`ALTER PLACEMENT POLICY` _replaces_ the previous policy with the new definition. It does not _merge_ the old policy with the new one. i.e. in the following example `FOLLOWERS=4` is lost when the `ALTER PLACEMENT POLICY` is executed:
+`ALTER PLACEMENT POLICY` _replaces_ the previous policy with the new definition. It does not _merge_ the old policy with the new one. In the following example, `FOLLOWERS=4` is lost when the `ALTER PLACEMENT POLICY` is executed:
 
 ```sql
 CREATE PLACEMENT POLICY p1 FOLLOWERS=4;
