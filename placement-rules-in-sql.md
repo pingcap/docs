@@ -21,7 +21,7 @@ The detailed user scenarios are as follows:
 
 ## Specify placement rules
 
-The first step in specifying placement rules is to create a `PLACEMENT POLICY`:
+To specify placement rules, first create a placement policy:
 
 ```sql
 CREATE PLACEMENT POLICY myplacementpolicy PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1";
