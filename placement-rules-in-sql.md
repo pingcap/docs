@@ -39,7 +39,7 @@ A placement policy is not associated with any database schema and has the global
 
 ## View current placement rules
 
-If a table has placement rules attached, they can be observed in the output of `SHOW CREATE TABLE`, with the definition of the policy available in `SHOW CREATE PLACEMENT POLICY`:
+If a table has placement rules attached, you can view the placement rules in the output of `SHOW CREATE TABLE`. To view the definition of the policy available, execute `SHOW CREATE PLACEMENT POLICY`:
 
 ```sql
 tidb> SHOW CREATE TABLE t1\G
