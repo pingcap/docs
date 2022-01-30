@@ -57,7 +57,7 @@ Create Policy: CREATE PLACEMENT POLICY myplacementpolicy PRIMARY_REGION="us-east
 1 row in set (0.00 sec)
 ```
 
-The `information_schema` tables `tables` and `partitions` also include a column for `tidb_placement_policy_name`, which makes it possible to find all objects which have placement rules attached:
+The `information_schema.tables` and `information_schema.partitions` tables also include a column for `tidb_placement_policy_name`, which shows all objects with placement rules attached:
 
 ```sql
 SELECT * FROM information_schema.tables WHERE tidb_placement_policy_name IS NOT NULL;
