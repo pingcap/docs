@@ -14,7 +14,7 @@ Currently, TiDB Lightning can mainly be used in the following two scenarios:
 
 Currently, TiDB Lightning supports:
 
-- The data source of the [Dumpling](/dumpling-overview.md), CSV or [Amazon Aurora Parquet](/migrate-from-aurora-using-lightning.md) exported formats.
+- The data source of the [Dumpling](/dumpling-overview.md), CSV or standard parquet file such as [Amazon Aurora Parquet](/migrate-from-aurora-using-lightning.md) exported formats.
 - Reading data from a local disk or from the Amazon S3 storage. For details, see [External Storages](/br/backup-and-restore-storages.md).
 
 ## TiDB Lightning architecture
@@ -47,6 +47,8 @@ TiDB Lightning also supports using TiDB-backend for data import. In this mode, `
 
 ## Restrictions
 
-If you use TiDB Lighting together with TiFlash:
+1. If you use TiDB Lighting together with TiFlash:
 
 No matter a table has TiFlash replica(s) or not, you can import data to that table using TiDB Lightning. Note that this might slow the TiDB Lightning procedure, which depends on the NIC bandwidth on the lightning host, the CPU and disk load of the TiFlash node, and the number of TiFlash replicas.
+
+2. When using parquet file to import, lightning currently only accepts the data types supported in Amazon Aurora Parquet.
