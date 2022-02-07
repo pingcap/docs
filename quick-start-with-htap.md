@@ -22,7 +22,7 @@ Before using TiDB HTAP, you need to have some basic knowledge about [TiKV](/tikv
 
 ## Steps
 
-In this document, you can experience the convenience and high performance of TiDB HTAP by querying an example table in a [TPC-H](http://www.tpc.org/tpch/) dataset. TPC-H is a popular decision support benchmark that consists of a suite of business oriented ad-hoc queries with large volumes of data and high degree of complexity. To experience a complete of 22 SQL queries using TPC-H, visit [tidb-bench repo](https://github.com/pingcap/tidb-bench/tree/master/tpch/queries) or [TPC-H](http://www.tpc.org/tpch/) for instructions on how to generate query statements and data.
+In this document, you can experience the convenience and high performance of TiDB HTAP by querying an example table in a [TPC-H](http://www.tpc.org/tpch/) dataset. TPC-H is a popular decision support benchmark that consists of a suite of business oriented ad-hoc queries with large volumes of data and a high degree of complexity. To experience 22 complete SQL queries using TPC-H, visit [tidb-bench repo](https://github.com/pingcap/tidb-bench/tree/master/tpch/queries) or [TPC-H](http://www.tpc.org/tpch/) for instructions on how to generate query statements and data.
 
 ### Step 1. Deploy a local test environment
 
