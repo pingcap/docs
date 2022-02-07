@@ -148,4 +148,5 @@ Pay attention to the following restrictions when you use `AUTO_RANDOM`:
 - You cannot change the column type of the primary key column that is specified with `AUTO_RANDOM` attribute.
 - You cannot specify `AUTO_RANDOM` and `AUTO_INCREMENT` for the same column at the same time.
 - You cannot specify `AUTO_RANDOM` and `DEFAULT` (the default value of a column) for the same column at the same time.
+- When using `AUTO_RANDOM` it is hard to go back to `AUTO_INCREMENT` due to very high auto generated values.
 - It is **not** recommended that you explicitly specify a value for the column with the `AUTO_RANDOM` attribute when you insert data. Otherwise, the numeral values that can be automatically allocated for this table might be used up in advance.
