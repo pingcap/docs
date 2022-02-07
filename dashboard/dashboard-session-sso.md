@@ -202,7 +202,7 @@ Now TiDB Dashboard has been configured to use Auth0 SSO for sign-in.
 
 ## Example 3: Use Casdoor for TiDB Dashboard SSO sign-in
 
-[Casdoor](https://casdoor.org/) is a SSO platform based OIDC, which is compatible with the SSO feature of TiDB Dashboard. The following steps describe how to configure Casdoor and TiDB Dashboard so that Casdoor can be used as the TiDB Dashboard SSO provider.
+[Casdoor](https://casdoor.org/) is an open-source SSO platform that can be deployed in your own hosts, which is compatible with the SSO feature of TiDB Dashboard. The following steps describe how to configure Casdoor and TiDB Dashboard so that Casdoor can be used as the TiDB Dashboard SSO provider.
 
 ### Step 1: Configure Casdoor
 
