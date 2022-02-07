@@ -12,7 +12,7 @@ summary: Learn how to configure a data migration task in different scenarios.
 > 1. [Deploy a DM Cluster Using TiUP](/dm/deploy-a-dm-cluster-using-tiup.md).
 > 2. [Create a Data Source](/dm/quick-start-create-source.md).
 
-This document introduces how to perform data migration tasks in different business scenarios.
+This document introduces how to perform data migration tasks in different scenarios.
 
 In addition to scenario-based documents, you can also refer to the following documents:
 
@@ -27,7 +27,7 @@ When you migrate data from Aurora to a TiDB cluster deployed on AWS, your data m
 
 ## Migrate from MySQL to TiDB
 
-If cloud storage (S3) service is not used, the network connectivity is good, and the network latency is low, you can use the following method to migrate data from MySQL to TiDB.
+If a cloud storage (S3) service is not used, the network connectivity is good, and the network latency is low, you can use the following method to migrate data from MySQL to TiDB.
 
 - [Migrate MySQL of Small Datasets to TiDB](/migrate-small-mysql-to-tidb.md)
 
@@ -50,9 +50,9 @@ If the data size of the sharded tables is large (for example, larger than 1 TiB)
 - [Migrate data from CSV files to TiDB](/migrate-from-csv-files-to-tidb.md)
 - [Migrate data from SQL files to TiDB](/migrate-from-sql-files-to-tidb.md)
 
-## More complex migration solutions
+## More advanced migration solutions
 
-The following features can improve the migration process and might meet more needs in your application.
+The following features can improve the migration process and meet more needs in your application.
 
 - [Continuous Replication from Databases that Use gh-ost or pt-osc](/migrate-with-pt-ghost.md)
 - [Migrate Data to a Downstream TiDB Table with More Columns](/migrate-with-more-columns-downstream.md)
