@@ -199,3 +199,40 @@ Similar to Okta, [Auth0](https://auth0.com/) also provides OIDC SSO identity ser
    ![Settings](/media/dashboard/dashboard-session-sso-auth0-settings-3.png)
 
 Now TiDB Dashboard has been configured to use Auth0 SSO for sign-in.
+
+## Example 3: Use Casdoor for TiDB Dashboard SSO sign-in
+
+[Casdoor](https://casdoor.org/) is a SSO platform based OIDC, which is compatible with the SSO feature of TiDB Dashboard. The following steps describe how to configure Casdoor and TiDB Dashboard so that Casdoor can be used as the TiDB Dashboard SSO provider.
+
+### Step 1: Configure Casdoor
+
+1. Deploy and access the Casdoor administration site.
+
+2. Navigate from the top sidebar **Applications**.
+
+3. Click **Applications - Add**.
+
+4. Fill "Name" and "Display name", for example, "TiDB Dashboard".
+
+5. Add **Redirect URLs** as follows:
+
+   ```
+   http://DASHBOARD_IP:PORT/dashboard/?sso_callback=1
+   ```
+
+   Replace `DASHBOARD_IP:PORT` with the actual domain (or IP address) and port that you use to access the TiDB Dashboard in your browser.
+   
+   ![Settings](/media/dashboard/dashboard-session-sso-casdoor-settings-1.png)
+
+6. Keep the default values for other settings and click **Save & Exit**.
+
+7. Save the **Client ID** seen on the page.
+
+### Step 2: Obtain OIDC information and fill in TiDB Dashboard
+
+1. Fill the **OIDC Client ID** of TiDB dashboard with the **Client ID** saved in the previous step.
+
+2. Fill **OIDC Discovery URL** with the **Domain** field value prefixed with `https://` and suffixed with `/`, for example, `https://casdoor.example.com/`. Complete authorization and save the configuration.
+   ![Settings](/media/dashboard/dashboard-session-sso-casdoor-settings-2.png)
+
+Now TiDB Dashboard has been configured to use Casdoor SSO for sign-in.
