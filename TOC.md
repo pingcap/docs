@@ -257,7 +257,7 @@
       - [Quick Start](/dm/quick-start-with-dm.md)
       - [Deploy a DM cluster Using TiUP](/dm/deploy-a-dm-cluster-using-tiup.md)
       - [Create a Data Source](/dm/quick-start-create-source.md)
-      - [Data Migration Scenarios](/dm/quick-create-migration-task.md)
+    - [Data Migration Scenarios](/dm/quick-create-migration-task.md)
     - Deploy
       - [Software and Hardware Requirements](/dm/dm-hardware-and-software-requirements.md)
       - Deploy a DM Cluster
