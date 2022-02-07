@@ -63,6 +63,23 @@ table-concurrency = 6
 # medium, this value might need to be adjusted for optimal performance.
 io-concurrency = 5
 
+# The maximum number of non-fatal errors to tolerate before stopping TiDB Lightning.
+# Non-fatal errors are localized to a few rows, and ignoring those rows allows the import process to continue.
+# Setting this to N means that TiDB Lightning will stop as soon as possible when the (N+1)-th error is encountered.
+# The skipped rows will be inserted into tables inside the "task info" schema on the target TiDB, which can be configured below.
+max-error = 0
+# task-info-schema-name is the name of the schema or database that stores TiDB Lightning execution results.
+# To disable error recording, set this to an empty string.
+# task-info-schema-name = 'lightning_task_info'
+
+# In parallel import mode, the schema name that stores the meta information for each TiDB Lightning instance in the target cluster. By default, the value is "lightning_metadata".
+# Configure this parameter only if parallel import is enabled.
+# **Note:**
+# - The value set for this parameter must be the same for each TiDB Lightning instance that participates in the same parallel import; otherwise, the correctness of the imported data cannot be ensured.
+# - If parallel import mode is enabled, make sure that the user used for import (for the tidb.user configuration) has permissions to create and access the databases corresponding to this configuration.
+# - TiDB Lightning removes this schema after the import is completed. So do not use any existing schema name to configure this parameter.
+meta-schema-name = "lightning_metadata"
+
 [security]
 # Specifies certificates and keys for TLS connections within the cluster.
 # Public certificate of the CA. Leave empty to disable TLS.
@@ -98,8 +115,13 @@ driver = "file"
 # keep-after-success = false
 
 [tikv-importer]
-# Delivery backend, can be "local", "importer" or "tidb".
+# "local": The default mode. It applies to large dataset import, for example, greater than 1 TiB. However, during the import, downstream TiDB is not available to provide services.
+# "tidb": You can use this mode for small dataset import, for example, smaller than 1 TiB. During the import, downstream TiDB is available to provide services.
 # backend = "local"
+# Whether to allow importing data to tables with data. The default value is `false`.
+# When you use parallel import mode, you must set it to `true`, because multiple TiDB Lightning instances are importing the same table at the same time.
+# incremental-import = false
+
 # The listening address of tikv-importer when backend is "importer". Change it to the actual address.
 addr = "172.16.31.10:8287"
 # Action to do when trying to insert a duplicated entry in the "tidb" backend.
@@ -107,6 +129,13 @@ addr = "172.16.31.10:8287"
 #  - ignore: keep the existing entry, and ignore the new entry
 #  - error: report error and quit the program
 # on-duplicate = "replace"
+# Whether to detect and resolve duplicate records (unique key conflict) when the backend is 'local'.
+# The following resolution algorithms are supported:
+#  - record: only records duplicate records to the `lightning_task_info.conflict_error_v1` table on the target TiDB. Note that the
+#    required version of the target TiKV is no earlier than v5.2.0; otherwise it falls back to 'none'.
+#  - none: does not detect duplicate records, which has the best performance of the three algorithms, but might lead to
+#    inconsistent data in the target TiDB.
+#  - remove: records all duplicate records to the lightning_task_info database, like the 'record' algorithm. But it removes all duplicate records from the target table to ensure a consistent
 #    state in the target TiDB.
 # duplicate-resolution = 'none'
 # The number of KV pairs sent in one request in the "local" backend.
