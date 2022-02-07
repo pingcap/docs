@@ -3,7 +3,7 @@ title: Use TiFlash
 aliases: ['/docs/dev/tiflash/use-tiflash/','/docs/dev/reference/tiflash/use-tiflash/']
 ---
 
-To experience the whole process from importing to querying in a TPC-H dataset, refer to [Quick Start Guide for TiDB HTAP](/quick-start-with-htap.md).
+To experience the whole process from importing data to querying in a TPC-H dataset, refer to [Quick Start Guide for TiDB HTAP](/quick-start-with-htap.md).
 
 # Use TiFlash
 
