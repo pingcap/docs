@@ -27,7 +27,7 @@ For some archiving scenarios, some data may be periodically cleaned up by execut
 
 For more information, refer to [Migrate and Merge MySQL Shards of Small Datasets to TiDB](/migrate-small-mysql-shards-to-tidb.md).
 
-## Shard Merge scenario
+## Shard merge scenario
 
 If there are multiple sharded tables in multiple sharded schemas in the upstream MySQL/MariaDB, to merge them into one table or schema when migrating to TiDB, you can rename the table or the schema in the upstream database by configuring `route-rules`, and then these tables can be merged into the same downstream schema or table. For details, refer to [Migrate and Merge MySQL Shards of Small Datasets to TiDB](/migrate-small-mysql-shards-to-tidb.md) and [Best Practices of Data Migration in the Shard Merge Scenario](/dm/shard-merge-best-practices.md).
 
