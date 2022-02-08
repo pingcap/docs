@@ -19,13 +19,13 @@ In addition to scenario-based documents, you can also refer to the following doc
 - For a complete example of data migration task configuration, refer to [DM Advanced Task Configuration File](/dm/task-configuration-file-full.md).
 - For a data migration task configuration guide, refer to [Data Migration Task Configuration Guide](/dm/dm-task-configuration-guide.md).
 
-## Migrate Data from Amazon Aurora to TiDB
+## Migrate data from Amazon Aurora to TiDB
 
 When you migrate data from Aurora to a TiDB cluster deployed on AWS, your data migration takes two operations: full data migration and incremental replication. You can choose the corresponding operation according to your application needs.
 
 -[Migrate Data from Amazon Aurora to TiDB](/migrate-aurora-to-tidb.md)
 
-## Migrate from MySQL to TiDB
+## Migrate data from MySQL to TiDB
 
 If a cloud storage (S3) service is not used, the network connectivity is good, and the network latency is low, you can use the following method to migrate data from MySQL to TiDB.
 
