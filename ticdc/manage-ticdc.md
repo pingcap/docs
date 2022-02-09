@@ -589,7 +589,7 @@ dispatchers = [
     {matcher = ['test3.*', 'test4.*'], dispatcher = "rowid"},
 ]
 # For the sink of MQ type, you can specify the protocol format of the message.
-# Currently the following protocols are supported: default, open-protocol, canal, avro, and maxwell. The default protocol is the TiCDC Open Protocol.
+# Currently the following protocols are supported: default, canal, avro, and maxwell. The default protocol is the TiCDC Open Protocol.
 protocol = "default"
 
 [cyclic-replication]
