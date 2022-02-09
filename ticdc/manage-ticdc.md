@@ -579,8 +579,8 @@ dispatchers = [
     {matcher = ['test3.*', 'test4.*'], dispatcher = "rowid"},
 ]
 # For the sink of MQ type, you can specify the protocol format of the message.
-# Currently the following protocols are supported: canal-json, open-protocol, canal, avro, and maxwell.
-protocol = "canal-json"
+# Currently the following protocols are supported: default, canal, avro, and maxwell. The default protocol is TiCDC Open Protocol..
+protocol = "default"
 
 ```
 
