@@ -8,6 +8,10 @@ aliases: ['/docs/v3.0/query-execution-plan/','/docs/v3.0/reference/performance/u
 
 Based on the details of your tables, the TiDB optimizer chooses the most efficient query execution plan, which consists of a series of operators. This document details the execution plan information returned by the `EXPLAIN` statement in TiDB.
 
+> **Note:**
+>
+> You are reading an older version of Understand the Query Execution Plan (TiDB v3.0). [`EXPLAIN` Overview](https://docs.pingcap.com/tidb/stable/explain-overview) is the newer version of this document. It is recommended to read the newer version if do not have any special need.
+
 ## Optimize SQL statements using `EXPLAIN`
 
 The result of the `EXPLAIN` statement provides information about how TiDB executes SQL queries:
