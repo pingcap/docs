@@ -31,7 +31,7 @@ Query OK, 0 rows affected (0.08 sec)
 
 The following list shows the keywords and reserved words in TiDB. The reserved words are labelled with (R).
 
-{{< tabs-panel "A" "B" "C" "D" "E" "F" "G" "H" "I" "J" "K" "L" "M" "N" "O" "P" "Q" "R" "S" "T" "U" "V" "W" "X" "Y" "Z" >}}
+<TabsPanel letters="ABCDEFGHIJKLMNOPQRSTUVWXYZ" />
 
 <a id="A" class="letter" href="#A">A</a>
 
