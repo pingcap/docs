@@ -207,27 +207,15 @@ The following are descriptions of parameters and parameter values that can be co
 | :------------------ | :------------------------------------------------------------ |
 | `127.0.0.1`          | The IP address of the downstream Kafka services                                 |
 | `9092`               | The port for the downstream Kafka                                          |
-<<<<<<< HEAD
 | `topic-name`         | Variable. The name of the Kafka topic                                      |
 | `kafka-version`      | The version of the downstream Kafka. Optional, `2.4.0` by default. Currently, the earliest supported Kafka version is `0.11.0.2` and the latest one is `2.7.0`. This value needs to be consistent with the actual version of the downstream Kafka.                      |
 | `kafka-client-id`    | Specifies the Kafka client ID of the replication task. Optional. `TiCDC_sarama_producer_replication ID` by default. |
 | `partition-num`      | The number of the downstream Kafka partitions. Optional. The value must be **no greater than** the actual number of partitions. If you do not configure this parameter, the partition number is obtained automatically. |
-| `max-message-bytes`  | The maximum size of data that is sent to Kafka broker each time (optional, `64MB` by default) |
+| `max-message-bytes`  | The maximum size of data that is sent to Kafka broker each time (optional, `10MB` by default) |
 | `replication-factor` | The number of Kafka message replicas that can be saved (optional, `1` by default)                       |
 | `protocol` | The protocol with which messages are output to Kafka. The value options are `default`, `canal`, `avro`, and `maxwell` (`default` by default)    |
-| `max-batch-size` | New in v4.0.9. If the message protocol supports outputting multiple data changes to one Kafka message, this parameter specifies the maximum number of data changes in one Kafka message. It currently takes effect only when Kafka's `protocol` is `default`. It's optional and `16` by default. |
-=======
-| `topic-name` | Variable. The name of the Kafka topic |
-| `kafka-version`      | The version of the downstream Kafka (optional, `2.4.0` by default. Currently, the earliest supported Kafka version is `0.11.0.2` and the latest one is `2.7.0`. This value needs to be consistent with the actual version of the downstream Kafka)                      |
-| `kafka-client-id`    | Specifies the Kafka client ID of the replication task (optional. `TiCDC_sarama_producer_replication ID` by default) |
-| `partition-num`      | The number of the downstream Kafka partitions (optional. The value must be **no greater than** the actual number of partitions; otherwise, the replication task cannot be created successfully. `3` by default) |
-| `max-message-bytes`  | The maximum size of data that is sent to Kafka broker each time (optional, `10MB` by default). From v5.0.6 and v4.0.6, the default value has changed from 64MB and 256MB to 10MB. |
-| `replication-factor` | The number of Kafka message replicas that can be saved (optional, `1` by default)                       |
-| `protocol` | The protocol with which messages are output to Kafka. The value options are `canal-json`, `open-protocol`, `canal`, `avro` and `maxwell`.   |
 | `auto-create-topic` | Determines whether TiCDC creates the topic automatically when the `topic-name` passed in does not exist in the Kafka cluster (optional, `true` by default) |
-| `enable-tidb-extension` | When the output protocol is `canal-json`, if the value is `true`, TiCDC sends Resolved events and adds the TiDB extension field to the Kafka message. (optional, `false` by default)|
-| `max-batch-size` | New in v4.0.9. If the message protocol supports outputting multiple data changes to one Kafka message, this parameter specifies the maximum number of data changes in one Kafka message. It currently takes effect only when Kafka's `protocol` is `open-protocol`. (optional, `16` by default) |
->>>>>>> 1f8fac6b0 (ticdc: Use open-protocol instead of default protocol and add missing params (#7407))
+| `max-batch-size` | New in v4.0.9. If the message protocol supports outputting multiple data changes to one Kafka message, this parameter specifies the maximum number of data changes in one Kafka message. It currently takes effect only when Kafka's `protocol` is `default`. It's optional and `16` by default. |
 | `ca` | The path of the CA certificate file needed to connect to the downstream Kafka instance (optional)  |
 | `cert` | The path of the certificate file needed to connect to the downstream Kafka instance (optional) |
 | `key` | The path of the certificate key file needed to connect to the downstream Kafka instance (optional) |
@@ -235,18 +223,9 @@ The following are descriptions of parameters and parameter values that can be co
 | `sasl-password` | The password of SASL/PLAIN or SASL/SCRAM authentication needed to connect to the downstream Kafka instance (optional) |
 | `sasl-mechanism` | The name of SASL/PLAIN or SASL/SCRAM authentication needed to connect to the downstream Kafka instance (optional)  |
 
-<<<<<<< HEAD
-=======
-Best practices:
-
-* It is recommended that you create your own Kafka Topic. At a minimum, you need to set the maximum amount of data of each message that the Topic can send to the Kafka broker, and the number of downstream Kafka partitions. When you create a changefeed, these two settings correspond to `max-message-bytes` and `partition-num`, respectively.
-* If you create a changefeed with a Topic that does not yet exist, TiCDC will try to create the Topic using the `partition-num` and `replication-factor` parameters. It is recommended that you specify these parameters explicitly.
-* In most cases, it is recommended to use the `canal-json` protocol.
-
->>>>>>> 1f8fac6b0 (ticdc: Use open-protocol instead of default protocol and add missing params (#7407))
 > **Note:**
 >
-> When `protocol` is `open-protocol`, TiCDC tries to avoid generating messages that exceed `max-message-bytes` in length. However, if a row is so large that a single change alone exceeds `max-message-bytes` in length, to avoid silent failure, TiCDC tries to output this message and prints a warning in the log.
+> When `protocol` is `default`, TiCDC tries to avoid generating messages that exceed `max-message-bytes` in length. However, if a row is so large that a single change alone exceeds `max-message-bytes` in length, to avoid silent failure, TiCDC tries to output this message and prints a warning in the log.
 
 #### Integrate TiCDC with Kafka Connect (Confluent Platform)
 
@@ -259,7 +238,7 @@ Sample configuration:
 {{< copyable "shell-regular" >}}
 
 ```shell
---sink-uri="kafka://127.0.0.1:9092/topic-name?protocol=canal-json&kafka-version=2.4.0&protocol=avro&partition-num=6&max-message-bytes=67108864&replication-factor=1"
+--sink-uri="kafka://127.0.0.1:9092/topic-name?kafka-version=2.4.0&protocol=avro&partition-num=6&max-message-bytes=67108864&replication-factor=1"
 --opts registry="http://127.0.0.1:8081"
 ```
 
@@ -610,8 +589,8 @@ dispatchers = [
     {matcher = ['test3.*', 'test4.*'], dispatcher = "rowid"},
 ]
 # For the sink of MQ type, you can specify the protocol format of the message.
-# Currently the following protocols are supported: canal-json, open-protocol, canal, avro, and maxwell.
-protocol = "canal-json"
+# Currently the following protocols are supported: default, open-protocol, canal, avro, and maxwell. The default protocol is the TiCDC Open Protocol.
+protocol = "default"
 
 [cyclic-replication]
 # Whether to enable cyclic replication.
