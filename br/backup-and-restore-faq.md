@@ -19,9 +19,11 @@ When you use the `oltp_read_only` scenario of `sysbench` to back up to a disk (m
 
 To reduce the impact on the cluster, you can use the `--ratelimit` parameter to limit the backup rate.
 
-## Does BR back up system tables? During data restoration, do they raise conflict?
+## Does BR back up system tables? During data restoration, do they raise conflicts?
 
-Before v5.1.0, BR filtered out data from the system schema `mysql` during the backup. Since v5.1.0, BR **backs up** all data by default, including the system schemas `mysql.*`. But the technical implementation of restoring the system tables in `mysql.*` is not complete yet, so the tables in the system schema `mysql` are **not** restored by default. For more details, refer to the [Back up and restore table data in the `mysql` system schema (experimental feature)](/br/backup-and-restore-tool.md#back-up-and-restore-table-data-in-the-mysql-system-schema-experimental-feature).
+Before v5.1.0, BR filtered out data from the system schema `mysql` during the backup. Since v5.1.0, BR **backs up** all data by default, including the system schemas `mysql.*`.
+
+During data restoration, system tables do not raise conflicts. The technical implementation of restoring the system tables in `mysql.*` is not complete yet, so the tables in the system schema `mysql` are **not** restored by default, which means no conflicts will be raised. For more details, refer to the [Back up and restore table data in the `mysql` system schema (experimental feature)](/br/backup-and-restore-tool.md#back-up-and-restore-table-data-in-the-mysql-system-schema-experimental-feature).
 
 ## What should I do to handle the `Permission denied` or `No such file or directory` error, even if I have tried to run BR using root in vain?
 
