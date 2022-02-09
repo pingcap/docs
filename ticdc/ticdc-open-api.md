@@ -146,7 +146,7 @@ The configuration parameters of sink are as follows:
     {"matcher":["test1.*", "test2.*"], "dispatcher":"ts"},
     {"matcher":["test3.*", "test4.*"], "dispatcher":"rowid"}
   ],
-  "protocal":"canal-json"
+  "protocal":"default"
 }
 ```
 
