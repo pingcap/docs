@@ -10,7 +10,7 @@ Based on the details of your tables, the TiDB optimizer chooses the most efficie
 
 > **Note:**
 >
-> You are reading an older version of Understand the Query Execution Plan (TiDB v3.0). [`EXPLAIN` Overview](https://docs.pingcap.com/tidb/stable/explain-overview) is the newer version of this document. It is recommended to read the newer version if do not have any special need.
+> You are reading an earlier version of Understand the Query Execution Plan (TiDB v3.0). [`EXPLAIN` Overview](https://docs.pingcap.com/tidb/stable/explain-overview) is the latest version of this document and is recommended if you do not have any special needs.
 
 ## Optimize SQL statements using `EXPLAIN`
 
