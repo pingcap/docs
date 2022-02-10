@@ -107,7 +107,7 @@ This feature is available in TiDB v5.1.2 and later versions.
 
 The state of a replication task represents the running status of the replication task. During the running of TiCDC, replication tasks might fail with errors, be manually paused, resumed, or reach the specified `TargetTs`. These behaviors can lead to the change of the replication task state. This section describes the states of TiCDC replication tasks and the transfer relationships between states.
 
-![TiCDC state transfer](/media/ticdc-state-transfer.png)
+![TiCDC state transfer](/media/ticdc/ticdc-state-transfer.png)
 
 The states in the above state transfer diagram are described as follows:
 
@@ -717,7 +717,7 @@ The cyclic replication feature supports replicating data across multiple indepen
 
 Enable cyclic replication in the three clusters of A, B, and C. Two TiCDC clusters are used for the replication from cluster A to cluster B. Among the three clusters, DDL statements enters cluster A first.
 
-![TiCDC cyclic replication](/media/cdc-cyclic-replication.png)
+![TiCDC cyclic replication](/media/ticdc/cdc-cyclic-replication.png)
 
 To use the cyclic replication feature, you need to configure the following parameters for the replication task upon the task creation.
 
