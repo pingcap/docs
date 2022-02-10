@@ -230,6 +230,8 @@ Default value: `mysql`
 * Specifies the commit timestamp at which the binlog is ignored, such as `[416815754209656834, 421349811963822081]`.
 * Default value: `[]`
 
+This parameter is only valid for v2.1.16 and later versions.
+
 #### ignore-schemas
 
 * Specifies the database to be ignored during replication. If there is more than one database to be ignored, use commas to separate them. If all changes in a binlog file are filtered, the whole binlog file is ignored.
