@@ -150,7 +150,7 @@ The configuration parameters of sink are as follows:
     {"matcher":["test1.*", "test2.*"], "dispatcher":"ts"},
     {"matcher":["test3.*", "test4.*"], "dispatcher":"rowid"},
   ],
-  "protocal":"default",
+  "protocol":"default",
 }
 ```
 
@@ -163,7 +163,7 @@ The configuration parameters of sink are as follows:
 
 `matcher`: The matching syntax of matcher is the same as the filter rule syntax.
 
-`protocal`: For the sink of MQ type, you can specify the protocol format of the message. Currently four protocols are supported: `default`, `canal`, `avro`, and `maxwell`. The default protocol is the TiCDC Open Protocol.
+`protocol`: For the sink of MQ type, you can specify the protocol format of the message. Currently the following protocols are supported: `default`, `canal`, `avro`, and `maxwell`. The default protocol is the TiCDC Open Protocol.
 
 ### Example
 
