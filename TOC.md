@@ -203,7 +203,6 @@
       - [Backends](/tidb-lightning/tidb-lightning-backends.md)
       - [Import Data in Parallel](/tidb-lightning/tidb-lightning-distributed-import.md)
       - [Web Interface](/tidb-lightning/tidb-lightning-web-interface.md)
-      - [Import Data in Parallel](/tidb-lightning/tidb-lightning-distributed-import.md)
     - [Monitor](/tidb-lightning/monitor-tidb-lightning.md)
     - [FAQ](/tidb-lightning/tidb-lightning-faq.md)
     - [Glossary](/tidb-lightning/tidb-lightning-glossary.md)
