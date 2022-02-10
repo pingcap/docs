@@ -717,7 +717,7 @@ The cyclic replication feature supports replicating data across multiple indepen
 
 Enable cyclic replication in the three clusters of A, B, and C. Two TiCDC clusters are used for the replication from cluster A to cluster B. Among the three clusters, DDL statements enters cluster A first.
 
-![TiCDC cyclic replication](/media/cdc-cyclic-replication.png)
+![TiCDC cyclic replication](/media/ticdc/cdc-cyclic-replication.png)
 
 To use the cyclic replication feature, you need to configure the following parameters for the replication task upon the task creation.
 
