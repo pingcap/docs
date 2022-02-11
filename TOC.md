@@ -31,11 +31,7 @@
     - [Online Schema Changes](/key-features.md#online-schema-changes)
 - How-to
   - Get Started
-    - Start a Cluster
-      - [From Binary](/deploy-tidb-from-binary.md)
-      - [From Homebrew](/deploy-tidb-from-homebrew.md)
-      - [From DBdeployer](/deploy-tidb-from-dbdeployer.md)
-      - [From Docker Compose](https://pingcap.com/docs/dev/how-to/get-started/deploy-tidb-from-docker-compose/)
+    - [Start a Cluster](/quick-start-with-tidb.md)
     - [Explore SQL with TiDB](/basic-sql-operations.md)
     - [Import Example Database](/import-example-data.md)
     - [Read Historical Data](/read-historical-data.md)
