@@ -68,18 +68,18 @@ TiDB version: 5.1.4
 
 + TiFlash
 
-    - Fix cast to decimal overflow bug [#3942](https://github.com/pingcap/tics/pull/3942)
-    - Fix the bug that castStringAsReal has different behaivor between tiflash and tikv/tidb. [#3755](https://github.com/pingcap/tics/pull/3755)
-    - Fix random `EstablishMPPConnection` fail after TiFlash server restart. [#3707](https://github.com/pingcap/tics/pull/3707)
-    - Fix the problem that obsolete data cannot be reclaimed after set tiflash replica to 0 [#3698](https://github.com/pingcap/tics/pull/3698)
-    - Increase the max supported depth of expression/plan tree in dag request from 100 to 200. [#3677](https://github.com/pingcap/tics/pull/3677)
-    - Fixed the inconsistent behavior of CastStringAsDecimal between tiflash and tidb/tikv. [#3675](https://github.com/pingcap/tics/pull/3675)
-    - Fix the bug that results of `where <string>` is wrong because it will be converted to int type. [#3478](https://github.com/pingcap/tics/pull/3478)
-    - Fix tiflash randomly crash when a mpp query is killed. [#3449](https://github.com/pingcap/tics/pull/3449)
-    - Fix the issue of unexpected error that `Unexpected type of column: Nullable(Nothing)` [#3377](https://github.com/pingcap/tics/pull/3377)
-    - Support INET6_ATON and INET6_NTOA in TiFlash. [#2624](https://github.com/pingcap/tics/pull/2624)
-    - Support INET_ATON and INET_NTOA in TiFlash. [#2613](https://github.com/pingcap/tics/pull/2613)
-    - expand streams after aggregation [#2537](https://github.com/pingcap/tics/pull/2537)
+    - Fix cast to decimal overflow bug
+    - Fix the bug that castStringAsReal has different behaivor between tiflash and tikv/tidb.
+    - Fix random `EstablishMPPConnection` fail after TiFlash server restart.
+    - Fix the problem that obsolete data cannot be reclaimed after set tiflash replica to 0
+    - Increase the max supported depth of expression/plan tree in dag request from 100 to 200.
+    - Fixed the inconsistent behavior of CastStringAsDecimal between tiflash and tidb/tikv.
+    - Fix the bug that results of `where <string>` is wrong because it will be converted to int type.
+    - Fix tiflash randomly crash when a mpp query is killed.
+    - Fix the issue of unexpected error that `Unexpected type of column: Nullable(Nothing)`
+    - Support INET6_ATON and INET6_NTOA in TiFlash.
+    - Support INET_ATON and INET_NTOA in TiFlash.
+    - expand streams after aggregation
 
 + PD
 
@@ -149,7 +149,7 @@ TiDB version: 5.1.4
 
 + TiFlash
 
-    - support functions of ADDDATE() and DATE_ADD() pushed down to tiflash [#2591](https://github.com/pingcap/tics/pull/2591)
+    - support functions of ADDDATE() and DATE_ADD() pushed down to tiflash
 
 ## Bug Fixes
 
@@ -166,14 +166,14 @@ TiDB version: 5.1.4
 
 + TiFlash
 
-    - Fix str_to_date() function incorrectly handles leading zeros when parsing Microseconds [#3934](https://github.com/pingcap/tics/pull/3934)
-    - Fix the problem of TiFlash crashing when the memory limit is enabled [#3916](https://github.com/pingcap/tics/pull/3916)
-    - Align unix_timestamp behavior with TiDB and mysql when input is earlier than 1970-01-01 00:00:01 UTC [#3623](https://github.com/pingcap/tics/pull/3623)
-    - Fix potential data inconsistency when widen pk column type if pk is handle [#3573](https://github.com/pingcap/tics/pull/3573)
-    - fix the issue that comparison between Decimal may cause overflow and report `Can't compare`. [#3364](https://github.com/pingcap/tics/pull/3364)
-    - Fix the issue of unexpected error that `3rd arguments of function substringUTF8 must be constants.` [#3265](https://github.com/pingcap/tics/pull/3265)
-    - Fix the issue that TiFlash fails to start up under platform without library `nsl` [#3206](https://github.com/pingcap/tics/pull/3206)
-    - release-note [#2673](https://github.com/pingcap/tics/pull/2673)
+    - Fix str_to_date() function incorrectly handles leading zeros when parsing Microseconds
+    - Fix the problem of TiFlash crashing when the memory limit is enabled
+    - Align unix_timestamp behavior with TiDB and mysql when input is earlier than 1970-01-01 00:00:01 UTC
+    - Fix potential data inconsistency when widen pk column type if pk is handle
+    - fix the issue that comparison between Decimal may cause overflow and report `Can't compare`
+    - Fix the issue of unexpected error that `3rd arguments of function substringUTF8 must be constants.`
+    - Fix the issue that TiFlash fails to start up under platform without library `nsl`
+    - release-note
 
 + PD
 
