@@ -61,7 +61,7 @@ The TiDB configuration file supports more options than command-line parameters. 
 
 ### `lower-case-table-names`
 
-- Configures the value of the `lower-case-table-names` system variable.
+- Configures the value of the `lower_case_table_names` system variable.
 - Default value: `2`
 - For details, see the [MySQL description](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_lower_case_table_names) of this variable.
 
@@ -389,7 +389,7 @@ Configuration items related to performance.
 
 - The size limit of a single transaction in TiDB.
 - Default value: `104857600` (in bytes)
-- In a single transaction, the total size of key-value records cannot exceed this value. The maximum value of this parameter is `10737418240` (10 GB). Note that if you have used the binlog to serve the downstream consumer Kafka (such as the `arbiter` cluster), the value of this parameter must be no more than `1073741824` (1 GB). This is because 1 GB is the upper limit of a single message size that Kafka can process. Otherwise, an error is returned if this limit is exceeded.
+- In a single transaction, the total size of key-value records cannot exceed this value. The maximum value of this parameter is `1099511627776` (1 TB). Note that if you have used the binlog to serve the downstream consumer Kafka (such as the `arbiter` cluster), the value of this parameter must be no more than `1073741824` (1 GB). This is because 1 GB is the upper limit of a single message size that Kafka can process. Otherwise, an error is returned if this limit is exceeded.
 
 ### `tcp-keep-alive`
 
@@ -648,3 +648,23 @@ The `experimental` section, introduced in v3.1.0, describes the configurations r
 
 + Controls whether an expression index can be created. Since TiDB v5.2.0, if the function in an expression is safe, you can create an expression index directly based on this function without enabling this configuration. If you want to create an expression index based on other functions, you can enable this configuration, but correctness issues might exist. By querying the `tidb_allow_function_for_expression_index` variable, you can get the functions that are safe to be directly used for creating an expression.
 + Default value: `false`
+
+### `stats-load-concurrency` <span class="version-mark">New in v5.4.0</span>
+
+> **WARNING:**
+>
+> Currently, synchronously loading statistics is an experimental feature. It is not recommended that you use it in production environments.
+
++ The maximum number of columns that the TiDB synchronously loading statistics feature can process concurrently.
++ Default value: `5`
++ Currently, the valid value range is `[1, 128]`.
+
+### `stats-load-queue-size` <span class="version-mark">New in v5.4.0</span>
+
+> **WARNING:**
+>
+> Currently, synchronously loading statistics is an experimental feature. It is not recommended that you use it in production environments.
+
++ The maximum number of column requests that the TiDB synchronously loading statistics feature can cache.
++ Default value: `1000`
++ Currently, the valid value range is `[1, 100000]`.
