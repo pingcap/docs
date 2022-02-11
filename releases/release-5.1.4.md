@@ -142,7 +142,7 @@ TiDB version: 5.1.4
     - Fix the problem that window function may return different results when using transaction or not. [#29947](https://github.com/pingcap/tidb/issues/29947)
     (dup) - Fix the issue that the length information is wrong when converting `Decimal` to `String` [#29417](https://github.com/pingcap/tidb/issues/29417)
     (dup) - Fix the issue that the `GREATEST` function returns inconsistent results due to different values of `tidb_enable_vectorized_expression` (`on` or `off`) [#29434](https://github.com/pingcap/tidb/issues/29434)
-    - planner: fix the issue that planner may cache invalid plans for joins in some cases [#28087](https://github.com/pingcap/tidb/issues/28087)
+    - (dup) Fix the issue that planner might cache invalid plans for `join` in some cases [#28087](https://github.com/pingcap/tidb/issues/28087)
 
 + TiFlash
 
@@ -158,8 +158,8 @@ TiDB version: 5.1.4
 + PD
 
     - Fix the bug that the region scatterer may generate the schedule with too few peers. [#4565](https://github.com/tikv/pd/issues/4565)
-    - Fix panic issue after TiKV node scales in [#4344](https://github.com/tikv/pd/issues/4344)
+    - (dup) Fix a panic issue that occurs after the TiKV node is removed [#4344](https://github.com/tikv/pd/issues/4344)
     - Fix the issue that operator can get blocked due to down store [#3353](https://github.com/tikv/pd/issues/3353)
     - Fix the bug that region statistics are not updated after `flow-round-by-digit` change. [#4295](https://github.com/tikv/pd/issues/4295)
-    - Fix the issue that PD may not elect leader as soon as leader step down [#3936](https://github.com/tikv/pd/issues/3936)
-    - `evict-leader-scheduler` supports schedule the regions with unhealthy peers. [#4093](https://github.com/tikv/pd/issues/4093)
+    - (dup) Fix slow leader election caused by stucked region syncer [#3936](https://github.com/tikv/pd/issues/3936)
+    - (dup) Support that the evict leader scheduler can schedule regions with unhealthy peers [#4093](https://github.com/tikv/pd/issues/4093)
