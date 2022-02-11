@@ -5,7 +5,7 @@ category: Releases
 
 # TiDB 5.1.4 Release Notes
 
-Release Date: February 22, 2022
+Release Date: xx, 2022
 
 TiDB version: 5.1.4
 
@@ -17,15 +17,15 @@ TiDB version: 5.1.4
 
 + TiDB
 
-    - Fix wrong result of microsecond function in vectorized [#29244](https://github.com/pingcap/tidb/issues/29244)
+    (dup) - Fix wrong results of the `microsecond` function in vectorized expressions [#29244](https://github.com/pingcap/tidb/issues/29244)
     - Set default value of tidb_analyze_version to 1 in v5.1 and v5.2 [#31748](https://github.com/pingcap/tidb/issues/31748)
     - Fix a panic that may happen when using `on duplicate key update`. [#28078](https://github.com/pingcap/tidb/issues/28078)
     - Fix `MaxDays` and `MaxBackups` not working for slow log. [#25716](https://github.com/pingcap/tidb/issues/25716)
     - Fix an issue that adding index panics by chance. [#27687](https://github.com/pingcap/tidb/issues/27687)
     - Fix wrong result for join with enum type [#27831](https://github.com/pingcap/tidb/issues/27831)
-    - Fix panic for caseWhen function with enum type [#29357](https://github.com/pingcap/tidb/issues/29357)
+    (dup) - Fix the panic when using the `CASE WHEN` function on the `ENUM` data type [#29357](https://github.com/pingcap/tidb/issues/29357)
     - Fix a memory leak bug when using @@tidb_analyze_version = 2 [#29305](https://github.com/pingcap/tidb/pull/29305)
-    - Fix wrong result of hour function in vectorized expression [#28643](https://github.com/pingcap/tidb/issues/28643)
+    (dup) - Fix wrong results of the `hour` function in vectorized expression [#28643](https://github.com/pingcap/tidb/issues/28643)
     - Fix a batch client bug that recycle idle connection may block sending requests in some rare cases. [#28345](https://github.com/pingcap/tidb/pull/28345)
     - Fix bug that mpp node availability detect does not work in some corner cases [#3118](https://github.com/pingcap/tics/issues/3118)
     - sessionctx: fix data-race bug when alloc task id [#27952](https://github.com/pingcap/tidb/issues/27952)
@@ -43,18 +43,18 @@ TiDB version: 5.1.4
     - Fix deadlock in some rare cases that futures get resolved too fast [#11549](https://github.com/tikv/tikv/issues/11549)
     - Fix resolved ts lag increased after stoping a tikv [#11351](https://github.com/tikv/tikv/issues/11351)
     - Fix connection abort when too many raft entries are batched into one messages [#9714](https://github.com/tikv/tikv/issues/9714)
-    - Fix panic in rare conditions when merge, conf change and snapshot happen at the same time [#11475](https://github.com/tikv/tikv/issues/11475)
+    (dup) - Fix a panic issue that occurs when Region merge, ConfChange, and Snapshot happen at the same time in extreme conditions [#11475](https://github.com/tikv/tikv/issues/11475)
     - status_server: skip profiling sample in glibc, pthread, libgcc to avoid possible deadlock
     - status_server: upgrade pprof-rs to fix memory leak [#11108](https://github.com/tikv/tikv/issues/11108)
     - Fix the issue that reverse scan can't detect memory locks and may read stale data. [#11440](https://github.com/tikv/tikv/issues/11440)
     - make tikv-ctl detect raft db correctly [#11393](https://github.com/tikv/tikv/issues/11393)
-    - fix negative sign when decimal divide to zero [#29586](https://github.com/pingcap/tidb/issues/29586)
+    (dup) - Fix the issue of negative sign when the decimal divide result is zero [#29586](https://github.com/pingcap/tidb/issues/29586)
     - Fix the bug that prewrite request retrying in pessimistic transactions have risk to affect data consistency in some rare cases. [#11187](https://github.com/tikv/tikv/issues/11187)
     - Fix resource-metering.enabled not working [#11235](https://github.com/tikv/tikv/issues/11235)
     - move verify_checksum to import-thread from apply-thread. [#11239](https://github.com/tikv/tikv/issues/11239)
     - Fix label leaking of thread metrics [#11195](https://github.com/tikv/tikv/issues/11195)
-    - Fix CDC panic due to missing downstream. [#11123](https://github.com/tikv/tikv/issues/11123)
-    - Fix frequent CDC incremental scan retry due to `Congest` error. [#11082](https://github.com/tikv/tikv/issues/11082)
+    (dup) - Fix the issue of TiCDC panic that occurs when the downstream database is missing [#11123](https://github.com/tikv/tikv/issues/11123)
+    (dup) - Fix the issue that CDC adds scan retries frequently due to the Congest error [#11082](https://github.com/tikv/tikv/issues/11082)
     - Fix the issue #9714. Now RaftClient will check the size of RaftMessage.extra_ctx and RaftMessage.message.context size as part of its message size estimate. [#9714](https://github.com/tikv/tikv/issues/9714)
     - resolved_ts: fix coroutine leaking [#10965](https://github.com/tikv/tikv/issues/10965)
     - Hide untouched storage commands' metrics in grafana dashboard [#11681](https://github.com/tikv/tikv/issues/11681)
@@ -87,15 +87,9 @@ TiDB version: 5.1.4
     + TiCDC
 
         - Fix a bug that MySQL sink will generate duplicated replace SQL if `batch-replace-enable` is disabled. [#4501](https://github.com/pingcap/tiflow/issues/4501)
-        - `None`. [#4128](https://github.com/pingcap/tiflow/issues/4128)
-        - release-note [#3793](https://github.com/pingcap/tiflow/issues/3793)
-        - `None`. [#4135](https://github.com/pingcap/tiflow/issues/4135)
         - Add exponential backoff mechanism for restarting a changefeed. [#3329](https://github.com/pingcap/tiflow/issues/3329)
         - Fix kv client cached region metric could be negative. [#4294](https://github.com/pingcap/tiflow/pull/4294)
-        - `None` [#4266](https://github.com/pingcap/tiflow/issues/4266)
-        - `None`. [#4223](https://github.com/pingcap/tiflow/issues/4223)
         - Fix the problem that TiCDC cannot send messages when `min.insync.replicas` is less than `replication-factor` [#3994](https://github.com/pingcap/tiflow/issues/3994)
-        - `None`. [#3431](https://github.com/pingcap/tiflow/issues/3431)
         - Fix the potential panic issue that occurs when changefeed info is removed from etcd. [#3128](https://github.com/pingcap/tiflow/issues/3128)
         - Manage sink checkpoint per table to avoid checkpointTs advances unexpected. [#3545](https://github.com/pingcap/tiflow/issues/3545)
         - Reduce "EventFeed retry rate limited" logs [#4006](https://github.com/pingcap/tiflow/issues/4006)
