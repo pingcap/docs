@@ -11,7 +11,7 @@ TiDB is highly compatible with the MySQL 5.7 protocol and the common features an
 However, some features of MySQL are not supported. This could be because there is now a better way to solve the problem (such as XML functions superseded by JSON), or a lack of current demand versus effort required (such as stored procedures and functions). Some features might also be difficult to implement as a distributed system.
 
 - In addition, TiDB does not support the MySQL replication protocol, but provides specific tools to replicate data with MySQL.
-    - Replicate data from MySQL: [TiDB Data Migration (DM)](https://docs.pingcap.com/tidb-data-migration/stable/overview) is a tool that supports the full data migration and the incremental data replication from MySQL/MariaDB into TiDB.
+    - Replicate data from MySQL: [TiDB Data Migration (DM)](/dm/dm-overview.md) is a tool that supports the full data migration and the incremental data replication from MySQL/MariaDB into TiDB.
     - Replicate data to MySQL: [TiCDC](/ticdc/ticdc-overview.md) is a tool for replicating the incremental data of TiDB by pulling TiKV change logs. TiCDC uses the [MySQL sink](/ticdc/ticdc-overview.md#sink-support) to replicate the incremental data of TiDB to MySQL.
 
 > **Note:**
@@ -25,8 +25,9 @@ However, some features of MySQL are not supported. This could be because there i
 + Events
 + User-defined functions
 + `FOREIGN KEY` constraints [#18209](https://github.com/pingcap/tidb/issues/18209)
-+ `FULLTEXT`/`SPATIAL` functions and indexes [#1793](https://github.com/pingcap/tidb/issues/1793)
-+ Character sets other than `utf8`, `utf8mb4`, `ascii`, `latin1` and `binary`
++ `FULLTEXT` syntax and indexes [#1793](https://github.com/pingcap/tidb/issues/1793)
++ `SPATIAL` (also known as `GIS`/`GEOMETRY`) functions, data types and indexes [#6347](https://github.com/pingcap/tidb/issues/6347)
++ Character sets other than `ascii`, `latin1`, `binary`, `utf8`, `utf8mb4`, and `gbk`.
 + SYS schema
 + Optimizer trace
 + XML Functions
@@ -130,6 +131,12 @@ Views in TiDB are not updatable. They do not support write operations such as `U
 ### Temporary tables
 
 For details, see [Compatibility between TiDB local temporary tables and MySQL temporary tables](/temporary-tables.md#compatibility-with-mysql-temporary-tables).
+
+### Character sets and collations
+
+* To learn the details of the character sets and collations supported by TiDB, see [Character Set and Collation Overview](/character-set-and-collation.md).
+
+* To learn the MySQL compatibility of the GBK character set, see [GBK compatibility](/character-set-gbk.md#mysql-compatibility) .
 
 ### Storage engines
 

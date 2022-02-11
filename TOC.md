@@ -7,9 +7,9 @@
   - [Basic Features](/basic-features.md)
   - [Experimental Features](/experimental-features.md)
   - Benchmarks
-    - [v5.3 Sysbench Performance Test Report](/benchmark/benchmark-sysbench-v5.3.0-vs-v5.2.2.md)
-    - [v5.3 TPC-C Performance Test Report](/benchmark/v5.3-performance-benchmarking-with-tpcc.md)
-    - [v5.3 MPP mode TPC-H 100GB Performance Test](/benchmark/v5.3-performance-benchmarking-with-tpch.md)
+    - [v5.4 Sysbench Performance Test Report](/benchmark/benchmark-sysbench-v5.4.0-vs-v5.3.0.md)
+    - [v5.4 TPC-C Performance Test Report](/benchmark/v5.4-performance-benchmarking-with-tpcc.md)
+    - [v5.4 MPP mode TPC-H 100GB Performance Test](/benchmark/v5.4-performance-benchmarking-with-tpch.md)
   - [MySQL Compatibility](/mysql-compatibility.md)
   - [TiDB Limitations](/tidb-limitations.md)
   - [TiDB Adopters](/adopters.md)
@@ -40,15 +40,21 @@
     - [Test TiDB Using TPC-C](/benchmark/benchmark-tidb-using-tpcc.md)
 - Migrate
   - [Overview](/migration-overview.md)
-  - Migrate from MySQL
-    - [Migrate from Amazon Aurora MySQL Using TiDB Lightning](/migrate-from-aurora-using-lightning.md)
-    - [Migrate from MySQL SQL Files Using TiDB Lightning](/migrate-from-mysql-dumpling-files.md)
-    - [Migrate from Amazon Aurora MySQL Using DM](/migrate-from-aurora-mysql-database.md)
-  - Migrate from CSV Files
-    - [Use TiDB Lightning](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)
-    - [Use `LOAD DATA` Statement](/sql-statements/sql-statement-load-data.md)
-  - [Migrate from SQL Files](/migrate-from-mysql-dumpling-files.md)
-  - [Replicate Incremental Data between TiDB Clusters in Real Time](/incremental-replication-between-clusters.md)
+  - [Migration Tools](/migration-tools.md)
+  - Migration Scenarios
+    - [Migrate from Aurora](/migrate-aurora-to-tidb.md)
+    - [Migrate MySQL of Small Datasets](/migrate-small-mysql-to-tidb.md)
+    - [Migrate MySQL of Large Datasets](/migrate-large-mysql-to-tidb.md)
+    - [Migrate and Merge MySQL Shards of Small Datasets](/migrate-small-mysql-shards-to-tidb.md)
+    - [Migrate and Merge MySQL Shards of Large Datasets](/migrate-large-mysql-shards-to-tidb.md)
+    - [Migrate from CSV Files](/migrate-from-csv-files-to-tidb.md)
+    - [Migrate from SQL Files](/migrate-from-sql-files-to-tidb.md)
+    - [Replicate Incremental Data between TiDB Clusters](/incremental-replication-between-clusters.md)
+  - Advanced Migration
+    - [Continuous Replication with gh-ost or pt-osc](/migrate-with-pt-ghost.md)
+    - [Migrate to a Downstream Table with More Columns](/migrate-with-more-columns-downstream.md)
+    - [Filter Binlog Events](/filter-binlog-event.md)
+    - [Filter DML Events Using SQL Expressions](/filter-dml-event.md)
 - Maintain
   - Upgrade
     - [Use TiUP (Recommended)](/upgrade-tidb-using-tiup.md)
@@ -61,7 +67,11 @@
       - [BR Tool Overview](/br/backup-and-restore-tool.md)
       - [Use BR Command-line for Backup and Restoration](/br/use-br-command-line-tool.md)
       - [BR Use Cases](/br/backup-and-restore-use-cases.md)
-      - [External Storages](/br/backup-and-restore-storages.md)
+      - External Storages
+        - [External Storages Overview](/br/backup-and-restore-storages.md)
+        - [Back up and Restore Data on Azure Blob Storage](/br/backup-and-restore-azblob.md)
+      - BR Features
+        - [Auto Tune](/br/br-auto-tune.md)
       - [BR FAQ](/br/backup-and-restore-faq.md)
   - [Configure Time Zone](/configure-time-zone.md)
   - [Daily Checklist](/daily-check.md)
@@ -81,7 +91,8 @@
   - [Identify Slow Queries](/identify-slow-queries.md)
   - [Analyze Slow Queries](/analyze-slow-queries.md)
   - [SQL Diagnostics](/information-schema/information-schema-sql-diagnostics.md)
-  - [Identify Expensive Queries](/identify-expensive-queries.md)
+  - [Identify Expensive Queries Using Top SQL](/dashboard/top-sql.md)
+  - [Identify Expensive Queries Using Logs](/identify-expensive-queries.md)
   - [Statement Summary Tables](/statement-summary-tables.md)
   - [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md)
   - [Troubleshoot Increased Read and Write Latency](/troubleshoot-cpu-issues.md)
@@ -146,6 +157,7 @@
     - Use Stale Read (Recommended)
       - [Usage Scenarios of Stale Read](/stale-read.md)
       - [Perform Stale Read Using `As OF TIMESTAMP`](/as-of-timestamp.md)
+      - [Perform Stale Read Using `tidb_read_staleness`](/tidb-read-staleness.md)
     - [Use the `tidb_snapshot` System Variable](/read-historical-data.md)
   - Best Practices
     - [Use TiDB](/best-practices/tidb-best-practices.md)
@@ -185,6 +197,8 @@
     - [Use BR Command-line for Backup and Restoration](/br/use-br-command-line-tool.md)
     - [BR Use Cases](/br/backup-and-restore-use-cases.md)
     - [External Storages](/br/backup-and-restore-storages.md)
+    - BR Features
+      - [Auto Tune](/br/br-auto-tune.md)
     - [BR FAQ](/br/backup-and-restore-faq.md)
   - TiDB Binlog
     - [Overview](/tidb-binlog/tidb-binlog-overview.md)
@@ -218,11 +232,89 @@
       - [CSV Support](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)
       - [Backends](/tidb-lightning/tidb-lightning-backends.md)
       - [Import Data in Parallel](/tidb-lightning/tidb-lightning-distributed-import.md)
+      - [Error Resolution](/tidb-lightning/tidb-lightning-error-resolution.md)
       - [Web Interface](/tidb-lightning/tidb-lightning-web-interface.md)
     - [Monitor](/tidb-lightning/monitor-tidb-lightning.md)
     - [FAQ](/tidb-lightning/tidb-lightning-faq.md)
     - [Glossary](/tidb-lightning/tidb-lightning-glossary.md)
-  - [TiDB Data Migration](/dm/dm-overview.md)
+  - TiDB Data Migration
+    - About TiDB Data Migration
+      - [DM Overview](/dm/dm-overview.md)
+      - Basic Features
+        - [Table Routing](/dm/dm-key-features.md#table-routing)
+        - [Block and Allow Lists](/dm/dm-key-features.md#block-and-allow-table-lists)
+        - [Binlog Event Filter](/dm/dm-key-features.md#binlog-event-filter)
+      - Advanced Features
+        - Merge and Migrate Data from Sharded Tables
+          - [Overview](/dm/feature-shard-merge.md)
+          - [Pessimistic Mode](/dm/feature-shard-merge-pessimistic.md)
+          - [Optimistic Mode](/dm/feature-shard-merge-optimistic.md)
+        - [Migrate from MySQL Databases that Use GH-ost/PT-osc](/dm/feature-online-ddl.md)
+        - [Filter DMLs Using SQL Expressions](/dm/feature-expression-filter.md)
+      - [DM Architecture](/dm/dm-arch.md)
+      - [Benchmarks](/dm/dm-benchmark-v5.4.0.md)
+    - Quick Start
+      - [Quick Start](/dm/quick-start-with-dm.md)
+      - [Deploy a DM cluster Using TiUP](/dm/deploy-a-dm-cluster-using-tiup.md)
+      - [Create a Data Source](/dm/quick-start-create-source.md)
+    - [Data Migration Scenarios](/dm/quick-create-migration-task.md)
+    - Deploy
+      - [Software and Hardware Requirements](/dm/dm-hardware-and-software-requirements.md)
+      - Deploy a DM Cluster
+        - [Use TiUP (Recommended)](/dm/deploy-a-dm-cluster-using-tiup.md)
+        - [Use TiUP Offline](/dm/deploy-a-dm-cluster-using-tiup-offline.md)
+        - [Use Binary](/dm/deploy-a-dm-cluster-using-binary.md)
+        - [Use Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/dev/deploy-tidb-dm)
+      - [Migrate Data Using DM](/dm/migrate-data-using-dm.md)
+      - [Test DM Performance](/dm/dm-performance-test.md)
+    - Maintain
+      - Tools
+        - [Maintain DM Clusters Using TiUP (Recommended)](/dm/maintain-dm-using-tiup.md)
+        - [Maintain DM Clusters Using dmctl](/dm/dmctl-introduction.md)
+        - [Maintain DM Clusters Using OpenAPI](/dm/dm-open-api.md)
+      - Cluster Upgrade
+        - [Manually Upgrade from v1.0.x to v2.0+](/dm/manually-upgrade-dm-1.0-to-2.0.md)
+      - [Manage Data Source](/dm/dm-manage-source.md)
+      - Manage a Data Migration Task
+        - [Task Configuration Guide](/dm/dm-task-configuration-guide.md)
+        - [Precheck a Task](/dm/dm-precheck.md)
+        - [Create a Task](/dm/dm-create-task.md)
+        - [Query Status](/dm/dm-query-status.md)
+        - [Pause a Task](/dm/dm-pause-task.md)
+        - [Resume a Task](/dm/dm-resume-task.md)
+        - [Stop a Task](/dm/dm-stop-task.md)
+        - [Export and Import Data Sources and Task Configuration of Clusters](/dm/dm-export-import-config.md)
+        - [Handle Failed DDL Statements](/dm/handle-failed-ddl-statements.md)
+      - [Manually Handle Sharding DDL Lock](/dm/manually-handling-sharding-ddl-locks.md)
+      - [Switch the MySQL Instance to Be Migrated](/dm/usage-scenario-master-slave-switch.md)
+      - [Manage Schemas of Tables to be Migrated](/dm/dm-manage-schema.md)
+      - [Handle Alerts](/dm/dm-handle-alerts.md)
+      - [Daily Check](/dm/dm-daily-check.md)
+    - Troubleshoot
+      - [Handle Errors](/dm/dm-error-handling.md)
+      - [Handle Performance Issues](/dm/dm-handle-performance-issues.md)
+    - Performance Tuning
+      - [Optimize Configuration](/dm/dm-tune-configuration.md)
+    - Reference
+      - Architecture
+        - [DM Architecture Overview](/dm/dm-overview.md)
+        - [DM-worker](/dm/dm-worker-intro.md)
+      - [Command-line Flags](/dm/dm-command-line-flags.md)
+      - Configuration
+        - [Overview](/dm/dm-config-overview.md)
+        - [DM-master Configuration](/dm/dm-master-configuration-file.md)
+        - [DM-worker Configuration](/dm/dm-worker-configuration-file.md)
+        - [Upstream Database Configuration](/dm/dm-source-configuration-file.md)
+        - [Data Migration Task Configuration](/dm/dm-task-configuration-guide.md)
+    - Secure
+      - [Enable TLS for DM Connections](/dm/dm-enable-tls.md)
+      - [Generate Self-signed Certificates](/dm/dm-generate-self-signed-certificates.md)
+      - [Monitoring Metrics](/dm/monitor-a-dm-cluster.md)
+      - [Alert Rules](/dm/dm-alert-rules.md)
+      - [Error Codes](/dm/dm-error-handling.md#handle-common-errors)
+    - [FAQ](/dm/dm-faq.md)
+    - [Glossary](/dm/dm-glossary.md)
+    - [Release Notes](/dm/dm-release-notes.md)
   - TiCDC
     - [Overview](/ticdc/ticdc-overview.md)
     - [Deploy](/ticdc/deploy-ticdc.md)
@@ -232,6 +324,7 @@
     - [Alert Rules](/ticdc/ticdc-alert-rules.md)
     - [TiCDC OpenAPI](/ticdc/ticdc-open-api.md)
     - [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
+    - [TiCDC Canal-JSON Protocol](/ticdc/ticdc-canal-json.md)
     - [Integrate TiDB with Confluent Platform](/ticdc/integrate-confluent-using-ticdc.md)
     - [Glossary](/ticdc/ticdc-glossary.md)
   - [Dumpling](/dumpling-overview.md)
@@ -242,7 +335,6 @@
     - [Data Check for TiDB Upstream/Downstream Clusters](/sync-diff-inspector/upstream-downstream-diff.md)
     - [Data Check in the DM Replication Scenario](/sync-diff-inspector/dm-diff.md)
   - TiSpark
-    - [Quick Start](/get-started-with-tispark.md)
     - [User Guide](/tispark-overview.md)
 - Reference
   - Cluster Architecture
@@ -453,7 +545,9 @@
     - [Views](/views.md)
     - [Partitioning](/partitioned-table.md)
     - [Temporary Tables](/temporary-tables.md)
-    - [Character Set and Collation](/character-set-and-collation.md)
+    - [Character Set and Collation]
+      - [Overview](/character-set-and-collation.md)
+      - [GBK](/character-set-gbk.md)
     - [Placement Rules in SQL](/placement-rules-in-sql.md)
     - System Tables
       - [`mysql`](/mysql-schema.md)
@@ -496,6 +590,7 @@
         - [`TABLE_CONSTRAINTS`](/information-schema/information-schema-table-constraints.md)
         - [`TABLE_STORAGE_STATS`](/information-schema/information-schema-table-storage-stats.md)
         - [`TIDB_HOT_REGIONS`](/information-schema/information-schema-tidb-hot-regions.md)
+        - [`TIDB_HOT_REGIONS_HISTORY`](/information-schema/information-schema-tidb-hot-regions-history.md)
         - [`TIDB_INDEXES`](/information-schema/information-schema-tidb-indexes.md)
         - [`TIDB_SERVERS_INFO`](/information-schema/information-schema-tidb-servers-info.md)
         - [`TIDB_TRX`](/information-schema/information-schema-tidb-trx.md)
@@ -517,6 +612,7 @@
       - [Access](/dashboard/dashboard-access.md)
       - [Overview Page](/dashboard/dashboard-overview.md)
       - [Cluster Info Page](/dashboard/dashboard-cluster-info.md)
+      - [Top SQL](/dashboard/top-sql.md)
       - [Key Visualizer Page](/dashboard/dashboard-key-visualizer.md)
       - [Metrics Relation Graph](/dashboard/dashboard-metrics-relation.md)
       - SQL Statements Analysis
@@ -590,6 +686,7 @@
     - [5.1.1](/releases/release-5.1.1.md)
     - [5.1.0](/releases/release-5.1.0.md)
   - v5.0
+    - [5.0.6](/releases/release-5.0.6.md)
     - [5.0.5](/releases/release-5.0.5.md)
     - [5.0.4](/releases/release-5.0.4.md)
     - [5.0.3](/releases/release-5.0.3.md)
