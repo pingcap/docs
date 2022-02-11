@@ -14,7 +14,7 @@ When TiCDC is running, it is a stateless node that achieves high availability th
 
 The architecture of TiCDC is shown in the following figure:
 
-![TiCDC architecture](/media/cdc-architecture.png)
+![TiCDC architecture](/media/ticdc/cdc-architecture.png)
 
 ### System roles
 
@@ -39,8 +39,6 @@ Currently, the TiCDC sink component supports replicating data to the following d
 
 - Databases compatible with MySQL protocol. The sink component provides the final consistency support.
 - Kafka based on the TiCDC Open Protocol. The sink component ensures the row-level order, final consistency or strict transactional consistency.
-- `cdclog` (experimental): Files written on the local filesystem or on the Amazon S3-compatible storage.
-- Apache Pulsar (experimental)
 
 ### Ensure replication order and consistency
 
