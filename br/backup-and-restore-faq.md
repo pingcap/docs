@@ -15,25 +15,25 @@ It is recommended to mount an NFS disk as a backup disk during backup. For detai
 
 ## How much does it affect the cluster during backup using BR?
 
-For TiDB v5.3.0 or earlier versions, the default configuration parameters of BR only serve to **offline backup** tasks. In the default configuration, the backup tasks using BR might use a large amount of CPU and I/O resources of the cluster, which causes the cluster latency to increase.
+For TiDB v5.3.0 or earlier versions, the default configuration parameters of BR only serve to **offline backup** tasks. In the default configuration, the backup tasks using BR might use a large amount of CPU and I/O resources of the cluster, which increases cluster latency.
 
 The results of internal tests show that under the default configuration, the backup tasks using BR have a great impact on the cluster performance. The detailed test information is as follows:
 
 - Test environment: Use a cluster with 6 TiKV nodes and a single-table dataset to perform the following hybrid operations. The ratio of the read and write tasks is about `10:1`.
 - Test methods:
     - Insert data to a single point
-    - Update data to in single point
+    - Update data in a single point
     - Queries for small ranges
-- Benchmark: Total QPS is around 20K, P95 latency is around 28ms, P99 is around 50ms.
-- Test result: When the total CPU utilization of the cluster is controlled at 91% by limiting speed, the results are as follows:
-    - The QPS of **write load** reduced by 50%, and the P99 latency increased several times.
-    - In contrast, **read load** is less affected, and its QPS even increased slightly.
+- Benchmark: Total QPS is around 20K. P95 latency is around 28ms. P99 latency is around 50ms.
+- Test result: When the total CPU utilization of the cluster is limited to 91%, the results are as follows:
+    - The QPS of **write workload** reduced by 50%, and P99 latency increased by several times.
+    - **Read workload** is less affected, and its QPS even increased slightly.
     - The overall P99 latency only rose by around 50%, and QPS reduced by around 4%.
 
 If you need to manually control the impact of backup tasks on cluster performance, you can use the following solutions. These two methods can reduce the impact of backup tasks on the cluster, but they also reduce the speed of backup tasks.
 
-- Use the `--ratelimit` parameter to limit the speed of backup tasks. Note that this parameter limits the speed of **saving backup files to external storage**. When calculating the total size of backup files, use the `backup data size(after compressed)` in the backup log as a benchmark.
-- Adjust the TiKV configuration item [`backup.num-threads`](/tikv-configuration-file.md#num-threads-1) to limit the resources used by backup tasks. This configuration item determines the number of threads used by backup tasks. The test data shows that when the number of threads used by backup tasks using BR does not exceed `8`, and the total CPU utilization of the cluster does not exceed 60%, the backup tasks have little impact on the cluster, regardless of the read and write load.
+- Use the `--ratelimit` parameter to limit the speed of backup tasks. Note that this parameter limits the speed of **storing backup files to external storage**. When calculating the total size of backup files, use the `backup data size(after compressed)` in the backup log as a benchmark.
+- Adjust the TiKV configuration item [`backup.num-threads`](/tikv-configuration-file.md#num-threads-1) to limit the resources used by backup tasks. This configuration item determines the number of threads used by backup tasks. The test data shows that when the number of threads used by backup tasks using BR does not exceed `8`, and the total CPU utilization of the cluster does not exceed 60%, the backup tasks have little impact on the cluster for both read and write workload.
 
 ## Does BR back up system tables? During data restoration, do they raise conflict?
 
