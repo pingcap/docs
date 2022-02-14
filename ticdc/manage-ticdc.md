@@ -210,9 +210,10 @@ The following are descriptions of parameters and parameter values that can be co
 | `kafka-version`      | The version of the downstream Kafka (optional, `2.4.0` by default. Currently, the earliest supported Kafka version is `0.11.0.2` and the latest one is `2.7.0`. This value needs to be consistent with the actual version of the downstream Kafka.)                      |
 | `kafka-client-id`    | Specifies the Kafka client ID of the replication task (optional, `TiCDC_sarama_producer_replication ID` by default) |
 | `partition-num`      | The number of the downstream Kafka partitions (Optional. The value must be **no greater than** the actual number of partitions. If you do not configure this parameter, the partition number is obtained automatically.) |
-| `max-message-bytes`  | The maximum size of data that is sent to Kafka broker each time (optional, `64MB` by default) |
+| `max-message-bytes`  | The maximum size of data that is sent to Kafka broker each time (optional, `10MB` by default) |
 | `replication-factor` | The number of Kafka message replicas that can be saved (optional, `1` by default)                       |
 | `protocol` | The protocol with which messages are output to Kafka. The value options are `default`, `canal`, `avro`, and `maxwell` (`default` by default)    |
+| `auto-create-topic` | Determines whether TiCDC creates the topic automatically when the `topic-name` passed in does not exist in the Kafka cluster (optional, `true` by default) |
 | `max-batch-size` | New in v4.0.9. If the message protocol supports outputting multiple data changes to one Kafka message, this parameter specifies the maximum number of data changes in one Kafka message. It currently takes effect only when Kafka's `protocol` is `default`. It's optional and `16` by default. From v5.0.1 and later versions, the default value has changed from 4096 to 16. |
 | `ca` | The path of the CA certificate file needed to connect to the downstream Kafka instance (optional)  |
 | `cert` | The path of the certificate file needed to connect to the downstream Kafka instance (optional) |
@@ -270,7 +271,7 @@ The following are descriptions of parameters that can be configured for the sink
 | `maxPendingMessages` | Sets the maximum size of the pending message queue, which is optional and defaults to 1000. For example, pending for the confirmation message from Pulsar. |
 | `disableBatching` |  Disables automatically sending messages in batches (optional) |
 | `batchingMaxPublishDelay` | Sets the duration within which the messages sent are batched (default: 10ms) |
-| `compressionType` | Sets the compression algorithm used for sending messages (optional). The value options are `LZ4`, `ZLIB`, and `ZSTD` (default). |
+| `compressionType` | Sets the compression algorithm used for sending messages (optional). The value options are `NONE`,`LZ4`, `ZLIB`, and `ZSTD`. (`NONE` by default) |
 | `hashingScheme` | The hash algorithm used for choosing the partition to which a message is sent (optional). The value options are `JavaStringHash` (default) and `Murmur3`. |
 | `properties.*` | The customized properties added to the Pulsar producer in TiCDC (optional). For example, `properties.location=Hangzhou`. |
 
