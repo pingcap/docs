@@ -20,7 +20,7 @@ The data migration task includes two stages: full data migration and incremental
 
 ## DM versions
 
-This document is dedicated to DM v5.4, the latest stable version of DM.
+This document is applicable to DM v5.4, the latest stable version of DM.
 
 Before v5.4, the DM documentation is independent of the TiDB documentation. To access these earlier versions of the DM documentation, click one of the following links:
 
