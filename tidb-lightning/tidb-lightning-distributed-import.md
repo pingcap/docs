@@ -61,7 +61,7 @@ Next, this document uses two examples to detail the operation steps of parallel 
 
 TiDB Lightning exclusively uses some resources when running. If you need to deploy multiple TiDB Lightning instances on a single machine (which is not recommended for production environments), or on a disk shared by multiple machines, you need to be aware of the following usage restrictions.
 
-- You must set the tikv-importer.sorted-kv-dir to a different path for each TiDB Lightning instance. Multiple instances sharing the same path can lead to unintended behavior and may result in import failures or data errors.
+- You must set the `tikv-importer.sorted-kv-dir` to a different path for each TiDB Lightning instance. Multiple instances sharing the same path can lead to unintended behavior and may result in import failures or data errors.
 - Store each TiDB Lightning checkpoint separately. For more informations about checkpoint configurations, see [TiDB Lightning Checkpoints](/tidb-lightning/tidb-lightning-checkpoints.md).
     - If you set checkpoint.driver = "file" (default), make sure that the path to the checkpoint is unique for each instance.
     - If you set checkpoint.driver = "mysql", you need to set a different schema for each instance.
