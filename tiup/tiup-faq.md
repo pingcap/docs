@@ -63,8 +63,9 @@ MaxStartups 1000
 ## How do I specify the latest patch version for a specific major.minor version?
 
 Use the format `~{Major}.{Minor}`, like `~5.1` which would currently give `v5.1.3` (the initial `v` is optional)
+Or use a `x` or `*` as wild card, like `v5.1.x` or `v5.1.*` to get `v5.1.3`
 You can use different constraints when specifying which version to use.
 vA[.B[.C]] => String match of version resulting in lowest version matching the string (v5.1 => v5.1.0)
 ^A[.B[.C]] => Match highest version with Major version >= A and < A+1 (^5.1 => v5.4.0)
 ~A[.B[.C]] => Match highest version with Minor version >= B and < B+1 (~5.1 => v5.1.3)
-(at the time of writing latest version in 5.1 series is 5.1.3 and 5.4 series is 5.4.0)
+(at the time of writing latest version in 5.1 series is 5.1.3 and 5 series is 5.4.0)
