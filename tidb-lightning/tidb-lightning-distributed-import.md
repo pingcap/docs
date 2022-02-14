@@ -57,6 +57,17 @@ Next, this document uses two examples to detail the operation steps of parallel 
 - Example 1: Use Dumpling + TiDB Lightning to import sharded databases and tables into TiDB in parallel
 - Example 2: Import single tables in parallel
 
+### Restrictions
+
+TiDB Lightning exclusively uses some resources when running. If you need to deploy multiple TiDB Lightning instances on a single machine (which is not recommended for production environments), or on a disk shared by multiple machines, you need to be aware of the following usage restrictions.
+
+- You must set the tikv-importer.sorted-kv-dir to a different path for each TiDB Lightning instance. Multiple instances sharing the same path can lead to unintended behavior and may result in import failures or data errors.
+- Store each TiDB Lightning checkpoint separately. For more informations about checkpoint configurations, see [TiDB Lightning Checkpoints](/tidb-lightning/tidb-lightning-checkpoints.md).
+    - If you set checkpoint.driver = "file" (default), make sure that the path to the checkpoint is unique for each instance.
+    - If you set checkpoint.driver = "mysql", you need to set a different schema for each instance.
+- The log file for each TiDB Lightning should be set to a different path. Sharing the same log file will impact log querying and troubleshooting.
+- If you use the [Web Interface](/tidb-lightning/tidb-lightning-web-interface.md) or Debug API, you need to set `lightning.status-addr` to a unique address for each instance; otherwise the TiDB Lightning process can not start due to port conflict.
+
 ## Example 1: Use Dumpling + TiDB Lightning to Import Sharded Databases and Tables into TiDB in Parallel
 
 In this example, assume that the upstream is a MySQL cluster with 10 sharded tables, with a total size of 10 TiB. You can Use 5 TiDB Lightning instances to perform parallel import, and each instance imports 2 TiB. It is estimated that the total import time (excluding the time required for Dumpling export) can be reduced from about 40 hours to about 10 hours.
