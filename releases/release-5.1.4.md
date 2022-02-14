@@ -26,7 +26,7 @@ TiDB version: 5.1.4
     (dup) - Fix the panic when using the `CASE WHEN` function on the `ENUM` data type [#29357](https://github.com/pingcap/tidb/issues/29357)
     - Fix a memory leak bug when using @@tidb_analyze_version = 2 [#29305](https://github.com/pingcap/tidb/pull/29305)
     (dup) - Fix wrong results of the `hour` function in vectorized expression [#28643](https://github.com/pingcap/tidb/issues/28643)
-    - Fix a batch client bug that recycle idle connection may block sending requests in some rare cases. [#28345](https://github.com/pingcap/tidb/pull/28345)
+    - Fix a batch client bug that recycle idle connection may block sending requests in some rare cases. [#27678](https://github.com/pingcap/tidb/pull/27678)
     (dup) - Fix a bug that the availability detection of MPP node does not work in some corner cases [#3118](https://github.com/pingcap/tics/issues/3118)
     (dup) - Fix the `DATA RACE` issue when assigning `MPP task ID` [#27952](https://github.com/pingcap/tidb/issues/27952)
     (dup) - Fix the `INDEX OUT OF RANGE` error for a MPP query after deleting an empty `dual table` [#28250](https://github.com/pingcap/tidb/issues/28250)
