@@ -6,7 +6,7 @@ aliases: ['/docs/dev/statistics/','/docs/dev/reference/performance/statistics/']
 
 # Introduction to Statistics
 
-TiDB uses statistics to decide [which index to choose](/choose-index.md). The `tidb_analyze_version` variable controls the statistics collected by TiDB. Currently, two versions of statistics are supported: `tidb_analyze_version = 1` and `tidb_analyze_version = 2`. In versions before v5.1.0, the default value of this variable is `1`. In v5.1, v5.2, and v5.3, the default value of this variable is `2`, which serves as an experimental feature.
+TiDB uses statistics to decide [which index to choose](/choose-index.md). The `tidb_analyze_version` variable controls the statistics collected by TiDB. Currently, two versions of statistics are supported: `tidb_analyze_version = 1` and `tidb_analyze_version = 2`. In versions lower than v5.1.0, the default value of this variable is `1`, analyze introduce value `2` in v5.1.0. For versions in v5.1.0-v5.1.3 and v5.2.0-v5.2.3, the default value of this variable is `2`, which serves as an experimental feature(In later versions of v5.1.4 and v5.2.4, the default value of this variable is changed to `1`). For all versions later than v5.3.0, the default value of this variable is `2`.
 
 > **Note:**
 >

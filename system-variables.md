@@ -452,7 +452,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Default value: `2`
 - Range: `[1, 2]`
 - Controls how TiDB collects statistics.
-- In versions before v5.1.0, the default value of this variable is `1`. In v5.1.0, the default value of this variable is `2`, which serves as an experimental feature. For detailed introduction, see [Introduction to Statistics](/statistics.md).
+- In versions lower than v5.1.0, the default value of this variable is `1`, introduce value `2` in v5.1.0. For versions in v5.1.0-v5.1.3 and v5.2.0-v5.2.3, the default value of this variable is `2`, which serves as an experimental feature(In later versions of v5.1.4 and v5.2.4, the default value of this variable is `1`). For all versions later than v5.3.0, the default value of this variable is `2`. For detailed introduction, see [Introduction to Statistics](/statistics.md).
 
 ### tidb_auto_analyze_end_time
 
