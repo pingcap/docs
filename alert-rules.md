@@ -313,7 +313,7 @@ This section gives the alert rules for the PD component.
 
 * Alert rule:
 
-    `(sum(pd_regions_status{type="down-peer-region-count"}) by (instance) > 0) and (sum(etcd_server_is_leader) by (instance) > 0)`
+    `(sum(pd_regions_status{type="down-peer-region-count"}) by (instance)  > 0) and (sum(etcd_server_is_leader) by (instance) > 0)`
 
 * Description:
 
