@@ -11,9 +11,18 @@ TiDB version: 5.1.4
 
 ## Compatibility changes
 
-## Feature enhancements
++ TiDB
 
-## __unsorted
+- Change the default value of system variable [`tidb_analyze_version`](https://docs.pingcap.com/tidb/v5.1/system-variables#tidb_analyze_version-new-in-v510) to 1. [#31748](https://github.com/pingcap/tidb/issues/31748)
+- Set `max-message-bytes` default to 10M [#4041](https://github.com/pingcap/tiflow/issues/4041)
+
++ Tools
+
+    + TiCDC
+
+        - Set `max-message-bytes` default to 10M [#4041](https://github.com/pingcap/tiflow/issues/4041)
+
+## Feature enhancements
 
 + TiDB
 
@@ -31,6 +40,10 @@ TiDB version: 5.1.4
     (dup) - Fix the `DATA RACE` issue when assigning `MPP task ID` [#27952](https://github.com/pingcap/tidb/issues/27952)
     (dup) - Fix the `INDEX OUT OF RANGE` error for a MPP query after deleting an empty `dual table` [#28250](https://github.com/pingcap/tidb/issues/28250)
     (dup) - Fix the issue of false positive error log `invalid cop task execution summaries length` for MPP queries [#1791](https://github.com/pingcap/tics/issues/1791)
+    - planner: support column range partition pruning for builtin function IN [#26739](https://github.com/pingcap/tidb/issues/26739)
+    - Support column range partition pruning for built-in function `IN`. [#26739](https://github.com/pingcap/tidb/issues/26739)
+    - Improve the accuracy of the memory usage tracking for 'IndexJoin'. [#28650](https://github.com/pingcap/tidb/issues/28650)
+    - Track the memory usage of IndexJoin more accurate. [#28650](https://github.com/pingcap/tidb/issues/28650)
 
 + TiKV/TiKV
 
@@ -62,21 +75,6 @@ TiDB version: 5.1.4
     - improve raft client error log report [#11959](https://github.com/tikv/tikv/issues/11959)
     - Avoid false "GC can not work" alert under low write flow. [#10664](https://github.com/tikv/tikv/pull/10664)
 
-+ TiFlash
-
-    - Fix cast to decimal overflow bug
-    - Fix the bug that castStringAsReal has different behaivor between tiflash and tikv/tidb.
-    - Fix random `EstablishMPPConnection` fail after TiFlash server restart.
-    - Fix the problem that obsolete data cannot be reclaimed after set tiflash replica to 0
-    - Increase the max supported depth of expression/plan tree in dag request from 100 to 200.
-    - Fixed the inconsistent behavior of CastStringAsDecimal between tiflash and tidb/tikv.
-    - Fix the bug that results of `where <string>` is wrong because it will be converted to int type.
-    - Fix tiflash randomly crash when a mpp query is killed.
-    - Fix the issue of unexpected error that `Unexpected type of column: Nullable(Nothing)`
-    - Support INET6_ATON and INET6_NTOA in TiFlash.
-    - Support INET_ATON and INET_NTOA in TiFlash.
-    - expand streams after aggregation
-
 + PD
 
     (dup) - Fix the issue that the hotspot cache cannot be cleared when the Region heartbeat is less than 60 seconds [#4390](https://github.com/tikv/pd/issues/4390)
@@ -88,16 +86,18 @@ TiDB version: 5.1.4
 
         - Fix a bug that MySQL sink will generate duplicated replace SQL if `batch-replace-enable` is disabled. [#4501](https://github.com/pingcap/tiflow/issues/4501)
         - Add exponential backoff mechanism for restarting a changefeed. [#3329](https://github.com/pingcap/tiflow/issues/3329)
-        - Fix kv client cached region metric could be negative. [#4294](https://github.com/pingcap/tiflow/pull/4294)
+        - Fix kv client cached region metric could be negative. [#4300](https://github.com/pingcap/tiflow/issues/4300)
         - Fix the problem that TiCDC cannot send messages when `min.insync.replicas` is less than `replication-factor` [#3994](https://github.com/pingcap/tiflow/issues/3994)
         - Fix the potential panic issue that occurs when changefeed info is removed from etcd. [#3128](https://github.com/pingcap/tiflow/issues/3128)
         - Manage sink checkpoint per table to avoid checkpointTs advances unexpected. [#3545](https://github.com/pingcap/tiflow/issues/3545)
         - Reduce "EventFeed retry rate limited" logs [#4006](https://github.com/pingcap/tiflow/issues/4006)
+         (dup) - Reduce the frequency of CDC reporting "EventFeed retry rate limited" logs when TiKV  encounters OOM error [#4006](https://github.com/pingcap/tiflow/issues/4006)
         - Fix a bug that can cause changefeed stuck due to a deadlock occurs. [#4055](https://github.com/pingcap/tiflow/issues/4055)
         - Set `max-message-bytes` default to 10M, and use the min value with topic and broker to initialize the producer. [#4041](https://github.com/pingcap/tiflow/issues/4041)
         (dup) - Fix the TiCDC panic issue that occurs when manually cleaning the task status in etcd [#2980](https://github.com/pingcap/tiflow/issues/2980)
         - Fix syntax error if DDL has a special comment. [#3755](https://github.com/pingcap/tiflow/issues/3755)
         - Reduce checkpoint lag when capturing many tables. [#3900](https://github.com/pingcap/tiflow/issues/3900)
+        (dup)- Optimize checkpoint lag when capturing many tables [#3900](https://github.com/pingcap/tiflow/issues/3900)
         (dup) - Fix the timezone error that occurs when the `cdc server` command runs on some Red Hat Enterprise Linux releases (such as 6.8 and 6.9) [#3584](https://github.com/pingcap/tiflow/issues/3584)
         - Fix a bug in EtcdWorker that could hang the owner or processor. [#3750](https://github.com/pingcap/tiflow/issues/3750)
         - Fix the issue of changefeed resuming automatically after upgrading cluster [#3473](https://github.com/pingcap/tiflow/issues/3473)
@@ -122,38 +122,35 @@ TiDB version: 5.1.4
         - Add metrics to observe incremental scan remaining time [#2985](https://github.com/pingcap/tiflow/issues/2985)
         (dup) - Fix the issue that TiCDC sync task might pause when an error occurs during writing a Kafka message [#2978](https://github.com/pingcap/tiflow/issues/2978)
 
-## Improvements
-
-+ TiDB
-
-    - planner: support column range partition pruning for builtin function IN [#26739](https://github.com/pingcap/tidb/issues/26739)
-    - Track the memory usage of IndexJoin more accurate. [#28650](https://github.com/pingcap/tidb/issues/28650)
-
-+ TiFlash
-
-    - support functions of ADDDATE() and DATE_ADD() pushed down to tiflash
-
 ## Bug Fixes
 
 + TiDB
 
     - Fix the bug that indexHashJoin may return the error `send on closed channel`. [#31129](https://github.com/pingcap/tidb/issues/31129)
+    - Fix the memory leak bug when using analyze version 2(@@tidb_analyze_version = 2). [#29305](https://github.com/pingcap/tidb/pull/29305)
+    - Fix the issue that `MaxDays` and `MaxBackups` not working for slow log. [#25716](https://github.com/pingcap/tidb/issues/25716)
+    - Fix the panic that may happen when using `ON DUPLICATE KEY UPDATE`. [#28078](https://github.com/pingcap/tidb/issues/28078)
+    - Fix the wrong result when using join with enum type [#27831](https://github.com/pingcap/tidb/issues/27831)
+    - Fix the issue that `IndexHashJoin` may return the error `send on closed channel`. [#31129](https://github.com/pingcap/tidb/issues/31129)
+    - Fix the issue that recycle idle connection of ['BatchCommands'](https://docs.pingcap.com/tidb/stable/tidb-configuration-file/#max-batch-size) may block sending requests in some rare cases. [#27678](https://github.com/pingcap/tidb/pull/27678)
     (dup) - Fix the data inconsistency issue caused by incorrect usage of lazy existence check and untouched key optimization [#30410](https://github.com/pingcap/tidb/issues/30410)
     (dup) - Fix the issue that window functions might return different results when using a transaction or not [#29947](https://github.com/pingcap/tidb/issues/29947)
     (dup) - Fix the issue that the length information is wrong when casting `Decimal` to `String` [#29417](https://github.com/pingcap/tidb/issues/29417)
     (dup) - Fix the issue that the `GREATEST` function returns inconsistent results due to different values of `tidb_enable_vectorized_expression` (set to `on` or `off`) [#29434](https://github.com/pingcap/tidb/issues/29434)
     (dup) - Fix the issue that the planner might cache invalid plans for `join` in some cases [#28087](https://github.com/pingcap/tidb/issues/28087)
 
-+ TiFlash
-
-    - Fix str_to_date() function incorrectly handles leading zeros when parsing Microseconds
-    - Fix the problem of TiFlash crashing when the memory limit is enabled
-    - Align unix_timestamp behavior with TiDB and mysql when input is earlier than 1970-01-01 00:00:01 UTC
-    - Fix potential data inconsistency when widen pk column type if pk is handle
-    - fix the issue that comparison between Decimal may cause overflow and report `Can't compare`
-    - Fix the issue of unexpected error that `3rd arguments of function substringUTF8 must be constants.`
-    - Fix the issue that TiFlash fails to start up under platform without library `nsl`
-    - release-note
++ TiKV
+    - Fixes the bug that unsafe_destroy_range does not get executed when GC worker is busy [#11903](https://github.com/tikv/tikv/issues/11903)
+    - Fix potential high latency caused by destroying a peer [#10210](https://github.com/tikv/tikv/issues/10210)
+    - Fix wrong `any_value` result when there are regions returning empty result [#11735](https://github.com/tikv/tikv/issues/11735)
+    - Fix the problem that destroying an uninitialized replica may cause a stalled replica be created again. [#10533](https://github.com/tikv/tikv/issues/10533)
+    - Fix metadata corruption in an unlikely condition that prepare merge is triggered after new election without informing an isolated peer [#11526](https://github.com/tikv/tikv/issues/11526)
+    - Fix deadlock in some rare cases that futures get resolved too fast [#11549](https://github.com/tikv/tikv/issues/11549)
+    - Skip profiling sample in glibc, pthread, libgcc to avoid possible deadlock and memory leak in profiling [#11108](https://github.com/tikv/tikv/issues/11108)
+    - Fix the bug that prewrite request retrying in pessimistic transactions have risk to affect data consistency in some rare cases. [#11187](https://github.com/tikv/tikv/issues/11187)
+    - Fix resource-metering.enabled config does not work [#11235](https://github.com/tikv/tikv/issues/11235)
+    - Fix coroutine leaking in the resolved_ts module.  [#10965](https://github.com/tikv/tikv/issues/10965)
+    - Avoid false "GC can not work" alert under low write flow. [#9910](https://github.com/tikv/tikv/issues/9910)
 
 + PD
 
@@ -163,3 +160,30 @@ TiDB version: 5.1.4
     - Fix the bug that region statistics are not updated after `flow-round-by-digit` change. [#4295](https://github.com/tikv/pd/issues/4295)
     - (dup) Fix slow leader election caused by stucked region syncer [#3936](https://github.com/tikv/pd/issues/3936)
     - (dup) Support that the evict leader scheduler can schedule regions with unhealthy peers [#4093](https://github.com/tikv/pd/issues/4093)
+    - (dup) - Fix the issue that the hotspot cache cannot be cleared when the Region heartbeat is less than 60 seconds [#4390](https://github.com/tikv/pd/issues/4390)
+
++ Tools
+
+    + TiCDC
+
+        - Fix a bug that MySQL sink will generate duplicated replace SQL if `batch-replace-enable` is disabled [#4501](https://github.com/pingcap/tiflow/issues/4501)
+        - Fix kv client cached region metric could be negative [#4300](https://github.com/pingcap/tiflow/issues/4300)
+        - Fix the problem that TiCDC cannot send messages when `min.insync.replicas` is less than `replication-factor` [#3994](https://github.com/pingcap/tiflow/issues/3994)
+        - Fix the potential panic issue that occurs when changefeed info is removed from etcd [#3128](https://github.com/pingcap/tiflow/issues/3128)
+        - Fix a bug that checkpointTs advances unexpectedly [#3545](https://github.com/pingcap/tiflow/issues/3545)
+        - Fix a bug that changefeed gets stuck when table scheduling [#4055](https://github.com/pingcap/tiflow/issues/4055)
+        - Fix syntax error if DDL has a special comment [#3755](https://github.com/pingcap/tiflow/issues/3755)
+        - Fix a bug in EtcdWorker that could hang the owner or processor [#3750](https://github.com/pingcap/tiflow/issues/3750)
+        - Fix the issue of stopped changefeed resuming automatically after upgrading cluster [#3473](https://github.com/pingcap/tiflow/issues/3473)
+        - Fix a data type compatibility issue between TiCDC and TiDB amend mechanism [#3793](https://github.com/pingcap/tiflow/issues/3793)
+        - Fixed the data inconsistencies caused by TiCDC default value padding exceptions [#3918](https://github.com/pingcap/tiflow/issues/3918) [#3929](https://github.com/pingcap/tiflow/issues/3929)
+        - Fix a bug that owner get stuck when PD leader shutdowns and transfers to new node [#3615](https://github.com/pingcap/tiflow/issues/3615)
+        - Fix kvclient takes too long time to recover when TiKV node shutdown  [#3191](https://github.com/pingcap/tiflow/issues/3191)
+
+    + Backup & Restore (BR)
+
+        - Fix a bug that caused region unbalanced after restoring [#30425](https://github.com/pingcap/tidb/issues/30425) [#31034](https://github.com/pingcap/tidb/issues/31034)
+
+    + TiDB Lightning
+
+        - Fix the bug that lightning doesn't report error if s3 storage path not exist [#28031](https://github.com/pingcap/tidb/issues/28031) [#30709](https://github.com/pingcap/tidb/issues/30709)
