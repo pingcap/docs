@@ -19,7 +19,7 @@ To make this mechanism effective, you need to properly configure TiKV and PD so 
 >
 > Location labels are defined as Strings in PD with no restricted default or pre-configured values. This offers customizable label configuration in label names other than `zone`, `rack` or `host` which are used as demonstration in below sections.
 
-To further customize it, there is no restriction in number of label levels (not mandatory for 3 levels) as long as they match with TiKV server labels.
+To further customize it, there is **no** restriction in the number of label levels (not mandatory for 3 levels) as long as they match with TiKV server labels.
 
 ### Configure `labels` for TiKV
 
