@@ -24,7 +24,7 @@ The results of internal tests show that under the default configuration, the bac
     - Insert data to a single point
     - Update data in a single point
     - Queries for small ranges
-- Benchmark: Total QPS is around 20K. P95 latency is around 28ms. P99 latency is around 50ms.
+- Benchmark: Total QPS is around 20k. P95 latency is around 28 ms. P99 latency is around 50 ms.
 - Test result: When the total CPU utilization of the cluster is limited to 91%, the results are as follows:
     - The QPS of **write workload** reduced by 50%, and P99 latency increased by several times.
     - **Read workload** is less affected, and its QPS even increased slightly.
