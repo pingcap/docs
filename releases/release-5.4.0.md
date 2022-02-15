@@ -4,7 +4,7 @@ title: TiDB 5.4 Release Notes
 
 # TiDB 5.4 Release Notes
 
-Release date：February xx, 2022
+Release date：February 15, 2022
 
 TiDB version: 5.4.0
 
