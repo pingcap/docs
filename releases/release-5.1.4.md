@@ -14,7 +14,6 @@ TiDB version: 5.1.4
 + TiDB
 
 - Change the default value of system variable [`tidb_analyze_version`](https://docs.pingcap.com/tidb/v5.1/system-variables#tidb_analyze_version-new-in-v510) to 1. [#31748](https://github.com/pingcap/tidb/issues/31748)
-- Set `max-message-bytes` default to 10M [#4041](https://github.com/pingcap/tiflow/issues/4041)
 
 + Tools
 
@@ -27,7 +26,7 @@ TiDB version: 5.1.4
 + TiDB
 
     (dup) - Fix wrong results of the `microsecond` function in vectorized expressions [#29244](https://github.com/pingcap/tidb/issues/29244)
-    - Set default value of tidb_analyze_version to 1 in v5.1 and v5.2 [#31748](https://github.com/pingcap/tidb/issues/31748)
+    - Set the default value of tidb_analyze_version to 1 in v5.1 and v5.2 [#31748](https://github.com/pingcap/tidb/issues/31748)
     - Fix a panic that may happen when using `on duplicate key update`. [#28078](https://github.com/pingcap/tidb/issues/28078)
     - Fix `MaxDays` and `MaxBackups` not working for slow log. [#25716](https://github.com/pingcap/tidb/issues/25716)
     (dup) - Fix the TiDB panic when executing the `ALTER TABLE.. ADD INDEX` statement in some cases [#27687](https://github.com/pingcap/tidb/issues/27687)
@@ -45,12 +44,12 @@ TiDB version: 5.1.4
     - Improve the accuracy of the memory usage tracking for 'IndexJoin'. [#28650](https://github.com/pingcap/tidb/issues/28650)
     - Track the memory usage of IndexJoin more accurate. [#28650](https://github.com/pingcap/tidb/issues/28650)
 
-+ TiKV/TiKV
++ TiKV
 
-    - Fixes the bug that unsafe_destroy_range does not get executed when GC worker is busy [#11903](https://github.com/tikv/tikv/issues/11903)
-    - fix potential high latency caused by destroying a peer [#10210](https://github.com/tikv/tikv/issues/10210)
+    - Fix the bug that unsafe_destroy_range does not get executed when GC worker is busy [#11903](https://github.com/tikv/tikv/issues/11903)
+    - Fix potential high latency caused by destroying a peer [#10210](https://github.com/tikv/tikv/issues/10210)
     - Fix wrong `any_value` result when there are regions returning empty result [#11735](https://github.com/tikv/tikv/issues/11735)
-    - update procfs to 0.12.0 [#11702](https://github.com/tikv/tikv/issues/11702)
+    - Update procfs to 0.12.0 [#11702](https://github.com/tikv/tikv/issues/11702)
     - Fix the problem that destroying an uninitialized replica may cause a stalled replica be created again. [#10533](https://github.com/tikv/tikv/issues/10533)
     - Fix metadata corruption in an unlikely condition that prepare merge is triggered after new election without informing an isolated peer [#11526](https://github.com/tikv/tikv/issues/11526)
     - Fix deadlock in some rare cases that futures get resolved too fast [#11549](https://github.com/tikv/tikv/issues/11549)
@@ -60,7 +59,7 @@ TiDB version: 5.1.4
     - status_server: skip profiling sample in glibc, pthread, libgcc to avoid possible deadlock
     - status_server: upgrade pprof-rs to fix memory leak [#11108](https://github.com/tikv/tikv/issues/11108)
     (dup) - Fix the issue that TiKV cannot detect the memory lock when TiKV perform a reverse table scan [#11440](https://github.com/tikv/tikv/issues/11440)
-    - make tikv-ctl detect raft db correctly [#11393](https://github.com/tikv/tikv/issues/11393)
+    - Make tikv-ctl detect raft db correctly [#11393](https://github.com/tikv/tikv/issues/11393)
     (dup) - Fix the issue of negative sign when the decimal divide result is zero [#29586](https://github.com/pingcap/tidb/issues/29586)
     - Fix the bug that prewrite request retrying in pessimistic transactions have risk to affect data consistency in some rare cases. [#11187](https://github.com/tikv/tikv/issues/11187)
     - Fix resource-metering.enabled not working [#11235](https://github.com/tikv/tikv/issues/11235)
@@ -72,7 +71,7 @@ TiDB version: 5.1.4
     - resolved_ts: fix coroutine leaking [#10965](https://github.com/tikv/tikv/issues/10965)
     (dup) - Collapse some uncommon storage-related metrics in Grafana dashboard [#11681](https://github.com/tikv/tikv/issues/11681)
     - resolved_ts: fix coroutine leaking [#10965](https://github.com/tikv/tikv/issues/10965)
-    - improve raft client error log report [#11959](https://github.com/tikv/tikv/issues/11959)
+    - Improve raft client error log report [#11959](https://github.com/tikv/tikv/issues/11959)
     - Avoid false "GC can not work" alert under low write flow. [#10664](https://github.com/tikv/tikv/pull/10664)
 
 + PD
@@ -140,7 +139,7 @@ TiDB version: 5.1.4
     (dup) - Fix the issue that the planner might cache invalid plans for `join` in some cases [#28087](https://github.com/pingcap/tidb/issues/28087)
 
 + TiKV
-    - Fixes the bug that unsafe_destroy_range does not get executed when GC worker is busy [#11903](https://github.com/tikv/tikv/issues/11903)
+    - Fix the bug that unsafe_destroy_range does not get executed when GC worker is busy [#11903](https://github.com/tikv/tikv/issues/11903)
     - Fix potential high latency caused by destroying a peer [#10210](https://github.com/tikv/tikv/issues/10210)
     - Fix wrong `any_value` result when there are regions returning empty result [#11735](https://github.com/tikv/tikv/issues/11735)
     - Fix the problem that destroying an uninitialized replica may cause a stalled replica be created again. [#10533](https://github.com/tikv/tikv/issues/10533)
@@ -158,9 +157,9 @@ TiDB version: 5.1.4
     (dup) - Fix a panic issue that occurs after the TiKV node is removed [#4344](https://github.com/tikv/pd/issues/4344)
     (dup) - Fix the issue that operator can get blocked due to down store [#3353](https://github.com/tikv/pd/issues/3353)
     - Fix the bug that region statistics are not updated after `flow-round-by-digit` change. [#4295](https://github.com/tikv/pd/issues/4295)
-    - (dup) Fix slow leader election caused by stucked region syncer [#3936](https://github.com/tikv/pd/issues/3936)
-    - (dup) Support that the evict leader scheduler can schedule regions with unhealthy peers [#4093](https://github.com/tikv/pd/issues/4093)
-    - (dup) - Fix the issue that the hotspot cache cannot be cleared when the Region heartbeat is less than 60 seconds [#4390](https://github.com/tikv/pd/issues/4390)
+    (dup) - Fix slow leader election caused by stucked region syncer [#3936](https://github.com/tikv/pd/issues/3936)
+    (dup) - Support that the evict leader scheduler can schedule regions with unhealthy peers [#4093](https://github.com/tikv/pd/issues/4093)
+    (dup) - Fix the issue that the hotspot cache cannot be cleared when the Region heartbeat is less than 60 seconds [#4390](https://github.com/tikv/pd/issues/4390)
 
 + Tools
 
