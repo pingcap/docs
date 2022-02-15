@@ -152,7 +152,7 @@ In v5.4, the key new features or improvements are as follows:
 
     Before TiDB v4.0, a query on a table supports using only one index for filtering at one time. If you want to query multiple columns of data, you can enable Index Merge to get the exact query result in a short time by using the indexes in individual columns. Index Merge avoids unnecessary full table scans and does not require establishing a large number of composite indexes.
 
-    In v5.4.0, Inex Merge becomes GA. However, you still need to pay attention to the following restrictions:
+    In v5.4.0, Index Merge becomes GA. However, you still need to pay attention to the following restrictions:
 
     - Index Merge supports only disjunctive normal form (X<sub>1</sub> ⋁ X<sub>2</sub> ⋁ …X<sub>n</sub>). That is, this feature only works when filtering conditions in a `WHERE` clause are connected by `OR`.
 
