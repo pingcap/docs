@@ -10,16 +10,20 @@ Release Date: xx, 2022
 TiDB version: 5.1.4
 
 ## Compatibility changes
-- TiKV configured with `storage.enable-ttl = true` cannot be used with TiDB any more. [#27303](https://github.com/pingcap/tidb/issues/27303)
+
 + TiDB
 
     - Change the default value of system variable [`tidb_analyze_version`](https://docs.pingcap.com/tidb/v5.1/system-variables#tidb_analyze_version-new-in-v510) to 1. [#31748](https://github.com/pingcap/tidb/issues/31748)
+
++ TiKV
+
+    - TiKV configured with `storage.enable-ttl = true` cannot be used with TiDB any more. [#27303](https://github.com/pingcap/tidb/issues/27303)
 
 + Tools
 
     + TiCDC
 
-        - Set `max-message-bytes` default to 10M, and use the min value with topic and broker to initialize the producer. [#4041](https://github.com/pingcap/tiflow/issues/4041)
+        - Set the default value of `max-message-bytes` to 10M [#4041](https://github.com/pingcap/tiflow/issues/4041)
 
 ## Feature enhancements
 
@@ -46,10 +50,11 @@ TiDB version: 5.1.4
 
     + TiCDC
 
-        - Add exponential backoff mechanism for restarting a changefeed. [#3329](https://github.com/pingcap/tiflow/issues/3329)
-        - Reduce "EventFeed retry rate limited" logs [#4006](https://github.com/pingcap/tiflow/issues/4006)
-        - Add metrics to observe incremental scan remaining time [#2985](https://github.com/pingcap/tiflow/issues/2985)
-        - Reduce checkpoint lag when capturing many tables. [#3900](https://github.com/pingcap/tiflow/issues/3900)
+        - Add the exponential backoff mechanism for restarting a changefeed. [#3329](https://github.com/pingcap/tiflow/issues/3329)
+        - Reduce checkpoint lag when capturing multiple tables. [#3900](https://github.com/pingcap/tiflow/issues/3900)
+        - Add metrics for observing the remaining time of incremental scan [#2985](https://github.com/pingcap/tiflow/issues/2985)
+        - Reduce the frequency of printing "EventFeed retry rate limited" logs when TiKV encounters OOM errors [#4006](https://github.com/pingcap/tiflow/issues/4006)
+
         (dup) - Reduce the frequency of CDC reporting "EventFeed retry rate limited" logs when TiKV  encounters OOM error [#4006](https://github.com/pingcap/tiflow/issues/4006)
         (dup)- Optimize checkpoint lag when capturing many tables [#3900](https://github.com/pingcap/tiflow/issues/3900)
         (dup) - Add more Promethous and Grafana monitoring metrics and alerts, including `no owner alert`, `mounter row`, `table sink total row`, and `buffer sink total row` [#4054](https://github.com/pingcap/tiflow/issues/4054) [#1606](https://github.com/pingcap/tiflow/issues/1606)
@@ -163,8 +168,8 @@ TiDB version: 5.1.4
 
     + Backup & Restore (BR)
 
-        - Fix a bug that caused region unbalanced after restoring [#30425](https://github.com/pingcap/tidb/issues/30425) [#31034](https://github.com/pingcap/tidb/issues/31034)
+        - Fix the issue that Regions are unbalanced after restoring [#30425](https://github.com/pingcap/tidb/issues/30425) [#31034](https://github.com/pingcap/tidb/issues/31034)
 
     + TiDB Lightning
 
-        - Fix the bug that lightning doesn't report error if S3 storage path not exist [#28031](https://github.com/pingcap/tidb/issues/28031) [#30709](https://github.com/pingcap/tidb/issues/30709)
+        - Fix the issue that TiDB Lightning does not report errors when the S3 storage path does not exist [#28031](https://github.com/pingcap/tidb/issues/28031) [#30709](https://github.com/pingcap/tidb/issues/30709)
