@@ -10,7 +10,7 @@ Release Date: xx, 2022
 TiDB version: 5.1.4
 
 ## Compatibility changes
-
+- TiKV configured with `storage.enable-ttl = true` cannot be used with TiDB any more. [#27303](https://github.com/pingcap/tidb/issues/27303)
 + TiDB
 
     - Change the default value of system variable [`tidb_analyze_version`](https://docs.pingcap.com/tidb/v5.1/system-variables#tidb_analyze_version-new-in-v510) to 1. [#31748](https://github.com/pingcap/tidb/issues/31748)
@@ -93,9 +93,9 @@ TiDB version: 5.1.4
 
 + TiFlash
 
-    - Fix str_to_date() function incorrectly handles leading zeros when parsing Microseconds
+    - Fix `str_to_date()` function incorrectly handles leading zeros when parsing Microseconds
     - Fix the problem of TiFlash crashing when the memory limit is enabled
-    - Align unix_timestamp behavior with TiDB and mysql when input is earlier than 1970-01-01 00:00:01 UTC
+    - Align `unix_timestamp` behavior with TiDB and MySQL when input is earlier than 1970-01-01 00:00:01 UTC
     - Fix potential data inconsistency when widen pk column type if pk is handle
     - Fix the issue that comparison between Decimal may cause overflow and report `Can't compare`
     - Fix the issue of unexpected error that `3rd arguments of function substringUTF8 must be constants.`
@@ -152,7 +152,7 @@ TiDB version: 5.1.4
         - Fix a bug in EtcdWorker that could hang the owner or processor [#3750](https://github.com/pingcap/tiflow/issues/3750)
         - Fix the issue of stopped changefeed resuming automatically after upgrading cluster [#3473](https://github.com/pingcap/tiflow/issues/3473)
         - Fix a data type compatibility issue between TiCDC and TiDB amend mechanism [#3793](https://github.com/pingcap/tiflow/issues/3793)
-        - Fixed the data inconsistencies caused by TiCDC default value padding exceptions [#3918](https://github.com/pingcap/tiflow/issues/3918) [#3929](https://github.com/pingcap/tiflow/issues/3929)
+        - Fix data inconsistency caused by TiCDC default value padding exceptions [#3918](https://github.com/pingcap/tiflow/issues/3918) [#3929](https://github.com/pingcap/tiflow/issues/3929)
         - Fix a bug that owner get stuck when PD leader shutdowns and transfers to new node [#3615](https://github.com/pingcap/tiflow/issues/3615)
         - Fix kvclient takes too long time to recover when TiKV node shutdown  [#3191](https://github.com/pingcap/tiflow/issues/3191)
         - Nond [#2983](https://github.com/pingcap/tiflow/issues/2983)
