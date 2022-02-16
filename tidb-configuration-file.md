@@ -433,12 +433,6 @@ Configuration items related to performance.
 - Default: `false`
 - This variable is the initial value of the system variable [`tidb_opt_distinct_agg_push_down`](/system-variables.md#tidb_opt_distinct_agg_push_down).
 
-### `nested-loop-join-cache-capacity`
-
-+ The maximum memory usage for the Least Recently Used (LRU) algorithm of the nested loop join cache (in bytes).
-+ Default value: `20971520`
-+ When `nested-loop-join-cache-capacity` is set to `0`, nested loop join cache is disabled by default. When the LRU size is larger than the value of `nested-loop-join-cache-capacity`, the elements in the LRU are removed.
-
 ## prepared-plan-cache
 
 The Plan Cache configuration of the `PREPARE` statement.
