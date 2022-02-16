@@ -36,18 +36,6 @@ TiDB version: 5.1.4
 
 + TiFlash
 
-    - Fix cast to decimal overflow bug
-    - Fix the bug that castStringAsReal has different behaivor between tiflash and tikv/tidb.
-    - Fix random `EstablishMPPConnection` fail after TiFlash server restart.
-    - Fix the problem that obsolete data cannot be reclaimed after set tiflash replica to 0
-    - Increase the max supported depth of expression/plan tree in dag request from 100 to 200.
-    - Fixed the inconsistent behavior of CastStringAsDecimal between tiflash and tidb/tikv.
-    - Fix the bug that results of `where <string>` is wrong because it will be converted to int type.
-    - Fix tiflash randomly crash when a mpp query is killed.
-    - Fix the issue of unexpected error that `Unexpected type of column: Nullable(Nothing)`
-    - Support INET6_ATON and INET6_NTOA in TiFlash.
-    - Support INET_ATON and INET_NTOA in TiFlash.
-    - expand streams after aggregation
     - support functions of ADDDATE() and DATE_ADD() pushed down to tiflash
 
 + PD
