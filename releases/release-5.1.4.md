@@ -134,14 +134,14 @@ TiDB version: 5.1.4
 
     + TiCDC
 
-        - Fix a bug that MySQL sink will generate duplicated replace SQL if `batch-replace-enable` is disabled [#4501](https://github.com/pingcap/tiflow/issues/4501)
-        - Fix kv client cached region metric could be negative [#4300](https://github.com/pingcap/tiflow/issues/4300)
-        - Fix the problem that TiCDC cannot send messages when `min.insync.replicas` is less than `replication-factor` [#3994](https://github.com/pingcap/tiflow/issues/3994)
-        - Fix the potential panic issue that occurs when changefeed info is removed from etcd [#3128](https://github.com/pingcap/tiflow/issues/3128)
-        - Fix a bug that checkpointTs advances unexpectedly [#3545](https://github.com/pingcap/tiflow/issues/3545)
-        - Fix a bug that changefeed gets stuck when table scheduling [#4055](https://github.com/pingcap/tiflow/issues/4055)
-        - Fix syntax error if DDL has a special comment [#3755](https://github.com/pingcap/tiflow/issues/3755)
-        - Fix a bug in EtcdWorker that could hang the owner or processor [#3750](https://github.com/pingcap/tiflow/issues/3750)
+        - Fix a bug that MySQL sink generates duplicated `replace` SQL statements if `batch-replace-enable` is disabled [#4501](https://github.com/pingcap/tiflow/issues/4501)
+        - Fix a bug that `kv client cached region metric` might be negative [#4300](https://github.com/pingcap/tiflow/issues/4300)
+(dup) - Fix the issue that replication cannot be performed when `min.insync.replicas` is smaller than `replication-factor` [#3994](https://github.com/pingcap/tiflow/issues/3994)
+(dup) - Fix the potential panic issue that occurs when a replication task is removed [#3128](https://github.com/pingcap/tiflow/issues/3128)
+(dup) - Fix the issue of potential data loss caused by inaccurate checkpoint [#3545](https://github.com/pingcap/tiflow/issues/3545)
+ (dup) - Fix the potential issue that the deadlock causes a replication task to get stuck [#4055](https://github.com/pingcap/tiflow/issues/4055)
+ (dup) - Fix the issue that special comments in DDL statements cause the replication task to stop [#3755](https://github.com/pingcap/tiflow/issues/3755)
+        - Fix a bug that EtcdWorker might hang the owner and processor [#3750](https://github.com/pingcap/tiflow/issues/3750)
         - Fix the issue of stopped changefeed resuming automatically after upgrading cluster [#3473](https://github.com/pingcap/tiflow/issues/3473)
         - Fix a data type compatibility issue between TiCDC and TiDB amend mechanism [#3793](https://github.com/pingcap/tiflow/issues/3793)
         - Fix data inconsistency caused by TiCDC default value padding exceptions [#3918](https://github.com/pingcap/tiflow/issues/3918) [#3929](https://github.com/pingcap/tiflow/issues/3929)
