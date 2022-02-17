@@ -46,13 +46,7 @@ update mysql.tidb set VARIABLE_VALUE="24h" where VARIABLE_NAME="tikv_gc_life_tim
 > - `tikv_gc_last_run_time`: The duration of the latest GC (updated at the beginning of each round of GC)
 > - `tikv_gc_safe_point`: The current safe point (updated at the beginning of each round of GC)
 
-<<<<<<< HEAD
 ## `tikv_gc_enable`
-=======
-```bash
-tikv-ctl --host=ip:port modify-tikv-config -n gc.max-write-bytes-per-sec -v 10MB
-```
->>>>>>> 5d6858ff3 (Update tikv-ctl modify-tikv-config usage for gc (#7301))
 
 - Enables or disables GC
 - Default: `true`
@@ -147,5 +141,5 @@ You can dynamically modify this configuration using tikv-ctl:
 {{< copyable "shell-regular" >}}
 
 ```bash
-tikv-ctl --host=ip:port modify-tikv-config -m server -n gc.max_write_bytes_per_sec -v 10MB
+tikv-ctl --host=ip:port modify-tikv-config -n gc.max-write-bytes-per-sec -v 10MB
 ```
