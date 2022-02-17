@@ -78,7 +78,8 @@ TiDB version: 5.1.4
     - Fix the `DATA RACE` issue when assigning `MPP task ID` [#27952](https://github.com/pingcap/tidb/issues/27952)
     - Fix the `INDEX OUT OF RANGE` error for a MPP query after deleting an empty `dual table` [#28250](https://github.com/pingcap/tidb/issues/28250)
     - Fix the issue of false positive error log `invalid cop task execution summaries length` for MPP queries [#1791](https://github.com/pingcap/tics/issues/1791)
-
+  + PD
+    (dup) - Speed up the exit process of schedulers [#4146](https://github.com/tikv/pd/issues/4146)
 + TiFlash
 
     - Fix the issue that the `str_to_date()` function incorrectly handles leading zeros when parsing microseconds
