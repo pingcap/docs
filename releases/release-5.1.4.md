@@ -29,7 +29,7 @@ TiDB version: 5.1.4
 
 + TiDB
 
-    - Support partition pruning for the built-in `IN` expression in the Range type partition [#26739](https://github.com/pingcap/tidb/issues/26739)
+    - Support partition pruning for the built-in `IN` expression in Range partition tables [#26739](https://github.com/pingcap/tidb/issues/26739)
     - Improve the accuracy of tracking memory usage when `IndexJoin` is executed [#28650](https://github.com/pingcap/tidb/issues/28650)
 
 + TiKV
@@ -64,12 +64,12 @@ TiDB version: 5.1.4
 
 + TiDB
 
-    - Fix the memory leak bug that occurs when the system variable `tidb_analyze_version` is set to `2` [#29305](https://github.com/pingcap/tidb/pull/29305)
+    - Fix a memory leak bug that occurs when the system variable `tidb_analyze_version` is set to `2` [#29305](https://github.com/pingcap/tidb/pull/29305)
     - Fix the issue that the `MaxDays` and `MaxBackups` configurations do not take effect for the slow log [#25716](https://github.com/pingcap/tidb/issues/25716)
     - Fix a panic issue that might occur when using `ON DUPLICATE KEY UPDATE` [#28078](https://github.com/pingcap/tidb/issues/28078)
-    - Fix the wrong result that might occur when performing `JOIN` with `ENUM` type columns [#27831](https://github.com/pingcap/tidb/issues/27831)
+    - Fix the wrong result that might occur when performing `JOIN` on `ENUM` type columns [#27831](https://github.com/pingcap/tidb/issues/27831)
     - Fix a bug that `IndexHashJoin` might return the `send on closed channel` error [#31129](https://github.com/pingcap/tidb/issues/31129)
-    - Fix the issue that using the [`BatchCommands`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file/#max-batch-size) might block sending TiDB requests to TiKV in some rare cases [#27678](https://github.com/pingcap/tidb/pull/27678)
+    - Fix the issue that using the [`BatchCommands`](/tidb-configuration-file.md#max-batch-size) API might block sending TiDB requests to TiKV in some rare cases [#27678](https://github.com/pingcap/tidb/pull/27678)
     (dup) - Fix the data inconsistency issue caused by incorrect usage of lazy existence check and untouched key optimization [#30410](https://github.com/pingcap/tidb/issues/30410)
     (dup) - Fix the issue that window functions might return different results when using a transaction or not [#29947](https://github.com/pingcap/tidb/issues/29947)
     (dup) - Fix the issue that the length information is wrong when casting `Decimal` to `String` [#29417](https://github.com/pingcap/tidb/issues/29417)
