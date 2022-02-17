@@ -7,11 +7,12 @@ summary: Learn best practice and strategy for using UUID's with TiDB.
 
 ## The usecase for UUID
 
-With TiDB and MySQL UUID's are often used as primary key instead of a integer primary key.
 
-The benefits of UUID's are:
-- UUID's are designed to be globally unique they can be generated on multiple systems without risking conflicts.
-- UUID's are supported by most programming languages and database systems
+There are several benefits to using a `UUID` as a primary key, instead of an `AUTO_INCREMENT` integer value:
+
+- They are designed to be globally unique they can be generated on multiple systems without risking conflicts. In some cases, this means that the number of network trips to TiDB can be reduced, leading to improved performance.
+- They are supported by most programming languages and database systems.
+- When used as part of URLs, a UUID is not vulnerable to enumeration attacks. i.e. with an `auto_increment` number, it is possible to guess the other invoice ids or user ids.
 
 ## Using UUID's with TiDB
 
