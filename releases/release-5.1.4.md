@@ -102,7 +102,7 @@ TiDB version: 5.1.4
 
 + TiKV
 
-    - Fix the bug that TiKV cannot delete a range of data (`unsafe_destroy_range` cannot be executed) when GC worker is busy [#11903](https://github.com/tikv/tikv/issues/11903)
+    - Fix the bug that TiKV cannot delete a range of data (`unsafe_destroy_range` cannot be executed) when the GC worker is busy [#11903](https://github.com/tikv/tikv/issues/11903)
     - Fix the issue that destroying a peer might cause high latency [#10210](https://github.com/tikv/tikv/issues/10210)
     - Fix a bug that `any_value` function returns wrong result when regions are empty [#11735](https://github.com/tikv/tikv/issues/11735)
     - Fix the issue that deleting an uninitialized replica might cause to create a stale replica again. [#10533](https://github.com/tikv/tikv/issues/10533)
