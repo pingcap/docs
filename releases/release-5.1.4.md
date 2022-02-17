@@ -14,10 +14,7 @@ TiDB version: 5.1.4
 + TiDB
 
     - Change the default value of the system variable [`tidb_analyze_version`](/system-variables.md#tidb_analyze_version-new-in-v510) from `2` to `1` [#31748](https://github.com/pingcap/tidb/issues/31748)
-
-+ TiKV
-
-    - TiKV configured with `storage.enable-ttl = true` rejects requests from TiDB. [#27303](https://github.com/pingcap/tidb/issues/27303)
+    - If TiKV configured with `storage.enable-ttl = true`, the requests from TiDB are rejected [#27303](https://github.com/pingcap/tidb/issues/27303)
 
 + Tools
 
@@ -34,9 +31,8 @@ TiDB version: 5.1.4
 
 + TiKV
 
-    - Update procfs to 0.12.0 [#11702](https://github.com/tikv/tikv/issues/11702)
-    - Improve raft client error log report [#11959](https://github.com/tikv/tikv/issues/11959)
-    - Avoid false "GC can not work" alert under low write flow. [#10664](https://github.com/tikv/tikv/pull/10664)
+    - Update the proc filesystem (procfs) to v0.12.0 [#11702](https://github.com/tikv/tikv/issues/11702)
+    - Improve the error log report in the raft client module [#11959](https://github.com/tikv/tikv/issues/11959)
 
 + TiFlash
 
@@ -106,18 +102,18 @@ TiDB version: 5.1.4
 
 + TiKV
 
-    - Fix the bug that unsafe_destroy_range does not get executed when GC worker is busy [#11903](https://github.com/tikv/tikv/issues/11903)
-    - Fix potential high latency caused by destroying a peer [#10210](https://github.com/tikv/tikv/issues/10210)
-    - Fix wrong `any_value` result when there are regions returning empty result [#11735](https://github.com/tikv/tikv/issues/11735)
-    - Fix the problem that destroying an uninitialized replica may cause a stalled replica be created again. [#10533](https://github.com/tikv/tikv/issues/10533)
-    - Fix metadata corruption in an unlikely condition that prepare merge is triggered after new election without informing an isolated peer [#11526](https://github.com/tikv/tikv/issues/11526)
-    - Fix deadlock in some rare cases that futures get resolved too fast [#11549](https://github.com/tikv/tikv/issues/11549)
-    - Skip profiling sample in glibc, pthread, libgcc to avoid possible deadlock and memory leak in profiling [#11108](https://github.com/tikv/tikv/issues/11108)
-    - Fix the bug that prewrite request retrying in pessimistic transactions have risk to affect data consistency in some rare cases. [#11187](https://github.com/tikv/tikv/issues/11187)
-    - Fix resource-metering.enabled config does not work [#11235](https://github.com/tikv/tikv/issues/11235)
-    - Fix coroutine leaking in the resolved_ts module.  [#10965](https://github.com/tikv/tikv/issues/10965)
-    - Avoid false "GC can not work" alert under low write flow. [#9910](https://github.com/tikv/tikv/issues/9910)
-    - Make tikv-ctl detect raft db correctly [#11393](https://github.com/tikv/tikv/issues/11393)
+    - Fix the bug that TiKV cannot delete a range of data (`unsafe_destroy_range` cannot be executed) when GC worker is busy [#11903](https://github.com/tikv/tikv/issues/11903)
+    - Fix the issue that destroying a peer might cause high latency [#10210](https://github.com/tikv/tikv/issues/10210)
+    - Fix a bug that `any_value` function returns wrong result when regions are empty [#11735](https://github.com/tikv/tikv/issues/11735)
+    - Fix the issue that deleting an uninitialized replica might cause to create a stale replica again. [#10533](https://github.com/tikv/tikv/issues/10533)
+    - Fix metadata corruption issue when `Prepare Merge` is triggered after the new election is finished but the isolated peer is not informed [#11526](https://github.com/tikv/tikv/issues/11526)
+    - Fix the dead lock issue that happens occasionally when coroutines run too fast  [#11549](https://github.com/tikv/tikv/issues/11549)
+    - Avoid the potential dead lock and memory leak issues when profiling flame graphs [#11108](https://github.com/tikv/tikv/issues/11108)
+    - Fix the data consistency issue when retrying a prewrite request in pessimistic transactions [#11187](https://github.com/tikv/tikv/issues/11187)
+    - Fix a bug that the configuration `resource-metering.enabled` does not work [#11235](https://github.com/tikv/tikv/issues/11235)
+    - Fix the issue that some coroutines leak in `resolved_ts` [#10965](https://github.com/tikv/tikv/issues/10965)
+    - Avoid the false "GC can not work" alert under low write flow [#9910](https://github.com/tikv/tikv/issues/9910)
+    - Fix a bug that tikv-ctl cannot return the correct region-related information [#11393](https://github.com/tikv/tikv/issues/11393)
 
     (dup) - Fix the issue that a down TiKV node causes the resolved timestamp to lag [#11351](https://github.com/tikv/tikv/issues/11351)
     (dup) - Fix a panic issue that occurs when Region merge, ConfChange, and Snapshot happen at the same time in extreme conditions [#11475](https://github.com/tikv/tikv/issues/11475)
