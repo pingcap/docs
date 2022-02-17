@@ -609,6 +609,13 @@ Configuration items related to Raftstore.
 + Default value: `"4h"`
 + Minimum value: `0`
 
+## `snap-generator-pool-size` <span class="version-mark">New in v5.4.0</span>
+
++ Configures the size of the `snap-generator` thread pool.
++ To make Regions generate snapshot faster in TiKV in recovery scenarios, you need to increase the count of the `snap-generator` threads of the corresponding worker. You can use this configuration item to increase the size of the `snap-generator` thread pool.
++ Default value: `2`
++ Minimum value: `0`
+
 ### `lock-cf-compact-interval`
 
 + The time interval at which TiKV triggers a manual compaction for the Lock Column Family
@@ -639,7 +646,7 @@ Configuration items related to Raftstore.
 
 + The longest inactive duration allowed for a peer. A peer with timeout is marked as `down`, and PD tries to delete it later.
 + Default value: `"10m"`
-+ Minimum value: When Hibernate Region is enabled, the minimum value is `peer-stale-check-interval * 2`; when Hibernate Region is disabled, the minimum value is `0`.
++ Minimum value: When Hibernate Region is enabled, the minimum value is `peer-stale-state-check-interval * 2`; when Hibernate Region is disabled, the minimum value is `0`.
 
 ### `max-leader-missing-duration`
 

@@ -3,7 +3,7 @@
 
 - About TiDB
   - [TiDB Introduction](/overview.md)
-  - [TiDB 5.3 Release Notes](/releases/release-5.3.0.md)
+  - [TiDB 5.4 Release Notes](/releases/release-5.4.0.md)
   - [Basic Features](/basic-features.md)
   - [Experimental Features](/experimental-features.md)
   - Benchmarks
@@ -672,6 +672,8 @@
 - Release Notes
   - [All Releases](/releases/release-notes.md)
   - [Release Timeline](/releases/release-timeline.md)
+  - v5.4
+    - [5.4.0](/releases/release-5.4.0.md)
   - v5.3
     - [5.3.0](/releases/release-5.3.0.md)
   - v5.2
