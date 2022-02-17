@@ -13,7 +13,7 @@ TiDB version: 5.1.4
 
 + TiDB
 
-    - Change the default value of the system variable [`tidb_analyze_version`](/system-variables#tidb_analyze_version-new-in-v510) from `2` to `1` [#31748](https://github.com/pingcap/tidb/issues/31748)
+    - Change the default value of the system variable [`tidb_analyze_version`](/system-variables.md#tidb_analyze_version-new-in-v510) from `2` to `1` [#31748](https://github.com/pingcap/tidb/issues/31748)
 
 + TiKV
 
