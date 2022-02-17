@@ -13,11 +13,11 @@ TiDB version: 5.1.4
 
 + TiDB
 
-    - Change the default value of system variable [`tidb_analyze_version`](https://docs.pingcap.com/tidb/v5.1/system-variables#tidb_analyze_version-new-in-v510) to 1. [#31748](https://github.com/pingcap/tidb/issues/31748)
+    - Change the default value of the system variable [`tidb_analyze_version`](/system-variables#tidb_analyze_version-new-in-v510) from `2` to `1` [#31748](https://github.com/pingcap/tidb/issues/31748)
 
 + TiKV
 
-    - TiKV configured with `storage.enable-ttl = true` cannot be used with TiDB any more. [#27303](https://github.com/pingcap/tidb/issues/27303)
+    - TiKV configured with `storage.enable-ttl = true` rejects requests from TiDB. [#27303](https://github.com/pingcap/tidb/issues/27303)
 
 + Tools
 
@@ -29,8 +29,8 @@ TiDB version: 5.1.4
 
 + TiDB
 
-    - Support column range partition pruning for built-in function `IN`. [#26739](https://github.com/pingcap/tidb/issues/26739)
-    - Improve the accuracy of the memory usage tracking for 'IndexJoin'. [#28650](https://github.com/pingcap/tidb/issues/28650)
+    - Support partition pruning for the built-in `IN` expression in the Range type partition [#26739](https://github.com/pingcap/tidb/issues/26739)
+    - Improve the accuracy of tracking memory usage when `IndexJoin` is executed [#28650](https://github.com/pingcap/tidb/issues/28650)
 
 + TiKV
 
@@ -60,17 +60,16 @@ TiDB version: 5.1.4
         (dup) - Add more Promethous and Grafana monitoring metrics and alerts, including `no owner alert`, `mounter row`, `table sink total row`, and `buffer sink total row` [#4054](https://github.com/pingcap/tiflow/issues/4054) [#1606](https://github.com/pingcap/tiflow/issues/1606)
         (dup) - Optimize rate limiting control on TiKV reloads to reduce gPRC congestion during changefeed initialization [#3110](https://github.com/pingcap/ticdc/issues/3110)
 
-## Bug Fixes
+## Bug fixes
 
 + TiDB
 
-    - Fix the bug that indexHashJoin may return the error `send on closed channel`. [#31129](https://github.com/pingcap/tidb/issues/31129)
-    - Fix the memory leak bug when using analyze version 2(@@tidb_analyze_version = 2). [#29305](https://github.com/pingcap/tidb/pull/29305)
-    - Fix the issue that `MaxDays` and `MaxBackups` not working for slow log. [#25716](https://github.com/pingcap/tidb/issues/25716)
-    - Fix the panic that may happen when using `ON DUPLICATE KEY UPDATE`. [#28078](https://github.com/pingcap/tidb/issues/28078)
-    - Fix the wrong result when using join with enum type [#27831](https://github.com/pingcap/tidb/issues/27831)
-    - Fix the issue that recycle idle connection of ['BatchCommands'](https://docs.pingcap.com/tidb/stable/tidb-configuration-file/#max-batch-size) may block sending requests in some rare cases. [#27678](https://github.com/pingcap/tidb/pull/27678)
-
+    - Fix the memory leak bug that occurs when the system variable `tidb_analyze_version` is set to `2` [#29305](https://github.com/pingcap/tidb/pull/29305)
+    - Fix the issue that the `MaxDays` and `MaxBackups` configurations do not take effect for the slow log [#25716](https://github.com/pingcap/tidb/issues/25716)
+    - Fix a panic issue that might occur when using `ON DUPLICATE KEY UPDATE` [#28078](https://github.com/pingcap/tidb/issues/28078)
+    - Fix the wrong result that might occur when performing `JOIN` with `ENUM` type columns [#27831](https://github.com/pingcap/tidb/issues/27831)
+    - Fix a bug that `IndexHashJoin` might return the `send on closed channel` error [#31129](https://github.com/pingcap/tidb/issues/31129)
+    - Fix the issue that using the [`BatchCommands`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file/#max-batch-size) might block sending TiDB requests to TiKV in some rare cases [#27678](https://github.com/pingcap/tidb/pull/27678)
     (dup) - Fix the data inconsistency issue caused by incorrect usage of lazy existence check and untouched key optimization [#30410](https://github.com/pingcap/tidb/issues/30410)
     (dup) - Fix the issue that window functions might return different results when using a transaction or not [#29947](https://github.com/pingcap/tidb/issues/29947)
     (dup) - Fix the issue that the length information is wrong when casting `Decimal` to `String` [#29417](https://github.com/pingcap/tidb/issues/29417)
