@@ -478,9 +478,7 @@ br restore full -f 'mysql.usertable' -s $external_storage_url --ratelimit 128
 > - Statistical information tables (`mysql.stat_*`)
 > - System variable tables (`mysql.tidb`，`mysql.global_variables`)
 > - User information tables (such as `mysql.user` and `mysql.columns_priv`)
-> - GC data
->
-> Restoring system tables might cause more compatibility issues. To avoid unexpected issues, **DO NOT** restore system tables in the production environment.
+> - [Other system tables](https://github.com/pingcap/tidb/blob/v5.3.0/br/pkg/restore/systable_restore.go#L31)
 
 ### Restore Raw KV (experimental feature)
 
