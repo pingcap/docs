@@ -473,13 +473,13 @@ br restore full -f 'mysql.usertable' -s $external_storage_url --ratelimit 128
 
 > **Warning:**
 >
-> Although you can back up and restore system tables (such as `mysql.tidb`) using the BR tool, some unexpected situations might occur after the restore, including:
+> Although you can back up system tables (such as `mysql.tidb`) using the BR tool, BR ignores the following system tables even if you use the `--filter` setting to perform the restoration:
 >
-> - the statistical information tables (`mysql.stat_*`) cannot be restored.
-> - the system variable tables (`mysql.tidb`，`mysql.global_variables`) cannot be restored.
-> - the user information tables (such as `mysql.user` and `mysql.columns_priv`) cannot be restored.
-> - GC data cannot be restored.
-> 
+> - Statistical information tables (`mysql.stat_*`)
+> - System variable tables (`mysql.tidb`，`mysql.global_variables`)
+> - User information tables (such as `mysql.user` and `mysql.columns_priv`)
+> - GC data
+>
 > Restoring system tables might cause more compatibility issues. To avoid unexpected issues, **DO NOT** restore system tables in the production environment.
 
 ### Restore Raw KV (experimental feature)
