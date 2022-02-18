@@ -14,7 +14,7 @@ TiDB version: 5.1.4
 + TiDB
 
     - Change the default value of the system variable [`tidb_analyze_version`](/system-variables.md#tidb_analyze_version-new-in-v510) from `2` to `1` [#31748](https://github.com/pingcap/tidb/issues/31748)
-    - If TiKV configured with `storage.enable-ttl = true`, the requests from TiDB are rejected [#27303](https://github.com/pingcap/tidb/issues/27303)
+    - Since v5.1.4, if TiKV is configured with `storage.enable-ttl = true`, the requests from TiDB are rejected, because the TTL feature of TiKV only supports the [RawKV mode](https://tikv.org/docs/5.1/concepts/explore-tikv-features/ttl/) [#27303](https://github.com/pingcap/tidb/issues/27303)
 
 + Tools
 
