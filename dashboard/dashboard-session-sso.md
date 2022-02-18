@@ -211,6 +211,7 @@ Now TiDB Dashboard has been configured to use Auth0 SSO for sign-in.
 2. Navigate from the top sidebar **Applications**.
 
 3. Click **Applications - Add**.
+   ![Settings](/media/dashboard/dashboard-session-sso-casdoor-settings-1.png)
 
 4. Fill **Name** and **Display name**, for example, **TiDB Dashboard**.
 
@@ -222,7 +223,7 @@ Now TiDB Dashboard has been configured to use Auth0 SSO for sign-in.
 
    Replace `DASHBOARD_IP:PORT` with the actual domain (or IP address) and port that you use to access the TiDB Dashboard in your browser.
    
-   ![Settings](/media/dashboard/dashboard-session-sso-casdoor-settings-1.png)
+   ![Settings](/media/dashboard/dashboard-session-sso-casdoor-settings-2.png)
 
 6. Keep the default values for other settings and click **Save & Exit**.
 
@@ -234,6 +235,6 @@ Now TiDB Dashboard has been configured to use Auth0 SSO for sign-in.
 
 2. Fill **OIDC Discovery URL** with the **Domain** field value prefixed with `https://` and suffixed with `/`, for example, `https://casdoor.example.com/`. Complete authorization and save the configuration.
 
-      ![Settings](/media/dashboard/dashboard-session-sso-casdoor-settings-2.png)
+      ![Settings](/media/dashboard/dashboard-session-sso-casdoor-settings-3.png)
 
 Now TiDB Dashboard has been configured to use Casdoor SSO for sign-in.
