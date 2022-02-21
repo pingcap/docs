@@ -34,16 +34,16 @@ TiDB version: 5.1.4
     - Improve the error log report in the raft client module [#11959](https://github.com/tikv/tikv/issues/11959)
     - Increase the speed of inserting SST files by moving the verification process to the `Import` thread pool from the `Apply` thread pool [#11239](https://github.com/tikv/tikv/issues/11239)
 
++ PD
+
+    - Speed up the exit process of schedulers [#4146](https://github.com/tikv/pd/issues/4146)
+
 + TiFlash
 
     - Support pushing down `ADDDATE()` and `DATE_ADD()` to TiFlash
     - Support pushing down `INET6_ATON` and `INET6_NTOA` to TiFlash
     - Support pushing down `INET_ATON` and `INET_NTOA` to TiFlash
     - Increase the max supported depth of expression or plan tree in a DAG request from `100` to `200`
-
-+ PD
-
-    - Speed up the exit process of schedulers [#4146](https://github.com/tikv/pd/issues/4146)
 
 + Tools
 
@@ -79,24 +79,6 @@ TiDB version: 5.1.4
     - Fix the `INDEX OUT OF RANGE` error for a MPP query after deleting an empty `dual table` [#28250](https://github.com/pingcap/tidb/issues/28250)
     - Fix the issue of false positive error log `invalid cop task execution summaries length` for MPP queries [#1791](https://github.com/pingcap/tics/issues/1791)
 
-+ TiFlash
-
-    - Fix the issue that the `str_to_date()` function incorrectly handles leading zeros when parsing microseconds
-    - Fix the TiFlash crash problem when the memory limit is enabled
-    - (dup) Fix the issue that when an input time is earlier than 1970-01-01 00:00:01 UTC, the behavior of `unix_timestamp` is inconsistent with that of TiDB or MySQL
-    - Fix the potential data inconsistency caused by widening the primary key column when the primary key is handle
-    - Fix the overflow bug and the issue of reporting `Can't compare` error when comparing data in the `DECIMAL` data type
-    - Fix the unexpected error of `3rd arguments of function substringUTF8 must be constants.`
-    - Fix the issue that TiFlash fails to start on platforms without the `nsl` library
-    - Fix the overflow bug when casting data to the `DECIMAL` data type
-    - (dup) Fix the issue that the `castStringAsReal` behavior is inconsistent in TiFlash and in TiDB/TiKV
-    - (dup) Fix the issue that TiFlash might return the `EstablishMPPConnection` error after it is restarted
-    - Fix the issue that obsolete data cannot be reclaimed after setting the number of TiFlash replicas to 0
-    - (dup) Fix the issue that the `CastStringAsDecimal` behavior is inconsistent in TiFlash and in TiDB/TiKV
-    - (dup) Fix the issue that queries with the `where <string>` clause return wrong results
-    - (dup) Fix the issue that TiFlash might panic when an MPP query is stopped
-    - Fix the unexpected error of `Unexpected type of column: Nullable(Nothing)`
-
 + TiKV
 
     - Fix the bug that TiKV cannot delete a range of data (`unsafe_destroy_range` cannot be executed) when the GC worker is busy [#11903](https://github.com/tikv/tikv/issues/11903)
@@ -130,6 +112,24 @@ TiDB version: 5.1.4
     - Fix the issue that the cold hotspot data cannot be deleted from the hotspot statistics [#4390](https://github.com/tikv/pd/issues/4390)
     - Fix a panic issue that occurs after the TiKV node is removed [#4344](https://github.com/tikv/pd/issues/4344)
     - Fix the issue that the scheduling operator cannot fail fast because the target store is down [#3353](https://github.com/tikv/pd/issues/3353)
+
++ TiFlash
+
+    - Fix the issue that the `str_to_date()` function incorrectly handles leading zeros when parsing microseconds
+    - Fix the TiFlash crash problem when the memory limit is enabled
+    - (dup) Fix the issue that when an input time is earlier than 1970-01-01 00:00:01 UTC, the behavior of `unix_timestamp` is inconsistent with that of TiDB or MySQL
+    - Fix the potential data inconsistency caused by widening the primary key column when the primary key is handle
+    - Fix the overflow bug and the issue of reporting `Can't compare` error when comparing data in the `DECIMAL` data type
+    - Fix the unexpected error of `3rd arguments of function substringUTF8 must be constants.`
+    - Fix the issue that TiFlash fails to start on platforms without the `nsl` library
+    - Fix the overflow bug when casting data to the `DECIMAL` data type
+    - (dup) Fix the issue that the `castStringAsReal` behavior is inconsistent in TiFlash and in TiDB/TiKV
+    - (dup) Fix the issue that TiFlash might return the `EstablishMPPConnection` error after it is restarted
+    - Fix the issue that obsolete data cannot be reclaimed after setting the number of TiFlash replicas to 0
+    - (dup) Fix the issue that the `CastStringAsDecimal` behavior is inconsistent in TiFlash and in TiDB/TiKV
+    - (dup) Fix the issue that queries with the `where <string>` clause return wrong results
+    - (dup) Fix the issue that TiFlash might panic when an MPP query is stopped
+    - Fix the unexpected error of `Unexpected type of column: Nullable(Nothing)`
 
 + Tools
 
