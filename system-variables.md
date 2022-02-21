@@ -498,7 +498,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Scope: SESSION
 - Default value: `OFF`
 - This variable permits `tidb_dml_batch_size` to be used in `INSERT` statements.
-- Only the value `OFF` provides ACID compliance. Setting this to any other value will break the atomicity and isolation guarantees of TiDB, as an indivudual `INSERT` statements will be split into smaller transactions.
+- Only the value `OFF` provides ACID compliance. Setting this to any other value breaks the atomicity and isolation guarantees of TiDB, because an individual `INSERT` statement will be split into smaller transactions.
 
 ### tidb_broadcast_join_threshold_count <span class="version-mark">New in v5.0</span>
 
