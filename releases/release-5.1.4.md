@@ -61,12 +61,12 @@ TiDB version: 5.1.4
 
 + TiDB
 
-    - Fix a memory leak bug that occurs when the system variable `tidb_analyze_version` is set to `2` [#29305](https://github.com/pingcap/tidb/pull/29305)
+    - Fix a memory leak bug that occurs when the system variable `tidb_analyze_version` is set to `2` [#32499](https://github.com/pingcap/tidb/issues/32499)
     - Fix the issue that the `MaxDays` and `MaxBackups` configurations do not take effect for the slow log [#25716](https://github.com/pingcap/tidb/issues/25716)
     - Fix the issue that executing the `INSERT ... SELECT ... ON DUPLICATE KEY UPDATE` statement gets panic [#28078](https://github.com/pingcap/tidb/issues/28078)
     - Fix the wrong result that might occur when performing `JOIN` on `ENUM` type columns [#27831](https://github.com/pingcap/tidb/issues/27831)
     - Fix the issue that INDEX HASH JOIN returns the `send on closed channel` error [#31129](https://github.com/pingcap/tidb/issues/31129)
-    - Fix the issue that using the [`BatchCommands`](/tidb-configuration-file.md#max-batch-size) API might block sending TiDB requests to TiKV in some rare cases [#27678](https://github.com/pingcap/tidb/pull/27678)
+    - Fix the issue that using the [`BatchCommands`](/tidb-configuration-file.md#max-batch-size) API might block sending TiDB requests to TiKV in some rare cases [#32500](https://github.com/pingcap/tidb/issues/32500)
     - Fix the issue of potential data index inconsistency in optimistic transaction mode [#30410](https://github.com/pingcap/tidb/issues/30410)
     - Fix the issue that window functions might return different results when using a transaction or not [#29947](https://github.com/pingcap/tidb/issues/29947)
     - Fix the issue that the length information is wrong when casting `Decimal` to `String` [#29417](https://github.com/pingcap/tidb/issues/29417)
