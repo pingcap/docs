@@ -56,4 +56,4 @@ TiDB Lightning also supports using TiDB-backend for data import. In this mode, `
 
     TiDB Lightning does not support importing `charset=GBK` tables to TiDB clusters earlier than v5.4.0.
 
-- When using parquet file to import, lightning currently only accepts the data types supported in Amazon Aurora Parquet.
+- For Apache Parquet files, TiDB Lightning currently only accepts Amazon Aurora Parquet files.
