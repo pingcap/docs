@@ -79,7 +79,50 @@ According to the intended cluster topology, you need to manually create and edit
 
 The following examples cover six common scenarios. You need to create a YAML configuration file (named `topology.yaml` for example) according to the topology description and templates in the corresponding links. For other scenarios, edit the configuration accordingly.
 
+<<<<<<< HEAD
 The following topology documents provide a cluster configuration template for each of the following common scenarios:
+=======
+{{< copyable "shell-regular" >}}
+
+```shell
+tiup cluster template > topology.yaml
+```
+
+> **Note:**
+>
+> For the hybrid deployment scenarios, you can also execute `tiup cluster template --full > topology.yaml` to create the recommended topology template. For the geo-distributed deployment scenarios, you can execute `tiup cluster template --multi-dc > topology.yaml` to create the recommended topology template.
+
+Execute `vi topology.yaml` to see the configuration file content:
+
+```shell
+global:
+  user: "tidb"
+  ssh_port: 22
+  deploy_dir: "/tidb-deploy"
+  data_dir: "/tidb-data"
+server_configs: {}
+pd_servers:
+  - host: 10.0.1.4
+  - host: 10.0.1.5
+  - host: 10.0.1.6
+tidb_servers:
+  - host: 10.0.1.7
+  - host: 10.0.1.8
+  - host: 10.0.1.9
+tikv_servers:
+  - host: 10.0.1.1
+  - host: 10.0.1.2
+  - host: 10.0.1.3
+monitoring_servers:
+  - host: 10.0.1.4
+grafana_servers:
+  - host: 10.0.1.4
+alertmanager_servers:
+  - host: 10.0.1.4
+```
+
+The following examples cover the most common scenarios. You need to modify the configuration file (named `topology.yaml`) according to the topology description and templates in the corresponding links. For other scenarios, edit the configuration template accordingly.
+>>>>>>> 90899418e (fix a number in tiup prod deployment (#7654))
 
 - [Minimal deployment topology](/minimal-deployment-topology.md)
 
