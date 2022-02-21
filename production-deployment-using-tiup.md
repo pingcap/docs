@@ -77,7 +77,7 @@ Log in to the control machine using a regular user account (take the `tidb` user
 
 According to the intended cluster topology, you need to manually create and edit the cluster initialization configuration file.
 
-The following examples cover six common scenarios. You need to create a YAML configuration file (named `topology.yaml` for example) according to the topology description and templates in the corresponding links. For other scenarios, edit the configuration accordingly.
+The following examples cover the most common scenarios. You need to create a YAML configuration file (named `topology.yaml` for example) according to the topology description and templates in the corresponding links. For other scenarios, edit the configuration accordingly.
 
 The following topology documents provide a cluster configuration template for each of the following common scenarios:
 
