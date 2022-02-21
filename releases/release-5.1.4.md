@@ -31,7 +31,7 @@ TiDB version: 5.1.4
 + TiKV
 
     - Update the proc filesystem (procfs) to v0.12.0 [#11702](https://github.com/tikv/tikv/issues/11702)
-    - Improve the error log report in the raft client module [#11959](https://github.com/tikv/tikv/issues/11959)
+    - Improve the error log report in the Raft client [#11959](https://github.com/tikv/tikv/issues/11959)
     - Increase the speed of inserting SST files by moving the verification process to the `Import` thread pool from the `Apply` thread pool [#11239](https://github.com/tikv/tikv/issues/11239)
 
 + PD
@@ -81,23 +81,23 @@ TiDB version: 5.1.4
 
 + TiKV
 
-    - Fix the bug that TiKV cannot delete a range of data (`unsafe_destroy_range` cannot be executed) when the GC worker is busy [#11903](https://github.com/tikv/tikv/issues/11903)
+    - Fix a bug that TiKV cannot delete a range of data (`unsafe_destroy_range` cannot be executed) when the GC worker is busy [#11903](https://github.com/tikv/tikv/issues/11903)
     - Fix the issue that destroying a peer might cause high latency [#10210](https://github.com/tikv/tikv/issues/10210)
-    - Fix a bug that the `any_value` function returns wrong result when regions are empty [#11735](https://github.com/tikv/tikv/issues/11735)
+    - Fix a bug that the `any_value` function returns a wrong result when regions are empty [#11735](https://github.com/tikv/tikv/issues/11735)
     - Fix the issue that deleting an uninitialized replica might cause an old replica to be recreated [#10533](https://github.com/tikv/tikv/issues/10533)
-    - Fix the metadata corruption issue when `Prepare Merge` is triggered after the new election is finished but the isolated peer is not informed [#11526](https://github.com/tikv/tikv/issues/11526)
-    - Fix the dead lock issue that happens occasionally when coroutines run too fast  [#11549](https://github.com/tikv/tikv/issues/11549)
+    - Fix the metadata corruption issue when `Prepare Merge` is triggered after a new election is finished but the isolated peer is not informed [#11526](https://github.com/tikv/tikv/issues/11526)
+    - Fix the deadlock issue that happens occasionally when coroutines run too fast [#11549](https://github.com/tikv/tikv/issues/11549)
     - Avoid the potential dead lock and memory leak issues when profiling flame graphs [#11108](https://github.com/tikv/tikv/issues/11108)
-    - Fix the data inconsistency issue when retrying a prewrite request in pessimistic transactions [#11187](https://github.com/tikv/tikv/issues/11187)
+    - Fix the rare data inconsistency issue when retrying a prewrite request in pessimistic transactions [#11187](https://github.com/tikv/tikv/issues/11187)
     - Fix a bug that the configuration `resource-metering.enabled` does not work [#11235](https://github.com/tikv/tikv/issues/11235)
     - Fix the issue that some coroutines leak in `resolved_ts` [#10965](https://github.com/tikv/tikv/issues/10965)
-    - Avoid the false "GC can not work" alert under low write flow [#9910](https://github.com/tikv/tikv/issues/9910)
-    - Fix a bug that tikv-ctl cannot return the correct region-related information [#11393](https://github.com/tikv/tikv/issues/11393)
+    - Fix the issue of reporting false "GC can not work" alert under low write flow [#9910](https://github.com/tikv/tikv/issues/9910)
+    - Fix a bug that tikv-ctl cannot return the correct Region-related information [#11393](https://github.com/tikv/tikv/issues/11393)
     - Fix the issue that a down TiKV node causes the resolved timestamp to lag [#11351](https://github.com/tikv/tikv/issues/11351)
     - Fix a panic issue that occurs when Region merge, ConfChange, and Snapshot happen at the same time in extreme conditions [#11475](https://github.com/tikv/tikv/issues/11475)
     - Fix the issue that TiKV cannot detect the memory lock when TiKV performs a reverse table scan [#11440](https://github.com/tikv/tikv/issues/11440)
     - Fix the issue of negative sign when the decimal divide result is zero [#29586](https://github.com/pingcap/tidb/issues/29586)
-    - Fix a memory leak caused by monitoring data of statistics threads [#11195](https://github.com/tikv/tikv/issues/11195)
+    - Fix a memory leak caused by the monitoring data of statistics threads [#11195](https://github.com/tikv/tikv/issues/11195)
     - Fix the issue of TiCDC panic that occurs when the downstream database is missing [#11123](https://github.com/tikv/tikv/issues/11123)
     - Fix the issue that TiCDC adds scan retries frequently due to the Congest error [#11082](https://github.com/tikv/tikv/issues/11082)
     - Fix the issue that batch messages are too large in Raft client implementation [#9714](https://github.com/tikv/tikv/issues/9714)
