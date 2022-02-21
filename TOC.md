@@ -222,7 +222,88 @@
     - [Monitor](/tidb-lightning/monitor-tidb-lightning.md)
     - [FAQ](/tidb-lightning/tidb-lightning-faq.md)
     - [Glossary](/tidb-lightning/tidb-lightning-glossary.md)
+<<<<<<< HEAD
   - [TiDB Data Migration](/dm/dm-overview.md)
+=======
+  - TiDB Data Migration
+    - About TiDB Data Migration
+      - [DM Overview](/dm/dm-overview.md)
+      - Basic Features
+        - [Table Routing](/dm/dm-key-features.md)
+        - [Block and Allow Lists](/dm/dm-key-features.md#block-and-allow-table-lists)
+        - [Binlog Event Filter](/dm/dm-key-features.md#binlog-event-filter)
+      - Advanced Features
+        - Merge and Migrate Data from Sharded Tables
+          - [Overview](/dm/feature-shard-merge.md)
+          - [Pessimistic Mode](/dm/feature-shard-merge-pessimistic.md)
+          - [Optimistic Mode](/dm/feature-shard-merge-optimistic.md)
+        - [Migrate from MySQL Databases that Use GH-ost/PT-osc](/dm/feature-online-ddl.md)
+        - [Filter DMLs Using SQL Expressions](/dm/feature-expression-filter.md)
+      - [DM Architecture](/dm/dm-arch.md)
+      - [Benchmarks](/dm/dm-benchmark-v5.4.0.md)
+    - Quick Start
+      - [Quick Start](/dm/quick-start-with-dm.md)
+      - [Deploy a DM cluster Using TiUP](/dm/deploy-a-dm-cluster-using-tiup.md)
+      - [Create a Data Source](/dm/quick-start-create-source.md)
+    - [Data Migration Scenarios](/dm/quick-create-migration-task.md)
+    - Deploy
+      - [Software and Hardware Requirements](/dm/dm-hardware-and-software-requirements.md)
+      - Deploy a DM Cluster
+        - [Use TiUP (Recommended)](/dm/deploy-a-dm-cluster-using-tiup.md)
+        - [Use TiUP Offline](/dm/deploy-a-dm-cluster-using-tiup-offline.md)
+        - [Use Binary](/dm/deploy-a-dm-cluster-using-binary.md)
+        - [Use Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/dev/deploy-tidb-dm)
+      - [Migrate Data Using DM](/dm/migrate-data-using-dm.md)
+      - [Test DM Performance](/dm/dm-performance-test.md)
+    - Maintain
+      - Tools
+        - [Maintain DM Clusters Using TiUP (Recommended)](/dm/maintain-dm-using-tiup.md)
+        - [Maintain DM Clusters Using dmctl](/dm/dmctl-introduction.md)
+        - [Maintain DM Clusters Using OpenAPI](/dm/dm-open-api.md)
+      - Cluster Upgrade
+        - [Manually Upgrade from v1.0.x to v2.0+](/dm/manually-upgrade-dm-1.0-to-2.0.md)
+      - [Manage Data Source](/dm/dm-manage-source.md)
+      - Manage a Data Migration Task
+        - [Task Configuration Guide](/dm/dm-task-configuration-guide.md)
+        - [Precheck a Task](/dm/dm-precheck.md)
+        - [Create a Task](/dm/dm-create-task.md)
+        - [Query Status](/dm/dm-query-status.md)
+        - [Pause a Task](/dm/dm-pause-task.md)
+        - [Resume a Task](/dm/dm-resume-task.md)
+        - [Stop a Task](/dm/dm-stop-task.md)
+        - [Export and Import Data Sources and Task Configuration of Clusters](/dm/dm-export-import-config.md)
+        - [Handle Failed DDL Statements](/dm/handle-failed-ddl-statements.md)
+      - [Manually Handle Sharding DDL Lock](/dm/manually-handling-sharding-ddl-locks.md)
+      - [Switch the MySQL Instance to Be Migrated](/dm/usage-scenario-master-slave-switch.md)
+      - [Manage Schemas of Tables to be Migrated](/dm/dm-manage-schema.md)
+      - [Handle Alerts](/dm/dm-handle-alerts.md)
+      - [Daily Check](/dm/dm-daily-check.md)
+    - Troubleshoot
+      - [Handle Errors](/dm/dm-error-handling.md)
+      - [Handle Performance Issues](/dm/dm-handle-performance-issues.md)
+    - Performance Tuning
+      - [Optimize Configuration](/dm/dm-tune-configuration.md)
+    - Reference
+      - Architecture
+        - [DM Architecture Overview](/dm/dm-overview.md)
+        - [DM-worker](/dm/dm-worker-intro.md)
+      - [Command-line Flags](/dm/dm-command-line-flags.md)
+      - Configuration
+        - [Overview](/dm/dm-config-overview.md)
+        - [DM-master Configuration](/dm/dm-master-configuration-file.md)
+        - [DM-worker Configuration](/dm/dm-worker-configuration-file.md)
+        - [Upstream Database Configuration](/dm/dm-source-configuration-file.md)
+        - [Data Migration Task Configuration](/dm/dm-task-configuration-guide.md)
+    - Secure
+      - [Enable TLS for DM Connections](/dm/dm-enable-tls.md)
+      - [Generate Self-signed Certificates](/dm/dm-generate-self-signed-certificates.md)
+      - [Monitoring Metrics](/dm/monitor-a-dm-cluster.md)
+      - [Alert Rules](/dm/dm-alert-rules.md)
+      - [Error Codes](/dm/dm-error-handling.md#handle-common-errors)
+    - [FAQ](/dm/dm-faq.md)
+    - [Glossary](/dm/dm-glossary.md)
+    - [Release Notes](/dm/dm-release-notes.md)
+>>>>>>> be518444d (Fix a TOC issue for PDF generation (#7659))
   - TiCDC
     - [Overview](/ticdc/ticdc-overview.md)
     - [Deploy](/ticdc/deploy-ticdc.md)
@@ -453,7 +534,13 @@
     - [Views](/views.md)
     - [Partitioning](/partitioned-table.md)
     - [Temporary Tables](/temporary-tables.md)
+<<<<<<< HEAD
     - [Character Set and Collation](/character-set-and-collation.md)
+=======
+    - Character Set and Collation
+      - [Overview](/character-set-and-collation.md)
+      - [GBK](/character-set-gbk.md)
+>>>>>>> be518444d (Fix a TOC issue for PDF generation (#7659))
     - [Placement Rules in SQL](/placement-rules-in-sql.md)
     - System Tables
       - [`mysql`](/mysql-schema.md)
@@ -528,7 +615,7 @@
         - [View Diagnostics Report](/dashboard/dashboard-diagnostics-report.md)
         - [Use Diagnostics](/dashboard/dashboard-diagnostics-usage.md)
       - [Search Logs Page](/dashboard/dashboard-log-search.md)
-      - [Instance Profiling]
+      - Instance Profiling
         - [Manual Profiling](/dashboard/dashboard-profiling.md)
         - [Continuous Profiling](/dashboard/continuous-profiling.md)
       - Session Management and Configuration
