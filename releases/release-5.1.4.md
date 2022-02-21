@@ -117,18 +117,18 @@ TiDB version: 5.1.4
 
     - Fix the issue that the `str_to_date()` function incorrectly handles leading zeros when parsing microseconds
     - Fix the TiFlash crash problem when the memory limit is enabled
-    - (dup) Fix the issue that when an input time is earlier than 1970-01-01 00:00:01 UTC, the behavior of `unix_timestamp` is inconsistent with that of TiDB or MySQL
+    - Fix the issue that when an input time is earlier than 1970-01-01 00:00:01 UTC, the behavior of `unix_timestamp` is inconsistent with that of TiDB or MySQL
     - Fix the potential data inconsistency caused by widening the primary key column when the primary key is handle
     - Fix the overflow bug and the issue of reporting `Can't compare` error when comparing data in the `DECIMAL` data type
     - Fix the unexpected error of `3rd arguments of function substringUTF8 must be constants.`
     - Fix the issue that TiFlash fails to start on platforms without the `nsl` library
     - Fix the overflow bug when casting data to the `DECIMAL` data type
-    - (dup) Fix the issue that the `castStringAsReal` behavior is inconsistent in TiFlash and in TiDB/TiKV
-    - (dup) Fix the issue that TiFlash might return the `EstablishMPPConnection` error after it is restarted
+    - Fix the issue that the `castStringAsReal` behavior is inconsistent in TiFlash and in TiDB/TiKV
+    - Fix the issue that TiFlash might return the `EstablishMPPConnection` error after it is restarted
     - Fix the issue that obsolete data cannot be reclaimed after setting the number of TiFlash replicas to 0
-    - (dup) Fix the issue that the `CastStringAsDecimal` behavior is inconsistent in TiFlash and in TiDB/TiKV
-    - (dup) Fix the issue that queries with the `where <string>` clause return wrong results
-    - (dup) Fix the issue that TiFlash might panic when an MPP query is stopped
+    - Fix the issue that the `CastStringAsDecimal` behavior is inconsistent in TiFlash and in TiDB/TiKV
+    - Fix the issue that queries with the `where <string>` clause return wrong results
+    - Fix the issue that TiFlash might panic when an MPP query is stopped
     - Fix the unexpected error of `Unexpected type of column: Nullable(Nothing)`
 
 + Tools
