@@ -167,6 +167,10 @@ TiDB version: 5.1.4
 
         - Fix the potential issue that Regions might be unevenly distributed after a restore operation is finished [#30425](https://github.com/pingcap/tidb/issues/30425)
 
+    + TiDB Binlog
+
+        - Fix the issue that DBaaS importing CSV fails with InvalidRange if CSV file size is about 256MB and `strict-format` is `true` [#27763](https://github.com/pingcap/tidb/issues/27763)
+
     + TiDB Lightning
 
         - Fix the issue that TiDB Lightning does not report errors when the S3 storage path does not exist [#28031](https://github.com/pingcap/tidb/issues/28031) [#30709](https://github.com/pingcap/tidb/issues/30709)
