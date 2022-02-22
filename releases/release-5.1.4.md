@@ -165,7 +165,7 @@ TiDB version: 5.1.4
 
     + Backup & Restore (BR)
 
-        - Fix the potential issue that Regions might be unevenly distributed after a restore operation is finished [#30425](https://github.com/pingcap/tidb/issues/30425)
+        - Fix the potential issue that Regions might be unevenly distributed after a restore operation is finished [#30425](https://github.com/pingcap/tidb/issues/30425) [#31034](https://github.com/pingcap/tidb/issues/31034)
 
     + TiDB Binlog
 
