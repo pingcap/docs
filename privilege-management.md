@@ -194,6 +194,7 @@ Dynamic privileges include:
 * `ROLE_ADMIN`
 * `CONNECTION_ADMIN`
 * `SYSTEM_VARIABLES_ADMIN`
+* `RESTRICTED_REPLICA_WRITER_ADMIN` allows privilege owners to perform write or update operations without being affected when the TiDB cluster is enabled the read-only mode. For details, see [`tidb_restricted_read_only`](/system-variables.md#tidb_restricted_read_only-new-in-v520).
 
 To see the full set of dynamic privileges, execute the `SHOW PRIVILEGES` statement. Because plugins are permitted to add new privileges, the list of privileges that are assignable might differ based on your TiDB installation.
 
