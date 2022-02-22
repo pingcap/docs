@@ -103,13 +103,15 @@ job = "tikv"
 # If there are multiple disks on the machine, store the data of Raft RocksDB on different disks to improve TiKV performance.
 # raftdb-path = "/tmp/tikv/store/raft"
 
-region-max-size = "384MB"
-# The threshold value of Region split
-region-split-size = "256MB"
 # When the data size change in a Region is larger than the threshold value, TiKV checks whether this Region needs split.
-# To reduce the costs of scanning data in the checking process, set the value to 32MB during checking and set it to
-# the default value in normal operation.
+# To reduce the costs of scanning data in the checking process, set the value to 32 MB during importing data and set it to the default value in normal operation.
 region-split-check-diff = "32MB"
+
+[coprocessor]
+## If the size of a Region with the interval [a,e) is larger than the value of `region_max_size`, TiKV trys to split the Region to several intervals, such as [a,b), [b,c), [c,d), [d, e).
+## After that, the size of splitted Regions with the intervals [a,b), [b,c) and [c,d) are equal to the value of `region_split_size` (or slightly larger than the value of `region_split_size`).
+# region-max-size = "144MB"
+# region-split-size = "96MB"
 
 [rocksdb]
 # The maximum number of threads of RocksDB background tasks. The background tasks include compaction and flush.
