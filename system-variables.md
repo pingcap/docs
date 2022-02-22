@@ -734,6 +734,21 @@ Constraint checking is always performed in place for pessimistic transactions (d
     - `RESTRICTED_VARIABLES_ADMIN`: The ability to see and set sensitive variables in `SHOW [GLOBAL] VARIABLES` and `SET`.
     - `RESTRICTED_USER_ADMIN`: The ability to prevent other users from making changes or dropping a user account.
 
+### tidb_restricted_read_only <span class="version-mark">New in v5.2.0</span>
+
+- Scope: GLOBAL
+- Default value: `0`
+- Optional values: `0`, `1`
+- This variable controls the read-only status of the entire cluster. If the variable is enabled (the value is `1`), all TiDB servers in the entire cluster turn on the read-only mode. In this case, TiDB only execute the statements that do not modify data, such as `SELECT`, `USE`, `SHOW`. For others, such as `INSERT`, `UPDATE`, TiDB rejects to execute those statements in the read-only mode.
+- The read-only mode enabled by this variable only ensures that the entire cluster finally goes into the read-only status. If you have changed the value of this variable, but the changed status is not updated to other TiDB servers, the un-updated TiDB is still **not** in the read-only mode.
+- When enabling this variable, the executing SQL statements are not affected. TiDB only checks the read-only status for the SQL statements that are to be executed.
+- When enabling this variable, the uncommitted transactions can have the following results:
+    - If there is an uncommitted read-only transaction, the transaction can be committed normally.
+    - If the uncommitted transaction is not a read-only transaction, the SQL statements executing write operations in that transaction are rejected.
+    - If the uncommitted read-only transaction has modified data, its commitment is also rejected.
+- After the cluster enables read-only mode, all users (including the users with the `SUPER` privilege) cannot execute the SQL statements that might write data unless the user is explicitly granted the `RESTRICTED_REPLICA_WRITER_ADMIN` privileges.
+- The users with `RESTRICTED_VARIABLES_ADMIN` or `SUPER` privileges can modify this variable. If you enabled [Security Enhanced Mode](#tidb_enable_enhanced_security), only the users with the `RESTRICTED_VARIABLES_ADMIN` privilege can modify this variable.
+
 ### tidb_enable_fast_analyze
 
 > **Warning:**
