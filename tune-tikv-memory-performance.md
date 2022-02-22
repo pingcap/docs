@@ -108,7 +108,7 @@ region-split-check-diff = "32MB"
 
 [coprocessor]
 ## If the size of a Region with the interval [a,e) is larger than the value of `region_max_size`, TiKV trys to split the Region to several intervals, such as [a,b), [b,c), [c,d), [d, e).
-## After that, the size of splitted Regions with the intervals [a,b), [b,c) and [c,d) are equal to the value of `region_split_size` (or slightly larger than the value of `region_split_size`).
+## After that, the size of split Regions with the intervals [a,b), [b,c) and [c,d) are equal to the value of `region_split_size` (or slightly larger than the value of `region_split_size`).
 # region-max-size = "144MB"
 # region-split-size = "96MB"
 
