@@ -41,9 +41,9 @@ TiDB version: 5.1.4
 + TiFlash
 
     - Support pushing down `ADDDATE()` and `DATE_ADD()` to TiFlash
-    - Support pushing down `INET6_ATON` and `INET6_NTOA` to TiFlash
-    - Support pushing down `INET_ATON` and `INET_NTOA` to TiFlash
-    - Increase the max supported depth of expression or plan tree in a DAG request from `100` to `200`
+    - Support pushing down `INET6_ATON()` and `INET6_NTOA()` to TiFlash
+    - Support pushing down `INET_ATON()` and `INET_NTOA()` to TiFlash
+    - Increase the max supported depth of an expression or a plan tree in a DAG request from `100` to `200`
 
 + Tools
 
@@ -88,7 +88,7 @@ TiDB version: 5.1.4
     - Fix the issue that deleting an uninitialized replica might cause an old replica to be recreated [#10533](https://github.com/tikv/tikv/issues/10533)
     - Fix the metadata corruption issue when `Prepare Merge` is triggered after a new election is finished but the isolated peer is not informed [#11526](https://github.com/tikv/tikv/issues/11526)
     - Fix the deadlock issue that happens occasionally when coroutines run too fast [#11549](https://github.com/tikv/tikv/issues/11549)
-    - Avoid the potential dead lock and memory leak issues when profiling flame graphs [#11108](https://github.com/tikv/tikv/issues/11108)
+    - Fix the potential deadlock and memory leak issues when profiling flame graphs [#11108](https://github.com/tikv/tikv/issues/11108)
     - Fix the rare data inconsistency issue when retrying a prewrite request in pessimistic transactions [#11187](https://github.com/tikv/tikv/issues/11187)
     - Fix a bug that the configuration `resource-metering.enabled` does not work [#11235](https://github.com/tikv/tikv/issues/11235)
     - Fix the issue that some coroutines leak in `resolved_ts` [#10965](https://github.com/tikv/tikv/issues/10965)
