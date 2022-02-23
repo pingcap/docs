@@ -9,4 +9,4 @@ summary: Learn about TiDB Operator, the automatic operation system for TiDB clus
 
 Currently, the TiDB Operator documentation (also named as TiDB in Kubernetes documentation) is independent of the TiDB documentation. To access the documentation, click the following link:
 
-- [TiDB in Kubernetes documentation](https://docs.pingcap.com/tidb-in-kubernetes/stable/).
+- [TiDB in Kubernetes documentation](https://docs.pingcap.com/tidb-in-kubernetes/stable/)
