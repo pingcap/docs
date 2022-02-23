@@ -71,7 +71,7 @@ tiup list tidb
 tiup playground ${version}
 ```
 
-Replace `${version}` with the target version number.
+Replace `${version}` with the target version number. 
 
 ### Start a TiDB cluster of the nightly version
 
