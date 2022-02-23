@@ -63,11 +63,7 @@ Flags:
 tiup list tidb
 ```
 
-<<<<<<< HEAD
-In the command above, `nightly` is the version number of the cluster. Similarly, you can replace `nightly` with `v5.2.2`, and the command is `tiup playground v5.2.2`.
-=======
 ### Start a TiDB cluster of a specific version
->>>>>>> 53fa86505 (Remove version from tiup playground and add two examples (#7671))
 
 {{< copyable "shell-regular" >}}
 
@@ -82,7 +78,7 @@ Replace `${version}` with the target version number.
 {{< copyable "shell-regular" >}}
 
 ```shell
-tiup playground nightly --monitor
+tiup playground nightly
 ```
 
 In the command above, `nightly` indicates the latest development version of TiDB.
@@ -114,11 +110,7 @@ By default, only one instance is started for each TiDB, TiKV, and PD component. 
 {{< copyable "shell-regular" >}}
 
 ```shell
-<<<<<<< HEAD
-tiup playground v3.0.10 --db 3 --pd 3 --kv 3
-=======
 tiup playground --db 3 --pd 3 --kv 3
->>>>>>> 53fa86505 (Remove version from tiup playground and add two examples (#7671))
 ```
 
 ## Quickly connect to the TiDB cluster started by playground
