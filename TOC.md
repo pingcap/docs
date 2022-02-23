@@ -55,12 +55,12 @@
   - Upgrade
     - [Use TiUP (Recommended)](/upgrade-tidb-using-tiup.md)
     - [Use TiUP Offline (Recommended)](/upgrade-tidb-using-tiup-offline.md)
-    - [Use TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.1/upgrade-a-tidb-cluster)
+    - [Use TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/upgrade-a-tidb-cluster)
     - [Use TiDB Ansible](/upgrade-tidb-using-ansible.md)
   - Scale
     - [Use TiUP (Recommended)](/scale-tidb-using-tiup.md)
     - [Use TiDB Ansible](/scale-tidb-using-ansible.md)
-    - [Use TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.1/scale-a-tidb-cluster)
+    - [Use TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/scale-a-tidb-cluster)
   - Backup and Restore
     - Use BR Tool (Recommended)
       - [BR Tool Overview](/br/backup-and-restore-tool.md)
