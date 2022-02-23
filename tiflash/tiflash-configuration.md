@@ -64,7 +64,7 @@ delta_index_cache_size = 0
 
 ## The path in which the TiFlash temporary files are stored. By default it is the first directory in path
 ## or in storage.latest.dir appended with "/tmp".
-# tmp_path = "/tidb-data/tiflash-9000/tmp"
+tmp_path = "/tidb-data/tiflash-9000/tmp"
 
 ## Storage paths settings take effect starting from v4.0.9
 [storage]
