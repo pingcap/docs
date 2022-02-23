@@ -79,7 +79,7 @@ Replace `${version}` with the target version number.
 {{< copyable "shell-regular" >}}
 
 ```shell
-tiup playground nightly --monitor
+tiup playground nightly
 ```
 
 In the command above, `nightly` indicates the latest development version of TiDB.
