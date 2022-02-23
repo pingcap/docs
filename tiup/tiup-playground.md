@@ -13,7 +13,7 @@ The TiDB cluster is a distributed system that consists of multiple components. A
 The basic usage of the playground component is shown as follows:
 
 ```bash
-tiup playground [version] [flags]
+tiup playground ${version} [flags]
 ```
 
 If you directly execute the `tiup playground` command, TiUP uses the locally installed TiDB, TiKV, and PD components or installs the stable version of these components to start a TiDB cluster that consists of one TiKV instance, one TiDB instance, and one PD instance.
@@ -56,7 +56,25 @@ Flags:
 
 ## Examples
 
-### Use the nightly version to start a TiDB cluster
+### Check available TiDB versions
+
+{{< copyable "shell-regular" >}}
+
+```shell
+tiup list tidb
+```
+
+### Start a TiDB cluster of a specific version
+
+{{< copyable "shell-regular" >}}
+
+```shell
+tiup playground ${version}
+```
+
+Replace `${version}` with the target version number.
+
+### Start a TiDB cluster of the nightly version
 
 {{< copyable "shell-regular" >}}
 
@@ -64,17 +82,7 @@ Flags:
 tiup playground nightly
 ```
 
-In the command above, `nightly` is the version number of the cluster. Similarly, you can replace `nightly` with `v4.0.0-rc`, and the command is `tiup playground v4.0.0-rc`.
-
-### Start a cluster with monitor
-
-{{< copyable "shell-regular" >}}
-
-```shell
-tiup playground nightly --monitor
-```
-
-This command starts Prometheus on port 9090 to display the time series data in the cluster.
+In the command above, `nightly` indicates the latest development version of TiDB.
 
 ### Override PD's default configuration
 
@@ -103,7 +111,7 @@ By default, only one instance is started for each TiDB, TiKV, and PD component. 
 {{< copyable "shell-regular" >}}
 
 ```shell
-tiup playground v3.0.10 --db 3 --pd 3 --kv 3
+tiup playground --db 3 --pd 3 --kv 3
 ```
 
 ## Quickly connect to the TiDB cluster started by playground
