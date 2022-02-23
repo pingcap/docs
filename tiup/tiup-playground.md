@@ -66,7 +66,7 @@ Flags:
 
 ## Examples
 
-### Check TiDB versions available
+### Check available TiDB versions
 
 {{< copyable "shell-regular" >}}
 
@@ -84,7 +84,7 @@ tiup playground ${version}
 
 Replace `${version}` with the target version number.
 
-### Start a TiDB cluster using nightly version
+### Start a TiDB cluster of the nightly version
 
 {{< copyable "shell-regular" >}}
 
