@@ -26,7 +26,7 @@ TiDB version: 5.1.4
 + TiDB
 
     - Support partition pruning for the built-in `IN` expression in Range partition tables [#26739](https://github.com/pingcap/tidb/issues/26739)
-    - Improve the accuracy of tracking memory usage when `IndexJoin` is executed [#28650](https://github.com/pingcap/tidb/issues/28650)
+    - Improve the accuracy of tracking memory usage when `IndexJoin` is executed [#28650](https://github.com/pingcap/tidb/issues/28650) 
 
 + TiKV
 
