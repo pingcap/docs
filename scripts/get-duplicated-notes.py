@@ -21,9 +21,9 @@ def store_exst_rn(ext_path,main_path):
                     for line in fp:
                         exst_issue_num = re.search(r'https://github.com/(pingcap|tikv)/\w+/(issues|pull)/\d+', line)
                         if exst_issue_num:
-                            if exst_issue_nums not in exst_issue_nums:
-                                note_pair = [exst_issue_num.group(), line,afile]
-                                exst_issue_nums.append(exst_issue_num)
+                            if exst_issue_num.group() not in exst_issue_nums:
+                                note_pair = [exst_issue_num.group(),line,afile]
+                                exst_issue_nums.append(exst_issue_num.group())
                                 exst_notes.append(note_pair)
                             else:
                                 continue
