@@ -75,7 +75,7 @@ This section lists the detailed diagnostic data collected by Diag in a TiDB clus
 
 | Data type | Exported file | Parameter for Clinic's data collection |
 | :------ | :------ |:-------- |
-| All metric data | `{metric_name}.json` | `--include=monitor` |
+| All metrics data | `{metric_name}.json` | `--include=monitor` |
 | Alert list | `alerts.json` | `--include=monitor` |
 
 ### TiDB system variable
@@ -126,7 +126,7 @@ This section lists the detailed diagnostic data collected by Diag in a DM cluste
 
 | Data type | Exported file | Parameter for Clinic's data collection |
 | :------ | :------ |:-------- |
-| All metric data | `{metric_name}.json` | `--include=monitor` |
+| All metrics data | `{metric_name}.json` | `--include=monitor` |
 | Alert list | `alerts.json` | `--include=monitor` |
 
 ### System information of the cluster
