@@ -50,6 +50,4 @@ TiDB Lightning also supports using TiDB-backend for data import. In this mode, `
 - If you use TiDB Lighting together with TiFlash:
 
     No matter a table has TiFlash replica(s) or not, you can import data to that table using TiDB Lightning. Note that this might slow the TiDB Lightning procedure, which depends on the NIC bandwidth on the lightning host, the CPU and disk load of the TiFlash node, and the number of TiFlash replicas.
-    
-
 - For Apache Parquet files, TiDB Lightning currently only accepts Amazon Aurora Parquet files.
