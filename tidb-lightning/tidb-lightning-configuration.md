@@ -236,6 +236,26 @@ backslash-escape = true
 # If a line ends with a separator, remove it.
 trim-last-separator = false
 
+# [[mydumper.files]]
+# Expression used for parsing AWS Aurora parquet files
+# pattern = '(?i)^(?:[^/]*/)*([a-z0-9_]+)\.([a-z0-9_]+)/(?:[^/]*/)*(?:[a-z0-9\-_.]+\.(parquet))$'
+# schema = '$1'
+# table = '$2'
+# type = '$3'
+# 
+# Sets rules for merging sharded schemas and tables. Specifically, import tables 1 and 2 from `my_db1` and tables3 and 4 from `my_db2` to table5 of `my_db`.
+# [[routes]]
+# schema-pattern = "my_db1"
+# table-pattern = "table[1-2]"
+# target-schema = "my_db"
+# target-table = "table5"
+# 
+# [[routes]]
+# schema-pattern = "my_db2"
+# table-pattern = "table[3-4]"
+# target-schema = "my_db"
+# target-table = "table5"
+
 [tidb]
 # Configuration of any TiDB server from the cluster.
 host = "172.16.31.1"
