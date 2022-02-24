@@ -65,6 +65,7 @@ This document lists the features supported in each TiDB version. Note that suppo
 
 ## Advanced SQL features
 
+<<<<<<< HEAD
 | **Advanced SQL features**                                                                                | **5.3**      | **5.2**      | **5.1**      | **5.0**      | **4.0**      |
 |----------------------------------------------------------------------------------------------------------|:------------:|:------------:|:------------:|:------------:|:------------:|
 | [Prepared statement cache](/sql-prepare-plan-cache.md)                                                   | Y            | Experimental | Experimental | Experimental | Experimental |
@@ -77,6 +78,20 @@ This document lists the features supported in each TiDB version. Note that suppo
 | [MPP Exection Engine](/explain-mpp.md)                                                                   | Y            | Y            | Y            | Y            | N            |
 | [Index Merge Join](/explain-index-merge.md)                                                              | Experimental | Experimental | Experimental | Experimental | Experimental |
 | [Placement Rules in SQL](/placement-rules-in-sql.md)                                                     | Experimental | N            | N            | N            | N            |
+=======
+| **Advanced SQL features**                                    | **5.4**          |   **5.3**    |   **5.2**    |   **5.1**    |   **5.0**    |   **4.0**    |
+| ------------------------------------------------------------ | ------------ | :----------: | :----------: | :----------: | :----------: | :----------: |
+| [Prepared statement cache](/sql-prepare-plan-cache.md)       | Y            |      Y       | Experimental | Experimental | Experimental | Experimental |
+| [SQL plan management (SPM)](/sql-plan-management.md)         | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
+| [Coprocessor cache](/coprocessor-cache.md)                   | Y            |      Y       |      Y       |      Y       |      Y       | Experimental |
+| [Stale Read](/stale-read.md)                                 | Y            |      Y       |      Y       |      Y       |      N       |      N       |
+| [Follower reads](/follower-read.md)                          | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
+| [Read historical data (tidb_snapshot)](/read-historical-data.md) | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
+| [Optimizer hints](/optimizer-hints.md)                       | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
+| [MPP Exection Engine](/explain-mpp.md)                       | Y            |      Y       |      Y       |      Y       |      Y       |      N       |
+| [Index Merge](/explain-index-merge.md)                  | Y            | Experimental | Experimental | Experimental | Experimental | Experimental |
+| [Placement Rules in SQL](/placement-rules-in-sql.md)         | Experimental | Experimental |      N       |      N       |      N       |      N       |
+>>>>>>> 1136af1cc (Fix wrong feature name for index merge (#7701))
 
 ## Data definition language (DDL)
 
