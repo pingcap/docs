@@ -89,7 +89,7 @@ Tools
     - Make tikv-ctl detect raft db correctly [#11393](https://github.com/tikv/tikv/issues/11393)
     - Fix incorrect by-instance gRPC average duration. [#11299](https://github.com/tikv/tikv/issues/11299)
 
-+ PingCAP/TiFlash
++ TiFlash
 
     - Fix error result for function `in` [#4076](https://github.com/pingcap/tics/pull/4076)
     - Fix cast to decimal overflow bug [#4073](https://github.com/pingcap/tics/pull/4073)
@@ -204,7 +204,7 @@ Tools
     - Fix wrong flen for CastAsString funtion [#29513](https://github.com/pingcap/tidb/issues/29513)
     - Expression: Fix the issue that length information is wrong when converting Decimal to String [#29417](https://github.com/pingcap/tidb/issues/29417)
 
-+ PingCAP/TiFlash
++ TiFlash
 
     - Align unix_timestamp behavior with TiDB and mysql when input is earlier than 1970-01-01 00:00:01 UTC [#3625](https://github.com/pingcap/tics/pull/3625)
 
