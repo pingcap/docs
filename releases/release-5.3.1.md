@@ -46,7 +46,7 @@ Tools
     - Fix a bug that turning on tidb_restricted_read_only won't automatically turn on tidb_super_read_only [#31745](https://github.com/pingcap/tidb/issues/31745)
     - Fix greatest and least function with collation get wrong result [#31789](https://github.com/pingcap/tidb/issues/31789)
     - Fix the crash or error when generating an empty mpp task list. [#31636](https://github.com/pingcap/tidb/issues/31636)
-    - ```release-note [#31667](https://github.com/pingcap/tidb/pull/31667)
+    - release-note [#31667](https://github.com/pingcap/tidb/pull/31667)
     - Fix index join bug caused by innerWorker panic [#31494](https://github.com/pingcap/tidb/issues/31494)
     - Fix double column value are different with MySQL after changing column type from float to double [#31372](https://github.com/pingcap/tidb/issues/31372)
     - Planner: make queries with the extra column `_tidb_rowid` can use PointGet [#31543](https://github.com/pingcap/tidb/issues/31543)
@@ -72,7 +72,7 @@ Tools
     - Fix a potential panic (#11746) when snapshot files have been deleted but the peer's status is still Applying. [#11746](https://github.com/tikv/tikv/issues/11746)
     - Fix potential high latency caused by destroying a peer [#10210](https://github.com/tikv/tikv/issues/10210)
     - Fix possible QPS drop when `level0_slowdown_trigger` is set explicitly with flow control enabled. [#11424](https://github.com/tikv/tikv/issues/11424)
-    - ```release-note [#11805](https://github.com/tikv/tikv/pull/11805)
+    - release-note [#11805](https://github.com/tikv/tikv/pull/11805)
     - Fix wrong `any_value` result when there are regions returning empty result [#11735](https://github.com/tikv/tikv/issues/11735)
     - Update procfs to 0.12.0 [#11702](https://github.com/tikv/tikv/issues/11702)
     - Fix the problem that destroying an uninitialized replica may cause a stalled replica be created again. [#10533](https://github.com/tikv/tikv/issues/10533)
@@ -86,14 +86,14 @@ Tools
     - Fix panic in rare conditions when merge, conf change and snapshot happen at the same time [#11475](https://github.com/tikv/tikv/issues/11475)
     - Fix the issue that reverse scan can't detect memory locks and may read stale data. [#11440](https://github.com/tikv/tikv/issues/11440)
     - Do not panic when RocksDB flush or compaction hits disk capacity [#11224](https://github.com/tikv/tikv/issues/11224)
-    - make tikv-ctl detect raft db correctly [#11393](https://github.com/tikv/tikv/issues/11393)
+    - Make tikv-ctl detect raft db correctly [#11393](https://github.com/tikv/tikv/issues/11393)
     - Fix incorrect by-instance gRPC average duration. [#11299](https://github.com/tikv/tikv/issues/11299)
 
-+ PingCAP/TiFlash
++ TiFlash
 
-    - fix error result for function `in` [#4076](https://github.com/pingcap/tics/pull/4076)
+    - Fix error result for function `in` [#4076](https://github.com/pingcap/tics/pull/4076)
     - Fix cast to decimal overflow bug [#4073](https://github.com/pingcap/tics/pull/4073)
-    - fix date format identifies '\n' as invalid separator [#4059](https://github.com/pingcap/tics/pull/4059)
+    - Fix date format identifies '\n' as invalid separator [#4059](https://github.com/pingcap/tics/pull/4059)
     - Fix cannot find column error after add column when remote read was triggered in tiflash [#4027](https://github.com/pingcap/tics/pull/4027)
     - Fix str_to_date() function incorrectly handles leading zeros when parsing Microseconds [#3936](https://github.com/pingcap/tics/pull/3936)
     - Fix the problem of TiFlash crashing when the memory limit is enabled [#3918](https://github.com/pingcap/tics/pull/3918)
@@ -108,16 +108,16 @@ Tools
 + PD
 
     - None. [#4663](https://github.com/tikv/pd/pull/4663)
-    - - fix a bug that operate steps may contain unnecessary or empty JointConsensus steps in certain conditions 
-- fix a bug when demoting single voter directly [#4362](https://github.com/tikv/pd/issues/4362)
-    - fix the problem that the hot cache cannot be emptied when the interval is less than 60 [#4390](https://github.com/tikv/pd/issues/4390)
+    - Fix a bug that operate steps may contain unnecessary or empty JointConsensus steps in certain conditions 
+    - Fix a bug when demoting single voter directly [#4362](https://github.com/tikv/pd/issues/4362)
+    - Fix the problem that the hot cache cannot be emptied when the interval is less than 60 [#4390](https://github.com/tikv/pd/issues/4390)
     - Improve DR_STATE file content format [#4341](https://github.com/tikv/pd/issues/4341)
     - Fix data race when updating replication mode configuration [#4325](https://github.com/tikv/pd/issues/4325)
     - Fix the issue that the RLock is not released [#4354](https://github.com/tikv/pd/issues/4354)
 
 + Tools
 
-    + PingCAP/TiCDC
+    + TiCDC
 
         - `None`. [#4660](https://github.com/pingcap/tiflow/issues/4660)
         - Support more data types with default value attribute, and fix potential data inconsistency caused by default value logic [#3793](https://github.com/pingcap/tiflow/issues/3793)
@@ -127,7 +127,7 @@ Tools
         - `None`. [#4588](https://github.com/pingcap/tiflow/issues/4588)
         - `None`. [#4561](https://github.com/pingcap/tiflow/issues/4561)
         - Fix a bug that owner exits abnormally when PD leader is killed [#4248](https://github.com/pingcap/tiflow/issues/4248)
-        - allow user set the configuration of Kafka producer dial/write/read timeout [#4385](https://github.com/pingcap/tiflow/issues/4385)
+        - Allow user set the configuration of Kafka producer dial/write/read timeout [#4385](https://github.com/pingcap/tiflow/issues/4385)
         - Fix a bug that MySQL sink will generate duplicated replace SQL if `batch-replace-enable` is disabled. [#4501](https://github.com/pingcap/tiflow/issues/4501)
         - `None`. [#4128](https://github.com/pingcap/tiflow/issues/4128)
         - `None`. [#4404](https://github.com/pingcap/tiflow/issues/4404)
@@ -150,7 +150,7 @@ Tools
         - `None`. [#4163](https://github.com/pingcap/tiflow/pull/4163)
         - `None`. [#3337](https://github.com/pingcap/tiflow/issues/3337)
         - Fix a bug that stop-task during load phase will cause the source always tries to transfer to a worker [#3771](https://github.com/pingcap/tiflow/issues/3771)
-        - `fix a bug that wrong progress in query-status for loader`. [#3252](https://github.com/pingcap/tiflow/issues/3252)
+        - Fix a bug that wrong progress in query-status for loader [#3252](https://github.com/pingcap/tiflow/issues/3252)
         - Fix the bug that http API panic when the processor info we want to get is not exist. [#3840](https://github.com/pingcap/tiflow/issues/3840)
         - Reduce "EventFeed retry rate limited" logs [#4006](https://github.com/pingcap/tiflow/issues/4006)
         - Fix a bug that can cause changefeed stuck due to a deadlock occurs. [#4055](https://github.com/pingcap/tiflow/issues/4055)
@@ -162,16 +162,15 @@ Tools
         - Fix a bug that DM-worker can't boot up after restart [#3344](https://github.com/pingcap/tiflow/issues/3344)
         - Fix a bug that DM task will failed when PARTITION DDL cost a long time [#3854](https://github.com/pingcap/tiflow/issues/3854)
         - Fix syntax error if DDL has a special comment. [#3755](https://github.com/pingcap/tiflow/issues/3755)
-        - ```release-note [#3976](https://github.com/pingcap/tiflow/pull/3976)
+        - release-note [#3976](https://github.com/pingcap/tiflow/pull/3976)
         - Fix the owner may be blocked when initializing the changefeed caused by a bad network connection to the sink [#3352](https://github.com/pingcap/tiflow/issues/3352)
         - `None` [#3953](https://github.com/pingcap/tiflow/pull/3953)
-        - fix a bug that DM may report "invalid sequence" when upstream is MySQL 8.0
-fix a bug that upstream will die on SHOW SLAVE HOSTS [#3847](https://github.com/pingcap/tiflow/issues/3847)
+        - Fix a bug that DM may report "invalid sequence" when upstream is MySQL 8.0. Fix a bug that upstream will die on SHOW SLAVE HOSTS [#3847](https://github.com/pingcap/tiflow/issues/3847)
         - Fix a bug that redo logs are not cleaned up when removing a paused changefeed. [#3919](https://github.com/pingcap/tiflow/pull/3919)
         - Fix timezone related error that cause cdc server can't run in some RHEL release version (6.8, 6.9 etc). [#3584](https://github.com/pingcap/tiflow/issues/3584)
         - Fix cli don't work when cli cert's common name was not added in config that use for start cdc server. [#3882](https://github.com/pingcap/tiflow/pull/3882)
-        - add pre clean up process when s3 enable, fix #3523 [#3878](https://github.com/pingcap/tiflow/pull/3878)
-        - add redo log related metric [#3877](https://github.com/pingcap/tiflow/pull/3877)
+        - Add pre clean up process when s3 enable, fix #3523 [#3878](https://github.com/pingcap/tiflow/pull/3878)
+        - Add redo log related metric [#3877](https://github.com/pingcap/tiflow/pull/3877)
         - Fix the issue of changefeed resuming automatically after upgrading cluster [#3473](https://github.com/pingcap/tiflow/issues/3473)
         - Fix a bug of data loss when DM does finer grained retry [#3487](https://github.com/pingcap/tiflow/issues/3487)
         - Fix mounter default date value not support [#3793](https://github.com/pingcap/tiflow/issues/3793)
@@ -180,11 +179,10 @@ fix a bug that upstream will die on SHOW SLAVE HOSTS [#3847](https://github.com/
         - Fix the problem that old value is not forced on automatically in `canal-json` and `maxwell` protocols [#3676](https://github.com/pingcap/tiflow/issues/3676)
         - `None`. [#3765](https://github.com/pingcap/tiflow/pull/3765)
         - `None`. [#3712](https://github.com/pingcap/tiflow/pull/3712)
-        - Please add a release note.
-fix kvclient takes too long time to recover [#3191](https://github.com/pingcap/tiflow/issues/3191)
+        - Please add a release note. Fix kvclient takes too long time to recover [#3191](https://github.com/pingcap/tiflow/issues/3191)
         - The Avro sink was updated to handle JSON columns [#3624](https://github.com/pingcap/tiflow/issues/3624)
         - Fix cli don't work when cli cert's common name was not added in config that use for start cdc server. [#3628](https://github.com/pingcap/tiflow/pull/3628)
-        - fix changefeed checkpoint lag negative value error [#3010](https://github.com/pingcap/tiflow/issues/3010)
+        - Fix changefeed checkpoint lag negative value error [#3010](https://github.com/pingcap/tiflow/issues/3010)
         - Fix HTTP API not working when there are TiCDC nodes of different versions in one cdc cluster. [#3483](https://github.com/pingcap/tiflow/issues/3483)
         - Fix a bug when too often query status is called in Load unit, DM-worker may encounter data race or panic [#3457](https://github.com/pingcap/tiflow/issues/3457)
         - Fix OOM in container environments. [#3439](https://github.com/pingcap/tiflow/pull/3439)
@@ -195,18 +193,18 @@ fix kvclient takes too long time to recover [#3191](https://github.com/pingcap/t
 
 + TiDB
 
-    - planner: fix wrong range calculation for Nulleq function on Enum values [#32428](https://github.com/pingcap/tidb/issues/32428)
+    - Planner: fix wrong range calculation for Nulleq function on Enum values [#32428](https://github.com/pingcap/tidb/issues/32428)
     - Fix the bug that indexHashJoin may return the error `send on closed channel`. [#31129](https://github.com/pingcap/tidb/issues/31129)
     - Fix the bug that lightning will skip some precheck items when restart [#30772](https://github.com/pingcap/tidb/issues/30772)
     - Fix the error that if tidb-lightning doesn't has permission to access mysql.tidb, it will generate kv with wrong format. [#31088](https://github.com/pingcap/tidb/issues/31088)
     - Fix concurrent column type changes(with changing data) that cause schema and data inconsistencies. [#31048](https://github.com/pingcap/tidb/issues/31048)
     - Add a new config to control whether support incremental import. [#27919](https://github.com/pingcap/tidb/issues/27919)
-    - executor: fix pipelined window invalid memory address [#30326](https://github.com/pingcap/tidb/issues/30326)
+    - Executor: fix pipelined window invalid memory address [#30326](https://github.com/pingcap/tidb/issues/30326)
     - Fix the problem that window function may return different results when using transaction or not. [#29947](https://github.com/pingcap/tidb/issues/29947)
     - Fix wrong flen for CastAsString funtion [#29513](https://github.com/pingcap/tidb/issues/29513)
-    - expression: Fix the issue that length information is wrong when converting Decimal to String [#29417](https://github.com/pingcap/tidb/issues/29417)
+    - Expression: Fix the issue that length information is wrong when converting Decimal to String [#29417](https://github.com/pingcap/tidb/issues/29417)
 
-+ PingCAP/TiFlash
++ TiFlash
 
     - Align unix_timestamp behavior with TiDB and mysql when input is earlier than 1970-01-01 00:00:01 UTC [#3625](https://github.com/pingcap/tics/pull/3625)
 
