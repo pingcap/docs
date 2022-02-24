@@ -35,7 +35,6 @@ Tools
 
 ## Feature enhancements
 
-
 ## __unsorted
 
 + TiDB
@@ -90,7 +89,6 @@ Tools
     - make tikv-ctl detect raft db correctly [#11413](https://github.com/tikv/tikv/pull/11413)
     - Fix incorrect by-instance gRPC average duration. [#11330](https://github.com/tikv/tikv/pull/11330)
 
-
 + PingCAP/TiFlash
 
     - fix error result for function `in` [#4076](https://github.com/pingcap/tics/pull/4076)
@@ -107,7 +105,6 @@ Tools
     - Fix the bug that results of `where <string>` is wrong because it will be converted to int type. [#3480](https://github.com/pingcap/tics/pull/3480)
     - Fix tiflash randomly crash when a mpp query is killed. [#3451](https://github.com/pingcap/tics/pull/3451)
 
-
 + PD
 
     - None. [#4663](https://github.com/tikv/pd/pull/4663)
@@ -117,7 +114,6 @@ Tools
     - Improve DR_STATE file content format [#4386](https://github.com/tikv/pd/pull/4386)
     - Fix data race when updating replication mode configuration [#4370](https://github.com/tikv/pd/pull/4370)
     - Fix the issue that the RLock is not released [#4358](https://github.com/tikv/pd/pull/4358)
-
 
 + Tools
 
@@ -192,14 +188,12 @@ fix kvclient takes too long time to recover [#3663](https://github.com/pingcap/t
         - Fix HTTP API not working when there are TiCDC nodes of different versions in one cdc cluster. [#3530](https://github.com/pingcap/tiflow/pull/3530)
         - Fix a bug when too often query status is called in Load unit, DM-worker may encounter data race or panic [#3468](https://github.com/pingcap/tiflow/pull/3468)
         - Fix OOM in container environments. [#3439](https://github.com/pingcap/tiflow/pull/3439)
-        - Please add a release note.
-If you don't think this PR needs a release note then fill it with `None`. [#3389](https://github.com/pingcap/tiflow/pull/3389)
-        - Please add a release note.
-If you don't think this PR needs a release note then fill it with `None`. [#3256](https://github.com/pingcap/tiflow/pull/3256)
+        - Please add a release note. If you don't think this PR needs a release note then fill it with `None`. [#3389](https://github.com/pingcap/tiflow/pull/3389)
+        - Please add a release note. If you don't think this PR needs a release note then fill it with `None`. [#3256](https://github.com/pingcap/tiflow/pull/3256)
 
 ## Bug Fixes
 
-+ PingCAP/TiDB
++ TiDB
 
     - planner: fix wrong range calculation for Nulleq function on Enum values [#32495](https://github.com/pingcap/tidb/pull/32495)
     - Fix the bug that indexHashJoin may return the error `send on closed channel`. [#31448](https://github.com/pingcap/tidb/pull/31448)
