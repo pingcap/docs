@@ -53,12 +53,3 @@ if __name__ == "__main__":
     ext_path = r'D:\GitHub\upstream\docs1\releases\release-5.0.6.md'  # 已发布的 release notes
     main_path = r'D:\GitHub\upstream\docs1\releases\release-5.1.4.md'  # 当前正在准备的 release notes
     check_exst_rn(ext_path, main_path)
-
-
-
-
-
-
-
-
-
