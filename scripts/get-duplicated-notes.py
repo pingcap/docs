@@ -1,5 +1,5 @@
 # This script compares an on-going release notes file with a previously published release notes file.
-# If the ongoing release notes file has a duplicate note with the published one, the script reports the note and replaces it with the published one.
+# If the ongoing release notes file has a duplicate note with the published one, the script reports the note and replaces it with the published one. 
 
 import re, os
 from tempfile import mkstemp
