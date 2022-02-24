@@ -3,61 +3,82 @@ title: TiDB 5.3.1 Release Notes
 category: Releases
 ---
 
-
-
 # TiDB 5.3.1 Release Notes
 
-Release Date: February 24, 2022
+Release Date: xx, 2022
 
 TiDB version: 5.3.1
 
+## Compatibility changes
+
+TiDB
+
+TiKV
+
+PD
+
+TiDB Dashboard
+
+TiFlash
+
+Tools
+
+    - Backup & Restore (BR)
+
+    - TiCDC
+
+    - Dumpling
+
+    - TiDB Binlog
+
+    - TiDB Lightning
+
+## Feature enhancements
+
+
 ## __unsorted
 
-+ PingCAP/TiDB
++ TiDB
 
-    - fix date formate identifies '\n' as invalid separator [#32503](https://github.com/pingcap/tidb/pull/32503)
+    - Fix date formate identifies '\n' as invalid separator [#32503](https://github.com/pingcap/tidb/pull/32503)
     - Fix the bug that lightning may not clean up metadata schema when some of the import contains no source files. [#32389](https://github.com/pingcap/tidb/pull/32389)
-    - fix `alter column set default` wrongly updates the schema [#32264](https://github.com/pingcap/tidb/pull/32264)
+    - Fix `alter column set default` wrongly updates the schema [#32264](https://github.com/pingcap/tidb/pull/32264)
     - Fix a bug that caused region unbalanced after restoring. [#32128](https://github.com/pingcap/tidb/pull/32128)
-    - Fixed a bug that turning on tidb_restricted_read_only won't automatically turn on tidb_super_read_only [#31841](https://github.com/pingcap/tidb/pull/31841)
-    - fix greatest and least function with collation get wrong result [#31837](https://github.com/pingcap/tidb/pull/31837)
+    - Fix a bug that turning on tidb_restricted_read_only won't automatically turn on tidb_super_read_only [#31841](https://github.com/pingcap/tidb/pull/31841)
+    - Fix greatest and least function with collation get wrong result [#31837](https://github.com/pingcap/tidb/pull/31837)
     - Fix the crash or error when generating an empty mpp task list. [#31695](https://github.com/pingcap/tidb/pull/31695)
     - ```release-note [#31667](https://github.com/pingcap/tidb/pull/31667)
     - Fix index join bug caused by innerWorker panic [#31614](https://github.com/pingcap/tidb/pull/31614)
     - Fix double column value are different with MySQL after changing column type from float to double [#31572](https://github.com/pingcap/tidb/pull/31572)
-    - planner: make queries with the extra column `_tidb_rowid` can use PointGet [#31552](https://github.com/pingcap/tidb/pull/31552)
+    - Planner: make queries with the extra column `_tidb_rowid` can use PointGet [#31552](https://github.com/pingcap/tidb/pull/31552)
     - Fix a data race that may cause "invalid transaction" error when executing a query using index lookup join. [#31350](https://github.com/pingcap/tidb/pull/31350)
     - Fix a panic that may happen when using `on duplicate key update`. [#31344](https://github.com/pingcap/tidb/pull/31344)
     - Fix the bug that lighting return error if gcs url starts with gs:// [#31169](https://github.com/pingcap/tidb/pull/31169)
-    - ```release-note [#30999](https://github.com/pingcap/tidb/pull/30999)
+    - [#30999](https://github.com/pingcap/tidb/pull/30999)
     - Fix a bug that the `mysql_stmt_field_count` returned to mysql client is incorrect in prepare protocal when handling union statement. [#30997](https://github.com/pingcap/tidb/pull/30997)
-    - make tidb-lightning pre-check output message clearer [#30888](https://github.com/pingcap/tidb/pull/30888)
+    - Make tidb-lightning pre-check output message clearer [#30888](https://github.com/pingcap/tidb/pull/30888)
     - Avoid tikv trigger auto region split by lower the ingest kv count threshold [#30876](https://github.com/pingcap/tidb/pull/30876)
     - Fix the but that lightning doesn't report error if s3 storage path not exist. [#30714](https://github.com/pingcap/tidb/pull/30714)
     - planner: regard NULL as point when accessing composite index [#30614](https://github.com/pingcap/tidb/pull/30614)
-    - fix a bug when reducing order by clause for the index which leads to the wrong result. [#30552](https://github.com/pingcap/tidb/pull/30552)
+    - Fix a bug when reducing order by clause for the index which leads to the wrong result. [#30552](https://github.com/pingcap/tidb/pull/30552)
     - The TiDB server now maps a user to an entry in the mysql.user table more consistently. [#30450](https://github.com/pingcap/tidb/pull/30450)
     - Fix `MaxDays` and `MaxBackups` not working for slow log. [#30172](https://github.com/pingcap/tidb/pull/30172)
-    - lightning: fix log doesn't output to stdout when passing `--log-file="-"` [#29939](https://github.com/pingcap/tidb/pull/29939)
+    - Lightning: fix log doesn't output to stdout when passing `--log-file="-"` [#29939](https://github.com/pingcap/tidb/pull/29939)
 
-
-+ TiKV/TiKV
++ TiKV
 
     - Reduce CDC recovery time by reduce the number regions that need resolved lock. [#12000](https://github.com/tikv/tikv/pull/12000)
     - Increase the size of write batch for raftlog GC to speed up GC. [#11971](https://github.com/tikv/tikv/pull/11971)
-    - Fixes the bug that unsafe_destroy_range does not get executed when GC worker is busy [#11913](https://github.com/tikv/tikv/pull/11913)
+    - Fix the bug that unsafe_destroy_range does not get executed when GC worker is busy [#11913](https://github.com/tikv/tikv/pull/11913)
     - Fix a potential panic (#11746) when snapshot files have been deleted but the peer's status is still Applying. [#11908](https://github.com/tikv/tikv/pull/11908)
-    - fix potential high latency caused by destroying a peer [#11880](https://github.com/tikv/tikv/pull/11880)
+    - Fix potential high latency caused by destroying a peer [#11880](https://github.com/tikv/tikv/pull/11880)
     - Fix possible QPS drop when `level0_slowdown_trigger` is set explicitly with flow control enabled. [#11857](https://github.com/tikv/tikv/pull/11857)
     - ```release-note [#11805](https://github.com/tikv/tikv/pull/11805)
     - Fix wrong `any_value` result when there are regions returning empty result [#11744](https://github.com/tikv/tikv/pull/11744)
-    - update procfs to 0.12.0 [#11726](https://github.com/tikv/tikv/pull/11726)
+    - Update procfs to 0.12.0 [#11726](https://github.com/tikv/tikv/pull/11726)
     - Fix the problem that destroying an uninitialized replica may cause a stalled replica be created again. [#11637](https://github.com/tikv/tikv/pull/11637)
-    - Please add a release note.
-None [#11632](https://github.com/tikv/tikv/pull/11632)
-    - Please add a release note.
-If you don't think this PR needs a release note then fill it with None.
-If this PR will be picked to release branch, then a release note is probably required. [#11616](https://github.com/tikv/tikv/pull/11616)
+    - Please add a release note.None [#11632](https://github.com/tikv/tikv/pull/11632)
+    - Please add a release note. [#11616](https://github.com/tikv/tikv/pull/11616)
     - Fix panic when cgroup controller is not mounted [#11582](https://github.com/tikv/tikv/pull/11582)
     - Fix metadata corruption in an unlikely condition that prepare merge is triggered after new election without informing an isolated peer [#11568](https://github.com/tikv/tikv/pull/11568)
     - Fix deadlock in some rare cases that futures get resolved too fast [#11564](https://github.com/tikv/tikv/pull/11564)
@@ -176,7 +197,6 @@ If you don't think this PR needs a release note then fill it with `None`. [#3389
         - Please add a release note.
 If you don't think this PR needs a release note then fill it with `None`. [#3256](https://github.com/pingcap/tiflow/pull/3256)
 
-
 ## Bug Fixes
 
 + PingCAP/TiDB
@@ -192,16 +212,12 @@ If you don't think this PR needs a release note then fill it with `None`. [#3256
     - Fix wrong flen for CastAsString funtion [#30058](https://github.com/pingcap/tidb/pull/30058)
     - expression: Fix the issue that length information is wrong when converting Decimal to String [#30016](https://github.com/pingcap/tidb/pull/30016)
 
-
 + PingCAP/TiFlash
 
     - Align unix_timestamp behavior with TiDB and mysql when input is earlier than 1970-01-01 00:00:01 UTC [#3625](https://github.com/pingcap/tics/pull/3625)
-
 
 + PD
 
     - Fix the bug that the region scatterer may generate the schedule with too few peers. [#4577](https://github.com/tikv/pd/pull/4577)
     - Fix incomplete replicate file [#4394](https://github.com/tikv/pd/pull/4394)
     - Fix panic issue after TiKV node scales in [#4382](https://github.com/tikv/pd/pull/4382)
-
-
