@@ -65,13 +65,13 @@ def check_exst_rn(note_pairs, main_path):
 
     remove(source_file_path)
     move(target_file_path, source_file_path)
-    DupRate = "%.0f%%" % (DupNum/NoteNum*100)
+    DupRate = "%.0f%%" % (DupNum/NoteNum*100) #计算 release notes 重复率
     print (str(DupNum) + " duplicated notes are found in " + str(NoteNum) + " notes. The duplicated rate is " + str(DupRate) + ".")
 
 
 if __name__ == "__main__":
 
-    ext_path = r'/Users/grcai/Documents/GitHub/qiancai/docs/releases'  # 已发布的 release notes
-    main_path = r'/Users/grcai/Documents/GitHub/qiancai/docs/releases/release-5.3.1.md'  # 当前正在准备的 release notes
+    ext_path = r'/Users/aaa/Documents/GitHub/githubid/docs/releases'  # 已发布的 release notes 文档路径
+    main_path = r'/Users/aaa/Documents/GitHub/githubid/docs/releases/release-5.3.1.md'  # 当前正在准备的 release notes 文档路径
     note_pairs = store_exst_rn(ext_path,main_path)
     check_exst_rn(note_pairs, main_path)
