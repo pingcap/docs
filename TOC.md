@@ -3,7 +3,7 @@
 
 - About TiDB
   - [TiDB Introduction](/overview.md)
-  - [TiDB 5.3 Release Notes](/releases/release-5.3.0.md)
+  - [TiDB 5.4 Release Notes](/releases/release-5.4.0.md)
   - [Basic Features](/basic-features.md)
   - [Experimental Features](/experimental-features.md)
   - Benchmarks
@@ -58,10 +58,10 @@
 - Maintain
   - Upgrade
     - [Use TiUP (Recommended)](/upgrade-tidb-using-tiup.md)
-    - [Use TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.1/upgrade-a-tidb-cluster)
+    - [Use TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/upgrade-a-tidb-cluster)
   - Scale
     - [Use TiUP (Recommended)](/scale-tidb-using-tiup.md)
-    - [Use TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.1/scale-a-tidb-cluster)
+    - [Use TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/scale-a-tidb-cluster)
   - Backup and Restore
     - Use BR Tool (Recommended)
       - [BR Tool Overview](/br/backup-and-restore-tool.md)
@@ -241,7 +241,7 @@
     - About TiDB Data Migration
       - [DM Overview](/dm/dm-overview.md)
       - Basic Features
-        - [Table Routing](/dm/dm-key-features.md#table-routing)
+        - [Table Routing](/dm/dm-key-features.md)
         - [Block and Allow Lists](/dm/dm-key-features.md#block-and-allow-table-lists)
         - [Binlog Event Filter](/dm/dm-key-features.md#binlog-event-filter)
       - Advanced Features
@@ -264,7 +264,7 @@
         - [Use TiUP (Recommended)](/dm/deploy-a-dm-cluster-using-tiup.md)
         - [Use TiUP Offline](/dm/deploy-a-dm-cluster-using-tiup-offline.md)
         - [Use Binary](/dm/deploy-a-dm-cluster-using-binary.md)
-        - [Use Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/dev/deploy-tidb-dm)
+        - [Use Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-tidb-dm)
       - [Migrate Data Using DM](/dm/migrate-data-using-dm.md)
       - [Test DM Performance](/dm/dm-performance-test.md)
     - Maintain
@@ -545,7 +545,7 @@
     - [Views](/views.md)
     - [Partitioning](/partitioned-table.md)
     - [Temporary Tables](/temporary-tables.md)
-    - [Character Set and Collation]
+    - Character Set and Collation
       - [Overview](/character-set-and-collation.md)
       - [GBK](/character-set-gbk.md)
     - [Placement Rules in SQL](/placement-rules-in-sql.md)
@@ -624,7 +624,7 @@
         - [View Diagnostics Report](/dashboard/dashboard-diagnostics-report.md)
         - [Use Diagnostics](/dashboard/dashboard-diagnostics-usage.md)
       - [Search Logs Page](/dashboard/dashboard-log-search.md)
-      - [Instance Profiling]
+      - Instance Profiling
         - [Manual Profiling](/dashboard/dashboard-profiling.md)
         - [Continuous Profiling](/dashboard/continuous-profiling.md)
       - Session Management and Configuration
@@ -672,6 +672,8 @@
 - Release Notes
   - [All Releases](/releases/release-notes.md)
   - [Release Timeline](/releases/release-timeline.md)
+  - v5.4
+    - [5.4.0](/releases/release-5.4.0.md)
   - v5.3
     - [5.3.1](/releases/release-5.3.1.md)
     - [5.3.0](/releases/release-5.3.0.md)
@@ -681,6 +683,7 @@
     - [5.2.1](/releases/release-5.2.1.md)
     - [5.2.0](/releases/release-5.2.0.md)
   - v5.1
+    - [5.1.4](/releases/release-5.1.4.md)
     - [5.1.3](/releases/release-5.1.3.md)
     - [5.1.2](/releases/release-5.1.2.md)
     - [5.1.1](/releases/release-5.1.1.md)
