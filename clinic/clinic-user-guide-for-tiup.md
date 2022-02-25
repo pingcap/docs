@@ -336,6 +336,6 @@ You can have a quick check for the cluster status locally using Diag. Even if yo
 
     Clinic is currently in the Beta version, and external users cannot visit the data access link. Only authorized PingCAP technical support staff can access the link and view the data.
 
-3. How long will the data uploaded to the Clinic Server be kept?
+3. How long will the uploaded data uploaded be kept on the Clinic Server?
 
     After a technical support case is closed, PingCAP permanently deletes or anonymizes the corresponding data within 90 days.
