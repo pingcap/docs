@@ -50,7 +50,7 @@ tiup update diag
 
 > **Note:**
 >
-> - For offline clusters, you need to deploy Diag offline. For details, refer to [Deploy TiUP offline: Method 2](production-deployment-using-tiup.md#method-2-deploy-tiup-offline).
+> - For offline clusters, you need to deploy Diag offline. For details, refer to [Deploy TiUP offline: Method 2](/production-deployment-using-tiup.md#method-2-deploy-tiup-offline).
 > - Diag is **only** included in the TiDB Server offline mirror package of v5.4.0 and later versions.
 
 ## Troubleshoot cluster problems remotely
