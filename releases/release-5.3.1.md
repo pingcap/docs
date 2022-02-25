@@ -91,19 +91,19 @@ Tools
 
 + TiFlash
 
-    - Fix error result for function `in` [#4076](https://github.com/pingcap/tics/pull/4076)
-    - Fix cast to decimal overflow bug [#4073](https://github.com/pingcap/tics/pull/4073)
-    - Fix date format identifies '\n' as invalid separator [#4059](https://github.com/pingcap/tics/pull/4059)
-    - Fix cannot find column error after add column when remote read was triggered in tiflash [#4027](https://github.com/pingcap/tics/pull/4027)
-    - Fix str_to_date() function incorrectly handles leading zeros when parsing Microseconds [#3936](https://github.com/pingcap/tics/pull/3936)
-    - Fix the problem of TiFlash crashing when the memory limit is enabled [#3918](https://github.com/pingcap/tics/pull/3918)
-    - Fix the bug that castStringAsReal has different behaivor between tiflash and tikv/tidb. [#3757](https://github.com/pingcap/tics/pull/3757)
-    - Avoid false alert of `DB::Exception: Encode type of coprocessor response is not CHBlock` [#3740](https://github.com/pingcap/tics/pull/3740)
-    - Fix random `EstablishMPPConnection` fail after TiFlash server restart. [#3708](https://github.com/pingcap/tics/pull/3708)
-    - Fixed the inconsistent behavior of CastStringAsDecimal between tiflash and tidb/tikv. [#3680](https://github.com/pingcap/tics/pull/3680)
-    - Fix potential data inconsistency after altering a primary key column to a larger int data type [#3570](https://github.com/pingcap/tics/pull/3570)
-    - Fix the bug that results of `where <string>` is wrong because it will be converted to int type. [#3480](https://github.com/pingcap/tics/pull/3480)
-    - Fix tiflash randomly crash when a mpp query is killed. [#3451](https://github.com/pingcap/tics/pull/3451)
+    - Fix error result for function `in`
+    - Fix cast to decimal overflow bug
+    - Fix date format identifies '\n' as invalid separator
+    - Fix cannot find column error after add column when remote read was triggered in tiflash
+    - Fix str_to_date() function incorrectly handles leading zeros when parsing Microseconds
+    - Fix the problem of TiFlash crashing when the memory limit is enabled
+    - Fix the bug that castStringAsReal has different behaivor between tiflash and tikv/tidb
+    - Avoid false alert of `DB::Exception: Encode type of coprocessor response is not CHBlock`
+    - Fix random `EstablishMPPConnection` fail after TiFlash server restart.
+    - Fixed the inconsistent behavior of CastStringAsDecimal between tiflash and tidb/tikv.
+    - Fix potential data inconsistency after altering a primary key column to a larger int data type
+    - Fix the bug that results of `where <string>` is wrong because it will be converted to int type.
+    - Fix tiflash randomly crash when a mpp query is killed.
 
 + PD
 
@@ -206,7 +206,7 @@ Tools
 
 + TiFlash
 
-    - Align unix_timestamp behavior with TiDB and mysql when input is earlier than 1970-01-01 00:00:01 UTC [#3625](https://github.com/pingcap/tics/pull/3625)
+    - Align unix_timestamp behavior with TiDB and mysql when input is earlier than 1970-01-01 00:00:01 UTC
 
 + PD
 
