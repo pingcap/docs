@@ -818,10 +818,10 @@ Configuration items related to RocksDB
 
 + WAL recovery mode
 + Value options:
-+ `"tolerate-corrupted-tail-records"`: tolerates and discards the records that have incomplete trailing data on all logs.
-+ `"absolute-consistency"`: abandons recovery when corrupted logs are found.
-+ `"point-in-time"`: recovers log sequentially until the first corrupted log is encountered.
-+ `"skip-any-corrupted-records"`: recovery after a disaster. Corrupted records are skipped
++    - `"tolerate-corrupted-tail-records"`: tolerates and discards the records that have incomplete trailing data on all logs
++    - `"absolute-consistency"`: abandons recovery when corrupted logs are found
++    - `"point-in-time"`: recovers log sequentially until the first corrupted log is encountered
++    - `"skip-any-corrupted-records"`: recovery after a disaster. Corrupted records are skipped
 + Default value: `"point-in-time"`
 
 ### `wal-dir`
@@ -882,7 +882,7 @@ Configuration items related to RocksDB
 ### `rate-limiter-mode`
 
 + RocksDB's compaction rate limiter mode
-+ Optional values: `"read-only"`, `"write-only"`, `"all-io"`)
++ Optional values: `"read-only"`, `"write-only"`, `"all-io"`
 + Default value: `"write-only"`
 
 ### `rate-limiter-auto-tuned` <span class="version-mark">New in v5.0</span>
