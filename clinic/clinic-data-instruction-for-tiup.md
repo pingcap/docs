@@ -7,9 +7,9 @@ summary: Introduces in detail what diagnostic data can be collected by the Clini
 
 This document provides the range of the diagnostic data that can be collected by the Clinic diagnostic service in the clusters deployed using TiUP. Also, the document lists the parameters for data collection corresponding to each data module. When running a command to collect data using the Clinic Diag tool (Diag), you can add the required parameters to the command according to the range of the data to be collected.
 
-The diagnostic data collected by the Clinic diagnosis service is **only** used for troubleshooting.
+The diagnostic data collected by the Clinic diagnosis service is **only** used for troubleshooting cluster problems.
 
-The Clinic Server is set up on the PingCAP intranet (in China). When you uploaded the collected diagnostic data to the Clinic Server for PingCAP developers to troubleshoot remotely, the data is stored in the AWS S3 China (Beijing) Region server set up by PingCAP. PingCAP strictly controls permissions for data access, and only authorized in-house developers can access the uploaded data.
+The Clinic Server is set up on the PingCAP intranet (in China). When you uploaded the collected diagnostic data to the Clinic Server for PingCAP developers to troubleshoot cluster problems remotely, the data is stored in the AWS S3 China (Beijing) Region server set up by PingCAP. PingCAP strictly controls permissions for data access, and only authorized in-house developers can access the uploaded data.
 
 After a technical support case is closed, PingCAP permanently deletes or anonymizes the corresponding data within 90 days.
 

@@ -5,7 +5,7 @@ summary: Introduces the Clinic diagnostic service, including tool components, us
 
 ## Clinic Diagnostic Service Overview
 
-Clinic is a diagnostic service provided by PingCAP for TiDB clusters. To the clusters deployed using TiUP and TiDB Operator, this service helps to troubleshoot remotely and perform a quick check of the cluster status locally. With Clinic diagnostic service, you can ensure the stable operation of your TiDB cluster for its full life-cycle, predict potential issues, reduce the probability of the issues, troubleshoot quickly, and fix issues.
+Clinic is a diagnostic service provided by PingCAP for TiDB clusters. To the clusters deployed using TiUP and TiDB Operator, this service helps to troubleshoot cluster problems remotely and perform a quick check of the cluster status locally. With Clinic diagnostic service, you can ensure the stable operation of your TiDB cluster for its full life-cycle, predict potential issues, reduce the probability of the issues, troubleshoot problems quickly, and fix the problems.
 
 The Clinic diagnostic service is currently in the Beta testing stage, so only the invited users can use the service. The service provides the following two components to diagnose clusters:
 
@@ -24,7 +24,7 @@ The Clinic diagnostic service is currently in the Beta testing stage, so only th
 
 ## Usage scenarios
 
-- Troubleshoot a cluster remotely:
+- Troubleshoot cluster problems remotely:
 
     When your cluster has some issues that cannot be fixed quickly, you can ask for help at TiDB Community or contact PingCAP technical support. When applying technical support for remote assistance, you need to save various diagnostic data from the cluster and forward the data to them. In this case, you can use Diag to collect diagnostic data with one click. Diag helps you to collect complete diagnostic data quickly, which can replace complex manual data collection operations. After collecting data, you need to upload the data to the Clinic Server for PingCAP technical support. The Clinic Server provides secure storage for diagnostic data and supports the online diagnosis, improving the efficiency of troubleshooting.
 
