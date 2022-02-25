@@ -32,7 +32,7 @@ This section lists the detailed diagnostic data collected by Diag in a TiDB clus
 | Error log | `tidb_stderr.log` | `--include=log` |
 | Slow log | `tidb_slow_query.log` | `--include=log` |
 | Configuration file | `tidb.toml` | `--include=config` |
-| Dynamic configuration | `config.json` | `--include=config` |
+| Realtime configuration | `config.json` | `--include=config` |
 
 ### TiKV diagnostic data
 
@@ -41,7 +41,7 @@ This section lists the detailed diagnostic data collected by Diag in a TiDB clus
 | Log | `tikv.log` | `--include=log` |
 | Error log | `tikv_stderr.log` | `--include=log` |
 | Configuration file | `tikv.toml` | `--include=config` |
-| Dynamic configuration | `config.json` | `--include=config` |
+| Realtime configuration | `config.json` | `--include=config` |
 
 ### PD diagnostic data
 
@@ -50,7 +50,7 @@ This section lists the detailed diagnostic data collected by Diag in a TiDB clus
 | Log | `pd.log` | `--include=log` |
 | Error log | `pd_stderr.log` | `--include=log` |
 | Configuration file | `pd.toml` | `--include=config` |
-| Dynamic configuration | `config.json` | `--include=config` |
+| Realtime configuration | `config.json` | `--include=config` |
 | Outputs of the command `tiup ctl pd -u http://${pd IP}:${PORT} store` | `store.json` | `--include=config` |
 | Outputs of the command `tiup ctl pd -u http://${pd IP}:${PORT} config placement-rules show` | `placement-rule.json` | `--include=config` |
 
@@ -61,7 +61,7 @@ This section lists the detailed diagnostic data collected by Diag in a TiDB clus
 | Log | `tiflash.log` | `--include=log` |
 | Error log | `tiflash_stderr.log` | `--include=log` |
 | Configuration file |  `tiflash-learner.toml`，`tiflash-preprocessed.toml`，`tiflash.toml` | `--include=config` |
-| Dynamic configuration | `config.json` | `--include=config` |
+| Realtime configuration | `config.json` | `--include=config` |
 
 ### TiCDC diagnostic data
 
@@ -76,13 +76,13 @@ This section lists the detailed diagnostic data collected by Diag in a TiDB clus
 | Data type | Exported file | Parameter for Clinic's data collection |
 | :------ | :------ |:-------- |
 | All metrics data | `{metric_name}.json` | `--include=monitor` |
-| Alert list | `alerts.json` | `--include=monitor` |
+| All alerts data | `alerts.json` | `--include=monitor` |
 
 ### TiDB system variable
 
 | Data type | Exported file | Parameter for Clinic's data collection |
 | :------ | :------ |:-------- |
-| Get TiDB system variables (do not collect this data by default; if you need to collect the data, additional database account is required) | `mysql.tidb.csv` | `--include=db_vars` |
+| Get TiDB system variables ( Diag does not collect this data by default; if you need to collect this data, database credential is required) | `mysql.tidb.csv` | `--include=db_vars` |
 | | `global_variables.csv` | `--include=db_vars` |
 
 ### System information of the cluster
@@ -91,7 +91,7 @@ This section lists the detailed diagnostic data collected by Diag in a TiDB clus
 | :------ | :------ |:-------- |
 | Kernel log | `dmesg.log` | `--include=system` |
 | Basic information of the system and the hardware | `insight.json` | `--include=system` |
-| Contents in the `/etc/security/limits.conf` system  | `limits.conf` | `--include=system` |
+| Contents in the `/etc/security/limits.conf` | `limits.conf` | `--include=system` |
 | List of kernel parameters | `sysctl.conf` | `--include=system` |
 | Socket system information, outputs of the ss command | `ss.txt` | `--include=system` |
 
@@ -103,8 +103,8 @@ This section lists the detailed diagnostic data collected by Diag in a DM cluste
 
 | Data type | Exported file | Parameter for Clinic's data collection |
 | :------ | :------ |:-------- |
-| Basic information of the cluster, including the cluster ID  | `cluster.json`| The data is collected every time by default. |
-| Detailed information of the cluster | `meta.yaml` | The data is collected every time by default.  |
+| Basic information of the cluster, including the cluster ID  | `cluster.json`| The data is collected per run by default. |
+| Detailed information of the cluster | `meta.yaml` | The data is collected per run by default. |
 
 ### dm-master diagnostic data
 
