@@ -5,15 +5,15 @@ summary: Introduces in detail what diagnostic data can be collected by the Clini
 
 # Clinic Diagnostic Data
 
-This document provides the range of the diagnostic data can be collected by the Clinic diagnostic service in the clusters deployed using TiUP. Also, the document lists the parameters for data collection corresponding to each data module. That is, when running a command to collect data using the Clinic Diag tool (Diag), you can add the required parameters to that command according to the range of the data to be collected.
+This document provides the range of the diagnostic data that can be collected by the Clinic diagnostic service in the clusters deployed using TiUP. Also, the document lists the parameters for data collection corresponding to each data module. When running a command to collect data using the Clinic Diag tool (Diag), you can add the required parameters to the command according to the range of the data to be collected.
 
 The diagnostic data collected by the Clinic diagnosis service is **only** used for troubleshooting.
 
-The Clinic Server is located on the PingCAP intranet (in China). When you uploaded the collected diagnostic data to the Clinic Server for PingCAP developers to troubleshoot remotely, the data is stored in the AWS S3 China (Beijing) Region server set up by PingCAP. PingCAP strictly controls permissions for data access, and only authorized in-house developers can get access to the uploaded data.
+The Clinic Server is set up on the PingCAP intranet (in China). When you uploaded the collected diagnostic data to the Clinic Server for PingCAP developers to troubleshoot remotely, the data is stored in the AWS S3 China (Beijing) Region server set up by PingCAP. PingCAP strictly controls permissions for data access, and only authorized in-house developers can access the uploaded data.
 
 After a technical support case is closed, PingCAP permanently deletes or anonymizes the corresponding data within 90 days.
 
-## Data collection range of TiDB clutsers
+## Data collection range of TiDB clusters
 
 This section lists the detailed diagnostic data collected by Diag in a TiDB cluster deployed using TiUP.
 
@@ -21,8 +21,8 @@ This section lists the detailed diagnostic data collected by Diag in a TiDB clus
 
 | Data type | Exported file | Parameter for Clinic's data collection |
 | :------ | :------ |:-------- |
-| Basic information of the cluster, including the cluster ID | `cluster.json` | The data is collected everytime by default. |
-| Detailed information of the cluster | `meta.yaml` | The data is collected everytime by default. |
+| Basic information of the cluster, including the cluster ID | `cluster.json` | The data is collected every time by default. |
+| Detailed information of the cluster | `meta.yaml` | The data is collected every time by default. |
 
 ### TiDB diagnostic data
 
@@ -103,8 +103,8 @@ This section lists the detailed diagnostic data collected by Diag in a DM cluste
 
 | Data type | Exported file | Parameter for Clinic's data collection |
 | :------ | :------ |:-------- |
-| Basic information of the cluster, including the cluster ID  | `cluster.json`| The data is collected everytime by default. |
-| Detailed information of the cluster | `meta.yaml` | The data is collected everytime by default.  |
+| Basic information of the cluster, including the cluster ID  | `cluster.json`| The data is collected every time by default. |
+| Detailed information of the cluster | `meta.yaml` | The data is collected every time by default.  |
 
 ### dm-master diagnostic data
 
