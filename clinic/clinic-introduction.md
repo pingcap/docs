@@ -14,23 +14,23 @@ The Clinic diagnostic service is currently in the Beta testing stage, so only th
     > **Note:**
     >
     > - Diag temporarily **does not support** collecting data in the clusters with TLS encryption enabled and the clusters deployed using TiDB Ansible.
-    > - The Clinic diagnostic service is currently in the Beta testing stage, so only the invited users can use the service. If you need to upload data to Clinic Server using Diag, you should get a trial account from the PingCAP technical support you contacted before.
+    > - The Clinic diagnostic service is currently in the Beta testing stage, so only the invited users can use the service. If you need to upload data to Clinic Server using Diag, you should get a trial account from the PingCAP technical support staff you contacted before.
 
 - Clinic Server: The cloud service deployed in the cloud. By providing diagnostic services in SaaS mode, Clinic Server can not only receive the diagnostic data uploaded to the Clinic Server, but also store the data, view and diagnose the uploaded data online, and provide cluster diagnostic reports.
 
     > **Note:**
     >
-    > In the Beta version of the Clinic diagnostic service, external users cannot use the features of the Clinic server. After you upload the collected data to the Clinic Server and get the data link, only authorized PingCAP technical supports can access the link and view the data.
+    > In the Beta version of the Clinic diagnostic service, external users cannot use the features of the Clinic server. After you upload the collected data to the Clinic Server and get the data link, only authorized PingCAP technical support staff can access the link and view the data.
 
 ## Usage scenarios
 
 - Troubleshoot cluster problems remotely:
 
-    When your cluster has some issues that cannot be fixed quickly, you can ask for help at TiDB Community or contact PingCAP technical support. When applying technical support for remote assistance, you need to save various diagnostic data from the cluster and forward the data to them. In this case, you can use Diag to collect diagnostic data with one click. Diag helps you to collect complete diagnostic data quickly, which can replace complex manual data collection operations. After collecting data, you need to upload the data to the Clinic Server for PingCAP technical support. The Clinic Server provides secure storage for diagnostic data and supports the online diagnosis, improving the efficiency of troubleshooting.
+    When your cluster has some issues that cannot be fixed quickly, you can ask for help at TiDB Community or contact PingCAP technical support. When applying technical support for remote assistance, you need to save various diagnostic data from the cluster and forward the data to them. In this case, you can use Diag to collect diagnostic data with one click. Diag helps you to collect complete diagnostic data quickly, which can replace complex manual data collection operations. After collecting data, you need to upload the data to the Clinic Server for PingCAP technical support staff. The Clinic Server provides secure storage for diagnostic data and supports the online diagnosis, improving the efficiency of troubleshooting.
 
 - Perform a quick check for the cluster status locally:
 
-    Even if your cluster can run normally, it is necessary to periodically check the cluster for potential stability risks. You can check the potential health risks of the cluster using the local quick check feature provided by the Clinic diagnostic service. Clinic Beta version mainly provides a rationality check for cluster configuration items to discover unreasonable configurations and provide modification suggestions.
+    Even if your cluster can run normally, it is necessary to periodically check the cluster for potential stability risks. You can check the potential health risks of the cluster using the local quick check feature provided by the Clinic diagnostic service. Clinic in Beta version mainly provides a rationality check for cluster configuration items to discover unreasonable configurations and provide modification suggestions.
 
 ## Implementation Principles
 
