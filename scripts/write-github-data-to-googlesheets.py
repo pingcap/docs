@@ -120,14 +120,14 @@ if __name__ == '__main__':
     r17 = get_pr_lines_comments(url_docs_tidb_operator_merged)
     r18 = get_pr_lines_comments(url_docs_tidb_operator_updated)
 
+    print('********************************************')
+    print("OK, let's begin writing to Google Sheets!")
+    print('********************************************')
+
     scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
     credentials = ServiceAccountCredentials.from_json_keyfile_name('<your personal Google Sheets API key in a JSON file>', scope)
     gc = gspread.authorize(credentials)
     time_row = now_4d + ' to ' + now_date
-
-    print('********************************************')
-    print("OK, let's begin writing to Google Sheets!")
-    print('********************************************')
 
     # Write to the docs-cn-pr-count sheet
     wks = gc.open('<your Google Sheets name>').worksheet('docs-cn-pr-count')
