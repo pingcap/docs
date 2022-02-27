@@ -21,8 +21,8 @@ The Clinic diagnostic service is currently in the Beta testing stage.
 
     > **Note:**
     >
-    > - Clinic is currently in the Beta testing stage, so only the invited users can use the service. If you need to upload data to Clinic Server using Diag, you should get a trial account from the PingCAP technical support staff you contacted before.
-    > - In the Clinic Beta version, external users cannot use the features of the Clinic server. After you upload the collected data to the Clinic Server and get the data link, only authorized PingCAP technical support staff can access the link and view the data.
+    > - Clinic is currently in the Beta testing stage, so only the invited users can use the service. If you need to upload data to the Clinic Server using Diag, you should get a trial account from the PingCAP technical support staff you contacted before.
+    > - In the Clinic Beta version, external users cannot use the features of the Clinic Server. After you upload the collected data to the Clinic Server and get the data link, only authorized PingCAP technical support staff can access the link and view the data.
 
     - When your cluster has some problems, but you cannot analyze them immediately, you can use Diag to collect data and save it for later analysis.
 
@@ -163,7 +163,7 @@ The collected data is stored in separate subdirectories based on its data source
 
 ### Upload data
 
-To provide the cluster diagnostic data to PingCAP technical support staff, you need to upload the data to Clinic Server first, and then send the data link to the staff. Clinic Server is a cloud service that stores and shares the diagnostic data securely.
+To provide the cluster diagnostic data to PingCAP technical support staff, you need to upload the data to the Clinic Server first, and then send the data link to the staff. Clinic Server is a cloud service that stores and shares diagnostic data securely.
 
 Depending on the network connection of the cluster, you can choose one of the following methods to upload data:
 

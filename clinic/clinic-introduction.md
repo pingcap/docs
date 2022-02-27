@@ -9,18 +9,18 @@ Clinic is a diagnostic service provided by PingCAP for TiDB clusters. To the clu
 
 The Clinic diagnostic service is currently in the Beta testing stage, so only the invited users can use the service. The service provides the following two components to diagnose clusters:
 
-- Diag: The tool deployed on the cluster side. Diag is used to collect cluster diagnostic data, upload the diagnostic data to Clinic Server, and perform a quick health check locally on the cluster. For the list of diagnostic data collected by Diag, see [Clinic Diagnostic Data](/clinic/clinic-data-instruction-for-tiup.md).
+- Diag: The tool deployed on the cluster side. Diag is used to collect cluster diagnostic data, upload the diagnostic data to the Clinic Server, and perform a quick health check locally on the cluster. For the list of diagnostic data collected by Diag, see [Clinic Diagnostic Data](/clinic/clinic-data-instruction-for-tiup.md).
 
     > **Note:**
     >
     > - Diag temporarily **does not support** collecting data in the clusters with TLS encryption enabled and the clusters deployed using TiDB Ansible.
-    > - The Clinic diagnostic service is currently in the Beta testing stage, so only the invited users can use the service. If you need to upload data to Clinic Server using Diag, you should get a trial account from the PingCAP technical support staff you contacted before.
+    > - The Clinic diagnostic service is currently in the Beta testing stage, so only the invited users can use the service. If you need to upload data to the Clinic Server using Diag, you should get a trial account from the PingCAP technical support staff you contacted before.
 
 - Clinic Server: The cloud service deployed in the cloud. By providing diagnostic services in SaaS mode, the Clinic Server can not only receive the diagnostic data uploaded to the Clinic Server but also store the data. Also, the Clinic Server can provide an online diagnostic environment for the uploaded data, and cluster diagnostic reports.
 
     > **Note:**
     >
-    > In the Beta version of the Clinic diagnostic service, external users cannot use the features of the Clinic server. After you upload the collected data to the Clinic Server and get the data link, only authorized PingCAP technical support staff can access the link and view the data.
+    > In the Beta version of the Clinic diagnostic service, external users cannot use the features of the Clinic Server. After you upload the collected data to the Clinic Server and get the data link, only authorized PingCAP technical support staff can access the link and view the data.
 
 ## Usage scenarios
 
