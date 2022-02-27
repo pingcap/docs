@@ -16,7 +16,7 @@ The Clinic diagnostic service is currently in the Beta testing stage, so only th
     > - Diag temporarily **does not support** collecting data in the clusters with TLS encryption enabled and the clusters deployed using TiDB Ansible.
     > - The Clinic diagnostic service is currently in the Beta testing stage, so only the invited users can use the service. If you need to upload data to Clinic Server using Diag, you should get a trial account from the PingCAP technical support staff you contacted before.
 
-- Clinic Server: The cloud service deployed in the cloud. By providing diagnostic services in SaaS mode, Clinic Server can not only receive the diagnostic data uploaded to the Clinic Server, but also store the data, view and diagnose the uploaded data online, and provide cluster diagnostic reports.
+- Clinic Server: The cloud service deployed in the cloud. By providing diagnostic services in SaaS mode, the Clinic Server can not only receive the diagnostic data uploaded to the Clinic Server but also store the data. Also, the Clinic Server can provide an online diagnostic environment for the uploaded data, and cluster diagnostic reports.
 
     > **Note:**
     >
@@ -30,7 +30,7 @@ The Clinic diagnostic service is currently in the Beta testing stage, so only th
 
 - Perform a quick check for the cluster status locally:
 
-    Even if your cluster can run normally, it is necessary to periodically check the cluster for potential stability risks. You can check the potential health risks of the cluster using the local quick check feature provided by the Clinic diagnostic service. Clinic in Beta version mainly provides a rationality check for cluster configuration items to discover unreasonable configurations and provide modification suggestions.
+    Even if your cluster runs stable, it is necessary to periodically check the cluster for potential stability risks. You can check the potential health risks of the cluster using the local quick check feature provided by the Clinic diagnostic service. Clinic in Beta version mainly provides a rationality check for cluster configuration items to discover unreasonable configurations and provide modification suggestions.
 
 ## Implementation Principles
 
@@ -49,11 +49,11 @@ First, Diag needs to get cluster topology information from the deployment tool T
 - Collect data through HTTP call
 
     - By calling the HTTP interface of TiDB components, Diag can get the real-time configuration sampling information and the real-time performance sampling information of TiDB, TiKV, PD, and other components.
-    - By calling the HTTP interface of Prometheus, Diag can get alert information and metrics monitoring data.
+    - By calling the HTTP interface of Prometheus, Diag can get alert information and monitoring metrics data.
 
 - Query database parameters through SQL statements
 
-    Using SQL statements, Diag can query the system parameters and other information of the TiDB database. To use this method, you need to **additionally provide** the username and password to access the TiDB database when collecting data.
+    Using SQL statements, Diag can query the system variables and other information of the TiDB database. To use this method, you need to **additionally provide** the username and password to access the TiDB database when collecting data.
 
 ## See also
 

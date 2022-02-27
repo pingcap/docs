@@ -28,11 +28,11 @@ The Clinic diagnostic service is currently in the Beta testing stage.
 
 - [Perform a quick check for the cluster status locally](#perform-a-quick-check-for-the-cluster-status-locally):
 
-    Even if your cluster can run normally, it is necessary to periodically check the cluster for potential stability risks. You can check the potential health risks of the cluster using the Clinic local quick check feature. Clinic Beta version mainly provides a rationality check for cluster configuration items to discover unreasonable configurations and provide modification suggestions.
+    Even if your cluster runs stable, it is necessary to periodically check the cluster for potential stability risks. You can check the potential health risks of the cluster using the Clinic local quick check feature. Clinic Beta version mainly provides a rationality check for cluster configuration items to discover unreasonable configurations and provide modification suggestions.
 
 ## Prerequisites
 
-If you have installed TiUP on the control machine, run the following command to install Diag with one click:
+If you have installed TiUP on the control machine, run the following command to install Diag :
 
 {{< copyable "shell-regular" >}}
 
@@ -40,7 +40,7 @@ If you have installed TiUP on the control machine, run the following command to 
 tiup install diag
 ```
 
-If you have installed Diag locally, you can also use the following command to upgrade Diag to the latest version with one click:
+If you have installed Diag locally, you can also use the following command to upgrade Diag to the latest version :
 
 {{< copyable "shell-regular" >}}
 
@@ -59,7 +59,7 @@ Diag can quickly collect the diagnostic data in the TiDB cluster, including moni
 
 ### Step 1. Check the data needs to be collected
 
-For a detailed list of data that can be collected by Diag, see [Clinic Diagnostic Data](/clinic/clinic-data-instruction-for-tiup.md). You are recommended to collect complete monitoring data, configuration information, and other data to help improve the efficiency of the later diagnosis.
+For a detailed list of data that can be collected by Diag, see [Clinic Diagnostic Data](/clinic/clinic-data-instruction-for-tiup.md). You are recommended to collect comprehensive monitoring data, configuration information, and other data to help improve the efficiency of the later diagnosis.
 
 ### Step 2. Collect data
 
@@ -132,7 +132,7 @@ With Diag, you can collect data in the TiDB clusters and the DM clusters deploye
     tiup diag collectdm ${cluster-name} -f="-4h" -t="-2h"
     ```
 
-    For the parameters used in the above commands or other parameters used when using Diag, refer to [Collect data in DM clusters](#collect-data-in-tidb-clusters).
+    For the parameters used in the above commands or other parameters used when using Diag, refer to [Collect data in TiDB clusters](#collect-data-in-tidb-clusters).
 
     After running the command, Diag does not start collecting data immediately. Diag asks you whether to collect data while providing the estimated data size and the path stored data in the result.
 
@@ -159,11 +159,11 @@ The collected data is stored in separate subdirectories based on its data source
 - Network connection when collecting data: In `ss.txt`
 - Configuration data: in the `config.json` directory of every node
 - Meta-information for the cluster itself: In `meta.yaml` (this file is located at the top level of the directory that stored collected data)
-- Monitoring data: In the `/monitor` file directory. The monitoring data compressed by default and cannot be viewed directly. To directly view the JSON file that has the monitoring data directly, disable compression with the `--compress-metrics=false` parameter when collecting data.
+- Monitoring data: In the `/monitor` file directory. The monitoring data is compressed by default and cannot be viewed directly. To directly view the JSON file that has the monitoring data, disable compression with the `--compress-metrics=false` parameter when collecting data.
 
 ### Upload data
 
-To provide the cluster diagnostic data to PingCAP technical support staff, you need to upload the data to Clinic Server first, and then send the data link to the staff. Clinic Server is a cloud service for Clinic that stores and shares the diagnostic data securely.
+To provide the cluster diagnostic data to PingCAP technical support staff, you need to upload the data to Clinic Server first, and then send the data link to the staff. Clinic Server is a cloud service that stores and shares the diagnostic data securely.
 
 Depending on the network connection of the cluster, you can choose one of the following methods to upload data:
 
@@ -201,7 +201,7 @@ After the upload is complete, you need to send the data access link of `Download
 
 > **Note:**
 >
-> In the Beta version of the Clinic diagnostic service, external users cannot use the features of the Clinic server. The data access link is only open for the PingCAP technical support staff.
+> In the Beta version of the Clinic diagnostic service, external users cannot use the features of the Clinic Server. The data access link is only open for the PingCAP technical support staff.
 
 #### Method 2: Pack and upload data
 
@@ -257,7 +257,7 @@ If your cluster is deployed offline, you need to pack the data on your intranet 
 
 ## Perform a quick check for the cluster status locally
 
-You can have a quick check for the cluster status locally using Diag. Even if your cluster can run normally, it is necessary to periodically check the cluster for potential stability risks. Clinic in Beta version mainly provides a rationality check for cluster configuration items to discover unreasonable configurations and provide modification suggestions.
+You can have a quick check for the cluster status locally using Diag. Even if your cluster runs stable, it is necessary to periodically check the cluster for potential stability risks. Clinic in Beta version mainly provides a rationality check for cluster configuration items to discover unreasonable configurations and provide modification suggestions.
 
 1. Collect configuration data
 
@@ -324,7 +324,7 @@ You can have a quick check for the cluster status locally using Diag. Even if yo
     Result report and record are saved at diag-fNTnz5MGhr6/report-220125153215
     ```
 
-    In the diagnostic result information (last part) of the above result example, for each configuration problem found, Diag provides a corresponding knowledge base link to view detailed configuration suggestions. In the example above, the relevant link is `https://s.tidb.io/msmo6awg`.
+    In the diagnostic result information (last part) of the above result example, for each configuration potential risk found, Diag provides a corresponding knowledge base link with detailed configuration suggestions. In the example above, the relevant link is `https://s.tidb.io/msmo6awg`.
 
 ## FAQ
 
