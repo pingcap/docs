@@ -183,9 +183,9 @@ For other steps, see the relevant steps in Example 1.
 
 ## Handle errors
 
-### Some TiDB Lightning nodes terminate abnormally
+### Some TiDB Lightning nodes exit abnormally
 
-If one or more TiDB Lightning nodes terminate abnormally during a parallel import, identify the cause based on the logged error, and handle the error differently according to the error type:
+If one or more TiDB Lightning nodes exit abnormally during a parallel import, identify the cause based on the logged error, and handle the error according to the error type:
 
 - If the error shows normal exit (for example, exit in response to a kill command) or termination by the operating system due to OOM, adjust the configuration and then restart the TiDB Lightning nodes.
 
@@ -195,4 +195,4 @@ If one or more TiDB Lightning nodes terminate abnormally during a parallel impor
 
 ### During an import, an error "Target table is calculating checksum. Please wait until the checksum is finished and try again" is reported
 
-Some parallel imports involve reams of tables or tables with small volume of data. In this case, it is possible that before one or more tasks start processing a table, other tasks associated with this table have finished and data checksum is in progress. At this time, an error `Target table is calculating checksum. Please wait until the checksum is finished and try again` is reported for the task. Wait for the completion of checksum and then restart the failed tasks. The error disappears and data accuracy is not affected.
+Some parallel imports involve reams of tables or tables with small volume of data. In this case, it is possible that before one or more tasks start processing a table, other tasks of this table have finished and data checksum is in progress. At this time, an error `Target table is calculating checksum. Please wait until the checksum is finished and try again` is reported. Wait for the completion of checksum and then restart the failed tasks. The error disappears and data accuracy is not affected.
