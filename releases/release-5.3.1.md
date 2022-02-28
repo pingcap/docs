@@ -130,7 +130,7 @@ Tools
         (dup) - Fix the issue that TiDB Lightning does not report errors when the S3 storage path does not exist #28031 #30709
         - Fix log doesn't output to stdout when passing --log-file="-" #29876
 
-# __unsorted
+# __unsorted （以下内容是原材料，用于核对检查！请不要动！谢谢）
 
 + TiDB
 
