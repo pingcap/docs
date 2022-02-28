@@ -330,9 +330,9 @@ In v5.4, the key new features or improvements are as follows:
 
     + TiCDC
 
-        - Reduce the count of "EventFeed retry rate limited" logs [#4006](https://github.com/pingcap/tiflow/issues/4006)
-        - Reduce the replication latency when replicating many tables [#3900](https://github.com/pingcap/tiflow/issues/3900)
-        - Reduce the time for the KV client to recover when a TiKV store is down [#3191](https://github.com/pingcap/tiflow/issues/3191)
+        (dup: release-5.1.4.md > Bug Fixes > Tools > TiCDC)- Reduce the count of "EventFeed retry rate limited" logs [#4006](https://github.com/pingcap/tiflow/issues/4006)
+        (dup: release-5.1.4.md > Bug Fixes > Tools > TiCDC)- Reduce the replication latency when replicating many tables [#3900](https://github.com/pingcap/tiflow/issues/3900)
+        (dup: release-5.1.4.md > Bug Fixes > Tools > TiCDC)- Reduce the time for the KV client to recover when a TiKV store is down [#3191](https://github.com/pingcap/tiflow/issues/3191)
 
     + TiDB Data Migration (DM)
 
@@ -353,8 +353,8 @@ In v5.4, the key new features or improvements are as follows:
 
     - Fix the issue of the `tidb_analyze_version` value change that occurs when upgrading the cluster from v4.x to v5.x [#25422](https://github.com/pingcap/tidb/issues/25422)
     - Fix the issue of the wrong result that occurs when using different collations in a subquery [#30748](https://github.com/pingcap/tidb/issues/30748)
-    - Fix the issue that the result of `concat(ifnull(time(3))` in TiDB is different from that in MySQL [#29498](https://github.com/pingcap/tidb/issues/29498)
-    - Fix the issue of potential data index inconsistency in optimistic transaction mode [#30410](https://github.com/pingcap/tidb/issues/30410)
+    (dup: release-5.0.6.md > Bug Fixes > TiDB)- Fix the wrong result of `CONCAT(IFNULL(TIME(3))` [#29498](https://github.com/pingcap/tidb/issues/29498)
+    (dup: release-5.0.6.md > Bug Fixes > TiDB)- Fix the data inconsistency issue caused by incorrect usage of lazy existence check and untouched key optimization [#30410](https://github.com/pingcap/tidb/issues/30410)
     - Fix the issue that the query execution plan of IndexMerge is wrong when an expression cannot be pushed down to TiKV [#30200](https://github.com/pingcap/tidb/issues/30200)
     - Fix the issue that concurrent column type change causes inconsistency between the schema and the data [#31048](https://github.com/pingcap/tidb/issues/31048)
     - Fix the issue that the IndexMerge query result is wrong when there is a subquery [#30913](https://github.com/pingcap/tidb/issues/30913)
@@ -363,22 +363,22 @@ In v5.4, the key new features or improvements are as follows:
     - Fix the issue that panic might occur when the `CASE-WHEN` expression and collation are used together [#30245](https://github.com/pingcap/tidb/issues/30245)
     - Fix the issue of wrong query result that occurs when the `IN` value contains a binary constant [#31261](https://github.com/pingcap/tidb/issues/31261)
     - Fix the issue of wrong query result that occurs when CTE has a subquery [#31255](https://github.com/pingcap/tidb/issues/31255)
-    - Fix the issue that executing the `INSERT ... SELECT ... ON DUPLICATE KEY UPDATE` statement gets panic [#28078](https://github.com/pingcap/tidb/issues/28078)
-    - Fix the issue that INDEX HASH JOIN returns the `send on closed channel` error [#31129](https://github.com/pingcap/tidb/issues/31129)
+    (dup: release-5.1.4.md > Bug Fixes > TiDB)- Fix the issue that executing the `INSERT ... SELECT ... ON DUPLICATE KEY UPDATE` statement gets panic [#28078](https://github.com/pingcap/tidb/issues/28078)
+    (dup: release-5.1.4.md > Bug Fixes > TiDB)- Fix the issue that INDEX HASH JOIN returns the `send on closed channel` error [#31129](https://github.com/pingcap/tidb/issues/31129)
 
 + TiKV
 
-    - Fix the issue that the MVCC deletion records are not cleared by GC [#11217](https://github.com/tikv/tikv/issues/11217)
-    - Fix the issue that retrying prewrite requests in the pessimistic transaction mode might cause the risk of data inconsistency in rare cases [#11187](https://github.com/tikv/tikv/issues/11187)
-    - Fix the issue that GC scan causes memory overflow [#11410](https://github.com/tikv/tikv/issues/11410)
+    (dup: release-5.1.3.md > Bug Fixes > TiKV)- Fix the issue that the `GcKeys` task does not work when it is called by multiple keys. Caused by this issue, compaction filer GC might not drop the MVCC deletion information. [#11217](https://github.com/tikv/tikv/issues/11217)
+    (dup: release-5.1.4.md > Bug Fixes > TiKV)- Fix the rare data inconsistency issue when retrying a prewrite request in pessimistic transactions [#11187](https://github.com/tikv/tikv/issues/11187)
+    (dup: release-5.0.6.md > Bug Fixes > TiKV)- Fix the issue that the accumulation of GC tasks might cause TiKV to be OOM (out of memory) [#11410](https://github.com/tikv/tikv/issues/11410)
     - Fix the issue that RocksDB flush or compaction causes panic when the disk capacity is full [#11224](https://github.com/tikv/tikv/issues/11224)
 
 + PD
 
-    - Fix the issue that Region statistics are not affected by `flow-round-by-digit` [#4295](https://github.com/tikv/pd/issues/4295)
-    - Fix the issue that the scheduling operator cannot fail fast because the target store is down [#3353](https://github.com/tikv/pd/issues/3353)
+    (dup: release-5.1.4.md > Bug Fixes > PD)- Fix the issue that Region statistics are not affected by `flow-round-by-digit` [#4295](https://github.com/tikv/pd/issues/4295)
+    (dup: release-5.0.6.md > Bug Fixes > PD)- Fix the issue that operator can get blocked due to down store [#3353](https://github.com/tikv/pd/issues/3353)
     - Fix the issue that Regions on offline stores cannot be merged [#4119](https://github.com/tikv/pd/issues/4119)
-    - Fix the issue that the cold hotspot data cannot be deleted from the hotspot statistics [#4390](https://github.com/tikv/pd/issues/4390)
+    (dup: release-5.0.6.md > Bug Fixes > PD)- Fix the issue that the hotspot cache cannot be cleared when the Region heartbeat is less than 60 seconds [#4390](https://github.com/tikv/pd/issues/4390)
 
 + TiFlash
 
@@ -396,26 +396,26 @@ In v5.4, the key new features or improvements are as follows:
 
     + Backup & Restore (BR)
 
-        - Fix the potential issue that Region distribution might be uneven after a restore operation is finished [#30425](https://github.com/pingcap/tidb/issues/30425)
+        (dup: release-5.1.4.md > Bug Fixes > Tools > Backup & Restore (BR))- Fix the potential issue that Regions might be unevenly distributed after a restore operation is finished [#30425](https://github.com/pingcap/tidb/issues/30425) [#31034](https://github.com/pingcap/tidb/issues/31034)
         - Fix the issue that `'/'` cannot be specified in endpoint when `minio` is used as the backup storage [#30104](https://github.com/pingcap/tidb/issues/30104)
         - Fix the issue that system tables cannot be restored because concurrently backing up system tables makes the table name fail to update [#29710](https://github.com/pingcap/tidb/issues/29710)
 
     + TiCDC
 
-        - Fix the issue that replication cannot be performed when `min.insync.replicas` is smaller than `replication-factor` [#3994](https://github.com/pingcap/tiflow/issues/3994)
-        - Fix the issue that the `cached region` monitoring metric is negative [#4300](https://github.com/pingcap/tiflow/issues/4300)
-        - Fix the issue that `mq sink write row` does not have monitoring data [#3431](https://github.com/pingcap/tiflow/issues/3431)
+        (dup: release-5.1.4.md > Bug Fixes > Tools > TiCDC)- Fix the issue that replication cannot be performed when `min.insync.replicas` is smaller than `replication-factor` [#3994](https://github.com/pingcap/tiflow/issues/3994)
+        (dup: release-5.1.4.md > Bug Fixes > Tools > TiCDC)- Fix the issue that the `cached region` monitoring metric is negative [#4300](https://github.com/pingcap/tiflow/issues/4300)
+        (dup: release-5.0.6.md > Bug Fixes > Tools > TiCDC)- Fix the issue of the inaccurate `txn_batch_size` monitoring metric for Kafka sink [#3431](https://github.com/pingcap/tiflow/issues/3431)
         - Fix the compatibility issue of `sql mode` [#3810](https://github.com/pingcap/tiflow/issues/3810)
-        - Fix the potential panic issue that occurs when a replication task is removed [#3128](https://github.com/pingcap/tiflow/issues/3128)
+        (dup: release-5.1.4.md > Bug Fixes > Tools > TiCDC)- Fix the potential panic issue that occurs when a replication task is removed [#3128](https://github.com/pingcap/tiflow/issues/3128)
         - Fix the issue of panic and data inconsistency that occurs when outputting the default column value [#3929](https://github.com/pingcap/tiflow/issues/3929)
-        - Fix the issue that default values cannot be replicated [#3793](https://github.com/pingcap/tiflow/issues/3793)
-        - Fix the potential issue that the deadlock causes a replication task to get stuck [#4055](https://github.com/pingcap/tiflow/issues/4055)
+        (dup: release-5.1.4.md > Bug Fixes > Tools > TiCDC)- Fix the issue that default values cannot be replicated [#3793](https://github.com/pingcap/tiflow/issues/3793)
+        (dup: release-5.1.4.md > Bug Fixes > Tools > TiCDC)- Fix the potential issue that the deadlock causes a replication task to get stuck [#4055](https://github.com/pingcap/tiflow/issues/4055)
         - Fix the issue that no log is output when the disk is fully written [#3362](https://github.com/pingcap/tiflow/issues/3362)
-        - Fix the issue that special comments in DDL statements cause the replication task to stop [#3755](https://github.com/pingcap/tiflow/issues/3755)
-        - Fix the issue that the service cannot be started because of a timezone issue in the RHEL release [#3584](https://github.com/pingcap/tiflow/issues/3584)
-        - Fix the issue of potential data loss caused by inaccurate checkpoint [#3545](https://github.com/pingcap/tiflow/issues/3545)
-        - Fix the OOM issue in the container environment [#1798](https://github.com/pingcap/tiflow/issues/1798)
-        - Fix the issue of replication stop caused by the incorrect configuration of `config.Metadata.Timeout` [#3352](https://github.com/pingcap/tiflow/issues/3352)
+        (dup: release-5.1.4.md > Bug Fixes > Tools > TiCDC)- Fix the issue that special comments in DDL statements cause the replication task to stop [#3755](https://github.com/pingcap/tiflow/issues/3755)
+        (dup: release-5.0.6.md > Bug Fixes > Tools > TiCDC)- Fix the timezone error that occurs when the `cdc server` command runs on some Red Hat Enterprise Linux releases (such as 6.8 and 6.9) [#3584](https://github.com/pingcap/tiflow/issues/3584)
+        (dup: release-5.1.4.md > Bug Fixes > Tools > TiCDC)- Fix the issue of potential data loss caused by inaccurate checkpoint [#3545](https://github.com/pingcap/tiflow/issues/3545)
+        (dup: release-4.0.16.md > Bug Fixes > Tools > TiCDC)- Fix OOM in container environments [#1798](https://github.com/pingcap/tiflow/issues/1798)
+        (dup: release-5.0.6.md > Improvements > Tools > TiCDC)- Add the default configuration for `config.Metadata.Timeout` in Kafka sink [#3352](https://github.com/pingcap/tiflow/issues/3352)
 
     + TiDB Data Migration (DM)
 
