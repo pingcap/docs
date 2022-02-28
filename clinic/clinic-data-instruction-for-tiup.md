@@ -1,21 +1,21 @@
 ---
-title: Clinic Diagnostic Data
-summary: Introduces in detail what diagnostic data can be collected by the Clinic diagnostic service in the clusters deployed using TiUP.
+title: TiDB Clinic Diagnostic Data
+summary: Learn what diagnostic data can be collected by the Clinic diagnostic service from the clusters deployed using TiUP.
 ---
 
-# Clinic Diagnostic Data
+# TiDB Clinic Diagnostic Data
 
-This document provides the range of the diagnostic data that can be collected by the Clinic diagnostic service in the clusters deployed using TiUP. Also, the document lists the parameters for data collection corresponding to each data module. When running a command to collect data using the Clinic Diag tool (Diag), you can add the required parameters to the command according to the range of the data to be collected.
+This document provides the scope of diagnostic data that can be collected by the Clinic diagnostic service from the clusters deployed using TiUP. Also, the document lists the parameters for data collection corresponding to each data type. When running a command to collect data using the Clinic Diag tool (Diag), you can add the required parameters to the command according to the scope of the data to be collected.
 
 The diagnostic data collected by the Clinic diagnosis service is **only** used for troubleshooting cluster problems.
 
-The Clinic Server is set up on the PingCAP intranet (in China). When you uploaded the collected diagnostic data to the Clinic Server for PingCAP developers to troubleshoot cluster problems remotely, the data is stored in the AWS S3 China (Beijing) Region server set up by PingCAP. PingCAP strictly controls permissions for data access, and only authorized in-house developers can access the uploaded data.
+The Clinic Server is set up on the PingCAP intranet (in China). If you upload the collected diagnostic data to the Clinic Server for PingCAP technical support staff to troubleshoot cluster problems remotely, the uploaded data is stored in the AWS S3 China (Beijing) Region server set up by PingCAP. PingCAP strictly controls permissions for data access and only allows authorized in-house technical support staff to access the uploaded data.
 
 After a technical support case is closed, PingCAP permanently deletes or anonymizes the corresponding data within 90 days.
 
-## Data collection range of TiDB clusters
+## Data collection scope of TiDB clusters
 
-This section lists the detailed diagnostic data collected by Diag in a TiDB cluster deployed using TiUP.
+This section lists the types of diagnostic data that can be collected by Diag from the TiDB clusters deployed using TiUP.
 
 ### Basic information of the cluster
 
@@ -82,7 +82,7 @@ This section lists the detailed diagnostic data collected by Diag in a TiDB clus
 
 | Data type | Exported file | Parameter for Clinic's data collection |
 | :------ | :------ |:-------- |
-| Get TiDB system variables ( Diag does not collect this data by default; if you need to collect this data, database credential is required) | `mysql.tidb.csv` | `--include=db_vars` |
+| Get TiDB system variables ( Diag does not collect this data type by default; if you need to collect this data type, database credential is required) | `mysql.tidb.csv` | `--include=db_vars` |
 | | `global_variables.csv` | `--include=db_vars` |
 
 ### System information of the cluster
@@ -95,7 +95,7 @@ This section lists the detailed diagnostic data collected by Diag in a TiDB clus
 | List of kernel parameters | `sysctl.conf` | `--include=system` |
 | Socket system information, outputs of the ss command | `ss.txt` | `--include=system` |
 
-## Data collection range of DM clusters
+## Data collection scope of DM clusters
 
 This section lists the detailed diagnostic data collected by Diag in a DM cluster deployed using TiUP.
 
