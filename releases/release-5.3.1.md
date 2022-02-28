@@ -1,6 +1,5 @@
 ---
 title: TiDB 5.3.1 Release Notes
-category: Releases
 ---
 
 # TiDB 5.3.1 Release Notes
@@ -10,28 +9,6 @@ Release Date: xx, 2022
 TiDB version: 5.3.1
 
 ## Compatibility changes
-
-TiDB
-
-TiKV
-
-PD
-
-TiDB Dashboard
-
-TiFlash
-
-Tools
-
-    - Backup & Restore (BR)
-
-    - TiCDC
-
-    - Dumpling
-
-    - TiDB Binlog
-
-    - TiDB Lightning
 
 ## Feature enhancements
 
@@ -55,10 +32,8 @@ Tools
     - TiCDC
 
         - Expose Kafka producer's configuration parameters can be configured [#4385](https://github.com/pingcap/tiflow/issues/4385)
-        - Add pre clean up process when s3 enable [#3878](https://github.com/pingcap/tiflow/issues/3523)
+        - Add pre clean up process when s3 enable [#3878](https://github.com/pingcap/tiflow/issues/3878)
         - TiCDC client works now when cert's common name was not specified [#3882](https://github.com/pingcap/tiflow/pull/3882)
-        - HTTP API works as expected now if there are TiCDC nodes of different versions in one cdc cluster. [#3483](https://github.com/pingcap/tiflow/issues/3483)
-        - Correct query-staus progress for loader [#3252](https://github.com/pingcap/tiflow/issues/3252)
         - Manage sink checkpoint per table to avoid checkpoint timestamp advance unexpected [#4083](https://github.com/pingcap/tiflow/pull/4083)
 
         (dup) - Add the exponential backoff mechanism for restarting a changefeed. [#3329](https://github.com/pingcap/tiflow/issues/3329)
@@ -68,7 +43,7 @@ Tools
         (dup) - Add more Promethous and Grafana monitoring metrics and alerts, including `no owner alert`, `mounter row`, `table sink total row`, and `buffer sink total row` [#4054](https://github.com/pingcap/tiflow/issues/4054) [#1606](https://github.com/pingcap/tiflow/issues/1606)
         (dup) - Reduce the time for the KV client to recover when a TiKV store is down [#3191](https://github.com/pingcap/tiflow/issues/3191)
 
-    - Lightning
+    Lightning
 
         - Make tidb-lightning pre-check output message clearer [#30395](https://github.com/pingcap/tiflow/issues/30395)
 
@@ -153,6 +128,9 @@ Tools
         - Fix a bug of data loss when DM does finer grained retry [#3487](https://github.com/pingcap/tiflow/issues/3487)
         - Fix OOM in container environments. [#3439](https://github.com/pingcap/tiflow/pull/3439)
         - Stopping tasks during load phase won't cause the source to be transfered [#3771](https://github.com/pingcap/tiflow/issues/3771)
+        - Fix query-staus progress for loader [#3252](https://github.com/pingcap/tiflow/issues/3252)
+        - Fix HTTP API works as expected now if there are TiCDC nodes of different versions in one cdc cluster. [#3483](https://github.com/pingcap/tiflow/issues/3483)
+        - 修复了当 CDC Redo Log 配置在 S3 存储上时的异常退出问题 [#3523](https://github.com/pingcap/tiflow/issues/3523)
 
         (dup) - Fix the issue that default values cannot be replicated [#3793](https://github.com/pingcap/tiflow/issues/3793)
         (dup) - Fix a bug that MySQL sink generates duplicated `replace` SQL statements if `batch-replace-enable` is disabled [#4501](https://github.com/pingcap/tiflow/issues/4501)
@@ -175,7 +153,7 @@ Tools
         (dup) - Fix the issue that Avro sink does not support parsing JSON type columns [#3624](https://github.com/pingcap/tiflow/issues/3624)
         (dup) - Fix the negative value error in the changefeed checkpoint lag [#3010](https://github.com/pingcap/tiflow/issues/3010)
 
-    - TiDB Lightning
+    TiDB Lightning
 
         - Fix the bug that lightning may not clean up metadata schema when some of the import contains no source files. [#28144](https://github.com/pingcap/tidb/issues/28144)
         - Fix the bug that lighting return error if gcs url starts with gs:// [#30254](https://github.com/pingcap/tidb/pull/30254)
