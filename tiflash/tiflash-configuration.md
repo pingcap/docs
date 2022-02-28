@@ -57,9 +57,9 @@ minmax_index_cache_size = 5368709120
 ## data is stored in the rest directories.
 # path_realtime_mode = false
 
-## The path in which the TiFlash temporary files are stored. By default it is the first directory in `path`
+## The path in which the TiFlash temporary files are stored. Usually, it is set to the first directory in `path`
 ## or in `storage.latest.dir` appended with "/tmp".
-# tmp_path = "/tidb-data/tiflash-9000/tmp"
+tmp_path = "/tidb-data/tiflash-9000/tmp"
 
 ## Storage paths settings take effect starting from v4.0.9
 [storage]
