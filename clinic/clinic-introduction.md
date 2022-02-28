@@ -1,6 +1,6 @@
 ---
 title:  Overview of TiDB Clinic Diagnostic Service
-summary: Introduces the Clinic diagnostic service, including tool components, user scenarios, and implementation principles.
+summary: Learn about the Clinic diagnostic service, including tool components, user scenarios, and implementation principles.
 ---
 
 ## Overview of TiDB Clinic Diagnostic Service
@@ -55,7 +55,7 @@ First, Diag gets cluster topology information from the deployment tool TiUP (tiu
 
     Using SQL statements, Diag can query the system variables and other information of the TiDB database. To use this method, you need to **additionally provide** the username and password to access the TiDB database when collecting data.
 
-## See also
+## Next step
 
  - [Use Clinic](/clinic/clinic-data-instruction-for-tiup.md)
  - [Clinic Diagnostic Data](/clinic/clinic-data-instruction-for-tiup.md)
