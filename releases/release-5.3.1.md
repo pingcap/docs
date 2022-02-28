@@ -35,7 +35,102 @@ Tools
 
 ## Feature enhancements
 
-## __unsorted
+TiKV
+
+    - Reduce CDC recovery time by reduce the number regions that need resolved lock. [#11993](https://github.com/tikv/tikv/issues/11993)
+    - Increase the size of write batch for raftlog GC to speed up GC. [#11404](https://github.com/tikv/tikv/issues/11404)
+
+PD
+
+    - Improve DR_STATE file content format [#4341](https://github.com/tikv/pd/issues/4341)
+
+Tools
+
+    - TiCDC
+
+        - Expose Kafka producer's configuration parameters can be configured [#4385](https://github.com/pingcap/tiflow/issues/4385)
+        - Fix OOM in container environments. [#3439](https://github.com/pingcap/tiflow/pull/3439)
+
+## Bug Fixes
+
++ TiDB
+
+    - Fix date formate identifies '\n' as invalid separator #32503
+    - Fix alter column set default wrongly updates the schema #31074
+    - Fix a bug that turning on tidb_restricted_read_only won't automatically turn on tidb_super_read_only #31745
+    - Fix greatest and least function with collation get wrong result #31789
+    - Fix the crash or error when generating an empty mpp task list. #31636
+    - Fix index join bug caused by innerWorker panic #31494
+    - Fix double column value are different with MySQL after changing column type from float to double #31372
+    - Fix a data race that may cause "invalid transaction" error when executing a query using index lookup join. #30468
+    (dup) - Fix the issue that executing the INSERT ... SELECT ... ON DUPLICATE KEY UPDATE statement gets panic #28078
+    - Fix a bug when reducing order by clause for the index which leads to the wrong result. #30271
+    - The TiDB server now maps a user to an entry in the mysql.user table more consistently. #30450
+    - Fix `MaxDays` and `MaxBackups` not working for slow log. [#25716](https://github.com/pingcap/tidb/issues/25716)
+
+TiKV
+
+    - Fix a potential panic (#11746) when snapshot files have been deleted but the peer's status is still Applying. [#11746](https://github.com/tikv/tikv/issues/11746)
+    - Fix possible QPS drop when `level0_slowdown_trigger` is set explicitly with flow control enabled. [#11424](https://github.com/tikv/tikv/issues/11424)
+    - Fix panic when cgroup controller is not mounted [#11569](https://github.com/tikv/tikv/issues/11569)
+    - Fix resolved ts lag increased after stoping a tikv [#11352](https://github.com/tikv/tikv/pull/11352)
+
++ TiFlash
+
+    - Fix the problem that `cast(arg as decimal(x,y))` return wrong result when `arg` overflows the range of `decimal(x,y)`
+    - Fix the problem of TiFlash crashing when `max_memory_usage` and `max_memory_usage_for_all_queries` are enabled
+    - Fix the problem that `cast(string ad real)` returns wrong result
+    - Fixed the problem that cast(string as decimal) returns wrong result
+    - Fix potential data inconsistency after altering a primary key column to a larger int data type
+    - Fix the problem that `select (arg0, arg1) in (x,y)` returns wrong result
+    - Fix the problem that tiflash randomly crash when a mpp query is killed
+    - Fix the problem that str_to_date return wrong result when the input argument has leading zeros.
+    - Fix the problem that query gets wrong results when the filter is like `where <string>`
+    - Fix the problem that `cast(string as datetime)` return wrong result when the string is of format `%Y-%m-%d\n%H:%i:%s`
+
++ PD
+
+    - Fix a bug that the operater steps may contain unnecessary or empty JointConsensus steps in certain conditions [#4362](https://github.com/tikv/pd/issues/4362)
+    - Fix a bug that the operator could not be executed when demoting single voter directly [#4444](https://github.com/tikv/pd/issues/4444)
+    - Fix data race when updating replication mode configuration [#4325](https://github.com/tikv/pd/issues/4325)
+    - Fix a bug that the RLock is not released in certain conditions [#4354](https://github.com/tikv/pd/issues/4354)
+
+Tools
+
+    - Backup & Restore (BR)
+
+        - Fix a bug that caused region unbalanced after restoring. #31034
+
+    - TiCDC
+
+        - Fix a bug that long varchar will report error of "Column length too big" [#4637](https://github.com/pingcap/tiflow/issues/4637)
+        - Fix a bug that owner exits abnormally when PD leader is killed [#4248](https://github.com/pingcap/tiflow/issues/4248)
+        - Fix the issue that update statement execute error in safemode may cause DM-worker panic [#4317](https://github.com/pingcap/tiflow/issues/4317)
+        - Fix kv client cached region metric could be negative [#4290](https://github.com/pingcap/tiflow/pull/4290)
+        - Stopping tasks during load phase won't cause the source to be transfered [#3771](https://github.com/pingcap/tiflow/issues/3771)
+        - Correct query-staus progress for loader [#3252](https://github.com/pingcap/tiflow/issues/3252)
+        - Fix the bug that http API panics when the required processor info is not exist [#3840](https://github.com/pingcap/tiflow/issues/3840)
+        - Manage sink checkpoint per table to avoid checkpoint timestamp advance unexpected [#4083](https://github.com/pingcap/tiflow/pull/4083)
+        - Fix a bug that when master and worker restart in a particular order, relay status in DM-master is wrong [#3478](https://github.com/pingcap/tiflow/issues/3478)
+        - Fix a bug that DM-worker can't boot up after restart [#3344](https://github.com/pingcap/tiflow/issues/3344)
+        - Fix a bug that DM task will failed when PARTITION DDL cost a long time [#3854](https://github.com/pingcap/tiflow/issues/3854)
+        - Fix a bug that DM may report "invalid sequence" when upstream is MySQL 8.0 [#3847](https://github.com/pingcap/tiflow/issues/3847)
+        - Fix a bug that redo logs are not cleaned up when removing a paused changefeed. [#3919](https://github.com/pingcap/tiflow/pull/3919)
+        - CDC client works now when cert's common name was not specified [#3882](https://github.com/pingcap/tiflow/pull/3882)
+        - Add pre clean up process when s3 enable [#3878](https://github.com/pingcap/tiflow/issues/3523)
+        - Fix a bug of data loss when DM does finer grained retry [#3487](https://github.com/pingcap/tiflow/issues/3487)
+        - HTTP API works as expected now if there are TiCDC nodes of different versions in one cdc cluster. [#3483](https://github.com/pingcap/tiflow/issues/3483)
+
+    - TiDB Lightning
+
+        - Fix the bug that lightning may not clean up metadata schema when some of the import contains no source files. #28144
+        - Fix the bug that lighting return error if gcs url starts with gs:// #32591
+        - Make tidb-lightning pre-check output message clearer #30395
+        - Avoid tikv trigger auto region split by lower the ingest kv count threshold #30018
+        (dup) - Fix the issue that TiDB Lightning does not report errors when the S3 storage path does not exist #28031 #30709
+        - Fix log doesn't output to stdout when passing --log-file="-" #29876
+
+# __unsorted
 
 + TiDB
 
@@ -108,7 +203,7 @@ Tools
 + PD
 
     - None. [#4663](https://github.com/tikv/pd/pull/4663)
-    - Fix a bug that operate steps may contain unnecessary or empty JointConsensus steps in certain conditions 
+    - Fix a bug that operate steps may contain unnecessary or empty JointConsensus steps in certain conditions
     - Fix a bug when demoting single voter directly [#4362](https://github.com/tikv/pd/issues/4362)
     (dup) - Fix the issue that the cold hotspot data cannot be deleted from the hotspot statistics [#4390](https://github.com/tikv/pd/issues/4390)
     - Improve DR_STATE file content format [#4341](https://github.com/tikv/pd/issues/4341)
@@ -188,28 +283,3 @@ Tools
         - Fix OOM in container environments. [#3439](https://github.com/pingcap/tiflow/pull/3439)
         - Please add a release note. If you don't think this PR needs a release note then fill it with `None`. [#3868](https://github.com/pingcap/tiflow/pull/3868)
         - Please add a release note. If you don't think this PR needs a release note then fill it with `None`. [#3256](https://github.com/pingcap/tiflow/pull/3256)
-
-## Bug Fixes
-
-+ TiDB
-
-    - Planner: fix wrong range calculation for Nulleq function on Enum values [#32428](https://github.com/pingcap/tidb/issues/32428)
-    (dup) - Fix the issue that INDEX HASH JOIN returns the `send on closed channel` error [#31129](https://github.com/pingcap/tidb/issues/31129)
-    (dup) - Fix the issue that some checks are skipped when TiDB Lightning is restarted [#30772](https://github.com/pingcap/tidb/issues/30772)
-    (dup) - Fix the issue of wrong import result that occurs when TiDB Lightning does not have the privilege to access the `mysql.tidb` table [#31088](https://github.com/pingcap/tidb/issues/31088)
-    (dup) - Fix the issue that concurrent column type change causes inconsistency between the schema and the data [#31048](https://github.com/pingcap/tidb/issues/31048)
-    - Add a new config to control whether support incremental import. [#27919](https://github.com/pingcap/tidb/issues/27919)
-    - Executor: fix pipelined window invalid memory address [#30326](https://github.com/pingcap/tidb/issues/30326)
-    (dup) - Fix the issue that window functions might return different results when using a transaction or not [#29947](https://github.com/pingcap/tidb/issues/29947)
-    (dup) - Fix the issue that the SQL statements that contain `cast(integer as char) union string` return wrong results [#29513](https://github.com/pingcap/tidb/issues/29513)
-    (dup) - Fix the issue that the length information is wrong when casting `Decimal` to `String` [#29417](https://github.com/pingcap/tidb/issues/29417)
-
-+ TiFlash
-
-    - Align unix_timestamp behavior with TiDB and mysql when input is earlier than 1970-01-01 00:00:01 UTC
-
-+ PD
-
-    (dup) - Fix a bug that the schedule generated by the region scatterer might decrease the number of peers [#4565](https://github.com/tikv/pd/issues/4565)
-    - Fix incomplete replicate file [#4328](https://github.com/tikv/pd/issues/4328)
-    (dup) - Fix a panic issue that occurs after the TiKV node is removed [#4344](https://github.com/tikv/pd/issues/4344)
