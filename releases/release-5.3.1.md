@@ -12,22 +12,22 @@ TiDB version: 5.3.1
 
 ## Feature enhancements
 
-TiDB
+- TiDB
 
     - The TiDB server now maps a user to an entry in the mysql.user table more consistently. [#30450](https://github.com/pingcap/tidb/issues/30450)
 
-TiKV
+- TiKV
 
     - Reduce CDC recovery time by reduce the number regions that need resolved lock. [#11993](https://github.com/tikv/tikv/issues/11993)
     - Increase the size of write batch for raftlog GC to speed up GC. [#11404](https://github.com/tikv/tikv/issues/11404)
 
     (dup) - Update the proc filesystem (procfs) to v0.12.0 [#11702](https://github.com/tikv/tikv/issues/11702)
 
-PD
+- PD
 
     - Improve DR_STATE file content format [#4341](https://github.com/tikv/pd/issues/4341)
 
-Tools
+- Tools
 
     - TiCDC
 
@@ -43,13 +43,13 @@ Tools
         (dup) - Add more Promethous and Grafana monitoring metrics and alerts, including `no owner alert`, `mounter row`, `table sink total row`, and `buffer sink total row` [#4054](https://github.com/pingcap/tiflow/issues/4054) [#1606](https://github.com/pingcap/tiflow/issues/1606)
         (dup) - Reduce the time for the KV client to recover when a TiKV store is down [#3191](https://github.com/pingcap/tiflow/issues/3191)
 
-    Lightning
+    - Lightning
 
         - Make tidb-lightning pre-check output message clearer [#30395](https://github.com/pingcap/tiflow/issues/30395)
 
 ## Bug Fixes
 
-+ TiDB
+- TiDB
 
     - Fix date formate identifies '\n' as invalid separator [#32503](https://github.com/pingcap/tidb/issues/32503)
     - Fix alter column set default wrongly updates the schema [#31074](https://github.com/pingcap/tidb/issues/31074)
@@ -64,7 +64,7 @@ Tools
 
     (dup) - Fix the issue that executing the INSERT ... SELECT ... ON DUPLICATE KEY UPDATE statement gets panic [#28078](https://github.com/pingcap/tidb/issues/28078)
 
-TiKV
+- TiKV
 
     - Fix a potential panic when snapshot files have been deleted but the peer's status is still Applying. [#11746](https://github.com/tikv/tikv/issues/11746)
     - Fix possible QPS drop when `level0_slowdown_trigger` is set explicitly with flow control enabled. [#11424](https://github.com/tikv/tikv/issues/11424)
@@ -85,7 +85,7 @@ TiKV
     (dup) - Fix a bug that tikv-ctl cannot return the correct Region-related information [#11393](https://github.com/tikv/tikv/issues/11393)
     (dup) - Fix the issue that the average latency of the by-instance gRPC requests is inaccurate in TiKV metrics [#11299](https://github.com/tikv/tikv/issues/11299)
 
-+ TiFlash
+- TiFlash
 
     - Fix the problem that `cast(arg as decimal(x,y))` return wrong result when `arg` overflows the range of `decimal(x,y)`
     - Fix the problem of TiFlash crashing when `max_memory_usage` and `max_memory_usage_for_all_queries` are enabled
@@ -98,7 +98,7 @@ TiKV
     - Fix the problem that query gets wrong results when the filter is like `where <string>`
     - Fix the problem that `cast(string as datetime)` return wrong result when the string is of format `%Y-%m-%d\n%H:%i:%s`
 
-+ PD
+- PD
 
     - Fix a bug that the operater steps may contain unnecessary or empty JointConsensus steps in certain conditions [#4362](https://github.com/tikv/pd/issues/4362)
     - Fix a bug that the operator could not be executed when demoting single voter directly [#4444](https://github.com/tikv/pd/issues/4444)
@@ -107,7 +107,7 @@ TiKV
 
     (dup) - Fix the issue that the cold hotspot data cannot be deleted from the hotspot statistics [#4390](https://github.com/tikv/pd/issues/4390)
 
-Tools
+- Tools
 
     - Backup & Restore (BR)
 
@@ -153,7 +153,7 @@ Tools
         (dup) - Fix the issue that Avro sink does not support parsing JSON type columns [#3624](https://github.com/pingcap/tiflow/issues/3624)
         (dup) - Fix the negative value error in the changefeed checkpoint lag [#3010](https://github.com/pingcap/tiflow/issues/3010)
 
-    TiDB Lightning
+    - TiDB Lightning
 
         - Fix the bug that lightning may not clean up metadata schema when some of the import contains no source files. [#28144](https://github.com/pingcap/tidb/issues/28144)
         - Fix the bug that lighting return error if gcs url starts with gs:// [#30254](https://github.com/pingcap/tidb/pull/30254)
