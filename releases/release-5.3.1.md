@@ -36,6 +36,7 @@ Tools
 ## Feature enhancements
 
 TiDB
+
     - The TiDB server now maps a user to an entry in the mysql.user table more consistently. [#30450](https://github.com/pingcap/tidb/issues/30450)
 
 TiKV
@@ -121,9 +122,6 @@ TiKV
     - Fix the problem that str_to_date return wrong result when the input argument has leading zeros.
     - Fix the problem that query gets wrong results when the filter is like `where <string>`
     - Fix the problem that `cast(string as datetime)` return wrong result when the string is of format `%Y-%m-%d\n%H:%i:%s`
-
-    (dup) - Fix the issue that executing the `INSERT ... SELECT ... ON DUPLICATE KEY UPDATE` statement gets panic [#28078](https://github.com/pingcap/tidb/issues/28078)
-    (dup) - Fix the issue that TiDB Lightning does not report errors when the S3 storage path does not exist [#28031](https://github.com/pingcap/tidb/issues/28031) [#30709](https://github.com/pingcap/tidb/issues/30709)
 
 + PD
 
