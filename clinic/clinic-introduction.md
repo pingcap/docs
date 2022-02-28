@@ -1,28 +1,28 @@
 ---
-title: Clinic Diagnostic Service Overview
-summary: Introduces the Clinic diagnostic service, including tool components, usage scenarios, and implementation principles.
+title:  Overview of TiDB Clinic Diagnostic Service
+summary: Introduces the Clinic diagnostic service, including tool components, user scenarios, and implementation principles.
 ---
 
-## Clinic Diagnostic Service Overview
+## Overview of TiDB Clinic Diagnostic Service
 
-Clinic is a diagnostic service provided by PingCAP for TiDB clusters. To the clusters deployed using TiUP and TiDB Operator, this service helps to troubleshoot cluster problems remotely and perform a quick check of the cluster status locally. With Clinic diagnostic service, you can ensure the stable operation of your TiDB cluster for its full life-cycle, predict potential issues, reduce the probability of the issues, troubleshoot problems quickly, and fix the problems.
+TiDB Clinic Diagnostic Service (TiDB Clinic) is a diagnostic service provided by PingCAP for TiDB clusters that are deployed using either TiUP or TiDB Operator. This service helps to troubleshoot cluster problems remotely and provides a quick check of cluster status locally. With TiDB Clinic, you can ensure the stable operation of your TiDB cluster for its full life-cycle, predict potential issues, reduce the probability of issues, troubleshoot problems quickly, and fix problems.
 
-The Clinic diagnostic service is currently in the Beta testing stage, so only the invited users can use the service. The service provides the following two components to diagnose clusters:
+TiDB Clinic is currently in the Beta testing stage, so only the invited users can use the service. The service provides the following two components to diagnose clusters:
 
-- Diag: The tool deployed on the cluster side. Diag is used to collect cluster diagnostic data, upload the diagnostic data to the Clinic Server, and perform a quick health check locally on the cluster. For the list of diagnostic data collected by Diag, see [Clinic Diagnostic Data](/clinic/clinic-data-instruction-for-tiup.md).
-
-    > **Note:**
-    >
-    > - Diag temporarily **does not support** collecting data in the clusters with TLS encryption enabled and the clusters deployed using TiDB Ansible.
-    > - The Clinic diagnostic service is currently in the Beta testing stage, so only the invited users can use the service. If you need to upload data to the Clinic Server using Diag, you should get a trial account from the PingCAP technical support staff you contacted before.
-
-- Clinic Server: The cloud service deployed in the cloud. By providing diagnostic services in SaaS mode, the Clinic Server can not only receive the diagnostic data uploaded to the Clinic Server but also store the data. Also, the Clinic Server can provide an online diagnostic environment for the uploaded data, and cluster diagnostic reports.
+- Diag: a diagnostic tool deployed on the cluster side. Diag is used to collect cluster diagnostic data, upload diagnostic data to the Clinic Server, and perform a quick health check locally on the cluster. For a full list of diagnostic data collected by Diag, see [Clinic Diagnostic Data](/clinic/clinic-data-instruction-for-tiup.md).
 
     > **Note:**
     >
-    > In the Beta version of the Clinic diagnostic service, external users cannot use the features of the Clinic Server. After you upload the collected data to the Clinic Server and get the data link, only authorized PingCAP technical support staff can access the link and view the data.
+    > - Diag temporarily **does not support** collecting data from the clusters with the TLS encryption enabled and the clusters deployed using TiDB Ansible.
+    > - TiDB Clinic is currently in the Beta testing stage for invited users only. If you need to upload data to the Clinic Server using Diag, contact [PingCAP technical support](https://en.pingcap.com/contact-us/) to get a trial account first.
 
-## Usage scenarios
+- Clinic Server: a cloud service deployed in the cloud. By providing diagnostic services in the SaaS model, the Clinic Server can not only receive uploaded diagnostic data but also work as an online diagnostic environment to store data, view data, and provide cluster diagnostic reports.
+
+    > **Note:**
+    >
+    > For the Clinic Beta version, external users cannot use the features of the Clinic Server. After you upload collected data to the Clinic Server and get a data link using Diag, only authorized PingCAP technical support staff can access the link and view the data.
+
+## User scenarios
 
 - Troubleshoot cluster problems remotely:
 
@@ -30,17 +30,17 @@ The Clinic diagnostic service is currently in the Beta testing stage, so only th
 
 - Perform a quick check for the cluster status locally:
 
-    Even if your cluster runs stable, it is necessary to periodically check the cluster for potential stability risks. You can check the potential health risks of the cluster using the local quick check feature provided by the Clinic diagnostic service. Clinic in Beta version mainly provides a rationality check for cluster configuration items to discover unreasonable configurations and provide modification suggestions.
+    Even if your cluster runs stably now, it is necessary to periodically check the cluster for potential stability risks. You can check the potential health risks of a cluster using the local quick check feature provided by the Clinic diagnostic service. The Clinic Beta version provides a rationality check on cluster configuration items to discover unreasonable configurations and provide modification suggestions.
 
-## Implementation Principles
+## Implementation principles
 
-This section mainly introduces the implementation principles of Diag, a cluster-side tool provided by the Clinic service, to collect diagnostic data of a cluster.
+This section introduces the implementation principles about how Diag (a cluster-side tool provided by the Clinic service) collects diagnostic data of a cluster.
 
-First, Diag needs to get cluster topology information from the deployment tool TiUP (tiup-cluster) or TiDB Operator (tidb-operator). Then, Diag collects different types of diagnostic data through various data collection methods as follows:
+First, Diag gets cluster topology information from the deployment tool TiUP (tiup-cluster) or TiDB Operator (tidb-operator). Then, Diag collects different types of diagnostic data through various data collection methods as follows:
 
 - Transfer server files through SCP
 
-    For clusters deployed using TiUP, Diag can collect log files and configuration files directly from the nodes of the target component through SCP (Secure copy protocol).
+    For clusters deployed using TiUP, Diag can collect log files and configuration files directly from the nodes of the target component through the secure copy protocol (SCP).
 
 - Collect data by running commands remotely through SSH
 
