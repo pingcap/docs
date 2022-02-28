@@ -1,38 +1,38 @@
 ---
 title: Use Clinic
-summary: Introduces in detail how to troubleshoot cluster problems remotely and perform a quick check of the cluster status locally with the Clinic diagnosis service on a cluster deployed using TiUP.
+summary: Learn how to troubleshoot cluster problems remotely and perform a quick check of the cluster status locally with TiDB Clinic Diagnostic Service on a cluster deployed using TiUP.
 ---
 
 # Use Clinic
 
-For TiDB clusters and DM clusters deployed using TiUP, the Clinic diagnosis service (Clinic) can troubleshoot cluster problems remotely and perform a quick check of the cluster status locally with the Clinic diagnostic tool Diag (Diag) and the Clinic Server cloud service (Clinic Server).
+For TiDB clusters and DM clusters deployed using TiUP, TiDB Clinic Diagnostic Service (TiDB Clinic) can troubleshoot cluster problems remotely and perform a quick check of the cluster status locally with a Clinic diagnostic tool Diag (Diag) and a Clinic Server cloud service (Clinic Server).
 
-The Clinic diagnostic service is currently in the Beta testing stage.
+TiDB Clinic is currently in the Beta testing stage.
 
 > **Note:**
 >
-> - Clinic temporarily **does not support** collecting data in the clusters with TLS encryption enabled and the clusters deployed using TiDB Ansible.
+> - Clinic temporarily **does not support** collecting data from the clusters with the TLS encryption enabled and the clusters deployed using TiDB Ansible.
 
-## Usage scenarios
+## User scenarios
 
 - [Troubleshoot cluster problems remotely](#troubleshoot-cluster-problems-remotely):
 
-    - When your cluster has some problems, and you need the PingCAP technical support, you can perform the following operations to assist technical support: collect diagnostic data with Diag, upload the data to Clinic Server, and provide the data link to technical support staff.
+    - When your cluster has some problems, and you need the PingCAP technical support, you can perform the following operations to help the technical support staff to troubleshoot the problems: collect diagnostic data with Diag, upload the collected data to the Clinic Server, and provide the data link to the technical support staff.
 
     > **Note:**
     >
-    > - Clinic is currently in the Beta testing stage, so only the invited users can use the service. If you need to upload data to the Clinic Server using Diag, you should get a trial account from the PingCAP technical support staff you contacted before.
-    > - In the Clinic Beta version, external users cannot use the features of the Clinic Server. After you upload the collected data to the Clinic Server and get the data link, only authorized PingCAP technical support staff can access the link and view the data.
+    > - TiDB Clinic is currently in the Beta testing stage for invited users only.If you need to upload data to the Clinic Server using Diag, contact [PingCAP technical support](https://en.pingcap.com/contact-us/) to get a trial account first.
+    > - For the Clinic Beta version, external users cannot use the features of the Clinic Server. After you upload collected data to the Clinic Server and get a data link using Diag, only authorized PingCAP technical support staff can access the link and view the data.
 
-    - When your cluster has some problems, but you cannot analyze them immediately, you can use Diag to collect data and save it for later analysis.
+    - When your cluster has some problems, but you cannot analyze the problems immediately, you can use Diag to collect and save the data for later analysis.
 
 - [Perform a quick check for the cluster status locally](#perform-a-quick-check-for-the-cluster-status-locally):
 
-    Even if your cluster runs stable, it is necessary to periodically check the cluster for potential stability risks. You can check the potential health risks of the cluster using the Clinic local quick check feature. Clinic Beta version mainly provides a rationality check for cluster configuration items to discover unreasonable configurations and provide modification suggestions.
+    Even if your cluster runs stably now, it is necessary to periodically check the cluster for potential stability risks. You can check the potential health risks of a cluster using the local quick check feature provided by TiDB Clinic. The Clinic Beta version provides a rationality check on cluster configuration items to discover unreasonable configurations and provide modification suggestions.
 
 ## Prerequisites
 
-If you have installed TiUP on the control machine, run the following command to install Diag :
+If you have installed TiUP on your control machine, run the following command to install Diag:
 
 {{< copyable "shell-regular" >}}
 
@@ -59,7 +59,7 @@ Diag can quickly collect the diagnostic data in the TiDB cluster, including moni
 
 ### Step 1. Check the data needs to be collected
 
-For a detailed list of data that can be collected by Diag, see [Clinic Diagnostic Data](/clinic/clinic-data-instruction-for-tiup.md). You are recommended to collect comprehensive monitoring data, configuration information, and other data to help improve the efficiency of the later diagnosis.
+For a detailed list of data that can be collected by Diag, see [Clinic Diagnostic Data](/clinic/clinic-data-instruction-for-tiup.md). To improve the efficiency of the later diagnosis, you are recommended to collect comprehensive monitoring data, configuration information, and other data.
 
 ### Step 2. Collect data
 
@@ -69,7 +69,7 @@ With Diag, you can collect data in the TiDB clusters and the DM clusters deploye
 
 1. Run the command to collect data using Diag.
 
-    For example, to collect the diagnostic data from 4 hours ago to 2 hours ago at the current time, run the following command:
+    For example, to collect the diagnostic data from 4 hours ago to 2 hours ago based on the current time, run the following command:
 
     {{< copyable "shell-regular" >}}
 
@@ -79,17 +79,17 @@ With Diag, you can collect data in the TiDB clusters and the DM clusters deploye
 
     Description of the parameters for data collection:
 
-    - `-f/--from`: Specifies the start point of the data collection time. If you did not specify this parameter, the starting point is 2 hours before the current time by default. To modify the time zone, use the syntax `-f="12:30 +0800"`. If you did not specify the time zone information in this parameter, such as `+0800`, the time zone is UTC by default.
-    - `-t/--to`: Specifies the end point of the data collection time. If you did not specify this parameter, the end point is the current moment by default. To modify the time zone, use the syntax `-f="12:30 +0800"`. If you did not specify the time zone information in this parameter, such as `+0800`, the time zone is UTC by default.
+    - `-f/--from`: specifies the start point of the data collection time. If you did not specify this parameter, the starting point is 2 hours before the current time by default. To modify the time zone, use the syntax `-f="12:30 +0800"`. If you did not specify the time zone information in this parameter, such as `+0800`, the time zone is UTC by default.
+    - `-t/--to`: specifies the end point of the data collection time. If you did not specify this parameter, the end point is the current moment by default. To modify the time zone, use the syntax `-f="12:30 +0800"`. If you did not specify the time zone information in this parameter, such as `+0800`, the time zone is UTC by default.
 
     Parameter usage tips:
 
     In addition to specifying the data collection time, you can use Diag to specify more parameters. To see all parameters, use the `tiup diag collect -h` command.
 
-    - `-l`: The bandwidth limit for transferring files, the unit is Kbit/s, and the default value is `100000` (the `-l` parameter of scp).
-    - `-N/--node`: Supports collecting the data only in the specified node, the format is `ip:port`.
-    - `--include`: Only collects specific types of data, optional values are `system`, `monitor`, `log`, `config`, `db_vars`.
-    - `--exclude`: Does not collect specific types of data, optional values are `system`, `monitor`, `log`, `config`, `db_vars`.
+    - `-l`: the bandwidth limit for transferring files, the unit is Kbit/s, and the default value is `100000` (the `-l` parameter of scp).
+    - `-N/--node`: supports collecting the data only in the specified node, the format is `ip:port`.
+    - `--include`: only collects specific types of data, optional values are `system`, `monitor`, `log`, `config`, `db_vars`.
+    - `--exclude`: does not collect specific types of data, optional values are `system`, `monitor`, `log`, `config`, `db_vars`.
 
     After running the command, Diag does not start collecting data immediately. Diag asks you whether to collect data while providing the estimated data size and the path stored data in the result. For example:
 
@@ -108,7 +108,7 @@ With Diag, you can collect data in the TiDB clusters and the DM clusters deploye
     Do you want to continue? [y/N]: (default=N)
     ```
 
-2. To confirm that you want to start collecting data, enter `Y`.
+2. Enter `Y` to confirm that you want to start collecting data.
 
     Collecting data takes a certain amount of time. The required time is related to the amount of data to be collected. For example, in a test environment, collecting 1 GB of data takes about 10 minutes.
 
@@ -124,7 +124,7 @@ With Diag, you can collect data in the TiDB clusters and the DM clusters deploye
 
 1. Run the command to collect data using Diag.
 
-    For example, to collect the diagnostic data from 4 hours ago to 2 hours ago at the current time, run the following command:
+    For example, to collect the diagnostic data from 4 hours ago to 2 hours ago based on the current time, run the following command:
 
     {{< copyable "shell-regular" >}}
 
@@ -136,7 +136,7 @@ With Diag, you can collect data in the TiDB clusters and the DM clusters deploye
 
     After running the command, Diag does not start collecting data immediately. Diag asks you whether to collect data while providing the estimated data size and the path stored data in the result.
 
-2. To confirm that you want to start collecting data, enter `Y`.
+2. Enter `Y` to confirm that you want to start collecting data.
 
     Collecting data takes a certain amount of time. The required time is related to the amount of data to be collected. For example, in a test environment, collecting 1 GB of data takes about 10 minutes.
 
@@ -150,16 +150,16 @@ With Diag, you can collect data in the TiDB clusters and the DM clusters deploye
 
 ### Step 3. View data locally (optional)
 
-The collected data is stored in separate subdirectories based on its data source. These subdirectories are named after the machine name and port number. The storage locations of the configuration, logs, and other files of each node are the same as the relative path stored in the real server:
+The collected data is stored in separate subdirectories based on its data source. These subdirectories are named after the machine name and port number. The storage locations of the configuration, logs, and other files of each node are the same as the relative path stored in the real server of the TiDB cluster:
 
-- Basic information of the system and the hardware: In `insight.json`
-- Contents in the system `/etc/security/limits.conf`: In `limits.conf`
-- List of kernel parameters: In `sysctl.conf`
-- Kernel logs: In `dmesg.log`
-- Network connection when collecting data: In `ss.txt`
-- Configuration data: in the `config.json` directory of every node
-- Meta-information for the cluster itself: In `meta.yaml` (this file is located at the top level of the directory that stored collected data)
-- Monitoring data: In the `/monitor` file directory. The monitoring data is compressed by default and cannot be viewed directly. To directly view the JSON file that has the monitoring data, disable compression with the `--compress-metrics=false` parameter when collecting data.
+- Basic information of the system and the hardware: in `insight.json`
+- Contents in the system `/etc/security/limits.conf`: in `limits.conf`
+- List of kernel parameters: in `sysctl.conf`
+- Kernel logs: in `dmesg.log`
+- Network connection when collecting data: in `ss.txt`
+- Configuration data: on the `config.json` directory of every node
+- Meta-information for the cluster itself: in `meta.yaml` (this file is located at the top level of the directory that stored collected data)
+- Monitoring data: in the `/monitor` file directory. The monitoring data is compressed by default and cannot be viewed directly. To directly view the JSON file that has the monitoring data, disable compression with the `--compress-metrics=false` parameter when collecting data.
 
 ### Upload data
 
@@ -167,8 +167,8 @@ To provide the cluster diagnostic data to PingCAP technical support staff, you n
 
 Depending on the network connection of the cluster, you can choose one of the following methods to upload data:
 
-- Methods 1: If the network where the cluster is located can directly connect to the Clinic Server, you can [directly upload data using the upload command](#method-1-upload-directly).
-- Methods 2: If the network where the cluster is located cannot directly connect to the Clinic Server, you need to [pack the data and then upload it](#method-2-pack-and-upload-data).
+- Methods 1: if the network where the cluster is located can directly connect to the Clinic Server, you can [directly upload data using the upload command](#method-1-upload-directly).
+- Methods 2: if the network where the cluster is located cannot directly connect to the Clinic Server, you need to [pack the data and then upload it](#method-2-pack-and-upload-data).
 
 #### Method 1: Upload directly
 
@@ -182,9 +182,9 @@ When the network where the cluster is located can directly connect to the Clinic
 
 > **Note:**
 >
-> Clinic is currently in the Beta testing stage, so only the invited users can use the service. You need to get a trial account from the PingCAP technical support staff you contacted before.
+> TiDB Clinic is currently in the Beta testing stage for invited users only. If you need to upload data to the Clinic Server using Diag, contact [PingCAP technical support](https://en.pingcap.com/contact-us/) to get a trial account first.
 
-The output can be as follows:
+The result can be as follows:
 
 {{< copyable "shell-regular" >}}
 
@@ -215,7 +215,7 @@ If your cluster is deployed offline, you need to pack the data on your intranet 
     tiup diag package ${filepath}
     ```
 
-    When packaging, Diag encrypts and compresses the data at the same time. In the test environment, 800 MB of data was compressed to 57 MB. The output can be as follows:
+    When packaging, Diag encrypts and compresses the data at the same time. In the test environment, 800 MB of data was compressed to 57 MB. The result can be as follows:
 
     ```bash
     Starting component `diag`: /root/.tiup/components/diag/v0.5.1/diag package diag-fNTnz5MGhr6
@@ -236,7 +236,7 @@ If your cluster is deployed offline, you need to pack the data on your intranet 
     >
     > Clinic is currently in the Beta testing stage, so only the invited users can use the service. You need to get a trial account from the PingCAP technical support staff you contacted before.
 
-    The output can be as follows:
+    The result can be as follows:
 
     {{< copyable "shell-regular" >}}
 
@@ -253,11 +253,11 @@ If your cluster is deployed offline, you need to pack the data on your intranet 
 
     > **Note:**
     >
-    > In the Beta version of the Clinic diagnostic service, external users cannot use the features of the Clinic server. The data access link is only open for the PingCAP technical support staff.
+    > For the Clinic Beta version, external users cannot use the features of the Clinic Server. After you upload collected data to the Clinic Server and get a data link using Diag, only authorized PingCAP technical support staff can access the link and view the data.
 
 ## Perform a quick check for the cluster status locally
 
-You can have a quick check for the cluster status locally using Diag. Even if your cluster runs stable, it is necessary to periodically check the cluster for potential stability risks. Clinic in Beta version mainly provides a rationality check for cluster configuration items to discover unreasonable configurations and provide modification suggestions.
+You can have a quick check for the cluster status locally using Diag. Even if your cluster runs stably now, it is necessary to periodically check the cluster for potential stability risks. The Clinic Beta version provides a rationality check on cluster configuration items to discover unreasonable configurations and provide modification suggestions.
 
 1. Collect configuration data
 
@@ -267,7 +267,7 @@ You can have a quick check for the cluster status locally using Diag. Even if yo
     tiup diag collect ${cluster-name} --include="config"
     ```
 
-    The configuration file data is relatively small. After the collection, the data is stored in the current path by default. In the test environment, for a cluster with 18 nodes, the size of configuration file data is less than 10 KB.
+    The configuration file data is relatively small. After the collection, the collected data is stored in the current path by default. In the test environment, for a cluster with 18 nodes, the size of configuration file data is less than 10 KB.
 
 2. Diagnose configuration data
 

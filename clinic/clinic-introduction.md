@@ -1,6 +1,6 @@
 ---
 title:  Overview of TiDB Clinic Diagnostic Service
-summary: Learn about the Clinic diagnostic service, including tool components, user scenarios, and implementation principles.
+summary: Learn about the Clinic Diagnostic Service, including tool components, user scenarios, and implementation principles.
 ---
 
 ## Overview of TiDB Clinic Diagnostic Service

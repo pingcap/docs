@@ -193,7 +193,7 @@
       - [tiup-bench](/tiup/tiup-bench.md)
     - TiDB Clinic Diagnostic Service (Beta)
       - [Overview](/clinic/clinic-introduction.md)
-      - [Use Clinic](/clinic/clinic-user-guide-for-tiup.md)
+      - [Use TiDB Clinic](/clinic/clinic-user-guide-for-tiup.md)
       - [Diagnostic Data](/clinic/clinic-data-instruction-for-tiup.md)
   - [TiDB Operator](/tidb-operator-overview.md)
   - Backup & Restore (BR)

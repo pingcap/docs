@@ -1,13 +1,13 @@
 ---
 title: TiDB Clinic Diagnostic Data
-summary: Learn what diagnostic data can be collected by the Clinic diagnostic service from the clusters deployed using TiUP.
+summary: Learn what diagnostic data can be collected by the Clinic Diagnostic Service from the clusters deployed using TiUP.
 ---
 
 # TiDB Clinic Diagnostic Data
 
-This document provides the scope of diagnostic data that can be collected by the Clinic diagnostic service from the clusters deployed using TiUP. Also, the document lists the parameters for data collection corresponding to each data type. When running a command to collect data using the Clinic Diag tool (Diag), you can add the required parameters to the command according to the scope of the data to be collected.
+This document provides the scope of diagnostic data that can be collected by the Clinic Diagnostic Service (TiDB Clinic) from the clusters deployed using TiUP. Also, the document lists the parameters for data collection corresponding to each data type. When running a command to collect data using the Clinic Diag tool (Diag), you can add the required parameters to the command according to the scope of the data to be collected.
 
-The diagnostic data collected by the Clinic diagnosis service is **only** used for troubleshooting cluster problems.
+The diagnostic data collected by TiDB Clinic is **only** used for troubleshooting cluster problems.
 
 The Clinic Server is set up on the PingCAP intranet (in China). If you upload the collected diagnostic data to the Clinic Server for PingCAP technical support staff to troubleshoot cluster problems remotely, the uploaded data is stored in the AWS S3 China (Beijing) Region server set up by PingCAP. PingCAP strictly controls permissions for data access and only allows authorized in-house technical support staff to access the uploaded data.
 
