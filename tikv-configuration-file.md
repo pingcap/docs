@@ -1303,13 +1303,10 @@ Configuration items related to `raftdb`
 
 Configuration items related to Raft Engine.
 
-> **Warning:**
->
-> Raft Engine is an experimental feature. It is not recommended to use it in the production environment.
-
 ### `enable`
 
 + Determines whether to use Raft Engine to store raft logs. When it is enabled, configurations of `raftdb` are ignored.
++ If you need to downgrade to a version earlier than v5.4.0, Raft Engine must be disabled first.
 + Default value: `"true"`
 
 ### `dir`
