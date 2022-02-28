@@ -45,7 +45,7 @@ Tools
 
     Lightning
 
-        - Make tidb-lightning pre-check output message clearer [#30395](https://github.com/pingcap/tiflow/issues/30395)
+        - Make tidb-lightning pre-check output message clearer [#30395](https://github.com/pingcap/tidb/issues/30395)
 
 ## Bug Fixes
 
