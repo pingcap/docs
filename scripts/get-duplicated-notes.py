@@ -12,6 +12,9 @@ def store_exst_rn(ext_path,main_path):
 
     exst_notes = []
     exst_issue_nums = []
+    exst_note_levels = []
+
+    level1 = level2 = level3 = ""
 
     for maindir, subdir, files in os.walk(ext_path):
         for afile in files:
@@ -22,11 +25,23 @@ def store_exst_rn(ext_path,main_path):
                         exst_issue_num = re.search(r'https://github.com/(pingcap|tikv)/\w+/(issues|pull)/\d+', line)
                         if exst_issue_num:
                             if exst_issue_num.group() not in exst_issue_nums:
-                                note_pair = [exst_issue_num.group(),line,afile]
+                                note_level = " " + level1 + " > " + level2 + " > " + level3
+                                note_pair = [exst_issue_num.group(),line,afile, note_level]
                                 exst_issue_nums.append(exst_issue_num.group())
                                 exst_notes.append(note_pair)
                             else:
                                 continue
+                        elif line.startswith("## Improvement"):
+                            level1 = "Improvements"
+                            level2 = level3 = ""
+                        elif line.startswith ("## Bug"):
+                            level1 = "Bug Fixes"
+                            level2 = level3 = ""
+                        elif line.startswith ("+") or line.startswith ("-"):
+                            level2 = line.replace("+","").replace("-","").strip()
+                            level3 = ""
+                        elif line.startswith ("    +") or line.startswith ("    -"):
+                            level3 = line.replace("    +","").replace("    -","").strip()
                         else:
                             continue
             else:
@@ -55,7 +70,7 @@ def check_exst_rn(note_pairs, main_path):
                      for note_pair in note_pairs:
                         if issue_num.group() == note_pair[0] and "(dup)" not in line:
                             print('A duplicated note is found in line ' + str(LineNum) + " from " + note_pair[2] + note_pair[1])
-                            line = re.sub(r'-.*$', '(dup) {} '.format(note_pair[2]) + note_pair[1].strip(), line)
+                            line = re.sub(r'-.*$', '(dup) {} '.format(note_pair[2]) + note_pair[3] + note_pair[1].strip(), line)
                             print('The duplicated note is replaced with ' + line)
                             DupNum += 1
                             break
@@ -71,7 +86,7 @@ def check_exst_rn(note_pairs, main_path):
 
 if __name__ == "__main__":
 
-    ext_path = r'/Users/aaa/Documents/GitHub/githubid/docs/releases'  # 已发布的 release notes 文件夹
-    main_path = r'/Users/aaa/Documents/GitHub/githubid/docs/releases/release-5.3.1.md'  # 当前正在准备的release notes 文档路径
+    ext_path = r'/Users/grcai/Documents/GitHub/qiancai/docs/releases'  # 已发布的 release notes 文件夹
+    main_path = r'/Users/grcai/Documents/GitHub/qiancai/docs/releases/release-5.4.0.md'  # 当前正在准备的release notes 文档路径
     note_pairs = store_exst_rn(ext_path,main_path)
     check_exst_rn(note_pairs, main_path)
