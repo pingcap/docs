@@ -1,11 +1,11 @@
 ---
-title: Use Clinic
-summary: Learn how to troubleshoot cluster problems remotely and perform a quick check of the cluster status locally with TiDB Clinic Diagnostic Service on a cluster deployed using TiUP.
+title: Use TiDB Clinic
+summary: Learn how to use the TiDB Clinic Diagnostic Service to troubleshoot cluster problems remotely and perform a quick check of the cluster status locally on a cluster deployed using TiUP.
 ---
 
-# Use Clinic
+# Use TiDB Clinic
 
-For TiDB clusters and DM clusters deployed using TiUP, TiDB Clinic Diagnostic Service (TiDB Clinic) can troubleshoot cluster problems remotely and perform a quick check of the cluster status locally with a Clinic diagnostic tool Diag (Diag) and a Clinic Server cloud service (Clinic Server).
+For TiDB clusters and DM clusters deployed using TiUP, you can use the TiDB Clinic Diagnostic Service (TiDB Clinic) to troubleshoot cluster problems remotely and perform a quick check of the cluster status locally using a Clinic diagnostic tool Diag (Diag) and a Clinic Server cloud service (Clinic Server).
 
 TiDB Clinic is currently in the Beta testing stage.
 
@@ -17,14 +17,14 @@ TiDB Clinic is currently in the Beta testing stage.
 
 - [Troubleshoot cluster problems remotely](#troubleshoot-cluster-problems-remotely):
 
-    - When your cluster has some problems, and you need the PingCAP technical support, you can perform the following operations to help the technical support staff to troubleshoot the problems: collect diagnostic data with Diag, upload the collected data to the Clinic Server, and provide the data link to the technical support staff.
+    - When your cluster has some problems, if you need to contact PingCAP technical support, you can perform the following operations to facilitate the remote troubleshooting: collect diagnostic data with Diag, upload the collected data to the Clinic Server, and provide the data link to the technical support staff.
 
     > **Note:**
     >
-    > - TiDB Clinic is currently in the Beta testing stage for invited users only.If you need to upload data to the Clinic Server using Diag, contact [PingCAP technical support](https://en.pingcap.com/contact-us/) to get a trial account first.
+    > - TiDB Clinic is currently in the Beta testing stage for invited users only. If you need to upload data to the Clinic Server using Diag, contact [PingCAP technical support](https://en.pingcap.com/contact-us/) to get a trial account first.
     > - For the Clinic Beta version, external users cannot use the features of the Clinic Server. After you upload collected data to the Clinic Server and get a data link using Diag, only authorized PingCAP technical support staff can access the link and view the data.
 
-    - When your cluster has some problems, but you cannot analyze the problems immediately, you can use Diag to collect and save the data for later analysis.
+    - When your cluster has some problems, if you cannot analyze the problems immediately, you can use Diag to collect and save the data for later analysis.
 
 - [Perform a quick check for the cluster status locally](#perform-a-quick-check-for-the-cluster-status-locally):
 
@@ -40,7 +40,7 @@ If you have installed TiUP on your control machine, run the following command to
 tiup install diag
 ```
 
-If you have installed Diag locally, you can also use the following command to upgrade Diag to the latest version :
+If you have installed Diag locally, you can use the following command to upgrade Diag to the latest version:
 
 {{< copyable "shell-regular" >}}
 
@@ -50,14 +50,14 @@ tiup update diag
 
 > **Note:**
 >
-> - For offline clusters, you need to deploy Diag offline. For details, refer to [Deploy TiUP offline: Method 2](/production-deployment-using-tiup.md#method-2-deploy-tiup-offline).
-> - Diag is **only** included in the TiDB Server offline mirror package of v5.4.0 and later versions.
+> - For clusters without an internet connection, you need to deploy Diag offline. For details, refer to [Deploy TiUP offline: Method 2](/production-deployment-using-tiup.md#method-2-deploy-tiup-offline).
+> - Diag is **only** included in the TiDB Server offline mirror package of v5.4.0 or later.
 
 ## Troubleshoot cluster problems remotely
 
-Diag can quickly collect the diagnostic data in the TiDB cluster, including monitoring data and configuration information.
+You can use Diag to quickly collect diagnostic data from the TiDB cluster, including monitoring data and configuration information.
 
-### Step 1. Check the data needs to be collected
+### Step 1. Check the data to be collected
 
 For a detailed list of data that can be collected by Diag, see [Clinic Diagnostic Data](/clinic/clinic-data-instruction-for-tiup.md). To improve the efficiency of the later diagnosis, you are recommended to collect comprehensive monitoring data, configuration information, and other data.
 
@@ -65,9 +65,9 @@ For a detailed list of data that can be collected by Diag, see [Clinic Diagnosti
 
 With Diag, you can collect data in the TiDB clusters and the DM clusters deployed using TiUP.
 
-#### Collect data in TiDB clusters
+#### Collect data from TiDB clusters
 
-1. Run the command to collect data using Diag.
+1. Run the data collection command of Diag.
 
     For example, to collect the diagnostic data from 4 hours ago to 2 hours ago based on the current time, run the following command:
 
@@ -77,21 +77,21 @@ With Diag, you can collect data in the TiDB clusters and the DM clusters deploye
     tiup diag collect ${cluster-name} -f="-4h" -t="-2h"
     ```
 
-    Description of the parameters for data collection:
+    Descriptions of the parameters for data collection:
 
-    - `-f/--from`: specifies the start point of the data collection time. If you did not specify this parameter, the starting point is 2 hours before the current time by default. To modify the time zone, use the syntax `-f="12:30 +0800"`. If you did not specify the time zone information in this parameter, such as `+0800`, the time zone is UTC by default.
-    - `-t/--to`: specifies the end point of the data collection time. If you did not specify this parameter, the end point is the current moment by default. To modify the time zone, use the syntax `-f="12:30 +0800"`. If you did not specify the time zone information in this parameter, such as `+0800`, the time zone is UTC by default.
+    - `-f/--from`: specifies the start point of the data collection time. If you do not specify this parameter, the starting point is 2 hours before the current time by default. To modify the time zone, use the `-f="12:30 +0800"` syntax. If you do not specify the time zone information in this parameter, such as `+0800`, the time zone is UTC by default.
+    - `-t/--to`: specifies the end point of the data collection time. If you do not specify this parameter, the end point is the current moment by default. To modify the time zone, use the `-f="12:30 +0800"` syntax. If you do not specify the time zone information in this parameter, such as `+0800`, the time zone is UTC by default.
 
     Parameter usage tips:
 
-    In addition to specifying the data collection time, you can use Diag to specify more parameters. To see all parameters, use the `tiup diag collect -h` command.
+    In addition to specifying the data collection time, you can use Diag to specify more parameters. To get all parameters, run the `tiup diag collect -h` command.
 
     - `-l`: the bandwidth limit for transferring files, the unit is Kbit/s, and the default value is `100000` (the `-l` parameter of scp).
-    - `-N/--node`: supports collecting the data only in the specified node, the format is `ip:port`.
-    - `--include`: only collects specific types of data, optional values are `system`, `monitor`, `log`, `config`, `db_vars`.
-    - `--exclude`: does not collect specific types of data, optional values are `system`, `monitor`, `log`, `config`, `db_vars`.
+    - `-N/--node`: supports collecting the data only in a specified node. The format is `ip:port`.
+    - `--include`: only collects specific types of data. The optional values are `system`, `monitor`, `log`, `config`, and `db_vars`.
+    - `--exclude`: does not collect specific types of data. The optional values are `system`, `monitor`, `log`, `config`, and `db_vars`.
 
-    After running the command, Diag does not start collecting data immediately. Diag asks you whether to collect data while providing the estimated data size and the path stored data in the result. For example:
+    After you run the command, Diag does not start collecting data immediately. Instead, Diag provides the estimated data size and the target data storage path in the output for you to confirm whether to continue. For example:
 
     {{< copyable "shell-regular" >}}
 
@@ -110,7 +110,7 @@ With Diag, you can collect data in the TiDB clusters and the DM clusters deploye
 
 2. Enter `Y` to confirm that you want to start collecting data.
 
-    Collecting data takes a certain amount of time. The required time is related to the amount of data to be collected. For example, in a test environment, collecting 1 GB of data takes about 10 minutes.
+    Collecting data takes a certain amount of time. The time varies according to the volume of data to be collected. For example, in a test environment, collecting 1 GB of data takes about 10 minutes.
 
     After the collection is complete, Diag provides the folder path where the collected data is located. For example:
 
@@ -150,20 +150,20 @@ With Diag, you can collect data in the TiDB clusters and the DM clusters deploye
 
 ### Step 3. View data locally (optional)
 
-The collected data is stored in separate subdirectories based on its data source. These subdirectories are named after the machine name and port number. The storage locations of the configuration, logs, and other files of each node are the same as the relative path stored in the real server of the TiDB cluster:
+The collected data is stored in separate subdirectories based on its data source. These subdirectories are named after the machine name and port number. The storage locations of the configuration, logs, and other files of each node are the same as their relative storage paths in the real server of the TiDB cluster:
 
-- Basic information of the system and the hardware: in `insight.json`
+- Basic system and hardware information: in `insight.json`
 - Contents in the system `/etc/security/limits.conf`: in `limits.conf`
 - List of kernel parameters: in `sysctl.conf`
 - Kernel logs: in `dmesg.log`
-- Network connection when collecting data: in `ss.txt`
-- Configuration data: on the `config.json` directory of every node
-- Meta-information for the cluster itself: in `meta.yaml` (this file is located at the top level of the directory that stored collected data)
-- Monitoring data: in the `/monitor` file directory. The monitoring data is compressed by default and cannot be viewed directly. To directly view the JSON file that has the monitoring data, disable compression with the `--compress-metrics=false` parameter when collecting data.
+- Network connection during data collection: in `ss.txt`
+- Configuration data: in the `config.json` directory of each node
+- Meta-information for the cluster itself: in `meta.yaml` (this file is located at the top level of the directory that stores collected data)
+- Monitoring data: in the `/monitor` file directory. The monitoring data is compressed by default and cannot be viewed directly. To directly view the JSON files with monitoring data, disable compression with the `--compress-metrics=false` parameter when collecting data.
 
 ### Upload data
 
-To provide the cluster diagnostic data to PingCAP technical support staff, you need to upload the data to the Clinic Server first, and then send the data link to the staff. Clinic Server is a cloud service that stores and shares diagnostic data securely.
+To provide cluster diagnostic data to PingCAP technical support staff, you need to upload the data to the Clinic Server first, and then send the data link to the staff. Clinic Server is a cloud service that stores and shares diagnostic data securely.
 
 Depending on the network connection of the cluster, you can choose one of the following methods to upload data:
 
@@ -172,7 +172,7 @@ Depending on the network connection of the cluster, you can choose one of the fo
 
 #### Method 1: Upload directly
 
-When the network where the cluster is located can directly connect to the Clinic Server, you can directly upload the folder with collected data obtained in [Step 2: Collect data](#step-2-collect-data) using the following command:
+If the network where the cluster is located can directly connect to the Clinic Server, you can directly upload the folder with collected data obtained in [Step 2: Collect data](#step-2-collect-data) using the following command:
 
 {{< copyable "shell-regular" >}}
 
@@ -184,7 +184,7 @@ When the network where the cluster is located can directly connect to the Clinic
 >
 > TiDB Clinic is currently in the Beta testing stage for invited users only. If you need to upload data to the Clinic Server using Diag, contact [PingCAP technical support](https://en.pingcap.com/contact-us/) to get a trial account first.
 
-The result can be as follows:
+The following is an example output:
 
 {{< copyable "shell-regular" >}}
 
@@ -205,9 +205,9 @@ After the upload is complete, you need to send the data access link of `Download
 
 #### Method 2: Pack and upload data
 
-If your cluster is deployed offline, you need to pack the data on your intranet and upload it to the Clinic Server using a network-connected device, because the network where the cluster is located cannot directly connect to the Clinic Server. The detailed operations are as follows:
+If the network where your cluster is located cannot directly connect to the Clinic Server, you need to pack the data on your intranet and upload it to the Clinic Server using a network-connected device. The detailed operations are as follows:
 
-1.Compress and encrypt the data package collected in [Step 2: Collect data](#step-2-collect-data).
+1. Compress and encrypt the data package collected in [Step 2. Collect data](#step-2-collect-data).
 
     {{< copyable "shell-regular" >}}
 
@@ -215,16 +215,16 @@ If your cluster is deployed offline, you need to pack the data on your intranet 
     tiup diag package ${filepath}
     ```
 
-    When packaging, Diag encrypts and compresses the data at the same time. In the test environment, 800 MB of data was compressed to 57 MB. The result can be as follows:
+    When packaging, Diag encrypts and compresses the data at the same time. In the test environment, 800 MB of data was compressed to 57 MB. The following is an example output:
 
     ```bash
     Starting component `diag`: /root/.tiup/components/diag/v0.5.1/diag package diag-fNTnz5MGhr6
     packaged data set saved to /home/qiaodan/diag-fNTnz5MGhr6.diag
     ```
 
-    After the data is packaged through the `package` command above, the data is in the `.diag` format. This file can only be decrypted and viewed after uploading it to the Clinic Server. If you need to directly forward the collected data instead of viewing it in the Clinic Server, you can compress the data and forward it by yourself.
+    After the data is packaged through the `package` command above, the data is in the `.diag` format. This file can only be decrypted and viewed after uploading it to the Clinic Server. If you need to directly forward the collected data instead of viewing it in the Clinic Server, you can compress the data by your own method and forward it.
 
-2. Upload the package using the Clinic Server connectable network.
+2. From a machine with the network connection to the Clinic Server, upload the compressed data package.
 
     {{< copyable "shell-regular" >}}
 
@@ -236,7 +236,7 @@ If your cluster is deployed offline, you need to pack the data on your intranet 
     >
     > Clinic is currently in the Beta testing stage, so only the invited users can use the service. You need to get a trial account from the PingCAP technical support staff you contacted before.
 
-    The result can be as follows:
+    The following is an example output:
 
     {{< copyable "shell-regular" >}}
 
@@ -253,13 +253,13 @@ If your cluster is deployed offline, you need to pack the data on your intranet 
 
     > **Note:**
     >
-    > For the Clinic Beta version, external users cannot use the features of the Clinic Server. After you upload collected data to the Clinic Server and get a data link using Diag, only authorized PingCAP technical support staff can access the link and view the data.
+    > For the Clinic Beta version, after you upload collected data to the Clinic Server and get a data link using Diag, only authorized PingCAP technical support staff can access the link and view the data.
 
-## Perform a quick check for the cluster status locally
+## Perform a quick check on the cluster status locally
 
-You can have a quick check for the cluster status locally using Diag. Even if your cluster runs stably now, it is necessary to periodically check the cluster for potential stability risks. The Clinic Beta version provides a rationality check on cluster configuration items to discover unreasonable configurations and provide modification suggestions.
+You can have a quick check on the cluster status locally using Diag. Even if your cluster runs stably now, it is necessary to periodically check the cluster for potential stability risks. The Clinic Beta version provides a rationality check on cluster configuration items to discover unreasonable configurations and provide modification suggestions.
 
-1. Collect configuration data
+1. Collect configuration data:
 
     {{< copyable "shell-regular" >}}
 
@@ -267,9 +267,9 @@ You can have a quick check for the cluster status locally using Diag. Even if yo
     tiup diag collect ${cluster-name} --include="config"
     ```
 
-    The configuration file data is relatively small. After the collection, the collected data is stored in the current path by default. In the test environment, for a cluster with 18 nodes, the size of configuration file data is less than 10 KB.
+    The data of configuration files are relatively small. After the collection, the collected data is stored in the current path by default. In the test environment, for a cluster with 18 nodes, the data size of configuration files is less than 10 KB.
 
-2. Diagnose configuration data
+2. Diagnose configuration data:
 
     {{< copyable "shell-regular" >}}
 
@@ -277,9 +277,9 @@ You can have a quick check for the cluster status locally using Diag. Even if yo
     tiup diag check ${subdir-in-output-data}
     ```
 
-    `${subdir-in-output-data}` in the above command is the path stored the collected data, and this path has the `meta.yaml` file.
+    `${subdir-in-output-data}` in the above command is the path that stores the collected data, and this path has the `meta.yaml` file.
 
-3. View the diagnostic result
+3. View the diagnostic result:
 
     The diagnostic result is returned on the command line. For example:
 
@@ -291,22 +291,22 @@ You can have a quick check for the cluster status locally using Diag. Even if yo
     # Diagnostic result
     lili 2022-01-24T09:33:57+08:00
 
-    ## 1. Cluster Information
+    ## 1. Cluster basic information
     - Cluster ID: 7047403704292855808
     - Cluster Name: lili
     - Cluster Version: v5.3.0
 
-    ## 2. Sample Information
+    ## 2. Sampling information
     - Sample ID: fNTnz5MGhr6
     - Sampling Date: 2022-01-24T09:33:57+08:00
     - Sample Content:: [system monitor log config]
 
-    ## 3. Diagnostic, including potential configuration problems
+    ## 3. Diagnostic result, including potential configuration problems
     In this inspection, 22 rules were executed.
     The results of **1** rules were abnormal and needed to be further discussed with support team.
     The following is the details of the abnormalities.
 
-    ### Diagnostic result Summary
+    ### Diagnostic result summary
     The configuration rules are all derived from PingCAP’s OnCall Service.
     If the results of the configuration rules are found to be abnormal, they may cause the cluster to fail.
     There were **1** abnormal results.
@@ -324,7 +324,7 @@ You can have a quick check for the cluster status locally using Diag. Even if yo
     Result report and record are saved at diag-fNTnz5MGhr6/report-220125153215
     ```
 
-    In the diagnostic result information (last part) of the above result example, for each configuration potential risk found, Diag provides a corresponding knowledge base link with detailed configuration suggestions. In the example above, the relevant link is `https://s.tidb.io/msmo6awg`.
+    In the last part of the diagnostic result information (under `#### Path to save the diagnostic result file`) of the above example output, for each configuration potential risk found, Diag provides a corresponding knowledge base link with detailed configuration suggestions. In the example above, the relevant link is `https://s.tidb.io/msmo6awg`.
 
 ## FAQ
 
@@ -336,6 +336,6 @@ You can have a quick check for the cluster status locally using Diag. Even if yo
 
     Clinic is currently in the Beta version, and external users cannot visit the data access link. Only authorized PingCAP technical support staff can access the link and view the data.
 
-3. How long will the uploaded data uploaded be kept on the Clinic Server?
+3. How long will the uploaded data be kept on the Clinic Server?
 
     After a technical support case is closed, PingCAP permanently deletes or anonymizes the corresponding data within 90 days.
