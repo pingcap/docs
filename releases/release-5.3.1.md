@@ -24,14 +24,14 @@ TiDB version: 5.3.1
 
 - TiKV
 
-    - Reduce CDC recovery time by reduce the number regions that need resolved lock. [#11993](https://github.com/tikv/tikv/issues/11993)
-    - Increase the size of write batch for raftlog GC to speed up GC. [#11404](https://github.com/tikv/tikv/issues/11404)
+    - Reduces TiCDC recovery time by reducing the number of the Regions that require the Resolve Locks step [#11993](https://github.com/tikv/tikv/issues/11993)
+    - Speed up the Garbage Collection (GC) process by increasing the write batch size when performing GC to Raft logs [#11404](https://github.com/tikv/tikv/issues/11404)
 
     (dup) - Update the proc filesystem (procfs) to v0.12.0 [#11702](https://github.com/tikv/tikv/issues/11702)
 
 - PD
 
-    - Improve DR_STATE file content format [#4341](https://github.com/tikv/pd/issues/4341)
+    - Optimize the contents' format of the `DR_STATE` file [#4341](https://github.com/tikv/pd/issues/4341)
 
 - Tools
 
@@ -72,10 +72,10 @@ TiDB version: 5.3.1
 
 - TiKV
 
-    - Fix a potential panic when snapshot files have been deleted but the peer's status is still Applying. [#11746](https://github.com/tikv/tikv/issues/11746)
-    - Fix possible QPS drop when `level0_slowdown_trigger` is set explicitly with flow control enabled. [#11424](https://github.com/tikv/tikv/issues/11424)
-    - Fix panic when cgroup controller is not mounted [#11569](https://github.com/tikv/tikv/issues/11569)
-    - Fix resolved ts lag increased after stoping a tikv [#11352](https://github.com/tikv/tikv/pull/11352)
+    - Fix the panic issue caused by deleting snapshot files when the peer status is `Applying` [#11746](https://github.com/tikv/tikv/issues/11746)
+    - Fix the issue of QPS drop when flow control is enabled and `level0_slowdown_trigger` is set explicitly [#11424](https://github.com/tikv/tikv/issues/11424)
+    - Fix the panic issue that occurs when the cgroup controller  is not mounted [#11569](https://github.com/tikv/tikv/issues/11569)
+    - Fix the issue that the latency of Resolved TS increases after TiKV stops operating [#11352](https://github.com/tikv/tikv/pull/11352)
 
     (dup) - Fix a bug that TiKV cannot delete a range of data (`unsafe_destroy_range` cannot be executed) when the GC worker is busy [#11903](https://github.com/tikv/tikv/issues/11903)
     (dup) - Fix the issue that destroying a peer might cause high latency [#10210](https://github.com/tikv/tikv/issues/10210)
@@ -91,6 +91,15 @@ TiDB version: 5.3.1
     (dup) - Fix a bug that tikv-ctl cannot return the correct Region-related information [#11393](https://github.com/tikv/tikv/issues/11393)
     (dup) - Fix the issue that the average latency of the by-instance gRPC requests is inaccurate in TiKV metrics [#11299](https://github.com/tikv/tikv/issues/11299)
 
+- PD
+
+    - Fix a bug that the scheduling process has the unnecessary JointConsensus steps in certain cases [#4362](https://github.com/tikv/pd/issues/4362)
+    - Fix a bug that the scheduling cannot be executed when demoting a voter directly [#4444](https://github.com/tikv/pd/issues/4444)
+    - Fix a data race issue that occurs when updating the configuration of the replication mode of replicas [#4325](https://github.com/tikv/pd/issues/4325)
+    - Fix a bug that the Read lock is not released in certain cases [#4354](https://github.com/tikv/pd/issues/4354)
+
+    (dup) - Fix the issue that the cold hotspot data cannot be deleted from the hotspot statistics [#4390](https://github.com/tikv/pd/issues/4390)
+
 - TiFlash
 
     - Fix the problem that `cast(arg as decimal(x,y))` returns a wrong result when `arg` overflows the range of `decimal(x,y)`
@@ -103,15 +112,6 @@ TiDB version: 5.3.1
     - Fix the issue that `str_to_date` returns the wrong result when the input argument has leading zeros.
     - Fix the issue that the query gets the wrong result when the filter is like `where <string>`
     - Fix the issue that `cast(string as datetime)` returns the wrong result when the string is in `%Y-%m-%d\n%H:%i:%s` format
-
-- PD
-
-    - Fix a bug that the operater steps may contain unnecessary or empty JointConsensus steps in certain conditions [#4362](https://github.com/tikv/pd/issues/4362)
-    - Fix a bug that the operator could not be executed when demoting single voter directly [#4444](https://github.com/tikv/pd/issues/4444)
-    - Fix data race when updating replication mode configuration [#4325](https://github.com/tikv/pd/issues/4325)
-    - Fix a bug that the RLock is not released in certain conditions [#4354](https://github.com/tikv/pd/issues/4354)
-
-    (dup) - Fix the issue that the cold hotspot data cannot be deleted from the hotspot statistics [#4390](https://github.com/tikv/pd/issues/4390)
 
 - Tools
 
