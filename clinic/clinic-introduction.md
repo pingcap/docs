@@ -1,15 +1,15 @@
 ---
-title:  Overview of TiDB Clinic Diagnostic Service
-summary: Learn about the TiDB Clinic Diagnostic Service, including tool components, user scenarios, and implementation principles.
+title: Overview of TiDB Clinic
+summary: Learn about the TiDB Clinic Diagnostic Service (TiDB Clinic), including tool components, user scenarios, and implementation principles.
 ---
 
-## Overview of TiDB Clinic Diagnostic Service
+## Overview of TiDB Clinic
 
 TiDB Clinic Diagnostic Service (TiDB Clinic) is a diagnostic service provided by PingCAP for TiDB clusters that are deployed using either TiUP or TiDB Operator. This service helps to troubleshoot cluster problems remotely and provides a quick check of cluster status locally. With TiDB Clinic, you can ensure the stable operation of your TiDB cluster for its full life-cycle, predict potential problems, reduce the probability of problems, troubleshoot cluster problems quickly, and fix the cluster problems.
 
-TiDB Clinic is currently in the Beta testing stage for invited users only. The service provides the following two components to diagnose clusters:
+TiDB Clinic is currently in the Beta testing stage for invited users only. This service provides the following two components to diagnose cluster problems:
 
-- Diag: a diagnostic tool deployed on the cluster side. Diag is used to collect cluster diagnostic data, upload diagnostic data to the Clinic Server, and perform a quick health check locally on the cluster. For a full list of diagnostic data collected by Diag, see [TiDB Clinic Diagnostic Data](/clinic/clinic-data-instruction-for-tiup.md).
+- Diag: a diagnostic tool deployed on the cluster side. Diag is used to collect cluster diagnostic data, upload diagnostic data to the Clinic Server, and perform a quick health check locally on your cluster. For a full list of diagnostic data collected by Diag, see [TiDB Clinic Diagnostic Data](/clinic/clinic-data-instruction-for-tiup.md).
 
     > **Note:**
     >
@@ -26,25 +26,25 @@ TiDB Clinic is currently in the Beta testing stage for invited users only. The s
 
 - Troubleshoot cluster problems remotely:
 
-    When your cluster has some issues that cannot be fixed quickly, you can ask for help at TiDB Community or contact PingCAP technical support. When applying technical support for remote assistance, you need to save various diagnostic data from the cluster and forward the data to them. In this case, you can use Diag to collect diagnostic data with one click. Diag helps you to collect complete diagnostic data quickly, which can replace complex manual data collection operations. After collecting data, you need to upload the data to the Clinic Server for PingCAP technical support staff. The Clinic Server provides secure storage for diagnostic data and supports the online diagnosis, improving the efficiency of troubleshooting.
+    When your cluster has some problems that cannot be fixed quickly, you can ask for help at [TiDB Community slack channel](https://tidbcommunity.slack.com/archives/CH7TTLL7P) or contact PingCAP technical support. When contacting technical support for remote assistance, you need to save various diagnostic data from the cluster and forward the data to the support staff. In this case, you can use Diag to collect diagnostic data with one click. Diag helps you to collect complete diagnostic data quickly, which can avoids complex manual data collection operations. After collecting data, you can upload the data to the Clinic Server for PingCAP technical support staff to troubleshoot cluster problems. The Clinic Server provides secure storage for uploaded diagnostic data and supports the online diagnosis, improving the efficiency of troubleshooting.
 
-- Perform a quick check for the cluster status locally:
+- Perform a quick check on the cluster status locally:
 
     Even if your cluster runs stably now, it is necessary to periodically check the cluster for potential stability risks. You can check the potential health risks of a cluster using the local quick check feature provided by TiDB Clinic. TiDB Clinic Beta version provides a rationality check on cluster configuration items to discover unreasonable configurations and provide modification suggestions.
 
 ## Implementation principles
 
-This section introduces the implementation principles about how Diag (a cluster-side tool provided by TiDB Clinic) collects diagnostic data of a cluster.
+This section introduces the implementation principles about how Diag (a cluster-side tool provided by TiDB Clinic) collects diagnostic data from a cluster.
 
 First, Diag gets cluster topology information from the deployment tool TiUP (tiup-cluster) or TiDB Operator (tidb-operator). Then, Diag collects different types of diagnostic data through various data collection methods as follows:
 
 - Transfer server files through SCP
 
-    For clusters deployed using TiUP, Diag can collect log files and configuration files directly from the nodes of the target component through the secure copy protocol (SCP).
+    For the clusters deployed using TiUP, Diag can collect log files and configuration files directly from the nodes of the target component through the Secure copy protocol (SCP).
 
 - Collect data by running commands remotely through SSH
 
-    For clusters deployed using TiUP, Diag can connect to the target component system through SSH (Secure Shell), and run commands (such as Insight) to obtain system information, including kernel logs, kernel parameters, and basic information of the system and the hardware.
+    For the clusters deployed using TiUP, Diag can connect to the target component system through SSH (Secure Shell) and run commands (such as Insight) to obtain system information, including kernel logs, kernel parameters, and basic system and the hardware information.
 
 - Collect data through HTTP call
 
@@ -53,7 +53,7 @@ First, Diag gets cluster topology information from the deployment tool TiUP (tiu
 
 - Query database parameters through SQL statements
 
-    Using SQL statements, Diag can query the system variables and other information of the TiDB database. To use this method, you need to **additionally provide** the username and password to access the TiDB database when collecting data.
+    Using SQL statements, Diag can query the system variables and other information of TiDB database. To use this method, you need to **additionally provide** the username and password to access TiDB database when collecting data.
 
 ## Next step
 

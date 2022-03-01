@@ -13,9 +13,9 @@ The Clinic Server is set up on the PingCAP intranet (in China). If you upload th
 
 After a technical support case is closed, PingCAP permanently deletes or anonymizes the corresponding data within 90 days.
 
-## Data collection scope of TiDB clusters
+## TiDB clusters
 
-This section lists the types of diagnostic data that can be collected by Diag from the TiDB clusters deployed using TiUP.
+This section lists the scope of diagnostic data that can be collected by Diag from the TiDB clusters deployed using TiUP.
 
 ### Basic information of the cluster
 
@@ -32,7 +32,7 @@ This section lists the types of diagnostic data that can be collected by Diag fr
 | Error log | `tidb_stderr.log` | `--include=log` |
 | Slow log | `tidb_slow_query.log` | `--include=log` |
 | Configuration file | `tidb.toml` | `--include=config` |
-| Realtime configuration | `config.json` | `--include=config` |
+| Real-time configuration | `config.json` | `--include=config` |
 
 ### TiKV diagnostic data
 
@@ -41,7 +41,7 @@ This section lists the types of diagnostic data that can be collected by Diag fr
 | Log | `tikv.log` | `--include=log` |
 | Error log | `tikv_stderr.log` | `--include=log` |
 | Configuration file | `tikv.toml` | `--include=config` |
-| Realtime configuration | `config.json` | `--include=config` |
+| Real-time configuration | `config.json` | `--include=config` |
 
 ### PD diagnostic data
 
@@ -50,7 +50,7 @@ This section lists the types of diagnostic data that can be collected by Diag fr
 | Log | `pd.log` | `--include=log` |
 | Error log | `pd_stderr.log` | `--include=log` |
 | Configuration file | `pd.toml` | `--include=config` |
-| Realtime configuration | `config.json` | `--include=config` |
+| Real-time configuration | `config.json` | `--include=config` |
 | Outputs of the command `tiup ctl pd -u http://${pd IP}:${PORT} store` | `store.json` | `--include=config` |
 | Outputs of the command `tiup ctl pd -u http://${pd IP}:${PORT} config placement-rules show` | `placement-rule.json` | `--include=config` |
 
@@ -61,7 +61,7 @@ This section lists the types of diagnostic data that can be collected by Diag fr
 | Log | `tiflash.log` | `--include=log` |
 | Error log | `tiflash_stderr.log` | `--include=log` |
 | Configuration file |  `tiflash-learner.toml`，`tiflash-preprocessed.toml`，`tiflash.toml` | `--include=config` |
-| Realtime configuration | `config.json` | `--include=config` |
+| Real-time configuration | `config.json` | `--include=config` |
 
 ### TiCDC diagnostic data
 
@@ -82,7 +82,7 @@ This section lists the types of diagnostic data that can be collected by Diag fr
 
 | Data type | Exported file | Parameter for data collection by TiDB Clinic |
 | :------ | :------ |:-------- |
-| Get TiDB system variables ( iag does not collect this data type by default; if you need to collect this data type, database credential is required) | `mysql.tidb.csv` | `--include=db_vars` |
+| Get TiDB system variables ( Diag does not collect this data type by default; if you need to collect this data type, database credential is required) | `mysql.tidb.csv` | `--include=db_vars` |
 | | `global_variables.csv` | `--include=db_vars` |
 
 ### System information of the cluster
@@ -90,14 +90,14 @@ This section lists the types of diagnostic data that can be collected by Diag fr
 | Data type | Exported file | Parameter for data collection by TiDB Clinic |
 | :------ | :------ |:-------- |
 | Kernel log | `dmesg.log` | `--include=system` |
-| Basic information of the system and the hardware | `insight.json` | `--include=system` |
+| Basic system and hardware information | `insight.json` | `--include=system` |
 | Contents in the `/etc/security/limits.conf` | `limits.conf` | `--include=system` |
 | List of kernel parameters | `sysctl.conf` | `--include=system` |
 | Socket system information, outputs of the ss command | `ss.txt` | `--include=system` |
 
-## Data collection scope of DM clusters
+## DM clusters
 
-This section lists the detailed diagnostic data collected by Diag from a DM cluster deployed using TiUP.
+This section lists the scope diagnostic data collected by Diag from a DM cluster deployed using TiUP.
 
 ### Basic information of the cluster
 
@@ -134,7 +134,7 @@ This section lists the detailed diagnostic data collected by Diag from a DM clus
 | Data type | Exported file | Parameter for data collection by TiDB Clinic |
 | :------ | :------ |:-------- |
 | Kernel log | `dmesg.log` | `--include=system` |
-| Basic information of the system and the hardware | `insight.json` | `--include=system` |
+| Basic system and hardware information | `insight.json` | `--include=system` |
 | Contents in the `/etc/security/limits.conf` system | `limits.conf` | `--include=system` |
 | List of kernel parameters | `sysctl.conf` | `--include=system` |
 | Socket system information, outputs of the ss command | `ss.txt` | `--include=system` |

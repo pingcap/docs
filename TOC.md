@@ -194,7 +194,7 @@
     - TiDB Clinic Diagnostic Service (Beta)
       - [Overview](/clinic/clinic-introduction.md)
       - [Use TiDB Clinic](/clinic/clinic-user-guide-for-tiup.md)
-      - [Diagnostic Data](/clinic/clinic-data-instruction-for-tiup.md)
+      - [TiDB Clinic Diagnostic Data](/clinic/clinic-data-instruction-for-tiup.md)
   - [TiDB Operator](/tidb-operator-overview.md)
   - Backup & Restore (BR)
     - [BR Tool Overview](/br/backup-and-restore-tool.md)
