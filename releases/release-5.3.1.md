@@ -13,7 +13,7 @@ TiDB version: 5.3.1
 - Tools
 
     + TiDB Lightning
-    
+
          - Change the default value of `regionMaxKeyCount` from 1_440_000 to 1_280_000, to avoid too many empty Regions after data import [#30018](https://github.com/pingcap/tidb/issues/30018)
 
 ## Feature enhancements
@@ -24,22 +24,22 @@ TiDB version: 5.3.1
 
 - TiKV
 
-    - Reduces TiCDC recovery time by reducing the number of the Regions that require the Resolve Locks step [#11993](https://github.com/tikv/tikv/issues/11993)
+    - Reduce the TiCDC recovery time by reducing the number of the Regions that require the Resolve Locks step [#11993](https://github.com/tikv/tikv/issues/11993)
     - Speed up the Garbage Collection (GC) process by increasing the write batch size when performing GC to Raft logs [#11404](https://github.com/tikv/tikv/issues/11404)
 
     (dup) - Update the proc filesystem (procfs) to v0.12.0 [#11702](https://github.com/tikv/tikv/issues/11702)
 
 - PD
 
-    - Optimize the contents' format of the `DR_STATE` file [#4341](https://github.com/tikv/pd/issues/4341)
+    - Optimize the content format of the `DR_STATE` file [#4341](https://github.com/tikv/pd/issues/4341)
 
 - Tools
 
     - TiCDC
 
-        - Expose configuration parameters of Kafka producer to make them configurable in TiCDC [#4385](https://github.com/pingcap/tiflow/issues/4385)
+        - Expose configuration parameters of the Kafka producer to make them configurable in TiCDC [#4385](https://github.com/pingcap/tiflow/issues/4385)
         - Add a pre-cleanup process before S3 is enabled [#3878](https://github.com/pingcap/tiflow/issues/3878)
-        - TiCDC client works when no certificate name is specified [#3627](https://github.com/pingcap/tiflow/issues/3627)
+        - The TiCDC client works when no certificate name is specified [#3627](https://github.com/pingcap/tiflow/issues/3627)
         - Manage sink checkpoints per table to avoid unexpected advance of checkpoint timestamps [#3545](https://github.com/pingcap/tiflow/issues/3545)
 
         (dup) - Add the exponential backoff mechanism for restarting a changefeed. [#3329](https://github.com/pingcap/tiflow/issues/3329)
@@ -51,7 +51,7 @@ TiDB version: 5.3.1
 
     - Lightning
 
-        - Refine the output message of the precheck to make it more user-friendly when the local disk space check fails [#30395](https://github.com/pingcap/tidb/issues/30395) 
+        - Refine the output message of the precheck to make it more user-friendly when the local disk space check fails [#30395](https://github.com/pingcap/tidb/issues/30395)
 
 ## Bug Fixes
 
@@ -123,12 +123,12 @@ TiDB version: 5.3.1
 
         - Fix a bug that long varchars report error of `Column length too big` [#4637](https://github.com/pingcap/tiflow/issues/4637)
         - Fix a bug that a TiCDC node exits abnormally when a PD leader is killed [#4248](https://github.com/pingcap/tiflow/issues/4248)
-        - Fix the issue that execution errors of the update statement in safemode may cause DM-worker panic [#4317](https://github.com/pingcap/tiflow/issues/4317)
+        - Fix the issue that execution errors of the update statement in safemode may cause the DM-worker panic [#4317](https://github.com/pingcap/tiflow/issues/4317)
         - Fix the issue that cached region metric of the KV client may be negative [#4300](https://github.com/pingcap/tiflow/issues/4300)
-        - Fix the bug that HTTP API panics when required processor info does not exist [#3840](https://github.com/pingcap/tiflow/issues/3840)
-        - Fix a bug that relay status in DM-master is wrong after restarting DM-master and DM-worker in a particular order [#3478](https://github.com/pingcap/tiflow/issues/3478)
+        - Fix the bug that HTTP API panics when the required processor info does not exist [#3840](https://github.com/pingcap/tiflow/issues/3840)
+        - Fix a bug that the relay status in the DM-master is wrong after restarting the DM-master and DM-worker in a particular order [#3478](https://github.com/pingcap/tiflow/issues/3478)
         - Fix a bug that DM-worker fails to boot up after a restart [#3344](https://github.com/pingcap/tiflow/issues/3344)
-        - Fix a bug that a DM task fails if a PARTITION DDL spends too long time [#3854](https://github.com/pingcap/tiflow/issues/3854)
+        - Fix a bug that a DM task fails if running a PARTITION DDL takes too long time [#3854](https://github.com/pingcap/tiflow/issues/3854)
         - Fix a bug that DM may report `invalid sequence` when upstream is MySQL 8.0 [#3847](https://github.com/pingcap/tiflow/issues/3847)
         - Fix a bug that redo logs are not cleaned up when removing a paused changefeed [#3919](https://github.com/pingcap/tiflow/pull/3919)
         - Fix a bug of data loss when DM does finer grained retry [#3487](https://github.com/pingcap/tiflow/issues/3487)
@@ -162,7 +162,7 @@ TiDB version: 5.3.1
     - TiDB Lightning
 
         - Fix the bug that Lightning may not delete the metadata schema when some of the import contains no source files. [#28144](https://github.com/pingcap/tidb/issues/28144)
-        - Fix the bug that Lightning returns an error if the storage URL is "gs://xxx" instead of "gcs://xxx" [#30254](https://github.com/pingcap/tidb/pull/30254)
-        - Fix the issue that setting --log-file="-" will not print any log to stdout [#29876](https://github.com/pingcap/tidb/issues/29876)        
+        - Fix the bug that Lightning returns an error if the storage URL prefix is "gs://xxx" instead of "gcs://xxx" [#30254](https://github.com/pingcap/tidb/pull/30254)
+        - Fix the issue that setting --log-file="-" will not print any log to stdout [#29876](https://github.com/pingcap/tidb/issues/29876)
 
         (dup) - Fix the issue that TiDB Lightning does not report errors when the S3 storage path does not exist #28031 [#30709](https://github.com/pingcap/tiflow/issues/30709)
