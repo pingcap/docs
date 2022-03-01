@@ -40,7 +40,7 @@ TiDB version: 5.3.1
         - Expose configuration parameters of Kafka producer to make them configurable in TiCDC [#4385](https://github.com/pingcap/tiflow/issues/4385)
         - Add a pre-cleanup process before S3 is enabled [#3878](https://github.com/pingcap/tiflow/issues/3878)
         - TiCDC client works when no certificate name is specified [#3627](https://github.com/pingcap/tiflow/issues/3627)
-        - Manage sink checkpoints per table to avoid checkpoint timestamps advance unexpected [#3545](https://github.com/pingcap/tiflow/issues/3545)
+        - Manage sink checkpoints per table to avoid unexpected advance of checkpoint timestamps [#3545](https://github.com/pingcap/tiflow/issues/3545)
 
         (dup) - Add the exponential backoff mechanism for restarting a changefeed. [#3329](https://github.com/pingcap/tiflow/issues/3329)
         (dup) - Change the default value of Kafka Sink `partition-num` to 3 so that TiCDC distributes messages across Kafka partitions more evenly [#3337](https://github.com/pingcap/tiflow/issues/3337)
