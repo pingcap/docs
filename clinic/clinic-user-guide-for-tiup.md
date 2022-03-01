@@ -63,7 +63,7 @@ For a detailed list of data that can be collected by Diag, see [TiDB Clinic Diag
 
 ### Step 2. Collect data
 
-With Diag, you can collect data in the TiDB clusters and the DM clusters deployed using TiUP.
+With Diag, you can collect data from the TiDB clusters and the DM clusters deployed using TiUP.
 
 #### Collect data from TiDB clusters
 
@@ -124,7 +124,7 @@ With Diag, you can collect data in the TiDB clusters and the DM clusters deploye
     Collected data are stored in /home/qiaodan/diag-fNTnz5MGhr6
     ```
 
-#### Collect data in DM clusters
+#### Collect data from DM clusters
 
 1. Run the data collection command of Diag.
 
@@ -136,7 +136,7 @@ With Diag, you can collect data in the TiDB clusters and the DM clusters deploye
     tiup diag collectdm ${cluster-name} -f="-4h" -t="-2h"
     ```
 
-    For the parameters used in the above commands or other parameters that you might use with Diag, refer to [Collect data in TiDB clusters](#collect-data-in-tidb-clusters).
+    For the parameters used in the above commands or other parameters that you might use with Diag, refer to [Collect data from TiDB clusters](#collect-data-from-tidb-clusters).
 
     After you run the command, Diag does not start collecting data immediately. Instead, Diag provides the estimated data size and the target data storage path in the output for you to confirm whether to continue. For example:
 
