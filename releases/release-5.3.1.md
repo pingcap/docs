@@ -93,16 +93,16 @@ TiDB version: 5.3.1
 
 - TiFlash
 
-    - Fix the problem that `cast(arg as decimal(x,y))` return wrong result when `arg` overflows the range of `decimal(x,y)`
-    - Fix the problem of TiFlash crashing when `max_memory_usage` and `max_memory_usage_for_all_queries` are enabled
-    - Fix the problem that `cast(string ad real)` returns wrong result
-    - Fixed the problem that cast(string as decimal) returns wrong result
+    - Fix the problem that `cast(arg as decimal(x,y))` returns a wrong result when `arg` overflows the range of `decimal(x,y)`
+    - Fix the TiFlash crash issue that occurs when `max_memory_usage` and `max_memory_usage_for_all_queries` are enabled
+    - Fix the issue that `cast(string as real)` returns a wrong result
+    - Fixed the issue that `cast(string as decimal)` returns a wrong result
     - Fix potential data inconsistency after altering a primary key column to a larger int data type
-    - Fix the problem that `select (arg0, arg1) in (x,y)` returns wrong result
-    - Fix the problem that tiflash randomly crash when a mpp query is killed
-    - Fix the problem that str_to_date return wrong result when the input argument has leading zeros.
-    - Fix the problem that query gets wrong results when the filter is like `where <string>`
-    - Fix the problem that `cast(string as datetime)` return wrong result when the string is of format `%Y-%m-%d\n%H:%i:%s`
+    - Fix the bug that when `in` has multiple arguments such as in the `select (arg0, arg1) in (x,y)` statement, `in` returns the wrong result
+    - (dup) Fix the issue that TiFlash might panic when an MPP query is stopped
+    - Fix the issue that `str_to_date` returns the wrong result when the input argument has leading zeros.
+    - Fix the issue that the query gets the wrong result when the filter is like `where <string>`
+    - Fix the issue that `cast(string as datetime)` returns the wrong result when the string is in `%Y-%m-%d\n%H:%i:%s` format
 
 - PD
 
