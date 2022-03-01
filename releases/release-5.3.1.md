@@ -66,7 +66,7 @@ TiDB version: 5.3.1
     - Fix wrong query results after changing the column type from `FLOAT` to `DOUBLE` [#31372](https://github.com/pingcap/tidb/issues/31372)
     - Fix the "invalid transaction" error when executing a query using index lookup join [#30468](https://github.com/pingcap/tidb/issues/30468)
     - Fix wrong query results due to the optimization of `Order By` [#30271](https://github.com/pingcap/tidb/issues/30271)
-    - Fix the issue that the configurations of `MaxDays` and `MaxBackups` do not take effect for slow log [#25716](https://github.com/pingcap/tidb/issues/25716)
+    - Fix the issue that the configurations of `MaxDays` and `MaxBackups` do not take effect on the slow log [#25716](https://github.com/pingcap/tidb/issues/25716)
 
     (dup) - Fix the issue that executing the INSERT ... SELECT ... ON DUPLICATE KEY UPDATE statement gets panic [#28078](https://github.com/pingcap/tidb/issues/28078)
 
