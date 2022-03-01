@@ -31,10 +31,10 @@ TiDB version: 5.3.1
 
     - TiCDC
 
-        - Expose Kafka producer's configuration parameters can be configured [#4385](https://github.com/pingcap/tiflow/issues/4385)
-        - Add pre clean up process when s3 enable [#3878](https://github.com/pingcap/tiflow/issues/3878)
-        - TiCDC client works now when cert's common name was not specified [#3882](https://github.com/pingcap/tiflow/pull/3882)
-        - Manage sink checkpoint per table to avoid checkpoint timestamp advance unexpected [#4083](https://github.com/pingcap/tiflow/pull/4083)
+        - Expose configuration parameters of Kafka producer to make them configurable in TiCDC [#4385](https://github.com/pingcap/tiflow/issues/4385)
+        - Add a pre-cleanup process before S3 is enabled [#3878](https://github.com/pingcap/tiflow/issues/3878)
+        - TiCDC client works when no certificate name is specified [#3627](https://github.com/pingcap/tiflow/issues/3627)
+        - Manage sink checkpoints per table to avoid checkpoint timestamps advance unexpected [#3545](https://github.com/pingcap/tiflow/issues/3545)
 
         (dup) - Add the exponential backoff mechanism for restarting a changefeed. [#3329](https://github.com/pingcap/tiflow/issues/3329)
         (dup) - Change the default value of Kafka Sink `partition-num` to 3 so that TiCDC distributes messages across Kafka partitions more evenly [#3337](https://github.com/pingcap/tiflow/issues/3337)
@@ -115,22 +115,22 @@ TiDB version: 5.3.1
 
     - TiCDC
 
-        - Fix a bug that long varchar will report error of "Column length too big" [#4637](https://github.com/pingcap/tiflow/issues/4637)
-        - Fix a bug that owner exits abnormally when PD leader is killed [#4248](https://github.com/pingcap/tiflow/issues/4248)
-        - Fix the issue that update statement execute error in safemode may cause DM-worker panic [#4317](https://github.com/pingcap/tiflow/issues/4317)
-        - Fix kv client cached region metric could be negative [#4290](https://github.com/pingcap/tiflow/pull/4290)
-        - Fix the bug that http API panics when the required processor info is not exist [#3840](https://github.com/pingcap/tiflow/issues/3840)
-        - Fix a bug that when master and worker restart in a particular order, relay status in DM-master is wrong [#3478](https://github.com/pingcap/tiflow/issues/3478)
-        - Fix a bug that DM-worker can't boot up after restart [#3344](https://github.com/pingcap/tiflow/issues/3344)
-        - Fix a bug that DM task will failed when PARTITION DDL cost a long time [#3854](https://github.com/pingcap/tiflow/issues/3854)
-        - Fix a bug that DM may report "invalid sequence" when upstream is MySQL 8.0 [#3847](https://github.com/pingcap/tiflow/issues/3847)
-        - Fix a bug that redo logs are not cleaned up when removing a paused changefeed. [#3919](https://github.com/pingcap/tiflow/pull/3919)
+        - Fix a bug that long varchars report error of `Column length too big` [#4637](https://github.com/pingcap/tiflow/issues/4637)
+        - Fix a bug that a TiCDC node exits abnormally when a PD leader is killed [#4248](https://github.com/pingcap/tiflow/issues/4248)
+        - Fix the issue that execution errors of the update statement in safemode may cause DM-worker panic [#4317](https://github.com/pingcap/tiflow/issues/4317)
+        - Fix the issue that cached region metric of the KV client may be negative [#4300](https://github.com/pingcap/tiflow/issues/4300)
+        - Fix the bug that HTTP API panics when required processor info does not exist [#3840](https://github.com/pingcap/tiflow/issues/3840)
+        - Fix a bug that relay status in DM-master is wrong after restarting DM-master and DM-worker in a particular order [#3478](https://github.com/pingcap/tiflow/issues/3478)
+        - Fix a bug that DM-worker fails to boot up after a restart [#3344](https://github.com/pingcap/tiflow/issues/3344)
+        - Fix a bug that a DM task fails if a PARTITION DDL spends too long time [#3854](https://github.com/pingcap/tiflow/issues/3854)
+        - Fix a bug that DM may report `invalid sequence` when upstream is MySQL 8.0 [#3847](https://github.com/pingcap/tiflow/issues/3847)
+        - Fix a bug that redo logs are not cleaned up when removing a paused changefeed [#3919](https://github.com/pingcap/tiflow/pull/3919)
         - Fix a bug of data loss when DM does finer grained retry [#3487](https://github.com/pingcap/tiflow/issues/3487)
-        - Fix OOM in container environments. [#3439](https://github.com/pingcap/tiflow/pull/3439)
-        - Stopping tasks during load phase won't cause the source to be transfered [#3771](https://github.com/pingcap/tiflow/issues/3771)
-        - Fix query-staus progress for loader [#3252](https://github.com/pingcap/tiflow/issues/3252)
-        - Fix HTTP API works as expected now if there are TiCDC nodes of different versions in one cdc cluster. [#3483](https://github.com/pingcap/tiflow/issues/3483)
-        - 修复了当 CDC Redo Log 配置在 S3 存储上时的异常退出问题 [#3523](https://github.com/pingcap/tiflow/issues/3523)
+        - Fix OOM in container environments [#1798](https://github.com/pingcap/tiflow/issues/1798)
+        - Fix a bug that stopping a loading task results in unexpected transfer of the task [#3771](https://github.com/pingcap/tiflow/issues/3771)
+        - Fix wrong progress returned for query-staus on loader [#3252](https://github.com/pingcap/tiflow/issues/3252)
+        - Fix the issue that HTTP API fails to work if there are TiCDC nodes of different versions in a cluster [#3483](https://github.com/pingcap/tiflow/issues/3483)
+        - Fix the issue that TiCDC exits abnormally when S3 storage is configured with CDC Redo Log [#3523](https://github.com/pingcap/tiflow/issues/3523)
 
         (dup) - Fix the issue that default values cannot be replicated [#3793](https://github.com/pingcap/tiflow/issues/3793)
         (dup) - Fix a bug that MySQL sink generates duplicated `replace` SQL statements if `batch-replace-enable` is disabled [#4501](https://github.com/pingcap/tiflow/issues/4501)
