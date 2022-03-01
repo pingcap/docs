@@ -20,7 +20,7 @@ TiDB version: 5.3.1
 
 - TiDB
 
-    - The TiDB server now maps a user to an entry in the mysql.user table more consistently. [#30450](https://github.com/pingcap/tidb/issues/30450)
+    - Optimize the mapping logic of user login mode to make the logging more MySQL-compatible [#30450](https://github.com/pingcap/tidb/pull/30450)
 
 - TiKV
 
@@ -57,16 +57,16 @@ TiDB version: 5.3.1
 
 - TiDB
 
-    - Fix date formate identifies '\n' as invalid separator [#32503](https://github.com/pingcap/tidb/issues/32503)
-    - Fix alter column set default wrongly updates the schema [#31074](https://github.com/pingcap/tidb/issues/31074)
-    - Fix a bug that turning on tidb_restricted_read_only won't automatically turn on tidb_super_read_only [#31745](https://github.com/pingcap/tidb/issues/31745)
-    - Fix greatest and least function with collation get wrong result [#31789](https://github.com/pingcap/tidb/issues/31789)
-    - Fix the crash or error when generating an empty mpp task list. [#31636](https://github.com/pingcap/tidb/issues/31636)
-    - Fix index join bug caused by innerWorker panic [#31494](https://github.com/pingcap/tidb/issues/31494)
-    - Fix double column value are different with MySQL after changing column type from float to double [#31372](https://github.com/pingcap/tidb/issues/31372)
-    - Fix a data race that may cause "invalid transaction" error when executing a query using index lookup join. [#30468](https://github.com/pingcap/tidb/issues/30468)
-    - Fix a bug when reducing order by clause for the index which leads to the wrong result. [#30271](https://github.com/pingcap/tidb/issues/30271)
-    - Fix `MaxDays` and `MaxBackups` not working for slow log. [#25716](https://github.com/pingcap/tidb/issues/25716)
+    - Fix the issue that `date_format` in TiDB handles `'\n'` in a MySQL-incompatible way [#32503](https://github.com/pingcap/tidb/issues/32503)
+    - Fix the issue that `alter column set default` wrongly updates the table schema [#31074](https://github.com/pingcap/tidb/issues/31074)
+    - Fix a bug that `tidb_super_read_only` is not automatically enabled when `tidb_restricted_read_only` is enabled [#31745](https://github.com/pingcap/tidb/issues/31745)
+    - Fix the issue that the `greatest` or `least` function with collation gets wrong result [#31789](https://github.com/pingcap/tidb/issues/31789)
+    - Fix the MPP task list empty error when executing a query [#31636](https://github.com/pingcap/tidb/issues/31636)
+    - Fix wrong results of index join caused by an innerWorker panic [#31494](https://github.com/pingcap/tidb/issues/31494)
+    - Fix wrong query results after changing the column type from `FLOAT` to `DOUBLE` [#31372](https://github.com/pingcap/tidb/issues/31372)
+    - Fix the "invalid transaction" error when executing a query using index lookup join [#30468](https://github.com/pingcap/tidb/issues/30468)
+    - Fix wrong query results due to the optimization of `Order By` [#30271](https://github.com/pingcap/tidb/issues/30271)
+    - Fix the issue that the configurations of `MaxDays` and `MaxBackups` do not take effect for slow log [#25716](https://github.com/pingcap/tidb/issues/25716)
 
     (dup) - Fix the issue that executing the INSERT ... SELECT ... ON DUPLICATE KEY UPDATE statement gets panic [#28078](https://github.com/pingcap/tidb/issues/28078)
 
