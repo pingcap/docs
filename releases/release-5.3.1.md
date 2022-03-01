@@ -10,6 +10,12 @@ TiDB version: 5.3.1
 
 ## Compatibility changes
 
+- Tools
+
+    + TiDB Lightning
+    
+         - Decreate the default region max-keys from 1_440_000 to 1_280_000, to avoid too many empty Regions after data import [#30018](https://github.com/pingcap/tidb/issues/30018)
+
 ## Feature enhancements
 
 - TiDB
@@ -45,7 +51,7 @@ TiDB version: 5.3.1
 
     - Lightning
 
-        - Make tidb-lightning pre-check output message clearer [#30395](https://github.com/pingcap/tidb/issues/30395)
+        - Refine the output message of the precheck to make it more user-friendly when the local disk space check fails [#30395](https://github.com/pingcap/tidb/issues/30395) 
 
 ## Bug Fixes
 
@@ -111,7 +117,7 @@ TiDB version: 5.3.1
 
     - Backup & Restore (BR)
 
-        - Fix a bug that caused region unbalanced after restoring. [#31034](https://github.com/pingcap/tiflow/issues/31034)
+        - Fix the potential issue that Regions might be unevenly distributed after a restore operation is finished. [#31034](https://github.com/pingcap/tidb/issues/31034)
 
     - TiCDC
 
