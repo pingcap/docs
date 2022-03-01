@@ -161,9 +161,8 @@ TiDB version: 5.3.1
 
     - TiDB Lightning
 
-        - Fix the bug that lightning may not clean up metadata schema when some of the import contains no source files. [#28144](https://github.com/pingcap/tidb/issues/28144)
-        - Fix the bug that lighting return error if gcs url starts with gs:// [#30254](https://github.com/pingcap/tidb/pull/30254)
-        - Avoid tikv trigger auto region split by lower the ingest kv count threshold [#30018](https://github.com/pingcap/tidb/issues/30018)
-        - Print logs to stdout when passing --log-file="-" [#29876](https://github.com/pingcap/tidb/issues/29876)
+        - Fix the bug that Lightning may not delete the metadata schema when some of the import contains no source files. [#28144](https://github.com/pingcap/tidb/issues/28144)
+        - Fix the bug that Lightning returns an error if the storage URL is "gs://xxx" instead of "gcs://xxx" [#30254](https://github.com/pingcap/tidb/pull/30254)
+        - Fix the issue that setting --log-file="-" will not print any log to stdout [#29876](https://github.com/pingcap/tidb/issues/29876)        
 
         (dup) - Fix the issue that TiDB Lightning does not report errors when the S3 storage path does not exist #28031 [#30709](https://github.com/pingcap/tiflow/issues/30709)
