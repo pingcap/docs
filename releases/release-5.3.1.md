@@ -55,7 +55,7 @@ TiDB version: 5.3.1
 
 - TiDB
 
-    - Fix the issue that `date_format` in TiDB handles `'\n'` in a MySQL-incompatible way [#32503](https://github.com/pingcap/tidb/issues/32503)
+    - Fix the issue that `date_format` in TiDB handles `'\n'` in a MySQL-incompatible way [#32232](https://github.com/pingcap/tidb/issues/32232)
     - Fix the issue that `alter column set default` wrongly updates the table schema [#31074](https://github.com/pingcap/tidb/issues/31074)
     - Fix a bug that `tidb_super_read_only` is not automatically enabled when `tidb_restricted_read_only` is enabled [#31745](https://github.com/pingcap/tidb/issues/31745)
     - Fix the issue that the `greatest` or `least` function with collation gets wrong result [#31789](https://github.com/pingcap/tidb/issues/31789)
