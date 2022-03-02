@@ -20,7 +20,7 @@ TiDB Clinic is currently in the Beta testing stage for invited users only. This 
 
     > **Note:**
     >
-    > > For the TiDB Clinic Beta version, the features of the Clinic Server are **not** open for external users. After you upload collected data to the Clinic Server and get a data link using Diag, only authorized PingCAP technical support staff can access the link and view the data.
+    > For the TiDB Clinic Beta version, the features of the Clinic Server are **not** open for external users. After you upload collected data to the Clinic Server and get a data link using Diag, only authorized PingCAP technical support staff can access the link and view the data.
 
 ## User scenarios
 
@@ -30,7 +30,7 @@ TiDB Clinic is currently in the Beta testing stage for invited users only. This 
 
 - Perform a quick check on the cluster status locally
 
-    Even if your cluster runs stably now, it is necessary to periodically check the cluster for potential stability risks. You can check the potential health risks of a cluster using the local quick check feature provided by TiDB Clinic. TiDB Clinic Beta version provides a rationality check on cluster configuration items to discover unreasonable configurations and provide modification suggestions.
+    Even if your cluster runs stably now, it is necessary to periodically check the cluster to avoid potential stability risks. You can check the potential health risks of a cluster using the local quick check feature provided by TiDB Clinic. The TiDB Clinic Beta version provides a rationality check on cluster configuration items to discover unreasonable configurations and provide modification suggestions.
 
 ## Implementation principles
 
@@ -57,5 +57,5 @@ First, Diag gets cluster topology information from the deployment tool TiUP (tiu
 
 ## Next step
 
- - [Use TiDB Clinic](/clinic/clinic-user-guide-for-tiup.md)
- - [TiDB Clinic Diagnostic Data](/clinic/clinic-data-instruction-for-tiup.md)
+- [Use TiDB Clinic](/clinic/clinic-user-guide-for-tiup.md)
+- [TiDB Clinic Diagnostic Data](/clinic/clinic-data-instruction-for-tiup.md)
