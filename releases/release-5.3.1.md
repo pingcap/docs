@@ -105,13 +105,13 @@ TiDB version: 5.3.1
     - Fix the issue that `cast(arg as decimal(x,y))` returns a wrong result when the input argument `arg` overflows the range of `decimal(x,y)`
     - Fix the TiFlash crash issue that occurs when `max_memory_usage` and `max_memory_usage_for_all_queries` are enabled
     - Fix the issue that `cast(string as real)` returns a wrong result
-    - Fixed the issue that `cast(string as decimal)` returns a wrong result
+    - Fix the issue that `cast(string as decimal)` returns a wrong result
     - Fix potential data inconsistency after altering a primary key column to a larger int data type
     - Fix the bug that when `in` has multiple arguments in the statements like `select (arg0, arg1) in (x,y)`, `in` returns a wrong result
     - (dup) Fix the issue that TiFlash might panic when an MPP query is stopped
     - Fix the issue that `str_to_date` returns a wrong result when the input argument has leading zeros
-    - Fix the issue that the query gets a wrong result when the filter is in `where <string>` format
-    - Fix the issue that `cast(string as datetime)` returns the wrong result when the input argument `string` is in `%Y-%m-%d\n%H:%i:%s` format
+    - Fix the issue that the query returns a wrong result when the filter is in the `where <string>` format
+    - Fix the issue that `cast(string as datetime)` returns a wrong result when the input argument `string` is in the `%Y-%m-%d\n%H:%i:%s` format
 
 - Tools
 
@@ -121,13 +121,13 @@ TiDB version: 5.3.1
 
     - TiCDC
 
-        - Fix a bug that long varchars report error of `Column length too big` [#4637](https://github.com/pingcap/tiflow/issues/4637)
+        - Fix a bug that long varchars report an error `Column length too big` [#4637](https://github.com/pingcap/tiflow/issues/4637)
         - Fix a bug that a TiCDC node exits abnormally when a PD leader is killed [#4248](https://github.com/pingcap/tiflow/issues/4248)
         - Fix the issue that execution errors of the update statement in safemode may cause the DM-worker panic [#4317](https://github.com/pingcap/tiflow/issues/4317)
-        - Fix the issue that cached region metric of the KV client may be negative [#4300](https://github.com/pingcap/tiflow/issues/4300)
-        - Fix the bug that HTTP API panics when the required processor info does not exist [#3840](https://github.com/pingcap/tiflow/issues/3840)
+        - Fix the issue that cached region metric of the TiKV client may be negative [#4300](https://github.com/pingcap/tiflow/issues/4300)
+        - Fix the bug that HTTP API panics when the required processor infomation does not exist [#3840](https://github.com/pingcap/tiflow/issues/3840)
         - Fix a bug that the relay status in the DM-master is wrong after restarting the DM-master and DM-worker in a particular order [#3478](https://github.com/pingcap/tiflow/issues/3478)
-        - Fix a bug that DM-worker fails to boot up after a restart [#3344](https://github.com/pingcap/tiflow/issues/3344)
+        - Fix a bug that the DM-worker fails to boot up after a restart [#3344](https://github.com/pingcap/tiflow/issues/3344)
         - Fix a bug that a DM task fails if running a PARTITION DDL takes too long time [#3854](https://github.com/pingcap/tiflow/issues/3854)
         - Fix a bug that DM may report `invalid sequence` when upstream is MySQL 8.0 [#3847](https://github.com/pingcap/tiflow/issues/3847)
         - Fix a bug that redo logs are not cleaned up when removing a paused changefeed [#3919](https://github.com/pingcap/tiflow/pull/3919)
@@ -136,7 +136,7 @@ TiDB version: 5.3.1
         - Fix a bug that stopping a loading task results in unexpected transfer of the task [#3771](https://github.com/pingcap/tiflow/issues/3771)
         - Fix wrong progress returned for query-staus on loader [#3252](https://github.com/pingcap/tiflow/issues/3252)
         - Fix the issue that HTTP API fails to work if there are TiCDC nodes of different versions in a cluster [#3483](https://github.com/pingcap/tiflow/issues/3483)
-        - Fix the issue that TiCDC exits abnormally when S3 storage is configured with CDC Redo Log [#3523](https://github.com/pingcap/tiflow/issues/3523)
+        - Fix the issue that TiCDC exits abnormally when the S3 storage is configured with TiCDC Redo Log [#3523](https://github.com/pingcap/tiflow/issues/3523)
 
         (dup) - Fix the issue that default values cannot be replicated [#3793](https://github.com/pingcap/tiflow/issues/3793)
         (dup) - Fix a bug that MySQL sink generates duplicated `replace` SQL statements if `batch-replace-enable` is disabled [#4501](https://github.com/pingcap/tiflow/issues/4501)
@@ -161,7 +161,7 @@ TiDB version: 5.3.1
 
     - TiDB Lightning
 
-        - Fix the bug that TiDB Lightning may not delete the metadata schema when some imports contain no source files [#28144](https://github.com/pingcap/tidb/issues/28144)
+        - Fix the bug that TiDB Lightning may not delete the metadata schema when some import tasks do not contain source files [#28144](https://github.com/pingcap/tidb/issues/28144)
         - Fix the bug that TiDB Lightning returns an error if the storage URL prefix is "gs://xxx", instead of "gcs://xxx" [#30254](https://github.com/pingcap/tidb/pull/30254)
         - Fix the issue that setting --log-file="-" does not print any log to stdout [#29876](https://github.com/pingcap/tidb/issues/29876)
 
