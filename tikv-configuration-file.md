@@ -446,6 +446,10 @@ Configuration items related to Raftstore.
 + Enables or disables `prevote`. Enabling this feature helps reduce jitter on the system after recovery from network partition.
 + Default value: `true`
 
+### `capacity`
++ Storage capacity, which is the maximum data storage size allowed. If not set, the current disk capacity is used. If you want to deploy multiple TiKV instances on the same physical disk, you need to add this parameter to the TiKV configuration, reference [the introduction of key parameters of hybrid deployment](/hybrid-deployment-topology.md).
++ Default: 0
+
 ### `raftdb-path`
 
 + The path to the Raft library, which is `storage.data-dir/raft` by default
