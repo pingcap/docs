@@ -49,7 +49,7 @@ TiDB version: 5.3.1
         (dup) - Add more Promethous and Grafana monitoring metrics and alerts, including `no owner alert`, `mounter row`, `table sink total row`, and `buffer sink total row` [#4054](https://github.com/pingcap/tiflow/issues/4054) [#1606](https://github.com/pingcap/tiflow/issues/1606)
         (dup) - Reduce the time for the KV client to recover when a TiKV store is down [#3191](https://github.com/pingcap/tiflow/issues/3191)
 
-    - Lightning
+    - TiDB Lightning
 
         - Refine the output message of the precheck to make it more user-friendly when the local disk space check fails [#30395](https://github.com/pingcap/tidb/issues/30395)
 
@@ -117,7 +117,7 @@ TiDB version: 5.3.1
 
     - Backup & Restore (BR)
 
-        - Fix the potential issue that Regions might be unevenly distributed after a restore operation is finished. [#31034](https://github.com/pingcap/tidb/issues/31034)
+        - Fix the potential issue that Regions might be unevenly distributed after a restore operation is finished [#31034](https://github.com/pingcap/tidb/issues/31034)
 
     - TiCDC
 
@@ -161,8 +161,8 @@ TiDB version: 5.3.1
 
     - TiDB Lightning
 
-        - Fix the bug that Lightning may not delete the metadata schema when some of the import contains no source files. [#28144](https://github.com/pingcap/tidb/issues/28144)
-        - Fix the bug that Lightning returns an error if the storage URL prefix is "gs://xxx" instead of "gcs://xxx" [#30254](https://github.com/pingcap/tidb/pull/30254)
-        - Fix the issue that setting --log-file="-" will not print any log to stdout [#29876](https://github.com/pingcap/tidb/issues/29876)
+        - Fix the bug that TiDB Lightning may not delete the metadata schema when some imports contain no source files [#28144](https://github.com/pingcap/tidb/issues/28144)
+        - Fix the bug that TiDB Lightning returns an error if the storage URL prefix is "gs://xxx", instead of "gcs://xxx" [#30254](https://github.com/pingcap/tidb/pull/30254)
+        - Fix the issue that setting --log-file="-" does not print any log to stdout [#29876](https://github.com/pingcap/tidb/issues/29876)
 
         (dup) - Fix the issue that TiDB Lightning does not report errors when the S3 storage path does not exist #28031 [#30709](https://github.com/pingcap/tiflow/issues/30709)
