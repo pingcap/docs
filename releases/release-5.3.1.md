@@ -158,4 +158,4 @@ TiDB version: 5.3.1
         - Fix the bug that TiDB Lightning may not delete the metadata schema when some import tasks do not contain source files [#28144](https://github.com/pingcap/tidb/issues/28144)
         - Fix the bug that TiDB Lightning returns an error if the storage URL prefix is "gs://xxx", instead of "gcs://xxx" [#30254](https://github.com/pingcap/tidb/pull/30254)
         - Fix the issue that setting --log-file="-" does not print any log to stdout [#29876](https://github.com/pingcap/tidb/issues/29876)
-        - Fix the issue that TiDB Lightning does not report errors when the S3 storage path does not exist #28031 [#30709](https://github.com/pingcap/tiflow/issues/30709)
+        - Fix the issue that TiDB Lightning does not report errors when the S3 storage path does not exist [#28031](https://github.com/pingcap/tidb/issues/28031) [#30709](https://github.com/pingcap/tiflow/issues/30709)
