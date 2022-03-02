@@ -83,11 +83,9 @@ func skipSv(sv *variable.SysVar) bool {
 		variable.TiDBEnableIndexMergeJoin,
 		variable.TiDBEnableLocalTxn,          // feature flag
 		variable.TiDBEnableOrderedResultMode, // no current plans to document
-		variable.TiDBEnablePaging,            // will be documented soon
 		variable.TiDBEnablePipelinedWindowFunction,
 		variable.TiDBEnablePointGetCache,
 		variable.TiDBEnableStreaming,
-		variable.TiDBEnableTopSQL, // will be documented soon
 		variable.TiDBGuaranteeLinearizability,
 		variable.TiDBHashExchangeWithNewCollation,
 		variable.TiDBLastQueryInfo,
@@ -115,19 +113,25 @@ func skipSv(sv *variable.SysVar) bool {
 		variable.TiDBOptScanFactor,
 		variable.TiDBOptSeekFactor,
 		variable.TiDBOptTiFlashConcurrencyFactor,
-		variable.TiDBReadStaleness,
-		variable.TiDBRegardNULLAsPoint,
 		variable.TiDBRestrictedReadOnly,
 		variable.TiDBShardAllocateStep,
 		variable.TiDBStreamAggConcurrency,
-		variable.TiDBTopSQLMaxCollect,            // will be documented soon
-		variable.TiDBTopSQLMaxStatementCount,     // will be documented soon
-		variable.TiDBTopSQLPrecisionSeconds,      // will be documented soon
-		variable.TiDBTopSQLReportIntervalSeconds, // will be documented soon
 		variable.TiDBTrackAggregateMemoryUsage,
 		variable.TiDBTxnReadTS,
 		variable.TiDBTxnScope,
-		variable.TxnIsolationOneShot:
+		variable.TxnIsolationOneShot,
+
+		variable.TiDBSuperReadOnly,
+		variable.TiDBTableCacheLease,
+		variable.TiDBTopSQLMaxMetaCount,
+		variable.TiDBTopSQLMaxTimeSeriesCount,
+		variable.TiDBTxnAssertionLevel,
+		variable.TiDBPlacementMode,
+		variable.TiDBReadConsistency,
+		variable.TiDBEnableMutationChecker,
+		variable.TiDBLastDDLInfo,
+		variable.TiDBMemQuotaBindCache,
+		variable.SysdateIsNow: // doc soon
 
 		return true
 	}
@@ -152,6 +156,19 @@ func printWarning(sv *variable.SysVar) string {
 		return "> **Warning:**\n>\n> Currently, `Fast Analyze` is an experimental feature. It is not recommended that you use it in production environments.\n\n"
 	case variable.TiDBEnableAlterPlacement:
 		return "> **Warning:**\n>\n> Currently, Placement Rules in SQL is an experimental feature. It is not recommended that you use it in production environments.\n\n"
+	case variable.TiDBEnableColumnTracking:
+		return "> **Warning:**\n>\n> Currently, collecting statistics on `PREDICATE COLUMNS` is an experimental feature. It is not recommended that you use it in production environments.\n\n"
+	case variable.TiDBEnableTopSQL:
+		return "> **Warning:**\n>\n> Currently, Top SQL is an experimental feature. It is not recommended that you use it for production environments.\n\n"
+	case variable.TiDBStatsLoadSyncWait, variable.TiDBStatsLoadPseudoTimeout:
+		return "> **Warning:**\n>\n> Currently, synchronously loading statistics is an experimental feature. It is not recommended that you use it in production environments.\n\n"
+	case variable.TiDBEnableIndexMerge:
+		return "> **Note:**\n>\n" +
+			"> - After upgrading a TiDB cluster from versions earlier than v4.0.0 to v5.4.0 or later, this variable is disabled by default to prevent performance regression due to changes of execution plans.\n" +
+			">\n" +
+			"> - After upgrading a TiDB cluster from v4.0.0 or later to v5.4.0 or later, this variable remains the setting before the upgrade.\n" +
+			">\n" +
+			"> - Since v5.4.0, for a newly deployed TiDB cluster, this variable is enabled by default.\n\n"
 
 	}
 	return ""
@@ -161,7 +178,8 @@ func printUnits(sv *variable.SysVar) string {
 	switch sv.Name {
 	case variable.TiDBMemQuotaApplyCache, variable.TiDBMemQuotaQuery, variable.TiDBQueryLogMaxLen, variable.TiDBBCJThresholdSize, variable.MaxAllowedPacket, variable.TiDBTmpTableMaxSize:
 		return "- Unit: Bytes\n"
-	case variable.TiDBSlowLogThreshold, variable.MaxExecutionTime, variable.TiDBDDLSlowOprThreshold:
+	case variable.TiDBSlowLogThreshold, variable.MaxExecutionTime, variable.TiDBDDLSlowOprThreshold,
+		variable.TiDBStatsLoadSyncWait:
 		return "- Unit: Milliseconds\n"
 	case variable.InteractiveTimeout, variable.WaitTimeout, variable.TiDBStmtSummaryRefreshInterval, variable.TiDBWaitSplitRegionTimeout, variable.InnodbLockWaitTimeout,
 		variable.TiDBMetricSchemaRangeDuration, variable.TiDBMetricSchemaStep, variable.TiDBEvolvePlanTaskMaxTime,
@@ -247,6 +265,10 @@ func formatSpecialVersionComment(sv *variable.SysVar) string {
 	case variable.TiDBEnablePseudoForOutdatedStats, variable.TiDBEnableTSOFollowerProxy, variable.TiDBLogFileMaxDays,
 		variable.TiDBTmpTableMaxSize, variable.TiDBTSOClientBatchMaxWaitTime, variable.PlacementChecks:
 		return ` <span class="version-mark">New in v5.3.0</span>`
+	case variable.TiDBEnableColumnTracking, variable.TiDBPersistAnalyzeOptions, variable.TiDBEnablePaging, variable.TiDBReadStaleness,
+		variable.TiDBRegardNULLAsPoint, variable.TiDBStatsLoadPseudoTimeout, variable.TiDBStatsLoadSyncWait,
+		variable.TiDBEnableTopSQL:
+		return ` <span class="version-mark">New in v5.4.0</span>`
 	default:
 		return ""
 	}
@@ -981,6 +1003,25 @@ func getExtendedDescription(sv *variable.SysVar) string {
 	case variable.RandSeed1, variable.RandSeed2:
 		return "- This variable is used to seed the random value generator used in the `RAND()` SQL function.\n" +
 			"- The behavior of this variable is MySQL compatible."
+	case variable.TiDBEnableColumnTracking:
+		return "- This variable controls whether to enable TiDB to collect `PREDICATE COLUMNS`. After enabling the collection, if you disable it, the information of previously collected `PREDICATE COLUMNS` is cleared. For details, see [Collect statistics on some columns](/statistics.md#collect-statistics-on-some-columns)."
+	case variable.TiDBEnableTopSQL:
+		return "- This variable is used to control whether to enable the [Top SQL](/dashboard/top-sql.md) feature."
+	case variable.TiDBPersistAnalyzeOptions:
+		return "- This variable controls whether to enable the [ANALYZE configuration persistence](/statistics.md#persist-analyze-configurations) feature."
+	case variable.TiDBReadStaleness:
+		return "- This variable is used to set the time range of historical data that TiDB can read in the current session. After setting the value, TiDB selects a timestamp as new as possible from the range allowed by this variable, and all subsequent read operations are performed against this timestamp. For example, if the value of this variable is set to `-5`, on the condition that TiKV has the corresponding historical version's data, TiDB selects a timestamp as new as possible within a 5-second time range."
+	case variable.TiDBRegardNULLAsPoint:
+		return "- This variable controls whether the optimizer can use a query condition including null equivalence as a prefix condition for index access.\n" +
+			"- This variable is enabled by default. When it is enabled, the optimizer can reduce the volume of index data to be accessed, which accelerates query execution. For example, if a query involves multiple-column indexes `index(a, b)` and the query condition contains `a<=>null and b=1`, the optimizer can use both `a<=>null` and `b=1` in the query condition for index access. If the variable is disabled, because `a<=>null and b=1` includes the null equivalence condition, the optimizer does not use `b=1` for index access."
+	case variable.TiDBStatsLoadPseudoTimeout:
+		return "- This variable controls how TiDB behaves when the waiting time of SQL optimization reaches the timeout to synchronously load complete column statistics. The default value `OFF` means that SQL execution fails after the timeout. If you set this variable to `ON`, the SQL optimization gets back to using pseudo statistics after the timeout."
+	case variable.TiDBStatsLoadSyncWait:
+		return "- This variable controls whether to enable the synchronously loading statistics feature. The default value `0` means that the feature is disabled. To enable the feature, you can set this variable to a timeout (in milliseconds) that SQL optimization can wait for at most to synchronously load complete column statistics. For details, see [Load statistics](/statistics.md#load-statistics)."
+	case variable.TiDBEnablePaging:
+		return "- This variable controls whether to use the method of paging to send coprocessor requests in `IndexLookUp` operator.\n" +
+			"- User scenarios: For read queries that use `IndexLookup` and `Limit` and that `Limit` cannot be pushed down to `IndexScan`, there might be high latency for the read queries and high CPU usage for TiKV's `unified read pool`. In such cases, because the `Limit` operator only requires a small set of data, if you set `tidb_enable_paging` to `ON`, TiDB processes less data, which reduces query latency and resource consumption.\n" +
+			"- When `tidb_enable_paging` is enabled, for the `IndexLookUp` requests with `Limit` that cannot be pushed down and are fewer than `960`, TiDB uses the method of paging to send coprocessor requests. The fewer `Limit`, the more obvious the optimization."
 	default:
 		return "- No documentation is currently available for this variable."
 	}
