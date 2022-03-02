@@ -1082,7 +1082,17 @@ Configuration items related to `import`
 - Default value: 1000
 - Minimum value: 1
 
-### `wait-up-delay-duration`
+### `wake-up-delay-duration`
 
+<<<<<<< HEAD
 - When pessimistic transactions release the lock, among all the transactions waiting for lock, only the transaction with the smallest `start ts` is woken up. Other transactions will be woken up after `wait-up-delay-duration` milliseconds.
 - Default value: 20
+=======
+- When pessimistic transactions release the lock, among all the transactions waiting for lock, only the transaction with the smallest `start_ts` is woken up. Other transactions will be woken up after `wake-up-delay-duration`.
+- Default value: `"20ms"`
+
+### `pipelined`
+
+- This configuration item enables the pipelined process of adding the pessimistic lock. With this feature enabled, after detecting that data can be locked, TiKV immediately notifies TiDB to execute the subsequent requests and write the pessimistic lock asynchronously, which reduces most of the latency and significantly improves the performance of pessimistic transactions. But there is a still low probability that the asynchronous write of the pessimistic lock fails, which might cause the failure of pessimistic transaction commits.
+- Default value: `true`
+>>>>>>> 23b3d9bd0 (Fix name of config item wake-up-delay-duration in TiKV config file #8185 (#7727))
