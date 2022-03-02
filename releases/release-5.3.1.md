@@ -125,7 +125,7 @@ TiDB version: 5.3.1
         - Fix a bug that the DM-worker fails to boot up after a restart [#3344](https://github.com/pingcap/tiflow/issues/3344)
         - Fix a bug that a DM task fails if running a PARTITION DDL takes too long time [#3854](https://github.com/pingcap/tiflow/issues/3854)
         - Fix a bug that DM may report `invalid sequence` when upstream is MySQL 8.0 [#3847](https://github.com/pingcap/tiflow/issues/3847)
-        - Fix a bug that redo logs are not cleaned up when removing a paused changefeed [#3919](https://github.com/pingcap/tiflow/pull/3919)
+        - Fix a bug that redo logs are not cleaned up when removing a paused changefeed [#4740](https://github.com/pingcap/tiflow/issues/4740)
         - Fix a bug of data loss when DM does finer grained retry [#3487](https://github.com/pingcap/tiflow/issues/3487)
         - Fix OOM in container environments [#1798](https://github.com/pingcap/tiflow/issues/1798)
         - Fix a bug that stopping a loading task results in unexpected transfer of the task [#3771](https://github.com/pingcap/tiflow/issues/3771)
@@ -156,6 +156,6 @@ TiDB version: 5.3.1
     - TiDB Lightning
 
         - Fix the bug that TiDB Lightning may not delete the metadata schema when some import tasks do not contain source files [#28144](https://github.com/pingcap/tidb/issues/28144)
-        - Fix the bug that TiDB Lightning returns an error if the storage URL prefix is "gs://xxx", instead of "gcs://xxx" [#30254](https://github.com/pingcap/tidb/pull/30254)
+        - Fix the bug that TiDB Lightning returns an error if the storage URL prefix is "gs://xxx", instead of "gcs://xxx" [#32742](https://github.com/pingcap/tidb/issues/32742)
         - Fix the issue that setting --log-file="-" does not print any log to stdout [#29876](https://github.com/pingcap/tidb/issues/29876)
         - Fix the issue that TiDB Lightning does not report errors when the S3 storage path does not exist [#30709](https://github.com/pingcap/tiflow/issues/30709)
