@@ -125,7 +125,7 @@ Step 2. Add the ng_port configuration item on the control machine by using TiUP.
     tiup cluster edit-config ${cluster-name}
     ```
 
-2. Add the parameter `ng_port:${port}` below `monitoring_servers`:
+2. Under `monitoring_servers`, add the `ng_port:${port}` parameter:
 
     ```
     monitoring_servers:
