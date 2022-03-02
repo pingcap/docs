@@ -1082,7 +1082,7 @@ Configuration items related to `import`
 - Default value: 1000
 - Minimum value: 1
 
-### `wait-up-delay-duration`
+### `wake-up-delay-duration`
 
-- When pessimistic transactions release the lock, among all the transactions waiting for lock, only the transaction with the smallest `start ts` is woken up. Other transactions will be woken up after `wait-up-delay-duration` milliseconds.
+- When pessimistic transactions release the lock, among all the transactions waiting for lock, only the transaction with the smallest `start ts` is woken up. Other transactions will be woken up after `wake-up-delay-duration` milliseconds.
 - Default value: 20
