@@ -129,7 +129,7 @@ TiDB version: 5.3.1
         - Fix a bug of data loss when DM does finer grained retry [#3487](https://github.com/pingcap/tiflow/issues/3487)
         - Fix OOM in container environments [#1798](https://github.com/pingcap/tiflow/issues/1798)
         - Fix a bug that stopping a loading task results in unexpected transfer of the task [#3771](https://github.com/pingcap/tiflow/issues/3771)
-        - Fix wrong progress returned for query-staus on loader [#3252](https://github.com/pingcap/tiflow/issues/3252)
+        - Fix the issue that wrong progress is returned for the `query-status` command on loader [#3252](https://github.com/pingcap/tiflow/issues/3252)
         - Fix the issue that HTTP API fails to work if there are TiCDC nodes of different versions in a cluster [#3483](https://github.com/pingcap/tiflow/issues/3483)
         - Fix the issue that TiCDC exits abnormally when the S3 storage is configured with TiCDC Redo Log [#3523](https://github.com/pingcap/tiflow/issues/3523)
         - Fix the issue that default values cannot be replicated [#3793](https://github.com/pingcap/tiflow/issues/3793)
