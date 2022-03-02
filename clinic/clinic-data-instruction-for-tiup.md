@@ -1,28 +1,28 @@
 ---
 title: TiDB Clinic Diagnostic Data
-summary: Learn what diagnostic data can be collected by the TiDB Clinic Diagnostic Service from the clusters deployed using TiUP.
+summary: Learn what diagnostic data can be collected by TiDB Clinic Diagnostic Service from the TiDB and DM clusters deployed using TiUP.
 ---
 
 # TiDB Clinic Diagnostic Data
 
-This document provides the scope of diagnostic data that can be collected by TiDB Clinic Diagnostic Service (TiDB Clinic) from the clusters deployed using TiUP. Also, the document lists the parameters for data collection corresponding to each data type. When running a command to collect data using the Clinic Diag tool (Diag), you can add the required parameters to the command according to the scope of the data to be collected.
+This document provides the types of diagnostic data that can be collected by TiDB Clinic Diagnostic Service (TiDB Clinic) from the TiDB and DM clusters deployed using TiUP. Also, the document lists the parameters for data collection corresponding to each data type. When running a command to [collect data using the Clinic Diag tool (Diag)](/clinic/clinic-user-guide-for-tiup.md), you can add the required parameters to the command according to the types of the data to be collected.
 
 The diagnostic data collected by TiDB Clinic is **only** used for troubleshooting cluster problems.
 
-The Clinic Server is set up on the PingCAP intranet (in China). If you upload the collected diagnostic data to the Clinic Server for PingCAP technical support staff to troubleshoot cluster problems remotely, the uploaded data is stored in the AWS S3 China (Beijing) Region server set up by PingCAP. PingCAP strictly controls permissions for data access and only allows authorized in-house technical support staff to access the uploaded data.
+Set up on the PingCAP intranet (in China), the Clinic Server is a cloud service deployed in the cloud. If you upload the collected diagnostic data to the Clinic Server for PingCAP technical support staff to troubleshoot cluster problems remotely, the uploaded data is stored in the AWS S3 China (Beijing) Region server set up by PingCAP. PingCAP strictly controls permissions for data access and only allows authorized in-house technical support staff to access the uploaded data.
 
 After a technical support case is closed, PingCAP permanently deletes or anonymizes the corresponding data within 90 days.
 
 ## TiDB clusters
 
-This section lists the scope of diagnostic data that can be collected by Diag from the TiDB clusters deployed using TiUP.
+This section lists the types of diagnostic data that can be collected by Diag from the TiDB clusters deployed using TiUP.
 
 ### Basic information of the cluster
 
 | Data type | Exported file | Parameter for data collection by TiDB Clinic |
 | :------ | :------ |:-------- |
-| Basic information of the cluster, including the cluster ID | `cluster.json` | The data is collected every time by default. |
-| Detailed information of the cluster | `meta.yaml` | The data is collected every time by default. |
+| Basic information of the cluster, including the cluster ID | `cluster.json` | The data is collected per run by default. |
+| Detailed information of the cluster | `meta.yaml` | The data is collected per run by default. |
 
 ### TiDB diagnostic data
 
@@ -82,7 +82,7 @@ This section lists the scope of diagnostic data that can be collected by Diag fr
 
 | Data type | Exported file | Parameter for data collection by TiDB Clinic |
 | :------ | :------ |:-------- |
-| Get TiDB system variables ( Diag does not collect this data type by default; if you need to collect this data type, database credential is required) | `mysql.tidb.csv` | `--include=db_vars` |
+| TiDB system variables (Diag does not collect this data type by default; if you need to collect this data type, database credential is required) | `mysql.tidb.csv` | `--include=db_vars` |
 | | `global_variables.csv` | `--include=db_vars` |
 
 ### System information of the cluster
@@ -90,14 +90,14 @@ This section lists the scope of diagnostic data that can be collected by Diag fr
 | Data type | Exported file | Parameter for data collection by TiDB Clinic |
 | :------ | :------ |:-------- |
 | Kernel log | `dmesg.log` | `--include=system` |
-| Basic system and hardware information | `insight.json` | `--include=system` |
+| Basic information of the system and hardware | `insight.json` | `--include=system` |
 | Contents in the `/etc/security/limits.conf` | `limits.conf` | `--include=system` |
 | List of kernel parameters | `sysctl.conf` | `--include=system` |
-| Socket system information, outputs of the ss command | `ss.txt` | `--include=system` |
+| Socket system information, which is the output of the ss command | `ss.txt` | `--include=system` |
 
 ## DM clusters
 
-This section lists the scope diagnostic data collected by Diag from a DM cluster deployed using TiUP.
+This section lists the types of diagnostic data that can be collected by Diag from the DM clusters deployed using TiUP.
 
 ### Basic information of the cluster
 
@@ -127,14 +127,14 @@ This section lists the scope diagnostic data collected by Diag from a DM cluster
 | Data type | Exported file | Parameter for data collection by TiDB Clinic |
 | :------ | :------ |:-------- |
 | All metrics data | `{metric_name}.json` | `--include=monitor` |
-| Alert list | `alerts.json` | `--include=monitor` |
+| All alerts data | `alerts.json` | `--include=monitor` |
 
 ### System information of the cluster
 
 | Data type | Exported file | Parameter for data collection by TiDB Clinic |
 | :------ | :------ |:-------- |
 | Kernel log | `dmesg.log` | `--include=system` |
-| Basic system and hardware information | `insight.json` | `--include=system` |
+| Basic information of the system and hardware | `insight.json` | `--include=system` |
 | Contents in the `/etc/security/limits.conf` system | `limits.conf` | `--include=system` |
 | List of kernel parameters | `sysctl.conf` | `--include=system` |
-| Socket system information, outputs of the ss command | `ss.txt` | `--include=system` |
+| Socket system information, which is the output of the ss command | `ss.txt` | `--include=system` |
