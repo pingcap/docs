@@ -51,7 +51,7 @@ TiDB version: 5.3.1
 
         - Refine the output message of the precheck to make it more user-friendly when the local disk space check fails [#30395](https://github.com/pingcap/tidb/issues/30395)
 
-## Bug Fixes
+## Bug fixes
 
 - TiDB
 
