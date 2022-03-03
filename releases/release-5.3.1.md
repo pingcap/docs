@@ -58,7 +58,7 @@ TiDB version: 5.3.1
     - Fix the issue that `date_format` in TiDB handles `'\n'` in a MySQL-incompatible way [#32232](https://github.com/pingcap/tidb/issues/32232)
     - Fix the issue that `alter column set default` wrongly updates the table schema [#31074](https://github.com/pingcap/tidb/issues/31074)
     - Fix a bug that `tidb_super_read_only` is not automatically enabled when `tidb_restricted_read_only` is enabled [#31745](https://github.com/pingcap/tidb/issues/31745)
-    - Fix the issue that the `greatest` or `least` function with collation gets wrong result [#31789](https://github.com/pingcap/tidb/issues/31789)
+    - Fix the issue that the `greatest` or `least` function with collation gets a wrong result [#31789](https://github.com/pingcap/tidb/issues/31789)
     - Fix the MPP task list empty error when executing a query [#31636](https://github.com/pingcap/tidb/issues/31636)
     - Fix wrong results of index join caused by an innerWorker panic [#31494](https://github.com/pingcap/tidb/issues/31494)
     - Fix wrong query results after changing the column type from `FLOAT` to `DOUBLE` [#31372](https://github.com/pingcap/tidb/issues/31372)
