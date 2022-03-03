@@ -214,7 +214,7 @@ After the upload is complete, you need to send the data access link of `Download
 
 If the network where your cluster is located cannot access the internet, you need to pack the data on your intranet and upload the data package to the Clinic Server using a device with internet access. The detailed operations are as follows:
 
-1. Pack collected in [Step 2. Collect data](#step-2-collect-data) and compress and encrypt the data package by running the following command:
+1. Pack the collected data obtained in [Step 2. Collect data](#step-2-collect-data) by running the following command:
 
     {{< copyable "shell-regular" >}}
 
@@ -222,7 +222,7 @@ If the network where your cluster is located cannot access the internet, you nee
     tiup diag package ${filepath}
     ```
 
-    While packaging, Diag encrypts and compresses the data at the same time. In the test environment, 800 MB of data was compressed to 57 MB. The following is an example output:
+    During packaging, Diag encrypts and compresses the data at the same time. In the test environment, 800 MB of data was compressed to 57 MB. The following is an example output:
 
     ```bash
     Starting component `diag`: /root/.tiup/components/diag/v0.5.1/diag package diag-fNTnz5MGhr6
@@ -256,7 +256,7 @@ If the network where your cluster is located cannot access the internet, you nee
     Download URL: "https://clinic.pingcap.com:4433/diag/files?uuid=XXXX"
     ```
 
-    After the upload is complete, you need to send the data access link of `Download URL` to the PingCAP technical support staff you contacted before.
+3. After the upload is complete, send the data access link of `Download URL` to the PingCAP technical support staff you contacted before.
 
     > **Note:**
     >

@@ -78,7 +78,7 @@ This section lists the types of diagnostic data that can be collected by Diag fr
 | All metrics data | `{metric_name}.json` | `--include=monitor` |
 | All alerts data | `alerts.json` | `--include=monitor` |
 
-### TiDB system variable
+### TiDB system variables
 
 | Data type | Exported file | Parameter for data collection by TiDB Clinic |
 | :------ | :------ |:-------- |
@@ -93,7 +93,7 @@ This section lists the types of diagnostic data that can be collected by Diag fr
 | Basic information of the system and hardware | `insight.json` | `--include=system` |
 | Contents in the `/etc/security/limits.conf` | `limits.conf` | `--include=system` |
 | List of kernel parameters | `sysctl.conf` | `--include=system` |
-| Socket system information, which is the output of the ss command | `ss.txt` | `--include=system` |
+| Socket system information, which is the output of the `ss` command | `ss.txt` | `--include=system` |
 
 ## DM clusters
 
@@ -137,4 +137,4 @@ This section lists the types of diagnostic data that can be collected by Diag fr
 | Basic information of the system and hardware | `insight.json` | `--include=system` |
 | Contents in the `/etc/security/limits.conf` system | `limits.conf` | `--include=system` |
 | List of kernel parameters | `sysctl.conf` | `--include=system` |
-| Socket system information, which is the output of the ss command | `ss.txt` | `--include=system` |
+| Socket system information, which is the output of the `ss` command | `ss.txt` | `--include=system` |
