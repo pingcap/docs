@@ -13,7 +13,7 @@ TiDB Clinic is currently in the Beta testing stage for invited users only. This 
 
     > **Note:**
     >
-    > - Diag temporarily **does not support** collecting data from the clusters with the TLS encryption enabled and the clusters deployed using TiDB Ansible.
+    > - Diag temporarily **does not support** collecting data from the clusters deployed using TiDB Ansible.
     > - For the TiDB Clinic Beta version, if you want to upload data to the Clinic Server for remote troubleshooting using Diag, you need to contact [PingCAP technical support](https://en.pingcap.com/contact-us/) to get a trial account first.
 
 - Clinic Server: a cloud service deployed in the cloud. By providing diagnostic services in the SaaS model, the Clinic Server can not only receive uploaded diagnostic data but also work as an online diagnostic environment to store data, view data, and provide cluster diagnostic reports.

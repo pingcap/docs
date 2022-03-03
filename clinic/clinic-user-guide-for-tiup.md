@@ -11,7 +11,7 @@ TiDB Clinic is currently in the Beta testing stage.
 
 > **Note:**
 >
-> TiDB Clinic temporarily **does not support** collecting data from the clusters with the TLS encryption enabled and the clusters deployed using TiDB Ansible.
+> TiDB Clinic temporarily **does not support** collecting data from the clusters deployed using TiDB Ansible.
 
 ## User scenarios
 
