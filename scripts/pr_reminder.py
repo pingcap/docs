@@ -131,7 +131,6 @@ if __name__ == "__main__":
         'bugfix_close_url_zh': bugfix_close_url_zh,
         'bugfix_open_url_en': bugfix_open_url_en,
         'bugfix_close_url_en': bugfix_close_url_en,
-        'enhance_close_url_en': enhance_close_url_en,
         'enhance_open_url_zh': enhance_open_url_zh,
         'enhance_close_url_zh': enhance_close_url_zh,
         'enhance_open_url_en': enhance_open_url_en,
