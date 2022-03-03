@@ -325,6 +325,18 @@ if __name__ == "__main__":
                         [
                             {
                                 "tag": "text",
+                                "text": "type/bug-fix 标签"
+                            }
+                        ],
+                        [
+                            {
+                                "tag": "text",
+                                "text": ""
+                            }
+                        ],
+                        [
+                            {
+                                "tag": "text",
                                 "text": "P3：已知文档 bug 影响用户体验，让我们一起扫除小虫子吧~"
                             }
                         ],
