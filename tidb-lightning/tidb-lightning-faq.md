@@ -14,7 +14,7 @@ The version of TiDB Lightning should be the same as the cluster. If you use the 
 
 Yes.
 
-## What are the permission requirements for the target database?
+## What are the privilege requirements for the target database?
 
 For details about the permissions, see [Prerequisites for using TiDB Lightning](/tidb-lightning/tidb-lightning-requirements.md).
 
