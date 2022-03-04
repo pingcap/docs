@@ -7,16 +7,16 @@ summary: Learn prerequisites for running TiDB Lightning.
 
 Before using TiDB Lightning, you need to check whether the environment meets the requirements. This helps reduce errors during import and ensures import success.
 
-## Downstream permission requirements
+## Downstream privilege requirements
 
-Based on the import mode and features enabled, downstream database users should be granted with different permissions. The following table provides a reference.
+Based on the import mode and features enabled, downstream database users should be granted with different privileges. The following table provides a reference.
 
 <table border=1>
    <tr>
       <td></td>
       <td>Feature</td>
       <td>Scope</td>
-      <td>Required permission</td>
+      <td>Required privilege</td>
       <td>Remarks</td>
    </tr>
    <tr>

@@ -228,8 +228,8 @@
     - [Overview](/tidb-lightning/tidb-lightning-overview.md)
     - Prechecks and requirements
       - [Prechecks](/tidb-lightning/tidb-lightning-prechecks.md)
-      - [Permissions](/tidb-lightning/tidb-lightning-requirements.md)
-      - [Storage space](/tidb-lightning/tidb-lightning-requirements.md#storage-space)
+      - [Downstream privilege requirements](/tidb-lightning/tidb-lightning-requirements.md)
+      - [Downstream storage space requirements](/tidb-lightning/tidb-lightning-requirements.md#Downstream storage space requirements)
     - Key Features
       - [Checkpoints](/tidb-lightning/tidb-lightning-checkpoints.md)
       - [Table Filter](/table-filter.md)
