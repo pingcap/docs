@@ -651,11 +651,11 @@ In the output of the above command, if the value of `sort-engine` is "unified", 
 
 ## Eventually consistent replication in disaster scenarios
 
-Starting from v5.3.1, TiCDC provides the eventually consistent replication capability in disaster scenarios. When a disaster occurs in the primary TiDB cluster and the service cannot be resumed in a short period of time, TiCDC needs to provide the ability to ensure the consistency of data in the secondary cluster. Meanwhile, TiCDC needs to allow the business to quickly switch the traffic to the secondary cluster to avoid the database being unavailable for a long time and affecting the business.
+Starting from v5.3.0, TiCDC provides the eventually consistent replication capability in disaster scenarios. When a disaster occurs in the primary TiDB cluster and the service cannot be resumed in a short period of time, TiCDC needs to provide the ability to ensure the consistency of data in the secondary cluster. Meanwhile, TiCDC needs to allow the business to quickly switch the traffic to the secondary cluster to avoid the database being unavailable for a long time and affecting the business.
 
 This feature supports TiCDC to replicate incremental data from a TiDB cluster to the secondary relational database TiDB/Aurora/MySQL/MariaDB. In case the primary cluster crashes, TiCDC can recover the secondary cluster to a certain snapshot in the primary cluster within 5 minutes, given the condition that before disaster the replication status of TiCDC is normal and replication lag is small. It allows data loss of less than 30 minutes, that is, RTO <= 5min, and RPO <= 30min.
 
-### Prerequisites 
+### Prerequisites
 
 - Prepare a highly available Amazon S3 storage or NFS system for storing TiCDC's real-time incremental data backup files. These files can be accessed in case of an primary cluster disaster.
 - Enable this feature for changefeeds that need to have eventual consistency in disaster scenarios. To enable it, you can add the following configuration to the changefeed configuration file.
@@ -663,8 +663,8 @@ This feature supports TiCDC to replicate incremental data from a TiDB cluster to
 ```toml
 [consistent]
 # Consistency level. Options include:
-# - none: the default value. In a non-disaster scenario, eventual consistency is only guaranteed if and only if finished-ts is specified. 
-# - eventual: Uses redo log to guarantee eventual consistency in case of the primary cluster disasters. 
+# - none: the default value. In a non-disaster scenario, eventual consistency is only guaranteed if and only if finished-ts is specified.
+# - eventual: Uses redo log to guarantee eventual consistency in case of the primary cluster disasters.
 level = "eventual"
 
 # Individual redo log file size, in MiB. By default, it's 64. It is recommended to be no more than 128.
