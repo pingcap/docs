@@ -100,12 +100,6 @@ if __name__ == "__main__":
         'en_jin19_en_assignee_open': get_pr_no(docs_url + open_url + en_jin19_assignee + v60),
         'en_jin19_en_assignee_close': get_pr_no(docs_url + close_url + en_jin19_assignee + v60),
         'en_jin19_en_author_open': get_pr_no(docs_url + open_url + en_jin19_author + v60),
-        'hfxsd_zh_assignee_open': get_pr_no(docs_cn_url + open_url + hfxsd_assignee + v60),
-        'hfxsd_zh_assignee_close': get_pr_no(docs_cn_url + close_url + hfxsd_assignee + v60),
-        'hfxsd_zh_author_open': get_pr_no(docs_cn_url + open_url + hfxsd_author + v60),
-        'hfxsd_en_assignee_open': get_pr_no(docs_url + open_url + hfxsd_assignee + v60),
-        'hfxsd_en_assignee_close': get_pr_no(docs_url + close_url + hfxsd_assignee + v60),
-        'hfxsd_en_author_open': get_pr_no(docs_url + open_url + hfxsd_author + v60),
         'ran_huang_zh_assignee_open': get_pr_no(docs_cn_url + open_url + ran_huang_assignee + v60),
         'ran_huang_zh_assignee_close': get_pr_no(docs_cn_url + close_url + ran_huang_assignee + v60),
         'ran_huang_zh_author_open': get_pr_no(docs_cn_url + open_url + ran_huang_author + v60),
@@ -136,12 +130,6 @@ if __name__ == "__main__":
         'en_jin19_en_assignee_open_url': docs_url + open_url + en_jin19_assignee + v60,
         'en_jin19_en_assignee_close_url': docs_url + close_url + en_jin19_assignee + v60,
         'en_jin19_en_author_open_url': docs_url + open_url + en_jin19_author + v60,
-        'hfxsd_zh_assignee_open_url': docs_cn_url + open_url + hfxsd_assignee + v60,
-        'hfxsd_zh_assignee_close_url': docs_cn_url + close_url + hfxsd_assignee + v60,
-        'hfxsd_zh_author_open_url': docs_cn_url + open_url + hfxsd_author + v60,
-        'hfxsd_en_assignee_open_url': docs_url + open_url + hfxsd_assignee + v60,
-        'hfxsd_en_assignee_close_url': docs_url + close_url + hfxsd_assignee + v60,
-        'hfxsd_en_author_open_url': docs_url + open_url + hfxsd_author + v60,
         'ran_huang_zh_assignee_open_url': docs_cn_url + open_url + ran_huang_assignee + v60,
         'ran_huang_zh_assignee_close_url': docs_cn_url + close_url + ran_huang_assignee + v60,
         'ran_huang_zh_author_open_url': docs_cn_url + open_url + ran_huang_author + v60,
@@ -345,82 +333,6 @@ if __name__ == "__main__":
                                 "tag": "a",
                                 "text": "未合并",
                                 "href": "${shichun_0415_en_author_open_url}"
-                            }
-                        ],
-                        [
-                            {
-                                "tag": "text",
-                                "text": ""
-                            }
-                        ],
-                        [
-                            {
-                                "tag": "text",
-                                "text": "- hfxsd"
-                            }
-                        ],
-                        [
-                            {
-                                "tag": "text",
-                                "text": ""
-                            }
-                        ],
-                        [
-                            {
-                                "tag": "text",
-                                "text": "    - docs-cn：有 ${hfxsd_zh_assignee_open} 个未合源语 PR"
-                            },
-                            {
-                                "tag": "a",
-                                "text": "待处理",
-                                "href": "${hfxsd_zh_assignee_open_url}"
-                            },
-                            {
-                                "tag": "text",
-                                "text": "，有 ${hfxsd_zh_assignee_close} 个已合源语 PR"
-                            },
-                            {
-                                "tag": "a",
-                                "text": "待翻译",
-                                "href": "${hfxsd_zh_assignee_close_url}"
-                            },
-                            {
-                                "tag": "text",
-                                "text": "，已翻译了 ${hfxsd_zh_author_open} 个 PR"
-                            },
-                            {
-                                "tag": "a",
-                                "text": "未合并",
-                                "href": "${hfxsd_zh_author_open_url}"
-                            }
-                        ],
-                        [
-                            {
-                                "tag": "text",
-                                "text": "    - docs：有 ${hfxsd_en_assignee_open} 个未合源语 PR"
-                            },
-                            {
-                                "tag": "a",
-                                "text": "待处理",
-                                "href": "${hfxsd_en_assignee_open_url}"
-                            },
-                            {
-                                "tag": "text",
-                                "text": "，有 ${hfxsd_en_assignee_close} 个已合源语 PR"
-                            },
-                            {
-                                "tag": "a",
-                                "text": "待翻译",
-                                "href": "${hfxsd_en_assignee_close_url}"
-                            },
-                            {
-                                "tag": "text",
-                                "text": "，已翻译了 ${hfxsd_en_author_open} 个 PR"
-                            },
-                            {
-                                "tag": "a",
-                                "text": "未合并",
-                                "href": "${hfxsd_en_author_open_url}"
                             }
                         ],
                         [
