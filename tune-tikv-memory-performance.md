@@ -104,12 +104,12 @@ job = "tikv"
 # raftdb-path = "/tmp/tikv/store/raft"
 
 # When the data size change in a Region is larger than the threshold value, TiKV checks whether this Region needs split.
-# To reduce the costs of scanning data in the checking process, set the value to 32 MB during importing data and set it to the default value in normal operation.
+# To reduce the costs of scanning data in the checking process, set the value to 32 MB during importing data. In normal operation, set it to the default value.
 region-split-check-diff = "32MB"
 
 [coprocessor]
 ## If the size of a Region with the interval [a,e) is larger than the value of `region_max_size`, TiKV trys to split the Region to several intervals, such as [a,b), [b,c), [c,d), [d, e).
-## After that, the size of split Regions with the intervals [a,b), [b,c) and [c,d) are equal to the value of `region_split_size` (or slightly larger than the value of `region_split_size`).
+## After that, the size of the split Regions with intervals [a,b), [b,c) and [c,d) are equal to the value of `region_split_size` (or slightly larger than the value of `region_split_size`).
 # region-max-size = "144MB"
 # region-split-size = "96MB"
 
