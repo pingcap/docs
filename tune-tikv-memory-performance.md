@@ -104,7 +104,7 @@ job = "tikv"
 # raftdb-path = "/tmp/tikv/store/raft"
 
 # When the data size change in a Region is larger than the threshold value, TiKV checks whether this Region needs split.
-# To reduce the costs of scanning data in the checking process, set the value to 32 MB during importing data. In normal operation, set it to the default value.
+# To reduce the costs of scanning data in the checking process, set the value to 32 MB during the data import process. In the normal operation status, set it to the default value.
 region-split-check-diff = "32MB"
 
 [coprocessor]
