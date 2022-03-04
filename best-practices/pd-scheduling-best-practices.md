@@ -265,7 +265,7 @@ Similar to slow scheduling, the speed of region merge is most likely limited by 
 
     - TiKV: Set `split-region-on-table` to `false`. You cannot modify the parameter dynamically.
     - PD: You can use PD Control to selectively set the following parameters according to the cluster situation.
-        - If no TiDB instance exists in the cluster, and the value of [`key-type`](/pd-control.md#config-show--set-option-value--placement-rules) is set to `raw` or `txn`, PD is allowed to merge Regions across tables regardless of the `enable-cross-table-merge setting`. You can modify the parameter dynamically.
+        - Suppose that the cluster has no TiDB instance, and the value of [`key-type`](/pd-control.md#config-show--set-option-value--placement-rules) is set to `raw` or `txn`. In this case, PD can merge Regions across tables, regardless of what value of `enable-cross-table-merge setting` is set to. You can modify the `key-type` parameter dynamically.
 
         {{< copyable "shell-regular" >}}
 
@@ -273,7 +273,7 @@ Similar to slow scheduling, the speed of region merge is most likely limited by 
         config set key-type txn
         ```
 
-        - If any TiDB instance exists in the cluster, and the value of `key-type` is set to "table", PD is allowed to merge Regions across tables when you set `enable-cross-table-merge` to `true`. You can modify the parameter dynamically.
+        - Suppose that the cluster has a TiDB instance, and the value of `key-type` is set to "table". In this case, PD can merge Regions across tables only if the value of `enable-cross-table-merge` is set to `true`. You can modify the `key-type` parameter dynamically.
 
         {{< copyable "shell-regular" >}}
 
