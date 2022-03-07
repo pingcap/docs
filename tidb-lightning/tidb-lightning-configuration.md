@@ -214,7 +214,7 @@ trim-last-separator = false
 # table = '$2'
 # type = '$3'
 # 
-# Sets rules for merging sharded schemas and tables. Specifically, import tables 1 and 2 from `my_db1` and tables3 and 4 from `my_db2` to table5 of `my_db`.
+# Sets rules for merging sharded schemas and tables. Specifically, import `table1` and `table2` from `my_db1`, and `table3` and `table4` from `my_db2` to `table5` in `my_db`.
 # [[routes]]
 # schema-pattern = "my_db1"
 # table-pattern = "table[1-2]"
