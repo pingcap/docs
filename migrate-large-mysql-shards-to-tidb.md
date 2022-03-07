@@ -21,8 +21,8 @@ In this document, you can migrate data following this procedure:
 
 1. Use Dumpling to export full data. In this example, you export 2 tables respectively from 2 upstream databases:
 
-   - Export `table1` and `table2` from `my_db1`
-   - Export `table3` and `table4` from `my_db2`
+    - Export `table1` and `table2` from `my_db1`
+    - Export `table3` and `table4` from `my_db2`
 
 2. Start TiDB Lightning to migrate data to `mydb.table5` in TiDB.
 
@@ -34,9 +34,9 @@ Before getting started, see the following documents to prepare for the migration
 
 - [Deploy a DM Cluster Using TiUP](/dm/deploy-a-dm-cluster-using-tiup.md)
 - [Use TiUP to Deploy Dumpling and Lightning](/migration-tools.md)
-- [Downstream Permissions for Dumpling](/dumpling-overview.md#export-data-from-tidbmysql)
-- [Downstream Permissions for TiDB Lightning](/tidb-lightning/tidb-lightning-requirements.md#permissions)
-- [Downstream storage space for TiDB Lightning](/tidb-lightning/tidb-lightning-requirements.md#storage-space)
+- [Downstream privilege requirements for Dumpling](/dumpling-overview.md#export-data-from-tidbmysql)
+- [Downstream privilege requirements for TiDB Lightning](/tidb-lightning/tidb-lightning-requirements.md#downstream-privilege-requirements)
+- [Downstream storage space for TiDB Lightning](/tidb-lightning/tidb-lightning-requirements.md#downstream-storage-space-requirements)
 - [Privileges required by DM-worker](/dm/dm-worker-intro.md)
 
 ### Check conflicts for Sharded Tables

@@ -52,7 +52,7 @@ Based on the import mode and features enabled, downstream database users should 
    <tr>
       <td>-</td>
       <td>RESTRICTED_VARIABLES_ADMIN,RESTRICTED_TABLES_ADMIN</td>
-      <td>Required when the target TiDB enabled SEM</td>
+      <td>Required when the target TiDB enables SEM</td>
    </tr>
    <tr>
       <td>Recommended</td>
