@@ -81,7 +81,7 @@ Based on the import mode and features enabled, downstream database users should 
 
 The target TiKV cluster must have enough disk space to store the imported data. In addition to the [standard hardware requirements](/hardware-and-software-requirements.md), the storage space of the target TiKV cluster must be larger than **the size of the data source x the number of replicas x 2**. For example, if the cluster uses 3 replicas by default, the target TiKV cluster must have a storage space larger than 6 times the size of the data source. The formula has x 2 because:
 
-- Index might take extra space.
+- Indexes might take extra space.
 - RocksDB has a space amplification effect.
 
 It is difficult to calculate the exact data volume exported by Dumpling from MySQL. However, you can estimate the data volume by using the following SQL statement to summarize the data-length field in the information_schema.tables table:
@@ -106,7 +106,7 @@ select table_name,table_schema,sum(data_length)/1024/1024 as data_length,sum(ind
 
 **Memory and CPU**:
 
-The CPU and memory consumed by TiDB Lightning vary with its backend mode. Run TiDB Lightning in an environment that supports the optimal import performance based on the backend you use.
+The CPU and memory consumed by TiDB Lightning vary with the backend mode. Run TiDB Lightning in an environment that supports the optimal import performance based on the backend you use.
 
 - Local-backend: TiDB lightning consumes much CPU and memory in this mode. It is recommended that you allocate CPU higher than 32 cores and memory greater than 64 GiB.
 
