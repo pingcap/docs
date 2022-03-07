@@ -106,7 +106,7 @@ select table_name,table_schema,sum(data_length)/1024/1024 as data_length,sum(ind
 
 **Memory and CPU**:
 
-TiDB Lightning consumes different CPU and memory in different backends. Run TiDB Lightning in an environment that supports the optimal import performance based on the backend you use.
+The CPU and memory consumed by TiDB Lightning vary with its backend mode. Run TiDB Lightning in an environment that supports the optimal import performance based on the backend you use.
 
 - Local-backend: TiDB lightning consumes much CPU and memory in this mode. It is recommended that you allocate CPU higher than 32 cores and memory greater than 64 GiB.
 
