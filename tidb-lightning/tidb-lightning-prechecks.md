@@ -11,12 +11,9 @@ The following table describes each check item and detailed explanation.
 
 |  Check Items | Supported Version| Description |
 |  ----  | ----  |----  |
-<<<<<<< HEAD
 | Cluster version and status| >= 5.3.0 | Check whether the cluster can be connected in the configuration, and whether the TiKV/PD/TiFlash version supports the Local import mode when the backend mode is Local. |
-=======
 | Cluster version and status | >= 5.3.0 | Check whether the cluster can be connected in the configuration, and whether the TiKV/PD/TiFlash version supports the Local import mode when the backend mode is Local. |
 | Read permission| >= 5.3.0 |  Check whether TiDB Lightning can access data stored on cloud (Amazon S3). This ensures that the import is not interrupted by the lack of the read permission. |
->>>>>>> c3937bfc1 (lightning: add new configuration for incremental restore (#7393) (#7696))
 | Disk space | >= 5.3.0 | Check whether there is enough space on the local disk and on the TiKV cluster for importing data. TiDB Lightning samples the data sources and estimates the percentage of the index size from the sample result. Because indexes are included in the estimation, there may be cases where the size of the source data is less than the available space on the local disk, but still the check fails. When the backend is Local, it also checks whether the local storage is sufficient because external sorting needs to be done locally. |
 | Region distribution status | >= 5.3.0 | Check whether the Regions in the TiKV cluster are distributed evenly and whether there are too many empty Regions. If the number of empty Regions exceeds max(1000, number of tables * 3), i.e. greater than the bigger one of "1000" or "3 times the number of tables ", then the import cannot be executed. |
 | Exceedingly Large CSV files in the data file | >= 5.3.0 | When there are CSV files larger than 10 GiB in the backup file and auto-slicing is not enabled (StrictFormat=false), it will impact the import performance. The purpose of this check is to remind you to ensure the data is in the right format and to enable auto-slicing. |

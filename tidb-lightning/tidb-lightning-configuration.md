@@ -62,7 +62,6 @@ table-concurrency = 6
 # medium, this value might need to be adjusted for optimal performance.
 io-concurrency = 5
 
-<<<<<<< HEAD
 # The maximum number of non-fatal errors to tolerate before stopping TiDB Lightning.
 # Non-fatal errors are localized to a few rows, and ignoring those rows allows the import process to continue.
 # Setting this to N means that TiDB Lightning will stop as soon as possible when the (N+1)-th error is encountered.
@@ -72,8 +71,6 @@ max-error = 0
 # To disable error recording, set this to an empty string.
 # task-info-schema-name = 'lightning_task_info'
 
-=======
->>>>>>> c3937bfc1 (lightning: add new configuration for incremental restore (#7393) (#7696))
 # In parallel import mode, the schema name that stores the meta information for each TiDB Lightning instance in the target cluster. By default, the value is "lightning_metadata".
 # Configure this parameter only if parallel import is enabled.
 # **Note:**
@@ -122,10 +119,7 @@ driver = "file"
 # backend = "local"
 # Whether to allow importing data to tables with data. The default value is `false`.
 # When you use parallel import mode, you must set it to `true`, because multiple TiDB Lightning instances are importing the same table at the same time.
-<<<<<<< HEAD
-=======
 # NOTE: this config field is introduced since v5.3.1. Ignore it when using TiDB Lightning v5.3.0.
->>>>>>> c3937bfc1 (lightning: add new configuration for incremental restore (#7393) (#7696))
 # incremental-import = false
 
 # The listening address of tikv-importer when backend is "importer". Change it to the actual address.
