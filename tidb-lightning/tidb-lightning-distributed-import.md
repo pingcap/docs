@@ -99,6 +99,10 @@ data-source-dir = "/path/to/source-dir"
 [tikv-importer]
 # Whether to allow importing data to tables with data. The default value is `false`.
 # When you use parallel import mode, you must set it to `true`, because multiple TiDB Lightning instances are importing the same table at the same time.
+<<<<<<< HEAD
+=======
+# NOTE: this config field is introduced since v5.3.1. Ignore it when using TiDB Lightning v5.3.0.
+>>>>>>> c3937bfc1 (lightning: add new configuration for incremental restore (#7393) (#7696))
 incremental-import = true
 # "local": The default mode. It applies to large dataset import, for example, greater than 1 TiB. However, during the import, downstream TiDB is not available to provide services.
 # "tidb": You can use this mode for small dataset import, for example, smaller than 1 TiB. During the import, downstream TiDB is available to provide services.
