@@ -248,7 +248,7 @@ The causes may vary. You can address the problem by performing the following ste
 
 1. Adjust the value of the scheduling parameters.
 
-    - Increase [`store limit`](/configure-store-limit.md#Usage) to accelerate replication.
+    - Increase [`store limit`](/configure-store-limit.md#usage) to accelerate replication.
     - Decrease [`config set patrol-region-interval 10ms`](/pd-control.md#command) to make checker scan on Regions more frequent in TiKV.
     - Increase [`region merge`](/pd-control.md#command) to reduce the number of Regions, which means fewer scans and higher check frequencies.
 
