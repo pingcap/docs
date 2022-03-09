@@ -448,7 +448,7 @@ Configuration items related to Raftstore.
 
 ### `capacity`
 
-+ The storage capacity, which is the maximum size allowed to store data. If the value of `capacity` is not set, TiKV uses the current disk capacity. If you want to deploy multiple TiKV instances on the same physical disk, you need to add this parameter to the TiKV configuration. For details, see [Key parameters of hybrid deployment](/hybrid-deployment-topology.md#key-parameters).
++ The storage capacity, which is the maximum size allowed to store data. If the value of `capacity` is not set, TiKV uses the current disk capacity. To deploy multiple TiKV instances on the same physical disk, add this parameter to the TiKV configuration. For details, see [Key parameters of hybrid deployment](/hybrid-deployment-topology.md#key-parameters).
 + Default value: `0`
 
 ### `raftdb-path`
