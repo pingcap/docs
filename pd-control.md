@@ -601,7 +601,7 @@ Usage:
 
 ### `region keys [--format=raw|encode|hex] <start_key> <end_key> <limit>`
 
-Use this command to query all Regions in a given range [startkey, endkey). It supports range without endKey, the default value of limit is 16 without endKey and -1 (no limit)  with endKey. 
+Use this command to query all Regions in a given range `[startkey, endkey)`. Ranges without `endKey`s are supported. With an `endKey`, the default value of `limit` is `16`. Without an `endKey`, the default value of `limit` is `-1`, which means no limit. 
 
 Usage:
 
