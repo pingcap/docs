@@ -73,7 +73,7 @@ From the query results above, you can see that TiDB uses the index join operatio
 
 1. The index scanning operator `└─IndexFullScan_31` at the TiKV side reads the values of the `t2.t1_id` column.
 2. Some tasks of the `└─StreamAgg_39` operator deduplicate the values of `t1_id` in TiKV.
-3. Some tasks of the `├─StreamAgg_49(Build)` operator deduplicate the values of `t1_id` in TiDB and the deduplication is performed by the aggregate function `firstrow(test.t2.t1_id)`.
+3. Some tasks of the `├─StreamAgg_49(Build)` operator deduplicate the values of `t1_id` in TiDB. The deduplication is performed by the aggregate function `firstrow(test.t2.t1_id)`.
 4. The operation results are joined with the primary key of the `t1` table. The join condition is `eq(test.t1.id, test.t2.t1_id)`.
 
 ## Inner join (unique subquery)
