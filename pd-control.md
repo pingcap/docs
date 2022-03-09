@@ -612,7 +612,7 @@ Usage:
   "regions": [......],
 }
 
->> region keys --format=raw a "" 20   // Display all Regions start from a with limit count 20
+>> region keys --format=raw a "" 20   // Display all Regions that start from the key a with a limit count of 20
 {
   "count": 20,
   "regions": [......],
