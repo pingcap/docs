@@ -39,13 +39,13 @@ TiDB splits data into Regions, each representing a range of data with a size lim
 
 ![TiDB Data Overview](/media/best-practices/tidb-data-overview.png)
 
-In theory, by the virtue of its architecture, TiDB can not only linearly scale its read and write capacities but also make full use of the distributed resources as long as there is no write hotspot in the application. From this point of view, TiDB is especially suitable for the high-concurrent and write-intensive scenario.
+In theory, if the application has no write hotspot, TiDB, by the virtue of its architecture, can not only linearly scale its read and write capacities but also make full use of the distributed resources. From this point of view, TiDB is especially suitable for the high-concurrent and write-intensive scenario.
 
 However, the actual situation often differs from the theoretical assumption.
 
 > **Note:**
 >
-> No write hotspot in the application means no `AUTO_INCREMENT` primary key or no monotonically increasing index in the write scenario.
+> No write hotspot in the application means the write scenario does not have `AUTO_INCREMENT` primary key or monotonically increasing index.
 
 ## Hotspot case
 
