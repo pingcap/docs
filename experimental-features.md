@@ -33,10 +33,18 @@ This document introduces the experimental features of TiDB in different versions
 + List COLUMNS Partition (Introduced in v5.0)
 + [Dynamic Pruning Mode for Partitioned Tables](/partitioned-table.md#dynamic-pruning-mode). (Introduced in v5.1)
 + The expression index feature. The expression index is also called the function-based index. When you create an index, the index fields do not have to be a specific column but can be an expression calculated from one or more columns. This feature is useful for quickly accessing the calculation-based tables. See [Expression index](/sql-statements/sql-statement-create-index.md) for details. (Introduced in v4.0)
+<<<<<<< HEAD
 + [Generated Columns](/generated-columns.md) (Introduced in v2.1)
 + [User-Defined Variables](/user-defined-variables.md) (Introduced in v2.1)
 + [JSON data type](/data-type-json.md) and [JSON functions](/functions-and-operators/json-functions.md) (Introduced in v2.1)
 + [View](/information-schema/information-schema-views.md) (Introduced in v2.1)
+=======
++ [Generated Columns](/generated-columns.md).
++ [User-Defined Variables](/user-defined-variables.md).
++ [JSON data type](/data-type-json.md) and [JSON functions](/functions-and-operators/json-functions.md).
++ [View](/information-schema/information-schema-views.md).
++ [Prepare Plan cache](/sql-prepare-plan-cache.md). (Introduced in v4.0)
+>>>>>>> 4e3232ba8 (SQL prepare execution plan cache: add the experimental feature warning (#7553))
 
 ## Configuration management
 
