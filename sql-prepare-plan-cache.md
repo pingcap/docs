@@ -7,6 +7,10 @@ summary: Learn about SQL Prepare Execution Plan Cache in TiDB.
 
 TiDB supports execution plan caching for `Prepare` / `Execute` queries.
 
+> **Warning:**
+>
+> This feature is still experimental. It is not recommended to use it in the production environment.
+
 There are two forms of `Prepare` / `Execute` queries:
 
 - In the binary communication protocol, use `COM_STMT_PREPARE` and `COM_STMT_EXECUTE` to execute general parameterized SQL queries;
