@@ -636,7 +636,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Range: `[0, 2147483647]`
 - Unit: Rows
 - When this value is greater than `0`, TiDB will batch commit statements such as `INSERT` or `LOAD DATA` into smaller transactions. This reduces memory usage and helps ensure that the `txn-total-size-limit` is not reached by bulk modifications.
-- To use in `INSERT` statements, the system variable `tidb_batch_insert` must also be set to `ON`.
+- To use `tidb_dml_batch_size` in `INSERT` statements, you also need to set the system variable `tidb_batch_insert` to `ON`.
 - Only the value `0` provides ACID compliance. Setting this to any other value will break the atomicity and isolation guarantees of TiDB.
 
 ### tidb_enable_1pc <span class="version-mark">New in v5.0</span>
