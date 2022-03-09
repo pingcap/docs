@@ -9,8 +9,8 @@ TiDB supports all of the [date and time functions](https://dev.mysql.com/doc/ref
 
 > **Note:**
 >
-> MySQL will often accept incorrectly formatted date and time values. For example, `'2020-01-01\n\t01:01:01'` and `'2020-01_01\n\t01:01'` are treated as valid date and time values.
-> TiDB makes a best-effort to match MySQL's behavior, but it might not match in all instances. It is recommended to correctly format dates, as the intended behavior for incorrectly formatted values is not documented, and is often inconsistent.
+> - MySQL will often accept the incorrectly formatted date and time values. For example, `'2020-01-01\n\t01:01:01'` and `'2020-01_01\n\t01:01'` are treated as valid date and time values.
+> - TiDB makes the best effort to match MySQL's behavior, but it might not match in all instances. It is recommended to correctly format dates, because the intended behavior for incorrectly formatted values is not documented, and is often inconsistent.
 
 **Date/Time functions:**
 
