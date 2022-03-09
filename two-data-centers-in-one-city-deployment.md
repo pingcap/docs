@@ -155,7 +155,7 @@ cat rule.json
 ]
 ```
 
-To use the configuration in `rule.json`, override the existing configuration by running the following command:
+To use the configurations in `rule.json`, override the existing configurations by running the following command:
 
 {{< copyable "shell-regular" >}}
 
