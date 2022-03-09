@@ -29,6 +29,7 @@ This document introduces the experimental features of TiDB in different versions
 + [User-Defined Variables](/user-defined-variables.md).
 + [JSON data type](/data-type-json.md) and [JSON functions](/functions-and-operators/json-functions.md).
 + [View](/information-schema/information-schema-views.md).
++ [Prepare Plan cache](/sql-prepare-plan-cache.md). (Introduced in v4.0)
 
 ## Configuration management
 
