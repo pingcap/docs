@@ -618,7 +618,7 @@ Usage:
   "regions": [......],
 }
 
->> region keys --format=raw a z      // Display all Regions in range [a, z) without limit count
+>> region keys --format=raw a z      // Display all Regions in the range [a, z) without a limit count
 {
   "count": 16,
   "regions": [......],
