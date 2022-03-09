@@ -266,7 +266,8 @@ Similar to slow scheduling, the speed of region merge is most likely limited by 
 
     - TiKV: Set `split-region-on-table` to `false`. You cannot modify the parameter dynamically.
     - PD: You can use PD Control to selectively set the following parameters according to the cluster situation.
-        - Suppose that the cluster has no TiDB instance, and the value of [`key-type`](/pd-control.md#config-show--set-option-value--placement-rules) is set to `raw` or `txn`. In this case, PD can merge Regions across tables, regardless of what value of `enable-cross-table-merge setting` is set to. You can modify the `key-type` parameter dynamically.
+
+        - Suppose that your cluster has no TiDB instance, and the value of [`key-type`](/pd-control.md#config-show--set-option-value--placement-rules) is set to `raw` or `txn`. In this case, PD can merge Regions across tables, regardless of the value of `enable-cross-table-merge setting`. You can modify the `key-type` parameter dynamically.
 
         {{< copyable "shell-regular" >}}
 
@@ -274,7 +275,7 @@ Similar to slow scheduling, the speed of region merge is most likely limited by 
         config set key-type txn
         ```
 
-        - Suppose that the cluster has a TiDB instance, and the value of `key-type` is set to "table". In this case, PD can merge Regions across tables only if the value of `enable-cross-table-merge` is set to `true`. You can modify the `key-type` parameter dynamically.
+        - Suppose that your cluster has a TiDB instance, and the value of `key-type` is set to `table`. In this case, PD can merge Regions across tables only if the value of `enable-cross-table-merge` is set to `true`. You can modify the `key-type` parameter dynamically.
 
         {{< copyable "shell-regular" >}}
 
@@ -286,7 +287,7 @@ Similar to slow scheduling, the speed of region merge is most likely limited by 
 
         > **Note:**
         >
-        > After placement rules are enabled, properly switch the value of `key-type` between `txn` and `raw` to avoid the failure of decoding.
+        > After enabling Placement Rules, properly switch the value of `key-type` to avoid the failure of decoding.
 
 For v3.0.4 and v2.1.16 or earlier, the `approximate_keys` of regions are inaccurate in specific circumstances (most of which occur after dropping tables), which makes the number of keys break the constraints of `max-merge-region-keys`. To avoid this problem, you can adjust `max-merge-region-keys` to a larger value.
 
