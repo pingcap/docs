@@ -119,7 +119,6 @@ driver = "file"
 # backend = "local"
 # Whether to allow importing data to tables with data. The default value is `false`.
 # When you use parallel import mode, you must set it to `true`, because multiple TiDB Lightning instances are importing the same table at the same time.
-# NOTE: this config field is introduced since v5.3.1. Ignore it when using TiDB Lightning v5.3.0.
 # incremental-import = false
 
 # The listening address of tikv-importer when backend is "importer". Change it to the actual address.
