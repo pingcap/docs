@@ -127,10 +127,10 @@ In this example, the warning message shows that TiDB does not select MPP mode be
 
 After deploying a TiFlash node and starting replication (by performing the ALTER operation), no data is replicated to it. You can identify and address the problem by following the steps below:
 
-1. Check whetether the replication is successful by running the `ALTER table <tbl_name> set tiflash replica <num>` command and check the output.
+1. Check whether the replication is successful by running the `ALTER table <tbl_name> set tiflash replica <num>` command and check the output.
 
     - If there is output, go to the next step.
-    - If there is no output, run the `SELECT * FROM information_schema.tiflash_replica` command to check whether TiFlash replicas have been created. If not, run the `ALTER table ${tbl_name} set tiflash replica ${num}` command again, check whether other statements have been executed, or check whether DDL operations are successful.
+    - If there is no output, run the `SELECT * FROM information_schema.tiflash_replica` command to check whether TiFlash replicas have been created. If not, run the `ALTER table ${tbl_name} set tiflash replica ${num}` command again, check whether other statements have been executed, or check whether DDL executions are successful.
 
 2. Check whether the TiFlash process runs correctly.
 
@@ -153,44 +153,44 @@ After deploying a TiFlash node and starting replication (by performing the ALTER
 4. Check whether the `max-replicas` configuration is correct:
 
     - If the value of `max-replicas` does not exceed the number of TiKV nodes in the cluster, go to the next step.
-    - If the value of `max-replicas` is greater than the number of TiKV nodes in the cluster, PD does not replicate data to the TiFlash node. To address the issue, change `max-replicas` to an integer fewer than or equal to the number of TiKV nodes in the cluster.
+    - If the value of `max-replicas` is greater than the number of TiKV nodes in the cluster, the PD does not replicate data to the TiFlash node. To address this issue, change `max-replicas` to an integer fewer than or equal to the number of TiKV nodes in the cluster.
 
-> **Note:**
->
-> `max-replicas` is defaulted to 3. In production environments, the value is usually fewer than the number of TiKV ndoes. In test environments, the value can be 1.
+    > **Note:**
+    >
+    > `max-replicas` is defaulted to 3. In production environments, the value is usually fewer than the number of TiKV nodes. In test environments, the value can be 1.
 
-{{< copyable "shell-regular" >}}
+    {{< copyable "shell-regular" >}}
 
- ```shell
-    curl -X POST -d '{
-        "group_id": "pd",
-        "id": "default",
-        "start_key": "",
-        "end_key": "",
-        "role": "voter",
-        "count": 3,
-        "location_labels": [
-        "host"
-        ]
-    }' <http://172.16.x.xxx:2379/pd/api/v1/config/rule>
-```
+    ```shell
+        curl -X POST -d '{
+            "group_id": "pd",
+            "id": "default",
+            "start_key": "",
+            "end_key": "",
+            "role": "voter",
+            "count": 3,
+            "location_labels": [
+            "host"
+            ]
+        }' <http://172.16.x.xxx:2379/pd/api/v1/config/rule>
+    ```
 
 5. Check whether the connection between TiDB or PD and TiFlash is normal.
 
-Check the `flash_cluster_manager.log` file for the `ERROR` keyword.
+    Check the `flash_cluster_manager.log` file for the `ERROR` keyword.
 
-- If no `ERROR` is found, the connection is normal. Go to the next step.
-- If `ERROR` is found, the connection is abnormal. Perform the following check.
+    - If no `ERROR` is found, the connection is normal. Go to the next step.
+    - If `ERROR` is found, the connection is abnormal. Perform the following check.
 
-    - Check whether the log records PD-related keywords.
+      - Check whether the log records PD keywords.
 
-        If PD keywords are found, check whether `raft.pd_addr` in the TiFlash configuration file is valid. Specifically, run the `curl '{pd-addr}/pd/api/v1/config/rules'` command and check whether there is any output in 5s.
+          If PD keywords are found, check whether `raft.pd_addr` in the TiFlash configuration file is valid. Specifically, run the `curl '{pd-addr}/pd/api/v1/config/rules'` command and check whether there is any output in 5s.
 
-    - Check whether the log records TiDB-related keywords.
+      - Check whether the log records TiDB-related keywords.
 
-        If TiDB keywords are found, check whether `flash.tidb_status_addr` in the TiFlash configuration file is valid. Specifically, run the `curl '{tidb-status-addr}/tiflash/replica'` command and check whether there is any output in 5s.
+          If TiDB keywords are found, check whether `flash.tidb_status_addr` in the TiFlash configuration file is valid. Specifically, run the `curl '{tidb-status-addr}/tiflash/replica'` command and check whether there is any output in 5s.
 
-    - Check whether the nodes can ping through each other.
+      - Check whether the nodes can ping through each other.
 
     > **Note:**
     >
@@ -212,7 +212,7 @@ Check the `flash_cluster_manager.log` file for the `ERROR` keyword.
 
 > **Note:**
 >
-> When there is a multitude of regions in the table to be replicated and the `region merge` parameter is enabled or set to a large value, the replication may stay unchanged or change a little in a period of time.
+> When there is a multitude of Regions in the table to be replicated, and the `region merge` parameter is enabled or set to a large value, the replication may stay unchanged or change a little in a period of time.
 
 ## Data replication gets stuck
 
@@ -237,7 +237,7 @@ If data replication on TiFlash starts normally but then all or some data fails t
 
 3. Check CPU usage.
 
-    On Grafana, choose **TiFlash-Proxy-Details** > **Thread CPU** > **Region task worker pre-handle/generate snapshot CPU**. Check the CPU usage of `<instance-ip>:<instance-port>-region-worker`. 
+    On Grafana, choose **TiFlash-Proxy-Details** > **Thread CPU** > **Region task worker pre-handle/generate snapshot CPU**. Check the CPU usage of `<instance-ip>:<instance-port>-region-worker`.
 
     If the curve is a straight line, the TiFlash node is stuck. Terminate the TiFlash process and restart it, or contact PingCAP technical support for help.
 
@@ -261,7 +261,4 @@ The causes may vary. You can address the problem by performing the following ste
     - `Write Stall Duration`: `TiFlash-summary` > `Storage Write Stall` > `Write Stall Duration`
     - `generate snapshot CPU`: `TiFlash-Proxy-Details` > `Thread CPU` > `Region task worker pre-handle/generate snapshot CPU`
 
-    Based on service priorities, adjust the load accordingly to achieve optimal performance. 
-
-
-
+    Based on service priorities, adjust the load accordingly to achieve optimal performance.
