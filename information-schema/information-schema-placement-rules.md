@@ -5,7 +5,7 @@ summary: Learn the `PLACEMENT_RULES` information_schema table.
 
 # PLACEMENT_RULES
 
-The `PLACEMENT_RULES` table provides information on all explicitly configured [Placement Rules in SQL](/placement-rules-in-sql.md), i.e. all placement policies.
+The `PLACEMENT_RULES` table provides information on all explicitly configured [Placement Rules in SQL](/placement-rules-in-sql.md), which means all placement policies.
 
 {{< copyable "sql" >}}
 
