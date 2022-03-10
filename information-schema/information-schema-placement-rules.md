@@ -39,7 +39,7 @@ DESC placement_rules;
 
 ## Examples
 
-The `PLACEMENT_RULES` table only shows explicitly configured policies. To see the canonical version of placement rules (including placement policies attached to tables), use the statement `SHOW PLACEMENT` instead:
+The `PLACEMENT_RULES` table only shows explicitly configured rules. To see the canonical version of placement rules (including placement policies attached to tables), use the statement `SHOW PLACEMENT` instead:
 
 {{< copyable "sql" >}}
 
