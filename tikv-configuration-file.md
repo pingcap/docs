@@ -857,7 +857,7 @@ Configuration items related to RocksDB
     + `"tolerate-corrupted-tail-records"`: tolerates and discards the records that have incomplete trailing data on all logs
     + `"absolute-consistency"`: abandons recovery when corrupted logs are found
     + `"point-in-time"`: recovers logs sequentially until the first corrupted log is encountered
-    + `"skip-any-corrupted-records"`: recovers after a disaster. The data is recovered as much as possible, and the corrupted records are skipped.
+    + `"skip-any-corrupted-records"`: post-disaster recovery. The data is recovered as much as possible, and corrupted records are skipped.
 + Default value: `"point-in-time"`
 
 ### `wal-dir`
