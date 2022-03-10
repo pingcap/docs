@@ -1067,8 +1067,8 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 ### `compaction-style`
 
 + Compaction method
-+ Optional values: `"level"`, `"universal"`
-+ Default value: `"level"`
++ Optional values (only numbers can be accepted): `0` (`Level`), `1` (`Universal`), `2` (`Fifo`)
++ Default value: `0`
 
 ### `disable-auto-compactions`
 
