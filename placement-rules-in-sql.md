@@ -95,7 +95,7 @@ Rules that are attached to objects are applied _asynchronously_. To view the cur
 | `SCHEDULE`                 | The strategy used to schedule the placement of followers. The value options are `EVEN` (default) or `MAJORITY_IN_PRIMARY`. |
 | `FOLLOWERS`                | The number of followers. For example, `FOLLOWERS=2` means that there will be 3 replicas of the data (2 followers and 1 leader). |
 
-In addition to the placement options above, you can also use the advance configurations. For details, see [Advance placement option](#advanced-placement-option).
+In addition to the placement options above, you can also use the advance configurations. For details, see [Advance placement options](#advanced-placement-options).
 
 | Option Name                | Description                                                                                    |
 | --------------| ------------ |
