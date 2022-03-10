@@ -11,7 +11,6 @@ The following table describes each check item and detailed explanation.
 
 |  Check Items | Supported Version| Description |
 |  ----  | ----  |----  |
-| Cluster version and status| >= 5.3.0 | Check whether the cluster can be connected in the configuration, and whether the TiKV/PD/TiFlash version supports the Local import mode when the backend mode is Local. |
 | Cluster version and status | >= 5.3.0 | Check whether the cluster can be connected in the configuration, and whether the TiKV/PD/TiFlash version supports the Local import mode when the backend mode is Local. |
 | Read permission| >= 5.3.0 |  Check whether TiDB Lightning can access data stored on cloud (Amazon S3). This ensures that the import is not interrupted by the lack of the read permission. |
 | Disk space | >= 5.3.0 | Check whether there is enough space on the local disk and on the TiKV cluster for importing data. TiDB Lightning samples the data sources and estimates the percentage of the index size from the sample result. Because indexes are included in the estimation, there may be cases where the size of the source data is less than the available space on the local disk, but still the check fails. When the backend is Local, it also checks whether the local storage is sufficient because external sorting needs to be done locally. |
