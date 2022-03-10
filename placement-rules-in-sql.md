@@ -150,7 +150,7 @@ CREATE TABLE t1 (
 
 ### Set the default placement for a schema
 
-You can directly attach the default placement options to a database schema. This works similar to setting the default character set or collation for a schema. Your specified placement options apply when no other options are specified. For example:
+You can directly attach the default placement rules to a database schema. This works similar to setting the default character set or collation for a schema. Your specified placement options apply when no other options are specified. For example:
 
 ```sql
 CREATE PLACEMENT POLICY p1 PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-east-2";  -- Create placement policies
