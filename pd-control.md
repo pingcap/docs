@@ -601,7 +601,7 @@ Usage:
 
 ### `region keys [--format=raw|encode|hex] <start_key> <end_key> <limit>`
 
-Use this command to query all Regions in a given range `[startkey, endkey)`. Ranges without `endKey`s are supported. With an `endKey`, the default value of `limit` is `16`. Without an `endKey`, the default value of `limit` is `-1`, which means no limit. 
+Use this command to query all Regions in a given range `[startkey, endkey)`. Ranges without `endKey`s are supported. The default value of `limit` is `16`, set to `-1` for unlimited. 
 
 Usage:
 
@@ -612,19 +612,19 @@ Usage:
   "regions": [......],
 }
 
->> region keys --format=raw a "" 20   // Display all Regions that start from the key a with a limit count of 20
-{
-  "count": 20,
-  "regions": [......],
-}
-
->> region keys --format=raw a z      // Display all Regions in the range [a, z) without a limit count
+>> region keys --format=raw a z      // Display all Regions in the range [a, z) with a default limit count of 16
 {
   "count": 16,
   "regions": [......],
 }
 
->> region keys --format=raw a z 20   // Display all Regions in the range [a, z) with a limit count of 20
+>> region keys --format=raw a z -1   // Display all Regions in the range [a, z) without a limit count
+{
+  "count": ...,
+  "regions": [......],
+}
+
+>> region keys --format=raw a "" 20   // Display all Regions that start from the key a with a limit count of 20
 {
   "count": 20,
   "regions": [......],
