@@ -176,7 +176,7 @@ ALTER PLACEMENT POLICY p3 FOLLOWERS=3; -- Tables with policy p3, i.e. t4, will h
 
 You can use [`ALTER PLACEMENT POLICY`](/sql-statements/sql-statement-alter-placement-policy.md) to change a policy, and the changes will propagate to all objects with the corresponding policy.
 
-### Advanced placement option
+### Advanced placement options
 
 The placement options `PRIMARY_REGION`, `REGIONS`, and `SCHEDULE` meet the basic needs of data placement at the loss of some flexibility. For more complex scenarios with the need for higher flexibility, you can also use the advanced placement options of `CONSTRAINTS` and `FOLLOWER_CONSTRAINTS`. You cannot specify the `PRIMARY_REGION`, `REGIONS`, or `SCHEDULE` option with the `CONSTRAINTS` option at the same time. If you specify both at the same time, an error will be returned.
 
