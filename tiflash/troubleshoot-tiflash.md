@@ -100,7 +100,7 @@ Take the following steps to handle the data file corruption:
 
 ## TiFlash analysis is slow
 
-If a statement contains operators or functions not supported in MPP mode, TiDB does not select MPP mode. This is because the analysis of the statement is slow. In this case, you can execute the `EXPLAIN` statement to check for operators or functions not supported in MPP mode.
+If a statement contains operators or functions not supported in the MPP mode, TiDB does not select the MPP mode. Therefore, the analysis of the statement is slow. In this case, you can execute the `EXPLAIN` statement to check for operators or functions not supported in the MPP mode.
 
 {{< copyable "sql" >}}
 
@@ -113,7 +113,7 @@ explain select count(*) from t where subtime(a, '12:00:00') > '2022-01-01' group
 show warnings;
 ```
 
-In this example, the warning message shows that TiDB does not select MPP mode because TiDB 5.4 and earlier versions do not support the `subtime` function.
+In this example, the warning message shows that TiDB does not select the MPP mode because TiDB 5.4 and earlier versions do not support the `subtime` function.
 
 ```
 +---------+------+-----------------------------------------------------------------------------+
@@ -125,12 +125,12 @@ In this example, the warning message shows that TiDB does not select MPP mode be
 
 ## Data is not replicated to TiFlash
 
-After deploying a TiFlash node and starting replication (by performing the ALTER operation), no data is replicated to it. You can identify and address the problem by following the steps below:
+After deploying a TiFlash node and starting replication (by performing the ALTER operation), no data is replicated to it. In this case, you can identify and address the problem by following the steps below:
 
 1. Check whether the replication is successful by running the `ALTER table <tbl_name> set tiflash replica <num>` command and check the output.
 
     - If there is output, go to the next step.
-    - If there is no output, run the `SELECT * FROM information_schema.tiflash_replica` command to check whether TiFlash replicas have been created. If not, run the `ALTER table ${tbl_name} set tiflash replica ${num}` command again, check whether other statements have been executed, or check whether DDL executions are successful.
+    - If there is no output, run the `SELECT * FROM information_schema.tiflash_replica` command to check whether TiFlash replicas have been created. If not, run the `ALTER table ${tbl_name} set tiflash replica ${num}` command again, check whether other statements (for example, `add index`) have been executed, or check whether DDL executions are successful.
 
 2. Check whether the TiFlash process runs correctly.
 
@@ -177,7 +177,7 @@ After deploying a TiFlash node and starting replication (by performing the ALTER
 
 5. Check whether the connection between TiDB or PD and TiFlash is normal.
 
-    Check the `flash_cluster_manager.log` file for the `ERROR` keyword.
+    Search the `flash_cluster_manager.log` file for the `ERROR` keyword.
 
     - If no `ERROR` is found, the connection is normal. Go to the next step.
     - If `ERROR` is found, the connection is abnormal. Perform the following check.
@@ -198,21 +198,21 @@ After deploying a TiFlash node and starting replication (by performing the ALTER
 
 6. Check whether `placement-rule` is created for tables.
 
-    Check the `flash_cluster_manager.log` file for the `Set placement rule … table-<table_id>-r` keyword.
+    Search the `flash_cluster_manager.log` file for the `Set placement rule … table-<table_id>-r` keyword.
 
-    - If yes, go to the next step.
-    - If no, collect logs of the corresponding component for troubleshooting.
+    - If the keyword is found, go to the next step.
+    - If not, collect logs of the corresponding component for troubleshooting.
 
 7. Check whether the PD schedules properly.
 
-    Check the `pd.log` file for the `table-<table_id>-r` keyword and scheduling behaviors like `add operator`.
+    Search the `pd.log` file for the `table-<table_id>-r` keyword and scheduling behaviors like `add operator`.
 
-    - If yes, the PD schedules properly.
-    - If no, the PD does not schedule properly. Contact PingCAP technical support for help.
+    - If the keyword is found, the PD schedules properly.
+    - If not, the PD does not schedule properly. Contact PingCAP technical support for help.
 
 > **Note:**
 >
-> When there is a multitude of Regions in the table to be replicated, and the `region merge` parameter is enabled or set to a large value, the replication may stay unchanged or change a little in a period of time.
+> When there are many small Regions in the table to be replicated, and the `region merge` parameter is enabled or set to a large value, the replication progress might stay unchanged or be reduced in a period of time.
 
 ## Data replication gets stuck
 
@@ -227,7 +227,7 @@ If data replication on TiFlash starts normally but then all or some data fails t
 
 2. Check the network connectivity between TiKV, TiFlash, and PD.
 
-    In `flash_cluster_manager.log`, check for updates on `flash_region_count` corresponding to the table that gets stuck.
+    In `flash_cluster_manager.log`, check whether there are any new updates to `flash_region_count` corresponding to the table that gets stuck.
 
     - If no, go to the next step.
     - If yes, check for `down peer` (replication gets stuck if there is a peer that is down).
@@ -261,4 +261,4 @@ The causes may vary. You can address the problem by performing the following ste
     - `Write Stall Duration`: `TiFlash-summary` > `Storage Write Stall` > `Write Stall Duration`
     - `generate snapshot CPU`: `TiFlash-Proxy-Details` > `Thread CPU` > `Region task worker pre-handle/generate snapshot CPU`
 
-    Based on service priorities, adjust the load accordingly to achieve optimal performance.
+    Based on your service priorities, adjust the load accordingly to achieve optimal performance.
