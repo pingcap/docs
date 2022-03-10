@@ -134,7 +134,7 @@ After deploying a TiFlash node and starting replication (by performing the ALTER
 
 2. Check whether the TiFlash process runs correctly.
 
-   Check whether there is any change in `progress`, the `flash_region_count` parameter in the `tiflash_cluster_manager.log` file, and `Uptime`:
+   Check whether there is any change in `progress`, the `flash_region_count` parameter in the `tiflash_cluster_manager.log` file, and the Grafana monitoring item `Uptime`:
 
    - If yes, the TiFlash process runs correctly.
    - If no, the TiFlash process is abnormal. Check the `tiflash` log for further information.
