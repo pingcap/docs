@@ -174,7 +174,7 @@ CREATE TABLE t4 (a INT);  -- Creates a table t4 with the default policy p3.
 ALTER PLACEMENT POLICY p3 FOLLOWERS=3; -- Tables with policy p3, i.e. t4, will have FOLLOWERS=3。
 ```
 
-One could use [ALTER PLACEMENT POLICY](/sql-statements/sql-statement-alter-placement-policy.md) to change a policy, and changes will be propagated to all objects with the corresponding policy.
+You can use [`ALTER PLACEMENT POLICY`](/sql-statements/sql-statement-alter-placement-policy.md) to change a policy, and the changes will propagate to all objects with the corresponding policy.
 
 ### Advanced placement option
 
