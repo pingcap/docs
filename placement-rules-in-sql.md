@@ -165,7 +165,7 @@ ALTER DATABASE test POLICY=p2;  -- Changes the default placement option, and doe
 
 CREATE TABLE t2 (a INT);  -- Creates a table t2 with the default placement policy p2.
 
-CREATE TABLE t3 (a INT) POLICY=p1;  -- Creates a table t3 without the default policy p2, because this statement has specified another placement policy.
+CREATE TABLE t3 (a INT) POLICY=p1;  -- Creates a table t3 without the default policy p2, because this statement has specified another placement rule.
 
 ALTER DATABASE test POLICY=p3;  -- Changes the default policy, and does not apply to existing tables.
 
