@@ -714,7 +714,9 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Default value: `OFF`
 - This variable is used to set whether to enable the `LIST (COLUMNS) TABLE PARTITION` feature.
 
-### tidb_enable_noop_functions <span class="version-mark">New in v4.0</span>
+### tidb_enable_noop_functions
+
+<span class="version-mark">New in v4.0</span>
 
 - Scope: SESSION | GLOBAL
 - Default value: `OFF`
