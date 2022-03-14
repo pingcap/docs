@@ -11,10 +11,6 @@ This document introduces how to use the type error feature (`lightning.max-error
 
 ## Type error
 
-> **Warning:**
->
-> The TiDB Lightning type error (`lightning.max-error`) is an experimental feature. It is **NOT** recommended to only rely on it to resolve errors in the production environment.
-
 You can use the `lightning.max-error` configuration to increase the tolerance of errors related to data types. If this configuration is set to *N*, TiDB Lightning allows and skips up to *N* errors from the data source before it exists. The default value `0` means that no error is allowed.
 
 These errors are recorded in a database. After the import is completed, you can view the errors in the database and process them manually. For more information, see [Error Report](#error-report).
