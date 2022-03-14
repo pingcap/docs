@@ -193,7 +193,7 @@ delta_index_cache_size = 0
     ## New in v5.4.0. This item enables or disables the elastic thread pool feature, which significantly improves CPU utilization in high concurrency scenarios of TiFlash. The default value is false. The elastic thread pool feature is experimental and not recommended for production environments.
     enable_elastic_threadpool = false
 
-    ## New in v5.4.0. This item specifies the maximum valid rate for triggering a hardlink by a page file (log type). 
+    ## New in v5.4.0. This item specifies the maximum valid rate for triggering a hardlink by a PageFile (log type). 
     ## Disabled by default. If the GC time is too long, it is recommended that you change the value to 0.8 to enable the hardlink function.
     dt_storage_pool_log_gc_force_hardlink_rate = 2.0
 
