@@ -446,6 +446,11 @@ Configuration items related to Raftstore.
 + Enables or disables `prevote`. Enabling this feature helps reduce jitter on the system after recovery from network partition.
 + Default value: `true`
 
+### `capacity`
+
++ The storage capacity, which is the maximum size allowed to store data. If `capacity` is left unspecified, the capacity of the current disk prevails. To deploy multiple TiKV instances on the same physical disk, add this parameter to the TiKV configuration. For details, see [Key parameters of the hybrid deployment](/hybrid-deployment-topology.md#key-parameters).
++ Default value: `0`
+
 ### `raftdb-path`
 
 + The path to the Raft library, which is `storage.data-dir/raft` by default
@@ -854,14 +859,12 @@ Configuration items related to RocksDB
 ### `wal-recovery-mode`
 
 + WAL recovery mode
-+ Value options: `0`, `1`, `2`, `3`
-+ `0` (`TolerateCorruptedTailRecords`): tolerates and discards the records that have incomplete trailing data on all logs.
-+ `1` (`AbsoluteConsistency`): abandons recovery when corrupted logs are found.
-+ `2` (`PointInTimeRecovery`): recovers log sequentially until the first corrupted log is encountered.
-+ `3` (`SkipAnyCorruptedRecords`): recovery after a disaster. Corrupted records are skipped
-+ Default value: `2`
-+ Minimum value: `0`
-+ Maximum value: `3`
++ Optional values:
+    + `"tolerate-corrupted-tail-records"`: tolerates and discards the records that have incomplete trailing data on all logs
+    + `"absolute-consistency"`: abandons recovery when corrupted logs are found
+    + `"point-in-time"`: recovers logs sequentially until the first corrupted log is encountered
+    + `"skip-any-corrupted-records"`: post-disaster recovery. The data is recovered as much as possible, and corrupted records are skipped.
++ Default value: `"point-in-time"`
 
 ### `wal-dir`
 
@@ -921,10 +924,8 @@ Configuration items related to RocksDB
 ### `rate-limiter-mode`
 
 + RocksDB's compaction rate limiter mode
-+ Optional values: `1` (`ReadOnly`), `2` (`WriteOnly`), `3` (`AllIo`)
-+ Default value: `2`
-+ Minimum value: `1`
-+ Maximum value: `3`
++ Optional values: `"read-only"`, `"write-only"`, `"all-io"`
++ Default value: `"write-only"`
 
 ### `rate-limiter-auto-tuned` <span class="version-mark">New in v5.0</span>
 
@@ -1147,9 +1148,9 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 ### `compaction-pri`
 
 + The priority type of compaction
-+ Optional values: `0` (`ByCompensatedSize`), `1` (`OldestLargestSeqFirst`), `2` (`OldestSmallestSeqFirst`), `3` (`MinOverlappingRatio`)
-+ Default value for `defaultcf` and `writecf`: `3`
-+ Default value for `lockcf`: `0`
++ Optional values: `"by-compensated-size"`, `"oldest-largest-seq-first"`, `"oldest-smallest-seq-first"`, `"min-overlapping-ratio"`
++ Default value for `defaultcf` and `writecf`: `"min-overlapping-ratio"`
++ Default value for `lockcf`: `"by-compensated-size"`
 
 ### `dynamic-level-bytes`
 
@@ -1169,7 +1170,7 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 ### `compaction-style`
 
 + Compaction method
-+ Optional values: `"level"`, `"universal"`
++ Optional values: `"level"`, `"universal"`, `"fifo"`
 + Default value: `"level"`
 
 ### `disable-auto-compactions`
