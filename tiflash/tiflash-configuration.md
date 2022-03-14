@@ -194,7 +194,7 @@ delta_index_cache_size = 0
     enable_elastic_threadpool = false
 
     ## New in v5.4.0. This item specifies the maximum valid rate for triggering a hardlink by a PageFile (log type). 
-    ## Disabled by default. If the GC time is too long, it is recommended that you change the value to 0.8 to enable the hardlink function.
+    ## Defaulted to 2, which disables the hardlink function. If the GC time is too long, it is recommended that you change the value to 0.8 to enable the hardlink function.
     dt_storage_pool_log_gc_force_hardlink_rate = 2.0
 
 ## Security settings take effect starting from v4.0.5.
