@@ -1309,6 +1309,10 @@ Configuration items related to Raft Engine.
 + If you need to downgrade to a version earlier than v5.4.0, please disable Raft Engine and restart TiKV first.
 + Default value: `"true"`
 
+> **Note:**
+>
+> The data format of Raft Engine in v5.4.0 is not compatible with previous versions. Therefore, before downgrading a TiDB cluster to versions earlier than v5.4.0, you need to first disable Raft Engine (by setting the value of `enable` to `disable`) and restart TiKV. Otherwise, you cannot start the downgraded cluster.
+
 ### `dir`
 
 + The directory at which raft log files are stored. If the directory does not exist, it will be created when TiKV is started.
