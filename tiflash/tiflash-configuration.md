@@ -192,11 +192,10 @@ delta_index_cache_size = 0
     batch_cop_pool_size = 0
     ## New in v5.4.0. This item enables or disables the elastic thread pool feature, which significantly improves CPU utilization in high concurrency scenarios of TiFlash. The default value is false. The elastic thread pool feature is experimental and not recommended for production environments.
     enable_elastic_threadpool = false
-    # Compression algorithm of the TiFlash storage engine, supports LZ4, zstd, and LZ4HC, and is not case-sensitive. The LZ4 algorithm is used by default.
+    # Compression algorithm of the TiFlash storage engine. The value can be LZ4, zstd, or LZ4HC, and is case-insensitive. By default, LZ4 is used.
     dt_compression_method = "LZ4"
-    # Compression level of the TiFlash storage engine, the default is 1. If dt_compression_method is LZ4, it is recommended to be 1; if dt_compression_method is zstd, it is recommended to be -1 or 1; if dt_compression_method is LZ4HC, it is recommended to be 9.
+    # Compression level of the TiFlash storage engine. The default is 1. It is recommended that you set this value to 1 if dt_compression_method is LZ4, -1 or 1 if dt_compression_method is zstd, and 9 if dt_compression_method is LZ4HC.
     dt_compression_level = 1
-
 
 ## Security settings take effect starting from v4.0.5.
 [security]
