@@ -1329,7 +1329,7 @@ curl -X 'GET' \
 }
 ```
 
-## 获取同步任务列表
+## Get the replication task list
 
 This API is a synchronous interface. If the request is successful, the information of the corresponding node is returned.
 
