@@ -268,7 +268,7 @@ The client connection can only access the cluster through TiDB. TiDB connects PD
 
 #### What is the relationship between each status (Up, Disconnect, Offline, Down, Tombstone) of a TiKV store?
 
-You can use PD Control to check the status information of a TiKV store. To see the relationship between each status, refer to [Relationship between each status of a TiKV store](/tidb-scheduling.md#information-collection).
+You can use PD Control to check the status information of a TiKV store. For the relationship between each status, refer to [Relationship between each status of a TiKV store](/tidb-scheduling.md#information-collection).
 
 #### What is the difference between the `leader-schedule-limit` and `region-schedule-limit` scheduling parameters in PD?
 
