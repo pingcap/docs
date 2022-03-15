@@ -50,7 +50,7 @@ You can use the APIs to perform the following maintenance operations on the DM c
 * [Create a replication task](#create-a-replication-task)
 * [Get a replication task](#get-a-replication-task)
 * [Delete a replication task](#delete-a-replication-task)
-* [Update a replication task](#pdate-a-replication-task)
+* [Update a replication task](#update-a-replication-task)
 * [Start a replication task](#start-a-replication-task)
 * [Stop a replication task](#stop-a-replication-task)
 * [Get the information of a replication task](#get-the-information-of-a-replication-task)
@@ -897,7 +897,7 @@ curl -X 'POST' \
 }
 ```
 
-## Get the replication task
+## Get a replication task
 
 This API is a synchronous interface. If the request is successful, the information of the corresponding replication task is returned.
 
@@ -1222,7 +1222,7 @@ curl -X 'PUT' \
 }
 ```
 
-## Start a replication tas
+## Start a replication task
 
 This API is an asynchronous interface. If the request is successful, the status code of the returned body is 204. To learn about its latest status, You can [get the information of a replication task](#get-the-information-of-a-replication-task).
 
@@ -1323,6 +1323,118 @@ curl -X 'GET' \
         "synced": true,
         "binlog_type": "string",
         "seconds_behind_master": 0
+      }
+    }
+  ]
+}
+```
+
+## 获取同步任务列表
+
+This API is a synchronous interface. If the request is successful, the information of the corresponding node is returned.
+
+### Request URI
+
+ `GET /api/v1/tasks`
+
+### Example
+
+{{< copyable "shell-regular" >}}
+
+```shell
+curl -X 'GET' \
+  'http://127.0.0.1:8261/api/v1/tasks' \
+  -H 'accept: application/json'
+```
+
+```json
+{
+  "total": 2,
+  "data": [
+    {
+      "name": "task-1",
+      "task_mode": "all",
+      "shard_mode": "pessimistic",
+      "meta_schema": "dm-meta",
+      "enhance_online_schema_change": true,
+      "on_duplicate": "overwrite",
+      "target_config": {
+        "host": "127.0.0.1",
+        "port": 3306,
+        "user": "root",
+        "password": "123456",
+        "security": {
+          "ssl_ca_content": "",
+          "ssl_cert_content": "",
+          "ssl_key_content": "",
+          "cert_allowed_cn": [
+            "string"
+          ]
+        }
+      },
+      "binlog_filter_rule": {
+        "rule-1": {
+          "ignore_event": [
+            "all dml"
+          ],
+          "ignore_sql": [
+            "^Drop"
+          ]
+        },
+        "rule-2": {
+          "ignore_event": [
+            "all dml"
+          ],
+          "ignore_sql": [
+            "^Drop"
+          ]
+        },
+        "rule-3": {
+          "ignore_event": [
+            "all dml"
+          ],
+          "ignore_sql": [
+            "^Drop"
+          ]
+        }
+      },
+      "table_migrate_rule": [
+        {
+          "source": {
+            "source_name": "source-name",
+            "schema": "db-*",
+            "table": "tb-*"
+          },
+          "target": {
+            "schema": "db1",
+            "table": "tb1"
+          },
+          "binlog_filter_rule": [
+            "rule-1",
+            "rule-2",
+            "rule-3",
+          ]
+        }
+      ],
+      "source_config": {
+        "full_migrate_conf": {
+          "export_threads": 4,
+          "import_threads": 16,
+          "data_dir": "./exported_data",
+          "consistency": "auto"
+        },
+        "incr_migrate_conf": {
+          "repl_threads": 16,
+          "repl_batch": 100
+        },
+        "source_conf": [
+          {
+            "source_name": "mysql-replica-01",
+            "binlog_name": "binlog.000001",
+            "binlog_pos": 4,
+            "binlog_gtid": "03fc0263-28c7-11e7-a653-6c0b84d59f30:1-7041423,05474d3c-28c7-11e7-8352-203db246dd3d:1-170"
+          }
+        ]
       }
     }
   ]
