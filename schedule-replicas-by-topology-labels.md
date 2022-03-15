@@ -15,12 +15,6 @@ To make this mechanism effective, you need to properly configure TiKV and PD so 
 
 ## Configure `labels` based on the cluster topology
 
-> **Note:**
->
-> Location labels are defined as strings in PD with no restricted default or pre-configured values. This offers customizable label configuration in label names other than `zone`, `rack`, or `host` which are used as demonstrations in the below sections.
-
-To further customize it, there is **no** restriction in the number of label levels (not mandatory for 3 levels) as long as they match with TiKV server labels.
-
 ### Configure `labels` for TiKV
 
 You can use the command-line flag or set the TiKV configuration file to bind some attributes in the form of key-value pairs. These attributes are called `labels`. After TiKV is started, it reports its `labels` to PD so users can identify the location of TiKV nodes.
@@ -48,6 +42,16 @@ Assume that the topology has three layers: zone > rack > host, and you can use t
 
 According to the description above, the label can be any key-value pair used to describe TiKV attributes. But PD cannot identify the location-related labels and the layer relationship of these labels. Therefore, you need to make the following configuration for PD to understand the TiKV node topology.
 
+Defined as an array of strings, `location-labels` is the configuration for PD. Each item of this configuration corresponds to the key of TiKV `labels`. Besides, the sequence of each key represents the layer relationship of different labels (the layer levels decrease from left to right).
+
+You can customize the value of `location-labels`, such as `zone`, `rack`, or `host`, because the configuration does not have default values. Also, this configuration has **no** restriction in the number of label levels (not mandatory for 3 levels) as long as they match with TiKV server labels.
+
+> **Note:**
+>
+> You must configure `location-labels` for PD and `labels` for TiKV at the same time for the configurations to take effect. Otherwise, PD does not perform scheduling according to the topology.
+
+To configure `location-labels`, choose one of the following methods according to your cluster situation:
+
 + If the PD cluster is not initialized, configure `location-labels` in the PD configuration file:
 
     {{< copyable "" >}}
@@ -64,12 +68,6 @@ According to the description above, the label can be any key-value pair used to 
     ```bash
     pd-ctl config set location-labels zone,rack,host
     ```
-
-The `location-labels` configuration is an array of strings, and each item corresponds to the key of TiKV `labels`. The sequence of each key represents the layer relationship of different labels.
-
-> **Note:**
->
-> You must configure `location-labels` for PD and `labels` for TiKV at the same time for the configurations to take effect. Otherwise, PD does not perform scheduling according to the topology.
 
 ### Configure `isolation-level` for PD
 
