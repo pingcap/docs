@@ -636,7 +636,7 @@ For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](
 ### pessimistic-auto-commit (New in v6.0)
 
 + Determines the transaction mode that the auto-commit transaction uses when the pessimistic transaction mode is globally enabled (`tidb_txn_mode='pessimistic'`). By default, even if the pessimistic transaction mode is globally enabled, the auto-commit transaction still uses the optimistic transaction mode. When `pessimistic-auto-commit` is enabled (set to `true`), the auto-commit transaction also uses pessimistic mode, which is consistent with the other explicitly committed pessimistic transactions.
-+ For scenarios with conflicts, with this switch enabled, TiDB includes the auto-commit transactions into the global lock-waiting management, which avoids dead locks and mitigates the high latency brought by deadlock-causing conflicts.
++ For scenarios with conflicts, after enabling this configuration, TiDB includes the auto-commit transactions into the global lock-waiting management, which avoids dead locks and mitigates the high latency brought by deadlock-causing conflicts.
 + For scenarios with no conflicts, if there are many auto-commit transactions and a single transaction operates a large data volume, enabling this configuration causes performance regression. For example, the auto-commit `INSERT INTO SELECT` statement.
 + Default value: `false`
 
