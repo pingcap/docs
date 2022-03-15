@@ -16,6 +16,8 @@ openapi = true
 > - DM provides the [specification document](https://github.com/pingcap/tiflow/blob/master/dm/openapi/spec/dm.yaml) that meets the OpenAPI 3.0.0 standard. This document contains all the request parameters and returned values. You can copy the document yaml and preview it in [Swagger Editor](https://editor.swagger.io/).
 >
 > - After you deploy the DM-master nodes, you can access `http://{master-addr}/api/v1/docs` to preview the documentation online.
+>
+> There are major changes in OpenAPI v6.0.0.
 
 You can use the APIs to perform the following maintenance operations on the DM cluster:
 
@@ -29,13 +31,16 @@ You can use the APIs to perform the following maintenance operations on the DM c
 ## APIs for managing data sources
 
 * [Create a data source](#create-a-data-source)
-* [Get the data source list](#get-the-data-source-list)
+* [Get a data source](#get-a-data-source)
 * [Delete the data source](#delete-the-data-source)
+* [Update a data source](#update-a-data-source)
+* [Enable a data source](#enable-a-data-source)
+* [Disable a data source](#disable-a-data-source)
 * [Get the information of a data source](#get-the-information-of-a-data-source)
+* [Get the data source list](#get-the-data-source-list)
 * [Start the relay-log feature for data sources](#start-the-relay-log-feature-for-data-sources)
 * [Stop the relay-log feature for data sources](#stop-the-relay-log-feature-for-data-sources)
-* [Pause the relay-log feature for data sources](#pause-the-relay-log-feature-for-data-sources)
-* [Resume the relay-log feature for data sources](#resume-the-relay-log-feature-for-data-sources)
+* [Purge relay-log files that no longer required](#purge-relay-log-files-that-no-longer-required)
 * [Change the bindings between the data source and DM-workers](#change-the-bindings-between-the-data-source-and-dm-workers)
 * [Get the list of schema names of a data source](#get-the-list-of-schema-names-of-a-data-source)
 * [Get the list of table names of a specified schema in a data source](#get-the-list-of-table-names-of-a-specified-schema-in-a-data-source)
@@ -43,11 +48,14 @@ You can use the APIs to perform the following maintenance operations on the DM c
 ## APIs for managing replication tasks
 
 * [Create a replication task](#create-a-replication-task)
-* [Get the replication task list](#get-the-replication-task-list)
+* [get a replication task](#get-a-replication-task)
+* [delete a replication task](#delete-a-replication-task)
+* [update a replication task](#pdate-a-replication-task)
+* [start a replication task](#start-a-replication-task)
 * [Stop a replication task](#stop-a-replication-task)
 * [Get the information of a replication task](#get-the-information-of-a-replication-task)
-* [Pause a replication task](#pause-a-replication-task)
-* [Resume a replication task](#resume-a-replication-task)
+* [Get the replication task list](#get-the-replication-task-list)
+* [Get the replication task migrate rules](#get-the-replication-task-migrate-rules)
 * [Get the list of schema names of the data source that is associated with a replication task](#get-the-list-of-schema-names-of-the-data-source-that-is-associated-with-a-replication-task)
 * [Get the list of table names of a specified schema in the data source that is associated with a replication task](#get-the-list-of-table-names-of-a-specified-schema-in-the-data-source-that-is-associated-with-a-replication-task)
 * [Get the CREATE statement for schemas of the data source that is associated with a replication task](#get-the-create-statement-for-schemas-of-the-data-source-that-is-associated-with-a-replication-task)
@@ -192,6 +200,7 @@ curl -X 'POST' \
   "port": 3306,
   "user": "root",
   "password": "123456",
+  "enable": true,
   "enable_gtid": false,
   "security": {
     "ssl_ca_content": "",
@@ -216,6 +225,7 @@ curl -X 'POST' \
   "port": 3306,
   "user": "root",
   "password": "123456",
+  "enable": true,
   "enable_gtid": false,
   "security": {
     "ssl_ca_content": "",
@@ -246,6 +256,211 @@ curl -X 'POST' \
     }
   ]
 }
+```
+
+## Get a data source
+
+This API is a synchronous interface. If the request is successful, the information of the corresponding data source is returned.
+
+### Request URI
+
+ `GET /api/v1/sources/{source-name}`
+
+### Example
+
+{{< copyable "shell-regular" >}}
+
+```shell
+curl -X 'GET' \
+  'http://127.0.0.1:8261/api/v1/sources/source-1?with_status=true' \
+  -H 'accept: application/json'
+```
+
+```json
+{
+  "source_name": "mysql-01",
+  "host": "127.0.0.1",
+  "port": 3306,
+  "user": "root",
+  "password": "123456",
+  "enable_gtid": false,
+  "enable": false,
+  "flavor": "mysql",
+  "task_name_list": [
+    "task1"
+  ],
+  "security": {
+    "ssl_ca_content": "",
+    "ssl_cert_content": "",
+    "ssl_key_content": "",
+    "cert_allowed_cn": [
+      "string"
+    ]
+  },
+  "purge": {
+    "interval": 3600,
+    "expires": 0,
+    "remain_space": 15
+  },
+  "status_list": [
+    {
+      "source_name": "mysql-replica-01",
+      "worker_name": "worker-1",
+      "relay_status": {
+        "master_binlog": "(mysql-bin.000001, 1979)",
+        "master_binlog_gtid": "e9a1fc22-ec08-11e9-b2ac-0242ac110003:1-7849",
+        "relay_dir": "./sub_dir",
+        "relay_binlog_gtid": "e9a1fc22-ec08-11e9-b2ac-0242ac110003:1-7849",
+        "relay_catch_up_master": true,
+        "stage": "Running"
+      },
+      "error_msg": "string"
+    }
+  ],
+  "relay_config": {
+    "enable_relay": true,
+    "relay_binlog_name": "mysql-bin.000002",
+    "relay_binlog_gtid": "e9a1fc22-ec08-11e9-b2ac-0242ac110003:1-7849",
+    "relay_dir": "./relay_log"
+  }
+}
+```
+
+## Delete the data source
+
+This API is a synchronous interface. If the request is successful, the status code of the returned body is 204.
+
+### Request URI
+
+ `DELETE /api/v1/sources/{source-name}`
+
+### Example
+
+{{< copyable "shell-regular" >}}
+
+```shell
+curl -X 'DELETE' \
+  'http://127.0.0.1:8261/api/v1/sources/mysql-01?force=true' \
+  -H 'accept: application/json'
+```
+
+## Update a data source
+
+This API is a synchronous interface. If the request is successful, the information of the corresponding data source is returned.
+> **NOTE:**
+>
+> Updating the data source configuration requires that there are no running tasks under the current data source
+
+### Request URI
+
+ `PUT /api/v1/sources/{source-name}`
+
+### Example
+
+{{< copyable "shell-regular" >}}
+
+```shell
+curl -X 'PUT' \
+  'http://127.0.0.1:8261/api/v1/sources/mysql-01' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "source": {
+    "source_name": "mysql-01",
+    "host": "127.0.0.1",
+    "port": 3306,
+    "user": "root",
+    "password": "123456",
+    "enable_gtid": false,
+    "enable": false,
+    "flavor": "mysql",
+    "task_name_list": [
+      "task1"
+    ],
+    "security": {
+      "ssl_ca_content": "",
+      "ssl_cert_content": "",
+      "ssl_key_content": "",
+      "cert_allowed_cn": [
+        "string"
+      ]
+    },
+    "purge": {
+      "interval": 3600,
+      "expires": 0,
+      "remain_space": 15
+    },
+    "relay_config": {
+      "enable_relay": true,
+      "relay_binlog_name": "mysql-bin.000002",
+      "relay_binlog_gtid": "e9a1fc22-ec08-11e9-b2ac-0242ac110003:1-7849",
+      "relay_dir": "./relay_log"
+    }
+  }
+}'
+```
+
+```json
+{
+  "source_name": "mysql-01",
+  "host": "127.0.0.1",
+  "port": 3306,
+  "user": "root",
+  "password": "123456",
+  "enable": true,
+  "enable_gtid": false,
+  "security": {
+    "ssl_ca_content": "",
+    "ssl_cert_content": "",
+    "ssl_key_content": "",
+    "cert_allowed_cn": [
+      "string"
+    ]
+  },
+  "purge": {
+    "interval": 3600,
+    "expires": 0,
+    "remain_space": 15
+  }
+}
+```
+
+## Enable-a data source
+
+This is a synchronisation interface that enables this data source on a successful request and starts all subtasks of the task that rely on this data source in bulk.
+
+### Request URI
+
+ `POST /api/v1/sources/{source-name}/enable`
+
+### Example
+
+{{< copyable "shell-regular" >}}
+
+```shell
+curl -X 'POST' \
+  'http://127.0.0.1:8261/api/v1/sources/mysql-01/enable' \
+  -H 'accept: */*' \
+  -H 'Content-Type: application/json'
+```
+
+## Disable a data source
+
+This is a synchronisation interface that deactivates this data source on a successful request and stops all subtasks of the task that depend on it in bulk.
+
+### Request URI
+
+ `POST /api/v1/sources/{source-name}/disable`
+
+### Example
+
+{{< copyable "shell-regular" >}}
+
+```shell
+curl -X 'POST' \
+  'http://127.0.0.1:8261/api/v1/sources/mysql-01/disable' \
+  -H 'accept: */*' \
+  -H 'Content-Type: application/json'
 ```
 
 ## Get the data source list
@@ -302,24 +517,6 @@ curl -X 'GET' \
 }
 ```
 
-## Delete the data source
-
-This API is a synchronous interface. If the request is successful, the status code of the returned body is 204.
-
-### Request URI
-
- `DELETE /api/v1/sources/{source-name}`
-
-### Example
-
-{{< copyable "shell-regular" >}}
-
-```shell
-curl -X 'DELETE' \
-  'http://127.0.0.1:8261/api/v1/sources/mysql-01?force=true' \
-  -H 'accept: application/json'
-```
-
 ## Get the information of a data source
 
 This API is a synchronous interface. If the request is successful, the information of the corresponding node is returned.
@@ -365,7 +562,7 @@ This API is an asynchronous interface. If the request is successful, the status 
 
 ### Request URI
 
- `POST /api/v1/sources/{source-name}/start-relay`
+ `POST /api/v1/sources/{source-name}/relay/enable`
 
 ### Example
 
@@ -373,7 +570,7 @@ This API is an asynchronous interface. If the request is successful, the status 
 
 ```shell
 curl -X 'POST' \
-  'http://127.0.0.1:8261/api/v1/sources/mysql-01/start-relay' \
+  'http://127.0.0.1:8261/api/v1/sources/mysql-01/relay/enable' \
   -H 'accept: */*' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -392,7 +589,7 @@ This API is an asynchronous interface. If the request is successful, the status 
 
 ### Request URI
 
- `POST /api/v1/sources/{source-name}/stop-relay`
+ `POST /api/v1/sources/{source-name}/relay/disable`
 
 ### Example
 
@@ -400,7 +597,7 @@ This API is an asynchronous interface. If the request is successful, the status 
 
 ```shell
 curl -X 'POST' \
-  'http://127.0.0.1:8261/api/v1/sources/mysql-01/stop-relay' \
+  'http://127.0.0.1:8261/api/v1/sources/mysql-01/relay/disable' \
   -H 'accept: */*' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -410,13 +607,13 @@ curl -X 'POST' \
 }'
 ```
 
-## Pause the relay-log feature for data sources
+## Purge relay log files that no longer required
 
 This API is an asynchronous interface. If the request is successful, the status code of the returned body is 200. To learn about its latest status, You can [get the information of a data source](#get-the-information-of-a-data-source).
 
 ### Request URI
 
- `POST /api/v1/sources/{source-name}/pause-relay`
+ `POST /api/v1/sources/{source-name}/relay/disable`
 
 ### Example
 
@@ -424,26 +621,14 @@ This API is an asynchronous interface. If the request is successful, the status 
 
 ```shell
 curl -X 'POST' \
-  'http://127.0.0.1:8261/api/v1/sources/mysql-01/pause-relay' \
-  -H 'accept: */*'
-```
-
-## Resume the relay-log feature for data sources
-
-This API is an asynchronous interface. If the request is successful, the status code of the returned body is 200. To learn about its latest status, You can [get the information of a data source](#get-the-information-of-a-data-source).
-
-### Request URI
-
- `POST /api/v1/sources/{source-name}/resume-relay`
-
-### Example
-
-{{< copyable "shell-regular" >}}
-
-```shell
-curl -X 'POST' \
-  'http://127.0.0.1:8261/api/v1/sources/mysql-01/resume-relay' \
-  -H 'accept: */*'
+  'http://127.0.0.1:8261/api/v1/sources/mysql-01/relay/disable' \
+  -H 'accept: */*' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "worker_name_list": [
+    "worker-1"
+  ]
+}'
 ```
 
 ## Change the bindings between the data source and DM-workers
