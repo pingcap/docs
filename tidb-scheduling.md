@@ -79,11 +79,11 @@ Scheduling is based on information collection. In short, the PD scheduling compo
 
 You can use PD control to check the status information of a TiKV store, which is divided into Up, Disconnect, Offline, Down, and Tombstone. The relationship between each status is as follows:
 
-+ **Up**: The current TiKV store is providing service.
-+ **Disconnect**: When the heartbeat information of PD and the TiKV store is lost for more than 20 seconds, the store status changes to "Disconnect". When the lost time is longer than the time specified by `max-store-down-time`, the store status changes to "Down".
-+ **Down**: When the time that the TiKV store lost connection with the cluster is longer than the time specified by `max-store-down-time` (30 minutes by default), the store changes to "Down". In this status, the store starts replenishing peers of each Region on the surviving store.
-+ **Offline**: If you manually take a TiKV store offline through PD Control, the store status changes to "Offline". This is only an intermediate status that the store is taking offline. The store in this status performs the operations of leader transfer and Region balance. When the `leader_count/region_count` (obtained through PD Control) shows that both operations of leader transfer and Region balance have been completed, the store status changes to "Tombstone" from "Offline". In the "Offline" status, you should **not** disable the store service and the physical server where the store is located.
-+ **Tombstone**: This status indicates that the TiKV store is completely offline. You can use `remove-tombstone` interface to safely clean up TiKV in this status.
++ **Up**: The current TiKV store is in service.
++ **Disconnect**: Heartbeat messages between the PD and the TiKV store are lost for more than 20 seconds. If the lost period exceeds the time specified by `max-store-down-time`, the status changes to "Down".
++ **Down**: Heartbeat messages between the PD and the TiKV store are lost for a time longer than `max-store-down-time` (30 minutes by default). In this status, the TiKV store starts replenishing replicas of each Region on the surviving store.
++ **Offline**: A TiKV store is manually taken offline through PD Control. In this status, the TiKV store is intermediately offline and performs leader transfer and Region balance. When the `leader_count/region_count` (obtained through PD Control) shows completion of leader transfer and Region balance, the store status changes to "Tombstone" from "Offline". In the "Offline" status, **do not** disable the store service and the physical server where the store is located.
++ **Tombstone**: The TiKV store is completely offline. You can use the `remove-tombstone` interface to safely clean up TiKV in this status.
 
 ![TiKV store status relationship](/media/tikv-store-status-relationship.png)
 
