@@ -230,9 +230,9 @@ If data replication on TiFlash starts normally but then all or some data fails t
     In `flash_cluster_manager.log`, check whether there are any new updates to `flash_region_count` corresponding to the table that gets stuck.
 
     - If no, go to the next step.
-    - If yes, check for `down peer` (replication gets stuck if there is a peer that is down).
+    - If yes, search for `down peer` (replication gets stuck if there is a peer that is down).
 
-        - Run `pd-ctl region check-down-peer` to check for `down peer`.
+        - Run `pd-ctl region check-down-peer` to search for `down peer`.
         - If `down peer` is found, run `pd-ctl operator add remove-peer\<region-id> \<tiflash-store-id>` to remove it.
 
 3. Check CPU usage.
