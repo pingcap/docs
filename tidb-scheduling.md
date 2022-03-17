@@ -77,7 +77,7 @@ Scheduling is based on information collection. In short, the PD scheduling compo
     * Whether the store is overloaded
     * Labels (See [Perception of Topology](/schedule-replicas-by-topology-labels.md))
 
-You can use PD control to check the status information of a TiKV store, which is divided into Up, Disconnect, Offline, Down, and Tombstone. The relationship between each status is as follows:
+You can use PD control to check the status of a TiKV store, which can be Up, Disconnect, Offline, Down, or Tombstone. The following is a description of all statuses and their relationship.
 
 + **Up**: The current TiKV store is in service.
 + **Disconnect**: Heartbeat messages between the PD and the TiKV store are lost for more than 20 seconds. If the lost period exceeds the time specified by `max-store-down-time`, the status changes to "Down".
