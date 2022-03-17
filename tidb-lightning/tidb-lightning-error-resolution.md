@@ -62,7 +62,7 @@ TiDB Lightning duplicate resolution can detect duplicate data only within the da
 
 ## Error report
 
-If TiDB Lightning encounters an error during the import, it outputs a report in both the terminal and its log file when it exits.
+If TiDB Lightning encounters an error during the import, it outputs an error statistics summary in the terminal and a log at the end of its log file when it exits.
 
 * The error report in the terminal is similar to the following table:
 
