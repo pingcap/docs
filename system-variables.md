@@ -1641,6 +1641,14 @@ SET tidb_slow_log_threshold = 200;
 - Range: `[0, 9223372036854775807]`
 - This variable is used to limit the maximum number of requests TiDB can send to TiKV at the same time. 0 means no limit.
 
+### tidb_table_cache_lease (New in v6.0.0)
+
+- Scope: GLOBAL
+- Default value: `3`
+- Range: `[1, 10]`
+- Unit: Seconds
+- This variable is used to control the lease time of [table cache](/table-cache.md) with a default value of `3`. The value of this variable affects the modification to table cache. After a modification is made to table cache, the longest waiting time might be `tidb_table_cache_lease` seconds. If the table is read-only or can accept a high write latency, you can increase the value of this variable to increase the valid time of table cache and to reduce the frequency of lease renewal.
+
 ### tidb_tmp_table_max_size <span class="version-mark">New in v5.3.0</span>
 
 - Scope: SESSION | GLOBAL
