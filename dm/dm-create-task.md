@@ -50,12 +50,12 @@ start-task [ -s "mysql-replica-01"] ./task.yaml
 - `remove-meta`: (Optional) Specifies whether to remove the task's previous metadata when starting the task.
 - `start-time`: (Optional) Specifies the start time of binlog replication.
     - Format: `'2021-10-21 00:01:00'` or `2021-10-21T00:01:00`.
-    - For incremental tasks, you can specify a rough starting point for task using this flag. This flag takes precedence over the binlog position in the task configuration file and the binlog position in the downstream checkpoint.
+    - For incremental tasks, you can specify a rough starting point for the task using this flag. This flag takes precedence over the binlog position in the task configuration file and the binlog position in the downstream checkpoint.
     - When the task already has a checkpoint, if you start the task using this flag, DM automatically enables safe mode until the replication passes the checkpoint. This is to avoid the data duplication error caused by resetting the task to an earlier position.
         - When you reset the task to an earlier position, if the table schema at that time point is different from the downstream at the current time point, the task might report an error.
         - When you reset the task to a later position, note that the skipped binlog might have dirty data left in the downstream.
-    - When specified a start time too early, DM starts migration from the earliest binlog position available.
-    - When specified a start time too late, DM reports an error: `start-time {input-time} is too late, no binlog location matches it`.
+    - When you specify an earlier start time, DM starts migration from the earliest binlog position available.
+    - When you specify a later start time, DM reports an error: `start-time {input-time} is too late, no binlog location matches it`.
 
 ## Returned results
 
