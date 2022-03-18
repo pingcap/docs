@@ -28,7 +28,6 @@ To enable OpenAPI, you can do the following:
 > - DM provides the [specification document](https://github.com/pingcap/tiflow/blob/master/dm/openapi/spec/dm.yaml) that meets the OpenAPI 3.0.0 standard. This document contains all the request parameters and returned values. You can copy the document yaml and preview it in [Swagger Editor](https://editor.swagger.io/).
 >
 > - After you deploy the DM-master nodes, you can access `http://{master-addr}/api/v1/docs` to preview the documentation online.
->
 
 You can use the APIs to perform the following maintenance operations on the DM cluster:
 
@@ -624,7 +623,7 @@ This API is an asynchronous interface. If the request is successful, the status 
 
 ### Request URI
 
-`POST /api/v1/sources/{source-name}/relay/disable`
+`POST /api/v1/sources/{source-name}/relay/purge`
 
 ### Example
 
@@ -632,13 +631,12 @@ This API is an asynchronous interface. If the request is successful, the status 
 
 ```shell
 curl -X 'POST' \
-  'http://127.0.0.1:8261/api/v1/sources/mysql-01/relay/disable' \
+  'http://127.0.0.1:8261/api/v1/sources/mysql-01/relay/purge' \
   -H 'accept: */*' \
   -H 'Content-Type: application/json' \
   -d '{
-  "worker_name_list": [
-    "worker-1"
-  ]
+  "relay_binlog_name": "mysql-bin.000002",
+  "relay_dir": "string"
 }'
 ```
 
@@ -714,7 +712,7 @@ curl -X 'GET' \
 
 ## Create a replication task
 
-This API is an synchronous interface. If the request is successful, the status code of the returned body is 200. the information of the corresponding node is returned.
+This API is an synchronous interface. If the request is successful, the status code of the returned body is 200. a successful request will return information about the corresponding synchronisation task.
 
 ### Request URI
 
