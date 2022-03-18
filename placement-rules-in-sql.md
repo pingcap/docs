@@ -214,7 +214,7 @@ CREATE TABLE t4 (a INT);  -- Creates a table t4 with the default policy p3.
 ALTER PLACEMENT POLICY p3 FOLLOWERS=3; -- The table with policy p3 (t4) will have FOLLOWERS=3.
 ```
 
-Note that this is different from inheritance between partitions and tables, where changing policy of tables will effect their partitions. Tables only inherit the policy of schema when it is created without attaching policies.
+Note that this is different from inheritance between partitions and tables, where changing policy of tables will affect their partitions. Tables only inherit the policy of schema when it is created without attaching policies, and modify policies of schemas does not affect created tables.
 
 ### Advanced placement options
 
@@ -252,7 +252,7 @@ In dictionary format, constraints also indicate a number of instances that apply
 
 The following known limitations exist in the experimental release of Placement Rules in SQL:
 
-* TiDB tools, including Backup & Restore (BR), TiCDC, TiDB Lightning, and TiDB Data Migration (DM), do not yet support placement rules.
+* TiDB tools, including TiDB Lightning, and TiDB Data Migration (DM), do not yet support placement rules.
 * Temporary tables do not support placement options.
 * Syntactic sugar rules are permitted for setting `PRIMARY_REGION` and `REGIONS`. In the future, we plan to add varieties for `PRIMARY_RACK`, `PRIMARY_ZONE`, and `PRIMARY_HOST`. See [issue #18030](https://github.com/pingcap/tidb/issues/18030).
 * TiFlash learners are not configurable through Placement Rules syntax.
