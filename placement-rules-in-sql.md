@@ -9,7 +9,7 @@ summary: Learn how to schedule placement of tables and partitions using SQL stat
 >
 > Placement Rules in SQL is an experimental feature introduced in v5.3.0. The syntax might change before its GA, and there might also be bugs. If you understand the risks, you can enable this experiment feature by executing `SET GLOBAL tidb_enable_alter_placement = 1;`.
 
-> **Note：**
+> **Note:**
 >
 > The implementation of *Placement Rules in SQL* relies on the *placement rules feature* of PD. For details, refer to [Configure Placement Rules](/configure-placement-rules.md). In the context of Placement Rules in SQL, *placement rules* might refer to *placement policies* attached to other objects, or to rules that are sent from TiDB to PD.
 
@@ -100,7 +100,7 @@ SELECT * FROM information_schema.tables WHERE tidb_placement_policy_name IS NOT 
 SELECT * FROM information_schema.partitions WHERE tidb_placement_policy_name IS NOT NULL;
 ```
 
-Rules that are attached to objects are applied _asynchronously_. To view the current scheduling progress of placement, use [`SHOW PLACEMENT`](/sql-statements/sql-statement-show-placement.md).
+Rules that are attached to objects are applied *asynchronously*. To view the current scheduling progress of placement, use [`SHOW PLACEMENT`](/sql-statements/sql-statement-show-placement.md).
 
 ## Option reference
 
@@ -132,11 +132,10 @@ In addition to the placement options above, you can also use the advance configu
 | Option Name                | Description                                                                                    |
 | --------------| ------------ |
 | `CONSTRAINTS`              | A list of constraints that apply to all roles. For example, `CONSTRAINTS="[+disk=ssd]`.       |
-| `LEADER_CONSTRAINTS`       | A list of constraints that only apply to leader.                                              |
-| `FOLLOWER_CONSTRAINTS`     | A list of constraints that only apply to followers.                                           |
-| `LEARNER_CONSTRAINTS`      | A list of constraints that only apply to learners.                                            |
-| `LEARNERS`                 | The number of learners.
-      |
+| `LEADER_CONSTRAINTS`       | A list of constraints that only apply to leader.                                      |
+| `FOLLOWER_CONSTRAINTS`     | A list of constraints that only apply to followers.                                   |
+| `LEARNER_CONSTRAINTS`      | A list of constraints that only apply to learners.                                     |
+| `LEARNERS`                 | The number of learners. |
 
 ## Examples
 
