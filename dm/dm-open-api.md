@@ -5,11 +5,23 @@ summary: Learn about how to use OpenAPI interface to manage the cluster status a
 
 # Maintain DM Clusters Using OpenAPI
 
-DM provides the OpenAPI feature for easily querying and operating the DM cluster, which is similar to the feature of [dmctl tools](/dm/dmctl-introduction.md). If you need to enable this feature, add the following configuration in the DM-master configuration file:
+DM provides the OpenAPI feature for easily querying and operating the DM cluster, which is similar to the feature of [dmctl tools](/dm/dmctl-introduction.md).
 
-```toml
-openapi = true
-```
+To enable OpenAPI, you can do the following:
+
++ If your DM cluster is deployed directly via binary, add the following configuration to the DM-MASTER configuration file.
+
+    ```toml
+    openapi = true
+    ```
+
++ If your DM cluster is deployed via TiUP, add the following configuration to the topology file：
+
+    ```yaml
+    server_configs:
+      master:
+        openapi: true
+    ```
 
 > **Note:**
 >
@@ -17,7 +29,6 @@ openapi = true
 >
 > - After you deploy the DM-master nodes, you can access `http://{master-addr}/api/v1/docs` to preview the documentation online.
 >
-> There are major changes in OpenAPI v6.0.0.
 
 You can use the APIs to perform the following maintenance operations on the DM cluster:
 
@@ -83,7 +94,7 @@ This API is a synchronous interface. If the request is successful, the informati
 
 ### Request URI
 
- `GET /api/v1/cluster/masters`
+`GET /api/v1/cluster/masters`
 
 ### Example
 
@@ -115,7 +126,7 @@ This API is a synchronous interface. If the request is successful, the status co
 
 ### Request URI
 
- `DELETE /api/v1/cluster/masters/{master-name}`
+`DELETE /api/v1/cluster/masters/{master-name}`
 
 ### Example
 
@@ -133,7 +144,7 @@ This API is a synchronous interface. If the request is successful, the informati
 
 ### Request URI
 
- `GET /api/v1/cluster/workers`
+`GET /api/v1/cluster/workers`
 
 ### Example
 
@@ -183,7 +194,7 @@ This API is a synchronous interface. If the request is successful, the informati
 
 ### Request URI
 
- `POST /api/v1/sources`
+`POST /api/v1/sources`
 
 ### Example
 
@@ -264,7 +275,7 @@ This API is a synchronous interface. If the request is successful, the informati
 
 ### Request URI
 
- `GET /api/v1/sources/{source-name}`
+`GET /api/v1/sources/{source-name}`
 
 ### Example
 
@@ -332,7 +343,7 @@ This API is a synchronous interface. If the request is successful, the status co
 
 ### Request URI
 
- `DELETE /api/v1/sources/{source-name}`
+`DELETE /api/v1/sources/{source-name}`
 
 ### Example
 
@@ -353,7 +364,7 @@ This API is a synchronous interface. If the request is successful, the informati
 
 ### Request URI
 
- `PUT /api/v1/sources/{source-name}`
+`PUT /api/v1/sources/{source-name}`
 
 ### Example
 
@@ -431,7 +442,7 @@ This is a synchronisation interface that enables this data source on a successfu
 
 ### Request URI
 
- `POST /api/v1/sources/{source-name}/enable`
+`POST /api/v1/sources/{source-name}/enable`
 
 ### Example
 
@@ -450,7 +461,7 @@ This is a synchronisation interface that deactivates this data source on a succe
 
 ### Request URI
 
- `POST /api/v1/sources/{source-name}/disable`
+`POST /api/v1/sources/{source-name}/disable`
 
 ### Example
 
@@ -469,7 +480,7 @@ This API is a synchronous interface. If the request is successful, the data sour
 
 ### Request URI
 
- `GET /api/v1/sources`
+`GET /api/v1/sources`
 
 ### Example
 
@@ -523,7 +534,7 @@ This API is a synchronous interface. If the request is successful, the informati
 
 ### Request URI
 
- `GET /api/v1/sources/{source-name}/status`
+`GET /api/v1/sources/{source-name}/status`
 
 ### Example
 
@@ -562,7 +573,7 @@ This API is an asynchronous interface. If the request is successful, the status 
 
 ### Request URI
 
- `POST /api/v1/sources/{source-name}/relay/enable`
+`POST /api/v1/sources/{source-name}/relay/enable`
 
 ### Example
 
@@ -589,7 +600,7 @@ This API is an asynchronous interface. If the request is successful, the status 
 
 ### Request URI
 
- `POST /api/v1/sources/{source-name}/relay/disable`
+`POST /api/v1/sources/{source-name}/relay/disable`
 
 ### Example
 
@@ -613,7 +624,7 @@ This API is an asynchronous interface. If the request is successful, the status 
 
 ### Request URI
 
- `POST /api/v1/sources/{source-name}/relay/disable`
+`POST /api/v1/sources/{source-name}/relay/disable`
 
 ### Example
 
@@ -637,7 +648,7 @@ This API is an asynchronous interface. If the request is successful, the status 
 
 ### Request URI
 
- `POST /api/v1/sources/{source-name}/transfer`
+`POST /api/v1/sources/{source-name}/transfer`
 
 ### Example
 
@@ -659,7 +670,7 @@ This API is a synchronous interface. If the request is successful, the correspon
 
 ### Request URI
 
- `GET /api/v1/sources/{source-name}/schemas`
+`GET /api/v1/sources/{source-name}/schemas`
 
 ### Example
 
@@ -683,7 +694,7 @@ This API is a synchronous interface. If the request is successful, the correspon
 
 ### Request URI
 
- `GET /api/v1/sources/{source-name}/schemas/{schema-name}`
+`GET /api/v1/sources/{source-name}/schemas/{schema-name}`
 
 ### Example
 
@@ -707,7 +718,7 @@ This API is an synchronous interface. If the request is successful, the status c
 
 ### Request URI
 
- `POST /api/v1/tasks`
+`POST /api/v1/tasks`
 
 ### Example
 
@@ -903,7 +914,7 @@ This API is a synchronous interface. If the request is successful, the informati
 
 ### Request URI
 
- `GET /api/v1/tasks/{task-name}?with_status=true`
+`GET /api/v1/tasks/{task-name}?with_status=true`
 
 ### Example
 
@@ -1010,7 +1021,7 @@ This interface is a synchronous interface and the Status Code of the returned bo
 
 ### Request URI
 
- `DELETE /api/v1/tasks/{task-name}`
+`DELETE /api/v1/tasks/{task-name}`
 
 ### Example
 
@@ -1032,7 +1043,7 @@ This interface is a synchronisation interface and a successful request will retu
 
 ### Request URI
 
- `PUT /api/v1/tasks/{task-name}`
+`PUT /api/v1/tasks/{task-name}`
 
 ### Example
 
@@ -1228,7 +1239,7 @@ This API is an asynchronous interface. If the request is successful, the status 
 
 ### Request URI
 
- `POST /api/v1/tasks/{task-name}/start`
+`POST /api/v1/tasks/{task-name}/start`
 
 ### Example
 
@@ -1246,7 +1257,7 @@ This API is an asynchronous interface. If the request is successful, the status 
 
 ### Request URI
 
- `POST /api/v1/tasks/{task-name}/stop`
+`POST /api/v1/tasks/{task-name}/stop`
 
 ### Example
 
@@ -1264,7 +1275,7 @@ This API is a synchronous interface. If the request is successful, the informati
 
 ### Request URI
 
- `GET /api/v1/tasks/task-1/status`
+`GET /api/v1/tasks/task-1/status`
 
 ### Example
 
@@ -1335,7 +1346,7 @@ This API is a synchronous interface. If the request is successful, the informati
 
 ### Request URI
 
- `GET /api/v1/tasks`
+`GET /api/v1/tasks`
 
 ### Example
 
@@ -1447,7 +1458,7 @@ This API is a synchronous interface and a successful request will return the cor
 
 ### Request URI
 
- `GET /api/v1/tasks/{task-name}/sources/{source-name}/migrate_targets`
+`GET /api/v1/tasks/{task-name}/sources/{source-name}/migrate_targets`
 
 ### Example
 
@@ -1479,7 +1490,7 @@ This API is a synchronous interface. If the request is successful, the correspon
 
 ### Request URI
 
- `GET /api/v1/tasks/{task-name}/sources/{source-name}/schemas`
+`GET /api/v1/tasks/{task-name}/sources/{source-name}/schemas`
 
 ### Example
 
@@ -1503,7 +1514,7 @@ This API is a synchronous interface. If the request is successful, the correspon
 
 ### Request URI
 
- `GET /api/v1/tasks/{task-name}/sources/{source-name}/schemas/{schema-name}`
+`GET /api/v1/tasks/{task-name}/sources/{source-name}/schemas/{schema-name}`
 
 ### Example
 
@@ -1527,7 +1538,7 @@ This API is a synchronous interface. If the request is successful, the correspon
 
 ### Request URI
 
- `GET /api/v1/tasks/{task-name}/sources/{source-name}/schemas/{schema-name}/{table-name}`
+`GET /api/v1/tasks/{task-name}/sources/{source-name}/schemas/{schema-name}/{table-name}`
 
 ### Example
 
@@ -1553,7 +1564,7 @@ This API is a synchronous interface. If the request is successful, the status co
 
 ### Request URI
 
- `POST /api/v1/tasks/{task-name}/sources/{source-name}/schemas/{schema-name}/{table-name}`
+`POST /api/v1/tasks/{task-name}/sources/{source-name}/schemas/{schema-name}/{table-name}`
 
 ### Example
 
@@ -1577,7 +1588,7 @@ This API is a synchronous interface. If the request is successful, the status co
 
 ### Request URI
 
- `DELETE /api/v1/tasks/{task-name}/sources/{source-name}/schemas/{schema-name}/{table-name}`
+`DELETE /api/v1/tasks/{task-name}/sources/{source-name}/schemas/{schema-name}/{table-name}`
 
 ### Example
 
