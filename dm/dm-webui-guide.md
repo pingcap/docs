@@ -136,30 +136,45 @@ Before creating a migration task, you need to create the data source information
 - When multiple migration tasks use the same upstream, it might cause additional stress. Enabling relay log can reduce the impact on the upstream, and it is recommended to enable relay log.
 
 ### 任务列表
+### Task
 
 你可通过**任务列表**界面查看迁移任务详情，并创建迁移任务。
+You can view the migration task details in the **Task** page, and create migration tasks.
 
 #### 查看迁移任务详情
+#### View migration task details
 
 在任务列表中，点击任务名称，详情页面会从右侧滑出。详情页面展示了更加详细的任务状态信息。在信息详情页面，你可以查看每一个子任务的运行情况，以及此迁移任务当前完整的配置项信息。
+In the task list, click the task name to view the details page from the right. The details page displays more detailed task status information. In the details page, you can view the status of each sub-task and the current configuration information of the migration task.
 
 在 DM 中，迁移任务中的每一个子任务可能处于不同的阶段，即全量导出 (dump) -> 全量导入 (load) -> 增量同步 (sync)。因此任务的当前阶段以子任务所处阶段的统计信息来展示，可以更加清楚的了解任务运行情况。
+In DM, each sub-task of a migration task might be in different stages, namely full dump -> full import (load) -> incremental replication (sync). Therefore, the statistics of a task status and the sub-task statuses can help you better understand the running status of the task.
 
 #### 创建迁移任务
+#### Create migration tasks
 
 要在该界面创建任务，点击右上角的**添加**按钮即可。创建迁移任务时，你可以使用以下任一方式：
+To create a migration task on this page, click the **Add** button on the top right corner. You can use one of the following methods to create a migration task:
 
 - 通过向导方式。通过 WebUI 根据指引一步步填写所需信息进行任务创建，此种方式比较适合入门级用户及日常使用。
+- By following the WebUI instruction. Fill in the required information step by step on the WebUI, and this method is suitable for beginners and for daily use.
 - 通过配置文件。通过直接粘贴或编写 JSON 格式的任务配置文件进行创建，支持更多的参数调整，适合熟练的用户使用。
+- By using configuration file. Paste or write a JSON-formatted configuration file to create a migration task. This method support adjusting more parameters and is suitable for more advanced users.
 
 ## 同步详情
+## Replication detail
 
 你可以通过**同步详情**页面查看迁移任务中所配置迁移规则的运行情况。同步详情页面支持根据任务、数据源、表库名称进行查询。
+You can view the status of the migration rules configured for a migration task on the **Replication Detail** page. This page supports querying by task, source, and database name.
 
 查询结果中包含上游表至下游表的对应信息，因此请慎重使用 `.*` 等，以防止查询结果过多导致页面反应迟缓。
+The query result contains the corresponding information of the upstream table and the downstream table, so be careful using `.*` in case that too many query results slow down the page response.
 
 ## 集群管理
+## Cluster
 
 ### 成员列表
+### Members
 
 **成员列表**页面展示 DM 集群中所有的 master 和 worker 节点，以及 worker 节点与 source 的绑定关系。你可在此页面对 master 和 worker 节点执行简单的 online 或 offline 操作。
+The **Members** page displays all the master and worker nodes in the DM cluster, and the binding relationship between worker nodes and the source. You can perform simple online or offline operations on master and worker nodes on this page.
