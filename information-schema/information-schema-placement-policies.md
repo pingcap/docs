@@ -5,7 +5,7 @@ sgmmary: Learn the `PLACEMENT_POLICIES` information_schema table.
 
 # PLACEMENT_POLICIES
 
-The `PLACEMENT_POLICIES` table provides information on all explicitly configured [Placement Rules in SQL](/placement-rules-in-sql.md), which means all placement policies.
+The `PLACEMENT_POLICIES` table provides information about all placement policies, refer [Placement Rules in SQL](/placement-rules-in-sql.md).
 
 {{< copyable "sql" >}}
 
