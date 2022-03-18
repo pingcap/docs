@@ -252,7 +252,7 @@ In dictionary format, constraints also indicate a number of instances that apply
 
 The following known limitations exist in the experimental release of Placement Rules in SQL:
 
-* TiDB tools, including TiDB Lightning, and TiDB Data Migration (DM), do not yet support placement rules.
+* TiDB Lightning do not yet support placement rules.
 * Temporary tables do not support placement options.
 * Syntactic sugar rules are permitted for setting `PRIMARY_REGION` and `REGIONS`. In the future, we plan to add varieties for `PRIMARY_RACK`, `PRIMARY_ZONE`, and `PRIMARY_HOST`. See [issue #18030](https://github.com/pingcap/tidb/issues/18030).
 * TiFlash learners are not configurable through Placement Rules syntax.
