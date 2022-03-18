@@ -25,7 +25,7 @@ The detailed user scenarios are as follows:
 
 ## Specify placement rules
 
-To specify placement rules, first create a placement policy:
+To specify placement rules, first create a placement policy by [`CREATE PLACEMENT POLICY`](/sql-statements/sql-statement-create-placement-policy.md):
 
 ```sql
 CREATE PLACEMENT POLICY myplacementpolicy PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1";
@@ -34,16 +34,28 @@ CREATE PLACEMENT POLICY myplacementpolicy PRIMARY_REGION="us-east-1" REGIONS="us
 Then attach the policy to a table or partition using either `CREATE TABLE` or `ALTER TABLE`. Then, the placement rules are specified on the table or the partition:
 
 ```sql
-CREATE TABLE t1 (a INT) PLACEMENT POLICY myplacementpolicy;
+CREATE TABLE t1 (a INT) PLACEMENT POLICY=myplacementpolicy;
 CREATE TABLE t2 (a INT);
-ALTER TABLE t2 PLACEMENT POLICY myplacementpolicy;
+ALTER TABLE t2 PLACEMENT POLICY=myplacementpolicy;
 ```
 
 A placement policy is not associated with any database schema and has the global scope. Therefore, assigning a placement policy does not require any additional privileges over the `CREATE TABLE` privilege.
 
+It is also possible to alter placement policies by [`ALTER PLACEMENT POLICY`](/sql-statements/sql-statement-alter-placement-policy.md), and the changes will propagate to all objects with the corresponding policy.
+
+```sql
+ALTER PLACEMENT POLICY myplacementpolicy FOLLOWERS=5;
+```
+
+Finally, you can use [`DROP PLACEMENT POLICY`](/sql-statements/sql-statement-drop-placement-policy.md) to drop policies that are not attached to any table or partition:
+
+```sql
+DROP PLACEMENT POLICY myplacementpolicy;
+```
+
 ## View current placement rules
 
-If a table has placement rules attached, you can view the placement rules in the output of `SHOW CREATE TABLE`. To view the definition of the policy available, execute `SHOW CREATE PLACEMENT POLICY`:
+If a table has placement rules attached, you can view the placement rules in the output of [`SHOW CREATE TABLE`](/sql-statements/sql-statement-show-create-table.md). To view the definition of the policy available, execute [`SHOW CREATE PLACEMENT POLICY`](/sql-statements/sql-statement-show-create-placement-policy.md):
 
 ```sql
 tidb> SHOW CREATE TABLE t1\G
@@ -59,6 +71,26 @@ tidb> SHOW CREATE PLACEMENT POLICY myplacementpolicy\G
        Policy: myplacementpolicy
 Create Policy: CREATE PLACEMENT POLICY myplacementpolicy PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1"
 1 row in set (0.00 sec)
+```
+
+It is also possible to view definition of placement policies through [`INFORMATION_SCHEMA.PLACEMENT_POLICIES`](/information-schema/information-schema-placement-policies.md) table.
+
+```sql
+tidb> select * from information_schema.placement_policies\G
+***************************[ 1. row ]***************************
+POLICY_ID            | 1
+CATALOG_NAME         | def
+POLICY_NAME          | p1
+PRIMARY_REGION       | us-east-1
+REGIONS              | us-east-1,us-west-1
+CONSTRAINTS          | 
+LEADER_CONSTRAINTS   | 
+FOLLOWER_CONSTRAINTS | 
+LEARNER_CONSTRAINTS  | 
+SCHEDULE             | 
+FOLLOWERS            | 4
+LEARNERS             | 0
+1 row in set
 ```
 
 The `information_schema.tables` and `information_schema.partitions` tables also include a column for `tidb_placement_policy_name`, which shows all objects with placement rules attached:
@@ -99,8 +131,12 @@ In addition to the placement options above, you can also use the advance configu
 
 | Option Name                | Description                                                                                    |
 | --------------| ------------ |
-| `CONSTRAINTS`              | A list of constraints that apply to all roles. For example, `CONSTRAINTS="[+disk=ssd]`.        |
-| `FOLLOWER_CONSTRAINTS`     | A list of constraints that only apply to followers.                                            |
+| `CONSTRAINTS`              | A list of constraints that apply to all roles. For example, `CONSTRAINTS="[+disk=ssd]`.       |
+| `LEADER_CONSTRAINTS`       | A list of constraints that only apply to leader.                                              |
+| `FOLLOWER_CONSTRAINTS`     | A list of constraints that only apply to followers.                                           |
+| `LEARNER_CONSTRAINTS`      | A list of constraints that only apply to learners.                                            |
+| `LEARNERS`                 | The number of learners.
+      |
 
 ## Examples
 
@@ -135,6 +171,7 @@ To ensure that enough followers are placed in the primary region (`us-east-1`) s
 In addition to assigning placement options to tables, you can also assign the options to table partitions. For example:
 
 ```sql
+CREATE PLACEMENT POLICY p1 FOLLOWERS=5;
 CREATE PLACEMENT POLICY europe PRIMARY_REGION="eu-central-1" REGIONS="eu-central-1,eu-west-1";
 CREATE PLACEMENT POLICY northamerica PRIMARY_REGION="us-east-1" REGIONS="us-east-1";
 
@@ -142,11 +179,14 @@ SET tidb_enable_list_partition = 1;
 CREATE TABLE t1 (
   country VARCHAR(10) NOT NULL,
   userdata VARCHAR(100) NOT NULL
-) PARTITION BY LIST COLUMNS (country) (
+) PLACEMENT POLICY=p1 PARTITION BY LIST COLUMNS (country) (
   PARTITION pEurope VALUES IN ('DE', 'FR', 'GB') PLACEMENT POLICY=europe,
   PARTITION pNorthAmerica VALUES IN ('US', 'CA', 'MX') PLACEMENT POLICY=northamerica
+  PARTITION pAsia VALUES IN ('CN', 'KR', 'JP')
 );
 ```
+
+If partitions have no attached policies, it will try to apply possibly existed policy on the table. For example, `pEurope` will apply `europe` policy, but `pAsia` will apply policy `p1` from table `t1`. If `t1` has no assigned policies, `pAsia` will not apply any policy, too.
 
 ### Set the default placement for a schema
 
@@ -174,7 +214,7 @@ CREATE TABLE t4 (a INT);  -- Creates a table t4 with the default policy p3.
 ALTER PLACEMENT POLICY p3 FOLLOWERS=3; -- The table with policy p3 (t4) will have FOLLOWERS=3.
 ```
 
-You can use [`ALTER PLACEMENT POLICY`](/sql-statements/sql-statement-alter-placement-policy.md) to change a policy, and the changes will propagate to all objects with the corresponding policy.
+Note that this is different from inheritance between partitions and tables, where changing policy of tables will effect their partitions. Tables only inherit the policy of schema when it is created without attaching policies.
 
 ### Advanced placement options
 
@@ -212,7 +252,6 @@ In dictionary format, constraints also indicate a number of instances that apply
 
 The following known limitations exist in the experimental release of Placement Rules in SQL:
 
-* Dumpling does not support dumping placement policies. See [issue #29371](https://github.com/pingcap/tidb/issues/29371).
 * TiDB tools, including Backup & Restore (BR), TiCDC, TiDB Lightning, and TiDB Data Migration (DM), do not yet support placement rules.
 * Temporary tables do not support placement options.
 * Syntactic sugar rules are permitted for setting `PRIMARY_REGION` and `REGIONS`. In the future, we plan to add varieties for `PRIMARY_RACK`, `PRIMARY_ZONE`, and `PRIMARY_HOST`. See [issue #18030](https://github.com/pingcap/tidb/issues/18030).
