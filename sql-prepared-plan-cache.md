@@ -29,7 +29,7 @@ In the current version of TiDB, if a `Prepare` statement meets any of the follow
 - The query contains `?` in the definition of the `Window Frame` window function, such as `(partition by year order by sale rows ? preceding)`. If `?` appears elsewhere in the window function, the query is cached.
 - The query contains parameters for comparing `int` and `string`, such as `c_int >= ?` or `c_int in (?, ?)`, in which `?` indicates the string type, such as `set @x='123'`. To ensure that the query result is compatible with MySQL, parameters need to be adjusted in each query, so such queries are not cached.
 - The plan attempts to access `TiFlash`.
-- In most cases, the plan that contains `TableDual` will not be cached, unless the current `Prepare` statement does not have parameters.
+- In most cases, the plan that contains `TableDual` is not cached, unless the current `Prepare` statement does not have parameters.
 
 The LRU linked list is designed as a session-level cache because `Prepare` / `Execute` cannot be executed across sessions. Each element of the LRU list is a key-value pair. The value is the execution plan, and the key is composed of the following parts:
 
