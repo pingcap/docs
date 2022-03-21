@@ -8,7 +8,7 @@ summary: Learn how to use WebUI to manage DM migration tasks.
 
 DM WebUI 是一个 TiDB Data Migration (DM) 迁移任务管理界面，方便用户以直观的方式管理大量迁移任务，无需使用 dmctl 命令行，简化任务管理的操作步骤。
 
-DM WebUI is web-based GUI management platform for TiDB Data Migration (DM) tasks. It provides a simple and intuitive way to manage a large number of migration tasks, without using the dmctl command line.
+DM WebUI is web-based GUI platform for managing TiDB Data Migration (DM) tasks. It provides a simple and intuitive way to manage a large number of migration tasks, which frees you from using the dmctl command-line tool.
 
 本文档介绍 DM WebUI 的访问方式、使用前提、各界面的使用场景以及注意事项。
 
@@ -17,13 +17,13 @@ This document introduces how to access DM WebUI, the prerequisites, the use case
 > **Warning:**
 >
 > - DM WebUI 当前为实验特性，不建议在生产环境中使用。
-> - DM WebUI is currently an experimental feature, it is not recommended to use it in the production environment.
+> - DM WebUI is currently an experimental feature. It is not recommended to use it in the production environment.
 > - DM WebUI 中 `task` 的生命周期有所改变，不建议与 dmctl 同时使用。
 > - The lifecycle of `task` in DM WebUI has changed, and it is not recommended to use DM WebUI and dmctl at the same time.
 
 DM WebUI 主要包含以下界面：
 
-DM WebUI has the following interfaces:
+DM WebUI has the following pages:
 
 - **Dashboard**：提供迁移任务运行状态的监控视图。
 - **数据迁移**
@@ -33,10 +33,10 @@ DM WebUI has the following interfaces:
 - **集群管理**
     - **成员列表**：展示 DM 集群中所有的 master 和 worker 节点，以及 worker 节点与 source 的绑定关系。
 
-- **Dashboard**: Provides the monitoring view of the migration task statuses.
+- **Dashboard**: Provides the monitoring view of migration task statuses.
 - **Migration**
-    - **Task**: Provides the interface to create a migration task, and displays the detailed information of each migration task.
-    - **Source**: Configures the upstream data source information for a migration task.
+    - **Task**: Provides an entry to task creation, and displays the detailed information of each migration task.
+    - **Source**: Configures the information of upstream data source for a migration task.
     - **Replication Detail**: Displays the detailed status information of migration tasks.
 - **Cluster**
     - **Members**: Displays the list of all master and worker nodes in the DM cluster, and the binding relationship between worker nodes and the source.
@@ -47,7 +47,7 @@ The interface is as follows:
 ![webui](/media/dm/dm-webui-preview-en.png)
 
 ## 访问方式
-## Access Method
+## Access method
 
 你可以从 DM 集群的任意 master 节点访问 DM WebUI，访问端口与 DM OpenAPI 保持一致，默认为 `8261`。访问地址示例：`http://{master_ip}:{master_port}/dashboard/`。
 You can access DM WebUI from any master node of the DM cluster. The access port is `8261` by default and is the same as that of DM OpenAPI. An example pf an access address: `http://{master_ip}:{master_port}/dashboard/`.
@@ -56,20 +56,20 @@ You can access DM WebUI from any master node of the DM cluster. The access port 
 ## Prerequisites
 
 为确保 DM WebUI 能正常显示，在使用 DM WebUI 前，确保以下操作或配置已完成：
-To ensure that DM WebUI can be displayed properly, before using DM WebUI, make sure that the following operations or configuration have been completed:
+To ensure that DM WebUI can display information properly, before using DM WebUI, make sure that the following operations or configuration have been completed:
 
 + 开启 DM OpenAPI 配置
 + Enable the DM OpenAPI configuration:
 
     - 如果你的 DM 集群是通过二进制方式部署的，在该 master 节点的配置中开启 `openapi` 配置项：
-    - If your DM cluster is deployed using binary, enable the `openapi` configuration item in the configuration of the master node:
+    - If your DM cluster has been deployed using binary, enable the `openapi` configuration item in the configuration of the master node:
 
         ```
         openapi = true
         ```
 
     - 如果你的 DM 集群是通过 TiUP 部署的，在拓扑文件中添加如下配置：
-    - If your DM cluster is deployed using TiUP, add the following configuration to the topology file:
+    - If your DM cluster has been deployed using TiUP, add the following configuration to the topology file:
 
         ```yaml
         server_configs:
@@ -78,14 +78,14 @@ To ensure that DM WebUI can be displayed properly, before using DM WebUI, make s
         ```
 
 + 首次部署 Grafana 时，已正确安装监控相关组件：`monitoring_servers` 和 `grafana_servers`。`grafana_servers` 须按如下进行配置：
-+ When deploying Grafana for the first time, make sure that the `monitoring_servers` and `grafana_servers` monitoring components have been correctly installed. `grafana_servers` must be configured as follows:
++ When deploying Grafana for the first time, make sure that the `monitoring_servers` and `grafana_servers` components have been correctly installed. You can expected to configure `grafana_servers` as follows:
 
     ```
     grafana_servers:
       - host: 10.0.1.14
         # port: 3000
         # deploy_dir: /tidb-deploy/grafana-3000
-        config:       # 请确保 tiup dm -v 版本在 v1.9.0 以上
+        config:       # Make sure that the TiUP version for tiup dm -v is later than v1.9.0.
           auth.anonymous.enabled: true
           security.allow_embedding: true
     ```
