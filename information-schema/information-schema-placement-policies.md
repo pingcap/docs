@@ -5,7 +5,7 @@ sgmmary: Learn the `PLACEMENT_POLICIES` information_schema table.
 
 # PLACEMENT_POLICIES
 
-The `PLACEMENT_POLICIES` table provides information about all placement policies, refer [Placement Rules in SQL](/placement-rules-in-sql.md).
+The `PLACEMENT_POLICIES` table provides information on all placement policies, refer [Placement Rules in SQL](/placement-rules-in-sql.md).
 
 {{< copyable "sql" >}}
 
@@ -36,16 +36,16 @@ DESC placement_policies;
 
 ## Examples
 
-The `PLACEMENT_POLICIES` table only shows explicitly configured rules. To see the canonical version of placement rules (including placement policies attached to tables), use the statement `SHOW PLACEMENT` instead:
+The `PLACEMENT_POLICIES` table only shows all placement policies. To view the canonical version of placement rules (including all placement policies and objects assigned placement policies), use the statement `SHOW PLACEMENT` instead:
 
 {{< copyable "sql" >}}
 
 ```sql
-CREATE TABLE t1 (a INT);
+CREATE TABLE t1 (a INT); 
 CREATE PLACEMENT POLICY p1 primary_region="us-east-1" regions="us-east-1";
 CREATE TABLE t3 (a INT) PLACEMENT POLICY=p1;
-SHOW PLACEMENT; -- Includes t3.
-SELECT * FROM information_schema.placement_policies; -- Does not include t3.
+SHOW PLACEMENT; -- Shows all information. Includes table t3.
+SELECT * FROM information_schema.placement_policies; -- Only shows placement policies. Does not include t3.
 ```
 
 ```sql
@@ -59,7 +59,7 @@ Query OK, 0 rows affected (0.08 sec)
 | Target        | Placement                                      | Scheduling_State |
 +---------------+------------------------------------------------+------------------+
 | POLICY p1     | PRIMARY_REGION="us-east-1" REGIONS="us-east-1" | NULL             |
-| TABLE test.t3 | PRIMARY_REGION="us-east-1" REGIONS="us-east-1" | SCHEDULED        |
+| TABLE test.t3 | PRIMARY_REGION="us-east-1" REGIONS="us-east-1" | PENDING          |
 +---------------+------------------------------------------------+------------------+
 2 rows in set (0.00 sec)
 
