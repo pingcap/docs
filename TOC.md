@@ -191,6 +191,10 @@
       - [tiup-cluster](/tiup/tiup-cluster.md)
       - [tiup-mirror](/tiup/tiup-mirror.md)
       - [tiup-bench](/tiup/tiup-bench.md)
+  - TiDB Clinic Diagnostic Service (Beta)
+    - [Overview](/clinic/clinic-introduction.md)
+    - [Use TiDB Clinic](/clinic/clinic-user-guide-for-tiup.md)
+    - [TiDB Clinic Diagnostic Data](/clinic/clinic-data-instruction-for-tiup.md)
   - [TiDB Operator](/tidb-operator-overview.md)
   - Backup & Restore (BR)
     - [BR Tool Overview](/br/backup-and-restore-tool.md)
@@ -222,10 +226,10 @@
     - [FAQ](/tidb-binlog/tidb-binlog-faq.md)
   - TiDB Lightning
     - [Overview](/tidb-lightning/tidb-lightning-overview.md)
-    - [Tutorial](/get-started-with-tidb-lightning.md)
-    - [Deploy](/tidb-lightning/deploy-tidb-lightning.md)
-    - [Precheck](/tidb-lightning/tidb-lightning-prechecks.md)
-    - [Configure](/tidb-lightning/tidb-lightning-configuration.md)
+    - Prechecks and requirements
+      - [Prechecks](/tidb-lightning/tidb-lightning-prechecks.md)
+      - [Downstream privilege requirements](/tidb-lightning/tidb-lightning-requirements.md)
+      - [Downstream storage space requirements](/tidb-lightning/tidb-lightning-requirements.md#downstream-storage-space-requirements)
     - Key Features
       - [Checkpoints](/tidb-lightning/tidb-lightning-checkpoints.md)
       - [Table Filter](/table-filter.md)
@@ -234,6 +238,9 @@
       - [Import Data in Parallel](/tidb-lightning/tidb-lightning-distributed-import.md)
       - [Error Resolution](/tidb-lightning/tidb-lightning-error-resolution.md)
       - [Web Interface](/tidb-lightning/tidb-lightning-web-interface.md)
+    - [Tutorial](/get-started-with-tidb-lightning.md)
+    - [Deploy](/tidb-lightning/deploy-tidb-lightning.md)
+    - [Configure](/tidb-lightning/tidb-lightning-configuration.md)
     - [Monitor](/tidb-lightning/monitor-tidb-lightning.md)
     - [FAQ](/tidb-lightning/tidb-lightning-faq.md)
     - [Glossary](/tidb-lightning/tidb-lightning-glossary.md)
@@ -675,6 +682,7 @@
   - v5.4
     - [5.4.0](/releases/release-5.4.0.md)
   - v5.3
+    - [5.3.1](/releases/release-5.3.1.md)
     - [5.3.0](/releases/release-5.3.0.md)
   - v5.2
     - [5.2.3](/releases/release-5.2.3.md)
