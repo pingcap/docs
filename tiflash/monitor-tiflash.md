@@ -47,6 +47,15 @@ The following sections introduce the default monitoring information of **TiFlash
 - Cop task memory usage: The total memory usage of all TiFlash instances processing coprocessor requests.
 - Handling Request Number: The total number of all TiFlash instances processing coprocessor requests. The classification of the requests is the same as that of Request QPS.
 
+## Task Scheduler
+
+- Min TSO: The minimum TSO of all running queries on each TiFlash instance. TiFlash maintains this value to make sure that every query with smaller TSO will be scheduled to run. If there is no running queries at a given time, this value is the max value of type `uint64`.
+- Estimated Thread Usage and Limit: The estimated thread count used by all running queries, and the soft and hard limit of thread count, on each TiFlash instance.
+- Active and Waiting Queries Count: The running and waiting query count on each TiFlash instance.
+- Active and Waiting Tasks Count: The running and waiting task count on each TiFlash instance.
+- Hard Limit Exceeded Count: How many times the estimated thread usage by all running queries has exceeded the hard limit of thread count, on each TiFlash instantce.
+- Task Waiting Duration: The duration of each task waiting to be scheduled after its initialization, on each TiFlash instance.
+
 ## DDL
 
 - Schema Version: The version of the schema currently cached in each TiFlash instance.
