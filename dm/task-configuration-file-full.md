@@ -112,7 +112,7 @@ loaders:
     # The directory that stores full data exported from the upstream ("./dumped_data" by default).
     # Supoprts a local filesystem path or an Amazon S3 path. For example, "s3://dm_bucket/dumped_data?region=us-west-2&endpoint=s3-website.us-east-2.amazonaws.com&access_key=s3accesskey&secret_access_key=s3secretkey&force_path_style=true"
     dir: "./dumped_data"
-    # The import mode during the full import phase. You can set it to the following:
+    # The import mode during the full import phase. In most cases you don't need to care about this configuration. 
     # - "sql" (default). Use [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) TiDB-backend mode to import data.
     # - "loader". Use Loader mode to import data. This mode is only for compatibility with features that TiDB Lightning does not support yet. It will be deprecated in the future.
     import-mode: "sql"
