@@ -177,7 +177,7 @@ delta_index_cache_size = 0
     ## Using the logical split can reduce the write amplification.
     ## However, these are at the cost of disk space waste.
     ## Modifying the default value is not recommended.
-    dt_enable_logical_split = false
+    # dt_enable_logical_split = false
 
     ## The memory usage limit for the generated intermediate data when a single
     ## coprocessor query is executed. The default value is 0, which means no limit.
