@@ -40,8 +40,6 @@ func formatDefaultValue(sv *variable.SysVar) string {
 		return "`5.7.25-TiDB-`(tidb version)"
 	case variable.VersionComment, "version_compile_machine", "version_compile_os":
 		return "(string)"
-	case variable.Socket:
-		return `""` // TODO: need to fix this in the code.
 	case variable.TiDBEnable1PC, variable.TiDBEnableAsyncCommit:
 		return "`ON`" // These are OFF in the source, which is for OLD versions. For NEW its on.
 	case variable.TiDBRowFormatVersion:
@@ -126,7 +124,6 @@ func skipSv(sv *variable.SysVar) bool {
 		variable.TiDBMemQuotaBindingCache,
 		variable.TiDBIgnorePreparedCacheCloseStmt,
 		variable.TiDBOptimizerEnableNewOnlyFullGroupByCheck,
-		variable.TiDBEnableLegacyInstanceScope,
 		variable.TiDBBatchPendingTiFlashCount:
 		return true
 	}
@@ -192,10 +189,10 @@ func printUnits(sv *variable.SysVar) string {
 }
 
 func formatScope(sv *variable.SysVar) string {
-	// Manually cater for "INSTANCE" scope, which is not a native concept.
+	// Manually cater for "INSTANCE" scope, which historically has not been a native concept.
 	switch sv.Name {
 	case variable.TiDBDDLSlowOprThreshold, variable.TiDBCheckMb4ValueInUTF8, variable.TiDBEnableCollectExecutionInfo,
-		variable.TiDBEnableSlowLog, variable.TiDBExpensiveQueryTimeThreshold, variable.TiDBForcePriority, variable.TiDBGeneralLog,
+		variable.TiDBEnableSlowLog, variable.TiDBExpensiveQueryTimeThreshold, variable.TiDBForcePriority,
 		variable.TiDBSlowLogThreshold, variable.TiDBPProfSQLCPU, variable.TiDBQueryLogMaxLen, variable.TiDBRecordPlanInSlowLog,
 		variable.TiDBMemoryUsageAlarmRatio, variable.PluginDir, variable.PluginLoad:
 		return "INSTANCE"
@@ -206,6 +203,12 @@ func formatScope(sv *variable.SysVar) string {
 	}
 	if sv.HasSessionScope() && sv.HasGlobalScope() {
 		return "SESSION | GLOBAL"
+	}
+	// For real instance scoped variables we call them GLOBAL
+	// But show a persists to cluster: NO.
+	// Eventually all instance scoped variables will look like this.
+	if sv.HasInstanceScope() {
+		return "GLOBAL"
 	}
 	if sv.HasGlobalScope() {
 		return "GLOBAL"
@@ -262,6 +265,8 @@ func formatSpecialVersionComment(sv *variable.SysVar) string {
 		variable.TiDBRegardNULLAsPoint, variable.TiDBStatsLoadPseudoTimeout, variable.TiDBStatsLoadSyncWait,
 		variable.TiDBEnableTopSQL:
 		return ` <span class="version-mark">New in v5.4.0</span>`
+	case variable.TiDBEnableLegacyInstanceScope:
+		return ` <span class="version-mark">New in v6.0</span>`
 	default:
 		return ""
 	}
@@ -499,7 +504,7 @@ func getExtendedDescription(sv *variable.SysVar) string {
 	case variable.TiDBEnableParallelApply:
 		return "- This variable controls whether to enable concurrency for the `Apply` operator. The number of concurrencies is controlled by the `tidb_executor_concurrency` variable. The `Apply` operator processes correlated subqueries and has no concurrency by default, so the execution speed is slow. Setting this variable value to `1` can increase concurrency and speed up execution. Currently, concurrency for `Apply` is disabled by default."
 	case variable.TiDBEnableRateLimitAction:
-		return "- This variable controls whether to enable the dynamic memory control feature for the operator that reads data. By default, this operator enables the maximum number of threads that [`tidb_disql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency) allows to read data. When the memory usage of a single SQL statement exceeds [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) each time, the operator that reads data stops one thread.\n" +
+		return "- This variable controls whether to enable the dynamic memory control feature for the operator that reads data. By default, this operator enables the maximum number of threads that [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency) allows to read data. When the memory usage of a single SQL statement exceeds [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) each time, the operator that reads data stops one thread.\n" +
 			"- When the operator that reads data has only one thread left and the memory usage of a single SQL statement continues to exceed [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query), this SQL statement triggers other memory control behaviors, such as [spilling data to disk](/tidb-configuration-file.md#oom-use-tmp-storage)."
 	case variable.TiDBEnableSlowLog:
 		return "- This variable is used to control whether to enable the slow log feature."
@@ -817,7 +822,8 @@ func getExtendedDescription(sv *variable.SysVar) string {
 			"- If you upgrade from a TiDB version earlier than 4.0.0 to 4.0.0, the format version is not changed, and TiDB continues to use the old format of version `1` to write data to the table, which means that **only newly created clusters use the new data format by default**.\n" +
 			"- Note that modifying this variable does not affect the old data that has been saved, but applies the corresponding version format only to the newly written data after modifying this variable."
 	case variable.TiDBScatterRegion:
-		return "- By default, Regions are split for a new table when it is being created in TiDB. After this variable is enabled, the newly split Regions are scattered immediately during the execution of the `CREATE TABLE` statement. This applies to the scenario where data need to be written in batches right after the tables are created in batches, because the newly split Regions can be scattered in TiKV beforehand and do not have to wait to be scheduled by PD. To ensure the continuous stability of writing data in batches, the `CREATE TABLE` statement returns success only after the Regions are successfully scattered. This makes the statement's execution time multiple times longer than that when you disable this variable."
+		return "- By default, Regions are split for a new table when it is being created in TiDB. After this variable is enabled, the newly split Regions are scattered immediately during the execution of the `CREATE TABLE` statement. This applies to the scenario where data need to be written in batches right after the tables are created in batches, because the newly split Regions can be scattered in TiKV beforehand and do not have to wait to be scheduled by PD. To ensure the continuous stability of writing data in batches, the `CREATE TABLE` statement returns success only after the Regions are successfully scattered. This makes the statement's execution time multiple times longer than that when you disable this variable.\n" +
+			"- Note that if `SHARD_ROW_ID_BITS` and `PRE_SPLIT_REGIONS` have been set when a table is created, the specified number of Regions are evenly split after the table creation."
 	case variable.TiDBSkipASCIICheck:
 		return "- This variable is used to set whether to skip ASCII validation.\n- Validating ASCII characters affects the performance. When you are sure that the input characters are valid ASCII characters, you can set the variable value to `ON`."
 	case variable.TiDBSkipIsolationLevelCheck:
@@ -1010,6 +1016,9 @@ func getExtendedDescription(sv *variable.SysVar) string {
 		return "- This variable controls whether to use the method of paging to send coprocessor requests in `IndexLookUp` operator.\n" +
 			"- User scenarios: For read queries that use `IndexLookup` and `Limit` and that `Limit` cannot be pushed down to `IndexScan`, there might be high latency for the read queries and high CPU usage for TiKV's `unified read pool`. In such cases, because the `Limit` operator only requires a small set of data, if you set `tidb_enable_paging` to `ON`, TiDB processes less data, which reduces query latency and resource consumption.\n" +
 			"- When `tidb_enable_paging` is enabled, for the `IndexLookUp` requests with `Limit` that cannot be pushed down and are fewer than `960`, TiDB uses the method of paging to send coprocessor requests. The fewer `Limit`, the more obvious the optimization."
+	case variable.TiDBEnableLegacyInstanceScope:
+		return "- This variable permits `INSTANCE` scoped variables to be set with `SET SESSION` as well as `SET GLOBAL` syntax.\n" +
+			"- This option is enabled by default for compatibility with earlier versions of TiDB."
 	default:
 		return "- No documentation is currently available for this variable."
 	}
@@ -1034,13 +1043,11 @@ func main() {
 		"\n" +
 		"# System Variables\n" +
 		"\n" +
-		"TiDB system variables behave similar to MySQL with some differences, in that settings might apply on a `SESSION`, `INSTANCE`, or `GLOBAL` scope, or on a scope that combines `SESSION`, `INSTANCE`, or `GLOBAL`.\n" +
+		"TiDB system variables behave similar to MySQL, in that settings apply on a `SESSION` or `GLOBAL` scope:\n" +
 		"\n" +
-		"- Changes to `GLOBAL` scoped variables **only apply to new connection sessions with TiDB**. Currently active connection sessions are not affected. These changes are persisted and valid after restarts.\n" +
-		"- Changes to `INSTANCE` scoped variables apply to all active or new connection sessions with the current TiDB instance immediately after the changes are made. Other TiDB instances are not affected. These changes are not persisted and become invalid after TiDB restarts.\n" +
-		"- Variables can also have `NONE` scope. These variables are read-only, and are typically used to convey static information that will not change after a TiDB server has started.\n" +
-		"\n" +
-		"Variables can be set with the [`SET` statement](/sql-statements/sql-statement-set-variable.md) on a per-session, instance or global basis:\n" +
+		"- Changes on a `SESSION` scope will only affect the current session.\n" +
+		"- Changes on a `GLOBAL` scope apply immediately, provided that the variable is not also `SESSION` scoped. In which case all sessions (including your session) will continue to use their current session value.\n" +
+		"- Changes are made using the [`SET` statement](/sql-statements/sql-statement-set-variable.md):\n" +
 		"\n" +
 		"```sql\n" +
 		"# These two identical statements change a session variable\n" +
@@ -1054,9 +1061,9 @@ func main() {
 		"\n" +
 		"> **Note:**\n" +
 		">\n" +
-		"> Executing `SET GLOBAL` applies immediately on the TiDB server where the statement was issued. A notification is then sent to all TiDB servers to refresh their system variable cache, which will start immediately as a background operation. Because there is a risk that some TiDB servers might miss the notification, the system variable cache is also refreshed automatically every 30 seconds. This helps ensure that all servers are operating with the same configuration.\n" +
+		"> Several `GLOBAL` variables persist to the TiDB cluster. For variables that specify `Persists to Cluster: Yes` a notification is sent to all TiDB servers to refresh their system variable cache when the global variable is changed. Adding additional TiDB servers (or restarting existing TiDB servers) will automatically use the persisted configuration value. For variables that specify `Persists to Cluster: No` any changes only apply to the local TiDB instance that you are connected to. In order to retain any values set, you will need to specify them in your `tidb.toml` configuration file.\n" +
 		">\n" +
-		"> TiDB differs from MySQL in that `GLOBAL` scoped variables **persist** through TiDB server restarts. Additionally, TiDB presents several MySQL variables as both readable and settable. This is required for compatibility, because it is common for both applications and connectors to read MySQL variables. For example, JDBC connectors both read and set query cache settings, despite not relying on the behavior.\n" +
+		"> Additionally, TiDB presents several MySQL variables as both readable and settable. This is required for compatibility, because it is common for both applications and connectors to read MySQL variables. For example, JDBC connectors both read and set query cache settings, despite not relying on the behavior.\n" +
 		"\n" +
 		"> **Note:**\n" +
 		">\n" +
@@ -1100,6 +1107,12 @@ func main() {
 		}
 
 		fmt.Printf("- Scope: %s\n", formatScope(sv))
+		if sv.HasInstanceScope() {
+			fmt.Printf("- Persists to cluster: No\n")
+		} else if sv.HasGlobalScope() {
+			fmt.Printf("- Persists to cluster: Yes\n")
+		}
+
 		fmt.Printf("- Default value: %s\n", formatDefaultValue(sv))
 
 		if sv.Type == variable.TypeDuration {
