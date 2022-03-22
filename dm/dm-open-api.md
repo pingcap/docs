@@ -713,7 +713,7 @@ curl -X 'GET' \
 
 ## Create a replication task
 
-This API is an synchronous interface. If the request is successful, the status code of the returned body is 200. a successful request will return information about the corresponding synchronisation task.
+This API is a synchronous interface. If the request is successful, the status code of the returned body is 200. A successful request will return the information of the corresponding replication task.
 
 ### Request URI
 
@@ -1034,11 +1034,11 @@ curl -X 'DELETE' \
 
 ## Update a replication task
 
-This interface is a synchronisation interface and a successful request will return information about the task.
+This interface is a synchronous interface and a successful request returns the information of the task.
 
-> **NOTE:**
+> **Note:**
 >
-> Updating the task configuration requires that the task is stopped and has run into incremental sync and that only some of the fields can be updated.
+> When you use this API to update the task configuration, make sure that the task is stopped and has run into incremental sync and that only some of the fields can be updated.
 
 ### Request URI
 
@@ -1234,7 +1234,7 @@ curl -X 'PUT' \
 
 ## Start a replication task
 
-This API is an asynchronous interface. If the request is successful, the status code of the returned body is 204. To learn about its latest status, You can [get the information of a replication task](#get-the-information-of-a-replication-task).
+This API is an asynchronous interface. If the request is successful, the status code of the returned body is 204. To learn the latest status of a task, You can [get the information of a replication task](#get-the-information-of-a-replication-task).
 
 ### Request URI
 
@@ -1252,7 +1252,7 @@ curl -X 'POST' \
 
 ## Stop a replication task
 
-This API is an asynchronous interface. If the request is successful, the status code of the returned body is 204. To learn about its latest status, You can [get the information of a replication task](#get-the-information-of-a-replication-task).
+This API is an asynchronous interface. If the request is successful, the status code of the returned body is 200. To learn the latest status of a task, You can [get the information of a replication task](#get-the-information-of-a-replication-task).
 
 ### Request URI
 
@@ -1451,9 +1451,9 @@ curl -X 'GET' \
 }
 ```
 
-## Get the replication task migrate rules
+## Get the migration rules of a replication task
 
-This API is a synchronous interface and a successful request will return the corresponding list.
+This API is a synchronous interface and a successful request returns a list of the corresponding tasks.
 
 ### Request URI
 
