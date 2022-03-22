@@ -85,20 +85,12 @@ func skipSv(sv *variable.SysVar) bool {
 		variable.TiDBEnableOrderedResultMode, // no current plans to document
 		variable.TiDBEnablePipelinedWindowFunction,
 		variable.TiDBEnablePointGetCache,
-		variable.TiDBEnableStreaming,
 		variable.TiDBGuaranteeLinearizability,
 		variable.TiDBHashExchangeWithNewCollation,
 		variable.TiDBLastQueryInfo,
 		variable.TiDBLastTxnInfo,
-		variable.TiDBMemQuotaHashJoin,
-		variable.TiDBMemQuotaIndexLookupJoin,
-		variable.TiDBMemQuotaIndexLookupReader,
-		variable.TiDBMemQuotaMergeJoin,
-		variable.TiDBMemQuotaSort,
-		variable.TiDBMemQuotaTopn,
 		variable.TiDBMergeJoinConcurrency,
 		variable.TiDBMPPStoreFailTTL,
-		variable.TiDBOptBCJ, // will be removed soon
 		variable.TiDBOptCartesianBCJ,
 		variable.TiDBOptConcurrencyFactor,
 		variable.TiDBOptCopCPUFactor,
@@ -120,7 +112,6 @@ func skipSv(sv *variable.SysVar) bool {
 		variable.TiDBTxnReadTS,
 		variable.TiDBTxnScope,
 		variable.TxnIsolationOneShot,
-
 		variable.TiDBSuperReadOnly,
 		variable.TiDBTableCacheLease,
 		variable.TiDBTopSQLMaxMetaCount,
@@ -130,9 +121,13 @@ func skipSv(sv *variable.SysVar) bool {
 		variable.TiDBReadConsistency,
 		variable.TiDBEnableMutationChecker,
 		variable.TiDBLastDDLInfo,
-		variable.TiDBMemQuotaBindCache,
-		variable.SysdateIsNow: // doc soon
-
+		variable.TiDBSysdateIsNow,
+		variable.TiDBRCReadCheckTS,
+		variable.TiDBMemQuotaBindingCache,
+		variable.TiDBIgnorePreparedCacheCloseStmt,
+		variable.TiDBOptimizerEnableNewOnlyFullGroupByCheck,
+		variable.TiDBEnableLegacyInstanceScope,
+		variable.TiDBBatchPendingTiFlashCount:
 		return true
 	}
 	return false
@@ -154,8 +149,6 @@ func printWarning(sv *variable.SysVar) string {
 		return "> **Warning:**\n>\n> Currently, cascades planner is an experimental feature. It is not recommended that you use it in production environments.\n\n"
 	case variable.TiDBEnableFastAnalyze:
 		return "> **Warning:**\n>\n> Currently, `Fast Analyze` is an experimental feature. It is not recommended that you use it in production environments.\n\n"
-	case variable.TiDBEnableAlterPlacement:
-		return "> **Warning:**\n>\n> Currently, Placement Rules in SQL is an experimental feature. It is not recommended that you use it in production environments.\n\n"
 	case variable.TiDBEnableColumnTracking:
 		return "> **Warning:**\n>\n> Currently, collecting statistics on `PREDICATE COLUMNS` is an experimental feature. It is not recommended that you use it in production environments.\n\n"
 	case variable.TiDBEnableTopSQL:
@@ -263,7 +256,7 @@ func formatSpecialVersionComment(sv *variable.SysVar) string {
 	case variable.SkipNameResolve, variable.TiDBAllowFunctionForExpressionIndex:
 		return ` <span class="version-mark">New in v5.2.0</span>`
 	case variable.TiDBEnablePseudoForOutdatedStats, variable.TiDBEnableTSOFollowerProxy, variable.TiDBLogFileMaxDays,
-		variable.TiDBTmpTableMaxSize, variable.TiDBTSOClientBatchMaxWaitTime, variable.PlacementChecks:
+		variable.TiDBTmpTableMaxSize, variable.TiDBTSOClientBatchMaxWaitTime:
 		return ` <span class="version-mark">New in v5.3.0</span>`
 	case variable.TiDBEnableColumnTracking, variable.TiDBPersistAnalyzeOptions, variable.TiDBEnablePaging, variable.TiDBReadStaleness,
 		variable.TiDBRegardNULLAsPoint, variable.TiDBStatsLoadPseudoTimeout, variable.TiDBStatsLoadSyncWait,
@@ -961,9 +954,6 @@ func getExtendedDescription(sv *variable.SysVar) string {
 		return "- This variable returns the name of the CPU architecture on which TiDB is running."
 	case "version_compile_os":
 		return "- This variable returns the name of the OS on which TiDB is running."
-	case variable.PlacementChecks:
-		return "- This variable controls whether DDL statements validate [Placement Rules in SQL](/placement-rules-in-sql.md).\n" +
-			"- It is intended to be used by logical dump/restore tools to ensure that tables can always be created even if placement rules are violated. This is similar to how mysqldump writes `SET FOREIGN_KEY_CHECKS=0;` to the start of every dump file."
 	case variable.TiDBAllowFunctionForExpressionIndex:
 		return "- This variable is used to show the functions that are allowed to be used for creating expression indexes."
 	case variable.TiDBEnableTSOFollowerProxy:
@@ -998,8 +988,6 @@ func getExtendedDescription(sv *variable.SysVar) string {
 			"- If the data on a table is frequently modified without executing `ANALYZE` on this table in time, to keep the execution plan stable, you can set the variable value to `OFF`."
 	case variable.TiDBTmpTableMaxSize:
 		return "- This variable is used to set the maximum size of a single [temporary table](/temporary-tables.md). Any temporary table with a size larger than this variable value causes error."
-	case variable.TiDBEnableAlterPlacement:
-		return "- This variable enables or disables [Placement Rules in SQL](/placement-rules-in-sql.md)."
 	case variable.RandSeed1, variable.RandSeed2:
 		return "- This variable is used to seed the random value generator used in the `RAND()` SQL function.\n" +
 			"- The behavior of this variable is MySQL compatible."
