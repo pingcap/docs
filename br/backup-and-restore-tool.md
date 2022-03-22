@@ -132,7 +132,7 @@ The compatibility issues of BR and the TiDB cluster are divided into the followi
 
     + BR versions earlier than v5.4.0 do not support recovering `charset=GBK` tables. No version of BR supports recovering `charset=GBK` tables to TiDB clusters earlier than v5.4.0.
 
-    + BR does not support tables with [placement rules](/placement-rules-in-sql.md) before v6.0.0. Use BR v6.0.0 and above, with the `--with-tidb-placement-mode=strict/ignore` command line option to backup and restore. When the value is `strict`，BR will try to restore placement rules, otherwise will ignore.
+    + BR does not support [placement rules](/placement-rules-in-sql.md) before v6.0.0. BR v6.0.0 and above support and introduce command lime option `--with-tidb-placement-mode=strict/ignore` to backup and restore. The default value `strict` will import and validate placement rules, but will ignore all placement rules when the value is `ignore`.
 
 + The KV format might change when some features are enabled or disabled. If these features are not consistently enabled or disabled during backup and restore, compatibility issues might occur.
 
