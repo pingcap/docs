@@ -249,12 +249,12 @@ In dictionary format, constraints also indicate a number of instances that apply
 
 ## Tools Compatibility
 
-Tool Name | Minimum supported version | Description
---- | --- | ---
-Backup & Restore (BR) | 6.0 | Supports imports and exports of placement rules，refer [BR Compatibility](/br/backup-and-restore-tool.md#Compatibility]
-TiDB Lightning | Not support yet |
-TiCDC | 6.0 | Ignore placement rules
-TiDB Binlog | 6.0 | Ignore placement rules, and will not synchronize to the downstream
+| Tool Name | Minimum supported version | Description |
+| --- | --- | --- |
+| Backup & Restore (BR) | 6.0 | Supports imports and exports of placement rules，refer [BR Compatibility](/br/backup-and-restore-tool.md#Compatibility] |
+| TiDB Lightning | Not compatible yet | |
+| TiCDC | 6.0 | Ignore placement rules |
+| TiDB Binlog | 6.0 | Ignore placement rules, and will not synchronize to the downstream |
 
 ## Known limitations
 
