@@ -1341,7 +1341,7 @@ curl -X 'GET' \
 
 ## Get the replication task list
 
-This API is a synchronous interface. If the request is successful, the information of the corresponding node is returned.
+This API is a synchronous interface and a successful request returns a list of the corresponding tasks.
 
 ### Request URI
 
@@ -1453,7 +1453,7 @@ curl -X 'GET' \
 
 ## Get the migration rules of a replication task
 
-This API is a synchronous interface and a successful request returns a list of the corresponding tasks.
+This API is a synchronous interface and a successful request returns a list of the migrate rules of this tasks.
 
 ### Request URI
 
