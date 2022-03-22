@@ -247,13 +247,19 @@ In dictionary format, constraints also indicate a number of instances that apply
 >
 > Dictionary and list formats are based on the YAML parser, but the YAML syntax might be incorrectly parsed. For example, `"{+disk=ssd:1,+disk=hdd:2}"` is incorrectly parsed as `'{"+disk=ssd:1": null, "+disk=hdd:1": null}'`. But `"{+disk=ssd: 1,+disk=hdd: 1}"` is correctly parsed as `'{"+disk=ssd": 1, "+disk=hdd": 1}'`.
 
+## Tools Compatibility
+
+Tool Name | Minimum supported version | Description
+--- | --- | ---
+Backup & Restore (BR) | 6.0 | Supports imports and exports of placement rules，refer [BR Compatibility](/br/backup-and-restore-tool.md#Compatibility]
+TiDB Lightning | Not support yet |
+TiCDC | 6.0 | Ignore placement rules
+TiDB Binlog | 6.0 | Ignore placement rules, and will not synchronize to the downstream
+
 ## Known limitations
 
 The following known limitations exist in the experimental release of Placement Rules in SQL:
 
-* TiDB tools，including Backup & Restore (BR), TiDB Lightning, TiCDC and TiDB Binlog, does not support placement rules before TiDB 6.0.
-* Since TiDB 6.0, Backup & Restore (BR) supports imports and exports of placement rules.
-* Since TiDB 6.0, TiCDC and TiDB Binlog will work in clusters assigned placement rules, and will not synchronize rules to the downstream clusters.
 * Temporary tables do not support placement options.
 * Syntactic sugar rules are permitted for setting `PRIMARY_REGION` and `REGIONS`. In the future, we plan to add varieties for `PRIMARY_RACK`, `PRIMARY_ZONE`, and `PRIMARY_HOST`. See [issue #18030](https://github.com/pingcap/tidb/issues/18030).
 * TiFlash learners are not configurable through Placement Rules syntax.
