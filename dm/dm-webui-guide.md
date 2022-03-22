@@ -90,9 +90,9 @@ To see the monitoring of migration tasks, visit the **Dashboard** page. **Dashbo
 
 ## Source
 
-Before creating a migration task, you need to create the data source information of the upstream for the replication task. You can create the upstream task configuration in the **Source** page. When creating tasks, pay attention to the following items:
+Before creating a migration task, you need to create the data source information of the upstream for the replication task. You can create the upstream configuration in the **Source** page. When creating sources, pay attention to the following items:
 
-- If there is a switch between primary and secondary node, enable GTID in the upstream MySQL and set GTID to `True` when creating the upstream configuration; otherwise, the migration task will be interrupted during the switch (except for AWS Aurora).
+- If there is a auto failover between primary and secondary instance, enable GTID in the upstream MySQL and set GTID to `True` when creating the upstream configuration; otherwise, the migration task will be interrupted during the failover (except for AWS Aurora).
 - If a MySQL instance needs to be temporarily made offline, you can disable the instance. However, when the MySQL instance is being disabled, other MySQL instances running migration tasks cannot execute DDL operations; otherwise, the disabled instance cannot properly migrate data after it is enabled.
 - When multiple migration tasks use the same upstream, it might cause additional stress. Enabling relay log can reduce the impact on the upstream, and it is recommended to enable relay log.
 
