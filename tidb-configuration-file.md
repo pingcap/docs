@@ -332,6 +332,11 @@ Configuration items related to security.
 - Determines whether to automatically generate the TLS certificates on startup.
 - Default value: `false`
 
+### `tls-version`
+
+- Set the minimum TLS version for MySQL Protocol connections.
+- Default value: "", which allows TLSv1.1 or higher.
+
 ## Performance
 
 Configuration items related to performance.
