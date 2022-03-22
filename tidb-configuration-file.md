@@ -335,6 +335,7 @@ Configuration items related to security.
 
 - Set the minimum TLS version for MySQL Protocol connections.
 - Default value: "", which allows TLSv1.1 or higher.
+- Optional values: `"TLSv1.0"`, `"TLSv1.1"`, `"TLSv1.2"` and `"TLSv1.3"`
 
 ## Performance
 
