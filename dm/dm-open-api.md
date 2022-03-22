@@ -7,15 +7,15 @@ summary: Learn about how to use OpenAPI interface to manage the cluster status a
 
 DM provides the OpenAPI feature for easily querying and operating the DM cluster, which is similar to the feature of [dmctl tools](/dm/dmctl-introduction.md).
 
-To enable OpenAPI, you can do the following:
+To enable OpenAPI, perform one of the following operations:
 
-+ If your DM cluster is deployed directly via binary, add the following configuration to the DM-MASTER configuration file.
++ If your DM cluster has been deployed directly using binary, add the following configuration to the DM-master configuration file.
 
     ```toml
     openapi = true
     ```
 
-+ If your DM cluster is deployed via TiUP, add the following configuration to the topology file：
++ If your DM cluster is deployed using TiUP, add the following configuration to the topology file：
 
     ```yaml
     server_configs:
@@ -50,7 +50,7 @@ You can use the APIs to perform the following maintenance operations on the DM c
 * [Get the data source list](#get-the-data-source-list)
 * [Start the relay-log feature for data sources](#start-the-relay-log-feature-for-data-sources)
 * [Stop the relay-log feature for data sources](#stop-the-relay-log-feature-for-data-sources)
-* [Purge relay-log files that no longer required](#purge-relay-log-files-that-no-longer-required)
+* [Purge relay-log files that are no longer required](#purge-relay-log-files-that-are-no-longer-required)
 * [Change the bindings between the data source and DM-workers](#change-the-bindings-between-the-data-source-and-dm-workers)
 * [Get the list of schema names of a data source](#get-the-list-of-schema-names-of-a-data-source)
 * [Get the list of table names of a specified schema in a data source](#get-the-list-of-table-names-of-a-specified-schema-in-a-data-source)
@@ -65,7 +65,7 @@ You can use the APIs to perform the following maintenance operations on the DM c
 * [Stop a replication task](#stop-a-replication-task)
 * [Get the information of a replication task](#get-the-information-of-a-replication-task)
 * [Get the replication task list](#get-the-replication-task-list)
-* [Get the replication task migrate rules](#get-the-replication-task-migrate-rules)
+* [Get the migration rules of a replication task](#get-the-migration-rules-of-a-replication-task)
 * [Get the list of schema names of the data source that is associated with a replication task](#get-the-list-of-schema-names-of-the-data-source-that-is-associated-with-a-replication-task)
 * [Get the list of table names of a specified schema in the data source that is associated with a replication task](#get-the-list-of-table-names-of-a-specified-schema-in-the-data-source-that-is-associated-with-a-replication-task)
 * [Get the CREATE statement for schemas of the data source that is associated with a replication task](#get-the-create-statement-for-schemas-of-the-data-source-that-is-associated-with-a-replication-task)
@@ -357,9 +357,10 @@ curl -X 'DELETE' \
 ## Update a data source
 
 This API is a synchronous interface. If the request is successful, the information of the corresponding data source is returned.
+
 > **NOTE:**
 >
-> Updating the data source configuration requires that there are no running tasks under the current data source
+> When you use this API to update the data source configuration, make sure that there are no running tasks under the current data source.
 
 ### Request URI
 
@@ -435,9 +436,9 @@ curl -X 'PUT' \
 }
 ```
 
-## Enable-a data source
+## Enable a data source
 
-This is a synchronisation interface that enables this data source on a successful request and starts all subtasks of the task that rely on this data source in bulk.
+This is a synchronous interface that enables a data source on a successful request and starts all subtasks of the task that rely on this data source in batch.
 
 ### Request URI
 
@@ -456,7 +457,7 @@ curl -X 'POST' \
 
 ## Disable a data source
 
-This is a synchronisation interface that deactivates this data source on a successful request and stops all subtasks of the task that depend on it in bulk.
+This is a synchronous interface that deactivates this data source on a successful request and stops all subtasks of the task that rely on it in batch.
 
 ### Request URI
 
@@ -617,7 +618,7 @@ curl -X 'POST' \
 }'
 ```
 
-## Purge relay log files that no longer required
+## Purge relay log files that are no longer required
 
 This API is an asynchronous interface. If the request is successful, the status code of the returned body is 200. To learn about its latest status, You can [get the information of a data source](#get-the-information-of-a-data-source).
 
