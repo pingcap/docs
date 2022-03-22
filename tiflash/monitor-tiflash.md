@@ -49,12 +49,12 @@ The following sections introduce the default monitoring information of **TiFlash
 
 ## Task Scheduler
 
-- Min TSO: The minimum TSO of all running queries on each TiFlash instance. TiFlash maintains this value to make sure that every query with smaller TSO will be scheduled to run. If there is no running queries at a given time, this value is the max value of type `uint64`.
-- Estimated Thread Usage and Limit: The estimated thread count used by all running queries, and the soft and hard limit of thread count, on each TiFlash instance.
-- Active and Waiting Queries Count: The running and waiting query count on each TiFlash instance.
-- Active and Waiting Tasks Count: The running and waiting task count on each TiFlash instance.
-- Hard Limit Exceeded Count: How many times the estimated thread usage by all running queries has exceeded the hard limit of thread count, on each TiFlash instantce.
-- Task Waiting Duration: The duration of each task waiting to be scheduled after its initialization, on each TiFlash instance.
+- Min TSO: The minimum TSO among all queries running on each TiFlash instance. This value ensures that queries with the minimum TSO can be scheduled to run. When no queries are running, this value is the maximum unsigned 64-bit integer.
+- Estimated Thread Usage and Limit: The estimated amount of threads used by all queries running on each TiFlash instance, and the soft and hard limits on the amount.
+- Active and Waiting Queries Count: The amount of running queries and that of waiting queries on each TiFlash instance.
+- Active and Waiting Tasks Count: The amount of running tasks and that of waiting tasks on each TiFlash instance.
+- Hard Limit Exceeded Count: Times that the estimated amount of threads used by queries running on each TiFlash instance exceeds the hard limit.
+- Task Waiting Duration: The duration from task initialization to task scheduling on each TiFlash instance.
 
 ## DDL
 
