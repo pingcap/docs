@@ -19,10 +19,6 @@ The table cache feature is suitable for tables with the following characteristic
 
 When the data volume of the table is small but the data is frequently accessed, the data is concentrated on a Region in TiKV and makes it a hotspot Region, which affects the performance. Therefore, the typical usage scenarios of table cache are as follows:
 
-- 配置表，业务通过该表读取配置信息
-- 金融场景中的存储汇率的表，该表不会实时更新，每天只更新一次
-- 银行分行或者网点信息表，该表很少新增记录项
-
 - Configuration tables, from which applications read the configuration information.
 - The tables of exchange rates in the financial sector, which is updated only once a day and not in real time.
 - Bank branch or network information tables, which is rarely updated.
@@ -33,7 +29,7 @@ Taking configuration tables as an example, when the application restarts, the co
 
 This section describes the usage of table cache by examples.
 
-#### Set a normal table to a table cache
+### Set a normal table to a table cache
 
 Suppose that there is a table `users`:
 
@@ -59,7 +55,7 @@ ALTER TABLE users CACHE;
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-#### Verify a table cache
+### Verify a table cache
 
 To verify a table cache, use the `SHOW CREATE TABLE` statement. If the table is cached, the returned result contains the `CACHED ON` attribute:
 
@@ -144,7 +140,7 @@ Note that the `UnionScan` operator is used to read the table cache, so you can s
 3 rows in set (0.00 sec)
 ```
 
-#### Write data to table cache
+### Write data to table cache
 
 Table cache supports data writes. For example, you can insert a record into the `users` table:
 
@@ -185,7 +181,7 @@ SELECT * FROM users;
 >
 > The write latency of table cache is high because it is implemented with a complex mechanism that requires a lease to be set for each cache. When there are multiple TiDB instances, one instance does not know whether the other instances have cached data. If an instance modifies the table data directly, the other instances will read the old cache data. To ensure correctness, the table cache implementation uses a lease mechanism to ensure that the data is not modified before the lease expires. That is why the write latency is high.
 
-#### Recover table cache to normal table
+### Recover table cache to normal table
 
 > **Note:**
 >
@@ -247,8 +243,6 @@ The table cache **CANNOT** be used in the following scenarios:
 - During modification, the cached data becomes invalid until the data is reloaded.
 
 ## Compatibility with TiDB ecosystem tools
-
-缓存表并不是标准的 MySQL 功能，而是 TiDB 扩展。只有 TiDB 能识别 `ALTER TABLE CACHE` 语句。所有的 TiDB 生态工具均不支持缓存表功能，包括 Backup & Restore (BR)、TiCDC、Dumpling 等组件，它们会将缓存表当作普通表处理。
 
 Table cache is not a standard MySQL feature but a TiDB extension. Only TiDB can recognize the `ALTER TABLE CACHE` statement. TiDB ecosystem tools **DOES NOT** support table cache, including Backup & Restore (BR), TiCDC, and Dumpling. They treat table cache as a normal table.
 
