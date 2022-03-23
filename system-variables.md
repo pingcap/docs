@@ -1400,7 +1400,7 @@ explain select * from t where age=5;
 - Default value: `ON`
 - This variable controls whether to enable the [ANALYZE configuration persistence](/statistics.md#persist-analyze-configurations) feature.
 
-### tidb_placement_mode <span class="version-mark">New in v6.0.0</span>
+### tidb_placement_mode (New in v6.0.0)
 
 - Scope: SESSION | GLOBAL
 - Default value: `STRICT`
