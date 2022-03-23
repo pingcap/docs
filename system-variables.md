@@ -1405,7 +1405,7 @@ explain select * from t where age=5;
 - Scope: SESSION | GLOBAL
 - Default value: `STRICT`
 - Possible values: `STRICT`, `IGNORE`
-- This variable controls whether DDL statements ignores [Placement Rules in SQL](/placement-rules-in-sql.md). When the variable is `IGNORE`, all placement rule options will be ignored.
+- This variable controls whether DDL statements ignore the [placement rules specified in SQL](/placement-rules-in-sql.md). When the variable value is `IGNORE`, all placement rule options are ignored.
 - It is intended to be used by logical dump/restore tools to ensure that tables can always be created even if invalid placement rules are assigned. This is similar to how mysqldump writes `SET FOREIGN_KEY_CHECKS=0;` to the start of every dump file.
 
 ### tidb_pprof_sql_cpu <span class="version-mark">New in v4.0</span>
