@@ -66,7 +66,7 @@ In such cases, you can use the `binlog-schema` command to set a table schema for
     )
     ```
 
-2. Use the `binlog-schema` command to set the table schema for the table to be migrated from the data source (At this time, the data migration task should be in the Paused state due to the above `Column count doesn't match` error).
+2. Use the `binlog-schema` command to set the table schema for the table to be migrated from the data source. At this time, the data migration task should be in the Paused state due to the above `Column count doesn't match` error.
 
     {{< copyable "shell-regular" >}}
 
