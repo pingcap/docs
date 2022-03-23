@@ -70,7 +70,7 @@ log-level = "info"
 # Correspond to `start-datetime` and `stop-datetime` respectively.
 # They are used to specify the time range in which the binlog files are to be recovered.
 # If `start-datetime` and `stop-datetime` are set, there is no need to set `start-tso` and `stop-tso`.
-# When you perform full recovery or continue incremental recovery from the last incremental position, set start-tso to the full tso + 1 or the last incremental position's stop-tso + 1.
+# When you perform a full recovery or resume an incremental recovery, set start-tso to tso + 1 or stop-tso + 1, respectively.
 # start-tso = 0
 # stop-tso = 0
 
