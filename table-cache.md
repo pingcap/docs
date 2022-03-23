@@ -227,8 +227,6 @@ Currently, the size limit of the table cache is 64 MB in TiDB. If the table data
 
 ## Compatibility restrictions with other TiDB features
 
-以下是缓存表不支持的功能：
-
 The table cache **DOES NOT** support the following features:
 
 - Performing the `ALTER TABLE t ADD PARTITION` operation on partitioned tables is not supported.
