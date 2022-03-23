@@ -395,8 +395,8 @@ DTFile is stored in the `stable` folder in the data file directory. All formats 
 TiFlash supports both automatic and manual data validation:
 
 * Automatic data validation:
-    * v6.0.0 and later versions uses the V3 validation mechanism by default.
-    * Versions earlier than v6.0.0 uses the V2 validation mechanism by default.
+    * v6.0.0 and later versions use the V3 validation mechanism by default.
+    * Versions earlier than v6.0.0 use the V2 validation mechanism by default.
     * To manually switch the validation mechanism, refer to [TiFlash configuration file](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file). However, the default configuration is verified by tests and therefore recommended.
 * Manual data validation. Refer to [`DTTool inspect`](/tiflash/tiflash-command-line-flags.md#dttool-inspect).
 
