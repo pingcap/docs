@@ -20,7 +20,7 @@ DM WebUI has the following pages:
 - **Migration**
     - **Task**: Provides an entry to task creation, and displays the detailed information of each migration task. This page helps you monitor, create, delete, and configure migration tasks.
     - **Source**: Configures the information of upstream data source for a migration task. On this page, you can manage the upstream configuration in a data migration environment, including creating and deleting upstream configuration, monitoring the task status corresponding to the upstream configuration, and modifying upstream configuration.
-    - **Replication Detail**: Displays the detailed status information of migration tasks. On this page,  you can view the detailed configuration and status information based on a specified filter, including the configuration information and database names of the upstream and downstream.
+    - **Replication Detail**: Displays the detailed status information of migration tasks. On this page,  you can view the detailed configuration and status information based on a specified filter, including the configuration information and database names of the upstream and downstream, the relation of source tables and target tables.
 - **Cluster**
     - **Members**: Displays the list of all master and worker nodes in the DM cluster, and the binding relationship between worker nodes and the source. On this page, you can view the configuration information of the current DM cluster and the status information of each worker. In addition, the basic management is also provided.
 
