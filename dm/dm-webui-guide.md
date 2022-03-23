@@ -123,4 +123,4 @@ The query result contains the corresponding information of the upstream table an
 
 ### Members
 
-The **Members** page displays all the master and worker nodes in the DM cluster, and the binding relationship between worker nodes and the source. You can perform simple online or offline operations on master and worker nodes on this page.
+The **Members** page displays all the master and worker nodes in the DM cluster, and the binding relationship between worker nodes and the source. 
