@@ -1453,7 +1453,7 @@ curl -X 'GET' \
 
 ## Get the migration rules of a replication task
 
-This API is a synchronous interface and a successful request returns a list of the migrate rules of this task.
+This API is a synchronous interface and a successful request returns a list of the migration rules of this task.
 
 ### Request URI
 
