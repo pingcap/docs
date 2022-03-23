@@ -652,16 +652,6 @@ Constraint checking is always performed in place for pessimistic transactions (d
 > - If you have enabled TiDB Binlog, enabling this variable cannot improve the performance. To improve the performance, it is recommended to use [TiCDC](/ticdc/ticdc-overview.md) instead.
 > - Enabling this parameter only means that one-phase commit becomes an optional mode of transaction commit. In fact, the most suitable mode of transaction commit is determined by TiDB.
 
-### tidb_enable_alter_placement
-
-> **Warning:**
->
-> Currently, Placement Rules in SQL is an experimental feature. It is not recommended that you use it in production environments.
-
-- Scope: GLOBAL
-- Default value: `OFF`
-- This variable enables or disables [Placement Rules in SQL](/placement-rules-in-sql.md).
-
 ### tidb_enable_amend_pessimistic_txn <span class="version-mark">New in v4.0.7</span>
 
 - Scope: SESSION | GLOBAL
