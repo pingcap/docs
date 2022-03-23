@@ -25,7 +25,7 @@ The detailed user scenarios are as follows:
 
 ## Specify placement rules
 
-To specify placement rules, first create a placement policy by [`CREATE PLACEMENT POLICY`](/sql-statements/sql-statement-create-placement-policy.md):
+To specify placement rules, first create a placement policy using [`CREATE PLACEMENT POLICY`](/sql-statements/sql-statement-create-placement-policy.md):
 
 ```sql
 CREATE PLACEMENT POLICY myplacementpolicy PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1";
@@ -41,13 +41,13 @@ ALTER TABLE t2 PLACEMENT POLICY=myplacementpolicy;
 
 A placement policy is not associated with any database schema and has the global scope. Therefore, assigning a placement policy does not require any additional privileges over the `CREATE TABLE` privilege.
 
-It is also possible to alter placement policies by [`ALTER PLACEMENT POLICY`](/sql-statements/sql-statement-alter-placement-policy.md), and the changes will propagate to all objects with the corresponding policy.
+To modify a placement policy, you can use [`ALTER PLACEMENT POLICY`](/sql-statements/sql-statement-alter-placement-policy.md), and the changes will propagate to all objects assigned with the corresponding policy.
 
 ```sql
 ALTER PLACEMENT POLICY myplacementpolicy FOLLOWERS=5;
 ```
 
-Finally, you can use [`DROP PLACEMENT POLICY`](/sql-statements/sql-statement-drop-placement-policy.md) to drop policies that are not attached to any table or partition:
+To drop policies that are not attached to any table or partition, you can use [`DROP PLACEMENT POLICY`](/sql-statements/sql-statement-drop-placement-policy.md):
 
 ```sql
 DROP PLACEMENT POLICY myplacementpolicy;
@@ -73,7 +73,7 @@ Create Policy: CREATE PLACEMENT POLICY myplacementpolicy PRIMARY_REGION="us-east
 1 row in set (0.00 sec)
 ```
 
-It is also possible to view definition of placement policies through [`INFORMATION_SCHEMA.PLACEMENT_POLICIES`](/information-schema/information-schema-placement-policies.md) table.
+You can also view definitions of placement policies using the [`INFORMATION_SCHEMA.PLACEMENT_POLICIES`](/information-schema/information-schema-placement-policies.md) table.
 
 ```sql
 tidb> select * from information_schema.placement_policies\G
@@ -185,7 +185,7 @@ CREATE TABLE t1 (
 );
 ```
 
-If partitions have no attached policies, it will try to apply possibly existed policy on the table. For example, `pEurope` will apply `europe` policy, but `pAsia` will apply policy `p1` from table `t1`. If `t1` has no assigned policies, `pAsia` will not apply any policy, too.
+If a partition has no attached policies, it tries to apply possibly existing policies on the table. For example, the `pEurope` partition will apply the `europe` policy, but the `pAsia` partition will apply the `p1` policy from table `t1`. If `t1` has no assigned policies, `pAsia` will not apply any policy, too.
 
 ### Set the default placement for a schema
 
@@ -213,7 +213,7 @@ CREATE TABLE t4 (a INT);  -- Creates a table t4 with the default policy p3.
 ALTER PLACEMENT POLICY p3 FOLLOWERS=3; -- The table with policy p3 (t4) will have FOLLOWERS=3.
 ```
 
-Note that this is different from inheritance between partitions and tables, where changing policy of tables will affect their partitions. Tables only inherit the policy of schema when it is created without attaching policies, and modify policies of schemas does not affect created tables.
+Note that this is different from the inheritance between partitions and tables, where changing the policy of tables will affect their partitions. Tables inherit the policy of schema only when they are created without policies attached, and modifying the policies of schemas does not affect created tables.
 
 ### Advanced placement options
 
@@ -247,14 +247,14 @@ In dictionary format, constraints also indicate a number of instances that apply
 >
 > Dictionary and list formats are based on the YAML parser, but the YAML syntax might be incorrectly parsed. For example, `"{+disk=ssd:1,+disk=hdd:2}"` is incorrectly parsed as `'{"+disk=ssd:1": null, "+disk=hdd:1": null}'`. But `"{+disk=ssd: 1,+disk=hdd: 1}"` is correctly parsed as `'{"+disk=ssd": 1, "+disk=hdd": 1}'`.
 
-## Tools Compatibility
+## Compatibility with tools
 
 | Tool Name | Minimum supported version | Description |
 | --- | --- | --- |
-| Backup & Restore (BR) | 6.0 | Supports imports and exports of placement rules，refer [BR Compatibility](/br/backup-and-restore-tool.md#Compatibility] |
+| Backup & Restore (BR) | 6.0 | Supports importing and exporting placement rules. Refer to [BR Compatibility](/br/backup-and-restore-tool.md#compatibility] for details. |
 | TiDB Lightning | Not compatible yet | |
-| TiCDC | 6.0 | Ignore placement rules, and will not synchronize to the downstream |
-| TiDB Binlog | 6.0 | Ignore placement rules, and will not synchronize to the downstream |
+| TiCDC | 6.0 | Ignores placement rules, and does not replicate the rules to the downstream |
+| TiDB Binlog | 6.0 | Ignores placement rules, and does not replicate the rules to the downstream |
 
 ## Known limitations
 
