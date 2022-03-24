@@ -64,7 +64,7 @@ ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 0
 
 * In v5.1 and later versions, setting the replicas for the system tables is no longer supported. Before upgrading the cluster, you need to clear the replicas of the relevant system tables. Otherwise, you cannot modify the replica settings of the system tables after you upgrade the cluster to a later version.
 
-## Check the replication progress
+### Check replication progress
 
 You can check the status of the TiFlash replicas of a specific table using the following statement. The table is specified using the `WHERE` clause. If you remove the `WHERE` clause, you will check the replica status of all tables.
 
@@ -78,6 +78,65 @@ In the result of above statement:
 
 * `AVAILABLE` indicates whether the TiFlash replicas of this table is available or not. `1` means available and `0` means unavailable. Once the replicas become available, this status does not change. If you use DDL statements to modify the number of replicas, the replication status will be recalculated.
 * `PROGRESS` means the progress of the replication. The value is between `0.0` and `1.0`. `1` means at least one replica is replicated.
+
+## Create TiFlash replicas for databases
+
+Similar with creating TiFlash replicas for tables, you can send a DDL statement to TiDB through a MySQL client to create a TiFlash replica for all tables in a specific database:
+
+{{< copyable "sql" >}}
+
+```sql
+ALTER DATABASE db_name SET TIFLASH REPLICA count
+```
+
+In this statement, `count` indicates the number of replicas. When the value is `0`, the replica is deleted.
+
+Examples:
+
+- Create two replicas for all tables in the database `tpch50`:
+
+    {{< copyable "sql" >}}
+
+    ```sql
+    ALTER DATABASE `tpch50` SET TIFLASH REPLICA 2
+    ```
+
+- Delete TiFlash replicas created for the database `tpch50`:
+
+    {{< copyable "sql" >}}
+
+    ```sql
+    ALTER DATABASE `tpch50` SET TIFLASH REPLICA 0
+    ```
+
+> **Note:**
+>
+> - This statement actually performs a series of DDL operations, which is resource-intensive. If the statement is interrupted during the execution, executed operations are not rolled back and unexecuted operations do not continue.
+>
+> - After executing the statement, do not set the number of TiFlash replicas or DDL operations on this database until **all tables in this database are replicated**. Otherwise, unexpected results may occur, which includes:
+>     - If you set the number of TiFlash replicas to 2 and then change the number to 1 before all tables in the database are replicated, the final number of TiFlash replicas of all the tables is not necessarily 1 or 2.
+>     - After executing the statement, if you create tables in this database before the completion of the statement execution, TiFlash replicas **may** be created for these new tables.
+>     - After executing the statement, if you add indexes for tables in the database before the completion of the statement execution, the statement may be hung and resumes only after the operation of adding indexes finishes.
+>
+> - This statement skips system tables, views, temporary tables, and tables with character sets not supported by TiFlash.
+
+### Check replication progress
+
+Similar with creating TiFlash replicas for tables, successful execution of the statement does not mean the completion of replication. You can execute the following SQL statement to check the progress of replication on target tables:
+
+{{< copyable "sql" >}}
+
+```sql
+SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = '<db_name>'
+```
+
+To check tables not setting TiFlash replicas in the database, you can execute the following SQL statement:
+
+{{< copyable "sql" >}}
+
+```sql
+SELECT TABLE_NAME FROM information_schema.tables where TABLE_SCHEMA = "<db_name>" and TABLE_NAME not in (SELECT TABLE_NAME FROM information_schema.tiflash_replica where TABLE_SCHEMA = "<db_name>")
+```
 
 ## Use TiDB to read TiFlash replicas
 
