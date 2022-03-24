@@ -84,7 +84,7 @@ ADMIN CHECKSUM TABLE `schema`.`table`;
 
 TiDB Lightning supports:
 
-- Importing [Dumpling](/dumpling-overview.md), CSV, or [Amazon Aurora Parquet](/migrate-from-aurora-using-lightning.md) output files.
+- Importing CSV, [Dumpling](/dumpling-overview.md) or [Amazon Aurora Parquet](/migrate-from-aurora-using-lightning.md) output files.
 - Reading data from the local disk or [Amazon S3 cloud storage](/br/backup-and-restore-storages.md).
 
 ## Could TiDB Lightning skip creating schema and tables?
