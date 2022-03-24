@@ -230,12 +230,10 @@ TiFlash supports the push-down of the following operators:
 * TopN: Performs the TopN calculation.
 * Limit: Performs the limit calculation.
 * Project: Performs the projection calculation.
-* HashJoin (Equi Join): Performs the join calculation based on the [Hash Join](/explain-joins.md#hash-join) algorithm, but with the following conditions:
+* HashJoin: Performs the join calculation based on the [Hash Join](/explain-joins.md#hash-join) algorithm, but with the following conditions:
     * The operator can be pushed down only in the [MPP mode](#use-the-mpp-mode).
-    * The push-down of `Full Outer Join` is not supported.
-* HashJoin (Non-Equi Join): Performs the Cartesian Join algorithm, but with the following conditions:
-    * The operator can be pushed down only in the [MPP mode](#use-the-mpp-mode).
-    * Cartesian Join is supported only in Broadcast Join.
+    * Supported joins are Inner Join, Left Join, Semi Join, Anti Semi Join, Left Semi Join, and Anti Left Semi Join.
+    * The preceding joins support both Equi Join and Non-Equi Join (Cartesian Join). When calculating Cartesian Join, the Broadcast algorithm, instead of the Shuffle Hash Join algorithm, is used.
 
 In TiDB, operators are organized in a tree structure. For an operator to be pushed down to TiFlash, all of the following prerequisites must be met:
 
@@ -244,11 +242,11 @@ In TiDB, operators are organized in a tree structure. For an operator to be push
 
 Currently, TiFlash supports the following push-down expressions:
 
-* Mathematical functions: `+, -, /, *, %, >=, <=, =, !=, <, >, round, abs, floor(int), ceil(int), ceiling(int), sqrt, log, log2, log10, ln, exp, pow, sign, radians, degrees, conv, crc32`
-* Logical functions: `and, or, not, case when, if, ifnull, isnull, in, like, coalesce`
+* Mathematical functions: `+, -, /, *, %, >=, <=, =, !=, <, >, round, abs, floor(int), ceil(int), ceiling(int), sqrt, log, log2, log10, ln, exp, pow, sign, radians, degrees, conv, crc32, greatest(int/real), least(int/real)`
+* Logical functions: `and, or, not, case when, if, ifnull, isnull, in, like, coalesce, is`
 * Bitwise operations: `bitand, bitor, bigneg, bitxor`
-* String functions: `substr, char_length, replace, concat, concat_ws, left, right, ascii, length, trim, ltrim, rtrim, position, format, lower, ucase, upper, substring_index, lpad, rpad, strcmp`
-* Date functions: `date_format, timestampdiff, from_unixtime, unix_timestamp(int), unix_timestamp(decimal), str_to_date(date), str_to_date(datetime), datediff, year, month, day, extract(datetime), date, hour, microsecond, minute, second, sysdate, date_add, date_sub, adddate, subdate, quarter`
+* String functions: `substr, char_length, replace, concat, concat_ws, left, right, ascii, length, trim, ltrim, rtrim, position, format, lower, ucase, upper, substring_index, lpad, rpad, strcmp, regexp`
+* Date functions: `date_format, timestampdiff, from_unixtime, unix_timestamp(int), unix_timestamp(decimal), str_to_date(date), str_to_date(datetime), datediff, year, month, day, extract(datetime), date, hour, microsecond, minute, second, sysdate, date_add, date_sub, adddate, subdate, quarter, dayname, dayofmonth, dayofweek, dayofyear, last_day, monthname`
 * JSON function: `json_length`
 * Conversion functions: `cast(int as double), cast(int as decimal), cast(int as string), cast(int as time), cast(double as int), cast(double as decimal), cast(double as string), cast(double as time), cast(string as int), cast(string as double), cast(string as decimal), cast(string as time), cast(decimal as int), cast(decimal as string), cast(decimal as time), cast(time as int), cast(time as decimal), cast(time as string), cast(time as real)`
 * Aggregate functions: `min, max, sum, count, avg, approx_count_distinct, group_concat`
