@@ -1471,6 +1471,10 @@ SET tidb_query_log_max_len = 20
 - This variable controls whether to hide user information in the SQL statement being recorded into the TiDB log and slow log.
 - When you set the variable to `1`, user information is hidden. For example, if the executed SQL statement is `insert into t values (1,2)`, the statement is recorded as `insert into t values (?,?)` in the log.
 
+> **Note:**
+>
+> The `tidb_redact_log` variable is not applicable to TiDB Cloud.
+
 ### tidb_regard_null_as_point <span class="version-mark">New in v5.4.0</span>
 
 - Scope: SESSION | GLOBAL
