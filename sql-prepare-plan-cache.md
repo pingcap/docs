@@ -119,3 +119,119 @@ MySQL [test]> select @@last_plan_from_cache;
 +------------------------+
 1 row in set (0.00 sec)
 ```
+
+## Manually clear execution plan cache
+
+You can manually clear execution plan cache by executing the `ADMIN FLUSH [SESSION | INSTANCE] PLAN_CACHE` statement.
+
+In this statement, `[SESSION | INSTANCE]`specifies whether the plan cache is cleared for the current session or the whole TiDB instance. If the scope is left blank, the statement above applies to `SESSION` cache by default.
+
+The following is an example of clearing the `SESSION` execution plan cache:
+
+{{< copyable "sql" >}}
+
+```sql
+MySQL [test]> create table t (a int);
+Query OK, 0 rows affected (0.00 sec)
+
+MySQL [test]> prepare stmt from 'select * from t';
+Query OK, 0 rows affected (0.00 sec)
+
+MySQL [test]> execute stmt;
+Empty set (0.00 sec)
+
+MySQL [test]> execute stmt;
+Empty set (0.00 sec)
+
+MySQL [test]> select @@last_plan_from_cache; -- Select the cached plan
++------------------------+
+| @@last_plan_from_cache |
++------------------------+
+|                      1 |
++------------------------+
+1 row in set (0.00 sec)
+
+MySQL [test]> admin flush session plan_cache; -- Clear the cached plan of the current session
+Query OK, 0 rows affected (0.00 sec)
+
+MySQL [test]> execute stmt;
+Empty set (0.00 sec)
+
+MySQL [test]> select @@last_plan_from_cache; -- The cached plan cannot be selected again, because it has been cleared
++------------------------+
+| @@last_plan_from_cache |
++------------------------+
+|                      0 |
++------------------------+
+1 row in set (0.00 sec)
+```
+
+Currently, TiDB does not support clearing `GLOBAL` execution plan cache. That means you cannot clear the cached plan of the whole TiDB cluster. The following error is reported if you try to clear the `GLOBAL` execution plan cache:
+
+{{< copyable "sql" >}}
+
+```sql
+MySQL [test]> admin flush global plan_cache;
+ERROR 1105 (HY000): Do not support the 'admin flush global scope.'
+```
+
+## Ignore the `COM_STMT_CLOSE` command and the `DEALLOCATE PREPARE` statement
+
+To reduce syntax analysis for executed SQL statements, it is recommended that you run `prepare stmt` once, then `execute stmt` multiple times before running `deallocate prepare`:
+
+{{< copyable "sql" >}}
+
+```sql
+MySQL [test]> prepare stmt from '...'; -- prepare once
+MySQL [test]> execute stmt using ...;  -- execute once
+MySQL [test]> ...
+MySQL [test]> execute stmt using ...;  -- execute multiple times
+MySQL [test]> deallocate prepare stmt; -- Release the prepared statement
+```
+
+In real practice, you may be used to running `deallocate prepare` each time after running `execute stmt`, as shown below:
+
+{{< copyable "sql" >}}
+
+```sql
+MySQL [test]> prepare stmt from '...'; -- First prepare
+MySQL [test]> execute stmt using ...;
+MySQL [test]> deallocate prepare stmt; -- Release the prepared statement
+MySQL [test]> prepare stmt from '...'; -- Second prepare
+MySQL [test]> execute stmt using ...;
+MySQL [test]> deallocate prepare stmt; -- Release the prepared statement
+```
+
+In such practice, the plan obtained by the first execute statement cannot be reused by the second execute statement.
+
+To address the problem, you can use the system varible [`tidb_ignore_prepared_cache_close_stmt`](/system-variables.md#tidb_ignore_prepared_cache_close_stmt-new-in v60). After this variable is set to `ON`, TiDB ignores commands to close `prepare stmt`:
+
+{{< copyable "sql" >}}
+
+```sql
+mysql> set @@tidb_ignore_prepared_cache_close_stmt=1;  -- Enable the variable
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> prepare stmt from 'select * from t'; -- First prepare
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> execute stmt;                        -- First execute
+Empty set (0.00 sec)
+
+mysql> deallocate prepare stmt;             -- Release after the first execute
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> prepare stmt from 'select * from t'; -- Second prepare
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> execute stmt;                        -- Second execute
+Empty set (0.00 sec)
+
+mysql> select @@last_plan_from_cache;       -- Reuse the last plan
++------------------------+
+| @@last_plan_from_cache |
++------------------------+
+|                      1 |
++------------------------+
+1 row in set (0.00 sec)
+```
