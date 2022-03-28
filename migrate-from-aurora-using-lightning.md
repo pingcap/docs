@@ -46,7 +46,7 @@ Based on different deployment methods, edit the `tidb-lighting.toml` configurati
     [tikv-importer]
     # Uses Local-backend.
     backend = "local"
-    # The storage path of local temporary files. Ensure that the corresponding directory does not exist or is empty and that the disk capacity is large enough for storage.
+    # The storage path of local temporary files. Ensure that the corresponding directory does not exist or is empty and that the disk capacity is greater than the size of the dataset to be imported.
     sorted-kv-dir = "/path/to/local-temp-dir"
     ```
 
