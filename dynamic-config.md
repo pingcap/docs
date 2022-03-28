@@ -131,7 +131,7 @@ The following TiKV configuration items can be modified online:
 | `raftstore.raft-log-gc-threshold` | The soft limit on the maximum allowable number of residual Raft logs |
 | `raftstore.raft-log-gc-count-limit` | The hard limit on the allowable number of residual Raft logs |
 | `raftstore.raft-log-gc-size-limit` | The hard limit on the allowable size of residual Raft logs |
-| `raftstore.raft-max-size-per-msg` | The soft limit on the allowable size of a single message packet |
+| `raftstore.raft-max-size-per-msg` | The soft limit on the size of a single message packet that is allowed to be generated |
 | `raftstore.raft-entry-cache-life-time` | The maximum remaining time allowed for the log cache in memory |
 | `raftstore.split-region-check-tick-interval` | The time interval at which to check whether the Region split is needed |
 | `raftstore.region-split-check-diff` | The maximum value by which the Region data is allowed to exceed before Region split |
