@@ -1462,7 +1462,7 @@ Configuration items related to BR backup.
 ### `num-threads`
 
 + The number of worker threads to process backup
-+ Default value: `MIN(CPU * 0.5, CPU)`.
++ Default value: `MIN(CPU * 0.5, 8)`.
 + Minimum value: `1`
 
 ### `enable-auto-tune` <span class="version-mark">New in v5.4.0</span>
