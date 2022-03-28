@@ -370,7 +370,7 @@ TiFlash provides the following two global/session variables to control whether t
 
 ## Access partitioned tables in MPP mode
 
-When TiDB accesses partitioned tables in [dynamic pruning mode](https://docs.pingcap.com/tidb/stable/partitioned-table#dynamic-pruning-mode), queries on the partitioned tables are executed in the MPP mode.
+To access partitioned tables in the MPP mode, you need to enable [dynamic pruning mode](https://docs.pingcap.com/tidb/stable/partitioned-table#dynamic-pruning-mode) first.
 
 > **Warning:**
 >
