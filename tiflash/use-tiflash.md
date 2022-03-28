@@ -81,7 +81,7 @@ In the result of above statement:
 
 ## Create TiFlash replicas for databases
 
-Similar with creating TiFlash replicas for tables, you can send a DDL statement to TiDB through a MySQL client to create a TiFlash replica for all tables in a specific database:
+Similar to creating TiFlash replicas for tables, you can send a SQL statement to TiDB through a MySQL client to create a TiFlash replica for all tables in a specific database:
 
 {{< copyable "sql" >}}
 
@@ -89,7 +89,7 @@ Similar with creating TiFlash replicas for tables, you can send a DDL statement 
 ALTER DATABASE db_name SET TIFLASH REPLICA count
 ```
 
-In this statement, `count` indicates the number of replicas. When the value is `0`, the replica is deleted.
+In this statement, `count` indicates the number of replicas. When the value is `0`, replicas are deleted.
 
 Examples:
 
@@ -115,14 +115,14 @@ Examples:
 >
 > - After executing the statement, do not set the number of TiFlash replicas or DDL operations on this database until **all tables in this database are replicated**. Otherwise, unexpected results may occur, which includes:
 >     - If you set the number of TiFlash replicas to 2 and then change the number to 1 before all tables in the database are replicated, the final number of TiFlash replicas of all the tables is not necessarily 1 or 2.
->     - After executing the statement, if you create tables in this database before the completion of the statement execution, TiFlash replicas **may** be created for these new tables.
+>     - After executing the statement, if you create tables in this database before the completion of the statement execution, TiFlash replicas **may or may not** be created for these new tables.
 >     - After executing the statement, if you add indexes for tables in the database before the completion of the statement execution, the statement may be hung and resumes only after the operation of adding indexes finishes.
 >
 > - This statement skips system tables, views, temporary tables, and tables with character sets not supported by TiFlash.
 
 ### Check replication progress
 
-Similar with creating TiFlash replicas for tables, successful execution of the statement does not mean the completion of replication. You can execute the following SQL statement to check the progress of replication on target tables:
+Similar to creating TiFlash replicas for tables, successful execution of the statement does not mean the completion of replication. You can execute the following SQL statement to check the progress of replication on target tables:
 
 {{< copyable "sql" >}}
 
