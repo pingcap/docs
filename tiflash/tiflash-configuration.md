@@ -75,9 +75,9 @@ delta_index_cache_size = 0
 
     ## DTFile format
     ## * format_version = 1, the old format, deprecated.
-    ## * format_version = 2, the default format.
-    ## * format_version = 3, the new format, which provides more data validation features.
-    # format_version = 2
+    ## * format_version = 2, the default format for versions < v6.0.0.
+    ## * format_version = 3, the default format for versions >= v6.0.0, which provides more data validation features.
+    # format_version = 3
 
     [storage.main]
     ## The list of directories to store the main data. More than 90% of the total data is stored in
@@ -191,8 +191,8 @@ delta_index_cache_size = 0
     cop_pool_size = 0
     ## New in v5.0. This item specifies the maximum number of batch requests that TiFlash Coprocessor executes at the same time. If the number of requests exceeds the specified value, the exceeded requests will queue. If the configuration value is set to 0 or not set, the default value is used, which is twice the number of physical cores.
     batch_cop_pool_size = 0
-    ## New in v5.4.0. This item enables or disables the elastic thread pool feature, which significantly improves CPU utilization in high concurrency scenarios of TiFlash. The default value is false. The elastic thread pool feature is experimental and not recommended for production environments.
-    enable_elastic_threadpool = false
+    ## New in v5.4.0. This item enables or disables the elastic thread pool feature, which significantly improves CPU utilization in high concurrency scenarios of TiFlash. The default value is true. 
+    enable_elastic_threadpool = true
     # Compression algorithm of the TiFlash storage engine. The value can be LZ4, zstd, or LZ4HC, and is case-insensitive. By default, LZ4 is used.
     dt_compression_method = "LZ4"
     # Compression level of the TiFlash storage engine. The default value is 1. It is recommended that you set this value to 1 if dt_compression_method is LZ4, -1 (smaller compression rate, but better read performance) or 1 if dt_compression_method is zstd, and 9 if dt_compression_method is LZ4HC.
