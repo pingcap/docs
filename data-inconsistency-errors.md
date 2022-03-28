@@ -1,9 +1,9 @@
 ---
-title: Troubleshoot Data and Index Inconsistency Errors
+title: Troubleshoot Inconsistencies Between Data and Index
 summary: Learn how to deal with errors reported by the data index consistency check, which can be performed automatically or manually.
 ---
 
-# Troubleshoot Data and Index Inconsistency Errors
+# Troubleshoot Inconsistencies Between Data and Index
 
 TiDB checks consistency between data and index during executing a transaction or executing the [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) command. If the check finds that record key-value and index key-value are inconsistent, that is, the key-value pair storing row data and the key-value pair storing its corresponding index are inconsistent (for example, more indexes or missing indexes), TiDB reports the data index consistency error and prints the related errors in the log file.
 
