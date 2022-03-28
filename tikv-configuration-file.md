@@ -211,7 +211,7 @@ Configuration items related to the single thread pool serving read requests. Thi
 ### `max-thread-count`
 
 + The maximum working thread count of the unified read pool or the UnifyReadPool thread pool. When you modify the size of this thread pool, refer to [Performance tuning for TiKV thread pools](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools).
-+ Value range: `[min-thread-count, MAX(4, CPU)]`. `MAX(4, CPU)` means the following: if the number of your CPU cores is less than `4`, take `4`; if the number of your CPU cores is greater than `4`, take the number of CPU cores.
++ Value range: `[min-thread-count, MAX(4, CPU)]`. `MAX(4, CPU)` means that if the number of your CPU cores is less than `4`, take `4`; if the number of your CPU cores is greater than `4`, take the number of CPU cores.
 + Default value: MAX(4, CPU * 0.8)
 
 ### `stack-size`
