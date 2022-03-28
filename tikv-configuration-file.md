@@ -1543,3 +1543,35 @@ For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](
 + Enables the in-memory pessimistic lock feature. With this feature enabled, pessimistic transactions try to store their locks in memory, instead of writing the locks to disk or replicating the locks to other replicas. This improves the performance of pessimistic transactions. However, there is a still low probability that the pessimistic lock gets lost and causes the pessimistic transaction commits to fail.
 + Default value: `true`
 + Note that `in-memory` takes effect only when the value of `pipelined` is `true`.
+
+## quota
+
+Configuration items related to Quota Limiter.
+
+Suppose that your machine deployed TiKV has limited resources, for example, 4v CPU, 16 G memory. In this case, if TiKV foreground processes requests in too large volumes, the foreground occupies the CPU resources for processing background requests, which causes performance degradation. To avoid this issue, you can use the quota-related configuration items to limit the CPU resources used by the foreground. When requests trigger the Quota Limiter feature, the requests are forced to wait for a while to free up CPU resources. The exact waiting time depends on the volume of the requests, and the maximum waiting time is no longer than the value of [`max-delay-duration`](#max-delay-durationnew-in-v600).
+
+> **Warning:**
+>
+> - Quota Limiter is an experimental feature introduced TiDB v6.0.0, and it is **NOT** recommended to use it in the production environment.
+> - This feature is only suitable for environments with limited resources, which ensures that TiKV can run continuously in these environments. If you enable this feature on an environment with rich resources, when the volume of requests reach a peak, performance degradation might be caused.
+
+### `foreground-cpu-time`(new in v6.0.0)
+
++ The soft limit on controlling the CPU resources used by TiKV foreground to process read and write requests.
++ Default value: `0` (no limit)
++ Unit: millicpu (`1500` means that foreground requests consume 1.5v CPU)
+
+### `foreground-write-bandwidth`(new in v6.0.0)
+
++ The soft limit for transactions to write data.
++ Default value: `0KB`(no limit)
+
+### `foreground-read-bandwidth`(new in v6.0.0)
+
++ The soft limit for transactions and Coprocessor to read data.
++ Default value: `0KB` (no limit)
+
+### `max-delay-duration`(new in v6.0.0)
+
++ The maximum time that a single read and write request of the foreground is forced to wait.
++ Default value: `500ms`
