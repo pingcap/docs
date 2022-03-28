@@ -16,9 +16,20 @@ For a specified TiDB or TiKV node, Top SQL provides the following features:
 * Show the top 5 types of SQL queries that contribute the most to the load in a specified time range.
 * Show information such as CPU usage, requests per second, average latency, and query plan of a particular query, which can be used for potential performance optimization to improve your business.
 
+## Enable Top SQL
+
+The Top SQL feature is disabled by default. You can enable the feature for the entire cluster using either of the following methods:
+
+- Method 1: Log in to TiDB Dashboard, click **Top SQL** in the left pane, click the gear button in the upper-right corner of the page, and then enable the Top SQL feature.
+- Method 2: Set the value of the TiDB system variable [`tidb_enable_top_sql`](/system-variables.md#tidb_enable_top_sql-new-in-v540) to `ON`.
+
+> **Note:**
+>
+> Enabling Top SQL has a slight impact on the performance of your cluster.
+
 ## Use Top SQL
 
-The Top SQL feature is enabled by default. To view SQL queries that contribute to a high load, log into TiDB Dashboard and click **Top SQL** in the left pane.
+Once Top SQL is enabled, you can log into TiDB Dashboard, and then click **Top SQL** in the left pane to use it.
 
 ![Top SQL](/media/dashboard/top-sql-overview.png)
 
@@ -33,7 +44,7 @@ Usage tips：
 
 ## Disable Top SQL
 
-Enabling Top SQL has a slight impact on the performance of your cluster. If you want to disable it for the entire cluster, do one of the following:
+If you want to disable Top SQL for the entire cluster, do one of the following:
 
 - Method 1: Log in to TiDB Dashboard, click **Top SQL** in the left pane, click the gear button in the upper-right corner of the page, and then disable the Top SQL feature.
 - Method 2: Set the value of the TiDB system variable [`tidb_enable_top_sql`](/system-variables.md#tidb_enable_top_sql-new-in-v540) to `OFF`.
