@@ -1098,7 +1098,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - When the parameter of the aggregate function is not distinct, `HashAgg` is run concurrently and respectively in two phases - the `partial` phase and the `final` phase.
 - A value of `-1` means that the value of `tidb_executor_concurrency` will be used instead.
 
-### tidb_ignore_prepared_cache_close_stmt ((New in v6.0.0))
+### tidb_ignore_prepared_cache_close_stmt (New in v6.0.0)
 
 - Scope: SESSION | GLOBAL
 - Default value: `OFF`
