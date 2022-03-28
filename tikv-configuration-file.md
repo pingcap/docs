@@ -348,7 +348,7 @@ Configuration items related to storage.
 
 ### `scheduler-worker-pool-size`
 
-+ The number of `scheduler` threads, mainly used for checking transaction consistency before data writing. If the number of CPU cores is greater than or equal to `16`, the default value is `8`; otherwise, the default value is `4`. When you modify the size of the Scheduler thread pool, refer to [Performance tuning for TiKV thread pools](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools).
++ The number of threads in the Scheduler thread pool. The scheduler threads is mainly used for checking transaction consistency before data writing. If the number of CPU cores is greater than or equal to `16`, the default value is `8`; otherwise, the default value is `4`. When you modify the size of the Scheduler thread pool, refer to [Performance tuning for TiKV thread pools](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools).
 + Default value: `4`
 + Minimum value: `1`
 
@@ -490,8 +490,9 @@ Configuration items related to Raftstore.
 
 + The soft limit on the size of a single message packet
 + Default value: `"1MB"`
-+ Minimum value: `0`
-+ Unit: MB
++ Minimum value: greater than `0`
++ Maximum value: `3GB`
++ Unit: KB|MB|GB
 
 ### `raft-max-inflight-msgs`
 
@@ -727,25 +728,27 @@ Configuration items related to Raftstore.
 
 ### `apply-max-batch-size`
 
-+ The maximum number of requests for data flushing in one batch
++ Raft state machines execute data write requests in batches by the BatchSystem. This configuration item specifies the maximum number of Raft state machines that can execute the requests in one batch.
 + Default value: `256`
 + Minimum value: greater than `0`
++ Maximum value: `10240`
 
 ### `apply-pool-size`
 
-+ The allowable number of threads in the pool that flushes data to storage. When you modify the size of this thread pool, refer to [Performance tuning for TiKV thread pools](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools).
++ The allowable number of threads in the pool that flushes data to storage, which is the size of the Apply thread pool. When you modify the size of this thread pool, refer to [Performance tuning for TiKV thread pools](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools).
 + Default value: `2`
 + Minimum value: greater than `0`
 
 ### `store-max-batch-size`
 
-+ The maximum number of requests processed in one batch
++ Raft state machines execute requests for log flushing in batches by the BatchSystem. This configuration item specifies the maximum number of Raft state machines that can execute the requests in one batch.
 + If `hibernate-regions` is enabled, the default value is `256`. If `hibernate-regions` is disabled, the default value is `1024`.
 + Minimum value: greater than `0`
++ Maximum value: `10240`
 
 ### `store-pool-size`
 
-+ The allowable number of threads that process Raft, which is the size of the Raftstore thread pool. When you modify the size of this thread pool, refer to [Performance tuning for TiKV thread pools](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools).
++ The allowable number of threads in the pool that processes Raft, which is the size of the Raftstore thread pool. When you modify the size of this thread pool, refer to [Performance tuning for TiKV thread pools](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools).
 + Default value: `2`
 + Minimum value: greater than `0`
 
