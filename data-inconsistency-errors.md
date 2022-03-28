@@ -13,7 +13,7 @@ This document explains the errors of data index consistency and provides some wa
 
 When data index inconsistency occurs, you can check TiDB error messages to see the specific inconsistent item of row data and index data, or check the related error logs for further investigation.
 
-### 执行事务中的报错 Errors reported during transaction execution
+### Errors reported during transaction execution
 
 This section lists the data index inconsistency errors reported when TiDB executes transactions and explains the meaning of these errors with examples.
 
@@ -47,7 +47,7 @@ This error indicates that the data of a row to be written by the transaction doe
 
 This error indicates that the assertion failed when a transaction was committed. Assuming that the data index is consistent, TiDB asserted that the key `7480000000000000405f720133000000000000000000f8` did not exist. When the transaction was committed, TiDB found the key did exist, written by the transaction with `start ts` as `430590532931551233`. TiDB will print the MVCC (Multi-Version Concurrency Control) history of this key to the log.
 
-### Admin check 中的报错  Errors reported in admin check
+### Errors reported in admin check
 
 This section lists the data index inconsistency errors that might occur in TiDB when you execute the [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) statement, with examples provided to explain the error meanings.
 
