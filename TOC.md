@@ -225,13 +225,13 @@
       - [Use TiUP Offline](/dm/deploy-a-dm-cluster-using-tiup-offline.md)
       - [Use Binary](/dm/deploy-a-dm-cluster-using-binary.md)
       - [Use Kubernetes](https://docs.pingcap.com/zh/tidb-in-kubernetes/dev/deploy-tidb-dm)
-      - Basic Features
-        - [Manage Data Sources](/dm/dm-manage-sources.md)
-        - [Configure Tasks](/dm/dm-task-configuration-guide.md)
-        - [Table Routing](/dm/dm-key-features.md)
-        - [Block and Allow Lists](/dm/dm-key-features.md#block-and-allow-table-lists)
-        - [Binlog Event Filter](/dm/dm-key-features.md#binlog-event-filter)
-        - [Filter DMLs Using SQL Expressions](/dm/feature-expression-filter.md)
+    - Basic Features
+      - [Manage Data Sources](/dm/dm-manage-source.md)
+      - [Configure Tasks](/dm/dm-task-configuration-guide.md)
+      - [Table Routing](/dm/dm-key-features.md)
+      - [Block and Allow Lists](/dm/dm-key-features.md#block-and-allow-table-lists)
+      - [Binlog Event Filter](/dm/dm-key-features.md#binlog-event-filter)
+      - [Filter DMLs Using SQL Expressions](/dm/feature-expression-filter.md)
       - Manage a Data Migration Task
         - [Precheck a Task](/dm/dm-precheck.md)
         - [Create a Task](/dm/dm-create-task.md)
@@ -271,7 +271,7 @@
         - [DM Architecture](/dm/dm-arch.md)
         - [DM-worker](/dm/dm-worker-intro.md)
       - Command Line
-        - [Command-line Flags](/dm/dm-command-line-flags.md)
+        - [DM-master & DM-worker](/dm/dm-command-line-flags.md)
       - Configuration Files
         - [Overview](/dm/dm-config-overview.md)
         - [Upstream Database Configurations](/dm/dm-source-configuration-file.md)
