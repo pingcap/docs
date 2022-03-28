@@ -456,11 +456,11 @@ The output of the official Canal is as follows:
 
 ## Changes in TiCDC Canal-JSON
 
-### Changes in the `Old` field of the `Delete` event message
+### Changes in the `Old` field of the `Delete` events
 
-From v5.4.0, the `old` field of the `Delete` event message has changed.
+From v5.4.0, the `old` field of the `Delete` events has changed.
 
-The following is an example of the `Delete` event message. Before v5.4.0, the `old` field contains the same content as the "data" field. In v5.4.0 and later versions, the `old` field is set to null. You can get the deleted data by using the "data" field.
+The following is a `Delete` event message. Before v5.4.0, the `old` field contains the same content as the "data" field. In v5.4.0 and later versions, the `old` field is set to null. You can get the deleted data by using the "data" field.
 
 ```
 {
