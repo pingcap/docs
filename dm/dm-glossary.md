@@ -32,7 +32,7 @@ Binlog replication processing unit is the processing unit used in DM-worker to r
 
 ### Block & allow table list
 
-Block & allow table list is the feature that filters or only migrates all operations of some databases or some tables. Refer to [block & allow table lists](/dm/dm-key-features.md#block--allow-table-lists) for details. This feature is similar to [MySQL Replication Filtering](https://dev.mysql.com/doc/refman/5.6/en/replication-rules.html) and [MariaDB Replication Filters](https://mariadb.com/kb/en/replication-filters/).
+Block & allow table list is the feature that filters or only migrates all operations of some databases or some tables. Refer to [block & allow table lists](/dm/dm-key-features.md#block-and-allow-table-lists) for details. This feature is similar to [MySQL Replication Filtering](https://dev.mysql.com/doc/refman/5.6/en/replication-rules.html) and [MariaDB Replication Filters](https://mariadb.com/kb/en/replication-filters/).
 
 ## C
 
