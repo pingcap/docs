@@ -729,7 +729,7 @@ Use this command to view and control the scheduling policy.
 Usage:
 
 ```bash
->> scheduler show                                 // Display all schedulers
+>> scheduler show                                 // Display all created schedulers
 >> scheduler add grant-leader-scheduler 1         // Schedule all the leaders of the Regions on store 1 to store 1
 >> scheduler add evict-leader-scheduler 1         // Move all the Region leaders on store 1 out
 >> scheduler config evict-leader-scheduler        // Display the stores in which the scheduler is located since v4.0.0
