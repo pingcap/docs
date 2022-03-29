@@ -357,7 +357,7 @@ Insert filtering conditions into the system table `mysql.capture_plan_baselines_
  INSERT INTO mysql.capture_plan_baselines_blacklist(filter_type, filter_value) VALUES('user', 'user1');
 ```
 
-| ** Dimension** | ** Dimension name** | ** Description**                                                     | Remarks                                                     |
+| **Dimension** | **Dimension name** | **Description**                                                     | Remarks                                                     |
 | :----------- | :----------- | :----------------------------------------------------------- | ------------------------------------------------------------ |
 | Table name         | table        | Filter by table name. Each filtering rule is in the form of `db.table` and supports wildcards. For details about the rules, see [Plain table names](/table-filter.md# plain-table-names) and [Wildcards](/table-filter.md#wildcards). | Case insensitive. If the table name contains illegal content, the log returns a warning message `[sql-bind] failed to load mysql.capture_plan_baselines_blacklist`. |
 | Frequency         | frequency    | SQL statements executed more than once are captured by default. You can set a high frequency to capture statements more frequently. | Setting frequency to a value smaller than 1 is considered illegal, and the log returns a warning message `[sql-bind] frequency threshold is less than 1, ignore it`. If multiple frequency filter rules are inserted, the value with the highest frequency prevails. |
