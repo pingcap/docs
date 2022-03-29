@@ -74,7 +74,7 @@ In v5.3, the key new features or improvements are as follows:
 - Fix the issue that auto-analyze is unexpectedly triggered outside the specified time period when new indexes are added before v5.3.0. In v5.3.0, after you set the time period through the `tidb_auto_analyze_start_time` and `tidb_auto_analyze_end_time` variables, auto-analyze is triggered only during this time period.
 - The default storage directory for plugins is changed from `""` to `/data/deploy/plugin`.
 - The DM code is migrated to [the folder "dm" in TiCDC code repository](https://github.com/pingcap/tiflow/tree/master/dm). Now DM follows TiDB in version numbers. Next to v2.0.x, the new DM version is v5.3.0, and you can upgrade from v2.0.x to v5.3.0 without any risk.
-- The default deployed version of Prometheus is updated form v2.8.1 to [v2.27.1](https://github.com/prometheus/prometheus/releases/tag/v2.27.1), which is released in May 2021. This version provides more features and fixes a security issue. Compared with Prometheus v2.8.1, alert's time representation in v2.27.1 is changed from Unix timestamp to UTC. Refer to [Prometheus commit](https://github.com/prometheus/prometheus/commit/7646cbca328278585be15fa615e22f2a50b47d06) for more details.
+- The default deployed version of Prometheus is upgraded from v2.8.1 to [v2.27.1](https://github.com/prometheus/prometheus/releases/tag/v2.27.1), which is released in May 2021. This version provides more features and fixes a security issue. Compared with Prometheus v2.8.1, alert time representation in v2.27.1 is changed from Unix timestamp to UTC. Refer to [Prometheus commit](https://github.com/prometheus/prometheus/commit/7646cbca328278585be15fa615e22f2a50b47d06) for more details.
 
 ## New features
 
