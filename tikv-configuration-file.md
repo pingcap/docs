@@ -1552,26 +1552,26 @@ Suppose that your machine deployed TiKV has limited resources, for example, 4v C
 
 > **Warning:**
 >
-> - Quota Limiter is an experimental feature introduced TiDB v6.0.0, and it is **NOT** recommended to use it in the production environment.
-> - This feature is only suitable for environments with limited resources, which ensures that TiKV can run stably in those environments for the long term. If you enable this feature in an environment with rich resources, performance degradation might be caused when the amount of requests reaches a peak.
+> - Quota Limiter is an experimental feature introduced in TiDB v6.0.0, and it is **NOT** recommended to use it in the production environment.
+> - This feature is only suitable for environments with limited resources to ensure that TiKV can run stably in those environments. If you enable this feature in an environment with rich resources, performance degradation might occur when the amount of requests reaches a peak.
 
-### `foreground-cpu-time`(new in v6.0.0)
+### `foreground-cpu-time` (new in v6.0.0)
 
 + The soft limit on controlling the CPU resources used by TiKV foreground to process read and write requests.
-+ Default value: `0` (no limit)
-+ Unit: millicpu (`1500` means that foreground requests consume 1.5v CPU)
++ Default value: `0` (which means no limit)
++ Unit: millicpu (for example, `1500` means that foreground requests consume 1.5v CPU)
 
-### `foreground-write-bandwidth`(new in v6.0.0)
+### `foreground-write-bandwidth` (new in v6.0.0)
 
 + The soft limit for transactions to write data.
-+ Default value: `0KB` (no limit)
++ Default value: `0KB` (which means no limit)
 
-### `foreground-read-bandwidth`(new in v6.0.0)
+### `foreground-read-bandwidth` (new in v6.0.0)
 
 + The soft limit for transactions and Coprocessor to read data.
-+ Default value: `0KB` (no limit)
++ Default value: `0KB` (which means no limit)
 
-### `max-delay-duration`(new in v6.0.0)
+### `max-delay-duration` (new in v6.0.0)
 
-+ The maximum time that a single read and write request needed to be processed in the foreground is forced to wait.
++ The maximum time that a single read or write request is forced to wait before it is processed in the foreground.
 + Default value: `500ms`
