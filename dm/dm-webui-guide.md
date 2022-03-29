@@ -1,5 +1,5 @@
 ---
-title: Use WebUI to manage DM migration tasks.
+title: Use WebUI to Manage DM migration tasks.
 summary: Learn how to use WebUI to manage DM migration tasks.
 ---
 
@@ -66,7 +66,7 @@ To ensure that DM WebUI can display information properly, before using DM WebUI,
 
     If the IP and port of `grafana_servers` are not the default ones, you need to fill in the correct IP and port in the **Dashboard** interface.
 
-+ If your DM cluster is upgraded from an old version, you need to manually modify the Grafana configuration:
++ If your DM cluster is upgraded from an earlier version, you need to manually modify the Grafana configuration:
 
     1. Edit the `/{deploy-dir}/grafana-{port}/conf/grafana.ini` file as follows:
 
