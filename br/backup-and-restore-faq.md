@@ -164,6 +164,12 @@ You can use [`filter.rules`](https://github.com/pingcap/tiflow/blob/7c3c2336f981
 
 Yes. BR backs up the [`SHARD_ROW_ID_BITS` and `PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions) information of a table. The data of the restored table is also split into multiple Regions.
 
+## What should I do when the `entry too large, the max entry size is 6291456, the size of data is 7690800` error reported during data restoration using BR?
+
+You can try reducing the size of the concurrent batch table creation by setting `--ddl-batch-size` to `128` or a smaller value.
+
+Suppose that the value of [`--ddl-batch-size`](/br/br-batch-create-table.md#how to use) is greater than `1`, and you use BR to restore the backup data. In this case, TiDB writes the queue of DDL jobs that create tables to TiKV. The total schema size of all tables sent by TiDB at one time should not exceed 6 MB, because the default maximum value of job messages that TiDB can send at one time is `6 MB`. You are **not recommended** to modify this value. For details, see [txn-entry-size-limit](/tidb-configuration-file.md#txn-entry-size-limit-new-in-50) and [raft-entry-max-size](/tikv-configuration-file.md#raft-entry-max-size). Therefore, if you set the too large value to `--ddl-batch-size`, the schema size of the batch table sent by TiDB at a time exceeds the specified value, resulting in BR reporting `entry too large, the max entry size is 6291456, the size of data is 7690800` error.
+
 ## Why is the `region is unavailable` error reported for a SQL query after I use BR to restore the backup data?
 
 If the cluster backed up using BR has TiFlash, `TableInfo` stores the TiFlash information when BR restores the backup data. If the cluster to be restored does not have TiFlash, the `region is unavailable` error is reported.
