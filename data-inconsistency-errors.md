@@ -90,4 +90,4 @@ For other errors reported in transaction execution and all errors reported durin
 
 ### Rewrite SQL
 
-Disabling `tidb_mutation_checker` and `tidb_txn_assertion_level` mentioned in the previous section bypasses the corresponding check of all SQL statements. If only a particular SQL is misreported, you can try bypassing the error by rewriting the SQL to another equivalent form using different execution operators.
+Disabling `tidb_enable_mutation_checker` and `tidb_txn_assertion_level` mentioned in the previous section bypasses the corresponding check of all SQL statements. If only a particular SQL is misreported, you can try bypassing the error by rewriting the SQL to another equivalent form using different execution operators.
