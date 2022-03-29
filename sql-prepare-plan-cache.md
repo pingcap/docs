@@ -177,7 +177,7 @@ ERROR 1105 (HY000): Do not support the 'admin flush global scope.'
 
 ## Ignore the `COM_STMT_CLOSE` command and the `DEALLOCATE PREPARE` statement
 
-To reduce syntax analysis for executed SQL statements, it is recommended that you run `prepare stmt` once, then `execute stmt` multiple times before running `deallocate prepare`:
+To reduce optimization cost for executed SQL statements, it is recommended that you run `prepare stmt` once, then `execute stmt` multiple times before running `deallocate prepare`:
 
 {{< copyable "sql" >}}
 
