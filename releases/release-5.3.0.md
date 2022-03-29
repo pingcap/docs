@@ -229,7 +229,7 @@ In v5.3, the key new features or improvements are as follows:
 
 - **TiCDC supports the HTTP protocol OpenAPI for managing TiCDC tasks**
 
-    Since TiDB v5.3.0, TiCDC OpenAPI becomes an General Availability (GA) feature. You can query and operate TiCDC clusters using OpenAPI in the production environment.
+    Since TiDB v5.3.0, TiCDC OpenAPI becomes a General Availability (GA) feature. You can query and operate TiCDC clusters using OpenAPI in the production environment.
 
 ### Deployment and maintenance
 
