@@ -552,7 +552,7 @@
     - [Views](/views.md)
     - [Partitioning](/partitioned-table.md)
     - [Temporary Tables](/temporary-tables.md)
-    - [Table Cache](/table-cache.md)
+    - [Cached Tables](/cached-tables.md)
     - Character Set and Collation
       - [Overview](/character-set-and-collation.md)
       - [GBK](/character-set-gbk.md)
