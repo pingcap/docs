@@ -72,8 +72,9 @@ In v5.3, the key new features or improvements are as follows:
 - The system variable `sql_auto_is_null` is added to the noop functions. When `tidb_enable_noop_functions = 0/OFF`, modifying this variable value causes an error.
 - The `GRANT ALL ON performance_schema.*` syntax is no longer permitted. If you execute this statement in TiDB, an error occurs.
 - Fix the issue that auto-analyze is unexpectedly triggered outside the specified time period when new indexes are added before v5.3.0. In v5.3.0, after you set the time period through the `tidb_auto_analyze_start_time` and `tidb_auto_analyze_end_time` variables, auto-analyze is triggered only during this time period.
-- The default storage directory for plugins is changed from "" to /data/deploy/plugin.
+- The default storage directory for plugins is changed from `""` to `/data/deploy/plugin`.
 - The DM code is migrated to [the folder "dm" in TiCDC code repository](https://github.com/pingcap/tiflow/tree/master/dm). Now DM follows TiDB in version numbers. Next to v2.0.x, the new DM version is v5.3.0, and you can upgrade from v2.0.x to v5.3.0 without any risk.
+- Deploy
 
 ## New features
 
