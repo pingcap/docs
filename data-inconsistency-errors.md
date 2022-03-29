@@ -75,9 +75,9 @@ When a data index consistency error occurs, the reasons can be as follows:
 
 - The data indexes in the existing data are consistent. The current version of TiDB has a bug. An ongoing transaction is about to write inconsistent data into the existing data, so the transaction is aborted.
 - The data indexes in the existing data are inconsistent. The inconsistent data could be from an error or a dangerous operation in the past or caused by a TiDB bug.
-- The data indexes are consistent but the detection algorithm has a bug that causes a false alarm.
+- The data indexes are consistent but the detection algorithm has a bug that causes an error by mistake.
 
-If you receive a data index consistency error, contact PingCAP technical support immediately to fix or troubleshoot it instead of dealing with the error by yourself. If PingCAP technical support confirms that the error is a false alarm, or your application needs to skip such errors urgently, you can use the following methods to bypass the check.
+If you receive a data index consistency error, contact PingCAP technical support immediately to fix or troubleshoot it instead of dealing with the error by yourself. If PingCAP technical support confirms that the error is reported by mistake, or your application needs to skip such errors urgently, you can use the following methods to bypass the check.
 
 ### Disable error check
 
@@ -90,4 +90,4 @@ For other errors reported in transaction execution and all errors reported durin
 
 ### Rewrite SQL
 
-Disabling `tidb_enable_mutation_checker` and `tidb_txn_assertion_level` mentioned in the previous section bypasses the corresponding check of all SQL statements. If only a particular SQL is misreported, you can try bypassing the error by rewriting the SQL to another equivalent form using different execution operators.
+Disabling `tidb_enable_mutation_checker` and `tidb_txn_assertion_level` mentioned in the previous section bypasses the corresponding check of all SQL statements. If an inconsistency error is misreported for a particular SQL statement, you can try bypassing the error by rewriting the SQL statement to another equivalent form using different execution operators.
