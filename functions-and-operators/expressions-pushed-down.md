@@ -21,7 +21,7 @@ When TiDB reads data from TiKV, TiDB tries to push down some expressions (includ
 
 ## Blocklist specific expressions
 
-Suppose that unexpected behaviors occur during the calculation of an [above-listed expression](#supported-expressions-for-pushdown) or a specific data type (**only** [`ENUM` type](/data-type-string.md#enum-type) and [`BIT` type](/data-type-numeric.md#bit-type)) caused by its pushdown. In that case, you can quickly restore the application by blocklisting pushdown the function, operator, or data type. Specifically, you can prohibit the function, operator, or data type from being pushed down by adding it to the blocklist `mysql.expr_pushdown_blacklist`. For details, refer to [Add to the blocklist](#add-to-the-blocklist).
+Suppose that unexpected behavior occurs when calculating [preceding expressions](#supported-expressions-for-pushdown) or specific data types (**only** [`ENUM` type](/data-type-string.md#enum-type) and [`BIT` type](/data-type-numeric.md#bit-type)) because of pushing them down. In that case, you can restore the application quickly by blocklisting pushdown the corresponding functions, operators, or data types. Specifically, you can prohibit the functions, operators, or data types from being pushed down by adding them to the blocklist `mysql.expr_pushdown_blacklist`. For details, refer to [Add to the blocklist](#add-to-the-blocklist).
 
 The schema of `mysql.expr_pushdown_blacklist` is as follows:
 
@@ -45,7 +45,7 @@ Field description:
 
 ### Add to the blocklist
 
-To add one or more [function, operator](#supported-expressions-for-pushdown), or data type (**only** [`ENUM` type](/data-type-string.md#enum-type) and [`BIT` type](/data-type-numeric.md#bit-type)) to the blocklist, perform the following steps:
+To add one or more [functions, operators](#supported-expressions-for-pushdown), or data types (**only** [`ENUM` type](/data-type-string.md#enum-type) and [`BIT` type](/data-type-numeric.md#bit-type)) to the blocklist, perform the following steps:
 
 1. Insert the followings to `mysql.expr_pushdown_blacklist`:
 
@@ -64,7 +64,7 @@ To remove one or more functions, operators, or data types from the blocklist, pe
 
 ### Blocklist usage examples
 
-The following example demonstrates how to add the `DATE_FORMAT()` function, `>` operators, and `BIT` data type to the blocklist, then remove `>` from the blocklist.
+The following example demonstrates how to add the `DATE_FORMAT()` function, `>` operator, and `BIT` data type to the blocklist, then remove `>` from the blocklist.
 
 You can see whether the blocklist takes effect by checking the results returned by `EXPLAIN` statement (See [Understanding `EXPLAIN` results](/explain-overview.md)).
 

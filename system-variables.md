@@ -1636,7 +1636,7 @@ SET tidb_slow_log_threshold = 200;
 
 - Scope: SESSION | GLOBAL
 - Default value: `OFF`
-- This variable is used to control whether `SYSDATE` can be replaced by `NOW`. This configuration has the same effect with MySQL option [`sysdate-is-now`](https://dev.mysql.com/doc/refman/8.0/en/server-options.html#option_mysqld_sysdate-is-now).
+- This variable is used to control whether `SYSDATE` can be replaced by `NOW`. This configuration item has the same effect as the MySQL option [`sysdate-is-now`](https://dev.mysql.com/doc/refman/8.0/en/server-options.html#option_mysqld_sysdate-is-now).
 
 ### tidb_tmp_table_max_size <span class="version-mark">New in v5.3.0</span>
 
