@@ -496,7 +496,7 @@ Configuration items related to Raftstore.
 
 ### `raft-max-inflight-msgs`
 
-+ The number of logs to be confirmed. If this number is exceeded, the Raft state machine slows down log sending.
++ The number of Raft logs to be confirmed. If this number is exceeded, the Raft state machine slows down log sending.
 + Default value: `256`
 + Minimum value: greater than `0`
 
@@ -1458,7 +1458,7 @@ Configuration items related to BR backup.
 
 + The number of worker threads to process backup
 + Default value: `MIN(CPU * 0.5, 8)`
-+ Value range: [1, CPU]
++ Value range: `[1, CPU]`
 + Minimum value: `1`
 
 ### `enable-auto-tune` <span class="version-mark">New in v5.4.0</span>
