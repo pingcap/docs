@@ -20,7 +20,7 @@ Binlog events are information about data modification made to a MySQL or MariaDB
 
 ### Binlog event filter
 
-[Binlog event filter](/dm/dm-key-features.md#binlog-event-filter) is a more fine-grained filtering feature than the block and allow lists filtering rule. Refer to [binlog event filter](/dm/dm-key-features.md#binlog-event-filtering) for details.
+[Binlog event filter](/dm/dm-key-features.md#binlog-event-filter) is a more fine-grained filtering feature than the block and allow lists filtering rule. Refer to [binlog event filter](/dm/dm-key-features.md#binlog-event-filter) for details.
 
 ### Binlog position
 
