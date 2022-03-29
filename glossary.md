@@ -19,17 +19,37 @@ ACID refers to the four key properties of a transaction: atomicity, consistency,
 
 - **Durability** means that once a transaction is committed, it remains committed even in the event of a system failure. TiKV uses persistent storage to ensure durability.
 
+## B
+
+### Baseline Capturing
+
+Baseline Capturing captures queries that meet capturing conditions and create bindings for them. It is used for [preventing rollback of execution plans during an upgrade](/sql-plan-management.md#prevent-rollback-of-execution-plans-during-an-upgrade).
+
 ## C
+
+### Cached Table
+
+With the cached table feature, TiDB loads the data of an entire table into the memory of the TiDB server, and TiDB directly gets the table data from the memory without accessing TiKV, which improves the read performance.
 
 ### Continuous Profiling
 
 Introduced in TiDB 5.3.0, Continuous Profiling is a way to observe resource overhead at the system call level. With the support of Continuous Profiling, TiDB provides performance insight as clear as directly looking into the database source code, and helps R&D and operation and maintenance personnel to locate the root cause of performance problems using a flame graph. For details, see [TiDB Dashboard Instance Profiling - Continuous Profiling](/dashboard/continuous-profiling.md).
+
+## D
+
+### Dynamic Pruning
+
+Dynamic proning mode is one of the modes that TiDB accesses partitioned tables. In dynamic pruning mode, each operator supports direct access to multiple partitions. Therefore, TiDB no longer uses Union. Omitting the Union operation can improve the execution efficiency and avoid the problem of Union concurrent execution.
 
 ## I
 
 ### Index Merge
 
 Index Merge is a method introduced in TiDB v4.0 to access tables. Using this method, the TiDB optimizer can use multiple indexes per table and merge the results returned by each index. In some scenarios, this method makes the query more efficient by avoiding full table scans. Since v5.4, Index Merge has become a GA feature.
+
+### In-Memory Pessimistic Lock
+
+The in-memory pessimistic lock is a new feature introduced in TiDB v6.0.0. When this feature is enabled, pessimistic locks are usually stored in the memory of the Region leader only, and are not persisted to disk or replicated through Raft to other replicas. This feature can greatly reduce the overhead of acquiring pessimistic locks and improve the throughput of pessimistic transactions.
 
 ## L
 
