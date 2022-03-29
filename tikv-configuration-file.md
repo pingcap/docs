@@ -728,7 +728,7 @@ Configuration items related to Raftstore.
 
 ### `apply-max-batch-size`
 
-+ Raft state machines execute data write requests in batches by the BatchSystem. This configuration item specifies the maximum number of Raft state machines that can execute the requests in one batch.
++ Raft state machines process data write requests in batches by the BatchSystem. This configuration item specifies the maximum number of Raft state machines that can execute the requests in one batch.
 + Default value: `256`
 + Minimum value: greater than `0`
 + Maximum value: `10240`
