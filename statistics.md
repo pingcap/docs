@@ -333,7 +333,7 @@ When the ratio of the number of modified rows to the total number of rows of `tb
 
 Before TiDB v5.0, when you execute a query, TiDB collects feedback with `feedback-probability` and updates the histogram and Count-Min Sketch based on the feedback. **Since v5.0, this feature is disabled by default, and it is not recommended to enable this feature.**
 
-Since TiDB v6.0, TiDB supports using the `KILL` statement to kill an `ANALYZE` task running in the background. If you find that an `ANALYZE` task running in the background consumes a lot of resources and affects your application, you can kill the `ANALYZE` task by taking the following steps:
+Since TiDB v6.0, TiDB supports using the `KILL` statement to terminate an `ANALYZE` task running in the background. If you find that an `ANALYZE` task running in the background consumes a lot of resources and affects your application, you can terminate the `ANALYZE` task by taking the following steps:
 
 1. Execute the following SQL statement to get the address and task `ID` of the TiDB instance that is executing the background `ANALYZE` task:
 
@@ -357,7 +357,7 @@ Since TiDB v6.0, TiDB supports using the `KILL` statement to kill an `ANALYZE` t
 
     > **Note:**
     >
-    > The above `KILL` statement only works on the TiDB instance that is executing the background `ANALYZE` task, so you must use a client to connect to that TiDB instance first. If you use a client to connect to another TiDB instance, or if there is a proxy between the client and TiDB, the `KILL` statement cannot kill the background `ANALYZE` task. For more information, see [`KILL [TIDB]`](/sql-statements/sql-statement-kill.md).
+    > The above `KILL` statement only works on the TiDB instance that is executing the background `ANALYZE` task, so you must use a client to connect to that TiDB instance first. If you use a client to connect to another TiDB instance, or if there is a proxy between the client and TiDB, the `KILL` statement cannot terminate the background `ANALYZE` task. For more information, see [`KILL [TIDB]`](/sql-statements/sql-statement-kill.md).
 
 ### Control `ANALYZE` concurrency
 
