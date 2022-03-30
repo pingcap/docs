@@ -21,7 +21,7 @@ When TiDB reads data from TiKV, TiDB tries to push down some expressions (includ
 
 ## Blocklist specific expressions
 
-Suppose that unexpected behavior occurs in the calculation process when pushing down the [supported expressions](#supported-expressions-for-pushdown) or specific data types (**only** the [`ENUM` type](/data-type-string.md#enum-type) and the [`BIT` type](/data-type-numeric.md#bit-type)). In this case, you can restore the application quickly by prohibiting the pushdown of the corresponding functions, operators, or data types. Specifically, you can prohibit the functions, operators, or data types from being pushed down by adding them to the blocklist `mysql.expr_pushdown_blacklist`. For details, refer to [Add to the blocklist](#add-to-the-blocklist).
+If unexpected behavior occurs in the calculation process when pushing down the [supported expressions](#supported-expressions-for-pushdown) or specific data types (**only** the [`ENUM` type](/data-type-string.md#enum-type) and the [`BIT` type](/data-type-numeric.md#bit-type)), you can restore the application quickly by prohibiting the pushdown of the corresponding functions, operators, or data types. Specifically, you can prohibit the functions, operators, or data types from being pushed down by adding them to the blocklist `mysql.expr_pushdown_blacklist`. For details, refer to [Add to the blocklist](#add-to-the-blocklist).
 
 The schema of `mysql.expr_pushdown_blacklist` is as follows:
 
