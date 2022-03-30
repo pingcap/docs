@@ -6,7 +6,7 @@ aliases: ['/docs/dev/dashboard/dashboard-user/']
 
 # TiDB Dashboard User Management
 
-TiDB Dashboard uses the same user privilege system and sign-in authentication as TiDB. You can control and manage TiDB SQL users to limit their access to TiDB Dashboard. This document describes the least privileges required for TiDB SQL users to access TiDB Dashboard and exemplifies how to create a least-privileged SQL user.
+TiDB Dashboard uses the same user privilege system and sign-in authentication as TiDB. You can control and manage TiDB SQL users to limit their access to TiDB Dashboard. This document describes the least privileges required for TiDB SQL users to access TiDB Dashboard and exemplifies how to create a least-privileged SQL user and how to authorize via RBAC.
 
 For details about how to control and manage TiDB SQL users, see [TiDB User Account Management](/user-account-management.md).
 
@@ -51,7 +51,7 @@ If an SQL user does not meet the preceding privilege requirements, the user fail
     GRANT SHOW DATABASES ON *.* TO 'dashboardAdmin'@'%';
     GRANT DASHBOARD_CLIENT ON *.* TO 'dashboardAdmin'@'%';
 
-    -- To modify the configuration items on the interface after signing in with TiDB Dashboard, the user-defined SQL user must be granted with the following privilege:
+    -- To modify the configuration items on the interface after signing in with TiDB Dashboard, the user-defined SQL user must be granted with the following privilege.
     GRANT SYSTEM_VARIABLES_ADMIN ON *.* TO 'dashboardAdmin'@'%';
     ```
 
@@ -66,9 +66,34 @@ If an SQL user does not meet the preceding privilege requirements, the user fail
     GRANT RESTRICTED_TABLES_ADMIN ON *.* TO 'dashboardAdmin'@'%';
     GRANT RESTRICTED_VARIABLES_ADMIN ON *.* TO 'dashboardAdmin'@'%';
 
-    -- To modify the configuration items on the interface after signing in with TiDB Dashboard, the user-defined SQL user must be granted with the following privilege:
+    -- To modify the configuration items on the interface after signing in with TiDB Dashboard, the user-defined SQL user must be granted with the following privilege.
     GRANT SYSTEM_VARIABLES_ADMIN ON *.* TO 'dashboardAdmin'@'%';
     ```
+
+## Example: Authorize SQL user to access TiDB Dashboard via RBAC
+
+The following example demonstrates how to create a role and a user to access TiDB Dashboard through [role-based access control (RBAC)](/role-based-access-control.md) mechanism.
+
+1. Create a role `dashboard_access` that meets the privilege requirements of TiDB Dashboard:
+
+    ```sql
+    CREATE ROLE 'dashboard_access';
+    GRANT PROCESS, CONFIG ON *.* TO 'dashboard_access'@'%';
+    GRANT SHOW DATABASES ON *.* TO 'dashboard_access'@'%';
+    GRANT DASHBOARD_CLIENT ON *.* TO 'dashboard_access'@'%';
+    GRANT SYSTEM_VARIABLES_ADMIN ON *.* TO 'dashboard_access'@'%';
+    ```
+
+2. Grant `dashboard_access` role to other users and set the default role:
+
+    ```sql
+    CREATE USER 'dashboardAdmin'@'%' IDENTIFIED BY '<YOUR_PASSWORD>';
+    GRANT 'dashboard_access' TO 'dashboardAdmin'@'%';
+    -- You need to set dashboard_access as the default role to the user
+    SET DEFAULT ROLE dashboard_access to 'dashboardAdmin'@'%';
+    ```
+
+After the above steps, you can use `dashboardAdmin` user to sign in TiDB Dashboard.
 
 ## Sign in with TiDB Dashboard
 
