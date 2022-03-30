@@ -124,9 +124,13 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
 * SQL-based placement rules for data
 
-    TiDB is a distributed database with excellent scalability. Usually, data is deployed across multiple servers or even multiple data centers. Therefore, data scheduling management is one of the most important basic capabilities of TiDB. In most cases, customers do not need to care about how to schedule and manage data, but with the increase of application complexity, deployment changes caused by isolation and access latency are new challenges for TiDB. Since v6.0.0, TiDB has officially provided data scheduling and management capabilities based on SQL interfaces. It supports flexible scheduling and management in dimensions such as replica count, role types, and placement locations for any data. It provides more flexible management for data placement  in multi-service shared clusters and cross-AZ deployments. For details, see [user document](/placement-rules-in-sql.md).
+    TiDB is a distributed database with excellent scalability. Usually, data is deployed across multiple servers or even multiple data centers. Therefore, data scheduling management is one of the most important basic capabilities of TiDB. In most cases, customers do not need to care about how to schedule and manage data. However, with the increasing application complexity, deployment changes caused by isolation and access latency have become new challenges for TiDB. Since v6.0.0, TiDB officially provides data scheduling and management capabilities based on SQL interfaces. It supports flexible scheduling and management in dimensions such as replica counts, role types, and placement locations for any data. TiDB also supports more flexible management for data placement in multi-service shared clusters and cross-AZ deployments. 
 
-* Support building TiFlash replicas by databases. To add TiFlash replicas for all tables in a database, you only need to use a single SQL statement, which greatly saves operation and maintenance costs. For the usage, effects and limitations of this feature, see [user document]().
+    [user document](/placement-rules-in-sql.md)
+
+* Support building TiFlash replicas by databases. To add TiFlash replicas for all tables in a database, you only need to use a single SQL statement, which greatly saves operation and maintenance costs. 
+
+    [user document]()
 
 ### Transaction
 
@@ -148,19 +152,27 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
 * General availability (GA) of Continuous Profiling
 
-    Continuous Profiling is GA in TiDB v6.0. This feature is not enabled by default. You can enable it in TiDB Dashboard.
+    TiDB Dashboard introduces the Continuous Profiling feature, providing the ability to automatically save instance performance analysis results as the cluster is running, improving the observability of TiDB cluster performance and helping to reduce troubleshooting time.
+    
+    With Continuous Profiling, you can collect continuous performance data of TiDB, TiKV, and PD instances, and view the profiling results in flame graphs.
+    
+    This feature is applicable to TiDB clusters deployed or upgraded using TiUP of v1.9.0 or later or TiDB Operator of v1.3.0 or later.
+    
+    This feature is not enabled by default. You can enable it in TiDB Dashboard.
+    
+    [User document](/dashboard/continuous-profiling.md)
 
 ### Performance
 
 * Enhanced Raft Engine
 
-    By default, [Raft Engine](https://github.com/tikv/raft-engine) is used as the storage engine for TiKV logs. Compared with RocksDB, Raft Engine can reduce TiKV I/O write traffic by up to 40% and CPU usage by 10%, while improving foreground throughput by about 5% under certain loads and reducing long-tail latency by 20%.
+    By default, [Raft Engine](https://github.com/tikv/raft-engine) is used as the storage engine for TiKV logs. Compared with RocksDB, Raft Engine can reduce TiKV I/O write traffic by up to 40% and CPU usage by 10%. At the same time, under certain loads, Raft Engine improves foreground throughput by about 5% and reduces long-tail latency by 20%.
 
     [User document](/tikv-configuration-file#raft-engine)，[issue 号]()
 
 * Cache hotspot small tables
 
-    For customer applications in scenarios where hotspot small tables are accessed, TiDB supports explicitly caching the hotspot tables in memory, which greatly improves the access performance, improves the throughput, and reduces the access latency. This solution can effectively avoid introducing a third-party cache middleware, reduce the complexity of the architecture, and reduce the cost of operation and maintenance management. This solution is suitable for scenarios where small tables are frequently accessed and rarely updated, such as the configuration tables or exchange rate tables.
+    For customer applications in scenarios where hotspot small tables are accessed, TiDB supports explicitly caching the hotspot tables in memory, which greatly improves the access performance, improves the throughput, and reduces access latency. This solution can effectively avoid introducing a third-party cache middleware, reduce the complexity of the architecture, and cut the cost of operation and maintenance management. The solution is suitable for scenarios where small tables are frequently accessed and rarely updated, such as the configuration tables or exchange rate tables.
 
     [User document]()，[issue 号]()
 
@@ -170,7 +182,11 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
     [User document]()，[issue 号]()
 
-* Add the `tidb_rc_read_check_ts` system variable at the [Read Committed isolation level](/transaction-isolation-levels.md#read-committed-isolation-level) to reduce the obtaining of unnecessary TSO when read-write conflicts are rare, which can reduce query latency. This variable is disabled by default. When it is enabled, the optimization can almost help avoid obtaining duplicated TSO to reduce latency in scenarios with no read-write conflict. However, in scenarios with frequent read-write conflicts, enabling this variable might cause performance regression. Do not use it before checking.
+* Optimization to get TSO at the Read Committed isolation level
+
+    To reduce query latency, when read-write conflicts are rare, TiDB adds the `tidb_rc_read_check_ts` system variable at the [Read Committed isolation level](/transaction-isolation-levels.md#read-committed-isolation-level) to get less unnecessary TSO. This variable is disabled by default. When the variable is enabled, this optimization can almost help avoid getting duplicated TSO to reduce latency in scenarios with no read-write conflict. However, in scenarios with frequent read-write conflicts, enabling this variable might cause a performance regression. Do not use it before checking.
+
+    [User docs]()，[issue 号]()
 
 * Enhance prepared statements to share execution plans
 
@@ -250,7 +266,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
     * Replication status query
     * Master and Worker management
 
-    WebUI is still experimental and needs improvement. Therefore, it is recommended only for trial. A known issue is that problems might occur if you use WebUI and dmctl  to operate the same task. This issue will be resolved in the next version.
+    WebUI is still experimental and needs improvement. Therefore, it is recommended only for trial. A known issue is that problems might occur if you use WebUI and dmctl  to operate the same task. This issue will be resolved in later versions.
 
     [User document](/dm/dm-webui-guide.md)
 
@@ -293,7 +309,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
 * Support replicating 100K tables simultaneously
 
-    By optimizing the data processing flow, TiCDC reduces the resource consumption of processing incremental data for each table, which greatly improves the replication stability and efficiencywhen replicating data in large clusters. The result of an internal test shows that TiCDC can stably support replicating 100,000 tables simultaneously.
+    By optimizing the data processing flow, TiCDC reduces the resource consumption of processing incremental data for each table, which greatly improves the replication stability and efficiency when replicating data in large clusters. The result of an internal test shows that TiCDC can stably support replicating 100,000 tables simultaneously.
 
     [User document]()
 
@@ -332,7 +348,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
     * Support filtering the automatically captured blacklist by usernames [#32558](https://github.com/pingcap/tidb/issues/32558)
     * Optimize the results of `ADMIN SHOW DDL JOBS` and `SHOW TABLE STATUS` statement by displaying the time according to the current `time_zone` [#26642](​​https://github.com/pingcap/tidb/issues/26642)
     * Supports pushing down the `DAYNAME()` and `MONTHNAME()` functions to TiFlash [#32594](https://github.com/pingcap/tidb/issues/32594)
-    * Support pushing down the `REGEXP` function to TiFlash (#32637)[https://github.com/pingcap/tidb/issues/32637]
+    * Support pushing down the `REGEXP` function to TiFlash [#32637](https://github.com/pingcap/tidb/issues/32637)
     * Support tracking the execution of the `UnionScan` operator [#32631](https://github.com/pingcap/tidb/issues/32631)
     * Support pushing down the `GREATEST` and `LEAST` functions to TiFlash [#32787](https://github.com/pingcap/tidb/issues/32787)
     * Support using the PointGet plan for queries that read the `_tidb_rowid` column [#31543](https://github.com/pingcap/tidb/issues/31543)
