@@ -1548,7 +1548,7 @@ For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](
 
 Configuration items related to Quota Limiter.
 
-Suppose that your machine deployed TiKV has limited resources, for example, 4v CPU, 16 G memory. In this case, if the amount of requests processed by TiKV in the foreground is too large, the CPU resources for background processing are occupied by the foreground, causing TiKV performance to degrade. To avoid this issue, you can use the quota-related configuration items to limit the CPU resources used by the foreground. When requests trigger the Quota Limiter feature, the requests are forced to wait for a while to free up CPU resources. The exact waiting time depends on the amount of the requests, and the maximum waiting time is no longer than the value of [`max-delay-duration`](#max-delay-durationnew-in-v600).
+Suppose that your machine on which TiKV is deployed has limited resources, for example, 4v CPU, 16 G memory. In this situation, if the foreground of TiKV processes too many read and write requests, the CPU resources in the background are used to help process such requests, affecting the performance stability of TiKV. To avoid this situation, you can use the quota-related configuration items to limit the CPU resources used by the foreground. When a request triggers the Quota Limiter, the request is forced to wait for a while for TiKV to free up CPU resources. The exact waiting time depends on the number of requests, and the maximum waiting time is no longer than the value of [`max-delay-duration`](#max-delay-duration-new-in-v600).
 
 > **Warning:**
 >
@@ -1563,12 +1563,12 @@ Suppose that your machine deployed TiKV has limited resources, for example, 4v C
 
 ### `foreground-write-bandwidth` (new in v6.0.0)
 
-+ The soft limit for transactions to write data.
++ The soft limit on the bandwidth with which transactions write data.
 + Default value: `0KB` (which means no limit)
 
 ### `foreground-read-bandwidth` (new in v6.0.0)
 
-+ The soft limit for transactions and Coprocessor to read data.
++ The soft limit on the bandwidth with which transactions and the Coprocessor read data.
 + Default value: `0KB` (which means no limit)
 
 ### `max-delay-duration` (new in v6.0.0)
