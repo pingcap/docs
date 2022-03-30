@@ -1,5 +1,5 @@
 ---
-title: Use WebUI to Manage DM migration tasks.
+title: Use WebUI to Manage DM migration tasks
 summary: Learn how to use WebUI to manage DM migration tasks.
 ---
 
