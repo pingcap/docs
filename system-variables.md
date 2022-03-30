@@ -776,7 +776,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 - Scope: SESSION | GLOBAL
 - Default value: `ON`
-- This variable is used to control whether to enable mutation checker, which performs the consistency check between data and index during the execution of DML statements. If the checker returns an error for a statement, TiDB rolls back the execution of the statement. Enabling this variable causes a slight increase in CPU usage. For more information, see [data-index-consistency-errors](/troubleshoot-data-inconsistency-errors.md ).
+- This variable is used to control whether to enable mutation checker, which performs the consistency check between data and index during the execution of DML statements. If the checker returns an error for a statement, TiDB rolls back the execution of the statement. Enabling this variable causes a slight increase in CPU usage. For more information, see [Troubleshoot Inconsistency Between Data and Index](/troubleshoot-data-inconsistency-errors.md ).
 
 ### tidb_enable_noop_functions <span class="version-mark">New in v4.0</span>
 
@@ -1669,7 +1669,7 @@ SET tidb_slow_log_threshold = 200;
 - Scope: SESSION | GLOBAL
 - Default value: `FAST`
 - Possible values: `OFF`, `FAST`, `STRICT`
-- This variable is used to control the assertion level. Assertion is a consistency check between data and index, which checks whether the key being written exists in the transaction commit process. For more information, see [data-index-consistency-errors](/troubleshoot-data-inconsistency-errors.md ).
+- This variable is used to control the assertion level. Assertion is a consistency check between data and index, which checks whether the key being written exists in the transaction commit process. For more information, see [Troubleshoot Inconsistency Between Data and Index](/troubleshoot-data-inconsistency-errors.md ).
 
     - `OFF`: Disable this check.
     - `FAST`: Enable only the check items that have a minor impact on performance, including most of the check items.
