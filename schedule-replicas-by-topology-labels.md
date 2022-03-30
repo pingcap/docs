@@ -48,7 +48,7 @@ You can customize the value of `location-labels`, such as `zone`, `rack`, or `ho
 
 > **Note:**
 >
-> You must configure `location-labels` for PD and `labels` for TiKV at the same time for the configurations to take effect. Otherwise, PD does not perform scheduling according to the topology.
+> To make configurations take effect, you must configure `location-labels` for PD and `labels` for TiKV at the same time. Otherwise, PD does not perform scheduling according to the topology.
 
 To configure `location-labels`, choose one of the following methods according to your cluster situation:
 
