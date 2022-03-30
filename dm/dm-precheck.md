@@ -6,7 +6,7 @@ aliases: ['/docs/tidb-data-migration/dev/precheck/']
 
 # Migration Task Precheck
 
-This document introduces the DM precheck feature, which detects errors in the upstream MySQL instance configurations before the migration task is executed.
+This document introduces the DM precheck feature, which detects errors in the upstream MySQL instance configurations before the migration task starts.
 
 ## Usage scenario
 
@@ -112,7 +112,7 @@ For the full and incremental data migration mode (`task-mode: all`), in addition
 
 ## Configure precheck arguments
 
-The migration task precheck supports multi-thread processing in parallel. Even if the number of rows in sharded tables reaches a million level, the check can be completed in minutes.
+The migration task precheck supports processing in parallel. Even if the number of rows in sharded tables reaches a million level, the check can be completed in minutes.
 
 To specify the number of threads for the precheck, you can configure the `threads` argument of the `mydumpers` field in the migration task configuration file.
 
