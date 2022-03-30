@@ -881,14 +881,14 @@ Query OK, 0 rows affected (0.09 sec)
 - Default value: `OFF`
 - This variable is used to control whether to enable the [Top SQL](/dashboard/top-sql.md) feature.
 
-### `tidb_top_sql_max_meta_count` (New in v6.0.0)
+### tidb_top_sql_max_meta_count (New in v6.0.0)
 
 - Scope: GLOBAL
 - Default value: `5000`
 - Range: `[1, 10000]`
 - This variable is used to control the maximum number of SQL statement types collected by [Top SQL](/dashboard/top-sql.md) per minute.
 
-### `tidb_top_sql_max_time_series_count` (New in v6.0.0)
+### tidb_top_sql_max_time_series_count (New in v6.0.0)
 
 - Scope: GLOBAL
 - Default value: `100`
