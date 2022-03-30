@@ -181,7 +181,7 @@ SELECT * FROM users;
 >
 > The write latency of cached tables is high because it is implemented with a complex mechanism that requires a lease to be set for each cache. When there are multiple TiDB instances, one instance does not know whether the other instances have cached data. If an instance modifies the table data directly, the other instances will read the old cache data. To ensure correctness, the cached table implementation uses a lease mechanism to ensure that the data is not modified before the lease expires. That is why the write latency is high.
 
-### Recover a cached table to normal table
+### Revert a cached table to normal table
 
 > **Note:**
 >
@@ -207,7 +207,7 @@ mysql> ALTER TABLE users ADD INDEX k_id(id);
 ERROR 8242 (HY000): 'Alter Table' is unsupported on cache tables.
 ```
 
-To recover a cached table to a normal table, use `ALTER TABLE t NOCACHE`:
+To revert a cached table to a normal table, use `ALTER TABLE t NOCACHE`:
 
 {{< copyable "sql" >}}
 
@@ -242,9 +242,9 @@ Cached tables **CANNOT** be used in the following scenarios:
 
 ## Compatibility with TiDB ecosystem tools
 
-The cached table is not a standard MySQL feature but a TiDB extension. Only TiDB can recognize the `ALTER TABLE CACHE` statement. TiDB ecosystem tools **DOES NOT** support cached tables, including Backup & Restore (BR), TiCDC, and Dumpling. They treat cached tables as a normal table.
+The cached table is not a standard MySQL feature but a TiDB extension. Only TiDB can recognize the `ALTER TABLE ... CACHE` statement. TiDB ecosystem tools **DOES NOT** support cached tables, including Backup & Restore (BR), TiCDC, and Dumpling. They treat cached tables as a normal table.
 
-That is to say, when a cached table is backed up and restored, it becomes a normal table. If the downstream cluster is a different TiDB cluster and you want to continue using the cached table feature, you can manually enable cached tables on the downstream cluster by executing `ALTER TABLE CACHE` on the downstream table.
+That is to say, when a cached table is backed up and restored, it becomes a normal table. If the downstream cluster is a different TiDB cluster and you want to continue using the cached table feature, you can manually enable cached tables on the downstream cluster by executing `ALTER TABLE ... CACHE` on the downstream table.
 
 ## See also
 
