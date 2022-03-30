@@ -893,7 +893,7 @@ Query OK, 0 rows affected (0.09 sec)
 - Scope: GLOBAL
 - Default value: `100`
 - Range: `[1, 5000]`
-- This variable is used to control [Top SQL](/dashboard/top-sql.md) can record how many SQL statements that contribute the most to the load (that is, top N) per minute.
+- This variable is used to control how many SQL statements that contribute the most to the load (that is, top N) can be recorded by [Top SQL](/dashboard/top-sql.md) per minute.
 
 > **Note:**
 >
