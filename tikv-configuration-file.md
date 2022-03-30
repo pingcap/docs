@@ -823,13 +823,19 @@ Configuration items related to RocksDB
 ### `max-background-jobs`
 
 + The number of background threads in RocksDB. When you modify the size of the RocksDB thread pool, refer to [Performance tuning for TiKV thread pools](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools).
-+ Default value: `8`
++ Default value:
+    + When the number of CPU cores is 10, the default value is `9`.
+    + When the number of CPU cores is 8, the default value is `7`.
+    + When the number of CPU cores is `N`, the default value is `max(2, min(N - 1, 9))`.
 + Minimum value: `2`
 
 ### `max-background-flushes`
 
 + The maximum number of concurrent background memtable flush jobs
-+ Default value: `2`
++ Default value:
+    + When the number of CPU cores is 10, the default value is `3`.
+    + When the number of CPU cores is 8, the default value is `2`.
+    + When the number of CPU cores is `N`, the default value is `[(max-background-jobs + 3) / 4]`.
 + Minimum value: `1`
 
 ### `max-sub-compactions`
@@ -934,8 +940,8 @@ Configuration items related to RocksDB
 
 ### `enable-pipelined-write`
 
-+ Enables or disables Pipelined Write
-+ Default value: `true`
++ Controls whether to enable Pipelined Write. When this configuration is enabled, the previous Pipelined Write is used. When this configuration is disabled, the new Pipelined Commit mechanism is used.
++ Default value: `false`
 
 ### `bytes-per-sync`
 
@@ -1537,3 +1543,9 @@ For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](
 
 - This configuration item enables the pipelined process of adding the pessimistic lock. With this feature enabled, after detecting that data can be locked, TiKV immediately notifies TiDB to execute the subsequent requests and write the pessimistic lock asynchronously, which reduces most of the latency and significantly improves the performance of pessimistic transactions. But there is a still low probability that the asynchronous write of the pessimistic lock fails, which might cause the failure of pessimistic transaction commits.
 - Default value: `true`
+
+### `in-memory` (New in v6.0.0)
+
++ Enables the in-memory pessimistic lock feature. With this feature enabled, pessimistic transactions try to store their locks in memory, instead of writing the locks to disk or replicating the locks to other replicas. This improves the performance of pessimistic transactions. However, there is a still low probability that the pessimistic lock gets lost and causes the pessimistic transaction commits to fail.
++ Default value: `true`
++ Note that `in-memory` takes effect only when the value of `pipelined` is `true`.
