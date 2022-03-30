@@ -148,7 +148,15 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
 * General availability (GA) of Continuous Profiling
 
-    Continuous Profiling is GA in TiDB v6.0. This feature is not enabled by default. You can enable it in TiDB Dashboard.
+    TiDB Dashboard introduces the Continuous Profiling feature, providing the ability to automatically save instance performance analysis results as the cluster is running, improving the observability of TiDB cluster performance and helping to reduce troubleshooting time.
+    
+    With Continuous Profiling, you can collect continuous performance data of TiDB, TiKV, and PD instances, and view the profiling results in flame graphs.
+    
+    This feature is applicable to TiDB clusters deployed or upgraded using TiUP of v1.9.0 or later or TiDB Operator of v1.3.0 or later.
+    
+    This feature is not enabled by default. You can enable it in TiDB Dashboard.
+    
+    [User document](/dashboard/continuous-profiling.md)
 
 ### Performance
 
@@ -250,7 +258,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
     * Replication status query
     * Master and Worker management
 
-    WebUI is still experimental and needs improvement. Therefore, it is recommended only for trial. A known issue is that problems might occur if you use WebUI and dmctl  to operate the same task. This issue will be resolved in the next version.
+    WebUI is still experimental and needs improvement. Therefore, it is recommended only for trial. A known issue is that problems might occur if you use WebUI and dmctl  to operate the same task. This issue will be resolved in later versions.
 
     [User document](/dm/dm-webui-guide.md)
 
@@ -332,7 +340,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
     * Support filtering the automatically captured blacklist by usernames [#32558](https://github.com/pingcap/tidb/issues/32558)
     * Optimize the results of `ADMIN SHOW DDL JOBS` and `SHOW TABLE STATUS` statement by displaying the time according to the current `time_zone` [#26642](​​https://github.com/pingcap/tidb/issues/26642)
     * Supports pushing down the `DAYNAME()` and `MONTHNAME()` functions to TiFlash [#32594](https://github.com/pingcap/tidb/issues/32594)
-    * Support pushing down the `REGEXP` function to TiFlash (#32637)[https://github.com/pingcap/tidb/issues/32637]
+    * Support pushing down the `REGEXP` function to TiFlash [#32637](https://github.com/pingcap/tidb/issues/32637)
     * Support tracking the execution of the `UnionScan` operator [#32631](https://github.com/pingcap/tidb/issues/32631)
     * Support pushing down the `GREATEST` and `LEAST` functions to TiFlash [#32787](https://github.com/pingcap/tidb/issues/32787)
     * Support using the PointGet plan for queries that read the `_tidb_rowid` column [#31543](https://github.com/pingcap/tidb/issues/31543)
