@@ -11,10 +11,20 @@ TiDB version: 6.0.0-DMR
 In 6.0.0-DMR, the key new features or improvements are as follows:
 
 * Support placement rules in SQL
-* Add kernel-level index consistency check
+* Add a check for data index consistency at the kernel level
 * Enhance Raft Engine
-* …
-* Top SQL becomes generally available
+* Accelerate leader balancing after restarting TiKV nodes
+* Support canceling the automatic update of statistics
+* Optimize the overhead of obtaining TSO at the Read Committed isolation level
+* Enhance prepared statements to share execution plans
+* Enhance function queries
+* TiKV 过载资源保护增强（实验特性)
+* Cache hotspot small tables
+* 批量更新热点索引
+* Optimize in-memory pessimistic locking
+* TiEM 图形化管理界面
+* Provide PingCAP Clinic, the automatic diagnosis tool for TiDB
+* Top SQL becomes generally available (GA)
 * HTAP capabilities improve by x times
 * Strengthen disaster recovery
 
@@ -56,7 +66,6 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 | `tidb_txn_assertion_level` | Newly added | Controls the assertion level. The assertion is a data index consistency check performed during the transaction commit process. By default, the check has only minor impact on performance and includes most of the check items.  |
 | `placement_checks` | Deleted | Controls whether the DDL statement validates the placement rules specified by [Placement Rules in SQL](/placement-rules-in-sql.md). Replaced by `tidb_placement_mode`. |
 | `tidb_enable_alter_placement` | Deleted | Controls whether to enable [placement rules in SQL](/placement-rules-in-sql.md). |
-| `tidb-enable-streaming` | Deleted |  |
 | `tidb_mem_quota_hashjoin`<br/>`tidb_mem_quota_indexlookupjoin`<br/>`tidb_mem_quota_indexlookupreader` <br/>`tidb_mem_quota_mergejoin`<br/>`tidb_mem_quota_sort`<br/>`tidb_mem_quota_topn` | Deleted | Since v5.0, these variables have been replaced by `tidb_mem_quota_query` and removed from the [system variables](/system-variables.md) document. To ensure compatibility, these variables were kept in source code. Since TiDB 6.0.0, these variables are removed from the code, too. |
 
 ## Configuration file parameters
@@ -65,13 +74,8 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 |---|---|---|---|
 | TiDB | `pessimistic-txn.pessimistic-auto-commi`t | Newly added | Determines the transaction mode that the auto-commit transaction uses when the pessimistic transaction mode is globally enabled (`tidb_txn_mode='pessimistic'`). |
 | TiDB | `new_collations_enabled_on_first_bootstrap` | Modified | Controls whether to enable support for the new collation. Since v6.0, the default value is changed from `false` to `true`. This configuration item only takes effect when the cluster is initialized for the first time. After the first bootstrap, you cannot enable or disable the new collation framework using this configuration item. |
-| TiDB | `stmt-summary.enable` | Deleted | Configuration related to the [statement summary tables](/statement-summary-tables.md). All these configuration items are removed. You need to use SQL variables to control the statement summary tables. |
-| TiDB | `stmt-summary.enable-internal-query` | Deleted |  |
-| TiDB | `stmt-summary.history-size` | Deleted |  |
-| TiDB | `stmt-summary.max-sql-length` | Deleted |  |
-| TiDB | `stmt-summary.max-stmt-count` | Deleted |  |
-| TiDB | `stmt-summary.refresh-interval` | Deleted |  |
-| TiKV | `pessimistic-txn.in-memory` | Newly added | Controls whether to enable the in-memory pessimistic lock. With this feature enabled, pessimistic transactions store pessimistic locks in TiKV memory as much as possible, instead of writing pessimistic locks to disks or replicating to other replicas. This improves the performance of pessimistic transactions; however, there is a low probability that a pessimistic lock will be lost, which might cause the pessimistic transaction to fail to commit. The default value is `true`. |
+| TiDB | `stmt-summary.enable` <br/> `stmt-summary.enable-internal-query` <br/> `stmt-summary.history-size` <br/> `stmt-summary.max-sql-length` <br/> `stmt-summary.max-stmt-count` <br/> `stmt-summary.refresh-interval` <br/> `pessimistic-txn.in-memory` | Deleted | Configuration related to the [statement summary tables](/statement-summary-tables.md). All these configuration items are removed. You need to use SQL variables to control the statement summary tables. |
+| TiKV |  | Newly added | Controls whether to enable the in-memory pessimistic lock. With this feature enabled, pessimistic transactions store pessimistic locks in TiKV memory as much as possible, instead of writing pessimistic locks to disks or replicating to other replicas. This improves the performance of pessimistic transactions; however, there is a low probability that a pessimistic lock will be lost, which might cause the pessimistic transaction to fail to commit. The default value is `true`. |
 | TiKV | `quota` | Newly added | This configuration item is related to the frontend quota limiter. It limits the resources occupied by frontend requests. This is an experimental feature and is disabled by default. New configuration items are `foreground-cpu-time`, `foreground-write-bandwidth`, `foreground-read-bandwidth`, and `max-delay-duration`. |
 | TiKV | `rocksdb.enable-pipelined-write` | Modified | Change the default value from `true` to `false`. When this configuration is enabled, the previous Pipelined Write is used. When this configuration is disabled, the new Pipelined Commit mechanism is used. |
 | TiKV | `rocksdb.max-background-flushes` | Modified | - When the number of CPU cores is 10, the default value is `3`.<br/>- When the number of CPU cores is 8, the default value is `2`. |
@@ -167,7 +171,8 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
     [User document]()，[issue 号]()
 
 * Add the `tidb_rc_read_check_ts` system variable at the [Read Committed isolation level](/transaction-isolation-levels.md#read-committed-isolation-level) to reduce the obtaining of unnecessary TSO when read-write conflicts are rare, which can reduce query latency. This variable is disabled by default. When it is enabled, the optimization can almost help avoid obtaining duplicated TSO to reduce latency in scenarios with no read-write conflict. However, in scenarios with frequent read-write conflicts, enabling this variable might cause performance regression. Do not use it before checking.
-* Enhanceprepared statements to share execution plans
+
+* Enhance prepared statements to share execution plans
 
     Reusing SQL execution plans can effectively reduce the time for parsing SQL statements, lessen CPU resource consumption, and improve SQL execution efficiency. One of the important methods of SQL tuning is to reuse SQL execution plans effectively. TiDB has supported sharing execution plans with prepared statements. However, when the prepared statements are closed, TiDB automatically clears the corresponding plan cache. After that, TiDB might unnecessarily parse the repeated SQL statements, affecting the execution efficiency. Since v6.0, TiDB supports controlling whether to ignore the `COM_STMT_CLOSE` directive through the `tidb_ignore_clost_stmt_cmd` parameter (disabled by default). When the parameter is enabled, TiDB ignores the directive of closing prepared statements and keeps the execution plan in the cache, improving the reuse rate of the execution plan.
 
@@ -315,18 +320,13 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 ## Improvements
 
 * TiDB
+
     * Clear the placement rule information of a table automatically after restoring the table using the `FLASHBACK` or `RECOVER` statement  [#31668](https://github.com/pingcap/tidb/issues/31668)
     * Add a performance overview monitoring dashboard to show core performance metrics on typical critical paths, making metrics analysis on TiDB easier  [#31676](https://github.com/pingcap/tidb/issues/31676)
     * Support using the `REPLACE` keyword in the `LOAD DATA LOCAL INFILE` statement [#24515](https://github.com/pingcap/tidb/issues/24515)
     * (dup: release-5.1.4.md > Improvements> TiDB)- Support partition pruning for the built-in `IN` expression in Range partition tables [#26739](https://github.com/pingcap/tidb/issues/26739)
     * Improve query efficiency by eliminating potentially redundant Exchange operations in MPP aggregation queries  [#31762](https://github.com/pingcap/tidb/issues/31762)
     * Improve compatibility with MySQL by allowing duplicate partition names in the `TRUNCATE PARTITION` and `DROP PARTITION` statements [#31681](https://github.com/pingcap/tidb/issues/31681)
-    * If no follower is specified, show the number of followers as 2 (the default value) when reading `information_schema.placement_policies` [#31702](https://github.com/pingcap/tidb/issues/31702)
-    * Disallow specifying a column prefix length as 0 when creating an index [#31972](https://github.com/pingcap/tidb/issues/31972)
-    * Disallow partition names ending with spaces [#31785](https://github.com/pingcap/tidb/issues/31535)
-    * Add [`pessimistic-auto-commit`](/tidb-configuration-file.md#pessimistic-auto-commit) to support automatic transaction commit in the pessimistic lock mode to avoid deadlocks [#31135](https://github.com/pingcap/tidb/issues/31135)
-    * Optimize the error message of the `RENAME TABLE` statement [#29893](https://github.com/pingcap/tidb/issues/29893)
-    * Add the system variable [`tidb_sysdate_is_now`]() to enable the `SYSDATE` function to use the results of the `NOW` function [#31872](https://github.com/pingcap/tidb/issues/31872)
     * Support showing the `CREATE_TIME` information in the results of the `ADMIN SHOW DDL JOBS` statement [#23494](https://github.com/pingcap/tidb/issues/23494)
     * Support a new built-in function `CHARSET()` [#3931](https://github.com/pingcap/tidb/issues/3931)
     * Support filtering the automatically captured blacklist by usernames [#32558](https://github.com/pingcap/tidb/issues/32558)
@@ -334,33 +334,28 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
     * Supports pushing down the `DAYNAME()` and `MONTHNAME()` functions to TiFlash [#32594](https://github.com/pingcap/tidb/issues/32594)
     * Support pushing down the `REGEXP` function to TiFlash (#32637)[https://github.com/pingcap/tidb/issues/32637]
     * Support tracking the execution of the `UnionScan` operator [#32631](https://github.com/pingcap/tidb/issues/32631)
-    * 执行 SHOW TABLE STATUS 根据当前的 time_zone 对结果进行调节 [#32449](https://github.com/pingcap/tidb/pull/32449)
     * Support pushing down the `GREATEST` and `LEAST` functions to TiFlash [#32787](https://github.com/pingcap/tidb/issues/32787)
     * Support using the PointGet plan for queries that read the `_tidb_rowid` column [#31543](https://github.com/pingcap/tidb/issues/31543)
     * Support using wildcards in the automatically captured blacklist [#32714](https://github.com/pingcap/tidb/issues/32714)
     * Support showing the original partition name in the output of the `EXPLAIN` statement without converting the name to lowercase [#32719](https://github.com/pingcap/tidb/issues/32719)
     * Enable partition pruning for RANGE COLUMNS partitionings on IN conditions and string type columns [#32626](https://github.com/pingcap/tidb/issues/32626)
-    * Remove deprecated system variables: `tidb_mem_quota_hashjoin`, `tidb_mem_quota_mergejoin`, `tidb_mem_quota_sort`, `tidb_mem_quota_topn`, `tidb_mem_quota_ indexlookupreader`, and `tidb_mem_quota_indexlookupjoin` [#32286](https://github.com/pingcap/tidb/issues/32286)
     * Return an error message when you set a system variable to NULL [#32850](https://github.com/pingcap/tidb/issues/32850)
     * Remove Broadcast Join from the non-MPP mode [#31465](https://github.com/pingcap/tidb/issues/31465)
-    * Remove the deprecated system variable `tidb-enable-streaming` [#32679](https://github.com/pingcap/tidb/issues/32679)
     * Support pushing down the ` DAYOFMONTH()` and ` LAST_DAY()` functions to TiFlash [#33012](https://github.com/pingcap/tidb/issues/33012)
     * Support pushing down the `DAYOFWEEK()` and `DAYOFYEAR()` functions to TiFlash [#33130](https://github.com/pingcap/tidb/issues/33130)
     * Support pushing down the `IS_TRUE`, `IS_FALSE`, and `IS_TRUE_WITH_NULL` functions to TiFlash [#33047](https://github.com/pingcap/tidb/issues/33047)
     * Support executing MPP plans on partitioned tables in dynamic pruning mode [#32347](https://github.com/pingcap/tidb/issues/32347)
-    * Support instance-level system variables  [#32887](https://github.com/pingcap/tidb/issues/32887)
     * 支持 read-consistency 读取可在 `READ-COMMITTED` 隔离级别下打开优化事务内读语句延迟  Support enabling the switch to reduce read latency in transaction at the `READ-COMMITTED` isolation level for the read-consistency read [#33159](https://github.com/pingcap/tidb/issues/33159)
     * Support pushing down predicates for common table expressions (CTEs) [#28163](https://github.com/pingcap/tidb/issues/28163)
     * Simplify the configurations of `Statement Summary` and `Capture Plan Baselines` to be available on a global basis only [#30557](https://github.com/pingcap/tidb/issues/30557)
-    * Disallow setting incorrect values of system variables. In v5.4 (v5.4 only), some noop system variables might allow incorrect values. [#31538](https://github.com/pingcap/tidb/issues/31538)
     * Update gopsutil to v3.21.12 to address alarms reported when building binary on macOS 12 [#31607](https://github.com/pingcap/tidb/issues/31607)
 
 * TiKV
+
     * (dup: release-5.4.0.md > Improvements> TiKV)- Support archiving and rotating logs [#11651](https://github.com/tikv/tikv/issues/11651)
     * Improve the Raftstore sampling accuracy for large key range batches [#11039](https://github.com/tikv/tikv/pull/11039)
     * Add the correct "Content-Type" for `debug/pprof/profile` to make the Profile more easily identified [#11521](https://github.com/tikv/tikv/issues/11521)
     * Renew the lease time of the leader infinitely when the Raftstore has heartbeats or handles read requests, which helps reduce latency jitter [#11579](https://github.com/tikv/tikv/pull/11579)
-    * Raft Engine stores Raft logs by default [#11119](https://github.com/tikv/tikv/issues/11119)
     * Choose the store with the least cost when switching the leader, which helps improve performance stability [#10602](https://github.com/tikv/tikv/issues/10602)
     * Fetch Raft logs asynchronously to reduce the performance jitter caused by blocking the Raftstore [#11320](https://github.com/tikv/tikv/issues/11320)
     * Support the `QUARTER` function in vector calculation [#5751](https://github.com/tikv/tikv/issues/5751)
@@ -385,21 +380,26 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
     * Use the TiKV internal pipeline to replace the RocksDB pipeline and deprecate the `rocksdb.enable-multibatch-write` parameter [#12059](https://github.com/tikv/tikv/issues/12059)
 
 * PD
+
     * Support automatically selecting the fastest object for transfer when evicting the leader, which helps speed up the eviction process  [#4229](https://github.com/tikv/pd/issues/4229)
     * Forbid deleting a voter from a 2-replica Raft group in case that the Region becomes unavailable [#4564](https://github.com/tikv/pd/issues/4564)
     * Speed up the scheduling of the balance leader [#4652](https://github.com/tikv/pd/issues/4652)
 
 * TiFlash
+
     * Forbid the logical splitting of TiFlash files (by adjusting the default value of `profiles.default.dt_enable_logical_split` to `false`. See [user document](/tiflash/tiflash-configuration.md#tiflash-configuration-parameters) for details) and improve the space usage efficiency of the TiFlash columnar storage so that the space occupation of a table synchronized to TiFlash is similar to the space occupation of the table in TiKV.
     * Optimize the cluster management and replica replication mechanism for TiFlash by integrating the previous cluster management module into TiDB, which accelerates replica creation for small tables. [#29924](https://github.com/pingcap/tidb/issues/29924)
 
 * Tools
+
     * Backup & Restore (BR)
+
         * Improve the speed of restoring the backup data. In the simulation test when BR restores 16 TB data to a TiKV cluster with 15 nodes (each node has 16 CPU cores), the throughput reaches 2.66 GiB/s. [#27036](https://github.com/pingcap/tidb/issues/27036)
 
         * Support importing and exporting placement rules. Add a `--with-tidb-placement-mode` parameter to control whether to ignore the placement rules when importing data. [#32290](https://github.com/pingcap/tidb/issues/32290)
 
     * TiCDC
+
         * Add a `Lag analyze` panel in Grafana [#4891](https://github.com/pingcap/tiflow/issues/4891)
         * Support placement rules [#4846](https://github.com/pingcap/tiflow/issues/4846)
         * Synchronize HTTP API handling [#1710](https://github.com/pingcap/tiflow/issues/1710)
@@ -407,12 +407,16 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
         * Set the default isolation level of MySQL sink to read-committed to reduce deadlocks in MySQL [#3589](https://github.com/pingcap/tiflow/issues/3589)
         * Validate changefeed parameters upon creation and refine error messages [#1716](https://github.com/pingcap/tiflow/issues/1716) [#1718](https://github.com/pingcap/tiflow/issues/1718) [#1719](https://github.com/pingcap/tiflow/issues/1719) [#4472](https://github.com/pingcap/tiflow/issues/4472)
         * (dup) Expose configuration parameters of the Kafka producer to make them configurable in TiCDC [#4385](https://github.com/pingcap/tiflow/issues/4385)
+
     * TiDB Data Migration (DM)
+
         * Support starting a task when upstream table schemas are inconsistent and in optimistic mode [#3903](https://github.com/pingcap/tiflow/pull/3903)
         * Support creating a task in the `stopped` state [#4510](https://github.com/pingcap/tiflow/pull/4510)
-        * Support Syncer using the working directory of the DM-worker rather than `/tmp` to write internal files, and cleaning the directoryit after the task is stopped [#4732](https://github.com/pingcap/tiflow/pull/4732)
+        * Support Syncer using the working directory of the DM-worker rather than `/tmp` to write internal files, and cleaning the directory after the task is stopped [#4732](https://github.com/pingcap/tiflow/pull/4732)
         * Precheck has improved. Some important checks are no longer skipped. [#3608](https://github.com/pingcap/tiflow/issues/3608)
+
     * TiDB Lightning
+
         * Add more retryable error types [#31484](https://github.com/pingcap/tidb/pull/31484)
         * Tolerate TiKV node address changes during importing [#32876](https://github.com/pingcap/tidb/pull/32876)
         * Support the base64 format password string [#31194](https://github.com/pingcap/tidb/issues/31194)
@@ -421,6 +425,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 ## Bug Fixes
 
 * TiDB
+
     * Fix the bug that the placement rule reports an error when `SCHEDULE = majority_in_primary`, and `PrimaryRegion` and `Regions` are of the same value [#31271](https://github.com/pingcap/tidb/issues/31271)
     * (dup: release-5.3.1.md > Bug fixes> TiDB)- Fix the `invalid transaction` error when executing a query using index lookup join [#30468](https://github.com/pingcap/tidb/issues/30468)
     * Fix the bug that `show grants` returns incorrect results when two or more privileges are granted [#30855](https://github.com/pingcap/tidb/issues/30855)
@@ -467,12 +472,12 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
     * Fix the wrong message of the `RENAME TABLE` statement [#29893](https://github.com/pingcap/tidb/issues/29893)
 
 * TiKV
+
     * (dup: release-5.3.1.md > Bug fixes> TiKV)- Fix the panic issue caused by deleting snapshot files when the peer status is `Applying` [#11746](https://github.com/tikv/tikv/issues/11746)修复 Peer 状态为 Applying 时快照文件被删除会造成 Panic 的问题 [#11746](https://github.com/tikv/tikv/issues/11746)
     * (dup: release-5.3.1.md > Bug fixes> TiKV)- Fix the issue of QPS drop when flow control is enabled and `level0_slowdown_trigger` is set explicitly [#11424](https://github.com/tikv/tikv/issues/11424)修复开启流量控制且显式设置 level0_slowdown_trigger 时出现 QPS 下降的问题 [#11424](https://github.com/tikv/tikv/issues/11424)
     * (dup: release-5.3.1.md > Bug fixes> TiKV)- Fix the issue that destroying a peer might cause high latency [#10210](https://github.com/tikv/tikv/issues/10210)修复删除 Peer 可能造成高延迟的问题 [#10210](https://github.com/tikv/tikv/issues/10210)
-    * (dup: release-5.3.1.md > Bug fixes> TiKV)- Fix a bug that TiKV cannot delete a range of data (`unsafe_destroy_range` cannot be executed) when the GC worker is busy [#11903](https://github.com/tikv/tikv/issues/11903)修复在某些 corner case 下 storeMeta 内数据被意外删除引发 panic 的问题 [#11852](https://github.com/tikv/tikv/issues/11852)
-    * Fix a bug that TiKV cannot delete a range of data (`unsafe_destroy_range` cannot be executed) when the GC worker is busy [#11903](https://github.com/tikv/tikv/issues/11903)
-    * Fixed a bug that TiKV panics when the data in `StoreMeta` is accidentally deleted in some corner cases [#11852](https://github.com/tikv/tikv/issues/11852)
+    * (dup: release-5.3.1.md > Bug fixes> TiKV)- Fix a bug that TiKV cannot delete a range of data (`unsafe_destroy_range` cannot be executed) when the GC worker is busy [#11903](https://github.com/tikv/tikv/issues/11903)
+    * Fix a bug that TiKV panics when the data in `StoreMeta` is accidentally deleted in some corner cases [#11852](https://github.com/tikv/tikv/issues/11852)
     * Fix a bug that TiKV panics when performing profiling on ARM platform [#10658](https://github.com/tikv/tikv/issues/10658)
     * Fix a bug that TiKV might panic when running 2 years or more [#11940](https://github.com/tikv/tikv/issues/11940)
     * Fix the compilation issue on the ARM64 architecture caused by missing SSE instruction set [#12034](https://github.com/tikv/tikv/issues/12034)
@@ -486,12 +491,14 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
     * Fix the potential issue of reporting TiKV panics when exiting TiKV [#12231](https://github.com/tikv/tikv/issues/12231)
 
 * PD
+
     * Fix the issue that the operator creates steps with meaningless Joint Consensus [#4534](https://github.com/tikv/pd/pull/4534)
     * Fix a bug that the TSO revoking might get stuck when closing the PD client [#4550](https://github.com/tikv/pd/pull/4550)
     * Fix the issue that the Region scatterer scheduling might cause lost peers [#4570](https://github.com/tikv/pd/pull/4570)
     * Fix the issue that `Duration` fields of `dr-autosync` cannot be dynamically configured [#4653](https://github.com/tikv/pd/pull/4653)
 
 * TiFlash
+
     * Fix the issue of TiFlash panic when the memory limit is enabled [#3902](https://github.com/pingcap/tiflash/issues/3902)
     * Fix the issue that expired data is recycled slowly [#4146]([https://github.com/pingcap/tiflash/issues/](https://github.com/pingcap/tiflash/issues/3902)4146)
     * Fix the potential issue of TiFlash panic when `Snapshot` is applied simultaneously with multiple DDL operations [#4072]([https://github.com/pingcap/tiflash/issues/](https://github.com/pingcap/tiflash/issues/3902)4072)
@@ -509,11 +516,14 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
     * Fix a bug that MPP tasks might leak threads forever [https://github.com/pingcap/tiflash/issues/4238](https://github.com/pingcap/tiflash/issues/4238)
 
 * Tools
+
     * Backup & Restore (BR)
+
         * Fix a bug that BR gets stuck when the restore operation meets some unrecoverable errors [#33200](https://github.com/pingcap/tidb/issues/33200)
         * Fix a bug that causes the restore operation to fail when the encryption information is lost during backup retry [#32423](https://github.com/pingcap/tidb/issues/32423)
 
     * TiCDC
+
         * (dup: release-5.3.1.md > Bug fixes> Tools> TiCDC)- Fix a bug that MySQL sink generates duplicated `replace` SQL statements when`batch-replace-enable` is disabled [#4501](https://github.com/pingcap/tiflow/issues/4501)
         * (dup: release-5.3.1.md > Bug fixes> Tools> TiCDC)- Fix a bug that a TiCDC node exits abnormally when a PD leader is killed [#4248](https://github.com/pingcap/tiflow/issues/4248)
         * Fix the error `Unknown system variable 'transaction_isolation'` for some MySQL versions [#4504](https://github.com/pingcap/tiflow/issues/4504)
@@ -525,6 +535,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
         * Fix an issue that TiCDC cannot exit [#4699](https://github.com/pingcap/tiflow/issues/4699)
 
     * TiDB Data Migration (DM)
+
         * (dup: release-5.4.0.md > Bug fixes> Tools> TiDB Data Migration (DM))- Fix the issue that syncer metrics are updated only when querying the status [#4281](https://github.com/pingcap/tiflow/issues/4281)
         * (dup: release-5.3.1.md > Bug fixes> Tools> TiCDC)- Fix the issue that execution errors of the update statement in safemode may cause the DM-worker panic [#4317](https://github.com/pingcap/tiflow/issues/4317)
         * (dup: release-5.3.1.md > Bug fixes> Tools> TiCDC)- Fix a bug that long varchars report an error `Column length too big` [#4637](https://github.com/pingcap/tiflow/issues/4637)
@@ -533,14 +544,17 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
         * Fix the DML loss issue when merging shards and replicating incremental data from upstream in the pessimistic mode [#5002](https://github.com/pingcap/tiflow/issues/5002)
 
     * TiDB Lightning
+
         * (dup: release-5.3.1.md > Bug fixes> Tools> TiDB Lightning)- Fix the bug that TiDB Lightning may not delete the metadata schema when some import tasks do not contain source files [#28144](https://github.com/pingcap/tidb/issues/28144)
         * Fix the panic that occurs when the table names in the source file and in the target cluster are different [#31771](https://github.com/pingcap/tidb/issues/31771)
         * Fix the checksum error “GC life time is shorter than transaction duration” [#32733](https://github.com/pingcap/tidb/issues/32733)
         * Fix the issue that TiDB Lightning gets stuck when it fails to check empty tables [#31797](https://github.com/pingcap/tidb/issues/31797)
 
     * Dumpling
+
         * Fix the issue that the displayed progress is not accurate when running `dumpling --sql $query` [#30532](https://github.com/pingcap/tidb/issues/30532)
-        * Fix the issue that Amazon S3 cannot correctly calculate the size of compressed data correctly [#30534](https://github.com/pingcap/tidb/issues/30534)
+        * Fix the issue that Amazon S3 cannot correctly calculate the size of compressed data [#30534](https://github.com/pingcap/tidb/issues/30534)
 
     * TiDB Binlog
-        * Fix thean issue that TiDB Binlog might be skipped when large upstream write transactions are replicated to Kkafka. [#1136](https://github.com/pingcap/tidb-binlog/issues/1136)
+
+        * Fix the issue that TiDB Binlog might be skipped when large upstream write transactions are replicated to Kafka. [#1136](https://github.com/pingcap/tidb-binlog/issues/1136)
