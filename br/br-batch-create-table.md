@@ -42,7 +42,7 @@ After disabling the feature, BR uses the [serial execution scheme](#implementati
 
 - Batch create table scheme since v6.0.0:
 
-    The batch create table feature uses the concurrent batch table creation scheme. From v6.0.0, by default, BR creates tables in multiple batches, and each batch has 128 tables. Using this scheme, when BR creates one batch of tables, TiDB schema version only changes once. This scheme significantly increases the speed of table creation.
+    From v6.0.0, by default, BR creates tables in multiple batches, and each batch has 128 tables. Using this scheme, when BR creates one batch of tables, TiDB schema version only changes once. This scheme significantly increases the speed of table creation.
 
 ## Test batch create table
 
@@ -50,7 +50,7 @@ This section describes the information of testing batch create table feature. Th
 
 - Cluster configurations:
 
-    - 15 TiKV instances. Each TiKV instance has 16 CPU cores, 80 GB memory, and 16 threads to process RPC requests ([`import.num-threads`](/tikv-configuration-file.md#num-threads) = 16).
+    - 15 TiKV instances. Each TiKV instance is equipped with 16 CPU cores, 80 GB memory, and 16 threads to process RPC requests ([`import.num-threads`](/tikv-configuration-file.md#num-threads) = 16).
     - 3 TiDB instances. Each TiDB instance is equipped with 16 CPU cores, 32 GB memory.
     - 3 PD instances. Each PD instance is equipped with 16 CPU cores, 32 GB memory.
 
