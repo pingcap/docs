@@ -49,11 +49,8 @@ If an SQL user does not meet the preceding privilege requirements, the user fail
     GRANT PROCESS, CONFIG ON *.* TO 'dashboardAdmin'@'%';
     GRANT SHOW DATABASES ON *.* TO 'dashboardAdmin'@'%';
     GRANT DASHBOARD_CLIENT ON *.* TO 'dashboardAdmin'@'%';
-    ```
 
     -- To modify the configuration items on the interface after signing in with TiDB Dashboard, the user-defined SQL user must be granted with the following privilege:
-
-    ```sql
     GRANT SYSTEM_VARIABLES_ADMIN ON *.* TO 'dashboardAdmin'@'%';
     ```
 
@@ -67,14 +64,11 @@ If an SQL user does not meet the preceding privilege requirements, the user fail
     GRANT RESTRICTED_STATUS_ADMIN ON *.* TO 'dashboardAdmin'@'%';
     GRANT RESTRICTED_TABLES_ADMIN ON *.* TO 'dashboardAdmin'@'%';
     GRANT RESTRICTED_VARIABLES_ADMIN ON *.* TO 'dashboardAdmin'@'%';
-    ```
 
     -- To modify the configuration items on the interface after signing in with TiDB Dashboard, the user-defined SQL user must be granted with the following privilege:
-
-    ```sql
     GRANT SYSTEM_VARIABLES_ADMIN ON *.* TO 'dashboardAdmin'@'%';
     ```
 
 ## Sign in with TiDB Dashboard
 
-After creating an SQL user that meets the privilege requirements of TiDB Dashboard, you can use this user to [Sign in](/dashboard/dashboard-access.md#Sign in) with TiDB Dashboard.
+After creating an SQL user that meets the privilege requirements of TiDB Dashboard, you can use this user to [Sign in](/dashboard/dashboard-access.md#sign-in) with TiDB Dashboard.
