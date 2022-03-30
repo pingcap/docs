@@ -1452,6 +1452,18 @@ Usage example:
 SET tidb_query_log_max_len = 20
 ```
 
+### tidb_rc_read_check_ts (New in v6.0.0)
+
+> **Warning:**
+>
+> - This feature is incompatible with [`replica-read`](#tidb_replica_read-new-in-v40). Do not enable `tidb_rc_read_check_ts` and `replica-read` at the same time.
+> - If your client uses a cursor, it is not recommended to enable `tidb_rc_read_check_ts` in case that the previous batch of returned data has already been used by the client and the statement eventually fails.
+
+- Scope: SESSION | GLOBAL
+- Default value: `OFF`
+- This variable is used to optimize the timestamp acquisition, which is suitable for scenarios with read-committed isolation level where read-write conflicts are rare. Enabling this variable can avoid the latency and cost of getting the global timestamp, and can optimize the transaction-level read latency.
+- If read-write conflicts are severe, enabling this feature will increase the cost and latency of getting the global timestamp, and might cause performance regression. For details, see [Read Committed isolation level](/transaction-isolation-levels.md#read-committed-isolation-level).
+
 ### tidb_read_staleness <span class="version-mark">New in v5.4.0</span>
 
 - Scope: SESSION
@@ -1631,6 +1643,12 @@ SET tidb_slow_log_threshold = 200;
 - Default value: `0`
 - Range: `[0, 9223372036854775807]`
 - This variable is used to limit the maximum number of requests TiDB can send to TiKV at the same time. 0 means no limit.
+
+### tidb_sysdate_is_now （New in v6.0.0）
+
+- Scope: SESSION | GLOBAL
+- Default value: `OFF`
+- This variable is used to control whether the `SYSDATE` function can be replaced by the `NOW` function. This configuration item has the same effect as the MySQL option [`sysdate-is-now`](https://dev.mysql.com/doc/refman/8.0/en/server-options.html#option_mysqld_sysdate-is-now).
 
 ### tidb_tmp_table_max_size <span class="version-mark">New in v5.3.0</span>
 
