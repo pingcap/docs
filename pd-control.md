@@ -742,7 +742,7 @@ Usage:
 >> scheduler resume balance-region-scheduler      // Continue to run the balance-region scheduler
 >> scheduler resume all                           // Continue to run all schedulers
 >> scheduler config balance-hot-region-scheduler  // Display the configuration of the balance-hot-region scheduler
->> scheduler config balance-leader-scheduler set batch 3 // Set 3 as the size of the operator that the balance-leader scheduler can execute in batches
+>> scheduler config balance-leader-scheduler set batch 3 // Set the size of the operator that the balance-leader scheduler can execute in a batch to 3
 ```
 
 #### `scheduler config balance-hot-region-scheduler`
