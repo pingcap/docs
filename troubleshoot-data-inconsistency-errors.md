@@ -1,21 +1,21 @@
 ---
-title: Troubleshoot Inconsistencies Between Data and Index
-summary: Learn how to deal with errors reported by the data index consistency check.
+title: Troubleshoot Inconsistency Between Data and Index
+summary: Learn how to deal with errors reported by the consistency check between data and index.
 ---
 
-# Troubleshoot Inconsistencies Between Data and Index
+# Troubleshoot Inconsistency Between Data and Index
 
-TiDB checks consistency between data and index during executing a transaction or executing the [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) command. If the check finds that record key-value and index key-value are inconsistent, that is, the key-value pair storing row data and the key-value pair storing its corresponding index are inconsistent (for example, more indexes or missing indexes), TiDB reports the data index consistency error and prints the related errors in the log file.
+TiDB checks consistency between data and index when it executes transactions or the [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) statement. If the check finds that a record key-value and an index key-value are inconsistent, that is, a key-value pair storing row data and a key-value pair storing the corresponding index are inconsistent (for example, more indexes or missing indexes), TiDB reports a data inconsistency error and prints the related errors in error logs.
 
-This document explains the errors of data index consistency and provides some ways to bypass the check. When a data index consistency error occurs, contact PingCAP technical support to fix or troubleshoot.
+This document describes the meanings of data inconsistency errors and provides some methods to bypass the consistency check. When a data consistency error occurs, contact PingCAP technical support to troubleshoot or fix it.
 
 ## Example error explanation
 
-When data index inconsistency occurs, you can check TiDB error messages to see the specific inconsistent item of row data and index data, or check the related error logs for further investigation.
+When inconsistency between data and index occurs, you can check TiDB error messages to know which item is inconsistent between row data and index data, or check the related error logs for further investigation.
 
 ### Errors reported during transaction execution
 
-This section lists the data index inconsistency errors reported when TiDB executes transactions and explains the meaning of these errors with examples.
+This section lists the data inconsistency errors reported when TiDB executes transactions and explains the meanings of these errors with examples.
 
 #### Error 8133
 
@@ -39,17 +39,17 @@ This error indicates that the handle (that is, the key of the row data) value of
 
 `ERROR 8140 (HY000): writing inconsistent data in table: t, index: i2, col: c1, indexed-value:{KindString hellp} != record-value:{KindString hello}`
 
-This error indicates that the data of a row to be written by the transaction does not match the value of the index. For the `i2` index in the table `t`, a row to be written by the transaction has data in the index key-value pair as `hellp` and data in the row record key-value pair as `hello`. The data of this row will not be written.
+This error indicates that the data in a row to be written by the transaction does not match the data in the index. For the `i2` index in the table `t`, a row to be written by the transaction has data `hellp` in the index key-value pair and data `hello` in the row record key-value pair. The data of this row will not be written.
 
 #### Error 8141
 
 `ERROR 8141 (HY000): assertion failed: key: 7480000000000000405f72013300000000000000f8, assertion: NotExist, start_ts: 430590532931813377, existing start ts: 430590532931551233, existing commit ts: 430590532931551234`
 
-This error indicates that the assertion failed when a transaction was committed. Assuming that the data index is consistent, TiDB asserted that the key `7480000000000000405f720133000000000000000000f8` did not exist. When the transaction was committed, TiDB found the key did exist, written by the transaction with `start ts` as `430590532931551233`. TiDB will print the MVCC (Multi-Version Concurrency Control) history of this key to the log.
+This error indicates that the assertion failed when a transaction was committed. Assuming that data and index are consistent, TiDB asserted that the key `7480000000000000405f720133000000000000000000f8` did not exist. When the transaction was committed, TiDB found the key did exist, written by the transaction with `start ts` as `430590532931551233`. TiDB will print the MVCC (Multi-Version Concurrency Control) history of this key to logs.
 
 ### Errors reported in admin check
 
-This section lists the data index inconsistency errors that might occur in TiDB when you execute the [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) statement, with examples provided to explain the error meanings.
+This section lists the data inconsistency errors that might occur in TiDB when you execute the [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) statement, and explains the meanings of these errors with examples.
 
 #### Error 8003
 
@@ -71,13 +71,13 @@ This error indicates that `index-value` is null and `record-values` is not null,
 
 ## Reasons and solutions
 
-When a data index consistency error occurs, the reasons can be as follows:
+When a data consistency error occurs, the reasons can be as follows:
 
-- The data indexes in the existing data are consistent. The current version of TiDB has a bug. An ongoing transaction is about to write inconsistent data into the existing data, so the transaction is aborted.
-- The data indexes in the existing data are inconsistent. The inconsistent data could be from an error or a dangerous operation in the past or caused by a TiDB bug.
-- The data indexes are consistent but the detection algorithm has a bug that causes an error by mistake.
+- The data and index in the existing data are consistent and the current version of TiDB has a bug. If an ongoing transaction is about to write inconsistent data into the existing data, TiDB aborts the transaction.
+- The data and index in the existing data are inconsistent. The inconsistent data could be from an error or a dangerous operation in the past or caused by a TiDB bug.
+- The data and index are consistent but the detection algorithm has a bug that causes errors by mistake.
 
-If you receive a data index consistency error, contact PingCAP technical support immediately to fix or troubleshoot it instead of dealing with the error by yourself. If PingCAP technical support confirms that the error is reported by mistake, or your application needs to skip such errors urgently, you can use the following methods to bypass the check.
+If you receive a data inconsistency error, contact PingCAP technical support immediately to troubleshoot or fix it instead of dealing with the error by yourself. If PingCAP technical support confirms that the error is reported by mistake, or your application needs to skip such errors urgently, you can use the following methods to bypass the check.
 
 ### Disable error check
 
@@ -86,7 +86,7 @@ For some errors reported in transaction execution, you can bypass the correspond
 - To bypass the check of errors 8138, 8139, and 8140, configure `set @@tidb_enable_mutation_checker=0`.
 - To bypass the check of error 8141, configure `set @@tidb_txn_assertion_level=OFF`.
 
-For other errors reported in transaction execution and all errors reported during the execution of the `ADMIN CHECK [TABLE|INDEX]` statements, you cannot bypass the corresponding check, because the data inconsistency has already occurred.
+For other errors reported in transaction execution and all errors reported during the execution of the `ADMIN CHECK [TABLE|INDEX]` statement, you cannot bypass the corresponding check, because the data inconsistency has already occurred.
 
 ### Rewrite SQL
 
