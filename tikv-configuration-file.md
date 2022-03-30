@@ -1548,7 +1548,7 @@ For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](
 
 Configuration items related to Quota Limiter.
 
-Suppose that your machine on which TiKV is deployed has limited resources, for example, 4v CPU, 16 G memory. In this situation, if the foreground of TiKV processes too many read and write requests, the CPU resources in the background are used to help process such requests, affecting the performance stability of TiKV. To avoid this situation, you can use the quota-related configuration items to limit the CPU resources used by the foreground. When a request triggers the Quota Limiter, the request is forced to wait for a while for TiKV to free up CPU resources. The exact waiting time depends on the number of requests, and the maximum waiting time is no longer than the value of [`max-delay-duration`](#max-delay-duration-new-in-v600).
+Suppose that your machine on which TiKV is deployed has limited resources, for example, 4v CPU, 16 G memory. In this situation, if the foreground of TiKV processes too many read and write requests, the CPU resources required by the background are used to help process such requests, affecting the performance stability of TiKV. To avoid this situation, you can use the quota-related configuration items to limit the CPU resources used by the foreground. When a request triggers the Quota Limiter, the request is forced to wait for a while for TiKV to free up CPU resources. The exact waiting time depends on the number of requests, and the maximum waiting time is no longer than the value of [`max-delay-duration`](#max-delay-duration-new-in-v600).
 
 > **Warning:**
 >
