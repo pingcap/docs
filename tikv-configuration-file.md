@@ -1309,8 +1309,7 @@ Configuration items related to Raft Engine.
 
 ### `enable`
 
-+ Determines whether to use Raft Engine to store raft logs. When it is enabled, configurations of `raftdb` are ignored.
-+ If you need to downgrade to a version earlier than v5.4.0, please disable Raft Engine and restart TiKV first.
++ Determines whether to use Raft Engine to store Raft logs. When it is enabled, configurations of `raftdb` are ignored.
 + Default value: `"true"`
 
 ### `dir`
