@@ -1,6 +1,6 @@
 ---
 title: Troubleshoot Inconsistencies Between Data and Index
-summary: Learn how to deal with errors reported by the data index consistency check, which can be performed automatically or manually.
+summary: Learn how to deal with errors reported by the data index consistency check.
 ---
 
 # Troubleshoot Inconsistencies Between Data and Index

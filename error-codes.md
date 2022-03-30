@@ -329,19 +329,19 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 * Error Number: 8138
 
-    The transaction attempts to write an incorrect row value. For more information, see [data-index-consistency-errors](/data-inconsistency-errors.md#error-8138).
+    The transaction attempts to write an incorrect row value. For more information, see [Troubleshoot Inconsistencies Between Data and Index](/troubleshoot-data-inconsistency-errors.md#error-8138).
 
 * Error Number: 8139
 
-    The transaction attempts to write an row whose handle value is inconsistent with that of the index. For more information, see [data-inconsistency-errors.md#error-8139](/data-inconsistency-errors.md#error-8139).
+    The transaction attempts to write an row whose handle value is inconsistent with that of the index. For more information, see [Troubleshoot Inconsistencies Between Data and Index](/troubleshoot-data-inconsistency-errors.md#error-8139).
 
 * Error Number: 8140
 
-   The transaction attempts to write an row whose record value is inconsistent with the value of the index. For more information, see [data-inconsistency-errors.md#error-8140](/data-inconsistency-errors.md#error-8140).
+   The transaction attempts to write an row whose record value is inconsistent with the value of the index. For more information, see [Troubleshoot Inconsistencies Between Data and Index](/troubleshoot-data-inconsistency-errors.md#error-8140).
 
 * Error Number: 8141
 
-    When the transaction is written, the existence assertion of a key fails. For more information,see [data-inconsistency-errors.md#error-8141](/data-inconsistency-errors.md#error-8141).
+    When the transaction is written, the existence assertion of a key fails. For more information,see [Troubleshoot Inconsistencies Between Data and Index](/troubleshoot-data-inconsistency-errors.md#error-8141).
 
 * Error Number: 8200
 
