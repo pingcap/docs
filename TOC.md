@@ -3,7 +3,7 @@
 
 - About TiDB
   - [TiDB Introduction](/overview.md)
-  - [TiDB 5.3 Release Notes](/releases/release-5.3.0.md)
+  - [TiDB 5.4 Release Notes](/releases/release-5.4.0.md)
   - [Basic Features](/basic-features.md)
   - [Experimental Features](/experimental-features.md)
   - Benchmarks
@@ -52,16 +52,16 @@
     - [Replicate Incremental Data between TiDB Clusters](/incremental-replication-between-clusters.md)
   - Advanced Migration
     - [Continuous Replication with gh-ost or pt-osc](/migrate-with-pt-ghost.md)
+    - [Migrate to a Downstream Table with More Columns](/migrate-with-more-columns-downstream.md)
     - [Filter Binlog Events](/filter-binlog-event.md)
     - [Filter DML Events Using SQL Expressions](/filter-dml-event.md)
-    - [Migrate to a Downstream Table with More Columns](/migrate-with-more-columns-downstream.md)
 - Maintain
   - Upgrade
     - [Use TiUP (Recommended)](/upgrade-tidb-using-tiup.md)
-    - [Use TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.1/upgrade-a-tidb-cluster)
+    - [Use TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/upgrade-a-tidb-cluster)
   - Scale
     - [Use TiUP (Recommended)](/scale-tidb-using-tiup.md)
-    - [Use TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.1/scale-a-tidb-cluster)
+    - [Use TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/scale-a-tidb-cluster)
   - Backup and Restore
     - Use BR Tool (Recommended)
       - [BR Tool Overview](/br/backup-and-restore-tool.md)
@@ -191,6 +191,10 @@
       - [tiup-cluster](/tiup/tiup-cluster.md)
       - [tiup-mirror](/tiup/tiup-mirror.md)
       - [tiup-bench](/tiup/tiup-bench.md)
+  - PingCAP Clinic Diagnostic Service (Beta)
+    - [Overview](/clinic/clinic-introduction.md)
+    - [Use PingCAP Clinic](/clinic/clinic-user-guide-for-tiup.md)
+    - [PingCAP Clinic Diagnostic Data](/clinic/clinic-data-instruction-for-tiup.md)
   - [TiDB Operator](/tidb-operator-overview.md)
   - Backup & Restore (BR)
     - [BR Tool Overview](/br/backup-and-restore-tool.md)
@@ -222,10 +226,10 @@
     - [FAQ](/tidb-binlog/tidb-binlog-faq.md)
   - TiDB Lightning
     - [Overview](/tidb-lightning/tidb-lightning-overview.md)
-    - [Tutorial](/get-started-with-tidb-lightning.md)
-    - [Deploy](/tidb-lightning/deploy-tidb-lightning.md)
-    - [Precheck](/tidb-lightning/tidb-lightning-prechecks.md)
-    - [Configure](/tidb-lightning/tidb-lightning-configuration.md)
+    - Prechecks and requirements
+      - [Prechecks](/tidb-lightning/tidb-lightning-prechecks.md)
+      - [Downstream privilege requirements](/tidb-lightning/tidb-lightning-requirements.md)
+      - [Downstream storage space requirements](/tidb-lightning/tidb-lightning-requirements.md#downstream-storage-space-requirements)
     - Key Features
       - [Checkpoints](/tidb-lightning/tidb-lightning-checkpoints.md)
       - [Table Filter](/table-filter.md)
@@ -234,6 +238,9 @@
       - [Import Data in Parallel](/tidb-lightning/tidb-lightning-distributed-import.md)
       - [Error Resolution](/tidb-lightning/tidb-lightning-error-resolution.md)
       - [Web Interface](/tidb-lightning/tidb-lightning-web-interface.md)
+    - [Tutorial](/get-started-with-tidb-lightning.md)
+    - [Deploy](/tidb-lightning/deploy-tidb-lightning.md)
+    - [Configure](/tidb-lightning/tidb-lightning-configuration.md)
     - [Monitor](/tidb-lightning/monitor-tidb-lightning.md)
     - [FAQ](/tidb-lightning/tidb-lightning-faq.md)
     - [Glossary](/tidb-lightning/tidb-lightning-glossary.md)
@@ -241,7 +248,7 @@
     - About TiDB Data Migration
       - [DM Overview](/dm/dm-overview.md)
       - Basic Features
-        - [Table Routing](/dm/dm-key-features.md#table-routing)
+        - [Table Routing](/dm/dm-key-features.md)
         - [Block and Allow Lists](/dm/dm-key-features.md#block-and-allow-table-lists)
         - [Binlog Event Filter](/dm/dm-key-features.md#binlog-event-filter)
       - Advanced Features
@@ -250,26 +257,21 @@
           - [Pessimistic Mode](/dm/feature-shard-merge-pessimistic.md)
           - [Optimistic Mode](/dm/feature-shard-merge-optimistic.md)
         - [Migrate from MySQL Databases that Use GH-ost/PT-osc](/dm/feature-online-ddl.md)
-        - [Filter Certain Row Changes Using SQL Expressions](/dm/feature-expression-filter.md)
+        - [Filter DMLs Using SQL Expressions](/dm/feature-expression-filter.md)
       - [DM Architecture](/dm/dm-arch.md)
       - [Benchmarks](/dm/dm-benchmark-v5.4.0.md)
     - Quick Start
       - [Quick Start](/dm/quick-start-with-dm.md)
       - [Deploy a DM cluster Using TiUP](/dm/deploy-a-dm-cluster-using-tiup.md)
       - [Create a Data Source](/dm/quick-start-create-source.md)
-      - Data Migration Scenarios
-        - [Data Migration Scenario Overview](/dm/quick-create-migration-task.md)
-        - [Migrate Data from Multiple Data Sources to TiDB](/dm/usage-scenario-simple-migration.md)
-        - [Migrate Sharded Schemas and Tables to TiDB](/dm/usage-scenario-shard-merge.md)
-        - [Migrate Incremental Data to TiDB](/dm/usage-scenario-incremental-migration.md)
-        - [Migrate Tables when There Are More Columns Downstream](/dm/usage-scenario-downstream-more-columns.md)
+    - [Data Migration Scenarios](/dm/quick-create-migration-task.md)
     - Deploy
       - [Software and Hardware Requirements](/dm/dm-hardware-and-software-requirements.md)
       - Deploy a DM Cluster
         - [Use TiUP (Recommended)](/dm/deploy-a-dm-cluster-using-tiup.md)
         - [Use TiUP Offline](/dm/deploy-a-dm-cluster-using-tiup-offline.md)
         - [Use Binary](/dm/deploy-a-dm-cluster-using-binary.md)
-        - [Use Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/dev/deploy-tidb-dm)
+        - [Use Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-tidb-dm)
       - [Migrate Data Using DM](/dm/migrate-data-using-dm.md)
       - [Test DM Performance](/dm/dm-performance-test.md)
     - Maintain
@@ -291,13 +293,10 @@
         - [Export and Import Data Sources and Task Configuration of Clusters](/dm/dm-export-import-config.md)
         - [Handle Failed DDL Statements](/dm/handle-failed-ddl-statements.md)
       - [Manually Handle Sharding DDL Lock](/dm/manually-handling-sharding-ddl-locks.md)
+      - [Switch the MySQL Instance to Be Migrated](/dm/usage-scenario-master-slave-switch.md)
       - [Manage Schemas of Tables to be Migrated](/dm/dm-manage-schema.md)
       - [Handle Alerts](/dm/dm-handle-alerts.md)
       - [Daily Check](/dm/dm-daily-check.md)
-    - Usage Scenarios
-      - [Migrate from Aurora to TiDB](/dm/migrate-from-mysql-aurora.md)
-      - [Migrate when TiDB Tables Have More Columns](/dm/usage-scenario-downstream-more-columns.md)
-      - [Switch the MySQL Instance to Be Migrated](/dm/usage-scenario-master-slave-switch.md)
     - Troubleshoot
       - [Handle Errors](/dm/dm-error-handling.md)
       - [Handle Performance Issues](/dm/dm-handle-performance-issues.md)
@@ -553,7 +552,7 @@
     - [Views](/views.md)
     - [Partitioning](/partitioned-table.md)
     - [Temporary Tables](/temporary-tables.md)
-    - [Character Set and Collation]
+    - Character Set and Collation
       - [Overview](/character-set-and-collation.md)
       - [GBK](/character-set-gbk.md)
     - [Placement Rules in SQL](/placement-rules-in-sql.md)
@@ -586,7 +585,7 @@
         - [`METRICS_SUMMARY`](/information-schema/information-schema-metrics-summary.md)
         - [`METRICS_TABLES`](/information-schema/information-schema-metrics-tables.md)
         - [`PARTITIONS`](/information-schema/information-schema-partitions.md)
-        - [`PLACEMENT_RULES`](/information-schema/information-schema-placement-rules.md)
+        - [`PLACEMENT_POLICIES`](/information-schema/information-schema-placement-policies.md)
         - [`PROCESSLIST`](/information-schema/information-schema-processlist.md)
         - [`REFERENTIAL_CONSTRAINTS`](/information-schema/information-schema-referential-constraints.md)
         - [`SCHEMATA`](/information-schema/information-schema-schemata.md)
@@ -632,7 +631,7 @@
         - [View Diagnostics Report](/dashboard/dashboard-diagnostics-report.md)
         - [Use Diagnostics](/dashboard/dashboard-diagnostics-usage.md)
       - [Search Logs Page](/dashboard/dashboard-log-search.md)
-      - [Instance Profiling]
+      - Instance Profiling
         - [Manual Profiling](/dashboard/dashboard-profiling.md)
         - [Continuous Profiling](/dashboard/continuous-profiling.md)
       - Session Management and Configuration
@@ -680,7 +679,10 @@
 - Release Notes
   - [All Releases](/releases/release-notes.md)
   - [Release Timeline](/releases/release-timeline.md)
+  - v5.4
+    - [5.4.0](/releases/release-5.4.0.md)
   - v5.3
+    - [5.3.1](/releases/release-5.3.1.md)
     - [5.3.0](/releases/release-5.3.0.md)
   - v5.2
     - [5.2.3](/releases/release-5.2.3.md)
@@ -688,6 +690,7 @@
     - [5.2.1](/releases/release-5.2.1.md)
     - [5.2.0](/releases/release-5.2.0.md)
   - v5.1
+    - [5.1.4](/releases/release-5.1.4.md)
     - [5.1.3](/releases/release-5.1.3.md)
     - [5.1.2](/releases/release-5.1.2.md)
     - [5.1.1](/releases/release-5.1.1.md)

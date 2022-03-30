@@ -211,7 +211,8 @@ Configuration items related to the single thread pool serving read requests. Thi
 ### `max-thread-count`
 
 + The maximum working thread count of the unified read pool or the UnifyReadPool thread pool. When you modify the size of this thread pool, refer to [Performance tuning for TiKV thread pools](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools).
-+ Default value: `MAX(4, CPU * 0.8)`
++ Value range: `[min-thread-count, MAX(4, CPU)]`. In `MAX(4, CPU)`, `CPU` means the number of your CPU cores. `MAX(4, CPU)` takes the greater value out of `4` and the `CPU`.
++ Default value: MAX(4, CPU * 0.8)
 
 ### `stack-size`
 
@@ -446,6 +447,11 @@ Configuration items related to Raftstore.
 + Enables or disables `prevote`. Enabling this feature helps reduce jitter on the system after recovery from network partition.
 + Default value: `true`
 
+### `capacity`
+
++ The storage capacity, which is the maximum size allowed to store data. If `capacity` is left unspecified, the capacity of the current disk prevails. To deploy multiple TiKV instances on the same physical disk, add this parameter to the TiKV configuration. For details, see [Key parameters of the hybrid deployment](/hybrid-deployment-topology.md#key-parameters).
++ Default value: `0`
+
 ### `raftdb-path`
 
 + The path to the Raft library, which is `storage.data-dir/raft` by default
@@ -490,7 +496,7 @@ Configuration items related to Raftstore.
 
 ### `raft-max-inflight-msgs`
 
-+ The number of Raft logs to be confirmed. If this number is exceeded, log sending slows down.
++ The number of Raft logs to be confirmed. If this number is exceeded, the Raft state machine slows down log sending.
 + Default value: `256`
 + Minimum value: greater than `0`
 
@@ -609,6 +615,13 @@ Configuration items related to Raftstore.
 + Default value: `"4h"`
 + Minimum value: `0`
 
+## `snap-generator-pool-size` <span class="version-mark">New in v5.4.0</span>
+
++ Configures the size of the `snap-generator` thread pool.
++ To make Regions generate snapshot faster in TiKV in recovery scenarios, you need to increase the count of the `snap-generator` threads of the corresponding worker. You can use this configuration item to increase the size of the `snap-generator` thread pool.
++ Default value: `2`
++ Minimum value: `0`
+
 ### `lock-cf-compact-interval`
 
 + The time interval at which TiKV triggers a manual compaction for the Lock Column Family
@@ -639,7 +652,7 @@ Configuration items related to Raftstore.
 
 + The longest inactive duration allowed for a peer. A peer with timeout is marked as `down`, and PD tries to delete it later.
 + Default value: `"10m"`
-+ Minimum value: When Hibernate Region is enabled, the minimum value is `peer-stale-check-interval * 2`; when Hibernate Region is disabled, the minimum value is `0`.
++ Minimum value: When Hibernate Region is enabled, the minimum value is `peer-stale-state-check-interval * 2`; when Hibernate Region is disabled, the minimum value is `0`.
 
 ### `max-leader-missing-duration`
 
@@ -721,7 +734,7 @@ Configuration items related to Raftstore.
 
 ### `apply-pool-size`
 
-+ The allowable number of threads in the pool that flushes data to storage. When you modify the size of this thread pool, refer to [Performance tuning for TiKV thread pools](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools).
++ The allowable number of threads in the pool that flushes data to storage, which is the size of the Apply thread pool. When you modify the size of this thread pool, refer to [Performance tuning for TiKV thread pools](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools).
 + Default value: `2`
 + Minimum value: greater than `0`
 
@@ -811,13 +824,19 @@ Configuration items related to RocksDB
 ### `max-background-jobs`
 
 + The number of background threads in RocksDB. When you modify the size of the RocksDB thread pool, refer to [Performance tuning for TiKV thread pools](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools).
-+ Default value: `8`
++ Default value:
+    + When the number of CPU cores is 10, the default value is `9`.
+    + When the number of CPU cores is 8, the default value is `7`.
+    + When the number of CPU cores is `N`, the default value is `max(2, min(N - 1, 9))`.
 + Minimum value: `2`
 
 ### `max-background-flushes`
 
 + The maximum number of concurrent background memtable flush jobs
-+ Default value: `2`
++ Default value:
+    + When the number of CPU cores is 10, the default value is `3`.
+    + When the number of CPU cores is 8, the default value is `2`.
+    + When the number of CPU cores is `N`, the default value is `[(max-background-jobs + 3) / 4]`.
 + Minimum value: `1`
 
 ### `max-sub-compactions`
@@ -847,14 +866,12 @@ Configuration items related to RocksDB
 ### `wal-recovery-mode`
 
 + WAL recovery mode
-+ Value options: `0`, `1`, `2`, `3`
-+ `0` (`TolerateCorruptedTailRecords`): tolerates and discards the records that have incomplete trailing data on all logs.
-+ `1` (`AbsoluteConsistency`): abandons recovery when corrupted logs are found.
-+ `2` (`PointInTimeRecovery`): recovers log sequentially until the first corrupted log is encountered.
-+ `3` (`SkipAnyCorruptedRecords`): recovery after a disaster. Corrupted records are skipped
-+ Default value: `2`
-+ Minimum value: `0`
-+ Maximum value: `3`
++ Optional values:
+    + `"tolerate-corrupted-tail-records"`: tolerates and discards the records that have incomplete trailing data on all logs
+    + `"absolute-consistency"`: abandons recovery when corrupted logs are found
+    + `"point-in-time"`: recovers logs sequentially until the first corrupted log is encountered
+    + `"skip-any-corrupted-records"`: post-disaster recovery. The data is recovered as much as possible, and corrupted records are skipped.
++ Default value: `"point-in-time"`
 
 ### `wal-dir`
 
@@ -914,10 +931,8 @@ Configuration items related to RocksDB
 ### `rate-limiter-mode`
 
 + RocksDB's compaction rate limiter mode
-+ Optional values: `1` (`ReadOnly`), `2` (`WriteOnly`), `3` (`AllIo`)
-+ Default value: `2`
-+ Minimum value: `1`
-+ Maximum value: `3`
++ Optional values: `"read-only"`, `"write-only"`, `"all-io"`
++ Default value: `"write-only"`
 
 ### `rate-limiter-auto-tuned` <span class="version-mark">New in v5.0</span>
 
@@ -926,8 +941,8 @@ Configuration items related to RocksDB
 
 ### `enable-pipelined-write`
 
-+ Enables or disables Pipelined Write
-+ Default value: `true`
++ Controls whether to enable Pipelined Write. When this configuration is enabled, the previous Pipelined Write is used. When this configuration is disabled, the new Pipelined Commit mechanism is used.
++ Default value: `false`
 
 ### `bytes-per-sync`
 
@@ -1140,9 +1155,9 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 ### `compaction-pri`
 
 + The priority type of compaction
-+ Optional values: `0` (`ByCompensatedSize`), `1` (`OldestLargestSeqFirst`), `2` (`OldestSmallestSeqFirst`), `3` (`MinOverlappingRatio`)
-+ Default value for `defaultcf` and `writecf`: `3`
-+ Default value for `lockcf`: `0`
++ Optional values: `"by-compensated-size"`, `"oldest-largest-seq-first"`, `"oldest-smallest-seq-first"`, `"min-overlapping-ratio"`
++ Default value for `defaultcf` and `writecf`: `"min-overlapping-ratio"`
++ Default value for `lockcf`: `"by-compensated-size"`
 
 ### `dynamic-level-bytes`
 
@@ -1162,7 +1177,7 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 ### `compaction-style`
 
 + Compaction method
-+ Optional values: `"level"`, `"universal"`
++ Optional values: `"level"`, `"universal"`, `"fifo"`
 + Default value: `"level"`
 
 ### `disable-auto-compactions`
@@ -1449,7 +1464,8 @@ Configuration items related to BR backup.
 ### `num-threads`
 
 + The number of worker threads to process backup
-+ Default value: `MIN(CPU * 0.5, 8)`.
++ Default value: `MIN(CPU * 0.5, 8)`
++ Value range: `[1, CPU]`
 + Minimum value: `1`
 
 ### `enable-auto-tune` <span class="version-mark">New in v5.4.0</span>
@@ -1521,12 +1537,18 @@ For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](
 - Default value: `"1s"`
 - Minimum value: `"1ms"`
 
-### `wait-up-delay-duration`
+### `wake-up-delay-duration`
 
-- When pessimistic transactions release the lock, among all the transactions waiting for lock, only the transaction with the smallest `start_ts` is woken up. Other transactions will be woken up after `wait-up-delay-duration`.
+- When pessimistic transactions release the lock, among all the transactions waiting for lock, only the transaction with the smallest `start_ts` is woken up. Other transactions will be woken up after `wake-up-delay-duration`.
 - Default value: `"20ms"`
 
 ### `pipelined`
 
 - This configuration item enables the pipelined process of adding the pessimistic lock. With this feature enabled, after detecting that data can be locked, TiKV immediately notifies TiDB to execute the subsequent requests and write the pessimistic lock asynchronously, which reduces most of the latency and significantly improves the performance of pessimistic transactions. But there is a still low probability that the asynchronous write of the pessimistic lock fails, which might cause the failure of pessimistic transaction commits.
 - Default value: `true`
+
+### `in-memory` (New in v6.0.0)
+
++ Enables the in-memory pessimistic lock feature. With this feature enabled, pessimistic transactions try to store their locks in memory, instead of writing the locks to disk or replicating the locks to other replicas. This improves the performance of pessimistic transactions. However, there is a still low probability that the pessimistic lock gets lost and causes the pessimistic transaction commits to fail.
++ Default value: `true`
++ Note that `in-memory` takes effect only when the value of `pipelined` is `true`.

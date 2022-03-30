@@ -108,7 +108,7 @@ If you deploy TiCDC using TiUP, replace `cdc cli` in the following commands with
 
 The state of a replication task represents the running status of the replication task. During the running of TiCDC, replication tasks might fail with errors, be manually paused, resumed, or reach the specified `TargetTs`. These behaviors can lead to the change of the replication task state. This section describes the states of TiCDC replication tasks and the transfer relationships between states.
 
-![TiCDC state transfer](/media/ticdc-state-transfer.png)
+![TiCDC state transfer](/media/ticdc/ticdc-state-transfer.png)
 
 The states in the above state transfer diagram are described as follows:
 
@@ -579,7 +579,7 @@ worker-num = 16
 # The dispatcher rules are as follows:
 # - default: When multiple unique indexes (including the primary key) exist or the Old Value feature is enabled, events are dispatched in the table mode. When only one unique index (or the primary key) exists, events are dispatched in the rowid mode.
 # - ts: Use the commitTs of the row change to create Hash and dispatch events.
-# - rowid: Use the name and value of the selected HandleKey column to create Hash and dispatch events.
+# - index-value: Use the value of the primary key or the unique index of the table to create Hash and dispatch events.
 # - table: Use the schema name of the table and the table name to create Hash and dispatch events.
 # The matching syntax of matcher is the same as the filter rule syntax.
 dispatchers = [

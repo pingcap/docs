@@ -33,7 +33,7 @@ case-sensitive: false           # Determines whether the schema/table is case-se
 online-ddl: true                # Supports automatic processing of upstream "gh-ost" and "pt".
 online-ddl-scheme: "gh-ost"     # `online-ddl-scheme` has been deprecated in v2.0.6, so it is recommended to use `online-ddl`.
 clean-dump-file: true           # Whether to clean up the files generated during data dump. Note that these include `metadata` files.
-collation_compatible: "loose"   # The mode to sync the default collation in `CREATE` SQL statements. The supported values are "loose" (by default) or "strict". When the value is "strict", DM explicitly appends the corresponding collation of the upstream to the SQL statements; when the value is "loose", DM does not modify the SQL statements. In "strict" mode, if the downstream does not support the default collation in the upstream, the downstream might report an error. 
+collation_compatible: "loose"   # The mode to sync the default collation in `CREATE` SQL statements. The supported values are "loose" (by default) or "strict". When the value is "strict", DM explicitly appends the corresponding collation of the upstream to the SQL statements; when the value is "loose", DM does not modify the SQL statements. In "strict" mode, if the downstream does not support the default collation in the upstream, the downstream might report an error.
 
 target-database:                # Configuration of the downstream database instance.
   host: "192.168.0.1"
@@ -109,7 +109,18 @@ mydumpers:
 loaders:
   global:                            # The configuration name of the processing unit.
     pool-size: 16                    # The number of threads that concurrently execute dumped SQL files in the load processing unit (16 by default). When multiple instances are migrating data to TiDB at the same time, slightly reduce the value according to the load.
-    dir: "./dumped_data"             # The directory that the load processing unit reads from and the dump processing unit outputs SQL files to ("./dumped_data" by default). The directories for different tasks of the same instance must be different.
+    # The directory that stores full data exported from the upstream ("./dumped_data" by default).
+    # Supoprts a local filesystem path or an Amazon S3 path. For example, "s3://dm_bucket/dumped_data?region=us-west-2&endpoint=s3-website.us-east-2.amazonaws.com&access_key=s3accesskey&secret_access_key=s3secretkey&force_path_style=true"
+    dir: "./dumped_data"
+    # The import mode during the full import phase. In most cases you don't need to care about this configuration. 
+    # - "sql" (default). Use [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) TiDB-backend mode to import data.
+    # - "loader". Use Loader mode to import data. This mode is only for compatibility with features that TiDB Lightning does not support yet. It will be deprecated in the future.
+    import-mode: "sql"
+    #  Methods to resolve conflicts during the full import phase. You can set it to the following:
+    # - "replace" (default). Only supports the import mode "sql". In this method, it uses the new data to replace the existing data.
+    # - "ignore". Only supports the import mode "sql". It keeps the existing data, and ignores the new data.
+    # - "error". Only supports the import mode "loader". It reports errors when inserting duplicated data, and then stops the replication task.
+    on-duplicate: "replace"
 
 # Configuration arguments of the sync processing unit.
 syncers:
