@@ -81,7 +81,7 @@ In the result of above statement:
 
 ## Create TiFlash replicas for databases
 
-Similar to creating TiFlash replicas for tables, you can send a SQL statement to TiDB through a MySQL client to create a TiFlash replica for all tables in a specific database:
+Similar to creating TiFlash replicas for tables, you can send a DDL statement to TiDB through a MySQL client to create a TiFlash replica for all tables in a specific database:
 
 {{< copyable "sql" >}}
 
@@ -89,7 +89,7 @@ Similar to creating TiFlash replicas for tables, you can send a SQL statement to
 ALTER DATABASE db_name SET TIFLASH REPLICA count
 ```
 
-In this statement, `count` indicates the number of replicas. When the value is `0`, replicas are deleted.
+In this statement, `count` indicates the number of replicas. When you set it to `0`, replicas are deleted.
 
 Examples:
 
@@ -111,18 +111,18 @@ Examples:
 
 > **Note:**
 >
-> - This statement actually performs a series of DDL operations, which is resource-intensive. If the statement is interrupted during the execution, executed operations are not rolled back and unexecuted operations do not continue.
+> - This statement actually performs a series of DDL operations, which are resource-intensive. If the statement is interrupted during the execution, executed operations are not rolled back and unexecuted operations do not continue.
 >
-> - After executing the statement, do not set the number of TiFlash replicas or DDL operations on this database until **all tables in this database are replicated**. Otherwise, unexpected results may occur, which includes:
+> - After executing the statement, do not set the number of TiFlash replicas or perform DDL operations on this database until **all tables in this database are replicated**. Otherwise, unexpected results might occur, which include:
 >     - If you set the number of TiFlash replicas to 2 and then change the number to 1 before all tables in the database are replicated, the final number of TiFlash replicas of all the tables is not necessarily 1 or 2.
 >     - After executing the statement, if you create tables in this database before the completion of the statement execution, TiFlash replicas **may or may not** be created for these new tables.
->     - After executing the statement, if you add indexes for tables in the database before the completion of the statement execution, the statement may be hung and resumes only after the operation of adding indexes finishes.
+>     - After executing the statement, if you add indexes for tables in the database before the completion of the statement execution, the statement might hang and resume only after the indexes are added.
 >
 > - This statement skips system tables, views, temporary tables, and tables with character sets not supported by TiFlash.
 
 ### Check replication progress
 
-Similar to creating TiFlash replicas for tables, successful execution of the statement does not mean the completion of replication. You can execute the following SQL statement to check the progress of replication on target tables:
+Similar to creating TiFlash replicas for tables, successful execution of the DDL statement does not mean the completion of replication. You can execute the following SQL statement to check the progress of replication on target tables:
 
 {{< copyable "sql" >}}
 
@@ -130,7 +130,7 @@ Similar to creating TiFlash replicas for tables, successful execution of the sta
 SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = '<db_name>'
 ```
 
-To check tables not setting TiFlash replicas in the database, you can execute the following SQL statement:
+To check tables without TiFlash replicas in the database, you can execute the following SQL statement:
 
 {{< copyable "sql" >}}
 
@@ -289,7 +289,7 @@ TiFlash supports the push-down of the following operators:
 * TopN: Performs the TopN calculation.
 * Limit: Performs the limit calculation.
 * Project: Performs the projection calculation.
-* HashJoin: Performs the join calculation based on the [Hash Join](/explain-joins.md#hash-join) algorithm, but with the following conditions:
+* HashJoin: Performs the join calculation using the [Hash Join](/explain-joins.md#hash-join) algorithm, but with the following conditions:
     * The operator can be pushed down only in the [MPP mode](#use-the-mpp-mode).
     * Supported joins are Inner Join, Left Join, Semi Join, Anti Semi Join, Left Semi Join, and Anti Left Semi Join.
     * The preceding joins support both Equi Join and Non-Equi Join (Cartesian Join). When calculating Cartesian Join, the Broadcast algorithm, instead of the Shuffle Hash Join algorithm, is used.
