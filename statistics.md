@@ -335,7 +335,7 @@ Before TiDB v5.0, when you execute a query, TiDB collects feedback with `feedbac
 
 Since TiDB v6.0, TiDB supports using the `KILL` statement to terminate an `ANALYZE` task running in the background. If you find that an `ANALYZE` task running in the background consumes a lot of resources and affects your application, you can terminate the `ANALYZE` task by taking the following steps:
 
-1. Execute the following SQL statement to get the address and task `ID` of the TiDB instance that is executing the background `ANALYZE` task:
+1. Execute the following SQL statement to get the TiDB instance address and the `ID` of the background `ANALYZE` task:
 
     {{< copyable "sql" >}}
 
@@ -343,9 +343,9 @@ Since TiDB v6.0, TiDB supports using the `KILL` statement to terminate an `ANALY
     SELECT ci.instance as instance, cp.id as id FROM information_schema.cluster_info ci, information_schema.cluster_processlist cp WHERE ci.status_address = cp.instance and ci.type = 'tidb' and cp.info like 'analyze table %' and cp.user = '' and cp.host = '';
     ```
 
-    If there is no result, it indicates that no `ANALYZE` task is executing in the background.
+    If there is no result, no `ANALYZE` task is running in the background.
 
-2. Use a client to connect to the TiDB instance that is executing the background `ANALYZE` task, and then execute the following `KILL` statement:
+2. Use a client to connect to the TiDB instance that is performing the background `ANALYZE` task, and then execute the following `KILL` statement:
 
     {{< copyable "sql" >}}
 
@@ -353,11 +353,11 @@ Since TiDB v6.0, TiDB supports using the `KILL` statement to terminate an `ANALY
     KILL TIDB ${id};
     ```
 
-    `${id}` is the `ID` of the background `ANALYZE` task obtained from the query of the previous step.
+    `${id}` is the `ID` of the background `ANALYZE` task obtained in the previous step.
 
     > **Note:**
     >
-    > The above `KILL` statement only works on the TiDB instance that is executing the background `ANALYZE` task, so you must use a client to connect to that TiDB instance first. If you use a client to connect to another TiDB instance, or if there is a proxy between the client and TiDB, the `KILL` statement cannot terminate the background `ANALYZE` task. For more information, see [`KILL [TIDB]`](/sql-statements/sql-statement-kill.md).
+    > The above `KILL` statement only works on a TiDB instance that is executing a background `ANALYZE` task. Therefore, you must use a client to connect to that TiDB instance first. If you use a client to connect to another TiDB instance, or if there is a proxy between the client and TiDB, the `KILL` statement cannot terminate the background `ANALYZE` task. For more information, see [`KILL [TIDB]`](/sql-statements/sql-statement-kill.md).
 
 ### Control `ANALYZE` concurrency
 
