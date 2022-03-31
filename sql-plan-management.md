@@ -202,7 +202,7 @@ You can execute this statement to change the status of a binding. The default st
 
 When executing this statement, you can only change the status of a binding from `Disabled` to `Enabled` or from `Enabled` to `Disabled`. If there is no binding for you to change the status, a warning message is returned, saying `There are no bindings can be set the status. Please check the SQL text`. Note that a binding in `Disabled` status is not used by any query.
 
-### View binding
+### View bindings
 
 {{< copyable "sql" >}}
 
@@ -224,7 +224,7 @@ This statement outputs the execution plan bindings at the GLOBAL or SESSION leve
 | collation | Ordering rule |
 | source | The way in which a binding is created, including `manual` (created by the `create [global] binding` SQL statement), `capture` (captured automatically by TiDB), and `evolve` (evolved automatically by TiDB) |
 
-### Troubleshoot bindings
+### Troubleshoot a binding
 
 You can use either of the following methods to troubleshoot bindings:
 
@@ -283,7 +283,7 @@ You can use either of the following methods to troubleshoot bindings:
 
 ### Cache bindings
 
-Each TiDB instace has a least recently used (LRU) cache for bindings. The cache capacity is controlled by the system variable [`tidb_mem_quota_binding_cache`](/system-variables.md#tidb_mem_quota_binding_cache-new-in-v60). You can view bindings that are cached in the TiDB instance.
+Each TiDB instance has a least recently used (LRU) cache for bindings. The cache capacity is controlled by the system variable [`tidb_mem_quota_binding_cache`](/system-variables.md#tidb_mem_quota_binding_cache-new-in-v60). You can view bindings that are cached in the TiDB instance.
 
 To view the cache status of bindings, run the `SHOW binding_cache status` statement. In this statement, the effective scope is GLOBAL by default and cannot be modified. This statement returns the number of available bindings in the cache, the total number of available bindings in the system, memory usage of all cached bindings, and the total memory.
 
