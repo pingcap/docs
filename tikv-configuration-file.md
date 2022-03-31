@@ -352,7 +352,6 @@ Configuration items related to storage.
 + The number of threads in the Scheduler thread pool. Scheduler threads are mainly used for checking transaction consistency before data writing. If the number of CPU cores is greater than or equal to `16`, the default value is `8`; otherwise, the default value is `4`. When you modify the size of the Scheduler thread pool, refer to [Performance tuning for TiKV thread pools](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools).
 + Default value: `4`
 + Value range: `[1, MAX(4, CPU)]`. In `MAX(4, CPU)`, `CPU` means the number of your CPU cores. `MAX(4, CPU)` takes the greater value out of `4` and the `CPU`.
-+ Default value: MAX(4, CPU * 0.8)
 
 ### `scheduler-pending-write-threshold`
 
@@ -738,7 +737,7 @@ Configuration items related to Raftstore.
 
 ### `apply-pool-size`
 
-+ The allowable number of threads in the pool that flushes data to storage, which is the size of the Apply thread pool. When you modify the size of this thread pool, refer to [Performance tuning for TiKV thread pools](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools).
++ The allowable number of threads in the pool that flushes data to the disk, which is the size of the Apply thread pool. When you modify the size of this thread pool, refer to [Performance tuning for TiKV thread pools](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools).
 + Default value: `2`
 + Value ranges: `[1, CPU * 10]` (`CPU` means the number of your CPU cores)
 
