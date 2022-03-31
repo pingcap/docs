@@ -764,12 +764,9 @@ Usage:
 >> store weight 1 5 10                 // Set the leader weight to 5 and Region weight to 10 for the store with the store id of 1
 >> store remove-tombstone              // Remove stores that are in tombstone state
 ```
-
-For the usage of `store limit`, see [Store Limit](/configure-store-limit.md).
-
 > **Note:**
 >
-> - You can use `pd-ctl` to check the status (Up, Disconnect, Offline, Down, or Tombstone) of a TiKV store. For the relationship between each status, refer to [Relationship between each status of a TiKV store](/tidb-scheduling.md#information-collection).
+> You can use `pd-ctl` to check the status (Up, Disconnect, Offline, Down, or Tombstone) of a TiKV store. For the relationship between each status, refer to [Relationship between each status of a TiKV store](/tidb-scheduling.md#information-collection).
 
 ### `log [fatal | error | warn | info | debug]`
 
