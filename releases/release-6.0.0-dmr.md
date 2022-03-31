@@ -494,8 +494,8 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
     - (dup: release-5.3.1.md > Bug fixes> TiKV)- Fix the issue that destroying a peer might cause high latency [#10210](https://github.com/tikv/tikv/issues/10210)
     - (dup: release-5.3.1.md > Bug fixes> TiKV)- Fix a bug that TiKV cannot delete a range of data (`unsafe_destroy_range` cannot be executed) when the GC worker is busy [#11903](https://github.com/tikv/tikv/issues/11903)
     - Fix a bug that TiKV panics when the data in `StoreMeta` is accidentally deleted in some corner cases [#11852](https://github.com/tikv/tikv/issues/11852)
-    - Fix a bug that TiKV panics when performing profiling on ARM platform [#10658](https://github.com/tikv/tikv/issues/10658)
-    - Fix a bug that TiKV might panic when running 2 years or more [#11940](https://github.com/tikv/tikv/issues/11940)
+    - Fix a bug that TiKV panics when performing profiling on an ARM platform [#10658](https://github.com/tikv/tikv/issues/10658)
+    - Fix a bug that TiKV might panic if it has been running for 2 years or more [#11940](https://github.com/tikv/tikv/issues/11940)
     - Fix the compilation issue on the ARM64 architecture caused by missing SSE instruction set [#12034](https://github.com/tikv/tikv/issues/12034)
     - (dup: release-5.3.1.md > Bug fixes> TiKV)- Fix the issue that deleting an uninitialized replica might cause an old replica to be recreated [#10533](https://github.com/tikv/tikv/issues/10533)
     - Fix the bug that stale messages causes TiKV to panic [#12023](https://github.com/tikv/tikv/issues/12023)
@@ -503,8 +503,8 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
     - Fix a bug that replica reads might violate the linearizability [#12109](https://github.com/tikv/tikv/issues/12109)
     - Fix the potential panic issue that occurs when TiKV performs profiling on Ubuntu 18.04 [#9765](https://github.com/tikv/tikv/issues/9765)
     - Fix the issue that tikv-ctl returns an incorrect result due to its wrong string match [#12049](https://github.com/tikv/tikv/pull/12049)
-    - Fix the issues of intermittent packet loss and out of memory (OOM) caused by the overflow of memory metrics [#12160](https://github.com/tikv/tikv/issues/12160)
-    - Fix the potential issue of reporting TiKV panics when exiting TiKV [#12231](https://github.com/tikv/tikv/issues/12231)
+    - Fix the issue of intermittent packet loss and out of memory (OOM) caused by the overflow of memory metrics [#12160](https://github.com/tikv/tikv/issues/12160)
+    - Fix the potential issue of mistakenly reporting TiKV panics when exiting TiKV [#12231](https://github.com/tikv/tikv/issues/12231)
 
 + PD
 
