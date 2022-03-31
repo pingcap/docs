@@ -333,7 +333,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 * Error Number: 8139
 
-    The transaction attempts to write an row whose handle value is inconsistent with that of the index. For more information, see [Troubleshoot Inconsistencies Between Data and Index](/troubleshoot-data-inconsistency-errors.md#error-8139).
+    The transaction attempts to write a row whose handle is inconsistent with that in the index. For more information, see [Troubleshoot Inconsistencies Between Data and Index](/troubleshoot-data-inconsistency-errors.md#error-8139).
 
 * Error Number: 8140
 
@@ -341,7 +341,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 * Error Number: 8141
 
-    When the transaction is written, the existence assertion of a key fails. For more information,see [Troubleshoot Inconsistencies Between Data and Index](/troubleshoot-data-inconsistency-errors.md#error-8141).
+    When a transaction is being committed, the existence assertion of a key fails. For more information,see [Troubleshoot Inconsistencies Between Data and Index](/troubleshoot-data-inconsistency-errors.md#error-8141).
 
 * Error Number: 8200
 

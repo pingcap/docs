@@ -33,19 +33,19 @@ This error indicates that the transaction was attempting to write an incorrect r
 
 `ERROR 8139 (HY000): writing inconsistent data in table: t, index: i1, index-handle:4 != record-handle:3, index: tables.mutation{key:kv.Key{0x74, 0x80, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x49, 0x5f, 0x69, 0x80, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1, 0x1, 0x68, 0x65, 0x6c, 0x6c, 0x6f, 0x0, 0x0, 0x0, 0xfc, 0x1, 0x68, 0x65, 0x6c, 0x6c, 0x6f, 0x0, 0x0, 0x0, 0xfc, 0x3, 0x80, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x4}, flags:0x0, value:[]uint8{0x30}, indexID:1}, record: tables.mutation{key:kv.Key{0x74, 0x80, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x49, 0x5f, 0x72, 0x80, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x3}, flags:0xd, value:[]uint8{0x80, 0x0, 0x2, 0x0, 0x0, 0x0, 0x1, 0x2, 0x5, 0x0, 0xa, 0x0, 0x68, 0x65, 0x6c, 0x6c, 0x6f, 0x68, 0x65, 0x6c, 0x6c, 0x6f}, indexID:0}`
 
-This error indicates that the handle (that is, the key of the row data) value of the data to be written is inconsistent. For the `i1` index in the table `t`, the row to be written by the transaction has a handle of 4 in the index key-value pair and a handle of 3 in the row record key-value pair. The data of this row will not be written.
+This error indicates that the handle (that is, the key of the row data) of the data to be written is inconsistent. For the `i1` index in the table `t`, the row to be written by the transaction has a handle of 4 in the index key-value pair and a handle of 3 in the row record key-value pair. The data of this row will not be written.
 
 #### Error 8140
 
 `ERROR 8140 (HY000): writing inconsistent data in table: t, index: i2, col: c1, indexed-value:{KindString hellp} != record-value:{KindString hello}`
 
-This error indicates that the data in a row to be written by the transaction does not match the data in the index. For the `i2` index in the table `t`, a row to be written by the transaction has data `hellp` in the index key-value pair and data `hello` in the row record key-value pair. The data of this row will not be written.
+This error indicates that the data in a row to be written by the transaction does not match the data in the index. For the `i2` index in the table `t`, a row to be written by the transaction has data `hellp` in the index key-value pair and data `hello` in the record key-value pair. The data of this row will not be written.
 
 #### Error 8141
 
 `ERROR 8141 (HY000): assertion failed: key: 7480000000000000405f72013300000000000000f8, assertion: NotExist, start_ts: 430590532931813377, existing start ts: 430590532931551233, existing commit ts: 430590532931551234`
 
-This error indicates that the assertion failed when a transaction was committed. Assuming that data and index are consistent, TiDB asserted that the key `7480000000000000405f720133000000000000000000f8` did not exist. When the transaction was committed, TiDB found the key did exist, written by the transaction with `start ts` as `430590532931551233`. TiDB will print the MVCC (Multi-Version Concurrency Control) history of this key to logs.
+This error indicates that the assertion failed when a transaction was being committed. Assuming that data and index are consistent, TiDB asserted that the key `7480000000000000405f720133000000000000000000f8` did not exist. When the transaction was being committed, TiDB found the key did exist, written by the transaction with the `start ts` of `430590532931551233`. TiDB will print the MVCC (Multi-Version Concurrency Control) history of this key to logs.
 
 ### Errors reported in admin check
 
@@ -61,7 +61,7 @@ This error indicates that the table on which the `ADMIN CHECK` statement is exec
 
 `ERROR 8134 (HY000): data inconsistency in table: t, index: c2, col: c2, handle: "2", index-values:"KindInt64 13" != record-values:"KindInt64 12", compare err:<nil>`
 
-This error indicates that for the `c2` index in table `t`, the handle value of a row is 13 in the index key-value pair but is 12 in the row record key-value pair, which results in data inconsistency.
+This error indicates that for the `c2` index in table `t`, the handle of a row is 13 in the index key-value pair but is 12 in the row record key-value pair, which results in data inconsistency.
 
 #### Error 8223
 
@@ -73,7 +73,7 @@ This error indicates that `index-value` is null and `record-values` is not null,
 
 When a data consistency error occurs, the reasons can be as follows:
 
-- The data and index in the existing data are consistent and the current version of TiDB has a bug. If an ongoing transaction is about to write inconsistent data into the existing data, TiDB aborts the transaction.
+- The data and index in the existing data are consistent and the current version of TiDB has a bug. If an ongoing transaction is about to write inconsistent data, TiDB aborts the transaction.
 - The data and index in the existing data are inconsistent. The inconsistent data could be from an error or a dangerous operation in the past or caused by a TiDB bug.
 - The data and index are consistent but the detection algorithm has a bug that causes errors by mistake.
 
