@@ -226,7 +226,7 @@ This statement outputs the execution plan bindings at the GLOBAL or SESSION leve
 
 ### Troubleshoot a binding
 
-You can use either of the following methods to troubleshoot bindings:
+You can use either of the following methods to troubleshoot a binding:
 
 - Use the system variable [`last_plan_from_binding`](/system-variables.md#last_plan_from_binding-new-in-v40) to show whether the execution plan used by the last executed statement is from the binding.
 
