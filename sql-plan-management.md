@@ -401,7 +401,7 @@ When upgrading a TiDB cluster, you can use baseline capturing to prevent regress
 
         - If the execution plan is consistent, you can delete the binding safely.
 
-        - If the execution plan is inconsistent, you need to identify the cause, for examaple, checking operations on statistical information. In this case, you need retain the binding to ensure plan consistency.
+        - If the execution plan is inconsistent, you need to identify the cause, for examaple, checking operations on statistical information. In this case, you need to retain the binding to ensure plan consistency.
 
 ## Baseline evolution
 
