@@ -156,10 +156,10 @@ The following TiKV configuration items can be modified online:
 | `raftstore.cleanup-import-sst-interval` | The time interval to check expired SST files |
 | `raftstore.local-read-batch-size` | The maximum number of read requests processed in one batch |
 | `raftstore.hibernate-timeout` | The shortest wait duration before entering hibernation upon start. Within this duration, TiKV does not hibernate (not released). |
-| `raftstore.apply-pool-size` | The number of threads in the pool that flushes data to storage, which is the size of the Apply thread pool |
+| `raftstore.apply-pool-size` | The number of threads in the pool that flushes data to the disk, which is the size of the Apply thread pool |
 | `raftstore.store-pool-size` | The number of threads in the pool that processes Raft, which is the size of the Raftstore thread pool |
-| `raftstore.apply-max-batch-size` | Raft state machines execute data write requests in batches by the BatchSystem. This configuration item specifies the maximum number of Raft state machines that can execute the requests in one batch. |
-| `raftstore.store-max-batch-size` | Raft state machines execute requests for log flushing in batches by the BatchSystem. This configuration item specifies the maximum number of Raft state machines that can execute the requests in one batch. |
+| `raftstore.apply-max-batch-size` | Raft state machines process data write requests in batches by the BatchSystem. This configuration item specifies the maximum number of Raft state machines that can execute the requests in one batch. |
+| `raftstore.store-max-batch-size` | Raft state machines process requests for flushing logs into the disk in batches by the BatchSystem. This configuration item specifies the maximum number of Raft state machines that can process the requests in one batch. |
 | `readpool.unified.max-thread-count` | The maximum number of threads in the thread pool that uniformly processes read requests, which is the size of the UnifyReadPool thread pool |
 | `coprocessor.split-region-on-table` | Enables to split Region by table |
 | `coprocessor.batch-split-limit` | The threshold of Region split in batches |

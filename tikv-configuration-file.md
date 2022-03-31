@@ -730,7 +730,7 @@ Configuration items related to Raftstore.
 
 ### `apply-max-batch-size`
 
-+ Raft state machines process data write requests in batches by the BatchSystem. This configuration item specifies the maximum number of Raft state machines that can execute the requests in one batch.
++ Raft state machines process data write requests in batches by the BatchSystem. This configuration item specifies the maximum number of Raft state machines that can process the requests in one batch.
 + Default value: `256`
 + Minimum value: greater than `0`
 + Maximum value: `10240`
@@ -739,11 +739,11 @@ Configuration items related to Raftstore.
 
 + The allowable number of threads in the pool that flushes data to the disk, which is the size of the Apply thread pool. When you modify the size of this thread pool, refer to [Performance tuning for TiKV thread pools](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools).
 + Default value: `2`
-+ Value ranges: `[1, CPU * 10]` (`CPU` means the number of your CPU cores)
++ Value ranges: `[1, CPU * 10]`. `CPU` means the number of your CPU cores.
 
 ### `store-max-batch-size`
 
-+ Raft state machines execute requests for log flushing in batches by the BatchSystem. This configuration item specifies the maximum number of Raft state machines that can execute the requests in one batch.
++ Raft state machines process requests for flushing logs into the disk in batches by the BatchSystem. This configuration item specifies the maximum number of Raft state machines that can process the requests in one batch.
 + If `hibernate-regions` is enabled, the default value is `256`. If `hibernate-regions` is disabled, the default value is `1024`.
 + Minimum value: greater than `0`
 + Maximum value: `10240`
@@ -752,7 +752,7 @@ Configuration items related to Raftstore.
 
 + The allowable number of threads in the pool that processes Raft, which is the size of the Raftstore thread pool. When you modify the size of this thread pool, refer to [Performance tuning for TiKV thread pools](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools).
 + Default value: `2`
-+ Value ranges: [1, CPU * 10] (`CPU` means the number of your CPU cores)
++ Value ranges: `[1, CPU * 10]`. `CPU` means the number of your CPU cores.
 
 ### `store-io-pool-size` <span class="version-mark">New in v5.3.0</span>
 
