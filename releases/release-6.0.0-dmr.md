@@ -126,11 +126,11 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
     TiDB is a distributed database with excellent scalability. Usually, data is deployed across multiple servers or even multiple data centers. Therefore, data scheduling management is one of the most important basic capabilities of TiDB. In most cases, customers do not need to care about how to schedule and manage data. However, with the increasing application complexity, deployment changes caused by isolation and access latency have become new challenges for TiDB. Since v6.0.0, TiDB officially provides data scheduling and management capabilities based on SQL interfaces. It supports flexible scheduling and management in dimensions such as replica counts, role types, and placement locations for any data. TiDB also supports more flexible management for data placement in multi-service shared clusters and cross-AZ deployments.
 
-    [user document](/placement-rules-in-sql.md)
+    [User document](/placement-rules-in-sql.md)
 
 - Support building TiFlash replicas by databases. To add TiFlash replicas for all tables in a database, you only need to use a single SQL statement, which greatly saves operation and maintenance costs.
 
-    [user document]()
+    [User document](/tiflash/use-tiflash.md#按库构建-tiflash-副本)
 
 ### Transaction
 
@@ -168,25 +168,25 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
     By default, [Raft Engine](https://github.com/tikv/raft-engine) is used as the storage engine for TiKV logs. Compared with RocksDB, Raft Engine can reduce TiKV I/O write traffic by up to 40% and CPU usage by 10%. At the same time, under certain loads, Raft Engine improves foreground throughput by about 5% and reduces long-tail latency by 20%.
 
-    [User document](/tikv-configuration-file#raft-engine)，[issue 号]()
+    [User document](/tikv-configuration-file#raft-engine)
 
 - Cache hotspot small tables
 
     For customer applications in scenarios where hotspot small tables are accessed, TiDB supports explicitly caching the hotspot tables in memory, which greatly improves the access performance, improves the throughput, and reduces access latency. This solution can effectively avoid introducing a third-party cache middleware, reduce the complexity of the architecture, and cut the cost of operation and maintenance management. The solution is suitable for scenarios where small tables are frequently accessed and rarely updated, such as the configuration tables or exchange rate tables.
 
-    [User document]()，[issue 号]()
+    [User document](/cached-tables.md), [#25293](https://github.com/pingcap/tidb/issues/25293)
 
 - In-memory pessimistic locking
 
     Since TiDB v6.0.0, in-memory pessimistic locking is enabled by default. After enabling this feature, pessimistic transaction locks are managed in memory. This avoids persisting pessimistic locks and the Raft replication of the lock information, and greatly reduces the overhead of managing pessimistic transaction locks. Under the performance bottleneck caused by pessimistic locks, memory optimization for pessimistic locks can effectively reduce latency by 10% and increase QPS by 10%.
 
-    [User document]()，[issue 号]()
+    [User document](/pessimistic-transaction.md#in-memory-pessimistic-lock), [#11452](https://github.com/tikv/tikv/issues/11452)
 
 - Optimization to get TSO at the Read Committed isolation level
 
     To reduce query latency, when read-write conflicts are rare, TiDB adds the `tidb_rc_read_check_ts` system variable at the [Read Committed isolation level](/transaction-isolation-levels.md#read-committed-isolation-level) to get less unnecessary TSO. This variable is disabled by default. When the variable is enabled, this optimization can almost help avoid getting duplicated TSO to reduce latency in scenarios with no read-write conflict. However, in scenarios with frequent read-write conflicts, enabling this variable might cause a performance regression. Do not use it before checking.
 
-    [User docs]()，[issue 号]()
+    [User docs](/transaction-isolation-levels.md#read-committed-isolation-level), [#33159](https://github.com/pingcap/tidb/issues/33159)
 
 - Enhance prepared statements to share execution plans
 
@@ -204,7 +204,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
     In this mode, TiDB can read and compute the data on partitioned tables using the MPP engine of TiFlash, which greatly improves the query performance of partitioned tables.
 
-    [User docs]()，[issue 号]()
+    [User docs](), [issue 号]()
 
 - Improve the computing performance of the MPP engine
 

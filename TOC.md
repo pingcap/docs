@@ -679,6 +679,8 @@
 - Release Notes
   - [All Releases](/releases/release-notes.md)
   - [Release Timeline](/releases/release-timeline.md)
+  - v6.0
+    - [6.0.0-DMR](/releases/release-6.0.0-dmr.md)
   - v5.4
     - [5.4.0](/releases/release-5.4.0.md)
   - v5.3
