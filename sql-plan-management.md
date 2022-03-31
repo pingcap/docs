@@ -285,7 +285,7 @@ You can use either of the following methods to troubleshoot bindings:
 
 Each TiDB instace has a least recently used (LRU) cache for bindings. The cache capacity is controlled by the system variable [`tidb_mem_quota_binding_cache`](/system-variables.md#tidb_mem_quota_binding_cache-new-in-v60). You can view bindings that are cached in the TiDB instance.
 
-To view the cache status of bindings, run the `SHOW binding_cache status` statement. In this statement, the effective scope is GLOBAL by default and cannot be modified. This statement returns the number of available bindings in the cache, the total number of available bindings in the system, memory usage of all cached bindings, and the memory quota.
+To view the cache status of bindings, run the `SHOW binding_cache status` statement. In this statement, the effective scope is GLOBAL by default and cannot be modified. This statement returns the number of available bindings in the cache, the total number of available bindings in the system, memory usage of all cached bindings, and the total memory.
 
 {{< copyable "sql" >}}
 
@@ -305,7 +305,7 @@ SHOW binding_cache status;
 
 ## Baseline capturing
 
-Used for [preventing rollback of execution plans during an upgrade](#prevent-rollback-of-execution-plans-during-an-upgrade), this function captures queries that meet capturing conditions and create bindings for them.
+Used for [preventing regression of execution plans during an upgrade](#prevent-regression-of-execution-plans-during-an-upgrade), this function captures queries that meet capturing conditions and create bindings for them.
 
 ### Enable capturing
 
@@ -369,15 +369,15 @@ Insert filtering conditions into the system table `mysql.capture_plan_baselines_
 >
 > - If the blocklist contains illegal filter content, TiDB returns warning message `[sql-bind] unknown capture filter type, ignore it` in the log.
 
-### Prevent rollback of execution plans during an upgrade
+### Prevent regression of execution plans during an upgrade
 
 When upgrading a TiDB cluster, you can use baseline capturing to prevent regression of execution plans by performing the following steps:
 
-1. Enable baseline capturing and keep it working for a period of time. This ensures that most important plans are captured.
+1. Enable baseline capturing and keep it working for a period of time.
 
     > **Note:**
     >
-    > Test data shows that long-term working of baseline capturing does not affect performance of the cluster load. Therefore, it is recommended to enable baseline capturing as long as possible.
+    > Test data shows that long-term working of baseline capturing does not affect performance of the cluster load. Therefore, it is recommended to enable baseline capturing as long as possible so that important plans are captured.
 
 2. Upgrade the TiDB cluster. After the upgrade, captured bindings work to ensure plan consistency.
 
