@@ -20,10 +20,9 @@ In 6.0.0-DMR, the key new features or improvements are as follows:
 - Enhance function queries
 - TiKV 过载资源保护增强（实验特性)
 - Cache hotspot small tables
-- 批量更新热点索引
 - Optimize in-memory pessimistic locking
-- TiDB Enterprise Manager, an enterprise-level database management platform
-- Provide PingCAP Clinic, the automatic diagnosis tool for TiDB
+- Provide TiDB Enterprise Manager, an enterprise-level database management platform
+- Provide PingCAP Clinic, the automatic diagnosis tool for TiDB (Technical Preview version)
 - Top SQL becomes generally available (GA)
 - HTAP capabilities improve by x times
 - Strengthen disaster recovery
@@ -333,6 +332,13 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
     [user documentation](/statistics.md#automatic-update)
 
+- PingCAP Clinic diagnostic service (Technical Preview version)
+	
+    PingCAP Clinic is a diagnostic service for TiDB clusters. This service helps users troubleshoot cluster issues remotely and provides a quick check of cluster status locally. With PingCAP Clinic, you can ensure the stable operation of your TiDB cluster for its full life cycle, predict potential issues, reduce the probability of issues, quickly troubleshoot and fix cluster issues.
+	
+    When contacting PingCAP technical support for remote assistance to troubleshoot cluster issues, you can use the PingCAP Clinic service to collect and upload diagnostic data, thereby improving the troubleshooting efficiency.
+	
+    [User documentation](/clinic-introduction.md)
 ### TiDB Enterprise Manager
 
 TiDB Enterprise Manager (TiEM) is an enterprise-level database management platform based on the TiDB database, which aims to help users deploy, monitor, back up, and scale TiDB clusters in on-premises or public cloud environments.
