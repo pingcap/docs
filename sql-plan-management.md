@@ -377,7 +377,7 @@ When upgrading a TiDB cluster, you can use baseline capturing to prevent regress
 
     > **Note:**
     >
-    > Test data shows that long-term working of baseline capturing does not affect performance of the cluster load. Therefore, it is recommended to enable baseline capturing as long as possible so that important plans are captured.
+    > Test data shows that long-term working of baseline capturing does not affect performance of the cluster load. Therefore, it is recommended to enable baseline capturing as long as possible so that important plans (appear twice or above) are captured.
 
 2. Upgrade the TiDB cluster. After the upgrade, captured bindings work to ensure plan consistency.
 
