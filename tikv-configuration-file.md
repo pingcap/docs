@@ -1557,7 +1557,7 @@ For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](
 
 Configuration items related to Quota Limiter.
 
-Suppose that your machine on which TiKV is deployed has limited resources, for example, 4v CPU, 16 G memory. In this situation, if the foreground of TiKV processes too many read and write requests, the CPU resources required by the background are used to help process such requests, affecting the performance stability of TiKV. To avoid this situation, you can use the quota-related configuration items to limit the CPU resources used by the foreground. When a request triggers the Quota Limiter, the request is forced to wait for a while for TiKV to free up CPU resources. The exact waiting time depends on the number of requests, and the maximum waiting time is no longer than the value of [`max-delay-duration`](#max-delay-duration-new-in-v600).
+Suppose that your machine on which TiKV is deployed has limited resources, for example, with only 4v CPU and 16 G memory. In this situation, if the foreground of TiKV processes too many read and write requests, the CPU resources used by the background are occupied to help process such requests, which affects the performance stability of TiKV. To avoid this situation, you can use the quota-related configuration items to limit the CPU resources to be used by the foreground. When a request triggers the Quota Limiter, the request is forced to wait for a while for TiKV to free up CPU resources. The exact waiting time depends on the number of requests, and the maximum waiting time is no longer than the value of [`max-delay-duration`](#max-delay-duration-new-in-v600).
 
 > **Warning:**
 >
@@ -1566,7 +1566,7 @@ Suppose that your machine on which TiKV is deployed has limited resources, for e
 
 ### `foreground-cpu-time` (new in v6.0.0)
 
-+ The soft limit on controlling the CPU resources used by TiKV foreground to process read and write requests.
++ The soft limit on the CPU resources used by TiKV foreground to process read and write requests.
 + Default value: `0` (which means no limit)
 + Unit: millicpu (for example, `1500` means that foreground requests consume 1.5v CPU)
 
