@@ -124,7 +124,7 @@ MySQL [test]> select @@last_plan_from_cache;
 
 You can manually clear execution plan cache by executing the `ADMIN FLUSH [SESSION | INSTANCE] PLAN_CACHE` statement.
 
-In this statement, `[SESSION | INSTANCE]`specifies whether the plan cache is cleared for the current session or the whole TiDB instance. If the scope is left blank, the statement above applies to `SESSION` cache by default.
+In this statement, `[SESSION | INSTANCE]`specifies whether the plan cache is cleared for the current session or the whole TiDB instance. If the scope is not specified, the statement above applies to the `SESSION` cache by default.
 
 The following is an example of clearing the `SESSION` execution plan cache:
 
@@ -177,7 +177,7 @@ ERROR 1105 (HY000): Do not support the 'admin flush global scope.'
 
 ## Ignore the `COM_STMT_CLOSE` command and the `DEALLOCATE PREPARE` statement
 
-To reduce optimization cost for executed SQL statements, it is recommended that you run `prepare stmt` once, then `execute stmt` multiple times before running `deallocate prepare`:
+To reduce the syntax parsing cost of SQL statements, it is recommended that you run `prepare stmt` once, then `execute stmt` multiple times before running `deallocate prepare`:
 
 {{< copyable "sql" >}}
 
@@ -202,9 +202,9 @@ MySQL [test]> execute stmt using ...;
 MySQL [test]> deallocate prepare stmt; -- Release the prepared statement
 ```
 
-In such practice, the plan obtained by the first execute statement cannot be reused by the second execute statement.
+In such practice, the plan obtained by the first executed statement cannot be reused by the second executed statement.
 
-To address the problem, you can use the system varible [`tidb_ignore_prepared_cache_close_stmt`](/system-variables.md#tidb_ignore_prepared_cache_close_stmt-new-in v60). After this variable is set to `ON`, TiDB ignores commands to close `prepare stmt`:
+To address the problem, you can set the system varible [`tidb_ignore_prepared_cache_close_stmt`](/system-variables.md#tidb_ignore_prepared_cache_close_stmt-new-in v60) to `ON` so TiDB ignores commands to close `prepare stmt`:
 
 {{< copyable "sql" >}}
 
