@@ -371,7 +371,7 @@ Insert filtering conditions into the system table `mysql.capture_plan_baselines_
 
 ### Prevent rollback of execution plans during an upgrade
 
-When upgrading a TiDB cluster, you can use baseline capturing to prevent rollback of execution plans by performing the following steps:
+When upgrading a TiDB cluster, you can use baseline capturing to prevent regression of execution plans by performing the following steps:
 
 1. Enable baseline capturing and keep it working for a period of time. This ensures that most important plans are captured.
 
@@ -383,9 +383,9 @@ When upgrading a TiDB cluster, you can use baseline capturing to prevent rollbac
 
 3. After the upgrade, delete bindings as required.
 
-    - Check the binding source by running the [`SHOW BINDINGS`](#view-binding) statement.
+    - Check the binding source by running the [`SHOW GLOBAL BINDINGS`](#view-binding) statement.
 
-        Based on the `Source` field in the output, decide whether the bindings are captured ( `capture`) or manually created (`manual`).
+        Based on the `Source` field in the output, decide whether the bindings are captured (`capture`) or manually created (`manual`).
 
     - Determine whether to retain the captured bindings:
 
@@ -401,7 +401,7 @@ When upgrading a TiDB cluster, you can use baseline capturing to prevent rollbac
 
         - If the execution plan is consistent, you can delete the binding safely.
 
-        - If the execution plan is inconsistent, you need to identify the cause, for examaple, checking operations on statistical information. In this case, you need retain the binding to ensure plan
+        - If the execution plan is inconsistent, you need to identify the cause, for examaple, checking operations on statistical information. In this case, you need retain the binding to ensure plan consistency.
 
 ## Baseline evolution
 
