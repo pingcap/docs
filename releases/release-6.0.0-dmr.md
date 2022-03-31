@@ -149,7 +149,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
     [User documentation](/dashboard/top-sql.md)
 
-- General availability (GA) of Continuous Profiling
+- GA of Continuous Profiling
 
     TiDB Dashboard introduces the Continuous Profiling feature, providing the ability to automatically save instance performance analysis results as the cluster is running, improving the observability of TiDB cluster performance and helping to reduce troubleshooting time.
 
@@ -191,7 +191,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
     Reusing SQL execution plans can effectively reduce the time for parsing SQL statements, lessen CPU resource consumption, and improve SQL execution efficiency. One of the important methods of SQL tuning is to reuse SQL execution plans effectively. TiDB has supported sharing execution plans with prepared statements. However, when the prepared statements are closed, TiDB automatically clears the corresponding plan cache. After that, TiDB might unnecessarily parse the repeated SQL statements, affecting the execution efficiency. Since v6.0, TiDB supports controlling whether to ignore the `COM_STMT_CLOSE` directive through the `tidb_ignore_clost_stmt_cmd` parameter (disabled by default). When the parameter is enabled, TiDB ignores the directive of closing prepared statements and keeps the execution plan in the cache, improving the reuse rate of the execution plan.
 
-    [User document](/sql-prepare-plan-cache.md#manually-clear-execution-plan-cache), [#31056](https://github.com/pingcap/tidb/issues/31056)
+    [User document](/sql-prepare-plan-cache.md#ignore-the-com_stmt_close-command-and-the-deallocate-prepare-statement), [#31056](https://github.com/pingcap/tidb/issues/31056)
 
 - Enhanced function queries
 
@@ -227,7 +227,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
     Enhance the usability of baseline capturing of execution plans by adding a blocklist with such dimensions as table name, frequency, and user name. Introduce a new algorithm to optimize memory management for caching bindings. After baseline capturing is enabled, the system automatically creates bindings for most OLTP queries. Execution plans of bound statements are fixed, avoiding performance problems due to any change in the execution plans. Baseline capturing is applicable to scenarios such as major version upgrades and cluster migration, and helps reduce performance problems caused by rollback of execution plans.
 
-    [User document](/sql-plan-management.md)
+    [User document](/sql-plan-management.md#baseline-capturing), [#32466](https://github.com/pingcap/tidb/issues/32466)
 
 - Quota Limiter (experimental)
 
