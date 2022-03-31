@@ -22,7 +22,7 @@ In 6.0.0-DMR, the key new features or improvements are as follows:
 - Cache hotspot small tables
 - 批量更新热点索引
 - Optimize in-memory pessimistic locking
-- TiEM 图形化管理界面
+- TiDB Enterprise Manager, an enterprise-level database management platform
 - Provide PingCAP Clinic, the automatic diagnosis tool for TiDB
 - Top SQL becomes generally available (GA)
 - HTAP capabilities improve by x times
