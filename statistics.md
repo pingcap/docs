@@ -345,7 +345,7 @@ Since TiDB v6.0, TiDB supports using the `KILL` statement to terminate an `ANALY
 
     If there is no result, no `ANALYZE` task is running in the background.
 
-2. Use a client to connect to the TiDB instance that is performing the background `ANALYZE` task, and then execute the following `KILL` statement:
+2. Use a client to connect to the TiDB instance where the background `ANALYZE` task is running, and then execute the following `KILL` statement:
 
     {{< copyable "sql" >}}
 
