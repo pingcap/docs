@@ -489,9 +489,9 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
 + TiKV
 
-    - (dup: release-5.3.1.md > Bug fixes> TiKV)- Fix the panic issue caused by deleting snapshot files when the peer status is `Applying` [#11746](https://github.com/tikv/tikv/issues/11746)修复 Peer 状态为 Applying 时快照文件被删除会造成 Panic 的问题 [#11746](https://github.com/tikv/tikv/issues/11746)
-    - (dup: release-5.3.1.md > Bug fixes> TiKV)- Fix the issue of QPS drop when flow control is enabled and `level0_slowdown_trigger` is set explicitly [#11424](https://github.com/tikv/tikv/issues/11424)修复开启流量控制且显式设置 level0_slowdown_trigger 时出现 QPS 下降的问题 [#11424](https://github.com/tikv/tikv/issues/11424)
-    - (dup: release-5.3.1.md > Bug fixes> TiKV)- Fix the issue that destroying a peer might cause high latency [#10210](https://github.com/tikv/tikv/issues/10210)修复删除 Peer 可能造成高延迟的问题 [#10210](https://github.com/tikv/tikv/issues/10210)
+    - (dup: release-5.3.1.md > Bug fixes> TiKV)- Fix the panic issue caused by deleting snapshot files when the peer status is `Applying` [#11746](https://github.com/tikv/tikv/issues/11746)
+    - (dup: release-5.3.1.md > Bug fixes> TiKV)- Fix the issue of QPS drop when flow control is enabled and `level0_slowdown_trigger` is set explicitly [#11424](https://github.com/tikv/tikv/issues/11424)
+    - (dup: release-5.3.1.md > Bug fixes> TiKV)- Fix the issue that destroying a peer might cause high latency [#10210](https://github.com/tikv/tikv/issues/10210)
     - (dup: release-5.3.1.md > Bug fixes> TiKV)- Fix a bug that TiKV cannot delete a range of data (`unsafe_destroy_range` cannot be executed) when the GC worker is busy [#11903](https://github.com/tikv/tikv/issues/11903)
     - Fix a bug that TiKV panics when the data in `StoreMeta` is accidentally deleted in some corner cases [#11852](https://github.com/tikv/tikv/issues/11852)
     - Fix a bug that TiKV panics when performing profiling on ARM platform [#10658](https://github.com/tikv/tikv/issues/10658)
@@ -518,8 +518,8 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
     - Fix the issue of TiFlash panic when the memory limit is enabled [#3902](https://github.com/pingcap/tiflash/issues/3902)
     - Fix the issue that expired data is recycled slowly [#4146]([https://github.com/pingcap/tiflash/issues/](https://github.com/pingcap/tiflash/issues/3902)4146)
     - Fix the potential issue of TiFlash panic when `Snapshot` is applied simultaneously with multiple DDL operations [#4072]([https://github.com/pingcap/tiflash/issues/](https://github.com/pingcap/tiflash/issues/3902)4072)
-    - Fix the potential query error after adding columns under heavy read workload [https://github.com/pingcap/tiflash/issues/3967](https://github.com/pingcap/tiflash/issues/3967)
-    - Fix the issue that the `SQRT` function with a negative argument returns `NaN` instead of `Null` [#3598] [https://github.com/pingcap/tiflash/issues/3598](https://github.com/pingcap/tiflash/issues/3598)
+    - Fix the potential query error after adding columns under heavy read workload [#3967](https://github.com/pingcap/tiflash/issues/3967)
+    - Fix the issue that the `SQRT` function with a negative argument returns `NaN` instead of `Null` [#3598](https://github.com/pingcap/tiflash/issues/3598)
     - Fix the issue that casting `INI` to `DECIMAL` might cause overflow [#3920](https://github.com/pingcap/tiflash/issues/3920)
     - Fix the issue that the result of `IN` is incorrect in multi-value expressions [#4016](https://github.com/pingcap/tiflash/issues/4016)
     - Fix the issue that the date format identifies `'\n'` as an invalid separator [#4036](https://github.com/pingcap/tiflash/issues/4036)
@@ -529,7 +529,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
     - Fix bug that enabling the elastic thread pool might introduce memory leak [#4098](https://github.com/pingcap/tiflash/issues/4098)
     - Fix a bug that canceled MPP queries might cause tasks to hang forever when the local tunnel is enabled [#4229](https://github.com/pingcap/tiflash/issues/4229)
     - Fix a bug that the failure of HashJoin build side might cause MPP queries to hang forever [#4195](https://github.com/pingcap/tiflash/issues/4195)
-    - Fix a bug that MPP tasks might leak threads forever [https://github.com/pingcap/tiflash/issues/4238](https://github.com/pingcap/tiflash/issues/4238)
+    - Fix a bug that MPP tasks might leak threads forever [#4238](https://github.com/pingcap/tiflash/issues/4238)
 
 + Tools
 
