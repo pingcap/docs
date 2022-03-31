@@ -383,7 +383,7 @@ When upgrading a TiDB cluster, you can use baseline capturing to prevent regress
 
 3. After the upgrade, delete bindings as required.
 
-    - Check the binding source by running the [`SHOW GLOBAL BINDINGS`](#view-binding) statement.
+    - Check the binding source by running the [`SHOW GLOBAL BINDINGS`](#view-bindings) statement.
 
         Based on the `Source` field in the output, decide whether the bindings are captured (`capture`) or manually created (`manual`).
 
