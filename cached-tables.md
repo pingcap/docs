@@ -1,6 +1,6 @@
 ---
 title: Cached Tables
-summary: Learn the cached table feature in TiDB, which is used for rarely-updated hotspot small tables to improve read performance.
+summary: Learn the cached table feature in TiDB, which is used for rarely-updated small hotspot tables to improve read performance.
 ---
 
 # Cached Tables
@@ -14,14 +14,14 @@ This document describes the usage scenarios of cached tables, the examples, and 
 The cached table feature is suitable for tables with the following characteristics:
 
 - The data volume of the table is small.
-- The table is read-only, or is rarely updated.
+- The table is read-only or rarely updated.
 - The table is frequently accessed, and you expect a better read performance.
 
 When the data volume of the table is small but the data is frequently accessed, the data is concentrated on a Region in TiKV and makes it a hotspot Region, which affects the performance. Therefore, the typical usage scenarios of cached tables are as follows:
 
 - Configuration tables, from which applications read the configuration information.
-- The tables of exchange rates in the financial sector, which is updated only once a day and not in real time.
-- Bank branch or network information tables, which is rarely updated.
+- The tables of exchange rates in the financial sector. These tables are updated only once a day but not in real-time.
+- Bank branch or network information tables, which are rarely updated.
 
 Taking configuration tables as an example, when the application restarts, the configuration information is loaded in all connections, which causes a high read latency. You can solve this problem by using the cached tables feature.
 
@@ -43,7 +43,7 @@ CREATE TABLE users (
 );
 ```
 
-By using the `ALTER TABLE` statement, you can set this table to a cached table:
+To set this table to a cached table, use the `ALTER TABLE` statement:
 
 {{< copyable "sql" >}}
 
@@ -106,7 +106,7 @@ TRACE SELECT * FROM users;
 12 rows in set (0.01 sec)
 ```
 
-After executing `trace` again, the returned result no longer contains the `regionRequest.SendReqCtx` attribute, which indicates that TiDB no longer reads data from TiKV, but instead reads data from the memory.
+After executing `trace` again, the returned result no longer contains the `regionRequest.SendReqCtx` attribute, which indicates that TiDB no longer reads data from TiKV but reads data from the memory instead.
 
 {{< copyable "sql" >}}
 
@@ -125,7 +125,7 @@ After executing `trace` again, the returned result no longer contains the `regio
 7 rows in set (0.00 sec)
 ```
 
-Note that the `UnionScan` operator is used to read the cached tables, so you can see `UnionScan` in the execution plan of the cached tables:
+Note that the `UnionScan` operator is used to read the cached tables, so you can see `UnionScan` in the execution plan of the cached tables through `explain`:
 
 {{< copyable "sql" >}}
 
@@ -171,7 +171,7 @@ SELECT * FROM users;
 
 > **Note:**
 >
-> When you insert data to a cached table, second-level write latency might occur. The latency is controlled by the global environment variable [`tidb_table_cache_lease`](/system-variables.md#tidb_table_cache_lease-new-in-v600). You can consider whether the latency is acceptable based on your application, and decide whether to use the cached table. For example, in a read-only scenario, you can increase the value of `tidb_table_cache_lease`:
+> When you insert data to a cached table, second-level write latency might occur. The latency is controlled by the global environment variable [`tidb_table_cache_lease`](/system-variables.md#tidb_table_cache_lease-new-in-v600). You can decide whether to use the cached table feature by checking whether the latency is acceptable based on your application. For example, in a read-only scenario, you can increase the value of `tidb_table_cache_lease`:
 >
 > {{< copyable "sql" >}}
 >
@@ -179,9 +179,9 @@ SELECT * FROM users;
 > set @@global.tidb_table_cache_lease = 10;
 > ```
 >
-> The write latency of cached tables is high because it is implemented with a complex mechanism that requires a lease to be set for each cache. When there are multiple TiDB instances, one instance does not know whether the other instances have cached data. If an instance modifies the table data directly, the other instances will read the old cache data. To ensure correctness, the cached table implementation uses a lease mechanism to ensure that the data is not modified before the lease expires. That is why the write latency is high.
+> The write latency of cached tables is high, because the cached table feature is implemented with a complex mechanism that requires a lease to be set for each cache. When there are multiple TiDB instances, one instance does not know whether the other instances have cached data. If an instance modifies the table data directly, the other instances read the old cache data. To ensure correctness, the cached table implementation uses a lease mechanism to ensure that the data is not modified before the lease expires. That is why the write latency is high.
 
-### Revert a cached table to normal table
+### Revert a cached table to a normal table
 
 > **Note:**
 >
@@ -221,7 +221,7 @@ Query OK, 0 rows affected (0.00 sec)
 
 ## Size limit of cached tables
 
-Cached tables are only suitable to scenarios with small tables, because TiDB loads the data of an entire table into memory, and the cached data becomes invalid after modification and needs to be reloaded.
+Cached tables are only suitable for scenarios with small tables, because TiDB loads the data of an entire table into memory, and the cached data becomes invalid after modification and needs to be reloaded.
 
 Currently, the size limit of a cached table is 64 MB in TiDB. If the table data exceeds 64 MB, executing `ALTER TABLE t CACHE` will fail.
 
@@ -242,7 +242,7 @@ Cached tables **CANNOT** be used in the following scenarios:
 
 ## Compatibility with TiDB ecosystem tools
 
-The cached table is a TiDB extension to MySQL syntax. Only TiDB can recognize the `ALTER TABLE ... CACHE` statement. TiDB ecosystem tools **DOES NOT** support cached tables, including Backup & Restore (BR), TiCDC, and Dumpling. They treat cached tables as normal tables.
+The cached table is a TiDB extension to MySQL syntax. Only TiDB can recognize the `ALTER TABLE ... CACHE` statement. TiDB ecosystem tools **DO NOT** support cached tables, including Backup & Restore (BR), TiCDC, and Dumpling. These tools treat cached tables as normal tables.
 
 That is to say, when a cached table is backed up and restored, it becomes a normal table. If the downstream cluster is a different TiDB cluster and you want to continue using the cached table feature, you can manually enable cached tables on the downstream cluster by executing `ALTER TABLE ... CACHE` on the downstream table.
 
