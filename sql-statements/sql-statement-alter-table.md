@@ -164,7 +164,7 @@ The following major restrictions apply to `ALTER TABLE` in TiDB:
 
 * Spatial data types are not supported.
 
-* `ALTER TABLE t CACHE | NOCACHE` is not a standard MySQL syntax but a TiDB extension. See [Cached Tables](/cached-tables.md) for more information.
+* `ALTER TABLE t CACHE | NOCACHE` is a TiDB extension to MySQL syntax. See [Cached Tables](/cached-tables.md) for more information.
 
 For further restrictions, see [MySQL Compatibility](/mysql-compatibility.md#ddl).
 
