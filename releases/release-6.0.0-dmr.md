@@ -129,7 +129,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
 - Support building TiFlash replicas by databases. To add TiFlash replicas for all tables in a database, you only need to use a single SQL statement, which greatly saves operation and maintenance costs.
 
-    [User document](/tiflash/use-tiflash.md#按库构建-tiflash-副本)
+    [User document](/tiflash/use-tiflash.md#create-tiflash-replicas-for-databases)
 
 ### Transaction
 
@@ -157,7 +157,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
     This feature is applicable to TiDB clusters deployed or upgraded using TiUP of v1.9.0 or later or TiDB Operator of v1.3.0 or later.
 
-    This feature is not enabled by default. You can enable it in TiDB Dashboard.
+    This feature is disabled by default. You can enable it in TiDB Dashboard.
 
     [User document](/dashboard/continuous-profiling.md)
 
@@ -191,7 +191,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
     Reusing SQL execution plans can effectively reduce the time for parsing SQL statements, lessen CPU resource consumption, and improve SQL execution efficiency. One of the important methods of SQL tuning is to reuse SQL execution plans effectively. TiDB has supported sharing execution plans with prepared statements. However, when the prepared statements are closed, TiDB automatically clears the corresponding plan cache. After that, TiDB might unnecessarily parse the repeated SQL statements, affecting the execution efficiency. Since v6.0, TiDB supports controlling whether to ignore the `COM_STMT_CLOSE` directive through the `tidb_ignore_clost_stmt_cmd` parameter (disabled by default). When the parameter is enabled, TiDB ignores the directive of closing prepared statements and keeps the execution plan in the cache, improving the reuse rate of the execution plan.
 
-    [User doc]()，[issue]()
+    [User document](/sql-prepare-plan-cache.md#manually-clear-execution-plan-cache), [#31056](https://github.com/pingcap/tidb/issues/31056)
 
 - Enhanced function queries
 
@@ -203,7 +203,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
     In this mode, TiDB can read and compute the data on partitioned tables using the MPP engine of TiFlash, which greatly improves the query performance of partitioned tables.
 
-    [User docs](), [issue 号]()
+    [User document](/use-tiflash.md#access-partitioned-tables-in-the-mpp-mode)
 
 - Improve the computing performance of the MPP engine
 
@@ -215,9 +215,11 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
         - Date functions: `DAYOFNAME()`, `DAYOFMONTH()`, `DAYOFWEEK()`, `DAYOFYEAR()`, `LAST_DAY()`, `MONTHNAME()`
         - Operators: Anti Left Outer Semi Join, Left Outer Semi Join
 
+      [User document](/use-tiflash.md#supported-push-down-calculations)
+
     - Introduce the dynamic thread pool (enabled by default) to improve the CPU utilization
 
-    [User docs]()，[issue 号]()
+        [User document](/tiflash-configuration.md#configure-the-tiflashtoml-file)
 
 ### Stability
 
