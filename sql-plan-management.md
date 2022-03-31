@@ -24,7 +24,7 @@ This statement binds SQL execution plans at the GLOBAL or SESSION level. Current
 
 > **Note:**
 >
-> Bindings have higher priority over hints added manually. Therefore, when you execute a statement containing a hint while a binding is present, the hint controlling the behavior of the optimizer does not take effect. However, other types of hints are still effective.
+> Bindings have higher priority over manually added hints. Therefore, when you execute a statement containing a hint while a binding is present, the hint controlling the behavior of the optimizer does not take effect. However, other types of hints are still effective.
 
 Specifically, two types of these statements cannot be bound to execution plans due to syntax conflicts. See the following examples:
 
