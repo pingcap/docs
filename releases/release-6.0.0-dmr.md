@@ -333,6 +333,14 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
     [user documentation](/statistics.md#automatic-update)
 
+### TiDB Enterprise Manager
+
+TiDB Enterprise Manager (TiEM) is an enterprise-level database management platform based on the TiDB database, which aims to help users deploy, monitor, back up, and scale TiDB clusters in on-premises or public cloud environments.
+
+TiEM not only provides full lifecycle visual management for TiDB clusters, but also provides one-stop services: parameter management, version upgrades, cluster clone, active-standby cluster switching, data import and export, data replication, and data backup and restore services. TiEM can improve the efficiency of DevOps on TiDB and reduce the DevOps cost for enterprises.
+
+Currently, TiEM is provided in the [TiDB Enterprise](https://en.pingcap.com/tidb-enterprise/) edition only. To get TiEM and its documentation, contact us via the [TiDB Enterprise](https://en.pingcap.com/tidb-enterprise/) page.
+
 ## Improvements
 
 + TiDB
