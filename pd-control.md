@@ -765,7 +765,14 @@ Usage:
 >> store remove-tombstone              // Remove stores that are in tombstone state
 ```
 
+<<<<<<< HEAD
 For the usage of `store limit`, see [Store Limit](/configure-store-limit.md).
+=======
+> **Note:**
+>
+> - The original `region-add` and `region-remove` parameters of the `store limit` command are deprecated and are replaced with `add-peer` and `remove-peer`.
+> - You can use `pd-ctl` to check the status (Up, Disconnect, Offline, Down, or Tombstone) of a TiKV store. For the relationship between each status, refer to [Relationship between each status of a TiKV store](/tidb-scheduling.md#information-collection).
+>>>>>>> f38041c87 (Update TiKV store status information (#6949))
 
 ### `log [fatal | error | warn | info | debug]`
 
