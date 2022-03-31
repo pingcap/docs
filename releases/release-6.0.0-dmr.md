@@ -333,11 +333,11 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
     [user documentation](/statistics.md#automatic-update)
 
 - PingCAP Clinic diagnostic service (Technical Preview version)
-	
+
     PingCAP Clinic is a diagnostic service for TiDB clusters. This service helps users troubleshoot cluster issues remotely and provides a quick check of cluster status locally. With PingCAP Clinic, you can ensure the stable operation of your TiDB cluster for its full life cycle, predict potential issues, reduce the probability of issues, quickly troubleshoot and fix cluster issues.
-	
+
     When contacting PingCAP technical support for remote assistance to troubleshoot cluster issues, you can use the PingCAP Clinic service to collect and upload diagnostic data, thereby improving the troubleshooting efficiency.
-	
+
     [User documentation](/clinic-introduction.md)
 
 ### TiDB Enterprise Manager
@@ -383,7 +383,6 @@ Currently, TiEM is provided in the [TiDB Enterprise](https://en.pingcap.com/tidb
 
 + TiKV
 
-    - (dup: release-5.4.0.md > Improvements> TiKV)- Support archiving and rotating logs [#11651](https://github.com/tikv/tikv/issues/11651)
     - Improve the Raftstore sampling accuracy for large key range batches [#11039](https://github.com/tikv/tikv/pull/11039)
     - Add the correct "Content-Type" for `debug/pprof/profile` to make the Profile more easily identified [#11521](https://github.com/tikv/tikv/issues/11521)
     - Renew the lease time of the leader infinitely when the Raftstore has heartbeats or handles read requests, which helps reduce latency jitter [#11579](https://github.com/tikv/tikv/pull/11579)
@@ -588,4 +587,4 @@ Currently, TiEM is provided in the [TiDB Enterprise](https://en.pingcap.com/tidb
 
     + TiDB Binlog
 
-        - Fix the issue that TiDB Binlog might be skipped when large upstream write transactions are replicated to Kafka. [#1136](https://github.com/pingcap/tidb-binlog/issues/1136)
+        - Fix the issue that TiDB Binlog might be skipped when large upstream write transactions are replicated to Kafka [#1136](https://github.com/pingcap/tidb-binlog/issues/1136)
