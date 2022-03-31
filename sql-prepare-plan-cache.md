@@ -182,10 +182,10 @@ To reduce the syntax parsing cost of SQL statements, it is recommended that you 
 {{< copyable "sql" >}}
 
 ```sql
-MySQL [test]> prepare stmt from '...'; -- prepare once
-MySQL [test]> execute stmt using ...;  -- execute once
+MySQL [test]> prepare stmt from '...'; -- Prepare once
+MySQL [test]> execute stmt using ...;  -- Execute once
 MySQL [test]> ...
-MySQL [test]> execute stmt using ...;  -- execute multiple times
+MySQL [test]> execute stmt using ...;  -- Execute multiple times
 MySQL [test]> deallocate prepare stmt; -- Release the prepared statement
 ```
 
@@ -194,10 +194,10 @@ In real practice, you may be used to running `deallocate prepare` each time afte
 {{< copyable "sql" >}}
 
 ```sql
-MySQL [test]> prepare stmt from '...'; -- First prepare
+MySQL [test]> prepare stmt from '...'; -- Prepare once
 MySQL [test]> execute stmt using ...;
 MySQL [test]> deallocate prepare stmt; -- Release the prepared statement
-MySQL [test]> prepare stmt from '...'; -- Second prepare
+MySQL [test]> prepare stmt from '...'; -- Prepare twice
 MySQL [test]> execute stmt using ...;
 MySQL [test]> deallocate prepare stmt; -- Release the prepared statement
 ```
@@ -212,19 +212,19 @@ To address the problem, you can set the system varible [`tidb_ignore_prepared_ca
 mysql> set @@tidb_ignore_prepared_cache_close_stmt=1;  -- Enable the variable
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> prepare stmt from 'select * from t'; -- First prepare
+mysql> prepare stmt from 'select * from t'; -- Prepare once
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> execute stmt;                        -- First execute
+mysql> execute stmt;                        -- Execute once
 Empty set (0.00 sec)
 
 mysql> deallocate prepare stmt;             -- Release after the first execute
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> prepare stmt from 'select * from t'; -- Second prepare
+mysql> prepare stmt from 'select * from t'; -- Prepare twice
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> execute stmt;                        -- Second execute
+mysql> execute stmt;                        -- Execute twice
 Empty set (0.00 sec)
 
 mysql> select @@last_plan_from_cache;       -- Reuse the last plan
