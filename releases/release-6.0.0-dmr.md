@@ -141,11 +141,9 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
 - ​​General availability (GA) of Top SQL
 
-    Top SQL is a self-service database performance monitoring and diagnosis feature provided in TiDB Dashboard for DBAs and app developers. With this feature, you can easily locate SQL queries that contribute to a high load of a TiDB or TiKV node in a specified time range. Unlike existing diagnostic features provided in TiDB Dashboard for database experts, Top SQL is designed for non-experts. You do not need to observe thousands of monitoring charts to find correlations or understand TiDB internal mechanisms such as Raft Snapshot, RocksDB, MVCC, and TSO. With basic database concepts such as index, lock conflict, and execution plans, you can use Top SQL to analyze database load quickly and improve application performance.
+    Top SQL is a self-service database performance monitoring and diagnosis feature provided in TiDB Dashboard for DBAs and app developers. With this feature, you can easily locate SQL queries that contribute to a high load of a TiDB or TiKV node in a specified time range. Unlike existing diagnostic features provided in TiDB Dashboard for database experts, Top SQL is designed for non-experts. You do not need to traverse thousands of monitoring charts to find correlations or understand TiDB internal mechanisms such as Raft Snapshot, RocksDB, MVCC, and TSO. Understanding basic concepts, such as index, lock conflict, and execution plans, is enough for you to use Top SQL to analyze database load quickly and improve application performance.
 
-    Top SQL is disabled by default and can be enabled with a single click. When enabled, Top SQL provides you with the CPU load of each TiKV or TiFlash node within the last 30 days, so you can intuitively see which SQL statements cause high CPU loads and quickly analyze the issues such as database hotspots and sudden load increases.
-
-    For example, you can use Top SQL to locate an analytic query that consumes 99% of the load for a low-load database.
+    Top SQL is disabled by default and can be enabled with a single click. When enabled, Top SQL provides you with the CPU load of each TiKV or TiFlash node within 30 days. Therefore, you can spot SQL statements consuming high CPU loads at first glimpse, and quickly analyze the issues such as database hotspots and sudden load increases. For example, you can use Top SQL to locate an analytical query that consumes 99% of the load for a low-load database.
 
     [User documentation](/dashboard/top-sql.md)
 
@@ -185,7 +183,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
     To reduce query latency, when read-write conflicts are rare, TiDB adds the `tidb_rc_read_check_ts` system variable at the [Read Committed isolation level](/transaction-isolation-levels.md#read-committed-isolation-level) to get less unnecessary TSO. This variable is disabled by default. When the variable is enabled, this optimization can almost help avoid getting duplicated TSO to reduce latency in scenarios with no read-write conflict. However, in scenarios with frequent read-write conflicts, enabling this variable might cause a performance regression. Do not use it before checking.
 
-    [User docs](/transaction-isolation-levels.md#read-committed-isolation-level), [#33159](https://github.com/pingcap/tidb/issues/33159)
+    [User document](/transaction-isolation-levels.md#read-committed-isolation-level), [#33159](https://github.com/pingcap/tidb/issues/33159)
 
 - Enhance prepared statements to share execution plans
 
@@ -318,19 +316,19 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
 - Enable new collation rules by default
 
-    TiDB has supported new collation rules since v4.0, which behave the same as MySQL in the case-insensitive, accent-insensitive, and padding rules. The new collation rules are controlled by the `new_collations_enabled_on_first_bootstrap` parameter, which was disabled by default. Since v6.0, TiDB enables new collation rules by default. Note that this configuration takes effect only for the TiDB clusters first initialized.
+    Since v4.0, TiDB has supported new collation rules that behave the same way as MySQL in the case-insensitive, accent-insensitive, and padding rules. The new collation rules are controlled by the `new_collations_enabled_on_first_bootstrap` parameter, which was disabled by default. Since v6.0, TiDB enables the new collation rules by default. Note that this configuration is configurable only upon TiDB cluster initialization.
 
     [User documentation](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)
 
 - ​​Accelerate leader balancing after restarting TiKV nodes
 
-    After a restart, TiKV nodes need to redistribute the unevenly scattered leaders for load balance. In large-scale clusters, leader balancing time is positively correlated with the number of Regions. For example, the leader balancing of 100K Regions can take 20-30 minutes, which is prone to performance issues and stability risks due to uneven load. TiDB 6.0 provides a parameter to control the balancing concurrency and adjusts the default value to 4 times of the original, which greatly shortens the leader rebalancing time and accelerates the business recovery after a restart of TiKV nodes.
+    After a restart of TiKV nodes, the unevenly scattered leaders must be redistributed for load balance. In large-scale clusters, leader balancing time is positively correlated with the number of Regions. For example, the leader balancing of 100K Regions can take 20-30 minutes, which is prone to performance issues and stability risks due to uneven load. TiDB v6.0 provides a parameter to control the balancing concurrency and enlarges the default value to 4 times of the original, which greatly shortens the leader rebalancing time and accelerates the business recovery after a restart of the TiKV nodes.
 
     [User documentation](/pd-control.md#scheduler-show--add--remove--pause--resume--config)
 
 - Support canceling the automatic update of statistics
 
-    Statistics are one of the most important basic data that affects SQL performance. To ensure the completeness and timeliness of statistics, TiDB updates statistics periodically. Since v6.0, you can cancel the automatic update of statistics manually, which avoids any SQL performance impact caused by resource contention of the automatic update task.
+    Statistics are one of the most important basic data that affect SQL performance. To ensure the completeness and timeliness of statistics, TiDB automatically updates object statistics periodically in the background. However, automatic statistics updates may result in resource contention, affecting SQL performance. To address this issue, you can manually cancel the automatic update of statistics since v6.0.
 
     [user documentation](/statistics.md#automatic-update)
 
@@ -354,31 +352,31 @@ Currently, TiEM is provided in the [TiDB Enterprise](https://en.pingcap.com/tidb
 
 + TiDB
 
-    - Clear the placement rule information of a table automatically after restoring the table using the `FLASHBACK` or `RECOVER` statement  [#31668](https://github.com/pingcap/tidb/issues/31668)
-    - Add a performance overview monitoring dashboard to show core performance metrics on typical critical paths, making metrics analysis on TiDB easier  [#31676](https://github.com/pingcap/tidb/issues/31676)
+    - Clear the placement rule settings of a table automatically after restoring the table using the `FLASHBACK` or `RECOVER` statement  [#31668](https://github.com/pingcap/tidb/issues/31668)
+    - Add a performance overview dashboard to show core performance metrics on typical critical paths, making metrics analysis on TiDB easier [#31676](https://github.com/pingcap/tidb/issues/31676)
     - Support using the `REPLACE` keyword in the `LOAD DATA LOCAL INFILE` statement [#24515](https://github.com/pingcap/tidb/issues/24515)
     - (dup: release-5.1.4.md > Improvements> TiDB)- Support partition pruning for the built-in `IN` expression in Range partition tables [#26739](https://github.com/pingcap/tidb/issues/26739)
-    - Improve query efficiency by eliminating potentially redundant Exchange operations in MPP aggregation queries  [#31762](https://github.com/pingcap/tidb/issues/31762)
+    - Improve query efficiency by eliminating potentially redundant Exchange operations in MPP aggregation queries [#31762](https://github.com/pingcap/tidb/issues/31762)
     - Improve compatibility with MySQL by allowing duplicate partition names in the `TRUNCATE PARTITION` and `DROP PARTITION` statements [#31681](https://github.com/pingcap/tidb/issues/31681)
     - Support showing the `CREATE_TIME` information in the results of the `ADMIN SHOW DDL JOBS` statement [#23494](https://github.com/pingcap/tidb/issues/23494)
     - Support a new built-in function `CHARSET()` [#3931](https://github.com/pingcap/tidb/issues/3931)
-    - Support filtering the automatically captured blacklist by usernames [#32558](https://github.com/pingcap/tidb/issues/32558)
-    - Optimize the results of `ADMIN SHOW DDL JOBS` and `SHOW TABLE STATUS` statement by displaying the time according to the current `time_zone` [#26642](​​https://github.com/pingcap/tidb/issues/26642)
+    - Support filtering a baseline capturing blocklist by usernames [#32558](https://github.com/pingcap/tidb/issues/32558)
+    - Optimize the results of the `ADMIN SHOW DDL JOBS` and `SHOW TABLE STATUS` statements by displaying the time according to the current `time_zone` [#26642](​​https://github.com/pingcap/tidb/issues/26642)
     - Supports pushing down the `DAYNAME()` and `MONTHNAME()` functions to TiFlash [#32594](https://github.com/pingcap/tidb/issues/32594)
     - Support pushing down the `REGEXP` function to TiFlash [#32637](https://github.com/pingcap/tidb/issues/32637)
     - Support tracking the execution of the `UnionScan` operator [#32631](https://github.com/pingcap/tidb/issues/32631)
     - Support pushing down the `GREATEST` and `LEAST` functions to TiFlash [#32787](https://github.com/pingcap/tidb/issues/32787)
     - Support using the PointGet plan for queries that read the `_tidb_rowid` column [#31543](https://github.com/pingcap/tidb/issues/31543)
-    - Support using wildcards in the automatically captured blacklist [#32714](https://github.com/pingcap/tidb/issues/32714)
+    - Support using wildcards in a baseline capturing blocklist [#32714](https://github.com/pingcap/tidb/issues/32714)
     - Support showing the original partition name in the output of the `EXPLAIN` statement without converting the name to lowercase [#32719](https://github.com/pingcap/tidb/issues/32719)
     - Enable partition pruning for RANGE COLUMNS partitionings on IN conditions and string type columns [#32626](https://github.com/pingcap/tidb/issues/32626)
-    - Return an error message when you set a system variable to NULL [#32850](https://github.com/pingcap/tidb/issues/32850)
+    - Return an error message when a system variable is set to NULL [#32850](https://github.com/pingcap/tidb/issues/32850)
     - Remove Broadcast Join from the non-MPP mode [#31465](https://github.com/pingcap/tidb/issues/31465)
     - Support pushing down the ` DAYOFMONTH()` and ` LAST_DAY()` functions to TiFlash [#33012](https://github.com/pingcap/tidb/issues/33012)
     - Support pushing down the `DAYOFWEEK()` and `DAYOFYEAR()` functions to TiFlash [#33130](https://github.com/pingcap/tidb/issues/33130)
     - Support pushing down the `IS_TRUE`, `IS_FALSE`, and `IS_TRUE_WITH_NULL` functions to TiFlash [#33047](https://github.com/pingcap/tidb/issues/33047)
     - Support executing MPP plans on partitioned tables in dynamic pruning mode [#32347](https://github.com/pingcap/tidb/issues/32347)
-    - 支持 read-consistency 读取可在 `READ-COMMITTED` 隔离级别下打开优化事务内读语句延迟  Support enabling the switch to reduce read latency in transaction at the `READ-COMMITTED` isolation level for the read-consistency read [#33159](https://github.com/pingcap/tidb/issues/33159)
+    - Support enabling the switch to reduce read latency in transactions at the `READ-COMMITTED` isolation level for the read-consistency read [#33159](https://github.com/pingcap/tidb/issues/33159)
     - Support pushing down predicates for common table expressions (CTEs) [#28163](https://github.com/pingcap/tidb/issues/28163)
     - Simplify the configurations of `Statement Summary` and `Capture Plan Baselines` to be available on a global basis only [#30557](https://github.com/pingcap/tidb/issues/30557)
     - Update gopsutil to v3.21.12 to address alarms reported when building binary on macOS 12 [#31607](https://github.com/pingcap/tidb/issues/31607)
