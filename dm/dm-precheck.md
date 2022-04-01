@@ -10,7 +10,7 @@ This document introduces the DM precheck feature, which detects errors in the up
 
 ## Usage scenario
 
-To run the data migration task smoothly, when a migration task is started, DM triggers the precheck automatically and returns the check results. Only after the precheck passes, does DM start executing the migration.
+To run a data migration task smoothly, DM triggers a precheck automatically on the start of the task and returns the check results. DM starts the migration only after the precheck passes.
 
 To trigger a precheck manually, run the `check-task` command.
 
@@ -59,7 +59,7 @@ Regardless of the migration mode you choose, the precheck always includes the fo
 
 For the full data migration mode (`task-mode: full`), in addition to the [common check items](#common-check-items), the precheck also includes the following check items:
 
-* (Required) dump permissions of the upstream database
+* (Mandatory) dump permission of the upstream database
 
     - SELECT permission on INFORMATION_SCHEMA and dump tables
     - RELOAD permission if `consistency=flush`
