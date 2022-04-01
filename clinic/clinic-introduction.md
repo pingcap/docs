@@ -9,13 +9,19 @@ PingCAP Clinic Diagnostic Service (PingCAP Clinic) is a diagnostic service provi
 
 PingCAP Clinic is currently in the Technical Preview stage. This service provides the following two components to diagnose cluster problems:
 
-- Diag client: a diagnostic tool deployed on the cluster side. Diag is used to collect cluster diagnostic data, upload diagnostic data to the Clinic Server, and perform a quick health check locally on your cluster. For a full list of diagnostic data that can be collected by Diag, see [PingCAP Clinic Diagnostic Data](/clinic/clinic-data-instruction-for-tiup.md).
+- Diag client:
+
+    Diag client (Diag) is a diagnostic tool deployed on the cluster side. Diag is used to collect cluster diagnostic data, upload diagnostic data to the Clinic Server, and perform a quick health check locally on your cluster. For a full list of diagnostic data that can be collected by Diag, see [PingCAP Clinic Diagnostic Data](/clinic/clinic-data-instruction-for-tiup.md).
 
     > **Note:**
     >
     > Diag temporarily **does not support** collecting data from the clusters deployed using TiDB Ansible.
 
-- [Clinic Server](https://clinic.pingcap.com.cn): a cloud service deployed in the cloud. By providing diagnostic services in the SaaS model, the Clinic Server can not only receive uploaded diagnostic data but also work as an online diagnostic environment to store data, view data, and provide cluster diagnostic reports.
+- Clinic Server:
+
+  Clinic Server is a cloud service deployed in the cloud. By providing diagnostic services in the SaaS model, the Clinic Server can not only receive uploaded diagnostic data but also work as an online diagnostic environment to store data, view data, and provide cluster diagnostic reports.
+
+  Set up on the PingCAP intranet (in China), the [Clinic Server China](https://clinic.pingcap.com.cn) (Clinic Server) is a cloud service deployed in the cloud. If you upload the collected diagnostic data to the Clinic Server for PingCAP technical support staff to troubleshoot cluster problems remotely, the uploaded data is stored in the AWS S3 China (Beijing) Region server set up by PingCAP. PingCAP strictly controls permissions for data access and only allows authorized in-house technical support staff to access the uploaded data. Clinic Server Global is coming soon. Clinic Server Global will store the uploaded data in a AWS S3 Region in North America (set up by PingCAP) and provide a URL different with Clinic Server China.
 
 ## User scenarios
 
@@ -29,7 +35,7 @@ PingCAP Clinic is currently in the Technical Preview stage. This service provide
 
 ## Implementation principles
 
-This section introduces the implementation principles about how Diag client (Diag) collects diagnostic data from a cluster.
+This section introduces the implementation principles about how Diag collects diagnostic data from a cluster.
 
 First, Diag gets cluster topology information from the deployment tool TiUP (tiup-cluster) or TiDB Operator (tidb-operator). Then, Diag collects different types of diagnostic data through various data collection methods as follows:
 
