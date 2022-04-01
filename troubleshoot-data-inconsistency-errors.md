@@ -1,6 +1,6 @@
 ---
 title: Troubleshoot Inconsistency Between Data and Indexes
-summary: Learn how to deal with errors reported by the consistency check between data and index.
+summary: Learn how to deal with errors reported by the consistency check between data and indexes.
 ---
 
 # Troubleshoot Inconsistency Between Data and Indexes
