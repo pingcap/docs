@@ -173,7 +173,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
 - Optimization to get TSO at the Read Committed isolation level
 
-    To reduce query latency, when read-write conflicts are rare, TiDB adds the `tidb_rc_read_check_ts` system variable at the [Read Committed isolation level](/transaction-isolation-levels.md#read-committed-isolation-level) to get less unnecessary TSO. This variable is disabled by default. When the variable is enabled, this optimization can almost help avoid getting duplicated TSO to reduce latency in scenarios with no read-write conflict. However, in scenarios with frequent read-write conflicts, enabling this variable might cause a performance regression. Do not use it before checking.
+    To reduce query latency, when read-write conflicts are rare, TiDB adds the `tidb_rc_read_check_ts` system variable at the [Read Committed isolation level](/transaction-isolation-levels.md#read-committed-isolation-level) to get less unnecessary TSO. This variable is disabled by default. When the variable is enabled, this optimization avoids getting duplicated TSO to reduce latency in scenarios where there is no read-write conflict. However, in scenarios with frequent read-write conflicts, enabling this variable might cause a performance regression.
 
     [User document](/transaction-isolation-levels.md#read-committed-isolation-level), [#33159](https://github.com/pingcap/tidb/issues/33159)
 
@@ -257,7 +257,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
     - Replication status query
     - Master and Worker management
 
-    WebUI is still experimental and needs improvement. Therefore, it is recommended only for trial. A known issue is that problems might occur if you use WebUI and dmctl  to operate the same task. This issue will be resolved in later versions.
+    WebUI is still experimental and is still under development. Therefore, it is recommended only for trial. A known issue is that problems might occur if you use WebUI and dmctl  to operate the same task. This issue will be resolved in later versions.
 
     [User document](/dm/dm-webui-guide.md)
 
