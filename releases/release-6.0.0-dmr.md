@@ -189,7 +189,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
     [User document](/functions-and-operators/expressions-pushed-down.md#add-to-the-blocklist), [#12037](https://github.com/tikv/tikv/pull/12037)
 
-- Support the dynamic pruning mode for partitioned tables in TiFlash MPP engine (experimental feature)
+- Support the dynamic pruning mode for partitioned tables in TiFlash MPP engine (experimental)
 
     In this mode, TiDB can read and compute the data on partitioned tables using the MPP engine of TiFlash, which greatly improves the query performance of partitioned tables.
 
@@ -205,7 +205,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
         - Date functions: `DAYOFNAME()`, `DAYOFMONTH()`, `DAYOFWEEK()`, `DAYOFYEAR()`, `LAST_DAY()`, `MONTHNAME()`
         - Operators: Anti Left Outer Semi Join, Left Outer Semi Join
 
-      [User document](/use-tiflash.md#supported-push-down-calculations)
+        [User document](/use-tiflash.md#supported-push-down-calculations)
 
     - Introduce the dynamic thread pool (enabled by default) to improve the CPU utilization
 
@@ -301,8 +301,6 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 - Support replicating 100K tables simultaneously
 
     By optimizing the data processing flow, TiCDC reduces the resource consumption of processing incremental data for each table, which greatly improves the replication stability and efficiency when replicating data in large clusters. The result of an internal test shows that TiCDC can stably support replicating 100,000 tables simultaneously.
-
-    [User document]()
 
 ### Deployment and maintenance
 
