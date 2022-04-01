@@ -50,9 +50,9 @@ Before using PingCAP Clinic, you need to install Diag (a component to collect da
     > - For clusters without an internet connection, you need to deploy Diag offline. For details, refer to [Deploy TiUP offline: Method 2](/production-deployment-using-tiup.md#method-2-deploy-tiup-offline).
     > - Diag is **only** provided in the TiDB Server offline mirror package of v5.4.0 or later.
 
-2. Get and set the Access token (token) to upload data.
+2. Get and set an access token (token) to upload data.
 
-    When uploading collected data through Diag, you need a token for user authentication. You can reuse one token, so if you already get a token and set it in Diag, you can skip this step.
+    When uploading collected data through Diag, you need a token for user authentication. You can reuse one token, so if you already got a token and set it in Diag, you can skip this step.
 
     First, get a token by the following instructions: log in to [Clinic Server](https://clinic.pingcap.com.cn), click the icon in the lower right side of the Cluster page, select **Get Access Token For Diag Tool**, click **+** in the pop-up window to get a token, and copy and save the token information.
 
@@ -62,7 +62,7 @@ Before using PingCAP Clinic, you need to install Diag (a component to collect da
     >
     > - When accessing Clinic Server for the first time, you need to log in to [Clinic Server](https://clinic.pingcap.com.cn) using your AskTUG account and create an organization first, and then create a token.
     > - For data security, TiDB only displays the token information when it is created. If you lost the information, you can delete the old token and create a new one.
-    > - The token is only used to upload data.
+    > - A token is only used to upload data.
 
     Then, set the token in Diag. For example:
 
@@ -327,6 +327,7 @@ You can have a quick check on the cluster status locally using Diag. Even if you
     There were **1** abnormal results.
 
     #### Path to save the diagnostic result file
+
     Rule Name: tidb-max-days
     - RuleID: 100
     - Variation: TidbConfig.log.file.max-days
