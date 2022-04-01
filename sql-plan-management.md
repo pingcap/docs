@@ -359,7 +359,7 @@ Insert filtering conditions into the system table `mysql.capture_plan_baselines_
 
 | **Dimension name** | **Description**                                                     | Remarks                                                     |
 | :----------- | :----------------------------------------------------------- | ------------------------------------------------------------ |
-| table        | Filter by table name. Each filtering rule is in the form of `db.table` and supports wildcards. For details about the rules, see [Plain table names](/table-filter.md# plain-table-names) and [Wildcards](/table-filter.md#wildcards). | Case insensitive. If the table name contains illegal content, the log returns a warning message `[sql-bind] failed to load mysql.capture_plan_baselines_blacklist`. |
+| table        | Filter by table name. Each filtering rule is in the `db.table` format. The supported filtering syntax includes [Plain table names](/table-filter.md#plain-table-names) and [Wildcards](/table-filter.md#wildcards). | Case insensitive. If a table name contains illegal characters, the log returns a warning message `[sql-bind] failed to load mysql.capture_plan_baselines_blacklist`. |
 | frequency    | Filter by frequency. SQL statements executed more than once are captured by default. You can set a high frequency to capture statements more frequently. | Setting frequency to a value smaller than 1 is considered illegal, and the log returns a warning message `[sql-bind] frequency threshold is less than 1, ignore it`. If multiple frequency filter rules are inserted, the value with the highest frequency prevails. |
 | user         | Filter by user name. Statements executed by blocklisted users are not captured.                           | If multiple users execute the same statement, this statement is not captured only if the user names are all in the blocklist. |
 
@@ -367,11 +367,11 @@ Insert filtering conditions into the system table `mysql.capture_plan_baselines_
 >
 > - Modifying a blocklist requires the super privilege.
 >
-> - If the blocklist contains illegal filter content, TiDB returns warning message `[sql-bind] unknown capture filter type, ignore it` in the log.
+> - If a blocklist contains illegal filters, TiDB returns the warning message `[sql-bind] unknown capture filter type, ignore it` in the log.
 
 ### Prevent regression of execution plans during an upgrade
 
-When upgrading a TiDB cluster, you can use baseline capturing to prevent regression of execution plans by performing the following steps:
+ Before upgrading a TiDB cluster, you can use baseline capturing to prevent regression of execution plans by performing the following steps:
 
 1. Enable baseline capturing and keep it working for a period of time.
 
@@ -379,13 +379,13 @@ When upgrading a TiDB cluster, you can use baseline capturing to prevent regress
     >
     > Test data shows that long-term working of baseline capturing does not affect performance of the cluster load. Therefore, it is recommended to enable baseline capturing as long as possible so that important plans (appear twice or above) are captured.
 
-2. Upgrade the TiDB cluster. After the upgrade, captured bindings work to ensure plan consistency.
+2. Upgrade the TiDB cluster. After the upgrade, TiDB uses those captured bindings to ensure execution plan consistency.
 
 3. After the upgrade, delete bindings as required.
 
     - Check the binding source by running the [`SHOW GLOBAL BINDINGS`](#view-bindings) statement.
 
-        Based on the `Source` field in the output, decide whether the bindings are captured (`capture`) or manually created (`manual`).
+        In the output, check the `Source` field to see whether a binding is captured (`capture`) or manually created (`manual`).
 
     - Determine whether to retain the captured bindings:
 
@@ -401,7 +401,7 @@ When upgrading a TiDB cluster, you can use baseline capturing to prevent regress
 
         - If the execution plan is consistent, you can delete the binding safely.
 
-        - If the execution plan is inconsistent, you need to identify the cause, for examaple, checking operations on statistical information. In this case, you need to retain the binding to ensure plan consistency.
+        - If the execution plan is inconsistent, you need to identify the cause, for example, by checking statistics. In this case, you need to retain the binding to ensure plan consistency.
 
 ## Baseline evolution
 
