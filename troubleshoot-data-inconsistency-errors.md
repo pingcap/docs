@@ -67,7 +67,7 @@ This error indicates that for index `c2` in table `t`, the handle of a row is 13
 
 `ERROR 8223 (HY000): data inconsistency in table: t2, index: i1, handle: {hello, hello}, index-values:"" != record-values:"handle: {hello, hello}, values: [KindString hello KindString hello]"`
 
-This error indicates that `index-value` is null and `record-values` is not null, meaning that the record does not have the corresponding index but has the corresponding row, which results in data inconsistency.
+This error indicates that `index-values` are null and `record-values` are not null, meaning that there is no corresponding index for the row.
 
 ## Reasons and solutions
 
