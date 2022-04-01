@@ -12,7 +12,6 @@ In 6.0.0-DMR, the key new features or improvements are as follows:
 
 - Support placement rules in SQL
 - Add a check for data index consistency at the kernel level
-- Enhance Raft Engine
 - Accelerate leader balancing after restarting TiKV nodes
 - Support canceling the automatic update of statistics
 - Optimize the overhead of obtaining TSO at the Read Committed isolation level
@@ -79,7 +78,6 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 | TiKV | [`rocksdb.enable-pipelined-write`](/tikv-configuration-file.md#enable-pipelined-write) | Modified | Change the default value from `true` to `false`. When this configuration is enabled, the previous Pipelined Write is used. When this configuration is disabled, the new Pipelined Commit mechanism is used. |
 | TiKV | [`rocksdb.max-background-flushes`](/tikv-configuration-file.md#max-background-flushes) | Modified | - When the number of CPU cores is 10, the default value is `3`.<br/>- When the number of CPU cores is 8, the default value is `2`. |
 | TiKV | [`rocksdb.max-background-jobs`](/tikv-configuration-file.md#max-background-jobs) | Modified | + When the number of CPU cores is 10, the default value is `9`.<br/>+ When the number of CPU cores is 8, the default value is `7`. |
-| TiKV | [`raft-engine.enable`](/tikv-configuration-file.md#raft-engine) | Modified | The default value is changed from `false` to `true`, which uses Raft Engine to store raft logs. When it is enabled, configurations of `raftdb` are ignored. |
 | TiKV | [`raftstore.apply-max-batch-size`](/tikv-configuration-file.md#apply-max-batch-size) | Modified | Chang the maximum value to `10240`. |
 | TiKV | [`backup.num-threads`](/tikv-configuration-file.md#num-threads-1) | Modified | Modify the adjustable range to `[1, CPU]`.  |
 | TiKV | [`readpool.unified.max-thread-count`](/tikv-configuration-file.md#max-thread-count) | Modified | Modify the adjustable range to `[min-thread-count, MAX(4, CPU)]`. |
@@ -160,12 +158,6 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
     [User document](/dashboard/continuous-profiling.md)
 
 ### Performance
-
-- Enhanced Raft Engine
-
-    By default, [Raft Engine](https://github.com/tikv/raft-engine) is used as the storage engine for TiKV logs. Compared with RocksDB, Raft Engine can reduce TiKV I/O write traffic by up to 40% and CPU usage by 10%. At the same time, under certain loads, Raft Engine improves foreground throughput by about 5% and reduces long-tail latency by 20%.
-
-    [User document](/tikv-configuration-file#raft-engine)
 
 - Cache hotspot small tables
 
