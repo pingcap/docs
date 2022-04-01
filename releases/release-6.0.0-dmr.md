@@ -16,7 +16,7 @@ In 6.0.0-DMR, the key new features or improvements are as follows:
 - Support canceling the automatic update of statistics
 - Optimize the overhead of obtaining TSO at the Read Committed isolation level
 - Enhance prepared statements to share execution plans
-- Enhance function queries
+- Improve query pushdown
 - Provide Quota Limiter (experimental)
 - Cache hotspot small tables
 - Optimize in-memory pessimistic locking
@@ -183,7 +183,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
     [User document](/sql-prepare-plan-cache.md#ignore-the-com_stmt_close-command-and-the-deallocate-prepare-statement), [#31056](https://github.com/pingcap/tidb/issues/31056)
 
-- Enhanced function queries
+- Improved query pushdown
 
     With its native architecture of separating computing from storage, TiDB supports filtering out invalid data by pushing down operators, which greatly reduces the data transmission between TiDB and TiKV and thereby improves the query efficiency. In v6.0, TiDB supports pushing down more expressions and the `BIT` data type to TiKV, improving the query efficiency when computing those expressions and data types.
 
