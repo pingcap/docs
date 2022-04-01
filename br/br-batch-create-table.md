@@ -5,13 +5,13 @@ summary: Learn how to use the Batch Create Table feature. When restoring data, B
 
 # Batch Create Table
 
-When restoring data, Backup & Restore (BR) creates databases and tables in the target TiDB before restoring the table data. In versions earlier than TiDB v6.0.0, BR uses the [serial execution](#implementation-principles) solution to create tables in the restore process. However, when BR restores data with a large number (nearly 50000) of tables, this solution takes much time on creating tables.
+When restoring data, Backup & Restore (BR) creates databases and tables in the target TiDB before restoring the table data. In versions earlier than TiDB v6.0.0, BR uses the [serial execution](#implementation-principles) implementation to create tables in the restore process. However, when BR restores data with a large number (nearly 50000) of tables, this implementation takes much time on creating tables.
 
 To speed up the table creation process, and thereby reduce the time for restoring data, the Batch Create Table feature is introduced in TiDB v6.0.0. This feature is enabled by default.
 
 > **Note:**
 >
-> - To use the Batch Create Table feature, both TiDB and BR are expected to be of v6.0.0 or later. If either TiDB or BR is earlier than v6.0.0, BR uses the serial execution solution.
+> - To use the Batch Create Table feature, both TiDB and BR are expected to be of v6.0.0 or later. If either TiDB or BR is earlier than v6.0.0, BR uses the serial execution implementation.
 > - Suppose that you use a cluster management tool (for example, TiUP), and your TiDB and BR are of v6.0.0 or later versions, or your TiDB and BR are upgraded from a version earlier than v6.0.0 to v6.0.0 or later. In this case, BR enables the Batch Create Table feature by default, without additional configuration.
 
 ## Usage scenario
@@ -32,17 +32,17 @@ To disable this feature, you can set `--ddl-batch-size` to `0`. See the followin
 br restore full -s local:///br_data/ --pd 172.16.5.198:2379 --log-file restore.log --ddl-batch-size=0
 ```
 
-After this feature is disabled, BR uses the [serial execution solution](#implementation-principles) instead.
+After this feature is disabled, BR uses the [serial execution implementation](#implementation-principles) instead.
 
 ## Implementation principles
 
-- Serial execution solution before v6.0.0:
+- Serial execution implementation before v6.0.0:
 
-    When restoring data using BR, BR creates databases and tables in the target TiDB before restoring the table data.To create tables, BR calls TiDB internal API first, and then process table creation tasks, which operation looks like BR executes the SQL `Create Table` statement. TiDB DDL owner creates tables sequentially. Once the DDL owner creates a table, the DDL schema version changes correspondingly, and each version change synchronizes to other TiDB DDL workers (including BR). Hence, when restoring a large number of tables, the serial execution solution takes too much time.
+    When restoring data, BR creates databases and tables in the target TiDB before restoring the table data.To create tables, BR calls TiDB internal API first, and then process table creation tasks, which operation looks like BR executes the SQL `Create Table` statement. TiDB DDL owner creates tables sequentially. Once the DDL owner creates a table, the DDL schema version changes correspondingly, and each version change synchronizes to other TiDB DDL workers (including BR). Hence, when restoring a large number of tables, the serial execution implementation takes too much time.
 
-- Batch create table solution since v6.0.0:
+- Batch create table implementation since v6.0.0:
 
-    By default, BR creates tables in multiple batches, and each batch has 128 tables. Using this solution, when BR creates one batch of tables, TiDB schema version only changes once. This scheme significantly increases the speed of table creation.
+    By default, BR creates tables in multiple batches, and each batch has 128 tables. Using this implementation, when BR creates one batch of tables, TiDB schema version only changes once. This scheme significantly increases the speed of table creation.
 
 ## Test for the Batch Create Table feature
 
