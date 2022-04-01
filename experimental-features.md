@@ -10,6 +10,7 @@ This document introduces the experimental features of TiDB in different versions
 
 ## Performance
 
++ [Raft Engine](/tikv-configuration-file.md#raft-engine). (Introduced in v5.4)
 + [Support collecting statistics for `PREDICATE COLUMNS`](/statistics.md#collect-statistics-on-some-columns) (Introduced in v5.4)
 + [Support synchronously loading statistics](/statistics.md#load-statistics). (Introduced in v5.4)
 
