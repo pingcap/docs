@@ -111,7 +111,7 @@ With Diag, you can collect data from the TiDB clusters and the DM clusters deplo
     > **Note:**
     >
     > - Diag does not collect system variables data (db_vars) by default. To collect this data, you need to additionally provide a username and password that can access the database. Note that the reading access to system variables should be enabled in this database.
-    > - Diag does not collect performance data (`perf`) and debug data (`debug`).
+    > - Diag does not collect performance data (`perf`) and debug data (`debug`) by default.
     > - To collect full diagnostic data including system variables, use the command `tiup diag collect <cluster-name> --include="system,monitor,log,config,db_vars,perf,debug"`.
 
     - `-l`: the bandwidth limit for transferring files, the unit is Kbit/s, and the default value is `100000` (the `-l` parameter of scp).
