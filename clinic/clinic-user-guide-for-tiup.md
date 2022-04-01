@@ -5,7 +5,7 @@ summary: Learn how to use the PingCAP Clinic Diagnostic Service to troubleshoot 
 
 # Use PingCAP Clinic
 
-For TiDB clusters and DM clusters deployed using TiUP, you can use PingCAP Clinic Diagnostic Service (PingCAP Clinic) to troubleshoot cluster problems remotely and perform a quick check on a cluster status locally using Diag client (Diag) and a [Clinic Server cloud service (Clinic Server)]((https://clinic.pingcap.com.cn)).
+For TiDB clusters and DM clusters deployed using TiUP, you can use PingCAP Clinic Diagnostic Service (PingCAP Clinic) to troubleshoot cluster problems remotely and perform a quick check on a cluster status locally using Diag client (Diag) and a [Clinic Server cloud service (Clinic Server)](https://clinic.pingcap.com.cn).
 
 PingCAP Clinic is currently in the Technical Preview stage.
 
@@ -27,7 +27,7 @@ PingCAP Clinic is currently in the Technical Preview stage.
 
 Before using PingCAP Clinic, you need to install Diag (a component to collect data provided by PingCAP Clinic) and prepare the environment to upload data.
 
-1. Install Diag
+1. Install Diag.
 
    - If you have installed TiUP on your control machine, run the following command to install Diag:
 
@@ -50,19 +50,17 @@ Before using PingCAP Clinic, you need to install Diag (a component to collect da
     > - For clusters without an internet connection, you need to deploy Diag offline. For details, refer to [Deploy TiUP offline: Method 2](/production-deployment-using-tiup.md#method-2-deploy-tiup-offline).
     > - Diag is **only** provided in the TiDB Server offline mirror package of v5.4.0 or later.
 
-2. Get and set the Access token (token) to upload data
+2. Get and set the Access token (token) to upload data.
 
-    When uploading collected data through Diag, you need a token for user authentication. You can reuse one token to upload data, so if you already get a token and set it in Diag, you can skip this step.
+    When uploading collected data through Diag, you need a token for user authentication. You can reuse one token, so if you already get a token and set it in Diag, you can skip this step.
 
-    First, set a token by following steps:
-
-    Log in [Clinic Server](https://clinic.pingcap.com.cn), click the icon in the lower right side of the Cluster page, select **Get Access Token For Diag Tool**, click  **+**  in the pop-up window to get a token, and copy and save the token information.
+    First, get a token by the following instructions: log in to [Clinic Server](https://clinic.pingcap.com.cn), click the icon in the lower right side of the Cluster page, select **Get Access Token For Diag Tool**, click **+** in the pop-up window to get a token, and copy and save the token information.
 
     ![Get the Token](/media/clinic-get-token.png)
 
     > **Note:**
     >
-    > - When accessing Clinic Server for the first time, you need to log in to [Clinic Server](https://clinic.pingcap.com.cn) using your AskTUG account and create an organization first, and then follow the preceding steps.
+    > - When accessing Clinic Server for the first time, you need to log in to [Clinic Server](https://clinic.pingcap.com.cn) using your AskTUG account and create an organization first, and then create a token.
     > - For data security, TiDB only displays the token information when it is created. If you lost the information, you can delete the old token and create a new one.
     > - The token is only used to upload data.
 
@@ -80,7 +78,7 @@ You can use Diag to quickly collect diagnostic data from TiDB clusters and DM cl
 
 ### Step 1. Check the data to be collected
 
-For a detailed list of data that can be collected by Diag, see [PingCAP Clinic Diagnostic Data](/clinic/clinic-data-instruction-for-tiup.md). 
+For a detailed list of data that can be collected by Diag, see [PingCAP Clinic Diagnostic Data](/clinic/clinic-data-instruction-for-tiup.md).
 
 To improve the efficiency of the later diagnosis, you are recommended to collect full diagnostic data including monitoring data and configuration information. For details, see [Collect data from TiDB clusters](#collect-data-from-tidb-clusters].
 
@@ -201,9 +199,7 @@ Depending on the network connection of the cluster, you can choose one of the fo
 
 > **Note:**
 >
->
-If you did not set a token in Diag before uploading data, Diag reports the upload failed and reminds you to set a token. To get a token, see [the second step in Prerequisites](prerequisites).
-
+> If you did not set a token in Diag before uploading data, Diag reports the upload failed and reminds you to set a token. To get a token, see [the second step in Prerequisites](#prerequisites).
 
 #### Method 1. Upload directly
 
@@ -353,7 +349,7 @@ You can have a quick check on the cluster status locally using Diag. Even if you
 
 2. After uploading data, I cannot open the returned data access link. What should I do?
 
-    You can try logging in to [Clinic Server](https://clinic.pingcap.com.cn) first. If you are still unable to open the link, check whether you have the access to view the data. If not, you need to contact the data owner to get the access, and then log in to Clinic server and open the link again.
+    You can try logging in to [Clinic Server](https://clinic.pingcap.com.cn) first. If you still cannot open the link, check whether you have the access to view the data. If not, you need to contact the data owner to get the access. With the access, try logging in to Clinic server and opening the link again.
 
 3. How long will the uploaded data be kept on the Clinic Server?
 
