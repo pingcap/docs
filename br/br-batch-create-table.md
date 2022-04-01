@@ -1,28 +1,28 @@
 ---
-title: BR Batch Create Table
-summary: Learn how to use the BR batch create table feature. When restoring data, BR can create tables in batches to speed up the restore process.
+title: Batch Create Table
+summary: Learn how to use the Batch Create Table feature. When restoring data, BR can create tables in batches to speed up the restore process.
 ---
 
-# BR Batch Create Table
+# Batch Create Table
 
-When restoring data, Backup & Restore (BR) creates databases and tables in the target TiDB before it starts to restore the table data. In versions earlier than TiDB v6.0.0, BR uses the [serial execution](#implementation-principles) to create tables in the restore process. However, when BR restores data with a large number (nearly 50000) of tables, this serial implementation of table creation takes much time.
+When restoring data, Backup & Restore (BR) creates databases and tables in the target TiDB before restoring the table data. In versions earlier than TiDB v6.0.0, BR uses the [serial execution](#implementation-principles) solution to create tables in the restore process. However, when BR restores data with a large number (nearly 50000) of tables, this solution takes much time on creating tables.
 
-To speed up the table creation process, and thereby reduce the time for restoring data, the BR batch create table feature is introduced in TiDB v6.0.0. This feature is enabled by default.
+To speed up the table creation process, and thereby reduce the time for restoring data, the Batch Create Table feature is introduced in TiDB v6.0.0. This feature is enabled by default.
 
 > **Note:**
 >
-> - To use the BR batch create table feature, both TiDB and BR are expected to be of v6.0.0 or later. If either TiDB or BR is earlier than v6.0.0, BR uses the serial execution implementation.
-> - Suppose that you use a cluster management tool (for example, TiUP), and your TiDB and BR are of v6.0.0 or later versions, or your TiDB and BR are upgraded from a version earlier than v6.0.0 to v6.0.0 or later. In this case, BR enables the batch create table feature by default without additional configuration.
+> - To use the Batch Create Table feature, both TiDB and BR are expected to be of v6.0.0 or later. If either TiDB or BR is earlier than v6.0.0, BR uses the serial execution solution.
+> - Suppose that you use a cluster management tool (for example, TiUP), and your TiDB and BR are of v6.0.0 or later versions, or your TiDB and BR are upgraded from a version earlier than v6.0.0 to v6.0.0 or later. In this case, BR enables the Batch Create Table feature by default, without additional configuration.
 
 ## Usage scenario
 
-If you need to restore data with a massive amount of tables, for example, 50000 tables, you can use the BR batch create table feature to speed up the restore process.
+If you need to restore data with a massive amount of tables, for example, 50000 tables, you can use the Batch Create Table feature to speed up the restore process.
 
-For the detailed effect, see [Test against the batch create table feature](#test-batch-create-table).
+For the detailed effect, see [Test for the Batch Create Table Feature](#test-batch-create-table).
 
-## Use batch create table
+## Use the Batch Create Table feature
 
-BR enables the batch create table feature by default, with the default configuration of `--ddl-batch-size=128` in v6.0.0 or later to speed up the restore process. Therefore, you do not need to configure this parameter. `--ddl-batch-size=128` means that BR creates tables in multiple batches, and each batch has 128 tables.
+BR enables the Batch Create Table Feature by default, with the default configuration of `--ddl-batch-size=128` in v6.0.0 or later to speed up the restore process. Therefore, you do not need to configure this parameter. `--ddl-batch-size=128` means that BR creates tables in multiple batches, and each batch has 128 tables.
 
 To disable this feature, you can set `--ddl-batch-size` to `0`. See the following example command:
 
@@ -32,21 +32,21 @@ To disable this feature, you can set `--ddl-batch-size` to `0`. See the followin
 br restore full -s local:///br_data/ --pd 172.16.5.198:2379 --log-file restore.log --ddl-batch-size=0
 ```
 
-After this feature is disabled, BR uses the [serial execution implementation](#implementation-principles) instead.
+After this feature is disabled, BR uses the [serial execution solution](#implementation-principles) instead.
 
 ## Implementation principles
 
 - Serial execution solution before v6.0.0:
 
-    In the versions earlier, BR uses the serial execution implementation. When restoring data, BR creates the databases and tables in the target TiDB first, then starts restoring data. BR calls TiDB internal API to create tables, which operation looks like BR executes the SQL `Create Table` statement. TiDB DDL owner creates tables sequentially. Once the DDL owner creates a table, the DDL schema version changes correspondingly, and each version change synchronizes to other TiDB DDL workers (including BR). Hence, when restoring a large number of tables, the serial execution implementation takes too much time.
+    When restoring data using BR, BR creates databases and tables in the target TiDB before restoring the table data.To create tables, BR calls TiDB internal API first, and then process table creation tasks, which operation looks like BR executes the SQL `Create Table` statement. TiDB DDL owner creates tables sequentially. Once the DDL owner creates a table, the DDL schema version changes correspondingly, and each version change synchronizes to other TiDB DDL workers (including BR). Hence, when restoring a large number of tables, the serial execution solution takes too much time.
 
-- Batch create table implementation since v6.0.0:
+- Batch create table solution since v6.0.0:
 
-    From v6.0.0, by default, BR creates tables in multiple batches, and each batch has 128 tables. Using this scheme, when BR creates one batch of tables, TiDB schema version only changes once. This scheme significantly increases the speed of table creation.
+    By default, BR creates tables in multiple batches, and each batch has 128 tables. Using this solution, when BR creates one batch of tables, TiDB schema version only changes once. This scheme significantly increases the speed of table creation.
 
-## Test against the batch create table feature
+## Test for the Batch Create Table feature
 
-This section describes the information of testing the batch create table feature. The test environment is as follows:
+This section describes the test information about the Batch Create Table feature. The test environment is as follows:
 
 - Cluster configurations:
 
@@ -62,4 +62,4 @@ The test result is as follows:
 ‘[2022/03/12 22:37:49.060 +08:00] [INFO] [collector.go:67] ["Full restore success summary"] [total-ranges=751760] [ranges-succeed=751760] [ranges-failed=0] [split-region=1h33m18.078448449s] [restore-ranges=542693] [total-take=1h41m35.471476438s] [restore-data-size(after-compressed)=8.337TB] [Size=8336694965072] [BackupTS=431773933856882690] [total-kv=148015861383] [total-kv-size=16.16TB] [average-speed=2.661GB/s]’
 ```
 
-In the result, you can find that the average speed of restoring one TiKV instance is as high as 181.65 MB/s （`average-speed(GB/s)`/`tikv_count` = `181.65(MB/s)`）.
+In the test result, you can find that the average speed of restoring one TiKV instance is as high as 181.65 MB/s （`average-speed(GB/s)`/`tikv_count` = `181.65(MB/s)`）.
