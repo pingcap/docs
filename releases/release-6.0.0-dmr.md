@@ -225,7 +225,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
     [User document](/tikv-configuration-file.md#quota)
 
-- Support the zstd compression algorithm
+- Support the zstd compression algorithm in TiFlash
 
     TiFlash introduces two parameters, profiles.default.dt_compression_method and profiles.default.dt_compression_level, which allows users to select the optimal compression algorithm based on performance and capacity balance.
 
@@ -245,7 +245,9 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
     [User document](/monitor-tiflash.md#coprocessor)
 
-### TiDB Data Migration (DM)
+### Data Migration
+
+#### TiDB Data Migration (DM)
 
 - Add WebUI (experimental)
 
@@ -284,7 +286,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
     [User document](/dm/dm-create-task.md#flags-description)
 
-### TiDB Lightning
+#### TiDB Lightning
 
 - Maximum tolerable error
 
