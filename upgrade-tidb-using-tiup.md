@@ -266,5 +266,5 @@ tiup install ctl:v6.0.0
 
 ## TiDB 6.0 compatibility changes
 
-- See TiDB 5.4 Release Notes for the compatibility changes.
+- See TiDB 6.0 Release Notes for the compatibility changes.
 - Try to avoid creating a new clustered index table when you apply rolling updates to the clusters using TiDB Binlog.
