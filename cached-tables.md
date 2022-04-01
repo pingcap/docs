@@ -23,7 +23,7 @@ When the data volume of the table is small but the data is frequently accessed, 
 - The tables of exchange rates in the financial sector. These tables are updated only once a day but not in real-time.
 - Bank branch or network information tables, which are rarely updated.
 
-Taking configuration tables as an example, when the application restarts, the configuration information is loaded in all connections, which causes a high read latency. You can solve this problem by using the cached tables feature.
+Take configuration tables as an example. When the application restarts, the configuration information is loaded in all connections, which causes a high read latency. In this case, you can solve this problem by using the cached tables feature.
 
 ## Examples
 
