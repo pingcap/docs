@@ -340,6 +340,10 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
     Currently, TiEM is provided in the [TiDB Enterprise](https://en.pingcap.com/tidb-enterprise/) edition only. To get TiEM, contact us via the [TiDB Enterprise](https://en.pingcap.com/tidb-enterprise/) page.
 
+- Support customizing configurations of the monitoring components
+
+    When you deploy a TiDB cluster using TiUP, TiUP automatically deploys monitoring components such as Prometheus, Grafana, and Alertmanager, and automatically adds new nodes into the monitoring scope after scale-out. You can customize the configurations of the monitoring components by adding configuration items to the `topology.yaml` file.
+
 ## Improvements
 
 + TiDB
