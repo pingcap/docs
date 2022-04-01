@@ -5,7 +5,7 @@ summary: Learn how to customize the configurations of monitoring servers
 
 # Customize Configurations of Monitoring Servers
 
-When you deploy a TiDB cluster using TiUP, TiUP also deploys monitoring servers, such as Prometheus, Grafana, and Alertmanager. In the meantime, if you scale out this cluster, TiUP also adds corresponding monitoring servers to the new nodes.
+When you deploy a TiDB cluster using TiUP, TiUP also deploys monitoring servers, such as Prometheus, Grafana, and Alertmanager. In the meantime, if you scale out this cluster, TiUP also adds the new nodes into monitoring scope.
 
 Noticeably, TiUP overwrites the configurations of the monitoring servers by using its own configurations. That means, if you modify the configuration files of the monitoring servers, the changes do not take effect because they are overwritten in such TiUP operations as deployment, scaling out, scaling in, and reloading.
 
@@ -70,11 +70,11 @@ After the preceding configuration is done, when you deploy, scale out, scale in,
             action: drop
     ```
 
-After the preceding configuration is done, when you deploy, scale out, scale in, or reload a TiDB cluster, TiUP adds the `additional_scrape_conf` field to the corresponding parameter of the Prometheus configuration file.
+After the preceding configuration is done, when you deploy, scale out, scale in, or reload a TiDB cluster, TiUP adds the `additional_scrape_conf` field to the corresponding parameters of the Prometheus configuration file.
 
 ## Customize the configurations of Grafana
 
-Currently, TiUP supports custoizing Grafana Dashboard and other configurations.
+Currently, TiUP supports customizing Grafana Dashboard and other configurations.
 
 1. Customize the configuration file of the Grafana Dashboard and place it under a directory of the machine where TiUP locates.
 
