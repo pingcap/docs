@@ -1672,8 +1672,8 @@ SET tidb_slow_log_threshold = 200;
 - This variable is used to control the assertion level. Assertion is a consistency check between data and index, which checks whether the key being written exists in the transaction commit process. For more information, see [Troubleshoot Inconsistency Between Data and Index](/troubleshoot-data-inconsistency-errors.md ).
 
     - `OFF`: Disable this check.
-    - `FAST`: Enable only the check items that have a minor impact on performance, including most of the check items.
-    - `STRICT`: Enable all check items, with a slight impact on pessimistic transaction performance.
+    - `FAST`: Enable most of the check items, with almost no impact on performance.
+    - `STRICT`: Enable all check items, with a minor impact on pessimistic transaction performance when the system workload is high.
 
 ### tidb_txn_mode
 
