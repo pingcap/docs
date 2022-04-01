@@ -74,7 +74,7 @@ This error indicates that `index-values` are null and `record-values` are not nu
 When a data consistency error occurs, the reasons can be as follows:
 
 - The data and index in the existing data are consistent and the current version of TiDB has a bug. If an ongoing transaction is about to write inconsistent data, TiDB aborts the transaction.
-- The data and index in the existing data are inconsistent. The inconsistent data could be from a dangerous operation erroneously in the past or caused by a TiDB bug.
+- The data and index in the existing data are inconsistent. The inconsistent data could be from a dangerous operation performed by mistake in the past or caused by a TiDB bug.
 - The data and index are consistent but the detection algorithm has a bug that causes errors by mistake.
 
 If you receive a data inconsistency error, contact PingCAP technical support for troubleshooting immediately instead of dealing with the error by yourself. If PingCAP technical support confirms that the error is reported by mistake, or your application needs to skip such errors urgently, you can use the following methods to bypass the check.
