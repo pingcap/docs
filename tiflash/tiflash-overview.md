@@ -6,7 +6,7 @@ aliases: ['/docs/dev/tiflash/tiflash-overview/','/docs/dev/reference/tiflash/ove
 
 # TiFlash Overview
 
-TiFlash is the key component that makes TiDB essentially an Hybrid Transactional/Analytical Processing (HTAP) database. As a columnar storage extension of TiKV, TiFlash provides both good isolation level and strong consistency guarantee.
+[TiFlash](https://github.com/pingcap/tiflash) is the key component that makes TiDB essentially an Hybrid Transactional/Analytical Processing (HTAP) database. As a columnar storage extension of TiKV, TiFlash provides both good isolation level and strong consistency guarantee.
 
 In TiFlash, the columnar replicas are asynchronously replicated according to the Raft Learner consensus algorithm. When these replicas are read, the Snapshot Isolation level of consistency is achieved by validating Raft index and multi-version concurrency control (MVCC).
 
@@ -34,10 +34,14 @@ When TiDB receives the DDL command to create replicas in TiFlash, the `pd buddy`
 
 TiFlash has the following key features:
 
-- [Asynchronous replication](#asynchronous-replication)
-- [Consistency](#consistency)
-- [Intelligent choice](#intelligent-choice)
-- [Computing acceleration](#computing-acceleration)
+- [TiFlash Overview](#tiflash-overview)
+  - [Architecture](#architecture)
+  - [Key features](#key-features)
+    - [Asynchronous replication](#asynchronous-replication)
+    - [Consistency](#consistency)
+    - [Intelligent choice](#intelligent-choice)
+    - [Computing acceleration](#computing-acceleration)
+  - [See also](#see-also)
 
 ### Asynchronous replication
 
