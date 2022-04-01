@@ -30,10 +30,11 @@ This section lists all the precheck items.
 
 > **Note:**
 >
-> For the checking items that must be passed in the precheck, "(required)" is indicated before the checking item names in this document.
+>  In this document, check items that must be passed are labeled "(mandatory)".  
+
+> - If a mandatory check item does not pass, DM returns an error after the check and does not proceed with the migration task. In this case, modify the configurations according to the error message and retry the task after meeting the precheck requirements.
 >
-> + For a required checking item, if the corresponding check does not pass, DM returns an error after the check and does not proceed with the migration task. In this case, modify the configurations according to the error message and retry the task after meeting the precheck requirements.
-> + For a non-required checking item, if the corresponding check does not pass, DM returns a warning after the check. If the check result has no errors but only warnings, DM automatically starts executing the migration task.
+> - If a non-mandatory check item does not pass, DM returns a warning after the check. DM automatically starts a migration task if the check result contains only warnings but no errors.
 
 ### Common check items
 
