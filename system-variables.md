@@ -1732,7 +1732,7 @@ SET tidb_slow_log_threshold = 200;
 
     - `OFF`: Disable this check.
     - `FAST`: Enable only the check items that have a minor impact on performance, including most of the check items.
-    - `STRICT`: Enable all check items, with some impact on pessimistic transaction performance.
+    - `STRICT`: Enable all check items, with a slight impact on pessimistic transaction performance.
 
 ### tidb_txn_mode
 

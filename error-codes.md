@@ -337,7 +337,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 * Error Number: 8140
 
-   The transaction attempts to write an row whose record value is inconsistent with the value of the index. For more information, see [Troubleshoot Inconsistencies Between Data and Index](/troubleshoot-data-inconsistency-errors.md#error-8140).
+   The transaction attempts to write a row whose data is inconsistent with the index data. For more information, see [Troubleshoot Inconsistencies Between Data and Index](/troubleshoot-data-inconsistency-errors.md#error-8140).
 
 * Error Number: 8141
 
