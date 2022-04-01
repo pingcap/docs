@@ -191,10 +191,10 @@
       - [tiup-cluster](/tiup/tiup-cluster.md)
       - [tiup-mirror](/tiup/tiup-mirror.md)
       - [tiup-bench](/tiup/tiup-bench.md)
-  - TiDB Clinic Diagnostic Service (Beta)
+  - PingCAP Clinic Diagnostic Service (Beta)
     - [Overview](/clinic/clinic-introduction.md)
-    - [Use TiDB Clinic](/clinic/clinic-user-guide-for-tiup.md)
-    - [TiDB Clinic Diagnostic Data](/clinic/clinic-data-instruction-for-tiup.md)
+    - [Use PingCAP Clinic](/clinic/clinic-user-guide-for-tiup.md)
+    - [PingCAP Clinic Diagnostic Data](/clinic/clinic-data-instruction-for-tiup.md)
   - [TiDB Operator](/tidb-operator-overview.md)
   - TiDB Lightning
     - [Overview](/tidb-lightning/tidb-lightning-overview.md)
@@ -263,7 +263,11 @@
       - Manage Tasks
         - [Handle Failed DDL Statements](/dm/handle-failed-ddl-statements.md)
         - [Manage Schemas of Tables to be Migrated](/dm/dm-manage-schema.md)
+        - [Use WebUI to Manage Tasks](/dm/dm-webui-guide.md)
       - [Export and Import Data Sources and Task Configurations of Clusters](/dm/dm-export-import-config.md)
+      - [Manually Handle Sharding DDL Lock](/dm/manually-handling-sharding-ddl-locks.md)
+      - [Switch the MySQL Instance to Be Migrated](/dm/usage-scenario-master-slave-switch.md)
+      - [Manage Schemas of Tables to be Migrated](/dm/dm-manage-schema.md)
       - [Handle Alerts](/dm/dm-handle-alerts.md)
       - [Daily Check](/dm/dm-daily-check.md)
     - Reference
@@ -551,6 +555,7 @@
     - [Views](/views.md)
     - [Partitioning](/partitioned-table.md)
     - [Temporary Tables](/temporary-tables.md)
+    - [Cached Tables](/cached-tables.md)
     - Character Set and Collation
       - [Overview](/character-set-and-collation.md)
       - [GBK](/character-set-gbk.md)

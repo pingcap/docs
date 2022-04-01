@@ -599,20 +599,6 @@ Configuration related to the status of TiDB service.
 - Determines whether to transmit the database-related QPS metrics to Prometheus.
 - Default value: `false`
 
-## stmt-summary <span class="version-mark">New in v3.0.4</span>
-
-Configurations related to [statement summary tables](/statement-summary-tables.md).
-
-### max-stmt-count
-
-- The maximum number of SQL categories allowed to be saved in [statement summary tables](/statement-summary-tables.md).
-- Default value: `3000`
-
-### max-sql-length
-
-- The longest display length for the `DIGEST_TEXT` and `QUERY_SAMPLE_TEXT` columns in [statement summary tables](/statement-summary-tables.md).
-- Default value: `4096`
-
 ## pessimistic-txn
 
 For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](/pessimistic-transaction.md).
@@ -632,6 +618,12 @@ For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](
 ### deadlock-history-collect-retryable
 
 + Controls whether the [`INFORMATION_SCHEMA.DEADLOCKS`](/information-schema/information-schema-deadlocks.md) table collects the information of retryable deadlock errors. For the description of retryable deadlock errors, see [Retryable deadlock errors](/information-schema/information-schema-deadlocks.md#retryable-deadlock-errors).
+
+### pessimistic-auto-commit (New in v6.0.0)
+
++ Determines the transaction mode that the auto-commit transaction uses when the pessimistic transaction mode is globally enabled (`tidb_txn_mode='pessimistic'`). By default, even if the pessimistic transaction mode is globally enabled, the auto-commit transaction still uses the optimistic transaction mode. After enabling `pessimistic-auto-commit` (set to `true`), the auto-commit transaction also uses pessimistic mode, which is consistent with the other explicitly committed pessimistic transactions.
++ For scenarios with conflicts, after enabling this configuration, TiDB includes auto-commit transactions into the global lock-waiting management, which avoids deadlocks and mitigates the latency spike brought by deadlock-causing conflicts.
++ For scenarios with no conflicts, if there are many auto-commit transactions, and a single transaction operates a large data volume, enabling this configuration causes performance regression. For example, the auto-commit `INSERT INTO SELECT` statement.
 + Default value: `false`
 
 ## experimental
