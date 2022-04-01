@@ -55,7 +55,7 @@ Before using the DM tool, note the following restrictions:
 
     - Currently, TiDB is not compatible with all the DDL statements that MySQL supports. Because DM uses the TiDB parser to process DDL statements, it only supports the DDL syntax supported by the TiDB parser. For details, see [MySQL Compatibility](/mysql-compatibility.md#ddl).
 
-    - DM reports an error when it encounters an incompatible DDL statement. To solve this error, you need to manually handle it using dmctl, either skipping this DDL statement or replacing it with a specified DDL statement(s). For details, see [Skip or replace abnormal SQL statements](/dm/dm-faq.md#how-to-handle-incompatible-ddl-statements).
+    - DM reports an error when it encounters an incompatible DDL statement. To solve this error, you need to manually handle it using dmctl, either skipping this DDL statement or replacing it with specified DDL statements. For details, see [Skip or replace abnormal SQL statements](/dm/dm-faq.md#how-to-handle-incompatible-ddl-statements).
 
 + GBK character set compatibility
 
@@ -70,12 +70,11 @@ You are welcome to participate in the DM open sourcing project. Your contributio
 You can learn about DM through the online documentation. If you have any questions, contact us in one of the following ways.
 
 - [GitHub](https://github.com/pingcap/tiflow/tree/master/dm)
-- [AskTUG](https://asktug.com/tags/dm)
 - [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=sig-migrate&ref=github_sig)
 
 ## License
 
-DM complies with Apache 2.0 license. For more details, see [LICENSE](https://github.com/pingcap/tiflow/blob/master/dm/LICENSE).
+DM complies with the Apache 2.0 license. For more details, see [LICENSE](https://github.com/pingcap/tiflow/blob/master/dm/LICENSE).
 
 ## DM versions
 
