@@ -26,7 +26,6 @@ aliases: ['/docs/tidb-data-migration/dev/overview/']
 
 Run the following command to install DM:
 
-```
 {{< copyable "shell-regular" >}}
 
 ```shell
