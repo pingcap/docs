@@ -360,7 +360,7 @@ Insert filtering conditions into the system table `mysql.capture_plan_baselines_
 | **Dimension name** | **Description**                                                     | Remarks                                                     |
 | :----------- | :----------------------------------------------------------- | ------------------------------------------------------------ |
 | table        | Filter by table name. Each filtering rule is in the `db.table` format. The supported filtering syntax includes [Plain table names](/table-filter.md#plain-table-names) and [Wildcards](/table-filter.md#wildcards). | Case insensitive. If a table name contains illegal characters, the log returns a warning message `[sql-bind] failed to load mysql.capture_plan_baselines_blacklist`. |
-| frequency    | Filter by frequency. SQL statements executed more than once are captured by default. You can set a high frequency to capture statements more frequently. | Setting frequency to a value smaller than 1 is considered illegal, and the log returns a warning message `[sql-bind] frequency threshold is less than 1, ignore it`. If multiple frequency filter rules are inserted, the value with the highest frequency prevails. |
+| frequency    | Filter by frequency. SQL statements executed more than once are captured by default. You can set a high frequency to capture statements that are frequently executed. | Setting frequency to a value smaller than 1 is considered illegal, and the log returns a warning message `[sql-bind] frequency threshold is less than 1, ignore it`. If multiple frequency filter rules are inserted, the value with the highest frequency prevails. |
 | user         | Filter by user name. Statements executed by blocklisted users are not captured.                           | If multiple users execute the same statement and their user names are all in the blocklist, this statement is captured. |
 
 > **Note:**
@@ -377,7 +377,7 @@ Insert filtering conditions into the system table `mysql.capture_plan_baselines_
 
     > **Note:**
     >
-    > Test data shows that long-term working of baseline capturing does not affect performance of the cluster load. Therefore, it is recommended to enable baseline capturing as long as possible so that important plans (appear twice or above) are captured.
+    > Test data shows that long-term working of baseline capturing has a slight impact on the performance of the cluster load. Therefore, it is recommended to enable baseline capturing as long as possible so that important plans (appear twice or above) are captured.
 
 2. Upgrade the TiDB cluster. After the upgrade, TiDB uses those captured bindings to ensure execution plan consistency.
 
