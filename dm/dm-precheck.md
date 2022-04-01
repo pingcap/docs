@@ -22,7 +22,7 @@ For example:
 tiup dmctl check-task ./task.yaml
 ```
 
-## Checking items
+## Descriptions of check items
 
 After a precheck is triggered for a task, DM checks the corresponding items according to your migration mode configuration.
 
@@ -30,7 +30,7 @@ This section lists all the precheck items.
 
 > **Note:**
 >
->  In this document, check items that must be passed are labeled "(Mandatory)".  
+> In this document, check items that must be passed are labeled "(Mandatory)".
 
 > - If a mandatory check item does not pass, DM returns an error after the check and does not proceed with the migration task. In this case, modify the configurations according to the error message and retry the task after meeting the precheck requirements.
 >
@@ -85,11 +85,11 @@ For the full data migration mode (`task-mode: full`), in addition to the [common
 
     - If sharded tables have auto-increment primary keys, the precheck returns a warning. If there are conflicts in auto-increment primary keys, see [Handle conflicts of auto-increment primary key](/dm/shard-merge-best-practices.md#Handling-auto-increment-primary-key-conflicts) for solutions.
 
-### Check items for incremental data migration 
+### Check items for incremental data migration
 
 For the incremental data migration mode (`task-mode: incremental`), in addition to the [common check items](#common-check-items), the precheck also includes the following check items:
 
-* (Mandatory) Upstream database REPLICATION permission 
+* (Mandatory) Upstream database REPLICATION permission
 
     - REPLICATION CLIENT permission
     - REPLICATION SLAVE permission
