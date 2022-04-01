@@ -7,9 +7,9 @@ summary: Learn how to customize the configurations of monitoring servers
 
 When you deploy a TiDB cluster using TiUP, TiUP also deploys monitoring servers, such as Prometheus, Grafana, and Alertmanager. In the meantime, if you scale out this cluster, TiUP also adds the new nodes into monitoring scope.
 
-Noticeably, TiUP overwrites the configurations of the monitoring servers by using its own configurations. That means, if you modify the configuration files of the monitoring servers, the changes do not take effect because they are overwritten in such TiUP operations as deployment, scaling out, scaling in, and reloading.
+Noticeably, TiUP overwrites the configurations of the monitoring servers by using its configurations. That means, if you modify the configuration files of the monitoring servers, the changes do not take effect because they are overwritten in such TiUP operations as deployment, scaling out, scaling in, and reloading.
 
-If you need to customize the configurations of the monitoring servers mentioned above, you can follow the instructions described below to add related configuration items in the topology.yaml of the TiDB cluster.
+If you need to customize the configurations of the monitoring servers mentioned above, you can follow the instructions below to add related configuration items in the topology.yaml of the TiDB cluster.
 
 > **Note:**
 >
@@ -134,5 +134,3 @@ alertmanager_servers:
 ```
 
 After the preceding configuration is done, when you deploy, scale out, scale in, or reload a TiDB cluster, TiUP adds the `listen_host` field to `--web.listen-address` of the Alertmanager's startup parameter.
-   
-
