@@ -38,7 +38,7 @@ After this feature is disabled, BR uses the [serial execution implementation](#i
 
 - Serial execution solution before v6.0.0:
 
-    In the versions earlier, BR uses the serial execution implementation. When restoring data, BR creates the databases and tables in the target TiDB first, then starts restoring data. To create tables, BR calls TiDB internal API, more like BR uses the SQL statement `Create Table`. TiDB DDL owner creates tables sequentially. Once the DDL owner creates a table, the DDL schema version changes correspondingly, and each version change synchronizes to other TiDB DDL workers (including BR). Hence, when restoring a large number of tables, the serial execution implementation takes too much time.
+    In the versions earlier, BR uses the serial execution implementation. When restoring data, BR creates the databases and tables in the target TiDB first, then starts restoring data. BR calls TiDB internal API to create tables, which operation looks like BR executes the SQL `Create Table` statement. TiDB DDL owner creates tables sequentially. Once the DDL owner creates a table, the DDL schema version changes correspondingly, and each version change synchronizes to other TiDB DDL workers (including BR). Hence, when restoring a large number of tables, the serial execution implementation takes too much time.
 
 - Batch create table implementation since v6.0.0:
 
