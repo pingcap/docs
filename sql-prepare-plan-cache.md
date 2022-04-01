@@ -204,7 +204,7 @@ MySQL [test]> deallocate prepare stmt; -- Release the prepared statement
 
 In such practice, the plan obtained by the first executed statement cannot be reused by the second executed statement.
 
-To address the problem, you can set the system varible [`tidb_ignore_prepared_cache_close_stmt`](/system-variables.md#tidb_ignore_prepared_cache_close_stmt-new-in v60) to `ON` so TiDB ignores commands to close `prepare stmt`:
+To address the problem, you can set the system varible [`tidb_ignore_prepared_cache_close_stmt`](/system-variables.md#tidb_ignore_prepared_cache_close_stmt-new-in-v600) to `ON` so TiDB ignores commands to close `prepare stmt`:
 
 {{< copyable "sql" >}}
 
