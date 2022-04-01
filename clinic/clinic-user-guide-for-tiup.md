@@ -18,6 +18,7 @@ PingCAP Clinic is currently in the Technical Preview stage.
 - [Troubleshoot cluster problems remotely](#troubleshoot-cluster-problems-remotely)
 
     - When your cluster has some problems, if you need to contact PingCAP technical support, you can perform the following operations to facilitate the remote troubleshooting: collect diagnostic data with Diag, upload the collected data to the Clinic Server, and provide the data access link to the technical support staff.
+    - When your cluster has some problems, if you cannot analyze the problems immediately, you can use Diag to collect and save the data for later analysis.
 
 - [Perform a quick check on the cluster status locally](#perform-a-quick-check-on-the-cluster-status-locally)
 
@@ -199,7 +200,7 @@ Depending on the network connection of the cluster, you can choose one of the fo
 
 > **Note:**
 >
-> If you did not set a token in Diag before uploading data, Diag reports the upload failed and reminds you to set a token. To get a token, see [the second step in Prerequisites](#prerequisites).
+> If you did not set a token in Diag before uploading data, Diag reports the upload failed and reminds you to set a token. To set a token, see [the second step in Prerequisites](#prerequisites).
 
 #### Method 1. Upload directly
 
@@ -212,6 +213,8 @@ tiup diag upload
 ```
 
 The following is an example output:
+
+{{< copyable "shell-regular" >}}
 
 ```bash
 [root@Copy-of-VM-EE-CentOS76-v1 qiaodan]# tiup diag upload /home/qiaodan/diag-fNTnz5MGhr6
