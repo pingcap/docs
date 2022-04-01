@@ -18,7 +18,7 @@ To speed up the table creation process, and thereby reduce the time for restorin
 
 If you need to restore data with a massive amount of tables, for example, 50000 tables, you can use the Batch Create Table feature to speed up the restore process.
 
-For the detailed effect, see [Test for the Batch Create Table Feature](#test-batch-create-table).
+For the detailed effect, see [Test for the Batch Create Table Feature](#test-for-the-batch-create-table-feature).
 
 ## Use the Batch Create Table feature
 
