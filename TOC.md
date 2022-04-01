@@ -292,6 +292,7 @@
         - [Stop a Task](/dm/dm-stop-task.md)
         - [Export and Import Data Sources and Task Configuration of Clusters](/dm/dm-export-import-config.md)
         - [Handle Failed DDL Statements](/dm/handle-failed-ddl-statements.md)
+        - [Use WebUI to Manage Tasks](/dm/dm-webui-guide.md)
       - [Manually Handle Sharding DDL Lock](/dm/manually-handling-sharding-ddl-locks.md)
       - [Switch the MySQL Instance to Be Migrated](/dm/usage-scenario-master-slave-switch.md)
       - [Manage Schemas of Tables to be Migrated](/dm/dm-manage-schema.md)
@@ -552,6 +553,7 @@
     - [Views](/views.md)
     - [Partitioning](/partitioned-table.md)
     - [Temporary Tables](/temporary-tables.md)
+    - [Cached Tables](/cached-tables.md)
     - Character Set and Collation
       - [Overview](/character-set-and-collation.md)
       - [GBK](/character-set-gbk.md)

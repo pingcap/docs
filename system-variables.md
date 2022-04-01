@@ -881,6 +881,24 @@ Query OK, 0 rows affected (0.09 sec)
 - Default value: `OFF`
 - This variable is used to control whether to enable the [Top SQL](/dashboard/top-sql.md) feature.
 
+### tidb_top_sql_max_meta_count (New in v6.0.0)
+
+- Scope: GLOBAL
+- Default value: `5000`
+- Range: `[1, 10000]`
+- This variable is used to control the maximum number of SQL statement types collected by [Top SQL](/dashboard/top-sql.md) per minute.
+
+### tidb_top_sql_max_time_series_count (New in v6.0.0)
+
+- Scope: GLOBAL
+- Default value: `100`
+- Range: `[1, 5000]`
+- This variable is used to control how many SQL statements that contribute the most to the load (that is, top N) can be recorded by [Top SQL](/dashboard/top-sql.md) per minute.
+
+> **Note:**
+>
+> Currently, the Top SQL page in TiDB Dashboard only displays the top 5 types of SQL queries that contribute the most to the load, which is irrelevant with the configuration of `tidb_top_sql_max_time_series_count`.
+
 ### tidb_enable_tso_follower_proxy <span class="version-mark">New in v5.3.0</span>
 
 - Scope: GLOBAL
@@ -1649,6 +1667,14 @@ SET tidb_slow_log_threshold = 200;
 - Scope: SESSION | GLOBAL
 - Default value: `OFF`
 - This variable is used to control whether the `SYSDATE` function can be replaced by the `NOW` function. This configuration item has the same effect as the MySQL option [`sysdate-is-now`](https://dev.mysql.com/doc/refman/8.0/en/server-options.html#option_mysqld_sysdate-is-now).
+
+### tidb_table_cache_lease (New in v6.0.0)
+
+- Scope: GLOBAL
+- Default value: `3`
+- Range: `[1, 10]`
+- Unit: Seconds
+- This variable is used to control the lease time of [cached tables](/cached-tables.md) with a default value of `3`. The value of this variable affects the modification to cached tables. After a modification is made to cached tables, the longest waiting time might be `tidb_table_cache_lease` seconds. If the table is read-only or can accept a high write latency, you can increase the value of this variable to increase the valid time for caching tables and to reduce the frequency of lease renewal.
 
 ### tidb_tmp_table_max_size <span class="version-mark">New in v5.3.0</span>
 
