@@ -6,7 +6,7 @@ aliases: ['/docs/tidb-data-migration/dev/precheck/']
 
 # Migration Task Precheck
 
-This document introduces the DM precheck feature, which detects errors in the upstream MySQL instance configurations before the migration task starts.
+Before using DM to migrate data from upstream to downstream, a precheck helps detect errors in the upstream database configurations and ensures that the migration goes smoothly. This document introduces the DM precheck feature, including its usage scenario, check items, and arguments.
 
 ## Usage scenario
 
