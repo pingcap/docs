@@ -30,7 +30,7 @@ This section lists all the precheck items.
 
 > **Note:**
 >
->  In this document, check items that must be passed are labeled "(mandatory)".  
+>  In this document, check items that must be passed are labeled "(Mandatory)".  
 
 > - If a mandatory check item does not pass, DM returns an error after the check and does not proceed with the migration task. In this case, modify the configurations according to the error message and retry the task after meeting the precheck requirements.
 >
