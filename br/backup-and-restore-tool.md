@@ -162,14 +162,14 @@ Note that skipping the version check might introduce incompatibility. The versio
 
 #### Check for the `new_collations_enabled_on_first_bootstrap` variable
 
-Since TiDB v6.0.0, the default value of [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) has changed from `false` to `true`. When the value `new_collations_enabled_on_first_bootstrap` is consistent between the upstream and downstream clusters, BR safely restores the backup data of the upstream cluster to the downstream cluster.
+Since TiDB v6.0.0, the default value of [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) has changed from `false` to `true`. When the value of `new_collations_enabled_on_first_bootstrap` is consistent between the upstream and downstream clusters, BR safely restores the data backed up in the upstream cluster to the downstream cluster.
 
-Since v6.0.0, BR backs up the `new_collations_enabled_on_first_bootstrap` configuration of the upstream cluster and then checks whether this configuration is consistent between the upstream and downstream clusters. If the value of `new_collations_enabled_on_first_bootstrap` is inconsistent between the upstream and downstream clusters, BR does not perform data restore and reports an error.
+Since v6.0.0, BR backs up the `new_collations_enabled_on_first_bootstrap` configuration of the upstream cluster and then checks whether the value of this configuration is consistent between the upstream and downstream clusters. If the value is inconsistent between the upstream and downstream clusters, BR does not perform the data restore and reports an error.
 
-If you need to restore data in a TiDB cluster of an earlier version to TiDB v6.0.0 or a later version, you need manually to check whether the value of `new_collations_enabled_on_first_bootstrap` is consistent between the upstream and downstream clusters:
+Suppose that you have backed up the data in a TiDB cluster of an earlier version of v6.0.0, and you want to restore this data to a TiDB cluster of v6.0.0 or later versions. In this situation, you need manually to check whether the value of `new_collations_enabled_on_first_bootstrap` is consistent between the upstream and downstream clusters:
 
-- If the `new_collations_enabled_on_first_bootstrap` configuration value is consistent, you can add `--check-requirements=false` to the restore command to skip this configuration check.
-- If the `new_collations_enabled_on_first_bootstrap` configuration value is inconsistent and you forcibly perform the restore, BR will report a [data validation error](/br/backup-and-restore-tool.md#usage-restrictions).
+- If the value is consistent, you can add `--check-requirements=false` to the restore command to skip this configuration check.
+- If the value is inconsistent, and you forcibly perform the restore, BR reports a [data validation error](/br/backup-and-restore-tool.md#usage-restrictions).
 
 ### Back up and restore table data in the `mysql` system schema (experimental feature)
 
