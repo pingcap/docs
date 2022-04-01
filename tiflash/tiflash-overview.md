@@ -33,14 +33,10 @@ When TiDB receives the DDL command to create replicas in TiFlash, the `pd buddy`
 
 TiFlash has the following key features:
 
-- [TiFlash Overview](#tiflash-overview)
-  - [Architecture](#architecture)
-  - [Key features](#key-features)
-    - [Asynchronous replication](#asynchronous-replication)
-    - [Consistency](#consistency)
-    - [Intelligent choice](#intelligent-choice)
-    - [Computing acceleration](#computing-acceleration)
-  - [See also](#see-also)
+- [Asynchronous replication](#asynchronous-replication)
+- [Consistency](#consistency)
+- [Intelligent choice](#intelligent-choice)
+- [Computing acceleration](#computing-acceleration)
 
 ### Asynchronous replication
 
