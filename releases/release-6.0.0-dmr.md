@@ -336,7 +336,7 @@ TiDB Enterprise Manager (TiEM) is an enterprise-level database management platfo
 
 TiEM not only provides full lifecycle visual management for TiDB clusters, but also provides one-stop services: parameter management, version upgrades, cluster clone, active-standby cluster switching, data import and export, data replication, and data backup and restore services. TiEM can improve the efficiency of DevOps on TiDB and reduce the DevOps cost for enterprises.
 
-Currently, TiEM is provided in the [TiDB Enterprise](https://en.pingcap.com/tidb-enterprise/) edition only. To get TiEM and its documentation, contact us via the [TiDB Enterprise](https://en.pingcap.com/tidb-enterprise/) page.
+Currently, TiEM is provided in the [TiDB Enterprise](https://en.pingcap.com/tidb-enterprise/) edition only. To get TiEM, contact us via the [TiDB Enterprise](https://en.pingcap.com/tidb-enterprise/) page.
 
 ## Improvements
 
