@@ -1,7 +1,6 @@
 ---
 title: Hybrid Deployment Topology
 summary: Learn the hybrid deployment topology of TiDB clusters.
-aliases: ['/docs/dev/hybrid-deployment-topology/']
 ---
 
 # Hybrid Deployment Topology
@@ -48,7 +47,7 @@ This section introduces the key parameters when you deploy multiple instances on
             ```
             readpool.unified.max-thread-count = cores * 0.8 / the number of TiKV instances
             ```
-        
+
     - To configure the storage CF (all RocksDB column families) to be self-adaptive to memory. By configuring the `storage.block-cache.capacity` parameter, you can make CF automatically balance the memory usage.
 
         - `storage.block-cache` enables the CF self-adaptation by default. You do not need to modify it.
@@ -56,7 +55,7 @@ This section introduces the key parameters when you deploy multiple instances on
             ```yaml
             storage.block-cache.shared: true
             ```
-        
+
         - The calculation method:
 
             ```
@@ -95,7 +94,7 @@ This section introduces the key parameters when you deploy multiple instances on
 - `numa_node` core binding
 
     - In the instance parameter module, configure the corresponding `numa_node` parameter and add the number of CPU cores.
-    
+
     - Before using NUMA to bind cores, make sure that the numactl tool is installed, and confirm the information of CPUs in the physical machines. After that, configure the parameters.
 
     - The `numa_node` parameter corresponds to the `numactl --membind` configuration.

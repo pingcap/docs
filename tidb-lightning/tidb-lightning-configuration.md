@@ -1,7 +1,6 @@
 ---
 title: TiDB Lightning Configuration
 summary: Learn about the CLI usage and sample configuration in TiDB Lightning.
-aliases: ['/docs/dev/tidb-lightning/tidb-lightning-configuration/','/docs/dev/reference/tools/tidb-lightning/config/']
 ---
 
 # TiDB Lightning Configuration
@@ -243,14 +242,14 @@ trim-last-separator = false
 # schema = '$1'
 # table = '$2'
 # type = '$3'
-# 
+#
 # Sets rules for merging sharded schemas and tables. Specifically, import `table1` and `table2` from `my_db1`, and `table3` and `table4` from `my_db2` to `table5` in `my_db`.
 # [[routes]]
 # schema-pattern = "my_db1"
 # table-pattern = "table[1-2]"
 # target-schema = "my_db"
 # target-table = "table5"
-# 
+#
 # [[routes]]
 # schema-pattern = "my_db2"
 # table-pattern = "table[3-4]"

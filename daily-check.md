@@ -1,7 +1,6 @@
 ---
 title: Daily Check
 summary: Learn about performance indicators of the TiDB cluster.
-aliases: ['/docs/dev/daily-check/']
 ---
 
 # Daily Check

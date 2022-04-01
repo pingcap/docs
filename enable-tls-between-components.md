@@ -1,7 +1,6 @@
 ---
 title: Enable TLS Between TiDB Components
 summary: Learn how to enable TLS authentication between TiDB components.
-aliases: ['/docs/dev/enable-tls-between-components/','/docs/dev/how-to/secure/enable-tls-between-components/']
 ---
 
 # Enable TLS Between TiDB Components
@@ -197,7 +196,7 @@ To verify component caller's identity, you need to mark the certificate user ide
     [security]
     cert-allowed-cn = ["PD-Server", "TiKV-Server", "TiFlash-Server"]
     ```
-    
+
 ### Reload certificates
 
 To reload the certificates and the keys, TiDB, PD, TiKV, and all kinds of clients reread the current certificates and the key files each time a new connection is created. Currently, you cannot reload the CA certificate.

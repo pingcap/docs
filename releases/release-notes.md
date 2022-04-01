@@ -1,6 +1,5 @@
 ---
 title: Release Notes
-aliases: ['/docs/dev/releases/release-notes/','/docs/dev/releases/rn/']
 ---
 
 # TiDB Release Notes
