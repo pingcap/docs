@@ -7,7 +7,7 @@ summary: Learn how to deal with errors reported by the consistency check between
 
 TiDB checks consistency between data and index when it executes transactions or the [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) statement. If the check finds that a record key-value and an index key-value are inconsistent, that is, a key-value pair storing row data and a key-value pair storing the corresponding index are inconsistent (for example, more indexes or missing indexes), TiDB reports a data inconsistency error and prints the related errors in error logs.
 
-This document describes the meanings of data inconsistency errors and provides some methods to bypass the consistency check. When a data consistency error occurs, contact PingCAP technical support to troubleshoot or fix it.
+This document describes the meanings of data inconsistency errors and provides some methods to bypass the consistency check. When a data consistency error occurs, contact PingCAP technical support for troubleshooting.
 
 ## Error explanation
 
@@ -74,14 +74,14 @@ This error indicates that `index-value` is null and `record-values` is not null,
 When a data consistency error occurs, the reasons can be as follows:
 
 - The data and index in the existing data are consistent and the current version of TiDB has a bug. If an ongoing transaction is about to write inconsistent data, TiDB aborts the transaction.
-- The data and index in the existing data are inconsistent. The inconsistent data could be from an error or a dangerous operation in the past or caused by a TiDB bug.
+- The data and index in the existing data are inconsistent. The inconsistent data could be from a dangerous operation erroneously in the past or caused by a TiDB bug.
 - The data and index are consistent but the detection algorithm has a bug that causes errors by mistake.
 
-If you receive a data inconsistency error, contact PingCAP technical support immediately to troubleshoot or fix it instead of dealing with the error by yourself. If PingCAP technical support confirms that the error is reported by mistake, or your application needs to skip such errors urgently, you can use the following methods to bypass the check.
+If you receive a data inconsistency error, contact PingCAP technical support for troubleshooting immediately instead of dealing with the error by yourself. If PingCAP technical support confirms that the error is reported by mistake, or your application needs to skip such errors urgently, you can use the following methods to bypass the check.
 
 ### Disable error check
 
-For some errors reported in transaction execution, you can bypass the corresponding check as follows:
+For the following errors reported in transaction execution, you can bypass the corresponding check:
 
 - To bypass the check of errors 8138, 8139, and 8140, configure `set @@tidb_enable_mutation_checker=0`.
 - To bypass the check of error 8141, configure `set @@tidb_txn_assertion_level=OFF`.
