@@ -11,7 +11,7 @@ To customize the configurations of the monitoring servers mentioned above, you c
 
 > **Note:**
 >
-> - Do not modify the configurations directly to customize the configurations of the monitoring servers. Because these modifications will be overwritten by later TiUP operations such as deployment, scaling out, scaling in, and reloading.
+> - Do not modify the configurations files of the monitoring server directly. Because these modifications will be overwritten by later TiUP operations such as deployment, scaling out, scaling in, and reloading.
 >
 > - If your monitoring servers are not deployed and managed by TiUP, you can directly modify the configuration files of the monitoring servers instead of referring to this document.
 >
