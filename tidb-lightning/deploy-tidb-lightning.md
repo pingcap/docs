@@ -1,7 +1,6 @@
 ---
 title: TiDB Lightning Deployment
 summary: Deploy TiDB Lightning to quickly import large amounts of new data.
-aliases: ['/docs/dev/tidb-lightning/deploy-tidb-lightning/','/docs/dev/reference/tools/tidb-lightning/deployment/']
 ---
 
 # TiDB Lightning Deployment
@@ -69,7 +68,7 @@ You can find deployment instructions in [TiDB Quick Start Guide](/quick-start-wi
 
 #### Step 2: Download the TiDB Lightning installation package
 
-Refer to the [TiDB enterprise tools download page](/download-ecosystem-tools.md#tidb-lightning) to download the TiDB Lightning package. 
+Refer to the [TiDB enterprise tools download page](/download-ecosystem-tools.md#tidb-lightning) to download the TiDB Lightning package.
 
 > **Note:**
 >

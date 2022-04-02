@@ -1,7 +1,6 @@
 ---
 title: Backup & Restore FAQ
 summary: Learn about Frequently Asked Questions (FAQ) and the solutions of BR.
-aliases: ['/docs/dev/br/backup-and-restore-faq/']
 ---
 
 # Backup & Restore FAQ
@@ -163,6 +162,12 @@ You can use [`filter.rules`](https://github.com/pingcap/tiflow/blob/7c3c2336f981
 ## Does BR back up the `SHARD_ROW_ID_BITS` and `PRE_SPLIT_REGIONS` information of a table? Does the restored table have multiple Regions?
 
 Yes. BR backs up the [`SHARD_ROW_ID_BITS` and `PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions) information of a table. The data of the restored table is also split into multiple Regions.
+
+## What should I do if the restore fails with the error message `the entry too large, the max entry size is 6291456, the size of data is 7690800`?
+
+You can try to reduce the number of tables to be created in a batch by setting `--ddl-batch-size` to `128` or a smaller value.
+
+When using BR to restore the backup data with the value of [`--ddl-batch-size`](/br/br-batch-create-table.md#how to use) greater than `1`, TiDB writes a DDL job of table creation to the DDL jobs queue that is maintained by TiKV. At this time, the total size of all tables schema sent by TiDB at one time should not exceed 6 MB, because the maximum value of job messages is `6 MB` by default (it is **not recommended** to modify this value. For details, see [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50) and [`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size)). Therefore, if you set `--ddl-batch-size` to an excessively large value, the schema size of the tables sent by TiDB in a batch at one time exceeds the specified value, which causes BR to report the `entry too large, the max entry size is 6291456, the size of data is 7690800` error.
 
 ## Why is the `region is unavailable` error reported for a SQL query after I use BR to restore the backup data?
 

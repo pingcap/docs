@@ -1,7 +1,6 @@
 ---
 title: TiDB Data Migration Quick Start
 summary: Learn how to quickly deploy a DM cluster using binary packages.
-aliases: ['/docs/tidb-data-migration/dev/get-started/']
 ---
 
 # Quick Start Guide for TiDB Data Migration
@@ -270,7 +269,7 @@ After inserting the [sample data](#prepare-sample-data) into `MySQL-3306`, take 
 
 Now you successfully create a data migration task that migrates data from `MySQL-3306` to the downstream TiDB instance.
 
-### Check status of the data migration task 
+### Check status of the data migration task
 
 After the data migration task is created, you can use `dmtcl query-status` to check the status of the task. See the following example:
 

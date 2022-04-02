@@ -1,7 +1,6 @@
 ---
 title: TiSpark User Guide
 summary: Use TiSpark to provide an HTAP solution to serve as a one-stop solution for both online transactions and analysis.
-aliases: ['/docs/dev/tispark-overview/','/docs/dev/reference/tispark/']
 ---
 
 # TiSpark User Guide
@@ -77,7 +76,7 @@ To co-deploy TiKV and TiSpark, add TiSpark required resources to the TiKV reserv
 
 ### Deploy TiSpark with a standalone Spark cluster
 
-For more information, see the [official configuration](https://spark.apache.org/docs/latest/spark-standalone.html) on the Spark website. 
+For more information, see the [official configuration](https://spark.apache.org/docs/latest/spark-standalone.html) on the Spark website.
 
 You are advised to use a standalone Spark cluster. To install Spark Standalone mode, you can simply place a compiled version of Spark on each node on the cluster. If you encounter any problem, see its [official website](https://spark.apache.org/docs/latest/spark-standalone.html). And you are welcome to [file an issue](https://github.com/pingcap/tispark/issues/new) on our GitHub.
 
@@ -102,7 +101,7 @@ cd spark
 Download TiSpark's jar package [here](https://github.com/pingcap/tispark/releases) and place it in the `$SPARKPATH/jars` folder.
 
 > **Note:**
-> 
+>
 > TiSpark v2.1.x and older versions have file names that look like `tispark-core-2.1.9-spark_2.4-jar-with-dependencies.jar`. Please check the [releases page on GitHub](https://github.com/pingcap/tispark/releases) for the exact file name for the version you want.
 
 ```
@@ -168,7 +167,7 @@ spark-shell --jars $TISPARK_FOLDER/tispark-${name_with_version}.jar
 
 ## Using Spark Shell and Spark SQL
 
-Assume that you have successfully started the TiSpark cluster as described above. The following describes how to use Spark SQL for OLAP analysis on a table named `lineitem` in the `tpch` database. 
+Assume that you have successfully started the TiSpark cluster as described above. The following describes how to use Spark SQL for OLAP analysis on a table named `lineitem` in the `tpch` database.
 
 To generate the test data via a TiDB server available on 192.168.1.101:
 

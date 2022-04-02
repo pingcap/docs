@@ -1,7 +1,6 @@
 ---
 title: Quick Start Guide for the TiDB Database Platform
 summary: Learn how to quickly get started with the TiDB platform and see if TiDB is the right choice for you.
-aliases: ['/docs/dev/quick-start-with-tidb/','/docs/dev/test-deployment-using-docker/']
 ---
 
 # Quick Start Guide for the TiDB Database Platform
@@ -19,7 +18,7 @@ This guide walks you through the quickest way to get started with TiDB. For non-
 >
 >     - To deploy an on-premises production cluster, see [production installation guide](/production-deployment-using-tiup.md).
 >     - To deploy TiDB in Kubernetes, see [Get Started with TiDB in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/get-started).
->     - To manage TiDB in the cloud, see [TiDB Cloud Quick Start](https://docs.pingcap.com/tidbcloud/beta/tidb-cloud-quickstart).
+>     - To manage TiDB in the cloud, see [TiDB Cloud Quick Start](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart).
 
 ## Deploy a local test cluster
 
