@@ -83,7 +83,7 @@ For the full data migration mode (`task-mode: full`), in addition to the [common
 
 * Auto-increment primary key in sharded tables
 
-    - If sharded tables have auto-increment primary keys, the precheck returns a warning. If there are conflicts in auto-increment primary keys, see [Handle conflicts of auto-increment primary key](/dm/shard-merge-best-practices.md#Handling-auto-increment-primary-key-conflicts) for solutions.
+    - If sharded tables have auto-increment primary keys, the precheck returns a warning. If there are conflicts in auto-increment primary keys, see [Handle conflicts of auto-increment primary key](/dm/shard-merge-best-practices.md#handle-conflicts-of-auto-increment-primary-key) for solutions.
 
 ### Check items for incremental data migration
 
@@ -109,7 +109,7 @@ For the incremental data migration mode (`task-mode: incremental`), in addition 
 
 ### Check items for full and incremental data migration
 
-For the full and incremental data migration mode (`task-mode: all`), in addition to the [common check items](#common-check-items), the precheck also includes the [full data migration check items](#full-data-migration-check-items) and the [incremental data migration check items](#incremental-data-migration-check-items).
+For the full and incremental data migration mode (`task-mode: all`), in addition to the [common check items](#common-check-items), the precheck also includes the [full data migration check items](#check-items-for-full-data-migration) and the [incremental data migration check items](#check-items-for-incremental-data-migration).
 
 ## Configure precheck arguments
 
