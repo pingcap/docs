@@ -496,19 +496,11 @@ During cluster upgrade, SQL Plan Management (SPM) might cause compatibility issu
     ```sql
     -- Check whether `tidb_evolve_plan_baselines` is disabled in the earlier version.
 
-<<<<<<< HEAD
-    select @@global.tidb_evolve_plan_baselines;
-
-    -- If `tidb_evolve_plan_baselines` is still enabled, disable it.
-
-    set global tidb_evolve_plan_baselines = off;
-=======
     SELECT @@global.tidb_evolve_plan_baselines;
 
     -- If `tidb_evolve_plan_baselines` is still enabled, disable it.
 
     SET GLOBAL tidb_evolve_plan_baselines = OFF;
->>>>>>> 4d59789e7 (update SPM doc for SQL plan auto capture (#7975))
     ```
 
 * Before you upgrade from v4.0 to the current version, you need to check whether the syntax of all queries corresponding to the available SQL bindings is correct in the new version. If any syntax errors exist, delete the corresponding SQL binding. To do that, perform the following steps.
@@ -518,11 +510,7 @@ During cluster upgrade, SQL Plan Management (SPM) might cause compatibility issu
     ```sql
     -- Check the query corresponding to the available SQL binding in the version to be upgraded.
 
-<<<<<<< HEAD
-    select bind_sql from mysql.bind_info where status = 'using';
-=======
     SELECT bind_sql FROM mysql.bind_info WHERE status = 'using';
->>>>>>> 4d59789e7 (update SPM doc for SQL plan auto capture (#7975))
 
     -- Verify the result from the above SQL query in the test environment of the new version.
 
