@@ -21,13 +21,13 @@ PingCAP Clinic is currently in the Technical Preview stage. This service provide
 
     Clinic Server is a cloud service deployed in the cloud. By providing diagnostic services in the SaaS model, the Clinic Server can not only receive uploaded diagnostic data but also work as an online diagnostic environment to store data, view data, and provide cluster diagnostic reports.
 
-    Currently, you can upload the collected diagnostic data to [Clinic Server China](https://clinic.pingcap.com.cn) only. The uploaded data is stored in the AWS S3 China (Beijing) region server set up by PingCAP. Clinic Server Global will be provided soon with a new URL. The data uploaded to Clinic Server Global will be stored in one of the AWS S3 Regions in North America.
+    Currently, you can upload the collected diagnostic data to [Clinic Server China](https://clinic.pingcap.com.cn) only. The uploaded data is stored in the AWS S3 China (Beijing) region server set up by PingCAP. Clinic Server Global will be provided soon with a new URL. Also, the data uploaded to Clinic Server Global will be stored in one of the AWS S3 Regions in North America.
 
 ## User scenarios
 
 - Troubleshoot cluster problems remotely
 
-    When your cluster has some problems that cannot be fixed quickly, you can ask for help at [TiDB Community slack channel](https://tidbcommunity.slack.com/archives/CH7TTLL7P) or contact PingCAP technical support. When contacting technical support for remote assistance, you need to save various diagnostic data from the cluster and forward the data to the support staff. In this case, you can use Diag client to collect diagnostic data with one click. Diag client helps you to collect complete diagnostic data quickly, which can avoid complex manual data collection operations. After collecting data, you can upload the data to the Clinic Server for PingCAP technical support staff to troubleshoot cluster problems. The Clinic Server provides secure storage for uploaded diagnostic data and supports the online diagnosis, which greatly improves the troubleshooting efficiency.
+    When your cluster has some problems that cannot be fixed quickly, you can ask for help at [TiDB Community slack channel](https://tidbcommunity.slack.com/archives/CH7TTLL7P) or contact PingCAP technical support. When contacting technical support for remote assistance, you need to save various diagnostic data from the cluster and forward the data to the support staff. In this case, you can use Diag to collect diagnostic data with one click. Diag helps you to collect complete diagnostic data quickly, which can avoid complex manual data collection operations. After collecting data, you can upload the data to the Clinic Server for PingCAP technical support staff to troubleshoot cluster problems. The Clinic Server provides secure storage for uploaded diagnostic data and supports the online diagnosis, which greatly improves the troubleshooting efficiency.
 
 - Perform a quick check on the cluster status locally
 
