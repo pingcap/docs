@@ -1,12 +1,6 @@
 ---
-<<<<<<< HEAD
-title: Precheck the Upstream MySQL Instance Configurations
-summary: Learn how to use the precheck feature provided by DM to detect errors in the upstream MySQL instance configurations.
-=======
 title: Migration Task Precheck
 summary: Learn the precheck that DM performs before starting a migration task.
-aliases: ['/docs/tidb-data-migration/dev/precheck/']
->>>>>>> b7570d403 (dm: update dm-precheck.md  (#7907))
 ---
 
 # Migration Task Precheck
