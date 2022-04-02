@@ -376,11 +376,11 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
     - Improve the Raftstore sampling accuracy for large key range batches [#11039](https://github.com/tikv/tikv/pull/11039)
     - Add the correct "Content-Type" for `debug/pprof/profile` to make the Profile more easily identified [#11521](https://github.com/tikv/tikv/issues/11521)
-    - Renew the lease time of the leader infinitely when the Raftstore has heartbeats or handles read requests, which helps reduce latency jitter [#11579](https://github.com/tikv/tikv/pull/11579)
+    - Renew the lease time of the leader infinitely when the Raftstore has heartbeats or handles read requests, which helps reduce latency jitter [#11579](https://github.com/tikv/tikv/issues/11579)
     - Choose the store with the least cost when switching the leader, which helps improve performance stability [#10602](https://github.com/tikv/tikv/issues/10602)
     - Fetch Raft logs asynchronously to reduce the performance jitter caused by blocking the Raftstore [#11320](https://github.com/tikv/tikv/issues/11320)
     - Support the `QUARTER` function in vector calculation [#5751](https://github.com/tikv/tikv/issues/5751)
-    - Support pushing down the `BIT` data type to TiKV [#12037](https://github.com/tikv/tikv/pull/12037)
+    - Support pushing down the `BIT` data type to TiKV [#30738](https://github.com/pingcap/tidb/issues/30738)
     - Support pushing down the `MOD` function and the `SYSDATE` function to TiKV [#11916](https://github.com/tikv/tikv/issues/11916)
     - (dup: release-5.3.1.md > Improvements> TiKV)- Reduce the TiCDC recovery time by reducing the number of the Regions that require the Resolve Locks step [#11993](https://github.com/tikv/tikv/issues/11993)
     - Support dynamically modifying `raftstore.raft-max-inflight-msgs` [#11865](https://github.com/tikv/tikv/issues/11865)
@@ -431,15 +431,15 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
     + TiDB Data Migration (DM)
 
-        - Support starting a task when upstream table schemas are inconsistent and in optimistic mode [#3903](https://github.com/pingcap/tiflow/pull/3903)
-        - Support creating a task in the `stopped` state [#4510](https://github.com/pingcap/tiflow/pull/4510)
-        - Support Syncer using the working directory of the DM-worker rather than `/tmp` to write internal files, and cleaning the directory after the task is stopped [#4732](https://github.com/pingcap/tiflow/pull/4732)
+        - Support starting a task when upstream table schemas are inconsistent and in optimistic mode [#3629](https://github.com/pingcap/tiflow/issues/3629) [#3708](https://github.com/pingcap/tiflow/issues/3708) [#3786](https://github.com/pingcap/tiflow/issues/3786)
+        - Support creating a task in the `stopped` state [#4484](https://github.com/pingcap/tiflow/issues/4484)
+        - Support Syncer using the working directory of the DM-worker rather than `/tmp` to write internal files, and cleaning the directory after the task is stopped [#4107](https://github.com/pingcap/tiflow/issues/4107)
         - Precheck has improved. Some important checks are no longer skipped. [#3608](https://github.com/pingcap/tiflow/issues/3608)
 
     + TiDB Lightning
 
-        - Add more retryable error types [#31484](https://github.com/pingcap/tidb/pull/31484)
-        - Tolerate TiKV node address changes during importing [#32876](https://github.com/pingcap/tidb/pull/32876)
+        - Add more retryable error types [#31376](https://github.com/pingcap/tidb/issues/31376)
+        - Tolerate TiKV node address changes during importing [#32875](https://github.com/pingcap/tidb/issues/32875)
         - Support the base64 format password string [#31194](https://github.com/pingcap/tidb/issues/31194)
         - Standardize error codes and error outputs [#32239](https://github.com/pingcap/tidb/issues/32239)
 
@@ -450,7 +450,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
     - Fix the bug that the placement rule reports an error when `SCHEDULE = majority_in_primary`, and `PrimaryRegion` and `Regions` are of the same value [#31271](https://github.com/pingcap/tidb/issues/31271)
     - (dup: release-5.3.1.md > Bug fixes> TiDB)- Fix the `invalid transaction` error when executing a query using index lookup join [#30468](https://github.com/pingcap/tidb/issues/30468)
     - Fix the bug that `show grants` returns incorrect results when two or more privileges are granted [#30855](https://github.com/pingcap/tidb/issues/30855)
-    - Fix the bug that `INSERT INTO t1 SET timestamp_col = DEFAULT` would set the timestamp to the zero timestamp for the field defaulted to CURRENT_TIMESTAMP [#29966](https://github.com/pingcap/tidb/pull/29966))
+    - Fix the bug that `INSERT INTO t1 SET timestamp_col = DEFAULT` would set the timestamp to the zero timestamp for the field defaulted to CURRENT_TIMESTAMP [#29926)](https://github.com/pingcap/tidb/issues/29926)
     - ​Fix errors reported in reading the results by avoiding encoding the maximum value and minimum non-null value of the string type [#31721](https://github.com/pingcap/tidb/issues/31721)
     - Fix load data panic if the data is broken at an escape character [#31589](https://github.com/pingcap/tidb/issues/31589)
     - (dup: release-5.3.1.md > Bug fixes> TiDB)- Fix the issue that the `greatest` or `least` function with collation gets a wrong result [#31789](https://github.com/pingcap/tidb/issues/31789)
@@ -513,10 +513,10 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
 + PD
 
-    - Fix the issue that the operator creates steps with meaningless Joint Consensus [#4534](https://github.com/tikv/pd/pull/4534)
-    - Fix a bug that the TSO revoking might get stuck when closing the PD client [#4550](https://github.com/tikv/pd/pull/4550)
-    - Fix the issue that the Region scatterer scheduling might cause lost peers [#4570](https://github.com/tikv/pd/pull/4570)
-    - Fix the issue that `Duration` fields of `dr-autosync` cannot be dynamically configured [#4653](https://github.com/tikv/pd/pull/4653)
+    - Fix the issue that the operator creates steps with meaningless Joint Consensus [#4362](https://github.com/tikv/pd/issues/4362) [#4444](https://github.com/tikv/pd/issues/4444)
+    - Fix a bug that the TSO revoking might get stuck when closing the PD client [#4549](https://github.com/tikv/pd/issues/4549)
+    - Fix the issue that the Region scatterer scheduling might cause lost peers [#4565](https://github.com/tikv/pd/issues/4565)
+    - Fix the issue that `Duration` fields of `dr-autosync` cannot be dynamically configured [#4651](https://github.com/tikv/pd/issues/4651)
 
 + TiFlash
 
