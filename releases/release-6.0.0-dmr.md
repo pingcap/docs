@@ -302,7 +302,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
 ### Data sharing and subscription
 
-- Support replicating 100K tables simultaneously
+- Support replicating 100,000 tables simultaneously
 
     By optimizing the data processing flow, TiCDC reduces the resource consumption of processing incremental data for each table, which greatly improves the replication stability and efficiency when replicating data in large clusters. The result of an internal test shows that TiCDC can stably support replicating 100,000 tables simultaneously.
 
