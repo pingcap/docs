@@ -5,7 +5,7 @@ summary: Learn how to use the PingCAP Clinic Diagnostic Service to troubleshoot 
 
 # Use PingCAP Clinic
 
-For TiDB clusters and DM clusters deployed using TiUP, you can use PingCAP Clinic Diagnostic Service (PingCAP Clinic) to troubleshoot cluster problems remotely and perform a quick check on cluster status locally using Diag client (Diag) and [Clinic Server China](https://clinic.pingcap.com.cn)(Clinic Server). For details about Diag and Clinic Server, see [PingCAP Clinic components](/clinic/clinic-introduction.md)。
+For TiDB clusters and DM clusters deployed using TiUP, you can use PingCAP Clinic Diagnostic Service (PingCAP Clinic) to troubleshoot cluster problems remotely and perform a quick check on cluster status locally using Diag client (Diag) and [Clinic Server China](https://clinic.pingcap.com.cn) (Clinic Server). For details about Diag and Clinic Server, see [PingCAP Clinic components](/clinic/clinic-introduction.md).
 
 PingCAP Clinic is currently in the Technical Preview stage.
 
@@ -224,7 +224,7 @@ Completed!
 Download URL: "https://clinic.pingcap.com.cn/portal/#/orgs/4/clusters/XXXX"
 ```
 
-After the upload is complete, you need to send the data access link of `Download URL` to the PingCAP technical support staff you contacted before.
+After the upload is complete, you can open the link of `Download URL` to see the uploaded data or send the link to the PingCAP technical support staff you contacted before.
 
 #### Method 2. Pack and upload data
 
@@ -267,7 +267,8 @@ If the network where your cluster is located cannot access the internet, you nee
     Download URL: "https://clinic.pingcap.com.cn/portal/#/orgs/4/clusters/XXXX"
     ```
 
-3. After the upload is complete, send the data access link of `Download URL` to the PingCAP technical support staff you contacted before.
+3. Suggested change 
+After the upload is complete, you can open the link of `Download URL` to see the uploaded data or send the link to the PingCAP technical support staff you contacted before.
 
 ## Perform a quick check on the cluster status locally
 
@@ -353,7 +354,7 @@ You can have a quick check on the cluster status locally using Diag. Even if you
 
 2. After uploading data, I cannot open the returned data access link. What should I do?
 
-    Try logging in to [Clinic Server](https://clinic.pingcap.com.cn) first. If you still cannot open the link, check whether you have permission to view the data. If not, contact the data owner for permission. After getting the permission, try logging in to Clinic server and opening the link again.
+    Try logging in to [Clinic Server](https://clinic.pingcap.com.cn) first. If you still cannot open the link, check whether you have permission to view the data. If not, contact the data owner for permission. After getting the permission, try logging in to Clinic Server and opening the link again.
 
 3. How long will the uploaded data be kept on the Clinic Server?
 
