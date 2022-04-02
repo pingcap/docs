@@ -1,7 +1,6 @@
 ---
 title: Scale the TiDB Cluster Using TiUP
 summary: Learn how to scale the TiDB cluster using TiUP.
-aliases: ['/docs/dev/scale-tidb-using-tiup/','/docs/dev/how-to/scale/with-tiup/']
 ---
 
 # Scale the TiDB Cluster Using TiUP
@@ -397,7 +396,7 @@ In special cases (such as when a node needs to be forcibly taken down), or if th
         > **Note:**
         >
         > If multiple PD instances exist in the cluster, you only need to specify the IP address:port of an active PD instance in the above command.
-        
+
 3. Wait for the store of the TiFlash node to disappear or for the `state_name` to become `Tombstone` before you stop the TiFlash process.
 
 4. Manually delete TiFlash data files (whose location can be found in the `data_dir` directory under the TiFlash configuration of the cluster topology file).

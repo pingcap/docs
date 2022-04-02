@@ -1,7 +1,6 @@
 ---
 title: TiDB Lightning Backends
 summary: Learn the backends of TiDB Lightning.
-aliases: ['/docs/dev/tidb-lightning/tidb-lightning-tidb-backend/','/docs/dev/reference/tools/tidb-lightning/tidb-backend/','/tidb/dev/tidb-lightning-tidb-backend','/docs/dev/loader-overview/','/docs/dev/reference/tools/loader/','/docs/dev/load-misuse-handling/','/docs/dev/reference/tools/error-case-handling/load-misuse-handling/','/tidb/dev/load-misuse-handling','/tidb/dev/loader-overview/']
 ---
 
 # TiDB Lightning Backends
@@ -158,7 +157,7 @@ backend = "tidb"
 [mydumper]
 # Block size for file reading. Keep it longer than the longest string of
 # the data source.
-# read-block-size = "64KiB" 
+# read-block-size = "64KiB"
 
 # Minimum size (in terms of source data file) of each batch of import.
 # TiDB Lightning splits a large table into multiple data engine files according to this size.

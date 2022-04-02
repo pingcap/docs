@@ -1,14 +1,13 @@
 ---
 title: Predicates Push Down
 summary: Introduce one of the TiDB's logic optimization rules—Predicate Push Down (PPD).
-aliases: ['/tidb/dev/predicates-push-down']
 ---
 
 # Predicates Push Down (PPD)
 
 This document introduces one of the TiDB's logic optimization rules—Predicate Push Down (PPD). It aims to help you understand the predicate push down and know its applicable and inapplicable scenarios.
 
-PPD pushes down selection operators to data source as close as possible to complete data filtering as early as possible, which significantly reduces the cost of data transmission or computation. 
+PPD pushes down selection operators to data source as close as possible to complete data filtering as early as possible, which significantly reduces the cost of data transmission or computation.
 
 ## Examples
 
@@ -148,4 +147,4 @@ select id, a, @a:=@a+1 from t where a = @a;
 2 rows in set (0.00 sec)
 ```
 
-As you can see from this query, the value of `@a` will change during the query. So if you replace `a = @a` with `a = 1` and push it down to TiKV, it's not an equivalent execution plan. 
+As you can see from this query, the value of `@a` will change during the query. So if you replace `a = @a` with `a = 1` and push it down to TiKV, it's not an equivalent execution plan.

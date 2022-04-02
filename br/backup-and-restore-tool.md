@@ -1,7 +1,6 @@
 ---
 title: BR Tool Overview
 summary: Learn what is BR and how to use the tool.
-aliases: ['/docs/dev/br/backup-and-restore-tool/','/docs/dev/reference/tools/br/br/','/docs/dev/how-to/maintain/backup-and-restore/br/']
 ---
 
 # BR Tool Overview
