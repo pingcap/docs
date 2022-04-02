@@ -501,6 +501,7 @@ During cluster upgrade, SQL Plan Management (SPM) might cause compatibility issu
     -- If `tidb_evolve_plan_baselines` is still enabled, disable it.
 
     SET GLOBAL tidb_evolve_plan_baselines = OFF;
+
     ```
 
 * Before you upgrade from v4.0 to the current version, you need to check whether the syntax of all queries corresponding to the available SQL bindings is correct in the new version. If any syntax errors exist, delete the corresponding SQL binding. To do that, perform the following steps.
