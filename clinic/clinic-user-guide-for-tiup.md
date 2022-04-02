@@ -267,8 +267,7 @@ If the network where your cluster is located cannot access the internet, you nee
     Download URL: "https://clinic.pingcap.com.cn/portal/#/orgs/4/clusters/XXXX"
     ```
 
-3. Suggested change 
-After the upload is complete, you can open the link of `Download URL` to see the uploaded data or send the link to the PingCAP technical support staff you contacted before.
+3. After the upload is complete, you can open the link of `Download URL` to see the uploaded data or send the link to the PingCAP technical support staff you contacted before.
 
 ## Perform a quick check on the cluster status locally
 
