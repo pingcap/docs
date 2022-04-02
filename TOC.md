@@ -72,7 +72,6 @@
         - [Back up and Restore Data on Azure Blob Storage](/br/backup-and-restore-azblob.md)
       - BR Features
         - [Auto Tune](/br/br-auto-tune.md)
-        - [Batch Create Table](/br/br-batch-create-table.md)
       - [BR FAQ](/br/backup-and-restore-faq.md)
   - [Configure Time Zone](/configure-time-zone.md)
   - [Daily Checklist](/daily-check.md)
@@ -204,7 +203,6 @@
     - [External Storages](/br/backup-and-restore-storages.md)
     - BR Features
       - [Auto Tune](/br/br-auto-tune.md)
-      - [Batch Create Table](/br/br-batch-create-table.md)
     - [BR FAQ](/br/backup-and-restore-faq.md)
   - TiDB Binlog
     - [Overview](/tidb-binlog/tidb-binlog-overview.md)
