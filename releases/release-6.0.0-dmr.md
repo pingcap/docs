@@ -22,7 +22,8 @@ In 6.0.0-DMR, the key new features or improvements are as follows:
 - Optimize in-memory pessimistic locking
 - Provide TiDB Enterprise Manager, an enterprise-level database management platform
 - Provide PingCAP Clinic, the automatic diagnosis tool for TiDB (Technical Preview version)
-- Top SQL becomes generally available (GA)
+- Provide Top SQL, a performance troubleshooting feature for non-experts
+- Support Continuous Profiling
 - HTAP capabilities improve by x times
 - Strengthen disaster recovery
 
@@ -149,13 +150,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
 - GA of Continuous Profiling
 
-    TiDB Dashboard introduces the Continuous Profiling feature, providing the ability to automatically save instance performance analysis results as the cluster is running, improving the observability of TiDB cluster performance and helping to reduce troubleshooting time.
-
-    With Continuous Profiling, you can collect continuous performance data of TiDB, TiKV, and PD instances, and view the profiling results in flame graphs.
-
-    This feature is applicable to TiDB clusters deployed or upgraded using TiUP of v1.9.0 or later or TiDB Operator of v1.3.0 or later.
-
-    This feature is disabled by default. You can enable it in TiDB Dashboard.
+    TiDB Dashboard introduces the Continuous Profiling feature, which is now generally available in TiDB v6.0. Continuous profiling is not enabled by default. When enabled, the performance data of individual TiDB, TiKV, and PD instances will be collected all the time, with negligible overhead. With history performance data, technical experts can backtrack and pinpoint the root causes of issues like high memory consumption, even when the issues are difficult to reproduce. In this way, the mean time to recovery (MTTR) can be reduced.
 
     [User document](/dashboard/continuous-profiling.md)
 
