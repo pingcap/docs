@@ -9,7 +9,7 @@ This document provides the types of diagnostic data that can be collected by Pin
 
 The diagnostic data collected by PingCAP Clinic is **only** used for troubleshooting cluster problems.
 
-Set up on the PingCAP intranet (in China), the [Clinic Server China](https://clinic.pingcap.com.cn) is a cloud service deployed in the cloud. If you upload the collected diagnostic data to the Clinic Server China for PingCAP technical support staff to troubleshoot cluster problems remotely, the uploaded data is stored in the AWS S3 China (Beijing) Region server set up by PingCAP. Clinic Server Global also will be provided soon with a new URL and data storage location. The data uploaded to Clinic Server Global will be stored in one of AWS S3 Regions in North America.
+[Clinic Server](https://clinic.pingcap.com.cn) is a cloud service deployed in the cloud. At present, [Clinic Server China](https://clinic.pingcap.com.cn) provides service. If you upload the collected diagnostic data to the Clinic Server China for PingCAP technical support staff to troubleshoot cluster problems remotely, the uploaded data is stored in the AWS S3 China (Beijing) Region server set up by PingCAP. Also, Clinic Server Global will be provided soon with a new URL and data storage location. For details, see [PingCAP Clinic components](/clinic/clinic-introduction.md).
 
 PingCAP strictly controls permissions for data access and only allows authorized in-house technical support staff to access the uploaded data.
 

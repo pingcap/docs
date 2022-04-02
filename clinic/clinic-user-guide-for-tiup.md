@@ -53,7 +53,7 @@ Before using PingCAP Clinic, you need to install Diag (a component to collect da
 
 2. Get and set an access token (token) to upload data.
 
-    When uploading collected data through Diag, you need a token for user authentication. You can reuse one token, so if you already got a token and set it in Diag, you can skip this step.
+    When uploading collected data through Diag, you need a token for user authentication. You can reuse a token, so if you already got a token and set it in Diag, you can skip this step.
 
     First, get a token by the following instructions: log in to [Clinic Server](https://clinic.pingcap.com.cn), click the icon in the lower right side of the Cluster page, select **Get Access Token For Diag Tool**, click **+** in the pop-up window to get a token, and copy and save the token information.
 
