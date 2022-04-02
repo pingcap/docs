@@ -82,7 +82,7 @@ Currently, TiUP supports customizing Grafana Dashboard and other configurations.
 
 2. In the topology.yaml file, set `dashboard_dir` to the directory of the customized Dashboard configuration file.
 
-    The following is a configuration example of monitoring_servers in the topology.yaml file:
+    The following is a configuration example of grafana_servers in the topology.yaml file:
 
     ```
     # # Server configs are used to specify the configuration of Grafana Servers.
