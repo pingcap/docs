@@ -10,22 +10,20 @@ TiDB version: 6.0.0-DMR
 
 In 6.0.0-DMR, the key new features or improvements are as follows:
 
-- Support placement rules in SQL
-- Add a check for data index consistency at the kernel level
-- Accelerate leader balancing after restarting TiKV nodes
-- Support canceling the automatic update of statistics
-- Optimize the overhead of obtaining TSO at the Read Committed isolation level
-- Enhance prepared statements to share execution plans
-- Improve query pushdown
-- Provide Quota Limiter (experimental)
-- Cache hotspot small tables
-- Optimize in-memory pessimistic locking
-- Provide TiDB Enterprise Manager, an enterprise-level database management platform
-- Provide PingCAP Clinic, the automatic diagnosis tool for TiDB (Technical Preview version)
-- Provide Top SQL, a performance troubleshooting feature for non-experts
-- Support Continuous Profiling
-- HTAP capabilities improve by x times
-- Strengthen disaster recovery
+- Support placement rules in SQL to provide more flexible management for data placement.
+- Add a check for data index consistency at the kernel level, which improves system stability and robustness, with only very low resource overhead.
+- Provide Top SQL, a performance troubleshooting feature for non-experts, which offers a self-serving database performance monitoring and diagnosis.
+- Support Continuous Profiling that continuously records the performance data during cluster failure, shortening the troubleshooting time for technical experts.
+- Cache hotspot small tables in memory, which greatly improves the access performance, improves the throughput, and reduces access latency.
+- Optimize in-memory pessimistic locking. Under the performance bottleneck caused by pessimistic locks, memory optimization for pessimistic locks can effectively reduce latency by 10% and increase QPS by 10%.
+- Enhance prepared statements to share execution plans, which lessens CPU resource consumption and improves SQL execution efficiency.
+- Improve the computing performance of the MPP engine, with more functions and operators pushdown, and introduce the dynamic thread pool.
+- Add DM WebUI to facilitate managing a large number of migration tasks.
+- Improve the replication stability and efficiency of TiCDC when replicating data in large clusters. TiCDC now supports replicating 100,000 tables simultaneously.
+- Accelerate leader balancing after restarting TiKV nodes, which improves the speed of business recovery after a restart.
+- Support canceling the automatic update of statistics, which reduces resource contention and limits the impact on SQL performance.
+- Provide PingCAP Clinic, the automatic diagnosis tool for TiDB (Technical Preview version).
+- Provide TiDB Enterprise Manager, an enterprise-level database management platform.
 
 Also, as a core component of TiDB’s HTAP solution, TiFlash<sup>TM</sup> is officially open source in this release. For details, see [TiFlash repository](https://github.com/pingcap/tiflash).
 
