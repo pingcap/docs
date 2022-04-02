@@ -1115,6 +1115,13 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - When the parameter of the aggregate function is not distinct, `HashAgg` is run concurrently and respectively in two phases - the `partial` phase and the `final` phase.
 - A value of `-1` means that the value of `tidb_executor_concurrency` will be used instead.
 
+### tidb_ignore_prepared_cache_close_stmt (New in v6.0.0)
+
+- Scope: SESSION | GLOBAL
+- Default value: `OFF`
+- This variable is used to set whether to ignore the commands for closing prepared statement cache.
+- When this variable is set to `ON`, the `COM_STMT_CLOSE` command of the Binary protocol and the [`DEALLOCATE PREPARE`](/sql-statements/sql-statement-deallocate.md) statement of the text protocol are ignored. For details, see [Ignore the `COM_STMT_CLOSE` command and the `DEALLOCATE PREPARE` statement](/sql-prepare-plan-cache.md#ignore-the-com_stmt_close-command-and-the-deallocate-prepare-statement).
+
 ### tidb_index_join_batch_size
 
 - Scope: SESSION | GLOBAL
@@ -1220,6 +1227,15 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Unit: Bytes
 - This variable is used to set the memory usage threshold of the local cache in the `Apply` operator.
 - The local cache in the `Apply` operator is used to speed up the computation of the `Apply` operator. You can set the variable to `0` to disable the `Apply` cache feature.
+
+### tidb_mem_quota_binding_cache (New in v6.0.0)
+
+- Scope: GLOBAL
+- Default value: `67108864` (64 MiB)
+- Range: `[0, 2147483647]`
+- Unit: Bytes
+- This variable is used to set the threshold of the memory used for caching bindings.
+- If a system creates or captures excessive bindings, resulting in overuse of memory space, TiDB returns a warning in the log. In this case, the cache cannot hold all available bindings or determine which bindings to store. For this reason, some queries might miss their bindings. To address this problem, you can increase the value of this variable, which increases the memory used for caching bindings. After modifying this parameter, you need to run `admin reload bindings` to reload bindings and validate the modification.
 
 ### tidb_mem_quota_query
 
