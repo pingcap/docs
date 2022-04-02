@@ -137,11 +137,13 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
 ### Observability
 
-- ​​General availability (GA) of Top SQL
+- Top SQL: Performance troubleshooting for non-experts
 
-    Top SQL is a self-service database performance monitoring and diagnosis feature provided in TiDB Dashboard for DBAs and app developers. With this feature, you can easily locate SQL queries that contribute to a high load of a TiDB or TiKV node in a specified time range. Unlike existing diagnostic features provided in TiDB Dashboard for database experts, Top SQL is designed for non-experts. You do not need to traverse thousands of monitoring charts to find correlations or understand TiDB internal mechanisms such as Raft Snapshot, RocksDB, MVCC, and TSO. Understanding basic concepts, such as index, lock conflict, and execution plans, is enough for you to use Top SQL to analyze database load quickly and improve application performance.
+    Top SQL is a self-serving database performance monitoring and diagnosis feature available in TiDB Dashboard, for DBAs and App developers, generally available in TiDB 6.0.
+    
+    Unlike existing expert diagnostic features, Top SQL is designed for non-experts: you do not need to traverse thousands of monitoring charts to find correlations or understand TiDB internal mechanisms such as Raft Snapshot, RocksDB, MVCC, and TSO. To get started with Top SQL for analyzing database load quickly and improving App performance, only basic database knowledges (such as index, lock conflict and execution plans) is needed.
 
-    Top SQL is disabled by default and can be enabled with a single click. When enabled, Top SQL provides you with the CPU load of each TiKV or TiFlash node within 30 days. Therefore, you can spot SQL statements consuming high CPU loads at first glimpse, and quickly analyze the issues such as database hotspots and sudden load increases. For example, you can use Top SQL to locate an analytical query that consumes 99% of the load for a low-load database.
+    Top SQL is not enabled by default. When enabled, Top SQL provides you with the real-time CPU load of each TiKV or TiDB node. Therefore, you can spot SQL statements consuming high CPU loads at first glimpse, and quickly analyze the issues such as database hotspots and sudden load increases. For example, you can use Top SQL to pinpoint and diagnose an unusual query that consumes 90% CPU of a single TiKV node.
 
     [User documentation](/dashboard/top-sql.md)
 
