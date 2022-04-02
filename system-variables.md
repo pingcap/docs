@@ -771,7 +771,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Default value: `OFF`
 - This variable is used to set whether to enable the `LIST (COLUMNS) TABLE PARTITION` feature.
 
-### `tidb_enable_mutation_checker` (New in v6.0.0)
+### tidb_enable_mutation_checker (New in v6.0.0)
 
 - Scope: SESSION | GLOBAL
 - Default value: `ON`
@@ -1723,7 +1723,7 @@ SET tidb_slow_log_threshold = 200;
 >
 > Suppose that the TSO RPC latency increases for reasons other than a CPU usage bottleneck of the PD leader (such as network issues). In this case, increasing the value of `tidb_tso_client_batch_max_wait_time` might increase the execution latency in TiDB and affect the QPS performance of the cluster.
 
-### `tidb_txn_assertion_level` (New in v6.0.0)
+### tidb_txn_assertion_level (New in v6.0.0)
 
 - Scope: SESSION | GLOBAL
 - Default value: `FAST`
