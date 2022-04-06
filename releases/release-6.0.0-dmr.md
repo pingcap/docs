@@ -217,7 +217,7 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
     If your machine deployed with TiKV has limited resources and the foreground is burdened by an excessively large amount of requests, background CPU resources are occupied by the foreground, causing TiKV performance unstable. In TiDB v6.0.0, you can use the quota-related configuration items to limit the resources used by the foreground, including CPU and read/write bandwidth. This greatly improves stability of clusters under long-term heavy workloads.
 
-    [User document](/tikv-configuration-file.md#quota), [#12264](https://github.com/tikv/tikv/pull/12264)
+    [User document](/tikv-configuration-file.md#quota), [#12131](https://github.com/tikv/tikv/issues/12131)
 
 - Support the zstd compression algorithm in TiFlash
 
@@ -506,7 +506,7 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
     - Fix the issue that undefined behavior (UB) might occur in TsSet conversions [#12070](https://github.com/tikv/tikv/issues/12070)
     - Fix a bug that replica reads might violate the linearizability [#12109](https://github.com/tikv/tikv/issues/12109)
     - Fix the potential panic issue that occurs when TiKV performs profiling on Ubuntu 18.04 [#9765](https://github.com/tikv/tikv/issues/9765)
-    - Fix the issue that tikv-ctl returns an incorrect result due to its wrong string match [#12049](https://github.com/tikv/tikv/pull/12049)
+    - Fix the issue that tikv-ctl returns an incorrect result due to its wrong string match [#12329](https://github.com/tikv/tikv/issues/12329)
     - Fix the issue of intermittent packet loss and out of memory (OOM) caused by the overflow of memory metrics [#12160](https://github.com/tikv/tikv/issues/12160)
     - Fix the potential issue of mistakenly reporting TiKV panics when exiting TiKV [#12231](https://github.com/tikv/tikv/issues/12231)
 
