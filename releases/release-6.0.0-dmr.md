@@ -245,13 +245,13 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
 - Add WebUI (experimental)
 
-    With the WebUI, you can easily manage a large number of migration tasks. The WebUI supports:
+    With the WebUI, you can easily manage a large number of migration tasks. On the WebUI, you can:
 
-    - Dashboard
-    - Migration task management
-    - Upstream configuration
-    - Replication status query
-    - Master and Worker management
+    - View migration tasks on Dashboard
+    - Manage migration tasks
+    - Configure upstream settings
+    - Query replication status 
+    -  View master and worker information
 
     WebUI is still experimental and is still under development. Therefore, it is recommended only for trial. A known issue is that problems might occur if you use WebUI and dmctl to operate the same task. This issue will be resolved in later versions.
 
@@ -276,7 +276,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
     A new parameter `--start-time` is added to migration tasks. You can define time in the format of '2021-10-21 00:01:00' or '2021-10-21T00:01:00'.
 
-    This feature is particularly useful in scenarios where you migrate and merge incremental data from shard mysql instances. Specifically, you do not need to set a binlog start point for each incremental migration task. Instead, you can complete an incremental migration task faster by using the `--start-time` parameter in `safe-mode`.
+    This feature is particularly useful in scenarios where you migrate and merge incremental data from shard mysql instances. Specifically, you do not need to set a binlog start point for each source in an incremental migration task. Instead, you can create an incremental migration task quickly by using the `--start-time` parameter in `safe-mode`.
 
     [User document](/dm/dm-create-task.md#flags-description)
 
@@ -284,9 +284,9 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
 - Support configuring the maximum number of tolerable errors
 
-    Added a configuration item `max-error`. The default value is 0. When the value is greater than 0, the max-error feature is enabled. If an error occurs in a row during encoding, a record containing this row is added to `type_error_v1` and this row is ignored. When rows with errors exceed the threshold, TiDB Lightning exits immediately.
+    Added a configuration item `lightning.max-error`. The default value is 0. When the value is greater than 0, the max-error feature is enabled. If an error occurs in a row during encoding, a record containing this row is added to `lightning_task_info.type_error_v1` in the target TiDB and this row is ignored. When rows with errors exceed the threshold, TiDB Lightning exits immediately.
 
-    Matching the `max-error` configuration, the `lightning.task-info-schema-name` configuration item records the name of the database that reports a data saving error.
+    Matching the `lightning.max-error` configuration, the `lightning.task-info-schema-name` configuration item records the name of the database that reports a data saving error.
 
     This feature does not cover all types of errors, for example, syntax errors are not applicable.
 
@@ -302,7 +302,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
 - Enable new collation rules by default
 
-    Since v4.0, TiDB has supported new collation rules that behave the same way as MySQL in the case-insensitive, accent-insensitive, and padding rules. The new collation rules are controlled by the `new_collations_enabled_on_first_bootstrap` parameter, which was disabled by default. Since v6.0, TiDB enables the new collation rules by default. Note that this configuration is configurable only upon TiDB cluster initialization.
+    Since v4.0, TiDB has supported new collation rules that behave the same way as MySQL in the case-insensitive, accent-insensitive, and padding rules. The new collation rules are controlled by the `new_collations_enabled_on_first_bootstrap` parameter, which was disabled by default. Since v6.0, TiDB enables the new collation rules by default. Note that this configuration takes effect only upon TiDB cluster initialization.
 
     [User documentation](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)
 
@@ -310,7 +310,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
     After a restart of TiKV nodes, the unevenly scattered leaders must be redistributed for load balance. In large-scale clusters, leader balancing time is positively correlated with the number of Regions. For example, the leader balancing of 100K Regions can take 20-30 minutes, which is prone to performance issues and stability risks due to uneven load. TiDB v6.0 provides a parameter to control the balancing concurrency and enlarges the default value to 4 times of the original, which greatly shortens the leader rebalancing time and accelerates the business recovery after a restart of the TiKV nodes.
 
-    [User documentation](/pd-control.md#scheduler-show--add--remove--pause--resume--config)
+    [User documentation](/pd-control.md#scheduler-config-balance-leader-scheduler), [#4610](https://github.com/tikv/pd/issues/4610)
 
 - Support canceling the automatic update of statistics
 
