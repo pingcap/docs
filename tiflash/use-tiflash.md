@@ -79,6 +79,74 @@ In the result of above statement:
 * `AVAILABLE` indicates whether the TiFlash replicas of this table is available or not. `1` means available and `0` means unavailable. Once the replicas become available, this status does not change. If you use DDL statements to modify the number of replicas, the replication status will be recalculated.
 * `PROGRESS` means the progress of the replication. The value is between `0.0` and `1.0`. `1` means at least one replica is replicated.
 
+### Set available zones
+
+When configuring replicas, if you need to distribute TiFlash replicas to multiple data centers for disaster recovery, you can configure available zones by following steps below:
+
+1. Specify labels for TiFlash nodes in the cluster configuration file.
+
+    ```
+    tiflash_servers:
+      - host: 172.16.5.81
+        config:
+          flash.proxy.labels: zone=z1
+      - host: 172.16.5.82
+        config:
+          flash.proxy.labels: zone=z1
+      - host: 172.16.5.85
+        config:
+          flash.proxy.labels: zone=z2
+    ```
+
+2. After starting a cluster, specify the labels when creating replicas.
+
+     {{< copyable "sql" >}}
+
+    ```sql
+    ALTER TABLE table_name SET TIFLASH REPLICA count LOCATION LABELS location_labels
+    ```
+
+    For example:
+
+    {{< copyable "sql" >}}
+
+    ```sql
+    ALTER TABLE t SET TIFLASH REPLICA 2 LOCATION LABELS "zone";
+    ```
+
+3. The PD schedules replicas based on the labels. Specifically, the PD schedules two replicas of table `t` to two available zones, respectively. You can use pd-ctl to view the scheduling.
+
+    ```shell
+    > tiup ctl:<version> pd -u<pd-host>:<pd-port> store
+
+        ...
+        "address": "172.16.5.82:23913",
+        "labels": [
+          { "key": "engine", "value": "tiflash"},
+          { "key": "zone", "value": "z1" }
+        ],
+        "region_count": 4,
+
+        ...
+        "address": "172.16.5.81:23913",
+        "labels": [
+          { "key": "engine", "value": "tiflash"},
+          { "key": "zone", "value": "z1" }
+        ],
+        "region_count": 5,
+        ...
+
+        "address": "172.16.5.85:23913",
+        "labels": [
+          { "key": "engine", "value": "tiflash"},
+          { "key": "zone", "value": "z2" }
+        ],
+        "region_count": 9,
+        ...
+    ```
+
+For more information about scheduling replicas by using labels, see [Schedule Replicas by Topology Labels](/schedule-replicas-by-topology-labels.md), [Multiple Data Centers in One City Deployment](/multi-data-centers-in-one-city-deployment.md), and [Three Data Centers in Two Cities Deployment](/three-data-centers-in-two-cities-deployment.md).
+
 ## Create TiFlash replicas for databases
 
 Similar to creating TiFlash replicas for tables, you can send a DDL statement to TiDB through a MySQL client to create a TiFlash replica for all tables in a specific database:
