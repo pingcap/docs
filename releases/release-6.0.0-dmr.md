@@ -45,7 +45,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
 > **Note:**
 >
-> When upgrading from an earlier TiDB version to v6.0.0, if you want to know the compatibility change notes of all intermediate versions, you can check the [Release Notes](/release/release-notes.md) of the corresponding version.
+> When upgrading from an earlier TiDB version to v6.0.0, if you want to know the compatibility change notes of all intermediate versions, you can check the [Release Notes](/releases/release-notes.md) of the corresponding version.
 
 ### System variables
 
@@ -60,7 +60,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 | [`tidb_placement_mode`](/system-variables.md#tidb_placement_mode-new-in-v600) | Newly added | Controls whether DDL statements ignore the placement rules specified by [Placement Rules in SQL](/placement-rules-in-sql.md). The default value is `strict`, which means that DDL statements do not ignore placement rules. |
 | [`tidb_rc_read_check_ts`](/system-variables.md#tidb_rc_read_check_ts-new-in-v600) | Newly added | <ul><li> Optimizes read statement latency within a transaction. If read/write conflicts are more severe, turning this variable on will add additional overhead and latency, causing regressions in performance. The default value is `off`.</li><li> This variable is not yet compatible with [replica-read](#tidb_replica_read-new-in-v40). If a read request has `tidb_rc_read_check_ts` on, it might not be able to use replica-read. Do not turn on both variables at the same time.</li></ul> |
 | [`tidb_sysdate_is_now`](/system-variables.md#tidb_sysdate_is_now-new-in-v600) | Newly added | Controls whether `SYSDATE` can be replaced by `NOW`. This configuration has the same effect as MySQL option [`sysdate-is-now`](https://dev.mysql.com/doc/refman/8.0/en/server-options.html#option_mysqld_sysdate-is-now). The default value is `OFF`. |
-| [`tidb_table_cache_lease`](/system-variables.md#tidb_table_cache_lease-new-in-v600) | Newly added | Controls the lease time of [table cache](/table-cache.md), in seconds. The default value is `3`. |
+| [`tidb_table_cache_lease`](/system-variables.md#tidb_table_cache_lease-new-in-v600) | Newly added | Controls the lease time of [table cache](/cached-tables.md), in seconds. The default value is `3`. |
 | [`tidb_top_sql_max_meta_count`](/system-variables.md#tidb_top_sql_max_meta_count-new-in-v600) | Newly added | Controls the maximum number of SQL statement types that are collected by [Top SQL](/dashboard/top-sql.md) every minute. The default is `5000`. |
 | [`tidb_top_sql_max_time_series_count`](/system-variables.md#tidb_top_sql_max_time_series_count-new-in-v600) | Newly added | Controls how many of the top SQL statements that consume the most resources are saved in [Top SQL](/dashboard/top-sql.md) every minute. The default is `100`. |
 | [`tidb_txn_assertion_level`](/system-variables.md#tidb_txn_assertion_level-new-in-v600) | Newly added | Controls the assertion level. The assertion is a data index consistency check performed during the transaction commit process. By default, the check has only minor impact on performance and includes most of the check items.  |
@@ -132,7 +132,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
 - Add a check for data index consistency at the kernel level
 
-    Add a check for data index consistency when a transaction is executed, which improves system stability and robustness, with only very low resource overhead. You can control the check behavior using the `tidb_enable_mutation_checker` and `tidb_txn_assertion_level` variables. With the default configuration, the QPS drop is controlled within 2% in most scenarios. For the error description of the consistency check, see [user document](/data-inconsistency-errors.md).
+    Add a check for data index consistency when a transaction is executed, which improves system stability and robustness, with only very low resource overhead. You can control the check behavior using the `tidb_enable_mutation_checker` and `tidb_txn_assertion_level` variables. With the default configuration, the QPS drop is controlled within 2% in most scenarios. For the error description of the consistency check, see [user document](/troubleshoot-data-inconsistency-errors.md).
 
 ### Observability
 
@@ -188,7 +188,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
     In this mode, TiDB can read and compute the data on partitioned tables using the MPP engine of TiFlash, which greatly improves the query performance of partitioned tables.
 
-    [User document](/use-tiflash.md#access-partitioned-tables-in-the-mpp-mode)
+    [User document](/tiflash/use-tiflash.md#access-partitioned-tables-in-the-mpp-mode)
 
 - Improve the computing performance of the MPP engine
 
@@ -200,11 +200,11 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
         - Date functions: `DAYOFNAME()`, `DAYOFMONTH()`, `DAYOFWEEK()`, `DAYOFYEAR()`, `LAST_DAY()`, `MONTHNAME()`
         - Operators: Anti Left Outer Semi Join, Left Outer Semi Join
 
-        [User document](/use-tiflash.md#supported-push-down-calculations)
+        [User document](/tiflash/use-tiflash.md#supported-push-down-calculations)
 
     - Introduce the dynamic thread pool (enabled by default) to improve the CPU utilization
 
-        [User document](/tiflash-configuration.md#configure-the-tiflashtoml-file)
+        [User document](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)
 
 ### Stability
 
@@ -224,7 +224,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
     TiFlash introduces two parameters, profiles.default.dt_compression_method and profiles.default.dt_compression_level, which allows users to select the optimal compression algorithm based on performance and capacity balance.
 
-    [User document](/tiflash-configuration.md#configure-the-tiflashtoml-file)
+    [User document](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)
 
 - Enable all I/O checks (Checksum) by default
 
@@ -238,7 +238,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
     TiFlash introduces asynchronous GRPC and Min-TSO scheduling mechanisms. Such mechanisms ensure more efficient use of threads and avoids system crashes caused by excessive threads.
 
-    [User document](/monitor-tiflash.md#coprocessor)
+    [User document](/tiflash/monitor-tiflash.md#coprocessor)
 
 ### Data Migration
 
@@ -325,7 +325,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
     When contacting PingCAP technical support for remote assistance to troubleshoot cluster issues, you can use the PingCAP Clinic service to collect and upload diagnostic data, thereby improving the troubleshooting efficiency.
 
-    [User documentation](/clinic-introduction.md)
+    [User documentation](/clinic/clinic-introduction.md)
 
 - An enterprise-level database management platform, TiDB Enterprise Manager
 
@@ -352,7 +352,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
     - Support showing the `CREATE_TIME` information in the results of the `ADMIN SHOW DDL JOBS` statement [#23494](https://github.com/pingcap/tidb/issues/23494)
     - Support a new built-in function `CHARSET()` [#3931](https://github.com/pingcap/tidb/issues/3931)
     - Support filtering a baseline capturing blocklist by usernames [#32558](https://github.com/pingcap/tidb/issues/32558)
-    - Optimize the results of the `ADMIN SHOW DDL JOBS` and `SHOW TABLE STATUS` statements by displaying the time according to the current `time_zone` [#26642](​​https://github.com/pingcap/tidb/issues/26642)
+    - Optimize the results of the `ADMIN SHOW DDL JOBS` and `SHOW TABLE STATUS` statements by displaying the time according to the current `time_zone` [#26642](https://github.com/pingcap/tidb/issues/26642)
     - Supports pushing down the `DAYNAME()` and `MONTHNAME()` functions to TiFlash [#32594](https://github.com/pingcap/tidb/issues/32594)
     - Support pushing down the `REGEXP` function to TiFlash [#32637](https://github.com/pingcap/tidb/issues/32637)
     - Support tracking the execution of the `UnionScan` operator [#32631](https://github.com/pingcap/tidb/issues/32631)
@@ -363,7 +363,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
     - Enable partition pruning for RANGE COLUMNS partitionings on IN conditions and string type columns [#32626](https://github.com/pingcap/tidb/issues/32626)
     - Return an error message when a system variable is set to NULL [#32850](https://github.com/pingcap/tidb/issues/32850)
     - Remove Broadcast Join from the non-MPP mode [#31465](https://github.com/pingcap/tidb/issues/31465)
-    - Support pushing down the ` DAYOFMONTH()` and ` LAST_DAY()` functions to TiFlash [#33012](https://github.com/pingcap/tidb/issues/33012)
+    - Support pushing down the `DAYOFMONTH()` and `LAST_DAY()` functions to TiFlash [#33012](https://github.com/pingcap/tidb/issues/33012)
     - Support pushing down the `DAYOFWEEK()` and `DAYOFYEAR()` functions to TiFlash [#33130](https://github.com/pingcap/tidb/issues/33130)
     - Support pushing down the `IS_TRUE`, `IS_FALSE`, and `IS_TRUE_WITH_NULL` functions to TiFlash [#33047](https://github.com/pingcap/tidb/issues/33047)
     - Support executing MPP plans on partitioned tables in dynamic pruning mode [#32347](https://github.com/pingcap/tidb/issues/32347)
@@ -521,8 +521,8 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 + TiFlash
 
     - Fix the issue of TiFlash panic when the memory limit is enabled [#3902](https://github.com/pingcap/tiflash/issues/3902)
-    - Fix the issue that expired data is recycled slowly [#4146]([https://github.com/pingcap/tiflash/issues/](https://github.com/pingcap/tiflash/issues/3902)4146)
-    - Fix the potential issue of TiFlash panic when `Snapshot` is applied simultaneously with multiple DDL operations [#4072]([https://github.com/pingcap/tiflash/issues/](https://github.com/pingcap/tiflash/issues/3902)4072)
+    - Fix the issue that expired data is recycled slowly [#4146](https://github.com/pingcap/tiflash/issues/4146)
+    - Fix the potential issue of TiFlash panic when `Snapshot` is applied simultaneously with multiple DDL operations [#4072](https://github.com/pingcap/tiflash/issues/4072)
     - Fix the potential query error after adding columns under heavy read workload [#3967](https://github.com/pingcap/tiflash/issues/3967)
     - Fix the issue that the `SQRT` function with a negative argument returns `NaN` instead of `Null` [#3598](https://github.com/pingcap/tiflash/issues/3598)
     - Fix the issue that casting `INI` to `DECIMAL` might cause overflow [#3920](https://github.com/pingcap/tiflash/issues/3920)
