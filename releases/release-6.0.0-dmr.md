@@ -17,7 +17,7 @@ In 6.0.0-DMR, the key new features or improvements are as follows:
 - Cache hotspot small tables in memory, which greatly improves the access performance, improves the throughput, and reduces access latency.
 - Optimize in-memory pessimistic locking. Under the performance bottleneck caused by pessimistic locks, memory optimization for pessimistic locks can effectively reduce latency by 10% and increase QPS by 10%.
 - Enhance prepared statements to share execution plans, which lessens CPU resource consumption and improves SQL execution efficiency.
-- Improve the computing performance of the MPP engine by pushing down more functions and operators and introducing the dynamic thread pool.
+- Improve the computing performance of the MPP engine by supporting pushing down more functions and operators and the general availability (GA) of the elastic thread pool.
 - Add DM WebUI to facilitate managing a large number of migration tasks.
 - Improve the stability and efficiency of TiCDC when replicating data in large clusters. TiCDC now supports replicating 100,000 tables simultaneously.
 - Accelerate leader balancing after restarting TiKV nodes, which improves the speed of business recovery after a restart.
@@ -195,13 +195,13 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
         - Logical functions: `IS`, `IS NOT`
         - String functions: `REGEXP()`, `NOT REGEXP()`
-        - Mathmatical functions: `GREATEST(int/real)`, `LEAST(int/real)`
+        - Mathematical functions: `GREATEST(int/real)`, `LEAST(int/real)`
         - Date functions: `DAYOFNAME()`, `DAYOFMONTH()`, `DAYOFWEEK()`, `DAYOFYEAR()`, `LAST_DAY()`, `MONTHNAME()`
         - Operators: Anti Left Outer Semi Join, Left Outer Semi Join
 
         [User document](/tiflash/use-tiflash.md#supported-push-down-calculations)
 
-    - Introduce the dynamic thread pool (enabled by default) to improve the CPU utilization
+    - The elastic thread pool (enabled by default) becomes GA. This feature aims to improve CPU utilization.
 
         [User document](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)
 
@@ -215,7 +215,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
 - Support TiKV quota limiter (experimental)
 
-    If your machine deployed with TiKV has limited resources and the foreground is burdened by an excessively large amount of requests, background CPU resources are occupied by the foreground, causing TiKV performance unstable. In TiDB v6.0, you can use the quota-related configuration items to limit the resources used by the foreground, including CPU and read/write bandwidth. This greatly improves stability of clusters under long-term heavy workloads.
+    If your machine deployed with TiKV has limited resources and the foreground is burdened by an excessively large amount of requests, background CPU resources are occupied by the foreground, causing TiKV performance unstable. In TiDB v6.0.0, you can use the quota-related configuration items to limit the resources used by the foreground, including CPU and read/write bandwidth. This greatly improves stability of clusters under long-term heavy workloads.
 
     [User document](/tikv-configuration-file.md#quota), [#12264](https://github.com/tikv/tikv/pull/12264)
 
@@ -374,7 +374,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
 + TiKV
 
-    - Improve the Raftstore sampling accuracy for large key range batches [#11039](https://github.com/tikv/tikv/pull/11039)
+    - Improve the Raftstore sampling accuracy for large key range batches [#12327](https://github.com/tikv/tikv/issues/12327)
     - Add the correct "Content-Type" for `debug/pprof/profile` to make the Profile more easily identified [#11521](https://github.com/tikv/tikv/issues/11521)
     - Renew the lease time of the leader infinitely when the Raftstore has heartbeats or handles read requests, which helps reduce latency jitter [#11579](https://github.com/tikv/tikv/issues/11579)
     - Choose the store with the least cost when switching the leader, which helps improve performance stability [#10602](https://github.com/tikv/tikv/issues/10602)
