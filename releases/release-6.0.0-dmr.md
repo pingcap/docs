@@ -479,7 +479,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
     - Fix wrong results when explicitly reading partitions and using the IndexJoin plan [#32007](https://github.com/pingcap/tidb/issues/32007)
     - Fix a bug that renaming a column fails when changing its column type concurrently [#31075](https://github.com/pingcap/tidb/issues/31075)
     - Fix a bug that the formula for calculating net cost for TiFlash plans is not aligned with TiKV plans [#30103](https://github.com/pingcap/tidb/issues/30103)
-    - Fix a bug that `KILL TIDB` cannot take effect immediately on idle links [#24031](https://github.com/pingcap/tidb/issues/24031)
+    - Fix a bug that `KILL TIDB` cannot take effect immediately on idle connections [#24031](https://github.com/pingcap/tidb/issues/24031)
     - Fix possible wrong results when querying a table with generated columns [#33038](https://github.com/pingcap/tidb/issues/33038)
     - Fix wrong results of deleting data of multiple tables using `left join` [#31321](https://github.com/pingcap/tidb/issues/31321)
     - Fix a bug that the `SUBTIME` function returns a wrong result in case of overflow [#31868](https://github.com/pingcap/tidb/issues/31868)
