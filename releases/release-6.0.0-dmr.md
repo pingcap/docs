@@ -11,18 +11,18 @@ TiDB version: 6.0.0-DMR
 In 6.0.0-DMR, the key new features or improvements are as follows:
 
 - Support placement rules in SQL to provide more flexible management for data placement.
-- Add a check for data index consistency at the kernel level, which improves system stability and robustness, with only very low resource overhead.
-- Provide Top SQL, a performance troubleshooting feature for non-experts, which offers a self-serving database performance monitoring and diagnosis.
-- Support Continuous Profiling that continuously records the performance data during cluster failure, shortening the troubleshooting time for technical experts.
+- Add a consistency check between data and indexes at the kernel level, which improves system stability and robustness, with only very low resource overhead.
+- Provide Top SQL, a self-serving database performance monitoring and diagnosis feature for non-experts.
+- Support Continuous Profiling that collects cluster performance data all the time, reducing MTTR for technical experts.
 - Cache hotspot small tables in memory, which greatly improves the access performance, improves the throughput, and reduces access latency.
 - Optimize in-memory pessimistic locking. Under the performance bottleneck caused by pessimistic locks, memory optimization for pessimistic locks can effectively reduce latency by 10% and increase QPS by 10%.
 - Enhance prepared statements to share execution plans, which lessens CPU resource consumption and improves SQL execution efficiency.
 - Improve the computing performance of the MPP engine, with more functions and operators pushdown, and introduce the dynamic thread pool.
 - Add DM WebUI to facilitate managing a large number of migration tasks.
-- Improve the replication stability and efficiency of TiCDC when replicating data in large clusters. TiCDC now supports replicating 100,000 tables simultaneously.
+- Improve the stability and efficiency of TiCDC when replicating data in large clusters. TiCDC now supports replicating 100,000 tables simultaneously.
 - Accelerate leader balancing after restarting TiKV nodes, which improves the speed of business recovery after a restart.
 - Support canceling the automatic update of statistics, which reduces resource contention and limits the impact on SQL performance.
-- Provide PingCAP Clinic, the automatic diagnosis tool for TiDB (Technical Preview version).
+- Provide PingCAP Clinic, the automatic diagnosis service for TiDB clusters (Technical Preview version).
 - Provide TiDB Enterprise Manager, an enterprise-level database management platform.
 
 Also, as a core component of TiDB’s HTAP solution, TiFlash<sup>TM</sup> is officially open source in this release. For details, see [TiFlash repository](https://github.com/pingcap/tiflash).
@@ -146,7 +146,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
     [User documentation](/dashboard/top-sql.md)
 
-- GA of Continuous Profiling
+- Support Continuous Profiling
 
     TiDB Dashboard introduces the Continuous Profiling feature, which is now generally available in TiDB v6.0. Continuous profiling is not enabled by default. When enabled, the performance data of individual TiDB, TiKV, and PD instances will be collected all the time, with negligible overhead. With history performance data, technical experts can backtrack and pinpoint the root causes of issues like high memory consumption, even when the issues are difficult to reproduce. In this way, the mean time to recovery (MTTR) can be reduced.
 
@@ -230,7 +230,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
     This feature was introduced in v5.4.0 as experimental. It enhances data accuracy and security without imposing an obvious impact on users’ businesses.
 
-    Warning: Newer version of data format cannot be downgraded in place to versions earlier than v5.4.0. During such a downgrade, you need to delete TiFlash replicas and replicate data after the downgrade. Alternatively, you can perform a downgrade by referring to [dttool migrate](/tiflash-command-line-flags.md#dttool-migrate).
+    Warning: Newer version of data format cannot be downgraded in place to versions earlier than v5.4.0. During such a downgrade, you need to delete TiFlash replicas and replicate data after the downgrade. Alternatively, you can perform a downgrade by referring to [dttool migrate](/tiflash/tiflash-command-line-flags.md#dttool-migrate).
 
     [User document](/use-tiflash.md#use-data-validation)
 
