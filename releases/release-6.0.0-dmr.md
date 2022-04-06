@@ -338,6 +338,8 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
     When you deploy a TiDB cluster using TiUP, TiUP automatically deploys monitoring components such as Prometheus, Grafana, and Alertmanager, and automatically adds new nodes into the monitoring scope after scale-out. You can customize the configurations of the monitoring components by adding configuration items to the `topology.yaml` file.
 
+    [User document](/tiup/customized-montior-in-tiup-environment.md)
+
 ## Improvements
 
 + TiDB
