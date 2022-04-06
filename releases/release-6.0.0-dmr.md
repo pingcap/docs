@@ -346,7 +346,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
     - Clear the placement rule settings of a table automatically after restoring the table using the `FLASHBACK` or `RECOVER` statement  [#31668](https://github.com/pingcap/tidb/issues/31668)
     - Add a performance overview dashboard to show core performance metrics on typical critical paths, making metrics analysis on TiDB easier [#31676](https://github.com/pingcap/tidb/issues/31676)
     - Support using the `REPLACE` keyword in the `LOAD DATA LOCAL INFILE` statement [#24515](https://github.com/pingcap/tidb/issues/24515)
-    - (dup: release-5.1.4.md > Improvements> TiDB)- Support partition pruning for the built-in `IN` expression in Range partition tables [#26739](https://github.com/pingcap/tidb/issues/26739)
+    - Support partition pruning for the built-in `IN` expression in Range partition tables [#26739](https://github.com/pingcap/tidb/issues/26739)
     - Improve query efficiency by eliminating potentially redundant Exchange operations in MPP aggregation queries [#31762](https://github.com/pingcap/tidb/issues/31762)
     - Improve compatibility with MySQL by allowing duplicate partition names in the `TRUNCATE PARTITION` and `DROP PARTITION` statements [#31681](https://github.com/pingcap/tidb/issues/31681)
     - Support showing the `CREATE_TIME` information in the results of the `ADMIN SHOW DDL JOBS` statement [#23494](https://github.com/pingcap/tidb/issues/23494)
@@ -382,7 +382,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
     - Support the `QUARTER` function in vector calculation [#5751](https://github.com/tikv/tikv/issues/5751)
     - Support pushing down the `BIT` data type to TiKV [#30738](https://github.com/pingcap/tidb/issues/30738)
     - Support pushing down the `MOD` function and the `SYSDATE` function to TiKV [#11916](https://github.com/tikv/tikv/issues/11916)
-    - (dup: release-5.3.1.md > Improvements> TiKV)- Reduce the TiCDC recovery time by reducing the number of the Regions that require the Resolve Locks step [#11993](https://github.com/tikv/tikv/issues/11993)
+    - Reduce the TiCDC recovery time by reducing the number of the Regions that require the Resolve Locks step [#11993](https://github.com/tikv/tikv/issues/11993)
     - Support dynamically modifying `raftstore.raft-max-inflight-msgs` [#11865](https://github.com/tikv/tikv/issues/11865)
     - Support `EXTRA_PHYSICAL_TABLE_ID_COL_ID` to enable dynamic pruning mode [#11888](https://github.com/tikv/tikv/issues/11888)
     - Support calculation in buckets [#11759](https://github.com/tikv/tikv/issues/11759)
@@ -424,10 +424,10 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
         - Add a `Lag analyze` panel in Grafana [#4891](https://github.com/pingcap/tiflow/issues/4891)
         - Support placement rules [#4846](https://github.com/pingcap/tiflow/issues/4846)
         - Synchronize HTTP API handling [#1710](https://github.com/pingcap/tiflow/issues/1710)
-        - (dup) Add the exponential backoff mechanism for restarting a changefeed [#3329](https://github.com/pingcap/tiflow/issues/3329)
+        - Add the exponential backoff mechanism for restarting a changefeed [#3329](https://github.com/pingcap/tiflow/issues/3329)
         - Set the default isolation level of MySQL sink to read-committed to reduce deadlocks in MySQL [#3589](https://github.com/pingcap/tiflow/issues/3589)
         - Validate changefeed parameters upon creation and refine error messages [#1716](https://github.com/pingcap/tiflow/issues/1716) [#1718](https://github.com/pingcap/tiflow/issues/1718) [#1719](https://github.com/pingcap/tiflow/issues/1719) [#4472](https://github.com/pingcap/tiflow/issues/4472)
-        - (dup) Expose configuration parameters of the Kafka producer to make them configurable in TiCDC [#4385](https://github.com/pingcap/tiflow/issues/4385)
+        - Expose configuration parameters of the Kafka producer to make them configurable in TiCDC [#4385](https://github.com/pingcap/tiflow/issues/4385)
 
     + TiDB Data Migration (DM)
 
@@ -448,22 +448,22 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 + TiDB
 
     - Fix the bug that the placement rule reports an error when `SCHEDULE = majority_in_primary`, and `PrimaryRegion` and `Regions` are of the same value [#31271](https://github.com/pingcap/tidb/issues/31271)
-    - (dup: release-5.3.1.md > Bug fixes> TiDB)- Fix the `invalid transaction` error when executing a query using index lookup join [#30468](https://github.com/pingcap/tidb/issues/30468)
+    - Fix the `invalid transaction` error when executing a query using index lookup join [#30468](https://github.com/pingcap/tidb/issues/30468)
     - Fix the bug that `show grants` returns incorrect results when two or more privileges are granted [#30855](https://github.com/pingcap/tidb/issues/30855)
     - Fix the bug that `INSERT INTO t1 SET timestamp_col = DEFAULT` would set the timestamp to the zero timestamp for the field defaulted to CURRENT_TIMESTAMP [#29926)](https://github.com/pingcap/tidb/issues/29926)
     - ​Fix errors reported in reading the results by avoiding encoding the maximum value and minimum non-null value of the string type [#31721](https://github.com/pingcap/tidb/issues/31721)
     - Fix load data panic if the data is broken at an escape character [#31589](https://github.com/pingcap/tidb/issues/31589)
-    - (dup: release-5.3.1.md > Bug fixes> TiDB)- Fix the issue that the `greatest` or `least` function with collation gets a wrong result [#31789](https://github.com/pingcap/tidb/issues/31789)
+    - Fix the issue that the `greatest` or `least` function with collation gets a wrong result [#31789](https://github.com/pingcap/tidb/issues/31789)
     - Fix the bug that the date_add and date_sub functions may return incorrect data types [#31809](https://github.com/pingcap/tidb/issues/31809)
     - Fix possible panic when inserting data to virtually generated columns using an insert statement [#31735](https://github.com/pingcap/tidb/issues/31735)
     - Fix the bug that no error is reported when duplicate columns are present in the created list partition [#31784](https://github.com/pingcap/tidb/issues/31784)
     - Fix wrong results returned when `select for update union select` uses incorrect snapshots [#31530](https://github.com/pingcap/tidb/issues/31530)
-    - (dup: release-5.3.1.md > Bug fixes> Tools> Backup & Restore (BR))- Fix the potential issue that Regions might be unevenly distributed after a restore operation is finished [#31034](https://github.com/pingcap/tidb/issues/31034)
+    - Fix the potential issue that Regions might be unevenly distributed after a restore operation is finished [#31034](https://github.com/pingcap/tidb/issues/31034)
     - Fix the bug that COERCIBILITY is wrong for the `json` type [#31541](https://github.com/pingcap/tidb/issues/31541)
     - Fix wrong collation of the `json` type when this type is processed using builtin-func [#31320](https://github.com/pingcap/tidb/issues/31320)
     - Fix the bug that PD rules are not deleted when the count of TiFlash replicas is set to 0 [#32190](https://github.com/pingcap/tidb/issues/32190)
-    - (dup: release-5.3.1.md > Bug fixes> TiDB)- Fix the issue that `alter column set default` wrongly updates the table schema [#31074](https://github.com/pingcap/tidb/issues/31074)
-    - (dup: release-5.3.1.md > Bug fixes> TiDB)- Fix the issue that `date_format` in TiDB handles in a MySQL-incompatible way [#32232](https://github.com/pingcap/tidb/issues/32232)
+    - Fix the issue that `alter column set default` wrongly updates the table schema [#31074](https://github.com/pingcap/tidb/issues/31074)
+    - Fix the issue that `date_format` in TiDB handles in a MySQL-incompatible way [#32232](https://github.com/pingcap/tidb/issues/32232)
     - Fix the bug that errors may occur when updating partitioned tables using join [#31629](https://github.com/pingcap/tidb/issues/31629)
     - Fix wrong range calculation for Nulleq function on Enum values [#32428](https://github.com/pingcap/tidb/issues/32428)
     - Fix possible panic in `upper()` and `lower()` functions [#32488](https://github.com/pingcap/tidb/issues/32488)
@@ -494,15 +494,15 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
 + TiKV
 
-    - (dup: release-5.3.1.md > Bug fixes> TiKV)- Fix the panic issue caused by deleting snapshot files when the peer status is `Applying` [#11746](https://github.com/tikv/tikv/issues/11746)
-    - (dup: release-5.3.1.md > Bug fixes> TiKV)- Fix the issue of QPS drop when flow control is enabled and `level0_slowdown_trigger` is set explicitly [#11424](https://github.com/tikv/tikv/issues/11424)
-    - (dup: release-5.3.1.md > Bug fixes> TiKV)- Fix the issue that destroying a peer might cause high latency [#10210](https://github.com/tikv/tikv/issues/10210)
-    - (dup: release-5.3.1.md > Bug fixes> TiKV)- Fix a bug that TiKV cannot delete a range of data (`unsafe_destroy_range` cannot be executed) when the GC worker is busy [#11903](https://github.com/tikv/tikv/issues/11903)
+    - Fix the panic issue caused by deleting snapshot files when the peer status is `Applying` [#11746](https://github.com/tikv/tikv/issues/11746)
+    - Fix the issue of QPS drop when flow control is enabled and `level0_slowdown_trigger` is set explicitly [#11424](https://github.com/tikv/tikv/issues/11424)
+    - Fix the issue that destroying a peer might cause high latency [#10210](https://github.com/tikv/tikv/issues/10210)
+    - Fix a bug that TiKV cannot delete a range of data (`unsafe_destroy_range` cannot be executed) when the GC worker is busy [#11903](https://github.com/tikv/tikv/issues/11903)
     - Fix a bug that TiKV panics when the data in `StoreMeta` is accidentally deleted in some corner cases [#11852](https://github.com/tikv/tikv/issues/11852)
     - Fix a bug that TiKV panics when performing profiling on an ARM platform [#10658](https://github.com/tikv/tikv/issues/10658)
     - Fix a bug that TiKV might panic if it has been running for 2 years or more [#11940](https://github.com/tikv/tikv/issues/11940)
     - Fix the compilation issue on the ARM64 architecture caused by missing SSE instruction set [#12034](https://github.com/tikv/tikv/issues/12034)
-    - (dup: release-5.3.1.md > Bug fixes> TiKV)- Fix the issue that deleting an uninitialized replica might cause an old replica to be recreated [#10533](https://github.com/tikv/tikv/issues/10533)
+    - Fix the issue that deleting an uninitialized replica might cause an old replica to be recreated [#10533](https://github.com/tikv/tikv/issues/10533)
     - Fix the bug that stale messages causes TiKV to panic [#12023](https://github.com/tikv/tikv/issues/12023)
     - Fix the issue that undefined behavior (UB) might occur in TsSet conversions [#12070](https://github.com/tikv/tikv/issues/12070)
     - Fix a bug that replica reads might violate the linearizability [#12109](https://github.com/tikv/tikv/issues/12109)
@@ -545,8 +545,8 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
     + TiCDC
 
-        - (dup: release-5.3.1.md > Bug fixes> Tools> TiCDC)- Fix a bug that MySQL sink generates duplicated `replace` SQL statements when`batch-replace-enable` is disabled [#4501](https://github.com/pingcap/tiflow/issues/4501)
-        - (dup: release-5.3.1.md > Bug fixes> Tools> TiCDC)- Fix a bug that a TiCDC node exits abnormally when a PD leader is killed [#4248](https://github.com/pingcap/tiflow/issues/4248)
+        - Fix a bug that MySQL sink generates duplicated `replace` SQL statements when`batch-replace-enable` is disabled [#4501](https://github.com/pingcap/tiflow/issues/4501)
+        - Fix a bug that a TiCDC node exits abnormally when a PD leader is killed [#4248](https://github.com/pingcap/tiflow/issues/4248)
         - Fix the error `Unknown system variable 'transaction_isolation'` for some MySQL versions [#4504](https://github.com/pingcap/tiflow/issues/4504)
         - Fix the TiCDC panic issue that might occur when `Canal-JSON` incorrectly handles `string` [#4635](https://github.com/pingcap/tiflow/issues/4635)
         - Fix a bug that sequence is incorrectly replicated in some cases [#4563](https://github.com/pingcap/tiflow/issues/4552)
@@ -557,16 +557,16 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
     + TiDB Data Migration (DM)
 
-        - (dup: release-5.4.0.md > Bug fixes> Tools> TiDB Data Migration (DM))- Fix the issue that syncer metrics are updated only when querying the status [#4281](https://github.com/pingcap/tiflow/issues/4281)
-        - (dup: release-5.3.1.md > Bug fixes> Tools> TiCDC)- Fix the issue that execution errors of the update statement in safemode may cause the DM-worker panic [#4317](https://github.com/pingcap/tiflow/issues/4317)
-        - (dup: release-5.3.1.md > Bug fixes> Tools> TiCDC)- Fix a bug that long varchars report an error `Column length too big` [#4637](https://github.com/pingcap/tiflow/issues/4637)
+        - Fix the issue that syncer metrics are updated only when querying the status [#4281](https://github.com/pingcap/tiflow/issues/4281)
+        - Fix the issue that execution errors of the update statement in safemode may cause the DM-worker panic [#4317](https://github.com/pingcap/tiflow/issues/4317)
+        - Fix a bug that long varchars report an error `Column length too big` [#4637](https://github.com/pingcap/tiflow/issues/4637)
         - Fix the conflict issue caused by multiple DM-workers writing data from the same upstream [#3737](https://github.com/pingcap/tiflow/issues/3737)
         - Fix the issue that hundreds of "checkpoint has no change, skip sync flush checkpoint" print in the log and the replication is very slow [#4619](https://github.com/pingcap/tiflow/issues/4619)
         - Fix the DML loss issue when merging shards and replicating incremental data from upstream in the pessimistic mode [#5002](https://github.com/pingcap/tiflow/issues/5002)
 
     + TiDB Lightning
 
-        - (dup: release-5.3.1.md > Bug fixes> Tools> TiDB Lightning)- Fix the bug that TiDB Lightning may not delete the metadata schema when some import tasks do not contain source files [#28144](https://github.com/pingcap/tidb/issues/28144)
+        - Fix the bug that TiDB Lightning may not delete the metadata schema when some import tasks do not contain source files [#28144](https://github.com/pingcap/tidb/issues/28144)
         - Fix the panic that occurs when the table names in the source file and in the target cluster are different [#31771](https://github.com/pingcap/tidb/issues/31771)
         - Fix the checksum error “GC life time is shorter than transaction duration” [#32733](https://github.com/pingcap/tidb/issues/32733)
         - Fix the issue that TiDB Lightning gets stuck when it fails to check empty tables [#31797](https://github.com/pingcap/tidb/issues/31797)
