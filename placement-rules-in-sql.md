@@ -183,7 +183,7 @@ CREATE TABLE t1 (
 
 If a partition has no attached policies, it tries to apply possibly existing policies on the table. For example, the `pEurope` partition will apply the `europe` policy, but the `pAsia` partition will apply the `p1` policy from table `t1`. If `t1` has no assigned policies, `pAsia` will not apply any policy, too.
 
-Altering the placement policy of a specified partition is supported. For example:
+After assigning placement policies to a partition, you can also alter the assigned placement policies. For example:
 
 ```sql
 ALTER TABLE t1 PARTITION pEurope PLACEMENT POLICY=p1;
