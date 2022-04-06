@@ -514,7 +514,7 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
     - Fix the issue that the operator creates steps with meaningless Joint Consensus [#4362](https://github.com/tikv/pd/issues/4362), [#4444](https://github.com/tikv/pd/issues/4444)
     - Fix a bug that the TSO revoking might get stuck when closing the PD client [#4549](https://github.com/tikv/pd/issues/4549)
-    - Fix the issue that the Region scatterer scheduling might cause lost peers [#4565](https://github.com/tikv/pd/issues/4565)
+    - Fix the issue that the Region scatterer scheduling lost some peers [#4565](https://github.com/tikv/pd/issues/4565)
     - Fix the issue that `Duration` fields of `dr-autosync` cannot be dynamically configured [#4651](https://github.com/tikv/pd/issues/4651)
 
 + TiFlash
