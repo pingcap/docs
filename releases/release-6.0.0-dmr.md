@@ -17,7 +17,7 @@ In 6.0.0-DMR, the key new features or improvements are as follows:
 - Cache hotspot small tables in memory, which greatly improves the access performance, improves the throughput, and reduces access latency.
 - Optimize in-memory pessimistic locking. Under the performance bottleneck caused by pessimistic locks, memory optimization for pessimistic locks can effectively reduce latency by 10% and increase QPS by 10%.
 - Enhance prepared statements to share execution plans, which lessens CPU resource consumption and improves SQL execution efficiency.
-- Improve the computing performance of the MPP engine, with more functions and operators pushdown, and introduce the dynamic thread pool.
+- Improve the computing performance of the MPP engine by pushing down more functions and operators and introducing the dynamic thread pool.
 - Add DM WebUI to facilitate managing a large number of migration tasks.
 - Improve the stability and efficiency of TiCDC when replicating data in large clusters. TiCDC now supports replicating 100,000 tables simultaneously.
 - Accelerate leader balancing after restarting TiKV nodes, which improves the speed of business recovery after a restart.
