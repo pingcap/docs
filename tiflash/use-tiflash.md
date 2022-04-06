@@ -123,7 +123,7 @@ Examples:
 >
 > - This statement skips system tables, views, temporary tables, and tables with character sets not supported by TiFlash.
 
-### Check replication progress
+#### Check replication progress
 
 Similar to creating TiFlash replicas for tables, successful execution of the DDL statement does not mean the completion of replication. You can execute the following SQL statement to check the progress of replication on target tables:
 
