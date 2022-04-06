@@ -438,7 +438,6 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
     + TiDB Lightning
 
         - Add more retryable error types [#31376](https://github.com/pingcap/tidb/issues/31376)
-        - Tolerate TiKV node address changes during importing [#32875](https://github.com/pingcap/tidb/issues/32875)
         - Support the base64 format password string [#31194](https://github.com/pingcap/tidb/issues/31194)
         - Standardize error codes and error outputs [#32239](https://github.com/pingcap/tidb/issues/32239)
 
