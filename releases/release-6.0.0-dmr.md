@@ -70,7 +70,6 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 | Configuration file | Configuration | Change type | Description |
 |:---|:---|:---|:---|
 | TiDB | `stmt-summary.enable` <br/> `stmt-summary.enable-internal-query` <br/> `stmt-summary.history-size` <br/> `stmt-summary.max-sql-length` <br/> `stmt-summary.max-stmt-count` <br/> `stmt-summary.refresh-interval` | Deleted | Configuration related to the [statement summary tables](/statement-summary-tables.md). All these configuration items are removed. You need to use SQL variables to control the statement summary tables. |
-| TiKV | `enable-io-snoop` | Deleted | Remove the `enable-io-snoop` configuration item. |
 | TiDB | [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) | Modified | Controls whether to enable support for the new collation. Since v6.0, the default value is changed from `false` to `true`. This configuration item only takes effect when the cluster is initialized for the first time. After the first bootstrap, you cannot enable or disable the new collation framework using this configuration item. |
 | TiKV | [`backup.num-threads`](/tikv-configuration-file.md#num-threads-1) | Modified | The value range is modified to `[1, CPU]`.  |
 | TiKV | [`raftstore.apply-max-batch-size`](/tikv-configuration-file.md#apply-max-batch-size) | Modified | The maximum value is changed to `10240`. |
