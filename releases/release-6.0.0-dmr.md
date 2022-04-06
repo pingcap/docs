@@ -262,7 +262,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
     More commands are introduced to address problems that interrupt a migration task. For example:
 
-     - In case of a schema error, you can update the schema file by using the `--from-source/--from-target` parameter of the `binlog-schema update` command, instead of editing the schema file separately.
+    - In case of a schema error, you can update the schema file by using the `--from-source/--from-target` parameter of the `binlog-schema update` command, instead of editing the schema file separately.
     - You can specify a binlog position to inject, replace, skip, or revert a DDL statement.
 
     [User document](/dm/dm-manage-schema.md)
