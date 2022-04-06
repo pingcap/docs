@@ -232,7 +232,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
     Warning: Newer version of data format cannot be downgraded in place to versions earlier than v5.4.0. During such a downgrade, you need to delete TiFlash replicas and replicate data after the downgrade. Alternatively, you can perform a downgrade by referring to [dttool migrate](/tiflash/tiflash-command-line-flags.md#dttool-migrate).
 
-    [User document](/use-tiflash.md#use-data-validation)
+    [User document](/tiflash/use-tiflash.md#use-data-validation)
 
 - Improve thread utilization
 
