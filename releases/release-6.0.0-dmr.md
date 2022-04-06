@@ -366,7 +366,6 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
     - Return an error message when a system variable is set to NULL [#32850](https://github.com/pingcap/tidb/issues/32850)
     - Remove Broadcast Join from the non-MPP mode [#31465](https://github.com/pingcap/tidb/issues/31465)
     - Support executing MPP plans on partitioned tables in dynamic pruning mode [#32347](https://github.com/pingcap/tidb/issues/32347)
-    - Support enabling the switch to reduce read latency in transactions at the `READ-COMMITTED` isolation level for the read-consistency read [#33159](https://github.com/pingcap/tidb/issues/33159)
     - Support pushing down predicates for common table expressions (CTEs) [#28163](https://github.com/pingcap/tidb/issues/28163)
     - Simplify the configurations of `Statement Summary` and `Capture Plan Baselines` to be available on a global basis only [#30557](https://github.com/pingcap/tidb/issues/30557)
     - Update gopsutil to v3.21.12 to address alarms reported when building binary on macOS 12 [#31607](https://github.com/pingcap/tidb/issues/31607)
