@@ -72,6 +72,7 @@
         - [Back up and Restore Data on Azure Blob Storage](/br/backup-and-restore-azblob.md)
       - BR Features
         - [Auto Tune](/br/br-auto-tune.md)
+        - [Batch Create Table](/br/br-batch-create-table.md)
       - [BR FAQ](/br/backup-and-restore-faq.md)
   - [Configure Time Zone](/configure-time-zone.md)
   - [Daily Checklist](/daily-check.md)
@@ -86,6 +87,7 @@
   - [Export Grafana Snapshots](/exporting-grafana-snapshots.md)
   - [TiDB Cluster Alert Rules](/alert-rules.md)
   - [TiFlash Alert Rules](/tiflash/tiflash-alert-rules.md)
+  - [Customize Configurations of Monitoring Servers](/tiup/customized-montior-in-tiup-environment.md)
 - Troubleshoot
   - [TiDB Troubleshooting Map](/tidb-troubleshooting-map.md)
   - [Identify Slow Queries](/identify-slow-queries.md)
@@ -102,6 +104,7 @@
   - [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md)
   - [Troubleshoot TiFlash](/tiflash/troubleshoot-tiflash.md)
   - [Troubleshoot Write Conflicts in Optimistic Transactions](/troubleshoot-write-conflicts.md)
+  - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
 - Performance Tuning
   - System Tuning
     - [Operating System Tuning](/tune-operating-system.md)
@@ -191,7 +194,7 @@
       - [tiup-cluster](/tiup/tiup-cluster.md)
       - [tiup-mirror](/tiup/tiup-mirror.md)
       - [tiup-bench](/tiup/tiup-bench.md)
-  - PingCAP Clinic Diagnostic Service (Beta)
+  - PingCAP Clinic Diagnostic Service (Technical Preview)
     - [Overview](/clinic/clinic-introduction.md)
     - [Use PingCAP Clinic](/clinic/clinic-user-guide-for-tiup.md)
     - [PingCAP Clinic Diagnostic Data](/clinic/clinic-data-instruction-for-tiup.md)
@@ -203,6 +206,7 @@
     - [External Storages](/br/backup-and-restore-storages.md)
     - BR Features
       - [Auto Tune](/br/br-auto-tune.md)
+      - [Batch Create Table](/br/br-batch-create-table.md)
     - [BR FAQ](/br/backup-and-restore-faq.md)
   - TiDB Binlog
     - [Overview](/tidb-binlog/tidb-binlog-overview.md)
