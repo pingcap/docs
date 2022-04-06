@@ -156,7 +156,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
 - Cache hotspot small tables
 
-    For customer applications in scenarios where hotspot small tables are accessed, TiDB supports explicitly caching the hotspot tables in memory, which greatly improves the access performance, improves the throughput, and reduces access latency. This solution can effectively avoid introducing a third-party cache middleware, reduce the complexity of the architecture, and cut the cost of operation and maintenance management. The solution is suitable for scenarios where small tables are frequently accessed and rarely updated, such as the configuration tables or exchange rate tables.
+    For customer applications in scenarios where hotspot small tables are accessed, TiDB supports explicitly caching the hotspot tables in memory, which greatly improves the access performance, improves the throughput, and reduces access latency. This solution can effectively avoid introducing a third-party cache middleware, reduce the complexity of the architecture, and cut the cost of operation and maintenance. The solution is suitable for scenarios where small tables are frequently accessed but rarely updated, such as the configuration tables or exchange rate tables.
 
     [User document](/cached-tables.md), [#25293](https://github.com/pingcap/tidb/issues/25293)
 
