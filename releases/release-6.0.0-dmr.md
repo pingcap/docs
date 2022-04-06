@@ -250,7 +250,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
     - View migration tasks on Dashboard
     - Manage migration tasks
     - Configure upstream settings
-    - Query replication status 
+    - Query replication status
     - View master and worker information
 
     WebUI is still experimental and is still under development. Therefore, it is recommended only for trial. A known issue is that problems might occur if you use WebUI and dmctl to operate the same task. This issue will be resolved in later versions.
@@ -308,7 +308,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
 - ​​Accelerate leader balancing after restarting TiKV nodes
 
-    After a restart of TiKV nodes, the unevenly scattered leaders must be redistributed for load balance. In large-scale clusters, leader balancing time is positively correlated with the number of Regions. For example, the leader balancing of 100K Regions can take 20-30 minutes, which is prone to performance issues and stability risks due to uneven load. TiDB v6.0 provides a parameter to control the balancing concurrency and enlarges the default value to 4 times of the original, which greatly shortens the leader rebalancing time and accelerates the business recovery after a restart of the TiKV nodes.
+    After a restart of TiKV nodes, the unevenly scattered leaders must be redistributed for load balance. In large-scale clusters, leader balancing time is positively correlated with the number of Regions. For example, the leader balancing of 100K Regions can take 20-30 minutes, which is prone to performance issues and stability risks due to uneven load. TiDB v6.0.0 provides a parameter to control the balancing concurrency and enlarges the default value to 4 times of the original, which greatly shortens the leader rebalancing time and accelerates the business recovery after a restart of the TiKV nodes.
 
     [User documentation](/pd-control.md#scheduler-config-balance-leader-scheduler), [#4610](https://github.com/tikv/pd/issues/4610)
 
