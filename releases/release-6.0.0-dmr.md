@@ -245,7 +245,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
 - Add WebUI (experimental)
 
-    On the WebUI, you can easily manage a large number of migration tasks. The WebUI supports:
+    With the WebUI, you can easily manage a large number of migration tasks. The WebUI supports:
 
     - Dashboard
     - Migration task management
