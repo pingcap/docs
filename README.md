@@ -38,3 +38,7 @@ Currently, we maintain the following versions of TiDB documentation in different
 [<img src="media/contribution-map.png" alt="contribution-map" width="180"></img>](https://github.com/pingcap/community/tree/master/special-interest-groups/sig-docs)
 
 See [TiDB Documentation Contributing Guide](/CONTRIBUTING.md) to become a contributor! 🤓
+
+## Contributor over time
+
+[![Contributor over time](https://contributor-graph-api.apiseven.com/contributors-svg?chart=contributorOverTime&repo=pingcap/docs)](https://www.apiseven.com/en/contributor-graph?chart=contributorOverTime&repo=pingcap/docs)
