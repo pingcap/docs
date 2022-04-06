@@ -214,15 +214,15 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
     [User document](/sql-plan-management.md#baseline-capturing), [#32466](https://github.com/pingcap/tidb/issues/32466)
 
-- Quota Limiter (experimental)
+- Support TiKV quota limiter (experimental)
 
-    If your machine deployed with TiKV has limited resources and the foreground is burdened by an excessively large amount of requests, background CPU resources are occupied by the foreground, causing TiKV performance to degrade. In TiDB v6.0, you can use the quota-related configuration items to limit the resources used by the foreground, including CPU and read/write bandwidth. This greatly improves stability of clusters under long-term heavy workloads.
+    If your machine deployed with TiKV has limited resources and the foreground is burdened by an excessively large amount of requests, background CPU resources are occupied by the foreground, causing TiKV performance unstable. In TiDB v6.0, you can use the quota-related configuration items to limit the resources used by the foreground, including CPU and read/write bandwidth. This greatly improves stability of clusters under long-term heavy workloads.
 
-    [User document](/tikv-configuration-file.md#quota)
+    [User document](/tikv-configuration-file.md#quota), [#12264](https://github.com/tikv/tikv/pull/12264)
 
 - Support the zstd compression algorithm in TiFlash
 
-    TiFlash introduces two parameters, profiles.default.dt_compression_method and profiles.default.dt_compression_level, which allows users to select the optimal compression algorithm based on performance and capacity balance.
+    TiFlash introduces two parameters, `profiles.default.dt_compression_method` and `profiles.default.dt_compression_level`, which allow users to select the optimal compression algorithm based on performance and capacity balance.
 
     [User document](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)
 
@@ -236,7 +236,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
 - Improve thread utilization
 
-    TiFlash introduces asynchronous GRPC and Min-TSO scheduling mechanisms. Such mechanisms ensure more efficient use of threads and avoids system crashes caused by excessive threads.
+    TiFlash introduces asynchronous GRPC and Min-TSO scheduling mechanisms. Such mechanisms ensure more efficient use of threads and avoid system crashes caused by excessive threads.
 
     [User document](/tiflash/monitor-tiflash.md#coprocessor)
 
@@ -246,7 +246,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
 - Add WebUI (experimental)
 
-    On the newly introduced WebUI, you can easily manage a large number of migration tasks. The WebUI supports:
+    On the WebUI, you can easily manage a large number of migration tasks. The WebUI supports:
 
     - Dashboard
     - Migration task management
@@ -254,7 +254,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
     - Replication status query
     - Master and Worker management
 
-    WebUI is still experimental and is still under development. Therefore, it is recommended only for trial. A known issue is that problems might occur if you use WebUI and dmctl  to operate the same task. This issue will be resolved in later versions.
+    WebUI is still experimental and is still under development. Therefore, it is recommended only for trial. A known issue is that problems might occur if you use WebUI and dmctl to operate the same task. This issue will be resolved in later versions.
 
     [User document](/dm/dm-webui-guide.md)
 
@@ -262,8 +262,8 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
     More commands are introduced to address problems that interrupt a migration task. For example:
 
-- In case of a schema error, you can update the schema file by using the `--from-source/--from-target` parameter of the binlog-schema update, instead of editing the schema file separately.
-- You can specify a binlog position to inject, replace, skip, or revert a DDL statement.
+     - In case of a schema error, you can update the schema file by using the `--from-source/--from-target` parameter of the `binlog-schema update` command, instead of editing the schema file separately.
+    - You can specify a binlog position to inject, replace, skip, or revert a DDL statement.
 
     [User document](/dm/dm-manage-schema.md)
 
@@ -283,9 +283,9 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
 #### TiDB Lightning
 
-- Maximum tolerable error
+- Support configuring the maximum number of tolerable errors
 
-    Added a configuration item `max-error`. The default value is 0. When the value is greater than 0, the max-error function is enabled. If an error occurs in a row during encoding, a record containing this row is added to `type_error_v1` and this row is ignored. When rows with errors exceed the threshold, TiDB Lightning exits immediately.
+    Added a configuration item `max-error`. The default value is 0. When the value is greater than 0, the max-error feature is enabled. If an error occurs in a row during encoding, a record containing this row is added to `type_error_v1` and this row is ignored. When rows with errors exceed the threshold, TiDB Lightning exits immediately.
 
     Matching the `max-error` configuration, the `lightning_task_info` configuration item records the name of the database that reports a data saving error.
 
