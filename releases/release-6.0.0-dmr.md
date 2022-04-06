@@ -4,7 +4,7 @@ title: TiDB 6.0.0 Release Notes
 
 # TiDB 6.0.0 Release Notes
 
-Release date: x x, 2022
+Release date: April 7, 2022
 
 TiDB version: 6.0.0-DMR
 
@@ -29,7 +29,7 @@ Also, as a core component of TiDB’s HTAP solution, TiFlash<sup>TM</sup> is off
 
 ## Release strategy changes
 
-Starting from TiDB 6.0.0, TiDB provides two types of releases:
+Starting from TiDB v6.0.0, TiDB provides two types of releases:
 
 - Long-Term Support Releases
 
@@ -39,7 +39,7 @@ Starting from TiDB 6.0.0, TiDB provides two types of releases:
 
     Development Milestone Releases (DMR) are released approximately every two months. A DMR introduces new features and improvements, but does not accept patch releases. It is not recommended for on-premises users to use DMR in production environments. For example, v6.0.0-DMR is a DMR.
 
-TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
+TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
 ## Compatibility changes
 
