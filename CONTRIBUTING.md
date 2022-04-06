@@ -75,6 +75,8 @@ Please perform the following steps to create your Pull Request to this repositor
 > **Note:**
 >
 > This section takes creating a PR to the `master` branch as an example. Steps of creating PRs to other branches are similar.
+>
+> TiDB currently maintains the following versions of TiDB documentation: dev(the latest development version, which corresponds to the master branch of documentation repository), v5.2, v5.1, v5.0, v4.0, v3.1, v3.0 and v2.1. Please consider which version(s) will be affected by your changes before creating a Pull Request, and apply your changes to corresponding version(s). You can refer to [Guideline for choosing the affected version(s)](#guideline-for-choosing-the-affected-versions) for more information.
 
 ### Step 0: Sign the CLA
 
@@ -147,6 +149,10 @@ git push -u origin new-branch-name # "-u" is used to track the remote branch fro
 2. Click the `Compare & pull request` button next to your `new-branch-name` branch to create your PR. See [Pull Request Title Style](https://github.com/pingcap/community/blob/master/contributors/commit-message-pr-style.md#pull-request-title-style).
 
 Now, your PR is successfully submitted! After this PR is merged, you will automatically become a contributor to TiDB documentation.
+
+> **Note:**
+>
+> If your changes apply to multiple docs versions(dev, v5.0, v4.0, v3.1, v3.0, v2.1), **choose the related version(s) in PR description template**. Then, the repository administrator will add corresponding cherry-pick labels to your PR.
 
 ## Guideline for choosing the affected version(s)
 
