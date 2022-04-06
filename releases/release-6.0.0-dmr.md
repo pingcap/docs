@@ -251,7 +251,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
     - Manage migration tasks
     - Configure upstream settings
     - Query replication status 
-    -  View master and worker information
+    - View master and worker information
 
     WebUI is still experimental and is still under development. Therefore, it is recommended only for trial. A known issue is that problems might occur if you use WebUI and dmctl to operate the same task. This issue will be resolved in later versions.
 
