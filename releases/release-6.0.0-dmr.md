@@ -391,7 +391,7 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
     - TiKV Coprocessor supports the Projection operator [#12114](https://github.com/tikv/tikv/issues/12114)
     - Support dynamically modifying `raftstore.raft-max-size-per-msg` [#12017](https://github.com/tikv/tikv/issues/12017)
     - Support monitoring multi-k8s in Grafana [#12014](https://github.com/tikv/tikv/issues/12014)
-    - Transfer the leadership to CDC observer to reduce latency jitter [#12111](https://github.com/tikv/tikv/issues/12111)
+    - Transfer the leadership to TiCDC observer to reduce latency jitter [#12111](https://github.com/tikv/tikv/issues/12111)
     - Support dynamically modifying `raftstore.apply_max_batch_size` and `raftstore.store_max_batch_size` [#11982](https://github.com/tikv/tikv/issues/11982)
     - RawKV V2 returns the latest version upon receiving the `raw_get` or `raw_scan` request [#11965](https://github.com/tikv/tikv/issues/11965)
     - Support the RCCheckTS consistency reads [#12097](https://github.com/tikv/tikv/issues/12097)
@@ -403,7 +403,7 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
 + PD
 
     - Support automatically selecting the fastest object for transfer when evicting the leader, which helps speed up the eviction process [#4229](https://github.com/tikv/pd/issues/4229)
-    - Forbid deleting a voter from a 2-replica Raft group in case that the Region becomes unavailable [#4564](https://github.com/tikv/pd/issues/4564)
+    - Forbid deleting a voter from a 2-replica Raft group in case the Region becomes unavailable [#4564](https://github.com/tikv/pd/issues/4564)
     - Speed up the scheduling of the balance leader [#4652](https://github.com/tikv/pd/issues/4652)
 
 + TiFlash
@@ -519,7 +519,7 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
 + TiFlash
 
-    - Fix the issue of TiFlash panic when the memory limit is enabled [#3902](https://github.com/pingcap/tiflash/issues/3902)
+    - Fix the TiFlash panic issue that occurs when the memory limit is enabled [#3902](https://github.com/pingcap/tiflash/issues/3902)
     - Fix the issue that expired data is recycled slowly [#4146](https://github.com/pingcap/tiflash/issues/4146)
     - Fix the potential issue of TiFlash panic when `Snapshot` is applied simultaneously with multiple DDL operations [#4072](https://github.com/pingcap/tiflash/issues/4072)
     - Fix the potential query error after adding columns under heavy read workload [#3967](https://github.com/pingcap/tiflash/issues/3967)
@@ -530,9 +530,9 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
     - Fix the issue that the learner-read process takes too much time under high concurrency scenarios [#3555](https://github.com/pingcap/tiflash/issues/3555)
     - Fix the wrong result that occurs when casting `DATETIME` to `DECIMAL` [#4151](https://github.com/pingcap/tiflash/issues/4151)
     - Fix the issue of memory leak that occurs when a query is canceled [#4098](https://github.com/pingcap/tiflash/issues/4098)
-    - Fix bug that enabling the elastic thread pool might introduce memory leak [#4098](https://github.com/pingcap/tiflash/issues/4098)
+    - Fix a bug that enabling the elastic thread pool might cause a memory leak [#4098](https://github.com/pingcap/tiflash/issues/4098)
     - Fix a bug that canceled MPP queries might cause tasks to hang forever when the local tunnel is enabled [#4229](https://github.com/pingcap/tiflash/issues/4229)
-    - Fix a bug that the failure of HashJoin build side might cause MPP queries to hang forever [#4195](https://github.com/pingcap/tiflash/issues/4195)
+    - Fix a bug that the failure of the HashJoin build side might cause MPP queries to hang forever [#4195](https://github.com/pingcap/tiflash/issues/4195)
     - Fix a bug that MPP tasks might leak threads forever [#4238](https://github.com/pingcap/tiflash/issues/4238)
 
 + Tools
