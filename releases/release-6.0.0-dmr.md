@@ -286,7 +286,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
     Added a configuration item `max-error`. The default value is 0. When the value is greater than 0, the max-error feature is enabled. If an error occurs in a row during encoding, a record containing this row is added to `type_error_v1` and this row is ignored. When rows with errors exceed the threshold, TiDB Lightning exits immediately.
 
-    Matching the `max-error` configuration, the `lightning_task_info` configuration item records the name of the database that reports a data saving error.
+    Matching the `max-error` configuration, the `lightning.task-info-schema-name` configuration item records the name of the database that reports a data saving error.
 
     This feature does not cover all types of errors, for example, syntax errors are not applicable.
 
