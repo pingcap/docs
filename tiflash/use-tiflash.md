@@ -81,7 +81,7 @@ In the result of above statement:
 
 ### Set available zones
 
-When configuring replicas, if you need to distribute TiFlash replicas to multiple data centers for disaster recovery, you can configure available zones by following steps below:
+When configuring replicas, if you need to distribute TiFlash replicas to multiple data centers for the purpose of disaster recovery, you can configure available zones by following steps below:
 
 1. Specify labels for TiFlash nodes in the cluster configuration file.
 
@@ -114,7 +114,7 @@ When configuring replicas, if you need to distribute TiFlash replicas to multipl
     ALTER TABLE t SET TIFLASH REPLICA 2 LOCATION LABELS "zone";
     ```
 
-3. The PD schedules replicas based on the labels. Specifically, the PD schedules two replicas of table `t` to two available zones, respectively. You can use pd-ctl to view the scheduling.
+3. The PD schedules the replicas based on the labels. In this example, the PD schedules two replicas of table `t` to two available zones, respectively. You can use pd-ctl to view the scheduling.
 
     ```shell
     > tiup ctl:<version> pd -u<pd-host>:<pd-port> store
