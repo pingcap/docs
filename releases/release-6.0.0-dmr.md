@@ -374,7 +374,7 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
 + TiKV
 
-    - Improve the Raftstore sampling accuracy for large key range batches [#12327](https://github.com/tikv/tikv/issues/12327)
+    - Improve the Raftstore sampling accuracy for batches with many key ranges [#12327](https://github.com/tikv/tikv/issues/12327)
     - Add the correct "Content-Type" for `debug/pprof/profile` to make the Profile more easily identified [#11521](https://github.com/tikv/tikv/issues/11521)
     - Renew the lease time of the leader infinitely when the Raftstore has heartbeats or handles read requests, which helps reduce latency jitter [#11579](https://github.com/tikv/tikv/issues/11579)
     - Choose the store with the least cost when switching the leader, which helps improve performance stability [#10602](https://github.com/tikv/tikv/issues/10602)
@@ -408,7 +408,7 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
 + TiFlash
 
-    - Forbid the logical splitting of TiFlash files (by adjusting the default value of `profiles.default.dt_enable_logical_split` to `false`. See [user document](/tiflash/tiflash-configuration.md#tiflash-configuration-parameters) for details) and improve the space usage efficiency of the TiFlash columnar storage so that the space occupation of a table synchronized to TiFlash is similar to the space occupation of the table in TiKV.
+    - Forbid the logical splitting of TiFlash files (by adjusting the default value of `profiles.default.dt_enable_logical_split` to `false`. See [user document](/tiflash/tiflash-configuration.md#tiflash-configuration-parameters) for details) and improve the space usage efficiency of the TiFlash columnar storage so that the space occupation of a table synchronized to TiFlash is similar to the space occupation of the table in TiKV
     - Optimize the cluster management and replica replication mechanism for TiFlash by integrating the previous cluster management module into TiDB, which accelerates replica creation for small tables [#29924](https://github.com/pingcap/tidb/issues/29924)
 
 + Tools
