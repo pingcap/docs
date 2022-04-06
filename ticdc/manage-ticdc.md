@@ -12,14 +12,14 @@ You can also use the HTTP interface (the TiCDC OpenAPI feature) to manage the Ti
 
 ## Upgrade TiCDC using TiUP
 
-This section introduces how to upgrade the TiCDC cluster using TiUP. In the following example, assume that you need to upgrade TiCDC and the entire TiDB cluster to v5.4.0.
+This section introduces how to upgrade the TiCDC cluster using TiUP. In the following example, assume that you need to upgrade TiCDC and the entire TiDB cluster to v6.0.0.
 
 {{< copyable "shell-regular" >}}
 
 ```shell
 tiup update --self && \
 tiup update --all && \
-tiup cluster upgrade <cluster-name> v5.4.0
+tiup cluster upgrade <cluster-name> v6.0.0
 ```
 
 ### Notes for upgrade
@@ -224,6 +224,9 @@ The following are descriptions of parameters and parameter values that can be co
 | `sasl-user` | The identity (authcid) of SASL/PLAIN or SASL/SCRAM authentication needed to connect to the downstream Kafka instance (optional) |
 | `sasl-password` | The password of SASL/PLAIN or SASL/SCRAM authentication needed to connect to the downstream Kafka instance (optional) |
 | `sasl-mechanism` | The name of SASL/PLAIN or SASL/SCRAM authentication needed to connect to the downstream Kafka instance (optional)  |
+| `dial-timeout` | The timeout in establishing a connection with the downstream Kafka. The default value is `10s` |
+| `read-timeout` | The timeout in getting a response returned by the downstream Kafka. The default value is `10s` |
+| `write-timeout`| The timeout in sending a request to the downstream Kafka. The default value is `10s` |
 
 Best practices:
 
