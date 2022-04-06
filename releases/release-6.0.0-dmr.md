@@ -56,10 +56,10 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 | `tidb_mem_quota_hashjoin`<br/>`tidb_mem_quota_indexlookupjoin`<br/>`tidb_mem_quota_indexlookupreader` <br/>`tidb_mem_quota_mergejoin`<br/>`tidb_mem_quota_sort`<br/>`tidb_mem_quota_topn` | Deleted | Since v5.0, these variables have been replaced by `tidb_mem_quota_query` and removed from the [system variables](/system-variables.md) document. To ensure compatibility, these variables were kept in source code. Since TiDB 6.0.0, these variables are removed from the code, too. |
 | [`tidb_enable_mutation_checker`](/system-variables.md#tidb_enable_mutation_checker-new-in-v600) | Newly added | Controls whether to enable the mutation checker. The default value is `ON`. |
 | [`tidb_ignore_prepared_cache_close_stmt`](/system-variables.md#tidb_ignore_prepared_cache_close_stmt-new-in-v600) | Newly added | Controls whether to ignore the command that closes Prepared Statement. The default value is `OFF`. |
-| [`tidb_mem_quota_binding_cache`](/system-variables.md#tidb_mem_quota_binding_cache-new-in-v600) | Newly added | Set the memory usage threshold for the cache holding `binding`. The default value is `67108864` (64 MiB). |
+| [`tidb_mem_quota_binding_cache`](/system-variables.md#tidb_mem_quota_binding_cache-new-in-v600) | Newly added | Sets the memory usage threshold for the cache holding `binding`. The default value is `67108864` (64 MiB). |
 | [`tidb_placement_mode`](/system-variables.md#tidb_placement_mode-new-in-v600) | Newly added | Controls whether DDL statements ignore the placement rules specified by [Placement Rules in SQL](/placement-rules-in-sql.md). The default value is `strict`, which means that DDL statements do not ignore placement rules. |
 | [`tidb_rc_read_check_ts`](/system-variables.md#tidb_rc_read_check_ts-new-in-v600) | Newly added | <ul><li> Optimizes read statement latency within a transaction. If read/write conflicts are more severe, turning this variable on will add additional overhead and latency, causing regressions in performance. The default value is `off`.</li><li> This variable is not yet compatible with [replica-read](/system-variables.md#tidb_replica_read-new-in-v40). If a read request has `tidb_rc_read_check_ts` on, it might not be able to use replica-read. Do not turn on both variables at the same time.</li></ul> |
-| [`tidb_sysdate_is_now`](/system-variables.md#tidb_sysdate_is_now-new-in-v600) | Newly added | Controls whether `SYSDATE` can be replaced by `NOW`. This configuration has the same effect as MySQL option [`sysdate-is-now`](https://dev.mysql.com/doc/refman/8.0/en/server-options.html#option_mysqld_sysdate-is-now). The default value is `OFF`. |
+| [`tidb_sysdate_is_now`](/system-variables.md#tidb_sysdate_is_now-new-in-v600) | Newly added | Controls whether the `SYSDATE` function can be replaced by the `NOW` function. This configuration item has the same effect as the MySQL option [`sysdate-is-now`](https://dev.mysql.com/doc/refman/8.0/en/server-options.html#option_mysqld_sysdate-is-now). The default value is `OFF`. |
 | [`tidb_table_cache_lease`](/system-variables.md#tidb_table_cache_lease-new-in-v600) | Newly added | Controls the lease time of [table cache](/cached-tables.md), in seconds. The default value is `3`. |
 | [`tidb_top_sql_max_meta_count`](/system-variables.md#tidb_top_sql_max_meta_count-new-in-v600) | Newly added | Controls the maximum number of SQL statement types collected by [Top SQL](/dashboard/top-sql.md) per minute. The default is `5000`. |
 | [`tidb_top_sql_max_time_series_count`](/system-variables.md#tidb_top_sql_max_time_series_count-new-in-v600) | Newly added | Controls how many SQL statements that contribute the most to the load (that is, top N) can be recorded by [Top SQL](/dashboard/top-sql.md) per minute. The default is `100`. |
@@ -72,7 +72,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 | TiDB | `stmt-summary.enable` <br/> `stmt-summary.enable-internal-query` <br/> `stmt-summary.history-size` <br/> `stmt-summary.max-sql-length` <br/> `stmt-summary.max-stmt-count` <br/> `stmt-summary.refresh-interval` | Deleted | Configuration related to the [statement summary tables](/statement-summary-tables.md). All these configuration items are removed. You need to use SQL variables to control the statement summary tables. |
 | TiKV | `enable-io-snoop` | Deleted | Remove the `enable-io-snoop` configuration item. |
 | TiDB | [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) | Modified | Controls whether to enable support for the new collation. Since v6.0, the default value is changed from `false` to `true`. This configuration item only takes effect when the cluster is initialized for the first time. After the first bootstrap, you cannot enable or disable the new collation framework using this configuration item. |
-| TiKV | [`backup.num-threads`](/tikv-configuration-file.md#num-threads-1) | Modified | Modify the adjustable range to `[1, CPU]`.  |
+| TiKV | [`backup.num-threads`](/tikv-configuration-file.md#num-threads-1) | Modified | Modify the value range to `[1, CPU]`.  |
 | TiKV | [`raftstore.apply-max-batch-size`](/tikv-configuration-file.md#apply-max-batch-size) | Modified | Chang the maximum value to `10240`. |
 | TiKV | [`raftstore.raft-max-size-per-msg`](/tikv-configuration-file.md#raft-max-size-per-msg) | Modified | <ul><li>Change the minimum value from `0` to larger than `0`.</li><li>Add a maximum value of `3GB`.</li><li>Change the unit from `MB` to `KB\|MB\|GB`.</li></ul> |
 | TiKV | [`raftstore.store-max-batch-size`](/tikv-configuration-file.md#store-max-batch-size) | Modified | Add a maximum value of `10240`. |
@@ -174,17 +174,17 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
 - Enhance prepared statements to share execution plans
 
-    Reusing SQL execution plans can effectively reduce the time for parsing SQL statements, lessen CPU resource consumption, and improve SQL execution efficiency. One of the important methods of SQL tuning is to reuse SQL execution plans effectively. TiDB has supported sharing execution plans with prepared statements. However, when the prepared statements are closed, TiDB automatically clears the corresponding plan cache. After that, TiDB might unnecessarily parse the repeated SQL statements, affecting the execution efficiency. Since v6.0, TiDB supports controlling whether to ignore the `COM_STMT_CLOSE` directive through the `tidb_ignore_clost_stmt_cmd` parameter (disabled by default). When the parameter is enabled, TiDB ignores the directive of closing prepared statements and keeps the execution plan in the cache, improving the reuse rate of the execution plan.
+    Reusing SQL execution plans can effectively reduce the time for parsing SQL statements, lessen CPU resource consumption, and improve SQL execution efficiency. One of the important methods of SQL tuning is to reuse SQL execution plans effectively. TiDB has supported sharing execution plans with prepared statements. However, when the prepared statements are closed, TiDB automatically clears the corresponding plan cache. After that, TiDB might unnecessarily parse the repeated SQL statements, affecting the execution efficiency. Since v6.0.0, TiDB supports controlling whether to ignore the `COM_STMT_CLOSE` directive through the `tidb_ignore_clost_stmt_cmd` parameter (disabled by default). When the parameter is enabled, TiDB ignores the directive of closing prepared statements and keeps the execution plan in the cache, improving the reuse rate of the execution plan.
 
     [User document](/sql-prepare-plan-cache.md#ignore-the-com_stmt_close-command-and-the-deallocate-prepare-statement), [#31056](https://github.com/pingcap/tidb/issues/31056)
 
-- Improved query pushdown
+- Improve query pushdown
 
-    With its native architecture of separating computing from storage, TiDB supports filtering out invalid data by pushing down operators, which greatly reduces the data transmission between TiDB and TiKV and thereby improves the query efficiency. In v6.0, TiDB supports pushing down more expressions and the `BIT` data type to TiKV, improving the query efficiency when computing those expressions and data types.
+    With its native architecture of separating computing from storage, TiDB supports filtering out invalid data by pushing down operators, which greatly reduces the data transmission between TiDB and TiKV and thereby improves the query efficiency. In v6.0.0, TiDB supports pushing down more expressions and the `BIT` data type to TiKV, improving the query efficiency when computing those expressions and data types.
 
     [User document](/functions-and-operators/expressions-pushed-down.md#add-to-the-blocklist), [#30738](https://github.com/pingcap/tidb/issues/30738)
 
-- Support the dynamic pruning mode for partitioned tables in TiFlash MPP engine (experimental)
+- Support dynamic pruning mode for partitioned tables in TiFlash MPP engine (experimental)
 
     In this mode, TiDB can read and compute the data on partitioned tables using the MPP engine of TiFlash, which greatly improves the query performance of partitioned tables.
 
@@ -321,7 +321,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
 - PingCAP Clinic diagnostic service (Technical Preview version)
 
-    PingCAP Clinic is a diagnostic service for TiDB clusters. This service helps users troubleshoot cluster issues remotely and provides a quick check of cluster status locally. With PingCAP Clinic, you can ensure the stable operation of your TiDB cluster for its full life cycle, predict potential issues, reduce the probability of issues, quickly troubleshoot and fix cluster issues.
+    PingCAP Clinic is a diagnostic service for TiDB clusters. This service helps troubleshoot cluster issues remotely and provides a quick check of cluster status locally. With PingCAP Clinic, you can ensure the stable operation of your TiDB cluster for its full life cycle, predict potential issues, reduce the probability of issues, and quickly troubleshoot and fix cluster issues.
 
     When contacting PingCAP technical support for remote assistance to troubleshoot cluster issues, you can use the PingCAP Clinic service to collect and upload diagnostic data, thereby improving the troubleshooting efficiency.
 
@@ -397,19 +397,19 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
     - Support the RCCheckTS consistency reads [#12097](https://github.com/tikv/tikv/issues/12097)
     - Support dynamically modifying  `storage.scheduler-worker-pool-size`(the thread count of the Scheduler pool) [#12067](https://github.com/tikv/tikv/issues/12067)
     - Control the use of CPU and bandwidth by using the global foreground flow controller to improve the performance stability of TiKV [#11855](https://github.com/tikv/tikv/issues/11855)
-    - Support dynamically modifying `readpool.unified.max-thread-count` (the thread count of the UnifyReadPool)  [#11781](https://github.com/tikv/tikv/issues/11781)
+    - Support dynamically modifying `readpool.unified.max-thread-count` (the thread count of the UnifyReadPool) [#11781](https://github.com/tikv/tikv/issues/11781)
     - Use the TiKV internal pipeline to replace the RocksDB pipeline and deprecate the `rocksdb.enable-multibatch-write` parameter [#12059](https://github.com/tikv/tikv/issues/12059)
 
 + PD
 
-    - Support automatically selecting the fastest object for transfer when evicting the leader, which helps speed up the eviction process  [#4229](https://github.com/tikv/pd/issues/4229)
+    - Support automatically selecting the fastest object for transfer when evicting the leader, which helps speed up the eviction process [#4229](https://github.com/tikv/pd/issues/4229)
     - Forbid deleting a voter from a 2-replica Raft group in case that the Region becomes unavailable [#4564](https://github.com/tikv/pd/issues/4564)
     - Speed up the scheduling of the balance leader [#4652](https://github.com/tikv/pd/issues/4652)
 
 + TiFlash
 
     - Forbid the logical splitting of TiFlash files (by adjusting the default value of `profiles.default.dt_enable_logical_split` to `false`. See [user document](/tiflash/tiflash-configuration.md#tiflash-configuration-parameters) for details) and improve the space usage efficiency of the TiFlash columnar storage so that the space occupation of a table synchronized to TiFlash is similar to the space occupation of the table in TiKV.
-    - Optimize the cluster management and replica replication mechanism for TiFlash by integrating the previous cluster management module into TiDB, which accelerates replica creation for small tables. [#29924](https://github.com/pingcap/tidb/issues/29924)
+    - Optimize the cluster management and replica replication mechanism for TiFlash by integrating the previous cluster management module into TiDB, which accelerates replica creation for small tables [#29924](https://github.com/pingcap/tidb/issues/29924)
 
 + Tools
 
@@ -503,7 +503,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
     - Fix a bug that TiKV might panic if it has been running for 2 years or more [#11940](https://github.com/tikv/tikv/issues/11940)
     - Fix the compilation issue on the ARM64 architecture caused by missing SSE instruction set [#12034](https://github.com/tikv/tikv/issues/12034)
     - Fix the issue that deleting an uninitialized replica might cause an old replica to be recreated [#10533](https://github.com/tikv/tikv/issues/10533)
-    - Fix the bug that stale messages causes TiKV to panic [#12023](https://github.com/tikv/tikv/issues/12023)
+    - Fix the bug that stale messages cause TiKV to panic [#12023](https://github.com/tikv/tikv/issues/12023)
     - Fix the issue that undefined behavior (UB) might occur in TsSet conversions [#12070](https://github.com/tikv/tikv/issues/12070)
     - Fix a bug that replica reads might violate the linearizability [#12109](https://github.com/tikv/tikv/issues/12109)
     - Fix the potential panic issue that occurs when TiKV performs profiling on Ubuntu 18.04 [#9765](https://github.com/tikv/tikv/issues/9765)
@@ -513,7 +513,7 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
 + PD
 
-    - Fix the issue that the operator creates steps with meaningless Joint Consensus [#4362](https://github.com/tikv/pd/issues/4362) [#4444](https://github.com/tikv/pd/issues/4444)
+    - Fix the issue that the operator creates steps with meaningless Joint Consensus [#4362](https://github.com/tikv/pd/issues/4362), [#4444](https://github.com/tikv/pd/issues/4444)
     - Fix a bug that the TSO revoking might get stuck when closing the PD client [#4549](https://github.com/tikv/pd/issues/4549)
     - Fix the issue that the Region scatterer scheduling might cause lost peers [#4565](https://github.com/tikv/pd/issues/4565)
     - Fix the issue that `Duration` fields of `dr-autosync` cannot be dynamically configured [#4651](https://github.com/tikv/pd/issues/4651)
