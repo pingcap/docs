@@ -27,7 +27,7 @@ Batch Create Table is a feature introduced in TiDB v6.0.0. This feature is enabl
 
 ### Baseline Capturing
 
-Baseline Capturing captures queries that meet capturing conditions and create bindings for them. It is used for [preventing rollback of execution plans during an upgrade](/sql-plan-management.md#prevent-rollback-of-execution-plans-during-an-upgrade).
+Baseline Capturing captures queries that meet capturing conditions and create bindings for them. It is used for [preventing regression of execution plans during an upgrade](/sql-plan-management.md#prevent-regression-of-execution-plans-during-an-upgrade).
 
 ## C
 
