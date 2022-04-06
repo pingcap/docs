@@ -346,8 +346,6 @@ Configuration items related to storage
 > - The TTL feature is only available for the RawKV interface for now. You can only configure this feature when creating a new cluster because TTL uses different data formats in the storage layer.
 > - You **must not** modify this item on an existing cluster. Otherwise, TiKV reports errors when it starts.
 > - You **must not** use this item on a cluster with TiDB nodes. Otherwise, serious consequences might occur, such as data corruption and the upgrade failure of TiDB clusters.
-
-
 ### `ttl-check-poll-interval`
 
 + The interval of checking data to reclaim physical spaces. If data reaches its TTL, TiKV forcibly reclaims its physical space during the check.
