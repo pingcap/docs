@@ -136,11 +136,11 @@ TiDB 6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
 ### Observability
 
-- Top SQL: Performance troubleshooting for non-experts
+- Top SQL: Performance diagnosis for non-experts
 
-    Top SQL is a self-serving database performance monitoring and diagnosis feature available in TiDB Dashboard, for DBAs and App developers, generally available in TiDB 6.0.
+    Top SQL is a self-serving database performance monitoring and diagnosis feature in TiDB Dashboard, for DBAs and App developers, which is now generally available in TiDB v6.0.
 
-    Unlike existing expert diagnostic features, Top SQL is designed for non-experts: you do not need to traverse thousands of monitoring charts to find correlations or understand TiDB internal mechanisms such as Raft Snapshot, RocksDB, MVCC, and TSO. To get started with Top SQL for analyzing database load quickly and improving App performance, only basic database knowledges (such as index, lock conflict and execution plans) is needed.
+    Unlike existing diagnostic features for experts, Top SQL is designed for non-experts: you do not need to traverse thousands of monitoring charts to find correlations or understand TiDB internal mechanisms such as Raft Snapshot, RocksDB, MVCC, and TSO. To use Top SQL for analyzing database load quickly and improving App performance, only basic database knowledge (such as index, lock conflict, and execution plans) is needed.
 
     Top SQL is not enabled by default. When enabled, Top SQL provides you with the real-time CPU load of each TiKV or TiDB node. Therefore, you can spot SQL statements consuming high CPU loads at first glimpse, and quickly analyze the issues such as database hotspots and sudden load increases. For example, you can use Top SQL to pinpoint and diagnose an unusual query that consumes 90% CPU of a single TiKV node.
 
