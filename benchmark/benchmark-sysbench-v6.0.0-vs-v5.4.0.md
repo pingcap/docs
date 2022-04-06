@@ -30,7 +30,7 @@ This test aims at comparing the Sysbench performance of TiDB v6.0.0 and TiDB v5.
 
 ### Parameter configuration
 
-TiDB v5.4.0 and TiDB v5.3.0 use the same configuration.
+TiDB v6.0.0 and TiDB v5.4.0 use the same configuration.
 
 #### TiDB parameter configuration
 
@@ -181,7 +181,7 @@ Compared with v5.4.0, the Update Non-index performance of v6.0.0 is slightly dro
 |600|23195.83|22270.81|40.37|44.17|-3.99|
 |900|25798.31|25118.78|56.84|57.87|-2.63|
 
-Compared with v5.4.0, the Update Index performance of v5.6.0 is dropped by 3.05%.
+Compared with v5.4.0, the Update Index performance of v6.0.0 is dropped by 3.05%.
 
 ![Update Index](/media/sysbench_v540vsv600_update_index.png)
 
