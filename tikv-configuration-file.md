@@ -369,6 +369,7 @@ Configuration items related to storage.
 ### `enable-ttl`
 
 + TTL is short for "Time to live". If this item is enabled, TiKV automatically deletes data that reaches its TTL. To set the value of TTL, you need to specify it in the requests when writing data via the client. If the TTL is not specified, it means that TiKV does not automatically delete the corresponding data.
++ Default value: `false`
 
 > **Warning:**
 >
@@ -376,7 +377,6 @@ Configuration items related to storage.
 > - You **must not** modify this item on an existing cluster. Otherwise, TiKV reports errors when it starts.
 > - You **must not** use this item on a cluster with TiDB nodes. Otherwise, serious consequences might occur, such as data corruption and the upgrade failure of TiDB clusters.
 
-+ Default value: `false`
 
 ### `ttl-check-poll-interval`
 
