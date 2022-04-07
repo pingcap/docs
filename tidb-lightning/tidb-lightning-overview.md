@@ -47,8 +47,15 @@ TiDB Lightning also supports using TiDB-backend for data import. In this mode, `
 
 ## Restrictions
 
-- If you use TiDB Lighting together with TiFlash:
+- If you use TiDB Lightning together with TiFlash:
 
     No matter a table has TiFlash replica(s) or not, you can import data to that table using TiDB Lightning. Note that this might slow the TiDB Lightning procedure, which depends on the NIC bandwidth on the lightning host, the CPU and disk load of the TiFlash node, and the number of TiFlash replicas.
 
+<<<<<<< HEAD
+=======
+- If you use TiDB Lightning together with TiDB:
+
+    TiDB Lightning does not support importing `charset=GBK` tables to TiDB clusters earlier than v5.4.0.
+
+>>>>>>> f20886918 (Update tidb-lightning-overview.md (#8086))
 - For Apache Parquet files, TiDB Lightning currently only accepts Amazon Aurora Parquet files.
