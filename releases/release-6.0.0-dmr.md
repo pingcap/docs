@@ -65,7 +65,7 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
 | [`tidb_top_sql_max_time_series_count`](/system-variables.md#tidb_top_sql_max_time_series_count-new-in-v600) | Newly added | Controls how many SQL statements that contribute the most to the load (that is, top N) can be recorded by [Top SQL](/dashboard/top-sql.md) per minute. The default value is `100`. |
 | [`tidb_txn_assertion_level`](/system-variables.md#tidb_txn_assertion_level-new-in-v600) | Newly added | Controls the assertion level. The assertion is a consistency check between data and indexes, which checks whether a key being written exists in the transaction commit process. By default, the check enables most of the check items, with almost no impact on performance.  |
 
-## Configuration file parameters
+### Configuration file parameters
 
 | Configuration file | Configuration | Change type | Description |
 |:---|:---|:---|:---|
@@ -239,7 +239,7 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
     [User document](/tiflash/monitor-tiflash.md#coprocessor)
 
-### Data Migration
+### Data migration
 
 #### TiDB Data Migration (DM)
 
@@ -442,7 +442,7 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
         - Support the base64 format password string [#31194](https://github.com/pingcap/tidb/issues/31194)
         - Standardize error codes and error outputs [#32239](https://github.com/pingcap/tidb/issues/32239)
 
-## Bug Fixes
+## Bug fixes
 
 + TiDB
 
