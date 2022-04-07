@@ -67,7 +67,7 @@ mysql> INSERT INTO t VALUES(),(),();
 Query OK, 3 rows affected (0.00 sec)
 Records: 3  Duplicates: 0  Warnings: 0
 
-mysql> SELECT _tidb_rowid, id from t;
+mysql> SELECT _tidb_rowid, id FROM t;
 +-------------+------+
 | _tidb_rowid | id   |
 +-------------+------+
