@@ -1316,13 +1316,8 @@ Configuration items related to Raft Engine.
 
 ### `enable`
 
-<<<<<<< HEAD
-+ Determines whether to use Raft Engine to store raft logs. When it is enabled, configurations of `raftdb` are ignored.
-+ Default value: `"false"`
-=======
 + Determines whether to use Raft Engine to store Raft logs. When it is enabled, configurations of `raftdb` are ignored.
 + Default value: `false`
->>>>>>> f08f7a1bd (Modify configuration description for disable-auto-compactions and fix typo (#7997))
 
 ### `dir`
 
