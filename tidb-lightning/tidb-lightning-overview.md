@@ -48,7 +48,7 @@ TiDB Lightning also supports using TiDB-backend for data import. In this mode, `
 
 ## Restrictions
 
-If you use TiDB Lighting together with TiFlash:
+If you use TiDB Lightning together with TiFlash:
 
-* For the cluster versions earlier than v4.0.6, if you create the TiFlash replica before using TiDB Lightning to import the data, the data import will fail. You must import data to the table before creating the TiFlash replica for the table.
+* For the cluster versions earlier than v4.0.6, if you create a TiFlash replica before using TiDB Lightning to import data, the data import will fail. You must import data to a table before creating the TiFlash replica for the table.
 * If TiDB and TiDB Lightning are both v4.0.6 or later, no matter whether a table has TiFlash replica(s) or not, you can import data to that table using TiDB Lightning. Note that this might slow the TiDB Lightning procedure, which depends on the NIC bandwidth on the lightning host, the CPU and disk load of the TiFlash node, and the number of TiFlash replicas.
