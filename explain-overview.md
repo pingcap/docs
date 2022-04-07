@@ -1,9 +1,9 @@
 ---
-title: Query Execution Plan Overview
+title: TiDB Query Execution Plan Overview
 summary: Learn about the execution plan information returned by the `EXPLAIN` statement in TiDB.
 ---
 
-# Query Execution Plan Overview
+# TiDB Query Execution Plan Overview
 
 > **Note:**
 >
