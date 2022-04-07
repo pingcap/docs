@@ -235,7 +235,7 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
 - Improve thread utilization
 
-    TiFlash introduces asynchronous GRPC and Min-TSO scheduling mechanisms. Such mechanisms ensure more efficient use of threads and avoid system crashes caused by excessive threads.
+    TiFlash introduces asynchronous gRPC and Min-TSO scheduling mechanisms. Such mechanisms ensure more efficient use of threads and avoid system crashes caused by excessive threads.
 
     [User document](/tiflash/monitor-tiflash.md#coprocessor)
 
