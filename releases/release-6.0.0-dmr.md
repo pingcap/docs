@@ -390,7 +390,7 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
     - Encode the values of RawKV API V2 as `user-value` + `ttl` + `ValueMeta` and encode `delete` in `ValueMeta` [#11965](https://github.com/tikv/tikv/issues/11965)
     - Support dynamically modifying `raftstore.raft-max-size-per-msg` [#12017](https://github.com/tikv/tikv/issues/12017)
     - Support monitoring multi-k8s in Grafana [#12014](https://github.com/tikv/tikv/issues/12014)
-    - Transfer the leadership to TiCDC observer to reduce latency jitter [#12111](https://github.com/tikv/tikv/issues/12111)
+    - Transfer the leadership to CDC observer to reduce latency jitter [#12111](https://github.com/tikv/tikv/issues/12111)
     - Support dynamically modifying `raftstore.apply_max_batch_size` and `raftstore.store_max_batch_size` [#11982](https://github.com/tikv/tikv/issues/11982)
     - RawKV V2 returns the latest version upon receiving the `raw_get` or `raw_scan` request [#11965](https://github.com/tikv/tikv/issues/11965)
     - Support the RCCheckTS consistency reads [#12097](https://github.com/tikv/tikv/issues/12097)
