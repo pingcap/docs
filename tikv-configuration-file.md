@@ -35,9 +35,19 @@ This document only describes the parameters that are not included in command-lin
 
 ### `log-format`
 
+<<<<<<< HEAD
 + The log format
 + Value options: "json", "text"
 + Default value: "text"
+=======
++ Determines whether to enable or disable the timestamp in the log
++ Optional values: `true`, `false`
++ Default value: `true`
+
+## log.file <span class="version-mark">New in v5.4.0</span>
+
++ Configuration items related to the log file.
+>>>>>>> f08f7a1bd (Modify configuration description for disable-auto-compactions and fix typo (#7997))
 
 ### `log-rotation-timespan`
 
@@ -1127,7 +1137,7 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 
 ### `disable-auto-compactions`
 
-+ Enables or disables automatic compaction
++ Determines whether to disable auto compaction.
 + Default value: `false`
 
 ### `soft-pending-compaction-bytes-limit`
@@ -1259,6 +1269,71 @@ Configuration items related to `raftdb`
 + The directory in which WAL files are stored
 + Default value: `"/tmp/tikv/store"`
 
+<<<<<<< HEAD
+=======
+## raft-engine
+
+Configuration items related to Raft Engine.
+
+> **Note:**
+>
+> - Raft Engine is an experimental feature. It is not recommended to use it in the production environment.
+> - When you enable Raft Engine for the first time, TiKV transfers its data from RocksDB to Raft Engine. Therefore, you need to wait extra tens of seconds for TiKV to start.
+> - The data format of Raft Engine in TiDB v5.4.0 is not compatible with earlier TiDB versions. Therefore, if you need to downgrade a TiDB cluster from v5.4.0 to an earlier version, **before** downgrading, disable Raft Engine by setting `enable` to `false` and restart TiKV for the configuration to take effect.
+
+### `enable`
+
++ Determines whether to use Raft Engine to store Raft logs. When it is enabled, configurations of `raftdb` are ignored.
++ Default value: `false`
+
+### `dir`
+
++ The directory at which raft log files are stored. If the directory does not exist, it will be created when TiKV is started.
++ When this configuration is not set, `{data-dir}/raft-engine` is used.
++ If there are multiple disks on your machine, it is recommended to store the data of Raft Engine on a different disk to improve TiKV performance.
++ Default value: `""`
+
+### `batch-compression-threshold`
+
++ Specifies the threshold size of a log batch. A log batch larger than this configuration is compressed. If you set this configuration item to `0`, compression is disabled.
++ Default value: `"8KB"`
+
+### `bytes-per-sync`
+
++ Specifies the maximum accumulative size of buffered writes. When this configuration value is exceeded, buffered writes are flushed to the disk.
++ If you set this configuration item to `0`, incremental sync is disabled.
++ Default value: `"4MB"`
+
+### `target-file-size`
+
++ Specifies the maximum size of log files. When a log file is larger than this value, it is rotated.
++ Default value: `"128MB"`
+
+### `purge-threshold`
+
++ Specifies the threshold size of the main log queue. When this configuration value is exceeded, the main log queue is purged.
++ This configuration can be used to adjust the disk space usage of Raft Engine.
++ Default value: `"10GB"`
+
+### `recovery-mode`
+
++ Determines how to deal with file corruption during recovery.
++ Value options: `"absolute-consistency"`, `"tolerate-tail-corruption"`, `"tolerate-any-corruption"`
++ Default value: `"tolerate-tail-corruption"`
+
+### `recovery-read-block-size`
+
++ The minimum I/O size for reading log files during recovery.
++ Default value: `"16KB"`
++ Minimum value: `"512B"`
+
+### `recovery-threads`
+
++ The number of threads used to scan and recover log files.
++ Default value: `4`
++ Minimum value: `1`
+
+>>>>>>> f08f7a1bd (Modify configuration description for disable-auto-compactions and fix typo (#7997))
 ## security
 
 Configuration items related to security
