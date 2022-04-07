@@ -388,7 +388,6 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
     - Support calculation in buckets [#11759](https://github.com/tikv/tikv/issues/11759)
     - Encode the keys of RawKV API V2 as `user-key` + `memcomparable-padding` + `timestamp` [#11965](https://github.com/tikv/tikv/issues/11965)
     - Encode the values of RawKV API V2 as `user-value` + `ttl` + `ValueMeta` and encode `delete` in `ValueMeta` [#11965](https://github.com/tikv/tikv/issues/11965)
-    - TiKV Coprocessor supports the Projection operator [#12114](https://github.com/tikv/tikv/issues/12114)
     - Support dynamically modifying `raftstore.raft-max-size-per-msg` [#12017](https://github.com/tikv/tikv/issues/12017)
     - Support monitoring multi-k8s in Grafana [#12014](https://github.com/tikv/tikv/issues/12014)
     - Transfer the leadership to TiCDC observer to reduce latency jitter [#12111](https://github.com/tikv/tikv/issues/12111)
