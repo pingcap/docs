@@ -292,7 +292,7 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
     [User document](/tidb-lightning/tidb-lightning-error-resolution.md#type-error)
 
-### Data sharing and subscription
+### TiDB data share subscription
 
 - Support replicating 100,000 tables simultaneously
 
