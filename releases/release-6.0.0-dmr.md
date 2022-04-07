@@ -14,10 +14,10 @@ In 6.0.0-DMR, the key new features or improvements are as follows:
 - Add a consistency check between data and indexes at the kernel level, which improves system stability and robustness, with only very low resource overhead.
 - Provide Top SQL, a self-serving database performance monitoring and diagnosis feature for non-experts.
 - Support Continuous Profiling that collects cluster performance data all the time, reducing MTTR for technical experts.
-- Cache hotspot small tables in memory, which greatly improves the access performance, improves the throughput, and reduces access latency.
+- Cache hotspot small tables in memory, which greatly improves the access performance, improves the throughput and reduces access latency.
 - Optimize in-memory pessimistic locking. Under the performance bottleneck caused by pessimistic locks, memory optimization for pessimistic locks can effectively reduce latency by 10% and increase QPS by 10%.
 - Enhance prepared statements to share execution plans, which lessens CPU resource consumption and improves SQL execution efficiency.
-- Improve the computing performance of the MPP engine by supporting pushing down more functions and operators and the general availability (GA) of the elastic thread pool.
+- Improve the computing performance of the MPP engine by supporting pushing down more expressions and the general availability (GA) of the elastic thread pool.
 - Add DM WebUI to facilitate managing a large number of migration tasks.
 - Improve the stability and efficiency of TiCDC when replicating data in large clusters. TiCDC now supports replicating 100,000 tables simultaneously.
 - Accelerate leader balancing after restarting TiKV nodes, which improves the speed of business recovery after a restart.
@@ -173,7 +173,7 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
 - Enhance prepared statements to share execution plans
 
-    Reusing SQL execution plans can effectively reduce the time for parsing SQL statements, lessen CPU resource consumption, and improve SQL execution efficiency. One of the important methods of SQL tuning is to reuse SQL execution plans effectively. TiDB has supported sharing execution plans with prepared statements. However, when the prepared statements are closed, TiDB automatically clears the corresponding plan cache. After that, TiDB might unnecessarily parse the repeated SQL statements, affecting the execution efficiency. Since v6.0.0, TiDB supports controlling whether to ignore the `COM_STMT_CLOSE` directive through the `tidb_ignore_clost_stmt_cmd` parameter (disabled by default). When the parameter is enabled, TiDB ignores the directive of closing prepared statements and keeps the execution plan in the cache, improving the reuse rate of the execution plan.
+    Reusing SQL execution plans can effectively reduce the time for parsing SQL statements, lessen CPU resource consumption, and improve SQL execution efficiency. One of the important methods of SQL tuning is to reuse SQL execution plans effectively. TiDB has supported sharing execution plans with prepared statements. However, when the prepared statements are closed, TiDB automatically clears the corresponding plan cache. After that, TiDB might unnecessarily parse the repeated SQL statements, affecting the execution efficiency. Since v6.0.0, TiDB supports controlling whether to ignore the `COM_STMT_CLOSE` command through the `tidb_ignore_clost_stmt_cmd` parameter (disabled by default). When the parameter is enabled, TiDB ignores the command of closing prepared statements and keeps the execution plan in the cache, improving the reuse rate of the execution plan.
 
     [User document](/sql-prepare-plan-cache.md#ignore-the-com_stmt_close-command-and-the-deallocate-prepare-statement), [#31056](https://github.com/pingcap/tidb/issues/31056)
 
@@ -374,7 +374,7 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
 + TiKV
 
-    - Improve the Raftstore sampling accuracy for batches with many key ranges [#12327](https://github.com/tikv/tikv/issues/12327)
+    - Improve the sampling accuracy of the Raftstore for batches with many key ranges [#12327](https://github.com/tikv/tikv/issues/12327)
     - Add the correct "Content-Type" for `debug/pprof/profile` to make the Profile more easily identified [#11521](https://github.com/tikv/tikv/issues/11521)
     - Renew the lease time of the leader infinitely when the Raftstore has heartbeats or handles read requests, which helps reduce latency jitter [#11579](https://github.com/tikv/tikv/issues/11579)
     - Choose the store with the least cost when switching the leader, which helps improve performance stability [#10602](https://github.com/tikv/tikv/issues/10602)
@@ -495,7 +495,7 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
     - Fix the panic issue caused by deleting snapshot files when the peer status is `Applying` [#11746](https://github.com/tikv/tikv/issues/11746)
     - Fix the issue of QPS drop when flow control is enabled and `level0_slowdown_trigger` is set explicitly [#11424](https://github.com/tikv/tikv/issues/11424)
     - Fix the issue that destroying a peer might cause high latency [#10210](https://github.com/tikv/tikv/issues/10210)
-    - Fix a bug that TiKV cannot delete a range of data (`unsafe_destroy_range` cannot be executed) when the GC worker is busy [#11903](https://github.com/tikv/tikv/issues/11903)
+    - Fix a bug that TiKV cannot delete a range of data (which means the internal command `unsafe_destroy_range` is executed) when the GC worker is busy [#11903](https://github.com/tikv/tikv/issues/11903)
     - Fix a bug that TiKV panics when the data in `StoreMeta` is accidentally deleted in some corner cases [#11852](https://github.com/tikv/tikv/issues/11852)
     - Fix a bug that TiKV panics when performing profiling on an ARM platform [#10658](https://github.com/tikv/tikv/issues/10658)
     - Fix a bug that TiKV might panic if it has been running for 2 years or more [#11940](https://github.com/tikv/tikv/issues/11940)
@@ -511,8 +511,8 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
 + PD
 
-    - Fix the issue that the operator creates steps with meaningless Joint Consensus [#4362](https://github.com/tikv/pd/issues/4362), [#4444](https://github.com/tikv/pd/issues/4444)
-    - Fix a bug that the TSO revoking might get stuck when closing the PD client [#4549](https://github.com/tikv/pd/issues/4549)
+    - Fix the issue that PD generates the operator with meaningless steps of Joint Consensus [#4362](https://github.com/tikv/pd/issues/4362)
+    - Fix a bug that the TSO revoking process might get stuck when closing the PD client [#4549](https://github.com/tikv/pd/issues/4549)
     - Fix the issue that the Region scatterer scheduling lost some peers [#4565](https://github.com/tikv/pd/issues/4565)
     - Fix the issue that `Duration` fields of `dr-autosync` cannot be dynamically configured [#4651](https://github.com/tikv/pd/issues/4651)
 
