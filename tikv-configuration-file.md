@@ -35,19 +35,9 @@ This document only describes the parameters that are not included in command-lin
 
 ### `log-format`
 
-<<<<<<< HEAD
 + The log format
 + Value options: "json", "text"
 + Default value: "text"
-=======
-+ Determines whether to enable or disable the timestamp in the log
-+ Optional values: `true`, `false`
-+ Default value: `true`
-
-## log.file <span class="version-mark">New in v5.4.0</span>
-
-+ Configuration items related to the log file.
->>>>>>> f08f7a1bd (Modify configuration description for disable-auto-compactions and fix typo (#7997))
 
 ### `log-rotation-timespan`
 
