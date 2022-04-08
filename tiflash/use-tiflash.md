@@ -15,7 +15,7 @@ You can either use TiDB to read TiFlash replicas for medium-scale analytical pro
 
 ## Create TiFlash replicas
 
-This section describes how to create TiFlash replicas for tables and for databases, and set available zones.
+This section describes how to create TiFlash replicas for tables and for databases, and set available zones for replica scheduling.
 
 ### Create TiFlash replicas for tables
 
@@ -143,7 +143,7 @@ SELECT TABLE_NAME FROM information_schema.tables where TABLE_SCHEMA = "<db_name>
 
 ### Set available zones
 
-When configuring replicas, if you need to distribute TiFlash replicas to multiple data centers for the purpose of disaster recovery, you can configure available zones by following steps below:
+When configuring replicas, if you need to distribute TiFlash replicas to multiple data centers for disaster recovery, you can configure available zones by following the steps below:
 
 1. Specify labels for TiFlash nodes in the cluster configuration file.
 
@@ -162,10 +162,10 @@ When configuring replicas, if you need to distribute TiFlash replicas to multipl
 
 2. After starting a cluster, specify the labels when creating replicas.
 
-     {{< copyable "sql" >}}
+    {{< copyable "sql" >}}
 
     ```sql
-    ALTER TABLE table_name SET TIFLASH REPLICA count LOCATION LABELS location_labels
+    ALTER TABLE table_name SET TIFLASH REPLICA count LOCATION LABELS location_labels;
     ```
 
     For example:
@@ -176,7 +176,7 @@ When configuring replicas, if you need to distribute TiFlash replicas to multipl
     ALTER TABLE t SET TIFLASH REPLICA 2 LOCATION LABELS "zone";
     ```
 
-3. The PD schedules the replicas based on the labels. In this example, the PD schedules two replicas of table `t` to two available zones, respectively. You can use pd-ctl to view the scheduling.
+3. PD schedules the replicas based on the labels. In this example, PD respectively schedules two replicas of the table `t` to two available zones. You can use pd-ctl to view the scheduling.
 
     ```shell
     > tiup ctl:<version> pd -u<pd-host>:<pd-port> store
