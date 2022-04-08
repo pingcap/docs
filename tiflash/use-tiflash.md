@@ -25,7 +25,7 @@ After TiFlash is connected to the TiKV cluster, data replication by default does
 {{< copyable "sql" >}}
 
 ```sql
-ALTER TABLE table_name SET TIFLASH REPLICA count
+ALTER TABLE table_name SET TIFLASH REPLICA count;
 ```
 
 The parameter of the above command is described as follows:
@@ -39,7 +39,7 @@ Create two replicas for the table:
 {{< copyable "sql" >}}
 
 ```sql
-ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 2
+ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 2;
 ```
 
 Delete the replica:
@@ -47,7 +47,7 @@ Delete the replica:
 {{< copyable "sql" >}}
 
 ```sql
-ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 0
+ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 0;
 ```
 
 **Notes:**
@@ -57,7 +57,7 @@ ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 0
     {{< copyable "sql" >}}
 
     ```sql
-    CREATE TABLE table_name like t
+    CREATE TABLE table_name like t;
     ```
 
 * For versions earlier than v4.0.6, if you create the TiFlash replica before using TiDB Lightning to import the data, the data import will fail. You must import data to the table before creating the TiFlash replica for the table.
@@ -75,7 +75,7 @@ You can check the status of the TiFlash replicas of a specific table using the f
 {{< copyable "sql" >}}
 
 ```sql
-SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = '<db_name>' and TABLE_NAME = '<table_name>'
+SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = '<db_name>' and TABLE_NAME = '<table_name>';
 ```
 
 In the result of above statement:
@@ -90,7 +90,7 @@ Similar to creating TiFlash replicas for tables, you can send a DDL statement to
 {{< copyable "sql" >}}
 
 ```sql
-ALTER DATABASE db_name SET TIFLASH REPLICA count
+ALTER DATABASE db_name SET TIFLASH REPLICA count;
 ```
 
 In this statement, `count` indicates the number of replicas. When you set it to `0`, replicas are deleted.
@@ -102,7 +102,7 @@ Examples:
     {{< copyable "sql" >}}
 
     ```sql
-    ALTER DATABASE `tpch50` SET TIFLASH REPLICA 2
+    ALTER DATABASE `tpch50` SET TIFLASH REPLICA 2;
     ```
 
 - Delete TiFlash replicas created for the database `tpch50`:
@@ -110,7 +110,7 @@ Examples:
     {{< copyable "sql" >}}
 
     ```sql
-    ALTER DATABASE `tpch50` SET TIFLASH REPLICA 0
+    ALTER DATABASE `tpch50` SET TIFLASH REPLICA 0;
     ```
 
 > **Note:**
@@ -131,7 +131,7 @@ Similar to creating TiFlash replicas for tables, successful execution of the DDL
 {{< copyable "sql" >}}
 
 ```sql
-SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = '<db_name>'
+SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = '<db_name>';
 ```
 
 To check tables without TiFlash replicas in the database, you can execute the following SQL statement:
@@ -139,7 +139,7 @@ To check tables without TiFlash replicas in the database, you can execute the fo
 {{< copyable "sql" >}}
 
 ```sql
-SELECT TABLE_NAME FROM information_schema.tables where TABLE_SCHEMA = "<db_name>" and TABLE_NAME not in (SELECT TABLE_NAME FROM information_schema.tiflash_replica where TABLE_SCHEMA = "<db_name>")
+SELECT TABLE_NAME FROM information_schema.tables where TABLE_SCHEMA = "<db_name>" and TABLE_NAME not in (SELECT TABLE_NAME FROM information_schema.tiflash_replica where TABLE_SCHEMA = "<db_name>");
 ```
 
 ### Set available zones
