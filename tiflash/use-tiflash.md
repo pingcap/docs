@@ -20,21 +20,21 @@ After TiFlash is connected to the TiKV cluster, data replication by default does
 {{< copyable "sql" >}}
 
 ```sql
-ALTER TABLE table_name SET TIFLASH REPLICA count
+ALTER TABLE table_name SET TIFLASH REPLICA count;
 ```
 
 The parameter of the above command is described as follows:
 
 - `count` indicates the number of replicas. When the value is `0`, the replica is deleted.
 
-If you execute multiple DDL statements on a same table, only the last statement is ensured to take effect. In the following example, two DDL statements are executed on the table `tpch50`, but only the second statement (to delete the replica) takes effect.
+If you execute multiple DDL statements on the same table, only the last statement is ensured to take effect. In the following example, two DDL statements are executed on the table `tpch50`, but only the second statement (to delete the replica) takes effect.
 
 Create two replicas for the table:
 
 {{< copyable "sql" >}}
 
 ```sql
-ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 2
+ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 2;
 ```
 
 Delete the replica:
@@ -42,7 +42,7 @@ Delete the replica:
 {{< copyable "sql" >}}
 
 ```sql
-ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 0
+ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 0;
 ```
 
 **Notes:**
@@ -52,7 +52,7 @@ ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 0
     {{< copyable "sql" >}}
 
     ```sql
-    CREATE TABLE table_name like t
+    CREATE TABLE table_name like t;
     ```
 
 * For versions earlier than v4.0.6, if you create the TiFlash replica before using TiDB Lightning to import the data, the data import will fail. You must import data to the table before creating the TiFlash replica for the table.
@@ -63,20 +63,88 @@ ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 0
 
 * In v5.1 and later versions, setting the replicas for the system tables is no longer supported. Before upgrading the cluster, you need to clear the replicas of the relevant system tables. Otherwise, you cannot modify the replica settings of the system tables after you upgrade the cluster to a later version.
 
-## Check the replication progress
+### Check replication progress
 
 You can check the status of the TiFlash replicas of a specific table using the following statement. The table is specified using the `WHERE` clause. If you remove the `WHERE` clause, you will check the replica status of all tables.
 
 {{< copyable "sql" >}}
 
 ```sql
-SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = '<db_name>' and TABLE_NAME = '<table_name>'
+SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = '<db_name>' and TABLE_NAME = '<table_name>';
 ```
 
 In the result of above statement:
 
-* `AVAILABLE` indicates whether the TiFlash replicas of this table is available or not. `1` means available and `0` means unavailable. Once the replicas become available, this status does not change. If you use DDL statements to modify the number of replicas, the replication status will be recalculated.
+* `AVAILABLE` indicates whether the TiFlash replicas of this table are available or not. `1` means available and `0` means unavailable. Once the replicas become available, this status does not change. If you use DDL statements to modify the number of replicas, the replication status will be recalculated.
 * `PROGRESS` means the progress of the replication. The value is between `0.0` and `1.0`. `1` means at least one replica is replicated.
+
+### Set available zones
+
+When configuring replicas, if you need to distribute TiFlash replicas to multiple data centers for disaster recovery, you can configure available zones by following the steps below:
+
+1. Specify labels for TiFlash nodes in the cluster configuration file.
+
+    ```
+    tiflash_servers:
+      - host: 172.16.5.81
+        config:
+          flash.proxy.labels: zone=z1
+      - host: 172.16.5.82
+        config:
+          flash.proxy.labels: zone=z1
+      - host: 172.16.5.85
+        config:
+          flash.proxy.labels: zone=z2
+    ```
+
+2. After starting a cluster, specify the labels when creating replicas.
+
+    {{< copyable "sql" >}}
+
+    ```sql
+    ALTER TABLE table_name SET TIFLASH REPLICA count LOCATION LABELS location_labels;
+    ```
+
+    For example:
+
+    {{< copyable "sql" >}}
+
+    ```sql
+    ALTER TABLE t SET TIFLASH REPLICA 2 LOCATION LABELS "zone";
+    ```
+
+3. PD schedules the replicas based on the labels. In this example, PD respectively schedules two replicas of the table `t` to two available zones. You can use pd-ctl to view the scheduling.
+
+    ```shell
+    > tiup ctl:<version> pd -u<pd-host>:<pd-port> store
+
+        ...
+        "address": "172.16.5.82:23913",
+        "labels": [
+          { "key": "engine", "value": "tiflash"},
+          { "key": "zone", "value": "z1" }
+        ],
+        "region_count": 4,
+
+        ...
+        "address": "172.16.5.81:23913",
+        "labels": [
+          { "key": "engine", "value": "tiflash"},
+          { "key": "zone", "value": "z1" }
+        ],
+        "region_count": 5,
+        ...
+
+        "address": "172.16.5.85:23913",
+        "labels": [
+          { "key": "engine", "value": "tiflash"},
+          { "key": "zone", "value": "z2" }
+        ],
+        "region_count": 9,
+        ...
+    ```
+
+For more information about scheduling replicas by using labels, see [Schedule Replicas by Topology Labels](/schedule-replicas-by-topology-labels.md), [Multiple Data Centers in One City Deployment](/multi-data-centers-in-one-city-deployment.md), and [Three Data Centers in Two Cities Deployment](/three-data-centers-in-two-cities-deployment.md).
 
 ## Use TiDB to read TiFlash replicas
 
