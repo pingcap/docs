@@ -503,9 +503,9 @@ The Plan Cache configuration of the `PREPARE` statement.
 
 ### `grpc-compression-type`
 
-- Specifies the compression algorithm used for data transfer between TiDB and TiKV nodes. The default value is `"none"`, which means no compression. To enable gzip algorithm, set this value to `"gzip"`.
+- Specifies the compression type used for data transfer between TiDB and TiKV nodes. The default value is `"none"`, which means no compression. To enable the gzip compression, set this value to `"gzip"`.
 - Default value: `"none"`
-- Optional values: `"none"`, `"gzip"`
+- Value options: `"none"`, `"gzip"`
 
 ### `commit-timeout`
 
