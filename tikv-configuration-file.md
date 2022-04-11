@@ -1029,7 +1029,7 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 
 ### `disable-auto-compactions`
 
-+ Enables or disables automatic compaction
++ Determines whether to disable auto compaction.
 + Default value: `false`
 
 ### `soft-pending-compaction-bytes-limit`
