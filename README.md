@@ -41,4 +41,4 @@ See [TiDB Documentation Contributing Guide](/CONTRIBUTING.md) to become a contri
 
 ## Contributor over time
 
-[![Contributor over time](https://contributor-graph-api.apiseven.com/contributors-svg?chart=contributorOverTime&repo=pingcap/docs)](https://www.apiseven.com/en/contributor-graph?chart=contributorOverTime&repo=pingcap/docs)
+[![Contributor over time](https://contributor-overtime-api.git-contributor.com/contributors-svg?chart=contributorOverTime&repo=pingcap/docs)](https://git-contributor.com?chart=contributorOverTime&repo=pingcap/docs)
