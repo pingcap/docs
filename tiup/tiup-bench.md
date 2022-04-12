@@ -5,7 +5,7 @@ summary: Learns how to stress test TiDB with TPC-C and TPC-H workloads using TiU
 
 # Stress Test TiDB Using TiUP Bench Component
 
-When you test the performance of a database, it is often required to stress test the database. To facilitate this, TiUP has integrated the bench component, which provides two workloads for stress testing: TPC-C and TPC-H. The commands and flags are as follows:
+When you test the performance of a database, it is often required to stress test the database. To facilitate this, TiUP has integrated the bench component, which provides two workloads for stress testing: [TPC-C](http://www.tpc.org/tpcc/) and [TPC-H](http://www.tpc.org/tpch/). The commands and flags are as follows. For more information, see the [TPC official website](http://www.tpc.org).
 
 {{< copyable "shell-root" >}}
 
