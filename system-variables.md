@@ -278,11 +278,11 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Scope: SESSION | GLOBAL
 - Value options: `1` and `2`
 - Controls how TiDB collects statistics.
-- The default value of `tidb_analyze_version` in each version of v5.1.x is as follows. For detailed introduction, see [Introduction to Statistics](/statistics.md).
+- The default value of `tidb_analyze_version` in each version of v5.1.x is as follows. For detailed information, see [Introduction to Statistics](/statistics.md).
 
-| Version | Default Value |
+| Version | Default value |
 | :- | :- |
-| v5.1.0 - v5.1.3 | `2`, serves as an experimental feature |
+| v5.1.0 - v5.1.3 | `2`, which serves as an experimental feature |
 | v5.1.4 and later v5.1.x versions | `1` |
 
 ### tidb_auto_analyze_end_time
