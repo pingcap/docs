@@ -29,7 +29,11 @@ You can use TiDB Dashboard in the following common desktop browsers of a relativ
 
 After accessing TiDB Dashboard, you will be directed to the user login interface, as shown in the image below.
 
+<<<<<<< HEAD
 - You can sign in with TiDB Dashboard using the TiDB `root` account. By default, the `root` password is empty.
+=======
+- You can sign in to TiDB Dashboard using the TiDB `root` account.
+>>>>>>> d72c2da65 (Update RBAC example for Dashboard access (#7988))
 - If you have created a [User-defined SQL User](/dashboard/dashboard-user.md), you can sign in using this account and the corresponding password.
 
 ![Login interface](/media/dashboard/dashboard-access-login.png)
