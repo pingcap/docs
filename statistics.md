@@ -7,9 +7,9 @@ summary: Learn how the statistics collect table-level and column-level informati
 
 TiDB uses statistics to decide [which index to choose](/choose-index.md). The `tidb_analyze_version` variable controls the statistics collected by TiDB. Currently, two versions of statistics are supported: `tidb_analyze_version = 1` and `tidb_analyze_version = 2`. The default value of this variable in each version of v5.1.x is as follows:
 
-| Version | Default Value |
+| Version | Default value |
 | :- | :- |
-| v5.1.0 - v5.1.3 | `2`, serves as an experimental feature |
+| v5.1.0 - v5.1.3 | `2`, which serves as an experimental feature |
 | v5.1.4 and later v5.1.x versions | `1` |
 
 > **Note:**
