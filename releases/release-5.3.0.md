@@ -274,7 +274,7 @@ Starting from TiCDC v5.3.0, the cyclic replication feature between TiDB clusters
     - Improve the error log report in the raft client module [#10944](https://github.com/tikv/tikv/pull/10944)
     - Improve logging threads to avoid them becoming a performance bottleneck [#10841](https://github.com/tikv/tikv/issues/10841)
     - Add more statistics types of write queries [#10507](https://github.com/tikv/tikv/issues/10507)
-    - Reduce the write latency by separating I/O operations from Raftstore thread pool (disabled by default). For more information about tuning, see [Tune TiKV Pool Performance](/tune-tikv-thread-performance.md) [#10540](https://github.com/tikv/tikv/issues/10540)
+    - Reduce the write latency by separating I/O operations from Raftstore thread pool (disabled by default). For more information about tuning, see [Tune TiKV Thread Pool Performance](/tune-tikv-thread-performance.md) [#10540](https://github.com/tikv/tikv/issues/10540)
 
 + PD
 
