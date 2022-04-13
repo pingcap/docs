@@ -208,13 +208,21 @@ Besides Spark Shell, there is also Spark SQL available. To use Spark SQL, run:
 ./bin/spark-sql
 ```
 
-You can run the same query
+You can run the same query:
 
-```sh
-spark-sql> use tpch;
+```scala
+use tpch;
+```
+
+```
 Time taken: 0.015 seconds
+```
 
-spark-sql> select count(*) from lineitem;
+```scala
+select count(*) from lineitem;
+```
+
+```
 2000
 Time taken: 0.673 seconds, Fetched 1 row(s)
 ```
