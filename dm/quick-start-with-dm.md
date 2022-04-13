@@ -6,15 +6,20 @@ aliases: ['/docs/tidb-data-migration/dev/get-started/']
 
 # Quick Start Guide for TiDB Data Migration
 
-This document describes how to migrate data from MySQL to TiDB using [TiDB Data Migration](https://github.com/pingcap/dm) (DM).
+This document describes how to migrate data from MySQL to TiDB using [TiDB Data Migration](https://github.com/pingcap/dm) (DM). This guide is a quick demo of DM features and is not recommended for any production environment.
 
-If you need to deploy DM in the production environment, refer to the following documents:
+## Step 1: Deploy a DM cluster
 
-- [Deploy a DM cluster Using TiUP](/dm/deploy-a-dm-cluster-using-tiup.md)
-- [Create a Data Source](/dm/quick-start-create-source.md)
-- [Create a Data Migration Task](/dm/quick-create-migration-task.md)
+1. Install TiUP, and deploy a minimal DM cluster using TiUP:
 
-## Sample scenario
+    {{< copyable "shell-regular" >}}
+
+    ```shell
+    curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
+    tiup install dm dmctl
+    ```
+
+2. Generate
 
 Suppose you deploy DM-master and DM-worker instances in an on-premise environment, and migrate data from an upstream MySQL instance to a downstream TiDB instance.
 
@@ -270,7 +275,7 @@ After inserting the [sample data](#prepare-sample-data) into `MySQL-3306`, take 
 
 Now you successfully create a data migration task that migrates data from `MySQL-3306` to the downstream TiDB instance.
 
-### Check status of the data migration task 
+### Check status of the data migration task
 
 After the data migration task is created, you can use `dmtcl query-status` to check the status of the task. See the following example:
 
