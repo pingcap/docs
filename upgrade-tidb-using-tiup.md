@@ -172,7 +172,7 @@ tiup cluster upgrade <cluster-name> v5.4.0
 >
 > + Performing a rolling upgrade to the cluster will upgrade all components one by one. During the upgrade of TiKV, all leaders in a TiKV instance are evicted before stopping the instance. The default timeout time is 5 minutes (300 seconds). The instance is directly stopped after this timeout time.
 >
-> + You can use the `--force` parameter to upgrade the cluster immediately without evicting the leader. However, errors arising in the upgrade will be ignored, which means you are not notified of any success failure. Therefore, use the `--force` parameter with caution.
+> + You can use the `--force` parameter to upgrade the cluster immediately without evicting the leader. However, errors arising in the upgrade will be ignored, which means you are not notified of any upgrade failure. Therefore, use the `--force` parameter with caution.
 >
 > + To keep a stable performance, make sure that all leaders in a TiKV instance are evicted before stopping the instance. You can set `--transfer-timeout` to a larger value, for example, `--transfer-timeout 3600` (unit: second).
 
