@@ -126,13 +126,9 @@ The `spark.tispark.pd.addresses` configuration allows you to put in multiple PD 
 
 For example, when you have multiple PD servers on `10.16.20.1,10.16.20.2,10.16.20.3` with the port 2379, put it as `10.16.20.1:2379,10.16.20.2:2379,10.16.20.3:2379`.
 
-The default setup of `firewalld` on CentOS blocks the traffic needed by TiSpark. Therefore, disable `firewalld` to ensure normal running of TiSpark.
-
-```bash
-sudo systemctl stop firewalld.service
-sudo systemctl disable firewalld.service
-sudo systemctl mask --now firewalld.service
-```
+> **Note:**
+>
+> If TiSpark could not communicate properly, please check your firewall configuration. You can adjust the firewall rules or disable it on your need.
 
 ### Start a Master node
 
