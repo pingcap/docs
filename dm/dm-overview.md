@@ -17,7 +17,7 @@ aliases: ['/docs/tidb-data-migration/dev/overview/']
 ## Basic features
 
 - **Compatibility with MySQL.** DM is compatible with MySQL 5.7 protocols and most of the features and syntax of MySQL 5.7.
-- **Replicating DML and DDL events.** It supports resolving and replicating DML and DDL events in MySQL binlog.
+- **Replicating DML and DDL events.** It supports parsing and replicating DML and DDL events in MySQL binlog.
 - **Migrating and merging MySQL shards.** DM supports migrating and merging multiple MySQL database instances upstream to one TiDB database downstream. It supports customizing replication rules for different migration scenarios. It can automatically detect and handle DDL changes of upstream MySQL shards, which greatly reduces the operational cost.
 - **Various types of filters.** You can predefine event types, regular expressions, and SQL expressions to filter out MySQL binlog events during the data migration process.
 - **Centralized management.** DM supports thousands of nodes in a cluster. It can run and manage a large number of data migration tasks concurrently.
@@ -71,7 +71,7 @@ You are welcome to participate in the DM open sourcing project. Your contributio
 You can learn about DM through the online documentation. If you have any questions, contact us in one of the following ways.
 
 - [GitHub](https://github.com/pingcap/tiflow/tree/master/dm)
-- [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=sig-migrate&ref=github_sig)
+- [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=sig-migrate&ref=pingcap-docs)
 
 ## License
 
@@ -83,7 +83,7 @@ Before v5.4, the DM documentation is independent of the TiDB documentation. To a
 
 - [DM v5.3 documentation](https://docs.pingcap.com/tidb-data-migration/v5.3)
 - [DM v2.0 documentation](https://docs.pingcap.com/tidb-data-migration/v2.0/)
-- [DM v1.0 documentation](https://docs.pingcap.com/tidb-data-migration/v1.0/) (Not recommended, because it the earliest stable version of DM)
+- [DM v1.0 documentation](https://docs.pingcap.com/tidb-data-migration/v1.0/) 
 
 > **Note:**
 >

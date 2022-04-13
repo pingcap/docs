@@ -50,23 +50,25 @@ DM can be deployed and run on a 64-bit generic hardware server platform (Intel x
 
 ## Downstream storage space requirements
 
-The target TiKV cluster must have enough disk space to store the imported data. In addition to the [standard hardware requirements](/hardware-and-software-requirements.md), the storage space of the target TiKV cluster must be larger than **the size of the data source x the number of replicas x 2**. For example, if the cluster uses 3 replicas by default, the target TiKV cluster must have a storage space larger than 6 times the size of the data source. The formula has x 2 because:
+The target TiKV cluster must have enough disk space to store the imported data. In addition to the [standard hardware requirements](/hardware-and-software-requirements.md), the storage space of the target TiKV cluster must be larger than **the size of the data source x the number of replicas x 2**. For example, if the cluster uses 3 replicas by default, the target TiKV cluster must have a storage space larger than 6 times the size of the data source. The formula has `x 2` because:
 
 - Indexes might take extra space.
 - RocksDB has a space amplification effect.
 
-It is difficult to calculate the exact data volume exported by Dumpling from MySQL. However, you can estimate the data volume by using the following SQL statement to summarize the data-length field in the information_schema.tables table:
+You can estimate the data volume by using the following SQL statements to summarize the `data-length` field:
 
-Calculate the size of all schemas, in MiB. Replace ${schema_name} with your schema name.
+- Calculate the size of all schemas, in MiB. Replace `${schema_name}` with your schema name.
 
-```sql
-select table_schema,sum(data_length)/1024/1024 as data_length,sum(index_length)/1024/1024 as index_length,sum(data_length+index_length)/1024/1024 as sum from information_schema.tables where table_schema = "${schema_name}" group by table_schema;
-```
+    {{< copyable "sql" >}}
 
-Calculate the size of the largest table, in MiB. Replace ${schema_name} with your schema name.
+    ```sql
+    select table_schema,sum(data_length)/1024/1024 as data_length,sum(index_length)/1024/1024 as index_length,sum(data_length+index_length)/1024/1024 as sum from information_schema.tables where table_schema = "${schema_name}" group by table_schema;
+    ```
 
-{{< copyable "sql" >}}
+- Calculate the size of the largest table, in MiB. Replace ${schema_name} with your schema name.
 
-```sql
-select table_name,table_schema,sum(data_length)/1024/1024 as data_length,sum(index_length)/1024/1024 as index_length,sum(data_length+index_length)/1024/1024 as sum from information_schema.tables where table_schema = "${schema_name}" group by table_name,table_schema order by sum  desc limit 5;
-```
+    {{< copyable "sql" >}}
+
+    ```sql
+    select table_name,table_schema,sum(data_length)/1024/1024 as data_length,sum(index_length)/1024/1024 as index_length,sum(data_length+index_length)/1024/1024 as sum from information_schema.tables where table_schema = "${schema_name}" group by table_name,table_schema order by sum  desc limit 5;
+    ```

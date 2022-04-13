@@ -199,6 +199,7 @@
     - [Use PingCAP Clinic](/clinic/clinic-user-guide-for-tiup.md)
     - [PingCAP Clinic Diagnostic Data](/clinic/clinic-data-instruction-for-tiup.md)
   - [TiDB Operator](/tidb-operator-overview.md)
+  - [Dumpling](/dumpling-overview.md)
   - TiDB Lightning
     - [Overview](/tidb-lightning/tidb-lightning-overview.md)
     - Prechecks and requirements
@@ -227,7 +228,7 @@
       - [Use TiUP (Recommended)](/dm/deploy-a-dm-cluster-using-tiup.md)
       - [Use TiUP Offline](/dm/deploy-a-dm-cluster-using-tiup-offline.md)
       - [Use Binary](/dm/deploy-a-dm-cluster-using-binary.md)
-      - [Use Kubernetes](https://docs.pingcap.com/zh/tidb-in-kubernetes/dev/deploy-tidb-dm)
+      - [Use Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/dev/deploy-tidb-dm)
     - Basic Features
       - [Manage Data Sources](/dm/dm-manage-source.md)
       - [Configure Tasks](/dm/dm-task-configuration-guide.md)
@@ -255,7 +256,8 @@
         - [Maintain DM Clusters Using TiUP (Recommended)](/dm/maintain-dm-using-tiup.md)
         - [Manually Upgrade from v1.0.x to v2.0+](/dm/manually-upgrade-dm-1.0-to-2.0.md)
       - Tools
-        - [Maintain DM Clusters Using dmctl](/dm/dmctl-introduction.md)
+        - [Manage Tasks Using WebUI](/dm/dm-webui-guide.md)
+        - [Manage Tasks Using dmctl](/dm/dmctl-introduction.md)
       - Performance Tuning
         - [Benchmarks](/dm/dm-benchmark-v5.4.0.md)
         - [Optimize Configurations](/dm/dm-tune-configuration.md)
@@ -266,11 +268,7 @@
       - Manage Tasks
         - [Handle Failed DDL Statements](/dm/handle-failed-ddl-statements.md)
         - [Manage Schemas of Tables to be Migrated](/dm/dm-manage-schema.md)
-        - [Use WebUI to Manage Tasks](/dm/dm-webui-guide.md)
       - [Export and Import Data Sources and Task Configurations of Clusters](/dm/dm-export-import-config.md)
-      - [Manually Handle Sharding DDL Lock](/dm/manually-handling-sharding-ddl-locks.md)
-      - [Switch the MySQL Instance to Be Migrated](/dm/usage-scenario-master-slave-switch.md)
-      - [Manage Schemas of Tables to be Migrated](/dm/dm-manage-schema.md)
       - [Handle Alerts](/dm/dm-handle-alerts.md)
       - [Daily Check](/dm/dm-daily-check.md)
     - Reference
