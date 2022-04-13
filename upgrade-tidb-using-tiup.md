@@ -13,7 +13,7 @@ This document is targeted for the following upgrade paths:
 
 > **Warning:**
 >
-> - During an upgrade of TiFlash from earlier versions to v5.3, query errors might occur. To avoid this issue, run the `set global tidb_allow_mpp = 0` command and start the upgrade after all queries in the MPP mode are completed. After TiFlash is upgraded to v5.3, run the `set global tidb_allow_mpp = 1` command to enable the MPP mode.
+> - You cannot upgrade TiFlash from versions earlier than v5.3 to v5.3 or later online. To achieve such a cross-version upgrade, you need to stop TiFlash instances of the early version first, and then upgrade the TiFlash instances. For details, see warnings in [Online upgrade](#online-upgrade).
 > - **DO NOT** upgrade a TiDB cluster when a DDL statement is being executed in the cluster (usually for the time-consuming DDL statements such as `ADD INDEX` and the column type changes).
 > - Before the upgrade, it is recommended to use the [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md) command to check whether the TiDB cluster has an ongoing DDL job. If the cluster has a DDL job, to upgrade the cluster, wait until the DDL execution is finished or use the [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md) command to cancel the DDL job before you upgrade the cluster.
 > - In addition, during the cluster upgrade, **DO NOT** execute any DDL statement. Otherwise, the issue of undefined behavior might occur.
@@ -139,9 +139,9 @@ After the command is executed, the "Region status" check result will be output.
 + If the result is "All Regions are healthy", all Regions in the current cluster are healthy and you can continue the upgrade.
 + If the result is "Regions are not fully healthy: m miss-peer, n pending-peer" with the "Please fix unhealthy regions before other operations." prompt, some Regions in the current cluster are abnormal. You need to troubleshoot the anomalies until the check result becomes "All Regions are healthy". Then you can continue the upgrade.
 
-## Perform a rolling upgrade to the TiDB cluster
+## Upgrade the TiDB cluster
 
-This section describes how to perform a rolling upgrade to the TiDB cluster and how to verify the version after the upgrade.
+This section describes how to upgrade the TiDB cluster and verify the version after the upgrade.
 
 ### Upgrade the TiDB cluster to a specified version
 
@@ -169,11 +169,13 @@ tiup cluster upgrade <cluster-name> v6.0.0
 
 > **Note:**
 >
-> + Performing a rolling upgrade to the cluster will upgrade all components one by one. During the upgrade of TiKV, all leaders in a TiKV instance are evicted before stopping the instance. The default timeout time is 5 minutes (300 seconds). The instance is directly stopped after this timeout time.
+> + An online upgrade upgrades all components one by one. During the upgrade of TiKV, all leaders in a TiKV instance are evicted before stopping the instance. The default timeout time is 5 minutes (300 seconds). The instance is directly stopped after this timeout time.
 >
 > + You can use the `--force` parameter to upgrade the cluster immediately without evicting the leader. However, the errors that occur during the upgrade will be ignored, which means that you are not notified of any upgrade failure. Therefore, use the `--force` parameter with caution.
 >
 > + To keep a stable performance, make sure that all leaders in a TiKV instance are evicted before stopping the instance. You can set `--transfer-timeout` to a larger value, for example, `--transfer-timeout 3600` (unit: second).
+>
+> - You cannot upgrade TiFlash online from versions earlier than v5.3 to v5.3 or later. To achieve such a cross-version upgrade, you need to stop the TiFlash instances first and upgrade the cluster offline. Then, reload the cluster so that other components are upgraded online without interruption.
 
 #### Offline upgrade
 
