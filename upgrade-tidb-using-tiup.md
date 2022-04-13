@@ -15,7 +15,7 @@ This document is targeted for the following upgrade paths:
 
 > **Warning:**
 >
-> - During an upgrade from earlier versions to v5.3, query errors may occur. To avoid this issue, you can set `set global tidb_allow_mpp = 0` and start the upgrade after completion of all queries in the MPP mode. After all components are upgraded to v5.3, you can set `set global tidb_allow_mpp = 1` to enable the MPP mode.
+> - During an upgrade of TiFlash from earlier versions to v5.3, query errors may occur. To avoid this issue, run `set global tidb_allow_mpp = 0` and start the upgrade after the completion of all queries in the MPP mode. After TiFlash is upgraded to v5.3, run `set global tidb_allow_mpp = 1` to enable the MPP mode.
 > - **DO NOT** upgrade a TiDB cluster when a DDL statement is being executed in the cluster (usually for the time-consuming DDL statements such as `ADD INDEX` and the column type changes).
 > - Before the upgrade, it is recommended to use the [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md) command to check whether the TiDB cluster has an ongoing DDL job. If the cluster has a DDL job, to upgrade the cluster, wait until the DDL execution is finished or use the [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md) command to cancel the DDL job before you upgrade the cluster.
 > - In addition, during the cluster upgrade, **DO NOT** execute any DDL statement. Otherwise, the issue of undefined behavior might occur.
