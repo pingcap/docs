@@ -3,12 +3,12 @@
 
 - About TiDB
   - [TiDB Introduction](/overview.md)
-  - [TiDB 5.4 Release Notes](/releases/release-5.4.0.md)
+  - [TiDB 6.0 Release Notes](/releases/release-6.0.0-dmr.md)
   - [Basic Features](/basic-features.md)
   - [Experimental Features](/experimental-features.md)
   - Benchmarks
-    - [v5.4 Sysbench Performance Test Report](/benchmark/benchmark-sysbench-v5.4.0-vs-v5.3.0.md)
-    - [v5.4 TPC-C Performance Test Report](/benchmark/v5.4-performance-benchmarking-with-tpcc.md)
+    - [v6.0 Sysbench Performance Test Report](/benchmark/benchmark-sysbench-v6.0.0-vs-v5.4.0.md)
+    - [v6.0 TPC-C Performance Test Report](/benchmark/v6.0-performance-benchmarking-with-tpcc.md)
     - [v5.4 MPP mode TPC-H 100GB Performance Test](/benchmark/v5.4-performance-benchmarking-with-tpch.md)
   - [MySQL Compatibility](/mysql-compatibility.md)
   - [TiDB Limitations](/tidb-limitations.md)
@@ -87,6 +87,7 @@
   - [Export Grafana Snapshots](/exporting-grafana-snapshots.md)
   - [TiDB Cluster Alert Rules](/alert-rules.md)
   - [TiFlash Alert Rules](/tiflash/tiflash-alert-rules.md)
+  - [Customize Configurations of Monitoring Servers](/tiup/customized-montior-in-tiup-environment.md)
 - Troubleshoot
   - [TiDB Troubleshooting Map](/tidb-troubleshooting-map.md)
   - [Identify Slow Queries](/identify-slow-queries.md)
@@ -103,6 +104,7 @@
   - [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md)
   - [Troubleshoot TiFlash](/tiflash/troubleshoot-tiflash.md)
   - [Troubleshoot Write Conflicts in Optimistic Transactions](/troubleshoot-write-conflicts.md)
+  - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
 - Performance Tuning
   - System Tuning
     - [Operating System Tuning](/tune-operating-system.md)
@@ -192,7 +194,7 @@
       - [tiup-cluster](/tiup/tiup-cluster.md)
       - [tiup-mirror](/tiup/tiup-mirror.md)
       - [tiup-bench](/tiup/tiup-bench.md)
-  - PingCAP Clinic Diagnostic Service (Beta)
+  - PingCAP Clinic Diagnostic Service (Technical Preview)
     - [Overview](/clinic/clinic-introduction.md)
     - [Use PingCAP Clinic](/clinic/clinic-user-guide-for-tiup.md)
     - [PingCAP Clinic Diagnostic Data](/clinic/clinic-data-instruction-for-tiup.md)
@@ -675,15 +677,19 @@
 - FAQs
   - [TiDB FAQs](/faq/tidb-faq.md)
   - [SQL FAQs](/faq/sql-faq.md)
-  - [Deploy and Maintain FAQs](/faq/deploy-and-maintain-faq.md)
+  - [Deployment FAQs](/faq/deploy-and-maintain-faq.md)
+  - [Migration FAQs](/faq/migration-tidb-faq.md)
   - [Upgrade FAQs](/faq/upgrade-faq.md)
+  - [Monitoring FAQs](/faq/monitor-faq.md)
+  - [Cluster Management FAQs](/faq/manage-cluster-faq.md)
   - [High Availability FAQs](/faq/high-availability-faq.md)
   - [High Reliability FAQs](/faq/high-reliability-faq.md)
-  - [Migration FAQs](/faq/migration-tidb-faq.md)
 - [Glossary](/glossary.md)
 - Release Notes
   - [All Releases](/releases/release-notes.md)
   - [Release Timeline](/releases/release-timeline.md)
+  - v6.0
+    - [6.0.0-DMR](/releases/release-6.0.0-dmr.md)
   - v5.4
     - [5.4.0](/releases/release-5.4.0.md)
   - v5.3

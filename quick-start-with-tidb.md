@@ -19,7 +19,7 @@ This guide walks you through the quickest way to get started with TiDB. For non-
 >
 >     - To deploy an on-premises production cluster, see [production installation guide](/production-deployment-using-tiup.md).
 >     - To deploy TiDB in Kubernetes, see [Get Started with TiDB in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/get-started).
->     - To manage TiDB in the cloud, see [TiDB Cloud Quick Start](https://docs.pingcap.com/tidbcloud/beta/tidb-cloud-quickstart).
+>     - To manage TiDB in the cloud, see [TiDB Cloud Quick Start](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart).
 
 ## Deploy a local test cluster
 
@@ -65,10 +65,10 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
         {{< copyable "shell-regular" >}}
 
         ```shell
-        tiup playground v5.4.0 --db 2 --pd 3 --kv 3
+        tiup playground v6.0.0 --db 2 --pd 3 --kv 3
         ```
 
-        The command downloads a version cluster to the local machine and starts it, such as v5.4.0. To view the latest version, run `tiup list tidb`.
+        The command downloads a version cluster to the local machine and starts it, such as v6.0.0. To view the latest version, run `tiup list tidb`.
 
         This command returns the access methods of the cluster:
 
@@ -168,10 +168,10 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
         {{< copyable "shell-regular" >}}
 
         ```shell
-        tiup playground v5.4.0 --db 2 --pd 3 --kv 3
+        tiup playground v6.0.0 --db 2 --pd 3 --kv 3
         ```
 
-        The command downloads a version cluster to the local machine and starts it, such as v5.4.0. To view the latest version, run `tiup list tidb`.
+        The command downloads a version cluster to the local machine and starts it, such as v6.0.0. To view the latest version, run `tiup list tidb`.
 
         This command returns the access methods of the cluster:
 

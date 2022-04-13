@@ -332,6 +332,12 @@ Configuration items related to security.
 - Determines whether to automatically generate the TLS certificates on startup.
 - Default value: `false`
 
+### `tls-version`
+
+- Set the minimum TLS version for MySQL Protocol connections.
+- Default value: "", which allows TLSv1.1 or higher.
+- Optional values: `"TLSv1.0"`, `"TLSv1.1"`, `"TLSv1.2"` and `"TLSv1.3"`
+
 ## Performance
 
 Configuration items related to performance.
@@ -500,6 +506,12 @@ The Plan Cache configuration of the `PREPARE` statement.
 - The timeout of the RPC `keepalive` check between TiDB and TiKV nodes.
 - Default value: `3`
 - Unit: second
+
+### `grpc-compression-type`
+
+- Specifies the compression type used for data transfer between TiDB and TiKV nodes. The default value is `"none"`, which means no compression. To enable the gzip compression, set this value to `"gzip"`.
+- Default value: `"none"`
+- Value options: `"none"`, `"gzip"`
 
 ### `commit-timeout`
 
