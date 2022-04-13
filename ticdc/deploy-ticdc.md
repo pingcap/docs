@@ -50,14 +50,14 @@ cdc server --pd=http://10.0.10.25:2379 --log-file=ticdc_3.log --addr=0.0.0.0:830
 
 The following are descriptions of options available in the `cdc server` command:
 
-- `addr`: The listening address of TiCDC, the HTTP API address, and the Prometheus address of the service. The default is to listen on `127.0.0.1:8300`.
-- `advertise-addr`: The advertised address for clients to access TiCDC. If unspecified, the value will be the same as the `addr`.
+- `addr`: The listening address of TiCDC, the HTTP API address, and the Prometheus address of the TiCDC service. The default value is `127.0.0.1:8300`.
+- `advertise-addr`: The advertised address via which clients access TiCDC. If unspecified, the value is the same as that of `addr`.
 - `pd`: A comma-separated list of PD endpoints.
 - `config`: The address of the configuration file that TiCDC uses (optional). This option is supported since TiCDC v5.0.0. This option can be used in the TiCDC deployment since TiUP v1.4.0.
-- `data-dir`: Specifies the directory that TiCDC uses when it needs to use disks to store files. Unified Sorter uses this directory to store temporary files. It is recommend to ensure that the free disk space is greater than or equal to 500 GiB. For more details, see [Unified Sorter](/ticdc/manage-ticdc.md#unified-sorter). If you are using TiUP, you can configure `data_dir` in the `cdc_servers` section, or directly use the default `data_dir` path in `global`.
+- `data-dir`: Specifies the directory that TiCDC uses when it needs to use disks to store files. Unified Sorter uses this directory to store temporary files. It is recommended to ensure that the free disk space for this directory is greater than or equal to 500 GiB. For more details, see [Unified Sorter](/ticdc/manage-ticdc.md#unified-sorter). If you are using TiUP, you can configure `data_dir` in the [`cdc_servers`](/tiup/tiup-cluster-topology-reference.md#cdc_servers) section, or directly use the default `data_dir` path in `global`.
 - `gc-ttl`: The TTL (Time To Live) of the service level `GC safepoint` in PD set by TiCDC, and the duration that the replication task can suspend, in seconds. The default value is `86400`, which means 24 hours. Note: Suspending of the TiCDC replication task affects the progress of TiCDC GC safepoint, which means that it affects the progress of upstream TiDB GC, as detailed in [Complete Behavior of TiCDC GC safepoint](/ticdc/troubleshoot-ticdc.md#what-is-the-complete-behavior-of-ticdc-garbage-collection-gc-safepoint).
-- `log-file`: The log file path when the TiCDC process is running. If not specified, the log will be written to the standard output.
-- `log-level`: The log level when the TiCDC process is running. The default is `"info"`.
+- `log-file`: The path to which logs are output when the TiCDC process is running. If this parameter is not specified, logs are written to the standard output (stdout).
+- `log-level`: The log level when the TiCDC process is running. The default value is `"info"`.
 - `ca`: Specifies the path of the CA certificate file in PEM format for TLS connection (optional).
 - `cert`: Specifies the path of the certificate file in PEM format for TLS connection (optional).
 - `cert-allowed-cn`: Specifies the path of the common name in PEM format for TLS connection (optional).
