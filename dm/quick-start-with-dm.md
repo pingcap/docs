@@ -5,15 +5,20 @@ summary: Learn how to quickly deploy a DM cluster using binary packages.
 
 # Quick Start Guide for TiDB Data Migration
 
-This document describes how to migrate data from MySQL to TiDB using [TiDB Data Migration](https://github.com/pingcap/dm) (DM).
+This document describes how to migrate data from MySQL to TiDB using [TiDB Data Migration](https://github.com/pingcap/dm) (DM). This guide is a quick demo of DM features and is not recommended for any production environment.
 
-If you need to deploy DM in the production environment, refer to the following documents:
+## Step 1: Deploy a DM cluster
 
-- [Deploy a DM cluster Using TiUP](/dm/deploy-a-dm-cluster-using-tiup.md)
-- [Create a Data Source](/dm/quick-start-create-source.md)
-- [Create a Data Migration Task](/dm/quick-create-migration-task.md)
+1. Install TiUP, and deploy a minimal DM cluster using TiUP:
 
-## Sample scenario
+    {{< copyable "shell-regular" >}}
+
+    ```shell
+    curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
+    tiup install dm dmctl
+    ```
+
+2. Generate
 
 Suppose you deploy DM-master and DM-worker instances in an on-premise environment, and migrate data from an upstream MySQL instance to a downstream TiDB instance.
 
