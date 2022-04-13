@@ -75,8 +75,6 @@ Please perform the following steps to create your Pull Request to this repositor
 > **Note:**
 >
 > This section takes creating a PR to the `master` branch as an example. Steps of creating PRs to other branches are similar.
->
-> TiDB currently maintains the following versions of TiDB documentation: dev(the latest development version, which corresponds to the master branch of documentation repository), v5.2, v5.1, v5.0, v4.0, v3.1, v3.0 and v2.1. Please consider which version(s) will be affected by your changes before creating a Pull Request, and apply your changes to corresponding version(s). You can refer to [Guideline for choosing the affected version(s)](#guideline-for-choosing-the-affected-versions) for more information.
 
 ### Step 0: Sign the CLA
 
