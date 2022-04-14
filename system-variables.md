@@ -1874,7 +1874,6 @@ SET tidb_slow_log_threshold = 200;
     - `FAST`: Enable most of the check items, with almost no impact on performance.
     - `STRICT`: Enable all check items, with a minor impact on pessimistic transaction performance when the system workload is high.
 
-
 ### tidb_txn_mode
 
 - Scope: SESSION | GLOBAL
