@@ -69,7 +69,6 @@ func skipSv(sv *variable.SysVar) bool {
 	// These svs have no documentation yet.
 	switch sv.Name {
 	case variable.ErrorCount, // doesn't work correctly
-		variable.LowerCaseTableNames, // does not support changing well.
 		variable.MaxPreparedStmtCount,
 		variable.TiDBBatchCommit,
 		variable.TiDBBatchDelete,
@@ -111,20 +110,14 @@ func skipSv(sv *variable.SysVar) bool {
 		variable.TiDBTxnScope,
 		variable.TxnIsolationOneShot,
 		variable.TiDBSuperReadOnly,
-		variable.TiDBTableCacheLease,
-		variable.TiDBTopSQLMaxMetaCount,
-		variable.TiDBTopSQLMaxTimeSeriesCount,
-		variable.TiDBTxnAssertionLevel,
-		variable.TiDBPlacementMode,
 		variable.TiDBReadConsistency,
-		variable.TiDBEnableMutationChecker,
 		variable.TiDBLastDDLInfo,
-		variable.TiDBSysdateIsNow,
-		variable.TiDBRCReadCheckTS,
-		variable.TiDBMemQuotaBindingCache,
-		variable.TiDBIgnorePreparedCacheCloseStmt,
 		variable.TiDBOptimizerEnableNewOnlyFullGroupByCheck,
-		variable.TiDBBatchPendingTiFlashCount:
+		variable.TiDBBatchPendingTiFlashCount,
+		variable.TiDBGCMaxWaitTime,
+		variable.TiDBRemoveOrderbyInSubquery,
+		variable.TiDBTxnCommitBatchSize:
+
 		return true
 	}
 	return false
@@ -159,21 +152,29 @@ func printWarning(sv *variable.SysVar) string {
 			"> - After upgrading a TiDB cluster from v4.0.0 or later to v5.4.0 or later, this variable remains the setting before the upgrade.\n" +
 			">\n" +
 			"> - Since v5.4.0, for a newly deployed TiDB cluster, this variable is enabled by default.\n\n"
-
+	case variable.TiDBRCReadCheckTS:
+		return "> **Warning:**\n>\n" +
+			"> - This feature is incompatible with [`replica-read`](#tidb_replica_read-new-in-v40). Do not enable `tidb_rc_read_check_ts` and `replica-read` at the same time.\n" +
+			"> - If your client uses a cursor, it is not recommended to enable `tidb_rc_read_check_ts` in case that the previous batch of returned data has already been used by the client and the statement eventually fails.\n\n"
+	case variable.TiDBTopSQLMaxTimeSeriesCount:
+		return "> **Note:**\n>\n" +
+			"> Currently, the Top SQL page in TiDB Dashboard only displays the top 5 types of SQL queries that contribute the most to the load, which is irrelevant with the configuration of `tidb_top_sql_max_time_series_count`.\n\n"
 	}
 	return ""
 }
 
 func printUnits(sv *variable.SysVar) string {
 	switch sv.Name {
-	case variable.TiDBMemQuotaApplyCache, variable.TiDBMemQuotaQuery, variable.TiDBQueryLogMaxLen, variable.TiDBBCJThresholdSize, variable.MaxAllowedPacket, variable.TiDBTmpTableMaxSize:
+	case variable.TiDBMemQuotaApplyCache, variable.TiDBMemQuotaQuery, variable.TiDBQueryLogMaxLen,
+		variable.TiDBBCJThresholdSize, variable.MaxAllowedPacket, variable.TiDBTmpTableMaxSize,
+		variable.TiDBMemQuotaBindingCache:
 		return "- Unit: Bytes\n"
 	case variable.TiDBSlowLogThreshold, variable.MaxExecutionTime, variable.TiDBDDLSlowOprThreshold,
 		variable.TiDBStatsLoadSyncWait:
 		return "- Unit: Milliseconds\n"
 	case variable.InteractiveTimeout, variable.WaitTimeout, variable.TiDBStmtSummaryRefreshInterval, variable.TiDBWaitSplitRegionTimeout, variable.InnodbLockWaitTimeout,
 		variable.TiDBMetricSchemaRangeDuration, variable.TiDBMetricSchemaStep, variable.TiDBEvolvePlanTaskMaxTime,
-		variable.TiDBExpensiveQueryTimeThreshold:
+		variable.TiDBExpensiveQueryTimeThreshold, variable.TiDBTableCacheLease:
 		return "- Unit: Seconds\n"
 	case variable.SQLSelectLimit, variable.TiDBBCJThresholdCount, variable.TiDBDDLReorgBatchSize,
 		variable.TiDBDMLBatchSize, variable.TiDBIndexJoinBatchSize, variable.TiDBIndexLookupSize,
@@ -265,8 +266,11 @@ func formatSpecialVersionComment(sv *variable.SysVar) string {
 		variable.TiDBRegardNULLAsPoint, variable.TiDBStatsLoadPseudoTimeout, variable.TiDBStatsLoadSyncWait,
 		variable.TiDBEnableTopSQL:
 		return ` <span class="version-mark">New in v5.4.0</span>`
-	case variable.TiDBEnableLegacyInstanceScope:
-		return ` <span class="version-mark">New in v6.0</span>`
+	case variable.TiDBEnableLegacyInstanceScope, variable.TiDBSysdateIsNow, variable.TiDBTableCacheLease,
+		variable.TiDBEnableMutationChecker, variable.TiDBIgnorePreparedCacheCloseStmt, variable.TiDBMemQuotaBindingCache,
+		variable.TiDBPlacementMode, variable.TiDBTxnAssertionLevel, variable.TiDBRCReadCheckTS,
+		variable.TiDBTopSQLMaxMetaCount, variable.TiDBTopSQLMaxTimeSeriesCount:
+		return ` <span class="version-mark">New in v6.0.0</span>`
 	default:
 		return ""
 	}
@@ -894,7 +898,7 @@ func getExtendedDescription(sv *variable.SysVar) string {
 		return "- This variable indicates the license of your TiDB server installation."
 	case variable.TiDBAnalyzeVersion:
 		return "- Controls how TiDB collects statistics.\n" +
-			"- In versions before v5.1.0, the default value of this variable is `1`. In v5.1.0, the default value of this variable is `2`, which serves as an experimental feature. For detailed introduction, see [Introduction to Statistics](/statistics.md)."
+			"- In v5.3.0 and later versions, the default value of this variable is `2`, which serves as an experimental feature. If your cluster is upgraded from a version earlier than v5.3.0 to v5.3.0 or later, the default value of `tidb_analyze_version` does not change. For detailed introduction, see [Introduction to Statistics](/statistics.md)."
 	case variable.TiDBOptLimitPushDownThreshold:
 		return "- This variable is used to set the threshold that determines whether to push the Limit or TopN operator down to TiKV.\n" +
 			"- If the value of the Limit or TopN operator is smaller than or equal to this threshold, these operators are forcibly pushed down to TiKV. This variable resolves the issue that the Limit or TopN operator cannot be pushed down to TiKV partly due to wrong estimation."
@@ -1019,6 +1023,33 @@ func getExtendedDescription(sv *variable.SysVar) string {
 	case variable.TiDBEnableLegacyInstanceScope:
 		return "- This variable permits `INSTANCE` scoped variables to be set with `SET SESSION` as well as `SET GLOBAL` syntax.\n" +
 			"- This option is enabled by default for compatibility with earlier versions of TiDB."
+	case variable.TiDBEnableMutationChecker:
+		return "- This variable is used to control whether to enable TiDB mutation checker, which is a tool used to check consistency between data and indexes during the execution of DML statements. If the checker returns an error for a statement, TiDB rolls back the execution of the statement. Enabling this variable causes a slight increase in CPU usage. For more information, see [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md )."
+	case variable.TiDBIgnorePreparedCacheCloseStmt:
+		return "- This variable is used to set whether to ignore the commands for closing prepared statement cache.\n" +
+			"- When this variable is set to `ON`, the `COM_STMT_CLOSE` command of the Binary protocol and the [`DEALLOCATE PREPARE`](/sql-statements/sql-statement-deallocate.md) statement of the text protocol are ignored. For details, see [Ignore the `COM_STMT_CLOSE` command and the `DEALLOCATE PREPARE` statement](/sql-prepare-plan-cache.md#ignore-the-com_stmt_close-command-and-the-deallocate-prepare-statement)."
+	case variable.TiDBMemQuotaBindingCache:
+		return "- This variable is used to set the threshold of the memory used for caching bindings.\n" +
+			"- If a system creates or captures excessive bindings, resulting in overuse of memory space, TiDB returns a warning in the log. In this case, the cache cannot hold all available bindings or determine which bindings to store. For this reason, some queries might miss their bindings. To address this problem, you can increase the value of this variable, which increases the memory used for caching bindings. After modifying this parameter, you need to run `admin reload bindings` to reload bindings and validate the modification."
+	case variable.TiDBPlacementMode:
+		return "- This variable controls whether DDL statements ignore the [placement rules specified in SQL](/placement-rules-in-sql.md). When the variable value is `IGNORE`, all placement rule options are ignored.\n" +
+			"- It is intended to be used by logical dump/restore tools to ensure that tables can always be created even if invalid placement rules are assigned. This is similar to how mysqldump writes `SET FOREIGN_KEY_CHECKS=0;` to the start of every dump file."
+	case variable.TiDBRCReadCheckTS:
+		return "- This variable is used to optimize the timestamp acquisition, which is suitable for scenarios with read-committed isolation level where read-write conflicts are rare. Enabling this variable can avoid the latency and cost of getting the global timestamp, and can optimize the transaction-level read latency.\n" +
+			"- If read-write conflicts are severe, enabling this feature will increase the cost and latency of getting the global timestamp, and might cause performance regression. For details, see [Read Committed isolation level](/transaction-isolation-levels.md#read-committed-isolation-level)."
+	case variable.TiDBSysdateIsNow:
+		return "- This variable is used to control whether the `SYSDATE` function can be replaced by the `NOW` function. This configuration item has the same effect as the MySQL option [`sysdate-is-now`](https://dev.mysql.com/doc/refman/8.0/en/server-options.html#option_mysqld_sysdate-is-now)."
+	case variable.TiDBTableCacheLease:
+		return "- This variable is used to control the lease time of [cached tables](/cached-tables.md) with a default value of `3`. The value of this variable affects the modification to cached tables. After a modification is made to cached tables, the longest waiting time might be `tidb_table_cache_lease` seconds. If the table is read-only or can accept a high write latency, you can increase the value of this variable to increase the valid time for caching tables and to reduce the frequency of lease renewal."
+	case variable.TiDBTopSQLMaxMetaCount:
+		return "- This variable is used to control the maximum number of SQL statement types collected by [Top SQL](/dashboard/top-sql.md) per minute."
+	case variable.TiDBTopSQLMaxTimeSeriesCount:
+		return "- This variable is used to control how many SQL statements that contribute the most to the load (that is, top N) can be recorded by [Top SQL](/dashboard/top-sql.md) per minute."
+	case variable.TiDBTxnAssertionLevel:
+		return "- This variable is used to control the assertion level. Assertion is a consistency check between data and indexes, which checks whether a key being written exists in the transaction commit process. For more information, see [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md ).\n\n" +
+			"    - `OFF`: Disable this check.\n" +
+			"    - `FAST`: Enable most of the check items, with almost no impact on performance.\n" +
+			"    - `STRICT`: Enable all check items, with a minor impact on pessimistic transaction performance when the system workload is high."
 	default:
 		return "- No documentation is currently available for this variable."
 	}
@@ -1061,7 +1092,7 @@ func main() {
 		"\n" +
 		"> **Note:**\n" +
 		">\n" +
-		"> Several `GLOBAL` variables persist to the TiDB cluster. For variables that specify `Persists to Cluster: Yes` a notification is sent to all TiDB servers to refresh their system variable cache when the global variable is changed. Adding additional TiDB servers (or restarting existing TiDB servers) will automatically use the persisted configuration value. For variables that specify `Persists to Cluster: No` any changes only apply to the local TiDB instance that you are connected to. In order to retain any values set, you will need to specify them in your `tidb.toml` configuration file.\n" +
+		"> Several `GLOBAL` variables persist to the TiDB cluster. For variables that specify `Persists to cluster: Yes` a notification is sent to all TiDB servers to refresh their system variable cache when the global variable is changed. Adding additional TiDB servers (or restarting existing TiDB servers) will automatically use the persisted configuration value. For variables that specify `Persists to cluster: No` any changes only apply to the local TiDB instance that you are connected to. In order to retain any values set, you will need to specify them in your `tidb.toml` configuration file.\n" +
 		">\n" +
 		"> Additionally, TiDB presents several MySQL variables as both readable and settable. This is required for compatibility, because it is common for both applications and connectors to read MySQL variables. For example, JDBC connectors both read and set query cache settings, despite not relying on the behavior.\n" +
 		"\n" +
