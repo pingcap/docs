@@ -20,6 +20,8 @@
   - [Learn TiDB SQL](/basic-sql-operations.md)
   - [Learn HTAP](/explore-htap.md)
   - [Import Example Database](/import-example-data.md)
+- Develop
+  - [Developer Guide Overview](develop/developer-guide-overview.md)
 - Deploy
   - [Software and Hardware Requirements](/hardware-and-software-requirements.md)
   - [Environment Configuration Checklist](/check-before-deployment.md)
