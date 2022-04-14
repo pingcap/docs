@@ -5,7 +5,7 @@ summary: Learn how to use PLAN REPLAYER to save and restore the on-site informat
 
 # Use PLAN REPLAYER to Save and Restore the On-Site Information of a Cluster
 
-When you locate and troubleshoot the issues of a TiDB cluster, you often need to provide information on the system and the execution plan. To help you get the information and troubleshoot cluster issues in a more convenient and efficient way, the `PLAN REPLAY` command is introduced in TiDB v5.3.0. This command enables you to easily save and restore the on-site information of a cluster, improves the efficiency of troubleshooting, and helps you more easily archive the issue for management.
+When you locate and troubleshoot the issues of a TiDB cluster, you often need to provide information on the system and the execution plan. To help you get the information and troubleshoot cluster issues in a more convenient and efficient way, the `PLAN REPLAYER` command is introduced in TiDB v5.3.0. This command enables you to easily save and restore the on-site information of a cluster, improves the efficiency of troubleshooting, and helps you more easily archive the issue for management.
 
 The features of `PLAN REPLAYER` are as follows:
 
@@ -43,7 +43,7 @@ Based on `sql-statement`, TiDB sorts out and exports the following on-site infor
 ```sql
 use test;
 create table t(a int, b int);
-insert into t valuse(1,1), (2, 2), (3, 3);
+insert into t values(1,1), (2, 2), (3, 3);
 analyze table t;
 
 plan replayer dump explain select * from t;
