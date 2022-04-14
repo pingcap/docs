@@ -1823,7 +1823,7 @@ SET tidb_slow_log_threshold = 200;
 - Unit: Bytes
 - This variable is used to set the maximum size of a single [temporary table](/temporary-tables.md). Any temporary table with a size larger than this variable value causes error.
 
-### tidb_top_sql_max_meta_count
+### tidb_top_sql_max_meta_count <span class="version-mark">New in v6.0.0</span>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -1831,7 +1831,7 @@ SET tidb_slow_log_threshold = 200;
 - Range: `[1, 10000]`
 - This variable is used to control the maximum number of SQL statement types collected by [Top SQL](/dashboard/top-sql.md) per minute.
 
-### tidb_top_sql_max_time_series_count
+### tidb_top_sql_max_time_series_count <span class="version-mark">New in v6.0.0</span>
 
 > **Note:**
 >
