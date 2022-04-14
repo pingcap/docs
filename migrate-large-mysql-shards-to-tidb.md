@@ -132,15 +132,6 @@ If the TiDB Lightning task crashes due to unrecoverable errors (for example, dat
 
 For more information, see [TiDB Lightning Checkpoints](https://docs.pingcap.com/tidb/stable/tidb-lightning-checkpoints).
 
-### Create the target schema
-
-After you make changes in the aforementioned [Check conflicts for sharded tables](/migrate-large-mysql-shards-to-tidb.md#check-conflicts-for-sharded-tables), you can now manually create the `my_db` schema and `table5` in downstream TiDB. After that, you need to configure `tidb-lightning.toml`.
-
-```toml
-[mydumper]
-no-schema = true # If you have created the downstream schema and tables, setting `true` tells TiDB Lightning not to create the downstream schema.
-```
-
 ### Start the migration task
 
 Follow these steps to start `tidb-lightning`:
@@ -177,13 +168,6 @@ Follow these steps to start `tidb-lightning`:
     target-schema = "my_db"
     target-table = "table5"
 
-    [mydumper]
-    # The source data directory. Set this to the path of the Dumpling exported data.
-    # If there are several Dumpling-exported data directories, you need to place all these directories in the same parent directory, and use the parent directory here.
-    data-source-dir = "${data-path}"        # The local or S3 path, for example, 's3://my-bucket/sql-backup?region=us-west-2'
-    # Because table1~table4 from source are merged into another table5 in the target, you should tell TiDB Lightning no need to create schemas, so that table1 ~ table4 won't be created automatically according to the exported schema information
-    no-schema = true
-
     # Information of the target TiDB cluster. For example purposes only. Replace the IP address with your IP address.
     [tidb]
     # Information of the target TiDB cluster.
@@ -206,7 +190,7 @@ Follow these steps to start `tidb-lightning`:
     ```shell
     export AWS_ACCESS_KEY_ID=${access_key}
     export AWS_SECRET_ACCESS_KEY=${secret_key}
-    nohup tiup tidb-lightning -config tidb-lightning.toml -no-schema=true > nohup.out 2>&1 &
+    nohup tiup tidb-lightning -config tidb-lightning.toml > nohup.out 2>&1 &
     ```
 
 3. After starting the migration task, you can check the progress by using either of the following methods:
