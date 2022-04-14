@@ -15,7 +15,7 @@ This document is targeted for the following upgrade paths:
 
 > **Warning:**
 >
-> - You cannot upgrade TiFlash online from versions earlier than v5.3 to v5.3 or later. To achieve such a cross-version upgrade, you need to stop TiFlash instances of the early version first, and then upgrade the TiFlash instances. For details, see warnings in [Online upgrade](#online-upgrade).
+> - You cannot upgrade TiFlash online from versions earlier than v5.3 to v5.3 or later. Instead, you can stop TiFlash instances of the early version first, and then upgrade the cluster by following the upgrade process of the target version. For details, see warnings in [Online upgrade](#online-upgrade).
 > - **DO NOT** upgrade a TiDB cluster when a DDL statement is being executed in the cluster (usually for the time-consuming DDL statements such as `ADD INDEX` and the column type changes).
 > - Before the upgrade, it is recommended to use the [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md) command to check whether the TiDB cluster has an ongoing DDL job. If the cluster has a DDL job, to upgrade the cluster, wait until the DDL execution is finished or use the [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md) command to cancel the DDL job before you upgrade the cluster.
 > - In addition, during the cluster upgrade, **DO NOT** execute any DDL statement. Otherwise, the issue of undefined behavior might occur.
@@ -177,7 +177,7 @@ tiup cluster upgrade <cluster-name> v5.4.0
 >
 > + To keep a stable performance, make sure that all leaders in a TiKV instance are evicted before stopping the instance. You can set `--transfer-timeout` to a larger value, for example, `--transfer-timeout 3600` (unit: second).
 >
-> - You cannot upgrade TiFlash online from versions earlier than v5.3 to v5.3 or later. To achieve such a cross-version upgrade, you need to stop the TiFlash instances first and upgrade the cluster offline. Then, reload the cluster so that other components are upgraded online without interruption.
+> - You cannot upgrade TiFlash online from versions earlier than v5.3 to v5.3 or later. Instead, you can stop the TiFlash instances first and upgrade the cluster offline. Then, reload the cluster so that other components are upgraded online without interruption.
 
 #### Offline upgrade
 
