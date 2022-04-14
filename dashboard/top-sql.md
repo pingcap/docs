@@ -5,7 +5,7 @@ summary: Using Top SQL to find SQL statements with high CPU overhead
 
 # TiDB Dashboard Top SQL page
 
-With Top SQL, you can monitor and visually explore the CPU overhead of each SQL statement in your database in real-time, which helps you optimize and resolve database performance issues. Top SQL continuously collects and stores CPU load data summarized by SQL statements for any seconds from all TiDB and TiKV instances. The data can be stored stored for up to 30 days. Top SQL presents you visual charts and tables to quickly pinpoint which SQL statements are contributing the high CPU load of a TiDB or TiKV instance over a certain period of time.
+With Top SQL, you can monitor and visually explore the CPU overhead of each SQL statement in your database in real-time, which helps you optimize and resolve database performance issues. Top SQL continuously collects and stores CPU load data summarized by SQL statements for any seconds from all TiDB and TiKV instances. The data can be stored for up to 30 days. Top SQL presents you visual charts and tables to quickly pinpoint which SQL statements are contributing the high CPU load of a TiDB or TiKV instance over a certain period of time.
 
 Top SQL provides following features:
 
