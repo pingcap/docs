@@ -1,5 +1,6 @@
 TiBD
 (?i)a lot
+(?i)lots of
 (?i)many
 (?i)much
 (?i)enough

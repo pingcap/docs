@@ -25,9 +25,12 @@ jobs:
     - name: Vale Linter
       uses: errata-ai/vale-action@v1.4.3
       with:
-        files: .
         # Optional
-        #onlyAnnotateModifiedLines: true
+        # Specify file path to lint
+        #files: .
+
+        # Optional
+        onlyAnnotateModifiedLines: true
       env:
         # Required, set by GitHub actions automatically:
         # https://docs.github.com/en/actions/security-guides/automatic-token-authentication#about-the-github_token-secret
