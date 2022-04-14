@@ -229,7 +229,7 @@
       - [Use TiUP Offline](/dm/deploy-a-dm-cluster-using-tiup-offline.md)
       - [Use Binary](/dm/deploy-a-dm-cluster-using-binary.md)
       - [Use Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/dev/deploy-tidb-dm)
-    - Basic Features
+    - Tutorials
       - [Manage Data Sources](/dm/dm-manage-source.md)
       - [Configure Tasks](/dm/dm-task-configuration-guide.md)
       - [Table Routing](/dm/dm-key-features.md)
@@ -243,7 +243,7 @@
         - [Pause a Task](/dm/dm-pause-task.md)
         - [Resume a Task](/dm/dm-resume-task.md)
         - [Stop a Task](/dm/dm-stop-task.md)
-    - Tutorials
+    - Advanced Tutorials
       - Merge and Migrate Data from Sharded Tables
         - [Overview](/dm/feature-shard-merge.md)
         - [Pessimistic Mode](/dm/feature-shard-merge-pessimistic.md)
@@ -256,8 +256,8 @@
         - [Maintain DM Clusters Using TiUP (Recommended)](/dm/maintain-dm-using-tiup.md)
         - [Manually Upgrade from v1.0.x to v2.0+](/dm/manually-upgrade-dm-1.0-to-2.0.md)
       - Tools
-        - [Manage Tasks Using WebUI](/dm/dm-webui-guide.md)
-        - [Manage Tasks Using dmctl](/dm/dmctl-introduction.md)
+        - [Manage Using WebUI](/dm/dm-webui-guide.md)
+        - [Manage Using dmctl](/dm/dmctl-introduction.md)
       - Performance Tuning
         - [Benchmarks](/dm/dm-benchmark-v5.4.0.md)
         - [Optimize Configurations](/dm/dm-tune-configuration.md)
