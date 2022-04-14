@@ -759,14 +759,14 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Scope: GLOBAL
 - Default value: `0`
 - Optional values: `0`, `1`
-- This variable controls the read-only status of the entire cluster. If the variable is enabled (the value is `1`), all TiDB servers in the entire cluster turn on the read-only mode. In this case, TiDB only execute the statements that do not modify data, such as `SELECT`, `USE`, `SHOW`. For others, such as `INSERT`, `UPDATE`, TiDB rejects to execute those statements in the read-only mode.
-- The read-only mode enabled by this variable only ensures that the entire cluster finally goes into the read-only status. If you have changed the value of this variable, but the changed status is not updated to other TiDB servers, the un-updated TiDB is still **not** in the read-only mode.
-- During enabling this variable, the executing SQL statements are not affected. TiDB only checks the read-only status for the SQL statements to be executed.
-- During enabling this variable, the uncommitted transactions can have the following results:
-    - If there is an uncommitted read-only transaction, the transaction can be committed normally.
-    - If the uncommitted transaction is not a read-only transaction, the SQL statements executing write operations in the transaction are rejected.
-    - If the uncommitted read-only transaction has modified data, the commitment of the transaction is rejected.
-- After the read-only mode is enabled, unless the user is explicitly granted the `RESTRICTED_REPLICA_WRITER_ADMIN` privileges, all users (including the users with the `SUPER` privilege) cannot execute the SQL statements that might write data.
+- This variable controls the read-only status of the entire cluster. If the variable is enabled (which means the value is `1`), all TiDB servers in the entire cluster turn on the read-only mode. In this case, TiDB only executes the statements that do not modify data, such as `SELECT`, `USE`, `SHOW`. For others, such as `INSERT` and `UPDATE`, TiDB rejects to execute those statements in the read-only mode.
+- If you enabled the read-only mode by this variable, this only ensures that the entire cluster finally goes into the read-only status. Suppose that you have changed the value of this variable, but the changed status is not updated to other TiDB servers. In this situation, the un-updated TiDB is still **not** in the read-only mode.
+- While enabling this variable, the executing SQL statements are not affected. TiDB only checks the read-only status for the SQL statements **to be** executed.
+- While enabling this variable, the uncommitted transactions have the following results:
+    - For uncommitted read-only transactions, the transactions can be committed normally.
+    - For uncommitted transactions that are not read-only transactions, SQL statements executing write operations in these transactions are rejected.
+    - For uncommitted read-only transactions with modified data, commitments of these transactions are rejected.
+- After the read-only mode is enabled, all users (including the users with the `SUPER` privilege) cannot execute the SQL statements that might write data unless the user is explicitly granted the `RESTRICTED_REPLICA_WRITER_ADMIN` privileges.
 - The users with `RESTRICTED_VARIABLES_ADMIN` or `SUPER` privileges can modify this variable. However, if the [Security Enhanced Mode](#tidb_enable_enhanced_security) is enabled, only the users with the `RESTRICTED_VARIABLES_ADMIN` privilege can modify this variable.
 
 ### tidb_enable_fast_analyze
