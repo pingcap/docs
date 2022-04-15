@@ -173,7 +173,7 @@ tiup cluster upgrade <cluster-name> v6.0.0
 >
 > + To keep a stable performance, make sure that all leaders in a TiKV instance are evicted before stopping the instance. You can set `--transfer-timeout` to a larger value, for example, `--transfer-timeout 3600` (unit: second).
 >
-> - You cannot upgrade TiFlash online from versions earlier than v5.3 to v5.3 or later. Instead, you must first stop all the TiFlash instances and then upgrade the cluster offline. Then, reload the cluster so that other components are upgraded online without interruption.
+> - When upgrading a TiDB cluster from versions earlier than 5.3 to 5.3 or later, you cannot upgrade TiFlash online. Instead, you must first stop all the TiFlash instances and then upgrade the cluster offline. Then, reload the cluster so that other components are upgraded online without interruption.
 
 #### Offline upgrade
 
