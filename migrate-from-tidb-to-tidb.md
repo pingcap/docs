@@ -1,7 +1,7 @@
 ---
 title: Migrate from one TiDB cluster to another TiDB cluster
 summary: Learn how to migrate data from one TiDB cluster to another TiDB cluster.
-----
+---
 
 # Migrate from one TiDB cluster to another TiDB cluster
 
@@ -65,6 +65,7 @@ This document exemplifies the whole migration process and contains the following
     threads=10              # Set the number of worker threads to 10
     time=0                  # Set the time required for executing the script. O indicates time unlimited
     rate=100                # Set average TPS to 100
+    ```
 
 3. Simulate service workload.
 
@@ -78,7 +79,7 @@ This document exemplifies the whole migration process and contains the following
 
 4. Prepare external storage.
 
-    In full data backup, both the upstream and downstream clusters need to access backup files. It is recommended that you use [External storage](backup-and-restore-storages.md) to store backup files. In this document, we use Minio to simulate an S3-compatible storage service.
+    In full data backup, both the upstream and downstream clusters need to access backup files. It is recommended that you use [External storage](/br/backup-and-restore-storages.md) to store backup files. In this document, we use Minio to simulate an S3-compatible storage service.
 
     {{< copyable "shell-regular" >}}
 
@@ -112,11 +113,11 @@ This document exemplifies the whole migration process and contains the following
 
 ## Step 2. Migrate full data
 
-After setting up the environment, you can use the backup and restore functions of [BR](https://github.com/pingcap/br) to migrate full data. BR can be started in [several ways](br/backup-and-restore-tool.md#how-to-use-br). In this document, we use the SQL statements, `BACKUP` and `RESTORE`.
+After setting up the environment, you can use the backup and restore functions of [BR](https://github.com/pingcap/br) to migrate full data. BR can be started in [several ways](/br/backup-and-restore-tool.md#how-to-use-br). In this document, we use the SQL statements, `BACKUP` and `RESTORE`.
 
 > **Note:**
 >
-> If the versions of the upstream and downstream clusters are different, you should check [BR compatibility](br/backup-and-restore-tool.md#compatibility). In this document, we assume that the upstream and downstream clusters are the same version.
+> If the versions of the upstream and downstream clusters are different, you should check [BR compatibility](/br/backup-and-restore-tool.md#compatibility). In this document, we assume that the upstream and downstream clusters are the same version.
 
 1. Disable GC.
 
@@ -235,7 +236,7 @@ After setting up the environment, you can use the backup and restore functions o
     - --changefeed-id: changefeed ID, must be in the format of a regular expression, ^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$
     - --start-ts: start timestamp of the changefeed, must be the backup time (or BackupTS mentioned in the previous step)
 
-    For more information about the changefeed configurations, see [Task configuration file](ticdc/manage-ticdc.md#task-configuration-file).
+    For more information about the changefeed configurations, see [Task configuration file](/ticdc/manage-ticdc.md#task-configuration-file).
 
 3. Enable GC.
 

@@ -104,9 +104,3 @@ After a changefeed is created, once there is any event change in the TiDB cluste
     ```
 
     In production environments, you need to develop Kafka Consumer to consume the data in the Kafka topic.
-
-
-
-
-
-

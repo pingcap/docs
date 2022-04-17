@@ -111,11 +111,11 @@ To replicate incremental data from a running  TiDB cluster to its secondary clus
 
 ## Step 2. Migrate full data
 
-After setting up the environment, you can use the backup and restore functions of [BR](https://github.com/pingcap/br) to migrate full data. BR can be started in [several ways](br/backup-and-restore-tool.md#how-to-use-br). In this document, we use the SQL statements, `BACKUP` and `RESTORE`.
+After setting up the environment, you can use the backup and restore functions of [BR](https://github.com/pingcap/br) to migrate full data. BR can be started in [several ways](/br/backup-and-restore-tool.md#how-to-use-br). In this document, we use the SQL statements, `BACKUP` and `RESTORE`.
 
 > **Note:**
 >
-> If the versions of the upstream and downstream clusters are different, you should check [BR compatibility](br/backup-and-restore-tool.md#compatibility). In this document, we assume that the upstream and downstream clusters are the same version.
+> If the versions of the upstream and downstream clusters are different, you should check [BR compatibility](/br/backup-and-restore-tool.md#compatibility). In this document, we assume that the upstream and downstream clusters are the same version.
 
 1. Disable GC.
 
@@ -251,7 +251,7 @@ After setting up the environment, you can use the backup and restore functions o
     - --sink-uri: URI of the downstream cluster
     - --start-ts: start timestamp of the changefeed, must be the backup time (or BackupTS mentioned in the previous step)
 
-    For more information about the changefeed configurations, see [Task configuration file](ticdc/manage-ticdc.md#task-configuration-file).
+    For more information about the changefeed configurations, see [Task configuration file](/ticdc/manage-ticdc.md#task-configuration-file).
 
 3. Enable GC.
 
