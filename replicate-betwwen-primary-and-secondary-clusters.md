@@ -83,7 +83,7 @@ To replicate incremental data from a running  TiDB cluster to its secondary clus
     ```shell
     wget https://dl.min.io/server/minio/release/linux-amd64/minio
     chmod +x minio
-    # Configure access-key access-screct-id to access minio 
+    # Configure access-key access-screct-id to access minio
     export HOST_IP='172.16.6.123' # Replace it with the IP address of your upstream cluster
     export MINIO_ROOT_USER='minio'
     export MINIO_ROOT_PASSWORD='miniostorage'
@@ -208,7 +208,7 @@ After setting up the environment, you can use the backup and restore functions o
             user = "root"
             password = ""
             snapshot = "431434141450371074" # Set snapshot to the actual restore time
-    
+
     ######################### Task config #########################
     [task]
             output-dir = "./output"
@@ -277,12 +277,12 @@ Create a disastrous event in the upstream cluster while it is running. For examp
 
 ## Step 5. Use redo log to ensure data consistency
 
-Normally, TiCDC concurrently writes transactions to downstream to increase throughtput. When a changefeed is interruped unexpectedlly, the downstream may not have the latest data as it is in the upstream. To address inconsistency, we run the following command to ensure that the downstream data is consistent with the upstream data.
+Normally, TiCDC concurrently writes transactions to downstream to increase throughout. When a changefeed is interrupted unexpectedly, the downstream may not have the latest data as it is in the upstream. To address inconsistency, we run the following command to ensure that the downstream data is consistent with the upstream data.
 
 {{< copyable "shell-regular" >}}
 
 ```shell
-tiup cdc redo apply --storage "s3://redo?access-key=minio&secret-access-key=miniostorage&endpoint=http://172.16.6.123:6060&force-path-style=true" --tmp-dir /tmp/redo --sink-uri "mysql://root:@172.16.6.124:4000" 
+tiup cdc redo apply --storage "s3://redo?access-key=minio&secret-access-key=miniostorage&endpoint=http://172.16.6.123:6060&force-path-style=true" --tmp-dir /tmp/redo --sink-uri "mysql://root:@172.16.6.124:4000"
 ```
 
 - --storage: Location and credential of the redo log in S3

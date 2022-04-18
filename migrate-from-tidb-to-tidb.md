@@ -86,7 +86,7 @@ This document exemplifies the whole migration process and contains the following
     ```shell
     wget https://dl.min.io/server/minio/release/linux-amd64/minio
     chmod +x minio
-    # Configure access-key access-screct-id to access minio  
+    # Configure access-key access-screct-id to access minio
     export HOST_IP='172.16.6.122' # Replace the value with the IP address of your upstream cluster
     export MINIO_ROOT_USER='minio'
     export MINIO_ROOT_PASSWORD='miniostorage'
@@ -154,7 +154,7 @@ After setting up the environment, you can use the backup and restore functions o
     +---------------+----------+--------------------+---------------------+---------------------+
     | s3://backup   | 10315858 | 431434047157698561 | 2022-02-25 19:57:59 | 2022-02-25 19:57:59 |
     +---------------+----------+--------------------+---------------------+---------------------+
-    1 row in set (2.11 sec) 
+    1 row in set (2.11 sec)
     ```
 
     After the `BACKUP` command is executed, TiDB returns metadata about the backup data. Pay attention to `BackupTS`, because data generated before it is backed up. In this document, we use `BackupTS` as **the end of data check** and **the start of incremental migration scanning by TiCDC**.
@@ -204,7 +204,7 @@ After setting up the environment, you can use the backup and restore functions o
         port = 4000
         user = "root"
         password = ""
- 
+
     ######################### Task config #########################
     [task]
         output-dir = "./output"
