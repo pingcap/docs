@@ -104,6 +104,10 @@ For the Standalone mode without Hadoop support, use Spark **2.3.x** and any vers
 
 Suppose you already have a Spark binaries, and the current PATH is `SPARKPATH`, you can copy the TiSpark jar package to the `${SPARKPATH}/jars` directory.
 
+> **Note:**
+>
+> If TiSpark could not communicate properly, please check your firewall configuration. You can adjust the firewall rules or disable it on your need.
+
 #### Start a Master node
 
 Execute the following command on the selected Spark Master node:
@@ -114,14 +118,14 @@ cd $SPARKPATH
 ./sbin/start-master.sh
 ```
 
-After the above step is completed, a log file will be printed on the screen. Check the log file to confirm whether the Spark-Master is started successfully. You can open the [http://spark-master-hostname:8080](http://spark-master-hostname:8080) to view the cluster information (if you does not change the Spark-Master default port number). When you start Spark-Worker, you can also use this panel to confirm whether the Worker is joined to the cluster.
+After the above step is completed, a log file will be printed on the screen. Check the log file to confirm whether the Spark-Master is started successfully. You can open the <http://${spark-master-hostname}:8080> to view the cluster information (if you does not change the Spark-Master default port number). When you start Spark-Worker, you can also use this panel to confirm whether the Worker is joined to the cluster.
 
 #### Start a Worker node
 
 Similarly, you can start a Spark-Worker node with the following command:
 
 ```sh
-./sbin/start-slave.sh spark://spark-master-hostname:7077
+./sbin/start-slave.sh spark://${spark-master-hostname}:7077
 ```
 
 After the command returns, you can see if the Worker node is joined to the Spark cluster correctly from the panel as well. Repeat the above command at all Worker nodes. After all Workers are connected to the master, you have a Standalone mode Spark cluster.
@@ -161,11 +165,19 @@ The result is:
 
 Spark SQL Interactive shell remains the same:
 
-```sh
-spark-sql> use tpch;
-Time taken: 0.015 seconds
+```scala
+use tpch;
+```
 
-spark-sql> select count(*) from lineitem;
+```
+Time taken: 0.015 seconds
+```
+
+```scala
+select count(*) from lineitem;
+```
+
+```
 2000
 Time taken: 0.673 seconds, Fetched 1 row(s)
 ```
@@ -287,14 +299,6 @@ TiSpark uses TiDB statistic information for the following items:
 If you would like TiSpark to use statistic information, first you need to make sure that concerning tables have already been analyzed. Read more about [how to analyze tables](/statistics.md).
 
 Starting from TiSpark 2.0, statistics information is default to auto load.
-
-Note that table statistics are cached in the memory of your Spark driver node, so you need to make sure that your memory size is large enough for your statistics information.
-
-Currently, you can adjust these configurations in your `spark-defaults.conf` file.
-
-| Property name | Default | Description |
-| :--------   | :-----  | :---- |
-| spark.tispark.statistics.auto_load | true | Whether to load statistics information automatically during database mapping. |
 
 ## FAQ
 
