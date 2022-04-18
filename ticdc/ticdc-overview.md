@@ -6,12 +6,12 @@ aliases: ['/docs/dev/ticdc/ticdc-overview/','/docs/dev/reference/tools/ticdc/ove
 
 # TiCDC Overview
 
-[TiCDC](https://github.com/pingcap/tiflow/tree/master/cdc) is a tool used for replicating incremental data of TiDB. Specifically, TiCDC pulls TiKV change logs, sorts captured data, and exports row-based incremental data to downstream.
+[TiCDC](https://github.com/pingcap/tiflow/tree/master/cdc) is a tool used for replicating incremental data of TiDB. Specifically, TiCDC pulls TiKV change logs, sorts captured data, and exports row-based incremental data to downstream databases.
 
-## Application scenarios
+## Usage scenarios
 
-- Database disaster recovery: TiCDC can be used for disaster recovery between homogeneous databases to ensure eventual data consistency of primary and secondary databases before and after a disaster event. This function works only with TiDB primary and secondary clusters.
-- Data integration: TiCDC provides [TiCDC Canal-JSON Protocol](/ticdc/ticdc-canal-json.md), which allows other systems to subscribe data changes from TiCDC. In this way, TiCDC provides data sources for such scenarios as monitoring, caching, global indexing, data analysis, and primary-secondary replication between heterogeneous databases.
+- Database disaster recovery: TiCDC can be used for disaster recovery between homogeneous databases to ensure eventual data consistency of primary and secondary databases after a disaster event. This function works only with TiDB primary and secondary clusters.
+- Data integration: TiCDC provides [TiCDC Canal-JSON Protocol](/ticdc/ticdc-canal-json.md), which allows other systems to subscribe data changes from TiCDC. In this way, TiCDC provides data sources for various scenarios such as monitoring, caching, global indexing, data analysis, and primary-secondary replication between heterogeneous databases.
 
 ## TiCDC architecture
 
