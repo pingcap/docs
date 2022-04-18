@@ -60,14 +60,10 @@ SPARK_WORKER_MEMORY: 10g
 
 In the `spark-defaults.conf` file, add the following lines:
 
-<<<<<<< HEAD
 ```sh
 spark.tispark.pd.addresses $your_pd_servers
 spark.sql.extensions org.apache.spark.sql.TiExtensions
 ```
-=======
-For more information, see the [official configuration](https://spark.apache.org/docs/latest/spark-standalone.html) on the Spark website.
->>>>>>> a78be050e (Remove statistics information and change firewalld description in TiSpark Overview (#8205))
 
 Add the following configuration in the `CDH` spark version:
 
@@ -88,13 +84,7 @@ For the hybrid deployment of TiKV and TiSpark, add TiSpark required resources to
 
 Download TiSpark's jar package [here](https://github.com/pingcap/tispark/releases). Download your desired version of jar package and copy the content to the appropriate folder.
 
-<<<<<<< HEAD
 ### Deploy TiSpark on the existing Spark cluster
-=======
-> **Note:**
->
-> TiSpark v2.1.x and older versions have file names that look like `tispark-core-2.1.9-spark_2.4-jar-with-dependencies.jar`. Please check the [releases page on GitHub](https://github.com/pingcap/tispark/releases) for the exact file name for the version you want.
->>>>>>> a78be050e (Remove statistics information and change firewalld description in TiSpark Overview (#8205))
 
 Running TiSpark on an existing Spark cluster does not require a reboot of the cluster. You can use Spark's `--jars` parameter to introduce TiSpark as a dependency:
 
@@ -110,15 +100,13 @@ If you do not have a Spark cluster, we recommend using the standalone mode. To u
 
 You can download [Apache Spark](https://spark.apache.org/downloads.html)
 
-<<<<<<< HEAD
 For the Standalone mode without Hadoop support, use Spark **2.3.x** and any version of Pre-build with Apache Hadoop 2.x with Hadoop dependencies. If you need to use the Hadoop cluster, choose the corresponding Hadoop version. You can also choose to build from the [source code](https://spark.apache.org/docs/latest/building-spark.html) to match the previous version of the official Hadoop 2.x.
 
 Suppose you already have a Spark binaries, and the current PATH is `SPARKPATH`, you can copy the TiSpark jar package to the `${SPARKPATH}/jars` directory.
-=======
+
 > **Note:**
 >
 > If TiSpark could not communicate properly, please check your firewall configuration. You can adjust the firewall rules or disable it on your need.
->>>>>>> a78be050e (Remove statistics information and change firewalld description in TiSpark Overview (#8205))
 
 #### Start a Master node
 
@@ -146,11 +134,7 @@ After the command returns, you can see if the Worker node is joined to the Spark
 
 TiSpark supports Spark 2.3, so you can use Spark's ThriftServer and SparkSQL directly.
 
-<<<<<<< HEAD
 ## Demo
-=======
-Assume that you have successfully started the TiSpark cluster as described above. The following describes how to use Spark SQL for OLAP analysis on a table named `lineitem` in the `tpch` database.
->>>>>>> a78be050e (Remove statistics information and change firewalld description in TiSpark Overview (#8205))
 
 Assuming that you have successfully started the TiSpark cluster as described above, here's a quick introduction to how to use Spark SQL for OLAP analysis. Here we use a table named `lineitem` in the `tpch` database as an example.
 
@@ -179,17 +163,7 @@ The result is:
 +-------------+
 ```
 
-<<<<<<< HEAD
 Spark SQL Interactive shell remains the same:
-=======
-Besides Spark Shell, there is also Spark SQL available. To use Spark SQL, run:
-
-```
-./bin/spark-sql
-```
-
-You can run the same query:
->>>>>>> a78be050e (Remove statistics information and change firewalld description in TiSpark Overview (#8205))
 
 ```scala
 use tpch;
@@ -325,39 +299,6 @@ TiSpark uses TiDB statistic information for the following items:
 If you would like TiSpark to use statistic information, first you need to make sure that concerning tables have already been analyzed. Read more about [how to analyze tables](/statistics.md).
 
 Starting from TiSpark 2.0, statistics information is default to auto load.
-
-<<<<<<< HEAD
-Note that table statistics are cached in the memory of your Spark driver node, so you need to make sure that your memory size is large enough for your statistics information.
-
-Currently, you can adjust these configurations in your `spark-defaults.conf` file.
-
-| Property name | Default | Description |
-| :--------   | :-----  | :---- |
-| spark.tispark.statistics.auto_load | true | Whether to load statistics information automatically during database mapping. |
-=======
-## Security
-
-If you are using TiSpark v2.5.0 or a later version, you can authenticate and authorize TiSpark users by using TiDB.
-
-The authentication and authorization feature is disabled by default. To enable it, add the following configurations to the Spark configuration file `spark-defaults.conf`.
-
-```
-// Enable authentication and authorization
-spark.sql.auth.enable true
-
-// Configure TiDB information
-spark.sql.tidb.addr $your_tidb_server_address
-spark.sql.tidb.port $your_tidb_server_port
-spark.sql.tidb.user $your_tidb_server_user
-spark.sql.tidb.password $your_tidb_server_password
-```
-
-For more information, see [Authorization and authentication through TiDB server](https://github.com/pingcap/tispark/blob/master/docs/authorization_userguide.md).
-
-> **Note:**
->
-> After enabling the authentication and authorization feature, TiSpark Spark SQL can only use TiDB as the data source, so switching to other data sources (such as Hive) makes tables invisible.
->>>>>>> a78be050e (Remove statistics information and change firewalld description in TiSpark Overview (#8205))
 
 ## FAQ
 
