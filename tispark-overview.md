@@ -126,13 +126,9 @@ The `spark.tispark.pd.addresses` configuration allows you to put in multiple PD 
 
 For example, when you have multiple PD servers on `10.16.20.1,10.16.20.2,10.16.20.3` with the port 2379, put it as `10.16.20.1:2379,10.16.20.2:2379,10.16.20.3:2379`.
 
-The default setup of `firewalld` on CentOS blocks the traffic needed by TiSpark. Therefore, disable `firewalld` to ensure normal running of TiSpark.
-
-```bash
-sudo systemctl stop firewalld.service
-sudo systemctl disable firewalld.service
-sudo systemctl mask --now firewalld.service
-```
+> **Note:**
+>
+> If TiSpark could not communicate properly, please check your firewall configuration. You can adjust the firewall rules or disable it on your need.
 
 ### Start a Master node
 
@@ -143,14 +139,14 @@ cd $SPARKPATH
 ./sbin/start-master.sh
 ```
 
-After the above step is completed, a log file will be printed on the screen. Check the log file to confirm whether the Spark-Master is started successfully. You can open the [http://spark-master-hostname:8080](http://spark-master-hostname:8080) to view the cluster information (if you does not change the Spark-Master default port number). When you start Spark-Worker, you can also use this panel to confirm whether the Worker is joined to the cluster.
+After the above step is completed, a log file will be printed on the screen. Check the log file to confirm whether the Spark-Master is started successfully. You can open the <http://${spark-master-hostname}:8080> to view the cluster information (if you does not change the Spark-Master default port number). When you start Spark-Worker, you can also use this panel to confirm whether the Worker is joined to the cluster.
 
 ### Start a Worker node
 
 Similarly, you can start a Spark-Worker node with the following command:
 
 ```sh
-./sbin/start-slave.sh spark://spark-master-hostname:7077
+./sbin/start-slave.sh spark://${spark-master-hostname}:7077
 ```
 
 Note that if you run the master node and worker node on the same host, you cannot use `127.0.0.1` or `localhost` because the master process only listens to the external interface by default.
@@ -212,13 +208,21 @@ Besides Spark Shell, there is also Spark SQL available. To use Spark SQL, run:
 ./bin/spark-sql
 ```
 
-You can run the same query
+You can run the same query:
 
-```sh
-spark-sql> use tpch;
+```scala
+use tpch;
+```
+
+```
 Time taken: 0.015 seconds
+```
 
-spark-sql> select count(*) from lineitem;
+```scala
+select count(*) from lineitem;
+```
+
+```
 2000
 Time taken: 0.673 seconds, Fetched 1 row(s)
 ```
@@ -348,14 +352,6 @@ TiSpark uses TiDB statistic information for the following items:
 If you would like TiSpark to use statistic information, first you need to make sure that concerning tables have already been analyzed. Read more about [how to analyze tables](/statistics.md).
 
 Starting from TiSpark 2.0, statistics information is default to auto load.
-
-Note that table statistics are cached in the memory of your Spark driver node, so you need to make sure that your memory size is large enough for your statistics information.
-
-Currently, you can adjust these configurations in your `spark-defaults.conf` file.
-
-| Property name | Default | Description |
-| :--------   | :-----  | :---- |
-| spark.tispark.statistics.auto_load | true | Whether to load statistics information automatically during database mapping. |
 
 ## Security
 
