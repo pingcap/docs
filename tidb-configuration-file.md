@@ -468,7 +468,7 @@ Configuration items related to performance.
 
 ## prepared-plan-cache
 
-The [`plan cache`](/sql-prepare-plan-cache.md) configuration of the `PREPARE` statement.
+The [`plan cache`](/sql-prepared-plan-cache.md) configuration of the `PREPARE` statement.
 
 ### `enabled`
 
