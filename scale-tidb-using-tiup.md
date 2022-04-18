@@ -265,9 +265,9 @@ If you want to remove a TiKV node from the `10.0.1.5` host, take the following s
     ```
 
     ```
-    Starting /root/.tiup/components/cluster/v1.9.0/cluster display <cluster-name>
+    Starting /root/.tiup/components/cluster/v1.9.3/cluster display <cluster-name>
     TiDB Cluster: <cluster-name>
-    TiDB Version: v5.4.0
+    TiDB Version: v6.0.0
     ID              Role         Host        Ports                            Status  Data Dir                Deploy Dir
     --              ----         ----        -----                            ------  --------                ----------
     10.0.1.3:8300   cdc          10.0.1.3    8300                             Up      data/cdc-8300           deploy/cdc-8300
@@ -338,7 +338,7 @@ Before the node goes down, make sure that the number of remaining nodes in the T
     alter table <db-name>.<table-name> set tiflash replica 0;
     ```
 
-2. Wait for the TiFlash replicas of the related tables to be deleted. [Check the table replication progress](/tiflash/use-tiflash.md#check-the-replication-progress) and the replicas are deleted if the replication information of the related tables is not found.
+2. Wait for the TiFlash replicas of the related tables to be deleted. [Check the table replication progress](/tiflash/use-tiflash.md#check-replication-progress) and the replicas are deleted if the replication information of the related tables is not found.
 
 ### 2. Perform the scale-in operation
 
