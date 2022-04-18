@@ -103,6 +103,7 @@ You can download [Apache Spark](https://spark.apache.org/downloads.html)
 For the Standalone mode without Hadoop support, use Spark **2.3.x** and any version of Pre-build with Apache Hadoop 2.x with Hadoop dependencies. If you need to use the Hadoop cluster, choose the corresponding Hadoop version. You can also choose to build from the [source code](https://spark.apache.org/docs/latest/building-spark.html) to match the previous version of the official Hadoop 2.x.
 
 Suppose you already have a Spark binaries, and the current PATH is `SPARKPATH`, you can copy the TiSpark jar package to the `${SPARKPATH}/jars` directory.
+
 > **Note:**
 >
 > If TiSpark could not communicate properly, please check your firewall configuration. You can adjust the firewall rules or disable it on your need.
