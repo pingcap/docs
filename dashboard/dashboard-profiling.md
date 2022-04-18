@@ -16,7 +16,7 @@ With these performance data, experts can analyze current resource consumption de
 
 After initiates the profiling, TiDB Dashboard collects current performance data for a period of time (30 seconds by default). Therefore this feature can only be used to analyze ongoing problems that the cluster is facing now and has no significant effect on historical problems. If you want to collect and analyze performance data **at any time**, see [Continuous Profiling](/dashboard/continuous-profiling.md).
 
-## Supported Performance Data
+## Supported performance data
 
 The following performance data are currently supported:
 
@@ -28,7 +28,7 @@ The following performance data are currently supported:
 
 - Mutex: The mutex contention states on TiDB and PD instances
 
-- Goroutine: The the running state and call stack of all goroutines on TiDB and PD instances
+- Goroutine: The running state and call stack of all goroutines on TiDB and PD instances
 
 ## Access the page
 

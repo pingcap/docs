@@ -3,7 +3,7 @@ title: TiDB Dashboard Top SQL page
 summary: Using Top SQL to find SQL statements with high CPU overhead
 ---
 
-# TiDB Dashboard Top SQL page
+# TiDB Dashboard Top SQL Page
 
 With Top SQL, you can monitor and visually explore the CPU overhead of each SQL statement in your database in real-time, which helps you optimize and resolve database performance issues. Top SQL continuously collects and stores CPU load data summarized by SQL statements for any seconds from all TiDB and TiKV instances. The data can be stored for up to 30 days. Top SQL presents you visual charts and tables to quickly pinpoint which SQL statements are contributing the high CPU load of a TiDB or TiKV instance over a certain period of time.
 
@@ -116,7 +116,7 @@ SET GLOBAL tidb_enable_top_sql = 0;
 
 ## Frequently Asked Questions
 
-**1. Feature cannot be enabled as the UI displays "required component NgMonitoring is not started"**.
+**1. Top SQL cannot be enabled and the UI displays "required component NgMonitoring is not started"**.
 
 See [TiDB Dashboard FAQ](/dashboard/dashboard-faq.md#a-required-component-ngmonitoring-is-not-started-error-is-shown).
 
@@ -126,7 +126,7 @@ This feature has a slight impact on cluster performance. According to our benchm
 
 **3. What is the status of this feature?**
 
-This is a generally available feature and can be used in production environments.
+It is now a generally available (GA) feature and can be used in production environments.
 
 **4. What is the meaning of "Other Statements"?**
 
