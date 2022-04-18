@@ -61,14 +61,10 @@ SPARK_WORKER_MEMORY: 10g
 
 In the `spark-defaults.conf` file, add the following lines:
 
-<<<<<<< HEAD
 ```sh
 spark.tispark.pd.addresses $your_pd_servers
 spark.sql.extensions org.apache.spark.sql.TiExtensions
 ```
-=======
-For more information, see the [official configuration](https://spark.apache.org/docs/latest/spark-standalone.html) on the Spark website.
->>>>>>> a78be050e (Remove statistics information and change firewalld description in TiSpark Overview (#8205))
 
 Add the following configuration in the `CDH` spark version:
 
