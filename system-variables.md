@@ -445,7 +445,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Default value: `2`
 - Range: `[1, 2]`
 - Controls how TiDB collects statistics.
-- In versions before v5.1.0, the default value of this variable is `1`. In v5.1.0, the default value of this variable is `2`, which serves as an experimental feature. For detailed introduction, see [Introduction to Statistics](/statistics.md).
+- In v5.3.0 and later versions, the default value of this variable is `2`, which serves as an experimental feature. If your cluster is upgraded from a version earlier than v5.3.0 to v5.3.0 or later, the default value of `tidb_analyze_version` does not change. For detailed introduction, see [Introduction to Statistics](/statistics.md).
 
 ### tidb_auto_analyze_end_time
 
@@ -486,6 +486,13 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
     For example, the base timeout for TiDB to take TSO from PD is 15 seconds. When `tidb_backoff_weight = 2`, the maximum timeout for taking TSO is: *base time \* 2 = 30 seconds*.
 
     In the case of a poor network environment, appropriately increasing the value of this variable can effectively alleviate error reporting to the application end caused by timeout. If the application end wants to receive the error information more quickly, minimize the value of this variable.
+
+### tidb_batch_insert
+
+- Scope: SESSION
+- Default value: `OFF`
+- This variable permits `tidb_dml_batch_size` to be used in `INSERT` statements.
+- Only the value `OFF` provides ACID compliance. Setting this to any other value breaks the atomicity and isolation guarantees of TiDB, because an individual `INSERT` statement will be split into smaller transactions.
 
 ### tidb_broadcast_join_threshold_count <span class="version-mark">New in v5.0</span>
 
@@ -638,6 +645,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Range: `[0, 2147483647]`
 - Unit: Rows
 - When this value is greater than `0`, TiDB will batch commit statements such as `INSERT` or `LOAD DATA` into smaller transactions. This reduces memory usage and helps ensure that the `txn-total-size-limit` is not reached by bulk modifications.
+- To use `tidb_dml_batch_size` in `INSERT` statements, you also need to set the system variable `tidb_batch_insert` to `ON`.
 - Only the value `0` provides ACID compliance. Setting this to any other value will break the atomicity and isolation guarantees of TiDB.
 
 ### tidb_enable_1pc <span class="version-mark">New in v5.0</span>
