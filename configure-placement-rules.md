@@ -8,7 +8,7 @@ aliases: ['/docs/dev/configure-placement-rules/','/docs/dev/how-to/configure/pla
 
 > **Note:**
 >
-> TiDB v5.3.0 introduces an experimental support for [Placement Rules in SQL](/placement-rules-in-sql.md). This offers a more convenient way to configure the placement of tables and partitions. Placement Rules in SQL might replace placement configuration with PD in future releases.
+> This document introduces how to manually specify placement rules in Placement Driver (PD). It is now recommended to use [Placement Rules in SQL](/placement-rules-in-sql.md). This offers a more convenient way to configure the placement of tables and partitions.
 
 Placement Rules, introduced in v5.0, is a replica rule system that guides PD to generate corresponding schedules for different types of data. By combining different scheduling rules, you can finely control the attributes of any continuous data range, such as the number of replicas, the storage location, the host type, whether to participate in Raft election, and whether to act as the Raft leader.
 
@@ -357,7 +357,7 @@ You only need to add a rule that limits the key range to the range of metadata, 
   "start_key": "6d00000000000000f8",
   "end_key": "6e00000000000000f8",
   "role": "voter",
-  "count": "5",
+  "count": 5,
   "location_labels": ["zone", "rack", "host"]
 }
 ```

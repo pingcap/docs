@@ -237,11 +237,32 @@ backslash-escape = true
 # If a line ends with a separator, remove it.
 trim-last-separator = false
 
+# [[mydumper.files]]
+# Expression used for parsing AWS Aurora parquet files
+# pattern = '(?i)^(?:[^/]*/)*([a-z0-9_]+)\.([a-z0-9_]+)/(?:[^/]*/)*(?:[a-z0-9\-_.]+\.(parquet))$'
+# schema = '$1'
+# table = '$2'
+# type = '$3'
+# 
+# Sets rules for merging sharded schemas and tables. Specifically, import `table1` and `table2` from `my_db1`, and `table3` and `table4` from `my_db2` to `table5` in `my_db`.
+# [[routes]]
+# schema-pattern = "my_db1"
+# table-pattern = "table[1-2]"
+# target-schema = "my_db"
+# target-table = "table5"
+# 
+# [[routes]]
+# schema-pattern = "my_db2"
+# table-pattern = "table[3-4]"
+# target-schema = "my_db"
+# target-table = "table5"
+
 [tidb]
 # Configuration of any TiDB server from the cluster.
 host = "172.16.31.1"
 port = 4000
 user = "root"
+# Configure the password to connect to TiDB. The password can either be plaintext or Base64 encoded.
 password = ""
 # Table schema information is fetched from TiDB via this status-port.
 status-port = 10080
@@ -298,7 +319,7 @@ max-allowed-packet = 67_108_864
 # "true" is equivalent to "required" and "false" is equivalent to "off".
 checksum = "required"
 # Specifies whether to perform `ANALYZE TABLE <table>` for each table after checksum is done.
-# Options available for this field are the same as `post-restore`. However, the default value for this field is "optional".
+# Options available for this field are the same as `checksum`. However, the default value for this field is "optional".
 analyze = "optional"
 
 # If the value is set to `true`, a level-1 compaction is performed
@@ -420,7 +441,7 @@ min-available-ratio = 0.05
 | --tidb-port *port* | TiDB server port (default = 4000) | `tidb.port` |
 | --tidb-status *port* | TiDB status port (default = 10080) | `tidb.status-port` |
 | --tidb-user *user* | User name to connect to TiDB | `tidb.user` |
-| --tidb-password *password* | Password to connect to TiDB | `tidb.password` |
+| --tidb-password *password* | Password to connect to TiDB. The password can either be plaintext or Base64 encoded. | `tidb.password` |
 | --no-schema | Ignore schema files, get schema directly from TiDB | `mydumper.no-schema` |
 | --enable-checkpoint *bool* | Whether to enable checkpoints (default = true) | `checkpoint.enable` |
 | --analyze *level* | Analyze tables after importing. Available values are "required", "optional" (default value), and "off" | `post-restore.analyze` |

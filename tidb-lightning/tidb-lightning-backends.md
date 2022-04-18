@@ -31,6 +31,12 @@ The **TiDB-backend**: `tidb-lightning` first encodes these data into SQL `INSERT
 | TiDB versions supported | >= v4.0.0 | All | All |
 | TiDB services impacted | Yes | Yes | No |
 
+> **Note**:
+>
+> - Apply only one backend at a time when using multiple TiDB Lightning instances to import data to the same target. For example, you cannot import data to the same TiDB cluster in both Local-backend and TiDB-backend modes at the same time.
+>
+> - By default, you cannot start multiple TiDB Lightning instances to import data into the same TiDB cluster. Instead, you can use the [Parallel Import](/tidb-lightning/tidb-lightning-distributed-import.md) feature.
+
 ## How to choose the backend modes
 
 - If the target cluster of data import is v4.0 or later versions, consider using the Local-backend mode first, which is easier to use and has higher performance than that of the other two modes.
@@ -62,7 +68,7 @@ When using the TiDB-backend, deploying `tikv-importer` is not necessary. Compare
 
 The speed of TiDB Lightning using TiDB-backend is limited by the SQL processing speed of TiDB. Therefore, even a lower-end machine may max out the possible performance. The recommended hardware configuration is:
 
-* 16 logical cores CPU
+* 4 logical cores CPU
 * An SSD large enough to store the entire data source, preferring higher read speed
 * 1 Gigabit network card
 

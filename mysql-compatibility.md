@@ -39,15 +39,14 @@ However, some features of MySQL are not supported. This could be because there i
 + `CHECK TABLE` syntax [#4673](https://github.com/pingcap/tidb/issues/4673)
 + `CHECKSUM TABLE` syntax [#1895](https://github.com/pingcap/tidb/issues/1895)
 + `GET_LOCK` and `RELEASE_LOCK` functions [#14994](https://github.com/pingcap/tidb/issues/14994)
-+ [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) with the `REPLACE` keyword [#24515](https://github.com/pingcap/tidb/issues/24515)
 
 ## Features that are different from MySQL
 
 ### Auto-increment ID
 
-+ In TiDB, auto-increment columns are only guaranteed to be unique and incremental on a single TiDB server, but they are *not* guaranteed to be incremental among multiple TiDB servers or allocated sequentially. It is recommended that you do not mix default values and custom values. Otherwise, you might encounter the `Duplicated Error` error message.
++ In TiDB, auto-incremental columns are globally unique. They are incremental on a single TiDB server, but *not* necessarily incremental among multiple TiDB servers or allocated sequentially. It is recommended that you do not mix default values and custom values. Otherwise, you might encounter the `Duplicated Error` error message.
 
-+ You can use the `tidb_allow_remove_auto_inc` system variable to allow or forbid removing the `AUTO_INCREMENT` column attribute. The syntax of removing the column attribute is `alter table modify` or `alter table change`.
++ You can use the `tidb_allow_remove_auto_inc` system variable to allow or forbid removing the `AUTO_INCREMENT` column attribute. The syntax of removing the column attribute is `ALTER TABLE MODIFY` or `ALTER TABLE CHANGE`.
 
 + TiDB does not support adding the `AUTO_INCREMENT` column attribute, and this attribute cannot be recovered once it is removed.
 
@@ -58,14 +57,14 @@ However, some features of MySQL are not supported. This could be because there i
 > + If you have not specified the primary key when creating a table, TiDB uses `_tidb_rowid` to identify the row. The allocation of this value shares an allocator with the auto-increment column (if such a column exists). If you specify an auto-increment column as the primary key, TiDB uses this column to identify the row. In this situation, the following situation might happen:
 
 ```sql
-mysql> create table t(id int unique key AUTO_INCREMENT);
+mysql> CREATE TABLE t(id INT UNIQUE KEY AUTO_INCREMENT);
 Query OK, 0 rows affected (0.05 sec)
 
-mysql> insert into t values(),(),();
+mysql> INSERT INTO t VALUES(),(),();
 Query OK, 3 rows affected (0.00 sec)
 Records: 3  Duplicates: 0  Warnings: 0
 
-mysql> select _tidb_rowid, id from t;
+mysql> SELECT _tidb_rowid, id FROM t;
 +-------------+------+
 | _tidb_rowid | id   |
 +-------------+------+
@@ -148,7 +147,7 @@ TiDB supports storage engine abstraction similar to MySQL, but you need to speci
 
 TiDB supports most [SQL modes](/sql-mode.md):
 
-- The compatibility modes, such as `ORACLE` and `POSTGRESQL` are parsed but ignored. Compatibility modes are deprecated in MySQL 5.7 and removed in MySQL 8.0.
+- The compatibility modes, such as `Oracle` and `PostgreSQL` are parsed but ignored. Compatibility modes are deprecated in MySQL 5.7 and removed in MySQL 8.0.
 - The `ONLY_FULL_GROUP_BY` mode has minor [semantic differences](/functions-and-operators/aggregate-group-by-functions.md#differences-from-mysql) from MySQL 5.7.
 - The `NO_DIR_IN_CREATE` and `NO_ENGINE_SUBSTITUTION` SQL modes in MySQL are accepted for compatibility, but are not applicable to TiDB.
 
