@@ -104,7 +104,7 @@ Additionally,
 You can disable this feature by following these steps.
 
 1. Visit [Top SQL page](#access-the-page).
-2. Click the **Gear icon** in the upper right corner to open the settings screen and switch off **Enable Feature**.
+2. Click the gear icon in the upper right corner to open the settings screen and switch off **Enable Feature**.
 3. Click **Save**.
 4. In the popped-up dialog box, click **Disable**.
 
@@ -120,7 +120,7 @@ SET GLOBAL tidb_enable_top_sql = 0;
 
 See [TiDB Dashboard FAQ](/dashboard/dashboard-faq.md#a-required-component-ngmonitoring-is-not-started-error-is-shown).
 
-**2. Is there any performance impact when enabled?**
+**2. Will performance be affected after enabling Top SQL?**
 
 This feature has a slight impact on cluster performance. According to our benchmark, the average performance impact is usually less than 3% when the feature is enabled.
 

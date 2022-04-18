@@ -50,7 +50,7 @@ You can modify the profiling duration before starting the profiling. This durati
 
 Manual Profiling cannot be initiated on clusters that have [Continuous Profiling](/dashboard/continuous-profiling.md) enabled. To view the performance data at the current moment, click on the most recent profiling result in the [Continuous Profiling page](/dashboard/continuous-profiling.md#access-the-page).
 
-## View Profiling Status
+## View profiling status
 
 After a profiling is started, you can view the profiling status and progress in real time.
 
@@ -58,7 +58,7 @@ After a profiling is started, you can view the profiling status and progress in 
 
 The profiling runs in the background. Refreshing or exiting the current page does not stop the profiling task that is running.
 
-## Download Performance Data
+## Download performance data
 
 After the profiling of all instances is completed, you can click **Download Profiling Result** in the upper right corner to download all performance data.
 
@@ -68,7 +68,7 @@ You can also click an individual instance in the table to view its profiling res
 
 ![Single instance result](/media/dashboard/dashboard-profiling-view-single.png)
 
-## View Profiling History
+## View profiling history
 
 The on-demand profiling history is listed on the page. Click a row to view details.
 
