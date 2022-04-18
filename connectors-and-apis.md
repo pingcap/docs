@@ -55,7 +55,7 @@ The third-party APIs are not developed by Oracle. The following table lists the 
 | Erlang         | `erlang-mysql-driver`                    | `libmysqlclient`                 | See [`erlang-mysql-driver`](http://code.google.com/p/erlang-mysql-driver/) |
 | Haskell        | Haskell MySQL Bindings                   | Native Driver                    | See [Brian O'Sullivan's pure Haskell MySQL bindings](http://www.serpentine.com/blog/software/mysql/) |
 |                | `hsql-mysql`                             | `libmysqlclient`                 | See [MySQL driver for Haskell](http://hackage.haskell.org/cgi-bin/hackage-scripts/package/hsql-mysql-1.7) |
-| Java/JDBC      | Connector/J                              | Native Driver                    | See [MySQL Connector/J 8.0 Developer Guide](https://dev.mysql.com/doc/connector-j/8.0/en/) |
+| Java/JDBC      | Connector/J                              | Native Driver                    | See [MySQL Connector/J 8.0 Developer Guide](https://dev.mysql.com/doc/connector-j/8.0/en/). Note: There is a [critical bug](https://bugs.mysql.com/bug.php?id=106252) in MySQL Connector/J that may cause failure when v6.0.4 to v8.0 of MySQL Connector/J connects to earlier versions of MySQL servers or MySQL-compatible servers. This bug is expected to be fixed in a subsequent release. You  can check [MySQL Connector/J 8.0 Release Notes](https://dev.mysql.com/doc/relnotes/connector-j/8.0/en/) for subsequent updates. |
 | Lua            | LuaSQL                                   | `libmysqlclient`                 | See [LuaSQL](http://keplerproject.github.io/luasql/manual.html) |
 | .NET/Mono      | Connector/Net                            | Native Driver                    | See [MySQL Connector/Net Developer Guide](https://dev.mysql.com/doc/connector-net/en/) |
 | Objective Caml | OBjective Caml MySQL Bindings            | `libmysqlclient`                 | See [MySQL Bindings for Objective Caml](http://raevnos.pennmush.org/code/ocaml-mysql/) |
@@ -89,3 +89,7 @@ The third-party APIs are not developed by Oracle. The following table lists the 
 | Connector/ODBC   | 3.51 (Unicode not supported) |
 | Connector/Python | 2.0                          |
 | Connector/Python | 1.2                          |
+
+> **Note:**
+>
+> There is a [critical bug](https://bugs.mysql.com/bug.php?id=106252) in MySQL Connector/J that may cause failure when v6.0.4 to v8.0 of MySQL Connector/J connects to earlier versions of MySQL servers or MySQL-compatible servers. This bug is expected to be fixed in a subsequent release. You  can check [MySQL Connector/J 8.0 Release Notes](https://dev.mysql.com/doc/relnotes/connector-j/8.0/en/) for subsequent updates.
