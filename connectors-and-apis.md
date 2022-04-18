@@ -10,7 +10,7 @@ Database Connectors provide connectivity to the TiDB server for client programs.
 TiDB is compatible with all Connectors and APIs of MySQL (5.6, 5.7), including:
 
 - [MySQL Connector/C++](https://dev.mysql.com/doc/refman/5.7/en/connector-cpp-info.html)
-- [MySQL Connector/J](https://dev.mysql.com/doc/refman/5.7/en/connector-j-info.html)
+- [MySQL Connector/J](https://dev.mysql.com/doc/refman/8.0/en/connector-j-info.html)
 - [MySQL Connector/Net](https://dev.mysql.com/doc/refman/5.7/en/connector-net-info.html)
 - [MySQL Connector/ODBC](https://dev.mysql.com/doc/refman/5.7/en/connector-odbc-info.html)
 - [MySQL Connector/Python](https://dev.mysql.com/doc/refman/5.7/en/connector-python-info.html)
@@ -28,7 +28,7 @@ TiDB is compatible with all Connectors and APIs of MySQL (5.6, 5.7), including:
 Oracle develops the following APIs and TiDB is compatible with all of them:
 
 - [MySQL Connector/C++](https://dev.mysql.com/doc/refman/5.7/en/connector-cpp-info.html)：to enable C++ applications to connect to MySQL
-- [MySQL Connector/J](https://dev.mysql.com/doc/refman/5.7/en/connector-j-info.html)：to enable Java applications to connect to MySQL using the standard JDBC API
+- [MySQL Connector/J](https://dev.mysql.com/doc/refman/8.0/en/connector-j-info.html)：to enable Java applications to connect to MySQL using the standard JDBC API
 - [MySQL Connector/Net](https://dev.mysql.com/doc/refman/5.7/en/connector-net-info.html)：to enable .Net applications to connect to MySQL; [MySQL for Visual Studio](https://dev.mysql.com/doc/visual-studio/en/) uses this; support Microsoft Visual Studio 2012, 2013, 2015 and 2017 versions
 - [MySQL Connector/ODBC](https://dev.mysql.com/doc/refman/5.7/en/connector-odbc-info.html)：the standard ODBC API; support Windows, Unix, and OS X platforms
 - [MySQL Connector/Python](https://dev.mysql.com/doc/refman/5.7/en/connector-python-info.html)：to enable Python applications to connect to MySQL, compliant with the [Python DB API version 2.0](http://www.python.org/dev/peps/pep-0249/)
@@ -55,7 +55,7 @@ The third-party APIs are not developed by Oracle. The following table lists the 
 | Erlang         | `erlang-mysql-driver`                    | `libmysqlclient`                 | See [`erlang-mysql-driver`](http://code.google.com/p/erlang-mysql-driver/) |
 | Haskell        | Haskell MySQL Bindings                   | Native Driver                    | See [Brian O'Sullivan's pure Haskell MySQL bindings](http://www.serpentine.com/blog/software/mysql/) |
 |                | `hsql-mysql`                             | `libmysqlclient`                 | See [MySQL driver for Haskell](http://hackage.haskell.org/cgi-bin/hackage-scripts/package/hsql-mysql-1.7) |
-| Java/JDBC      | Connector/J                              | Native Driver                    | See [MySQL Connector/J 5.1 Developer Guide](https://dev.mysql.com/doc/connector-j/5.1/en/) |
+| Java/JDBC      | Connector/J                              | Native Driver                    | See [MySQL Connector/J 8.0 Developer Guide](https://dev.mysql.com/doc/connector-j/8.0/en/). Note: There is a [critical bug](https://bugs.mysql.com/bug.php?id=106252) in MySQL Connector/J that may cause failure when v6.0.4 to v8.0 of MySQL Connector/J connects to earlier versions of MySQL servers or MySQL-compatible servers. This bug is expected to be fixed in a subsequent release. You  can check [MySQL Connector/J 8.0 Release Notes](https://dev.mysql.com/doc/relnotes/connector-j/8.0/en/) for subsequent updates. |
 | Lua            | LuaSQL                                   | `libmysqlclient`                 | See [LuaSQL](http://keplerproject.github.io/luasql/manual.html) |
 | .NET/Mono      | Connector/Net                            | Native Driver                    | See [MySQL Connector/Net Developer Guide](https://dev.mysql.com/doc/connector-net/en/) |
 | Objective Caml | OBjective Caml MySQL Bindings            | `libmysqlclient`                 | See [MySQL Bindings for Objective Caml](http://raevnos.pennmush.org/code/ocaml-mysql/) |
@@ -82,10 +82,14 @@ The third-party APIs are not developed by Oracle. The following table lists the 
 | ---------------- | ---------------------------- |
 | Connector/C      | 6.1.0 GA                     |
 | Connector/C++    | 1.0.5 GA                     |
-| Connector/J      | 5.1.8                        |
+| Connector/J      | 8.0                        |
 | Connector/Net    | 6.9.9 GA                     |
 | Connector/Net    | 6.8.8 GA                     |
 | Connector/ODBC   | 5.1                          |
 | Connector/ODBC   | 3.51 (Unicode not supported) |
 | Connector/Python | 2.0                          |
 | Connector/Python | 1.2                          |
+
+> **Note:**
+>
+> There is a [critical bug](https://bugs.mysql.com/bug.php?id=106252) in MySQL Connector/J that may cause failure when v6.0.4 to v8.0 of MySQL Connector/J connects to earlier versions of MySQL servers or MySQL-compatible servers. This bug is expected to be fixed in a subsequent release. You  can check [MySQL Connector/J 8.0 Release Notes](https://dev.mysql.com/doc/relnotes/connector-j/8.0/en/) for subsequent updates.
