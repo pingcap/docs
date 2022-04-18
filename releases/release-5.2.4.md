@@ -33,7 +33,8 @@ TiDB version: 5.2.4
 
 + TiKV
 
-    -
+    - (dup: release-6.0.0-dmr.md > Improvements> TiKV)- Transfer the leadership to CDC observer to reduce latency jitter [#12111](https://github.com/tikv/tikv/issues/12111)
+    - (dup: release-6.0.0-dmr.md > Improvements> TiKV)- Reduce the TiCDC recovery time by reducing the number of the Regions that require the Resolve Locks step [#11993](https://github.com/tikv/tikv/issues/11993)
 
 + PD
 
@@ -55,7 +56,12 @@ TiDB version: 5.2.4
 
     + TiCDC
 
-        -
+        - (dup: release-6.0.0-dmr.md > Improvements> Tools> TiCDC)- Add a `Lag analyze` panel in Grafana [#4891](https://github.com/pingcap/tiflow/issues/4891)
+        - (dup: release-6.0.0-dmr.md > Improvements> Tools> TiCDC)- Expose configuration parameters of the Kafka producer to make them configurable in TiCDC [#4385](https://github.com/pingcap/tiflow/issues/4385)
+        - (dup: release-6.0.0-dmr.md > Improvements> Tools> TiCDC)- Add the exponential backoff mechanism for restarting a changefeed [#3329](https://github.com/pingcap/tiflow/issues/3329)
+        - (dup: release-5.4.0.md > Improvements> Tools> TiCDC)- Reduce the count of "EventFeed retry rate limited" logs [#4006](https://github.com/pingcap/tiflow/issues/4006)
+        - (dup: release-5.3.1.md > Improvements> Tools> TiCDC)- Set the default value of `max-message-bytes` to 10M [#4041](https://github.com/pingcap/tiflow/issues/4041)
+        - (dup: release-5.3.1.md > Improvements> Tools> TiCDC)- Add more Promethous and Grafana monitoring metrics and alerts, including `no owner alert`, `mounter row`, `table sink total row`, and `buffer sink total row` [#4054](https://github.com/pingcap/tiflow/issues/4054) [#1606](https://github.com/pingcap/tiflow/issues/1606)
 
     + Dumpling
 
@@ -100,10 +106,8 @@ TiDB version: 5.2.4
     - (dup: release-6.0.0-dmr.md > Bug fixes> TiKV)- Fix the issue of intermittent packet loss and out of memory (OOM) caused by the overflow of memory metrics [#12160](https://github.com/tikv/tikv/issues/12160)
     - (dup: release-6.0.0-dmr.md > Bug fixes> TiKV)- Fix the potential panic issue that occurs when TiKV performs profiling on Ubuntu 18.04 [#9765](https://github.com/tikv/tikv/issues/9765)
     - (dup: release-6.0.0-dmr.md > Bug fixes> TiKV)- Fix the issue that tikv-ctl returns an incorrect result due to its wrong string match [#12329](https://github.com/tikv/tikv/issues/12329)
-    - (dup: release-6.0.0-dmr.md > Improvements> TiKV)- Transfer the leadership to CDC observer to reduce latency jitter [#12111](https://github.com/tikv/tikv/issues/12111)
     - (dup: release-6.0.0-dmr.md > Bug fixes> TiKV)- Fix a bug that replica reads might violate the linearizability [#12109](https://github.com/tikv/tikv/issues/12109)
     - (dup: release-6.0.0-dmr.md > Bug fixes> TiKV)- Fix a bug that TiKV might panic if it has been running for 2 years or more [#11940](https://github.com/tikv/tikv/issues/11940)
-    - (dup: release-6.0.0-dmr.md > Improvements> TiKV)- Reduce the TiCDC recovery time by reducing the number of the Regions that require the Resolve Locks step [#11993](https://github.com/tikv/tikv/issues/11993)
     - (dup: release-6.0.0-dmr.md > Bug fixes> TiKV)- Fix the issue of QPS drop when flow control is enabled and `level0_slowdown_trigger` is set explicitly [#11424](https://github.com/tikv/tikv/issues/11424)
     - (dup: release-5.3.1.md > Bug fixes> TiKV)- Fix the panic issue that occurs when the cgroup controller is not mounted [#11569](https://github.com/tikv/tikv/issues/11569)
     - (dup: release-5.3.1.md > Bug fixes> TiKV)- Fix the metadata corruption issue when `Prepare Merge` is triggered after a new election is finished but the isolated peer is not informed [#11526](https://github.com/tikv/tikv/issues/11526)
@@ -142,29 +146,23 @@ TiDB version: 5.2.4
 
         -
         - (dup: release-5.4.0.md > Bug fixes> Tools> TiCDC)- Fix the issue that default values cannot be replicated [#3793](https://github.com/pingcap/tiflow/issues/3793)
-        - (dup: release-6.0.0-dmr.md > Improvements> Tools> TiCDC)- Add a `Lag analyze` panel in Grafana [#4891](https://github.com/pingcap/tiflow/issues/4891)
         - (dup: release-6.0.0-dmr.md > Bug fixes> Tools> TiCDC)- Fix a bug that sequence is incorrectly replicated in some cases [#4563](https://github.com/pingcap/tiflow/issues/4552)
         - (dup: release-6.0.0-dmr.md > Bug fixes> Tools> TiCDC)- Fix a bug that a TiCDC node exits abnormally when a PD leader is killed [#4248](https://github.com/pingcap/tiflow/issues/4248)
-        - (dup: release-6.0.0-dmr.md > Improvements> Tools> TiCDC)- Expose configuration parameters of the Kafka producer to make them configurable in TiCDC [#4385](https://github.com/pingcap/tiflow/issues/4385)
         - (dup: release-6.0.0-dmr.md > Bug fixes> Tools> TiCDC)- Fix a bug that MySQL sink generates duplicated `replace` SQL statements when`batch-replace-enable` is disabled [#4501](https://github.com/pingcap/tiflow/issues/4501)
         - (dup: release-5.4.0.md > Bug fixes> Tools> TiCDC)- Fix the issue of panic and data inconsistency that occurs when outputting the default column value [#3929](https://github.com/pingcap/tiflow/issues/3929)
-        - (dup: release-6.0.0-dmr.md > Improvements> Tools> TiCDC)- Add the exponential backoff mechanism for restarting a changefeed [#3329](https://github.com/pingcap/tiflow/issues/3329)
         - (dup: release-5.4.0.md > Bug fixes> Tools> TiCDC)- Fix the issue that `mq sink write row` does not have monitoring data [#3431](https://github.com/pingcap/tiflow/issues/3431)
         - (dup: release-5.4.0.md > Bug fixes> Tools> TiCDC)- Fix the issue that replication cannot be performed when `min.insync.replicas` is smaller than `replication-factor` [#3994](https://github.com/pingcap/tiflow/issues/3994)
         - (dup: release-5.4.0.md > Bug fixes> Tools> TiCDC)- Fix the issue that `mq sink write row` does not have monitoring data [#3431](https://github.com/pingcap/tiflow/issues/3431)
         - (dup: release-5.4.0.md > Bug fixes> Tools> TiCDC)- Fix the potential panic issue that occurs when a replication task is removed [#3128](https://github.com/pingcap/tiflow/issues/3128)
         - (dup: release-5.3.1.md > Bug fixes> Tools> TiCDC)- Fix the bug that HTTP API panics when the required processor infomation does not exist [#3840](https://github.com/pingcap/tiflow/issues/3840)
         - (dup: release-5.4.0.md > Bug fixes> Tools> TiCDC)- Fix the issue of potential data loss caused by inaccurate checkpoint [#3545](https://github.com/pingcap/tiflow/issues/3545)
-        - (dup: release-5.4.0.md > Improvements> Tools> TiCDC)- Reduce the count of "EventFeed retry rate limited" logs [#4006](https://github.com/pingcap/tiflow/issues/4006)
         - (dup: release-5.4.0.md > Bug fixes> Tools> TiCDC)- Fix the potential issue that the deadlock causes a replication task to get stuck [#4055](https://github.com/pingcap/tiflow/issues/4055)
-        - (dup: release-5.3.1.md > Improvements> Tools> TiCDC)- Set the default value of `max-message-bytes` to 10M [#4041](https://github.com/pingcap/tiflow/issues/4041)
         - (dup: release-5.3.1.md > Bug fixes> Tools> TiCDC)- Fix the TiCDC panic issue that occurs when manually cleaning the task status in etcd [#2980](https://github.com/pingcap/tiflow/issues/2980)
         - (dup: release-5.4.0.md > Bug fixes> Tools> TiCDC)- Fix the issue that special comments in DDL statements cause the replication task to stop [#3755](https://github.com/pingcap/tiflow/issues/3755)
         - (dup: release-5.4.0.md > Bug fixes> Tools> TiCDC)- Fix the issue of replication stop caused by the incorrect configuration of `config.Metadata.Timeout` [#3352](https://github.com/pingcap/tiflow/issues/3352)
         - (dup: release-5.4.0.md > Bug fixes> Tools> TiCDC)- Fix the issue that the service cannot be started because of a timezone issue in the RHEL release [#3584](https://github.com/pingcap/tiflow/issues/3584)
         - (dup: release-5.3.1.md > Bug fixes> Tools> TiCDC)- Fix the issue that `stopped` changefeeds resume automatically after a cluster upgrade [#3473](https://github.com/pingcap/tiflow/issues/3473)
         - (dup: release-5.4.0.md > Bug fixes> Tools> TiCDC)- Fix the issue that default values cannot be replicated [#3793](https://github.com/pingcap/tiflow/issues/3793)
-        - (dup: release-5.3.1.md > Improvements> Tools> TiCDC)- Add more Promethous and Grafana monitoring metrics and alerts, including `no owner alert`, `mounter row`, `table sink total row`, and `buffer sink total row` [#4054](https://github.com/pingcap/tiflow/issues/4054) [#1606](https://github.com/pingcap/tiflow/issues/1606)
         - (dup: release-5.3.1.md > Bug fixes> Tools> TiCDC)- Fix the issue of overly frequent warnings caused by MySQL sink deadlock [#2706](https://github.com/pingcap/tiflow/issues/2706)
         - (dup: release-5.3.1.md > Bug fixes> Tools> TiCDC)- Fix the bug that the `enable-old-value` configuration item is not automatically set to `true` on Canal and Maxwell protocols [#3676](https://github.com/pingcap/tiflow/issues/3676)
         - (dup: release-5.3.1.md > Bug fixes> Tools> TiCDC)- Fix the issue that Avro sink does not support parsing JSON type columns [#3624](https://github.com/pingcap/tiflow/issues/3624)
