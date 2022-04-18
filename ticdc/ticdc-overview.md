@@ -10,7 +10,7 @@ aliases: ['/docs/dev/ticdc/ticdc-overview/','/docs/dev/reference/tools/ticdc/ove
 
 ## Application scenarios
 
-- Database disaster recovery: TiCDC can be used for disaster recovery between homogeneous databases to ensure data eventual consistency of primary and secondary databases before and after a disaster event. This function works only with TiDB primary and secondary clusters.
+- Database disaster recovery: TiCDC can be used for disaster recovery between homogeneous databases to ensure eventual data consistency of primary and secondary databases before and after a disaster event. This function works only with TiDB primary and secondary clusters.
 - Data integration: TiCDC provides [TiCDC Canal-JSON Protocol](/ticdc/ticdc-canal-json.md), which allows other systems to subscribe data changes from TiCDC. In this way, TiCDC provides data sources for such scenarios as monitoring, caching, global indexing, data analysis, and primary-secondary replication between heterogeneous databases.
 
 ## TiCDC architecture
