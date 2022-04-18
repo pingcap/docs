@@ -55,7 +55,8 @@ TiDB version: 5.2.4
         -
 
     + TiCDC
-
+        - (dup: release-5.3.1.md > Improvements> Tools> TiCDC)- Change the default value of Kafka Sink `partition-num` to 3 so that TiCDC distributes messages across Kafka partitions more evenly [#3337](https://github.com/pingcap/tiflow/issues/3337)
+        - (dup: release-5.4.0.md > Improvements> Tools> TiCDC)- Reduce the time for the KV client to recover when a TiKV store is down [#3191](https://github.com/pingcap/tiflow/issues/3191)
         - (dup: release-6.0.0-dmr.md > Improvements> Tools> TiCDC)- Add a `Lag analyze` panel in Grafana [#4891](https://github.com/pingcap/tiflow/issues/4891)
         - (dup: release-6.0.0-dmr.md > Improvements> Tools> TiCDC)- Expose configuration parameters of the Kafka producer to make them configurable in TiCDC [#4385](https://github.com/pingcap/tiflow/issues/4385)
         - (dup: release-6.0.0-dmr.md > Improvements> Tools> TiCDC)- Add the exponential backoff mechanism for restarting a changefeed [#3329](https://github.com/pingcap/tiflow/issues/3329)
@@ -247,6 +248,4 @@ TiDB version: 5.2.4
         - `None`. [#4223](https://github.com/pingcap/tiflow/issues/4223)
         - Please add a release note. If you don't think this PR needs a release note then fill it with `None`. [#3867](https://github.com/pingcap/tiflow/pull/3867)
         - Show changefeed checkepoint catch-up ETA in metrics. [#3311](https://github.com/pingcap/tiflow/pull/3311)
-        - Please add a release note. If you don't think this PR needs a release note then fill it with `None`. [#3337](https://github.com/pingcap/tiflow/issues/3337)
-        - Please add a release note. fix kvclient takes too long time to recover [#3191](https://github.com/pingcap/tiflow/issues/3191)
         - `None`. [#4089](https://github.com/pingcap/tiflow/issues/4089)
