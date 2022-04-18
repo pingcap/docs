@@ -139,7 +139,7 @@ After setting up the environment, you can use the backup and restore functions o
 
     > **Note:**
     >
-    > In production clusters, backup operations cause cluster performance to deteriorate to some extent. It is recommended that you back up data in off-peak hours, and set RATE_LIMIT to a proper value to avoid performance degradation. Besides, after GC is disabled, MVCC data accumulated in clusters might affect cluster read performance if the data volume is excessively large.
+    > In production clusters, performing a backup with GC disabled might affect clsuter performance. It is recommended that you back up data in off-peak hours, and set RATE_LIMIT to a proper value to avoid performance degradation.
 
 2. Back up data.
 
