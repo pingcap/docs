@@ -6,8 +6,6 @@ title: DM Advanced Task Configuration File
 
 This document introduces the advanced task configuration file of Data Migration (DM), including [global configuration](#global-configuration) and [instance configuration](#instance-configuration).
 
-For the feature and configuration of each configuration item, see [Data migration features](/dm/dm-overview.md#basic-features).
-
 ## Important concepts
 
 For description of important concepts including `source-id` and the DM-worker ID, see [Important concepts](/dm/dm-config-overview.md#important-concepts).
@@ -30,7 +28,7 @@ meta-schema: "dm_meta"          # The downstream database that stores the `meta`
 timezone: "Asia/Shanghai"       # The timezone used in SQL Session. By default, DM uses the global timezone setting in the target cluster, which ensures the correctness automatically. A customized timezone does not affect data migration but is unnecessary.
 case-sensitive: false           # Determines whether the schema/table is case-sensitive.
 online-ddl: true                # Supports automatic processing of upstream "gh-ost" and "pt".
-online-ddl-scheme: "gh-ost"     # `online-ddl-scheme` has been deprecated in v2.0.6, so it is recommended to use `online-ddl`.
+online-ddl-scheme: "gh-ost"     # `online-ddl-scheme` is deprecated, so it is recommended to use `online-ddl`.
 clean-dump-file: true           # Whether to clean up the files generated during data dump. Note that these include `metadata` files.
 collation_compatible: "loose"   # The mode to sync the default collation in `CREATE` SQL statements. The supported values are "loose" (by default) or "strict". When the value is "strict", DM explicitly appends the corresponding collation of the upstream to the SQL statements; when the value is "loose", DM does not modify the SQL statements. In "strict" mode, if the downstream does not support the default collation in the upstream, the downstream might report an error.
 
