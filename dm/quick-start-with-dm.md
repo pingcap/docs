@@ -12,7 +12,7 @@ If you need to deploy DM in the production environment, refer to the following d
 
 - [Deploy a DM cluster Using TiUP](/dm/deploy-a-dm-cluster-using-tiup.md)
 - [Create a Data Source](/dm/quick-start-create-source.md)
-- [Create a Data Migration Task](/dm/quick-create-migration-task.md)
+- [Create a Data Migration Task](/dm/quick-start-create-task.md)
 
 ## Sample scenario
 
