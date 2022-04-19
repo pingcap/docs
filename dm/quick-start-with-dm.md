@@ -9,7 +9,7 @@ This document describes how to migrate data from MySQL to TiDB using [TiDB Data 
 
 ## Step 1: Deploy a DM cluster
 
-1. Install TiUP, and install `dmctl` using TiUP:
+1. Install TiUP, and install [`dmctl`](/dm/dmctl-introduction.md) using TiUP:
 
     {{< copyable "shell-regular" >}}
 
@@ -26,7 +26,7 @@ This document describes how to migrate data from MySQL to TiDB using [TiDB Data 
     tiup dm template
     ```
 
-3. Copy the configuration information in the output, and save it as the `topology.yaml` file with the modified IP addresss. Deploy the DM cluster with the `topology.yaml` file using TiUP:
+3. Copy the configuration information in the output, and save it as the `topology.yaml` file with the modified IP address. Deploy the DM cluster with the `topology.yaml` file using TiUP:
 
     {{< copyable "shell-regular" >}}
 
@@ -87,7 +87,7 @@ If you do not have a MySQL instance for testing, you can create a MySQL instance
     {{< copyable "shell-regular" >}}
 
     ```shell
-    docker run --name mysql-01 -v /tmp/mysqltest:/etc/mysql/conf.d -e MYSQL_ROOT_PASSWORD=my-secret-pw -d -p 3306:3306  mysql:5.7
+    docker run --name mysql-01 -v /tmp/mysqltest:/etc/mysql/conf.d -e MYSQL_ROOT_PASSWORD=my-secret-pw -d -p 3306:3306 mysql:5.7
     ```
 
 3. After the MySQL instance is started, access the instance:
@@ -168,9 +168,8 @@ You have successfully created a task that migrates data from a `mysql-01` databa
 
 ## Step 6: Check the status of the task
 
-在创建迁移任务之后，可以用 `dmtcl query-status` 来查看任务的状态。
 
-After the task is created, you can use the `dmtcl query-status` command to check the status of the task:
+After the task is created, you can use the `dmctl query-status` command to check the status of the task:
 
 {{< copyable "shell-regular" >}}
 
