@@ -358,6 +358,7 @@
         - [DM-master Configuration](/dm/dm-master-configuration-file.md)
         - [DM-worker Configuration](/dm/dm-worker-configuration-file.md)
       - [OpenAPI](/dm/dm-open-api.md)
+      - [Compatibility Catalog](/dm/dm-compatibility-catalog.md)
       - Secure
         - [Enable TLS for DM Connections](/dm/dm-enable-tls.md)
         - [Generate Self-signed Certificates](/dm/dm-generate-self-signed-certificates.md)
