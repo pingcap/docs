@@ -242,7 +242,7 @@ When using the above statement, you need to fill in and replace the following fi
 
 - @dbname: the name of the database.
 - @table_name: the name of the target table.
-- @size_amplification: The average of the cluster compression ratio. To get this information, check the Size amplification metric for each node on the Grafana Monitoring PD - statistics balance panel. The average of the cluster compression ratio is the average of the Size amplification for all nodes.
+- @size_amplification: The average of the cluster compression ratio. To get this information, check the **Size amplification** metric for each node on the **Grafana Monitoring PD - statistics balance** panel. The average of the cluster compression ratio is the average of the Size amplification for all nodes.
 
 In addition, Approximate_Size in the above statement indicates the size of the table before compression and Disk_Size indicates the size of the table after compression.
 
