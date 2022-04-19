@@ -371,7 +371,7 @@
       - [Glossary](/dm/dm-glossary.md)
     - Example
       - [Migrate Data Using DM](/dm/migrate-data-using-dm.md)
-      - [Create a data migration task](/dm/quick-start-create-task.md)
+      - [Create a Data Migration Task](/dm/quick-start-create-task.md)
       - [Best Practices of Data Migration in the Shard Merge Scenario](/dm/shard-merge-best-practices.md)
     - Troubleshoot
       - [FAQ](/dm/dm-faq.md)
