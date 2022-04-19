@@ -1,6 +1,10 @@
 ---
 title: Keywords
 summary: Keywords and Reserved Words
+<<<<<<< HEAD
+=======
+aliases: ['/docs/dev/keywords-and-reserved-words/','/docs/dev/reference/sql/language-structure/keywords-and-reserved-words/','/tidb/dev/keywords-and-reserved-words/']
+>>>>>>> 78c9433fd (Fix aliases typo (#8254))
 ---
 
 # Keywords
