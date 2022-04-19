@@ -240,11 +240,11 @@ GROUP BY db_name , table_name;
 
 When using the above statement, you need to fill in and replace the following fields in the statement as appropriate.
 
-- @dbname: the name of the database.
-- @table_name: the name of the target table.
-- @size_amplification: The average of the cluster compression ratio. To get this information, check the **Size amplification** metric for each node on the **Grafana Monitoring PD - statistics balance** panel. The average of the cluster compression ratio is the average of the Size amplification for all nodes.
+- `@dbname`: the name of the database.
+- `@table_name`: the name of the target table.
+- `@size_amplification`: the average of the cluster compression ratio. To get this information, check the **Size amplification** metric for each node on the **Grafana Monitoring PD - statistics balance** panel. The average of the cluster compression ratio is the average of the Size amplification for all nodes.
 
-In addition, Approximate_Size in the above statement indicates the size of the table before compression and Disk_Size indicates the size of the table after compression.
+In addition, `Approximate_Size` in the above statement indicates the size of the table before compression and `Disk_Size` indicates the size of the table after compression.
 
 ## TiKV server management
 
