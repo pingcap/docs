@@ -445,7 +445,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Default value: `2`
 - Range: `[1, 2]`
 - Controls how TiDB collects statistics.
-- In versions before v5.1.0, the default value of this variable is `1`. In v5.1.0, the default value of this variable is `2`, which serves as an experimental feature. For detailed introduction, see [Introduction to Statistics](/statistics.md).
+- In v5.3.0 and later versions, the default value of this variable is `2`, which serves as an experimental feature. If your cluster is upgraded from a version earlier than v5.3.0 to v5.3.0 or later, the default value of `tidb_analyze_version` does not change. For detailed introduction, see [Introduction to Statistics](/statistics.md).
 
 ### tidb_auto_analyze_end_time
 
@@ -486,6 +486,13 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
     For example, the base timeout for TiDB to take TSO from PD is 15 seconds. When `tidb_backoff_weight = 2`, the maximum timeout for taking TSO is: *base time \* 2 = 30 seconds*.
 
     In the case of a poor network environment, appropriately increasing the value of this variable can effectively alleviate error reporting to the application end caused by timeout. If the application end wants to receive the error information more quickly, minimize the value of this variable.
+
+### tidb_batch_insert
+
+- Scope: SESSION
+- Default value: `OFF`
+- This variable permits `tidb_dml_batch_size` to be used in `INSERT` statements.
+- Only the value `OFF` provides ACID compliance. Setting this to any other value breaks the atomicity and isolation guarantees of TiDB, because an individual `INSERT` statement will be split into smaller transactions.
 
 ### tidb_broadcast_join_threshold_count <span class="version-mark">New in v5.0</span>
 
@@ -638,6 +645,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Range: `[0, 2147483647]`
 - Unit: Rows
 - When this value is greater than `0`, TiDB will batch commit statements such as `INSERT` or `LOAD DATA` into smaller transactions. This reduces memory usage and helps ensure that the `txn-total-size-limit` is not reached by bulk modifications.
+- To use `tidb_dml_batch_size` in `INSERT` statements, you also need to set the system variable `tidb_batch_insert` to `ON`.
 - Only the value `0` provides ACID compliance. Setting this to any other value will break the atomicity and isolation guarantees of TiDB.
 
 ### tidb_enable_1pc <span class="version-mark">New in v5.0</span>
@@ -772,6 +780,12 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Default value: `OFF`
 - This variable is used to set whether to enable the `LIST (COLUMNS) TABLE PARTITION` feature.
 
+### `tidb_enable_mutation_checker` (New in v6.0.0)
+
+- Scope: SESSION | GLOBAL
+- Default value: `ON`
+- This variable is used to control whether to enable TiDB mutation checker, which is a tool used to check consistency between data and indexes during the execution of DML statements. If the checker returns an error for a statement, TiDB rolls back the execution of the statement. Enabling this variable causes a slight increase in CPU usage. For more information, see [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md ).
+
 ### tidb_enable_noop_functions <span class="version-mark">New in v4.0</span>
 
 - Scope: SESSION | GLOBAL
@@ -880,6 +894,24 @@ Query OK, 0 rows affected (0.09 sec)
 - Scope: GLOBAL
 - Default value: `OFF`
 - This variable is used to control whether to enable the [Top SQL](/dashboard/top-sql.md) feature.
+
+### tidb_top_sql_max_meta_count (New in v6.0.0)
+
+- Scope: GLOBAL
+- Default value: `5000`
+- Range: `[1, 10000]`
+- This variable is used to control the maximum number of SQL statement types collected by [Top SQL](/dashboard/top-sql.md) per minute.
+
+### tidb_top_sql_max_time_series_count (New in v6.0.0)
+
+- Scope: GLOBAL
+- Default value: `100`
+- Range: `[1, 5000]`
+- This variable is used to control how many SQL statements that contribute the most to the load (that is, top N) can be recorded by [Top SQL](/dashboard/top-sql.md) per minute.
+
+> **Note:**
+>
+> Currently, the Top SQL page in TiDB Dashboard only displays the top 5 types of SQL queries that contribute the most to the load, which is irrelevant with the configuration of `tidb_top_sql_max_time_series_count`.
 
 ### tidb_enable_tso_follower_proxy <span class="version-mark">New in v5.3.0</span>
 
@@ -1098,6 +1130,13 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - When the parameter of the aggregate function is not distinct, `HashAgg` is run concurrently and respectively in two phases - the `partial` phase and the `final` phase.
 - A value of `-1` means that the value of `tidb_executor_concurrency` will be used instead.
 
+### tidb_ignore_prepared_cache_close_stmt (New in v6.0.0)
+
+- Scope: SESSION | GLOBAL
+- Default value: `OFF`
+- This variable is used to set whether to ignore the commands for closing prepared statement cache.
+- When this variable is set to `ON`, the `COM_STMT_CLOSE` command of the Binary protocol and the [`DEALLOCATE PREPARE`](/sql-statements/sql-statement-deallocate.md) statement of the text protocol are ignored. For details, see [Ignore the `COM_STMT_CLOSE` command and the `DEALLOCATE PREPARE` statement](/sql-prepared-plan-cache.md#ignore-the-com_stmt_close-command-and-the-deallocate-prepare-statement).
+
 ### tidb_index_join_batch_size
 
 - Scope: SESSION | GLOBAL
@@ -1203,6 +1242,15 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Unit: Bytes
 - This variable is used to set the memory usage threshold of the local cache in the `Apply` operator.
 - The local cache in the `Apply` operator is used to speed up the computation of the `Apply` operator. You can set the variable to `0` to disable the `Apply` cache feature.
+
+### tidb_mem_quota_binding_cache (New in v6.0.0)
+
+- Scope: GLOBAL
+- Default value: `67108864` (64 MiB)
+- Range: `[0, 2147483647]`
+- Unit: Bytes
+- This variable is used to set the threshold of the memory used for caching bindings.
+- If a system creates or captures excessive bindings, resulting in overuse of memory space, TiDB returns a warning in the log. In this case, the cache cannot hold all available bindings or determine which bindings to store. For this reason, some queries might miss their bindings. To address this problem, you can increase the value of this variable, which increases the memory used for caching bindings. After modifying this parameter, you need to run `admin reload bindings` to reload bindings and validate the modification.
 
 ### tidb_mem_quota_query
 
@@ -1452,6 +1500,18 @@ Usage example:
 SET tidb_query_log_max_len = 20
 ```
 
+### tidb_rc_read_check_ts (New in v6.0.0)
+
+> **Warning:**
+>
+> - This feature is incompatible with [`replica-read`](#tidb_replica_read-new-in-v40). Do not enable `tidb_rc_read_check_ts` and `replica-read` at the same time.
+> - If your client uses a cursor, it is not recommended to enable `tidb_rc_read_check_ts` in case that the previous batch of returned data has already been used by the client and the statement eventually fails.
+
+- Scope: SESSION | GLOBAL
+- Default value: `OFF`
+- This variable is used to optimize the timestamp acquisition, which is suitable for scenarios with read-committed isolation level where read-write conflicts are rare. Enabling this variable can avoid the latency and cost of getting the global timestamp, and can optimize the transaction-level read latency.
+- If read-write conflicts are severe, enabling this feature will increase the cost and latency of getting the global timestamp, and might cause performance regression. For details, see [Read Committed isolation level](/transaction-isolation-levels.md#read-committed-isolation-level).
+
 ### tidb_read_staleness <span class="version-mark">New in v5.4.0</span>
 
 - Scope: SESSION
@@ -1632,6 +1692,20 @@ SET tidb_slow_log_threshold = 200;
 - Range: `[0, 9223372036854775807]`
 - This variable is used to limit the maximum number of requests TiDB can send to TiKV at the same time. 0 means no limit.
 
+### tidb_sysdate_is_now （New in v6.0.0）
+
+- Scope: SESSION | GLOBAL
+- Default value: `OFF`
+- This variable is used to control whether the `SYSDATE` function can be replaced by the `NOW` function. This configuration item has the same effect as the MySQL option [`sysdate-is-now`](https://dev.mysql.com/doc/refman/8.0/en/server-options.html#option_mysqld_sysdate-is-now).
+
+### tidb_table_cache_lease (New in v6.0.0)
+
+- Scope: GLOBAL
+- Default value: `3`
+- Range: `[1, 10]`
+- Unit: Seconds
+- This variable is used to control the lease time of [cached tables](/cached-tables.md) with a default value of `3`. The value of this variable affects the modification to cached tables. After a modification is made to cached tables, the longest waiting time might be `tidb_table_cache_lease` seconds. If the table is read-only or can accept a high write latency, you can increase the value of this variable to increase the valid time for caching tables and to reduce the frequency of lease renewal.
+
 ### tidb_tmp_table_max_size <span class="version-mark">New in v5.3.0</span>
 
 - Scope: SESSION | GLOBAL
@@ -1657,6 +1731,17 @@ SET tidb_slow_log_threshold = 200;
 > **Notes:**
 >
 > Suppose that the TSO RPC latency increases for reasons other than a CPU usage bottleneck of the PD leader (such as network issues). In this case, increasing the value of `tidb_tso_client_batch_max_wait_time` might increase the execution latency in TiDB and affect the QPS performance of the cluster.
+
+### `tidb_txn_assertion_level` (New in v6.0.0)
+
+- Scope: SESSION | GLOBAL
+- Default value: `FAST`
+- Possible values: `OFF`, `FAST`, `STRICT`
+- This variable is used to control the assertion level. Assertion is a consistency check between data and indexes, which checks whether a key being written exists in the transaction commit process. For more information, see [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md ).
+
+    - `OFF`: Disable this check.
+    - `FAST`: Enable most of the check items, with almost no impact on performance.
+    - `STRICT`: Enable all check items, with a minor impact on pessimistic transaction performance when the system workload is high.
 
 ### tidb_txn_mode
 

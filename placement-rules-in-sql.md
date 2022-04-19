@@ -127,7 +127,7 @@ In addition to the placement options above, you can also use the advance configu
 
 | Option Name                | Description                                                                                    |
 | --------------| ------------ |
-| `CONSTRAINTS`              | A list of constraints that apply to all roles. For example, `CONSTRAINTS="[+disk=ssd]`.       |
+| `CONSTRAINTS`              | A list of constraints that apply to all roles. For example, `CONSTRAINTS="[+disk=ssd]"`.       |
 | `LEADER_CONSTRAINTS`       | A list of constraints that only apply to leader.                                      |
 | `FOLLOWER_CONSTRAINTS`     | A list of constraints that only apply to followers.                                   |
 | `LEARNER_CONSTRAINTS`      | A list of constraints that only apply to learners.                                     |
@@ -176,12 +176,18 @@ CREATE TABLE t1 (
   userdata VARCHAR(100) NOT NULL
 ) PLACEMENT POLICY=p1 PARTITION BY LIST COLUMNS (country) (
   PARTITION pEurope VALUES IN ('DE', 'FR', 'GB') PLACEMENT POLICY=europe,
-  PARTITION pNorthAmerica VALUES IN ('US', 'CA', 'MX') PLACEMENT POLICY=northamerica
+  PARTITION pNorthAmerica VALUES IN ('US', 'CA', 'MX') PLACEMENT POLICY=northamerica,
   PARTITION pAsia VALUES IN ('CN', 'KR', 'JP')
 );
 ```
 
 If a partition has no attached policies, it tries to apply possibly existing policies on the table. For example, the `pEurope` partition will apply the `europe` policy, but the `pAsia` partition will apply the `p1` policy from table `t1`. If `t1` has no assigned policies, `pAsia` will not apply any policy, too.
+
+You can also alter the placement policies assigned to a specific partition. For example:
+
+```sql
+ALTER TABLE t1 PARTITION pEurope PLACEMENT POLICY=p1;
+```
 
 ### Set the default placement for a schema
 
@@ -247,8 +253,8 @@ In dictionary format, constraints also indicate a number of instances that apply
 
 | Tool Name | Minimum supported version | Description |
 | --- | --- | --- |
-| Backup & Restore (BR) | 6.0 | Supports importing and exporting placement rules. Refer to [BR Compatibility](/br/backup-and-restore-tool.md#compatibility] for details. |
-| TiDB Lightning | Not compatible yet | |
+| Backup & Restore (BR) | 6.0 | Supports importing and exporting placement rules. Refer to [BR Compatibility](/br/backup-and-restore-tool.md#compatibility) for details. |
+| TiDB Lightning | Not compatible yet | An error is reported when TiDB Lightning imports backup data that contains placement policies  |
 | TiCDC | 6.0 | Ignores placement rules, and does not replicate the rules to the downstream |
 | TiDB Binlog | 6.0 | Ignores placement rules, and does not replicate the rules to the downstream |
 
