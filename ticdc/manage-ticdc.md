@@ -665,6 +665,14 @@ Starting from v5.3.0, TiCDC supports backing up incremental data from an upstrea
 
 Currently, TiCDC can replicate incremental data from a TiDB cluster to another TiDB cluster or a MySQL-compatible database system (including Aurora, MySQL, and MariaDB). In case the upstream cluster crashes, TiCDC can restore data in the downstream cluster within 5 minutes, given the condition that before the disaster the replication status of TiCDC is normal and replication lag is small. It allows data loss of 10s at most, that is, RTO <= 5 min, and RPO <= 10s.
 
+TiCDC replication lag increases in the following scenarios:
+
+- The TPS increases significantly in a short time
+- Large or long transactions occur in the upstream
+- The TiKV or TiCDC cluster in the upstream is reloaded or upgraded
+- Time-consuming DDL statements, such as `add index`, are executed in the upstream
+- The PD is configured with improper scheduling strategies, resulting in frequent transfer of Region leader, Region merge, or Region split
+
 ### Prerequisites
 
 - Prepare a highly available Amazon S3 storage or NFS system for storing TiCDC's real-time incremental data backup files. These files can be accessed in case of an primary cluster disaster.
