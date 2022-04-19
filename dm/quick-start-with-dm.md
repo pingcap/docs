@@ -168,7 +168,6 @@ You have successfully created a task that migrates data from a `mysql-01` databa
 
 ## Step 6: Check the status of the task
 
-
 After the task is created, you can use the `dmctl query-status` command to check the status of the task:
 
 {{< copyable "shell-regular" >}}
