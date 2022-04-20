@@ -7,7 +7,7 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
 
 This guide walks you through the quickest way to get started with TiDB. For non-production environments, you can deploy your TiDB database by either of the following methods:
 
-- [Deploy a local test cluster](#deploy-a-local-test-cluster) (for Mac and Linux)
+- [Deploy a local test cluster](#deploy-a-local-test-cluster) (for macOS and Linux)
 - [Simulate production deployment on a single machine](#simulate-production-deployment-on-a-single-machine) (for Linux only)
 
 > **Note:**
@@ -22,10 +22,10 @@ This guide walks you through the quickest way to get started with TiDB. For non-
 
 ## Deploy a local test cluster
 
-- Scenario: Quickly deploy a local TiDB cluster for testing using a single Mac or Linux server. By deploying such a cluster, you can learn the basic architecture of TiDB and the operation of its components, such as TiDB, TiKV, PD, and the monitoring components.
+- Scenario: Quickly deploy a local TiDB cluster for testing using a single macOS or Linux server. By deploying such a cluster, you can learn the basic architecture of TiDB and the operation of its components, such as TiDB, TiKV, PD, and the monitoring components.
 
 <SimpleTab>
-<div label="Mac">
+<div label="macOS">
 
 As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB instances, 3 TiKV instances, 3 PD instances, and optional TiFlash instances. With TiUP Playground, you can quickly build the test cluster by taking the following steps:
 
@@ -37,7 +37,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
     curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
     ```
 
-    The following message will be visible in the terminal or shell window after installation:
+    Verify that TiUP has installed successfully by checking the output in the terminal of shell window for the following message:
 
     ```log
     Successfully set mirror to https://tiup-mirrors.pingcap.com
@@ -55,7 +55,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
 
     > **Note:**
     >
-    > After the installation, TiUP displays the absolute path of the corresponding Shell profile file. You need to modify the following `source` command according to the path.
+    > After the installation, TiUP displays the absolute path of the corresponding Shell profile file. You need to modify `${your_shell_profile}` in the following `source` command according to the path.
 
     {{< copyable "shell-regular" >}}
 
@@ -156,7 +156,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
     curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
     ```
 
-    安装完成后会提示如下信息：
+    Verify that TiUP has installed successfully by checking the output in the terminal of shell window for the following message:
 
     ```log
     Successfully set mirror to https://tiup-mirrors.pingcap.com
@@ -174,7 +174,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
 
     > **Note:**
     >
-    > After the installation, TiUP displays the absolute path of the corresponding Shell profile file. You need to modify the following `source` command according to the path.
+    > After the installation, TiUP displays the absolute path of the corresponding Shell profile file. You need to modify `${your_shell_profile}` in the following `source` command according to the path.
 
     {{< copyable "shell-regular" >}}
 
@@ -317,7 +317,7 @@ Other requirements for the target machine:
 
     > **Note:**
     >
-    > After the installation, TiUP displays the absolute path of the corresponding Shell profile file. You need to modify the following `source` command according to the path.
+    > After the installation, TiUP displays the absolute path of the corresponding Shell profile file. You need to modify  `${your_shell_profile}` in the following `source` command according to the path.
 
     {{< copyable "shell-regular" >}}
 
