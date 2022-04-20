@@ -1,4 +1,4 @@
-i---
+---
 title: Enable TLS Between TiDB Components
 summary: Learn how to enable TLS authentication between TiDB components.
 aliases: ['/docs/dev/enable-tls-between-components/','/docs/dev/how-to/secure/enable-tls-between-components/']
