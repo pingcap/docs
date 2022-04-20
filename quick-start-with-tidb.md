@@ -38,7 +38,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
     curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
     ```
 
-    Verify that TiUP has installed successfully by checking the output in the terminal of shell window for the following message:
+    Verify that TiUP has installed successfully by checking the output in the terminal or shell window for the following message:
 
     ```log
     Successfully set mirror to https://tiup-mirrors.pingcap.com
@@ -52,11 +52,13 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
     ===============================================
     ```
 
+    Please pay attention to the Shell profile path above. After installation, this file has been modified to add tiup to PATH. You can open a new terminal or follow the next step to declare the global environment variables of the TiUP.
+
 2. Declare the global environment variable:
 
     > **Note:**
     >
-    > After the installation, TiUP displays the absolute path of the corresponding Shell profile file. You need to modify `${your_shell_profile}` in the following `source` command according to the path.
+    > After the installation, TiUP displays the absolute path of the corresponding Shell profile file. You need to modify `${your_shell_profile}` in the following `source` command according to the path. In this case, `${your_shell_profile}` is `/Users/user/.zshrc` from the output of Step 1.
 
     {{< copyable "shell-regular" >}}
 
@@ -170,6 +172,8 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
     Have a try:     tiup playground
     ===============================================
     ```
+
+    Please pay attention to the Shell profile path above. After installation, this file has been modified to add tiup to PATH. You can open a new terminal or follow the next step to declare the global environment variables of the TiUP.
 
 2. Declare the global environment variable:
 
