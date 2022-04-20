@@ -1,0 +1,64 @@
+<!-- markdownlint-disable MD007 -->
+<!-- markdownlint-disable MD041 -->
+
+- Introduction
+  - [Why TiDB Cloud](/cloud/tidb-cloud-intro.md)
+  - [Architecture](/cloud/tidb-cloud-intro.md#architecture)
+- [Quick Start](/cloud/tidb-cloud-quickstart.md)
+- [Perform a PoC](/cloud/tidb-cloud-poc.md)
+- Use Your Cluster
+  - [Create a TiDB Cluster](/cloud/create-tidb-cluster.md)
+  - Connect to Your TiDB Cluster
+    - [Connect via a SQL Client](/cloud/connect-to-tidb-cluster.md)
+    - [Connect via SQL Shell](/cloud/connect-to-tidb-cluster.md#connect-via-sql-shell)
+  - [Set Up VPC Peering Connections](/cloud/set-up-vpc-peering-connections.md)
+  - Monitor a TiDB Cluster
+    - [Overview](/cloud/monitor-tidb-cluster.md)
+    - [Built-in Alerting](/cloud/monitor-built-in-alerting.md)
+    - Third-Party Monitoring Integrations
+      - [Datadog Integration](/cloud/monitor-datadog-integration.md)
+      - [Prometheus and Grafana Integration](/cloud/monitor-prometheus-and-grafana-integration.md)
+  - [Scale a TiDB Cluster](/cloud/scale-tidb-cluster.md)
+  - [Use an HTAP Cluster](/cloud/use-htap-cluster.md)
+  - Back Up and Restore Data
+    - [Automatic Backup](/cloud/backup-and-restore.md)
+    - [Manual Backup](/cloud/backup-and-restore.md#manual-backup)
+    - [Restore](/cloud/backup-and-restore.md#restore)
+  - Tune Performance
+    - [Statement Analysis](/cloud/tune-performance.md)
+    - [Key Visualizer](/cloud/tune-performance.md#key-visualizer)
+  - [Upgrade a TiDB Cluster](/cloud/upgrade-tidb-cluster.md)
+  - [Delete a TiDB Cluster](/cloud/delete-tidb-cluster.md)
+- Migrate Data
+  - [Import Sample Data](/cloud/import-sample-data.md)
+  - Migrate Data into TiDB
+    - [Migrate from MySQL-Compatible Databases](/cloud/migrate-data-into-tidb.md)
+    - [Migrate from Amazon Aurora MySQL in Bulk](/cloud/migrate-from-aurora-bulk-import.md)
+    - [Import or Migrate from Amazon S3 or GCS to TiDB Cloud](/cloud/migrate-from-amazon-s3-or-gcs.md)
+    - [Import CSV Files from Amazon S3 or GCS into TiDB Cloud](/cloud/import-csv-files.md)
+    - [Import Apache Parquet Files from Amazon S3 or GCS into TiDB Cloud](/cloud/import-parquet-files.md)
+  - [Export Data from TiDB](/cloud/export-data-from-tidb-cloud.md)
+- Manage User Access
+  - [Sign In](/cloud/manage-user-access.md)
+  - [Sign Out](/cloud/manage-user-access.md#sign-out)
+  - [View the Organization and Project](/cloud/manage-user-access.md#view-the-organization-and-project)
+  - [Invite an Organization Member](/cloud/manage-user-access.md#invite-an-organization-member)
+  - [Invite a Project Member](/cloud/manage-user-access.md#invite-a-project-member)
+  - [Configure Member Roles](/cloud/manage-user-access.md#configure-member-roles)
+  - [Remove an Organization Member](/cloud/manage-user-access.md#remove-an-organization-member)
+  - [Remove a Project Member](/cloud/manage-user-access.md#remove-a-project-member)
+  - [Set the Local Time Zone](/cloud/manage-user-access.md#set-the-local-time-zone)
+- Billing
+  - [Node Cost](/cloud/tidb-cloud-billing.md)
+  - [Backup Storage Cost](/cloud/tidb-cloud-billing.md#backup-storage-cost)
+  - [Data Transfer Cost](/cloud/tidb-cloud-billing.md#data-transfer-cost)
+  - [Invoices](/cloud/tidb-cloud-billing.md#invoices)
+  - [Billing Details](/cloud/tidb-cloud-billing.md#billing-details)
+  - [Trial Points](/cloud/tidb-cloud-billing.md#trial-points)
+  - [Payment Method Setting](/cloud/tidb-cloud-billing.md#payment-method)
+- Reference
+  - [Select Your Cluster Tier](/cloud/select-cluster-tier.md)
+  - [Size Your TiDB Cluster](/cloud/size-your-cluster.md)
+  - [Release Notes](/cloud/cloud-release-notes.md)
+- [Support](/cloud/tidb-cloud-support.md)
+- [Glossary](/cloud/cloud-glossary.md)
