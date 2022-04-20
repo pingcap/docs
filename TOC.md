@@ -349,6 +349,7 @@
         - [Maintain DM Clusters Using OpenAPI](/dm/dm-open-api.md)
       - Cluster Upgrade
         - [Manually Upgrade from v1.0.x to v2.0+](/dm/manually-upgrade-dm-1.0-to-2.0.md)
+      - [Create a Data Source](/dm/quick-start-create-source.md)
       - [Manage Data Source](/dm/dm-manage-source.md)
       - Manage a Data Migration Task
         - [Task Configuration Guide](/dm/dm-task-configuration-guide.md)
@@ -374,6 +375,7 @@
       - Architecture
         - [DM Architecture Overview](/dm/dm-overview.md)
         - [DM-worker](/dm/dm-worker-intro.md)
+        - [Relay Log](/dm/relay-log.md)
       - [Command-line Flags](/dm/dm-command-line-flags.md)
       - Configuration
         - [Overview](/dm/dm-config-overview.md)
@@ -382,6 +384,7 @@
 <<<<<<< HEAD
         - [Upstream Database Configuration](/dm/dm-source-configuration-file.md)
         - [Data Migration Task Configuration](/dm/dm-task-configuration-guide.md)
+        - [Table Selector](/dm/table-selector.md)
     - Secure
       - [Enable TLS for DM Connections](/dm/dm-enable-tls.md)
       - [Generate Self-signed Certificates](/dm/dm-generate-self-signed-certificates.md)
@@ -401,6 +404,9 @@
       - [Error Codes](/dm/dm-error-handling.md#handle-common-errors)
     - [FAQ](/dm/dm-faq.md)
     - [Glossary](/dm/dm-glossary.md)
+    - Example
+      - [Create a Data Migration Task](/dm/quick-start-create-task.md)
+      - [Best Practices of Data Migration in the Shard Merge Scenario](/dm/shard-merge-best-practices.md)
     - [Release Notes](/dm/dm-release-notes.md)
   - TiCDC
     - [Overview](/ticdc/ticdc-overview.md)
