@@ -24,6 +24,7 @@ When the telemetry collection feature is enabled in TiDB, the TiDB cluster colle
 - Deployment characteristics, such as the size of hardware (CPU, memory, disk), TiDB components versions, OS name.
 - The status of query requests in the system, such as the number of query requests and the duration.
 - Component usage, for example, whether the Async Commit feature is in use or not.
+- Pseudonymized IP address of the TiDB telemetry data sender.
 
 To view the full content of the usage information shared to PingCAP, execute the following SQL statement:
 
@@ -262,4 +263,4 @@ To meet compliance requirements in different countries or regions, the usage inf
 - For IP addresses from the Chinese mainland, usage information is sent to and stored on cloud servers in the Chinese mainland.
 - For IP addresses from outside of the Chinese mainland, usage information is sent to and stored on cloud servers in the US.
 
-See [PingCAP Privacy Policy](https://pingcap.com/privacy-policy) for details.
+See [PingCAP Privacy Policy](https://en.pingcap.com/privacy-policy/) for details.

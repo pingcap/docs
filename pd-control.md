@@ -28,7 +28,7 @@ If you want to download the latest version of `pd-ctl`, directly download the Ti
 
 > **Note:**
 >
-> `{version}` indicates the version number of TiDB. For example, if `{version}` is `v5.3.0`, the package download link is `https://download.pingcap.org/tidb-v5.3.0-linux-amd64.tar.gz`.
+> `{version}` indicates the version number of TiDB. For example, if `{version}` is `v6.0.0`, the package download link is `https://download.pingcap.org/tidb-v6.0.0-linux-amd64.tar.gz`.
 
 ### Compile from source code
 
@@ -729,7 +729,7 @@ Use this command to view and control the scheduling policy.
 Usage:
 
 ```bash
->> scheduler show                                 // Display all schedulers
+>> scheduler show                                 // Display all created schedulers
 >> scheduler add grant-leader-scheduler 1         // Schedule all the leaders of the Regions on store 1 to store 1
 >> scheduler add evict-leader-scheduler 1         // Move all the Region leaders on store 1 out
 >> scheduler config evict-leader-scheduler        // Display the stores in which the scheduler is located since v4.0.0
@@ -742,6 +742,18 @@ Usage:
 >> scheduler resume balance-region-scheduler      // Continue to run the balance-region scheduler
 >> scheduler resume all                           // Continue to run all schedulers
 >> scheduler config balance-hot-region-scheduler  // Display the configuration of the balance-hot-region scheduler
+```
+
+### `scheduler config balance-leader-scheduler`
+
+Use this command to view and control the `balance-leader-scheduler` policy.
+
+Since TiDB v6.0.0, PD introduces the `Batch` parameter for `balance-leader-scheduler` to control the speed at which the balance-leader processes tasks. To use this parameter, you can modify the `balance-leader batch` configuration item using pd-ctl.
+
+Before v6.0.0, PD does not have this configuration item, which means `balance-leader batch=1`. In v6.0.0 or later versions, the default value of `balance-leader batch` is `4`. To set this configuration item to a value greater than `4`, you need to set a greater value for [`scheduler-max-waiting-operator`](#config-show--set-option-value--placement-rules) (whose default value is `5`) at the same time. You can get the expected acceleration effect only after modifying both configuration items.
+
+```bash
+>> scheduler config balance-leader-scheduler set batch 3 // Set the size of the operator that the balance-leader scheduler can execute in a batch to 3
 ```
 
 #### `scheduler config balance-hot-region-scheduler`
@@ -882,7 +894,8 @@ Usage:
 
 > **Note:**
 >
-> When you use the `store limit` command, the original `region-add` and `region-remove` are deprecated. Use `add-peer` and `remove-peer` instead.
+> - The original `region-add` and `region-remove` parameters of the `store limit` command are deprecated and are replaced with `add-peer` and `remove-peer`.
+> - You can use `pd-ctl` to check the status (Up, Disconnect, Offline, Down, or Tombstone) of a TiKV store. For the relationship between each status, refer to [Relationship between each status of a TiKV store](/tidb-scheduling.md#information-collection).
 
 ### `log [fatal | error | warn | info | debug]`
 

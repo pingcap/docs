@@ -61,7 +61,7 @@ The TiDB configuration file supports more options than command-line parameters. 
 
 ### `lower-case-table-names`
 
-- Configures the value of the `lower-case-table-names` system variable.
+- Configures the value of the `lower_case_table_names` system variable.
 - Default value: `2`
 - For details, see the [MySQL description](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_lower_case_table_names) of this variable.
 
@@ -125,8 +125,8 @@ The TiDB configuration file supports more options than command-line parameters. 
 ### `new_collations_enabled_on_first_bootstrap`
 
 - Enables or disables the new collation support.
-- Default value: `false`
-- Note: This configuration takes effect only for the TiDB cluster that is first initialized. After the initialization, you cannot use this configuration item to enable or disable the new collation support. When a TiDB cluster is upgraded to v4.0, because the cluster has been initialized before, both `true` and `false` values of this configuration item are taken as `false`.
+- Default value: `true`
+- Note: This configuration takes effect only for the TiDB cluster that is first initialized. After the initialization, you cannot use this configuration item to enable or disable the new collation support. When a TiDB cluster is upgraded to v4.0 or later, because the cluster has been initialized before, both `true` and `false` values of this configuration item are taken as `false`.
 
 ### `max-server-connections`
 
@@ -332,6 +332,12 @@ Configuration items related to security.
 - Determines whether to automatically generate the TLS certificates on startup.
 - Default value: `false`
 
+### `tls-version`
+
+- Set the minimum TLS version for MySQL Protocol connections.
+- Default value: "", which allows TLSv1.1 or higher.
+- Optional values: `"TLSv1.0"`, `"TLSv1.1"`, `"TLSv1.2"` and `"TLSv1.3"`
+
 ## Performance
 
 Configuration items related to performance.
@@ -389,7 +395,7 @@ Configuration items related to performance.
 
 - The size limit of a single transaction in TiDB.
 - Default value: `104857600` (in bytes)
-- In a single transaction, the total size of key-value records cannot exceed this value. The maximum value of this parameter is `10737418240` (10 GB). Note that if you have used the binlog to serve the downstream consumer Kafka (such as the `arbiter` cluster), the value of this parameter must be no more than `1073741824` (1 GB). This is because 1 GB is the upper limit of a single message size that Kafka can process. Otherwise, an error is returned if this limit is exceeded.
+- In a single transaction, the total size of key-value records cannot exceed this value. The maximum value of this parameter is `1099511627776` (1 TB). Note that if you have used the binlog to serve the downstream consumer Kafka (such as the `arbiter` cluster), the value of this parameter must be no more than `1073741824` (1 GB). This is because 1 GB is the upper limit of a single message size that Kafka can process. Otherwise, an error is returned if this limit is exceeded.
 
 ### `tcp-keep-alive`
 
@@ -455,12 +461,6 @@ Configuration items related to performance.
 - Default: `false`
 - This variable is the initial value of the system variable [`tidb_opt_distinct_agg_push_down`](/system-variables.md#tidb_opt_distinct_agg_push_down).
 
-### `nested-loop-join-cache-capacity`
-
-+ The maximum memory usage for the Least Recently Used (LRU) algorithm of the nested loop join cache (in bytes).
-+ Default value: `20971520`
-+ When `nested-loop-join-cache-capacity` is set to `0`, nested loop join cache is disabled by default. When the LRU size is larger than the value of `nested-loop-join-cache-capacity`, the elements in the LRU are removed.
-
 ### `enforce-mpp`
 
 + Determines whether to ignore the optimizer's cost estimation and to forcibly use TiFlash's MPP mode for query execution.
@@ -469,7 +469,7 @@ Configuration items related to performance.
 
 ## prepared-plan-cache
 
-The Plan Cache configuration of the `PREPARE` statement.
+The [`plan cache`](/sql-prepared-plan-cache.md) configuration of the `PREPARE` statement.
 
 ### `enabled`
 
@@ -506,6 +506,12 @@ The Plan Cache configuration of the `PREPARE` statement.
 - The timeout of the RPC `keepalive` check between TiDB and TiKV nodes.
 - Default value: `3`
 - Unit: second
+
+### `grpc-compression-type`
+
+- Specifies the compression type used for data transfer between TiDB and TiKV nodes. The default value is `"none"`, which means no compression. To enable the gzip compression, set this value to `"gzip"`.
+- Default value: `"none"`
+- Value options: `"none"`, `"gzip"`
 
 ### `commit-timeout`
 
@@ -605,20 +611,6 @@ Configuration related to the status of TiDB service.
 - Determines whether to transmit the database-related QPS metrics to Prometheus.
 - Default value: `false`
 
-## stmt-summary <span class="version-mark">New in v3.0.4</span>
-
-Configurations related to [statement summary tables](/statement-summary-tables.md).
-
-### max-stmt-count
-
-- The maximum number of SQL categories allowed to be saved in [statement summary tables](/statement-summary-tables.md).
-- Default value: `3000`
-
-### max-sql-length
-
-- The longest display length for the `DIGEST_TEXT` and `QUERY_SAMPLE_TEXT` columns in [statement summary tables](/statement-summary-tables.md).
-- Default value: `4096`
-
 ## pessimistic-txn
 
 For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](/pessimistic-transaction.md).
@@ -638,6 +630,12 @@ For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](
 ### deadlock-history-collect-retryable
 
 + Controls whether the [`INFORMATION_SCHEMA.DEADLOCKS`](/information-schema/information-schema-deadlocks.md) table collects the information of retryable deadlock errors. For the description of retryable deadlock errors, see [Retryable deadlock errors](/information-schema/information-schema-deadlocks.md#retryable-deadlock-errors).
+
+### pessimistic-auto-commit (New in v6.0.0)
+
++ Determines the transaction mode that the auto-commit transaction uses when the pessimistic transaction mode is globally enabled (`tidb_txn_mode='pessimistic'`). By default, even if the pessimistic transaction mode is globally enabled, the auto-commit transaction still uses the optimistic transaction mode. After enabling `pessimistic-auto-commit` (set to `true`), the auto-commit transaction also uses pessimistic mode, which is consistent with the other explicitly committed pessimistic transactions.
++ For scenarios with conflicts, after enabling this configuration, TiDB includes auto-commit transactions into the global lock-waiting management, which avoids deadlocks and mitigates the latency spike brought by deadlock-causing conflicts.
++ For scenarios with no conflicts, if there are many auto-commit transactions, and a single transaction operates a large data volume, enabling this configuration causes performance regression. For example, the auto-commit `INSERT INTO SELECT` statement.
 + Default value: `false`
 
 ## experimental
@@ -648,3 +646,23 @@ The `experimental` section, introduced in v3.1.0, describes the configurations r
 
 + Controls whether an expression index can be created. Since TiDB v5.2.0, if the function in an expression is safe, you can create an expression index directly based on this function without enabling this configuration. If you want to create an expression index based on other functions, you can enable this configuration, but correctness issues might exist. By querying the `tidb_allow_function_for_expression_index` variable, you can get the functions that are safe to be directly used for creating an expression.
 + Default value: `false`
+
+### `stats-load-concurrency` <span class="version-mark">New in v5.4.0</span>
+
+> **WARNING:**
+>
+> Currently, synchronously loading statistics is an experimental feature. It is not recommended that you use it in production environments.
+
++ The maximum number of columns that the TiDB synchronously loading statistics feature can process concurrently.
++ Default value: `5`
++ Currently, the valid value range is `[1, 128]`.
+
+### `stats-load-queue-size` <span class="version-mark">New in v5.4.0</span>
+
+> **WARNING:**
+>
+> Currently, synchronously loading statistics is an experimental feature. It is not recommended that you use it in production environments.
+
++ The maximum number of column requests that the TiDB synchronously loading statistics feature can cache.
++ Default value: `1000`
++ Currently, the valid value range is `[1, 100000]`.

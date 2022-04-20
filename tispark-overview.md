@@ -35,9 +35,15 @@ Also, TiSpark supports distributed writes to TiKV. Compared with writes to TiDB 
 
 ## Environment setup
 
-+ The TiSpark 2.x supports Spark 2.3.x and Spark 2.4.x. If you want to use Spark 2.1.x, use TiSpark 1.x instead. Spark 3.x is not yet supported.
-+ TiSpark requires JDK 1.8+ and Scala 2.11 (Spark2.0 + default Scala version).
-+ TiSpark runs in any Spark mode such as YARN, Mesos, and Standalone.
+The following table lists the compatibility information of the supported TiSpark versions. You can choose a TiSpark version according to your need.
+
+| TiSpark version | TiDB, TiKV, and PD versions | Spark version | Scala version |
+| ---------------  | -------------------- | -------------  | ------------- |
+| 2.4.x-scala_2.11 | 5.x，4.x             | 2.3.x，2.4.x    | 2.11          |
+| 2.4.x-scala_2.12 | 5.x，4.x             | 2.4.x           | 2.12          |
+| 2.5.x            | 5.x，4.x             | 3.0.x，3.1.x    | 2.12           |
+
+TiSpark runs in any Spark mode such as YARN, Mesos, and Standalone.
 
 This section describes the configuration of:
 
@@ -71,7 +77,7 @@ To co-deploy TiKV and TiSpark, add TiSpark required resources to the TiKV reserv
 
 ### Deploy TiSpark with a standalone Spark cluster
 
-For more information, see the [official configuration](https://spark.apache.org/docs/latest/spark-standalone.html) on the Spark website. 
+For more information, see the [official configuration](https://spark.apache.org/docs/latest/spark-standalone.html) on the Spark website.
 
 You are advised to use a standalone Spark cluster. To install Spark Standalone mode, you can simply place a compiled version of Spark on each node on the cluster. If you encounter any problem, see its [official website](https://spark.apache.org/docs/latest/spark-standalone.html). And you are welcome to [file an issue](https://github.com/pingcap/tispark/issues/new) on our GitHub.
 
@@ -96,7 +102,7 @@ cd spark
 Download TiSpark's jar package [here](https://github.com/pingcap/tispark/releases) and place it in the `$SPARKPATH/jars` folder.
 
 > **Note:**
-> 
+>
 > TiSpark v2.1.x and older versions have file names that look like `tispark-core-2.1.9-spark_2.4-jar-with-dependencies.jar`. Please check the [releases page on GitHub](https://github.com/pingcap/tispark/releases) for the exact file name for the version you want.
 
 ```
@@ -121,13 +127,9 @@ The `spark.tispark.pd.addresses` configuration allows you to put in multiple PD 
 
 For example, when you have multiple PD servers on `10.16.20.1,10.16.20.2,10.16.20.3` with the port 2379, put it as `10.16.20.1:2379,10.16.20.2:2379,10.16.20.3:2379`.
 
-The default setup of `firewalld` on CentOS blocks the traffic needed by TiSpark. Therefore, disable `firewalld` to ensure normal running of TiSpark.
-
-```bash
-sudo systemctl stop firewalld.service
-sudo systemctl disable firewalld.service
-sudo systemctl mask --now firewalld.service
-```
+> **Note:**
+>
+> If TiSpark could not communicate properly, please check your firewall configuration. You can adjust the firewall rules or disable it on your need.
 
 ### Start a Master node
 
@@ -138,14 +140,14 @@ cd $SPARKPATH
 ./sbin/start-master.sh
 ```
 
-After the above step is completed, a log file will be printed on the screen. Check the log file to confirm whether the Spark-Master is started successfully. You can open the [http://spark-master-hostname:8080](http://spark-master-hostname:8080) to view the cluster information (if you does not change the Spark-Master default port number). When you start Spark-Worker, you can also use this panel to confirm whether the Worker is joined to the cluster.
+After the above step is completed, a log file will be printed on the screen. Check the log file to confirm whether the Spark-Master is started successfully. You can open the <http://${spark-master-hostname}:8080> to view the cluster information (if you does not change the Spark-Master default port number). When you start Spark-Worker, you can also use this panel to confirm whether the Worker is joined to the cluster.
 
 ### Start a Worker node
 
 Similarly, you can start a Spark-Worker node with the following command:
 
 ```sh
-./sbin/start-slave.sh spark://spark-master-hostname:7077
+./sbin/start-slave.sh spark://${spark-master-hostname}:7077
 ```
 
 Note that if you run the master node and worker node on the same host, you cannot use `127.0.0.1` or `localhost` because the master process only listens to the external interface by default.
@@ -162,7 +164,7 @@ spark-shell --jars $TISPARK_FOLDER/tispark-${name_with_version}.jar
 
 ## Using Spark Shell and Spark SQL
 
-Assume that you have successfully started the TiSpark cluster as described above. The following describes how to use Spark SQL for OLAP analysis on a table named `lineitem` in the `tpch` database. 
+Assume that you have successfully started the TiSpark cluster as described above. The following describes how to use Spark SQL for OLAP analysis on a table named `lineitem` in the `tpch` database.
 
 To generate the test data via a TiDB server available on 192.168.1.101:
 
@@ -207,13 +209,21 @@ Besides Spark Shell, there is also Spark SQL available. To use Spark SQL, run:
 ./bin/spark-sql
 ```
 
-You can run the same query
+You can run the same query:
 
-```sh
-spark-sql> use tpch;
+```scala
+use tpch;
+```
+
+```
 Time taken: 0.015 seconds
+```
 
-spark-sql> select count(*) from lineitem;
+```scala
+select count(*) from lineitem;
+```
+
+```
 2000
 Time taken: 0.673 seconds, Fetched 1 row(s)
 ```
@@ -344,13 +354,28 @@ If you would like TiSpark to use statistic information, first you need to make s
 
 Starting from TiSpark 2.0, statistics information is default to auto load.
 
-Note that table statistics are cached in the memory of your Spark driver node, so you need to make sure that your memory size is large enough for your statistics information.
+## Security
 
-Currently, you can adjust these configurations in your `spark-defaults.conf` file.
+If you are using TiSpark v2.5.0 or a later version, you can authenticate and authorize TiSpark users by using TiDB.
 
-| Property name | Default | Description |
-| :--------   | :-----  | :---- |
-| spark.tispark.statistics.auto_load | true | Whether to load statistics information automatically during database mapping. |
+The authentication and authorization feature is disabled by default. To enable it, add the following configurations to the Spark configuration file `spark-defaults.conf`.
+
+```
+// Enable authentication and authorization
+spark.sql.auth.enable true
+
+// Configure TiDB information
+spark.sql.tidb.addr $your_tidb_server_address
+spark.sql.tidb.port $your_tidb_server_port
+spark.sql.tidb.user $your_tidb_server_user
+spark.sql.tidb.password $your_tidb_server_password
+```
+
+For more information, see [Authorization and authentication through TiDB server](https://github.com/pingcap/tispark/blob/master/docs/authorization_userguide.md).
+
+> **Note:**
+>
+> After enabling the authentication and authorization feature, TiSpark Spark SQL can only use TiDB as the data source, so switching to other data sources (such as Hive) makes tables invisible.
 
 ## FAQ
 
