@@ -98,7 +98,7 @@ To view the billing details, perform the following steps:
 
 ## Trial points
 
-During the [PoC](\cloud\tidb-cloud-poc.md) period, you can use trial points to pay the TiDB cluster fees. One point is equivalent to one U.S. dollar. All your TiDB clusters will be automatically terminated when the trial points are used up.
+During the [PoC](/cloud/tidb-cloud-poc.md) period, you can use trial points to pay the TiDB cluster fees. One point is equivalent to one U.S. dollar. All your TiDB clusters will be automatically terminated when the trial points are used up.
 
 > **Note:**
 >

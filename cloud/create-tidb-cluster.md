@@ -27,7 +27,7 @@ TiDB Cloud provides the following two cluster tier options. Before creating a Ti
 
     The TiDB Cloud Dedicated Tier is dedicated for production use with the benefits of cross-zone high availability, horizontal scaling, and [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing).
 
-For more information about the two options, see [Select Your Cluster Tier](\cloud\select-cluster-tier.md).
+For more information about the two options, see [Select Your Cluster Tier](/cloud/select-cluster-tier.md).
 
 ## Step 3. Use your default project or create a new project
 

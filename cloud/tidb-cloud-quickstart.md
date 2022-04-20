@@ -12,7 +12,7 @@ This tutorial guides you through an easy way to get started with your TiDB Cloud
 
 ## Step 1. Create a TiDB cluster
 
-You can either create a free [Developer Tier (Dev Tier)](\cloud\select-cluster-tier.md#developer-tier) cluster or a [Dedicated Tier](\cloud\select-cluster-tier.md#dedicated-tier).
+You can either create a free [Developer Tier (Dev Tier)](/cloud/select-cluster-tier.md#developer-tier) cluster or a [Dedicated Tier](/cloud/select-cluster-tier.md#dedicated-tier).
 
 <SimpleTab>
 <div label="Developer Tier">
@@ -49,7 +49,7 @@ Your TiDB Cloud cluster will be created in approximately 5 to 15 minutes.
 
     > **Note:**
     >
-    > If you want to get a 14-day free trial of TiDB Cloud first, click **Apply for a PoC Trial** in the **Proof of Concept** plan, fill in the application form, and then click **OK**. The PingCAP support team will get back to you in 48 hours. For more information, see [Perform a Proof of Concept (PoC) with TiDB Cloud](\cloud\tidb-cloud-poc.md).
+    > If you want to get a 14-day free trial of TiDB Cloud first, click **Apply for a PoC Trial** in the **Proof of Concept** plan, fill in the application form, and then click **OK**. The PingCAP support team will get back to you in 48 hours. For more information, see [Perform a Proof of Concept (PoC) with TiDB Cloud](/cloud/tidb-cloud-poc.md).
 
 4. On the **Create a Cluster** page, set up your cluster name and root password.
 

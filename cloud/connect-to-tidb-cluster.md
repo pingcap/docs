@@ -56,7 +56,7 @@ To connect to your TiDB cluster via VPC peering, perform the following steps:
 
 2. Click **Connect**, and select the **VPC Peering** tab at the **Connect to TiDB** dialog.
 
-3. Set up VPC peering. See [Set up VPC Peering](\cloud\set-up-vpc-peering-connections.md) for details.
+3. Set up VPC peering. See [Set up VPC Peering](/cloud/set-up-vpc-peering-connections.md) for details.
 
 4. Click **Get Endpoint** and wait for a few minutes. Then the connection command displays in the dialog.
 
