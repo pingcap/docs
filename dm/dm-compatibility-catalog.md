@@ -9,7 +9,7 @@ DM supports migrating data from different sources to TiDB clusters. Based on the
 
 - **Generally available (GA)**: The application scenario has been verified and passed the GA test.
 - **Experimental**: Although the application scenario has been verified, the test does not cover all scenarios or involves only a limited number of users. The application scenario might encounter problems occasionally.
-- **Not tested**: DM is expected to be always compatible with MySQL during iteration. However, due to resource constraints, we cannot test all MySQL-derived versions. Therefore, the application is technically compatible with MySQL, but is not fully tested, which means you need to perform a test to ensure compatibility.
+- **Not tested**: DM is expected to be always compatible with MySQL during iteration. However, due to resource constraints, not all MySQL forks are tested with DM. Therefore, the *not tested* source or target is technically compatible with DM, but is not fully tested, which means you need to verify its compatibility before you use.
 - **Incompatible**: DM is proved to be incompatible with the data source and the application is not recommended for use in production environments.
 
 ## Data sources
