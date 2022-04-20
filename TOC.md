@@ -384,12 +384,13 @@
         - [Upstream Database Configuration](/dm/dm-source-configuration-file.md)
         - [Data Migration Task Configuration](/dm/dm-task-configuration-guide.md)
         - [Table Selector](/dm/table-selector.md)
+      - [Compatibility Catalog](/dm/dm-compatibility-catalog.md)
     - Secure
       - [Enable TLS for DM Connections](/dm/dm-enable-tls.md)
       - [Generate Self-signed Certificates](/dm/dm-generate-self-signed-certificates.md)
-      - [Monitoring Metrics](/dm/monitor-a-dm-cluster.md)
-      - [Alert Rules](/dm/dm-alert-rules.md)
-      - [Error Codes](/dm/dm-error-handling.md#handle-common-errors)
+    - [Monitoring Metrics](/dm/monitor-a-dm-cluster.md)
+    - [Alert Rules](/dm/dm-alert-rules.md)
+    - [Error Codes](/dm/dm-error-handling.md#handle-common-errors)
     - [FAQ](/dm/dm-faq.md)
     - [Glossary](/dm/dm-glossary.md)
     - Example
