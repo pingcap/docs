@@ -142,7 +142,7 @@ This attribute supports forward compatibility, namely, downgrade compatibility. 
 
 Pay attention to the following restrictions when you use `AUTO_RANDOM`:
 
-- Specify this attribute for the primary key column **ONLY** of `bigint` type. Otherwise an error occur. In addition, when the attribute of the primary key is `NONCLUSTERED`, `AUTO_RANDOM` is not supported even on the integer primary key. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
+- Specify this attribute for the primary key column **ONLY** of `bigint` type. Otherwise, an error occurs. In addition, when the attribute of the primary key is `NONCLUSTERED`, `AUTO_RANDOM` is not supported even on the integer primary key. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
 - You cannot use `ALTER TABLE` to modify the `AUTO_RANDOM` attribute, including adding or removing this attribute.
 - You cannot use `ALTER TABLE` to changing from `AUTO_INCREMENT` to `AUTO_RANDOM` if the maximum value is close to the maximum value of the column type.
 - You cannot change the column type of the primary key column that is specified with `AUTO_RANDOM` attribute.
