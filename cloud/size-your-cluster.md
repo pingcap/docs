@@ -19,7 +19,7 @@ Data in each TiDB Cloud cluster has 3 replicas, and each replica is distributed 
 
 > **Note:**
 >
-> When you scale your TiDB cluster, nodes in the 3 availability zones are increased or decreased at the same time. For how to scale in or scale out a TiDB cluster based on your needs, see [Scale Your TiDB Cluster]\cloud\scale-tidb-cluster.md).
+> When you scale your TiDB cluster, nodes in the 3 availability zones are increased or decreased at the same time. For how to scale in or scale out a TiDB cluster based on your needs, see [Scale Your TiDB Cluster](\cloud\scale-tidb-cluster.md).
 
 Minimum number of TiKV nodes: `ceil(compressed size of your data ÷ one TiKV capacity) × the number of replicas`
 

@@ -102,7 +102,7 @@ General change:
 
 New feature:
 
-* Support [adding VPC CIDR for your TiDB cloud project]\cloud\set-up-vpc-peering-connections.md)
+* Support [adding VPC CIDR for your TiDB cloud project](\cloud\set-up-vpc-peering-connections.md)
 
 Improvements:
 
@@ -133,7 +133,7 @@ Bug fixes:
 
 ## October 11, 2021
 
-* Support [viewing and exporting billing details of TiDB Cloud]\cloud\tidb-cloud-billing.md#billing-details), including the cost of each service and each project
+* Support [viewing and exporting billing details of TiDB Cloud](\cloud\tidb-cloud-billing.md#billing-details), including the cost of each service and each project
 * Fix several issues of TiDB Cloud internal features
 
 ## September 16, 2021
@@ -196,7 +196,7 @@ Management Console
 
 * Email verification and anti-robot reCAPTCHA have been added to the sign up process
 * [TiDB Cloud Service Agreement](https://pingcap.com/legal/tidb-cloud-services-agreement) and [PingCAP Privacy Policy](https://pingcap.com/legal/privacy-policy/) have been updated
-* You can apply for a [PoC]\cloud\tidb-cloud-poc.md) by filling out an application form in the console
+* You can apply for a [PoC](\cloud\tidb-cloud-poc.md) by filling out an application form in the console
 * You can import sample data into TiDB Cloud cluster through UI
 * Clusters with the same name are not allowed to avoid confusion 
 * You can give feedback by clicking **Give Feedback** in the **Support** menu  

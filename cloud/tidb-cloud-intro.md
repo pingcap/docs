@@ -48,4 +48,4 @@ category: intro
 
 - Your VPC
 
-    You can connect to your TiDB cluster via a VPC peering connection. Refer to [Set up VPC Peering Connection]\cloud\set-up-vpc-peering-connections.md) for details.
+    You can connect to your TiDB cluster via a VPC peering connection. Refer to [Set up VPC Peering Connection](\cloud\set-up-vpc-peering-connections.md) for details.

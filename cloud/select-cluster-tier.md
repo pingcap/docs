@@ -49,7 +49,7 @@ The TiDB Cloud Dedicated Tier is dedicated for production use with the benefits 
 
 For Dedicated Tier clusters, you can customize the cluster size of TiDB, TiKV, and TiFlash<sup>beta</sup> easily according to your business need.
 
-To create a Dedicated Tier cluster, you need to [add a payment method](/cloud/tidb-cloud-billing.md#payment-method) or [apply for a Proof of Concept (PoC) trial]\cloud\tidb-cloud-poc.md).
+To create a Dedicated Tier cluster, you need to [add a payment method](/cloud/tidb-cloud-billing.md#payment-method) or [apply for a Proof of Concept (PoC) trial](\cloud\tidb-cloud-poc.md).
 
 > **Note:**
 >
