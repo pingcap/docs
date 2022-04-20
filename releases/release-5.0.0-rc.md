@@ -46,7 +46,7 @@ When users tune performance or select optimal indexes, they can set an index to 
 
 To modify the visibility of an index, use the `ALTER INDEX` statement. After the modification, the optimizer decides whether to add this index to the index list based on the index visibility.
 
-+ [User document](/sql-statements/sql-statement-alter-index.md)
++ [User document](/common/sql-statements/sql-statement-alter-index.md)
 + Related issue: [#9246](https://github.com/pingcap/tidb/issues/9246)
 
 ### Support `EXCEPT` and `INTERSECT` operators
@@ -179,7 +179,7 @@ When users troubleshoot SQL performance issues, they need detailed diagnostic in
 + More information is available in the output of `EXPLAIN ANALYZE`, including the number of RPC requests sent by operators, the duration of resolving lock conflicts, network latency, the scanned volume of deleted data in RocksDB, and the hit rate of RocksDB caches. [#18663](https://github.com/pingcap/tidb/issues/18663)
 + The detailed execution information of SQL statements is recorded in the slow log, which is consistent with the output information of `EXPLAIN ANALYZE`. This information includes the time consumed by each operator, the number of processed rows, and the number of sent RPC requests. [#15009](https://github.com/pingcap/tidb/issues/15009)
 
-[User document](/sql-statements/sql-statement-explain.md)
+[User document](/common/sql-statements/sql-statement-explain.md)
 
 ## Deployment and maintenance
 

@@ -327,6 +327,6 @@ Global temporary tables are exported, backed up, and replicated by TiDB ecosyste
 
 ## See also
 
-* [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
-* [CREATE TABLE LIKE](/sql-statements/sql-statement-create-table-like.md)
-* [DROP TABLE](/sql-statements/sql-statement-drop-table.md)
+* [CREATE TABLE](/common/sql-statements/sql-statement-create-table.md)
+* [CREATE TABLE LIKE](/common/sql-statements/sql-statement-create-table-like.md)
+* [DROP TABLE](/common/sql-statements/sql-statement-drop-table.md)

@@ -111,7 +111,7 @@ In v5.3, the key new features or improvements are as follows:
 
     For a SQL statement that joins multiple tables, TiDB supports acquiring pessimistic locks on the rows correlated to the tables that are included in `OF TABLES`.
 
-    [User document](/sql-statements/sql-statement-select.md), [#28689](https://github.com/pingcap/tidb/issues/28689)
+    [User document](/common/sql-statements/sql-statement-select.md), [#28689](https://github.com/pingcap/tidb/issues/28689)
 
 - **Table attributes**
 

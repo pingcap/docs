@@ -26,9 +26,9 @@ TiDB supports reading historical data through a standard SQL interface, which is
 
 You can use the `AS OF TIMESTAMP` clause in the following three ways:
 
-- [`SELECT ... FROM ... AS OF TIMESTAMP`](/sql-statements/sql-statement-select.md)
-- [`START TRANSACTION READ ONLY AS OF TIMESTAMP`](/sql-statements/sql-statement-start-transaction.md)
-- [`SET TRANSACTION READ ONLY AS OF TIMESTAMP`](/sql-statements/sql-statement-set-transaction.md)
+- [`SELECT ... FROM ... AS OF TIMESTAMP`](/common/sql-statements/sql-statement-select.md)
+- [`START TRANSACTION READ ONLY AS OF TIMESTAMP`](/common/sql-statements/sql-statement-start-transaction.md)
+- [`SET TRANSACTION READ ONLY AS OF TIMESTAMP`](/common/sql-statements/sql-statement-set-transaction.md)
 
 If you want to specify an exact point of time, you can set a datetime value or use a time function in the `AS OF TIMESTAMP` clause. The format of datetime is like "2016-10-08 16:45:26.999", with millisecond as the minimum time unit, but for most of the time, the time unit of second is enough for specifying a datetime, such as "2016-10-08 16:45:26". You can also get the current time to the millisecond using the `NOW(3)` function. If you want to read the data of several seconds ago, it is **recommended** to use an expression such as `NOW() - INTERVAL 10 SECOND`.
 
@@ -132,7 +132,7 @@ select * from t;
 
 ### Read historical data using the `SELECT` statement
 
-You can use the [`SELECT ... FROM ... AS OF TIMESTAMP`](/sql-statements/sql-statement-select.md) statement to read data from a time point in the past.
+You can use the [`SELECT ... FROM ... AS OF TIMESTAMP`](/common/sql-statements/sql-statement-select.md) statement to read data from a time point in the past.
 
 ```sql
 select * from t as of timestamp '2021-05-26 16:45:26';
@@ -155,7 +155,7 @@ select * from t as of timestamp '2021-05-26 16:45:26';
 
 ### Read historical data using the `START TRANSACTION READ ONLY AS OF TIMESTAMP` statement
 
-You can use the [`START TRANSACTION READ ONLY AS OF TIMESTAMP`](/sql-statements/sql-statement-start-transaction.md) statement to start a read-only transaction based on a time point in the past. The transaction reads historical data of the given time.
+You can use the [`START TRANSACTION READ ONLY AS OF TIMESTAMP`](/common/sql-statements/sql-statement-start-transaction.md) statement to start a read-only transaction based on a time point in the past. The transaction reads historical data of the given time.
 
 ```sql
 start transaction read only as of timestamp '2021-05-26 16:45:26';
@@ -211,7 +211,7 @@ select * from t;
 
 ### Read historical data using the `SET TRANSACTION READ ONLY AS OF TIMESTAMP` statement
 
-You can use the [`SET TRANSACTION READ ONLY AS OF TIMESTAMP`](/sql-statements/sql-statement-set-transaction.md) statement to set the next transaction as a read-only transaction based on a specified time point in the past. The transaction reads historical data of the given time.
+You can use the [`SET TRANSACTION READ ONLY AS OF TIMESTAMP`](/common/sql-statements/sql-statement-set-transaction.md) statement to set the next transaction as a read-only transaction based on a specified time point in the past. The transaction reads historical data of the given time.
 
 ```sql
 set transaction read only as of timestamp '2021-05-26 16:45:26';

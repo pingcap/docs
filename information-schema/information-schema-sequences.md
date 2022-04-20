@@ -5,7 +5,7 @@ summary: Learn the `SEQUENCES` information_schema table.
 
 # SEQUENCES
 
-The `SEQUENCES` table provides information about sequences. The [sequences feature](/sql-statements/sql-statement-create-sequence.md) is modeled on a similar feature in MariaDB.
+The `SEQUENCES` table provides information about sequences. The [sequences feature](/common/sql-statements/sql-statement-create-sequence.md) is modeled on a similar feature in MariaDB.
 
 {{< copyable "sql" >}}
 

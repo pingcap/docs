@@ -35,11 +35,11 @@ This document lists the features supported in each TiDB version. Note that suppo
 
 | Indexing and constraints                                     | 6.0 | 5.4          |   5.3    |   5.2    |   5.1    |   5.0    |   4.0    |
 | ------------------------------------------------------------ | :--: | ------------ | :----------: | :----------: | :----------: | :----------: | :----------: |
-| [Expression indexes](/sql-statements/sql-statement-create-index.md#expression-index) | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
+| [Expression indexes](/common/sql-statements/sql-statement-create-index.md#expression-index) | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
 | [Columnar storage (TiFlash)](/tiflash/tiflash-overview.md)   | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | [RocksDB engine](/storage-engine/rocksdb-overview.md)        | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | [Titan plugin](/storage-engine/titan-overview.md)            | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Invisible indexes](/sql-statements/sql-statement-add-index.md) | Y | Y            |      Y       |      Y       |      Y       |      Y       |      N       |
+| [Invisible indexes](/common/sql-statements/sql-statement-add-index.md) | Y | Y            |      Y       |      Y       |      Y       |      Y       |      N       |
 | [Composite `PRIMARY KEY`](/constraints.md)                   | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | [Unique indexes](/constraints.md)                            | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | [Clustered index on integer `PRIMARY KEY`](/constraints.md)  | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
@@ -58,10 +58,10 @@ This document lists the features supported in each TiDB version. Note that suppo
 | [`EXCEPT` and `INTERSECT` operators](/functions-and-operators/set-operators.md) | Y | Y            |      Y       |      Y       |      Y       |      Y       |      N       |
 | `GROUP BY`, `ORDER BY`                                       | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | [Window Functions](/functions-and-operators/window-functions.md) | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Common Table Expressions (CTE)](/sql-statements/sql-statement-with.md)| Y  | Y            |      Y       |      Y       |      Y       |      N       |      N       |
+| [Common Table Expressions (CTE)](/common/sql-statements/sql-statement-with.md)| Y  | Y            |      Y       |      Y       |      Y       |      N       |      N       |
 | `START TRANSACTION`, `COMMIT`, `ROLLBACK`                    | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [`EXPLAIN`](/sql-statements/sql-statement-explain.md)        | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
+| [`EXPLAIN`](/common/sql-statements/sql-statement-explain.md)        | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
+| [`EXPLAIN ANALYZE`](/common/sql-statements/sql-statement-explain-analyze.md) | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | [User-defined variables](/user-defined-variables.md)        | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
 
 ## Advanced SQL features
@@ -86,12 +86,12 @@ This document lists the features supported in each TiDB version. Note that suppo
 | Basic `CREATE`, `DROP`, `ALTER`, `RENAME`, `TRUNCATE`        | Y  | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | [Generated columns](/generated-columns.md)                   | Experimental| Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
 | [Views](/views.md)                                           | Y  | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Sequences](/sql-statements/sql-statement-create-sequence.md) | Y  | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
+| [Sequences](/common/sql-statements/sql-statement-create-sequence.md) | Y  | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | [Auto increment](/auto-increment.md)                         | Y  | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | [Auto random](/auto-random.md)                               | Y  | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [DDL algorithm assertions](/sql-statements/sql-statement-alter-table.md) | Y  | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
+| [DDL algorithm assertions](/common/sql-statements/sql-statement-alter-table.md) | Y  | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | Multi schema change: add column(s)                           | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
-| [Change column type](/sql-statements/sql-statement-modify-column.md) | Y  | Y            |      Y       |      Y       |      Y       |      N       |      N       |
+| [Change column type](/common/sql-statements/sql-statement-modify-column.md) | Y  | Y            |      Y       |      Y       |      Y       |      N       |      N       |
 | [Temporary tables](/temporary-tables.md)                    | Y   | Y            |      Y       |      N       |      N       |      N       |      N       |
 
 ## Transactions
@@ -148,7 +148,7 @@ This document lists the features supported in each TiDB version. Note that suppo
 | [Fast Importer (TiDB Lightning)](/tidb-lightning/tidb-lightning-overview.md)                             | Y  | Y           | Y            | Y            | Y            | Y            | Y            |
 | mydumper logical dumper                                                                                  | Deprecated | Deprecated | Deprecated   | Deprecated   | Deprecated   | Deprecated   | Deprecated   |
 | [Dumpling logical dumper](/dumpling-overview.md)                                                         | Y | Y           | Y            | Y            | Y            | Y            | Y            |
-| [Transactional `LOAD DATA`](/sql-statements/sql-statement-load-data.md)                                 | Y  | Y           | Y            | Y            | Y            | Y            | N [^3]       |
+| [Transactional `LOAD DATA`](/common/sql-statements/sql-statement-load-data.md)                                 | Y  | Y           | Y            | Y            | Y            | Y            | N [^3]       |
 | [Database migration toolkit (DM)](/migration-overview.md)                                               | Y  | Y           | Y            | Y            | Y            | Y            | Y            |
 | [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md)                                                     | Y  | Y   | Y    | Y    | Y    | Y    | Y    |
 | [Change data capture (CDC)](/ticdc/ticdc-overview.md)                                                   | Y  | Y           | Y            | Y            | Y            | Y            | Y            |
@@ -167,9 +167,9 @@ This document lists the features supported in each TiDB version. Note that suppo
 | Ansible deployment                                           | N | N            |      N       |      N       |      N       |      N       |  Deprecated  |
 | [Kubernetes operator](https://docs.pingcap.com/tidb-in-kubernetes/) | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | [Built-in physical backup](/br/backup-and-restore-use-cases.md) | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Global Kill](/sql-statements/sql-statement-kill.md)        | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
+| [Global Kill](/common/sql-statements/sql-statement-kill.md)        | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
 | [Lock View](/information-schema/information-schema-data-lock-waits.md) | Y | Y            |      Y       |      Y       | Experimental | Experimental | Experimental |
-| [`SHOW CONFIG`](/sql-statements/sql-statement-show-config.md) | Experimental| Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
+| [`SHOW CONFIG`](/common/sql-statements/sql-statement-show-config.md) | Experimental| Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
 | [`SET CONFIG`](/dynamic-config.md)                           | Experimental| Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
 | [Continuous Profiling](/dashboard/continuous-profiling.md)   | Y | Experimental | Experimental |      N       |      N       |      N       |      N       |
 | [Top SQL](/dashboard/top-sql.md)                                                      | Y | Experimental |      N       |      N       |      N       |      N       |      N       |
@@ -177,6 +177,6 @@ This document lists the features supported in each TiDB version. Note that suppo
 
 [^1]: TiDB incorrectly treats latin1 as a subset of utf8. See [TiDB #18955](https://github.com/pingcap/tidb/issues/18955) for more details.
 
-[^2]: See [Statement Reference](/sql-statements/sql-statement-select.md) for a full list of SQL statements supported.
+[^2]: See [Statement Reference](/common/sql-statements/sql-statement-select.md) for a full list of SQL statements supported.
 
 [^3]: For TiDB v4.0, the `LOAD DATA` transaction does not guarantee atomicity.

@@ -74,7 +74,7 @@ In v5.1, the key new features or improvements are as follows:
 
     This feature empowers TiDB with the capability of querying hierarchical data recursively or non-recursively and meets the needs of using tree queries to implement application logics in multiple sectors such as human resources, manufacturing, financial markets, and education.
 
-    In TiDB, you can apply the `WITH` statement to use Common Table Expressions. [User document](/sql-statements/sql-statement-with.md), [#17472](https://github.com/pingcap/tidb/issues/17472)
+    In TiDB, you can apply the `WITH` statement to use Common Table Expressions. [User document](/common/sql-statements/sql-statement-with.md), [#17472](https://github.com/pingcap/tidb/issues/17472)
 
 - Support the dynamic privilege feature of MySQL 8.0.
 
@@ -100,7 +100,7 @@ In v5.1, the key new features or improvements are as follows:
     - Modifying the `DECIMAL` precision
     - Compressing the length of `VARCHAR(10)` to `VARCHAR(5)`
 
-    [User document](/sql-statements/sql-statement-modify-column.md)
+    [User document](/common/sql-statements/sql-statement-modify-column.md)
 
 - Introduce a new SQL syntax `AS OF TIMESTAMP` to perform Stale Read, a new experimental feature used to read historical data from a specified point in time or from a specified time range.
 

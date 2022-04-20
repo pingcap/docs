@@ -162,7 +162,7 @@ You can use [`filter.rules`](https://github.com/pingcap/tiflow/blob/7c3c2336f981
 
 ## Does BR back up the `SHARD_ROW_ID_BITS` and `PRE_SPLIT_REGIONS` information of a table? Does the restored table have multiple Regions?
 
-Yes. BR backs up the [`SHARD_ROW_ID_BITS` and `PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions) information of a table. The data of the restored table is also split into multiple Regions.
+Yes. BR backs up the [`SHARD_ROW_ID_BITS` and `PRE_SPLIT_REGIONS`](/common/sql-statements/sql-statement-split-region.md#pre_split_regions) information of a table. The data of the restored table is also split into multiple Regions.
 
 ## What should I do if the restore fails with the error message `the entry too large, the max entry size is 6291456, the size of data is 7690800`?
 

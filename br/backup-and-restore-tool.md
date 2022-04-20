@@ -218,7 +218,7 @@ Currently, the following methods are supported to run the BR tool:
 
 #### Use SQL statements
 
-TiDB supports both [`BACKUP`](/sql-statements/sql-statement-backup.md#backup) and [`RESTORE`](/sql-statements/sql-statement-restore.md#restore) SQL statements. The progress of these operations can be monitored with the statement [`SHOW BACKUPS|RESTORES`](/sql-statements/sql-statement-show-backups.md).
+TiDB supports both [`BACKUP`](/common/sql-statements/sql-statement-backup.md#backup) and [`RESTORE`](/common/sql-statements/sql-statement-restore.md#restore) SQL statements. The progress of these operations can be monitored with the statement [`SHOW BACKUPS|RESTORES`](/common/sql-statements/sql-statement-show-backups.md).
 
 #### Use the command-line tool
 

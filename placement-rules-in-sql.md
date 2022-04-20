@@ -21,7 +21,7 @@ The detailed user scenarios are as follows:
 
 ## Specify placement rules
 
-To specify placement rules, first create a placement policy using [`CREATE PLACEMENT POLICY`](/sql-statements/sql-statement-create-placement-policy.md):
+To specify placement rules, first create a placement policy using [`CREATE PLACEMENT POLICY`](/common/sql-statements/sql-statement-create-placement-policy.md):
 
 ```sql
 CREATE PLACEMENT POLICY myplacementpolicy PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1";
@@ -37,13 +37,13 @@ ALTER TABLE t2 PLACEMENT POLICY=myplacementpolicy;
 
 A placement policy is not associated with any database schema and has the global scope. Therefore, assigning a placement policy does not require any additional privileges over the `CREATE TABLE` privilege.
 
-To modify a placement policy, you can use [`ALTER PLACEMENT POLICY`](/sql-statements/sql-statement-alter-placement-policy.md), and the changes will propagate to all objects assigned with the corresponding policy.
+To modify a placement policy, you can use [`ALTER PLACEMENT POLICY`](/common/sql-statements/sql-statement-alter-placement-policy.md), and the changes will propagate to all objects assigned with the corresponding policy.
 
 ```sql
 ALTER PLACEMENT POLICY myplacementpolicy FOLLOWERS=5;
 ```
 
-To drop policies that are not attached to any table or partition, you can use [`DROP PLACEMENT POLICY`](/sql-statements/sql-statement-drop-placement-policy.md):
+To drop policies that are not attached to any table or partition, you can use [`DROP PLACEMENT POLICY`](/common/sql-statements/sql-statement-drop-placement-policy.md):
 
 ```sql
 DROP PLACEMENT POLICY myplacementpolicy;
@@ -51,7 +51,7 @@ DROP PLACEMENT POLICY myplacementpolicy;
 
 ## View current placement rules
 
-If a table has placement rules attached, you can view the placement rules in the output of [`SHOW CREATE TABLE`](/sql-statements/sql-statement-show-create-table.md). To view the definition of the policy available, execute [`SHOW CREATE PLACEMENT POLICY`](/sql-statements/sql-statement-show-create-placement-policy.md):
+If a table has placement rules attached, you can view the placement rules in the output of [`SHOW CREATE TABLE`](/common/sql-statements/sql-statement-show-create-table.md). To view the definition of the policy available, execute [`SHOW CREATE PLACEMENT POLICY`](/common/sql-statements/sql-statement-show-create-placement-policy.md):
 
 ```sql
 tidb> SHOW CREATE TABLE t1\G
@@ -96,13 +96,13 @@ SELECT * FROM information_schema.tables WHERE tidb_placement_policy_name IS NOT 
 SELECT * FROM information_schema.partitions WHERE tidb_placement_policy_name IS NOT NULL;
 ```
 
-Rules that are attached to objects are applied *asynchronously*. To view the current scheduling progress of placement, use [`SHOW PLACEMENT`](/sql-statements/sql-statement-show-placement.md).
+Rules that are attached to objects are applied *asynchronously*. To view the current scheduling progress of placement, use [`SHOW PLACEMENT`](/common/sql-statements/sql-statement-show-placement.md).
 
 ## Option reference
 
 > **Note:**
 >
-> Placement options depend on labels correctly specified in the configuration of each TiKV node. For example, the `PRIMARY_REGION` option depends on the `region` label in TiKV. To see a summary of all labels available in your TiKV cluster, use the statement [`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md):
+> Placement options depend on labels correctly specified in the configuration of each TiKV node. For example, the `PRIMARY_REGION` option depends on the `region` label in TiKV. To see a summary of all labels available in your TiKV cluster, use the statement [`SHOW PLACEMENT LABELS`](/common/sql-statements/sql-statement-show-placement-labels.md):
 >
 > ```sql
 > mysql> show placement labels;

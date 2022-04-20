@@ -36,7 +36,7 @@ First, you need to have a general understanding of the query process. The key st
 You can get the duration information using the following methods:
 
 - [Slow log](/identify-slow-queries.md). It is recommended to view the slow log in [TiDB Dashboard](/dashboard/dashboard-overview.md).
-- [`EXPLAIN ANALYZE` statement](/sql-statements/sql-statement-explain-analyze.md).
+- [`EXPLAIN ANALYZE` statement](/common/sql-statements/sql-statement-explain-analyze.md).
 
 The methods above are different in the following aspects:
 

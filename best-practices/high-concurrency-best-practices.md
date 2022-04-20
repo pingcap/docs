@@ -116,7 +116,7 @@ In most cases, the above process of causing a hotspot is normal, which is the Re
 
 To achieve the ideal performance expected in theory, you can skip the warm-up phase by directly splitting a Region into the desired number of Regions and scheduling these Regions in advance to other nodes in the cluster.
 
-In v3.0.x, v2.1.13 and later versions, TiDB supports a new feature called [Split Region](/sql-statements/sql-statement-split-region.md). This new feature provides the following new syntaxes:
+In v3.0.x, v2.1.13 and later versions, TiDB supports a new feature called [Split Region](/common/sql-statements/sql-statement-split-region.md). This new feature provides the following new syntaxes:
 
 {{< copyable "sql" >}}
 
@@ -176,7 +176,7 @@ Then operate the write load again:
 
 You can see that the apparent hotspot problem has been resolved now.
 
-In this case, the table is simple. In other cases, you might also need to consider the hotspot problem of index. For more details on how to pre-split the index Region, refer to [Split Region](/sql-statements/sql-statement-split-region.md).
+In this case, the table is simple. In other cases, you might also need to consider the hotspot problem of index. For more details on how to pre-split the index Region, refer to [Split Region](/common/sql-statements/sql-statement-split-region.md).
 
 ## Complex hotspot problems
 
@@ -184,7 +184,7 @@ In this case, the table is simple. In other cases, you might also need to consid
 
 If a table does not have a primary key, or the primary key is not the `Int` type and you do not want to generate a randomly distributed primary key ID, TiDB provides an implicit `_tidb_rowid` column as the row ID. Generally, when you do not use the `SHARD_ROW_ID_BITS` parameter, the values of the `_tidb_rowid` column are also monotonically increasing, which might causes hotspots too. Refer to [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md) for more details.
 
-To avoid the hotspot problem in this situation, you can use `SHARD_ROW_ID_BITS` and `PRE_SPLIT_REGIONS` when creating a table. For more details about `PRE_SPLIT_REGIONS`, refer to [Pre-split Regions](/sql-statements/sql-statement-split-region.md#pre_split_regions).
+To avoid the hotspot problem in this situation, you can use `SHARD_ROW_ID_BITS` and `PRE_SPLIT_REGIONS` when creating a table. For more details about `PRE_SPLIT_REGIONS`, refer to [Pre-split Regions](/common/sql-statements/sql-statement-split-region.md#pre_split_regions).
 
 `SHARD_ROW_ID_BITS` is used to randomly scatter the row ID generated in the `_tidb_rowid` column. `PRE_SPLIT_REGIONS` is used to pre-split the Region after a table is created.
 

@@ -183,7 +183,7 @@ However, this is unsuitable on cloud environment, where every node has their own
 ./br backup full -c=0 -u pd-service:2379 -s 's3://bucket-name/prefix'
 ```
 
-When using SQL statements to [back up](/sql-statements/sql-statement-backup.md) and [restore](/sql-statements/sql-statement-restore.md) data, you can add the `SEND_CREDENTIALS_TO_TIKV = FALSE` option:
+When using SQL statements to [back up](/common/sql-statements/sql-statement-backup.md) and [restore](/common/sql-statements/sql-statement-restore.md) data, you can add the `SEND_CREDENTIALS_TO_TIKV = FALSE` option:
 
 {{< copyable "sql" >}}
 
