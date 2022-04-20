@@ -434,6 +434,11 @@ Other requirements for the target machine:
 
     - `<cluster-name>`: Set the cluster name
     - `<tidb-version>`: Set the TiDB cluster version. You can see all the supported TiDB versions by running the `tiup list tidb` command
+    - `-p`: Specify the password used to connect to the target machine.
+
+        > **Note:**
+        >
+        > If you use secret keys, you can specify the path of the keys through `-i`. Do not use `-i` and `-p` at the same time.
 
     Enter "y" and the `root` user's password to complete the deployment:
 
