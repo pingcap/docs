@@ -8,11 +8,11 @@ aliases: ['/docs/dev/incremental-replication-between-clusters/']
 
 This document describes how to configure a TiDB primary (upstream) cluster and a TiDB or MySQL secondary (downstream) cluster, and replicate incremental data from the primary cluster to the secondary cluster. The process includes the following steps:
 
-- Configure a TiDB primary cluster and a TiDB or MySQL secondary cluster.
-- Replicate incremental data from the primary cluster to the secondary cluster.
-- Recover data consistently by using Redo log when the primary cluster is down.
+1. Configure a TiDB primary cluster and a TiDB or MySQL secondary cluster.
+2. Replicate incremental data from the primary cluster to the secondary cluster.
+3. Recover data consistently by using Redo log when the primary cluster is down.
 
-To replicate incremental data from a running  TiDB cluster to its secondary cluster, you can use Backup & Restore [BR](/br/backup-and-restore-tool.md) and [TiCDC](/ticdc/ticdc-overview.md).
+To replicate incremental data from a running TiDB cluster to its secondary cluster, you can use Backup & Restore [BR](/br/backup-and-restore-tool.md) and [TiCDC](/ticdc/ticdc-overview.md).
 
 ## Step 1. Set the environment
 
@@ -39,7 +39,7 @@ To replicate incremental data from a running  TiDB cluster to its secondary clus
 
 2. Initialize data.
 
-    By default, test databases are created in the newly deployed clusters. Therefore, you can use sysbench to generate test data and simulate data in real scenarios.
+    By default, test databases are created in the newly deployed clusters. Therefore, you can use [sysbench](https://github.com/akopytov/sysbench#linux) to generate test data and simulate data in real scenarios.
 
     {{< copyable "shell-regular" >}}
 
@@ -101,7 +101,7 @@ To replicate incremental data from a running  TiDB cluster to its secondary clus
     - Secret-access-key: `miniostorage`
     - Bucket: `redo`
 
-    The access link is as follows:
+    The link is as follows:
 
     {{< copyable "shell-regular" >}}
 
@@ -175,7 +175,7 @@ After setting up the environment, you can use the backup and restore functions o
 
 4. (Optional) Check data.
 
-    Use [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md) to check data consistency between upstream and downstream data at a certain time. The preceding `BACKUP` output shows that the upstream cluster finishes backup at 431434047157698561. The preceding `RESTORE` output shows that the downstream finishes restoration at 431434141450371074.
+    Use [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md) to check data consistency between upstream and downstream at a certain time. The preceding `BACKUP` output shows that the upstream cluster finishes backup at 431434047157698561. The preceding `RESTORE` output shows that the downstream finishes restoration at 431434141450371074.
 
     {{< copyable "shell-regular" >}}
 
@@ -233,7 +233,7 @@ After setting up the environment, you can use the backup and restore functions o
     [consistent]
     # Consistency level, eventual means enabling consistent replication
     level = "eventual"
-    # Use S3 to store redo logs, other options are local and nfs
+    # Use S3 to store redo logs. Other options are local and nfs.
     storage = "s3://redo?access-key=minio&secret-access-key=miniostorage&endpoint=http://172.16.6.125:6060&force-path-style=true"
     ```
 
@@ -242,7 +242,7 @@ After setting up the environment, you can use the backup and restore functions o
     {{< copyable "shell-regular" >}}
 
     ```shell
-    tiup cdc  cli changefeed --sink-url "mysql://root:@172.16.6.124:4000" --config ./changefeed.toml
+    tiup cdc cli changefeed --sink-url "mysql://root:@172.16.6.124:4000" --config ./changefeed.toml
     ```
 
     In this command, the parameters are as follows:
@@ -273,11 +273,11 @@ After setting up the environment, you can use the backup and restore functions o
 
 ## Step 4. Simulate a disaster in the upstream cluster
 
-Create a disastrous event in the upstream cluster while it is running. For example, you can terminate the tiup playground process by running Ctrl+C.
+Create a disastrous event in the upstream cluster while it is running. For example, you can terminate the tiup playground process by pressing Ctrl+C.
 
 ## Step 5. Use redo log to ensure data consistency
 
-Normally, TiCDC concurrently writes transactions to downstream to increase throughout. When a changefeed is interrupted unexpectedly, the downstream may not have the latest data as it is in the upstream. To address inconsistency, we run the following command to ensure that the downstream data is consistent with the upstream data.
+Normally, TiCDC concurrently writes transactions to downstream to increase throughout. When a changefeed is interrupted unexpectedly, the downstream may not have the latest data as it is in the upstream. To address inconsistency, run the following command to ensure that the downstream data is consistent with the upstream data.
 
 {{< copyable "shell-regular" >}}
 

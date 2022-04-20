@@ -8,9 +8,7 @@ summary: Learn how to migrate data from one TiDB cluster to another TiDB cluster
 This document describes how to migrate data from one TiDB cluster to another TiDB cluster. This function applies to the following scenarios:
 
 - Split databases: You can split databases when a TiDB cluster is excessively large, or you want to avoid impact between services of a cluster.
-
 - Relocate databases: Physically relocate databases, such as changing the data center.
-
 - Migrate data to a TiDB cluster of a newer version: Migrate data to a TiDB cluster of a newer version to satisfy data security and accuracy requirements.
 
 This document exemplifies the whole migration process and contains the following steps:
@@ -42,7 +40,7 @@ This document exemplifies the whole migration process and contains the following
 
 2. Initialize data.
 
-    By default, test databases are created in the newly deployed clusters. Therefore, you can use sysbench to generate test data and simulate data in real scenarios.
+    By default, test databases are created in the newly deployed clusters. Therefore, you can use [sysbench](https://github.com/akopytov/sysbench#linux) to generate test data and simulate data in real scenarios.
 
     {{< copyable "shell-regular" >}}
 
@@ -177,7 +175,7 @@ After setting up the environment, you can use the backup and restore functions o
 
 4. (Optional) Check data.
 
-    You can use [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md) to check data consistency between upstream and downstream data at a certain time. The preceding `BACKUP` output shows that the upstream cluster finishes backup at 431434047157698561. The preceding `RESTORE` output shows that the downstream finishes restoration at 431434141450371074.
+    You can use [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md) to check data consistency between upstream and downstream at a certain time. The preceding `BACKUP` output shows that the upstream cluster finishes backup at 431434047157698561. The preceding `RESTORE` output shows that the downstream finishes restoration at 431434141450371074.
 
     {{< copyable "shell-regular" >}}
 
@@ -217,7 +215,7 @@ After setting up the environment, you can use the backup and restore functions o
 
 1. Deploy TiCDC.
 
-    After finishing full data migration, deploy and configure a TiCDC to replicate incremental data. In production environments, deploy TiCDC as instructed in [Deploy TiCDC](/ticdc/deploy-ticdc.md). In this document, a TiCDC node has been started upon the creation of the test clusters. Therefore, we skip the step of deploying TiCDC and proceed with changefeed configuration.
+    After finishing full data migration, deploy and configure a TiCDC to replicate incremental data. In production environments, deploy TiCDC as instructed in [Deploy TiCDC](/ticdc/deploy-ticdc.md). In this document, a TiCDC node has been started upon the creation of the test clusters. Therefore, you can skip the step of deploying TiCDC and proceed with changefeed configuration.
 
 2. Create a changefeed.
 
@@ -256,7 +254,7 @@ After setting up the environment, you can use the backup and restore functions o
     1 row in set (0.00 sec)
     ```
 
-## Step 4. Switch services
+## Step 4. Switch services to the new TiDB cluster.
 
 After creating a changefeed, data written to the upstream cluster is replicated to the downstream cluster with low latency. You can migrate read stream to the downstream cluster gradually. Observe a period. If the downstream cluster is stable, you can switch write stream to the downstream cluster as well, which may include three steps:
 
