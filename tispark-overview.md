@@ -53,6 +53,8 @@ This section describes the configuration of:
 
 See also [TiSpark Deployment Topology](/tispark-deployment-topology.md) for more details about how to deploy TiSpark using TiUP.
 
+## Recommended configuration
+
 ### Configuration of independent deployment of TiKV and TiSpark
 
 For independent deployment of TiKV and TiSpark, it is recommended to refer to the following recommendations:
@@ -116,6 +118,10 @@ Running TiSpark on an existing Spark cluster does not require a reboot of the cl
 ```sh
 spark-shell --jars $TISPARK_FOLDER/tispark-${name_with_version}.jar
 ```
+
+### Deploy TiSpark without the Spark cluster
+
+If you do not have a Spark cluster, we recommend using the standalone mode. For more information, see [Spark Standalone](https://spark.apache.org/docs/latest/spark-standalone.html). If you encounter any problem, see its [official website](https://spark.apache.org/docs/latest/spark-standalone.html). And you are welcome to [file an issue](https://github.com/pingcap/tispark/issues/new) on our GitHub.
 
 ## Using Spark Shell and Spark SQL
 
