@@ -74,28 +74,6 @@ It is recommended to provision at least 8 to 16 cores on per machine for Spark. 
 
 To co-deploy TiKV and TiSpark, add TiSpark required resources to the TiKV reserved resources, and allocate 25% of the memory for the system.
 
-### Deploy TiSpark with a standalone Spark cluster
-
-For more information, see the [official configuration](https://spark.apache.org/docs/latest/spark-standalone.html) on the Spark website.
-
-You are advised to use a standalone Spark cluster. To install Spark Standalone mode, you can simply place a compiled version of Spark on each node on the cluster. If you encounter any problem, see its [official website](https://spark.apache.org/docs/latest/spark-standalone.html). And you are welcome to [file an issue](https://github.com/pingcap/tispark/issues/new) on our GitHub.
-
-#### Download and install
-
-You can download Spark 2.x from the [Apache Spark Archive](https://archive.apache.org/dist/spark/).
-
-For the Standalone mode without Hadoop support, use Spark **2.4.x** and any version of the pre-build binaries *with* Hadoop dependencies, for example `spark-2.4.8-bin-hadoop2.7.tgz`. If you need to use the Hadoop cluster, choose the corresponding Hadoop version. You can also choose to build from the [source code](https://spark.apache.org/docs/latest/building-spark.html) to match the previous version of the official Hadoop 2.x.
-
-Example:
-
-```
-wget https://archive.apache.org/dist/spark/spark-2.4.8/spark-2.4.8-bin-hadoop2.7.tgz
-tar zxf spark-2.4.8-bin-hadoop2.7.tgz
-mv spark-2.4.8-bin-hadoop2.7 spark
-export SPARKPATH=~/spark # Also add this to your ~/.bashrc
-cd spark
-```
-
 ## Deploy the TiSpark cluster
 
 Download TiSpark's jar package [here](https://github.com/pingcap/tispark/releases) and place it in the `$SPARKPATH/jars` folder.
@@ -129,29 +107,6 @@ For example, when you have multiple PD servers on `10.16.20.1,10.16.20.2,10.16.2
 > **Note:**
 >
 > If TiSpark could not communicate properly, please check your firewall configuration. You can adjust the firewall rules or disable it on your need.
-
-### Start a Master node
-
-Execute the following command on the selected Spark Master node:
-
-```sh
-cd $SPARKPATH
-./sbin/start-master.sh
-```
-
-After the above step is completed, a log file will be printed on the screen. Check the log file to confirm whether the Spark-Master is started successfully. You can open the <http://${spark-master-hostname}:8080> to view the cluster information (if you does not change the Spark-Master default port number). When you start Spark-Worker, you can also use this panel to confirm whether the Worker is joined to the cluster.
-
-### Start a Worker node
-
-Similarly, you can start a Spark-Worker node with the following command:
-
-```sh
-./sbin/start-slave.sh spark://${spark-master-hostname}:7077
-```
-
-Note that if you run the master node and worker node on the same host, you cannot use `127.0.0.1` or `localhost` because the master process only listens to the external interface by default.
-
-After the command returns, you can see if the Worker node is joined to the Spark cluster correctly from the panel as well. Repeat the above command at all Worker nodes. After all Workers are connected to the master, you have a Standalone mode Spark cluster.
 
 ### Deploy TiSpark on an existing Spark cluster
 
