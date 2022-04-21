@@ -38,7 +38,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
     curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
     ```
 
-    Verify that TiUP has installed successfully by checking the output in the terminal or shell window for the following message:
+    If the following message is displayed, you have installed TiUP successfully:
 
     ```log
     Successfully set mirror to https://tiup-mirrors.pingcap.com
@@ -52,7 +52,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
     ===============================================
     ```
 
-    Please pay attention to the Shell profile path above. After installation, this file has been modified to add tiup to PATH. You can open a new terminal or follow the next step to declare the global environment variables of the TiUP.
+    Note the Shell profile path in the output above. You need to use the path in the next step.
 
 2. Declare the global environment variable:
 
@@ -159,7 +159,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
     curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
     ```
 
-    Verify that TiUP has installed successfully by checking the output in the terminal of shell window for the following message:
+    If the following message is displayed, you have installed TiUP successfully:
 
     ```log
     Successfully set mirror to https://tiup-mirrors.pingcap.com
@@ -173,7 +173,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
     ===============================================
     ```
 
-    Please pay attention to the Shell profile path above. After installation, this file has been modified to add tiup to PATH. You can open a new terminal or follow the next step to declare the global environment variables of the TiUP.
+    Note the Shell profile path in the output above. You need to use the path in the next step.
 
 2. Declare the global environment variable:
 
