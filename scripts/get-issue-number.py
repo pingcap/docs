@@ -34,16 +34,22 @@ from tempfile import mkstemp
 from shutil import move
 from os import remove
 
-def get_issue_link(pr_url):
-
+def get_issue_link(repo, pr_num):
+    pr_url = 'https://api.github.com/repos/{}/issues/{}'.format(repo, pr_num)
     response = requests.get(pr_url).json()
     body = response.get("body")
     if body:
-        match = re.search(r'(?:(?:Issue Number)|(?:fix)|(?:bug)|(?:cc)|(?:ref)).*?(https?://(?:www\.)?github\.com/.*?/issues/(\d+))', body)
-        if match:
-            issue_url = match.group(1)
-            issue_num = match.group(2)
+        match_link = re.search(r'(?:(?:Issue Number)|(?:fix)|(?:bug)|(?:cc)|(?:ref)|(?:close)).*?(https?://(?:www\.)?github\.com/.*?/issues/(\d+))', body, re.I)
+        if match_link:
+            issue_url = match_link.group(1)
+            issue_num = match_link.group(2)
             return issue_url, issue_num
+        else:
+            match_num = re.search(r'(?:(?:Issue Number)|(?:fix)|(?:bug)|(?:cc)|(?:ref)|(?:close)).*?#(\d+)', body, re.I)
+            if match_num:
+                issue_num = match_num.group(1)
+                issue_url = 'https://github.com/{}/issues/{}'.format(repo, issue_num)
+                return issue_url, issue_num
     return None, None
 
 def change_pr_to_issue(filename):
@@ -65,8 +71,7 @@ def change_pr_to_issue(filename):
                     if matchObj:
                         repo = matchObj.group(2)
                         pr_num = matchObj.group(3)
-                        pr_api = 'https://api.github.com/repos/{}/issues/{}'.format(repo, pr_num)
-                        issue_url, issue_num = get_issue_link(pr_api)
+                        issue_url, issue_num = get_issue_link(repo, pr_num)
 
                         # 判断有记录 issue link 的在原文件中替换
                         if issue_url and issue_num:
