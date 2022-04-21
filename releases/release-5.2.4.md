@@ -67,7 +67,8 @@ TiDB version: 5.2.4
         - (dup: release-5.4.0.md > Improvements> Tools> TiCDC)- Reduce the count of "EventFeed retry rate limited" logs [#4006](https://github.com/pingcap/tiflow/issues/4006)
         - (dup: release-5.3.1.md > Improvements> Tools> TiCDC)- Set the default value of `max-message-bytes` to 10M [#4041](https://github.com/pingcap/tiflow/issues/4041)
         - (dup: release-5.3.1.md > Improvements> Tools> TiCDC)- Add more Promethous and Grafana monitoring metrics and alerts, including `no owner alert`, `mounter row`, `table sink total row`, and `buffer sink total row` [#4054](https://github.com/pingcap/tiflow/issues/4054) [#1606](https://github.com/pingcap/tiflow/issues/1606)
-
+        - metrics: support multi-k8s in grafana dashboards [#4665](https://github.com/pingcap/tiflow/issues/4665)
+        - Show changefeed checkepoint catch-up ETA in metrics. [#3311](https://github.com/pingcap/tiflow/pull/3311)
     + Dumpling
 
         -
@@ -103,6 +104,14 @@ TiDB version: 5.2.4
     - (dup: release-5.1.4.md > Bug fixes> TiDB)- Fix the wrong result that might occur when performing `JOIN` on `ENUM` type columns [#27831](https://github.com/pingcap/tidb/issues/27831)
     - (dup: release-5.0.6.md > Bug fixes> TiDB)- Fix the panic when using the `CASE WHEN` function on the `ENUM` data type [#29357](https://github.com/pingcap/tidb/issues/29357)
     - (dup: release-5.0.6.md > Bug fixes> TiDB)- Fix wrong results of the `microsecond` function in vectorized expressions [#29244](https://github.com/pingcap/tidb/issues/29244)
+    - Fix the issue that Window function should return error but cause TiDB to crash [#30326](https://github.com/pingcap/tidb/issues/30326)
+    - Fix the issue that the Merge Join Executor would get the wrong result in special cases [#33042](https://github.com/pingcap/tidb/issues/33042)
+    - Fix the issue that TiDB gets the wrong result when the correlated subquery output constant  [#32089](https://github.com/pingcap/tidb/issues/32089)
+    - FIx the issue that TiDB write wrong data caused by the wrong encoding of ENUM/SET column [#32302](https://github.com/pingcap/tidb/issues/32302)
+    - Fix the issue that the MAX/MIN function on the ENUM/SET column returns the wrong result when TiDB enables new_collation [#31638](https://github.com/pingcap/tidb/issues/31638)
+    - Fix the issue that IndexHashJoin executor doesn't exit successfully [#31062](https://github.com/pingcap/tidb/issues/31062)
+    - Fix the issue that TiDB may read wrong data when the table has virtual columns [#30965](https://github.com/pingcap/tidb/issues/30965)
+    - Fix the issue that the setting of the log level doesn't work for slow query log [#30309](https://github.com/pingcap/tidb/issues/30309)
 
 + TiKV
 
@@ -134,12 +143,28 @@ TiDB version: 5.2.4
 
 + TiFlash
 
-    - (dup: release-6.0.0-dmr.md > Bug fixes> TiFlash)- Fix a bug that MPP tasks might leak threads forever [#4238](https://github.com/pingcap/tiflash/issues/4238)
+    - (dup: release-6.0.0-dmr.md > Bug fixes> TiFlash)-  Fix a bug that MPP tasks might leak threads forever [#4238](https://github.com/pingcap/tiflash/issues/4238)
     - (dup: release-6.0.0-dmr.md > Bug fixes> TiFlash)- Fix the issue that the result of `IN` is incorrect in multi-value expressions [#4016](https://github.com/pingcap/tiflash/issues/4016)
-    - (dup: release-6.0.0-dmr.md > Bug fixes> TiFlash)- Fix the issue that casting `INI` to `DECIMAL` might cause overflow [#3920](https://github.com/pingcap/tiflash/issues/3920)
     - (dup: release-6.0.0-dmr.md > Bug fixes> TiFlash)- Fix the issue that the date format identifies `'\n'` as an invalid separator [#4036](https://github.com/pingcap/tiflash/issues/4036)
     - (dup: release-6.0.0-dmr.md > Bug fixes> TiFlash)- Fix the potential query error after adding columns under heavy read workload [#3967](https://github.com/pingcap/tiflash/issues/3967)
+    - Fix the bug that invalid storage dir configurations lead to unexpected behavior [#4093](https://github.com/pingcap/tiflash/issues/4093)
+    - Fix the bug that some exception is not handled properly [#4101](https://github.com/pingcap/tiflash/issues/4101)
+    - Fix the bug that function `STR_TO_DATE()` incorrectly handles leading zeros when parsing microseconds [#3557](https://github.com/pingcap/tiflash/issues/3557)
+    - (dup: release-6.0.0-dmr.md > Bug fixes> TiFlash)- Fix the issue that casting `INT` to `DECIMAL` might cause overflow [#3920](https://github.com/pingcap/tiflash/issues/3920)
     - (dup: release-6.0.0-dmr.md > Bug fixes> TiFlash)- Fix the wrong result that occurs when casting `DATETIME` to `DECIMAL` [#4151](https://github.com/pingcap/tiflash/issues/4151)
+    - Fix the wrong result that occurs when casting `FLOAT` to `DECIMAL` when an overflow happens [#3998](https://github.com/pingcap/tiflash/issues/3998)
+    - Fix the issue that `CastStringAsReal` behavior is inconsistent in TiFlash and in TiDB/TiKV [#3475](https://github.com/pingcap/tiflash/issues/3475)
+    - Fix the issue that `CastStringAsDecimal` behavior is inconsistent in TiFlash and in TiDB/TiKV [#3619](https://github.com/pingcap/tiflash/issues/3619)
+    - Fix the issue that TiFlash might return the `EstablishMPPConnection` error after it is restarted [#3615](https://github.com/pingcap/tiflash/issues/3615)
+    - Fix the issue that obsolete data cannot be reclaimed after setting the tiflash replica to 0 [#3659](https://github.com/pingcap/tiflash/issues/3659)
+    - Fix the potential data inconsistency caused by widening the primary key column when the primary key is handle [#3569](https://github.com/pingcap/tiflash/issues/3569)
+    - Fix the possible parsing errors when an SQL statement contains extremely long nested expressions [#3354](https://github.com/pingcap/tiflash/issues/3354)
+    - Fix the possible wrong result that queries with the `where <string>` clause [#3447](https://github.com/pingcap/tiflash/issues/3447)
+    - Fix the possible wrong result when new collation is enabled [#3388](https://github.com/pingcap/tiflash/issues/3388), [#3391](https://github.com/pingcap/tiflash/issues/3391)
+    - Fix the panic issue that occurs when TLS is enabled [#4196](https://github.com/pingcap/tiflash/issues/4196)
+    - Fix the panic issue that occurs when the memory limit is enabled [#3902](https://github.com/pingcap/tiflash/issues/3902)
+    - Fix the panic issue that occurs when an MPP query is stopped [#3401](https://github.com/pingcap/tiflash/issues/3401)
+    - Fix the unexpected error of `Unexpected type of column: Nullable(Nothing)` [#3351](https://github.com/pingcap/tiflash/issues/3351)
 
 + Tools
 
@@ -178,7 +203,11 @@ TiDB version: 5.2.4
         - (dup: release-5.3.1.md > Bug fixes> Tools> TiCDC)- Fix the negative value error in the changefeed checkpoint lag [#3010](https://github.com/pingcap/tiflow/issues/3010)
         - (dup: release-5.4.0.md > Bug fixes> Tools> TiCDC)- Fix the OOM issue in the container environment [#1798](https://github.com/pingcap/tiflow/issues/1798)
         - (dup: release-4.0.16.md > Bug fixes> Tools> TiCDC)- Fix the memory leak issue after processing DDLs [#3174](https://github.com/pingcap/tiflow/issues/3174)
-
+        - Fix chengefeed getting stuck when tables are repeatedly scheduled in the same node [#4464](https://github.com/pingcap/tiflow/issues/4464)
+       - Fix a bug that openapi may be stuck when pd is abnormal [#4778](https://github.com/pingcap/tiflow/issues/4778)
+       - Fix stale metrics caused by owner changes. [#4774](https://github.com/pingcap/tiflow/issues/4774)
+       - Fix stability problem in workerpool, which is used by Unified Sorter. [#4447](https://github.com/pingcap/tiflow/issues/4447)
+       - Fix kv client cached region metric could be negative. [#4300](https://github.com/pingcap/tiflow/issues/4300) 
 
     + Dumpling
 
@@ -206,54 +235,25 @@ TiDB version: 5.2.4
 
 + TiKV/TiKV
 
-    - fix tikv panic and peer unexpected destroy due to fake merge target [#12232](https://github.com/tikv/tikv/issues/12232)
-    - fix panic when target peer is replaced with an destroyed uninitialized peer during merge [#12048](https://github.com/tikv/tikv/issues/12048)
+## Bug fixes
 
-+ PingCAP/TiFlash
+    - Fix TiKV panic and peer unexpectedly destroyed due to fake merge target [#12232](https://github.com/tikv/tikv/issues/12232)
+    - Fix panic when target peer is replaced with a destroyed uninitialized peer during merge [#12048](https://github.com/tikv/tikv/issues/12048)
+    - Fix panic when applying snapshot is aborted [#11618](https://github.com/tikv/tikv/issues/11618)
+    - Fix the issue that the average latency of the by-instance gRPC requests is inaccurate in TiKV metrics [#11299](https://github.com/tikv/tikv/issues/11299)
+    - Fix the panic issue caused by deleting snapshot files when the peer status is `Applying` [#11746](https://github.com/tikv/tikv/issues/11746)
+    - Fix a bug that TiKV cannot delete a range of data (`unsafe_destroy_range` cannot be executed) when the GC worker is busy [#11903](https://github.com/tikv/tikv/issues/11903)
+    - Fix the issue that deleting an uninitialized replica might cause an old replica to be recreated [#10533](https://github.com/tikv/tikv/issues/10533)
+    - Fix the issue that TiKV cannot detect the memory lock when TiKV performs a reverse table scan [#11440](https://github.com/tikv/tikv/issues/11440)
+    - Fix the deadlock issue that happens occasionally when coroutines run too fast [#11549](https://github.com/tikv/tikv/issues/11549)
+    - Fix the issue that destroying a peer might cause high latency [#10210](https://github.com/tikv/tikv/issues/10210)
+    
+## Improvements
 
-    - Fix the potential crash issue that occurs when TLS is enabled [#4196](https://github.com/pingcap/tiflash/issues/4196)
-    - Fix the problem that empty segments cannot be merged after gc [#4511](https://github.com/pingcap/tiflash/issues/4511)
-    - Fix wrong result of cast(float as decimal) when overflow happens [#3998](https://github.com/pingcap/tiflash/issues/3998)
-    - Fix the bug that invalid storage dir configurations lead to unexpected behavior [#4093](https://github.com/pingcap/tiflash/issues/4093)
-    - mpp task handle pingcap exception. [#4101](https://github.com/pingcap/tiflash/issues/4101)
-    - Fix str_to_date() function incorrectly handles leading zeros when parsing Microseconds [#3557](https://github.com/pingcap/tiflash/issues/3557)
-    - (dup: release-6.0.0-dmr.md > Bug fixes> TiFlash)- Fix the TiFlash panic issue that occurs when the memory limit is enabled [#3902](https://github.com/pingcap/tiflash/issues/3902)
-    - Fix the bug that castStringAsReal has different behaivor between tiflash and tikv/tidb. [#3475](https://github.com/pingcap/tiflash/issues/3475)
-    - Fix random `EstablishMPPConnection` fail after TiFlash server restart. [#3615](https://github.com/pingcap/tiflash/issues/3615)
-    - Fix the problem that obsolete data cannot be reclaimed after set tiflash replica to 0 [#3659](https://github.com/pingcap/tiflash/issues/3659)
-    - Increase the max supported depth of expression/plan tree in dag request from 100 to 200. [#3354](https://github.com/pingcap/tiflash/issues/3354)
-    - Fixed the inconsistent behavior of CastStringAsDecimal between tiflash and tidb/tikv. [#3619](https://github.com/pingcap/tiflash/issues/3619)
-    - Fix potential data inconsistency after altering a primary key column to a larger int data type [#3569](https://github.com/pingcap/tiflash/issues/3569)
-    - Fix the bug that results of `where <string>` is wrong because it will be converted to int type. [#3447](https://github.com/pingcap/tiflash/issues/3447)
-    - Fix tiflash randomly crash when a mpp query is killed. [#3401](https://github.com/pingcap/tiflash/issues/3401)
-    - Fix that coalesce mistakenly removed nullable flag from the result column. [#3388](https://github.com/pingcap/tiflash/issues/3388)
-    - Fix bug that collation does not work for nullable type [#3391](https://github.com/pingcap/tiflash/issues/3391)
-    - Fix the issue of unexpected error that `Unexpected type of column: Nullable(Nothing)` [#3351](https://github.com/pingcap/tiflash/issues/3351)
+    - Update the proc filesystem (procfs) to v0.12.0 [#11702](https://github.com/tikv/tikv/issues/11702)
+    - Speed up the Garbage Collection (GC) process by increasing the write batch size when performing GC to Raft logs [#11404](https://github.com/tikv/tikv/issues/11404)
+    - Increase the speed of inserting SST files by moving the verification process to the `Import` thread pool from the `Apply` thread pool [#11239](https://github.com/tikv/tikv/issues/11239)
+
 
 + PD
 
-    - None. [#4808](https://github.com/tikv/pd/issues/4808)
-
-+ Tools
-
-    + PingCAP/TiCDC
-
-        - Fix chengefeed getting stuck when tables are repeatedly scheduled in the same node [#4464](https://github.com/pingcap/tiflow/issues/4464)
-        - `Fix a bug that openapi may be stuck when pd is abnormal` [#4778](https://github.com/pingcap/tiflow/issues/4778)
-        - Fix stale metrics data when TiCDC owner switches. [#4774](https://github.com/pingcap/tiflow/issues/4774)
-        - `None`. [#4858](https://github.com/pingcap/tiflow/issues/4858)
-        - Fix stale metrics caused by owner changes. [#4774](https://github.com/pingcap/tiflow/issues/4774)
-        - metrics: support multi-k8s in grafana dashboards [#4665](https://github.com/pingcap/tiflow/issues/4665)
-        - Fix stability problem in workerpool, which is used by Unified Sorter. [#4447](https://github.com/pingcap/tiflow/issues/4447)
-        - `None`. [#4675](https://github.com/pingcap/tiflow/issues/4675)
-        - `None`. [#4607](https://github.com/pingcap/tiflow/issues/4607)
-        - `None`. [#4588](https://github.com/pingcap/tiflow/issues/4588)
-        - `None`. [#4561](https://github.com/pingcap/tiflow/issues/4561)
-        - `None`. [#4128](https://github.com/pingcap/tiflow/issues/4128)
-        - `None`. [#4135](https://github.com/pingcap/tiflow/issues/4135)
-        - Fix kv client cached region metric could be negative. [#4295](https://github.com/pingcap/tiflow/pull/4295)
-        - `None` [#4266](https://github.com/pingcap/tiflow/issues/4266)
-        - `None`. [#4223](https://github.com/pingcap/tiflow/issues/4223)
-        - Please add a release note. If you don't think this PR needs a release note then fill it with `None`. [#3867](https://github.com/pingcap/tiflow/pull/3867)
-        - Show changefeed checkepoint catch-up ETA in metrics. [#3311](https://github.com/pingcap/tiflow/pull/3311)
-        - `None`. [#4089](https://github.com/pingcap/tiflow/issues/4089)
