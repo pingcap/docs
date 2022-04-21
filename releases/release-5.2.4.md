@@ -78,6 +78,9 @@ TiDB version: 5.2.4
     - Fix the issue that IndexHashJoin executor doesn't exit successfully [#31062](https://github.com/pingcap/tidb/issues/31062)
     - Fix the issue that TiDB may read wrong data when the table has virtual columns [#30965](https://github.com/pingcap/tidb/issues/30965)
     - Fix the issue that the setting of the log level doesn't work for slow query log [#30309](https://github.com/pingcap/tidb/issues/30309)
+    - Fix the issue that the partitioned table cannot fully use the index to seek data in some cases [#33966](https://github.com/pingcap/tidb/issues/33966)
+    - Fix the issue that the background HTTP service of TiDB may not exit successfully and make the cluster in the abnormal state [#30571](https://github.com/pingcap/tidb/issues/30571)
+    - Fix the issue that TiDB may wrongly output many authentication failed log [#29709](https://github.com/pingcap/tidb/issues/29709)
 
 + TiKV
 
