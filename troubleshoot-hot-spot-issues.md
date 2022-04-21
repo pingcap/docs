@@ -177,4 +177,4 @@ For more details, see [Coprocessor Cache](/coprocessor-cache.md).
 **See also:**
 
 - [Highly Concurrent Write Best Practices](/best-practices/high-concurrency-best-practices.md)
-- [Split Region](/sql-statements/sql-statement-split-region.md)
+- [Split Region](/common/sql-statements/sql-statement-split-region.md)

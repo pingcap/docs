@@ -248,5 +248,5 @@ That is to say, when a cached table is backed up and restored, it becomes a norm
 
 ## See also
 
-* [ALTER TABLE](/sql-statements/sql-statement-alter-table.md)
+* [ALTER TABLE](/common/sql-statements/sql-statement-alter-table.md)
 * [System Variables](/system-variables.md)

@@ -20,7 +20,7 @@ The common variables include [`autocommit`](#autocommit), [`tidb_disable_txn_aut
 
 ### Starting a transaction
 
-The statements [`BEGIN`](/sql-statements/sql-statement-begin.md) and [`START TRANSACTION`](/sql-statements/sql-statement-start-transaction.md) can be used interchangeably to explicitly start a new transaction.
+The statements [`BEGIN`](/common/sql-statements/sql-statement-begin.md) and [`START TRANSACTION`](/common/sql-statements/sql-statement-start-transaction.md) can be used interchangeably to explicitly start a new transaction.
 
 Syntax:
 
@@ -56,7 +56,7 @@ If the current session is in the process of a transaction when one of these stat
 
 ### Committing a transaction
 
-The statement [`COMMIT`](/sql-statements/sql-statement-commit.md) instructs TiDB to apply all changes made in the current transaction.
+The statement [`COMMIT`](/common/sql-statements/sql-statement-commit.md) instructs TiDB to apply all changes made in the current transaction.
 
 Syntax:
 
@@ -72,7 +72,7 @@ COMMIT;
 
 ### Rolling back a transaction
 
-The statement [`ROLLBACK`](/sql-statements/sql-statement-rollback.md) rolls back and cancels all changes in the current transaction.
+The statement [`ROLLBACK`](/common/sql-statements/sql-statement-rollback.md) rolls back and cancels all changes in the current transaction.
 
 Syntax:
 
@@ -158,7 +158,7 @@ mysql> SELECT * FROM t2;
 Empty set (0.00 sec)
 ```
 
-The [`autocommit`](/system-variables.md#autocommit) system variable [can be changed](/sql-statements/sql-statement-set-variable.md) on either a global or session basis.
+The [`autocommit`](/system-variables.md#autocommit) system variable [can be changed](/common/sql-statements/sql-statement-set-variable.md) on either a global or session basis.
 
 For example:
 

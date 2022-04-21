@@ -95,7 +95,7 @@ To enable List COLUMNS partitioning, set the session variable [`tidb_enable_list
 
 #### Invisible indexes
 
-[User document](/sql-statements/sql-statement-alter-index.md), [#9246](https://github.com/pingcap/tidb/issues/9246)
+[User document](/common/sql-statements/sql-statement-alter-index.md), [#9246](https://github.com/pingcap/tidb/issues/9246)
 
 When you tune performance or select optimal indexes, you can set an index to be `Visible` or `Invisible` by using SQL statements. This setting can avoid performing resource-consuming operations, such as `DROP INDEX` and `ADD INDEX`.
 
@@ -399,7 +399,7 @@ The Kafka connectors protocol provided by the Confluent platform is widely used 
 
 ## Diagnostics
 
-[User document](/sql-statements/sql-statement-explain.md#explain)
+[User document](/common/sql-statements/sql-statement-explain.md#explain)
 
 During the troubleshooting of SQL performance issues, detailed diagnostic information is needed to determine the causes of performance issues. Before TiDB 5.0, the information collected by the `EXPLAIN` statements was not detailed enough. The root causes of the issues can only be determined based on log information, monitoring information, or even on guess, which might be inefficient.
 

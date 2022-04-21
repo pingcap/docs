@@ -244,5 +244,5 @@ Currently, views in TiDB are subject to the following limitations:
 
 ## See also
 
-- [CREATE VIEW](/sql-statements/sql-statement-create-view.md)
-- [DROP VIEW](/sql-statements/sql-statement-drop-view.md)
+- [CREATE VIEW](/common/sql-statements/sql-statement-create-view.md)
+- [DROP VIEW](/common/sql-statements/sql-statement-drop-view.md)

@@ -31,7 +31,7 @@ SELECT SLEEP(1);
 ANALYZE TABLE t1;
 ```
 
-From the output of [`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md), you can see that this table is split into multiple Regions:
+From the output of [`SHOW TABLE REGIONS`](/common/sql-statements/sql-statement-show-table-regions.md), you can see that this table is split into multiple Regions:
 
 {{< copyable "sql" >}}
 

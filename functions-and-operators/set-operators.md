@@ -5,7 +5,7 @@ summary: Learn the supported set operations in TiDB.
 
 # Set Operations
 
-TiDB supports three set operations using the UNION, EXCEPT, and INTERSECT operators. The smallest unit of a set is a [`SELECT` statement](/sql-statements/sql-statement-select.md).
+TiDB supports three set operations using the UNION, EXCEPT, and INTERSECT operators. The smallest unit of a set is a [`SELECT` statement](/common/sql-statements/sql-statement-select.md).
 
 ## UNION operator
 

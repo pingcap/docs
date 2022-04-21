@@ -38,7 +38,7 @@ Records: 2  Duplicates: 0  Warnings: 0
 3 rows in set (0.00 sec)
 ```
 
-`EXPLAIN` does not execute the actual query. [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) can be used to execute the query and show `EXPLAIN` information. This can be useful in diagnosing cases where the execution plan selected is suboptimal. For additional examples of using `EXPLAIN`, see the following documents:
+`EXPLAIN` does not execute the actual query. [`EXPLAIN ANALYZE`](/common/sql-statements/sql-statement-explain-analyze.md) can be used to execute the query and show `EXPLAIN` information. This can be useful in diagnosing cases where the execution plan selected is suboptimal. For additional examples of using `EXPLAIN`, see the following documents:
 
 * [Indexes](/explain-indexes.md)
 * [Joins](/explain-joins.md)

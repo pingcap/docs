@@ -24,7 +24,7 @@ Optimizer hints are case insensitive and specified within `/*+ ... */` comments 
 SELECT /*+ USE_INDEX(t1, idx1), HASH_AGG(), HASH_JOIN(t1) */ count(*) FROM t t1, t t2 WHERE t1.a = t2.b;
 ```
 
-How optimizer hints affect query execution plans can be observed in the output of [`EXPLAIN`](/sql-statements/sql-statement-explain.md) and [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md).
+How optimizer hints affect query execution plans can be observed in the output of [`EXPLAIN`](/common/sql-statements/sql-statement-explain.md) and [`EXPLAIN ANALYZE`](/common/sql-statements/sql-statement-explain-analyze.md).
 
 An incorrect or incomplete hint will not result in a statement error. This is because hints are intended to have only a _hint_ (suggestion) semantic to query execution. Similarly, TiDB will at most return a warning if a hint is not applicable.
 

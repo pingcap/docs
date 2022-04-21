@@ -145,7 +145,7 @@ If you are conducting a performance test, you can disable the feature of automat
 set @@tidb_enable_collect_execution_info=0;
 ```
 
-The returned result of the `Plan` field has roughly the same format with that of `EXPLAIN` or `EXPLAIN ANALYZE`. For more details of the execution plan, see [`EXPLAIN`](/sql-statements/sql-statement-explain.md) or [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md).
+The returned result of the `Plan` field has roughly the same format with that of `EXPLAIN` or `EXPLAIN ANALYZE`. For more details of the execution plan, see [`EXPLAIN`](/common/sql-statements/sql-statement-explain.md) or [`EXPLAIN ANALYZE`](/common/sql-statements/sql-statement-explain-analyze.md).
 
 For more information, see [TiDB specific variables and syntax](/system-variables.md).
 

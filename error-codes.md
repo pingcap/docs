@@ -390,13 +390,13 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
     Unsupported options are used when creating Sequence.
 
-    See [Sequence documentation](/sql-statements/sql-statement-create-sequence.md#parameters) to find the list of the supported options.
+    See [Sequence documentation](/common/sql-statements/sql-statement-create-sequence.md#parameters) to find the list of the supported options.
 
 * Error Number: 8228
 
     Unsupported types are specified when using `setval` on Sequence.
 
-    See [Sequence documentation](/sql-statements/sql-statement-create-sequence.md#examples) to find the example of the function.
+    See [Sequence documentation](/common/sql-statements/sql-statement-create-sequence.md#examples) to find the example of the function.
 
 * Error Number: 8229
 
