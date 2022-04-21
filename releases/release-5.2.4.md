@@ -13,8 +13,6 @@ TiDB version: 5.2.4
 
 + TiDB
 
-    - Fix the issue that system variable `max_allowed_packet` does not work. [#31422](https://github.com/pingcap/tidb/issues/31422)
-    - Fix an issue that REPLACE statement changing other rows when the auto ID is out of range [#29483](https://github.com/pingcap/tidb/issues/29483)
     - (dup: release-5.1.4.md > Compatibility changes> TiDB)- Change the default value of the system variable [`tidb_analyze_version`](/system-variables.md#tidb_analyze_version-new-in-v510) from `2` to `1` [#31748](https://github.com/pingcap/tidb/issues/31748)
 
 + Tools
@@ -81,6 +79,8 @@ TiDB version: 5.2.4
     - Fix the issue that the partitioned table cannot fully use the index to seek data in some cases [#33966](https://github.com/pingcap/tidb/issues/33966)
     - Fix the issue that the background HTTP service of TiDB may not exit successfully and make the cluster in the abnormal state [#30571](https://github.com/pingcap/tidb/issues/30571)
     - Fix the issue that TiDB may wrongly output many authentication failed log [#29709](https://github.com/pingcap/tidb/issues/29709)
+    - Fix the issue that system variable `max_allowed_packet` does not work [#31422](https://github.com/pingcap/tidb/issues/31422)
+    - Fix an issue that REPLACE statement changes other rows when the auto ID is out of range [#29483](https://github.com/pingcap/tidb/issues/29483)
 
 + TiKV
 
