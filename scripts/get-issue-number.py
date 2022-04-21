@@ -77,7 +77,7 @@ def change_pr_to_issue(filename):
     remove(source_file_path)
     move(target_file_path, source_file_path)
 
-# get_issue_link("https://api.github.com/repos/pingcap/tidb/pull/22924")
+# get_issue_link("https://api.github.com/repos/pingcap/tidb/issues/34111")
 
 # change_pr_to_issue('./releases/release-4.0.13.md')
 
