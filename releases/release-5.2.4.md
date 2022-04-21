@@ -106,9 +106,9 @@ TiDB version: 5.2.4
     - (dup: release-5.3.1.md > Bug fixes> TiKV)- Fix the issue that TiKV cannot detect the memory lock when TiKV performs a reverse table scan [#11440](https://github.com/tikv/tikv/issues/11440)
     - (dup: release-5.3.1.md > Bug fixes> TiKV)- Fix the deadlock issue that happens occasionally when coroutines run too fast [#11549](https://github.com/tikv/tikv/issues/11549)
     - (dup: release-6.0.0-dmr.md > Bug fixes> TiKV)- Fix the issue that destroying a peer might cause high latency [#10210](https://github.com/tikv/tikv/issues/10210)
-    - Fix TiKV panic and peer unexpectedly destroyed due to fake merge target [#12232](https://github.com/tikv/tikv/issues/12232)
-    - Fix panic when target peer is replaced with a destroyed uninitialized peer during merge [#12048](https://github.com/tikv/tikv/issues/12048)
-    - Fix panic when applying snapshot is aborted [#11618](https://github.com/tikv/tikv/issues/11618)
+    - Fix the issue that TiKV panics and destroys peers unexpectedly because the target Region to be merged is faked [#12232](https://github.com/tikv/tikv/issues/12232)
+    - Fix the TiKV panic issue that occurs when the target peer is  replaced with a destroyed uninitialized peer when merging a Region [#12048](https://github.com/tikv/tikv/issues/12048)
+    - Fix the TiKV panic  issue that occurs when applying snapshot is aborted [#11618](https://github.com/tikv/tikv/issues/11618)
 
 + PD
 
