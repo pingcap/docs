@@ -11,7 +11,7 @@ summary: Use TiSpark to provide an HTAP solution to serve as a one-stop solution
 
 [TiFlash](/tiflash/tiflash-overview.md) is another tool that enables HTAP. Both TiFlash and TiSpark allow the use of multiple hosts to execute OLAP queries on OLTP data. TiFlash stores data in a columnar format, which allows more efficient analytical queries. TiFlash and TiSpark can be used together.
 
-TiSpark depends on the TiKV cluster and the PD cluster. You also need to set up a Spark cluster. This document provides a brief introduction to how to setup and use TiSpark. It requires some basic knowledge of Apache Spark. For more information, see [Spark website](https://spark.apache.org/docs/latest/index.html).
+TiSpark depends on the TiKV cluster and the PD cluster. You also need to set up a Spark cluster. This document provides a brief introduction to how to setup and use TiSpark. It requires some basic knowledge of Apache Spark. For more information, see [Apache Spark website](https://spark.apache.org/docs/latest/index.html).
 
 Deeply integrating with Spark Catalyst Engine, TiSpark provides precise control on computing. This allows Spark to read data from TiKV efficiently. TiSpark also supports index seek, which enables high-speed point query.
 
@@ -24,13 +24,12 @@ You can use tools of the Spark ecosystem for data processing on TiDB:
 - TiSpark: Data analysis and ETLs
 - TiKV: Data retrieval
 - Scheduling system: Report generation
-- ... and more
 
 Also, TiSpark supports distributed writes to TiKV. Compared with writes to TiDB by using Spark and JDBC, distributed writes to TiKV can implement transactions (either all data are written successfully or all writes fail), and the writes are faster.
 
 > **Warning:**
 >
-> Because TiSpark accesses TiKV directly, the access control mechanisms used by TiDB Server are not applicable to TiSpark.
+> Because TiSpark accesses TiKV directly, the access control mechanisms used by TiDB Server are not applicable to TiSpark. Since TiSpark v2.5.0, TiSpark supports user authentication and authorization, for more information, see [Security](/tispark-overview.md#security).
 
 ## Environment setup
 
@@ -44,11 +43,11 @@ The following table lists the compatibility information of the supported TiSpark
 
 TiSpark runs in any Spark mode such as YARN, Mesos, and Standalone.
 
-See also [TiSpark Deployment Topology](/tispark-deployment-topology.md) for more details about how to deploy TiSpark using TiUP.
-
 ## Recommended configuration
 
 This section describes the recommended configuration of independent deployment of TiKV and TiSpark, independent deployment of Spark and TiSpark, and co-deployed TiKV and TiSpark.
+
+See also [TiSpark Deployment Topology](/tispark-deployment-topology.md) for more details about how to deploy TiSpark using TiUP.
 
 ### Configuration of independent deployment of TiKV and TiSpark
 
@@ -60,13 +59,11 @@ For independent deployment of TiKV and TiSpark, it is recommended to refer to th
 
 ### Configuration of independent deployment of Spark and TiSpark
 
-See the [Spark official website](https://spark.apache.org/docs/latest/hardware-provisioning.html) for the detail hardware recommendations.
+See the [Spark official website](https://spark.apache.org/docs/latest/hardware-provisioning.html) for the detail hardware recommendations. The following is a short overview of TiSpark configuration:
 
-The following is a short overview of TiSpark configuration.
+- It is recommended to allocate 32G memory for Spark, and reserve at least 25% of the memory for the operating system and buffer cache.
 
-It is recommended to allocate 32G memory for Spark, and reserve at least 25% of the memory for the operating system and buffer cache.
-
-It is recommended to provision at least 8 to 16 cores on per machine for Spark. Initially, you can assign all the CPU cores to Spark.
+- It is recommended to provision at least 8 to 16 cores on per machine for Spark. Initially, you can assign all the CPU cores to Spark.
 
 ### Configuration of co-deployed TiKV and TiSpark
 
@@ -80,27 +77,31 @@ Download TiSpark's jar package [here](https://github.com/pingcap/tispark/release
 >
 > TiSpark v2.1.x and older versions have file names that look like `tispark-core-2.1.9-spark_2.4-jar-with-dependencies.jar`. Please check the [releases page on GitHub](https://github.com/pingcap/tispark/releases) for the exact file name for the version you want.
 
-```
+The following is a short example of how to install TiSpark v2.4.1:
+
+{{< copyable "shell-regular" >}}
+
+```shell
 wget https://github.com/pingcap/tispark/releases/download/v2.4.1/tispark-assembly-2.4.1.jar
 mv tispark-assembly-2.4.1.jar $SPARKPATH/jars/
 ```
 
-Copy the `spark-defaults.conf` from the template.
+Copy the `spark-defaults.conf` from the `spark-defaults.conf.template` file:
 
-```
+{{< copyable "shell-regular" >}}
+
+```shell
 cp conf/spark-defaults.conf.template conf/spark-defaults.conf
 ```
 
 In the `spark-defaults.conf` file, add the following lines:
 
-```sh
+```
 spark.tispark.pd.addresses $pd_host:$pd_port
 spark.sql.extensions org.apache.spark.sql.TiExtensions
 ```
 
-The `spark.tispark.pd.addresses` configuration allows you to put in multiple PD servers. Specify the port number for each of them.
-
-For example, when you have multiple PD servers on `10.16.20.1,10.16.20.2,10.16.20.3` with the port 2379, put it as `10.16.20.1:2379,10.16.20.2:2379,10.16.20.3:2379`.
+The `spark.tispark.pd.addresses` configuration allows you to put in multiple PD servers. Specify the port number for each of them. For example, when you have multiple PD servers on `10.16.20.1,10.16.20.2,10.16.20.3` with the port 2379, put it as `10.16.20.1:2379,10.16.20.2:2379,10.16.20.3:2379`.
 
 > **Note:**
 >
@@ -110,7 +111,9 @@ For example, when you have multiple PD servers on `10.16.20.1,10.16.20.2,10.16.2
 
 Running TiSpark on an existing Spark cluster does not require a reboot of the cluster. You can use Spark's `--jars` parameter to introduce TiSpark as a dependency:
 
-```sh
+{{< copyable "shell-regular" >}}
+
+```shell
 spark-shell --jars $TISPARK_FOLDER/tispark-${name_with_version}.jar
 ```
 
@@ -118,17 +121,21 @@ spark-shell --jars $TISPARK_FOLDER/tispark-${name_with_version}.jar
 
 If you do not have a Spark cluster, we recommend using the standalone mode. For more information, see [Spark Standalone](https://spark.apache.org/docs/latest/spark-standalone.html). If you encounter any problem, see [Spark official website](https://spark.apache.org/docs/latest/spark-standalone.html). And you are welcome to [file an issue](https://github.com/pingcap/tispark/issues/new) on our GitHub.
 
-## Using Spark Shell and Spark SQL
+## Use Spark Shell and Spark SQL
 
 Assume that you have successfully started the TiSpark cluster as described above. The following describes how to use Spark SQL for OLAP analysis on a table named `lineitem` in the `tpch` database.
 
-To generate the test data via a TiDB server available on 192.168.1.101:
+To generate the test data via a TiDB server available on `192.168.1.101`:
 
-```
+{{< copyable "shell-regular" >}}
+
+```shell
 tiup bench tpch prepare --host 192.168.1.101 --user root
 ```
 
 Assuming that your PD node is located at `192.168.1.100`, port `2379`, add the following command to `$SPARK_HOME/conf/spark-defaults.conf`:
+
+{{< copyable "" >}}
 
 ```
 spark.tispark.pd.addresses 192.168.1.100:2379
@@ -137,21 +144,24 @@ spark.sql.extensions org.apache.spark.sql.TiExtensions
 
 Start the Spark Shell:
 
-```
+{{< copyable "shell-regular" >}}
+
+```shell
 ./bin/spark-shell
 ```
 
-And then enter the following command in the Spark-Shell as in native Apache Spark:
+And then enter the following command in the Spark Shell as in native Apache Spark:
 
-```
+{{< copyable "" >}}
+
+```scala
 spark.sql("use tpch")
-
 spark.sql("select count(*) from lineitem").show
 ```
 
 The result is:
 
-```sql
+```
 +-------------+
 | Count (1) |
 +-------------+
@@ -161,44 +171,57 @@ The result is:
 
 Besides Spark Shell, there is also Spark SQL available. To use Spark SQL, run:
 
-```
+{{< copyable "shell-regular" >}}
+
+```shell
 ./bin/spark-sql
 ```
 
 You can run the same query:
 
+{{< copyable "" >}}
+
 ```scala
 use tpch;
-```
-
-```
-Time taken: 0.015 seconds
-```
-
-```scala
 select count(*) from lineitem;
 ```
+
+The result is:
 
 ```
 2000
 Time taken: 0.673 seconds, Fetched 1 row(s)
 ```
 
-## Using JDBC support with ThriftServer
+## Use JDBC support with ThriftServer
 
-You can use `spark-shell` or `spark-sql` without JDBC support. However, JDBC support is required for tools like `beeline`. JDBC support is provided by Thrift server.
+You can use Spark Shell or Spark SQL without JDBC support. However, JDBC support is required for tools like beeline. JDBC support is provided by Thrift server. To use Spark's Thrift server, run:
 
-To use Spark's Thrift server, run:
+{{< copyable "shell-regular" >}}
 
-```sh
+```shell
 ./sbin/start-thriftserver.sh
 ```
 
-To connect JDBC with Thrift server, you can use JDBC supported tools including beeline. For example, to use it with beeline:
+To connect JDBC with Thrift server, you can use JDBC supported tools including beeline.
 
-```sh
+For example, to use it with beeline:
+
+{{< copyable "shell-regular" >}}
+
+```shell
 ./bin/beeline jdbc:hive2://localhost:10000
+```
+
+If the following message is displayed, you have enabled beeline successfully.
+
+```
 Beeline version 1.2.2 by Apache Hive
+```
+
+Then, you can run the query command:
+
+```
 1: jdbc:hive2://localhost:10000> use testdb;
 +---------+--+
 | Result  |
@@ -217,11 +240,9 @@ select count(*) from account;
 
 ## Use TiSpark together with Hive
 
-You can use TiSpark together with Hive.
+You can use TiSpark together with Hive. Before starting Spark, you need to set the `HADOOP_CONF_DIR` environment variable to your Hadoop configuration folder and copy `hive-site.xml` to the `spark/conf` folder.
 
-Before starting Spark, you need to set the `HADOOP_CONF_DIR` environment variable to your Hadoop configuration folder and copy `hive-site.xml` to the `spark/conf` folder.
-
-```
+```scala
 val tisparkDF = spark.sql("select * from tispark_table").toDF
 tisparkDF.write.saveAsTable("hive_table") // save table to hive
 spark.sql("select * from hive_table a, tispark_table b where a.col1 = b.col1").show // join table across Hive and Tispark
@@ -333,7 +354,7 @@ For more information, see [Authorization and authentication through TiDB server]
 >
 > After enabling the authentication and authorization feature, TiSpark Spark SQL can only use TiDB as the data source, so switching to other data sources (such as Hive) makes tables invisible.
 
-## FAQ
+## TiSpark FAQ
 
 Q: What are the pros/cons of independent deployment as opposed to a shared resource with an existing Spark / Hadoop cluster?
 
