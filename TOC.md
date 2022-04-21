@@ -146,7 +146,7 @@
         - [Statistics](/statistics.md)
         - [Wrong Index Solution](/wrong-index-solution.md)
         - [Distinct Optimization](/agg-distinct-optimization.md)
-      - [Prepare Execution Plan Cache](/sql-prepare-plan-cache.md)
+      - [Prepare Execution Plan Cache](/sql-prepared-plan-cache.md)
     - Control Execution Plans
       - [Overview](/control-execution-plan.md)
       - [Optimizer Hints](/optimizer-hints.md)
@@ -304,6 +304,7 @@
       - [Use Binary](/dm/deploy-a-dm-cluster-using-binary.md)
       - [Use Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/dev/deploy-tidb-dm)
     - Tutorials
+      - [Create a Data Source](/dm/quick-start-create-source.md)
       - [Manage Data Sources](/dm/dm-manage-source.md)
       - [Configure Tasks](/dm/dm-task-configuration-guide.md)
       - [Table Routing](/dm/dm-key-features.md)
@@ -349,6 +350,7 @@
       - Architecture
         - [DM Architecture](/dm/dm-arch.md)
         - [DM-worker](/dm/dm-worker-intro.md)
+        - [Relay Log](/dm/relay-log.md)
       - Command Line
         - [DM-master & DM-worker](/dm/dm-command-line-flags.md)
       - Configuration Files
@@ -357,7 +359,9 @@
         - [Task Configurations](/dm/task-configuration-file-full.md)
         - [DM-master Configuration](/dm/dm-master-configuration-file.md)
         - [DM-worker Configuration](/dm/dm-worker-configuration-file.md)
+        - [Table Selector](/dm/table-selector.md)
       - [OpenAPI](/dm/dm-open-api.md)
+      - [Compatibility Catalog](/dm/dm-compatibility-catalog.md)
       - Secure
         - [Enable TLS for DM Connections](/dm/dm-enable-tls.md)
         - [Generate Self-signed Certificates](/dm/dm-generate-self-signed-certificates.md)
@@ -368,6 +372,8 @@
       - [Glossary](/dm/dm-glossary.md)
     - Example
       - [Migrate Data Using DM](/dm/migrate-data-using-dm.md)
+      - [Create a Data Migration Task](/dm/quick-start-create-task.md)
+      - [Best Practices of Data Migration in the Shard Merge Scenario](/dm/shard-merge-best-practices.md)
     - Troubleshoot
       - [FAQ](/dm/dm-faq.md)
       - [Handle Errors](/dm/dm-error-handling.md)
