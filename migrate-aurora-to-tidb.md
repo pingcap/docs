@@ -1,7 +1,7 @@
 ---
 title: Migrate Data from Amazon Aurora to TiDB
 summary: Learn how to migrate data from Amazon Aurora to TiDB using DB snapshot.
-aliases: ['/tidb/dev/migrate-from-aurora-using-lightning','/docs/dev/migrate-from-aurora-mysql-database/','/docs/dev/how-to/migrate/from-mysql-aurora/','/docs/dev/how-to/migrate/from-aurora/', '/tidb/dev/migrate-from-aurora-mysql-database/', 'tidb/dev/migrate-from-mysql-aurora/']
+aliases: ['/tidb/dev/migrate-from-aurora-using-lightning','/docs/dev/migrate-from-aurora-mysql-database/','/docs/dev/how-to/migrate/from-mysql-aurora/','/docs/dev/how-to/migrate/from-aurora/', '/tidb/dev/migrate-from-aurora-mysql-database/', '/tidb/dev/migrate-from-mysql-aurora/']
 ---
 
 # Migrate Data from Amazon Aurora to TiDB
@@ -105,7 +105,7 @@ pd-addr = "${ip}:${port}"     # The cluster PD address, e.g.: 172.16.31.3:2379. 
 # "tidb": The "tidb" backend is recommended to import data less than 1 TiB. During the import, the target TiDB cluster can provide service normally.
 backend = "local"
 
-# Set the temporary storage directory for the sorted Key-Value files. The directory must be empty, and the storage space must be enough to hold the largest single table in the data source. For better import performance, it is recommended to use a directory different from `data-source-dir` and use flash storage, which can use I/O exclusively.
+# Set the temporary storage directory for the sorted Key-Value files. The directory must be empty, and the storage space must be greater than the size of the dataset to be imported. For better import performance, it is recommended to use a directory different from `data-source-dir` and use flash storage, which can use I/O exclusively.
 sorted-kv-dir = "/mnt/ssd/sorted-kv-dir"
 
 [mydumper]

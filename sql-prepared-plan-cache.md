@@ -1,6 +1,7 @@
 ---
 title: SQL Prepare Execution Plan Cache
 summary: Learn about SQL Prepare Execution Plan Cache in TiDB.
+aliases: ['/tidb/dev/sql-prepare-plan-cache']
 ---
 
 # SQL Prepare Execution Plan Cache
@@ -52,7 +53,7 @@ There are several points worth noting about execution plan caching and query per
 - Considering that the parameters of `Execute` are different, the execution plan cache prohibits some aggressive query optimization methods that are closely related to specific parameter values to ensure adaptability. This causes that the query plan may not be optimal for certain parameter values. For example, the filter condition of the query is `where a > ? And a < ?`, the parameters of the first `Execute` statement are `2` and `1` respectively. Considering that these two parameters maybe be `1` and `2` in the next execution time, the optimizer does not generate the optimal `TableDual` execution plan that is specific to current parameter values;
 - If cache invalidation and elimination are not considered, an execution plan cache is applied to various parameter values, which in theory also results in non-optimal execution plans for certain values. For example, if the filter condition is `where a < ?` and the parameter value used for the first execution is `1`, then the optimizer generates the optimal `IndexScan` execution plan and puts it into the cache. In the subsequent executions, if the value becomes `10000`, the `TableScan` plan might be the better one. But due to the execution plan cache, the previously generated `IndexScan` is used for execution. Therefore, the execution plan cache is more suitable for application scenarios where the query is simple (the ratio of compilation is high) and the execution plan is relatively fixed.
 
-Currently, the execution plan cache is disabled by default. You can enable this feature by enabling the [`prepare-plan-cache`](/tidb-configuration-file.md#prepared-plan-cache) in the TiDB configuration file.
+Currently, the execution plan cache is disabled by default. You can enable this feature by enabling the [`prepared-plan-cache`](/tidb-configuration-file.md#prepared-plan-cache) in the TiDB configuration file.
 
 > **Note：**
 >
@@ -118,6 +119,122 @@ MySQL [test]> select @@last_plan_from_cache;
 | @@last_plan_from_cache |
 +------------------------+
 | 0                      |
++------------------------+
+1 row in set (0.00 sec)
+```
+
+## Clear execution plan cache
+
+You can clear execution plan cache by executing the `ADMIN FLUSH [SESSION | INSTANCE] PLAN_CACHE` statement.
+
+In this statement, `[SESSION | INSTANCE]`specifies whether the plan cache is cleared for the current session or the whole TiDB instance. If the scope is not specified, the statement above applies to the `SESSION` cache by default.
+
+The following is an example of clearing the `SESSION` execution plan cache:
+
+{{< copyable "sql" >}}
+
+```sql
+MySQL [test]> create table t (a int);
+Query OK, 0 rows affected (0.00 sec)
+
+MySQL [test]> prepare stmt from 'select * from t';
+Query OK, 0 rows affected (0.00 sec)
+
+MySQL [test]> execute stmt;
+Empty set (0.00 sec)
+
+MySQL [test]> execute stmt;
+Empty set (0.00 sec)
+
+MySQL [test]> select @@last_plan_from_cache; -- Select the cached plan
++------------------------+
+| @@last_plan_from_cache |
++------------------------+
+|                      1 |
++------------------------+
+1 row in set (0.00 sec)
+
+MySQL [test]> admin flush session plan_cache; -- Clear the cached plan of the current session
+Query OK, 0 rows affected (0.00 sec)
+
+MySQL [test]> execute stmt;
+Empty set (0.00 sec)
+
+MySQL [test]> select @@last_plan_from_cache; -- The cached plan cannot be selected again, because it has been cleared
++------------------------+
+| @@last_plan_from_cache |
++------------------------+
+|                      0 |
++------------------------+
+1 row in set (0.00 sec)
+```
+
+Currently, TiDB does not support clearing `GLOBAL` execution plan cache. That means you cannot clear the cached plan of the whole TiDB cluster. The following error is reported if you try to clear the `GLOBAL` execution plan cache:
+
+{{< copyable "sql" >}}
+
+```sql
+MySQL [test]> admin flush global plan_cache;
+ERROR 1105 (HY000): Do not support the 'admin flush global scope.'
+```
+
+## Ignore the `COM_STMT_CLOSE` command and the `DEALLOCATE PREPARE` statement
+
+To reduce the syntax parsing cost of SQL statements, it is recommended that you run `prepare stmt` once, then `execute stmt` multiple times before running `deallocate prepare`:
+
+{{< copyable "sql" >}}
+
+```sql
+MySQL [test]> prepare stmt from '...'; -- Prepare once
+MySQL [test]> execute stmt using ...;  -- Execute once
+MySQL [test]> ...
+MySQL [test]> execute stmt using ...;  -- Execute multiple times
+MySQL [test]> deallocate prepare stmt; -- Release the prepared statement
+```
+
+In real practice, you may be used to running `deallocate prepare` each time after running `execute stmt`, as shown below:
+
+{{< copyable "sql" >}}
+
+```sql
+MySQL [test]> prepare stmt from '...'; -- Prepare once
+MySQL [test]> execute stmt using ...;
+MySQL [test]> deallocate prepare stmt; -- Release the prepared statement
+MySQL [test]> prepare stmt from '...'; -- Prepare twice
+MySQL [test]> execute stmt using ...;
+MySQL [test]> deallocate prepare stmt; -- Release the prepared statement
+```
+
+In such practice, the plan obtained by the first executed statement cannot be reused by the second executed statement.
+
+To address the problem, you can set the system varible [`tidb_ignore_prepared_cache_close_stmt`](/system-variables.md#tidb_ignore_prepared_cache_close_stmt-new-in-v600) to `ON` so TiDB ignores commands to close `prepare stmt`:
+
+{{< copyable "sql" >}}
+
+```sql
+mysql> set @@tidb_ignore_prepared_cache_close_stmt=1;  -- Enable the variable
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> prepare stmt from 'select * from t'; -- Prepare once
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> execute stmt;                        -- Execute once
+Empty set (0.00 sec)
+
+mysql> deallocate prepare stmt;             -- Release after the first execute
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> prepare stmt from 'select * from t'; -- Prepare twice
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> execute stmt;                        -- Execute twice
+Empty set (0.00 sec)
+
+mysql> select @@last_plan_from_cache;       -- Reuse the last plan
++------------------------+
+| @@last_plan_from_cache |
++------------------------+
+|                      1 |
 +------------------------+
 1 row in set (0.00 sec)
 ```

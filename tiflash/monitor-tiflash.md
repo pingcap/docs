@@ -46,6 +46,19 @@ The following sections introduce the default monitoring information of **TiFlash
 - Response Bytes/Seconds: The total bytes of the response from all TiFlash instances.
 - Cop task memory usage: The total memory usage of all TiFlash instances processing coprocessor requests.
 - Handling Request Number: The total number of all TiFlash instances processing coprocessor requests. The classification of the requests is the same as that of Request QPS.
+- Threads of RPC: The real-time number of RPC threads used in each TiFlash instance.
+- Max Threads of RPC: The maximum number of RPC threads recently used in each TiFlash instance.
+- Threads: The real-time number of threads used in each TiFlash instance.
+- Max Threads: The maximum number of threads recently used in each TiFlash instance.
+
+## Task Scheduler
+
+- Min TSO: The minimum TSO among all queries running on each TiFlash instance. This value ensures that queries with the minimum TSO can be scheduled to run. When no queries are running, this value is the maximum unsigned 64-bit integer.
+- Estimated Thread Usage and Limit: The estimated amount of threads used by all queries running on each TiFlash instance, and the soft and hard limits on the amount.
+- Active and Waiting Queries Count: The amount of running queries and that of waiting queries on each TiFlash instance.
+- Active and Waiting Tasks Count: The amount of running tasks and that of waiting tasks on each TiFlash instance.
+- Hard Limit Exceeded Count: Times that the estimated amount of threads used by queries running on each TiFlash instance exceeds the hard limit.
+- Task Waiting Duration: The duration from task initialization to task scheduling on each TiFlash instance.
 
 ## DDL
 
