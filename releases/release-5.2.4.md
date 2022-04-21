@@ -27,36 +27,13 @@ TiDB version: 5.2.4
 
 ## Improvements
 
-+ TiDB
-
-    -
-
 + TiKV
 
     - (dup: release-6.0.0-dmr.md > Improvements> TiKV)- Transfer the leadership to CDC observer to reduce latency jitter [#12111](https://github.com/tikv/tikv/issues/12111)
     - (dup: release-6.0.0-dmr.md > Improvements> TiKV)- Reduce the TiCDC recovery time by reducing the number of the Regions that require the Resolve Locks step [#11993](https://github.com/tikv/tikv/issues/11993)
-
-+ PD
-
-    -
-
-+ TiDB Dashboard
-
-    -
-
-+ TiFlash
-
-    -
-
-+ Tools
-
-    + Backup & Restore (BR)
-
-        -
-
-    + Data Migration (DM)
-
-        -
+    - (dup: release-5.3.1.md > Improvements> TiKV)- Update the proc filesystem (procfs) to v0.12.0 [#11702](https://github.com/tikv/tikv/issues/11702)
+    - (dup: release-5.3.1.md > Improvements> TiKV)- Speed up the Garbage Collection (GC) process by increasing the write batch size when performing GC to Raft logs [#11404](https://github.com/tikv/tikv/issues/11404)
+    - (dup: release-5.0.6.md > Improvements> TiKV)- Increase the speed of inserting SST files by moving the verification process to the `Import` thread pool from the `Apply` thread pool [#11239](https://github.com/tikv/tikv/issues/11239)
 
     + TiCDC
         - (dup: release-5.3.1.md > Improvements> Tools> TiCDC)- Change the default value of Kafka Sink `partition-num` to 3 so that TiCDC distributes messages across Kafka partitions more evenly [#3337](https://github.com/pingcap/tiflow/issues/3337)
@@ -69,17 +46,6 @@ TiDB version: 5.2.4
         - (dup: release-5.3.1.md > Improvements> Tools> TiCDC)- Add more Promethous and Grafana monitoring metrics and alerts, including `no owner alert`, `mounter row`, `table sink total row`, and `buffer sink total row` [#4054](https://github.com/pingcap/tiflow/issues/4054) [#1606](https://github.com/pingcap/tiflow/issues/1606)
         - metrics: support multi-k8s in grafana dashboards [#4665](https://github.com/pingcap/tiflow/issues/4665)
         - Show changefeed checkepoint catch-up ETA in metrics. [#3311](https://github.com/pingcap/tiflow/pull/3311)
-    + Dumpling
-
-        -
-
-    + TiDB Lightning
-
-        - note 1
-
-    + TiDB Binlog
-
-        - note 1
 
 ## Bug fixes
 
@@ -115,7 +81,6 @@ TiDB version: 5.2.4
 
 + TiKV
 
-    -
     - (dup: release-6.0.0-dmr.md > Bug fixes> TiKV)- Fix a bug that stale messages cause TiKV to panic [#12023](https://github.com/tikv/tikv/issues/12023)
     - (dup: release-6.0.0-dmr.md > Bug fixes> TiKV)- Fix the issue of intermittent packet loss and out of memory (OOM) caused by the overflow of memory metrics [#12160](https://github.com/tikv/tikv/issues/12160)
     - (dup: release-6.0.0-dmr.md > Bug fixes> TiKV)- Fix the potential panic issue that occurs when TiKV performs profiling on Ubuntu 18.04 [#9765](https://github.com/tikv/tikv/issues/9765)
@@ -131,15 +96,21 @@ TiDB version: 5.2.4
     - (dup: release-5.0.6.md > Bug fixes> TiKV)- Fix the issue of negative sign when the decimal divide result is zero [#29586](https://github.com/pingcap/tidb/issues/29586)
     - (dup: release-5.4.0.md > Bug fixes> TiKV)- Fix the issue that retrying prewrite requests in the pessimistic transaction mode might cause the risk of data inconsistency in rare cases [#11187](https://github.com/tikv/tikv/issues/11187)
     - (dup: release-5.3.0.md > Bug Fixes> TiKV)- Fix a memory leak caused by monitoring data of statistics threads [#11195](https://github.com/tikv/tikv/issues/11195)
+    - (dup: release-5.3.1.md > Bug fixes> TiKV)- Fix the issue that the average latency of the by-instance gRPC requests is inaccurate in TiKV metrics [#11299](https://github.com/tikv/tikv/issues/11299)
+    - (dup: release-6.0.0-dmr.md > Bug fixes> TiKV)- Fix the panic issue caused by deleting snapshot files when the peer status is `Applying` [#11746](https://github.com/tikv/tikv/issues/11746)
+    - (dup: release-6.0.0-dmr.md > Bug fixes> TiKV)- Fix a bug that TiKV cannot delete a range of data (which means the internal command `unsafe_destroy_range` is executed) when the GC worker is busy [#11903](https://github.com/tikv/tikv/issues/11903)
+    - (dup: release-6.0.0-dmr.md > Bug fixes> TiKV)- Fix the issue that deleting an uninitialized replica might cause an old replica to be recreated [#10533](https://github.com/tikv/tikv/issues/10533)
+    - (dup: release-5.3.1.md > Bug fixes> TiKV)- Fix the issue that TiKV cannot detect the memory lock when TiKV performs a reverse table scan [#11440](https://github.com/tikv/tikv/issues/11440)
+    - (dup: release-5.3.1.md > Bug fixes> TiKV)- Fix the deadlock issue that happens occasionally when coroutines run too fast [#11549](https://github.com/tikv/tikv/issues/11549)
+    - (dup: release-6.0.0-dmr.md > Bug fixes> TiKV)- Fix the issue that destroying a peer might cause high latency [#10210](https://github.com/tikv/tikv/issues/10210)
+    - Fix TiKV panic and peer unexpectedly destroyed due to fake merge target [#12232](https://github.com/tikv/tikv/issues/12232)
+    - Fix panic when target peer is replaced with a destroyed uninitialized peer during merge [#12048](https://github.com/tikv/tikv/issues/12048)
+    - Fix panic when applying snapshot is aborted [#11618](https://github.com/tikv/tikv/issues/11618)
 
 + PD
 
     - (dup: release-6.0.0-dmr.md > Bug fixes> PD)- Fix the issue that the Region scatterer scheduling lost some peers [#4565](https://github.com/tikv/pd/issues/4565)
     - (dup: release-5.4.0.md > Bug fixes> PD)- Fix the issue that the cold hotspot data cannot be deleted from the hotspot statistics [#4390](https://github.com/tikv/pd/issues/4390)
-
-+ TiDB Dashboard
-
-    -
 
 + TiFlash
 
@@ -170,15 +141,10 @@ TiDB version: 5.2.4
 
     + Backup & Restore (BR)
 
-        -
-
-    + Data Migration (DM)
-
-        -
+        - Fix BR failure on backup rawkv. [#32607](https://github.com/pingcap/tidb/issues/32607)
 
     + TiCDC
 
-        -
         - (dup: release-5.4.0.md > Bug fixes> Tools> TiCDC)- Fix the issue that default values cannot be replicated [#3793](https://github.com/pingcap/tiflow/issues/3793)
         - (dup: release-6.0.0-dmr.md > Bug fixes> Tools> TiCDC)- Fix a bug that sequence is incorrectly replicated in some cases [#4563](https://github.com/pingcap/tiflow/issues/4552)
         - (dup: release-6.0.0-dmr.md > Bug fixes> Tools> TiCDC)- Fix a bug that a TiCDC node exits abnormally when a PD leader is killed [#4248](https://github.com/pingcap/tiflow/issues/4248)
@@ -204,14 +170,10 @@ TiDB version: 5.2.4
         - (dup: release-5.4.0.md > Bug fixes> Tools> TiCDC)- Fix the OOM issue in the container environment [#1798](https://github.com/pingcap/tiflow/issues/1798)
         - (dup: release-4.0.16.md > Bug fixes> Tools> TiCDC)- Fix the memory leak issue after processing DDLs [#3174](https://github.com/pingcap/tiflow/issues/3174)
         - Fix chengefeed getting stuck when tables are repeatedly scheduled in the same node [#4464](https://github.com/pingcap/tiflow/issues/4464)
-       - Fix a bug that openapi may be stuck when pd is abnormal [#4778](https://github.com/pingcap/tiflow/issues/4778)
-       - Fix stale metrics caused by owner changes. [#4774](https://github.com/pingcap/tiflow/issues/4774)
-       - Fix stability problem in workerpool, which is used by Unified Sorter. [#4447](https://github.com/pingcap/tiflow/issues/4447)
-       - Fix kv client cached region metric could be negative. [#4300](https://github.com/pingcap/tiflow/issues/4300) 
-
-    + Dumpling
-
-        -
+        - Fix a bug that openapi may be stuck when pd is abnormal [#4778](https://github.com/pingcap/tiflow/issues/4778)
+        - Fix stale metrics caused by owner changes. [#4774](https://github.com/pingcap/tiflow/issues/4774)
+        - Fix stability problem in workerpool, which is used by Unified Sorter. [#4447](https://github.com/pingcap/tiflow/issues/4447)
+        - Fix kv client cached region metric could be negative. [#4300](https://github.com/pingcap/tiflow/issues/4300)
 
     + TiDB Lightning
 
@@ -220,10 +182,6 @@ TiDB version: 5.2.4
         - (dup: release-6.0.0-dmr.md > Bug fixes> Tools> TiDB Lightning)- Fix a bug that TiDB Lightning may not delete the metadata schema when some import tasks do not contain source files [#28144](https://github.com/pingcap/tidb/issues/28144)
         - (dup: release-5.1.4.md > Bug fixes> Tools> TiDB Lightning)- Fix the issue that TiDB Lightning does not report errors when the S3 storage path does not exist [#28031](https://github.com/pingcap/tidb/issues/28031) [#30709](https://github.com/pingcap/tidb/issues/30709)
 
-    + TiDB Binlog
-
-        -
-
 ## __unsorted
 
 + PingCAP/TiDB
@@ -231,29 +189,3 @@ TiDB version: 5.2.4
     - ```release-note [#33966](https://github.com/pingcap/tidb/issues/33966)
     - Fix some connections and goroutines leak caused by not closed HTTP response body [#30571](https://github.com/pingcap/tidb/issues/30571)
     - Fix the bug that TiDB logs many `failed to check the user authplugin` when a user connects to TiDB. [#29709](https://github.com/pingcap/tidb/issues/29709)
-    - Fix BR failure on backup rawkv. [#32607](https://github.com/pingcap/tidb/issues/32607)
-
-+ TiKV/TiKV
-
-## Bug fixes
-
-    - Fix TiKV panic and peer unexpectedly destroyed due to fake merge target [#12232](https://github.com/tikv/tikv/issues/12232)
-    - Fix panic when target peer is replaced with a destroyed uninitialized peer during merge [#12048](https://github.com/tikv/tikv/issues/12048)
-    - Fix panic when applying snapshot is aborted [#11618](https://github.com/tikv/tikv/issues/11618)
-    - Fix the issue that the average latency of the by-instance gRPC requests is inaccurate in TiKV metrics [#11299](https://github.com/tikv/tikv/issues/11299)
-    - Fix the panic issue caused by deleting snapshot files when the peer status is `Applying` [#11746](https://github.com/tikv/tikv/issues/11746)
-    - Fix a bug that TiKV cannot delete a range of data (`unsafe_destroy_range` cannot be executed) when the GC worker is busy [#11903](https://github.com/tikv/tikv/issues/11903)
-    - Fix the issue that deleting an uninitialized replica might cause an old replica to be recreated [#10533](https://github.com/tikv/tikv/issues/10533)
-    - Fix the issue that TiKV cannot detect the memory lock when TiKV performs a reverse table scan [#11440](https://github.com/tikv/tikv/issues/11440)
-    - Fix the deadlock issue that happens occasionally when coroutines run too fast [#11549](https://github.com/tikv/tikv/issues/11549)
-    - Fix the issue that destroying a peer might cause high latency [#10210](https://github.com/tikv/tikv/issues/10210)
-    
-## Improvements
-
-    - Update the proc filesystem (procfs) to v0.12.0 [#11702](https://github.com/tikv/tikv/issues/11702)
-    - Speed up the Garbage Collection (GC) process by increasing the write batch size when performing GC to Raft logs [#11404](https://github.com/tikv/tikv/issues/11404)
-    - Increase the speed of inserting SST files by moving the verification process to the `Import` thread pool from the `Apply` thread pool [#11239](https://github.com/tikv/tikv/issues/11239)
-
-
-+ PD
-
