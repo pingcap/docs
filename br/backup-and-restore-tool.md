@@ -7,9 +7,7 @@ summary: Learn what is BR and how to use the tool.
 
 [BR](http://github.com/pingcap/br) (Backup & Restore) is a command-line tool for distributed backup and restoration of the TiDB cluster data.
 
-Compared with [Dumpling](/dumpling-overview.md), BR is more suitable for scenarios involved huge data volumes.
-
-In addition to regular backup and restoration, you can also use BR for large-scale data migration as long as compatibility is ensured.
+Compared with [Dumpling](/dumpling-overview.md), BR is more suitable to scenarios involving huge data volumes.
 
 This document describes BR's implementation principles, recommended deployment configuration, usage restrictions and several methods to use BR.
 
