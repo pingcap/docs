@@ -130,15 +130,16 @@ If the TiDB Lightning task crashes due to unrecoverable errors (for example, dat
 * --checkpoint-error-ignore: If migration has failed, this option clears the error status as if no errors ever happened.
 * --checkpoint-remove: This option simply clears all checkpoints, regardless of errors.
 
-For more information, see [TiDB Lightning Checkpoints](https://docs.pingcap.com/tidb/stable/tidb-lightning-checkpoints).
+For more information, see [TiDB Lightning Checkpoints](/tidb-lightning/tidb-lightning-checkpoints.md).
 
 ### Create the target schema
 
-After you make changes in the aforementioned [Check conflicts for sharded tables](/migrate-large-mysql-shards-to-tidb.md#check-conflicts-for-sharded-tables), you can now manually create the `my_db` schema and `table5` in downstream TiDB. After that, you need to configure `tidb-lightning.toml`.
+Run the following command and edit the `my_db1-schema-create.sql` file to create `mydb.table5` in downstream:
 
-```toml
-[mydumper]
-no-schema = true # If you have created the downstream schema and tables, setting `true` tells TiDB Lightning not to create the downstream schema.
+{{< copyable "shell-regular" >}}
+
+```shell
+vim ${data-path}/my_db1/my_db1-schema-create.sql
 ```
 
 ### Start the migration task
@@ -165,24 +166,17 @@ Follow these steps to start `tidb-lightning`:
     sorted-kv-dir = "${sorted-kv-dir}"
 
     # Set the renaming rules ('routes') from source to target tables, in order to support merging different table shards into a single target table. Here you migrate `table1` and `table2` in `my_db1`, and `table3` and `table4` in `my_db2`, to the target `table5` in downstream `my_db`.
-    [[routes]]
-    schema-pattern = "my_db1"
-    table-pattern = "table[1-2]"
-    target-schema = "my_db"
-    target-table = "table5"
+    [[mydumper.files]]
+    pattern = '(^|/)my_db1\.table[1-2].*\.sql$'
+    schema = "my_db"
+    table = "table5"
+    type = "sql"
 
-    [[routes]]
-    schema-pattern = "my_db2"
-    table-pattern = "table[3-4]"
-    target-schema = "my_db"
-    target-table = "table5"
-
-    [mydumper]
-    # The source data directory. Set this to the path of the Dumpling exported data.
-    # If there are several Dumpling-exported data directories, you need to place all these directories in the same parent directory, and use the parent directory here.
-    data-source-dir = "${data-path}"        # The local or S3 path, for example, 's3://my-bucket/sql-backup?region=us-west-2'
-    # Because table1~table4 from source are merged into another table5 in the target, you should tell TiDB Lightning no need to create schemas, so that table1 ~ table4 won't be created automatically according to the exported schema information
-    no-schema = true
+    [[mydumper.files]]
+    pattern = '(^|/)my_db2\.table[3-4].*\.sql$'
+    schema = "my_db"
+    table = "table5"
+    type = "sql"
 
     # Information of the target TiDB cluster. For example purposes only. Replace the IP address with your IP address.
     [tidb]
