@@ -39,7 +39,7 @@ def get_issue_link(pr_url):
     response = requests.get(pr_url).json()
     body = response.get("body")
     if body:
-        match = re.search(r'(?:(?:Issue Number)|(?:fix)|(?:bug)).*?(https?://(?:www\.)?github\.com/.*?/issues/(\d+))')
+        match = re.search(r'(?:(?:Issue Number)|(?:fix)|(?:bug)).*?(https?://(?:www\.)?github\.com/.*?/issues/(\d+))', body)
         if match:
             issue_url = match.group(1)
             issue_num = match.group(2)
