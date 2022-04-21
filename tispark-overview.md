@@ -44,15 +44,11 @@ The following table lists the compatibility information of the supported TiSpark
 
 TiSpark runs in any Spark mode such as YARN, Mesos, and Standalone.
 
-This section describes the configuration of:
-
-- independently deployed TiKV and TiSpark
-- independently deployed Spark and TiSpark
-- co-deployed TiKV and TiSpark
-
 See also [TiSpark Deployment Topology](/tispark-deployment-topology.md) for more details about how to deploy TiSpark using TiUP.
 
 ## Recommended configuration
+
+This section describes the recommended configuration of independent deployment of TiKV and TiSpark, independent deployment of Spark and TiSpark, and co-deployed TiKV and TiSpark.
 
 ### Configuration of independent deployment of TiKV and TiSpark
 
@@ -118,9 +114,9 @@ Running TiSpark on an existing Spark cluster does not require a reboot of the cl
 spark-shell --jars $TISPARK_FOLDER/tispark-${name_with_version}.jar
 ```
 
-### Deploy TiSpark without the Spark cluster
+### Deploy TiSpark without a Spark cluster
 
-If you do not have a Spark cluster, we recommend using the standalone mode. For more information, see [Spark Standalone](https://spark.apache.org/docs/latest/spark-standalone.html). If you encounter any problem, see its [official website](https://spark.apache.org/docs/latest/spark-standalone.html). And you are welcome to [file an issue](https://github.com/pingcap/tispark/issues/new) on our GitHub.
+If you do not have a Spark cluster, we recommend using the standalone mode. For more information, see [Spark Standalone](https://spark.apache.org/docs/latest/spark-standalone.html). If you encounter any problem, see [Spark official website](https://spark.apache.org/docs/latest/spark-standalone.html). And you are welcome to [file an issue](https://github.com/pingcap/tispark/issues/new) on our GitHub.
 
 ## Using Spark Shell and Spark SQL
 
