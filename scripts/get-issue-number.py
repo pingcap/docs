@@ -61,25 +61,23 @@ def change_pr_to_issue(filename):
                     print("Match Start\n")
 
                 if match_start == 0:
-                    matchObj = re.search(r'\[#\d+\]\([a-zA-z]+://[^\s]*\)',line)
+                    matchObj = re.search(r'\[(#\d+)\]\(https?://(?:www\.)?github\.com/(.*?)/pull/(\d+).*?\)',line)
                     if matchObj:
-                        link = re.search(r'[a-zA-z]+://[^\s]*[^\)]', matchObj.group())
-                        pr_url = link.group()
-                        issue_url = get_issue_link(pr_url)
+                        repo = matchObj.group(2)
+                        pr_num = matchObj.group(3)
+                        pr_api = 'https://api.github.com/repos/{}/issues/{}'.format(repo, pr_num)
+                        issue_url, issue_num = get_issue_link(pr_api)
 
                         # 判断有记录 issue link 的在原文件中替换
-                        if issue_url:
-                            issue_num = re.search(r'\d+', issue_url)
-                            issue_md = '[#' + issue_num.group() + ']' + '(' + issue_url + ')'
-                            line = re.sub(r'\[#\d+\]\([a-zA-z]+://[^\s]*\)', issue_md, line)
-                            print(issue_md + '\n')
-
+                        if issue_url and issue_num:
+                            begin, end = matchObj.span(0)
+                            line = line[:begin] + "[#{}]({})".format(issue_num, issue_url) + line[end:]
                 target_file.write(line)
 
     remove(source_file_path)
     move(target_file_path, source_file_path)
 
-# get_issue_link("https://github.com/pingcap/tidb/pull/22924")
+# get_issue_link("https://api.github.com/repos/pingcap/tidb/pull/22924")
 
 # change_pr_to_issue('./releases/release-4.0.13.md')
 
