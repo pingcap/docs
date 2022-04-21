@@ -77,7 +77,7 @@ This document exemplifies the whole migration process and contains the following
 
 4. Prepare external storage.
 
-    In full data backup, both the upstream and downstream clusters need to access backup files. It is recommended that you use [External storage](/br/backup-and-restore-storages.md) to store backup files. In this document, we use Minio to simulate an S3-compatible storage service.
+    In full data backup, both the upstream and downstream clusters need to access backup files. It is recommended that you use [External storage](/br/backup-and-restore-storages.md) to store backup files. In this document, Minio is used to simulate an S3-compatible storage service.
 
     {{< copyable "shell-regular" >}}
 
