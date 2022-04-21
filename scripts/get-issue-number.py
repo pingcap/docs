@@ -33,50 +33,18 @@ import requests
 from tempfile import mkstemp
 from shutil import move
 from os import remove
-from bs4 import BeautifulSoup
 
 def get_issue_link(pr_url):
 
-    print("Connecting to " + pr_url + " ...")
-
-    response = requests.get(pr_url)
-
-    if response:
-
-        resp = BeautifulSoup(response.text, "html.parser")
-
-        table = resp.find("table", "d-block")
-
-        paragraphs = table.findAll("p")
-
-        flag = 0
-        match = 0
-
-        for p in  paragraphs:
-            # print(p.contents[0])
-
-            if isinstance(p.contents[0], str):
-                match = re.search(r'(Issue Number)|(fix)|(bug).*', p.contents[0], re.I)
-
-            if match or p.find('span', attrs = {"class": "issue-keyword"}):
-                issue_link = p.find('a', attrs = {"data-hovercard-type":"issue"}) or p.find('a', attrs = {"class": "issue-link"})
-                if issue_link:
-                    flag = 1
-                    link = issue_link['href']
-                break
-
-        if flag:
-            print('Related issue number: ' + link)
-            return link
-        else:
-            print("No related issue number.\n")
-            return 0
-
-        #print(paragraphs)
-
-    else:
-        print('Connection failed. No html content')
-        return 0
+    response = requests.get(pr_url).json()
+    body = response.get("body")
+    if body:
+        match = re.search(r'(?:(?:Issue Number)|(?:fix)|(?:bug)).*?(https?://(?:www\.)?github\.com/.*?/issues/(\d+))')
+        if match:
+            issue_url = match.group(1)
+            issue_num = match.group(2)
+            return issue_url, issue_num
+    return None, None
 
 def change_pr_to_issue(filename):
 
