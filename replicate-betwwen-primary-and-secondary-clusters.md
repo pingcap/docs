@@ -76,7 +76,7 @@ To replicate incremental data from a running TiDB cluster to its secondary clust
 
 4. Prepare external storage.
 
-    In full data backup, both the upstream and downstream clusters need to access backup files. It is recommended that you use [External storage](/br/backup-and-restore-storages.md#external-storages) to store backup files. In this document, we use Minio to simulate an S3-compatible storage service.
+    In full data backup, both the upstream and downstream clusters need to access backup files. It is recommended that you use [External storage](/br/backup-and-restore-storages.md#external-storages) to store backup files. In this example, Minio is used to simulate an S3-compatible storage service.
 
     {{< copyable "shell-regular" >}}
 
