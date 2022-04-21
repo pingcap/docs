@@ -36,7 +36,7 @@ from os import remove
 
 def get_issue_link(repo, pr_num):
     pr_url = 'https://api.github.com/repos/{}/issues/{}'.format(repo, pr_num)
-    response = requests.get(pr_url).json()
+    response = requests.get(pr_url, auth = ("user", token)).json()
     body = response.get("body")
     if body:
         match_link = re.search(r'(?:(?:Issue Number)|(?:fix)|(?:bug)|(?:cc)|(?:ref)|(?:close)).*?(https?://(?:www\.)?github\.com/.*?/issues/(\d+))', body, re.I)
@@ -62,7 +62,7 @@ def change_pr_to_issue(filename):
 
             for line in source_file:
 
-                if re.match(r'## Bug',line):
+                if re.match(r'# TiDB .* Release Notes',line):
                     match_start = 0
                     print("Match Start\n")
 
@@ -72,7 +72,6 @@ def change_pr_to_issue(filename):
                         repo = matchObj.group(2)
                         pr_num = matchObj.group(3)
                         issue_url, issue_num = get_issue_link(repo, pr_num)
-
                         # 判断有记录 issue link 的在原文件中替换
                         if issue_url and issue_num:
                             begin, end = matchObj.span(0)
@@ -82,12 +81,15 @@ def change_pr_to_issue(filename):
     remove(source_file_path)
     move(target_file_path, source_file_path)
 
-# get_issue_link("https://api.github.com/repos/pingcap/tidb/issues/34111")
+# get_issue_link("pingcap/tidb","34111")
 
 # change_pr_to_issue('./releases/release-4.0.13.md')
 
-if __name__ == "__main__":
+# Please add your GitHub token to environment variables.
+# When you first use this script, you can execute the following command `export GitHubToken="your_token"` to add your token.
 
+if __name__ == "__main__":
+    token = os.environ["GitHubToken"]
     for filename in sys.argv[1:]:
         if os.path.isfile(filename):
             change_pr_to_issue(filename)
