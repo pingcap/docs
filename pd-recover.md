@@ -112,7 +112,7 @@ Before deploying a new PD cluster, you need to stop the the existing PD cluster 
 
 ### Use pd-recover
 
-You only need to run `pd-recover` on a PD node.
+You only need to run `pd-recover` on one PD node.
 
 {{< copyable "shell-regular" >}}
 
