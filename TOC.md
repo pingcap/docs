@@ -68,6 +68,7 @@
       - [BR Use Cases](/br/backup-and-restore-use-cases.md)
       - [External Storages](/br/backup-and-restore-storages.md)
       - [BR FAQ](/br/backup-and-restore-faq.md)
+    - [Use Dumpling and TiDB Lightning for Data Backup and Restoration](/backup-and-restore-using-dumpling-lightning.md)
   - [Read Historical Data](/read-historical-data.md)
   - [Configure Time Zone](/configure-time-zone.md)
   - [Daily Checklist](/daily-check.md)
