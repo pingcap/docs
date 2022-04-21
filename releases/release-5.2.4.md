@@ -34,6 +34,7 @@ TiDB version: 5.2.4
 + Tools
 
     + TiCDC
+
         - (dup: release-5.3.1.md > Improvements> Tools> TiCDC)- Change the default value of Kafka Sink `partition-num` to 3 so that TiCDC distributes messages across Kafka partitions more evenly [#3337](https://github.com/pingcap/tiflow/issues/3337)
         - (dup: release-5.4.0.md > Improvements> Tools> TiCDC)- Reduce the time for the KV client to recover when a TiKV store is down [#3191](https://github.com/pingcap/tiflow/issues/3191)
         - (dup: release-6.0.0-dmr.md > Improvements> Tools> TiCDC)- Add a `Lag analyze` panel in Grafana [#4891](https://github.com/pingcap/tiflow/issues/4891)
