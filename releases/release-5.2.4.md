@@ -16,14 +16,12 @@ TiDB version: 5.2.4
     - Fix the issue that system variable `max_allowed_packet` does not work. [#31422](https://github.com/pingcap/tidb/issues/31422)
     - Fix an issue that REPLACE statement changing other rows when the auto ID is out of range [#29483](https://github.com/pingcap/tidb/issues/29483)
     - (dup: release-5.1.4.md > Compatibility changes> TiDB)- Change the default value of the system variable [`tidb_analyze_version`](/system-variables.md#tidb_analyze_version-new-in-v510) from `2` to `1` [#31748](https://github.com/pingcap/tidb/issues/31748)
-    - (dup: release-5.3.1.md > Compatibility changes> Tools> TiDB Lightning)- Change the default value of `regionMaxKeyCount` from 1_440_000 to 1_280_000, to avoid too many empty Regions after data import [#30018](https://github.com/pingcap/tidb/issues/30018)
 
 + Tools
 
-    + Backup & Restore (BR)
+    + TiDB Lightning
 
-        -
-        -
+        - (dup: release-5.3.1.md > Compatibility changes> Tools> TiDB Lightning)- Change the default value of `regionMaxKeyCount` from 1_440_000 to 1_280_000, to avoid too many empty Regions after data import [#30018](https://github.com/pingcap/tidb/issues/30018)
 
 ## Improvements
 
@@ -34,6 +32,8 @@ TiDB version: 5.2.4
     - (dup: release-5.3.1.md > Improvements> TiKV)- Update the proc filesystem (procfs) to v0.12.0 [#11702](https://github.com/tikv/tikv/issues/11702)
     - (dup: release-5.3.1.md > Improvements> TiKV)- Speed up the Garbage Collection (GC) process by increasing the write batch size when performing GC to Raft logs [#11404](https://github.com/tikv/tikv/issues/11404)
     - (dup: release-5.0.6.md > Improvements> TiKV)- Increase the speed of inserting SST files by moving the verification process to the `Import` thread pool from the `Apply` thread pool [#11239](https://github.com/tikv/tikv/issues/11239)
+
++ Tools
 
     + TiCDC
         - (dup: release-5.3.1.md > Improvements> Tools> TiCDC)- Change the default value of Kafka Sink `partition-num` to 3 so that TiCDC distributes messages across Kafka partitions more evenly [#3337](https://github.com/pingcap/tiflow/issues/3337)
