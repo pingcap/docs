@@ -164,7 +164,7 @@ For more information, see [TiDB Lightning Checkpoints](/tidb-lightning/tidb-ligh
 
 ### Create the target schema
 
-Run the following command and edit the `my_db1-schema-create.sql` file. Then run the `my_db1-schema-create.sql` file downstream to create `mydb.table5`:
+Create `mydb.table5` at downstream. For example, you can change the table name to `mydb.table5` in the `my_db1-schema-create.sql` and then execute the file at downstream:
 
 {{< copyable "shell-regular" >}}
 
