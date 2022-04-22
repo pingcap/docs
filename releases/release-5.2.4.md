@@ -115,7 +115,7 @@ TiDB version: 5.2.4
     - Fix the issue that TiKV panics and destroys peers unexpectedly because the target Region to be merged is invalid [#12232](https://github.com/tikv/tikv/issues/12232)
     - Fix the TiKV panic issue that occurs when the target peer is replaced with the peer that is destroyed without being initialized when merging a Region [#12048](https://github.com/tikv/tikv/issues/12048)
     - Fix the TiKV panic issue that occurs when applying snapshot is aborted [#11618](https://github.com/tikv/tikv/issues/11618)
-    - Fix a bug that TiKV cannot calculate the number of snapshots being sent correctly when the operator execution fails [#11341](https://github.com/tikv/tikv/issues/11341)
+    - Fix a bug that TiKV cannot correctly calculate the number of snapshots being sent when the operator execution fails [#11341](https://github.com/tikv/tikv/issues/11341)
 
 + PD
 
