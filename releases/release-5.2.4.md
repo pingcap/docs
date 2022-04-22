@@ -81,6 +81,12 @@ TiDB version: 5.2.4
     - Fix the issue that TiDB might unexpectedly output many logs of failed authentication [#29709](https://github.com/pingcap/tidb/issues/29709)
     - Fix the issue that the system variable `max_allowed_packet` does not take effect [#31422](https://github.com/pingcap/tidb/issues/31422)
     - Fix the issue that the `REPLACE` statement incorrectly changes other rows when the auto ID is out of range [#29483](https://github.com/pingcap/tidb/issues/29483)
+    - Fix the issue that the slow query log cannot output log normally and may cause too much memory  [#32656](https://github.com/pingcap/tidb/issues/32656)
+    - Fix the issue that the NATURAL JOIN may output unexpected column [#24981](https://github.com/pingcap/tidb/issues/29481)
+    - Fix the issue that the ORDER BY + LIMIT clause may output wrong result if we use prefix-column index to seek data [#29711](https://github.com/pingcap/tidb/issues/29711)
+    - Fix the issue that the DOUBLE type auto-incremental column may be changed when the optimistic transaction retries [#29892](https://github.com/pingcap/tidb/issues/29892)
+    - Fix the issue that the STR_TO_DATE function cannot handle the preceding zero of the microsecond part correctly [#30078](https://github.com/pingcap/tidb/issues/30078)
+    - Fix the issue that TiDB gets the wrong result when we use TiFlash to scan table with empty range although the TiFlash doesn't support read table with empty range yet [#33083](https://github.com/pingcap/tidb/issues/33083)
 
 + TiKV
 
