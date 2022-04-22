@@ -145,6 +145,8 @@ TiDB version: 5.2.4
     - Fix the panic issue that occurs when the memory limit is enabled [#3902](https://github.com/pingcap/tiflash/issues/3902)
     - Fix the issue that TiFlash crashes occasionally when an MPP query is stopped [#3401](https://github.com/pingcap/tiflash/issues/3401)
     - Fix the unexpected error of `Unexpected type of column: Nullable(Nothing)` [#3351](https://github.com/pingcap/tiflash/issues/3351)
+    - Fix metadata corruption caused by running `Prepare Merge` following a new election before the isolated peer is informed of the election [#4437](https://github.com/pingcap/tiflash/issues/4437)
+    - Fix the issue that a query containing `JOIN` might be hung if an error occurs [#4195](https://github.com/pingcap/tiflash/issues/4195)
 
 + Tools
 
