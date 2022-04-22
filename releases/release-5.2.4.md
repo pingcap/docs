@@ -131,13 +131,13 @@ TiDB version: 5.2.4
     - Fix the issue that `CastStringAsDecimal` behavior is inconsistent in TiFlash and in TiDB/TiKV [#3619](https://github.com/pingcap/tiflash/issues/3619)
     - Fix the issue that TiFlash might return the `EstablishMPPConnection` error after it is restarted [#3615](https://github.com/pingcap/tiflash/issues/3615)
     - Fix the issue that obsolete data cannot be reclaimed after setting the tiflash replica to 0 [#3659](https://github.com/pingcap/tiflash/issues/3659)
-    - Fix the potential data inconsistency caused by widening the primary key column when the primary key is handle [#3569](https://github.com/pingcap/tiflash/issues/3569)
-    - Fix the possible parsing errors when an SQL statement contains extremely long nested expressions [#3354](https://github.com/pingcap/tiflash/issues/3354)
-    - Fix the possible wrong result that queries with the `where <string>` clause [#3447](https://github.com/pingcap/tiflash/issues/3447)
-    - Fix the possible wrong result when new collation is enabled [#3388](https://github.com/pingcap/tiflash/issues/3388), [#3391](https://github.com/pingcap/tiflash/issues/3391)
+    - Fix potential data inconsistency when widening the primary key column with the primary key being `handle` [#3569](https://github.com/pingcap/tiflash/issues/3569)
+    - Fix possible parsing errors when an SQL statement contains extremely long nested expressions [#3354](https://github.com/pingcap/tiflash/issues/3354)
+    - Fix possible wrong results when a query contains the `where <string>` clause [#3447](https://github.com/pingcap/tiflash/issues/3447)
+    - Fix possible wrong results when `new_collations_enabled_on_first_bootstrap` is enabled [#3388](https://github.com/pingcap/tiflash/issues/3388), [#3391](https://github.com/pingcap/tiflash/issues/3391)
     - Fix the panic issue that occurs when TLS is enabled [#4196](https://github.com/pingcap/tiflash/issues/4196)
     - Fix the panic issue that occurs when the memory limit is enabled [#3902](https://github.com/pingcap/tiflash/issues/3902)
-    - Fix the panic issue that occurs when an MPP query is stopped [#3401](https://github.com/pingcap/tiflash/issues/3401)
+    - Fix the issue that TiFlash crashes occasionally when an MPP query is stopped [#3401](https://github.com/pingcap/tiflash/issues/3401)
     - Fix the unexpected error of `Unexpected type of column: Nullable(Nothing)` [#3351](https://github.com/pingcap/tiflash/issues/3351)
 
 + Tools
