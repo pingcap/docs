@@ -98,7 +98,7 @@ TiDB version: 5.2.4
     - (dup: release-6.0.0-dmr.md > Bug fixes> TiKV)- Fix a bug that TiKV might panic if it has been running for 2 years or more [#11940](https://github.com/tikv/tikv/issues/11940)
     - (dup: release-6.0.0-dmr.md > Bug fixes> TiKV)- Fix the issue of QPS drop when flow control is enabled and `level0_slowdown_trigger` is set explicitly [#11424](https://github.com/tikv/tikv/issues/11424)
     - (dup: release-5.3.1.md > Bug fixes> TiKV)- Fix the panic issue that occurs when the cgroup controller is not mounted [#11569](https://github.com/tikv/tikv/issues/11569)
-    - (dup: release-5.3.1.md > Bug fixes> TiKV)- Fix the metadata corruption issue when `Prepare Merge` is triggered after a new election is finished but the isolated peer is not informed [#11526](https://github.com/tikv/tikv/issues/11526)
+    - (dup: release-5.3.1.md > Bug fixes> TiKV)- Fix possible metadata corruption caused by Region merge on a lagging Region peer [#11526](https://github.com/tikv/tikv/issues/11526)
     - (dup: release-5.3.1.md > Bug fixes> TiKV)- Fix the issue that the latency of Resolved TS increases after TiKV stops operating [#11351](https://github.com/tikv/tikv/issues/11351)
     - (dup: release-5.3.1.md > Bug fixes> TiKV)- Fix a panic issue that occurs when Region merge, ConfChange, and Snapshot happen at the same time in extreme conditions [#11475](https://github.com/tikv/tikv/issues/11475)
     - (dup: release-5.3.1.md > Bug fixes> TiKV)- Fix a bug that tikv-ctl cannot return the correct Region-related information [#11393](https://github.com/tikv/tikv/issues/11393)
@@ -146,7 +146,7 @@ TiDB version: 5.2.4
     - Fix the panic issue that occurs when the memory limit is enabled [#3902](https://github.com/pingcap/tiflash/issues/3902)
     - Fix the issue that TiFlash crashes occasionally when an MPP query is stopped [#3401](https://github.com/pingcap/tiflash/issues/3401)
     - Fix the unexpected error of `Unexpected type of column: Nullable(Nothing)` [#3351](https://github.com/pingcap/tiflash/issues/3351)
-    - Fix metadata corruption caused by running `Prepare Merge` following a new election before the isolated peer is informed of the election [#4437](https://github.com/pingcap/tiflash/issues/4437)
+    - Fix possible metadata corruption caused by Region merge on a lagging Region peer [#4437](https://github.com/pingcap/tiflash/issues/4437)
     - Fix the issue that a query containing `JOIN` might be hung if an error occurs [#4195](https://github.com/pingcap/tiflash/issues/4195)
     - Fix possible wrong results returned for MPP queries due to incorrect execution plans [#3389](https://github.com/pingcap/tiflash/issues/3389)
 
