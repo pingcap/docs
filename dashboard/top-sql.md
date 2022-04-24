@@ -61,6 +61,8 @@ After enabling the feature, wait up to 1 minute for Top SQL to load the data. Th
 
 In addition to the UI, you can also enable the Top SQL feature by setting the TiDB system variable [`tidb_enable_top_sql`](/system-variables.md#tidb_enable_top_sql-new-in-v540):
 
+{{< copyable "sql" >}}
+
 ```sql
 SET GLOBAL tidb_enable_top_sql = 1;
 ```
@@ -109,6 +111,8 @@ You can disable this feature by following these steps:
 4. In the popped-up dialog box, click **Disable**.
 
 In addition to the UI, you can also disable the Top SQL feature by setting the TiDB system variable [`tidb_enable_top_sql`](/system-variables.md#tidb_enable_top_sql-new-in-v540):
+
+{{< copyable "sql" >}}
 
 ```sql
 SET GLOBAL tidb_enable_top_sql = 0;
