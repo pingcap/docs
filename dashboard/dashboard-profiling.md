@@ -1,12 +1,6 @@
 ---
-<<<<<<< HEAD
-title: Manual Profiling
-summary: Learn the manual instance profiling of TiDB Dashboard.
-=======
 title: TiDB Dashboard Instance Profiling - Manual Profiling
 summary: Learn how to collect performance data to analyze sophisticated problems.
-aliases: ['/docs/dev/dashboard/dashboard-profiling/']
->>>>>>> 3157c03fc (Update TiDB Dashboard docs for 6.0 features (#8229))
 ---
 
 # TiDB Dashboard Instance Profiling - Manual Profiling
