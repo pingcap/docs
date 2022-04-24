@@ -49,7 +49,7 @@ You can access the Top SQL page using either of the following methods:
 
 > **Note:**
 >
-> To use Top SQL, your cluster should be deployed or upgraded with a recent version of TiUP (v1.9.0 or above) or TiDB Operator (v1.3.0 or above). If your cluster was upgraded from an earlier version, see [FAQ](/dashboard/dashboard-faq.md#a-required-component-ngmonitoring-is-not-started-error-is-shown) for instructions.
+> To use Top SQL, your cluster should be deployed or upgraded with a recent version of TiUP (v1.9.0 or above) or TiDB Operator (v1.3.0 or above). If your cluster was upgraded using an earlier version of TiUP or TiDB Operator, see [FAQ](/dashboard/dashboard-faq.md#a-required-component-ngmonitoring-is-not-started-error-is-shown) for instructions.
 
 Top SQL is not enabled by default as it has a slight impact on cluster performance (within 3% on average) when enabled. You can enable Top SQL by the following steps:
 
@@ -130,7 +130,7 @@ It is now a generally available (GA) feature and can be used in production envir
 
 **4. What is the meaning of "Other Statements"?**
 
-"Other Statement" counts the total CPU overhead of all non-Top 5 statements. With this information, you can learn how much CPU overhead Top 5 statements contribute compared with the overall.
+"Other Statement" counts the total CPU overhead of all non-Top 5 statements. With this information, you can learn the CPU overhead contributed by the Top 5 statements compared with the overall.
 
 **5. What is the relationship between the CPU overhead displayed by Top SQL and the actual CPU usage of the process?**
 
