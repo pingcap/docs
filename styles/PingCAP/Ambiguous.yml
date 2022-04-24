@@ -12,3 +12,6 @@ tokens:
     - sufficient
     - a large number of
     - a large volume of
+exceptions:
+    - 'how much'
+    - 'how many'
