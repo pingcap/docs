@@ -142,7 +142,7 @@ Their correlation is strong but they are not exactly the same thing. For example
 
 **6. What is the meaning of the Y-axis of the Top SQL chart?**
 
-It represents the size of CPU resources consumed. The more resources consumed by the SQL statement, the higher the value is. In most cases, you do not need to care about the meaning or unit of the specific value.
+It represents the size of CPU resources consumed. The more resources consumed by a SQL statement, the higher the value is. In most cases, you do not need to care about the meaning or unit of the specific value.
 
 **7. Does Top SQL collect running (unfinished) SQL statements?**
 

@@ -55,7 +55,7 @@ If your deployment tool is TiUP, take the following steps to solve this problem.
 
    Even if the cluster has been started, still execute this command. This command does not affect the normal application in the cluster, but refreshes and reports the metrics addresses, so that the monitoring metrics can be displayed normally in TiDB Dashboard.
 
-### An `invalid connection` error is shown in **Slow Queries** page
+### An `invalid connection` error is shown on the **Slow Queries** page
 
 The possible reason is that you have enabled the `prepared-plan-cache` feature of TiDB. As an experimental feature, when enabled, `prepared-plan-cache` might not function properly in specific TiDB versions, which could cause this problem in TiDB Dashboard (and other applications). You can disable `prepared-plan-cache` by updating [TiDB Configuration file](/tidb-configuration-file.md#prepared-plan-cache) to solve this problem.
 
@@ -131,7 +131,7 @@ Deploy the NgMonitoring component by following instructions in the [Enable Conti
 
 </details>
 
-### An `unknown field` error is shown in **Slow Queries** page
+### An `unknown field` error is shown on the **Slow Queries** page
 
 If the `unknown field` error appears on the **Slow Queries** page after the cluster upgrade, the error is related to a compatibility issue caused by the difference between TiDB Dashboard server fields (which might be updated) and user preferences fields (which are in the browser cache). This issue has been fixed. If your cluster is earlier than v5.0.3 or v4.0.14, perform the following steps to clear your browser cache:
 
