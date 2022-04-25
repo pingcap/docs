@@ -134,7 +134,7 @@ If the TiDB Lightning task crashes due to unrecoverable errors (for example, dat
 * --checkpoint-error-ignore: If migration has failed, this option clears the error status as if no errors ever happened.
 * --checkpoint-remove: This option simply clears all checkpoints, regardless of errors.
 
-For more information, see [TiDB Lightning Checkpoints](/tidb-lightning/tidb-lightning-checkpoints.md).
+For more information, see [TiDB Lightning Checkpoints](/tidb-lightning/tidb-lightning-checkpoints.md). 
 
 ### Create a target schema
 
