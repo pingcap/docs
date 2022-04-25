@@ -75,6 +75,8 @@ If the migration involves merging data from different sharded tables, primary ke
 
 Assume that tables 1~4 have the same table structure as follows.
 
+{{< copyable "sql" >}}
+
 ```sql
 CREATE TABLE `table1` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -87,6 +89,8 @@ CREATE TABLE `table1` (
 ```
 
 For those four tables, the `id` column is the primary key. It is auto-incremental, which will cause different sharded tables to generate duplicated `id` ranges and cause the primary key conflict on the target table during the migration. On the other hand, the `sid` column is the sharding key, which ensures that the index is unique globally. So you can remove the unique constraint of the `id` column in the target `table5` to avoid the data merge conflicts.
+
+{{< copyable "sql" >}}
 
 ```sql
 CREATE TABLE `table5` (
@@ -162,14 +166,21 @@ If the TiDB Lightning task crashes due to unrecoverable errors (for example, dat
 
 For more information, see [TiDB Lightning Checkpoints](/tidb-lightning/tidb-lightning-checkpoints.md).
 
-### Create the target schema
+### Create a target schema
 
-Create `mydb.table5` at downstream. For example, you can change the table name to `mydb.table5` in the `my_db1-schema-create.sql` and then execute the file at downstream:
+Create `mydb.table5` at downstream.
 
-{{< copyable "shell-regular" >}}
+{{< copyable "sql" >}}
 
-```shell
-vim ${data-path}/my_db1/my_db1-schema-create.sql
+```sql
+CREATE TABLE `table5` (
+  `id` bigint(20) NOT NULL,
+  `sid` bigint(20) NOT NULL,
+  `pid` bigint(20) NOT NULL,
+  `comment` varchar(255) DEFAULT NULL,
+  INDEX (`id`),
+  UNIQUE KEY `sid` (`sid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
 ```
 
 ### Start the migration task
@@ -184,6 +195,9 @@ Follow these steps to start `tidb-lightning`:
     level = "info"
     file = "tidb-lightning.log"
 
+    [mydumper]
+    data-source-dir = ${data-path}
+
     [tikv-importer]
     # Choose a local backend.
     # "local": The default mode. It is used for large data volumes greater than 1 TiB. During migration, downstream TiDB cannot provide services.
@@ -197,13 +211,13 @@ Follow these steps to start `tidb-lightning`:
 
     # Set the renaming rules ('routes') from source to target tables, in order to support merging different table shards into a single target table. Here you migrate `table1` and `table2` in `my_db1`, and `table3` and `table4` in `my_db2`, to the target `table5` in downstream `my_db`.
     [[mydumper.files]]
-    pattern = '(^|/)my_db1\.table[1-2].*\.sql$'
+    pattern = '(^|/)my_db1\.table[1-2]\..*\.sql$'
     schema = "my_db"
     table = "table5"
     type = "sql"
 
     [[mydumper.files]]
-    pattern = '(^|/)my_db2\.table[3-4].*\.sql$'
+    pattern = '(^|/)my_db2\.table[3-4]\..*\.sql$'
     schema = "my_db"
     table = "table5"
     type = "sql"
