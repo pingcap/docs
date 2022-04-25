@@ -15,6 +15,11 @@ TiDB version: 5.2.4
 
     - (dup: release-5.1.4.md > Compatibility changes> TiDB)- Change the default value of the system variable [`tidb_analyze_version`](/system-variables.md#tidb_analyze_version-new-in-v510) from `2` to `1` [#31748](https://github.com/pingcap/tidb/issues/31748)
 
++ TiKV
+
+    - Add the [`raft-log-compact-sync-interval`](/tikv-configuration-file.md#raft-log-compact-sync-interval-introduced-from-v524-version) configuration to control the time interval ("2s" by default) to compact unnecessary Raft logs [#11404](https://github.com/tikv/tikv/issues/11404)
+    - Change the default value of the [`raft-log-gc-tick-interval`](/tikv-configuration-file.md#raft-log-gc-tick-interval) configuration from "10s" to "3s"  [#11404](https://github.com/tikv/tikv/issues/11404)
+
 + Tools
 
     + TiDB Lightning
