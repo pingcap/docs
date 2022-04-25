@@ -44,7 +44,7 @@ TiDB version: 5.2.4
         - (dup: release-5.3.1.md > Improvements> Tools> TiCDC)- Set the default value of `max-message-bytes` to 10M [#4041](https://github.com/pingcap/tiflow/issues/4041)
         - (dup: release-5.3.1.md > Improvements> Tools> TiCDC)- Add more Promethous and Grafana monitoring metrics and alerts, including `no owner alert`, `mounter row`, `table sink total row`, and `buffer sink total row` [#4054](https://github.com/pingcap/tiflow/issues/4054) [#1606](https://github.com/pingcap/tiflow/issues/1606)
         - Support multiple Kubernetes clusters in Grafana dashboards [#4665](https://github.com/pingcap/tiflow/issues/4665)
-        - Add changefeed checkepoint catch-up ETA in metrics. [#5232](https://github.com/pingcap/tiflow/issues/5232)
+        - Add changefeed checkpoint catch-up ETA in metrics [#5232](https://github.com/pingcap/tiflow/issues/5232)
 
 ## Bug fixes
 
@@ -154,7 +154,7 @@ TiDB version: 5.2.4
 
     + Backup & Restore (BR)
 
-        - Fix the issue that BR fails when backing up rawkv. [#32607](https://github.com/pingcap/tidb/issues/32607)
+        - Fix the issue that BR fails when backing up RawKV [#32607](https://github.com/pingcap/tidb/issues/32607)
 
     + TiCDC
 
@@ -180,11 +180,11 @@ TiDB version: 5.2.4
         - (dup: release-5.3.1.md > Bug fixes> Tools> TiCDC)- Fix the negative value error in the changefeed checkpoint lag [#3010](https://github.com/pingcap/tiflow/issues/3010)
         - (dup: release-5.4.0.md > Bug fixes> Tools> TiCDC)- Fix the OOM issue in the container environment [#1798](https://github.com/pingcap/tiflow/issues/1798)
         - (dup: release-4.0.16.md > Bug fixes> Tools> TiCDC)- Fix the memory leak issue after processing DDLs [#3174](https://github.com/pingcap/tiflow/issues/3174)
-        - Fix the issue that chengefeed gets stuck when tables are repeatedly scheduled in the same node [#4464](https://github.com/pingcap/tiflow/issues/4464)
+        - Fix the issue that changefeed gets stuck when tables are repeatedly scheduled in the same node [#4464](https://github.com/pingcap/tiflow/issues/4464)
         - Fix a bug that querying status through open API may be blocked when the PD node is abnormal [#4778](https://github.com/pingcap/tiflow/issues/4778)
         - Fix incorrect metrics caused by owner changes [#4774](https://github.com/pingcap/tiflow/issues/4774)
         - Fix a stability problem in workerpool used by Unified Sorter [#4447](https://github.com/pingcap/tiflow/issues/4447)
-        - Fix the issue that the kv client cached region metric could be negative [#4300](https://github.com/pingcap/tiflow/issues/4300)
+        - (dup: release-5.4.0.md > Bug fixes> Tools> TiCDC)- Fix the issue that the `cached region` monitoring metric is negative [#4300](https://github.com/pingcap/tiflow/issues/4300)
 
     + TiDB Lightning
 
@@ -192,4 +192,4 @@ TiDB version: 5.2.4
         - (dup: release-6.0.0-dmr.md > Bug fixes> Tools> TiDB Lightning)- Fix the checksum error “GC life time is shorter than transaction duration” [#32733](https://github.com/pingcap/tidb/issues/32733)
         - (dup: release-6.0.0-dmr.md > Bug fixes> Tools> TiDB Lightning)- Fix a bug that TiDB Lightning may not delete the metadata schema when some import tasks do not contain source files [#28144](https://github.com/pingcap/tidb/issues/28144)
         - (dup: release-5.1.4.md > Bug fixes> Tools> TiDB Lightning)- Fix the issue that TiDB Lightning does not report errors when the S3 storage path does not exist [#28031](https://github.com/pingcap/tidb/issues/28031) [#30709](https://github.com/pingcap/tidb/issues/30709)
-        - Fix an error that occurs when iterating more than 1000 keys on GCS [#30377](https://github.com/pingcap/tidb/issues/30377) 
+        - Fix an error that occurs when iterating more than 1000 keys on GCS [#30377](https://github.com/pingcap/tidb/issues/30377)
