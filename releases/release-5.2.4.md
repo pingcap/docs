@@ -75,7 +75,7 @@ TiDB version: 5.2.4
     - (dup: release-5.0.6.md > Bug fixes> TiDB)- Fix the panic when using the `CASE WHEN` function on the `ENUM` data type [#29357](https://github.com/pingcap/tidb/issues/29357)
     - (dup: release-5.0.6.md > Bug fixes> TiDB)- Fix wrong results of the `microsecond` function in vectorized expressions [#29244](https://github.com/pingcap/tidb/issues/29244)
     - Fix the issue that the window function causes TiDB to panic instead of reporting an error [#30326](https://github.com/pingcap/tidb/issues/30326)
-    - Fix the issue that the Merge Join operator gets wrong results in special cases [#33042](https://github.com/pingcap/tidb/issues/33042)
+    - Fix the issue that the Merge Join operator gets wrong results in certain cases [#33042](https://github.com/pingcap/tidb/issues/33042)
     - Fix the issue that TiDB gets wrong result when the correlated subquery outputs a constant  [#32089](https://github.com/pingcap/tidb/issues/32089)
     - Fix the issue that TiDB writes wrong data due to the wrong encoding of the `ENUM` or `SET` column [#32302](https://github.com/pingcap/tidb/issues/32302)
     - Fix the issue that the `MAX` or `MIN` function on the `ENUM` or `SET` column returns wrong result when the New Collation is enabled in TiDB [#31638](https://github.com/pingcap/tidb/issues/31638)
@@ -87,12 +87,12 @@ TiDB version: 5.2.4
     - Fix the issue that TiDB might unexpectedly output many logs of failed authentication [#29709](https://github.com/pingcap/tidb/issues/29709)
     - Fix the issue that the system variable `max_allowed_packet` does not take effect [#31422](https://github.com/pingcap/tidb/issues/31422)
     - Fix the issue that the `REPLACE` statement incorrectly changes other rows when the auto ID is out of range [#29483](https://github.com/pingcap/tidb/issues/29483)
-    - Fix the issue that the slow query log cannot output log normally and might consume too much memory  [#32656](https://github.com/pingcap/tidb/issues/32656)
+    - Fix the issue that the slow query log cannot output log normally and might consume too much memory [#32656](https://github.com/pingcap/tidb/issues/32656)
     - Fix the issue that the result of NATURAL JOIN might include unexpected columns [#24981](https://github.com/pingcap/tidb/issues/29481)
-    - Fix the issue that using ORDER BY and LIMIT together in one statement might output wrong results if a prefix-column index is used to query data [#29711](https://github.com/pingcap/tidb/issues/29711)
-    - Fix the issue that the DOUBLE type auto-incremental column might be changed when the optimistic transaction retries [#29892](https://github.com/pingcap/tidb/issues/29892)
+    - Fix the issue that using `ORDER BY` and `LIMIT` together in one statement might output wrong results if a prefix-column index is used to query data [#29711](https://github.com/pingcap/tidb/issues/29711)
+    - Fix the issue that the DOUBLE type auto-increment column might be changed when the optimistic transaction retries [#29892](https://github.com/pingcap/tidb/issues/29892)
     - Fix the issue that the STR_TO_DATE function cannot handle the preceding zero of the microsecond part correctly [#30078](https://github.com/pingcap/tidb/issues/30078)
-    - Fix the issue that TiDB gets the wrong result when using TiFlash to scan tables with empty range although the TiFlash does not support reading tables with empty range yet [#33083](https://github.com/pingcap/tidb/issues/33083)
+    - Fix the issue that TiDB gets the wrong result when using TiFlash to scan tables with empty range although TiFlash does not support reading tables with empty range yet [#33083](https://github.com/pingcap/tidb/issues/33083)
 
 + TiKV
 
