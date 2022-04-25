@@ -43,8 +43,8 @@ TiDB version: 5.2.4
         - (dup: release-5.4.0.md > Improvements> Tools> TiCDC)- Reduce the count of "EventFeed retry rate limited" logs [#4006](https://github.com/pingcap/tiflow/issues/4006)
         - (dup: release-5.3.1.md > Improvements> Tools> TiCDC)- Set the default value of `max-message-bytes` to 10M [#4041](https://github.com/pingcap/tiflow/issues/4041)
         - (dup: release-5.3.1.md > Improvements> Tools> TiCDC)- Add more Promethous and Grafana monitoring metrics and alerts, including `no owner alert`, `mounter row`, `table sink total row`, and `buffer sink total row` [#4054](https://github.com/pingcap/tiflow/issues/4054) [#1606](https://github.com/pingcap/tiflow/issues/1606)
-        - metrics: support multi-k8s in grafana dashboards [#4665](https://github.com/pingcap/tiflow/issues/4665)
-        - Show changefeed checkepoint catch-up ETA in metrics. [#5232](https://github.com/pingcap/tiflow/issues/5232)
+        - Support multiple Kubernetes clusters in Grafana dashboards [#4665](https://github.com/pingcap/tiflow/issues/4665)
+        - Add changefeed checkepoint catch-up ETA in metrics. [#5232](https://github.com/pingcap/tiflow/issues/5232)
 
 ## Bug fixes
 
