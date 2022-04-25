@@ -489,10 +489,10 @@ Configuration items related to Raftstore
 + The time interval at which the polling task of deleting Raft logs is scheduled. `0` means that this feature is disabled.
 + Default value:
 
-    - v5.2.3 and earlier v5.2.x versions: "10s"
-    - v5.2.4 and later v5.2.x versions: "3s"
+    - v5.2.3 and earlier v5.2.x versions: `"10s"`
+    - v5.2.4 and later v5.2.x versions: `"3s"`
 
-+ Minimum value: "0s"
++ Minimum value: `"0s"`
 
 ### `raft-log-gc-threshold`
 
