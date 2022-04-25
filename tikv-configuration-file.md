@@ -1153,12 +1153,8 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 ### `hard-pending-compaction-bytes-limit`
 
 + The hard limit on the pending compaction bytes
-+ Default value:
-
-    - v5.2.3 and earlier v5.2.x versions: `"256GiB"`
-    - v5.2.4 and later v5.2.x versions: `"1TiB"`
-
-+ Unit: KB|MB|GiB
++ Default value: `"256GB"`
++ Unit: KB|MB|GB
 
 ### `enable-compaction-guard`
 
