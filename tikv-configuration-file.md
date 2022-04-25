@@ -478,11 +478,21 @@ Configuration items related to Raftstore
 + Minimum value: `0`
 + Unit: MB|GB
 
+### `raft-log-compact-sync-interval` <span class="version-mark">New in v5.2.4</span>
+
++ The time interval to compact unnecessary Raft logs
++ Default value: `"2s"`
++ Minimum value: `"0s"`
+
 ### `raft-log-gc-tick-interval`
 
 + The time interval at which the polling task of deleting Raft logs is scheduled. `0` means that this feature is disabled.
-+ Default value: `"10s"`
-+ Minimum value: `0`
++ Default value:
+
+    - v5.2.3 and earlier v5.2.x versions: "10s"
+    - v5.2.4 and later v5.2.x versions: "3s"
+
++ Minimum value: "0s"
 
 ### `raft-log-gc-threshold`
 
@@ -1145,8 +1155,8 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 + The hard limit on the pending compaction bytes
 + Default value:
 
-    - v5.2.3 and earlier v5.2.x releases: `"256GiB"`
-    - v5.2.4 and later v5.2.x releases: `"1TiB"`
+    - v5.2.3 and earlier v5.2.x versions: `"256GiB"`
+    - v5.2.4 and later v5.2.x versions: `"1TiB"`
 
 + Unit: KB|MB|GiB
 
