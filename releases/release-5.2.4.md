@@ -160,7 +160,7 @@ TiDB version: 5.2.4
 
     + Backup & Restore (BR)
 
-        - Fix the issue that BR fails when backing up RawKV [#32607](https://github.com/pingcap/tidb/issues/32607)
+        - Fix the issue that BR fails to back up RawKV [#32607](https://github.com/pingcap/tidb/issues/32607)
 
     + TiCDC
 
