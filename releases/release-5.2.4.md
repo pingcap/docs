@@ -17,8 +17,8 @@ TiDB version: 5.2.4
 
 + TiKV
 
-    - Add the configuration item [`raft-log-compact-sync-interval`](/tikv-configuration-file.md#raft-log-compact-sync-interval-new-in-v524-version) to control the time interval (`"2s"` by default) to compact unnecessary Raft logs [#11404](https://github.com/tikv/tikv/issues/11404)
-    - Change the default value of the [`raft-log-gc-tick-interval`](/tikv-configuration-file.md#raft-log-gc-tick-interval) configuration from `"10s"` to `"3s"` [#11404](https://github.com/tikv/tikv/issues/11404)
+    - Add [`raft-log-compact-sync-interval`](/tikv-configuration-file.md#raft-log-compact-sync-interval-new-in-v524-version) to control the time interval (`"2s"` by default) to compact unnecessary Raft logs [#11404](https://github.com/tikv/tikv/issues/11404)
+    - Change the default value of [`raft-log-gc-tick-interval`](/tikv-configuration-file.md#raft-log-gc-tick-interval) from `"10s"` to `"3s"` [#11404](https://github.com/tikv/tikv/issues/11404)
     - When [`storage.flow-control.enable`](/tikv-configuration-file.md#enable) is set to `true`, the value of [`storage.flow-control.hard-pending-compaction-bytes-limit`](/tikv-configuration-file.md#hard-pending-compaction-bytes-limit) overwrites that of [`rocksdb.(defaultcf|writecf|lockcf).hard-pending-compaction-bytes-limit`](/tikv-configuration-file.md#hard-pending-compaction-bytes-limit-1) [#11424](https://github.com/tikv/tikv/issues/11424)
 
 + Tools
