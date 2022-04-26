@@ -157,7 +157,7 @@ If you have specified URL parameters and command-line parameters at the same tim
 | `--s3.acl` | The canned ACL of the upload object. For example, `private` and `authenticated-read`. |
 | `--s3.provider` | The type of the S3-compatible service. The supported types are `aws`, `alibaba`, `ceph`, `netease` and `other`. |
 
-To export data to non-AWS S3 cloud storage, you should specify the cloud provider and whether to use `virtual-hosted style`. The following exemplifies storage to Alibaba Cloud OSS:
+To export data to non-AWS S3 cloud storage, specify the cloud provider and whether to use `virtual-hosted style`. In the following examples, data is exported to the Alibaba Cloud OSS storage:
 
 * Export data to Alibaba Cloud OSS using Dumpling:
 
@@ -185,7 +185,7 @@ To export data to non-AWS S3 cloud storage, you should specify the cloud provide
         --log-file backuptable.log
     ```
 
-* Export data from TiDB Lightning to Alibaba Cloud OSS:
+* Export data to Alibaba Cloud OSS using TiDB Lightning. You need to specify the following content in the YAML-formatted configuration file:
 
     {{< copyable "" >}}
 
