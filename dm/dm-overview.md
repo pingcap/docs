@@ -70,7 +70,7 @@ You are welcome to participate in the DM open sourcing project. Your contributio
 You can learn about DM through the online documentation. If you have any questions, contact us in one of the following ways.
 
 - [GitHub](https://github.com/pingcap/tiflow/tree/master/dm)
-- [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=sig-migrate&ref=pingcap-docs)
+- [TiDB Internals forum](https://internals.tidb.io/)
 
 ## License
 
