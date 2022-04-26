@@ -27,8 +27,8 @@ If you use Dumpling to export data, the table schema file is automatically expor
 
     Create SQL files that contain the required DDL statements:
 
-    - The format of the file name is `${db_name}-schema-create.sql`, and this file should have the `CREATE DATABASE` statements.
-    - The format of the file name is `${db_name}.${table_name}-schema.sql`, and this file should have the `CREATE TABLE` statements.
+    - Add `CREATE DATABASE` statements in the `${db_name}-schema-create.sql` files.
+    - Add `CREATE TABLE` statements in the `${db_name}.${table_name}-schema.sql` files.
 
 + **Method 2**: Create the target table schema manually.
 
