@@ -9,7 +9,7 @@ aliases: ['/tidb/dev/tidb-specific-system-variables','/docs/dev/system-variables
 TiDB system variables behave similar to MySQL, in that settings apply on a `SESSION` or `GLOBAL` scope:
 
 - Changes on a `SESSION` scope will only affect the current session.
-- Changes on a `GLOBAL` scope apply immediately, provided that the variable is not also `SESSION` scoped. In which case all sessions (including your session) will continue to use their current session value.
+- Changes on a `GLOBAL` scope apply immediately. If this variable is also`SESSION` scoped, all sessions (including your session) will continue to use their current session value.
 - Changes are made using the [`SET` statement](/sql-statements/sql-statement-set-variable.md):
 
 ```sql
