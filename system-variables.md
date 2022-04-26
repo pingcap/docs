@@ -821,7 +821,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Default value: `ON`
-- This variable permits `INSTANCE` scoped variables to be set with `SET SESSION` as well as `SET GLOBAL` syntax.
+- This variable permits `INSTANCE` scoped variables to be set using the `SET SESSION` as well as `SET GLOBAL` syntax.
 - This option is enabled by default for compatibility with earlier versions of TiDB.
 
 ### tidb_enable_list_partition <span class="version-mark">New in v5.0</span>
