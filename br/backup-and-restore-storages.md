@@ -77,7 +77,6 @@ Cloud storages such as S3, GCS and Azblob sometimes require additional configura
 | `region` | Service Region for Amazon S3 (default to `us-east-1`) |
 | `use-accelerate-endpoint` | Whether to use the accelerate endpoint on Amazon S3 (default to `false`) |
 | `endpoint` | URL of custom endpoint for S3-compatible services (for example, `https://s3.example.com/`) |
-| `force-path-style` | Use `path-style`, instead of `virtual-hosted style` (default to `true`) |
 | `force-path-style` | Use path style access rather than virtual hosted style access (default to `false`) |
 | `storage-class` | Storage class of the uploaded objects (for example, `STANDARD`, `STANDARD_IA`) |
 | `sse` | Server-side encryption algorithm used to encrypt the upload (empty, `AES256` or `aws:kms`) |
