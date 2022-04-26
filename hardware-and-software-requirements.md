@@ -126,6 +126,17 @@ As an open source distributed NewSQL database, TiDB requires the following netwo
 | Alertmanager | 9093 | the port for the alert web service |
 | Alertmanager | 9094 | the alert communication port |
 
+## Disk space requirements
+
+| Component | Disk space requirement |
+| :-- | :-- |
+| TiDB |  |
+| PD | Reserve at least 30 GB for data and log disks |
+| TiKV | Reserve at least 100 GB for data and log disks <br/> Ensure that the disk usage is below 90% |
+| TiFlash | TiFlash binary: Occupies 2.1 GB. Considering log space, you are advised to reserve no less than 30 GB space for the deployment directory <br/> Data disk: No less than 100 GB is recommended. 20 GB is the minimum requirement. Ensure that the disk usage is below 80% |
+| TiUP | A TiUP cluster occupies hundreds of megabytes. During deployment, the TiUP cluster requires no more than 1 MB /tmp space to restore temporary configuration files |
+ Ngmonitoring | Conprof: 3 x 1 GB x Number of components + 20 GB (reserved space. 3 days, 1 GB for each component per day)<br/>TopSQL: 30 x 50 MB x Number of components (30 days, 50 MB for each component per day, shared with Continuous Profiling) |
+
 ## Web browser requirements
 
 TiDB relies on [Grafana](https://grafana.com/) to provide visualization of database metrics. A recent version of Internet Explorer, Chrome or Firefox with Javascript enabled is sufficient.
