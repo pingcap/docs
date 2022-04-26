@@ -45,7 +45,7 @@ SELECT * FROM collations WHERE character_set_name='utf8mb4';
 3 rows in set (0.001 sec)
 ```
 
-The description of columns in the `COLLATION` table is as follows:
+The description of columns in the `COLLATIONS` table is as follows:
 
 * `COLLATION_NAME`: The name of the collation.
 * `CHARACTER_SET_NAME`: The name of the character set which the collation belongs to.
