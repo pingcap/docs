@@ -183,7 +183,7 @@ The replication mode is controlled by PD. When deploying a cluster, you can conf
     wait-sync-timeout = "1m"
     ```
 
-- Method 2: If you have deployed a cluster, use pd-ctl commands to modify the configuration of PD.
+- Method 2: If you have deployed a cluster, use pd-ctl commands to modify the configurations of PD.
 
     {{< copyable "" >}}
 
