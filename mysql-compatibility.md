@@ -40,8 +40,8 @@ However, some features of MySQL are not supported. This could be because there i
 + `OPTIMIZE TABLE` syntax
 + `CHECKSUM TABLE` syntax [#1895](https://github.com/pingcap/tidb/issues/1895)
 + `GET_LOCK` and `RELEASE_LOCK` functions [#14994](https://github.com/pingcap/tidb/issues/14994)
-+ `HANDLER` statements
-+ `CREATE TABLESPACE` Statement
++ `HANDLER` statement
++ `CREATE TABLESPACE` statement
 
 ## Features that are different from MySQL
 
