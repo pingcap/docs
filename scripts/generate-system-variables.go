@@ -72,7 +72,6 @@ func skipSv(sv *variable.SysVar) bool {
 		variable.MaxPreparedStmtCount,
 		variable.TiDBBatchCommit,
 		variable.TiDBBatchDelete,
-		variable.TiDBBatchInsert,
 		variable.TiDBEnableChangeMultiSchema, // feature flag
 		variable.TiDBEnableExchangePartition, // feature flag
 		variable.TiDBEnableExtendedStats,     // feature flag
@@ -102,7 +101,6 @@ func skipSv(sv *variable.SysVar) bool {
 		variable.TiDBOptScanFactor,
 		variable.TiDBOptSeekFactor,
 		variable.TiDBOptTiFlashConcurrencyFactor,
-		variable.TiDBRestrictedReadOnly,
 		variable.TiDBShardAllocateStep,
 		variable.TiDBStreamAggConcurrency,
 		variable.TiDBTrackAggregateMemoryUsage,
@@ -116,7 +114,9 @@ func skipSv(sv *variable.SysVar) bool {
 		variable.TiDBBatchPendingTiFlashCount,
 		variable.TiDBGCMaxWaitTime,
 		variable.TiDBRemoveOrderbyInSubquery,
-		variable.TiDBTxnCommitBatchSize:
+		variable.TiDBTxnCommitBatchSize,
+		variable.TiDBOptProjectionPushDown,
+		variable.TiDBEnableNewCostInterface:
 
 		return true
 	}
@@ -257,7 +257,7 @@ func formatSpecialVersionComment(sv *variable.SysVar) string {
 		return ` <span class="version-mark">New in v5.1</span>`
 	case variable.TiDBAnalyzeVersion:
 		return ` <span class="version-mark">New in v5.1.0</span>`
-	case variable.SkipNameResolve, variable.TiDBAllowFunctionForExpressionIndex:
+	case variable.SkipNameResolve, variable.TiDBAllowFunctionForExpressionIndex, variable.TiDBRestrictedReadOnly:
 		return ` <span class="version-mark">New in v5.2.0</span>`
 	case variable.TiDBEnablePseudoForOutdatedStats, variable.TiDBEnableTSOFollowerProxy, variable.TiDBLogFileMaxDays,
 		variable.TiDBTmpTableMaxSize, variable.TiDBTSOClientBatchMaxWaitTime:
@@ -448,6 +448,7 @@ func getExtendedDescription(sv *variable.SysVar) string {
 			"- If a table has a lot of partitions, you can reduce the variable value appropriately to avoid TiKV becoming out of memory (OOM)."
 	case variable.TiDBDMLBatchSize:
 		return "- When this value is greater than `0`, TiDB will batch commit statements such as `INSERT` or `LOAD DATA` into smaller transactions. This reduces memory usage and helps ensure that the `txn-total-size-limit` is not reached by bulk modifications.\n" +
+			"- To use `tidb_dml_batch_size` in `INSERT` statements, you also need to set the system variable `tidb_batch_insert` to `ON`.\n" +
 			"- Only the value `0` provides ACID compliance. Setting this to any other value will break the atomicity and isolation guarantees of TiDB."
 	case variable.TiDBEnableAmendPessimisticTxn:
 		return "- This variable is used to control whether to enable the `AMEND TRANSACTION` feature. If you enable the `AMEND TRANSACTION` feature in a pessimistic transaction, when concurrent DDL operations and SCHEMA VERSION changes exist on tables associated with this transaction, TiDB attempts to amend the transaction. TiDB corrects the transaction commit to make the commit consistent with the latest valid SCHEMA VERSION so that the transaction can be successfully committed without getting the `Information schema is changed` error. This feature is effective on the following concurrent DDL operations:\n" +
@@ -1021,13 +1022,13 @@ func getExtendedDescription(sv *variable.SysVar) string {
 			"- User scenarios: For read queries that use `IndexLookup` and `Limit` and that `Limit` cannot be pushed down to `IndexScan`, there might be high latency for the read queries and high CPU usage for TiKV's `unified read pool`. In such cases, because the `Limit` operator only requires a small set of data, if you set `tidb_enable_paging` to `ON`, TiDB processes less data, which reduces query latency and resource consumption.\n" +
 			"- When `tidb_enable_paging` is enabled, for the `IndexLookUp` requests with `Limit` that cannot be pushed down and are fewer than `960`, TiDB uses the method of paging to send coprocessor requests. The fewer `Limit`, the more obvious the optimization."
 	case variable.TiDBEnableLegacyInstanceScope:
-		return "- This variable permits `INSTANCE` scoped variables to be set with `SET SESSION` as well as `SET GLOBAL` syntax.\n" +
+		return "- This variable permits `INSTANCE` scoped variables to be set using the `SET SESSION` as well as `SET GLOBAL` syntax.\n" +
 			"- This option is enabled by default for compatibility with earlier versions of TiDB."
 	case variable.TiDBEnableMutationChecker:
 		return "- This variable is used to control whether to enable TiDB mutation checker, which is a tool used to check consistency between data and indexes during the execution of DML statements. If the checker returns an error for a statement, TiDB rolls back the execution of the statement. Enabling this variable causes a slight increase in CPU usage. For more information, see [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md )."
 	case variable.TiDBIgnorePreparedCacheCloseStmt:
 		return "- This variable is used to set whether to ignore the commands for closing prepared statement cache.\n" +
-			"- When this variable is set to `ON`, the `COM_STMT_CLOSE` command of the Binary protocol and the [`DEALLOCATE PREPARE`](/sql-statements/sql-statement-deallocate.md) statement of the text protocol are ignored. For details, see [Ignore the `COM_STMT_CLOSE` command and the `DEALLOCATE PREPARE` statement](/sql-prepare-plan-cache.md#ignore-the-com_stmt_close-command-and-the-deallocate-prepare-statement)."
+			"- When this variable is set to `ON`, the `COM_STMT_CLOSE` command of the Binary protocol and the [`DEALLOCATE PREPARE`](/sql-statements/sql-statement-deallocate.md) statement of the text protocol are ignored. For details, see [Ignore the `COM_STMT_CLOSE` command and the `DEALLOCATE PREPARE` statement](/sql-prepared-plan-cache.md#ignore-the-com_stmt_close-command-and-the-deallocate-prepare-statement)."
 	case variable.TiDBMemQuotaBindingCache:
 		return "- This variable is used to set the threshold of the memory used for caching bindings.\n" +
 			"- If a system creates or captures excessive bindings, resulting in overuse of memory space, TiDB returns a warning in the log. In this case, the cache cannot hold all available bindings or determine which bindings to store. For this reason, some queries might miss their bindings. To address this problem, you can increase the value of this variable, which increases the memory used for caching bindings. After modifying this parameter, you need to run `admin reload bindings` to reload bindings and validate the modification."
@@ -1050,6 +1051,20 @@ func getExtendedDescription(sv *variable.SysVar) string {
 			"    - `OFF`: Disable this check.\n" +
 			"    - `FAST`: Enable most of the check items, with almost no impact on performance.\n" +
 			"    - `STRICT`: Enable all check items, with a minor impact on pessimistic transaction performance when the system workload is high."
+	case variable.TiDBBatchInsert:
+		return "- This variable permits `tidb_dml_batch_size` to be used in `INSERT` statements.\n" +
+			"- Only the value `OFF` provides ACID compliance. Setting this to any other value breaks the atomicity and isolation guarantees of TiDB, because an individual `INSERT` statement will be split into smaller transactions."
+	case variable.TiDBRestrictedReadOnly:
+		return "- This variable controls the read-only status of the entire cluster. If the variable is enabled (which means that the value is `1`), all TiDB servers in the entire cluster are in the read-only mode. In this case, TiDB only executes the statements that do not modify data, such as `SELECT`, `USE`, and `SHOW`. For other statements such as `INSERT` and `UPDATE`, TiDB rejects executing those statements in the read-only mode.\n" +
+			"- Enabling the read-only mode using this variable only ensures that the entire cluster finally enters the read-only status. If you have changed the value of this variable in a TiDB cluster but the change has not yet propagated to other TiDB servers, the un-updated TiDB servers are still **not** in the read-only mode.\n" +
+			"- When this variable is enabled, the SQL statements being executed are not affected. TiDB only performs the read-only check for the SQL statements **to be** executed.\n" +
+			"- When this variable is enabled, TiDB handles the uncommitted transactions in the following ways:\n" +
+			"    - For uncommitted read-only transactions, you can commit the transactions normally.\n" +
+			"    - For uncommitted transactions that are not read-only, SQL statements that perform write operations in these transactions are rejected.\n" +
+			"    - For uncommitted read-only transactions with modified data, the commit of these transactions is rejected.\n" +
+			"- After the read-only mode is enabled, all users (including the users with the `SUPER` privilege) cannot execute the SQL statements that might write data unless the user is explicitly granted the `RESTRICTED_REPLICA_WRITER_ADMIN` privilege.\n" +
+			"- Users with `RESTRICTED_VARIABLES_ADMIN` or `SUPER` privileges can modify this variable. However, if the [security enhanced mode](#tidb_enable_enhanced_security) is enabled, only the users with the `RESTRICTED_VARIABLES_ADMIN` privilege can modify this variable."
+
 	default:
 		return "- No documentation is currently available for this variable."
 	}
@@ -1077,7 +1092,7 @@ func main() {
 		"TiDB system variables behave similar to MySQL, in that settings apply on a `SESSION` or `GLOBAL` scope:\n" +
 		"\n" +
 		"- Changes on a `SESSION` scope will only affect the current session.\n" +
-		"- Changes on a `GLOBAL` scope apply immediately, provided that the variable is not also `SESSION` scoped. In which case all sessions (including your session) will continue to use their current session value.\n" +
+		"- Changes on a `GLOBAL` scope apply immediately. If this variable is also`SESSION` scoped, all sessions (including your session) will continue to use their current session value.\n" +
 		"- Changes are made using the [`SET` statement](/sql-statements/sql-statement-set-variable.md):\n" +
 		"\n" +
 		"```sql\n" +
@@ -1092,7 +1107,10 @@ func main() {
 		"\n" +
 		"> **Note:**\n" +
 		">\n" +
-		"> Several `GLOBAL` variables persist to the TiDB cluster. For variables that specify `Persists to cluster: Yes` a notification is sent to all TiDB servers to refresh their system variable cache when the global variable is changed. Adding additional TiDB servers (or restarting existing TiDB servers) will automatically use the persisted configuration value. For variables that specify `Persists to cluster: No` any changes only apply to the local TiDB instance that you are connected to. In order to retain any values set, you will need to specify them in your `tidb.toml` configuration file.\n" +
+		"> Several `GLOBAL` variables persist to the TiDB cluster. Some variables in this document have a `Persists to cluster` setting, which can be configured to `Yes` or `No`.\n" +
+		">\n" +
+		"> - For variables with the `Persists to cluster: Yes` setting, when a global variable is changed, a notification is sent to all TiDB servers to refresh their system variable cache. When you add additional TiDB servers or restart existing TiDB servers, the persisted configuration value is automatically used.\n" +
+		"> - For variables with the `Persists to cluster: No` setting, changes only apply to the local TiDB instance that you are connected to. To retain any values set, you need to specify the variables in your `tidb.toml` configuration file.\n" +
 		">\n" +
 		"> Additionally, TiDB presents several MySQL variables as both readable and settable. This is required for compatibility, because it is common for both applications and connectors to read MySQL variables. For example, JDBC connectors both read and set query cache settings, despite not relying on the behavior.\n" +
 		"\n" +
