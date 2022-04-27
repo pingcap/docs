@@ -50,7 +50,7 @@
     - [Migrate from CSV Files](/migrate-from-csv-files-to-tidb.md)
     - [Migrate from SQL Files](/migrate-from-sql-files-to-tidb.md)
     - [Migrate from one TiDB cluster to another TiDB cluster](/migrate-from-tidb-to-tidb.md)
-    - [Replicate incremental data from TiDB to Kafka](/replicate-incremental-data-to-kafka.md)
+    - [Replicate data from TiDB to Kafka](/replicate-incremental-data-to-kafka.md)
   - Advanced Migration
     - [Continuous Replication with gh-ost or pt-osc](/migrate-with-pt-ghost.md)
     - [Migrate to a Downstream Table with More Columns](/migrate-with-more-columns-downstream.md)
