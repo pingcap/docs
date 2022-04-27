@@ -1,11 +1,11 @@
 ---
-title: Replicate incremental data from TiDB to Kafka
-summary: Learn how to replicate incremental data from TiDB to Kafka
+title: Replicate data from TiDB to Kafka
+summary: Learn how to replicate data from TiDB to Kafka
 ---
 
-# Replicate incremental data from TiDB to Kafka
+# Replicate data from TiDB to Kafka
 
-This document describes how to replicate incremental data from TiDB to Kafka by using [TiCDC](/ticdc/ticdc-overview.md), which includes the following steps:
+This document describes how to replicate data from TiDB to Kafka by using [TiCDC](/ticdc/ticdc-overview.md), which includes the following steps:
 
 - Deploy a TiCDC cluster and a Kafka cluster.
 - Create a changefeed with Kafka as the sink.
