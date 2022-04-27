@@ -254,7 +254,7 @@ After setting up the environment, you can use the backup and restore functions o
     1 row in set (0.00 sec)
     ```
 
-## Step 4. Switch services to the new TiDB cluster.
+## Step 4. Switch services to the new TiDB cluster
 
 After creating a changefeed, data written to the upstream cluster is replicated to the downstream cluster with low latency. You can migrate read stream to the downstream cluster gradually. Observe a period. If the downstream cluster is stable, you can switch write stream to the downstream cluster as well, which may include three steps:
 
