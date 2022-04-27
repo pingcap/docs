@@ -36,9 +36,12 @@ However, some features of MySQL are not supported. This could be because there i
 + `XA` syntax (TiDB uses a two-phase commit internally, but this is not exposed via an SQL interface)
 + `CREATE TABLE tblName AS SELECT stmt` syntax [#4754](https://github.com/pingcap/tidb/issues/4754)
 + `CHECK TABLE` syntax [#4673](https://github.com/pingcap/tidb/issues/4673)
++ `REPAIR TABLE` syntax
++ `OPTIMIZE TABLE` syntax
 + `CHECKSUM TABLE` syntax [#1895](https://github.com/pingcap/tidb/issues/1895)
 + `GET_LOCK` and `RELEASE_LOCK` functions [#14994](https://github.com/pingcap/tidb/issues/14994)
-+ `HANDLER` commands
++ `HANDLER` statements
++ `CREATE TABLESPACE` Statement
 
 ## Features that are different from MySQL
 
