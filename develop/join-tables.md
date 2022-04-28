@@ -200,7 +200,7 @@ The full outer join is based on all the records in the left table and the right 
 
 ### CROSS JOIN
 
-When the join condition is constant, the join between the two tables is called a [cross join](https://en.wikipedia.org/wiki/Join_(SQL)#Cross_join). A cross join joins every record of the left table to all the records of the right table. If the number of records in the left table is m and the number of records in the right table is n, then m \* n records will be generated in the result set.
+When the join condition is constant, the inner join between the two tables is called a [cross join](https://en.wikipedia.org/wiki/Join_(SQL)#Cross_join). A cross join joins every record of the left table to all the records of the right table. If the number of records in the left table is m and the number of records in the right table is n, then m \* n records will be generated in the result set.
 
 ### LEFT SEMI JOIN
 
