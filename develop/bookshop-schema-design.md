@@ -143,7 +143,14 @@ The following describes the database table structure of the Bookshop application
 
 This table is used to store the basic information of the book.
 
-
+| Field name   | Type          | Explain                                                          |
+|--------------|---------------|------------------------------------------------------------------|
+| id           | bigint(20)    | Unique ID of the book                                            |
+| title        | varchar(100)  | Book title                                                       |
+| type         | enum          | Types of books (eg: magazines / animation / teaching aids, etc.) |
+| stock        | bigint(20)    | Stock                                                            |
+| price        | decimal(15,2) | Price                                                            |
+| published_at | datetime      | Date of publish                                                  |
 
 ### `authors` table
 
