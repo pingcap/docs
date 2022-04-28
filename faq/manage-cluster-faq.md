@@ -220,8 +220,14 @@ To estimate the size of a table in TiDB, you can use the following query stateme
 SELECT
     db_name,
     table_name,
-    SUM(total_size / cnt)                   Approximate_Size,
-    SUM(total_size / cnt / @amplification)  Disk_Size
+    ROUND(SUM(total_size / cnt), 2) Approximate_Size,
+    ROUND(SUM(total_size / cnt / (SELECT
+                    ROUND(AVG(value), 2)
+                FROM
+                    METRICS_SCHEMA.store_size_amplification
+                WHERE
+                    value > 0)),
+            2) Disk_Size
 FROM
     (SELECT
         db_name,
@@ -233,7 +239,7 @@ FROM
         information_schema.TIKV_REGION_STATUS
     WHERE
         db_name = @dbname
-        AND table_name in (@table_name)
+            AND table_name IN (@table_name)
     GROUP BY db_name , table_name , region_id) tabinfo
 GROUP BY db_name , table_name;
 ```
@@ -242,9 +248,12 @@ When using the above statement, you need to fill in and replace the following fi
 
 - `@dbname`: the name of the database.
 - `@table_name`: the name of the target table.
-- `@size_amplification`: the average of the cluster compression ratio. To get this information, check the **Size amplification** metric for each node on the **Grafana Monitoring PD - statistics balance** panel. The average of the cluster compression ratio is the average of the Size amplification for all nodes.
 
-In addition, `Approximate_Size` in the above statement indicates the size of the table before compression and `Disk_Size` indicates the size of the table after compression.
+In addition, in the above statement:
+
+- `store_size_amplification` indicates the average of the cluster compression ratio. In addition to using `SELECT * FROM METRICS_SCHEMA.store_size_amplification;` to query this information, you can also check the **Size amplification** metric for each node on the **Grafana Monitoring PD - statistics balance** panel. The average of the cluster compression ratio is the average of the Size amplification for all nodes.
+- `Approximate_Size` indicates the size of the table in a replica before compression. Note that this is an approximate value, not an accurate one.
+- `Disk_Size` indicates the size of the table after compression. This is an approximate value and can be calculated according to `Approximate_Size` and `store_size_amplification`.
 
 ## TiKV server management
 
