@@ -259,6 +259,7 @@ ORDER BY page_num;
 ### Clustered index table
 
 For clustered index tables (also known as "index-organized tables"), we can use the `concat` function to concatenate the values ​​of multiple columns as a key, and then use the window function to get the paging information.
+
 It should be noted that the key is a string at this time, and you must ensure that the length of the string is always the same, in order to obtain the correct `start_key` and `end_key` in the slice through the `min` and `max` aggregation functions. If the length of the field for string concatenation is not fixed, you can use the `LPAD` function to complete it.
 
 For example, we want to do a paged batch of the data in the `ratings` table.
