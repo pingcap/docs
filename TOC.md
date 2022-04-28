@@ -22,6 +22,21 @@
   - [Import Example Database](/import-example-data.md)
 - Develop
   - [Developer Guide Overview](/develop/developer-guide-overview.md)
+  - Read Data
+    - [Get Data from Single Table](/develop/get-data-from-single-table.md)
+    - [Multi-table Join Query](/develop/join-tables.md)
+    - [Subqueries](/develop/use-subqueries.md)
+    - [Paginate Results](/develop/paginate-results.md)
+    - [Views](/develop/use-views.md)
+    - [Temporary Tables](/develop/use-temporary-tables.md)
+    - [Common Table Expression](/develop/use-common-table-expression.md)
+    - Read Replica Data
+      - [Follower Read](/develop/use-follower-read.md)
+      - [Stale Read](/develop/use-stale-read.md)
+    - [HTAP Queries](/develop/hybrid-oltp-and-olap-queries.md)
+  - Reference
+    - SQL
+      - [Bookshop Example Application](/develop/bookshop-schema-design.md)
 - Deploy
   - [Software and Hardware Requirements](/hardware-and-software-requirements.md)
   - [Environment Configuration Checklist](/check-before-deployment.md)
