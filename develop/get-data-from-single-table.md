@@ -231,7 +231,7 @@ The query results are as follows:
 10 rows in set (0.11 sec)
 ```
 
-By observing the query results, you can see that after using the `LIMIT` statement, the query time is significantly shortened. This is the result of TiDB's optimization of the LIMIT clause. You can push down [TopN and Limit] ( https://docs.pingcap.com/zh/tidb/stable/topn-limit-push-down) for more details.
+By observing the query results, you can see that after using the `LIMIT` statement, the query time is significantly shortened. This is the result of TiDB's optimization of the LIMIT clause. You can push down [TopN and Limit](https://docs.pingcap.com/tidb/stable/topn-limit-push-down) for more details.
 
 ## Aggregate Queries
 
