@@ -218,30 +218,43 @@ To estimate the size of a table in TiDB, you can use the following query stateme
 
 ```sql
 SELECT
-    db_name,
-    table_name,
-    ROUND(SUM(total_size / cnt), 2) Approximate_Size,
-    ROUND(SUM(total_size / cnt / (SELECT
-                    ROUND(AVG(value), 2)
-                FROM
-                    METRICS_SCHEMA.store_size_amplification
-                WHERE
-                    value > 0)),
-            2) Disk_Size
+  db_name,
+  table_name,
+  ROUND(SUM(total_size / cnt), 2) Approximate_Size,
+  ROUND(
+    SUM(
+      total_size / cnt / (
+        SELECT
+          ROUND(AVG(value), 2)
+        FROM
+          METRICS_SCHEMA.store_size_amplification
+        WHERE
+          value > 0
+      )
+    ),
+    2
+  ) Disk_Size
 FROM
-    (SELECT
-        db_name,
-            table_name,
-            region_id,
-            SUM(Approximate_Size) total_size,
-            COUNT(*) cnt
+  (
+    SELECT
+      db_name,
+      table_name,
+      region_id,
+      SUM(Approximate_Size) total_size,
+      COUNT(*) cnt
     FROM
-        information_schema.TIKV_REGION_STATUS
+      information_schema.TIKV_REGION_STATUS
     WHERE
-        db_name = @dbname
-            AND table_name IN (@table_name)
-    GROUP BY db_name , table_name , region_id) tabinfo
-GROUP BY db_name , table_name;
+      db_name = @dbname
+      AND table_name IN (@table_name)
+    GROUP BY
+      db_name,
+      table_name,
+      region_id
+  ) tabinfo
+GROUP BY
+  db_name,
+  table_name;
 ```
 
 When using the above statement, you need to fill in and replace the following fields in the statement as appropriate.
