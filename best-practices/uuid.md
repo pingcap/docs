@@ -13,10 +13,6 @@ There are several benefits to using a `UUID` as a primary key, instead of an `AU
 - UUIDs are supported by most programming languages and database systems.
 - When used as part of URLs, a UUID is not vulnerable to enumeration attacks. i.e. with an `auto_increment` number, it is possible to guess the other invoice ids or user ids.
 
-## Using UUID's with TiDB
-
-In TiDB you can generate UUID's with [`UUID()`](/functions-and-operators/miscellaneous-functions.md) and use `UUID_TO_BIN()` and `BIN_TO_UUID()` to convert from a text format to a binary format and back.
-
 ## Best practices
 
 ### Store as binary
