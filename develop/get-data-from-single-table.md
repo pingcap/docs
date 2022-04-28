@@ -15,7 +15,7 @@ Next, we will introduce the data query section of TiDB around the [Bookshop](/de
 Before reading this chapter, you need to do the following:
 
 1. Build a TiDB cluster (recommended to use [TiDB Cloud](/develop/build-cluster-in-cloud.md) or [TiUP](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)).
-2. [Import table schema and sample data of Bookshop application](/develop/bookshop-schema-design.md#导入数据.)
+2. [Import table schema and sample data of Bookshop application](/develop/bookshop-schema-design.md#import-data).
 3. [Connect to TiDB](/develop/connect-to-tidb.md).
 
 ## A simple query

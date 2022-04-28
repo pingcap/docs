@@ -12,7 +12,7 @@ In the [Create Database](/develop/create-table.md#using-htap-capability) chapter
 
 ## Data preparation
 
-Before starting, you can import much larger sample data [via the `tiup demo` command](/develop/bookshop-schema-design.md#mode-1-via-tiup-demo-command-line), for example:
+Before starting, you can import much larger sample data [via the `tiup demo` command](/develop/bookshop-schema-design.md#method-1-through-tiup-demo-command-line), for example:
 
 {{< copyable "shell-regular" >}}
 
@@ -20,7 +20,7 @@ Before starting, you can import much larger sample data [via the `tiup demo` com
 tiup demo bookshop prepare --users=200000 --books=500000 --authors=100000 --ratings=1000000 --orders=1000000 --host 127.0.0.1 --port 4000 --drop-tables
 ```
 
-Or [using the Import function of TiDB Cloud](/develop/bookshop-schema-design.md#Method-2-through-tidb-cloud-import-function) to import the pre-prepared sample data.
+Or [using the Import function of TiDB Cloud](/develop/bookshop-schema-design.md#method-2-through-the-tidb-cloud-import-function) to import the pre-prepared sample data.
 
 ## Window function
 
@@ -149,7 +149,7 @@ For example, in the previous [Pagination Query](/develop/paginate-results.md) ch
 
 ### Enable column replica
 
-TiDB's default storage engine, TiKV, is row-stored. Before proceeding to the next steps, you can read the section [Enable HTAP Capability](/develop/create-table.md#Use-htap-capability) and add a TiFlash column-stored replica of the `books` and `orders` tables using the following SQL.
+TiDB's default storage engine, TiKV, is row-stored. Before proceeding to the next steps, you can read the section [Enable HTAP Capability](/develop/create-table.md#using-htap-capability) and add a TiFlash column-stored replica of the `books` and `orders` tables using the following SQL.
 
 {{< copyable "sql" >}}
 
