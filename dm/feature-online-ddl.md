@@ -214,7 +214,7 @@ The SQL statements mostly used by pt-osc and the corresponding operation of DM a
 
 ## Other online schema change tools
 
-In some case, you might need to change the default behavior of your online schema change tool. For example, you might use customized names for `ghost table` and `trash table`. In other cases, you might want to use other tools instead of gh-ost or pt-osc, with the same working principles and change processes.
+In some cases, you might need to change the default behavior of your online schema change tool. For example, you might use customized names for `ghost table` and `trash table`. In other cases, you might want to use other tools instead of gh-ost or pt-osc, with the same working principles and change processes.
 
 To achieve such customized needs, you need to write regular expressions to match the names of the `ghost table` and `trash table`.
 
