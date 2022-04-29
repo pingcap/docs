@@ -7,9 +7,41 @@ category: Releases
 
 # TiDB 5.4.1 Release Notes
 
-Release Date: April 29, 2022
+Release Date: May xx, 2022
 
 TiDB version: 5.4.1
+
+## Improvements
+
++ PingCAP/TiDB
+
+    - ```release-note [#34067](https://github.com/pingcap/tidb/pull/34067)
+
+
++ Tools
+
+    + PingCAP/TiCDC
+
+        - `None`. [#4828](https://github.com/pingcap/tiflow/pull/4828)
+
+## Bug Fixes
+
++ PingCAP/TiDB
+
+    - executor: fix CTE is block when query report error [#33190](https://github.com/pingcap/tidb/pull/33190)
+    - planner: fix wrong range calculation for Nulleq function on Enum values [#32496](https://github.com/pingcap/tidb/pull/32496)
+
+
++ PingCAP/TiFlash
+
+    - Fix the potential crash issue that occurs when TLS is enabled [#4689](https://github.com/pingcap/tiflash/pull/4689)
+    - Fix the metadata corruption issue when `Prepare Merge` is triggered after a new election is finished but the isolated peer is not informed [#4496](https://github.com/pingcap/tiflash/pull/4496)
+    - Fix the issue that a query containing `JOIN` could be hung if an error was encountered [#4270](https://github.com/pingcap/tiflash/pull/4270)
+
+
++ PD
+
+    - Fix the issue that duration fields of dr-autosync cannot be set [#4660](https://github.com/tikv/pd/pull/4660)
 
 ## __unsorted
 
@@ -55,7 +87,6 @@ TiDB version: 5.4.1
     - fix load data will panic in some case [#31774](https://github.com/pingcap/tidb/pull/31774)
     - Fix a data race that may cause "invalid transaction" error when executing a query using index lookup join. [#31351](https://github.com/pingcap/tidb/pull/31351)
 
-
 + TiKV/TiKV
 
     - Fixes that successfully committed optimistic transactions may report false WriteConflict on network errors. [#12378](https://github.com/tikv/tikv/pull/12378)
@@ -71,7 +102,6 @@ TiDB version: 5.4.1
     - Reduce CDC recovery time by reduce the number regions that need resolved lock. [#12001](https://github.com/tikv/tikv/pull/12001)
     - Fix a potential panic (#11746) when snapshot files have been deleted but the peer's status is still Applying. [#11905](https://github.com/tikv/tikv/pull/11905)
     - fix potential high latency caused by destroying a peer [#11881](https://github.com/tikv/tikv/pull/11881)
-
 
 + PingCAP/TiFlash
 
@@ -99,14 +129,12 @@ TiDB version: 5.4.1
     - Fix potential query error after add column under heavy read workload [#4028](https://github.com/pingcap/tiflash/pull/4028)
     - Fix the problem of TiFlash crashing when the memory limit is enabled [#3919](https://github.com/pingcap/tiflash/pull/3919)
 
-
 + PD
 
     - None. [#4849](https://github.com/tikv/pd/pull/4849)
     - Fix the issue that the label distribution has residual labels [#4826](https://github.com/tikv/pd/pull/4826)
     - metrics: support multi-k8s in grafana dashboards [#4717](https://github.com/tikv/pd/pull/4717)
     - None. [#4664](https://github.com/tikv/pd/pull/4664)
-
 
 + Tools
 
@@ -149,39 +177,3 @@ If you don't think this PR needs a release note then fill it with `None`. [#4513
         - `None`. [#4466](https://github.com/pingcap/tiflow/pull/4466)
         - Fix the issue that update statement execute error in safemode may cause DM-worker panic. [#4438](https://github.com/pingcap/tiflow/pull/4438)
         - None. [#4431](https://github.com/pingcap/tiflow/pull/4431)
-
-
-## Improvements
-
-+ PingCAP/TiDB
-
-    - ```release-note [#34067](https://github.com/pingcap/tidb/pull/34067)
-
-
-+ Tools
-
-    + PingCAP/TiCDC
-
-        - `None`. [#4828](https://github.com/pingcap/tiflow/pull/4828)
-
-
-## Bug Fixes
-
-+ PingCAP/TiDB
-
-    - executor: fix CTE is block when query report error [#33190](https://github.com/pingcap/tidb/pull/33190)
-    - planner: fix wrong range calculation for Nulleq function on Enum values [#32496](https://github.com/pingcap/tidb/pull/32496)
-
-
-+ PingCAP/TiFlash
-
-    - Fix the potential crash issue that occurs when TLS is enabled [#4689](https://github.com/pingcap/tiflash/pull/4689)
-    - Fix the metadata corruption issue when `Prepare Merge` is triggered after a new election is finished but the isolated peer is not informed [#4496](https://github.com/pingcap/tiflash/pull/4496)
-    - Fix the issue that a query containing `JOIN` could be hung if an error was encountered [#4270](https://github.com/pingcap/tiflash/pull/4270)
-
-
-+ PD
-
-    - Fix the issue that duration fields of dr-autosync cannot be set [#4660](https://github.com/tikv/pd/pull/4660)
-
-
