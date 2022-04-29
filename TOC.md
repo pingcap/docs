@@ -47,14 +47,14 @@
   - Read Data
     - [Get Data from a Single Table](/develop/get-data-from-single-table.md)
     - [Join Tables](/develop/join-tables.md)
-    - [Subqueries](/develop/subquries.md)
+    - [Subqueries](/develop/use-subquries.md)
     - [Paginate Results](/develop/paginate-results.md)
-    - [Views](/develop/views.md)
-    - [Temporary Tables](/develop/temporary-table.md)
-    - [Common Table Expression](/develop/common-table-expression.md)
+    - [Views](/develop/use-views.md)
+    - [Temporary Tables](/develop/use-temporary-table.md)
+    - [Common Table Expression](/develop/use-common-table-expression.md)
     - Read Data from Copy
-      - [Follower Read](/develop/follower-read.md)
-      - [Stale Read](/develop/stale-read.md)
+      - [Follower Read](/develop/use-follower-read.md)
+      - [Stale Read](/develop/use-stale-read.md)
     - [HTAP Queries](/develop/hybrid-oltp-and-olap-queries.md)
   - Transaction
     - [Overview](/develop/transaction-overview.md)
