@@ -190,28 +190,15 @@ func printUnits(sv *variable.SysVar) string {
 }
 
 func formatScope(sv *variable.SysVar) string {
-	// Manually cater for "INSTANCE" scope, which historically has not been a native concept.
-	switch sv.Name {
-	case variable.TiDBDDLSlowOprThreshold, variable.TiDBCheckMb4ValueInUTF8, variable.TiDBEnableCollectExecutionInfo,
-		variable.TiDBEnableSlowLog, variable.TiDBExpensiveQueryTimeThreshold, variable.TiDBForcePriority,
-		variable.TiDBSlowLogThreshold, variable.TiDBPProfSQLCPU, variable.TiDBQueryLogMaxLen, variable.TiDBRecordPlanInSlowLog,
-		variable.TiDBMemoryUsageAlarmRatio, variable.PluginDir, variable.PluginLoad:
-		return "INSTANCE"
-	}
-
 	if sv.HasNoneScope() {
 		return "NONE"
 	}
 	if sv.HasSessionScope() && sv.HasGlobalScope() {
 		return "SESSION | GLOBAL"
 	}
-	// For real instance scoped variables we call them GLOBAL
+	// For INSTANCE scoped variables we call them GLOBAL
 	// But show a persists to cluster: NO.
-	// Eventually all instance scoped variables will look like this.
-	if sv.HasInstanceScope() {
-		return "GLOBAL"
-	}
-	if sv.HasGlobalScope() {
+	if sv.HasInstanceScope() || sv.HasGlobalScope() {
 		return "GLOBAL"
 	}
 	return "SESSION"
@@ -1055,7 +1042,7 @@ func getExtendedDescription(sv *variable.SysVar) string {
 		return "- This variable permits `tidb_dml_batch_size` to be used in `INSERT` statements.\n" +
 			"- Only the value `OFF` provides ACID compliance. Setting this to any other value breaks the atomicity and isolation guarantees of TiDB, because an individual `INSERT` statement will be split into smaller transactions."
 	case variable.TiDBRestrictedReadOnly:
-		return "- This variable controls the read-only status of the entire cluster. If the variable is enabled (which means that the value is `1`), all TiDB servers in the entire cluster are in the read-only mode. In this case, TiDB only executes the statements that do not modify data, such as `SELECT`, `USE`, and `SHOW`. For other statements such as `INSERT` and `UPDATE`, TiDB rejects executing those statements in the read-only mode.\n" +
+		return "- This variable controls the read-only status of the entire cluster. When the variable is `ON`, all TiDB servers in the entire cluster are in the read-only mode. In this case, TiDB only executes the statements that do not modify data, such as `SELECT`, `USE`, and `SHOW`. For other statements such as `INSERT` and `UPDATE`, TiDB rejects executing those statements in the read-only mode.\n" +
 			"- Enabling the read-only mode using this variable only ensures that the entire cluster finally enters the read-only status. If you have changed the value of this variable in a TiDB cluster but the change has not yet propagated to other TiDB servers, the un-updated TiDB servers are still **not** in the read-only mode.\n" +
 			"- When this variable is enabled, the SQL statements being executed are not affected. TiDB only performs the read-only check for the SQL statements **to be** executed.\n" +
 			"- When this variable is enabled, TiDB handles the uncommitted transactions in the following ways:\n" +

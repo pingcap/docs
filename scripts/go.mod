@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/go-sql-driver/mysql v1.6.0
-	github.com/pingcap/tidb v1.1.0-beta.0.20220427122651-6bd54bea8a9e
+	github.com/pingcap/tidb v1.1.0-beta.0.20220503035853-fbe60158fa38
 )
 
 require (
@@ -66,5 +66,4 @@ require (
 	gopkg.in/natefinch/lumberjack.v2 v2.0.0 // indirect
 )
 
-replace github.com/pingcap/tidb => github.com/morgo/tidb v1.1.0-beta.0.20220427152044-8de8a5057f93
 replace github.com/tikv/client-go/v2 => github.com/tikv/client-go/v2 v2.0.1-0.20220406091203-f73ec0e675f4
