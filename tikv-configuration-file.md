@@ -408,22 +408,22 @@ Configuration items related to the flow control mechanism in TiKV. This mechanis
 
 ### `memtables-threshold`
 
-+ When the number of kvDB memtables reaches this threshold, the flow control mechanism starts to work. When `enable` is set to `true`, the value of `rocksdb.(defaultcf|writecf|lockcf).max-write-buffer-number` overrides that of this configuration item.
++ When the number of kvDB memtables reaches this threshold, the flow control mechanism starts to work. When `enable` is set to `true`, this configuration item overrides `rocksdb.(defaultcf|writecf|lockcf).max-write-buffer-number`.
 + Default value: `5`
 
 ### `l0-files-threshold`
 
-+ When the number of kvDB L0 files reaches this threshold, the flow control mechanism starts to work. When `enable` is set to `true`, the value of `rocksdb.(defaultcf|writecf|lockcf).level0-slowdown-writes-trigger` overrides that of this configuration item.
++ When the number of kvDB L0 files reaches this threshold, the flow control mechanism starts to work. When `enable` is set to `true`, this configuration item overrides `rocksdb.(defaultcf|writecf|lockcf).level0-slowdown-writes-trigger`.
 + Default value: `20`
 
 ### `soft-pending-compaction-bytes-limit`
 
-+ When the pending compaction bytes in KvDB reach this threshold, the flow control mechanism starts to reject some write requests and reports the `ServerIsBusy` error. When `enable` is set to `true`, the value of `rocksdb.(defaultcf|writecf|lockcf).soft-pending-compaction-bytes-limit` overrides that of this configuration item.
++ When the pending compaction bytes in KvDB reach this threshold, the flow control mechanism starts to reject some write requests and reports the `ServerIsBusy` error. When `enable` is set to `true`, this configuration item overrides `rocksdb.(defaultcf|writecf|lockcf).soft-pending-compaction-bytes-limit`.
 + Default value: `"192GB"`
 
 ### `hard-pending-compaction-bytes-limit`
 
-+ When the pending compaction bytes in KvDB reach this threshold, the flow control mechanism rejects all write requests and reports the `ServerIsBusy` error. When `enable` is set to `true`, the value of `rocksdb.(defaultcf|writecf|lockcf).hard-pending-compaction-bytes-limit` overrides that of this configuration item.
++ When the pending compaction bytes in KvDB reach this threshold, the flow control mechanism rejects all write requests and reports the `ServerIsBusy` error. When `enable` is set to `true`, this configuration item overrides `rocksdb.(defaultcf|writecf|lockcf).hard-pending-compaction-bytes-limit`.
 + Default value: `"1024GB"`
 
 ## storage.io-rate-limit
@@ -1108,7 +1108,7 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 
 ### `max-write-buffer-number`
 
-+ The maximum number of memtables. When `storage.flow-control.enable` is set to `true`, the value of `storage.flow-control.memtables-threshold` overrides that of this configuration item.
++ The maximum number of memtables. When `storage.flow-control.enable` is set to `true`, this configuration item overrides  `storage.flow-control.memtables-threshold`.
 + Default value: `5`
 + Minimum value: `0`
 
@@ -1142,7 +1142,7 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 
 ### `level0-slowdown-writes-trigger`
 
-+ The maximum number of files at L0 that trigger write stall. When `storage.flow-control.enable` is set to `true`, the value of `storage.flow-control.l0-files-threshold` overrides that of this configuration item.
++ The maximum number of files at L0 that trigger write stall. When `storage.flow-control.enable` is set to `true`, this configuration item overrides `storage.flow-control.l0-files-threshold`.
 + Default value: `20`
 + Minimum value: `0`
 
@@ -1194,13 +1194,13 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 
 ### `soft-pending-compaction-bytes-limit`
 
-+ The soft limit on the pending compaction bytes. When `storage.flow-control.enable` is set to `true`, the value of `storage.flow-control.soft-pending-compaction-bytes-limit` overrides that of this configuration item.
++ The soft limit on the pending compaction bytes. When `storage.flow-control.enable` is set to `true`, this configuration item overrides `storage.flow-control.soft-pending-compaction-bytes-limit`.
 + Default value: `"192GB"`
 + Unit: KB|MB|GB
 
 ### `hard-pending-compaction-bytes-limit`
 
-+ The hard limit on the pending compaction bytes. When `storage.flow-control.enable` is set to `true`, the value of `storage.flow-control.hard-pending-compaction-bytes-limit` overrides that of this configuration item.
++ The hard limit on the pending compaction bytes. When `storage.flow-control.enable` is set to `true`, this configuration item overrides `storage.flow-control.hard-pending-compaction-bytes-limit`.
 + Default value: `"256GB"`
 + Unit: KB|MB|GB
 
