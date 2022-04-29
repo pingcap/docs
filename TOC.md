@@ -45,14 +45,14 @@
     - [Delete Data](/develop/delete-data.md)
     - [Prepared Statement](/develop/prepared-statement.md)
   - Read Data
-    - [Get Data from a Single Table](/develop/get-data-from-single-table.md)
-    - [Join Tables](/develop/join-tables.md)
-    - [Subqueries](/develop/use-subquries.md)
+    - [Get Data from Single Table](/develop/get-data-from-single-table.md)
+    - [Multi-table Join Query](/develop/join-tables.md)
+    - [Subqueries](/develop/use-subqueries.md)
     - [Paginate Results](/develop/paginate-results.md)
     - [Views](/develop/use-views.md)
-    - [Temporary Tables](/develop/use-temporary-table.md)
+    - [Temporary Tables](/develop/use-temporary-tables.md)
     - [Common Table Expression](/develop/use-common-table-expression.md)
-    - Read Data from Copy
+    - Read Replica Data
       - [Follower Read](/develop/use-follower-read.md)
       - [Stale Read](/develop/use-stale-read.md)
     - [HTAP Queries](/develop/hybrid-oltp-and-olap-queries.md)
@@ -75,7 +75,7 @@
       - [Timeouts](/develop/timeouts-in-tidb.md)
   - Reference
     - SQL
-      - [Bookshop Sample Application](/develop/bookshop-schema-design.md)
+      - [Bookshop Example Application](/develop/bookshop-schema-design.md)
     - Guidelines
       - [Object Naming Guidelines](/develop/object-naming-guidelines.md)
       - [SQL Development Specification](/develop/sql-development-specification.md)
