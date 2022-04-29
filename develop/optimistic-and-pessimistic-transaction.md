@@ -5,7 +5,7 @@ summary: Introduce optimistic and pessimistic transaction in TiDB, retries of op
 
 # Optimistic transaction and pessimistic transaction
 
-Simply put, the [optimistic transaction](https://docs.pingcap.com/zh/tidb/stable/optimistic-transaction) model is to commit directly, and rollback when there is a conflict, [pessimistic transaction](https://docs.pingcap.com/zh/tidb/stable/pessimistic-transaction) model is to try to lock the resources that need to be modified before actually committing the transaction, and only start committing after ensuring that the transaction can be successfully executed.
+Simply put, the [optimistic transaction](/optimistic-transaction.md) model is to commit directly, and rollback when there is a conflict, [pessimistic transaction](/pessimistic-transaction.md) model is to try to lock the resources that need to be modified before actually committing the transaction, and only start committing after ensuring that the transaction can be successfully executed.
 
 For the optimistic transaction model, it is more suitable for scenarios with a low conflict rate, because the direct submission has a high probability of success, and the conflict is a small probability event, but once a transaction conflict is encountered, the cost of rollback will be relatively high.
 
@@ -31,7 +31,7 @@ Because we use multiple threads to simulate the simultaneous insertion of multip
 
 #### Configuration file
 
-If you use Maven as package management, in the `<dependencies>` node in `pom.xml`, add the following dependencies to import `HikariCP`, and set the packaging goal, and the main class of the JAR package startup, complete ` pom.xml` looks like this:
+If you use Maven as package management, in the `<dependencies>` node in `pom.xml`, add the following dependencies to import `HikariCP`, and set the packaging goal, and the main class of the JAR package startup, complete `pom.xml` looks like this:
 
 {{< copyable "" >}}
 
