@@ -1,8 +1,6 @@
 ---
 title: TiDB 5.4.1 Release Notes
-category: Releases
 ---
-
 
 
 # TiDB 5.4.1 Release Notes
@@ -11,18 +9,58 @@ Release Date: May xx, 2022
 
 TiDB version: 5.4.1
 
+## Compatibility changes
+
++ TiDB
+
+    - note 1
+    - note 2
+
++ TiKV
+
+    - note 1
+    - note 2
+
 ## Improvements
 
 + TiDB
 
     - (dup: release-6.0.0-dmr.md > Improvements> TiDB)- Support using the PointGet plan for queries that read the `_tidb_rowid` column [#31543](https://github.com/pingcap/tidb/issues/31543)
 
++ TiKV
+
+    - note 1
+
++ PD
+
+    - note 1
+
++ TiDB Dashboard
+
+    - note 1
+
++ TiFlash
+
+    - note 1
+
 + Tools
+
+    + Backup & Restore (BR)
+
+        - note 1
 
     + TiCDC
 
         - (dup: release-5.2.4.md > Improvements> Tools> TiCDC)- Support multiple Kubernetes clusters in Grafana dashboards [#4665](https://github.com/pingcap/tiflow/issues/4665)
         - (dup: release-5.2.4.md > Improvements> Tools> TiCDC)- Expose configuration parameters of the Kafka producer to make them configurable in TiCDC [#4385](https://github.com/pingcap/tiflow/issues/4385)
+
+    + Dumpling
+
+        - note 1
+
+    + TiDB Lightning
+
+        - note 1
 
     + TiDB Data Migration (DM)
 
@@ -68,6 +106,10 @@ TiDB version: 5.4.1
     - (dup: release-5.2.4.md > Bug fixes> TiKV)- Fix the panic issue caused by deleting snapshot files when the peer status is `Applying` [#11746](https://github.com/tikv/tikv/issues/11746)
     - (dup: release-5.2.4.md > Bug fixes> TiKV)- Fix the issue that destroying a peer might cause high latency [#10210](https://github.com/tikv/tikv/issues/10210)
 
++ PD
+
+    - (dup: release-6.0.0-dmr.md > Bug fixes> PD)- Fix the issue that `Duration` fields of `dr-autosync` cannot be dynamically configured [#4651](https://github.com/tikv/pd/issues/4651)
+
 + TiFlash
 
     - (dup: release-5.2.4.md > Bug fixes> TiFlash)- Fix the panic issue that occurs when TLS is enabled [#4196](https://github.com/pingcap/tiflash/issues/4196)
@@ -91,10 +133,6 @@ TiDB version: 5.4.1
     - (dup: release-5.2.4.md > Bug fixes> TiFlash)- Fix the potential query error after adding columns under heavy read workload [#3967](https://github.com/pingcap/tiflash/issues/3967)
     - (dup: release-5.2.4.md > Bug fixes> TiFlash)- Fix the panic issue that occurs when the memory limit is enabled [#3902](https://github.com/pingcap/tiflash/issues/3902)
 
-+ PD
-
-    - (dup: release-6.0.0-dmr.md > Bug fixes> PD)- Fix the issue that `Duration` fields of `dr-autosync` cannot be dynamically configured [#4651](https://github.com/tikv/pd/issues/4651)
-
 + Tools
 
     + Backup & Restore (BR)
@@ -111,17 +149,21 @@ TiDB version: 5.4.1
         - (dup: release-5.2.4.md > Bug fixes> Tools> TiCDC)- Fix a bug that a TiCDC node exits abnormally when a PD leader is killed [#4248](https://github.com/pingcap/tiflow/issues/4248)
         - (dup: release-5.2.4.md > Bug fixes> Tools> TiCDC)- Fix a bug that MySQL sink generates duplicated `replace` SQL statements when `batch-replace-enable` is disabled [#4501](https://github.com/pingcap/tiflow/issues/4501)
 
-    + TiDB Data Migration (DM)
-
-        - (dup: release-6.0.0-dmr.md > Bug fixes> Tools> TiDB Data Migration (DM))- Fix the issue that hundreds of "checkpoint has no change, skip sync flush checkpoint" print in the log and the replication is very slow [#4619](https://github.com/pingcap/tiflow/issues/4619)
-        - (dup: release-6.0.0-dmr.md > Bug fixes> Tools> TiDB Data Migration (DM))- Fix a bug that long varchars report an error `Column length too big` [#4637](https://github.com/pingcap/tiflow/issues/4637)
-        - (dup: release-6.0.0-dmr.md > Bug fixes> Tools> TiDB Data Migration (DM))- Fix the issue that execution errors of the update statement in safemode may cause the DM-worker panic [#4317](https://github.com/pingcap/tiflow/issues/4317)
-
     + TiDB Lightning
 
         - (dup: release-5.2.4.md > Bug fixes> Tools> TiDB Lightning)- Fix the checksum error “GC life time is shorter than transaction duration” [#32733](https://github.com/pingcap/tidb/issues/32733)
         - (dup: release-6.0.0-dmr.md > Bug fixes> Tools> TiDB Lightning)- Fix the issue that TiDB Lightning gets stuck when it fails to check empty tables [#31797](https://github.com/pingcap/tidb/issues/31797)
         - (dup: release-5.2.4.md > Bug fixes> Tools> TiDB Lightning)- Fix a bug that TiDB Lightning may not delete the metadata schema when some import tasks do not contain source files [#28144](https://github.com/pingcap/tidb/issues/28144)
+
+    + Dumpling
+
+        - note 1
+
+    + TiDB Data Migration (DM)
+
+        - (dup: release-6.0.0-dmr.md > Bug fixes> Tools> TiDB Data Migration (DM))- Fix the issue that hundreds of "checkpoint has no change, skip sync flush checkpoint" print in the log and the replication is very slow [#4619](https://github.com/pingcap/tiflow/issues/4619)
+        - (dup: release-6.0.0-dmr.md > Bug fixes> Tools> TiDB Data Migration (DM))- Fix a bug that long varchars report an error `Column length too big` [#4637](https://github.com/pingcap/tiflow/issues/4637)
+        - (dup: release-6.0.0-dmr.md > Bug fixes> Tools> TiDB Data Migration (DM))- Fix the issue that execution errors of the update statement in safemode may cause the DM-worker panic [#4317](https://github.com/pingcap/tiflow/issues/4317)
 
 ## __unsorted
 
