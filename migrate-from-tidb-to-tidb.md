@@ -3,7 +3,7 @@ title: Migrate from one TiDB cluster to another TiDB cluster
 summary: Learn how to migrate data from one TiDB cluster to another TiDB cluster.
 ---
 
-# Migrate from one TiDB cluster to another TiDB cluster
+# Migrate from One TiDB Cluster to Another TiDB Cluster
 
 This document describes how to migrate data from one TiDB cluster to another TiDB cluster. This function applies to the following scenarios:
 

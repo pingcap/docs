@@ -3,7 +3,7 @@ title: Replicate data from TiDB to Kafka
 summary: Learn how to replicate data from TiDB to Kafka
 ---
 
-# Replicate data from TiDB to Kafka
+# Replicate Data from TiDB to Kafka
 
 This document describes how to replicate data from TiDB to Kafka by using [TiCDC](/ticdc/ticdc-overview.md), which includes the following steps:
 

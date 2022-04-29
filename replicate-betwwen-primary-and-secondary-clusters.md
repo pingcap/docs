@@ -4,7 +4,7 @@ summary: Learn how to replicate data from a primary cluster to a secondary clust
 aliases: ['/docs/dev/incremental-replication-between-clusters/']
 ---
 
-# Replicate data between primary and secondary clusters
+# Replicate Data Between Primary and Secondary Clusters
 
 This document describes how to configure a TiDB primary (upstream) cluster and a TiDB or MySQL secondary (downstream) cluster, and replicate incremental data from the primary cluster to the secondary cluster. The process includes the following steps:
 
