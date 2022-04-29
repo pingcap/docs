@@ -73,7 +73,7 @@ TiDB version: 5.4.1
     - (dup: release-6.0.0-dmr.md > Bug fixes> TiDB)- Fix a bug that CTE might be blocked when a query reports errors [#31302](https://github.com/pingcap/tidb/issues/31302)
     - (dup: release-5.2.4.md > Bug fixes> TiDB)- Fix wrong range calculation results for Nulleq function on Enum values [#32428](https://github.com/pingcap/tidb/issues/32428)
     - (dup: release-6.0.0-dmr.md > Bug fixes> TiDB)- Fix TiDB OOM when exporting data using ChunkRPC [#31981](https://github.com/pingcap/tidb/issues/31981) [#30880](https://github.com/pingcap/tidb/issues/30880)
-    - (dup: release-6.0.0-dmr.md > Bug fixes> TiDB)- Fix the issue that `date_format` in TiDB handles in a MySQL-incompatible way [#32232](https://github.com/pingcap/tidb/issues/32232)
+    - (dup: release-6.0.0-dmr.md > Bug fixes> TiDB)- Fix the issue that `date_format` in TiDB handles `'\n'` in a MySQL-incompatible way [#32232](https://github.com/pingcap/tidb/issues/32232)
     - (dup: release-6.0.0-dmr.md > Bug fixes> TiDB)- Fix the potential issue that Regions might be unevenly distributed after a restore operation is finished [#31034](https://github.com/pingcap/tidb/issues/31034)
     - (dup: release-5.3.1.md > Bug fixes> TiDB)- Fix a bug that `tidb_super_read_only` is not automatically enabled when `tidb_restricted_read_only` is enabled [#31745](https://github.com/pingcap/tidb/issues/31745)
     - (dup: release-6.0.0-dmr.md > Bug fixes> TiDB)- Fix the issue that the `greatest` or `least` function with collation gets a wrong result [#31789](https://github.com/pingcap/tidb/issues/31789)
@@ -98,7 +98,6 @@ TiDB version: 5.4.1
     - (dup: release-5.2.4.md > Bug fixes> TiKV)- Fix a bug that stale messages cause TiKV to panic [#12023](https://github.com/tikv/tikv/issues/12023)
     - (dup: release-5.2.4.md > Bug fixes> TiKV)- Fix the issue of intermittent packet loss and out of memory (OOM) caused by the overflow of memory metrics [#12160](https://github.com/tikv/tikv/issues/12160)
     - (dup: release-5.2.4.md > Bug fixes> TiKV)- Fix the potential panic issue that occurs when TiKV performs profiling on Ubuntu 18.04 [#9765](https://github.com/tikv/tikv/issues/9765)
-    - metrics: support multi k8s in grafana dashboards. [#12104](https://github.com/tikv/tikv/issues/12104)
     - (dup: release-5.2.4.md > Bug fixes> TiKV)- Fix a bug that replica reads might violate the linearizability [#12109](https://github.com/tikv/tikv/issues/12109)
     - (dup: release-5.2.4.md > Bug fixes> TiKV)- Fix the TiKV panic issue that occurs when the target peer is replaced with the peer that is destroyed without being initialized when merging a Region [#12048](https://github.com/tikv/tikv/issues/12048)
     - (dup: release-5.2.4.md > Bug fixes> TiKV)- Fix a bug that TiKV might panic if it has been running for 2 years or more [#11940](https://github.com/tikv/tikv/issues/11940)
@@ -128,8 +127,7 @@ TiDB version: 5.4.1
     - (dup: release-5.2.4.md > Bug fixes> TiFlash)- Fix the bug that some exceptions are not handled properly [#4101](https://github.com/pingcap/tiflash/issues/4101)
     - (dup: release-5.2.4.md > Bug fixes> TiFlash)- Fix the issue that casting `INT` to `DECIMAL` might cause overflow [#3920](https://github.com/pingcap/tiflash/issues/3920)
     - (dup: release-5.2.4.md > Bug fixes> TiFlash)- Fix the issue that the result of `IN` is incorrect in multi-value expressions [#4016](https://github.com/pingcap/tiflash/issues/4016)
-    - (dup: release-5.2.4.md > Bug fixes> TiFlash)- Fix the issue that the date format identifies `'
-'` as an invalid separator [#4036](https://github.com/pingcap/tiflash/issues/4036)
+    - (dup: release-5.2.4.md > Bug fixes> TiFlash)- Fix the issue that the date format identifies `'\n'` as an invalid separator [#4036](https://github.com/pingcap/tiflash/issues/4036)
     - (dup: release-5.2.4.md > Bug fixes> TiFlash)- Fix the potential query error after adding columns under heavy read workload [#3967](https://github.com/pingcap/tiflash/issues/3967)
     - (dup: release-5.2.4.md > Bug fixes> TiFlash)- Fix the panic issue that occurs when the memory limit is enabled [#3902](https://github.com/pingcap/tiflash/issues/3902)
 
@@ -190,6 +188,7 @@ TiDB version: 5.4.1
 
     - Fix that successfully committed optimistic transactions may report false WriteConflict on network errors. [#34066](https://github.com/pingcap/tidb/issues/34066)
     - Fix panicking when replica read is enabled and there is a long time network condition [#12046](https://github.com/tikv/tikv/issues/12046)
+    - metrics: support multi k8s in grafana dashboards. [#12104](https://github.com/tikv/tikv/issues/12104)
 
 + PingCAP/TiFlash
 
