@@ -9,7 +9,7 @@
   - Benchmarks
     - [v6.0 Sysbench Performance Test Report](/benchmark/benchmark-sysbench-v6.0.0-vs-v5.4.0.md)
     - [v6.0 TPC-C Performance Test Report](/benchmark/v6.0-performance-benchmarking-with-tpcc.md)
-    - [v5.4 MPP mode TPC-H 100GB Performance Test](/benchmark/v5.4-performance-benchmarking-with-tpch.md)
+    - [Performance Comparison between TiFlash and Greenplum/Spark](/benchmark/v6.0-performance-benchmarking-with-tpch.md)
   - [MySQL Compatibility](/mysql-compatibility.md)
   - [TiDB Limitations](/tidb-limitations.md)
   - [TiDB Adopters](/adopters.md)
@@ -704,7 +704,7 @@
       - [Access](/dashboard/dashboard-access.md)
       - [Overview Page](/dashboard/dashboard-overview.md)
       - [Cluster Info Page](/dashboard/dashboard-cluster-info.md)
-      - [Top SQL](/dashboard/top-sql.md)
+      - [Top SQL Page](/dashboard/top-sql.md)
       - [Key Visualizer Page](/dashboard/dashboard-key-visualizer.md)
       - [Metrics Relation Graph](/dashboard/dashboard-metrics-relation.md)
       - SQL Statements Analysis
@@ -774,6 +774,7 @@
     - [5.3.1](/releases/release-5.3.1.md)
     - [5.3.0](/releases/release-5.3.0.md)
   - v5.2
+    - [5.2.4](/releases/release-5.2.4.md)
     - [5.2.3](/releases/release-5.2.3.md)
     - [5.2.2](/releases/release-5.2.2.md)
     - [5.2.1](/releases/release-5.2.1.md)
