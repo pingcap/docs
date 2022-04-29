@@ -20,9 +20,7 @@ Before reading this page, you need to prepare the following:
 
 ## Create Database
 
-[Database](/develop/schema-design-overview.md#database) logical object is a collection of TiDB **tables**, **views**, **sequences**, etc.
-
-若需创建数据库，请使用 `CREATE DATABASE` 语句，并遵循[数据库最佳实践](#数据库最佳实践)。
+[Database](/develop/schema-design-overview.md) logical object is a collection of TiDB **tables**, **views**, **sequences**, etc.
 
 To create a database, use the `CREATE DATABASE` statement and follow [Database Best Practices](#database-best-practices).
 
