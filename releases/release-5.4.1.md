@@ -79,7 +79,7 @@ TiDB version: 5.4.1
     - Fix BR failure on backup rawkv. [#32607](https://github.com/pingcap/tidb/issues/32607)
     - planner: make queries with the extra column `_tidb_rowid` can use PointGet [#31543](https://github.com/pingcap/tidb/issues/31543)
     - Fix the problem of tidb oom when exporting data using chunk rpc [#31981](https://github.com/pingcap/tidb/issues/31981)
-    - fix date formate identifies '\n' as invalid separator [#32504](https://github.com/pingcap/tidb/pull/32504)
+    - fix date formate identifies '\n' as invalid separator [#32504](https://github.com/pingcap/tidb/issues/32232)
     - Fix the bug that lightning may not clean up metadata schema when some of the import contains no source files. [#28144](https://github.com/pingcap/tidb/issues/28144)
     - Fix a bug that caused region unbalanced after restoring. [#31034](https://github.com/pingcap/tidb/issues/31034)
     - Fixed a bug that turning on tidb_restricted_read_only won't automatically turn on tidb_super_read_only [#31745](https://github.com/pingcap/tidb/issues/31745)
