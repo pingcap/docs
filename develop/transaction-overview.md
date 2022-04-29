@@ -5,7 +5,7 @@ summary: A brief introduction to transactions in TiDB.
 
 # Transaction overview
 
-TiDB supports complete distributed transactions, providing [optimistic transactions](https://docs.pingcap.com/tidb/stable/optimistic-transaction) and [pessimistic transactions](https://docs.pingcap.com/tidb/stable/pessimistic-transaction) (introduced in TiDB 3.0) two transaction models. This article mainly introduces statements related to transactions, optimistic transactions and pessimistic transactions, transaction isolation levels, and optimistic transaction application-side retry and error handling.
+TiDB supports complete distributed transactions, providing [optimistic transactions](/optimistic-transaction.md) and [pessimistic transactions](/pessimistic-transaction.md) (introduced in TiDB 3.0) two transaction models. This article mainly introduces statements related to transactions, optimistic transactions and pessimistic transactions, transaction isolation levels, and optimistic transaction application-side retry and error handling.
 
 ## Common statement
 
@@ -171,4 +171,4 @@ mysql> SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
 ERROR 8048 (HY000): The isolation level 'SERIALIZABLE' is not supported. Set tidb_skip_isolation_level_check=1 to skip this error
 ```
 
-TiDB implements Snapshot Isolation (SI) level consistency. Also known as "repeatable read" for consistency with MySQL. This isolation level is different from [ANSI Repeatable Read Isolation Level](/transaction-isolation-levels#difference-between-tidb-and-ansi-repeatable-read) and [MySQL Repeatable Read Isolation Level](/transaction-isolation-levels#difference-between-tidb-and-mysql-repeatable-read). For more details, please read [TiDB Transaction Isolation Levels](/transaction-isolation-levels).
+TiDB implements Snapshot Isolation (SI) level consistency. Also known as "repeatable read" for consistency with MySQL. This isolation level is different from [ANSI Repeatable Read Isolation Level](/transaction-isolation-levels.md#difference-between-tidb-and-ansi-repeatable-read) and [MySQL Repeatable Read Isolation Level](/transaction-isolation-levels.md#difference-between-tidb-and-mysql-repeatable-read). For more details, please read [TiDB Transaction Isolation Levels](/transaction-isolation-levels.md).
