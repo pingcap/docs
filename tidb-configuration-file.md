@@ -494,7 +494,7 @@ Configuration items related to opentracing.
 
 ### `enable`
 
-+ Enables opentracing to trace the call overhead of some TiDB components. Note that enabling opentracing will cause some performance loss.
++ Enables opentracing to trace the call overhead of some TiDB components. Note that enabling opentracing causes some performance loss.
 + Default value: `false`
 
 ### `rpc-metrics`
