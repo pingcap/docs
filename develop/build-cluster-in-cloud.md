@@ -20,16 +20,16 @@ If you need to start TiDB on your local machine, see [Starting TiDB Locally](htt
 5. Wait for a while. After 5-15 minutes, the creation will be completed. You can check the creation progress at [Active Clusters](https://tidbcloud.com/console/clusters).
 6. After creation, on the **Active Clusters** page, click the cluster name to enter the cluster control panel
 
-    ![active clusters](media/IMG_20220331-232643794.png)
+    ![active clusters](/media/IMG_20220331-232643794.png)
 
 7. Click **Connect** to create a traffic filter (list of client IPs allowed to connect)
 
-    ![connect](media/IMG_20220331-232726165.png)
+    ![connect](/media/IMG_20220331-232726165.png)
 
 8. Click **Add Your Current IP Address** in the popup window. We will be filled in by your current network IP. Click **Create Filter** to create a traffic filter.
 9. Copy the connection string from the popup window **Step 2: Connect with a SQL client** for the next step.
 
-    ![SQL string](media/IMG_20220331-232800929.png)
+    ![SQL string](/media/IMG_20220331-232800929.png)
 
 ## Step 2. Connect to a cluster
 
