@@ -41,7 +41,7 @@ But when migrating data in parallel, you need to take the following into conside
 
 ### Handle conflicts between primary keys or unique indexes
 
-When using [Local-backend mode](/tidb-lightning/tidb-lightning-backends.md#tidb-lightning) to import in parallel, you need to ensure that there are no primary key or unique index conflicts between data sources, and between the tables in the target TiDB cluster. Ensure that there are no data writes in the target table during import. Otherwise, TiDB Lightning will not be able to guarantee the correctness of the imported data, and the target table will contain inconsistent indexes after the import is completed.
+When using [Local-backend mode](/tidb-lightning/tidb-lightning-backends.md#local-backend) to import in parallel, you need to ensure that there are no primary key or unique index conflicts between data sources, and between the tables in the target TiDB cluster. Ensure that there are no data writes in the target table during import. Otherwise, TiDB Lightning will not be able to guarantee the correctness of the imported data, and the target table will contain inconsistent indexes after the import is completed.
 
 ### Optimize import performance
 
