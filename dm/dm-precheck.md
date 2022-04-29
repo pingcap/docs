@@ -112,7 +112,7 @@ For the full and incremental data migration mode (`task-mode: all`), in addition
 
 ### Ignorable check items
 
-Prechecks can find potential risks in your environments. It is not recommended to ignore check items. If you data migration task has special needs, you can use the [`ignore-checking-items` configuration item](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced) to skip some check items.
+Prechecks can find potential risks in your environments. It is not recommended to ignore check items. If your data migration task has special needs, you can use the [`ignore-checking-items` configuration item](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced) to skip some check items.
 
 | Check item  | Description   |
 | :---------- | :------------ |
@@ -125,9 +125,8 @@ Prechecks can find potential risks in your environments. It is not recommended t
 | `schema_of_shard_tables`| Checks the consistency of the table schemas in the upstream MySQL multi-instance shards. |
 | `auto_increment_ID`     | Checks whether the auto-increment primary key conflicts in the upstream MySQL multi-instance shards. |
 
-> **注意：**
+> **Note: **
 >
-> 6.0 之前的版本支持忽略更多的检查项，但诸如 `binlog_row_image` 等参数，若配置错误可能导致同步时丢失数据，因此在 6.0 版本中移除了部分与数据安全相关的检查项。
 > More ignorable check items are supported in versions earlier than v6.0. Since v6.0, DM does not allow ignoring some check items related to data safety. For example, if you configure the `binlog_row_image` parameter incorrectly, data might be lost during the replication.
 
 ## Configure precheck arguments
