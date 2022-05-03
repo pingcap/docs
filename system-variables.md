@@ -181,7 +181,8 @@ mysql> SELECT * FROM t1;
 
 ### ddl_slow_threshold
 
-- Scope: INSTANCE
+- Scope: GLOBAL
+- Persists to cluster: No
 - Default value: `300`
 - Unit: Milliseconds
 - Log DDL operations whose execution time exceeds the threshold value.
@@ -320,13 +321,15 @@ This variable is an alias for `last_insert_id`.
 
 ### plugin_dir
 
-- Scope: INSTANCE
+- Scope: GLOBAL
+- Persists to cluster: No
 - Default value: ""
 - Indicates the directory to load plugins as specified by a command-line flag.
 
 ### plugin_load
 
-- Scope: INSTANCE
+- Scope: GLOBAL
+- Persists to cluster: No
 - Default value: ""
 - Indicates the plugins to load when TiDB is started. These plugins are specified by a command-line flag and separated by commas.
 
@@ -568,7 +571,8 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 ### tidb_check_mb4_value_in_utf8
 
-- Scope: INSTANCE
+- Scope: GLOBAL
+- Persists to cluster: No
 - Default value: `ON`
 - This variable is used to enforce that the `utf8` character set only stores values from the [Basic Multilingual Plane (BMP)](https://en.wikipedia.org/wiki/Plane_(Unicode)#Basic_Multilingual_Plane). To store characters outside the BMP, it is recommended to use the `utf8mb4` character set.
 - You might need to disable this option when upgrading your cluster from an earlier version of TiDB where the `utf8` checking was more relaxed. For details, see [FAQs After Upgrade](/faq/upgrade-faq.md).
@@ -774,7 +778,8 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 ### tidb_enable_collect_execution_info
 
-- Scope: INSTANCE
+- Scope: GLOBAL
+- Persists to cluster: No
 - Default value: `ON`
 - This variable controls whether to record the execution information of each operator in the slow query log.
 
@@ -907,7 +912,8 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 ### tidb_enable_slow_log
 
-- Scope: INSTANCE
+- Scope: GLOBAL
+- Persists to cluster: No
 - Default value: `ON`
 - This variable is used to control whether to enable the slow log feature.
 
@@ -1077,7 +1083,8 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 ### tidb_expensive_query_time_threshold
 
-- Scope: INSTANCE
+- Scope: GLOBAL
+- Persists to cluster: No
 - Default value: `60`
 - Range: `[10, 2147483647]`
 - Unit: Seconds
@@ -1087,7 +1094,8 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 ### tidb_force_priority
 
-- Scope: INSTANCE
+- Scope: GLOBAL
+- Persists to cluster: No
 - Default value: `NO_PRIORITY`
 - This variable is used to change the default priority for statements executed on a TiDB server. A use case is to ensure that a particular user that is performing OLAP queries receives lower priority than users performing OLTP queries.
 - You can set the value of this variable to `NO_PRIORITY`, `LOW_PRIORITY`, `DELAYED` or `HIGH_PRIORITY`.
@@ -1341,16 +1349,18 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 ### tidb_mem_quota_query
 
-- Scope: SESSION
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
 - Default value: `1073741824` (1 GiB)
-- Range: `[-1, 9223372036854775807]`
+- Range: `[128, 137438953472]`
 - Unit: Bytes
 - This variable is used to set the threshold value of memory quota for a query.
 - If the memory quota of a query during execution exceeds the threshold value, TiDB performs the operation designated by the OOMAction option in the configuration file. The initial value of this variable is configured by [`mem-quota-query`](/tidb-configuration-file.md#mem-quota-query).
 
 ### tidb_memory_usage_alarm_ratio
 
-- Scope: INSTANCE
+- Scope: GLOBAL
+- Persists to cluster: No
 - Default value: `0.8`
 - TiDB triggers an alarm when the percentage of the memory it takes exceeds a certain threshold. For the detailed usage description of this feature, see [`memory-usage-alarm-ratio`](/tidb-configuration-file.md#memory-usage-alarm-ratio-new-in-v409).
 - You can set the initial value of this variable by configuring [`memory-usage-alarm-ratio`](/tidb-configuration-file.md#memory-usage-alarm-ratio-new-in-v409).
@@ -1565,7 +1575,8 @@ explain select * from t where age=5;
 
 ### tidb_pprof_sql_cpu <span class="version-mark">New in v4.0</span>
 
-- Scope: INSTANCE
+- Scope: GLOBAL
+- Persists to cluster: No
 - Default value: `0`
 - Range: `[0, 1]`
 - This variable is used to control whether to mark the corresponding SQL statement in the profile output to identify and troubleshoot performance issues.
@@ -1586,7 +1597,8 @@ explain select * from t where age=5;
 
 ### tidb_query_log_max_len
 
-- Scope: INSTANCE
+- Scope: GLOBAL
+- Persists to cluster: No
 - Default value: `4096` (4 KiB)
 - Range: `[-1, 9223372036854775807]`
 - Unit: Bytes
@@ -1620,7 +1632,8 @@ SET tidb_query_log_max_len = 20
 
 ### tidb_record_plan_in_slow_log
 
-- Scope: INSTANCE
+- Scope: GLOBAL
+- Persists to cluster: No
 - Default value: `ON`
 - This variable is used to control whether to include the execution plan of slow queries in the slow log.
 
@@ -1728,7 +1741,8 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 ### tidb_slow_log_threshold
 
-- Scope: INSTANCE
+- Scope: GLOBAL
+- Persists to cluster: No
 - Default value: `300`
 - Range: `[-1, 9223372036854775807]`
 - Unit: Milliseconds
