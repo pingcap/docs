@@ -35,6 +35,6 @@ Currently, we maintain the following versions of TiDB documentation in different
 
 ## Contributing
 
-[<img src="media/contribution-map.png" alt="contribution-map" width="180"></img>](https://github.com/pingcap/docs-cn/blob/master/credits.md)
+[<img src="media/contribution-map.png" alt="contribution-map" width="180"></img>](https://github.com/pingcap/docs/blob/master/credits.md)
 
 See [TiDB Documentation Contributing Guide](/CONTRIBUTING.md) to become a contributor! 🤓

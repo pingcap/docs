@@ -67,10 +67,7 @@ You are welcome to participate in the DM open sourcing project. Your contributio
 
 ## Community support
 
-You can learn about DM through the online documentation. If you have any questions, contact us in one of the following ways.
-
-- [GitHub](https://github.com/pingcap/tiflow/tree/master/dm)
-- [TiDB Internals forum](https://internals.tidb.io/)
+You can learn about DM through the online documentation. If you have any questions, contact us on [GitHub](https://github.com/pingcap/tiflow/tree/master/dm).
 
 ## License
 
