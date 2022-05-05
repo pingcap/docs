@@ -1,8 +1,8 @@
 ---
-title: Multi-table Join Query
+title: Multi-table Join Queries
 ---
 
-# Multi-table Join Query
+# Multi-table Join Queries
 
 Most of the time，we need to use data from multiple tables in one query. At this time, we can combine the data of two or more tables through the `JOIN` statement.
 

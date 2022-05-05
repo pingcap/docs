@@ -1,8 +1,8 @@
 ---
-title: HTAP Query
+title: HTAP Queries
 ---
 
-# HTAP Query
+# HTAP Queries
 
 HTAP stands for Hybrid Transactional / Analytical Processing. Traditionally, databases are often designed for transactional or analytical scenarios, so the data platform often needs to be split into Transactional Processing and Analytical Processing, and the data needs to be replicated from the transactional database to the analytical database for quick response to analytical queries. TiDB databases can perform both transactional and analytical tasks, which greatly simplifies the construction of data platforms and allows users to use fresher data for analysis.
 
