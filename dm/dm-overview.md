@@ -93,9 +93,13 @@ Before using the DM tool, note the following restrictions:
 
 + Sharding merge with conflicts
 
+<<<<<<< HEAD
     - If conflict exists between sharded tables, solve the conflict by referring to [handling conflicts of auto-increment primary key](/dm/shard-merge-best-practices.md#handle-conflicts-of-auto-increment-primary-key). Otherwise, data migration is not supported. Conflicting data can cover each other and cause data loss.
 
     - For other sharding DDL migration restrictions, see [Sharding DDL usage restrictions in the pessimistic mode](/dm/feature-shard-merge-pessimistic.md#restrictions) and [Sharding DDL usage restrictions in the optimistic mode](/dm/feature-shard-merge-optimistic.md#restrictions).
+=======
+You can learn about DM through the online documentation. If you have any questions, contact us on [GitHub](https://github.com/pingcap/tiflow/tree/master/dm).
+>>>>>>> 3afc92e3d (Updata the contact info from slack to internals (#8389))
 
 + Switch of MySQL instances for data sources
 
