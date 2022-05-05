@@ -46,7 +46,7 @@
     - [Prepared Statement](/develop/prepared-statement.md)
   - Read Data
     - [Get Data from Single Table](/develop/get-data-from-single-table.md)
-    - [Multi-table Join Query](/develop/join-tables.md)
+    - [Multi-table Join Queries](/develop/join-tables.md)
     - [Subqueries](/develop/use-subqueries.md)
     - [Paginate Results](/develop/paginate-results.md)
     - [Views](/develop/use-views.md)
