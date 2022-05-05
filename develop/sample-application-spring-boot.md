@@ -21,7 +21,7 @@ This part describes how to start a TiDB cluster.
 
 ### Using TiDB Cloud Free Cluster
 
-[Create a free cluster](build-cluster-in-cloud.md#step-1-create-a-free-cluster)
+[Create a free cluster](/develop/build-cluster-in-cloud.md#step-1-create-a-free-cluster)
 
 ### Using Local Clusters
 
