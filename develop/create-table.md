@@ -123,8 +123,6 @@ Finally, we added a field named `balance`, type is [decimal](https://docs.pingca
 
 TiDB supports many other column data types, including [Integer types](https://docs.pingcap.com/tidb/stable/data-type-numeric#integer-types), [Floating-point types](https://docs.pingcap.com/tidb/stable/data-type-numeric#floating-point-types), [Fixed-point types](https://docs.pingcap.com/tidb/stable/data-type-numeric#fixed-point-types), [Date and time types](https://docs.pingcap.com/tidb/stable/data-type-date-and-time), [Enum type](https://docs.pingcap.com/tidb/stable/data-type-string#enum-type), etc. You can refer to the supported column [data types](https://docs.pingcap.com/tidb/stable/basic-features#data-types-functions-and-operators) and use the **data types** that match the data you want to save in the database.
 
-让我们稍微提升一下复杂度，例如我们会选择定义一张 `books` 表，这张表将是 `bookshop` 数据的核心。它包含书的 唯一标识、名称、书籍类型（如：杂志、动漫、教辅 等）、库存、价格、出版时间 字段。
-
 Let's increase the complexity a little bit, for example, we will choose to define a `books` table which will be the core of the `bookshop` data. It contains fields for the book's id, title, type (e.g., Magazine, Novel, Life, Arts, etc.), stock, price, and publication date.
 
 {{< copyable "sql" >}}
@@ -150,35 +148,35 @@ This table contains more data types than the `users` table.
 
 [Primary key](https://docs.pingcap.com/tidb/stable/constraints#primary-key) is a column or group of columns, and this value, which is a combination of all **primary key columns**, is a unique identifier for a row of data.
 
-> **注意：**
+> **Note:**
 >
-> TiDB 中，关于 **Primary Key** 的默认定义与 MySQL 常用存储引擎 [InnoDB](https://mariadb.com/kb/en/innodb/) 不一致。**InnoDB** 中，**Primary Key** 的语义为：唯一，不为空，**且为聚簇索引**。
+> In TiDB, the default definition of **Primary Key** is different from [InnoDB](https://mariadb.com/kb/en/innodb/)(the common storage engine of MySQL). In **InnoDB**, The semantics of **Primary Key** is unique, not null, and **index clustered**.
 >
-> 而在 TiDB 中，**Primary Key** 的定义为：唯一，不为空。但主键不保证为**聚簇索引**。而是由另一组关键字 `CLUSTERED`、`NONCLUSTERED` 额外控制 **Primary Key** 是否为聚簇索引，若不指定，则由系统变量 `@@global.tidb_enable_clustered_index` 影响，具体说明请看[此文档](https://docs.pingcap.com/zh/tidb/stable/clustered-indexes)。
+> However, in TiDB, the definition of **Primary Key** is: unique, not null. But the primary key is not guaranteed to be a **clustered index**. Instead, another set of keywords `CLUSTERED` / `NONCLUSTERED` additionally controls whether the **Primary Key** is a **Clustered Index**, and if not specified, is affected by the system variable `@@global.tidb_enable_clustered_index`, as described in [this document](https://docs.pingcap.com/zh/tidb/stable/clustered-indexes).
 
-主键在 `CREATE TABLE` 语句中定义。[主键约束](https://docs.pingcap.com/zh/tidb/stable/constraints#%E4%B8%BB%E9%94%AE%E7%BA%A6%E6%9D%9F)要求所有受约束的列仅包含非 `NULL` 值。
+The **primary key** is defined in the `CREATE TABLE` statement. The [primary key constraint](https://docs.pingcap.com/tidb/stable/constraints#primary-key) requires that all constrained columns contain only non-NULL values.
 
-一个表可以没有主键，主键也可以是非整数类型。但此时 TiDB 就会创建一个 `_tidb_rowid` 作为隐式主键。隐式主键 `_tidb_rowid` 因为其单调递增的特性，可能在大批量写入场景下会导致写入热点，如果你写入量密集，可考虑通过 [SHARD_ROW_ID_BITS](https://docs.pingcap.com/zh/tidb/stable/shard-row-id-bits) 和 [PRE_SPLIT_REGIONS](https://docs.pingcap.com/zh/tidb/stable/sql-statement-split-region#pre_split_regions) 两参数控制打散。但这可能导致读放大，请自行取舍。
+A table can create without **primary key**, and the **primary key** can be a non-integer type. But then TiDB creates an `_tidb_rowid` as an **implicit primary key**. The implicit primary key `_tidb_rowid`, because of its monotonically increasing nature, may cause write hotspots in write-intensive scenarios. So if your application is write-intensive, consider sharding with the [SHARD_ROW_ID_BITS](https://docs.pingcap.com/zh/tidb/stable/shard-row-id-bits) and [PRE_SPLIT_REGIONS](https://docs.pingcap.com/tidb/stable/sql-statement-split-region#pre_split_regions) parameters. However, this may lead to read amplification, so please make your own trade-off.
 
-表的主键为 [整数类型](https://docs.pingcap.com/zh/tidb/stable/data-type-numeric#%E6%95%B4%E6%95%B0%E7%B1%BB%E5%9E%8B) 且使用了 `AUTO_INCREMENT` 时，无法使用 `SHARD_ROW_ID_BITS` 消除热点。需解决此热点问题，且无需使用主键的连续和递增时，可使用 [AUTO_RANDOM](https://docs.pingcap.com/zh/tidb/stable/auto-random) 替换 `AUTO_INCREMENT` 属性来消除行 ID 的连续性。
+When the **primary key** of a table is [integer types](https://docs.pingcap.com/tidb/stable/data-type-numeric#integer-types) and `AUTO_INCREMENT` is used, hotspots cannot avoid by using `SHARD_ROW_ID_BITS`. If you need to avoid hotspots and do not need to use the primary key continuous and incremental, you can use [AUTO_RANDOM](https://docs.pingcap.com/tidb/stable/auto-random) instead of `AUTO_INCREMENT` to eliminate row ID continuous.
 
-更多有关热点问题的处理办法，请参考[TiDB 热点问题处理](https://docs.pingcap.com/zh/tidb/stable/troubleshoot-hot-spot-issues)。
+For more information on how to handle hotspot issues, please refer to [Troubleshoot Hotspot Issues](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues).
 
 #### Best Practices for select primary key
 
-以下是在 TiDB 中选择主键列时需要遵循的一些最佳实践：
+There are some best practices to follow when selecting primary key columns in TiDB:
 
-- 在表内定义一个主键或唯一索引。
-- 尽量选择有意义的列作为主键。
-- 出于为性能考虑，尽量避免存储超宽表，表字段数不建议超过 60 个，建议单行的总数据大小不要超过 64K，数据长度过大字段最好拆到另外的表。
-- 不推荐使用复杂的数据类型。
-- 需要 JOIN 的字段，数据类型保障绝对一致，避免隐式转换。
-- 避免在单个单调数据列上定义主键。如果你使用单个单调数据列（例如：`AUTO_INCREMENT` 的列）来定义主键，有可能会对写性能产生负面影响。可能的话，使用 `AUTO_RANDOM` 替换 `AUTO_INCREMENT`（这会失去主键的连续和递增特性）。
-- 如果你 **_必须_** 在单个单调数据列上创建索引，且有大量写入的话。请不要将这个单调数据列定义为主键，而是使用 `AUTO_RANDOM` 创建该表的主键，或使用 [SHARD_ROW_ID_BITS](https://docs.pingcap.com/zh/tidb/stable/shard-row-id-bits) 和 [PRE_SPLIT_REGIONS](https://docs.pingcap.com/zh/tidb/stable/sql-statement-split-region#pre_split_regions) 打散 `_tidb_rowid`。
+- Define a **primary key** or **unique index** within the table.
+- Try to select meaningful **columns** as **primary keys**.
+- For performance reasons, try to avoid storing extra-wide tables, the number of table fields is not recommended to over `60`, the total data size of a single row is not recommended to over `64K`, and fields with too much data length are best split to another table.
+- It is not recommended to use complex data types.
+- The fields need to **JOIN** , ensure data types absolute consistency, to avoid implicit conversion.
+- Avoid defining **primary keys** on a single monotonic data column. If you use a single monotonic data column (e.g., a column of `AUTO_INCREMENT`) to define the **primary key**, there is a risk of a negative impact on write performance. If possible, use `AUTO_RANDOM` instead of `AUTO_INCREMENT` (this loses the continuous and incremental nature of the primary key).
+- If you **_must_** create an index on a single monotonic data column at write-intensive scenarios. Instead of defining this monotonic data column as the **primary key**. You can use `AUTO_RANDOM` to create the **primary key** for that table, or use [SHARD_ROW_ID_BITS](https://docs.pingcap.com/tidb/stable/shard-row-id-bits) and [PRE_SPLIT_REGIONS](https://docs.pingcap.com/tidb/stable/sql-statement-split-region#pre_split_regions) to shard `_tidb_rowid`.
 
 #### Select primary key example
 
-需遵循[主键选择的最佳实践](#主键选择的最佳实践)，我们展示在 `users` 表中定义 `AUTO_RANDOM` 主键的场景：
+Following the [Best Practices for select primary key](#best-practices-for-select-primary-key), we show a scenario where the `AUTO_RANDOM` primary key is defined in the `users` table.
 
 {{< copyable "sql" >}}
 
@@ -193,47 +191,43 @@ CREATE TABLE `bookshop`.`users` (
 
 ### Clustered or not
 
-[聚簇索引](https://docs.pingcap.com/zh/tidb/stable/clustered-indexes) (clustered index) 是 TiDB 从 v5.0 开始支持的特性，用于控制含有主键的表数据的存储方式。通过使用聚簇索引，TiDB 可以更好地组织数据表，从而提高某些查询的性能。有些数据库管理系统也将聚簇索引称为“索引组织表” (index-organized tables)。
+TiDB supports the [clustered index](https://docs.pingcap.com/tidb/stable/clustered-indexes) feature since v5.0. This feature controls how data is stored in tables containing primary keys. It provides TiDB the ability to organize tables in a way that can improve the performance of certain queries.
 
-目前 TiDB 中 **_含有主键_** 的表分为以下两类：
+The term clustered in this context refers to the organization of how data is stored and not a group of database servers working together. Some database management systems refer to clustered indexes as index-organized tables (IOT).
 
-- `NONCLUSTERED`，表示该表的主键为非聚簇索引。在非聚簇索引表中，行数据的键由 TiDB 内部隐式分配的 `_tidb_rowid` 构成，而主键本质上是唯一索引，因此非聚簇索引表存储一行至少需要两个键值对，分别为：
-    - `_tidb_rowid`（键）- 行数据（值）
-    - 主键列数据（键） - `_tidb_rowid`（值）
-- `CLUSTERED`，表示该表的主键为聚簇索引。在聚簇索引表中，行数据的键由用户给定的主键列数据构成，因此聚簇索引表存储一行至少只要一个键值对，即：
-    - 主键列数据（键） - 行数据（值）
+Currently, tables **_containing primary_** keys in TiDB are divided into the following two categories:
 
-如[主键](#选择主键)中所述，聚簇索引在 TiDB 中，使用关键字 `CLUSTERED`、`NONCLUSTERED` 进行控制。
+- `NONCLUSTERED`: The primary key of the table is non-clustered index. In tables with non-clustered indexes, the keys for row data consist of internal `_tidb_rowid` implicitly assigned by TiDB. Because primary keys are essentially unique indexes, tables with non-clustered indexes need at least two key-value pairs to store a row, which are:
+    - `_tidb_rowid` (key) - row data (value)
+    - Primary key data (key) - `_tidb_rowid` (value)
+- `CLUSTERED`: The primary key of the table is clustered index. In tables with clustered indexes, the keys for row data consist of primary key data given by the user. Therefore, tables with clustered indexes need only one key-value pair to store a row, which is:
+    - Primary key data (key) - row data (value)
 
-> **注意：**
+As described in [select primary key](#select-primary-key), **clustered indexes** are controlled in TiDB using the keywords `CLUSTERED`, `NONCLUSTERED`.
+
+> **Note:**
 >
-> TiDB 仅支持根据表的主键来进行聚簇操作。聚簇索引启用时，“主键”和“聚簇索引”两个术语在一些情况下可互换使用。主键指的是约束（一种逻辑属性），而聚簇索引描述的是数据存储的物理实现。
+> TiDB supports clustering only by a table's `PRIMARY KEY`. With clustered indexes enabled, the terms _the_ `PRIMARY KEY` and _the clustered index_ might be used interchangeably. `PRIMARY KEY` refers to the constraint (a logical property), and clustered index describes the physical implementation of how the data is stored.
 
 #### Best Practices for select clustered index
 
-以下是在 TiDB 中选择聚簇索引时需要遵循的一些最佳实践：
+The following are some best practices to follow when selecting **clustered indexes** in TiDB.
 
-- 遵循 [主键选择的最佳实践](#主键选择的最佳实践)：
+- Follow the [best practices for select primary key](#best-practices-for-select-primary-key), **Clustered indexes** will be built based on **primary keys**.
+- Compared to tables with non-clustered indexes, tables with clustered indexes offer greater performance and throughput advantages in the following scenarios:
+    - When data is inserted, the clustered index reduces one write of the index data from the network.
+    - When a query with an equivalent condition only involves the primary key, the clustered index reduces one read of index data from the network.
+    - When a query with a range condition only involves the primary key, the clustered index reduces multiple reads of index data from the network.
+    - When a query with an equivalent or range condition only involves the primary key prefix, the clustered index reduces multiple reads of index data from the network.
+- On the other hand, tables with clustered indexes have certain disadvantages. See the following:
+    - There might be write hotspot issues when inserting a large number of primary keys with close values, please follow the [best practices for select primary key](#best-practices-for-select-primary-key).
+    - The table data takes up more storage space if the data type of the primary key is larger than 64 bits, especially when there are multiple secondary indexes.
 
-    聚簇索引将基于主键建立，请遵循主键选择的最佳实践，以完成聚簇索引最佳实践的基础。
-
-- 在以下场景中，尽量使用聚簇索引，将带来性能和吞吐量的优势：
-
-    - 插入数据时会减少一次从网络写入索引数据。
-    - 等值条件查询仅涉及主键时会减少一次从网络读取数据。
-    - 范围条件查询仅涉及主键时会减少多次从网络读取数据。
-    - 等值或范围条件查询仅涉及主键的前缀时会减少多次从网络读取数据。
-
-- 在以下场景中，尽量避免使用聚簇索引，将带来性能劣势：
-
-    - 批量插入大量取值相邻的主键时，可能会产生较大的写热点问题，请遵循[主键选择的最佳实践](#主键选择的最佳实践)。
-    - 当使用大于 64 位的数据类型作为主键时，可能导致表数据需要占用更多的存储空间。该现象在存在多个二级索引时尤为明显。
-
-- 显式指定是否使用聚簇索引，而非使用系统变量 `@@global.tidb_enable_clustered_index` 及配置项 `alter-primary-key` 控制是否使用[聚簇索引的默认行为](https://docs.pingcap.com/zh/tidb/stable/clustered-indexes#%E5%88%9B%E5%BB%BA%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95%E8%A1%A8)。
+- Explicitly specifying whether to use clustered indexes instead of using the system variable `@@global.tidb_enable_clustered_index` and the configuration `alter-primary-key` control the [default behavior of whether to use clustered indexes](https://docs.pingcap.com/tidb/stable/clustered-indexes#create-a-table-with-clustered-indexes).
 
 #### Select clustered index example
 
-需遵循[聚簇索引选择的最佳实践](#聚簇索引选择的最佳实践)，假设我们将需要建立一张 `books` 和 `users` 之间关联的表，代表用户对某书籍的评分。我们使用表名 `ratings` 来创建该表，并使用 `book_id` 和 `user_id` 构建[复合主键](https://docs.pingcap.com/zh/tidb/stable/constraints#%E4%B8%BB%E9%94%AE%E7%BA%A6%E6%9D%9F)，并在该主键上建立聚簇索引：
+Following the [best practices for select clustered index](#best-practices-for-select-clustered-index), suppose we will need to create a table with an association between `books` and `users`, representing the `ratings` of a `book` by `users`. We create the table and construct a composite primary key using `book_id` and `user_id` and create a **clustered index** on that **primary key**.
 
 {{< copyable "sql" >}}
 
@@ -249,13 +243,13 @@ CREATE TABLE `bookshop`.`ratings` (
 
 ### Add column constraints
 
-除[主键约束](#选择主键)外，TiDB 还支持其他的列约束，如：[非空约束 `NOT NULL`](https://docs.pingcap.com/zh/tidb/stable/constraints#%E9%9D%9E%E7%A9%BA%E7%BA%A6%E6%9D%9F)、[唯一约束 `UNIQUE KEY`](https://docs.pingcap.com/zh/tidb/stable/constraints#%E5%94%AF%E4%B8%80%E7%BA%A6%E6%9D%9F)、默认值 `DEFAULT` 等。完整约束，请查看 [TiDB 约束](https://docs.pingcap.com/zh/tidb/stable/constraints)文档。
+In addition to [primary key constraints](#select-primary-key), TiDB also supports other **column constraints** such as [NOT NULL](https://docs.pingcap.com/tidb/stable/constraints#not-null) constraint, [UNIQUE KEY](https://docs.pingcap.com/tidb/stable/constraints#unique-key) constraint, `DEFAULT`, etc. For complete constraints, please check TiDB [Constraints](https://docs.pingcap.com/tidb/stable/constraints) documentation.
 
-#### 填充默认值
+#### Default value
 
-如需在列上设置默认值，请使用 `DEFAULT` 约束。默认值将可以使你无需指定每一列的值，就可以插入数据。
+To set a default value on a column, use the `DEFAULT` constraint. The default value will allow you to insert data without specifying a value for each column.
 
-你可以将 `DEFAULT` 与[支持的 SQL 函数](https://docs.pingcap.com/zh/tidb/stable/basic-features#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%87%BD%E6%95%B0%E5%92%8C%E6%93%8D%E4%BD%9C%E7%AC%A6)结合使用，将默认值的计算移出应用层，从而节省应用层的资源（当然，计算所消耗的资源并不会凭空消失，只是被转移到了 TiDB 集群中）。常见的，我们想实现数据插入时，可默认填充默认的时间。还是使用 `rating` 作为示例，可使用以下语句：
+You can use `DEFAULT` together with [supported SQL functions](https://docs.pingcap.com/tidb/stable/basic-features#data-types-functions-and-operators) to move the calculation of defaults out of the application layer, thus saving application layer resources (of course, the resources consumed by the calculation don't just disappear into thin air, they are just moved to the TiDB cluster). Commonly, we want to implement data insertion with the default time populated by default. Again using `rating` as an example, the following statement can be used:
 
 {{< copyable "sql" >}}
 
@@ -269,7 +263,7 @@ CREATE TABLE `bookshop`.`ratings` (
 );
 ```
 
-额外的，如果需更新时也默认填入当前时间，可使用以下语句（但 `ON UPDATE` 后仅可填入[当前时间相关语句](https://pingcap.github.io/sqlgram/#NowSymOptionFraction)，`DEFAULT` 后支持[更多选择](https://pingcap.github.io/sqlgram/#DefaultValueExpr)）：
+In addition, if the current time is also filled in by default when updating, the following statements can be used (but only the [current time related statements](https://pingcap.github.io/sqlgram/#NowSymOptionFraction) can be filled in after `ON UPDATE`, [more options](https://pingcap.github.io/sqlgram/#DefaultValueExpr) are supported after `DEFAULT`):
 
 {{< copyable "sql" >}}
 
@@ -283,11 +277,11 @@ CREATE TABLE `bookshop`.`ratings` (
 );
 ```
 
-#### 防止重复
+#### Prevent duplicate values
 
-如果你需要防止列中出现重复值，那你可以使用 `UNIQUE` 约束。
+If you need to prevent duplicate values in a column, you can use the `UNIQUE` constraint.
 
-例如，你需要确保用户的昵称唯一，我们可以这样改写 `user` 表的创建 SQL：
+For example, you need to make sure that the `nickname` of `users` is unique. We can override the creation SQL of the user table like this:
 
 {{< copyable "sql" >}}
 
@@ -300,13 +294,13 @@ CREATE TABLE `bookshop`.`users` (
 );
 ```
 
-如果你在 `user` 表中尝试插入相同的 `nickname`，将返回错误。
+If you try to insert the same `nickname` in the `users` table, an error will be return.
 
-#### 防止空值
+#### Prevents null values
 
-如果你需要防止列中出现空值，那就可以使用 `NOT NULL` 约束。
+If you need to prevent null values in columns, then you can use the `NOT NULL` constraint.
 
-还是使用用户昵称来举例子，除了昵称唯一，我们还希望昵称不可为空，于是此处可以这样改写 `user` 表的创建 SQL：
+Using the user nickname example again, in addition to the nickname being unique, we also want the nickname to be non-null, so here we can rewrite the `users` table creation SQL like this.
 
 {{< copyable "sql" >}}
 
@@ -321,21 +315,21 @@ CREATE TABLE `bookshop`.`users` (
 
 ### Using HTAP capabilities
 
-> **注意：**
+> **Note:**
 >
-> 本指南中有关 HTAP 的步骤仅适用于快速上手体验，不适用于生产环境。如需探索 HTAP 更多功能，请参考[深入探索 HTAP](https://docs.pingcap.com/zh/tidb/stable/explore-htap)。
+> The steps provided in this guide is **_ONLY_** for quick start in the test environment. For production environments, [explore HTAP](https://docs.pingcap.com/tidb/stable/explore-htap) is recommended.
 
-假设我们的 `bookshop` 应用程序，有对用户评价的 `ratings` 表进行 OLAP 分析查询的需求，例如需查询: **书籍的评分，是否和评价的时间具有显著的相关性** 的需求，用以分析用户的书籍评分是否客观。那么会要求我们查询整个 `ratings` 表中的 `score` 和 `rated_at` 字段。这对普通仅支持的 OLTP 的数据库来说，是一个非常消耗资源的操作。或者使用一些 ETL 或其他数据同步工具，将 OLTP 数据库中的数据，导出到专用的 OLAP 数据库，再进行分析。
+Suppose our `bookshop` application has a requirement to perform OLAP analysis on the `ratings` table of user ratings, for example, we need to query: **whether the rating of a book has a significant correlation with the time of the rating**, in order to analyze whether the user's rating of the book is objective or not. Then we are asked to query the `score` and `rated_at` fields of the entire `ratings` table. This is a very resource-intensive operation for a normal OLTP-only database. Or we can use some ETL or other data synchronization tools to export the data from OLTP database to a dedicated OLAP database for analysis.
 
-这种场景下，TiDB 就是一个比较理想的一站式数据库解决方案，TiDB 是一个 **HTAP (Hybrid Transactional and Analytical Processing)** 数据库，同时支持 OLTP 和 OLAP 场景。
+In this scenario, TiDB is an ideal one-stop database solution. TiDB is a **HTAP (Hybrid Transactional and Analytical Processing)** database that supports both OLTP and OLAP scenarios.
 
-#### 同步列存数据
+#### Synchronized column-oriented data
 
-当前，TiDB 支持两种数据分析引擎：**TiFlash** 和 **TiSpark**。大数据场景 (100 T) 下，推荐使用 TiFlash MPP 作为 HTAP 的主要方案，TiSpark 作为补充方案。希望了解更多关于 TiDB 的 HTAP 能力，可参考以下文章：[快速上手 HTAP](https://docs.pingcap.com/zh/tidb/stable/quick-start-with-htap) 和 [深入探索 HTAP](https://docs.pingcap.com/zh/tidb/stable/explore-htap)。
+Currently, TiDB supports two data analysis engines, **TiFlash** and **TiSpark**, and for large data scenarios (100 T), **TiFlash MPP** is recommended as the primary solution for HTAP, and **TiSpark** as a complementary solution. To learn more about TiDB HTAP capabilities, please refer to the following articles: [Quick Start Guide for TiDB HTAP](https://docs.pingcap.com/tidb/stable/quick-start-with-htap) and [Explore HTAP](https://docs.pingcap.com/tidb/stable/explore-htap).
 
-我们此处选用 [TiFlash](https://docs.pingcap.com/zh/tidb/stable/tiflash-overview) 为 `bookshop` 数据库的数据分析引擎。
+We have chosen [TiFlash](https://docs.pingcap.com/zh/tidb/stable/tiflash-overview) as the data analysis engine for our `bookshop` database.
 
-TiFlash 部署完成后并不会自动同步数据，而需要手动指定需要同步的表，开启同步副本仅需一行 SQL，如下所示：
+TiFlash does not automatically synchronize data after deployment, but you need to manually specify the tables that need to be synchronized:
 
 {{< copyable "sql" >}}
 
@@ -345,14 +339,14 @@ ALTER TABLE {table_name} SET TIFLASH REPLICA {count};
 
 |      Parameter      |                      Description                      |
 | :------------: | :------------------------------------: |
-| `{table_name}` |                  表名                  |
-|   `{count}`    | 同步副本数，若为 0，则表示删除同步副本 |
+| `{table_name}` |                  Table name                  |
+|   `{count}`    | The number of synchronized copies, if 0, the synchronized copies are deleted |
 
-随后，TiFlash 将同步该表，查询时，TiDB 将会自动基于成本优化，考虑使用 **TiKV (行存)** 或 **TiFlash (列存)** 进行数据查询。当然，除了自动的方法，你也可以直接指定查询是否使用 TiFlash 副本，使用方法可查看[使用 TiDB 读取 TiFlash](https://docs.pingcap.com/zh/tidb/stable/use-tiflash#%E4%BD%BF%E7%94%A8-tidb-%E8%AF%BB%E5%8F%96-tiflash) 文档。
+**TiFlash** will then synchronize the table, and when queried, TiDB will automatically consider using TiKV (row-oriented) or TiFlash (column-oriented) for data queries based on cost optimization. Of course, in addition to the automatic approach, you can also directly specify whether the query uses a **TiFlash** copy, see [Use TiDB to read TiFlash replicas](https://docs.pingcap.com/tidb/stable/use-tiflash#use-tidb-to-read-tiflash-replicas) for how to use it.
 
-#### 使用 HTAP 的示例
+#### Using HTAP capabilities example
 
-`ratings` 表开启 1 个 TiFlash 副本：
+The `ratings` table opens `1` copy of TiFlash:
 
 {{< copyable "sql" >}}
 
@@ -360,11 +354,11 @@ ALTER TABLE {table_name} SET TIFLASH REPLICA {count};
 ALTER TABLE `bookshop`.`ratings` SET TIFLASH REPLICA 1;
 ```
 
-> **注意：**
+> **Note:**
 >
-> 如果你的集群，不包含 TiFlash 节点，此 SQL 语句将会报错：`1105 - the tiflash replica count: 1 should be less than the total tiflash server count: 0` 你可以[使用 TiDB Cloud (DevTier) 构建 TiDB 集群](/develop/build-cluster-in-cloud.md#第-1-步创建免费集群) 来创建一个含有 TiFlash 的免费集群。
+> If your cluster, does not contain **TiFlash** nodes, this SQL statement will report an error: `1105 - the tiflash replica count: 1 should be less than the total tiflash server count: 0` You can use [Build a TiDB Cluster in TiDB Cloud (DevTier)](/develop/build-cluster-in-cloud.md#step-1-create-a-free-cluster) to create a free cluster include **TiFlash**.
 
-随后正常进行查询即可：
+Subsequent queries can be carried out normally.
 
 {{< copyable "sql" >}}
 
@@ -372,7 +366,7 @@ ALTER TABLE `bookshop`.`ratings` SET TIFLASH REPLICA 1;
 SELECT HOUR(`rated_at`), AVG(`score`) FROM `bookshop`.`ratings` GROUP BY HOUR(`rated_at`);
 ```
 
-我们也可使用 [EXPLAIN ANALYZE](https://docs.pingcap.com/zh/tidb/stable/sql-statement-explain-analyze) 语句查看此语句是否使用了 TiFlash 引擎：
+We can also use the [EXPLAIN ANALYZE](https://docs.pingcap.com/tidb/stable/sql-statement-explain-analyze) statement to see if this statement is using the **TiFlash** here:
 
 {{< copyable "sql" >}}
 
@@ -380,7 +374,7 @@ SELECT HOUR(`rated_at`), AVG(`score`) FROM `bookshop`.`ratings` GROUP BY HOUR(`r
 EXPLAIN ANALYZE SELECT HOUR(`rated_at`), AVG(`score`) FROM `bookshop`.`ratings` GROUP BY HOUR(`rated_at`);
 ```
 
-运行结果为：
+Running results:
 
 ```
 +-----------------------------+-----------+---------+--------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------+----------+------+
@@ -394,24 +388,24 @@ EXPLAIN ANALYZE SELECT HOUR(`rated_at`), AVG(`score`) FROM `bookshop`.`ratings` 
 +-----------------------------+-----------+---------+--------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------+----------+------+
 ```
 
-在出现 `cop[tiflash]` 字样时，表示该任务发送至 TiFlash 进行处理。
+When the word `cop[tiflash]` appears, it means that the task is sent to **TiFlash** for processing.
 
 ### Execute the `CREATE TABLE` statement
 
-我们定义完毕 `CREATE TABLE` 后，可以进行执行。
+Once we have defined `CREATE TABLE`, we can execute it.
 
 #### Best Practices for execute the `CREATE TABLE` statement
 
-执行 `CREATE TABLE` 时需要遵循的一些最佳实践：
+Some best practices to follow when executing `CREATE TABLE`：
 
-- 我们不推荐使用客户端的 Driver 或 ORM 来执行数据库模式的更改。以经验来看，作为最佳实践，我们建议使用 [MySQL 客户端](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)或使用任意你喜欢的 GUI 客户端来进行数据库模式的更改。本文档中，我们将在大多数场景下，使用 **MySQL 客户端** 传入 SQL 文件来执行数据库模式的更改。
-- 遵循 SQL 开发规范中的[建表删表规范](/develop/sql-development-specification.md#建表删表规范)，建议业务应用内部封装建表删表语句增加判断逻辑。
+- We do not recommend using a client-side Driver or ORM to perform database schema changes. As a best practice from experience, we recommend using a [MySQL client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) or using any GUI client you like to perform database schema changes. In this document, we will use the **MySQL client** to pass in SQL files to perform database schema changes in most scenarios.
+- Following the SQL development [specification for table build and delete](/develop/sql-development-specification.md#specification-for-table-build-and-delete), it is recommended to wrap the build and delete statements inside the business application to add judgment logic.
 
 #### Execute the `CREATE TABLE` statement example
 
-按以上步骤创建所有表后，我们的 `dbinit.sql` 文件应该类似于[数据库初始化](/develop/bookshop-schema-design.md#数据库初始化-dbinitsql-脚本)所示。若需查看表信息详解，请参阅[数据表详解](/develop/bookshop-schema-design.md#数据表详解)。
+After creating all the tables as above rules, our `dbinit.sql` file should look similar to the [database initialization](/develop/bookshop-schema-design.md#database-initialization-script-dbinitsql) shown. If you need to see the table information in detail, please refer to [Details about Table](/develop/bookshop-schema-design.md#details-about-table).
 
-我们可使用以下语句来执行 `dbinit.sql` 文件：
+We can execute the dbinit.sql file with the following statements:
 
 {{< copyable "shell-regular" >}}
 
@@ -424,7 +418,7 @@ mysql
     < dbinit.sql
 ```
 
-需查看 `bookshop` 数据库下的所有表，可使用 [SHOW TABLES](https://docs.pingcap.com/zh/tidb/stable/sql-statement-show-tables#show-full-tables) 语句：
+To view all tables under the `bookshop` database, use the [SHOW TABLES](https://docs.pingcap.com/tidb/stable/sql-statement-show-tables#show-full-tables) statement.
 
 {{< copyable "sql" >}}
 
@@ -432,7 +426,7 @@ mysql
 SHOW TABLES IN `bookshop`;
 ```
 
-运行结果为：
+Running results:
 
 ```
 +--------------------+
@@ -447,4 +441,4 @@ SHOW TABLES IN `bookshop`;
 +--------------------+
 ```
 
-请注意，到目前为止，我们所创建的所有表都不包含二级索引。添加二级索引的指南，请参考[创建二级索引](/develop/create-secondary-indexes.md)。
+Please note that all the tables we have created so far do not contain secondary indexes. For a guide to adding secondary indexes, please refer to [Creating Secondary Indexes](/develop/create-secondary-indexes.md).

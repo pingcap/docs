@@ -33,8 +33,6 @@ Here are some best practices to follow when you create and use databases:
 - As a general best practice, we do not recommend using Driver / ORM for database schema definition and changes. Instead, use the **MySQL command-line client** or other **MySQL GUI client** of your preferred.
 - Following [Database Naming Guidelines](/develop/object-naming-guidelines.md)
 
-这里是一些当你创建和使用数据库时可遵循的最佳实践：
-
 ### Example
 
 Create an empty file with a `.sql` file extension at the end of the file. We will use this file to initialize the database that will store all the data for the entire `bookshop` sample application.
@@ -54,10 +52,6 @@ Then, open `dbinit.sql` in a text editor and add the `CREATE DATABASE` statement
 ```sql
 CREATE DATABASE IF NOT EXISTS `bookshop`;
 ```
-
-此语句会创建一个名为 `bookshop` 的数据库（如果尚不存在）。
-
-`dbinit.sql` 要以 `root` 用户身份执行文件中的建库语句，请运行以下命令：
 
 This statement will create a database named `bookshop` (if it does not already exist).
 
@@ -99,6 +93,6 @@ mysql
 +--------------------+
 ```
 
-至此，你已经准备完毕 `bookshop` 数据库，可以将**表**添加到该数据库中。
+At this point, you have finished preparing the `bookshop` database and can add **tables** to it.
 
-你可继续阅读[创建表](/develop/create-table.md)文档获得相关指引。
+You can continue reading [the create a table](/develop/create-table.md) for guidance.
