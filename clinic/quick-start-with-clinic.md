@@ -20,7 +20,7 @@ PingCAP Clinic is currently in the Technical Preview stage.
 
 ## Prerequisites
 
-Before using PingCAP Clinic, you need to install Diag and prepare the environment to upload data.
+Before using PingCAP Clinic, you need to install Diag and prepare an environment for uploading data.
 
 1. On your control machine with TiUP installed, run the following command to install Diag:
 
