@@ -172,7 +172,7 @@ pd-ctl config placement-rules rule-bundle save --in="rule.json"
 
 ### Enable the DR Auto-Sync mode
 
-The replication mode is controlled by PD. When deploying a cluster, you can configure the replication mode in the PD configuration file using one of the following methods:
+The replication mode is controlled by PD. You can configure the replication mode in the PD configuration file using one of the following methods:
 
 - Method 1: Configure the PD configuration file, and then deploy a cluster.
 
