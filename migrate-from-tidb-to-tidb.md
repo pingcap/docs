@@ -137,7 +137,7 @@ After setting up the environment, you can use the backup and restore functions o
 
     > **Note:**
     >
-    > In production clusters, performing a backup with GC disabled might affect clsuter performance. It is recommended that you back up data in off-peak hours, and set RATE_LIMIT to a proper value to avoid performance degradation.
+    > In production clusters, performing a backup with GC disabled might affect cluster performance. It is recommended that you back up data in off-peak hours, and set RATE_LIMIT to a proper value to avoid performance degradation.
 
 2. Back up data.
 
