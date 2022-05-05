@@ -131,9 +131,9 @@ As an open source distributed NewSQL database, TiDB requires the following netwo
 | Component | Disk space requirement |
 | :-- | :-- |
 | TiDB |  |
-| PD | Reserve at least 20 GB for data and log disks |
-| TiKV | Reserve at least 100 GB for data and log disks <br/> Ensure that the disk usage is below 90% |
-| TiFlash | Log disk: Reserve at least 30 GB <br/> Data disk: Reserve at least 100 GB. Ensure that the disk usage is below 80% |
+| PD | Reserve at least 20 GB for the data disk and the log disk, respectively <br/> Ensure that the disk usage is below 90%|
+| TiKV | Reserve at least 100 GB for the data disk and the log disk, respectively <br/> Ensure that the disk usage is below 80% |
+| TiFlash | Reserve at least 100 GB and 30 GB for the data disk and log disk, respectively <br/> Ensure that the disk usage is below 80% |
 | TiUP | A TiUP cluster occupies hundreds of megabytes. During deployment, the TiUP cluster requires no more than 1 MB /tmp space to restore temporary configuration files |
 | Ngmonitoring | Conprof: 3 x 1 GB x Number of components + 20 GB (reserved space. 3 days, 1 GB for each component per day)<br/>TopSQL: 30 x 50 MB x Number of components (30 days, 50 MB for each component per day, shared with Continuous Profiling) |
 
