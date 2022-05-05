@@ -15,8 +15,8 @@ This page provides a best practice guide for creating a database and an example 
 
 Before reading this page, you need to prepare the following:
 
-- [Build a TiDB Cluster in TiDB Cloud(DevTier)](/develop/build-cluster-in-cloud.md)
-- Read [Schema Design Overview](/develop/schema-design-overview.md)
+- [Build a TiDB Cluster in TiDB Cloud(DevTier)](/develop/build-cluster-in-cloud.md).
+- Read [Schema Design Overview](/develop/schema-design-overview.md).
 
 ## Create Database
 
