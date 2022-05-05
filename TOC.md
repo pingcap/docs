@@ -20,8 +20,30 @@
   - [Learn TiDB SQL](/basic-sql-operations.md)
   - [Learn HTAP](/explore-htap.md)
   - [Import Example Database](/import-example-data.md)
-- Develop
-  - [Developer Guide Overview](/develop/developer-guide-overview.md)
+- Application Develop
+  - Quick Start
+    - [Build a TiDB Cluster in TiDB Cloud(DevTier)](/develop/build-cluster-in-cloud.md)
+    - [CRUD SQL in TiDB](/develop/tidb-crud-sql.md)
+    - Build a Simple CRUD App with TiDB
+      - [Java](/develop/sample-application-java.md)
+  - Developer
+    - [Overview](/develop/developer-guide-overview.md)
+    - Example Applications
+      - [Build the TiDB Application using Spring Boot](/develop/sample-application-spring-boot.md)
+  - Connect to TiDB
+    - [Choose Driver or ORM](/develop/choose-driver-or-orm.md)
+    - [Connect to TiDB](/develop/connect-to-tidb.md)
+    - [Connection Pools and Connection Parameter](/develop/connection-parameters.md)
+  - Database Schema Design
+    - [Overview](/develop/schema-design-overview.md)
+    - [Create a Database](/develop/create-database.md)
+    - [Create a Table](/develop/create-table.md)
+    - [Create Secondary Indexes](/develop/create-secondary-indexes.md)
+  - Write Data
+    - [Insert Data](/develop/insert-data.md)
+    - [Update Data](/develop/update-data.md)
+    - [Delete Data](/develop/delete-data.md)
+    - [Prepared Statement](/develop/prepared-statement.md)
   - Read Data
     - [Get Data from Single Table](/develop/get-data-from-single-table.md)
     - [Multi-table Join Query](/develop/join-tables.md)
@@ -34,9 +56,29 @@
       - [Follower Read](/develop/use-follower-read.md)
       - [Stale Read](/develop/use-stale-read.md)
     - [HTAP Queries](/develop/hybrid-oltp-and-olap-queries.md)
+  - Transaction
+    - [Overview](/develop/transaction-overview.md)
+    - [Optimistic and Pessimistic Transaction](/develop/optimistic-and-pessimistic-transaction.md)
+    - [Transaction Restraints](/develop/transaction-restraints.md)
+    - [Transaction Troubleshoot](/develop/transaction-troubleshoot.md)
+  - Optimize
+    - [Overview](/develop/optimize-sql-overview.md)
+    - [SQL Optimize](/develop/optimize-sql.md)
+    - [Best Practices](/develop/optimize-sql-best-practices.md)
+    - Others
+      - [Implicit Type Conversion](/develop/implicit-type-conversion.md)
+      - [Unique Serial Number Generation](/develop/unique-serial-number-generation.md)
+  - Troubleshoot
+    - [Overview](/develop/troubleshoot-overview.md)
+    - Others
+      - [Unstable Result Set](/develop/unstable-result-set.md)
+      - [Timeouts](/develop/timeouts-in-tidb.md)
   - Reference
     - SQL
       - [Bookshop Example Application](/develop/bookshop-schema-design.md)
+    - Guidelines
+      - [Object Naming Guidelines](/develop/object-naming-guidelines.md)
+      - [SQL Development Specification](/develop/sql-development-specification.md)
 - Deploy
   - [Software and Hardware Requirements](/hardware-and-software-requirements.md)
   - [Environment Configuration Checklist](/check-before-deployment.md)
