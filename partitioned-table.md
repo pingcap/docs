@@ -1296,10 +1296,6 @@ This variable is only used in table creation. After the table is created, modify
 
 ### Dynamic pruning mode
 
-> **Warning:**
->
-> This is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
-
 TiDB accesses partitioned tables in one of the two modes: `dynamic` mode and `static` mode. Currently, `static` mode is used by default. If you want to enable `dynamic` mode, you need to manually set the `tidb_partition_prune_mode` variable to `dynamic`.
 
 {{< copyable "sql" >}}
@@ -1358,8 +1354,8 @@ From the above query results, you can see that the `Union` operator in the execu
 
 `dynamic` mode makes execution plans simpler and clearer. Omitting the Union operation can improve the execution efficiency and avoid the problem of Union concurrent execution. In addition, `dynamic` mode also solves two problems that cannot be solved in `static` mode:
 
-+ Plan Cache cannot be used. (See example 1 and 2)
-+ Execution plans with IndexJoin cannot be used. (See example 3 and 4)
++ Plan Cache cannot be used. (See example 1 and 2) (Currently disabled, see https://github.com/pingcap/tidb/issues/33031)
++ Execution plans with IndexJoin cannot be used. (See example 3 and 4) (TODO: Verify if this is fixed yet or not?)
 
 **Example 1**：In the following example, the Plan Cache feature is enabled in the configuration file and the same query is executed twice in `static` mode:
 

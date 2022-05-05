@@ -503,9 +503,7 @@ To access partitioned tables in the MPP mode, you need to enable [dynamic prunin
 
 > **Warning:**
 >
-> - Currently, dynamic pruning mode for partitioned tables is an experimental feature and is not recommended for production environments.
->
-> - Do not enable dynamic pruning mode when a partitioned table contains columns of the `time` type. Otherwise, TiFlash crashes when a query selects a column of the `time` type.
+> - Do not enable dynamic pruning mode when a partitioned table contains columns of the `time` type. Otherwise, TiFlash crashes when a query selects a column of the `time` type. (TODO: Check if this is still correct?!)
 
 Example:
 
@@ -513,9 +511,19 @@ Example:
 mysql> DROP TABLE if exists test.employees;
 Query OK, 0 rows affected, 1 warning (0.00 sec)
 
-mysql> CREATE TABLE test.employees (  id int(11) NOT NULL,  fname varchar(30) DEFAULT NULL,  lname varchar(30) DEFAULT NULL,  hired date NOT NULL DEFAULT '1970-01-01',  separated date DEFAULT '99
-99-12-31',  job_code int(11) DEFAULT NULL,  store_id int(11) NOT NULL  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin  PARTITION BY RANGE (store_id)  (PARTITION p0 VALUES LESS THAN (
-6),  PARTITION p1 VALUES LESS THAN (11),  PARTITION p2 VALUES LESS THAN (16), PARTITION p3 VALUES LESS THAN (MAXVALUE));
+mysql> CREATE TABLE test.employees
+(id int(11) NOT NULL,
+ fname varchar(30) DEFAULT NULL,
+ lname varchar(30) DEFAULT NULL,
+ hired date NOT NULL DEFAULT '1970-01-01',
+ separated date DEFAULT '9999-12-31',
+ job_code int DEFAULT NULL,
+ store_id int NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
+PARTITION BY RANGE (store_id)
+(PARTITION p0 VALUES LESS THAN (6),
+ PARTITION p1 VALUES LESS THAN (11),
+ PARTITION p2 VALUES LESS THAN (16),
+ PARTITION p3 VALUES LESS THAN (MAXVALUE));
 Query OK, 0 rows affected (0.10 sec)
 
 mysql> ALTER table test.employees SET tiflash replica 1;
