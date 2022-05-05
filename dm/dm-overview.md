@@ -86,27 +86,6 @@ Before using the DM tool, note the following restrictions:
 
     - For other sharding DDL migration restrictions, see [Sharding DDL usage restrictions in the pessimistic mode](https://docs.pingcap.com/tidb-data-migration/stable/feature-shard-merge-pessimistic#restrictions) and [Sharding DDL usage restrictions in the optimistic mode](https://docs.pingcap.com/tidb-data-migration/stable/feature-shard-merge-optimistic#restrictions).
 
-<<<<<<< HEAD
 + Switch of MySQL instances for data sources
 
     When DM-worker connects the upstream MySQL instance via a virtual IP (VIP), if you switch the VIP connection to another MySQL instance, DM might connect to the new and old MySQL instances at the same time in different connections. In this situation, the binlog migrated to DM is not consistent with other upstream status that DM receives, causing unpredictable anomalies and even data damage. To make necessary changes to DM manually, see [Switch DM-worker connection via virtual IP](https://docs.pingcap.com/tidb-data-migration/stable/usage-scenario-master-slave-switch#switch-dm-worker-connection-via-virtual-ip).
-=======
-You can learn about DM through the online documentation. If you have any questions, contact us on [GitHub](https://github.com/pingcap/tiflow/tree/master/dm).
-
-## License
-
-DM complies with the Apache 2.0 license. For more details, see [LICENSE](https://github.com/pingcap/tiflow/blob/master/dm/LICENSE).
-
-## DM versions
-
-Before v5.4, the DM documentation is independent of the TiDB documentation. To access these earlier versions of the DM documentation, click one of the following links:
-
-- [DM v5.3 documentation](https://docs.pingcap.com/tidb-data-migration/v5.3)
-- [DM v2.0 documentation](https://docs.pingcap.com/tidb-data-migration/v2.0/)
-- [DM v1.0 documentation](https://docs.pingcap.com/tidb-data-migration/v1.0/) 
-
-> **Note:**
->
-> - Since October 2021, DM's GitHub repository has been moved to [pingcap/tiflow](https://github.com/pingcap/tiflow/tree/master/dm). If you see any issues with DM, submit your issue to the `pingcap/tiflow` repository for feedback.
-> - In earlier versions (v1.0 and v2.0), DM uses version numbers that are independent of TiDB. Since v5.3, DM uses the same version number as TiDB. The next version of DM v2.0 is DM v5.3. There are no compatibility changes from DM v2.0 to v5.3, and the upgrade process is the same as a normal upgrade, only an increase in version number.
->>>>>>> 3afc92e3d (Updata the contact info from slack to internals (#8389))
