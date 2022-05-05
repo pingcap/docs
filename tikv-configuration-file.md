@@ -1097,7 +1097,7 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 
 ### `max-write-buffer-number`
 
-+ The maximum number of memtables. When `storage.flow-control.enable` is set to `true`, this configuration item overrides  `storage.flow-control.memtables-threshold`.
++ The maximum number of memtables. When `storage.flow-control.enable` is set to `true`, `storage.flow-control.memtables-threshold` overrides this configuration item.
 + Default value: `5`
 + Minimum value: `0`
 
@@ -1131,7 +1131,7 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 
 ### `level0-slowdown-writes-trigger`
 
-+ The maximum number of files at L0 that trigger write stall. When `storage.flow-control.enable` is set to `true`, this configuration item overrides `storage.flow-control.l0-files-threshold`.
++ The maximum number of files at L0 that trigger write stall. When `storage.flow-control.enable` is set to `true`, `storage.flow-control.l0-files-threshold` overrides this configuration item.
 + Default value: `20`
 + Minimum value: `0`
 
@@ -1183,13 +1183,13 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 
 ### `soft-pending-compaction-bytes-limit`
 
-+ The soft limit on the pending compaction bytes. When `storage.flow-control.enable` is set to `true`, this configuration item overrides `storage.flow-control.soft-pending-compaction-bytes-limit`.
++ The soft limit on the pending compaction bytes. When `storage.flow-control.enable` is set to `true`, `storage.flow-control.soft-pending-compaction-bytes-limit` overrides this configuration item.
 + Default value: `"192GB"`
 + Unit: KB|MB|GB
 
 ### `hard-pending-compaction-bytes-limit`
 
-+ The hard limit on the pending compaction bytes. When `storage.flow-control.enable` is set to `true`, this configuration item overrides `storage.flow-control.hard-pending-compaction-bytes-limit`.
++ The hard limit on the pending compaction bytes. When `storage.flow-control.enable` is set to `true`, `storage.flow-control.hard-pending-compaction-bytes-limit` overrides this configuration item.
 + Default value: `"256GB"`
 + Unit: KB|MB|GB
 
