@@ -48,7 +48,7 @@ This document exemplifies the whole migration process and contains the following
     sysbench oltp_write_only --config-file=./tidb-config --tables=10 --table-size=10000 prepare
     ```
 
-    In this document, we use [sysbench](https://github.com/akopytov/sysbench#linux) to run the `oltp_write_only` script. This script generates 10 tables in the test database, each with 10,000 rows. The tidb-config is as follows:
+    In this document, we use sysbench to run the `oltp_write_only` script. This script generates 10 tables in the test database, each with 10,000 rows. The tidb-config is as follows:
 
     {{< copyable "shell-regular" >}}
 

@@ -12,7 +12,7 @@ This document describes how to configure a TiDB primary (upstream) cluster and a
 2. Replicate incremental data from the primary cluster to the secondary cluster.
 3. Recover data consistently by using Redo log when the primary cluster is down.
 
-To replicate incremental data from a running TiDB cluster to its secondary cluster, you can use Backup & Restore [BR](/br/backup-and-restore-tool.md) and [TiCDC](/ticdc/ticdc-overview.md).
+To replicate incremental data from a running TiDB cluster to its secondary cluster, you can use [Backup & Restore (BR)](/br/backup-and-restore-tool.md) and [TiCDC](/ticdc/ticdc-overview.md).
 
 ## Step 1. Set up the environment
 
