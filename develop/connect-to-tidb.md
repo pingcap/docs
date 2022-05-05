@@ -95,5 +95,3 @@ For more information about Hibernate connection parameters, see the [Hibernate d
 | `{host}` | [Host](https://en.wikipedia.org/wiki/Host_(network)) of TiDB nodes |
 | `{port}` | Port that the TiDB node is listening on |
 | `{database}` | Name of the database (that already exists) |
-
-## JDBC
