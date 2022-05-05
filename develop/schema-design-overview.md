@@ -47,11 +47,11 @@ TiDB supports some specialized types of indexes, designed to improve query perfo
 
 | Indexing and constraints                                     | **5.4**          |   **5.3**    |   **5.2**    |   **5.1**    |   **5.0**    |   **4.0**    |
 | ------------------------------------------------------------ | ------------ | :----------: | :----------: | :----------: | :----------: | :----------: |
-| [Expression indexes](/sql-statements/sql-statement-create-index.md#expression-index) | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
+| [Expression indexes](/common/sql-statements/sql-statement-create-index.md#expression-index) | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
 | [Columnar storage (TiFlash)](/tiflash/tiflash-overview.md)   | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | [RocksDB engine](/storage-engine/rocksdb-overview.md)        | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | [Titan plugin](/storage-engine/titan-overview.md)            | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Invisible indexes](/sql-statements/sql-statement-add-index.md) | Y            |      Y       |      Y       |      Y       |      Y       |      N       |
+| [Invisible indexes](/common/sql-statements/sql-statement-add-index.md) | Y            |      Y       |      Y       |      Y       |      Y       |      N       |
 | [Composite `PRIMARY KEY`](/constraints.md)                   | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | [Unique indexes](/constraints.md)                            | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | [Clustered index on integer `PRIMARY KEY`](/constraints.md)  | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
