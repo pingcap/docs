@@ -40,12 +40,9 @@ However, some features of MySQL are not supported. This could be because there i
 + `REPAIR TABLE` syntax
 + `OPTIMIZE TABLE` syntax
 + `GET_LOCK` and `RELEASE_LOCK` functions [#14994](https://github.com/pingcap/tidb/issues/14994)
-<<<<<<< HEAD
 + [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) with the `REPLACE` keyword [#24515](https://github.com/pingcap/tidb/issues/24515)
-=======
 + `HANDLER` statement
 + `CREATE TABLESPACE` statement
->>>>>>> 7094270fb (Document four unsupported mysql syntax and statements (#8381))
 
 ## Features that are different from MySQL
 
