@@ -381,13 +381,8 @@ Configuration items related to the flow control mechanism in TiKV. This mechanis
 
 ### `l0-files-threshold`
 
-<<<<<<< HEAD
-+ When the number of kvDB L0 files reaches this threshold, the flow control mechanism starts to work.
-+ Before v5.2.2, the default value is `9`. Since v5.2.2, the default value is `20`.
-=======
 + When the number of kvDB L0 files reaches this threshold, the flow control mechanism starts to work. When `enable` is set to `true`, this configuration item overrides `rocksdb.(defaultcf|writecf|lockcf).level0-slowdown-writes-trigger`.
-+ Default value: `20`
->>>>>>> ab9661272 (TiKV Config: add override information about some configuration items (#8375))
++ Before v5.2.2, the default value is `9`. Since v5.2.2, the default value is `20`.
 
 ### `soft-pending-compaction-bytes-limit`
 
