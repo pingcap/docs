@@ -182,7 +182,7 @@ url = https://grafana.net
 Start the Grafana service:
 
 ```bash
-$ ./bin/grafana-server \
+  ./bin/grafana-server \
     --config="./conf/grafana.ini" &
 ```
 
