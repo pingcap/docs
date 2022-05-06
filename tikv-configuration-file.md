@@ -113,7 +113,7 @@ This document only describes the parameters that are not included in command-lin
 ### `advertise-addr`
 
 + Advertise the listening address for client communication
-+ If not set, `addr` is used.
++ If this configuration item is not set, `addr` is used.
 + Default value: `""`
 
 ### `status-addr`
@@ -633,7 +633,7 @@ Configuration items related to Raftstore.
 
 ### `raft-engine-purge-interval`
 
-+ The interval of purging old log files to recycle disk space as soon as possible. Raft engine is a replaceable component, so the purging process is needed for some implementations, such as [XXX].
++ The interval of purging old log files to recycle disk space as soon as possible. Raft engine is a replaceable component, so the purging process is needed for some implementations.
 + Default value: `"10s"`
 
 ### `raft-entry-cache-life-time`
@@ -923,7 +923,7 @@ Configuration items related to Coprocessor.
 ### `coprocessor-plugin-directory`
 
 + THe path of the directory where compiled coprocessor plugins are located. Plugins in this directory are automatically loaded by TiKV.
-+ If not set, the coprocessor plugin is disabled.
++ If this configuration item is not set, the coprocessor plugin is disabled.
 + Default value: `"./coprocessors"`
 
 ## RocksDB
@@ -1464,7 +1464,7 @@ Configuration items related to `raftdb`
 ### `wal-dir`
 
 + The directory in which Raft RocksDB WAL files are stored, which is the absolute directory path for WAL. **Do not** set this config the same as [`rocksdb.wal-dir`](#wal-dir).
-+ If not set, the log files store in the same directory as data.
++ If this configuration item is not set, the log files store in the same directory as data.
 + If there are two disks on the machine, storing RocksDB data and WAL logs on different disks can improve performance.
 + Default value: `""`
 
@@ -1489,7 +1489,7 @@ Configuration items related to `raftdb`
 
 ### `compaction-readahead-size`
 
-+ Determines whether to enable the readahead feature during RocksDB compaction and specify the size of readahead data.
++ Controls whether to enable the readahead feature during RocksDB compaction and specify the size of readahead data.
 + If you use mechanical disks, it is recommended to set the value to `2MB` at least.
 + Default value: `0`
 + Minimum value: `0`
@@ -1509,12 +1509,12 @@ Configuration items related to `raftdb`
 
 ### `enable-pipelined-write`
 
-+ Enables or disables Pipelined Write.
++ Controls whether to enable Pipelined Write
 + Default value: `true`
 
 ### `allow-concurrent-memtable-write`
 
-+ Enable or disable concurrent memtable write.
++ Controls whether to enable concurrent memtable write.
 + Default value: `true`
 
 ### `bytes-per-sync`
@@ -1526,37 +1526,37 @@ Configuration items related to `raftdb`
 
 ### `wal-bytes-per-sync`
 
-+ The rate at which OS incrementally synchronizes WAL files to disk while the WAL files are being written
++ The rate at which OS incrementally synchronizes WAL files to disk when the WAL files are being written
 + Default value: `"512KB"`
 + Minimum value: `0`
 + Unit: B|KB|MB|GB
 
 ### `info-log-max-size`
 
-+ The maximum size of Info log
++ The maximum size of Info logs
 + Default value: `"1GB"`
 + Minimum value: `0`
 + Unit: B|KB|MB|GB
 
 ### `info-log-roll-time`
 
-+ The time interval at which Info logs are truncated. If the value is `0s`, logs are not truncated.
-+ Default value: `"0s"`
++ The interval at which Info logs are truncated. If the value is `0s`, logs are not truncated.
++ Default value: `"0s"`(which means logs are not truncated)
 
 ### `info-log-keep-log-file-num`
 
-+ The maximum number of kept log files
++ The maximum number of Info log files kept in RaftDB
 + Default value: `10`
 + Minimum value: `0`
 
 ### `info-log-dir`
 
-+ The directory in which logs are stored
++ The directory in which Info logs are stored
 + Default value: `""`
 
 ### `info-log-level`
 
-+ RocksDB log levels.
++ Log levels of RocksDB
 + Default value: `"info"`
 
 ## raft-engine
@@ -1577,7 +1577,7 @@ Configuration items related to Raft Engine.
 ### `dir`
 
 + The directory at which raft log files are stored. If the directory does not exist, it will be created when TiKV is started.
-+ When this configuration is not set, `{data-dir}/raft-engine` is used.
++ If this configuration item is not set, `{data-dir}/raft-engine` is used.
 + If there are multiple disks on your machine, it is recommended to store the data of Raft Engine on a different disk to improve TiKV performance.
 + Default value: `""`
 
@@ -1692,19 +1692,20 @@ Configuration items related to TiDB Lightning import and BR restore.
 
 ### `stream-channel-window`
 
-+ Stream channel window size, stream will be blocked on channel full.
-+ Default value: 128
++ The window size of Stream channel. When the channel is full, the stream is blocked.
++ Default value: `128`
 
 ## gc
 
 ### `batch-keys`
 
-+ The number of keys to GC in one batch.
++ The number of keys to GC in one batch
 + Default value: `512`
 
 ### `max-write-bytes-per-sec`
 
-+ Max bytes that GC worker can write to rocksdb in one second. If it is set to 0, there is no limit.
++ The maximum bytes that GC worker can write to RocksDB in one second.
++ If the value set to `0`, there is no limit.
 + Default value: `"0"`
 
 ### `enable-compaction-filter` <span class="version-mark">New in v5.0</span>
@@ -1714,7 +1715,7 @@ Configuration items related to TiDB Lightning import and BR restore.
 
 ### `ratio-threshold`
 
-+ Garbage ratio threshold to trigger a GC.
++ The garbage ratio threshold to trigger GC.
 + Default value: `1.1`
 
 ## backup
@@ -1730,12 +1731,12 @@ Configuration items related to BR backup.
 
 ### `batch-size`
 
-+ Number of ranges to backup in one batch.
++ The number of ranges to backup in one batch
 + Default value: `8`
 
 ### `sst-max-size`
 
-+ When Backup region [a,e) size exceeds `sst-max-size`, it will be backuped into several Files [a,b), [b,c), [c,d), [d,e) and the size of [a,b), [b,c), [c,d) will be `sst-max-size` (or a little larger).
++ When the size of a backup file with the region [a,e) is larger than `sst-max-size`, the file is backed up to several files with regions [a,b), [b,c), [c,d) and [d,e), and the size of [a,b), [b,c), [c,d) is same as that of `sst-max-size` (or slightly larger).
 + Default value: `"144MB"`
 
 ### `enable-auto-tune` <span class="version-mark">New in v5.4.0</span>
@@ -1747,12 +1748,13 @@ Configuration items related to BR backup.
 
 ### `home`
 
-+ let TiKV know how to find the HDFS shell command. Equivalent to the `$HADOOP_HOME` environment variable.
++ Allows TiKV to find the HDFS shell command. This configuration item has the same effect to the environment variable `$HADOOP_HOME`.
 + Default value: `""`
 
 ### `linux-user`
 
-+ TiKV will run the hdfs shell command under this linux user. TiKV will use the current linux user if not provided.
++ Allows TiKV to run the HDFS shell command under this linux user.
++ If this configuration item is not set, TiKV uses the current linux user.
 + Default value: `""`
 
 ## cdc
