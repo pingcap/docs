@@ -1,9 +1,9 @@
 ---
-title: Create Secondary Index
+title: Create Secondary Indexes
 summary: The ways, best practices and examples for creating secondary indexes.
 ---
 
-# Create Secondary Index
+# Create Secondary Indexes
 
 Indexes are logical objects in a cluster that help TiDB cluster queries find data more efficiently. When you create a secondary index, TiDB creates a reference to each row in the table and sorts it by the selected column. More information about secondary indexes can be found in [TiDB Best Practices](https://docs.pingcap.com/tidb/stable/tidb-best-practices#secondary-index).
 
