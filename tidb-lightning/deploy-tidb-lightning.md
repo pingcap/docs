@@ -7,8 +7,6 @@ summary: Deploy TiDB Lightning to quickly import large amounts of new data.
 
 This document describes the hardware requirements of TiDB Lightning using the Local-backend, and how to deploy it manually.
 
-If Local-backend is used for data import, during the import process, **the cluster cannot provide services**. If you do not want the TiDB services to be impacted, perform the data import according to [TiDB Lightning TiDB-backend](/tidb-lightning/tidb-lightning-backends.md#tidb-lightning-tidb-backend).
-
 ## Notes
 
 Before starting TiDB Lightning, note that:
