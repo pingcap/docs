@@ -546,7 +546,7 @@ We use the **Get** method to request the `/player/count` endpoint request to get
 curl --location --request GET 'http://localhost:8080/player/count'
 ```
 
-返回值为玩家个数
+The return value is the number of players:
 
 ```json
 4
@@ -567,7 +567,7 @@ curl --location --request PUT 'http://localhost:8080/player/trade' \
   --data-urlencode 'price=100'
 ```
 
-We use **Form Data** as the payload of our message with the request parameters are sell player ID `sellID`, buy player ID `buyID`, number of goods purchased `amount`, number of coins consumed for purchase `price`. 
+We use **Form Data** as the payload of our message with the request parameters are sell player ID `sellID`, buy player ID `buyID`, number of goods purchased `amount`, number of coins consumed for purchase `price`.
 
 The return value is whether the transaction is successful or not. When there is insufficient goods for the selling player, insufficient gold for the buying player or database error, the transaction will not be successful and no player's gold or goods will be lost due to the database [transaction](/develop/transaction-overview.md) guarantee.
 

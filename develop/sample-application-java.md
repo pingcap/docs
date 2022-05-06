@@ -1033,8 +1033,6 @@ Then the configuration file should be changed to:
 
 <div label="Using JDBC" href="run-jdbc">
 
-运行 `make`，这是两个操作的组合：
-
 Run `make`, which is a combination of two actions.
 
 - Clean and build (make build): `mvn clean package`
