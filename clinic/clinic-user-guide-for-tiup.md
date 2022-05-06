@@ -75,7 +75,7 @@ Before using PingCAP Clinic, you need to install Diag (a component to collect da
 
 3. (Optional) Enable log redaction.
 
-    When TiDB provides detailed log information, it might print sensitive information (for example, user data) in the log. If you want to remove sensitive information from the local log and Clinic Server, you can enable log redaction in configuration. For more information, see [Log Redaction](/log-redaction.md#log-redaction-in-tidb-side).
+    When TiDB provides detailed log information, it might print sensitive information (for example, user data) in the log. If you want to avoid leaking sensitive information in the local log and Clinic Server, you can enable log redaction in configuration. For more information, see [Log Redaction](/log-redaction.md#log-redaction-in-tidb-side).
 
 ## Troubleshoot cluster problems remotely
 
