@@ -38,13 +38,14 @@ This document only describes the parameters that are not included in command-lin
 
 ### `memory-usage-limit`
 
-+ Memory usage limit for the TiKV instance. Generally it's not necessary to configure it explicitly, in which case it will be set to 75% of total available system memory. Considering the behavior of `block-cache.capacity`, it means 25% memory is reserved for the OS page cache.
-+ It's still unnecessary to configure it for deploying multiple TiKV nodes on a single physical machine. It will be calculated as `5/3 * block-cache.capacity`.
-+ For different system memory capacity, the default memory quota will be:
-+ system=8G    block-cache=3.6G    memory-usage-limit=6G   page-cache=2G.
-+ system=16G   block-cache=7.2G    memory-usage-limit=12G  page-cache=4G
-+ system=32G   block-cache=14.4G   memory-usage-limit=24G  page-cache=8G
-+ So how can `memory-usage-limit` influence TiKV? When a TiKV's memory usage almost reaches this threshold, it can squeeze some internal components (e.g. evicting cached Raft entries) to release memory.
++ The memory usage limit for the TiKV instance. When the memory usage of TiKV almost reaches this threshold, it can occupy some internal components (such as evicting cached Raft entries) to release memory.
++ Generally, you do not necessary to configure this configuration item explicitly, in which case the TiKV instance is set to use 75% of the total available system memory. Considering the behavior of `block-cache.capacity`, this means the rest 25% of memory is reserved for the OS page cache.
++ When deploying multiple TiKV nodes on a single physical machine, you still do not need to set this configuration item. In this case, the TiKV instance uses `5/3 * block-cache.capacity` of memory.
++ The default value for different system memory capacity is as follows:
+
+    + system=8G    block-cache=3.6G    memory-usage-limit=6G   page-cache=2G
+    + system=16G   block-cache=7.2G    memory-usage-limit=12G  page-cache=4G
+    + system=32G   block-cache=14.4G   memory-usage-limit=24G  page-cache=8G
 
 ## log <span class="version-mark">New in v5.4.0</span>
 
@@ -106,20 +107,24 @@ This document only describes the parameters that are not included in command-lin
 
 ### `addr`
 
-+ Listening IP address and port.
++ The listening IP address and the listening port
 + Default value: `"127.0.0.1:20160"`
 
 ### `advertise-addr`
 
-+ Advertise listening address for client communication.
-+ If not set, `addr` will be used.
++ Advertise the listening address for client communication
++ If not set, `addr` is used.
 + Default value: `""`
 
 ### `status-addr`
 
-+ Status address.
-+ This is used for reporting the status of TiKV directly through the HTTP address. Notice that there is a risk of leaking status information if this port is exposed to the public.
-+ Empty string means disabling it.
++ The status address reports TiKV status directly through the `HTTP` address
+
+    > **Note:**
+    >
+    > If this value is exposed to the public, the status information of the TiKV server might be leaked.
+
++ To disable this configuration item, set the value to `""`.
 + Default value: `"127.0.0.1:20180"`
 
 ### `status-thread-pool-size`
@@ -218,18 +223,18 @@ This document only describes the parameters that are not included in command-lin
 
 ### `enable-request-batch`
 
-+ Whether to enable request batch.
++ Whether to enable to process requests in batches
 + Default value: `true`
 
 ### `labels`
 
-+ Attributes about this server, e.g. `{ zone = "us-west-1", disk = "ssd" }`.
++ Attributes about the server, such as `{ zone = "us-west-1", disk = "ssd" }`.
 + Default value: `{}`
 
 ### `background-thread-count`
 
-+ The working thread count of the background pool, which include the endpoint of and br, split-check, region thread and other thread of delay-insensitive tasks.
-+ The default value is 2 if the number of CPU cores is less than 16, otherwise 3.
++ + The working thread counts of the background pool, including endpoint threads, BR threads, split-check threads, Region threads, and other threads of delay-insensitive tasks.
++ Default value: when the number of CPU cores is less than 16, the default value is `2`; Otherwise, the default value is `3`.
 
 ### `end-point-slow-log-threshold`
 
@@ -386,7 +391,7 @@ Configuration items related to storage.
 
 ### `data-dir`
 
-+ The path to RocksDB directory.
++ The storage path to RocksDB directory
 + Default value: `"./"`
 
 ### `scheduler-concurrency`
@@ -409,7 +414,7 @@ Configuration items related to storage.
 
 ### `enable-async-apply-prewrite`
 
-+ For async commit transactions, it's possible to response to the client before applying prewrite requests. Enabling this can ease reduce latency when apply duration is significant, or reduce latency jittering when apply duration is not stable.
++ + Async Commit transactions can respond to the TiKV client before applying prewrite requests. Enabling this configuration item can reduce latency easily when apply duration is high, or reduce the delay jitter when apply duration is not stable.
 + Default value: `false`
 
 ### `reserve-space`
@@ -499,24 +504,24 @@ Configuration items related to the I/O rate limiter.
 
 ### `endpoints`
 
-+ PD endpoints. Specify endpoints separated by commas.
++ The endpoints of PD. When specifying endpoints, you need to split them by commas.
 + Default value: `["127.0.0.1:2379"]`
 
 ### `retry-interval`
 
-+ The interval at which to retry a PD connection initialization.
++ The interval for retrying to initialize the PD connection
 + Default value: `"300ms"`
 
 ### `retry-log-every`
 
-+ If the client observes an error, it can can skip reporting it except every `n` times.
-+ Set to 1 to disable this feature.
++ When PD client observes an error, the client skips reporting the error except every `n` time.
++ To disable this feature, set `1`.
 + Default value: `10`
 
 ### `retry-max-count`
 
-+ The maximum number of times to retry a PD connection initialization.
-+ Set to 0 to disable retry. Set to -1 for unlimited retry.
++ The maximum number of times to retry to initialize the PD connection
++ To disable retries, set `0`; to not limit the number of retries, set `-1`.
 + Default value: `-1`
 
 ## raftstore
@@ -624,16 +629,16 @@ Configuration items related to Raftstore.
 
 + After the number of ticks set by this configuration item passes, even if the number of residual Raft logs does not reach the value set by `raft-log-gc-threshold`, TiKV still performs garbage collection (GC) to these logs.
 + Default value: `6`
-+ Minimum value: greater than `0` 
++ Minimum value: greater than `0`
 
 ### `raft-engine-purge-interval`
 
-+ Raft engine is a replaceable component. For some implementations, it's necessary to purge old log files to recycle disk space ASAP.
++ The interval of purging old log files to recycle disk space as soon as possible. Raft engine is a replaceable component, so the purging process is needed for some implementations, such as [XXX].
 + Default value: `"10s"`
 
 ### `raft-entry-cache-life-time`
 
-+ The maximum remaining time allowed for the log cache in memory.
++ The maximum remaining time allowed for the log cache in memory
 + Default value: `"30s"`
 + Minimum value: `0`
 
@@ -909,16 +914,16 @@ Configuration items related to Coprocessor.
 
 ### `consistency-check-method`
 
-+ Set to "mvcc" to do consistency check for MVCC data, or "raw" for raw data.
++ The method for consistency check
++ For the consistency check of MVCC data, set `"mvcc"`; for the consistency check of raw data, set `"raw"`.
 + Default value: `"mvcc"`
 
 ## coprocessor-v2
 
 ### `coprocessor-plugin-directory`
 
-+ Path to the directory where compiled coprocessor plugins are located.
-+ Plugins in this directory will be automatically loaded by TiKV.
-+ If the config value is not set, the coprocessor plugin will be disabled.
++ THe path of the directory where compiled coprocessor plugins are located. Plugins in this directory are automatically loaded by TiKV.
++ If not set, the coprocessor plugin is disabled.
 + Default value: `"./coprocessors"`
 
 ## RocksDB
@@ -998,7 +1003,7 @@ Configuration items related to RocksDB
 
 ### `max-total-wal-size`
 
-+ Max RocksDB WAL size in total. This is the size of `*.log` files in the `data-dir`
++ The maximum RocksDB WAL size in total, which is the size of `*.log` files in the `data-dir`.
 + Default value: `"4GB"`
 
 ### `enable-statistics`
@@ -1039,7 +1044,7 @@ Configuration items related to RocksDB
 
 ### `rate-limiter-refill-period`
 
-+ Controls how often IO tokens are refilled. Smaller value will flatten IO bursts while introducing more CPU overhead.
++ Controls how often I/O tokens are refilled. A smaller value reduces I/O bursts but causes more CPU overhead.
 + Default value: `"100ms"`
 
 ### `rate-limiter-mode`
@@ -1097,7 +1102,7 @@ Configuration items related to RocksDB
 
 ### `info-log-level`
 
-+ RocksDB log levels.
++ Log levels of RocksDB
 + Default value: `"info"`
 
 ## rocksdb.titan
@@ -1453,24 +1458,22 @@ Configuration items related to `raftdb`
 
 ### `stats-dump-period`
 
-+ The interval at which statistics are output to the log.
++ The interval at which statistics are output to the log
 + Default value: `10m`
 
 ### `wal-dir`
 
-+ Raft RocksDB WAL directory.
-+ This config specifies the absolute directory path for WAL.
-+ If it is not set, the log files will be in the same directory as data.
++ The directory in which Raft RocksDB WAL files are stored, which is the absolute directory path for WAL. **Do not** set this config the same as [`rocksdb.wal-dir`](#wal-dir).
++ If not set, the log files store in the same directory as data.
 + If there are two disks on the machine, storing RocksDB data and WAL logs on different disks can improve performance.
-+ Do not set this config the same as `rocksdb.wal-dir`.
 + Default value: `""`
 
 ### `wal-ttl-seconds`
 
-+ The living time of the archived WAL files. When the value is exceeded, the system deletes these files.
++ The existing time of the archived WAL files. When the value is exceeded, the system deletes these files.
 + Default value: `0`
 + Minimum value: `0`
-+ unit: second
++ Unit: second
 
 ### `wal-size-limit`
 
@@ -1481,12 +1484,13 @@ Configuration items related to `raftdb`
 
 ### `max-total-wal-size`
 
-+ Max RocksDB WAL size in total
++ The maximum RocksDB WAL size in total
 + Default value: `"4GB"`
 
 ### `compaction-readahead-size`
 
-+ Enables the readahead feature during RocksDB compaction and specifies the size of readahead data. If you are using mechanical disks, it is recommended to set the value to 2MB at least.
++ Determines whether to enable the readahead feature during RocksDB compaction and specify the size of readahead data.
++ If you use mechanical disks, it is recommended to set the value to `2MB` at least.
 + Default value: `0`
 + Minimum value: `0`
 + Unit: B|KB|MB|GB
