@@ -123,8 +123,8 @@ jdbc:mysql://127.0.0.1:4000/test?user=root&useConfigs=maxPerformance&useServerPr
 
 For a complete example in Java, see:
 
-- [Build a Simple CRUD App with TiDB and Java - Using JDBC](/develop/sample-application-java.md#get-code-jdbc)
-- [Build a Simple CRUD App with TiDB and Java - Using Hibernate](/develop/sample-application-java.md#get-code-hibernate)
+- [Build a Simple CRUD App with TiDB and Java - Using JDBC](/develop/sample-application-java.md#step-2-get-the-code)
+- [Build a Simple CRUD App with TiDB and Java - Using Hibernate](/develop/sample-application-java.md#step-2-get-the-code)
 - [Build the TiDB Application using Spring Boot](/develop/sample-application-spring-boot.md)
 
 </div>
@@ -147,8 +147,6 @@ When designing a table you need to consider if there is a large number of insert
 For more information on how to handle hotspot issues, please refer to the [Troubleshoot Hotspot Issues](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues) documentation.
 
 ## Insert data to a table with `AUTO_RANDOM` primary key
-
-在我们插入的表主键为 `AUTO_RANDOM` 时，这时默认情况下，不能指定主键。例如 [bookshop](/develop/bookshop-schema-design.md) 数据库中，我们可以看到 [users 表](/develop/bookshop-schema-design.md#users-表) 的 `id` 字段含有 `AUTO_RANDOM` 属性。
 
 In case the primary key of the table we insert has the `AUTO_RANDOM` attribute, then by default, the primary key cannot be specified. For example, in the [bookshop](/develop/bookshop-schema-design.md) database, we can see that the `id` field of the [users table](/develop/bookshop-schema-design.md#users-table) contains the `AUTO_RANDOM` attribute.
 
