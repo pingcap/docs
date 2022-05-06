@@ -25,12 +25,10 @@ In SQL, the `DELETE` statement is generally of the following form:
 DELETE FROM {table} WHERE {filter}
 ```
 
-|    参数    |      描述      |
+| Parameter Name | Description |
 | :--------: | :------------: |
-| `{table}`  |      表名      |
-| `{filter}` | 过滤器匹配条件 |
-
-此处仅展示 `DELETE` 的简单用法，详细文档可参考 TiDB 的 [DELETE 语法页](https://docs.pingcap.com/zh/tidb/stable/sql-statement-delete)。
+| `{table}`  |      Table Name      |
+| `{filter}` | Filter matching conditions |
 
 This only shows a simple usage of `DELETE`. For detailed documentation, refer to TiDB's [DELETE syntax](https://docs.pingcap.com/tidb/stable/sql-statement-delete) page.
 
