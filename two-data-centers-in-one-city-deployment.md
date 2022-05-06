@@ -162,12 +162,36 @@ cat rule.json
 ]
 ```
 
-To use the configurations in `rule.json`, override the existing configurations by running the following command:
+To use the configurations in `rule.json`, override the existing configurations backed up in `default.json` file by running the following command:
 
 {{< copyable "shell-regular" >}}
 
 ```bash
+pd-ctl config placement-rules rule-bundle load --out="default.json"
 pd-ctl config placement-rules rule-bundle save --in="rule.json"
+```
+
+If you need to roll back the configurations, you can restore the backup file `default.json` or write the following JSON file manually and overwrite the file with the existing configuration file:
+
+```
+cat default.json
+[
+  {
+    "group_id": "pd",
+    "group_index": 0,
+    "group_override": false,
+    "rules": [
+      {
+        "group_id": "pd",
+        "id": "default",
+        "start_key": "",
+        "end_key": "",
+        "role": "voter",
+        "count": 3
+      }
+    ]
+  }
+]
 ```
 
 ### Enable the DR Auto-Sync mode
