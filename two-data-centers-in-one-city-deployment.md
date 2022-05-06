@@ -161,7 +161,7 @@ cat rule.json
 ]
 ```
 
-To use the configurations in `rule.json`, run the following command to back up the existing configurations to the `default.json` file and override the existing configurations to `rule.json`:
+To use the configurations in `rule.json`, run the following command to back up the existing configurations into the `default.json` file and override the existing configurations to `rule.json`:
 
 {{< copyable "shell-regular" >}}
 
