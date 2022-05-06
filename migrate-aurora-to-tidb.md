@@ -128,7 +128,7 @@ If you need to enable TLS in the TiDB cluster, refer to [TiDB Lightning Configur
     {{< copyable "shell-regular" >}}
 
     ```shell
-    tiup tidb-lightning -config tidb-lightning.toml -d ./schema
+    tiup tidb-lightning -config tidb-lightning.toml -d 's3://my-bucket/schema-backup?region=us-west-2'
     ```
 
 2. Start the import by running `tidb-lightning`. If you launch the program directly in the command line, the process might exit unexpectedly after receiving a SIGHUP signal. In this case, it is recommended to run the program using a `nohup` or `screen` tool. For example:
