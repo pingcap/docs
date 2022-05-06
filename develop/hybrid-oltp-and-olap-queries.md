@@ -8,7 +8,7 @@ HTAP stands for Hybrid Transactional / Analytical Processing. Traditionally, dat
 
 In TiDB, we have both TiKV, a row-store engine for online transactions, and TiFlash, a column-store engine for real-time analytics scenarios. Data exists in both the Row-Store and Columnar-Store, which are automatically synchronized for strong consistency. The Row-Store is optimized for online transactional OLTP, while the Columnar-Store is optimized for online analytical OLAP performance.
 
-In the [Create Database](/develop/create-table.md#using-htap-capability) chapter, we have introduced how to enable the HTAP capability of TiDB. Below we'll take a closer look at how to use HTAP capabilities to analyze data faster.
+In the [Create Database](/develop/create-table.md#using-htap-capabilities) chapter, we have introduced how to enable the HTAP capability of TiDB. Below we'll take a closer look at how to use HTAP capabilities to analyze data faster.
 
 ## Data preparation
 
@@ -149,7 +149,7 @@ For example, in the previous [Pagination Query](/develop/paginate-results.md) ch
 
 ### Enable column replica
 
-TiDB's default storage engine, TiKV, is row-stored. Before proceeding to the next steps, you can read the section [Enable HTAP Capability](/develop/create-table.md#using-htap-capability) and add a TiFlash column-stored replica of the `books` and `orders` tables using the following SQL.
+TiDB's default storage engine, TiKV, is row-stored. Before proceeding to the next steps, you can read the section [Enable HTAP Capability](/develop/create-table.md#using-htap-capabilities) and add a TiFlash column-stored replica of the `books` and `orders` tables using the following SQL.
 
 {{< copyable "sql" >}}
 
