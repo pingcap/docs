@@ -204,7 +204,6 @@ TiDB version: 5.4.1
     - None. [#4805](https://github.com/tikv/pd/issues/4805)
     - Fix the issue that the label distribution has residual labels [#4825](https://github.com/tikv/pd/issues/4825)
     - metrics: support multi-k8s in grafana dashboards [#4673](https://github.com/tikv/pd/issues/4673)
-    - None. [#4808](https://github.com/tikv/pd/issues/4808)
 
 + Tools
 
