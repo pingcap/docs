@@ -78,7 +78,7 @@ The following part shows how to use Pump and Drainer based on the nodes above.
 
 1. Deploy Pump using the binary.
 
-    - To view the command line parameters of Pump, execute `./bin/pump -help`:
+    - To view the command line parameters of Pump, execute `./pump -help`:
 
         ```bash
         Usage of Pump:
@@ -173,14 +173,14 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         {{< copyable "shell-regular" >}}
 
         ```bash
-        ./bin/pump -config pump.toml
+        ./pump -config pump.toml
         ```
 
         If the command line parameters is the same with the configuration file parameters, the values of command line parameters are used.
 
 2. Deploy Drainer using binary.
 
-    - To view the command line parameters of Drainer, execute `./bin/drainer -help`:
+    - To view the command line parameters of Drainer, execute `./drainer -help`:
 
         ```bash
         Usage of Drainer:
@@ -370,9 +370,12 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         # zookeeper-addrs = "127.0.0.1:2181"
         # kafka-addrs = "127.0.0.1:9092"
         # kafka-version = "0.8.2.0"
+        # The maximum number of messages (number of binlogs) in a broker request. If it is left blank or a value smaller than 0 is configured, the default value 1024 is used.
         # kafka-max-messages = 1024
+        # The maximum size of a broker request (unit: byte). The default value is 1 GiB and the maximum value is 2 GiB.
+        # kafka-max-message-size = 1073741824
 
-        # the topic name of the Kafka cluster that saves the binlog data. The default value is <cluster-id>_obinlog
+        # the topic name of the Kafka cluster that saves the binlog data. The default value is <cluster-id>_obinlog.
         # To run multiple Drainers to replicate data to the same Kafka cluster, you need to set different `topic-name`s for each Drainer.
         # topic-name = ""
         ```
@@ -388,7 +391,7 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         {{< copyable "shell-regular" >}}
 
         ```bash
-        ./bin/drainer -config drainer.toml -initial-commit-ts {initial-commit-ts}
+        ./drainer -config drainer.toml -initial-commit-ts {initial-commit-ts}
         ```
 
         If the command line parameter and the configuration file parameter are the same, the parameter value in the command line is used.

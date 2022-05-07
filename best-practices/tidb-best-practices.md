@@ -10,9 +10,9 @@ This document summarizes the best practices of using TiDB, including the use of 
 
 Before you read this document, it is recommended that you read three blog posts that introduce the technical principles of TiDB:
 
-* [TiDB Internal (I) - Data Storage](https://pingcap.com/blog/2017-07-11-tidbinternal1/)
-* [TiDB Internal (II) - Computing](https://pingcap.com/blog/2017-07-11-tidbinternal2/)
-* [TiDB Internal (III) - Scheduling](https://pingcap.com/blog/2017-07-20-tidbinternal3/)
+* [TiDB Internal (I) - Data Storage](https://en.pingcap.com/blog/tidb-internal-data-storage/)
+* [TiDB Internal (II) - Computing](https://en.pingcap.com/blog/tidb-internal-computing/)
+* [TiDB Internal (III) - Scheduling](https://en.pingcap.com/blog/tidb-internal-scheduling/)
 
 ## Preface
 
@@ -42,9 +42,9 @@ TiDB provides complete distributed transactions and the model has some optimizat
 
     Assume that the database is used as a counter. High access concurrency might lead to severe conflicts, resulting in multiple retries or even timeouts. Therefore, in the scenario of severe conflicts, it is recommended to use the pessimistic transaction mode or to solve problems at the system architecture level, such as placing counter in Redis. Nonetheless, the optimistic transaction model is efficient if the access conflict is not very severe.
 
-* Pessimistic transaction model
+* Pessimistic transaction mode
 
-    In TiDB, the pessimistic transaction model has almost the same behavior as in MySQL. The transaction applies a lock during the execution phase, which avoids retries in conflict situations and ensures a higher success rate. By applying the pessimistic locking, you can also lock data in advance using `SELECT FOR UPDATE`.
+    In TiDB, the pessimistic transaction mode has almost the same behavior as in MySQL. The transaction applies a lock during the execution phase, which avoids retries in conflict situations and ensures a higher success rate. By applying the pessimistic locking, you can also lock data in advance using `SELECT FOR UPDATE`.
 
     However, if the application scenario has fewer conflicts, the optimistic transaction model has better performance.
 
@@ -68,7 +68,7 @@ Placement Driver (PD) balances the load of the cluster according to the status o
 
 ### SQL on KV
 
-TiDB automatically maps the SQL structure into Key-Value structure. For details, see [TiDB Internal (II) - Computing](https://pingcap.com/blog/2017-07-11-tidbinternal2/).
+TiDB automatically maps the SQL structure into Key-Value structure. For details, see [TiDB Internal (II) - Computing](https://en.pingcap.com/blog/tidb-internal-computing/).
 
 Simply put, TiDB performs the following operations:
 
@@ -87,7 +87,7 @@ Lots of MySQL experience is also applicable to TiDB. It is noted that TiDB has i
 
 * The more secondary indexes, the better?
 
-    Secondary indexes can speed up queries, but adding an index has side effects. The previous section introduces the storage model of indexes. For each additional index, there will be one more Key-Value when inserting a piece of data. Therefore, the more indexes, the slower the writing speed and the more space it takes up.
+    Secondary indexes can speed up queries, but adding an index has side effects. The previous section introduces the storage model of indexes. For each additional index, there will be one more Key-Value when inserting a row. Therefore, the more indexes, the slower the writing speed and the more space it takes up.
 
     In addition, too many indexes affects the runtime of the optimizer, and inappropriate indexes mislead the optimizer. Thus, more secondary indexes does not mean better performance.
 

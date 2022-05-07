@@ -27,7 +27,7 @@ To download the latest version of PD Recover, directly download the TiDB package
 
 > **Note:**
 >
-> `{version}` indicates the version number of TiDB. For example, if `{version}` is `v5.3.0`, the package download link is `https://download.pingcap.org/tidb-v5.3.0-linux-amd64.tar.gz`.
+> `{version}` indicates the version number of TiDB. For example, if `{version}` is `v6.0.0`, the package download link is `https://download.pingcap.org/tidb-v6.0.0-linux-amd64.tar.gz`.
 
 ## Quick Start
 
@@ -109,9 +109,11 @@ Or you can simply run the above command in all PD servers to find the largest on
 
 ### Deploy a new PD cluster
 
-Before deploying a new PD cluster, you need to stop the the existing PD cluster and then delete the previous data directory which is specified by `--data-dir`.
+Before deploying a new PD cluster, you need to stop the the existing PD cluster and then delete the previous data directory or specify a new data directory using `--data-dir`.
 
 ### Use pd-recover
+
+You only need to run `pd-recover` on one PD node.
 
 {{< copyable "shell-regular" >}}
 

@@ -6,7 +6,7 @@ aliases: ['/docs/dev/sync-diff-inspector/shard-diff/','/docs/dev/reference/tools
 
 # Data Check in the Sharding Scenario
 
-sync-diff-inspector supports data check in the sharding scenario. Assume that you use the [TiDB Data Migration](https://docs.pingcap.com/tidb-data-migration/stable/overview) tool to replicate data from multiple MySQL instances into TiDB, you can use sync-diff-inspector to check upstream and downstream data.
+sync-diff-inspector supports data check in the sharding scenario. Assume that you use the [TiDB Data Migration](/dm/dm-overview.md) tool to replicate data from multiple MySQL instances into TiDB, you can use sync-diff-inspector to check upstream and downstream data.
 
 For scenarios where the number of upstream sharded tables is small and the naming rules of sharded tables do not have a pattern as shown below, you can use `Datasource config` to configure `table-0`, set corresponding `rules` and configure the tables that have the mapping relationship between the upstream and downstream databases. This configuration method requires setting all sharded tables.
 
@@ -70,7 +70,7 @@ target-table = "table-0"     # The name of the target table
 
     source-instances = ["mysql1", "mysql2"]
 
-    target-instance = ["tidb0"]
+    target-instance = "tidb0"
 
     # The tables of downstream databases to be compared. Each table needs to contain the schema name and the table name, separated by '.'
     target-check-tables = ["test.table-0"]
@@ -126,7 +126,7 @@ target-table = "table-0"     # The name of the target table
     output-dir = "./output"
     source-instances = ["mysql1", "mysql2"]
 
-    target-instance = ["tidb0"]
+    target-instance = "tidb0"
 
     # The tables of downstream databases to be compared. Each table needs to contain the schema name and the table name, separated by '.'
     target-check-tables = ["test.table-0"]

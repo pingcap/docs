@@ -3,6 +3,8 @@ title: Use TiFlash
 aliases: ['/docs/dev/tiflash/use-tiflash/','/docs/dev/reference/tiflash/use-tiflash/']
 ---
 
+To experience the whole process from importing data to querying in a TPC-H dataset, refer to [Quick Start Guide for TiDB HTAP](/quick-start-with-htap.md).
+
 # Use TiFlash
 
 After TiFlash is deployed, data replication does not automatically begin. You need to manually specify the tables to be replicated.
@@ -12,28 +14,32 @@ You can either use TiDB to read TiFlash replicas for medium-scale analytical pro
 - [Use TiDB to read TiFlash replicas](#use-tidb-to-read-tiflash-replicas)
 - [Use TiSpark to read TiFlash replicas](#use-tispark-to-read-tiflash-replicas)
 
-## Create TiFlash replicas for tables
+## Create TiFlash replicas
+
+This section describes how to create TiFlash replicas for tables and for databases, and set available zones for replica scheduling.
+
+### Create TiFlash replicas for tables
 
 After TiFlash is connected to the TiKV cluster, data replication by default does not begin. You can send a DDL statement to TiDB through a MySQL client to create a TiFlash replica for a specific table:
 
 {{< copyable "sql" >}}
 
 ```sql
-ALTER TABLE table_name SET TIFLASH REPLICA count
+ALTER TABLE table_name SET TIFLASH REPLICA count;
 ```
 
 The parameter of the above command is described as follows:
 
 - `count` indicates the number of replicas. When the value is `0`, the replica is deleted.
 
-If you execute multiple DDL statements on a same table, only the last statement is ensured to take effect. In the following example, two DDL statements are executed on the table `tpch50`, but only the second statement (to delete the replica) takes effect.
+If you execute multiple DDL statements on the same table, only the last statement is ensured to take effect. In the following example, two DDL statements are executed on the table `tpch50`, but only the second statement (to delete the replica) takes effect.
 
 Create two replicas for the table:
 
 {{< copyable "sql" >}}
 
 ```sql
-ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 2
+ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 2;
 ```
 
 Delete the replica:
@@ -41,7 +47,7 @@ Delete the replica:
 {{< copyable "sql" >}}
 
 ```sql
-ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 0
+ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 0;
 ```
 
 **Notes:**
@@ -51,7 +57,7 @@ ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 0
     {{< copyable "sql" >}}
 
     ```sql
-    CREATE TABLE table_name like t
+    CREATE TABLE table_name like t;
     ```
 
 * For versions earlier than v4.0.6, if you create the TiFlash replica before using TiDB Lightning to import the data, the data import will fail. You must import data to the table before creating the TiFlash replica for the table.
@@ -62,20 +68,147 @@ ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 0
 
 * In v5.1 and later versions, setting the replicas for the system tables is no longer supported. Before upgrading the cluster, you need to clear the replicas of the relevant system tables. Otherwise, you cannot modify the replica settings of the system tables after you upgrade the cluster to a later version.
 
-## Check the replication progress
+#### Check replication progress
 
 You can check the status of the TiFlash replicas of a specific table using the following statement. The table is specified using the `WHERE` clause. If you remove the `WHERE` clause, you will check the replica status of all tables.
 
 {{< copyable "sql" >}}
 
 ```sql
-SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = '<db_name>' and TABLE_NAME = '<table_name>'
+SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = '<db_name>' and TABLE_NAME = '<table_name>';
 ```
 
 In the result of above statement:
 
-* `AVAILABLE` indicates whether the TiFlash replicas of this table is available or not. `1` means available and `0` means unavailable. Once the replicas become available, this status does not change. If you use DDL statements to modify the number of replicas, the replication status will be recalculated.
+* `AVAILABLE` indicates whether the TiFlash replicas of this table are available or not. `1` means available and `0` means unavailable. Once the replicas become available, this status does not change. If you use DDL statements to modify the number of replicas, the replication status will be recalculated.
 * `PROGRESS` means the progress of the replication. The value is between `0.0` and `1.0`. `1` means at least one replica is replicated.
+
+### Create TiFlash replicas for databases
+
+Similar to creating TiFlash replicas for tables, you can send a DDL statement to TiDB through a MySQL client to create a TiFlash replica for all tables in a specific database:
+
+{{< copyable "sql" >}}
+
+```sql
+ALTER DATABASE db_name SET TIFLASH REPLICA count;
+```
+
+In this statement, `count` indicates the number of replicas. When you set it to `0`, replicas are deleted.
+
+Examples:
+
+- Create two replicas for all tables in the database `tpch50`:
+
+    {{< copyable "sql" >}}
+
+    ```sql
+    ALTER DATABASE `tpch50` SET TIFLASH REPLICA 2;
+    ```
+
+- Delete TiFlash replicas created for the database `tpch50`:
+
+    {{< copyable "sql" >}}
+
+    ```sql
+    ALTER DATABASE `tpch50` SET TIFLASH REPLICA 0;
+    ```
+
+> **Note:**
+>
+> - This statement actually performs a series of DDL operations, which are resource-intensive. If the statement is interrupted during the execution, executed operations are not rolled back and unexecuted operations do not continue.
+>
+> - After executing the statement, do not set the number of TiFlash replicas or perform DDL operations on this database until **all tables in this database are replicated**. Otherwise, unexpected results might occur, which include:
+>     - If you set the number of TiFlash replicas to 2 and then change the number to 1 before all tables in the database are replicated, the final number of TiFlash replicas of all the tables is not necessarily 1 or 2.
+>     - After executing the statement, if you create tables in this database before the completion of the statement execution, TiFlash replicas **may or may not** be created for these new tables.
+>     - After executing the statement, if you add indexes for tables in the database before the completion of the statement execution, the statement might hang and resume only after the indexes are added.
+>
+> - This statement skips system tables, views, temporary tables, and tables with character sets not supported by TiFlash.
+
+#### Check replication progress
+
+Similar to creating TiFlash replicas for tables, successful execution of the DDL statement does not mean the completion of replication. You can execute the following SQL statement to check the progress of replication on target tables:
+
+{{< copyable "sql" >}}
+
+```sql
+SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = '<db_name>';
+```
+
+To check tables without TiFlash replicas in the database, you can execute the following SQL statement:
+
+{{< copyable "sql" >}}
+
+```sql
+SELECT TABLE_NAME FROM information_schema.tables where TABLE_SCHEMA = "<db_name>" and TABLE_NAME not in (SELECT TABLE_NAME FROM information_schema.tiflash_replica where TABLE_SCHEMA = "<db_name>");
+```
+
+### Set available zones
+
+When configuring replicas, if you need to distribute TiFlash replicas to multiple data centers for disaster recovery, you can configure available zones by following the steps below:
+
+1. Specify labels for TiFlash nodes in the cluster configuration file.
+
+    ```
+    tiflash_servers:
+      - host: 172.16.5.81
+        config:
+          flash.proxy.labels: zone=z1
+      - host: 172.16.5.82
+        config:
+          flash.proxy.labels: zone=z1
+      - host: 172.16.5.85
+        config:
+          flash.proxy.labels: zone=z2
+    ```
+
+2. After starting a cluster, specify the labels when creating replicas.
+
+    {{< copyable "sql" >}}
+
+    ```sql
+    ALTER TABLE table_name SET TIFLASH REPLICA count LOCATION LABELS location_labels;
+    ```
+
+    For example:
+
+    {{< copyable "sql" >}}
+
+    ```sql
+    ALTER TABLE t SET TIFLASH REPLICA 2 LOCATION LABELS "zone";
+    ```
+
+3. PD schedules the replicas based on the labels. In this example, PD respectively schedules two replicas of the table `t` to two available zones. You can use pd-ctl to view the scheduling.
+
+    ```shell
+    > tiup ctl:<version> pd -u<pd-host>:<pd-port> store
+
+        ...
+        "address": "172.16.5.82:23913",
+        "labels": [
+          { "key": "engine", "value": "tiflash"},
+          { "key": "zone", "value": "z1" }
+        ],
+        "region_count": 4,
+
+        ...
+        "address": "172.16.5.81:23913",
+        "labels": [
+          { "key": "engine", "value": "tiflash"},
+          { "key": "zone", "value": "z1" }
+        ],
+        "region_count": 5,
+        ...
+
+        "address": "172.16.5.85:23913",
+        "labels": [
+          { "key": "engine", "value": "tiflash"},
+          { "key": "zone", "value": "z2" }
+        ],
+        "region_count": 9,
+        ...
+    ```
+
+For more information about scheduling replicas by using labels, see [Schedule Replicas by Topology Labels](/schedule-replicas-by-topology-labels.md), [Multiple Data Centers in One City Deployment](/multi-data-centers-in-one-city-deployment.md), and [Three Data Centers in Two Cities Deployment](/three-data-centers-in-two-cities-deployment.md).
 
 ## Use TiDB to read TiFlash replicas
 
@@ -228,12 +361,10 @@ TiFlash supports the push-down of the following operators:
 * TopN: Performs the TopN calculation.
 * Limit: Performs the limit calculation.
 * Project: Performs the projection calculation.
-* HashJoin (Equi Join): Performs the join calculation based on the [Hash Join](/explain-joins.md#hash-join) algorithm, but with the following conditions:
+* HashJoin: Performs the join calculation using the [Hash Join](/explain-joins.md#hash-join) algorithm, but with the following conditions:
     * The operator can be pushed down only in the [MPP mode](#use-the-mpp-mode).
-    * The push-down of `Full Outer Join` is not supported.
-* HashJoin (Non-Equi Join): Performs the Cartesian Join algorithm, but with the following conditions:
-    * The operator can be pushed down only in the [MPP mode](#use-the-mpp-mode).
-    * Cartesian Join is supported only in Broadcast Join.
+    * Supported joins are Inner Join, Left Join, Semi Join, Anti Semi Join, Left Semi Join, and Anti Left Semi Join.
+    * The preceding joins support both Equi Join and Non-Equi Join (Cartesian Join). When calculating Cartesian Join, the Broadcast algorithm, instead of the Shuffle Hash Join algorithm, is used.
 
 In TiDB, operators are organized in a tree structure. For an operator to be pushed down to TiFlash, all of the following prerequisites must be met:
 
@@ -242,17 +373,29 @@ In TiDB, operators are organized in a tree structure. For an operator to be push
 
 Currently, TiFlash supports the following push-down expressions:
 
-* Mathematical functions: `+, -, /, *, %, >=, <=, =, !=, <, >, round, abs, floor(int), ceil(int), ceiling(int), sqrt, log, log2, log10, ln, exp, pow, sign, radians, degrees, conv, crc32`
-* Logical functions: `and, or, not, case when, if, ifnull, isnull, in, like, coalesce`
+* Mathematical functions: `+, -, /, *, %, >=, <=, =, !=, <, >, round, abs, floor(int), ceil(int), ceiling(int), sqrt, log, log2, log10, ln, exp, pow, sign, radians, degrees, conv, crc32, greatest(int/real), least(int/real)`
+* Logical functions: `and, or, not, case when, if, ifnull, isnull, in, like, coalesce, is`
 * Bitwise operations: `bitand, bitor, bigneg, bitxor`
-* String functions: `substr, char_length, replace, concat, concat_ws, left, right, ascii, length, trim, ltrim, rtrim, position, format, lower, ucase, upper, substring_index`
-* Date functions: `date_format, timestampdiff, from_unixtime, unix_timestamp(int), unix_timestamp(decimal), str_to_date(date), str_to_date(datetime), datediff, year, month, day, extract(datetime), date, hour, microsecond, minute, second, sysdate`
+* String functions: `substr, char_length, replace, concat, concat_ws, left, right, ascii, length, trim, ltrim, rtrim, position, format, lower, ucase, upper, substring_index, lpad, rpad, strcmp, regexp`
+* Date functions: `date_format, timestampdiff, from_unixtime, unix_timestamp(int), unix_timestamp(decimal), str_to_date(date), str_to_date(datetime), datediff, year, month, day, extract(datetime), date, hour, microsecond, minute, second, sysdate, date_add, date_sub, adddate, subdate, quarter, dayname, dayofmonth, dayofweek, dayofyear, last_day, monthname`
 * JSON function: `json_length`
 * Conversion functions: `cast(int as double), cast(int as decimal), cast(int as string), cast(int as time), cast(double as int), cast(double as decimal), cast(double as string), cast(double as time), cast(string as int), cast(string as double), cast(string as decimal), cast(string as time), cast(decimal as int), cast(decimal as string), cast(decimal as time), cast(time as int), cast(time as decimal), cast(time as string), cast(time as real)`
 * Aggregate functions: `min, max, sum, count, avg, approx_count_distinct, group_concat`
 * Miscellaneous functions: `inetntoa, inetaton, inet6ntoa, inet6aton`
 
-In addition, expressions that contain the Bit/Set/Geometry type cannot be pushed down to TiFlash.
+### Other restrictions
+
+* Expressions that contain the Bit, Set, and Geometry types cannot be pushed down to TiFlash.
+
+* The `date_add`, `date_sub`, `adddate`, and `subdate` functions support the following interval types only. If other interval types are used, TiFlash reports errors.
+
+    * DAY
+    * WEEK
+    * MONTH
+    * YEAR
+    * HOUR
+    * MINUTE
+    * SECOND
 
 If a query encounters unsupported push-down calculations, TiDB needs to complete the remaining calculations, which might greatly affect the TiFlash acceleration effect. The currently unsupported operators and expressions might be supported in future versions.
 
@@ -303,18 +446,18 @@ The initial value of the `tidb_enforce_mpp` session variable is equal to the [`e
 > **Note:**
 >
 > When `tidb_enforce_mpp=1` takes effect, the TiDB optimizer will ignore the cost estimation to choose the MPP mode. However, if other factors block the MPP mode, TiDB will not select the MPP mode. These factors include the absence of TiFlash replica, unfinished replication of TiFlash replicas, and statements containing operators or functions that are not supported by the MPP mode.
-> 
+>
 > If TiDB optimizer cannot select the MPP mode due to reasons other than cost estimation, when you use the `EXPLAIN` statement to check out the execution plan, a warning is returned to explain the reason. For example:
-> 
+>
 > {{< copyable "sql" >}}
-> 
+>
 > ```sql
 > set @@session.tidb_enforce_mpp=1;
 > create table t(a int);
-> explain select count(*) from t; 
+> explain select count(*) from t;
 > show warnings;
 > ```
-> 
+>
 > ```
 > +---------+------+-----------------------------------------------------------------------------+
 > | Level   | Code | Message                                                                     |
@@ -354,9 +497,116 @@ TiFlash provides the following two global/session variables to control whether t
 - [`tidb_broadcast_join_threshold_size`](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50): The unit of the value is bytes. If the table size (in the unit of bytes) is less than the value of the variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used.
 - [`tidb_broadcast_join_threshold_count`](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50): The unit of the value is rows. If the objects of the join operation belong to a subquery, the optimizer cannot estimate the size of the subquery result set, so the size is determined by the number of rows in the result set. If the estimated number of rows in the subquery is less than the value of this variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used.
 
+## Access partitioned tables in the MPP mode
+
+To access partitioned tables in the MPP mode, you need to enable [dynamic pruning mode](https://docs.pingcap.com/tidb/stable/partitioned-table#dynamic-pruning-mode) first.
+
+> **Warning:**
+>
+> - Currently, dynamic pruning mode for partitioned tables is an experimental feature and is not recommended for production environments.
+>
+> - Do not enable dynamic pruning mode when a partitioned table contains columns of the `time` type. Otherwise, TiFlash crashes when a query selects a column of the `time` type.
+
+Example:
+
+```sql
+mysql> DROP TABLE if exists test.employees;
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+mysql> CREATE TABLE test.employees (  id int(11) NOT NULL,  fname varchar(30) DEFAULT NULL,  lname varchar(30) DEFAULT NULL,  hired date NOT NULL DEFAULT '1970-01-01',  separated date DEFAULT '99
+99-12-31',  job_code int(11) DEFAULT NULL,  store_id int(11) NOT NULL  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin  PARTITION BY RANGE (store_id)  (PARTITION p0 VALUES LESS THAN (
+6),  PARTITION p1 VALUES LESS THAN (11),  PARTITION p2 VALUES LESS THAN (16), PARTITION p3 VALUES LESS THAN (MAXVALUE));
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> ALTER table test.employees SET tiflash replica 1;
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> SET tidb_partition_prune_mode=static;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> explain SELECT count(*) FROM test.employees;
++----------------------------------+----------+-------------------+-------------------------------+-----------------------------------+
+| id                               | estRows  | task              | access object                 | operator info                     |
++----------------------------------+----------+-------------------+-------------------------------+-----------------------------------+
+| HashAgg_19                       | 1.00     | root              |                               | funcs:count(Column#10)->Column#9  |
+| └─PartitionUnion_21              | 4.00     | root              |                               |                                   |
+|   ├─StreamAgg_40                 | 1.00     | root              |                               | funcs:count(Column#12)->Column#10 |
+|   │ └─TableReader_41             | 1.00     | root              |                               | data:StreamAgg_27                 |
+|   │   └─StreamAgg_27             | 1.00     | batchCop[tiflash] |                               | funcs:count(1)->Column#12         |
+|   │     └─TableFullScan_39       | 10000.00 | batchCop[tiflash] | table:employees, partition:p0 | keep order:false, stats:pseudo    |
+|   ├─StreamAgg_63                 | 1.00     | root              |                               | funcs:count(Column#14)->Column#10 |
+|   │ └─TableReader_64             | 1.00     | root              |                               | data:StreamAgg_50                 |
+|   │   └─StreamAgg_50             | 1.00     | batchCop[tiflash] |                               | funcs:count(1)->Column#14         |
+|   │     └─TableFullScan_62       | 10000.00 | batchCop[tiflash] | table:employees, partition:p1 | keep order:false, stats:pseudo    |
+|   ├─StreamAgg_86                 | 1.00     | root              |                               | funcs:count(Column#16)->Column#10 |
+|   │ └─TableReader_87             | 1.00     | root              |                               | data:StreamAgg_73                 |
+|   │   └─StreamAgg_73             | 1.00     | batchCop[tiflash] |                               | funcs:count(1)->Column#16         |
+|   │     └─TableFullScan_85       | 10000.00 | batchCop[tiflash] | table:employees, partition:p2 | keep order:false, stats:pseudo    |
+|   └─StreamAgg_109                | 1.00     | root              |                               | funcs:count(Column#18)->Column#10 |
+|     └─TableReader_110            | 1.00     | root              |                               | data:StreamAgg_96                 |
+|       └─StreamAgg_96             | 1.00     | batchCop[tiflash] |                               | funcs:count(1)->Column#18         |
+|         └─TableFullScan_108      | 10000.00 | batchCop[tiflash] | table:employees, partition:p3 | keep order:false, stats:pseudo    |
++----------------------------------+----------+-------------------+-------------------------------+-----------------------------------+
+18 rows in set, 4 warnings (0.00 sec)
+
+mysql> SET tidb_partition_prune_mode=dynamic;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> explain SELECT count(*) FROM test.employees;
++------------------------------+----------+-------------------+-----------------+----------------------------------+
+| id                           | estRows  | task              | access object   | operator info                    |
++------------------------------+----------+-------------------+-----------------+----------------------------------+
+| HashAgg_21                   | 1.00     | root              |                 | funcs:count(Column#11)->Column#9 |
+| └─TableReader_23             | 1.00     | root              | partition:all   | data:ExchangeSender_22           |
+|   └─ExchangeSender_22        | 1.00     | batchCop[tiflash] |                 | ExchangeType: PassThrough        |
+|     └─HashAgg_9              | 1.00     | batchCop[tiflash] |                 | funcs:count(1)->Column#11        |
+|       └─TableFullScan_20     | 10000.00 | batchCop[tiflash] | table:employees | keep order:false, stats:pseudo   |
++------------------------------+----------+-------------------+-----------------+----------------------------------+
+```
+
+## Data validation
+
+### User scenarios
+
+Data corruptions are usually caused by serious hardware failures. In such cases, even if you attempt to manually recover data, your data become less reliable.
+
+To ensure data integrity, by default, TiFlash performs basic data validation on data files, using the `City128` algorithm. In the event of any data validation failure, TiFlash immediately reports an error and exits, avoiding secondary disasters caused by inconsistent data. At this time, you need to manually intervene and replicate the data again before you can restore the TiFlash node.
+
+Starting from v5.4.0, TiFlash introduces more advanced data validation features. TiFlash uses the `XXH3` algorithm by default and allows you to customize the validation frame and algorithm.
+
+### Validation mechanism
+
+The validation mechanism builds upon the DeltaTree File (DTFile). DTFile is the storage file that persists TiFlash data. DTFile has three formats:
+
+| Version | State | Validation mechanism | Notes |
+| :-- | :-- | :-- |:-- |
+| V1 | Deprecated | Hashes are embedded in data files. | |
+| V2 | Default for versions < v6.0.0 | Hashes are embedded in data files. | Compared to V1, V2 adds statistics of column data. |
+| V3 | Default for versions >= v6.0.0 | V3 contains metadata and token data checksum, and supports multiple hash algorithms. | New in v5.4.0. |
+
+DTFile is stored in the `stable` folder in the data file directory. All formats currently enabled are in folder format, which means the data is stored in multiple files under a folder with a name like `dmf_<file id>`.
+
+#### Use data validation
+
+TiFlash supports both automatic and manual data validation:
+
+* Automatic data validation:
+    * v6.0.0 and later versions use the V3 validation mechanism by default.
+    * Versions earlier than v6.0.0 use the V2 validation mechanism by default.
+    * To manually switch the validation mechanism, refer to [TiFlash configuration file](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file). However, the default configuration is verified by tests and therefore recommended.
+* Manual data validation. Refer to [`DTTool inspect`](/tiflash/tiflash-command-line-flags.md#dttool-inspect).
+
+> **Warning:**
+>
+> After you enable the V3 validation mechanism, the newly generated DTFile cannot be directly read by TiFlash earlier than v5.4.0. Since v5.4.0, TiFlash supports both V2 and V3 and does not actively upgrade or downgrade versions. If you need to upgrade or downgrade versions for existing files, you need to manually [switch versions](/tiflash/tiflash-command-line-flags.md#dttool-migrate).
+
+#### Validation tool
+
+In addition to automatic data validation performed when TiFlash reads data, a tool for manually checking data integrity is introduced in v5.4.0. For details, refer to [DTTool](/tiflash/tiflash-command-line-flags.md#dttool-inspect).
+
 ## Notes
 
-Currently, TiFlash does not support some features. These features might be incompatible with the native TiDB:
+TiFlash is incompatible with TiDB in the following situations:
 
 * In the TiFlash computation layer:
     * Checking overflowed numerical values is not supported. For example, adding two maximum values of the `BIGINT` type `9223372036854775807 + 9223372036854775807`. The expected behavior of this calculation in TiDB is to return the `ERROR 1690 (22003): BIGINT value is out of range` error. However, if this calculation is performed in TiFlash, an overflow value of `-2` is returned without any error.

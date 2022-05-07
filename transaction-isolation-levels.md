@@ -23,7 +23,7 @@ TiDB implements Snapshot Isolation (SI) consistency, which it advertises as `REP
 >
 > In TiDB v3.0, the automatic retry of transactions is disabled by default. It is not recommended to enable the automatic retry because it might **break the transaction isolation level**. Refer to [Transaction Retry](/optimistic-transaction.md#automatic-retry) for details.
 >
-> Starting from TiDB [v3.0.8](/releases/release-3.0.8.md#tidb), newly created TiDB clusters use the [pessimistic transaction model](/pessimistic-transaction.md) by default. The current read (`for update` read) is **non-repeatable read**. Refer to [pessimistic transaction mode](/pessimistic-transaction.md) for details.
+> Starting from TiDB [v3.0.8](/releases/release-3.0.8.md#tidb), newly created TiDB clusters use the [pessimistic transaction mode](/pessimistic-transaction.md) by default. The current read (`for update` read) is **non-repeatable read**. Refer to [pessimistic transaction mode](/pessimistic-transaction.md) for details.
 
 ## Repeatable Read isolation level
 
@@ -54,13 +54,22 @@ The Repeatable Read isolation level in TiDB differs from that in MySQL. The MySQ
 
 ## Read Committed isolation level
 
-Starting from TiDB [v4.0.0-beta](/releases/release-4.0.0-beta.md#tidb), TiDB supports the Read Committed isolation level. 
+Starting from TiDB [v4.0.0-beta](/releases/release-4.0.0-beta.md#tidb), TiDB supports the Read Committed isolation level.
 
 For historical reasons, the Read Committed isolation level of current mainstream databases is essentially the [Consistent Read isolation level defined by Oracle](https://docs.oracle.com/cd/B19306_01/server.102/b14220/consist.htm). In order to adapt to this situation, the Read Committed isolation level in TiDB pessimistic transactions is also a consistent read behavior in essence.
 
 > **Note:**
 >
 > The Read Committed isolation level only takes effect in the [pessimistic transaction mode](/pessimistic-transaction.md). In the [optimistic transaction mode](/optimistic-transaction.md), setting the transaction isolation level to `Read Committed` does not take effect and transactions still use the Repeatable Read isolation level.
+
+Starting from v6.0.0, TiDB supports using the [`tidb_rc_read_check_ts`](/system-variables.md#tidb_rc_read_check_ts-new-in-v600) system variable to optimize the timestamp acquisition in scenarios where read-write conflicts are rare. After enabling this variable, TiDB will try to use the previous valid timestamp to read data when `SELECT` is executed. The initial value of this variable is the `start_ts` of the transaction.
+
+- If TiDB does not encounter any data update during the read process, it returns the result to the client and the `SELECT` statement is successfully executed.
+- If TiDB encounters data update during the read process:
+    - If TiDB has not yet sent the result to the client, TiDB tries to acquire a new timestamp and retry this statement.
+    - If TiDB has already sent partial data to the client, TiDB reports an error to the client. The amount of data sent to the client each time is controlled by `tidb_init_chunk_size` and `tidb_max_chunk_size`.
+
+In scenarios where the `READ-COMMITTED` isolation level is used, the `SELECT` statements are many, and read-write conflicts are rare, enabling this variable can avoid the latency and cost of getting the global timestamp.
 
 ## Difference between TiDB and MySQL Read Committed
 

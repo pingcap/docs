@@ -8,12 +8,19 @@ aliases: ['/tidb/dev/experimental-features-4.0/']
 
 This document introduces the experimental features of TiDB in different versions. It is **NOT** recommended to use these features in the production environment.
 
+## Performance
+
++ [Raft Engine](/tikv-configuration-file.md#raft-engine). (Introduced in v5.4)
++ [Support collecting statistics for `PREDICATE COLUMNS`](/statistics.md#collect-statistics-on-some-columns) (Introduced in v5.4)
++ [Support synchronously loading statistics](/statistics.md#load-statistics). (Introduced in v5.4)
+
 ## Stability
 
 + TiFlash limits the use of I/O resources by compressing or sorting data, mitigating the contention for I/O resources between background tasks and front-end data reading and writing (Introduced in v5.0)
 + Improve the stability of the optimizer's choice of indexes (Introduced in v5.0)
     + Extend the statistics feature by collecting the multi-column order dependency information.
     + Refactor the statistics module, including deleting the `TopN` value from `CMSKetch` and the histogram, and adding NDV information for histogram buckets of each table index.
++ When TiKV is deployed with limited resources, if the foreground of TiKV processes too many read and write requests, the CPU resources used by the background are occupied to help process such requests, which affects the performance stability of TiKV. To avoid this situation, you can use the [Quota Limiter](/tikv-configuration-file.md#quota) to limit the CPU resources to be used by the foreground. (Introduced in v6.0)
 
 ## Scheduling
 
@@ -22,7 +29,6 @@ This document introduces the experimental features of TiDB in different versions
 
 ## SQL
 
-+ [Use SQL interface to set placement rules for data] (/placement-rules-in-sql.md) (Introduced in v5.3)
 + List Partition (Introduced in v5.0)
 + List COLUMNS Partition (Introduced in v5.0)
 + [Dynamic Pruning Mode for Partitioned Tables](/partitioned-table.md#dynamic-pruning-mode). (Introduced in v5.1)
@@ -47,13 +53,13 @@ This document introduces the experimental features of TiDB in different versions
 + [Titan Level Merge](/storage-engine/titan-configuration.md#level-merge-experimental) (Introduced in v4.0)
 + TiFlash supports distributing the new data of the storage engine on multiple hard drives to share the I/O pressure. (Introduced in v4.0)
 
-## Data migration
-
-+ [DM OpenAPI](https://docs.pingcap.com/tidb-data-migration/stable/open-api) (Introduced in v5.3)
-
 ## Backup and restoration
 
 + [Back up Raw KV](/br/use-br-command-line-tool.md#back-up-raw-kv-experimental-feature) (Introduced in v3.1)
+
+## Data migration
+
++ [Use WebUI](/dm/dm-webui-guide.md) to manage migration tasks in DM. (Introduced in v6.0)
 
 ## Garbage collection
 
@@ -63,5 +69,4 @@ This document introduces the experimental features of TiDB in different versions
 
 + [SQL diagnostics](/information-schema/information-schema-sql-diagnostics.md) (Introduced in v4.0)
 + [Cluster diagnostics](/dashboard/dashboard-diagnostics-access.md) (Introduced in v4.0)
-+ [Continuous profiling](/dashboard/continuous-profiling.md) (Introduced in v5.3)
 + [Online Unsafe Recovery](/online-unsafe-recovery.md) (Introduced in v5.3)

@@ -145,11 +145,11 @@ This section gives the alert rules for the TiDB component.
     * Restart TiDB to recover the service.
     * Check whether the TiDB Binlog service is normal.
 
-#### `TiDB_tikvclient_backoff_total`
+#### `TiDB_tikvclient_backoff_seconds_count`
 
 * Alert rule:
 
-    `increase(tidb_tikvclient_backoff_total[10m]) > 10`
+    `increase(tidb_tikvclient_backoff_seconds_count[10m]) > 10`
 
 * Description:
 
@@ -193,20 +193,20 @@ This section gives the alert rules for the PD component.
 
 ### Emergency-level alerts
 
-#### `PD_cluster_offline_tikv_nums`
+#### `PD_cluster_down_store_nums`
 
 * Alert rule:
 
-    `sum(pd_cluster_status{type="store_down_count"}) > 0`
+    `(sum(pd_cluster_status{type="store_down_count"}) by (instance) > 0) and (sum(etcd_server_is_leader) by (instance) > 0)`
 
 * Description:
 
-    PD has not received a TiKV heartbeat for a long time (the default configuration is 30 minutes).
+    PD has not received a TiKV/TiFlash heartbeat for a long time (the default configuration is 30 minutes).
 
 * Solution:
 
-    * Check whether the TiKV process is normal, the network is isolated or the load is too high, and recover the service as much as possible.
-    * If the TiKV instance cannot be recovered, you can make it offline.
+    * Check whether the TiKV/TiFlash process is normal, the network is isolated or the load is too high, and recover the service as much as possible.
+    * If the TiKV/TiFlash instance cannot be recovered, you can make it offline.
 
 ### Critical-level alerts
 
@@ -214,7 +214,7 @@ This section gives the alert rules for the PD component.
 
 * Alert rule:
 
-    `histogram_quantile(0.99, sum(rate(etcd_disk_wal_fsync_duration_seconds_bucket[1m])) by (instance,job,le)) > 1`
+    `histogram_quantile(0.99, sum(rate(etcd_disk_wal_fsync_duration_seconds_bucket[1m])) by (instance, job, le)) > 1`
 
 * Description:
 
@@ -230,7 +230,7 @@ This section gives the alert rules for the PD component.
 
 * Alert rule:
 
-    `sum(pd_regions_status{type="miss_peer_region_count"}) > 100`
+    `(sum(pd_regions_status{type="miss_peer_region_count"}) by (instance) > 100) and (sum(etcd_server_is_leader) by (instance) > 0)`
 
 * Description:
 
@@ -243,32 +243,32 @@ This section gives the alert rules for the PD component.
 
 ### Warning-level alerts
 
-#### `PD_cluster_lost_connect_tikv_nums`
+#### `PD_cluster_lost_connect_store_nums`
 
 * Alert rule:
 
-    `sum(pd_cluster_status{type="store_disconnected_count"}) > 0`
+    `(sum(pd_cluster_status{type="store_disconnected_count"}) by (instance) > 0) and (sum(etcd_server_is_leader) by (instance) > 0)`
 
 * Description:
 
-    PD does not receive a TiKV heartbeat within 20 seconds. Normally a TiKV heartbeat comes in every 10 seconds.
+    PD does not receive a TiKV/TiFlash heartbeat within 20 seconds. Normally a TiKV/TiFlash heartbeat comes in every 10 seconds.
 
 * Solution:
 
-    * Check whether the TiKV instance is being restarted.
-    * Check whether the TiKV process is normal, the network is isolated, and the load is too high, and recover the service as much as possible.
-    * If you confirm that the TiKV instance cannot be recovered, you can make it offline.
-    * If you confirm that the TiKV instance can be recovered, but not in the short term, you can consider increasing the value of `max-down-time`. It will prevent the TiKV instance from being considered as irrecoverable and the data from being removed from the TiKV.
+    * Check whether the TiKV/TiFlash instance is being restarted.
+    * Check whether the TiKV/TiFlash process is normal, the network is isolated, and the load is too high, and recover the service as much as possible.
+    * If you confirm that the TiKV/TiFlash instance cannot be recovered, you can make it offline.
+    * If you confirm that the TiKV/TiFlash instance can be recovered, but not in the short term, you can consider increasing the value of `max-down-time`. It will prevent the TiKV/TiFlash instance from being considered as irrecoverable and the data from being removed from the TiKV/TiFlash.
 
 #### `PD_cluster_low_space`
 
 * Alert rule:
 
-    `sum(pd_cluster_status{type="store_low_space_count"}) > 0`
+    `(sum(pd_cluster_status{type="store_low_space_count"}) by (instance) > 0) and (sum(etcd_server_is_leader) by (instance) > 0)`
 
 * Description:
 
-    Indicates that there is no sufficient space on the TiKV node.
+    Indicates that there is no sufficient space on the TiKV/TiFlash node.
 
 * Solution:
 
@@ -282,7 +282,7 @@ This section gives the alert rules for the PD component.
 
 * Alert rule:
 
-    `histogram_quantile(0.99, sum(rate(etcd_network_peer_round_trip_time_seconds_bucket[1m])) by (To,instance,job,le)) > 1`
+    `histogram_quantile(0.99, sum(rate(etcd_network_peer_round_trip_time_seconds_bucket[1m])) by (To, instance, job, le)) > 1`
 
 * Description:
 
@@ -297,7 +297,7 @@ This section gives the alert rules for the PD component.
 
 * Alert rule:
 
-    `histogram_quantile(0.99, sum(rate(pd_client_request_handle_requests_duration_seconds_bucket{type="tso"}[1m])) by (instance,job,le)) > 0.1`
+    `histogram_quantile(0.99, sum(rate(pd_client_request_handle_requests_duration_seconds_bucket{type="tso"}[1m])) by (instance, job, le)) > 0.1`
 
 * Description:
 
@@ -314,7 +314,7 @@ This section gives the alert rules for the PD component.
 
 * Alert rule:
 
-    `sum(pd_regions_status{type="down_peer_region_count"}) > 0`
+    `(sum(pd_regions_status{type="down-peer-region-count"}) by (instance)  > 0) and (sum(etcd_server_is_leader) by (instance) > 0)`
 
 * Description:
 
@@ -330,7 +330,7 @@ This section gives the alert rules for the PD component.
 
 * Alert rule:
 
-    `sum(pd_regions_status{type="pending_peer_region_count"}) > 100`
+    `(sum(pd_regions_status{type="pending-peer-region-count"}) by (instance) > 100) and (sum(etcd_server_is_leader) by (instance) > 0)`
 
 * Description:
 
@@ -425,7 +425,7 @@ This section gives the alert rules for the TiKV component.
 
 * Alert rule:
 
-    `sum(increase(tikv_gcworker_gc_tasks_vec{task="gc"}[1d])) < 1 and sum(increase(tikv_gc_compaction_filter_perform[1d])) < 1`
+    `sum(increase(tikv_gcworker_gc_tasks_vec{task="gc"}[1d])) < 1 and (sum(increase(tikv_gc_compaction_filter_perform[1d])) < 1 and sum(increase(tikv_engine_event_total{db="kv", cf="write", type="compaction"}[1d])) >= 1)` 
 
 * Description:
 
@@ -596,11 +596,11 @@ This section gives the alert rules for the TiKV component.
 
 * Alert rule:
 
-    `sum(rate(tikv_thread_cpu_seconds_total{name="apply_worker"}[1m])) by (instance) > 1.8`
+    `max(rate(tikv_thread_cpu_seconds_total{name=~"apply_.*"}[1m])) by (instance) > 0.9`
 
 * Description:
 
-    The pressure on the apply Raft log thread is too high. It is often caused by a burst of writes.
+    The apply Raft log thread is under great pressure and is approaching or has exceeded its limit. This is often caused by a burst of writes.
 
 ### Warning-level alerts
 
@@ -685,34 +685,6 @@ This section gives the alert rules for the TiKV component.
 * Solution:
 
     Refer to [`TiKV_coprocessor_request_wait_seconds`](#tikv_coprocessor_request_wait_seconds).
-
-#### `TiKV_coprocessor_request_error`
-
-* Alert rule:
-
-    `increase(tikv_coprocessor_request_error{reason=!"meet_lock"}[10m]) > 100`
-
-* Description:
-
-    The request error of Coprocessor.
-
-* Solution:
-
-    The reasons for the Coprocessor error can be divided into three types: "lock", “outdated” and “full”. “outdated” indicates that the request has a timeout. It might be caused by a long queue time or a long time to handle a single request. “full” indicates that the request queue is full. It is possibly because the running request is time-consuming, which sends all new requests in the queue. You need to check whether the time-consuming query’s execution plan is correct.
-
-#### `TiKV_coprocessor_request_lock_error`
-
-* Alert rule:
-
-    `increase(tikv_coprocessor_request_error{reason="meet_lock"}[10m]) > 10000`
-
-* Description:
-
-    The lock requesting error of Coprocessor.
-
-* Solution:
-
-    The reasons for the Coprocessor error can be divided into three types: "lock", “outdated” and “full”. “lock” indicates that the read data is being written and you need to wait a while and read again (the automatic retry happens inside TiDB). If just a few errors of this kind occur, you can ignore them; but if there are a lot of them, you need to check whether there is a conflict between the write and the query.
 
 #### `TiKV_coprocessor_pending_request`
 
@@ -1152,5 +1124,5 @@ This section gives the alert rules for the Blackbox_exporter TCP, ICMP, and HTTP
 
 * Solution:
 
-    * View the ping latency between the two nodes on the Grafana Blackbox Exporter dashboard to check whether it is too high.
-    * Check the tcp panel on the Grafana Node Exporter dashboard to check whether there is any packet loss.
+    * View the ping latency between the two nodes on the Grafana Blackbox Exporter page to check whether it is too high.
+    * Check the TCP panel on the Grafana Node Exporter page to check whether there is any packet loss.

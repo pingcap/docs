@@ -51,7 +51,7 @@ You can filter the result by fields. For example:
 show config where type='tidb'
 show config where instance in (...)
 show config where name like '%log%'
-show config where type='tikv' and name='log-level'
+show config where type='tikv' and name='log.level'
 ```
 
 ### Modify TiKV configuration online
@@ -94,7 +94,7 @@ If an error occurs during the batch modification, a warning is returned:
 {{< copyable "sql" >}}
 
 ```sql
-set config `tikv log-level`='warn';
+set config tikv `log-level`='warn';
 ```
 
 ```sql
@@ -126,11 +126,12 @@ The following TiKV configuration items can be modified online:
 
 | Configuration item | Description |
 | :--- | :--- |
-| `raftstore.raft-entry-max-size` | The maximum size of a single log |
+| `raftstore.raft-max-inflight-msgs` | The number of Raft logs to be confirmed. If this number is exceeded, the Raft state machine slows down log sending. |
 | `raftstore.raft-log-gc-tick-interval` | The time interval at which the polling task of deleting Raft logs is scheduled |
 | `raftstore.raft-log-gc-threshold` | The soft limit on the maximum allowable number of residual Raft logs |
 | `raftstore.raft-log-gc-count-limit` | The hard limit on the allowable number of residual Raft logs |
 | `raftstore.raft-log-gc-size-limit` | The hard limit on the allowable size of residual Raft logs |
+| `raftstore.raft-max-size-per-msg` | The soft limit on the size of a single message packet that is allowed to be generated |
 | `raftstore.raft-entry-cache-life-time` | The maximum remaining time allowed for the log cache in memory |
 | `raftstore.split-region-check-tick-interval` | The time interval at which to check whether the Region split is needed |
 | `raftstore.region-split-check-diff` | The maximum value by which the Region data is allowed to exceed before Region split |
@@ -151,11 +152,15 @@ The following TiKV configuration items can be modified online:
 | `raftstore.peer-stale-state-check-interval` | The time interval to check whether a peer is without a leader |
 | `raftstore.consistency-check-interval` | The time interval to check consistency |
 | `raftstore.raft-store-max-leader-lease` | The longest trusted period of a Raft leader |
-| `raftstore.allow-remove-leader` | Determines whether to allow deleting the main switch |
 | `raftstore.merge-check-tick-interval` | The time interval for merge check |
 | `raftstore.cleanup-import-sst-interval` | The time interval to check expired SST files |
 | `raftstore.local-read-batch-size` | The maximum number of read requests processed in one batch |
 | `raftstore.hibernate-timeout` | The shortest wait duration before entering hibernation upon start. Within this duration, TiKV does not hibernate (not released). |
+| `raftstore.apply-pool-size` | The number of threads in the pool that flushes data to the disk, which is the size of the Apply thread pool |
+| `raftstore.store-pool-size` | The number of threads in the pool that processes Raft, which is the size of the Raftstore thread pool |
+| `raftstore.apply-max-batch-size` | Raft state machines process data write requests in batches by the BatchSystem. This configuration item specifies the maximum number of Raft state machines that can execute the requests in one batch. |
+| `raftstore.store-max-batch-size` | Raft state machines process requests for flushing logs into the disk in batches by the BatchSystem. This configuration item specifies the maximum number of Raft state machines that can process the requests in one batch. |
+| `readpool.unified.max-thread-count` | The maximum number of threads in the thread pool that uniformly processes read requests, which is the size of the UnifyReadPool thread pool |
 | `coprocessor.split-region-on-table` | Enables to split Region by table |
 | `coprocessor.batch-split-limit` | The threshold of Region split in batches |
 | `coprocessor.region-max-size` | The maximum size of a Region |
@@ -164,7 +169,8 @@ The following TiKV configuration items can be modified online:
 | `coprocessor.region-split-keys` | The number of keys in the newly split Region |
 | `pessimistic-txn.wait-for-lock-timeout` | The longest duration that a pessimistic transaction waits for the lock |
 | `pessimistic-txn.wake-up-delay-duration` | The duration after which a pessimistic transaction is woken up |
-| `pessimistic-txn.pipelined` | Whether to enable the pipelined pessimistic locking process |
+| `pessimistic-txn.pipelined` | Determines whether to enable the pipelined pessimistic locking process |
+| `pessimistic-txn.in-memory` | Determines whether to enable the in-memory pessimistic lock |
 | `gc.ratio-threshold` | The threshold at which Region GC is skipped (the number of GC versions/the number of keys) |
 | `gc.batch-keys` | The number of keys processed in one batch |
 | `gc.max-write-bytes-per-sec` | The maximum bytes that can be written into RocksDB per second |
@@ -172,6 +178,7 @@ The following TiKV configuration items can be modified online:
 | `gc.compaction-filter-skip-version-check` | Whether to skip the cluster version check of compaction filter (not released) |
 | `{db-name}.max-total-wal-size` | The maximum size of total WAL |
 | `{db-name}.max-background-jobs` | The number of background threads in RocksDB |
+| `{db-name}.max-background-flushes` | The maximum number of flush threads in RocksDB |
 | `{db-name}.max-open-files` | The total number of files that RocksDB can open |
 | `{db-name}.compaction-readahead-size` | The size of `readahead` during compaction |
 | `{db-name}.bytes-per-sync` | The rate at which OS incrementally synchronizes files to disk while these files are being written asynchronously |
@@ -192,6 +199,7 @@ The following TiKV configuration items can be modified online:
 | `{db-name}.{cf-name}.hard-pending-compaction-bytes-limit` | The hard limit on the pending compaction bytes |
 | `{db-name}.{cf-name}.titan.blob-run-mode` | The mode of processing blob files |
 | `storage.block-cache.capacity` | The size of shared block cache (supported since v4.0.3) |
+| `storage.scheduler-worker-pool-size` | The number of threads in the Scheduler thread pool |
 | `backup.num-threads` | The number of backup threads (supported since v4.0.3) |
 | `split.qps-threshold` | The threshold to execute `load-base-split` on a Region. If the QPS of read requests for a Region exceeds `qps-threshold` for a consecutive period of time, this Region should be split.|
 | `split.byte-threshold` | The threshold to execute `load-base-split` on a Region. If the traffic of read requests for a Region exceeds the `byte-threshold` for a consecutive period of time, this Region should be split. |

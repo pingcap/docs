@@ -63,6 +63,23 @@ table-concurrency = 6
 # medium, this value might need to be adjusted for optimal performance.
 io-concurrency = 5
 
+# The maximum number of non-fatal errors to tolerate before stopping TiDB Lightning.
+# Non-fatal errors are localized to a few rows, and ignoring those rows allows the import process to continue.
+# Setting this to N means that TiDB Lightning will stop as soon as possible when the (N+1)-th error is encountered.
+# The skipped rows will be inserted into tables inside the "task info" schema on the target TiDB, which can be configured below.
+max-error = 0
+# task-info-schema-name is the name of the schema or database that stores TiDB Lightning execution results.
+# To disable error recording, set this to an empty string.
+# task-info-schema-name = 'lightning_task_info'
+
+# In parallel import mode, the schema name that stores the meta information for each TiDB Lightning instance in the target cluster. By default, the value is "lightning_metadata".
+# Configure this parameter only if parallel import is enabled.
+# **Note:**
+# - The value set for this parameter must be the same for each TiDB Lightning instance that participates in the same parallel import; otherwise, the correctness of the imported data cannot be ensured.
+# - If parallel import mode is enabled, make sure that the user used for import (for the tidb.user configuration) has permissions to create and access the databases corresponding to this configuration.
+# - TiDB Lightning removes this schema after the import is completed. So do not use any existing schema name to configure this parameter.
+meta-schema-name = "lightning_metadata"
+
 [security]
 # Specifies certificates and keys for TLS connections within the cluster.
 # Public certificate of the CA. Leave empty to disable TLS.
@@ -98,8 +115,13 @@ driver = "file"
 # keep-after-success = false
 
 [tikv-importer]
-# Delivery backend, can be "local", "importer" or "tidb".
+# "local": The default mode. It applies to large dataset import, for example, greater than 1 TiB. However, during the import, downstream TiDB is not available to provide services.
+# "tidb": You can use this mode for small dataset import, for example, smaller than 1 TiB. During the import, downstream TiDB is available to provide services.
 # backend = "local"
+# Whether to allow importing data to tables with data. The default value is `false`.
+# When you use parallel import mode, you must set it to `true`, because multiple TiDB Lightning instances are importing the same table at the same time.
+# incremental-import = false
+
 # The listening address of tikv-importer when backend is "importer". Change it to the actual address.
 addr = "172.16.31.10:8287"
 # Action to do when trying to insert a duplicated entry in the "tidb" backend.
@@ -107,6 +129,13 @@ addr = "172.16.31.10:8287"
 #  - ignore: keep the existing entry, and ignore the new entry
 #  - error: report error and quit the program
 # on-duplicate = "replace"
+# Whether to detect and resolve duplicate records (unique key conflict) when the backend is 'local'.
+# The following resolution algorithms are supported:
+#  - record: only records duplicate records to the `lightning_task_info.conflict_error_v1` table on the target TiDB. Note that the
+#    required version of the target TiKV is no earlier than v5.2.0; otherwise it falls back to 'none'.
+#  - none: does not detect duplicate records, which has the best performance of the three algorithms, but might lead to
+#    inconsistent data in the target TiDB.
+#  - remove: records all duplicate records to the lightning_task_info database, like the 'record' algorithm. But it removes all duplicate records from the target table to ensure a consistent
 #    state in the target TiDB.
 # duplicate-resolution = 'none'
 # The number of KV pairs sent in one request in the "local" backend.
@@ -121,9 +150,8 @@ addr = "172.16.31.10:8287"
 # range-concurrency = 16
 
 [mydumper]
-# Block size for file reading. Keep it longer than the longest string of
-# the data source.
-read-block-size = 65536 # Byte (default = 64 KB)
+# Block size for file reading. Keep it longer than the longest string of the data source.
+read-block-size = "64KiB" # default value
 
 # The engine file needs to be imported sequentially. Due to parallel processing,
 # multiple data engines will be imported at nearly the same time, and this
@@ -132,7 +160,7 @@ read-block-size = 65536 # Byte (default = 64 KB)
 # resources. The scale up factor is controlled by this parameter, which
 # expresses the ratio of duration between the "import" and "write" steps
 # with full concurrency. This can be calculated by using the ratio
-# (import duration/write duration) of a single table of size around 1 GB.
+# (import duration/write duration) of a single table of size around 1 GiB.
 # The exact timing can be found in the log. If "import" is faster, the batch
 # size variance is smaller, and a ratio of zero means a uniform batch size.
 # This value should be in the range (0 <= batch-import-ratio < 1).
@@ -140,10 +168,7 @@ batch-import-ratio = 0.75
 
 # Local source data directory or the URL of the external storage.
 data-source-dir = "/data/my_database"
-# If no-schema is set to true, tidb-lightning assumes that the table skeletons
-# already exist on the target TiDB cluster, and will not execute the `CREATE
-# TABLE` statements.
-no-schema = false
+
 # The character set of the schema files, containing CREATE TABLE statements;
 # only supports one of:
 #  - utf8mb4: the schema files must be encoded as UTF-8; otherwise, an error is reported.
@@ -182,7 +207,7 @@ strict-format = false
 
 # If strict-format is true, TiDB Lightning splits large CSV files into multiple chunks to process in
 # parallel. max-region-size is the maximum size of each chunk after splitting.
-# max-region-size = 268_435_456 # Byte (default = 256 MB)
+# max-region-size = "256MiB" # default value
 
 # Only import tables if these wildcard rules are matched. See the corresponding section for details.
 filter = ['*.*', '!mysql.*', '!sys.*', '!INFORMATION_SCHEMA.*', '!PERFORMANCE_SCHEMA.*', '!METRICS_SCHEMA.*', '!INSPECTION_SCHEMA.*']
@@ -209,11 +234,19 @@ backslash-escape = true
 # If a line ends with a separator, remove it.
 trim-last-separator = false
 
+# [[mydumper.files]]
+# Expression used for parsing AWS Aurora parquet files
+# pattern = '(?i)^(?:[^/]*/)*([a-z0-9_]+)\.([a-z0-9_]+)/(?:[^/]*/)*(?:[a-z0-9\-_.]+\.(parquet))$'
+# schema = '$1'
+# table = '$2'
+# type = '$3'
+
 [tidb]
 # Configuration of any TiDB server from the cluster.
 host = "172.16.31.1"
 port = 4000
 user = "root"
+# Configure the password to connect to TiDB. The password can either be plaintext or Base64 encoded.
 password = ""
 # Table schema information is fetched from TiDB via this status-port.
 status-port = 10080
@@ -260,15 +293,18 @@ max-allowed-packet = 67_108_864
 # these as true in the production environment.
 # The execution order: Checksum -> Analyze
 [post-restore]
-# Specifies the behavior of `ADMIN CHECKSUM TABLE <table>` for each table to verify data integrity. 
+# Specifies whether to perform `ADMIN CHECKSUM TABLE <table>` for each table to verify data integrity after importing.
 # The following options are available:
+# - "required" (default value): Perform admin checksum. If checksum fails, TiDB Lightning will exit with failure.
+# - "optional": Perform admin checksum. If checksum fails, TiDB Lightning will report a WARN log but ignore any error.
 # - "off": Do not perform checksum.
-# - "optional": Perform admin checksum, but will ignore any error if checksum fails.
-# - "required": Perform admin checksum. If checksum fails, TiDB Lightning will exit with failure.
-# The default value is "required". Note that since v4.0.8, the default value has changed from "true" to "required". 
-# For backward compatibility, bool values "true" and "false" are also allowed for this field. 
+# Note that since v4.0.8, the default value has changed from "true" to "required".
+# For backward compatibility, bool values "true" and "false" are also allowed for this field.
 # "true" is equivalent to "required" and "false" is equivalent to "off".
-checksum = required
+checksum = "required"
+# Specifies whether to perform `ANALYZE TABLE <table>` for each table after checksum is done.
+# Options available for this field are the same as `checksum`. However, the default value for this field is "optional".
+analyze = "optional"
 
 # If the value is set to `true`, a level-1 compaction is performed
 # every time a table is imported.
@@ -279,16 +315,6 @@ level-1-compact = false
 # TiKV cluster is performed at the end of the import.
 # The default value is `false`.
 compact = false
-
-# Specifies the behavior of `ANALYZE TABLE <table>` for each table.
-# The following options are available:
-# - "off": Do not perform `ANALYZE TABLE <table>`.
-# - "optional": Perform `ANALYZE TABLE <table>`, but will ignore any error if checksum fails.
-# - "required": Perform `ANALYZE TABLE <table>`. If it fails, TiDB Lightning will exit with failure.
-# The default value is "optional". Note that since v4.0.8, the default value has changed from "true" to "optional". 
-# For backward compatibility, bool values "true" and "false" are also allowed for this field. 
-# "true" is equivalent to "required" and "false" is equivalent to "off".
-analyze = optional
 
 # Configures the background periodic actions.
 # Supported units: h (hour), m (minute), s (second).
@@ -399,11 +425,10 @@ min-available-ratio = 0.05
 | --tidb-port *port* | TiDB server port (default = 4000) | `tidb.port` |
 | --tidb-status *port* | TiDB status port (default = 10080) | `tidb.status-port` |
 | --tidb-user *user* | User name to connect to TiDB | `tidb.user` |
-| --tidb-password *password* | Password to connect to TiDB | `tidb.password` |
-| --no-schema | Ignore schema files, get schema directly from TiDB | `mydumper.no-schema` |
+| --tidb-password *password* | Password to connect to TiDB. The password can either be plaintext or Base64 encoded. | `tidb.password` |
 | --enable-checkpoint *bool* | Whether to enable checkpoints (default = true) | `checkpoint.enable` |
-| --analyze *bool* | Analyze tables after importing (default = optional) | `post-restore.analyze` |
-| --checksum *bool* | Compare checksum after importing (default = required) | `post-restore.checksum` |
+| --analyze *level* | Analyze tables after importing. Available values are "required", "optional" (default value), and "off" | `post-restore.analyze` |
+| --checksum *level* | Compare checksum after importing. Available values are "required" (default value), "optional", and "off" | `post-restore.checksum` |
 | --check-requirements *bool* | Check cluster version compatibility before starting (default = true) | `lightning.check-requirements` |
 | --ca *file* | CA certificate path for TLS connection | `security.ca-path` |
 | --cert *file* | Certificate path for TLS connection | `security.cert-path` |

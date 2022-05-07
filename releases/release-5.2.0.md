@@ -45,7 +45,7 @@ In v5.2, the key new features and improvements are as follows:
 | :---------- | :----------- | :----------- | :----------- |
 | TiDB configuration file  | [`pessimistic-txn.deadlock-history-collect-retryable`](/tidb-configuration-file.md#deadlock-history-collect-retryable) |  Newly added  | Controls whether the [`INFORMATION\_SCHEMA.DEADLOCKS`](/information-schema/information-schema-deadlocks.md) table collects retryable deadlock error messages or not.  |
 | TiDB configuration file  | [`security.auto-tls`](/tidb-configuration-file.md#auto-tls) |  Newly added  | Determines whether to automatically generate the TLS certificates on startup. The default value is `false`.  |
-| TiDB configuration file  | [`stmt-summary.max-stmt-count`](/tidb-configuration-file.md#max-stmt-count) | Modified | Indicates the maximum number of SQL categories allowed to be saved in the statement summary tables. The default value is changed from `200` to `3000`.  |
+| TiDB configuration file  | `stmt-summary.max-stmt-count` | Modified | Indicates the maximum number of SQL categories allowed to be saved in the statement summary tables. The default value is changed from `200` to `3000`.  |
 | TiDB configuration file  | `experimental.allow-expression-index`  | Deprecated | The `allow-expression-index` configuration in the TiDB configuration file is deprecated.  |
 | TiKV configuration file  | [`raftstore.cmd-batch`](/tikv-configuration-file.md#cmd-batch)  |  Newly added  | Controls whether to enable batch processing of the requests. When it is enabled, the write performance is significantly improved. The default value is `true`.  |
 | TiKV configuration file  | [`raftstore.inspect-interval`](/tikv-configuration-file.md#inspect-interval)  |  Newly added  | At a certain interval, TiKV inspects the latency of the Raftstore component. This configuration item specifies the interval of the inspection. If the latency exceeds this value, this inspection is marked as timeout. The default value is `500ms`.  |
@@ -167,7 +167,7 @@ In v5.2, the key new features and improvements are as follows:
 
 TiCDC supports using the HTTP protocol (OpenAPI) to manage TiCDC tasks, which is a more user-friendly operation method for both Kubernetes and on-premises environments. (Experimental feature)
 
-[#2411](https://github.com/pingcap/ticdc/issues/2411)
+[#2411](https://github.com/pingcap/tiflow/issues/2411)
 
 ### Deployment and operations
 
@@ -179,9 +179,9 @@ Support running the `tiup playground` command on Mac computers with Apple M1 chi
 
     + TiCDC
 
-        - Add the binary MQ format designed for TiDB. It is more compact than the open protocols based on JSON [#1621](https://github.com/pingcap/ticdc/pull/1621)
-        - Remove support for file sorter [#2114](https://github.com/pingcap/ticdc/pull/2114)
-        - Support log rotation configurations [#2182](https://github.com/pingcap/ticdc/pull/2182)
+        - Add the binary MQ format designed for TiDB. It is more compact than the open protocols based on JSON [#1621](https://github.com/pingcap/tiflow/pull/1621)
+        - Remove support for file sorter [#2114](https://github.com/pingcap/tiflow/pull/2114)
+        - Support log rotation configurations [#2182](https://github.com/pingcap/tiflow/pull/2182)
 
     + TiDB Lightning
 
@@ -234,11 +234,11 @@ Support running the `tiup playground` command on Mac computers with Apple M1 chi
 
     + TiCDC
 
-        - Add the concurrency limit to the incremental scan of kv client [#1899](https://github.com/pingcap/ticdc/pull/1899)
-        - TiCDC can always pull the old value internally [#2271](https://github.com/pingcap/ticdc/pull/2271)
-        - TiCDC can fail and exit fast when unrecoverable DML errors occur [#1928](https://github.com/pingcap/ticdc/pull/1928)
-        - `resolve lock` cannot be run immediately after a Region is initialized [#2235](https://github.com/pingcap/ticdc/pull/2235)
-        - Optimize workerpool to reduce the number of goroutines under high concurrency [#2201](https://github.com/pingcap/ticdc/pull/2201)
+        - Add the concurrency limit to the incremental scan of kv client [#1899](https://github.com/pingcap/tiflow/pull/1899)
+        - TiCDC can always pull the old value internally [#2271](https://github.com/pingcap/tiflow/pull/2271)
+        - TiCDC can fail and exit fast when unrecoverable DML errors occur [#1928](https://github.com/pingcap/tiflow/pull/1928)
+        - `resolve lock` cannot be run immediately after a Region is initialized [#2235](https://github.com/pingcap/tiflow/pull/2235)
+        - Optimize workerpool to reduce the number of goroutines under high concurrency [#2201](https://github.com/pingcap/tiflow/pull/2201)
 
     + Dumpling
 
@@ -296,15 +296,15 @@ Support running the `tiup playground` command on Mac computers with Apple M1 chi
 
     + TiCDC
 
-        - Fix a bug that TiCDC owner exits abnormally when refreshing the checkpoint [#1902](https://github.com/pingcap/ticdc/issues/1902)
-        - Fix a bug that changefeed fails immediately after its successful creation [#2113](https://github.com/pingcap/ticdc/issues/2113)
-        - Fix a bug that changefeed fails due to the invalid format of rules filter [#1625](https://github.com/pingcap/ticdc/issues/1625)
-        - Fix the potential DDL loss issue when the TiCDC owner panics [#1260](https://github.com/pingcap/ticdc/issues/1260)
-        - Fix the CLI compatibility issue with 4.0.x clusters on the default sort-engine option [#2373](https://github.com/pingcap/ticdc/issues/2373)
-        - Fix a bug that changefeed might be reset unexpectedly when TiCDC gets the `ErrSchemaStorageTableMiss` error [#2422](https://github.com/pingcap/ticdc/issues/2422)
-        - Fix a bug that changefeed cannot be removed when TiCDC gets the `ErrGCTTLExceeded` error [#2391](https://github.com/pingcap/ticdc/issues/2391)
-        - Fix a bug that TiCDC fails to synchronize large tables to cdclog [#1259](https://github.com/pingcap/ticdc/issues/1259) [#2424](https://github.com/pingcap/ticdc/issues/2424)
-        - Fix a bug that multiple processors might write data to the same table when TiCDC is rescheduling the table [#2230](https://github.com/pingcap/ticdc/issues/2230)
+        - Fix a bug that TiCDC owner exits abnormally when refreshing the checkpoint [#1902](https://github.com/pingcap/tiflow/issues/1902)
+        - Fix a bug that changefeed fails immediately after its successful creation [#2113](https://github.com/pingcap/tiflow/issues/2113)
+        - Fix a bug that changefeed fails due to the invalid format of rules filter [#1625](https://github.com/pingcap/tiflow/issues/1625)
+        - Fix the potential DDL loss issue when the TiCDC owner panics [#1260](https://github.com/pingcap/tiflow/issues/1260)
+        - Fix the CLI compatibility issue with 4.0.x clusters on the default sort-engine option [#2373](https://github.com/pingcap/tiflow/issues/2373)
+        - Fix a bug that changefeed might be reset unexpectedly when TiCDC gets the `ErrSchemaStorageTableMiss` error [#2422](https://github.com/pingcap/tiflow/issues/2422)
+        - Fix a bug that changefeed cannot be removed when TiCDC gets the `ErrGCTTLExceeded` error [#2391](https://github.com/pingcap/tiflow/issues/2391)
+        - Fix a bug that TiCDC fails to synchronize large tables to cdclog [#1259](https://github.com/pingcap/tiflow/issues/1259) [#2424](https://github.com/pingcap/tiflow/issues/2424)
+        - Fix a bug that multiple processors might write data to the same table when TiCDC is rescheduling the table [#2230](https://github.com/pingcap/tiflow/issues/2230)
 
     + Backup & Restore (BR)
 

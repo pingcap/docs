@@ -23,47 +23,76 @@ This document only describes the parameters that are not included in command-lin
 
 + Default value: `false`
 
-### `log-level`
-
-+ The log level
-+ Value options: "trace", "debug", "info", "warning", "error", "critical"
-+ Default value: "info"
-
-### `log-file`
-
-+ The log file. If this configuration is not set, logs are output to "stderr" by default.
-+ Default value: ""
-
-### `log-format`
-
-+ The log format
-+ Value options: "json", "text"
-+ Default value: "text"
-
-### `log-rotation-timespan`
-
-+ The timespan between log rotations. When this timespan passes, log files are rotated, that is, a timestamp is appended to the file name of the current log file, and a new file is created.
-+ Default value: "24h"
-
-### `log-rotation-size`
-
-+ The size of a log file that triggers log rotation. Once the size of a log file is bigger than the specified threshold value, log files are rotated. The old log file is placed into the new file, and the new file name is the old file name with a timestamp suffix.
-+ Default value: "300MB"
-
 ### `slow-log-file`
 
-+ The file to store slow logs
-+ If this configuration is not set but `log-file` is set, slow logs are output to the log file specified by `log-file`. If neither `slow-log-file` nor `log-file` are set, all logs are output to "stderr".
-+ Default value: ""
++ The file that stores slow logs
++ If this configuration item is not set, but `log.file.filename` is set, slow logs are output to the log file specified by `log.file.filename`.
++ If neither `slow-log-file` nor `log.file.filename` are set, all logs are output to "stderr" by default.
++ If both configuration items are set, ordinary logs are output to the log file specified by `log.file.filename`, and slow logs are output to the log file set by `slow-log-file`.
++ Default value: `""`
 
 ### `slow-log-threshold`
 
 + The threshold for outputing slow logs. If the processing time is longer than this threshold, slow logs are output.
-+ Default value: "1s"
++ Default value: `"1s"`
+
+## log <span class="version-mark">New in v5.4.0</span>
+
++ Configuration items related to the log.
+
++ From v5.4.0, to make the log configuration items of TiKV and TiDB consistent, TiKV deprecates the former configuration item `log-rotation-timespan` and changes `log-level`, `log-format`, `log-file`, `log-rotation-size` to the following ones. If you only set the old configuration items, and their values are set to non-default values, the old items remain compatible with the new items. If both old and new configuration items are set, the new items take effect.
+
+### `level` <span class="version-mark">New in v5.4.0</span>
+
++ The log level
++ Optional values: `"debug"`, `"info"`, `"warn"`, `"error"`, `"fatal"`
++ Default value: `"info"`
+
+### `format` <span class="version-mark">New in v5.4.0</span>
+
++ The log format
++ Optional values: `"json"`, `"text"`
++ Default value: `"text"`
+
+### `enable-timestamp` <span class="version-mark">New in v5.4.0</span>
+
++ Determines whether to enable or disable the timestamp in the log
++ Optional values: `true`, `false`
++ Default value: `true`
+
+## log.file <span class="version-mark">New in v5.4.0</span>
+
++ Configuration items related to the log file.
+
+### `filename` <span class="version-mark">New in v5.4.0</span>
+
++ The log file. If this configuration item is not set, logs are output to "stderr" by default. If this configuration item is set, logs are output to the corresponding file.
++ Default value: `""`
+
+### `max-size` <span class="version-mark">New in v5.4.0</span>
+
++ The maximum size of a single log file. When the file size is larger than the value set by this configuration item, the system automatically splits the single file into multiple files.
++ Default value: `300`
++ Maximum value: `4096`
++ Unit: MiB
+
+### `max-days` <span class="version-mark">New in v5.4.0</span>
+
++ The maximum number of days that TiKV keeps log files.
+    + If the configuration item is not set, or the value of it is set to the default value `0`, TiKV does not clean log files.
+    + If the parameter is set to a value other than `0`, TiKV cleans up the expired log files after `max-days`.
++ Default value: `0`
+
+### `max-backups` <span class="version-mark">New in v5.4.0</span>
+
++ The maximum number of log files that TiKV keeps.
+    + If the configuration item is not set, or the value of it is set to the default value `0`, TiKV keeps all log files.
+    + If the configuration item is set to a value other than `0`, TiKV keeps at most the number of old log files specified by `max-backups`. For example, if the value is set to `7`, TiKV keeps up to 7 old log files.
++ Default value: `0`
 
 ## server
 
-+ Configuration items related to the server
++ Configuration items related to the server.
 
 ## `status-thread-pool-size`
 
@@ -93,39 +122,39 @@ This document only describes the parameters that are not included in command-lin
 ### `grpc-memory-pool-quota`
 
 + Limits the memory size that can be used by gRPC
-+ Default: No limit
++ Default value: No limit
 + Limit the memory in case OOM is observed. Note that limit the usage can lead to potential stall
 
 ### `grpc-raft-conn-num`
 
 + The maximum number of links among TiKV nodes for Raft communication
-+ Default: `1`
++ Default value: `1`
 + Minimum value: `1`
 
 ### `max-grpc-send-msg-len`
 
-+ Sets the maximum length of a gRPC message that can be sent 
-+ Default: `10485760`
++ Sets the maximum length of a gRPC message that can be sent
++ Default value: `10485760`
 + Unit: Bytes
 + Maximum value: `2147483647`
 
 ### `grpc-stream-initial-window-size`
 
 + The window size of the gRPC stream
-+ Default: 2MB
++ Default value: `2MB`
 + Unit: KB|MB|GB
 + Minimum value: `"1KB"`
 
 ### `grpc-keepalive-time`
 
 + The time interval at which that gRPC sends `keepalive` Ping messages
-+ Default: `"10s"`
++ Default value: `"10s"`
 + Minimum value: `"1s"`
 
 ### `grpc-keepalive-timeout`
 
 + Disables the timeout for gRPC streams
-+ Default: `"3s"`
++ Default value: `"3s"`
 + Minimum value: `"1s"`
 
 ### `concurrent-send-snap-limit`
@@ -182,7 +211,8 @@ Configuration items related to the single thread pool serving read requests. Thi
 ### `max-thread-count`
 
 + The maximum working thread count of the unified read pool or the UnifyReadPool thread pool. When you modify the size of this thread pool, refer to [Performance tuning for TiKV thread pools](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools).
-+ Default value: `MAX(4, CPU * 0.8)`
++ Value range: `[min-thread-count, MAX(4, CPU)]`. In `MAX(4, CPU)`, `CPU` means the number of your CPU cores. `MAX(4, CPU)` takes the greater value out of `4` and the `CPU`.
++ Default value: MAX(4, CPU * 0.8)
 
 ### `stack-size`
 
@@ -309,7 +339,7 @@ Configuration items related to the Coprocessor thread pool.
 
 ## storage
 
-Configuration items related to storage
+Configuration items related to storage.
 
 ### `scheduler-concurrency`
 
@@ -319,9 +349,9 @@ Configuration items related to storage
 
 ### `scheduler-worker-pool-size`
 
-+ The number of `scheduler` threads, mainly used for checking transaction consistency before data writing. If the number of CPU cores is greater than or equal to `16`, the default value is `8`; otherwise, the default value is `4`. When you modify the size of the Scheduler thread pool, refer to [Performance tuning for TiKV thread pools](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools).
++ The number of threads in the Scheduler thread pool. Scheduler threads are mainly used for checking transaction consistency before data writing. If the number of CPU cores is greater than or equal to `16`, the default value is `8`; otherwise, the default value is `4`. When you modify the size of the Scheduler thread pool, refer to [Performance tuning for TiKV thread pools](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools).
 + Default value: `4`
-+ Minimum value: `1`
++ Value range: `[1, MAX(4, CPU)]`. In `MAX(4, CPU)`, `CPU` means the number of your CPU cores. `MAX(4, CPU)` takes the greater value out of `4` and the `CPU`.
 
 ### `scheduler-pending-write-threshold`
 
@@ -339,8 +369,12 @@ Configuration items related to storage
 
 ### `enable-ttl`
 
+> **Warning:**
+>
+> - Set `enable-ttl` to `true` or `false` **ONLY WHEN** deploying a new TiKV cluster. **DO NOT** modify the value of this configuration item in an existing TiKV cluster. TiKV clusters with different `enable-ttl` values use different data formats. Therefore, if you modify the value of this item in an existing TiKV cluster, the cluster will store data in different formats, which causes the "can't enable TTL on a non-ttl" error when you restart the TiKV cluster.
+> - Use `enable-ttl` **ONLY IN** a TiKV cluster. **DO NOT** use this configuration item in a cluster that has TiDB nodes (which means setting `enable-ttl` to `true` in such clusters). Otherwise, critical issues such as data corruption and the upgrade failure of TiDB clusters will occur.
+
 + TTL is short for "Time to live". If this item is enabled, TiKV automatically deletes data that reaches its TTL. To set the value of TTL, you need to specify it in the requests when writing data via the client. If the TTL is not specified, it means that TiKV does not automatically delete the corresponding data.
-+ Note: The TTL feature is only available for the RawKV interface for now. You can only configure this feature when creating a new cluster because TTL uses different data formats in the storage layer. If you modify this item on an existing cluster, TiKV reports errors when it starts.
 + Default value: `false`
 
 ### `ttl-check-poll-interval`
@@ -366,7 +400,7 @@ Configuration items related to the sharing of block cache among multiple RocksDB
 
 ## storage.flow-control
 
-Configuration items related to the flow control mechanism in TiKV. This mechanism replaces the write stall mechanism in RocksDB and controls flow at the scheduler layer, which avoids the issue of QPS drop caused by the stuck Raftstore or Apply threads when the write traffic is high.
+Configuration items related to the flow control mechanism in TiKV. This mechanism replaces the write stall mechanism in RocksDB and controls flow at the scheduler layer, which avoids secondary disasters caused by the stuck Raftstore or Apply threads.
 
 ### `enable`
 
@@ -375,22 +409,22 @@ Configuration items related to the flow control mechanism in TiKV. This mechanis
 
 ### `memtables-threshold`
 
-+ When the number of kvDB memtables reaches this threshold, the flow control mechanism starts to work.
++ When the number of kvDB memtables reaches this threshold, the flow control mechanism starts to work. When `enable` is set to `true`, this configuration item overrides `rocksdb.(defaultcf|writecf|lockcf).max-write-buffer-number`.
 + Default value: `5`
 
 ### `l0-files-threshold`
 
-+ When the number of kvDB L0 files reaches this threshold, the flow control mechanism starts to work.
++ When the number of kvDB L0 files reaches this threshold, the flow control mechanism starts to work. When `enable` is set to `true`, this configuration item overrides `rocksdb.(defaultcf|writecf|lockcf).level0-slowdown-writes-trigger`.
 + Default value: `20`
 
 ### `soft-pending-compaction-bytes-limit`
 
-+ When the pending compaction bytes in KvDB reach this threshold, the flow control mechanism starts to reject some write requests and reports the `ServerIsBusy` error.
++ When the pending compaction bytes in KvDB reach this threshold, the flow control mechanism starts to reject some write requests and reports the `ServerIsBusy` error. When `enable` is set to `true`, this configuration item overrides `rocksdb.(defaultcf|writecf|lockcf).soft-pending-compaction-bytes-limit`.
 + Default value: `"192GB"`
 
 ### `hard-pending-compaction-bytes-limit`
 
-+ When the pending compaction bytes in KvDB reach this threshold, the flow control mechanism rejects all write requests and reports the `ServerIsBusy` error.
++ When the pending compaction bytes in KvDB reach this threshold, the flow control mechanism rejects all write requests and reports the `ServerIsBusy` error. When `enable` is set to `true`, this configuration item overrides `rocksdb.(defaultcf|writecf|lockcf).hard-pending-compaction-bytes-limit`.
 + Default value: `"1024GB"`
 
 ## storage.io-rate-limit
@@ -410,17 +444,22 @@ Configuration items related to the I/O rate limiter.
 
 ## raftstore
 
-Configuration items related to Raftstore
+Configuration items related to Raftstore.
 
 ### `prevote`
 
 + Enables or disables `prevote`. Enabling this feature helps reduce jitter on the system after recovery from network partition.
 + Default value: `true`
 
+### `capacity`
+
++ The storage capacity, which is the maximum size allowed to store data. If `capacity` is left unspecified, the capacity of the current disk prevails. To deploy multiple TiKV instances on the same physical disk, add this parameter to the TiKV configuration. For details, see [Key parameters of the hybrid deployment](/hybrid-deployment-topology.md#key-parameters).
++ Default value: `0`
+
 ### `raftdb-path`
 
 + The path to the Raft library, which is `storage.data-dir/raft` by default
-+ Default value: ""
++ Default value: `""`
 
 ### `raft-base-tick-interval`
 
@@ -456,14 +495,16 @@ Configuration items related to Raftstore
 
 + The soft limit on the size of a single message packet
 + Default value: `"1MB"`
-+ Minimum value: `0`
-+ Unit: MB
++ Minimum value: greater than `0`
++ Maximum value: `3GB`
++ Unit: KB|MB|GB
 
 ### `raft-max-inflight-msgs`
 
-+ The number of Raft logs to be confirmed. If this number is exceeded, log sending slows down.
++ The number of Raft logs to be confirmed. If this number is exceeded, the Raft state machine slows down log sending.
 + Default value: `256`
 + Minimum value: greater than `0`
++ Maximum value: `16384`
 
 ### `raft-entry-max-size`
 
@@ -472,11 +513,17 @@ Configuration items related to Raftstore
 + Minimum value: `0`
 + Unit: MB|GB
 
+### `raft-log-compact-sync-interval` <span class="version-mark">New in v5.3</span>
+
++ The time interval to compact unnecessary Raft logs
++ Default value: `"2s"`
++ Minimum value: `"0s"`
+
 ### `raft-log-gc-tick-interval`
 
 + The time interval at which the polling task of deleting Raft logs is scheduled. `0` means that this feature is disabled.
-+ Default value: `"10s"`
-+ Minimum value: `0`
++ Default value: `"3s"`
++ Minimum value: `"0s"`
 
 ### `raft-log-gc-threshold`
 
@@ -495,6 +542,12 @@ Configuration items related to Raftstore
 + The hard limit on the allowable size of residual Raft logs
 + Default value: 3/4 of the Region size
 + Minimum value: greater than `0`
+
+### `raft-log-reserve-max-ticks` <span class="version-mark">New in v5.3</span>
+
++ After the number of ticks set by this configuration item passes, even if the number of residual Raft logs does not reach the value set by `raft-log-gc-threshold`, TiKV still performs garbage collection (GC) to these logs.
++ Default value: `6`
++ Minimum value: greater than `0` 
 
 ### `raft-entry-cache-life-time`
 
@@ -568,6 +621,13 @@ Configuration items related to Raftstore
 + Default value: `"4h"`
 + Minimum value: `0`
 
+## `snap-generator-pool-size` <span class="version-mark">New in v5.4.0</span>
+
++ Configures the size of the `snap-generator` thread pool.
++ To make Regions generate snapshot faster in TiKV in recovery scenarios, you need to increase the count of the `snap-generator` threads of the corresponding worker. You can use this configuration item to increase the size of the `snap-generator` thread pool.
++ Default value: `2`
++ Minimum value: `0`
+
 ### `lock-cf-compact-interval`
 
 + The time interval at which TiKV triggers a manual compaction for the Lock Column Family
@@ -598,7 +658,7 @@ Configuration items related to Raftstore
 
 + The longest inactive duration allowed for a peer. A peer with timeout is marked as `down`, and PD tries to delete it later.
 + Default value: `"10m"`
-+ Minimum value: When Hibernate Region is enabled, the minimum value is `peer-stale-check-interval * 2`; when Hibernate Region is disabled, the minimum value is `0`.
++ Minimum value: When Hibernate Region is enabled, the minimum value is `peer-stale-state-check-interval * 2`; when Hibernate Region is disabled, the minimum value is `0`.
 
 ### `max-leader-missing-duration`
 
@@ -643,11 +703,6 @@ Configuration items related to Raftstore
 + Default value: `"9s"`
 + Minimum value: `0`
 
-### `allow-remove-leader`
-
-+ Determines whether to allow deleting the main switch
-+ Default value: `false`
-
 ### `merge-max-log-gap`
 
 + The maximum number of missing logs allowed when `merge` is performed
@@ -679,27 +734,29 @@ Configuration items related to Raftstore
 
 ### `apply-max-batch-size`
 
-+ The maximum number of requests for data flushing in one batch
++ Raft state machines process data write requests in batches by the BatchSystem. This configuration item specifies the maximum number of Raft state machines that can process the requests in one batch.
 + Default value: `256`
 + Minimum value: greater than `0`
++ Maximum value: `10240`
 
 ### `apply-pool-size`
 
-+ The allowable number of threads in the pool that flushes data to storage. When you modify the size of this thread pool, refer to [Performance tuning for TiKV thread pools](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools).
++ The allowable number of threads in the pool that flushes data to the disk, which is the size of the Apply thread pool. When you modify the size of this thread pool, refer to [Performance tuning for TiKV thread pools](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools).
 + Default value: `2`
-+ Minimum value: greater than `0`
++ Value ranges: `[1, CPU * 10]`. `CPU` means the number of your CPU cores.
 
 ### `store-max-batch-size`
 
-+ The maximum number of requests processed in one batch
++ Raft state machines process requests for flushing logs into the disk in batches by the BatchSystem. This configuration item specifies the maximum number of Raft state machines that can process the requests in one batch.
 + If `hibernate-regions` is enabled, the default value is `256`. If `hibernate-regions` is disabled, the default value is `1024`.
 + Minimum value: greater than `0`
++ Maximum value: `10240`
 
 ### `store-pool-size`
 
-+ The allowable number of threads that process Raft, which is the size of the Raftstore thread pool. When you modify the size of this thread pool, refer to [Performance tuning for TiKV thread pools](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools).
++ The allowable number of threads in the pool that processes Raft, which is the size of the Raftstore thread pool. When you modify the size of this thread pool, refer to [Performance tuning for TiKV thread pools](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools).
 + Default value: `2`
-+ Minimum value: greater than `0`
++ Value ranges: `[1, CPU * 10]`. `CPU` means the number of your CPU cores.
 
 ### `store-io-pool-size` <span class="version-mark">New in v5.3.0</span>
 
@@ -731,15 +788,9 @@ Configuration items related to Raftstore
 + Default value: `1MB`
 + Minimum value: `0`
 
-### `raft-msg-flush-interval` <span class="version-mark">New in v5.3.0</span>
-
-+ Determines the interval at which Raft messages are sent in batches. The Raft messages in batches are sent at every interval specified by this configuration item. When the value of `store-io-pool-size` is `0`, this configuration item does not take effect.
-+ Default value: `250us`
-+ Minimum value: `0`
-
 ## Coprocessor
 
-Configuration items related to Coprocessor
+Configuration items related to Coprocessor.
 
 ### `split-region-on-table`
 
@@ -781,13 +832,19 @@ Configuration items related to RocksDB
 ### `max-background-jobs`
 
 + The number of background threads in RocksDB. When you modify the size of the RocksDB thread pool, refer to [Performance tuning for TiKV thread pools](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools).
-+ Default value: `8`
++ Default value:
+    + When the number of CPU cores is 10, the default value is `9`.
+    + When the number of CPU cores is 8, the default value is `7`.
+    + When the number of CPU cores is `N`, the default value is `max(2, min(N - 1, 9))`.
 + Minimum value: `2`
 
 ### `max-background-flushes`
 
 + The maximum number of concurrent background memtable flush jobs
-+ Default value: `2`
++ Default value:
+    + When the number of CPU cores is 10, the default value is `3`.
+    + When the number of CPU cores is 8, the default value is `2`.
+    + When the number of CPU cores is `N`, the default value is `[(max-background-jobs + 3) / 4]`.
 + Minimum value: `1`
 
 ### `max-sub-compactions`
@@ -817,14 +874,12 @@ Configuration items related to RocksDB
 ### `wal-recovery-mode`
 
 + WAL recovery mode
-+ Value options: `0`, `1`, `2`, `3`
-+ `0` (`TolerateCorruptedTailRecords`): tolerates and discards the records that have incomplete trailing data on all logs.
-+ `1` (`AbsoluteConsistency`): abandons recovery when corrupted logs are found.
-+ `2` (`PointInTimeRecovery`): recovers log sequentially until the first corrupted log is encountered.
-+ `3` (`SkipAnyCorruptedRecords`): recovery after a disaster. Corrupted records are skipped
-+ Default value: `2`
-+ Minimum value: `0`
-+ Maximum value: `3`
++ Optional values:
+    + `"tolerate-corrupted-tail-records"`: tolerates and discards the records that have incomplete trailing data on all logs
+    + `"absolute-consistency"`: abandons recovery when corrupted logs are found
+    + `"point-in-time"`: recovers logs sequentially until the first corrupted log is encountered
+    + `"skip-any-corrupted-records"`: post-disaster recovery. The data is recovered as much as possible, and corrupted records are skipped.
++ Default value: `"point-in-time"`
 
 ### `wal-dir`
 
@@ -884,10 +939,8 @@ Configuration items related to RocksDB
 ### `rate-limiter-mode`
 
 + RocksDB's compaction rate limiter mode
-+ Optional values: `1` (`ReadOnly`), `2` (`WriteOnly`), `3` (`AllIo`)
-+ Default value: `2`
-+ Minimum value: `1`
-+ Maximum value: `3`
++ Optional values: `"read-only"`, `"write-only"`, `"all-io"`
++ Default value: `"write-only"`
 
 ### `rate-limiter-auto-tuned` <span class="version-mark">New in v5.0</span>
 
@@ -896,8 +949,8 @@ Configuration items related to RocksDB
 
 ### `enable-pipelined-write`
 
-+ Enables or disables Pipelined Write
-+ Default value: `true`
++ Controls whether to enable Pipelined Write. When this configuration is enabled, the previous Pipelined Write is used. When this configuration is disabled, the new Pipelined Commit mechanism is used.
++ Default value: `false`
 
 ### `bytes-per-sync`
 
@@ -934,11 +987,11 @@ Configuration items related to RocksDB
 ### `info-log-dir`
 
 + The directory in which logs are stored
-+ Default value: ""
++ Default value: `""`
 
 ## rocksdb.titan
 
-Configuration items related to Titan
+Configuration items related to Titan.
 
 ### `enabled`
 
@@ -1018,7 +1071,7 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 
 + The length that bloom filter reserves for each key
 + Default value: `10`
-+ unit: byte
++ Unit: byte
 
 ### `block-based-bloom-filter`
 
@@ -1035,8 +1088,8 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 ### `compression-per-level`
 
 + The default compression algorithm for each level
-+ Optional values: ["no", "no", "lz4", "lz4", "lz4", "zstd", "zstd"]
-+ Default value for `defaultcf` and `writecf`: ["no", "no", "lz4", "lz4", "lz4", "zstd", "zstd"]
++ Default value for `defaultcf`: ["no", "no", "lz4", "lz4", "lz4", "zstd", "zstd"]
++ Default value for `writecf`: ["no", "no", "lz4", "lz4", "lz4", "zstd", "zstd"]
 + Default value for `lockcf`: ["no", "no", "no", "no", "no", "no", "no"]
 
 ### `bottommost-level-compression`
@@ -1044,7 +1097,7 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 + Sets the compression algorithm of the bottommost layer. This configuration item overrides the `compression-per-level` setting.
 + Ever since data is written to LSM-tree, RocksDB does not directly adopt the last compression algorithm specified in the `compression-per-level` array for the bottommost layer. `bottommost-level-compression` enables the bottommost layer to use the compression algorithm of the best compression effect from the beginning.
 + If you do not want to set the compression algorithm for the bottommost layer, set the value of this configuration item to `disable`.
-+ Default value: "zstd"
++ Default value: `"zstd"`
 
 ### `write-buffer-size`
 
@@ -1056,7 +1109,7 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 
 ### `max-write-buffer-number`
 
-+ The maximum number of memtables
++ The maximum number of memtables. When `storage.flow-control.enable` is set to `true`, `storage.flow-control.memtables-threshold` overrides this configuration item.
 + Default value: `5`
 + Minimum value: `0`
 
@@ -1077,7 +1130,7 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 ### `target-file-size-base`
 
 + The size of the target file at base level. This value is overridden by `compaction-guard-max-output-file-size` when the `enable-compaction-guard` value is `true`.
-+ Default: `"8MB"`
++ Default value: `"8MB"`
 + Minimum value: `0`
 + Unit: KB|MB|GB
 
@@ -1090,7 +1143,7 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 
 ### `level0-slowdown-writes-trigger`
 
-+ The maximum number of files at L0 that trigger write stall
++ The maximum number of files at L0 that trigger write stall. When `storage.flow-control.enable` is set to `true`, `storage.flow-control.l0-files-threshold` overrides this configuration item.
 + Default value: `20`
 + Minimum value: `0`
 
@@ -1110,9 +1163,9 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 ### `compaction-pri`
 
 + The priority type of compaction
-+ Optional values: `0` (`ByCompensatedSize`), `1` (`OldestLargestSeqFirst`), `2` (`OldestSmallestSeqFirst`), `3` (`MinOverlappingRatio`)
-+ Default value for `defaultcf` and `writecf`: `3`
-+ Default value for `lockcf`: `0`
++ Optional values: `"by-compensated-size"`, `"oldest-largest-seq-first"`, `"oldest-smallest-seq-first"`, `"min-overlapping-ratio"`
++ Default value for `defaultcf` and `writecf`: `"min-overlapping-ratio"`
++ Default value for `lockcf`: `"by-compensated-size"`
 
 ### `dynamic-level-bytes`
 
@@ -1132,23 +1185,23 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 ### `compaction-style`
 
 + Compaction method
-+ Optional values: `"level"`, `"universal"`
++ Optional values: `"level"`, `"universal"`, `"fifo"`
 + Default value: `"level"`
 
 ### `disable-auto-compactions`
 
-+ Enables or disables automatic compaction
++ Determines whether to disable auto compaction.
 + Default value: `false`
 
 ### `soft-pending-compaction-bytes-limit`
 
-+ The soft limit on the pending compaction bytes
++ The soft limit on the pending compaction bytes. When `storage.flow-control.enable` is set to `true`, `storage.flow-control.soft-pending-compaction-bytes-limit` overrides this configuration item.
 + Default value: `"192GB"`
 + Unit: KB|MB|GB
 
 ### `hard-pending-compaction-bytes-limit`
 
-+ The hard limit on the pending compaction bytes
++ The hard limit on the pending compaction bytes. When `storage.flow-control.enable` is set to `true`, `storage.flow-control.hard-pending-compaction-bytes-limit` overrides this configuration item.
 + Default value: `"256GB"`
 + Unit: KB|MB|GB
 
@@ -1269,24 +1322,86 @@ Configuration items related to `raftdb`
 + The directory in which WAL files are stored
 + Default value: `"/tmp/tikv/store"`
 
+## raft-engine
+
+Configuration items related to Raft Engine.
+
+> **Note:**
+>
+> - Raft Engine is an experimental feature. It is not recommended to use it in the production environment.
+> - When you enable Raft Engine for the first time, TiKV transfers its data from RocksDB to Raft Engine. Therefore, you need to wait extra tens of seconds for TiKV to start.
+> - The data format of Raft Engine in TiDB v5.4.0 is not compatible with earlier TiDB versions. Therefore, if you need to downgrade a TiDB cluster from v5.4.0 to an earlier version, **before** downgrading, disable Raft Engine by setting `enable` to `false` and restart TiKV for the configuration to take effect.
+
+### `enable`
+
++ Determines whether to use Raft Engine to store Raft logs. When it is enabled, configurations of `raftdb` are ignored.
++ Default value: `false`
+
+### `dir`
+
++ The directory at which raft log files are stored. If the directory does not exist, it will be created when TiKV is started.
++ When this configuration is not set, `{data-dir}/raft-engine` is used.
++ If there are multiple disks on your machine, it is recommended to store the data of Raft Engine on a different disk to improve TiKV performance.
++ Default value: `""`
+
+### `batch-compression-threshold`
+
++ Specifies the threshold size of a log batch. A log batch larger than this configuration is compressed. If you set this configuration item to `0`, compression is disabled.
++ Default value: `"8KB"`
+
+### `bytes-per-sync`
+
++ Specifies the maximum accumulative size of buffered writes. When this configuration value is exceeded, buffered writes are flushed to the disk.
++ If you set this configuration item to `0`, incremental sync is disabled.
++ Default value: `"4MB"`
+
+### `target-file-size`
+
++ Specifies the maximum size of log files. When a log file is larger than this value, it is rotated.
++ Default value: `"128MB"`
+
+### `purge-threshold`
+
++ Specifies the threshold size of the main log queue. When this configuration value is exceeded, the main log queue is purged.
++ This configuration can be used to adjust the disk space usage of Raft Engine.
++ Default value: `"10GB"`
+
+### `recovery-mode`
+
++ Determines how to deal with file corruption during recovery.
++ Value options: `"absolute-consistency"`, `"tolerate-tail-corruption"`, `"tolerate-any-corruption"`
++ Default value: `"tolerate-tail-corruption"`
+
+### `recovery-read-block-size`
+
++ The minimum I/O size for reading log files during recovery.
++ Default value: `"16KB"`
++ Minimum value: `"512B"`
+
+### `recovery-threads`
+
++ The number of threads used to scan and recover log files.
++ Default value: `4`
++ Minimum value: `1`
+
 ## security
 
-Configuration items related to security
+Configuration items related to security.
 
 ### `ca-path`
 
 + The path of the CA file
-+ Default value: ""
++ Default value: `""`
 
 ### `cert-path`
 
 + The path of the Privacy Enhanced Mail (PEM) file that contains the X.509 certificate
-+ Default value: ""
++ Default value: `""`
 
 ### `key-path`
 
 + The path of the PEM file that contains the X.509 key
-+ Default value: ""
++ Default value: `""`
 
 ### `cert-allowed-cn`
 
@@ -1358,8 +1473,14 @@ Configuration items related to BR backup.
 ### `num-threads`
 
 + The number of worker threads to process backup
-+ Default value: `MIN(CPU * 0.75, 32)`.
++ Default value: `MIN(CPU * 0.5, 8)`
++ Value range: `[1, CPU]`
 + Minimum value: `1`
+
+### `enable-auto-tune` <span class="version-mark">New in v5.4.0</span>
+
++ Controls whether to limit the resources used by backup tasks to reduce the impact on the cluster when the cluster resource utilization is high. For more information, refer to [BR Auto-Tune](/br/br-auto-tune.md).
++ Default value: `true`
 
 ## cdc
 
@@ -1425,12 +1546,50 @@ For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](
 - Default value: `"1s"`
 - Minimum value: `"1ms"`
 
-### `wait-up-delay-duration`
+### `wake-up-delay-duration`
 
-- When pessimistic transactions release the lock, among all the transactions waiting for lock, only the transaction with the smallest `start_ts` is woken up. Other transactions will be woken up after `wait-up-delay-duration`.
+- When pessimistic transactions release the lock, among all the transactions waiting for lock, only the transaction with the smallest `start_ts` is woken up. Other transactions will be woken up after `wake-up-delay-duration`.
 - Default value: `"20ms"`
 
 ### `pipelined`
 
 - This configuration item enables the pipelined process of adding the pessimistic lock. With this feature enabled, after detecting that data can be locked, TiKV immediately notifies TiDB to execute the subsequent requests and write the pessimistic lock asynchronously, which reduces most of the latency and significantly improves the performance of pessimistic transactions. But there is a still low probability that the asynchronous write of the pessimistic lock fails, which might cause the failure of pessimistic transaction commits.
 - Default value: `true`
+
+### `in-memory` (New in v6.0.0)
+
++ Enables the in-memory pessimistic lock feature. With this feature enabled, pessimistic transactions try to store their locks in memory, instead of writing the locks to disk or replicating the locks to other replicas. This improves the performance of pessimistic transactions. However, there is a still low probability that the pessimistic lock gets lost and causes the pessimistic transaction commits to fail.
++ Default value: `true`
++ Note that `in-memory` takes effect only when the value of `pipelined` is `true`.
+
+## quota
+
+Configuration items related to Quota Limiter.
+
+Suppose that your machine on which TiKV is deployed has limited resources, for example, with only 4v CPU and 16 G memory. In this situation, if the foreground of TiKV processes too many read and write requests, the CPU resources used by the background are occupied to help process such requests, which affects the performance stability of TiKV. To avoid this situation, you can use the quota-related configuration items to limit the CPU resources to be used by the foreground. When a request triggers Quota Limiter, the request is forced to wait for a while for TiKV to free up CPU resources. The exact waiting time depends on the number of requests, and the maximum waiting time is no longer than the value of [`max-delay-duration`](#max-delay-duration-new-in-v600).
+
+> **Warning:**
+>
+> - Quota Limiter is an experimental feature introduced in TiDB v6.0.0, and it is **NOT** recommended to use it in the production environment.
+> - This feature is only suitable for environments with limited resources to ensure that TiKV can run stably in those environments. If you enable this feature in an environment with rich resources, performance degradation might occur when the amount of requests reaches a peak.
+
+### `foreground-cpu-time` (new in v6.0.0)
+
++ The soft limit on the CPU resources used by TiKV foreground to process read and write requests.
++ Default value: `0` (which means no limit)
++ Unit: millicpu (for example, `1500` means that foreground requests consume 1.5v CPU)
+
+### `foreground-write-bandwidth` (new in v6.0.0)
+
++ The soft limit on the bandwidth with which transactions write data.
++ Default value: `0KB` (which means no limit)
+
+### `foreground-read-bandwidth` (new in v6.0.0)
+
++ The soft limit on the bandwidth with which transactions and the Coprocessor read data.
++ Default value: `0KB` (which means no limit)
+
+### `max-delay-duration` (new in v6.0.0)
+
++ The maximum time that a single read or write request is forced to wait before it is processed in the foreground.
++ Default value: `500ms`

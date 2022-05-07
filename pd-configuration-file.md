@@ -67,7 +67,7 @@ This document only describes parameters that are not included in command-line pa
 
 ### `initial-cluster-token`
 
-+ Identifies different clusters during the bootstrap phase.
++ Identifies different clusters during the bootstrap phase
 + Default value: `"pd-cluster"`
 + If multiple clusters that have nodes with same configurations are deployed successively, you must specify different tokens to isolate different cluster nodes.
 
@@ -119,7 +119,7 @@ Configuration items related to security
 
 ### `redact-info-log` <span class="version-mark">New in v5.0</span>
 
-+ Controls whether to enable log redaction in the PD log.
++ Controls whether to enable log redaction in the PD log
 + When you set the configuration value to `true`, user data is redacted in the PD log.
 + Default value: `false`
 
@@ -129,13 +129,15 @@ Configuration items related to log
 
 ### `level`
 
-+ The log level, which can be specified as "DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL".
-+ Default value: "INFO"
++ Specifies the level of the output log
++ Optional value: `"debug"`, `"info"`, `"warn"`, `"error"`, `"fatal"`
++ Default value: `"info"`
 
 ### `format`
 
-+ The log format, which can be specified as "text", "json", or "console"
-+ Default value: "text"
++ The log format
++ Optional value: `"text"`, `"json"`
++ Default value: `"text"`
 
 ### `disable-timestamp`
 
@@ -280,6 +282,20 @@ Configuration items related to scheduling
 
 + Controls whether to use Joint Consensus for replica scheduling. If this configuration is disabled, PD schedules one replica at a time.
 + Default value: `true`
+
+### `hot-regions-write-interval` <span class="version-mark">New in v5.4.0</span>
+
++ The time interval at which PD stores hot Region information.
++ Default value: `10m`
+
+> **Note:**
+> 
+> The information about hot Regions is updated every three minutes. If the interval is set to less than three minutes, updates during the interval might be meaningless.
+
+### `hot-regions-reserved-days` <span class="version-mark">New in v5.4.0</span>
+
++ Specifies how many days the hot Region information is retained.
++ Default value: `7`
 
 ## `replication`
 

@@ -13,9 +13,9 @@ Currently, the official documentation supports two languages:
 
 You can use Google Translate to view the documentation in different languages. For example:
 
-- `fr`: [documentation in French](http://translate.google.com/translate?hl=en&sl=en&tl=fr&u=https%3A%2F%2Fgithub.com%2Fpingcap%2Fdocs%2Fblob%2Fmaster%2FTOC.md)
-- `ja`: [documentation in Japanese](http://translate.google.com/translate?hl=en&sl=en&tl=ja&u=https%3A%2F%2Fgithub.com%2Fpingcap%2Fdocs%2Fblob%2Fmaster%2FTOC.md)
-- `ko`: [documentation in Korean](http://translate.google.com/translate?hl=en&sl=en&tl=ko&u=https%3A%2F%2Fgithub.com%2Fpingcap%2Fdocs%2Fblob%2Fmaster%2FTOC.md)
+- `fr`: [documentation in French](https://translate.google.com/translate?hl=en&sl=en&tl=fr&u=https%3A%2F%2Fgithub.com%2Fpingcap%2Fdocs%2Fblob%2Fmaster%2FTOC.md)
+- `ja`: [documentation in Japanese](https://translate.google.com/translate?hl=en&sl=en&tl=ja&u=https%3A%2F%2Fgithub.com%2Fpingcap%2Fdocs%2Fblob%2Fmaster%2FTOC.md)
+- `ko`: [documentation in Korean](https://translate.google.com/translate?hl=en&sl=en&tl=ko&u=https%3A%2F%2Fgithub.com%2Fpingcap%2Fdocs%2Fblob%2Fmaster%2FTOC.md)
 
 ## Documentation versions
 
@@ -24,6 +24,8 @@ Currently, we maintain the following versions of TiDB documentation in different
 | Branch name | TiDB docs version |
 | :---------|:----------|
 | [`master`](https://github.com/pingcap/docs/tree/master) | The latest development version |
+| [`release-6.0`](https://github.com/pingcap/docs/tree/release-6.0) | 6.0 Development Milestone Release |
+| [`release-5.4`](https://github.com/pingcap/docs/tree/release-5.4) | 5.4 stable version |
 | [`release-5.3`](https://github.com/pingcap/docs/tree/release-5.3) | 5.3 stable version |
 | [`release-5.2`](https://github.com/pingcap/docs/tree/release-5.2) | 5.2 stable version |
 | [`release-5.1`](https://github.com/pingcap/docs/tree/release-5.1) | 5.1 stable version |
@@ -35,6 +37,6 @@ Currently, we maintain the following versions of TiDB documentation in different
 
 ## Contributing
 
-[<img src="media/contribution-map.png" alt="contribution-map" width="180"></img>](https://github.com/pingcap/community/tree/master/special-interest-groups/sig-docs)
+[<img src="media/contribution-map.png" alt="contribution-map" width="180"></img>](https://github.com/pingcap/docs/blob/master/credits.md)
 
 See [TiDB Documentation Contributing Guide](/CONTRIBUTING.md) to become a contributor! 🤓

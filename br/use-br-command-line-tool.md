@@ -127,7 +127,7 @@ br backup db \
     --db test \
     --storage "local:///tmp/backup" \
     --ratelimit 128 \
-    --log-file backuptable.log
+    --log-file backupdb.log
 ```
 
 In the above command, `--db` specifies the name of the database to be backed up. For descriptions of other options, see [Back up all the cluster data](#use-br-command-line-to-back-up-cluster-data).
@@ -212,7 +212,7 @@ br backup full \
     --s3.region "${region}" \
     --send-credentials-to-tikv=true \
     --ratelimit 128 \
-    --log-file backuptable.log
+    --log-file backupfull.log
 ```
 
 ### Back up incremental data
@@ -271,28 +271,6 @@ br backup full\
     --crypter.method aes128-ctr \
     --crypter.key 0123456789abcdef0123456789abcdef
 ```
-
-### Point-in-time recovery (experimental feature)
-
-Point-in-time recovery (PITR) allows you to restore data to a point in time of your choice.
-
-An example scenario would be to take a full backup every day and take incremental backups every 6 hours and then use TiCDC for PITR. Assume that on one day, the full backup was performed at 00:00 and the first incremental backup was performed at 06:00. If you want to restore the database to the state of 07:16, you can first restore the full backup (taken at 00:00) and the incremental backup (taken at 06:00), and then restore TiCDC logs that fill in the gap between 06:00 and 07:16.
-
-To peform the PITR, you can take the following steps:
-
-1. Restore a full backup using `br restore full`.
-2. (optional) Restore incremental backup(s).
-3. Use `br restore cdclog` to restore the transactions that happened after the last incremental backup. The complete command to execute is as follows:
-
-    ```shell
-    br restore cdclog --storage local:///data/cdclog --start-ts $START_TS --end-ts $END_TS
-    ```
-
-    In the command above:
-
-    - `local:///data/cdclog` is the location of the TiCDC logs. This might be on the local filesystem or on the external storage like S3.
-    - `$START_TS` is the end position of the restore from the last restored backup (either a full backup or an incremental backup).
-    - `$END_TS` is the point to which you want to restore your data.
 
 ### Back up Raw KV (experimental feature)
 
@@ -389,7 +367,7 @@ br restore db \
     --db "test" \
     --ratelimit 128 \
     --storage "local:///tmp/backup" \
-    --log-file restorefull.log
+    --log-file restoredb.log
 ```
 
 In the above command, `--db` specifies the name of the database to be restored. For descriptions of other options, see [Restore all backup data](#restore-all-the-backup-data)).
@@ -415,7 +393,7 @@ br restore table \
     --table "usertable" \
     --ratelimit 128 \
     --storage "local:///tmp/backup" \
-    --log-file restorefull.log
+    --log-file restoretable.log
 ```
 
 In the above command, `--table` specifies the name of the table to be restored. For descriptions of other options, see [Restore all backup data](#restore-all-the-backup-data) and [Restore a database](#restore-a-database).
@@ -501,14 +479,12 @@ br restore full -f 'mysql.usertable' -s $external_storage_url --ratelimit 128
 
 > **Warning:**
 >
-> Although you can back up and restore system tables (such as `mysql.tidb`) using the BR tool, some unexpected situations might occur after the restore, including:
+> Although you can back up system tables (such as `mysql.tidb`) using the BR tool, BR ignores the following system tables even if you use the `--filter` setting to perform the restoration:
 >
-> - the statistical information tables (`mysql.stat_*`) cannot be restored.
-> - the system variable tables (`mysql.tidb`，`mysql.global_variables`) cannot be restored.
-> - the user information tables (such as `mysql.user` and `mysql.columns_priv`) cannot be restored.
-> - GC data cannot be restored.
->
-> Restoring system tables might cause more compatibility issues. To avoid unexpected issues, **DO NOT** restore system tables in the production environment.
+> - Statistical information tables (`mysql.stat_*`)
+> - System variable tables (`mysql.tidb`，`mysql.global_variables`)
+> - User information tables (such as `mysql.user` and `mysql.columns_priv`)
+> - [Other system tables](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/restore/systable_restore.go#L31)
 
 ### Decrypt data during restore (experimental feature)
 

@@ -91,10 +91,7 @@ Refer to [5 PD issues](#5-pd-issues).
 
     - Cause 1：The TiDB server that is executing the DML statement is stopped by `graceful kill` and prepares to exit. The execution time of the transaction that contains the DML statement exceeds one DDL lease. An error is reported when the transaction is committed.
 
-    - Cause 2: The TiDB server cannot connect to PD or TiKV when it is executing the DML statement, which causes the following problems:
-
-        - The TiDB server did not load the new schema within one DDL lease (`45s` by default); or
-        - The TiDB server disconnects from PD with the `keep alive` setting.
+    - Cause 2: The TiDB server cannot connect to PD or TiKV when it is executing the DML statement. As a result, the TiDB server did not load the new schema within one DDL lease (`45s` by default), or the TiDB server disconnects from PD with the `keep alive` setting.
 
     - Cause 3: TiKV has high load or network timed out. Check the node loads in **Grafana** -> **TiDB** and **TiKV**.
 
@@ -455,7 +452,7 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
 - 6.2.2 `Access denied for user 'root'@'172.31.43.27' (using password: YES)` shows when you run `query status` or check the log.
 
     - The database related passwords in all the DM configuration files should be encrypted by `dmctl`. If a database password is empty, it is unnecessary to encrypt the password. Cleartext passwords can be used since v1.0.6.
-    - During DM operation, the user of the upstream and downstream databases must have the corresponding read and write privileges. Data Migration also [prechecks the corresponding privileges](https://docs.pingcap.com/tidb-data-migration/v2.0/precheck) automatically while starting the data replication task.
+    - During DM operation, the user of the upstream and downstream databases must have the corresponding read and write privileges. Data Migration also [prechecks the corresponding privileges](/dm/dm-precheck.md) automatically while starting the data replication task.
     - To deploy different versions of DM-worker/DM-master/dmctl in a DM cluster, see the [case study on AskTUG](https://asktug.com/t/dm1-0-0-ga-access-denied-for-user/1049/5) in Chinese.
 
 - 6.2.3 A replication task is interrupted with the `driver: bad connection` error returned.

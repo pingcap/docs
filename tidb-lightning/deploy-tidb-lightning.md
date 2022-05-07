@@ -8,8 +8,6 @@ aliases: ['/docs/dev/tidb-lightning/deploy-tidb-lightning/','/docs/dev/reference
 
 This document describes the hardware requirements of TiDB Lightning using the Local-backend, and how to deploy it manually.
 
-If Local-backend is used for data import, during the import process, **the cluster cannot provide services**. If you do not want the TiDB services to be impacted, perform the data import according to [TiDB Lightning TiDB-backend](/tidb-lightning/tidb-lightning-backends.md#tidb-lightning-tidb-backend).
-
 ## Notes
 
 Before starting TiDB Lightning, note that:
@@ -19,20 +17,6 @@ Before starting TiDB Lightning, note that:
     ```sh
     bin/tidb-lightning-ctl --switch-mode=normal
     ```
-
-- TiDB Lightning is required to have the following privileges in the downstream TiDB:
-
-    | Privilege | Scope |
-    |----:|:------|
-    | SELECT | Tables |
-    | INSERT | Tables |
-    | UPDATE | Tables |
-    | DELETE | Tables |
-    | CREATE | Databases, tables |
-    | DROP | Databases, tables |
-    | ALTER | Tables |
-
-    If the `checksum` configuration item of TiDB Lightning is set to `true`, then the admin user privileges in the downstream TiDB need to be granted to TiDB Lightning.
 
 ## Hardware requirements
 
@@ -48,7 +32,7 @@ Before starting TiDB Lightning, note that:
 >
 > - `tidb-lightning` is a CPU intensive program. In an environment with mixed components, the resources allocated to `tidb-lightning` must be limited. Otherwise, other components might not be able to run. It is recommended to set the `region-concurrency` to 75% of CPU logical cores. For instance, if the CPU has 32 logical cores, you can set the `region-concurrency` to 24.
 
-Additionally, the target TiKV cluster should have enough space to absorb the new data. Besides [the standard requirements](/hardware-and-software-requirements.md), the total free space of the target TiKV cluster should be larger than **Size of data source × [Number of replicas](/faq/deploy-and-maintain-faq.md#is-the-number-of-replicas-in-each-region-configurable-if-yes-how-to-configure-it) × 2**.
+Additionally, the target TiKV cluster should have enough space to absorb the new data. Besides [the standard requirements](/hardware-and-software-requirements.md), the total free space of the target TiKV cluster should be larger than **Size of data source × [Number of replicas](/faq/manage-cluster-faq.md#is-the-number-of-replicas-in-each-region-configurable-if-yes-how-to-configure-it) × 2**.
 
 With the default replica count of 3, this means the total free space should be at least 6 times the size of data source.
 
@@ -57,7 +41,7 @@ With the default replica count of 3, this means the total free space should be a
 Use the [`dumpling` tool](/dumpling-overview.md) to export data from MySQL by using the following command:
 
 ```sh
-./bin/dumpling -h 127.0.0.1 -P 3306 -u root -t 16 -F 256MB -B test -f 'test.t[12]' -o /data/my_database/
+./dumpling -h 127.0.0.1 -P 3306 -u root -t 16 -F 256MB -B test -f 'test.t[12]' -o /data/my_database/
 ```
 
 In this command,
@@ -83,7 +67,7 @@ You can find deployment instructions in [TiDB Quick Start Guide](/quick-start-wi
 
 #### Step 2: Download the TiDB Lightning installation package
 
-Refer to the [TiDB enterprise tools download page](/download-ecosystem-tools.md#tidb-lightning) to download the TiDB Lightning package. 
+Refer to the [TiDB enterprise tools download page](/download-ecosystem-tools.md#tidb-lightning) to download the TiDB Lightning package.
 
 > **Note:**
 >
@@ -95,7 +79,9 @@ Refer to the [TiDB enterprise tools download page](/download-ecosystem-tools.md#
 
 2. Mount the data source onto the same machine.
 
-3. Configure `tidb-lightning.toml`. For configurations that do not appear in the template below, TiDB Lightning writes a configuration error to the log file and exits. `sorted-kv-dir` must be an empty directory and the disk where the directory is located must have a lot of free space.
+3. Configure `tidb-lightning.toml`. For configurations that do not appear in the template below, TiDB Lightning writes a configuration error to the log file and exits.
+
+    `sorted-kv-dir` sets the temporary storage directory for the sorted Key-Value files. The directory must be empty, and the storage space **must be greater than the size of the dataset to be imported**. See [Downstream storage space requirements](/tidb-lightning/tidb-lightning-requirements.md#resource-requirements) for details.
 
     ```toml
     [lightning]

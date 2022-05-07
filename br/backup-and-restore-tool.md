@@ -8,7 +8,7 @@ aliases: ['/docs/dev/br/backup-and-restore-tool/','/docs/dev/reference/tools/br/
 
 [BR](http://github.com/pingcap/br) (Backup & Restore) is a command-line tool for distributed backup and restoration of the TiDB cluster data.
 
-Compared with [`dumpling`](/backup-and-restore-using-dumpling-lightning.md), BR is more suitable for scenarios involved huge data volumes.
+Compared with [Dumpling](/dumpling-overview.md), BR is more suitable for scenarios involved huge data volumes.
 
 In addition to regular backup and restoration, you can also use BR for large-scale data migration as long as compatibility is ensured.
 
@@ -129,6 +129,11 @@ The following are the limitations of using BR for backup and restoration:
 The compatibility issues of BR and the TiDB cluster are divided into the following categories:
 
 + Some versions of BR are not compatible with the interface of the TiDB cluster.
+
+    + BR versions earlier than v5.4.0 do not support recovering `charset=GBK` tables. No version of BR supports recovering `charset=GBK` tables to TiDB clusters earlier than v5.4.0.
+
+    + BR does not support [placement rules](/placement-rules-in-sql.md) before v6.0.0. Since v6.0.0, BR supports placement rules and introduces a command-line option `--with-tidb-placement-mode=strict/ignore` to control the backup and restore mode of placement rules. With the default value `strict`, BR imports and validates placement rules, but ignores all placement rules when the value is `ignore`.
+
 + The KV format might change when some features are enabled or disabled. If these features are not consistently enabled or disabled during backup and restore, compatibility issues might occur.
 
 These features are as follows:
@@ -151,9 +156,20 @@ Note that skipping the version check might introduce incompatibility. The versio
 | Backup version (vertical) \ Restore version (horizontal) | Use BR nightly to restore TiDB nightly | Use BR v5.0 to restore TiDB v5.0| Use BR v4.0 to restore TiDB v4.0 |
 |  ----  |  ----  | ---- | ---- |
 | Use BR nightly to back up TiDB nightly | ✅ | ✅ | ❌ (If a table with the primary key of the non-integer clustered index type is restored to a TiDB v4.0 cluster, BR will cause data error without warning.)  |
-| Use BR v5.0 to back up TiDB v5.0 | ✅ | ✅ | ❌  (If a table with the primary key of the non-integer clustered index type is restored to a TiDB v4.0 cluster, BR will cause data error without warning.) 
+| Use BR v5.0 to back up TiDB v5.0 | ✅ | ✅ | ❌  (If a table with the primary key of the non-integer clustered index type is restored to a TiDB v4.0 cluster, BR will cause data error without warning.)
 | Use BR v4.0 to back up TiDB v4.0 | ✅ | ✅ | ✅ (If TiKV >= v4.0.0-rc.1, and if BR contains the [#233](https://github.com/pingcap/br/pull/233) bug fix and TiKV does not contain the [#7241](https://github.com/tikv/tikv/pull/7241) bug fix, BR will cause the TiKV node to restart.) |
 | Use BR nightly or v5.0 to back up TiDB v4.0 | ❌ (If the TiDB version is earlier than v4.0.9, the [#609](https://github.com/pingcap/br/issues/609) issue might occur.) | ❌ (If the TiDB version is earlier than v4.0.9, the [#609](https://github.com/pingcap/br/issues/609) issue might occur.) | ❌ (If the TiDB version is earlier than v4.0.9, the [#609](https://github.com/pingcap/br/issues/609) issue might occur.) |
+
+#### Check for the `new_collations_enabled_on_first_bootstrap` variable
+
+Since TiDB v6.0.0, the default value of [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) has changed from `false` to `true`. When the value of `new_collations_enabled_on_first_bootstrap` is consistent between the upstream and downstream clusters, BR safely restores the data backed up in the upstream cluster to the downstream cluster.
+
+Since v6.0.0, BR backs up the `new_collations_enabled_on_first_bootstrap` configuration of the upstream cluster and then checks whether the value of this configuration is consistent between the upstream and downstream clusters. If the value is inconsistent between the upstream and downstream clusters, BR does not perform the data restore and reports an error.
+
+Suppose that you have backed up the data in a TiDB cluster of an earlier version of v6.0.0, and you want to restore this data to a TiDB cluster of v6.0.0 or later versions. In this situation, you need manually to check whether the value of `new_collations_enabled_on_first_bootstrap` is consistent between the upstream and downstream clusters:
+
+- If the value is consistent, you can add `--check-requirements=false` to the restore command to skip this configuration check.
+- If the value is inconsistent, and you forcibly perform the restore, BR reports a [data validation error](/br/backup-and-restore-tool.md#usage-restrictions).
 
 ### Back up and restore table data in the `mysql` system schema (experimental feature)
 

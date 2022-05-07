@@ -10,11 +10,11 @@ This document describes best practices for handling highly-concurrent write-heav
 
 ## Target audience
 
-This document assumes that you have a basic understanding of TiDB. It is recommended that you first read the following three blog articles that explain TiDB fundamentals, and [TiDB Best Practices](https://pingcap.com/blog/2017-07-24-tidbbestpractice/):
+This document assumes that you have a basic understanding of TiDB. It is recommended that you first read the following three blog articles that explain TiDB fundamentals, and [TiDB Best Practices](https://en.pingcap.com/blog/tidb-best-practice/):
 
-+ [Data Storage](https://pingcap.com/blog/2017-07-11-tidbinternal1/)
-+ [Computing](https://pingcap.com/blog/2017-07-11-tidbinternal2/)
-+ [Scheduling](https://pingcap.com/blog/2017-07-20-tidbinternal3/)
++ [Data Storage](https://en.pingcap.com/blog/tidb-internal-data-storage/)
++ [Computing](https://en.pingcap.com/blog/tidb-internal-computing/)
++ [Scheduling](https://en.pingcap.com/blog/tidb-internal-scheduling/)
 
 ## Highly-concurrent write-intensive scenario
 
@@ -33,17 +33,19 @@ For a distributed database, it is important to make full use of the capacity of 
 
 ## Data distribution principles in TiDB
 
-To address the above challenges, it is necessary to start with the data segmentation and scheduling principle of TiDB. Refer to [Scheduling](https://pingcap.com/blog/2017-07-20-tidbinternal3/) for more details.
+To address the above challenges, it is necessary to start with the data segmentation and scheduling principle of TiDB. Refer to [Scheduling](https://en.pingcap.com/blog/tidb-internal-scheduling/) for more details.
 
 TiDB splits data into Regions, each representing a range of data with a size limit of 96M by default. Each Region has multiple replicas, and each group of replicas is called a Raft Group. In a Raft Group, the Region Leader executes the read and write tasks (TiDB supports [Follower-Read](/follower-read.md)) within the data range. The Region Leader is automatically scheduled by the Placement Driver (PD) component to different physical nodes evenly to distribute the read and write pressure.
 
 ![TiDB Data Overview](/media/best-practices/tidb-data-overview.png)
 
-In theory, by the virtue of this architecture, TiDB can linearly scale its read and write capacities and make full use of the distributed resources so long as there is no `AUTO_INCREMENT` primary key in the write scenario, or there is no monotonically increasing index. From this point of view, TiDB is especially suitable for the highly-concurrent and write-intensive scenario. However, the actual situation often differs from the theoretical assumption.
+In theory, if an application has no write hotspot, TiDB, by the virtue of its architecture, can not only linearly scale its read and write capacities, but also make full use of the distributed resources. From this point of view, TiDB is especially suitable for the high-concurrent and write-intensive scenario.
+
+However, the actual situation often differs from the theoretical assumption.
 
 > **Note:**
 >
-> No `AUTO_INCREMENT` primary key in the write scenario or no monotonically increasing index means no write hotspot in the application.
+> No write hotspot in an application means the write scenario does not have any `AUTO_INCREMENT` primary key or monotonically increasing index.
 
 ## Hotspot case
 
@@ -65,7 +67,25 @@ This table is simple in structure. In addition to `id` as the primary key, no se
 {{< copyable "sql" >}}
 
 ```sql
-INSERT INTO TEST_HOTSPOT(id, age, user_name, email) values(%v, %v, '%v', '%v');
+SET SESSION cte_max_recursion_depth = 1000000;
+INSERT INTO TEST_HOTSPOT
+SELECT
+  n,                                       -- ID
+  RAND()*80,                               -- Number between 0 and 80
+  CONCAT('user-',n),
+  CONCAT(
+    CHAR(65 + (RAND() * 25) USING ascii),  -- Number between 65 and 65+25, converted to a character, A-Z
+    '-user-',
+    n,
+    '@example.com'
+  )
+FROM
+  (WITH RECURSIVE nr(n) AS 
+    (SELECT 1                              -- Start CTE at 1
+      UNION ALL SELECT n + 1               -- increase n with 1 every loop
+      FROM nr WHERE n < 1000000            -- stop loop at 1_000_000 
+    ) SELECT n FROM nr
+  ) a;
 ```
 
 The load comes from executing the above statement intensively in a short time.

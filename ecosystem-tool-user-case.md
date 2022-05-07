@@ -1,12 +1,20 @@
 ---
-title: TiDB Ecosystem Tools Use Cases
-summary: Learn the common use cases of TiDB ecosystem tools and how to choose the tools.
+title: TiDB Tools Use Cases
+summary: Learn the common use cases of TiDB tools and how to choose the tools.
 aliases: ['/docs/dev/ecosystem-tool-user-case/']
 ---
 
-# TiDB Ecosystem Tools Use Cases
+# TiDB Tools Use Cases
 
-This document introduces the common use cases of TiDB ecosystem tools and how to choose the right tool for your scenario.
+This document introduces the common use cases of TiDB tools and how to choose the right tool for your scenario.
+
+## Deploy and operate TiDB on physical or virtual machines
+
+If you need to deploy and operate TiDB on physical or virtual machines, you can install [TiUP](/tiup/tiup-overview.md), and then use TiUP to manage TiDB components such as TiDB, PD, and TiKV.
+
+## Deploy and operate TiDB in Kubernetes
+
+If you need to deploy and operate TiDB in Kubernetes, you can deploy a Kubernetes cluster, and then deploy [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable). After that, you can use TiDB Operator to deploy and operate a TiDB cluster.
 
 ## Import data from CSV to TiDB
 
@@ -18,7 +26,7 @@ If you need to import full data from MySQL/Aurora, use [Dumpling](/dumpling-over
 
 ## Migrate data from MySQL/Aurora
 
-If you need to migrate both full data and incremental data from MySQL/Aurora, use [TiDB Data Migration](https://docs.pingcap.com/tidb-data-migration/v2.0/overview) (DM) to perform the [full and incremental data migration](https://docs.pingcap.com/tidb-data-migration/v2.0/migrate-from-mysql-aurora).
+If you need to migrate both full data and incremental data from MySQL/Aurora, use [TiDB Data Migration](/dm/dm-overview.md) (DM) to perform the [Migrate Data from Amazon Aurora to TiDB](/migrate-aurora-to-tidb.md).
 
 If the full data volume is large (at the TB level), you can first use [Dumpling](/dumpling-overview.md) and [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) to perform the full data migration, and then use DM to perform the incremental data migration.
 
