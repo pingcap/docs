@@ -79,7 +79,9 @@ INSERT INTO t VALUES (1,2);
 UPDATE t SET a = a+1,b=a;
 ```
 
-In MySQL, the column `b` is updated to 2 because it uses the value of `a` which is derived from `a+1`. TiDB follows the more standard SQL behavior, and updates `b` to 1.
+In MySQL, the column `b` is updated to 2 because it is set to the value of `a`, and the value of `a` (which is 1) is updated to `a+1` (which is 2) in the same statement. 
+
+TiDB follows the more standard SQL behavior, and updates `b` to 1.
 
 ## See also
 
