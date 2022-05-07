@@ -68,7 +68,7 @@ Example versions:
 
 ### Alpha Releases
 
-Alpha Releases are internal releases for testing and introduce new features and improvements.Alpha releases are the initial versions of the current release series. Alpha Releases might have some bugs and are available for users to test the latest features.
+Alpha Releases are internal releases for testing and introduce new features and improvements. Alpha releases are the initial versions of the current release series. Alpha Releases might have some bugs and are available for users to test the latest features.
 
 Example versions:
 
