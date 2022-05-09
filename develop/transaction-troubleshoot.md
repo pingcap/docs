@@ -17,7 +17,7 @@ ERROR 1213: Deadlock found when trying to get lock; try restarting transaction
 
 A deadlock occurs when two or more transactions are waiting for each other to release the lock they already hold, or because the lock order is inconsistent, resulting in a loop waiting for the lock resources.
 
-Here is an example of a deadlock using the table `books` in the [bookshop](bookshop-schema-design.md) database:
+Here is an example of a deadlock using the table `books` in the [bookshop](/develop/bookshop-schema-design.md) database:
 
 First insert 2 rows data into the table `books`:
 
