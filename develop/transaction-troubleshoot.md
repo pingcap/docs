@@ -42,7 +42,7 @@ After client-B encounters deadlock error, TiDB will automatically `ROLLBACK` the
 
 For getting better performance, you should try to avoid deadlock at the application level by adjusting the business logic or schema design. In the example above, if client-B also uses the same update order as client-A, that is, they update `books` with `id=1` first, and then `update` books with `id=2`, so that deadlocks can be avoided:
 
-| 客户端-A                                                    | 客户端-B                                                         |
+| Client-A                                                    | Client-B                                                         |
 | ---------------------------------------------------------- | ----------------------------------------------------------------|
 | BEGIN;                                                     |                                                                 |
 |                                                            | BEGIN;                                                          |
