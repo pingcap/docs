@@ -242,7 +242,7 @@ After setting up the environment, you can use the backup and restore functions o
     {{< copyable "shell-regular" >}}
 
     ```shell
-    tiup cdc cli changefeed --sink-url "mysql://root:@172.16.6.124:4000" --config ./changefeed.toml
+    tiup cdc cli changefeed create --pd=http://172.16.6.122:2379 --sink-uri="mysql://root:@172.16.6.125:4000" --changefeed-id="primary-to-secondary" --start-ts="431434047157698561"
     ```
 
     In this command, the parameters are as follows:
@@ -318,5 +318,5 @@ After the previous step, the downstream (secondary) cluster has data that is con
 
     ```shell
     # Create a changefeed
-    tiup cdc cli changefeed --sink-url "mysql://root:@172.16.6.124:4000" --config ./changefeed.toml
+    tiup cdc cli changefeed create --pd=http://172.16.6.122:2379 --sink-uri="mysql://root:@172.16.6.125:4000" --changefeed-id="primary-to-secondary"
     ```
