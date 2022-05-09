@@ -65,11 +65,11 @@ If you only update 1 book in each transaction, you can also avoid deadlock. Howe
 
 ### Solution 3: Use Optimistic Transactions
 
-In TiDB optimistic transaction model, there is no deadlock problem, but the application needs to add the optimistic transaction retry logic after failure. For details, see [Application Retry and Error Handling](#Application-Retry-And-Error-Handling).
+In TiDB optimistic transaction model, there is no deadlock problem, but the application needs to add the optimistic transaction retry logic after failure. For details, see [Application Retry and Error Handling](#application-retry-and-error-handling).
 
 ### Solution 4: Retry
 
-As suggested in the error message, just add retry logic in the application code. For details, see [Application Retry and Error Handling](#Application-Retry-And-Error-Handling).
+As suggested in the error message, just add retry logic in the application code. For details, see [Application Retry and Error Handling](#application-retry-and-error-handling).
 
 ## Application Retry And Error Handling
 
