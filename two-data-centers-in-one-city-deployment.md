@@ -162,8 +162,6 @@ cat rule.json
 ]
 ```
 
-<<<<<<< HEAD
-=======
 To use the configurations in `rule.json`, run the following command to back up the existing configuration to the `default.json` file and overwrite the existing configuration with `rule.json`:
 
 {{< copyable "shell-regular" >}}
@@ -196,7 +194,6 @@ cat default.json
 ]
 ```
 
->>>>>>> 7844434ae (add a rollback step (#8467))
 ### Enable the DR Auto-Sync mode
 
 The replication mode is controlled by PD. You can configure the replication mode in the PD configuration file using one of the following methods:
