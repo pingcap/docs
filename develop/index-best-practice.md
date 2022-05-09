@@ -31,11 +31,12 @@ CREATE TABLE `books` (
 2. Avoid creating secondary index that you don't need. Useful secondary indexes can speed up queries, but be aware that adding an index has side effects. Every time you add an index, an additional key-value is added when you insert a row of data, so the more indexes you have, the slower you write, and the more space it takes up. In addition, too many indexes can affect optimizer runtime, and inappropriate indexes can mislead the optimizer. So more indexes aren't always better.
 
 3. Create an appropriate index based on business characteristics. In principle, you need to create indexes on the columns you need to use in your query to improve performance. The following situations are suitable for creating an index:
- - Columns with a high degree of distinction can significantly reduce the number of filtered rows. For example, it is recommended to create an index on the column of the person's ID number, but not on the column of the person's gender.
- - If you have multiple search conditions, you can use combined index. Note that columns with equivalent conditions need to be placed in front of the combined index
- Here is an example. Assuming the query is `select* from t where c1 = 10 and c2 = 100 and c3 > 10`, then consider creating a combined index `Index cidx (c1, c2, c3) `, so that index prefix scan can be performed according to query conditions.
- 
- 4. Use meaningful secondary index name, and we recommend that you follow your company's or organization's table naming conventions. If your company or organization does not have an appropriate naming convention, refer to [Index Naming Specification](/develop/object-naming-guidelines.md)。
+
+- Columns with a high degree of distinction can significantly reduce the number of filtered rows. For example, it is recommended to create an index on the column of the person's ID number, but not on the column of the person's gender.
+- If you have multiple search conditions, you can use combined index. Note that columns with equivalent conditions need to be placed in front of the combined index.
+Here is an example. Assuming the query is `select* from t where c1 = 10 and c2 = 100 and c3 > 10`, then consider creating a combined index `Index cidx (c1, c2, c3)`, so that index prefix scan can be performed according to query conditions.
+
+4. Use meaningful secondary index name, and we recommend that you follow your company's or organization's table naming conventions. If your company or organization does not have an appropriate naming convention, refer to [Index Naming Specification](/develop/object-naming-guidelines.md).
 
 ## Use Index Best Practices
 
