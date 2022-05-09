@@ -162,7 +162,7 @@ cat rule.json
 ]
 ```
 
-To use the configurations in `rule.json`, run the following command to back up the existing configurations into the `default.json` file and override the existing configurations to `rule.json`:
+To use the configurations in `rule.json`, run the following command to back up the existing configuration to the `default.json` file and overwrite the existing configuration with `rule.json`:
 
 {{< copyable "shell-regular" >}}
 
@@ -171,7 +171,7 @@ pd-ctl config placement-rules rule-bundle load --out="default.json"
 pd-ctl config placement-rules rule-bundle save --in="rule.json"
 ```
 
-If you need to roll back the configurations, you can restore the backup file `default.json` or write the following JSON file manually and overwrite the file with the existing configuration file:
+If you need to roll back to the previous configuration, you can restore the backup file `default.json` or write the following JSON file manually and overwrite the current configuration with this JSON file:
 
 ```
 cat default.json
