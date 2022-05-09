@@ -142,7 +142,6 @@ TiDB version: 5.4.1
         - Fix a bug that caused BR panics sometime when merge small file enabled.[#33801](https://github.com/pingcap/tidb/issues/33801)
         - Fix the issue that the schedulers won't be resumed after BR/Lightning exits abnormally. [#33546](https://github.com/pingcap/tidb/issues/33546)
 
-
     + TiCDC
 
         - (dup: release-5.2.4.md > Bug fixes> Tools> TiCDC)- Fix incorrect metrics caused by owner changes [#4774](https://github.com/pingcap/tiflow/issues/4774)
