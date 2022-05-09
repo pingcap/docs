@@ -68,7 +68,6 @@ TiDB version: 5.4.1
     - (dup: release-6.0.0-dmr.md > Bug fixes> TiDB)- Fix the `invalid transaction` error when executing a query using index lookup join [#30468](https://github.com/pingcap/tidb/issues/30468)
     - (dup: release-5.2.4.md > Bug fixes> TiDB)- Fix wrong results of deleting data of multiple tables using `left join` [#31321](https://github.com/pingcap/tidb/issues/31321)
     - (dup: release-5.2.4.md > Bug fixes> TiDB)- Fix a bug that TiDB may dispatch duplicate tasks to TiFlash [#32814](https://github.com/pingcap/tidb/issues/32814)
-    - Fix a bug of duplicate primary key when insert record into table after incremental restoration. [#33596](https://github.com/pingcap/tidb/issues/33596)
     - Fix the issue that privilege-related operations may fail for upgraded clusters. [#33588](https://github.com/pingcap/tidb/issues/33588)
     - fix bug #33509 [#33509](https://github.com/pingcap/tidb/issues/33509)
     - fix a bug that compress function may report error [#33397](https://github.com/pingcap/tidb/issues/33397)
@@ -142,6 +141,8 @@ TiDB version: 5.4.1
         - Fix a bug that caused region unbalanced after restoring.[#31034](https://github.com/pingcap/tidb/issues/31034)
         - Fix the issue that BR not retry enough when region not consistency during restoration.[#33419](https://github.com/pingcap/tidb/issues/33419)
         - Fix a bug that caused BR panics sometime when merge small file enabled.[#33801](https://github.com/pingcap/tidb/issues/33801)
+        - Fix the issue that the schedulers won't be resumed after BR/Lightning exits abnormally. [#33546](https://github.com/pingcap/tidb/issues/33546)
+
 
     + TiCDC
 
