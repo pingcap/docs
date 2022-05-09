@@ -134,8 +134,8 @@ As an open source distributed NewSQL database, TiDB requires the following netwo
 | PD | At least 20 GB for the data disk and for the log disk, respectively | Lower than 90% |
 | TiKV | At least 100 GB for the data disk and for the log disk, respectively | Lower than 80% |
 | TiFlash | At least 100 GB for the data disk and at least 30 GB for the log disk, respectively | Lower than 80% |
-| TiUP | A single TiUP cluster occupies no more than 1 GB. During the cluster deployment process, the TiUP cluster requires less than 1 MB /tmp space to restore temporary configuration files. | N/A |
-| Ngmonitoring | Conprof: 3 x 1 GB x Number of components (each component occupies about 1 GB per day, 3 days in total) + 20 GB reserved space <br/> Top SQL: 30 x 50 MB x Number of components (each component occupies about 50 MB per day, 30 days in total) <br/> Conprof and Top SQL share the reserved space | N/A |
+| TiUP | <ul><li>Control machine: No more than 1 GB space is required for deploying a single version of TiDB cluster. The space required increases if multiple versions of TiDB cluster are deployed. </li> <li> Deployment servers (machines where the TiDB components run): TiFlash occupies about 700 MB space and other components (such as PD, TiDB, and TiKV) occupy about 200 MB space respectively. During the cluster deployment process, the TiUP cluster requires less than 1 MB temporary space (`/tmp` directory) to store temporary files.</li></ul>| N/A |
+| Ngmonitoring | <ul><li>Conprof: 3 x 1 GB x Number of components (each component occupies about 1 GB per day, 3 days in total) + 20 GB reserved space </li><li> Top SQL: 30 x 50 MB x Number of components (each component occupies about 50 MB per day, 30 days in total) </li><li> Conprof and Top SQL share the reserved space</li></ul> | N/A |
 
 ## Web browser requirements
 
