@@ -83,10 +83,10 @@ The following Python pseudocode shows how to implement application-level retries
 
 - Throws an error if the number of failed retries reaches the `max_retries` limit.
 - Use `try ... catch ...` to catch SQL execution exception，Retry on failure when encountering the following errors, and rollback when encountering other errors. More error code detail, see [Error Codes and Troubleshooting](https://docs.pingcap.com/tidb/stable/error-codes).
-  - `Error 8002: can not retry select for update statement`: SELECT FOR UPDATE write conflict error
-  - `Error 8022: Error: KV error safe to retry`: transaction commit failed error.
-  - `Error 8028: Information schema is changed during the execution of the statement`: Table schema has been changed by DDL operation, resulting in an error in the transaction commit.
-  - `Error 9007: Write conflict`: Write conflict error, cause by multiple transactions modify the same row of data when the optimistic transaction mode is used.
+    - `Error 8002: can not retry select for update statement`: SELECT FOR UPDATE write conflict error
+    - `Error 8022: Error: KV error safe to retry`: transaction commit failed error.
+    - `Error 8028: Information schema is changed during the execution of the statement`: Table schema has been changed by DDL operation, resulting in an error in the transaction commit.
+    - `Error 9007: Write conflict`: Write conflict error, cause by multiple transactions modify the same row of data when the optimistic transaction mode is used.
 - COMMIT the transaction at the end of the try block.
 
 ```python
