@@ -71,7 +71,6 @@ TiDB version: 5.4.1
     - Fix the issue that privilege-related operations may fail for upgraded clusters. [#33588](https://github.com/pingcap/tidb/issues/33588)
     - fix bug #33509 [#33509](https://github.com/pingcap/tidb/issues/33509)
     - fix a bug that compress function may report error [#33397](https://github.com/pingcap/tidb/issues/33397)
-    - Fix the issue that NewCollationEnable config not checked during restoration. [#33422](https://github.com/pingcap/tidb/issues/33422)
     - Fix the problem of high use of reArrangeFallback cpu. [#30353](https://github.com/pingcap/tidb/issues/30353)
     - Fix the issue that the table attributes don't support index and won't be updated when the partition changes [#33929](https://github.com/pingcap/tidb/issues/33929)
     - Fix a bug that the initial `TopN` of the table's statistics may not be correctly sorted [#34216](https://github.com/pingcap/tidb/issues/34216)
