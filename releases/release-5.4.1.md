@@ -33,7 +33,7 @@ TiDB version: 5.4.1
 
 + PD
 
-    - note 1
+   - metrics: support multi-k8s in grafana dashboards [#4673](https://github.com/tikv/pd/issues/4673)
 
 + TiDB Dashboard
 
@@ -41,7 +41,7 @@ TiDB version: 5.4.1
 
 + TiFlash
 
-    - note 1
+    - metrics: support multi-k8s in grafana dashboards [#4129](https://github.com/pingcap/tiflash/issues/4129)
 
 + Tools
 
@@ -104,11 +104,12 @@ TiDB version: 5.4.1
     - (dup: release-5.2.4.md > Improvements> TiKV)- Reduce the TiCDC recovery time by reducing the number of the Regions that require the Resolve Locks step [#11993](https://github.com/tikv/tikv/issues/11993)
     - (dup: release-5.2.4.md > Bug fixes> TiKV)- Fix the panic issue caused by deleting snapshot files when the peer status is `Applying` [#11746](https://github.com/tikv/tikv/issues/11746)
     - (dup: release-5.2.4.md > Bug fixes> TiKV)- Fix the issue that destroying a peer might cause high latency [#10210](https://github.com/tikv/tikv/issues/10210)
-    - metrics: support multi k8s in grafana dashboards. [#12104](https://github.com/tikv/tikv/issues/12104)
 
 + PD
 
     - (dup: release-6.0.0-dmr.md > Bug fixes> PD)- Fix the issue that `Duration` fields of `dr-autosync` cannot be dynamically configured [#4651](https://github.com/tikv/pd/issues/4651)
+     -Fix the issue that when there exists a store with more than a big free disk(2T for example)  no balance operator generated even when one or more stores with its disk full. [#4805](https://github.com/tikv/pd/issues/4805)
+    - Fix the issue that in the metrics the label distribution has residual labels [#4825](https://github.com/tikv/pd/issues/4825)
 
 + TiFlash
 
@@ -199,11 +200,6 @@ TiDB version: 5.4.1
     - Fix the problem that empty segments cannot be merged after gc [#4511](https://github.com/pingcap/tiflash/issues/4511)
     - metrics: support multi-k8s in grafana dashboards [#4129](https://github.com/pingcap/tiflash/issues/4129)
 
-+ PD
-
-    - None. [#4805](https://github.com/tikv/pd/issues/4805)
-    - Fix the issue that the label distribution has residual labels [#4825](https://github.com/tikv/pd/issues/4825)
-    - metrics: support multi-k8s in grafana dashboards [#4673](https://github.com/tikv/pd/issues/4673)
 
 + Tools
 
