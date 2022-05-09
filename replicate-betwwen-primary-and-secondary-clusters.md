@@ -249,7 +249,7 @@ After setting up the environment, you can use the backup and restore functions o
 
     - --pd: PD address of the upstream cluster
     - --sink-uri: URI of the downstream cluster
-    - --start-ts: start timestamp of the changefeed, must be the backup time (or BackupTS mentioned in the previous step)
+    - --start-ts: start timestamp of the changefeed, must be the backup time (or BackupTS mentioned in [Step 2. Migrate full data](#step-2-migrate-full-data))
 
     For more information about the changefeed configurations, see [Task configuration file](/ticdc/manage-ticdc.md#task-configuration-file).
 
