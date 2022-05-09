@@ -93,11 +93,11 @@ SELECT title, price FROM books WHERE title = 'Marian Yost';
 
 ### Use Batch Delete
 
-When a large amount of data needs to be deleted, it is recommended to use [Batch Delete](delete-data.md/xx)
+When a large amount of data needs to be deleted, it is recommended to use [Batch Delete](/develop/delete-data.md#Bulk-delete)
 
 ### Use Batch Update
 
-When a large amount of data needs to be update, it is recommended to use [Batch Update](update-data.md/xx)
+When a large amount of data needs to be update, it is recommended to use [Batch Update](/develop/update-data.md#Bulk-update)
 
 ### Use TRUNCATE instead of DELETE full table data
 
@@ -117,11 +117,11 @@ DELETE FROM t;
 
 ### Primary Key Best Practices
 
-See [Primary Key Best Practices](create-table.md#Best-Practices-for-select-primary-key)
+See [Primary Key Best Practices](/develop/create-table.md#Best-Practices-for-select-primary-key)
 
 ### Index Best Practices
 
-See [Index Best Practice](index-best-practice.md)
+See [Index Best Practice](/develop/index-best-practice.md)
 
 ### Add Index Best Practices
 
