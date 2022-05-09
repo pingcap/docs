@@ -1,7 +1,7 @@
 ---
 title: What's New in TiDB 4.0
 summary: Learn the new features of TiDB v4.0.
-aliases: ['/docs/stable/whats-new-in-tidb-4.0/','/docs/v4.0/whats-new-in-tidb-4.0/']
+aliases: ['/docs/stable/whats-new-in-tidb-4.0/','/docs/v4.0/whats-new-in-tidb-4.0/','/tidb/stable/whats-new-in-tidb-4.0']
 ---
 
 # What’s New in TiDB 4.0
