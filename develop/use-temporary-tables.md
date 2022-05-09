@@ -251,12 +251,20 @@ Unlike [views](/develop/use-views.md), when querying a temporary table, instead 
 
 Local temporary tables are automatically purged after the **session** ends, along with both data and table structures. Global temporary tables are automatically purged of data at the end of a **session**, but the table structure remains and needs to be deleted manually.
 
-You can manually drop temporary tables with the `DROP TABLE` or `DROP TEMPORARY TABLE` statement. E.g:
+To manually drop local temporary tables, use the `DROP TABLE` or `DROP TEMPORARY TABLE` syntax. For example:
 
 {{< copyable "sql" >}}
 
 ```sql
-DROP TEMPORARY TABLE top_50_eldest_authors_global;
+DROP TEMPORARY TABLE top_50_eldest_authors;
+```
+
+To manually drop global temporary tables, use the `DROP TABLE` or `DROP GLOBAL TEMPORARY TABLE` syntax. For example:
+
+{{< copyable "sql" >}}
+
+```sql
+DROP GLOBAL TEMPORARY TABLE top_50_eldest_authors_global;
 ```
 
 ## Limitation
