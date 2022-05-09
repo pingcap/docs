@@ -26,10 +26,13 @@ TiDB version: 5.4.1
 + TiDB
 
     - (dup: release-6.0.0-dmr.md > Improvements> TiDB)- Support using the PointGet plan for queries that read the `_tidb_rowid` column [#31543](https://github.com/pingcap/tidb/issues/31543)
+    - Add more debug information for `Apply` executor [#33887](https://github.com/pingcap/tidb/issues/33887)
+    - Improve the `TopN` pruning logic for analyze version 2 [#34256](https://github.com/pingcap/tidb/issues/34256)
+    - Support multi k8s in grafana dashboards [#32593](https://github.com/pingcap/tidb/issues/32593)
 
 + TiKV
 
-    - note 1
+    - metrics: support multi k8s in grafana dashboards. [#12104](https://github.com/tikv/tikv/issues/12104)
 
 + PD
 
@@ -91,6 +94,12 @@ TiDB version: 5.4.1
     - Fix the issue that BR not retry enough when region not consistency during restoration. [#33419](https://github.com/pingcap/tidb/issues/33419)
     - Fix the problem of high use of reArrangeFallback cpu. [#30353](https://github.com/pingcap/tidb/issues/30353)
     - Fix the issue that the table attributes don't support index and won't be updated when the partition changes [#33929](https://github.com/pingcap/tidb/issues/33929)
+    - Fix a bug that the initial `TopN` of the table's statistics may not be correctly sorted [#34216](https://github.com/pingcap/tidb/issues/34216)
+    - Fix reading from `INFORMATION_SCHEMA.ATTRIBUTES` return error by skipping the unidentifiable table attributes [#33665](https://github.com/pingcap/tidb/issues/33665)
+    - Fix a bug that even though `@@tidb_enable_parallel_apply` is set, the apply operator is not paralleled when order property exists [#34237](https://github.com/pingcap/tidb/issues/34237)
+    - Fix a bug that '0000-00-00 00:00:00' can be inserted into a datetime column in spite of the `NO_ZERO_DATE` sql_mode restriction [#34099](https://github.com/pingcap/tidb/issues/34099)
+    - Fix query `INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY` table cause TiDB server OOM, it can be triggered when checking slow query on the Dashboard [#33893](https://github.com/pingcap/tidb/issues/33893)
+    - Fix the bug that locking with NOWAIT does not return immediately when encountering a lock. [#32754](https://github.com/pingcap/tidb/issues/32754)
 
 + TiKV
 
@@ -104,6 +113,11 @@ TiDB version: 5.4.1
     - (dup: release-5.2.4.md > Improvements> TiKV)- Reduce the TiCDC recovery time by reducing the number of the Regions that require the Resolve Locks step [#11993](https://github.com/tikv/tikv/issues/11993)
     - (dup: release-5.2.4.md > Bug fixes> TiKV)- Fix the panic issue caused by deleting snapshot files when the peer status is `Applying` [#11746](https://github.com/tikv/tikv/issues/11746)
     - (dup: release-5.2.4.md > Bug fixes> TiKV)- Fix the issue that destroying a peer might cause high latency [#10210](https://github.com/tikv/tikv/issues/10210)
+    - Fix panic invalid assertion in resource metering. [#12234](https://github.com/tikv/tikv/issues/12234)
+    - Fix the issue that slow score calculation is inaccurate in corner cases. [#12254](https://github.com/tikv/tikv/issues/12254)
+    - Fix the oom issue caused by the resolved_ts module and add more metrics. [#12159](https://github.com/tikv/tikv/issues/12159)
+    - Fix that successfully committed optimistic transactions may report false WriteConflict on network errors. [#34066](https://github.com/pingcap/tidb/issues/34066)
+    - Fix panicking when replica read is enabled and there is a long time network condition [#12046](https://github.com/tikv/tikv/issues/12046)
 
 + PD
 
@@ -132,11 +146,21 @@ TiDB version: 5.4.1
     - (dup: release-5.2.4.md > Bug fixes> TiFlash)- Fix the issue that the date format identifies `'\n'` as an invalid separator [#4036](https://github.com/pingcap/tiflash/issues/4036)
     - (dup: release-5.2.4.md > Bug fixes> TiFlash)- Fix the potential query error after adding columns under heavy read workload [#3967](https://github.com/pingcap/tiflash/issues/3967)
     - (dup: release-5.2.4.md > Bug fixes> TiFlash)- Fix the panic issue that occurs when the memory limit is enabled [#3902](https://github.com/pingcap/tiflash/issues/3902)
+    - fix potential data corruption for large indices [#4778](https://github.com/pingcap/tiflash/issues/4778)
+    - Fix potential query error when select on a table with many delete operations [#4747](https://github.com/pingcap/tiflash/issues/4747)
+    - Fix bug that TiFlash query will meet keepalive timeout error randomly. [#4192](https://github.com/pingcap/tiflash/issues/4192)
+    - Avoid leaving data on tiflash node which doesn't corresponding to any region range [#4414](https://github.com/pingcap/tiflash/issues/4414)
+    - Fix the problem that empty segments cannot be merged after gc [#4511](https://github.com/pingcap/tiflash/issues/4511)
 
 + Tools
 
     + Backup & Restore (BR)
         - (dup: release-5.2.4.md > Bug fixes> Tools> Backup & Restore (BR))- Fix the issue that BR fails to back up RawKV [#32607](https://github.com/pingcap/tidb/issues/32607)
+        - Fix a bug of duplicate primary key when insert record into table after incremental restoration. [#33596](https://github.com/pingcap/tidb/issues/33596)
+        - Fix a bug that BR incremental restore return error by mistake caused by ddl job with empty query.[#33322](https://github.com/pingcap/tidb/issues/33322)
+        - Fix a bug that caused region unbalanced after restoring.[#31034](https://github.com/pingcap/tidb/issues/31034)
+        - Fix the issue that BR not retry enough when region not consistency during restoration.[#33419](https://github.com/pingcap/tidb/issues/33419)
+        - Fix a bug that caused BR panics sometime when merge small file enabled.[#33801](https://github.com/pingcap/tidb/issues/33801)
 
     + TiCDC
 
@@ -148,12 +172,18 @@ TiDB version: 5.4.1
         - (dup: release-6.0.0-dmr.md > Bug fixes> Tools> TiCDC)- Fix the TiCDC panic issue that might occur when `Canal-JSON` incorrectly handles `string` [#4635](https://github.com/pingcap/tiflow/issues/4635)
         - (dup: release-5.2.4.md > Bug fixes> Tools> TiCDC)- Fix a bug that a TiCDC node exits abnormally when a PD leader is killed [#4248](https://github.com/pingcap/tiflow/issues/4248)
         - (dup: release-5.2.4.md > Bug fixes> Tools> TiCDC)- Fix a bug that MySQL sink generates duplicated `replace` SQL statements when `batch-replace-enable` is disabled [#4501](https://github.com/pingcap/tiflow/issues/4501)
+        - Fix the DML construct error issue caused by `rename tables` DDL [#5059](https://github.com/pingcap/tiflow/issues/5059)
+        - Fix a rare likelihood that replication be stuck if the owner is changed when the new scheduler is enabled (disabled by default) [#4963](https://github.com/pingcap/tiflow/issues/4963)
+        - Fix ErrProcessorDuplicateOperations when new scheduler is enabled (disabled by default) [#4769](https://github.com/pingcap/tiflow/issues/4769)
+        - Fix the issue that ticdc failed to start when connects to multiple pd endpoints with tls-enabled and the 1st endpoint is not available [#4777](https://github.com/pingcap/tiflow/issues/4777)
+        - Fix checkpoint metrics when tables are being scheduled [#4714](https://github.com/pingcap/tiflow/issues/4714)
 
     + TiDB Lightning
 
         - (dup: release-5.2.4.md > Bug fixes> Tools> TiDB Lightning)- Fix the checksum error “GC life time is shorter than transaction duration” [#32733](https://github.com/pingcap/tidb/issues/32733)
         - (dup: release-6.0.0-dmr.md > Bug fixes> Tools> TiDB Lightning)- Fix the issue that TiDB Lightning gets stuck when it fails to check empty tables [#31797](https://github.com/pingcap/tidb/issues/31797)
         - (dup: release-5.2.4.md > Bug fixes> Tools> TiDB Lightning)- Fix a bug that TiDB Lightning may not delete the metadata schema when some import tasks do not contain source files [#28144](https://github.com/pingcap/tidb/issues/28144)
+        - Fix the issue that Lightning precheck doesn't check local disk resources and cluster available.[#34213](https://github.com/pingcap/tidb/issues/34213)
 
     + Dumpling
 
@@ -164,6 +194,10 @@ TiDB version: 5.4.1
         - (dup: release-6.0.0-dmr.md > Bug fixes> Tools> TiDB Data Migration (DM))- Fix the issue that hundreds of "checkpoint has no change, skip sync flush checkpoint" print in the log and the replication is very slow [#4619](https://github.com/pingcap/tiflow/issues/4619)
         - (dup: release-6.0.0-dmr.md > Bug fixes> Tools> TiDB Data Migration (DM))- Fix a bug that long varchars report an error `Column length too big` [#4637](https://github.com/pingcap/tiflow/issues/4637)
         - (dup: release-6.0.0-dmr.md > Bug fixes> Tools> TiDB Data Migration (DM))- Fix the issue that execution errors of the update statement in safemode may cause the DM-worker panic [#4317](https://github.com/pingcap/tiflow/issues/4317)
+        - Fix the issue that manual execute the filtered DDL makes the task failed [#5272](https://github.com/pingcap/tiflow/issues/5272)
+        - Fix a bug that no data is return by `query-status` when upstream doesn't turn on binlog [#5121](https://github.com/pingcap/tiflow/issues/5121)
+        - Fix the issue that tracker panic when pk of downstream table orders behind [#5159](https://github.com/pingcap/tiflow/issues/5159)
+        - Fix the issue that CPU usage may increased and print large amount logs when GTID enabled and task auto resumed. [#5063](https://github.com/pingcap/tiflow/issues/5063)
 
 ## __unsorted
 
