@@ -27,10 +27,10 @@ jobs:
       with:
         # Optional
         # Specify file path to lint
-        #files: .
+        files: .
 
         # Optional
-        onlyAnnotateModifiedLines: true
+        #onlyAnnotateModifiedLines: true
       env:
         # Required, set by GitHub actions automatically:
         # https://docs.github.com/en/actions/security-guides/automatic-token-authentication#about-the-github_token-secret
