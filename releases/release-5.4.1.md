@@ -33,11 +33,11 @@ collecting statistics [#34256](https://github.com/pingcap/tidb/issues/34256)
 
 + TiKV
 
-    - Support monitoring multi-k8s in Grafana [#12104](https://github.com/tikv/tikv/issues/12104)
+    - Support displaying multiple Kubernetes clusters in the Grafana dashboard [#12104](https://github.com/tikv/tikv/issues/12104)
 
 + PD
 
-    - Support monitoring multi-k8s in Grafana [#4673](https://github.com/tikv/pd/issues/4673)
+    - Support displaying multiple Kubernetes clusters in the Grafana dashboard [#4673](https://github.com/tikv/pd/issues/4673)
 
 + TiFlash
 
