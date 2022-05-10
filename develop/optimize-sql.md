@@ -1,5 +1,6 @@
 ---
 title: SQL Performance Tuning
+summary: Introducing TiDB's SQL performance tuning scheme and analysis approach.
 ---
 
 # SQL Performance Tuning
@@ -10,8 +11,10 @@ This section introduce some common reasons for slow SQL statements, and you will
 
 You can use [`tiup demo` Import](/develop/bookshop-schema-design.md#method-1-through-tiup-demo-command-line) to prepare data:
 
+{{< copyable "shell-regular" >}}
+
 ```shell
-tiup demo bookshop prepare --books 1000000
+tiup demo bookshop prepare --host 127.0.0.1 --port 4000 --books 1000000
 ```
 
 Or [using the Import function of TiDB Cloud](/develop/bookshop-schema-design.md#method-2-through-the-tidb-cloud-import-function) to import the pre-prepared sample data.
@@ -21,6 +24,8 @@ Or [using the Import function of TiDB Cloud](/develop/bookshop-schema-design.md#
 The most common reason for slow SQL is that the `SELECT` statements that include full table scan and incorrect use of indexes.
 
 You'll get poor performance when retrieving a small number of rows from a large table based on a column that is not in the primary key or any secondary index:
+
+{{< copyable "sql" >}}
 
 ```sql
 SELECT * FROM books WHERE title = 'Marian Yost';
@@ -41,6 +46,8 @@ Time: 0.582s
 ```
 
 We can use `EXPLAIN` to see the execution plan of the SQL and see why the SQL is so slow:
+
+{{< copyable "sql" >}}
 
 ```sql
 EXPLAIN SELECT * FROM books WHERE title = 'Marian Yost';
@@ -64,11 +71,15 @@ For more information about the usage of `EXPLAIN`, see [EXPLAIN Walkthrough](htt
 
 To speed up this query, add a secondary index on `books.title`:
 
+{{< copyable "sql" >}}
+
 ```sql
 CREATE INDEX title_idx ON books (title);
 ```
 
 The query will now return much faster:
+
+{{< copyable "sql" >}}
 
 ```sql
 SELECT * FROM books WHERE title = 'Marian Yost';
@@ -89,6 +100,8 @@ Time: 0.007s
 ```
 
 To understand why the performance improved, use `EXPLAIN` to see the new execution plan:
+
+{{< copyable "sql" >}}
 
 ```sql
 EXPLAIN SELECT * FROM books WHERE title = 'Marian Yost';
@@ -116,6 +129,8 @@ If the index is covering index, which contains all the columns required by the S
 
 For example, in the following query, you only need to query the corresponding `price` based on `title`:
 
+{{< copyable "sql" >}}
+
 ```sql
 SELECT title, price FROM books WHERE title = 'Marian Yost';
 ```
@@ -136,6 +151,8 @@ Time: 0.007s
 
 Since the index `title_idx` only contains the `title` column data, TiDB still needs to scan the index data first, then query the `price` column data from the table row data.
 
+{{< copyable "sql" >}}
+
 ```sql
 EXPLAIN SELECT title, price FROM books WHERE title = 'Marian Yost';
 ```
@@ -152,15 +169,21 @@ EXPLAIN SELECT title, price FROM books WHERE title = 'Marian Yost';
 
 Let's drop the `title_idx` index and create a new covering index `title_price_idx`:
 
+{{< copyable "sql" >}}
+
 ```sql
 ALTER TABLE books DROP INDEX title_idx;
 ```
+
+{{< copyable "sql" >}}
 
 ```sql
 CREATE INDEX title_price_idx ON books (title, price);
 ```
 
 Now that the `price` data is stored in the index `title_price_idx`, so the following query only needs to scan the index data:
+
+{{< copyable "sql" >}}
 
 ```sql
 EXPLAIN SELECT title, price FROM books WHERE title = 'Marian Yost';
@@ -176,6 +199,8 @@ EXPLAIN SELECT title, price FROM books WHERE title = 'Marian Yost';
 ```
 
 Now this query will run faster:
+
+{{< copyable "sql" >}}
 
 ```sql
 SELECT title, price FROM books WHERE title = 'Marian Yost';
@@ -197,6 +222,8 @@ Time: 0.004s
 
 Since table `books` will be used in later examples, let's drop the `title_price_idx` index.
 
+{{< copyable "sql" >}}
+
 ```sql
 ALTER TABLE books DROP INDEX title_price_idx;
 ```
@@ -204,6 +231,8 @@ ALTER TABLE books DROP INDEX title_price_idx;
 ### Solution: Use Primary Index
 
 If the query uses the primary key to filter data, the query will run very fast. For example, the primary key of the table `books` is the column `id`, and then use the column `id` to query the data:
+
+{{< copyable "sql" >}}
 
 ```sql
 SELECT * FROM books WHERE id = 896;
@@ -220,6 +249,8 @@ Time: 0.004s
 ```
 
 We can use `EXPLAIN` to see the execution plan:
+
+{{< copyable "sql" >}}
 
 ```sql
 EXPLAIN SELECT * FROM books WHERE id = 896;
