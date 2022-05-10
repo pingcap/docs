@@ -86,8 +86,8 @@ collecting statistics [#34256](https://github.com/pingcap/tidb/issues/34256)
     - Fix a bug that `'0000-00-00 00:00:00'` can be inserted into a `datetime` column despite of the `NO_ZERO_DATE` sql_mode restriction [#34099](https://github.com/pingcap/tidb/issues/34099)
     - Fix the issue that the TiDB server might run out of memory when querying the `INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY` table. This issue can be triggered when you check slow queries on the Grafana dashboard. [#33893](https://github.com/pingcap/tidb/issues/33893)
     - Fix a bug that in the `NOWAIT` statement, a transaction being executed does not return immediately when encountering a lock [#32754](https://github.com/pingcap/tidb/issues/32754)
-    - Fix a bug that cause creating table with `GBK` charset and `gbk_bin` collation fail [#31308](Can't create GBK table with collation · Issue #31308 · pingcap/tidb)
-    - Fix bug that when `enable-new-charset` is `on`, creating a `GBK` charset table with collation fail with error "Unknown character set" [#31297](br restore failed with "Unknown character set: 'gbk'" if table CHARSET=gbk · Issue #31297 · pingcap/)
+    - Fix a bug that causes a failure when creating a table with the `GBK` charset and `gbk_bin` collation [#31308](https://github.com/pingcap/tidb/issues/31308)
+    - Fix a bug that when `enable-new-charset` is `on`, creating a `GBK` charset table with collation fails with the "Unknown character set" error [#31297](https://github.com/pingcap/tidb/issues/31297)
 
 + TiKV
 
