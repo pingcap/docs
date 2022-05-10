@@ -162,11 +162,11 @@ collecting statistics [#34256](https://github.com/pingcap/tidb/issues/34256)
         - (dup: release-6.0.0-dmr.md > Bug fixes> Tools> TiCDC)- Fix the TiCDC panic issue that might occur when `Canal-JSON` incorrectly handles `string` [#4635](https://github.com/pingcap/tiflow/issues/4635)
         - (dup: release-5.2.4.md > Bug fixes> Tools> TiCDC)- Fix a bug that a TiCDC node exits abnormally when a PD leader is killed [#4248](https://github.com/pingcap/tiflow/issues/4248)
         - (dup: release-5.2.4.md > Bug fixes> Tools> TiCDC)- Fix a bug that MySQL sink generates duplicated `replace` SQL statements when `batch-replace-enable` is disabled [#4501](https://github.com/pingcap/tiflow/issues/4501)
-        - Fix the DML construct error issue caused by `rename tables` DDL [#5059](https://github.com/pingcap/tiflow/issues/5059)
-        - Fix a rare likelihood that replication be stuck if the owner is changed when the new scheduler is enabled (disabled by default) [#4963](https://github.com/pingcap/tiflow/issues/4963)
-        - Fix ErrProcessorDuplicateOperations when new scheduler is enabled (disabled by default) [#4769](https://github.com/pingcap/tiflow/issues/4769)
-        - Fix the issue that ticdc failed to start when connects to multiple pd endpoints with tls-enabled and the 1st endpoint is not available [#4777](https://github.com/pingcap/tiflow/issues/4777)
-        - Fix checkpoint metrics when tables are being scheduled [#4714](https://github.com/pingcap/tiflow/issues/4714)
+        - Fix the DML construct error caused by the `rename tables` DDL [#5059](https://github.com/pingcap/tiflow/issues/5059)
+        - Fix the issue that in rare cases replication can be stuck if the owner is changed and the new scheduler is enabled (disabled by default) [#4963](https://github.com/pingcap/tiflow/issues/4963)
+        - Fix the issue that the error ErrProcessorDuplicateOperations is reported when the new scheduler is enabled (disabled by default) [#4769](https://github.com/pingcap/tiflow/issues/4769)
+        - Fix the issue that TiCDC fails to start when the first PD set in `--pd` is not available after TLS is enabled [#4777](https://github.com/pingcap/tiflow/issues/4777)
+        - Fix the issue that the checkpoint metrics is missing when tables are being scheduled [#4714](https://github.com/pingcap/tiflow/issues/4714)
 
     + TiDB Lightning
 
