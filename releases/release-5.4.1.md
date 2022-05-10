@@ -41,7 +41,7 @@ collecting statistics [#34256](https://github.com/pingcap/tidb/issues/34256)
 
 + TiFlash
 
-    - metrics: support multi-k8s in grafana dashboards [#4129](https://github.com/pingcap/tiflash/issues/4129)
+    - Support displaying multiple Kubernetes clusters in the Grafana dashboard [#4129](https://github.com/pingcap/tiflash/issues/4129)
 
 + Tools
 
@@ -126,22 +126,22 @@ collecting statistics [#34256](https://github.com/pingcap/tidb/issues/34256)
     - (dup: release-5.2.4.md > Bug fixes> TiFlash)- Fix the issue that the date format identifies `'\n'` as an invalid separator [#4036](https://github.com/pingcap/tiflash/issues/4036)
     - (dup: release-5.2.4.md > Bug fixes> TiFlash)- Fix the potential query error after adding columns under heavy read workload [#3967](https://github.com/pingcap/tiflash/issues/3967)
     - (dup: release-5.2.4.md > Bug fixes> TiFlash)- Fix the panic issue that occurs when the memory limit is enabled [#3902](https://github.com/pingcap/tiflash/issues/3902)
-    - fix potential data corruption for large indices [#4778](https://github.com/pingcap/tiflash/issues/4778)
-    - Fix potential query error when select on a table with many delete operations [#4747](https://github.com/pingcap/tiflash/issues/4747)
-    - Fix bug that TiFlash query will meet keepalive timeout error randomly. [#4192](https://github.com/pingcap/tiflash/issues/4192)
-    - Avoid leaving data on tiflash node which doesn't corresponding to any region range [#4414](https://github.com/pingcap/tiflash/issues/4414)
-    - Fix the problem that empty segments cannot be merged after gc [#4511](https://github.com/pingcap/tiflash/issues/4511)
+    - Fix potential data corruption in DTFiles [#4778](https://github.com/pingcap/tiflash/issues/4778)
+    - Fix potential query errors when selecting on a table with many delete operations [#4747](https://github.com/pingcap/tiflash/issues/4747)
+    - Fix a bug that TiFlash reports keepalive timeout errors randomly [#4192](https://github.com/pingcap/tiflash/issues/4192)
+    - Fix a bug that data not matching any region range remains on a TiFlash node [#4414](https://github.com/pingcap/tiflash/issues/4414)
+    - Fix a bug that empty segments cannot be merged after GC [#4511](https://github.com/pingcap/tiflash/issues/4511)
 
 + Tools
 
     + Backup & Restore (BR)
         - (dup: release-5.2.4.md > Bug fixes> Tools> Backup & Restore (BR))- Fix the issue that BR fails to back up RawKV [#32607](https://github.com/pingcap/tidb/issues/32607)
-        - Fix a bug of duplicate primary key when insert record into table after incremental restoration. [#33596](https://github.com/pingcap/tidb/issues/33596)
-        - Fix a bug that BR incremental restore return error by mistake caused by ddl job with empty query.[#33322](https://github.com/pingcap/tidb/issues/33322)
-        - Fix a bug that caused region unbalanced after restoring.[#31034](https://github.com/pingcap/tidb/issues/31034)
-        - Fix the issue that BR not retry enough when region not consistency during restoration.[#33419](https://github.com/pingcap/tidb/issues/33419)
-        - Fix a bug that caused BR panics sometime when merge small file enabled.[#33801](https://github.com/pingcap/tidb/issues/33801)
-        - Fix the issue that the schedulers won't be resumed after BR/Lightning exits abnormally. [#33546](https://github.com/pingcap/tidb/issues/33546)
+        - Fix duplicate primary keys when inserting a record into a table after incremental restoration [#33596](https://github.com/pingcap/tidb/issues/33596)
+        - Fix a bug that BR incremental restore returns errors mistakenly due to DDL jobs with empty query [#33322](https://github.com/pingcap/tidb/issues/33322)
+        - Fix the potential issue that Regions might be unevenly distributed after a restore operation is finished [#31034](https://github.com/pingcap/tidb/issues/31034)
+        - Fix the issue that BR does not retry enough when Regions are not consistent during restoration [#33419](https://github.com/pingcap/tidb/issues/33419)
+        - Fix BR panic that occurs occasionally when merging small file is enabled [#33801](https://github.com/pingcap/tidb/issues/33801)
+        - Fix the issue that schedulers do not resume after BR or TiDB Lightning exits abnormally [#33546](https://github.com/pingcap/tidb/issues/33546)
 
     + TiCDC
 
