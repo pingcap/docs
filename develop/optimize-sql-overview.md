@@ -1,5 +1,6 @@
 ---
 title: Optimize SQL Performance Overview
+summary: Provides an overview of SQL performance tuning for TiDB.
 ---
 
 # Optimize SQL Performance Overview
