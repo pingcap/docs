@@ -941,7 +941,7 @@ In `getPlayerAndLock` we use an annotation [@Lock](https://docs.spring.io/spring
 @Query(value = "SELECT * FROM player_jpa WHERE id = :id FOR UPDATE", nativeQuery = true)
 ```
 
-Use SQL: `FOR UPDATE` to add locks directly. You can also go deeper into the principles with the TiDB [SELECT document](/common/sql-statements/sql-statement-select).
+Use SQL: `FOR UPDATE` to add locks directly. You can also go deeper into the principles with the TiDB [SELECT document](/common/sql-statements/sql-statement-select.md).
 
 ### Logic Implementation
 
