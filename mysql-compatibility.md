@@ -38,7 +38,11 @@ However, some features of MySQL are not supported. This could be because there i
 + `CREATE TABLE tblName AS SELECT stmt` syntax [#4754](https://github.com/pingcap/tidb/issues/4754)
 + `CHECK TABLE` syntax [#4673](https://github.com/pingcap/tidb/issues/4673)
 + `CHECKSUM TABLE` syntax [#1895](https://github.com/pingcap/tidb/issues/1895)
++ `REPAIR TABLE` syntax
++ `OPTIMIZE TABLE` syntax
 + `GET_LOCK` and `RELEASE_LOCK` functions [#14994](https://github.com/pingcap/tidb/issues/14994)
++ `HANDLER` statement
++ `CREATE TABLESPACE` statement
 
 ## Features that are different from MySQL
 
@@ -136,6 +140,8 @@ For details, see [Compatibility between TiDB local temporary tables and MySQL te
 * To learn the details of the character sets and collations supported by TiDB, see [Character Set and Collation Overview](/character-set-and-collation.md).
 
 * To learn the MySQL compatibility of the GBK character set, see [GBK compatibility](/character-set-gbk.md#mysql-compatibility) .
+
+* TiDB inherits the character set used in the table as the national character set.
 
 ### Storage engines
 
