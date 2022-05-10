@@ -370,8 +370,6 @@ TiDB has a restrictions on the size of a single transaction, and this restrictio
 - The maximum single row record size is `120MB` (adjustable by tidb-server configuration item `performance.txn-entry-size-limit` for TiDB v5.0 and higher, and `6MB` for versions lower than TiDB v5.0).
 - The maximum single transaction size supported is `10GB` (TiDB v4.0 and higher can be adjusted via the tidb-server configuration item `performance.txn-total-size-limit`, and the maximum single transaction size supported for versions lower than TiDB v4.0 is `100MB`).
 
-另外注意，无论是大小限制还是行数限制，还要考虑事务执行过程中，TiDB 做编码以及事务额外 Key 的开销。在使用的时候，为了使性能达到最优，建议每 100 ～ 500 行写入一个事务。
-
 Also note that both the size restrictions and row restrictions should be considered, as well as the overhead of encoding and additional keys for the transaction during the transaction execution. When using TiDB, it is recommended to write one transaction every 100~500 rows for optimal performance.
 
 ## Auto-committed SELECT FOR UPDATE statements do NOT wait for locks

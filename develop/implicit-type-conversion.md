@@ -23,8 +23,6 @@ The rules for implicit type conversion in TiDB are as follows:
 
 ## Consequences caused by implicit type conversion
 
-隐式类型转换增强了人机交互的易用性，但在应用代码中，我们应尽量避免隐式类型转换出现，这是由于隐式类型转换会导致：
-
 Implicit type conversions increase the ease of human-computer interaction, but we should try to avoid them in application code, due to the fact that they can lead to:
 
 - Index invalidity
