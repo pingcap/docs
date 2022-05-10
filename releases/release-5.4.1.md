@@ -59,7 +59,6 @@ collecting statistics [#34256](https://github.com/pingcap/tidb/issues/34256)
 + TiDB
 
     - (dup: release-5.2.4.md > Bug fixes> TiDB)- Fix the issue that TiDB writes wrong data due to the wrong encoding of the `ENUM` or `SET` column [#32302](https://github.com/pingcap/tidb/issues/32302)
-    - (dup: release-6.0.0-dmr.md > Bug fixes> TiDB)- Fix a bug that causes the restore operation to fail when the encryption information is lost during backup retry [#32423](https://github.com/pingcap/tidb/issues/32423)
     - (dup: release-5.2.4.md > Bug fixes> TiDB)- Fix the issue that the Merge Join operator gets wrong results in certain cases [#33042](https://github.com/pingcap/tidb/issues/33042)
     - (dup: release-5.2.4.md > Bug fixes> TiDB)- Fix the issue that TiDB gets a wrong result when a correlated subquery returns a constant  [#32089](https://github.com/pingcap/tidb/issues/32089)
     - (dup: release-5.2.4.md > Bug fixes> TiDB)- Fix the issue that TiDB gets the wrong result when using TiFlash to scan tables with empty range although TiFlash does not support reading tables with empty range yet [#33083](https://github.com/pingcap/tidb/issues/33083)
@@ -143,6 +142,8 @@ collecting statistics [#34256](https://github.com/pingcap/tidb/issues/34256)
 + Tools
 
     + Backup & Restore (BR)
+    
+        - (dup: release-6.0.0-dmr.md > Bug fixes> Tools> Backup & Restore (BR))- Fix a bug that causes the restore operation to fail when the encryption information is lost during backup retry [#32423](https://github.com/pingcap/tidb/issues/32423)
         - (dup: release-5.2.4.md > Bug fixes> Tools> Backup & Restore (BR))- Fix the issue that BR fails to back up RawKV [#32607](https://github.com/pingcap/tidb/issues/32607)
         - Fix duplicate primary keys when inserting a record into a table after incremental restoration [#33596](https://github.com/pingcap/tidb/issues/33596)
         - Fix a bug that BR incremental restore returns errors mistakenly due to DDL jobs with empty query [#33322](https://github.com/pingcap/tidb/issues/33322)
