@@ -1,12 +1,6 @@
 ---
-<<<<<<< HEAD
-title: TiDB Lightning Backends
-summary: Learn the backends of TiDB Lightning.
-=======
 title: TiDB Lightning Import Mode
 summary: Learn how to choose different import modes of TiDB Lightning.
-aliases: ['/docs/dev/tidb-lightning/tidb-lightning-tidb-backend/','/docs/dev/reference/tools/tidb-lightning/tidb-backend/','/tidb/dev/tidb-lightning-tidb-backend','/docs/dev/loader-overview/','/docs/dev/reference/tools/loader/','/docs/dev/load-misuse-handling/','/docs/dev/reference/tools/error-case-handling/load-misuse-handling/','/tidb/dev/load-misuse-handling','/tidb/dev/loader-overview/']
->>>>>>> e25b4bb8a (lightning: remove importer backend (#8421))
 ---
 
 # TiDB Lightning Import Modes
