@@ -100,17 +100,17 @@ collecting statistics [#34256](https://github.com/pingcap/tidb/issues/34256)
     - (dup: release-5.2.4.md > Improvements> TiKV)- Reduce the TiCDC recovery time by reducing the number of the Regions that require the Resolve Locks step [#11993](https://github.com/tikv/tikv/issues/11993)
     - (dup: release-5.2.4.md > Bug fixes> TiKV)- Fix the panic issue caused by deleting snapshot files when the peer status is `Applying` [#11746](https://github.com/tikv/tikv/issues/11746)
     - (dup: release-5.2.4.md > Bug fixes> TiKV)- Fix the issue that destroying a peer might cause high latency [#10210](https://github.com/tikv/tikv/issues/10210)
-    - Fix panic invalid assertion in resource metering [#12234](https://github.com/tikv/tikv/issues/12234)
-    - Fix the issue that slow score calculation is inaccurate in corner cases [#12254](https://github.com/tikv/tikv/issues/12254)
-    - Fix the OOM issue caused by the resolved_ts module and add more metrics [#12159](https://github.com/tikv/tikv/issues/12159)
-    - Fix that successfully committed optimistic transactions may report false WriteConflict on network errors [#34066](https://github.com/pingcap/tidb/issues/34066)
-    - Fix panicking when replica read is enabled and there is a long time network condition [#12046](https://github.com/tikv/tikv/issues/12046)
+    - Fix the panic issue caused by invalid assertion in resource metering [#12234](https://github.com/tikv/tikv/issues/12234)
+    - Fix the issue that slow score calculation is inaccurate in some corner cases [#12254](https://github.com/tikv/tikv/issues/12254)
+    - Fix the OOM issue caused by the `resolved_ts` module and add more metrics [#12159](https://github.com/tikv/tikv/issues/12159)
+    - Fix the issue that successfully committed optimistic transactions may report the `Write Conflict` error when the network is poor [#34066](https://github.com/pingcap/tidb/issues/34066)
+    - Fix the TiKV panic issue that occurs when replica read is enabled on a poor network [#12046](https://github.com/tikv/tikv/issues/12046)
 
 + PD
 
     - (dup: release-6.0.0-dmr.md > Bug fixes> PD)- Fix the issue that `Duration` fields of `dr-autosync` cannot be dynamically configured [#4651](https://github.com/tikv/pd/issues/4651)
     - Fix the issue that when there exists a store with more than a big free disk (2T for example) no balance operator generated even when one or more stores with its disk full [#4805](https://github.com/tikv/pd/issues/4805)
-    - Fix the issue that in the metrics the label distribution has residual labels [#4825](https://github.com/tikv/pd/issues/4825)
+    - Fix the issue that the label distribution has residual labels in the metrics [#4825](https://github.com/tikv/pd/issues/4825)
 
 + TiFlash
 
