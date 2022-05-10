@@ -27,8 +27,9 @@ TiDB version: 5.4.1
 
     - (dup: release-6.0.0-dmr.md > Improvements> TiDB)- Support using the PointGet plan for queries that read the `_tidb_rowid` column [#31543](https://github.com/pingcap/tidb/issues/31543)
     - Add more debug information for `Apply` executor [#33887](https://github.com/pingcap/tidb/issues/33887)
-    - Improve the `TopN` pruning logic for analyze version 2 [#34256](https://github.com/pingcap/tidb/issues/34256)
-    - Support multi k8s in grafana dashboards [#32593](https://github.com/pingcap/tidb/issues/32593)
+    - Improve the `TopN` pruning logic for Analyze Version 2 used for 
+collecting statistics [#34256](https://github.com/pingcap/tidb/issues/34256)
+    - Support displaying multiple Kubernetes clusters in the Grafana dashboard [#32593](https://github.com/pingcap/tidb/issues/32593)
 
 + TiKV
 
@@ -68,17 +69,17 @@ TiDB version: 5.4.1
     - (dup: release-6.0.0-dmr.md > Bug fixes> TiDB)- Fix the `invalid transaction` error when executing a query using index lookup join [#30468](https://github.com/pingcap/tidb/issues/30468)
     - (dup: release-5.2.4.md > Bug fixes> TiDB)- Fix wrong results of deleting data of multiple tables using `left join` [#31321](https://github.com/pingcap/tidb/issues/31321)
     - (dup: release-5.2.4.md > Bug fixes> TiDB)- Fix a bug that TiDB may dispatch duplicate tasks to TiFlash [#32814](https://github.com/pingcap/tidb/issues/32814)
-    - Fix the issue that privilege-related operations may fail for upgraded clusters. [#33588](https://github.com/pingcap/tidb/issues/33588)
-    - fix bug #33509 [#33509](https://github.com/pingcap/tidb/issues/33509)
-    - fix a bug that compress function may report error [#33397](https://github.com/pingcap/tidb/issues/33397)
-    - Fix the problem of high use of reArrangeFallback cpu. [#30353](https://github.com/pingcap/tidb/issues/30353)
-    - Fix the issue that the table attributes don't support index and won't be updated when the partition changes [#33929](https://github.com/pingcap/tidb/issues/33929)
-    - Fix a bug that the initial `TopN` of the table's statistics may not be correctly sorted [#34216](https://github.com/pingcap/tidb/issues/34216)
-    - Fix reading from `INFORMATION_SCHEMA.ATTRIBUTES` return error by skipping the unidentifiable table attributes [#33665](https://github.com/pingcap/tidb/issues/33665)
-    - Fix a bug that even though `@@tidb_enable_parallel_apply` is set, the apply operator is not paralleled when order property exists [#34237](https://github.com/pingcap/tidb/issues/34237)
-    - Fix a bug that '0000-00-00 00:00:00' can be inserted into a datetime column in spite of the `NO_ZERO_DATE` sql_mode restriction [#34099](https://github.com/pingcap/tidb/issues/34099)
-    - Fix query `INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY` table cause TiDB server OOM, it can be triggered when checking slow query on the Dashboard [#33893](https://github.com/pingcap/tidb/issues/33893)
-    - Fix the bug that locking with NOWAIT does not return immediately when encountering a lock. [#32754](https://github.com/pingcap/tidb/issues/32754)
+    - Fix the issue that granting the `all` privilege might fail in clusters that are upgraded from v4.0 [#33588](https://github.com/pingcap/tidb/issues/33588)
+    - Fix the issue of session panic that occurs when executing the prepared statement after table schema change with the MySQL binary protocol [#33509](https://github.com/pingcap/tidb/issues/33509)
+    - Fix the issue that executing SQL statements that have the `compress()` expression with `tidb_enable_vectorized_expression` enabled will fail [#33397](https://github.com/pingcap/tidb/issues/33397)
+    - Fix the issue of high CPU usage by the `reArrangeFallback` function [#30353](https://github.com/pingcap/tidb/issues/30353)
+    - Fix the issue that the table attributes are not indexed when a new partition is added and the issue that the table range information are not updated when the partition changes [#33929](https://github.com/pingcap/tidb/issues/33929)
+    - Fix a bug that the `TopN` statistical information of a table during the initialization is not correctly sorted  [#34216](https://github.com/pingcap/tidb/issues/34216)
+    - Fix the error reporting that occurs when reading from the `INFORMATION_SCHEMA.ATTRIBUTES` table by skipping the unidentifiable table attributes [#33665](https://github.com/pingcap/tidb/issues/33665)
+    - Fix a bug that even if `@@tidb_enable_parallel_apply` is set, the `Apply` operator is not paralleled when an `order` property exists [#34237](https://github.com/pingcap/tidb/issues/34237)
+    - Fix a bug that `'0000-00-00 00:00:00'` can be inserted into a `datetime` column despite of the `NO_ZERO_DATE` sql_mode restriction [#34099](https://github.com/pingcap/tidb/issues/34099)
+    - Fix the issue that the TiDB server might run out of memory when querying the `INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY` table. This issue can be triggered when you check slow queries on the Grafana dashboard. [#33893](https://github.com/pingcap/tidb/issues/33893)
+    - Fix a bug that in the `NOWAIT` statement, a transaction being executed does not return immediately when encountering a lock [#32754](https://github.com/pingcap/tidb/issues/32754)
 
 + TiKV
 
