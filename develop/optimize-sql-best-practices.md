@@ -1,5 +1,6 @@
 ---
 title: Performance Tuning Best Practices
+summary: Introducing performance tuning best practices with TiDB.
 ---
 
 # Performance Tuning Best Practices
@@ -8,9 +9,13 @@ This section introduce some best practices for using TiDB databases.
 
 ## DML Best Practices
 
+The following describes the best practices involved when using DML with TiDB.
+
 ### Use multi-row statement
 
 When you need to modify multiple rows of table, it is recommended to use multi-row statement:
+
+{{< copyable "sql" >}}
 
 ```sql
 INSERT INTO t VALUES (1, 'a'), (2, 'b'), (3, 'c');
@@ -19,6 +24,8 @@ DELETE FROM t WHERE id IN (1, 2, 3);
 ```
 
 Not recommended to use multiple single-row statements:
+
+{{< copyable "sql" >}}
 
 ```sql
 INSERT INTO t VALUES (1, 'a');
@@ -36,6 +43,8 @@ When you need to execute a SQL statement multiple times, it is recommended to us
 
 <SimpleTab>
 <div label="Golang">
+
+{{< copyable "" >}}
 
 ```go
 func BatchInsert(db *sql.DB) error {
@@ -57,6 +66,8 @@ func BatchInsert(db *sql.DB) error {
 </div>
 
 <div label="Java">
+
+{{< copyable "" >}}
 
 ```java
 public void batchInsert(Connection connection) throws SQLException {
@@ -81,11 +92,15 @@ Do not execute the `PREPARE` statement repeatedly. Otherwise, the execution effi
 
 Don't always use `SELECT *` to return all columns data if you don't have to; the following query is inefficient
 
+{{< copyable "sql" >}}
+
 ```sql
 SELECT * FROM books WHERE title = 'Marian Yost';
 ```
 
 You should only query the columns you need, for example:
+
+{{< copyable "sql" >}}
 
 ```sql
 SELECT title, price FROM books WHERE title = 'Marian Yost';
@@ -103,11 +118,15 @@ When a large amount of data needs to be update, it is recommended to use [Batch 
 
 When you need to delete all data from a table, it is recommended to use the `TRUNCATE` statement:
 
+{{< copyable "sql" >}}
+
 ```sql
 TRUNCATE TABLE t;
 ```
 
 Not recommended to use `DELETE` full table data:
+
+{{< copyable "sql" >}}
 
 ```sql
 DELETE FROM t;
@@ -115,13 +134,15 @@ DELETE FROM t;
 
 ## DDL Best Practices
 
+The following describes the best practices involved when using TiDB's DDL.
+
 ### Primary Key Best Practices
 
 See [Primary Key Best Practices](/develop/create-table.md#best-practices-for-select-primary-key)
 
-### Index Best Practices
+## Index Best Practices
 
-See [Index Best Practice](/develop/index-best-practice.md)
+See [Index Best Practice](/develop/index-best-practice.md).
 
 ### Add Index Best Practices
 
@@ -132,12 +153,16 @@ TiDB supports the online `ADD INDEX` operation and does not block data reads and
 
 To reduce the impact on online business, the default speed of `ADD INDEX` is conservative. When the target column of `ADD INDEX` only involves read load or is not directly related to online load, the above variable can be appropriately increased to speed up `ADD INDEX`:
 
+{{< copyable "sql" >}}
+
 ```sql
 SET @@global.tidb_ddl_reorg_worker_cnt = 16;
 SET @@global.tidb_ddl_reorg_batch_size = 4096;
 ```
 
 When the target column of `ADD INDEX` is updated frequently (including `UPDATE`, `INSERT` and `DELETE`), increase the above variable will cause more write conflicts, resulting in impact online business load; at the same time, `ADD INDEX` may take a long time to complete due to constant retries. In this case, it is recommended to reduce the above variable to avoid write conflicts with online load:
+
+{{< copyable "sql" >}}
 
 ```sql
 SET @@global.tidb_ddl_reorg_worker_cnt = 4;
