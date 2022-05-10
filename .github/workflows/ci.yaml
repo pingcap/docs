@@ -3,16 +3,25 @@ name: ci
 on: [pull_request]
 
 jobs:
-
   pull:
     runs-on: ubuntu-latest
     steps:
-    - name: Check out
-      uses: actions/checkout@v2
-    - uses: actions/setup-node@v1
-      with:
-        node-version: '12'
-    - name: Verify internal links
-      run: ./scripts/verify-links.sh
-    - name: Verify internal link anchors
-      run: ./scripts/verify-link-anchors.sh
+      - name: Check out
+        uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "12"
+      - name: Verify internal links
+        run: ./scripts/verify-links.sh
+      - name: Verify internal links - cloud and common only
+        run: |
+          mkdir -p cloud_and_common
+          cp -r cloud cloud_and_common
+          cp -r common cloud_and_common
+          cp -r TOC-cloud.md cloud_and_common
+          cp -r media cloud_and_common
+          cp -r scripts cloud_and_common
+          cd cloud_and_common
+          ./scripts/verify-links.sh
+      - name: Verify internal link anchors
+        run: ./scripts/verify-link-anchors.sh
