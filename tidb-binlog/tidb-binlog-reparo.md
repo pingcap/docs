@@ -116,7 +116,7 @@ password = ""
 ### Start example
 
 ```
-./bin/reparo -config reparo.toml
+./reparo -config reparo.toml
 ```
 
 > **Note:**
