@@ -17,11 +17,11 @@ TiDB Lightning has two configuration classes: "global" and "task", and they have
 ### tidb-lightning global configuration
 
 [lightning]
-# The HTTP port for displaying the web interface, pulling Prometheus metrics, exposing debug data, and submitting import tasks (in server mode). Setting this to 0 disables the port.
+# The HTTP port for displaying the web interface, pulling Prometheus metrics, exposing debug data, and submitting import tasks (in server mode). Setting it to 0 disables the port.
 status-addr = ':8289'
 
-# Server mode. Defaults to false, which means the import task starts immediately after executing the command.
-# If this is set to true, after executing the command, TiDB Lightning waits until the user submits the import task in the web interface.
+# Server mode. Defaults to false, which means an import task starts immediately after you execute the command.
+# If this value is set to true, after you execute the command, TiDB Lightning waits until you submit an import task in the web interface.
 # See the "TiDB Lightning Web Interface" section for details.
 server-mode = false
 
