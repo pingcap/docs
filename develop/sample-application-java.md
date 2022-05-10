@@ -88,7 +88,7 @@ Applicable scenario: Use a local macOS or single-instance Linux environment to q
 >
 > - TiDB supports v5.2.0 and later version runs `tiup playground` on Apple M1 machines.
 > - When a playground is executed in this way, TiUP will clean up the original cluster data after the deployment test is completed, and a new cluster will be obtained after re-executing the command.
-> - If you want to persist the data, you can execute TiUp's `--tag` parameter: `tiup --tag <your-tag> playground ...`, refer to the [TiUP Reference](/tiup-reference.md#-t---tag) for details.
+> - If you want to persist the data, you can execute TiUp's `--tag` parameter: `tiup --tag <your-tag> playground ...`, refer to the [TiUP Reference](/tiup/tiup-reference.md#-t---tag) for details.
 
 ## Step 2. Get the code
 

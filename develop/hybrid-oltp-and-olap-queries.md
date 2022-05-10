@@ -141,7 +141,7 @@ The query results are as follows:
 
 ### Non-aggregate window function
 
-Besides, TiDB also provides us with some non-aggregated [window functions](/window-functions.md), with the help of which we can realize richer analysis queries.
+Besides, TiDB also provides us with some non-aggregated [window functions](/functions-and-operators/window-functions.md), with the help of which we can realize richer analysis queries.
 
 For example, in the previous [Pagination Query](/develop/paginate-results.md) chapter, we have introduced how to use the `row_number()` function to achieve efficient pagination batch processing.
 
@@ -253,11 +253,11 @@ SELECT * FROM acc;
 
 If you check the execution plan of the above SQL with the `EXPLAIN` statement, you will see both `cop[tiflash]` and `cop[tikv]` in the task column, which means that TiDB is scheduling both the row-store query engine and the column-store query engine to complete the query when it processes this query. It is important to note that since the tiflash and tikv storage engines are usually part of different compute nodes, the two query types are not affected by each other.
 
-You can learn more about how TiDB chooses to use TiFlash by reading the section [Reading TiFlash with TiDB](/use-tiflash.md#use-tidb-to-read-tiflash-replicas) as a query engine.
+You can learn more about how TiDB chooses to use TiFlash by reading the section [Reading TiFlash with TiDB](/tiflash/use-tiflash.md#use-tidb-to-read-tiflash-replicas) as a query engine.
 
 ## Read more
 
 - [Quick Start Guide for TiDB HTAP](/quick-start-with-htap.md)
 - [Explore HTAP](/explore-htap.md)
-- [Window Functions](/window-functions.md)
+- [Window Functions](/functions-and-operators/window-functions.md)
 - [Use TiFlash](/tiflash/use-tiflash.md)

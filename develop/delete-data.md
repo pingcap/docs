@@ -104,7 +104,7 @@ TiDB does not delete the data immediately after the `DELETE` statement runs, but
 
 GC is triggered once every 10 minutes in the default configuration, and each GC calculates a time point called **safe_point**, and any data before this time point will not be used again, so TiDB can safely clean up the data.
 
-You can read the introduction of [GC mechanism](/garbage-collection-overview).md to get more detailed description of GC.
+You can read the introduction of [GC mechanism](/garbage-collection-overview.md) to get more detailed description of GC.
 
 ### Update statistical information
 

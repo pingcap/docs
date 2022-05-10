@@ -342,7 +342,7 @@ ALTER TABLE {table_name} SET TIFLASH REPLICA {count};
 | `{table_name}` |                  Table name                  |
 |   `{count}`    | The number of synchronized copies, if 0, the synchronized copies are deleted |
 
-**TiFlash** will then synchronize the table, and when queried, TiDB will automatically consider using TiKV (row-oriented) or TiFlash (column-oriented) for data queries based on cost optimization. Of course, in addition to the automatic approach, you can also directly specify whether the query uses a **TiFlash** copy, see [Use TiDB to read TiFlash replicas](/use-tiflash.md#use-tidb-to-read-tiflash-replicas) for how to use it.
+**TiFlash** will then synchronize the table, and when queried, TiDB will automatically consider using TiKV (row-oriented) or TiFlash (column-oriented) for data queries based on cost optimization. Of course, in addition to the automatic approach, you can also directly specify whether the query uses a **TiFlash** copy, see [Use TiDB to read TiFlash replicas](/tiflash/use-tiflash.md#use-tidb-to-read-tiflash-replicas) for how to use it.
 
 #### Using HTAP capabilities example
 

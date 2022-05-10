@@ -85,7 +85,7 @@ Applicable scenario: Use a local Mac or single-instance Linux environment to qui
 >
 > - TiDB supports v5.2.0 and later version runs `tiup playground` on Apple M1 machines.
 > - When a playground is executed in this way, TiUP will clean up the original cluster data after the deployment test is completed, and a new cluster will be obtained after re-executing the command.
-> - If you want to persist the data, you can execute TiUp's `--tag` parameter: `tiup --tag <your-tag> playground ...`, refer to the [TiUP Reference](/tiup-reference.md#-t---tag) for details.
+> - If you want to persist the data, you can execute TiUp's `--tag` parameter: `tiup --tag <your-tag> playground ...`, refer to the [TiUP Reference](/tiup/tiup-reference.md#-t---tag) for details.
 
 ## Step 2. Install JDK
 
@@ -881,7 +881,7 @@ We can see that the entity class has several annotations that give Hibernate add
 
 #### Repository
 
-To abstract the database layer, Spring applications use the [Repository](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories) interface, or a sub-interface of the `Repository`. This interface maps to a database object, such as a table. JPA will implement some methods for us, such as [INSERT](/common/sql-statements/sql-statement-insert.md), or [SELECT](/common/sql-statements/sql-statement-select), etc.
+To abstract the database layer, Spring applications use the [Repository](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories) interface, or a sub-interface of the `Repository`. This interface maps to a database object, such as a table. JPA will implement some methods for us, such as [INSERT](/common/sql-statements/sql-statement-insert.md), or [SELECT](/common/sql-statements/sql-statement-select.md), etc.
 
 {{< copyable "" >}}
 

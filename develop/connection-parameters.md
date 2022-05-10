@@ -6,8 +6,8 @@ title: Connection Pools and Connection Parameter
 
 > **Note:**
 >
-> - Connection Pooling Parameters: **Configure the number of connections**, **Probe configuration** of two sections from [Best Practices for Developing Java Applications with TiDB - Connection pool](/java-app-best-practices.md#connection-pool)
-> - Connection Parameters from [Best Practices for Developing Java Applications with TiDB - JDBC](/java-app-best-practices.md#jdbc)
+> - Connection Pooling Parameters: **Configure the number of connections**, **Probe configuration** of two sections from [Best Practices for Developing Java Applications with TiDB - Connection pool](/best-practices/java-app-best-practices.md#connection-pool)
+> - Connection Parameters from [Best Practices for Developing Java Applications with TiDB - JDBC](best-practices/java-app-best-practices.md#jdbc)
 
 ## Connection pool
 

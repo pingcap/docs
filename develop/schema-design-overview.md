@@ -111,4 +111,4 @@ These are some of the common object size restrictions, please refer to [tidb lim
 
 ### Number of rows
 
-TiDB can support **any** number of rows by adding nodes in the cluster, see the [tidb best practices](/tidb-best-practices.md) for the mechanics.
+TiDB can support **any** number of rows by adding nodes in the cluster, see the [tidb best practices](/best-practices/tidb-best-practices.md) for the mechanics.

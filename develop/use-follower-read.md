@@ -12,7 +12,7 @@ By default, TiDB will only read and write data on the leader of the same Region.
 
 ## When to use
 
-You can visually analyze whether your application has hotspot regions on the [TiDB Dashboard Key Visualizer Page](/dashboard-key-visualizer.md). You can check whether there is a read hotspot region by selecting the "metrics selection box" to `Read (bytes)` or `Read (keys)`.
+You can visually analyze whether your application has hotspot regions on the [TiDB Dashboard Key Visualizer Page](/dashboard/dashboard-key-visualizer.md). You can check whether there is a read hotspot region by selecting the "metrics selection box" to `Read (bytes)` or `Read (keys)`.
 
 If you find that there is indeed a hotspot problem, you can avoid it from the application level by reading the chapter [TiDB Hotspot Problem Handling](https://docs.pingcap.com/zh/tidb/stable/troubleshoot-hot-spot-issues) to troubleshoot it one by one.
 
@@ -123,4 +123,4 @@ public static class AuthorDAO {
 
 - [Follower Read](/follower-read.md)
 - [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md)
-- [TiDB Dashboard - Key Visualizer Page](/dashboard-key-visualizer.md)
+- [TiDB Dashboard - Key Visualizer Page](/dashboard/dashboard-key-visualizer.md)

@@ -269,4 +269,4 @@ The query results are as follows:
 71 rows in set (0.00 sec)
 ```
 
-In addition to the `COUNT` function, TiDB also supports many useful aggregate functions. You can do this by checking the [Aggregate (GROUP BY) Functions](/aggregate-group-by-functions.md) section to learn more.
+In addition to the `COUNT` function, TiDB also supports many useful aggregate functions. You can do this by checking the [Aggregate (GROUP BY) Functions](/functions-and-operators/aggregate-group-by-functions.md) section to learn more.

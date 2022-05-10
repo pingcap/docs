@@ -50,5 +50,5 @@ This chapter will introduce some generalized development specifications for usin
 - If the application uses **Multi Statements** to execute SQL, i.e. multiple SQLs are joined with semicolons and sent to the client for execution at once, TiDB will only return the result of the first SQL execution.
 - When using expressions, check if they support compute push-down to the storage layer (TiKV, TiFlash), otherwise you should expect more memory consumption and even OOM at the TiDB layer. the list of compute push-down to the storage layer is as follows:
     - [TiFlash - Supported push-down calculations](/tiflash/use-tiflash.md#supported-push-down-calculations).
-    - [TiKV - List of Expressions for Pushdown](/expressions-pushed-down.md).
+    - [TiKV - List of Expressions for Pushdown](/functions-and-operators/expressions-pushed-down.md).
     - [Predicate push down](/predicate-push-down.md).

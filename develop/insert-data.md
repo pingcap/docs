@@ -136,7 +136,7 @@ For a complete example in Java, see:
 If you need to quickly import a large amount of data into a TiDB cluster, the best way to do it is not to use the `INSERT` statement, which is not the most efficient way and requires you to handle exceptions and other issues on your own. We recommend using a range of tools provided by **PingCAP** for data migration.
 
 - Data export tool: [Dumpling](/dumpling-overview.md). You can export MySQL or TiDB data to local or Amazon S3.
-- Data import tool: [TiDB Lightning](/tidb-lightning-overview.md). You can import **Dumpling** exported data, a **CSV** file, or [Migrate Data from Amazon Aurora to TiDB](/migrate-aurora-to-tidb.md). It also supports reading data from a local disk or [Amazon S3 cloud disk](/br/backup-and-restore-storages.md).
+- Data import tool: [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md). You can import **Dumpling** exported data, a **CSV** file, or [Migrate Data from Amazon Aurora to TiDB](/migrate-aurora-to-tidb.md). It also supports reading data from a local disk or [Amazon S3 cloud disk](/br/backup-and-restore-storages.md).
 - Data synchronization tool: [TiDB Data Migration](/dm/dm-overview.md). You can synchronize MySQL, MariaDB, and Amazon Aurora databases to TiDB. It also supports merging and migrating the original sharded instances and tables from the source databases.
 - Data backup restore tool: [Backup & Restore (BR)](/br/backup-and-restore-tool.md). Compared to **Dumpling**, **BR** is more suitable for **_big data_** scenario.
 

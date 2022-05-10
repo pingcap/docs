@@ -5,7 +5,7 @@ summary: The ways, best practices and examples for creating secondary indexes.
 
 # Create Secondary Indexes
 
-Indexes are logical objects in a cluster that help TiDB cluster queries find data more efficiently. When you create a secondary index, TiDB creates a reference to each row in the table and sorts it by the selected column. More information about secondary indexes can be found in [TiDB Best Practices](/tidb-best-practices.md#secondary-index).
+Indexes are logical objects in a cluster that help TiDB cluster queries find data more efficiently. When you create a secondary index, TiDB creates a reference to each row in the table and sorts it by the selected column. More information about secondary indexes can be found in [TiDB Best Practices](/best-practices/tidb-best-practices.md#secondary-index).
 
 This page provides a best practice guide for creating secondary indexes and provides an example of a TiDB-based [bookshop](/develop/bookshop-schema-design.md) database.
 

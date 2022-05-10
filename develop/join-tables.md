@@ -238,7 +238,7 @@ Hints related to join algorithm:
 - [MERGE_JOIN(t1_name [, tl_name ...])](/optimizer-hints.md#merge_joint1_name--tl_name-)
 - [INL_JOIN(t1_name [, tl_name ...])](/optimizer-hints.md#inl_joint1_name--tl_name-)
 - [INL_HASH_JOIN(t1_name [, tl_name ...])](/optimizer-hints.md#inl_hash_join)
-- [HASH_JOIN(t1_name [, tl_name ...])](/optimizer-hints.mdhash_joint1_name--tl_name-)
+- [HASH_JOIN(t1_name [, tl_name ...])](/optimizer-hints.md#hash_joint1_name--tl_name-)
 
 ## Join order
 
