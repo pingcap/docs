@@ -546,7 +546,6 @@
   - [High Availability FAQs](/faq/high-availability-faq.md)
   - [High Reliability FAQs](/faq/high-reliability-faq.md)
   - [Migration FAQs](/faq/migration-tidb-faq.md)
-- [Glossary](/glossary.md)
 - Release Notes
   - [All Releases](/releases/release-notes.md)
   - v5.1
@@ -684,3 +683,4 @@
     - [RC3](/releases/release-rc.3.md)
     - [RC2](/releases/release-rc.2.md)
     - [RC1](/releases/release-rc.1.md)
+- [Glossary](/glossary.md)
