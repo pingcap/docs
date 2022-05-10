@@ -23,7 +23,7 @@ Before reading this page, you need to prepare the following:
 
 [Table](/develop/schema-design-overview.md#table) is a logical object. It would stores data sent from the persistence layer of an application or from other SQL. Tables saved data records in the form of rows and columns.
 
-To create a table, use the [CREATE TABLE](https://docs.pingcap.com/tidb/stable/sql-statement-create-table) statement and follow the best practices:
+To create a table, use the [CREATE TABLE](/common/sql-statements/sql-statement-create-table.md) statement and follow the best practices:
 
 - [Naming a table](#naming-a-table)
 - [Defining columns](#defining-columns)
@@ -88,14 +88,14 @@ Column definitions typically use the following form.
 |      Parameter      |                      Description                      |
 | :----------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------: |
 |     `{column_name}`      |                                                                               Column name                                                                                |
-|      `{data_type}`       | Column [data type](https://docs.pingcap.com/tidb/stable/basic-features#data-types-functions-and-operators) |
-| `{column_qualification}` | Column qualifications, such as **column-level constraints** or [generated column (experimental function)](https://docs.pingcap.com/tidb/stable/generated-columns) clauses |
+|      `{data_type}`       | Column [data type](/basic-features.md#data-types-functions-and-operators) |
+| `{column_qualification}` | Column qualifications, such as **column-level constraints** or [generated column (experimental function)](/generated-columns.md) clauses |
 
 #### Best Practices for defining columns
 
 There are some best practices to follow when defining columns:
 
-- Check the [data types](https://docs.pingcap.com/tidb/stable/basic-features#data-types-functions-and-operators) of the supporting columns and organize your data according to the data type restrictions. Select the appropriate type for the data you plan to be present in the column.
+- Check the [data types](/basic-features.md#data-types-functions-and-operators) of the supporting columns and organize your data according to the data type restrictions. Select the appropriate type for the data you plan to be present in the column.
 - Check the [best practices](#best-practices-for-select-primary-key) and [examples](#select-primary-key-example) for selecting primary keys and decide whether to use primary key columns.
 - Check [best practices](#best-practices-for-select-clustered-index) and [examples](#select-clustered-index-example) for selecting clustered indexes and decide whether to specify **clustered indexes**.
 - Check [adding column constraints](#add-column-constraints) and decide whether to add constraints to the columns.
@@ -115,13 +115,13 @@ CREATE TABLE `bookshop`.`users` (
 );
 ```
 
-In this case, we define a field with the name `id` and the type [bigint](https://docs.pingcap.com/tidb/stable/data-type-numeric#bigint-type). This is used to represent a unique user identifier. This means that all user identifiers should be of type `bigint`.
+In this case, we define a field with the name `id` and the type [bigint](/data-type-numeric.md#bigint-type). This is used to represent a unique user identifier. This means that all user identifiers should be of type `bigint`.
 
-After that, we define a field named `nickname`, of type [varchar](https://docs.pingcap.com/tidb/stable/data-type-string#varchar-type), and not longer than 100 characters. This means that the `nicknames` of the users used `varchar` type and were not longer than `100` characters.
+After that, we define a field named `nickname`, of type [varchar](/data-type-string.md#varchar-type), and not longer than 100 characters. This means that the `nicknames` of the users used `varchar` type and were not longer than `100` characters.
 
-Finally, we added a field named `balance`, type is [decimal](https://docs.pingcap.com/tidb/stable/data-type-numeric#decimal-type), with a **precision** of `15` and a **scale** of `2`. To briefly explain the meaning of **precision** and **scale**, **precision** represents the total number of digits in the field, and **scale** represents the number of decimal places. For example: `decimal(5,2)`, i.e., with a precision of `5` and a scale of `2`, the range is `-999.99` to `999.99`. `decimal(6,1)`, i.e., with a precision of `6` and a scale of `1`, the range is `-99999.9` to `99999.9`. **decimal** is a [fixed-point types](https://docs.pingcap.com/tidb/stable/data-type-numeric#fixed-point-types), which can be used to store numbers accurately, in scenarios where accurate numbers are needed (e.g., user property-related), please **make sure** to use the **decimal** type.
+Finally, we added a field named `balance`, type is [decimal](/data-type-numeric.md#decimal-type), with a **precision** of `15` and a **scale** of `2`. To briefly explain the meaning of **precision** and **scale**, **precision** represents the total number of digits in the field, and **scale** represents the number of decimal places. For example: `decimal(5,2)`, i.e., with a precision of `5` and a scale of `2`, the range is `-999.99` to `999.99`. `decimal(6,1)`, i.e., with a precision of `6` and a scale of `1`, the range is `-99999.9` to `99999.9`. **decimal** is a [fixed-point types](/data-type-numeric.md#fixed-point-types), which can be used to store numbers accurately, in scenarios where accurate numbers are needed (e.g., user property-related), please **make sure** to use the **decimal** type.
 
-TiDB supports many other column data types, including [Integer types](https://docs.pingcap.com/tidb/stable/data-type-numeric#integer-types), [Floating-point types](https://docs.pingcap.com/tidb/stable/data-type-numeric#floating-point-types), [Fixed-point types](https://docs.pingcap.com/tidb/stable/data-type-numeric#fixed-point-types), [Date and time types](https://docs.pingcap.com/tidb/stable/data-type-date-and-time), [Enum type](https://docs.pingcap.com/tidb/stable/data-type-string#enum-type), etc. You can refer to the supported column [data types](https://docs.pingcap.com/tidb/stable/basic-features#data-types-functions-and-operators) and use the **data types** that match the data you want to save in the database.
+TiDB supports many other column data types, including [Integer types](/data-type-numeric.md#integer-types), [Floating-point types](/data-type-numeric.md#floating-point-types), [Fixed-point types](/data-type-numeric.md#fixed-point-types), [Date and time types](/data-type-date-and-time.md), [Enum type](/data-type-string.md#enum-type), etc. You can refer to the supported column [data types](/basic-features.md#data-types-functions-and-operators) and use the **data types** that match the data you want to save in the database.
 
 Let's increase the complexity a little bit, for example, we will choose to define a `books` table which will be the core of the `bookshop` data. It contains fields for the book's id, title, type (e.g., Magazine, Novel, Life, Arts, etc.), stock, price, and publication date.
 
@@ -140,13 +140,13 @@ CREATE TABLE `bookshop`.`books` (
 
 This table contains more data types than the `users` table.
 
-- [int](https://docs.pingcap.com/tidb/stable/data-type-numeric#integer-types): We recommend using the right size type to aviod using too much hard disk or even affecting performance worse (too large a type range) or data overflow (too small a type range).
-- [datetime](https://docs.pingcap.com/tidb/stable/data-type-date-and-time): The **datetime** type can be used to store time values.
-- [enum](https://docs.pingcap.com/tidb/stable/data-type-string#enum-type): Enum type can be used to save a limited selection of values.
+- [int](/data-type-numeric.md#integer-types): We recommend using the right size type to aviod using too much hard disk or even affecting performance worse (too large a type range) or data overflow (too small a type range).
+- [datetime](/data-type-date-and-time.md): The **datetime** type can be used to store time values.
+- [enum](/data-type-string.md#enum-type): Enum type can be used to save a limited selection of values.
 
 ### Select primary key
 
-[Primary key](https://docs.pingcap.com/tidb/stable/constraints#primary-key) is a column or group of columns, and this value, which is a combination of all **primary key columns**, is a unique identifier for a row of data.
+[Primary key](/constraints.md#primary-key) is a column or group of columns, and this value, which is a combination of all **primary key columns**, is a unique identifier for a row of data.
 
 > **Note:**
 >
@@ -154,13 +154,13 @@ This table contains more data types than the `users` table.
 >
 > However, in TiDB, the definition of **Primary Key** is: unique, not null. But the primary key is not guaranteed to be a **clustered index**. Instead, another set of keywords `CLUSTERED` / `NONCLUSTERED` additionally controls whether the **Primary Key** is a **Clustered Index**, and if not specified, is affected by the system variable `@@global.tidb_enable_clustered_index`, as described in [this document](https://docs.pingcap.com/zh/tidb/stable/clustered-indexes).
 
-The **primary key** is defined in the `CREATE TABLE` statement. The [primary key constraint](https://docs.pingcap.com/tidb/stable/constraints#primary-key) requires that all constrained columns contain only non-NULL values.
+The **primary key** is defined in the `CREATE TABLE` statement. The [primary key constraint](/constraints.md#primary-key) requires that all constrained columns contain only non-NULL values.
 
-A table can create without **primary key**, and the **primary key** can be a non-integer type. But then TiDB creates an `_tidb_rowid` as an **implicit primary key**. The implicit primary key `_tidb_rowid`, because of its monotonically increasing nature, may cause write hotspots in write-intensive scenarios. So if your application is write-intensive, consider sharding with the [SHARD_ROW_ID_BITS](https://docs.pingcap.com/zh/tidb/stable/shard-row-id-bits) and [PRE_SPLIT_REGIONS](https://docs.pingcap.com/tidb/stable/sql-statement-split-region#pre_split_regions) parameters. However, this may lead to read amplification, so please make your own trade-off.
+A table can create without **primary key**, and the **primary key** can be a non-integer type. But then TiDB creates an `_tidb_rowid` as an **implicit primary key**. The implicit primary key `_tidb_rowid`, because of its monotonically increasing nature, may cause write hotspots in write-intensive scenarios. So if your application is write-intensive, consider sharding with the [SHARD_ROW_ID_BITS](https://docs.pingcap.com/zh/tidb/stable/shard-row-id-bits) and [PRE_SPLIT_REGIONS](/common/sql-statements/sql-statement-split-region.md#pre_split_regions) parameters. However, this may lead to read amplification, so please make your own trade-off.
 
-When the **primary key** of a table is [integer types](https://docs.pingcap.com/tidb/stable/data-type-numeric#integer-types) and `AUTO_INCREMENT` is used, hotspots cannot avoid by using `SHARD_ROW_ID_BITS`. If you need to avoid hotspots and do not need to use the primary key continuous and incremental, you can use [AUTO_RANDOM](https://docs.pingcap.com/tidb/stable/auto-random) instead of `AUTO_INCREMENT` to eliminate row ID continuous.
+When the **primary key** of a table is [integer types](/data-type-numeric.md#integer-types) and `AUTO_INCREMENT` is used, hotspots cannot avoid by using `SHARD_ROW_ID_BITS`. If you need to avoid hotspots and do not need to use the primary key continuous and incremental, you can use [AUTO_RANDOM](/auto-random.md) instead of `AUTO_INCREMENT` to eliminate row ID continuous.
 
-For more information on how to handle hotspot issues, please refer to [Troubleshoot Hotspot Issues](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues).
+For more information on how to handle hotspot issues, please refer to [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md).
 
 #### Best Practices for select primary key
 
@@ -172,7 +172,7 @@ There are some best practices to follow when selecting primary key columns in Ti
 - It is not recommended to use complex data types.
 - The fields need to **JOIN** , ensure data types absolute consistency, to avoid implicit conversion.
 - Avoid defining **primary keys** on a single monotonic data column. If you use a single monotonic data column (e.g., a column of `AUTO_INCREMENT`) to define the **primary key**, there is a risk of a negative impact on write performance. If possible, use `AUTO_RANDOM` instead of `AUTO_INCREMENT` (this loses the continuous and incremental nature of the primary key).
-- If you **_must_** create an index on a single monotonic data column at write-intensive scenarios. Instead of defining this monotonic data column as the **primary key**. You can use `AUTO_RANDOM` to create the **primary key** for that table, or use [SHARD_ROW_ID_BITS](https://docs.pingcap.com/tidb/stable/shard-row-id-bits) and [PRE_SPLIT_REGIONS](https://docs.pingcap.com/tidb/stable/sql-statement-split-region#pre_split_regions) to shard `_tidb_rowid`.
+- If you **_must_** create an index on a single monotonic data column at write-intensive scenarios. Instead of defining this monotonic data column as the **primary key**. You can use `AUTO_RANDOM` to create the **primary key** for that table, or use [SHARD_ROW_ID_BITS](/shard-row-id-bits.md) and [PRE_SPLIT_REGIONS](/common/sql-statements/sql-statement-split-region.md#pre_split_regions) to shard `_tidb_rowid`.
 
 #### Select primary key example
 
@@ -191,7 +191,7 @@ CREATE TABLE `bookshop`.`users` (
 
 ### Clustered or not
 
-TiDB supports the [clustered index](https://docs.pingcap.com/tidb/stable/clustered-indexes) feature since v5.0. This feature controls how data is stored in tables containing primary keys. It provides TiDB the ability to organize tables in a way that can improve the performance of certain queries.
+TiDB supports the [clustered index](/clustered-indexes.md) feature since v5.0. This feature controls how data is stored in tables containing primary keys. It provides TiDB the ability to organize tables in a way that can improve the performance of certain queries.
 
 The term clustered in this context refers to the organization of how data is stored and not a group of database servers working together. Some database management systems refer to clustered indexes as index-organized tables (IOT).
 
@@ -223,7 +223,7 @@ The following are some best practices to follow when selecting **clustered index
     - There might be write hotspot issues when inserting a large number of primary keys with close values, please follow the [best practices for select primary key](#best-practices-for-select-primary-key).
     - The table data takes up more storage space if the data type of the primary key is larger than 64 bits, especially when there are multiple secondary indexes.
 
-- Explicitly specifying whether to use clustered indexes instead of using the system variable `@@global.tidb_enable_clustered_index` and the configuration `alter-primary-key` control the [default behavior of whether to use clustered indexes](https://docs.pingcap.com/tidb/stable/clustered-indexes#create-a-table-with-clustered-indexes).
+- Explicitly specifying whether to use clustered indexes instead of using the system variable `@@global.tidb_enable_clustered_index` and the configuration `alter-primary-key` control the [default behavior of whether to use clustered indexes](/clustered-indexes.md#create-a-table-with-clustered-indexes).
 
 #### Select clustered index example
 
@@ -243,13 +243,13 @@ CREATE TABLE `bookshop`.`ratings` (
 
 ### Add column constraints
 
-In addition to [primary key constraints](#select-primary-key), TiDB also supports other **column constraints** such as [NOT NULL](https://docs.pingcap.com/tidb/stable/constraints#not-null) constraint, [UNIQUE KEY](https://docs.pingcap.com/tidb/stable/constraints#unique-key) constraint, `DEFAULT`, etc. For complete constraints, please check TiDB [Constraints](https://docs.pingcap.com/tidb/stable/constraints) documentation.
+In addition to [primary key constraints](#select-primary-key), TiDB also supports other **column constraints** such as [NOT NULL](/constraints.md#not-null) constraint, [UNIQUE KEY](/constraints.md#unique-key) constraint, `DEFAULT`, etc. For complete constraints, please check TiDB [Constraints](/constraints.md) documentation.
 
 #### Default value
 
 To set a default value on a column, use the `DEFAULT` constraint. The default value will allow you to insert data without specifying a value for each column.
 
-You can use `DEFAULT` together with [supported SQL functions](https://docs.pingcap.com/tidb/stable/basic-features#data-types-functions-and-operators) to move the calculation of defaults out of the application layer, thus saving application layer resources (of course, the resources consumed by the calculation don't just disappear into thin air, they are just moved to the TiDB cluster). Commonly, we want to implement data insertion with the default time populated by default. Again using `rating` as an example, the following statement can be used:
+You can use `DEFAULT` together with [supported SQL functions](/basic-features.md#data-types-functions-and-operators) to move the calculation of defaults out of the application layer, thus saving application layer resources (of course, the resources consumed by the calculation don't just disappear into thin air, they are just moved to the TiDB cluster). Commonly, we want to implement data insertion with the default time populated by default. Again using `rating` as an example, the following statement can be used:
 
 {{< copyable "sql" >}}
 
@@ -317,7 +317,7 @@ CREATE TABLE `bookshop`.`users` (
 
 > **Note:**
 >
-> The steps provided in this guide is **_ONLY_** for quick start in the test environment. For production environments, [explore HTAP](https://docs.pingcap.com/tidb/stable/explore-htap) is recommended.
+> The steps provided in this guide is **_ONLY_** for quick start in the test environment. For production environments, [explore HTAP](/explore-htap.md) is recommended.
 
 Suppose our `bookshop` application has a requirement to perform OLAP analysis on the `ratings` table of user ratings, for example, we need to query: **whether the rating of a book has a significant correlation with the time of the rating**, in order to analyze whether the user's rating of the book is objective or not. Then we are asked to query the `score` and `rated_at` fields of the entire `ratings` table. This is a very resource-intensive operation for a normal OLTP-only database. Or we can use some ETL or other data synchronization tools to export the data from OLTP database to a dedicated OLAP database for analysis.
 
@@ -325,7 +325,7 @@ In this scenario, TiDB is an ideal one-stop database solution. TiDB is a **HTAP 
 
 #### Synchronized column-oriented data
 
-Currently, TiDB supports two data analysis engines, **TiFlash** and **TiSpark**, and for large data scenarios (100 T), **TiFlash MPP** is recommended as the primary solution for HTAP, and **TiSpark** as a complementary solution. To learn more about TiDB HTAP capabilities, please refer to the following articles: [Quick Start Guide for TiDB HTAP](https://docs.pingcap.com/tidb/stable/quick-start-with-htap) and [Explore HTAP](https://docs.pingcap.com/tidb/stable/explore-htap).
+Currently, TiDB supports two data analysis engines, **TiFlash** and **TiSpark**, and for large data scenarios (100 T), **TiFlash MPP** is recommended as the primary solution for HTAP, and **TiSpark** as a complementary solution. To learn more about TiDB HTAP capabilities, please refer to the following articles: [Quick Start Guide for TiDB HTAP](/quick-start-with-htap.md) and [Explore HTAP](/explore-htap.md).
 
 We have chosen [TiFlash](https://docs.pingcap.com/zh/tidb/stable/tiflash-overview) as the data analysis engine for our `bookshop` database.
 
@@ -342,7 +342,7 @@ ALTER TABLE {table_name} SET TIFLASH REPLICA {count};
 | `{table_name}` |                  Table name                  |
 |   `{count}`    | The number of synchronized copies, if 0, the synchronized copies are deleted |
 
-**TiFlash** will then synchronize the table, and when queried, TiDB will automatically consider using TiKV (row-oriented) or TiFlash (column-oriented) for data queries based on cost optimization. Of course, in addition to the automatic approach, you can also directly specify whether the query uses a **TiFlash** copy, see [Use TiDB to read TiFlash replicas](https://docs.pingcap.com/tidb/stable/use-tiflash#use-tidb-to-read-tiflash-replicas) for how to use it.
+**TiFlash** will then synchronize the table, and when queried, TiDB will automatically consider using TiKV (row-oriented) or TiFlash (column-oriented) for data queries based on cost optimization. Of course, in addition to the automatic approach, you can also directly specify whether the query uses a **TiFlash** copy, see [Use TiDB to read TiFlash replicas](/use-tiflash.md#use-tidb-to-read-tiflash-replicas) for how to use it.
 
 #### Using HTAP capabilities example
 
@@ -366,7 +366,7 @@ Subsequent queries can be carried out normally.
 SELECT HOUR(`rated_at`), AVG(`score`) FROM `bookshop`.`ratings` GROUP BY HOUR(`rated_at`);
 ```
 
-We can also use the [EXPLAIN ANALYZE](https://docs.pingcap.com/tidb/stable/sql-statement-explain-analyze) statement to see if this statement is using the **TiFlash** here:
+We can also use the [EXPLAIN ANALYZE](/common/sql-statements/sql-statement-explain-analyze.md) statement to see if this statement is using the **TiFlash** here:
 
 {{< copyable "sql" >}}
 
@@ -418,7 +418,7 @@ mysql
     < dbinit.sql
 ```
 
-To view all tables under the `bookshop` database, use the [SHOW TABLES](https://docs.pingcap.com/tidb/stable/sql-statement-show-tables#show-full-tables) statement.
+To view all tables under the `bookshop` database, use the [SHOW TABLES](/common/sql-statements/sql-statement-show-tables.md#show-full-tables) statement.
 
 {{< copyable "sql" >}}
 

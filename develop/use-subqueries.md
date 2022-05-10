@@ -80,13 +80,13 @@ WHERE (IFNULL(a1.death_year, YEAR(NOW())) - a1.birth_year) > 34;
 ...
 ```
 
-For unrelated column subqueries in both existence test and quantified comparison cases, TiDB rewrites and equivalently replaces them for better execution performance, you can read the [Subquery Related Optimizations](https://docs.pingcap.com/tidb/stable/subquery-optimization) chapter for more implementation details.
+For unrelated column subqueries in both existence test and quantified comparison cases, TiDB rewrites and equivalently replaces them for better execution performance, you can read the [Subquery Related Optimizations](/subquery-optimization.md) chapter for more implementation details.
 
 ## Correlated subquery
 
 For correlated subquery, since the inner subquery references the columns of the outer query, the subquery needs to be executed on every row obtained by the outer query. That is, assuming that the outer query gets 10 million results, the subquery will also be executed 10 million times, which will cause the query to consume more time and resources.
 
-Therefore, in the process of processing, TiDB will try to [Decorrelate of Correlated Subquery](https://docs.pingcap.com/tidb/stable/correlated-subquery-optimization) to improve the query efficiency in the execution plan level.
+Therefore, in the process of processing, TiDB will try to [Decorrelate of Correlated Subquery](/correlated-subquery-optimization.md) to improve the query efficiency in the execution plan level.
 
 For example, if we want to find authors who are older than the average age of other writers of the same gender, the SQL statement could be written like this.
 
@@ -130,6 +130,6 @@ As a best practice, in actual development, it is recommended to avoid querying t
 
 ## Read more
 
-- [Subquery Related Optimizations](https://docs.pingcap.com/tidb/stable/subquery-optimization)
-- [Decorrelation of Correlated Subquery](https://docs.pingcap.com/tidb/stable/correlated-subquery-optimization)
+- [Subquery Related Optimizations](/subquery-optimization.md)
+- [Decorrelation of Correlated Subquery](/correlated-subquery-optimization.md)
 - [Subquery Optimization in TiDB](https://en.pingcap.com/blog/subquery-optimization-in-tidb/)

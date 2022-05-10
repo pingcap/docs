@@ -15,7 +15,7 @@ By default, TiDB guarantees that each MVCC version (consistency snapshot) is kep
 
 When you are sure you need longer read time, for example, in a scenario where you are using **Mydumper** for full backups (**Mydumper** backs up consistent snapshots), you can adjust the value of `tikv_gc_life_time` in the `mysql.tidb` table in TiDB to increase the MVCC version retention time, and note that `tikv_gc_life_time` is configured to have an immediate global impact; turning it up will increase the life time of all currently existing snapshots, and turning it down will immediately shorten the life time of all snapshots. Too many MVCC versions will slow down TiKV's processing efficiency, so you need to adjust `tikv_gc_life_time` back to the previous setting in time after doing a full volume backup with **Mydumper**.
 
-For more information about GC, please refer to the [GC Overview](https://docs.pingcap.com/tidb/stable/garbage-collection-overview) document.
+For more information about GC, please refer to the [GC Overview](/garbage-collection-overview.md) document.
 
 ## Transaction Timeout
 

@@ -5,7 +5,7 @@ summary: This page describes the TiDB prepared statement function.
 
 # Prepared Statement
 
-[Prepared statement](https://docs.pingcap.com/tidb/stable/sql-statement-prepare) is a statement that templates multiple SQL statements with only different parameters. It separates the SQL statements from the parameters. We can use it to improve our SQL statements:
+[Prepared statement](/common/sql-statements/sql-statement-prepare.md) is a statement that templates multiple SQL statements with only different parameters. It separates the SQL statements from the parameters. We can use it to improve our SQL statements:
 
 - **Security**: Because parameters and statements are separated, the risk of [SQL injection](https://en.wikipedia.org/wiki/SQL_injection) attacks is avoided.
 - **Performance**: Because the statement is pre-parsed on the TiDB server-side, only parameters need to be passed for subsequent execution, saving the cost of complete SQL parse, splicing SQL statement strings, and network transmission.
@@ -29,11 +29,11 @@ PREPARE {prepared_statement_name} FROM '{prepared_statement_sql}';
 | `{prepared_statement_name}` | Prepared statement name|
 | `{prepared_statement_sql}`  | Prepared statement SQL with a question mark as a placeholder |
 
-You can see the [PREPARE statement](https://docs.pingcap.com/tidb/stable/sql-statement-prepare) for more information.
+You can see the [PREPARE statement](/common/sql-statements/sql-statement-prepare.md) for more information.
 
 ### Use prepared statement
 
-Prepared statements can only use **user variables** as parameters, so use the [SET statement](https://docs.pingcap.com/tidb/stable/sql-statement-set-variable) to set the variables before the [EXECUTE statement](https://docs.pingcap.com/tidb/stable/sql-statement-execute) can call the prepared statement.
+Prepared statements can only use **user variables** as parameters, so use the [SET statement](/common/sql-statements/sql-statement-set-variable.md) to set the variables before the [EXECUTE statement](/common/sql-statements/sql-statement-execute.md) can call the prepared statement.
 
 {{< copyable "sql" >}}
 
@@ -48,7 +48,7 @@ EXECUTE {prepared_statement_name} USING @{parameter_name};
 |     `{parameter_value}`     |                              user variables value                               |
 | `{prepared_statement_name}` | The name of the preprocessing statement, which must be the same as the name defined in the [create prepared statement](#create-prepared-statement) |
 
-You can see the [EXECUTE statement](https://docs.pingcap.com/tidb/stable/sql-statement-execute) for more information.
+You can see the [EXECUTE statement](/common/sql-statements/sql-statement-execute.md) for more information.
 
 ### Delete prepared statement
 
@@ -62,7 +62,7 @@ DEALLOCATE PREPARE {prepared_statement_name};
 | :-------------------------: | :-------------------------------------------------------------------: |
 | `{prepared_statement_name}` | The name of the preprocessing statement, which must be the same as the name defined in the [create prepared statement](#create-prepared-statement) |
 
-You can see the [DEALLOCATE statement](https://docs.pingcap.com/tidb/stable/sql-statement-deallocate) for more information.
+You can see the [DEALLOCATE statement](/common/sql-statements/sql-statement-deallocate.md) for more information.
 
 ## Example
 

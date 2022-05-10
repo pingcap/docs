@@ -29,7 +29,7 @@ CREATE TABLE `books` (
 
 ## Create Index Best Practices
 
-- Create combined index of all the columns of data you need to use. This optimization technique is called [covering index optimization](https://docs.pingcap.com/tidb/stable/explain-indexes#indexreader). `covering index optimization` will allow TiDB to get all required data for the query directly on the index data, which can greatly improve performance.
+- Create combined index of all the columns of data you need to use. This optimization technique is called [covering index optimization](/explain-indexes.md#indexreader). `covering index optimization` will allow TiDB to get all required data for the query directly on the index data, which can greatly improve performance.
 - Avoid creating secondary index that you don't need. Useful secondary indexes can speed up queries, but be aware that adding an index has side effects. Every time you add an index, an additional key-value is added when you insert a row of data, so the more indexes you have, the slower you write, and the more space it takes up. In addition, too many indexes can affect optimizer runtime, and inappropriate indexes can mislead the optimizer. So more indexes aren't always better.
 - Create an appropriate index based on business characteristics. In principle, you need to create indexes on the columns you need to use in your query to improve performance. The following situations are suitable for creating an index:
 
@@ -105,7 +105,7 @@ CREATE TABLE `books` (
 
     > **Warning:**
     >
-    > Currently, expression index is an experimental feature, and it needs to be enabled in the TiDB configuration file, see more in [expression index](https://docs.pingcap.com/tidb/stable/sql-statement-create-index#expression-index).
+    > Currently, expression index is an experimental feature, and it needs to be enabled in the TiDB configuration file, see more in [expression index](/common/sql-statements/sql-statement-create-index#expression-index.md).
 
 - Try to use covering index, which is the index columns contains query columns, and avoid `SELECT *` statements.
 
@@ -141,7 +141,7 @@ CREATE TABLE `books` (
     SELECT * FROM books WHERE title LIKE '%database';
     ```
 
-- When the query condition has multiple indexes available, but you know which index is the best one to use, it is recommended to use [Optimizer Hint](https://docs.pingcap.com/tidb/stable/optimizer-hints) to force the TiDB optimizer to use this index. This can prevent the TiDB optimizer from selecting the wrong index due to inaccurate statistics or other problems.
+- When the query condition has multiple indexes available, but you know which index is the best one to use, it is recommended to use [Optimizer Hint](/optimizer-hints.md) to force the TiDB optimizer to use this index. This can prevent the TiDB optimizer from selecting the wrong index due to inaccurate statistics or other problems.
 
     For example, in the following query, assuming that there are indexes `id_idx` and `title_idx` on column `id` and column `title` respectively, you know that `id_idx` is better, you can use `USE INDEX` hint in SQL to force the TiDB optimizer to use the `id_idx` index.
 

@@ -6,7 +6,7 @@ title: Stale Read
 
 Stale Read is a mechanism for reading historical data versions. With the Stale Read feature, you can read the corresponding historical data from a specified time point or time range，so that it can reduce the latency of reading data in scenarios where strong data consistency is not required. When using stale read, TiDB randomly selects a replica to read data by default, so it can utilize the processing power of all nodes that have replicas.
 
-In practice, please determine if it is appropriate to enable Stale in TiDB based on the usage [scenario](https://docs.pingcap.com/tidb/stable/stale-read#usage-scenarios-of-stale-read). If your application cannot tolerate reading non-real-time data, do not enable stale read feature, otherwise the data read may not be the latest successfully written data.
+In practice, please determine if it is appropriate to enable Stale in TiDB based on the usage [scenario](/stale-read.md#usage-scenarios-of-stale-read). If your application cannot tolerate reading non-real-time data, do not enable stale read feature, otherwise the data read may not be the latest successfully written data.
 
 TiDB provides us with three levels of stale read features: statement level, transaction level, and session level. Next, we will introduce them one by one:
 
@@ -95,7 +95,7 @@ In addition to specifying the exact point in time, you can also use:
 
 It should be noted that the set timestamp or the range of timestamps cannot be too early or later than the current time.
 
-Expired data will be recycled by [Garbage Collection](https://docs.pingcap.com/tidb/stable/garbage-collection-overview) in TiDB, and the data will be retained for a short period of time before being cleared. The time is called [GC Life Time (default 10 minutes)](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50). Each time a GC is performed, the value of the current time minus the time period will be used as the **GC Safe Point**. If you try to read the data before GC Safe Point, TiDB will report the following error:
+Expired data will be recycled by [Garbage Collection](/garbage-collection-overview.md) in TiDB, and the data will be retained for a short period of time before being cleared. The time is called [GC Life Time (default 10 minutes)](/system-variables.md#tidb_gc_life_time-new-in-v50). Each time a GC is performed, the value of the current time minus the time period will be used as the **GC Safe Point**. If you try to read the data before GC Safe Point, TiDB will report the following error:
 
 ```
 ERROR 9006 (HY000): GC life time is shorter than transaction duration...
@@ -485,6 +485,6 @@ public static class StaleReadHelper{
 
 ## Read more
 
-- [Usage Scenarios of Stale Read](https://docs.pingcap.com/tidb/stable/stale-read)
-- [Read Historical Data Using the AS OF TIMESTAMP Clause](https://docs.pingcap.com/tidb/stable/as-of-timestamp)
-- [Read Historical Data Using the tidb_read_staleness System Variable](https://docs.pingcap.com/tidb/stable/tidb-read-staleness)
+- [Usage Scenarios of Stale Read](/stale-read.md)
+- [Read Historical Data Using the AS OF TIMESTAMP Clause](/as-of-timestamp.md)
+- [Read Historical Data Using the tidb_read_staleness System Variable](/tidb-read-staleness.md)

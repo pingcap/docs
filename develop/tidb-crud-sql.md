@@ -15,7 +15,7 @@ Please make sure you are connected to a TiDB cluster. If not, refer to [Build a 
 
 > **Note:**
 >
-> This document references and simplifies [Explore SQL with TiDB](https://docs.pingcap.com/tidb/stable/basic-sql-operations) from the TiDB documentation, so you can go directly to this document for more comprehensive, in-depth information on basic SQL operations.
+> This document references and simplifies [Explore SQL with TiDB](/basic-sql-operations.md) from the TiDB documentation, so you can go directly to this document for more comprehensive, in-depth information on basic SQL operations.
 
 TiDB is compatible with MySQL, you can use MySQL statements directly in most the cases. For unsupported features, see [Compatibility with MySQL](/mysql-compatibility.md#unsupported-features).
 
@@ -35,7 +35,7 @@ SQL is divided into the following 4 types according to their functions:
 
 - **DCL (Data Control Language)**: It is used to define access privileges and security levels.
 
-In this document, we mainly introduce DML and DQL, the Data Manipulation Language and the Data Query Language. The rest can be found in the [Explore SQL with TiDB](https://docs.pingcap.com/tidb/stable/basic-sql-operations) or the [TiDB SQL syntax detailed explanation](https://pingcap.github.io/sqlgram/) for more information.
+In this document, we mainly introduce DML and DQL, the Data Manipulation Language and the Data Query Language. The rest can be found in the [Explore SQL with TiDB](/basic-sql-operations.md) or the [TiDB SQL syntax detailed explanation](https://pingcap.github.io/sqlgram/) for more information.
 
 ## DML (Data Manipulation Language)
 

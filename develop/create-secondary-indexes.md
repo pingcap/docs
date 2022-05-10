@@ -5,7 +5,7 @@ summary: The ways, best practices and examples for creating secondary indexes.
 
 # Create Secondary Indexes
 
-Indexes are logical objects in a cluster that help TiDB cluster queries find data more efficiently. When you create a secondary index, TiDB creates a reference to each row in the table and sorts it by the selected column. More information about secondary indexes can be found in [TiDB Best Practices](https://docs.pingcap.com/tidb/stable/tidb-best-practices#secondary-index).
+Indexes are logical objects in a cluster that help TiDB cluster queries find data more efficiently. When you create a secondary index, TiDB creates a reference to each row in the table and sorts it by the selected column. More information about secondary indexes can be found in [TiDB Best Practices](/tidb-best-practices.md#secondary-index).
 
 This page provides a best practice guide for creating secondary indexes and provides an example of a TiDB-based [bookshop](/develop/bookshop-schema-design.md) database.
 
@@ -22,7 +22,7 @@ Before reading this page, you need to prepare the following:
 
 ### Adding a secondary index to an existing table
 
-If you need to add a secondary index to an existing table, you can use the [CREATE INDEX](https://docs.pingcap.com/tidb/stable/sql-statement-create-index) statement. In TiDB, `CREATE INDEX` is an online operation, it indicated the statement does not block data reads or writes to the table. Secondary indexes are typically created in the following form.
+If you need to add a secondary index to an existing table, you can use the [CREATE INDEX](/common/sql-statements/sql-statement-create-index.md) statement. In TiDB, `CREATE INDEX` is an online operation, it indicated the statement does not block data reads or writes to the table. Secondary indexes are typically created in the following form.
 
 {{< copyable "sql" >}}
 
@@ -38,7 +38,7 @@ CREATE INDEX {index_name} ON {table_name} ({column_names});
 
 ### Create a secondary index while creating a new table
 
-If you want to create a secondary index at the same time as the table, use a clause containing the KEY keyword at the end of [CREATE TABLE](https://docs.pingcap.com/tidb/stable/sql-statement-create-table) to create the secondary index:
+If you want to create a secondary index at the same time as the table, use a clause containing the KEY keyword at the end of [CREATE TABLE](/common/sql-statements/sql-statement-create-table.md) to create the secondary index:
 
 {{< copyable "sql" >}}
 
@@ -90,7 +90,7 @@ Then we need to write the SQL for **search for all books published in a given ye
 SELECT * FROM `bookshop`.`books` WHERE `published_at` >= '2022-01-01 00:00:00' AND `published_at` < '2023-01-01 00:00:00';
 ```
 
-We can use [EXPLAIN](https://docs.pingcap.com/tidb/stable/sql-statement-explain) to check the execution plan of a SQL statement.
+We can use [EXPLAIN](/common/sql-statements/sql-statement-explain.md) to check the execution plan of a SQL statement.
 
 {{< copyable "sql" >}}
 
@@ -138,13 +138,13 @@ Instead of **TableFullScan** in the execution plan, you can see **IndexRangeScan
 
 > **Note:**
 >
-> The **TableFullScan**, **IndexRangeScan**, etc. in the execution plan above are called [operators](https://docs.pingcap.com/tidb/stable/explain-overview#operator-overview) within TiDB. If you are interested, you can go to the [TiDB Query Execution Plan Overview](https://docs.pingcap.com/tidb/stable/explain-overview) document to learn more about execution plans and operators.
+> The **TableFullScan**, **IndexRangeScan**, etc. in the execution plan above are called [operators](/explain-overview.md#operator-overview) within TiDB. If you are interested, you can go to the [TiDB Query Execution Plan Overview](/explain-overview.md) document to learn more about execution plans and operators.
 >
-> The execution plan does not return the same operator every time, because TiDB uses a **Cost-Based Optimization (CBO)** approach. It means execution plan is not only rule-dependent, but also data distribution-dependent. You can go to the [SQL Tuning Overview](https://docs.pingcap.com/tidb/stable/sql-tuning-overview) documentation for a more detailed description of TiDB SQL performance.
+> The execution plan does not return the same operator every time, because TiDB uses a **Cost-Based Optimization (CBO)** approach. It means execution plan is not only rule-dependent, but also data distribution-dependent. You can go to the [SQL Tuning Overview](/sql-tuning-overview.md) documentation for a more detailed description of TiDB SQL performance.
 >
-> TiDB also supports explicit use of indexes when querying, and you can use [Optimizer Hints](https://docs.pingcap.com/tidb/stable/optimizer-hints) or [SQL Plan Management (SPM)](https://docs.pingcap.com/tidb/stable/sql-plan-management) to artificially control the use of indexes. But if you don't understand what's going on inside it, please **_don't use it yet_**.
+> TiDB also supports explicit use of indexes when querying, and you can use [Optimizer Hints](/optimizer-hints.md) or [SQL Plan Management (SPM)](/sql-plan-management.md) to artificially control the use of indexes. But if you don't understand what's going on inside it, please **_don't use it yet_**.
 
-We can query the indexes in the table using the [SHOW INDEXES](https://docs.pingcap.com/tidb/stable/sql-statement-show-indexes) statement:
+We can query the indexes in the table using the [SHOW INDEXES](/common/sql-statements/sql-statement-show-indexes.md) statement:
 
 {{< copyable "sql" >}}
 

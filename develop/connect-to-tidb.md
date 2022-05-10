@@ -21,7 +21,7 @@ mysql --host <tidb_server_host> --port 4000 -u root -p --comments
 
 > **Note:**
 >
-> The MySQL command-line client cleared [Optimizer Hints](https://docs.pingcap.com/tidb/stable/optimizer-hints#optimizer-hints) by default before version 5.7.7. If you need to use the Hint syntax in these earlier versions of the client, you need to add the `--comments` option when starting the client.
+> The MySQL command-line client cleared [Optimizer Hints](/optimizer-hints.md#optimizer-hints) by default before version 5.7.7. If you need to use the Hint syntax in these earlier versions of the client, you need to add the `--comments` option when starting the client.
 
 ## JDBC
 
@@ -42,7 +42,7 @@ For more information on JDBC connections, refer to the official [JDBC documentat
 
 | Parameter Name | Description |
 | :---: | :----------------------------: |
-| `{username}` | [SQL users](https://docs.pingcap.com/tidb/stable/user-account-management) that need to connect to the TiDB cluster |
+| `{username}` | [SQL users](/user-account-management.md) that need to connect to the TiDB cluster |
 | `{password}` | The password of the `SQL user` |
 | `{host}` | [Host](https://en.wikipedia.org/wiki/Host_(network)) of TiDB nodes |
 | `{port}` | Port that the TiDB node is listening on |
@@ -90,7 +90,7 @@ For more information about Hibernate connection parameters, see the [Hibernate d
 
 | Parameter Name | Description |
 | :---: | :----------------------------: |
-| `{username}` | [SQL users](https://docs.pingcap.com/tidb/stable/user-account-management) that need to connect to the TiDB cluster |
+| `{username}` | [SQL users](/user-account-management.md) that need to connect to the TiDB cluster |
 | `{password}` | The password of the `SQL user` |
 | `{host}` | [Host](https://en.wikipedia.org/wiki/Host_(network)) of TiDB nodes |
 | `{port}` | Port that the TiDB node is listening on |

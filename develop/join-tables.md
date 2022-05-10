@@ -204,7 +204,7 @@ When the join condition is constant, the inner join between the two tables is ca
 
 ### LEFT SEMI JOIN
 
-TiDB does not support `LEFT SEMI JOIN table_name` at the SQL syntax level, but at the execution plan level, [subquery-related optimizations](https://docs.pingcap.com/tidb/stable/subquery-optimization/) will use `semi join` as the default join method for rewritten equivalent JOIN queries.
+TiDB does not support `LEFT SEMI JOIN table_name` at the SQL syntax level, but at the execution plan level, [subquery-related optimizations](/subquery-optimization.md) will use `semi join` as the default join method for rewritten equivalent JOIN queries.
 
 ## Implicit join
 
@@ -214,11 +214,11 @@ Before the `JOIN` statement that explicitly declared a join appeared as an SQL s
 
 TiDB supports the following three general table join algorithms and the optimizer will select the appropriate join algorithm to execute based on factors such as the amount of data in the joined table. You can see which algorithm the query uses for Join by using the `EXPLAIN` statement.
 
-- [Index Join](https://docs.pingcap.com/tidb/stable/explain-joins#index-join)
-- [Hash Join](https://docs.pingcap.com/tidb/stable/explain-joins#hash-join)
-- [Merge Join](https://docs.pingcap.com/tidb/stable/explain-joins#merge-join)
+- [Index Join](/explain-joins.md#index-join)
+- [Hash Join](/explain-joins.md#hash-join)
+- [Merge Join](/explain-joins.md#merge-join)
 
-If it is found that the optimizer of TiDB does not execute according to the optimal join algorithm. You can also use [Optimizer Hints](https://docs.pingcap.com/tidb/stable/optimizer-hints) to force TiDB to use a better join algorithm for execution.
+If it is found that the optimizer of TiDB does not execute according to the optimal join algorithm. You can also use [Optimizer Hints](/optimizer-hints.md) to force TiDB to use a better join algorithm for execution.
 
 For example, assuming the example SQL for the left join query above executes faster using the Hash Join algorithm, which is not chosen by the optimizer, you can add hint `/*+ HASH_JOIN(b, r) */` the `SELECT` keyword (Note: If the table name is aliased, the table alias should also be used in hint).
 
@@ -235,10 +235,10 @@ LIMIT 10;
 
 Hints related to join algorithm:
 
-- [MERGE_JOIN(t1_name [, tl_name ...])](https://docs.pingcap.com/tidb/stable/optimizer-hints#merge_joint1_name--tl_name-)
-- [INL_JOIN(t1_name [, tl_name ...])](https://docs.pingcap.com/tidb/stable/optimizer-hints#inl_joint1_name--tl_name-)
-- [INL_HASH_JOIN(t1_name [, tl_name ...])](https://docs.pingcap.com/tidb/stable/optimizer-hints#inl_hash_join)
-- [HASH_JOIN(t1_name [, tl_name ...])](https://docs.pingcap.com/tidb/stable/optimizer-hints#hash_joint1_name--tl_name-)
+- [MERGE_JOIN(t1_name [, tl_name ...])](/optimizer-hints.md#merge_joint1_name--tl_name-)
+- [INL_JOIN(t1_name [, tl_name ...])](/optimizer-hints.md#inl_joint1_name--tl_name-)
+- [INL_HASH_JOIN(t1_name [, tl_name ...])](/optimizer-hints.md#inl_hash_join)
+- [HASH_JOIN(t1_name [, tl_name ...])](/optimizer-hints.mdhash_joint1_name--tl_name-)
 
 ## Join order
 
@@ -254,9 +254,9 @@ FROM authors a STRAIGHT_JOIN book_authors ba STRAIGHT_JOIN books b
 WHERE b.id = ba.book_id AND ba.author_id = a.id;
 ```
 
-You can learn about the implementation details and limitations of this algorithm by checking the [Introduction to Join Reorder Algorithm](https://docs.pingcap.com/tidb/stable/join-reorder) chapter.
+You can learn about the implementation details and limitations of this algorithm by checking the [Introduction to Join Reorder Algorithm](/join-reorder.md) chapter.
 
 ## Read more
 
-- [Explain Statements That Use Joins](https://docs.pingcap.com/tidb/stable/explain-joins)
-- [Introduction to Join Reorder](https://docs.pingcap.com/tidb/stable/join-reorder)
+- [Explain Statements That Use Joins](/explain-joins.md)
+- [Introduction to Join Reorder](/join-reorder.md)

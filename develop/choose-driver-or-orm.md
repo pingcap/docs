@@ -17,7 +17,7 @@ Features that are different from MySQL:
 
 - Auto-increment ID: In TiDB, auto-incremental columns are globally unique. They are incremental on a single TiDB server, but ***not*** necessarily incremental among multiple TiDB servers or allocated sequentially.
 
-Full compatibility differences can be found at [MySQL Compatibility](https://docs.pingcap.com/tidb/stable/mysql-compatibility)
+Full compatibility differences can be found at [MySQL Compatibility](/mysql-compatibility.md)
 
 ## Java
 
@@ -104,4 +104,4 @@ Example of building a TiDB application:
 - Native Java using Hibernate, see [Build a Simple CRUD App with TiDB and Java](/develop/sample-application-java.md)
 - Spring Data JPA / Hibernate, see [Build the TiDB Application using Spring Boot](/develop/sample-application-spring-boot.md)
 
-In addition, you need to specify the TiDB dialect in your [Hibernate configuration file](https://www.tutorialspoint.com/hibernate/hibernate_configuration.htm): `org.hibernate.dialect.TiDBDialect`, which is only supported in Hibernate `6.0.0.Beta2` and above. If you are unable to upgrade your `Hibernate` version, then please use the MySQL 5.7 dialect `org.hibernate.dialect.MySQL57Dialect` instead. However, this may cause unpredictable usage results and the absence of some TiDB-specific features, such as [sequences](https://docs.pingcap.com/tidb/stable/sql-statement-create-sequence), etc.
+In addition, you need to specify the TiDB dialect in your [Hibernate configuration file](https://www.tutorialspoint.com/hibernate/hibernate_configuration.htm): `org.hibernate.dialect.TiDBDialect`, which is only supported in Hibernate `6.0.0.Beta2` and above. If you are unable to upgrade your `Hibernate` version, then please use the MySQL 5.7 dialect `org.hibernate.dialect.MySQL57Dialect` instead. However, this may cause unpredictable usage results and the absence of some TiDB-specific features, such as [sequences](/common/sql-statements/sql-statement-create-sequence.md), etc.

@@ -82,7 +82,7 @@ Different from traditional databases such as MySQL, in TiDB optimistic transacti
 The following Python pseudocode shows how to implement application-level retries. It does not require your driver or ORM to implement advanced retry logic, so it can be used in any programming language or environment. Your retry logic must follow the following points:
 
 - Throws an error if the number of failed retries reaches the `max_retries` limit.
-- Use `try ... catch ...` to catch SQL execution exception，Retry on failure when encountering the following errors, and rollback when encountering other errors. More error code detail, see [Error Codes and Troubleshooting](https://docs.pingcap.com/tidb/stable/error-codes).
+- Use `try ... catch ...` to catch SQL execution exception，Retry on failure when encountering the following errors, and rollback when encountering other errors. More error code detail, see [Error Codes and Troubleshooting](/error-codes.md).
     - `Error 8002: can not retry select for update statement`: SELECT FOR UPDATE write conflict error
     - `Error 8022: Error: KV error safe to retry`: transaction commit failed error.
     - `Error 8028: Information schema is changed during the execution of the statement`: Table schema has been changed by DDL operation, resulting in an error in the transaction commit.
@@ -114,9 +114,9 @@ while True:
 > Note:
 >
 > If you frequently encounter `Error 9007: Write conflict` error, you may need to check your schema design and the data access patterns of your workload to find the source of conflicts and avoid conflicts by design.
-> About how to troubleshoot and resolve transaction conflicts, see [Troubleshoot Lock Conflicts](https://docs.pingcap.com/tidb/stable/troubleshoot-lock-conflicts).
+> About how to troubleshoot and resolve transaction conflicts, see [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md).
 
 ## See Also
 
-- [Troubleshoot Lock Conflicts](https://docs.pingcap.com/tidb/stable/troubleshoot-lock-conflicts)
-- [Troubleshoot Write Conflicts in Optimistic Transactions](https://docs.pingcap.com/tidb/stable/troubleshoot-write-conflicts)
+- [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md)
+- [Troubleshoot Write Conflicts in Optimistic Transactions](/troubleshoot-write-conflicts.md)

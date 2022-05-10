@@ -148,8 +148,8 @@ See [Index Best Practice](/develop/index-best-practice.md).
 
 TiDB supports the online `ADD INDEX` operation and does not block data reads and writes in the table. The speed of `ADD INDEX` can be adjusted by modify the following system variable:
 
-* [tidb_ddl_reorg_worker_cnt](https://docs.pingcap.com/tidb/stable/system-variables#tidb_ddl_reorg_worker_cnt)
-* [tidb_ddl_reorg_batch_size](https://docs.pingcap.com/tidb/stable/system-variables#tidb_ddl_reorg_batch_size)
+* [tidb_ddl_reorg_worker_cnt](/system-variables.md#tidb_ddl_reorg_worker_cnt)
+* [tidb_ddl_reorg_batch_size](/system-variables.md#tidb_ddl_reorg_batch_size)
 
 To reduce the impact on online business, the default speed of `ADD INDEX` is conservative. When the target column of `ADD INDEX` only involves read load or is not directly related to online load, the above variable can be appropriately increased to speed up `ADD INDEX`:
 
@@ -171,12 +171,12 @@ SET @@global.tidb_ddl_reorg_batch_size = 128;
 
 ## Transaction Conflicts
 
-About how to locate and resolve transaction conflicts, see [Troubleshoot Lock Conflicts](https://docs.pingcap.com/tidb/stable/troubleshoot-lock-conflicts)
+About how to locate and resolve transaction conflicts, see [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md)
 
 ## Best Practices for Developing Java Applications with TiDB
 
-See [Best Practices for Developing Java Applications with TiDB](https://docs.pingcap.com/tidb/stable/java-app-best-practices)
+See [Best Practices for Developing Java Applications with TiDB](/java-app-best-practices.md)
 
 ### See Also
 
-- [Highly Concurrent Write Best Practices](https://docs.pingcap.com/tidb/stable/high-concurrency-best-practices)
+- [Highly Concurrent Write Best Practices](/high-concurrency-best-practices.md)

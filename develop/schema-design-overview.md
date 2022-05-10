@@ -24,7 +24,7 @@ TiDB clusters contain a database named `test`. However, we recommend that you cr
 
 A Table in the TiDB is subordinate to a [Database](#database).
 
-A table contains **rows**. Each value in each row of data belongs to a specific **column**. Each column allows only a single data type. Columns can be further qualified by adding [constraints](https://docs.pingcap.com/tidb/stable/constraints). You can also add [generated columns (experimental feature)](https://docs.pingcap.com/tidb/stable/generated-columns) for calculations.
+A table contains **rows**. Each value in each row of data belongs to a specific **column**. Each column allows only a single data type. Columns can be further qualified by adding [constraints](/constraints.md). You can also add [generated columns (experimental feature)](/generated-columns.md) for calculations.
 
 ## Index
 
@@ -61,13 +61,13 @@ TiDB supports some specialized types of indexes, designed to improve query perfo
 
 TiDB supports several logical objects at the same level as **table**:
 
-1. [Views](https://docs.pingcap.com/tidb/stable/views): A view acts as a virtual table, whose schema is defined by the `SELECT` statement that creates the view.
-2. [Sequence](https://docs.pingcap.com/tidb/stable/sql-statement-create-sequence): Create and store sequential data.
-3. [Temporary tables](https://docs.pingcap.com/tidb/stable/temporary-tables): Temporary table is a table whose data is not persistent.
+1. [Views](/views.md): A view acts as a virtual table, whose schema is defined by the `SELECT` statement that creates the view.
+2. [Sequence](/common/sql-statements/sql-statement-create-sequence.md): Create and store sequential data.
+3. [Temporary tables](/temporary-tables.md): Temporary table is a table whose data is not persistent.
 
 ## Access Control
 
-TiDB supports user-based or role-based access control. You can grant **users** [permission](https://docs.pingcap.com/tidb/stable/privilege-management) to view, modify, or delete data objects and data schemas through [roles](https://docs.pingcap.com/tidb/stable/role-based-access-control) or directly to [users](https://docs.pingcap.com/tidb/stable/user-account-management).
+TiDB supports user-based or role-based access control. You can grant **users** [permission](/privilege-management.md) to view, modify, or delete data objects and data schemas through [roles](/role-based-access-control.md) or directly to [users](/user-account-management.md).
 
 ## Execute database schema changes
 
@@ -75,7 +75,7 @@ We do not recommend using a Driver or ORM to change database schemas. As a best 
 
 ## Object Limitations
 
-These are some of the common object size restrictions, please refer to [tidb limitations](https://docs.pingcap.com/tidb/stable/tidb-limitations) for detailed usage restrictions.
+These are some of the common object size restrictions, please refer to [tidb limitations](/tidb-limitations.md) for detailed usage restrictions.
 
 ## Limitations on identifier length
 
@@ -111,4 +111,4 @@ These are some of the common object size restrictions, please refer to [tidb lim
 
 ### Number of rows
 
-TiDB can support **any** number of rows by adding nodes in the cluster, see the [tidb best practices](https://docs.pingcap.com/tidb/stable/tidb-best-practices) for the mechanics.
+TiDB can support **any** number of rows by adding nodes in the cluster, see the [tidb best practices](/tidb-best-practices.md) for the mechanics.

@@ -5,7 +5,7 @@ summary: The ways, best practices, and examples for deleting data, bulk data del
 
 # Delete Data
 
-This page will use the [DELETE](https://docs.pingcap.com/tidb/stable/sql-statement-delete) SQL statement to delete the data in TiDB.
+This page will use the [DELETE](/common/sql-statements/sql-statement-delete.md) SQL statement to delete the data in TiDB.
 
 ## Before you start
 
@@ -30,15 +30,15 @@ DELETE FROM {table} WHERE {filter}
 | `{table}`  |      Table Name      |
 | `{filter}` | Filter matching conditions |
 
-This only shows a simple usage of `DELETE`. For detailed documentation, refer to TiDB's [DELETE syntax](https://docs.pingcap.com/tidb/stable/sql-statement-delete) page.
+This only shows a simple usage of `DELETE`. For detailed documentation, refer to TiDB's [DELETE syntax](/common/sql-statements/sql-statement-delete.md) page.
 
 ## Best Practices
 
 There are some best practices to follow when delete rows as follows:
 
 - Always specify the `WHERE` clause in the delete statement. If the `DELETE` does not have a `WHERE` clause, TiDB will delete **_ALL ROWS_** within this table.
-- Use [bulk-delete](#bulk-delete) when you need to delete a large number of rows (tens of thousands or more), because TiDB has a single transaction size limit of [txn-total-size-limit](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit) (default is 100MB).
-- If you need to delete all the data in a table, do not use the `DELETE` statement; instead, use the [TRUNCATE](https://docs.pingcap.com/tidb/stable/sql-statement-truncate) statement.
+- Use [bulk-delete](#bulk-delete) when you need to delete a large number of rows (tens of thousands or more), because TiDB has a single transaction size limit of [txn-total-size-limit](/tidb-configuration-file.md#txn-total-size-limit) (default is 100MB).
+- If you need to delete all the data in a table, do not use the `DELETE` statement; instead, use the [TRUNCATE](/common/sql-statements/sql-statement-truncate.md) statement.
 - See [Performance Considerations](#performance-considerations).
 
 ## Example
@@ -92,7 +92,7 @@ try (Connection connection = ds.getConnection()) {
 
 > **Note:**
 >
-> Note here that the `rating_at` field is the `DATETIME` type of the [Date and Time Types](https://docs.pingcap.com/tidb/stable/data-type-date-and-time), which you can assume is stored as a literal quantity in TiDB, independent of the time zone. On the other hand, the `TIMESTAMP` type, will store a timestamp and thus display a different time string when [configured time zone](https://docs.pingcap.com/tidb/stable/configure-time-zone) differently.
+> Note here that the `rating_at` field is the `DATETIME` type of the [Date and Time Types](/data-type-date-and-time.md), which you can assume is stored as a literal quantity in TiDB, independent of the time zone. On the other hand, the `TIMESTAMP` type, will store a timestamp and thus display a different time string when [configured time zone](/configure-time-zone.md) differently.
 >
 > Also, like MySQL, the `TIMESTAMP` data type is affected by the [year 2038 problem](https://en.wikipedia.org/wiki/Year_2038_problem). It is recommended to use the DATETIME type if storing values larger than 2038.
 
@@ -104,17 +104,17 @@ TiDB does not delete the data immediately after the `DELETE` statement runs, but
 
 GC is triggered once every 10 minutes in the default configuration, and each GC calculates a time point called **safe_point**, and any data before this time point will not be used again, so TiDB can safely clean up the data.
 
-You can read the introduction of [GC mechanism](https://docs.pingcap.com/tidb/stable/garbage-collection-overview) to get more detailed description of GC.
+You can read the introduction of [GC mechanism](/garbage-collection-overview).md to get more detailed description of GC.
 
 ### Update statistical information
 
-TiDB uses [statistical information](https://docs.pingcap.com/tidb/stable/statistics) to determine index selection, so there is a high risk that incorrect index selection will occur after a large volume of data is deleted. You can use a [manual collection](https://docs.pingcap.com/tidb/stable/statistics#manual-collection) to update the statistics. Use this to give the TiDB optimizer more accurate statistical information to provide SQL performance optimization.
+TiDB uses [statistical information](/statistics.md) to determine index selection, so there is a high risk that incorrect index selection will occur after a large volume of data is deleted. You can use a [manual collection](/statistics.md#manual-collection) to update the statistics. Use this to give the TiDB optimizer more accurate statistical information to provide SQL performance optimization.
 
 ## Bulk-delete
 
 When you need to delete multiple rows of data from a table, you can choose the [`DELETE` example](#example) and use the `WHERE` clause to filter the data that needs to be deleted.
 
-However, if you need to delete a large number of rows (tens of thousands or more), we recommend using an iteration that deletes a portion of the data at a time until the deletion is complete. This is because TiDB has a single transaction size limit of [txn-total-size-limit](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit) (default is 100MB). You can use loops in your programs or scripts to complete operations.
+However, if you need to delete a large number of rows (tens of thousands or more), we recommend using an iteration that deletes a portion of the data at a time until the deletion is complete. This is because TiDB has a single transaction size limit of [txn-total-size-limit](/tidb-configuration-file.md#txn-total-size-limit) (default is 100MB). You can use loops in your programs or scripts to complete operations.
 
 This page provides an example of writing a script to handle a circular delete that demonstrates how you should do a combination of `SELECT` and `DELETE` to complete a bulk-delete.
 

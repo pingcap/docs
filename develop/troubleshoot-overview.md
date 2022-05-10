@@ -11,10 +11,10 @@ This section introduce troubleshoot problems that may arise during application d
 
 If you want to improve SQL query performance, follow the instructions in [SQL Performance Tuning](/develop/optimize-sql-overview.md) to be sure you are avoiding common performance problems like full table scans, missing indexes, etc. Then if you still having performance issue, take a look at:
 
-- [Analyze Slow Queries](https://docs.pingcap.com/tidb/stable/analyze-slow-queries)
-- [Identify Expensive Queries Using Top SQL](https://docs.pingcap.com/tidb/stable/top-sql)
+- [Analyze Slow Queries](/analyze-slow-queries.md)
+- [Identify Expensive Queries Using Top SQL](/top-sql.md)
 
-If you have some questions about SQL operations, take a look at [SQL FAQs](https://docs.pingcap.com/tidb/stable/sql-faq).
+If you have some questions about SQL operations, take a look at [SQL FAQs](/faq/sql-faq.md).
 
 ## Troubleshoot Transaction
 
@@ -22,6 +22,6 @@ See [Transaction Error Handling](/develop/transaction-troubleshoot.md)。
 
 ## See Also
 
-- [Unsupported features](https://docs.pingcap.com/tidb/stable/mysql-compatibility#unsupported-features)
-- [Cluster Management FAQs](https://docs.pingcap.com/tidb/stable/manage-cluster-faq)
-- [TiDB FAQs](https://docs.pingcap.com/tidb/stable/tidb-faq)
+- [Unsupported features](/mysql-compatibility.md#unsupported-features)
+- [Cluster Management FAQs](/manage-cluster-faq.md)
+- [TiDB FAQs](/tidb-faq.md)
