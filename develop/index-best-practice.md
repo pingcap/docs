@@ -34,6 +34,7 @@ CREATE TABLE `books` (
 
 - Columns with a high degree of distinction can significantly reduce the number of filtered rows. For example, it is recommended to create an index on the column of the person's ID number, but not on the column of the person's gender.
 - If you have multiple search conditions, you can use combined index. Note that columns with equivalent conditions need to be placed in front of the combined index.
+
 Here is an example. Assuming the query is `select* from t where c1 = 10 and c2 = 100 and c3 > 10`, then consider creating a combined index `Index cidx (c1, c2, c3)`, so that index prefix scan can be performed according to query conditions.
 
 4. Use meaningful secondary index name, and we recommend that you follow your company's or organization's table naming conventions. If your company or organization does not have an appropriate naming convention, refer to [Index Naming Specification](/develop/object-naming-guidelines.md).
