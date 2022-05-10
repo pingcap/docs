@@ -39,18 +39,18 @@ When you need to execute a SQL statement multiple times, it is recommended to us
 
 ```go
 func BatchInsert(db *sql.DB) error {
-	stmt, err := db.Prepare("INSERT INTO t (id) VALUES (?), (?), (?), (?), (?)")
-	if err != nil {
-		return err
-	}
-	for i := 0; i < 1000; i += 5 {
-		values := []interface{}{i, i + 1, i + 2, i + 3, i + 4}
-		_, err = stmt.Exec(values...)
-		if err != nil {
-			return err
-		}
-	}
-	return nil
+    stmt, err := db.Prepare("INSERT INTO t (id) VALUES (?), (?), (?), (?), (?)")
+    if err != nil {
+        return err
+    }
+    for i := 0; i < 1000; i += 5 {
+        values := []interface{}{i, i + 1, i + 2, i + 3, i + 4}
+        _, err = stmt.Exec(values...)
+        if err != nil {
+            return err
+        }
+    }
+    return nil
 }
 ```
 
