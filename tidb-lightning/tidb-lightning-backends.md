@@ -39,65 +39,6 @@ TiDB Lightning introduces the local-backend in TiDB v4.0.3. By using the local-b
 # task-info-schema-name = 'lightning_task_info'
 
 [tikv-importer]
-<<<<<<< HEAD
-# use the TiDB-backend.
-backend = "tidb"
-
-# Action to do when trying to insert a duplicated entry in the "tidb" backend.
-#  - replace: use new entry to replace the existing entry
-#  - ignore: keep the existing entry, and ignore the new entry
-#  - error: report error and quit the program
-# on-duplicate = "replace"
-
-[mydumper]
-# Block size for file reading. Keep it longer than the longest string of
-# the data source.
-# read-block-size = "64KiB"
-
-# Minimum size (in terms of source data file) of each batch of import.
-# TiDB Lightning splits a large table into multiple data engine files according to this size.
-# batch-size = 107_374_182_400 # Byte (default = 100 GB)
-
-# Local source data directory or the URL of the external storage.
-data-source-dir = "/data/my_database"
-
-# the input data in a "strict" format speeds up processing.
-# "strict-format = true" requires that:
-# in CSV, every value cannot contain literal new lines (U+000A and U+000D, or \r and \n) even
-# when quoted, which means new lines are strictly used to separate rows.
-# "Strict" format allows TiDB Lightning to quickly locate split positions of a large file for parallel processing.
-# However, if the input data is not "strict", it may split a valid data in half and
-# corrupt the result.
-# The default value is false for safety instead of speed.
-strict-format = false
-
-# If strict-format is true, TiDB Lightning splits large CSV files into multiple chunks to process in
-# parallel. max-region-size is the maximum size of each chunk after splitting.
-# max-region-size = 268_435_456 # Byte (default = 256 MB)
-
-# Only import tables if these wildcard rules are matched. See the corresponding section for details.
-filter = ['*.*', '!mysql.*', '!sys.*', '!INFORMATION_SCHEMA.*', '!PERFORMANCE_SCHEMA.*', '!METRICS_SCHEMA.*', '!INSPECTION_SCHEMA.*']
-
-# Configures how CSV files are parsed.
-[mydumper.csv]
-# Separator between fields, should be an ASCII character.
-separator = ','
-# Quoting delimiter, can either be an ASCII character or empty string.
-delimiter = '"'
-# Whether the CSV files contain a header.
-# If `header` is true, the first line will be skipped.
-header = true
-# Whether the CSV contains any NULL value.
-# If `not-null` is true, all columns from CSV cannot be NULL.
-not-null = false
-# When `not-null` is false (that is, CSV can contain NULL),
-# fields equal to this value will be treated as NULL.
-null = '\N'
-# Whether to interpret backslash escapes inside fields.
-backslash-escape = true
-# If a line ends with a separator, remove it.
-trim-last-separator = false
-=======
 backend = "local"
 # When the backend is 'local', whether to detect and resolve conflicting records (unique key conflict).
 # The following three resolution strategies are supported:
@@ -122,7 +63,6 @@ sorted-kv-dir = ""
 # range-concurrency = 16
 # The number of KV pairs sent in one request in the local-backend mode.
 # send-kv-pairs = 32768
->>>>>>> e25b4bb8a (lightning: remove importer backend (#8421))
 
 [tidb]
 # The target cluster information. The address of any tidb-server from the cluster.
