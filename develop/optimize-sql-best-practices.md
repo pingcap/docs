@@ -60,15 +60,15 @@ func BatchInsert(db *sql.DB) error {
 
 ```java
 public void batchInsert(Connection connection) throws SQLException {
-	PreparedStatement statement = connection.prepareStatement(
-			"INSERT INTO `t` (`id`) VALUES (?), (?), (?), (?), (?)");
-	for (int i = 0; i < 1000; i ++) {
-		statement.setInt(i % 5 + 1, i);
+    PreparedStatement statement = connection.prepareStatement(
+            "INSERT INTO `t` (`id`) VALUES (?), (?), (?), (?), (?)");
+    for (int i = 0; i < 1000; i ++) {
+        statement.setInt(i % 5 + 1, i);
 
-		if (i % 5 == 4) {
-			statement.executeUpdate();
-		}
-	}
+        if (i % 5 == 4) {
+            statement.executeUpdate();
+        }
+    }
 }
 ```
 
