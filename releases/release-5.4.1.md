@@ -58,12 +58,12 @@ collecting statistics [#34256](https://github.com/pingcap/tidb/issues/34256)
 
 + TiDB
 
-- (dup: release-5.2.4.md > Bug fixes> TiDB)- Fix the issue that TiDB writes wrong data due to the wrong encoding of the `ENUM` or `SET` column [#32302](https://github.com/pingcap/tidb/issues/32302)
-- (dup: release-6.0.0-dmr.md > Bug fixes> TiDB)- Fix a bug that causes the restore operation to fail when the encryption information is lost during backup retry [#32423](https://github.com/pingcap/tidb/issues/32423)
-- (dup: release-5.2.4.md > Bug fixes> TiDB)- Fix the issue that the Merge Join operator gets wrong results in certain cases [#33042](https://github.com/pingcap/tidb/issues/33042)
-- (dup: release-5.2.4.md > Bug fixes> TiDB)- Fix the issue that TiDB gets a wrong result when a correlated subquery returns a constant  [#32089](https://github.com/pingcap/tidb/issues/32089)
-- (dup: release-5.2.4.md > Bug fixes> TiDB)- Fix the issue that TiDB gets the wrong result when using TiFlash to scan tables with empty range although TiFlash does not support reading tables with empty range yet [#33083](https://github.com/pingcap/tidb/issues/33083)
-- (dup: release-5.2.4.md > Bug fixes> TiDB)- Fix the issue that the `MAX` or `MIN` function on the `ENUM` or `SET` column returns a wrong result when the new collation is enabled in TiDB [#31638](https://github.com/pingcap/tidb/issues/31638)
+    - (dup: release-5.2.4.md > Bug fixes> TiDB)- Fix the issue that TiDB writes wrong data due to the wrong encoding of the `ENUM` or `SET` column [#32302](https://github.com/pingcap/tidb/issues/32302)
+    - (dup: release-6.0.0-dmr.md > Bug fixes> TiDB)- Fix a bug that causes the restore operation to fail when the encryption information is lost during backup retry [#32423](https://github.com/pingcap/tidb/issues/32423)
+    - (dup: release-5.2.4.md > Bug fixes> TiDB)- Fix the issue that the Merge Join operator gets wrong results in certain cases [#33042](https://github.com/pingcap/tidb/issues/33042)
+    - (dup: release-5.2.4.md > Bug fixes> TiDB)- Fix the issue that TiDB gets a wrong result when a correlated subquery returns a constant  [#32089](https://github.com/pingcap/tidb/issues/32089)
+    - (dup: release-5.2.4.md > Bug fixes> TiDB)- Fix the issue that TiDB gets the wrong result when using TiFlash to scan tables with empty range although TiFlash does not support reading tables with empty range yet [#33083](https://github.com/pingcap/tidb/issues/33083)
+    - (dup: release-5.2.4.md > Bug fixes> TiDB)- Fix the issue that the `MAX` or `MIN` function on the `ENUM` or `SET` column returns a wrong result when the new collation is enabled in TiDB [#31638](https://github.com/pingcap/tidb/issues/31638)
     - (dup: release-6.0.0-dmr.md > Bug fixes> TiDB)- Fix a bug that CTE might be blocked when a query reports errors [#31302](https://github.com/pingcap/tidb/issues/31302)
     - (dup: release-5.2.4.md > Bug fixes> TiDB)- Fix wrong range calculation results for Nulleq function on Enum values [#32428](https://github.com/pingcap/tidb/issues/32428)
     - (dup: release-6.0.0-dmr.md > Bug fixes> TiDB)- Fix TiDB OOM when exporting data using ChunkRPC [#31981](https://github.com/pingcap/tidb/issues/31981) [#30880](https://github.com/pingcap/tidb/issues/30880)
