@@ -95,7 +95,7 @@ SELECT
     max(t.id) AS end_key,
     count(*) AS page_size
 FROM (
-    SELECT *, row_number () OVER (ORDER BY id) AS row_num
+    SELECT id, row_number() OVER (ORDER BY id) AS row_num
     FROM books
 ) t
 GROUP BY page_num
@@ -168,7 +168,7 @@ public class BookDAO {
                 max(t.id) AS end_key,
                 count(*) AS page_size
             FROM (
-                SELECT *, row_number () OVER (ORDER BY id) AS row_num
+                SELECT id, row_number() OVER (ORDER BY id) AS row_num
                 FROM books
             ) t
             GROUP BY page_num
@@ -236,9 +236,9 @@ For non-clustered index tables (also known as "non-index-organized tables"), the
 
 > **Tips:**
 >
-> You can use the `SHOW CREATE TABLE books;` statement to check whether the table primary key uses [clustered index](https://docs.pingcap.com/tidb/stable/clustered-indexes).
+> You can use the `SHOW CREATE TABLE users;` statement to check whether the table primary key uses [clustered index](https://docs.pingcap.com/tidb/stable/clustered-indexes).
 
-E.g:
+For example:
 
 {{< copyable "sql" >}}
 
@@ -249,11 +249,31 @@ SELECT
     max(t._tidb_rowid) AS end_key,
     count(*) AS page_size
 FROM (
-    SELECT *, row_number () OVER (ORDER BY _tidb_rowid) AS row_num
-    FROM books
+    SELECT _tidb_rowid, row_number () OVER (ORDER BY _tidb_rowid) AS row_num
+    FROM users
 ) t
 GROUP BY page_num
 ORDER BY page_num;
+```
+
+The query results are as follows:
+
+```
++----------+-----------+---------+-----------+
+| page_num | start_key | end_key | page_size |
++----------+-----------+---------+-----------+
+|        1 |         1 |    1000 |      1000 |
+|        2 |      1001 |    2000 |      1000 |
+|        3 |      2001 |    3000 |      1000 |
+|        4 |      3001 |    4000 |      1000 |
+|        5 |      4001 |    5000 |      1000 |
+|        6 |      5001 |    6000 |      1000 |
+|        7 |      6001 |    7000 |      1000 |
+|        8 |      7001 |    8000 |      1000 |
+|        9 |      8001 |    9000 |      1000 |
+|       10 |      9001 |    9990 |       990 |
++----------+-----------+---------+-----------+
+10 rows in set (0.00 sec)
 ```
 
 ### Clustered index table
