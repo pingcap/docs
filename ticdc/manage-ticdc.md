@@ -217,24 +217,9 @@ The following are descriptions of parameters and parameter values that can be co
 | `ca` | The path of the CA certificate file needed to connect to the downstream Kafka instance (optional)  |
 | `cert` | The path of the certificate file needed to connect to the downstream Kafka instance (optional) |
 | `key` | The path of the certificate key file needed to connect to the downstream Kafka instance (optional) |
-<<<<<<< HEAD
-| `sasl-user` | The identity (authcid) of SASL/PLAIN or SASL/SCRAM authentication needed to connect to the downstream Kafka instance (optional) |
-| `sasl-password` | The password of SASL/PLAIN or SASL/SCRAM authentication needed to connect to the downstream Kafka instance (optional) |
-| `sasl-mechanism` | The name of SASL/PLAIN or SASL/SCRAM authentication needed to connect to the downstream Kafka instance (optional)  |
-=======
 | `sasl-user` | The identity (authcid) of SASL/SCRAM authentication needed to connect to the downstream Kafka instance (optional) |
 | `sasl-password` | The password of SASL/SCRAM authentication needed to connect to the downstream Kafka instance (optional) |
 | `sasl-mechanism` | The name of SASL/SCRAM authentication needed to connect to the downstream Kafka instance (optional)  |
-| `dial-timeout` | The timeout in establishing a connection with the downstream Kafka. The default value is `10s` |
-| `read-timeout` | The timeout in getting a response returned by the downstream Kafka. The default value is `10s` |
-| `write-timeout`| The timeout in sending a request to the downstream Kafka. The default value is `10s` |
-
-Best practices:
-
-* It is recommended that you create your own Kafka Topic. At a minimum, you need to set the maximum amount of data of each message that the Topic can send to the Kafka broker, and the number of downstream Kafka partitions. When you create a changefeed, these two settings correspond to `max-message-bytes` and `partition-num`, respectively.
-* If you create a changefeed with a Topic that does not yet exist, TiCDC will try to create the Topic using the `partition-num` and `replication-factor` parameters. It is recommended that you specify these parameters explicitly.
-* In most cases, it is recommended to use the `canal-json` protocol.
->>>>>>> 4dd7bcf03 (ticdc: remove unsupported kafka auth type (#8536))
 
 > **Note:**
 >
