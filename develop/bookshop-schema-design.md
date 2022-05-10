@@ -10,7 +10,7 @@ Bookshop is a virtual online bookstore application, you can easily buy books of 
 
 ### Method 1: Through `tiup demo` command line
 
-If you use [TiUP](/tiup/tiup-reference.md#tiup) to deploy a TiDB cluster or you can directly connect to your TiDB server, you can quickly generate and import sample data for the Bookshop application with the following commands :
+If you use [TiUP](/tiup/tiup-reference.md#tiup-reference) to deploy a TiDB cluster or you can directly connect to your TiDB server, you can quickly generate and import sample data for the Bookshop application with the following commands :
 
 {{< copyable "shell" >}}
 
