@@ -18,9 +18,11 @@ Before reading this page, you need to prepare the following:
 - [Build a TiDB Cluster in TiDB Cloud(DevTier)](/develop/build-cluster-in-cloud.md).
 - Read [Schema Design Overview](/develop/schema-design-overview.md).
 
-## Create Database
+## What is database
 
 [Database](/develop/schema-design-overview.md) objects in TiDB can contain **tables**, **views**, **sequences**, and other objects.
+
+## Create Database
 
 You can use the `CREATE DATABASE` statement to create a database. This will create an empty file with a `.sql` file extension at the end of the file. We will use this file to initialize the database that will store all the data for the entire [Bookshop](/develop/bookshop-schema-design.md) sample application.
 
