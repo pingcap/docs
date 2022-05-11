@@ -126,7 +126,7 @@ When the **primary key** of a table is [integer types](/data-type-numeric.md#int
 
 For more information on how to handle hotspot issues, please refer to [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md).
 
-Following the [Best Practices for select primary key](#best-practices-for-select-primary-key), we show a scenario where the `AUTO_RANDOM` primary key is defined in the `users` table.
+Following the [Rules when selecting primary key](#rules-to-follow-when-selecting-primary-key), we show a scenario where the `AUTO_RANDOM` primary key is defined in the `users` table.
 
 {{< copyable "sql" >}}
 

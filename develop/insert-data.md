@@ -142,7 +142,7 @@ If you need to quickly import a large amount of data into a TiDB cluster, the be
 
 ## Avoid hot spots
 
-When designing a table you need to consider if there is a large number of inserts. And if so, you need to avoid hotspots during table design. See the [Select primary key](/develop/create-table.md#select-primary-key) section and follow the [Best Practices for select primary key](/develop/create-table.md#best-practices-for-select-primary-key).
+When designing a table you need to consider if there is a large number of inserts. And if so, you need to avoid hotspots during table design. See the [Select primary key](/develop/create-table.md#select-primary-key) section and follow the [Rules when selecting primary key](/develop/create-table.md#rules-to-follow-when-selecting-primary-key).
 
 For more information on how to handle hotspot issues, please refer to the [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md) documentation.
 
