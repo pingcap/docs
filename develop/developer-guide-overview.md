@@ -34,7 +34,7 @@ Since TiDB is compatible with MySQL protocol and MySQL syntax, most of the ORMs 
 
 ## Read More
 
-- [Quick Start](/develop/build-cluster-in-cloud)
+- [Quick Start](/develop/build-cluster-in-cloud.md)
 - [Choose Driver or ORM](/develop/choose-driver-or-orm.md)
 - [Connect to TiDB](/develop/connect-to-tidb.md)
 - [Database Schema Design](/develop/schema-design-overview.md)

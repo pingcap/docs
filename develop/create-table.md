@@ -9,7 +9,7 @@ In this section, we will start to introduce how to create tables using SQL and v
 
 > **Note:**
 >
-> Here we will only briefly describe the `CREATE TABLE` statement, for detailed reference documentation (including additional examples), see the [CREATE TABLE](/sql-statements/sql-statement-create-table.md) documentation.
+> Here we will only briefly describe the `CREATE TABLE` statement, for detailed reference documentation (including additional examples), see the [CREATE TABLE](/common/sql-statements/sql-statement-create-table.md) documentation.
 
 ## Before you start
 
