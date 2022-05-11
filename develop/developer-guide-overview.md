@@ -9,18 +9,6 @@ This guide is written for application developers, but if you are interested in t
 
 We will show how to quickly build an application using TiDB. Therefore, before reading this page, we recommend that you read the [Quick Start Guide for the TiDB Database Platform](/quick-start-with-tidb.md) and install the Driver or use the ORM framework.
 
-This guide will cover the following:
-
-- [Quick Start](/develop/build-cluster-in-cloud)
-- [Choose Driver or ORM](/develop/choose-driver-or-orm.md)
-- [Connect to TiDB](/develop/connect-to-tidb.md)
-- [Database Schema Design](/develop/schema-design-overview.md)
-- [Write Data](/develop/insert-data.md)
-- [Read Data](/develop/get-data-from-single-table.md)
-- [Transaction](/develop/transaction-overview.md)
-- [Optimize](/develop/optimize-sql-overview.md)
-- [Example Applications](/develop/sample-application-spring-boot.md)
-
 ## TiDB Basics
 
 Before you start working with TiDB, you need to understand some important mechanics of how TiDB databases work:
@@ -43,3 +31,15 @@ If you are not sure what an **optimistic transaction** is, do ***NOT*** use it y
 TiDB is highly compatible with MySQL protocol, TiDB supports [most MySQL syntax and features](https://docs.pingcap.com/zh/tidb/stable/mysql-compatibility), so most MySQL connection libraries are compatible with TiDB. If your application framework or language does not have an official PingCAP adaptation, then we recommend that you use MySQL's client libraries. At the same time, more and more three-party databases are actively supporting TiDB's different features.
 
 Since TiDB is compatible with MySQL protocol and MySQL syntax, most of the ORMs that support MySQL are also compatible with TiDB.
+
+## Read More
+
+- [Quick Start](/develop/build-cluster-in-cloud)
+- [Choose Driver or ORM](/develop/choose-driver-or-orm.md)
+- [Connect to TiDB](/develop/connect-to-tidb.md)
+- [Database Schema Design](/develop/schema-design-overview.md)
+- [Write Data](/develop/insert-data.md)
+- [Read Data](/develop/get-data-from-single-table.md)
+- [Transaction](/develop/transaction-overview.md)
+- [Optimize](/develop/optimize-sql-overview.md)
+- [Example Applications](/develop/sample-application-spring-boot.md)
