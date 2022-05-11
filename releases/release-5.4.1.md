@@ -109,7 +109,7 @@ collecting statistics [#34256](https://github.com/pingcap/tidb/issues/34256)
 + PD
 
     - (dup: release-6.0.0-dmr.md > Bug fixes> PD)- Fix the issue that `Duration` fields of `dr-autosync` cannot be dynamically configured [#4651](https://github.com/tikv/pd/issues/4651)
-    - Fix the issue that when there exists a store with more than a big free disk (2T for example) no balance operator generated even when one or more stores with its disk full [#4805](https://github.com/tikv/pd/issues/4805)
+    - Fix the issue that when there exists a Store with large capacity (2T for example), fully allocated small Stores cannot be detected, which results in no balance operator being generated [#4805](https://github.com/tikv/pd/issues/4805)
     - Fix the issue that the label distribution has residual labels in the metrics [#4825](https://github.com/tikv/pd/issues/4825)
 
 + TiFlash
