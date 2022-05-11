@@ -1,15 +1,15 @@
 ---
 title: Create a Database
-summary: The ways, best practices, and examples for creating databases.
+summary: Methods, rules to be followed and examples when creating a database.
 ---
 
 # Create a Database
 
-This page provides a best practice guide for creating a database and an example of a [bookshop](/develop/bookshop-schema-design.md) database based on TiDB.
+In this section, we will begin to cover how to create databases using SQL and various programming languages, and the rules to follow when creating databases. In this section, we will cover the database creation part of TiDB around the [Bookshop](/develop/bookshop-schema-design.md) application.
 
 > **Note:**
 >
-> Detailed reference document for the [CREATE DATABASE](https://docs.pingcap.com/zh/tidb/stable/sql-statement-create-database) statement, with additional examples, can be found in the `CREATE DATABASE` documentation.
+> The `CREATE DATABASE` statement is only briefly described here; for detailed reference documentation (including additional examples), see the [CREATE DATABASE](https://docs.pingcap.com/zh/tidb/stable/sql-statement-create-database) documentation.
 
 ## Before you start
 
@@ -20,24 +20,9 @@ Before reading this page, you need to prepare the following:
 
 ## Create Database
 
-[Database](/develop/schema-design-overview.md) logical object is a collection of TiDB **tables**, **views**, **sequences**, etc.
+[Database](/develop/schema-design-overview.md) objects in TiDB can contain **tables**, **views**, **sequences**, and other objects.
 
-To create a database, use the `CREATE DATABASE` statement and follow [Database Best Practices](#database-best-practices).
-
-### Database Best Practices
-
-Here are some best practices to follow when you create and use databases:
-
-- Try not to use a `test` database that already exists. Instead, you should use the `CREATE DATABASE` statement to create the database and use the `USE {databasename};` statement in the SQL session to [change the current database](/common/sql-statements/sql-statement-use.md).
-- Create the **database**, **roles**, **users**, etc. using the **root user**. and grant **_only_** the necessary privileges.
-- As a general best practice, we do not recommend using Driver / ORM for database schema definition and changes. Instead, use the **MySQL command-line client** or other **MySQL GUI client** of your preferred.
-- Following [Database Naming Guidelines](/develop/object-naming-guidelines.md)
-
-### Example
-
-Create an empty file with a `.sql` file extension at the end of the file. We will use this file to initialize the database that will store all the data for the entire `bookshop` sample application.
-
-e.g.
+You can use the `CREATE DATABASE` statement to create a database. This will create an empty file with a `.sql` file extension at the end of the file. We will use this file to initialize the database that will store all the data for the entire [Bookshop](/develop/bookshop-schema-design.md) sample application.
 
 {{< copyable "shell-regular" >}}
 
@@ -92,6 +77,15 @@ mysql
 | test               |
 +--------------------+
 ```
+
+## Rules to follow when creating a database
+
+- Follow the [Database Naming Guidelines](/develop/object-naming-guidelines.md) and give your database a meaningful name.
+- The `test` database is a default database provided by TiDB. Try not to use it in a production environment if you don't have to. You can create the database yourself with the `CREATE DATABASE` statement and [change the current database](/common/sql-statements/sql-statement-use.md) with the `USE {databasename};` statement in the SQL session.
+- Create the **database**, **roles**, **users**, etc. using the root user. and grant only the necessary privileges.
+As a general rule, we do not recommend using Driver, ORM to define and change the database schema. Instead, please use **MySQL command-line client** or other **MySQL GUI client** of your choice to do so.
+
+## One more step
 
 At this point, you have finished preparing the `bookshop` database and can add **tables** to it.
 
