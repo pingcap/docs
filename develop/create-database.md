@@ -85,7 +85,7 @@ mysql
 - Follow the [Database Naming Guidelines](/develop/object-naming-guidelines.md) and give your database a meaningful name.
 - The `test` database is a default database provided by TiDB. Try not to use it in a production environment if you don't have to. You can create the database yourself with the `CREATE DATABASE` statement and [change the current database](/common/sql-statements/sql-statement-use.md) with the `USE {databasename};` statement in the SQL session.
 - Create the **database**, **roles**, **users**, etc. using the root user. and grant only the necessary privileges.
-As a general rule, we do not recommend using Driver, ORM to define and change the database schema. Instead, please use **MySQL command-line client** or other **MySQL GUI client** of your choice to do so.
+- As a general rule, we do not recommend using Driver, ORM to define and change the database schema. Instead, please use **MySQL command-line client** or other **MySQL GUI client** of your choice to do so.
 
 ## One more step
 
