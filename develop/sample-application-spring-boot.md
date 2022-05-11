@@ -1,31 +1,31 @@
 ---
-title: Build the TiDB Application using Spring Boot
-summary: Gives an example of building a TiDB application using Spring Boot.
+title: Build a TiDB Application Using Spring Boot
+summary: Learn an example of how to build a TiDB application using Spring Boot.
 ---
 
 <!-- markdownlint-disable MD029 -->
 
-# Build the TiDB Application using Spring Boot
+# Build a TiDB Application Using Spring Boot
 
-This tutorial shows you how to build a [Spring Boot](https://spring.io/projects/spring-boot) Web application using TiDB. The [Spring Data JPA](https://spring.io/projects/spring-data-jpa) module is used as the framework for data access capabilities. The code repository for this sample application can be downloaded from [Github](https://github.com/pingcap-inc/tidb-example-java).
+This tutorial shows you how to build a [Spring Boot](https://spring.io/projects/spring-boot) web application using TiDB. The [Spring Data JPA](https://spring.io/projects/spring-data-jpa) module is used as the framework for data access capabilities. The code for this sample application can be downloaded from [GitHub](https://github.com/pingcap-inc/tidb-example-java).
 
-This is an example application for building a Restful API, showing a generic **Spring Boot** backend service using **TiDB** as the database. The following process was designed to recreate a realistic scenario:
+This is an sample application for building a RESTful API, which shows a generic **Spring Boot** backend service using **TiDB** as the database. The application builds upon a real-world scenario:
 
-This is an example of a game where each player has two attributes: `coins` and `goods`, and each player has a field `id` that uniquely identifies the player. Players can trade freely if they have sufficient coins and goods.
+This is an example of a game where each player has two attributes, `coins` and `goods`, and each player has an `id` field that uniquely identifies the player. Players can trade freely with each other if they have sufficient coins and goods.
 
 You can use this example as a base to build your application.
 
-## Step 1. Launch your TiDB cluster
+## Step 1: Launch your TiDB cluster
 
-This part describes how to start a TiDB cluster.
+This step describes how to start a TiDB cluster.
 
-### Using TiDB Cloud Free Cluster
+### Use TiDB Cloud Free Cluster
 
-[Create a free cluster](/develop/build-cluster-in-cloud.md#step-1-create-a-free-cluster)
+[Create a free cluster](/develop/build-cluster-in-cloud.md#step-1-create-a-free-cluster).
 
-### Using Local Clusters
+### Use Local Clusters
 
-This will briefly describe the process of starting a test cluster, for a full environment cluster deployment, or to see a more detailed deployment, please refer to [Starting TiDB Locally](/quick-start-with-tidb.md).
+This section briefly describes the process of starting a test cluster. For a production environment cluster deployment, or to see a more detailed deployment, refer to [Starting TiDB Locally](/quick-start-with-tidb.md).
 
 **Deploy local test clusters**
 
@@ -87,59 +87,59 @@ Applicable scenario: Use a local Mac or single-instance Linux environment to qui
 > - When a playground is executed in this way, TiUP will clean up the original cluster data after the deployment test is completed, and a new cluster will be obtained after re-executing the command.
 > - If you want to persist the data, you can execute TiUp's `--tag` parameter: `tiup --tag <your-tag> playground ...`, refer to the [TiUP Reference](/tiup/tiup-reference.md#-t---tag) for details.
 
-## Step 2. Install JDK
+## Step 2: Install JDK
 
-Please download and install the **Java Development Kit** (JDK) on your computer, which is a necessary tool for Java development. **Spring Boot** supports Java version 8 or higher JDK, we recommend using Java version 11 or higher JDK due to **Hibernate** version.
+Download and install the **Java Development Kit** (JDK) on your computer, which is a necessary tool for Java development. **Spring Boot** supports JDK for Java 8 and above. However, due to the **Hibernate** version, we recommend using JDK for Java 11 and above.
 
-We support both **Oracle JDK** and **OpenJDK**, please choose your preference, this tutorial will use version 17 of **OpenJDK**.
+Both **Oracle JDK** and **OpenJDK** are supported. You can choose at your own discretion. This tutorial uses JDK 17 from **OpenJDK**.
 
-## Step 3. Install Maven
+## Step 3: Install Maven
 
-This sample application uses **Maven** to manage the application's dependencies; Spring supports **Maven** from version 3.2 and above, and as dependency management software, the latest stable version of **Maven** is recommended.
+This sample application uses **Apache Maven** to manage the application's dependencies; Spring supports Maven 3.2 or above. As dependency management software, the latest stable version of **Maven** is recommended.
 
-Here is how to install **Maven** from the command line.
+To install **Maven** from the command line:
 
 - macOS:
 
     {{< copyable "shell-regular" >}}
 
-    ```
+    ```shell
     brew install maven
     ```
 
-- Installation on Debian-based Linux distributions (e.g. Ubuntu, etc.):
+- Debian-based Linux distributions (such as Ubuntu):
 
     {{< copyable "shell-regular" >}}
 
-    ```
+    ```shell
     apt-get install maven
     ```
 
-- Install on Red Hat-based Linux distributions (e.g. Fedora, CentOS, etc.):
+- Red Hat-based Linux distributions (such as Fedora, CentOS):
 
-1. dnf software package manager
+    - dnf:
 
-    {{< copyable "shell-regular" >}}
+        {{< copyable "shell-regular" >}}
 
-    ```
-    dnf install maven
-    ```
+        ```shell
+        dnf install maven
+        ```
 
-2. yum software package manager
+    - yum:
 
-    {{< copyable "shell-regular" >}}
+        {{< copyable "shell-regular" >}}
 
-    ```
-    yum install maven
-    ```
+        ```shell
+        yum install maven
+        ```
 
-For other installation methods, please refer to the Maven [official documentation](https://maven.apache.org/install.html).
+For other installation methods, refer to the [Maven official documentation](https://maven.apache.org/install.html).
 
-## Step 4. Get the application code
+## Step 4: Get the application code
 
-Please download or clone the [sample code library](https://github.com/pingcap-inc/tidb-example-java) and go to the directory `spring-jpa-hibernate`.
+Download or clone the [sample code repository](https://github.com/pingcap-inc/tidb-example-java) and navigate to the `spring-jpa-hibernate` directory.
 
-### Create the same dependency blank application (optional)
+### Create a blank application with the same dependency (optional)
 
 This application is built using [Spring Initializr](https://start.spring.io/). You can quickly get a blank application with the same dependencies as this sample application by clicking on the following options and changing a few configuration items:
 
@@ -176,7 +176,7 @@ After the configuration is completed as shown in the figure:
 
 > **Note:**
 >
-> Although SQL is relatively standardized, each database vendor uses a subset and superset of ANSI SQL defined syntax. This is referred to as the database’s dialect. Hibernate handles variations across these dialects through its `org.hibernate.dialect.Dialect` class and the various subclasses for each database vendor.
+> Although SQL is relatively standardized, each database vendor uses a subset and superset of ANSI SQL defined syntax. This is referred to as the database's dialect. Hibernate handles variations across these dialects through its `org.hibernate.dialect.Dialect` class and the various subclasses for each database vendor.
 >
 > In most cases, Hibernate will be able to determine the proper Dialect to use by asking some questions of the JDBC Connection during bootstrap. For information on Hibernate’s ability to determine the proper Dialect to use (and your ability to influence that resolution), see [Dialect resolution](https://docs.jboss.org/hibernate/orm/6.0/userguide/html_single/Hibernate_User_Guide.html#portability-dialectresolver).
 >
@@ -184,7 +184,7 @@ After the configuration is completed as shown in the figure:
 >
 > _—— Excerpt from the Hibernate official documentation: [Database Dialect](https://docs.jboss.org/hibernate/orm/6.0/userguide/html_single/Hibernate_User_Guide.html#database-dialect)_
 
-Subsequently, the project can be used normally, but only in the same way that **TiDB** can be used with **MySQL**, i.e. using the **MySQL Dialect**. This is due to the fact that **Hibernate** supports the **TiDB Dialect** from version `6.0.0.Beta2` and above, while the default dependency of **Spring Data JPA** on **Hibernate** is `5.6.4.Final`. Therefore, we recommend the following changes to `pom.xml`.
+After that, the project can be used normally, but only in the same way that TiDB can be used with MySQL, that is, using the **MySQL Dialect**. The default dependency of **Spring Data JPA** on **Hibernate** is `5.6.4.Final`, but **Hibernate** supports the **TiDB Dialect** from version `6.0.0.Beta2`. Therefore, we recommend the following changes to `pom.xml`.
 
 1. The `jakarta` packages introduced within `Spring Data JPA` are excluded as shown in this [dependency file](https://github.com/pingcap-inc/tidb-example-java/blob/main/spring-jpa-hibernate/pom.xml#L26):
 
@@ -228,9 +228,9 @@ Subsequently, the project can be used normally, but only in the same way that **
 
     Once the changes are made, you can get a blank **Spring Boot** application with the same dependencies as the sample application.
 
-## Step 5. Run the application
+## Step 5: Run the application
 
-Here the application code is compiled and run, resulting in a web application. hibernate will create a table `player_jpa` within the database `test`, and if you make requests using the application's Restful API, these requests will run database [transactions](/develop/transaction-overview.md) on the TiDB cluster.
+Here the application code is compiled and run, resulting in a web application. hibernate will create a table `player_jpa` within the database `test`, and if you make requests using the application's RESTful API, these requests will run database [transactions](/develop/transaction-overview.md) on the TiDB cluster.
 
 If you want to learn more about the code of this application, you can see the [Implementation Details](#implementation-details) at the bottom of this tutorial.
 
@@ -364,7 +364,7 @@ The output log, which indicates what the application did during startup, shows t
 
 If you want to learn more about the code of this application, you can see the [implementation details](#implementation-details) at the bottom of this tutorial.
 
-## Step 6. HTTP Request
+## Step 6: HTTP Request
 
 Once the service is up and running, the HTTP interface can be used to request the back-end application. `http://localhost:8080` is our service providing the root address. We use a series of HTTP requests to show how to use the service.
 
@@ -774,8 +774,8 @@ The [YAML](https://yaml.org/) configuration has:
 - `spring.datasource.password` : the database password, this is empty, need to comment or delete
 - `spring.datasource.driver-class-name` : database driver, since TiDB is compatible with MySQL, use mysql-connector-java driver class here `com.mysql.cj.jdbc`.
 - `jpa.show-sql` : when true, the SQL run by JPA will be printed
-- `jpa.database-platform` : the selected database dialect, here we connect to TiDB, so naturally we choose **TiDB dialect**, this dialect is only available in Hibernate version `6.0.0.Beta2` and above, please notice the dependency version.
-- `jpa.hibernate.ddl-auto` : The `create-drop` selected here will create the table at the beginning of the program and delete it on exit. Please do not use this in a formal environment, but we are using this as a sample application and want to minimize the impact on the database data, so we have chosen this option.
+- `jpa.database-platform` : the selected database dialect, here we connect to TiDB, so naturally we choose **TiDB dialect**, this dialect is only available in Hibernate version `6.0.0.Beta2` and above,  notice the dependency version.
+- `jpa.hibernate.ddl-auto` : The `create-drop` selected here will create the table at the beginning of the program and delete it on exit.  do not use this in a formal environment, but we are using this as a sample application and want to minimize the impact on the database data, so we have chosen this option.
 
 ### Entry Point
 
@@ -1097,7 +1097,7 @@ Here we use the `@Service` annotation to declare that the life cycle of this obj
 
 Note that the PlayerServiceImpl implementation class has a [@Transactional](https://docs.spring.io/spring-framework/docs/current/reference/html/data-access.html#transaction-declarative-annotations) annotation in addition to the `@Service` annotation. When transaction management is enabled in the application (which can be turned on using [@EnableTransactionManagement](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/transaction/annotation/EnableTransactionManagement.html), but is turned on by default by `Spring Boot` and does not need to be configured manually again), `Spring` automatically wraps all objects with the `@Transactional` annotation in a proxy, which is used for object invocation processing.
 
-You can simply assume that when the agent calls a function inside an object with the `@Transactional` annotation: 
+You can simply assume that when the agent calls a function inside an object with the `@Transactional` annotation:
 
 - At the top of the function it will start the transaction with `transaction.begin()`
 - When the function returns, it will call `transaction.commit()` to commit the transaction
@@ -1169,7 +1169,7 @@ public class PlayerController {
 }
 ```
 
-`PlayerController` uses annotations as many as possible to demonstrate feature, in real projects, please try to keep the style uniform while following the rules of your company or group. We will explain annotations in `PlayerController` one by one:
+`PlayerController` uses annotations as many as possible to demonstrate feature, in real projects,  try to keep the style uniform while following the rules of your company or group. We will explain annotations in `PlayerController` one by one:
 
 - [@RestController](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/RestController.html) declares the `PlayerController` as a [Web Controller](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) and serializes the return value as `JSON` output.
 - [@RequestMapping](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/RequestMapping.html)  maps the URL endpoint to `/player`, i.e. this `Web Controller` only listens for requests under the `/player` URL.
