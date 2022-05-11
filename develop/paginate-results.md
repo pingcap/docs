@@ -236,7 +236,7 @@ For non-clustered index tables (also known as "non-index-organized tables"), the
 
 > **Tips:**
 >
-> You can use the `SHOW CREATE TABLE users;` statement to check whether the table primary key uses [clustered index](https://docs.pingcap.com/tidb/stable/clustered-indexes).
+> You can use the `SHOW CREATE TABLE users;` statement to check whether the table primary key uses [clustered index](/clustered-indexes.md).
 
 For example:
 

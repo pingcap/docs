@@ -28,7 +28,7 @@ To create a database, use the `CREATE DATABASE` statement and follow [Database B
 
 Here are some best practices to follow when you create and use databases:
 
-- Try not to use a `test` database that already exists. Instead, you should use the `CREATE DATABASE` statement to create the database and use the `USE {databasename};` statement in the SQL session to [change the current database](https://docs.pingcap.com/tidb/stable/sql-statement-use).
+- Try not to use a `test` database that already exists. Instead, you should use the `CREATE DATABASE` statement to create the database and use the `USE {databasename};` statement in the SQL session to [change the current database](/common/sql-statements/sql-statement-use.md).
 - Create the **database**, **roles**, **users**, etc. using the **root user**. and grant **_only_** the necessary privileges.
 - As a general best practice, we do not recommend using Driver / ORM for database schema definition and changes. Instead, use the **MySQL command-line client** or other **MySQL GUI client** of your preferred.
 - Following [Database Naming Guidelines](/develop/object-naming-guidelines.md)

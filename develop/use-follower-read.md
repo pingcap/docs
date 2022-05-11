@@ -6,13 +6,13 @@ title: Follower Read
 
 ## Introduction
 
-In TiDB, data is stored in units of [Region](https://docs.pingcap.com/tidb/stable/tidb-storage#region), which are dispersed on all nodes in the cluster. A Region can have multiple replicas, and the replicas are divided into a leader and multiple followers. When the data on the leader changes, TiDB will update the data to the followers synchronously.
+In TiDB, data is stored in units of [Region](/tidb-storage.md#region), which are dispersed on all nodes in the cluster. A Region can have multiple replicas, and the replicas are divided into a leader and multiple followers. When the data on the leader changes, TiDB will update the data to the followers synchronously.
 
 By default, TiDB will only read and write data on the leader of the same Region. When there is a read hotspot Region in the system, the leader resource is tight and becomes the reading bottleneck of the whole system. Enabling the Follower Read feature can significantly reduce the burden on the leader, and significantly improve the overall system throughput by balancing the load among multiple followers. .
 
 ## When to use
 
-You can visually analyze whether your application has hotspot regions on the [TiDB Dashboard Key Visualizer Page](https://docs.pingcap.com/tidb/stable/dashboard-key-visualizer). You can check whether there is a read hotspot region by selecting the "metrics selection box" to `Read (bytes)` or `Read (keys)`.
+You can visually analyze whether your application has hotspot regions on the [TiDB Dashboard Key Visualizer Page](/dashboard/dashboard-key-visualizer.md). You can check whether there is a read hotspot region by selecting the "metrics selection box" to `Read (bytes)` or `Read (keys)`.
 
 If you find that there is indeed a hotspot problem, you can avoid it from the application level by reading the chapter [TiDB Hotspot Problem Handling](https://docs.pingcap.com/zh/tidb/stable/troubleshoot-hot-spot-issues) to troubleshoot it one by one.
 
@@ -29,7 +29,7 @@ You can set the value of the variable `tidb_replica_read` (the default is `leade
 SET [GLOBAL] tidb_replica_read = 'follower';
 ```
 
-You can checkout the [Follower Read - Usage](https://docs.pingcap.com/tidb/stable/follower-read#usage) section for more details on this variable.
+You can checkout the [Follower Read - Usage](/follower-read.md#usage) section for more details on this variable.
 
 </div>
 <div label="Java">
@@ -121,6 +121,6 @@ public static class AuthorDAO {
 
 ## Read more
 
-- [Follower Read](https://docs.pingcap.com/tidb/stable/follower-read)
-- [Troubleshoot Hotspot Issues](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues)
-- [TiDB Dashboard - Key Visualizer Page](https://docs.pingcap.com/tidb/stable/dashboard-key-visualizer)
+- [Follower Read](/follower-read.md)
+- [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md)
+- [TiDB Dashboard - Key Visualizer Page](/dashboard/dashboard-key-visualizer.md)

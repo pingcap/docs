@@ -25,7 +25,7 @@ This part describes how to start a TiDB cluster.
 
 ### Using Local Clusters
 
-This will briefly describe the process of starting a test cluster, for a full environment cluster deployment, or to see a more detailed deployment, please refer to [Starting TiDB Locally](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb).
+This will briefly describe the process of starting a test cluster, for a full environment cluster deployment, or to see a more detailed deployment, please refer to [Starting TiDB Locally](/quick-start-with-tidb.md).
 
 **Deploy local test clusters**
 
@@ -85,7 +85,7 @@ Applicable scenario: Use a local Mac or single-instance Linux environment to qui
 >
 > - TiDB supports v5.2.0 and later version runs `tiup playground` on Apple M1 machines.
 > - When a playground is executed in this way, TiUP will clean up the original cluster data after the deployment test is completed, and a new cluster will be obtained after re-executing the command.
-> - If you want to persist the data, you can execute TiUp's `--tag` parameter: `tiup --tag <your-tag> playground ...`, refer to the [TiUP Reference](https://docs.pingcap.com/tidb/stable/tiup-reference#-t---tag) for details.
+> - If you want to persist the data, you can execute TiUp's `--tag` parameter: `tiup --tag <your-tag> playground ...`, refer to the [TiUP Reference](/tiup/tiup-reference.md#-t---tag) for details.
 
 ## Step 2. Install JDK
 
@@ -876,12 +876,12 @@ We can see that the entity class has several annotations that give Hibernate add
 - `@Table` relates this entity class to the table `player_jpa` using the annotated attribute `name`
 - `@Id` declare that this property is related to the primary key column of the table
 - `@GeneratedValue` indicates that the value of this column is generated automatically and should not be set manually, using the attribute `generator` to specify the name of the generator as `player_id`.
-- `@SequenceGenerator` declares a generator that uses [sequence](https://docs.pingcap.com/tidb/stable/sql-statement-create-sequence), and uses the annotation attribute `name` to declare the name of the generator as `player_id` (to be consistent with the name specified in `@GeneratedValue`). Then use the annotation attribute `sequenceName` to specify the name of the sequence in the database. Finally, the annotation attribute `allocationSize` is used to declare the sequence's step size to be 1.
+- `@SequenceGenerator` declares a generator that uses [sequence](/common/sql-statements/sql-statement-create-sequence.md), and uses the annotation attribute `name` to declare the name of the generator as `player_id` (to be consistent with the name specified in `@GeneratedValue`). Then use the annotation attribute `sequenceName` to specify the name of the sequence in the database. Finally, the annotation attribute `allocationSize` is used to declare the sequence's step size to be 1.
 - `@Column` declares each private attribute as a column of the table `player_jpa`, and uses the annotated attribute `name` to determine the name of the column corresponding to the attribute.
 
 #### Repository
 
-To abstract the database layer, Spring applications use the [Repository](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories) interface, or a sub-interface of the `Repository`. This interface maps to a database object, such as a table. JPA will implement some methods for us, such as [INSERT](https://docs.pingcap.com/tidb/stable/sql-statement-insert), or [SELECT](https://docs.pingcap.com/tidb/stable/sql-statement-select), etc.
+To abstract the database layer, Spring applications use the [Repository](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories) interface, or a sub-interface of the `Repository`. This interface maps to a database object, such as a table. JPA will implement some methods for us, such as [INSERT](/common/sql-statements/sql-statement-insert.md), or [SELECT](/common/sql-statements/sql-statement-select.md), etc.
 
 {{< copyable "" >}}
 
@@ -941,7 +941,7 @@ In `getPlayerAndLock` we use an annotation [@Lock](https://docs.spring.io/spring
 @Query(value = "SELECT * FROM player_jpa WHERE id = :id FOR UPDATE", nativeQuery = true)
 ```
 
-Use SQL: `FOR UPDATE` to add locks directly. You can also go deeper into the principles with the TiDB [SELECT document](https://docs.pingcap.com/tidb/stable/sql-statement-select).
+Use SQL: `FOR UPDATE` to add locks directly. You can also go deeper into the principles with the TiDB [SELECT document](/common/sql-statements/sql-statement-select.md).
 
 ### Logic Implementation
 

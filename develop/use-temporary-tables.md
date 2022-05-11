@@ -269,8 +269,8 @@ DROP GLOBAL TEMPORARY TABLE top_50_eldest_authors_global;
 
 ## Limitation
 
-To learn about the limitations of TiDB's temporary table feature, you can read the [Compatibility restrictions with other TiDB features](https://docs.pingcap.com/tidb/stable/temporary-tables#compatibility-restrictions-with-other-tidb-features) section in the reference documents.
+To learn about the limitations of TiDB's temporary table feature, you can read the [Compatibility restrictions with other TiDB features](/temporary-tables.md#compatibility-restrictions-with-other-tidb-features) section in the reference documents.
 
 ## Read more
 
-- [Temporary Tables](https://docs.pingcap.com/tidb/stable/temporary-tables)
+- [Temporary Tables](/temporary-tables.md)

@@ -23,9 +23,9 @@ To get good SQL statement performance, you can follow these guidelines:
 
 If you still not get good performance after tuning according to [SQL Performance Tuning](#sql-performance-tuning), you may need to check your schema design and data access patterns to make sure you avoid the following issues:
 
-* Transaction contention. For how to diagnose and resolve transaction contention, see [Troubleshoot Lock Conflicts](https://docs.pingcap.com/tidb/stable/troubleshoot-lock-conflicts).
-* Hot spots. For how to diagnose and resolve hot spots, see [Troubleshoot Hotspot Issues](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues).
+* Transaction contention. For how to diagnose and resolve transaction contention, see [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md).
+* Hot spots. For how to diagnose and resolve hot spots, see [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md).
 
 ### See Also
 
-* [SQL Performance Tuning](https://docs.pingcap.com/tidb/stable/sql-tuning-overview)
+* [SQL Performance Tuning](/sql-tuning-overview.md)

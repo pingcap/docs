@@ -14,7 +14,7 @@ Next, we will introduce the data query section of TiDB around the [Bookshop](/de
 
 Before reading this chapter, you need to do the following:
 
-1. Build a TiDB cluster (recommended to use [TiDB Cloud](/develop/build-cluster-in-cloud.md) or [TiUP](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)).
+1. Build a TiDB cluster (recommended to use [TiDB Cloud](/develop/build-cluster-in-cloud.md) or [TiUP](/production-deployment-using-tiup.md)).
 2. [Import table schema and sample data of Bookshop application](/develop/bookshop-schema-design.md#import-data).
 3. [Connect to TiDB](/develop/connect-to-tidb.md).
 
@@ -57,7 +57,7 @@ The output results are as follows:
 </div>
 <div label="Java" href="simple-java">
 
-In the Java language, we define how to store the author's basic information by declaring a `Author` class. We can select the appropriate data type according to the [type](https://docs.pingcap.com/tidb/stable/data-type-overview) and [value range](https://docs.pingcap.com/zh/tidb/stable/data-type-numeric) of the data in the database, to store the corresponding data in the Java language, for example:
+In the Java language, we define how to store the author's basic information by declaring a `Author` class. We can select the appropriate data type according to the [type](/data-type-overview.md) and [value range](https://docs.pingcap.com/zh/tidb/stable/data-type-numeric) of the data in the database, to store the corresponding data in the Java language, for example:
 
 - Use a variable of type `Int` to store data of type `int`.
 - Use a variable of type `Long` to store data of type `bigint`.
@@ -231,7 +231,7 @@ The query results are as follows:
 10 rows in set (0.11 sec)
 ```
 
-By observing the query results, you can see that after using the `LIMIT` statement, the query time is significantly shortened. This is the result of TiDB's optimization of the LIMIT clause. You can push down [TopN and Limit](https://docs.pingcap.com/tidb/stable/topn-limit-push-down) for more details.
+By observing the query results, you can see that after using the `LIMIT` statement, the query time is significantly shortened. This is the result of TiDB's optimization of the LIMIT clause. You can push down [TopN and Limit](/topn-limit-push-down.md) for more details.
 
 ## Aggregate Queries
 
@@ -269,4 +269,4 @@ The query results are as follows:
 71 rows in set (0.00 sec)
 ```
 
-In addition to the `COUNT` function, TiDB also supports many useful aggregate functions. You can do this by checking the [Aggregate (GROUP BY) Functions](https://docs.pingcap.com/tidb/stable/aggregate-group-by-functions) section to learn more.
+In addition to the `COUNT` function, TiDB also supports many useful aggregate functions. You can do this by checking the [Aggregate (GROUP BY) Functions](/functions-and-operators/aggregate-group-by-functions.md) section to learn more.

@@ -216,4 +216,4 @@ The query results are as follows:
 
 ## Read more
 
-- [WITH](https://docs.pingcap.com/tidb/stable/sql-statement-with)
+- [WITH](/common/sql-statements/sql-statement-with.md)

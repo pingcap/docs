@@ -118,12 +118,12 @@ DROP VIEW book_with_ratings;
 
 ## Limitation
 
-You can learn more about the limitations by reading the [View](https://docs.pingcap.com/tidb/stable/views#limitations) section in the reference documentation.
+You can learn more about the limitations by reading the [View](/views.md#limitations) section in the reference documentation.
 
 ## Read More
 
-- [Views](https://docs.pingcap.com/tidb/stable/views)
-- [CREATE VIEW](https://docs.pingcap.com/tidb/stable/sql-statement-create-view)
-- [DROP VIEW](https://docs.pingcap.com/tidb/stable/sql-statement-drop-view)
-- [EXPLAIN Statements Using Views](https://docs.pingcap.com/tidb/stable/explain-views)
+- [Views](/views.md)
+- [CREATE VIEW](/common/sql-statements/sql-statement-create-view.md)
+- [DROP VIEW](/common/sql-statements/sql-statement-drop-view.md)
+- [EXPLAIN Statements Using Views](/explain-views.md)
 - [TiFlink: Strongly Consistent Materialized Views Using TiKV and Flink](https://github.com/tiflink/tiflink)

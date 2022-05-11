@@ -7,8 +7,8 @@ summary: The ways, best practices and examples for updating data, batch update d
 
 This page will show the following SQL statements to update the data in TiDB with various programming languages:
 
-- [UPDATE](https://docs.pingcap.com/tidb/stable/sql-statement-update): Used to modify the data in the specified table.
-- [INSERT ON DUPLICATE KEY UPDATE](https://docs.pingcap.com/tidb/stable/sql-statement-insert): Used to insert data and update this data if there is a primary key or unique key conflict. Note that **_NOT RECOMMENDED_** to use this statement if there are multiple unique keys (including primary keys). This is because this statement will update the data if any unique key (including primary key) conflicts are detected. When more than one row is matched to a conflict, only one row of data will be updated.
+- [UPDATE](/common/sql-statements/sql-statement-update.md): Used to modify the data in the specified table.
+- [INSERT ON DUPLICATE KEY UPDATE](/common/sql-statements/sql-statement-insert.md): Used to insert data and update this data if there is a primary key or unique key conflict. Note that **_NOT RECOMMENDED_** to use this statement if there are multiple unique keys (including primary keys). This is because this statement will update the data if any unique key (including primary key) conflicts are detected. When more than one row is matched to a conflict, only one row of data will be updated.
 
 ## Before you start
 
@@ -20,7 +20,7 @@ Before reading this page, you need to prepare the following:
 
 ## Using `UPDATE`
 
-To update an existing row in a table, you need to use a [UPDATE statement](https://docs.pingcap.com/tidb/stable/sql-statement-update) with a `WHERE` clause, i.e., you need to filter the columns for updating.
+To update an existing row in a table, you need to use a [UPDATE statement](/common/sql-statements/sql-statement-update.md) with a `WHERE` clause, i.e., you need to filter the columns for updating.
 
 > **Note:**
 >
@@ -45,14 +45,14 @@ UPDATE {table} SET {update_column} = {update_value} WHERE {filter_column} = {fil
 | `{filter_column}` | Column names used by conditional filters |
 | `{filter_value}`  | Column values used by conditional filters |
 
-This only shows a simple usage of `UPDATE`. For detailed documentation, refer to TiDB's [UPDATE syntax](https://docs.pingcap.com/tidb/stable/sql-statement-update) page.
+This only shows a simple usage of `UPDATE`. For detailed documentation, refer to TiDB's [UPDATE syntax](/common/sql-statements/sql-statement-update.md) page.
 
 ### `UPDATE` Best Practices
 
 There are some best practices to follow when updating rows as follows:
 
 - Always specify the `WHERE` clause in the update statement. If the `UPDATE` does not have a `WHERE` clause, TiDB will update **_ALL ROWS_** within this table.
-- Use [bulk-update](#bulk-update) when you need to update a large number of rows (tens of thousands or more), because TiDB has a single transaction size limit of [txn-total-size-limit](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit) (default is 100MB) and too many data updates at once will result in holding locks for too long ([pessimistic transactions](https://docs.pingcap.com/tidb/stable/pessimistic-transaction)) or creating a lot of conflicts ([optimistic transactions](https://docs.pingcap.com/tidb/stable/optimistic-transaction)).
+- Use [bulk-update](#bulk-update) when you need to update a large number of rows (tens of thousands or more), because TiDB has a single transaction size limit of [txn-total-size-limit](/tidb-configuration-file.md#txn-total-size-limit) (default is 100MB) and too many data updates at once will result in holding locks for too long ([pessimistic transactions](/pessimistic-transaction.md)) or creating a lot of conflicts ([optimistic transactions](/optimistic-transaction.md)).
 
 ### `UPDATE` Example
 
@@ -164,7 +164,7 @@ VALUES (?, ?, ?, NOW()) ON DUPLICATE KEY UPDATE `score` = ?, `rated_at` = NOW()"
 
 When you need to update multiple rows of data in a table, you can choose to [use `UPDATE`](#using-update) and use the `WHERE` clause to filter the data that needs to be updated.
 
-However, if you need to update a large number of rows (tens of thousands or more), we recommend using an iteration that updates only a portion of the data at a time until the update is all done. This is because TiDB has a single transaction size limit of [txn-total-size-limit](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit) (100MB by default), and too many data updates at once will result in holding locks for too long ([pessimistic transactions](https://docs.pingcap.com/tidb/stable/pessimistic-transaction), or creating a lot of conflicts ([optimistic transactions](https://docs.pingcap.com/tidb/stable/optimistic-transaction)). You can use a loop in your program or script to complete the operation.
+However, if you need to update a large number of rows (tens of thousands or more), we recommend using an iteration that updates only a portion of the data at a time until the update is all done. This is because TiDB has a single transaction size limit of [txn-total-size-limit](/tidb-configuration-file.md#txn-total-size-limit) (100MB by default), and too many data updates at once will result in holding locks for too long ([pessimistic transactions](/pessimistic-transaction.md), or creating a lot of conflicts ([optimistic transactions](/optimistic-transaction.md)). You can use a loop in your program or script to complete the operation.
 
 This page provides examples of writing scripts to handle recurring updates. This example shows how a combination of `SELECT` and `UPDATE` should be done to complete a bulk-update.
 
@@ -178,7 +178,7 @@ Suppose that we have had a lot of book ratings from users on our `bookshop` site
 
 At this point, we need to multiply by `2` the data in the `ratings` table from the previous 5-point scale and add a new column to the ratings table to indicate whether the rows have been updated. Using this column, we can filter out rows that have been updated in `SELECT`, which will prevent the script from crashing and updating the rows multiple times, resulting in unreasonable data.
 
-For example, you could create a column named `ten_point` with the data type [BOOL](https://docs.pingcap.com/tidb/stable/data-type-numeric#boolean-type) as an identifier of whether it is a 10-point scale:
+For example, you could create a column named `ten_point` with the data type [BOOL](/data-type-numeric.md#boolean-type) as an identifier of whether it is a 10-point scale:
 
 {{< copyable "sql" >}}
 
@@ -188,7 +188,7 @@ ALTER TABLE `bookshop`.`ratings` ADD COLUMN `ten_point` BOOL NOT NULL DEFAULT FA
 
 > **Note:**
 >
-> This bulk-update application will use **DDL** statements to make schema changes to the data tables. all DDL change operations for TiDB are online, see here for the [ADD COLUMN](https://docs.pingcap.com/tidb/stable/sql-statement-add-column) statements used here.
+> This bulk-update application will use **DDL** statements to make schema changes to the data tables. all DDL change operations for TiDB are online, see here for the [ADD COLUMN](/common/sql-statements/sql-statement-add-column.md) statements used here.
 
 <SimpleTab>
 <div label="Golang">

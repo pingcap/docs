@@ -65,7 +65,7 @@ EXPLAIN SELECT * FROM books WHERE title = 'Marian Yost';
 
 As can be seen from `TableFullScan_5` in the execution plan, TiDB will perform a full table scan of table `books` and then check whether `title` satisfies the condition for each row. The `estRows` value of `TableFullScan_5` is `1000000.00`, indicating that the optimizer estimates that this full table scan will scan `1000000.00` rows of data.
 
-For more information about the usage of `EXPLAIN`, see [EXPLAIN Walkthrough](https://docs.pingcap.com/tidb/stable/explain-walkthrough).
+For more information about the usage of `EXPLAIN`, see [EXPLAIN Walkthrough](/explain-walkthrough.md).
 
 ### Solution: Use Secondary Index
 
@@ -121,7 +121,7 @@ As can be seen from `IndexLookup_10` in the execution plan, TiDB will query the 
 
 The execution process of the `IndexLookup_10` is to first use the `IndexRangeScan_8` operator to read the index data that meets the condition through the `title_idx` index, and then query the corresponding row data according to the Row ID stored in the index data by `TableLookup_9` operator.
 
-For more information on the TiDB execution plan, see [TiDB Query Execution Plan Overview](https://docs.pingcap.com/tidb/stable/explain-overview).
+For more information on the TiDB execution plan, see [TiDB Query Execution Plan Overview](/explain-overview.md).
 
 ### Solution: Use Covering Index
 
@@ -268,9 +268,9 @@ EXPLAIN SELECT * FROM books WHERE id = 896;
 
 ## Use Right Join Type
 
-See [JOIN Execution Plan](https://docs.pingcap.com/tidb/stable/explain-joins)。
+See [JOIN Execution Plan](/explain-joins.md)。
 
 ### See Also
 
-* [EXPLAIN Walkthrough](https://docs.pingcap.com/tidb/stable/explain-walkthrough)
-* [Explain Statements That Use Indexes](https://docs.pingcap.com/tidb/stable/explain-indexes)
+* [EXPLAIN Walkthrough](/explain-walkthrough.md)
+* [Explain Statements That Use Indexes](/explain-indexes.md)

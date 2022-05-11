@@ -141,7 +141,7 @@ The query results are as follows:
 
 ### Non-aggregate window function
 
-Besides, TiDB also provides us with some non-aggregated [window functions](https://docs.pingcap.com/tidb/stable/window-functions), with the help of which we can realize richer analysis queries.
+Besides, TiDB also provides us with some non-aggregated [window functions](/functions-and-operators/window-functions.md), with the help of which we can realize richer analysis queries.
 
 For example, in the previous [Pagination Query](/develop/paginate-results.md) chapter, we have introduced how to use the `row_number()` function to achieve efficient pagination batch processing.
 
@@ -218,7 +218,7 @@ This is because when using window functions, it is often necessary to perform a 
 
 ### Specify the query engine
 
-TiDB will use the cost-based optimizer (CBO) to automatically choose whether to use TiFlash replicas based on cost estimates. However, in practice, if you are very sure about the type of query, it is recommended that you use [Optimizer Hints](https://docs.pingcap.com/tidb/stable/optimizer-hints) to explicitly specify the query engine used for the query to avoid fluctuations in application performance due to different optimization results from the optimizer. 
+TiDB will use the cost-based optimizer (CBO) to automatically choose whether to use TiFlash replicas based on cost estimates. However, in practice, if you are very sure about the type of query, it is recommended that you use [Optimizer Hints](/optimizer-hints.md) to explicitly specify the query engine used for the query to avoid fluctuations in application performance due to different optimization results from the optimizer.
 
 You can use Hint `/*+ read_from_storage(engine_name[table_name]) */` to specify the query engine to be used when querying in the SELECT statement like the following SQL:
 
@@ -253,11 +253,11 @@ SELECT * FROM acc;
 
 If you check the execution plan of the above SQL with the `EXPLAIN` statement, you will see both `cop[tiflash]` and `cop[tikv]` in the task column, which means that TiDB is scheduling both the row-store query engine and the column-store query engine to complete the query when it processes this query. It is important to note that since the tiflash and tikv storage engines are usually part of different compute nodes, the two query types are not affected by each other.
 
-You can learn more about how TiDB chooses to use TiFlash by reading the section [Reading TiFlash with TiDB](https://docs.pingcap.com/tidb/stable/use-tiflash#use-tidb-to-read-tiflash-replicas) as a query engine.
+You can learn more about how TiDB chooses to use TiFlash by reading the section [Reading TiFlash with TiDB](/tiflash/use-tiflash.md#use-tidb-to-read-tiflash-replicas) as a query engine.
 
 ## Read more
 
-- [Quick Start Guide for TiDB HTAP](https://docs.pingcap.com/tidb/stable/quick-start-with-htap)
-- [Explore HTAP](https://docs.pingcap.com/tidb/stable/explore-htap)
-- [Window Functions](https://docs.pingcap.com/tidb/stable/window-functions)
-- [Use TiFlash](https://docs.pingcap.com/tidb/stable/use-tiflash)
+- [Quick Start Guide for TiDB HTAP](/quick-start-with-htap.md)
+- [Explore HTAP](/explore-htap.md)
+- [Window Functions](/functions-and-operators/window-functions.md)
+- [Use TiFlash](/tiflash/use-tiflash.md)
