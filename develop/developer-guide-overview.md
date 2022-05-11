@@ -5,17 +5,21 @@ summary: Described the outline of the developer's guide is listed.
 
 # Developer Overview
 
-This guide will show how to quickly build an application using TiDB. Therefore, before reading this page, we recommend that you read the [Quick Start Guide for the TiDB Database Platform](/quick-start-with-tidb.md) and install the Driver or use the ORM framework
+This guide is written for application developers, but if you are interested in the inner workings of TiDB or want to get involved in TiDB development, then go read the [TiDB Kernel Development Guide](https://pingcap.github.io/tidb-dev-guide/) for more information about TiDB.
 
-## Guide contents
+We will show how to quickly build an application using TiDB. Therefore, before reading this page, we recommend that you read the [Quick Start Guide for the TiDB Database Platform](/quick-start-with-tidb.md) and install the Driver or use the ORM framework.
 
-- [Overview](#tidb-basics)
+This guide will cover the following:
+
+- [Quick Start](/develop/build-cluster-in-cloud)
 - [Choose Driver or ORM](/develop/choose-driver-or-orm.md)
 - [Connect to TiDB](/develop/connect-to-tidb.md)
 - [Database Schema Design](/develop/schema-design-overview.md)
-- [Insert Data](/develop/insert-data.md)
+- [Write Data](/develop/insert-data.md)
 - [Read Data](/develop/get-data-from-single-table.md)
 - [Transaction](/develop/transaction-overview.md)
+- [Optimize](/develop/optimize-sql-overview.md)
+- [Example Applications](/develop/sample-application-spring-boot.md)
 
 ## TiDB Basics
 
@@ -23,8 +27,6 @@ Before you start working with TiDB, you need to understand some important mechan
 
 - Read the [TiDB Transaction Overview](/transaction-overview.md) to understand how TiDB transactions work or check out the [Transaction Notes for Application Developers](/develop/transaction-overview.md) to see what application developers need to know about the part of the transaction.
 - In addition, you need to understand [The way applications interact with TiDB](#the-way-applications-interact-with-tidb)
-
-The following sections are written for application developers, but if you are interested in the inner workings of TiDB or want to get involved in TiDB development, then go read the [TiDB Kernel Development Guide](https://pingcap.github.io/tidb-dev-guide/) for more information about TiDB.
 
 ## TiDB Transaction Mechanism
 
