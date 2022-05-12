@@ -3,7 +3,7 @@ title: TiDB 5.4.1 Release Notes
 ---
 # TiDB 5.4.1 Release Notes
 
-Release Date: May xx, 2022
+Release Date: May 13, 2022
 
 TiDB version: 5.4.1
 
@@ -11,13 +11,7 @@ TiDB version: 5.4.1
 
 + TiDB
 
-    - note 1
-    - note 2
-
-+ TiKV
-
-    - note 1
-    - note 2
+    - (dup: release-6.0.0-dmr.md > Bug fixes> TiDB)- Fix the issue that `date_format` in TiDB handles `'\n'` in a MySQL-incompatible way [#32232](https://github.com/pingcap/tidb/issues/32232)
 
 ## Improvements
 
@@ -64,7 +58,6 @@ collecting statistics [#34256](https://github.com/pingcap/tidb/issues/34256)
     - (dup: release-6.0.0-dmr.md > Bug fixes> TiDB)- Fix a bug that CTE might be blocked when a query reports errors [#31302](https://github.com/pingcap/tidb/issues/31302)
     - (dup: release-5.2.4.md > Bug fixes> TiDB)- Fix wrong range calculation results for Nulleq function on Enum values [#32428](https://github.com/pingcap/tidb/issues/32428)
     - (dup: release-6.0.0-dmr.md > Bug fixes> TiDB)- Fix TiDB OOM when exporting data using ChunkRPC [#31981](https://github.com/pingcap/tidb/issues/31981) [#30880](https://github.com/pingcap/tidb/issues/30880)
-    - (dup: release-6.0.0-dmr.md > Bug fixes> TiDB)- Fix the issue that `date_format` in TiDB handles `'\n'` in a MySQL-incompatible way [#32232](https://github.com/pingcap/tidb/issues/32232)
     - (dup: release-6.0.0-dmr.md > Bug fixes> TiDB)- Fix the potential issue that Regions might be unevenly distributed after a restore operation is finished [#31034](https://github.com/pingcap/tidb/issues/31034)
     - (dup: release-5.3.1.md > Bug fixes> TiDB)- Fix a bug that `tidb_super_read_only` is not automatically enabled when `tidb_restricted_read_only` is enabled [#31745](https://github.com/pingcap/tidb/issues/31745)
     - (dup: release-6.0.0-dmr.md > Bug fixes> TiDB)- Fix the issue that the `greatest` or `least` function with collation gets a wrong result [#31789](https://github.com/pingcap/tidb/issues/31789)
