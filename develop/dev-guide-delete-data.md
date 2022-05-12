@@ -15,7 +15,7 @@ Before reading this document, you need to prepare the following:
 - Read [Schema Design Overview](/develop/dev-guide-schema-design-overview.md), [Create a Database](/develop/dev-guide-create-database.md), [Create a Table](/develop/dev-guide-create-table.md), and [Create Secondary Indexes](/develop/dev-guide-create-secondary-indexes.md).
 - If you need to delete data, you need to [insert data](/develop/dev-guide-insert-data.md) first.
 
-## SQL Syntax
+## SQL syntax
 
 In SQL, the `DELETE` statement is generally in the following form:
 
@@ -32,7 +32,7 @@ DELETE FROM {table} WHERE {filter}
 
 This only shows a simple usage of `DELETE`. For detailed information, see [DELETE syntax](/common/sql-statements/sql-statement-delete.md).
 
-## Best Practices
+## Best practices
 
 The following are some best practices to follow when you delete rows:
 
@@ -96,9 +96,9 @@ try (Connection connection = ds.getConnection()) {
 >
 > Also, like MySQL, the `TIMESTAMP` data type is affected by the [year 2038 problem](https://en.wikipedia.org/wiki/Year_2038_problem). It is recommended to use the `DATETIME` type if storing values larger than 2038.
 
-## Performance Considerations
+## Performance considerations
 
-### TiDB GC Mechanism
+### TiDB GC mechanism
 
 TiDB does not delete the data immediately after the `DELETE` statement runs. Instead, it marks the data as ready for deletion. Then it waits for TiDB GC (Garbage Collection) to clean up the outdated data. Therefore, your DELETE statement **_DOES NOT_** immediately reduce disk usage.
 
@@ -122,7 +122,7 @@ This document provides an example of writing a script to handle a cyclic delete 
 
 First, you write a `SELECT` query in a loop of your application or script. The returned value of this query can be used as the primary key for the rows that need to be deleted. Note that when defining this `SELECT` query, you need to use the `WHERE` clause to filter the rows that need to be deleted.
 
-### Bulk-delete Example
+### Bulk-delete example
 
 Suppose we find that a application error has occurred within a specific time period and we need to delete all the data for the [rating](/develop/dev-guide-bookshop-schema-design.md#ratings-table) within this period, for example, `2022-04-15 00:00:00` to `2022-04-15 00:15:00`, and more than 10,000 data are written in 15 minutes, we should use a round robin deletion to delete.
 

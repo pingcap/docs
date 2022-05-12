@@ -18,7 +18,7 @@ Before reading this document, you need to prepare the following:
 - Read [Schema Design Overview](/develop/dev-guide-schema-design-overview.md), [Create a Database](/develop/dev-guide-create-database.md), [Create a Table](/develop/dev-guide-create-table.md), and [Create Secondary Indexes](/develop/dev-guide-create-secondary-indexes.md).
 - If you want to `UPDATE` data, you need to [insert data](/develop/dev-guide-insert-data.md) first.
 
-## Using `UPDATE`
+## Use `UPDATE`
 
 To update an existing row in a table, you need to use a [UPDATE statement](/common/sql-statements/sql-statement-update.md) with a `WHERE` clause to filter the columns for updating.
 
@@ -54,7 +54,7 @@ There are some best practices to follow when updating rows as follows:
 - Always specify the `WHERE` clause in the update statement. If the `UPDATE` statement does not have a `WHERE` clause, TiDB will update **_ALL ROWS_** within this table.
 - Use [bulk-update](#bulk-update) when you need to update a large number of rows (tens of thousands or more), because TiDB limits the size of a single transaction ([txn-total-size-limit](/tidb-configuration-file.md#txn-total-size-limit), 100 MB by default), and too many data updates at once will result in holding locks for too long ([pessimistic transactions](/pessimistic-transaction.md)) or cause a lot of conflicts ([optimistic transactions](/optimistic-transaction.md)).
 
-### `UPDATE` Example
+### `UPDATE` example
 
 Suppose an author changes her name to **Helen Haruki** and needs to change the [authors](/develop/dev-guide-bookshop-schema-design.md#authors-table) table. Assume that her unique `id` is **1**, and the filter should be: `id = 1`.
 
@@ -88,7 +88,7 @@ try (Connection connection = ds.getConnection()) {
 </div>
 </SimpleTab>
 
-## Using `INSERT ON DUPLICATE KEY UPDATE`
+## Use `INSERT ON DUPLICATE KEY UPDATE`
 
 If you need to insert new data into a table, but if any unique key (primary key is also a unique key) conflicts, the first entry of conflicted data will be updated. You can use `INSERT ... ON DUPLICATE KEY UPDATE ...` statement to insert or update.
 
@@ -269,7 +269,7 @@ func placeHolder(n int) string {
 }
 ```
 
-In each iteration, `SELECT` queries in primary key order, selecting primary key values for up to `1000` rows of data that have not been updated to the 10-point scale (`ten_point` is `false`). Each `SELECT` with a primary key larger than the largest of the previous `SELECT` results to prevent duplication. Then, using a bulk-update, multiply its `score` column by `2` and set `ten_point` to `true`. The point of updating `ten_point` is to prevent our update application from crashing and restarting and repeatedly updating the same row of data, which can lead to data corruption. `time.Sleep(time.Second)` in each loop will make the update application pause for 1 second to prevent the update application from taking up too much hardware resources.
+In each iteration, `SELECT` queries in order of the primary key, selecting primary key values for up to `1000` rows of data that have not been updated to the 10-point scale (`ten_point` is `false`). Each `SELECT` with a primary key larger than the largest of the previous `SELECT` results to prevent duplication. Then, using a bulk-update, multiply its `score` column by `2` and set `ten_point` to `true`. The point of updating `ten_point` is to prevent our update application from crashing and restarting and repeatedly updating the same row of data, which can lead to data corruption. `time.Sleep(time.Second)` in each loop will make the update application pause for 1 second to prevent the update application from consuming too much hardware resources.
 
 </div>
 
@@ -439,7 +439,7 @@ public class BatchUpdateExample {
 </hibernate-configuration>
 ```
 
-In each iteration, `SELECT` queries in primary key order, selecting primary key values for up to `1000` rows of data that have not been updated to the 10-point scale (`ten_point` is `false`). Each `SELECT` with a primary key larger than the largest of the previous `SELECT` results to prevent duplication. Then, using a bulk-update, multiply its `score` column by `2` and set `ten_point` to `true`. The point of updating `ten_point` is to prevent our update application from crashing and restarting and repeatedly updating the same row of data, which can lead to data corruption. `TimeUnit.SECONDS.sleep(1);` in each loop will make the update application pause for 1 second to prevent the update application from taking up too much hardware resources.
+In each iteration, `SELECT` queries in order of the primary key, selecting primary key values for up to `1000` rows of data that have not been updated to the 10-point scale (`ten_point` is `false`). Each `SELECT` with a primary key larger than the largest of the previous `SELECT` results to prevent duplication. Then, using a bulk-update, multiply its `score` column by `2` and set `ten_point` to `true`. The point of updating `ten_point` is to prevent the update application from crashing and restarting and repeatedly updating the same row of data, which can lead to data corruption. `TimeUnit.SECONDS.sleep(1);` in each loop will make the update application pause for 1 second to prevent the update application from consuming too much hardware resources.
 
 </div>
 

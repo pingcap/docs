@@ -16,7 +16,7 @@ Before reading this document, you need to prepare the following:
 - [Build a TiDB Cluster in TiDB Cloud(DevTier)](/develop/dev-guide-build-cluster-in-cloud.md).
 - Read [Schema Design Overview](/develop/dev-guide-schema-design-overview.md), [Create a Database](/develop/dev-guide-create-database.md), [Create a Table](/develop/dev-guide-create-table.md), and [Create Secondary Indexes](/develop/dev-guide-create-secondary-indexes.md)
 
-## Insert Rows
+## Insert rows
 
 There are two ways to insert multiple rows of data. For example, if you need to insert **3** players' data.
 
@@ -185,6 +185,6 @@ This is to indicate that it is not recommended to manually specify the `AUTO_RAN
     INSERT INTO `bookshop`.`users` (`id`, `balance`, `nickname`) VALUES (1, 0.00, 'nicky');
     ```
 
-## Using HTAP
+## Use HTAP
 
 In TiDB, using HTAP capabilities does not require you to perform additional operations when inserting data. There is no additional insertion logic, and TiDB does the data consistency assurance automatically. All you need to do is [turn on column-oriented copy synchronization](/develop/dev-guide-create-table.md#using-htap-capabilities) after creating the table and you can use the column copy to speed up your queries directly.

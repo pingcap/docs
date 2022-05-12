@@ -147,7 +147,7 @@ try (Connection connection = ds.getConnection()) {
 
 </SimpleTab>
 
-### `INSERT` Example
+### `INSERT` example
 
 Using the [books table](/develop/dev-guide-bookshop-schema-design.md#books-table) as an example, you need to insert a book with a `title` of `TiDB Developer Guide`, `type` of `Science & Technology`, `stock` of `100`, `price` of `0.0`, and `published_at` the `current time of insertion`. Note that the **primary key** of our `books` table contains the `AUTO_RANDOM` attribute, which you don't need to specify. If you are not familiar with inserting data, you can learn more about inserting data in [Insert Data](/develop/dev-guide-insert-data.md).
 
