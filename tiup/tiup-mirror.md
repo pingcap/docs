@@ -124,7 +124,7 @@ tiup list
 If you run the `tiup mirror clone` command again with the same `target-dir`, the machine will create new manifests and download the latest versions of components available.
 
 > **Note:**
-> 
+>
 > Before recreating the manifest, ensure that all components and versions (including earlier ones downloaded previously) are included.
 
 ## Custom repository
@@ -192,15 +192,15 @@ tiup mirror grant jdoe
     ```bash
     $ tiup hello
     ```
-    
+
     ```
     The component `hello` version  is not installed; downloading from repository.
     Starting component `hello`: /home/dvaneeden/.tiup/components/hello/v0.0.1/hello
     hello
     ```
-    
+
     With `tiup mirror merge`, you can merge a repository with custom components into another one. This assumes that all components in `/data/my_custom_components` are signed by the current `$USER`.
-    
+
     ```bash
     $ tiup mirror set /data/my_mirror
     $ tiup mirror grant $USER
