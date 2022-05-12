@@ -1,45 +1,33 @@
 ---
 title: Create a Table
-summary: The ways, best practices, and examples for creating tables.
+summary: Methods, rules to be followed and examples when creating tables.
 ---
 
 # Create a Table
 
-This page provides a best practice guide for creating tables and an example of a [bookshop](/develop/bookshop-schema-design.md) database based on TiDB.
+In this section, we will start to introduce how to create tables using SQL and various programming languages, and the rules to follow when creating tables. And we will introduce the table creation of TiDB by the [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application.
 
 > **Note:**
 >
-> Detailed reference documentation for this `CREATE TABLE` statement, including additional examples, can be found in the [CREATE TABLE](https://docs.pingcap.com/zh/tidb/stable/sql-statement-create-table) documentation.
+> Here we will only briefly describe the `CREATE TABLE` statement, for detailed reference documentation (including additional examples), see the [CREATE TABLE](/common/sql-statements/sql-statement-create-table.md) documentation.
 
 ## Before you start
 
 Before reading this page, you need to prepare the following:
 
-- [Build a TiDB Cluster in TiDB Cloud(DevTier)](/develop/build-cluster-in-cloud.md).
-- Read [Schema Design Overview](/develop/schema-design-overview.md).
-- [Create a Database](/develop/create-database.md).
+- [Build a TiDB Cluster in TiDB Cloud(DevTier)](/develop/dev-guide-build-cluster-in-cloud.md).
+- Read [Schema Design Overview](/develop/dev-guide-schema-design-overview.md).
+- [Create a Database](/develop/dev-guide-create-database.md).
 
-## How to create a table
+## What is a table
 
-[Table](/develop/schema-design-overview.md#table) is a logical object. It would stores data sent from the persistence layer of an application or from other SQL. Tables saved data records in the form of rows and columns.
+[Table](/develop/dev-guide-schema-design-overview.md#table) is a logical object in TiDB cluster that is subordinate to the [database](/develop/dev-guide-schema-design-overview.md#database). It is used to stores the data sent from SQL. Tables saved data records in the form of rows and columns. A table has at least one column, and each row of data has data for all columns.
 
-To create a table, use the [CREATE TABLE](/common/sql-statements/sql-statement-create-table.md) statement and follow the best practices:
+## Naming a table
 
-- [Naming a table](#naming-a-table)
-- [Defining columns](#defining-columns)
-- [Select primary key](#select-primary-key)
-- [Clustered or not](#clustered-or-not)
-- [Add column constraints](#add-column-constraints)
-- [Using HTAP capabilities](#using-htap-capabilities)
-- [Execute the `CREATE TABLE` statement](#execute-the-create-table-statement)
+The first step in creating a table is to give your table a name. Please do not use meaningless table names that will cause great distress to youself or your colleagues in the future. We recommend that you follow your company or organization's table naming convention.
 
-After reviewing each best practice, you can take a look at the examples provided in this page.
-
-### Naming a table
-
-Giving your table a name is the first step in creating it. We recommend that you follow your company or organization's table naming convention.
-
-The `CREATE TABLE` statement usually takes the following form.
+The `CREATE TABLE` statement usually takes the following form:
 
 {{< copyable "sql" >}}
 
@@ -52,18 +40,6 @@ CREATE TABLE {table_name} ( {elements} );
 | `{table_name}` |                      Table name                      |
 |  `{elements}`  | A comma-separated list of table elements, such as column definitions, primary key definitions, etc. |
 
-#### Best Practices for naming a table
-
-There are some best practices to follow when naming tables:
-
-- Use a **fully-qualified** table name (i.e., `CREATE TABLE {database_name}. {table_name}`). This is because when you do not specify a database name, TiDB will use the current database in your **SQL session**. If you do not use `USE {databasename};` to specify the database in your SQL session, TiDB will return an error.
-- Use meaningful table names, for example, if you need to create a user table, you can use names: `user`, `t_user`, `users`, etc., or follow your company or organization's naming convention. If your company or organization does not have a naming convention, you can refer to the [table naming convention](/develop/object-naming-guidelines.md#table-naming-convention). Do not use such table names as: `t1`, `table1`, etc.
-- Multiple words are separated by an underscore, more than 32 characters are not recommended.
-- Create separate DATABASE for tables of different business modules and add comments accordingly.
-- Create a separate `DATABASE` for the tables of different business modules and add comments accordingly.
-
-#### Table naming example
-
 Suppose you need to create a table to store the user information in the `bookshop` database.
 
 Note that the following SQL cannot be run yet because not a single column has been added.
@@ -75,7 +51,7 @@ CREATE TABLE `bookshop`.`users` (
 );
 ```
 
-### Defining columns
+## Defining columns
 
 **Columns** provide structure to a table by dividing the values in each row into small cells of a single data type.
 
@@ -90,18 +66,6 @@ Column definitions typically use the following form.
 |     `{column_name}`      |                                                                               Column name                                                                                |
 |      `{data_type}`       | Column [data type](/basic-features.md#data-types-functions-and-operators) |
 | `{column_qualification}` | Column qualifications, such as **column-level constraints** or [generated column (experimental function)](/generated-columns.md) clauses |
-
-#### Best Practices for defining columns
-
-There are some best practices to follow when defining columns:
-
-- Check the [data types](/basic-features.md#data-types-functions-and-operators) of the supporting columns and organize your data according to the data type restrictions. Select the appropriate type for the data you plan to be present in the column.
-- Check the [best practices](#best-practices-for-select-primary-key) and [examples](#select-primary-key-example) for selecting primary keys and decide whether to use primary key columns.
-- Check [best practices](#best-practices-for-select-clustered-index) and [examples](#select-clustered-index-example) for selecting clustered indexes and decide whether to specify **clustered indexes**.
-- Check [adding column constraints](#add-column-constraints) and decide whether to add constraints to the columns.
-- Please use meaningful column names. we recommend that you follow your company or organization's table naming convention. If your company or organization does not have a corresponding naming convention, refer to the [column naming convention](/develop/object-naming-guidelines.md#field-naming-convention).
-
-#### Defining columns example
 
 We can add some columns to the `users` table, such as their unique identifier `id`, `balance` and `nickname`.
 
@@ -144,7 +108,7 @@ This table contains more data types than the `users` table.
 - [datetime](/data-type-date-and-time.md): The **datetime** type can be used to store time values.
 - [enum](/data-type-string.md#enum-type): Enum type can be used to save a limited selection of values.
 
-### Select primary key
+## Select primary key
 
 [Primary key](/constraints.md#primary-key) is a column or group of columns, and this value, which is a combination of all **primary key columns**, is a unique identifier for a row of data.
 
@@ -162,21 +126,7 @@ When the **primary key** of a table is [integer types](/data-type-numeric.md#int
 
 For more information on how to handle hotspot issues, please refer to [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md).
 
-#### Best Practices for select primary key
-
-There are some best practices to follow when selecting primary key columns in TiDB:
-
-- Define a **primary key** or **unique index** within the table.
-- Try to select meaningful **columns** as **primary keys**.
-- For performance reasons, try to avoid storing extra-wide tables, the number of table fields is not recommended to over `60`, the total data size of a single row is not recommended to over `64K`, and fields with too much data length are best split to another table.
-- It is not recommended to use complex data types.
-- The fields need to **JOIN** , ensure data types absolute consistency, to avoid implicit conversion.
-- Avoid defining **primary keys** on a single monotonic data column. If you use a single monotonic data column (e.g., a column of `AUTO_INCREMENT`) to define the **primary key**, there is a risk of a negative impact on write performance. If possible, use `AUTO_RANDOM` instead of `AUTO_INCREMENT` (this loses the continuous and incremental nature of the primary key).
-- If you **_must_** create an index on a single monotonic data column at write-intensive scenarios. Instead of defining this monotonic data column as the **primary key**. You can use `AUTO_RANDOM` to create the **primary key** for that table, or use [SHARD_ROW_ID_BITS](/shard-row-id-bits.md) and [PRE_SPLIT_REGIONS](/common/sql-statements/sql-statement-split-region.md#pre_split_regions) to shard `_tidb_rowid`.
-
-#### Select primary key example
-
-Following the [Best Practices for select primary key](#best-practices-for-select-primary-key), we show a scenario where the `AUTO_RANDOM` primary key is defined in the `users` table.
+Following the [Rules when selecting primary key](#rules-to-follow-when-selecting-primary-key), we show a scenario where the `AUTO_RANDOM` primary key is defined in the `users` table.
 
 {{< copyable "sql" >}}
 
@@ -189,7 +139,7 @@ CREATE TABLE `bookshop`.`users` (
 );
 ```
 
-### Clustered or not
+## Clustered or not
 
 TiDB supports the [clustered index](/clustered-indexes.md) feature since v5.0. This feature controls how data is stored in tables containing primary keys. It provides TiDB the ability to organize tables in a way that can improve the performance of certain queries.
 
@@ -209,25 +159,7 @@ As described in [select primary key](#select-primary-key), **clustered indexes**
 >
 > TiDB supports clustering only by a table's `PRIMARY KEY`. With clustered indexes enabled, the terms _the_ `PRIMARY KEY` and _the clustered index_ might be used interchangeably. `PRIMARY KEY` refers to the constraint (a logical property), and clustered index describes the physical implementation of how the data is stored.
 
-#### Best Practices for select clustered index
-
-The following are some best practices to follow when selecting **clustered indexes** in TiDB.
-
-- Follow the [best practices for select primary key](#best-practices-for-select-primary-key), **Clustered indexes** will be built based on **primary keys**.
-- Compared to tables with non-clustered indexes, tables with clustered indexes offer greater performance and throughput advantages in the following scenarios:
-    - When data is inserted, the clustered index reduces one write of the index data from the network.
-    - When a query with an equivalent condition only involves the primary key, the clustered index reduces one read of index data from the network.
-    - When a query with a range condition only involves the primary key, the clustered index reduces multiple reads of index data from the network.
-    - When a query with an equivalent or range condition only involves the primary key prefix, the clustered index reduces multiple reads of index data from the network.
-- On the other hand, tables with clustered indexes have certain disadvantages. See the following:
-    - There might be write hotspot issues when inserting a large number of primary keys with close values, please follow the [best practices for select primary key](#best-practices-for-select-primary-key).
-    - The table data takes up more storage space if the data type of the primary key is larger than 64 bits, especially when there are multiple secondary indexes.
-
-- Explicitly specifying whether to use clustered indexes instead of using the system variable `@@global.tidb_enable_clustered_index` and the configuration `alter-primary-key` control the [default behavior of whether to use clustered indexes](/clustered-indexes.md#create-a-table-with-clustered-indexes).
-
-#### Select clustered index example
-
-Following the [best practices for select clustered index](#best-practices-for-select-clustered-index), suppose we will need to create a table with an association between `books` and `users`, representing the `ratings` of a `book` by `users`. We create the table and construct a composite primary key using `book_id` and `user_id` and create a **clustered index** on that **primary key**.
+Following the [Rules to follow when selecting clustered index](#rules-to-follow-when-selecting-clustered-index), suppose we will need to create a table with an association between `books` and `users`, representing the `ratings` of a `book` by `users`. We create the table and construct a composite primary key using `book_id` and `user_id` and create a **clustered index** on that **primary key**.
 
 {{< copyable "sql" >}}
 
@@ -241,11 +173,11 @@ CREATE TABLE `bookshop`.`ratings` (
 );
 ```
 
-### Add column constraints
+## Add column constraints
 
 In addition to [primary key constraints](#select-primary-key), TiDB also supports other **column constraints** such as [NOT NULL](/constraints.md#not-null) constraint, [UNIQUE KEY](/constraints.md#unique-key) constraint, `DEFAULT`, etc. For complete constraints, please check TiDB [Constraints](/constraints.md) documentation.
 
-#### Default value
+### Default value
 
 To set a default value on a column, use the `DEFAULT` constraint. The default value will allow you to insert data without specifying a value for each column.
 
@@ -277,7 +209,7 @@ CREATE TABLE `bookshop`.`ratings` (
 );
 ```
 
-#### Prevent duplicate values
+### Prevent duplicate values
 
 If you need to prevent duplicate values in a column, you can use the `UNIQUE` constraint.
 
@@ -296,7 +228,7 @@ CREATE TABLE `bookshop`.`users` (
 
 If you try to insert the same `nickname` in the `users` table, an error will be return.
 
-#### Prevents null values
+### Prevents null values
 
 If you need to prevent null values in columns, then you can use the `NOT NULL` constraint.
 
@@ -313,7 +245,7 @@ CREATE TABLE `bookshop`.`users` (
 );
 ```
 
-### Using HTAP capabilities
+## Using HTAP capabilities
 
 > **Note:**
 >
@@ -323,7 +255,7 @@ Suppose our `bookshop` application has a requirement to perform OLAP analysis on
 
 In this scenario, TiDB is an ideal one-stop database solution. TiDB is a **HTAP (Hybrid Transactional and Analytical Processing)** database that supports both OLTP and OLAP scenarios.
 
-#### Synchronized column-oriented data
+### Synchronized column-oriented data
 
 Currently, TiDB supports two data analysis engines, **TiFlash** and **TiSpark**, and for large data scenarios (100 T), **TiFlash MPP** is recommended as the primary solution for HTAP, and **TiSpark** as a complementary solution. To learn more about TiDB HTAP capabilities, please refer to the following articles: [Quick Start Guide for TiDB HTAP](/quick-start-with-htap.md) and [Explore HTAP](/explore-htap.md).
 
@@ -344,7 +276,7 @@ ALTER TABLE {table_name} SET TIFLASH REPLICA {count};
 
 **TiFlash** will then synchronize the table, and when queried, TiDB will automatically consider using TiKV (row-oriented) or TiFlash (column-oriented) for data queries based on cost optimization. Of course, in addition to the automatic approach, you can also directly specify whether the query uses a **TiFlash** copy, see [Use TiDB to read TiFlash replicas](/tiflash/use-tiflash.md#use-tidb-to-read-tiflash-replicas) for how to use it.
 
-#### Using HTAP capabilities example
+### Using HTAP capabilities example
 
 The `ratings` table opens `1` copy of TiFlash:
 
@@ -356,7 +288,7 @@ ALTER TABLE `bookshop`.`ratings` SET TIFLASH REPLICA 1;
 
 > **Note:**
 >
-> If your cluster, does not contain **TiFlash** nodes, this SQL statement will report an error: `1105 - the tiflash replica count: 1 should be less than the total tiflash server count: 0` You can use [Build a TiDB Cluster in TiDB Cloud (DevTier)](/develop/build-cluster-in-cloud.md#step-1-create-a-free-cluster) to create a free cluster include **TiFlash**.
+> If your cluster, does not contain **TiFlash** nodes, this SQL statement will report an error: `1105 - the tiflash replica count: 1 should be less than the total tiflash server count: 0` You can use [Build a TiDB Cluster in TiDB Cloud (DevTier)](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-free-cluster) to create a free cluster include **TiFlash**.
 
 Subsequent queries can be carried out normally.
 
@@ -390,20 +322,9 @@ Running results:
 
 When the word `cop[tiflash]` appears, it means that the task is sent to **TiFlash** for processing.
 
-### Execute the `CREATE TABLE` statement
+## Execute the `CREATE TABLE` statement
 
-Once we have defined `CREATE TABLE`, we can execute it.
-
-#### Best Practices for execute the `CREATE TABLE` statement
-
-Some best practices to follow when executing `CREATE TABLE`：
-
-- We do not recommend using a client-side Driver or ORM to perform database schema changes. As a best practice from experience, we recommend using a [MySQL client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) or using any GUI client you like to perform database schema changes. In this document, we will use the **MySQL client** to pass in SQL files to perform database schema changes in most scenarios.
-- Following the SQL development [specification for table build and delete](/develop/sql-development-specification.md#specification-for-table-build-and-delete), it is recommended to wrap the build and delete statements inside the business application to add judgment logic.
-
-#### Execute the `CREATE TABLE` statement example
-
-After creating all the tables as above rules, our `dbinit.sql` file should look similar to the [database initialization](/develop/bookshop-schema-design.md#database-initialization-script-dbinitsql) shown. If you need to see the table information in detail, please refer to [Details about Table](/develop/bookshop-schema-design.md#details-about-table).
+After creating all the tables as above rules, our `dbinit.sql` file should look similar to the [database initialization](/develop/dev-guide-bookshop-schema-design.md#database-initialization-script-dbinitsql) shown. If you need to see the table information in detail, please refer to [Details about Table](/develop/dev-guide-bookshop-schema-design.md#details-about-table).
 
 We can execute the dbinit.sql file with the following statements:
 
@@ -441,4 +362,53 @@ Running results:
 +--------------------+
 ```
 
-Please note that all the tables we have created so far do not contain secondary indexes. For a guide to adding secondary indexes, please refer to [Creating Secondary Indexes](/develop/create-secondary-indexes.md).
+## Rules to follow when creating tables
+
+### Rules to follow when naming a table
+
+- Use a **fully-qualified** table name (i.e., `CREATE TABLE {database_name}. {table_name}`). This is because when you do not specify a database name, TiDB will use the current database in your **SQL session**. If you do not use `USE {databasename};` to specify the database in your SQL session, TiDB will return an error.
+- Use meaningful table names, for example, if you need to create a user table, you can use names: `user`, `t_user`, `users`, etc., or follow your company or organization's naming convention. If your company or organization does not have a naming convention, you can refer to the [table naming convention](/develop/dev-guide-object-naming-guidelines.md#table-naming-convention). Do not use such table names as: `t1`, `table1`, etc.
+- Multiple words are separated by an underscore, more than 32 characters are not recommended.
+- Create separate DATABASE for tables of different business modules and add comments accordingly.
+- Create a separate `DATABASE` for the tables of different business modules and add comments accordingly.
+
+### Rules to follow when defining columns
+
+- Check the [data types](/basic-features.md#data-types-functions-and-operators) of the supporting columns and organize your data according to the data type restrictions. Select the appropriate type for the data you plan to be present in the column.
+- Check the [Rules to follow](#rules-to-follow-when-selecting-primary-key) for selecting primary keys and decide whether to use primary key columns.
+- Check the [Rules to follow](#rules-to-follow-when-selecting-clustered-index) for selecting clustered indexes and decide whether to specify **clustered indexes**.
+- Check [adding column constraints](#add-column-constraints) and decide whether to add constraints to the columns.
+- Please use meaningful column names. we recommend that you follow your company or organization's table naming convention. If your company or organization does not have a corresponding naming convention, refer to the [column naming convention](/develop/dev-guide-object-naming-guidelines.md#field-naming-convention).
+
+### Rules to follow when selecting primary key
+
+- Define a **primary key** or **unique index** within the table.
+- Try to select meaningful **columns** as **primary keys**.
+- For performance reasons, try to avoid storing extra-wide tables, the number of table fields is not recommended to over `60`, the total data size of a single row is not recommended to over `64K`, and fields with too much data length are best split to another table.
+- It is not recommended to use complex data types.
+- The fields need to **JOIN** , ensure data types absolute consistency, to avoid implicit conversion.
+- Avoid defining **primary keys** on a single monotonic data column. If you use a single monotonic data column (e.g., a column of `AUTO_INCREMENT`) to define the **primary key**, there is a risk of a negative impact on write performance. If possible, use `AUTO_RANDOM` instead of `AUTO_INCREMENT` (this loses the continuous and incremental nature of the primary key).
+- If you **_must_** create an index on a single monotonic data column at write-intensive scenarios. Instead of defining this monotonic data column as the **primary key**. You can use `AUTO_RANDOM` to create the **primary key** for that table, or use [SHARD_ROW_ID_BITS](/shard-row-id-bits.md) and [PRE_SPLIT_REGIONS](/common/sql-statements/sql-statement-split-region.md#pre_split_regions) to shard `_tidb_rowid`.
+
+### Rules to follow when selecting clustered index
+
+- Follow the [Rules to follow when selecting primary key](#rules-to-follow-when-selecting-primary-key), **Clustered indexes** will be built based on **primary keys**.
+- Compared to tables with non-clustered indexes, tables with clustered indexes offer greater performance and throughput advantages in the following scenarios:
+    - When data is inserted, the clustered index reduces one write of the index data from the network.
+    - When a query with an equivalent condition only involves the primary key, the clustered index reduces one read of index data from the network.
+    - When a query with a range condition only involves the primary key, the clustered index reduces multiple reads of index data from the network.
+    - When a query with an equivalent or range condition only involves the primary key prefix, the clustered index reduces multiple reads of index data from the network.
+- On the other hand, tables with clustered indexes have certain disadvantages. See the following:
+    - There might be write hotspot issues when inserting a large number of primary keys with close values, please follow the [Rules to follow when selecting primary key](#rules-to-follow-when-selecting-primary-key).
+    - The table data takes up more storage space if the data type of the primary key is larger than 64 bits, especially when there are multiple secondary indexes.
+
+- Explicitly specifying whether to use clustered indexes instead of using the system variable `@@global.tidb_enable_clustered_index` and the configuration `alter-primary-key` control the [default behavior of whether to use clustered indexes](/clustered-indexes.md#create-a-table-with-clustered-indexes).
+
+### Rules to follow when executing the `CREATE TABLE` statement
+
+- We do not recommend using a client-side Driver or ORM to perform database schema changes. Based on experience, we recommend using a [MySQL client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) or using any GUI client you like to perform database schema changes. In this document, we will use the **MySQL client** to pass in SQL files to perform database schema changes in most scenarios.
+- Following the SQL development [specification for table build and delete](/develop/dev-guide-sql-development-specification.md#specification-for-table-build-and-delete), it is recommended to wrap the build and delete statements inside the business application to add judgment logic.
+
+## One more step
+
+Please note that all the tables we have created so far do not contain secondary indexes. For a guide to adding secondary indexes, please refer to [Creating Secondary Indexes](/develop/dev-guide-create-secondary-indexes.md).

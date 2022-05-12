@@ -14,9 +14,9 @@ This document describes how to use the following SQL statements to update the da
 
 Before reading this document, you need to prepare the following:
 
-- [Build a TiDB Cluster in TiDB Cloud (DevTier)](/develop/build-cluster-in-cloud.md).
-- Read [Schema Design Overview](/develop/schema-design-overview.md), [Create a Database](/develop/create-database.md), [Create a Table](/develop/create-table.md), and [Create Secondary Indexes](/develop/create-secondary-indexes.md).
-- If you need to `UPDATE` data, you need to [insert data](/develop/insert-data.md) first.
+- [Build a TiDB Cluster in TiDB Cloud(DevTier)](/develop/dev-guide-build-cluster-in-cloud.md).
+- Read [Schema Design Overview](/develop/dev-guide-schema-design-overview.md), [Create a Database](/develop/dev-guide-create-database.md), [Create a Table](/develop/dev-guide-create-table.md), and [Create Secondary Indexes](/develop/dev-guide-create-secondary-indexes.md).
+- If you want to `UPDATE` data, you need to [insert data](/develop/dev-guide-insert-data.md) first.
 
 ## Using `UPDATE`
 
@@ -56,7 +56,7 @@ There are some best practices to follow when updating rows as follows:
 
 ### `UPDATE` Example
 
-Suppose an author changes his/her name to **Helen Haruki** and needs to change our [authors](/develop/bookshop-schema-design.md#authors-table) table. Assume that her unique `id` is **1**, the filter should be: `id = 1`.
+Suppose an author changes her name to **Helen Haruki** and needs to change the [authors](/develop/dev-guide-bookshop-schema-design.md#authors-table) table. Assume that her unique `id` is **1**, and the filter should be: `id = 1`.
 
 <SimpleTab>
 <div label="SQL" href="update-sql">
@@ -118,7 +118,7 @@ INSERT INTO {table} ({columns}) VALUES ({values})
 
 ### `INSERT ON DUPLICATE KEY UPDATE` example
 
-For example, you need to update the [ratings](/develop/bookshop-schema-design.md#ratings-table) table to include the user's ratings for the book, so that if the user has not yet rated the book, a new rating will be created. If the user has already rated it, the previous rating will be updated.
+For example, we need to update the [ratings](/develop/dev-guide-bookshop-schema-design.md#ratings-table) table to include the user's ratings for the book, so that if the user has not yet rated the book, a new rating will be created, and if the user has already rated it, then his previous rating will be updated.
 
 The primary key here is the joint primary key of `book_id` and `user_id`. `user_id` is `1` and the user gives a rating of `5` to a book with a `book_id` of `1000`.
 

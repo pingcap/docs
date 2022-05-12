@@ -70,7 +70,7 @@ This section uses prepared statements to complete two scenarios with examples of
 
 ### `SELECT` Example
 
-For example, you need to query the `bookshop` application for [books](/develop/bookshop-schema-design.md#books-table) with `id` is `1`.
+For example, you need to query the `bookshop` application for [books](/develop/dev-guide-bookshop-schema-design.md#books-table) with `id` is `1`.
 
 <SimpleTab>
 
@@ -149,7 +149,7 @@ try (Connection connection = ds.getConnection()) {
 
 ### `INSERT` Example
 
-Using the [books table](/develop/bookshop-schema-design.md#books-table) as an example, you insert a book with the `title` as `TiDB Developer Guide`, `type` as `Science & Technology`, `stock` as `100`, `price` as `0.0`, and `published_at` as `the current time of insertion`. Note that the **primary key** in the `books` table contains the `AUTO_RANDOM` attribute, which you don't need to specify. If you are not familiar with inserting data, you can learn more about inserting data in [Insert Data](/develop/insert-data.md).
+Using the [books table](/develop/dev-guide-bookshop-schema-design.md#books-table) as an example, you need to insert a book with a `title` of `TiDB Developer Guide`, `type` of `Science & Technology`, `stock` of `100`, `price` of `0.0`, and `published_at` the `current time of insertion`. Note that the **primary key** of our `books` table contains the `AUTO_RANDOM` attribute, which you don't need to specify. If you are not familiar with inserting data, you can learn more about inserting data in [Insert Data](/develop/dev-guide-insert-data.md).
 
 <SimpleTab>
 
@@ -233,13 +233,13 @@ The following is a typical scenario of JDBC connection string configurations, Ho
 jdbc:mysql://127.0.0.1:4000/test?user=root&useConfigs=maxPerformance&useServerPrepStmts=true&prepStmtCacheSqlLimit=2048&prepStmtCacheSize=256&rewriteBatchedStatements=true&allowMultiQueries=true
 ```
 
-You can also see the [insert rows](/develop/insert-data.md#insert-rows) chapter if you need to change other JDBC parameters when inserting data.
+You can also see the [insert rows](/develop/dev-guide-insert-data.md#insert-rows) chapter if you need to change other JDBC parameters when inserting data.
 
 For a complete example in Java, see:
 
-- [Build a Simple CRUD App with TiDB and Java - Using JDBC](/develop/sample-application-java.md#step-2-get-the-code)
-- [Build a Simple CRUD App with TiDB and Java - Using Hibernate](/develop/sample-application-java.md#step-2-get-the-code)
-- [Build the TiDB Application using Spring Boot](/develop/sample-application-spring-boot.md)
+- [Build a Simple CRUD App with TiDB and Java - Using JDBC](/develop/dev-guide-sample-application-java.md#step-2-get-the-code)
+- [Build a Simple CRUD App with TiDB and Java - Using Hibernate](/develop/dev-guide-sample-application-java.md#step-2-get-the-code)
+- [Build the TiDB Application using Spring Boot](/develop/dev-guide-sample-application-spring-boot.md)
 
 </div>
 

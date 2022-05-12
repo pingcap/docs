@@ -8,11 +8,11 @@ HTAP stands for Hybrid Transactional / Analytical Processing. Traditionally, dat
 
 In TiDB, we have both TiKV, a row-store engine for online transactions, and TiFlash, a column-store engine for real-time analytics scenarios. Data exists in both the Row-Store and Columnar-Store, which are automatically synchronized for strong consistency. The Row-Store is optimized for online transactional OLTP, while the Columnar-Store is optimized for online analytical OLAP performance.
 
-In the [Create Database](/develop/create-table.md#using-htap-capabilities) chapter, we have introduced how to enable the HTAP capability of TiDB. Below we'll take a closer look at how to use HTAP capabilities to analyze data faster.
+In the [Create Database](/develop/dev-guide-create-table.md#using-htap-capabilities) chapter, we have introduced how to enable the HTAP capability of TiDB. Below we'll take a closer look at how to use HTAP capabilities to analyze data faster.
 
 ## Data preparation
 
-Before starting, you can import much larger sample data [via the `tiup demo` command](/develop/bookshop-schema-design.md#method-1-through-tiup-demo-command-line), for example:
+Before starting, you can import much larger sample data [via the `tiup demo` command](/develop/dev-guide-bookshop-schema-design.md#method-1-through-tiup-demo-command-line), for example:
 
 {{< copyable "shell-regular" >}}
 
@@ -20,13 +20,13 @@ Before starting, you can import much larger sample data [via the `tiup demo` com
 tiup demo bookshop prepare --users=200000 --books=500000 --authors=100000 --ratings=1000000 --orders=1000000 --host 127.0.0.1 --port 4000 --drop-tables
 ```
 
-Or [using the Import function of TiDB Cloud](/develop/bookshop-schema-design.md#method-2-through-the-tidb-cloud-import-function) to import the pre-prepared sample data.
+Or [using the Import function of TiDB Cloud](/develop/dev-guide-bookshop-schema-design.md#method-2-through-the-tidb-cloud-import-function) to import the pre-prepared sample data.
 
 ## Window function
 
 When we use the database, in addition to the hope that it can store the data we want to record, and can realize business functions such as ordering and buying books, rating books, etc., we may also need to analyze our existing data, so as to make further decisions or take some operations based on the data.
 
-In the [Single Table Read](/develop/get-data-from-single-table.md) section, we have introduced how to use aggregate queries to analyze the data as a whole. In more complex usage scenarios, we may want to aggregate the results of multiple aggregate queries in a single query. For example, if we want to know the historical trend of orders for a particular book, we may need to use aggregate function `sum` for all the orders every month, and then aggregate the `sum` results together to get the historical trend data.
+In the [Single Table Read](/develop/dev-guide-get-data-from-single-table.md) section, we have introduced how to use aggregate queries to analyze the data as a whole. In more complex usage scenarios, we may want to aggregate the results of multiple aggregate queries in a single query. For example, if we want to know the historical trend of orders for a particular book, we may need to use aggregate function `sum` for all the orders every month, and then aggregate the `sum` results together to get the historical trend data.
 
 In order to help users simplify the processing of such analysis, TiDB has supported window functions since version 3.0. Window functions provide cross-row data access capability for each row of data. Different from aggregation queries, window functions are used to aggregate data rows in the window range, but does not cause the result set to be merged into a single row of data.
 
@@ -143,13 +143,13 @@ The query results are as follows:
 
 Besides, TiDB also provides us with some non-aggregated [window functions](/functions-and-operators/window-functions.md), with the help of which we can realize richer analysis queries.
 
-For example, in the previous [Pagination Query](/develop/paginate-results.md) chapter, we have introduced how to use the `row_number()` function to achieve efficient pagination batch processing.
+For example, in the previous [Pagination Query](/develop/dev-guide-paginate-results.md) chapter, we have introduced how to use the `row_number()` function to achieve efficient pagination batch processing.
 
 ## Hybrid workload
 
 ### Enable column replica
 
-TiDB's default storage engine, TiKV, is row-stored. Before proceeding to the next steps, you can read the section [Enable HTAP Capability](/develop/create-table.md#using-htap-capabilities) and add a TiFlash column-stored replica of the `books` and `orders` tables using the following SQL.
+TiDB's default storage engine, TiKV, is row-stored. Before proceeding to the next steps, you can read the section [Enable HTAP Capability](/develop/dev-guide-create-table.md#using-htap-capabilities) and add a TiFlash column-stored replica of the `books` and `orders` tables using the following SQL.
 
 {{< copyable "sql" >}}
 
@@ -225,7 +225,7 @@ You can use Hint `/*+ read_from_storage(engine_name[table_name]) */` to specify 
 > **Notice:**
 >
 > 1. If your table uses aliases, you should replace table_name in Hints with alias_name, otherwise Hints will be invalid.
-> 2. Also, setting read_from_storage Hint for [common table expression](/develop/use-common-table-expression.md) does not work.
+> 2. Also, setting read_from_storage Hint for [common table expression](/develop/dev-guide-use-common-table-expression.md) does not work.
 
 {{< copyable "sql" >}}
 
