@@ -11,9 +11,9 @@ This page will use the [DELETE](/common/sql-statements/sql-statement-delete.md) 
 
 Before reading this page, you need to prepare the following:
 
-- [Build a TiDB Cluster in TiDB Cloud(DevTier)](/develop/build-cluster-in-cloud.md).
-- Read [Schema Design Overview](/develop/schema-design-overview.md), [Create a Database](/develop/create-database.md), [Create a Table](/develop/create-table.md), and [Create Secondary Indexes](/develop/create-secondary-indexes.md).
-- If you need to delete data, you need to [insert data](/develop/insert-data.md) first.
+- [Build a TiDB Cluster in TiDB Cloud(DevTier)](/develop/dev-guide-build-cluster-in-cloud.md).
+- Read [Schema Design Overview](/develop/dev-guide-schema-design-overview.md), [Create a Database](/develop/dev-guide-create-database.md), [Create a Table](/develop/dev-guide-create-table.md), and [Create Secondary Indexes](/develop/dev-guide-create-secondary-indexes.md).
+- If you need to delete data, you need to [insert data](/develop/dev-guide-insert-data.md) first.
 
 ## SQL Syntax
 
@@ -43,7 +43,7 @@ There are some best practices to follow when delete rows as follows:
 
 ## Example
 
-Suppose we find that a application error has occurred within a specific time period and we need to delete all the data for the [rating](/develop/bookshop-schema-design.md#ratings-table) within this period, for example, `2022-04-15 00:00:00` to `2022-04-15 00:15:00`. In this case, you can use the `SELECT` statement to see the number of data items to be deleted.
+Suppose we find that a application error has occurred within a specific time period and we need to delete all the data for the [rating](/develop/dev-guide-bookshop-schema-design.md#ratings-table) within this period, for example, `2022-04-15 00:00:00` to `2022-04-15 00:15:00`. In this case, you can use the `SELECT` statement to see the number of data items to be deleted.
 
 {{< copyable "sql" >}}
 
@@ -124,7 +124,7 @@ First, you should write a `SELECT` query in a loop of your application or script
 
 ### Bulk-delete Example
 
-Suppose we find that a application error has occurred within a specific time period and we need to delete all the data for the [rating](/develop/bookshop-schema-design.md#ratings-table) within this period, for example, `2022-04-15 00:00:00` to `2022-04-15 00:15:00`, and more than 10,000 data are written in 15 minutes, we should use a round robin deletion to delete.
+Suppose we find that a application error has occurred within a specific time period and we need to delete all the data for the [rating](/develop/dev-guide-bookshop-schema-design.md#ratings-table) within this period, for example, `2022-04-15 00:00:00` to `2022-04-15 00:15:00`, and more than 10,000 data are written in 15 minutes, we should use a round robin deletion to delete.
 
 {{< copyable "" >}}
 

@@ -17,7 +17,7 @@ To get good SQL statement performance, you can follow these guidelines:
 * Scan as few rows as possible. It's best to scan only the data you need and avoid scanning excess data.
 * Use right index, you need to ensure that there is a corresponding index for the column in the `WHERE` clause in SQL, otherwise it will be a full table scan, and the performance will be poor.
 * Use the right join type. Depending on the relative size of the tables in the query, it is also important to choose the right join type. In general, TiDB's cost-base optimizer should pick the best-performing join type. However, in a few cases it may be better for the user to specify the join type manually.
-* Use the right storage engine. For mixed OLTP and OLAP workloads, the TiFlash engine is recommended. For details, see [HTAP Query](/develop/hybrid-oltp-and-olap-queries.md).
+* Use the right storage engine. For mixed OLTP and OLAP workloads, the TiFlash engine is recommended. For details, see [HTAP Query](/develop/dev-guide-hybrid-oltp-and-olap-queries.md).
 
 ## Schema Design
 
