@@ -10,9 +10,7 @@ TiDB version: 5.4.1
 
 ## Compatibility changes
 
-+ TiDB
-
-    - (dup: release-6.0.0-dmr.md > Bug fixes> TiDB)- Fix the issue that `date_format` in TiDB handles `'\n'` in a MySQL-incompatible way [#32232](https://github.com/pingcap/tidb/issues/32232)
+TiDB v5.4.1 does not introduce any compatibility changes in product design. But note that bug fixes in this release might result in compatibility changes too. For more information, see [Bug Fixes](#bug-fixes).
 
 ## Improvements
 
@@ -20,8 +18,7 @@ TiDB version: 5.4.1
 
     - (dup: release-6.0.0-dmr.md > Improvements> TiDB)- Support using the PointGet plan for queries that read the `_tidb_rowid` column [#31543](https://github.com/pingcap/tidb/issues/31543)
     - Add more logs and metrics for the `Apply` operator to show whether it is parallel [#33887](https://github.com/pingcap/tidb/issues/33887)
-    - Improve the `TopN` pruning logic for Analyze Version 2 used for 
-collecting statistics [#34256](https://github.com/pingcap/tidb/issues/34256)
+    - Improve the `TopN` pruning logic for Analyze Version 2 used for collecting statistics [#34256](https://github.com/pingcap/tidb/issues/34256)
     - Support displaying multiple Kubernetes clusters in the Grafana dashboard [#32593](https://github.com/pingcap/tidb/issues/32593)
 
 + TiKV
@@ -51,6 +48,7 @@ collecting statistics [#34256](https://github.com/pingcap/tidb/issues/34256)
 
 + TiDB
 
+    - (dup: release-6.0.0-dmr.md > Bug fixes> TiDB)- Fix the issue that `date_format` in TiDB handles `'\n'` in a MySQL-incompatible way [#32232](https://github.com/pingcap/tidb/issues/32232)
     - (dup: release-5.2.4.md > Bug fixes> TiDB)- Fix the issue that TiDB writes wrong data due to the wrong encoding of the `ENUM` or `SET` column [#32302](https://github.com/pingcap/tidb/issues/32302)
     - (dup: release-5.2.4.md > Bug fixes> TiDB)- Fix the issue that the Merge Join operator gets wrong results in certain cases [#33042](https://github.com/pingcap/tidb/issues/33042)
     - (dup: release-5.2.4.md > Bug fixes> TiDB)- Fix the issue that TiDB gets a wrong result when a correlated subquery returns a constant  [#32089](https://github.com/pingcap/tidb/issues/32089)
