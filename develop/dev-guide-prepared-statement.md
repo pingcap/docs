@@ -46,7 +46,7 @@ EXECUTE {prepared_statement_name} USING @{parameter_name};
 | :-------------------------: | :-------------------------------------------------------------------: |
 |     `{parameter_name}`      |                              user variable name                               |
 |     `{parameter_value}`     |                              user variable value                               |
-| `{prepared_statement_name}` | The name of the preprocessing statement, which must be the same as the name defined in the [Create the `PREPARE` statement](#Create-the-`PREPARE`-statement) |
+| `{prepared_statement_name}` | The name of the preprocessing statement, which must be the same as the name defined in the [Create a prepared statement](#create-a-prepared-statement) |
 
 See the [EXECUTE statement](/common/sql-statements/sql-statement-execute.md) for more information.
 
@@ -60,7 +60,7 @@ DEALLOCATE PREPARE {prepared_statement_name};
 
 | Parameter Name | Description |
 | :-------------------------: | :-------------------------------------------------------------------: |
-| `{prepared_statement_name}` | The name of the preprocessing statement, which must be the same as the name defined in the [Create the `PREPARE` statement](#Create-the-`PREPARE`-statement) |
+| `{prepared_statement_name}` | The name of the preprocessing statement, which must be the same as the name defined in the [Create a prepared statement](#create-a-prepared-statement) |
 
 See the [DEALLOCATE statement](/common/sql-statements/sql-statement-deallocate.md) for more information.
 
