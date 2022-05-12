@@ -6,7 +6,7 @@ title: Temporary Tables
 
 Temporary tables can be thought of as a technique for reusing query results.
 
-Suppose we want to know something about the eldest authors in the [Bookshop](/develop/dev-bookshop-schema-design.md) application, we may need to write multiple queries that use this list of eldest authors.
+Suppose we want to know something about the eldest authors in the [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application, we may need to write multiple queries that use this list of eldest authors.
 
 We can use the following SQL statement to find the top 50 eldest authors from the `authors` table for our research.
 
@@ -234,7 +234,7 @@ Once the temporary table is ready, you can query the temporary table as if it we
 SELECT * FROM top_50_eldest_authors;
 ```
 
-You can reference data from temporary tables to your query via [join-tables](/develop/dev-join-tables.md).
+You can reference data from temporary tables to your query via [join-tables](/develop/dev-guide-join-tables.md).
 
 {{< copyable "sql" >}}
 
@@ -245,7 +245,7 @@ LEFT JOIN book_authors ba ON ta.id = ba.author_id
 GROUP BY ta.id;
 ```
 
-Unlike [views](/develop/dev-use-views.md), when querying a temporary table, instead of executing the original query used to import the data, you will get the data directly from the temporary table. In some cases, this will help you improve the efficiency of your queries.
+Unlike [views](/develop/dev-guide-use-views.md), when querying a temporary table, instead of executing the original query used to import the data, you will get the data directly from the temporary table. In some cases, this will help you improve the efficiency of your queries.
 
 ## Drop temporary table
 

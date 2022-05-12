@@ -10,18 +10,18 @@ This guide will show how to quickly build an application using TiDB. Therefore, 
 ## Guide contents
 
 - [Overview](#tidb-basics)
-- [Choose Driver or ORM](/develop/dev-choose-driver-or-orm.md)
-- [Connect to TiDB](/develop/dev-connect-to-tidb.md)
-- [Database Schema Design](/develop/dev-schema-design-overview.md)
-- [Insert Data](/develop/dev-insert-data.md)
-- [Read Data](/develop/dev-get-data-from-single-table.md)
-- [Transaction](/develop/dev-transaction-overview.md)
+- [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
+- [Connect to TiDB](/develop/dev-guide-connect-to-tidb.md)
+- [Database Schema Design](/develop/dev-guide-schema-design-overview.md)
+- [Insert Data](/develop/dev-guide-insert-data.md)
+- [Read Data](/develop/dev-guide-get-data-from-single-table.md)
+- [Transaction](/develop/dev-guide-transaction-overview.md)
 
 ## TiDB Basics
 
 Before you start working with TiDB, you need to understand some important mechanics of how TiDB databases work:
 
-- Read the [TiDB Transaction Overview](/transaction-overview.md) to understand how TiDB transactions work or check out the [Transaction Notes for Application Developers](/develop/dev-transaction-overview.md) to see what application developers need to know about the part of the transaction.
+- Read the [TiDB Transaction Overview](/transaction-overview.md) to understand how TiDB transactions work or check out the [Transaction Notes for Application Developers](/develop/dev-guide-transaction-overview.md) to see what application developers need to know about the part of the transaction.
 - In addition, you need to understand [The way applications interact with TiDB](#the-way-applications-interact-with-tidb)
 
 The following sections are written for application developers, but if you are interested in the inner workings of TiDB or want to get involved in TiDB development, then go read the [TiDB Kernel Development Guide](https://pingcap.github.io/tidb-dev-guide/) for more information about TiDB.

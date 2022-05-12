@@ -23,7 +23,7 @@ Unless explicitly requested not to use any sorting to randomize the data, you sh
 <SimpleTab>
 <div label="SQL" href="page-sql">
 
-For example, in the [Bookshop](/develop/dev-bookshop-schema-design.md) application, we want to return the latest book list to the user in a paginated form. With the `LIMIT 0, 10` statement, we can get the information about the books on page 1 of the list, with a maximum of 10 records per page. To get page 2, we can change it to `LIMIT 10, 10`, and so on.
+For example, in the [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application, we want to return the latest book list to the user in a paginated form. With the `LIMIT 0, 10` statement, we can get the information about the books on page 1 of the list, with a maximum of 10 records per page. To get page 2, we can change it to `LIMIT 10, 10`, and so on.
 
 {{< copyable "sql" >}}
 

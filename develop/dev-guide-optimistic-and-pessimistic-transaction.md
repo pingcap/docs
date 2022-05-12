@@ -13,7 +13,7 @@ The advantage of pessimistic transactions is that for scenarios with a high conf
 
 In terms of the complexity of application-side implementation, pessimistic transactions are more intuitive and easier to implement. Optimistic transactions require complex application-side retry mechanisms to ensure that.
 
-The following uses a table in the [bookshop](/develop/dev-bookshop-schema-design.md) database to implement an example of buying a book to demonstrate the difference between optimistic transactions and pessimistic transactions, as well as their advantages and disadvantages. The purchase process mainly includes:
+The following uses a table in the [bookshop](/develop/dev-guide-bookshop-schema-design.md) database to implement an example of buying a book to demonstrate the difference between optimistic transactions and pessimistic transactions, as well as their advantages and disadvantages. The purchase process mainly includes:
 
 1. Update stock quantity
 2. Create an order

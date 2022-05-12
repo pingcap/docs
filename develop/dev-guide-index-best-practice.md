@@ -11,7 +11,7 @@ This section introduces some best practices for creating and using index in TiDB
 
 ## Before you begin
 
-This section will use the `books` table in the [bookshop](/develop/dev-bookshop-schema-design.md) database as an example.
+This section will use the `books` table in the [bookshop](/develop/dev-guide-bookshop-schema-design.md) database as an example.
 
 {{< copyable "sql" >}}
 
@@ -36,7 +36,7 @@ CREATE TABLE `books` (
     - Columns with a high degree of distinction can significantly reduce the number of filtered rows. For example, it is recommended to create an index on the column of the person's ID number, but not on the column of the person's gender.
     - If you have multiple search conditions, you can use combined index. Note that columns with equivalent conditions need to be placed in front of the combined index. Here is an example. Assuming the query is `select* from t where c1 = 10 and c2 = 100 and c3 > 10`, then consider creating a combined index `Index cidx (c1, c2, c3)`, so that index prefix scan can be performed according to query conditions.
 
-- Use meaningful secondary index name, and we recommend that you follow your company's or organization's table naming conventions. If your company or organization does not have an appropriate naming convention, refer to [Index Naming Specification](/develop/dev-object-naming-guidelines.md).
+- Use meaningful secondary index name, and we recommend that you follow your company's or organization's table naming conventions. If your company or organization does not have an appropriate naming convention, refer to [Index Naming Specification](/develop/dev-guide-object-naming-guidelines.md).
 
 ## Use Index Best Practices
 

@@ -18,7 +18,7 @@ Bob wants to transfer $20 to Alice, which includes at least two operations:
 
 Transactions can ensure that both of the above operations are executed successfully or both fail, and the money will not disappear or appear in vain.
 
-Insert some sample data into the table using the `users` table in the [bookshop](/develop/dev-bookshop-schema-design.md) database
+Insert some sample data into the table using the `users` table in the [bookshop](/develop/dev-guide-bookshop-schema-design.md) database
 
 {{< copyable "sql" >}}
 
@@ -68,7 +68,7 @@ BEGIN;
 START TRANSACTION;
 ```
 
-The default transaction mode of TiDB is pessimistic transaction. You can also explicitly specify to enable [optimistic transaction](/develop/dev-optimistic-and-pessimistic-transaction.md):
+The default transaction mode of TiDB is pessimistic transaction. You can also explicitly specify to enable [optimistic transaction](/develop/dev-guide-optimistic-and-pessimistic-transaction.md):
 
 {{< copyable "sql" >}}
 
@@ -76,7 +76,7 @@ The default transaction mode of TiDB is pessimistic transaction. You can also ex
 BEGIN OPTIMISTIC;
 ```
 
-Enable [pessimistic transaction](/develop/dev-optimistic-and-pessimistic-transaction.md):
+Enable [pessimistic transaction](/develop/dev-guide-optimistic-and-pessimistic-transaction.md):
 
 {{< copyable "sql" >}}
 

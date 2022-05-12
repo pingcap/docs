@@ -21,7 +21,7 @@ CREATE VIEW view_name AS query;
 
 Note: that you cannot create a view with the same name as an existing view or table.
 
-For example, in the [multi-table join query](/develop/dev-join-tables.md) chapter, we query the list of books with average ratings by joining the `books` table and the `ratings` table through a `JOIN` statement. 
+For example, in the [multi-table join query](/develop/dev-guide-join-tables.md) chapter, we query the list of books with average ratings by joining the `books` table and the `ratings` table through a `JOIN` statement. 
 
 For the convenience of subsequent queries, we can define the query statement as a view, and the SQL statement is as follows:
 
