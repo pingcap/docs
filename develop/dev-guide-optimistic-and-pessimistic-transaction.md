@@ -3,7 +3,7 @@ title: Optimistic transaction and pessimistic transaction
 summary: Introduces optimistic and pessimistic transactions in TiDB, retries of optimistic transaction, etc.
 ---
 
-# Optimistic transaction and pessimistic transaction
+# Optimistic transaction and pessimistic transactions
 
 The [optimistic transaction](/optimistic-transaction.md) model commits the transaction directly, and rolls back when there is a conflict. By contrast, the [pessimistic transaction](/pessimistic-transaction.md) model tries to lock the resources that need to be modified before actually committing the transaction, and only starts committing after ensuring that the transaction can be successfully executed.
 
@@ -27,7 +27,7 @@ The following code uses two threads to simulate the process that two users buy t
 
 Because we use multiple threads to simulate the situation that multiple users insert data simultaneously, we need to use a connection object with safe threads. Here we use Java's popular connection pool [HikariCP](https://github.com/brettwooldridge/HikariCP) for demo.
 
-### 1. Writing a pessimistic transaction example
+### 1. Write a pessimistic transaction example
 
 #### Configuration file
 
@@ -258,7 +258,7 @@ public class TxnExample {
 }
 ```
 
-### 2. An example that does not involve oversold
+### 2. An example that does not involve overselling
 
 Run the sample program:
 
@@ -318,7 +318,7 @@ mysql> SELECT * FROM users;
 2 rows in set (0.00 sec)
 ```
 
-### 3. An example that prevents oversold
+### 3. An example that prevents overselling
 
 The task in this example is more challenging. If there are 10 books left in stock, Bob buys 7 books, Alice buys 4 books, and they place orders almost at the same time. Imagine what will happen? We reuse the code from the previous example to solve this challenge, and change Bob's purchase quantity from 6 to 7:
 
@@ -561,7 +561,7 @@ Change it to the following to point to the optimistic transaction example.
 <mainClass>com.pingcap.txn.optimistic.TxnExample</mainClass>
 ```
 
-### 2. An example that does not involve oversold
+### 2. An example that does not involve overselling
 
 Run the sample program:
 
@@ -629,9 +629,9 @@ mysql> SELECT * FROM users;
 2 rows in set (0.00 sec)
 ```
 
-### 3. An example that prevents oversold
+### 3. An example that prevents overselling
 
-Let's check the example of using the optimistic transaction model that prevents oversold. If there are 10 books left in inventory, Bob buys 7 books, Alice buys 4 books, and they place orders almost at the same time. Imagine what will happen? We reuse the code from the optimistic transaction example to address this requirement, but change Bob's purchases from 6 to 7:
+Let's check the example of using the optimistic transaction model that prevents overselling. If there are 10 books left in inventory, Bob buys 7 books, Alice buys 4 books, and they place orders almost at the same time. Imagine what will happen? We reuse the code from the optimistic transaction example to address this requirement, but change Bob's purchases from 6 to 7:
 
 Run the sample program:
 
