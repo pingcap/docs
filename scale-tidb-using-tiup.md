@@ -101,6 +101,7 @@ Assume that you want to add a TiDB node to the `10.0.1.5` host. Take the followi
 
         ```shell
         tiup cluster check <cluster-name> scale-out.yaml --cluster --user root [-p] [-i /home/root/.ssh/gcp_rsa]
+        ```
 
     2. Enable automatic repair:
 
@@ -112,11 +113,11 @@ Assume that you want to add a TiDB node to the `10.0.1.5` host. Take the followi
 
     3. Run the `scale-out` command:
 
-      {{< copyable "shell-regular" >}}
+        {{< copyable "shell-regular" >}}
 
-      ```shell
-      tiup cluster scale-out <cluster-name> scale-out.yaml [-p] [-i /home/root/.ssh/gcp_rsa]
-      ```
+        ```shell
+        tiup cluster scale-out <cluster-name> scale-out.yaml [-p] [-i /home/root/.ssh/gcp_rsa]
+        ```
 
     In the preceding commands:
 
@@ -165,7 +166,7 @@ Assume that you want to add a TiFlash node to the `10.0.1.4` host. Take the foll
 
     ```ini
     tiflash_servers:
-      - host: 10.0.1.4
+    - host: 10.0.1.4
     ```
 
     Currently, you can only add IP addresses but not domain names.
@@ -380,15 +381,15 @@ In special cases (such as when a node needs to be forcibly taken down), or if th
 
     * If you use TiUP deployment, replace `pd-ctl` with `tiup ctl pd`:
 
-        {{< copyable "shell-regular" >}}
+    {{< copyable "shell-regular" >}}
 
-        ```shell
-        tiup ctl:<cluster-version> pd -u http://<pd_ip>:<pd_port> store
-        ```
+    ```shell
+    tiup ctl:<cluster-version> pd -u http://<pd_ip>:<pd_port> store
+    ```
 
-        > **Note:**
-        >
-        > If multiple PD instances exist in the cluster, you only need to specify the IP address:port of an active PD instance in the above command.
+    > **Note:**
+    >
+    > If multiple PD instances exist in the cluster, you only need to specify the IP address:port of an active PD instance in the above command.
 
 2. Remove the TiFlash node in pd-ctl:
 
@@ -402,9 +403,9 @@ In special cases (such as when a node needs to be forcibly taken down), or if th
         tiup ctl:<cluster-version> pd -u http://<pd_ip>:<pd_port> store delete <store_id>
         ```
 
-        > **Note:**
-        >
-        > If multiple PD instances exist in the cluster, you only need to specify the IP address:port of an active PD instance in the above command.
+    > **Note:**
+    >
+    > If multiple PD instances exist in the cluster, you only need to specify the IP address:port of an active PD instance in the above command.
 
 3. Wait for the store of the TiFlash node to disappear or for the `state_name` to become `Tombstone` before you stop the TiFlash process.
 
