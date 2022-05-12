@@ -559,11 +559,11 @@ tiup cluster audit
 Starting component `cluster`: /home/tidb/.tiup/components/cluster/v1.9.0/cluster audit
 ID      Time                       Command
 --      ----                       -------
-4BLhr0  2022-03-01T13:25:09+08:00  /home/tidb/.tiup/components/cluster/v1.9.0/cluster deploy test v5.4.1 /tmp/topology.yaml
-4BKWjF  2022-02-28T23:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.9.0/cluster deploy test v5.4.1 /tmp/topology.yaml
-4BKVwH  2022-02-28T23:02:08+08:00  /home/tidb/.tiup/components/cluster/v1.9.0/cluster deploy test v5.4.1 /tmp/topology.yaml
-4BKKH1  2022-02-28T16:39:04+08:00  /home/tidb/.tiup/components/cluster/v1.9.0/cluster destroy test
-4BKKDx  2022-02-28T16:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.9.0/cluster deploy test v5.4.1 /tmp/topology.yaml
+4BLhr0  2022-05-13T13:25:09+08:00  /home/tidb/.tiup/components/cluster/v1.9.0/cluster deploy test v5.4.1 /tmp/topology.yaml
+4BKWjF  2022-05-13T23:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.9.0/cluster deploy test v5.4.1 /tmp/topology.yaml
+4BKVwH  2022-05-13T23:02:08+08:00  /home/tidb/.tiup/components/cluster/v1.9.0/cluster deploy test v5.4.1 /tmp/topology.yaml
+4BKKH1  2022-05-13T16:39:04+08:00  /home/tidb/.tiup/components/cluster/v1.9.0/cluster destroy test
+4BKKDx  2022-05-13T16:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.9.0/cluster deploy test v5.4.1 /tmp/topology.yaml
 ```
 
 The first column is `audit-id`. To view the execution log of a certain command, pass the `audit-id` of a command as the flag as follows:
