@@ -162,7 +162,7 @@ VALUES (?, ?, ?, NOW()) ON DUPLICATE KEY UPDATE `score` = ?, `rated_at` = NOW()"
 
 ## Bulk-update
 
-When you need to update multiple rows of data in a table, you can choose to [use `UPDATE`](#using-update) and use the `WHERE` clause to filter the data that needs to be updated.
+When you need to update multiple rows of data in a table, you can choose to [use `UPDATE`](#use-update) and use the `WHERE` clause to filter the data that needs to be updated.
 
 However, if you need to update a large number of rows (tens of thousands or more), we recommend that you update the data in an iterative way, that is, updating only a portion of the data at each iteration until the update is complete. This is because TiDB limits the size of a single transaction ([txn-total-size-limit](/tidb-configuration-file.md#txn-total-size-limit), 100 MB by default). Too many data updates at once will result in holding locks for too long ([pessimistic transactions](/pessimistic-transaction.md), or causing a lot of conflicts ([optimistic transactions](/optimistic-transaction.md)). You can use a loop in your program or script to complete the operation.
 
