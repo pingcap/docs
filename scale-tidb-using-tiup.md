@@ -473,15 +473,15 @@ The steps to manually clean up the replication rules in PD are below:
 
     Access the monitoring platform at <http://10.0.1.5:3000> using your browser, and view the status of the cluster and the new nodes.
 
-    After the scale-out, the cluster topology is as follows:
+After the scale-out, the cluster topology is as follows:
 
-    | Host IP   | Service   |
-    |:----|:----|
-    | 10.0.1.3   | TiDB + TiFlash + TiCDC  |
-    | 10.0.1.4   | TiDB + PD + TiCDC **(TiFlash is deleted)**  |
-    | 10.0.1.5   | TiDB+ Monitor  |
-    | 10.0.1.1   | TiKV    |
-    | 10.0.1.2   | TiKV    |
+| Host IP   | Service   |
+|:----|:----|
+| 10.0.1.3   | TiDB + TiFlash + TiCDC  |
+| 10.0.1.4   | TiDB + PD + TiCDC **(TiFlash is deleted)**  |
+| 10.0.1.5   | TiDB+ Monitor  |
+| 10.0.1.1   | TiKV    |
+| 10.0.1.2   | TiKV    |
 
 ## Scale in a TiCDC cluster
 
@@ -505,12 +505,12 @@ Assume that you want to remove the TiCDC node from the `10.0.1.4` host. Take the
 
     Access the monitoring platform at <http://10.0.1.5:3000> using your browser, and view the status of the cluster.
 
-    The current topology is as follows:
+The current topology is as follows:
 
-    | Host IP   | Service   |
-    |:----|:----|
-    | 10.0.1.3   | TiDB + TiFlash + TiCDC  |
-    | 10.0.1.4   | TiDB + PD + **(TiCDC is deleted）**  |
-    | 10.0.1.5   | TiDB + Monitor  |
-    | 10.0.1.1   | TiKV    |
-    | 10.0.1.2   | TiKV    |
+| Host IP   | Service   |
+|:----|:----|
+| 10.0.1.3   | TiDB + TiFlash + TiCDC  |
+| 10.0.1.4   | TiDB + PD + **(TiCDC is deleted）**  |
+| 10.0.1.5   | TiDB + Monitor  |
+| 10.0.1.1   | TiKV    |
+| 10.0.1.2   | TiKV    |
