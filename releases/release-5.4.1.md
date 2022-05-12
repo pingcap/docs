@@ -130,7 +130,7 @@ TiDB v5.4.1 does not introduce any compatibility changes in product design. But 
 + Tools
 
     + Backup & Restore (BR)
-    
+
         - Fix a bug that causes the restore operation to fail when the encryption information is lost during backup retry [#32423](https://github.com/pingcap/tidb/issues/32423)
         - Fix the issue that BR fails to back up RawKV [#32607](https://github.com/pingcap/tidb/issues/32607)
         - Fix duplicate primary keys when inserting a record into a table after incremental restoration [#33596](https://github.com/pingcap/tidb/issues/33596)
