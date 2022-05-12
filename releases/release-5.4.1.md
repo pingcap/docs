@@ -164,7 +164,7 @@ collecting statistics [#34256](https://github.com/pingcap/tidb/issues/34256)
         - Fix the issue that in rare cases replication can be stuck if the owner is changed and the new scheduler is enabled (disabled by default) [#4963](https://github.com/pingcap/tiflow/issues/4963)
         - Fix the issue that the error ErrProcessorDuplicateOperations is reported when the new scheduler is enabled (disabled by default) [#4769](https://github.com/pingcap/tiflow/issues/4769)
         - Fix the issue that TiCDC fails to start when the first PD set in `--pd` is not available after TLS is enabled [#4777](https://github.com/pingcap/tiflow/issues/4777)
-        - Fix the issue that the checkpoint metrics is missing when tables are being scheduled [#4714](https://github.com/pingcap/tiflow/issues/4714)
+        - Fix the issue that the checkpoint metrics are missing when tables are being scheduled [#4714](https://github.com/pingcap/tiflow/issues/4714)
 
     + TiDB Lightning
 
