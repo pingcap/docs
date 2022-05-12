@@ -5,7 +5,7 @@ summary: Methods, rules to be followed and examples when creating a database.
 
 # Create a Database
 
-In this section, we will begin to cover how to create databases using SQL and various programming languages, and the rules to follow when creating databases. In this section, we will cover the database creation part of TiDB around the [Bookshop](/develop/bookshop-schema-design.md) application.
+In this section, we will begin to cover how to create databases using SQL and various programming languages, and the rules to follow when creating databases. In this section, we will cover the database creation part of TiDB around the [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application.
 
 > **Note:**
 >
@@ -15,12 +15,12 @@ In this section, we will begin to cover how to create databases using SQL and va
 
 Before reading this page, you need to prepare the following:
 
-- [Build a TiDB Cluster in TiDB Cloud(DevTier)](/develop/build-cluster-in-cloud.md).
-- Read [Schema Design Overview](/develop/schema-design-overview.md).
+- [Build a TiDB Cluster in TiDB Cloud(DevTier)](/develop/dev-guide-build-cluster-in-cloud.md).
+- Read [Schema Design Overview](/develop/dev-guide-schema-design-overview.md).
 
 ## What is database
 
-[Database](/develop/schema-design-overview.md) objects in TiDB can contain **tables**, **views**, **sequences**, and other objects.
+[Database](/develop/dev-guide-schema-design-overview.md) objects in TiDB can contain **tables**, **views**, **sequences**, and other objects.
 
 ## Create Database
 
@@ -91,4 +91,4 @@ mysql
 
 At this point, you have finished preparing the `bookshop` database and can add **tables** to it.
 
-You can continue reading [the create a table](/develop/create-table.md) for guidance.
+You can continue reading [the create a table](/develop/dev-guide-create-table.md) for guidance.

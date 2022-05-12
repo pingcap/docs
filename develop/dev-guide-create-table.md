@@ -5,7 +5,7 @@ summary: Methods, rules to be followed and examples when creating tables.
 
 # Create a Table
 
-In this section, we will start to introduce how to create tables using SQL and various programming languages, and the rules to follow when creating tables. And we will introduce the table creation of TiDB by the [Bookshop](/develop/bookshop-schema-design.md) application.
+In this section, we will start to introduce how to create tables using SQL and various programming languages, and the rules to follow when creating tables. And we will introduce the table creation of TiDB by the [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application.
 
 > **Note:**
 >
@@ -15,13 +15,13 @@ In this section, we will start to introduce how to create tables using SQL and v
 
 Before reading this page, you need to prepare the following:
 
-- [Build a TiDB Cluster in TiDB Cloud(DevTier)](/develop/build-cluster-in-cloud.md).
-- Read [Schema Design Overview](/develop/schema-design-overview.md).
-- [Create a Database](/develop/create-database.md).
+- [Build a TiDB Cluster in TiDB Cloud(DevTier)](/develop/dev-guide-build-cluster-in-cloud.md).
+- Read [Schema Design Overview](/develop/dev-guide-schema-design-overview.md).
+- [Create a Database](/develop/dev-guide-create-database.md).
 
 ## What is a table
 
-[Table](/develop/schema-design-overview.md#table) is a logical object in TiDB cluster that is subordinate to the [database](/develop/schema-design-overview.md#database). It is used to stores the data sent from SQL. Tables saved data records in the form of rows and columns. A table has at least one column, and each row of data has data for all columns.
+[Table](/develop/dev-guide-schema-design-overview.md#table) is a logical object in TiDB cluster that is subordinate to the [database](/develop/dev-guide-schema-design-overview.md#database). It is used to stores the data sent from SQL. Tables saved data records in the form of rows and columns. A table has at least one column, and each row of data has data for all columns.
 
 ## Naming a table
 
@@ -288,7 +288,7 @@ ALTER TABLE `bookshop`.`ratings` SET TIFLASH REPLICA 1;
 
 > **Note:**
 >
-> If your cluster, does not contain **TiFlash** nodes, this SQL statement will report an error: `1105 - the tiflash replica count: 1 should be less than the total tiflash server count: 0` You can use [Build a TiDB Cluster in TiDB Cloud (DevTier)](/develop/build-cluster-in-cloud.md#step-1-create-a-free-cluster) to create a free cluster include **TiFlash**.
+> If your cluster, does not contain **TiFlash** nodes, this SQL statement will report an error: `1105 - the tiflash replica count: 1 should be less than the total tiflash server count: 0` You can use [Build a TiDB Cluster in TiDB Cloud (DevTier)](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-free-cluster) to create a free cluster include **TiFlash**.
 
 Subsequent queries can be carried out normally.
 
@@ -324,7 +324,7 @@ When the word `cop[tiflash]` appears, it means that the task is sent to **TiFlas
 
 ## Execute the `CREATE TABLE` statement
 
-After creating all the tables as above rules, our `dbinit.sql` file should look similar to the [database initialization](/develop/bookshop-schema-design.md#database-initialization-script-dbinitsql) shown. If you need to see the table information in detail, please refer to [Details about Table](/develop/bookshop-schema-design.md#details-about-table).
+After creating all the tables as above rules, our `dbinit.sql` file should look similar to the [database initialization](/develop/dev-guide-bookshop-schema-design.md#database-initialization-script-dbinitsql) shown. If you need to see the table information in detail, please refer to [Details about Table](/develop/dev-guide-bookshop-schema-design.md#details-about-table).
 
 We can execute the dbinit.sql file with the following statements:
 
@@ -367,7 +367,7 @@ Running results:
 ### Rules to follow when naming a table
 
 - Use a **fully-qualified** table name (i.e., `CREATE TABLE {database_name}. {table_name}`). This is because when you do not specify a database name, TiDB will use the current database in your **SQL session**. If you do not use `USE {databasename};` to specify the database in your SQL session, TiDB will return an error.
-- Use meaningful table names, for example, if you need to create a user table, you can use names: `user`, `t_user`, `users`, etc., or follow your company or organization's naming convention. If your company or organization does not have a naming convention, you can refer to the [table naming convention](/develop/object-naming-guidelines.md#table-naming-convention). Do not use such table names as: `t1`, `table1`, etc.
+- Use meaningful table names, for example, if you need to create a user table, you can use names: `user`, `t_user`, `users`, etc., or follow your company or organization's naming convention. If your company or organization does not have a naming convention, you can refer to the [table naming convention](/develop/dev-guide-object-naming-guidelines.md#table-naming-convention). Do not use such table names as: `t1`, `table1`, etc.
 - Multiple words are separated by an underscore, more than 32 characters are not recommended.
 - Create separate DATABASE for tables of different business modules and add comments accordingly.
 - Create a separate `DATABASE` for the tables of different business modules and add comments accordingly.
@@ -378,7 +378,7 @@ Running results:
 - Check the [Rules to follow](#rules-to-follow-when-selecting-primary-key) for selecting primary keys and decide whether to use primary key columns.
 - Check the [Rules to follow](#rules-to-follow-when-selecting-clustered-index) for selecting clustered indexes and decide whether to specify **clustered indexes**.
 - Check [adding column constraints](#add-column-constraints) and decide whether to add constraints to the columns.
-- Please use meaningful column names. we recommend that you follow your company or organization's table naming convention. If your company or organization does not have a corresponding naming convention, refer to the [column naming convention](/develop/object-naming-guidelines.md#field-naming-convention).
+- Please use meaningful column names. we recommend that you follow your company or organization's table naming convention. If your company or organization does not have a corresponding naming convention, refer to the [column naming convention](/develop/dev-guide-object-naming-guidelines.md#field-naming-convention).
 
 ### Rules to follow when selecting primary key
 
@@ -407,8 +407,8 @@ Running results:
 ### Rules to follow when executing the `CREATE TABLE` statement
 
 - We do not recommend using a client-side Driver or ORM to perform database schema changes. Based on experience, we recommend using a [MySQL client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) or using any GUI client you like to perform database schema changes. In this document, we will use the **MySQL client** to pass in SQL files to perform database schema changes in most scenarios.
-- Following the SQL development [specification for table build and delete](/develop/sql-development-specification.md#specification-for-table-build-and-delete), it is recommended to wrap the build and delete statements inside the business application to add judgment logic.
+- Following the SQL development [specification for table build and delete](/develop/dev-guide-sql-development-specification.md#specification-for-table-build-and-delete), it is recommended to wrap the build and delete statements inside the business application to add judgment logic.
 
 ## One more step
 
-Please note that all the tables we have created so far do not contain secondary indexes. For a guide to adding secondary indexes, please refer to [Creating Secondary Indexes](/develop/create-secondary-indexes.md).
+Please note that all the tables we have created so far do not contain secondary indexes. For a guide to adding secondary indexes, please refer to [Creating Secondary Indexes](/develop/dev-guide-create-secondary-indexes.md).

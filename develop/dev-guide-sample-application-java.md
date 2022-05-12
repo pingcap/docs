@@ -16,7 +16,7 @@ This document will show you how to use TiDB and Java to build a simple CRUD appl
 
 > Tip:
 >
-> If you want to write a TiDB application using Spring Boot, you can check to [Build the TiDB Application using Spring Boot](/develop/sample-application-spring-boot.md)
+> If you want to write a TiDB application using Spring Boot, you can check to [Build the TiDB Application using Spring Boot](/develop/dev-guide-sample-application-spring-boot.md)
 
 ## Step 1. Launch your TiDB cluster
 
@@ -24,7 +24,7 @@ This part describes how to start a TiDB cluster.
 
 ### Using TiDB Cloud Free Cluster
 
-[Create a free cluster](/develop/build-cluster-in-cloud.md#step-1-create-a-free-cluster)
+[Create a free cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-free-cluster)
 
 ### Using Local Clusters
 

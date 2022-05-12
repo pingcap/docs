@@ -13,7 +13,7 @@ We will show how to quickly build an application using TiDB. Therefore, before r
 
 Before you start working with TiDB, you need to understand some important mechanics of how TiDB databases work:
 
-- Read the [TiDB Transaction Overview](/transaction-overview.md) to understand how TiDB transactions work or check out the [Transaction Notes for Application Developers](/develop/transaction-overview.md) to see what application developers need to know about the part of the transaction.
+- Read the [TiDB Transaction Overview](/transaction-overview.md) to understand how TiDB transactions work or check out the [Transaction Notes for Application Developers](/develop/dev-guide-transaction-overview.md) to see what application developers need to know about the part of the transaction.
 - In addition, you need to understand [The way applications interact with TiDB](#the-way-applications-interact-with-tidb)
 
 ## TiDB Transaction Mechanism
@@ -34,12 +34,12 @@ Since TiDB is compatible with MySQL protocol and MySQL syntax, most of the ORMs 
 
 ## Read More
 
-- [Quick Start](/develop/build-cluster-in-cloud.md)
-- [Choose Driver or ORM](/develop/choose-driver-or-orm.md)
-- [Connect to TiDB](/develop/connect-to-tidb.md)
-- [Database Schema Design](/develop/schema-design-overview.md)
-- [Write Data](/develop/insert-data.md)
-- [Read Data](/develop/get-data-from-single-table.md)
-- [Transaction](/develop/transaction-overview.md)
-- [Optimize](/develop/optimize-sql-overview.md)
-- [Example Applications](/develop/sample-application-spring-boot.md)
+- [Quick Start](/develop/dev-guide-build-cluster-in-cloud.md)
+- [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
+- [Connect to TiDB](/develop/dev-guide-connect-to-tidb.md)
+- [Database Schema Design](/develop/dev-guide-schema-design-overview.md)
+- [Write Data](/develop/dev-guide-insert-data.md)
+- [Read Data](/develop/dev-guide-get-data-from-single-table.md)
+- [Transaction](/develop/dev-guide-transaction-overview.md)
+- [Optimize](/develop/dev-guide-optimize-sql-overview.md)
+- [Example Applications](/develop/dev-guide-sample-application-spring-boot.md)

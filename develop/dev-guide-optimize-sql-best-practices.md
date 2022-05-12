@@ -108,11 +108,11 @@ SELECT title, price FROM books WHERE title = 'Marian Yost';
 
 ### Use Batch Delete
 
-When a large amount of data needs to be deleted, it is recommended to use [Batch Delete](/develop/delete-data.md#bulk-delete)
+When a large amount of data needs to be deleted, it is recommended to use [Batch Delete](/develop/dev-guide-delete-data.md#bulk-delete)
 
 ### Use Batch Update
 
-When a large amount of data needs to be update, it is recommended to use [Batch Update](/develop/delete-data.md#bulk-delete)
+When a large amount of data needs to be update, it is recommended to use [Batch Update](/develop/dev-guide-delete-data.md#bulk-delete)
 
 ### Use TRUNCATE instead of DELETE full table data
 
@@ -138,11 +138,11 @@ The following describes the best practices involved when using TiDB's DDL.
 
 ### Primary Key Best Practices
 
-See the [Rules to follow when selecting primary key](/develop/create-table.md#rules-to-follow-when-selecting-primary-key).
+See the [Rules to follow when selecting primary key](/develop/dev-guide-create-table.md#rules-to-follow-when-selecting-primary-key).
 
 ## Index Best Practices
 
-See [Index Best Practice](/develop/index-best-practice.md).
+See [Index Best Practice](/develop/dev-guide-index-best-practice.md).
 
 ### Add Index Best Practices
 

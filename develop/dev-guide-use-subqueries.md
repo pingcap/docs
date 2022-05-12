@@ -8,7 +8,7 @@ title: Subqueries
 
 Subqueries are SQL expressions nested within another query, with the help of subqueries, we can use the query results of another query in one query.
 
-Below we will take the [Bookshop](/develop/bookshop-schema-design.md) application as an example to introduce subqueries:
+Below we will take the [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application as an example to introduce subqueries:
 
 ## Subquery statement
 
