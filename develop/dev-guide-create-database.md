@@ -24,7 +24,7 @@ Before reading this page, you need to prepare the following:
 
 ## Create Database
 
-You can use the `CREATE DATABASE` statement to create a database. This will create an empty file with a `.sql` file extension at the end of the file. We will use this file to initialize the database that will store all the data for the entire [Bookshop](/develop/bookshop-schema-design.md) sample application.
+You can use the `CREATE DATABASE` statement to create a database. This will create an empty file with a `.sql` file extension at the end of the file. We will use this file to initialize the database that will store all the data for the entire [Bookshop](/develop/dev-guide-bookshop-schema-design.md) sample application.
 
 {{< copyable "shell-regular" >}}
 
@@ -82,7 +82,7 @@ mysql
 
 ## Rules to follow when creating a database
 
-- Follow the [Database Naming Guidelines](/develop/object-naming-guidelines.md) and give your database a meaningful name.
+- Follow the [Database Naming Guidelines](/develop/dev-guide-object-naming-guidelines.md) and give your database a meaningful name.
 - The `test` database is a default database provided by TiDB. Try not to use it in a production environment if you don't have to. You can create the database yourself with the `CREATE DATABASE` statement and [change the current database](/common/sql-statements/sql-statement-use.md) with the `USE {databasename};` statement in the SQL session.
 - Create the **database**, **roles**, **users**, etc. using the root user. and grant only the necessary privileges.
 - As a general rule, we do not recommend using Driver, ORM to define and change the database schema. Instead, please use **MySQL command-line client** or other **MySQL GUI client** of your choice to do so.
