@@ -13,8 +13,8 @@ This page will demonstrate the use of SQL language with different programming la
 
 Before reading this page, you need to prepare the following:
 
-- [Build a TiDB Cluster in TiDB Cloud(DevTier)](/develop/dev-guide-build-cluster-in-cloud.md).
-- Read [Schema Design Overview](/develop/dev-guide-schema-design-overview.md), [Create a Database](/develop/dev-guide-create-database.md), [Create a Table](/develop/dev-guide-create-table.md), and [Create Secondary Indexes](/develop/dev-guide-create-secondary-indexes.md)
+- [Build a TiDB Cluster in TiDB Cloud(DevTier)](/develop/dev-build-cluster-in-cloud.md).
+- Read [Schema Design Overview](/develop/dev-schema-design-overview.md), [Create a Database](/develop/dev-create-database.md), [Create a Table](/develop/dev-create-table.md), and [Create Secondary Indexes](/develop/dev-create-secondary-indexes.md)
 
 ## Insert Rows
 
@@ -50,7 +50,7 @@ CREATE TABLE `player` (`id` INT, `coins` INT, `goods` INT);
 INSERT INTO `player` (`id`, `coins`, `goods`) VALUES (1, 1000, 1), (2, 230, 2);
 ```
 
-For more information on how to use this SQL, see the [Connecting to a TiDB Cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-2-connect-to-a-cluster) documentation section and follow the documentation steps to enter the SQL statement after connecting to a TiDB cluster using a client.
+For more information on how to use this SQL, see the [Connecting to a TiDB Cluster](/develop/dev-build-cluster-in-cloud.md#step-2-connect-to-a-cluster) documentation section and follow the documentation steps to enter the SQL statement after connecting to a TiDB cluster using a client.
 
 </div>
 
@@ -123,9 +123,9 @@ jdbc:mysql://127.0.0.1:4000/test?user=root&useConfigs=maxPerformance&useServerPr
 
 For a complete example in Java, see:
 
-- [Build a Simple CRUD App with TiDB and Java - Using JDBC](/develop/dev-guide-sample-application-java.md#step-2-get-the-code)
-- [Build a Simple CRUD App with TiDB and Java - Using Hibernate](/develop/dev-guide-sample-application-java.md#step-2-get-the-code)
-- [Build the TiDB Application using Spring Boot](/develop/dev-guide-sample-application-spring-boot.md)
+- [Build a Simple CRUD App with TiDB and Java - Using JDBC](/develop/dev-sample-application-java.md#step-2-get-the-code)
+- [Build a Simple CRUD App with TiDB and Java - Using Hibernate](/develop/dev-sample-application-java.md#step-2-get-the-code)
+- [Build the TiDB Application using Spring Boot](/develop/dev-sample-application-spring-boot.md)
 
 </div>
 
@@ -142,13 +142,13 @@ If you need to quickly import a large amount of data into a TiDB cluster, the be
 
 ## Avoid hot spots
 
-When designing a table you need to consider if there is a large number of inserts. And if so, you need to avoid hotspots during table design. See the [Select primary key](/develop/dev-guide-create-table.md#select-primary-key) section and follow the [Best Practices for select primary key](/develop/dev-guide-create-table.md#best-practices-for-select-primary-key).
+When designing a table you need to consider if there is a large number of inserts. And if so, you need to avoid hotspots during table design. See the [Select primary key](/develop/dev-create-table.md#select-primary-key) section and follow the [Best Practices for select primary key](/develop/dev-create-table.md#best-practices-for-select-primary-key).
 
 For more information on how to handle hotspot issues, please refer to the [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md) documentation.
 
 ## Insert data to a table with `AUTO_RANDOM` primary key
 
-In case the primary key of the table we insert has the `AUTO_RANDOM` attribute, then by default, the primary key cannot be specified. For example, in the [bookshop](/develop/dev-guide-bookshop-schema-design.md) database, we can see that the `id` field of the [users table](/develop/dev-guide-bookshop-schema-design.md#users-table) contains the `AUTO_RANDOM` attribute.
+In case the primary key of the table we insert has the `AUTO_RANDOM` attribute, then by default, the primary key cannot be specified. For example, in the [bookshop](/develop/dev-bookshop-schema-design.md) database, we can see that the `id` field of the [users table](/develop/dev-bookshop-schema-design.md#users-table) contains the `AUTO_RANDOM` attribute.
 
 In this case, we cannot use SQL like the following to insert:
 
@@ -185,4 +185,4 @@ This is intended to indicate to you that it is not recommended to manually speci
 
 ## Using HTAP
 
-In TiDB, using HTAP capabilities does not require you to perform additional operations when inserting data. There is no additional insertion logic, and TiDB does the data consistency assurance automatically. All you need to do is [turn on column-oriented copy synchronization](/develop/dev-guide-create-table.md#using-htap-capabilities) after creating the table and you can use the column copy to speed up your queries directly.
+In TiDB, using HTAP capabilities does not require you to perform additional operations when inserting data. There is no additional insertion logic, and TiDB does the data consistency assurance automatically. All you need to do is [turn on column-oriented copy synchronization](/develop/dev-create-table.md#using-htap-capabilities) after creating the table and you can use the column copy to speed up your queries directly.

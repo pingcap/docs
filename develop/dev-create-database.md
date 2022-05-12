@@ -5,7 +5,7 @@ summary: The ways, best practices, and examples for creating databases.
 
 # Create a Database
 
-This page provides a best practice guide for creating a database and an example of a [bookshop](/develop/dev-guide-bookshop-schema-design.md) database based on TiDB.
+This page provides a best practice guide for creating a database and an example of a [bookshop](/develop/dev-bookshop-schema-design.md) database based on TiDB.
 
 > **Note:**
 >
@@ -15,12 +15,12 @@ This page provides a best practice guide for creating a database and an example 
 
 Before reading this page, you need to prepare the following:
 
-- [Build a TiDB Cluster in TiDB Cloud(DevTier)](/develop/dev-guide-build-cluster-in-cloud.md).
-- Read [Schema Design Overview](/develop/dev-guide-schema-design-overview.md).
+- [Build a TiDB Cluster in TiDB Cloud(DevTier)](/develop/dev-build-cluster-in-cloud.md).
+- Read [Schema Design Overview](/develop/dev-schema-design-overview.md).
 
 ## Create Database
 
-[Database](/develop/dev-guide-schema-design-overview.md) logical object is a collection of TiDB **tables**, **views**, **sequences**, etc.
+[Database](/develop/dev-schema-design-overview.md) logical object is a collection of TiDB **tables**, **views**, **sequences**, etc.
 
 To create a database, use the `CREATE DATABASE` statement and follow [Database Best Practices](#database-best-practices).
 
@@ -31,7 +31,7 @@ Here are some best practices to follow when you create and use databases:
 - Try not to use a `test` database that already exists. Instead, you should use the `CREATE DATABASE` statement to create the database and use the `USE {databasename};` statement in the SQL session to [change the current database](/common/sql-statements/sql-statement-use.md).
 - Create the **database**, **roles**, **users**, etc. using the **root user**. and grant **_only_** the necessary privileges.
 - As a general best practice, we do not recommend using Driver / ORM for database schema definition and changes. Instead, use the **MySQL command-line client** or other **MySQL GUI client** of your preferred.
-- Following [Database Naming Guidelines](/develop/dev-guide-object-naming-guidelines.md)
+- Following [Database Naming Guidelines](/develop/dev-object-naming-guidelines.md)
 
 ### Example
 
@@ -95,4 +95,4 @@ mysql
 
 At this point, you have finished preparing the `bookshop` database and can add **tables** to it.
 
-You can continue reading [the create a table](/develop/dev-guide-create-table.md) for guidance.
+You can continue reading [the create a table](/develop/dev-create-table.md) for guidance.

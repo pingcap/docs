@@ -9,7 +9,7 @@ This section introduce troubleshoot problems that may arise during application d
 
 ## Troubleshoot Query Problems
 
-If you want to improve SQL query performance, follow the instructions in [SQL Performance Tuning](/develop/dev-guide-optimize-sql-overview.md) to be sure you are avoiding common performance problems like full table scans, missing indexes, etc. Then if you still having performance issue, take a look at:
+If you want to improve SQL query performance, follow the instructions in [SQL Performance Tuning](/develop/dev-optimize-sql-overview.md) to be sure you are avoiding common performance problems like full table scans, missing indexes, etc. Then if you still having performance issue, take a look at:
 
 - [Analyze Slow Queries](/analyze-slow-queries.md)
 - [Identify Expensive Queries Using Top SQL](/dashboard/top-sql.md)
@@ -18,7 +18,7 @@ If you have some questions about SQL operations, take a look at [SQL FAQs](/faq/
 
 ## Troubleshoot Transaction
 
-See [Transaction Error Handling](/develop/dev-guide-transaction-troubleshoot.md)。
+See [Transaction Error Handling](/develop/dev-transaction-troubleshoot.md)。
 
 ## See Also
 

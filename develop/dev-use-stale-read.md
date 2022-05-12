@@ -12,7 +12,7 @@ TiDB provides us with three levels of stale read features: statement level, tran
 
 ## Introduce
 
-In the [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application, you can query the latest published books and their prices through the following SQL statement:
+In the [Bookshop](/develop/dev-bookshop-schema-design.md) application, you can query the latest published books and their prices through the following SQL statement:
 
 ```sql
 SELECT id, title, type, price FROM books ORDER BY published_at DESC LIMIT 5;

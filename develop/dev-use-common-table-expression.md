@@ -6,7 +6,7 @@ title: Common Table Expression
 
 Due to the objective complexity of the business, sometimes a single SQL statement as long as 2000 lines is written, which contains a large number of aggregations and multi-level sub-query nesting. Maintaining such SQL is a developer's nightmare.
 
-In the previous subsections we have described how to use [views](/develop/dev-guide-use-views.md) to simplify queries and how to use [temporary tables](/develop/dev-guide-use-temporary-tables.md) to cache intermediate query results.
+In the previous subsections we have described how to use [views](/develop/dev-use-views.md) to simplify queries and how to use [temporary tables](/develop/dev-use-temporary-tables.md) to cache intermediate query results.
 
 In this section, we will introduce the Common Table Expression (CTE) syntax in TiDB, which is a more convenient way to reuse query results.
 
@@ -34,7 +34,7 @@ For example, suppose we still want to know how many books each of the 50 oldest 
 <SimpleTab>
 <div label="SQL">
 
-We can change the example in the [temporary tables](/develop/dev-guide-use-temporary-tables.md) section to the following SQL statement:
+We can change the example in the [temporary tables](/develop/dev-use-temporary-tables.md) section to the following SQL statement:
 
 {{< copyable "sql" >}}
 

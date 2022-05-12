@@ -21,7 +21,7 @@ This part describes how to start a TiDB cluster.
 
 ### Using TiDB Cloud Free Cluster
 
-[Create a free cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-free-cluster)
+[Create a free cluster](/develop/dev-build-cluster-in-cloud.md#step-1-create-a-free-cluster)
 
 ### Using Local Clusters
 
@@ -230,7 +230,7 @@ Subsequently, the project can be used normally, but only in the same way that **
 
 ## Step 5. Run the application
 
-Here the application code is compiled and run, resulting in a web application. hibernate will create a table `player_jpa` within the database `test`, and if you make requests using the application's Restful API, these requests will run database [transactions](/develop/dev-guide-transaction-overview.md) on the TiDB cluster.
+Here the application code is compiled and run, resulting in a web application. hibernate will create a table `player_jpa` within the database `test`, and if you make requests using the application's Restful API, these requests will run database [transactions](/develop/dev-transaction-overview.md) on the TiDB cluster.
 
 If you want to learn more about the code of this application, you can see the [Implementation Details](#implementation-details) at the bottom of this tutorial.
 
@@ -406,7 +406,7 @@ Click the **Count** tab and the **Send** button to send a Get form of the `http:
 
 #### Player Trading
 
-Click on the **Trade** tab and the **Send** button to send a Put request to `http://localhost:8080/player/trade` with the request parameters are sell player ID `sellID`, buy player ID `buyID`, number of goods purchased `amount`, number of coins consumed for the purchase `price`. The return value is whether the transaction is successful or not. When there are insufficient goods for the selling player, insufficient gold for the buying player, or database error, the transaction will not be successful and no player's gold or goods will be lost due to the database [transaction](/develop/dev-guide-transaction-overview.md) guarantee.
+Click on the **Trade** tab and the **Send** button to send a Put request to `http://localhost:8080/player/trade` with the request parameters are sell player ID `sellID`, buy player ID `buyID`, number of goods purchased `amount`, number of coins consumed for the purchase `price`. The return value is whether the transaction is successful or not. When there are insufficient goods for the selling player, insufficient gold for the buying player, or database error, the transaction will not be successful and no player's gold or goods will be lost due to the database [transaction](/develop/dev-transaction-overview.md) guarantee.
 
 ![Postman-Trade](/media/develop/IMG_20220402-003659102.png)
 
@@ -569,7 +569,7 @@ curl --location --request PUT 'http://localhost:8080/player/trade' \
 
 We use **Form Data** as the payload of our message with the request parameters are sell player ID `sellID`, buy player ID `buyID`, number of goods purchased `amount`, number of coins consumed for purchase `price`.
 
-The return value is whether the transaction is successful or not. When there is insufficient goods for the selling player, insufficient gold for the buying player or database error, the transaction will not be successful and no player's gold or goods will be lost due to the database [transaction](/develop/dev-guide-transaction-overview.md) guarantee.
+The return value is whether the transaction is successful or not. When there is insufficient goods for the selling player, insufficient gold for the buying player or database error, the transaction will not be successful and no player's gold or goods will be lost due to the database [transaction](/develop/dev-transaction-overview.md) guarantee.
 
 ```json
 true
@@ -1103,7 +1103,7 @@ You can simply assume that when the agent calls a function inside an object with
 - When the function returns, it will call `transaction.commit()` to commit the transaction
 - When any runtime error occurs, the agent will call `transaction.rollback()` to roll back.
 
-You can refer to [Database Transactions](/develop/dev-guide-transaction-overview.md) for more information on transactions, or read the article on the `Spring` website to [Understanding the Spring Framework’s Declarative Transaction Implementation](https://docs.spring.io/spring-framework/docs/current/reference/html/data-access.html#tx-decl-explained).
+You can refer to [Database Transactions](/develop/dev-transaction-overview.md) for more information on transactions, or read the article on the `Spring` website to [Understanding the Spring Framework’s Declarative Transaction Implementation](https://docs.spring.io/spring-framework/docs/current/reference/html/data-access.html#tx-decl-explained).
 
 Of the implementation classes, the `buyGoods` function is the one to focus on, as it throws an exception if it is not logical and directs `Hibernate` to perform a transaction rollback to prevent incorrect data.
 

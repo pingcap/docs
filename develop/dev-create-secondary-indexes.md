@@ -7,16 +7,16 @@ summary: The ways, best practices and examples for creating secondary indexes.
 
 Indexes are logical objects in a cluster that help TiDB cluster queries find data more efficiently. When you create a secondary index, TiDB creates a reference to each row in the table and sorts it by the selected column. More information about secondary indexes can be found in [TiDB Best Practices](/best-practices/tidb-best-practices.md#secondary-index).
 
-This page provides a best practice guide for creating secondary indexes and provides an example of a TiDB-based [bookshop](/develop/dev-guide-bookshop-schema-design.md) database.
+This page provides a best practice guide for creating secondary indexes and provides an example of a TiDB-based [bookshop](/develop/dev-bookshop-schema-design.md) database.
 
 ## Before you start
 
 Before reading this page, you need to prepare the following:
 
-- [Build a TiDB Cluster in TiDB Cloud(DevTier)](/develop/dev-guide-build-cluster-in-cloud.md).
-- Read [Schema Design Overview](/develop/dev-guide-schema-design-overview.md).
-- [Create a Database](/develop/dev-guide-create-database.md).
-- [Create a Table](/develop/dev-guide-create-table.md)。
+- [Build a TiDB Cluster in TiDB Cloud(DevTier)](/develop/dev-build-cluster-in-cloud.md).
+- Read [Schema Design Overview](/develop/dev-schema-design-overview.md).
+- [Create a Database](/develop/dev-create-database.md).
+- [Create a Table](/develop/dev-create-table.md)。
 
 ## How to create secondary index
 
@@ -53,7 +53,7 @@ KEY `{index_name}` (`{column_names}`)
 
 ## Best Practices
 
-Please refer to the [Best Practices for Indexing](/develop/dev-guide-index-best-practice.md).
+Please refer to the [Best Practices for Indexing](/develop/dev-index-best-practice.md).
 
 ## Example
 
@@ -164,4 +164,4 @@ Running result:
 2 rows in set (1.63 sec)
 ```
 
-At this point, you have completed the creation of the **database**, **tables**, and **secondary indexes**. Next, the database schema is ready to give your application the ability to [write](/develop/dev-guide-insert-data.md) to and [read](/develop/dev-guide-get-data-from-single-table.md) from it.
+At this point, you have completed the creation of the **database**, **tables**, and **secondary indexes**. Next, the database schema is ready to give your application the ability to [write](/develop/dev-insert-data.md) to and [read](/develop/dev-get-data-from-single-table.md) from it.

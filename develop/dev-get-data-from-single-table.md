@@ -10,13 +10,13 @@ In this chapter, we will begin to explain how to use SQL and various programming
 
 ## Before you begin
 
-Next, we will introduce the data query section of TiDB around the [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application.
+Next, we will introduce the data query section of TiDB around the [Bookshop](/develop/dev-bookshop-schema-design.md) application.
 
 Before reading this chapter, you need to do the following:
 
-1. Build a TiDB cluster (recommended to use [TiDB Cloud](/develop/dev-guide-build-cluster-in-cloud.md) or [TiUP](/production-deployment-using-tiup.md)).
-2. [Import table schema and sample data of Bookshop application](/develop/dev-guide-bookshop-schema-design.md#import-data).
-3. [Connect to TiDB](/develop/dev-guide-connect-to-tidb.md).
+1. Build a TiDB cluster (recommended to use [TiDB Cloud](/develop/dev-build-cluster-in-cloud.md) or [TiUP](/production-deployment-using-tiup.md)).
+2. [Import table schema and sample data of Bookshop application](/develop/dev-bookshop-schema-design.md#import-data).
+3. [Connect to TiDB](/develop/dev-connect-to-tidb.md).
 
 ## A simple query
 
@@ -106,7 +106,7 @@ public class AuthorDAO {
 }
 ```
 
-- After [getting the database connection](/develop/dev-guide-connect-to-tidb.md#jdbc), you can create a `Statement` instance object using the `conn.createStatus()` statement.
+- After [getting the database connection](/develop/dev-connect-to-tidb.md#jdbc), you can create a `Statement` instance object using the `conn.createStatus()` statement.
 - Then call the `stmt.executeQuery("query_sql")` method to initiate a database query request to TiDB.
 - The query results return by the database will be stored in `ResultSet` object. By traversing the `ResultSet` object, the return result can be mapped to the `Author` class object prepared earlier.
 
@@ -137,7 +137,7 @@ For Java programs, we want to use the same SQL to handle data query request with
 
 Splicing parameters into a SQL statement may be a method, but it is not a good idea, as it poses a potential [SQL Injection](https://en.wikipedia.org/wiki/SQL_injection) risk to our application.
 
-When dealing with such queries, we should use [preparedStatement](/develop/dev-guide-prepared-statement.md) instead of a normal Statement.
+When dealing with such queries, we should use [preparedStatement](/develop/dev-prepared-statement.md) instead of a normal Statement.
 
 {{< copyable "java" >}}
 
