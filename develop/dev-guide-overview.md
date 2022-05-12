@@ -5,17 +5,9 @@ summary: Described the outline of the developer's guide is listed.
 
 # Developer Overview
 
-This guide will show how to quickly build an application using TiDB. Therefore, before reading this page, we recommend that you read the [Quick Start Guide for the TiDB Database Platform](/quick-start-with-tidb.md) and install the Driver or use the ORM framework
+This guide is written for application developers, but if you are interested in the inner workings of TiDB or want to get involved in TiDB development, then go read the [TiDB Kernel Development Guide](https://pingcap.github.io/tidb-dev-guide/) for more information about TiDB.
 
-## Guide contents
-
-- [Overview](#tidb-basics)
-- [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
-- [Connect to TiDB](/develop/dev-guide-connect-to-tidb.md)
-- [Database Schema Design](/develop/dev-guide-schema-design-overview.md)
-- [Insert Data](/develop/dev-guide-insert-data.md)
-- [Read Data](/develop/dev-guide-get-data-from-single-table.md)
-- [Transaction](/develop/dev-guide-transaction-overview.md)
+We will show how to quickly build an application using TiDB. Therefore, before reading this page, we recommend that you read the [Quick Start Guide for the TiDB Database Platform](/quick-start-with-tidb.md) and install the Driver or use the ORM framework.
 
 ## TiDB Basics
 
@@ -23,8 +15,6 @@ Before you start working with TiDB, you need to understand some important mechan
 
 - Read the [TiDB Transaction Overview](/transaction-overview.md) to understand how TiDB transactions work or check out the [Transaction Notes for Application Developers](/develop/dev-guide-transaction-overview.md) to see what application developers need to know about the part of the transaction.
 - In addition, you need to understand [The way applications interact with TiDB](#the-way-applications-interact-with-tidb)
-
-The following sections are written for application developers, but if you are interested in the inner workings of TiDB or want to get involved in TiDB development, then go read the [TiDB Kernel Development Guide](https://pingcap.github.io/tidb-dev-guide/) for more information about TiDB.
 
 ## TiDB Transaction Mechanism
 
@@ -41,3 +31,15 @@ If you are not sure what an **optimistic transaction** is, do ***NOT*** use it y
 TiDB is highly compatible with MySQL protocol, TiDB supports [most MySQL syntax and features](https://docs.pingcap.com/zh/tidb/stable/mysql-compatibility), so most MySQL connection libraries are compatible with TiDB. If your application framework or language does not have an official PingCAP adaptation, then we recommend that you use MySQL's client libraries. At the same time, more and more three-party databases are actively supporting TiDB's different features.
 
 Since TiDB is compatible with MySQL protocol and MySQL syntax, most of the ORMs that support MySQL are also compatible with TiDB.
+
+## Read More
+
+- [Quick Start](/develop/dev-guide-build-cluster-in-cloud.md)
+- [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
+- [Connect to TiDB](/develop/dev-guide-connect-to-tidb.md)
+- [Database Schema Design](/develop/dev-guide-schema-design-overview.md)
+- [Write Data](/develop/dev-guide-insert-data.md)
+- [Read Data](/develop/dev-guide-get-data-from-single-table.md)
+- [Transaction](/develop/dev-guide-transaction-overview.md)
+- [Optimize](/develop/dev-guide-optimize-sql-overview.md)
+- [Example Applications](/develop/dev-guide-sample-application-spring-boot.md)

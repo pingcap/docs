@@ -1,13 +1,11 @@
 ---
 title: Create Secondary Indexes
-summary: The ways, best practices and examples for creating secondary indexes.
+summary: Methods, rules to follow and examples when creating secondary indexes.
 ---
 
 # Create Secondary Indexes
 
-Indexes are logical objects in a cluster that help TiDB cluster queries find data more efficiently. When you create a secondary index, TiDB creates a reference to each row in the table and sorts it by the selected column. More information about secondary indexes can be found in [TiDB Best Practices](/best-practices/tidb-best-practices.md#secondary-index).
-
-This page provides a best practice guide for creating secondary indexes and provides an example of a TiDB-based [bookshop](/develop/dev-guide-bookshop-schema-design.md) database.
+In this section, we will begin to describe how to create secondary indexes using SQL and various programming languages and the rules to follow when creating secondary indexes. In this section we will cover the secondary index creation part of TiDB around the [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application.
 
 ## Before you start
 
@@ -18,9 +16,11 @@ Before reading this page, you need to prepare the following:
 - [Create a Database](/develop/dev-guide-create-database.md).
 - [Create a Table](/develop/dev-guide-create-table.md)。
 
-## How to create secondary index
+## What is secondary index
 
-### Adding a secondary index to an existing table
+Secondary index is logical object in a TiDB cluster that help TiDB clusters find data more efficiently. When you create a secondary index, TiDB creates a reference to each row in the table and sorts it by the selected column, not by the table itself. TiDB's secondary index creation is an online operation that does not block data reads and writes from the table. More information can be found in [Secondary Indexes](/best-practices/tidb-best-practices.md#secondary-index). Secondary indexes can be [Create a secondary index while creating a new table](#create-a-secondary-index-while-creating-a-new-table) or [Adding a secondary index to an existing table](#adding-a-secondary-index-to-an-existing-table).
+
+## Adding a secondary index to an existing table
 
 If you need to add a secondary index to an existing table, you can use the [CREATE INDEX](/common/sql-statements/sql-statement-create-index.md) statement. In TiDB, `CREATE INDEX` is an online operation, it indicated the statement does not block data reads or writes to the table. Secondary indexes are typically created in the following form.
 
@@ -36,7 +36,7 @@ CREATE INDEX {index_name} ON {table_name} ({column_names});
 |  `{table_name}`  |                 Table name                 |
 | `{column_names}` | List the names of the columns to be indexed, separated by semi-colon commas |
 
-### Create a secondary index while creating a new table
+## Create a secondary index while creating a new table
 
 If you want to create a secondary index at the same time as the table, use a clause containing the KEY keyword at the end of [CREATE TABLE](/common/sql-statements/sql-statement-create-table.md) to create the secondary index:
 
@@ -51,7 +51,7 @@ KEY `{index_name}` (`{column_names}`)
 |  `{index_name}`  |              Secondary Index Name              |
 | `{column_names}` | List the names of the columns to be indexed, separated by semi-colon commas |
 
-## Best Practices
+## Rules to follow when creating secondary indexes
 
 Please refer to the [Best Practices for Indexing](/develop/dev-guide-index-best-practice.md).
 
@@ -163,5 +163,7 @@ Running result:
 +-------+------------+-----------------------+--------------+--------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+-----------+
 2 rows in set (1.63 sec)
 ```
+
+## One more step
 
 At this point, you have completed the creation of the **database**, **tables**, and **secondary indexes**. Next, the database schema is ready to give your application the ability to [write](/develop/dev-guide-insert-data.md) to and [read](/develop/dev-guide-get-data-from-single-table.md) from it.
