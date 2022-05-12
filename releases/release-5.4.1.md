@@ -26,7 +26,7 @@ TiDB version: 5.4.1
 + TiDB
 
     - (dup: release-6.0.0-dmr.md > Improvements> TiDB)- Support using the PointGet plan for queries that read the `_tidb_rowid` column [#31543](https://github.com/pingcap/tidb/issues/31543)
-    - Add more debug information for `Apply` executor [#33887](https://github.com/pingcap/tidb/issues/33887)
+    - Add more logs and metrics for the `Apply` operator to show whether it is parallel [#33887](https://github.com/pingcap/tidb/issues/33887)
     - Improve the `TopN` pruning logic for Analyze Version 2 used for 
 collecting statistics [#34256](https://github.com/pingcap/tidb/issues/34256)
     - Support displaying multiple Kubernetes clusters in the Grafana dashboard [#32593](https://github.com/pingcap/tidb/issues/32593)
