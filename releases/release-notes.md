@@ -6,6 +6,7 @@ title: Release Notes
 
 ## 5.4
 
+- [5.4.1](/releases/release-5.4.1.md)
 - [5.4.0](/releases/release-5.4.0.md)
 
 ## 5.3
