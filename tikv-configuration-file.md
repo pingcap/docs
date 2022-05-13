@@ -369,8 +369,12 @@ Configuration items related to storage.
 
 ### `enable-ttl`
 
+> **Warning:**
+>
+> - Set `enable-ttl` to `true` or `false` **ONLY WHEN** deploying a new TiKV cluster. **DO NOT** modify the value of this configuration item in an existing TiKV cluster. TiKV clusters with different `enable-ttl` values use different data formats. Therefore, if you modify the value of this item in an existing TiKV cluster, the cluster will store data in different formats, which causes the "can't enable TTL on a non-ttl" error when you restart the TiKV cluster.
+> - Use `enable-ttl` **ONLY IN** a TiKV cluster. **DO NOT** use this configuration item in a cluster that has TiDB nodes (which means setting `enable-ttl` to `true` in such clusters). Otherwise, critical issues such as data corruption and the upgrade failure of TiDB clusters will occur.
+
 + TTL is short for "Time to live". If this item is enabled, TiKV automatically deletes data that reaches its TTL. To set the value of TTL, you need to specify it in the requests when writing data via the client. If the TTL is not specified, it means that TiKV does not automatically delete the corresponding data.
-+ Note: The TTL feature is only available for the RawKV interface for now. You can only configure this feature when creating a new cluster because TTL uses different data formats in the storage layer. If you modify this item on an existing cluster, TiKV reports errors when it starts.
 + Default value: `false`
 
 ### `ttl-check-poll-interval`
@@ -396,7 +400,7 @@ Configuration items related to the sharing of block cache among multiple RocksDB
 
 ## storage.flow-control
 
-Configuration items related to the flow control mechanism in TiKV. This mechanism replaces the write stall mechanism in RocksDB and controls flow at the scheduler layer, which avoids the issue of QPS drop caused by the stuck Raftstore or Apply threads when the write traffic is high.
+Configuration items related to the flow control mechanism in TiKV. This mechanism replaces the write stall mechanism in RocksDB and controls flow at the scheduler layer, which avoids secondary disasters caused by the stuck Raftstore or Apply threads.
 
 ### `enable`
 
@@ -405,22 +409,22 @@ Configuration items related to the flow control mechanism in TiKV. This mechanis
 
 ### `memtables-threshold`
 
-+ When the number of kvDB memtables reaches this threshold, the flow control mechanism starts to work.
++ When the number of kvDB memtables reaches this threshold, the flow control mechanism starts to work. When `enable` is set to `true`, this configuration item overrides `rocksdb.(defaultcf|writecf|lockcf).max-write-buffer-number`.
 + Default value: `5`
 
 ### `l0-files-threshold`
 
-+ When the number of kvDB L0 files reaches this threshold, the flow control mechanism starts to work.
++ When the number of kvDB L0 files reaches this threshold, the flow control mechanism starts to work. When `enable` is set to `true`, this configuration item overrides `rocksdb.(defaultcf|writecf|lockcf).level0-slowdown-writes-trigger`.
 + Default value: `20`
 
 ### `soft-pending-compaction-bytes-limit`
 
-+ When the pending compaction bytes in KvDB reach this threshold, the flow control mechanism starts to reject some write requests and reports the `ServerIsBusy` error.
++ When the pending compaction bytes in KvDB reach this threshold, the flow control mechanism starts to reject some write requests and reports the `ServerIsBusy` error. When `enable` is set to `true`, this configuration item overrides `rocksdb.(defaultcf|writecf|lockcf).soft-pending-compaction-bytes-limit`.
 + Default value: `"192GB"`
 
 ### `hard-pending-compaction-bytes-limit`
 
-+ When the pending compaction bytes in KvDB reach this threshold, the flow control mechanism rejects all write requests and reports the `ServerIsBusy` error.
++ When the pending compaction bytes in KvDB reach this threshold, the flow control mechanism rejects all write requests and reports the `ServerIsBusy` error. When `enable` is set to `true`, this configuration item overrides `rocksdb.(defaultcf|writecf|lockcf).hard-pending-compaction-bytes-limit`.
 + Default value: `"1024GB"`
 
 ## storage.io-rate-limit
@@ -1084,8 +1088,8 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 ### `compression-per-level`
 
 + The default compression algorithm for each level
-+ Optional values: ["no", "no", "lz4", "lz4", "lz4", "zstd", "zstd"]
-+ Default value for `defaultcf` and `writecf`: ["no", "no", "lz4", "lz4", "lz4", "zstd", "zstd"]
++ Default value for `defaultcf`: ["no", "no", "lz4", "lz4", "lz4", "zstd", "zstd"]
++ Default value for `writecf`: ["no", "no", "lz4", "lz4", "lz4", "zstd", "zstd"]
 + Default value for `lockcf`: ["no", "no", "no", "no", "no", "no", "no"]
 
 ### `bottommost-level-compression`
@@ -1105,7 +1109,7 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 
 ### `max-write-buffer-number`
 
-+ The maximum number of memtables
++ The maximum number of memtables. When `storage.flow-control.enable` is set to `true`, `storage.flow-control.memtables-threshold` overrides this configuration item.
 + Default value: `5`
 + Minimum value: `0`
 
@@ -1139,7 +1143,7 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 
 ### `level0-slowdown-writes-trigger`
 
-+ The maximum number of files at L0 that trigger write stall
++ The maximum number of files at L0 that trigger write stall. When `storage.flow-control.enable` is set to `true`, `storage.flow-control.l0-files-threshold` overrides this configuration item.
 + Default value: `20`
 + Minimum value: `0`
 
@@ -1191,13 +1195,13 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 
 ### `soft-pending-compaction-bytes-limit`
 
-+ The soft limit on the pending compaction bytes
++ The soft limit on the pending compaction bytes. When `storage.flow-control.enable` is set to `true`, `storage.flow-control.soft-pending-compaction-bytes-limit` overrides this configuration item.
 + Default value: `"192GB"`
 + Unit: KB|MB|GB
 
 ### `hard-pending-compaction-bytes-limit`
 
-+ The hard limit on the pending compaction bytes
++ The hard limit on the pending compaction bytes. When `storage.flow-control.enable` is set to `true`, `storage.flow-control.hard-pending-compaction-bytes-limit` overrides this configuration item.
 + Default value: `"256GB"`
 + Unit: KB|MB|GB
 

@@ -210,7 +210,63 @@ The `create_time` of tables in the `information_schema` is the creation time.
 
 ### What is the meaning of `EXPENSIVE_QUERY` in the TiDB log?
 
-When TiDB is executing a SQL statement, the query will be `EXPENSIVE_QUERY` if each operator is estimated to process over 10000 pieces of data. You can modify the `tidb-server` configuration parameter to adjust the threshold and then restart the `tidb-server`.
+When TiDB is executing a SQL statement, the query will be `EXPENSIVE_QUERY` if each operator is estimated to process over 10,000 rows. You can modify the `tidb-server` configuration parameter to adjust the threshold and then restart the `tidb-server`.
+
+### How do I estimate the size of a table in TiDB?
+
+To estimate the size of a table in TiDB, you can use the following query statement.
+
+```sql
+SELECT
+  db_name,
+  table_name,
+  ROUND(SUM(total_size / cnt), 2) Approximate_Size,
+  ROUND(
+    SUM(
+      total_size / cnt / (
+        SELECT
+          ROUND(AVG(value), 2)
+        FROM
+          METRICS_SCHEMA.store_size_amplification
+        WHERE
+          value > 0
+      )
+    ),
+    2
+  ) Disk_Size
+FROM
+  (
+    SELECT
+      db_name,
+      table_name,
+      region_id,
+      SUM(Approximate_Size) total_size,
+      COUNT(*) cnt
+    FROM
+      information_schema.TIKV_REGION_STATUS
+    WHERE
+      db_name = @dbname
+      AND table_name IN (@table_name)
+    GROUP BY
+      db_name,
+      table_name,
+      region_id
+  ) tabinfo
+GROUP BY
+  db_name,
+  table_name;
+```
+
+When using the above statement, you need to fill in and replace the following fields in the statement as appropriate.
+
+- `@dbname`: the name of the database.
+- `@table_name`: the name of the target table.
+
+In addition, in the above statement:
+
+- `store_size_amplification` indicates the average of the cluster compression ratio. In addition to using `SELECT * FROM METRICS_SCHEMA.store_size_amplification;` to query this information, you can also check the **Size amplification** metric for each node on the **Grafana Monitoring PD - statistics balance** panel. The average of the cluster compression ratio is the average of the Size amplification for all nodes.
+- `Approximate_Size` indicates the size of the table in a replica before compression. Note that this is an approximate value, not an accurate one.
+- `Disk_Size` indicates the size of the table after compression. This is an approximate value and can be calculated according to `Approximate_Size` and `store_size_amplification`.
 
 ## TiKV server management
 
@@ -350,4 +406,4 @@ TiDB is not suitable for tables of small size (such as below ten million level),
 
 ### How to back up data in TiDB?
 
-Currently, for the backup of a large volume of data, the preferred method is using [BR](/br/backup-and-restore-tool.md). Otherwise, the recommended tool is [Dumpling](/backup-and-restore-using-dumpling-lightning.md). Although the official MySQL tool `mysqldump` is also supported in TiDB to back up and restore data, its performance is worse than [BR](/br/backup-and-restore-tool.md) and it needs much more time to back up and restore large volumes of data.
+Currently, for the backup of a large volume of data, the preferred method is using [BR](/br/backup-and-restore-tool.md). Otherwise, the recommended tool is [Dumpling](/dumpling-overview.md). Although the official MySQL tool `mysqldump` is also supported in TiDB to back up and restore data, its performance is worse than [BR](/br/backup-and-restore-tool.md) and it needs much more time to back up and restore large volumes of data.
