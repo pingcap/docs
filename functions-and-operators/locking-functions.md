@@ -11,7 +11,7 @@ TiDB supports most of the user-level [locking functions](https://dev.mysql.com/d
 
 | Name                                                                                                                 | Description                                                           |
 |:---------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------|
-| [`GET_LOCK(lockName, timeout)`](https://dev.mysql.com/doc/refman/5.7/en/locking-functions.html#function_get-lock)    | Acquire an advisory lock. LockName must be <= 64 characters.          |
+| [`GET_LOCK(lockName, timeout)`](https://dev.mysql.com/doc/refman/5.7/en/locking-functions.html#function_get-lock)    | Acquires an advisory lock. The `lockName` parameter must be NO longer than 64 characters.          |
 | [`RELEASE_LOCK(lockName)`](https://dev.mysql.com/doc/refman/5.7/en/locking-functions.html#function_release-lock)     | Release a previously acquired lock LockName must be <= 64 characters. |
 | [`RELEASE_ALL_LOCKS()`](https://dev.mysql.com/doc/refman/5.7/en/locking-functions.html#function_release-all-locks)   | Release all locks held by the current session.                        |
 
