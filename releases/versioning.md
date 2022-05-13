@@ -9,30 +9,57 @@ summary: Learn the version numbering system of TiDB.
 It is recommended to always upgrade to the latest patch release of your release series.
 </Important>
 
-Starting from TiDB v6.0.0, TiDB has introduced a new release series, DMR. Currently TiDB has two release series:
+TiDB offers two release series:
 
-* Long-Term Support Releases (LTS)
-* Development Milestone Releases (DMR)
-
-For the versioning system of TiDB v5.0.0 and earlier versions, refer to [Historical versioning](#historical-versioning-deprecated).
+* Long-Term Support Releases
+* Development Milestone Releases (introduced in TiDB v6.0.0)
 
 ## Release versioning
 
-TiDB versioning has the form of `X.Y.Z`.
+TiDB versioning has the form of `X.Y.Z`. `X.Y` represents a release series.
 
 - Since TiDB 1.0, `X` increments every year. Each `X` release introduces new features and improvements.
-- `Y` increments from 0. Each `Y` release introduces new features and improvements. `X.Y` represents a release series.
-- `Z` is the patch release number. The first release of a release series `X.Y` has `Z` set to 0. For patch releases, `Z` increments from 1.
+- `Y` increments from 0. Each `Y` release introduces new features and improvements.
+- In the first release of a release series, `Z` is set to 0 by default. For patch releases, `Z` increments from 1.
 
-| Release series | Definition | Naming convention | Example |
-| :--- | :----- | :---| :---|
-| Long-Term Support Releases (LTS) | LTS are released approximately every six months and introduce new features, improvements and bug fixes. During its lifecycle, patch releases based on the current release series are released on demand. | `X.Y.Z`. `Z` defaults to 0. | 6.1.0<br/>5.4.0 |
-| Development Milestone Releases (DMR) | DMR are released approximately every two months that do not contain LTS. DMR introduce new features, improvements and bug fixes. Patch releases based on DMR are not available, and any related bugs are fixed in the subsequent release series. | `X.Y.Z` with the `-DMR` suffix. `Z` defaults to 0. | 6.0.0-DMR |
-| Patch Releases | Patch releases are made available on demand during the lifecycle of LTS. Patch releases contain bug fixes and security vulnerability fixes, and do not introduce new features. | `X.Y.Z`. `X.Y` follows the LTS naming, and `Z` increments from 1. | 6.1.1 |
+For the versioning system of TiDB v5.0.0 and earlier versions, refer to [Historical versioning](#historical-versioning-deprecated).
+
+## Long-Term Support Releases
+
+Long-Term Support Releases (LTS) are released approximately every six months and introduce new features, improvements, bug fixes and security vulnerability fixes.
+
+LTS are versioned as `X.Y.Z`. `Z` defaults to 0.
+
+Example versions:
+
+- 6.1.0
+- 5.4.0
+
+During the lifecycle of LTS, patch releases are made available on demand. Patch releases contain bug fixes and security vulnerability fixes, and do not introduce new features.
+
+Patch releases are versioned as `X.Y.Z`. `X.Y` is consistent with the corresponding LTS versioning. The patch number `Z` increments from 1.
+
+Example versions:
+
+- 6.1.1
+
+<Note>
+v5.1.0, v5.2.0, v5.3.0, v5.4.0 were released only two months after their preceding releases, but all four releases are LTS and provide patch releases.
+</Note>
+
+## Development Milestone Releases
+
+Development Milestone Releases (DMR) are released approximately every two months that do not contain LTS. DMR introduce new features, improvements and bug fixes. TiDB does not provide patch releases based on DMR, and any related bugs are fixed in the subsequent release series.
+
+DMR are versioned as `X.Y.Z`. `Z` defaults to 0. A `-DMR` suffix is appended to the version number.
+
+Example versions:
+
+- 6.0.0-DMR
 
 ## Versioning of TiDB ecosystem tools
 
-Some TiDB tools are released together with TiDB server and use the same version numbering system. Some TiDB tools are released separately from the TiDB server and use their own version numbering system, such as TiUP and TiDB Operator.
+Some TiDB tools are released together with TiDB server and use the same version numbering system, such as TiDB Lightning. Some TiDB tools are released separately from the TiDB server and use their own version numbering system, such as TiUP and TiDB Operator.
 
 ## Historical versioning (deprecated)
 
