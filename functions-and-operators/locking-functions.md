@@ -19,7 +19,7 @@ TiDB supports most of the user-level [locking functions](https://dev.mysql.com/d
 
 * The minimum timeout permitted by TiDB is 1 second, and the maximum timeout is 1 hour. This differs from MySQL, where both zero second and unlimited timeouts are permitted. TiDB will automatically convert out of range values to the nearest permitted value.
 * TiDB does not automatically detect deadlocks in user-level locks. Deadlocked sessions will timeout after a maximum of 1 hour, but can also be manually resolved by using `KILL` on one of the affected sessions. Deadlocks can also be prevented by always acquiring user-locks in the same order.
-* Locks are scoped to all TiDB servers in the cluster. This differs from MySQL Cluster and Group Replication where locks are local to a single server.
+* Locks take effect on all TiDB servers in the cluster. This differs from MySQL Cluster and Group Replication where locks are local to a single server.
 
 ## Unsupported functions
 
