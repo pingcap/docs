@@ -18,7 +18,7 @@ Before reading this page, you need to prepare the following:
 
 ## What is secondary index
 
-Secondary index is logical object in a TiDB cluster that help TiDB clusters find data more efficiently. When you create a secondary index, TiDB creates a reference to each row in the table and sorts it by the selected column, not by the table itself. TiDB's secondary index creation is an online operation that does not block data reads and writes from the table. More information can be found in [Secondary Indexes](/best-practices/tidb-best-practices.md#secondary-index). Secondary indexes can be [Create a secondary index while creating a new table](#create-a-secondary-index-while-creating-a-new-table) or [Adding a secondary index to an existing table](#adding-a-secondary-index-to-an-existing-table).
+Secondary index is a logical object in the TiDB cluster, you can simply think of it as the sorting of data, TiDB uses this orderliness to speed up the query.TiDB's operation of creating a secondary index is online and does not block data reads and writes in the table.TiDB creates references to rows in the table and sorts them by the selected columns. Instead of sorting the data in the table itself. More information can be found in [Secondary Indexes](/best-practices/tidb-best-practices.md#secondary-index). Secondary indexes can be [Create a secondary index while creating a new table](#create-a-secondary-index-while-creating-a-new-table) or [Adding a secondary index to an existing table](#adding-a-secondary-index-to-an-existing-table).
 
 ## Adding a secondary index to an existing table
 
@@ -30,11 +30,11 @@ If you need to add a secondary index to an existing table, you can use the [CREA
 CREATE INDEX {index_name} ON {table_name} ({column_names});
 ```
 
-|      Parameter      |               Description               |
-| :--------------: | :----------------------------------: |
-|  `{index_name}`  |              Secondary Index Name              |
-|  `{table_name}`  |                 Table name                 |
-| `{column_names}` | List the names of the columns to be indexed, separated by semi-colon commas |
+**Parameter Description**
+
+- `{index_name}`: Secondary Index Name.
+- `{table_name}`: Table name.
+- `{column_names}`: List the names of the columns to be indexed, separated by semi-colon commas.
 
 ## Create a secondary index while creating a new table
 
@@ -46,10 +46,10 @@ If you want to create a secondary index at the same time as the table, use a cla
 KEY `{index_name}` (`{column_names}`)
 ```
 
-|      Parameter      |               Description               |
-| :--------------: | :----------------------------------: |
-|  `{index_name}`  |              Secondary Index Name              |
-| `{column_names}` | List the names of the columns to be indexed, separated by semi-colon commas |
+**Parameter Description**
+
+- `{index_name}`: Secondary Index Name.
+- `{column_names}`: List the names of the columns to be indexed, separated by semi-colon commas.
 
 ## Rules to follow when creating secondary indexes
 

@@ -35,10 +35,10 @@ The `CREATE TABLE` statement usually takes the following form:
 CREATE TABLE {table_name} ( {elements} );
 ```
 
-|      Parameter      |                      Description                      |
-| :------------: | :--------------------------------------------: |
-| `{table_name}` |                      Table name                      |
-|  `{elements}`  | A comma-separated list of table elements, such as column definitions, primary key definitions, etc. |
+**Parameter Description**
+
+- `{table_name}`: Table name.
+- `{elements}`: A comma-separated list of table elements, such as column definitions, primary key definitions, etc.
 
 Suppose you need to create a table to store the user information in the `bookshop` database.
 
@@ -61,11 +61,11 @@ Column definitions typically use the following form.
 {column_name} {data_type} {column_qualification}
 ```
 
-|      Parameter      |                      Description                      |
-| :----------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-|     `{column_name}`      |                                                                               Column name                                                                                |
-|      `{data_type}`       | Column [data type](/basic-features.md#data-types-functions-and-operators) |
-| `{column_qualification}` | Column qualifications, such as **column-level constraints** or [generated column (experimental function)](/generated-columns.md) clauses |
+**Parameter Description**
+
+- `{column_name}`: Column name.
+- `{data_type}`: Column [data type](/basic-features.md#data-types-functions-and-operators).
+- `{column_qualification}`: Column qualifications, such as **column-level constraints** or [generated column (experimental function)](/generated-columns.md) clauses.
 
 We can add some columns to the `users` table, such as their unique identifier `id`, `balance` and `nickname`.
 
@@ -269,10 +269,10 @@ TiFlash does not automatically synchronize data after deployment, but you need t
 ALTER TABLE {table_name} SET TIFLASH REPLICA {count};
 ```
 
-|      Parameter      |                      Description                      |
-| :------------: | :------------------------------------: |
-| `{table_name}` |                  Table name                  |
-|   `{count}`    | The number of synchronized copies, if 0, the synchronized copies are deleted |
+**Parameter Description**
+
+- `{table_name}`: Table name.
+- `{count}`: The number of synchronized copies, if 0, the synchronized copies are deleted.
 
 **TiFlash** will then synchronize the table, and when queried, TiDB will automatically consider using TiKV (row-oriented) or TiFlash (column-oriented) for data queries based on cost optimization. Of course, in addition to the automatic approach, you can also directly specify whether the query uses a **TiFlash** copy, see [Use TiDB to read TiFlash replicas](/tiflash/use-tiflash.md#use-tidb-to-read-tiflash-replicas) for how to use it.
 
@@ -324,9 +324,9 @@ When the word `cop[tiflash]` appears, it means that the task is sent to **TiFlas
 
 ## Execute the `CREATE TABLE` statement
 
-After creating all the tables as above rules, our `dbinit.sql` file should look similar to the [database initialization](/develop/dev-guide-bookshop-schema-design.md#database-initialization-script-dbinitsql) shown. If you need to see the table information in detail, please refer to [Details about Table](/develop/dev-guide-bookshop-schema-design.md#details-about-table).
+After creating all the tables as above rules, our [database initialization](/develop/dev-guide-bookshop-schema-design.md#database-initialization-script-dbinitsql) script should look like this. If you need to see the table information in detail, please refer to [Details about Table](/develop/dev-guide-bookshop-schema-design.md#details-about-table).
 
-We can execute the dbinit.sql file with the following statements:
+If we name the database initialization script `init.sql` and save it, we can use the following statement to perform the database initialization.
 
 {{< copyable "shell-regular" >}}
 
@@ -336,7 +336,7 @@ mysql
     -h {host} \
     -P {port} \
     -p {password} \
-    < dbinit.sql
+    < init.sql
 ```
 
 To view all tables under the `bookshop` database, use the [SHOW TABLES](/common/sql-statements/sql-statement-show-tables.md#show-full-tables) statement.
