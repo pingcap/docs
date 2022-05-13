@@ -15,7 +15,7 @@ def get_note_info(path):
 
 
 if __name__ == "__main__":
-    path = r'/Users/grcai/Documents/GitHub/qiancai/docs/releases/release-5.4.1.md'
+    path = r'D:\GitHub\upstream\docs1\releases\release-5.1.4.md'
     exst_note = get_note_info(path)
     mylist = exst_note
     myset = set(mylist)
