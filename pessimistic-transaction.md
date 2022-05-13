@@ -49,7 +49,7 @@ Pessimistic transactions in TiDB behave similarly to those in MySQL. See the min
 
     The following examples provide a detailed description of snapshot read and current read.
 
-    | session 1 | session 2 | session 3 |
+    | Session 1 | Session 2 | Session 3 |
     | :----| :---- | :---- |
     | CREATE TABLE t (a INT); |  |  |
     | INSERT INTO T VALUES(1); |  |  |
