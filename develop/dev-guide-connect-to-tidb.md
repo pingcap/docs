@@ -82,7 +82,7 @@ Note the following:
 
 - Because the `hibernate.cfg.xml` configuration file is in the XML format and `&` is a special character in XML, you need to change `&` to `&amp;` when configuring the file. For example, you need to change the connection string `hibernate.connection.url` from `jdbc:mysql://{host}:{port}/{database}?user={user}&password={password}` to `jdbc:mysql://{host}:{ port}/{database}?user={user}&amp;password={password}`.
 - It is recommended that you use the `TiDB` dialect by setting `hibernate.dialect` to `org.hibernate.dialect.TiDBDialect`.
-- Hibernate supports TiDB dialects starting from version `6.0.0.Beta2`, so it is recommended that you use Hibernate `6.0.0.Beta2` or above.
+- Hibernate supports TiDB dialects starting from `6.0.0.Beta2`, so it is recommended that you use Hibernate `6.0.0.Beta2` or a later version to connect to TiDB.
 
 For more information about Hibernate connection parameters, see [Hibernate documentation](https://hibernate.org/orm/documentation).
 
