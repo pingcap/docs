@@ -24,15 +24,7 @@ Before reading this page, you need to prepare the following:
 
 ## Create Database
 
-You can use the `CREATE DATABASE` statement to create a database. This will create an empty file with a `.sql` file extension at the end of the file. We will use this file to initialize the database that will store all the data for the entire [Bookshop](/develop/dev-guide-bookshop-schema-design.md) sample application.
-
-{{< copyable "shell-regular" >}}
-
-```shell
-touch dbinit.sql
-```
-
-Then, open `dbinit.sql` in a text editor and add the `CREATE DATABASE` statement to the top of the file.
+You can use the `CREATE DATABASE` statement to create a database.
 
 {{< copyable "sql" >}}
 
@@ -42,7 +34,7 @@ CREATE DATABASE IF NOT EXISTS `bookshop`;
 
 This statement will create a database named `bookshop` (if it does not already exist).
 
-To execute the library build statement in the `dbinit.sql` file as the **root user**, run the following command:
+To execute the library build statement as the **root user**, run the following command:
 
 {{< copyable "shell-regular" >}}
 
@@ -52,7 +44,7 @@ mysql
     -h {host} \
     -P {port} \
     -p {password} \
-    < dbinit.sql
+    -e "CREATE DATABASE IF NOT EXISTS bookshop;"
 ```
 
 To view the databases in the cluster, execute a `SHOW DATABASES` statement.
