@@ -1,11 +1,11 @@
 ---
 title: Timeouts in TiDB
-summary: A brief introduction to the timeouts in TiDB to provide a basis for troubleshooting errors.
+summary: Learn about timeouts in TiDB, and provides solutions for troubleshooting errors.
 ---
 
 # Timeouts in TiDB
 
-This chapter will describe the timeouts in TiDB to provide a basis for troubleshooting errors.
+This document describe various timeouts in TiDB to help you troubleshoot errors.
 
 ## GC Timeout
 
