@@ -1,23 +1,26 @@
 ---
 title: Multi-table Join Queries
+summary: This document describes how to use multi-table join queries.
 ---
 
 # Multi-table Join Queries
 
-Most of the time，we need to use data from multiple tables in one query. At this time, we can combine the data of two or more tables through the `JOIN` statement.
+In many scenarios，you need to use one query to get data from multiple tables. You can use the `JOIN` statement to combine the data from two or more tables.
 
-## Join type
+## Join types
+
+This section describes the types of Join in detail.
 
 ### INNER JOIN
 
 The join result of an inner join returns only rows that match the join condition.
 
-For example, suppose if we want to know which authors have written the most books, we need to join the author base information table named `authors` with the book author table named `book_authors`.
+For example, if you want to know the most prolific author, you need to join the author table named `authors` with the book author table named `book_authors`.
 
 <SimpleTab>
 <div label="SQL" href="inner-join-sql">
 
-In the following SQL statement, we use the keyword `JOIN` to declare that we want to join the rows of the left table `authors` and the right table `book_authors` as an inner join with the join condition `a.id = ba.author_id`, then the result set of the join will only contain rows that satisfy the join condition. If an author has not written any books, then his record in `authors` table will not satisfy the join condition and will therefore not appear in the result set.
+In the following SQL statement, use the keyword `JOIN` to declare that you want to join the rows of the left table `authors` and the right table `book_authors` as an inner join with the join condition `a.id = ba.author_id`. The result set will only contain rows that satisfy the join condition. If an author has not written any books, then his record in `authors` table will not satisfy the join condition and will therefore not appear in the result set.
 
 {{< copyable "sql" >}}
 
@@ -85,16 +88,16 @@ public List<Author> getTop10AuthorsOrderByBooks() throws SQLException {
 
 ### LEFT OUTER JOIN
 
-The left outer join will return all the data rows in the left table and the values ​​in the right table that can match the join condition. If no matching rows are found in the right table, it will be filled with `NULL`.
+The left outer join returns all the rows in the left table and the values ​​in the right table that match the join condition. If no rows are matched in the right table, it will be filled with `NULL`.
 
-In some cases, we want to use multiple tables to complete the data query, but do not want the data set to become smaller because the join condition are not met. 
+In some cases, you want to use multiple tables to complete the data query, but do not want the data set to become too small because the join condition are not met.
 
-For example, on the homepage of the Bookshop app, we want to display a list of the latest books with average ratings. In this case, the latest books may not have been rated by anyone, and using inner joins will cause the information of these unrated books to be filtered out, which is not what we expect.
+For example, on the homepage of the Bookshop app, you want to display a list of new books with average ratings. In this case, the new books may not have been rated by anyone yet. Using inner joins will cause the information of these unrated books to be filtered out, which is not what you expect.
 
 <SimpleTab>
 <div label="SQL" href="left-join-sql">
 
-In the following SQL statement, we use the `LEFT JOIN` keyword to declare that the left table `books` will be joined to the right table `ratings` in a left outer join, thus ensuring that all rows in the `books` table are returned.
+In the following SQL statement, use the `LEFT JOIN` keyword to declare that the left table `books` will be joined to the right table `ratings` in a left outer join, thus ensuring that all rows in the `books` table are returned.
 
 {{< copyable "sql" >}}
 
@@ -127,7 +130,7 @@ The query results are as follows:
 10 rows in set (0.30 sec)
 ```
 
-It seems that the latest published book already has a lot of ratings. To verify the above, let's delete all the ratings of the book **The Documentary of lion** through the SQL statement:
+It seems that the latest published book already has a lot of ratings. To verify the above method, let's delete all the ratings of the book **The Documentary of lion** through the SQL statement:
 
 {{< copyable "sql" >}}
 
@@ -155,7 +158,7 @@ Query again, you will find that the book **The Documentary of lion** still appea
 10 rows in set (0.30 sec)
 ```
 
-What happens if instead you use the inner join through `JOIN`? It's up to you to try.
+What happens if you use `INNER JOIN`? It's up to you to have a try.
 
 </div>
 <div label="Java" href="left-join-java">
@@ -196,7 +199,7 @@ A right outer join returns all the records in the right table and the values ​
 
 ### FULL OUTER JOIN
 
-The full outer join is based on all the records in the left table and the right table. If no value that meets the join condition is found in the another table, it is filled with `NULL`.
+A full outer join is based on all the records in the left table and the right table. If no value matches the join condition, it is filled with `NULL`.
 
 ### CROSS JOIN
 
@@ -208,19 +211,21 @@ TiDB does not support `LEFT SEMI JOIN table_name` at the SQL syntax level, but a
 
 ## Implicit join
 
-Before the `JOIN` statement that explicitly declared a join appeared as an SQL standard, it was possible to join two or more tables in a SQL statement using the `FROM t1, t2` clause, using `WHERE t1.id = t2.id` clause to specify the conditions for the join. You can think of it as an implicitly declared join, which uses an inner join way to join tables.
+Before the `JOIN` statement that explicitly declared a join appeared as an SQL standard, it was possible to join two or more tables in a SQL statement using the `FROM t1, t2` clause, and use the `WHERE t1.id = t2.id` clause to specify the conditions for the join. You can understand it as an implicit join, which uses the inner join to join tables.
 
 ## Join related algorithms
 
-TiDB supports the following three general table join algorithms and the optimizer will select the appropriate join algorithm to execute based on factors such as the amount of data in the joined table. You can see which algorithm the query uses for Join by using the `EXPLAIN` statement.
+TiDB supports the following general table join algorithms.
 
 - [Index Join](/explain-joins.md#index-join)
 - [Hash Join](/explain-joins.md#hash-join)
 - [Merge Join](/explain-joins.md#merge-join)
 
-If it is found that the optimizer of TiDB does not execute according to the optimal join algorithm. You can also use [Optimizer Hints](/optimizer-hints.md) to force TiDB to use a better join algorithm for execution.
+The optimizer selects an appropriate join algorithm to execute based on factors such as the data volume in the joined table. You can see which algorithm the query uses for Join by using the `EXPLAIN` statement.
 
-For example, assuming the example SQL for the left join query above executes faster using the Hash Join algorithm, which is not chosen by the optimizer, you can add hint `/*+ HASH_JOIN(b, r) */` the `SELECT` keyword (Note: If the table name is aliased, the table alias should also be used in hint).
+If the optimizer of TiDB does not execute according to the optimal join algorithm, you can use [Optimizer Hints](/optimizer-hints.md) to force TiDB to use a better join algorithm.
+
+For example, assuming the example for the left join query above executes faster using the Hash Join algorithm, which is not chosen by the optimizer, you can append the hint `/*+ HASH_JOIN(b, r) */` after the `SELECT` keyword. Note that If an alias is added to the table name, use the alias in the hint.
 
 {{< copyable "sql" >}}
 
@@ -233,18 +238,18 @@ ORDER BY b.published_at DESC
 LIMIT 10;
 ```
 
-Hints related to join algorithm:
+Hints related to join algorithms:
 
 - [MERGE_JOIN(t1_name [, tl_name ...])](/optimizer-hints.md#merge_joint1_name--tl_name-)
 - [INL_JOIN(t1_name [, tl_name ...])](/optimizer-hints.md#inl_joint1_name--tl_name-)
 - [INL_HASH_JOIN(t1_name [, tl_name ...])](/optimizer-hints.md#inl_hash_join)
 - [HASH_JOIN(t1_name [, tl_name ...])](/optimizer-hints.md#hash_joint1_name--tl_name-)
 
-## Join order
+## Join orders
 
-In actual business scenarios, join statements of multiple tables are very common, and the execution efficiency of join is related to the order in which each table participates in join. TiDB uses the Join Reorder algorithm to determine the order in which multiple tables are joined.
+In actual business scenarios, join statements of multiple tables are very common. The execution efficiency of join is related to the order in which each table participates in join. TiDB uses the Join Reorder algorithm to determine the order in which multiple tables are joined.
 
-When the join order selected by the optimizer is not good enough, you can use the `STRAIGHT_JOIN` syntax to make TiDB enforce the join query in the order of the tables used in the FROM clause.
+When the join order selected by the optimizer is not good enough, you can use `STRAIGHT_JOIN` to make TiDB enforce the join query in the order of the tables used in the FROM clause.
 
 {{< copyable "sql" >}}
 
@@ -254,7 +259,7 @@ FROM authors a STRAIGHT_JOIN book_authors ba STRAIGHT_JOIN books b
 WHERE b.id = ba.book_id AND ba.author_id = a.id;
 ```
 
-You can learn about the implementation details and limitations of this algorithm by checking the [Introduction to Join Reorder Algorithm](/join-reorder.md) chapter.
+For more information about the implementation details and limitations of this algorithm, see [Introduction to Join Reorder Algorithm](/join-reorder.md).
 
 ## Read more
 
