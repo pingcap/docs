@@ -16,7 +16,7 @@ For example, you have two tables:
 - `stu_info` stores the student information
 - `stu_score` stores the student test scores.
 
-Then you can write a SQL query as follows:
+Then you can write a SQL query statement like this:
 
 {{< copyable "sql" >}}
 
@@ -47,9 +47,7 @@ Result:
 +------------+--------------+------------------+
 3 rows in set (0.00 sec)
 
-As you can see, since  `a`. `class` and `a`. `stuname` fields are specified in `GROUP BY`. The selected columns are `a`. `class`, `a`. `stuname` and `b`. `courscore`. The only column  `b`. `courscore` is not in the `GROUP BY` condition, and also uses the max() function to specify a unique value. That is, there is one and only one result that satisfies this SQL statement without any ambiguity, which is called the `FULL GROUP BY` syntax.
-
-而反例就是 `NON-FULL GROUP BY` 语法，举个例子，还是这两张表，编写如下 SQL 查询（删除了上方 `GROUP BY` 中的 `a`.`stuname`）：
+As you can see, since the `a`.`class` and `a`.`stuname` fields are specified in the `GROUP BY` statement, and the selected columns are `a`.`class`, `a`.`stuname` and `b`.`courscore`. The only column that is not in the `GROUP BY` condition, `b`.`courscore`, is also specified with a unique value using the `max()` function. That is, there is **_ONLY ONE_** result that satisfies this SQL statement without any ambiguity, which is called the `FULL GROUP BY` syntax.
 
 And the counter example is the `NON-FULL GROUP BY` syntax. For example,  in these two tables, write the following SQL query (delete `a`.`stuname` in `GROUP BY`).
 
@@ -94,9 +92,7 @@ The second returned value:
    +------------+--------------+------------------+
    ```
 
-这种情况的出现，是因为你在 SQL 中并未指定如何对 `a`.`stuname` 字段取值，两种结果都是符合 SQL 语义的。从而导致了结果集的不稳定。因此，想保障 `GROUP BY` 语句结果集的稳定，请使用 `FULL GROUP BY` 语法。
-
-It happends because you did not specify how to get the value of the `a`.`stuname` field in SQL, and two results are both satisfied by SQL semantics. Therefore, if you want to guarantee the stability of `GROUP BY` statement result set, use the `FULL GROUP BY` syntax.
+It happens because you did **_NOT_** specify how to get the value of the `a`.`stuname` field in SQL, and two results are both satisfied by SQL semantics. This results in an unstable result set. Therefore, if you want to guarantee the stability of `GROUP BY` statement result set, use the `FULL GROUP BY` syntax.
 
 MySQL provides a `sql_mode` switch `ONLY_FULL_GROUP_BY` to control whether to check the `FULL GROUP BY` syntax or not, TiDB is also compatible with this `sql_mode` switch.
 
