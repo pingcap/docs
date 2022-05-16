@@ -9,9 +9,9 @@ summary: Describes how to connect to TiDB.
 
 TiDB supports the [MySQL Client/Server Protocol](https://dev.mysql.com/doc/internals/en/client-server-protocol.html). This allows most client drivers and ORM frameworks to connect to TiDB just as they connect to MySQL.
 
-## MySQL Client
+## MySQL Shell
 
-You can use MySQL Client as a command line tool for TiDB. You can find the installation method for different operating systems in the [MySQL Shell documentation](https://dev.mysql.com/doc/mysql-shell/8.0/en/mysql-shell-install.html). After the installation you can connect to TiDB using the following command-line:
+You can use MySQL Shell as a command line tool for TiDB. You can find the installation method for different operating systems in the [MySQL Shell documentation](https://dev.mysql.com/doc/mysql-shell/8.0/en/mysql-shell-install.html). After the installation you can connect to TiDB using the following command-line:
 
 {{< copyable "shell-regular" >}}
 
