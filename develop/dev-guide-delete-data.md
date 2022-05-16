@@ -120,11 +120,11 @@ This document provides an example of writing a script to handle a cyclic delete 
 
 ### Write bulk-delete loop
 
-First, you write a `SELECT` query in a loop of your application or script. The returned value of this query can be used as the primary key for the rows that need to be deleted. Note that when defining this `SELECT` query, you need to use the `WHERE` clause to filter the rows that need to be deleted.
+First, you write a `SELECT` query in a loop of your application or script. Use the returned value of this query as the primary key for the rows that need to be deleted. Note that when defining this `SELECT` query, you need to use the `WHERE` clause to filter the rows that need to be deleted.
 
 ### Bulk-delete example
 
-Suppose we find that a application error has occurred within a specific time period and we need to delete all the data for the [rating](/develop/dev-guide-bookshop-schema-design.md#ratings-table) within this period, for example, `2022-04-15 00:00:00` to `2022-04-15 00:15:00`, and more than 10,000 data are written in 15 minutes, we should use a round robin deletion to delete.
+Suppose you find an application error within a specific time period. You need to delete all the data for the [rating](/develop/dev-guide-bookshop-schema-design.md#ratings-table) within this period, for example, `2022-04-15 00:00:00` to `2022-04-15 00:15:00`, and more than 10,000 records are written in 15 minutes. You can perform as follows.
 
 {{< copyable "" >}}
 
