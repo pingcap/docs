@@ -1,6 +1,6 @@
 ---
 title: Prepared Statements
-summary: This page describes the TiDB prepared statement function.
+summary: Learn about how to use the TiDB prepared statements.
 ---
 
 # Prepared Statements
@@ -12,7 +12,7 @@ A [prepared statement](/common/sql-statements/sql-statement-prepare.md) templati
 
 In most applications, SQL statements can be enumerated. You can use a limited number of SQL statements to complete data queries for the entire application. So using a prepared statement is a best practice.
 
-## SQL Syntax
+## SQL syntax
 
 This section describes the SQL syntax for creating, running and deleting a prepared statement.
 
@@ -64,11 +64,11 @@ DEALLOCATE PREPARE {prepared_statement_name};
 
 See the [DEALLOCATE statement](/common/sql-statements/sql-statement-deallocate.md) for more information.
 
-## Example
+## Examples
 
 This section uses prepared statements to complete two scenarios with examples of `SELECT` data and `INSERT` data.
 
-### `SELECT` Example
+### `SELECT` example
 
 For example, you need to query the `bookshop` application for [books](/develop/dev-guide-bookshop-schema-design.md#books-table) with `id` is `1`.
 
