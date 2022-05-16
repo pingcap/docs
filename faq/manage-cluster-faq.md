@@ -45,7 +45,7 @@ By default, TiDB/PD/TiKV outputs standard error in the logs. If a log file is sp
 
 [Kill](/sql-statements/sql-statement-kill.md) commands are disabled by default. To run a kill command, set `compatible-kill-query = true` or enable Global Kill (experimental).
 
-- Kil DML statements: First use `show processlist` to find the ID corresponding with the session, and then run `kill tidb [session id]`.
+- Kill DML statements: First use `show processlist` to find the ID corresponding with the session, and then run `kill tidb [session id]`.
 - Kill DDL statements: First use `admin show ddl jobs` to find the ID of the DDL job you need to kill, and then run `admin cancel ddl jobs 'job_id' [, 'job_id'] ...`. For more details, see the [`ADMIN` statement](/sql-statements/sql-statement-admin.md).
 
 ### Does TiDB support session timeout?
@@ -424,4 +424,4 @@ This section describes common problems you may encounter during backup and resto
 
 Currently, for the backup of a large volume of data, the preferred method is using [BR](/br/backup-and-restore-tool.md). Otherwise, the recommended tool is [Dumpling](/dumpling-overview.md). Although the official MySQL tool `mysqldump` is also supported in TiDB to back up and restore data, its performance is worse than [BR](/br/backup-and-restore-tool.md) and it needs much more time to back up and restore large volumes of data.
 
-For more FAQS about BR, see [BR FAQs](/br/backup-and-restore-faq.md).
+For more FAQs about BR, see [BR FAQs](/br/backup-and-restore-faq.md).
