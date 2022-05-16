@@ -11,14 +11,33 @@ This document describes how to solve unstable result set errors.
 
 For convenience, MySQL "extends" the `GROUP BY` syntax to allow the `SELECT` clause to refer to non-aggregated fields not declared in the `GROUP BY` clause, i.e., the `NON-FULL GROUP BY` syntax. In other databases, this is considered a syntax **_ERROR_** because it causes unstable result sets.
 
-In the following 3 SQL statements, the first SQL uses the `FULL GROUP BY` syntax and all the fields referenced in the `SELECT` clause are declared in the `GROUP BY` clause, so its result set is stable. You can see that there are three combinations of `class` and `stuname`.
+For example, you have two tables:
 
-The second and third SQL statements are the same, but they get different results. The `GROUP BY` clause of this SQL declares only one `class` field, so the result set will only be aggregated for `class`, and there are two unique values for `class`, which means the result set will only contain two rows of data, and there are three combinations of `class` and `stuname`, and there are two students in class `2018_CS_03`, so there is no semantic restriction on which one is returned in each execution. There is no semantic restriction on which classmate is returned in each execution, and the results are semantically consistent.
+- `stu_info` stores the student information
+- `stu_score` stores the student test scores.
+
+Then you can write a SQL query as follows:
 
 {{< copyable "sql" >}}
 
 ```sql
-mysql> SELECT a.class, a.stuname, max(b.courscore) from stu_info a join stu_score b on a.stuno=b.stuno group by a.class, a.stuname order by a.class, a.stuname;
+SELECT
+    `a`.`class`,
+    `a`.`stuname`,
+    max( `b`.`courscore` )
+FROM
+    `stu_info` `a`
+    JOIN `stu_score` `b` ON `a`.`stuno` = `b`.`stuno`
+GROUP BY
+    `a`.`class`,
+    `a`.`stuname`
+ORDER BY
+    `a`.`class`,
+    `a`.`stuname`;
+```
+
+Result:
+
 +------------+--------------+------------------+
 | class      | stuname      | max(b.courscore) |
 +------------+--------------+------------------+
@@ -28,27 +47,56 @@ mysql> SELECT a.class, a.stuname, max(b.courscore) from stu_info a join stu_scor
 +------------+--------------+------------------+
 3 rows in set (0.00 sec)
 
-mysql> select a.class, a.stuname, max(b.courscore) from stu_info a join stu_score b on a.stuno=b.stuno group by a.class order by a.class, a.stuname;
-+------------+--------------+------------------+
-| class      | stuname      | max(b.courscore) |
-+------------+--------------+------------------+
-| 2018_CS_01 | MonkeyDLuffy |             95.5 |
-| 2018_CS_03 | SpongeBob    |             99.0 |
-+------------+--------------+------------------+
-2 rows in set (0.01 sec)
+As you can see, since  `a`. `class` and `a`. `stuname` fields are specified in `GROUP BY`. The selected columns are `a`. `class`, `a`. `stuname` and `b`. `courscore`. The only column  `b`. `courscore` is not in the `GROUP BY` condition, and also uses the max() function to specify a unique value. That is, there is one and only one result that satisfies this SQL statement without any ambiguity, which is called the `FULL GROUP BY` syntax.
 
-mysql> select a.class, a.stuname, max(b.courscore) from stu_info a join stu_score b on a.stuno=b.stuno group by a.class order by a.class, a.stuname;
-+------------+--------------+------------------+
-| class      | stuname      | max(b.courscore) |
-+------------+--------------+------------------+
-| 2018_CS_01 | MonkeyDLuffy |             95.5 |
-| 2018_CS_03 | PatrickStar  |             99.0 |
-+------------+--------------+------------------+
-2 rows in set (0.01 sec)
+而反例就是 `NON-FULL GROUP BY` 语法，举个例子，还是这两张表，编写如下 SQL 查询（删除了上方 `GROUP BY` 中的 `a`.`stuname`）：
 
+And the counter example is the `NON-FULL GROUP BY` syntax. For example,  in these two tables, write the following SQL query (delete `a`.`stuname` in `GROUP BY`).
+
+{{< copyable "sql" >}}
+
+```sql
+SELECT
+    `a`.`class`,
+    `a`.`stuname`,
+    max( `b`.`courscore` )
+FROM
+    `stu_info` `a`
+    JOIN `stu_score` `b` ON `a`.`stuno` = `b`.`stuno`
+GROUP BY
+    `a`.`class`
+ORDER BY
+    `a`.`class`,
+    `a`.`stuname`;
 ```
 
-Therefore, if you want to guarantee the stability of `GROUP BY` statement result set, use the `FULL GROUP BY` syntax.
+Then two values that match this SQL are returned.
+
+The first returned value:
+
+   ```sql
+   +------------+--------------+------------------------+
+   | class      | stuname      | max( `b`.`courscore` ) |
+   +------------+--------------+------------------------+
+   | 2018_CS_01 | MonkeyDLuffy |                   95.5 |
+   | 2018_CS_03 | PatrickStar  |                   99.0 |
+   +------------+--------------+------------------------+
+   ```
+
+The second returned value:
+
+   ```sql
+   +------------+--------------+------------------+
+   | class      | stuname      | max(b.courscore) |
+   +------------+--------------+------------------+
+   | 2018_CS_01 | MonkeyDLuffy |             95.5 |
+   | 2018_CS_03 | SpongeBob    |             99.0 |
+   +------------+--------------+------------------+
+   ```
+
+这种情况的出现，是因为你在 SQL 中并未指定如何对 `a`.`stuname` 字段取值，两种结果都是符合 SQL 语义的。从而导致了结果集的不稳定。因此，想保障 `GROUP BY` 语句结果集的稳定，请使用 `FULL GROUP BY` 语法。
+
+It happends because you did not specify how to get the value of the `a`.`stuname` field in SQL, and two results are both satisfied by SQL semantics. Therefore, if you want to guarantee the stability of `GROUP BY` statement result set, use the `FULL GROUP BY` syntax.
 
 MySQL provides a `sql_mode` switch `ONLY_FULL_GROUP_BY` to control whether to check the `FULL GROUP BY` syntax or not, TiDB is also compatible with this `sql_mode` switch.
 
