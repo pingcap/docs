@@ -11,13 +11,13 @@ This document describes how to use the [DELETE](/common/sql-statements/sql-state
 
 Before reading this document, you need to prepare the following:
 
-- [Build a TiDB Cluster in TiDB Cloud (DevTier)](/develop/dev-guide-build-cluster-in-cloud.md).
-- Read [Schema Design Overview](/develop/dev-guide-schema-design-overview.md), [Create a Database](/develop/dev-guide-create-database.md), [Create a Table](/develop/dev-guide-create-table.md), and [Create Secondary Indexes](/develop/dev-guide-create-secondary-indexes.md).
+- [Build a TiDB Cluster in TiDB Cloud (DevTier)](/develop/dev-guide-build-cluster-in-cloud.md)
+- Read [Schema Design Overview](/develop/dev-guide-schema-design-overview.md), [Create a Database](/develop/dev-guide-create-database.md), [Create a Table](/develop/dev-guide-create-table.md), and [Create Secondary Indexes](/develop/dev-guide-create-secondary-indexes.md)
 - [Insert Data](/develop/dev-guide-insert-data.md)
 
 ## SQL syntax
 
-The SQL `DELETE` statement is generally in the following form:
+The `DELETE` statement is generally in the following form:
 
 {{< copyable "sql" >}}
 
@@ -27,10 +27,10 @@ DELETE FROM {table} WHERE {filter}
 
 | Parameter Name | Description |
 | :--------: | :------------: |
-| `{table}`  |      Table Name      |
-| `{filter}` | Matching conditions of filter|
+| `{table}`  |      Table name      |
+| `{filter}` | Matching conditions of the filter|
 
-This only shows a simple usage of `DELETE`. For detailed information, see [DELETE syntax](/common/sql-statements/sql-statement-delete.md).
+This example only shows a simple use case of `DELETE`. For detailed information, see [DELETE syntax](/common/sql-statements/sql-statement-delete.md).
 
 ## Best practices
 
@@ -43,7 +43,7 @@ The following are some best practices to follow when you delete data:
 
 ## Example
 
-Suppose you find an application error within a specific time period and you need to delete all the data for the [rating](/develop/dev-guide-bookshop-schema-design.md#ratings-table) within this period, for example, `2022-04-15 00:00:00` to `2022-04-15 00:15:00`. In this case, you can use the `SELECT` statement to check the number of records to be deleted.
+Suppose you find an application error within a specific time period and you need to delete all the data for the [rating](/develop/dev-guide-bookshop-schema-design.md#ratings-table) within this period, for example, from `2022-04-15 00:00:00` to `2022-04-15 00:15:00`. In this case, you can use the `SELECT` statement to check the number of records to be deleted.
 
 {{< copyable "sql" >}}
 
@@ -51,8 +51,9 @@ Suppose you find an application error within a specific time period and you need
 SELECT COUNT(*) FROM `rating` WHERE `rating_at` >= "2022-04-15 00:00:00" AND  `rating_at` <= "2022-04-15 00:15:00";
 ```
 
-- If more than 10,000 records are returned, use [Bulk-Delete](#bulk-delete) to delete them.
-- If fewer than 10,000 records are returned, use the following example to delete them.
+If more than 10,000 records are returned, use [Bulk-Delete](#bulk-delete) to delete them.
+
+If fewer than 10,000 records are returned, use the following example to delete them.
 
 <SimpleTab>
 <div label="SQL" href="delete-sql">
@@ -92,7 +93,7 @@ try (Connection connection = ds.getConnection()) {
 
 > **Note:**
 >
-> Note that the `rating_at` field is of the `DATETIME` type in [Date and Time Types](/data-type-date-and-time.md). You can assume that it is stored as a literal quantity in TiDB, independent of the time zone. On the other hand, the `TIMESTAMP` type will store a timestamp and thus display a different time string in a different [time zone](/configure-time-zone.md).
+> Note that the `rating_at` field is of the `DATETIME` type in [Date and Time Types](/data-type-date-and-time.md). You can assume that it is stored as a literal quantity in TiDB, independent of the time zone. On the other hand, the `TIMESTAMP` type stores a timestamp and thus displays a different time string in a different [time zone](/configure-time-zone.md).
 >
 > Also, like MySQL, the `TIMESTAMP` data type is affected by the [year 2038 problem](https://en.wikipedia.org/wiki/Year_2038_problem). It is recommended to use the `DATETIME` type if you store values larger than 2038.
 
@@ -102,29 +103,29 @@ try (Connection connection = ds.getConnection()) {
 
 TiDB does not delete the data immediately after you run the `DELETE` statement. Instead, it marks the data as ready for deletion. Then it waits for TiDB GC (Garbage Collection) to clean up the outdated data. Therefore, the `DELETE` statement **_DOES NOT_** immediately reduce disk usage.
 
-GC is triggered once every 10 minutes by default. Each GC calculates a time point called **safe_point**. Any data before this time point will not be used again, so TiDB can safely clean up the data.
+GC is triggered once every 10 minutes by default. Each GC calculates a time point called **safe_point**. Any data earlier than this time point will not be used again, so TiDB can safely clean it up.
 
 For more information, see [GC mechanism](/garbage-collection-overview.md).
 
 ### Update statistical information
 
-TiDB uses [statistical information](/statistics.md) to determine index selection, so there is a high risk that incorrect index selection will occur after a large volume of data is deleted. You can use [manual collection](/statistics.md#manual-collection) to update the statistics. It provides the TiDB optimizer with more accurate statistical information for SQL performance optimization.
+TiDB uses [statistical information](/statistics.md) to determine index selection. There is a high risk that the index is not correctly selected after a large volume of data is deleted. You can use [manual collection](/statistics.md#manual-collection) to update the statistics. It provides the TiDB optimizer with more accurate statistical information for SQL performance optimization.
 
 ## Bulk-delete
 
 When you need to delete multiple rows of data from a table, you can choose the [`DELETE` example](#example) and use the `WHERE` clause to filter the data that needs to be deleted.
 
-However, if you need to delete a large number of rows (more than ten thousand), we recommend that you delete the data in an iterative way, that is, deleting a portion of the data at each iteration until the deletion is complete. This is because TiDB limits the size of a single transaction ([txn-total-size-limit](/tidb-configuration-file.md#txn-total-size-limit), 100 MB by default). You can use loops in your programs or scripts to perform such operations.
+However, if you need to delete a large number of rows (more than ten thousand), it is recommended that you delete the data in an iterative way, that is, deleting a portion of the data at each iteration until the deletion is complete. This is because TiDB limits the size of a single transaction ([txn-total-size-limit](/tidb-configuration-file.md#txn-total-size-limit), 100 MB by default). You can use loops in your programs or scripts to perform such operations.
 
-This document provides an example of writing a script to handle a cyclic delete operation that demonstrates how you should do a combination of `SELECT` and `DELETE` to complete a bulk-delete.
+This document provides an example of writing a script to handle an iterative delete operation that demonstrates how you should do a combination of `SELECT` and `DELETE` to complete a bulk-delete.
 
-### Write bulk-delete loop
+### Write a bulk-delete loop
 
 First, you write a `SELECT` query in a loop of your application or script. Use the returned value of this query as the primary key for the rows that need to be deleted. Note that when defining this `SELECT` query, you need to use the `WHERE` clause to filter the rows that need to be deleted.
 
 ### Bulk-delete example
 
-Suppose you find an application error within a specific time period. You need to delete all the data for the [rating](/develop/dev-guide-bookshop-schema-design.md#ratings-table) within this period, for example, `2022-04-15 00:00:00` to `2022-04-15 00:15:00`, and more than 10,000 records are written in 15 minutes. You can perform as follows.
+Suppose you find an application error within a specific time period. You need to delete all the data for the [rating](/develop/dev-guide-bookshop-schema-design.md#ratings-table) within this period, for example, from `2022-04-15 00:00:00` to `2022-04-15 00:15:00`, and more than 10,000 records are written in 15 minutes. You can perform as follows.
 
 {{< copyable "" >}}
 
@@ -180,4 +181,4 @@ public class BatchDeleteExample
 }
 ```
 
-In each iteration, `SELECT` selects up to 1000 rows of primary key values for data in the time period `2022-04-15 00:00:00` to `2022-04-15 00:15:00`. Then it performs bulk-delete. `TimeUnit.SECONDS.sleep(1);` at the end of each loop will cause the bulk-delete operation to pause for 1 second, preventing the bulk-delete operation from consuming too many hardware resources.
+In each iteration, `SELECT` selects up to 1000 rows of primary key values for data in the time period from `2022-04-15 00:00:00` to `2022-04-15 00:15:00`. Then it performs bulk-delete. Note that `TimeUnit.SECONDS.sleep(1);` at the end of each loop will cause the bulk-delete operation to pause for 1 second, preventing the bulk-delete operation from consuming too many hardware resources.
