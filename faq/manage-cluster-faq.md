@@ -43,7 +43,7 @@ By default, TiDB/PD/TiKV outputs standard error in the logs. If a log file is sp
 
 ### Can `kill` be executed in TiDB?
 
-[Kill](/sql-statements/sql-statement-kill.md) commands are disabled by default. To run a kill command, you need to set `compatible-kill-query = true` or enable Global Kill (experimental) first. The proceed with the following steps:
+[Kill](/sql-statements/sql-statement-kill.md) commands are disabled by default. To run a kill command, you need to set `compatible-kill-query = true` or enable Global Kill (experimental) first. Then proceed with the following steps:
 
 - Kill DML statements: First use `show processlist` to find the ID corresponding with the session, and then run `kill tidb [session id]`.
 - Kill DDL statements: First use `admin show ddl jobs` to find the ID of the DDL job you need to kill, and then run `admin cancel ddl jobs 'job_id' [, 'job_id'] ...`. For more details, see the [`ADMIN` statement](/sql-statements/sql-statement-admin.md).
