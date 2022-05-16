@@ -117,21 +117,21 @@ Here is how to install **Maven** from the command line.
 
 - Install on Red Hat-based Linux distributions (e.g. Fedora, CentOS, etc.):
 
-1. dnf software package manager
+    - dnf software package manager
 
-    {{< copyable "shell-regular" >}}
+        {{< copyable "shell-regular" >}}
 
-    ```
-    dnf install maven
-    ```
+        ```
+        dnf install maven
+        ```
 
-2. yum software package manager
+    - yum software package manager
 
-    {{< copyable "shell-regular" >}}
+        {{< copyable "shell-regular" >}}
 
-    ```
-    yum install maven
-    ```
+        ```
+        yum install maven
+        ```
 
 For other installation methods, please refer to the Maven [official documentation](https://maven.apache.org/install.html).
 
