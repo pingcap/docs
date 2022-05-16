@@ -1,6 +1,6 @@
 ---
 title: Delete Data
-summary: The ways, best practices, and examples for deleting data, bulk data deletion.
+summary: Learn about the SQL syntax, best practices, and examples for deleting data.
 ---
 
 # Delete Data
