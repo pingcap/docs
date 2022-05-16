@@ -26,7 +26,7 @@ In addition, during the cluster upgrade, **DO NOT** execute any DDL statement. O
 
 ### How to upgrade TiDB using the binary?
 
-It is not recommended to upgrade TiDB using a binary. Instead, you are advised to [Upgrade TiDB using TiUP](/upgrade-tidb-using-tiup.md) or TiDB Operator for Kubernetes, which ensures both version consistency and compatibility.
+It is not recommended to upgrade TiDB using a binary. Instead, you are advised to [Upgrade TiDB using TiUP](/upgrade-tidb-using-tiup.md) or [Upgrade a TiDB Cluster in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/upgrade-a-tidb-cluster), which ensures both version consistency and compatibility.
 
 ## After upgrade FAQs
 
