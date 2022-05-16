@@ -17,6 +17,8 @@ The join result of an inner join returns only rows that match the join condition
 
 For example, if you want to know the most prolific author, you need to join the author table named `authors` with the book author table named `book_authors`.
 
+![Inner Join](/media/develop/inner-join.png)
+
 <SimpleTab>
 <div label="SQL" href="inner-join-sql">
 
@@ -89,6 +91,8 @@ public List<Author> getTop10AuthorsOrderByBooks() throws SQLException {
 ### LEFT OUTER JOIN
 
 The left outer join returns all the rows in the left table and the values ​​in the right table that match the join condition. If no rows are matched in the right table, it will be filled with `NULL`.
+
+![Left Outer Join](/media/develop/left-outer-join.png)
 
 In some cases, you want to use multiple tables to complete the data query, but do not want the data set to become too small because the join condition are not met.
 
@@ -197,9 +201,13 @@ public List<Book> getLatestBooksWithAverageScore() throws SQLException {
 
 A right outer join returns all the records in the right table and the values ​​in the left table that match the join condition. If there is no matching value, it is filled with `NULL`.
 
+![Right Outer Join](/media/develop/right-outer-join.png)
+
 ### FULL OUTER JOIN
 
-A full outer join is based on all the records in the left table and the right table. Whether or not the join condition is met, it returns all the records when there is a match in the left table or the right table. If no value matches the join condition, it is filled with `NULL`.
+A full outer join is based on all the records in the left table and the right table. Whether or not the join condition is met, it returns all the matching records when there is a match in the left table or the right table. If no value matches the join condition, it is filled with `NULL`.
+
+![Full Outer Join](/media/develop/full-outer-join.png)
 
 ### CROSS JOIN
 
