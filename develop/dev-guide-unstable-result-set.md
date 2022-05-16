@@ -11,7 +11,10 @@ This chapter will describe the treatment of result set unstable errors.
 
 For convenience reasons, MySQL "extends" the `GROUP BY` syntax to allow the `SELECT` clause to refer to non-aggregated fields not declared in the `GROUP BY` clause, i.e., the `NON-FULL GROUP BY` syntax. In other databases, this is considered a syntax **_ERROR_** because it causes the result set to be unstable.
 
-For example, we have two tables: `stu_info` to save student information data and `stu_score` to holdsave student test scores.
+For example, you have two tables:
+
+- `stu_info` stores the student information
+- `stu_score` stores the student test scores.
 
 Then you can write a SQL query statement like this:
 
