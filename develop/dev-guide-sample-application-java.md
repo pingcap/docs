@@ -28,7 +28,7 @@ This part describes how to start a TiDB cluster.
 
 ### Using Local Clusters
 
-This will briefly describe the process of starting a test cluster, for a full environment cluster deployment, or to see a more detailed deployment, please refer to [Starting TiDB Locally](/quick-start-with-tidb.md).
+The process of starting a test cluster is briefly described here, and you can consult [Deploy a local test cluster](/quick-start-with-tidb.md) or [Deploy a Formal TiDB Cluster](/production-deployment-using-tiup.md) for more information.
 
 **Deploy local test clusters**
 
