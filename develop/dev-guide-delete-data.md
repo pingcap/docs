@@ -13,11 +13,11 @@ Before reading this document, you need to prepare the following:
 
 - [Build a TiDB Cluster in TiDB Cloud (DevTier)](/develop/dev-guide-build-cluster-in-cloud.md).
 - Read [Schema Design Overview](/develop/dev-guide-schema-design-overview.md), [Create a Database](/develop/dev-guide-create-database.md), [Create a Table](/develop/dev-guide-create-table.md), and [Create Secondary Indexes](/develop/dev-guide-create-secondary-indexes.md).
-- If you need to delete data, you need to [insert data](/develop/dev-guide-insert-data.md) first.
+- [Insert Data](/develop/dev-guide-insert-data.md)
 
 ## SQL syntax
 
-In SQL, the `DELETE` statement is generally in the following form:
+The SQL `DELETE` statement is generally in the following form:
 
 {{< copyable "sql" >}}
 
@@ -28,22 +28,22 @@ DELETE FROM {table} WHERE {filter}
 | Parameter Name | Description |
 | :--------: | :------------: |
 | `{table}`  |      Table Name      |
-| `{filter}` | Filter matching conditions |
+| `{filter}` | Matching conditions of filter|
 
 This only shows a simple usage of `DELETE`. For detailed information, see [DELETE syntax](/common/sql-statements/sql-statement-delete.md).
 
 ## Best practices
 
-The following are some best practices to follow when you delete rows:
+The following are some best practices to follow when you delete data:
 
-- Always specify the `WHERE` clause in the delete statement. If there is no `WHERE` clause in `DELETE`, TiDB will delete **_ALL ROWS_** within this table.
-- Use [bulk-delete](#bulk-delete) when you need to delete a large number of rows (more than ten thousand), because TiDB limits the size of a single transaction ([txn-total-size-limit](/tidb-configuration-file.md#txn-total-size-limit), 100 MB by default).
-- If you need to delete all the data in a table, do not use the `DELETE` statement; instead, use the [TRUNCATE](/common/sql-statements/sql-statement-truncate.md) statement.
-- See [Performance Considerations](#performance-considerations).
+- Always specify the `WHERE` clause in the `DELETE` statement. If the `WHERE` clause is not specified, TiDB will delete **_ALL ROWS_** in the table.
+- Use [bulk-delete](#bulk-delete) when you delete a large number of rows (for example, more than ten thousand), because TiDB limits the size of a single transaction ([txn-total-size-limit](/tidb-configuration-file.md#txn-total-size-limit), 100 MB by default).
+- If you delete all the data in a table, do not use the `DELETE` statement. Instead, use the [TRUNCATE](/common/sql-statements/sql-statement-truncate.md) statement.
+- For performance considerations, see [Performance Considerations](#performance-considerations).
 
 ## Example
 
-Suppose we find that a application error has occurred within a specific time period and we need to delete all the data for the [rating](/develop/dev-guide-bookshop-schema-design.md#ratings-table) within this period, for example, `2022-04-15 00:00:00` to `2022-04-15 00:15:00`. In this case, you can use the `SELECT` statement to see the number of data items to be deleted.
+Suppose you find an application error within a specific time period and you need to delete all the data for the [rating](/develop/dev-guide-bookshop-schema-design.md#ratings-table) within this period, for example, `2022-04-15 00:00:00` to `2022-04-15 00:15:00`. In this case, you can use the `SELECT` statement to check the number of records to be deleted.
 
 {{< copyable "sql" >}}
 
@@ -51,8 +51,8 @@ Suppose we find that a application error has occurred within a specific time per
 SELECT COUNT(*) FROM `rating` WHERE `rating_at` >= "2022-04-15 00:00:00" AND  `rating_at` <= "2022-04-15 00:15:00";
 ```
 
-- If the number of returned items is greater than 10,000, use [Bulk-Delete](#bulk-delete) to delete them.
-- If the number of returned items is less than 10,000, you can use the following example to delete them.
+- If more than 10,000 records are returned, use [Bulk-Delete](#bulk-delete) to delete them.
+- If fewer than 10,000 records are returned, use the following example to delete them.
 
 <SimpleTab>
 <div label="SQL" href="delete-sql">
@@ -92,17 +92,17 @@ try (Connection connection = ds.getConnection()) {
 
 > **Note:**
 >
-> Note that the `rating_at` field is the `DATETIME` type in [Date and Time Types](/data-type-date-and-time.md), which you can assume is stored as a literal quantity in TiDB, independent of the time zone. On the other hand, the `TIMESTAMP` type will store a timestamp and thus display a different time string in a different [time zone](/configure-time-zone.md).
+> Note that the `rating_at` field is of the `DATETIME` type in [Date and Time Types](/data-type-date-and-time.md). You can assume that it is stored as a literal quantity in TiDB, independent of the time zone. On the other hand, the `TIMESTAMP` type will store a timestamp and thus display a different time string in a different [time zone](/configure-time-zone.md).
 >
-> Also, like MySQL, the `TIMESTAMP` data type is affected by the [year 2038 problem](https://en.wikipedia.org/wiki/Year_2038_problem). It is recommended to use the `DATETIME` type if storing values larger than 2038.
+> Also, like MySQL, the `TIMESTAMP` data type is affected by the [year 2038 problem](https://en.wikipedia.org/wiki/Year_2038_problem). It is recommended to use the `DATETIME` type if you store values larger than 2038.
 
 ## Performance considerations
 
 ### TiDB GC mechanism
 
-TiDB does not delete the data immediately after the `DELETE` statement runs. Instead, it marks the data as ready for deletion. Then it waits for TiDB GC (Garbage Collection) to clean up the outdated data. Therefore, your DELETE statement **_DOES NOT_** immediately reduce disk usage.
+TiDB does not delete the data immediately after you run the `DELETE` statement. Instead, it marks the data as ready for deletion. Then it waits for TiDB GC (Garbage Collection) to clean up the outdated data. Therefore, the `DELETE` statement **_DOES NOT_** immediately reduce disk usage.
 
-GC is triggered once every 10 minutes by default, and each GC calculates a time point called **safe_point**, and any data before this time point will not be used again, so TiDB can safely clean up the data.
+GC is triggered once every 10 minutes by default. Each GC calculates a time point called **safe_point**. Any data before this time point will not be used again, so TiDB can safely clean up the data.
 
 For more information, see [GC mechanism](/garbage-collection-overview.md).
 
