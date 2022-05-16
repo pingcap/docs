@@ -25,67 +25,7 @@ This part describes how to start a TiDB cluster.
 
 ### Using Local Clusters
 
-The process of starting a test cluster is briefly described here, and you can consult [Deploy a local test cluster](/quick-start-with-tidb.md) or [Deploy a Formal TiDB Cluster](/production-deployment-using-tiup.md) for more information.
-
-**Deploy local test clusters**
-
-Applicable scenario: Use a local Mac or single-instance Linux environment to quickly deploy a TiDB test cluster, and experience the basic architecture of a TiDB cluster, and the operation of basic components such as TiDB, TiKV, PD, and Monitoring.
-
-1. Download and install TiUP.
-
-    {{< copyable "shell-regular" >}}
-
-    ```shell
-    curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
-    ```
-
-2. Declare global environment variables.
-
-    > **Note:**
-    >
-    > When TiUP is installed, you will be prompted for the absolute path of the corresponding `profile` file. Before executing the following `source` command, you need to modify the command according to the actual location of the `profile` file.
-
-    {{< copyable "shell-regular" >}}
-
-    ```shell
-    source .bash_profile
-    ```
-
-3. Execute the following command in the current session to start the cluster.
-
-    - Executing the `tiup playground` command directly runs the latest version of the TiDB cluster, with 1 TiDB, TiKV, PD, and TiFlash instance:
-
-        {{< copyable "shell-regular" >}}
-
-        ```shell
-        tiup playground
-        ```
-
-    - You can also specify the TiDB version and the number of instances of each component. The command is similar to:
-
-        {{< copyable "shell-regular" >}}
-
-        ```shell
-        tiup playground v5.4.0 --db 2 --pd 3 --kv 3
-        ```
-
-    The above command downloads and launches a version of the cluster locally (for example, v5.4.0). The latest version can be executed by `tiup list tidb` to check it out. The results of the operation will show how the cluster is accessed:
-
-    ```
-    CLUSTER START SUCCESSFULLY, Enjoy it ^-^
-    To connect TiDB: mysql --comments --host 127.0.0.1 --port 4001 -u root -p (no password)
-    To connect TiDB: mysql --comments --host 127.0.0.1 --port 4000 -u root -p (no password)
-    To view the dashboard: http://127.0.0.1:2379/dashboard
-    PD client endpoints: [127.0.0.1:2379 127.0.0.1:2382 127.0.0.1:2384]
-    To view the Prometheus: http://127.0.0.1:9090
-    To view the Grafana: http://127.0.0.1:3000
-    ```
-
-> **Note:**
->
-> - TiDB supports v5.2.0 and later version runs `tiup playground` on Apple M1 machines.
-> - When a playground is executed in this way, TiUP will clean up the original cluster data after the deployment test is completed, and a new cluster will be obtained after re-executing the command.
-> - If you want to persist the data, you can execute TiUp's `--tag` parameter: `tiup --tag <your-tag> playground ...`, refer to the [TiUP Reference](/tiup/tiup-reference.md#-t---tag) for details.
+The process of starting a test cluster is briefly described here, and you can consult [Deploy a local test cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a Formal TiDB Cluster](/production-deployment-using-tiup.md) for more information.
 
 ## Step 2. Install JDK
 
