@@ -199,7 +199,7 @@ A right outer join returns all the records in the right table and the values ​
 
 ### FULL OUTER JOIN
 
-A full outer join is based on all the records in the left table and the right table. Whether or not the join condition is met, all the records in both tables are returned. If no value matches the join condition, it is filled with `NULL`.
+A full outer join is based on all the records in the left table and the right table. Whether or not the join condition is met, it returns all the records when there is a match in the left table or the right table. If no value matches the join condition, it is filled with `NULL`.
 
 ### CROSS JOIN
 
