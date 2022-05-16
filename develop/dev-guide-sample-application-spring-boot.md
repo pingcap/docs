@@ -95,7 +95,7 @@ We support both **Oracle JDK** and **OpenJDK**, please choose your preference, t
 
 ## Step 3. Install Maven
 
-This sample application uses **Maven** to manage the application's dependencies; Spring supports **Maven** from version 3.2 and above, and as dependency management software, the latest stable version of **Maven** is recommended.
+This sample application uses **Maven** to manage the application's dependencies; Spring supports **Maven** from version 3.3 and above, and as dependency management software, the latest stable version of **Maven** is recommended.
 
 Here is how to install **Maven** from the command line.
 
