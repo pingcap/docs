@@ -75,7 +75,7 @@ This document lists the features supported in each TiDB version. Note that suppo
 | [Follower reads](/follower-read.md)                          | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | [Read historical data (tidb_snapshot)](/read-historical-data.md) | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | [Optimizer hints](/optimizer-hints.md)                       | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [MPP Exection Engine](/explain-mpp.md)                       | Y | Y            |      Y       |      Y       |      Y       |      Y       |      N       |
+| [MPP Execution Engine](/explain-mpp.md)                       | Y | Y            |      Y       |      Y       |      Y       |      Y       |      N       |
 | [Index Merge](/explain-index-merge.md)                  | Y | Y            | Experimental | Experimental | Experimental | Experimental | Experimental |
 | [Placement Rules in SQL](/placement-rules-in-sql.md)         | Y | Experimental | Experimental |      N       |      N       |      N       |      N       |
 
@@ -157,8 +157,10 @@ This document lists the features supported in each TiDB version. Note that suppo
 
 | Management, observability, and tools                     | 6.0 | 5.4          |   5.3    |   5.2    |   5.1    |   5.0    |   4.0    |
 | ------------------------------------------------------------ | :--: | ------------ | :----------: | :----------: | :----------: | :----------: | :----------: |
-| [TiDB Dashboard](/dashboard/dashboard-intro.md)              | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [SQL diagnostics](/information-schema/information-schema-sql-diagnostics.md) | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
+| [TiDB Dashboard UI](/dashboard/dashboard-intro.md)              | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
+| [TiDB Dashboard Continuous Profiling](/dashboard/continuous-profiling.md)   | Y | Experimental | Experimental |      N       |      N       |      N       |      N       |
+| [TiDB Dashboard Top SQL](/dashboard/top-sql.md)                             | Y | Experimental |      N       |      N       |      N       |      N       |      N       |
+| [TiDB Dashboard SQL Diagnostics](/information-schema/information-schema-sql-diagnostics.md) | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
 | [Information schema](/information-schema/information-schema.md) | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | [Metrics schema](/metrics-schema.md)                        | Y  | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | [Statements summary tables](/statement-summary-tables.md)    | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
@@ -171,8 +173,6 @@ This document lists the features supported in each TiDB version. Note that suppo
 | [Lock View](/information-schema/information-schema-data-lock-waits.md) | Y | Y            |      Y       |      Y       | Experimental | Experimental | Experimental |
 | [`SHOW CONFIG`](/sql-statements/sql-statement-show-config.md) | Experimental| Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
 | [`SET CONFIG`](/dynamic-config.md)                           | Experimental| Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
-| [Continuous Profiling](/dashboard/continuous-profiling.md)   | Y | Experimental | Experimental |      N       |      N       |      N       |      N       |
-| [Top SQL](/dashboard/top-sql.md)                                                      | Y | Experimental |      N       |      N       |      N       |      N       |      N       |
 | [DM WebUI](/dm/dm-webui-guide.md) | Experimental | N | N | N | N | N | N |
 
 [^1]: TiDB incorrectly treats latin1 as a subset of utf8. See [TiDB #18955](https://github.com/pingcap/tidb/issues/18955) for more details.

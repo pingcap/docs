@@ -38,7 +38,11 @@ However, some features of MySQL are not supported. This could be because there i
 + `CREATE TABLE tblName AS SELECT stmt` syntax [#4754](https://github.com/pingcap/tidb/issues/4754)
 + `CHECK TABLE` syntax [#4673](https://github.com/pingcap/tidb/issues/4673)
 + `CHECKSUM TABLE` syntax [#1895](https://github.com/pingcap/tidb/issues/1895)
++ `REPAIR TABLE` syntax
++ `OPTIMIZE TABLE` syntax
 + `GET_LOCK` and `RELEASE_LOCK` functions [#14994](https://github.com/pingcap/tidb/issues/14994)
++ `HANDLER` statement
++ `CREATE TABLESPACE` statement
 
 ## Features that are different from MySQL
 
@@ -122,6 +126,10 @@ These differences are documented further in [`ANALYZE TABLE`](/sql-statements/sq
 - The syntax `SELECT .. GROUP BY expr` does not imply `GROUP BY expr ORDER BY expr` as it does in MySQL 5.7.
 
 For details, see the [`SELECT`](/sql-statements/sql-statement-select.md) statement reference.
+
+### `UPDATE` statement
+
+See the [`UPDATE`](/sql-statements/sql-statement-update.md) statement reference.
 
 ### Views
 
