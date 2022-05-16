@@ -37,7 +37,7 @@ This only shows a simple usage of `DELETE`. For detailed information, see [DELET
 The following are some best practices to follow when you delete rows:
 
 - Always specify the `WHERE` clause in the delete statement. If there is no `WHERE` clause in `DELETE`, TiDB will delete **_ALL ROWS_** within this table.
-- Use [bulk-delete](#bulk-delete) when you need to delete a large number of rows (more than ten thousands), because TiDB limits the size of a single transaction ([txn-total-size-limit](/tidb-configuration-file.md#txn-total-size-limit), 100 MB by default).
+- Use [bulk-delete](#bulk-delete) when you need to delete a large number of rows (more than ten thousand), because TiDB limits the size of a single transaction ([txn-total-size-limit](/tidb-configuration-file.md#txn-total-size-limit), 100 MB by default).
 - If you need to delete all the data in a table, do not use the `DELETE` statement; instead, use the [TRUNCATE](/common/sql-statements/sql-statement-truncate.md) statement.
 - See [Performance Considerations](#performance-considerations).
 
@@ -114,7 +114,7 @@ TiDB uses [statistical information](/statistics.md) to determine index selection
 
 When you need to delete multiple rows of data from a table, you can choose the [`DELETE` example](#example) and use the `WHERE` clause to filter the data that needs to be deleted.
 
-However, if you need to delete a large number of rows (more than ten thousands), we recommend that you delete the data in an iterative way, that is, deleting a portion of the data at each iteration until the deletion is complete. This is because TiDB limits the size of a single transaction ([txn-total-size-limit](/tidb-configuration-file.md#txn-total-size-limit), 100 MB by default). You can use loops in your programs or scripts to perform such operations.
+However, if you need to delete a large number of rows (more than ten thousand), we recommend that you delete the data in an iterative way, that is, deleting a portion of the data at each iteration until the deletion is complete. This is because TiDB limits the size of a single transaction ([txn-total-size-limit](/tidb-configuration-file.md#txn-total-size-limit), 100 MB by default). You can use loops in your programs or scripts to perform such operations.
 
 This document provides an example of writing a script to handle a cyclic delete operation that demonstrates how you should do a combination of `SELECT` and `DELETE` to complete a bulk-delete.
 
