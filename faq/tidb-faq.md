@@ -53,7 +53,7 @@ Any language supported by MySQL client or driver.
 
 Yes. In addition to TiKV, TiDB supports standalone storage engines such as UniStore and MockTiKV. Note that in later TiDB releases, MockTiKV might NO LONGER be supported.
 
-To check all TiDB-compatible storage engines, use the following command:
+To check all TiDB-supported storage engines, use the following command:
 
 {{< copyable "shell-regular" >}}
 
