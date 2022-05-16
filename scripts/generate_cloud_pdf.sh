@@ -26,4 +26,4 @@ pandoc -N --toc --smart --latex-engine=xelatex \
 -V fontsize=12pt \
 -V geometry:margin=1in \
 -V include-after="\\input{templates/copyright.tex}" \
-"doc.md" -s -o "output_cloud.pdf"
+"doc_cloud.md" -s -o "output_cloud.pdf"
