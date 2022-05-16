@@ -42,7 +42,7 @@ Download [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) by using t
 
 ## BR (backup and restore)
 
-Download [BR](/br/backup-and-restore-tool.md) by using the download link in the following table:
+Download [BR](/br/backup-and-restore-overview.md) by using the download link in the following table:
 
 | Package name | OS | Architecture | SHA256 checksum |
 |:---|:---|:---|:---|
