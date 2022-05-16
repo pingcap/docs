@@ -11,6 +11,8 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: "16"
+      - name: Verify duplicated file names
+        run: ./scripts/verify-duplicated-file-name.sh
       - name: Verify internal links
         run: ./scripts/verify-links.sh
       - name: Verify internal link anchors
