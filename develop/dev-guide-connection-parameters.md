@@ -36,7 +36,7 @@ The last packet sent successfully to the server was 3600000 milliseconds ago. Th
 
 If `n` in `n milliseconds ago` is `0` or a very small value, it is usually because the executed SQL operation causes TiDB to exit abnormally. To find the cause, it is recommended to check the TiDB stderr log.
 
-If `n` is a very large value (such as `3600000` in the above example), it is likely that this connection was idle for a long time and then closed by the inter, media, or develope proxy. The usual solution is to increase the value of the proxy's idle configuration and allow the connection pool to:
+If `n` is a very large value (such as `3600000` in the above example), it is likely that this connection was idle for a long time and then closed by the proxy. The usual solution is to increase the value of the proxy's idle configuration and allow the connection pool to:
 
 - Check whether the connection is available before using the connection every time.
 - Regularly check whether the connection is available using a separate thread.
@@ -72,13 +72,13 @@ In particular, pay attention to the following note below the [formula](https://g
 > how well the formula works with SSDs.
 > ```
 
-This note states that:
+This note indicates that:
 
 - **core_count** is the number of physical cores, regardless of whether you enable [Hyper-Threading](https://en.wikipedia.org/wiki/Hyper-threading) or not.
 - When data is fully cached, you need to set **effective_spindle_count** to `0`. As the hit rate of cache decreases, the count is more and more closer to the actual number of `HDD`.
 - **Whether the formula works for _SSD_ is not tested and unknown.**
 
-Therefore, when using SSDs, it is recommended that you using the following formula instead:
+When using SSDs, it is recommended that you using the following formula based on experiences instead:
 
 ```
 connections = (number of cores * 4)
