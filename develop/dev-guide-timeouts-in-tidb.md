@@ -33,8 +33,10 @@ MySQL JDBC's query timeout setting for `setQueryTimeout()` does **_NOT_** work f
 
 TiDB provides the following MySQL-compatible timeout control parameters.
 
-- **wait_timeout**, which controls the non-interactive idle timeout for connections to Java applications, defaults to `0`, which allows connections to be idle indefinitely.
-- **interactive_timeout**, controls the interactive idle timeout for connections to Java applications, the default value is `8 hours`.
-- **max_execution_time**, controls the timeout for SQL execution in the connection, the default value is `0`, i.e. the connection is allowed to be infinitely busy (an SQL statement is executed for an infinitely long time).
+- **wait_timeout**, controls the non-interactive idle timeout for the connection to Java applications. The value is `0` by default, which allows the connection to be idle indefinitely.
+- **interactive_timeout**, controls the interactive idle timeout for the connection to Java applications. The value is `8 hours` by default.
+- **max_execution_time**, controls the timeout for SQL execution in the connection. The value is `0` by default, which allows the connection to be infinitely busy, that is, an SQL statement is executed for an infinitely long time.
 
-However, in a real production environment, idle connections and SQL that keeps executing indefinitely have a bad effect on both the database and the application. You can avoid idle connections and SQL statements that take too long to execute by configuring these two session-level variables in your application's connection string. For example, set `sessionVariables=wait_timeout=3600` (1 hour) and `sessionVariables=max_execution_time=300000` (5 minutes).
+However, in a real production environment, both idle connections and indefinitely executing SQL statements have a negative effect on both the database and the application. You can avoid idle connections and indefinitely executing SQL statements by configuring these two session-level variables in your application's connection string. For example, set the following:
+
+`sessionVariables=wait_timeout=3600` (1 hour)  `sessionVariables=max_execution_time=300000` (5 minutes)
