@@ -5,32 +5,32 @@ summary: Introduces the possible consequences of implicit type conversions in Ti
 
 # Avoid Implicit Type Conversions
 
-This page introduces the possible consequences of implicit type conversions in TiDB and ways to avoid them.
+This document introduces the rules and possible consequences of implicit type conversions in TiDB and how to avoid implicit type conversions.
 
 ## Conversion rules
 
-When the data types on both sides of a predicate in SQL do not match, TiDB will implicitly convert the data types on one or both sides to a compatible data type for predicate operations.
+When the data types on the two sides of the  predicate in a SQL statement do not match, TiDB implicitly convert the data types on one or both sides to a compatible data type for predicate operations.
 
 The rules for implicit type conversion in TiDB are as follows:
 
-- If one or both arguments are `NULL`, the result of the comparison is `NULL` (except for the NULL-safe `<=>` equivalent comparison operator, which results in `true` for NULL `<=>` NULL and does not require conversion).
+- If one or both arguments are `NULL`, the result of the comparison is `NULL`. The NULL-safe `<=>` equivalent comparison operator does not require conversion, because NULL `<=>` NULL results in `true`.
 - If both arguments in the comparison operation are strings, they are compared as strings.
 - If both arguments are integers, they are compared as integers.
 - If no comparison is made with numbers, the hexadecimal value is treated as a binary string.
-- If one of the arguments is a decimal value, the comparison depends on the other argument. If the other parameter is a decimal or integer value, the parameter is compared to the decimal value, and if the other parameter is a floating-point value, the parameter is compared to the floating-point value.
-- If one of the parameters is a `TIMESTAMP` or `DATETIME` column and the other parameter is a constant, the constant is converted to a timestamp before performing the comparison.
-- In all other cases, the parameters are compared as floating-point numbers (`DOUBLE` type).
+- If one of the arguments is a decimal value, the comparison depends on the other argument. If the other argument is a decimal or integer value, the argument is compared with the decimal value. If the other argument is a floating-point value, the argument is compared with the floating-point value.
+- If one of the arguments is a `TIMESTAMP` or `DATETIME` column and the other argument is a constant, the constant is converted to a timestamp before the comparison is performed.
+- In all other cases, the arguments are compared as floating-point numbers (the `DOUBLE` type).
 
 ## Consequences caused by implicit type conversion
 
-Implicit type conversions increase the ease of human-computer interaction, but we should try to avoid them in application code, due to the fact that they can lead to:
+Implicit type conversions increase the ease of human-computer interaction. However, implicit type conversions need to be avoided in application code, because they might lead to the following issues:
 
 - Index invalidity
 - Loss of precision
 
 ### Index invalidity
 
-In the following case, `account_id` is the primary key and its data type is `varchar`. As you can see from the execution plan, this SQL has an implicit type conversion and cannot use the index.
+In the following case, `account_id` is the primary key and its data type is `varchar`. In the execution plan, this SQL statement has an implicit type conversion and cannot use the index.
 
 {{< copyable "sql" >}}
 
@@ -50,7 +50,7 @@ DESC SELECT * FROM `account` WHERE `account_id`=6010000000009801;
 
 ### Loss of precision
 
-In the following case, the data type of field a is `decimal(32,0)`. From the execution plan, we know that there is an implicit type conversion, and both the decimal field and the string constant are converted to double type, but the precision of `double` type is not as high as `decimal`, so there is a loss of precision, and in this case, it causes the error of filtering the result set out of range.
+In the following case, the data type of the `a` field is `decimal(32,0)`. In the execution plan, an implicit type conversion occurs, and both the decimal field and the string constant are converted to the double type. Because the precision of the double type is not as high as decimal, there is a loss of precision. In this case, the SQL statement incorrectly filters the result set out of range.
 
 {{< copyable "sql" >}}
 
@@ -81,4 +81,4 @@ SELECT * FROM `t1` WHERE `a` BETWEEN '12123123' AND '1111222211111111200000';
 
 ```
 
-**Brief description of run results**: The above execution gives an error result.
+**Brief description of run results**: The above execution gives a wrong result.
