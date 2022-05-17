@@ -8,7 +8,7 @@ summary: Learn about how to use the TiDB prepared statements.
 A [prepared statement](/common/sql-statements/sql-statement-prepare.md) templatizes multiple SQL statements in which only parameters are different. It separates the SQL statements from the parameters. You can use it to improve the following aspects of SQL statements:
 
 - **Security**: Because parameters and statements are separated, the risk of [SQL injection](https://en.wikipedia.org/wiki/SQL_injection) attacks is avoided.
-- **Performance**: Because the statement is parsed in advance on the TiDB server, only parameters need to be passed for subsequent execution, saving the cost of parsing the entire SQL statements, splicing SQL statement strings, and network transmission.
+- **Performance**: Because the statement is parsed in advance on the TiDB server, only parameters are passed for subsequent executions, saving the cost of parsing the entire SQL statements, splicing SQL statement strings, and network transmission.
 
 In most applications, SQL statements can be enumerated. You can use a limited number of SQL statements to complete data queries for the entire application. So using a prepared statement is a best practice.
 
@@ -66,11 +66,11 @@ See the [DEALLOCATE statement](/common/sql-statements/sql-statement-deallocate.m
 
 ## Examples
 
-This section uses prepared statements to complete two scenarios with examples of `SELECT` data and `INSERT` data.
+This section describes two examples of prepared statements: `SELECT` data and `INSERT` data.
 
 ### `SELECT` example
 
-For example, you need to query the `bookshop` application for [books](/develop/dev-guide-bookshop-schema-design.md#books-table) with `id` is `1`.
+For example, you need to query a book with `id = 1` in the [`bookshop` application](/develop/dev-guide-bookshop-schema-design.md#books-table).
 
 <SimpleTab>
 
@@ -149,7 +149,7 @@ try (Connection connection = ds.getConnection()) {
 
 ### `INSERT` example
 
-Using the [books table](/develop/dev-guide-bookshop-schema-design.md#books-table) as an example, you need to insert a book with a `title` of `TiDB Developer Guide`, `type` of `Science & Technology`, `stock` of `100`, `price` of `0.0`, and `published_at` the `current time of insertion`. Note that the **primary key** of our `books` table contains the `AUTO_RANDOM` attribute, which you don't need to specify. If you are not familiar with inserting data, you can learn more about inserting data in [Insert Data](/develop/dev-guide-insert-data.md).
+Using the [books table](/develop/dev-guide-bookshop-schema-design.md#books-table) as an example, you need to insert a book with `title = TiDB Developer Guide`, `type = Science & Technology`, `stock = 100`, `price = 0.0`, and `published_at = NOW()` (current time of insertion). Note that you don't need to specify the `AUTO_RANDOM` attribute in the **primary key** of the `books` table. For more information about inserting data, see [Insert Data](/develop/dev-guide-insert-data.md).
 
 <SimpleTab>
 
@@ -218,16 +218,18 @@ try (Connection connection = ds.getConnection()) {
 }
 ```
 
-As you can see, JDBC helps you control the life cycle of prepared statements and you don't need to manually create, use, or delete prepared statements in your application. However, note that because TiDB is compatible with MySQL, the default configuration for using MySQL JDBC Driver on the client-side is not to enable the **_server-side_** prepared statement option, but to use the client-side prepared statement. You need to note the following configurations to get support for TiDB server-side prepared statements under JDBC and the best configuration for your usage scenario:
+As you can see, JDBC helps you control the life cycle of prepared statements and you don't need to manually create, use, or delete prepared statements in your application. However, note that because TiDB is compatible with MySQL, the default configuration for using MySQL JDBC Driver on the client-side is not to enable the **_server-side_** prepared statement option, but to use the client-side prepared statement.
+
+The following configurations help you use the TiDB server-side prepared statements under JDBC:
 
 |            Parameter            |                 Means                  |   Recommended Scenario   | Recommended Configuration|
 | :------------------------: | :-----------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------: |
 |    `useServerPrepStmts`    |    Whether to use the server side to enable prepared statements    |  When you need to use a prepared statement more than once                                                             |          `true`          |
 |      `cachePrepStmts`      |       Whether the client caches prepared statements        |                                                           `useServerPrepStmts=true` 时                                                            |          `true`          |
 |  `prepStmtCacheSqlLimit`   |  Maximum size of a prepared statement (256 characters by default)  | When the prepared statement is greater than 256 characters | Configured according to the actual size of the prepared statement |
-|    `prepStmtCacheSize`     | Maximum number of prepared statement caches (25 by default) | When the number of prepared statement is greater than 25  | Configured according to the actual number of prepared statements |
+|    `prepStmtCacheSize`     | Maximum number of prepared statements (25 by default) | When the number of prepared statements is greater than 25  | Configured according to the actual number of prepared statements |
 
-The following is a typical scenario of JDBC connection string configurations, Host: `127.0.0.1`, Port: `4000`, User name: `root`, Password: null, Default database: `test`:
+The following is a typical scenario of JDBC connection string configurations. Host: `127.0.0.1`, Port: `4000`, User name: `root`, Password: null, Default database: `test`:
 
 ```
 jdbc:mysql://127.0.0.1:4000/test?user=root&useConfigs=maxPerformance&useServerPrepStmts=true&prepStmtCacheSqlLimit=2048&prepStmtCacheSize=256&rewriteBatchedStatements=true&allowMultiQueries=true
