@@ -9,15 +9,15 @@ In many scenarios，you need to use one query to get data from multiple tables. 
 
 ## Join types
 
-This section describes the types of Join in detail.
+This section describes the Join types in detail.
 
 ### INNER JOIN
 
 The join result of an inner join returns only rows that match the join condition.
 
-For example, if you want to know the most prolific author, you need to join the author table named `authors` with the book author table named `book_authors`.
-
 ![Inner Join](/media/develop/inner-join.png)
+
+For example, if you want to know the most prolific author, you need to join the author table named `authors` with the book author table named `book_authors`.
 
 <SimpleTab>
 <div label="SQL" href="inner-join-sql">
@@ -142,7 +142,7 @@ It seems that the latest published book already has a lot of ratings. To verify 
 DELETE FROM ratings WHERE book_id = 3438991610;
 ```
 
-Query again, you will find that the book **The Documentary of lion** still appears in the result set, but the `average_score` column calculated from `score` of the right table `ratings` is filled with `NULL`.
+Query again. The book **The Documentary of lion** still appears in the result set, but the `average_score` column calculated from `score` of the right table `ratings` is filled with `NULL`.
 
 ```
 +------------+---------------------------------+---------------+
@@ -211,15 +211,15 @@ A full outer join is based on all the records in the left table and the right ta
 
 ### CROSS JOIN
 
-When the join condition is constant, the inner join between the two tables is called a [cross join](https://en.wikipedia.org/wiki/Join_(SQL)#Cross_join). A cross join joins every record of the left table to all the records of the right table. If the number of records in the left table is m and the number of records in the right table is n, then m \* n records will be generated in the result set.
+When the join condition is constant, the inner join between the two tables is called a [cross join](https://en.wikipedia.org/wiki/Join_(SQL)#Cross_join). A cross join joins every record of the left table to all the records of the right table. If the number of records in the left table is `m` and the number of records in the right table is `n`, then `m \* n` records will be generated in the result set.
 
 ### LEFT SEMI JOIN
 
-TiDB does not support `LEFT SEMI JOIN table_name` at the SQL syntax level, but at the execution plan level, [subquery-related optimizations](/subquery-optimization.md) will use `semi join` as the default join method for rewritten equivalent JOIN queries.
+TiDB does not support `LEFT SEMI JOIN table_name` at the SQL syntax level. But at the execution plan level, [subquery-related optimizations](/subquery-optimization.md) will use `semi join` as the default join method for rewritten equivalent JOIN queries.
 
 ## Implicit join
 
-Before the `JOIN` statement that explicitly declared a join appeared as an SQL standard, it was possible to join two or more tables in a SQL statement using the `FROM t1, t2` clause, and use the `WHERE t1.id = t2.id` clause to specify the conditions for the join. You can understand it as an implicit join, which uses the inner join to join tables.
+Before the `JOIN` statement that explicitly declared a join appeared as an SQL standard, it was possible to join two or more tables in a SQL statement using the `FROM t1, t2` clause, and using the `WHERE t1.id = t2.id` clause to specify the conditions for the join. You can understand it as an implicit join, which uses the inner join to join tables.
 
 ## Join related algorithms
 
@@ -229,7 +229,7 @@ TiDB supports the following general table join algorithms.
 - [Hash Join](/explain-joins.md#hash-join)
 - [Merge Join](/explain-joins.md#merge-join)
 
-The optimizer selects an appropriate join algorithm to execute based on factors such as the data volume in the joined table. You can see which algorithm the query uses for Join by using the `EXPLAIN` statement.
+The optimizer selects an appropriate join algorithm to execute based on the factors such as the data volume in the joined table. You can see which algorithm the query uses for Join by using the `EXPLAIN` statement.
 
 If the optimizer of TiDB does not execute according to the optimal join algorithm, you can use [Optimizer Hints](/optimizer-hints.md) to force TiDB to use a better join algorithm.
 
@@ -255,9 +255,9 @@ Hints related to join algorithms:
 
 ## Join orders
 
-In actual business scenarios, join statements of multiple tables are very common. The execution efficiency of join is related to the order in which each table participates in join. TiDB uses the Join Reorder algorithm to determine the order in which multiple tables are joined.
+In real business scenarios, join statements of multiple tables are very common. The execution efficiency of join is related to the order of each table in join. TiDB uses the Join Reorder algorithm to determine the order in which multiple tables are joined.
 
-When the join order selected by the optimizer is not good enough, you can use `STRAIGHT_JOIN` to make TiDB enforce the join query in the order of the tables used in the FROM clause.
+If the join order selected by the optimizer is not optimal as expected, you can use `STRAIGHT_JOIN` to enforce TiDB to join queries in the order of the tables used in the `FROM` clause.
 
 {{< copyable "sql" >}}
 
@@ -267,9 +267,9 @@ FROM authors a STRAIGHT_JOIN book_authors ba STRAIGHT_JOIN books b
 WHERE b.id = ba.book_id AND ba.author_id = a.id;
 ```
 
-For more information about the implementation details and limitations of this algorithm, see [Introduction to Join Reorder Algorithm](/join-reorder.md).
+For more information about the implementation details and limitations of this Join Reorder algorithm, see [Introduction to Join Reorder Algorithm](/join-reorder.md).
 
-## Read more
+## See also
 
 - [Explain Statements That Use Joins](/explain-joins.md)
 - [Introduction to Join Reorder](/join-reorder.md)
