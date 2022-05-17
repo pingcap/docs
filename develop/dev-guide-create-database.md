@@ -1,6 +1,6 @@
 ---
 title: Create a Database
-summary: Methods, rules to be followed and examples when creating a database.
+summary: Learn methods, rules, and examples to create a database.
 ---
 
 # Create a Database
