@@ -7,9 +7,9 @@ summary: Introduces optimistic and pessimistic transactions in TiDB, retries of 
 
 The [optimistic transaction](/optimistic-transaction.md) model commits the transaction directly, and rolls back when there is a conflict. By contrast, the [pessimistic transaction](/pessimistic-transaction.md) model tries to lock the resources that need to be modified before actually committing the transaction, and only starts committing after ensuring that the transaction can be successfully executed.
 
-The optimistic transaction model is suitable for scenarios with a low conflict rate, because the direct commitment has a high probability of success. But once a transaction conflict occurs, the cost of rollback is relatively high.
+The optimistic transaction model is suitable for scenarios with low conflict rates, because the direct commitment has a high probability of success. But once a transaction conflict occurs, the cost of rollback is relatively high.
 
-The advantage of the pessimistic transaction model is that for scenarios with high conflict rates, the cost of locking ahead is less than the cost of rollback afterwards. Moreover, it can solve the problem that multiple concurrent transactions fail to commit due to conflicts. However, the pessimistic transaction model is not as efficient as the optimistic transaction model in scenarios with low conflict rates.
+The advantage of the pessimistic transaction model is that for scenarios with high conflict rates. The cost of locking ahead is less than the cost of rollback afterwards. Moreover, it can solve the problem that multiple concurrent transactions fail to commit due to conflicts. However, the pessimistic transaction model is not as efficient as the optimistic transaction model in scenarios with low conflict rates.
 
 The pessimistic transaction model is more intuitive and easier to implement on the application side. The optimistic transaction model requires complex application-side retry mechanisms.
 
