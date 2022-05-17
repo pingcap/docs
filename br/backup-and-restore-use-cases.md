@@ -295,23 +295,23 @@ In the log specified before running the restoration command, you can get the sta
 
 The above log includes the following information:
 
-* Restore duration: `total take(Full restore time): 17m1.001611365s`
-* Total runtime of the application: `total take(real time): 16m1.371611365s`
-* Restore data size: `total size(MB): 353227.18`
-* Restore KV pair number: `total kv: 5659888624`
-* Restore throughput: `avg speed(MB/s): 367.42`
-* `Region Split` duration: `take=49.049182743s`
-* Restore checksum duration: `restore checksum=6m34.879439498s`
-* The actual size of the restored data in the disk: `[Size=48693068713]`
+* `total take(Full restore time)`: Restoration duration
+* `total take(real time)`: Total runtime of the application
+* `total size(MB)`: Restoration data size
+* `total kv`: Number of restored KV pairs
+* `avg speed(MB/s)`: Restoration throughput
+* `split region`: Region split duration
+* `restore checksum`: Restoration checksum duration
+* `Size`: The actual size of the restored data in the disk
 
-From the above information, the following items can be calculated:
+From the preceding information, the following items can be calculated:
 
 * The throughput of a single TiKV instance: `avg speed(MB/s)`/`tikv_count` = `91.8`
 * The average restore speed of a single TiKV instance: `total size(MB)`/(`split time` + `restore time`)/`tikv_count` = `87.4`
 
 #### Performance tuning
 
-If the resource usage of TiKV does not become an obvious bottleneck during the restore process, you can try to increase the value of `--concurrency` which is `128` by default. See the following example:
+If the resource usage of TiKV does not impose an obvious bottleneck during the restore process, you can increase the value of `--concurrency` (defaults to `128`). See the following example:
 
 {{< copyable "shell-regular" >}}
 
@@ -321,35 +321,31 @@ bin/br restore table --db batchmark --table order_line -s local:///br_data/ --pd
 
 The tuned performance results are as follows (with the same data size):
 
-+ Restore duration: `total take(s)` reduced from `961.37` to `443.49`
-+ Restore throughput: `avg speed(MB/s)` increased from `367.42` to `796.47`
-+ Throughput of a single TiKV instance: `avg speed(MB/s)`/`tikv_count` increased from `91.8` to `199.1`
-+ Average restore speed of a single TiKV instance: `total size(MB)`/(`split time` + `restore time`)/`tikv_count` increased from `87.4` to `162.3`
++ Restoration duration (`total take(s)`): reduced from `961.37` to `443.49`
++ Restoration throughput (`avg speed(MB/s)`): increased from `367.42` to `796.47`
++ Throughput of a single TiKV instance (`avg speed(MB/s)`/`tikv_count`): increased from `91.8` to `199.1`
++ Average restore speed of a single TiKV instance (`total size(MB)`/(`split time` + `restore time`)/`tikv_count`): increased from `87.4` to `162.3`
 
-### Back up a single table to a local disk (recommended in testing environment)
+## Back up a single table to a local disk (recommended in testing environment)
 
-Use the `br backup` command to back up the single table `--db batchmark --table order_line` to the specified path `local:///home/tidb/backup_local` in the local disk.
+Run the `br backup` command to back up a single table `--db batchmark --table order_line` to the specified path `local:///home/tidb/backup_local` in the local disk.
 
-#### Backup prerequisites
+### Backup prerequisites
 
-* [Preparation for backup](#preparation-for-backup)
-* Each TiKV node has a separate disk to store the backupSST file.
-* The `backup_endpoint` node has a separate disk to store the `backupmeta` file.
-* TiKV and the `backup_endpoint` node must have the same directory for the backup (for example, `/home/tidb/backup_local`).
+* [Check before backup](#check-before-backup)
+* Each TiKV node has a separate disk to store backupSST files.
+* The `backup_endpoint` node has a separate disk to store `backupmeta` files.
+* TiKV and the `backup_endpoint` node share the same directory (for example, `/home/tidb/backup_local`) for backup.
 
-#### Topology
+### Topology
 
 The following diagram shows the typology of BR:
 
 ![img](/media/br/backup-local-deploy.png)
 
-#### Backup operation
+### Backup operation
 
-Before the backup operation, execute the `admin checksum table order_line` command to get the statistical information of the table to be backed up (`--db batchmark --table order_line`). The following image shows an example of this information:
-
-![img](/media/br/total-data.png)
-
-Execute the `br backup` command:
+Run the `br backup` command:
 
 {{< copyable "shell-regular" >}}
 
@@ -366,48 +362,58 @@ During the backup process, pay attention to the metrics on the monitoring panels
 
 #### Backup results explanation
 
-Before executing the backup command, a path in which the log is stored has been specified. You can get the statistical information of the backup operation from this log. Search "summary" in this log, you can see the following information:
+In the log specified before running the backup command, you can get the statistical information of the restoration operation from this log. Search "summary" in this log, you can see the following information:
 
 ```
-["Table backup summary: total backup ranges: 4, total success: 4, total failed: 0, total take(s): 551.31, total kv: 5659888624, total size(MB): 353227.18, avg speed(MB/s): 640.71"] ["backup total regions"=6795] ["backup checksum"=6m33.962719217s] ["backup fast checksum"=22.995552ms]
+["Table backup summary:
+    total backup ranges: 4,
+    total success: 4,
+    total failed: 0,
+    total take(s): 551.31,
+    total kv: 5659888624,
+    total size(MB): 353227.18,
+    avg speed(MB/s): 640.71"]
+    ["backup total regions"=6795]
+    ["backup checksum"=6m33.962719217s]
+    ["backup fast checksum"=22.995552ms]
 ```
 
-The information from the above log includes:
+The information from the preceding log includes:
 
-+ Backup duration: `total take(s): 551.31`
-+ Data size: `total size(MB): 353227.18`
-+ Backup throughput: `avg speed(MB/s): 640.71`
-+ Backup checksum duration: `take=6m33.962719217s`
++ `total take(s)`: Backup duration
++ `total size(MB)`: Data size:
++ `avg speed(MB/s)`: Backup throughput
++ `backup checksum`: Backup checksum duration
 
-From the above information, the throughput of a single TiKV instance can be calculated: `avg speed(MB/s)`/`tikv_count` = `160`.
+From the preceding information, the throughput of a single TiKV instance can be calculated: `avg speed(MB/s)`/`tikv_count` = `160`.
 
-### Restore data from a local disk (recommended in testing environment)
+## Restore data from a local disk (recommended in testing environment)
 
-Use the `br restore` command to restore the complete backup data to an offline cluster. Currently, BR does not support restoring data to an online cluster.
+Run the `br restore` command to restore the complete backup data to an offline cluster. Currently, BR does not support restoring data to an online cluster.
 
-#### Restoration prerequisites
+### Restoration prerequisites
 
-* [Preparation for restoration](#preparation-for-restoration)
+* [Check before restore](#check-before-restore)
 * The TiKV cluster and the backup data do not have a duplicate database or table. Currently, BR does not support table route.
-* Each TiKV node has a separate disk to store the backupSST file.
-* The `restore_endpoint` node has a separate disk to store the `backupmeta` file.
-* TiKV and the `restore_endpoint` node must have the same directory for the restoration (for example, `/home/tidb/backup_local/`).
+* Each TiKV node has a separate disk to store backupSST files.
+* The `restore_endpoint` node has a separate disk to store `backupmeta` files.
+* TiKV and the `restore_endpoint` node share the same directory (for example, `/home/tidb/backup_local/`) for restoration.
 
 Before the restoration, follow these steps:
 
 1. Collect all backupSST files into the same directory.
 2. Copy the collected backupSST files to all TiKV nodes of the cluster.
-3. Copy the `backupmeta` file to the `restore endpoint` node.
+3. Copy the `backupmeta` files to the `restore endpoint` node.
 
-#### Topology
+### Topology
 
 The following diagram shows the typology of BR:
 
 ![img](/media/br/restore-local-deploy.png)
 
-#### Restoration operation
+### Restoration operation
 
-Execute the `br restore` command:
+Run the `br restore` command:
 
 {{< copyable "shell-regular" >}}
 
@@ -417,42 +423,53 @@ bin/br restore table --db batchmark --table order_line -s local:///home/tidb/bac
 
 During the restoration process, pay attention to the metrics on the monitoring panels to get the status of the restoration process. See [Monitoring metrics for the restoration](#monitoring-metrics-for-the-restoration) for details.
 
-#### Restoration results explanation
+### Restoration results explanation
 
-Before executing the restoration command, a path in which the log is stored has been specified. You can get the statistical information of the restoration operation from this log. Search "summary" in this log, you can see the following information:
+In the log specified before running the restoration command, you can get the statistical information of the restoration operation from this log. Search "summary" in this log, you can see the following information:
 
 ```
-["Table Restore summary: total restore tables: 1, total success: 1, total failed: 0, total take(s): 908.42, total kv: 5659888624, total size(MB): 353227.18, avg speed(MB/s): 388.84"] ["restore files"=9263] ["restore ranges"=6888] ["split region"=58.7885518s] ["restore checksum"=6m19.349067937s]
+["Table Restore summary:
+    total restore tables: 1,
+    total success: 1,
+    total failed: 0,
+    total take(s): 908.42,
+    total kv: 5659888624,
+    total size(MB): 353227.18,
+    avg speed(MB/s): 388.84"]
+    ["restore files"=9263]
+    ["restore ranges"=6888]
+    ["split region"=58.7885518s]
+    ["restore checksum"=6m19.349067937s]
 ```
 
-The above log includes the following information:
+The preceding log includes the following information:
 
-+ Restoration duration: `total take(s): 908.42`
-+ Data size: `total size(MB): 353227.18`
-+ Restoration throughput: `avg speed(MB/s):  388.84`
-+ `Region Split` duration: `take=58.7885518s`
-+ Restoration checksum duration: `take=6m19.349067937s`
++ `total take(s)`: Restoration duration
++ `total size(MB)`: Data size
++ `avg speed(MB/s)`: Restoration throughput
++ `split region`: Region split duration
++ `restore checksum`: Restoration checksum duration
 
-From the above information, the following items can be calculated:
+From the preceding information, the following items can be calculated:
 
 * The throughput of a single TiKV instance: `avg speed(MB/s)`/`tikv_count` = `97.2`
 * The average restoration speed of a single TiKV instance: `total size(MB)`/(`split time` + `restore time`)/`tikv_count` = `92.4`
 
 ## Error handling during backup
 
-This section introduces the common errors occurred during the backup process.
+This section introduces the common errors that might occur during the backup process.
 
 ### `key locked Error` in the backup log
 
 Error message in the log: `log - ["backup occur kv error"][error="{\"KvError\":{\"locked\":`
 
-If a key is locked during the backup process, BR tries to resolve the lock. A small number of these errors do not affect the correctness of the backup.
+If a key is locked during the backup process, BR tries to resolve the lock. A small number of this error do not affect the correctness of the backup.
 
 ### Backup failure
 
 Error message in the log: `log - Error: msg:"Io(Custom { kind: AlreadyExists, error: \"[5_5359_42_123_default.sst] is already exists in /dir/backup_local/\" })"`
 
-If the backup operation fails and the above message occurs, perform one of the following operations and then start the backup operation again:
+If the backup operation fails and the preceding message occurs, perform one of the following operations and then start the backup operation again:
 
 * Change the directory for the backup. For example, change `/dir/backup-2020-01-01/` to `/dir/backup_local/`.
 * Delete the backup directory of all TiKV nodes and BR nodes.
